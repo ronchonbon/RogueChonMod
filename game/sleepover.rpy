@@ -1,0 +1,2173 @@
+label Sleepover(Line = 0,BO=[]): #rkeljsv
+            # This event gets called from Round10
+            # If there's a Lead, she's been sent to this from elsewhere
+            # Sleep tracks number of previous sleepovers
+
+            $ Party = []
+
+            $ BO = TotalGirls[:]
+            while BO:
+                    if BO[0].Loc == bg_current:
+                            $ Party.append(BO[0])
+                    $ BO.remove(BO[0])
+
+
+            if bg_current == "bg player" and "met" in StormX.History and "met" not in JubesX.History:
+                    #Jubilee intro
+                    call CleartheRoom("All",1,0)
+                    "It's getting late, so you go to sleep."
+                    call Jubes_Meet
+                    call Wait
+                    return
+
+            if not Party and bg_current == "bg player":
+                    #if nobody is around.
+                    call CleartheRoom("All",1)
+                    #if nobody is here, you just go to sleep
+                    "It's getting late, so you go to sleep."
+                    if "met" in StormX.History and "met" not in JubesX.History:
+                            call Jubes_Meet
+                    call Wait
+                    return
+
+            while len(Party) > 2:
+                    #culls out extra members
+                    $ Party.remove(Party[2])
+
+            if Day <= 4: #was at 7
+                    # prevents anyone agreeing before day 7.
+                    $ Party = []
+            elif Party and Party[0]:
+                    call Shift_Focus(Party[0])
+
+            if bg_current != "bg player":
+                    #if this isn't your room, sets "room" to the name of the room's owner
+                    $ BO = TotalGirls[:]
+                    while BO:
+                            if BO[0].Home == bg_current:
+                                    if BO[0] not in Party:
+                                            #either another girl is around
+                                            "[BO[0].Name] probably wouldn't appreciate you staying over, you head back to your own room."
+                                            call Remove_Girl("All")
+                                            jump Return_Player
+                                    if BO[0] != Party[0]:
+                                            $ Party.reverse() #makes sure the room's owner is first
+                                    $ BO = [1]
+                            $ BO.remove(BO[0])
+
+            # the previous statement should cull out all situations where the owner isn't there
+            if bg_current == "bg player":
+                    if len(Party) == 2:
+                        $ renpy.random.shuffle(Party)
+                        if ApprovalCheck(Party[0],Check=1) <= ApprovalCheck(Party[1],Check=1):
+                            # If second one likes you more, pick her
+                            $ Party.reverse()
+                    if not Party:
+                        pass
+                    elif Party[0].Sleep >= 3 and ApprovalCheck(Party[0], 800):
+                        pass
+                    elif Party[0] == RogueX:
+                            ch_r "It's getting late and I'm getting a bit tired."
+                    elif Party[0] == KittyX:
+                            ch_k "It's late, I'm thinking of heading out. . ."
+                    elif Party[0] == EmmaX:
+                            ch_e "It's late, I should be going. . ."
+                    elif Party[0] == LauraX:
+                            ch_l "I need some sleep. . ."
+                    elif Party[0] == JeanX:
+                            ch_j "I'm turning in. . ."
+                    elif Party[0] == StormX:
+                            ch_s "It is getting late, I should be going. . ."
+                    elif Party[0] == JubesX:
+                            ch_v "Well, it's pretty late, you should be getting some sleep. . ."
+            elif Party and bg_current == Party[0].Home:
+                    if Party[0] == RogueX:#Room == RogueX.Name:
+                            ch_r "It's getting late and I'm turning in."
+                    elif Party[0] == KittyX:
+                            ch_k "I'm getting kinda tired. . ."
+                    elif Party[0] == EmmaX:
+                            ch_e "It's getting late, [EmmaX.Petname]. . ."
+                    elif Party[0] == LauraX:
+                            ch_l "I'm tired. . ."
+                    elif Party[0] == JeanX:
+                            ch_j "I'm turning in. . ."
+                    elif Party[0] == StormX:
+                            ch_s "It is getting late, I would like to get ready for bed. . ."
+                    elif Party[0] == JubesX:
+                            ch_v "Well, it's pretty late, you should be getting some sleep. . ."
+            else:
+                "Something went wrong."
+                "Tell Oni \"[Party] - [bg_current]\""
+
+
+            if Day <= 4: #was at 7
+                    # If it's too early for sleepovers,
+                    jump Return_Player
+
+            if EmmaX in Party:
+                    if "classcaught" not in EmmaX.History:
+                            if bg_current == EmmaX.Home:
+                                    ch_e "You should probably get going, we wouldn't want any rumors to spread."
+                                    jump Return_Player
+                            else:
+                                    ch_e "I should probably get going, we wouldn't want any rumors to spread."
+                                    call Remove_Girl(EmmaX)
+                    elif len(Party) >= 2 and "three" not in EmmaX.History:
+                            #if Emma's around but can't do threesome stuff yet
+                            if (bg_current == EmmaX.Home or bg_current == "bg player") and ApprovalCheck(EmmaX, 1100, "LI"):
+                                if Party[0] != EmmaX:
+                                        $ Party.reverse()
+                                ch_e "[Party[1].Name] dear, I need a moment with [Player.Name], but you can leave."
+                                $ Party[1].FaceChange("confused",1)
+                                call AnyLine(Party[1],"Oh, ok. . .")
+                                call Remove_Girl(Party[1])
+                                ch_e "Sorry about that, but I had to discuss something with you in private."
+                            else:
+                                #if it's not her room, or she doesn't like you enough to stay
+                                ch_e "Yes, I really should be leaving, don't let me bother you two."
+                                call Remove_Girl(EmmaX)
+                            if "sleeptime" not in EmmaX.History:
+                                $ EmmaX.History.append("sleeptime")
+                    if not Party or (EmmaX not in Party and bg_current == EmmaX.Home):
+                                #if Emma leaves
+                                jump Return_Player
+
+            $ Party[0].FaceChange("sexy",1)
+
+            $ Line = 0
+            if Party[0].Sleep >= 3 and ApprovalCheck(Party[0], 800):
+                    #You've slept over several times and she still likes you
+                    if Party[0].Home == bg_current:
+                            call AnyLine(Party[0],"Are you staying over tonight?")
+                    else:
+                            call AnyLine(Party[0],"I'm staying over, right?")
+                    $ Line = 1
+
+            elif Party[0].Sleep < 3 and ApprovalCheck(Party[0], 1100, "LI"):
+                    #You haven't slept over much, but she wants you to
+                    $ Party[0].FaceChange("bemused",1)
+                    if Party[0] == RogueX:
+                            if bg_current == Party[0].Home:
+                                ch_r "I was thinking. . . maybe you wanted to stay the night?"
+                            else:
+                                ch_r "I was thinking. . . maybe I could stay the night?"
+                    elif Party[0] == KittyX:
+                            if bg_current == Party[0].Home:
+                                ch_k "So[KittyX.like]did you want to stay over?"
+                            else:
+                                ch_k "So[KittyX.like]could I stay over?"
+                    elif Party[0] == EmmaX:
+                            if bg_current == Party[0].Home:
+                                ch_e "I was wondering, have you considered staying over?"
+                            else:
+                                ch_e "I was wondering, could I stay over?"
+                    elif Party[0] == LauraX:
+                            if bg_current == Party[0].Home:
+                                ch_l "So, are you staying over?"
+                            else:
+                                ch_l "So, can I stay here tonight?"
+                    elif Party[0] == JeanX:
+                            if bg_current == Party[0].Home:
+                                ch_j "Were you planning to stay over?"
+                            else:
+                                ch_j "I'm crashing here, ok?"
+                    elif Party[0] == StormX:
+                            if bg_current == Party[0].Home:
+                                ch_s "Did you want to stay the night?"
+                            else:
+                                ch_s "Would you mind if I sleep here tonight?"
+                    elif Party[0] == JubesX:
+                            if bg_current == Party[0].Home:
+                                ch_v "Would you maybe wanna sleep here?"
+                            else:
+                                ch_v "Would you maybe want me to sleep here?"
+                    $ Line = 1
+
+
+            if Line:
+                    #she offered to sleep over
+                    menu:
+                        extend ""
+                        "Sure.":
+                                if Party[0].Sleep <= 5:
+                                        $ Party[0].Statup("Love", 70, 10)
+                                        $ Party[0].Statup("Obed", 80, 10)
+                                        $ Party[0].Statup("Obed", 50, 20)
+                                        $ Party[0].Statup("Inbt", 25, 20)
+                                $ Party[0].Statup("Love", 70, 5)
+                                $ Party[0].FaceChange("smile")
+                                # Line = 1
+
+                        "No, sorry.":
+                                $ Party[0].Statup("Obed", 50, 2)
+                                $ Party[0].Statup("Obed", 30, 5)
+                                $ Party[0].Statup("Inbt", 40, 3)
+                                $ Party[0].FaceChange("sad")
+                                $ Line = 0
+                                if Party[0] == RogueX:
+                                        ch_r "Ok, see you tomorrow then. 'Night."
+                                elif Party[0] == KittyX:
+                                        ch_k "Alright. . . see you tomorrow. . ."
+                                elif Party[0] == EmmaX:
+                                        ch_e "Well, if you insist. See you tomorrow then."
+                                elif Party[0] == LauraX:
+                                        ch_l "Ok."
+                                elif Party[0] == JeanX:
+                                        ch_j "Huh. Ok, whatever."
+                                elif Party[0] == StormX:
+                                        ch_s "Very well, I will see you tomorrow then."
+                                elif Party[0] == JubesX:
+                                        ch_v "Ok, cool, cool. . .  later then. . ."
+            else:
+                    #if she didn't offer to sleep over
+                    if Party[0] == RogueX:
+                            if bg_current == Party[0].Home:
+                                ch_r "You should get going."
+                            else:
+                                ch_r "I'm heading out, see you tomorrow."
+                    elif Party[0] == KittyX:
+                            if bg_current == Party[0].Home:
+                                ch_k "You should[KittyX.like]head out."
+                            else:
+                                ch_k "See ya tomorrow, [KittyX.Petname]."
+                    elif Party[0] == EmmaX:
+                            if bg_current == Party[0].Home:
+                                ch_e "Could you please clear the room?"
+                            else:
+                                ch_e "I should leave."
+                    elif Party[0] == LauraX:
+                            if bg_current == Party[0].Home:
+                                ch_l "Clear out."
+                            else:
+                                ch_l "So, later."
+                    elif Party[0] == JeanX:
+                            if bg_current == Party[0].Home:
+                                ch_j "So get going."
+                            #else:
+                                #ch_j "I'm crashing here, ok?"
+                    elif Party[0] == StormX:
+                            if bg_current == Party[0].Home:
+                                ch_s "Could you please leave me?"
+                            else:
+                                ch_s "I will see you tomorrow."
+                    elif Party[0] == JubesX:
+                            if bg_current == Party[0].Home:
+                                ch_v "I've got some stuff to take care of, so I should get going."
+                            else:
+                                ch_v "I've got some stuff to take care of, so I guess you should get going."
+
+                    menu:
+                        extend ""
+                        "Ok, I'll head out. Good night." if Party[0].Home == bg_current:
+                                #if she didn't agree and this is her room
+                                $ Line = "leave"
+                        "Ok, see you later then. Good night." if Party[0].Home != bg_current:
+                                #if she didn't agree and this is not her room
+                                $ Line = "leave"
+
+                        "Are you sure I can't stay the night? . ." if not Party[0].Sleep and Party[0].Home == bg_current:
+                                $ Line = "please"
+                        "Are you sure you can't stay? . ." if not Party[0].Sleep and Party[0].Home != bg_current:
+                                $ Line = "please"
+
+                        "That's not what you said the other night . ." if Party[0].Sleep:
+                                #if she wants you gone
+                                if ApprovalCheck(Party[0],900)or ApprovalCheck(Party[0],700,"L") or ApprovalCheck(Party[0],500,"O"):
+                                    $ Party[0].FaceChange("bemused",1)
+                                    $ Line = 1
+                                    if Party[0] == RogueX:
+                                            ch_r "Well. . . that didn't turn out so bad, I suppose. . ."
+                                    elif Party[0] == KittyX:
+                                            ch_k "and that went pretty well. . ."
+                                    elif Party[0] == EmmaX:
+                                            ch_e "It was a nice evening."
+                                    elif Party[0] == LauraX:
+                                            ch_l "Yeah, it was."
+                                    elif Party[0] == JeanX:
+                                            ch_j "I guess?"
+                                    elif Party[0] == StormX:
+                                            ch_s "That was pleasant. . ."
+                                    elif Party[0] == JubesX:
+                                            ch_v "Yeah, yeah. . ."
+                                else:
+                                    $ Party[0].FaceChange("smile",Brows="confused")
+                                    # Line = 0
+                                    if Party[0] == RogueX:
+                                            ch_r "I'm afraid not this time, [RogueX.Petname]. I'll see you later."
+                                    elif Party[0] == KittyX:
+                                            ch_k "Um, no, 'fraid not. I'll see ya tomorrow."
+                                    elif Party[0] == EmmaX:
+                                            ch_e "Well, not tonight, [EmmaX.Petname]."
+                                    elif Party[0] == LauraX:
+                                            ch_l "Yeah, but not this time."
+                                    elif Party[0] == JeanX:
+                                            ch_j "So what?"
+                                    elif Party[0] == StormX:
+                                            ch_s "Yes, but not tonight, unfortunately. . ."
+                                    elif Party[0] == JubesX:
+                                            ch_v "Yeah, I know, but I've got stuff to do tonight. . ."
+                                    if bg_current != "bg player":
+                                            #if it's a girl's room, you leave.
+                                            ch_p "Ok, I'll be going then."
+                    #if she didn't offer to sleep over
+
+            if Line == "leave":
+                    # if you agreed to leave
+                    $ Party[0].Statup("Love", 90, 3)
+                    $ Party[0].Statup("Inbt", 25, 2)
+                    $ Party[0].FaceChange("smile")
+                    $ Line = 0
+                    if Party[0] == RogueX:
+                            ch_r "Yeah, good night, [RogueX.Petname]. . ."
+                    elif Party[0] == KittyX:
+                            ch_k "Yeah, 'night, [KittyX.Petname]. . ."
+                    elif Party[0] == EmmaX:
+                            ch_e "Yes, good night, [EmmaX.Petname]."
+                    elif Party[0] == LauraX:
+                            ch_l "Ok, good night then."
+                    elif Party[0] == JeanX:
+                            ch_j "Ok, 'night."
+                    elif Party[0] == StormX:
+                            ch_s "Yes, good night."
+                    elif Party[0] == JubesX:
+                            ch_v "Yup. . .  later then. . ."
+
+            if Line == "please":
+                    #if she said no but you asked nicely
+                    if ApprovalCheck(Party[0],1000) or ApprovalCheck(Party[0],700,"L") or ApprovalCheck(Party[0],500,"O"):
+                        $ Party[0].FaceChange("bemused")
+                        $ Line = 1
+                        if Party[0] == RogueX:
+                                ch_r "Well. . . I suppose it would be alright."
+                        elif Party[0] == KittyX:
+                                ch_k "Well, Maaaybeee. . ."
+                        elif Party[0] == EmmaX:
+                                ch_e "I suppose we could make an exception. . ."
+                        elif Party[0] == LauraX:
+                                ch_l "Suit yourself."
+                        elif Party[0] == JeanX:
+                                ch_j "-Fine,- geeze."
+                        elif Party[0] == StormX:
+                                ch_s "Oh, I suppose we could make do. . ."
+                        elif Party[0] == JubesX:
+                                ch_v "Well. . . fine. . ."
+                    else:
+                        $ Party[0].FaceChange("smile",Brows="confused")
+                        $ Line = 0
+                        if Party[0] == RogueX:
+                                ch_r "I'm afraid not, [RogueX.Petname]. Head home, I'll see you later."
+                        elif Party[0] == KittyX:
+                                ch_k "Ehhhh. . . no, not tonight, [KittyX.Petname]. Sorry."
+                        elif Party[0] == EmmaX:
+                                ch_e "I'm afraid not."
+                        elif Party[0] == LauraX:
+                                ch_l "Don't push it."
+                        elif Party[0] == JeanX:
+                                ch_j "Yeah, no."
+                        elif Party[0] == StormX:
+                                ch_s "No, we cannot."
+                        elif Party[0] == JubesX:
+                                ch_v "Nope."
+
+            if not Line:
+                    #if the primary girl refused to sleep over
+                    if Party[0].Home == bg_current:
+                            #if it's her room, removes any other girls around
+                            call CleartheRoom(Party[0],1)
+                            jump Return_Player
+                    else:
+                            #if it's not her room, remove her, and try again
+                            call Remove_Girl(Party[0])
+                            call Sleepover
+                            return
+
+            #If the primary girl agreed
+            if len(Party) >= 2:
+                #if there is another girl
+                if Party[0].GirlLikeCheck(Party[1]) >= 700 and ApprovalCheck(Party[0], 1200):
+                        # If she likes the other girl quite a bit and likes you a decent amount
+                        if Party[0] == RogueX:
+                                ch_r "And you, [Party[1].Name]?"
+                        elif Party[0] == KittyX:
+                                ch_k "How about you, [Party[1].Name]?"
+                        elif Party[0] == EmmaX:
+                                ch_e "And what about you, [Party[1].Name]?"
+                        elif Party[0] == LauraX:
+                                ch_l "And you, [Party[1].Name]?"
+                        elif Party[0] == JeanX:
+                                ch_j ". . ."
+                                ch_j ". . . . . ."
+                                ch_j "And you, [Party[1].Name]?"
+                        elif Party[0] == StormX:
+                                ch_s "And are you staying as well, [Party[1].Name]?"
+                        elif Party[0] == JubesX:
+                                ch_v "What about you, [Party[1].Name]?"
+                else:
+                        if Party[0] == RogueX:
+                                ch_r "Are you leaving, [Party[1].Name]?"
+                        elif Party[0] == KittyX:
+                                ch_k "You heading out, [Party[1].Name]?"
+                        elif Party[0] == EmmaX:
+                                ch_e "I assume you're leaving, [Party[1].Name]?"
+                        elif Party[0] == LauraX:
+                                ch_l "See you later, [Party[1].Name]."
+                        elif Party[0] == JeanX:
+                                ch_j ". . ."
+                                ch_j ". . . . . ."
+                                ch_j "And you, [Party[1].Name]?"
+                        elif Party[0] == StormX:
+                                ch_s "And I assume you will be leaving, [Party[1].Name]?"
+                        elif Party[0] == JubesX:
+                                ch_v "You've gotta go though, -right- [Party[1].Name]?"
+
+                if Party[1].GirlLikeCheck(Party[0]) >= 500 and ApprovalCheck(Party[1], 1200):
+                        # If second girl likes the other girl a bit and likes you a decent amount
+                        $ Party[1].FaceChange("smile")
+                        if Party[1] == RogueX:
+                                ch_r "I'd like to stay too."
+                        elif Party[1] == KittyX:
+                                ch_k "Can I stay too?"
+                        elif Party[1] == EmmaX:
+                                ch_e "I'd rather join the fun."
+                        elif Party[1] == LauraX:
+                                ch_l "Me too, right?"
+                        elif Party[1] == JeanX:
+                                ch_j "Sounds fun, I'm in."
+                        elif Party[1] == StormX:
+                                ch_s "I would prefer to stay."
+                        elif Party[1] == JubesX:
+                                ch_v "I can stay too, right?"
+                        $ Line = 1
+                else:
+                        $ Party[0].FaceChange("smile",1)
+                        if Party[1] == RogueX:
+                                ch_r "I guess I should be going."
+                        elif Party[1] == KittyX:
+                                ch_k "I should go, right?"
+                        elif Party[1] == EmmaX:
+                                ch_e "I suppose three is a crowd."
+                        elif Party[1] == LauraX:
+                                ch_l "I should leave."
+                        elif Party[1] == JeanX:
+                                ch_j "Sounds \"fun.\""
+                                ch_j "Later guys."
+                        elif Party[1] == StormX:
+                                ch_s "Ah, I should be going then."
+                        elif Party[1] == JubesX:
+                                ch_v "Um, yeah, I've got stuff to do, so. . ."
+                        $ Line = 0
+                menu:
+                    extend ""
+                    "You should stay, [Party[1].Name].":
+                            #this checks the second girl's response.
+                            if Party[1].GirlLikeCheck(Party[0]) >= 500 and ApprovalCheck(Party[1], 1200):
+                                    # If second girl likes the first girl a bit and likes you a decent amount
+                                    if Party[1] == RogueX:
+                                            ch_r "Oh, I'd love to."
+                                    elif Party[1] == KittyX:
+                                            ch_k "Roomies!"
+                                    elif Party[1] == EmmaX:
+                                            ch_e "I'd love to."
+                                    elif Party[1] == LauraX:
+                                            ch_l "Great."
+                                    elif Party[1] == JeanX:
+                                            ch_j "Oh, so glad I have permission. . ."
+                                    elif Party[1] == StormX:
+                                            ch_s "Thank you, I would love to."
+                                    elif Party[1] == JubesX:
+                                            ch_v "Oh! Thanks!"
+                                    $ Line = 1
+                                    $ Party[0].GLG(Party[1],800,3,1)
+                            else:
+                                    $ Party[1].FaceChange("sadside",1,Mouth="smile")
+                                    if Party[1] == RogueX:
+                                            ch_r "I don't want to be a bother."
+                                    elif Party[1] == KittyX:
+                                            ch_k "No way."
+                                    elif Party[1] == EmmaX:
+                                            ch_e "I couldn't."
+                                    elif Party[1] == LauraX:
+                                            ch_l "Nah."
+                                    elif Party[1] == JeanX:
+                                            $ Party[1].FaceChange("angry",1,Mouth="smile")
+                                            ch_j "Oh, so glad I have permission. . ."
+                                    elif Party[1] == StormX:
+                                            ch_s "I would not want to intrude."
+                                    elif Party[1] == JubesX:
+                                            ch_v ". . . nah, really. . . stuff to do."
+                                    $ Line = 0
+                                    $ Party[0].GLG(Party[1],700,-5,1)
+
+                            #This checks the first girl's response
+                            if Line:
+                                if Party[0].GirlLikeCheck(Party[1]) >= 700 and ApprovalCheck(Party[0], 1200):
+                                    # If first girl likes the other girl quite a bit and likes you a decent amount
+                                    if Party[0] == RogueX:
+                                            ch_r "Great!"
+                                    elif Party[0] == KittyX:
+                                            ch_k "Roomies!"
+                                    elif Party[0] == EmmaX:
+                                            ch_e "Lovely."
+                                    elif Party[0] == LauraX:
+                                            ch_l "Ok."
+                                    elif Party[0] == JeanX:
+                                            ch_j "Nice, threesome."
+                                    elif Party[0] == StormX:
+                                            ch_s "Excellent, glad to have you."
+                                    elif Party[0] == JubesX:
+                                            ch_v "Oh, cool!"
+                                    $ Party[1].GLG(Party[0],800,5,1)
+                                elif Party[0].GirlLikeCheck(Party[1]) >= 400 and ApprovalCheck(Party[0], 1400):
+                                    # If she barely likes the other girl but likes you a a lot
+                                    $ Party[0].FaceChange("sadside",1,Mouth="smile")
+                                    if Party[0] == RogueX:
+                                            ch_r "Sure, I guess."
+                                    elif Party[0] == KittyX:
+                                            ch_k "Um, Ok."
+                                    elif Party[0] == EmmaX:
+                                            ch_e "I suppose we could find room for one more."
+                                    elif Party[0] == LauraX:
+                                            ch_l "Whatever."
+                                    elif Party[0] == JeanX:
+                                            ch_j "Yeah, ok."
+                                    elif Party[0] == StormX:
+                                            ch_s "Very well, make yourself at home. . ."
+                                    elif Party[0] == JubesX:
+                                            ch_v "Oh, cool! Promise I won't bite."
+                                else:
+                                    $ Party[0].FaceChange("angry",1)
+                                    if Party[0] == RogueX:
+                                            ch_r "I'm not cool with that."
+                                    elif Party[0] == KittyX:
+                                            ch_k "No way."
+                                    elif Party[0] == EmmaX:
+                                            ch_e "I don't think so."
+                                    elif Party[0] == LauraX:
+                                            ch_l "Um, no."
+                                    elif Party[0] == JeanX:
+                                            ch_j "Definitely not."
+                                    elif Party[0] == StormX:
+                                            ch_s "No, I'm afraid not, [Party[1].Name]."
+                                    elif Party[0] == JubesX:
+                                            ch_v "Oh. . . cool. Promise I won't bite."
+                                            ch_v "much. . ."
+                                    $ Party[0].GLG(Party[1],700,-5,1)
+                                    $ Party[1].GLG(Party[0],700,-5,1)
+                                    $ Line = 0
+
+                    "You should get going, [Party[1].Name].":
+                            if Party[1] == RogueX:
+                                    ch_r "Oh, ok."
+                            elif Party[1] == KittyX:
+                                    ch_k "Yeah."
+                            elif Party[1] == EmmaX:
+                                    ch_e "I assumed."
+                            elif Party[1] == LauraX:
+                                    ch_l "Yeah."
+                            elif Party[1] == JeanX:
+                                    ch_j "What? You're not kicking me out, I'm kicking me out!"
+                            elif Party[1] == StormX:
+                                    ch_s "Ah, I understand."
+                            elif Party[1] == JubesX:
+                                    ch_v "Oh, ok, yeah. . ."
+                            $ Line = 0
+
+            if Line == 0:
+                    #if the second girl got the boot:
+                    if len(Party) >= 2:
+                        if Party[0] == RogueX:
+                                ch_r "Later, [Party[1].Name]."
+                        elif Party[0] == KittyX:
+                                ch_k "Night, [Party[1].Name]."
+                        elif Party[0] == EmmaX:
+                                ch_e "Goodnight, [Party[1].Name]."
+                        elif Party[0] == LauraX:
+                                ch_l "Night."
+                        elif Party[0] == JeanX:
+                                ch_j "Later, [Party[1].Name]."
+                        elif Party[0] == StormX:
+                                ch_s "Good night, [Party[1].Name]."
+                        elif Party[0] == JubesX:
+                                ch_v "Night, [Party[1].Name]."
+
+                        if Party[1] == RogueX:
+                                ch_r "Later guys."
+                        elif Party[1] == KittyX:
+                                ch_k "Night."
+                        elif Party[1] == EmmaX:
+                                ch_e "Goodnight."
+                        elif Party[1] == LauraX:
+                                ch_l "Night."
+                        elif Party[1] == JeanX:
+                                ch_j "Right, later."
+                        elif Party[1] == StormX:
+                                ch_s "Good night."
+                        elif Party[1] == JubesX:
+                                ch_v "Night!"
+                    if Party:
+                        call CleartheRoom(Party[0],1,1) #removes any other girls around
+
+            if not Party:
+                    #if nobody is around.
+                    if bg_current != "bg player":
+                            jump Return_Player
+                    call CleartheRoom("All",1)
+                    #if nobody is here, you just go to sleep
+                    "It's getting late, so you go to sleep."
+                    call Wait
+                    return
+
+            if bg_current != "bg player" and bg_current != Party[0].Home:
+                    #if the room's owner left you in her room. . .
+                    "You probably shouldn't sleep here, you head back to your own room."
+                    call Remove_Girl("All")
+                    $ renpy.pop_call()
+                    jump Player_Room
+
+            jump Sleepover_Morning
+
+
+label Return_Player:
+        # This label is jumped to by the Sleep labels if the player or girl leaves after a sleepover (fail state).
+        $ del Party[:]
+        $ BO = TotalGirls[:]
+        $ renpy.random.shuffle(BO)
+        while BO:
+                if bg_current != BO[0].Home and BO[0].Loc == bg_current:
+                        "[BO[0].Name] heads out."
+                        $ BO[0].Loc = BO[0].Home
+                $ BO.remove(BO[0])
+        if bg_current != "bg player":
+                "You head back to your room."
+        $ bg_current = "bg player"
+        jump Misplaced
+#        call Set_The_Scene
+#        $ renpy.pop_call()
+#        jump Player_Room
+
+label Sleepover_Morning: #rkeljsv
+        #This label is jumped too from Sleepover if you successfully stay the night
+        $ BO = TotalGirls[:]
+        while BO:
+                if BO[0].Loc == bg_current and BO[0] not in Party:
+                        call Remove_Girl(BO[0])
+                $ BO.remove(BO[0])
+
+        call Shift_Focus(Party[0])
+
+        if Party[0] == StormX and not StormX.Sleepwear[0] and StormX.Taboo < 20:
+                #if it's Storm, you haven't set Sleepwear, and there's nobody else that would mind, go nude
+                $ Party[0].OutfitChange("nude")
+        else:
+                $ Party[0].OutfitChange("sleep")
+        $ Party[0].OutfitDay == Party[0].Outfit
+        if len(Party) >= 2:
+                #If there are two girls. . .
+                if Party[1] == StormX and not StormX.Sleepwear[0] and StormX.Taboo < 20:
+                        #if it's Storm, you haven't set Sleepwear, and there's nobody else that would mind, go nude
+                        $ Party[1].OutfitChange("nude")
+                else:
+                        $ Party[1].OutfitChange("sleep")
+                $ Party[1].OutfitDay == Party[1].Outfit
+                "The girls change into their sleepwear."
+        else:
+                "[Party[0].Name] changes into her sleepwear."
+
+        if Party[0] == RogueX:
+                ch_r "Hmm, that's a bit more comfortable."
+        elif Party[0] == KittyX:
+                ch_k "Ah, that's better."
+        elif Party[0] == EmmaX:
+                ch_e "Mmmm, that's better."
+        elif Party[0] == LauraX:
+                ch_l ". . ."
+        elif Party[0] == JeanX:
+                ch_j "Sexy, right?"
+        elif Party[0] == StormX:
+                ch_s "Ah, much better."
+        elif Party[0] == JubesX:
+                ch_v "Ah, that's better."
+
+        # should no longer be necessary
+        #$ Party[0].Traits.append("sleepover") #this is temporary, removed in the morning
+
+        if len(Party) >= 2:
+                if Party[1] == RogueX:
+                        ch_r "Let's turn in."
+                elif Party[1] == KittyX:
+                        ch_k "Night, [KittyX.Petname]"
+                elif Party[1] == EmmaX:
+                        ch_e "Lights out."
+                elif Party[1] == LauraX:
+                        ch_l "Night."
+                elif Party[1] == JeanX:
+                        ch_j "Night."
+                elif Party[1] == StormX:
+                        ch_s "Good night."
+                elif Party[1] == JubesX:
+                        ch_v "Night."
+                # should no longer be necessary
+                #$ Party[1].Traits.append("sleepover") #this is temporary, removed in the morning
+        else:
+                if Party[0] == RogueX:
+                        ch_r "Let's turn in."
+                elif Party[0] == KittyX:
+                        ch_k "Night, [KittyX.Petname]"
+                elif Party[0] == EmmaX:
+                        ch_e "Goodnight."
+                elif Party[0] == LauraX:
+                        ch_l "Night."
+                elif Party[0] == JeanX:
+                        ch_j "Night."
+                elif Party[0] == StormX:
+                        ch_s "Good night."
+                elif Party[0] == JubesX:
+                        ch_v "Night."
+
+        show blackscreen onlayer black
+        pause 1
+
+
+        #replace "Wait" content here. . .
+        #call Wait(0,0) #shouldn't change outfit or lighting
+
+        #fake "wait" period to make it temporarily morning. Is reversed later.
+        $ Time_Count = 0
+        $ Current_Time = Time_Options[(Time_Count)]
+        $ Day += 1
+
+        if Weekday < 6:
+            $ Weekday += 1
+        else:
+            $ Weekday = 0
+
+
+
+        $ DayofWeek = Week[Weekday]
+        hide NightMask onlayer nightmask
+        $ Player.Semen = Player.Semen_Max
+        $ Player.Spunk = 0
+        $ Round = 50
+
+        $ BO = Party[:]
+        while BO:
+            $ BO[0].Action = BO[0].MaxAction
+            $ BO.remove(BO[0])
+
+        call Morningwood_Check # / / / / / / / checks for morning wood event here / / / / / / / checks for morning wood event here / / / / / / / checks for morning wood event here
+
+        $ Party[0].FaceChange("smile")
+        if len(Party) >= 2:
+                $ Party[1].FaceChange("smile")
+        hide NightMask onlayer nightmask
+        hide blackscreen onlayer black
+
+        if "morningwood" in Player.DailyActions:
+                #if you got some
+                if Party[0] == RogueX:
+                        ch_r "So, that aside, Sleep well?"
+                elif Party[0] == KittyX:
+                        ch_k "So anyway. . . G'morning . . ."
+                elif Party[0] == EmmaX:
+                        ch_e "Now that we've got that out of our system. . ."
+                        ch_e "Morning, [EmmaX.Petname]."
+                elif Party[0] == LauraX:
+                        ch_l "Anyway, 'Morning."
+                elif Party[0] == JeanX:
+                        ch_j "So. . . 'Morning."
+                elif Party[0] == StormX:
+                        ch_s "Anyway, good morning, [StormX.Petname]."
+                elif Party[0] == JubesX:
+                        ch_v "Anyways, 'morning, [Party[0].Petname]."
+        else:
+                if Party[0] == RogueX:
+                        ch_r "'Morning [RogueX.Petname]. Sleep well?"
+                elif Party[0] == KittyX:
+                        ch_k "G'morning . . ."
+                elif Party[0] == EmmaX:
+                        ch_e "Hrmph. . ."
+                        ch_e "Oh. You're here."
+                elif Party[0] == LauraX:
+                        ch_l "'Morning."
+                elif Party[0] == JeanX:
+                        ch_j "-Yawn-"
+                elif Party[0] == StormX:
+                        ch_s "Good morning, [StormX.Petname]."
+                elif Party[0] == JubesX:
+                        ch_v "Hey. . . 'morning, [Party[0].Petname]."
+
+        menu:
+            extend ""
+            "It's always nice sleeping with you." if Party[0].Sleep:
+                    if Party[0].Sleep < 5:
+                            $ Party[0].Statup("Love", 90, 8)
+                            $ Party[0].Statup("Obed", 50, 10)
+                            $ Party[0].Statup("Inbt", 70, 8)
+                    $ Party[0].Blush = 1
+
+                    if Party[0] == RogueX:
+                            ch_r "Aw, that's right sweet of ya, [RogueX.Petname]."
+                            ch_r "We'll have to keep this regular."
+                    elif Party[0] == KittyX:
+                            ch_k "And that's always nice to hear."
+                            ch_k "We'll have to keep this up."
+                    elif Party[0] == EmmaX:
+                            ch_e "Well. . ."
+                            ch_e "We'll have to make a habit of it then."
+                    elif Party[0] == LauraX:
+                            ch_l "Yeah. . ."
+                            ch_l "Warm. . ."
+                    elif Party[0] == JeanX:
+                            ch_j "Of course it is."
+                            ch_j "I'm a princess."
+                    elif Party[0] == StormX:
+                            ch_s "I enjoy it as well, [StormX.Petname]."
+                            ch_s "You keep the bed quite warm. . ."
+                    elif Party[0] == JubesX:
+                            ch_v "Yeah. . . it's nice having company. . ."
+                            ch_v "You keep it so cozy. . ."
+
+            "I loved sleeping next to you." if not Party[0].Sleep:
+                    $ Party[0].Statup("Love", 90, 15)
+                    $ Party[0].Statup("Love", 70, 10)
+                    $ Party[0].Statup("Obed", 50, 12)
+                    $ Party[0].Statup("Inbt", 70, 12)
+                    $ Line = "nice"
+
+            "It was fun.":
+                    if not Party[0].Sleep:
+                            $ Party[0].Statup("Love", 90, 10)
+                            $ Party[0].Statup("Love", 70, 8)
+                            $ Party[0].Statup("Obed", 50, 15)
+                            $ Party[0].Statup("Inbt", 70, 15)
+                    elif Party[0].Sleep < 5:
+                            $ Party[0].Statup("Love", 70, 8)
+                            $ Party[0].Statup("Obed", 80, 10)
+                            $ Party[0].Statup("Inbt", 35, 8)
+                    $ Party[0].Statup("Obed", 50, 8)
+                    if ApprovalCheck(Party[0], 800, "L"):
+                            $ Party[0].FaceChange("bemused")
+                    else:
+                            $ Party[0].FaceChange("confused")
+
+                    $ Line = "fun"
+                    if Party[0] == RogueX:
+                            ch_r "Ok, well glad I wasn't {i}too{/i} much bother."
+                    elif Party[0] == KittyX:
+                            ch_k "Yeah, I mean I guess it was. . ."
+                    elif Party[0] == EmmaX:
+                            ch_e "\"Fun\" is certainly how I would describe it."
+                    elif Party[0] == LauraX:
+                            ch_l "Yeah, I guess?"
+                    elif Party[0] == JeanX:
+                            ch_j "Um, \"fun?\" . . Yeah."
+                    elif Party[0] == StormX:
+                            ch_s ". . . Yes. . ."
+                            ch_s ". . . fun."
+                    elif Party[0] == JubesX:
+                            ch_v "Yeah. . . it's nice having company. . ."
+                            $ Line = "nice"
+
+            "You were constantly tossing around.":
+                    $ Party[0].Blush = 1
+                    if ApprovalCheck(Party[0], 800, "L") or ApprovalCheck(Party[0], 1200):
+                            $ Party[0].FaceChange("bemused")
+                            call AnyLine(Party[0],"Hmm?")
+                    else:
+                            $ Party[0].FaceChange("angry")
+                            call AnyLine(Party[0],"!!!")
+                    if Party[0].Sleep < 5:
+                            if Party[0] == RogueX:
+                                    ch_r "It's not like I've had much experience sleeping next to someone. . ."
+                            elif Party[0] == KittyX:
+                                    ch_k "I don't make a habit out of it. . ."
+                            elif Party[0] == EmmaX:
+                                    ch_e "I haven't had a lot of practice lately."
+                            elif Party[0] == LauraX:
+                                    ch_l "Deal with it."
+                            elif Party[0] == JeanX:
+                                    ch_j "It's called \"grace.\""
+                            elif Party[0] == StormX:
+                                    ch_s "Yes. . . well. . ."
+                                    ch_s "I do have a lot of energy. . ."
+                            elif Party[0] == JubesX:
+                                    ch_v "I'm just not used to sleeping nights. . ."
+                            $ Party[0].Statup("Love", 60, -8)
+                            $ Party[0].Statup("Obed", 50, 22)
+                            $ Party[0].Statup("Inbt", 50, 22)
+                    else:
+                            if Party[0] == RogueX:
+                                    ch_r "Well you should probably be used to that by now."
+                            elif Party[0] == KittyX:
+                                    ch_k "Yeah, well. . . you should be used to that!"
+                            elif Party[0] == EmmaX:
+                                    ch_e "I don't plan on changing any time soon."
+                            elif Party[0] == LauraX:
+                                    ch_l "Yeah, it'll be like that."
+                            elif Party[0] == JeanX:
+                                    ch_j "Deal with it."
+                            elif Party[0] == StormX:
+                                    ch_s "I suppose that I do."
+                            elif Party[0] == JubesX:
+                                    ch_v "You don't need to harp on it. . ."
+                    $Line = "toss"
+
+            "You need to learn to stick to your side.":
+                    if Party[0].Sleep < 5:
+                            $ Party[0].Statup("Love", 80, -8)
+                            $ Party[0].Statup("Obed", 50, 40)
+                    if ApprovalCheck(Party[0], 500, "O"):
+                            $ Party[0].Statup("Love", 80, -2)
+                            $ Party[0].Statup("Obed", 90, 5)
+                            $ Party[0].FaceChange("normal")
+                            if Party[0] == RogueX:
+                                    ch_r "Yes, [RogueX.Petname], I'll try my best."
+                            elif Party[0] == KittyX:
+                                    ch_k "Fine, whatever."
+                            elif Party[0] == EmmaX:
+                                    ch_e "I do try."
+                            elif Party[0] == LauraX:
+                                    ch_l "Ok."
+                            elif Party[0] == JeanX:
+                                    ch_j "It's all my side."
+                            elif Party[0] == StormX:
+                                    ch_s "I. . . can try. . ."
+                            elif Party[0] == JubesX:
+                                    ch_v "I thought you wanted the attention. . ."
+                            if Party[0].Sleep < 5:
+                                    $ Party[0].Statup("Obed", 80, 8)
+                    else:
+                            $ Party[0].FaceChange("angry")
+                            $ Party[0].Statup("Obed", 90, 5)
+                            if Party[0] == RogueX:
+                                    ch_r "Hmmph, you'll be sleeping alone, keep talk'in like that."
+                            elif Party[0] == KittyX:
+                                    ch_k "That's not how you get me to come back."
+                            elif Party[0] == EmmaX:
+                                    ch_e "I'll sleep how I please."
+                            elif Party[0] == LauraX:
+                                    ch_l "Good luck with that."
+                            elif Party[0] == JeanX:
+                                    ch_j "It's all my side."
+                            elif Party[0] == StormX:
+                                    ch_s "That seems unlikely."
+                            elif Party[0] == JubesX:
+                                    ch_v "I could just stay out of the bed entirely. . ."
+                            if Party[0].Sleep < 5:
+                                    $ Party[0].Statup("Inbt", 35, 20)
+                    $ Line = "toss"
+
+        if not Party[0].Sleep and Line == "nice":
+                if Party[0] == RogueX:
+                        $ Party[0].Blush = 1
+                        ch_r "Aw, that's right sweet of ya, [RogueX.Petname]."
+                        ch_r "Makes me want to do it again sometime."
+                elif Party[0] == KittyX:
+                        $ Party[0].Blush = 2
+                        ch_k "Yeah, I. . [KittyX.like]I had fun too."
+                        $ Party[0].Blush = 1
+                        ch_k "I wouldn't[KittyX.like]mind doing it again."
+                        $ Party[0].Blush = 2
+                        ch_k "You know, some other time. . . "
+                        $ Party[0].Blush = 1
+                elif Party[0] == EmmaX:
+                        $ Party[0].FaceChange("smile",1)
+                        ch_e "You're a hopeless romantic, [EmmaX.Petname]."
+                        $ Party[0].FaceChange("smile",2,Eyes="side")
+                        ch_e "I suppose I can be a bit hopeless too. . ."
+                elif Party[0] == LauraX:
+                        $ Party[0].FaceChange("confused",1)
+                        ch_l "Oh. . ."
+                        $ Party[0].FaceChange("surprised",2,Brows="confused")
+                        ch_l "Yeah, so did I, now that you mention it. . ."
+                        $ Party[0].FaceChange("confused",1)
+                        ch_l "Huh."
+                elif Party[0] == JeanX:
+                        $ Party[0].FaceChange("confused",1)
+                        ch_j "Huh? . ."
+                        ch_j "Oh, yeah. . . it was great. . ."
+                        $ Party[0].FaceChange("smile",1)
+                elif Party[0] == StormX:
+                        $ Party[0].FaceChange("smile",1)
+                        ch_s "Well, yes, it was nice to sleep next to you as well, [StormX.Petname]."
+                        $ Party[0].FaceChange("smile",2,Eyes="leftside")
+                        ch_s "I think we should make a habit of this. . ."
+                        $ Party[0].FaceChange("smile",1)
+                elif Party[0] == JubesX:
+                        $ Party[0].FaceChange("smile",1)
+                        ch_v "Yeah, I enjoyed it too. . ."
+                        $ Party[0].FaceChange("sad",1)
+                        ch_v "I haven't really been sleeping much since. . ."
+                        $ Party[0].FaceChange("sadside",1)
+                        ch_v ". . . the change."
+                        $ Party[0].FaceChange("smile",1)
+                        ch_v "It's nice having someone to stay with me. . ."
+
+        $ Party[0].Blush = 0
+
+        if len(Party) >= 2:
+            #second girl's lines
+            if "morningwood" in Player.DailyActions:
+                    if Party[1] == RogueX:
+                            ch_r "And what about me?"
+                    elif Party[1] == KittyX:
+                            ch_k "Me too?"
+                    elif Party[1] == EmmaX:
+                            ch_e "And me?"
+                    elif Party[1] == LauraX:
+                            ch_l "Ung, 'morning."
+                    elif Party[1] == JeanX:
+                            ch_j "Yeah, yeah, 'morning."
+                    elif Party[1] == StormX:
+                            ch_s "Ah, yes, good morning."
+                    elif Party[1] == JubesX:
+                            ch_v "Yeah. . . 'morning."
+            else:
+                    "[Party[1].Name] rolls over in bed."
+                    if Party[1] == RogueX:
+                            ch_r "Mmm, yeah, 'Morning [RogueX.Petname]."
+                    elif Party[1] == KittyX:
+                            ch_k "Yeah, G'morning . . ."
+                    elif Party[1] == EmmaX:
+                            ch_e "Hrmph. . ."
+                            ch_e "Oh. Not so loud, you two."
+                    elif Party[1] == JeanX:
+                            ch_j "Yeah, yeah, 'morning."
+                    elif Party[1] == StormX:
+                            ch_s "Ah, yes, good morning."
+                    elif Party[1] == JubesX:
+                            ch_v "Oh, um, yeah. . . 'morning."
+
+            menu:
+                extend ""
+                "I always love sleeping with you too, [Party[1].Name]." if Party[1].Sleep:
+                        if Party[1].Sleep < 5:
+                            $ Party[1].Statup("Love", 90, 8)
+                            $ Party[1].Statup("Obed", 50, 10)
+                            $ Party[1].Statup("Inbt", 70, 8)
+                        $ Party[1].Blush = 1
+
+                        if Party[1] == RogueX:
+                                ch_r "That's sweet of ya to say, [RogueX.Petname]."
+                        elif Party[1] == KittyX:
+                                ch_k "So cute!"
+                        elif Party[1] == EmmaX:
+                                ch_e "Mmmm. . . yes, lovely."
+                        elif Party[1] == LauraX:
+                                ch_l "Sure. . ."
+                        elif Party[1] == JeanX:
+                                ch_j "Ouch, you're giving me a toothache."
+                        elif Party[1] == StormX:
+                                ch_s "And I enjoy it as well, [StormX.Petname]."
+                        elif Party[1] == JubesX:
+                                ch_v "Yeah. . . it's nice having company. . ."
+
+                "And it was great sleeping with you as well, [Party[1].Name]." if not Party[1].Sleep:
+                        $ Party[1].Statup("Love", 90, 15)
+                        $ Party[1].Statup("Love", 70, 10)
+                        $ Party[1].Statup("Obed", 50, 12)
+                        $ Party[1].Statup("Inbt", 70, 12)
+                        $ Line = "nice"
+
+                "I had fun sleeping with you too, [Party[1].Name].":
+                        if not Party[1].Sleep:
+                                $ Party[1].Statup("Love", 90, 10)
+                                $ Party[1].Statup("Love", 70, 8)
+                                $ Party[1].Statup("Obed", 50, 15)
+                                $ Party[1].Statup("Inbt", 70, 15)
+                        elif Party[1].Sleep < 5:
+                                $ Party[1].Statup("Love", 70, 8)
+                                $ Party[1].Statup("Obed", 80, 10)
+                                $ Party[1].Statup("Inbt", 35, 8)
+                        $ Party[1].Statup("Obed", 50, 8)
+                        if ApprovalCheck(Party[1], 800, "L"):
+                                $ Party[1].FaceChange("bemused")
+                        else:
+                                $ Party[1].FaceChange("confused")
+
+                        $ Line = "fun"
+                        if Party[1] == RogueX:
+                                ch_r "Yeah, uh, fun."
+                        elif Party[1] == KittyX:
+                                ch_k "Yeah, I mean I guess it was. . ."
+                        elif Party[1] == EmmaX:
+                                ch_e "\"Fun\" is certainly how I would describe it."
+                        elif Party[1] == LauraX:
+                                ch_l "Yeah, I guess?"
+                        elif Party[1] == JeanX:
+                                ch_j "Yeah you did."
+                        elif Party[1] == StormX:
+                                ch_s ". . . Yes. . ."
+                                ch_s ". . . fun."
+                        elif Party[1] == JubesX:
+                                ch_v "Yeah. . . it's nice having company. . ."
+                                $ Line = "nice"
+
+                "You were constantly tossing around, [Party[1].Name]." if Line == "toss":
+                        $ Line = "toss"
+                "You were tossing around constantly too, [Party[1].Name]." if Line != "toss":
+                        $ Line = "toss"
+
+                "You need to learn to stick to your side, [Party[1].Name]." if Line == "toss":
+                        $ Line = "turn"
+                "And you need to learn to stick to your side too, [Party[1].Name]." if Line != "toss":
+                        $ Line = "turn"
+
+            if not Party[1].Sleep and Line == "nice":
+                    if Party[1] == RogueX:
+                            $ Party[1].Blush = 1
+                            ch_r "Aw, that's right sweet of ya, [RogueX.Petname]."
+                            ch_r "I think I'd want to do that again."
+                            ch_r "And, uh, you too, [Party[0].Name]."
+                    elif Party[1] == KittyX:
+                            $ Party[1].Blush = 2
+                            ch_k "Yeah, I. . [KittyX.like]I had fun too."
+                            $ Party[1].Blush = 1
+                            ch_k "I wouldn't[KittyX.like]mind doing it again."
+                            $ Party[1].Blush = 2
+                            ch_k "You know, some other time. . . "
+                            $ Party[1].Blush = 1
+                            ch_k "And[KittyX.like]you too, [Party[0].Name]."
+                    elif Party[1] == EmmaX:
+                            $ Party[1].FaceChange("smile",1)
+                            ch_e "You're a hopeless romantic, [EmmaX.Petname]."
+                            $ Party[1].FaceChange("smile",2,Eyes="side")
+                            ch_e "I suppose I can be a bit hopeless too. . ."
+                            ch_e "You know what I'm talking about, [Party[0].Name]."
+                    elif Party[1] == LauraX:
+                            $ LauraX.FaceChange("confused",1)
+                            ch_l "Oh. . ."
+                            $ Party[1].FaceChange("surprised",2,Brows="confused")
+                            ch_l "Yeah, so did I, now that you mention it. . ."
+                            $ Party[1].FaceChange("confused",1)
+                            ch_l "Huh."
+                            ch_l "Weird, right, [Party[0].Name]?"
+                    elif Party[1] == JeanX:
+                            $ Party[1].FaceChange("confused",1)
+                            ch_j "Huh? . ."
+                            ch_j "Oh, yeah. . . it was great. . ."
+                            $ Party[0].FaceChange("smile",1)
+                    elif Party[1] == StormX:
+                            $ Party[1].FaceChange("smile",1)
+                            ch_s "Well, yes, it was nice to sleep next to you as well, [StormX.Petname]."
+                            $ Party[1].FaceChange("smile",2,Eyes="leftside")
+                            ch_s "I think we should make a habit of this. . ."
+                            $ Party[1].FaceChange("smile",1)
+                    elif Party[1] == JubesX:
+                            $ Party[1].FaceChange("smile",1)
+                            ch_v "Yeah, I enjoyed it too. . ."
+                            $ Party[1].FaceChange("sad",1)
+                            ch_v "I haven't really been sleeping much since. . ."
+                            $ Party[1].FaceChange("sadside",1)
+                            ch_v ". . . the change."
+                            $ Party[1].FaceChange("smile",1)
+                            ch_v "It's nice having someone to stay with me. . ."
+
+
+            elif Line == "toss":
+                        $ Party[1].Blush = 1
+                        if ApprovalCheck(Party[1], 800, "L") or ApprovalCheck(Party[1], 1200):
+                                $ Party[1].FaceChange("bemused")
+                                call AnyLine(Party[1],"Hmm?")
+                        else:
+                                $ Party[1].FaceChange("angry")
+                                call AnyLine(Party[1],"!!!")
+                        if Party[1].Sleep < 5:
+                                if Party[1] == RogueX:
+                                        ch_r "It's not like I've had much experience sleeping next to someone. . ."
+                                elif Party[1] == KittyX:
+                                        ch_k "I don't make a habit out of it. . ."
+                                elif Party[1] == EmmaX:
+                                        ch_e "I haven't had a lot of practice lately."
+                                elif Party[1] == LauraX:
+                                        ch_l "Deal with it."
+                                elif Party[1] == JeanX:
+                                        ch_j "It's called \"grace.\""
+                                elif Party[1] == StormX:
+                                        ch_s "Yes. . . well. . ."
+                                        ch_s "I do have a lot of energy. . ."
+                                elif Party[1] == JubesX:
+                                        ch_v "I'm just not used to sleeping nights. . ."
+                                $ Party[1].Statup("Love", 60, -8)
+                                $ Party[1].Statup("Obed", 50, 22)
+                                $ Party[1].Statup("Inbt", 50, 22)
+                        else:
+                                if Party[1] == RogueX:
+                                        ch_r "Well you should probably be used to that by now."
+                                elif Party[1] == KittyX:
+                                        ch_k "Yeah, well. . . you should be used to that!"
+                                elif Party[1] == EmmaX:
+                                        ch_e "I don't plan on changing any time soon."
+                                elif Party[1] == LauraX:
+                                        ch_l "Yeah, it'll be like that."
+                                elif Party[1] == JeanX:
+                                        ch_j "Deal with it."
+                                elif Party[1] == StormX:
+                                        ch_s "I suppose that I do."
+                                elif Party[1] == JubesX:
+                                        ch_v "I could just stay out of the bed entirely. . ."
+            elif Line == "turn":
+                        if Party[1].Sleep < 5:
+                                $ Party[1].Statup("Love", 80, -8)
+                                $ Party[1].Statup("Obed", 50, 40)
+                        if ApprovalCheck(Party[1], 500, "O"):
+                                $ Party[1].Statup("Love", 80, -2)
+                                $ Party[1].Statup("Obed", 90, 5)
+                                $ Party[1].FaceChange("normal")
+                                if Party[1] == RogueX:
+                                        ch_r "Yes, [RogueX.Petname], I'll try my best."
+                                elif Party[1] == KittyX:
+                                        ch_k "Fine, whatever."
+                                elif Party[1] == EmmaX:
+                                        ch_e "I do try."
+                                elif Party[1] == LauraX:
+                                        ch_l "Ok."
+                                elif Party[1] == JeanX:
+                                        ch_j "It's all my side."
+                                elif Party[1] == StormX:
+                                        ch_s "I. . . can try. . ."
+                                elif Party[1] == JubesX:
+                                        ch_v "I could just stay out of the bed entirely. . ."
+                                if Party[1].Sleep < 5:
+                                        $ Party[1].Statup("Obed", 80, 8)
+                        else:
+                                $ Party[1].FaceChange("angry")
+                                $ Party[1].Statup("Obed", 90, 5)
+                                if Party[1] == RogueX:
+                                        ch_r "Hmmph, you'll be sleeping alone, keep talk'in like that."
+                                elif Party[1] == KittyX:
+                                        ch_k "That's not how you get me to come back."
+                                elif Party[1] == EmmaX:
+                                        ch_e "I'll sleep how I please."
+                                elif Party[1] == LauraX:
+                                        ch_l "Good luck with that."
+                                elif Party[1] == JeanX:
+                                        ch_j "It's all my side."
+                                elif Party[1] == StormX:
+                                        ch_s "That seems unlikely."
+                                elif Party[1] == JubesX:
+                                        ch_v "I could just stay out of the bed entirely. . ."
+                                if Party[1].Sleep < 5:
+                                        $ Party[1].Statup("Inbt", 35, 20)
+
+            $ Party[1].Blush = 0
+        #end second girl's lines
+
+
+        if len(Party) >= 2:
+                $ Party[1].Sleep += 1
+                #$ Party[1].DrainWord("sleepover",1,1,1)                                #no longer necessary?
+                #call Girls_Schedule([Party[1]],2) #forces clothing pick                #no longer necessary?
+        $ Party[0].Sleep += 1
+        #$ Party[0].DrainWord("sleepover",1,1,1)                                        #no longer necessary?
+        #call Girls_Schedule([Party[0]],2) #forces clothing pick                        #no longer necessary?
+
+        # Removes faux "Wait" changes, resets timing to previous night
+        $ Time_Count = 3
+        $ Current_Time = Time_Options[(Time_Count)]
+        $ Day -= 1
+
+        if Weekday == 0:
+            $ Weekday = 6
+        else:
+            $ Weekday -= 1
+
+        $ DayofWeek = Week[Weekday]
+
+        call Wait                                                                       #Wait added here?
+
+        $ BO = TotalGirls[:]
+        while BO:
+                if "leaving" in BO[0].RecentActions or BO[0].Loc == bg_current:
+                        #should add to the party any girls who are staying in the room for the morning
+                        #or who were in the room but are leaving
+                        $ Party.append(BO[0])
+                        $ BO[0].Loc = bg_current
+                        if "leaving" in BO[0].RecentActions:
+                            $ BO[0].RecentActions.remove("leaving")
+                if "morningwood" in BO[0].Traits:
+                        #if a morning wood event happened, apply these traits to them
+                        $ BO[0].RecentActions.append("blow")
+                        $ BO[0].DailyActions.append("blow")
+                        $ BO[0].DailyActions.append("morningwood")
+                        $ BO[0].Traits.remove("morningwood")
+                $ BO.remove(BO[0])
+
+        #fix add sex option here
+
+        if Party:
+            $ Party[0].FaceChange("normal")
+            $ Party[0].OutfitChange(6,Changed = 1)
+
+            if len(Party) >= 2:
+                    $ Party[1].FaceChange("normal")
+                    $ Party[1].OutfitChange(6,Changed = 1)
+                    "The girls get changed for the day."
+            else:
+                    "[Party[0].Name] gets changed for the day."
+        $ Party = []
+
+
+        call Girls_Location
+        return
+
+# end Event Sleepover / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+
+
+
+
+# start Event Morning Wood / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# start Morning Wood Check / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+
+label Morningwood_Check(Girls=[0,-3],D20=0): #rkeljsv
+        #This element sends player to the Morningwood event or returns them
+        #it is called from Sleepover_Morning
+
+        $ D20 = renpy.random.randint(0,3)
+        $ Line = 0
+
+        if len(Party) >= 2:
+                #builds a modifier for how the girls like each other
+                if Party[0].GirlLikeCheck(Party[1]) >= 900:
+                        # If the first girl really likes the second
+                        $ Girls[0] = 2
+                elif Party[0].GirlLikeCheck(Party[1]) >= 750:
+                        # If the first girl kinda likes the second
+                        $ Girls[0] = 0
+                elif Party[0].GirlLikeCheck(Party[1]) <= 400:
+                        # If the first girl really hates the second
+                        $ Girls[0] = 2
+                else:
+                        $ Girls[0] = 0
+
+                if Party[1].GirlLikeCheck(Party[0]) >= 900:
+                        # If the second girl really likes the first
+                        $ Girls[1] = 2
+                elif Party[1].GirlLikeCheck(Party[0]) >= 750:
+                        # If the second girl kinda likes the first
+                        $ Girls[1] = 0
+                elif Party[1].GirlLikeCheck(Party[0]) <= 400:
+                        # If the second girl really hates the first
+                        $ Girls[1] = -5
+                else:
+                        $ Girls[1] = -3
+        else:
+                        $ Girls[0] -= 2
+
+        #checks if Primary girl wants to do it
+        if "chill" in Party[0].Traits:
+                #if you've told her to chill, she stops here.
+                $ Girls[0] = 0
+        else:
+                if Party[0].Blow >= 5 or ApprovalCheck(Party[0], 900, "I"):
+                        $ Girls[0] += 3
+                elif Party[0].Blow and ApprovalCheck(Party[0], 900):
+                        $ Girls[0] += 2
+                elif ApprovalCheck(Party[0], 1400):
+                        $ Girls[0] += 2
+                elif Party[0].Blow or ApprovalCheck(Party[0], 900):
+                        $ Girls[0] += 1
+
+                if "hungry" in Party[0].Traits and D20 >= 2:
+                        #if she likes cum and gets a 50-70 result
+                        $ Girls[0] += 2
+                if Party[0].Thirst >= 60:
+                        #if she's horny
+                        $ Girls[0] += 2
+                elif Party[0].Thirst >= 30:
+                        #if she's horny
+                        $ Girls[0] += 1
+                if Party[0].Lust >= 50:
+                        #if she's horny
+                        $ Girls[0] += 1
+                if Party[0].SEXP <= 15:
+                        #if she's inexperienced
+                        $ Girls[0] -= 1
+                #end first girls
+
+                if Girls[1] >= 0:
+                        # if the other girl quite likes her
+                        $ Girls[0] += 1
+
+        #minimum: -1 likely: 3 maximum: 11
+        if JubesX in Party:
+                 #remove when JubesX has a BJ animation                           #remove when JubesX has a BJ animation
+                if len(Party) >= 2:
+                        $ Line = "no"
+                else:
+                        return
+        elif Girls[0] >= D20:
+                $ Line = "yes"
+
+
+        #end first girl check, Girls[0] maybe "yes," maybe 0
+
+        if len(Party) >= 2:
+                if Party[1].Blow >= 5 or ApprovalCheck(Party[1], 900, "I"):
+                        $ Girls[1] += 3
+                elif Party[1].Blow and ApprovalCheck(Party[1], 900):
+                        $ Girls[1] += 2
+                elif ApprovalCheck(Party[1], 1400):
+                        $ Girls[1] += 2
+                elif Party[1].Blow or ApprovalCheck(Party[1], 900):
+                        $ Girls[1] += 1
+
+                if "hungry" in Party[1].Traits and D20 >= 2:
+                        #if she likes cum and gets a 50-70 result
+                        $ Girls[1] += 2
+                if Party[1].Thirst >= 60:
+                        #if she's horny
+                        $ Girls[1] += 2
+                elif Party[1].Thirst >= 30:
+                        #if she's horny
+                        $ Girls[1] += 1
+                if Party[1].Lust >= 50:
+                        #if she's horny
+                        $ Girls[1] += 1
+                if Party[1].SEXP <= 15:
+                        #if she's inexperienced
+                        $ Girls[1] -= 1
+                #end second girls
+
+                if Girls[0] >= 0:
+                        # if the other girl quite likes her
+                        $ Girls[1] += 1
+
+                #minimum: -6 likely: 2 maximum: 11
+                if Party[1] == JubesX:
+                        #remove when Jubes is into it
+                        if Girls[1] >= (D20 + 1):# 1-4
+                                $ Line = "other"
+                        elif Girls[1] <= -1:
+                                $ Line = "no"
+                elif Girls[1] >= (D20 + 1):# 1-4
+                        if Line == "yes": #if the first girl agreed
+                                $ Line = "double"
+                        else:
+                                $ Line = "other"
+                elif Girls[1] <= -1:
+                        $ Line = "no"
+                #else: stays "yes"
+
+                if Line == "other" and Party[0].GirlLikeCheck(Party[1]) >= 500 and "chill" not in Party[1].Traits:
+                    # If Girl 1 wasn't into it, but liked girl 2 and girl 2 was, swap them
+                    $ Party.reverse()
+                    $ Girls[0] = "yes"
+                    $ Girls[1] = 0
+
+        #End second girl check, Girls[1] maybe "double," maybe "no", maybe 0
+
+        if Line:
+            # if Line has changed from 0
+            if Line == "no":
+                        # second girl ruins it
+                        "You hear a little commotion as you start to wake up."
+                        if Party[1] == RogueX:
+                                ch_r "You get'cher head out of there, [Party[0].Name]!"
+                        elif Party[1] == KittyX:
+                                "You hear a thump and feel a small woosh as something heavy drops under the bed."
+                                call AnyLine(Party[0],"Ow!")
+                                ch_k "Serves you right, [Party[0].Name]."
+                        elif Party[1] == EmmaX:
+                                ch_e "Step away from [Player.Name], [Party[0].Name]."
+                        elif Party[1] == LauraX:
+                                ch_l "Back it up, [Party[0].Name]."
+                        elif Party[1] == JeanX:
+                                ch_j "Back it off, [Party[0].Name]."
+                        elif Party[1] == StormX:
+                                ch_s "[Party[0].Name], some of us are trying to sleep. . ."
+                        elif Party[1] == JubesX:
+                                ch_v "He's trying to sleep over there, cut it out. . ."
+
+                        if Party[0] == RogueX:
+                                ch_r "I didn't mean no harm, [Party[1].Name]."
+                        elif Party[0] == KittyX:
+                                "You hear a thump and feel a small woosh as something drops under the bed."
+                                call AnyLine(Party[0],"Ow!")
+                                ch_k "Spoilsport."
+                        elif Party[0] == EmmaX:
+                                ch_e "Don't be a bore, dear."
+                        elif Party[0] == LauraX:
+                                ch_l "Fine, whatever."
+                        elif Party[0] == JeanX:
+                                ch_j "You back it off. . ."
+                                "-Zap-"
+                        elif Party[0] == StormX:
+                                ch_s "I didn't intend to wake you. . ."
+                        elif Party[0] == JubesX:
+                                ch_v "Oh, fine. . ."
+                        if Party[0] != JeanX:
+                                return
+            elif Line == "double":
+                        # it's a threesome
+                        $ Trigger4 = "blow"
+                        $ Party[1].RecentActions.append("blow")
+                        $ Party[1].DailyActions.append("blow")
+                        $ Party[1].DailyActions.append("morningwood")
+                        $ Party[1].Traits.append("morningwood")
+            # it's a solo act with girl 1
+            $ Trigger = "blow"
+            $ Party[0].RecentActions.append("blow")
+            $ Party[0].DailyActions.append("blow")
+            $ Party[0].DailyActions.append("morningwood")
+            $ Party[0].Traits.append("morningwood")
+            call Sleepover_MorningWood
+            #call expression Party[0].Tag + "_SexAct" pass ("morningwood")
+            call Sex_Over(0)
+            #end "yes"
+
+        else: #Girls[0] = 0
+            #neither girl was interested
+            pass
+
+        return
+
+
+# end Morning Wood Check / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+
+
+
+label Sleepover_MorningWood: #rkeljsv
+        # this label is called from Morningwood_Check, which was called from Sleepover_Morning
+        $ Player.AddWord(1,"interruption") #prevents interruption
+        call Shift_Focus(Party[0])
+        $ Player.Focus = 30
+        if Trigger == "blow":
+                    ch_u "\"Slurp, slurp, slurp.\""
+        else:
+                    ch_u "\"Squish, squish, squish.\""
+
+        $ Player.Statup("Focus", 80, 5)
+        $ Party[0].Statup("Lust", 80, 5)
+        $ Player.DailyActions.append("morningwood")
+
+        $ Partner = Party[1] if len(Party) >= 2 else 0
+        #display other girl here if necessary
+
+        $ Player.RecentActions.append("cockout")
+
+        if Partner:
+                if Partner == RogueX:
+                        show Rogue_Sprite:
+                            pos (900,250)
+                elif Partner == KittyX:
+                        show Kitty_Sprite:
+                            pos (900,250)
+                elif Partner == EmmaX:
+                        show Emma_Sprite:
+                            pos (900,250)
+                elif Partner == LauraX:
+                        show Laura_Sprite:
+                            pos (900,250)
+                elif Partner == JeanX:
+                        show Jean_Sprite:
+                            pos (900,250)
+                elif Partner == StormX:
+                        show Storm_Sprite:
+                            pos (900,250)
+                elif Partner == JubesX:
+                        show Jubes_Sprite:
+                            pos (900,250)
+                $ Partner.RecentActions.append("threesome")
+
+        $ Party[0].RecentActions.append("blanket")
+        call expression Party[0].Tag + "_BJ_Launch"
+
+        $ Party[0].FaceChange("closed",1)
+        if Partner:
+                $ Partner.FaceChange("closed",1,Mouth="tongue")
+
+        "You feel a pleasant sensation. . ."
+        if Trigger == "blow":
+                if Trigger4:
+                    ch_u "\"Slurp, slurp, slurp.\" \n \ \"Slurp, slurp, slurp.\""
+                else:
+                    ch_u "\"Slurp, slurp, slurp.\""
+        else:
+                if Trigger4:
+                    ch_u "\"Squish, squish, squish.\" \n \ \"Slurp, slurp, slurp.\""
+                else:
+                    ch_u "\"Squish, squish, squish.\""
+        $ Player.Statup("Focus", 80, 5)
+        $ Party[0].Statup("Lust", 80, 5)
+
+        "It's somewhere below your waist. . ."
+        if Trigger == "blow":
+                if Trigger4:
+                    ch_u "\"Slurp, slurp, slurp.\" \n \ \"Slurp, slurp, slurp.\""
+                else:
+                    ch_u "\"Slurp, slurp, slurp.\""
+        else:
+                if Trigger4:
+                    ch_u "\"Squish, squish, squish.\" \n \ \"Slurp, slurp, slurp.\""
+                else:
+                    ch_u "\"Squish, squish, squish.\""
+        $ Player.Statup("Focus", 80, 10)
+        $ Party[0].Statup("Lust", 80, 5)
+
+        "You open your eyes. . ."
+
+        hide NightMask onlayer nightmask
+        hide blackscreen onlayer black
+
+        $ Speed = 3
+        $ Count = 3
+        $ Line = 0
+        call Seen_First_Peen(Party[0],Partner,1,1,1)
+        while Count > 0:
+                #Looping portion
+                $ Player.Statup("Focus", 80, 10)
+                $ Party[0].Statup("Lust", 80, 5)
+                if Partner:
+                        $ Partner.Statup("Lust", 80, 5)
+                menu:
+                    "Stay Quiet":
+                        if Count >2:
+                            if Trigger4:
+                                "You just let them do their thing and pretend to still be asleep."
+                            else:
+                                "You just let her do her thing and pretend to still be asleep."
+                        elif Count>1:
+                            "It does feel nice. . ."
+                        else:
+                            if Trigger4:
+                                "You wouldn't want to disturb them. . ."
+                            else:
+                                "You wouldn't want to disturb her. . ."
+                        if Trigger == "blow":
+                                call AnyLine(Party[0],"\"Slurp, slurp, slurp.\"")
+                        else:
+                                call AnyLine(Party[0],"\"Squish, squish, squish.\"")
+                        if Trigger4:
+                                call AnyLine(Party[1],"\"Slurp, slurp, slurp.\"")
+                        ". . ."
+                    "Um. . . [Party[0].Pet], what're you doing?":
+                        $ Line = "question"
+                        $ Count = 1
+                    "That feels great, keep going. . .":
+                        $ Line = "praise"
+                        $ Count = 1
+                    "Hey, quit that!":
+                        $ Line = "no"
+                        $ Count = 1
+                $ Count -= 1
+        $ Speed = 1
+        $ Party[0].Blush = 1
+        if Trigger4:
+                "[Party[0].Name] pulls back with a pop and [Party[1].Name] sits back."
+                $ Trigger4 = 0
+        else:
+                "[Party[0].Name] pulls back with a pop."
+        if Line == "question":
+                        $ Party[0].FaceChange("smile",1)
+                        if Party[0] == RogueX:
+                                ch_r "Well I ain't whistlin Dixie, [RogueX.Petname]."
+                        elif Party[0] == KittyX:
+                                ch_k "I wasn't[KittyX.like]being subtle about it, [KittyX.Petname]."
+                        elif Party[0] == EmmaX:
+                                ch_e "Surely your education hasn't been that poor, [EmmaX.Petname]."
+                        elif Party[0] == LauraX:
+                                ch_l "Guess."
+                        elif Party[0] == JeanX:
+                                $ Party[0].FaceChange("confused",1)
+                                $ Speed = 2
+                                ch_j ". . ."
+                                ch_j "I 'ave orr dick, in ey 'outh. . ."
+                                ch_j "Are u 'rain 'amaged?"
+                                $ Speed = 1
+                                if Partner:
+                                    $ Party[0].Eyes = "leftside"
+                                    ch_j "Is he brain damaged?"
+                                $ Party[0].FaceChange("sly",1)
+                        elif Party[0] == StormX:
+                                ch_s "I didn't intend to wake you. . ."
+                        elif Party[0] == JubesX:
+                                ch_v "Sorry, I. . . hadn't had breakfast. . ."
+        elif Line == "praise":
+                        $ Party[0].FaceChange("smile",1)
+                        $ Party[0].Statup("Love", 90, 5)
+                        $ Party[0].Statup("Obed", 50, 2)
+                        $ Party[0].Statup("Inbt", 60, 2)
+                        if Party[0] == RogueX:
+                                ch_r "Mmm, you know it, [RogueX.Petname]."
+                        elif Party[0] == KittyX:
+                                ch_k "Mmm, hehe."
+                        elif Party[0] == EmmaX:
+                                ch_e "Practice, [EmmaX.Petname]."
+                        elif Party[0] == LauraX:
+                                ch_l "Yeah, I guess?"
+                        elif Party[0] == JeanX:
+                                ch_j "Heh."
+                        elif Party[0] == StormX:
+                                ch_s "Certainly. . ."
+                        elif Party[0] == JubesX:
+                                ch_v "I do enjoy it. . ."
+        elif Line == "no":
+                        $ Party[0].Statup("Love", 90, -3)
+                        $ Party[0].Statup("Obed", 50, 2)
+                        $ Party[0].Statup("Inbt", 60, -2)
+                        $ Speed = 0
+                        $ Party[0].FaceChange("angry",1,Brows="confused")
+                        if Party[0] == RogueX:
+                                 ch_r "Well that's a fine \"how d'ya do,\" when a girl goes to all this trouble!"
+                        elif Party[0] == KittyX:
+                                ch_k "{i}That's{/i} the thanks I get?!"
+                        elif Party[0] == EmmaX:
+                                ch_e "A little \"gratitude\" wouldn't be uncalled for. . ."
+                        elif Party[0] == LauraX:
+                                ch_l "Huh?"
+                        elif Party[0] == JeanX:
+                                ch_j "Seriously? No \"thank you?\""
+                        elif Party[0] == StormX:
+                                ch_s "Oh, I'm sorry if I was presumptuous. . ."
+                        elif Party[0] == JubesX:
+                                ch_v "Sorry, sorry! I was a little hungry. . ."
+        else: #if it fell through due to time
+                        if Party[0] == RogueX:
+                                ch_r "Heh, I can tell you're awake, [RogueX.Petname]. . ."
+                                ch_r "You've been. . . more responsive."
+                        elif Party[0] == KittyX:
+                                ch_k "You can stop faking it, [KittyX.Petname]. . ."
+                                ch_k "This guy's telling me you're awake now."
+                        elif Party[0] == EmmaX:
+                                ch_e "I don't know who you think you're fooling."
+                                ch_e "You've been awake for a while, [EmmaX.Petname]. . ."
+                        elif Party[0] == LauraX:
+                                ch_l "You can stop playing dead, [LauraX.Petname]. . ."
+                                ch_l "Oldest trick in the book."
+                        elif Party[0] == JeanX:
+                                ch_j "You can stop pretending to be asleep. . ."
+                                ch_j "I can't read your mind, but I can read your dick. . ."
+                        elif Party[0] == StormX:
+                                ch_s "I didn't intend to wake you, but it seems I have."
+                        elif Party[0] == JubesX:
+                                ch_v "Oh, g'morning sleepyhead. . ."
+        #end first response phase
+
+        if Partner:
+                #second girl's lines
+                if Line == "question":
+                                $ Party[1].FaceChange("smile",1)
+                elif Line == "praise":
+                                $ Party[1].Statup("Love", 90, 3)
+                                $ Party[1].Statup("Obed", 50, 2)
+                                $ Party[1].Statup("Inbt", 60, -2)
+                                $ Party[1].FaceChange("smile",1)
+                elif Line == "no":
+                                $ Party[1].Statup("Love", 90, -3)
+                                $ Party[1].Statup("Obed", 50, 2)
+                                $ Party[1].Statup("Inbt", 60, -2)
+                                $ Party[1].FaceChange("angry",1,Brows="confused")
+
+                if Partner == RogueX:
+                        if "blow" in RogueX.RecentActions:
+                            ch_r "I don't know 'bout that, [RogueX.Petname]."
+                        else:
+                            "[RogueX.Name] rolls over in bed."
+                            ch_r "Don't stop on my account, [RogueX.Petname]."
+                elif Partner == KittyX:
+                        if "blow" in KittyX.RecentActions:
+                            ch_k "Huh. . ."
+                        else:
+                            "[KittyX.Name] rolls over in bed."
+                            ch_k "Looked like you were having some fun there . . ."
+                elif Partner == EmmaX:
+                        if "blow" in EmmaX.RecentActions:
+                            ch_e "Well. . ."
+                        else:
+                            "[EmmaX.Name] rolls over in bed."
+                            ch_e "Oh, don't let me stop you two."
+                elif Partner == LauraX:
+                        if "blow" in LauraX.RecentActions:
+                            ch_l "Hmm. . ."
+                        else:
+                            "[LauraX.Name] rolls over in bed and stares at you both."
+                elif Partner == JeanX:
+                        if "blow" in JeanX.RecentActions:
+                            ch_j "Hmm. . ."
+                        else:
+                            "[JeanX.Name] rolls over in bed and puts a pillow over her head."
+                elif Partner == StormX:
+                        if "blow" in StormX.RecentActions:
+                            ch_s "Hm?"
+                        else:
+                            "[StormX.Name] rolls over in bed."
+                            ch_s "Ah."
+                            ch_s "Go on then. . ."
+                elif Partner == JubesX:
+                        if "blow" in JubesX.RecentActions:
+                            ch_v "Mmmm. . ."
+                        else:
+                            "[JubesX.Name] rolls over in bed."
+                            ch_v "I just thought it looked like fun. . ."
+
+        #start second question phase
+        menu:
+            "So, um, you want to get back to it?":
+                    if Line != "no":
+                            #assuming you weren't rude
+                            $ Party[0].FaceChange("smile",1)
+                            if Party[0] == RogueX:
+                                    ch_r "My pleasure."
+                            elif Party[0] == KittyX:
+                                    ch_k "Hehe, mmmm. . ."
+                            elif Party[0] == EmmaX:
+                                    ch_e "If you insist. . ."
+                            elif Party[0] == LauraX:
+                                    ch_l "That's the plan. . ."
+                            elif Party[0] == JeanX:
+                                    ch_j "Sure."
+                            elif Party[0] == StormX:
+                                    ch_s "I would love to. . ."
+                            elif Party[0] == JubesX:
+                                    ch_v "Sure would."
+                    elif Line == "no" and ApprovalCheck(Party[0], 1750):
+                            #if you were a dick but she's ok
+                            $ Party[0].Statup("Obed", 80, 3)
+                            $ Party[0].Statup("Inbt", 60, 2)
+                            $ Party[0].FaceChange("bemused")
+                            if Party[0] == RogueX:
+                                    ch_r "You're lucky I'm so into you. . ."
+                            elif Party[0] == KittyX:
+                                    ch_k "Wha? Well. . . I guess. . ."
+                            elif Party[0] == EmmaX:
+                                    ch_e "Do try not to be a prat this time. . ."
+                            elif Party[0] == LauraX:
+                                    ch_l "Fine. . ."
+                            elif Party[0] == JeanX:
+                                    $ Party[0].Statup("Obed", 90, 3)
+                                    ch_j "Whatever."
+                            elif Party[0] == StormX:
+                                    ch_s ". . ."
+                                    ch_s "I suppose I should finish what I start."
+                            elif Party[0] == JubesX:
+                                    ch_v "Do you need to ask?"
+                            $ Line = "maybe"
+                    else:
+                            #if you were a dick and she's not ok with that
+                            $ Party[0].FaceChange("angry",1)
+                            if Party[0] == RogueX:
+                                    ch_r "Well not when you're rude to me."
+                                    ch_r "You can polish yourself off."
+                            elif Party[0] == KittyX:
+                                    ch_k "You can't walk that one back!"
+                                    ch_k "You can take care of that yourself."
+                            elif Party[0] == EmmaX:
+                                    ch_e "Not with your attitude."
+                                    ch_e "I think you can manage to finish this yourself."
+                            elif Party[0] == LauraX:
+                                    ch_l "No."
+                            elif Party[0] == JeanX:
+                                    ch_j "Ha! No."
+                            elif Party[0] == StormX:
+                                    ch_s "Well now I am not so motivated. . ."
+                            elif Party[0] == JubesX:
+                                    ch_v "No, I think I got enough. . ."
+            "Were you more interested in something else?":
+                    if Line != "no":
+                            #assuming you weren't rude
+                            $ Party[0].FaceChange("sexy",1)
+                            if Party[0] == RogueX:
+                                    ch_r "Ooh, what did you have in mind?"
+                            elif Party[0] == KittyX:
+                                    ch_k "Maaaybee. . . like what?"
+                            elif Party[0] == EmmaX:
+                                    ch_e "Perhaps. . . What did you have in mind?"
+                            elif Party[0] == LauraX:
+                                    ch_l "Yeah, I guess?"
+                            elif Party[0] == JeanX:
+                                    ch_j "You read my mind. . ."
+                            elif Party[0] == StormX:
+                                    ch_s "I would love to. . ."
+                            elif Party[0] == JubesX:
+                                    ch_v "Sure, I guess. . ."
+                            $ Line = "sex"
+                    elif Line == "no" and ApprovalCheck(Party[0], 1650):
+                            #if you were a dick but she's ok
+                            $ Party[0].Statup("Obed", 80, 3)
+                            $ Party[0].Statup("Inbt", 60, 3)
+                            $ Party[0].FaceChange("bemused",1)
+                            if Party[0] == RogueX:
+                                    ch_r "Well, you're a jerk, but you're a cute jerk."
+                                    ch_r "What were you thinking?"
+                            elif Party[0] == KittyX:
+                                    ch_k "Oh, so you had something {i}else{/i} in mind. . ."
+                                    ch_k "Like what?"
+                            elif Party[0] == EmmaX:
+                                    ch_e "Hmm, second chance [EmmaX.Petname], what were you considering?"
+                            elif Party[0] == LauraX:
+                                    ch_l "Yeah, I guess?"
+                            elif Party[0] == JeanX:
+                                    ch_j "Oh? Trying to make it up to me?"
+                            elif Party[0] == StormX:
+                                    ch_s "Well, I suppose if you were interested. . ."
+                            elif Party[0] == JubesX:
+                                    ch_v "I guess?"
+                            $ Line = "sex"
+                    else:
+                            #if you were a dick and she's not ok with that
+                            $ Party[0].FaceChange("angry",1)
+                            if Party[0] == RogueX:
+                                    ch_r "Well not when you're rude to me."
+                                    ch_r "You can polish yourself off."
+                            elif Party[0] == KittyX:
+                                    ch_k "You can't walk that one back!"
+                                    ch_k "You can take care of that yourself."
+                            elif Party[0] == EmmaX:
+                                    ch_e "Not with your attitude."
+                                    ch_e "I think you can manage to finish this yourself."
+                            elif Party[0] == LauraX:
+                                    ch_l "No."
+                            elif Party[0] == JeanX:
+                                    ch_j "Well I -was,- but then you had to be a dickbag about it."
+                            elif Party[0] == StormX:
+                                    ch_s "I am no longer in the mood."
+                            elif Party[0] == JubesX:
+                                    ch_v "Lol, no. . ."
+            "Sorry, sorry, please continue." if Line == "no":
+                    if ApprovalCheck(Party[0], 1450):
+                            #if you were a dick but she's ok
+                            $ Party[0].Statup("Love", 90, 3)
+                            $ Party[0].Statup("Obed", 80, 2)
+                            $ Party[0].Statup("Inbt", 60, 4)
+                            $ Party[0].FaceChange("bemused",1)
+                            if Party[0] == RogueX:
+                                    ch_r "Well, since you asked so nice. . ."
+                            elif Party[0] == KittyX:
+                                    ch_k "I guess I can forgive you. . ."
+                            elif Party[0] == EmmaX:
+                                    ch_e "Ok, I'll give you another chance here."
+                            elif Party[0] == LauraX:
+                                    ch_l "Yeah, I guess?"
+                            elif Party[0] == JeanX:
+                                    ch_j ". . . fine."
+                            elif Party[0] == StormX:
+                                    ch_s "Fine."
+                            elif Party[0] == JubesX:
+                                    ch_v "Yeah, sure."
+                            $ Line = "maybe"
+                    else:
+                            #if you were a dick and she's not ok with that
+                            $ Party[0].Statup("Love", 90, 2)
+                            $ Party[0].FaceChange("angry",1)
+                            if Party[0] == RogueX:
+                                    ch_r "Well not when you're rude to me."
+                                    ch_r "You can polish yourself off."
+                            elif Party[0] == KittyX:
+                                    ch_k "You can't walk that one back!"
+                                    ch_k "You can take care of that yourself."
+                            elif Party[0] == EmmaX:
+                                    ch_e "Not with your attitude."
+                                    ch_e "I think you can manage to finish this yourself."
+                            elif Party[0] == LauraX:
+                                    ch_l "No."
+                            elif Party[0] == JeanX:
+                                    ch_j "Nice try."
+                            elif Party[0] == StormX:
+                                    ch_s "I am no longer in the mood."
+                            elif Party[0] == JubesX:
+                                    ch_v "Nah, I got enough. . ."
+            "Sorry, but we could do something else." if Line == "no":
+                    if ApprovalCheck(Party[0], 1350):
+                            #if you were a dick but she's ok
+                            $ Party[0].Statup("Love", 90, 3)
+                            $ Party[0].FaceChange("sexy",1)
+                            if Party[0] == RogueX:
+                                    ch_r "Well, since you asked so nice. . ."
+                                    ch_r "What did you have in mind?"
+                            elif Party[0] == KittyX:
+                                    ch_k "I guess, maybe. . ."
+                                    ch_k "Like what?"
+                            elif Party[0] == EmmaX:
+                                    ch_e "Mmm, I'll consider it. . ."
+                            elif Party[0] == LauraX:
+                                    ch_l "Yeah, I guess?"
+                            elif Party[0] == JeanX:
+                                    ch_j ". . . fine."
+                            elif Party[0] == StormX:
+                                    ch_s "I. . . suppose so."
+                            elif Party[0] == JubesX:
+                                    ch_v "Sure, I guess. . ."
+                            $ Line = "sex"
+                    else:
+                            #if you were a dick and she's not ok with that
+                            $ Party[0].Statup("Love", 90, 2)
+                            $ Party[0].FaceChange("angry",1)
+                            if Party[0] == RogueX:
+                                    ch_r "Well not when you're rude to me."
+                                    ch_r "You can polish yourself off."
+                            elif Party[0] == KittyX:
+                                    ch_k "You can't walk that one back!"
+                                    ch_k "You can take care of that yourself."
+                            elif Party[0] == EmmaX:
+                                    ch_e "Not with your attitude."
+                                    ch_e "I think you can manage to finish this yourself."
+                            elif Party[0] == LauraX:
+                                    ch_l "No."
+                            elif Party[0] == JeanX:
+                                    ch_j "Nope, too late."
+                            elif Party[0] == StormX:
+                                    ch_s "No, I am no longer in the mood."
+                            elif Party[0] == JubesX:
+                                    ch_v "Nah. . ."
+            "Not when I'm just waking up.":
+                            $ Party[0].FaceChange("angry",1)
+                            if Party[0] == RogueX:
+                                    ch_r "Fine, whatever!"
+                                    $RogueX.Eyes = "side"
+                                    ch_r "[[mumbles] Girl tries to do a favor. . ."
+                            elif Party[0] == KittyX:
+                                    ch_k "Aw. . ."
+                                    $KittyX.Eyes = "side"
+                                    ch_k "Last time I do you a favor. . ."
+                            elif Party[0] == EmmaX:
+                                    ch_e "Hmph. . ."
+                                    $EmmaX.Eyes = "side"
+                                    ch_e "It's not as though that was for my benefit. . ."
+                            elif Party[0] == LauraX:
+                                    ch_l "Tsk. . ."
+                                    $LauraX.Eyes = "side"
+                                    ch_l "\"No free blowjobs,\" got it. . ."
+                            elif Party[0] == JeanX:
+                                    $ Party[0].Statup("Love", 90, -5)
+                                    $ Party[0].Statup("Obed", 90, 2)
+                                    ch_j "Seriously? . ."
+                                    $JeanX.Eyes = "side"
+                                    ch_j "\"Rules, rules, rules\" around here. . ."
+                            elif Party[0] == StormX:
+                                    ch_s "I can understand."
+                            elif Party[0] == JubesX:
+                                    ch_v "Ok, ok. . ."
+                            $ Line = "no"
+        #end second question phase
+
+
+        if Line == "no" or Line == "sex":
+                if Partner:
+                        $ Partner.FaceChange("sexy")
+                $ Party[0].RecentActions.remove("blanket")
+                call expression Party[0].Tag + "_BJ_Reset"
+
+                if len(Party) >= 2:
+                    if Party[1] == RogueX:
+                            show Rogue_Sprite:
+                                ease 1 pos (700,50)
+                            show Rogue_Sprite:
+                                pos (700,50)
+                    elif Party[1] == KittyX:
+                            show Kitty_Sprite:
+                                ease 1 pos (700,50)
+                            show Kitty_Sprite:
+                                pos (700,50)
+                    elif Party[1] == EmmaX:
+                            show Emma_Sprite:
+                                ease 1 pos (700,50)
+                            show Emma_Sprite:
+                                pos (700,50)
+                    elif Party[1] == LauraX:
+                            show Laura_Sprite:
+                                ease 1 pos (700,50)
+                            show Laura_Sprite:
+                                pos (700,50)
+                    elif Party[1] == JeanX:
+                            show Jean_Sprite:
+                                ease 1 pos (700,50)
+                            show Jean_Sprite:
+                                pos (700,50)
+                    elif Party[1] == StormX:
+                            show Storm_Sprite:
+                                ease 1 pos (700,50)
+                            show Storm_Sprite:
+                                pos (700,50)
+                    elif Party[1] == JubesX:
+                            show Jubes_Sprite:
+                                ease 1 pos (700,50)
+                            show Jubes_Sprite:
+                                pos (700,50)
+
+                if Line == "no":
+                        if bg_current == "bg player":
+                            if Partner:
+                                    call AnyLine(Partner,"I'm out of here.")
+                            call AnyLine(Party[0],"Yeah, me too.")
+                        else:
+                            call AnyLine(Party[0],"Oh, get out of here already.")
+
+                        $ Party = []
+                        $ Partner = 0
+
+                        # Removes faux "Wait" changes, resets timing to previous night
+                        $ Time_Count = 3
+                        $ Current_Time = Time_Options[(Time_Count)]
+                        $ Day -= 1
+
+                        if Weekday == 0:
+                            $ Weekday = 6
+                        else:
+                            $ Weekday -= 1
+
+                        $ DayofWeek = Week[Weekday]
+                        call Wait
+
+                        jump Return_Player
+
+                elif Line == "sex":
+                        #shift to other sex stuff with her
+                        call expression Party[0].Tag + "_SexMenu"
+        else:
+                        #continue with the BJ
+                        $ Line = 0
+                        $ Speed = 1
+                        $ Situation = 0
+                        if Partner:
+                                $ Trigger4 = "blow"
+                        call Morning_Partner
+                        call expression Party[0].Tag + "_SexAct" pass ("blow")
+        return
+
+# end Event Morning Wood / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+
+label Morning_Partner:  #rkeljsv
+        #Called from sex act menu
+        if not Partner:
+                return
+        $ Partner.FaceChange("sexy")
+        if Partner == RogueX:
+                show Rogue_Sprite:
+                    ease 1 pos (700,50)
+                show Rogue_Sprite:
+                    pos (700,50)
+        elif Partner == EmmaX:
+                show Emma_Sprite:
+                    ease 1 pos (700,50)
+                show Emma_Sprite:
+                    pos (700,50)
+        elif Partner == KittyX:
+                show Kitty_Sprite:
+                    ease 1 pos (700,50)
+                show Kitty_Sprite:
+                    pos (700,50)
+        elif Partner == LauraX:
+                show Laura_Sprite:
+                    ease 1 pos (700,50)
+                show Laura_Sprite:
+                    pos (700,50)
+        elif Partner == JeanX:
+                show Jean_Sprite:
+                    ease 1 pos (700,50)
+                show Jean_Sprite:
+                    pos (700,50)
+        elif Partner == StormX:
+                show Storm_Sprite:
+                    ease 1 pos (700,50)
+                show Storm_Sprite:
+                    pos (700,50)
+        elif Partner == JubesX:
+                show Jubes_Sprite:
+                    ease 1 pos (700,50)
+                show Jubes_Sprite:
+                    pos (700,50)
+        return
+
+
+# end Sleepover content / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
