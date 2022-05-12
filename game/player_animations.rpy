@@ -1,3 +1,591 @@
+image lick_animation:
+    anchor (0.5, 0.5)
+
+    parallel:
+        "images/Lick1.png"
+        0.8
+        "images/Lick6.png"
+        0.2
+        "images/Lick2.png"
+        0.2
+        "images/Lick3.png"
+        0.2
+        "images/Lick4.png"
+        0.8
+        "images/Lick3.png"
+        0.1
+        "images/Lick2.png"
+        0.1
+        repeat
+
+    parallel:
+        pause 0.6
+        easein 0.7 yoffset -15
+        pause 0.3
+        easein 0.8 yoffset 0
+        repeat
+
+image doggy_lick_pussy:
+    "lick_animation"
+    zoom 0.5
+    offset (195,540)
+
+image doggy_lick_Ass:
+    "lick_animation"
+    zoom 0.5
+    offset (195,500)
+
+image doggy_grope_breast:
+    contains:
+        subpixel True
+
+        "images/UI_HandUnder.png"
+
+        xzoom -.55
+        yzoom .55
+        offset (150,340)#(100,200)
+        anchor (0.5,0.5)
+        alpha 0.3
+        rotate 0
+        block:
+            ease 1 rotate 10#60
+            ease 1 rotate 0#90
+            repeat
+
+
+
+image Zero_Doggy_Up:
+    contains:
+        ConditionSwitch(
+            "Player.Color == 'pink'", "images/RogueDoggy/Rogue_Doggy_Cock_U_P.png",
+            "Player.Color == 'brown'", "images/RogueDoggy/Rogue_Doggy_Cock_U_B.png",
+            "True", "images/RogueDoggy/Rogue_Doggy_Cock_U_G.png")
+    contains:
+        ConditionSwitch(
+            "Player.Wet", "images/RogueDoggy/Rogue_Doggy_Cock_U_W.png",
+            "True", Null())
+
+image Zero_Hotdog_Static:
+    contains:
+        "Zero_Doggy_Up"
+        pos (175, 370)
+
+image Zero_Hotdog_Moving:
+    contains:
+        "Zero_Doggy_Up"
+        pos (175, 370)
+        block:
+            ease 1 ypos 330
+            ease 1 ypos 420
+            repeat
+
+
+image Zero_Doggy_Static:
+    # Sex Speed 0 motions
+    contains:
+        subpixel True
+        "Zero_Doggy_Insert"
+        pos (169,545)
+        block:
+            ease 1 ypos 540 #in stroke
+            pause 1
+            ease 3 ypos 545 #out stroke
+            repeat
+
+image Zero_Doggy_Anal_Heading:
+        #the cock anal heading animation
+    contains:
+        "Zero_Doggy_Insert"
+        pos (172,500)
+        block:
+            ease .5 ypos 450
+            pause .25
+            ease 1.75 ypos 500#505
+            repeat
+
+image Rogue_Sex_Lick_Pussy:
+        "Lick_Anim"
+        zoom 0.7
+        offset (530,510)
+
+image Rogue_Sex_Lick_Ass:
+        "Lick_Anim"
+        zoom 0.7
+        offset (535,590)
+
+
+
+image Rogue_Sex_Dildo_Anim2:
+        #this is Rogue's sex animation, Speed 2 (slow)
+        contains:
+            subpixel True
+            "images/DildoIn.png"
+            pos (504,490) #X less is left, Y less is up
+            zoom 1.3#1.4
+            block:
+                ease 1 ypos 380 #(500,470)
+                pause 1
+                ease 3 ypos 490
+                repeat
+
+
+image Rogue_Sex_FingerA_Anim1:
+        #this is Rogue's fingering animation
+        contains:
+            subpixel True
+            "images/UI_Fingering.png"
+            pos (507,600) #X less is left, Y less is up(498,525)
+            zoom 1.2#1.3
+            block:
+                ease .4 ypos 550 #480
+                pause .4
+                ease 1.2 ypos 600#520
+                repeat
+
+
+#Start Animations for Zero's Cock during Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+image Rogue_Anal_Zero_Anim0:
+        #this is Rogue's sex animation, Speed 0 (static)
+        contains:
+            subpixel True
+            "Zero_Doggy_Insert" # Zero's cock, changes color and properties
+            pos (505,600) #X less is left, Y less is up (498,520)
+            zoom 1.3
+
+image Rogue_Anal_Zero_Anim1:
+        #this is Rogue's sex animation, Speed 1 (heading)
+        contains:
+            subpixel True
+            "Zero_Doggy_Insert" # Zero's cock, changes color and properties
+            pos (505,600) #X less is left, Y less is up
+            zoom 1.3
+            block:
+                ease 1 ypos 570 #(500,470)
+                pause 1
+                ease 3 ypos 600
+                repeat
+
+image Rogue_Anal_Zero_Anim2:
+        #this is Rogue's sex animation, Speed 2 (slow)
+        contains:
+            subpixel True
+            "Zero_Doggy_Insert" # Zero's cock, changes color and properties
+            pos (505,570) #X less is left, Y less is up
+            zoom 1.3
+            block:
+                ease 1 ypos 450 #(500,470)
+                pause 1
+                ease 3 ypos 570
+                repeat
+
+image Rogue_Anal_Zero_Anim3:
+        #this is Rogue's sex animation, Speed 3 (fast)
+        contains:
+            subpixel True
+            "Zero_Doggy_Insert" # Zero's cock, changes color and properties
+            pos (505,570) #X less is left, Y less is up
+            zoom 1.3
+            block:
+                ease .25 ypos 450 #(500,470)
+                pause .25
+                ease 1.5 ypos 570
+                repeat
+#End Animations for Zero's Cock during Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+
+#Start Animations for Zero's Cock during Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+image Rogue_Hotdog_Zero_Anim0:
+        #this is Rogue's sex animation, Speed 0 (static)
+        contains:
+            subpixel True
+            "Zero_Doggy_Insert" # Zero's cock, changes color and properties
+            pos (503,570) #X less is left, Y less is up
+            zoom 1.3
+
+image Rogue_Hotdog_Zero_Anim1:
+        #this is Rogue's sex animation, Speed 1 (heading)
+        contains:
+            subpixel True
+            "Zero_Doggy_Insert" # Zero's cock, changes color and properties
+            pos (503,500) #X less is left, Y less is up
+            zoom 1.3
+            block:
+                ease 1 ypos 560 #(500,500)
+                pause .5
+                ease 1.5 ypos 500
+                repeat
+
+
+transform Zero_BJ_Static():                            #The static animation for the cock
+    anchor (.5,.5)
+#    pos (180,560) #(125,300)
+    rotate -10
+#    pos (-25,0)
+
+transform Zero_BJ_Sucking():                            #The sucking animation for the cock
+    anchor (.5,.5)
+    rotate 0
+
+transform Zero_BJ_Licking():                            #The licking animation for the cock
+    subpixel True
+    block:
+        ease 2 rotate -5 #410
+        pause .5
+        ease 2.5 rotate 0
+        repeat
+
+image Zero_Blowcock:
+    LiveComposite(                            #The compositived BJ cock
+        (175,946),
+        (0,0), ConditionSwitch(
+            "Player.Color == 'pink'", "images/RogueBJFace/Zero_Cock_P.png",
+            "Player.Color == 'brown'", "images/RogueBJFace/Zero_Cock_B.png",
+            "Player.Color == 'green'", "images/RogueBJFace/Zero_Cock_G.png",
+            "True", Null(),
+            ),
+        (0,0), ConditionSwitch(
+            "Player.Wet", "images/RogueBJFace/Zero_Cock_Wet.png",
+            "True", Null(),
+            ),
+        (0,0), ConditionSwitch(
+            "Player.Spunk", "images/RogueBJFace/Zero_Cock_S.png",
+            "True", Null(),
+            ),
+        )
+    anchor (0.5,0.5)
+    zoom 1.2
+    xoffset 5
+
+
+
+transform Zero_TJ_Cock():
+    #The sucking animation for the cock
+    anchor (.5,.5)
+    pos (440,1020) #220,1000 #(180,560)
+    rotate 0
+
+transform Zero_TJ_Cock_1():
+    pos (440,1020)
+    subpixel True
+    block:
+        ease 1 ypos 1050
+        easeout .2 ypos 1060
+        easein 1.3 ypos 1020
+        repeat
+
+transform Zero_TJ_Cock_2():
+    pos (440,1020)
+    subpixel True
+    block:
+        ease .35 ypos 1030
+        ease .4 ypos 1020
+#        pause .1
+        repeat
+
+image Blowcock:
+    contains:
+        ConditionSwitch(
+            "Player.Color == 'pink'", "images/RogueBJFace/Zero_Cock_P.png",
+            "Player.Color == 'brown'", "images/RogueBJFace/Zero_Cock_B.png",
+            "Player.Color == 'green'", "images/RogueBJFace/Zero_Cock_G.png",
+            "True", Null(),
+            ),
+    contains:
+        ConditionSwitch(
+            "Player.Wet", "images/RogueBJFace/Zero_Cock_Wet.png",
+            "True", Null(),
+            ),
+    contains:
+        ConditionSwitch(
+            "Player.Spunk", "images/RogueBJFace/Zero_Cock_S.png",
+            "True", Null(),
+            ),
+    anchor (0.5,0.5)
+    zoom 1.0
+    alpha 1.0
+    offset (26,350)#(-175,450)
+
+
+transform Handcock_1():
+    subpixel True
+    rotate_pad False
+    ease .5 ypos 450 rotate -2 #450
+    pause 0.25
+    ease 1.0 ypos 400 rotate 0 #400
+    pause 0.1
+    repeat
+
+transform Handcock_2():
+    subpixel True
+    rotate_pad False
+    ease .2 ypos 430 rotate -3 #410
+    ease .5 ypos 400 rotate 0
+    pause 0.1
+    repeat
+
+
+image Zero_Handcock:
+    contains:
+        ConditionSwitch(    # Zero cock sucking
+            "Player.Color == 'pink'", "images/RogueBJFace/handcock_P.png",
+            "Player.Color == 'brown'", "images/RogueBJFace/handcock_B.png",
+            "Player.Color == 'green'", "images/RogueBJFace/handcock_G.png",
+            "Player.Color != 'pink'", Null(),
+            ),
+    anchor (0.5,1.0)  #1.0
+    pos (200,400)#(200,400)
+
+image Rogue_Hotdog_Zero_Anim2:
+        #this is Rogue's sex animation, Speed 3 (fast)
+        contains:
+            subpixel True
+            "Zero_Doggy_Insert" # Zero's cock, changes color and properties
+            pos (503,510) #X less is left, Y less is up
+            zoom 1.3
+            block:
+                ease .5 ypos 400 #(500,470)
+                pause .5
+                ease 1 ypos 510
+                repeat
+
+image Rogue_Anal_Dildo_Anim2:
+        #this is Rogue's sex animation, Speed 2 (slow)
+        contains:
+            subpixel True
+            "images/DildoIn.png"
+            pos (505,570) #X less is left, Y less is up
+            zoom 1.3
+            block:
+                ease 1 ypos 450 #(500,470)
+                pause 1
+                ease 3 ypos 570
+                repeat
+
+#Start Animations for Zero's Cock during Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+image Rogue_Sex_Zero_Anim0:
+        #this is Rogue's sex animation, Speed 0 (static)
+        contains:
+            subpixel True
+            "Zero_Doggy_Insert" # Zero's cock, changes color and properties
+            pos (503,530) #X less is left, Y less is up (498,530)
+            zoom 1.3#1.4
+
+image Rogue_Sex_Zero_Anim1:
+        #this is Rogue's sex animation, Speed 1 (heading)
+        contains:
+            subpixel True
+            "Zero_Doggy_Insert" # Zero's cock, changes color and properties
+            pos (503,525) #X less is left, Y less is up(498,525)
+            zoom 1.3#1.4
+            block:
+                ease 1 ypos 510 #(498,500)
+                pause 1
+                ease 3 ypos 525
+                repeat
+
+image Rogue_Sex_Zero_Anim2:
+        #this is Rogue's sex animation, Speed 2 (slow)
+        contains:
+            subpixel True
+            "Zero_Doggy_Insert" # Zero's cock, changes color and properties
+            pos (504,490) #X less is left, Y less is up
+            zoom 1.3#1.4
+            block:
+                ease 1 ypos 380 #(500,470)
+                pause 1
+                ease 3 ypos 490
+                repeat
+
+image Rogue_Sex_Zero_Anim3:
+        #this is Rogue's sex animation, Speed 3 (fast)
+        contains:
+            subpixel True
+            "Zero_Doggy_Insert" # Zero's cock, changes color and properties
+            pos (504,490) #X less is left, Y less is up
+            zoom 1.3#1.4
+            block:
+                ease .25 ypos 380 #(500,470)
+                pause .25
+                ease 1.5 ypos 490
+                repeat
+#End Animations for Zero's Cock during Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+
+
+image Rogue_Sex_FingerP_Anim1:
+        #this is Rogue's fingering animation
+        contains:
+            subpixel True
+            "images/UI_Fingering.png"
+            pos (507,520) #X less is left, Y less is up(498,525)
+            zoom 1.2#1.3
+            block:
+                ease .2 ypos 480 #(498,500)
+                pause .2
+                ease .6 ypos 520
+                repeat
+
+image GropeBack:
+    contains:
+        subpixel True
+        "images/UI_HandUnder.png"
+        zoom .7
+        pos (300,420)
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 90
+        block:
+            ease 1 rotate 60
+            ease 1 rotate 90
+            repeat
+
+
+image Slap_Ass:
+    contains:
+        "SlapHand"
+        pause 1.2
+        Null()
+
+image Slap_Ass:
+    contains:
+        "UI_Hand"
+        subpixel True
+        zoom 1
+        alpha 0.5
+        anchor (0.5,0.5)
+        pos (600,380)
+        rotate 40
+        block:
+            parallel:
+                ease .5 xpos 300 rotate 80
+                ease .1 xpos 310 rotate 80
+                pause .5
+            parallel:
+                ease .2 ypos 520
+                pause .9
+
+image NotSlap_Ass:
+    contains:
+        subpixel True
+        "UI_Hand"
+        zoom 1
+        pos (600,380) #follow through  point r-60
+        anchor (0.5,0.5)
+        alpha 0.5
+        rotate 40
+        block:
+            pos (600,380)
+            rotate 40
+            parallel:
+                ease .5 xpos 300 rotate 80
+                ease .1 xpos 310 rotate 80
+                pause .5
+            parallel:
+                ease .2 ypos 520
+                pause .9
+            repeat
+
+
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+image Zero_Doggy_Anal2:
+    #Animation for speed 3 Cock
+    contains:
+        "Zero_Doggy_Insert"
+        pos (172,460)
+        block:
+            ease .2 ypos 395
+            pause .1
+            ease .6 ypos 465
+            repeat
+
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+image Zero_Doggy_Anal1:
+    #Animation for speed 2 Cock
+    contains:
+        "Zero_Doggy_Insert"
+        pos (172,460)
+        block:
+            ease .5 ypos 395
+            pause .25
+            ease 1.75 ypos 460
+            repeat
+
+image Zero_Doggy_Anal_HeadingJunk:
+    #this is a mask to correct an annoying glitch in the core mask
+    contains:
+        Solid("#159457", xysize=(150,150))
+        pos (152,600)
+        block:
+            ease .5 ypos 550
+            pause .25
+            ease 1.75 ypos 600#505
+            repeat
+
+image Zero_Pussy_Finger:
+    # Sex Speed 1 motions
+    contains:
+        subpixel True
+        "images/UI_Fingering.png"
+        pos (171,545)
+        block:
+            ease 1 xpos 168 ypos 500 #in stroke
+            pause 1
+            ease 3 xpos 171 ypos 545 #out stroke
+            repeat
+
+image Zero_Doggy_Heading:
+    # Sex Speed 1 motions
+    contains:
+        subpixel True
+        "Zero_Doggy_Insert"
+        pos (171,545)
+        block:
+            ease 1 xpos 168 ypos 500 #in stroke
+            pause 1
+            ease 3 xpos 171 ypos 545 #out stroke
+            repeat
+
+image Zero_Doggy_Fucking2:
+    # Sex Speed 2 motions
+    contains:
+        "Zero_Doggy_Insert"
+        pos (169,500)
+        block:
+            ease .5 ypos 440
+            pause .25
+            ease 1.75 ypos 500
+            repeat
+
+image Zero_Doggy_Fucking3:
+    # Sex Speed 3 motions
+    contains:
+        "Zero_Doggy_Insert"
+        pos (169,500)
+        block:
+            ease .2 ypos 440
+            pause .1
+            ease .6 ypos 500
+            repeat
+
+#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+#Insert cock animations
+image Zero_Doggy_Insert:
+    #Insert cock
+    contains:
+        ConditionSwitch(
+            "Player.Color == 'pink'", "images/RogueDoggy/Rogue_Doggy_Cock_In_P.png",
+            "Player.Color == 'brown'", "images/RogueDoggy/Rogue_Doggy_Cock_In_B.png",
+            "True", "images/RogueDoggy/Rogue_Doggy_Cock_In_G.png",
+            ),
+    contains:
+        ConditionSwitch(
+            "Player.Wet", "images/RogueDoggy/Rogue_Doggy_Cock_In_Wet.png",
+            "True", Null(),
+            ),
+    contains:
+        ConditionSwitch(
+            "Player.Spunk", "images/RogueDoggy/Rogue_Doggy_Cock_In_Spunk.png",
+            "True", Null(),
+            ),
+
 
 image GropeLeftBreast:
     contains:

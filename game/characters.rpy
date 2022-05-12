@@ -1912,7 +1912,7 @@ label GirlsAngry(Girls = 0,BO=[]):
                                 "You head back to your room."
                                 $ Party = []
                                 $ renpy.pop_call()
-                                jump Player_Room_Entry
+                                jump player_room_entry
                         else:
                                 $ BO[0].Loc = BO[0].Home
                         if BO[0] in Party:

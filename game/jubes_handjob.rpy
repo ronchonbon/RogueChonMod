@@ -372,52 +372,6 @@ label Jubes_HJ_Cycle:
                                             else:
                                                 call Sex_Basic_Dialog(JubesX,"tired")
 
-                                    "Threesome actions (locked)" if not Partner:
-                                        pass
-                                    "Threesome actions" if Partner:
-                                        menu:
-                                            "Ask [JubesX.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(JubesX)
-                                            "Ask [JubesX.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
-                                                        pass
-                                            "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(JubesX)
-
-                                            "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
-                                                        $ ThreeCount = 0
-                                            "Don't stop what you're doing. . ." if ThreeCount and Trigger4:
-                                                        $ ThreeCount = 0
-
-                                            "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(JubesX)
-                                            "Undress [Partner.Name]":
-                                                        call Girl_Undress(Partner)
-                                                        jump Jubes_HJ_Cycle
-                                            "Clean up Partner":
-                                                        call Girl_Cleanup(Partner,"ask")
-                                                        jump Jubes_HJ_Cycle
-                                            "Never mind":
-                                                        jump Jubes_HJ_Cycle
-                                    "undress [JubesX.Name]":
-                                            call Girl_Undress(JubesX)
-                                    "Clean up [JubesX.Name] (locked)" if not JubesX.Spunk:
-                                            pass
-                                    "Clean up [JubesX.Name]" if JubesX.Spunk:
-                                            call Girl_Cleanup(JubesX,"ask")
-                                    "Never mind":
-                                            jump Jubes_HJ_Cycle
-
-                        "Back to Sex Menu" if MultiAction:
-                                    ch_p "Let's try something else."
-                                    call Jubes_HJ_Reset
-                                    $ Situation = "shift"
-                                    $ Line = 0
-                                    jump Jubes_HJ_After
-                        "End Scene" if not MultiAction:
-                                    ch_p "Let's stop for now."
-                                    call Jubes_HJ_Reset
-                                    $ Line = 0
-                                    jump Jubes_HJ_After
         #End menu (if Line)
 
         call Shift_Focus(JubesX)
@@ -984,52 +938,6 @@ label Jubes_TJ_Cycle: #Repeating strokes
                                             else:
                                                 call Sex_Basic_Dialog(JubesX,"tired")
 
-                                    "Threesome actions (locked)" if not Partner:
-                                        pass
-                                    "Threesome actions" if Partner:
-                                        menu:
-                                            "Ask [JubesX.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(JubesX)
-                                            "Ask [JubesX.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
-                                                        pass
-                                            "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(JubesX)
-
-                                            "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
-                                                        $ ThreeCount = 0
-                                            "Don't stop what you're doing. . ." if ThreeCount and Trigger4:
-                                                        $ ThreeCount = 0
-
-                                            "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(JubesX)
-                                            "Undress [Partner.Name]":
-                                                        call Girl_Undress(Partner)
-                                                        jump Jubes_TJ_Cycle
-                                            "Clean up Partner":
-                                                        call Girl_Cleanup(Partner,"ask")
-                                                        jump Jubes_TJ_Cycle
-                                            "Never mind":
-                                                        jump Jubes_TJ_Cycle
-                                    "undress [JubesX.Name]":
-                                            call Girl_Undress(JubesX)
-                                    "Clean up [JubesX.Name] (locked)" if not JubesX.Spunk:
-                                            pass
-                                    "Clean up [JubesX.Name]" if JubesX.Spunk:
-                                            call Girl_Cleanup(JubesX,"ask")
-                                    "Never mind":
-                                            jump Jubes_TJ_Cycle
-
-                        "Back to Sex Menu" if MultiAction:
-                                    ch_p "Let's try something else."
-                                    call Jubes_TJ_Reset
-                                    $ Situation = "shift"
-                                    $ Line = 0
-                                    jump Jubes_TJ_After
-                        "End Scene" if not MultiAction:
-                                    ch_p "Let's stop for now."
-                                    call Jubes_TJ_Reset
-                                    $ Line = 0
-                                    jump Jubes_TJ_After
         #End menu (if Line)
 
         call Shift_Focus(JubesX)
@@ -1622,52 +1530,6 @@ label Jubes_BJ_Cycle: #Repeating strokes
                                             else:
                                                 call Sex_Basic_Dialog(JubesX,"tired")
 
-                                    "Threesome actions (locked)" if not Partner:
-                                        pass
-                                    "Threesome actions" if Partner:
-                                        menu:
-                                            "Ask [JubesX.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(JubesX)
-                                            "Ask [JubesX.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
-                                                        pass
-                                            "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(JubesX)
-
-                                            "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
-                                                        $ ThreeCount = 0
-                                            "Don't stop what you're doing. . ." if ThreeCount and Trigger4:
-                                                        $ ThreeCount = 0
-
-                                            "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(JubesX)
-                                            "Undress [Partner.Name]":
-                                                        call Girl_Undress(Partner)
-                                                        jump Jubes_BJ_Cycle
-                                            "Clean up Partner":
-                                                        call Girl_Cleanup(Partner,"ask")
-                                                        jump Jubes_BJ_Cycle
-                                            "Never mind":
-                                                        jump Jubes_BJ_Cycle
-                                    "undress [JubesX.Name]":
-                                            call Girl_Undress(JubesX)
-                                    "Clean up [JubesX.Name] (locked)" if not JubesX.Spunk:
-                                            pass
-                                    "Clean up [JubesX.Name]" if JubesX.Spunk:
-                                            call Girl_Cleanup(JubesX,"ask")
-                                    "Never mind":
-                                            jump Jubes_BJ_Cycle
-
-                        "Back to Sex Menu" if MultiAction:
-                                    ch_p "Let's try something else."
-                                    call Jubes_BJ_Reset
-                                    $ Situation = "shift"
-                                    $ Line = 0
-                                    jump Jubes_BJ_After
-                        "End Scene" if not MultiAction:
-                                    ch_p "Let's stop for now."
-                                    call Jubes_BJ_Reset
-                                    $ Line = 0
-                                    jump Jubes_BJ_After
         #End menu (if Line)
 
         call Shift_Focus(JubesX)
@@ -2267,58 +2129,6 @@ label Jubes_DP_Cycle: #Repeating strokes
                                             else:
                                                 call Sex_Basic_Dialog(JubesX,"tired")
 
-                                    "Shift your focus" if Trigger2:
-                                                $ Situation = "shift focus"
-                                                call Jubes_DP_After
-                                                call Offhand_Set
-                                    "Shift your focus (locked)" if not Trigger2:
-                                                pass
-                                    "Threesome actions (locked)" if not Partner:
-                                        pass
-                                    "Threesome actions" if Partner:
-                                        menu:
-                                            "Ask [JubesX.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(JubesX)
-                                            "Ask [JubesX.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
-                                                        pass
-                                            "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(JubesX)
-
-                                            "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
-                                                        $ ThreeCount = 0
-                                            "Don't stop what you're doing. . ." if ThreeCount and Trigger4:
-                                                        $ ThreeCount = 0
-
-                                            "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(JubesX)
-                                            "Undress [Partner.Name]":
-                                                        call Girl_Undress(Partner)
-                                                        jump Jubes_DP_Cycle
-                                            "Clean up Partner":
-                                                        call Girl_Cleanup(Partner,"ask")
-                                                        jump Jubes_DP_Cycle
-                                            "Never mind":
-                                                        jump Jubes_DP_Cycle
-                                    "undress [JubesX.Name]":
-                                            call Girl_Undress(JubesX)
-                                    "Clean up [JubesX.Name] (locked)" if not JubesX.Spunk:
-                                            pass
-                                    "Clean up [JubesX.Name]" if JubesX.Spunk:
-                                            call Girl_Cleanup(JubesX,"ask")
-                                    "Never mind":
-                                            jump Jubes_DP_Cycle
-
-                        "Back to Sex Menu" if MultiAction:
-                                    ch_p "Let's try something else."
-                                    call Jubes_Pos_Reset
-                                    $ Situation = "shift"
-                                    $ Line = 0
-                                    jump Jubes_DP_After
-                        "End Scene" if not MultiAction:
-                                    ch_p "Let's stop for now."
-                                    call Jubes_Pos_Reset
-                                    $ Line = 0
-                                    jump Jubes_DP_After
         #End menu (if Line)
 
         if JubesX.Panties or JubesX.PantsNum() >= 6 or JubesX.HoseNum() >= 5: #This checks if Jubes wants to strip down.
@@ -2901,44 +2711,7 @@ label Jubes_DA_Cycle: #Repeating strokes
                                                 call Offhand_Set
                                     "Shift your focus (locked)" if not Trigger2:
                                                 pass
-                                    "Threesome actions (locked)" if not Partner:
-                                        pass
-                                    "Threesome actions" if Partner:
-                                        menu:
-                                            "Ask [JubesX.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(JubesX)
-                                            "Ask [JubesX.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
-                                                        pass
-                                            "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(JubesX)
 
-                                            "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
-                                                        $ ThreeCount = 0
-                                            "Don't stop what you're doing. . ." if ThreeCount and Trigger4:
-                                                        $ ThreeCount = 0
-
-                                            "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(JubesX)
-                                            "Undress [Partner.Name]":
-                                                        call Girl_Undress(Partner)
-                                                        jump Jubes_DA_Cycle
-                                            "Clean up Partner":
-                                                        call Girl_Cleanup(Partner,"ask")
-                                                        jump Jubes_DA_Cycle
-                                    "Never mind":
-                                            jump Jubes_DA_Cycle
-
-                        "Back to Sex Menu" if MultiAction:
-                                    ch_p "Let's try something else."
-                                    call Jubes_Pos_Reset
-                                    $ Situation = "shift"
-                                    $ Line = 0
-                                    jump Jubes_DA_After
-                        "End Scene" if not MultiAction:
-                                    ch_p "Let's stop for now."
-                                    call Jubes_Pos_Reset
-                                    $ Line = 0
-                                    jump Jubes_DA_After
         #End menu (if Line)
 
         if JubesX.Panties or JubesX.PantsNum() >= 6 or JubesX.HoseNum() >= 5: #This checks if Jubes wants to strip down.
@@ -3475,53 +3248,7 @@ label Jubes_FJ_Cycle:
                                                                 jump Jubes_FJ_Cycle
                                             else:
                                                 call Sex_Basic_Dialog(JubesX,"tired")
-
-                                    "Threesome actions (locked)" if not Partner:
-                                        pass
-                                    "Threesome actions" if Partner:
-                                        menu:
-                                            "Ask [JubesX.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(JubesX)
-                                            "Ask [JubesX.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
-                                                        pass
-                                            "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(JubesX)
-
-                                            "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
-                                                        $ ThreeCount = 0
-                                            "Don't stop what you're doing. . ." if ThreeCount and Trigger4:
-                                                        $ ThreeCount = 0
-
-                                            "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(JubesX)
-                                            "Undress [Partner.Name]":
-                                                        call Girl_Undress(Partner)
-                                                        jump Jubes_FJ_Cycle
-                                            "Clean up Partner":
-                                                        call Girl_Cleanup(Partner,"ask")
-                                                        jump Jubes_FJ_Cycle
-                                            "Never mind":
-                                                        jump Jubes_FJ_Cycle
-                                    "undress [JubesX.Name]":
-                                            call Girl_Undress(JubesX)
-                                    "Clean up [JubesX.Name] (locked)" if not JubesX.Spunk:
-                                            pass
-                                    "Clean up [JubesX.Name]" if JubesX.Spunk:
-                                            call Girl_Cleanup(JubesX,"ask")
-                                    "Never mind":
-                                            jump Jubes_FJ_Cycle
-
-                        "Back to Sex Menu" if MultiAction:
-                                    ch_p "Let's try something else."
-                                    call Jubes_Sex_Reset
-                                    $ Situation = "shift"
-                                    $ Line = 0
-                                    jump Jubes_FJ_After
-                        "End Scene" if not MultiAction:
-                                    ch_p "Let's stop for now."
-                                    call Jubes_Sex_Reset
-                                    $ Line = 0
-                                    jump Jubes_FJ_After
+                                                
         #End menu (if Line)
 
         call Shift_Focus(JubesX)

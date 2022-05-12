@@ -1,4 +1,4 @@
-image Professor:
+image xavier_sprite:
     LiveComposite(
         (429,521),
 
@@ -17,7 +17,7 @@ image Professor:
             "X_Mouth == 'neutral'", "images/NPC/Xavier_mouth_neutral.png",
             "True", Null()),
 
-        (0,0), "Xavier Blink",
+        (0,0), "xavier_blink",
 
         (0,0), ConditionSwitch(
             "X_Psychic == 1", "images/NPC/Xavier_psychic.png",
@@ -28,7 +28,7 @@ image Professor:
     offset (0, 150)
     zoom 1.1
 
-image Xavier Blink:
+image xavier_blink:
     ConditionSwitch(
         "X_Eyes == 'concentrate'", "images/NPC/Xavier_eyes_closed.png",
         "X_Eyes == 'hypno'", "images/NPC/Xavier_eyes_hypno.png",
@@ -46,28 +46,30 @@ image Xavier Blink:
     repeat
 
 label Xavierface(face = X_Emote):
-        if face == "psychic":
-                $ X_Mouth = "concentrate"
-                $ X_Brows = "concentrate"
-                $ X_Eyes = "concentrate"
-                $ X_Psychic = 1
-        if face == "hypno":
-                $ X_Mouth = "neutral"
-                $ X_Brows = "neutral"
-                $ X_Eyes = "hypno"
-        if face == "shocked":
-                $ X_Mouth = "neutral"
-                $ X_Brows = "shocked"
-                $ X_Eyes = "shocked"
-                $ X_Psychic = 0
-        if face == "happy":
-                $ X_Mouth = "happy"
-                $ X_Brows = "happy"
-                $ X_Eyes = "happy"
-                $ X_Psychic = 0
-        if face == "angry":
-                $ X_Mouth = "concentrate"
-                $ X_Brows = "concentrate"
-                $ X_Eyes = "happy"
-                $ X_Psychic = 0
-        return
+    if face == "psychic":
+        $ X_Mouth = "concentrate"
+        $ X_Brows = "concentrate"
+        $ X_Eyes = "concentrate"
+        $ X_Psychic = 1
+    if face == "hypno":
+        $ X_Mouth = "neutral"
+        $ X_Brows = "neutral"
+        $ X_Eyes = "hypno"
+        $ X_Psychic = 0
+    if face == "shocked":
+        $ X_Mouth = "neutral"
+        $ X_Brows = "shocked"
+        $ X_Eyes = "shocked"
+        $ X_Psychic = 0
+    if face == "happy":
+        $ X_Mouth = "happy"
+        $ X_Brows = "happy"
+        $ X_Eyes = "happy"
+        $ X_Psychic = 0
+    if face == "angry":
+        $ X_Mouth = "concentrate"
+        $ X_Brows = "concentrate"
+        $ X_Eyes = "happy"
+        $ X_Psychic = 0
+
+    return

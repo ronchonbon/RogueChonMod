@@ -34,7 +34,7 @@ label prologue:
             "Black":
                 $ Player.Color = "brown"
 
-    show Professor at sprite_location(StageLeft) with dissolve
+    show xavier_sprite at sprite_location(StageLeft) with dissolve
 
     ch_x "Welcome to the Xavier Institute for Higher Learning. This is a home for all mutants to learn and grow."
     ch_x "My name is Charles Xavier, and I have dedicated my life to helping other mutants such as yourself."
@@ -71,7 +71,7 @@ label prologue:
     ch_x "This young lady is named [RogueX.Name], one of our veteran students."
     ch_x "And [RogueX.Name], this young man goes by the name \"[Player.Name]\"."
 
-    hide Professor with easeoutright
+    hide xavier_sprite with easeoutright
 
     $ RogueX.sprite_location = StageCenter
 

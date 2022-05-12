@@ -1,4 +1,4 @@
-label sex_menu(character):
+label enter_main_sex_menu(character):
     if character == EmmaX:
         if "classcaught" not in character.History:
             ch_e "I can't imagine being a part of something so. . . tawdry."
@@ -59,43 +59,68 @@ label sex_menu(character):
         return
 
     $ main_line = None
-    $ touch_line = None
+    $ fondle_line = None
     $ handjob_line = None
     $ show_line = None
 
+    call character_sex_menu(character)
+
+    if character.Loc != bg_current:
+        call Set_The_Scene
+        call Trig_Reset
+
+        return
+
+    if not MultiAction:
+        call Set_The_Scene
+
+        call thats_it_for_now_dialog(character)
+
+        $ character.OCount = 0
+
+        call Trig_Reset
+
+        return
+
+    call GirlsAngry
+    call enter_main_sex_menu(character)
+
+    return
+
+label character_sex_menu(character):
     if character == RogueX:
         $ main_line = "So what would you like to do?"
-        $ touch_line = "Well where exactly were you interested in touching, " + character.Petname + "?"
+        $ fondle_line = "Well where exactly were you interested in touching, " + character.Petname + "?"
         $ handjob_line = "What did you have in mind, " + character.Petname + "?"
         $ show_line = "What sort of show were you expecting?"
     elif character == KittyX:
         $ main_line = "So what would you like to do?"
-        $ touch_line = "Um, what did you want to touch, " + character.Petname + "?"
+        $ fondle_line = "Um, what did you want to touch, " + character.Petname + "?"
         $ handjob_line = character.Like + "what did you want me to do?"
         $ show_line = character.Like + "what did you want to see?"
     elif character == EmmaX:
         $ main_line = "So, what was it you hoped to do?"
-        $ touch_line = "Um, what did you want to touch, " + character.Petname + "?"
+        $ fondle_line = "Well? Where did you want to touch, " + character.Petname + "?"
         $ handjob_line = "What did you want me to do?"
         $ show_line = "What did you want to see?"
     elif character == LauraX:
         $ main_line = "What did you want to do?"
-        $ touch_line = "Yeah? Like where?"
+        $ fondle_line = "Yeah? Like where?"
         $ handjob_line = "Oh? Like what?"
         $ show_line = "What kind of show are you thinking?"
     elif character == JeanX:
         $ main_line = "What did you want to do?"
-        $ touch_line = "Yeah? Like where?"
+        $ fondle_line = "Yeah? Like where?"
         $ handjob_line = "Oh? Like what?"
         $ show_line = "What kind of show are you thinking?"
     elif character == StormX:
         $ main_line = "So, what was it you hoped to do?"
-        $ touch_line = "What did you wish to touch, " + character.Petname + "?"
+        $ fondle_line = "What did you wish to touch, " + character.Petname + "?"
         $ handjob_line = "What did you want me to do?"
         $ show_line = "What did you want to see?"
     elif character == JubesX:
         $ main_line = "So what did you wanna do?"
-        $ touch_line = "Where were you thinking?"
+        $ fondle_line = "Where were you thinking?"
         $ handjob_line = "What were you thinking?"
         $ show_line = "What kind of show?"
 
@@ -114,35 +139,23 @@ label sex_menu(character):
                     $ character.Mouth = "smile"
 
                 menu:
-                    character.voice "[touch_line]"
+                    character.voice "[fondle_line]"
                     "Could I give you a massage?":
                         call Massage(character)
-
-                        return
                     "Your breasts?":
                         call fondle_breasts(character)
-
-                        return
                     "Suck your breasts?" if character.Action and character.SuckB:
                         call suck_breasts(character)
-
-                        return
                     "Your thighs?" if character.Action:
                         call fondle_thighs(character)
-
-                        return
                     "Your pussy?" if character.Action:
-                        call expression character.Tag + "_Fondle_Pussy"
-
-                        return
+                        call fondle_pussy(character)
                     "Lick your pussy?" if character.Action and character.LickP:
-                        call expression character.Tag + "_Lick_Pussy"
-
-                        return
+                        call lick_pussy(character)
                     "Your Ass?":
-                        call expression character.Tag + "_Fondle_Ass"
-
-                        return
+                        call fondle_ass(character)
+                    "Eat your ass?" if character.Action and character.LickA:
+                        call lick_ass(character)
                     "Never mind [[something else]":
                         jump main_sex_menu
             else:
@@ -153,20 +166,12 @@ label sex_menu(character):
                     character.voice "[handjob_line]"
                     "Could you give me a handjob?":
                         call expression character.Tag + "_Handjob"
-
-                        return
                     "Could you give me a titjob?":
                         call expression character.Tag + "_Titjob"
-
-                        return
                     "Could you suck my cock?":
                         call expression character.Tag + "_Blowjob"
-
-                        return
                     "Could use your feet?":
                         call expression character.Tag + "_Footjob"
-
-                        return
                     "Never mind [[something else]":
                         jump main_sex_menu
             elif not character.Action:
@@ -179,51 +184,31 @@ label sex_menu(character):
                 "Dance for me?":
                     if character.Action:
                         call Group_Strip(character)
-
-                        return
                     else:
                         call out_of_action_dialog(character)
                 "Could you undress for me?":
                     call Girl_Undress(character)
-
-                    return
                 "You've got a little something. . . [[clean-up]" if character.Spunk:
                     call got_some_spunk_dialog(character)
 
                     call Girl_Cleanup(character,"ask")
-
-                    return
                 "Could I watch you get yourself off? [[masturbate]":
                     if character.Action:
                         call expression character.Tag + "_Masturbate"
-
-                        return
                     else:
                         call out_of_action_dialog(character)
                 "Maybe make out with [RogueX.Name]?" if character != RogueX and RogueX.Loc == bg_current:
                     call LesScene(RogueX)
-
-                    return
                 "Maybe make out with [KittyX.Name]?" if character != KittyX and  KittyX.Loc == bg_current:
                     call LesScene(KittyX)
-
-                    return
                 "Maybe make out with [LauraX.Name]?" if character != LauraX and LauraX.Loc == bg_current:
                     call LesScene(LauraX)
-
-                    return
                 "Maybe make out with [JeanX.Name]?" if character != JeanX and JeanX.Loc == bg_current:
                     call LesScene(JeanX)
-
-                    return
                 "Maybe make out with [StormX.Name]?" if character != StormX and StormX.Loc == bg_current:
                     call LesScene(StormX)
-
-                    return
                 "Maybe make out with [JubesX.Name]?" if character != JubesX and JubesX.Loc == bg_current:
                     call LesScene(JubesX)
-
-                    return
                 "Never mind [[something else]":
                     jump main_sex_menu
         "Could we maybe?. . . [[fuck]":
@@ -233,44 +218,32 @@ label sex_menu(character):
                     "Come over here, I've got something in mind. . .":
                         if Player.Semen:
                             call expression character.Tag + "_Sex_H"
-
-                            return
                         else:
                             "The spirit is apparently willing, but the flesh is spongy and bruised."
                     "Fuck your pussy.":
                         if Player.Semen:
                             call expression character.Tag + "_Sex_P"
-
-                            return
                         else:
                             "The spirit is apparently willing, but the flesh is spongy and bruised."
                     "Fuck your ass.":
                         if Player.Semen:
                             call expression character.Tag + "_Sex_A"
-
-                            return
                         else:
                             "The spirit is apparently willing, but the flesh is spongy and bruised."
                     "How about some toys? [[Pussy]":
                         call expression character.Tag + "_Dildo_Pussy"
-
-                        return
                     "How about some toys? [[Anal]":
                         call expression character.Tag + "_Dildo_Ass"
-
-                        return
                     "Never mind [[something else]":
                         jump main_sex_menu
             else:
                 call out_of_action_dialog(character)
         "Hey, do you want in on this? [[Threesome]" if not Partner:
-            call Sex_Menu_Threesome(character)
+            call main_sex_menu_Threesome(character)
 
             jump main_sex_menu
         "Hey, [Partner.Name]? [[Switch lead]" if Partner:
             call expression Partner.Tag + "_SexAct" pass ("switch")
-
-            return
         "Cheat Menu" if config.developer:
             call Cheat_Menu(character)
         "Never mind. [[exit]":
@@ -467,7 +440,7 @@ label sex_menu(character):
                             $ character.RecentActions.append("round2")
                             $ character.DailyActions.append("round2")
 
-                            call sex_menu(character)
+                            call main_sex_menu(character)
 
                             return
                         "Again? Ok, fine." if MultiAction and "round2" in character.RecentActions:
@@ -488,7 +461,7 @@ label sex_menu(character):
                             elif character == JubesX:
                                 ch_v "Yup. . ."
 
-                            call sex_menu(character)
+                            call main_sex_menu(character)
 
                             return
                 else:
@@ -533,25 +506,5 @@ label sex_menu(character):
             call Sex_Over
 
             return
-
-    if character.Loc != bg_current:
-        call Set_The_Scene
-        call Trig_Reset
-
-        return
-
-    if not MultiAction:
-        call Set_The_Scene
-
-        call thats_it_for_now_dialog(character)
-
-        $ character.OCount = 0
-
-        call Trig_Reset
-
-        return
-
-    call GirlsAngry
-    call sex_menu(character)
 
     return

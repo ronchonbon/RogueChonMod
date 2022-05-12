@@ -819,7 +819,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                                     $ CountStore = temp_modifier
                                     call Top_Off(Girl,2)
                                     $ temp_modifier = CountStore
-                                    call expression Girl.Tag + "_Fondle_Breasts"
+                                    call fondle_breasts(Girl)
                                     if "fondle breasts" in Girl.RecentActions:
                                             $ Girl.Statup("Obed", 80, 10)
                                             $ Girl.Statup("Inbt", 80, 10)

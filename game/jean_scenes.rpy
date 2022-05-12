@@ -154,7 +154,7 @@ label JeanMeet:
                             $ JeanX.Statup("Obed", 200, 10)
                             $ JeanX.Statup("Inbt", 200, -5)
                             ch_j "Well, only because I know how great they look. . ."
-                call Jean_First_Topless(0,1)
+                call first_topless(JeanX, silent = 0, temporary_line = 1)
                 $ JeanX.FaceChange("bemused")
                 ch_j ". . . not that you'll remember this in five minutes."
                 $ JeanX.FaceChange("bemused",Eyes="psychic")

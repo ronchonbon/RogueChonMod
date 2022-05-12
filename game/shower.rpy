@@ -214,7 +214,7 @@ label Shower_Room:
     if Round <= 10:
                 if Time_Count == 3: #night time
                         "You're getting tired, you head back to your room."
-                        jump Player_Room
+                        jump player_room
                 call Wait
                 call EventCalls
                 call Girls_Location
@@ -268,7 +268,7 @@ label Shower_Room:
                 jump Danger_Room_Entry
         "Return to Your Room" if TravelMode:
                 call No_Towels
-                jump Player_Room_Entry
+                jump player_room_entry
         "Girl's Rooms" if TravelMode:
             menu:
                 "[RogueX.Name]'s Room":

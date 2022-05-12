@@ -427,7 +427,7 @@ label Emma_M_Cycle:
         $ Situation = 0
 
     while Round > 0:
-        call Emma_Pos_Reset("masturbation")
+        call reset_position(EmmaX, trigger = "masturbation")
         call Shift_Focus(EmmaX)
         $ EmmaX.LustFace()
         if "unseen" in EmmaX.RecentActions:
@@ -526,13 +526,13 @@ label Emma_M_Cycle:
 
                         "Back to Sex Menu" if MultiAction and EmmaX.Loc == bg_current:
                                     ch_p "Let's try something else."
-                                    call Emma_Pos_Reset
+                                    call reset_position(EmmaX)
                                     $ Situation = "shift"
                                     $ Line = 0
                                     jump Emma_M_Interupted
                         "End Scene" if not MultiAction or EmmaX.Loc != bg_current:
                                     ch_p "Let's stop for now."
-                                    call Emma_Pos_Reset
+                                    call reset_position(EmmaX)
                                     $ Line = 0
                                     jump Emma_M_Interupted
         #End menu (if Line)
@@ -554,7 +554,7 @@ label Emma_M_Cycle:
                             #if she knows you're there
                             call Player_Cumming(EmmaX)
                             if "angry" in EmmaX.RecentActions:
-                                call Emma_Pos_Reset
+                                call reset_position(EmmaX)
                                 return
                             $ EmmaX.Statup("Lust", 200, 5)
                             if 100 > EmmaX.Lust >= 70 and EmmaX.OCount < 2:
