@@ -1352,7 +1352,7 @@ label get_out_lines(character):
 
     character.voice "[line]"
 
-    if character in [character, KittyX, EmmaX, LauraX, JeanX, JubesX]:
+    if character in [RogueX, KittyX, EmmaX, LauraX, JeanX, JubesX]:
         $ line = renpy.random.choice([character.Name + " pushes you back into the hall and slams the door. You head back to your room.",
             character.Name + " shoves you back into the hall and slams the door. You head back to your room."])
     elif character == StormX:

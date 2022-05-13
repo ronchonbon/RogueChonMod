@@ -3402,6 +3402,7 @@ label Set_The_Scene(Chr = 1, Entry = 0, Dress = 1, TrigReset = 1, Quiet=0,BO=[])
         return
 
 label Shift_Focus(Chr = RogueX, Second = 0,BO=[],Return=0):
+
         #When used like Shift_Focus(KittyX), changes the focus character and relative default positions
         if Chr not in TotalGirls:
                 "Tell Oni [Chr]"
@@ -3449,6 +3450,8 @@ label Shift_Focus(Chr = RogueX, Second = 0,BO=[],Return=0):
         $ Ch_Focus = Chr
         if Partner == Chr:
                 $ Partner = 0
+
+        $ Player.focused_girl = Ch_Focus
 
         $ renpy.restart_interaction()
         return
@@ -3626,11 +3629,11 @@ label AllReset(Chr = 0,BO=[]): #rkeljsv
             $ BO = TotalGirls[:]
 
     while BO:
-            call expression BO[0].Tag + "_BJ_Reset"
-            call expression BO[0].Tag + "_TJ_Reset"
-            call expression BO[0].Tag + "_HJ_Reset"
+            call blowjob_reset(BO[0])
+            call titjob_reset(BO[0])
+            call handjob_reset(BO[0])
             call sex_reset(BO[0])
-            call expression BO[0].Tag + "_Doggy_Reset"
+            call doggy_reset(BO[0])
             call hide_girl(BO[0])
             if BO[0] == RogueX:
                 if RogueX.Loc == bg_current:

@@ -2498,7 +2498,7 @@ label AutoStrip(Girl=0):  #rkeljsv
         $ Girl.Hose = 0 if Girl.HoseNum() >= 6 else Girl.Hose
 
         $ Girl.SeenPanties = 1
-        call expression Girl.Tag + "_First_Bottomless"
+        call first_bottomless(Girl)
         return
 
 label Girl_Undress(Girl=0,Region = "ask",CountStore=0): #rkeljsv
@@ -3611,7 +3611,7 @@ label Bottoms_Off(Girl=0,Intro = 1, Line = 0, Cnt = 0): #rkeljsv
                                 "[Girl.Name] grumbles to herself, and then unzips her [Girl.Legs], sliding them off her bare ass."
                             else:
                                 "[Girl.Name] grumbles to herself, and then pulls her [Line] down her bare ass."
-                    call expression Girl.Tag + "_First_Bottomless" pass (1)
+                    call first_bottomless(Girl, 1)
                     if Taboo:
                         $ Girl.Statup("Inbt", 90, (int(Taboo/10)))
                     $ Cnt = 1
@@ -3635,7 +3635,7 @@ label Bottoms_Off(Girl=0,Intro = 1, Line = 0, Cnt = 0): #rkeljsv
                                 "[Girl.Name] tsks in irritation, and pulls down her [Girl.Panties] too."
                             else:
                                 "[Girl.Name] tsks in irritation, and pulls down her [Girl.Panties]."
-                    call expression Girl.Tag + "_First_Bottomless" pass (1)
+                    call first_bottomless(Girl, 1)
                     if Girl == RogueX:
                             ch_r "I wasn't getting anything out of it with those on. Give it another go."
                     elif Girl == KittyX:
@@ -4074,7 +4074,7 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                         elif Girl == JubesX and JubesX.Acc == "shut jacket":
                                 $ Girl.Acc = 0
                                 "She pulls her [Girl.Acc] off."
-                                call expression Girl.Tag + "_First_Bottomless"
+                                call first_bottomless(Girl)
                         elif Girl.Acc: #boots, mostly
                                 $ Girl.Acc = 0
                                 "She pulls her [Girl.Acc] off."
@@ -4097,7 +4097,7 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                                         "She glances up at you as her [Line] fall clear of her."
                                 else:
                                         "She glances up at you as she removes her [Line]."
-                        call expression Girl.Tag + "_First_Bottomless"
+                        call first_bottomless(Girl)
 
 
                 "Lose the [Girl.Legs]." if Girl.Legs:
@@ -4136,7 +4136,7 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                                         "She blushes and looks at you slyly before removing her [Line]."
                                 else:
                                         "She glaces at you slyly before removing her [Line]."
-                                call expression Girl.Tag + "_First_Bottomless"
+                                call first_bottomless(Girl)
                         elif not Girl.SeenPanties:
                                 if Girl == KittyX:
                                         "She blushes and looks at you as her [Line] drops at her feet."
@@ -4213,7 +4213,7 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                                 "She reaches under her [Girl.Legs] and pulls her [Line] down."
                         else:
                                 "She glances up at you as she removes her [Line]."
-                        call expression Girl.Tag + "_First_Bottomless"
+                        call first_bottomless(Girl)
 
                 "Just give me a clear view. . ." if (Girl.Panties and not Girl.PantiesDown) or (Girl.Legs and not Girl.Upskirt):
                         if Approval >= 2:
@@ -4248,7 +4248,7 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                                 $ Girl.RecentActions.append("no bottomless")
                                 $ Girl.DailyActions.append("no bottomless")
                                 return
-                        call expression Girl.Tag + "_First_Bottomless"
+                        call first_bottomless(Girl)
 
                 "Lose the [Girl.Hose]." if Girl.Hose:
                         $ Girl.FaceChange("bemused", 1)
@@ -4285,7 +4285,7 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                                 $ Girl.FaceChange("sly", 2)
                                 "She blushes and looks at you slyly before removing her [Line]."
                                 $ Girl.Blush = 1
-                                call expression Girl.Tag + "_First_Bottomless"
+                                call first_bottomless(Girl)
                         elif not Girl.SeenPanties:
                                 "[Girl.Name] shyly removes her [Line]."
                                 $ Girl.SeenPanties = 1

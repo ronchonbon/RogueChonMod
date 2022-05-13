@@ -256,7 +256,7 @@ label Chat_Menu: #rkeljsv
                                                     ch_s "Oh?"
                                             elif Girl == JubesX:
                                                     ch_v "Yeah?"
-                                            call character_sex_menu(Girl)
+                                            call enter_main_sex_menu
                                             return
                                     elif ApprovalCheck(Girl, 400, "OI"):
                                             if Girl == RogueX:
@@ -273,7 +273,7 @@ label Chat_Menu: #rkeljsv
                                                     ch_s "Fine."
                                             elif Girl == JubesX:
                                                     ch_v "What would you like, [Girl.Petname]?"
-                                            call character_sex_menu(Girl)
+                                            call enter_main_sex_menu
                                             return
                                     else:
                                             if Girl == RogueX:
@@ -1375,7 +1375,7 @@ label summon(character, temp_modifier = temp_modifier):
 
             return
     elif Time_Count >= 3:
-        if ApprovalCheck(character, 700, "L", ALt = [[StormX], 500]) or ApprovalCheck(character, 300, "O", Alt = [[StormX], 400]):
+        if ApprovalCheck(character, 700, "L", Alt = [[StormX], 500]) or ApprovalCheck(character, 300, "O", Alt = [[StormX], 400]):
             if character == RogueX:
                 ch_r "Ok, it's getting late but I can hang out for a bit."
             elif character == KittyX:

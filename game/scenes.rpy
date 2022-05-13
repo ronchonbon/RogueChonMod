@@ -24,7 +24,7 @@ label Poly_Start(Newbie=0,Round2=0,Asked=0): #rkeljsv
                 if Round2 and Asked:
                         "You pull [Player.Harem[0].Name] aside for a moment."
                         ch_p "Hey, have you changed your mind about [Newbie.Name] lately?"
-                        if Player.Harem[0] == RogueX:
+                        if Player.Harem[0] == First_Bottomless:
                                 ch_r "Getting a little greedy, aren't you."
                         elif Player.Harem[0] == KittyX:
                                 ch_k "Wow, um, chill for a bit."
@@ -62,7 +62,7 @@ label Poly_Start(Newbie=0,Round2=0,Asked=0): #rkeljsv
                 "[Party[0].Name] pulls you aside and wants to talk about something."
 
                 #Line 1
-                if Party[0] == RogueX:
+                if Party[0] == First_Bottomless:
                         ch_r "I've seen you were getting pretty cozy with [Newbie.Name]."
                 elif Party[0] == KittyX:
                         ch_k "You look kinda close with [Newbie.Name] lately."
@@ -2950,7 +2950,7 @@ label girl_boyfriend(character):
                     "I'm sorry, but. . . no." if character.Event[5] != 20:
                         $ Line = "no."
                     "No way.":
-                        call girl_boyfriend_jerk_ending(character)
+                        jump girl_boyfriend_jerk_ending
 
                 if Line == "no":
                     $ character.Statup("Love", 200, -10)
@@ -2971,7 +2971,7 @@ label girl_boyfriend(character):
 
                     return
             "Not really.":
-                call girl_boyfriend_jerk_ending(character)
+                jump girl_boyfriend_jerk_ending
 
         $ character.Petnames.append("boyfriend")
     elif character == LauraX:
@@ -3665,32 +3665,32 @@ label girl_boyfriend(character):
 
     return
 
-label girl_boyfriend_jerk_ending(character):
+label girl_boyfriend_jerk_ending:
     $ character.FaceChange("angry", 1)
 
-    if character == RogueX:
+    if Player.focused_girl == RogueX:
         ch_r "Well fine!"
 
-        $ Count = (20*character.Event[5])
-    elif character == KittyX:
+        $ Count = (20*Player.focused_girl.Event[5])
+    elif Player.focused_girl == KittyX:
         ch_k "Fine![KittyX.Like]. . .be that way!"
-    elif character == EmmaX:
+    elif Player.focused_girl == EmmaX:
         ch_e "Well! Suit yourself."
 
-    $ character.Statup("Obed", 50, 40)
+    $ Player.focused_girl.Statup("Obed", 50, 40)
 
-    if character.Event[5] != 20:
-        $ character.Statup("Obed", 200, (20*character.Event[5]))
-    if 20 > character.Event[5] >= 3:
-        $ character.FaceChange("sad")
+    if Player.focused_girl.Event[5] != 20:
+        $ Player.focused_girl.Statup("Obed", 200, (20*Player.focused_girl.Event[5]))
+    if 20 > Player.focused_girl.Event[5] >= 3:
+        $ Player.focused_girl.FaceChange("sad")
 
-        if character == RogueX:
+        if Player.focused_girl == RogueX:
             ch_r "Hrmph. I don't care what you want, we're dating. Deal with it."
             ch_r "Now I need some alone time though."
-        elif character == KittyX:
-            ch_k "Yeah? Well. . .[character.like]I don’t care what you want! We’re dating! Deal."
-            ch_k "I. . .uhm. . .think I need to[character.like]be alone for a little while."
-        elif character == EmmaX:
+        elif Player.focused_girl == KittyX:
+            ch_k "Yeah? Well. . .[Player.focused_girl.like]I don’t care what you want! We’re dating! Deal."
+            ch_k "I. . .uhm. . .think I need to[Player.focused_girl.like]be alone for a little while."
+        elif Player.focused_girl == EmmaX:
             ch_e "You know, I'm tired of caring what you think about the matter."
             ch_e "I'm doing to consider us a couple whether you approve or not."
             ch_e "And with that, adieu."
@@ -3698,49 +3698,49 @@ label girl_boyfriend_jerk_ending(character):
         if "Historia" in Player.Traits:
             return 1
 
-        $ character.Petnames.append("boyfriend")
+        $ Player.focused_girl.Petnames.append("boyfriend")
 
         $ Achievements.append("I am not your Boyfriend!")
 
         $ bg_current = "bg player"
 
-        call Remove_Girl(character)
+        call Remove_Girl(Player.focused_girl)
         call Set_The_Scene
         $ renpy.pop_call()
         jump Player_Room
 
         return
 
-    if character.Event[5] > 1:
-        if character == RogueX:
+    if Player.focused_girl.Event[5] > 1:
+        if Player.focused_girl == RogueX:
             ch_r "I don't know why I keep asking, I should know you haven't changed."
-        elif character == KittyX:
+        elif Player.focused_girl == KittyX:
             ch_k "It was such a mistake asking you again.  You’re[KittyX.like]still such a jerk!"
-        elif character == EmmaX:
+        elif Player.focused_girl == EmmaX:
             ch_e "It was such a mistake asking you again.  You still need to mature."
 
-    if character.Event[5] != 20:
-        $ character.Statup("Love", 200, -(50*character.Event[5]))
+    if Player.focused_girl.Event[5] != 20:
+        $ Player.focused_girl.Statup("Love", 200, -(50*Player.focused_girl.Event[5]))
     else:
-        $ character.Statup("Love", 200, -50)
+        $ Player.focused_girl.Statup("Love", 200, -50)
 
-    if bg_current == character.Home:
-        if character == RogueX:
+    if bg_current == Player.focused_girl.Home:
+        if Player.focused_girl == RogueX:
             ch_r "Jerk! Out!"
-        elif character == KittyX:
+        elif Player.focused_girl == KittyX:
             ch_k "Get out, you big jerk!"
-        elif character == EmmaX:
+        elif Player.focused_girl == EmmaX:
             ch_e "Get away from me."
 
         $ bg_current = "bg player"
-        call Remove_Girl(character)
+        call Remove_Girl(Player.focused_girl)
         call Set_The_Scene
         $ renpy.pop_call()
         jump Player_Room
     else:
-        "[character.Name] storms off."
+        "[Player.focused_girl.Name] storms off."
 
-        call Remove_Girl(character)
+        call Remove_Girl(Player.focused_girl)
         call Set_The_Scene
         $ renpy.pop_call()
 
@@ -4594,48 +4594,58 @@ label first_topless(character, silent = 0, temporary_line = 0): #rkeljsv
                 $ character.Statup("Obed", 70, 10)
     return
 
-label Rogue_First_Bottomless(Silent = 0): #rkeljsv
-    if RogueX.PantiesNum() > 1 or RogueX.PantsNum() > 2 or RogueX.HoseNum() > 9:
-            #if she's wearing substantial clothing. . .
-            return
-    if RogueX.Loc != bg_current and "phonesex" not in Player.RecentActions:
-            return
-    $ RogueX.RecentActions.append("bottomless")
-    $ RogueX.DailyActions.append("bottomless")
-    $ RogueX.DrainWord("no bottomless")
-    $ RogueX.SeenPussy += 1
-    if RogueX.SeenPussy > 1:
-            #ends portion if you've already seen them
-            return
+label first_bottomless(character, silent = 0): #rkeljsv
+    if character.PantiesNum() > 1 or character.PantsNum() > 2 or character.HoseNum() > 9:
+        return
 
-    $ RogueX.Statup("Inbt", 80, 40)
-    if not Silent:
-        $ RogueX.FaceChange("bemused", 1)
-        "[RogueX.Name] shyly moves her hands aside, revealing her pussy."
-        menu Rogue_First_BMenu:
-            ch_r "Well, [RogueX.Petname]? Was it worth the wait?"
+    if character.Loc != bg_current and "phonesex" not in Player.RecentActions:
+        return
+
+    $ character.RecentActions.append("bottomless")
+    $ character.DailyActions.append("bottomless")
+    $ character.DrainWord("no bottomless")
+
+    $ character.SeenPussy += 1
+
+    if character.SeenPussy > 1:
+        return
+
+    $ character.Statup("Inbt", 80, 40)
+
+    if not silent:
+        $ character.FaceChange("bemused", 1)
+
+        "[character.Name] shyly moves her hands aside, revealing her pussy."
+
+        menu:
+            ch_r "Well, [character.Petname]? Was it worth the wait?"
             "Lovely. . .":
-                    $ RogueX.Statup("Love", 90, 20)
-                    $ RogueX.Statup("Inbt", 60, 30)
-                    $ RogueX.FaceChange("smile")
+                    $ character.Statup("Love", 90, 20)
+                    $ character.Statup("Inbt", 60, 30)
+                    $ character.FaceChange("smile")
+
                     ch_r ". . ."
-                    $ RogueX.Statup("Love", 40, 20)
+
+                    $ character.Statup("Love", 40, 20)
             "I suppose.":
-                    $ RogueX.Statup("Love", 90, -30)
-                    $ RogueX.Statup("Obed", 50, 20)
-                    $ RogueX.Statup("Inbt", 70, -20)
-                    $ RogueX.FaceChange("angry")
+                    $ character.Statup("Love", 90, -30)
+                    $ character.Statup("Obed", 50, 20)
+                    $ character.Statup("Inbt", 70, -20)
+                    $ character.FaceChange("angry")
+
                     ch_r ". . ."
-                    $ RogueX.Statup("Obed", 70, 30)
+
+                    $ character.Statup("Obed", 70, 30)
     else:
-            $ RogueX.AddWord(1,0,0,0,"bottomless") #$ RogueX.History.append("bottomless")
-            if ApprovalCheck(RogueX, 500):
-                    $ RogueX.Statup("Inbt", 60, 30)
-            else:
-                    $ RogueX.Statup("Love", 90, -5)
-                    $ RogueX.Statup("Inbt", 70, -5)
-                    $ RogueX.FaceChange("angry")
-                    $ RogueX.Statup("Obed", 70, 15)
+        $ character.AddWord(1,0,0,0,"bottomless") #$ character.History.append("bottomless")
+
+        if ApprovalCheck(character, 500):
+            $ character.Statup("Inbt", 60, 30)
+        else:
+            $ character.Statup("Love", 90, -5)
+            $ character.Statup("Inbt", 70, -5)
+            $ character.FaceChange("angry")
+            $ character.Statup("Obed", 70, 15)
     return
 
 label Kitty_First_Bottomless(Silent = 0):

@@ -692,7 +692,7 @@ label Primary_SexDialog(GirlA=Primary,TempLine = 0, TempLust = 0, TempLust2 = 0)
                     $ GirlA.Addict -= 2
 
     # end Fondle breasts                                 //////////////////////////////////////////////////////////////////////////////
-    elif Trigger == "suck breasts":
+    elif Trigger == "suck_breasts":
                     $ Line = "You continue to suck on " + GirlA.Name + "'s breasts. "
                     if not GirlA.Uptop and GirlA.Over and GirlA.Chest:
                                 #Full top
@@ -1755,7 +1755,7 @@ label Offhand_Dialog(Girl=Primary, TempLine=0):
                 $ PrimaryLust += 3
                 $ TempFocus += 2 if Player.Focus < 90 else 0
 
-    elif Trigger2 == "suck breasts":
+    elif Trigger2 == "suck_breasts":
             if Girl.ChestNum() > 1 or Girl.OverNum() > 1:
                 $ Line = renpy.random.choice([" You bend down and motor-boat her breasts.",
                     " You tease her nipples with your tongue through her top.",
@@ -1872,39 +1872,27 @@ label Offhand_Set(Situation = Situation, TempTrigger = Trigger2,character=0):
                 if TempTrigger == "fondle_breasts":
                         "You shift your attention to her breasts."
 
-                        call before_fondle(character, "fondle_breasts")
-
-                        return
-                elif TempTrigger == "suck breasts":
+                        jump before_fondle
+                elif TempTrigger == "suck_breasts":
                         "You shift your attention to her breasts."
 
-                        call before_fondle(character, "suck_breasts")
-
-                        return
+                        jump before_fondle
                 elif TempTrigger == "fondle_pussy":
                         "You shift your attention to her pussy."
 
-                        call before_fondle(character, "fondle_pussy")
-
-                        return
+                        jump before_fondle
                 elif TempTrigger == "eat_pussy":
                         "You shift your attention to her pussy."
 
-                        call before_fondle(character, "lick_pussy")
-
-                        return
+                        jump before_fondle
                 elif TempTrigger == "fondle_ass":
                         "You shift your attention to her ass."
 
-                        call before_fondle(character, "fondle_ass")
-
-                        return
+                        jump before_fondle
                 elif TempTrigger == "finger_ass":
                         "You shift your attention to her ass."
 
-                        call before_fondle(character, "finger_ass")
-
-                        return
+                        jump before_fondle
                 else: #If Trigger2 is "kiss_you"
                         "You go back to kissing her deeply."
                         jump KissPrep
@@ -1920,27 +1908,27 @@ label Offhand_Set(Situation = Situation, TempTrigger = Trigger2,character=0):
                     "You lean in and start kissing her."
                     $ Trigger2 = "kiss_you"
 
-            "Also fondle her breasts." if Trigger in ("kiss_you","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
+            "Also fondle her breasts." if Trigger in ("kiss_you","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
                     $ Trigger2 = "fondle_breasts"
                     call fondle_breasts(character)
 
             "Also suck her breasts." if Trigger in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "sex", "anal", "hotdog", "dildo_pussy", "dildo_anal"):
-                    $ Trigger2 = "suck breasts"
+                    $ Trigger2 = "suck_breasts"
                     call suck_breasts(character)
 
-            "Also fondle her pussy." if Trigger in ("kiss_you","fondle_breasts","fondle_thighs", "fondle_ass", "finger_ass", "suck breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
+            "Also fondle her pussy." if Trigger in ("kiss_you","fondle_breasts","fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
                     $ Trigger2 = "fondle_pussy"
                     call fondle_pussy(character)
 
-            "Also fondle her ass." if Trigger in ("kiss_you","fondle_breasts","fondle_pussy", "fondle_thighs", "finger_ass", "suck breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
+            "Also fondle her ass." if Trigger in ("kiss_you","fondle_breasts","fondle_pussy", "fondle_thighs", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
                     $ Trigger2 = "fondle_ass"
                     call fondle_ass(character)
 
-            "Also finger her ass." if Trigger in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "suck breasts", "eat_pussy", "eat_ass", "sex", "hotdog", "footjob", "dildo_pussy"):
+            "Also finger her ass." if Trigger in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "hotdog", "footjob", "dildo_pussy"):
                     $ Trigger2 = "finger_ass"
                     call finger_ass(character)
 
-            "Also jack it." if Trigger in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck breasts", "eat_pussy", "eat_ass", "dildo_pussy", "dildo_anal"):
+            "Also jack it." if Trigger in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "dildo_pussy", "dildo_anal"):
                     call Jackin(character)
 
             "Nevermind":
@@ -2201,7 +2189,7 @@ label Girl_Self_Set(GirlA=Primary, Mode = "T3", Action = Trigger3, Length=0, Cou
                         $ Options.append("vibrator pussy")
 
     else:
-                if GirlA.Hand >= 5 and Mode != "T5" and Trigger in ("fondle_pussy", "fondle_breasts", "fondle_thighs", "kiss_you", "fondle_ass", "suck breasts"):
+                if GirlA.Hand >= 5 and Mode != "T5" and Trigger in ("fondle_pussy", "fondle_breasts", "fondle_thighs", "kiss_you", "fondle_ass", "suck_breasts"):
                         #if this is about the primary girl, and she's done handys, and you're feeling her up, she might feel you up
                         $ Options.append("hand")
 
@@ -2220,7 +2208,7 @@ label Girl_Self_Set(GirlA=Primary, Mode = "T3", Action = Trigger3, Length=0, Cou
                 if "vibrator" in GirlA.Inventory:
                         $ Options.append("vibrator pussy")
 
-                if Trigger not in ("fondle_breasts", "suck breasts"):
+                if Trigger not in ("fondle_breasts", "suck_breasts"):
                         #if you aren't dealing with her breasts. . .
                         $ Options.append("fondle_breasts")
 
@@ -2387,7 +2375,7 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
     # end Fondle breasts Threeway                                //////////////////////////////////////////////////////////////////////////////
 
 
-    elif Action == "suck breasts":
+    elif Action == "suck_breasts":
                         if Trigger2 == "fondle_breasts" and Trigger != "lesbian": #if you're also fondling them,
                                 $ Line = GirlA.Name + " also continues to suck " + GirlB.Name + "'s breasts"
                         else:
@@ -2771,8 +2759,8 @@ label Three_Change(LeadGirl = Primary, SecondGirl = Partner, D20S=0, PrimaryLust
                                     call Threeway_Set(SecondGirl,"kiss girl", 0, Trigger4, LeadGirl)
                     "why don't you grab her tits?" if Trigger4 != "fondle_breasts":
                                     call Threeway_Set(SecondGirl,"fondle_breasts",0, Trigger4, LeadGirl)
-                    "why don't you suck her breasts?" if Trigger4 != "suck breasts":
-                                    call Threeway_Set(SecondGirl,"suck breasts",0, Trigger4, LeadGirl)
+                    "why don't you suck her breasts?" if Trigger4 != "suck_breasts":
+                                    call Threeway_Set(SecondGirl,"suck_breasts",0, Trigger4, LeadGirl)
                     "why don't you finger her?" if Trigger4 != "fondle_pussy":
                                     call Threeway_Set(SecondGirl,"fondle_pussy",0, Trigger4, LeadGirl)
                     "why don't you go down on her?" if Trigger4 != "eat_pussy":
@@ -2806,7 +2794,7 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Trigger4, Girl
             # Action defaults to Trigger4, the action of the seondary girl and GirlB to the lead girl in the scene
             # In lesbian mode, Action becomes Trigger3, the secondary action of the primary girl, and GirlB is the secondary girl
             # If Set gets passed a preset, it chooses that preset, otherwise it chooses one randomly
-            # for Lesbian: call Threeway_Set(Primary,"suck breasts", "lesbian", Trigger3,Secondary)
+            # for Lesbian: call Threeway_Set(Primary,"suck_breasts", "lesbian", Trigger3,Secondary)
             # for Threeway: call Threeway_Set(SecondGirl,"fondle_breasts",0, Trigger4, LeadGirl)
             # ThreeCount is a value that gets set to a few digits lower then the current Round
             # The girl will not arbitrarily change motions until after this value has been passed.
@@ -2875,7 +2863,7 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Trigger4, Girl
 
             if State == "lesbian" or State == "threeway":
                 #if she's into girls, add girl-touching options
-                $ Options.extend(("fondle_breasts","suck breasts","fondle_pussy","fondle_ass","kiss girl"))
+                $ Options.extend(("fondle_breasts","suck_breasts","fondle_pussy","fondle_ass","kiss girl"))
 
                 if ApprovalCheck(GirlA, 800, "I") or GirlA.GirlLikeCheck(GirlB) >= 800:
                     $ Options.append("eat_pussy")
@@ -3035,10 +3023,10 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Trigger4, Girl
                         $ TempLust += 2 if ApprovalCheck(GirlA, 500, "I") else 1  # GirlA's lust
                         $ TempLust2 += 4 if GirlB.GirlLikeCheck(GirlA) >= 800 else 2
                         $ TempFocus += 1
-            elif Options[0] == "suck breasts":
+            elif Options[0] == "suck_breasts":
 
                         $ Line = Line + " and slurps " + GirlB.Name + "'s nipple into her mouth"
-                        $ Action = "suck breasts"
+                        $ Action = "suck_breasts"
                         if "lesbian" not in GirlA.RecentActions:
                                 $ GirlA.Les += 1
                                 $ GirlA.RecentActions.append("lesbian")
@@ -3227,7 +3215,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                             pass
                     elif TempTrigger == "fondle_breasts":
                             $ TempLine = "Your titties feel so nice, "+ActiveGirl.Name+"." #fondle breasts
-                    elif TempTrigger == "suck breasts":
+                    elif TempTrigger == "suck_breasts":
                             $ TempLine = "Your titties taste so good, "+ActiveGirl.Name+"." #suck breasts
                     elif TempTrigger == "fondle_pussy":
                             $ TempLine = "You're sucking me in, "+ActiveGirl.Name+"." #fondle pussy
@@ -3355,7 +3343,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                             $ TempLine = "I'm so jelly here "+ActiveGirl.Name+"." #fondle breasts
                         else:
                             $ TempLine = "I love these tits, "+ActiveGirl.Name+"." #fondle breasts
-                    elif TempTrigger == "suck breasts":
+                    elif TempTrigger == "suck_breasts":
                         if ActiveGirl in (EmmaX,StormX):
                             $ TempLine = "These tits are {i}amazing,{/i} "+ActiveGirl.Name+"." #fondle breasts
                         else:
@@ -3492,7 +3480,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                     if "unseen" not in EmmaX.RecentActions and D20 <= 5:
                             #if they know you're watching, there is a 3/10 or 2/5 chance
                             $ TempLine = "Are you enjoying the performance, "+EmmaX.Petname+"?" #you watching
-                    elif TempTrigger == "fondle_breasts" or TempTrigger == "suck breasts":
+                    elif TempTrigger == "fondle_breasts" or TempTrigger == "suck_breasts":
                             if ActiveGirl == KittyX:
                                 $ TempLine = "Oh my, these breasts are adorable!" #fondle breasts
                             else:
@@ -3631,7 +3619,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                                 $ TempLine = "These things are huge." #fondle breasts
                             else:
                                 $ TempLine = "Your titties feel so nice, "+ActiveGirl.Name+"." #fondle breasts
-                    elif TempTrigger == "suck breasts":
+                    elif TempTrigger == "suck_breasts":
                             $ TempLine = "Hmm, tasty." #suck breasts
                     elif TempTrigger == "fondle_pussy":
                                 $ TempLine = "Cozy in there." #fondle pussy
@@ -3774,7 +3762,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                                 $ TempLine = "How do you even cart these things around?" #fondle breasts
                             else:
                                 $ TempLine = "Mmm, these things are firm, "+ActiveGirl.Name+"." #fondle breasts
-                    elif TempTrigger == "suck breasts":
+                    elif TempTrigger == "suck_breasts":
                             $ TempLine = "Mmmm, tasty." #suck breasts
                     elif TempTrigger == "fondle_pussy":
                                 $ TempLine = "You like that, slut?" #fondle pussy
@@ -3892,7 +3880,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                     if "unseen" not in StormX.RecentActions and D20 <= 5:
                             #if they know you're watching, there is a 3/10 or 2/5 chance
                             $ TempLine = "So you do enjoy watching, "+StormX.Petname+"?" #you watching
-                    elif TempTrigger == "fondle_breasts" or TempTrigger == "suck breasts":
+                    elif TempTrigger == "fondle_breasts" or TempTrigger == "suck_breasts":
                             if ActiveGirl == EmmaX:
                                 $ TempLine = "These really are quite impressive, Emma." #fondle breasts
                             else:
@@ -4028,7 +4016,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                                 $ TempLine = "Wow, how do you work with these. . ." #fondle breasts
                             else:
                                 $ TempLine = "Maybe I need to find a new bra, "+ActiveGirl.Name+"." #fondle breasts
-                    elif TempTrigger == "suck breasts":
+                    elif TempTrigger == "suck_breasts":
                             $ TempLine = "Hmm, hard not to take a nibble. . ." #suck breasts
                     elif TempTrigger == "fondle_pussy":
                                 $ TempLine = "You're burning up. . ." #fondle pussy
@@ -4172,13 +4160,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
         if Girl not in TotalGirls:
                 return
         if Girl == RogueX:
-                if Type == 10:
-                                ch_r "You might want to wrap this up, it's getting late."
-                elif Type == 5:
-                                ch_r "Seriously, it'll be time to stop soon."
-                elif Type == "done":
-                                ch_r "Ok, [Girl.Petname], that's enough of that for now."
-                elif Type == "sitch":
+                if Type == "switch":
                                 ch_r "Mmm, so what else did you have in mind?"
                 elif Type == "partner": #if a partner leaves during a scene
                                 ch_r "Sorry about that."
@@ -4195,13 +4177,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
 
         elif Girl == KittyX:
-                if Type == 10:
-                                ch_k "It's[KittyX.like]getting kinda late."
-                elif Type == 5:
-                                ch_k "We should wrap this up."
-                elif Type == "done":
-                                ch_k "Time to take a little break, for now."
-                elif Type == "sitch":
+                if Type == "switch":
                                 ch_k "Mmm, so what else did you have in mind?"
                 elif Type == "partner":
                                 ch_k "Well that was awkward."
@@ -4218,13 +4194,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
 
         elif Girl == EmmaX:
-                if Type == 10:
-                                ch_e "It's getting late. . ."
-                elif Type == 5:
-                                ch_e "We should take a break soon."
-                elif Type == "done":
-                                ch_e "We need to stop for a moment, let me catch my breath."
-                elif Type == "sitch":
+                if Type == "switch":
                                 ch_e "Ok then, what were you thinking?"
                 elif Type == "partner":
                                 ch_e "Hmm, that was uncomfortable."
@@ -4241,13 +4211,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
 
         elif Girl == LauraX:
-                if Type == 10:
-                                ch_l "It's getting late, we should wrap this up."
-                elif Type == 5:
-                                ch_l "Tic tock, [Girl.Petname]."
-                elif Type == "done":
-                                ch_l "Ok, [Girl.Petname], breaktime."
-                elif Type == "sitch":
+                if Type == "switch":
                                 ch_l "Ok then, what next?"
                 elif Type == "partner":
                                 ch_l "I wonder if she's coming back."
@@ -4264,13 +4228,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
 
         elif Girl == JeanX:
-                if Type == 10:
-                                ch_j "Wow, look at the time. . ."
-                elif Type == 5:
-                                ch_j "We should probably wrap this up, [Girl.Petname]."
-                elif Type == "done":
-                                ch_j "Ok, [Girl.Petname], time for a break."
-                elif Type == "sitch":
+                if Type == "switch":
                                 ch_j "Ok, what'd you have in mind?"
                 elif Type == "partner":
                                 ch_j "I'm sure she'll be missed."
@@ -4287,13 +4245,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
 
         elif Girl == StormX:
-                if Type == 10:
-                                ch_s "It is getting late, [Girl.Petname]. . ."
-                elif Type == 5:
-                                ch_s "We should take a break soon."
-                elif Type == "done":
-                                ch_s "I need to take a moment to collect myself."
-                elif Type == "sitch":
+                if Type == "switch":
                                 ch_s "Very well, what were you thinking?"
                 elif Type == "partner":
                                 ch_s "I am sorry for the awkwardness."
@@ -4310,13 +4262,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
 
         elif Girl == JubesX:
-                if Type == 10:
-                                ch_v "I could use a break soon. . ."
-                elif Type == 5:
-                                ch_v ". . . I could really use a break here. . ."
-                elif Type == "done":
-                                ch_v "Ok, that's it, I need a break."
-                elif Type == "sitch":
+                if Type == "switch":
                                 ch_v "Ok then, what else?"
                 elif Type == "partner":
                                 ch_v "Aw, that's a bummer. Anyway. . ."
@@ -4346,66 +4292,6 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
         return
 
-label before_sex_skirt_narration(character):
-    $ line = renpy.random.choice(["[character.Name] turns and backs up against your cock, sliding her skirt up as she does so.",
-        "[character.Name] rolls back and pulls you toward her, sliding her skirt up as she does so.",
-        "[character.Name] turns around, sliding her skirt up as she does so.",
-        "[character.Name] pushes you back and climbs on top of you, sliding her skirt up as she does so.",
-        "[character.Name] lays back, sliding her skirt up as she does so."])
-    "[line]"
-
-    return
-
-label before_sex_leg_narration(character):
-    $ line = renpy.random.choice(["[character.Name] turns and backs up against your cock, sliding her [character.Legs] down as she does so.",
-        "[character.Name] rolls back and pulls you against her, sliding her [character.Legs] off as she does so.",
-        "[character.Name] pushes you down and climbs on top of you, sliding her [character.Legs] down as she does so.",
-        "[character.Name] turns around, sliding her [character.Legs] down as she does so.",
-        "[character.Name] lays back, sliding her [character.Legs] down as she does so."])
-    "[line]"
-
-    return
-
-label before_sex_shorts_narration(character):
-
-    $ line = renpy.random.choice(["[character.Name] rolls onto her back and pulls you against her, sliding her shorts off as she does so."])
-    "[line]"
-
-    return
-
-label before_sex_commando_narration(character):
-    $ line = renpy.random.choice(["[character.Name] turns and backs up against your cock.",
-        "[character.Name] rolls back and pulls you toward her.",
-        "[character.Name] pushes you back and climbs on top of you.",
-        "[character.Name] turns around and pulls you toward her."])
-    "[line]"
-
-    return
-
-label sex_wants_to_insert_narration(character):
-    $ line = renpy.random.choice(["She slides the tip along her pussy and seems to want you to insert it."])
-    "[line]"
-
-    return
-
-label anal_wants_to_insert_narration(character):
-    $ line = renpy.random.choice(["She slides the tip up to her anus, and presses against it.",
-        "She slides the tip along her ass and seems to want you to insert it.",
-        "She slides the tip against her ass and seems to want you to insert it.",
-        "She slides the tip along her asshole, and seems to want you to insert it."])
-    "[line]"
-
-    return
-
-label hotdog_prep_narration(character):
-    $ line = renpy.random.choice(["[character.Name] turns and backs up against your cock, rubbing it against her ass.",
-        "[character.Name] rolls back and pulls you toward her, rubbing her pussy against your cock.",
-        "[character.Name] pushes you back and climbs on top of you, sliding back and forth along your shaft.",
-        "[character.Name] rolls back and pulls you toward her, grinding against your cock.",
-        "[character.Name] turns around and pulls you toward her, grinding against your cock."])
-    "[line]"
-
-    return
 
 label start_of_sex_narration(character, action):
     $ check_line = renpy.random.choice(["glances around for voyeurs",
@@ -4479,7 +4365,7 @@ label start_of_sex_narration(character, action):
                     "[player_first_action_line]."
             else:
                 if "cockout" in Player.RecentActions:
-                    "[character_name] [check_line], then [undressing_line] and [action_line]"
+                    "[character.Name] [check_line], then [undressing_line] and [action_line]"
                 else:
                     "[character.Name] [check_line], then [action_line]."
 
@@ -4514,7 +4400,7 @@ label start_of_sex_narration(character, action):
                     "[player_first_action_line]."
             else:
                 if "cockout" in Player.RecentActions:
-                    "[character_name] [undressing_line] and [action_line]"
+                    "[character.Name] [undressing_line] and [action_line]"
                 else:
                     "[character.Name] [action_line]."
 
