@@ -1,4 +1,4 @@
-label fondle(character):
+label fondle_action(character):
     $ character.Mouth = "smile"
 
     if not character.Action:
@@ -122,11 +122,11 @@ label fondle_menu(character, action):
                                 "Never Mind":
                                     pass
 
-                                call fondle_cycle(character, action)
+                            call fondle_cycle(character, action)
 
-                                return
-                            else:
-                                call tired_lines(character)
+                            return
+                        else:
+                            call tired_lines(character)
                     elif action == "fondle_breasts":
                         if character.Action and MultiAction:
                             menu:
@@ -134,7 +134,7 @@ label fondle_menu(character, action):
                                     if character.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call fondle_breasts_after(character)
+                                        call after_fondle(character, action)
                                         call suck_breasts(character)
                                     else:
                                         call tired_lines(character)
@@ -142,7 +142,7 @@ label fondle_menu(character, action):
                                     if character.Action and MultiAction:
                                         $ Situation = "auto"
 
-                                        call fondle_breasts_after(character)
+                                        call after_fondle(character, action)
                                         call suck_breasts(character)
                                     else:
                                         "As you lean in to suck on her breast, she grabs your head and pushes back."
@@ -163,7 +163,7 @@ label fondle_menu(character, action):
                                     if character.Action and MultiAction:
                                         $ Situation = "pullback"
 
-                                        call suck_breasts_after(character)
+                                        call after_fondle(character, action)
                                         call fondle_breasts(character)
                                     else:
                                         "As you pull back, [character.Name] pushes you back in close."
@@ -181,7 +181,7 @@ label fondle_menu(character, action):
                         if MultiAction:
                             menu:
                                 "I want to lick your pussy.":
-                                    if character.Action
+                                    if character.Action:
                                         $ Situation = "shift"
 
                                         call fondle_pussy_after(character)
@@ -605,14 +605,13 @@ label fondle_set_modifier(character, action):
     return
 
 label before_fondle(character, action):
-    # we have to fix Trigger to accept action
     if action not in ["suck_breasts", "fondle_pussy"]:
         if Trigger == "kiss_you":
             $ Trigger = action
 
             return
 
-    if Trigger2 == action:
+    if action != "finger_pussy" and Trigger2 == action:
         return
 
     # we have to fix the launch functions to accept action
@@ -630,155 +629,10 @@ label before_fondle(character, action):
     if Situation == character:
         $ Situation = 0
 
-        if action in ["fondle_breasts", "suck_breasts"]:
-            if action == "fondle_breasts":
-                $ covered_phrase = "arm and shoves your hand against her covered breast"
-                $ topless_phrase = "arm and shoves your hand against her breast"
-            elif action == "suck_breasts":
-                $ covered_phrase = "head and shoves your face into her chest"
-                $ topless_phrase = covered_phrase
+        call character_initiated_action(character, action)
 
-            if (character.Over or character.Chest) and not character.Uptop:
-                if ApprovalCheck(character, 1250, TabM = 1) or (character.SeenChest and ApprovalCheck(character, 500) and not Taboo):
-                    $ character.Uptop = 1
-
-                    $ Line = character.Over if character.Over else character.Chest
-
-                    "With a mischievous grin, [character.Name] pulls her [Line] up over her breasts."
-
-                    call first_topless(character, silent = True)
-
-                    $ Line = 0
-
-                    "She then grabs your [topless_phrase], clearly intending you to get to work."
-                else:
-                    "[character.Name] grabs your [covered_phrase], clearly intending you to get to work."
-            else:
-                "[character.Name] grabs your [topless_phrase], clearly intending you to get to work."
-        elif action in ["fondle_pussy", "eat_pussy", "finger_ass"]:
-            if action == "fondle_pussy":
-                if character in [Jeanx, JubesX]:
-                    $ phrase = "grabs your arm and presses your hand into her crotch"
-                elif character == StormX:
-                    $ phrase "grabs your arm and strokes your hand across her crotch"
-                else:
-                    $ phrase = "grabs your arm and shoves your hand into her crotch"
-            elif action == "eat_pussy":
-                $ phrase = renpy.random.choice(["grabs your head and shoves your face into her crotch",
-                    "grabs your head and pulls it to her crotch",
-                    "grabs your head and wraps her thighs around it"])
-            elif action == "finger_ass":
-                $ phrase = renpy.random.choice(["grabs your arm and presses your hand against her asshole",
-                    "grabs your arm and rubs your hand against her asshole"])
-
-
-            if (character.Legs and not character.Upskirt) or (character.Panties and not character.PantiesDown):
-                if ApprovalCheck(character, 1250, TabM = 1) or (character.SeenPussy and ApprovalCheck(character, 500) and not Taboo):
-                    $ character.Upskirt = 1
-                    $ character.PantiesDown = 1
-
-                    $ Line = 0
-
-                    if character.PantsNum() == 5:
-                        $ Line = character.Name + " hikes up her skirt"
-                    elif character.PantsNum() > 6:
-                        $ Line = character.Name + " pulls down her " + character.Legs
-                    else:
-                        $ Line = 0
-
-                    if character.Panties:
-                        if Line:
-                            "[Line] and pulls her [character.Panties] out of the way."
-                            "She then [phrase], clearly intending you to get to work."
-                        else:
-                            "She pulls her [character.Panties] out of the way, and then [phrase]."
-                            "She clearly intends for you to get to work."
-                    else:
-                        "[Line], and then [phrase]."
-                        "She clearly intends for you to get to work."
-
-                    call first_bottomless(character, 1)
-                else:
-                    "[character.Name] [phrase], clearly intending you to get to work."
-            else:
-                "[character.Name] [phrase], clearly intending you to get to work."
-
-        if action in ["fondle_breasts", "fondle_breasts", "fondle_pussy"]:
-            if action == "fondle_breasts":
-                $ action_line = "You start to fondle them."
-                $ praise_line = "I like the initiative, " + character.Pet
-                $ no_action_line = "You pull your hand back."
-                $ reject_line = "Let's not do that right now, " + character.Pet
-                $ rejection_response_line = character.Name + " pulls back."
-            elif action == "suck_breasts":
-                $ action_line = "You start to run your tongue along her nipple."
-                $ praise_line = "Mmm, I like this, " + character.Pet
-                $ no_action_line = "You pull your head back."
-                $ reject_line = "Let's not do that right now, " + character.Pet
-                $ rejection_response_line = character.Name + " pulls away."
-            elif action == "fondle_pussy":
-                $ action_line = "You start to run your fingers along her pussy."
-                $ praise_line = "I like the initiative, " + character.Pet
-                $ no_action_line = "You pull your hand back."
-                $ reject_line = "Let's not do that right now, " + character.Pet
-                $ rejection_response_line = character.Name + " pulls back."
-            elif action == "eat_pussy":
-                $ action_line = "You start licking her slit."
-                $ praise_line = "Mmm, I like this idea, " + character.Pet
-                $ no_action_line = "You pull your head away."
-                $ reject_line = "Let's not do that right now, " + character.Pet
-                $ rejection_response_line = character.Name + " pulls back."
-            elif action == "finger_ass":
-                $ action_line = "You press your finger into her tight ass."
-                $ praise_line = "Dirty girl, " + character.Pet
-                $ no_action_line = "You pull your hand back."
-                $ reject_line = "Let's not do that right now, " + character.Pet
-                $ rejection_response_line = character.Name + " pulls back."
-
-            menu:
-                "What do you do?"
-                "Get to work.":
-                    $ character.Statup("Inbt", 80, 3)
-                    $ character.Statup("Inbt", 50, 2)
-
-                    "[action_line]"
-                "Praise her.":
-                    $ character.FaceChange("sexy", 1)
-                    $ character.Statup("Inbt", 80, 3)
-
-                    ch_p "[praise_line]"
-
-                    $ character.NameCheck() #checks reaction to petname
-
-                    "[action_line]"
-
-                    $ character.Statup("Love", 85, 1)
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 2)
-                "Ask her to stop.":
-                    "[no_action_line]"
-
-                    $ character.FaceChange("surprised")
-                    $ character.Statup("Inbt", 70, 1)
-
-                    ch_p "[reject_line]"
-
-                    $ character.NameCheck() #checks reaction to petname
-
-                    if character == JeanX:
-                        $ character.Statup("Love", 70, -4)
-
-                    "[rejection_response_line]"
-
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 1)
-                    $ character.Statup("Obed", 30, 2)
-
-                    $ Player.RecentActions.append("nope")
-
-                    $ character.AddWord(1,"refused","refused")
-
-                    return
+        if _return:
+            return
 
     if not character.Forced and Situation != "auto":
         $ temp_modifier = 0
@@ -896,7 +750,7 @@ label before_fondle(character, action):
             $ character.Lust += int(Taboo/5)
 
     if Situation:
-        $ renpy.pop_call()
+        #$ renpy.pop_call()
 
         $ Situation = 0
 
@@ -963,9 +817,9 @@ label fondle_cycle(character, action):
         $ Cnt += 1
         $ Round -= 1
 
-        $ end_cycle = end_of_fondle_round(character, action)
+        call end_of_fondle_round(character, action)
 
-        if end_cycle:
+        if _return:
             return
 
         if action in ["fondle_breasts", "suck_breasts"]:
@@ -1034,7 +888,7 @@ label after_fondle(character, action):
                 call Partner_Like(character,4,3)
             elif character not in [KittyX, StormX] and Partner == RogueX:
                 call Partner_Like(character, 3, 3)
-            elif character == RogueX::
+            elif character == RogueX:
                 call Partner_Like(character,3,2)
             else:
                 call Partner_Like(character, 2)
@@ -1283,138 +1137,13 @@ label fondle_thighs(character):
         call gently_lines(character)
 
     if Approval >= 2:
-        $ character.FaceChange("bemused", 1)
-
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Obed", 90, 1)
-            $ character.Statup("Inbt", 60, 1)
-
-        call come_and_get_em_lines(character)
-
-        $ character.Statup("Love", 90, 1)
-        $ character.Statup("Inbt", 50, 3)
-
-        call before_fondle(character, "fondle_thighs")
+        call action_accepted(character)
 
         return
     else:
-        $ character.FaceChange("angry", 1)
+        call action_disapproved(character, "fondle_thighs", character.FondleT)
 
-        if "no_fondle_thighs" in character.RecentActions:
-            call just_told_you_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions and "no_fondle_thighs" in character.DailyActions:
-            call had_enough_of_this_lines(character)
-        elif "no_fondle_thighs" in character.DailyActions:
-            call already_said_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions:
-            call already_said_not_here_lines(character)
-        elif not character.FondleT:
-            $ character.FaceChange("bemused")
-
-            call not_ready_yet_lines(character)
-        else:
-            $ character.FaceChange("bemused")
-
-            call rather_not_lines(character)
-        menu:
-            extend ""
-            "Sorry, never mind." if "no_fondle_thighs" in character.DailyActions:
-                $ character.FaceChange("bemused")
-
-                call no_problem_lines(character)
-
-                return
-            "Maybe later?" if "no_fondle_thighs" not in character.DailyActions:
-                $ character.FaceChange("sexy")
-
-                call maybe_later_lines(character)
-
-                $ character.Statup("Love", 80, 1)
-                $ character.Statup("Inbt", 30, 2)
-
-                if Taboo:
-                    $ character.AddWord(1,"tabno","tabno")
-
-                $ character.RecentActions.append("no_fondle_thighs")
-                $ character.DailyActions.append("no_fondle_thighs")
-
-                return
-            "Come on, Please?":
-                if Approval:
-                    $ character.FaceChange("sexy")
-                    $ character.Statup("Obed", 60, 1)
-                    $ character.Statup("Obed", 30, 2)
-                    $ character.Statup("Inbt", 50, 1)
-                    $ character.Statup("Inbt", 30, 2)
-
-                    call reward_politeness_lines(character)
-                    call before_fondle(character, "fondle_thighs")
-
-                    return
-                else:
-                    $ character.FaceChange("sexy")
-
-                    call please_not_good_enough_lines(character)
-            "[[Start caressing her thigh anyway]":
-                $ Approval = ApprovalCheck(character, 350, "OI", TabM = 2)
-
-                if Approval > 1 or (Approval and character.Forced):
-                    $ character.FaceChange("sad")
-                    $ character.Statup("Love", 70, -5, 1)
-                    $ character.Statup("Love", 20, -2, 1)
-
-                    call forced_but_not_unwelcome_lines(character)
-
-                    $ character.Statup("Obed", 50, 3)
-                    $ character.Statup("Inbt", 60, 2)
-
-                    if Approval < 2:
-                        $ character.Forced = 1
-
-                    call before_fondle(character, "fondle_thighs")
-
-                    return
-                else:
-                    $ character.Statup("Love", 200, -8)
-                    $ character.FaceChange("angry", 1)
-
-                    "She slaps your hand away."
-
-                    $ character.AddWord(1,"angry","angry")
-
-    if "no_fondle_thighs" in character.DailyActions:
-        call learn_to_take_no_lines(character)
-
-        $ character.AddWord(1,"angry","angry")
-    elif character.Forced:
-        $ character.FaceChange("angry", 1)
-
-        call went_too_far_lines(character)
-
-        $ character.Statup("Lust", 50, 2)
-        $ character.Statup("Obed", 50, -1)
-        $ character.AddWord(1,"angry","angry")
-    elif Taboo:
-        $ character.FaceChange("angry", 1)
-        $ character.AddWord(1,"tabno","tabno")
-
-        call not_in_public_lines(character)
-    elif character.FondleT:
-        $ character.FaceChange("sad")
-
-        call you_had_your_shot_lines(character)
-    else:
-        $ character.FaceChange("sexy")
-        $ character.Mouth = "sad"
-
-        call not_happening_lines(character)
-
-    $ character.RecentActions.append("no_fondle_thighs")
-    $ character.DailyActions.append("no_fondle_thighs")
-
-    $ temp_modifier = 0
+    call action_rejected(character, "fondle_thighs", character.FondleT)
 
     return
 
@@ -1475,147 +1204,13 @@ label fondle_breasts(character):
         call gently_lines(character)
 
     if Approval >= 2:
-        $ character.FaceChange("bemused", 1)
-
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
-            $ character.Statup("Obed", 90, 1)
-            $ character.Statup("Inbt", 60, 1)
-
-        call come_and_get_em_lines(character)
-
-        $ character.Statup("Love", 90, 1)
-        $ character.Statup("Inbt", 50, 3)
-
-        call before_fondle(character, "fondle_breasts")
+        call action_accepted(character, "fondle_breasts")
 
         return
     else:
-        $ character.FaceChange("angry", 1)
+        call action_disapproved(character, "fondle_breasts", character.FondleB)
 
-        if "no_fondle_breasts" in character.RecentActions:
-            call just_told_you_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions and "no_fondle_breasts" in character.DailyActions:
-            call had_enough_of_this_lines(character)
-        elif "no_fondle_breasts" in character.DailyActions:
-            call already_said_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions:
-            call already_said_not_here_lines(character)
-        elif not character.FondleB:
-            $ character.FaceChange("bemused")
-
-            call not_ready_yet_lines(character)
-        else:
-            $ character.FaceChange("bemused")
-
-            call rather_not_lines(character)
-        menu:
-            extend ""
-            "Sorry, never mind." if "no_fondle_breasts" in character.DailyActions:
-                $ character.FaceChange("bemused")
-
-                call no_problem_lines(character)
-
-                return
-            "Maybe later?" if "no_fondle_breasts" not in character.DailyActions:
-                $ character.FaceChange("sexy")
-
-                if character not in [LauraX, JubesX]:
-                    "She re-adjusts her cleavage."
-
-                call maybe_later_lines(character)
-
-                $ character.Statup("Love", 80, 1)
-                $ character.Statup("Love", 50, 1)
-                $ character.Statup("Inbt", 30, 2)
-
-                if Taboo:
-                    $ character.AddWord(1,"tabno","tabno")
-
-                $ character.RecentActions.append("no_fondle_breasts")
-                $ character.DailyActions.append("no_fondle_breasts")
-
-                return
-            "Come on, Please?":
-                if Approval:
-                    $ character.FaceChange("sexy")
-
-                    if character != LauraX:
-                        $ character.Statup("Obed", 90, 1)
-
-                    $ character.Statup("Obed", 50, 2)
-                    $ character.Statup("Inbt", 60, 3)
-                    $ character.Statup("Inbt", 30, 2)
-
-                    call reward_politeness_lines(character)
-                    call before_fondle(character, "fondle_breasts")
-
-                    return
-                else:
-                    $ character.FaceChange("sexy")
-
-                    call please_not_good_enough_lines(character)
-            "[[Grab her chest anyway]":
-                $ Approval = ApprovalCheck(character, 350, "OI", TabM = 3)
-
-                if Approval > 1 or (Approval and character.Forced):
-                    $ character.FaceChange("sad")
-                    $ character.Statup("Love", 70, -5, 1)
-                    $ character.Statup("Love", 20, -2, 1)
-
-                    call forced_but_not_unwelcome_lines(character)
-
-                    $ character.Statup("Obed", 90, 2)
-                    $ character.Statup("Obed", 50, 4)
-                    $ character.Statup("Inbt", 60, 3)
-
-                    if Approval < 2:
-                        $ character.Forced = 1
-
-                    call before_fondle(character, "fondle_breasts")
-
-                    return
-                else:
-                    $ character.Statup("Love", 200, -10)
-                    $ character.FaceChange("angry", 1)
-
-                    "She slaps your hand away."
-
-                    $ character.AddWord(1,"angry","angry")
-
-    if "no_fondle_breasts" in character.DailyActions:
-        call learn_to_take_no_lines(character)
-
-        $ character.AddWord(1,"angry","angry")
-    elif character.Forced:
-        $ character.FaceChange("angry", 1)
-
-        call went_too_far_lines(character)
-
-        $ character.Statup("Lust", 60, 5)
-        $ character.Statup("Obed", 50, -2)
-        $ character.AddWord(1,"angry","angry")
-    elif Taboo:
-        $ character.FaceChange("angry", 1)
-        $ character.AddWord(1,"tabno","tabno")
-
-        call not_in_public_lines(character)
-    elif character.FondleB:
-        $ character.FaceChange("sad")
-
-        call you_had_your_shot_lines(character)
-    else:
-        $ character.FaceChange("sexy")
-        $ character.Mouth = "sad"
-
-        call not_happening_lines(character)
-
-    $ character.RecentActions.append("no_fondle_breasts")
-    $ character.DailyActions.append("no_fondle_breasts")
-
-    $ temp_modifier = 0
+    call action_rejected(character, "fondle_breasts", character.FondleB)
 
     return
 
@@ -1664,141 +1259,13 @@ label suck_breasts(character):
         call gently_lines(character)
 
     if Approval >= 2:                                                                   #She's into it. . .
-        $ character.FaceChange("bemused", 1)
-
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
-            $ character.Statup("Obed", 90, 1)
-            $ character.Statup("Inbt", 60, 1)
-
-        call come_and_get_em_lines(character)
-
-        $ character.Statup("Love", 90, 1)
-        $ character.Statup("Inbt", 50, 3)
-
-        call before_fondle(character, "suck_breasts")
+        call action_accepted(character, "suck_breasts")
 
         return
-    else:                                                                               #She's not into it, but maybe. . .
-        $ character.FaceChange("angry", 1)
-
-        if "no_suck_breasts" in character.RecentActions:
-            call just_told_you_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions and "no_suck_breasts" in character.DailyActions:
-            call had_enough_of_this_lines(character)
-        elif "no_suck_breasts" in character.DailyActions:
-            call already_said_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions:
-            call already_said_not_here_lines(character)
-        elif not character.SuckB:
-            $ character.FaceChange("bemused")
-
-            call not_ready_yet_lines(character)
-        else:
-            $ character.FaceChange("bemused")
-
-            call rather_not_lines(character)
-        menu:
-            extend ""
-            "Sorry, never mind." if "no_suck_breasts" in character.DailyActions:
-                $ character.FaceChange("bemused")
-
-                call no_problem_lines(character)
-
-                return
-            "Maybe later?" if "no_suck_breasts" not in character.DailyActions:
-                $ character.FaceChange("sexy")
-
-                call maybe_later_lines(character)
-
-                $ character.Statup("Love", 80, 1)
-                $ character.Statup("Love", 50, 1)
-                $ character.Statup("Inbt", 30, 2)
-
-                if Taboo:
-                    $ character.AddWord(1,"tabno","tabno")
-
-                $ character.RecentActions.append("no_suck_breasts")
-                $ character.DailyActions.append("no_suck_breasts")
-
-                return
-            "Come on, Please?":
-                if Approval:
-                    $ character.FaceChange("sexy")
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 2)
-                    $ character.Statup("Inbt", 60, 3)
-                    $ character.Statup("Inbt", 30, 2)
-
-                    call reward_politeness_lines(character)
-                    call before_fondle(character, "suck_breasts")
-
-                    return
-                else:
-                    $ character.FaceChange("sexy")
-
-                    call please_not_good_enough_lines(character)
-            "[[Start sucking anyway]":                                               # Pressured into licking.
-                $ Approval = ApprovalCheck(character, 450, "OI", TabM = 3) # 45, 60, 75, -120(165)
-
-                if Approval > 1 or (Approval and character.Forced):
-                    $ character.FaceChange("sad")
-                    $ character.Statup("Love", 70, -5, 1)
-                    $ character.Statup("Love", 20, -2, 1)
-
-                    call forced_but_not_unwelcome_lines(character)
-
-                    $ character.Statup("Obed", 90, 2)
-                    $ character.Statup("Obed", 50, 4)
-                    $ character.Statup("Inbt", 60, 3)
-
-                    if Approval < 2:
-                        $ character.Forced = 1
-
-                    call before_fondle(character, "suck_breasts")
-
-                    return
-                else:
-                    $ character.Statup("Love", 200, -10)
-                    $ character.FaceChange("angry", 1)
-
-                    "She shoves your head back out."
-
-                    $ character.AddWord(1,"angry","angry")
-
-    if "no_suck_breasts" in character.DailyActions:
-        call learn_to_take_no_lines(character)
-
-        $ character.AddWord(1,"angry","angry")
-    elif character.Forced:
-        $ character.FaceChange("angry", 1)
-
-        call went_too_far_lines(character)
-
-        $ character.Statup("Lust", 60, 5)
-        $ character.Statup("Obed", 50, -2)
-        $ character.AddWord(1,"angry","angry")
-    elif Taboo:
-        $ character.FaceChange("angry", 1)
-        $ character.AddWord(1,"tabno","tabno")
-
-        call not_in_public_lines(character)
-    elif character.SuckB:
-        $ character.FaceChange("sad")
-
-        call you_had_your_shot_lines(character)
     else:
-        $ character.FaceChange("sexy")
-        $ character.Mouth = "sad"
+        call action_disapproved(character, "suck_breasts", character.SuckB)
 
-        call not_happening_lines(character)
-
-    $ character.RecentActions.append("no_suck_breasts")
-    $ character.DailyActions.append("no_suck_breasts")
-
-    $ temp_modifier = 0
+    call action_rejected(character, "suck_breasts", character.SuckB)
 
     return
 
@@ -1869,141 +1336,13 @@ label fondle_pussy(character):
         call gently_lines(character)
 
     if Approval >= 2:                                                                   #She's into it. . .
-        $ character.FaceChange("bemused", 1)
-
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
-            $ character.Statup("Obed", 90, 1)
-            $ character.Statup("Inbt", 60, 1)
-
-        call come_and_get_em_lines(character)
-
-        $ character.Statup("Love", 90, 1)
-        $ character.Statup("Inbt", 50, 3)
-
-        call before_fondle(character, "fondle_pussy")
+        call action_accepted(character, "fondle_pussy")
 
         return
-    else:                                                                               #She's not into it, but maybe. . .
-        $ character.FaceChange("angry", 1)
-
-        if "no_fondle_pussy" in character.RecentActions:
-            call just_told_you_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions and "no_fondle_pussy" in character.DailyActions:
-            call had_enough_of_this_lines(character)
-        elif "no_fondle_pussy" in character.DailyActions:
-            call already_said_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions:
-            call already_said_not_here_lines(character)
-        elif not character.FondleP:
-            $ character.FaceChange("bemused")
-
-            call not_ready_yet_lines(character)
-        else:
-            $ character.FaceChange("bemused")
-
-            call rather_not_lines(character)
-
-        menu:
-            extend ""
-            "Sorry, never mind." if "no_fondle_pussy" in character.DailyActions:
-                $ character.FaceChange("bemused")
-
-                call no_problem_lines(character)
-
-                return
-            "Maybe later?" if "no_fondle_pussy" not in character.DailyActions:
-                $ character.FaceChange("sexy")
-
-                call maybe_later_lines(character)
-
-                $ character.Statup("Love", 80, 2)
-                $ character.Statup("Inbt", 70, 2)
-
-                if Taboo:
-                    $ character.AddWord(1,"tabno","tabno")
-
-                $ character.RecentActions.append("no_fondle_pussy")
-                $ character.DailyActions.append("no_fondle_pussy")
-
-                return
-            "Come on, Please?":
-                if Approval:
-                    $ character.FaceChange("sexy")
-                    $ character.Statup("Obed", 90, 2)
-                    $ character.Statup("Obed", 50, 2)
-                    $ character.Statup("Inbt", 70, 3)
-                    $ character.Statup("Inbt", 40, 2)
-
-                    call reward_politeness_lines(character)
-                    call before_fondle(character, "fondle_pussy")
-
-                    return
-                else:
-                    $ character.FaceChange("sexy")
-
-                    call not_happening_lines(character)
-            "[[Start fondling anyway]":                                               # Pressured into fondling.
-                $ Approval = ApprovalCheck(character, 450, "OI", TabM = 2) # 45, 60, 75, -80(125)
-
-                if Approval > 1 or (Approval and character.Forced):
-                    $ character.FaceChange("sad")
-                    $ character.Statup("Love", 70, -5, 1)
-                    $ character.Statup("Love", 200, -2)
-
-                    call forced_but_not_unwelcome_lines(character)
-
-                    $ character.Statup("Obed", 50, 4)
-                    $ character.Statup("Inbt", 80, 1)
-                    $ character.Statup("Inbt", 60, 3)
-
-                    if Approval < 2:
-                        $ character.Forced = 1
-
-                    call before_fondle(character, "fondle_pussy")
-
-                    return
-                else:
-                    $ character.Statup("Love", 200, -15)
-                    $ character.FaceChange("angry", 1)
-
-                    "She slaps your hand away."
-
-                    $ character.AddWord(1,"angry","angry")
-
-    if "no_fondle_pussy" in character.DailyActions:
-        call learn_to_take_no_lines(character)
-
-        $ character.AddWord(1,"angry","angry")
-    elif character.Forced:
-        $ character.FaceChange("angry", 1)
-
-        call went_too_far_lines(character)
-
-        $ character.Statup("Lust", 70, 5)
-        $ character.Statup("Obed", 50, -2)
-        $ character.AddWord(1,"angry","angry")
-    elif Taboo:
-        $ character.FaceChange("angry", 1)
-        $ character.AddWord(1,"tabno","tabno")
-
-        call not_in_public_lines(character)
-    elif character.FondleP:
-        $ character.FaceChange("sad")
-
-        call you_had_your_shot_lines(character)
     else:
-        $ character.FaceChange("sexy")
-        $ character.Mouth = "sad"
+        call action_disapproved(character, action, character.FondleP)
 
-        call not_happening_lines(character)
-
-    $ character.RecentActions.append("no_fondle_pussy")
-    $ character.DailyActions.append("no_fondle_pussy")
-
-    $ temp_modifier = 0
+    call action_rejected(character, "fondle_pussy", character.FondleP)
 
     return
 
@@ -2037,28 +1376,8 @@ label finger_pussy(character):
 
             return
 
-    if ApprovalCheck(character, 1100, TabM = 2):                                                                   #She's into it. . .
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
-            $ character.Statup("Obed", 90, 1)
-            $ character.Statup("Inbt", 60, 1)
-
-            call forced_but_welcome_lines(character)
-
-        else:
-            $ character.FaceChange("sexy", 1)
-            $ character.Statup("Love", 90, 1)
-            $ character.Statup("Inbt", 50, 3)
-
-            call come_and_get_em_lines(character)
-
-        $ character.Statup("Obed", 20, 1)
-        $ character.Statup("Obed", 60, 1)
-        $ character.Statup("Inbt", 70, 2)
-
-        call before_fondle(character, "finger_pussy")
+    if ApprovalCheck(character, 1100, TabM = 2):                           #She's into it. . .
+        call action_accepted(character, "finger_pussy")
 
         return
     else:                                                                               #She's not into it, but maybe. . .
@@ -2129,154 +1448,13 @@ label eat_pussy(character):
         call gently_lines(character)
 
     if Approval >= 2:                                                                   #She's into it. . .
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
-            $ character.Statup("Obed", 90, 1)
-            $ character.Statup("Inbt", 60, 1)
-
-            call forced_but_welcome_lines(character)
-        else:
-            $ character.FaceChange("sexy", 1)
-            $ character.Eyes = "closed"
-            $ character.Statup("Love", 90, 1)
-            $ character.Statup("Inbt", 50, 3)
-            $ character.Statup("Lust", 200, 3)
-
-            call come_and_get_em_lines(character)
-
-        $ character.Statup("Obed", 20, 1)
-        $ character.Statup("Obed", 60, 1)
-        $ character.Statup("Inbt", 70, 2)
-
-        call before_fondle(character, "eat_pussy")
+        call action_accepted(character, "eat_pussy")
 
         return
-
-    else:                                                                               #She's not into it, but maybe. . .
-        $ character.FaceChange("angry", 1)
-
-        if "no_eat_pussy" in character.RecentActions:
-            call just_told_you_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions and "no_eat_pussy" in character.DailyActions:
-            call had_enough_of_this_lines(character)
-        elif "no_eat_pussy" in character.DailyActions:
-            call already_said_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions:
-            call already_said_not_here_lines(character)
-        elif not character.LickP:
-            $ character.FaceChange("bemused")
-
-            call first_time_pussy_eaten_lines(character)
-        else:
-            $ character.FaceChange("bemused")
-
-            call not_ready_yet_lines(character)
-
-        menu:
-            extend ""
-            "Sorry, never mind." if "no_eat_pussy" in character.DailyActions:
-                $ character.FaceChange("bemused")
-
-                call no_problem_lines(character)
-
-                return
-            "I'm sure I can convince you later. . ." if "no_eat_pussy" not in character.DailyActions:
-                $ character.FaceChange("sexy")
-
-                call maybe_later_lines(character)
-
-                $ character.Statup("Love", 80, 2)
-                $ character.Statup("Inbt", 70, 2)
-
-                if Taboo:
-                    $ character.AddWord(1,"tabno","tabno")
-
-                $ character.RecentActions.append("no_eat_pussy")
-                $ character.DailyActions.append("no_eat_pussy")
-
-                return
-            "I think you'd really enjoy it. . .":
-                if Approval:
-                    $ character.FaceChange("sexy")
-                    $ character.Statup("Obed", 90, 2)
-                    $ character.Statup("Obed", 50, 2)
-
-                    call think_would_enjoy_lines(character)
-
-                    $ character.Statup("Inbt", 70, 3)
-                    $ character.Statup("Inbt", 40, 2)
-
-                    call before_fondle(character, "eat_pussy")
-
-                    return
-                else:
-                    $ character.FaceChange("sexy")
-
-                    call unconvinced_lines(character)
-            "[[Get in there anyway]":                                               # Pressured into being licked.
-                $ Approval = ApprovalCheck(character, 750, "OI", TabM = 4) # 75, 90, 105, -160(235)
-
-                if Approval > 1 or (Approval and character.Forced):
-                    $ character.FaceChange("sad")
-                    $ character.Statup("Love", 70, -5, 1)
-                    $ character.Statup("Love", 200, -2)
-
-                    call forced_but_not_unwelcome_lines(character)
-
-                    $ character.Statup("Obed", 50, 4)
-                    $ character.Statup("Inbt", 80, 1)
-                    $ character.Statup("Inbt", 60, 3)
-
-                    if Approval < 2:
-                        $ character.Forced = 1
-
-                    call before_fondle(character, "eat_pussy")
-
-                    return
-                else:
-                    $ character.Statup("Love", 200, -15)
-                    $ character.FaceChange("angry", 1)
-
-                    "She shoves your head back."
-
-                    $ character.AddWord(1,"angry","angry")
-
-    if "no_eat_pussy" in character.DailyActions:
-        call learn_to_take_no_lines(character)
-
-        $ character.AddWord(1,"angry","angry")
-    elif character.Forced:
-        $ character.FaceChange("angry", 1)
-
-        call went_too_far_lines(character)
-
-        $ character.Statup("Lust", 80, 5)
-        $ character.Statup("Obed", 50, -2)
-        $ character.AddWord(1,"angry","angry")
-    elif Taboo:
-        $ character.FaceChange("angry", 1)
-        $ character.AddWord(1,"tabno","tabno")
-
-        call not_in_public_lines(character)
-    elif character.LickP:
-        $ character.FaceChange("sad")
-
-        call you_had_your_shot_lines(character)
     else:
-        $ character.FaceChange("surprised")
+        call action_disapproved(character, action, character.LickP)
 
-        call not_happening_lines(character)
-
-        $ character.FaceChange()
-
-    $ character.RecentActions.append("no_eat_pussy")
-    $ character.DailyActions.append("no_eat_pussy")
-
-    $ temp_modifier = 0
-
-    return
+    call action_rejected(character, "eat_pussy", character.LickP)
 
 label fondle_ass(character):
     $ Round -= 5 if Round > 5 else (Round-1)
@@ -2344,149 +1522,17 @@ label fondle_ass(character):
         call gently_lines(character)
 
     if Approval >= 2:                                                                   #She's into it. . .
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -2, 1)
-            $ character.Statup("Obed", 90, 2)
-            $ character.Statup("Inbt", 60, 2)
-
-            call forced_but_welcome_lines(character)
-
-        else:
-            $ character.FaceChange("bemused, 1")
-
-            call come_and_get_em_lines(character)
-
-        $ character.Statup("Lust", 200, 3)
-        $ character.Statup("Obed", 60, 1)
-        $ character.Statup("Inbt", 70, 1)
-
-        call before_fondle(character, "fondle_ass")
+        call action_accepted(character, "fondle_ass")
 
         return
-    else:                                                                               #She's not into it, but maybe. . .
-        $ character.FaceChange("angry", 1)
-
-        if "no_fondle_ass" in character.RecentActions:
-            call just_told_you_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions and "no_fondle_ass" in character.DailyActions:
-            call had_enough_of_this_lines(character)
-        elif "no_fondle_ass" in character.DailyActions:
-            call already_said_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions:
-            call already_said_not_here_lines(character)
-        elif not character.FondleA:
-            $ character.FaceChange("bemused")
-
-            call not_ready_yet_lines(character)
-        else:
-            $ character.FaceChange("bemused")
-
-            call not_ready_yet_lines(character)
-
-        menu:
-            extend ""
-            "Sorry, never mind." if "no_fondle_ass" in character.DailyActions:
-                $ character.FaceChange("bemused")
-
-                call no_problem_lines(character)
-
-                return
-            "Maybe later?" if "no_fondle_ass" not in character.DailyActions:
-                $ character.FaceChange("sexy")
-
-                call maybe_later_lines(character)
-
-                $ character.Statup("Love", 80, 2)
-                $ character.Statup("Inbt", 50, 2)
-
-                if Taboo:
-                    $ character.AddWord(1,"tabno","tabno")
-
-                $ character.RecentActions.append("no_fondle_ass")
-                $ character.DailyActions.append("no_fondle_ass")
-
-                return
-            "Just one good squeeze?":
-                if Approval:
-                    $ character.FaceChange("sexy")
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 2)
-
-                    call reward_politeness_lines(character)
-
-                    $ character.Statup("Inbt", 70, 1)
-                    $ character.Statup("Inbt", 40, 2)
-
-                    call before_fondle(character, "fondle_ass")
-
-                    return
-                else:
-                    $ character.FaceChange("sexy")
-
-                    call unconvinced_lines(character)
-            "[[Start fondling anyway]":                                               # Pressured into fondling.
-                $ Approval = ApprovalCheck(character, 250, "OI", TabM = 3) # 25, 40, 55, -120(145)
-
-                if Approval > 1 or (Approval and character.Forced):
-                    $ character.FaceChange("sad")
-                    $ character.Statup("Love", 70, -3, 1)
-                    $ character.Statup("Love", 200, -1)
-
-                    call forced_but_not_unwelcome_lines(character)
-
-                    $ character.Statup("Obed", 50, 3)
-                    $ character.Statup("Inbt", 60, 3)
-
-                    if Approval < 2:
-                        $ character.Forced = 1
-
-                    call before_fondle(character, "fondle_ass")
-
-                    return
-                else:
-                    $ character.Statup("Love", 200, -10)
-                    $ character.FaceChange("angry", 1)
-
-                    "She slaps your hand away."
-
-                    $ character.AddWord(1,"angry","angry")
-
-    if "no_fondle_ass" in character.DailyActions:
-        call learn_to_take_no_lines(character)
-
-        $ character.AddWord(1,"angry","angry")
-    elif character.Forced:
-        $ character.FaceChange("angry", 1)
-
-        call went_too_far_lines(character)
-
-        $ character.Statup("Lust", 60, 5)
-        $ character.Statup("Obed", 50, -2)
-        $ character.AddWord(1,"angry","angry")
-    elif Taboo:
-        $ character.FaceChange("angry", 1)
-        $ character.AddWord(1,"tabno","tabno")
-
-        call not_in_public_lines(character)
-    elif character.FondleA:
-        $ character.FaceChange("sad")
-
-        call you_had_your_shot_lines(character)
     else:
-        $ character.FaceChange("sexy")
-        $ character.Mouth = "sad"
+        call action_disapproved(character, action, character.FondleA)
 
-        call not_happening_lines(character)
-
-    $ character.RecentActions.append("no_fondle_ass")
-    $ character.DailyActions.append("no_fondle_ass")
-
-    $ temp_modifier = 0
+    call action_rejected(character, "fondle_ass", character.FondleA)
 
     return
 
-label finger_ass(character, action):
+label finger_ass(character):
     $ Round -= 5 if Round > 5 else (Round-1)
 
     call Shift_Focus(character)
@@ -2531,157 +1577,14 @@ label finger_ass(character, action):
         call gently_lines(character)
 
     if Approval >= 2:                                                                   #She's into it. . .
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
-            $ character.Statup("Obed", 90, 1)
-            $ character.Statup("Inbt", 60, 1)
-
-            call forced_but_welcome_lines(character)
-        else:
-            $ character.FaceChange("sexy", 1)
-            $ character.Eyes = "closed"
-            $ character.Statup("Love", 90, 1)
-            $ character.Statup("Inbt", 50, 3)
-            $ character.Statup("Lust", 200, 3)
-
-            cal come_and_get_em_lines(character)
-
-        $ character.Statup("Obed", 20, 1)
-        $ character.Statup("Obed", 60, 1)
-        $ character.Statup("Inbt", 70, 2)
-
-        call before_fondle(character, "finger_ass")
+        call action_accepted(character, "finger_ass")
 
         return
 
-    else:                                                                               #She's not into it, but maybe. . .
-        $ character.FaceChange("angry", 1)
-
-        if "finger_ass" in character.RecentActions:
-            call just_told_you_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions and "finger_ass" in character.DailyActions:
-            call had_enough_of_this_lines(character)
-        elif "finger_ass" in character.DailyActions:
-            call already_said_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions:
-            call already_said_not_here_lines(character)
-        elif not character.InsertA:
-            $ character.FaceChange("perplexed", 1)
-
-            call not_into_ass_play(character)
-        else:
-            $ character.FaceChange("bemused")
-
-            call rather_not_lines(character)
-
-        menu:
-            extend ""
-            "Sorry, never mind." if "no_finger_ass" in character.DailyActions:
-                $ character.FaceChange("bemused")
-
-                call no_problem_lines(character)
-
-                return
-            "Maybe later?" if "no_finger_ass" not in character.DailyActions:
-                $ character.FaceChange("sexy")
-
-                call maybe_later_lines(character)
-
-                $ character.Statup("Love", 80, 2)
-                $ character.Statup("Inbt", 70, 2)
-
-                if Taboo:
-                    $ character.AddWord(1,"tabno","tabno")
-
-                $ character.RecentActions.append("finger_ass")
-                $ character.DailyActions.append("finger_ass")
-
-                return
-            "I think you'd really enjoy it. . .":
-                if Approval:
-                    $ character.FaceChange("sexy")
-                    $ character.Statup("Obed", 90, 2)
-                    $ character.Statup("Obed", 50, 2)
-
-                    call think_would_enjoy_lines(character)
-
-                    $ character.Statup("Inbt", 70, 3)
-                    $ character.Statup("Inbt", 40, 2)
-
-                    call before_fondle(character, "finger_ass")
-
-                    return
-                else:
-                    $ character.FaceChange("bemused")
-
-                    call unconvinced_lines(character)
-            "[[Slide a finger in anyway]":                                               # Pressured into being fingered.
-                $ Approval = ApprovalCheck(character, 950, "OI", TabM = 3) # 95, 110, 125, -120(215)
-
-                if Approval > 1 or (Approval and character.Forced):
-                    $ character.FaceChange("surprised", 1)
-                    $ character.Statup("Love", 70, -5, 1)
-                    $ character.Statup("Love", 200, -2)
-
-                    call forced_but_not_unwelcome_lines(character)
-
-                    $ character.FaceChange("sad")
-                    $ character.Statup("Obed", 50, 4)
-                    $ character.Statup("Inbt", 80, 1)
-                    $ character.Statup("Inbt", 60, 3)
-
-                    if Approval < 2:
-                        $ character.Forced = 1
-
-                    call before_fondle(character, "finger_ass")
-
-                    return
-                else:
-                    $ character.Statup("Love", 200, -15)
-                    $ character.FaceChange("angry", 1)
-
-                    "She slaps your hand away."
-
-                    $ character.AddWord(1,"angry","angry")
-
-    if "finger_ass" in character.DailyActions:
-        call learn_to_take_no_lines(character)
-
-        $ character.AddWord(1,"angry","angry")
-    elif character.Forced:
-        $ character.FaceChange("angry", 1)
-
-        call went_too_far_lines(character)
-
-        if ApprovalCheck(character, 500, "I"):
-            $ character.Statup("Lust", 80, 10)
-        else:
-            $ character.Statup("Lust", 50, 3)
-
-        $ character.Statup("Obed", 50, -2)
-        $ character.AddWord(1,"angry","angry")
-    elif Taboo:
-        $ character.FaceChange("angry", 1)
-        $ character.AddWord(1,"tabno","tabno")
-
-        call not_in_public_lines(character)
-    elif character.InsertA:
-        $ character.FaceChange("sad")
-
-        call you_had_your_shot_lines(character)
     else:
-        $ character.FaceChange("surprised")
+        call action_disapproved(character, "finger_ass", character.InsertA)
 
-        cal not_happening_lines(character)
-
-        $ character.FaceChange()
-
-    $ character.RecentActions.append("finger_ass")
-    $ character.DailyActions.append("finger_ass")
-
-    $ temp_modifier = 0
+    call action_rejected(character, "finger_ass", character.InsertA)
 
     return
 
@@ -2732,155 +1635,13 @@ label eat_ass(character):
         call gently_lines(character)
 
     if Approval >= 2:                                                                   #She's into it. . .
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
-            $ character.Statup("Obed", 90, 2)
-            $ character.Statup("Inbt", 60, 2)
-
-            call forced_but_welcome_lines(character)
-        else:
-            $ character.FaceChange("sexy", 1)
-            $ character.Eyes = "closed"
-            $ character.Statup("Love", 90, 1)
-            $ character.Statup("Inbt", 60, 2)
-            $ character.Statup("Lust", 200, 3)
-
-            call come_and_get_em_lines(character)
-
-        $ character.Statup("Obed", 20, 1)
-        $ character.Statup("Obed", 60, 1)
-        $ character.Statup("Inbt", 80, 2)
-
-        call before_fondle(character, "eat_ass")
+        call action_accepted(character, "eat_ass")
 
         return
 
     else:                                                                               #She's not into it, but maybe. . .
-        $ character.FaceChange("angry", 1)
+        call action_disapproved(character, "eat_ass", character.LickA)
 
-        if "no_eat_ass" in character.RecentActions:
-            call just_told_you_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions and "no_eat_ass" in character.DailyActions:
-            call had_enough_of_this_lines(character)
-        elif "no_eat_ass" in character.DailyActions:
-            call already_said_no_lines(character)
-        elif Taboo and "tabno" in character.DailyActions:
-            call already_said_not_here_lines(character)
-        elif not character.LickA:                    #First time dialog
-            $ character.FaceChange("bemused", 1)
-
-            call first_time_ass_eaten_lines(character)
-        else:
-            $ character.FaceChange("bemused")
-
-            call not_ready_yet_lines(character)
-
-        menu:
-            extend ""
-            "Sorry, never mind." if "no_eat_ass" in character.DailyActions:
-                $ character.FaceChange("bemused")
-
-                call no_problem_lines(character)
-
-                return
-            "I'm sure I can convince you later. . ." if "no_eat_ass" not in character.DailyActions:
-                $ character.FaceChange("sexy")
-
-                call maybe_later_lines(character)
-
-                $ character.Statup("Love", 80, 2)
-                $ character.Statup("Inbt", 70, 2)
-
-                if Taboo:
-                    $ character.AddWord(1,"tabno","tabno")
-
-                $ character.RecentActions.append("no_eat_ass")
-                $ character.DailyActions.append("no_eat_ass")
-
-                return
-            "I think you'd really enjoy it. . .":
-                if Approval:
-                    $ character.FaceChange("sexy")
-                    $ character.Statup("Obed", 90, 2)
-                    $ character.Statup("Obed", 50, 2)
-
-                    call think_would_enjoy_lines(character)
-
-                    $ character.Statup("Inbt", 70, 3)
-                    $ character.Statup("Inbt", 40, 2)
-
-                    call before_fondle(character, "eat_ass")
-
-                    return
-                else:
-                    $ character.FaceChange("sexy")
-
-                    call unconvinced_lines(character)
-            "[[Start licking anyway]":                                               # Pressured into being licked.
-                $ Approval = ApprovalCheck(character, 1100, "OI", TabM = 4) # 110, 125, 140, -160(270)
-
-                if Approval > 1 or (Approval and character.Forced):
-                    $ character.FaceChange("sad")
-                    $ character.Statup("Love", 70, -5, 1)
-                    $ character.Statup("Love", 200, -2)
-
-                    call forced_but_not_unwelcome_lines(character)
-
-                    $ character.Statup("Obed", 50, 4)
-                    $ character.Statup("Inbt", 80, 1)
-                    $ character.Statup("Inbt", 60, 3)
-
-                    if Approval < 2:
-                        $ character.Forced = 1
-
-                    call before_fondle(character, "eat_ass")
-
-                    return
-                else:
-                    $ character.Statup("Love", 200, -15)
-                    $ character.FaceChange("angry", 1)
-
-                    "She shoves your head back."
-
-                    $ character.AddWord(1,"angry","angry")
-
-    if "no_eat_ass" in character.DailyActions:
-        call learn_to_take_no_lines(character)
-
-        $ character.AddWord(1,"angry","angry")
-    elif character.Forced:
-        $ character.FaceChange("angry", 1)
-
-        call went_too_far_lines(character)
-
-        if ApprovalCheck(character, 500, "I"):
-            $ character.Statup("Lust", 80, 10)
-        else:
-            $ character.Statup("Lust", 50, 3)
-
-        $ character.Statup("Obed", 50, -2)
-        $ character.AddWord(1,"angry","angry")
-    elif Taboo:
-        $ character.FaceChange("angry", 1)
-        $ character.AddWord(1,"tabno","tabno")
-
-        call not_in_public_lines(character)
-    elif character.LickP:
-        $ character.FaceChange("sad")
-
-        call you_had_your_shot_lines(character)
-    else:
-        $ character.FaceChange("surprised")
-
-        call not_happening_lines(character)
-
-        $ character.FaceChange()
-
-    $ character.RecentActions.append("no_eat_ass")
-    $ character.DailyActions.append("no_eat_ass")
-
-    $ temp_modifier = 0
+    call action_rejected(character, "eat_ass", character.LickA)
 
     return

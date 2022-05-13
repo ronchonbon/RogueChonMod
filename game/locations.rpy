@@ -1,4 +1,4 @@
-label Worldmap:   
+label Worldmap:
     scene bg_campus onlayer backdrop
     scene
     $ Taboo = 0
@@ -167,13 +167,11 @@ label Campus:
 
         "Chat":
             call Chat
-
         "Wait." if Time_Count < 3: #not night time
             "You wait around a bit."
             call Wait
             call EventCalls
             call Girls_Location
-
         "Go to my Room" if TravelMode:
                     jump player_room_entry
         "Girl's Rooms" if TravelMode:

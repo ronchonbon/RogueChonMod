@@ -1,3 +1,13 @@
+image Dildo_Animation:
+    contains:
+        "UI_Dildo"
+        block:
+            ease 1 pos (100,300) #pos (0,50)
+            ease 1 pos (100,400) #pos (0,0)
+            repeat
+
+image AssBase:                  #This is the base image, used in masks
+    "images/RogueDoggy/Rogue_Doggy_Ass.png"
 
 image Spunk_Drip:
         #the minor dripping animation

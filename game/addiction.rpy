@@ -857,7 +857,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                                                     ch_s "So long as you provide me what I need as well."
                                             elif Girl == JubesX:
                                                     ch_v "Ok, we'll see. . ."
-                                    call expression Girl.Tag + "_Fondle_Thighs"
+                                    call fondle_thighs(Girl)
                                     if "fondle thighs" in Girl.RecentActions:
                                             $ Girl.Statup("Obed", 50, 5)
                                             $ Girl.Statup("Inbt", 50, 5)

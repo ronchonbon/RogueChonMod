@@ -166,8 +166,6 @@ label start:
     show screen Status_Screen
     show screen Inventorybutton
 
-    if config.developer:
-        jump Dev_Room
     jump prologue
 
 label after_load:

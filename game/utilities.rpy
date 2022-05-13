@@ -3582,13 +3582,13 @@ label ViewShift(Girl=0,View=0,ShouldHide=1,ViewTrig=Trigger):
                             call pussy_launch(Girl, trigger = ViewTrig)
                     "Rear view" if Girl in (RogueX,KittyX,EmmaX,LauraX,JeanX):
                             $ Girl.Pose = "doggy"
-                            call expression Girl.Tag + "_Sex_Launch" pass (ViewTrig)
+                            call sex_launch(Girl, ViewTrig)
                     "On top of you" if Girl in (EmmaX,JeanX,StormX):
                             $ Girl.Pose = "sex"
-                            call expression Girl.Tag + "_Sex_Launch" pass (ViewTrig)
+                            call sex_launch(Girl, ViewTrig)
                     "Laying down" if Girl in (RogueX,KittyX,LauraX):
                             $ Girl.Pose = "sex"
-                            call expression Girl.Tag + "_Sex_Launch" pass (ViewTrig)
+                            call sex_launch(Girl, ViewTrig)
                     "Never mind":
                             pass
     else:
@@ -3603,7 +3603,7 @@ label ViewShift(Girl=0,View=0,ShouldHide=1,ViewTrig=Trigger):
                     elif View == "pussy":
                             call pussy_launch(Girl, trigger = ViewTrig)
                     elif View == "doggy" or View == "sex":
-                            call expression Girl.Tag + "_Sex_Launch" pass (ViewTrig)
+                            call sex_launch(Girl, ViewTrig)
                     elif View == "kiss":
                             call kissing_launch(Girl, trigger = ViewTrig)
     return
@@ -3629,7 +3629,7 @@ label AllReset(Chr = 0,BO=[]): #rkeljsv
             call expression BO[0].Tag + "_BJ_Reset"
             call expression BO[0].Tag + "_TJ_Reset"
             call expression BO[0].Tag + "_HJ_Reset"
-            call expression BO[0].Tag + "_Sex_Reset"
+            call sex_reset(BO[0])
             call expression BO[0].Tag + "_Doggy_Reset"
             call hide_girl(BO[0])
             if BO[0] == RogueX:

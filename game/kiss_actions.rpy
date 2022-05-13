@@ -202,7 +202,7 @@ label KissPrep(Girl=Ch_Focus):
     $ Girl.Statup("Inbt", 10, 1)
     $ Girl.Statup("Inbt", 20, 1)
 
-    call kissing_launch(Girl, "kiss you")
+    call kissing_launch(Girl, "kiss_you")
 
     if Girl.Kissed >= 10 and Girl.Inbt >= 300:
             $ Girl.FaceChange("sucking")
@@ -280,7 +280,7 @@ label KissPrep(Girl=Ch_Focus):
             $ Line = "You and "+ Girl.Name +" make out for a while."
     "[Line]"
     $ Cnt = 0
-    $ Trigger = "kiss you"
+    $ Trigger = "kiss_you"
     $ Line = 0
     if Situation:
         $ renpy.pop_call()
@@ -291,7 +291,7 @@ label KissCycle(Girl=0):
 
     while Round > 0:
         call Shift_Focus(Girl)
-        call kissing_launch(Girl, "kiss you")
+        call kissing_launch(Girl, "kiss_you")
         $ Girl.LustFace()
         $ Player.Focus -= 10 if Player.FocusX and Player.Focus > 50 else 0
         if  Player.Focus < 100:
@@ -329,7 +329,7 @@ label KissCycle(Girl=0):
                                                     if Trigger2:
                                                          $ Girl.Action -= 1
                                             else:
-                                                    call tired_dialog(Girl)
+                                                    call tired_lines(Girl)
                                                     #"I'm actually getting a little tired, so maybe we could wrap this up?"
 
                                     "Shift primary action":
@@ -341,13 +341,13 @@ label KissCycle(Girl=0):
                                                                     call Kiss_After
                                                                     call fondle_breasts(Girl)
                                                                     if Trigger == "fondle breasts":
-                                                                        $ Trigger2 = "kiss you"
+                                                                        $ Trigger2 = "kiss_you"
                                                                         call fondle_breasts_prep(Girl)
                                                                     else:
-                                                                        $ Trigger = "kiss you"
+                                                                        $ Trigger = "kiss_you"
                                                                 else:
                                                                     "As your hands creep upwards, she grabs your wrists."
-                                                                    call tired_dialog(Girl)
+                                                                    call tired_lines(Girl)
                                                                     #"I'm actually getting a little tired, so maybe we could wrap this up?"
                                                         "Move a hand to her thighs. . ." if Girl.Kissed >= 1 and MultiAction:
                                                                 if Girl.Action and MultiAction:
@@ -355,18 +355,18 @@ label KissCycle(Girl=0):
                                                                     call Kiss_After
                                                                     call fondle_thighs(Girl)
                                                                     if Trigger == "fondle thighs":
-                                                                            $ Trigger2 = "kiss you"
+                                                                            $ Trigger2 = "kiss_you"
                                                                             call fondle_thighs_prep(Girl)
                                                                     else:
-                                                                            $ Trigger = "kiss you"
+                                                                            $ Trigger = "kiss_you"
                                                                 else:
                                                                     "As your hands creep downwards, she grabs your wrists."
-                                                                    call tired_dialog(Girl)
+                                                                    call tired_lines(Girl)
                                                                     #"I'm actually getting a little tired, so maybe we could wrap this up?"
                                                         "Never Mind":
                                                                     jump KissCycle
                                             else:
-                                                                    call tired_dialog(Girl)
+                                                                    call tired_lines(Girl)
                                                                     #"I'm actually getting a little tired, so maybe we could wrap this up?"
                                     "Threesome actions (locked)" if not Partner:
                                         pass

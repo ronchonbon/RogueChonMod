@@ -643,7 +643,7 @@ label Primary_SexDialog(GirlA=Primary,TempLine = 0, TempLust = 0, TempLust2 = 0)
 
     # end GirlA.Anal                                 //////////////////////////////////////////////////////////////////////////////
 
-    elif Trigger == "fondle breasts":
+    elif Trigger == "fondle_breasts":
                     $ Line = "You continue to fondle " + GirlA.Name + ". "
                     if not GirlA.Uptop and GirlA.Over and GirlA.Chest:
                                 #Full top
@@ -745,7 +745,7 @@ label Primary_SexDialog(GirlA=Primary,TempLine = 0, TempLust = 0, TempLust2 = 0)
 
     # end Suck breasts                                 //////////////////////////////////////////////////////////////////////////////
 
-    elif Trigger == "fondle thighs":  #Trigger4 not available
+    elif Trigger == "fondle_thighs":  #Trigger4 not available
                     $ Line = "You continue to massage " + GirlA.Name + "'s thighs. "
 
                     if GirlA.PantsNum() > 6 and not GirlA.Upskirt:
@@ -823,7 +823,7 @@ label Primary_SexDialog(GirlA=Primary,TempLine = 0, TempLust = 0, TempLust2 = 0)
     # end fondle thighs                               //////////////////////////////////////////////////////////////////////////////
 
 
-    elif Trigger == "fondle pussy":
+    elif Trigger == "fondle_pussy":
                     if Speed == 2 and D20S <= 10:
                             $ Line = renpy.random.choice(["You continue to finger " + GirlA.Name + "'s pussy. ",
                                                     "You continue to finger bang " + GirlA.Name + "'s pussy. ",
@@ -988,7 +988,7 @@ label Primary_SexDialog(GirlA=Primary,TempLine = 0, TempLust = 0, TempLust2 = 0)
     # end fondle pussy                               /////////////////////////////////////////////////////////////////////////////
 
 
-    elif Trigger == "lick pussy":
+    elif Trigger == "eat_pussy":
                             $ Line = renpy.random.choice(["You continue to lick " + GirlA.Name + "'s pussy. ",
                                                     "You continue to suck " + GirlA.Name + "'s pussy. ",
                                                     "You continue to tongue " + GirlA.Name + "'s pussy. "])
@@ -1124,7 +1124,7 @@ label Primary_SexDialog(GirlA=Primary,TempLine = 0, TempLust = 0, TempLust2 = 0)
 
     # end lick pussy                               /////////////////////////////////////////////////////////////////////////////
 
-    elif Trigger == "fondle ass":
+    elif Trigger == "fondle_ass":
                         $ Line = renpy.random.choice(["You continue to fondle " + GirlA.Name + "'s ass. ",
                                                 "You continue to feel up " + GirlA.Name + "'s ass. ",
                                                 "You continue to grope " + GirlA.Name + "'s ass. "])
@@ -1229,7 +1229,7 @@ label Primary_SexDialog(GirlA=Primary,TempLine = 0, TempLust = 0, TempLust2 = 0)
 
     # end fondle ass                               /////////////////////////////////////////////////////////////////////////////
 
-    elif Trigger == "insert ass":
+    elif Trigger == "finger_ass":
                             $ Line = renpy.random.choice(["You continue to finger " + GirlA.Name + "'s asshole. ",
                                                     "You continue to finger bang " + GirlA.Name + "'s asshole. ",
                                                     "You continue to finger " + GirlA.Name + "'s rim. "])
@@ -1288,7 +1288,7 @@ label Primary_SexDialog(GirlA=Primary,TempLine = 0, TempLust = 0, TempLust2 = 0)
 
     # end insert ass                              /////////////////////////////////////////////////////////////////////////////
 
-    elif Trigger == "lick ass":
+    elif Trigger == "eat_ass":
                             $ Line = renpy.random.choice(["You continue to lick " + GirlA.Name + "'s ass. ",
                                                     "You continue to suck " + GirlA.Name + "'s ass. ",
                                                     "You continue to tongue " + GirlA.Name + "'s ass. "])
@@ -1407,7 +1407,7 @@ label Primary_SexDialog(GirlA=Primary,TempLine = 0, TempLust = 0, TempLust2 = 0)
 
     # end lick ass                               /////////////////////////////////////////////////////////////////////////////
 
-    elif Trigger == "dildo pussy":
+    elif Trigger == "dildo_pussy":
                         if GirlA.PantsNum() > 6 and not GirlA.Upskirt:
                                 $ Line = renpy.random.choice(["You rub the dildo against the outside of her pants",
                                         "You slap the dildo lightly against her mound"])
@@ -1460,7 +1460,7 @@ label Primary_SexDialog(GirlA=Primary,TempLine = 0, TempLust = 0, TempLust2 = 0)
                                     $ TempLust += 10 if GirlA.Lust > 70 else 8
     # end dildo pussy                              /////////////////////////////////////////////////////////////////////////////
 
-    elif Trigger == "dildo anal":
+    elif Trigger == "dildo_anal":
                         if GirlA.PantsNum() > 6 and not GirlA.Upskirt:
                                 $ Line = renpy.random.choice(["You rub the dildo against the outside of her pants",
                                         "You slap the dildo lightly against her ass"])
@@ -1526,7 +1526,7 @@ label Primary_SexDialog(GirlA=Primary,TempLine = 0, TempLust = 0, TempLust2 = 0)
     elif Trigger == "lesbian":
                 call SexDialog_Threeway(GirlA,"lesbian",GirlB=Partner) #Rog*ue_SexDialog_Threeway("lesbian")
 
-    elif Trigger == "foot":
+    elif Trigger == "footjob":
                         $ Line = GirlA.Name + " continues stroke your cock with her feet. "
 
                         if not Speed:
@@ -1665,7 +1665,7 @@ label Primary_SexDialog(GirlA=Primary,TempLine = 0, TempLust = 0, TempLust2 = 0)
 
     #End Psychic dialog ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    elif Trigger == "kiss you":
+    elif Trigger == "kiss_you":
                         $ GirlA.Addict -= 3
                         $ GirlA.Addict -= 3 if GirlA == JubesX else 0
                         if GirlA.Kissed > 10 and GirlA.Love >= 700:#Loving
@@ -1724,7 +1724,7 @@ label Offhand_Dialog(Girl=Primary, TempLine=0):
 
     $ D20X = renpy.random.randint(1,20)
 
-    if Trigger2 == "kiss you":
+    if Trigger2 == "kiss_you":
                 $ Line = renpy.random.choice([" Your lips gently slide across hers.",
                         " Her lips part as you hold her close.",
                         " You nibble her neck as she groans in pleasure.",
@@ -1738,7 +1738,7 @@ label Offhand_Dialog(Girl=Primary, TempLine=0):
                         $ Girl.Statup("Love", 75, 1)
                 $ PrimaryLust += 2 if Girl.Lust < 50 else 1
 
-    elif Trigger2 == "fondle breasts":
+    elif Trigger2 == "fondle_breasts":
                 if Girl == EmmaX and D20X >= 15:
                     $ Line = " You reach out and massage her enormous breasts."
                     $ PrimaryLust += 1
@@ -1772,7 +1772,7 @@ label Offhand_Dialog(Girl=Primary, TempLine=0):
             $ PrimaryLust += 4 if 60 < Girl.Lust < 80 else 2
             $ TempFocus += 3 if Player.Focus < 90 else 0
 
-    elif Trigger2 == "fondle pussy":
+    elif Trigger2 == "fondle_pussy":
             if Girl.Pubes and D20X >= 15:
                 $ Line = " You draw your hand along her furry bush, dripping with her excitement."
             elif D20X >= 15:
@@ -1787,7 +1787,7 @@ label Offhand_Dialog(Girl=Primary, TempLine=0):
             $ PrimaryLust += 4 if 60 < Girl.Lust < 90 else 2
             $ TempFocus += 4 if Player.Focus < 90 else 0
 
-    elif Trigger2 == "lick pussy":
+    elif Trigger2 == "eat_pussy":
             if Girl.PantsNum() <= 5 and Girl.PantiesNum() <= 1:
                 if Girl.Pubes and D20X >= 15:
                     $ Line = " You press you nose into her furry bush, dripping with her excitement."
@@ -1811,7 +1811,7 @@ label Offhand_Dialog(Girl=Primary, TempLine=0):
             $ PrimaryLust += 5 if Girl.Lust > 50 else 2
             $ TempFocus += 4 if Player.Focus < 90 else 0
 
-    elif Trigger2 == "fondle ass":
+    elif Trigger2 == "fondle_ass":
             $ Line = renpy.random.choice([" You reach out and brush your hands across her ass.",
                     " You put your hand against her firm rear and grind against it.",
                     " You reach between her legs and she gasps as you stroke along her crevice.",
@@ -1822,7 +1822,7 @@ label Offhand_Dialog(Girl=Primary, TempLine=0):
             $ TempFocus += 1 if Player.Focus < 50 else 0
             $ TempFocus += 1 if Player.Focus < 80 else 0
 
-    elif Trigger2 == "insert ass":
+    elif Trigger2 == "finger_ass":
             $ Line = renpy.random.choice([" You reach out and slide a finger into her ass.",
                     " You slide a finger into her asshole and stroke the roof of it.",
                     " You can feel her twitching as you press your thumb against her clit.",
@@ -1862,32 +1862,50 @@ label Offhand_Dialog(Girl=Primary, TempLine=0):
     return
     #End Offhand check
 
-label Offhand_Set(Situation = Situation, TempTrigger = Trigger2,Chr=0):
+label Offhand_Set(Situation = Situation, TempTrigger = Trigger2,character=0):
     #called by various sex activities to set Trigger 2, which is the player's secondary action related to the primary girl
     #if the Situation is "shift focus," it means that the player is attempting to make his secondary action into his primary one.
-    $ Chr = GirlCheck(Chr)
+    $ character = GirlCheck(character)
     if Situation == "shift focus":
             if TempTrigger:
                 $ Trigger2 = 0
-                if TempTrigger == "fondle breasts":
+                if TempTrigger == "fondle_breasts":
                         "You shift your attention to her breasts."
-                        jump expression Chr.Tag + "_FB_Prep"
+
+                        call before_fondle(character, "fondle_breasts")
+
+                        return
                 elif TempTrigger == "suck breasts":
                         "You shift your attention to her breasts."
-                        jump expression Chr.Tag + "_SB_Prep"
-                elif TempTrigger == "fondle pussy":
+
+                        call before_fondle(character, "suck_breasts")
+
+                        return
+                elif TempTrigger == "fondle_pussy":
                         "You shift your attention to her pussy."
-                        jump expression Chr.Tag + "_FP_Prep"
-                elif TempTrigger == "lick pussy":
+
+                        call before_fondle(character, "fondle_pussy")
+
+                        return
+                elif TempTrigger == "eat_pussy":
                         "You shift your attention to her pussy."
-                        jump expression Chr.Tag + "_LP_Prep"
-                elif TempTrigger == "fondle ass":
+
+                        call before_fondle(character, "lick_pussy")
+
+                        return
+                elif TempTrigger == "fondle_ass":
                         "You shift your attention to her ass."
-                        jump expression Chr.Tag + "_FA_Prep"
-                elif TempTrigger == "insert ass":
+
+                        call before_fondle(character, "fondle_ass")
+
+                        return
+                elif TempTrigger == "finger_ass":
                         "You shift your attention to her ass."
-                        jump expression Chr.Tag + "_IA_Prep"
-                else: #If Trigger2 is "kiss you"
+
+                        call before_fondle(character, "finger_ass")
+
+                        return
+                else: #If Trigger2 is "kiss_you"
                         "You go back to kissing her deeply."
                         jump KissPrep
             else: #if there's no Trigger2
@@ -1898,32 +1916,32 @@ label Offhand_Set(Situation = Situation, TempTrigger = Trigger2,Chr=0):
     if Trigger:
         $ Situation = "auto"
         menu:
-            "Also kiss her." if Trigger in ("fondle breasts","fondle pussy", "fondle thighs", "fondle ass", "insert ass", "sex", "anal", "hotdog", "dildo pussy", "dildo anal"):
+            "Also kiss her." if Trigger in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "sex", "anal", "hotdog", "dildo_pussy", "dildo_anal"):
                     "You lean in and start kissing her."
-                    $ Trigger2 = "kiss you"
+                    $ Trigger2 = "kiss_you"
 
-            "Also fondle her breasts." if Trigger in ("kiss you","fondle pussy", "fondle thighs", "fondle ass", "insert ass", "suck breasts", "lick pussy", "lick ass", "sex", "anal", "hotdog", "foot", "dildo pussy", "dildo anal"):
-                    $ Trigger2 = "fondle breasts"
-                    call fondle_breasts(Chr)
+            "Also fondle her breasts." if Trigger in ("kiss_you","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
+                    $ Trigger2 = "fondle_breasts"
+                    call fondle_breasts(character)
 
-            "Also suck her breasts." if Trigger in ("fondle breasts","fondle pussy", "fondle thighs", "fondle ass", "insert ass", "sex", "anal", "hotdog", "dildo pussy", "dildo anal"):
+            "Also suck her breasts." if Trigger in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "sex", "anal", "hotdog", "dildo_pussy", "dildo_anal"):
                     $ Trigger2 = "suck breasts"
-                    call suck_breasts(Chr)
+                    call suck_breasts(character)
 
-            "Also fondle her pussy." if Trigger in ("kiss you","fondle breasts","fondle thighs", "fondle ass", "insert ass", "suck breasts", "lick pussy", "lick ass", "sex", "anal", "hotdog", "foot", "dildo pussy", "dildo anal"):
-                    $ Trigger2 = "fondle pussy"
-                    call expression Chr.Tag + "_Fondle_Pussy"
+            "Also fondle her pussy." if Trigger in ("kiss_you","fondle_breasts","fondle_thighs", "fondle_ass", "finger_ass", "suck breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
+                    $ Trigger2 = "fondle_pussy"
+                    call fondle_pussy(character)
 
-            "Also fondle her ass." if Trigger in ("kiss you","fondle breasts","fondle pussy", "fondle thighs", "insert ass", "suck breasts", "lick pussy", "lick ass", "sex", "anal", "hotdog", "foot", "dildo pussy", "dildo anal"):
-                    $ Trigger2 = "fondle ass"
-                    call expression Chr.Tag + "_Fondle_Ass"
+            "Also fondle her ass." if Trigger in ("kiss_you","fondle_breasts","fondle_pussy", "fondle_thighs", "finger_ass", "suck breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
+                    $ Trigger2 = "fondle_ass"
+                    call fondle_ass(character)
 
-            "Also finger her ass." if Trigger in ("fondle breasts","fondle pussy", "fondle thighs", "fondle ass", "suck breasts", "lick pussy", "lick ass", "sex", "hotdog", "foot", "dildo pussy"):
-                    $ Trigger2 = "insert ass"
-                    call expression Chr.Tag + "_Insert_Ass"
+            "Also finger her ass." if Trigger in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "suck breasts", "eat_pussy", "eat_ass", "sex", "hotdog", "footjob", "dildo_pussy"):
+                    $ Trigger2 = "finger_ass"
+                    call finger_ass(character)
 
-            "Also jack it." if Trigger in ("fondle breasts","fondle pussy", "fondle thighs", "fondle ass", "insert ass", "suck breasts", "lick pussy", "lick ass", "dildo pussy", "dildo anal"):
-                    call Jackin(Chr)
+            "Also jack it." if Trigger in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck breasts", "eat_pussy", "eat_ass", "dildo_pussy", "dildo_anal"):
+                    call Jackin(character)
 
             "Nevermind":
                 pass
@@ -1990,7 +2008,7 @@ label Girl_Self_Lines(GirlA = Primary, Mode = "T3", Action = Trigger3, TempLustX
                         $ GirlA.Addict -= 1
     else:
         if GirlA.Lust >= 80:
-                if Action == "fondle pussy":
+                if Action == "fondle_pussy":
                         $ Line = Line + renpy.random.choice(["Her hand rapidly moves across her mound, firmly stroking her clit",
                                 "She inserts two fingers into her dripping pussy and rapidly pistons them",
                                 "She gasps as her fingers bury themselves deeply inside her",
@@ -2003,12 +2021,12 @@ label Girl_Self_Lines(GirlA = Primary, Mode = "T3", Action = Trigger3, TempLustX
                                 "She rapidly circles her fingers against her erect clit",
                                 "She quickly slides a finger up and down the crease of her pussy",
                                 "She lets out a moan as her fingers brush against her erect clit"])
-                elif Action == "dildo pussy":
+                elif Action == "dildo_pussy":
                         $ Line = Line + renpy.random.choice(["She moves the dildo in circles across her mound, firmly rubbing into it",
                                 "She hungrily slams the dildo into her tight pussy, and pistons it in and out",
                                 "She shoves the dildo firmly in and out of her grasping pussy",
                                 "She quickly slides the phallus up and down her crease"])
-                elif Action == "fondle ass":
+                elif Action == "fondle_ass":
                         $ Line = Line + renpy.random.choice(["Her hand rapidly moves across her ass, firmly stroking her tight hole",
                                 "She inserts a finger deep into her grasping hole and rapidly pistons it",
                                 "She gasps as she buries a finger deeply into her tight anus",
@@ -2019,7 +2037,7 @@ label Girl_Self_Lines(GirlA = Primary, Mode = "T3", Action = Trigger3, TempLustX
                                 "She slides two fingers firmly in and out of her tight hole",
                                 "She rapidly circles her fingers against the sensitive rim",
                                 "She lets out a moan as her fingers brush against her quivering hole"])
-                elif Action == "dildo anal":
+                elif Action == "dildo_anal":
                         $ Line = Line + renpy.random.choice(["She moves the dildo in circles across her ass, firmly rubbing into it",
                                 "She hungrily slams the dildo into her tight hole, and pistons it in and out",
                                 "She shoves the dildo firmly in and out of her grasping asshole",
@@ -2032,7 +2050,7 @@ label Girl_Self_Lines(GirlA = Primary, Mode = "T3", Action = Trigger3, TempLustX
                                 "Her whirring toy is dragged up and down her inner thighs, slowly building towards their center",
                                 "She  spreads her lower lips and runs the device along the inner lining",
                                 "She presses the toy deep into her and the vibrations send a shock through her body"])
-                else: # Action == "fondle breasts"
+                else: # Action == "fondle_breasts"
                         $ Line = Line + renpy.random.choice(["She passionately rubs her breasts, desperately tugging at her nipples",
                                 "Her hands squeeze at her breasts, massaging them firmly with both hands",
                                 "She hungrily cups her breasts and moves them in rapid circles",
@@ -2041,7 +2059,7 @@ label Girl_Self_Lines(GirlA = Primary, Mode = "T3", Action = Trigger3, TempLustX
                                 "She passionately rubs her breasts, desperately tugging at her nipples"])
         #End GirlA.Lust >= 80
         elif GirlA.Lust >= 50:
-                if Action == "fondle pussy":
+                if Action == "fondle_pussy":
                         $ Line = Line + renpy.random.choice(["Her hand moves in circles across her mound, firmly rubbing into it",
                                 "Her hands move along her sides, carefully caressing them",
                                 "Her fingers move smoothly across her delta, occasionally grazing her lips",
@@ -2049,7 +2067,7 @@ label Girl_Self_Lines(GirlA = Primary, Mode = "T3", Action = Trigger3, TempLustX
                                 "She slowly spreads her lower lips and caresses the inner lining",
                                 "She gently slides a finger up and down the crease of her pussy",
                                 "She lets out a gasp as her fingers brush against her erect clit"])
-                elif Action == "dildo pussy":
+                elif Action == "dildo_pussy":
                         $ Line = Line + renpy.random.choice(["She moves the dildo in circles across her mound, firmly rubbing into it",
                                 "She traces the rubber phallus slowly down her body, barely grazing her mound",
                                 "Her dildo slides lightly across her pubic region, subtly avoiding her lips",
@@ -2057,7 +2075,7 @@ label Girl_Self_Lines(GirlA = Primary, Mode = "T3", Action = Trigger3, TempLustX
                                 "She slowly spreads her lower lips and caresses the inner lining",
                                 "She gently slides the phallus up and down the crease of her pussy",
                                 "She drags the dildo slowly along her sides, carefully caressing them"])
-                elif Action == "fondle ass":
+                elif Action == "fondle_ass":
                         $ Line = Line + renpy.random.choice(["Her hand moves in circles across her ass, firmly rubbing into it",
                                 "Her hands move along her sides, carefully caressing them",
                                 "Her fingers move smoothly along her crack, occasionally grazing her asshole",
@@ -2065,7 +2083,7 @@ label Girl_Self_Lines(GirlA = Primary, Mode = "T3", Action = Trigger3, TempLustX
                                 "She slowly spreads her cheeks and caresses the tight hole within",
                                 "She gently slides a finger up and down the crease of ass",
                                 "She lets out a gasp as her fingers brush against her puckered hole"])
-                elif Action == "dildo anal":
+                elif Action == "dildo_anal":
                         $ Line = Line + renpy.random.choice(["She traces the rubber phallus slowly down her body, barely grazing her ass",
                                 "Her dildo slides lightly across her crack, subtly avoiding the hole",
                                 "Her dildo is dragged up and down her inner thighs, slowly building towards their center",
@@ -2077,7 +2095,7 @@ label Girl_Self_Lines(GirlA = Primary, Mode = "T3", Action = Trigger3, TempLustX
                                 "Her whirring toy is dragged up and down her inner thighs, slowly building towards their center",
                                 "She slowly spreads her lower lips and caresses the inner lining",
                                 "She drags the vibrator slowly along her sides, carefully caressing them"])
-                else: # Action == "fondle breasts"
+                else: # Action == "fondle_breasts"
                         $ Line = Line + renpy.random.choice(["She gently rubs her breasts, dragging a finger across her nipple",
                                 "She gently cups her breasts and moves them in slow circles",
                                 "She moves her hands from her breasts to rub her neck",
@@ -2087,24 +2105,24 @@ label Girl_Self_Lines(GirlA = Primary, Mode = "T3", Action = Trigger3, TempLustX
                                 "She gasps as her finger brushes against an erect nipple"])
         #End GirlA.Lust >= 50
         else: #if GirlA.Lust < 50:
-                if Action == "fondle pussy":
+                if Action == "fondle_pussy":
                         $ Line = Line + renpy.random.choice(["Her hand traces slowly down her body, barely grazing her mound",
                                 "Her fingers move lightly across her pubic region, subtly avoiding her lips",
                                 "Her fingers move up and down her inner thighs, slowly building towards their center",
                                 "She slowly spreads her lower lips and caresses the inner lining",
                                 "Her hands move along her sides, carefully caressing them"])
-                elif Action == "dildo pussy":
+                elif Action == "dildo_pussy":
                         $ Line = Line + renpy.random.choice(["She traces the rubber phallus slowly down her body, barely grazing her mound",
                                 "Her dildo slides lightly across her pubic region, subtly avoiding her lips",
                                 "Her dildo is dragged up and down her inner thighs, slowly building towards their center",
                                 "She slowly spreads her lower lips and caresses the inner lining",
                                 "She drags the dildo slowly along her sides, carefully caressing them"])
-                elif Action == "fondle ass":
+                elif Action == "fondle_ass":
                         $ Line = Line + renpy.random.choice(["Her hand traces slowly down her body, barely passing smoothly across her hips",
                                 "Her fingers move lightly across her crack, subtly avoiding her rosebud",
                                 "Her fingers move up and down her inner thighs, slowly building towards their center",
                                 "Her hands move along her sides, carefully caressing them"])
-                elif Action == "dildo anal":
+                elif Action == "dildo_anal":
                         $ Line = Line + renpy.random.choice(["She traces the rubber phallus slowly down her body, barely grazing her ass",
                                 "Her dildo slides lightly across her crack, subtly avoiding the hole",
                                 "Her dildo is dragged up and down her inner thighs, slowly building towards their center",
@@ -2116,7 +2134,7 @@ label Girl_Self_Lines(GirlA = Primary, Mode = "T3", Action = Trigger3, TempLustX
                                 "Her whirring toy is dragged up and down her inner thighs, slowly building towards their center",
                                 "She slowly spreads her lower lips and caresses the inner lining",
                                 "She drags the vibrator slowly along her sides, carefully caressing them"])
-                else: # Action == "fondle breasts"
+                else: # Action == "fondle_breasts"
                         $ Line = Line + renpy.random.choice(["She gently rubs her breasts, dragging a finger across her nipple",
                                 "She gently cups her breasts and moves them in slow circles",
                                 "She moves her hands from her breasts to rub her neck",
@@ -2174,46 +2192,46 @@ label Girl_Self_Set(GirlA=Primary, Mode = "T3", Action = Trigger3, Length=0, Cou
 
     if Mode == "T3" and Trigger == "masturbation":
                 #sets base options as masturbatory
-                $ Options = ["fondle pussy", "fondle breasts", "fondle ass"]
+                $ Options = ["fondle_pussy", "fondle_breasts", "fondle_ass"]
                 if "dildo" in GirlA.Inventory:
-                        $ Options.append("dildo pussy")
+                        $ Options.append("dildo_pussy")
                         if GirlA.Loose:
-                            $ Options.append("dildo anal")
+                            $ Options.append("dildo_anal")
                 if "vibrator" in GirlA.Inventory:
                         $ Options.append("vibrator pussy")
 
     else:
-                if GirlA.Hand >= 5 and Mode != "T5" and Trigger in ("fondle pussy", "fondle breasts", "fondle thighs", "kiss you", "fondle ass", "suck breasts"):
+                if GirlA.Hand >= 5 and Mode != "T5" and Trigger in ("fondle_pussy", "fondle_breasts", "fondle_thighs", "kiss_you", "fondle_ass", "suck breasts"):
                         #if this is about the primary girl, and she's done handys, and you're feeling her up, she might feel you up
                         $ Options.append("hand")
 
-                if Trigger not in ("sex", "fondle pussy", "lick pussy", "dildo pussy"):
+                if Trigger not in ("sex", "fondle_pussy", "eat_pussy", "dildo_pussy"):
                         #if you aren't touching her pussy, she might
                         if "dildo" in GirlA.Inventory:
-                                $ Options.append("dildo pussy")
-                        $ Options.append("fondle pussy")
+                                $ Options.append("dildo_pussy")
+                        $ Options.append("fondle_pussy")
 
-                if Trigger not in ("anal", "fondle ass", "insert ass", "lick ass", "dildo anal") and GirlA.Loose:
+                if Trigger not in ("anal", "fondle_ass", "finger_ass", "eat_ass", "dildo_anal") and GirlA.Loose:
                         #if you aren't messing with her ass, she might
                         if "dildo" in GirlA.Inventory:
-                                $ Options.append("dildo anal")
-                        $ Options.append("fondle ass")
+                                $ Options.append("dildo_anal")
+                        $ Options.append("fondle_ass")
 
                 if "vibrator" in GirlA.Inventory:
                         $ Options.append("vibrator pussy")
 
-                if Trigger not in ("fondle breasts", "suck breasts"):
+                if Trigger not in ("fondle_breasts", "suck breasts"):
                         #if you aren't dealing with her breasts. . .
-                        $ Options.append("fondle breasts")
+                        $ Options.append("fondle_breasts")
 
                 if GirlA.Obed < GirlA.Inbt:
                         #adds more options if she is not submissive
-                        if "fondle pussy" not in Options:
-                                $ Options.append("fondle pussy")
-                        if "fondle ass" not in Options:
-                                $ Options.append("fondle ass")
-                        if "fondle breasts" not in Options:
-                                $ Options.append("fondle breasts")
+                        if "fondle_pussy" not in Options:
+                                $ Options.append("fondle_pussy")
+                        if "fondle_ass" not in Options:
+                                $ Options.append("fondle_ass")
+                        if "fondle_breasts" not in Options:
+                                $ Options.append("fondle_breasts")
     # End filling options
 
     $ Length = len(Options)-1
@@ -2236,17 +2254,17 @@ label Girl_Self_Set(GirlA=Primary, Mode = "T3", Action = Trigger3, Length=0, Cou
             if Action == "hand":
                     $ Line = GirlA.Name + " slides her hand down and firmly grabs your dick. "
                     $ Approval = 3
-            elif Action == "fondle pussy":
+            elif Action == "fondle_pussy":
                     $ Line = GirlA.Name + "'s hand slides down and begins to stroke her pussy. "
-            elif Action == "dildo pussy":
+            elif Action == "dildo_pussy":
                     $ Line = GirlA.Name + " pulls out her dildo and draws it toward her pussy. "
-            elif Action == "fondle ass":
+            elif Action == "fondle_ass":
                     $ Line = GirlA.Name + "'s hand slides behind her body, reaching toward her ass. "
-            elif Action == "dildo anal":
+            elif Action == "dildo_anal":
                     $ Line = GirlA.Name + " pulls out her dildo and reaches it behind her. "
             elif Action == "vibrator pussy":
                     $ Line = GirlA.Name + " pulls out her vibrator and strokes it across her body. "
-            else: # Action == "fondle breasts"
+            else: # Action == "fondle_breasts"
                     $ Line = GirlA.Name + "'s hands slide up her body and begin to kneed her breasts. "
     elif Action == "hand":
             $ Line = "Also, " + GirlA.Name + " continues stroke your cock. "
@@ -2351,8 +2369,8 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                         $ GirlA.Addict -= 2
     # end GirlA.Blowjob Threeway                                //////////////////////////////////////////////////////////////////////////////
 
-    elif Action == "fondle breasts":
-                        if Trigger2 == "fondle breasts" and Trigger != "lesbian": #if you're also fondling them,
+    elif Action == "fondle_breasts":
+                        if Trigger2 == "fondle_breasts" and Trigger != "lesbian": #if you're also fondling them,
                             $ Line = GirlA.Name + " also continues to fondle " + GirlB.Name + "'s breasts"
                         else:
                             $ Line = GirlA.Name + " continues to fondle " + GirlB.Name + "'s breasts"
@@ -2370,7 +2388,7 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
 
 
     elif Action == "suck breasts":
-                        if Trigger2 == "fondle breasts" and Trigger != "lesbian": #if you're also fondling them,
+                        if Trigger2 == "fondle_breasts" and Trigger != "lesbian": #if you're also fondling them,
                                 $ Line = GirlA.Name + " also continues to suck " + GirlB.Name + "'s breasts"
                         else:
                                 $ Line = GirlA.Name + " continues to suck " + GirlB.Name + "'s breasts"
@@ -2387,8 +2405,8 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
     # end Suck breasts Threeway                                //////////////////////////////////////////////////////////////////////////////
 
 
-    elif Action == "fondle pussy":
-                        if (Trigger == "fondle pussy" or Trigger2 == "fondle pussy") and Trigger != "lesbian": #if you're also fondling them,
+    elif Action == "fondle_pussy":
+                        if (Trigger == "fondle_pussy" or Trigger2 == "fondle_pussy") and Trigger != "lesbian": #if you're also fondling them,
                                 $ Line = GirlA.Name + " also continues to fondle " + GirlB.Name + "'s pussy"
                                 $ Templine = renpy.random.choice([", stroking across her clit",
                                         ", the two of you taking turns in your motions",
@@ -2414,27 +2432,27 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                                 if Templine == "a":
                                     if Trigger == "sex" or Trigger == "anal":
                                             $ Templine = ", her fingers brush against your cock as it goes in"
-                                    elif Trigger == "lick pussy":
+                                    elif Trigger == "eat_pussy":
                                             $ Templine = ", your tongue slides past her fingers"
-                                    elif Trigger == "dildo pussy" or Trigger2 == "dildo pussy":
+                                    elif Trigger == "dildo_pussy" or Trigger2 == "dildo_pussy":
                                             $ Templine = ", her fingers brush against the dildo as it goes in"
                                     else:
                                             $ Templine = ", stroking into it vigorously"
                                 elif Templine == "b":
                                     if Trigger == "sex" or Trigger == "anal":
                                             $ Templine = ", her fingers brushing up against your balls as you sink in"
-                                    elif Trigger == "lick pussy":
+                                    elif Trigger == "eat_pussy":
                                             $ Templine = ", you briefly suck on one of her fingers"
-                                    elif Trigger == "dildo pussy" or Trigger2 == "dildo pussy":
+                                    elif Trigger == "dildo_pussy" or Trigger2 == "dildo_pussy":
                                             $ Templine = ", her fingers brushing up against the dildo as it slides by"
                                     else:
                                             $ Templine = ", sliding firmly into it"
                                 elif Templine == "c":
                                     if Trigger == "sex" or Trigger == "anal":
                                             $ Templine = ", her fingers brush against your cock as it goes in"
-                                    elif Trigger == "lick pussy":
+                                    elif Trigger == "eat_pussy":
                                             $ Templine = ", your tongue slides along her fingers"
-                                    elif Trigger == "dildo pussy" or Trigger2 == "dildo pussy":
+                                    elif Trigger == "dildo_pussy" or Trigger2 == "dildo_pussy":
                                             $ Templine = ", her fingers brushing up against the dildo as it slides by"
                                     else:
                                             $ Templine = ", moving inside it with slow undulating motions"
@@ -2448,8 +2466,8 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
     # end fondle pussy Threeway                              /////////////////////////////////////////////////////////////////////////////
 
 
-    elif Action == "lick pussy":
-                        if (Trigger == "lick pussy" or Trigger2 == "lick  pussy") and Trigger != "lesbian": #if you're also fondling them,
+    elif Action == "eat_pussy":
+                        if (Trigger == "eat_pussy" or Trigger2 == "lick  pussy") and Trigger != "lesbian": #if you're also fondling them,
                             $ Line = GirlA.Name + " also continues to lick " + GirlB.Name + "'s pussy"
                         else:
                             $ Line = GirlA.Name + " continues to lick " + GirlB.Name + "'s pussy"
@@ -2467,33 +2485,33 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                         if Templine == "a":
                                 if Trigger == "sex" or Trigger == "anal":
                                         $ Templine = ", her tongue brushes against your cock as it goes in"
-                                elif Trigger == "lick pussy":
+                                elif Trigger == "eat_pussy":
                                         $ Templine = ", her tongue brushing against yours as you work"
-                                elif Trigger == "fondle pussy" or Trigger2 == "fondle pussy":
+                                elif Trigger == "fondle_pussy" or Trigger2 == "fondle_pussy":
                                         $ Templine = ", her tongue slides along your fingers"
-                                elif Trigger == "dildo pussy" or Trigger2 == "dildo pussy":
+                                elif Trigger == "dildo_pussy" or Trigger2 == "dildo_pussy":
                                         $ Templine = ", her tongue brushes along the dildo as it goes in"
                                 else:
                                         $ Templine = ", lapping into it vigorously"
                         elif Templine == "b":
                                 if Trigger == "sex" or Trigger == "anal":
                                         $ Templine = ", her longue lapping against your balls as you sink in"
-                                elif Trigger == "lick pussy":
+                                elif Trigger == "eat_pussy":
                                         $ Templine = ", you briefly kiss as you take turns"
-                                elif Trigger == "fondle pussy" or Trigger2 == "fondle pussy":
+                                elif Trigger == "fondle_pussy" or Trigger2 == "fondle_pussy":
                                         $ Templine = ", her tongue slides past your fingers"
-                                elif Trigger == "dildo pussy" or Trigger2 == "dildo pussy":
+                                elif Trigger == "dildo_pussy" or Trigger2 == "dildo_pussy":
                                         $ Templine = ", her tongue runs up against the dildo as it slides by"
                                 else:
                                         $ Templine = ", sliding firmly into it"
                         elif Templine == "c":
                                 if Trigger == "sex" or Trigger == "anal":
                                         $ Templine = ", her tongue brushes against your cock as it goes in"
-                                elif Trigger == "lick pussy":
+                                elif Trigger == "eat_pussy":
                                         $ Templine = ", the two of you taking turns in your motions"
-                                elif Trigger == "fondle pussy" or Trigger2 == "fondle pussy":
+                                elif Trigger == "fondle_pussy" or Trigger2 == "fondle_pussy":
                                         $ Templine = ", her tongue slides past your fingers"
-                                elif Trigger == "dildo pussy" or Trigger2 == "dildo pussy":
+                                elif Trigger == "dildo_pussy" or Trigger2 == "dildo_pussy":
                                         $ Templine = ", her tongue runs up against the dildo as it slides by"
                                 else:
                                         $ Templine = ", moving inside it with slow undulating motions"
@@ -2506,8 +2524,8 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
 
     # end lick pussy Threeway                              /////////////////////////////////////////////////////////////////////////////
 
-    elif Action == "fondle ass":
-                        if Trigger2 == "fondle ass" and Trigger != "lesbian": #if you're also fondling them,
+    elif Action == "fondle_ass":
+                        if Trigger2 == "fondle_ass" and Trigger != "lesbian": #if you're also fondling them,
                                 $ Line = GirlA.Name + " also continues to fondle " + GirlB.Name + "'s ass"
                                 $ Line = Line + renpy.random.choice([", stroking across her rear",
                                         ", the two of you taking turns in your motions",
@@ -2533,8 +2551,8 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
     # end fondle ass Threeway                              /////////////////////////////////////////////////////////////////////////////
 
 
-    elif Action == "insert ass":
-                        if (Trigger == "insert ass" or Trigger2 == "insert ass") and Trigger != "lesbian": #if you're also fondling them,
+    elif Action == "finger_ass":
+                        if (Trigger == "finger_ass" or Trigger2 == "finger_ass") and Trigger != "lesbian": #if you're also fondling them,
                                 $ Line = GirlA.Name + " also continues to stroke " + GirlB.Name + "'s ass"
                         else:
                                 $ Line = GirlA.Name + " continues to stroke " + GirlB.Name + "'s ass"
@@ -2551,27 +2569,27 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                         if Templine == "a":
                                 if Trigger == "sex" or Trigger == "anal":
                                         $ Templine = ", her fingers brush against your cock as it goes in"
-                                elif Trigger == "insert ass" or Trigger2 == "insert ass":
+                                elif Trigger == "finger_ass" or Trigger2 == "finger_ass":
                                         $ Templine = ", her fingers circling yours"
-                                elif Trigger == "dildo anal" or Trigger2 == "dildo anal":
+                                elif Trigger == "dildo_anal" or Trigger2 == "dildo_anal":
                                         $ Templine = ", her fingers brush against the dildo as it goes in"
                                 else:
                                         $ Templine = ", running fingers gently up her cleft"
                         elif Templine == "b":
                                 if Trigger == "sex" or Trigger == "anal":
                                         $ Templine = ", her fingers brushing up against your balls as you sink in"
-                                elif Trigger == "insert ass" or Trigger2 == "insert ass":
+                                elif Trigger == "finger_ass" or Trigger2 == "finger_ass":
                                         $ Templine = ", the two of you taking turns in your motions"
-                                elif Trigger == "dildo anal" or Trigger2 == "dildo anal":
+                                elif Trigger == "dildo_anal" or Trigger2 == "dildo_anal":
                                         $ Templine = ", her fingers run along the dildo as it slides by"
                                 else:
                                         $ Templine = ", sliding firmly into it"
                         elif Templine == "c":
                                 if Trigger == "sex" or Trigger == "anal":
                                         $ Templine = ", her fingers brush against your cock as it goes in"
-                                elif Trigger == "insert ass" or Trigger2 == "insert ass":
+                                elif Trigger == "finger_ass" or Trigger2 == "finger_ass":
                                         $ Templine = ", her fingers intertwine yours"
-                                elif Trigger == "dildo anal" or Trigger2 == "dildo anal":
+                                elif Trigger == "dildo_anal" or Trigger2 == "dildo_anal":
                                         $ Templine = ", her fingers brush against the dildo as it goes in"
                                 else:
                                         $ Templine = ", moving inside it with slow undulating motions"
@@ -2586,8 +2604,8 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
 
     # end insert ass Threeway                             /////////////////////////////////////////////////////////////////////////////
 
-    elif Action == "lick ass":
-                        if (Trigger == "lick ass" or Trigger2 == "lick ass") and Trigger != "lesbian": #if you're also fondling them,
+    elif Action == "eat_ass":
+                        if (Trigger == "eat_ass" or Trigger2 == "eat_ass") and Trigger != "lesbian": #if you're also fondling them,
                                 $ Line = GirlA.Name + " also continues to lick " + GirlB.Name + "'s ass"
                         else:
                                 $ Line = GirlA.Name + " continues to lick " + GirlB.Name + "'s ass"
@@ -2604,33 +2622,33 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                         if Templine == "a":
                                 if Trigger == "sex" or Trigger == "anal":
                                         $ Templine = ", her tongue brushes against your cock as it goes in"
-                                elif Trigger == "lick ass":
+                                elif Trigger == "eat_ass":
                                         $ Templine = ", her tongue brushing against yours as you work"
-                                elif Trigger == "insert ass" or Trigger2 == "insert ass":
+                                elif Trigger == "finger_ass" or Trigger2 == "finger_ass":
                                         $ Templine = ", her tongue slides along your fingers"
-                                elif Trigger == "dildo anal" or Trigger2 == "dildo anal":
+                                elif Trigger == "dildo_anal" or Trigger2 == "dildo_anal":
                                         $ Templine = ", her tongue brushes along the dildo as it goes in"
                                 else:
                                         $ Templine = ", lapping into it vigorously"
                         elif Templine == "b":
                                 if Trigger == "sex" or Trigger == "anal":
                                         $ Templine = ", her longue lapping against your balls as you sink in"
-                                elif Trigger == "lick ass":
+                                elif Trigger == "eat_ass":
                                         $ Templine = ", you briefly kiss as you take turns"
-                                elif Trigger == "insert ass" or Trigger2 == "insert ass":
+                                elif Trigger == "finger_ass" or Trigger2 == "finger_ass":
                                         $ Templine = ", her tongue slides past your fingers"
-                                elif Trigger == "dildo anal" or Trigger2 == "dildo anal":
+                                elif Trigger == "dildo_anal" or Trigger2 == "dildo_anal":
                                         $ Templine = ", her tongue runs up against the dildo as it slides by"
                                 else:
                                         $ Templine = ", sliding firmly into it"
                         elif Templine == "c":
                                 if Trigger == "sex" or Trigger == "anal":
                                         $ Templine = ", her tongue brushes against your cock as it goes in"
-                                elif Trigger == "lick ass":
+                                elif Trigger == "eat_ass":
                                         $ Templine = ", the two of you taking turns in your motions"
-                                elif Trigger == "insert ass" or Trigger2 == "insert ass":
+                                elif Trigger == "finger_ass" or Trigger2 == "finger_ass":
                                         $ Templine = ", her tongue slides past your fingers"
-                                elif Trigger == "dildo anal" or Trigger2 == "dildo anal":
+                                elif Trigger == "dildo_anal" or Trigger2 == "dildo_anal":
                                         $ Templine = ", her tongue runs up against the dildo as it slides by"
                                 else:
                                         $ Templine = ", moving inside it with slow undulating motions"
@@ -2649,7 +2667,7 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
 
     # end Masturbation Threeway                              /////////////////////////////////////////////////////////////////////////////
 
-    elif Action in ("kiss you", "kiss girl", "kiss both"):
+    elif Action in ("kiss_you", "kiss girl", "kiss both"):
                         if Trigger == "blow" and GirlA.Blow > 5 and Trigger4 == "kiss girl":
                                     $ Line = GirlA.Name + " also continues to kiss " + GirlB.Name
                                     $ Line = Line + renpy.random.choice([", occasionally taking a lick of your cock as well",
@@ -2675,7 +2693,7 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                                                 ", their tongues swirl around each other",
                                                 ", occasionally nibbling at her ears",
                                                 ", trailing kisses down her neck"])
-                                    elif Action == "kiss you":
+                                    elif Action == "kiss_you":
                                         $ Line = GirlA.Name + " also continues to make out with you"
                                         $ Line = Line + renpy.random.choice([", occasionally coming up for air",
                                                 ", licking along your cheek",
@@ -2751,26 +2769,26 @@ label Three_Change(LeadGirl = Primary, SecondGirl = Partner, D20S=0, PrimaryLust
                     ch_p "about [LeadGirl.Name]. . ."
                     "why don't you kiss her?" if Trigger5 != "kiss girl" and Trigger5 != "kiss both":
                                     call Threeway_Set(SecondGirl,"kiss girl", 0, Trigger4, LeadGirl)
-                    "why don't you grab her tits?" if Trigger4 != "fondle breasts":
-                                    call Threeway_Set(SecondGirl,"fondle breasts",0, Trigger4, LeadGirl)
+                    "why don't you grab her tits?" if Trigger4 != "fondle_breasts":
+                                    call Threeway_Set(SecondGirl,"fondle_breasts",0, Trigger4, LeadGirl)
                     "why don't you suck her breasts?" if Trigger4 != "suck breasts":
                                     call Threeway_Set(SecondGirl,"suck breasts",0, Trigger4, LeadGirl)
-                    "why don't you finger her?" if Trigger4 != "fondle pussy":
-                                    call Threeway_Set(SecondGirl,"fondle pussy",0, Trigger4, LeadGirl)
-                    "why don't you go down on her?" if Trigger4 != "lick pussy":
-                                    call Threeway_Set(SecondGirl,"lick pussy", 0, Trigger4, LeadGirl)
-                    "why don't you grab her ass?" if Trigger4 != "fondle ass":
-                                    call Threeway_Set(SecondGirl,"fondle ass", 0, Trigger4, LeadGirl)
-                    "why don't you lick her ass?" if Trigger4 != "lick ass":
-                                    call Threeway_Set(SecondGirl,"lick ass", 0, Trigger4, LeadGirl)
+                    "why don't you finger her?" if Trigger4 != "fondle_pussy":
+                                    call Threeway_Set(SecondGirl,"fondle_pussy",0, Trigger4, LeadGirl)
+                    "why don't you go down on her?" if Trigger4 != "eat_pussy":
+                                    call Threeway_Set(SecondGirl,"eat_pussy", 0, Trigger4, LeadGirl)
+                    "why don't you grab her ass?" if Trigger4 != "fondle_ass":
+                                    call Threeway_Set(SecondGirl,"fondle_ass", 0, Trigger4, LeadGirl)
+                    "why don't you lick her ass?" if Trigger4 != "eat_ass":
+                                    call Threeway_Set(SecondGirl,"eat_ass", 0, Trigger4, LeadGirl)
                     "wait, I meant. . .":
                                     jump Three_Change_Menu
 
             "about me. . .":
                 menu:
                     ch_p "about me. . ."
-                    "why don't you kiss me?" if Trigger5 != "kiss you" and Trigger5 != "kiss both":
-                                    call Threeway_Set(SecondGirl,"kiss you", 0, Trigger4, LeadGirl)
+                    "why don't you kiss me?" if Trigger5 != "kiss_you" and Trigger5 != "kiss both":
+                                    call Threeway_Set(SecondGirl,"kiss_you", 0, Trigger4, LeadGirl)
                     "maybe take me in hand?" if Trigger4 != "hand":
                                     call Threeway_Set(SecondGirl,"hand", 0, Trigger4, LeadGirl)
                     "maybe give me a lick?" if Trigger4 != "blow":
@@ -2789,7 +2807,7 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Trigger4, Girl
             # In lesbian mode, Action becomes Trigger3, the secondary action of the primary girl, and GirlB is the secondary girl
             # If Set gets passed a preset, it chooses that preset, otherwise it chooses one randomly
             # for Lesbian: call Threeway_Set(Primary,"suck breasts", "lesbian", Trigger3,Secondary)
-            # for Threeway: call Threeway_Set(SecondGirl,"fondle breasts",0, Trigger4, LeadGirl)
+            # for Threeway: call Threeway_Set(SecondGirl,"fondle_breasts",0, Trigger4, LeadGirl)
             # ThreeCount is a value that gets set to a few digits lower then the current Round
             # The girl will not arbitrarily change motions until after this value has been passed.
 
@@ -2824,7 +2842,7 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Trigger4, Girl
                     # if this was sent from a Lesbian action. . .
                     $ State = "lesbian"
                     $ Options = ["kiss girl","kiss girl"]
-                    if Preset in ("hand","blow","kiss you","kiss both"):
+                    if Preset in ("hand","blow","kiss_you","kiss both"):
                             #if you send it presets that you want the other girl to touch you. . .
                             $ State = "threeway"
                     elif Preset:
@@ -2857,20 +2875,20 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Trigger4, Girl
 
             if State == "lesbian" or State == "threeway":
                 #if she's into girls, add girl-touching options
-                $ Options.extend(("fondle breasts","suck breasts","fondle pussy","fondle ass","kiss girl"))
+                $ Options.extend(("fondle_breasts","suck breasts","fondle_pussy","fondle_ass","kiss girl"))
 
                 if ApprovalCheck(GirlA, 800, "I") or GirlA.GirlLikeCheck(GirlB) >= 800:
-                    $ Options.append("lick pussy")
+                    $ Options.append("eat_pussy")
                 if ApprovalCheck(GirlA, 900, "I") and GirlA.GirlLikeCheck(GirlB) >= 900:
-                    $ Options.append("lick ass")
+                    $ Options.append("eat_ass")
 
 
             if State == "hetero" or State == "threeway":
                 #if she's into you, add you-touching options
                 if Trigger == "anal":
-                    $ Options.extend(("hand","kiss you","kiss you"))
+                    $ Options.extend(("hand","kiss_you","kiss_you"))
                 else:
-                    $ Options.extend(("hand","blow","kiss you"))
+                    $ Options.extend(("hand","blow","kiss_you"))
             $ renpy.random.shuffle(Options)
 
             if Preset:
@@ -3004,10 +3022,10 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Trigger4, Girl
                         $ GirlA.Addict -= 2
             #the above three do not apply to lesbian actions.
 
-            elif Options[0] == "fondle breasts":
+            elif Options[0] == "fondle_breasts":
 
                         $ Line = Line + " and slides her hands along " + GirlB.Name + "'s breasts"
-                        $ Action = "fondle breasts"
+                        $ Action = "fondle_breasts"
                         if "lesbian" not in GirlA.RecentActions:
                                 $ GirlA.Les += 1
                                 $ GirlA.RecentActions.append("lesbian")
@@ -3030,10 +3048,10 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Trigger4, Girl
                         $ TempLust += 2 if ApprovalCheck(GirlA, 500, "I") else 1  # GirlA's lust
                         $ TempLust2 += 5 if GirlB.GirlLikeCheck(GirlA) >= 800 else 2
                         $ TempFocus += 1
-            elif Options[0] == "fondle pussy":
+            elif Options[0] == "fondle_pussy":
 
                         $ Line = Line + " and runs her finger along " + GirlB.Name + "'s pussy"
-                        $ Action = "fondle pussy"
+                        $ Action = "fondle_pussy"
                         if "lesbian" not in GirlA.RecentActions:
                                 $ GirlA.Les += 1
                                 $ GirlA.RecentActions.append("lesbian")
@@ -3043,10 +3061,10 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Trigger4, Girl
                         $ TempLust += 2 if ApprovalCheck(GirlA, 500, "I") else 1  # GirlA's lust
                         $ TempLust2 += 5 if GirlB.GirlLikeCheck(GirlA) >= 800 else 3
                         $ TempFocus += 2
-            elif Options[0] == "lick pussy":
+            elif Options[0] == "eat_pussy":
 
                         $ Line = Line + " and runs her tongue along " + GirlB.Name + "'s pussy"
-                        $ Action = "lick pussy"
+                        $ Action = "eat_pussy"
                         if "lesbian" not in GirlA.RecentActions:
                                 $ GirlA.Les += 1
                                 $ GirlA.RecentActions.append("lesbian")
@@ -3056,10 +3074,10 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Trigger4, Girl
                         $ TempLust += 3 if ApprovalCheck(GirlA, 600, "I") else 1  # GirlA's lust
                         $ TempLust2 += 8 if GirlB.GirlLikeCheck(GirlA) >= 800 else 5
                         $ TempFocus += 3
-            elif Options[0] == "fondle ass":
+            elif Options[0] == "fondle_ass":
 
                         $ Line = Line + " and gives " + GirlB.Name + "'s ass a firm squeeze"
-                        $ Action = "fondle ass"
+                        $ Action = "fondle_ass"
                         if "lesbian" not in GirlA.RecentActions:
                                 $ GirlA.Les += 1
                                 $ GirlA.RecentActions.append("lesbian")
@@ -3069,10 +3087,10 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Trigger4, Girl
                         $ TempLust += 1 if ApprovalCheck(GirlA, 400, "I") else 0  # GirlA's lust
                         $ TempLust2 += 3 if GirlB.GirlLikeCheck(GirlA) >= 600 else 2
                         $ TempFocus += 1
-            elif Options[0] == "lick ass":
+            elif Options[0] == "eat_ass":
 
                         $ Line = Line + " and starts to lick around " + GirlB.Name + "'s ass"
-                        $ Action = "lick ass"
+                        $ Action = "eat_ass"
                         if "lesbian" not in GirlA.RecentActions:
                                 $ GirlA.Les += 1
                                 $ GirlA.RecentActions.append("lesbian")
@@ -3086,23 +3104,23 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Trigger4, Girl
             elif Options[0] == "kiss girl" or Mode == "lesbian":
                         $ Line = Line + " and gives " + GirlB.Name + " a passionate kiss"
                         $ Action = "kiss girl"
-                        if Mode != "lesbian" and "kiss you" in Options:
-                                if Trigger == "kiss you":
+                        if Mode != "lesbian" and "kiss_you" in Options:
+                                if Trigger == "kiss_you":
                                         $ Action = "kiss both"
-                                elif Trigger3 == "kiss you":
+                                elif Trigger3 == "kiss_you":
                                         $ Action = "kiss both"
-                                elif Trigger4 == "kiss you":
+                                elif Trigger4 == "kiss_you":
                                         $ Action = "kiss both"
                         $ TempFocus += 1
-            elif Options[0] == "kiss you":
+            elif Options[0] == "kiss_you":
                         $ Line = Line + " and gives you a passionate kiss"
-                        $ Action = "kiss you"
+                        $ Action = "kiss_you"
                         if "kiss girl" in Options:
-                                if Trigger == "kiss you":
+                                if Trigger == "kiss_you":
                                         $ Action = "kiss both"
-                                elif Trigger3 == "kiss you":
+                                elif Trigger3 == "kiss_you":
                                         $ Action = "kiss both"
-                                elif Trigger4 == "kiss you":
+                                elif Trigger4 == "kiss_you":
                                         $ Action = "kiss both"
                         $ TempLust += 1
                         $ TempFocus += 1
@@ -3207,13 +3225,13 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                             $ TempLine = "Hmm, enjoying the show, "+RogueX.Petname+"?" #you watching
                     elif D20 <= 10:
                             pass
-                    elif TempTrigger == "fondle breasts":
+                    elif TempTrigger == "fondle_breasts":
                             $ TempLine = "Your titties feel so nice, "+ActiveGirl.Name+"." #fondle breasts
                     elif TempTrigger == "suck breasts":
                             $ TempLine = "Your titties taste so good, "+ActiveGirl.Name+"." #suck breasts
-                    elif TempTrigger == "fondle pussy":
+                    elif TempTrigger == "fondle_pussy":
                             $ TempLine = "You're sucking me in, "+ActiveGirl.Name+"." #fondle pussy
-                    elif TempTrigger == "lick pussy":
+                    elif TempTrigger == "eat_pussy":
                             $ TempLine = "You taste so good, "+ActiveGirl.Name+"." #lick pussy
 
                     if not TempLine:
@@ -3258,7 +3276,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
 
                     if D20 <= 10:
                             pass
-                    elif RogueX.SEXP <= 20 or TempCheck == "kiss you":
+                    elif RogueX.SEXP <= 20 or TempCheck == "kiss_you":
                             #If she's relatively inexperienced
                             $ TempLine = renpy.random.choice([
                                     "Touching ya is so amazing, " + RogueX.Petname + ".",
@@ -3332,7 +3350,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                     if "unseen" not in KittyX.RecentActions and D20 <= 7:
                             #if they know you're watching, there is a 3/10 or 2/5 chance
                             $ TempLine = "Hmm, like what you see, "+KittyX.Petname+"?" #you watching
-                    elif TempTrigger == "fondle breasts":
+                    elif TempTrigger == "fondle_breasts":
                         if ActiveGirl in (EmmaX,StormX):
                             $ TempLine = "I'm so jelly here "+ActiveGirl.Name+"." #fondle breasts
                         else:
@@ -3342,9 +3360,9 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                             $ TempLine = "These tits are {i}amazing,{/i} "+ActiveGirl.Name+"." #fondle breasts
                         else:
                             $ TempLine = "Hmm, you taste so good, "+ActiveGirl.Name+"." #suck breasts
-                    elif TempTrigger == "fondle pussy":
+                    elif TempTrigger == "fondle_pussy":
                             $ TempLine = "So wet, "+ActiveGirl.Name+"." #fondle pussy
-                    elif TempTrigger == "lick pussy":
+                    elif TempTrigger == "eat_pussy":
                         if ActiveGirl == RogueX and RogueX.Pubes:
                             $ TempLine = "I love your little stripe, Rogue." #lick pussy
                         else:
@@ -3393,7 +3411,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
 
                     if D20 <= 10:
                             pass
-                    elif KittyX.SEXP <= 30 or TempCheck == "kiss you":
+                    elif KittyX.SEXP <= 30 or TempCheck == "kiss_you":
                             #If she's relatively inexperienced
                             $ TempLine = renpy.random.choice([
                                     "You're so amazing, " + KittyX.Petname + ".",
@@ -3474,14 +3492,14 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                     if "unseen" not in EmmaX.RecentActions and D20 <= 5:
                             #if they know you're watching, there is a 3/10 or 2/5 chance
                             $ TempLine = "Are you enjoying the performance, "+EmmaX.Petname+"?" #you watching
-                    elif TempTrigger == "fondle breasts" or TempTrigger == "suck breasts":
+                    elif TempTrigger == "fondle_breasts" or TempTrigger == "suck breasts":
                             if ActiveGirl == KittyX:
                                 $ TempLine = "Oh my, these breasts are adorable!" #fondle breasts
                             else:
                                 $ TempLine = "These really are wonderfully. . . pert." #fondle breasts
-                    elif TempTrigger == "fondle pussy":
+                    elif TempTrigger == "fondle_pussy":
                                 $ TempLine = "Such pressure, "+ActiveGirl.Name+"." #fondle pussy
-                    elif TempTrigger == "lick pussy":
+                    elif TempTrigger == "eat_pussy":
                             if ActiveGirl == LauraX:
                                 $ TempLine = "Oh yes, that is a Howlett." #lick pussy
                             else:
@@ -3529,7 +3547,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
 
                     if D20 <= 10:
                             pass
-                    elif EmmaX.SEXP <= 30 or TempCheck == "kiss you":
+                    elif EmmaX.SEXP <= 30 or TempCheck == "kiss_you":
                             #If she's relatively inexperienced
                             $ TempLine = renpy.random.choice([
                                     "You're incredible, " + EmmaX.Petname + ".",
@@ -3608,16 +3626,16 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                     if "unseen" not in LauraX.RecentActions and D20 <= 5:
                             #if they know you're watching, there is a 3/10 or 2/5 chance
                             $ TempLine = "Looking good, "+LauraX.Petname+"?" #you watching
-                    elif TempTrigger == "fondle breasts":
+                    elif TempTrigger == "fondle_breasts":
                             if ActiveGirl in (EmmaX,StormX):
                                 $ TempLine = "These things are huge." #fondle breasts
                             else:
                                 $ TempLine = "Your titties feel so nice, "+ActiveGirl.Name+"." #fondle breasts
                     elif TempTrigger == "suck breasts":
                             $ TempLine = "Hmm, tasty." #suck breasts
-                    elif TempTrigger == "fondle pussy":
+                    elif TempTrigger == "fondle_pussy":
                                 $ TempLine = "Cozy in there." #fondle pussy
-                    elif TempTrigger == "lick pussy":
+                    elif TempTrigger == "eat_pussy":
                             if ActiveGirl == RogueX:
                                 $ TempLine = "Spicy." #lick pussy
                             elif ActiveGirl == KittyX:
@@ -3672,7 +3690,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
 
                     if D20 <= 5:
                             pass
-                    elif LauraX.SEXP <= 30 or TempCheck == "kiss you":
+                    elif LauraX.SEXP <= 30 or TempCheck == "kiss_you":
                             #If she's relatively inexperienced
                             $ TempLine = renpy.random.choice([
                                     "You're good at this, " + LauraX.Petname + ".",
@@ -3751,14 +3769,14 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                     if "unseen" not in JeanX.RecentActions and D20 <= 5:
                             #if they know you're watching, there is a 3/10 or 2/5 chance
                             $ TempLine = "Enjoying the show, "+JeanX.Petname+"?" #you watching
-                    elif TempTrigger == "fondle breasts":
+                    elif TempTrigger == "fondle_breasts":
                             if ActiveGirl == EmmaX:
                                 $ TempLine = "How do you even cart these things around?" #fondle breasts
                             else:
                                 $ TempLine = "Mmm, these things are firm, "+ActiveGirl.Name+"." #fondle breasts
                     elif TempTrigger == "suck breasts":
                             $ TempLine = "Mmmm, tasty." #suck breasts
-                    elif TempTrigger == "fondle pussy":
+                    elif TempTrigger == "fondle_pussy":
                                 $ TempLine = "You like that, slut?" #fondle pussy
 
                     if not TempLine:
@@ -3803,7 +3821,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
 
                     if D20 <= 5:
                             pass
-                    elif JeanX.SEXP <= 30 or TempCheck == "kiss you":
+                    elif JeanX.SEXP <= 30 or TempCheck == "kiss_you":
                             #If she's relatively inexperienced
                             $ TempLine = renpy.random.choice([
                                     "You're good at this, " + JeanX.Petname + ".",
@@ -3874,14 +3892,14 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                     if "unseen" not in StormX.RecentActions and D20 <= 5:
                             #if they know you're watching, there is a 3/10 or 2/5 chance
                             $ TempLine = "So you do enjoy watching, "+StormX.Petname+"?" #you watching
-                    elif TempTrigger == "fondle breasts" or TempTrigger == "suck breasts":
+                    elif TempTrigger == "fondle_breasts" or TempTrigger == "suck breasts":
                             if ActiveGirl == EmmaX:
                                 $ TempLine = "These really are quite impressive, Emma." #fondle breasts
                             else:
                                 $ TempLine = "So firm. . ." #fondle breasts
-                    elif TempTrigger == "fondle pussy":
+                    elif TempTrigger == "fondle_pussy":
                                 $ TempLine = "Do you enjoy that, "+ActiveGirl.Name+"." #fondle pussy
-                    elif TempTrigger == "lick pussy":
+                    elif TempTrigger == "eat_pussy":
                             if ActiveGirl == LauraX:
                                 $ TempLine = "Hmmm, that is a familiar taste. . ." #lick pussy
                             else:
@@ -3929,7 +3947,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
 
                     if D20 <= 10:
                             pass
-                    elif StormX.SEXP <= 30 or TempCheck == "kiss you":
+                    elif StormX.SEXP <= 30 or TempCheck == "kiss_you":
                             #If she's relatively inexperienced
                             $ TempLine = renpy.random.choice([
                                     "You are incredible, " + StormX.Petname + ".",
@@ -4005,16 +4023,16 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
                     if "unseen" not in JubesX.RecentActions and D20 <= 5:
                             #if they know you're watching, there is a 3/10 or 2/5 chance
                             $ TempLine = "Like what you see there, "+JubesX.Petname+"?" #you watching
-                    elif TempTrigger == "fondle breasts":
+                    elif TempTrigger == "fondle_breasts":
                             if ActiveGirl in (EmmaX,StormX):
                                 $ TempLine = "Wow, how do you work with these. . ." #fondle breasts
                             else:
                                 $ TempLine = "Maybe I need to find a new bra, "+ActiveGirl.Name+"." #fondle breasts
                     elif TempTrigger == "suck breasts":
                             $ TempLine = "Hmm, hard not to take a nibble. . ." #suck breasts
-                    elif TempTrigger == "fondle pussy":
+                    elif TempTrigger == "fondle_pussy":
                                 $ TempLine = "You're burning up. . ." #fondle pussy
-                    elif TempTrigger == "lick pussy":
+                    elif TempTrigger == "eat_pussy":
                             if ActiveGirl == RogueX:
                                 $ TempLine = "So hot. . ." #lick pussy
                             elif ActiveGirl == KittyX:
@@ -4067,7 +4085,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
 
                     if D20 <= 5:
                             pass
-                    elif JubesX.SEXP <= 30 or TempCheck == "kiss you":
+                    elif JubesX.SEXP <= 30 or TempCheck == "kiss_you":
                             #If she's relatively inexperienced
                             $ TempLine = renpy.random.choice([
                                     "Oh, um, you seem to know what you're doing, " + JubesX.Petname + ".",
@@ -4328,63 +4346,187 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
         return
 
-label sex_prep_skirt_lines(character):
+label before_sex_skirt_narration(character):
     $ line = renpy.random.choice(["[character.Name] turns and backs up against your cock, sliding her skirt up as she does so.",
         "[character.Name] rolls back and pulls you toward her, sliding her skirt up as she does so.",
         "[character.Name] turns around, sliding her skirt up as she does so.",
         "[character.Name] pushes you back and climbs on top of you, sliding her skirt up as she does so.",
         "[character.Name] lays back, sliding her skirt up as she does so."])
-
-    character.voice "[line]"
+    "[line]"
 
     return
 
-label sex_prep_leg_lines(character):
+label before_sex_leg_narration(character):
     $ line = renpy.random.choice(["[character.Name] turns and backs up against your cock, sliding her [character.Legs] down as she does so.",
         "[character.Name] rolls back and pulls you against her, sliding her [character.Legs] off as she does so.",
         "[character.Name] pushes you down and climbs on top of you, sliding her [character.Legs] down as she does so.",
         "[character.Name] turns around, sliding her [character.Legs] down as she does so.",
         "[character.Name] lays back, sliding her [character.Legs] down as she does so."])
-
-    character.voice "[line]"
+    "[line]"
 
     return
 
-label sex_prep_shorts_lines(character):
+label before_sex_shorts_narration(character):
 
     $ line = renpy.random.choice(["[character.Name] rolls onto her back and pulls you against her, sliding her shorts off as she does so."])
-
-    character.voice "[line]"
+    "[line]"
 
     return
 
-label sex_prep_commando_lines(character):
+label before_sex_commando_narration(character):
     $ line = renpy.random.choice(["[character.Name] turns and backs up against your cock.",
         "[character.Name] rolls back and pulls you toward her.",
         "[character.Name] pushes you back and climbs on top of you.",
         "[character.Name] turns around and pulls you toward her."])
-
-    character.voice "[line]"
+    "[line]"
 
     return
 
-label anal_wants_to_insert_lines(character):
+label sex_wants_to_insert_narration(character):
+    $ line = renpy.random.choice(["She slides the tip along her pussy and seems to want you to insert it."])
+    "[line]"
+
+    return
+
+label anal_wants_to_insert_narration(character):
     $ line = renpy.random.choice(["She slides the tip up to her anus, and presses against it.",
         "She slides the tip along her ass and seems to want you to insert it.",
         "She slides the tip against her ass and seems to want you to insert it.",
         "She slides the tip along her asshole, and seems to want you to insert it."])
-
-    character.voice "[line]"
+    "[line]"
 
     return
 
-label hotdog_prep_lines(character):
+label hotdog_prep_narration(character):
     $ line = renpy.random.choice(["[character.Name] turns and backs up against your cock, rubbing it against her ass.",
         "[character.Name] rolls back and pulls you toward her, rubbing her pussy against your cock.",
         "[character.Name] pushes you back and climbs on top of you, sliding back and forth along your shaft.",
         "[character.Name] rolls back and pulls you toward her, grinding against your cock.",
         "[character.Name] turns around and pulls you toward her, grinding against your cock."])
+    "[line]"
 
-    character.voice "[line]"
+    return
+
+label start_of_sex_narration(character, action):
+    $ check_line = renpy.random.choice(["glances around for voyeurs",
+        "glances around to see if anyone notices what she's doing"])
+
+    $ first_undressing_line = renpy.random.choice(["hesitantly pulls down your pants"])
+
+    $ undressing_line = renpy.random.choice(["pulls down your pants"])
+
+    if action == "sex":
+        $ first_action_line = renpy.random.choice(["slowly presses against your rigid member"])
+
+        $ action_line = renpy.random.choice(["climbs on top of you",
+            "pushes you back and slowly presses against your rigid member",
+            "lays back and slowly presses against your rigid member",
+            "turns around and slowly presses against your rigid member",
+            "bends over and presses her backside against you suggestively",
+            "backs her ass up against your cock"])
+
+        $ player_first_action_line = renpy.random.choice(["You guide it into place and slide it in",
+            "You press her folds aside and nudge your cock in",
+            "You take careful aim and then push your cock in"])
+
+        $ player_action_line = renpy.random.choice(["You guide your cock into place and ram it home",
+            "You guide it into place and slide it in",
+            "You press her folds aside and nudge your cock in",
+            "You take careful aim and then ram your cock in"])
+
+        $ final_line = renpy.random.choice(["leans back a bit and your cock slides in"])
+    elif action == "anal":
+        $ first_action_line = renpy.random.choice(["slowly presses against your rigid member",
+            "leans back and presses against you suggestively"])
+
+        $ action_line = renpy.random.choice(["climbs on top of you",
+            "pushes you back and slowly presses against your rigid member",
+            "lays back and slowly presses against your rigid member",
+            "turns around and slowly presses against your rigid member",
+            "bends over and presses her backside against you suggestively",
+            "leans back and presses against you suggestively",
+            "backs her ass up against your cock"])
+
+        $ player_first_action_line = renpy.random.choice(["You guide it into place and slide it in"])
+
+        $ player_action_line = renpy.random.choice(["You guide your cock into place and ram it home",
+            "You guide it into place and slide it in",
+            "You take careful aim and then ram your cock in",
+            "You press against her rim and nudge your cock in."])
+
+        $ final_line = renpy.random.choice(["leans back a bit and your cock pops in"])
+    elif action == "hotdog":
+        $ first_action_line = renpy.random.choice(["slowly presses against your rigid member",
+            "leans back and presses against you suggestively"])
+
+        $ action_line = renpy.random.choice(["pushes you back and slowly presses against your rigid member",
+            "turns around and slowly presses against your rigid member",
+            "bends over and presses her backside against you suggestively",
+            "leans back and presses against you suggestively",
+            "backs her ass up against your cock"])
+
+    if Taboo:
+        if character in [RogueX, KittyX]:
+            if (action == "sex" and not character.Sex) or (action == "anal" and not character.Anal):
+                "[character.Name] [check_line]. . ."
+
+                if "cockout" in Player.RecentActions:
+                    "[character.Name] [first_action_line]"
+                else:
+                    "She [first_undressing_line] and [first_action_line]."
+
+                if player_first_action_line:
+                    "[player_first_action_line]."
+            else:
+                if "cockout" in Player.RecentActions:
+                    "[character_name] [check_line], then [undressing_line] and [action_line]"
+                else:
+                    "[character.Name] [check_line], then [action_line]."
+
+                if player_action_line:
+                    "[player_action_line]."
+        elif character in [EmmaX, LauraX, JeanX, StormX, JubesX]:
+            "[character.Name] [check_line]."
+
+            if "cockout" in Player.RecentActions:
+                "Then she [action_line]."
+            else:
+                "Then she [undressing_line] and [action_line]."
+
+            if final_line:
+                "She [final_line]."
+
+        if character != JeanX:
+            $ character.Inbt += int(Taboo/10)
+            $ character.Lust += int(Taboo/5)
+        else:
+            $ JeanX.Statup("Inbt", 90, int(Taboo/10))
+            $ JeanX.Statup("Lust", 50, int(Taboo/5))
+    else:
+        if character in [RogueX, KittyX]:
+            if (action == "sex" and not character.Sex) or (action == "anal" and not character.Anal):
+                if "cockout" in Player.RecentActions:
+                    "[character.Name] [first_action_line]."
+                else:
+                    "[character.Name] [first_undressing_line] and [first_action_line]."
+
+                if player_first_action_line:
+                    "[player_first_action_line]."
+            else:
+                if "cockout" in Player.RecentActions:
+                    "[character_name] [undressing_line] and [action_line]"
+                else:
+                    "[character.Name] [action_line]."
+
+                if player_action_line:
+                    "[player_action_line]."
+        elif character in [EmmaX, LauraX, JeanX, StormX, JubesX]:
+            if "cockout" in Player.RecentActions:
+                "[character.Name] [action_line]."
+            else:
+                "[character.Name] [undressing_line] and [action_line]."
+
+            if final_line:
+                "She [final_line]."
 
     return

@@ -4413,35 +4413,35 @@ label first_topless(character, silent = 0, temporary_line = 0): #rkeljsv
                         elif character == JubesX:
                             ch_v ". . ."
                             ch_v "I -know- that, that's why I was confused?"
-                    "[EmmaX.Name]'s were a lot bigger, that's all." if character in [KittyX] and if EmmaX.SeenChest:
+                    "[EmmaX.Name]'s were a lot bigger, that's all." if character in [KittyX] and EmmaX.SeenChest:
                         $ temporary_line = EmmaX
-                    "[StormX.Name]'s were a lot bigger, that's all." if character in [RogueX, KittyX, LauraX, JeanX, JubesX] and if StormX.SeenChest:
+                    "[StormX.Name]'s were a lot bigger, that's all." if character in [RogueX, KittyX, LauraX, JeanX, JubesX] and StormX.SeenChest:
                         $ temporary_line = StormX
-                    "[RogueX.Name]'s were bigger, that's all." if character in [KittyX] and if RogueX.SeenChest:
+                    "[RogueX.Name]'s were bigger, that's all." if character in [KittyX] and RogueX.SeenChest:
                         $ temporary_line = RogueX
-                    "[EmmaX.Name]'s were bigger, that's all." if character in [RogueX, KittyX, LauraX, JeanX, JubesX] and if EmmaX.SeenChest:
+                    "[EmmaX.Name]'s were bigger, that's all." if character in [RogueX, KittyX, LauraX, JeanX, JubesX] and EmmaX.SeenChest:
                         $ temporary_line = EmmaX
-                    "[LauraX.Name]'s were bigger, that's all." if character in [KittyX] and if LauraX.SeenChest:
+                    "[LauraX.Name]'s were bigger, that's all." if character in [KittyX] and LauraX.SeenChest:
                         $ temporary_line = LauraX
-                    "[JeanX.Name]'s were bigger, that's all." if character in [KittyX] and if JeanX.SeenChest:
+                    "[JeanX.Name]'s were bigger, that's all." if character in [KittyX] and JeanX.SeenChest:
                         $ temporary_line = JeanX
-                    "[StormX.Name]'s were bigger, that's all." if character in [RogueX, KittyX, EmmaX, LauraX, JeanX, JubesX] and if StormX.SeenChest:
+                    "[StormX.Name]'s were bigger, that's all." if character in [RogueX, KittyX, EmmaX, LauraX, JeanX, JubesX] and StormX.SeenChest:
                         $ temporary_line = StormX
-                    "[RogueX.Name]'s were nicer, that's all." if character in [LauraX, JeanX JubesX] and if RogueX.SeenChest:
+                    "[RogueX.Name]'s were nicer, that's all." if character in [LauraX, JeanX, JubesX] and RogueX.SeenChest:
                         $ temporary_line = RogueX
-                    "[LauraX.Name]'s were nicer, that's all." if character in [RogueX, JeanX, JubesX] and if LauraX.SeenChest:
+                    "[LauraX.Name]'s were nicer, that's all." if character in [RogueX, JeanX, JubesX] and LauraX.SeenChest:
                         $ temporary_line = LauraX
-                    "[JeanX.Name]'s were nicer, that's all." if character in [RogueX, LauraX, JubesX] and if JeanX.SeenChest:
+                    "[JeanX.Name]'s were nicer, that's all." if character in [RogueX, LauraX, JubesX] and JeanX.SeenChest:
                         $ temporary_line = JeanX
-                    "[RogueX.Name]'s were tighter, that's all." if character in [EmmaX, StormX] and if RogueX.SeenChest:
+                    "[RogueX.Name]'s were tighter, that's all." if character in [EmmaX, StormX] and RogueX.SeenChest:
                         $ temporary_line = RogueX
-                    "[KittyX.Name]'s were tighter, that's all." if character in [RogueX, EmmaX, LauraX, JeanX, StormX, JubesX] and if KittyX.SeenChest:
+                    "[KittyX.Name]'s were tighter, that's all." if character in [RogueX, EmmaX, LauraX, JeanX, StormX, JubesX] and KittyX.SeenChest:
                         $ temporary_line = KittyX
-                    "[EmmaX.Name]'s were tighter, that's all." if character in [StormX] and if EmmaX.SeenChest:
+                    "[EmmaX.Name]'s were tighter, that's all." if character in [StormX] and EmmaX.SeenChest:
                         $ temporary_line = EmmaX
-                    "[LauraX.Name]'s were tighter, that's all." if character in [RogueX, EmmaX, StormX] and if LauraX.SeenChest:
+                    "[LauraX.Name]'s were tighter, that's all." if character in [RogueX, EmmaX, StormX] and LauraX.SeenChest:
                         $ temporary_line = LauraX
-                    "[JeanX.Name]'s were tighter, that's all." if character in [EmmaX, StormX] and if JeanX.SeenChest:
+                    "[JeanX.Name]'s were tighter, that's all." if character in [EmmaX, StormX] and JeanX.SeenChest:
                         $ temporary_line = JeanX
 
                 if temporary_line:

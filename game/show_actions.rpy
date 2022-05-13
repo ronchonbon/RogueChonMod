@@ -1035,3 +1035,691 @@ transform Girl_Dance1(Chr=Ch_Focus):
                 ease 3.5 yoffset 0
         repeat
 # End Strip Dancing / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+
+
+label Rogue_Masturbate: #(Situation = Situation):
+    $ Round -= 5 if Round > 5 else (Round-1)
+    call Shift_Focus(character)
+    if character.Mast:
+        $ temp_modifier += 10
+    if character.SEXP >= 50:
+        $ temp_modifier += 25
+    elif character.SEXP >= 30:
+        $ temp_modifier += 15
+    elif character.SEXP >= 15:
+        $ temp_modifier += 5
+    if character.Lust >= 90:
+        $ temp_modifier += 20
+    elif character.Lust >= 75:
+        $ temp_modifier += 5
+    if "exhibitionist" in character.Traits:
+        $ temp_modifier += (3*Taboo)
+    if character in Player.Harem or "sex friend" in character.Petnames:
+        $ temp_modifier += 10
+    elif "ex" in character.Traits:
+        $ temp_modifier -= 40
+    if character.ForcedCount and not character.Forced:
+        $ temp_modifier -= 5 * character.ForcedCount
+
+    $ Approval = ApprovalCheck(character, 1200, TabM = 2) # 120, 135, 150, Taboo -80(200)
+
+    $ character.DrainWord("unseen",1,0) #She sees you, so remove unseens
+
+    if Situation == "join":       # This triggers if you ask to join in
+                if Approval > 1 or (Approval and character.Lust >= 50):
+                    $ Player.AddWord(1,"join")
+                    menu:
+                        extend ""
+                        "Would you like some help? I could lend some helping hands. . ."  if Player.Semen and character.Action:
+                                $ character.Statup("Love", 90, 1)
+                                $ character.Statup("Obed", 50, 2)
+                                $ character.FaceChange("sexy")
+                                ch_r "Well, [character.Petname], I suppose I could use some help with these. . ."
+                                $ character.Statup("Obed", 70, 2)
+                                $ character.Statup("Inbt", 70, 1)
+                                $ Trigger2 = "fondle breasts"
+                                $ character.Mast += 1
+                                jump Rogue_M_Cycle
+                        "Would you like some help? I could. . . up to you, I guess." if Player.Semen and character.Action:
+                                $ character.Statup("Love", 70, 2)
+                                $ character.Statup("Love", 90, 1)
+                                $ character.FaceChange("sexy")
+                                ch_r "Well, [character.Petname], I suppose you could help me with these. . ."
+                                $ character.Statup("Obed", 70, 2)
+                                $ character.Statup("Inbt", 70, 1)
+                                $ D20 = renpy.random.randint(1, 20)
+                                if D20 > 10:
+                                    $ Trigger2 = "fondle breasts"
+                                else:
+                                    $ Trigger2 = "suck breasts"
+                                $ character.Mast += 1
+                                jump Rogue_M_Cycle
+                        "Why don't we take care of each other?" if Player.Semen and character.Action:
+                                $ character.FaceChange("sexy")
+                                ch_r "Well what did you have in mind?"
+                                $ renpy.pop_call()          #removes the call to this label
+                                return                      #returns to sexmenu=
+                        "You look like you have things well in hand. . .":
+                                if character.Lust >= 50:
+                                    $ character.Statup("Love", 70, 2)
+                                    $ character.Statup("Love", 90, 1)
+                                    $ character.FaceChange("sexy")
+                                    ch_r "Well, [character.Petname], I suppose I do at that . ."
+                                    $ character.Statup("Obed", 80, 3)
+                                    $ character.Statup("Inbt", 80, 5)
+                                    jump Rogue_M_Cycle
+                                elif ApprovalCheck(character, 1000):
+                                    $ character.FaceChange("sly")
+                                    ch_r "Well I did, but I think I've got it taken care of for now. . ."
+                                else:
+                                    $ character.FaceChange("angry")
+                                    ch_r "Well I did, but now you've blown the mood."
+
+                #else: You've failed all checks so she kicks you out.
+                $ character.ArmPose = 1
+                $ character.OutfitChange(Changed=0)
+                $ character.Action -= 1
+                $ Player.Statup("Focus", 50, 30)
+                call Checkout(1)
+                $ Line = 0
+                $ Situation = 0
+                $ renpy.pop_call()          #removes the call to this label
+                if Approval:
+                        $ character.FaceChange("bemused", 2)
+                        if bg_current == "bg rogue":
+                            ch_r "So what did you come over for anyway, [character.Petname]?"
+                        else:
+                            ch_r "So . . . fancy bumping into you here, [character.Petname]. . ."
+                        $ character.Blush = 1
+                else:
+                        $ character.Statup("Love", 200, -5)
+                        $ character.FaceChange("angry")
+                        $ character.RecentActions.append("angry")
+                        $ character.DailyActions.append("angry")
+                        if bg_current == "bg rogue":
+                            ch_r "Well if you don't mind, I'd kind of appreciate you getting out of here. Maybe knock next time?"
+                            "[character.Name] kicks you out of her room."
+                            $ renpy.pop_call()
+                            jump Campus_Map
+                        else:
+                            ch_r "Well if you don't mind, I'm getting out of here. Maybe knock next time?"
+                            call Remove_Girl(character)
+                return                      #returns to sexmenu, which returns to original
+    #End of "Join" option
+
+
+
+    if Situation == character:                                                                  #Rogue auto-starts
+                if Approval > 2:                                                      # fix, add rogue auto stuff here
+                        if character.PantsNum() == 5:
+                            "[character.Name]'s hand snakes down her body, and hikes up her skirt."
+                            $ character.Upskirt = 1
+                        elif character.PantsNum() > 6:
+                            "[character.Name] slides her hand down her body and into her jeans."
+                        elif character.HoseNum() >= 5:
+                            "[character.Name]'s hand slides down her body and under her [character.Hose]."
+                        elif character.Panties:
+                            "[character.Name]'s hand slides down her body and under her [character.Panties]."
+                        else:
+                            "[character.Name]'s hand slides down her body and begins to caress her pussy."
+                        $ character.SeenPanties = 1
+                        "She starts to slowly rub herself."
+                        call Rogue_First_Bottomless
+                        menu:
+                            "What do you do?"
+                            "Nothing.":
+                                    $ character.Statup("Inbt", 80, 3)
+                                    $ character.Statup("Inbt", 60, 2)
+                                    "[character.Name] begins to masturbate."
+                            "Go for it.":
+                                    $ character.FaceChange("sexy, 1")
+                                    $ character.Statup("Inbt", 80, 3)
+                                    ch_p "That is so sexy, [character.Pet]."
+                                    $ character.NameCheck() #checks reaction to petname
+                                    "You lean back and enjoy the show."
+                                    $ character.Statup("Love", 80, 1)
+                                    $ character.Statup("Obed", 90, 1)
+                                    $ character.Statup("Obed", 50, 2)
+                            "Ask her to stop.":
+                                    $ character.FaceChange("surprised")
+                                    $ character.Statup("Inbt", 70, 1)
+                                    ch_p "Let's not do that right now, [character.Pet]."
+                                    $ character.NameCheck() #checks reaction to petname
+                                    "[character.Name] pulls her hands away from herself."
+                                    $ character.OutfitChange(Changed=0)
+                                    $ character.Statup("Obed", 90, 1)
+                                    $ character.Statup("Obed", 50, 1)
+                                    $ character.Statup("Obed", 30, 2)
+                                    return
+                        jump Rogue_M_Prep
+                else:
+                        $ temp_modifier = 0                               # fix, add rogue auto stuff here
+                        $ Trigger2 = 0
+                return
+    #End if Rogue intitiates this action
+
+    #first time
+    if not character.Mast:
+            $ character.FaceChange("surprised", 1)
+            $ character.Mouth = "kiss"
+            ch_r "You want me to get myself off, while you watch?"
+            if character.Forced:
+                $ character.FaceChange("sad")
+                ch_r "So you just want to watch then?"
+
+
+    #First time dialog
+    if not character.Mast and Approval:
+            if character.Forced:
+                $ character.FaceChange("sad")
+                $ character.Statup("Love", 70, -3, 1)
+                $ character.Statup("Love", 20, -2, 1)
+            elif character.Love >= (character.Obed + character.Inbt):
+                $ character.FaceChange("sexy")
+                $ character.Brows = "sad"
+                $ character.Mouth = "smile"
+                ch_r "Since my love life's been a bit. . . limited, I've gotten pretty good at this."
+            elif character.Obed >= character.Inbt:
+                $ character.FaceChange("normal")
+                ch_r "If that's what you want, [character.Petname]. . ."
+            else: # Uninhibited
+                $ character.FaceChange("sad")
+                $ character.Mouth = "smile"
+                ch_r "I guess it could be fun with you watching. . ."
+
+
+    #Second time+ initial dialog
+    elif Approval:
+            if character.Forced:
+                $ character.FaceChange("sad")
+                $ character.Statup("Love", 70, -3, 1)
+                $ character.Statup("Love", 20, -2, 1)
+                ch_r "You want to watch me again?"
+            elif Approval and "masturbation" in character.RecentActions:
+                $ character.FaceChange("sexy", 1)
+                ch_r "I guess I have a bit more in me. . ."
+                jump Rogue_M_Prep
+            elif Approval and "masturbation" in character.DailyActions:
+                $ character.FaceChange("sexy", 1)
+                $ Line = renpy.random.choice(["You enjoyed the show?",
+                    "Didn't get enough earlier?",
+                    "It is nice to have an audience. . ."])
+                ch_r "[Line]"
+            elif character.Mast < 3:
+                $ character.FaceChange("sexy", 1)
+                $ character.Brows = "confused"
+                ch_r "You like to watch, huh?"
+            else:
+                $ character.FaceChange("sexy", 1)
+                $ character.ArmPose = 2
+                $ Line = renpy.random.choice(["You sure do like to watch.",
+                    "So you'd like me to go again?",
+                    "You want to watch some more?",
+                    "You want me ta diddle myself?"])
+                ch_r "[Line]"
+                $ Line = 0
+    #End second time+ initial dialog
+
+    #If she's into it. . .
+    if Approval >= 2:
+            if character.Forced:
+                $ character.FaceChange("sad")
+                $ character.Statup("Obed", 90, 1)
+                $ character.Statup("Inbt", 60, 1)
+                ch_r "I suppose, let me get comfortable. . ."
+            else:
+                $ character.FaceChange("sexy", 1)
+                $ character.Statup("Love", 90, 1)
+                $ character.Statup("Inbt", 50, 3)
+                $ Line = renpy.random.choice(["Well. . . ok.",
+                    "I suppose it would help to have something nice to look at. . .",
+                    "I've kind of needed this anyways. . .",
+                    "Sure!",
+                    "I guess I could. . . give it a go.",
+                    "Heh, ok, ok."])
+                ch_r "[Line]"
+                $ Line = 0
+            $ character.Statup("Obed", 20, 1)
+            $ character.Statup("Obed", 60, 1)
+            $ character.Statup("Inbt", 70, 2)
+            jump Rogue_M_Prep
+
+    #If she's not into it, but maybe. . .
+    else:
+        menu:
+            ch_r "That's. . . a little intimate, [character.Petname]."
+            "Maybe later?":
+                    $ character.FaceChange("sexy", 1)
+                    if character.Lust > 50:
+                        ch_r "Well, definitely later. . . but I'll have to think about inviting you."
+                    else:
+                        ch_r "Hmm, maybe. . . I'll let you know."
+                    $ character.Statup("Love", 80, 2)
+                    $ character.Statup("Inbt", 70, 2)
+                    return
+            "You look like you could use it. . .":
+                    if Approval:
+                        $ character.FaceChange("sexy")
+                        $ character.Statup("Obed", 90, 2)
+                        $ character.Statup("Obed", 50, 2)
+                        $ character.Statup("Inbt", 70, 3)
+                        $ character.Statup("Inbt", 40, 2)
+                        $ Line = renpy.random.choice(["Well. . . ok.",
+                            "I suppose it would help to have something nice to look at. . .",
+                            "I've kind of needed this anyways. . .",
+                            "Sure!",
+                            "I guess I could. . . give it a go.",
+                            "Heh, ok, ok."])
+                        ch_r "[Line]"
+                        $ Line = 0
+                        jump Rogue_M_Prep
+
+            "Just get at it already.":                                               # Pressured into it
+                    $ Approval = ApprovalCheck(character, 450, "OI", TabM = 2) # 45, 60, 75, -80(125)
+                    if Approval > 1 or (Approval and character.Forced):
+                        $ character.FaceChange("sad")
+                        $ character.Statup("Love", 70, -5, 1)
+                        $ character.Statup("Love", 200, -5)
+                        ch_r "Ok, fine. I'll give it a try."
+                        $ character.Statup("Obed", 80, 4)
+                        $ character.Statup("Inbt", 80, 1)
+                        $ character.Statup("Inbt", 60, 3)
+                        $ character.Forced = 1
+                        jump Rogue_M_Prep
+                    else:
+                        $ character.Statup("Love", 200, -20)
+                        $ character.RecentActions.append("angry")
+                        $ character.DailyActions.append("angry")
+    # end of asking her to do it
+
+    #She refused all offers.
+    $ character.ArmPose = 1
+    if character.Forced:
+            $ character.FaceChange("angry", 1)
+            ch_r "I'm not doing something so. . . intimate with you watching."
+            $ character.Statup("Lust", 90, 5)
+            if character.Love > 300:
+                $ character.Statup("Love", 70, -2)
+            $ character.Statup("Obed", 50, -2)
+            $ character.RecentActions.append("angry")
+            $ character.DailyActions.append("angry")
+            $ character.RecentActions.append("no masturbation")
+            $ character.DailyActions.append("no masturbation")
+            return
+    elif Taboo:                             # she refuses and this is too public a place for her
+            $ character.FaceChange("angry", 1)
+            $ character.DailyActions.append("tabno")
+            ch_r "I can't do that here!"
+            $ character.Statup("Lust", 90, 5)
+            $ character.Statup("Obed", 50, -3)
+            return
+    elif character.Mast:
+            $ character.FaceChange("sad")
+            ch_r "Nope, not anymore, you'll have to go back to Internet porn."
+    else:
+            $ character.FaceChange("normal", 1)
+            ch_r "Heh, no, I'm not doing that."
+    $ character.RecentActions.append("no masturbation")
+    $ character.DailyActions.append("no masturbation")
+    $ temp_modifier = 0
+    return
+
+label Rogue_M_Prep:
+    $ character.Upskirt = 1
+    $ character.PantiesDown = 1
+    call Rogue_First_Bottomless(1)
+    call Set_The_Scene(Dress=0)
+
+    #if she hasn't seen you yet. . .
+    if "unseen" in character.RecentActions:
+            $ character.FaceChange("sexy")
+            $ character.Eyes = "closed"
+            $ character.ArmPose = 2
+            "You see [character.Name] leaning back, masturbating. You don't think she's noticed you yet."
+    else:
+            $ character.FaceChange("sexy")
+            $ character.ArmPose = 2
+            "[character.Name] lays back and starts to toy with herself."
+            if not character.Mast:#First time
+                    if character.Forced:
+                        $ character.Statup("Love", 90, -20)
+                        $ character.Statup("Obed", 70, 45)
+                        $ character.Statup("Inbt", 80, 35)
+                    else:
+                        $ character.Statup("Love", 90, 15)
+                        $ character.Statup("Obed", 70, 35)
+                        $ character.Statup("Inbt", 80, 40)
+
+
+    $ Trigger = "masturbation"
+    if not Trigger3:
+        $ Trigger3 = "fondle pussy"
+
+    if Situation:
+        $ renpy.pop_call()
+        $ Situation = 0
+    $ Line = 0
+    if Taboo:
+        $ character.DrainWord("tabno")
+    $ character.DrainWord("no masturbation")
+    $ character.RecentActions.append("masturbation")
+    $ character.DailyActions.append("masturbation")
+
+label Rogue_M_Cycle:
+    if Situation == "join":
+        # resets the call made to this option
+        $ renpy.pop_call()
+        $ Situation = 0
+
+    while Round > 0:
+        call reset_position(character, trigger = "masturbation")
+        call Shift_Focus(character)
+        $ character.LustFace
+        if "unseen" in character.RecentActions:
+                $ character.Eyes = "closed"
+
+        $ Player.Focus -= 12 if Player.FocusX and Player.Focus > 50 else 0
+
+        if  Player.Focus < 100:
+                    #Player Command menu
+                    menu:
+                        "Keep Watching.":
+                                pass
+
+                        "[character.Name]. . .[[jump in]" if "unseen" not in character.RecentActions and "join" not in Player.RecentActions and character.Loc == bg_current:
+                                "[character.Name] slows what she's doing with a sly grin."
+                                ch_r "Yeah, did you want something, [character.Petname]?"
+                                $ Situation = "join"
+                                call Rogue_Masturbate
+                        "\"Ahem. . .\"" if "unseen" in character.RecentActions:
+                                jump Rogue_M_Interupted
+
+                        "Start jack'in it." if Trigger2 != "jackin":
+                                call Jackin(character)
+                        "Stop jack'in it." if Trigger2 == "jackin":
+                                $ Trigger2 = 0
+
+                        "Slap her ass" if character.Loc == bg_current:
+                                if "unseen" in character.RecentActions:
+                                        "You smack [character.Name] firmly on the ass!"
+                                        jump Rogue_M_Interupted
+                                else:
+                                        call Slap_Ass(character)
+                                        $ Cnt += 1
+                                        $ Round -= 1
+                                        jump Rogue_M_Cycle
+
+                        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                                    pass
+                        "Focus to last longer." if not Player.FocusX and "focus" in Player.Traits:
+                                    "You concentrate on not burning out too quickly."
+                                    $ Player.FocusX = 1
+                        "Release your focus." if Player.FocusX:
+                                    "You release your concentration. . ."
+                                    $ Player.FocusX = 0
+
+                        "Change what I'm doing":
+                                menu:
+                                    "Offhand action" if character.Loc == bg_current:
+                                            if character.Action and MultiAction:
+                                                call Offhand_Set
+                                                if Trigger2:
+                                                     $ character.Action -= 1
+                                            else:
+                                                call Sex_Basic_Dialog(character,"tired")
+
+                                    "Threesome actions (locked)" if not Partner or "unseen" in character.RecentActions or character.Loc == bg_current:
+                                        pass
+                                    "Threesome actions" if character.Loc == bg_current and Partner and "unseen" not in character.RecentActions:
+                                        menu:
+                                            "Ask [Partner.Name] to do something else":
+                                                        call Three_Change(character)
+                                            "Swap to [Partner.Name]":
+                                                        call Trigger_Swap(character)
+                                            "Undress [Partner.Name]":
+                                                        call Girl_Undress(Partner)
+                                                        jump Rogue_M_Cycle
+                                            "Clean up [Partner.Name] (locked)" if not Partner.Spunk:
+                                                        pass
+                                            "Clean up [Partner.Name]" if Partner.Spunk:
+                                                        call Girl_Cleanup(Partner,"ask")
+                                                        jump Rogue_M_Cycle
+                                            "Never mind":
+                                                        jump Rogue_M_Cycle
+
+                                    "Show her feet" if not ShowFeet and (character.Pose == "doggy" or character.Pose == "sex"):
+                                            $ ShowFeet = 1
+                                    "Hide her feet" if ShowFeet and (character.Pose == "doggy" or character.Pose == "sex"):
+                                            $ ShowFeet = 0
+
+                                    "Undress [character.Name]":
+                                            if "unseen" in character.RecentActions:
+                                                    ch_p "Oh, yeah, take it off. . ."
+                                                    jump Rogue_M_Interupted
+                                            else:
+                                                    call Girl_Undress(character)
+                                    "Clean up [character.Name] (locked)" if not character.Spunk:
+                                            pass
+                                    "Clean up [character.Name]" if character.Spunk:
+                                            if "unseen" in character.RecentActions:
+                                                    ch_p "You've got a little something on you. . ."
+                                                    jump Rogue_M_Interupted
+                                            else:
+                                                    call Girl_Cleanup(character,"ask")
+                                    "Never mind":
+                                            jump Rogue_M_Cycle
+
+                        "Back to Sex Menu" if MultiAction and character.Loc == bg_current:
+                                    ch_p "Let's try something else."
+                                    call reset_position(character)
+                                    $ Situation = "shift"
+                                    $ Line = 0
+                                    jump Rogue_M_Interupted
+                        "End Scene" if not MultiAction or character.Loc != bg_current:
+                                    ch_p "Let's stop for now."
+                                    call reset_position(character)
+                                    $ Line = 0
+                                    jump Rogue_M_Interupted
+        #End menu (if Line)
+
+        call Shift_Focus(character)
+        call Sex_Dialog(character,Partner)
+
+        #If either of you could cum
+
+        $ Cnt += 1
+        $ Round -= 1
+
+        $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
+
+        if Player.Focus >= 100 or character.Lust >= 100:
+                    #If you can cum:
+                    if Player.Focus >= 100:
+                        if "unseen" not in character.RecentActions:
+                            #if she knows you're there
+                            call Player_Cumming(character)
+                            if "angry" in character.RecentActions:
+                                call reset_position(character)
+                                return
+                            $ character.Statup("Lust", 200, 5)
+                            if 100 > character.Lust >= 70 and character.OCount < 2:
+                                $ character.RecentActions.append("unsatisfied")
+                                $ character.DailyActions.append("unsatisfied")
+                            $ Line = "came"
+                        else: #If she wasn't aware you were there
+                            "You grunt and try to hold it in."
+                            $ Player.Focus = 95
+                            if character.Loc == bg_current:
+                                    jump Rogue_M_Interupted
+
+                    #If Rogue can cum
+                    if character.Lust >= 100:
+                        call Girl_Cumming(character)
+                        if character.Loc == bg_current:
+                                jump Rogue_M_Interupted
+
+                    if Line == "came":
+                        $ Line = 0
+                        if not Player.Semen:
+                            "You're emptied out, you should probably take a break."
+                            $ Trigger2 = 0 if Trigger2 == "jackin" else Trigger2
+
+
+                        if "unsatisfied" in character.RecentActions:#And Rogue is unsatisfied,
+                            "[character.Name] still seems a bit unsatisfied with the experience."
+                            menu:
+                                "Let her keep going?"
+                                "Yes, keep going for a bit.":
+                                    $ Line = "You let her get back into it"
+                                    jump Rogue_M_Cycle
+                                "No, I'm done.":
+                                    "You ask her to stop."
+                                    return
+        if Partner and Partner.Lust >= 100:
+                #Checks if partner could orgasm
+                call Girl_Cumming(Partner)
+        #End orgasm
+
+        if "unseen" in character.RecentActions:
+                if Round == 10:
+                    "It's getting a bit late, [character.Name] will probably be wrapping up soon."
+                elif Round == 5:
+                    "She's definitely going to stop soon."
+        else:
+                if character.Loc == bg_current:
+                        call Escalation(character) #sees if she wants to escalate things
+
+                if Round == 10:
+                    ch_r "We might want to wrap this up, it's getting late."
+                    $ character.Lust += 10
+                elif Round == 5:
+                    ch_r "Seriously, it'll be time to stop soon."
+                    $ character.Lust += 25
+
+    #Round = 0 loop breaks
+    $ character.FaceChange("bemused", 0)
+    $ Line = 0
+    if "unseen" not in character.RecentActions:
+        ch_r "Ok, [character.Petname], that's enough of that for now."
+
+label Rogue_M_Interupted:
+
+    # If she hasn't noticed you're there before cumming
+    if "unseen" in character.RecentActions:
+                $ character.FaceChange("surprised", 1)
+                "[character.Name] stops what she's doing with a start, eyes wide."
+                call Rogue_First_Bottomless(1)
+                $ character.FaceChange("surprised", 1)
+
+                #If you've been jacking it
+                if Trigger2 == "jackin":
+                        ch_r "H- how long you been stand'in there, [character.Petname]?"
+                        $ character.Eyes = "down"
+                        menu:
+                            ch_r "And why is your cock out like that?!"
+                            "Long enough, it was an excellent show.":
+                                    $ character.FaceChange("sexy")
+                                    $ character.Statup("Obed", 50, 3)
+                                    $ character.Statup("Obed", 70, 2)
+                                    ch_r "Well, I imagine it was. . ."
+                                    if character.Love >= 800 or character.Obed >= 500 or character.Inbt >= 500:
+                                        $ temp_modifier += 10
+                                        $ character.Statup("Lust", 90, 5)
+                                        ch_r "And the view from this angle ain't so bad either. . ."
+
+                            "I. . . just got here?":
+                                    $ character.FaceChange("angry")
+                                    $ character.Statup("Love", 70, 2)
+                                    $ character.Statup("Love", 90, 1)
+                                    $ character.Statup("Obed", 50, 2)
+                                    $ character.Statup("Obed", 70, 2)
+                                    "She looks pointedly at your cock,"
+                                    ch_r "A likely story . . ."
+                                    if character.Love >= 800 or character.Obed >= 500 or character.Inbt >= 500:
+                                            $ temp_modifier += 10
+                                            $ character.Statup("Lust", 90, 5)
+                                            $ character.FaceChange("bemused", 1)
+                                            ch_r "Still, can't blame a fella for take'in inspirations."
+                                    else:
+                                            $ temp_modifier -= 10
+                                            $ character.Statup("Lust", 200, -5)
+                        call Seen_First_Peen(character,Partner)
+                        ch_r "Hmm. . ."
+
+                #you haven't been jacking it
+                else:
+                        ch_r "H- how long you been stand'in there, [character.Petname]?"
+                        menu:
+                            extend ""
+                            "Long enough.":
+                                    $ character.FaceChange("sexy", 1)
+                                    $ character.Statup("Obed", 50, 3)
+                                    $ character.Statup("Obed", 70, 2)
+                                    ch_r "Well I hope you got a good show out of it. . ."
+                            "I just got here.":
+                                    $ character.FaceChange("bemused", 1)
+                                    $ character.Statup("Love", 70, 2)
+                                    $ character.Statup("Love", 90, 1)
+                                    ch_r "A likely story . . ."
+                                    $ character.Statup("Obed", 50, 2)
+                                    $ character.Statup("Obed", 70, 2)
+
+                $ character.DrainWord("unseen",1,0) #She sees you, so remove unseens
+                $ character.Mast += 1
+                if Round <= 10:
+                    ch_r "It's getting too late to do much about it right now though."
+                    return
+                $ Situation = "join"
+                call Rogue_Masturbate
+                "error: report this if you see it."
+                return #should be redundant
+    #End Unseen
+
+    #else, if She's seen you already
+    $ character.Action -= 1
+    $ character.Mast += 1
+
+    if Partner == EmmaX:
+        call Partner_Like(character,4)
+    else:
+        call Partner_Like(character,3)
+    call Checkout
+    if Situation == "shift":
+        $ Situation = 0
+        return
+    $ Situation = 0
+
+    if character.Loc != bg_current:
+        return
+
+    if Round <= 10:
+            ch_r "I need to take a little break here, [character.Petname]."
+            return
+    $ character.FaceChange("sexy", 1)
+    if character.Lust < 20:
+        ch_r "That really worked for me, [character.Petname]. How about you?"
+    else:
+        ch_r "Yeah, what did you want?"
+    menu:
+        extend ""
+        "Well, I have something you could take care of. . ." if Player.Semen and character.Action:
+                $ Situation = "shift"
+                return
+        "You could just keep going. . ." if Player.Semen:
+                $ character.FaceChange("sly")
+                if character.Action and Round >= 10:
+                    ch_r "Well, alright. . ."
+                    jump Rogue_M_Cycle
+                else:
+                    ch_r "I'm kinda worn out, maybe time for a break. . ."
+        "I'm good here. [[Stop]":
+                if character.Love < 800 and character.Inbt < 500 and character.Obed < 500:
+                    $ character.OutfitChange(Changed=0)
+                $ character.FaceChange("normal")
+                $ character.Brows = "confused"
+                ch_r "Well. . . ok then. . ."
+                $ character.Brows = "normal"
+        "You should probably stop for now." if character.Lust > 30:
+                $ character.FaceChange("angry")
+                ch_r "Well if you say so."
+    return

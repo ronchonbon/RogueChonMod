@@ -706,7 +706,7 @@ label Girls_Taboo(Girl=0,Cnt= 1,Choice=0,D20=0):  #nee  Rogue_Taboo(Cnt= 1,Choic
         if D20 < 10:
                 #if you're at the point where the girls would notice you. . .
                 if Taboo > 20:
-                        if (Trigger == "kiss you" and not Trigger2 and not Trigger3):
+                        if (Trigger == "kiss_you" and not Trigger2 and not Trigger3):
                                 #if it's very innocent, skip this part
                                 pass
                         elif Girl not in Rules:
@@ -758,7 +758,7 @@ label Girls_Taboo(Girl=0,Cnt= 1,Choice=0,D20=0):  #nee  Rogue_Taboo(Cnt= 1,Choic
                 #This is a private space with others around.
                 call Girls_Noticed(Girl)
                 return
-        elif (Trigger == "kiss you" and not Trigger2 and not Trigger3):
+        elif (Trigger == "kiss_you" and not Trigger2 and not Trigger3):
                 #if it's very innocent, skip this part
                 pass
         elif Cnt < 4:
@@ -1126,7 +1126,7 @@ label Activity_Check(Girl=0,Girl2=0,Silent=0,Removal=1,ClothesCheck=1,Mod=0,Appr
         elif Trigger == "masturbation":
                     $ Approval = ApprovalCheck(Girl,1200,Bonus=Mod, TabM = (TabooM* 2 ))
 
-        elif Trigger == "kiss you":
+        elif Trigger == "kiss_you":
                     $ Approval = ApprovalCheck(Girl,500,Bonus=Mod, TabM = 0)
         elif Trigger == "fondle thighs":
                     $ Approval = ApprovalCheck(Girl,750,Bonus=Mod, TabM = 0)
@@ -1166,7 +1166,7 @@ label Activity_Check(Girl=0,Girl2=0,Silent=0,Removal=1,ClothesCheck=1,Mod=0,Appr
                     $ Approval = ApprovalCheck(Girl,1400,Bonus=(Mod+200), TabM = (TabooM* 2 ))
         elif Trigger4 == "watch":
                     $ Approval = ApprovalCheck(Girl,1000,Bonus=(Mod+200), TabM = 0)
-        elif Trigger4 == "kiss you":
+        elif Trigger4 == "kiss_you":
                     $ Approval = ApprovalCheck(Girl,600,Bonus=Mod, TabM = 0)
 
         if not Silent and not Approval and not Girl.Forced:

@@ -30,6 +30,10 @@ init python:
             self.Spunk = 0
             self.Wet = 0
 
+            self.focused_girl = None
+            self.primary_action = None
+            self.offhand_action = None
+
         def AddWord(self, Only = 0, Recent = 0, Daily = 0, Trait = 0, History = 0):
             if (Recent and not Only) or (Recent and Recent not in self.RecentActions):
                 self.RecentActions.append(Recent)
@@ -1006,9 +1010,9 @@ init python:
                         Kissing = 1
                 elif Partner != self:
                         #If the called girl is kissing and is primary
-                        if Trigger == "kiss you" or Trigger2 == "kiss you":
+                        if Trigger == "kiss_you" or Trigger2 == "kiss_you":
                             Kissing = 1
-                elif Trigger4 == "kiss you":
+                elif Trigger4 == "kiss_you":
                         #If the called girl is kissing you in a threesome action
                         Kissing = 1
 

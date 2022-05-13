@@ -148,12 +148,209 @@ label pussy_launch(character, trigger = Trigger, set = True):
 
     return
 
+label handjob_launch(character, trigger = Trigger):
+    if renpy.showing(character.Tag + "_HJ_Animation"):
+        $ Trigger = "hand"
+
+        return
+
+    call hide_girl(character)
+
+    $ character.Arms = 0
+    $ character.ArmPose = 1
+
+    if not renpy.showing("Rogue_Sprite"):
+        show Rogue_Sprite at sprite_location(character.sprite_location) zorder character.Layer:
+            alpha 1
+            zoom 1.7 xpos 700 offset (0,200)
+        with dissolve
+
+    show Rogue_Sprite at sprite_location(character.sprite_location) zorder character.Layer:
+        alpha 1
+        ease 1 zoom 1.7  xpos 700 offset (0,200)
+
+    if Taboo and trigger == "L":
+        if len(Present) >= 2:
+            if Present[0] != character:
+                "[character.Name] looks back at [Present[0].Name] to see if she's watching."
+            elif Present[1] != character:
+                "[character.Name] looks back at [Present[1].Name] to see if she's watching."
+        else:
+            "[character.Name] looks around to see if anyone can see her."
+        if not character.Hand and character.Arms:
+            "As you pull out your cock, [character.Name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
+        else:
+            "She then leans over and grabs your cock."
+    elif trigger == "L":
+        if not character.Hand and character.Arms:
+            "As you pull out your cock, [character.Name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
+        else:
+            "[character.Name] bends down and grabs your cock."
+    else:
+            "[character.Name] bends down and grabs your cock."
+
+    $ Speed = 0
+
+    if trigger != "cum":
+        $ Trigger = "hand"
+
+    show Rogue_HJ_Animation at sprite_location(character.sprite_location) zorder 150 with easeinbottom
+
+    return
+
+label handjob_reset(character): # The sequence to the Rogue animations from handjob to default
+    if not renpy.showing(character.Tag + "_HJ_Animation"):
+        return
+
+    $ Speed = 0
+
+    hide Rogue_HJ_Animation
+    with dissolve
+
+    call hide_girl(character)
+
+    show Rogue_Sprite at sprite_location(character.sprite_location) zorder character.Layer:
+        alpha 1
+        zoom 1.7  xpos 700 offset (0,200)
+
+    show Rogue_Sprite zorder character.Layer:
+        alpha 1
+        ease 1 zoom 1.5 offset (0,50)
+        pause .5
+        ease .5 zoom 1 xpos character.sprite_location yoffset 0
+
+    show Rogue_Sprite at sprite_location(character.sprite_location) zorder character.Layer:
+        alpha 1
+        zoom 1  xpos character.sprite_location yoffset 0
+
+    return
+
+label blowjob_launch(character, trigger = Trigger):
+    if renpy.showing("Rogue_BJ_Animation"):
+        return
+
+    call hide_girl(character)
+
+    if trigger == "L" or trigger == "cum":
+        show Rogue_Sprite at sprite_location(StageCenter) zorder character.Layer:
+            alpha 1
+            ease 1 zoom 2.5 offset (70,140) #(-90,140) offset (150,80)
+        with dissolve
+    else:
+        show Rogue_Sprite at sprite_location(StageCenter) zorder character.Layer:
+            alpha 1
+            zoom 2.5 offset (70,140) #(-90,140)
+        with dissolve
+
+    if Taboo and trigger == "L":
+        if len(Present) >= 2:
+            if Present[0] != RogueX:
+                "[character.Name] looks back at [Present[0].Name] to see if she's watching."
+            elif Present[1] != RogueX:
+                "[character.Name] looks back at [Present[1].Name] to see if she's watching."
+        else:
+            "[character.Name] looks around to see if anyone can see her."
+    if trigger == "L":
+        if not character.Blow:
+            "[character.Name] hesitantly pulls down your pants and touches her mouth to your cock."
+        else:
+            "[character.Name] bends down and begins to suck on your cock."
+
+    $ Speed = 0
+
+    if trigger != "cum":
+        $ Trigger = "blow"
+
+    show Rogue_Sprite zorder character.Layer:
+        alpha 0
+    show Rogue_BJ_Animation zorder 150:
+        pos (645,510)
+
+    return
+
+label blowjob_reset(character): # The sequence to the Rogue animations from BJ to default
+    if not renpy.showing("Rogue_BJ_Animation"):
+        return
+
+    call hide_girl(character)
+
+    $ Speed = 0
+
+    show Rogue_Sprite at sprite_location(character.sprite_location) zorder character.Layer:
+        zoom 2 offset (70,140)
+        alpha 1
+        block:
+            pause .5
+            ease 1 zoom 1.5 offset (-50,50)
+            pause .5
+            ease .5 zoom 1 offset (0,0)
+
+    show Rogue_Sprite at sprite_location(character.sprite_location) zorder character.Layer:
+        alpha 1
+        zoom 1 offset (0,0)
+
+    $ character.FaceChange("sexy")
+
+    return
+
+label sex_launch(character, trigger = Trigger):
+    $ Trigger3 = 0 if Trigger3 == "hand" else Trigger3
+
+    $ trigger = "solo" if not trigger else trigger
+
+    $ Player.Sprite = 1
+
+    if trigger == "sex":
+        $ Player.Cock = "in"
+
+        if Trigger2 in ["fondle pussy","dildo pussy","lick pussy"]:
+            $ Trigger2 = 0
+    elif trigger == "anal":
+        $ Player.Cock = "anal"
+
+        if Trigger2 in ["insert ass","dildo anal","lick ass"]:
+            $ Trigger2 = 0
+    elif trigger == "hotdog":
+        $ Player.Cock = "out"
+    elif trigger == "foot":
+        $ ShowFeet = 1
+
+        $ Player.Cock = "foot"
+    elif trigger == "massage":
+        $ Player.Sprite = 0
+        $ Player.Cock = 0
+    else: #elif trigger == "solo":
+        $ Player.Sprite = 0
+        $ Player.Cock = "out"
+
+        $ Speed = 0
+
+    $ Trigger = trigger
+
+    if character.Pose == "doggy":
+        call doggy_launch(character, trigger)
+
+        return
+
+    if renpy.showing("Rogue_SexSprite"):
+        return
+
+    $ Speed = 0
+
+    call hide_girl(character, sprite = True)
+
+    show Rogue_SexSprite zorder 150
+
+    with dissolve
+
+    return
+
 label sex_reset(character):
     $ character.ArmPose = 2
 
     if character == RogueX:
         if renpy.showing("Rogue_Doggy_Animation"):
-            call Rogue_Doggy_Reset
+            call doggy_reset(character)
 
             return
         if not renpy.showing("Rogue_SexSprite"):
@@ -200,6 +397,52 @@ label sex_reset(character):
     $ Speed = 0
 
     return
+
+label doggy_launch(character, trigger = Trigger):
+    if renpy.showing(character.Tag + "_Doggy_Animation"):
+        return
+
+    $ Speed = 0
+
+    call hide_girl(character, sprite = True)
+
+    show Rogue_Doggy_Animation at sprite_location(StageCenter+50) zorder 150
+    with dissolve
+
+    return
+
+label doggy_reset(character):
+    if renpy.showing(character.Tag + "_Doggy_Animation"):
+        return
+
+    $ character.ArmPose = 2
+    $ character.SpriteVer = 0
+
+    hide Rogue_Doggy_Animation
+
+    call hide_girl(character)
+
+    show Rogue_Sprite at sprite_location(character.sprite_location) zorder character.Layer:
+        alpha 1
+        zoom 1
+        offset (0,0)
+        anchor (0.6, 0.0)
+    with dissolve
+
+    $ Speed = 0
+
+    return
+
+
+
+
+
+
+
+
+
+
+
 
 transform Rogue_Hand_1():
     subpixel True
@@ -340,70 +583,6 @@ transform Rogue_BJ_StartingBody():
                                                                #BJ Launchers
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-label Rogue_BJ_Launch(Line = Trigger):
-    # The sequence to launch the Rogue BJ animations
-    if renpy.showing("Rogue_BJ_Animation"):
-        return
-
-    call hide_girl(RogueX)
-    if Line == "L" or Line == "cum":
-        show Rogue_Sprite at sprite_location(StageCenter) zorder RogueX.Layer:
-            alpha 1
-#            zoom 1 offset (0,0)
-            ease 1 zoom 2.5 offset (70,140) #(-90,140) offset (150,80)
-        with dissolve
-    else:
-        show Rogue_Sprite at sprite_location(StageCenter) zorder RogueX.Layer:
-            alpha 1
-            zoom 2.5 offset (70,140) #(-90,140)
-        with dissolve
-
-    if Taboo and Line == "L":
-            # Rogue gets started. . .
-            if len(Present) >= 2:
-                if Present[0] != RogueX:
-                        "[RogueX.Name] looks back at [Present[0].Name] to see if she's watching."
-                elif Present[1] != RogueX:
-                        "[RogueX.Name] looks back at [Present[1].Name] to see if she's watching."
-            else:
-                        "[RogueX.Name] looks around to see if anyone can see her."
-    if Line == "L":
-            if not RogueX.Blow:
-                "[RogueX.Name] hesitantly pulls down your pants and touches her mouth to your cock."
-            else:
-                "[RogueX.Name] bends down and begins to suck on your cock."
-
-    $ Speed = 0
-
-    if Line != "cum":
-        $ Trigger = "blow"
-
-    show Rogue_Sprite zorder RogueX.Layer:
-        alpha 0
-    show Rogue_BJ_Animation zorder 150:
-        pos (645,510)
-    return
-
-label Rogue_BJ_Reset: # The sequence to the Rogue animations from BJ to default
-    if not renpy.showing("Rogue_BJ_Animation"):
-        return
-#    hide Rogue_BJ_Animation
-    call hide_girl(RogueX)
-    $ Speed = 0
-
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location) zorder RogueX.Layer:
-        zoom 2 offset (70,140)
-        alpha 1
-        block:
-            pause .5
-            ease 1 zoom 1.5 offset (-50,50)
-            pause .5
-            ease .5 zoom 1 offset (0,0)
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location) zorder RogueX.Layer:
-        alpha 1
-        zoom 1 offset (0,0)
-    $ RogueX.FaceChange("sexy")
-    return
 
 transform Rogue_BJ_MouthAnim():
         #The animation for the heading mouth
@@ -412,7 +591,7 @@ transform Rogue_BJ_MouthAnim():
         block: #total time 10 down, 15 back up
             pause .10   #.4
             easeout .55 zoom 0.9 #.25
-            linear .10 zoom 0.87
+            linear 0.10 zoom 0.87
             easein .30 zoom 0.9
             pause .15
             easeout .40 zoom 0.87
@@ -421,48 +600,6 @@ transform Rogue_BJ_MouthAnim():
             pause .35
             repeat
 
-
-#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>                                     Sex Launch/Reset
-label Rogue_Sex_Launch(Line = Trigger):
-    $ Trigger3 = 0 if Trigger3 == "hand" else Trigger3
-
-    $ Line = "solo" if not Line else Line
-    $ Player.Sprite = 1
-    if Line == "sex":
-        $ Player.Cock = "in"
-        if Trigger2 in ("fondle pussy","dildo pussy","lick pussy"):
-                $ Trigger2 = 0
-    elif Line == "anal":
-        $ Player.Cock = "anal"
-        if Trigger2 in ("insert ass","dildo anal","lick ass"):
-                $ Trigger2 = 0
-    elif Line == "hotdog":
-        $ Player.Cock = "out"
-    elif Line == "foot":
-        $ ShowFeet = 1
-        $ Player.Cock = "foot"
-    elif Line == "massage":
-        $ Player.Sprite = 0
-        $ Player.Cock = 0
-    else: #elif Line == "solo":
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
-        $ Speed = 0
-    $ Trigger = Line
-
-    if RogueX.Pose == "doggy":
-            call Rogue_Doggy_Launch(Line)
-            return
-    if renpy.showing("Rogue_SexSprite"):
-        return
-    $ Speed = 0
-    call hide_girl(RogueX, sprite = True)
-    show Rogue_SexSprite zorder 150
-#    show Rogue_SexSprite zorder 150:
-#        pos (750,230)
-
-    with dissolve
-    return
 
 transform Rogue_Sex_Legs_FootAnim1A():
         #this is the animation for Rogue's lower body during Footjobs, Speed 2 (slow)
@@ -714,60 +851,60 @@ transform Rogue_TJ_Over_2():
         repeat
 
 
-label Rogue_TJ_Launch(Line = Trigger):
+label Rogue_TJ_Launch(trigger = Trigger):
     # The sequence to launch the Rogue Titfuck animations
     if renpy.showing("Rogue_TJ_Animation"):
         return
-    call hide_girl(RogueX)
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location) zorder RogueX.Layer:
+    call hide_girl(character)
+    show Rogue_Sprite at sprite_location(character.sprite_location) zorder character.Layer:
         alpha 1
         ease 1 zoom 2 xpos 550 offset (0,50)
     if Taboo: # Rogue gets started. . .
             if len(Present) >= 2:
                 if Present[0] != RogueX:
-                        "[RogueX.Name] looks back at [Present[0].Name] to see if she's watching."
+                        "[character.Name] looks back at [Present[0].Name] to see if she's watching."
                 elif Present[1] != RogueX:
-                        "[RogueX.Name] looks back at [Present[1].Name] to see if she's watching."
+                        "[character.Name] looks back at [Present[1].Name] to see if she's watching."
             else:
-                        "[RogueX.Name] looks around to see if anyone can see her."
+                        "[character.Name] looks around to see if anyone can see her."
 
-    if RogueX.Chest and RogueX.Over:
-        "She throws off her [RogueX.Over] and her [RogueX.Chest]."
-    elif RogueX.Over:
-        "She throws off her [RogueX.Over], baring her breasts underneath."
-    elif RogueX.Chest:
-        "She tugs off her [RogueX.Chest] and throws it aside."
-    $ RogueX.Over = 0
-    $ RogueX.Chest = 0
-    $ RogueX.Arms = 0
+    if character.Chest and character.Over:
+        "She throws off her [character.Over] and her [character.Chest]."
+    elif character.Over:
+        "She throws off her [character.Over], baring her breasts underneath."
+    elif character.Chest:
+        "She tugs off her [character.Chest] and throws it aside."
+    $ character.Over = 0
+    $ character.Chest = 0
+    $ character.Arms = 0
 
-    call first_topless(RogueX)
+    call first_topless(character)
 
-    if not RogueX.Tit and Line == "L": #first time
-        if not RogueX.Chest and not RogueX.Over:
-            "As you pull out your cock, [RogueX.Name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
-        elif RogueX.Chest and not RogueX.Over:
-            "As you pull out your cock, [RogueX.Name] hesitantly places it under her [RogueX.Chest], between her breasts and starts to rub them up and down the shaft."
-        elif RogueX.Chest and RogueX.Over:
-            "As you pull out your cock, [RogueX.Name] hesitantly places it under her [RogueX.Over], between her breasts and starts to rub them up and down the shaft."
+    if not character.Tit and trigger == "L": #first time
+        if not character.Chest and not character.Over:
+            "As you pull out your cock, [character.Name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
+        elif character.Chest and not character.Over:
+            "As you pull out your cock, [character.Name] hesitantly places it under her [character.Chest], between her breasts and starts to rub them up and down the shaft."
+        elif character.Chest and character.Over:
+            "As you pull out your cock, [character.Name] hesitantly places it under her [character.Over], between her breasts and starts to rub them up and down the shaft."
         else:
-            "As you pull out your cock, [RogueX.Name] hesitantly places it under her clothes, between her breasts and starts to rub them up and down the shaft."
-    elif Line == "L": #any other time
-        if not RogueX.Chest and not RogueX.Over:
-            "As you pull out your cock, [RogueX.Name] places it between her breasts and starts to rub them up and down the shaft."
-        elif RogueX.Chest and not RogueX.Over:
-            "As you pull out your cock, [RogueX.Name] places it under her [RogueX.Chest], between her breasts and starts to rub them up and down the shaft."
-        elif RogueX.Chest and RogueX.Over:
-            "As you pull out your cock, [RogueX.Name] places it under her [RogueX.Over], between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [character.Name] hesitantly places it under her clothes, between her breasts and starts to rub them up and down the shaft."
+    elif trigger == "L": #any other time
+        if not character.Chest and not character.Over:
+            "As you pull out your cock, [character.Name] places it between her breasts and starts to rub them up and down the shaft."
+        elif character.Chest and not character.Over:
+            "As you pull out your cock, [character.Name] places it under her [character.Chest], between her breasts and starts to rub them up and down the shaft."
+        elif character.Chest and character.Over:
+            "As you pull out your cock, [character.Name] places it under her [character.Over], between her breasts and starts to rub them up and down the shaft."
         else:
-            "As you pull out your cock, [RogueX.Name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [character.Name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
     else:
-            "[RogueX.Name] wraps her tits around your cock."
+            "[character.Name] wraps her tits around your cock."
     show blackscreen onlayer black with dissolve
-    show Rogue_Sprite zorder RogueX.Layer:
+    show Rogue_Sprite zorder character.Layer:
         alpha 0
     $ Speed = 0
-    if Line != "cum":
+    if trigger != "cum":
         $ Trigger = "titjob"
     show Rogue_TJ_Animation at sprite_location(StageRight) zorder 150
     hide blackscreen onlayer black with dissolve
@@ -778,19 +915,19 @@ label Rogue_TJ_Reset:
     if not renpy.showing("Rogue_TJ_Animation"):
             return
     hide Rogue_TJ_Animation
-    call hide_girl(RogueX)
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location) zorder RogueX.Layer:
+    call hide_girl(character)
+    show Rogue_Sprite at sprite_location(character.sprite_location) zorder character.Layer:
             zoom 2 xpos 550 offset (0,50)
-    show Rogue_Sprite zorder RogueX.Layer:
+    show Rogue_Sprite zorder character.Layer:
         alpha 1
         ease 1 zoom 1.5 xpos 500 offset (0,50)
         pause .5
-        ease .5 zoom 1 xpos RogueX.sprite_location yoffset 0
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location) zorder RogueX.Layer:
+        ease .5 zoom 1 xpos character.sprite_location yoffset 0
+    show Rogue_Sprite at sprite_location(character.sprite_location) zorder character.Layer:
         alpha 1
-        zoom 1 xpos RogueX.sprite_location yoffset 0
+        zoom 1 xpos character.sprite_location yoffset 0
 
-    "[RogueX.Name] pulls back"
+    "[character.Name] pulls back"
     return
 
 
@@ -1014,7 +1151,7 @@ label Les_Launch(Girl=0,XLoc=0,YLoc=0,XZoom=0,BO=[]): #rkeljs
                     else:
                         $ XLoc = 715
                     if BO[0] == KittyX:
-                            if RogueX in (Partner,Girl):
+                            if character in (Partner,Girl):
                                     $ KittyX.Layer = 100
                             else:
                                     $ KittyX.Layer = 25

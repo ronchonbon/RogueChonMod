@@ -1,3 +1,51 @@
+label sex_action(action = None):
+    if AloneCheck(character) and character.Taboo == 20:
+        $ character.Taboo = 0
+
+        $ Taboo = 0
+
+    call Shift_Focus(character)
+
+    if action == "SkipTo":
+        $ renpy.pop_call() #causes it to skip past the Trigger Swap
+        $ renpy.pop_call() #causes it to skip past the cycle you were in before
+
+        call SkipTo(character)
+    elif action == "switch":
+        $ renpy.pop_call() #causes it to skip past call here from Sex_Menu_Threesome
+    elif action == "masturbate":
+        call Rogue_M_Prep
+
+        if not Situation:
+            return
+    elif action == "lesbian":
+        call Les_Prep(character)
+
+        if not Situation:
+            return
+    elif action == "kissing":
+        call KissPrep(character)
+
+        if not Situation:
+            return
+    elif action == "fondle_breasts":
+        call fondle_breasts(character)
+
+        if not Situation:
+            return
+    elif action in ["handjob", "blowjob"]:
+        call before_handjob(character, action)
+
+        if not Situation:
+            return
+    elif action == "sex":
+        call before_sex(character, action)
+
+        if not Situation:
+            return
+
+    return
+
 label sex_menu(character, action):
     menu:
         "Keep going. . ." if Speed:
@@ -48,15 +96,15 @@ label sex_menu(character, action):
         "Other options":
             menu:
                 "Offhand action":
-                    if character.Action and MultiAction:
+                    if character.actionion and Multiactionion:
                         call Offhand_Set
 
                         if Trigger2:
-                            $ character.Action -= 1
+                            $ character.actionion -= 1
                     else:
                         call Sex_Basic_Dialog(character,"tired")
                 "Shift primary action":
-                    if character.Action and MultiAction:
+                    if character.actionion and Multiactionion:
                         menu:
                             "How about sex?" if action != "sex":
                                 $ Situation = "shift"
@@ -141,7 +189,7 @@ label sex_menu(character, action):
                     call sex_cycle(character, action)
 
                     return
-        "Back to Sex Menu" if MultiAction:
+        "Back to Sex Menu" if Multiactionion:
             ch_p "Let's try something else."
 
             call sex_reset(character)
@@ -152,7 +200,7 @@ label sex_menu(character, action):
             call after_sex(character, action)
 
             return
-        "End Scene" if not MultiAction:
+        "End Scene" if not Multiactionion:
             ch_p "Let's stop for now."
 
             call sex_reset(character)
@@ -208,9 +256,9 @@ label sex_set_modifier(character, action):
 
         if character.Loose:
             $ temp_modifier += 10
-        elif "anal" in character.RecentActions:
+        elif "anal" in character.Recentactionions:
             $ temp_modifier -= 20
-        elif "anal" in character.DailyActions:
+        elif "anal" in character.Dailyactionions:
             $ temp_modifier -= 10
 
         if Situation == "shift":
@@ -240,12 +288,12 @@ label sex_set_modifier(character, action):
     if character.ForcedCount and not character.Forced:
         $ temp_modifier -= 5*character.ForcedCount
 
-    if Taboo and "tabno" in character.DailyActions:
+    if Taboo and "tabno" in character.Dailyactionions:
         $ temp_modifier -= 10
 
-    if "no_" + action in character.DailyActions:
+    if "no_" + action in character.Dailyactionions:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no_" + action in character.RecentActions else 0
+        $ temp_modifier -= 10 if "no_" + action in character.Recentactionions else 0
 
     return
 
@@ -259,75 +307,10 @@ label before_sex(character, action):
     if Situation == character:
         $ Situation = 0
 
-        if action in ["sex", "anal"]:
-            if character.PantsNum() == 5:
-                call before_sex_skirt_lines(character)
+        call character_initiated_action(character, action)
 
-                $ character.Upskirt = 1
-            elif character.PantsNum() > 6:
-                call before_sex_leg_lines(character)
-
-                $ character.Upskirt = 1
-            elif character.PantsNum() == 6:
-                call before_sex_shorts_lines(character)
-
-                $ character.Upskirt = 1
-            else:
-                call before_sex_commando_lines(character)
-
-            $ character.SeenPanties = 1
-
-            if action == "sex":
-                "She slides the tip along her pussy and seems to want you to insert it."
-            elif action == "anal":
-                call anal_wants_to_insert_lines(character)
-        else:
-            call before_hotdog_lines(character)
-
-        menu:
-            "What do you do?"
-            "Go with it.":
-                $ character.Statup("Inbt", 80, 3)
-                $ character.Statup("Inbt", 50, 2)
-
-                "[character.Name] slides it in."
-            "Praise her.":
-                $ character.FaceChange("sexy", 1)
-                $ character.Statup("Inbt", 80, 3)
-
-                if action == "anal" and character == RogueX:
-                    ch_p "Ooo, dirty girl, [character.Pet], let's do this."
-                elif action == "hotdog" and character == RogueX:
-                    ch_p "Hmmm, that's good, [character.Pet]."
-                else:
-                    ch_p "Oh yeah, [character.Pet], let's do this."
-
-                $ character.NameCheck() #checks reaction to petname
-
-                "[character.Name] slides it in."
-
-                $ character.Statup("Love", 85, 1)
-                $ character.Statup("Obed", 90, 1)
-                $ character.Statup("Obed", 50, 2)
-            "Ask her to stop.":
-                $ character.FaceChange("surprised")
-                $ character.Statup("Inbt", 70, 1)
-
-                ch_p "Let's not do that right now, [character.Pet]."
-
-                $ character.NameCheck() #checks reaction to petname
-
-                "[character.Name] pulls back."
-
-                $ character.Statup("Obed", 90, 1)
-                $ character.Statup("Obed", 50, 1)
-                $ character.Statup("Obed", 30, 2)
-
-                $ Player.RecentActions.append("nope")
-
-                $ character.AddWord(1,"refused","refused")
-
-                return
+        if _return:
+            return
 
         $ character.PantiesDown = 1
 
@@ -335,90 +318,31 @@ label before_sex(character, action):
     elif Situation != "auto":
         call AutoStrip(character)
 
-        if Taboo:
-            if character in [RogueX, KittyX]:
-                if not character.Sex:
-                    "[character.Name] glances around for voyeurs. . ."
-
-                    if "cockout" in Player.RecentActions:
-                        "[character.Name] slowly presses against your rigid member."
-                    else:
-                        "She hesitantly pulls down your pants and slowly backs up against your rigid member."
-
-                    "You guide it into place and slide it in."
-                else:
-                    "[character.Name] glances around to see if anyone notices what she's doing, then backs her ass up against your cock."
-                    "You guide your cock into place and ram it home."
-            elif character in [EmmaX, LauraX, JeanX, StormX, JubesX]:
-                "[character.Name] glances around to see if anyone notices what she's doing."
-
-                if "cockout" in Player.RecentActions:
-                    if character in [EmmaX, StormX]:
-                        "Then she pushes you back and slowly presses against your rigid member."
-                    elif character in [character, JubesX]:
-                        "Then she lays back and slowly presses against your rigid member."
-                    elif character == JeanX:
-                        "Then she turns around and slowly presses against your rigid member."
-                else:
-                    if character in [EmmaX, StormX]:
-                        "Then she pulls down your pants and climbs on top of you."
-                    elif character in [character, JubesX]:
-                        "Then she pulls down your pants and lays back."
-                    elif character == JeanX:
-                        "Then she pulls down your pants and turns around."
-
-                    "She slowly presses against your rigid member."
-
-                "She leans back a bit and your cock slides in."
-
-            if character != JeanX:
-                $ character.Inbt += int(Taboo/10)
-                $ character.Lust += int(Taboo/5)
-            else:
-                $ JeanX.Statup("Inbt", 90, int(Taboo/10))
-                $ JeanX.Statup("Lust", 50, int(Taboo/5))
-        else:
-            if character in [character, KittyX]:
-                if not character.Sex:
-                    if "cockout" in Player.RecentActions:
-                        "[character.Name] slowly presses against your rigid member."
-                    else:
-                        "[character.Name] hesitantly pulls down your pants and slowly backs up against your rigid member."
-
-                    "You press her folds aside and nudge your cock in."
-                else:
-                    "[character.Name] bends over and presses her backside against you suggestively."
-                    "You take careful aim and then ram your cock in."
-            elif character in [EmmaX, LauraX, JeanX, StormX, JubesX]:
-                if "cockout" in Player.RecentActions:
-                    if character in [EmmaX, StormX]:
-                        "[character.Name] pushes you back and slowly presses against your rigid member."
-                    elif character in [character, JubesX]:
-                        "[character.Name] lays back and slowly presses against your rigid member."
-                    elif character == JeanX:
-                        "[character.Name] turns around and slowly presses against your rigid member."
-                else:
-                    if character in [EmmaX, StormX]:
-                        "[character.Name] pulls down your pants and climbs on top of you."
-                    elif character in [character, JubesX]:
-                        "[character.Name] pulls down your pants and lays back."
-                    elif character == JeanX:
-                        "[character.Name] pulls down your pants and turns around."
-
-                    "She slowly presses against your rigid member."
-
-                "She leans back a bit and your cock slides in."
+        call start_of_sex_narration(character, action)
     else:
-        if (character.PantsNum() > 6 and not character.Upskirt) and (character.Panties and not character.PantiesDown):
-            "You quickly pull down her pants and her [character.Panties] and press against her slit."
-        elif (character.Panties and not character.PantiesDown):
-            "You quickly pull down her [character.Panties] and press against her slit."
+        if action in ["sex", "anal"]:
+            if action == "sex":
+                $ word = renpy.random.choice(["slit"])
+            elif action == "anal":
+                $ word = renpy.random.choice(["ass", "back door"])
 
-        $ character.Upskirt = 1
-        $ character.PantiesDown = 1
-        $ character.SeenPanties = 1
+            if (character.PantsNum() > 6 and not character.Upskirt) and (character.Panties and not character.PantiesDown):
+                "You quickly pull down her pants and her [character.Panties] and press against her [word]."
+            elif (character.Panties and not character.PantiesDown):
+                "You quickly pull down her [character.Panties] and press against her [word]."
 
-        call first_bottomless(character, 1)
+            $ character.Upskirt = 1
+            $ character.PantiesDown = 1
+            $ character.SeenPanties = 1
+
+            call first_bottomless(character, 1)
+        elif action == "hotdog":
+            $ line = renpy.random.choice(["You press yourself against her ass.",
+                "You press yourself against her mound.",
+                "You roll back, pulling her on top of you and your rigid member.",
+                "She lays back, pulling you against her with your rigid member.",
+                "She turns around, pulling you against her with your rigid member."])
+            "[line]"
 
     if Player.Focus >= 50:
         if character == EmmaX:
@@ -468,7 +392,7 @@ label before_sex(character, action):
             $ character.Statup("Inbt", 80, 20)
 
     if Situation:
-        $ renpy.pop_call()
+        #$ renpy.pop_call()
 
         $ Situation = 0
 
@@ -487,8 +411,8 @@ label before_sex(character, action):
         $ character.DrainWord("tabno")
 
     $ character.DrainWord("no_" + action)
-    $ character.RecentActions.append(action)
-    $ character.DailyActions.append(action)
+    $ character.Recentactionions.append(action)
+    $ character.Dailyactionions.append(action)
 
 label sex_cycle(character, action):
     while Round > 0:
@@ -507,6 +431,9 @@ label sex_cycle(character, action):
         if Player.Focus < 100:
             call sex_menu(character, action)
 
+            if _return:
+                return
+
         call Shift_Focus(character)
         call Sex_Dialog(character,Partner)
 
@@ -516,9 +443,9 @@ label sex_cycle(character, action):
         $ Player.Wet = 1 #wets penis
         $ Player.Spunk = 0 if (Player.Spunk and "in" not in character.Spunk) else Player.Spunk #cleans you off after one cycle
 
-        $ end_cycle = end_of_sex_round(character, action)
+        call end_of_sex_round(character, action)
 
-        if end_cycle:
+        if _return:
             return
 
     $ character.FaceChange("bemused", 0)
@@ -546,7 +473,7 @@ label after_sex(character, action):
     elif action == "hotdog":
         $ character.Hotdog += 1
 
-    $ character.Action -= 1
+    $ character.actionion -= 1
     $ character.Addictionrate += 1
 
     if "addictive" in Player.Traits:
@@ -622,7 +549,7 @@ label after_sex(character, action):
             $ character.SEXP += 20
 
             if not Situation:
-                if character.Love >= 500 and "unsatisfied" not in character.RecentActions:
+                if character.Love >= 500 and "unsatisfied" not in character.Recentactionions:
                     if character == RogueX:
                         ch_r "That was really great, [character.Petname], we'll have to do that again sometime."
                     elif character == KittyX:
@@ -672,7 +599,7 @@ label after_sex(character, action):
             elif character == JubesX:
                 ch_v "You know, this was a good idea."
         elif not Situation: #fix  Situation != "shift" and Situation != "auto" and Situation != "pullback":
-            if "unsatisfied" in character.RecentActions:
+            if "unsatisfied" in character.Recentactionions:
                 $ character.FaceChange("angry")
 
                 if character != JeanX:
@@ -736,7 +663,7 @@ label after_sex(character, action):
                 $character.SEXP += 25
 
                 if not Situation:
-                    if character.Love >= 500 and "unsatisfied" not in character.RecentActions:
+                    if character.Love >= 500 and "unsatisfied" not in character.Recentactionions:
                         if character == RogueX:
                             ch_r "That was . . . interesting [character.Petname]. We'll have to do that again sometime."
                         elif character == KittyX:
@@ -789,7 +716,7 @@ label after_sex(character, action):
             elif character == JubesX:
                 ch_v "I'm glad you're into this."
         elif not Situation: #fix  Situation != "shift" and Situation != "auto" and Situation != "pullback":
-            if "unsatisfied" in character.RecentActions:
+            if "unsatisfied" in character.Recentactionions:
                 $ character.FaceChange("angry")
 
                 if character != JeanX:
@@ -870,7 +797,7 @@ label after_sex(character, action):
             $ character.SEXP += 10
 
             if not Situation:
-                if character.Love >= 500 and "unsatisfied" not in character.RecentActions:
+                if character.Love >= 500 and "unsatisfied" not in character.Recentactionions:
                     if character == RogueX:
                         ch_r "That was pretty hot, [character.Petname], we'll have to do that again sometime."
                     elif character == KittyX:
@@ -908,7 +835,7 @@ label after_sex(character, action):
             elif character == KittyX:
                 ch_k "I'm surprised how much I enjoy this."
         elif not Situation: #fix  Situation != "shift" and Situation != "auto" and Situation != "pullback":
-            if "unsatisfied" in character.RecentActions:
+            if "unsatisfied" in character.Recentactionions:
                 $ character.FaceChange("angry")
 
                 if character != JeanX:
@@ -944,7 +871,7 @@ label end_of_sex_round(character, action):
         if Player.Focus >= 100:
             call Player_Cumming(character)
 
-            if "angry" in character.RecentActions:
+            if "angry" in character.Recentactionions:
                 call sex_reset(character)
 
                 return True
@@ -964,7 +891,7 @@ label end_of_sex_round(character, action):
         if character.Lust >= 100:
             call Girl_Cumming(character)
 
-            if Situation == "shift" or "angry" in character.RecentActions:
+            if Situation == "shift" or "angry" in character.Recentactionions:
                 call after_sex(character, action)
 
                 return True
@@ -978,7 +905,7 @@ label end_of_sex_round(character, action):
                 call after_sex(character, action)
 
                 return True
-            elif "unsatisfied" in character.RecentActions:#And Rogue is unsatisfied,
+            elif "unsatisfied" in character.Recentactionions:#And Rogue is unsatisfied,
                 $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
                     "She is breathing heavily as your cock rubs inside her.",
                     "She slowly turns back towards you and smiles.",
@@ -1035,7 +962,7 @@ label end_of_sex_round(character, action):
 
         menu:
             extend ""
-            "How about a BJ?" if character.Action and MultiAction:
+            "How about a BJ?" if character.actionion and Multiactionion:
                 if action != "anal":
                     $ Situation = "shift"
 
@@ -1055,7 +982,7 @@ label end_of_sex_round(character, action):
 
                         call after_sex(character, action)
                         call before_handjob(character, "handjob")
-            "How about a Handy?" if character.Action and MultiAction:
+            "How about a Handy?" if character.actionion and Multiactionion:
                 $ Situation = "shift"
 
                 call after_sex(character, action)
@@ -1069,7 +996,7 @@ label end_of_sex_round(character, action):
                 call after_sex(character, action)
 
                 return True
-            "Let's try something else." if MultiAction:
+            "Let's try something else." if Multiactionion:
                 $ Line = 0
                 $ Situation = "shift"
 
@@ -1111,225 +1038,402 @@ label end_of_sex_round(character, action):
 
     return False
 
+label sex(character):
+    $ Round -= 5 if Round > 5 else (Round-1)
 
+    call Shift_Focus(character)
+    call sex_set_modifier(character, "sex")
 
+    $ Approval = ApprovalCheck(character, 1400, TabM = 5) # 135, 150, 165, Taboo -200(335)
 
+    if Situation == "auto":
+        $ character.Pose = "doggy"
 
-label before_anal(character):
+        call sex_launch(character, "sex")
 
+        if character.PantsNum() == 5:
+            "You press up against [character.Name]'s backside, sliding her skirt up as you go."
 
-    elif Situation != "auto":
-        call AutoStrip(character)
+            $ character.Upskirt = 1
+        elif character.PantsNum() > 6:
+            "You press up against [character.Name]'s backside, sliding her pants down as you do."
 
-        if Taboo:
-            if character not in [EmmaX, LauraX, JeanX, StormX, JubesX]:
-                if character.Anal:
-                    "[character.Name] glances around to see if anyone notices what she's doing, then backs her ass up against your cock."
-                    "You guide your cock into place and ram it home."
-                else:
-                    "[character.Name] glances around for voyeurs. . ."
-
-                    if "cockout" in Player.RecentActions:
-                        "[character.Name] slowly presses against your rigid member."
-                    else:
-                        if character == RogueX:
-                            "[character.Name] hesitantly pulls down your pants and slowly backs up against your rigid member."
-                        elif character == KittyX:
-                            "[character.Name] hesitantly pulls down your pants and slowly presses against your rigid member."
-
-                    "You guide it into place and slide it in."
-            else:
-                "[character.Name] glances around to see if anyone notices what she's doing."
-
-                if "cockout" in Player.RecentActions:
-                    if character in [EmmaX, StormX]:
-                        "Then she pushes you back and slowly presses against your rigid member."
-                    elif character in [character, JubesX]:
-                        "Then she lays back and slowly presses against your rigid member."
-                    elif character == JeanX:
-                        "Then she turns around and slowly presses against your rigid member."
-                else:
-                    if character in [EmmaX, StormX]:
-                        "Then she pulls down your pants and climbs on top of you."
-                    elif character in [character, JubesX]:
-                        "Then she pulls down your pants and lays back."
-                    elif character == JeanX:
-                        "Then she pulls down your pants and turns around."
-
-                    "She slowly presses against your rigid member."
-
-                "She leans back a bit and your cock pops in."
-
-
+            $ character.Legs = 0
         else:
-            if character not in [EmmaX, LauraX, JeanX, StormX, JubesX]:
-                if not character.Anal:
-                    if character == RogueX:
-                        "[character.Name] bends over and presses her backside against you suggestively."
-                    elif character == KittyX:
-                        "[character.Name] leans back and presses against you suggestively."
+            "You press up against [character.Name]'s backside."
 
-                    "You take careful aim and then push your cock in."
-                else:
-                    if "cockout" in Player.RecentActions:
-                        "[character.Name] slowly presses against your rigid member."
+        $ character.SeenPanties = 1
+
+        "You rub the tip of your cock against her moist slit."
+
+        $ character.FaceChange("surprised", 1)
+
+        if (character.Sex and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
+            "[character.Name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
+
+            $ character.FaceChange("sexy")
+            $ character.Statup("Obed", 70, 3)
+            $ character.Statup("Inbt", 50, 3)
+            $ character.Statup("Inbt", 70, 1)
+
+            ch_r "Ok, [character.Petname], let's do this."
+
+            call before_sex(character, "sex")
+
+            return
+        else:                                                                                                            #she's questioning it
+            $ character.Brows = "angry"
+
+            menu:
+                ch_r "Hey, what do you think you're doing back there?!"
+                "Sorry, sorry! Never mind.":
+                    if Approval:
+                        $ character.FaceChange("sexy", 1)
+                        $ character.Statup("Obed", 70, 3)
+                        $ character.Statup("Inbt", 50, 3)
+                        $ character.Statup("Inbt", 70, 1)
+
+                        ch_r "Well, since you're be'in so nice about it, I guess we can give it a go. . ."
+
+                        call before_sex(character, "sex")
+
+                        return
+                    "You pull back before you really get it in."
+
+                    $ character.FaceChange("bemused", 1)
+
+                    if character.Sex:
+                        ch_r "Well ok, [character.Petname], no harm done. Just give me a little warning next time."
                     else:
-                        if character == RogueX:
-                            "[character.Name] hesitantly pulls down your pants and slowly backs up against your rigid member."
-                        elif character == KittyX:
-                            "[character.Name] hesitantly pulls down your pants and slowly presses against your rigid member."
+                        ch_r "Well ok, [character.Petname], I'm not really ready for that, but maybe if you ask nicely next time . . ."
+                "Just fucking.":
+                    $ character.Statup("Love", 80, -10, 1)
+                    $ character.Statup("Love", 200, -10)
 
-                    "You press against her rim and nudge your cock in."
-            else:
-                if "cockout" in Player.RecentActions:
-                    if character in [EmmaX, StormX]:
-                        "[character.Name] pushes you back and slowly presses against your rigid member."
-                    elif character in [character, JubesX]:
-                        "[character.Name] lays back and slowly presses against your rigid member."
-                    elif character == JeanX:
-                        "[character.Name] turns around and slowly presses against your rigid member."
-                else:
-                    if character in [EmmaX, StormX]:
-                        "[character.Name] pulls down your pants and climbs on top of you."
-                    elif character in [character, JubesX]:
-                        "[character.Name] pulls down your pants and lays back."
-                    elif character == JeanX:
-                        "[character.Name] pulls down your pants and turns around."
+                    "You press inside some more."
 
-                    "She slowly presses against your rigid member."
+                    $ character.Statup("Obed", 70, 3)
+                    $ character.Statup("Inbt", 50, 3)
 
-                "She leans back a bit and your cock pops in."
-    else:
-        if (character.PantsNum() > 6 and not character.Upskirt) and (character.Panties and not character.PantiesDown):
-            if character == RogueX:
-                "You quickly pull down her pants and her [character.Panties] and press against her ass."
-            elif character in [character, EmmaX, LauraX, JeanX, StormX, JubesX]:
-                "You quickly pull down her pants and her [character.Panties] and press against her back door."
-        elif (character.Panties and not character.PantiesDown):
-            if character == RogueX:
-                "You quickly pull down her [character.Panties] and press against her ass."
-            elif character in [character, EmmaX, LauraX, JeanX, StormX, JubesX]:
-                "You quickly pull down her [character.Panties] and press against her back door."
+                    if not ApprovalCheck(character, 700, "O", TabM=1):   #Checks if Obed is 700+
+                        $ character.FaceChange("angry")
 
+                        "[character.Name] shoves you away and slaps you in the face."
+                        ch_r "Jackass!"
+                        ch_r "If that's how you want to treat me, we're done here!"
 
+                        $ character.Statup("Love", 50, -10, 1)
+                        $ character.Statup("Obed", 50, 3)
 
+                        $ renpy.pop_call()
 
+                        if Situation:
+                            $ renpy.pop_call()
 
-label before_hotdog(character):
+                        call sex_reset(character)
 
-        menu:
-            "What do you do?"
-            "Go with it.":
-                $ character.Statup("Inbt", 50, 3)
-
-                if character in [character, EmmaX, StormX]:
-                    "[character.Name] starts to grind against you."
-                elif character == KittyX:
-                    "[character.Name] keeps grinding."
-                elif character in [character, JeanX, JubesX]:
-                    "[character.Name] continues to grind."
-            "Praise her.":
-                $ character.FaceChange("sexy", 1)
-                $ character.Statup("Inbt", 80, 2)
-
-                if character in [character, EmmaX, StormX]:
-                    "[character.Name] starts to grind against you."
-                elif character == KittyX:
-                    "[character.Name] keeps grinding."
-                elif character in [character, JeanX, JubesX]:
-                    "[character.Name] continues to grind."
-
-                $ character.Statup("Love", 85, 1)
-                $ character.Statup("Obed", 60, 2)
-            "Ask her to stop.":
-
-                $ character.Statup("Obed", 80, 1)
-                $ character.Statup("Obed", 30, 2)
-
-                return
-    elif Situation != "auto":
-        call Bottoms_Off(character)
-
-        if Taboo:
-            if character not in [EmmaX, LauraX, JeanX, StormX, JubesX]:
-                if character.Hotdog:
-                    "[character.Name] glances around to see if anyone notices what she's doing, then backs her ass up against your cock."
-                else:
-                    "[character.Name] glances around for voyeurs. . ."
-
-                    if "cockout" in Player.RecentActions:
-                        "[character.Name] slowly presses against your rigid member."
+                        $ character.Recentactionions.append("angry")
+                        $ character.Dailyactionions.append("angry")
                     else:
-                        if character == RogueX:
-                            "[character.Name] hesitantly pulls down your pants and slowly backs up against your rigid member."
-                        elif character == KittyX:
-                            "[character.Name] hesitantly pulls down your pants and slowly presses against your rigid member."
-            else:
-                "[character.Name] glances around to see if anyone notices what she's doing."
+                        $ character.FaceChange("sad")
 
-                if "cockout" in Player.RecentActions:
-                    if character in [EmmaX, StormX]:
-                        "Then she pushes you back and slowly presses against your rigid member."
-                    elif character in [character, JubesX]:
-                        "Then she lays back and slowly presses against your rigid member."
-                    elif character == JeanX:
-                        "Then she turns around and slowly presses against your rigid member."
-                else:
-                    if character in [EmmaX, StormX]:
-                        "Then she pulls down your pants and climbs on top of you."
-                    elif character in [character, JubesX]:
-                        "Then she pulls down your pants and lays back."
-                    elif character == JeanX:
-                        "Then she pulls down your pants and turns around."
+                        "[character.Name] doesn't seem to be into this, you're lucky she's so obedient."
 
-                    "She slowly presses against your rigid member."
+                        call before_sex(character, "sex")
+        return
 
-            if character != JeanX:
-                $ character.Inbt += int(Taboo/10)
-                $ character.Lust += int(Taboo/5)
-            else:
-                $ JeanX.Statup("Inbt", 90, int(Taboo/10))
-                $ JeanX.Statup("Lust", 50, int(Taboo/5))
+    if not character.Sex and "no sex" not in character.Recentactionions:                           #first time
+        $ character.FaceChange("surprised", 1)
+        $ character.Mouth = "kiss"
+
+        ch_r "So, you'd like to take this to the next level? actionual sex? . . ."
+
+        if character.Forced:
+            $ character.FaceChange("sad")
+
+            ch_r "You'd really take it that far?"
+
+    if not character.Sex and Approval:                                                  #First time dialog
+        call first_action_approval(character, "sex")
+    elif Approval:
+        call action_approved(character, "sex", character.Sex)
+
+    if Approval >= 2:                                                                   #She's into it. . .
+        call action_accepted(character, "sex")
+
+        return
+    else:                                                                               #She's not into it, but maybe. . .
+        call action_disapproved(character, "sex", character.Sex)
+
+    $ character.ArmPose = 1
+
+    call action_rejected(character, "sex", character.Sex)
+
+    return
+
+label anal(character):
+    $ Round -= 5 if Round > 5 else (Round-1)
+
+    call Shift_Focus(character)
+    call sex_set_modifier(character, "anal")
+
+    $ Approval = ApprovalCheck(character, 1550, TabM = 5) # 155, 170, 185, Taboo -200(355)
+
+    if Situation == "auto":
+        $ character.Pose = "doggy"
+
+        call sex_launch(character, "anal")
+
+        if character.PantsNum() == 5:
+            "You press up against [character.Name]'s backside, sliding her skirt up as you go."
+
+            $ character.Upskirt = 1
+        elif character.PantsNum() > 6:
+            "You press up against [character.Name]'s backside, sliding her pants down as you do."
+
+            $ character.Legs = 0
         else:
-            if character not in [EmmaX, LauraX, JeanX, StormX, JubesX]:
-                if not character.Hotdog:
-                    if character == RogueX:
-                        "[character.Name] bends over and presses her backside against you suggestively."
-                    elif character == KittyX:
-                        "[character.Name] leans back and presses against you suggestively."
-                else:
-                    if "cockout" in Player.RecentActions:
-                        "[character.Name] slowly presses against your rigid member."
-                    else:
-                        if character == RogueX:
-                            "[character.Name] hesitantly pulls down your pants and slowly backs up against your rigid member."
-                        elif character == KittyX:
-                            "[character.Name] hesitantly pulls down your pants and slowly presses against your rigid member."
-            else:
-                if "cockout" in Player.RecentActions:
-                    if character in [EmmaX, StormX]:
-                        "[character.Name] pushes you back and slowly presses against your rigid member."
-                    elif character in [character, JubesX]:
-                        "[character.Name] lays back and slowly presses against your rigid member."
-                    elif character == JeanX:
-                        "[character.Name] turns around and slowly presses against your rigid member."
-                else:
-                    if character in [EmmaX, StormX]:
-                        "[character.Name] pulls down your pants and climbs on top of you."
-                    elif character in [character, JubesX]:
-                        "[character.Name] pulls down your pants and lays back."
-                    elif character == JeanX:
-                        "[character.Name] pulls down your pants and turns around."
+            "You press up against [character.Name]'s backside."
 
-                    "She slowly presses against your rigid member."
-    else:
-        if character == RogueX:
-            "You press yourself against her ass."
-        elif character == KittyX:
-            "You press yourself against her mound."
-        elif character in [EmmaX, StormX]:
-            "You roll back, pulling her on top of you and your rigid member."
-        elif character in [character, JubesX]:
-            "She lays back, pulling you against her with your rigid member."
-        elif character == JeanX:
-            "She turns around, pulling you against her with your rigid member."
+        $ character.SeenPanties = 1
+
+        "You press the tip of your cock against her tight rim."
+
+        $ character.FaceChange("surprised", 1)
+
+        if (character.Anal and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
+            "[character.Name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
+
+            $ character.FaceChange("sexy")
+            $ character.Statup("Obed", 70, 3)
+            $ character.Statup("Inbt", 50, 3)
+            $ character.Statup("Inbt", 70, 1)
+
+            ch_r "Hmm, stick it in. . ."
+
+            call before_sex(character, "anal")
+
+            return
+        else:                                                                                                            #she's questioning it
+            $ character.Brows = "angry"
+
+            menu:
+                ch_r "Hey, what do you think you're doing back there?!"
+                "Sorry, sorry! Never mind.":
+                    if Approval:
+                        $ character.FaceChange("sexy", 1)
+                        $ character.Statup("Obed", 70, 3)
+                        $ character.Statup("Inbt", 50, 3)
+                        $ character.Statup("Inbt", 70, 1)
+
+                        ch_r "I guess if you really want to try it. . ."
+
+                        call before_sex(character, "anal")
+
+                        return
+                    "You pull back before you really get it in."
+
+                    $ character.FaceChange("bemused", 1)
+
+                    if character.Anal:
+                        ch_r "Well ok, [character.Petname], no harm done. Just give me a little warning next time."
+                    else:
+                        ch_r "Well ok, [character.Petname], I'm not really ready for that, but maybe if you ask nicely next time . . ."
+                "Just fucking.":
+                    $ character.Statup("Love", 80, -10, 1)
+                    $ character.Statup("Love", 200, -8)
+
+                    "You press into her."
+
+                    $ character.Statup("Obed", 70, 3)
+                    $ character.Statup("Inbt", 50, 3)
+
+                    if not ApprovalCheck(character, 700, "O", TabM=1):
+                        $ character.FaceChange("angry")
+
+                        "[character.Name] shoves you away and slaps you in the face."
+                        ch_r "Jackass!"
+                        ch_r "If that's how you want to treat me, we're done here!"
+
+                        $ character.Statup("Love", 50, -10, 1)
+                        $ character.Statup("Obed", 50, 3)
+
+                        $ renpy.pop_call()
+
+                        if Situation:
+                            $ renpy.pop_call()
+
+                        call sex_reset(character)
+
+                        $ character.Recentactionions.append("angry")
+                        $ character.Dailyactionions.append("angry")
+                    else:
+                        $ character.FaceChange("sad")
+
+                        "[character.Name] doesn't seem to be into this, you're lucky she's so obedient."
+
+                        call before_sex(character, "anal")
+        return
+
+    if not character.Anal and "no anal" not in character.Recentactionions:                                                               #first time
+        $ character.FaceChange("surprised", 1)
+        $ character.Mouth = "kiss"
+
+        ch_r "Wait, so you want to stick it in my butt?!"
+
+        if character.Forced:
+            $ character.FaceChange("sad")
+
+            ch_r "Seriously?"
+
+    if not character.Loose and ("dildo anal" in character.Dailyactionions or "anal" in character.Dailyactionions):
+        $ character.FaceChange("bemused", 1)
+
+        ch_r "I'm still a little sore from earlier."
+    elif "anal" in character.Recentactionions:
+        $ character.FaceChange("sexy", 1)
+
+        ch_r "You want to go again? Ok."
+
+        call before_sex(character, "anal")
+
+    if not character.Anal and Approval:                                                 #First time dialog
+        call first_action_approval(character, "anal")
+    elif Approval:
+        call action_approved(character, "anal", character.Anal)
+
+    if Approval >= 2:                                                                   #She's into it. . .
+        call action_accepted(character, "anal")
+
+        return
+    else:                                                                               #She's not into it, but maybe. . .
+        call action_disapproved(character, "anal", character.Anal)
+
+    $ character.ArmPose = 1
+
+    call action_rejectd(character, "anal", character.Anal)
+
+    return
+
+label hotdog(character):
+    $ Round -= 5 if Round > 5 else (Round-1)
+
+    call Shift_Focus(character)
+    call sex_set_modifier(character, "hotdog")
+
+    $ Approval = ApprovalCheck(character, 1000, TabM = 3) # 100, 115, 130, Taboo -120(220)
+
+    if Situation == "auto":
+        $ character.Pose = "doggy"
+
+        call sex_launch("hotdog")
+
+        "You press up against [character.Name]'s backside."
+
+        $ character.FaceChange("surprised", 1)
+
+        if (character.Hotdog and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
+            "[character.Name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
+
+            $ character.FaceChange("sexy")
+            $ character.Statup("Obed", 70, 3)
+            $ character.Statup("Inbt", 50, 3)
+            $ character.Statup("Inbt", 70, 1)
+
+            ch_r "Hmm, I've apparently got someone's attention. . ."
+
+            call before_sex(character, "hotdog")
+
+            return
+        else:                                                                                                            #she's questioning it
+            $ character.Brows = "angry"
+
+            menu:
+                ch_r "Hmm, kinda rude, [character.Petname]."
+                "Sorry, sorry! Never mind.":
+                    if Approval:
+                        $ character.FaceChange("sexy", 1)
+                        $ character.Statup("Obed", 70, 3)
+                        $ character.Statup("Inbt", 50, 3)
+                        $ character.Statup("Inbt", 70, 1)
+
+                        ch_r "I guess it doesn't feel so bad. . ."
+
+                        call before_sex(character, "hotdog")
+
+                        return
+
+                    "You pull back before you really get it in."
+
+                    $ character.FaceChange("bemused", 1)
+
+                    if character.Hotdog:
+                        ch_r "Well ok, [character.Petname], it has been kinda fun."
+                    else:
+                        ch_r "Well ok, [character.Petname], that's a bit dirty, maybe ask a girl?"
+                "You'll see.":
+                    $ character.Statup("Love", 80, -10, 1)
+                    $ character.Statup("Love", 200, -8)
+
+                    "You grind against her asscrack."
+
+                    $ character.Statup("Obed", 70, 3)
+                    $ character.Statup("Inbt", 50, 3)
+
+                    if not ApprovalCheck(character, 500, "O", TabM=1): #Checks if Obed is 700+
+                        $ character.FaceChange("angry")
+
+                        "[character.Name] shoves you away."
+                        ch_r "Dick!"
+                        ch_r "If that's how you want want to act, I'm out of here!"
+
+                        $ character.Statup("Love", 50, -10, 1)
+                        $ character.Statup("Obed", 50, 3)
+
+                        $ renpy.pop_call()
+
+                        if Situation:
+                            $ renpy.pop_call()
+
+                        call sex_reset(character)
+
+                        $ character.Recentactionions.append("angry")
+                        $ character.Dailyactionions.append("angry")
+                    else:
+                        $ character.FaceChange("sad")
+
+                        "[character.Name] doesn't seem to be into this, but she knows her place."
+
+                        call before_sex(character, "hotdog")
+
+                        return
+        return
+
+    if not character.Hotdog and "no hotdog" not in character.Recentactionions:                                                               #first time
+        $ character.FaceChange("surprised", 1)
+        $ character.Mouth = "kiss"
+
+        ch_r "Wait, so you want to grind against my butt?!"
+
+        if character.Forced:
+            $ character.FaceChange("sad")
+
+            ch_r ". . . That's all?"
+
+    if not character.Hotdog and Approval:                                                 #First time dialog
+        call first_action_approval(character, "hotdog")
+    elif Approval:                                                                       #Second time+ dialog
+        call action_approved(character, "hotdog", character.Hotdog)
+
+    if Approval >= 2:                                                                   #She's into it. . .
+        call action_accepted(character, "hotdog")
+
+        return
+    else:                                                                               #She's not into it, but maybe. . .
+        call action_rejected(character, "hotdog", character.Hotdog)
+
+    $ character.ArmPose = 1
+
+    call action_rejected(character, "hotdog", character.Hotdog)
+
+    return

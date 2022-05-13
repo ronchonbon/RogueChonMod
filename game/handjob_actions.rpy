@@ -22,7 +22,7 @@ label handjob_menu(character, action):
             pass
         "Just the head. . ." if action == "blowjob" and Speed != 2:
             $ Speed = 2
-        "Just the head. . . (locked)" iif action == "blowjob" and Speed == 2:
+        "Just the head. . . (locked)" if action == "blowjob" and Speed == 2:
             pass
         "Suck on it." if action == "blowjob" and Speed != 3:
             $ Speed = 3
@@ -127,39 +127,39 @@ label handjob_menu(character, action):
                                     if character.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call Rogue_TJ_After
-                                        call Rogue_Handjob
+                                        call after_handjob(character, action)
+                                        call handjob(character)
                                     else:
                                         call tired_lines(character)
                                 "How about a footjob?" if action in ["handjob", "titjob", "blowjob"]:
                                     if character.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call Rogue_TJ_After
-                                        call Rogue_Footjob
+                                        call after_handjob(character, action)
+                                        call footjob(character)
                                     else:
                                         call tired_lines(character)
                                 "How about a titjob?" if action in ["handjob", "footjob", "blowjob"]:
                                     if character.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call Rogue_HJ_After
-                                        call Rogue_Titjob
+                                        call after_handjob(character, action)
+                                        call titjob(character)
                                     else:
                                         call tired_lines(character)
                                 "How about a blowjob?" if action in ["handjob", "footjob", "titjob"]:
                                     if character.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call Rogue_HJ_After
-                                        call Rogue_Blowjob
+                                        call after_handjob(character, action)
+                                        call blowjob(character)
                                     else:
                                         call tired_lines(character)
                                 "I want to stick a finger in her ass." if action == "dildo_pussy":
                                     if character.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call Rogue_DP_After
+                                        call after_handjob(character, action)
                                         call finger_ass(character)
                                     else:
                                         call tired_lines(character)
@@ -167,7 +167,7 @@ label handjob_menu(character, action):
                                     if character.Action and MultiAction:
                                         $ Situation = "auto"
 
-                                        call Rogue_DP_After
+                                        call after_handjob(character, action)
                                         call finger_ass(character)
                                     else:
                                         call tired_lines(character)
@@ -175,15 +175,15 @@ label handjob_menu(character, action):
                                     if character.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call Rogue_DP_After
-                                        call Rogue_Dildo_Ass
+                                        call after_handjob(character, action)
+                                        call dildo_ass(character)
                                     else:
                                         call tired_lines(character)
                                 "I want to stick a finger in her pussy." if action == "dildo_ass":
                                     if character.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call Rogue_DA_After
+                                        call after_handjob(character, action)
                                         call finger_pussy(character)
                                     else:
                                         call tired_lines(character)
@@ -191,7 +191,7 @@ label handjob_menu(character, action):
                                     if character.Action and MultiAction:
                                         $ Situation = "auto"
 
-                                        call Rogue_DA_After
+                                        call after_handjob(character, action)
                                         call finger_pussy(character)
                                     else:
                                         call tired_lines(character)
@@ -199,8 +199,8 @@ label handjob_menu(character, action):
                                     if character.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call Rogue_DA_After
-                                        call Rogue_Dildo_Pussy
+                                        call after_handjob(character, action)
+                                        call dildo_pussy(character)
                                     else:
                                         call tired_lines(character)
                                 "Never Mind":
@@ -482,73 +482,15 @@ label before_handjob(character, action):
     elif action in ["dildo_pussy", "dildo_ass"]:
         call pussy_launch(character, action)
 
-    if action in ["handjob", "titjob", "blowjob"]:
-        if Situation == character:
-            $ Situation = 0
+    if Situation == character:
+        $ Situation = 0
 
-            if action == "handjob":
-                if Trigger2 == "jackin":
-                    "[character.Name] brushes your hand aside and starts stroking your cock."
-                else:
-                    "[character.Name] gives you a mischevious smile, and starts to fondle your cock."
-            elif action == "titjob":
-                "[character.Name] slides down and sandwiches your dick between her tits."
-            elif action == "blowjob":
-                "[character.Name] slides down and gives your cock a little lick."
+        $ stop_character = False
 
-            if action == "handjob":
-                $ action_line = "[character.Name] continues her actions."
-                $ praise_line = "Oooh, that's good, [character.Pet]."
-                $ reject_line = "Let's not do that for now, [character.Pet]."
-                $ rejection_response_line = "[character.Name] puts it down."
-            elif action == "titjob":
-                $ action_line = "[character.Name] starts to slide them up and down."
-                $ praise_line = "Oh, that sounds like a good idea, [character.Pet]."
-                $ reject_line = "Let's not do that for now, [character.Pet]."
-                $ rejection_response_line = "[character.Name] lets it drop out from between her breasts."
-            elif action == "blowjob":
-                $ action_line = "[character.Name] continues licking at it."
-                $ praise_line = "Hmmm, keep doing that, [character.Pet]."
-                $ reject_line = "Let's not do that for now, [character.Pet]."
-                $ rejection_response_line = "[character.Name] puts it down."
+        call character_initiated_action(character, action)
 
-            menu:
-                "What do you do?"
-                "Nothing.":
-                    $ character.Statup("Inbt", 70, 3)
-                    $ character.Statup("Inbt", 30, 2)
-
-                    "[action_line]"
-                "Praise her.":
-                    $ character.FaceChange("sexy", 1)
-                    $ character.Statup("Inbt", 70, 3)
-
-                    ch_p "[praise_line]"
-
-                    $ character.NameCheck() #checks reaction to petname
-
-                    "[action_line]"
-
-                    $ character.Statup("Love", 80, 1)
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 2)
-                "Ask her to stop.":
-                    $ character.FaceChange("surprised")
-                    $ character.Statup("Inbt", 70, 1)
-
-                    ch_p "[reject_line]"
-
-                    $ character.NameCheck() #checks reaction to petname
-
-                    "[rejection_response_line]"
-
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 1)
-                    $ character.Statup("Obed", 30, 2)
-                    $ Player.RecentActions.append("nope")
-                    $ character.AddWord(1,"refused","refused")
-
-                    return
+        if _return:
+            return
 
     if action == "handjob" and not character.Hand:
         if character.Forced:
@@ -606,7 +548,8 @@ label before_handjob(character, action):
             $ character.Statup("Inbt", 80, 45)
 
     if Situation:
-        $ renpy.pop_call()
+        #$ renpy.pop_call()
+
         $ Situation = 0
 
     $ Line = 0
@@ -625,7 +568,7 @@ label before_handjob(character, action):
 
 label handjob_cycle(character, action):
     while Round > 0:
-        call expression action + "launch('" + character.Tag "')"
+        call handjob_launch(character)
         call Shift_Focus(character)
 
         $ character.LustFace()
@@ -647,9 +590,9 @@ label handjob_cycle(character, action):
             $ Player.Wet = 1
             $ Player.Spunk = 0 if Player.Spunk else Player.Spunk
 
-        $ end_cycle = end_of_handjob_round(character, action)
+        call end_of_handjob_round(character, action)
 
-        if end_cycle:
+        if _return:
             return
 
     $ character.FaceChange("bemused", 0)
@@ -658,6 +601,132 @@ label handjob_cycle(character, action):
 
     call im_done_lines(character)
     call after_handjob(character, action)
+
+    return
+
+label after_handjob(character, action):
+    if action in ["dildo_pussy", "dildo_ass"] and not Situation:
+        call reset_position(character)
+
+    $ character.FaceChange("sexy")
+
+    if action == "handjob":
+        $ character.Hand += 1
+
+        $ achievement = character.Tag + " Handi-Queen"
+        $ counter = character.Hand
+
+        call Partner_Like(character, 2)
+    elif action == "footjob":
+        $ character.Foot += 1
+
+        $ achievement = character.Tag + "pedi"
+        $ counter = character.Foot
+
+        call Partner_Like(character, 1)
+    elif action == "titjob":
+        $ character.Tit += 1
+
+        $ achievement = None
+        $ counter = character.Tit
+
+        call Partner_Like(character, 3)
+    elif action == "blowjob":
+        $ character.Blow += 1
+
+        $ achievement = character.Tag + " Jobber"
+        $ counter = character.Blow
+
+        if character == RogueX and Partner == EmmaX:
+            call Partner_Like(character, 3)
+        else:
+            call Partner_Like(character, 2)
+    elif action == "dildo_pussy":
+        $ character.DildoP += 1
+
+        $ achievement = None
+        $ counter = character.DildoP
+
+        call Partner_Like(character, 2)
+    elif action == "dildo_ass":
+        $ character.DildoA += 1
+
+        $ achievement = None
+        $ counter = character.DildoA
+
+        call Partner_Like(character, 2)
+
+    $ character.Action -= 1
+
+    if action not in ["dildo_pussy", "dildo_ass"]:
+        $ character.Addictionrate += 1
+
+        if "addictive" in Player.Traits:
+            $ character.Addictionrate += 1
+
+    if action in ["handjob", "footjob"]:
+        $ character.Statup("Lust", 90, 5)
+
+    if achievement is not None and achievement in Achievements:
+        pass
+    elif action not in ["dildo_pussy", "dildo_ass"] and counter >= 10:
+        $ character.FaceChange("smile", 1)
+
+        ch_r "I guess you can call me \"Handi-Queen.\""
+        ch_r "I guess I've gotten used to this foot thing."
+        ch_r "I'm really starting to enjoy this."
+
+        if achievement is not None:
+            $ Achievements.append(achievement)
+
+        $ character.SEXP += 5
+    elif counter == 1:
+        if action in ["handjob", "footjob", "dildo_pussy"]:
+            $ character.SEXP += 10
+        elif action in ["titjob"]:
+            $ character.SEXP += 12
+        elif action in ["blowjob"]:
+            $ character.SEXP += 15
+
+        if character.Love >= 500 and "unsatisfied" not in character.RecentActions:
+            $ character.Mouth = "smile"
+
+            ch_r "Well, it's really nice to finally be able to reach out and touch someone."
+            ch_r "That was a real interesting experience. . ."
+            ch_r "Well, that was certainly interesting."
+            ch_r "That really wasn't half bad."
+            ch_r "Well I liked that. . ."
+            ch_r "Well that was a bit rough. . ."
+        elif action not in ["dildo_pussy", "dildo_ass"] and  Player.Focus <= 20:
+            $ character.Mouth = "sad"
+
+            ch_r "Well, I hope that got your rocks off."
+            ch_r "Did that work for you?"
+            ch_r "Well, I hope that was enough for you."
+        elif action in ["dildo_pussy", "dildo_ass"] and character.Obed <= 500 and Player.Focus <= 20:
+            $ character.FaceChange("perplexed", 1)
+
+            ch_r "Did you like that?"
+    elif action not in ["dildo_pussy", "dildo_ass"] and counter == 5:
+        ch_r "I think I've got this well in hand."
+        ch_r "I kinda like this sensation.{p}}Never thought about touching people with my feet."
+        ch_r "I think I've got the hang of this."
+
+    $ temp_modifier = 0
+
+    if Situation == "shift":
+        ch_r "Mmm, so what else did you have in mind?"
+    else:
+        if action == "handjob":
+            call handjob_reset(character)
+        elif action == "footjob":
+            call doggy_reset(character)
+        elif action == "titjob":
+            call titjob_reset(character)
+        elif action == "blowjob":
+            call blowjob_reset(character)
+
+    call Checkout
 
     return
 
@@ -723,11 +792,11 @@ label end_of_handjob_round(character, action):
     if action == "handjob":
         $ bonus = character.Hand
     elif action == "footjob":
-        $ bonus = character.Footjob
+        $ bonus = character.Foot
     elif action == "titjob":
         $ bonus = character.Tit
     elif action == "blowjob":
-        $ bonus = character.Blowjob
+        $ bonus = character.Blow
     elif action == "dildo_pussy":
         $ bonus = character.DildoP
     elif action == "dildo_ass":
@@ -823,7 +892,7 @@ label end_of_handjob_round(character, action):
                     call after_handjob(character, action)
 
                     return True
-            "No, this is fun." if action in ["dildo_pussy", "dildo_ass"]
+            "No, this is fun." if action in ["dildo_pussy", "dildo_ass"]:
                 if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
                     $ character.Statup("Love", 200, -5)
                     $ character.Statup("Obed", 50, 3)
@@ -856,7 +925,438 @@ label end_of_handjob_round(character, action):
     elif Round == 5:
         call time_to_stop_soon_lines(character)
 
-    return = False
+    return False
+
+label handjob(character):
+    $ Round -= 5 if Round > 5 else (Round-1)
+
+    call Shift_Focus(character)
+    call handjob_set_modifier(character, "handjob")
+
+    $ Approval = ApprovalCheck(character, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)
+
+    if not character.Hand and "no hand" not in character.RecentActions:
+        $ character.FaceChange("surprised", 1)
+        $ character.Mouth = "kiss"
+
+        ch_r "You want me to rub your cock, with my hand?"
+
+    if not character.Hand and Approval:                                                 #First time dialog
+        call first_action_approval(character, "handjob")
+    elif Approval:
+        call action_approved(character, "handjob", character.Hand)
+
+    if Approval >= 2:
+        call action_accepted(character, "handjob")
+
+        return
+    else:                                                                               #She's not into it, but maybe. . .
+        call action_disapproved(character, "handjob", character.Hand)
+
+    $ character.ArmPose = 1
+
+    call action_rejected(character, "handjob", character.Hand)
+
+    return
+
+label footjob(character):
+    $ Round -= 5 if Round > 5 else (Round-1)
+
+    call Shift_Focus(character)
+    call handjob_set_modifier(character, "footjob")
+
+    $ Approval = ApprovalCheck(character, 1250, TabM = 3) # 110, 125, 140, Taboo -120(230)
+
+    if Situation == character:                                                                  #Rogue auto-starts
+        if Approval > 2:                                                      # fix, add rogue auto stuff here
+            call character_initiated_action(character, "footjob")
+
+            if _return:
+                return
+
+            if Trigger:
+                $ Trigger3 = "foot"
+                return
+
+            call before_handjob(character, "footjob")
+        else:
+            $ temp_modifier = 0                               # fix, add rogue auto stuff here
+            $ Trigger2 = 0
+
+            return
+
+    if not character.Foot and "no foot" not in character.RecentActions:
+        $ character.FaceChange("confused", 2)
+
+        ch_r "Huh, so like a handy, but with my feet?"
+
+        $ character.Blush = 1
+
+    if not character.Foot and Approval:                                                 #First time dialog
+        call first_action_approval(character, "footjob")
+    elif Approval:
+        call action_approved(character, "footjob", character.Foot)
+
+    if Approval >= 2:                                                                   #She's into it. . .
+        call action_accepted(character, "footjob")
+
+        return
+    else:                                                                               #She's not into it, but maybe. . .
+        call action_disapproved(character, "footjob", character.Foot)
+
+    $ character.ArmPose = 1
+
+    call action_rejected(character, "footjob", character.Foot)
+
+    return
+
+label titjob(character):
+    $ Round -= 5 if Round > 5 else (Round-1)
+
+    call Shift_Focus(character)
+    call handjob_set_modifier(character, "titjob")
+
+    $ Approval = ApprovalCheck(character, 1200, TabM = 5) # 120, 135, 150, Taboo -200(320)
+
+    if not character.Tit and "no titjob" not in character.RecentActions:
+        $ character.FaceChange("surprised", 1)
+        $ character.Mouth = "kiss"
+
+        ch_r "You want me to rub your cock with my breasts?"
+
+        if character.Blow:
+            $ character.Mouth = "smile"
+
+            ch_r "My mouth wasn't enough?"
+        elif character.Hand:
+            $ character.Mouth = "smile"
+
+            ch_r "My hand wasn't enough?"
+
+    if not character.Tit and Approval:                                                 #First time dialog
+        call first_action_approval(character)
+    elif Approval:
+        call action_approved(character, "titjob", character.Tit)
+
+    if Approval >= 2:                                                                   #She's into it. . .
+        call action_accepted(character, "titjob")
+    else:                                                                               #She's not into it, but maybe. . .
+        call action_disapproved(character, "titjob", character.Tit)
+
+    call action_rejected(character, "titjob", character.Tit)
+
+    return
+
+label blowjob(character):
+    $ Round -= 5 if Round > 5 else (Round-1)
+
+    call Shift_Focus(character)
+    call handjob_set_modifier(character, "blowjob")
+
+    $ Approval = ApprovalCheck(character, 1300, TabM = 4) # 130, 145, 160, Taboo -160(290)
+
+    if not character.Blow and "no blow" not in character.RecentActions:
+        $ character.FaceChange("surprised", 1)
+        $ character.Mouth = "kiss"
+
+        ch_r "You want me to put your dick. . . in my mouth?"
+        if character.Hand:
+            $ character.Mouth = "smile"
+
+            ch_r "My hand wasn't enough?"
+
+    if not character.Blow and Approval:                                                 #First time dialog
+        call first_action_approval(character)
+    elif Approval:
+        call action_approved(character, "blowjob", character.Blow)
+
+    if Approval >= 2:                                                                   #She's into it. . .
+        call action_accepted(character, "blowjob")
+
+        return
+    else:                                                                               #She's not into it, but maybe. . .
+        call action_disapproved(character, "blowjob", character.Blow)
+
+    call action_rejected(character, "blowjob", character.Blow)
+
+    return
+
+label dildo_pussy(character):
+    $ Round -= 5 if Round > 5 else (Round-1)
+
+    call Shift_Focus(character)
+    call Rogue_Dildo_Check
+
+    if not _return:
+        return
+
+    call handjob_set_modifier(character, "dildo_pussy")
+
+    $ Approval = ApprovalCheck(character, 1250, TabM = 4) # 125, 140, 155, Taboo -160(335)
+
+    if Situation == character:                                                                  #Rogue auto-starts
+        if Approval > 2:                                                      # fix, add rogue auto stuff here
+
+            call character_initiated_action(character, "dildo_pussy")
+
+            if _return:
+                return
+
+            call before_handjob(character, "dildo_pussy")
+        else:
+            $ temp_modifier = 0                               # fix, add rogue auto stuff here
+            $ Trigger2 = 0
+        return
+
+    if Situation == "auto":
+        "You rub the dildo across her body, and along her moist slit."
+
+        $ character.FaceChange("surprised", 1)
+
+        if (character.DildoP and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
+            "[character.Name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
+
+            $ character.FaceChange("sexy")
+            $ character.Statup("Obed", 70, 3)
+            $ character.Statup("Inbt", 50, 3)
+            $ character.Statup("Inbt", 70, 1)
+
+            ch_r "Ok, [character.Petname], let's do this."
+
+            call before_handjob(character, "dildo_pussy")
+
+            return
+        else:                                                                                                            #she's questioning it
+            $ character.Brows = "angry"
+
+            menu:
+                ch_r "Hey, what do you think you're doing back there?!"
+                "Sorry, sorry! Never mind.":
+                    if Approval:
+                        $ character.FaceChange("sexy", 1)
+                        $ character.Statup("Obed", 70, 3)
+                        $ character.Statup("Inbt", 50, 3)
+                        $ character.Statup("Inbt", 70, 1)
+
+                        ch_r "Well, since you're be'in so nice about it, I guess we can give it a go. . ."
+
+                        call before_handjob(character, "dildo_pussy")
+
+                        return
+                    "You pull back before you really get it in."
+
+                    $ character.FaceChange("bemused", 1)
+
+                    if character.DildoP:
+                        ch_r "Well ok, [character.Petname], no harm done. Just give me a little warning next time."
+                    else:
+                        ch_r "Well ok, [character.Petname], I'm not really ready for that, but maybe if you ask nicely next time . . ."
+                "Just playing with my favorite toys.":
+                    $ character.Statup("Love", 80, -10, 1)
+                    $ character.Statup("Love", 200, -10)
+
+                    "You press it inside some more."
+
+                    $ character.Statup("Obed", 70, 3)
+                    $ character.Statup("Inbt", 50, 3)
+
+                    if not ApprovalCheck(character, 700, "O", TabM=1): #Checks if Obed is 700+
+                        $ character.FaceChange("angry")
+
+                        "[character.Name] shoves you away and slaps you in the face."
+                        ch_r "Jackass!"
+                        ch_r "If that's how you want to treat me, we're done here!"
+
+                        $ character.Statup("Love", 50, -10, 1)
+                        $ character.Statup("Obed", 50, 3)
+
+                        $ renpy.pop_call()
+
+                        if Situation:
+                            $ renpy.pop_call()
+
+                        if renpy.showing("Rogue_Doggy"):
+                            call doggy_reset(character)
+
+                        $ character.RecentActions.append("angry")
+                        $ character.DailyActions.append("angry")
+                    else:
+                        $ character.FaceChange("sad")
+
+                        "[character.Name] doesn't seem to be into this, you're lucky she's so obedient."
+
+                        call before_handjob(character, "dildo_pussy")
+
+                        return
+        return
+
+    if not character.DildoP:
+        $ character.FaceChange("surprised", 1)
+        $ character.Mouth = "kiss"
+
+        ch_r "Hmmm, so you'd like to try out some toys?"
+
+        if character.Forced:
+            $ character.FaceChange("sad")
+
+            ch_r "I suppose there are worst things you could ask for."
+
+    if not character.DildoP and Approval:
+        call first_action_approval(character, "dildo_pussy")
+    elif Approval:
+        call action_approved(character, "dildo_pussy", character.DildoP)
+
+    if Approval >= 2:
+        call action_accepted(character, "dildo_pussy")
+    else:
+        call action_disapproved(character, "dildo_pussy", character.DildoP)
+
+    $ character.ArmPose = 1
+
+    call action_rejected(character, "dildo_pussy", character.DildoP)
+
+    return
+
+label dildo_ass(character):
+    $ Round -= 5 if Round > 5 else (Round-1)
+
+    call Shift_Focus(character)
+    call Rogue_Dildo_Check
+
+    if not _return:
+        return
+
+    call handjob_set_modifier(character, "dildo_ass")
+
+    $ Approval = ApprovalCheck(character, 1450, TabM = 4) # 145, 160, 175, Taboo -160(355)
+
+    if Situation == character:
+        if Approval > 2:                                                      # fix, add rogue auto stuff here
+            call character_initiated_action(character, "dildo_ass")
+
+            if _return:
+                return
+
+            call before_handjob(character, "dildo_ass")
+
+            return
+        else:
+            $ temp_modifier = 0                               # fix, add rogue auto stuff here
+            $ Trigger2 = 0
+        return
+
+    if Situation == "auto":
+        "You rub the dildo across her body, and against her tight anus."
+        $ character.FaceChange("surprised", 1)
+
+        if (character.DildoA and Approval) or (Approval > 1):
+            "[character.Name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
+
+            $ character.FaceChange("sexy")
+            $ character.Statup("Obed", 70, 3)
+            $ character.Statup("Inbt", 50, 3)
+            $ character.Statup("Inbt", 70, 1)
+
+            ch_r "Ok, [character.Petname], let's do this."
+
+            call before_handjob(character, "dildo_ass")
+
+            return
+        else:
+            $ character.Brows = "angry"
+
+            menu:
+                ch_r "Hey, what do you think you're doing back there?!"
+                "Sorry, sorry! Never mind.":
+                    if Approval:
+                        $ character.FaceChange("sexy", 1)
+                        $ character.Statup("Obed", 70, 3)
+                        $ character.Statup("Inbt", 50, 3)
+                        $ character.Statup("Inbt", 70, 1)
+
+                        ch_r "Well, since you're be'in so nice about it, I guess we can give it a go. . ."
+
+                        call before_handjob(character, "dildo_ass")
+
+                        return
+
+                    "You pull back before you really get it in."
+
+                    $ character.FaceChange("bemused", 1)
+
+                    if character.DildoA:
+                        ch_r "Well ok, [character.Petname], no harm done. Just give me a little warning next time."
+                    else:
+                        ch_r "Well ok, [character.Petname], I'm not really ready for that, but maybe if you ask nicely next time . . ."
+                "Just playing with my favorite toys.":
+                    $ character.Statup("Love", 80, -10, 1)
+                    $ character.Statup("Love", 200, -10)
+
+                    "You press it inside some more."
+                    $ character.Statup("Obed", 70, 3)
+                    $ character.Statup("Inbt", 50, 3)
+
+                    if not ApprovalCheck(character, 700, "O", TabM=1): #Checks if Obed is 700+
+                        $ character.FaceChange("angry")
+
+                        "[character.Name] shoves you away and slaps you in the face."
+                        ch_r "Jackass!"
+                        ch_r "If that's how you want to treat me, we're done here!"
+
+                        $ character.Statup("Love", 50, -10, 1)
+                        $ character.Statup("Obed", 50, 3)
+
+                        $ renpy.pop_call()
+
+                        if Situation:
+                            $ renpy.pop_call()
+
+                        if renpy.showing("Rogue_Doggy"):
+                            call doggy_reset(character)
+
+                        $ character.RecentActions.append("angry")
+                        $ character.DailyActions.append("angry")
+                    else:
+                        $ character.FaceChange("sad")
+
+                        "[character.Name] doesn't seem to be into this, you're lucky she's so obedient."
+
+                        call before_handjob(character, "dildo_ass")
+
+                        return
+        return
+
+    if not character.DildoA:
+        $ character.FaceChange("surprised", 1)
+        $ character.Mouth = "kiss"
+
+        ch_r "Hmmm, so you'd like to try out some toys?"
+
+        if character.Forced:
+            $ character.FaceChange("sad")
+
+            ch_r "You had to go for the butt, uh?"
+
+    if not character.Loose and ("dildo anal" in character.RecentActions or "anal" in character.RecentActions or "dildo anal" in character.DailyActions or "anal" in character.DailyActions):
+        $ character.FaceChange("bemused", 1)
+
+        ch_r "I'm still a bit sore from earlier. . ."
+
+    if not character.DildoA and Approval:
+        call first_action_approval(character, "dildo_ass")
+    elif Approval:
+        call action_approved(character, "dildo_ass")
+
+    if Approval >= 2:
+        call action_accepted(character, "dildo_ass")
+    else:
+        call action_disapproved(character, "dildo_ass", character.DildoA)
+
+    $ character.ArmPose = 1
+
+    call action_rejected(character, "dildo_ass", character.DildoA)
+
+    return
 
 label dildo_check(character):
     if "dildo" in Player.Inventory:
@@ -870,7 +1370,7 @@ label dildo_check(character):
 
     return True
 
-label vibrator_check(character):     
+label vibrator_check(character):
     if "vibrator" in Player.Inventory:
         "You pull out the \"shocker\" vibrator, handy."
     elif "vibrator" in character.Inventory:

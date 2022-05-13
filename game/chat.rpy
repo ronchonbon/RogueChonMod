@@ -256,7 +256,7 @@ label Chat_Menu: #rkeljsv
                                                     ch_s "Oh?"
                                             elif Girl == JubesX:
                                                     ch_v "Yeah?"
-                                            call sex_menu(Girl)
+                                            call character_sex_menu(Girl)
                                             return
                                     elif ApprovalCheck(Girl, 400, "OI"):
                                             if Girl == RogueX:
@@ -273,7 +273,7 @@ label Chat_Menu: #rkeljsv
                                                     ch_s "Fine."
                                             elif Girl == JubesX:
                                                     ch_v "What would you like, [Girl.Petname]?"
-                                            call sex_menu(Girl)
+                                            call character_sex_menu(Girl)
                                             return
                                     else:
                                             if Girl == RogueX:
@@ -991,11 +991,11 @@ label Favorite_Actions(Chr=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp=
                         elif D20F >= 10 and Chr.SuckB:
                             $ Temp = "suck breasts"
                         elif D20F >= 5 and Chr.FondleB:
-                            $ Temp = "fondle breasts"
+                            $ Temp = "fondle_breasts"
                         else:
-                            $ Temp = "fondle thighs"
+                            $ Temp = "fondle_thighs"
             else:
-                            $ Temp = "kiss you"
+                            $ Temp = "kiss_you"
 
             if not Quick:
                 $ Chr.Favorite = Temp

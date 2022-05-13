@@ -24,7 +24,7 @@ label Player_Cumming(Girl=0,temp_modifier = temp_modifier): #rkeljsv
             $ temp_modifier += 5
 
     if (Girl.CreamP + Girl.CreamA) >= 10:
-            $ temp_modifier += 15 
+            $ temp_modifier += 15
     elif (Girl.CreamP + Girl.CreamA) >= 3:
             $ temp_modifier += 5
 
@@ -146,7 +146,7 @@ label Player_Cumming(Girl=0,temp_modifier = temp_modifier): #rkeljsv
                         extend ""
                         "Ok, if you'll swallow it.":
                                         if not renpy.showing(Girl.Tag+"_BJ_Animation"): #if not renpy.showing("Rogue_BJ_Animation"):
-                                            call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+                                            call blowjob_launch(Girl, "cum")
                                         $ Girl.FaceChange("sucking")
                                         $ Speed = 2
                                         "She nods and puts the tip into her mouth. As you release she gulps it down hungrily."
@@ -183,7 +183,7 @@ label Player_Cumming(Girl=0,temp_modifier = temp_modifier): #rkeljsv
                                         $ Girl.Statup("Inbt", 30, 2)
                                         $ Girl.Statup("Inbt", 70, 3)
                                         if not renpy.showing(Girl.Tag+"_BJ_Animation"): #if not renpy.showing("Rogue_BJ_Animation"):
-                                            call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+                                            call blowjob_launch(Girl, "cum")
                                             $ Speed = 4
                                         "She dives down on you and you can't resist filling her throat."
                                         $ Speed = 0
@@ -357,7 +357,7 @@ label Girl_Warn_Her:  #rkeljsv
                         "She makes a little humming sound, but keeps sucking."
                 else:
                         if renpy.showing(Girl.Tag+"_Doggy_Animation") or renpy.showing(Girl.Tag+"_SexSprite"): #if renpy.showing("Rogue_Doggy"):
-                            call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+                            call blowjob_launch(Girl, "cum")
                             $ Speed = 2
                         $ Girl.FaceChange("sucking")
                         $ Girl.Spunk.append("mouth")
@@ -451,7 +451,7 @@ label Girl_In_Mouth: #rkeljsv
     if Situation == "auto" or Situation == "warn":
                 $ Situation = 0
                 if not renpy.showing(Girl.Tag+"_BJ_Animation"): #if not renpy.showing("Rogue_BJ_Animation"):
-                        call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+                        call blowjob_launch(Girl, "cum")
                 $ Speed = 2
                 if Situation == "warn":
                     "She doesn't seem sure what to do about that, as you cum in her mouth."
@@ -720,7 +720,7 @@ label Girl_In_Mouth: #rkeljsv
             # If she's swallowed 5 times,
             $ Girl.FaceChange("sucking")
             if not renpy.showing(Girl.Tag+"_BJ_Animation"): #if not renpy.showing("Rogue_BJ_Animation"):
-                call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+                call blowjob_launch(Girl, "cum")
                 $ Speed = 2
                 "She nods and bends down to put the tip between her lips."
             else:
@@ -742,7 +742,7 @@ label Girl_In_Mouth: #rkeljsv
             $ Girl.Brows = "confused"
             $ Girl.Eyes = "manic"
             if not renpy.showing(Girl.Tag+"_BJ_Animation"): #if not renpy.showing("Rogue_BJ_Animation"):
-                call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+                call blowjob_launch(Girl, "cum")
                 $ Speed = 2
                 "She looks a bit quizzical, but gently puts the tip to her lips, just as you blow."
             else:
@@ -770,7 +770,7 @@ label Girl_In_Mouth: #rkeljsv
                     $ Speed = 5
                     "She looks a bit confused, but gently puts the tip to her lips."
                 elif not renpy.showing(Girl.Tag+"_BJ_Animation"): #if not renpy.showing("Rogue_BJ_Animation"):
-                    call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+                    call blowjob_launch(Girl, "cum")
                     $ Speed = 2
                     "She looks a bit quizzical, but gently puts the tip to her lips, just as you blow."
                 else:
@@ -960,7 +960,7 @@ label Girl_In_Mouth: #rkeljsv
                 $ Girl.Statup("Obed", 70, 5)
 
     if not renpy.showing(Girl.Tag+"_BJ_Animation"): #if not renpy.showing("Rogue_BJ_Animation"):
-        call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+        call blowjob_launch(Girl, "cum")
     $ Speed = 2
     if ApprovalCheck(Girl, 1200):
             "She gently puts the tip to her lips, just as you blow."
@@ -1367,7 +1367,7 @@ label Girl_Cum_Outside:  #rkeljsv
         if Girl.Addict >= 60 and ApprovalCheck(Girl, 1000, "I", Bonus = ((Girl.Addict*10)- Girl.Obed))  and Girl.Swallow:
                 $ Girl.Eyes = "manic"
                 $ Girl.Blush = 1
-                call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+                call blowjob_launch(Girl, "cum")
                 if Trigger == "sex":
                     "You pull out of her pussy with a pop, and her eyes widen in surprise. She leaps at your cock and sucks it deep, draining your fluids hungrily."
                 elif Trigger == "anal":
@@ -1469,7 +1469,7 @@ label Girl_Cum_Outside:  #rkeljsv
 #        if Girl.Addict >= 60 and ApprovalCheck(Girl, 1000, "I", Bonus = ((Girl.Addict*10)- Girl.Obed))  and Girl.Swallow:
 #                $ Girl.Eyes = "manic"
 #                $ Girl.Blush = 1
-#                call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+#                call blowjob_launch(Girl, "cum")
 #                if Trigger == "sex":
 #                    "You pull out of her pussy with a pop, and her eyes widen in surprise. She leaps at your cock and sucks it deep, draining your fluids hungrily."
 #                elif Trigger == "anal":
@@ -1708,7 +1708,7 @@ label Girl_CleanCock(Girl=0):
                         "She wipes your cock clean."
         elif Girl.Blow > 3 or Girl.Swallow:
                 if ApprovalCheck(Girl, 1200, TabM=1) or Girl.Addict >= 60:
-                        call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+                        call blowjob_launch(Girl, "cum")
                         $ Speed = 1
                         $ Girl.FaceChange("sucking", 1)
                         if ApprovalCheck(Girl, 1500, TabM=1):

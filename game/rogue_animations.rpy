@@ -666,49 +666,6 @@ image Rogue_Doggy_Feet2:
             repeat
 # Footjob animations end > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > > >
 
-#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>             UI Tool animations
-
-
-
-#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-#Doggy Launch/Reset
-label Rogue_Doggy_Launch(Line = Trigger):
-    if renpy.showing("Rogue_Doggy_Animation"):
-        return
-    $ Speed = 0
-    call hide_girl(RogueX, sprite = True)
-    show Rogue_Doggy_Animation at sprite_location(StageCenter+50) zorder 150
-    with dissolve
-    return
-
-label Rogue_Doggy_Reset:
-    if not renpy.showing("Rogue_Doggy_Animation"):
-        return
-#    $ Trigger = 0               #fix, not sure this is a good idea
-    $ RogueX.ArmPose = 2
-    $ RogueX.SpriteVer = 0
-    hide Rogue_Doggy_Animation
-    call hide_girl(RogueX)
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location) zorder RogueX.Layer:
-                    alpha 1
-                    zoom 1
-                    offset (0,0)
-                    anchor (0.6, 0.0)
-    with dissolve
-    $ Speed = 0
-    return
-
-
-
-
-
-# Rogue Sex Sprite ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-#\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-
-#Start Animations for Rogue's Pussy during Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
 
 image Rogue_Sex_Pussy_Fucking0:
     # This is the visual for her pussy during the Speed 0 mode (static).
@@ -1404,68 +1361,7 @@ image Rogue_HJ_Animation:
     offset (200,800)
     zoom 0.6
 
-label Rogue_HJ_Launch(Line = Trigger):
-    if renpy.showing("Rogue_HJ_Animation"):
-        $ Trigger = "hand"
-        return
-    call hide_girl(RogueX)
-    $ RogueX.Arms = 0
-    $ RogueX.ArmPose = 1
-    if not renpy.showing("Rogue_Sprite"):
-        show Rogue_Sprite at sprite_location(RogueX.sprite_location) zorder RogueX.Layer:
-            alpha 1
-            zoom 1.7 xpos 700 offset (0,200)
-        with dissolve
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location) zorder RogueX.Layer:
-        alpha 1
-        ease 1 zoom 1.7  xpos 700 offset (0,200)
 
-    if Taboo and Line == "L":
-        # Rogue gets started. . .
-        if len(Present) >= 2:
-            if Present[0] != RogueX:
-                    "[RogueX.Name] looks back at [Present[0].Name] to see if she's watching."
-            elif Present[1] != RogueX:
-                    "[RogueX.Name] looks back at [Present[1].Name] to see if she's watching."
-        else:
-                    "[RogueX.Name] looks around to see if anyone can see her."
-        if not RogueX.Hand and RogueX.Arms:
-            "As you pull out your cock, [RogueX.Name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
-        else:
-            "She then leans over and grabs your cock."
-    elif Line == "L":
-        if not RogueX.Hand and RogueX.Arms:
-            "As you pull out your cock, [RogueX.Name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
-        else:
-            "[RogueX.Name] bends down and grabs your cock."
-    else:
-            "[RogueX.Name] bends down and grabs your cock."
-
-    $ Speed = 0
-    if Line != "cum":
-        $ Trigger = "hand"
-    show Rogue_HJ_Animation at sprite_location(RogueX.sprite_location) zorder 150 with easeinbottom
-    return
-
-label Rogue_HJ_Reset: # The sequence to the Rogue animations from handjob to default
-    if not renpy.showing("Rogue_HJ_Animation"):
-        return
-    $ Speed = 0
-    hide Rogue_HJ_Animation
-    with dissolve
-    call hide_girl(RogueX)
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location) zorder RogueX.Layer:
-        alpha 1
-        zoom 1.7  xpos 700 offset (0,200)
-    show Rogue_Sprite zorder RogueX.Layer:
-        alpha 1
-        ease 1 zoom 1.5 offset (0,50)
-        pause .5
-        ease .5 zoom 1 xpos RogueX.sprite_location yoffset 0
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location) zorder RogueX.Layer:
-        alpha 1
-        zoom 1  xpos RogueX.sprite_location yoffset 0
-    return
 
 label Rogue_Middle_Launch(T = Trigger,Set=1):
     call hide_girl(RogueX)

@@ -421,7 +421,7 @@ label please_not_good_enough_lines(character):
             "No.",
             "It is not appropriate."])
     elif character == JubesX:
-        $ line = renpy.random.choice(["Geeze, don't whine about it. . .".
+        $ line = renpy.random.choice(["Geeze, don't whine about it. . .",
             "No."])
 
     character.voice "[line]"
@@ -972,7 +972,7 @@ label warm_hands_lines(character):
     elif character == KittyX:
         $ line = renpy.random.choice(["You like how those feel, huh?",
             "You're just going at them, huh?",
-            "Are they keeping you satisfied?".
+            "Are they keeping you satisfied?",
             "You like how that feels, huh?",
             "You like it down there?",
             "Uh, that's nice, but. . .",
@@ -1256,7 +1256,7 @@ label was_that_enough_lines(character):
         $ line = renpy.random.choice(["Was that enough?",
             "That worked out for you?",
             "Did you get enough?",
-            "Did you find anything in there?,
+            "Did you find anything in there?",
             "Was that good for you?",
             "Well, that wasn't so bad. . .",
             "Did you like that?"])
@@ -1353,10 +1353,11 @@ label get_out_lines(character):
     character.voice "[line]"
 
     if character in [character, KittyX, EmmaX, LauraX, JeanX, JubesX]:
-        $ line = renpy.random.choice(["" + character.Name + " pushes you back into the hall and slams the door. You head back to your room.",
-            "" + character.Name + " shoves you back into the hall and slams the door. You head back to your room."])
+        $ line = renpy.random.choice([character.Name + " pushes you back into the hall and slams the door. You head back to your room.",
+            character.Name + " shoves you back into the hall and slams the door. You head back to your room."])
     elif character == StormX:
-        "" + character.Name + " pushes you to the top of the stairs and slams the door. You head back to your room."
+        $ line = renpy.random.choice([character.Name + " pushes you to the top of the stairs and slams the door. You head back to your room."])
+    "[line]"
 
     return
 
@@ -1408,7 +1409,7 @@ label first_time_ass_eaten_lines(character):
             $ character.Eyes = "sexy"
 
             ch_e "Hm, I didn't know that's what you were into."
-     elif character == LauraX:
+    elif character == LauraX:
         if character.Love >= character.Obed and character.Love >= character.Inbt:
             ch_l "Oh, we're there now?"
         elif character.Obed >= character.Inbt:
