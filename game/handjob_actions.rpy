@@ -98,7 +98,7 @@ label handjob_menu:
         "Other options":
                 menu:
                     "I also want to fondle her breasts." if offhand_action != "fondle breasts":
-                        if focused_Girl.Action and MultiAction:
+                        if focused_Girl.Action and multi_action:
                             $ offhand_action = "fondle breasts"
 
                             "You start to fondle her breasts."
@@ -107,7 +107,7 @@ label handjob_menu:
                         else:
                             call tired_lines(focused_Girl)
                     "Offhand action" if primary_action in ["footjob", "dildo_pussy", "dildo_ass"]:
-                        if focused_Girl.Action and MultiAction:
+                        if focused_Girl.Action and multi_action:
                             call Offhand_Set
 
                             if offhand_action:
@@ -115,10 +115,10 @@ label handjob_menu:
                         else:
                             call tired_lines(focused_Girl)
                     "Shift primary action":
-                        if focused_Girl.Action and MultiAction:
+                        if focused_Girl.Action and multi_action:
                             menu:
                                 "How about a handy?" if primary_action in ["footjob", "titjob", "blowjob"]:
-                                    if focused_Girl.Action and MultiAction:
+                                    if focused_Girl.Action and multi_action:
                                         $ action_context = "shift"
 
                                         call after_action
@@ -126,7 +126,7 @@ label handjob_menu:
                                     else:
                                         call tired_lines(focused_Girl)
                                 "How about a footjob?" if primary_action in ["handjob", "titjob", "blowjob"]:
-                                    if focused_Girl.Action and MultiAction:
+                                    if focused_Girl.Action and multi_action:
                                         $ action_context = "shift"
 
                                         call after_action
@@ -134,7 +134,7 @@ label handjob_menu:
                                     else:
                                         call tired_lines(focused_Girl)
                                 "How about a titjob?" if primary_action in ["handjob", "footjob", "blowjob"]:
-                                    if focused_Girl.Action and MultiAction:
+                                    if focused_Girl.Action and multi_action:
                                         $ action_context = "shift"
 
                                         call after_action
@@ -142,7 +142,7 @@ label handjob_menu:
                                     else:
                                         call tired_lines(focused_Girl)
                                 "How about a blowjob?" if primary_action in ["handjob", "footjob", "titjob"]:
-                                    if focused_Girl.Action and MultiAction:
+                                    if focused_Girl.Action and multi_action:
                                         $ action_context = "shift"
 
                                         call after_action
@@ -150,7 +150,7 @@ label handjob_menu:
                                     else:
                                         call tired_lines(focused_Girl)
                                 "I want to stick a finger in her ass." if primary_action == "dildo_pussy":
-                                    if focused_Girl.Action and MultiAction:
+                                    if focused_Girl.Action and multi_action:
                                         $ action_context = "shift"
 
                                         call after_action
@@ -158,7 +158,7 @@ label handjob_menu:
                                     else:
                                         call tired_lines(focused_Girl)
                                 "Just stick a finger in her ass without asking." if primary_action == "dildo_pussy":
-                                    if focused_Girl.Action and MultiAction:
+                                    if focused_Girl.Action and multi_action:
                                         $ action_context = "auto"
 
                                         call after_action
@@ -166,7 +166,7 @@ label handjob_menu:
                                     else:
                                         call tired_lines(focused_Girl)
                                 "I want to shift the dildo to her ass." if primary_action == "dildo_pussy":
-                                    if focused_Girl.Action and MultiAction:
+                                    if focused_Girl.Action and multi_action:
                                         $ action_context = "shift"
 
                                         call after_action
@@ -174,7 +174,7 @@ label handjob_menu:
                                     else:
                                         call tired_lines(focused_Girl)
                                 "I want to stick a finger in her pussy." if primary_action == "dildo_ass":
-                                    if focused_Girl.Action and MultiAction:
+                                    if focused_Girl.Action and multi_action:
                                         $ action_context = "shift"
 
                                         call after_action
@@ -182,7 +182,7 @@ label handjob_menu:
                                     else:
                                         call tired_lines(focused_Girl)
                                 "Just stick a finger in her pussy without asking." if primary_action == "dildo_ass":
-                                    if focused_Girl.Action and MultiAction:
+                                    if focused_Girl.Action and multi_action:
                                         $ action_context = "auto"
 
                                         call after_action
@@ -190,7 +190,7 @@ label handjob_menu:
                                     else:
                                         call tired_lines(focused_Girl)
                                 "I want to shift the dildo to her pussy." if primary_action == "dildo_ass":
-                                    if focused_Girl.Action and MultiAction:
+                                    if focused_Girl.Action and multi_action:
                                         $ action_context = "shift"
 
                                         call after_action
@@ -242,7 +242,7 @@ label handjob_menu:
                         call Girl_Cleanup(RogueX,"ask")
                     "Never mind":
                         jump handjob_cycle
-        "Back to Sex Menu" if MultiAction:
+        "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
             call handjob_reset(focused_Girl)
@@ -251,7 +251,7 @@ label handjob_menu:
             $ line = 0
 
             jump after_action
-        "End Scene" if not MultiAction:
+        "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
             call handjob_reset(focused_Girl)
@@ -499,22 +499,22 @@ label end_of_handjob_round(Girl, action):
 
         menu:
             extend ""
-            "How about a handy?" if action in ["footjob", "titjob", "blowjob"] and Girl.Action and MultiAction:
+            "How about a handy?" if action in ["footjob", "titjob", "blowjob"] and Girl.Action and multi_action:
                 $ action_context = "shift"
 
                 call handjob_after
                 call handjob(Girl)
-            "How about a footjob?" if action in ["handjob", "titjob", "blowjob"] and Girl.Action and MultiAction:
+            "How about a footjob?" if action in ["handjob", "titjob", "blowjob"] and Girl.Action and multi_action:
                 $ action_context = "shift"
 
                 call handjob_after
                 call footjob(Girl)
-            "How about a titjob?" if action in ["handjob", "footjob", "blowjob"] and Girl.Action and MultiAction:
+            "How about a titjob?" if action in ["handjob", "footjob", "blowjob"] and Girl.Action and multi_action:
                 $ action_context = "shift"
 
                 call handjob_after
                 call titjob(Girl)
-            "How about a BJ?" if action in ["handjob", "footjob", "titjob"] and Girl.Action and MultiAction:
+            "How about a BJ?" if action in ["handjob", "footjob", "titjob"] and Girl.Action and multi_action:
                 $ action_context = "shift"
 
                 call handjob_after
@@ -530,7 +530,7 @@ label end_of_handjob_round(Girl, action):
                 "You let go. . ."
 
                 jump after_action
-            "Let's try something else." if MultiAction:
+            "Let's try something else." if multi_action:
                 $ line = 0
                 $ action_context = "shift"
 

@@ -469,7 +469,7 @@ label Laura_M_Cycle:
                         "Change what I'm doing":
                                 menu:
                                     "Offhand action" if LauraX.Loc == bg_current:
-                                            if LauraX.Action and MultiAction:
+                                            if LauraX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ LauraX.Action -= 1
@@ -515,13 +515,13 @@ label Laura_M_Cycle:
                                     "Never mind":
                                                     jump Laura_M_Cycle
 
-                        "Back to Sex Menu" if MultiAction and LauraX.Loc == bg_current:
+                        "Back to Sex Menu" if multi_action and LauraX.Loc == bg_current:
                                     ch_p "Let's try something else."
                                     call Laura_Pos_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Laura_M_Interupted
-                        "End Scene" if not MultiAction or LauraX.Loc != bg_current:
+                        "End Scene" if not multi_action or LauraX.Loc != bg_current:
                                     ch_p "Let's stop for now."
                                     call Laura_Pos_Reset
                                     $ line = 0
@@ -1103,7 +1103,7 @@ label Laura_Sex_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if LauraX.Action and MultiAction:
+                                            if LauraX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ LauraX.Action -= 1
@@ -1111,7 +1111,7 @@ label Laura_Sex_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(LauraX,"tired")
 
                                     "Shift primary action":
-                                            if LauraX.Action and MultiAction:
+                                            if LauraX.Action and multi_action:
                                                     menu:
                                                         "How about anal?":
                                                                 $ action_context = "shift"
@@ -1167,13 +1167,13 @@ label Laura_Sex_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Laura_Sex_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Laura_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Laura_SexAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Laura_Sex_Reset
                                     $ line = 0
@@ -1250,7 +1250,7 @@ label Laura_Sex_Cycle: #Repeating strokes
                     $ LauraX.Brows = "angry"
                     menu:
                         ch_l "Hey. . . could we. . . try something. . . else?"
-                        "How about a BJ?" if LauraX.Action and MultiAction:
+                        "How about a BJ?" if LauraX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Laura_SexAfter
                                 call Laura_Blowjob
@@ -1260,7 +1260,7 @@ label Laura_Sex_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Laura_Sex_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Laura_Sex_Reset
                                 $ action_context = "shift"
@@ -1724,7 +1724,7 @@ label Laura_Anal_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if LauraX.Action and MultiAction:
+                                            if LauraX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ LauraX.Action -= 1
@@ -1732,7 +1732,7 @@ label Laura_Anal_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(LauraX,"tired")
 
                                     "Shift primary action":
-                                            if LauraX.Action and MultiAction:
+                                            if LauraX.Action and multi_action:
                                                     menu:
                                                         "How about sex?":
                                                                 $ action_context = "shift"
@@ -1794,13 +1794,13 @@ label Laura_Anal_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Laura_Anal_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Laura_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Laura_AnalAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Laura_Sex_Reset
                                     $ line = 0
@@ -1877,11 +1877,11 @@ label Laura_Anal_Cycle: #Repeating strokes
                     $ LauraX.Brows = "angry"
                     menu:
                         ch_l "Can we. . . do something. . . else?"
-                        "How about a BJ?" if LauraX.Action and MultiAction:
+                        "How about a BJ?" if LauraX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Laura_AnalAfter
                                 call Laura_Blowjob
-                        "How about a Handy?" if LauraX.Action and MultiAction:
+                        "How about a Handy?" if LauraX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Laura_AnalAfter
                                 call Laura_Handjob
@@ -1891,7 +1891,7 @@ label Laura_Anal_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Laura_Anal_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Laura_Sex_Reset
                                 $ action_context = "shift"
@@ -2259,7 +2259,7 @@ label Laura_Hotdog_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if LauraX.Action and MultiAction:
+                                            if LauraX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ LauraX.Action -= 1
@@ -2267,7 +2267,7 @@ label Laura_Hotdog_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(LauraX,"tired")
 
                                     "Shift primary action":
-                                            if LauraX.Action and MultiAction:
+                                            if LauraX.Action and multi_action:
                                                     menu:
                                                         "How about sex?":
                                                             $ action_context = "shift"
@@ -2333,13 +2333,13 @@ label Laura_Hotdog_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Laura_Hotdog_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Laura_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Laura_HotdogAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Laura_Sex_Reset
                                     $ line = 0
@@ -2416,7 +2416,7 @@ label Laura_Hotdog_Cycle: #Repeating strokes
                     $ LauraX.Brows = "angry"
                     menu:
                         ch_l "I'm kinda bored by this."
-                        "How about a BJ?" if LauraX.Action and MultiAction:
+                        "How about a BJ?" if LauraX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Laura_HotdogAfter
                                 call Laura_Blowjob
@@ -2426,7 +2426,7 @@ label Laura_Hotdog_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Laura_Hotdog_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Laura_Sex_Reset
                                 $ action_context = "shift"

@@ -74,7 +74,7 @@ label enter_main_sex_menu:
 
         return
 
-    if not MultiAction:
+    if not multi_action:
         call set_the_scene
 
         call thats_it_for_now_lines(Player.focused_girl)
@@ -418,7 +418,7 @@ label Girl_sex_menu(Girl):
                                 ch_s "Well, I cannot push you to breaking. . ."
                             elif Girl == JubesX:
                                 ch_l "Well, you could always try something else. . ."
-                        "Ok, we can try something else." if MultiAction and "round2" not in Girl.recent_history:
+                        "Ok, we can try something else." if multi_action and "round2" not in Girl.recent_history:
                             $ Girl.change_face("smile")
                             $ Girl.change_stat("love", 70, 2)
                             $ Girl.change_stat("love", 90, 1)
@@ -444,7 +444,7 @@ label Girl_sex_menu(Girl):
                             call main_sex_menu(Girl)
 
                             return
-                        "Again? Ok, fine." if MultiAction and "round2" in Girl.recent_history:
+                        "Again? Ok, fine." if multi_action and "round2" in Girl.recent_history:
                             $ Girl.change_face("sly")
 
                             if Girl == RogueX:

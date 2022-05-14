@@ -4154,9 +4154,9 @@ label Girl_Date_End(Girl=0): #nee R_Date_End
                         elif Girl == JubesX:
                                 ch_v "Sure, why not. . ."
                         call Date_Sex_Break(Girl,0,2)
-                        $ MultiAction = 0
+                        $ multi_action = 0
                         call KissPrep(Girl)
-                        $ MultiAction = 1
+                        $ multi_action = 1
                     if ApprovalCheck(Girl, 900, Bonus=(10*Date_Bonus[0])):
                         $ Girl.change_face("sexy", 1)
                         if Girl == RogueX:

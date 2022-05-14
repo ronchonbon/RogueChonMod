@@ -23,39 +23,39 @@ label out_of_action_lines(character):
 
     return
 
-label tired_lines(character, multi = MultiAction):
+label tired_lines(character):
     if character == RogueX:
-        if not multi:
+        if not multi_action:
             $ line = renpy.random.choice(["Look, I think we can stay on this one thing. . ."])
         else:
             $ line = renpy.random.choice(["I'm actually getting a little tired, so maybe we could wrap this up?"])
     elif character == KittyX:
-        if not multi:
+        if not multi_action:
             $ line = renpy.random.choice(["Let's just. . . stick with this. . ."])
         else:
             $ line = renpy.random.choice(["I kinda need a break, so if we could wrap this up?"])
     elif character == EmmaX:
-        if not multi:
+        if not multi_action:
             $ line = renpy.random.choice(["Focus on what we're doing, " + character.Petname + "."])
         else:
             $ line = renpy.random.choice(["I could use a break, are you about finished here?"])
     elif character == LauraX:
-        if not multi:
+        if not multi_action:
             $ line = renpy.random.choice(["Nah, let's just stick to this."])
         else:
             $ line = renpy.random.choice(["Maybe we could finish this up for now?"])
     elif character == JeanX:
-        if not multi:
+        if not multi_action:
             $ line = renpy.random.choice(["I'd rather just stick to this."])
         else:
             $ line = renpy.random.choice(["Keep your eye on the prize. . ."])
     elif character == StormX:
-        if not multi:
+        if not multi_action:
             $ line = renpy.random.choice(["I would prefer to finish this."])
         else:
             $ line = renpy.random.choice(["Why not finish off here first?"])
     elif character == JubesX:
-        if not multi:
+        if not multi_action:
             $ line = renpy.random.choice(["Let's just keep doing this for a bit. . ."])
         else:
             $ line = renpy.random.choice(["Maybe we could wrap it up?"])

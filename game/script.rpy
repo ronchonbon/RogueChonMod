@@ -84,7 +84,7 @@ init -1:
     default Digits = []
     default Keys = []
     default action_context = 0               #Whether Auto/Shift
-    default MultiAction = 1             #0 if the action cannot continue, 1 if it can
+    default multi_action = 1             #0 if the action cannot continue, 1 if it can
     default primary_action = 0                 #Mainhand
     default offhand_action = 0                #Offhand
     default girl_offhand_action = 0                #Girl's offhand
@@ -102,7 +102,7 @@ init -1:
     default Events = []
     default PunishmentX = 0             #countdown on your punishment
     default temp_modifier = 0
-    default Approval = 0                #for approval checks
+
     default Count = 0                   #For within an event
     default between_event_count = 0                  #For between several events
     default stored_count = 0              #Stores values for after an event ends

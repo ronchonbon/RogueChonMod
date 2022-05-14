@@ -437,7 +437,7 @@ label Emma_Caught_Classroom:
                                         $ EmmaX.change_face("sly")
                                         ch_e "Still. . ."
                     $ line = 0
-                    $ MultiAction = 0
+                    $ multi_action = 0
                     $ temp_modifier = 25
                     menu:
                         extend ""
@@ -541,7 +541,7 @@ label Emma_Caught_Classroom:
                     $ EmmaX.Loc = "bg_emma"
                     hide Emma_Sprite with easeoutleft
                     $ Round = 20 if Round > 20 else Round
-                    $ MultiAction = 1
+                    $ multi_action = 1
             return
 
 label Emma_Detention:

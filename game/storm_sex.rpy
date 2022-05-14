@@ -464,7 +464,7 @@ label Storm_M_Cycle:
                         "Change what I'm doing":
                                 menu:
                                     "Offhand action" if StormX.Loc == bg_current:
-                                            if StormX.Action and MultiAction:
+                                            if StormX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                     $ StormX.Action -= 1
@@ -512,13 +512,13 @@ label Storm_M_Cycle:
                                     "Never mind":
                                             jump Storm_M_Cycle
 
-                        "Back to Sex Menu" if MultiAction and StormX.Loc == bg_current:
+                        "Back to Sex Menu" if multi_action and StormX.Loc == bg_current:
                                     ch_p "Let's try something else."
                                     call Storm_Pos_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Storm_M_Interupted
-                        "End Scene" if not MultiAction or StormX.Loc != bg_current:
+                        "End Scene" if not multi_action or StormX.Loc != bg_current:
                                     ch_p "Let's stop for now."
                                     call Storm_Pos_Reset
                                     $ line = 0
@@ -717,7 +717,7 @@ label Storm_M_Interupted:
             ch_s "Yes?"
     menu:
         extend ""
-        "Well, I have something you could take care of. . ." if Player.Semen and StormX.Action and MultiAction:
+        "Well, I have something you could take care of. . ." if Player.Semen and StormX.Action and multi_action:
                 $ action_context = "shift"
                 return
         "You could just keep going. . ." if Player.Semen:
@@ -1204,7 +1204,7 @@ label Storm_Sex_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if StormX.Action and MultiAction:
+                                            if StormX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ StormX.Action -= 1
@@ -1212,7 +1212,7 @@ label Storm_Sex_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(StormX,"tired")
 
                                     "Shift primary action":
-                                            if StormX.Action and MultiAction:
+                                            if StormX.Action and multi_action:
                                                     menu:
                                                         "How about anal?":
                                                                 $ action_context = "shift"
@@ -1276,13 +1276,13 @@ label Storm_Sex_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Storm_Sex_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Storm_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Storm_SexAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Storm_Sex_Reset
                                     $ line = 0
@@ -1360,7 +1360,7 @@ label Storm_Sex_Cycle: #Repeating strokes
                     ch_s "I am . . .becoming . . a bit. . . worn out. . . here. . ."
                     menu:
                         ch_s "Would you mind. . . a different. . . option?"
-                        "How about a BJ?" if StormX.Action and MultiAction:
+                        "How about a BJ?" if StormX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Storm_SexAfter
                                 call Storm_Blowjob
@@ -1370,7 +1370,7 @@ label Storm_Sex_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Storm_Sex_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Storm_Sex_Reset
                                 $ action_context = "shift"
@@ -1771,7 +1771,7 @@ label Storm_Anal_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if StormX.Action and MultiAction:
+                                            if StormX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ StormX.Action -= 1
@@ -1779,7 +1779,7 @@ label Storm_Anal_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(StormX,"tired")
 
                                     "Shift primary action":
-                                            if StormX.Action and MultiAction:
+                                            if StormX.Action and multi_action:
                                                     menu:
                                                         "How about sex?":
                                                                 $ action_context = "shift"
@@ -1843,13 +1843,13 @@ label Storm_Anal_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Storm_Anal_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Storm_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Storm_AnalAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Storm_Sex_Reset
                                     $ line = 0
@@ -1927,11 +1927,11 @@ label Storm_Anal_Cycle: #Repeating strokes
                     ch_s "This is . . .becoming . . rather. . . uncomfortable. . ."
                     menu:
                         ch_s "Could we. . . do something. . . else?"
-                        "How about a BJ?" if StormX.Action and MultiAction:
+                        "How about a BJ?" if StormX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Storm_AnalAfter
                                 call Storm_Blowjob
-                        "How about a Handy?" if StormX.Action and MultiAction:
+                        "How about a Handy?" if StormX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Storm_AnalAfter
                                 call Storm_Handjob
@@ -1941,7 +1941,7 @@ label Storm_Anal_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Storm_Anal_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Storm_Sex_Reset
                                 $ action_context = "shift"
@@ -2297,7 +2297,7 @@ label Storm_Hotdog_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if StormX.Action and MultiAction:
+                                            if StormX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ StormX.Action -= 1
@@ -2305,7 +2305,7 @@ label Storm_Hotdog_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(StormX,"tired")
 
                                     "Shift primary action":
-                                            if StormX.Action and MultiAction:
+                                            if StormX.Action and multi_action:
                                                     menu:
                                                         "How about sex?":
                                                             $ action_context = "shift"
@@ -2373,13 +2373,13 @@ label Storm_Hotdog_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Storm_Hotdog_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Storm_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Storm_HotdogAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Storm_Sex_Reset
                                     $ line = 0
@@ -2456,7 +2456,7 @@ label Storm_Hotdog_Cycle: #Repeating strokes
                     $ StormX.Brows = "angry"
                     menu:
                         ch_s "I am getting rather tired of this."
-                        "How about a BJ?" if StormX.Action and MultiAction:
+                        "How about a BJ?" if StormX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Storm_HotdogAfter
                                 call Storm_Blowjob
@@ -2466,7 +2466,7 @@ label Storm_Hotdog_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Storm_Hotdog_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Storm_Sex_Reset
                                 $ action_context = "shift"

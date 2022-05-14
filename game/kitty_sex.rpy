@@ -471,7 +471,7 @@ label Kitty_M_Cycle:
                         "Change what I'm doing":
                                 menu:
                                     "Offhand action" if KittyX.Loc == bg_current:
-                                            if KittyX.Action and MultiAction:
+                                            if KittyX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ KittyX.Action -= 1
@@ -519,13 +519,13 @@ label Kitty_M_Cycle:
                                     "Never mind":
                                             jump Kitty_M_Cycle
 
-                        "Back to Sex Menu" if MultiAction and KittyX.Loc == bg_current:
+                        "Back to Sex Menu" if multi_action and KittyX.Loc == bg_current:
                                     ch_p "Let's try something else."
                                     call Kitty_Pos_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Kitty_M_Interupted
-                        "End Scene" if not MultiAction or KittyX.Loc != bg_current:
+                        "End Scene" if not multi_action or KittyX.Loc != bg_current:
                                     ch_p "Let's stop for now."
                                     call Kitty_Pos_Reset
                                     $ line = 0
@@ -1100,7 +1100,7 @@ label Kitty_Sex_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if KittyX.Action and MultiAction:
+                                            if KittyX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ KittyX.Action -= 1
@@ -1108,7 +1108,7 @@ label Kitty_Sex_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(KittyX,"tired")
 
                                     "Shift primary action":
-                                            if KittyX.Action and MultiAction:
+                                            if KittyX.Action and multi_action:
                                                     menu:
                                                         "How about anal?":
                                                                 $ action_context = "shift"
@@ -1172,13 +1172,13 @@ label Kitty_Sex_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Kitty_Sex_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Kitty_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Kitty_SexAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Kitty_Sex_Reset
                                     $ line = 0
@@ -1256,7 +1256,7 @@ label Kitty_Sex_Cycle: #Repeating strokes
                     ch_k "I'm . . .getting . . kinda tired. . . here. . ."
                     menu:
                         ch_k "Can we. . . do something. . . else?"
-                        "How about a BJ?" if KittyX.Action and MultiAction:
+                        "How about a BJ?" if KittyX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Kitty_SexAfter
                                 call Kitty_Blowjob
@@ -1266,7 +1266,7 @@ label Kitty_Sex_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Kitty_Sex_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Kitty_Sex_Reset
                                 $ action_context = "shift"
@@ -1688,7 +1688,7 @@ label Kitty_Anal_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if KittyX.Action and MultiAction:
+                                            if KittyX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ KittyX.Action -= 1
@@ -1696,7 +1696,7 @@ label Kitty_Anal_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(KittyX,"tired")
 
                                     "Shift primary action":
-                                            if KittyX.Action and MultiAction:
+                                            if KittyX.Action and multi_action:
                                                     menu:
                                                         "How about sex?":
                                                                 $ action_context = "shift"
@@ -1760,13 +1760,13 @@ label Kitty_Anal_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Kitty_Anal_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Kitty_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Kitty_AnalAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Kitty_Sex_Reset
                                     $ line = 0
@@ -1847,7 +1847,7 @@ label Kitty_Anal_Cycle: #Repeating strokes
                     ch_k "I'm . . .getting . . kinda tired. . . of this. . ."
                     menu:
                         ch_k "Can we. . . do something. . . else?"
-                        "How about a BJ?" if KittyX.Action and MultiAction:
+                        "How about a BJ?" if KittyX.Action and multi_action:
                                 if KittyX.Anal >= 5 and KittyX.Blow >= 10 and KittyX.SEXP >= 50:
                                     $ action_context = "shift"
                                     call Kitty_AnalAfter
@@ -1857,7 +1857,7 @@ label Kitty_Anal_Cycle: #Repeating strokes
                                     $ action_context = "shift"
                                     call Kitty_AnalAfter
                                     call Kitty_HJ_Prep
-                        "How about a Handy?" if KittyX.Action and MultiAction:
+                        "How about a Handy?" if KittyX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Kitty_AnalAfter
                                 call Kitty_Handjob
@@ -1867,7 +1867,7 @@ label Kitty_Anal_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Kitty_Anal_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Kitty_Sex_Reset
                                 $ action_context = "shift"
@@ -2234,7 +2234,7 @@ label Kitty_Hotdog_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if KittyX.Action and MultiAction:
+                                            if KittyX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ KittyX.Action -= 1
@@ -2242,7 +2242,7 @@ label Kitty_Hotdog_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(KittyX,"tired")
 
                                     "Shift primary action":
-                                            if KittyX.Action and MultiAction:
+                                            if KittyX.Action and multi_action:
                                                     menu:
                                                         "How about sex?":
                                                             $ action_context = "shift"
@@ -2310,13 +2310,13 @@ label Kitty_Hotdog_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Kitty_Hotdog_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Kitty_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Kitty_HotdogAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Kitty_Sex_Reset
                                     $ line = 0
@@ -2393,7 +2393,7 @@ label Kitty_Hotdog_Cycle: #Repeating strokes
                     $ KittyX.Brows = "angry"
                     menu:
                         ch_k "This is getting a bit dull."
-                        "How about a BJ?" if KittyX.Action and MultiAction:
+                        "How about a BJ?" if KittyX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Kitty_HotdogAfter
                                 call Kitty_Blowjob
@@ -2403,7 +2403,7 @@ label Kitty_Hotdog_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Kitty_Hotdog_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Kitty_Sex_Reset
                                 $ action_context = "shift"

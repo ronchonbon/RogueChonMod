@@ -473,9 +473,9 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
                             $ Girl.AddWord(1,"bargainsex",0,0,0) #adds "bargainsex" to recent
                             $ Girl.change_stat("obedience", 80, 3)
                             $ temp_modifier = 50
-                            $ MultiAction = 0
+                            $ multi_action = 0
                             call expression Girl.Tag + "_SMenu" #call Rogue_SexMenu
-                            $ MultiAction = 1
+                            $ multi_action = 1
                             menu:
                                 "Ok, I guess we can give it another shot.":
                                         $ Girl.change_stat("love", 80, 3)

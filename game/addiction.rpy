@@ -687,7 +687,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
             $ stored_count = temp_modifier
             if not ApprovalCheck(Girl, 1200, "LO"):
                     $ Girl.Forced = 1
-                    $ MultiAction = 0
+                    $ multi_action = 0
             menu Addict_Ultimatum_Menu:
                 extend ""
                 "Nothing, just touch whatever you like.":
@@ -1391,7 +1391,7 @@ label Addicted_Bad_End: #rkeljs
         $ line = 0
         $ action_context = 0
         $ Girl.Forced = 0
-        $ MultiAction = 1
+        $ multi_action = 1
         $ Girl.Addictionrate += 2
         call Sex_Over
         call Checkout
@@ -2476,7 +2476,7 @@ label Addicted_Serum: #rkeljs
                                 $ Girl.change_stat("inhibition", 70, 2)
                                 if not ApprovalCheck(Girl, 1200, "LI"):
                                         $ Girl.Forced = 1
-                                        $ MultiAction = 0
+                                        $ multi_action = 0
                                 $ Player.Cash += 10
                                 $ Girl.recent_history.append("has serum")
                         elif Girl.Chat[2] and line == "Five":
@@ -2500,7 +2500,7 @@ label Addicted_Serum: #rkeljs
                                 $ Girl.change_stat("inhibition", 70, 4)
                                 if not ApprovalCheck(Girl, 1200, "LI"):
                                         $ Girl.Forced = 1
-                                        $ MultiAction = 0
+                                        $ multi_action = 0
                                 $ Player.Cash += 5
                                 $ Girl.recent_history.append("has serum")
                         else:

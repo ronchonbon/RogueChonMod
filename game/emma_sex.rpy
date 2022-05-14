@@ -476,7 +476,7 @@ label Emma_M_Cycle:
                         "Change what I'm doing":
                                 menu:
                                     "Offhand action" if EmmaX.Loc == bg_current:
-                                            if EmmaX.Action and MultiAction:
+                                            if EmmaX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ EmmaX.Action -= 1
@@ -524,13 +524,13 @@ label Emma_M_Cycle:
                                     "Never mind":
                                             jump Emma_M_Cycle
 
-                        "Back to Sex Menu" if MultiAction and EmmaX.Loc == bg_current:
+                        "Back to Sex Menu" if multi_action and EmmaX.Loc == bg_current:
                                     ch_p "Let's try something else."
                                     call reset_position(EmmaX)
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Emma_M_Interupted
-                        "End Scene" if not MultiAction or EmmaX.Loc != bg_current:
+                        "End Scene" if not multi_action or EmmaX.Loc != bg_current:
                                     ch_p "Let's stop for now."
                                     call reset_position(EmmaX)
                                     $ line = 0
@@ -729,7 +729,7 @@ label Emma_M_Interupted:
             ch_e "Yes?"
     menu:
         extend ""
-        "Well, I have something you could take care of. . ." if Player.Semen and EmmaX.Action and MultiAction:
+        "Well, I have something you could take care of. . ." if Player.Semen and EmmaX.Action and multi_action:
                 $ action_context = "shift"
                 return
         "You could just keep going. . ." if Player.Semen:
@@ -1118,7 +1118,7 @@ label Emma_Sex_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if EmmaX.Action and MultiAction:
+                                            if EmmaX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ EmmaX.Action -= 1
@@ -1126,7 +1126,7 @@ label Emma_Sex_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(EmmaX,"tired")
 
                                     "Shift primary action":
-                                            if EmmaX.Action and MultiAction:
+                                            if EmmaX.Action and multi_action:
                                                     menu:
                                                         "How about anal?":
                                                                 $ action_context = "shift"
@@ -1190,13 +1190,13 @@ label Emma_Sex_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Emma_Sex_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Emma_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Emma_SexAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Emma_Sex_Reset
                                     $ line = 0
@@ -1274,7 +1274,7 @@ label Emma_Sex_Cycle: #Repeating strokes
                     ch_e "I'm . . .getting . . a bit. . . tired. . . here. . ."
                     menu:
                         ch_e "Could we. . . do something. . . else?"
-                        "How about a BJ?" if EmmaX.Action and MultiAction:
+                        "How about a BJ?" if EmmaX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Emma_SexAfter
                                 call Emma_Blowjob
@@ -1284,7 +1284,7 @@ label Emma_Sex_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Emma_Sex_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Emma_Sex_Reset
                                 $ action_context = "shift"
@@ -1805,7 +1805,7 @@ label Emma_Anal_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if EmmaX.Action and MultiAction:
+                                            if EmmaX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ EmmaX.Action -= 1
@@ -1813,7 +1813,7 @@ label Emma_Anal_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(EmmaX,"tired")
 
                                     "Shift primary action":
-                                            if EmmaX.Action and MultiAction:
+                                            if EmmaX.Action and multi_action:
                                                     menu:
                                                         "How about sex?":
                                                                 $ action_context = "shift"
@@ -1877,13 +1877,13 @@ label Emma_Anal_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Emma_Anal_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Emma_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Emma_AnalAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Emma_Sex_Reset
                                     $ line = 0
@@ -1961,11 +1961,11 @@ label Emma_Anal_Cycle: #Repeating strokes
                     ch_e "I'm . . .getting . . a bit. . . tired. . . of this. . ."
                     menu:
                         ch_e "Can we. . . do something. . . else?"
-                        "How about a BJ?" if EmmaX.Action and MultiAction:
+                        "How about a BJ?" if EmmaX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Emma_AnalAfter
                                 call Emma_Blowjob
-                        "How about a Handy?" if EmmaX.Action and MultiAction:
+                        "How about a Handy?" if EmmaX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Emma_AnalAfter
                                 call Emma_Handjob
@@ -1975,7 +1975,7 @@ label Emma_Anal_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Emma_Anal_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Emma_Sex_Reset
                                 $ action_context = "shift"
@@ -2343,7 +2343,7 @@ label Emma_Hotdog_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if EmmaX.Action and MultiAction:
+                                            if EmmaX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ EmmaX.Action -= 1
@@ -2351,7 +2351,7 @@ label Emma_Hotdog_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(EmmaX,"tired")
 
                                     "Shift primary action":
-                                            if EmmaX.Action and MultiAction:
+                                            if EmmaX.Action and multi_action:
                                                     menu:
                                                         "How about sex?":
                                                             $ action_context = "shift"
@@ -2419,13 +2419,13 @@ label Emma_Hotdog_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Emma_Hotdog_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Emma_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Emma_HotdogAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Emma_Sex_Reset
                                     $ line = 0
@@ -2502,7 +2502,7 @@ label Emma_Hotdog_Cycle: #Repeating strokes
                     $ EmmaX.Brows = "angry"
                     menu:
                         ch_e "I'm a bit bored by this."
-                        "How about a BJ?" if EmmaX.Action and MultiAction:
+                        "How about a BJ?" if EmmaX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Emma_HotdogAfter
                                 call Emma_Blowjob
@@ -2512,7 +2512,7 @@ label Emma_Hotdog_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Emma_Hotdog_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Emma_Sex_Reset
                                 $ action_context = "shift"

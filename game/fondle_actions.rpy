@@ -38,7 +38,7 @@ label fondle_menu:
         "Other options":
             menu:
                 "Offhand action":
-                    if focused_Girl.Action and MultiAction:
+                    if focused_Girl.Action and multi_action:
                         call Offhand_Set
 
                         if offhand_action:
@@ -47,7 +47,7 @@ label fondle_menu:
                         call tired_lines(focused_Girl)
                 "Shift primary action":
                     if primary_action == "fondle_thighs":
-                        if MultiAction:
+                        if multi_action:
                             menu:
                                 "Can I go a little deeper?":
                                     if focused_Girl.Action:
@@ -72,10 +72,10 @@ label fondle_menu:
                         else:
                             call tired_lines(focused_Girl)
                     elif primary_action == "fondle_breasts":
-                        if focused_Girl.Action and MultiAction:
+                        if focused_Girl.Action and multi_action:
                             menu:
                                 "Ask to suck on them.":
-                                    if focused_Girl.Action and MultiAction:
+                                    if focused_Girl.Action and multi_action:
                                         $ action_context = "shift"
 
                                         call after_action
@@ -83,7 +83,7 @@ label fondle_menu:
                                     else:
                                         call tired_lines(focused_Girl)
                                 "Just suck on them without asking.":
-                                    if focused_Girl.Action and MultiAction:
+                                    if focused_Girl.Action and multi_action:
                                         $ action_context = "auto"
 
                                         call after_action
@@ -97,10 +97,10 @@ label fondle_menu:
                         else:
                             call tired_lines(focused_Girl)
                     elif primary_action == "suck_breasts":
-                        if MultiAction:
+                        if multi_action:
                             menu:
                                 "Pull back to fondling.":
-                                    if focused_Girl.Action and MultiAction:
+                                    if focused_Girl.Action and multi_action:
                                         $ action_context = "pullback"
 
                                         call after_action
@@ -114,7 +114,7 @@ label fondle_menu:
                         else:
                             call tired_lines(focused_Girl)
                     elif primary_action == "fondle_pussy":
-                        if MultiAction:
+                        if multi_action:
                             menu:
                                 "I want to lick your pussy.":
                                     if focused_Girl.Action:
@@ -165,7 +165,7 @@ label fondle_menu:
                         else:
                             call tired_lines(focused_Girl)
                     elif primary_action == "eat_pussy":
-                        if focused_Girl.Action and MultiAction:
+                        if focused_Girl.Action and multi_action:
                             menu:
                                 "Pull out and start rubbing again.":
                                     $ action_context = "pullback"
@@ -182,7 +182,7 @@ label fondle_menu:
                         else:
                             call tired_lines(focused_Girl)
                     elif primary_action == "fondle_ass":
-                        if focused_Girl.Action and MultiAction:
+                        if focused_Girl.Action and multi_action:
                             menu:
                                 "I want to stick a finger in.":
                                     $ action_context = "shift"
@@ -212,7 +212,7 @@ label fondle_menu:
                                 "Never Mind":
                                     jump action_cycle
                     elif primary_action == "finger_ass":
-                        if focused_Girl.Action and MultiAction:
+                        if focused_Girl.Action and multi_action:
                             menu:
                                 "Pull out and start rubbing again.":
                                     $ action_context = "pullback"
@@ -239,7 +239,7 @@ label fondle_menu:
                         else:
                             call tired_lines(focused_Girl)
                     elif primary_action == "eat_ass":
-                        if focused_Girl.Action and MultiAction:
+                        if focused_Girl.Action and multi_action:
                             menu:
                                 "Switch to fondling.":
                                     $ action_context = "pullback"
@@ -310,7 +310,7 @@ label fondle_menu:
                     call Girl_Cleanup(focused_Girl,"ask")
                 "Never mind":
                     jump action_cycle
-        "Back to Sex Menu" if MultiAction:
+        "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
             call reset_position(Girl)
@@ -319,7 +319,7 @@ label fondle_menu:
             $ line = 0
 
             jump after_action
-        "End Scene" if not MultiAction:
+        "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
             call reset_position(Girl)
@@ -594,7 +594,7 @@ label end_of_fondle_round(Girl, action):
                 "You let go. . ."
 
                 jump after_action
-            "Let's try something else." if MultiAction:
+            "Let's try something else." if multi_action:
                 $ line = 0
                 $ action_context = "shift"
 

@@ -1964,7 +1964,7 @@ label Girl_Cumming(Girl=0,Quick=0,Girls=[]): #rename from Girl_Cumming  #rkeljsv
                             "You release your concentration. . ."
                             $ Player.FocusX = 0
                             $ Player.Focus += 15
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                             $ action_context = "shift"
                         "No, I'm not done yet.":
                             if primary_action == "sex" or primary_action == "anal":

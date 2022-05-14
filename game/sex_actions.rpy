@@ -44,7 +44,7 @@ label sex_menu:
         "Other options":
             menu:
                 "Offhand action":
-                    if focused_Girl.Action and MultiAction:
+                    if focused_Girl.Action and multi_action:
                         call Offhand_Set
 
                         if offhand_action:
@@ -52,7 +52,7 @@ label sex_menu:
                     else:
                         call Sex_Basic_Dialog(focused_Girl,"tired")
                 "Shift primary action":
-                    if focused_Girl.Action and MultiAction:
+                    if focused_Girl.Action and multi_action:
                         menu:
                             "How about sex?" if primary_action != "sex":
                                 $ action_context = "shift"
@@ -125,7 +125,7 @@ label sex_menu:
                     call Girl_Cleanup(focused_Girl,"ask")
                 "Never mind":
                     jump sex_cycle
-        "Back to Sex Menu" if MultiAction:
+        "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
             call sex_reset(focused_Girl)
@@ -134,7 +134,7 @@ label sex_menu:
             $ line = 0
 
             jump after_action
-        "End Scene" if not MultiAction:
+        "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
             call sex_reset(focused_Girl)
@@ -316,7 +316,7 @@ label end_of_sex_round(Girl, action):
 
         menu:
             extend ""
-            "How about a BJ?" if Girl.Action and MultiAction:
+            "How about a BJ?" if Girl.Action and multi_action:
                 if action != "anal":
                     $ action_context = "shift"
 
@@ -335,7 +335,7 @@ label end_of_sex_round(Girl, action):
 
                         call after_action(Girl, action)
                         call before_handjob(Girl, "handjob")
-            "How about a Handy?" if Girl.Action and MultiAction:
+            "How about a Handy?" if Girl.Action and multi_action:
                 $ action_context = "shift"
 
                 call after_action(Girl, action)
@@ -349,7 +349,7 @@ label end_of_sex_round(Girl, action):
                 call after_action(Girl, action)
 
                 return True
-            "Let's try something else." if MultiAction:
+            "Let's try something else." if multi_action:
                 $ line = 0
                 $ action_context = "shift"
 

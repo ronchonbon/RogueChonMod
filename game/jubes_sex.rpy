@@ -462,7 +462,7 @@ label Jubes_M_Cycle:
                         "Change what I'm doing":
                                 menu:
                                     "Offhand action" if JubesX.Loc == bg_current:
-                                            if JubesX.Action and MultiAction:
+                                            if JubesX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ JubesX.Action -= 1
@@ -508,13 +508,13 @@ label Jubes_M_Cycle:
                                     "Never mind":
                                                     jump Jubes_M_Cycle
 
-                        "Back to Sex Menu" if MultiAction and JubesX.Loc == bg_current:
+                        "Back to Sex Menu" if multi_action and JubesX.Loc == bg_current:
                                     ch_p "Let's try something else."
                                     call Jubes_Pos_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Jubes_M_Interupted
-                        "End Scene" if not MultiAction or JubesX.Loc != bg_current:
+                        "End Scene" if not multi_action or JubesX.Loc != bg_current:
                                     ch_p "Let's stop for now."
                                     call Jubes_Pos_Reset
                                     $ line = 0
@@ -1100,7 +1100,7 @@ label Jubes_Sex_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if JubesX.Action and MultiAction:
+                                            if JubesX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ JubesX.Action -= 1
@@ -1108,7 +1108,7 @@ label Jubes_Sex_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(JubesX,"tired")
 
                                     "Shift primary action":
-                                            if JubesX.Action and MultiAction:
+                                            if JubesX.Action and multi_action:
                                                     menu:
                                                         "How about anal?":
                                                                 $ action_context = "shift"
@@ -1164,13 +1164,13 @@ label Jubes_Sex_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Jubes_Sex_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Jubes_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Jubes_SexAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Jubes_Sex_Reset
                                     $ line = 0
@@ -1247,7 +1247,7 @@ label Jubes_Sex_Cycle: #Repeating strokes
                     $ JubesX.Brows = "angry"
                     menu:
                         ch_v "Hey. . . could we. . . try something. . . else?"
-                        "How about a BJ?" if JubesX.Action and MultiAction:
+                        "How about a BJ?" if JubesX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Jubes_SexAfter
                                 call Jubes_Blowjob
@@ -1257,7 +1257,7 @@ label Jubes_Sex_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Jubes_Sex_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Jubes_Sex_Reset
                                 $ action_context = "shift"
@@ -1782,7 +1782,7 @@ label Jubes_Anal_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if JubesX.Action and MultiAction:
+                                            if JubesX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ JubesX.Action -= 1
@@ -1790,7 +1790,7 @@ label Jubes_Anal_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(JubesX,"tired")
 
                                     "Shift primary action":
-                                            if JubesX.Action and MultiAction:
+                                            if JubesX.Action and multi_action:
                                                     menu:
                                                         "How about sex?":
                                                                 $ action_context = "shift"
@@ -1852,13 +1852,13 @@ label Jubes_Anal_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Jubes_Anal_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Jubes_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Jubes_AnalAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Jubes_Sex_Reset
                                     $ line = 0
@@ -1935,11 +1935,11 @@ label Jubes_Anal_Cycle: #Repeating strokes
                     $ JubesX.Brows = "angry"
                     menu:
                         ch_v "Can we. . . do something. . . else?"
-                        "How about a BJ?" if JubesX.Action and MultiAction:
+                        "How about a BJ?" if JubesX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Jubes_AnalAfter
                                 call Jubes_Blowjob
-                        "How about a Handy?" if JubesX.Action and MultiAction:
+                        "How about a Handy?" if JubesX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Jubes_AnalAfter
                                 call Jubes_Handjob
@@ -1949,7 +1949,7 @@ label Jubes_Anal_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Jubes_Anal_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Jubes_Sex_Reset
                                 $ action_context = "shift"
@@ -2324,7 +2324,7 @@ label Jubes_Hotdog_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if JubesX.Action and MultiAction:
+                                            if JubesX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ JubesX.Action -= 1
@@ -2332,7 +2332,7 @@ label Jubes_Hotdog_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(JubesX,"tired")
 
                                     "Shift primary action":
-                                            if JubesX.Action and MultiAction:
+                                            if JubesX.Action and multi_action:
                                                     menu:
                                                         "How about sex?":
                                                             $ action_context = "shift"
@@ -2398,13 +2398,13 @@ label Jubes_Hotdog_Cycle: #Repeating strokes
                                     "Never mind":
                                             jump Jubes_Hotdog_Cycle
 
-                        "Back to Sex Menu" if MultiAction:
+                        "Back to Sex Menu" if multi_action:
                                     ch_p "Let's try something else."
                                     call Jubes_Sex_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Jubes_HotdogAfter
-                        "End Scene" if not MultiAction:
+                        "End Scene" if not multi_action:
                                     ch_p "Let's stop for now."
                                     call Jubes_Sex_Reset
                                     $ line = 0
@@ -2481,7 +2481,7 @@ label Jubes_Hotdog_Cycle: #Repeating strokes
                     $ JubesX.Brows = "angry"
                     menu:
                         ch_v "I'm kinda bored by this."
-                        "How about a BJ?" if JubesX.Action and MultiAction:
+                        "How about a BJ?" if JubesX.Action and multi_action:
                                 $ action_context = "shift"
                                 call Jubes_HotdogAfter
                                 call Jubes_Blowjob
@@ -2491,7 +2491,7 @@ label Jubes_Hotdog_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 $ counter += 1
                                 jump Jubes_Hotdog_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ line = 0
                                 call Jubes_Sex_Reset
                                 $ action_context = "shift"

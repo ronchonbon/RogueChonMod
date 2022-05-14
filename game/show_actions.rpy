@@ -105,7 +105,7 @@ label show_cycle:
                 "Change what I'm doing":
                     menu:
                         "Offhand action" if focused_Girl.Loc == bg_current:
-                            if focused_Girl.Action and MultiAction:
+                            if focused_Girl.Action and multi_action:
                                 call Offhand_Set
 
                                 if offhand_action:
@@ -153,7 +153,7 @@ label show_cycle:
                                 call Girl_Cleanup(focused_Girl,"ask")
                         "Never mind":
                             jump show_cycle
-                "Back to Sex Menu" if MultiAction and focused_Girl.Loc == bg_current:
+                "Back to Sex Menu" if multi_action and focused_Girl.Loc == bg_current:
                     ch_p "Let's try something else."
 
                     call reset_position(focused_Girl)
@@ -162,7 +162,7 @@ label show_cycle:
                     $ line = 0
 
                     jump after_show
-                "End Scene" if not MultiAction or focused_Girl.Loc != bg_current:
+                "End Scene" if not multi_action or focused_Girl.Loc != bg_current:
                     ch_p "Let's stop for now."
 
                     call reset_position(focused_Girl)

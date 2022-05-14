@@ -343,16 +343,16 @@ label kiss_cycle:
                     "You release your concentration. . ."
 
                     $ Player.FocusX = 0
-                "Start jack'in it." if MultiAction and offhand_action != "jackin":
+                "Start jack'in it." if multi_action and offhand_action != "jackin":
                     call Jackin(focused_Girl)
-                "Stop jack'in it." if MultiAction and offhand_action == "jackin":
+                "Stop jack'in it." if multi_action and offhand_action == "jackin":
                     "You stop jack'in it."
 
                     $ offhand_action = 0
                 "Other options":
                     menu:
                         "Offhand action":
-                            if focused_Girl.Action and MultiAction:
+                            if focused_Girl.Action and multi_action:
                                 call Offhand_Set
 
                                 if offhand_action:
@@ -360,10 +360,10 @@ label kiss_cycle:
                             else:
                                 call tired_lines(focused_Girl)
                         "Shift primary action":
-                            if focused_Girl.Action and MultiAction:
+                            if focused_Girl.Action and multi_action:
                                 menu:
-                                    "Move a hand to her breasts. . ." if focused_Girl.Kissed >= 1 and MultiAction:
-                                        if focused_Girl.Action and MultiAction:
+                                    "Move a hand to her breasts. . ." if focused_Girl.Kissed >= 1 and multi_action:
+                                        if focused_Girl.Action and multi_action:
                                             $ action_context = "auto"
 
                                             call after_kiss
@@ -381,8 +381,8 @@ label kiss_cycle:
                                             "As your hands creep upwards, she grabs your wrists."
 
                                             call tired_lines(focused_Girl)
-                                    "Move a hand to her thighs. . ." if focused_Girl.Kissed >= 1 and MultiAction:
-                                        if focused_Girl.Action and MultiAction:
+                                    "Move a hand to her thighs. . ." if focused_Girl.Kissed >= 1 and multi_action:
+                                        if focused_Girl.Action and multi_action:
                                             $ action_context = "auto"
 
                                             call after_kiss
@@ -439,7 +439,7 @@ label kiss_cycle:
                             call Girl_Cleanup(focused_Girl,"ask")
                         "Never mind":
                             jump kiss_cycle
-                "Back to Sex Menu" if MultiAction and focused_Girl.Kissed >= 5:
+                "Back to Sex Menu" if multi_action and focused_Girl.Kissed >= 5:
                     ch_p "Let's try something else."
 
                     $ action_context = "shift"

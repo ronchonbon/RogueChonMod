@@ -164,7 +164,7 @@ label Checkout(Total = 0,Girls=[]):
         $ Player.Semen = 0 if Player.Semen < 0 else Player.Semen
 
         if Total:
-                $ MultiAction = 1
+                $ multi_action = 1
                 $ Player.DrainWord("cockout")
                 $ Player.DrainWord("nude")
                 $ primary_action = 0
@@ -350,7 +350,7 @@ label Wait (Outfit = 1, Lights = 1, Girls=[]):
     # Things that happen every time you wait
     #Things that are about you:
     $ Player.Semen += 1
-    $ MultiAction = 1
+    $ multi_action = 1
     $ Player.Focus -= 5 if Player.Focus >= 10 else 0
     $ action_context = 0
     $ Current_Time = Time_Options[(time_index)]

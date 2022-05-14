@@ -328,7 +328,7 @@ label Jubes_HJ_Cycle:
                         "Other options":
                                 menu:
                                     "I also want to fondle her breasts." if offhand_action != "fondle breasts":
-                                            if Girl.Action and MultiAction:
+                                            if Girl.Action and multi_action:
                                                 $ offhand_action = "fondle breasts"
                                                 "You start to fondle her breasts."
                                                 $ Girl.Action -= 1
@@ -336,10 +336,10 @@ label Jubes_HJ_Cycle:
                                                 call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Shift primary action":
-                                            if Girl.Action and MultiAction:
+                                            if Girl.Action and multi_action:
                                                     menu:
                                                         "How about a blowjob?":
-                                                                    if Girl.Action and MultiAction:
+                                                                    if Girl.Action and multi_action:
                                                                         $ action_context = "shift"
                                                                         call Jubes_HJ_After
                                                                         call Jubes_Blowjob
@@ -347,7 +347,7 @@ label Jubes_HJ_Cycle:
                                                                         call Sex_Basic_Dialog(Girl,"tired")
 
                                                         "How about a titjob?":
-                                                                    if Girl.Action and MultiAction:
+                                                                    if Girl.Action and multi_action:
                                                                         $ action_context = "shift"
                                                                         call Jubes_HJ_After
                                                                         call Jubes_Titjob
@@ -419,7 +419,7 @@ label Jubes_HJ_Cycle:
                     $ Girl.Brows = "angry"
                     menu:
                         ch_v "Hmm, this is boring, can we take a break?"
-                        "How about a BJ?" if Girl.Action and MultiAction:
+                        "How about a BJ?" if Girl.Action and multi_action:
                                 $ action_context = "shift"
                                 call Jubes_HJ_After
                                 call Jubes_Blowjob
@@ -428,7 +428,7 @@ label Jubes_HJ_Cycle:
                                 $ Player.FocusX = 0
                                 $ Player.Focus += 15
                                 jump Jubes_HJ_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ Line = 0
                                 call Jubes_HJ_Reset
                                 $ action_context = "shift"
@@ -894,7 +894,7 @@ label Jubes_TJ_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "I also want to fondle her breasts." if offhand_action != "fondle breasts":
-                                            if Girl.Action and MultiAction:
+                                            if Girl.Action and multi_action:
                                                 $ offhand_action = "fondle breasts"
                                                 "You start to fondle her breasts."
                                                 $ Girl.Action -= 1
@@ -902,10 +902,10 @@ label Jubes_TJ_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Shift primary action":
-                                            if Girl.Action and MultiAction:
+                                            if Girl.Action and multi_action:
                                                     menu:
                                                         "How about a blowjob?":
-                                                                if Girl.Action and MultiAction:
+                                                                if Girl.Action and multi_action:
                                                                     $ action_context = "shift"
                                                                     call Jubes_TJ_After
                                                                     call Jubes_Blowjob
@@ -913,7 +913,7 @@ label Jubes_TJ_Cycle: #Repeating strokes
                                                                     call Sex_Basic_Dialog(Girl,"tired")
 
                                                         "How about a handy?":
-                                                                if Girl.Action and MultiAction:
+                                                                if Girl.Action and multi_action:
                                                                     $ action_context = "shift"
                                                                     call Jubes_BJ_After
                                                                     call Jubes_Handjob
@@ -992,7 +992,7 @@ label Jubes_TJ_Cycle: #Repeating strokes
                 $ Girl.Brows = "angry"
                 menu:
                     ch_v "Seriously, can we do something else?"
-                    "How about a BJ?" if Girl.Action and MultiAction:
+                    "How about a BJ?" if Girl.Action and multi_action:
                         $ action_context = "shift"
                         call Jubes_TJ_After
                         call Jubes_Blowjob
@@ -1002,7 +1002,7 @@ label Jubes_TJ_Cycle: #Repeating strokes
                         $ Player.FocusX = 0
                         $ Player.Focus += 15
                         jump Jubes_TJ_Cycle
-                    "Let's try something else." if MultiAction:
+                    "Let's try something else." if multi_action:
                         $ Line = 0
                         call Jubes_TJ_Reset
                         $ action_context = "shift"
@@ -1487,7 +1487,7 @@ label Jubes_BJ_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "I also want to fondle her breasts." if offhand_action != "fondle breasts":
-                                            if Girl.Action and MultiAction:
+                                            if Girl.Action and multi_action:
                                                 $ offhand_action = "fondle breasts"
                                                 "You start to fondle her breasts."
                                                 $ Girl.Action -= 1
@@ -1495,17 +1495,17 @@ label Jubes_BJ_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Shift primary action":
-                                            if Girl.Action and MultiAction:
+                                            if Girl.Action and multi_action:
                                                     menu:
                                                         "How about a handy?":
-                                                                if Girl.Action and MultiAction:
+                                                                if Girl.Action and multi_action:
                                                                     $ action_context = "shift"
                                                                     call Jubes_BJ_After
                                                                     call Jubes_Handjob
                                                                 else:
                                                                     ch_v "I need a break, can we wrap on this?"
                                                         "How about a titjob?":
-                                                                if Girl.Action and MultiAction:
+                                                                if Girl.Action and multi_action:
                                                                     $ action_context = "shift"
                                                                     call Jubes_BJ_After
                                                                     call Jubes_Titjob
@@ -1581,7 +1581,7 @@ label Jubes_BJ_Cycle: #Repeating strokes
                 $ Girl.Brows = "angry"
                 menu:
                     ch_v "I'm getting kinda bored. Can we do something else?"
-                    "How about a Handy?" if Girl.Action and MultiAction:
+                    "How about a Handy?" if Girl.Action and multi_action:
                             $ action_context = "shift"
                             call Jubes_BJ_After
                             call Jubes_Handjob
@@ -1591,7 +1591,7 @@ label Jubes_BJ_Cycle: #Repeating strokes
                             $ Player.FocusX = 0
                             $ Player.Focus += 15
                             jump Jubes_BJ_Cycle
-                    "Let's try something else." if MultiAction:
+                    "Let's try something else." if multi_action:
                             $ Line = 0
                             call Jubes_BJ_Reset
                             $ action_context = "shift"
@@ -2088,7 +2088,7 @@ label Jubes_DP_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if Girl.Action and MultiAction:
+                                            if Girl.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ Girl.Action -= 1
@@ -2096,7 +2096,7 @@ label Jubes_DP_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Shift primary action":
-                                            if Girl.Action and MultiAction:
+                                            if Girl.Action and multi_action:
                                                     menu:
                                                         "I want to stick a finger in her ass.":
                                                                 $ action_context = "shift"
@@ -2189,7 +2189,7 @@ label Jubes_DP_Cycle: #Repeating strokes
                         "Finish up.":
                                 "You let go. . ."
                                 jump Jubes_DP_After
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ Line = 0
                                 $ action_context = "shift"
                                 jump Jubes_DP_After
@@ -2664,7 +2664,7 @@ label Jubes_DA_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if Girl.Action and MultiAction:
+                                            if Girl.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ Girl.Action -= 1
@@ -2672,7 +2672,7 @@ label Jubes_DA_Cycle: #Repeating strokes
                                                 call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Shift primary action":
-                                            if Girl.Action and MultiAction:
+                                            if Girl.Action and multi_action:
                                                     menu:
                                                         "I want to stick a finger in her pussy.":
                                                                 $ action_context = "shift"
@@ -2772,7 +2772,7 @@ label Jubes_DA_Cycle: #Repeating strokes
                         "Finish up.":
                                 "You let go. . ."
                                 jump Jubes_DA_After
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ Line = 0
                                 $ action_context = "shift"
                                 jump Jubes_DA_After
@@ -3195,7 +3195,7 @@ label Jubes_FJ_Cycle:
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if Girl.Action and MultiAction:
+                                            if Girl.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
                                                      $ Girl.Action -= 1
@@ -3203,17 +3203,17 @@ label Jubes_FJ_Cycle:
                                                 call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Shift primary action":
-                                            if Girl.Action and MultiAction:
+                                            if Girl.Action and multi_action:
                                                     menu:
                                                         "How about a blowjob?":
-                                                                    if Girl.Action and MultiAction:
+                                                                    if Girl.Action and multi_action:
                                                                         $ action_context = "shift"
                                                                         call Jubes_FJ_After
                                                                         call Jubes_Blowjob
                                                                     else:
                                                                         call Sex_Basic_Dialog(Girl,"tired")
                                                         "How about a handjob?":
-                                                                    if Girl.Action and MultiAction:
+                                                                    if Girl.Action and multi_action:
                                                                         $ action_context = "shift"
                                                                         call Jubes_FJ_After
                                                                         call Jubes_Handjob
@@ -3221,7 +3221,7 @@ label Jubes_FJ_Cycle:
                                                                         call Sex_Basic_Dialog(Girl,"tired")
 
                                                         "How about a titjob?":
-                                                                    if Girl.Action and MultiAction:
+                                                                    if Girl.Action and multi_action:
                                                                         $ action_context = "shift"
                                                                         call Jubes_FJ_After
                                                                         call Jubes_Titjob
@@ -3296,11 +3296,11 @@ label Jubes_FJ_Cycle:
                     $ Girl.Brows = "angry"
                     menu:
                         ch_v "Hmm, this is getting a bit boring."
-                        "How about a BJ?" if Girl.Action and MultiAction:
+                        "How about a BJ?" if Girl.Action and multi_action:
                                 $ action_context = "shift"
                                 call Jubes_FJ_After
                                 call Jubes_Blowjob
-                        "How about a Handy?" if Girl.Action and MultiAction:
+                        "How about a Handy?" if Girl.Action and multi_action:
                                 $ action_context = "shift"
                                 call Jubes_FJ_After
                                 call Jubes_Handjob
@@ -3311,7 +3311,7 @@ label Jubes_FJ_Cycle:
                                 $ counter += 1
                                 "[Line]"
                                 jump Jubes_FJ_Cycle
-                        "Let's try something else." if MultiAction:
+                        "Let's try something else." if multi_action:
                                 $ Line = 0
                                 call Jubes_Sex_Reset
                                 $ action_context = "shift"
