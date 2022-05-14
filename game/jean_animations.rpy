@@ -3200,70 +3200,6 @@ image Jean_Sex_Hotdog_Speed2:
 
 
 
-#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-label Jean_Sex_Launch(Line = Trigger):
-        $ Trigger3 = 0 if Trigger3 == "hand" else Trigger3
-#        #temporary      #temporary      #temporary      #temporary      #temporary      #temporary
-#        $ JeanX.Pose = "doggy"
-#        #temporary      #temporary      #temporary      #temporary      #temporary      #temporary
-
-        $ Player.Sprite = 1
-        $ Line = "solo" if not Line else Line
-        if Line == "sex":
-            $ Player.Cock = "in"
-            if Trigger2 in ("fondle pussy","dildo pussy","lick pussy"):
-                    $ Trigger2 = 0
-        elif Line == "anal":
-            $ Player.Cock = "anal"
-            if Trigger2 in ("insert ass","dildo anal","lick ass"):
-                    $ Trigger2 = 0
-        elif Line == "hotdog":
-            if JeanX.PantsNum() == 5: #upskirts her if she's in a skirt
-                    $ JeanX.Upskirt = 1
-            $ Player.Cock = "out"
-        elif Line == "foot":
-            $ ShowFeet = 1
-            $ Player.Cock = "foot"
-            $ JeanX.Pose = "doggy"
-        elif Line == "massage":
-            $ Player.Sprite = 0
-            $ Player.Cock = 0
-        else: #elif Line == "solo":
-            $ Player.Sprite = 0
-            $ Player.Cock = "out"
-            $ Speed = 0
-        $ Trigger = Line
-
-        if JeanX.Pose == "doggy":
-                call Jean_Doggy_Launch(Line)
-                return
-        if renpy.showing("Jean_SexSprite"):
-                return
-        $ Speed = 0
-        call Jean_Hide(1)
-        show Jean_SexSprite zorder 150
-        with dissolve
-        return
-
-label Jean_Sex_Reset:
-        if renpy.showing("Jean_Doggy_Animation"):
-                call Jean_Doggy_Reset
-                return
-        if not renpy.showing("Jean_SexSprite"):
-                return
-        $ JeanX.ArmPose = 2
-        hide Jean_SexSprite
-        call Jean_Hide
-        show Jean_Sprite at sprite_location(JeanX.sprite_location) zorder JeanX.Layer:
-            alpha 1
-            zoom 1 offset (0,0)
-            anchor (0.5, 0.0)
-        with dissolve
-        $ Speed = 0
-        return
-
-
 
 
 # Jean's BJ Scenes / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
@@ -4096,36 +4032,6 @@ image Jean_HJ_Animation:
     anchor (0.51, -1.3)
     zoom 0.4#0.6
 
-
-label Jean_HJ_Launch(Line = Trigger):
-    if renpy.showing("Jean_HJ_Animation"):
-        $ Trigger = "hand"
-        return
-    call Jean_Hide
-    $ JeanX.ArmPose = 1
-    if Line == "L":
-        show Jean_Sprite at sprite_location(StageRight) zorder JeanX.Layer:
-            alpha 1
-            ease 1 zoom 1.7 offset (-150,350)#(-180,350)
-    else:
-        show Jean_Sprite at sprite_location(StageRight) zorder JeanX.Layer:
-            alpha 1
-            ease 1 zoom 1.7 offset (-150,350)#(-180,350)
-        with dissolve
-
-    $ Speed = 0
-    if Line != "cum":
-        $ Trigger = "hand"
-    else:
-        $ Speed = 1
-    pause .5
-    show Jean_HJ_Animation at sprite_location(StageCenter) zorder 150 with easeinbottom:
-        #xoffset 150
-        offset (250,250)#(100,250)
-    show Jean_Sprite at sprite_location(StageRight) zorder JeanX.Layer:
-        alpha 1
-        ease .5 zoom 1.7 offset (-150,200)#(-180,200)
-    return
 
 label Jean_HJ_Reset: # The sequence to the Jean animations from handjob to default
     if not renpy.showing("Jean_HJ_Animation"):
@@ -5185,39 +5091,7 @@ label Jean_TJ_Launch(Line = Trigger):    # The sequence to launch the Jean Titfu
     hide blackscreen onlayer black with dissolve
     return
 
-label Jean_TJ_Reset:
-    # The sequence to the Jean animations from Titfuck to default
-    if not renpy.showing("Jean_TJ_Animation"):
-        return
-#    hide Jean_TJ_Animation
-    call Jean_Hide
-    $ Player.Sprite = 0
 
-    show Jean_Sprite at sprite_location(JeanX.sprite_location) zorder JeanX.Layer:
-        zoom 2.3 xpos 750 yoffset -100
-    show Jean_Sprite zorder JeanX.Layer:
-        alpha 1
-        ease 1 zoom 1.5 xpos 700 yoffset 50
-        pause .5
-        ease .5 zoom 1 xpos JeanX.sprite_location yoffset 0
-    "[JeanX.Name] pulls back"
-    show Jean_Sprite at sprite_location(JeanX.sprite_location) zorder JeanX.Layer:
-        alpha 1
-        zoom 1 offset (0,0) xpos JeanX.sprite_location
-    return
-
-
-label Jean_Kissing_Smooch:
-    $ JeanX.FaceChange("kiss")
-    show Jean_Sprite at sprite_location(StageCenter) zorder JeanX.Layer:
-        ease 0.5 xpos StageCenter offset (0,0) zoom 2 alpha 1
-        pause 1
-        ease 0.5 xpos JeanX.sprite_location zoom 1
-    show Jean_Sprite at sprite_location(JeanX.sprite_location) zorder JeanX.Layer:
-        zoom 1
-    $ JeanX.FaceChange("sexy")
-    return
-    
 
 label Jean_Middle_Launch(T = Trigger,Set=1):
     call Jean_Hide

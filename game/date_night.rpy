@@ -465,7 +465,6 @@
         $ Girl.DailyActions.append("yesdate")
         $ Player.DailyActions.append("yesdate")
         return
-#end AskDate / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 label Date_Stood_Up(Girl=0): #rkeljsv
     # if "stoodup" in Girl.Traits
@@ -786,14 +785,7 @@ label Date_Stood_Up(Girl=0): #rkeljsv
     if "stoodup" not in Girl.History:
             $ Girl.History.append("stoodup")
 
-#    call CleartheRoom("All",Check=1)
-#    if _return >= 3:            #fix, maybe reduce this to 2 if CtR is sending returns back properly
-#        #if the room is full,
-#        call Remove_Girl(Girl)
-#        "[Girl.Name] wanders off."
     return
-
-# End Ask Girl / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 label Readytogo(Girl=0,R=0,BO=[]):  #rkeljsv
     #checks to see if you want to go on a date
@@ -886,18 +878,6 @@ label Readytogo(Girl=0,R=0,BO=[]):  #rkeljsv
                         $ R.OutfitChange()
                         call Set_The_Scene
     return
-
-
-# Date Night //////////////////////////////////////////////////////////////////////
-# Gets called from the Events whenever "yesdate" in Player.DailyActions
-# Checks to see which girls show up, if more than one, they decide whether they are cool with that.
-# If they are, you choose location. You can go to dinner first, or skip to movies.
-# During dinner there is a check to menu, then a check to whether sexy stuff occurs
-# During sexy stuff, the other girl can join in, ignore it, to cockblock it.
-# Then you pay, during which you can cause offense by being cheap.
-# Then you can pick a movie, and pay for that too, similar to dinner.
-# Then you watch the movie and potentially have sex, and again the other girl can object.
-# Then you return to campus, and can pick a girl to take home first, the other will follow.
 
 label DateNight(Date_Bonus=[0,0],Play_Cost=0,Date_Cost=[0,0],BO=[]):  #rkeljsv
     #(nee Prime_Bonus=0,Second_Bonus=0,Play_Cost=0,Prime_Cost=0,Second_Cost=0,BO=[]):
@@ -1188,12 +1168,6 @@ label DateNight(Date_Bonus=[0,0],Play_Cost=0,Date_Cost=[0,0],BO=[]):  #rkeljsv
             #somehow didn't pick a location?
             $ bg_current = "bg campus"
             jump Misplaced
-
-#End Date Start   / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
-
-
-#Start Crossed Wires Sequence   / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 label Date_Crossed(Girls=[],Check=0,Count=0,Cnt=0): #rkeljsv
     #this checks to make sure both girls are on the same page.
@@ -1520,8 +1494,6 @@ label Date_Crossed(Girls=[],Check=0,Count=0,Cnt=0): #rkeljsv
                     call Girl_Date_Over(Party[Cnt],0)
     #end check to see if they're cool with this. . .
     return
-#End Crossed Wires Sequence   / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
 
 label Date_Prep(Girl=0):
     #This gets rthe girl Dressed and ready for Dinner, called by Date_Night
@@ -1557,10 +1529,6 @@ label Date_Prep(Girl=0):
     $ Girl.FaceChange("smile")
     return
 
-# End Rogue Prep / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
-
-#Start Dinner Sequence   / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Date_Dinner:    #rkeljsv
     $ bg_current = "bg restaurant"
     $ Player.RecentActions.append("dinner")
@@ -1628,13 +1596,6 @@ label Date_Dinner:    #rkeljsv
     "You seem to have some time left, where would you like to go next?"
     jump Date_Location #picks next stop. . .
 
-# End Primary Dinner Sequence / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
-
-
-
-
-
 label Player_Dinner: #rkeljsv
     # This is the player's menu choices
     menu:
@@ -1653,8 +1614,6 @@ label Player_Dinner: #rkeljsv
             $ Line = "fresh garden salad"
     return
 
-
-# Start Rogue Dinner Menu/ / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Rogue_Dinner(GirlCost=0): #rkeljsv
     #Called by Date Dinner, picked Rogue's food
     menu:
@@ -1705,9 +1664,7 @@ label Rogue_Dinner(GirlCost=0): #rkeljsv
             $ Date_Cost[1] = GirlCost
     call Date_Bonus(RogueX,GirlCost)
     return
-# End Rogue Menu / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Kitty Dinner Menu/ / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Kitty_Dinner(GirlCost=0):
     #Called by Date Dinner, picked Kitty's food
     menu:
@@ -1758,9 +1715,7 @@ label Kitty_Dinner(GirlCost=0):
         $ Date_Cost[1] = GirlCost
     call Date_Bonus(KittyX,GirlCost)
     return
-# End Kitty Menu / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Emma Dinner Menu/ / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Emma_Dinner(GirlCost=0):
     #Called by Date Dinner, picked Emma's food
     menu:
@@ -1813,9 +1768,7 @@ label Emma_Dinner(GirlCost=0):
         $ Date_Cost[1] = GirlCost
     call Date_Bonus(EmmaX,GirlCost)
     return
-# End Emma Menu / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Laura Dinner Menu/ / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Laura_Dinner(GirlCost=0):
     #Called by Date Dinner, picked Laura's food
     menu:
@@ -1869,9 +1822,7 @@ label Laura_Dinner(GirlCost=0):
         $ Date_Cost[1] = GirlCost
     call Date_Bonus(LauraX,GirlCost)
     return
-# End Laura Menu / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Jean Dinner Menu/ / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Jean_Dinner(GirlCost=0):
     #Called by Date Dinner, picked Jean's food
     if not ApprovalCheck(JeanX, 500, "O"):
@@ -1958,9 +1909,7 @@ label Jean_Dinner(GirlCost=0):
         $ Date_Cost[1] = GirlCost
     call Date_Bonus(JeanX,GirlCost)
     return
-# End Jean Menu / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Storm Dinner Menu/ / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Storm_Dinner(GirlCost=0):
     #Called by Date Dinner, picked Storm's food
     menu:
@@ -2009,9 +1958,7 @@ label Storm_Dinner(GirlCost=0):
         $ Date_Cost[1] = GirlCost
     call Date_Bonus(StormX,GirlCost)
     return
-# End Storm Menu / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Jubes Dinner Menu/ / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Jubes_Dinner(GirlCost=0):
     #Called by Date Dinner, picked Jubes's food
     menu:
@@ -2067,9 +2014,7 @@ label Jubes_Dinner(GirlCost=0):
         $ Date_Cost[1] = GirlCost
     call Date_Bonus(JubesX,(int(GirlCost/2)))
     return
-# End Jubes Menu / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Dinner Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Dinner_Sex(Girl=0,Previous=0,GirlBonus=0,OptionsDS=[],BO=[]):#rkeljsv
     #Called by Dinner Sex
 
@@ -2476,12 +2421,7 @@ label Dinner_Sex(Girl=0,Previous=0,GirlBonus=0,OptionsDS=[],BO=[]):#rkeljsv
 
     $ Girl.Blush = 0
     return
-# End Dinner Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-
-
-
-#Start Movie Sequence   / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Date_Movies:  #rkeljsv
     #This picks and watches a movie
     $ bg_current = "bg movies"
@@ -2829,12 +2769,6 @@ label Date_Movies:  #rkeljsv
     "You seem to have some time left, where would you like to go next?"
     jump Date_Location #picks next stop. . .
 
-#end Movie Sequence  / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
-
-
-
-# Start Movie Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Movie_Sex(Girl=0,Previous=0,GirlBonus=0, OptionsDS=[],BO=[]):#rkeljsv
     # Called by Date_Sex
     $ BO = Party[:]
@@ -3309,9 +3243,7 @@ label Movie_Sex(Girl=0,Previous=0,GirlBonus=0, OptionsDS=[],BO=[]):#rkeljsv
     #End Rogue movie sex options
     $ Girl.OutfitChange(Changed=0)
     return
-# End Movie Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-#Start Date_Sex_Break   / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Date_Sex_Break(Girl=0,Previous=0,Repeat=0):#rkeljsv
         #Girl is the lead girl
         #Previous is the other girl
@@ -3443,9 +3375,6 @@ label Date_Sex_Break(Girl=0,Previous=0,Repeat=0):#rkeljsv
                 return 3
         return 0 #Yes
 
-#end Date_Sex_Break   / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
-#Start Payment system   / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Date_Paying(Activity="dinner", Total_Cost=0):  #rkeljsv
     # Activity is which thing you're doing, total cost is the combined meal costs.
     if Activity == "dinner":
@@ -3980,7 +3909,6 @@ label Date_Paying(Activity="dinner", Total_Cost=0):  #rkeljsv
     $ Date_Cost[0] = 0
     $ Date_Cost[1] = 0
     return
-#end payment   / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 label Date_Bonus(Girl=0, Amount=0):
     #This updates the prime value if the girl is prime, second if not.
@@ -3991,8 +3919,6 @@ label Date_Bonus(Girl=0, Amount=0):
                 $ Date_Bonus[1] += Amount
     return
 
-
-#Start Date End  / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Date_End:#rkeljsv
     #The end of the date jumped to from any end of date
     if Time_Count == 2: #evening time
@@ -4082,8 +4008,6 @@ label Player_Date_End:
             call Girl_Date_End(Party[0])
     jump Player_Room
 
-
-# Start Girl Date End / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Girl_Date_End(Girl=0): #nee R_Date_End
     #Called if you end up with girl at the end of the date
     if Girl not in TotalGirls:
@@ -4393,8 +4317,6 @@ label Girl_Date_End(Girl=0): #nee R_Date_End
     elif Girl == JubesX:
                             ch_v "So. . . what did you wanna do to me?"
     $ Player.DailyActions.append("post date")
-#    $ renpy.pop_call() #removes call to date
-#    $ renpy.pop_call() #removes call to Events
     call sex_menu(Girl)
 
     if "angry" in Girl.RecentActions:
@@ -4414,9 +4336,6 @@ label Girl_Date_End(Girl=0): #nee R_Date_End
 
     call Sleepover(Girl)
     jump Misplaced
-
-# End Girl Date End / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
 
 label Date_Ditched(Girls=0):  #rkeljsv
     #if you ditch out on a date, called by Date End
@@ -4531,7 +4450,6 @@ label Date_Ditched(Girls=0):  #rkeljsv
         $ Party.remove(Party[0])
     return
 
-# Start Girl Date Over / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Girl_Date_Over(Girl=0,Angry=1): #rkeljsv
         # Called if Girl is pissed and leaves
         if Angry:
@@ -4575,5 +4493,3 @@ label Girl_Date_Over(Girl=0,Angry=1): #rkeljsv
                 jump Date_End
         call Shift_Focus(Party[0])
         return
-
-#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>

@@ -121,7 +121,7 @@ label handjob_menu:
                                     if Player.focused_girl.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call after_handjob
+                                        call after_action
                                         call handjob(Player.focused_girl)
                                     else:
                                         call tired_lines(Player.focused_girl)
@@ -129,7 +129,7 @@ label handjob_menu:
                                     if Player.focused_girl.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call after_handjob
+                                        call after_action
                                         call footjob(Player.focused_girl)
                                     else:
                                         call tired_lines(Player.focused_girl)
@@ -137,7 +137,7 @@ label handjob_menu:
                                     if Player.focused_girl.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call after_handjob
+                                        call after_action
                                         call titjob(Player.focused_girl)
                                     else:
                                         call tired_lines(Player.focused_girl)
@@ -145,7 +145,7 @@ label handjob_menu:
                                     if Player.focused_girl.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call after_handjob
+                                        call after_action
                                         call blowjob(Player.focused_girl)
                                     else:
                                         call tired_lines(Player.focused_girl)
@@ -153,7 +153,7 @@ label handjob_menu:
                                     if Player.focused_girl.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call after_handjob
+                                        call after_action
                                         call finger_ass(Player.focused_girl)
                                     else:
                                         call tired_lines(Player.focused_girl)
@@ -161,7 +161,7 @@ label handjob_menu:
                                     if Player.focused_girl.Action and MultiAction:
                                         $ Situation = "auto"
 
-                                        call after_handjob
+                                        call after_action
                                         call finger_ass(Player.focused_girl)
                                     else:
                                         call tired_lines(Player.focused_girl)
@@ -169,7 +169,7 @@ label handjob_menu:
                                     if Player.focused_girl.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call after_handjob
+                                        call after_action
                                         call dildo_ass(Player.focused_girl)
                                     else:
                                         call tired_lines(Player.focused_girl)
@@ -177,7 +177,7 @@ label handjob_menu:
                                     if Player.focused_girl.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call after_handjob
+                                        call after_action
                                         call finger_pussy(Player.focused_girl)
                                     else:
                                         call tired_lines(Player.focused_girl)
@@ -185,7 +185,7 @@ label handjob_menu:
                                     if Player.focused_girl.Action and MultiAction:
                                         $ Situation = "auto"
 
-                                        call after_handjob
+                                        call after_action
                                         call finger_pussy(Player.focused_girl)
                                     else:
                                         call tired_lines(Player.focused_girl)
@@ -193,7 +193,7 @@ label handjob_menu:
                                     if Player.focused_girl.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call after_handjob
+                                        call after_action
                                         call dildo_pussy(Player.focused_girl)
                                     else:
                                         call tired_lines(Player.focused_girl)
@@ -204,7 +204,7 @@ label handjob_menu:
                     "Shift your focus." if Player.primary_action in ["dildo_pussy", "dildo_ass"] and Trigger2:
                         $ Situation = "shift focus"
 
-                        call after_handjob
+                        call after_action
                         call Offhand_Set
                     "Shift your focus. (locked)" if Player.primary_action in ["dildo_pussy", "dildo_ass"] and not Trigger2:
                         pass
@@ -213,17 +213,17 @@ label handjob_menu:
                     "Threesome actions" if Partner:
                         menu:
                             "Ask [Player.focused_girl.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                call Les_Change(RogueX)
+                                call Les_Change(Player.focused_girl)
                             "Ask [Player.focused_girl.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
                                 pass
                             "Ask [Partner.Name] to do something else":
-                                call Three_Change(RogueX)
+                                call Three_Change(Player.focused_girl)
                             "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
                                 $ ThreeCount = 0
                             "Don't stop what you're doing. . ." if ThreeCount and Trigger4:
                                 $ ThreeCount = 0
                             "Swap to [Partner.Name]":
-                                call Trigger_Swap(RogueX)
+                                call Trigger_Swap(Player.focused_girl)
                             "Undress [Partner.Name]":
                                 call Girl_Undress(Partner)
                                 jump handjob_cycle
@@ -235,7 +235,7 @@ label handjob_menu:
                             "Never mind":
                                 jump handjob_cycle
                     "Undress [Player.focused_girl.Name]":
-                        call Girl_Undress(RogueX)
+                        call Girl_Undress(Player.focused_girl)
                     "Clean up [Player.focused_girl.Name] (locked)" if not Player.focused_girl.Spunk:
                         pass
                     "Clean up [Player.focused_girl.Name]" if Player.focused_girl.Spunk:
@@ -250,7 +250,7 @@ label handjob_menu:
             $ Situation = "shift"
             $ Line = 0
 
-            jump after_handjob
+            jump after_action
         "End Scene" if not MultiAction:
             ch_p "Let's stop for now."
 
@@ -258,296 +258,9 @@ label handjob_menu:
 
             $ Line = 0
 
-            jump after_handjob
+            jump after_action
 
     jump handjob_menu_return
-
-label before_handjob:
-    if Trigger2 == action:
-        return
-
-    if Taboo:
-        $ Player.focused_girl.Inbt += int(Taboo/10)
-        $ Player.focused_girl.Lust += int(Taboo/5)
-
-    $ Player.focused_girl.FaceChange("sexy")
-
-    if Player.primary_action in ["handjob", "footjob", "titjob", "blowjob"]:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.FaceChange("sad")
-        elif not Player.focused_girl.Hand:
-            $ Player.focused_girl.Brows = "confused"
-            $ Player.focused_girl.Eyes = "sexy"
-            $ Player.focused_girl.Mouth = "smile"
-    elif Player.primary_action in ["dildo_pussy", "dildo_ass"]:
-        if not Player.focused_girl.Forced and Situation != "auto":
-            if Player.primary_action == "dildo_pussy":
-                $ temp_modifier = 15 if Player.focused_girl.PantsNum() > 6 else 0
-            elif Player.primary_action == "dildo_ass":
-                $ temp_modifier = 20 if Player.focused_girl.PantsNum() > 6 else 0
-
-            call Bottoms_Off(Player.focused_girl)
-
-            if "angry" in Player.focused_girl.RecentActions:
-                return
-
-        $ temp_modifier = 0
-
-    call Seen_First_Peen(Player.focused_girl, Partner, React = Situation)
-
-    if Player.primary_action == "handjob":
-        call handjob_launch(Player.focused_girl, "L")
-    elif Player.primary_action == "footjob":
-        call sex_launch(Player.focused_girl, "foot")
-    elif Player.primary_action == "titjob":
-        call titjob_launch(Player.focused_girl, "L")
-    elif Player.primary_action == "blowjob":
-        call blowjob_launch(Player.focused_girl, "L")
-    elif Player.primary_action in ["dildo_pussy", "dildo_ass"]:
-        call pussy_launch
-
-    if Situation == Player.focused_girl:
-        $ Situation = 0
-
-        $ stop_Player.focused_girl = False
-
-        call Player.focused_girl_initiated_action
-
-        if _return:
-            return
-
-    if Player.primary_action == "handjob" and not Player.focused_girl.Hand:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -20)
-            $ Player.focused_girl.Statup("Obed", 70, 25)
-            $ Player.focused_girl.Statup("Inbt", 80, 30)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 5)
-            $ Player.focused_girl.Statup("Obed", 70, 20)
-            $ Player.focused_girl.Statup("Inbt", 80, 20)
-    elif Player.primary_action == "footjob" and not Player.focused_girl.Foot:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -20)
-            $ Player.focused_girl.Statup("Obed", 70, 25)
-            $ Player.focused_girl.Statup("Inbt", 80, 30)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 5)
-            $ Player.focused_girl.Statup("Obed", 70, 20)
-            $ Player.focused_girl.Statup("Inbt", 80, 20)
-    elif Player.primary_action == "titjob" and not Player.focused_girl.Tit:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -25)
-            $ Player.focused_girl.Statup("Obed", 70, 30)
-            $ Player.focused_girl.Statup("Inbt", 80, 35)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 5)
-            $ Player.focused_girl.Statup("Obed", 70, 25)
-            $ Player.focused_girl.Statup("Inbt", 80, 30)
-    elif Player.primary_action == "blowjob" and not Player.focused_girl.Blow:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -70)
-            $ Player.focused_girl.Statup("Obed", 70, 45)
-            $ Player.focused_girl.Statup("Inbt", 80, 60)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 5)
-            $ Player.focused_girl.Statup("Obed", 70, 35)
-            $ Player.focused_girl.Statup("Inbt", 80, 40)
-    if Player.primary_action == "dildo_pussy" and not Player.focused_girl.DildoP:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -75)
-            $ Player.focused_girl.Statup("Obed", 70, 60)
-            $ Player.focused_girl.Statup("Inbt", 80, 35)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 10)
-            $ Player.focused_girl.Statup("Obed", 70, 20)
-            $ Player.focused_girl.Statup("Inbt", 80, 45)
-    if Player.primary_action == "dildo_ass" and not Player.focused_girl.DildoA:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -75)
-            $ Player.focused_girl.Statup("Obed", 70, 60)
-            $ Player.focused_girl.Statup("Inbt", 80, 35)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 10)
-            $ Player.focused_girl.Statup("Obed", 70, 20)
-            $ Player.focused_girl.Statup("Inbt", 80, 45)
-
-    if Situation:
-        $ renpy.pop_call()
-
-        $ Situation = 0
-
-    $ Line = 0
-    $ Cnt = 0
-
-    if Taboo:
-        $ Player.focused_girl.DrainWord("tabno")
-
-    $ Player.focused_girl.DrainWord("no_" + Player.primary_action)
-    $ Player.focused_girl.RecentActions.append(action)
-    $ Player.focused_girl.DailyActions.append(action)
-
-label handjob_cycle:
-    while Round > 0:
-        call Shift_Focus(Player.focused_girl)
-        call handjob_launch(Player.focused_girl)
-
-        $ Player.focused_girl.LustFace()
-
-        if Player.Focus < 100:
-            jump handjob_menu
-
-            label handjob_menu_return:
-
-        if Player.primary_action in ["dildo_pussy", "dildo_ass"]:
-            if Player.focused_girl.Panties or RogueX.PantsNum() > 6 or Player.focused_girl.HoseNum() >= 5:
-                call Girl_Undress(Player.focused_girl,"auto")
-
-        call Shift_Focus(Player.focused_girl)
-        call Sex_Dialog(Player.focused_girl,Partner)
-
-        $ Cnt += 1
-        $ Round -= 1
-
-        if Player.primary_action in ["blowjob"] and Speed:
-            $ Player.Wet = 1
-            $ Player.Spunk = 0 if Player.Spunk else Player.Spunk
-
-        call end_of_handjob_round(Player.focused_girl, Player.primary_action)
-
-        if _return:
-            return
-
-    $ Player.focused_girl.FaceChange("bemused", 0)
-
-    $ Line = 0
-
-    call im_done_lines(Player.focused_girl)
-
-label after_handjob:
-    if Player.primary_action in ["dildo_pussy", "dildo_ass"] and not Situation:
-        call reset_position(Player.focused_girl)
-
-    $ Player.focused_girl.FaceChange("sexy")
-
-    if Player.primary_action == "handjob":
-        $ Player.focused_girl.Hand += 1
-
-        $ achievement = Player.focused_girl.Tag + " Handi-Queen"
-        $ counter = Player.focused_girl.Hand
-
-        call Partner_Like(Player.focused_girl, 2)
-    elif Player.primary_action == "footjob":
-        $ Player.focused_girl.Foot += 1
-
-        $ achievement = Player.focused_girl.Tag + "pedi"
-        $ counter = Player.focused_girl.Foot
-
-        call Partner_Like(Player.focused_girl, 1)
-    elif Player.primary_action == "titjob":
-        $ Player.focused_girl.Tit += 1
-
-        $ achievement = None
-        $ counter = Player.focused_girl.Tit
-
-        call Partner_Like(Player.focused_girl, 3)
-    elif Player.primary_action == "blowjob":
-        $ Player.focused_girl.Blow += 1
-
-        $ achievement = Player.focused_girl.Tag + " Jobber"
-        $ counter = Player.focused_girl.Blow
-
-        if Player.focused_girl == RogueX and Partner == EmmaX:
-            call Partner_Like(Player.focused_girl, 3)
-        else:
-            call Partner_Like(Player.focused_girl, 2)
-    elif Player.primary_action == "dildo_pussy":
-        $ Player.focused_girl.DildoP += 1
-
-        $ achievement = None
-        $ counter = Player.focused_girl.DildoP
-
-        call Partner_Like(Player.focused_girl, 2)
-    elif Player.primary_action == "dildo_ass":
-        $ Player.focused_girl.DildoA += 1
-
-        $ achievement = None
-        $ counter = Player.focused_girl.DildoA
-
-        call Partner_Like(Player.focused_girl, 2)
-
-    $ Player.focused_girl.Action -= 1
-
-    if Player.primary_action not in ["dildo_pussy", "dildo_ass"]:
-        $ Player.focused_girl.Addictionrate += 1
-
-        if "addictive" in Player.Traits:
-            $ Player.focused_girl.Addictionrate += 1
-
-    if Player.primary_action in ["handjob", "footjob"]:
-        $ Player.focused_girl.Statup("Lust", 90, 5)
-
-    if achievement is not None and achievement in Achievements:
-        pass
-    elif Player.primary_action not in ["dildo_pussy", "dildo_ass"] and counter >= 10:
-        $ Player.focused_girl.FaceChange("smile", 1)
-
-        ch_r "I guess you can call me \"Handi-Queen.\""
-        ch_r "I guess I've gotten used to this foot thing."
-        ch_r "I'm really starting to enjoy this."
-
-        if achievement is not None:
-            $ Achievements.append(achievement)
-
-        $ Player.focused_girl.SEXP += 5
-    elif counter == 1:
-        if Player.primary_action in ["handjob", "footjob", "dildo_pussy"]:
-            $ Player.focused_girl.SEXP += 10
-        elif Player.primary_action in ["titjob"]:
-            $ Player.focused_girl.SEXP += 12
-        elif Player.primary_action in ["blowjob"]:
-            $ Player.focused_girl.SEXP += 15
-
-        if Player.focused_girl.Love >= 500 and "unsatisfied" not in Player.focused_girl.RecentActions:
-            $ Player.focused_girl.Mouth = "smile"
-
-            ch_r "Well, it's really nice to finally be able to reach out and touch someone."
-            ch_r "That was a real interesting experience. . ."
-            ch_r "Well, that was certainly interesting."
-            ch_r "That really wasn't half bad."
-            ch_r "Well I liked that. . ."
-            ch_r "Well that was a bit rough. . ."
-        elif Player.primary_action not in ["dildo_pussy", "dildo_ass"] and  Player.Focus <= 20:
-            $ Player.focused_girl.Mouth = "sad"
-
-            ch_r "Well, I hope that got your rocks off."
-            ch_r "Did that work for you?"
-            ch_r "Well, I hope that was enough for you."
-        elif Player.primary_action in ["dildo_pussy", "dildo_ass"] and Player.focused_girl.Obed <= 500 and Player.Focus <= 20:
-            $ Player.focused_girl.FaceChange("perplexed", 1)
-
-            ch_r "Did you like that?"
-    elif Player.primary_action not in ["dildo_pussy", "dildo_ass"] and counter == 5:
-        ch_r "I think I've got this well in hand."
-        ch_r "I kinda like this sensation.{p}}Never thought about touching people with my feet."
-        ch_r "I think I've got the hang of this."
-
-    $ temp_modifier = 0
-
-    if Situation == "shift":
-        ch_r "Mmm, so what else did you have in mind?"
-    else:
-        if Player.primary_action == "handjob":
-            call handjob_reset(Player.focused_girl)
-        elif Player.primary_action == "footjob":
-            call doggy_reset(Player.focused_girl)
-        elif Player.primary_action == "titjob":
-            call titjob_reset(Player.focused_girl)
-        elif Player.primary_action == "blowjob":
-            call blowjob_reset(Player.focused_girl)
-
-    call Checkout
-
-    return
 
 label handjob_set_modifier(character, action):
     if action == "handjob":
@@ -710,7 +423,7 @@ label end_of_handjob_round(character, action):
 
     if Player.Focus >= 100 or character.Lust >= 100:
         if Player.Focus >= 100:
-            call Player_Cumming(RogueX)
+            call Player_Cumming(Player.focused_girl)
 
             if "angry" in character.RecentActions:
                 call handjob_reset(character)
@@ -723,7 +436,7 @@ label end_of_handjob_round(character, action):
                 $ character.AddWord(0, "unsatisfied", "unsatisfied")
 
             if Player.Focus > 80:
-                jump after_handjob
+                jump after_action
 
             $ Line = "came"
 
@@ -731,7 +444,7 @@ label end_of_handjob_round(character, action):
             call Girl_Cumming(character)
 
             if Situation == "shift" or "angry" in character.RecentActions:
-                jump after_handjob
+                jump after_action
 
         if Line == "came": #ex Player.Focus <= 20:
             $ Line = 0
@@ -748,7 +461,7 @@ label end_of_handjob_round(character, action):
                     "No, I'm done.":
                         "You pull back."
 
-                        jump after_handjob
+                        jump after_action
 
     if Partner and Partner.Lust >= 100:
         call Girl_Cumming(Partner)
@@ -777,20 +490,12 @@ label end_of_handjob_round(character, action):
         $ character.Brows = "confused"
 
         call getting_close_lines(character)
-        ch_r "Are you getting close here? I'm getting a little sore."
-        ch_r "Are you getting close here? My jaw's getting pretty sore."
-        ch_r "What are you even doing down there?"
     elif action in ["dildo_pussy", "dildo_ass"] and character.Lust >= 80:
         pass
     elif (action in ["handjob, footjob, titjob, blowjob"] and Cnt == (10 + bonus)) or (action in ["dildo_pussy", "dildo_ass"] and (Cnt == (15 + bonus) and character.SEXP <= 100 and not ApprovalCheck(character, 1200, "LO"))):
         $ character.Brows = "angry"
 
         call getting_rugburn_lines(character)
-        ch_r "I'm getting rug-burn here [character.Petname]. Can we do something else?"
-        ch_r "I'm getting a little tired, [character.Petname]. Can we do something else?"
-        ch_r "[RogueX.Petname], this is getting uncomfortable, maybe we could try something else."
-        ch_r "Ow, i'm not used to this. Mind if we take a break?"
-        ch_r "Can we be done with this now? I'm getting sore."
 
         menu:
             extend ""
@@ -824,12 +529,12 @@ label end_of_handjob_round(character, action):
             "Finish up." if action in ["dildo_pussy", "dildo_ass"]:
                 "You let go. . ."
 
-                jump after_handjob
+                jump after_action
             "Let's try something else." if MultiAction:
                 $ Line = 0
                 $ Situation = "shift"
 
-                jump after_handjob
+                jump after_action
             "No, get back down there." if action in ["handjob", "footjob", "titjob", "blowjob"]:
                 if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
                     $ character.Statup("Love", 200, -5)
@@ -852,7 +557,7 @@ label end_of_handjob_round(character, action):
                     $ character.Statup("Obed", 50, -1, 1)
                     $ character.AddWord(1,"angry","angry")
 
-                    jump after_handjob
+                    jump after_action
             "No, this is fun." if action in ["dildo_pussy", "dildo_ass"]:
                 if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
                     $ character.Statup("Love", 200, -5)
@@ -875,7 +580,7 @@ label end_of_handjob_round(character, action):
                     $ character.Statup("Obed", 50, -1, 1)
                     $ character.AddWord(1,"angry","angry")
 
-                    jump after_handjob
+                    jump after_action
 
     call Escalation(character)
 
@@ -941,7 +646,7 @@ label footjob(character):
                 $ Trigger3 = "foot"
                 return
 
-            call before_handjob(character, "footjob")
+            call before_action(character, "footjob")
         else:
             $ temp_modifier = 0                               # fix, add rogue auto stuff here
             $ Trigger2 = 0
@@ -1027,6 +732,7 @@ label blowjob(character):
         $ character.Mouth = "kiss"
 
         ch_r "You want me to put your dick. . . in my mouth?"
+
         if character.Hand:
             $ character.Mouth = "smile"
 
@@ -1071,7 +777,7 @@ label dildo_pussy(character):
             if _return:
                 return
 
-            call before_handjob(character, "dildo_pussy")
+            call before_action(character, "dildo_pussy")
         else:
             $ temp_modifier = 0                               # fix, add rogue auto stuff here
             $ Trigger2 = 0
@@ -1092,7 +798,7 @@ label dildo_pussy(character):
 
             ch_r "Ok, [character.Petname], let's do this."
 
-            jump before_handjob
+            jump before_action
         else:                                                                                                            #she's questioning it
             $ character.Brows = "angry"
 
@@ -1105,9 +811,10 @@ label dildo_pussy(character):
                         $ character.Statup("Inbt", 50, 3)
                         $ character.Statup("Inbt", 70, 1)
 
-                        ch_r "Well, since you're be'in so nice about it, I guess we can give it a go. . ."
+                        call since_you_are_so_nice_lines(character)
 
-                        jump before_handjob
+                        jump before_action
+                        
                     "You pull back before you really get it in."
 
                     $ character.FaceChange("bemused", 1)
@@ -1150,7 +857,7 @@ label dildo_pussy(character):
 
                         "[character.Name] doesn't seem to be into this, you're lucky she's so obedient."
 
-                        jump before_handjob
+                        jump before_action
         return
 
     if not character.DildoP:
@@ -1202,7 +909,7 @@ label dildo_ass(character):
             if _return:
                 return
 
-            jump before_handjob
+            jump before_action
         else:
             $ temp_modifier = 0                               # fix, add rogue auto stuff here
             $ Trigger2 = 0
@@ -1222,7 +929,7 @@ label dildo_ass(character):
 
             ch_r "Ok, [character.Petname], let's do this."
 
-            jump before_handjob
+            jump before_action
         else:
             $ character.Brows = "angry"
 
@@ -1235,9 +942,9 @@ label dildo_ass(character):
                         $ character.Statup("Inbt", 50, 3)
                         $ character.Statup("Inbt", 70, 1)
 
-                        ch_r "Well, since you're be'in so nice about it, I guess we can give it a go. . ."
+                        call since_you_are_so_nice_lines(character)
 
-                        jump before_handjob
+                        jump before_action
 
                     "You pull back before you really get it in."
 
@@ -1280,7 +987,7 @@ label dildo_ass(character):
 
                         "[character.Name] doesn't seem to be into this, you're lucky she's so obedient."
 
-                        jump before_handjob
+                        jump before_action
         return
 
     if not character.DildoA:

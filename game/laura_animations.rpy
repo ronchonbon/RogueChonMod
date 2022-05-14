@@ -3828,74 +3828,7 @@ image Laura_Mega_Mask:
     zoom 1
     rotate 30
 
-# end Laura's Sex Scenes / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
-
-label Laura_Sex_Launch(Line = Trigger):
-        $ Trigger3 = 0 if Trigger3 == "hand" else Trigger3
-        $ Player.Sprite = 1
-        $ Line = "solo" if not Line else Line
-        if Line == "sex":
-            $ Player.Cock = "in"
-            if Trigger2 in ("fondle pussy","dildo pussy","lick pussy"):
-                    $ Trigger2 = 0
-        elif Line == "anal":
-            $ Player.Cock = "anal"
-            if Trigger2 in ("insert ass","dildo anal","lick ass"):
-                    $ Trigger2 = 0
-        elif Line == "solo":
-            $ Player.Sprite = 0
-            $ Player.Cock = "out"
-        elif Line == "hotdog":
-            $ Player.Cock = "out"
-        elif Line == "foot":
-            $ ShowFeet = 1
-            $ Player.Cock = "foot"
-        elif Line == "massage":
-            $ Player.Sprite = 0
-            $ Player.Cock = 0
-        else: #elif Line == "solo":
-            $ Player.Sprite = 0
-            $ Player.Cock = "out"
-            $ Speed = 0
-        $ Trigger = Line
-
-        if LauraX.Pose == "doggy":
-                call Laura_Doggy_Launch(Line)
-                return
-        if renpy.showing("Laura_SexSprite"):
-            return
-        call Laura_Hide(1)
-        $ Speed = 0
-
-        if Trigger == "in" or Trigger == "anal":
-                if LauraX.Legs or LauraX.HoseNum() >= 5:
-                    $ LauraX.Upskirt = 1
-                if LauraX.Panties:
-                    $ LauraX.PantiesDown = 1
-
-        show Laura_SexSprite zorder 150:
-            pos (450,500)
-        with dissolve
-        return
-
-label Laura_Sex_Reset:
-        if renpy.showing("Laura_Doggy_Animation"):
-            call Laura_Doggy_Reset
-            return
-        if not renpy.showing("Laura_SexSprite"):
-            return
-        $ LauraX.ArmPose = 2
-        hide Laura_SexSprite
-        call Laura_Hide
-        show Laura_Sprite at sprite_location(LauraX.sprite_location) zorder LauraX.Layer:
-            alpha 1
-            zoom 1 offset (0,0)
-            anchor (0.5, 0.0)
-        with dissolve
-        $ Speed = 0
-        return
-
+# end Laura's Sex Scenes /
 
 
 # Laura's BJ Scenes / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
@@ -5203,33 +5136,6 @@ image Laura_HJ_Animation:
     zoom 0.4#0.6
 
 
-label Laura_HJ_Launch(Line = Trigger):
-    if renpy.showing("Laura_HJ_Animation"):
-        $ Trigger = "hand"
-        return
-    call Laura_Hide
-    if Line == "L":
-        show Laura_Sprite at sprite_location(StageRight) zorder LauraX.Layer:
-            alpha 1
-            ease 1 zoom 1.7 offset (-150,200)#(0,200)
-    else:
-        show Laura_Sprite at sprite_location(StageRight) zorder LauraX.Layer:
-            alpha 1
-            ease 1 zoom 1.7 offset (-150,200)#(0,200)
-        with dissolve
-
-    $ Speed = 0
-    if Line != "cum":
-        $ Trigger = "hand"
-    else:
-        $ Speed = 1
-    pause .5
-    $ LauraX.ArmPose = 1
-    show Laura_HJ_Animation at sprite_location(StageCenter) zorder 150 with easeinbottom:
-        #xoffset 150
-        offset (250,250)#(100,250)
-    return
-
 label Laura_HJ_Reset: # The sequence to the Laura animations from handjob to default
     if not renpy.showing("Laura_HJ_Animation"):
         return
@@ -6367,38 +6273,6 @@ label Laura_TJ_Launch(Line = Trigger):    # The sequence to launch the Laura Tit
     hide blackscreen onlayer black with dissolve
     return
 
-label Laura_TJ_Reset:
-    # The sequence to the Laura animations from Titfuck to default
-    if not renpy.showing("Laura_TJ_Animation"):
-        return
-#    hide Laura_TJ_Animation
-    call Laura_Hide
-    $ Player.Sprite = 0
-
-    show Laura_Sprite at sprite_location(LauraX.sprite_location) zorder LauraX.Layer:
-        zoom 2.3 xpos 750 yoffset -100
-    show Laura_Sprite zorder LauraX.Layer:
-        alpha 1
-        ease 1 zoom 1.5 xpos 700 yoffset 50
-        pause .5
-        ease .5 zoom 1 xpos LauraX.sprite_location yoffset 0
-    "[LauraX.Name] pulls back"
-    show Laura_Sprite at sprite_location(LauraX.sprite_location) zorder LauraX.Layer:
-        alpha 1
-        zoom 1 offset (0,0) xpos LauraX.sprite_location
-    return
-
-label Laura_Kissing_Smooch:
-    $ LauraX.FaceChange("kiss")
-    show Laura_Sprite at sprite_location(StageCenter) zorder LauraX.Layer:
-        ease 0.5 xpos StageCenter offset (0,0) zoom 2 alpha 1
-        pause 1
-        ease 0.5 xpos LauraX.sprite_location zoom 1
-    show Laura_Sprite at sprite_location(LauraX.sprite_location) zorder LauraX.Layer:
-        zoom 1
-    $ LauraX.FaceChange("sexy")
-    return
-    
 
 label Laura_Middle_Launch(T = Trigger,Set=1):
     call Laura_Hide

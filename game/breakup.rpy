@@ -1,5 +1,3 @@
-
-
 label Breakup(Girl=0,Other=0,Anger = 0,BO=[]): #rkeljsv
         # call Breakup(RogueX) from Chat
         # Repeats is number of times you've broken up, Other is a potential other woman, Anger is a meter that ends things at 4+

@@ -1,89 +1,89 @@
-﻿## JeanX.Handjob //////////////////////////////////////////////////////////////////////
+﻿## character.Handjob //////////////////////////////////////////////////////////////////////
 label Jean_Handjob:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JeanX)
-    if JeanX.Hand >= 7: # She loves it
+    call Shift_Focus(character)
+    if character.Hand >= 7: # She loves it
         $ temp_modifier += 10
-    elif JeanX.Hand >= 3: #You've done it before several times
+    elif character.Hand >= 3: #You've done it before several times
         $ temp_modifier += 7
-    elif JeanX.Hand: #You've done it before
+    elif character.Hand: #You've done it before
         $ temp_modifier += 3
 
-    if JeanX.Addict >= 75 and JeanX.Swallow >=3: #She's really strung out and has swallowed
+    if character.Addict >= 75 and character.Swallow >=3: #She's really strung out and has swallowed
         $ temp_modifier += 15
-    if JeanX.Addict >= 75:
+    if character.Addict >= 75:
         $ temp_modifier += 5
 
     if Situation == "shift":
         $ temp_modifier += 15
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in character.Traits:
         $ temp_modifier += (3*Taboo)
-    if JeanX in Player.Harem or "sex friend" in JeanX.Petnames:
+    if character in Player.Harem or "sex friend" in character.Petnames:
         $ temp_modifier += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in character.Traits:
         $ temp_modifier -= 40
-    if JeanX.ForcedCount and not JeanX.Forced:
-        $ temp_modifier -= 5 * JeanX.ForcedCount    
+    if character.ForcedCount and not character.Forced:
+        $ temp_modifier -= 5 * character.ForcedCount
 
-    if JeanX.Taboo and "tabno" in JeanX.DailyActions:
+    if character.Taboo and "tabno" in character.DailyActions:
         $ temp_modifier -= 10
 
-    if "no hand" in JeanX.DailyActions:
+    if "no hand" in character.DailyActions:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no hand" in JeanX.RecentActions else 0
+        $ temp_modifier -= 10 if "no hand" in character.RecentActions else 0
 
-    $ Approval = ApprovalCheck(JeanX, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)
+    $ Approval = ApprovalCheck(character, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)
 
-    if not JeanX.Hand and "no hand" not in JeanX.RecentActions:
-        $ JeanX.FaceChange("confused", 2)
+    if not character.Hand and "no hand" not in character.RecentActions:
+        $ character.FaceChange("confused", 2)
         ch_j "You want a handjob, hmm. . ."
-        $ JeanX.Blush = 1
+        $ character.Blush = 1
 
-    if not JeanX.Hand and Approval:                                                 #First time dialog
-        if JeanX.Forced:
-            $ JeanX.FaceChange("sad",1)
-            $ JeanX.Statup("Love", 70, -3, 1)
-            $ JeanX.Statup("Love", 20, -2, 1)
+    if not character.Hand and Approval:                                                 #First time dialog
+        if character.Forced:
+            $ character.FaceChange("sad",1)
+            $ character.Statup("Love", 70, -3, 1)
+            $ character.Statup("Love", 20, -2, 1)
             ch_j ". . ."
-        elif JeanX.Love >= (JeanX.Obed + JeanX.Inbt - JeanX.IX):
-            $ JeanX.FaceChange("sexy",1)
-            $ JeanX.Brows = "sad"
-            $ JeanX.Mouth = "smile"
+        elif character.Love >= (character.Obed + character.Inbt - character.IX):
+            $ character.FaceChange("sexy",1)
+            $ character.Brows = "sad"
+            $ character.Mouth = "smile"
             ch_j "Well, I guess it wouldn't be so bad. . ."
-        elif JeanX.Obed >= (JeanX.Inbt - JeanX.IX):
-            $ JeanX.FaceChange("normal",1)
-            ch_j "If you want, [JeanX.Petname]. . ."
+        elif character.Obed >= (character.Inbt - character.IX):
+            $ character.FaceChange("normal",1)
+            ch_j "If you want, [character.Petname]. . ."
         else: # Uninhibited
-            $ JeanX.FaceChange("lipbite",1)
+            $ character.FaceChange("lipbite",1)
             ch_j "Hmm. . ."
 
     elif Approval:                                                                       #Second time+ dialog
-        if JeanX.Forced:
-            $ JeanX.FaceChange("sad")
-            $ JeanX.Statup("Love", 70, -3, 1)
-            $ JeanX.Statup("Love", 20, -2, 1)
+        if character.Forced:
+            $ character.FaceChange("sad")
+            $ character.Statup("Love", 70, -3, 1)
+            $ character.Statup("Love", 20, -2, 1)
             ch_j "And that's it?"
-        elif not JeanX.Taboo and "tabno" in JeanX.DailyActions:
+        elif not character.Taboo and "tabno" in character.DailyActions:
             ch_j "Well, I guess here might not be that bad. . ."
-        elif "hand" in JeanX.RecentActions:
-            $ JeanX.FaceChange("sexy", 1)
+        elif "hand" in character.RecentActions:
+            $ character.FaceChange("sexy", 1)
             ch_j "Well, I guess another wouldn't hurt. . ."
             jump Jean_HJ_Prep
-        elif "hand" in JeanX.DailyActions:
-            $ JeanX.FaceChange("sexy", 1)
+        elif "hand" in character.DailyActions:
+            $ character.FaceChange("sexy", 1)
             $ Line = renpy.random.choice(["Another one?",
                 "Didn't get enough earlier?",
                 "Again the with handjobs, huh?",
                 "I guess you want more."])
             ch_j "[Line]"
-        elif JeanX.Hand < 3:
-            $ JeanX.FaceChange("sexy", 1)
-            $ JeanX.Brows = "confused"
-            $ JeanX.Mouth = "kiss"
+        elif character.Hand < 3:
+            $ character.FaceChange("sexy", 1)
+            $ character.Brows = "confused"
+            $ character.Mouth = "kiss"
             ch_j "I guess you're getting used to these. . ."
         else:
-            $ JeanX.FaceChange("sexy", 1)
-            $ JeanX.ArmPose = 2
+            $ character.FaceChange("sexy", 1)
+            $ character.ArmPose = 2
             $ Line = renpy.random.choice(["You want some more?",
                 "So you'd like another handjob?",
                 "You want a. . . [fist pumping hand gestures]?",
@@ -91,22 +91,22 @@ label Jean_Handjob:
             ch_j "[Line]"
         $ Line = 0
 
-    if ApprovalCheck(JeanX, 1000) and (Approval < 2 or "psysex" not in JeanX.History):
+    if ApprovalCheck(character, 1000) and (Approval < 2 or "psysex" not in character.History):
             #sees if you're up for psychic handy
-            call Psychic_Sex(JeanX)
+            call Psychic_Sex(character)
 
     if Approval >= 2:                                                                   #She's into it. . .
-        if JeanX.Forced:
-            $ JeanX.FaceChange("sad")
-            $ JeanX.Statup("Obed", 90, 1)
-            $ JeanX.Statup("Inbt", 60, 1)
+        if character.Forced:
+            $ character.FaceChange("sad")
+            $ character.Statup("Obed", 90, 1)
+            $ character.Statup("Inbt", 60, 1)
             ch_j "Ok, fine."
-        elif "no hand" in JeanX.DailyActions:
+        elif "no hand" in character.DailyActions:
             ch_j "Oh, -fine-. . ."
         else:
-            $ JeanX.FaceChange("sexy", 1)
-            $ JeanX.Statup("Love", 90, 1)
-            $ JeanX.Statup("Inbt", 50, 3)
+            $ character.FaceChange("sexy", 1)
+            $ character.Statup("Love", 90, 1)
+            $ character.Statup("Inbt", 50, 3)
             $ Line = renpy.random.choice(["Sure, I guess.",
                 "Okay. . . ",
                 "Fine.",
@@ -115,51 +115,51 @@ label Jean_Handjob:
                 "Ok, ok."])
             ch_j "[Line]"
             $ Line = 0
-        $ JeanX.Statup("Obed", 20, 1)
-        $ JeanX.Statup("Obed", 60, 1)
-        $ JeanX.Statup("Inbt", 70, 2)
+        $ character.Statup("Obed", 20, 1)
+        $ character.Statup("Obed", 60, 1)
+        $ character.Statup("Inbt", 70, 2)
         jump Jean_HJ_Prep
 
     else:                                                                               #She's not into it, but maybe. . .
-        $ JeanX.FaceChange("angry")
-        if "no hand" in JeanX.RecentActions:
-            ch_j "I just told you no, [JeanX.Petname]."
-        elif JeanX.Taboo and "tabno" in JeanX.DailyActions and "no hand" in JeanX.DailyActions:
+        $ character.FaceChange("angry")
+        if "no hand" in character.RecentActions:
+            ch_j "I just told you no, [character.Petname]."
+        elif character.Taboo and "tabno" in character.DailyActions and "no hand" in character.DailyActions:
             ch_j "I told you I wasn't comfortable in public. . ."
-        elif "no hand" in JeanX.DailyActions:
-            ch_j "I told you \"no,\" [JeanX.Petname]."
-        elif JeanX.Taboo and "tabno" in JeanX.DailyActions:
+        elif "no hand" in character.DailyActions:
+            ch_j "I told you \"no,\" [character.Petname]."
+        elif character.Taboo and "tabno" in character.DailyActions:
             ch_j "I told you I wasn't comfortable in public. . ."
-        elif not JeanX.Hand:
-            $ JeanX.FaceChange("bemused")
-            ch_j "Seriously, [JeanX.Petname]. . ."
+        elif not character.Hand:
+            $ character.FaceChange("bemused")
+            ch_j "Seriously, [character.Petname]. . ."
         else:
-            $ JeanX.FaceChange("bemused")
+            $ character.FaceChange("bemused")
             ch_j "Nope."
         menu:
             extend ""
-            "Sorry, never mind." if "no hand" in JeanX.DailyActions:
-                $ JeanX.FaceChange("bemused")
+            "Sorry, never mind." if "no hand" in character.DailyActions:
+                $ character.FaceChange("bemused")
                 ch_j "It's fine."
                 return
-            "Maybe later?" if "no hand" not in JeanX.DailyActions:
-                $ JeanX.FaceChange("bemused")
+            "Maybe later?" if "no hand" not in character.DailyActions:
+                $ character.FaceChange("bemused")
                 ch_j "Maybe."
-                $ JeanX.Statup("Love", 80, 2)
-                $ JeanX.Statup("Inbt", 70, 2)
-                if JeanX.Taboo:
-                    $ JeanX.RecentActions.append("tabno")
-                    $ JeanX.DailyActions.append("tabno")
-                $ JeanX.RecentActions.append("no hand")
-                $ JeanX.DailyActions.append("no hand")
+                $ character.Statup("Love", 80, 2)
+                $ character.Statup("Inbt", 70, 2)
+                if character.Taboo:
+                    $ character.RecentActions.append("tabno")
+                    $ character.DailyActions.append("tabno")
+                $ character.RecentActions.append("no hand")
+                $ character.DailyActions.append("no hand")
                 return
             "I'd really appreciate it. . .":
                 if Approval:
-                    $ JeanX.FaceChange("sexy")
-                    $ JeanX.Statup("Obed", 90, 2)
-                    $ JeanX.Statup("Obed", 50, 2)
-                    $ JeanX.Statup("Inbt", 70, 3)
-                    $ JeanX.Statup("Inbt", 40, 2)
+                    $ character.FaceChange("sexy")
+                    $ character.Statup("Obed", 90, 2)
+                    $ character.Statup("Obed", 50, 2)
+                    $ character.Statup("Inbt", 70, 3)
+                    $ character.Statup("Inbt", 40, 2)
                     $ Line = renpy.random.choice(["Sure, I guess.",
                         "Okay. . . ",
                         "Fine.",
@@ -173,52 +173,38 @@ label Jean_Handjob:
                     pass
 
             "Come on, get to work.":                                               # Pressured into it
-                $ Approval = ApprovalCheck(JeanX, 350, "OI", TabM = 3) # 35, 50, 65, -120(155)
-                if Approval > 1 or (Approval and JeanX.Forced):
-                    $ JeanX.FaceChange("sad")
-                    $ JeanX.Statup("Love", 70, -5, 1)
-                    $ JeanX.Statup("Love", 200, -2)
-                    ch_j ". . . Ok, whatever."
-                    $ JeanX.Statup("Obed", 50, 4)
-                    $ JeanX.Statup("Inbt", 80, 1)
-                    $ JeanX.Statup("Inbt", 60, 3)
-                    $ JeanX.Forced = 1
-                    jump Jean_HJ_Prep
-                else:
-                    $ JeanX.Statup("Love", 200, -15)
-                    $ JeanX.RecentActions.append("angry")
-                    $ JeanX.DailyActions.append("angry")
+                call forced_action(character, "handjob")
 
     #She refused all offers.
-    $ JeanX.ArmPose = 1
-    if "no hand" in JeanX.DailyActions:
-        $ JeanX.FaceChange("angry", 1)
-        ch_j "Don't ask again."
-        $ JeanX.RecentActions.append("angry")
-        $ JeanX.DailyActions.append("angry")
-    elif JeanX.Forced:
-        $ JeanX.FaceChange("angry", 1)
+    $ character.ArmPose = 1
+    if "no hand" in character.DailyActions:
+        $ character.FaceChange("angry", 1)
+
+        $ character.RecentActions.append("angry")
+        $ character.DailyActions.append("angry")
+    elif character.Forced:
+        $ character.FaceChange("angry", 1)
         ch_j "No."
-        $ JeanX.Statup("Lust", 200, 5)
-        if JeanX.Love > 300:
-                $ JeanX.Statup("Love", 70, -2)
-        $ JeanX.Statup("Obed", 50, -2)
-        $ JeanX.RecentActions.append("angry")
-        $ JeanX.DailyActions.append("angry")
-    elif JeanX.Taboo:                             # she refuses and this is too public a place for her
-        $ JeanX.FaceChange("angry", 1)
-        $ JeanX.DailyActions.append("tabno")
+        $ character.Statup("Lust", 200, 5)
+        if character.Love > 300:
+                $ character.Statup("Love", 70, -2)
+        $ character.Statup("Obed", 50, -2)
+        $ character.RecentActions.append("angry")
+        $ character.DailyActions.append("angry")
+    elif character.Taboo:                             # she refuses and this is too public a place for her
+        $ character.FaceChange("angry", 1)
+        $ character.DailyActions.append("tabno")
         ch_j "I'm not comfortable in public right now. . ."
-        $ JeanX.Statup("Lust", 200, 5)
-        $ JeanX.Statup("Obed", 50, -3)
-    elif JeanX.Hand:
-        $ JeanX.FaceChange("sad")
+        $ character.Statup("Lust", 200, 5)
+        $ character.Statup("Obed", 50, -3)
+    elif character.Hand:
+        $ character.FaceChange("sad")
         ch_j "I'm not into it today. . ."
     else:
-        $ JeanX.FaceChange("normal", 1)
+        $ character.FaceChange("normal", 1)
         ch_j "I'd really prefer not touching that."
-    $ JeanX.RecentActions.append("no hand")
-    $ JeanX.DailyActions.append("no hand")
+    $ character.RecentActions.append("no hand")
+    $ character.DailyActions.append("no hand")
     $ temp_modifier = 0
     return
 
@@ -227,82 +213,82 @@ label Jean_HJ_Prep:
     if Trigger2 == "hand":
         return
 
-    if JeanX.Taboo:
-        $ JeanX.Statup("Inbt", 90, int(Taboo/10))
-        $ JeanX.Statup("Lust", 50, int(Taboo/5))
+    if character.Taboo:
+        $ character.Statup("Inbt", 90, int(Taboo/10))
+        $ character.Statup("Lust", 50, int(Taboo/5))
 
-    $ JeanX.FaceChange("sexy")
-    if JeanX.Forced:
-        $ JeanX.FaceChange("sad")
-    elif not JeanX.Hand:
-        $ JeanX.Brows = "confused"
-        $ JeanX.Eyes = "sexy"
-        $ JeanX.Mouth = "smile"
+    $ character.FaceChange("sexy")
+    if character.Forced:
+        $ character.FaceChange("sad")
+    elif not character.Hand:
+        $ character.Brows = "confused"
+        $ character.Eyes = "sexy"
+        $ character.Mouth = "smile"
 
-    call Seen_First_Peen(JeanX,Partner,React=Situation)
+    call Seen_First_Peen(character,Partner,React=Situation)
     call Jean_HJ_Launch("L")
 
-    if Situation == JeanX:
+    if Situation == character:
             #Jean auto-starts
             $ Situation = 0
             if Trigger2 == "jackin":
-                "[JeanX.Name] brushes your hand aside and starts stroking your cock."
+                "[character.Name] brushes your hand aside and starts stroking your cock."
             else:
-                "[JeanX.Name] gives you a mischevious smile, and starts to fondle your cock."
+                "[character.Name] gives you a mischevious smile, and starts to fondle your cock."
             menu:
                 "What do you do?"
                 "Nothing.":
-                    $ JeanX.Statup("Inbt", 70, 3)
-                    $ JeanX.Statup("Inbt", 30, 2)
-                    "[JeanX.Name] continues her actions."
+                    $ character.Statup("Inbt", 70, 3)
+                    $ character.Statup("Inbt", 30, 2)
+                    "[character.Name] continues her actions."
                 "Praise her.":
-                    $ JeanX.FaceChange("sexy", 1)
-                    $ JeanX.Statup("Inbt", 70, 3)
-                    ch_p "Oooh, that's good, [JeanX.Pet]."
-                    $ JeanX.NameCheck() #checks reaction to petname
-                    "[JeanX.Name] continues her actions."
-                    $ JeanX.Statup("Love", 80, 1)
-                    $ JeanX.Statup("Obed", 90, 1)
-                    $ JeanX.Statup("Obed", 50, 2)
+                    $ character.FaceChange("sexy", 1)
+                    $ character.Statup("Inbt", 70, 3)
+                    ch_p "Oooh, that's good, [character.Pet]."
+                    $ character.NameCheck() #checks reaction to petname
+                    "[character.Name] continues her actions."
+                    $ character.Statup("Love", 80, 1)
+                    $ character.Statup("Obed", 90, 1)
+                    $ character.Statup("Obed", 50, 2)
                 "Ask her to stop.":
-                    $ JeanX.FaceChange("surprised")
-                    $ JeanX.Statup("Inbt", 70, 1)
-                    ch_p "Let's not do that for now, [JeanX.Pet]."
-                    $ JeanX.NameCheck() #checks reaction to petname
-                    "[JeanX.Name] puts it down."
-                    $ JeanX.Statup("Obed", 90, 1)
-                    $ JeanX.Statup("Obed", 50, 1)
-                    $ JeanX.Statup("Obed", 30, 2)
+                    $ character.FaceChange("surprised")
+                    $ character.Statup("Inbt", 70, 1)
+                    ch_p "Let's not do that for now, [character.Pet]."
+                    $ character.NameCheck() #checks reaction to petname
+                    "[character.Name] puts it down."
+                    $ character.Statup("Obed", 90, 1)
+                    $ character.Statup("Obed", 50, 1)
+                    $ character.Statup("Obed", 30, 2)
                     $ Player.RecentActions.append("nope")
-                    $ JeanX.AddWord(1,"refused","refused")
+                    $ character.AddWord(1,"refused","refused")
                     return
 
-    if not JeanX.Hand:
-        if JeanX.Forced:
-            $ JeanX.Statup("Love", 90, -20)
-            $ JeanX.Statup("Obed", 70, 25)
-            $ JeanX.Statup("Inbt", 80, 30)
+    if not character.Hand:
+        if character.Forced:
+            $ character.Statup("Love", 90, -20)
+            $ character.Statup("Obed", 70, 25)
+            $ character.Statup("Inbt", 80, 30)
         else:
-            $ JeanX.Statup("Love", 90, 5)
-            $ JeanX.Statup("Obed", 70, 20)
-            $ JeanX.Statup("Inbt", 80, 20)
+            $ character.Statup("Love", 90, 5)
+            $ character.Statup("Obed", 70, 20)
+            $ character.Statup("Inbt", 80, 20)
 
     if Situation:
         $ renpy.pop_call()
         $ Situation = 0
     $ Line = 0
     $ Cnt = 0
-    if JeanX.Taboo:
-        $ JeanX.DrainWord("tabno")
-    $ JeanX.DrainWord("no hand")
-    $ JeanX.RecentActions.append("hand")
-    $ JeanX.DailyActions.append("hand")
+    if character.Taboo:
+        $ character.DrainWord("tabno")
+    $ character.DrainWord("no hand")
+    $ character.RecentActions.append("hand")
+    $ character.DailyActions.append("hand")
 
 label Jean_HJ_Cycle:
     while Round > 0:
-        call Shift_Focus(JeanX)
+        call Shift_Focus(character)
         call Jean_HJ_Launch
-        $ JeanX.LustFace()
+        $ character.LustFace()
 
         if  Player.Focus < 100:
                     #Player Command menu
@@ -336,46 +322,46 @@ label Jean_HJ_Cycle:
                         "Other options":
                                 menu:
                                     "I also want to fondle her breasts." if Trigger2 != "fondle breasts":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                 $ Trigger2 = "fondle breasts"
                                                 "You start to fondle her breasts."
-                                                $ JeanX.Action -= 1
+                                                $ character.Action -= 1
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Shift primary action":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                     menu:
 #                                                        "How about a blowjob?":
-#                                                                    if JeanX.Action and MultiAction:
+#                                                                    if character.Action and MultiAction:
 #                                                                        $ Situation = "shift"
 #                                                                        call Jean_HJ_After
 #                                                                        call Jean_Blowjob
 #                                                                    else:
-#                                                                        call Sex_Basic_Dialog(JeanX,"tired")
+#                                                                        call Sex_Basic_Dialog(character,"tired")
 
 #                                                        "How about a titjob?":
-#                                                                    if JeanX.Action and MultiAction:
+#                                                                    if character.Action and MultiAction:
 #                                                                        $ Situation = "shift"
 #                                                                        call Jean_HJ_After
 #                                                                        call Jean_Titjob
 #                                                                    else:
-#                                                                        call Sex_Basic_Dialog(JeanX,"tired")
+#                                                                        call Sex_Basic_Dialog(character,"tired")
                                                         "Never Mind":
                                                                 jump Jean_HJ_Cycle
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Threesome actions (locked)" if not Partner:
                                         pass
                                     "Threesome actions" if Partner:
                                         menu:
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(JeanX)
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
+                                            "Ask [character.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
+                                                        call Les_Change(character)
+                                            "Ask [character.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
                                                         pass
                                             "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(JeanX)
+                                                        call Three_Change(character)
 
                                             "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
                                                         $ ThreeCount = 0
@@ -383,7 +369,7 @@ label Jean_HJ_Cycle:
                                                         $ ThreeCount = 0
 
                                             "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(JeanX)
+                                                        call Trigger_Swap(character)
                                             "Undress [Partner.Name]":
                                                         call Girl_Undress(Partner)
                                                         jump Jean_HJ_Cycle
@@ -392,12 +378,12 @@ label Jean_HJ_Cycle:
                                                         jump Jean_HJ_Cycle
                                             "Never mind":
                                                         jump Jean_HJ_Cycle
-                                    "undress [JeanX.Name]":
-                                            call Girl_Undress(JeanX)
-                                    "Clean up [JeanX.Name] (locked)" if not JeanX.Spunk:
+                                    "undress [character.Name]":
+                                            call Girl_Undress(character)
+                                    "Clean up [character.Name] (locked)" if not character.Spunk:
                                             pass
-                                    "Clean up [JeanX.Name]" if JeanX.Spunk:
-                                            call Girl_Cleanup(JeanX,"ask")
+                                    "Clean up [character.Name]" if character.Spunk:
+                                            call Girl_Cleanup(character,"ask")
                                     "Never mind":
                                             jump Jean_HJ_Cycle
 
@@ -414,8 +400,8 @@ label Jean_HJ_Cycle:
                                     jump Jean_HJ_After
         #End menu (if Line)
 
-        call Shift_Focus(JeanX)
-        call Sex_Dialog(JeanX,Partner)
+        call Shift_Focus(character)
+        call Sex_Dialog(character,Partner)
 
         #If either of you could cum
 
@@ -423,27 +409,27 @@ label Jean_HJ_Cycle:
         $ Round -= 1
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-        if Player.Focus >= 100 or JeanX.Lust >= 100:
+        if Player.Focus >= 100 or character.Lust >= 100:
                     #If either of you could cum
                     if Player.Focus >= 100:
                             #If you can cum:
-                            call Player_Cumming(JeanX)
-                            if "angry" in JeanX.RecentActions:
+                            call Player_Cumming(character)
+                            if "angry" in character.RecentActions:
                                 call Jean_HJ_Reset
                                 return
-                            $ JeanX.Statup("Lust", 200, 5)
-                            if 100 > JeanX.Lust >= 70 and JeanX.OCount < 2 and JeanX.SEXP >= 20:
-                                $ JeanX.RecentActions.append("unsatisfied")
-                                $ JeanX.DailyActions.append("unsatisfied")
+                            $ character.Statup("Lust", 200, 5)
+                            if 100 > character.Lust >= 70 and character.OCount < 2 and character.SEXP >= 20:
+                                $ character.RecentActions.append("unsatisfied")
+                                $ character.DailyActions.append("unsatisfied")
 
                             if Player.Focus > 80:
                                 jump Jean_HJ_After
                             $ Line = "came"
 
-                    if JeanX.Lust >= 100:
+                    if character.Lust >= 100:
                             #If Jean can cum
-                            call Girl_Cumming(JeanX)
-                            if Situation == "shift" or "angry" in JeanX.RecentActions:
+                            call Girl_Cumming(character)
+                            if Situation == "shift" or "angry" in character.RecentActions:
                                 jump Jean_HJ_After
 
                     if Line == "came": #ex Player.Focus <= 20:
@@ -453,8 +439,8 @@ label Jean_HJ_Cycle:
                                 "You're emptied out, you should probably take a break."
 
 
-                            if "unsatisfied" in JeanX.RecentActions:#And Jean is unsatisfied,
-                                "[JeanX.Name] still seems a bit unsatisfied with the experience."
+                            if "unsatisfied" in character.RecentActions:#And Jean is unsatisfied,
+                                "[character.Name] still seems a bit unsatisfied with the experience."
                                 menu:
                                     "Finish her?"
                                     "Yes, keep going for a bit.":
@@ -470,10 +456,10 @@ label Jean_HJ_Cycle:
         $ Player.Focus -= 10 if Player.FocusX and Player.Focus > 50 else 0
 
         if Cnt == 20:
-                    $ JeanX.Brows = "angry"
+                    $ character.Brows = "angry"
                     menu:
                         ch_j "Ok, I'm bored now. Can we try something else?"
-#                        "How about a BJ?" if JeanX.Action and MultiAction:
+#                        "How about a BJ?" if character.Action and MultiAction:
 #                                $ Situation = "shift"
 #                                call Jean_HJ_After
 #                                call Jean_Blowjob
@@ -488,67 +474,67 @@ label Jean_HJ_Cycle:
                                 $ Situation = "shift"
                                 jump Jean_HJ_After
                         "No, get back down there.":
-                                if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
-                                    $ JeanX.Statup("Love", 200, -5)
-                                    $ JeanX.Statup("Obed", 50, 3)
-                                    $ JeanX.Statup("Obed", 80, 2)
+                                if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
+                                    $ character.Statup("Love", 200, -5)
+                                    $ character.Statup("Obed", 50, 3)
+                                    $ character.Statup("Obed", 80, 2)
                                     "She grumbles but gets back to work."
                                 else:
-                                    $ JeanX.FaceChange("angry", 1)
+                                    $ character.FaceChange("angry", 1)
                                     "She scowls at you, drops you cock and pulls back."
                                     ch_j "I have better things to do with my time."
-                                    $ JeanX.Statup("Love", 50, -3, 1)
-                                    $ JeanX.Statup("Love", 80, -4, 1)
-                                    $ JeanX.Statup("Obed", 30, -1, 1)
-                                    $ JeanX.Statup("Obed", 50, -1, 1)
-                                    $ JeanX.RecentActions.append("angry")
-                                    $ JeanX.DailyActions.append("angry")
+                                    $ character.Statup("Love", 50, -3, 1)
+                                    $ character.Statup("Love", 80, -4, 1)
+                                    $ character.Statup("Obed", 30, -1, 1)
+                                    $ character.Statup("Obed", 50, -1, 1)
+                                    $ character.RecentActions.append("angry")
+                                    $ character.DailyActions.append("angry")
                                     jump Jean_HJ_After
-        elif Cnt == 10 and JeanX.SEXP <= 100 and not ApprovalCheck(JeanX, 1200, "LO"):
-                    $ JeanX.Brows = "confused"
+        elif Cnt == 10 and character.SEXP <= 100 and not ApprovalCheck(character, 1200, "LO"):
+                    $ character.Brows = "confused"
                     ch_j "Nice, right?"
         #End Count check
 
-        call Escalation(JeanX) #sees if she wants to escalate things
+        call Escalation(character) #sees if she wants to escalate things
 
         if Round == 10:
-                call Sex_Basic_Dialog(JeanX,10) #"You might want to wrap this up, it's getting late."
+                call Sex_Basic_Dialog(character,10) #"You might want to wrap this up, it's getting late."
         elif Round == 5:
-                call Sex_Basic_Dialog(JeanX,5)   #"Seriously, it'll be time to stop soon."
+                call Sex_Basic_Dialog(character,5)   #"Seriously, it'll be time to stop soon."
 
     #Round = 0 loop breaks
-    $ JeanX.FaceChange("bemused", 0)
+    $ character.FaceChange("bemused", 0)
     $ Line = 0
-    call Sex_Basic_Dialog(JeanX,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
+    call Sex_Basic_Dialog(character,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
 
 label Jean_HJ_After:
-    $ JeanX.FaceChange("sexy")
+    $ character.FaceChange("sexy")
 
-    $ JeanX.Hand += 1
-    $ JeanX.Action -=1
-    $ JeanX.Addictionrate += 1
+    $ character.Hand += 1
+    $ character.Action -=1
+    $ character.Addictionrate += 1
     if "addictive" in Player.Traits:
-        $ JeanX.Addictionrate += 1
-    $ JeanX.Statup("Lust", 90, 5)
+        $ character.Addictionrate += 1
+    $ character.Statup("Lust", 90, 5)
 
-    call Partner_Like(JeanX,1)
+    call Partner_Like(character,1)
 
     if "Jean Handi-Queen" in Achievements:
             pass
-    elif JeanX.Hand >= 10:
-            $ JeanX.FaceChange("smile", 1)
+    elif character.Hand >= 10:
+            $ character.FaceChange("smile", 1)
             ch_j "This seems to be all we do lately. . ."
             $ Achievements.append("Jean Handi-Queen")
-            $JeanX.SEXP += 5
-    elif JeanX.Hand == 1:
-            $JeanX.SEXP += 10
-            if JeanX.Love >= 500:
-                $ JeanX.Mouth = "smile"
+            $character.SEXP += 5
+    elif character.Hand == 1:
+            $character.SEXP += 10
+            if character.Love >= 500:
+                $ character.Mouth = "smile"
                 ch_j "That was kinda fun. . ."
             elif Player.Focus <= 20:
-                $ JeanX.Mouth = "sad"
+                $ character.Mouth = "sad"
                 ch_j "Pretty nice, right?"
-    elif JeanX.Hand == 5:
+    elif character.Hand == 5:
                 ch_j "I'm pretty good at this, right?"
 
     $ temp_modifier = 0
@@ -559,105 +545,105 @@ label Jean_HJ_After:
     call Checkout
     return
 
-## end JeanX.Handjob //////////////////////////////////////////////////////////////////////
+## end character.Handjob //////////////////////////////////////////////////////////////////////
 
 
-## JeanX.Titjob //////////////////////////////////////////////////////////////////////
+## character.Titjob //////////////////////////////////////////////////////////////////////
 label Jean_Titjob:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JeanX)
-    if JeanX.Tit >= 7: # She loves it
+    call Shift_Focus(character)
+    if character.Tit >= 7: # She loves it
         $ temp_modifier += 10
-    elif JeanX.Tit >= 3: #You've done it before several times
+    elif character.Tit >= 3: #You've done it before several times
         $ temp_modifier += 7
-    elif JeanX.Tit: #You've done it before
+    elif character.Tit: #You've done it before
         $ temp_modifier += 5
 
-    if JeanX.Addict >= 75 and JeanX.Swallow >=3: #She's really strung out and has swallowed
+    if character.Addict >= 75 and character.Swallow >=3: #She's really strung out and has swallowed
         $ temp_modifier += 15
-    elif JeanX.Addict >= 75:
+    elif character.Addict >= 75:
         $ temp_modifier += 5
 
-    if JeanX.SeenChest and ApprovalCheck(JeanX, 500): # You've seen her tits.
+    if character.SeenChest and ApprovalCheck(character, 500): # You've seen her tits.
         $ temp_modifier += 10
-    if not JeanX.Chest and not JeanX.Over: #She's already topless
+    if not character.Chest and not character.Over: #She's already topless
         $ temp_modifier += 10
-    if JeanX.Lust > 75: #She's really horny
+    if character.Lust > 75: #She's really horny
         $ temp_modifier += 10
     if Situation == "shift":
         $ temp_modifier += 15
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in character.Traits:
         $ temp_modifier += (5*Taboo)
-    if JeanX in Player.Harem or "sex friend" in JeanX.Petnames:
+    if character in Player.Harem or "sex friend" in character.Petnames:
         $ temp_modifier += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in character.Traits:
         $ temp_modifier -= 30
-    if JeanX.ForcedCount and not JeanX.Forced:
-        $ temp_modifier -= 5 * JeanX.ForcedCount
+    if character.ForcedCount and not character.Forced:
+        $ temp_modifier -= 5 * character.ForcedCount
 
-    if JeanX.Taboo and "tabno" in JeanX.DailyActions:
+    if character.Taboo and "tabno" in character.DailyActions:
         $ temp_modifier -= 10
 
-    if "no titjob" in JeanX.DailyActions:
+    if "no titjob" in character.DailyActions:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no titjob" in JeanX.RecentActions else 0
+        $ temp_modifier -= 10 if "no titjob" in character.RecentActions else 0
 
-    $ Approval = ApprovalCheck(JeanX, 1200, TabM = 4) # 120, 135, 150, Taboo -200(320)
+    $ Approval = ApprovalCheck(character, 1200, TabM = 4) # 120, 135, 150, Taboo -200(320)
 
-    if not JeanX.Tit and "no titjob" not in JeanX.RecentActions:
-        $ JeanX.FaceChange("surprised", 1)
-        $ JeanX.Mouth = "kiss"
+    if not character.Tit and "no titjob" not in character.RecentActions:
+        $ character.FaceChange("surprised", 1)
+        $ character.Mouth = "kiss"
         ch_j "Oh, you want me to put these to work. . ."
-        $ JeanX.FaceChange("sly", 1)
+        $ character.FaceChange("sly", 1)
         ch_j "I can't blame you. . ."
 
-    if not JeanX.Tit and Approval:                                                 #First time dialog
-        if JeanX.Forced:
-            $ JeanX.FaceChange("sad")
-            $ JeanX.Statup("Love", 70, -3, 1)
-            $ JeanX.Statup("Love", 20, -2, 1)
-        elif JeanX.Love >= (JeanX.Obed + JeanX.Inbt - JeanX.IX):
-            $ JeanX.FaceChange("sexy")
-            $ JeanX.Brows = "sad"
-            $ JeanX.Mouth = "smile"
+    if not character.Tit and Approval:                                                 #First time dialog
+        if character.Forced:
+            $ character.FaceChange("sad")
+            $ character.Statup("Love", 70, -3, 1)
+            $ character.Statup("Love", 20, -2, 1)
+        elif character.Love >= (character.Obed + character.Inbt - character.IX):
+            $ character.FaceChange("sexy")
+            $ character.Brows = "sad"
+            $ character.Mouth = "smile"
             ch_j "I'd love to, but. . .."
-        elif JeanX.Obed >= (JeanX.Inbt - JeanX.IX):
-            $ JeanX.FaceChange("normal")
+        elif character.Obed >= (character.Inbt - character.IX):
+            $ character.FaceChange("normal")
             ch_j "If you'd want that. . ."
-        elif JeanX.Addict >= 50:
-            $ JeanX.FaceChange("manic", 1)
+        elif character.Addict >= 50:
+            $ character.FaceChange("manic", 1)
             ch_j "Hmmmm. . . ."
         else: # Uninhibited
-            $ JeanX.FaceChange("sad")
-            $ JeanX.Mouth = "smile"
+            $ character.FaceChange("sad")
+            $ character.Mouth = "smile"
             ch_j "Sounds fun, but. . ."
     elif Approval:                                                                       #Second time+ dialog
-        if JeanX.Forced:
-            $ JeanX.FaceChange("sad")
-            $ JeanX.Statup("Love", 70, -3, 1)
-            $ JeanX.Statup("Love", 20, -2, 1)
+        if character.Forced:
+            $ character.FaceChange("sad")
+            $ character.Statup("Love", 70, -3, 1)
+            $ character.Statup("Love", 20, -2, 1)
             ch_j "Well that's a big ask. . ."
-        elif not JeanX.Taboo and "tabno" in JeanX.DailyActions:
+        elif not character.Taboo and "tabno" in character.DailyActions:
             ch_j "Ok, I guess this is secluded enough. . ."
-        elif "titjob" in JeanX.RecentActions:
-            $ JeanX.FaceChange("sexy", 1)
+        elif "titjob" in character.RecentActions:
+            $ character.FaceChange("sexy", 1)
             ch_j "Huh, again?"
             jump Jean_TJ_Prep
-        elif "titjob" in JeanX.DailyActions:
-            $ JeanX.FaceChange("sexy", 1)
+        elif "titjob" in character.DailyActions:
+            $ character.FaceChange("sexy", 1)
             $ Line = renpy.random.choice(["Back for more?",
                 "You're really working these babies.",
                 "Didn't get enough earlier?",
                 "You're really working these babies."])
             ch_j "[Line]"
-        elif JeanX.Tit < 3:
-            $ JeanX.FaceChange("sexy", 1)
-            $ JeanX.Brows = "confused"
-            $ JeanX.Mouth = "kiss"
+        elif character.Tit < 3:
+            $ character.FaceChange("sexy", 1)
+            $ character.Brows = "confused"
+            $ character.Mouth = "kiss"
             ch_j "Again with the tits, uh?"
         else:
-            $ JeanX.FaceChange("sexy", 1)
-            $ JeanX.ArmPose = 2
+            $ character.FaceChange("sexy", 1)
+            $ character.ArmPose = 2
             $ Line = renpy.random.choice(["You want some of this action [rubs her chest]?",
                 "So you'd like another titjob?",
                 "So you'd like another titjob?",
@@ -668,17 +654,17 @@ label Jean_Titjob:
         $ Line = 0
 
     if Approval >= 2:                                                                   #She's into it. . .
-        if JeanX.Forced:
-            $ JeanX.FaceChange("sad")
-            $ JeanX.Statup("Obed", 90, 1)
-            $ JeanX.Statup("Inbt", 60, 1)
+        if character.Forced:
+            $ character.FaceChange("sad")
+            $ character.Statup("Obed", 90, 1)
+            $ character.Statup("Inbt", 60, 1)
             ch_j "I can't fault your taste. . ."
-        elif "no titjob" in JeanX.DailyActions:
+        elif "no titjob" in character.DailyActions:
             ch_j "Hmm, I guess. . ."
         else:
-            $ JeanX.FaceChange("sexy", 1)
-            $ JeanX.Statup("Love", 90, 1)
-            $ JeanX.Statup("Inbt", 50, 3)
+            $ character.FaceChange("sexy", 1)
+            $ character.Statup("Love", 90, 1)
+            $ character.Statup("Inbt", 50, 3)
             $ Line = renpy.random.choice(["Well, sure, put it here.",
                 "Well. . . ok.",
                 "Yum.",
@@ -686,52 +672,52 @@ label Jean_Titjob:
                 "Heh, ok."])
             ch_j "[Line]"
             $ Line = 0
-        $ JeanX.Statup("Obed", 20, 1)
-        $ JeanX.Statup("Obed", 70, 1)
-        $ JeanX.Statup("Inbt", 80, 2)
+        $ character.Statup("Obed", 20, 1)
+        $ character.Statup("Obed", 70, 1)
+        $ character.Statup("Inbt", 80, 2)
         jump Jean_TJ_Prep
 
     else:                                                                               #She's not into it, but maybe. . .
-        $ JeanX.FaceChange("angry")
-        if "no titjob" in JeanX.RecentActions:
-            ch_j "I {i}just{/i} told you \"no,\" [JeanX.Petname]."
-        elif JeanX.Taboo and "tabno" in JeanX.DailyActions and "no titjob" in JeanX.DailyActions:
+        $ character.FaceChange("angry")
+        if "no titjob" in character.RecentActions:
+            ch_j "I {i}just{/i} told you \"no,\" [character.Petname]."
+        elif character.Taboo and "tabno" in character.DailyActions and "no titjob" in character.DailyActions:
             ch_j "I don't want to show off the goods like that!"
-        elif "no titjob" in JeanX.DailyActions:
-            ch_j "I already told you \"no,\" [JeanX.Petname]."
-        elif JeanX.Taboo and "tabno" in JeanX.DailyActions:
+        elif "no titjob" in character.DailyActions:
+            ch_j "I already told you \"no,\" [character.Petname]."
+        elif character.Taboo and "tabno" in character.DailyActions:
             ch_j "I don't want to show off the goods like that!"
-        elif not JeanX.Tit:
-            $ JeanX.FaceChange("bemused")
-            ch_j "Not really my thing, [JeanX.Petname]. . ."
+        elif not character.Tit:
+            $ character.FaceChange("bemused")
+            ch_j "Not really my thing, [character.Petname]. . ."
         else:
-            $ JeanX.FaceChange("bemused")
-            ch_j "Not right now [JeanX.Petname]. . ."
+            $ character.FaceChange("bemused")
+            ch_j "Not right now [character.Petname]. . ."
 
         menu:
             extend ""
-            "Sorry, never mind." if "no titjob" in JeanX.DailyActions:
-                $ JeanX.FaceChange("bemused")
-                ch_j "Ok, fine, [JeanX.Petname]."
+            "Sorry, never mind." if "no titjob" in character.DailyActions:
+                $ character.FaceChange("bemused")
+                ch_j "Ok, fine, [character.Petname]."
                 return
-            "Maybe later?" if "no titjob" not in JeanX.DailyActions:
-                $ JeanX.FaceChange("sexy")
+            "Maybe later?" if "no titjob" not in character.DailyActions:
+                $ character.FaceChange("sexy")
                 ch_j ". . . maybe."
-                $ JeanX.Statup("Love", 80, 2)
-                $ JeanX.Statup("Inbt", 70, 2)
-                if JeanX.Taboo:
-                    $ JeanX.RecentActions.append("tabno")
-                    $ JeanX.DailyActions.append("tabno")
-                $ JeanX.RecentActions.append("no titjob")
-                $ JeanX.DailyActions.append("no titjob")
+                $ character.Statup("Love", 80, 2)
+                $ character.Statup("Inbt", 70, 2)
+                if character.Taboo:
+                    $ character.RecentActions.append("tabno")
+                    $ character.DailyActions.append("tabno")
+                $ character.RecentActions.append("no titjob")
+                $ character.DailyActions.append("no titjob")
                 return
             "I think this could be fun for both of us. . .":
                 if Approval:
-                    $ JeanX.FaceChange("sexy")
-                    $ JeanX.Statup("Obed", 80, 2)
-                    $ JeanX.Statup("Obed", 40, 2)
-                    $ JeanX.Statup("Inbt", 70, 3)
-                    $ JeanX.Statup("Inbt", 40, 2)
+                    $ character.FaceChange("sexy")
+                    $ character.Statup("Obed", 80, 2)
+                    $ character.Statup("Obed", 40, 2)
+                    $ character.Statup("Inbt", 70, 3)
+                    $ character.Statup("Inbt", 40, 2)
                     $ Line = renpy.random.choice(["Well, ok, put it here.",
                         "Well. . . ok.",
                         "I guess.",
@@ -741,169 +727,169 @@ label Jean_Titjob:
                     $ Line = 0
                     jump Jean_TJ_Prep
                 else:
-                    $ Approval = ApprovalCheck(JeanX, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)             Handy instead?
-                    if Approval >= 2 and JeanX.Blow:
-                        $ JeanX.Statup("Inbt", 80, 1)
-                        $ JeanX.Statup("Inbt", 60, 3)
-                        $ JeanX.FaceChange("confused", 1)
+                    $ Approval = ApprovalCheck(character, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)             Handy instead?
+                    if Approval >= 2 and character.Blow:
+                        $ character.Statup("Inbt", 80, 1)
+                        $ character.Statup("Inbt", 60, 3)
+                        $ character.FaceChange("confused", 1)
                         ch_j "What about a blowjob then?"
                         menu:
                             ch_j "What about a blowjob then?"
                             "Ok, get down there.":
-                                $ JeanX.Statup("Love", 80, 2)
-                                $ JeanX.Statup("Inbt", 60, 1)
-                                $ JeanX.Statup("Obed", 50, 1)
+                                $ character.Statup("Love", 80, 2)
+                                $ character.Statup("Inbt", 60, 1)
+                                $ character.Statup("Obed", 50, 1)
                                 jump Jean_BJ_Prep
                             "Nah, it's all about dem titties.":
                                 $ Line = "no BJ"
-                    if Approval and JeanX.Hand:
-                        $ JeanX.Statup("Inbt", 80, 1)
-                        $ JeanX.Statup("Inbt", 60, 3)
-                        $ JeanX.FaceChange("confused", 1)
+                    if Approval and character.Hand:
+                        $ character.Statup("Inbt", 80, 1)
+                        $ character.Statup("Inbt", 60, 3)
+                        $ character.FaceChange("confused", 1)
                         ch_j "I could give you a hand job?"
                         menu:
                             ch_j "What do you say?"
                             "Sure, that's fine.":
-                                $ JeanX.Statup("Love", 80, 2)
-                                $ JeanX.Statup("Inbt", 60, 1)
-                                $ JeanX.Statup("Obed", 50, 1)
+                                $ character.Statup("Love", 80, 2)
+                                $ character.Statup("Inbt", 60, 1)
+                                $ character.Statup("Obed", 50, 1)
                                 jump Jean_HJ_Prep
                             "Seriously, titties." if Line == "no BJ":
                                 $ Line = 0
                             "Nah, it's all about dem titties." if Line != "no BJ":
                                 pass
-                    $ JeanX.Statup("Love", 200, -2)
+                    $ character.Statup("Love", 200, -2)
                     ch_j "Well then too bad, I guess."
-                    $ JeanX.Statup("Obed", 70, 2)
+                    $ character.Statup("Obed", 70, 2)
 
 
-            "Come on, let me fuck those titties, [JeanX.Pet]":                                               # Pressured into it
-                $ JeanX.NameCheck() #checks reaction to petname
-                $ Approval = ApprovalCheck(JeanX, 700, "OI", TabM = 4) # 70, 85, 100, -160(230)
-                if Approval > 1 or (Approval and JeanX.Forced):
-                    $ JeanX.FaceChange("angry",1)
-                    $ JeanX.Statup("Love", 70, -5, 1)
-                    $ JeanX.Statup("Love", 200, -2)
-                    ch_j ". . ."
-                    $ JeanX.FaceChange("angry",1,Eyes="side")
+            "Come on, let me fuck those titties, [character.Pet]":                                               # Pressured into it
+                $ character.NameCheck() #checks reaction to petname
+                $ Approval = ApprovalCheck(character, 700, "OI", TabM = 4) # 70, 85, 100, -160(230)
+                if Approval > 1 or (Approval and character.Forced):
+                    $ character.FaceChange("angry",1)
+                    $ character.Statup("Love", 70, -5, 1)
+                    $ character.Statup("Love", 200, -2)
+                    ch_j
+                    $ character.FaceChange("angry",1,Eyes="side")
                     ch_j "Ok, fine, whip it out."
-                    $ JeanX.Statup("Obed", 50, 4)
-                    $ JeanX.Statup("Inbt", 80, 1)
-                    $ JeanX.Statup("Inbt", 60, 3)
-                    $ JeanX.Forced = 1
+                    $ character.Statup("Obed", 50, 4)
+                    $ character.Statup("Inbt", 80, 1)
+                    $ character.Statup("Inbt", 60, 3)
+                    $ character.Forced = 1
                     jump Jean_TJ_Prep
                 else:
-                    $ JeanX.Statup("Love", 200, -15)
-                    $ JeanX.RecentActions.append("angry")
-                    $ JeanX.DailyActions.append("angry")
+                    $ character.Statup("Love", 200, -15)
+                    $ character.RecentActions.append("angry")
+                    $ character.DailyActions.append("angry")
 
     #She refused all offers.
-    if "no titjob" in JeanX.DailyActions:
-        $ JeanX.FaceChange("angry", 1)
-        ch_j "I already told you no."
-        $ JeanX.RecentActions.append("angry")
-        $ JeanX.DailyActions.append("angry")
-    elif JeanX.Forced:
-        $ JeanX.FaceChange("angry", 1)
+    if "no titjob" in character.DailyActions:
+        $ character.FaceChange("angry", 1)
+
+        $ character.RecentActions.append("angry")
+        $ character.DailyActions.append("angry")
+    elif character.Forced:
+        $ character.FaceChange("angry", 1)
         ch_j "No, try something else."
-        $ JeanX.Statup("Lust", 200, 5)
-        if JeanX.Love > 300:
-                $ JeanX.Statup("Love", 70, -2)
-        $ JeanX.Statup("Obed", 50, -2)
-        $ JeanX.RecentActions.append("angry")
-        $ JeanX.DailyActions.append("angry")
-    elif JeanX.Taboo:                             # she refuses and this is too public a place for her
-        $ JeanX.FaceChange("angry", 1)
-        $ JeanX.DailyActions.append("tabno")
+        $ character.Statup("Lust", 200, 5)
+        if character.Love > 300:
+                $ character.Statup("Love", 70, -2)
+        $ character.Statup("Obed", 50, -2)
+        $ character.RecentActions.append("angry")
+        $ character.DailyActions.append("angry")
+    elif character.Taboo:                             # she refuses and this is too public a place for her
+        $ character.FaceChange("angry", 1)
+        $ character.DailyActions.append("tabno")
         ch_j "You really expect me to do that here?"
         ch_j "You know I can't \"take care of that\" anymore. . ."
-        $ JeanX.Statup("Lust", 200, 5)
-        $ JeanX.Statup("Obed", 50, -3)
-    elif JeanX.Tit:
-        $ JeanX.FaceChange("sad")
+        $ character.Statup("Lust", 200, 5)
+        $ character.Statup("Obed", 50, -3)
+    elif character.Tit:
+        $ character.FaceChange("sad")
         ch_j "You'll know when it's time for that."
     else:
-        $ JeanX.FaceChange("normal", 1)
+        $ character.FaceChange("normal", 1)
         ch_j "Nah."
-    $ JeanX.RecentActions.append("no titjob")
-    $ JeanX.DailyActions.append("no titjob")
+    $ character.RecentActions.append("no titjob")
+    $ character.DailyActions.append("no titjob")
     $ temp_modifier = 0
     return
 
 label Jean_TJ_Prep:
-    if JeanX.Taboo:
-        $ JeanX.Statup("Inbt", 90, int(Taboo/10))
-        $ JeanX.Statup("Lust", 50, int(Taboo/5))
+    if character.Taboo:
+        $ character.Statup("Inbt", 90, int(Taboo/10))
+        $ character.Statup("Lust", 50, int(Taboo/5))
 
 
-    $ JeanX.FaceChange("sexy")
-    if JeanX.Forced:
-        $ JeanX.FaceChange("sad")
-    elif not JeanX.Tit:
-        $ JeanX.Brows = "confused"
-        $ JeanX.Eyes = "sexy"
-        $ JeanX.Mouth = "smile"
+    $ character.FaceChange("sexy")
+    if character.Forced:
+        $ character.FaceChange("sad")
+    elif not character.Tit:
+        $ character.Brows = "confused"
+        $ character.Eyes = "sexy"
+        $ character.Mouth = "smile"
 
-    call Seen_First_Peen(JeanX,Partner,React=Situation)
+    call Seen_First_Peen(character,Partner,React=Situation)
     call Jean_TJ_Launch("L")
 
-    if Situation == JeanX:
+    if Situation == character:
             #Jean auto-starts
             $ Situation = 0
-            "[JeanX.Name] slides down and sandwiches your dick between her tits."
+            "[character.Name] slides down and sandwiches your dick between her tits."
             menu:
                 "What do you do?"
                 "Nothing.":
-                    $ JeanX.Statup("Inbt", 80, 3)
-                    $ JeanX.Statup("Inbt", 40, 2)
-                    "[JeanX.Name] starts to slide them up and down."
+                    $ character.Statup("Inbt", 80, 3)
+                    $ character.Statup("Inbt", 40, 2)
+                    "[character.Name] starts to slide them up and down."
                 "Praise her.":
-                    $ JeanX.FaceChange("sexy", 1)
-                    $ JeanX.Statup("Inbt", 80, 3)
-                    ch_p "Oh, that sounds like a good idea, [JeanX.Pet]."
-                    $ JeanX.NameCheck() #checks reaction to petname
-                    "[JeanX.Name] continues her actions."
-                    $ JeanX.Statup("Love", 85, 1)
-                    $ JeanX.Statup("Obed", 90, 1)
-                    $ JeanX.Statup("Obed", 50, 2)
+                    $ character.FaceChange("sexy", 1)
+                    $ character.Statup("Inbt", 80, 3)
+                    ch_p "Oh, that sounds like a good idea, [character.Pet]."
+                    $ character.NameCheck() #checks reaction to petname
+                    "[character.Name] continues her actions."
+                    $ character.Statup("Love", 85, 1)
+                    $ character.Statup("Obed", 90, 1)
+                    $ character.Statup("Obed", 50, 2)
                 "Ask her to stop.":
-                    $ JeanX.FaceChange("confused")
-                    $ JeanX.Statup("Inbt", 70, 1)
-                    ch_p "Let's not do that for now, [JeanX.Pet]."
-                    $ JeanX.NameCheck() #checks reaction to petname
-                    "[JeanX.Name] lets it drop out from between her breasts."
-                    $ JeanX.Statup("Obed", 90, 1)
-                    $ JeanX.Statup("Obed", 50, 3)
+                    $ character.FaceChange("confused")
+                    $ character.Statup("Inbt", 70, 1)
+                    ch_p "Let's not do that for now, [character.Pet]."
+                    $ character.NameCheck() #checks reaction to petname
+                    "[character.Name] lets it drop out from between her breasts."
+                    $ character.Statup("Obed", 90, 1)
+                    $ character.Statup("Obed", 50, 3)
                     $ Player.RecentActions.append("nope")
-                    $ JeanX.AddWord(1,"refused","refused")
+                    $ character.AddWord(1,"refused","refused")
                     return
 
-    if not JeanX.Tit:
-        if JeanX.Forced:
-            $ JeanX.Statup("Love", 90, -25)
-            $ JeanX.Statup("Obed", 70, 30)
-            $ JeanX.Statup("Inbt", 80, 35)
+    if not character.Tit:
+        if character.Forced:
+            $ character.Statup("Love", 90, -25)
+            $ character.Statup("Obed", 70, 30)
+            $ character.Statup("Inbt", 80, 35)
         else:
-            $ JeanX.Statup("Love", 90, 5)
-            $ JeanX.Statup("Obed", 70, 25)
-            $ JeanX.Statup("Inbt", 80, 30)
+            $ character.Statup("Love", 90, 5)
+            $ character.Statup("Obed", 70, 25)
+            $ character.Statup("Inbt", 80, 30)
 
     if Situation:
         $ renpy.pop_call()
         $ Situation = 0
     $ Line = 0
     $ Cnt = 0
-    if JeanX.Taboo:
-        $ JeanX.DrainWord("tabno")
-    $ JeanX.DrainWord("no titjob")
-    $ JeanX.RecentActions.append("titjob")
-    $ JeanX.DailyActions.append("titjob")
+    if character.Taboo:
+        $ character.DrainWord("tabno")
+    $ character.DrainWord("no titjob")
+    $ character.RecentActions.append("titjob")
+    $ character.DailyActions.append("titjob")
 
 label Jean_TJ_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(JeanX)
+        call Shift_Focus(character)
         call Jean_TJ_Launch
-        $ JeanX.LustFace()
+        $ character.LustFace()
 
         if  Player.Focus < 100:
                     #Player Command menu
@@ -941,15 +927,15 @@ label Jean_TJ_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "I also want to fondle her breasts." if Trigger2 != "fondle breasts":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                 $ Trigger2 = "fondle breasts"
                                                 "You start to fondle her breasts."
-                                                $ JeanX.Action -= 1
+                                                $ character.Action -= 1
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Shift primary action":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                     menu:
                                                         "How about a blowjob?":
                                                                     $ Situation = "shift"
@@ -962,18 +948,18 @@ label Jean_TJ_Cycle: #Repeating strokes
                                                         "Never Mind":
                                                                 jump Jean_TJ_Cycle
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Threesome actions (locked)" if not Partner:
                                         pass
                                     "Threesome actions" if Partner:
                                         menu:
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(JeanX)
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
+                                            "Ask [character.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
+                                                        call Les_Change(character)
+                                            "Ask [character.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
                                                         pass
                                             "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(JeanX)
+                                                        call Three_Change(character)
 
                                             "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
                                                         $ ThreeCount = 0
@@ -981,7 +967,7 @@ label Jean_TJ_Cycle: #Repeating strokes
                                                         $ ThreeCount = 0
 
                                             "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(JeanX)
+                                                        call Trigger_Swap(character)
                                             "Undress [Partner.Name]":
                                                         call Girl_Undress(Partner)
                                                         jump Jean_TJ_Cycle
@@ -990,12 +976,12 @@ label Jean_TJ_Cycle: #Repeating strokes
                                                         jump Jean_TJ_Cycle
                                             "Never mind":
                                                         jump Jean_TJ_Cycle
-                                    "undress [JeanX.Name]":
-                                            call Girl_Undress(JeanX)
-                                    "Clean up [JeanX.Name] (locked)" if not JeanX.Spunk:
+                                    "undress [character.Name]":
+                                            call Girl_Undress(character)
+                                    "Clean up [character.Name] (locked)" if not character.Spunk:
                                             pass
-                                    "Clean up [JeanX.Name]" if JeanX.Spunk:
-                                            call Girl_Cleanup(JeanX,"ask")
+                                    "Clean up [character.Name]" if character.Spunk:
+                                            call Girl_Cleanup(character,"ask")
                                     "Never mind":
                                             jump Jean_TJ_Cycle
 
@@ -1012,8 +998,8 @@ label Jean_TJ_Cycle: #Repeating strokes
                                     jump Jean_TJ_After
         #End menu (if Line)
 
-        call Shift_Focus(JeanX)
-        call Sex_Dialog(JeanX,Partner)
+        call Shift_Focus(character)
+        call Sex_Dialog(character,Partner)
 
         #If either of you could cum
 
@@ -1021,27 +1007,27 @@ label Jean_TJ_Cycle: #Repeating strokes
         $ Round -= 1
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-        if Player.Focus >= 100 or JeanX.Lust >= 100:
+        if Player.Focus >= 100 or character.Lust >= 100:
                     #If either of you could cum
                     if Player.Focus >= 100:
                             #If you can cum:
-                            call Player_Cumming(JeanX)
-                            if "angry" in JeanX.RecentActions:
+                            call Player_Cumming(character)
+                            if "angry" in character.RecentActions:
                                 call Jean_TJ_Reset
                                 return
-                            $ JeanX.Statup("Lust", 200, 5)
-                            if 100 > JeanX.Lust >= 70 and JeanX.OCount < 2 and JeanX.SEXP >= 20:
-                                $ JeanX.RecentActions.append("unsatisfied")
-                                $ JeanX.DailyActions.append("unsatisfied")
+                            $ character.Statup("Lust", 200, 5)
+                            if 100 > character.Lust >= 70 and character.OCount < 2 and character.SEXP >= 20:
+                                $ character.RecentActions.append("unsatisfied")
+                                $ character.DailyActions.append("unsatisfied")
 
                             if Player.Focus > 80:
                                 jump Jean_TJ_After
                             $ Line = "came"
 
-                    if JeanX.Lust >= 100:
+                    if character.Lust >= 100:
                             #If Jean can cum
-                            call Girl_Cumming(JeanX)
-                            if Situation == "shift" or "angry" in JeanX.RecentActions:
+                            call Girl_Cumming(character)
+                            if Situation == "shift" or "angry" in character.RecentActions:
                                 jump Jean_TJ_After
 
                     if Line == "came": #ex Player.Focus <= 20:
@@ -1051,8 +1037,8 @@ label Jean_TJ_Cycle: #Repeating strokes
                                 "You're emptied out, you should probably take a break."
 
 
-                            if "unsatisfied" in JeanX.RecentActions:#And Jean is unsatisfied,
-                                "[JeanX.Name] still seems a bit unsatisfied with the experience."
+                            if "unsatisfied" in character.RecentActions:#And Jean is unsatisfied,
+                                "[character.Name] still seems a bit unsatisfied with the experience."
                                 menu:
                                     "Finish her?"
                                     "Yes, keep going for a bit.":
@@ -1069,16 +1055,16 @@ label Jean_TJ_Cycle: #Repeating strokes
 
         $ Player.Focus -= 10 if Player.FocusX and Player.Focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if character.SEXP >= 100 or ApprovalCheck(character, 1200, "LO"):
                 pass
-        elif Cnt == (5 + JeanX.Tit):
-                $ JeanX.Brows = "confused"
+        elif Cnt == (5 + character.Tit):
+                $ character.Brows = "confused"
                 ch_j "Hey, how you doing up there? About done?"
-        if Cnt == (10 + JeanX.Tit):
-                $ JeanX.Brows = "angry"
+        if Cnt == (10 + character.Tit):
+                $ character.Brows = "angry"
                 menu:
                     ch_j "Ok, seriously, can't we do something else?"
-                    "How about a BJ?" if JeanX.Action and MultiAction:
+                    "How about a BJ?" if character.Action and MultiAction:
                         $ Situation = "shift"
                         call Jean_TJ_After
                         call Jean_Blowjob
@@ -1094,58 +1080,58 @@ label Jean_TJ_Cycle: #Repeating strokes
                         $ Situation = "shift"
                         jump Jean_TJ_After
                     "No, get back down there.":
-                        if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
-                            $ JeanX.Statup("Love", 200, -5)
-                            $ JeanX.Statup("Obed", 50, 3)
-                            $ JeanX.Statup("Obed", 80, 2)
+                        if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
+                            $ character.Statup("Love", 200, -5)
+                            $ character.Statup("Obed", 50, 3)
+                            $ character.Statup("Obed", 80, 2)
                             "She grumbles but gets back to work."
                         else:
-                            $ JeanX.FaceChange("angry", 1)
+                            $ character.FaceChange("angry", 1)
                             "She scowls at you, drops you cock and pulls back."
                             ch_j "Well fuck you then."
-                            $ JeanX.Statup("Love", 50, -3, 1)
-                            $ JeanX.Statup("Love", 80, -4, 1)
-                            $ JeanX.Statup("Obed", 30, -1, 1)
-                            $ JeanX.Statup("Obed", 50, -1, 1)
-                            $ JeanX.RecentActions.append("angry")
-                            $ JeanX.DailyActions.append("angry")
+                            $ character.Statup("Love", 50, -3, 1)
+                            $ character.Statup("Love", 80, -4, 1)
+                            $ character.Statup("Obed", 30, -1, 1)
+                            $ character.Statup("Obed", 50, -1, 1)
+                            $ character.RecentActions.append("angry")
+                            $ character.DailyActions.append("angry")
                             jump Jean_TJ_After
             #End Count check
 
-        call Escalation(JeanX) #sees if she wants to escalate things
+        call Escalation(character) #sees if she wants to escalate things
 
         if Round == 10:
-                call Sex_Basic_Dialog(JeanX,10) #"You might want to wrap this up, it's getting late."
+                call Sex_Basic_Dialog(character,10) #"You might want to wrap this up, it's getting late."
         elif Round == 5:
-                call Sex_Basic_Dialog(JeanX,5)   #"Seriously, it'll be time to stop soon."
+                call Sex_Basic_Dialog(character,5)   #"Seriously, it'll be time to stop soon."
 
     #Round = 0 loop breaks
-    $ JeanX.FaceChange("bemused", 0)
+    $ character.FaceChange("bemused", 0)
     $ Line = 0
-    call Sex_Basic_Dialog(JeanX,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
+    call Sex_Basic_Dialog(character,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
 
 label Jean_TJ_After:
-    $ JeanX.FaceChange("sexy")
+    $ character.FaceChange("sexy")
 
-    $ JeanX.Tit += 1
-    $ JeanX.Action -=1
-    $ JeanX.Addictionrate += 1
+    $ character.Tit += 1
+    $ character.Action -=1
+    $ character.Addictionrate += 1
     if "addictive" in Player.Traits:
-        $ JeanX.Addictionrate += 1
+        $ character.Addictionrate += 1
 
-    call Partner_Like(JeanX,4)
+    call Partner_Like(character,4)
 
-    if JeanX.Tit > 5:
+    if character.Tit > 5:
         pass
-    elif JeanX.Tit == 1:
-        $ JeanX.SEXP += 12
-        if JeanX.Love >= 500:
-            $ JeanX.Mouth = "smile"
+    elif character.Tit == 1:
+        $ character.SEXP += 12
+        if character.Love >= 500:
+            $ character.Mouth = "smile"
             ch_j "OK, that was fun."
         elif Player.Focus <= 20:
-            $ JeanX.Mouth = "sad"
+            $ character.Mouth = "sad"
             ch_j "I hope that worked out for you. . ."
-    elif JeanX.Tit == 5:
+    elif character.Tit == 5:
             ch_j "Fun, right?"
 
     $ temp_modifier = 0
@@ -1157,99 +1143,99 @@ label Jean_TJ_After:
     call Checkout
     return
 
-## end JeanX.Titjob //////////////////////////////////////////////////////////////////////
+## end character.Titjob //////////////////////////////////////////////////////////////////////
 
 
 
-# JeanX.Blowjob //////////////////////////////////////////////////////////////////////
+# character.Blowjob //////////////////////////////////////////////////////////////////////
 
 label Jean_Blowjob:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JeanX)
-    if JeanX.Blow >= 7: # She loves it
+    call Shift_Focus(character)
+    if character.Blow >= 7: # She loves it
         $ temp_modifier += 15
-    elif JeanX.Blow >= 3: #You've done it before several times
+    elif character.Blow >= 3: #You've done it before several times
         $ temp_modifier += 10
-    elif JeanX.Blow: #You've done it before
+    elif character.Blow: #You've done it before
         $ temp_modifier += 7
 
-    if JeanX.Addict >= 75 and JeanX.Swallow >=3: #She's really strung out and has swallowed
+    if character.Addict >= 75 and character.Swallow >=3: #She's really strung out and has swallowed
         $ temp_modifier += 25
-    elif JeanX.Addict >= 75: #She's really strung out
+    elif character.Addict >= 75: #She's really strung out
         $ temp_modifier += 15
 
     if Situation == "shift":
         $ temp_modifier += 15
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in character.Traits:
         $ temp_modifier += (4*Taboo)
-    if JeanX in Player.Harem or "sex friend" in JeanX.Petnames:
+    if character in Player.Harem or "sex friend" in character.Petnames:
         $ temp_modifier += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in character.Traits:
         $ temp_modifier -= 40
-    if JeanX.ForcedCount and not JeanX.Forced:
-        $ temp_modifier -= 5 * JeanX.ForcedCount
+    if character.ForcedCount and not character.Forced:
+        $ temp_modifier -= 5 * character.ForcedCount
 
-    if JeanX.Taboo and "tabno" in JeanX.DailyActions:
+    if character.Taboo and "tabno" in character.DailyActions:
         $ temp_modifier -= 10
 
-    if "no blow" in JeanX.DailyActions:
+    if "no blow" in character.DailyActions:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no blow" in JeanX.RecentActions else 0
+        $ temp_modifier -= 10 if "no blow" in character.RecentActions else 0
 
-    $ Approval = ApprovalCheck(JeanX, 1300, TabM = 4) # 130, 145, 160, Taboo -160(290)
+    $ Approval = ApprovalCheck(character, 1300, TabM = 4) # 130, 145, 160, Taboo -160(290)
 
-    if not JeanX.Blow and "no blow" not in JeanX.RecentActions:
-        $ JeanX.FaceChange("surprised", 2)
-        $ JeanX.Mouth = "kiss"
+    if not character.Blow and "no blow" not in character.RecentActions:
+        $ character.FaceChange("surprised", 2)
+        $ character.Mouth = "kiss"
         ch_j "Oh! You want me to suck you off?"
 
-    if not JeanX.Blow and Approval:                                                 #First time dialog
-        if JeanX.Forced:
-            $ JeanX.FaceChange("sad")
-            $ JeanX.Statup("Love", 70, -3, 1)
-            $ JeanX.Statup("Love", 20, -2, 1)
-        elif JeanX.Love >= (JeanX.Obed + JeanX.Inbt - JeanX.IX):
-            $ JeanX.FaceChange("sexy")
-            $ JeanX.Brows = "sad"
-            $ JeanX.Mouth = "smile"
+    if not character.Blow and Approval:                                                 #First time dialog
+        if character.Forced:
+            $ character.FaceChange("sad")
+            $ character.Statup("Love", 70, -3, 1)
+            $ character.Statup("Love", 20, -2, 1)
+        elif character.Love >= (character.Obed + character.Inbt - character.IX):
+            $ character.FaceChange("sexy")
+            $ character.Brows = "sad"
+            $ character.Mouth = "smile"
             ch_j "Well, I could hardly turn down that offer. . ."
-        elif JeanX.Obed >= (JeanX.Inbt - JeanX.IX):
-            $ JeanX.FaceChange("normal")
+        elif character.Obed >= (character.Inbt - character.IX):
+            $ character.FaceChange("normal")
             ch_j "I could do that, I guess. . ."
-        elif JeanX.Addict >= 50:
-            $ JeanX.FaceChange("manic", 1)
+        elif character.Addict >= 50:
+            $ character.FaceChange("manic", 1)
             ch_j "Mmmmm. . ."
         else: # Uninhibited
-            $ JeanX.FaceChange("sad")
-            $ JeanX.Mouth = "smile"
+            $ character.FaceChange("sad")
+            $ character.Mouth = "smile"
             ch_j "Huh. . ."
     elif Approval:                                                                       #Second time+ dialog
-        if JeanX.Forced:
-            $ JeanX.FaceChange("sad")
-            $ JeanX.Statup("Love", 70, -3, 1)
-            $ JeanX.Statup("Love", 20, -2, 1)
+        if character.Forced:
+            $ character.FaceChange("sad")
+            $ character.Statup("Love", 70, -3, 1)
+            $ character.Statup("Love", 20, -2, 1)
             ch_j "Again?"
-        elif not JeanX.Taboo and "tabno" in JeanX.DailyActions:
+        elif not character.Taboo and "tabno" in character.DailyActions:
             ch_j "Hmm, this is private enough. . ."
-        elif "blow" in JeanX.RecentActions:
-            $ JeanX.FaceChange("sexy", 1)
+        elif "blow" in character.RecentActions:
+            $ character.FaceChange("sexy", 1)
             ch_j "Mmm, again?"
             jump Jean_BJ_Prep
-        elif "blow" in JeanX.DailyActions:
-            $ JeanX.FaceChange("sexy", 1)
+        elif "blow" in character.DailyActions:
+            $ character.FaceChange("sexy", 1)
             $ Line = renpy.random.choice(["Back again so soon?",
                 "You're wearing me out here.",
                 "I must be too good at this.",
                 "Didn't get enough earlier?"])
             ch_j "[Line]"
-        elif JeanX.Blow < 3:
-            $ JeanX.FaceChange("sexy", 1)
-            $ JeanX.Brows = "confused"
-            $ JeanX.Mouth = "kiss"
+        elif character.Blow < 3:
+            $ character.FaceChange("sexy", 1)
+            $ character.Brows = "confused"
+            $ character.Mouth = "kiss"
             ch_j "You'd like another blowjob?"
         else:
-            $ JeanX.FaceChange("sexy", 1)
-            $ JeanX.ArmPose = 2
+            $ character.FaceChange("sexy", 1)
+            $ character.ArmPose = 2
             $ Line = renpy.random.choice(["You want me to [mimes blowing]?",
                 "So you want another blowjob?",
                 "You want me to lick you?",
@@ -1259,17 +1245,17 @@ label Jean_Blowjob:
         $ Line = 0
 
     if Approval >= 2:                                                                   #She's into it. . .
-        if JeanX.Forced:
-            $ JeanX.FaceChange("sad")
-            $ JeanX.Statup("Obed", 90, 1)
-            $ JeanX.Statup("Inbt", 60, 1)
+        if character.Forced:
+            $ character.FaceChange("sad")
+            $ character.Statup("Obed", 90, 1)
+            $ character.Statup("Inbt", 60, 1)
             ch_j "Fine, let's get this over with."
-        elif "no blow" in JeanX.DailyActions:
+        elif "no blow" in character.DailyActions:
             ch_j "Fine. . ."
         else:
-            $ JeanX.FaceChange("sexy", 1)
-            $ JeanX.Statup("Love", 90, 1)
-            $ JeanX.Statup("Inbt", 50, 3)
+            $ character.FaceChange("sexy", 1)
+            $ character.Statup("Love", 90, 1)
+            $ character.Statup("Inbt", 50, 3)
             $ Line = renpy.random.choice(["Sure. Ahhhhhh.",
                 "Well. . . alright.",
                 "Yum.",
@@ -1278,51 +1264,51 @@ label Jean_Blowjob:
                 "Alright, let's see it."])
             ch_j "[Line]"
             $ Line = 0
-        $ JeanX.Statup("Obed", 20, 1)
-        $ JeanX.Statup("Obed", 70, 1)
-        $ JeanX.Statup("Inbt", 80, 2)
+        $ character.Statup("Obed", 20, 1)
+        $ character.Statup("Obed", 70, 1)
+        $ character.Statup("Inbt", 80, 2)
         jump Jean_BJ_Prep
 
     else:                                                                               #She's not into it, but maybe. . .
-        $ JeanX.FaceChange("angry")
-        if "no blow" in JeanX.RecentActions:
-            ch_j "Just told you I wouldn't, [JeanX.Petname]."
-        elif JeanX.Taboo and "tabno" in JeanX.DailyActions and "no blow" in JeanX.DailyActions:
+        $ character.FaceChange("angry")
+        if "no blow" in character.RecentActions:
+            ch_j "Just told you I wouldn't, [character.Petname]."
+        elif character.Taboo and "tabno" in character.DailyActions and "no blow" in character.DailyActions:
             ch_j "Like I said, not in public."
-        elif "no blow" in JeanX.DailyActions:
-            ch_j "Told you \"no,\" [JeanX.Petname]."
-        elif JeanX.Taboo and "tabno" in JeanX.DailyActions:
+        elif "no blow" in character.DailyActions:
+            ch_j "Told you \"no,\" [character.Petname]."
+        elif character.Taboo and "tabno" in character.DailyActions:
             ch_j "Like I said, too public!"
-        elif not JeanX.Blow:
-            $ JeanX.FaceChange("bemused")
-            ch_j "I have been wondering what you taste like, [JeanX.Petname]. . ."
+        elif not character.Blow:
+            $ character.FaceChange("bemused")
+            ch_j "I have been wondering what you taste like, [character.Petname]. . ."
         else:
-            $ JeanX.FaceChange("bemused")
-            ch_j "I don't know, [JeanX.Petname]. . ."
+            $ character.FaceChange("bemused")
+            ch_j "I don't know, [character.Petname]. . ."
         menu:
             extend ""
-            "Sorry, never mind." if "no blow" in JeanX.DailyActions:
-                $ JeanX.FaceChange("bemused")
+            "Sorry, never mind." if "no blow" in character.DailyActions:
+                $ character.FaceChange("bemused")
                 ch_j "Ok then."
                 return
-            "Maybe later?" if "no blow" not in JeanX.DailyActions:
-                $ JeanX.FaceChange("sexy")
-                ch_j "Sure, whatever, [JeanX.Petname]."
-                $ JeanX.Statup("Love", 80, 2)
-                $ JeanX.Statup("Inbt", 70, 2)
-                if JeanX.Taboo:
-                    $ JeanX.RecentActions.append("tabno")
-                    $ JeanX.DailyActions.append("tabno")
-                $ JeanX.RecentActions.append("no blow")
-                $ JeanX.DailyActions.append("no blow")
+            "Maybe later?" if "no blow" not in character.DailyActions:
+                $ character.FaceChange("sexy")
+                ch_j "Sure, whatever, [character.Petname]."
+                $ character.Statup("Love", 80, 2)
+                $ character.Statup("Inbt", 70, 2)
+                if character.Taboo:
+                    $ character.RecentActions.append("tabno")
+                    $ character.DailyActions.append("tabno")
+                $ character.RecentActions.append("no blow")
+                $ character.DailyActions.append("no blow")
                 return
             "Come on, please?":
                 if Approval:
-                    $ JeanX.FaceChange("sexy")
-                    $ JeanX.Statup("Obed", 90, 2)
-                    $ JeanX.Statup("Obed", 50, 2)
-                    $ JeanX.Statup("Inbt", 70, 3)
-                    $ JeanX.Statup("Inbt", 40, 2)
+                    $ character.FaceChange("sexy")
+                    $ character.Statup("Obed", 90, 2)
+                    $ character.Statup("Obed", 50, 2)
+                    $ character.Statup("Inbt", 70, 3)
+                    $ character.Statup("Inbt", 40, 2)
                     $ Line = renpy.random.choice(["Sure. Ahhhhhh.",
                         "Well. . . alright.",
                         "Yum.",
@@ -1333,90 +1319,90 @@ label Jean_Blowjob:
                     $ Line = 0
                     jump Jean_BJ_Prep
                 else:
-                    if ApprovalCheck(JeanX, 1100, TabM = 3): # 110, 125, 140, Taboo -120(230)             Handy instead?
-                        $ JeanX.Statup("Inbt", 80, 1)
-                        $ JeanX.Statup("Inbt", 60, 3)
-                        $ JeanX.FaceChange("confused", 1)
-                        $ JeanX.Arms = 1
-                        if "psysex" in JeanX.History:
+                    if ApprovalCheck(character, 1100, TabM = 3): # 110, 125, 140, Taboo -120(230)             Handy instead?
+                        $ character.Statup("Inbt", 80, 1)
+                        $ character.Statup("Inbt", 60, 3)
+                        $ character.FaceChange("confused", 1)
+                        $ character.Arms = 1
+                        if "psysex" in character.History:
                             ch_j "Couldn't I just do the mind thing again?"
-                            $ JeanX.FaceChange("sly", 1)
+                            $ character.FaceChange("sly", 1)
                             ch_j "You seemed to enjoy that one. . ."
                         else:
                             ch_j "What if I just used my telekinesis?"
-                            $ JeanX.FaceChange("confused", 1)
+                            $ character.FaceChange("confused", 1)
                             ch_j "It would feel great, I promise. . ."
                         menu:
                             extend ""
                             "Sure, that's fine.":
-                                $ JeanX.Statup("Love", 80, 2)
-                                $ JeanX.Statup("Inbt", 60, 1)
-                                $ JeanX.Statup("Obed", 50, 1)
+                                $ character.Statup("Love", 80, 2)
+                                $ character.Statup("Inbt", 60, 1)
+                                $ character.Statup("Obed", 50, 1)
                                 jump Jean_PJ_Prep
                             "Nah, if it's not a BJ, forget it.":
-                                $ JeanX.Statup("Love", 200, -2)
-                                $ JeanX.Arms = 0
+                                $ character.Statup("Love", 200, -2)
+                                $ character.Arms = 0
                                 ch_j "too bad then."
-                                $ JeanX.Statup("Obed", 70, 2)
+                                $ character.Statup("Obed", 70, 2)
 
 
-            "Suck it, [JeanX.Pet]":                                               # Pressured into it
-                $ JeanX.NameCheck() #checks reaction to petname
-                $ Approval = ApprovalCheck(JeanX, 750, "OI", TabM = 3) # 75, 90, 105, -120(195)
-                if Approval > 1 or (Approval and JeanX.Forced):
-                    $ JeanX.FaceChange("angry",2)
-                    $ JeanX.Statup("Love", 70, -5, 1)
-                    $ JeanX.Statup("Love", 200, -2)
-                    ch_j ". . ."
-                    $ JeanX.FaceChange("angry",1,Eyes="side")
+            "Suck it, [character.Pet]":                                               # Pressured into it
+                $ character.NameCheck() #checks reaction to petname
+                $ Approval = ApprovalCheck(character, 750, "OI", TabM = 3) # 75, 90, 105, -120(195)
+                if Approval > 1 or (Approval and character.Forced):
+                    $ character.FaceChange("angry",2)
+                    $ character.Statup("Love", 70, -5, 1)
+                    $ character.Statup("Love", 200, -2)
+
+                    $ character.FaceChange("angry",1,Eyes="side")
                     ch_j "Whatever. . ."
-                    $ JeanX.Statup("Obed", 50, 4)
-                    $ JeanX.Statup("Inbt", 80, 1)
-                    $ JeanX.Statup("Inbt", 60, 3)
-                    $ JeanX.Forced = 1
+                    $ character.Statup("Obed", 50, 4)
+                    $ character.Statup("Inbt", 80, 1)
+                    $ character.Statup("Inbt", 60, 3)
+                    $ character.Forced = 1
                     jump Jean_BJ_Prep
                 else:
-                    $ JeanX.Statup("Love", 200, -15)
-                    $ JeanX.RecentActions.append("angry")
-                    $ JeanX.DailyActions.append("angry")
+                    $ character.Statup("Love", 200, -15)
+                    $ character.RecentActions.append("angry")
+                    $ character.DailyActions.append("angry")
 
     #She refused all offers.
-    if "no blow" in JeanX.DailyActions:
-        $ JeanX.FaceChange("angry", 1)
-        $ JeanX.ArmPose = 2
-        ch_j "You want me to make you suck yourself?"
-        $ JeanX.ArmPose = 1
-        $ JeanX.FaceChange("angry",1,Eyes="side")
+    if "no blow" in character.DailyActions:
+        $ character.FaceChange("angry", 1)
+        $ character.ArmPose = 2
+
+        $ character.ArmPose = 1
+        $ character.FaceChange("angry",1,Eyes="side")
         ch_j "Damn. . . forgot I can't do that. . ."
-        $ JeanX.RecentActions.append("angry")
-        $ JeanX.DailyActions.append("angry")
-    elif JeanX.Forced:
-        $ JeanX.FaceChange("angry", 1)
+        $ character.RecentActions.append("angry")
+        $ character.DailyActions.append("angry")
+    elif character.Forced:
+        $ character.FaceChange("angry", 1)
         ch_j "I'm not doing that."
-        $ JeanX.Statup("Lust", 200, 5)
-        if JeanX.Love > 300:
-                $ JeanX.Statup("Love", 70, -2)
-        $ JeanX.Statup("Obed", 50, -2)
-        $ JeanX.RecentActions.append("angry")
-        $ JeanX.DailyActions.append("angry")
-        $ JeanX.RecentActions.append("no blow")
-        $ JeanX.DailyActions.append("no blow")
+        $ character.Statup("Lust", 200, 5)
+        if character.Love > 300:
+                $ character.Statup("Love", 70, -2)
+        $ character.Statup("Obed", 50, -2)
+        $ character.RecentActions.append("angry")
+        $ character.DailyActions.append("angry")
+        $ character.RecentActions.append("no blow")
+        $ character.DailyActions.append("no blow")
         return
-    elif JeanX.Taboo:                             # she refuses and this is too public a place for her
-        $ JeanX.FaceChange("angry", 1)
-        $ JeanX.DailyActions.append("tabno")
+    elif character.Taboo:                             # she refuses and this is too public a place for her
+        $ character.FaceChange("angry", 1)
+        $ character.DailyActions.append("tabno")
         ch_j "I'm not comfortable in public right now. . ."
-        $ JeanX.Statup("Lust", 200, 5)
-        $ JeanX.Statup("Obed", 50, -3)
+        $ character.Statup("Lust", 200, 5)
+        $ character.Statup("Obed", 50, -3)
         return
-    elif JeanX.Blow:
-        $ JeanX.FaceChange("sad")
+    elif character.Blow:
+        $ character.FaceChange("sad")
         ch_j "Nah, not this time."
     else:
-        $ JeanX.FaceChange("smile", 1)
+        $ character.FaceChange("smile", 1)
         ch_j "Ha! Good one."
-    $ JeanX.RecentActions.append("no blow")
-    $ JeanX.DailyActions.append("no blow")
+    $ character.RecentActions.append("no blow")
+    $ character.DailyActions.append("no blow")
     $ temp_modifier = 0
     return
 
@@ -1424,76 +1410,76 @@ label Jean_Blowjob:
 label Jean_BJ_Prep:
     if renpy.showing("Jean_HJ_Animation"):
         hide Jean_HJ_Animation with easeoutbottom
-    if JeanX.Taboo:
-        $ JeanX.Statup("Inbt", 90, int(Taboo/10))
-        $ JeanX.Statup("Lust", 50, int(Taboo/5))
+    if character.Taboo:
+        $ character.Statup("Inbt", 90, int(Taboo/10))
+        $ character.Statup("Lust", 50, int(Taboo/5))
 
-    $ JeanX.FaceChange("sexy")
-    if JeanX.Forced:
-        $ JeanX.FaceChange("sad")
-    elif not JeanX.Blow:
-        $ JeanX.Brows = "confused"
-        $ JeanX.Eyes = "sexy"
-        $ JeanX.Mouth = "smile"
+    $ character.FaceChange("sexy")
+    if character.Forced:
+        $ character.FaceChange("sad")
+    elif not character.Blow:
+        $ character.Brows = "confused"
+        $ character.Eyes = "sexy"
+        $ character.Mouth = "smile"
 
-    call Seen_First_Peen(JeanX,Partner,React=Situation)
+    call Seen_First_Peen(character,Partner,React=Situation)
     call Jean_BJ_Launch("L")
-    if Situation == JeanX:
+    if Situation == character:
             #Jean auto-starts
             $ Situation = 0
-            "[JeanX.Name] slides down and gives your cock a little lick."
+            "[character.Name] slides down and gives your cock a little lick."
             menu:
                 "What do you do?"
                 "Nothing.":
-                    $ JeanX.Statup("Inbt", 80, 3)
-                    $ JeanX.Statup("Inbt", 40, 2)
-                    "[JeanX.Name] continues licking at it."
+                    $ character.Statup("Inbt", 80, 3)
+                    $ character.Statup("Inbt", 40, 2)
+                    "[character.Name] continues licking at it."
                 "Praise her.":
-                    $ JeanX.FaceChange("sexy", 1)
-                    $ JeanX.Statup("Inbt", 80, 3)
-                    ch_p "Hmmm, keep doing that, [JeanX.Pet]."
-                    $ JeanX.NameCheck() #checks reaction to petname
-                    "[JeanX.Name] continues her actions."
-                    $ JeanX.Statup("Love", 85, 1)
-                    $ JeanX.Statup("Obed", 90, 1)
-                    $ JeanX.Statup("Obed", 50, 2)
+                    $ character.FaceChange("sexy", 1)
+                    $ character.Statup("Inbt", 80, 3)
+                    ch_p "Hmmm, keep doing that, [character.Pet]."
+                    $ character.NameCheck() #checks reaction to petname
+                    "[character.Name] continues her actions."
+                    $ character.Statup("Love", 85, 1)
+                    $ character.Statup("Obed", 90, 1)
+                    $ character.Statup("Obed", 50, 2)
                 "Ask her to stop.":
-                    $ JeanX.FaceChange("surprised")
-                    $ JeanX.Statup("Inbt", 70, 1)
-                    ch_p "Let's not do that for now, [JeanX.Pet]."
-                    $ JeanX.NameCheck() #checks reaction to petname
-                    "[JeanX.Name] puts it down."
-                    $ JeanX.Statup("Obed", 90, 1)
-                    $ JeanX.Statup("Obed", 50, 3)
+                    $ character.FaceChange("surprised")
+                    $ character.Statup("Inbt", 70, 1)
+                    ch_p "Let's not do that for now, [character.Pet]."
+                    $ character.NameCheck() #checks reaction to petname
+                    "[character.Name] puts it down."
+                    $ character.Statup("Obed", 90, 1)
+                    $ character.Statup("Obed", 50, 3)
                     $ Player.RecentActions.append("nope")
-                    $ JeanX.AddWord(1,"refused","refused")
+                    $ character.AddWord(1,"refused","refused")
                     return
-    if not JeanX.Blow:
-        if JeanX.Forced:
-            $ JeanX.Statup("Love", 90, -70)
-            $ JeanX.Statup("Obed", 70, 45)
-            $ JeanX.Statup("Inbt", 80, 60)
+    if not character.Blow:
+        if character.Forced:
+            $ character.Statup("Love", 90, -70)
+            $ character.Statup("Obed", 70, 45)
+            $ character.Statup("Inbt", 80, 60)
         else:
-            $ JeanX.Statup("Love", 90, 5)
-            $ JeanX.Statup("Obed", 70, 35)
-            $ JeanX.Statup("Inbt", 80, 40)
+            $ character.Statup("Love", 90, 5)
+            $ character.Statup("Obed", 70, 35)
+            $ character.Statup("Inbt", 80, 40)
 
     if Situation:
         $ renpy.pop_call()
         $ Situation = 0
     $ Line = 0
     $ Cnt = 0
-    if JeanX.Taboo:
-        $ JeanX.DrainWord("tabno")
-    $ JeanX.DrainWord("no blow")
-    $ JeanX.RecentActions.append("blow")
-    $ JeanX.DailyActions.append("blow")
+    if character.Taboo:
+        $ character.DrainWord("tabno")
+    $ character.DrainWord("no blow")
+    $ character.RecentActions.append("blow")
+    $ character.DailyActions.append("blow")
 
 label Jean_BJ_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(JeanX)
+        call Shift_Focus(character)
         call Jean_BJ_Launch
-        $ JeanX.LustFace()
+        $ character.LustFace()
 
         if Player.Focus < 100:
                     #Player Command menu
@@ -1527,26 +1513,26 @@ label Jean_BJ_Cycle: #Repeating strokes
                                 pass
 
                         "Set your own pace. . .":
-                                "[JeanX.Name] hums contentedly."
-                                if "setpace" not in JeanX.RecentActions:
-                                    $ JeanX.Statup("Love", 80, 2)
+                                "[character.Name] hums contentedly."
+                                if "setpace" not in character.RecentActions:
+                                    $ character.Statup("Love", 80, 2)
                                 $ D20 = renpy.random.randint(1, 20)
-                                if JeanX.Blow < 5:
+                                if character.Blow < 5:
                                     $ D20 -= 10
-                                elif JeanX.Blow < 10:
+                                elif character.Blow < 10:
                                     $ D20 -= 5
 
                                 if D20 > 15:
                                     call Speed_Shift(4)
-                                    if "setpace" not in JeanX.RecentActions:
-                                        $ JeanX.Statup("Inbt", 80, 3)
+                                    if "setpace" not in character.RecentActions:
+                                        $ character.Statup("Inbt", 80, 3)
                                 elif D20 > 10:
                                     call Speed_Shift(3)
                                 elif D20 > 5:
                                     call Speed_Shift(2)
                                 else:
                                     call Speed_Shift(1)
-                                $ JeanX.RecentActions.append("setpace")
+                                $ character.RecentActions.append("setpace")
 
                         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
                                     pass
@@ -1560,15 +1546,15 @@ label Jean_BJ_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "I also want to fondle her breasts." if Trigger2 != "fondle breasts":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                 $ Trigger2 = "fondle breasts"
                                                 "You start to fondle her breasts."
-                                                $ JeanX.Action -= 1
+                                                $ character.Action -= 1
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Shift primary action":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                     menu:
                                                         "How about a handy?":
                                                                     $ Situation = "shift"
@@ -1581,18 +1567,18 @@ label Jean_BJ_Cycle: #Repeating strokes
                                                         "Never Mind":
                                                                 jump Jean_BJ_Cycle
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Threesome actions (locked)" if not Partner:
                                         pass
                                     "Threesome actions" if Partner:
                                         menu:
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(JeanX)
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
+                                            "Ask [character.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
+                                                        call Les_Change(character)
+                                            "Ask [character.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
                                                         pass
                                             "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(JeanX)
+                                                        call Three_Change(character)
 
                                             "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
                                                         $ ThreeCount = 0
@@ -1600,7 +1586,7 @@ label Jean_BJ_Cycle: #Repeating strokes
                                                         $ ThreeCount = 0
 
                                             "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(JeanX)
+                                                        call Trigger_Swap(character)
                                             "Undress [Partner.Name]":
                                                         call Girl_Undress(Partner)
                                                         jump Jean_BJ_Cycle
@@ -1609,12 +1595,12 @@ label Jean_BJ_Cycle: #Repeating strokes
                                                         jump Jean_BJ_Cycle
                                             "Never mind":
                                                         jump Jean_BJ_Cycle
-                                    "undress [JeanX.Name]":
-                                            call Girl_Undress(JeanX)
-                                    "Clean up [JeanX.Name] (locked)" if not JeanX.Spunk:
+                                    "undress [character.Name]":
+                                            call Girl_Undress(character)
+                                    "Clean up [character.Name] (locked)" if not character.Spunk:
                                             pass
-                                    "Clean up [JeanX.Name]" if JeanX.Spunk:
-                                            call Girl_Cleanup(JeanX,"ask")
+                                    "Clean up [character.Name]" if character.Spunk:
+                                            call Girl_Cleanup(character,"ask")
                                     "Never mind":
                                             jump Jean_BJ_Cycle
 
@@ -1631,8 +1617,8 @@ label Jean_BJ_Cycle: #Repeating strokes
                                     jump Jean_BJ_After
         #End menu (if Line)
 
-        call Shift_Focus(JeanX)
-        call Sex_Dialog(JeanX,Partner)
+        call Shift_Focus(character)
+        call Sex_Dialog(character,Partner)
 
         #If either of you could cum
 
@@ -1643,27 +1629,27 @@ label Jean_BJ_Cycle: #Repeating strokes
             $ Player.Spunk = 0 if Player.Spunk else Player.Spunk #cleans you off after one cycle
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-        if Player.Focus >= 100 or JeanX.Lust >= 100:
+        if Player.Focus >= 100 or character.Lust >= 100:
                     #If either of you could cum
                     if Player.Focus >= 100:
                             #If you can cum:
-                            call Player_Cumming(JeanX)
-                            if "angry" in JeanX.RecentActions:
+                            call Player_Cumming(character)
+                            if "angry" in character.RecentActions:
                                 call Jean_BJ_Reset
                                 return
-                            $ JeanX.Statup("Lust", 200, 5)
-                            if 100 > JeanX.Lust >= 70 and JeanX.OCount < 2 and JeanX.SEXP >= 20:
-                                $ JeanX.RecentActions.append("unsatisfied")
-                                $ JeanX.DailyActions.append("unsatisfied")
+                            $ character.Statup("Lust", 200, 5)
+                            if 100 > character.Lust >= 70 and character.OCount < 2 and character.SEXP >= 20:
+                                $ character.RecentActions.append("unsatisfied")
+                                $ character.DailyActions.append("unsatisfied")
 
                             if Player.Focus > 80:
                                 jump Jean_BJ_After
                             $ Line = "came"
 
-                    if JeanX.Lust >= 100:
+                    if character.Lust >= 100:
                             #If Jean can cum
-                            call Girl_Cumming(JeanX)
-                            if Situation == "shift" or "angry" in JeanX.RecentActions:
+                            call Girl_Cumming(character)
+                            if Situation == "shift" or "angry" in character.RecentActions:
                                 jump Jean_BJ_After
 
                     if Line == "came": #ex Player.Focus <= 20:
@@ -1672,8 +1658,8 @@ label Jean_BJ_Cycle: #Repeating strokes
                             if not Player.Semen:
                                 "You're emptied out, you should probably take a break."
 
-                            if "unsatisfied" in JeanX.RecentActions:#And Jean is unsatisfied,
-                                "[JeanX.Name] still seems a bit unsatisfied with the experience."
+                            if "unsatisfied" in character.RecentActions:#And Jean is unsatisfied,
+                                "[character.Name] still seems a bit unsatisfied with the experience."
                                 menu:
                                     "Finish her?"
                                     "Yes, keep going for a bit.":
@@ -1688,13 +1674,13 @@ label Jean_BJ_Cycle: #Repeating strokes
 
         $ Player.Focus -= 12 if Player.FocusX and Player.Focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if character.SEXP >= 100 or ApprovalCheck(character, 1200, "LO"):
             pass
-        elif Cnt == (10 + JeanX.Blow):
-                $ JeanX.Brows = "angry"
+        elif Cnt == (10 + character.Blow):
+                $ character.Brows = "angry"
                 menu:
                     ch_j "Ok, that's enough of that. Can we do something else?"
-                    "How about a Handy?" if JeanX.Action and MultiAction:
+                    "How about a Handy?" if character.Action and MultiAction:
                             $ Situation = "shift"
                             call Jean_BJ_After
                             call Jean_Handjob
@@ -1710,88 +1696,88 @@ label Jean_BJ_Cycle: #Repeating strokes
                             $ Situation = "shift"
                             jump Jean_BJ_After
                     "No, get back down there.":
-                            if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
-                                $ JeanX.Statup("Love", 200, -5)
-                                $ JeanX.Statup("Obed", 50, 3)
-                                $ JeanX.Statup("Obed", 80, 2)
+                            if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
+                                $ character.Statup("Love", 200, -5)
+                                $ character.Statup("Obed", 50, 3)
+                                $ character.Statup("Obed", 80, 2)
                                 "She grumbles but gets back to work."
                             else:
-                                $ JeanX.FaceChange("angry", 1)
+                                $ character.FaceChange("angry", 1)
                                 "She scowls at you, drops you cock and pulls back."
                                 ch_j "Ok, have fun with that then."
-                                $ JeanX.Statup("Love", 50, -3, 1)
-                                $ JeanX.Statup("Love", 80, -4, 1)
-                                $ JeanX.Statup("Obed", 30, -1, 1)
-                                $ JeanX.Statup("Obed", 50, -1, 1)
-                                $ JeanX.RecentActions.append("angry")
-                                $ JeanX.DailyActions.append("angry")
+                                $ character.Statup("Love", 50, -3, 1)
+                                $ character.Statup("Love", 80, -4, 1)
+                                $ character.Statup("Obed", 30, -1, 1)
+                                $ character.Statup("Obed", 50, -1, 1)
+                                $ character.RecentActions.append("angry")
+                                $ character.DailyActions.append("angry")
                                 jump Jean_BJ_After
-        elif Cnt == (5 + JeanX.Blow) and JeanX.SEXP <= 100 and not ApprovalCheck(JeanX, 1200, "LO"):
-                    $ JeanX.Brows = "confused"
+        elif Cnt == (5 + character.Blow) and character.SEXP <= 100 and not ApprovalCheck(character, 1200, "LO"):
+                    $ character.Brows = "confused"
                     ch_j "Hey, you about done up there?"
         #End Count check
 
-        call Escalation(JeanX) #sees if she wants to escalate things
+        call Escalation(character) #sees if she wants to escalate things
 
         if Round == 10:
-                call Sex_Basic_Dialog(JeanX,10) #"You might want to wrap this up, it's getting late."
+                call Sex_Basic_Dialog(character,10) #"You might want to wrap this up, it's getting late."
         elif Round == 5:
-                call Sex_Basic_Dialog(JeanX,5)   #"Seriously, it'll be time to stop soon."
+                call Sex_Basic_Dialog(character,5)   #"Seriously, it'll be time to stop soon."
 
     #Round = 0 loop breaks
-    $ JeanX.FaceChange("bemused", 0)
+    $ character.FaceChange("bemused", 0)
     $ Line = 0
-    call Sex_Basic_Dialog(JeanX,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
+    call Sex_Basic_Dialog(character,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
 
 label Jean_BJ_After:
-    $ JeanX.FaceChange("sexy")
+    $ character.FaceChange("sexy")
 
-    $ JeanX.Blow += 1
-    $ JeanX.Action -=1
-    $ JeanX.Addictionrate += 1
+    $ character.Blow += 1
+    $ character.Action -=1
+    $ character.Addictionrate += 1
     if "addictive" in Player.Traits:
-        $ JeanX.Addictionrate += 1
+        $ character.Addictionrate += 1
 
-    call Partner_Like(JeanX,2)
+    call Partner_Like(character,2)
 
     if "Jean Jobber" in Achievements:
         pass
-    elif JeanX.Blow >= 10:
-        $ JeanX.FaceChange("confused", 1,Eyes="side")
+    elif character.Blow >= 10:
+        $ character.FaceChange("confused", 1,Eyes="side")
         ch_j "Wow, you know. . . I don't always love this. . ."
-        $ JeanX.FaceChange("smile", 2)
+        $ character.FaceChange("smile", 2)
         ch_j "but I guess with you it's different somehow. . ."
-        $ JeanX.Blush = 1
+        $ character.Blush = 1
         $ Achievements.append("Jean Jobber")
-        $JeanX.SEXP += 5
+        $character.SEXP += 5
     elif Situation == "shift":
         pass
-    elif JeanX.Blow == 1:
-            $JeanX.SEXP += 15
-            if JeanX.Love >= 500:
-                $ JeanX.Mouth = "smile"
+    elif character.Blow == 1:
+            $character.SEXP += 15
+            if character.Love >= 500:
+                $ character.Mouth = "smile"
                 ch_j "Mmm, yeah, that was as good as I expected. . ."
             elif Player.Focus <= 20:
-                $ JeanX.Mouth = "sad"
+                $ character.Mouth = "sad"
                 ch_j "Well, got what you wanted from that?"
-    elif JeanX.Blow == 5:
+    elif character.Blow == 5:
         ch_j "I am loving this. You too, right?"
         menu:
             "[[nod]":
-                $ JeanX.FaceChange("smile", 1)
-                $ JeanX.Statup("Love", 90, 15)
-                $ JeanX.Statup("Obed", 80, 5)
-                $ JeanX.Statup("Inbt", 90, 10)
+                $ character.FaceChange("smile", 1)
+                $ character.Statup("Love", 90, 15)
+                $ character.Statup("Obed", 80, 5)
+                $ character.Statup("Inbt", 90, 10)
             "[[shake head \"no\"]":
-                if ApprovalCheck(JeanX, 500, "O"):
-                    $ JeanX.FaceChange("sad", 2)
-                    $ JeanX.Statup("Love", 200, -5)
+                if ApprovalCheck(character, 500, "O"):
+                    $ character.FaceChange("sad", 2)
+                    $ character.Statup("Love", 200, -5)
                 else:
-                    $ JeanX.FaceChange("angry", 2)
-                    $ JeanX.Statup("Love", 200, -25)
-                $ JeanX.Statup("Obed", 80, 10)
+                    $ character.FaceChange("angry", 2)
+                    $ character.Statup("Love", 200, -25)
+                $ character.Statup("Obed", 80, 10)
                 ch_j ". . ."
-                $ JeanX.FaceChange("angry", 1)
+                $ character.FaceChange("angry", 1)
 
     $ temp_modifier = 0
     if Situation != "shift":
@@ -1801,14 +1787,14 @@ label Jean_BJ_After:
 
 
 
-# end JeanX.Blowjob                                 //////////////////////////////////////////////////////////////////////////////
+# end character.Blowjob                                 //////////////////////////////////////////////////////////////////////////////
 
 # ////////////////////////////////////////////////////////////////////////Start Insert Pussy
 label Jean_Dildo_Check:
     if "dildo" in Player.Inventory:
         "You pull out a large rubber dildo. Lucky you remembered to keep it handy."
-    elif "dildo" in JeanX.Inventory:
-        "You ask [JeanX.Name] to get out her favorite Dildo."
+    elif "dildo" in character.Inventory:
+        "You ask [character.Name] to get out her favorite Dildo."
     else:
         "You don't have one of those on you."
         return 0
@@ -1821,79 +1807,79 @@ label Jean_Dildo_Pussy:
     return
 
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JeanX)
+    call Shift_Focus(character)
     call Jean_Dildo_Check
     if not _return:
         return
 
-    if JeanX.DildoP: #You've done it before
+    if character.DildoP: #You've done it before
         $ temp_modifier += 15
-    if JeanX.Legs == "pants:": # she's got pants on.
+    if character.Legs == "pants:": # she's got pants on.
         $ temp_modifier -= 20
 
-    if JeanX.Lust > 95:
+    if character.Lust > 95:
         $ temp_modifier += 20
-    elif JeanX.Lust > 85: #She's really horny
+    elif character.Lust > 85: #She's really horny
         $ temp_modifier += 15
 
     if Situation == "shift":
         $ temp_modifier += 10
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in character.Traits:
         $ temp_modifier += (5*Taboo)
-    if JeanX in Player.Harem or "sex friend" in JeanX.Petnames:
+    if character in Player.Harem or "sex friend" in character.Petnames:
         $ temp_modifier += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in character.Traits:
         $ temp_modifier -= 40
-    if JeanX.ForcedCount and not JeanX.Forced:
-        $ temp_modifier -= 5 * JeanX.ForcedCount
+    if character.ForcedCount and not character.Forced:
+        $ temp_modifier -= 5 * character.ForcedCount
 
-    if JeanX.Taboo and "tabno" in JeanX.DailyActions:
+    if character.Taboo and "tabno" in character.DailyActions:
         $ temp_modifier -= 10
 
-    if "no dildo" in JeanX.DailyActions:
+    if "no dildo" in character.DailyActions:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no dildo" in JeanX.RecentActions else 0
+        $ temp_modifier -= 10 if "no dildo" in character.RecentActions else 0
 
-    $ Approval = ApprovalCheck(JeanX, 1250, TabM = 4) # 125, 140, 155, Taboo -160(335)
+    $ Approval = ApprovalCheck(character, 1250, TabM = 4) # 125, 140, 155, Taboo -160(335)
 
-    if Situation == JeanX:                                                                  #Jean auto-starts
+    if Situation == character:                                                                  #Jean auto-starts
                 if Approval > 2:                                                      # fix, add Jean auto stuff here
-                    if JeanX.PantsNum() == 5:
-                        "[JeanX.Name] grabs her dildo, hiking up her skirt as she does."
-                        $ JeanX.Upskirt = 1
-                    elif JeanX.PantsNum() >= 6:
-                        "[JeanX.Name] grabs her dildo, pulling down her pants as she does."
-                        $ JeanX.Legs = 0
+                    if character.PantsNum() == 5:
+                        "[character.Name] grabs her dildo, hiking up her skirt as she does."
+                        $ character.Upskirt = 1
+                    elif character.PantsNum() >= 6:
+                        "[character.Name] grabs her dildo, pulling down her pants as she does."
+                        $ character.Legs = 0
                     else:
-                        "[JeanX.Name] grabs her dildo, rubbing is suggestively against her crotch."
-                    $ JeanX.SeenPanties = 1
+                        "[character.Name] grabs her dildo, rubbing is suggestively against her crotch."
+                    $ character.SeenPanties = 1
                     call Jean_First_Bottomless(1)
                     "She slides the tip along her pussy and seems to want you to insert it."
                     menu:
                         "What do you do?"
                         "Nothing.":
-                            $ JeanX.Statup("Inbt", 80, 3)
-                            $ JeanX.Statup("Inbt", 50, 2)
-                            "[JeanX.Name] slides it in."
+                            $ character.Statup("Inbt", 80, 3)
+                            $ character.Statup("Inbt", 50, 2)
+                            "[character.Name] slides it in."
                         "Go for it.":
-                            $ JeanX.FaceChange("sexy", 1)
-                            $ JeanX.Statup("Inbt", 80, 3)
-                            ch_p "Oh yeah, [JeanX.Pet], let's do this."
-                            $ JeanX.NameCheck() #checks reaction to petname
+                            $ character.FaceChange("sexy", 1)
+                            $ character.Statup("Inbt", 80, 3)
+                            ch_p "Oh yeah, [character.Pet], let's do this."
+                            $ character.NameCheck() #checks reaction to petname
                             "You grab the dildo and slide it in."
-                            $ JeanX.Statup("Love", 85, 1)
-                            $ JeanX.Statup("Obed", 90, 1)
-                            $ JeanX.Statup("Obed", 50, 2)
+                            $ character.Statup("Love", 85, 1)
+                            $ character.Statup("Obed", 90, 1)
+                            $ character.Statup("Obed", 50, 2)
                         "Ask her to stop.":
-                            $ JeanX.FaceChange("surprised")
-                            $ JeanX.Statup("Inbt", 70, 1)
-                            ch_p "Let's not do that right now, [JeanX.Pet]."
-                            $ JeanX.NameCheck() #checks reaction to petname
-                            "[JeanX.Name] sets the dildo down."
-                            $ JeanX.OutfitChange()
-                            $ JeanX.Statup("Obed", 90, 1)
-                            $ JeanX.Statup("Obed", 50, 1)
-                            $ JeanX.Statup("Obed", 30, 2)
+                            $ character.FaceChange("surprised")
+                            $ character.Statup("Inbt", 70, 1)
+                            ch_p "Let's not do that right now, [character.Pet]."
+                            $ character.NameCheck() #checks reaction to petname
+                            "[character.Name] sets the dildo down."
+                            $ character.OutfitChange()
+                            $ character.Statup("Obed", 90, 1)
+                            $ character.Statup("Obed", 50, 1)
+                            $ character.Statup("Obed", 30, 2)
                             return
                     jump Jean_DP_Prep
                 else:
@@ -1903,116 +1889,116 @@ label Jean_Dildo_Pussy:
 
     if Situation == "auto":
                 "You rub the dildo across her body, and along her moist slit."
-                $ JeanX.FaceChange("surprised", 1)
+                $ character.FaceChange("surprised", 1)
 
-                if (JeanX.DildoP and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
-                    "[JeanX.Name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
-                    $ JeanX.FaceChange("sexy")
-                    $ JeanX.Statup("Obed", 70, 3)
-                    $ JeanX.Statup("Inbt", 50, 3)
-                    $ JeanX.Statup("Inbt", 70, 1)
-                    ch_j "Ooo, [JeanX.Petname], toys!"
+                if (character.DildoP and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
+                    "[character.Name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
+                    $ character.FaceChange("sexy")
+                    $ character.Statup("Obed", 70, 3)
+                    $ character.Statup("Inbt", 50, 3)
+                    $ character.Statup("Inbt", 70, 1)
+                    ch_j "Ooo, [character.Petname], toys!"
                     jump Jean_DP_Prep
                 else:                                                                                                            #she's questioning it
-                    $ JeanX.Brows = "angry"
+                    $ character.Brows = "angry"
                     menu:
                         ch_j "Hey, what are you planning to do with that?!"
                         "Sorry, sorry! Never mind.":
                             if Approval:
-                                $ JeanX.FaceChange("sexy", 1)
-                                $ JeanX.Statup("Obed", 70, 3)
-                                $ JeanX.Statup("Inbt", 50, 3)
-                                $ JeanX.Statup("Inbt", 70, 1)
+                                $ character.FaceChange("sexy", 1)
+                                $ character.Statup("Obed", 70, 3)
+                                $ character.Statup("Inbt", 50, 3)
+                                $ character.Statup("Inbt", 70, 1)
                                 ch_j "Well, now that you mention it. . ."
                                 jump Jean_DP_Prep
                             "You pull back before you really get it in."
-                            $ JeanX.FaceChange("bemused", 1)
-                            if JeanX.DildoP:
-                                ch_j "Well ok, [JeanX.Petname], maybe warn me next time?"
+                            $ character.FaceChange("bemused", 1)
+                            if character.DildoP:
+                                ch_j "Well ok, [character.Petname], maybe warn me next time?"
                             else:
-                                ch_j "Well ok, [JeanX.Petname], that's a little much. . . for now . . ."
+                                ch_j "Well ok, [character.Petname], that's a little much. . . for now . . ."
                         "Just playing with my favorite toys.":
-                            $ JeanX.Statup("Love", 80, -10, 1)
-                            $ JeanX.Statup("Love", 200, -10)
+                            $ character.Statup("Love", 80, -10, 1)
+                            $ character.Statup("Love", 200, -10)
                             "You press it inside some more."
-                            $ JeanX.Statup("Obed", 70, 3)
-                            $ JeanX.Statup("Inbt", 50, 3)
-                            if not ApprovalCheck(JeanX, 700, "O", TabM=1): #Checks if Obed is 700+
-                                $ JeanX.FaceChange("angry")
-                                "[JeanX.Name] shoves you away and slaps you in the face."
+                            $ character.Statup("Obed", 70, 3)
+                            $ character.Statup("Inbt", 50, 3)
+                            if not ApprovalCheck(character, 700, "O", TabM=1): #Checks if Obed is 700+
+                                $ character.FaceChange("angry")
+                                "[character.Name] shoves you away and slaps you in the face."
                                 ch_j "Jerk!"
                                 ch_j "Ask nice if you want to stick something in my pussy!"
-                                $ JeanX.Statup("Love", 50, -10, 1)
-                                $ JeanX.Statup("Obed", 50, 3)
+                                $ character.Statup("Love", 50, -10, 1)
+                                $ character.Statup("Obed", 50, 3)
                                 $ renpy.pop_call()
                                 if Situation:
                                     $ renpy.pop_call()
                                 if renpy.showing("Jean_SexSprite"):
                                     call Jean_Sex_Reset
-                                $ JeanX.RecentActions.append("angry")
-                                $ JeanX.DailyActions.append("angry")
+                                $ character.RecentActions.append("angry")
+                                $ character.DailyActions.append("angry")
                             else:
-                                $ JeanX.FaceChange("sad")
-                                "[JeanX.Name] doesn't seem to be into this, you're lucky she's so obedient."
+                                $ character.FaceChange("sad")
+                                "[character.Name] doesn't seem to be into this, you're lucky she's so obedient."
                                 jump Jean_DP_Prep
                 return
     #end Auto
 
-    if not JeanX.DildoP:
+    if not character.DildoP:
             #first time
-            $ JeanX.FaceChange("surprised", 1)
-            $ JeanX.Mouth = "kiss"
+            $ character.FaceChange("surprised", 1)
+            $ character.Mouth = "kiss"
             ch_j "Hmmm, so you'd like to try out some toys?"
-            if JeanX.Forced:
-                $ JeanX.FaceChange("sad")
+            if character.Forced:
+                $ character.FaceChange("sad")
                 ch_j "I suppose there are worst things you could ask for."
 
-    if not JeanX.DildoP and Approval:
+    if not character.DildoP and Approval:
             #First time dialog
-            if JeanX.Forced:
-                $ JeanX.FaceChange("sad")
-                $ JeanX.Statup("Love", 70, -3, 1)
-                $ JeanX.Statup("Love", 20, -2, 1)
-            elif JeanX.Love >= (JeanX.Obed + JeanX.Inbt - JeanX.IX):
-                $ JeanX.FaceChange("sexy")
-                $ JeanX.Brows = "sad"
-                $ JeanX.Mouth = "smile"
+            if character.Forced:
+                $ character.FaceChange("sad")
+                $ character.Statup("Love", 70, -3, 1)
+                $ character.Statup("Love", 20, -2, 1)
+            elif character.Love >= (character.Obed + character.Inbt - character.IX):
+                $ character.FaceChange("sexy")
+                $ character.Brows = "sad"
+                $ character.Mouth = "smile"
                 ch_j "I've had a reasonable amount of experience with these, you know. . ."
-            elif JeanX.Obed >= (JeanX.Inbt - JeanX.IX):
-                $ JeanX.FaceChange("normal")
-                ch_j "If that's what you want, [JeanX.Petname]. . ."
+            elif character.Obed >= (character.Inbt - character.IX):
+                $ character.FaceChange("normal")
+                ch_j "If that's what you want, [character.Petname]. . ."
             else: # Uninhibited
-                $ JeanX.FaceChange("sad")
-                $ JeanX.Mouth = "smile"
+                $ character.FaceChange("sad")
+                $ character.Mouth = "smile"
                 ch_j "I guess it could be fun with a partner. . ."
 
     elif Approval:
             #Second time+ dialog
-            if JeanX.Forced:
-                $ JeanX.FaceChange("sad")
-                $ JeanX.Statup("Love", 70, -3, 1)
-                $ JeanX.Statup("Love", 20, -2, 1)
+            if character.Forced:
+                $ character.FaceChange("sad")
+                $ character.Statup("Love", 70, -3, 1)
+                $ character.Statup("Love", 20, -2, 1)
                 ch_j "The toys again?"
-            elif not JeanX.Taboo and "tabno" in JeanX.DailyActions:
+            elif not character.Taboo and "tabno" in character.DailyActions:
                 ch_j "Well, at least you got us some privacy this time. . ."
-            elif "dildo pussy" in JeanX.RecentActions:
-                $ JeanX.FaceChange("sexy", 1)
+            elif "dildo pussy" in character.RecentActions:
+                $ character.FaceChange("sexy", 1)
                 ch_j "Mmm, again? Ok, let's get to it."
                 jump Jean_DP_Prep
-            elif "dildo pussy" in JeanX.DailyActions:
-                $ JeanX.FaceChange("sexy", 1)
+            elif "dildo pussy" in character.DailyActions:
+                $ character.FaceChange("sexy", 1)
                 $ Line = renpy.random.choice(["Breaking out the toys again?",
                     "Didn't get enough earlier?",
                     "You're going to wear me out."])
                 ch_j "[Line]"
-            elif JeanX.DildoP < 3:
-                $ JeanX.FaceChange("sexy", 1)
-                $ JeanX.Brows = "confused"
-                $ JeanX.Mouth = "kiss"
+            elif character.DildoP < 3:
+                $ character.FaceChange("sexy", 1)
+                $ character.Brows = "confused"
+                $ character.Mouth = "kiss"
                 ch_j "You want to stick it in my pussy again?"
             else:
-                $ JeanX.FaceChange("sexy", 1)
-                $ JeanX.ArmPose = 2
+                $ character.FaceChange("sexy", 1)
+                $ character.ArmPose = 2
                 $ Line = renpy.random.choice(["You want some of this action?",
                     "So you'd like another go?",
                     "You want to stick it in my pussy again?",
@@ -2022,15 +2008,15 @@ label Jean_Dildo_Pussy:
 
     if Approval >= 2:
             #She's into it. . .
-            if JeanX.Forced:
-                $ JeanX.FaceChange("sad")
-                $ JeanX.Statup("Obed", 90, 1)
-                $ JeanX.Statup("Inbt", 60, 1)
+            if character.Forced:
+                $ character.FaceChange("sad")
+                $ character.Statup("Obed", 90, 1)
+                $ character.Statup("Inbt", 60, 1)
                 ch_j "Ok, fine."
             else:
-                $ JeanX.FaceChange("sexy", 1)
-                $ JeanX.Statup("Love", 90, 1)
-                $ JeanX.Statup("Inbt", 50, 3)
+                $ character.FaceChange("sexy", 1)
+                $ character.Statup("Love", 90, 1)
+                $ character.Statup("Inbt", 50, 3)
                 $ Line = renpy.random.choice(["Well, sure, stick it in.",
                     "Well. . . ok.",
                     "Sure!",
@@ -2039,52 +2025,52 @@ label Jean_Dildo_Pussy:
                     "Heh, ok, ok."])
                 ch_j "[Line]"
                 $ Line = 0
-            $ JeanX.Statup("Obed", 20, 1)
-            $ JeanX.Statup("Obed", 60, 1)
-            $ JeanX.Statup("Inbt", 70, 2)
+            $ character.Statup("Obed", 20, 1)
+            $ character.Statup("Obed", 60, 1)
+            $ character.Statup("Inbt", 70, 2)
             jump Jean_DP_Prep
 
     else:
             #She's not into it, but maybe. . .
-            $ JeanX.FaceChange("angry")
-            if "no dildo" in JeanX.RecentActions:
-                ch_j "What part of \"no,\" did you not get, [JeanX.Petname]?"
-            elif JeanX.Taboo and "tabno" in JeanX.DailyActions and "no dildo" in JeanX.DailyActions:
+            $ character.FaceChange("angry")
+            if "no dildo" in character.RecentActions:
+                ch_j "What part of \"no,\" did you not get, [character.Petname]?"
+            elif character.Taboo and "tabno" in character.DailyActions and "no dildo" in character.DailyActions:
                 ch_j "Stop swinging that thing around in public!"
-            elif "no dildo" in JeanX.DailyActions:
-                ch_j "I already told you \"no,\" [JeanX.Petname]."
-            elif JeanX.Taboo and "tabno" in JeanX.DailyActions:
+            elif "no dildo" in character.DailyActions:
+                ch_j "I already told you \"no,\" [character.Petname]."
+            elif character.Taboo and "tabno" in character.DailyActions:
                 ch_j "Stop swinging that thing around in public!"
-            elif not JeanX.DildoP:
-                $ JeanX.FaceChange("bemused")
-                ch_j "I'm just not into toys, [JeanX.Petname]. . ."
+            elif not character.DildoP:
+                $ character.FaceChange("bemused")
+                ch_j "I'm just not into toys, [character.Petname]. . ."
             else:
-                $ JeanX.FaceChange("bemused")
-                ch_j "I don't think we need any toys, [JeanX.Petname]."
+                $ character.FaceChange("bemused")
+                ch_j "I don't think we need any toys, [character.Petname]."
             menu:
                 extend ""
-                "Sorry, never mind." if "no dildo" in JeanX.DailyActions:
-                    $ JeanX.FaceChange("bemused")
-                    ch_j "Yeah, ok, [JeanX.Petname]."
+                "Sorry, never mind." if "no dildo" in character.DailyActions:
+                    $ character.FaceChange("bemused")
+                    ch_j "Yeah, ok, [character.Petname]."
                     return
-                "Maybe later?" if "no dildo" not in JeanX.DailyActions:
-                    $ JeanX.FaceChange("sexy")
-                    ch_j "Maybe I'll practice on my own time, [JeanX.Petname]."
-                    $ JeanX.Statup("Love", 80, 2)
-                    $ JeanX.Statup("Inbt", 70, 2)
-                    if JeanX.Taboo:
-                        $ JeanX.RecentActions.append("tabno")
-                        $ JeanX.DailyActions.append("tabno")
-                    $ JeanX.RecentActions.append("no dildo")
-                    $ JeanX.DailyActions.append("no dildo")
+                "Maybe later?" if "no dildo" not in character.DailyActions:
+                    $ character.FaceChange("sexy")
+                    ch_j "Maybe I'll practice on my own time, [character.Petname]."
+                    $ character.Statup("Love", 80, 2)
+                    $ character.Statup("Inbt", 70, 2)
+                    if character.Taboo:
+                        $ character.RecentActions.append("tabno")
+                        $ character.DailyActions.append("tabno")
+                    $ character.RecentActions.append("no dildo")
+                    $ character.DailyActions.append("no dildo")
                     return
                 "I think you'd like it. . .":
                     if Approval:
-                        $ JeanX.FaceChange("sexy")
-                        $ JeanX.Statup("Obed", 90, 2)
-                        $ JeanX.Statup("Obed", 50, 2)
-                        $ JeanX.Statup("Inbt", 70, 3)
-                        $ JeanX.Statup("Inbt", 40, 2)
+                        $ character.FaceChange("sexy")
+                        $ character.Statup("Obed", 90, 2)
+                        $ character.Statup("Obed", 50, 2)
+                        $ character.Statup("Inbt", 70, 3)
+                        $ character.Statup("Inbt", 40, 2)
                         $ Line = renpy.random.choice(["Well, sure, stick it in.",
                             "I suppose. . .",
                             "You've got me there."])
@@ -2095,52 +2081,52 @@ label Jean_Dildo_Pussy:
                         pass
 
                 "[[press it against her]":                                               # Pressured into it
-                    $ Approval = ApprovalCheck(JeanX, 950, "OI", TabM = 3) # 95, 110, 125, -120(215)
-                    if Approval > 1 or (Approval and JeanX.Forced):
-                        $ JeanX.FaceChange("sad")
-                        $ JeanX.Statup("Love", 70, -5, 1)
-                        $ JeanX.Statup("Love", 200, -5)
-                        ch_j "Ok, fine. If we're going to do this, stick it in already."
-                        $ JeanX.Statup("Obed", 80, 4)
-                        $ JeanX.Statup("Inbt", 80, 1)
-                        $ JeanX.Statup("Inbt", 60, 3)
-                        $ JeanX.Forced = 1
+                    $ Approval = ApprovalCheck(character, 950, "OI", TabM = 3) # 95, 110, 125, -120(215)
+                    if Approval > 1 or (Approval and character.Forced):
+                        $ character.FaceChange("sad")
+                        $ character.Statup("Love", 70, -5, 1)
+                        $ character.Statup("Love", 200, -5)
+                        ch_j
+                        $ character.Statup("Obed", 80, 4)
+                        $ character.Statup("Inbt", 80, 1)
+                        $ character.Statup("Inbt", 60, 3)
+                        $ character.Forced = 1
                         jump Jean_DP_Prep
                     else:
-                        $ JeanX.Statup("Love", 200, -20)
-                        $ JeanX.RecentActions.append("angry")
-                        $ JeanX.DailyActions.append("angry")
+                        $ character.Statup("Love", 200, -20)
+                        $ character.RecentActions.append("angry")
+                        $ character.DailyActions.append("angry")
 
     #She refused all offers.
-    $ JeanX.ArmPose = 1
-    if "no dildo" in JeanX.DailyActions:
-            ch_j "Learn to take \"no\" for an answer, [JeanX.Petname]."
-            $ JeanX.RecentActions.append("angry")
-            $ JeanX.DailyActions.append("angry")
-    elif JeanX.Forced:
-            $ JeanX.FaceChange("angry", 1)
+    $ character.ArmPose = 1
+    if "no dildo" in character.DailyActions:
+
+            $ character.RecentActions.append("angry")
+            $ character.DailyActions.append("angry")
+    elif character.Forced:
+            $ character.FaceChange("angry", 1)
             ch_j "I'm not going to let you use that on me."
-            $ JeanX.Statup("Lust", 200, 5)
-            if JeanX.Love > 300:
-                    $ JeanX.Statup("Love", 70, -2)
-            $ JeanX.Statup("Obed", 50, -2)
-            $ JeanX.RecentActions.append("angry")
-            $ JeanX.DailyActions.append("angry")
-    elif JeanX.Taboo:                             # she refuses and this is too public a place for her
-            $ JeanX.FaceChange("angry", 1)
-            $ JeanX.RecentActions.append("tabno")
-            $ JeanX.DailyActions.append("tabno")
+            $ character.Statup("Lust", 200, 5)
+            if character.Love > 300:
+                    $ character.Statup("Love", 70, -2)
+            $ character.Statup("Obed", 50, -2)
+            $ character.RecentActions.append("angry")
+            $ character.DailyActions.append("angry")
+    elif character.Taboo:                             # she refuses and this is too public a place for her
+            $ character.FaceChange("angry", 1)
+            $ character.RecentActions.append("tabno")
+            $ character.DailyActions.append("tabno")
             ch_j "Not here!"
-            $ JeanX.Statup("Lust", 200, 5)
-            $ JeanX.Statup("Obed", 50, -3)
-    elif JeanX.DildoP:
-            $ JeanX.FaceChange("sad")
+            $ character.Statup("Lust", 200, 5)
+            $ character.Statup("Obed", 50, -3)
+    elif character.DildoP:
+            $ character.FaceChange("sad")
             ch_j "Sorry, you can keep your toys to yourself."
     else:
-            $ JeanX.FaceChange("normal", 1)
+            $ character.FaceChange("normal", 1)
             ch_j "No way."
-    $ JeanX.RecentActions.append("no dildo")
-    $ JeanX.DailyActions.append("no dildo")
+    $ character.RecentActions.append("no dildo")
+    $ character.DailyActions.append("no dildo")
     $ temp_modifier = 0
     return
 
@@ -2148,26 +2134,26 @@ label Jean_DP_Prep: #Animation set-up
     if Trigger2 == "dildo pussy":
         return
 
-    if not JeanX.Forced and Situation != "auto":
-        $ temp_modifier = 15 if JeanX.PantsNum() >= 6 else 0
-        call Bottoms_Off(JeanX)
-        if "angry" in JeanX.RecentActions:
+    if not character.Forced and Situation != "auto":
+        $ temp_modifier = 15 if character.PantsNum() >= 6 else 0
+        call Bottoms_Off(character)
+        if "angry" in character.RecentActions:
             return
 
     $ temp_modifier = 0
     call Jean_Pussy_Launch("dildo pussy")
-    if not JeanX.DildoP:
-        if JeanX.Forced:
-            $ JeanX.Statup("Love", 90, -75)
-            $ JeanX.Statup("Obed", 70, 60)
-            $ JeanX.Statup("Inbt", 80, 35)
+    if not character.DildoP:
+        if character.Forced:
+            $ character.Statup("Love", 90, -75)
+            $ character.Statup("Obed", 70, 60)
+            $ character.Statup("Inbt", 80, 35)
         else:
-            $ JeanX.Statup("Love", 90, 10)
-            $ JeanX.Statup("Obed", 70, 20)
-            $ JeanX.Statup("Inbt", 80, 45)
-    if JeanX.Taboo:
-        $ JeanX.Statup("Inbt", 90, int(Taboo/10))
-        $ JeanX.Statup("Lust", 50, int(Taboo/5))
+            $ character.Statup("Love", 90, 10)
+            $ character.Statup("Obed", 70, 20)
+            $ character.Statup("Inbt", 80, 45)
+    if character.Taboo:
+        $ character.Statup("Inbt", 90, int(Taboo/10))
+        $ character.Statup("Lust", 50, int(Taboo/5))
 
 
     if Situation:
@@ -2175,17 +2161,17 @@ label Jean_DP_Prep: #Animation set-up
         $ Situation = 0
     $ Line = 0
     $ Cnt = 0
-    if JeanX.Taboo:
-        $ JeanX.DrainWord("tabno")
-    $ JeanX.DrainWord("no dildo")
-    $ JeanX.RecentActions.append("dildo pussy")
-    $ JeanX.DailyActions.append("dildo pussy")
+    if character.Taboo:
+        $ character.DrainWord("tabno")
+    $ character.DrainWord("no dildo")
+    $ character.RecentActions.append("dildo pussy")
+    $ character.DailyActions.append("dildo pussy")
 
 label Jean_DP_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(JeanX)
+        call Shift_Focus(character)
         call Jean_Pussy_Launch("dildo pussy")
-        $ JeanX.LustFace()
+        $ character.LustFace()
 
         if  Player.Focus < 100:
                     #Player Command menu
@@ -2194,7 +2180,7 @@ label Jean_DP_Cycle: #Repeating strokes
                                     pass
 
                         "Slap her ass":
-                                call Slap_Ass(JeanX)
+                                call Slap_Ass(character)
                                 jump Jean_DP_Cycle
 
                         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
@@ -2209,15 +2195,15 @@ label Jean_DP_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                 call Offhand_Set
                                                 if Trigger2:
-                                                     $ JeanX.Action -= 1
+                                                     $ character.Action -= 1
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Shift primary action":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                     menu:
                                                         "I want to stick a finger in her ass.":
                                                                 $ Situation = "shift"
@@ -2234,7 +2220,7 @@ label Jean_DP_Cycle: #Repeating strokes
                                                         "Never Mind":
                                                                 jump Jean_DP_Cycle
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Shift your focus" if Trigger2:
                                                 $ Situation = "shift focus"
@@ -2246,12 +2232,12 @@ label Jean_DP_Cycle: #Repeating strokes
                                         pass
                                     "Threesome actions" if Partner:
                                         menu:
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(JeanX)
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
+                                            "Ask [character.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
+                                                        call Les_Change(character)
+                                            "Ask [character.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
                                                         pass
                                             "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(JeanX)
+                                                        call Three_Change(character)
 
                                             "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
                                                         $ ThreeCount = 0
@@ -2259,7 +2245,7 @@ label Jean_DP_Cycle: #Repeating strokes
                                                         $ ThreeCount = 0
 
                                             "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(JeanX)
+                                                        call Trigger_Swap(character)
                                             "Undress [Partner.Name]":
                                                         call Girl_Undress(Partner)
                                                         jump Jean_DP_Cycle
@@ -2268,12 +2254,12 @@ label Jean_DP_Cycle: #Repeating strokes
                                                         jump Jean_DP_Cycle
                                             "Never mind":
                                                         jump Jean_DP_Cycle
-                                    "undress [JeanX.Name]":
-                                            call Girl_Undress(JeanX)
-                                    "Clean up [JeanX.Name] (locked)" if not JeanX.Spunk:
+                                    "undress [character.Name]":
+                                            call Girl_Undress(character)
+                                    "Clean up [character.Name] (locked)" if not character.Spunk:
                                             pass
-                                    "Clean up [JeanX.Name]" if JeanX.Spunk:
-                                            call Girl_Cleanup(JeanX,"ask")
+                                    "Clean up [character.Name]" if character.Spunk:
+                                            call Girl_Cleanup(character,"ask")
                                     "Never mind":
                                             jump Jean_DP_Cycle
 
@@ -2290,11 +2276,11 @@ label Jean_DP_Cycle: #Repeating strokes
                                     jump Jean_DP_After
         #End menu (if Line)
 
-        if JeanX.Panties or JeanX.PantsNum() >= 6 or JeanX.HoseNum() >= 5: #This checks if Jean wants to strip down.
-                call Girl_Undress(JeanX,"auto")
+        if character.Panties or character.PantsNum() >= 6 or character.HoseNum() >= 5: #This checks if Jean wants to strip down.
+                call Girl_Undress(character,"auto")
 
-        call Shift_Focus(JeanX)
-        call Sex_Dialog(JeanX,Partner)
+        call Shift_Focus(character)
+        call Sex_Dialog(character,Partner)
 
         #If either of you could cum
 
@@ -2302,27 +2288,27 @@ label Jean_DP_Cycle: #Repeating strokes
         $ Round -= 1
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-        if Player.Focus >= 100 or JeanX.Lust >= 100:
+        if Player.Focus >= 100 or character.Lust >= 100:
                     #If either of you could cum
                     if Player.Focus >= 100:
                             #If you can cum:
-                            call Player_Cumming(JeanX)
-                            if "angry" in JeanX.RecentActions:
+                            call Player_Cumming(character)
+                            if "angry" in character.RecentActions:
                                 call Jean_Pos_Reset
                                 return
-                            $ JeanX.Statup("Lust", 200, 5)
-                            if 100 > JeanX.Lust >= 70 and JeanX.OCount < 2:
-                                $ JeanX.RecentActions.append("unsatisfied")
-                                $ JeanX.DailyActions.append("unsatisfied")
+                            $ character.Statup("Lust", 200, 5)
+                            if 100 > character.Lust >= 70 and character.OCount < 2:
+                                $ character.RecentActions.append("unsatisfied")
+                                $ character.DailyActions.append("unsatisfied")
 
                             if Player.Focus > 80:
                                 jump Jean_DP_After
                             $ Line = "came"
 
-                    if JeanX.Lust >= 100:
+                    if character.Lust >= 100:
                             #If Jean can cum
-                            call Girl_Cumming(JeanX)
-                            if Situation == "shift" or "angry" in JeanX.RecentActions:
+                            call Girl_Cumming(character)
+                            if Situation == "shift" or "angry" in character.RecentActions:
                                 jump Jean_DP_After
 
                     if Line == "came": #ex Player.Focus <= 20:
@@ -2332,8 +2318,8 @@ label Jean_DP_Cycle: #Repeating strokes
                                 "You're emptied out, you should probably take a break."
 
 
-                            if "unsatisfied" in JeanX.RecentActions:#And Jean is unsatisfied,
-                                "[JeanX.Name] still seems a bit unsatisfied with the experience."
+                            if "unsatisfied" in character.RecentActions:#And Jean is unsatisfied,
+                                "[character.Name] still seems a bit unsatisfied with the experience."
                                 menu:
                                     "Finish her?"
                                     "Yes, keep going for a bit.":
@@ -2348,17 +2334,17 @@ label Jean_DP_Cycle: #Repeating strokes
 
         $ Player.Focus -= 12 if Player.FocusX and Player.Focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if character.SEXP >= 100 or ApprovalCheck(character, 1200, "LO"):
             pass
-        elif Cnt == (5 + JeanX.DildoP):
-                    $ JeanX.Brows = "confused"
+        elif Cnt == (5 + character.DildoP):
+                    $ character.Brows = "confused"
                     ch_j "What are you even doing down there?"
-        elif JeanX.Lust >= 80:
+        elif character.Lust >= 80:
                     pass
-        elif Cnt == (15 + JeanX.DildoP) and JeanX.SEXP >= 15 and not ApprovalCheck(JeanX, 1500):
-                    $ JeanX.Brows = "confused"
+        elif Cnt == (15 + character.DildoP) and character.SEXP >= 15 and not ApprovalCheck(character, 1500):
+                    $ character.Brows = "confused"
                     menu:
-                        ch_j "[JeanX.Petname], this is getting uncomfortable, maybe we could try something else."
+                        ch_j "[character.Petname], this is getting uncomfortable, maybe we could try something else."
                         "Finish up.":
                                 "You let go. . ."
                                 jump Jean_DP_After
@@ -2367,53 +2353,53 @@ label Jean_DP_Cycle: #Repeating strokes
                                 $ Situation = "shift"
                                 jump Jean_DP_After
                         "No, this is fun.":
-                                if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
-                                    $ JeanX.Statup("Love", 200, -5)
-                                    $ JeanX.Statup("Obed", 50, 3)
-                                    $ JeanX.Statup("Obed", 80, 2)
+                                if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
+                                    $ character.Statup("Love", 200, -5)
+                                    $ character.Statup("Obed", 50, 3)
+                                    $ character.Statup("Obed", 80, 2)
                                     "She grumbles but lets you keep going."
                                 else:
-                                    $ JeanX.FaceChange("angry", 1)
+                                    $ character.FaceChange("angry", 1)
                                     call Jean_Pos_Reset
                                     "She scowls at you and pulls back."
                                     ch_j "Well if that's your attitude, I don't need your \"help\"."
-                                    $ JeanX.Statup("Love", 50, -3, 1)
-                                    $ JeanX.Statup("Love", 80, -4, 1)
-                                    $ JeanX.Statup("Obed", 30, -1, 1)
-                                    $ JeanX.Statup("Obed", 50, -1, 1)
-                                    $ JeanX.RecentActions.append("angry")
-                                    $ JeanX.DailyActions.append("angry")
+                                    $ character.Statup("Love", 50, -3, 1)
+                                    $ character.Statup("Love", 80, -4, 1)
+                                    $ character.Statup("Obed", 30, -1, 1)
+                                    $ character.Statup("Obed", 50, -1, 1)
+                                    $ character.RecentActions.append("angry")
+                                    $ character.DailyActions.append("angry")
                                     jump Jean_DP_After
         #End Count check
 
         if Round == 10:
-                call Sex_Basic_Dialog(JeanX,10) #"You might want to wrap this up, it's getting late."
+                call Sex_Basic_Dialog(character,10) #"You might want to wrap this up, it's getting late."
         elif Round == 5:
-                call Sex_Basic_Dialog(JeanX,5)   #"Seriously, it'll be time to stop soon."
+                call Sex_Basic_Dialog(character,5)   #"Seriously, it'll be time to stop soon."
 
     #Round = 0 loop breaks
-    $ JeanX.FaceChange("bemused", 0)
+    $ character.FaceChange("bemused", 0)
     $ Line = 0
-    call Sex_Basic_Dialog(JeanX,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
+    call Sex_Basic_Dialog(character,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
 
 label Jean_DP_After:
     if not Situation: #fix  Situation != "shift" and Situation != "auto" and Situation != "pullback":
         call Jean_Pos_Reset
 
-    $ JeanX.FaceChange("sexy")
+    $ character.FaceChange("sexy")
 
-    $ JeanX.DildoP += 1
-    $ JeanX.Action -=1
+    $ character.DildoP += 1
+    $ character.Action -=1
 
-    call Partner_Like(JeanX,1)
+    call Partner_Like(character,1)
 
-    if JeanX.DildoP == 1:
-            $ JeanX.SEXP += 10
+    if character.DildoP == 1:
+            $ character.SEXP += 10
             if not Situation:
-                if JeanX.Love >= 500 and "unsatisfied" not in JeanX.RecentActions:
+                if character.Love >= 500 and "unsatisfied" not in character.RecentActions:
                     ch_j "Thanks for the extra hand. . ."
-                elif JeanX.Obed <= 500 and Player.Focus <= 20:
-                    $ JeanX.FaceChange("perplexed", 1)
+                elif character.Obed <= 500 and Player.Focus <= 20:
+                    $ character.FaceChange("perplexed", 1)
                     ch_j "Did you like that?"
 
     $ temp_modifier = 0
@@ -2422,7 +2408,7 @@ label Jean_DP_After:
     call Checkout
     return
 
-# end JeanX.Dildo Pussy /////////////////////////////////////////////////////////////////////////////
+# end character.Dildo Pussy /////////////////////////////////////////////////////////////////////////////
 
 
 # ////////////////////////////////////////////////////////////////////////Start Insert Ass
@@ -2434,87 +2420,87 @@ label Jean_Dildo_Ass:
     return
 
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JeanX)
+    call Shift_Focus(character)
     call Jean_Dildo_Check
     if not _return:
         return
 
-    if JeanX.Loose:
+    if character.Loose:
         $ temp_modifier += 30
-    elif "anal" in JeanX.RecentActions or "dildo anal" in JeanX.RecentActions:
+    elif "anal" in character.RecentActions or "dildo anal" in character.RecentActions:
         $ temp_modifier -= 20
-    elif "anal" in JeanX.DailyActions or "dildo anal" in JeanX.DailyActions:
+    elif "anal" in character.DailyActions or "dildo anal" in character.DailyActions:
         $ temp_modifier -= 10
-    elif (JeanX.Anal + JeanX.DildoA + JeanX.Plug) > 0: #You've done it before
+    elif (character.Anal + character.DildoA + character.Plug) > 0: #You've done it before
         $ temp_modifier += 20
 
-    if JeanX.Legs == "pants:": # she's got pants on.
+    if character.Legs == "pants:": # she's got pants on.
         $ temp_modifier -= 20
 
-    if JeanX.Lust > 95:
+    if character.Lust > 95:
         $ temp_modifier += 20
-    elif JeanX.Lust > 85: #She's really horny
+    elif character.Lust > 85: #She's really horny
         $ temp_modifier += 15
 
     if Situation == "shift":
         $ temp_modifier += 10
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in character.Traits:
         $ temp_modifier += (5*Taboo)
-    if JeanX in Player.Harem or "sex friend" in JeanX.Petnames:
+    if character in Player.Harem or "sex friend" in character.Petnames:
         $ temp_modifier += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in character.Traits:
         $ temp_modifier -= 40
-    if JeanX.ForcedCount and not JeanX.Forced:
-        $ temp_modifier -= 5 * JeanX.ForcedCount
+    if character.ForcedCount and not character.Forced:
+        $ temp_modifier -= 5 * character.ForcedCount
 
-    if JeanX.Taboo and "tabno" in JeanX.DailyActions:
+    if character.Taboo and "tabno" in character.DailyActions:
         $ temp_modifier -= 10
 
-    if "no dildo" in JeanX.DailyActions:
+    if "no dildo" in character.DailyActions:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no dildo" in JeanX.RecentActions else 0
+        $ temp_modifier -= 10 if "no dildo" in character.RecentActions else 0
 
-    $ Approval = ApprovalCheck(JeanX, 1450, TabM = 4) # 145, 160, 175, Taboo -160(355)
+    $ Approval = ApprovalCheck(character, 1450, TabM = 4) # 145, 160, 175, Taboo -160(355)
 
-    if Situation == JeanX:
+    if Situation == character:
             #Jean auto-starts
             if Approval > 2:                                                      # fix, add Jean auto stuff here
-                if JeanX.PantsNum() == 5:
-                    "[JeanX.Name] grabs her dildo, hiking up her skirt as she does."
-                    $ JeanX.Upskirt = 1
-                elif JeanX.PantsNum() >= 6:
-                    "[JeanX.Name] grabs her dildo, pulling down her pants as she does."
-                    $ JeanX.Legs = 0
+                if character.PantsNum() == 5:
+                    "[character.Name] grabs her dildo, hiking up her skirt as she does."
+                    $ character.Upskirt = 1
+                elif character.PantsNum() >= 6:
+                    "[character.Name] grabs her dildo, pulling down her pants as she does."
+                    $ character.Legs = 0
                 else:
-                    "[JeanX.Name] grabs her dildo, rubbing is suggestively against her ass."
-                $ JeanX.SeenPanties = 1
+                    "[character.Name] grabs her dildo, rubbing is suggestively against her ass."
+                $ character.SeenPanties = 1
                 call Jean_First_Bottomless(1)
                 "She slides the tip against her asshole, and seems to want you to insert it."
                 menu:
                     "What do you do?"
                     "Nothing.":
-                        $ JeanX.Statup("Inbt", 80, 3)
-                        $ JeanX.Statup("Inbt", 50, 2)
-                        "[JeanX.Name] slides it in."
+                        $ character.Statup("Inbt", 80, 3)
+                        $ character.Statup("Inbt", 50, 2)
+                        "[character.Name] slides it in."
                     "Go for it.":
-                        $ JeanX.FaceChange("sexy", 1)
-                        $ JeanX.Statup("Inbt", 80, 3)
-                        ch_p "Oh yeah, [JeanX.Pet], let's do this."
-                        $ JeanX.NameCheck() #checks reaction to petname
+                        $ character.FaceChange("sexy", 1)
+                        $ character.Statup("Inbt", 80, 3)
+                        ch_p "Oh yeah, [character.Pet], let's do this."
+                        $ character.NameCheck() #checks reaction to petname
                         "You grab the dildo and slide it in."
-                        $ JeanX.Statup("Love", 85, 1)
-                        $ JeanX.Statup("Obed", 90, 1)
-                        $ JeanX.Statup("Obed", 50, 2)
+                        $ character.Statup("Love", 85, 1)
+                        $ character.Statup("Obed", 90, 1)
+                        $ character.Statup("Obed", 50, 2)
                     "Ask her to stop.":
-                        $ JeanX.FaceChange("surprised")
-                        $ JeanX.Statup("Inbt", 70, 1)
-                        ch_p "Let's not do that right now, [JeanX.Pet]."
-                        $ JeanX.NameCheck() #checks reaction to petname
-                        "[JeanX.Name] sets the dildo down."
-                        $ JeanX.OutfitChange()
-                        $ JeanX.Statup("Obed", 90, 1)
-                        $ JeanX.Statup("Obed", 50, 1)
-                        $ JeanX.Statup("Obed", 30, 2)
+                        $ character.FaceChange("surprised")
+                        $ character.Statup("Inbt", 70, 1)
+                        ch_p "Let's not do that right now, [character.Pet]."
+                        $ character.NameCheck() #checks reaction to petname
+                        "[character.Name] sets the dildo down."
+                        $ character.OutfitChange()
+                        $ character.Statup("Obed", 90, 1)
+                        $ character.Statup("Obed", 50, 1)
+                        $ character.Statup("Obed", 30, 2)
                         return
                 jump Jean_DA_Prep
             else:
@@ -2524,121 +2510,121 @@ label Jean_Dildo_Ass:
 
     if Situation == "auto":
             "You rub the dildo across her body, and against her tight anus."
-            $ JeanX.FaceChange("surprised", 1)
+            $ character.FaceChange("surprised", 1)
 
-            if (JeanX.DildoA and Approval) or (Approval > 1):
+            if (character.DildoA and Approval) or (Approval > 1):
                 #this is not the first time you've had sex, or she's into it
-                "[JeanX.Name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
-                $ JeanX.FaceChange("sexy")
-                $ JeanX.Statup("Obed", 70, 3)
-                $ JeanX.Statup("Inbt", 50, 3)
-                $ JeanX.Statup("Inbt", 70, 1)
-                ch_j "Ooo, [JeanX.Petname], toys!"
+                "[character.Name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
+                $ character.FaceChange("sexy")
+                $ character.Statup("Obed", 70, 3)
+                $ character.Statup("Inbt", 50, 3)
+                $ character.Statup("Inbt", 70, 1)
+                ch_j "Ooo, [character.Petname], toys!"
                 jump Jean_DA_Prep
             else:
                 #she's questioning it
-                $ JeanX.Brows = "angry"
+                $ character.Brows = "angry"
                 menu:
                     ch_j "Hey, what are you planning to do with that?!"
                     "Sorry, sorry! Never mind.":
                         if Approval:
-                            $ JeanX.FaceChange("sexy", 1)
-                            $ JeanX.Statup("Obed", 70, 3)
-                            $ JeanX.Statup("Inbt", 50, 3)
-                            $ JeanX.Statup("Inbt", 70, 1)
+                            $ character.FaceChange("sexy", 1)
+                            $ character.Statup("Obed", 70, 3)
+                            $ character.Statup("Inbt", 50, 3)
+                            $ character.Statup("Inbt", 70, 1)
                             ch_j "Well, now that you mention it. . ."
                             jump Jean_DA_Prep
                         "You pull back before you really get it in."
-                        $ JeanX.FaceChange("bemused", 1)
-                        if JeanX.DildoA:
-                            ch_j "Well ok, [JeanX.Petname], maybe warn me next time?"
+                        $ character.FaceChange("bemused", 1)
+                        if character.DildoA:
+                            ch_j "Well ok, [character.Petname], maybe warn me next time?"
                         else:
-                            ch_j "Well ok, [JeanX.Petname], that's a little much. . . for now . . ."
+                            ch_j "Well ok, [character.Petname], that's a little much. . . for now . . ."
                     "Just playing with my favorite toys.":
-                        $ JeanX.Statup("Love", 80, -10, 1)
-                        $ JeanX.Statup("Love", 200, -10)
+                        $ character.Statup("Love", 80, -10, 1)
+                        $ character.Statup("Love", 200, -10)
                         "You press it inside some more."
-                        $ JeanX.Statup("Obed", 70, 3)
-                        $ JeanX.Statup("Inbt", 50, 3)
-                        if not ApprovalCheck(JeanX, 700, "O", TabM=1): #Checks if Obed is 700+
-                            $ JeanX.FaceChange("angry")
-                            "[JeanX.Name] shoves you away and slaps you in the face."
+                        $ character.Statup("Obed", 70, 3)
+                        $ character.Statup("Inbt", 50, 3)
+                        if not ApprovalCheck(character, 700, "O", TabM=1): #Checks if Obed is 700+
+                            $ character.FaceChange("angry")
+                            "[character.Name] shoves you away and slaps you in the face."
                             ch_j "Jerk!"
                             ch_j "Ask nice if you want to stick something in my ass!"
-                            $ JeanX.Statup("Love", 50, -10, 1)
-                            $ JeanX.Statup("Obed", 50, 3)
+                            $ character.Statup("Love", 50, -10, 1)
+                            $ character.Statup("Obed", 50, 3)
                             $ renpy.pop_call()
                             if Situation:
                                 $ renpy.pop_call()
                             if renpy.showing("Jean_SexSprite"):
                                 call Jean_Sex_Reset
-                            $ JeanX.RecentActions.append("angry")
-                            $ JeanX.DailyActions.append("angry")
+                            $ character.RecentActions.append("angry")
+                            $ character.DailyActions.append("angry")
                         else:
-                            $ JeanX.FaceChange("sad")
-                            "[JeanX.Name] doesn't seem to be into this, you're lucky she's so obedient."
+                            $ character.FaceChange("sad")
+                            "[character.Name] doesn't seem to be into this, you're lucky she's so obedient."
                             jump Jean_DA_Prep
             return
     #end auto
 
-    if not JeanX.DildoA:
+    if not character.DildoA:
             #first time
-            $ JeanX.FaceChange("surprised", 1)
-            $ JeanX.Mouth = "kiss"
+            $ character.FaceChange("surprised", 1)
+            $ character.Mouth = "kiss"
             ch_j "You want to try and fit that. . .?"
-            if JeanX.Forced:
-                $ JeanX.FaceChange("sad")
+            if character.Forced:
+                $ character.FaceChange("sad")
                 ch_j "Always about the butt, huh?"
 
-    if not JeanX.Loose and ("dildo anal" in JeanX.RecentActions or "anal" in JeanX.RecentActions or "dildo anal" in JeanX.DailyActions or "anal" in JeanX.DailyActions):
-            $ JeanX.FaceChange("bemused", 1)
+    if not character.Loose and ("dildo anal" in character.RecentActions or "anal" in character.RecentActions or "dildo anal" in character.DailyActions or "anal" in character.DailyActions):
+            $ character.FaceChange("bemused", 1)
             ch_j "I'm still sore from earlier. . ."
 
-    if not JeanX.DildoA and Approval:
+    if not character.DildoA and Approval:
             #First time dialog
-            if JeanX.Forced:
-                $ JeanX.FaceChange("sad")
-                $ JeanX.Statup("Love", 70, -3, 1)
-                $ JeanX.Statup("Love", 20, -2, 1)
-            elif JeanX.Love >= (JeanX.Obed + JeanX.Inbt - JeanX.IX):
-                $ JeanX.FaceChange("sexy")
-                $ JeanX.Brows = "sad"
-                $ JeanX.Mouth = "smile"
+            if character.Forced:
+                $ character.FaceChange("sad")
+                $ character.Statup("Love", 70, -3, 1)
+                $ character.Statup("Love", 20, -2, 1)
+            elif character.Love >= (character.Obed + character.Inbt - character.IX):
+                $ character.FaceChange("sexy")
+                $ character.Brows = "sad"
+                $ character.Mouth = "smile"
                 ch_j "I haven't actually used one of these, back there before. . ."
-            elif JeanX.Obed >= (JeanX.Inbt - JeanX.IX):
-                $ JeanX.FaceChange("normal")
-                ch_j "If that's what you want, [JeanX.Petname]. . ."
+            elif character.Obed >= (character.Inbt - character.IX):
+                $ character.FaceChange("normal")
+                ch_j "If that's what you want, [character.Petname]. . ."
             else: # Uninhibited
-                $ JeanX.FaceChange("sad")
-                $ JeanX.Mouth = "smile"
+                $ character.FaceChange("sad")
+                $ character.Mouth = "smile"
                 ch_j "I guess it could be fun two-player. . ."
 
     elif Approval:
             #Second time+ dialog
-            if JeanX.Forced:
-                $ JeanX.FaceChange("sad")
-                $ JeanX.Statup("Love", 70, -3, 1)
-                $ JeanX.Statup("Love", 20, -2, 1)
+            if character.Forced:
+                $ character.FaceChange("sad")
+                $ character.Statup("Love", 70, -3, 1)
+                $ character.Statup("Love", 20, -2, 1)
                 ch_j "The toys again?"
-            elif not JeanX.Taboo and "tabno" in JeanX.DailyActions:
+            elif not character.Taboo and "tabno" in character.DailyActions:
                 ch_j "Well, at least you got us some privacy this time. . ."
-            elif "dildo anal" in JeanX.DailyActions and not JeanX.Loose:
+            elif "dildo anal" in character.DailyActions and not character.Loose:
                 pass
-            elif "dildo anal" in JeanX.DailyActions:
-                $ JeanX.FaceChange("sexy", 1)
+            elif "dildo anal" in character.DailyActions:
+                $ character.FaceChange("sexy", 1)
                 $ Line = renpy.random.choice(["Breaking out the toys again?",
                     "Didn't get enough earlier?",
                     "I'm still a bit sore from earlier.",
                     "You're going to wear me out."])
                 ch_j "[Line]"
-            elif JeanX.DildoA < 3:
-                $ JeanX.FaceChange("sexy", 1)
-                $ JeanX.Brows = "confused"
-                $ JeanX.Mouth = "kiss"
+            elif character.DildoA < 3:
+                $ character.FaceChange("sexy", 1)
+                $ character.Brows = "confused"
+                $ character.Mouth = "kiss"
                 ch_j "You want to stick it in my ass again?"
             else:
-                $ JeanX.FaceChange("sexy", 1)
-                $ JeanX.ArmPose = 2
+                $ character.FaceChange("sexy", 1)
+                $ character.ArmPose = 2
                 $ Line = renpy.random.choice(["You want some of this action?",
                     "So you'd like another go?",
                     "You want to stick it in my ass again?",
@@ -2648,15 +2634,15 @@ label Jean_Dildo_Ass:
 
     if Approval >= 2:
             #She's into it. . .
-            if JeanX.Forced:
-                $ JeanX.FaceChange("sad")
-                $ JeanX.Statup("Obed", 90, 1)
-                $ JeanX.Statup("Inbt", 60, 1)
+            if character.Forced:
+                $ character.FaceChange("sad")
+                $ character.Statup("Obed", 90, 1)
+                $ character.Statup("Inbt", 60, 1)
                 ch_j "Ok, fine."
             else:
-                $ JeanX.FaceChange("sexy", 1)
-                $ JeanX.Statup("Love", 90, 1)
-                $ JeanX.Statup("Inbt", 50, 3)
+                $ character.FaceChange("sexy", 1)
+                $ character.Statup("Love", 90, 1)
+                $ character.Statup("Inbt", 50, 3)
                 $ Line = renpy.random.choice(["Well, sure, stick it in.",
                     "Well. . . ok.",
                     "Sure!",
@@ -2665,55 +2651,55 @@ label Jean_Dildo_Ass:
                     "Heh, ok, ok."])
                 ch_j "[Line]"
                 $ Line = 0
-            $ JeanX.Statup("Obed", 20, 1)
-            $ JeanX.Statup("Obed", 60, 1)
-            $ JeanX.Statup("Inbt", 70, 2)
+            $ character.Statup("Obed", 20, 1)
+            $ character.Statup("Obed", 60, 1)
+            $ character.Statup("Inbt", 70, 2)
             jump Jean_DA_Prep
 
     else:
             #She's not into it, but maybe. . .
-            $ JeanX.FaceChange("angry")
-            if "no dildo" in JeanX.RecentActions:
-                ch_j "What part of \"no,\" did you not get, [JeanX.Petname]?"
-            elif JeanX.Taboo and "tabno" in JeanX.DailyActions and "no dildo" in JeanX.DailyActions:
+            $ character.FaceChange("angry")
+            if "no dildo" in character.RecentActions:
+                ch_j "What part of \"no,\" did you not get, [character.Petname]?"
+            elif character.Taboo and "tabno" in character.DailyActions and "no dildo" in character.DailyActions:
                 ch_j "Stop swinging that thing around in public!"
-            elif "no dildo" in JeanX.DailyActions:
-                ch_j "I already told you \"no,\" [JeanX.Petname]."
-            elif JeanX.Taboo and "tabno" in JeanX.DailyActions:
+            elif "no dildo" in character.DailyActions:
+                ch_j "I already told you \"no,\" [character.Petname]."
+            elif character.Taboo and "tabno" in character.DailyActions:
                 ch_j "I already told you that I wouldn't do that out here!"
-            elif not JeanX.DildoA:
-                $ JeanX.FaceChange("bemused")
-                ch_j "I'm just not into toys, [JeanX.Petname]. . ."
-            elif not JeanX.Loose and "dildo anal" not in JeanX.DailyActions:
-                $ JeanX.FaceChange("perplexed")
-                ch_j "You could have been a bit more gentle last time, [JeanX.Petname]. . ."
+            elif not character.DildoA:
+                $ character.FaceChange("bemused")
+                ch_j "I'm just not into toys, [character.Petname]. . ."
+            elif not character.Loose and "dildo anal" not in character.DailyActions:
+                $ character.FaceChange("perplexed")
+                ch_j "You could have been a bit more gentle last time, [character.Petname]. . ."
             else:
-                $ JeanX.FaceChange("bemused")
-                ch_j "I don't think we need any toys, [JeanX.Petname]."
+                $ character.FaceChange("bemused")
+                ch_j "I don't think we need any toys, [character.Petname]."
             menu:
                 extend ""
-                "Sorry, never mind." if "no dildo" in JeanX.DailyActions:
-                    $ JeanX.FaceChange("bemused")
-                    ch_j "Yeah, ok, [JeanX.Petname]."
+                "Sorry, never mind." if "no dildo" in character.DailyActions:
+                    $ character.FaceChange("bemused")
+                    ch_j "Yeah, ok, [character.Petname]."
                     return
-                "Maybe later?" if "no dildo" not in JeanX.DailyActions:
-                    $ JeanX.FaceChange("sexy")
-                    ch_j "Maybe I'll practice on my own time, [JeanX.Petname]."
-                    $ JeanX.Statup("Love", 80, 2)
-                    $ JeanX.Statup("Inbt", 70, 2)
-                    if JeanX.Taboo:
-                        $ JeanX.RecentActions.append("tabno")
-                        $ JeanX.DailyActions.append("tabno")
-                    $ JeanX.RecentActions.append("no dildo")
-                    $ JeanX.DailyActions.append("no dildo")
+                "Maybe later?" if "no dildo" not in character.DailyActions:
+                    $ character.FaceChange("sexy")
+                    ch_j "Maybe I'll practice on my own time, [character.Petname]."
+                    $ character.Statup("Love", 80, 2)
+                    $ character.Statup("Inbt", 70, 2)
+                    if character.Taboo:
+                        $ character.RecentActions.append("tabno")
+                        $ character.DailyActions.append("tabno")
+                    $ character.RecentActions.append("no dildo")
+                    $ character.DailyActions.append("no dildo")
                     return
                 "I think you'd like it. . .":
                     if Approval:
-                        $ JeanX.FaceChange("sexy")
-                        $ JeanX.Statup("Obed", 90, 2)
-                        $ JeanX.Statup("Obed", 50, 2)
-                        $ JeanX.Statup("Inbt", 70, 3)
-                        $ JeanX.Statup("Inbt", 40, 2)
+                        $ character.FaceChange("sexy")
+                        $ character.Statup("Obed", 90, 2)
+                        $ character.Statup("Obed", 50, 2)
+                        $ character.Statup("Inbt", 70, 3)
+                        $ character.Statup("Inbt", 40, 2)
                         $ Line = renpy.random.choice(["Well, sure, stick it in.",
                             "I suppose. . .",
                             "You've got me there."])
@@ -2724,55 +2710,55 @@ label Jean_Dildo_Ass:
                         pass
 
                 "[[press it against her]":                                               # Pressured into it
-                    $ Approval = ApprovalCheck(JeanX, 1050, "OI", TabM = 3) # 105, 120, 135, -120(225)
-                    if Approval > 1 or (Approval and JeanX.Forced):
-                        $ JeanX.FaceChange("sad")
-                        $ JeanX.Statup("Love", 70, -5, 1)
-                        $ JeanX.Statup("Love", 200, -5)
-                        ch_j "Ok, fine. If we're going to do this, stick it in already."
-                        $ JeanX.Statup("Obed", 80, 4)
-                        $ JeanX.Statup("Inbt", 80, 1)
-                        $ JeanX.Statup("Inbt", 60, 3)
-                        $ JeanX.Forced = 1
+                    $ Approval = ApprovalCheck(character, 1050, "OI", TabM = 3) # 105, 120, 135, -120(225)
+                    if Approval > 1 or (Approval and character.Forced):
+                        $ character.FaceChange("sad")
+                        $ character.Statup("Love", 70, -5, 1)
+                        $ character.Statup("Love", 200, -5)
+
+                        $ character.Statup("Obed", 80, 4)
+                        $ character.Statup("Inbt", 80, 1)
+                        $ character.Statup("Inbt", 60, 3)
+                        $ character.Forced = 1
                         jump Jean_DA_Prep
                     else:
-                        $ JeanX.Statup("Love", 200, -20)
-                        $ JeanX.RecentActions.append("angry")
-                        $ JeanX.DailyActions.append("angry")
+                        $ character.Statup("Love", 200, -20)
+                        $ character.RecentActions.append("angry")
+                        $ character.DailyActions.append("angry")
 
     #She refused all offers.
-    $ JeanX.ArmPose = 1
-    if "no dildo" in JeanX.DailyActions:
-            ch_j "Learn to take \"no\" for an answer, [JeanX.Petname]."
-            $ JeanX.RecentActions.append("angry")
-            $ JeanX.DailyActions.append("angry")
-    elif JeanX.Forced:
-            $ JeanX.FaceChange("angry", 1)
+    $ character.ArmPose = 1
+    if "no dildo" in character.DailyActions:
+
+            $ character.RecentActions.append("angry")
+            $ character.DailyActions.append("angry")
+    elif character.Forced:
+            $ character.FaceChange("angry", 1)
             ch_j "I'm not going to let you use that on me."
-            $ JeanX.Statup("Lust", 200, 5)
-            if JeanX.Love > 300:
-                    $ JeanX.Statup("Love", 70, -2)
-            $ JeanX.Statup("Obed", 50, -2)
-            $ JeanX.RecentActions.append("angry")
-            $ JeanX.DailyActions.append("angry")
-    elif JeanX.Taboo:                             # she refuses and this is too public a place for her
-            $ JeanX.FaceChange("angry", 1)
-            $ JeanX.RecentActions.append("tabno")
-            $ JeanX.DailyActions.append("tabno")
+            $ character.Statup("Lust", 200, 5)
+            if character.Love > 300:
+                    $ character.Statup("Love", 70, -2)
+            $ character.Statup("Obed", 50, -2)
+            $ character.RecentActions.append("angry")
+            $ character.DailyActions.append("angry")
+    elif character.Taboo:                             # she refuses and this is too public a place for her
+            $ character.FaceChange("angry", 1)
+            $ character.RecentActions.append("tabno")
+            $ character.DailyActions.append("tabno")
             ch_j "Not here!"
-            $ JeanX.Statup("Lust", 200, 5)
-            $ JeanX.Statup("Obed", 50, -3)
-    elif not JeanX.Loose and "dildo anal" in JeanX.DailyActions:
-            $ JeanX.FaceChange("bemused")
-            ch_j "Sorry, I just need a little break back there, [JeanX.Petname]."
-    elif JeanX.DildoA:
-            $ JeanX.FaceChange("sad")
+            $ character.Statup("Lust", 200, 5)
+            $ character.Statup("Obed", 50, -3)
+    elif not character.Loose and "dildo anal" in character.DailyActions:
+            $ character.FaceChange("bemused")
+            ch_j "Sorry, I just need a little break back there, [character.Petname]."
+    elif character.DildoA:
+            $ character.FaceChange("sad")
             ch_j "Sorry, you can keep your toys out of there."
     else:
-            $ JeanX.FaceChange("normal", 1)
+            $ character.FaceChange("normal", 1)
             ch_j "No way."
-    $ JeanX.RecentActions.append("no dildo")
-    $ JeanX.DailyActions.append("no dildo")
+    $ character.RecentActions.append("no dildo")
+    $ character.DailyActions.append("no dildo")
     $ temp_modifier = 0
     return
 
@@ -2780,26 +2766,26 @@ label Jean_DA_Prep: #Animation set-up
     if Trigger2 == "dildo anal":
         return
 
-    if not JeanX.Forced and Situation != "auto":
-        $ temp_modifier = 20 if JeanX.PantsNum() >= 6 else 0
-        call Bottoms_Off(JeanX)
-        if "angry" in JeanX.RecentActions:
+    if not character.Forced and Situation != "auto":
+        $ temp_modifier = 20 if character.PantsNum() >= 6 else 0
+        call Bottoms_Off(character)
+        if "angry" in character.RecentActions:
             return
 
     $ temp_modifier = 0
     call Jean_Pussy_Launch("dildo anal")
-    if not JeanX.DildoA:
-        if JeanX.Forced:
-            $ JeanX.Statup("Love", 90, -75)
-            $ JeanX.Statup("Obed", 70, 60)
-            $ JeanX.Statup("Inbt", 80, 35)
+    if not character.DildoA:
+        if character.Forced:
+            $ character.Statup("Love", 90, -75)
+            $ character.Statup("Obed", 70, 60)
+            $ character.Statup("Inbt", 80, 35)
         else:
-            $ JeanX.Statup("Love", 90, 10)
-            $ JeanX.Statup("Obed", 70, 20)
-            $ JeanX.Statup("Inbt", 80, 45)
-    if JeanX.Taboo:
-        $ JeanX.Statup("Inbt", 90, int(Taboo/10))
-        $ JeanX.Statup("Lust", 50, int(Taboo/5))
+            $ character.Statup("Love", 90, 10)
+            $ character.Statup("Obed", 70, 20)
+            $ character.Statup("Inbt", 80, 45)
+    if character.Taboo:
+        $ character.Statup("Inbt", 90, int(Taboo/10))
+        $ character.Statup("Lust", 50, int(Taboo/5))
 
 
     if Situation:
@@ -2807,17 +2793,17 @@ label Jean_DA_Prep: #Animation set-up
         $ Situation = 0
     $ Line = 0
     $ Cnt = 0
-    if JeanX.Taboo:
-        $ JeanX.DrainWord("tabno")
-    $ JeanX.DrainWord("no dildo")
-    $ JeanX.RecentActions.append("dildo anal")
-    $ JeanX.DailyActions.append("dildo anal")
+    if character.Taboo:
+        $ character.DrainWord("tabno")
+    $ character.DrainWord("no dildo")
+    $ character.RecentActions.append("dildo anal")
+    $ character.DailyActions.append("dildo anal")
 
 label Jean_DA_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(JeanX)
+        call Shift_Focus(character)
         call Jean_Pussy_Launch("dildo anal")
-        $ JeanX.LustFace()
+        $ character.LustFace()
 
         if  Player.Focus < 100:
                     #Player Command menu
@@ -2826,7 +2812,7 @@ label Jean_DA_Cycle: #Repeating strokes
                                     pass
 
                         "Slap her ass":
-                                call Slap_Ass(JeanX)
+                                call Slap_Ass(character)
                                 jump Jean_DA_Cycle
 
                         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
@@ -2841,15 +2827,15 @@ label Jean_DA_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                 call Offhand_Set
                                                 if Trigger2:
-                                                     $ JeanX.Action -= 1
+                                                     $ character.Action -= 1
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Shift primary action":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                     menu:
                                                         "I want to stick a finger in her pussy.":
                                                                 $ Situation = "shift"
@@ -2866,7 +2852,7 @@ label Jean_DA_Cycle: #Repeating strokes
                                                         "Never Mind":
                                                                 jump Jean_DA_Cycle
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Shift your focus" if Trigger2:
                                                 $ Situation = "shift focus"
@@ -2878,12 +2864,12 @@ label Jean_DA_Cycle: #Repeating strokes
                                         pass
                                     "Threesome actions" if Partner:
                                         menu:
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(JeanX)
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
+                                            "Ask [character.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
+                                                        call Les_Change(character)
+                                            "Ask [character.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
                                                         pass
                                             "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(JeanX)
+                                                        call Three_Change(character)
 
                                             "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
                                                         $ ThreeCount = 0
@@ -2891,7 +2877,7 @@ label Jean_DA_Cycle: #Repeating strokes
                                                         $ ThreeCount = 0
 
                                             "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(JeanX)
+                                                        call Trigger_Swap(character)
                                             "Undress [Partner.Name]":
                                                         call Girl_Undress(Partner)
                                                         jump Jean_DA_Cycle
@@ -2914,11 +2900,11 @@ label Jean_DA_Cycle: #Repeating strokes
                                     jump Jean_DA_After
         #End menu (if Line)
 
-        if JeanX.Panties or JeanX.PantsNum() >= 6 or JeanX.HoseNum() >= 5: #This checks if Jean wants to strip down.
-                call Girl_Undress(JeanX,"auto")
+        if character.Panties or character.PantsNum() >= 6 or character.HoseNum() >= 5: #This checks if Jean wants to strip down.
+                call Girl_Undress(character,"auto")
 
-        call Shift_Focus(JeanX)
-        call Sex_Dialog(JeanX,Partner)
+        call Shift_Focus(character)
+        call Sex_Dialog(character,Partner)
 
         #If either of you could cum
 
@@ -2926,27 +2912,27 @@ label Jean_DA_Cycle: #Repeating strokes
         $ Round -= 1
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-        if Player.Focus >= 100 or JeanX.Lust >= 100:
+        if Player.Focus >= 100 or character.Lust >= 100:
                     #If either of you could cum
                     if Player.Focus >= 100:
                             #If you can cum:
-                            call Player_Cumming(JeanX)
-                            if "angry" in JeanX.RecentActions:
+                            call Player_Cumming(character)
+                            if "angry" in character.RecentActions:
                                 call Jean_Pos_Reset
                                 return
-                            $ JeanX.Statup("Lust", 200, 5)
-                            if 100 > JeanX.Lust >= 70 and JeanX.OCount < 2:
-                                $ JeanX.RecentActions.append("unsatisfied")
-                                $ JeanX.DailyActions.append("unsatisfied")
+                            $ character.Statup("Lust", 200, 5)
+                            if 100 > character.Lust >= 70 and character.OCount < 2:
+                                $ character.RecentActions.append("unsatisfied")
+                                $ character.DailyActions.append("unsatisfied")
 
                             if Player.Focus > 80:
                                 jump Jean_DA_After
                             $ Line = "came"
 
-                    if JeanX.Lust >= 100:
+                    if character.Lust >= 100:
                             #If Jean can cum
-                            call Girl_Cumming(JeanX)
-                            if Situation == "shift" or "angry" in JeanX.RecentActions:
+                            call Girl_Cumming(character)
+                            if Situation == "shift" or "angry" in character.RecentActions:
                                 jump Jean_DA_After
 
                     if Line == "came": #ex Player.Focus <= 20:
@@ -2956,8 +2942,8 @@ label Jean_DA_Cycle: #Repeating strokes
                                 "You're emptied out, you should probably take a break."
 
 
-                            if "unsatisfied" in JeanX.RecentActions:#And Jean is unsatisfied,
-                                "[JeanX.Name] still seems a bit unsatisfied with the experience."
+                            if "unsatisfied" in character.RecentActions:#And Jean is unsatisfied,
+                                "[character.Name] still seems a bit unsatisfied with the experience."
                                 menu:
                                     "Finish her?"
                                     "Yes, keep going for a bit.":
@@ -2972,17 +2958,17 @@ label Jean_DA_Cycle: #Repeating strokes
 
         $ Player.Focus -= 12 if Player.FocusX and Player.Focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if character.SEXP >= 100 or ApprovalCheck(character, 1200, "LO"):
             pass
-        elif Cnt == (5 + JeanX.DildoA):
-                    $ JeanX.Brows = "confused"
+        elif Cnt == (5 + character.DildoA):
+                    $ character.Brows = "confused"
                     ch_j "What are you even doing down there?"
-        elif JeanX.Lust >= 80:
+        elif character.Lust >= 80:
                     pass
-        elif Cnt == (15 + JeanX.DildoA) and JeanX.SEXP >= 15 and not ApprovalCheck(JeanX, 1500):
-                    $ JeanX.Brows = "confused"
+        elif Cnt == (15 + character.DildoA) and character.SEXP >= 15 and not ApprovalCheck(character, 1500):
+                    $ character.Brows = "confused"
                     menu:
-                        ch_j "[JeanX.Petname], this is getting uncomfortable, maybe we could try something else."
+                        ch_j "[character.Petname], this is getting uncomfortable, maybe we could try something else."
                         "Finish up.":
                                 "You let go. . ."
                                 jump Jean_DA_After
@@ -2991,56 +2977,56 @@ label Jean_DA_Cycle: #Repeating strokes
                                 $ Situation = "shift"
                                 jump Jean_DA_After
                         "No, this is fun.":
-                                if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
-                                    $ JeanX.Statup("Love", 200, -5)
-                                    $ JeanX.Statup("Obed", 50, 3)
-                                    $ JeanX.Statup("Obed", 80, 2)
+                                if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
+                                    $ character.Statup("Love", 200, -5)
+                                    $ character.Statup("Obed", 50, 3)
+                                    $ character.Statup("Obed", 80, 2)
                                     "She grumbles but lets you keep going."
                                 else:
-                                    $ JeanX.FaceChange("angry", 1)
+                                    $ character.FaceChange("angry", 1)
                                     call Jean_Pos_Reset
                                     "She scowls at you and pulls back."
                                     ch_j "Well if that's your attitude, I don't need your \"help\"."
-                                    $ JeanX.Statup("Love", 50, -3, 1)
-                                    $ JeanX.Statup("Love", 80, -4, 1)
-                                    $ JeanX.Statup("Obed", 30, -1, 1)
-                                    $ JeanX.Statup("Obed", 50, -1, 1)
-                                    $ JeanX.RecentActions.append("angry")
-                                    $ JeanX.DailyActions.append("angry")
+                                    $ character.Statup("Love", 50, -3, 1)
+                                    $ character.Statup("Love", 80, -4, 1)
+                                    $ character.Statup("Obed", 30, -1, 1)
+                                    $ character.Statup("Obed", 50, -1, 1)
+                                    $ character.RecentActions.append("angry")
+                                    $ character.DailyActions.append("angry")
                                     jump Jean_DA_After
         #End Count check
 
         if Round == 10:
-                call Sex_Basic_Dialog(JeanX,10) #"You might want to wrap this up, it's getting late."
+                call Sex_Basic_Dialog(character,10) #"You might want to wrap this up, it's getting late."
         elif Round == 5:
-                call Sex_Basic_Dialog(JeanX,5)   #"Seriously, it'll be time to stop soon."
+                call Sex_Basic_Dialog(character,5)   #"Seriously, it'll be time to stop soon."
 
     #Round = 0 loop breaks
-    $ JeanX.FaceChange("bemused", 0)
+    $ character.FaceChange("bemused", 0)
     $ Line = 0
-    call Sex_Basic_Dialog(JeanX,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
+    call Sex_Basic_Dialog(character,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
 
 label Jean_DA_After:
     if not Situation: #fix  Situation != "shift" and Situation != "auto" and Situation != "pullback":
         call Jean_Pos_Reset
 
-    $ JeanX.FaceChange("sexy")
+    $ character.FaceChange("sexy")
 
-    $ JeanX.DildoA += 1
-    $ JeanX.Action -=1
+    $ character.DildoA += 1
+    $ character.Action -=1
 
-    call Partner_Like(JeanX,1)
+    call Partner_Like(character,1)
 
-    if JeanX.DildoA == 1:
-            $ JeanX.SEXP += 10
+    if character.DildoA == 1:
+            $ character.SEXP += 10
             if not Situation:
-                if JeanX.Love >= 500 and "unsatisfied" not in JeanX.RecentActions:
-                    if JeanX.Loose:
+                if character.Love >= 500 and "unsatisfied" not in character.RecentActions:
+                    if character.Loose:
                         ch_j "That was. . . interesting. . ."
                     else:
                         ch_j "Ouch. . ."
-                elif JeanX.Obed <= 500 and Player.Focus <= 20:
-                    $ JeanX.FaceChange("perplexed", 1)
+                elif character.Obed <= 500 and Player.Focus <= 20:
+                    $ character.FaceChange("perplexed", 1)
                     ch_j "Did you like that?"
 
     $ temp_modifier = 0
@@ -3049,81 +3035,81 @@ label Jean_DA_After:
     call Checkout
     return
 
-# end JeanX.Dildo Ass /////////////////////////////////////////////////////////////////////////////
+# end character.Dildo Ass /////////////////////////////////////////////////////////////////////////////
 
 label Jean_Vibrator_Check:                                                                                 #fix this whole section is copy/paste unfinished
     if "vibrator" in Player.Inventory:
         "You pull out the \"shocker\" vibrator, handy."
-    elif "vibrator" in JeanX.Inventory:
-        "You ask [JeanX.Name] to get out her vibrator."
+    elif "vibrator" in character.Inventory:
+        "You ask [character.Name] to get out her vibrator."
     else:
         "You don't have one of those on you."
         return 0
     return 1
 
-## JeanX.Footjob //////////////////////////////////////////////////////////////////////
+## character.Footjob //////////////////////////////////////////////////////////////////////
 label Jean_Footjob:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JeanX)
-    if JeanX.Foot >= 7: # She loves it
+    call Shift_Focus(character)
+    if character.Foot >= 7: # She loves it
         $ temp_modifier += 10
-    elif JeanX.Foot >= 3: #You've done it before several times
+    elif character.Foot >= 3: #You've done it before several times
         $ temp_modifier += 7
-    elif JeanX.Foot: #You've done it before
+    elif character.Foot: #You've done it before
         $ temp_modifier += 3
 
-    if JeanX.Addict >= 75 and JeanX.Swallow >=3: #She's really strung out and has swallowed
+    if character.Addict >= 75 and character.Swallow >=3: #She's really strung out and has swallowed
         $ temp_modifier += 10
-    if JeanX.Addict >= 75:
+    if character.Addict >= 75:
         $ temp_modifier += 5
 
     if Situation == "shift":
         $ temp_modifier += 15
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in character.Traits:
         $ temp_modifier += (3*Taboo)
-    if JeanX in Player.Harem or "sex friend" in JeanX.Petnames:
+    if character in Player.Harem or "sex friend" in character.Petnames:
         $ temp_modifier += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in character.Traits:
         $ temp_modifier -= 40
-    if JeanX.ForcedCount and not JeanX.Forced:
-        $ temp_modifier -= 5 * JeanX.ForcedCount
+    if character.ForcedCount and not character.Forced:
+        $ temp_modifier -= 5 * character.ForcedCount
 
-    if JeanX.Taboo and "tabno" in JeanX.DailyActions:
+    if character.Taboo and "tabno" in character.DailyActions:
         $ temp_modifier -= 10
 
-    if "no foot" in JeanX.DailyActions:
+    if "no foot" in character.DailyActions:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no foot" in JeanX.RecentActions else 0
+        $ temp_modifier -= 10 if "no foot" in character.RecentActions else 0
 
-    $ Approval = ApprovalCheck(JeanX, 1250, TabM = 3) # 110, 125, 140, Taboo -120(230)
+    $ Approval = ApprovalCheck(character, 1250, TabM = 3) # 110, 125, 140, Taboo -120(230)
 
-    if Situation == JeanX:                                                                  #Jean auto-starts
+    if Situation == character:                                                                  #Jean auto-starts
         if Approval > 2:                                                      # fix, add Jean auto stuff here
-            "[JeanX.Name] leans back  and starts rubbing your cock with her foot."
+            "[character.Name] leans back  and starts rubbing your cock with her foot."
             menu:
                 "What do you do?"
                 "Nothing.":
-                    $ JeanX.Statup("Inbt", 70, 3)
-                    $ JeanX.Statup("Inbt", 30, 2)
-                    "[JeanX.Name] continues her actions."
+                    $ character.Statup("Inbt", 70, 3)
+                    $ character.Statup("Inbt", 30, 2)
+                    "[character.Name] continues her actions."
                 "Praise her.":
-                    $ JeanX.FaceChange("sexy", 1)
-                    $ JeanX.Statup("Inbt", 70, 3)
-                    ch_p "Oooh, that's good, [JeanX.Pet]."
-                    $ JeanX.NameCheck() #checks reaction to petname
-                    "[JeanX.Name] continues her actions."
-                    $ JeanX.Statup("Love", 80, 1)
-                    $ JeanX.Statup("Obed", 90, 1)
-                    $ JeanX.Statup("Obed", 50, 2)
+                    $ character.FaceChange("sexy", 1)
+                    $ character.Statup("Inbt", 70, 3)
+                    ch_p "Oooh, that's good, [character.Pet]."
+                    $ character.NameCheck() #checks reaction to petname
+                    "[character.Name] continues her actions."
+                    $ character.Statup("Love", 80, 1)
+                    $ character.Statup("Obed", 90, 1)
+                    $ character.Statup("Obed", 50, 2)
                 "Ask her to stop.":
-                    $ JeanX.FaceChange("surprised")
-                    $ JeanX.Statup("Inbt", 70, 1)
-                    ch_p "Let's not do that for now, [JeanX.Pet]."
-                    $ JeanX.NameCheck() #checks reaction to petname
-                    "[JeanX.Name] puts it down."
-                    $ JeanX.Statup("Obed", 90, 1)
-                    $ JeanX.Statup("Obed", 50, 1)
-                    $ JeanX.Statup("Obed", 30, 2)
+                    $ character.FaceChange("surprised")
+                    $ character.Statup("Inbt", 70, 1)
+                    ch_p "Let's not do that for now, [character.Pet]."
+                    $ character.NameCheck() #checks reaction to petname
+                    "[character.Name] puts it down."
+                    $ character.Statup("Obed", 90, 1)
+                    $ character.Statup("Obed", 50, 1)
+                    $ character.Statup("Obed", 30, 2)
                     return
             if Trigger:
                 $ Trigger3 = "foot"
@@ -3134,58 +3120,58 @@ label Jean_Footjob:
             $ Trigger2 = 0
             return
 
-    if not JeanX.Foot and "no foot" not in JeanX.RecentActions:
-        $ JeanX.FaceChange("confused", 2)
+    if not character.Foot and "no foot" not in character.RecentActions:
+        $ character.FaceChange("confused", 2)
         ch_j "Oh, a foot person, eh?"
-        $ JeanX.Blush = 1
+        $ character.Blush = 1
 
-    if not JeanX.Foot and Approval:                                                 #First time dialog
-        if JeanX.Forced:
-            $ JeanX.FaceChange("sad",1)
-            $ JeanX.Statup("Love", 70, -3, 1)
-            $ JeanX.Statup("Love", 20, -2, 1)
-        elif JeanX.Love >= (JeanX.Obed + JeanX.Inbt - JeanX.IX):
-            $ JeanX.FaceChange("sexy",1)
-            $ JeanX.Brows = "sad"
-            $ JeanX.Mouth = "smile"
+    if not character.Foot and Approval:                                                 #First time dialog
+        if character.Forced:
+            $ character.FaceChange("sad",1)
+            $ character.Statup("Love", 70, -3, 1)
+            $ character.Statup("Love", 20, -2, 1)
+        elif character.Love >= (character.Obed + character.Inbt - character.IX):
+            $ character.FaceChange("sexy",1)
+            $ character.Brows = "sad"
+            $ character.Mouth = "smile"
             ch_j "I suppose. . ."
-        elif JeanX.Obed >= (JeanX.Inbt - JeanX.IX):
-            $ JeanX.FaceChange("normal",1)
-            ch_j "If you want, [JeanX.Petname]. . ."
-        elif JeanX.Addict >= 50:
-            $ JeanX.FaceChange("manic", 1)
+        elif character.Obed >= (character.Inbt - character.IX):
+            $ character.FaceChange("normal",1)
+            ch_j "If you want, [character.Petname]. . ."
+        elif character.Addict >= 50:
+            $ character.FaceChange("manic", 1)
             ch_j "Okay. . ."
         else: # Uninhibited
-            $ JeanX.FaceChange("lipbite",1)
+            $ character.FaceChange("lipbite",1)
             ch_j "Sure. . ."
 
     elif Approval:                                                                       #Second time+ dialog
-        if JeanX.Forced:
-            $ JeanX.FaceChange("sad")
-            $ JeanX.Statup("Love", 70, -3, 1)
-            $ JeanX.Statup("Love", 20, -2, 1)
+        if character.Forced:
+            $ character.FaceChange("sad")
+            $ character.Statup("Love", 70, -3, 1)
+            $ character.Statup("Love", 20, -2, 1)
             ch_j "That's it?"
-        elif not JeanX.Taboo and "tabno" in JeanX.DailyActions:
+        elif not character.Taboo and "tabno" in character.DailyActions:
             ch_j "Um, I guess we're alone enough like this. . ."
-        elif "foot" in JeanX.DailyActions:
-            $ JeanX.FaceChange("sexy", 1)
+        elif "foot" in character.DailyActions:
+            $ character.FaceChange("sexy", 1)
             ch_j "More of that, huh. . ."
             jump Jean_FJ_Prep
-#        elif "foot" in JeanX.DailyActions:
-#            $ JeanX.FaceChange("sexy", 1)
+#        elif "foot" in character.DailyActions:
+#            $ character.FaceChange("sexy", 1)
 #            $ Line = renpy.random.choice(["Another one?",
 #                "Didn't get enough earlier?",
 #                "My feet are kinda sore from earlier.",
 #                "My feet are kinda sore from earlier."])
 #            ch_j "[Line]"
-        elif JeanX.Foot < 3:
-            $ JeanX.FaceChange("sexy", 1)
-            $ JeanX.Brows = "confused"
-            $ JeanX.Mouth = "kiss"
+        elif character.Foot < 3:
+            $ character.FaceChange("sexy", 1)
+            $ character.Brows = "confused"
+            $ character.Mouth = "kiss"
             ch_j "Hmm, it is kinda fun. . ."
         else:
-            $ JeanX.FaceChange("sexy", 1)
-            $ JeanX.ArmPose = 2
+            $ character.FaceChange("sexy", 1)
+            $ character.ArmPose = 2
             $ Line = renpy.random.choice(["You want me to use my feet?",
                 "So you'd like another footjob?",
                 "A little. . . [she rubs her foot along your leg]?",
@@ -3194,17 +3180,17 @@ label Jean_Footjob:
         $ Line = 0
 
     if Approval >= 2:                                                                   #She's into it. . .
-        if JeanX.Forced:
-            $ JeanX.FaceChange("sad")
-            $ JeanX.Statup("Obed", 90, 1)
-            $ JeanX.Statup("Inbt", 60, 1)
+        if character.Forced:
+            $ character.FaceChange("sad")
+            $ character.Statup("Obed", 90, 1)
+            $ character.Statup("Inbt", 60, 1)
             ch_j "Ok, sure."
-        elif "no foot" in JeanX.DailyActions:
+        elif "no foot" in character.DailyActions:
             ch_j "Fine."
         else:
-            $ JeanX.FaceChange("sexy", 1)
-            $ JeanX.Statup("Love", 90, 1)
-            $ JeanX.Statup("Inbt", 50, 3)
+            $ character.FaceChange("sexy", 1)
+            $ character.Statup("Love", 90, 1)
+            $ character.Statup("Inbt", 50, 3)
             $ Line = renpy.random.choice(["Sure, I guess.",
                 "OK.",
                 "Fine, lemme see it.",
@@ -3213,52 +3199,52 @@ label Jean_Footjob:
                 "Heh, ok, ok."])
             ch_j "[Line]"
             $ Line = 0
-        $ JeanX.Statup("Obed", 20, 1)
-        $ JeanX.Statup("Obed", 60, 1)
-        $ JeanX.Statup("Inbt", 70, 2)
+        $ character.Statup("Obed", 20, 1)
+        $ character.Statup("Obed", 60, 1)
+        $ character.Statup("Inbt", 70, 2)
         jump Jean_FJ_Prep
 
     else:                                                                               #She's not into it, but maybe. . .
-        $ JeanX.FaceChange("angry")
-        if "no foot" in JeanX.RecentActions:
-            ch_j "Don't make me repeat myself again, [JeanX.Petname]."
-        elif JeanX.Taboo and "tabno" in JeanX.DailyActions and "no foot" in JeanX.DailyActions:
+        $ character.FaceChange("angry")
+        if "no foot" in character.RecentActions:
+            ch_j "Don't make me repeat myself again, [character.Petname]."
+        elif character.Taboo and "tabno" in character.DailyActions and "no foot" in character.DailyActions:
             ch_j "I told you I wasn't comfortable in public. . ."
-        elif "no foot" in JeanX.DailyActions:
-            ch_j "I told you \"no,\" [JeanX.Petname]."
-        elif JeanX.Taboo and "tabno" in JeanX.DailyActions:
+        elif "no foot" in character.DailyActions:
+            ch_j "I told you \"no,\" [character.Petname]."
+        elif character.Taboo and "tabno" in character.DailyActions:
             ch_j "I said not in public!"
-        elif not JeanX.Foot:
-            $ JeanX.FaceChange("bemused")
+        elif not character.Foot:
+            $ character.FaceChange("bemused")
             ch_j "Well. . ."
         else:
-            $ JeanX.FaceChange("bemused")
+            $ character.FaceChange("bemused")
             ch_j "Not now, ok?"
         menu:
             extend ""
-            "Sorry, never mind." if "no foot" in JeanX.DailyActions:
-                $ JeanX.FaceChange("bemused")
+            "Sorry, never mind." if "no foot" in character.DailyActions:
+                $ character.FaceChange("bemused")
                 ch_j "Sure, it's fine."
                 return
-            "Maybe later?" if "no foot" not in JeanX.DailyActions:
-                $ JeanX.FaceChange("sexy")
+            "Maybe later?" if "no foot" not in character.DailyActions:
+                $ character.FaceChange("sexy")
                 ch_j "Well. . ."
                 ch_j "Maybe."
-                $ JeanX.Statup("Love", 80, 2)
-                $ JeanX.Statup("Inbt", 70, 2)
-                if JeanX.Taboo:
-                    $ JeanX.RecentActions.append("tabno")
-                    $ JeanX.DailyActions.append("tabno")
-                $ JeanX.RecentActions.append("no foot")
-                $ JeanX.DailyActions.append("no foot")
+                $ character.Statup("Love", 80, 2)
+                $ character.Statup("Inbt", 70, 2)
+                if character.Taboo:
+                    $ character.RecentActions.append("tabno")
+                    $ character.DailyActions.append("tabno")
+                $ character.RecentActions.append("no foot")
+                $ character.DailyActions.append("no foot")
                 return
             "I'd really appreciate it. . .":
                 if Approval:
-                    $ JeanX.FaceChange("sexy")
-                    $ JeanX.Statup("Obed", 90, 2)
-                    $ JeanX.Statup("Obed", 50, 2)
-                    $ JeanX.Statup("Inbt", 70, 3)
-                    $ JeanX.Statup("Inbt", 40, 2)
+                    $ character.FaceChange("sexy")
+                    $ character.Statup("Obed", 90, 2)
+                    $ character.Statup("Obed", 50, 2)
+                    $ character.Statup("Inbt", 70, 3)
+                    $ character.Statup("Inbt", 40, 2)
                     $ Line = renpy.random.choice(["Sure, I guess.",
                         "OK.",
                         "Fine, lemme see it.",
@@ -3272,52 +3258,52 @@ label Jean_Footjob:
                     pass
 
             "Come on, get to work.":                                               # Pressured into it
-                $ Approval = ApprovalCheck(JeanX, 400, "OI", TabM = 3) # 35, 50, 65, -120(155)
-                if Approval > 1 or (Approval and JeanX.Forced):
-                    $ JeanX.FaceChange("sad")
-                    $ JeanX.Statup("Love", 70, -5, 1)
-                    $ JeanX.Statup("Love", 200, -2)
-                    ch_j "Fine."
-                    $ JeanX.Statup("Obed", 50, 4)
-                    $ JeanX.Statup("Inbt", 80, 1)
-                    $ JeanX.Statup("Inbt", 60, 3)
-                    $ JeanX.Forced = 1
+                $ Approval = ApprovalCheck(character, 400, "OI", TabM = 3) # 35, 50, 65, -120(155)
+                if Approval > 1 or (Approval and character.Forced):
+                    $ character.FaceChange("sad")
+                    $ character.Statup("Love", 70, -5, 1)
+                    $ character.Statup("Love", 200, -2)
+                    ch_j
+                    $ character.Statup("Obed", 50, 4)
+                    $ character.Statup("Inbt", 80, 1)
+                    $ character.Statup("Inbt", 60, 3)
+                    $ character.Forced = 1
                     jump Jean_FJ_Prep
                 else:
-                    $ JeanX.Statup("Love", 200, -15)
-                    $ JeanX.RecentActions.append("angry")
-                    $ JeanX.DailyActions.append("angry")
+                    $ character.Statup("Love", 200, -15)
+                    $ character.RecentActions.append("angry")
+                    $ character.DailyActions.append("angry")
 
     #She refused all offers.
-    $ JeanX.ArmPose = 1
-    if "no foot" in JeanX.DailyActions:
-        $ JeanX.FaceChange("angry", 1)
-        ch_j "I'm not telling you again."
-        $ JeanX.RecentActions.append("angry")
-        $ JeanX.DailyActions.append("angry")
-    elif JeanX.Forced:
-        $ JeanX.FaceChange("angry", 1)
+    $ character.ArmPose = 1
+    if "no foot" in character.DailyActions:
+        $ character.FaceChange("angry", 1)
+
+        $ character.RecentActions.append("angry")
+        $ character.DailyActions.append("angry")
+    elif character.Forced:
+        $ character.FaceChange("angry", 1)
         ch_j "Don't push it. . ."
-        $ JeanX.Statup("Lust", 200, 5)
-        if JeanX.Love > 300:
-                $ JeanX.Statup("Love", 70, -2)
-        $ JeanX.Statup("Obed", 50, -2)
-        $ JeanX.RecentActions.append("angry")
-        $ JeanX.DailyActions.append("angry")
-    elif JeanX.Taboo:                             # she refuses and this is too public a place for her
-        $ JeanX.FaceChange("angry", 1)
-        $ JeanX.DailyActions.append("tabno")
+        $ character.Statup("Lust", 200, 5)
+        if character.Love > 300:
+                $ character.Statup("Love", 70, -2)
+        $ character.Statup("Obed", 50, -2)
+        $ character.RecentActions.append("angry")
+        $ character.DailyActions.append("angry")
+    elif character.Taboo:                             # she refuses and this is too public a place for her
+        $ character.FaceChange("angry", 1)
+        $ character.DailyActions.append("tabno")
         ch_j "This is too public."
-        $ JeanX.Statup("Lust", 200, 5)
-        $ JeanX.Statup("Obed", 50, -3)
-    elif JeanX.Foot:
-        $ JeanX.FaceChange("sad")
+        $ character.Statup("Lust", 200, 5)
+        $ character.Statup("Obed", 50, -3)
+    elif character.Foot:
+        $ character.FaceChange("sad")
         ch_j "Not right now."
     else:
-        $ JeanX.FaceChange("normal", 1)
+        $ character.FaceChange("normal", 1)
         ch_j "I'd rather not."
-    $ JeanX.RecentActions.append("no foot")
-    $ JeanX.DailyActions.append("no foot")
+    $ character.RecentActions.append("no foot")
+    $ character.DailyActions.append("no foot")
     $ temp_modifier = 0
     return
 
@@ -3326,46 +3312,46 @@ label Jean_FJ_Prep:
     if Trigger2 == "foot":
         return
 
-    if JeanX.Taboo:
-        $ JeanX.Statup("Inbt", 90, int(Taboo/10))
-        $ JeanX.Statup("Lust", 50, int(Taboo/5))
+    if character.Taboo:
+        $ character.Statup("Inbt", 90, int(Taboo/10))
+        $ character.Statup("Lust", 50, int(Taboo/5))
 
-    $ JeanX.FaceChange("sexy")
-    if JeanX.Forced:
-        $ JeanX.FaceChange("sad")
-    elif not JeanX.Foot:
-        $ JeanX.Brows = "confused"
-        $ JeanX.Eyes = "sexy"
-        $ JeanX.Mouth = "smile"
+    $ character.FaceChange("sexy")
+    if character.Forced:
+        $ character.FaceChange("sad")
+    elif not character.Foot:
+        $ character.Brows = "confused"
+        $ character.Eyes = "sexy"
+        $ character.Mouth = "smile"
 
-    call Seen_First_Peen(JeanX,Partner)
+    call Seen_First_Peen(character,Partner)
 
-    if not JeanX.Foot:
-        if JeanX.Forced:
-            $ JeanX.Statup("Love", 90, -20)
-            $ JeanX.Statup("Obed", 70, 25)
-            $ JeanX.Statup("Inbt", 80, 30)
+    if not character.Foot:
+        if character.Forced:
+            $ character.Statup("Love", 90, -20)
+            $ character.Statup("Obed", 70, 25)
+            $ character.Statup("Inbt", 80, 30)
         else:
-            $ JeanX.Statup("Love", 90, 5)
-            $ JeanX.Statup("Obed", 70, 20)
-            $ JeanX.Statup("Inbt", 80, 20)
+            $ character.Statup("Love", 90, 5)
+            $ character.Statup("Obed", 70, 20)
+            $ character.Statup("Inbt", 80, 20)
 
     if Situation:
         $ renpy.pop_call()
         $ Situation = 0
     $ Line = 0
     $ Cnt = 0
-    if JeanX.Taboo:
-        $ JeanX.DrainWord("tabno")
-    $ JeanX.DrainWord("no foot")
-    $ JeanX.RecentActions.append("foot")
-    $ JeanX.DailyActions.append("foot")
+    if character.Taboo:
+        $ character.DrainWord("tabno")
+    $ character.DrainWord("no foot")
+    $ character.RecentActions.append("foot")
+    $ character.DailyActions.append("foot")
 
 label Jean_FJ_Cycle:
     while Round > 0:
-        call Shift_Focus(JeanX)
+        call Shift_Focus(character)
         call Jean_Sex_Launch("foot")
-        $ JeanX.LustFace()
+        $ character.LustFace()
 
         if  Player.Focus < 100:
                     #Player Command menu
@@ -3399,56 +3385,56 @@ label Jean_FJ_Cycle:
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                 call Offhand_Set
                                                 if Trigger2:
-                                                     $ JeanX.Action -= 1
+                                                     $ character.Action -= 1
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Shift primary action":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                     menu:
                                                         "How about a blowjob?":
-                                                                    if JeanX.Action and MultiAction:
+                                                                    if character.Action and MultiAction:
                                                                         $ Situation = "shift"
                                                                         call Jean_FJ_After
                                                                         call Jean_Blowjob
                                                                     else:
-                                                                        call Sex_Basic_Dialog(JeanX,"tired")
+                                                                        call Sex_Basic_Dialog(character,"tired")
                                                         "How about a handjob?":
-                                                                    if JeanX.Action and MultiAction:
+                                                                    if character.Action and MultiAction:
                                                                         $ Situation = "shift"
                                                                         call Jean_FJ_After
                                                                         call Jean_Handjob
                                                                     else:
-                                                                        call Sex_Basic_Dialog(JeanX,"tired")
+                                                                        call Sex_Basic_Dialog(character,"tired")
 
                                                         "How about a titjob?":
-                                                                    if JeanX.Action and MultiAction:
+                                                                    if character.Action and MultiAction:
                                                                         $ Situation = "shift"
                                                                         call Jean_FJ_After
                                                                         call Jean_Titjob
                                                                     else:
-                                                                        call Sex_Basic_Dialog(JeanX,"tired")
+                                                                        call Sex_Basic_Dialog(character,"tired")
 
 
 
                                                         "Never Mind":
                                                                 jump Jean_FJ_Cycle
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Threesome actions (locked)" if not Partner:
                                         pass
                                     "Threesome actions" if Partner:
                                         menu:
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(JeanX)
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
+                                            "Ask [character.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
+                                                        call Les_Change(character)
+                                            "Ask [character.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
                                                         pass
                                             "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(JeanX)
+                                                        call Three_Change(character)
 
                                             "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
                                                         $ ThreeCount = 0
@@ -3456,7 +3442,7 @@ label Jean_FJ_Cycle:
                                                         $ ThreeCount = 0
 
                                             "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(JeanX)
+                                                        call Trigger_Swap(character)
                                             "Undress [Partner.Name]":
                                                         call Girl_Undress(Partner)
                                                         jump Jean_FJ_Cycle
@@ -3465,12 +3451,12 @@ label Jean_FJ_Cycle:
                                                         jump Jean_FJ_Cycle
                                             "Never mind":
                                                         jump Jean_FJ_Cycle
-                                    "undress [JeanX.Name]":
-                                            call Girl_Undress(JeanX)
-                                    "Clean up [JeanX.Name] (locked)" if not JeanX.Spunk:
+                                    "undress [character.Name]":
+                                            call Girl_Undress(character)
+                                    "Clean up [character.Name] (locked)" if not character.Spunk:
                                             pass
-                                    "Clean up [JeanX.Name]" if JeanX.Spunk:
-                                            call Girl_Cleanup(JeanX,"ask")
+                                    "Clean up [character.Name]" if character.Spunk:
+                                            call Girl_Cleanup(character,"ask")
                                     "Never mind":
                                             jump Jean_FJ_Cycle
 
@@ -3487,8 +3473,8 @@ label Jean_FJ_Cycle:
                                     jump Jean_FJ_After
         #End menu (if Line)
 
-        call Shift_Focus(JeanX)
-        call Sex_Dialog(JeanX,Partner)
+        call Shift_Focus(character)
+        call Sex_Dialog(character,Partner)
 
         #If either of you could cum
 
@@ -3496,27 +3482,27 @@ label Jean_FJ_Cycle:
         $ Round -= 1
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-        if Player.Focus >= 100 or JeanX.Lust >= 100:
+        if Player.Focus >= 100 or character.Lust >= 100:
                     #If either of you could cum
                     if Player.Focus >= 100:
                             #If you can cum:
-                            call Player_Cumming(JeanX)
-                            if "angry" in JeanX.RecentActions:
+                            call Player_Cumming(character)
+                            if "angry" in character.RecentActions:
                                 call Jean_Sex_Reset
                                 return
-                            $ JeanX.Statup("Lust", 200, 5)
-                            if 100 > JeanX.Lust >= 70 and JeanX.OCount < 2:
-                                $ JeanX.RecentActions.append("unsatisfied")
-                                $ JeanX.DailyActions.append("unsatisfied")
+                            $ character.Statup("Lust", 200, 5)
+                            if 100 > character.Lust >= 70 and character.OCount < 2:
+                                $ character.RecentActions.append("unsatisfied")
+                                $ character.DailyActions.append("unsatisfied")
 
                             if Player.Focus > 80:
                                 jump Jean_FJ_After
                             $ Line = "came"
 
-                    if JeanX.Lust >= 100:
+                    if character.Lust >= 100:
                             #If Jean can cum
-                            call Girl_Cumming(JeanX)
-                            if Situation == "shift" or "angry" in JeanX.RecentActions:
+                            call Girl_Cumming(character)
+                            if Situation == "shift" or "angry" in character.RecentActions:
                                 jump Jean_FJ_After
 
                     if Line == "came": #ex Player.Focus <= 20:
@@ -3526,8 +3512,8 @@ label Jean_FJ_Cycle:
                                 "You're emptied out, you should probably take a break."
 
 
-                            if "unsatisfied" in JeanX.RecentActions:#And Jean is unsatisfied,
-                                "[JeanX.Name] still seems a bit unsatisfied with the experience."
+                            if "unsatisfied" in character.RecentActions:#And Jean is unsatisfied,
+                                "[character.Name] still seems a bit unsatisfied with the experience."
                                 menu:
                                     "Finish her?"
                                     "Yes, keep going for a bit.":
@@ -3543,14 +3529,14 @@ label Jean_FJ_Cycle:
         $ Player.Focus -= 10 if Player.FocusX and Player.Focus > 50 else 0
 
         if Cnt == 20:
-                    $ JeanX.Brows = "angry"
+                    $ character.Brows = "angry"
                     menu:
                         ch_j "Hmm, my feet are cramping up here. . ."
-                        "How about a BJ?" if JeanX.Action and MultiAction:
+                        "How about a BJ?" if character.Action and MultiAction:
                                 $ Situation = "shift"
                                 call Jean_FJ_After
                                 call Jean_Blowjob
-                        "How about a Handy?" if JeanX.Action and MultiAction:
+                        "How about a Handy?" if character.Action and MultiAction:
                                 $ Situation = "shift"
                                 call Jean_FJ_After
                                 call Jean_Handjob
@@ -3567,67 +3553,67 @@ label Jean_FJ_Cycle:
                                 $ Situation = "shift"
                                 jump Jean_FJ_After
                         "No, get back down there.":
-                                if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
-                                    $ JeanX.Statup("Love", 200, -5)
-                                    $ JeanX.Statup("Obed", 50, 3)
-                                    $ JeanX.Statup("Obed", 80, 2)
+                                if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
+                                    $ character.Statup("Love", 200, -5)
+                                    $ character.Statup("Obed", 50, 3)
+                                    $ character.Statup("Obed", 80, 2)
                                     "She grumbles but gets back to work."
                                 else:
-                                    $ JeanX.FaceChange("angry", 1)
+                                    $ character.FaceChange("angry", 1)
                                     "She scowls at you and pulls back."
                                     ch_j "Not interested."
-                                    $ JeanX.Statup("Love", 50, -3, 1)
-                                    $ JeanX.Statup("Love", 80, -4, 1)
-                                    $ JeanX.Statup("Obed", 30, -1, 1)
-                                    $ JeanX.Statup("Obed", 50, -1, 1)
-                                    $ JeanX.RecentActions.append("angry")
-                                    $ JeanX.DailyActions.append("angry")
+                                    $ character.Statup("Love", 50, -3, 1)
+                                    $ character.Statup("Love", 80, -4, 1)
+                                    $ character.Statup("Obed", 30, -1, 1)
+                                    $ character.Statup("Obed", 50, -1, 1)
+                                    $ character.RecentActions.append("angry")
+                                    $ character.DailyActions.append("angry")
                                     jump Jean_FJ_After
-        elif Cnt == 10 and JeanX.SEXP <= 100 and not ApprovalCheck(JeanX, 1200, "LO"):
-                    $ JeanX.Brows = "confused"
+        elif Cnt == 10 and character.SEXP <= 100 and not ApprovalCheck(character, 1200, "LO"):
+                    $ character.Brows = "confused"
                     ch_j "Ok, seriously, let's try something different."
         #End Count check
 
-        call Escalation(JeanX) #sees if she wants to escalate things
+        call Escalation(character) #sees if she wants to escalate things
 
         if Round == 10:
-                call Sex_Basic_Dialog(JeanX,10) #"You might want to wrap this up, it's getting late."
+                call Sex_Basic_Dialog(character,10) #"You might want to wrap this up, it's getting late."
         elif Round == 5:
-                call Sex_Basic_Dialog(JeanX,5)   #"Seriously, it'll be time to stop soon."
+                call Sex_Basic_Dialog(character,5)   #"Seriously, it'll be time to stop soon."
 
     #Round = 0 loop breaks
-    $ JeanX.FaceChange("bemused", 0)
+    $ character.FaceChange("bemused", 0)
     $ Line = 0
-    call Sex_Basic_Dialog(JeanX,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
+    call Sex_Basic_Dialog(character,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
 
 label Jean_FJ_After:
-    $ JeanX.FaceChange("sexy")
+    $ character.FaceChange("sexy")
 
-    $ JeanX.Foot += 1
-    $ JeanX.Action -=1
-    $ JeanX.Addictionrate += 1
+    $ character.Foot += 1
+    $ character.Action -=1
+    $ character.Addictionrate += 1
     if "addictive" in Player.Traits:
-        $ JeanX.Addictionrate += 1
-    $ JeanX.Statup("Lust", 90, 5)
+        $ character.Addictionrate += 1
+    $ character.Statup("Lust", 90, 5)
 
-    call Partner_Like(JeanX,1)
+    call Partner_Like(character,1)
 
     if "Jeanpedi" in Achievements:
             pass
-    elif JeanX.Foot >= 10:
-            $ JeanX.FaceChange("smile", 1)
+    elif character.Foot >= 10:
+            $ character.FaceChange("smile", 1)
             ch_j "Hmm, this is kinda fun. . ."
             $ Achievements.append("Jeanpedi")
-            $ JeanX.SEXP += 5
-    elif JeanX.Foot == 1:
-            $ JeanX.SEXP += 10
-            if JeanX.Love >= 500:
-                $ JeanX.Mouth = "smile"
+            $ character.SEXP += 5
+    elif character.Foot == 1:
+            $ character.SEXP += 10
+            if character.Love >= 500:
+                $ character.Mouth = "smile"
                 ch_j "Did you enjoy that? . ."
             elif Player.Focus <= 20:
-                $ JeanX.Mouth = "sad"
+                $ character.Mouth = "sad"
                 ch_j "Did that do it for you?"
-    elif JeanX.Foot == 5:
+    elif character.Foot == 5:
                 ch_j "I'm getting used to this. . ."
 
     $ temp_modifier = 0
@@ -3638,7 +3624,7 @@ label Jean_FJ_After:
     call Checkout
     return
 
-## end JeanX.Footjob //////////////////////////////////////////////////////////////////////
+## end character.Footjob //////////////////////////////////////////////////////////////////////
 
 
 label Psychic_Sex(Girl=0,Act=0):
@@ -3682,76 +3668,76 @@ label Psychic_Sex(Girl=0,Act=0):
     return
 
 label Jean_PJ_Prep:
-    if JeanX.Taboo:
-        $ JeanX.Statup("Inbt", 90, int(Taboo/10))
-        $ JeanX.Statup("Lust", 50, int(Taboo/5))
+    if character.Taboo:
+        $ character.Statup("Inbt", 90, int(Taboo/10))
+        $ character.Statup("Lust", 50, int(Taboo/5))
 
-    $ JeanX.FaceChange("sexy")
-    if JeanX.Forced:
-        $ JeanX.FaceChange("sad")
+    $ character.FaceChange("sexy")
+    if character.Forced:
+        $ character.FaceChange("sad")
 
-    call Seen_First_Peen(JeanX,Partner,React=Situation)
+    call Seen_First_Peen(character,Partner,React=Situation)
     call Jean_PJ_Launch
 
-    if Situation == JeanX:
+    if Situation == character:
             #Jean auto-starts
             $ Situation = 0
             if Trigger2 == "jackin":
                 "An invisible pressure brushes your hand aside and starts stroking your cock."
             else:
-                "[JeanX.Name] gives you a mischevious smile, and a gentle pressure starts to fondle your cock."
+                "[character.Name] gives you a mischevious smile, and a gentle pressure starts to fondle your cock."
             menu:
                 "What do you do?"
                 "Nothing.":
-                    $ JeanX.Statup("Inbt", 70, 3)
-                    $ JeanX.Statup("Inbt", 30, 2)
-                    "[JeanX.Name] continues her actions."
+                    $ character.Statup("Inbt", 70, 3)
+                    $ character.Statup("Inbt", 30, 2)
+                    "[character.Name] continues her actions."
                 "Praise her.":
-                    $ JeanX.FaceChange("sexy", 1)
-                    $ JeanX.Statup("Inbt", 70, 3)
-                    ch_p "Oooh, that's good, [JeanX.Pet]."
-                    $ JeanX.NameCheck() #checks reaction to petname
-                    "[JeanX.Name] continues her actions."
-                    $ JeanX.Statup("Love", 80, 1)
-                    $ JeanX.Statup("Obed", 90, 1)
-                    $ JeanX.Statup("Obed", 50, 2)
+                    $ character.FaceChange("sexy", 1)
+                    $ character.Statup("Inbt", 70, 3)
+                    ch_p "Oooh, that's good, [character.Pet]."
+                    $ character.NameCheck() #checks reaction to petname
+                    "[character.Name] continues her actions."
+                    $ character.Statup("Love", 80, 1)
+                    $ character.Statup("Obed", 90, 1)
+                    $ character.Statup("Obed", 50, 2)
                 "Ask her to stop.":
-                    $ JeanX.FaceChange("surprised")
-                    $ JeanX.Statup("Inbt", 70, 1)
-                    ch_p "Let's not do that for now, [JeanX.Pet]."
-                    $ JeanX.NameCheck() #checks reaction to petname
-                    "[JeanX.Name] puts it down."
-                    $ JeanX.Statup("Obed", 90, 1)
-                    $ JeanX.Statup("Obed", 50, 1)
-                    $ JeanX.Statup("Obed", 30, 2)
+                    $ character.FaceChange("surprised")
+                    $ character.Statup("Inbt", 70, 1)
+                    ch_p "Let's not do that for now, [character.Pet]."
+                    $ character.NameCheck() #checks reaction to petname
+                    "[character.Name] puts it down."
+                    $ character.Statup("Obed", 90, 1)
+                    $ character.Statup("Obed", 50, 1)
+                    $ character.Statup("Obed", 30, 2)
                     $ Player.RecentActions.append("nope")
-                    $ JeanX.AddWord(1,"refused","refused")
+                    $ character.AddWord(1,"refused","refused")
                     return
 
-    if "psysex" not in JeanX.History:
-        if JeanX.Forced:
-            $ JeanX.Statup("Love", 90, -10)
-            $ JeanX.Statup("Obed", 70, 15)
-            $ JeanX.Statup("Inbt", 80, 20)
+    if "psysex" not in character.History:
+        if character.Forced:
+            $ character.Statup("Love", 90, -10)
+            $ character.Statup("Obed", 70, 15)
+            $ character.Statup("Inbt", 80, 20)
         else:
-            $ JeanX.Statup("Love", 90, 5)
-            $ JeanX.Statup("Obed", 70, 15)
-            $ JeanX.Statup("Inbt", 80, 15)
+            $ character.Statup("Love", 90, 5)
+            $ character.Statup("Obed", 70, 15)
+            $ character.Statup("Inbt", 80, 15)
 
     if Situation:
         $ renpy.pop_call()
         $ Situation = 0
     $ Line = 0
     $ Cnt = 0
-    $ JeanX.RecentActions.append("psysex")
-    $ JeanX.DailyActions.append("psysex")
+    $ character.RecentActions.append("psysex")
+    $ character.DailyActions.append("psysex")
 
 label Jean_PJ_Cycle:
     $ Trigger = "psy"
     while Round > 0:
-        call Shift_Focus(JeanX)
+        call Shift_Focus(character)
         call Jean_PJ_Launch
-        $ JeanX.LustFace()
+        $ character.LustFace()
 
         if  Player.Focus < 100:
                     #Player Command menu
@@ -3782,79 +3768,79 @@ label Jean_PJ_Cycle:
                                     "You release your concentration. . ."
                                     $ Player.FocusX = 0
                         "View":
-                                    call ViewShift(JeanX,"menu")
+                                    call ViewShift(character,"menu")
                                     jump Jean_PJ_Cycle
                         "Change Construct":
                                     menu:
                                         "What do you want to feel?"
                                         "Hand":
-                                            if ApprovalCheck(JeanX, 1000):
+                                            if ApprovalCheck(character, 1000):
                                                     $ Psychic = "hand"
                                             else:
                                                     ch_j "I'd rather not."
                                         "Mouth":
-                                            if ApprovalCheck(JeanX, 1100):
+                                            if ApprovalCheck(character, 1100):
                                                     $ Psychic = "mouth"
                                             else:
                                                     ch_j "Uh-uh."
                                         "Tits":
-                                            if ApprovalCheck(JeanX, 1000):
+                                            if ApprovalCheck(character, 1000):
                                                     $ Psychic = "tits"
                                             else:
                                                     ch_j "I'd rather not."
                                         "Pussy":
-                                            if ApprovalCheck(JeanX, 1200):
+                                            if ApprovalCheck(character, 1200):
                                                     $ Psychic = "pussy"
                                             else:
                                                     ch_j "Um. . . no."
                                         "Anal":
-                                            if ApprovalCheck(JeanX, 1300):
+                                            if ApprovalCheck(character, 1300):
                                                     $ Psychic = "anal"
                                             else:
                                                     ch_j "You wish."
                         "Other options":
                                 menu:
                                     "I also want to fondle her breasts." if Trigger2 != "fondle breasts":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                 $ Trigger2 = "fondle breasts"
                                                 "You start to fondle her breasts."
-                                                $ JeanX.Action -= 1
+                                                $ character.Action -= 1
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Shift primary action":
-                                            if JeanX.Action and MultiAction:
+                                            if character.Action and MultiAction:
                                                     menu:
 #                                                        "How about a blowjob?":
-#                                                                    if JeanX.Action and MultiAction:
+#                                                                    if character.Action and MultiAction:
 #                                                                        $ Situation = "shift"
 #                                                                        call Jean_PJ_After
 #                                                                        call Jean_Blowjob
 #                                                                    else:
-#                                                                        call Sex_Basic_Dialog(JeanX,"tired")
+#                                                                        call Sex_Basic_Dialog(character,"tired")
 
 #                                                        "How about a titjob?":
-#                                                                    if JeanX.Action and MultiAction:
+#                                                                    if character.Action and MultiAction:
 #                                                                        $ Situation = "shift"
 #                                                                        call Jean_PJ_After
 #                                                                        call Jean_Titjob
 #                                                                    else:
-#                                                                        call Sex_Basic_Dialog(JeanX,"tired")
+#                                                                        call Sex_Basic_Dialog(character,"tired")
                                                         "Never Mind":
                                                                 jump Jean_PJ_Cycle
                                             else:
-                                                call Sex_Basic_Dialog(JeanX,"tired")
+                                                call Sex_Basic_Dialog(character,"tired")
 
                                     "Threesome actions (locked)" if not Partner:
                                         pass
                                     "Threesome actions" if Partner:
                                         menu:
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(JeanX)
-                                            "Ask [JeanX.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
+                                            "Ask [character.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
+                                                        call Les_Change(character)
+                                            "Ask [character.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
                                                         pass
                                             "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(JeanX)
+                                                        call Three_Change(character)
 
                                             "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
                                                         $ ThreeCount = 0
@@ -3862,7 +3848,7 @@ label Jean_PJ_Cycle:
                                                         $ ThreeCount = 0
 
                                             "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(JeanX)
+                                                        call Trigger_Swap(character)
                                             "Undress [Partner.Name]":
                                                         call Girl_Undress(Partner)
                                                         jump Jean_PJ_Cycle
@@ -3871,12 +3857,12 @@ label Jean_PJ_Cycle:
                                                         jump Jean_PJ_Cycle
                                             "Never mind":
                                                         jump Jean_PJ_Cycle
-                                    "undress [JeanX.Name]":
-                                            call Girl_Undress(JeanX)
-                                    "Clean up [JeanX.Name] (locked)" if not JeanX.Spunk:
+                                    "undress [character.Name]":
+                                            call Girl_Undress(character)
+                                    "Clean up [character.Name] (locked)" if not character.Spunk:
                                             pass
-                                    "Clean up [JeanX.Name]" if JeanX.Spunk:
-                                            call Girl_Cleanup(JeanX,"ask")
+                                    "Clean up [character.Name]" if character.Spunk:
+                                            call Girl_Cleanup(character,"ask")
                                     "Never mind":
                                             jump Jean_PJ_Cycle
 
@@ -3893,8 +3879,8 @@ label Jean_PJ_Cycle:
                                     jump Jean_PJ_After
         #End menu (if Line)
 
-        call Shift_Focus(JeanX)
-        call Sex_Dialog(JeanX,Partner)
+        call Shift_Focus(character)
+        call Sex_Dialog(character,Partner)
 
         #If either of you could cum
 
@@ -3902,27 +3888,27 @@ label Jean_PJ_Cycle:
         $ Round -= 1
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-        if Player.Focus >= 100 or JeanX.Lust >= 100:
+        if Player.Focus >= 100 or character.Lust >= 100:
                     #If either of you could cum
                     if Player.Focus >= 100:
                             #If you can cum:
-                            call Player_Cumming(JeanX)
-                            if "angry" in JeanX.RecentActions:
+                            call Player_Cumming(character)
+                            if "angry" in character.RecentActions:
                                 call Jean_PJ_Reset
                                 return
-                            $ JeanX.Statup("Lust", 200, 5)
-                            if 100 > JeanX.Lust >= 70 and JeanX.OCount < 2 and JeanX.SEXP >= 20:
-                                $ JeanX.RecentActions.append("unsatisfied")
-                                $ JeanX.DailyActions.append("unsatisfied")
+                            $ character.Statup("Lust", 200, 5)
+                            if 100 > character.Lust >= 70 and character.OCount < 2 and character.SEXP >= 20:
+                                $ character.RecentActions.append("unsatisfied")
+                                $ character.DailyActions.append("unsatisfied")
 
                             if Player.Focus > 80:
                                 jump Jean_PJ_After
                             $ Line = "came"
 
-                    if JeanX.Lust >= 100:
+                    if character.Lust >= 100:
                             #If Jean can cum
-                            call Girl_Cumming(JeanX)
-                            if Situation == "shift" or "angry" in JeanX.RecentActions:
+                            call Girl_Cumming(character)
+                            if Situation == "shift" or "angry" in character.RecentActions:
                                 jump Jean_PJ_After
 
                     if Line == "came": #ex Player.Focus <= 20:
@@ -3932,8 +3918,8 @@ label Jean_PJ_Cycle:
                                 "You're emptied out, you should probably take a break."
 
 
-                            if "unsatisfied" in JeanX.RecentActions:#And Jean is unsatisfied,
-                                "[JeanX.Name] still seems a bit unsatisfied with the experience."
+                            if "unsatisfied" in character.RecentActions:#And Jean is unsatisfied,
+                                "[character.Name] still seems a bit unsatisfied with the experience."
                                 menu:
                                     "Finish her?"
                                     "Yes, keep going for a bit.":
@@ -3949,10 +3935,10 @@ label Jean_PJ_Cycle:
         $ Player.Focus -= 10 if Player.FocusX and Player.Focus > 50 else 0
 
         if Cnt == 20:
-                    $ JeanX.Brows = "angry"
+                    $ character.Brows = "angry"
                     menu:
                         ch_j "Ok, I'm bored now. Can we try something else?"
-#                        "How about a BJ?" if JeanX.Action and MultiAction:
+#                        "How about a BJ?" if character.Action and MultiAction:
 #                                $ Situation = "shift"
 #                                call Jean_PJ_After
 #                                call Jean_Blowjob
@@ -3967,51 +3953,51 @@ label Jean_PJ_Cycle:
                                 $ Situation = "shift"
                                 jump Jean_PJ_After
                         "No, get back down there.":
-                                if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
-                                    $ JeanX.Statup("Love", 200, -5)
-                                    $ JeanX.Statup("Obed", 50, 3)
-                                    $ JeanX.Statup("Obed", 80, 2)
+                                if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
+                                    $ character.Statup("Love", 200, -5)
+                                    $ character.Statup("Obed", 50, 3)
+                                    $ character.Statup("Obed", 80, 2)
                                     "She grumbles but gets back to work."
                                 else:
-                                    $ JeanX.FaceChange("angry", 1)
+                                    $ character.FaceChange("angry", 1)
                                     "She scowls at you, drops you cock and pulls back."
                                     ch_j "I have better things to do with my time."
-                                    $ JeanX.Statup("Love", 50, -3, 1)
-                                    $ JeanX.Statup("Love", 80, -4, 1)
-                                    $ JeanX.Statup("Obed", 30, -1, 1)
-                                    $ JeanX.Statup("Obed", 50, -1, 1)
-                                    $ JeanX.RecentActions.append("angry")
-                                    $ JeanX.DailyActions.append("angry")
+                                    $ character.Statup("Love", 50, -3, 1)
+                                    $ character.Statup("Love", 80, -4, 1)
+                                    $ character.Statup("Obed", 30, -1, 1)
+                                    $ character.Statup("Obed", 50, -1, 1)
+                                    $ character.RecentActions.append("angry")
+                                    $ character.DailyActions.append("angry")
                                     jump Jean_PJ_After
-        elif Cnt == 10 and JeanX.SEXP <= 100 and not ApprovalCheck(JeanX, 1200, "LO"):
-                    $ JeanX.Brows = "confused"
+        elif Cnt == 10 and character.SEXP <= 100 and not ApprovalCheck(character, 1200, "LO"):
+                    $ character.Brows = "confused"
                     ch_j "Nice, right?"
         #End Count check
 
-        call Escalation(JeanX) #sees if she wants to escalate things
+        call Escalation(character) #sees if she wants to escalate things
 
         if Round == 10:
-                call Sex_Basic_Dialog(JeanX,10) #"You might want to wrap this up, it's getting late."
+                call Sex_Basic_Dialog(character,10) #"You might want to wrap this up, it's getting late."
         elif Round == 5:
-                call Sex_Basic_Dialog(JeanX,5)   #"Seriously, it'll be time to stop soon."
+                call Sex_Basic_Dialog(character,5)   #"Seriously, it'll be time to stop soon."
 
     #Round = 0 loop breaks
-    $ JeanX.FaceChange("bemused", 0)
+    $ character.FaceChange("bemused", 0)
     $ Line = 0
-    call Sex_Basic_Dialog(JeanX,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
+    call Sex_Basic_Dialog(character,"done")   #"Ok, [Girl.Petname], that's enough of that for now."
 
 label Jean_PJ_After:
-    $ JeanX.FaceChange("sexy")
+    $ character.FaceChange("sexy")
 
-    $ JeanX.Action -=1
+    $ character.Action -=1
 
-    $ JeanX.Statup("Lust", 90, 5)
+    $ character.Statup("Lust", 90, 5)
 
-    call Partner_Like(JeanX,1)
+    call Partner_Like(character,1)
 
-    if "psysex" not in JeanX.History:
+    if "psysex" not in character.History:
             ch_j "Pretty great, right?"
-    $ JeanX.AddWord(1,0,0,0,"psysex")
+    $ character.AddWord(1,0,0,0,"psysex")
 
     $ temp_modifier = 0
     if Situation == "shift":
@@ -4020,4 +4006,4 @@ label Jean_PJ_After:
     call Checkout
     return
 
-## end JeanX.Psychic Handjob //////////////////////////////////////////////////////////////////////
+## end character.Psychic Handjob //////////////////////////////////////////////////////////////////////

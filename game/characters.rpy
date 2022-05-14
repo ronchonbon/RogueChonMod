@@ -791,7 +791,6 @@ init python:
 
                 setattr(self,Flavor,Type)
                 return
-        #End Statup
 
         def FaceChange(self, Emote = 5, B = 5, M = 0, Mouth = 0, Eyes = 0, Brows = 0):
             Emote = self.Emote if Emote == 5 else Emote
@@ -964,7 +963,6 @@ init python:
             if Brows:
                 self.Brows = Brows
             return
-        # End Face Change / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
         def DefaultFaces(self):
                 #This sets a default face for the girl
@@ -1081,8 +1079,6 @@ init python:
                 if Partner and self != Partner:
                         Partner.LustFace()
                 return
-
-        # End Lust Face / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
         def OutfitChange(self, OutfitTemp = 5, Spunk = 0, Undressed = 0, Changed = 1,HolderOutfit=[]):
                 # $ RogueX.OutfitChange("casual1")
@@ -1224,8 +1220,6 @@ init python:
                         # This checks the pantyless state from flirting
                         if OutfitTemp != "sleep" and OutfitTemp != "gym":
                                 self.Panties = 0
-        #                renpy.call(OutfitShame,self,0,1)
-                        #make sure that this element accurately checks to decide whether she would wear this outfit with or without panties.
 
                 if not Changed and OutfitTemp == self.Outfit and self.Loc == bg_current:
                         #If she was partially dressed then it says she gets dressed
@@ -1237,8 +1231,6 @@ init python:
                     return 2
                 return 1
                 #End Outfits
-
-        # End Outfits / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
         def Set_Temp_Outfit(self):
                     # This takes whatever the girl is wearing, and sets it as the temporary outfit
@@ -1452,10 +1444,7 @@ init python:
                                     # if no panties and loose hose or they're down
                                     C += 1
                     return C
-        # End Clothing Checks / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-
-        # Girl interactions / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
         def GirlLikeCheck(self,Chr=0):
                 # RogueX.GirlLikeCheck(KittyX) will return RogueX.LikeKitty, ie 600
                 return getattr(self,"Like"+Chr.Tag)
@@ -1584,8 +1573,6 @@ init python:
 
                 return Ok
                 # returns 2 if very into it, 1 if ok with it, 0 if not cool with it.
-        # End Girl Like girl stuff / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
 
         def NameCheck(self, Cnt = 0): #rkeljs
                 #Checks how she reacts to you using her petname
@@ -1784,7 +1771,6 @@ init python:
                             self.Statup("Inbt", 50, -1)
                             return 1
                 return 0
-        # End Petname Check / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 label EmotionEditor(Chr=0):
         # call EmotionEditor(RogueX)
@@ -1866,31 +1852,6 @@ label EmotionEditor(Chr=0):
                     return
             $ Chr.FaceChange() #applies change
         #end Emotion Editor
-
-label AnyLine(Girl=0,Templine=". . ."):
-        #This calls a line from any girl you reference
-        # call AnyLine(Girl,Line)
-        #$ Girl = GirlCheck(Girl) #removed when I added unknown. Needed?
-
-        $ global PassLine
-        $ PassLine = Templine
-        if Girl == RogueX:
-                ch_r "[PassLine]"
-        elif Girl == KittyX:
-                ch_k "[PassLine]"
-        elif Girl == EmmaX:
-                ch_e "[PassLine]"
-        elif Girl == LauraX:
-                ch_l "[PassLine]"
-        elif Girl == JeanX:
-                ch_j "[PassLine]"
-        elif Girl == StormX:
-                ch_s "[PassLine]"
-        elif Girl == JubesX:
-                ch_v "[PassLine]"
-        else:
-                ch_u "[PassLine]"
-        return
 
 label GirlsAngry(Girls = 0,BO=[]):
         # Causes girls to storm off if you've pissed them off.

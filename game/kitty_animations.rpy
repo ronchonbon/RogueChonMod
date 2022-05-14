@@ -1837,69 +1837,6 @@ transform Kitty_Sex_Body_FootAnimStaticA():
 
 
 
-#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>                                     Sex Launch/Reset
-label Kitty_Sex_Launch(Line = Trigger):
-    $ Trigger3 = 0 if Trigger3 == "hand" else Trigger3
-
-#    #temporary      #temporary      #temporary      #temporary      #temporary      #temporary
-#    $ KittyX.Pose = 0
-#    #temporary      #temporary      #temporary      #temporary      #temporary      #temporary
-
-    $ Player.Sprite = 1
-    $ Line = "solo" if not Line else Line
-    if Line == "sex":
-        $ Player.Cock = "in"
-        if Trigger2 in ("fondle pussy","dildo pussy","lick pussy"):
-                $ Trigger2 = 0
-    elif Line == "anal":
-        $ Player.Cock = "anal"
-        if Trigger2 in ("insert ass","dildo anal","lick ass"):
-                $ Trigger2 = 0
-    elif Line == "hotdog":
-        $ Player.Cock = "out"
-    elif Line == "foot":
-        $ ShowFeet = 1
-        $ Player.Cock = "foot"
-    elif Line == "massage":
-        $ Player.Sprite = 0
-        $ Player.Cock = 0
-    else: #elif Line == "solo":
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
-        $ Speed = 0
-    $ Trigger = Line
-
-    if KittyX.Pose == "doggy":
-            call Kitty_Doggy_Launch(Line)
-            return
-    if renpy.showing("Kitty_SexSprite"):
-        return
-    $ Speed = 0
-    call Kitty_Hide(1)
-    show Kitty_SexSprite zorder 150
-#    show Kitty_SexSprite zorder 150:
-#        pos (750,230)
-
-    with dissolve
-    return
-
-label Kitty_Sex_Reset:
-    if renpy.showing("Kitty_Doggy_Animation"):
-        call Kitty_Doggy_Reset
-        return
-    if not renpy.showing("Kitty_SexSprite"):
-        return
-    $ KittyX.ArmPose = 2
-    hide Kitty_SexSprite
-    call Kitty_Hide
-#    call Set_The_Scene(Dress = 0)
-    show Kitty_Sprite at sprite_location(KittyX.sprite_location) zorder KittyX.Layer:
-        alpha 1
-        zoom 1 offset (0,0)
-        anchor (0.5, 0.0)
-    with dissolve
-    $ Speed = 0
-    return
 
 # End Kitty Sex pose Animations / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
@@ -3301,27 +3238,6 @@ label Kitty_Doggy_Launch(Line = Trigger):
     with dissolve
     return
 
-label Kitty_Doggy_Reset:
-    if not renpy.showing("Kitty_Doggy_Animation"):
-        return
-#    $ Trigger = 0               #fix, not sure this is a good idea
-    $ KittyX.ArmPose = 2
-    $ KittyX.SpriteVer = 0
-    hide Kitty_Doggy_Animation
-    call Kitty_Hide
-    show Kitty_Sprite at sprite_location(KittyX.sprite_location) zorder KittyX.Layer:
-                    alpha 1
-                    zoom 1
-                    offset (0,0)
-                    anchor (0.6, 0.0)
-    with dissolve
-    $ Speed = 0
-    return
-
-# End Kitty Doggy Animations / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
-
-
 
 
 
@@ -4682,25 +4598,6 @@ label Kitty_TJ_Launch(Line = Trigger):    # The sequence to launch the Kitty Tit
     hide blackscreen onlayer black with dissolve
     return
 
-label Kitty_TJ_Reset: # The sequence to the Kitty animations from Titfuck to default
-    if not renpy.showing("Kitty_TJ_Animation"):
-            return
-    call Kitty_Hide
-    $ Player.Sprite = 0
-
-    show Kitty_Sprite at sprite_location(KittyX.sprite_location) zorder KittyX.Layer:
-            zoom 2 xpos 550 yoffset 50 #offset (-100,50)  #zoom 2 offset (-100,50)
-    show Kitty_Sprite zorder KittyX.Layer:
-            alpha 1
-            ease 1 zoom 1.5 xpos 700 yoffset 50
-            pause .5
-            ease .5 zoom 1 xpos KittyX.sprite_location yoffset 0
-    show Kitty_Sprite at sprite_location(KittyX.sprite_location) zorder KittyX.Layer:
-            alpha 1
-            zoom 1 offset (0,0) xpos KittyX.sprite_location
-#    "Kitty pulls back"
-    return
-
 # End Kitty TJ Animations / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
@@ -4793,42 +4690,6 @@ image Kitty_HJ_Animation:
     zoom 0.4#0.6
 
 
-label Kitty_HJ_Launch(Line = Trigger):
-    if renpy.showing("Kitty_HJ_Animation"):
-        $ Trigger = "hand"
-        return
-    call Kitty_Hide
-    if Line == "L":
-        show Kitty_Sprite at sprite_location(StageRight) zorder KittyX.Layer:
-            alpha 1
-            ease 1 zoom 1.7 offset (-50,200)
-    else:
-        show Kitty_Sprite at sprite_location(StageRight) zorder KittyX.Layer:
-            alpha 1
-            ease 1 zoom 1.7 offset (-50,200)
-        with dissolve
-
-    if Line == "L":
-            if Taboo:
-                if len(Present) >= 2:
-                    if Present[0] != KittyX:
-                            "[KittyX.Name] looks back at [Present[0].Name] to see if she's watching."
-                    elif Present[1] != KittyX:
-                            "[KittyX.Name] looks back at [Present[1].Name] to see if she's watching."
-                else:
-                            "[KittyX.Name] casually glances around to see if anyone can see her."
-
-    $ Speed = 0
-    if Line != "cum":
-        $ Trigger = "hand"
-    else:
-        $ Speed = 1
-    pause .5
-    show Kitty_HJ_Animation at sprite_location(StageCenter) zorder 150 with easeinbottom:
-        #xoffset 150
-        offset (100,250)#(75,250)
-    return
-
 label Kitty_HJ_Reset: # The sequence to the Rogue animations from handjob to default
     if not renpy.showing("Kitty_HJ_Animation"):
             return
@@ -4847,17 +4708,6 @@ label Kitty_HJ_Reset: # The sequence to the Rogue animations from handjob to def
             alpha 1
             zoom 1 offset (0,0)
     return
-
-
-label Kitty_Kissing_Smooch:
-    $ KittyX.FaceChange("kiss")
-    show Kitty_Sprite at sprite_location(StageCenter) zorder KittyX.Layer:
-        ease 0.5 xpos StageCenter offset (0,0) zoom 2 alpha 1
-        pause 1
-        ease 0.5 xpos KittyX.sprite_location zoom 1
-    $ KittyX.FaceChange("sexy")
-    return
-    
 
 label Kitty_Middle_Launch(T = Trigger,Set=1):
     call Kitty_Hide

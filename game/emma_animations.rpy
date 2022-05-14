@@ -2227,70 +2227,7 @@ image Emma_Sex_Anus_A2:
                 )
         xpos  0
 
-#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-
-label Emma_Sex_Launch(Line = Trigger):
-        $ Trigger3 = 0 if Trigger3 == "hand" else Trigger3
-#        #temporary      #temporary      #temporary      #temporary      #temporary      #temporary
-#        $ EmmaX.Pose = 0
-#        #temporary      #temporary      #temporary      #temporary      #temporary      #temporary
-        $ Player.Sprite = 1
-        $ Line = "solo" if not Line else Line
-        if Line == "sex":
-            $ Player.Cock = "in"
-            if Trigger2 in ("fondle pussy","dildo pussy","lick pussy"):
-                    $ Trigger2 = 0
-        elif Line == "anal":
-            $ Player.Cock = "anal"
-            if Trigger2 in ("insert ass","dildo anal","lick ass"):
-                    $ Trigger2 = 0
-        elif Line == "hotdog":
-            $ Player.Cock = "out"
-        elif Line == "foot":
-            $ ShowFeet = 1
-            $ Player.Cock = "foot"
-        elif Line == "massage":
-            $ Player.Sprite = 0
-            $ Player.Cock = 0
-        else: #elif Line == "solo":
-            $ Player.Sprite = 0
-            $ Player.Cock = "out"
-            $ Speed = 0
-#        if not Trigger:
-        $ Trigger = Line
-
-        if EmmaX.Pose == "doggy":
-                call Emma_Doggy_Launch(Line)
-                return
-        if renpy.showing("Emma_SexSprite"):
-                return
-        $ Speed = 0
-        call Emma_Hide(1)
-
-        show Emma_SexSprite zorder 150:
-            pos (575,470)
-        with dissolve
-        return
-
-label Emma_Sex_Reset:
-        if renpy.showing("Emma_Doggy_Animation"):
-            call Emma_Doggy_Reset
-            return
-        if not renpy.showing("Emma_SexSprite"):
-            return
-        $ EmmaX.ArmPose = 2
-        hide Emma_SexSprite
-        call Emma_Hide
-        show Emma_Sprite at sprite_location(EmmaX.sprite_location) zorder EmmaX.Layer:
-            alpha 1
-            zoom 1 offset (0,0)
-            anchor (0.5, 0.0)
-        with dissolve
-        $ Speed = 0
-        return
-
-
-
+#<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 # Emma Doggy Compositing ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 #\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
@@ -4269,30 +4206,6 @@ label Emma_TJ_Launch(Line = Trigger):    # The sequence to launch the Emma Titfu
     hide blackscreen onlayer black with dissolve
     return
 
-label Emma_TJ_Reset: # The sequence to the Emma animations from Titfuck to default
-    if not renpy.showing("Emma_TJ_Animation"):
-        return
-#    hide Emma_TJ_Animation
-    call Emma_Hide
-    $ Player.Sprite = 0
-
-    show Emma_Sprite at sprite_location(EmmaX.sprite_location) zorder EmmaX.Layer:
-        zoom 2 xpos 550 yoffset 50 #offset (-100,50)  #zoom 2 offset (-100,50)
-    show Emma_Sprite zorder EmmaX.Layer:
-        alpha 1
-        ease 1 zoom 1.5 xpos 500 yoffset 50
-        pause .5
-        ease .5 zoom 1 xpos EmmaX.sprite_location yoffset 0
-    show Emma_Sprite at sprite_location(EmmaX.sprite_location) zorder EmmaX.Layer:
-        alpha 1
-        zoom 1 offset (0,0) xpos EmmaX.sprite_location
-
-    "[EmmaX.Name] pulls back"
-    return
-
-# End Emma TJ Animations / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
-
 
 
 
@@ -5029,46 +4942,6 @@ image Emma_HJ_Animation:
     zoom 0.4#0.6
 
 
-label Emma_HJ_Launch(Line = Trigger):
-    if renpy.showing("Emma_HJ_Animation"):
-        $ Trigger = "hand"
-        return
-    call Emma_Hide
-    if Line == "L":
-        show Emma_Sprite at sprite_location(StageRight) zorder EmmaX.Layer:
-            alpha 1
-            ease 1 zoom 1.7 offset (0,200)#(-50,200)
-    else:
-        show Emma_Sprite at sprite_location(StageRight) zorder EmmaX.Layer:
-            alpha 1
-            ease 1 zoom 1.7 offset (0,200)#(-50,200)
-        with dissolve
-
-    if Line == "L": # Rogue gets started. . .
-        if Taboo:
-            if len(Present) >= 2:
-                if Present[0] != EmmaX:
-                        "[EmmaX.Name] looks back at [Present[0].Name] to see if she's watching."
-                elif Present[1] != EmmaX:
-                        "[EmmaX.Name] looks back at [Present[1].Name] to see if she's watching."
-            else:
-                        "[EmmaX.Name] looks around to see if anyone can see her."
-            "She then bends down and grabs your cock."
-        else:
-            "[EmmaX.Name] bends down and grabs your cock."
-
-    $ Speed = 0
-    if Line != "cum":
-        $ Trigger = "hand"
-    else:
-        $ Speed = 1
-    pause .5
-    $ EmmaX.ArmPose = 1
-    show Emma_HJ_Animation at sprite_location(StageCenter) zorder 150 with easeinbottom:
-        #xoffset 150
-        offset (100,250)#(100,250)
-    return
-
 label Emma_HJ_Reset: # The sequence to the Rogue animations from handjob to default
     if not renpy.showing("Emma_HJ_Animation"):
         return
@@ -5724,17 +5597,6 @@ image Emma_Behind_Podium:
             pause .5
             repeat
 
-label Emma_Kissing_Smooch:
-    $ EmmaX.FaceChange("kiss")
-    show Emma_Sprite at sprite_location(StageCenter) zorder EmmaX.Layer:
-        ease 0.5 xpos StageCenter offset (0,0) zoom 2 alpha 1
-        pause 1
-        ease 0.5 xpos EmmaX.sprite_location zoom 1
-    show Emma_Sprite at sprite_location(EmmaX.sprite_location) zorder EmmaX.Layer:
-        zoom 1
-    $ EmmaX.FaceChange("sexy")
-    return
-    
 
 label Emma_Middle_Launch(T = Trigger,Set=1):
     call Emma_Hide

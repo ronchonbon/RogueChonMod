@@ -2613,70 +2613,7 @@ image Storm_Sex_FJ_Speed2:
 
 # End main animation for Sex Pose Footjob Speed 2
 
-# End Storm Sex Pose Speed 2 Footjob / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
-#>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>                                     Sex Launch/Reset
-label Storm_Sex_Launch(Line = Trigger):
-    $ Trigger3 = 0 if Trigger3 == "hand" else Trigger3
-
-#    #temporary      #temporary      #temporary      #temporary      #temporary      #temporary
-    $ StormX.Pose = "sex"
-#    #temporary      #temporary      #temporary      #temporary      #temporary      #temporary
-
-    $ Player.Sprite = 1
-    $ Line = "solo" if not Line else Line
-    if Line == "sex":
-        $ Player.Cock = "in"
-        if Trigger2 in ("fondle pussy","dildo pussy","lick pussy"):
-                $ Trigger2 = 0
-    elif Line == "anal":
-        $ Player.Cock = "anal"
-        if Trigger2 in ("insert ass","dildo anal","lick ass"):
-                $ Trigger2 = 0
-    elif Line == "hotdog":
-        if StormX.PantsNum() == 5: #upskirts her if she's in a skirt
-                $ StormX.Upskirt = 1
-        $ Player.Cock = "out"
-    elif Line == "foot":
-        $ ShowFeet = 1
-        $ Player.Cock = "foot"
-    elif Line == "massage":
-        $ Player.Sprite = 0
-        $ Player.Cock = 0
-    else: #elif Line == "solo":
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
-        $ Speed = 0
-    $ Trigger = Line
-
-    if StormX.Pose == "doggy":
-            call Storm_Doggy_Launch(Line)
-            return
-    if renpy.showing("Storm_SexSprite"):
-        return
-    $ Speed = 0
-    call Storm_Hide(1)
-    show Storm_SexSprite zorder 150
-    with dissolve
-    return
-
-label Storm_Sex_Reset:
-    if renpy.showing("Storm_Doggy_Animation"):
-        call Storm_Doggy_Reset
-        return
-    if not renpy.showing("Storm_SexSprite"):
-        return
-    $ StormX.ArmPose = 2
-    hide Storm_SexSprite
-    call Storm_Hide
-#    call Set_The_Scene(Dress = 0)
-    show Storm_Sprite at sprite_location(StormX.sprite_location) zorder StormX.Layer:
-        alpha 1
-        zoom 1 offset (0,0)
-        anchor (0.5, 0.0)
-    with dissolve
-    $ Speed = 0
-    return
+# End Storm Sex
 
 
 # End Storm Sex Pose Content / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
@@ -2794,36 +2731,6 @@ image Storm_HJ_Animation:
     anchor (0.51, -1.3)
     zoom 0.4#0.6
 
-
-label Storm_HJ_Launch(Line = Trigger):
-    $ StormX.ArmPose = 2
-    if renpy.showing("Storm_HJ_Animation"):
-        $ Trigger = "hand"
-        return
-    call Storm_Hide
-    if Line == "L":
-        show Storm_Sprite at sprite_location(StageRight) zorder StormX.Layer:
-            alpha 1
-            ease 1 zoom 1.7 offset (-150,350)#(-210,350)
-    else:
-        show Storm_Sprite at sprite_location(StageRight) zorder StormX.Layer:
-            alpha 1
-            ease 1 zoom 1.7 offset (-150,350)#(-150,350)
-        with dissolve
-
-    $ Speed = 0
-    if Line != "cum":
-        $ Trigger = "hand"
-    else:
-        $ Speed = 1
-    pause .5
-    show Storm_HJ_Animation at sprite_location(StageCenter) zorder 150 with easeinbottom:
-        #xoffset 150
-        offset (250,250)#(100,250)
-    show Storm_Sprite at sprite_location(StageRight) zorder StormX.Layer:
-        alpha 1
-        ease .5 zoom 1.7 offset (-150,200)#(-150,200)
-    return
 
 label Storm_HJ_Reset: # The sequence to the Storm animations from handjob to default
     if not renpy.showing("Storm_HJ_Animation"):
@@ -5057,37 +4964,7 @@ label Storm_TJ_Launch(Line = Trigger):    # The sequence to launch the Storm Tit
     hide blackscreen onlayer black with dissolve
     return
 
-label Storm_TJ_Reset:
-    # The sequence to the Storm animations from Titfuck to default
-    if not renpy.showing("Storm_TJ_Animation"):
-        return
-#    hide Storm_TJ_Animation
-    call Storm_Hide
-    $ Player.Sprite = 0
 
-    show Storm_Sprite at sprite_location(StormX.sprite_location) zorder StormX.Layer:
-        zoom 2.3 xpos 750 yoffset -100
-    show Storm_Sprite zorder StormX.Layer:
-        alpha 1
-        ease 1 zoom 1.5 xpos 700 yoffset 50
-        pause .5
-        ease .5 zoom 1 xpos StormX.sprite_location yoffset 0
-    "[StormX.Name] pulls back"
-    show Storm_Sprite at sprite_location(StormX.sprite_location) zorder StormX.Layer:
-        alpha 1
-        zoom 1 offset (0,0) xpos StormX.sprite_location
-    return
-
-label Storm_Kissing_Smooch:
-    $ StormX.FaceChange("kiss")
-    show Storm_Sprite at sprite_location(StageCenter) zorder StormX.Layer:
-        ease 0.5 xpos StageCenter offset (0,0) zoom 2 alpha 1
-        pause 1
-        ease 0.5 xpos StormX.sprite_location zoom 1
-    show Storm_Sprite at sprite_location(StormX.sprite_location) zorder StormX.Layer:
-        zoom 1
-    $ StormX.FaceChange("sexy")
-    return
 
 
 label Storm_Middle_Launch(T = Trigger,Set=1):

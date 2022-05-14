@@ -680,108 +680,108 @@ label EventCalls(EGirls=[]): #rkeljs
         if Day < 3 or Round <= 10: #was day 5
                     #Disables events when it's too early in the game or the turn is about to end
                     return
-
-    #Activates Jubes meet
-        if JubesX in ActiveGirls:
-                    #you haven't completed Jubes's intro, but have met Storm
-                    if Time_Count < 3 and "sunshine" not in JubesX.History and "traveling" in Player.RecentActions and bg_current in ("bg classroom","bg dangerroom","bg campus","bg pool"):
-                            jump Jubes_Sunshine
-                            return
-                    elif "mall" not in Player.History and "sunshine" in JubesX.History and Time_Count < 3 and JubesX.Addict < 50:
-                            call Jubes_Mall
-                            jump Misplaced
-                    elif not JubesX.Event[1] and JubesX.Addict < 50:
-                            #if she hasn't had her addiction event yet. . .
-                            $ JubesX.Addict += 5
-    #End Jubes meet
-
-    #Activates Kitty meet
-        if KittyX in ActiveGirls:
-                if "Kate" not in KittyX.Names and KittyX.Inbt >= 500 and KittyX.Loc == bg_current:
-                        #She calls herself Kate now.
-                        call Kitty_Kate
-                        return
-        else:
-                if "traveling" in Player.RecentActions and "met" not in KittyX.History and bg_current == "bg classroom":
-                        jump KittyMeet
-                        return
-
-    #Activates Laura meet
-        if LauraX in ActiveGirls:
-                    pass
-        elif "met" not in LauraX.History and "traveling" in Player.RecentActions:
-                    if bg_current == "bg dangerroom":
-                            if Day >= 7 and "dress0" not in LauraX.History and "mission" not in LauraX.Todo:
-                                    call LauraMeet
-                                    return
-
-                    #Calls Kitty starting dressup event
-                    if Time_Count < 3 and "met" in KittyX.History:
-                            if "dress0" in LauraX.History:
-                                    call Laura_Dressup
-                                    return
-
-    #Activates Emma meet and class stuff
-        if EmmaX in ActiveGirls:
-                if bg_current == "bg classroom" and Time_Count == 2 and Weekday in (0,2,4):
-                        #If you've met Emma, it's evening on a school night, mon/tue/fri
-                        if "traveling" in Player.RecentActions and not Party:
-                                #if you are in motion,
-                                if "classcaught" not in EmmaX.History:
-                                        #if first time you catch her, 100% chance
-                                        jump Emma_Caught_Classroom
-                                        return
-                                elif D20 <= 10 and "gonnafap" in EmmaX.DailyActions:
-                                        #50/50 chance of catching Emma in class
-                                        jump Emma_Caught_Classroom
-                                        return
-
-                        if "detention" in Player.Traits and not Party:
-                                        jump Emma_Detention
-
-                        if Round >= 70:
-                                #if you are in class and not travelling. . .
-                                $ EmmaX.Loc = "bg classroom"
-        else:
-                #Emma is not in ActiveGirls
-                if Day >= 4 and "met" not in EmmaX.History and "traveling" in Player.RecentActions and bg_current == "bg classroom" and Weekday < 5:   #was day 6
-                        jump EmmaMeet
-                        return
-    #End Emma meet
-
-    #Activates Storm meet
-        if StormX in ActiveGirls:
-                    if bg_current == "bg classroom" and StormX.Loc == "bg teacher" and "Peter" in StormX.History and "traveling" in Player.RecentActions:
-                            #if you told her your name was Peter Parker
-                            call Storm_Peter
-                            return
-                    if bg_current == "bg classroom" and Time_Count == 2 and Weekday in (1,3):
-                            if "mohawk" not in StormX.History and "traveling" not in Player.RecentActions and ApprovalCheck(StormX, 200, "I"):
-                                    jump Storm_Hairtalk
-                                    return
-                            if Round >= 70:
-                                    #if you are in class and not travelling. . .
-                                    $ StormX.Loc = "bg classroom"
-                    if Time_Count == 3 and bg_current == "bg pool" and "poolnight" in Player.History:
-                            if "sex friend" not in StormX.Petnames or (D20 < 5 and "poolnight" not in Player.RecentActions):
-                                    #call's Storm's skinny dipping thing at night if it's the first time or a 25% chance.
-                                    call Storm_Poolnight
-                                    return
-
-
-        elif "met" not in StormX.History and "met" in JeanX.History:
-                    if bg_current == "bg player" and "attic" not in Player.History and "noise" not in Player.History:
-                            #You hadn't asked Emma yet
-                            call StormMeetPrelude
-                            return
-                    elif bg_current == "bg classroom" and "noise" in Player.History and "traveling" in Player.RecentActions:
-                            #You hadn't asked Emma yet
-                            call StormMeetAsk
-                            return
-                    elif bg_current == "bg player" and Time_Count < 2 and 0 < StormX.Break[0] <= 101 and "traveling" in Player.RecentActions:
-                            #Break is being used as a 3-day countdown to when you are forced to meet Storm.
-                            call StormMeetWater
-                            jump Misplaced
+    # turn off all other girls for now, focus on Rogue
+    # #Activates Jubes meet
+    #     if JubesX in ActiveGirls:
+    #                 #you haven't completed Jubes's intro, but have met Storm
+    #                 if Time_Count < 3 and "sunshine" not in JubesX.History and "traveling" in Player.RecentActions and bg_current in ("bg classroom","bg dangerroom","bg campus","bg pool"):
+    #                         jump Jubes_Sunshine
+    #                         return
+    #                 elif "mall" not in Player.History and "sunshine" in JubesX.History and Time_Count < 3 and JubesX.Addict < 50:
+    #                         call Jubes_Mall
+    #                         jump Misplaced
+    #                 elif not JubesX.Event[1] and JubesX.Addict < 50:
+    #                         #if she hasn't had her addiction event yet. . .
+    #                         $ JubesX.Addict += 5
+    # #End Jubes meet
+    #
+    # #Activates Kitty meet
+    #     if KittyX in ActiveGirls:
+    #             if "Kate" not in KittyX.Names and KittyX.Inbt >= 500 and KittyX.Loc == bg_current:
+    #                     #She calls herself Kate now.
+    #                     call Kitty_Kate
+    #                     return
+    #     else:
+    #             if "traveling" in Player.RecentActions and "met" not in KittyX.History and bg_current == "bg classroom":
+    #                     jump KittyMeet
+    #                     return
+    #
+    # #Activates Laura meet
+    #     if LauraX in ActiveGirls:
+    #                 pass
+    #     elif "met" not in LauraX.History and "traveling" in Player.RecentActions:
+    #                 if bg_current == "bg dangerroom":
+    #                         if Day >= 7 and "dress0" not in LauraX.History and "mission" not in LauraX.Todo:
+    #                                 call LauraMeet
+    #                                 return
+    #
+    #                 #Calls Kitty starting dressup event
+    #                 if Time_Count < 3 and "met" in KittyX.History:
+    #                         if "dress0" in LauraX.History:
+    #                                 call Laura_Dressup
+    #                                 return
+    #
+    # #Activates Emma meet and class stuff
+    #     if EmmaX in ActiveGirls:
+    #             if bg_current == "bg classroom" and Time_Count == 2 and Weekday in (0,2,4):
+    #                     #If you've met Emma, it's evening on a school night, mon/tue/fri
+    #                     if "traveling" in Player.RecentActions and not Party:
+    #                             #if you are in motion,
+    #                             if "classcaught" not in EmmaX.History:
+    #                                     #if first time you catch her, 100% chance
+    #                                     jump Emma_Caught_Classroom
+    #                                     return
+    #                             elif D20 <= 10 and "gonnafap" in EmmaX.DailyActions:
+    #                                     #50/50 chance of catching Emma in class
+    #                                     jump Emma_Caught_Classroom
+    #                                     return
+    #
+    #                     if "detention" in Player.Traits and not Party:
+    #                                     jump Emma_Detention
+    #
+    #                     if Round >= 70:
+    #                             #if you are in class and not travelling. . .
+    #                             $ EmmaX.Loc = "bg classroom"
+    #     else:
+    #             #Emma is not in ActiveGirls
+    #             if Day >= 4 and "met" not in EmmaX.History and "traveling" in Player.RecentActions and bg_current == "bg classroom" and Weekday < 5:   #was day 6
+    #                     jump EmmaMeet
+    #                     return
+    # #End Emma meet
+    #
+    # #Activates Storm meet
+    #     if StormX in ActiveGirls:
+    #                 if bg_current == "bg classroom" and StormX.Loc == "bg teacher" and "Peter" in StormX.History and "traveling" in Player.RecentActions:
+    #                         #if you told her your name was Peter Parker
+    #                         call Storm_Peter
+    #                         return
+    #                 if bg_current == "bg classroom" and Time_Count == 2 and Weekday in (1,3):
+    #                         if "mohawk" not in StormX.History and "traveling" not in Player.RecentActions and ApprovalCheck(StormX, 200, "I"):
+    #                                 jump Storm_Hairtalk
+    #                                 return
+    #                         if Round >= 70:
+    #                                 #if you are in class and not travelling. . .
+    #                                 $ StormX.Loc = "bg classroom"
+    #                 if Time_Count == 3 and bg_current == "bg pool" and "poolnight" in Player.History:
+    #                         if "sex friend" not in StormX.Petnames or (D20 < 5 and "poolnight" not in Player.RecentActions):
+    #                                 #call's Storm's skinny dipping thing at night if it's the first time or a 25% chance.
+    #                                 call Storm_Poolnight
+    #                                 return
+    #
+    #
+    #     elif "met" not in StormX.History and "met" in JeanX.History:
+    #                 if bg_current == "bg player" and "attic" not in Player.History and "noise" not in Player.History:
+    #                         #You hadn't asked Emma yet
+    #                         call StormMeetPrelude
+    #                         return
+    #                 elif bg_current == "bg classroom" and "noise" in Player.History and "traveling" in Player.RecentActions:
+    #                         #You hadn't asked Emma yet
+    #                         call StormMeetAsk
+    #                         return
+    #                 elif bg_current == "bg player" and Time_Count < 2 and 0 < StormX.Break[0] <= 101 and "traveling" in Player.RecentActions:
+    #                         #Break is being used as a 3-day countdown to when you are forced to meet Storm.
+    #                         call StormMeetWater
+    #                         jump Misplaced
     #End Storm meet
 
 

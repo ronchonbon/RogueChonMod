@@ -3164,20 +3164,14 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Trigger4, Girl
 
             return
 
-label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Trigger4, ActiveGirl=0):  #rkeljsv
-
-
+label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Trigger4, ActiveGirl=0):
     if Trigger == "strip" or not Trigger:
-            #if nothing that involves dirty talk. . .
-            return
+        return
 
     $ D20 = renpy.random.randint(1, 4)
-    # 1 is nobody, 2 and 3 is primary, 4 is secondary
-
 
     if D20 == 1:
-            #RNG said no
-            return
+        return
     elif D20 == 4 and Partner in TotalGirls:
             #RNG said partner says a line
             $ Girl = Partner
@@ -4154,6 +4148,143 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, TempLine=0, TempTrigger=Tri
 
     return
 
+
+
+label start_of_sex_narration(character, action):
+    $ check_line = renpy.random.choice(["glances around for voyeurs",
+        "glances around to see if anyone notices what she's doing"])
+
+    $ first_undressing_line = renpy.random.choice(["hesitantly pulls down your pants"])
+
+    $ undressing_line = renpy.random.choice(["pulls down your pants"])
+
+    if action == "sex":
+        $ first_action_line = renpy.random.choice(["slowly presses against your rigid member"])
+
+        $ action_line = renpy.random.choice(["climbs on top of you",
+            "pushes you back and slowly presses against your rigid member",
+            "lays back and slowly presses against your rigid member",
+            "turns around and slowly presses against your rigid member",
+            "bends over and presses her backside against you suggestively",
+            "backs her ass up against your cock"])
+
+        $ player_first_action_line = renpy.random.choice(["You guide it into place and slide it in",
+            "You press her folds aside and nudge your cock in",
+            "You take careful aim and then push your cock in"])
+
+        $ player_action_line = renpy.random.choice(["You guide your cock into place and ram it home",
+            "You guide it into place and slide it in",
+            "You press her folds aside and nudge your cock in",
+            "You take careful aim and then ram your cock in"])
+
+        $ final_line = renpy.random.choice(["leans back a bit and your cock slides in"])
+    elif action == "anal":
+        $ first_action_line = renpy.random.choice(["slowly presses against your rigid member",
+            "leans back and presses against you suggestively"])
+
+        $ action_line = renpy.random.choice(["climbs on top of you",
+            "pushes you back and slowly presses against your rigid member",
+            "lays back and slowly presses against your rigid member",
+            "turns around and slowly presses against your rigid member",
+            "bends over and presses her backside against you suggestively",
+            "leans back and presses against you suggestively",
+            "backs her ass up against your cock"])
+
+        $ player_first_action_line = renpy.random.choice(["You guide it into place and slide it in"])
+
+        $ player_action_line = renpy.random.choice(["You guide your cock into place and ram it home",
+            "You guide it into place and slide it in",
+            "You take careful aim and then ram your cock in",
+            "You press against her rim and nudge your cock in."])
+
+        $ final_line = renpy.random.choice(["leans back a bit and your cock pops in"])
+    elif action == "hotdog":
+        $ first_action_line = renpy.random.choice(["slowly presses against your rigid member",
+            "leans back and presses against you suggestively"])
+
+        $ action_line = renpy.random.choice(["pushes you back and slowly presses against your rigid member",
+            "turns around and slowly presses against your rigid member",
+            "bends over and presses her backside against you suggestively",
+            "leans back and presses against you suggestively",
+            "backs her ass up against your cock"])
+
+    if Taboo:
+        if character in [RogueX, KittyX]:
+            if (action == "sex" and not character.Sex) or (action == "anal" and not character.Anal):
+                "[character.Name] [check_line]. . ."
+
+                if "cockout" in Player.RecentActions:
+                    "[character.Name] [first_action_line]"
+                else:
+                    "She [first_undressing_line] and [first_action_line]."
+
+                if player_first_action_line:
+                    "[player_first_action_line]."
+            else:
+                if "cockout" in Player.RecentActions:
+                    "[character.Name] [check_line], then [undressing_line] and [action_line]"
+                else:
+                    "[character.Name] [check_line], then [action_line]."
+
+                if player_action_line:
+                    "[player_action_line]."
+        elif character in [EmmaX, LauraX, JeanX, StormX, JubesX]:
+            "[character.Name] [check_line]."
+
+            if "cockout" in Player.RecentActions:
+                "Then she [action_line]."
+            else:
+                "Then she [undressing_line] and [action_line]."
+
+            if final_line:
+                "She [final_line]."
+
+        if character != JeanX:
+            $ character.Inbt += int(Taboo/10)
+            $ character.Lust += int(Taboo/5)
+        else:
+            $ JeanX.Statup("Inbt", 90, int(Taboo/10))
+            $ JeanX.Statup("Lust", 50, int(Taboo/5))
+    else:
+        if character in [RogueX, KittyX]:
+            if (action == "sex" and not character.Sex) or (action == "anal" and not character.Anal):
+                if "cockout" in Player.RecentActions:
+                    "[character.Name] [first_action_line]."
+                else:
+                    "[character.Name] [first_undressing_line] and [first_action_line]."
+
+                if player_first_action_line:
+                    "[player_first_action_line]."
+            else:
+                if "cockout" in Player.RecentActions:
+                    "[character.Name] [undressing_line] and [action_line]"
+                else:
+                    "[character.Name] [action_line]."
+
+                if player_action_line:
+                    "[player_action_line]."
+        elif character in [EmmaX, LauraX, JeanX, StormX, JubesX]:
+            if "cockout" in Player.RecentActions:
+                "[character.Name] [action_line]."
+            else:
+                "[character.Name] [undressing_line] and [action_line]."
+
+            if final_line:
+                "She [final_line]."
+
+    return
+
+
+
+
+
+
+
+
+
+
+
+
 label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
         # call Sex_Basic_Dialog(Girl,"done")
         #called from during sex scenes if a girl is getting tired. . .
@@ -4291,128 +4422,3 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
                                 ch_v "You coulda warned me though. . ."
 
         return
-
-
-label start_of_sex_narration(character, action):
-    $ check_line = renpy.random.choice(["glances around for voyeurs",
-        "glances around to see if anyone notices what she's doing"])
-
-    $ first_undressing_line = renpy.random.choice(["hesitantly pulls down your pants"])
-
-    $ undressing_line = renpy.random.choice(["pulls down your pants"])
-
-    if action == "sex":
-        $ first_action_line = renpy.random.choice(["slowly presses against your rigid member"])
-
-        $ action_line = renpy.random.choice(["climbs on top of you",
-            "pushes you back and slowly presses against your rigid member",
-            "lays back and slowly presses against your rigid member",
-            "turns around and slowly presses against your rigid member",
-            "bends over and presses her backside against you suggestively",
-            "backs her ass up against your cock"])
-
-        $ player_first_action_line = renpy.random.choice(["You guide it into place and slide it in",
-            "You press her folds aside and nudge your cock in",
-            "You take careful aim and then push your cock in"])
-
-        $ player_action_line = renpy.random.choice(["You guide your cock into place and ram it home",
-            "You guide it into place and slide it in",
-            "You press her folds aside and nudge your cock in",
-            "You take careful aim and then ram your cock in"])
-
-        $ final_line = renpy.random.choice(["leans back a bit and your cock slides in"])
-    elif action == "anal":
-        $ first_action_line = renpy.random.choice(["slowly presses against your rigid member",
-            "leans back and presses against you suggestively"])
-
-        $ action_line = renpy.random.choice(["climbs on top of you",
-            "pushes you back and slowly presses against your rigid member",
-            "lays back and slowly presses against your rigid member",
-            "turns around and slowly presses against your rigid member",
-            "bends over and presses her backside against you suggestively",
-            "leans back and presses against you suggestively",
-            "backs her ass up against your cock"])
-
-        $ player_first_action_line = renpy.random.choice(["You guide it into place and slide it in"])
-
-        $ player_action_line = renpy.random.choice(["You guide your cock into place and ram it home",
-            "You guide it into place and slide it in",
-            "You take careful aim and then ram your cock in",
-            "You press against her rim and nudge your cock in."])
-
-        $ final_line = renpy.random.choice(["leans back a bit and your cock pops in"])
-    elif action == "hotdog":
-        $ first_action_line = renpy.random.choice(["slowly presses against your rigid member",
-            "leans back and presses against you suggestively"])
-
-        $ action_line = renpy.random.choice(["pushes you back and slowly presses against your rigid member",
-            "turns around and slowly presses against your rigid member",
-            "bends over and presses her backside against you suggestively",
-            "leans back and presses against you suggestively",
-            "backs her ass up against your cock"])
-
-    if Taboo:
-        if character in [RogueX, KittyX]:
-            if (action == "sex" and not character.Sex) or (action == "anal" and not character.Anal):
-                "[character.Name] [check_line]. . ."
-
-                if "cockout" in Player.RecentActions:
-                    "[character.Name] [first_action_line]"
-                else:
-                    "She [first_undressing_line] and [first_action_line]."
-
-                if player_first_action_line:
-                    "[player_first_action_line]."
-            else:
-                if "cockout" in Player.RecentActions:
-                    "[character.Name] [check_line], then [undressing_line] and [action_line]"
-                else:
-                    "[character.Name] [check_line], then [action_line]."
-
-                if player_action_line:
-                    "[player_action_line]."
-        elif character in [EmmaX, LauraX, JeanX, StormX, JubesX]:
-            "[character.Name] [check_line]."
-
-            if "cockout" in Player.RecentActions:
-                "Then she [action_line]."
-            else:
-                "Then she [undressing_line] and [action_line]."
-
-            if final_line:
-                "She [final_line]."
-
-        if character != JeanX:
-            $ character.Inbt += int(Taboo/10)
-            $ character.Lust += int(Taboo/5)
-        else:
-            $ JeanX.Statup("Inbt", 90, int(Taboo/10))
-            $ JeanX.Statup("Lust", 50, int(Taboo/5))
-    else:
-        if character in [RogueX, KittyX]:
-            if (action == "sex" and not character.Sex) or (action == "anal" and not character.Anal):
-                if "cockout" in Player.RecentActions:
-                    "[character.Name] [first_action_line]."
-                else:
-                    "[character.Name] [first_undressing_line] and [first_action_line]."
-
-                if player_first_action_line:
-                    "[player_first_action_line]."
-            else:
-                if "cockout" in Player.RecentActions:
-                    "[character.Name] [undressing_line] and [action_line]"
-                else:
-                    "[character.Name] [action_line]."
-
-                if player_action_line:
-                    "[player_action_line]."
-        elif character in [EmmaX, LauraX, JeanX, StormX, JubesX]:
-            if "cockout" in Player.RecentActions:
-                "[character.Name] [action_line]."
-            else:
-                "[character.Name] [undressing_line] and [action_line]."
-
-            if final_line:
-                "She [final_line]."
-
-    return

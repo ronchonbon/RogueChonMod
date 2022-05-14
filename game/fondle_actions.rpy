@@ -21,7 +21,7 @@ label fondle_menu:
             $ Cnt += 1
             $ Round -= 1
 
-            jump fondle_cycle
+            jump action_cycle
         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
             pass
         "Focus to last longer." if not Player.FocusX and "focus" in Player.Traits:
@@ -34,7 +34,7 @@ label fondle_menu:
             $ Player.FocusX = 0
         "View":
             call ViewShift(Player.focused_girl, "menu")
-            jump fondle_cycle
+            jump action_cycle
         "Other options":
             menu:
                 "Offhand action":
@@ -53,7 +53,7 @@ label fondle_menu:
                                     if Player.focused_girl.Action:
                                         $ Situation = "shift"
 
-                                        call after_fondle
+                                        call after_action
                                         call fondle_pussy(Player.focused_girl)
                                     else:
                                         call tired_lines(Player.focused_girl)
@@ -61,14 +61,14 @@ label fondle_menu:
                                     if Player.focused_girl.Action:
                                         $ Situation = "auto"
 
-                                        call after_fondle
+                                        call after_action
                                         call fondle_pussy(Player.focused_girl)
                                     else:
                                         "As your hands creep upwards, she grabs your wrists."
 
                                         call tired_lines(Player.focused_girl)
                                 "Never Mind":
-                                    jump fondle_cycle
+                                    jump action_cycle
                         else:
                             call tired_lines(Player.focused_girl)
                     elif Player.primary_action == "fondle_breasts":
@@ -78,7 +78,7 @@ label fondle_menu:
                                     if Player.focused_girl.Action and MultiAction:
                                         $ Situation = "shift"
 
-                                        call after_fondle
+                                        call after_action
                                         call suck_breasts(Player.focused_girl)
                                     else:
                                         call tired_lines(Player.focused_girl)
@@ -86,14 +86,14 @@ label fondle_menu:
                                     if Player.focused_girl.Action and MultiAction:
                                         $ Situation = "auto"
 
-                                        call after_fondle
+                                        call after_action
                                         call suck_breasts(Player.focused_girl)
                                     else:
                                         "As you lean in to suck on her breast, she grabs your head and pushes back."
 
                                         call tired_lines(Player.focused_girl)
                                 "Never Mind":
-                                    jump fondle_cycle
+                                    jump action_cycle
                         else:
                             call tired_lines(Player.focused_girl)
                     elif Player.primary_action == "suck_breasts":
@@ -103,14 +103,14 @@ label fondle_menu:
                                     if Player.focused_girl.Action and MultiAction:
                                         $ Situation = "pullback"
 
-                                        call after_fondle
+                                        call after_action
                                         call fondle_breasts
                                     else:
                                         "As you pull back, [Player.focused_girl.Name] pushes you back in close."
 
                                         call tired_lines(Player.focused_girl)
                                 "Never Mind":
-                                    jump fondle_cycle
+                                    jump action_cycle
                         else:
                             call tired_lines(Player.focused_girl)
                     elif Player.primary_action == "fondle_pussy":
@@ -120,7 +120,7 @@ label fondle_menu:
                                     if Player.focused_girl.Action:
                                         $ Situation = "shift"
 
-                                        call after_fondle
+                                        call after_action
                                         call eat_pussy(Player.focused_girl)
 
                                         return False
@@ -130,7 +130,7 @@ label fondle_menu:
                                     if Player.focused_girl.Action:
                                         $ Situation = "auto"
 
-                                        call after_fondle
+                                        call after_action
                                         call eat_pussy(Player.focused_girl)
 
                                         return False
@@ -142,7 +142,7 @@ label fondle_menu:
                                     if Player.focused_girl.Action:
                                         $ Situation = "pullback"
 
-                                        call after_fondle
+                                        call after_action
                                         call fondle_thighs(Player.focused_girl)
 
                                         return False
@@ -154,14 +154,14 @@ label fondle_menu:
                                     if Player.focused_girl.Action:
                                         $ Situation = "shift"
 
-                                        call after_fondle
+                                        call after_action
                                         call dildo_pussy(Player.focused_girl)
 
                                         return False
                                     else:
                                         call tired_lines(Player.focused_girl)
                                 "Never Mind":
-                                    jump fondle_cycle
+                                    jump action_cycle
                         else:
                             call tired_lines(Player.focused_girl)
                     elif Player.primary_action == "eat_pussy":
@@ -170,15 +170,15 @@ label fondle_menu:
                                 "Pull out and start rubbing again.":
                                     $ Situation = "pullback"
 
-                                    call after_fondle
+                                    call after_action
                                     call fondle_pussy(Player.focused_girl)
                                 "I want to stick a dildo in.":
                                     $ Situation = "shift"
 
-                                    call after_fondle
+                                    call after_action
                                     call dildo_pussy(Player.focused_girl)
                                 "Never Mind":
-                                    jump fondle_cycle
+                                    jump action_cycle
                         else:
                             call tired_lines(Player.focused_girl)
                     elif Player.primary_action == "fondle_ass":
@@ -187,55 +187,55 @@ label fondle_menu:
                                 "I want to stick a finger in.":
                                     $ Situation = "shift"
 
-                                    call after_fondle
+                                    call after_action
                                     call finger_ass(Player.focused_girl)
                                 "Just stick a finger in without asking.":
                                     $ Situation = "auto"
 
-                                    call after_fondle
+                                    call after_action
                                     call finger_ass(Player.focused_girl)
                                 "I want to lick your asshole.":
                                     $ Situation = "shift"
 
-                                    call after_fondle
+                                    call after_action
                                     call eat_ass(Player.focused_girl)
                                 "Just start licking.":
                                     $ Situation = "auto"
 
-                                    call after_fondle
+                                    call after_action
                                     call eat_ass(Player.focused_girl)
                                 "I want to stick a dildo in.":
                                     $ Situation = "shift"
 
-                                    call after_fondle
+                                    call after_action
                                     call dildo_ass(Player.focused_girl)
                                 "Never Mind":
-                                    jump fondle_cycle
+                                    jump action_cycle
                     elif Player.primary_action == "finger_ass":
                         if Player.focused_girl.Action and MultiAction:
                             menu:
                                 "Pull out and start rubbing again.":
                                     $ Situation = "pullback"
 
-                                    call after_fondle
+                                    call after_action
                                     call fondle_ass(Player.focused_girl)
                                 "I want to lick your asshole.":
                                     $ Situation = "shift"
 
-                                    call after_fondle
+                                    call after_action
                                     call eat_ass(Player.focused_girl)
                                 "Just start licking.":
                                     $ Situation = "auto"
 
-                                    call after_fondle
+                                    call after_action
                                     call eat_ass(Player.focused_girl)
                                 "I want to stick a dildo in.":
                                     $ Situation = "shift"
 
-                                    call after_fondle
+                                    call after_action
                                     call dildo_ass(Player.focused_girl)
                                 "Never Mind":
-                                    jump fondle_cycle
+                                    jump action_cycle
                         else:
                             call tired_lines(Player.focused_girl)
                     elif Player.primary_action == "eat_ass":
@@ -244,31 +244,31 @@ label fondle_menu:
                                 "Switch to fondling.":
                                     $ Situation = "pullback"
 
-                                    call after_fondle
+                                    call after_action
                                     call fondle_ass(Player.focused_girl)
                                 "I want to stick a finger in.":
                                     $ Situation = "shift"
 
-                                    call after_fondle
+                                    call after_action
                                     call finger_ass(Player.focused_girl)
                                 "Just stick a finger in [[without asking].":
                                     $ Situation = "auto"
 
-                                    call after_fondle
+                                    call after_action
                                     call finger_ass(Player.focused_girl)
                                 "I want to stick a dildo in.":
                                     $ Situation = "shift"
 
-                                    call after_fondle
+                                    call after_action
                                     call dildo_ass(Player.focused_girl)
                                 "Never Mind":
-                                    jump fondle_cycle
+                                    jump action_cycle
                         else:
                             call tired_lines(Player.focused_girl)
                 "Shift your focus" if Trigger2:
                     $ Situation = "shift focus"
 
-                    call after_fondle
+                    call after_action
                     call Offhand_Set
                 "Shift your focus (locked)" if not Trigger2:
                     pass
@@ -290,14 +290,14 @@ label fondle_menu:
                             call Trigger_Swap
                         "Undress [Partner.Name]":
                             call Girl_Undress(Partner)
-                            jump fondle_cycle
+                            jump action_cycle
                         "Clean up [Partner.Name] (locked)" if not Partner.Spunk:
                             pass
                         "Clean up [Partner.Name]" if Partner.Spunk:
                             call Girl_Cleanup(Partner,"ask")
-                            jump fondle_cycle
+                            jump action_cycle
                         "Never mind":
-                            jump fondle_cycle
+                            jump action_cycle
                 "Show her feet" if not ShowFeet and (Player.focused_girl.Pose == "doggy" or Player.focused_girl.Pose == "sex"):
                     $ ShowFeet = 1
                 "Hide her feet" if ShowFeet and (Player.focused_girl.Pose == "doggy" or Player.focused_girl.Pose == "sex"):
@@ -309,7 +309,7 @@ label fondle_menu:
                 "Clean up [Player.focused_girl.Name]" if Player.focused_girl.Spunk:
                     call Girl_Cleanup(Player.focused_girl,"ask")
                 "Never mind":
-                    jump fondle_cycle
+                    jump action_cycle
         "Back to Sex Menu" if MultiAction:
             ch_p "Let's try something else."
 
@@ -318,7 +318,7 @@ label fondle_menu:
             $ Situation = "shift"
             $ Line = 0
 
-            jump after_fondle
+            jump after_action
         "End Scene" if not MultiAction:
             ch_p "Let's stop for now."
 
@@ -326,343 +326,9 @@ label fondle_menu:
 
             $ Line = 0
 
-            jump after_fondle
+            jump after_action
 
     jump fondle_menu_return
-
-label before_fondle:
-    if Player.primary_action not in ["suck_breasts", "fondle_pussy"]:
-        if Trigger == "kiss_you":
-            $ Trigger = Player.primary_action
-
-            return
-
-    if Player.primary_action != "finger_pussy" and Trigger2 == Player.primary_action:
-        return
-
-    # we have to fix the launch functions to accept Player.primary_action
-    if Player.primary_action in ["fondle_thighs", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-        if Player.focused_girl != EmmaX:
-            call pussy_launch(Player.focused_girl, trigger = Player.primary_action)
-        else:
-            if Player.focused_girl.Pose in ["doggy", "sex"]:
-                call ViewShift(Player.focused_girl, Player.focused_girl.Pose, 0, Player.primary_action)
-            else:
-                call ViewShift(Player.focused_girl, "pussy", 0, Player.primary_action)
-    elif Player.primary_action in ["fondle_breasts", "suck_breasts"]:
-        call breasts_launch(Player.focused_girl, trigger = Player.primary_action)
-
-    if Situation == Player.focused_girl:
-        $ Situation = 0
-
-        call character_initated_action(Player.focused_girl, Player.primary_action)
-
-        if _return:
-            return
-
-    if not Player.focused_girl.Forced and Situation != "auto":
-        $ temp_modifier = 0
-
-        if Player.primary_action in ["eat_pussy", "eat_ass"] and Player.focused_girl.PantsNum() >= 6:
-            $ temp_modifier = 15
-
-        if Player.primary_action in ["fondle_thighs", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-            call Bottoms_Off
-        elif Player.primary_action in ["fondle_breasts", "suck_breasts"]:
-            call Top_Off
-        elif Player.primary_action == "finger_pussy":
-            call Girl_Undress(Player.focused_girl, "bottom")
-
-        if "angry" in Player.focused_girl.RecentActions:
-            return
-
-    $ temp_modifier = 0
-
-    if Player.primary_action == "fondle_thighs" and not Player.focused_girl.FondleT:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -10)
-            $ Player.focused_girl.Statup("Obed", 70, 15)
-            $ Player.focused_girl.Statup("Inbt", 80, 10)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 5)
-            $ Player.focused_girl.Statup("Obed", 70, 10)
-            $ Player.focused_girl.Statup("Inbt", 80, 15)
-    elif Player.primary_action == "fondle_breasts" and not Player.focused_girl.FondleB:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -20)
-            $ Player.focused_girl.Statup("Obed", 70, 25)
-            $ Player.focused_girl.Statup("Inbt", 80, 15)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 10)
-            $ Player.focused_girl.Statup("Obed", 70, 5)
-            $ Player.focused_girl.Statup("Inbt", 80, 15)
-    elif Player.primary_action == "suck_breasts" and not Player.focused_girl.SuckB:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -25)
-            $ Player.focused_girl.Statup("Obed", 70, 25)
-            $ Player.focused_girl.Statup("Inbt", 80, 17)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 10)
-            $ Player.focused_girl.Statup("Obed", 70, 10)
-            $ Player.focused_girl.Statup("Inbt", 80, 15)
-    elif Player.primary_action == "fondle_pussy" and not Player.focused_girl.FondleP:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -50)
-            $ Player.focused_girl.Statup("Obed", 70, 35)
-            $ Player.focused_girl.Statup("Inbt", 80, 25)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 10)
-            $ Player.focused_girl.Statup("Obed", 70, 10)
-            $ Player.focused_girl.Statup("Inbt", 80, 15)
-    elif Player.primary_action == "finger_pussy" and not Player.focused_girl.InsertP:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -60)
-            $ Player.focused_girl.Statup("Obed", 70, 55)
-            $ Player.focused_girl.Statup("Inbt", 80, 35)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 10)
-            $ Player.focused_girl.Statup("Obed", 70, 20)
-            $ Player.focused_girl.Statup("Inbt", 80, 25)
-    if Player.primary_action == "eat_pussy" and not Player.focused_girl.LickP:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -30)
-            $ Player.focused_girl.Statup("Obed", 70, 35)
-            $ Player.focused_girl.Statup("Inbt", 80, 75)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 35)
-            $ Player.focused_girl.Statup("Obed", 70, 15)
-            $ Player.focused_girl.Statup("Inbt", 80, 35)
-    elif Player.primary_action == "fondle_ass" and not Player.focused_girl.FondleA:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -20)
-            $ Player.focused_girl.Statup("Obed", 70, 20)
-            $ Player.focused_girl.Statup("Inbt", 80, 15)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 10)
-            $ Player.focused_girl.Statup("Obed", 70, 12)
-            $ Player.focused_girl.Statup("Inbt", 80, 20)
-    elif Player.primary_action == "finger_ass" and not Player.focused_girl.InsertA:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -50)
-            $ Player.focused_girl.Statup("Obed", 70, 60)
-            $ Player.focused_girl.Statup("Inbt", 80, 35)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 10)
-            $ Player.focused_girl.Statup("Obed", 70, 20)
-            $ Player.focused_girl.Statup("Inbt", 80, 25)
-    elif Player.primary_action == "eat_ass" and not Player.focused_girl.LickA:
-        if Player.focused_girl.Forced:
-            $ Player.focused_girl.Statup("Love", 90, -30)
-            $ Player.focused_girl.Statup("Obed", 70, 40)
-            $ Player.focused_girl.Statup("Inbt", 80, 80)
-        else:
-            $ Player.focused_girl.Statup("Love", 90, 35)
-            $ Player.focused_girl.Statup("Obed", 70, 25)
-            $ Player.focused_girl.Statup("Inbt", 80, 55)
-
-    if Taboo:
-        if Player.primary_action == "fondle_thighs":
-            $ Player.focused_girl.Statup("Lust", 200, (int(Taboo/5)))
-            $ Player.focused_girl.Statup("Inbt", 200, (2*(int(Taboo/5))))
-        elif Player.primary_action in ["fondle_breasts", "suck_breasts", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass"]:
-            $ Player.focused_girl.Inbt += int(Taboo/10)
-            $ Player.focused_girl.Lust += int(Taboo/5)
-        elif Player.primary_action in ["fondle_pussy", "eat_pussy", "finger_ass", "eat_ass"]:
-            if Player.focused_girl == JeanX and Player.focused_girl.Taboo:
-                $ Player.focused_girl.Statup("Inbt", 200, (int(Taboo/10)))
-            elif Taboo:
-                $ Player.focused_girl.Inbt += int(Taboo/10)
-
-            $ Player.focused_girl.Lust += int(Taboo/5)
-
-    if Situation:
-        $ renpy.pop_call()
-
-        $ Situation = 0
-
-    if Player.primary_action in ["eat_pussy", "eat_ass"]:
-        if Player.focused_girl.PantsNum() == 5:
-            $ Player.focused_girl.Upskirt = 1
-            $ Player.focused_girl.SeenPanties = 1
-
-        if not Player.focused_girl.Panties:
-            call first_bottomless(Player.focused_girl, 1)
-
-    $ Line = 0
-    $ Cnt = 0
-
-    if Player.primary_action == "finger_pussy":
-        $ Speed = 2
-
-    if Taboo:
-        $ Player.focused_girl.DrainWord("tabno")
-
-    # we have to fix DrainWord and AddWord to accept Player.primary_action
-    $ Player.focused_girl.DrainWord("no_" + Player.primary_action)
-    $ Player.focused_girl.AddWord(0, Player.primary_action, Player.primary_action)
-
-    # we have to fix the launch functions to accept Player.primary_action
-    if Player.primary_action in ["fondle_thighs", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-        if Player.focused_girl != EmmaX:
-            call pussy_launch(Player.focused_girl, trigger = Player.primary_action)
-        else:
-            if Player.focused_girl.Pose in ["doggy", "sex"]:
-                call ViewShift(Player.focused_girl, Player.focused_girl.Pose, 0, Player.primary_action)
-            else:
-                call ViewShift(Player.focused_girl, "pussy", 0, Player.primary_action)
-    elif Player.primary_action in ["fondle_breasts", "suck_breasts"]:
-        call breasts_launch(Player.focused_girl, trigger = Player.primary_action)
-
-label fondle_cycle:
-    if Player.primary_action in ["suck_breasts", "eat_pussy", "eat_ass"]:
-        if Trigger2 == "kiss_you":
-            $ Trigger2 = 0
-
-    while Round > 0:
-
-        # we have to fix ViewShift to accept Player.primary_action
-        call Shift_Focus(RogueX)
-        call ViewShift(Player.focused_girl, Player.focused_girl.Pose, 0, Player.primary_action)
-
-        $ Player.focused_girl.LustFace()
-
-        if Player.Focus < 100:
-            jump fondle_menu
-
-            label fondle_menu_return:
-
-        if Player.primary_action in ["eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-            if Player.focused_girl.Panties or Player.focused_girl.PantsNum() >= 6 or Player.focused_girl.HoseNum() >= 5: #This checks if Rogue wants to strip down.
-                call Girl_Undress(Player.focused_girl, "auto")
-
-        call Shift_Focus(character)
-        call Sex_Dialog(Player.focused_girl, Partner)
-
-        $ Cnt += 1
-        $ Round -= 1
-
-        call end_of_fondle_round(Player.focused_girl, Player.primary_action)
-
-        if _return:
-            return
-
-        if Player.primary_action in ["fondle_breasts", "suck_breasts"]:
-            if Player.focused_girl.Lust >= 50 and not Player.focused_girl.Uptop and (Player.focused_girl.Chest or Player.focused_girl.Over):
-                $ Player.focused_girl.Uptop = 1
-
-                if Player.focused_girl == RogueX:
-                    "[Player.focused_girl.Name] shrugs and pulls her top open."
-                elif Player.focused_girl == KittyX:
-                    "[KittyX.Name] laughs and pulls her top open."
-                elif Player.focused_girl in [EmmaX, StormX]:
-                    "[EmmaX.Name] sighs and tugs her breasts free of her clothes."
-                elif Player.focused_girl in [LauraX, JeanX, JubesX]:
-                    "[Player.focused_girl.Name] grunts and pulls her clothes aside."
-
-                call first_topless
-
-    $ Player.focused_girl.FaceChange("bemused", 0)
-
-    $ Line = 0
-
-    call im_done_lines
-
-label after_fondle:
-    if Player.primary_action in ["fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-        if not Situation:
-            call reset_position(character)
-
-    $ Player.focused_girl.FaceChange("sexy")
-    $ Player.focused_girl.Action -= 1
-
-    if Player.primary_action == "fondle_thighs":
-        $ Player.focused_girl.FondleT += 1
-    elif Player.primary_action == "fondle_breasts":
-        $ Player.focused_girl.FondleB += 1
-    elif Player.primary_action == "suck_breasts":
-        $ Player.focused_girl.SuckB += 1
-    elif Player.primary_action == "fondle_pussy":
-        $ Player.focused_girl.FondleP += 1
-    elif Player.primary_action == "finger_pussy":
-        $ Player.focused_girl.InsertP += 1
-    elif Player.primary_action == "eat_pussy":
-        $ Player.focused_girl.LickP += 1
-    elif Player.primary_action == "fondle_ass":
-        $ Player.focused_girl.FondleA += 1
-    elif Player.primary_action == "finger_ass":
-        $ Player.focused_girl.InsertA += 1
-    elif Player.primary_action == "eat_ass":
-        $ Player.focused_girl.LickA += 1
-
-    if Player.primary_action in ["fondle_thighs", "fondle_pussy", "eat_pussy", "fondle_ass"] and Player.focused_girl.PantsNum() < 6 or Player.focused_girl.Upskirt:
-        $ Player.focused_girl.Addictionrate += 1
-
-        if "addictive" in Player.Traits:
-            $ Player.focused_girl.Addictionrate += 1
-
-        if Player.primary_action == "fondle_thighs":
-            call Partner_Like(Player.focused_girl, 1, 0)
-        elif Player.primary_action == ["fondle_pussy", "fondle_ass"]:
-            call Partner_Like(Player.focused_girl, 2)
-        elif Player.primary_action == "eat_pussy":
-            if Player.focused_girl == RogueX and Partner == EmmaX:
-                call Partner_Like(Player.focused_girl,4,3)
-            elif Player.focused_girl not in [KittyX, StormX] and Partner == RogueX:
-                call Partner_Like(Player.focused_girl, 3, 3)
-            elif Player.focused_girl == RogueX:
-                call Partner_Like(Player.focused_girl,3,2)
-            else:
-                call Partner_Like(Player.focused_girl, 2)
-    else:
-        $ Player.focused_girl.Addictionrate += 1
-
-        if "addictive" in Player.Traits:
-            $ Player.focused_girl.Addictionrate += 1
-
-        call Partner_Like(Player.focused_girl, 2)
-
-    $ first_time_fondling_thighs = (Player.primary_action == "fondle_thighs" and Player.focused_girl.FondleT == 1)
-    $ first_time_fondling_breasts = (Player.primary_action == "fondle_breasts" and Player.focused_girl.FondleB == 1)
-    $ first_time_sucking_breasts = (Player.primary_action == "suck_breasts" and Player.focused_girl.SuckB == 1)
-    $ first_time_fondling_pussy = (Player.primary_action == "fondle_pussy" and Player.focused_girl.FondleP == 1)
-    $ first_time_fingering_pussy = (Player.primary_action == "finger_pussy" and Player.focused_girl.InsertP == 1)
-    $ first_time_licking_pussy = (Player.primary_action == "eat_pussy" and Player.focused_girl.LickP == 1)
-    $ first_time_fondling_ass = (Player.primary_action == "fondle_ass" and Player.focused_girl.FondleA == 1)
-    $ first_time_fingering_ass = (Player.primary_action == "finger_ass" and Player.focused_girl.InsertA == 1)
-    $ first_time_licking_ass = (Player.primary_action == "eat_ass" and Player.focused_girl.LickA == 1)
-
-    if first_time_fondling_thighs or first_time_fondling_breasts or first_time_sucking_breasts or first_time_fondling_pussy or first_time_fingering_pussy or first_time_licking_pussy or first_time_fondling_ass or first_time_fingering_ass or first_time_licking_ass:
-        if Player.primary_action == "fondle_thighs":
-            $ Player.focused_girl.SEXP += 3
-        elif Player.primary_action in ["fondle_breasts", "suck_breasts", "fondle_ass"]:
-            $ Player.focused_girl.SEXP += 4
-        elif Player.primary_action in ["fondle_pussy"]:
-            $ Player.focused_girl.SEXP += 7
-        elif Player.primary_action in ["finger_pussy", "eat_pussy"]:
-            $ Player.focused_girl.SEXP += 10
-        elif Player.primary_action in ["finger_ass"]:
-            $ Player.focused_girl.SEXP += 12
-        elif Player.primary_action in ["eat_ass"]:
-            $ Player.focused_girl.SEXP += 15
-
-        if not Situation:
-            if Player.focused_girl.Love >= 500 and "unsatisfied" not in Player.focused_girl.RecentActions:
-                call that_was_nice_lines(character)
-            elif Player.focused_girl.Obed <= 500 and Player.Focus <= 20:
-                $ Player.focused_girl.FaceChange("perplexed", 1)
-
-                call was_that_enough_lines(character)
-
-    $ temp_modifier = 0
-
-    call Checkout
-
-    if Situation:
-        call Sex_Basic_Dialog(Player.focused_girl, "switch")
-    else:
-        call reset_position(character)
-
-    return
 
 label fondle_set_modifier(character, action):
     if action == "fondle_thighs":
@@ -860,7 +526,7 @@ label end_of_fondle_round(character, action):
                 $ character.AddWord(0, "unsatisfied", "unsatisfied")
 
             if Player.Focus > 80:
-                jump after_fondle
+                jump after_action
 
             $ Line = "came"
 
@@ -868,7 +534,7 @@ label end_of_fondle_round(character, action):
             call Girl_Cumming
 
             if Situation == "shift" or "angry" in character.RecentActions:
-                jump after_fondle
+                jump after_action
 
         if Line == "came": #ex Player.Focus <= 20:
             $ Line = 0
@@ -885,30 +551,30 @@ label end_of_fondle_round(character, action):
                     "No, I'm done.":
                         "You pull back."
 
-                        jump after_fondle
+                        jump after_action
 
     if Partner and Partner.Lust >= 100:
         call Girl_Cumming(Partner)
 
     $ Player.Focus -= 10 if Player.FocusX and Player.Focus > 50 else 0
 
-    if character == "fondle_thighs":
+    if action == "fondle_thighs":
         $ bonus = character.FondleT
-    elif character == "fondle_breasts":
+    elif action == "fondle_breasts":
         $ bonus = character.FondleB
-    elif character == "suck_breasts":
+    elif action == "suck_breasts":
         $ bonus = character.SuckB
-    elif character == "fondle_pussy":
+    elif action == "fondle_pussy":
         $ bonus = character.FondleP
-    elif character == "finger_pussy":
+    elif action == "finger_pussy":
         $ bonus = character.InsertP
-    elif character == "eat_pussy":
+    elif action == "eat_pussy":
         $ bonus = character.LickP
-    elif character == "fondle_ass":
+    elif action == "fondle_ass":
         $ bonus = character.FondleA
-    elif character == "finger_ass":
+    elif action == "finger_ass":
         $ bonus = character.InsertA
-    elif character == "eat_ass":
+    elif action == "eat_ass":
         $ bonus = character.LickA
 
     if character.SEXP >= 100 or ApprovalCheck(character, 1200, "LO"):
@@ -927,12 +593,12 @@ label end_of_fondle_round(character, action):
             "Finish up.":
                 "You let go. . ."
 
-                jump after_fondle
+                jump after_action
             "Let's try something else." if MultiAction:
                 $ Line = 0
                 $ Situation = "shift"
 
-                jump after_fondle
+                jump after_action
             "No, this is fun.":
                 if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
                     $ character.Statup("Love", 200, -5)
@@ -955,7 +621,7 @@ label end_of_fondle_round(character, action):
                     $ character.Statup("Obed", 50, -1, 1)
                     $ character.AddWord(1,"angry","angry")
 
-                    jump after_fondle
+                    jump after_action
 
     call Escalation(character)
 
@@ -984,7 +650,7 @@ label fondle_thighs(character):
 
             "As you caress her thigh, [character.Name] glances at you, and smiles."
 
-            jump before_fondle
+            jump before_action
         else:
             $ character.FaceChange("surprised")
             $ character.Statup("Obed", 50, -2)
@@ -1008,12 +674,12 @@ label fondle_thighs(character):
 
         "As you pull back, [character.Name] looks a little sad."
 
-        jump before_fondle
+        jump before_action
     elif "fondle_thighs" in character.RecentActions:
         $ character.FaceChange("sexy", 1)
 
         call repeat_action_lines(character)
-        jump before_fondle
+        jump before_action
     elif "fondle_thighs" in character.DailyActions:
         $ character.FaceChange("sexy", 1)
 
@@ -1050,7 +716,7 @@ label fondle_breasts(character):
 
             "As you cup her breast, [character.Name] gently nods."
 
-            jump before_fondle
+            jump before_action
         else:
             $ character.FaceChange("surprised")
             $ character.Brows = "confused"
@@ -1078,7 +744,7 @@ label fondle_breasts(character):
         $ character.FaceChange("sexy", 1)
 
         call repeat_action_lines(character)
-        jump before_fondle
+        jump before_action
     elif "fondle_breasts" in character.DailyActions:
         $ character.FaceChange("sexy", 1)
 
@@ -1115,7 +781,7 @@ label suck_breasts(character):
 
             "As you dive in, [character.Name] seems a bit surprised, but just makes a little \"coo.\""
 
-            jump before_fondle
+            jump before_action
         else:
             $ character.FaceChange("surprised")
             $ character.Statup("Obed", 50, -2)
@@ -1131,7 +797,7 @@ label suck_breasts(character):
         $ character.FaceChange("sexy", 1)
 
         call repeat_action_lines(character)
-        jump before_fondle
+        jump before_action
     elif "suck_breasts" in character.DailyActions:
         $ character.FaceChange("sexy", 1)
 
@@ -1175,7 +841,7 @@ label fondle_pussy(character):
 
             "As your hand creeps up her thigh, [character.Name] seems a bit surprised, but then nods."
 
-            jump before_fondle
+            jump before_action
         else:
             $ character.FaceChange("surprised")
             $ character.Statup("Obed", 50, -2)
@@ -1199,12 +865,12 @@ label fondle_pussy(character):
 
         "As your hand pulls out, [character.Name] gasps and looks upset."
 
-        jump before_fondle
+        jump before_action
     elif "fondle_pussy" in character.RecentActions:
         $ character.FaceChange("sexy", 1)
 
         call repeat_action_lines(character)
-        jump before_fondle
+        jump before_action
     elif "fondle_pussy" in character.DailyActions:
         $ character.FaceChange("sexy", 1)
 
@@ -1236,7 +902,7 @@ label finger_pussy(character):
 
             "As you slide a finger in, [character.Name] seems a bit surprised, but seems into it."
 
-            jump before_fondle
+            jump before_action
         else:
             $ character.FaceChange("surprised", 2)
             $ character.Statup("Love", 80, -2)
@@ -1292,7 +958,7 @@ label eat_pussy(character):
 
             $ character.FaceChange("sexy")
 
-            jump before_fondle
+            jump before_action
         else:
             $ character.FaceChange("surprised")
             $ character.Statup("Love", 80, -2)
@@ -1314,7 +980,7 @@ label eat_pussy(character):
 
         call repeat_action_lines(character)
 
-        jump before_fondle
+        jump before_action
     elif "eat_pussy" in character.DailyActions:
         $ character.FaceChange("sexy", 1)
 
@@ -1352,7 +1018,7 @@ label fondle_ass(character):
 
             $ character.FaceChange("sexy")
 
-            jump before_fondle
+            jump before_action
         else:
             $ character.FaceChange("surprised")
             $ character.Statup("Obed", 50, -3)
@@ -1378,13 +1044,13 @@ label fondle_ass(character):
 
         "As your finger slides out, [character.Name] gasps and looks upset."
 
-        jump before_fondle
+        jump before_action
     elif "fondle_ass" in character.RecentActions:
         $ character.FaceChange("sexy", 1)
 
         call repeat_action_lines(character)
 
-        jump before_fondle
+        jump before_action
     elif "fondle_ass" in character.DailyActions:
         $ character.FaceChange("sexy", 1)
 
@@ -1423,7 +1089,7 @@ label finger_ass(character):
 
             $ character.FaceChange("sexy")
 
-            jump before_fondle
+            jump before_action
         else:
             $ character.FaceChange("surprised")
             $ character.Statup("Love", 80, -2)
@@ -1478,7 +1144,7 @@ label eat_ass(character):
 
             $ character.FaceChange("sexy")
 
-            jump before_fondle
+            jump before_action
         else:
             $ character.FaceChange("surprised")
             $ character.Statup("Love", 80, -2)
@@ -1495,7 +1161,7 @@ label eat_ass(character):
         $ character.FaceChange("sexy", 1)
 
         call repeat_action_lines(character)
-        jump before_fondle
+        jump before_action
     elif "eat_ass" in character.DailyActions:
         $ character.FaceChange("sexy", 1)
 

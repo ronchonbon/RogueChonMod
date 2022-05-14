@@ -276,8 +276,7 @@ label Strip_Study_Right:
                         $ LauraX.FaceChange("bemused", 1)
                 elif Party[0] == JeanX:
                         ch_j "Kidding."
-#                elif Party[0] == StormX:    #should be unnecessary, she should never refuse
-#                        ch_s "I suppose I could join in as well. . ."
+
                 elif Party[0] == JubesX:
                         ch_v "I'm, uh. . . I'm kinda done for now. . ."
                 $ Count2 = 0

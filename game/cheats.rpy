@@ -66,7 +66,6 @@ label StatHacks(Chr=0,Cnt=0):
                     call Checkout
                     return
 
-
 label Cheat_Menu(Girl=0):
         if Girl not in TotalGirls:
                 $ Girl = Ch_Focus

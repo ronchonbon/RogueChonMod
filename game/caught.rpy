@@ -1,6 +1,3 @@
-
-
-#start girls caught lesing / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Girls_Caught_Lesing(Girl=0,Girl2=0,BO=[]): #rkeljsv
         #called by room entry dialog if the girls were lesing
 
@@ -102,10 +99,6 @@ label Girls_Caught_Lesing(Girl=0,Girl2=0,BO=[]): #rkeljsv
         $ Line = 0
         return
 
-#end Girls caught lesing / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
-
-#Start girls caught showering / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Girl_Caught_Shower(Girl=0): #rkeljsv
         if Girl not in TotalGirls:
                 return
@@ -432,9 +425,6 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                 $ Girl.OutfitChange(6)
         $ Line = 0
         return 0
-# End Girl Caught Shower / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
-
 
 label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,BO=[]): #rkeljsv
     call Shift_Focus(Girl)
@@ -1096,8 +1086,6 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,BO=[]): #rkeljsv
     hide Professor
     $ bg_current = "bg player"
     jump Misplaced
-#End Caught / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
 
 label Xavier_Plan(GirlX=0): #rkeljsv
     if "Xavier" in Player.DailyActions:
@@ -1631,12 +1619,6 @@ label Xavier_Plan(GirlX=0): #rkeljsv
     "You return to your room"
     jump Misplaced
 
-# end Caught / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
-
-
-
-# Start Caught Changing/ / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Girl_Caught_Changing(Girl=0): #rkeljsv
         if Girl not in TotalGirls:
                 return
@@ -1943,8 +1925,6 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
                                 ch_s "I do not think that I will, [Girl.Petname]."
                                 $ Girl.OutfitChange(6,Changed=0)
         return
-#End Girl Caught Changing
-
 
 label Girl_Caught_Mastubating(Girl=0): #rkeljsv
         #called by room entry dialog if the girl was masturbating
@@ -2089,5 +2069,3 @@ label Girl_Caught_Mastubating(Girl=0): #rkeljsv
                 $ Girl.OutfitChange(Changed=0)
                 #end "if you entered"
         return
-
-#end girls caught masturbating / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /

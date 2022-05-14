@@ -3817,73 +3817,6 @@ image Jubes_Mega_Mask:
 # end Jubes's Sex Scenes / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-label Jubes_Sex_Launch(Line = Trigger):
-        return #fix, temporary
-        $ Trigger3 = 0 if Trigger3 == "hand" else Trigger3
-        $ Player.Sprite = 1
-        $ Line = "solo" if not Line else Line
-        if Line == "sex":
-            $ Player.Cock = "in"
-            if Trigger2 in ("fondle pussy","dildo pussy","lick pussy"):
-                    $ Trigger2 = 0
-        elif Line == "anal":
-            $ Player.Cock = "anal"
-            if Trigger2 in ("insert ass","dildo anal","lick ass"):
-                    $ Trigger2 = 0
-        elif Line == "solo":
-            $ Player.Sprite = 0
-            $ Player.Cock = "out"
-        elif Line == "hotdog":
-            $ Player.Cock = "out"
-        elif Line == "foot":
-            $ ShowFeet = 1
-            $ Player.Cock = "foot"
-        elif Line == "massage":
-            $ Player.Sprite = 0
-            $ Player.Cock = 0
-        else: #elif Line == "solo":
-            $ Player.Sprite = 0
-            $ Player.Cock = "out"
-            $ Speed = 0
-        $ Trigger = Line
-
-        if JubesX.Pose == "doggy":
-                call Jubes_Doggy_Launch(Line)
-                return
-        if renpy.showing("Jubes_SexSprite"):
-            return
-        call Jubes_Hide(1)
-        $ Speed = 0
-
-        if Trigger == "in" or Trigger == "anal":
-                if JubesX.Legs or JubesX.HoseNum() >= 5:
-                    $ JubesX.Upskirt = 1
-                if JubesX.Panties:
-                    $ JubesX.PantiesDown = 1
-
-        show Jubes_SexSprite zorder 150:
-            pos (450,500)
-        with dissolve
-        return
-
-label Jubes_Sex_Reset:
-        if renpy.showing("Jubes_Doggy_Animation"):
-            call Jubes_Doggy_Reset
-            return
-        if not renpy.showing("Jubes_SexSprite"):
-            return
-        $ JubesX.ArmPose = 2
-        hide Jubes_SexSprite
-        call Jubes_Hide
-        show Jubes_Sprite at sprite_location(JubesX.sprite_location) zorder JubesX.Layer:
-            alpha 1
-            zoom 1 offset (0,0)
-            anchor (0.5, 0.0)
-        with dissolve
-        $ Speed = 0
-        return
-
-
 
 # Jubes's BJ Scenes / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
@@ -5191,34 +5124,6 @@ image Jubes_HJ_Animation:
     zoom 0.4#0.6
 
 
-label Jubes_HJ_Launch(Line = Trigger):
-    return #fix, temporary
-    if renpy.showing("Jubes_HJ_Animation"):
-        $ Trigger = "hand"
-        return
-    call Jubes_Hide
-    if Line == "L":
-        show Jubes_Sprite at sprite_location(StageRight) zorder JubesX.Layer:
-            alpha 1
-            ease 1 zoom 1.7 offset (-150,200)#(0,200)
-    else:
-        show Jubes_Sprite at sprite_location(StageRight) zorder JubesX.Layer:
-            alpha 1
-            ease 1 zoom 1.7 offset (-150,200)#(0,200)
-        with dissolve
-
-    $ Speed = 0
-    if Line != "cum":
-        $ Trigger = "hand"
-    else:
-        $ Speed = 1
-    pause .5
-    $ JubesX.ArmPose = 1
-    show Jubes_HJ_Animation at sprite_location(StageCenter) zorder 150 with easeinbottom:
-        #xoffset 150
-        offset (250,250)#(100,250)
-    return
-
 label Jubes_HJ_Reset: # The sequence to the Jubes animations from handjob to default
     if not renpy.showing("Jubes_HJ_Animation"):
         return
@@ -6355,39 +6260,6 @@ label Jubes_TJ_Launch(Line = Trigger):    # The sequence to launch the Jubes Tit
         pos (700,520) #700,420)
     $ Player.Sprite = 1
     hide blackscreen onlayer black with dissolve
-    return
-
-label Jubes_TJ_Reset:
-    # The sequence to the Jubes animations from Titfuck to default
-    if not renpy.showing("Jubes_TJ_Animation"):
-        return
-#    hide Jubes_TJ_Animation
-    call Jubes_Hide
-    $ Player.Sprite = 0
-
-    show Jubes_Sprite at sprite_location(JubesX.sprite_location) zorder JubesX.Layer:
-        zoom 2.3 xpos 750 yoffset -100
-    show Jubes_Sprite zorder JubesX.Layer:
-        alpha 1
-        ease 1 zoom 1.5 xpos 700 yoffset 50
-        pause .5
-        ease .5 zoom 1 xpos JubesX.sprite_location yoffset 0
-    "[JubesX.Name] pulls back"
-    show Jubes_Sprite at sprite_location(JubesX.sprite_location) zorder JubesX.Layer:
-        alpha 1
-        zoom 1 offset (0,0) xpos JubesX.sprite_location
-    return
-
-
-label Jubes_Kissing_Smooch:
-    $ JubesX.FaceChange("kiss")
-    show Jubes_Sprite at sprite_location(StageCenter) zorder JubesX.Layer:
-        ease 0.5 xpos StageCenter offset (0,0) zoom 2 alpha 1
-        pause 1
-        ease 0.5 xpos JubesX.sprite_location zoom 1
-    show Jubes_Sprite at sprite_location(JubesX.sprite_location) zorder JubesX.Layer:
-        zoom 1
-    $ JubesX.FaceChange("sexy")
     return
 
 

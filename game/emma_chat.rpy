@@ -658,7 +658,7 @@ label Emma_Hungry:
     else:
         ch_e "I do enjoy your taste. . ."
     $ EmmaX.Traits.append("hungry")
-return
+    return
 
 
 # end emma hungry / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /

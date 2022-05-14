@@ -1,6 +1,5 @@
 init python:
 
-# Start Approval Check / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
     def ApprovalCheck(Chr = 0, T = 1000, Type = "LOI", Spread = 150, TmpM = 1, TabM = 0, C = 1, Bonus = 0, Loc = 0, Check=0, Alt=[[],0]):
             # $ Count = ApprovalCheck(Rogue,125,"L")
             # T is the value being checked against, Type is the LOI condition in play, Spread is the difference between basic approval and high approval
@@ -124,9 +123,7 @@ init python:
                     return 1
             else:
                     return 0
-# End Approval Check / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# AloneCheck / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
     def AloneCheck(Girl=0,BO=[]):
             # returns a positive value if alone
             # if Girl, it checks if she's the only one in the room
@@ -139,8 +136,6 @@ init python:
                     BO.remove(BO[0])
             return 1
 
-
-# GirlCheck / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
     def GirlCheck(Check=0,Local=0,BO=[]):
             #checks whether the indicated girl is available for this activity
             # $ Girl = GirlCheck(Girl,1)
@@ -165,10 +160,7 @@ init python:
                         BO.remove(BO[0])
             ch_u("Tell Oni, no appropriate character was found.", interact=True)
             return Ch_Focus
-# End Python Init stuff/ / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / // / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-
-# Start Seen Peen / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Girl_First_Peen(Girl = 0, Silent = 0, Undress = 0, Second = 0, React = 0):  #rkeljsv
         #checked each time she sees your cock  ## call Girl_First_Peen(RogueX,0,1)
         #if Silent it doesn't say anything
@@ -1365,7 +1357,6 @@ label LesCheck(Girls=[],BO=[]): #rkeljsv
         $ Girls[1].Thirst -= 5
         return
 
-
 label CheckTaboo(Girl=0,Taboo_Check=0,Girl2=[]): #rkeljsv
         #Girl is the girl being tested
         # Taboo_Check is the location she is at
@@ -1417,8 +1408,6 @@ label CheckTaboo(Girl=0,Taboo_Check=0,Girl2=[]): #rkeljsv
 
         return
 
-
-# Start Present Check / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Present_Check(Hold=1,BO=[],TempList=[]):
         # Culls parties down to 2 max
         # call Present Check will cull inhabitants of the room down to zero
