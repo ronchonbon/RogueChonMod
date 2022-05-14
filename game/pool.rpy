@@ -1,73 +1,73 @@
 label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
-    # This gets called with a character name, and checks
-    # Line tends to carry the current agreement state, Type tends to carry the item being discussed
+    # This gets called with a Girl name, and checks
+    # line tends to carry the current agreement state, Type tends to carry the item being discussed
     # mod is a modifier, base 0, but +200 if asking for no bottoms
 
     menu:
         "With who?"
-        "[RogueX.Name]" if bg_current == RogueX.Loc:
+        "[RogueX.name]" if bg_current == RogueX.Loc:
                 $ Girl = RogueX
-        "[KittyX.Name]" if bg_current == KittyX.Loc:
+        "[KittyX.name]" if bg_current == KittyX.Loc:
                 $ Girl = KittyX
-        "[EmmaX.Name]" if bg_current == EmmaX.Loc:
+        "[EmmaX.name]" if bg_current == EmmaX.Loc:
                 $ Girl = EmmaX
-        "[LauraX.Name]" if bg_current == LauraX.Loc:
+        "[LauraX.name]" if bg_current == LauraX.Loc:
                 $ Girl = LauraX
-        "[JeanX.Name]" if bg_current == JeanX.Loc:
+        "[JeanX.name]" if bg_current == JeanX.Loc:
                 $ Girl = JeanX
-        "[StormX.Name]" if bg_current == StormX.Loc:
+        "[StormX.name]" if bg_current == StormX.Loc:
                 $ Girl = StormX
-        "[JubesX.Name]" if bg_current == JubesX.Loc:
+        "[JubesX.name]" if bg_current == JubesX.Loc:
                 $ Girl = JubesX
         "Never mind.":
                 return
 
-    if "tan" not in Girl.RecentActions and "no tan" not in Girl.RecentActions:
-            ch_p "Hey, [Girl.Name], why don't you just relax over here?"
+    if "tan" not in Girl.recent_history and "no tan" not in Girl.recent_history:
+            ch_p "Hey, [Girl.name], why don't you just relax over here?"
             ch_p "You don't want to get tanlines, why don't you. . ."
             ch_p ". . . take off a few layers?"
     else:
             ch_p "Are you sure you don't want to. . ."
 
-    if Time_Count >= 2: #night/evening time
-            $ Girl.FaceChange("confused")
-            call AnyLine(Girl,"A bit late in the day for that. . .")
-            $ Girl.FaceChange("normal")
+    if time_index >= 2: #night/evening time
+            $ Girl.change_face("confused")
+            call Anyline(Girl,"A bit late in the day for that. . .")
+            $ Girl.change_face("normal")
             return
     if not Girl.ClothingCheck():
             #if she's already nude. . .
-            $ Girl.FaceChange("sly")
-            call AnyLine(Girl,"Little late for that.")
+            $ Girl.change_face("sly")
+            call Anyline(Girl,"Little late for that.")
             return
-    if "no tan" in Girl.RecentActions:
-            $ Girl.FaceChange("angry")
-            call AnyLine(Girl,"I just told you \"no.\"")
+    if "no tan" in Girl.recent_history:
+            $ Girl.change_face("angry")
+            call Anyline(Girl,"I just told you \"no.\"")
             $ Girl.AddWord(1,"angry","angry") #makes her angry
             return
-    elif "no tan" in Girl.DailyActions :
-            $ Girl.FaceChange("angry")
-            call AnyLine(Girl,"Not today.")
+    elif "no tan" in Girl.daily_history :
+            $ Girl.change_face("angry")
+            call Anyline(Girl,"Not today.")
             $ Girl.AddWord(1,"angry","angry") #makes her angry
             return
 
     if Girl == EmmaX:
             if "classcaught" not in EmmaX.History:
-                        $ Girl.FaceChange("angry",2)
+                        $ Girl.change_face("angry",2)
                         ch_e "That would be entirely inappropriate."
                         return
             if "taboo" not in EmmaX.History:
-                        $ Girl.FaceChange("bemused",2)
+                        $ Girl.change_face("bemused",2)
                         ch_e "[EmmaX.Petname], we can't be seen like that in public. . ."
                         return
             if "three" not in EmmaX.History:
                 if not AloneCheck(EmmaX):
-                        $ Girl.FaceChange("bemused",2)
+                        $ Girl.change_face("bemused",2)
                         ch_e "Not with this sort of company. . ."
                         return
 
     if not Girl.Over and not Girl.Chest and not Girl.Legs and not Girl.Panties and (not Girl.Acc or Girl != JubesX): #jubilee could have a coat without that last bit
             #if she's already nude. . .
-            $ Girl.FaceChange("sly")
+            $ Girl.change_face("sly")
             if Girl == RogueX:
                     ch_r "I don't think that'll be a problem, [RogueX.Petname]."
             elif Girl == KittyX:
@@ -85,10 +85,10 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
             $ Girl.AddWord(1,"tan","tan") #adds the "tan" trait to recent and daily actions
             return
 
-    $ Line = 0
+    $ line = 0
     while True:
             #loops until you return
-            if not Line:
+            if not line:
                 #only asks questions if there's not a play on the table.
                 menu:
                     extend ""
@@ -144,11 +144,11 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
 
             if Type == "no panties":
                     $ Mod = 200
-                    $ Girl.FaceChange("bemused",1)
-                    call AnyLine(Girl,"I don't have bottoms on under this. . .")
+                    $ Girl.change_face("bemused",1)
+                    call Anyline(Girl,"I don't have bottoms on under this. . .")
             elif Type == "no bra":
-                    $ Girl.FaceChange("bemused",1)
-                    call AnyLine(Girl,"I don't have a top on under this. . .")
+                    $ Girl.change_face("bemused",1)
+                    call Anyline(Girl,"I don't have a top on under this. . .")
 
             if (Girl.SeenPussy and Girl.SeenChest) and AloneCheck(): #makes it easier if you've already seen her
                     $ Mod -= 100
@@ -156,30 +156,30 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
             # This is the primary check to see whether she's into it.
             if "exhibitionist" in Girl.Traits:
                     #if she's an exhibitionist
-                    $ Line = "sure"
+                    $ line = "sure"
             elif ApprovalCheck(Girl, 700+Mod, "I"):
                     #if she's generally slutty
-                    $ Line = "sure"
+                    $ line = "sure"
             elif ApprovalCheck(Girl, 1400+Mod) or (Girl == StormX and StormX in Rules):
                     # if she really likes you.
-                    $ Line = "sure"
+                    $ line = "sure"
             elif ApprovalCheck(Girl, 900):
                     # if she is fairly casual, not not enough
-                    $ Line = "sorry"
+                    $ line = "sorry"
             else:
                     # if she refuses
-                    $ Line = "no"
+                    $ line = "no"
 
             if Type == "no bra" or Type == "no panties":
                     #checks to see if she'd lose her jacket/pants if nothing on under
                     menu:
                         extend ""
                         "And?":
-                            if Line == "sure":
-                                    if "tan" not in Girl.RecentActions and "no tan" not in Girl.RecentActions:
-                                        $ Girl.Statup("Inbt", 70, 1)
+                            if line == "sure":
+                                    if "tan" not in Girl.recent_history and "no tan" not in Girl.recent_history:
+                                        $ Girl.change_stat("inhibition", 70, 1)
 
-                                    $ Girl.FaceChange("sly",1)
+                                    $ Girl.change_face("sly",1)
                                     if Girl == RogueX:
                                             ch_r "Hmm, good point. . ."
                                     elif Girl == KittyX:
@@ -195,11 +195,11 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                                     elif Girl == JubesX:
                                             ch_v "Well. . . ok. . ."
                             else:
-                                    if "tan" not in Girl.RecentActions and "no tan" not in Girl.RecentActions:
-                                        $ Girl.Statup("Love", 70, -1)
-                                        $ Girl.Statup("Obed", 80, 1)
+                                    if "tan" not in Girl.recent_history and "no tan" not in Girl.recent_history:
+                                        $ Girl.change_stat("love", 70, -1)
+                                        $ Girl.change_stat("obedience", 80, 1)
 
-                                    $ Girl.FaceChange("angry",2)
+                                    $ Girl.change_face("angry",2)
                                     if Girl == RogueX:
                                             ch_r "\"And\" that's all you're getting. . . for now. . ."
                                     elif Girl == KittyX:
@@ -209,21 +209,21 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                                     elif Girl == LauraX:
                                             ch_l "\"And\" that's all you get."
                                     elif Girl == JeanX:
-                                            $ Girl.FaceChange("bemused",1)
+                                            $ Girl.change_face("bemused",1)
                                             ch_j "\"And\" I'd rather not."
                                     elif Girl == StormX:
                                             ch_s "\"And\" I would prefer to keep it on."
                                     elif Girl == JubesX:
                                             ch_v "Well, I'm keeping it on."
                         "Take it off anyway.":
-                            if Line == "sure" or (Line == "sorry" and Girl != StormX and ApprovalCheck(Girl, 600+Mod, "O")):
-                                    if "tan" not in Girl.RecentActions and "no tan" not in Girl.RecentActions:
-                                        $ Girl.Statup("Obed", 50, 1)
-                                        $ Girl.Statup("Obed", 80, 2)
-                                    if Line != "sure":
-                                            $ Girl.FaceChange("sad",2)
+                            if line == "sure" or (line == "sorry" and Girl != StormX and ApprovalCheck(Girl, 600+Mod, "O")):
+                                    if "tan" not in Girl.recent_history and "no tan" not in Girl.recent_history:
+                                        $ Girl.change_stat("obedience", 50, 1)
+                                        $ Girl.change_stat("obedience", 80, 2)
+                                    if line != "sure":
+                                            $ Girl.change_face("sad",2)
                                     else:
-                                            $ Girl.FaceChange("normal",1)
+                                            $ Girl.change_face("normal",1)
                                     if Girl == RogueX:
                                             ch_r "Oh, ok. . ."
                                     elif Girl == KittyX:
@@ -235,19 +235,19 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                                     elif Girl == JeanX:
                                             ch_j ". . . ok."
                                     elif Girl == StormX:
-                                            $ Girl.Statup("Love", 80, -2)
+                                            $ Girl.change_stat("love", 80, -2)
                                             ch_s ". . . fine. . ."
                                     elif Girl == JubesX:
                                             ch_v "Whatever. . ."
 
-                                    $ Line = "sure"
+                                    $ line = "sure"
                             else:
-                                    if "tan" not in Girl.RecentActions and "no tan" not in Girl.RecentActions:
-                                        $ Girl.Statup("Love", 80, -2)
-                                        $ Girl.Statup("Obed", 80, -1)
-                                        $ Girl.Statup("Inbt", 60, 1)
+                                    if "tan" not in Girl.recent_history and "no tan" not in Girl.recent_history:
+                                        $ Girl.change_stat("love", 80, -2)
+                                        $ Girl.change_stat("obedience", 80, -1)
+                                        $ Girl.change_stat("inhibition", 60, 1)
 
-                                    $ Girl.FaceChange("angry",1)
+                                    $ Girl.change_face("angry",1)
                                     if Girl == RogueX:
                                             ch_r "I don't like that tone on you. . ."
                                     elif Girl == KittyX:
@@ -257,10 +257,10 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                                     elif Girl == LauraX:
                                             ch_l "Don't push me."
                                     elif Girl == JeanX:
-                                            $ Girl.FaceChange("bemused",1)
+                                            $ Girl.change_face("bemused",1)
                                             ch_j "Ha! no."
                                     elif Girl == StormX:
-                                            $ Girl.Statup("Love", 80, -2)
+                                            $ Girl.change_stat("love", 80, -2)
                                             ch_s "You presume too much."
                                     elif Girl == JubesX:
                                             ch_v "Nope."
@@ -268,13 +268,13 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                                     $ Girl.AddWord(1,"no tan","no tan") #adds the "no tan" trait to recent and daily actions
                                     return
                         "Hot.":
-                                    if "tan" not in Girl.RecentActions and "no tan" not in Girl.RecentActions:
-                                        $ Girl.Statup("Love", 80, 1)
-                                        $ Girl.Statup("Obed", 70, 2)
-                                        $ Girl.Statup("Inbt", 60, 1)
-                                        $ Girl.Statup("Inbt", 80, 1)
+                                    if "tan" not in Girl.recent_history and "no tan" not in Girl.recent_history:
+                                        $ Girl.change_stat("love", 80, 1)
+                                        $ Girl.change_stat("obedience", 70, 2)
+                                        $ Girl.change_stat("inhibition", 60, 1)
+                                        $ Girl.change_stat("inhibition", 80, 1)
 
-                                    $ Girl.FaceChange("sly",1)
+                                    $ Girl.change_face("sly",1)
                                     if Girl == RogueX:
                                             ch_r "Heh, you're a sweetie. . ."
                                     elif Girl == KittyX:
@@ -291,14 +291,14 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                                             ch_v "Hehe. . ."
 
                         "Ok, that's fine.":
-                            if Line == "sure":
-                                    if "tan" not in Girl.RecentActions and "no tan" not in Girl.RecentActions:
-                                        $ Girl.Statup("Love", 80, 2)
-                                        $ Girl.Statup("Obed", 80, 1)
-                                        $ Girl.Statup("Inbt", 60, 1)
-                                        $ Girl.Statup("Inbt", 80, 1)
+                            if line == "sure":
+                                    if "tan" not in Girl.recent_history and "no tan" not in Girl.recent_history:
+                                        $ Girl.change_stat("love", 80, 2)
+                                        $ Girl.change_stat("obedience", 80, 1)
+                                        $ Girl.change_stat("inhibition", 60, 1)
+                                        $ Girl.change_stat("inhibition", 80, 1)
 
-                                    $ Girl.FaceChange("sly",1)
+                                    $ Girl.change_face("sly",1)
                                     if Girl == RogueX:
                                             ch_r "Ready for a nice surprise? . ."
                                     elif Girl == KittyX:
@@ -314,12 +314,12 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                                     elif Girl == JubesX:
                                             ch_v "You bet. . ."
                             else:
-                                    if "tan" not in Girl.RecentActions and "no tan" not in Girl.RecentActions:
-                                        $ Girl.Statup("Love", 50, 1)
-                                        $ Girl.Statup("Love", 80, 1)
-                                        $ Girl.Statup("Inbt", 60, 1)
+                                    if "tan" not in Girl.recent_history and "no tan" not in Girl.recent_history:
+                                        $ Girl.change_stat("love", 50, 1)
+                                        $ Girl.change_stat("love", 80, 1)
+                                        $ Girl.change_stat("inhibition", 60, 1)
 
-                                    $ Girl.FaceChange("smile")
+                                    $ Girl.change_face("smile")
                                     if Girl == RogueX:
                                             ch_r "Thanks, [RogueX.Petname]. . ."
                                     elif Girl == KittyX:
@@ -335,7 +335,7 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                                     elif Girl == JubesX:
                                             ch_v "Thanks. . ."
 
-                    if Line == "sure":
+                    if line == "sure":
                             #she agrees
                             $ Girl.Over = 0 # removes Over
                             call first_topless(Girl)
@@ -347,17 +347,17 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                     else:
                             $ Girl.AddWord(1,"no tan","no tan") #adds the "no tan" trait to recent and daily actions
 
-                    $ Line = 0
+                    $ line = 0
             # end "nothing on under this. . ."
 
-            if Line == "sure":
+            if line == "sure":
                     #She agrees. . .
-                    if "tan" not in Girl.RecentActions and "no tan" not in Girl.RecentActions:
-                            $ Girl.Statup("Obed", 70, 2)
-                            $ Girl.Statup("Obed", 90, 1)
-                            $ Girl.Statup("Inbt", 70, 2)
-                            $ Girl.Statup("Inbt", 90, 1)
-                    $ Girl.FaceChange("sly",1)
+                    if "tan" not in Girl.recent_history and "no tan" not in Girl.recent_history:
+                            $ Girl.change_stat("obedience", 70, 2)
+                            $ Girl.change_stat("obedience", 90, 1)
+                            $ Girl.change_stat("inhibition", 70, 2)
+                            $ Girl.change_stat("inhibition", 90, 1)
+                    $ Girl.change_face("sly",1)
                     if Girl == RogueX:
                             ch_r "I suppose I could. . ."
                     elif Girl == KittyX:
@@ -391,14 +391,14 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
 
                     $ Girl.AddWord(1,"tan","tan") #adds the "tan" trait to recent and daily actions
 
-            elif Line == "sorry" and (Type == "over" or Type == "legs" or Type == "jacket"):
+            elif line == "sorry" and (Type == "over" or Type == "legs" or Type == "jacket"):
                     #She agrees to just an over-layer. . .
-                    if "tan" not in Girl.RecentActions and "no tan" not in Girl.RecentActions:
-                            $ Girl.Statup("Obed", 50, 1)
-                            $ Girl.Statup("Obed", 80, 1)
-                            $ Girl.Statup("Inbt", 60, 1)
-                            $ Girl.Statup("Inbt", 80, 1)
-                    $ Girl.FaceChange("bemused",1)
+                    if "tan" not in Girl.recent_history and "no tan" not in Girl.recent_history:
+                            $ Girl.change_stat("obedience", 50, 1)
+                            $ Girl.change_stat("obedience", 80, 1)
+                            $ Girl.change_stat("inhibition", 60, 1)
+                            $ Girl.change_stat("inhibition", 80, 1)
+                    $ Girl.change_face("bemused",1)
                     if Girl == RogueX:
                             ch_r "I suppose I could. . ."
                     elif Girl == KittyX:
@@ -423,14 +423,14 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                             $ Girl.Hose = 0
                     $ Girl.AddWord(1,"tan","tan") #adds the "tan" trait to recent and daily actions
 
-            elif Line == "sorry":
+            elif line == "sorry":
                     #She refuses but is not offended. . .
-                    if "tan" not in Girl.RecentActions and "no tan" not in Girl.RecentActions:
-                            $ Girl.Statup("Obed", 50, 2)
-                            $ Girl.Statup("Obed", 80, 2)
-                            $ Girl.Statup("Inbt", 60, 1)
-                            $ Girl.Statup("Inbt", 90, 2)
-                    $ Girl.FaceChange("sadside",1)
+                    if "tan" not in Girl.recent_history and "no tan" not in Girl.recent_history:
+                            $ Girl.change_stat("obedience", 50, 2)
+                            $ Girl.change_stat("obedience", 80, 2)
+                            $ Girl.change_stat("inhibition", 60, 1)
+                            $ Girl.change_stat("inhibition", 90, 2)
+                    $ Girl.change_face("sadside",1)
                     if Girl == RogueX:
                             ch_r "Sorry, I think I can live with the tan lines. . ."
                     elif Girl == KittyX:
@@ -447,12 +447,12 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                             ch_v "Sorry. . ."
                     $ Girl.AddWord(1,"no tan","no tan") #adds the "no tan" trait to recent and daily actions
 
-            elif Line == "no":
+            elif line == "no":
                     #She is offended you even asked. . .
-                    $ Girl.Statup("Love", 50, -5)
-                    $ Girl.Statup("Obed", 50, 2)
-                    $ Girl.Statup("Inbt", 60, 1)
-                    $ Girl.FaceChange("angry",1)
+                    $ Girl.change_stat("love", 50, -5)
+                    $ Girl.change_stat("obedience", 50, 2)
+                    $ Girl.change_stat("inhibition", 60, 1)
+                    $ Girl.change_face("angry",1)
                     if Girl == RogueX:
                             ch_r "Not interested, [RogueX.Petname]. . ."
                     elif Girl == KittyX:
@@ -473,82 +473,82 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
             if not Girl.Chest and not Girl.Over and not Girl.Panties and not Girl.Legs and Girl.HoseNum() < 10:
                         $ Girl.OutfitChange("nude") #removes remaining clothing.
             $ Mod = 0
-            $ Line = 0
+            $ line = 0
             if Girl.ClothingCheck():
                 "Anything else?" #loops back to menu
             else:
                 return
     return
 
-label Pool_Skinnydip(Girl=0,Line=0,Type=0,Mod=0): #rkeljsv
-    # This gets called with a character name, and checks
-    # Line tends to carry the current agreement state, Type tends to carry the item being discussed
+label Pool_Skinnydip(Girl=0,line=0,Type=0,Mod=0): #rkeljsv
+    # This gets called with a Girl name, and checks
+    # line tends to carry the current agreement state, Type tends to carry the item being discussed
     # mod is a modifier, base 0, but +200 if asking for no bottoms
 
     menu:
         "With who?"
-        "[RogueX.Name]" if bg_current == RogueX.Loc:
+        "[RogueX.name]" if bg_current == RogueX.Loc:
                 $ Girl = RogueX
-        "[KittyX.Name]" if bg_current == KittyX.Loc:
+        "[KittyX.name]" if bg_current == KittyX.Loc:
                 $ Girl = KittyX
-        "[EmmaX.Name]" if bg_current == EmmaX.Loc:
+        "[EmmaX.name]" if bg_current == EmmaX.Loc:
                 $ Girl = EmmaX
-        "[LauraX.Name]" if bg_current == LauraX.Loc:
+        "[LauraX.name]" if bg_current == LauraX.Loc:
                 $ Girl = LauraX
-        "[JeanX.Name]" if bg_current == JeanX.Loc:
+        "[JeanX.name]" if bg_current == JeanX.Loc:
                 $ Girl = JeanX
-        "[StormX.Name]" if bg_current == StormX.Loc:
+        "[StormX.name]" if bg_current == StormX.Loc:
                 $ Girl = StormX
-        "[JubesX.Name]" if bg_current == JubesX.Loc:
+        "[JubesX.name]" if bg_current == JubesX.Loc:
                 $ Girl = JubesX
         "Never mind.":
                 return
 
-    ch_p "Hey, [Girl.Name], why don't we skinny dip?"
+    ch_p "Hey, [Girl.name], why don't we skinny dip?"
 
     if Round <= 10:
-            $ Girl.FaceChange("sad")
-            call AnyLine(Girl,"No time for that.")
+            $ Girl.change_face("sad")
+            call Anyline(Girl,"No time for that.")
             return
-    elif "no dip" in Girl.RecentActions:
-            $ Girl.FaceChange("angry")
-            call AnyLine(Girl,"I just told you \"no.\"")
+    elif "no dip" in Girl.recent_history:
+            $ Girl.change_face("angry")
+            call Anyline(Girl,"I just told you \"no.\"")
             $ Girl.AddWord(1,"angry","angry") #makes her angry
             return
-    elif "no dip" in Girl.DailyActions:
-            $ Girl.FaceChange("angry")
-            call AnyLine(Girl,"Not today.")
+    elif "no dip" in Girl.daily_history:
+            $ Girl.change_face("angry")
+            call Anyline(Girl,"Not today.")
             $ Girl.AddWord(1,"angry","angry") #makes her angry
             return
-    elif "dip" in Girl.RecentActions:
-            $ Girl.FaceChange("confused")
-            call AnyLine(Girl,"We already did that.")
+    elif "dip" in Girl.recent_history:
+            $ Girl.change_face("confused")
+            call Anyline(Girl,"We already did that.")
             return
 
     if Girl == EmmaX:
             if "classcaught" not in EmmaX.History:
-                    $ Girl.FaceChange("angry",2)
+                    $ Girl.change_face("angry",2)
                     ch_e "That would be entirely inappropriate."
                     return
             if "taboo" not in EmmaX.History:
-                    $ Girl.FaceChange("bemused",2)
+                    $ Girl.change_face("bemused",2)
                     ch_e "[EmmaX.Petname], I couldn't risk us getting caught. . ."
                     return
             if "three" not in EmmaX.History:
                     if not AloneCheck(EmmaX):
-                            $ Girl.FaceChange("bemused",2)
+                            $ Girl.change_face("bemused",2)
                             ch_e "Not with this sort of company. . ."
                             return
 
     if not Girl.ClothingCheck():
             #if she's already nude. . .
-            $ Girl.FaceChange("sly")
+            $ Girl.change_face("sly")
             if Girl == RogueX:
                     ch_r "Sure, let's get wet."
             elif Girl == KittyX:
                     ch_k "Cannonball!"
             elif Girl == EmmaX:
-                    ch_e "Lovely."
+                    ch_e "lovely."
             elif Girl == LauraX:
                     ch_l "I'm in."
             elif Girl == JeanX:
@@ -566,28 +566,28 @@ label Pool_Skinnydip(Girl=0,Line=0,Type=0,Mod=0): #rkeljsv
 
             if "exhibitionist" in Girl.Traits:
                     #if she's an exhibitionist
-                    $ Line = "sure"
+                    $ line = "sure"
             elif ApprovalCheck(Girl, 700-Mod, "I"):
                     #if she's generally slutty
-                    $ Line = "sure"
+                    $ line = "sure"
             elif ApprovalCheck(Girl, 1200-Mod) or (Girl == StormX and StormX in Rules):
                     # if she really likes you.
-                    $ Line = "sure"
+                    $ line = "sure"
             elif ApprovalCheck(Girl, 800):
                     # if she is fairly casual, not not enough
-                    $ Line = "sorry"
+                    $ line = "sorry"
             else:
                     # if she refuses
-                    $ Line = "no"
+                    $ line = "no"
 
-            if Line == "sure":
+            if line == "sure":
                     #She agrees. . .
-                    if "dip" not in Girl.RecentActions and "no dip" not in Girl.RecentActions:
-                            $ Girl.Statup("Obed", 70, 2)
-                            $ Girl.Statup("Obed", 90, 1)
-                            $ Girl.Statup("Inbt", 70, 2)
-                            $ Girl.Statup("Inbt", 90, 1)
-                    $ Girl.FaceChange("sly",1)
+                    if "dip" not in Girl.recent_history and "no dip" not in Girl.recent_history:
+                            $ Girl.change_stat("obedience", 70, 2)
+                            $ Girl.change_stat("obedience", 90, 1)
+                            $ Girl.change_stat("inhibition", 70, 2)
+                            $ Girl.change_stat("inhibition", 90, 1)
+                    $ Girl.change_face("sly",1)
                     if Girl == RogueX:
                             ch_r "Sounds fun. . ."
                     elif Girl == KittyX:
@@ -615,14 +615,14 @@ label Pool_Skinnydip(Girl=0,Line=0,Type=0,Mod=0): #rkeljsv
                     $ Girl.OutfitChange("nude") #removes remaining clothing.
                     $ Girl.AddWord(1,"dip","dip") #adds the "dip" trait to recent and daily actions
 
-            elif Line == "sorry":
+            elif line == "sorry":
                     #She refuses but is not offended. . .
-                    if "dip" not in Girl.RecentActions and "no dip" not in Girl.RecentActions:
-                            $ Girl.Statup("Obed", 50, 2)
-                            $ Girl.Statup("Obed", 80, 2)
-                            $ Girl.Statup("Inbt", 60, 1)
-                            $ Girl.Statup("Inbt", 90, 2)
-                    $ Girl.FaceChange("sadside",1)
+                    if "dip" not in Girl.recent_history and "no dip" not in Girl.recent_history:
+                            $ Girl.change_stat("obedience", 50, 2)
+                            $ Girl.change_stat("obedience", 80, 2)
+                            $ Girl.change_stat("inhibition", 60, 1)
+                            $ Girl.change_stat("inhibition", 90, 2)
+                    $ Girl.change_face("sadside",1)
                     if Girl == RogueX:
                             ch_r "Couldn't we just take a normal swim?"
                     elif Girl == KittyX:
@@ -642,11 +642,11 @@ label Pool_Skinnydip(Girl=0,Line=0,Type=0,Mod=0): #rkeljsv
                         "Ok, we can just use swimsuits.":
                                 if Girl.Swim[0]:
                                         #if she has a suit to put on. . .
-                                        if "dip" not in Girl.RecentActions and "no dip" not in Girl.RecentActions:
-                                                $ Girl.Statup("Love", 80, 2)
-                                                $ Girl.Statup("Obed", 50, 1)
-                                                $ Girl.Statup("Inbt", 60, 2)
-                                        $ Girl.FaceChange("smile")
+                                        if "dip" not in Girl.recent_history and "no dip" not in Girl.recent_history:
+                                                $ Girl.change_stat("love", 80, 2)
+                                                $ Girl.change_stat("obedience", 50, 1)
+                                                $ Girl.change_stat("inhibition", 60, 2)
+                                        $ Girl.change_face("smile")
                                         if Girl == RogueX:
                                                 ch_r "Thanks, [RogueX.Petname]."
                                         elif Girl == KittyX:
@@ -683,11 +683,11 @@ label Pool_Skinnydip(Girl=0,Line=0,Type=0,Mod=0): #rkeljsv
                                                         #if she mostly likes you, and is wearing scandelous undies. . .
                                                         pass
                                                 else:
-                                                        $ Girl.FaceChange("sly",1)
-                                                        call AnyLine(Girl,"That's not going to work either.")
+                                                        $ Girl.change_face("sly",1)
+                                                        call Anyline(Girl,"That's not going to work either.")
                                                         $ Girl.AddWord(1,"no dip","no dip")
                                                         return
-                                                $ Girl.FaceChange("smile",1)
+                                                $ Girl.change_face("smile",1)
                                                 if Girl == RogueX:
                                                         ch_r "Ok, fine. . ."
                                                 elif Girl == KittyX:
@@ -703,7 +703,7 @@ label Pool_Skinnydip(Girl=0,Line=0,Type=0,Mod=0): #rkeljsv
                                                 elif Girl == JubesX:
                                                         ch_v "I guess so. . ."
                                         "Ok then, never mind.":
-                                                call AnyLine(Girl,"Thanks.")
+                                                call Anyline(Girl,"Thanks.")
                                                 $ Girl.AddWord(1,"no dip","no dip")
                                                 return
                                     $ Girl.Over = 0 # Takes off Over
@@ -715,10 +715,10 @@ label Pool_Skinnydip(Girl=0,Line=0,Type=0,Mod=0): #rkeljsv
 
 
                         "Never mind then.":
-                                $ Girl.Statup("Love", 80, -1)
-                                if "dip" not in Girl.RecentActions and "no dip" not in Girl.RecentActions:
-                                        $ Girl.Statup("Obed", 50, 2)
-                                        $ Girl.Statup("Inbt", 60, 1)
+                                $ Girl.change_stat("love", 80, -1)
+                                if "dip" not in Girl.recent_history and "no dip" not in Girl.recent_history:
+                                        $ Girl.change_stat("obedience", 50, 2)
+                                        $ Girl.change_stat("inhibition", 60, 1)
                                 if Girl == RogueX:
                                         ch_r "Hmph."
                                 elif Girl == KittyX:
@@ -734,13 +734,13 @@ label Pool_Skinnydip(Girl=0,Line=0,Type=0,Mod=0): #rkeljsv
                                 $ Girl.AddWord(1,"no dip","no dip") #adds the "no tan" trait to recent and daily actions
                                 return
 
-            elif Line == "no":
+            elif line == "no":
                     #She is offended you even asked. . .
-                    $ Girl.Statup("Love", 50, -5)
-                    if "dip" not in Girl.RecentActions and "no dip" not in Girl.RecentActions:
-                        $ Girl.Statup("Obed", 50, 2)
-                        $ Girl.Statup("Inbt", 60, 1)
-                    $ Girl.FaceChange("angry",1)
+                    $ Girl.change_stat("love", 50, -5)
+                    if "dip" not in Girl.recent_history and "no dip" not in Girl.recent_history:
+                        $ Girl.change_stat("obedience", 50, 2)
+                        $ Girl.change_stat("inhibition", 60, 1)
+                    $ Girl.change_face("angry",1)
                     if Girl == RogueX:
                             ch_r "Not interested, [RogueX.Petname]. . ."
                     elif Girl == KittyX:
@@ -750,7 +750,7 @@ label Pool_Skinnydip(Girl=0,Line=0,Type=0,Mod=0): #rkeljsv
                     elif Girl == LauraX:
                             ch_l "Nope. . ."
                     elif Girl == JeanX:
-                            $ Girl.FaceChange("bemused",1)
+                            $ Girl.change_face("bemused",1)
                             ch_j "Ha!"
                     elif Girl == StormX:
                             ch_s "I am afraid not, [Girl.Petname]."
@@ -765,89 +765,89 @@ label Pool_Skinnydip(Girl=0,Line=0,Type=0,Mod=0): #rkeljsv
     $ Round -= 20 if Round >= 20 else Round
     "You both swim around for a bit."
     hide FullPool
-    call Set_The_Scene(1,0,0)
+    call set_the_scene(1,0,0)
 
     return
 
-label Pool_Topless(Girl=Ch_Focus,BO=[]): #rkeljsv
+label Pool_Topless(Girl=focused_Girl,Girls=[]): #rkeljsv
         #the girl is swimming, but ends up topless temporarily
         if Girl.Loc != bg_current:
                     #if the lead girl isn't in the room for some reason. . .
-                    $ BO = TotalGirls[:]
-                    $ renpy.random.shuffle(BO)
-                    while BO:
-                            if BO[0].Loc == bg_current:
-                                    call Shift_Focus(BO[0])
-                                    $ BO = [1]
-                            $ BO.remove(BO[0])
+                    $ Girls = all_Girls[:]
+                    $ renpy.random.shuffle(Girls)
+                    while Girls:
+                            if Girls[0].Loc == bg_current:
+                                    call Shift_Focus(Girls[0])
+                                    $ Girls = [1]
+                            $ Girls.remove(Girls[0])
 
-        $ Ch_Focus = Girl
+        $ focused_Girl = Girl
         if (Girl.ChestNum() <= 1 and Girl.OverNum() <= 1) or Girl.Loc != bg_current:
                 #if *no* girls are present, ditch or no point, already topless
                 $ D20 = renpy.random.randint(1, 14)
                 return
         $ Girl.Uptop = 1 #sets uptop
-        "[Girl.Name] dives into the pool"
+        "[Girl.name] dives into the pool"
         menu:
             "It appears she's had a wardrobe malfunction."
-            "Hey, [Girl.Name]. . .":
+            "Hey, [Girl.name]. . .":
                     ch_p "Looks like you might be missing something there. . ."
-                    $ Girl.FaceChange("confused")
+                    $ Girl.change_face("confused")
                     if Girl != StormX:
-                            $ Girl.Statup("Obed", 60, 2)
-                            $ Girl.Statup("Inbt", 50, -2)
-                            call AnyLine(Girl,". . .")
-                            $ Girl.FaceChange("surprised",2,Eyes="down")
-                    $ Girl.Statup("Love", 80, 3)
-                    $ Girl.Statup("Love", 90, 1)
-                    $ Girl.Statup("Lust", 50, 2)
+                            $ Girl.change_stat("obedience", 60, 2)
+                            $ Girl.change_stat("inhibition", 50, -2)
+                            call Anyline(Girl,". . .")
+                            $ Girl.change_face("surprised",2,Eyes="down")
+                    $ Girl.change_stat("love", 80, 3)
+                    $ Girl.change_stat("love", 90, 1)
+                    $ Girl.change_stat("lust", 50, 2)
                     $ Count = 100
             "Say nothing":
-                    $ Girl.FaceChange("surprised",2,Eyes="down")
-                    "After a few moments, [Girl.Name] seems to notice that her top rode up."
+                    $ Girl.change_face("surprised",2,Eyes="down")
+                    "After a few moments, [Girl.name] seems to notice that her top rode up."
                     if ApprovalCheck(Girl, 1200):
                             $ Count = 0
                     else:
                             $ Count = -100
 
         if ApprovalCheck(Girl, 800-Count,"I") or ApprovalCheck(Girl, 1600-Count) or (Girl == StormX and StormX in Rules):
-                $ Girl.FaceChange("sly")
+                $ Girl.change_face("sly")
                 $ Girl.Chest = 0 #loses top
                 $ Girl.Over = 0 #loses top
-                $ Girl.Statup("Obed", 60, 2)
-                $ Girl.Statup("Inbt", 50, 4)
-                $ Girl.Statup("Inbt", 90, 2)
-                $ Girl.Statup("Lust", 50, 5)
+                $ Girl.change_stat("obedience", 60, 2)
+                $ Girl.change_stat("inhibition", 50, 4)
+                $ Girl.change_stat("inhibition", 90, 2)
+                $ Girl.change_stat("lust", 50, 5)
                 "She smiles and tosses her top over her head."
                 call first_topless(Girl)
         elif ApprovalCheck(Girl, 500-Count,"I") or ApprovalCheck(Girl, 1200-Count):
-                $ Girl.FaceChange("sly",1)
-                $ Girl.Statup("Obed", 60, 2)
-                $ Girl.Statup("Inbt", 50, 3)
-                $ Girl.Statup("Inbt", 80, 2)
-                $ Girl.Statup("Lust", 50, 3)
+                $ Girl.change_face("sly",1)
+                $ Girl.change_stat("obedience", 60, 2)
+                $ Girl.change_stat("inhibition", 50, 3)
+                $ Girl.change_stat("inhibition", 80, 2)
+                $ Girl.change_stat("lust", 50, 3)
                 "She smiles, and leaves the top how it is."
                 call first_topless(Girl)
         else:
                 if ApprovalCheck(Girl, 800-Count) or (Girl == StormX):
                         #she's ok with it
-                        $ Girl.Statup("Obed", 60, 2)
-                        $ Girl.Statup("Inbt", 70, 2)
-                        $ Girl.Statup("Lust", 50, 1)
-                        $ Girl.FaceChange("bemused",2)
+                        $ Girl.change_stat("obedience", 60, 2)
+                        $ Girl.change_stat("inhibition", 70, 2)
+                        $ Girl.change_stat("lust", 50, 1)
+                        $ Girl.change_face("bemused",2)
                 else:
                         #she's mad
-                        $ Girl.Statup("Love", 70, -2)
-                        $ Girl.Statup("Inbt", 50, 1)
-                        $ Girl.FaceChange("angry",2)
+                        $ Girl.change_stat("love", 70, -2)
+                        $ Girl.change_stat("inhibition", 50, 1)
+                        $ Girl.change_face("angry",2)
                 call first_topless(Girl, silent = 1)
                 $ Girl.Uptop = 0 #resets uptop
                 "She tugs her top back into place."
                 if Count <= 0:
-                        $ Girl.Statup("Love", 70, -5)
-                        $ Girl.Statup("Obed", 60, -2)
-                        $ Girl.Statup("Inbt", 60, 2)
-                        call AnyLine(Girl,"You could have told me.")
+                        $ Girl.change_stat("love", 70, -5)
+                        $ Girl.change_stat("obedience", 60, -2)
+                        $ Girl.change_stat("inhibition", 60, 2)
+                        call Anyline(Girl,"You could have told me.")
 
         $ Count = 0
         return
@@ -855,25 +855,25 @@ label Pool_Topless(Girl=Ch_Focus,BO=[]): #rkeljsv
 label Pool_Entry:
     call Jubes_Entry_Check
     $ Player.DrainWord("locked",0,0,1)
-    $ bg_current = "bg pool"
+    $ bg_current = "bg_pool"
     $ Nearby = []
     call Taboo_Level
-    $ Player.RecentActions.append("traveling")
+    $ Player.recent_history.append("traveling")
     $ Round -= 5 if Round >= 5 else Round
     call EventCalls
     call Gym_Clothes_Off #call Gym_Clothes
     call SwimSuit #puts girls in swimsuits if already here
-    call Set_The_Scene
+    call set_the_scene
 
 label Pool_Room:
-    $ bg_current = "bg pool"
+    $ bg_current = "bg_pool"
     $ Player.DrainWord("traveling",1,0)
     call Taboo_Level
-    call Set_The_Scene(Quiet=1,Dress=0)
+    call set_the_scene(Quiet=1,Dress=0)
     call QuickEvents
     call Checkout(1)
     if Round <= 10:
-                if Time_Count >= 3: #night time
+                if time_index >= 3: #night time
                     "You're getting tired, you head back to your room."
                     jump Player_Room
                 call Wait
@@ -888,21 +888,21 @@ label Pool_Room:
         "Chat":
                 call Chat
 
-        "Want to sunbathe?" if Time_Count < 2:
+        "Want to sunbathe?" if time_index < 2:
                 call Pool_Sunbathe
                 $ Round -= 20 if Round >= 20 else Round
                 "You just hang out for a little while."
         "Want to swim?":
-            if Time_Count >= 3 and AloneCheck():
+            if time_index >= 3 and AloneCheck():
                 "It's a bit late for a swim."
             else:
                 call Pool_Swim
         "Want to skinnydip?":
                 call Pool_Skinnydip
 
-        "Wait. (locked)" if Time_Count >= 3: #night
+        "Wait. (locked)" if time_index >= 3: #night
                 pass
-        "Wait." if Time_Count < 3: #not night
+        "Wait." if time_index < 3: #not night
                 "You hang out for a bit."
                 call Wait
                 call EventCalls
@@ -917,47 +917,47 @@ label Pool_Room:
                 jump Shower_Room_Entry
     jump Pool_Room
 
-label Pool_Swim(Swimmers=[],BO=[]):
+label Pool_Swim(Swimmers=[],Girls=[]):
     $ D20 = renpy.random.randint(1, 20)
 
-    $ Player.DailyActions.append("swim")
-    call Set_The_Scene
+    $ Player.daily_history.append("swim")
+    call set_the_scene
 
-    $ Line = ""
-    $ PassLine = 0
-    $ BO = TotalGirls[:]
-    while BO:
-            if bg_current == BO[0].Loc and ApprovalCheck(BO[0], 700):
-                    if BO[0].Chest == BO[0].Swim[5] and BO[0].Panties == BO[0].Swim[6]:
+    $ line = ""
+    $ Passline = 0
+    $ Girls = all_Girls[:]
+    while Girls:
+            if bg_current == Girls[0].Loc and ApprovalCheck(Girls[0], 700):
+                    if Girls[0].Chest == Girls[0].Swim[5] and Girls[0].Panties == Girls[0].Swim[6]:
                                 # if she's already in swimwear . . .
-                                $ Swimmers.append(BO[0])
-                    elif not BO[0].ChestNum() and not BO[0].OverNum() and not BO[0].PantiesNum() and not BO[0].PantsNum() and not BO[0].HoseNum():
+                                $ Swimmers.append(Girls[0])
+                    elif not Girls[0].ChestNum() and not Girls[0].OverNum() and not Girls[0].PantiesNum() and not Girls[0].PantsNum() and not Girls[0].HoseNum():
                                 # or is nude. . .
-                                $ Swimmers.append(BO[0])
+                                $ Swimmers.append(Girls[0])
                     else:
-                        if Line or PassLine:
+                        if line or Passline:
                                 #if it's second time through
-                                call Display_Girl(BO[0],0,0,950,150)
+                                call Display_Girl(Girls[0],0,0,950,150)
                         else:
-                                call Display_Girl(BO[0],0,0,800,150)
-                        if BO[0].OutfitChange("swimwear"):
+                                call Display_Girl(Girls[0],0,0,800,150)
+                        if Girls[0].OutfitChange("swimwear"):
                                 #if changed into swimsuit. . .
-                                $ Line = "" if Swimmers and not PassLine else "s" #whole point of this is to change the plaurals
-                                $ Swimmers.append(BO[0])
+                                $ line = "" if Swimmers and not Passline else "s" #whole point of this is to change the plaurals
+                                $ Swimmers.append(Girls[0])
                         else:
                                 #If she doesn't swim. . .
-                                $ Line = "" if PassLine and not Swimmers else "s"
-                                $ PassLine = PassLine + " and " + BO[0].Name if PassLine else BO[0].Name
-            $ BO.remove(BO[0])
+                                $ line = "" if Passline and not Swimmers else "s"
+                                $ Passline = Passline + " and " + Girls[0].name if Passline else Girls[0].name
+            $ Girls.remove(Girls[0])
 
     if len(Swimmers) >= 2:
-            "The girls get[Line] changed and join you."
+            "The girls get[line] changed and join you."
     elif Swimmers:
-            "[Swimmers[0].Name] get[Line] changed and joins you."
-    if PassLine:
-            "[PassLine] chill[Line] out poolside."
-    $ PassLine = 0
-    $ Line = 0
+            "[Swimmers[0].name] get[line] changed and joins you."
+    if Passline:
+            "[Passline] chill[line] out poolside."
+    $ Passline = 0
+    $ line = 0
 
     call ShowPool(Swimmers[:]) #displays pool graphics
 
@@ -991,53 +991,53 @@ label Pool_Swim(Swimmers=[],BO=[]):
             "You decide to make use of the diving board. You do a couple of dives before taking it easy and just swimming around."
 
     call GirlWaitUp(1,80,3) #makes any girls in the room like each other a bit more.
-    call RoomStatboost("Love",80,3)
-    call RoomStatboost("Lust",30,5)
+    call RoomStatboost("love",80,3)
+    call RoomStatboost("lust",30,5)
     $ Round -= 20 if Round >= 20 else Round
     hide FullPool
-    call Set_The_Scene(1,0,0)
+    call set_the_scene(1,0,0)
     "You all get out of the pool and rest for a bit."
     return
 
-label SwimSuit(BO=[]):
+label SwimSuit(Girls=[]):
         # puts girls in swimsuit if applicable
-        $ BO = TotalGirls[:]
-        while BO:
-                if BO[0].Loc == bg_current and BO[0].Swim[0] and BO[0] not in Party and BO[0].Schedule[Weekday][Time_Count] == "bg pool":
+        $ Girls = all_Girls[:]
+        while Girls:
+                if Girls[0].Loc == bg_current and Girls[0].Swim[0] and Girls[0] not in Party and Girls[0].Schedule[Weekday][time_index] == "bg_pool":
                         #if she has a suit, is not in the party, is at this location, and is scehduled to be there, put her in a swimsuit.
-                        $ BO[0].OutfitChange("swimwear") # puts on her swimsuit
-                $ BO.remove(BO[0])
+                        $ Girls[0].OutfitChange("swimwear") # puts on her swimsuit
+                $ Girls.remove(Girls[0])
         return
 
 image FullPool:
         #water
         AlphaMask("bg_pool", "images/PoolMask.png")
 
-label ShowPool(BO=[],PoolLoc=0): #rkeljsv
+label ShowPool(Girls=[],PoolLoc=0): #rkeljsv
         #displays the pool with girls in it
-        #if not BO:
-                #$ BO = ActiveGirls[:]
-        while BO:
-                if BO[0].Loc == bg_current:
-                            $ BO[0].AddWord(0,"swim","swim",0,0) #adds "swim" tag to recent and daily actions
-                            $ BO[0].Water = 1
-                            $ BO[0].Spunk = []
-                            $ PoolLoc = 500 if len(BO) > 1 else 650
-                            if BO[0] == RogueX:
-                                    show Rogue_Sprite at Pool_Bob(PoolLoc) zorder 50  #BO[0].Layer
-                            elif BO[0] == KittyX:
+        #if not Girls:
+                #$ Girls = active_Girls[:]
+        while Girls:
+                if Girls[0].Loc == bg_current:
+                            $ Girls[0].AddWord(0,"swim","swim",0,0) #adds "swim" tag to recent and daily actions
+                            $ Girls[0].Water = 1
+                            $ Girls[0].Spunk = []
+                            $ PoolLoc = 500 if len(Girls) > 1 else 650
+                            if Girls[0] == RogueX:
+                                    show Rogue_Sprite at Pool_Bob(PoolLoc) zorder 50  #Girls[0].Layer
+                            elif Girls[0] == KittyX:
                                     show Kitty_Sprite at Pool_Bob(PoolLoc) zorder 50
-                            elif BO[0] == EmmaX:
+                            elif Girls[0] == EmmaX:
                                     show Emma_Sprite at Pool_Bob(PoolLoc) zorder 50
-                            elif BO[0] == LauraX:
+                            elif Girls[0] == LauraX:
                                     show Laura_Sprite at Pool_Bob(PoolLoc) zorder 50
-                            elif BO[0] == JeanX:
+                            elif Girls[0] == JeanX:
                                     show Jean_Sprite at Pool_Bob(PoolLoc) zorder 50
-                            elif BO[0] == StormX:
+                            elif Girls[0] == StormX:
                                     show Storm_Sprite at Pool_Bob(PoolLoc) zorder 50
-                            elif BO[0] == JubesX:
+                            elif Girls[0] == JubesX:
                                     show Jubes_Sprite at Pool_Bob(PoolLoc) zorder 50
-                $ BO.remove(BO[0])
+                $ Girls.remove(Girls[0])
         show FullPool zorder 60        #should put masked pool above girls #175?
         return
 

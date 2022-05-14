@@ -71,36 +71,36 @@ default G_Brows = "normal"
 default G_Eyes = "normal"
 default G_Blush = 0
 
-label GwenFace(Emote = "normal", B = G_Blush, M = 0, Mouth = 0, Eyes = 0, Brows = 0):
-        # Emote is the chosen emote, B is the lush state
+label GwenFace(emotion = "normal", B = G_Blush, M = 0, Mouth = 0, Eyes = 0, Brows = 0):
+        # emotion is the chosen emote, B is the lush state
         # M is whether the character is in a  manic state
         $ B = G_Blush if B == 5 else B
 
-        if Emote == "normal":
+        if emotion == "normal":
                 $ G_Mouth = "normal"
                 $ G_Brows = "normal"
                 $ G_Eyes = "normal"
-        elif Emote == "angry":
+        elif emotion == "angry":
                 $ G_Mouth = "kiss"
                 $ G_Brows = "angry"
                 $ G_Eyes = "angry"
-        elif Emote == "closed":
+        elif emotion == "closed":
                 $ G_Mouth = "normal"
                 $ G_Brows = "sad"
                 $ G_Eyes = "closed"
-        elif Emote == "sad":
+        elif emotion == "sad":
                 $ G_Mouth = "kiss"
                 $ G_Brows = "sad"
                 $ G_Eyes = "normal"
-        elif Emote == "smile":
+        elif emotion == "smile":
                 $ G_Mouth = "smile"
                 $ G_Brows = "normal"
                 $ G_Eyes = "normal"
-        elif Emote == "surprised":
+        elif emotion == "surprised":
                 $ G_Mouth = "open"
                 $ G_Brows = "normal"
                 $ G_Eyes = "surprised"
-        elif Emote == "shocked":
+        elif emotion == "shocked":
                 $ G_Mouth = "shocked"
                 $ G_Brows = "normal"
                 $ G_Eyes = "surprised"

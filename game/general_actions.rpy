@@ -1,4 +1,4 @@
-label character_initiated_action(character, action):
+label Girl_initiated_action(Girl, action):
     if action in ["fondle_breasts", "suck_breasts"]:
         if action == "fondle_breasts":
             $ covered_phrase = "arm and shoves your hand against her covered breast"
@@ -7,28 +7,28 @@ label character_initiated_action(character, action):
             $ covered_phrase = "head and shoves your face into her chest"
             $ topless_phrase = covered_phrase
 
-        if (character.Over or character.Chest) and not character.Uptop:
-            if ApprovalCheck(character, 1250, TabM = 1) or (character.SeenChest and ApprovalCheck(character, 500) and not Taboo):
-                $ character.Uptop = 1
+        if (Girl.Over or Girl.Chest) and not Girl.Uptop:
+            if ApprovalCheck(Girl, 1250, TabM = 1) or (Girl.SeenChest and ApprovalCheck(Girl, 500) and not Taboo):
+                $ Girl.Uptop = 1
 
-                $ Line = character.Over if character.Over else character.Chest
+                $ line = Girl.Over if Girl.Over else Girl.Chest
 
-                "With a mischievous grin, [character.Name] pulls her [Line] up over her breasts."
+                "With a mischievous grin, [Girl.name] pulls her [line] up over her breasts."
 
-                call first_topless(character, silent = True)
+                call first_topless(Girl, silent = True)
 
-                $ Line = 0
+                $ line = 0
 
                 "She then grabs your [topless_phrase], clearly intending you to get to work."
             else:
-                "[character.Name] grabs your [covered_phrase], clearly intending you to get to work."
+                "[Girl.name] grabs your [covered_phrase], clearly intending you to get to work."
         else:
-            "[character.Name] grabs your [topless_phrase], clearly intending you to get to work."
+            "[Girl.name] grabs your [topless_phrase], clearly intending you to get to work."
     elif action in ["fondle_pussy", "eat_pussy", "finger_ass"]:
         if action == "fondle_pussy":
-            if character in [Jeanx, JubesX]:
+            if Girl in [Jeanx, JubesX]:
                 $ phrase = "grabs your arm and presses your hand into her crotch"
-            elif character == StormX:
+            elif Girl == StormX:
                 $ phrase = "grabs your arm and strokes your hand across her crotch"
             else:
                 $ phrase = "grabs your arm and shoves your hand into her crotch"
@@ -41,64 +41,64 @@ label character_initiated_action(character, action):
                 "grabs your arm and rubs your hand against her asshole"])
 
 
-        if (character.Legs and not character.Upskirt) or (character.Panties and not character.PantiesDown):
-            if ApprovalCheck(character, 1250, TabM = 1) or (character.SeenPussy and ApprovalCheck(character, 500) and not Taboo):
-                $ character.Upskirt = 1
-                $ character.PantiesDown = 1
+        if (Girl.Legs and not Girl.Upskirt) or (Girl.Panties and not Girl.PantiesDown):
+            if ApprovalCheck(Girl, 1250, TabM = 1) or (Girl.SeenPussy and ApprovalCheck(Girl, 500) and not Taboo):
+                $ Girl.Upskirt = 1
+                $ Girl.PantiesDown = 1
 
-                $ Line = 0
+                $ line = 0
 
-                if character.PantsNum() == 5:
-                    $ Line = character.Name + " hikes up her skirt"
-                elif character.PantsNum() > 6:
-                    $ Line = character.Name + " pulls down her " + character.Legs
+                if Girl.wearing_skirt:
+                    $ line = Girl.name + " hikes up her skirt"
+                elif Girl.PantsNum() > 6:
+                    $ line = Girl.name + " pulls down her " + Girl.Legs
                 else:
-                    $ Line = 0
+                    $ line = 0
 
-                if character.Panties:
-                    if Line:
-                        "[Line] and pulls her [character.Panties] out of the way."
+                if Girl.Panties:
+                    if line:
+                        "[line] and pulls her [Girl.Panties] out of the way."
                         "She then [phrase], clearly intending you to get to work."
                     else:
-                        "She pulls her [character.Panties] out of the way, and then [phrase]."
+                        "She pulls her [Girl.Panties] out of the way, and then [phrase]."
                         "She clearly intends for you to get to work."
                 else:
-                    "[Line], and then [phrase]."
+                    "[line], and then [phrase]."
                     "She clearly intends for you to get to work."
 
-                call first_bottomless(character, 1)
+                call first_bottomless(Girl, 1)
             else:
-                "[character.Name] [phrase], clearly intending you to get to work."
+                "[Girl.name] [phrase], clearly intending you to get to work."
         else:
-            "[character.Name] [phrase], clearly intending you to get to work."
+            "[Girl.name] [phrase], clearly intending you to get to work."
     elif action in ["handjob", "footjob", "titjob", "blowjob"]:
         if action == "handjob":
-            if Trigger2 == "jackin":
-                "[character.Name] brushes your hand aside and starts stroking your cock."
+            if offhand_action == "jackin":
+                "[Girl.name] brushes your hand aside and starts stroking your cock."
             else:
-                "[character.Name] gives you a mischevious smile, and starts to fondle your cock."
+                "[Girl.name] gives you a mischevious smile, and starts to fondle your cock."
         elif action == "footjob":
-            "[character.Name] leans forward and starts rubbing your cock between her feet."
+            "[Girl.name] leans forward and starts rubbing your cock between her feet."
         elif action == "titjob":
-            "[character.Name] slides down and sandwiches your dick between her tits."
+            "[Girl.name] slides down and sandwiches your dick between her tits."
         elif action == "blowjob":
-            "[character.Name] slides down and gives your cock a little lick."
+            "[Girl.name] slides down and gives your cock a little lick."
     elif action in ["dildo_pussy", "dildo_ass"]:
-        if character.PantsNum() == 5:
-            "[character.Name] grabs her dildo, hiking up her skirt as she does."
+        if Girl.wearing_skirt:
+            "[Girl.name] grabs her dildo, hiking up her skirt as she does."
 
-            $ character.Upskirt = 1
-        elif character.PantsNum() > 6:
-            "[character.Name] grabs her dildo, pulling down her pants as she does."
+            $ Girl.Upskirt = 1
+        elif Girl.PantsNum() > 6:
+            "[Girl.name] grabs her dildo, pulling down her pants as she does."
 
-            $ character.Legs = 0
+            $ Girl.Legs = 0
         else:
             if action == "dildo_pussy":
-                "[character.Name] grabs her dildo, rubbing it suggestively against her crotch."
+                "[Girl.name] grabs her dildo, rubbing it suggestively against her crotch."
             elif action == "dildo_ass":
-                "[character.Name] grabs her dildo, rubbing is suggestively against her ass."
+                "[Girl.name] grabs her dildo, rubbing is suggestively against her ass."
 
-        $ character.SeenPanties = 1
+        $ Girl.SeenPanties = 1
 
         if action == "dildo_pussy":
             "She slides the tip along her pussy and seems to want you to insert it."
@@ -106,37 +106,37 @@ label character_initiated_action(character, action):
             "She slides the tip against her asshole, and seems to want you to insert it."
     elif action in ["sex", "anal", "hotdog"]:
         if action in ["sex", "anal"]:
-            if character.PantsNum() == 5:
-                $ line = renpy.random.choice(["[character.Name] turns and backs up against your cock, sliding her skirt up as she does so.",
-                    "[character.Name] rolls back and pulls you toward her, sliding her skirt up as she does so.",
-                    "[character.Name] turns around, sliding her skirt up as she does so.",
-                    "[character.Name] pushes you back and climbs on top of you, sliding her skirt up as she does so.",
-                    "[character.Name] lays back, sliding her skirt up as she does so."])
+            if Girl.wearing_skirt:
+                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her skirt up as she does so.",
+                    "[Girl.name] rolls back and pulls you toward her, sliding her skirt up as she does so.",
+                    "[Girl.name] turns around, sliding her skirt up as she does so.",
+                    "[Girl.name] pushes you back and climbs on top of you, sliding her skirt up as she does so.",
+                    "[Girl.name] lays back, sliding her skirt up as she does so."])
                 "[line]"
 
-                $ character.Upskirt = 1
-            elif character.PantsNum() > 6:
-                $ line = renpy.random.choice(["[character.Name] turns and backs up against your cock, sliding her [character.Legs] down as she does so.",
-                    "[character.Name] rolls back and pulls you against her, sliding her [character.Legs] off as she does so.",
-                    "[character.Name] pushes you down and climbs on top of you, sliding her [character.Legs] down as she does so.",
-                    "[character.Name] turns around, sliding her [character.Legs] down as she does so.",
-                    "[character.Name] lays back, sliding her [character.Legs] down as she does so."])
+                $ Girl.Upskirt = 1
+            elif Girl.PantsNum() > 6:
+                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her [Girl.Legs] down as she does so.",
+                    "[Girl.name] rolls back and pulls you against her, sliding her [Girl.Legs] off as she does so.",
+                    "[Girl.name] pushes you down and climbs on top of you, sliding her [Girl.Legs] down as she does so.",
+                    "[Girl.name] turns around, sliding her [Girl.Legs] down as she does so.",
+                    "[Girl.name] lays back, sliding her [Girl.Legs] down as she does so."])
                 "[line]"
 
-                $ character.Upskirt = 1
-            elif character.PantsNum() == 6:
-                $ line = renpy.random.choice(["[character.Name] rolls onto her back and pulls you against her, sliding her shorts off as she does so."])
+                $ Girl.Upskirt = 1
+            elif Girl.PantsNum() == 6:
+                $ line = renpy.random.choice(["[Girl.name] rolls onto her back and pulls you against her, sliding her shorts off as she does so."])
                 "[line]"
 
-                $ character.Upskirt = 1
+                $ Girl.Upskirt = 1
             else:
-                $ line = renpy.random.choice(["[character.Name] turns and backs up against your cock.",
-                    "[character.Name] rolls back and pulls you toward her.",
-                    "[character.Name] pushes you back and climbs on top of you.",
-                    "[character.Name] turns around and pulls you toward her."])
+                $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock.",
+                    "[Girl.name] rolls back and pulls you toward her.",
+                    "[Girl.name] pushes you back and climbs on top of you.",
+                    "[Girl.name] turns around and pulls you toward her."])
                 "[line]"
 
-            $ character.SeenPanties = 1
+            $ Girl.SeenPanties = 1
 
             if action == "sex":
                 $ line = renpy.random.choice(["She slides the tip along her pussy and seems to want you to insert it."])
@@ -148,203 +148,203 @@ label character_initiated_action(character, action):
                     "She slides the tip along her asshole, and seems to want you to insert it."])
                 "[line]"
         else:
-            $ line = renpy.random.choice(["[character.Name] turns and backs up against your cock, rubbing it against her ass.",
-                "[character.Name] rolls back and pulls you toward her, rubbing her pussy against your cock.",
-                "[character.Name] pushes you back and climbs on top of you, sliding back and forth along your shaft.",
-                "[character.Name] rolls back and pulls you toward her, grinding against your cock.",
-                "[character.Name] turns around and pulls you toward her, grinding against your cock."])
+            $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, rubbing it against her ass.",
+                "[Girl.name] rolls back and pulls you toward her, rubbing her pussy against your cock.",
+                "[Girl.name] pushes you back and climbs on top of you, sliding back and forth along your shaft.",
+                "[Girl.name] rolls back and pulls you toward her, grinding against your cock.",
+                "[Girl.name] turns around and pulls you toward her, grinding against your cock."])
             "[line]"
 
     if action in ["fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "finger_ass", "handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
         if action == "fondle_breasts":
             $ action_line = "You start to fondle them."
-            $ praise_line = "I like the initiative, " + character.Pet
+            $ praise_line = "I like the initiative, " + Girl.Pet
             $ no_action_line = "You pull your hand back."
-            $ reject_line = "Let's not do that right now, " + character.Pet
-            $ rejection_response_line = character.Name + " pulls back."
+            $ reject_line = "Let's not do that right now, " + Girl.Pet
+            $ rejection_response_line = Girl.name + " pulls back."
         elif action == "suck_breasts":
             $ action_line = "You start to run your tongue along her nipple."
-            $ praise_line = "Mmm, I like this, " + character.Pet
+            $ praise_line = "Mmm, I like this, " + Girl.Pet
             $ no_action_line = "You pull your head back."
-            $ reject_line = "Let's not do that right now, " + character.Pet
-            $ rejection_response_line = character.Name + " pulls away."
+            $ reject_line = "Let's not do that right now, " + Girl.Pet
+            $ rejection_response_line = Girl.name + " pulls away."
         elif action == "fondle_pussy":
             $ action_line = "You start to run your fingers along her pussy."
-            $ praise_line = "I like the initiative, " + character.Pet
+            $ praise_line = "I like the initiative, " + Girl.Pet
             $ no_action_line = "You pull your hand back."
-            $ reject_line = "Let's not do that right now, " + character.Pet
-            $ rejection_response_line = character.Name + " pulls back."
+            $ reject_line = "Let's not do that right now, " + Girl.Pet
+            $ rejection_response_line = Girl.name + " pulls back."
         elif action == "eat_pussy":
             $ action_line = "You start licking her slit."
-            $ praise_line = "Mmm, I like this idea, " + character.Pet
+            $ praise_line = "Mmm, I like this idea, " + Girl.Pet
             $ no_action_line = "You pull your head away."
-            $ reject_line = "Let's not do that right now, " + character.Pet
-            $ rejection_response_line = character.Name + " pulls back."
+            $ reject_line = "Let's not do that right now, " + Girl.Pet
+            $ rejection_response_line = Girl.name + " pulls back."
         elif action == "finger_ass":
             $ action_line = "You press your finger into her tight ass."
-            $ praise_line = "Dirty girl, " + character.Pet
+            $ praise_line = "Dirty girl, " + Girl.Pet
             $ no_action_line = "You pull your hand back."
-            $ reject_line = "Let's not do that right now, " + character.Pet
-            $ rejection_response_line = character.Name + " pulls back."
+            $ reject_line = "Let's not do that right now, " + Girl.Pet
+            $ rejection_response_line = Girl.name + " pulls back."
         elif action == "handjob":
-            $ action_line = "[character.Name] continues her actions."
-            $ praise_line = "Oooh, that's good, [character.Pet]."
+            $ action_line = "[Girl.name] continues her actions."
+            $ praise_line = "Oooh, that's good, [Girl.Pet]."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [character.Pet]."
-            $ rejection_response_line = "[character.Name] puts it down."
+            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ rejection_response_line = "[Girl.name] puts it down."
         elif action == "footjob":
-            $ action_line = "[character.Name] continues her actions."
-            $ praise_line = "Oooh, that's good, [character.Pet]."
+            $ action_line = "[Girl.name] continues her actions."
+            $ praise_line = "Oooh, that's good, [Girl.Pet]."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [character.Pet]."
-            $ rejection_response_line = "[character.Name] puts it down."
+            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ rejection_response_line = "[Girl.name] puts it down."
         elif action == "titjob":
-            $ action_line = "[character.Name] starts to slide them up and down."
-            $ praise_line = "Oh, that sounds like a good idea, [character.Pet]."
+            $ action_line = "[Girl.name] starts to slide them up and down."
+            $ praise_line = "Oh, that sounds like a good idea, [Girl.Pet]."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [character.Pet]."
-            $ rejection_response_line = "[character.Name] lets it drop out from between her breasts."
+            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ rejection_response_line = "[Girl.name] lets it drop out from between her breasts."
         elif action == "blowjob":
-            $ action_line = "[character.Name] continues licking at it."
-            $ praise_line = "Hmmm, keep doing that, [character.Pet]."
+            $ action_line = "[Girl.name] continues licking at it."
+            $ praise_line = "Hmmm, keep doing that, [Girl.Pet]."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [character.Pet]."
-            $ rejection_response_line = "[character.Name] puts it down."
+            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ rejection_response_line = "[Girl.name] puts it down."
         elif action == "dildo_pussy":
-            $ action_line = "[character.Name] slides it in."
-            $ praise_line = "Oh yeah, [character.Pet], let's do this."
+            $ action_line = "[Girl.name] slides it in."
+            $ praise_line = "Oh yeah, [Girl.Pet], let's do this."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [character.Pet]."
-            $ rejection_response_line = "[character.Name] sets the dildo down."
+            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ rejection_response_line = "[Girl.name] sets the dildo down."
         elif action == "dildo_ass":
-            $ action_line = "[character.Name] slides it in."
-            $ praise_line = "Hmmm, keep doing that, [character.Pet]."
+            $ action_line = "[Girl.name] slides it in."
+            $ praise_line = "Hmmm, keep doing that, [Girl.Pet]."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [character.Pet]."
-            $ rejection_response_line = "[character.Name] sets the dildo down."
+            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ rejection_response_line = "[Girl.name] sets the dildo down."
         elif action == "sex":
-            $ action_line = "[character.Name] slides it in."
-            $ praise_line = "Oh yeah, [character.Pet], let's do this."
+            $ action_line = "[Girl.name] slides it in."
+            $ praise_line = "Oh yeah, [Girl.Pet], let's do this."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [character.Pet]."
-            $ rejection_response_line = "[character.Name] pulls back."
+            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ rejection_response_line = "[Girl.name] pulls back."
         elif action == "anal":
-            $ action_line = "[character.Name] slides it in."
-            $ praise_line = "Ooo, dirty girl, [character.Pet], let's do this."
+            $ action_line = "[Girl.name] slides it in."
+            $ praise_line = "Ooo, dirty girl, [Girl.Pet], let's do this."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [character.Pet]."
-            $ rejection_response_line = "[character.Name] pulls back."
+            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ rejection_response_line = "[Girl.name] pulls back."
         elif action == "hotdog":
-            $ action_line = renpy.random.choice([character.Name + " starts to grind against you",
-                character.Name + " keeps grinding",
-                character.Name + " continues to grind"])
-            $ praise_line = "Hmmm, that's good, [character.Pet]."
+            $ action_line = renpy.random.choice([Girl.name + " starts to grind against you",
+                Girl.name + " keeps grinding",
+                Girl.name + " continues to grind"])
+            $ praise_line = "Hmmm, that's good, [Girl.Pet]."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [character.Pet]."
-            $ rejection_response_line = "[character.Name] pulls back."
+            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ rejection_response_line = "[Girl.name] pulls back."
 
         menu:
             "What do you do?"
             "Get to work." if action in ["fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "finger_ass"]:
-                $ character.Statup("Inbt", 80, 3)
-                $ character.Statup("Inbt", 50, 2)
+                $ Girl.change_stat("inhibition", 80, 3)
+                $ Girl.change_stat("inhibition", 50, 2)
 
                 "[action_line]"
             "Nothing." if action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]:
-                $ character.Statup("Inbt", 70, 3)
-                $ character.Statup("Inbt", 30, 2)
+                $ Girl.change_stat("inhibition", 70, 3)
+                $ Girl.change_stat("inhibition", 30, 2)
 
                 "[action_line]"
             "Go with it." if action in ["sex", "anal", "hotdog"]:
                 if action in ["sex", "anal"]:
-                    $ character.Statup("Inbt", 80, 3)
-                    $ character.Statup("Inbt", 50, 2)
+                    $ Girl.change_stat("inhibition", 80, 3)
+                    $ Girl.change_stat("inhibition", 50, 2)
                 elif action in ["hotdog"]:
-                    $ character.Statup("Inbt", 50, 3)
+                    $ Girl.change_stat("inhibition", 50, 3)
 
                 "[action_line]"
             "Go for it." if action in ["dildo_pussy", "dildo_ass"]:
-                $ character.FaceChange("sexy", 1)
-                $ character.Statup("Inbt", 80, 3)
+                $ Girl.change_face("sexy", 1)
+                $ Girl.change_stat("inhibition", 80, 3)
 
                 ch_p "[praise_line]"
 
-                $ character.NameCheck() #checks reaction to petname
+                $ Girl.nameCheck() #checks reaction to petname
 
                 "You grab the dildo and slide it in."
 
-                $ character.Statup("Love", 85, 1)
-                $ character.Statup("Obed", 90, 1)
-                $ character.Statup("Obed", 50, 2)
+                $ Girl.change_stat("love", 85, 1)
+                $ Girl.change_stat("obedience", 90, 1)
+                $ Girl.change_stat("obedience", 50, 2)
             "Praise her." if action not in ["dildo_pussy", "dildo_ass"]:
-                $ character.FaceChange("sexy", 1)
+                $ Girl.change_face("sexy", 1)
 
                 if action in ["fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "finger_ass", "dildo_pussy", "dildo_ass", "sex", "anal"]:
-                    $ character.Statup("Inbt", 80, 3)
+                    $ Girl.change_stat("inhibition", 80, 3)
                 elif action in ["handjob", "footjob", "titjob", "blowjob"]:
-                    $ character.Statup("Inbt", 70, 3)
+                    $ Girl.change_stat("inhibition", 70, 3)
                 elif action in ["hotdog"]:
-                    $ character.Statup("Inbt", 80, 2)
+                    $ Girl.change_stat("inhibition", 80, 2)
 
                 ch_p "[praise_line]"
 
-                $ character.NameCheck() #checks reaction to petname
+                $ Girl.nameCheck() #checks reaction to petname
 
                 "[action_line]"
 
                 if action in ["fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "finger_ass", "dildo_pussy", "dildo_ass", "sex", "anal"]:
-                    $ character.Statup("Love", 85, 1)
+                    $ Girl.change_stat("love", 85, 1)
                 elif action in ["handjob", "footjob", "titjob", "blowjob", "hotdog"]:
-                    $ character.Statup("Love", 80, 1)
+                    $ Girl.change_stat("love", 80, 1)
 
-                $ character.Statup("Obed", 90, 1)
-                $ character.Statup("Obed", 50, 2)
+                $ Girl.change_stat("obedience", 90, 1)
+                $ Girl.change_stat("obedience", 50, 2)
             "Ask her to stop.":
                 if no_action_line is not None:
                     "[no_action_line]"
 
-                $ character.FaceChange("surprised")
-                $ character.Statup("Inbt", 70, 1)
+                $ Girl.change_face("surprised")
+                $ Girl.change_stat("inhibition", 70, 1)
 
                 ch_p "[reject_line]"
 
-                $ character.NameCheck() #checks reaction to petname
+                $ Girl.nameCheck() #checks reaction to petname
 
-                if character == JeanX:
-                    $ character.Statup("Love", 70, -4)
+                if Girl == JeanX:
+                    $ Girl.change_stat("love", 70, -4)
 
                 "[rejection_response_line]"
 
                 if action not in ["hotdog"]:
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 1)
-                    $ character.Statup("Obed", 30, 2)
+                    $ Girl.change_stat("obedience", 90, 1)
+                    $ Girl.change_stat("obedience", 50, 1)
+                    $ Girl.change_stat("obedience", 30, 2)
                 else:
-                    $ character.Statup("Obed", 80, 1)
-                    $ character.Statup("Obed", 30, 2)
+                    $ Girl.change_stat("obedience", 80, 1)
+                    $ Girl.change_stat("obedience", 30, 2)
 
-                $ Player.RecentActions.append("nope")
+                $ Player.recent_history.append("nope")
 
-                $ character.AddWord(1,"refused","refused")
+                $ Girl.AddWord(1,"refused","refused")
 
                 return True
 
     return False
 
-label first_action_approval(character, action):
-    if character.Forced:
-        $ character.FaceChange("sad")
+label first_action_approval(Girl, action):
+    if Girl.Forced:
+        $ Girl.change_face("sad")
 
         if action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "anal", "hotdog"]:
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
+            $ Girl.change_stat("love", 70, -3, 1)
+            $ Girl.change_stat("love", 20, -2, 1)
         elif action in ["sex"]:
-            $ character.Statup("Love", 70, -30, 1)
-            $ character.Statup("Love", 20, -20, 1)
-    elif character.Love >= (character.Obed + character.Inbt):
-        $ character.FaceChange("sexy")
-        $ character.Brows = "sad"
-        $ character.Mouth = "smile"
+            $ Girl.change_stat("love", 70, -30, 1)
+            $ Girl.change_stat("love", 20, -20, 1)
+    elif Girl.love >= (Girl.obedience + Girl.inhibition):
+        $ Girl.change_face("sexy")
+        $ Girl.Brows = "sad"
+        $ Girl.Mouth = "smile"
 
         ch_r "Well, I've never really been able to touch people without draining them, this could be an interesting experience. . ."
         ch_r "If that's what you like. . ."
@@ -355,18 +355,18 @@ label first_action_approval(character, action):
         ch_r "Well, I've never been able to do this before now, so this might be fun."
         ch_r "I guess if you really want to try it. . ."
         ch_r "It looks like you need some relief. . ."
-    elif character.Obed >= character.Inbt:
+    elif Girl.obedience >= Girl.inhibition:
         if action in ["handjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
-            $ character.FaceChange("normal")
+            $ Girl.change_face("normal")
         elif action in ["footjob"]:
-            $ character.FaceChange("normal",1)
+            $ Girl.change_face("normal",1)
 
-        ch_r "If that's what you want, [character.Petname]. . ."
+        ch_r "If that's what you want, [Girl.Petname]. . ."
         ch_r "If that's what you want. . ."
         ch_r "I suppose, if that's what you want. . ."
-        ch_r "Ok, [character.Petname], I'm ready."
-    elif action in ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"] and character.Addict >= 50:
-        $ character.FaceChange("manic", 1)
+        ch_r "Ok, [Girl.Petname], I'm ready."
+    elif action in ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"] and Girl.Addict >= 50:
+        $ Girl.change_face("manic", 1)
 
         ch_r "I think, if I could just touch that. . ."
         ch_r "I guess. . ."
@@ -375,10 +375,10 @@ label first_action_approval(character, action):
         ch_r "Well. . . I bet it would feel really good down there."
     else:
         if action in ["handjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
-            $ character.FaceChange("sad")
-            $ character.Mouth = "smile"
+            $ Girl.change_face("sad")
+            $ Girl.Mouth = "smile"
         elif action in ["footjob"]:
-            $ character.FaceChange("lipbite",1)
+            $ Girl.change_face("lipbite",1)
 
         ch_r "Hmm, could be fun. . ."
         ch_r "Sure. . ."
@@ -391,370 +391,370 @@ label first_action_approval(character, action):
 
     return
 
-label first_action_reaction(character, action):
+label first_action_reaction(Girl, action):
     if action == "fondle_thighs":
-        $ character.SEXP += 3
+        $ Girl.SEXP += 3
     elif action in ["fondle_breasts", "suck_breasts", "fondle_ass"]:
-        $ character.SEXP += 4
+        $ Girl.SEXP += 4
     elif action in ["fondle_pussy"]:
-        $ character.SEXP += 7
+        $ Girl.SEXP += 7
     elif action in ["finger_pussy", "eat_pussy", "handjob", "footjob", "dildo_pussy", "hotdog"]:
-        $ character.SEXP += 10
+        $ Girl.SEXP += 10
     elif action in ["finger_ass", "titjob"]:
-        $ character.SEXP += 12
+        $ Girl.SEXP += 12
     elif action in ["eat_ass", "blowjob"]:
-        $ character.SEXP += 15
+        $ Girl.SEXP += 15
     elif action in ["sex"]:
-        $ character.SEXP += 20
+        $ Girl.SEXP += 20
     elif action in ["anal"]:
-        $ character.SEXP += 25
+        $ Girl.SEXP += 25
 
-    if not Situation:
-        if character.Love >= 500 and "unsatisfied" not in character.RecentActions:
-            $ character.Mouth = "smile"
-            call that_was_nice_lines(character)
-        elif action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"] and character.Obed <= 500 and Player.Focus <= 20:
-            $ character.FaceChange("perplexed", 1)
+    if not action_context:
+        if Girl.love >= 500 and "unsatisfied" not in Girl.recent_history:
+            $ Girl.Mouth = "smile"
+            call that_was_nice_lines(Girl)
+        elif action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"] and Girl.obedience <= 500 and Player.Focus <= 20:
+            $ Girl.change_face("perplexed", 1)
 
-            call was_that_enough_lines(character)
+            call was_that_enough_lines(Girl)
         elif action in ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"] and  Player.Focus <= 20:
-            $ character.Mouth = "sad"
+            $ Girl.Mouth = "sad"
 
-            call was_that_enough_lines(character)
-
-    return
-
-label first_action_stats(character, action):
-    if action == "fondle_thighs" and not character.FondleT:
-        if character.Forced:
-            $ character.Statup("Love", 90, -10)
-            $ character.Statup("Obed", 70, 15)
-            $ character.Statup("Inbt", 80, 10)
-        else:
-            $ character.Statup("Love", 90, 5)
-            $ character.Statup("Obed", 70, 10)
-            $ character.Statup("Inbt", 80, 15)
-    elif action == "fondle_breasts" and not character.FondleB:
-        if character.Forced:
-            $ character.Statup("Love", 90, -20)
-            $ character.Statup("Obed", 70, 25)
-            $ character.Statup("Inbt", 80, 15)
-        else:
-            $ character.Statup("Love", 90, 10)
-            $ character.Statup("Obed", 70, 5)
-            $ character.Statup("Inbt", 80, 15)
-    elif action == "suck_breasts" and not character.SuckB:
-        if character.Forced:
-            $ character.Statup("Love", 90, -25)
-            $ character.Statup("Obed", 70, 25)
-            $ character.Statup("Inbt", 80, 17)
-        else:
-            $ character.Statup("Love", 90, 10)
-            $ character.Statup("Obed", 70, 10)
-            $ character.Statup("Inbt", 80, 15)
-    elif action == "fondle_pussy" and not character.FondleP:
-        if character.Forced:
-            $ character.Statup("Love", 90, -50)
-            $ character.Statup("Obed", 70, 35)
-            $ character.Statup("Inbt", 80, 25)
-        else:
-            $ character.Statup("Love", 90, 10)
-            $ character.Statup("Obed", 70, 10)
-            $ character.Statup("Inbt", 80, 15)
-    elif action == "finger_pussy" and not character.InsertP:
-        if character.Forced:
-            $ character.Statup("Love", 90, -60)
-            $ character.Statup("Obed", 70, 55)
-            $ character.Statup("Inbt", 80, 35)
-        else:
-            $ character.Statup("Love", 90, 10)
-            $ character.Statup("Obed", 70, 20)
-            $ character.Statup("Inbt", 80, 25)
-    if action == "eat_pussy" and not character.LickP:
-        if character.Forced:
-            $ character.Statup("Love", 90, -30)
-            $ character.Statup("Obed", 70, 35)
-            $ character.Statup("Inbt", 80, 75)
-        else:
-            $ character.Statup("Love", 90, 35)
-            $ character.Statup("Obed", 70, 15)
-            $ character.Statup("Inbt", 80, 35)
-    elif action == "fondle_ass" and not character.FondleA:
-        if character.Forced:
-            $ character.Statup("Love", 90, -20)
-            $ character.Statup("Obed", 70, 20)
-            $ character.Statup("Inbt", 80, 15)
-        else:
-            $ character.Statup("Love", 90, 10)
-            $ character.Statup("Obed", 70, 12)
-            $ character.Statup("Inbt", 80, 20)
-    elif action == "finger_ass" and not character.InsertA:
-        if character.Forced:
-            $ character.Statup("Love", 90, -50)
-            $ character.Statup("Obed", 70, 60)
-            $ character.Statup("Inbt", 80, 35)
-        else:
-            $ character.Statup("Love", 90, 10)
-            $ character.Statup("Obed", 70, 20)
-            $ character.Statup("Inbt", 80, 25)
-    elif action == "eat_ass" and not character.LickA:
-        if character.Forced:
-            $ character.Statup("Love", 90, -30)
-            $ character.Statup("Obed", 70, 40)
-            $ character.Statup("Inbt", 80, 80)
-        else:
-            $ character.Statup("Love", 90, 35)
-            $ character.Statup("Obed", 70, 25)
-            $ character.Statup("Inbt", 80, 55)
-    elif action == "handjob" and not character.Hand:
-        if character.Forced:
-            $ character.Statup("Love", 90, -20)
-            $ character.Statup("Obed", 70, 25)
-            $ character.Statup("Inbt", 80, 30)
-        else:
-            $ character.Statup("Love", 90, 5)
-            $ character.Statup("Obed", 70, 20)
-            $ character.Statup("Inbt", 80, 20)
-    elif action == "footjob" and not character.Foot:
-        if character.Forced:
-            $ character.Statup("Love", 90, -20)
-            $ character.Statup("Obed", 70, 25)
-            $ character.Statup("Inbt", 80, 30)
-        else:
-            $ character.Statup("Love", 90, 5)
-            $ character.Statup("Obed", 70, 20)
-            $ character.Statup("Inbt", 80, 20)
-    elif action == "titjob" and not character.Tit:
-        if character.Forced:
-            $ character.Statup("Love", 90, -25)
-            $ character.Statup("Obed", 70, 30)
-            $ character.Statup("Inbt", 80, 35)
-        else:
-            $ character.Statup("Love", 90, 5)
-            $ character.Statup("Obed", 70, 25)
-            $ character.Statup("Inbt", 80, 30)
-    elif action == "blowjob" and not character.Blow:
-        if character.Forced:
-            $ character.Statup("Love", 90, -70)
-            $ character.Statup("Obed", 70, 45)
-            $ character.Statup("Inbt", 80, 60)
-        else:
-            $ character.Statup("Love", 90, 5)
-            $ character.Statup("Obed", 70, 35)
-            $ character.Statup("Inbt", 80, 40)
-    elif action == "dildo_pussy" and not character.DildoP:
-        if character.Forced:
-            $ character.Statup("Love", 90, -75)
-            $ character.Statup("Obed", 70, 60)
-            $ character.Statup("Inbt", 80, 35)
-        else:
-            $ character.Statup("Love", 90, 10)
-            $ character.Statup("Obed", 70, 20)
-            $ character.Statup("Inbt", 80, 45)
-    elif action == "dildo_ass" and not character.DildoA:
-        if character.Forced:
-            $ character.Statup("Love", 90, -75)
-            $ character.Statup("Obed", 70, 60)
-            $ character.Statup("Inbt", 80, 35)
-        else:
-            $ character.Statup("Love", 90, 10)
-            $ character.Statup("Obed", 70, 20)
-            $ character.Statup("Inbt", 80, 45)
-    elif action == "sex" and not character.Sex:
-        if character.Forced:
-            $ character.Statup("Love", 90, -150)
-            $ character.Statup("Obed", 70, 60)
-            $ character.Statup("Inbt", 80, 50)
-        else:
-            $ character.Statup("Love", 90, 30)
-            $ character.Statup("Obed", 70, 30)
-            $ character.Statup("Inbt", 80, 60)
-    elif action == "anal" and not character.Anal:
-        if not character.Anal:
-            if character.Forced:
-                $ character.Statup("Love", 90, -150)
-                $ character.Statup("Obed", 70, 70)
-                $ character.Statup("Inbt", 80, 40)
-            else:
-                $ character.Statup("Love", 90, 10)
-                $ character.Statup("Obed", 70, 30)
-                $ character.Statup("Inbt", 80, 70)
-        elif not character.Loose:
-            if character.Forced:
-                $ character.Statup("Love", 90, -20)
-                $ character.Statup("Obed", 70, 10)
-                $ character.Statup("Inbt", 80, 5)
-            else:
-                $ character.Statup("Obed", 70, 7)
-                $ character.Statup("Inbt", 80, 5)
-    elif action == "hotdog" and not character.Hotdog:
-        if character.Forced:
-            $ character.Statup("Love", 90, -5)
-            $ character.Statup("Obed", 70, 20)
-            $ character.Statup("Inbt", 80, 10)
-        else:
-            $ character.Statup("Love", 90, 20)
-            $ character.Statup("Obed", 70, 20)
-            $ character.Statup("Inbt", 80, 20)
+            call was_that_enough_lines(Girl)
 
     return
 
-label action_specific_consequences(character, action):
+label first_action_stats(Girl, action):
+    if action == "fondle_thighs" and not Girl.FondleT:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -10)
+            $ Girl.change_stat("obedience", 70, 15)
+            $ Girl.change_stat("inhibition", 80, 10)
+        else:
+            $ Girl.change_stat("love", 90, 5)
+            $ Girl.change_stat("obedience", 70, 10)
+            $ Girl.change_stat("inhibition", 80, 15)
+    elif action == "fondle_breasts" and not Girl.FondleB:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -20)
+            $ Girl.change_stat("obedience", 70, 25)
+            $ Girl.change_stat("inhibition", 80, 15)
+        else:
+            $ Girl.change_stat("love", 90, 10)
+            $ Girl.change_stat("obedience", 70, 5)
+            $ Girl.change_stat("inhibition", 80, 15)
+    elif action == "suck_breasts" and not Girl.SuckB:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -25)
+            $ Girl.change_stat("obedience", 70, 25)
+            $ Girl.change_stat("inhibition", 80, 17)
+        else:
+            $ Girl.change_stat("love", 90, 10)
+            $ Girl.change_stat("obedience", 70, 10)
+            $ Girl.change_stat("inhibition", 80, 15)
+    elif action == "fondle_pussy" and not Girl.FondleP:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -50)
+            $ Girl.change_stat("obedience", 70, 35)
+            $ Girl.change_stat("inhibition", 80, 25)
+        else:
+            $ Girl.change_stat("love", 90, 10)
+            $ Girl.change_stat("obedience", 70, 10)
+            $ Girl.change_stat("inhibition", 80, 15)
+    elif action == "finger_pussy" and not Girl.InsertP:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -60)
+            $ Girl.change_stat("obedience", 70, 55)
+            $ Girl.change_stat("inhibition", 80, 35)
+        else:
+            $ Girl.change_stat("love", 90, 10)
+            $ Girl.change_stat("obedience", 70, 20)
+            $ Girl.change_stat("inhibition", 80, 25)
+    if action == "eat_pussy" and not Girl.LickP:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -30)
+            $ Girl.change_stat("obedience", 70, 35)
+            $ Girl.change_stat("inhibition", 80, 75)
+        else:
+            $ Girl.change_stat("love", 90, 35)
+            $ Girl.change_stat("obedience", 70, 15)
+            $ Girl.change_stat("inhibition", 80, 35)
+    elif action == "fondle_ass" and not Girl.FondleA:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -20)
+            $ Girl.change_stat("obedience", 70, 20)
+            $ Girl.change_stat("inhibition", 80, 15)
+        else:
+            $ Girl.change_stat("love", 90, 10)
+            $ Girl.change_stat("obedience", 70, 12)
+            $ Girl.change_stat("inhibition", 80, 20)
+    elif action == "finger_ass" and not Girl.InsertA:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -50)
+            $ Girl.change_stat("obedience", 70, 60)
+            $ Girl.change_stat("inhibition", 80, 35)
+        else:
+            $ Girl.change_stat("love", 90, 10)
+            $ Girl.change_stat("obedience", 70, 20)
+            $ Girl.change_stat("inhibition", 80, 25)
+    elif action == "eat_ass" and not Girl.LickA:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -30)
+            $ Girl.change_stat("obedience", 70, 40)
+            $ Girl.change_stat("inhibition", 80, 80)
+        else:
+            $ Girl.change_stat("love", 90, 35)
+            $ Girl.change_stat("obedience", 70, 25)
+            $ Girl.change_stat("inhibition", 80, 55)
+    elif action == "handjob" and not Girl.Hand:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -20)
+            $ Girl.change_stat("obedience", 70, 25)
+            $ Girl.change_stat("inhibition", 80, 30)
+        else:
+            $ Girl.change_stat("love", 90, 5)
+            $ Girl.change_stat("obedience", 70, 20)
+            $ Girl.change_stat("inhibition", 80, 20)
+    elif action == "footjob" and not Girl.Foot:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -20)
+            $ Girl.change_stat("obedience", 70, 25)
+            $ Girl.change_stat("inhibition", 80, 30)
+        else:
+            $ Girl.change_stat("love", 90, 5)
+            $ Girl.change_stat("obedience", 70, 20)
+            $ Girl.change_stat("inhibition", 80, 20)
+    elif action == "titjob" and not Girl.Tit:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -25)
+            $ Girl.change_stat("obedience", 70, 30)
+            $ Girl.change_stat("inhibition", 80, 35)
+        else:
+            $ Girl.change_stat("love", 90, 5)
+            $ Girl.change_stat("obedience", 70, 25)
+            $ Girl.change_stat("inhibition", 80, 30)
+    elif action == "blowjob" and not Girl.Blow:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -70)
+            $ Girl.change_stat("obedience", 70, 45)
+            $ Girl.change_stat("inhibition", 80, 60)
+        else:
+            $ Girl.change_stat("love", 90, 5)
+            $ Girl.change_stat("obedience", 70, 35)
+            $ Girl.change_stat("inhibition", 80, 40)
+    elif action == "dildo_pussy" and not Girl.DildoP:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -75)
+            $ Girl.change_stat("obedience", 70, 60)
+            $ Girl.change_stat("inhibition", 80, 35)
+        else:
+            $ Girl.change_stat("love", 90, 10)
+            $ Girl.change_stat("obedience", 70, 20)
+            $ Girl.change_stat("inhibition", 80, 45)
+    elif action == "dildo_ass" and not Girl.DildoA:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -75)
+            $ Girl.change_stat("obedience", 70, 60)
+            $ Girl.change_stat("inhibition", 80, 35)
+        else:
+            $ Girl.change_stat("love", 90, 10)
+            $ Girl.change_stat("obedience", 70, 20)
+            $ Girl.change_stat("inhibition", 80, 45)
+    elif action == "sex" and not Girl.Sex:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -150)
+            $ Girl.change_stat("obedience", 70, 60)
+            $ Girl.change_stat("inhibition", 80, 50)
+        else:
+            $ Girl.change_stat("love", 90, 30)
+            $ Girl.change_stat("obedience", 70, 30)
+            $ Girl.change_stat("inhibition", 80, 60)
+    elif action == "anal" and not Girl.Anal:
+        if not Girl.Anal:
+            if Girl.Forced:
+                $ Girl.change_stat("love", 90, -150)
+                $ Girl.change_stat("obedience", 70, 70)
+                $ Girl.change_stat("inhibition", 80, 40)
+            else:
+                $ Girl.change_stat("love", 90, 10)
+                $ Girl.change_stat("obedience", 70, 30)
+                $ Girl.change_stat("inhibition", 80, 70)
+        elif not Girl.Loose:
+            if Girl.Forced:
+                $ Girl.change_stat("love", 90, -20)
+                $ Girl.change_stat("obedience", 70, 10)
+                $ Girl.change_stat("inhibition", 80, 5)
+            else:
+                $ Girl.change_stat("obedience", 70, 7)
+                $ Girl.change_stat("inhibition", 80, 5)
+    elif action == "hotdog" and not Girl.Hotdog:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -5)
+            $ Girl.change_stat("obedience", 70, 20)
+            $ Girl.change_stat("inhibition", 80, 10)
+        else:
+            $ Girl.change_stat("love", 90, 20)
+            $ Girl.change_stat("obedience", 70, 20)
+            $ Girl.change_stat("inhibition", 80, 20)
+
+    return
+
+label action_specific_consequences(Girl, action):
     $ achievement = None
 
     if action == "fondle_thighs":
-        $ character.FondleT += 1
+        $ Girl.FondleT += 1
 
-        $ counter = character.FondleT
+        $ counter = Girl.FondleT
 
-        call Partner_Like(character, 1, 0)
+        call Partner_Like(Girl, 1, 0)
     elif action == "fondle_breasts":
-        $ character.FondleB += 1
+        $ Girl.FondleB += 1
 
-        $ counter = character.FondleB
+        $ counter = Girl.FondleB
 
-        call Partner_Like(character, 2)
+        call Partner_Like(Girl, 2)
     elif action == "suck_breasts":
-        $ character.SuckB += 1
+        $ Girl.SuckB += 1
 
-        $ counter = character.SuckB
+        $ counter = Girl.SuckB
 
-        call Partner_Like(character, 2)
+        call Partner_Like(Girl, 2)
     elif action == "fondle_pussy":
-        $ character.FondleP += 1
+        $ Girl.FondleP += 1
 
-        $ counter = character.FondleP
+        $ counter = Girl.FondleP
 
-        call Partner_Like(character, 2)
+        call Partner_Like(Girl, 2)
     elif action == "finger_pussy":
-        $ character.InsertP += 1
+        $ Girl.InsertP += 1
 
-        $ counter = character.InsertP
+        $ counter = Girl.InsertP
 
-        call Partner_Like(character, 2)
+        call Partner_Like(Girl, 2)
     elif action == "eat_pussy":
-        $ character.LickP += 1
+        $ Girl.LickP += 1
 
-        $ counter = character.LickP
+        $ counter = Girl.LickP
 
-        if character == RogueX and Partner == EmmaX:
-            call Partner_Like(character,4,3)
-        elif character not in [KittyX, StormX] and Partner == RogueX:
-            call Partner_Like(character, 3, 3)
-        elif character == RogueX:
-            call Partner_Like(character,3,2)
+        if Girl == RogueX and Partner == EmmaX:
+            call Partner_Like(Girl,4,3)
+        elif Girl not in [KittyX, StormX] and Partner == RogueX:
+            call Partner_Like(Girl, 3, 3)
+        elif Girl == RogueX:
+            call Partner_Like(Girl,3,2)
         else:
-            call Partner_Like(character, 2)
+            call Partner_Like(Girl, 2)
     elif action == "fondle_ass":
-        $ character.FondleA += 1
+        $ Girl.FondleA += 1
 
-        $ counter = character.FondleA
+        $ counter = Girl.FondleA
 
-        call Partner_Like(character, 2)
+        call Partner_Like(Girl, 2)
     elif action == "finger_ass":
-        $ character.InsertA += 1
+        $ Girl.InsertA += 1
 
-        $ counter = character.InsertA
+        $ counter = Girl.InsertA
 
-        call Partner_Like(character, 2)
+        call Partner_Like(Girl, 2)
     elif action == "eat_ass":
-        $ character.LickA += 1
+        $ Girl.LickA += 1
 
-        $ counter = character.LickA
+        $ counter = Girl.LickA
 
-        call Partner_Like(character, 2)
+        call Partner_Like(Girl, 2)
     elif action == "handjob":
-        $ character.Hand += 1
+        $ Girl.Hand += 1
 
-        $ achievement = character.Tag + " Handi-Queen"
-        $ counter = character.Hand
+        $ achievement = Girl.Tag + " Handi-Queen"
+        $ counter = Girl.Hand
 
-        call Partner_Like(character, 2)
+        call Partner_Like(Girl, 2)
     elif action == "footjob":
-        $ character.Foot += 1
+        $ Girl.Foot += 1
 
-        $ achievement = character.Tag + "pedi"
-        $ counter = character.Foot
+        $ achievement = Girl.Tag + "pedi"
+        $ counter = Girl.Foot
 
-        call Partner_Like(character, 1)
+        call Partner_Like(Girl, 1)
     elif action == "titjob":
-        $ character.Tit += 1
+        $ Girl.Tit += 1
 
-        $ counter = character.Tit
+        $ counter = Girl.Tit
 
-        call Partner_Like(character, 3)
+        call Partner_Like(Girl, 3)
     elif action == "blowjob":
-        $ character.Blow += 1
+        $ Girl.Blow += 1
 
-        $ achievement = character.Tag + " Jobber"
-        $ counter = character.Blow
+        $ achievement = Girl.Tag + " Jobber"
+        $ counter = Girl.Blow
 
-        if character == RogueX and Partner == EmmaX:
-            call Partner_Like(character, 3)
+        if Girl == RogueX and Partner == EmmaX:
+            call Partner_Like(Girl, 3)
         else:
-            call Partner_Like(character, 2)
+            call Partner_Like(Girl, 2)
     elif action == "dildo_pussy":
-        $ character.DildoP += 1
+        $ Girl.DildoP += 1
 
-        $ counter = character.DildoP
+        $ counter = Girl.DildoP
 
-        call Partner_Like(character, 2)
+        call Partner_Like(Girl, 2)
     elif action == "dildo_ass":
-        $ character.DildoA += 1
+        $ Girl.DildoA += 1
 
-        $ counter = character.DildoA
+        $ counter = Girl.DildoA
 
-        call Partner_Like(character, 2)
+        call Partner_Like(Girl, 2)
     elif action == "sex":
-        $ character.Sex += 1
+        $ Girl.Sex += 1
 
-        $ achievement = character.Tag + " Sex Addict"
-        $ counter = character.Sex
+        $ achievement = Girl.Tag + " Sex Addict"
+        $ counter = Girl.Sex
 
-        call Partner_Like(character, 3, 2)
+        call Partner_Like(Girl, 3, 2)
 
-        $ character.Statup("Inbt", 30, 2)
-        $ character.Statup("Inbt", 70, 1)
+        $ Girl.change_stat("inhibition", 30, 2)
+        $ Girl.change_stat("inhibition", 70, 1)
     elif action == "anal":
-        $ character.Anal += 1
+        $ Girl.Anal += 1
 
-        $ achievement = character.Tag + " Anal Addict"
-        $ counter = character.Anal
+        $ achievement = Girl.Tag + " Anal Addict"
+        $ counter = Girl.Anal
 
         if Partner == "Kitty":
-            if character == RogueX:
-                call Partner_Like(character, 3, 1)
-            elif character in [EmmaX, LauraX, JeanX, StormX, JubesX]:
-                call Partner_Like(character, 4, 2)
+            if Girl == RogueX:
+                call Partner_Like(Girl, 3, 1)
+            elif Girl in [EmmaX, LauraX, JeanX, StormX, JubesX]:
+                call Partner_Like(Girl, 4, 2)
         else:
-            if character == RogueX:
-                call Partner_Like(character, 4, 2)
-            elif character in [EmmaX, LauraX, JeanX, StormX, JubesX]:
-                call Partner_Like(character, 3, 2)
+            if Girl == RogueX:
+                call Partner_Like(Girl, 4, 2)
+            elif Girl in [EmmaX, LauraX, JeanX, StormX, JubesX]:
+                call Partner_Like(Girl, 3, 2)
 
-        $ character.Statup("Inbt", 30, 3)
-        $ character.Statup("Inbt", 70, 1)
+        $ Girl.change_stat("inhibition", 30, 3)
+        $ Girl.change_stat("inhibition", 70, 1)
     elif action == "hotdog":
-        $ character.Hotdog += 1
+        $ Girl.Hotdog += 1
 
-        $ achievement = character.Tag + " Full Buns"
-        $ counter = character.Hotdog
+        $ achievement = Girl.Tag + " Full Buns"
+        $ counter = Girl.Hotdog
 
-        if character == RogueX:
-            call Partner_Like(character, 1)
-        elif character in [KittyX, EmmaX, LauraX]:
-            call Partner_Like(character, 2)
+        if Girl == RogueX:
+            call Partner_Like(Girl, 1)
+        elif Girl in [KittyX, EmmaX, LauraX]:
+            call Partner_Like(Girl, 2)
 
-        $ character.Statup("Inbt", 30, 1)
-        $ character.Statup("Inbt", 70, 1)
+        $ Girl.change_stat("inhibition", 30, 1)
+        $ Girl.change_stat("inhibition", 70, 1)
 
     return
 
-label action_approved(character, action, action_counter):                                                                      #Second time+ dialog
-    if character.Forced:
-        $ character.FaceChange("sad")
-        $ character.Statup("Love", 70, -3, 1)
-        $ character.Statup("Love", 20, -2, 1)
+label action_approved(Girl, action, action_counter):                                                                      #Second time+ dialog
+    if Girl.Forced:
+        $ Girl.change_face("sad")
+        $ Girl.change_stat("love", 70, -3, 1)
+        $ Girl.change_stat("love", 20, -2, 1)
 
         ch_r "That's really what you want?"
         ch_r "That's it?"
@@ -762,16 +762,16 @@ label action_approved(character, action, action_counter):                       
         ch_r "You want me to do that again?"
         ch_r "The toys again?"
         ch_r "That's all you want?"
-    elif not Taboo and "tabno" in character.DailyActions:
+    elif not Taboo and "tabno" in Girl.daily_history:
         ch_r "Ok, I guess this is private enough. . ."
         ch_r "I guess here would be ok. . ."
         ch_r "Well, at least you got us some privacy this time. . ."
-    elif action == "anal" and "anal" in character.DailyActions and not character.Loose:
+    elif action == "anal" and "anal" in Girl.daily_history and not Girl.Loose:
         pass
-    elif action in character.RecentActions:
-        $ character.FaceChange("sexy", 1)
+    elif action in Girl.recent_history:
+        $ Girl.change_face("sexy", 1)
 
-        call recent_action_lines(character)
+        call recent_action_lines(Girl)
 
         if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
             call before_handjob
@@ -779,15 +779,15 @@ label action_approved(character, action, action_counter):                       
             call before_action
 
         return
-    elif action in character.DailyActions:
-        $ character.FaceChange("sexy", 1)
+    elif action in Girl.daily_history:
+        $ Girl.change_face("sexy", 1)
 
-        call daily_action_lines(character)
+        call daily_action_lines(Girl)
 
     elif action_counter < 3:
-        $ character.FaceChange("sexy", 1)
-        $ character.Brows = "confused"
-        $ character.Mouth = "kiss"
+        $ Girl.change_face("sexy", 1)
+        $ Girl.Brows = "confused"
+        $ Girl.Mouth = "kiss"
 
         ch_r "So you'd like another handy?"
         ch_r "Again?"
@@ -797,143 +797,143 @@ label action_approved(character, action, action_counter):                       
         ch_r "You want to stick it in my ass again?"
         ch_r "So you'd like another go?"
     else:
-        $ character.FaceChange("sexy", 1)
-        $ character.ArmPose = 2
+        $ Girl.change_face("sexy", 1)
+        $ Girl.ArmPose = 2
 
-        call used_to_action_lines(character)
+        call used_to_action_lines(Girl)
 
-    $ Line = 0
+    $ line = 0
 
     return
 
-label action_disapproved(character, action, action_counter):
+label action_disapproved(Girl, action, action_counter):
     if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-        $ character.FaceChange("angry", 1)
+        $ Girl.change_face("angry", 1)
     elif action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "sex"]:
-        $ character.FaceChange("angry")
+        $ Girl.change_face("angry")
 
-    if "no_" + action in character.RecentActions:
-        call just_told_you_no_lines(character)
-    elif Taboo and "tabno" in character.DailyActions and "no_" + action in character.DailyActions:
-        call had_enough_of_this_lines(character)
-    elif "no_" + action in character.DailyActions:
-        call already_said_no_lines(character)
-    elif Taboo and "tabno" in character.DailyActions:
-        call already_said_not_here_lines(character)
+    if "no_" + action in Girl.recent_history:
+        call just_told_you_no_lines(Girl)
+    elif Taboo and "tabno" in Girl.daily_history and "no_" + action in Girl.daily_history:
+        call had_enough_of_this_lines(Girl)
+    elif "no_" + action in Girl.daily_history:
+        call already_said_no_lines(Girl)
+    elif Taboo and "tabno" in Girl.daily_history:
+        call already_said_not_here_lines(Girl)
     elif not action_counter:
-        $ character.FaceChange("bemused")
+        $ Girl.change_face("bemused")
 
         if action not in ["finger_ass", "eat_ass"]:
-            call not_ready_yet_lines(character)
+            call not_ready_yet_lines(Girl)
         else:
-            call not_into_ass_play(character)
-    elif action in ["dildo_ass", "anal"] and not character.Loose and action not in character.DailyActions:
-        $ character.FaceChange("perplexed")
+            call not_into_ass_play(Girl)
+    elif action in ["dildo_ass", "anal"] and not Girl.Loose and action not in Girl.daily_history:
+        $ Girl.change_face("perplexed")
 
-        ch_r "You could have been a bit more gentle last time, [character.Petname]. . ."
+        ch_r "You could have been a bit more gentle last time, [Girl.Petname]. . ."
     else:
-        $ character.FaceChange("bemused")
+        $ Girl.change_face("bemused")
 
-        call rather_not_lines(character)
+        call rather_not_lines(Girl)
 
-    call begging_menu(character, action)
+    call begging_menu(Girl, action)
 
     return
 
-label action_accepted(character, action):
-    $ character.FaceChange("bemused", 1)
+label action_accepted(Girl, action):
+    $ Girl.change_face("bemused", 1)
 
     if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy"]:
-        if character.Forced:
-            $ character.FaceChange("sad")
+        if Girl.Forced:
+            $ Girl.change_face("sad")
 
             if action in ["fondle_thighs"]:
-                $ character.Statup("Love", 70, -3, 1)
-                $ character.Statup("Obed", 90, 1)
-                $ character.Statup("Inbt", 60, 1)
+                $ Girl.change_stat("love", 70, -3, 1)
+                $ Girl.change_stat("obedience", 90, 1)
+                $ Girl.change_stat("inhibition", 60, 1)
             elif action in ["fondle_breasts", "suck_breasts", "fondle_pussy"]:
-                $ character.Statup("Love", 70, -3, 1)
-                $ character.Statup("Love", 20, -2, 1)
-                $ character.Statup("Obed", 90, 1)
-                $ character.Statup("Inbt", 60, 1)
+                $ Girl.change_stat("love", 70, -3, 1)
+                $ Girl.change_stat("love", 20, -2, 1)
+                $ Girl.change_stat("obedience", 90, 1)
+                $ Girl.change_stat("inhibition", 60, 1)
 
-        call come_and_get_em_lines(character)
+        call come_and_get_em_lines(Girl)
 
-        $ character.Statup("Love", 90, 1)
-        $ character.Statup("Inbt", 50, 3)
+        $ Girl.change_stat("love", 90, 1)
+        $ Girl.change_stat("inhibition", 50, 3)
 
         call before_fondle
     elif action in ["finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-        if character.Forced:
-            $ character.FaceChange("sad")
+        if Girl.Forced:
+            $ Girl.change_face("sad")
 
             if action in ["finger_pussy", "eat_pussy", "finger_ass"]:
-                $ character.Statup("Love", 70, -3, 1)
-                $ character.Statup("Love", 20, -2, 1)
-                $ character.Statup("Obed", 90, 1)
-                $ character.Statup("Inbt", 60, 1)
+                $ Girl.change_stat("love", 70, -3, 1)
+                $ Girl.change_stat("love", 20, -2, 1)
+                $ Girl.change_stat("obedience", 90, 1)
+                $ Girl.change_stat("inhibition", 60, 1)
             elif action in ["fondle_ass"]:
-                $ character.Statup("Love", 70, -2, 1)
-                $ character.Statup("Obed", 90, 2)
-                $ character.Statup("Inbt", 60, 2)
+                $ Girl.change_stat("love", 70, -2, 1)
+                $ Girl.change_stat("obedience", 90, 2)
+                $ Girl.change_stat("inhibition", 60, 2)
             elif action in ["eat_ass"]:
-                $ character.Statup("Love", 70, -3, 1)
-                $ character.Statup("Love", 20, -2, 1)
-                $ character.Statup("Obed", 90, 2)
-                $ character.Statup("Inbt", 60, 2)
+                $ Girl.change_stat("love", 70, -3, 1)
+                $ Girl.change_stat("love", 20, -2, 1)
+                $ Girl.change_stat("obedience", 90, 2)
+                $ Girl.change_stat("inhibition", 60, 2)
 
-            call forced_but_welcome_lines(character)
+            call forced_but_welcome_lines(Girl)
         else:
             if action in ["finger_pussy", "eat_pussy"]:
-                $ character.FaceChange("sexy", 1)
+                $ Girl.change_face("sexy", 1)
 
                 if action in ["finger_pussy"]:
-                    $ character.Statup("Love", 90, 1)
-                    $ character.Statup("Inbt", 50, 3)
+                    $ Girl.change_stat("love", 90, 1)
+                    $ Girl.change_stat("inhibition", 50, 3)
                 elif action in ["eat_pussy", "finger_ass"]:
-                    $ character.Eyes = "closed"
-                    $ character.Statup("Love", 90, 1)
-                    $ character.Statup("Inbt", 50, 3)
-                    $ character.Statup("Lust", 200, 3)
+                    $ Girl.Eyes = "closed"
+                    $ Girl.change_stat("love", 90, 1)
+                    $ Girl.change_stat("inhibition", 50, 3)
+                    $ Girl.change_stat("lust", 200, 3)
                 elif action in ["eat_ass"]:
-                    $ character.Eyes = "closed"
-                    $ character.Statup("Love", 90, 1)
-                    $ character.Statup("Inbt", 60, 2)
-                    $ character.Statup("Lust", 200, 3)
+                    $ Girl.Eyes = "closed"
+                    $ Girl.change_stat("love", 90, 1)
+                    $ Girl.change_stat("inhibition", 60, 2)
+                    $ Girl.change_stat("lust", 200, 3)
             elif action in ["fondle_ass"]:
-                $ character.FaceChange("bemused, 1")
+                $ Girl.change_face("bemused, 1")
 
-            call come_and_get_em_lines(character)
+            call come_and_get_em_lines(Girl)
 
         if action in ["finger_pussy", "eat_pussy", "finger_ass"]:
-            $ character.Statup("Obed", 20, 1)
-            $ character.Statup("Obed", 60, 1)
-            $ character.Statup("Inbt", 70, 2)
+            $ Girl.change_stat("obedience", 20, 1)
+            $ Girl.change_stat("obedience", 60, 1)
+            $ Girl.change_stat("inhibition", 70, 2)
         elif action in ["fondle_ass"]:
-            $ character.Statup("Lust", 200, 3)
-            $ character.Statup("Obed", 60, 1)
-            $ character.Statup("Inbt", 70, 1)
+            $ Girl.change_stat("lust", 200, 3)
+            $ Girl.change_stat("obedience", 60, 1)
+            $ Girl.change_stat("inhibition", 70, 1)
         elif action in ["eat_ass"]:
-            $ character.Statup("Obed", 20, 1)
-            $ character.Statup("Obed", 60, 1)
-            $ character.Statup("Inbt", 80, 2)
+            $ Girl.change_stat("obedience", 20, 1)
+            $ Girl.change_stat("obedience", 60, 1)
+            $ Girl.change_stat("inhibition", 80, 2)
 
         call before_fondle
     elif action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:                                                                   #She's into it. . .
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Inbt", 60, 1)
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("inhibition", 60, 1)
 
             if action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal"]:
-                $ character.Statup("Obed", 90, 1)
+                $ Girl.change_stat("obedience", 90, 1)
             elif action in ["hotdog"]:
-                $ character.Statup("Obed", 80, 1)
+                $ Girl.change_stat("obedience", 80, 1)
 
             ch_r "Ok, fine."
             ch_r ". . . Ok, if that's what you want."
             ch_r "Well, there are worst ways to get you off. . ."
             ch_r "Whatever."
-        elif "no_" + action in character.DailyActions:
+        elif "no_" + action in Girl.daily_history:
             ch_r "I guess if it'll get you off. . ."
             ch_r "Fine!"
             ch_r "Hmm, I suppose. . ."
@@ -942,16 +942,16 @@ label action_accepted(character, action):
             ch_r "Ok, ok, I have been itching for this. . ."
             ch_r "Well, I guess it's not so bad. . ."
         else:
-            $ character.FaceChange("sexy", 1)
+            $ Girl.change_face("sexy", 1)
 
             if action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal"]:
-                $ character.Statup("Love", 90, 1)
-                $ character.Statup("Inbt", 50, 3)
+                $ Girl.change_stat("love", 90, 1)
+                $ Girl.change_stat("inhibition", 50, 3)
             elif action in ["hotdog"]:
-                $ character.Statup("Love", 80, 1)
-                $ character.Statup("Inbt", 50, 2)
+                $ Girl.change_stat("love", 80, 1)
+                $ Girl.change_stat("inhibition", 50, 2)
 
-            $ Line = renpy.random.choice(["Well, sure, put'im here.",
+            $ line = renpy.random.choice(["Well, sure, put'im here.",
                 "Well. . . ok.",
                 "Well, sure, give it a rub.",
                 "I suppose, drop trou.",
@@ -973,18 +973,18 @@ label action_accepted(character, action):
                 "I guess I could. . . whip it out.",
                 "Fine. . . [She gestures for you to come over].",
                 "Heh, ok, ok."])
-            ch_r "[Line]"
+            ch_r "[line]"
 
-            $ Line = 0
+            $ line = 0
 
-        $ character.Statup("Obed", 20, 1)
+        $ Girl.change_stat("obedience", 20, 1)
 
         if action in ["handjob", "footjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
-            $ character.Statup("Obed", 60, 1)
-            $ character.Statup("Inbt", 70, 2)
+            $ Girl.change_stat("obedience", 60, 1)
+            $ Girl.change_stat("inhibition", 70, 2)
         elif action in ["titjob", "blowjob"]:
-            $ character.Statup("Obed", 70, 1)
-            $ character.Statup("Inbt", 80, 2)
+            $ Girl.change_stat("obedience", 70, 1)
+            $ Girl.change_stat("inhibition", 80, 2)
 
         if action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]:
             call before_handjob
@@ -993,155 +993,155 @@ label action_accepted(character, action):
 
     return
 
-label action_rejected(character, action, action_counter):
-    if "no_" + action in character.DailyActions:
-        $ character.FaceChange("angry", 1)
+label action_rejected(Girl, action, action_counter):
+    if "no_" + action in Girl.daily_history:
+        $ Girl.change_face("angry", 1)
 
-        call learn_to_take_no_lines(character)
+        call learn_to_take_no_lines(Girl)
 
-        $ character.AddWord(1,"angry","angry")
-    elif character.Forced:
-        call went_too_far_lines(character)
+        $ Girl.AddWord(1,"angry","angry")
+    elif Girl.Forced:
+        call went_too_far_lines(Girl)
 
         if action in ["fondle_thighs"]:
-            $ character.Statup("Lust", 50, 2)
-            $ character.Statup("Obed", 50, -1)
+            $ Girl.change_stat("lust", 50, 2)
+            $ Girl.change_stat("obedience", 50, -1)
         elif action in ["hotdog"]:
-            $ character.Statup("Lust", 200, 5)
+            $ Girl.change_stat("lust", 200, 5)
 
-            if character.Love > 300:
-                $ character.Statup("Love", 70, -1)
+            if Girl.love > 300:
+                $ Girl.change_stat("love", 70, -1)
 
-            $ character.Statup("Obed", 50, -1)
+            $ Girl.change_stat("obedience", 50, -1)
         else:
             if action in ["fondle_pussy"]:
-                $ character.Statup("Lust", 70, 5)
+                $ Girl.change_stat("lust", 70, 5)
             elif action in ["eat_pussy"]:
-                $ character.Statup("Lust", 80, 5)
+                $ Girl.change_stat("lust", 80, 5)
             elif action in ["fondle_breasts", "suck_breasts", "fondle_ass"]:
-                $ character.Statup("Lust", 60, 5)
+                $ Girl.change_stat("lust", 60, 5)
             elif action in ["finger_ass", "eat_ass"]:
-                if ApprovalCheck(character, 500, "I"):
-                    $ character.Statup("Lust", 80, 10)
+                if ApprovalCheck(Girl, 500, "I"):
+                    $ Girl.change_stat("lust", 80, 10)
                 else:
-                    $ character.Statup("Lust", 50, 3)
+                    $ Girl.change_stat("lust", 50, 3)
             elif action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal"]:
-                $ character.Statup("Lust", 200, 5)
+                $ Girl.change_stat("lust", 200, 5)
 
-                if character.Love > 300:
-                    $ character.Statup("Love", 70, -2)
+                if Girl.love > 300:
+                    $ Girl.change_stat("love", 70, -2)
 
-            $ character.Statup("Obed", 50, -2)
+            $ Girl.change_stat("obedience", 50, -2)
 
-        $ character.AddWord(1, "angry", "angry")
+        $ Girl.AddWord(1, "angry", "angry")
     elif Taboo:
-        $ character.FaceChange("angry", 1)
-        $ character.AddWord(1, "tabno", "tabno")
+        $ Girl.change_face("angry", 1)
+        $ Girl.AddWord(1, "tabno", "tabno")
 
-        call not_in_public_lines(character)
+        call not_in_public_lines(Girl)
 
         if action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
-            $ character.Statup("Lust", 200, 5)
-            $ character.Statup("Obed", 50, -3)
-    elif action in ["dildo_ass", "anal"] and not character.Loose and action in character.DailyActions:
-        $ character.FaceChange("bemused")
+            $ Girl.change_stat("lust", 200, 5)
+            $ Girl.change_stat("obedience", 50, -3)
+    elif action in ["dildo_ass", "anal"] and not Girl.Loose and action in Girl.daily_history:
+        $ Girl.change_face("bemused")
 
-        ch_r "Sorry, I just need a little break back there, [character.Petname]."
+        ch_r "Sorry, I just need a little break back there, [Girl.Petname]."
     elif action_counter:
-        $ character.FaceChange("sad")
+        $ Girl.change_face("sad")
 
-        call you_had_your_shot_lines(character)
+        call you_had_your_shot_lines(Girl)
     else:
         if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "fondle_ass", "handjob", "blowjob", "sex"]:
-            $ character.FaceChange("sexy")
-            $ character.Mouth = "sad"
+            $ Girl.change_face("sexy")
+            $ Girl.Mouth = "sad"
         elif action in ["eat_pussy", "finger_ass", "eat_ass", "footjob", "titjob", "dildo_pussy", "dildo_ass", "anal", "hotdog"]:
-            $ character.FaceChange("surprised")
+            $ Girl.change_face("surprised")
 
-        call not_happening_lines(character)
+        call not_happening_lines(Girl)
 
-        $ character.FaceChange()
+        $ Girl.change_face()
 
-    $ character.RecentActions.append("no_" + action)
-    $ character.DailyActions.append("no_" + action)
+    $ Girl.recent_history.append("no_" + action)
+    $ Girl.daily_history.append("no_" + action)
 
     $ temp_modifier = 0
 
     return
 
-label forced_action(character, action):
+label forced_action(Girl, action):
     if action in ["fondle_thighs", "fondle_breasts"]:
-        $ Approval = ApprovalCheck(character, 350, "OI", TabM = 2)
+        $ Approval = ApprovalCheck(Girl, 350, "OI", TabM = 2)
     elif action in ["suck_breasts", "fondle_pussy"]:
-        $ Approval = ApprovalCheck(character, 450, "OI", TabM = 3)
+        $ Approval = ApprovalCheck(Girl, 450, "OI", TabM = 3)
     elif action in ["suck_breasts", "blowjob"]:
-        $ Approval = ApprovalCheck(character, 750, "OI", TabM = 3)
+        $ Approval = ApprovalCheck(Girl, 750, "OI", TabM = 3)
     elif action in ["eat_pussy"]:
-        $ Approval = ApprovalCheck(character, 750, "OI", TabM = 4)
+        $ Approval = ApprovalCheck(Girl, 750, "OI", TabM = 4)
     elif action in ["fondle_ass"]:
-        $ Approval = ApprovalCheck(character, 250, "OI", TabM = 3)
+        $ Approval = ApprovalCheck(Girl, 250, "OI", TabM = 3)
     elif action in ["finger_ass", "dildo_pussy"]:
-        $ Approval = ApprovalCheck(character, 950, "OI", TabM = 3)
+        $ Approval = ApprovalCheck(Girl, 950, "OI", TabM = 3)
     elif action in ["eat_ass"]:
-        $ Approval = ApprovalCheck(character, 1100, "OI", TabM = 4)
+        $ Approval = ApprovalCheck(Girl, 1100, "OI", TabM = 4)
     elif action in ["handjob"]:
-        $ Approval = ApprovalCheck(character, 350, "OI", TabM = 3) # 35, 50, 65, -120(155)
+        $ Approval = ApprovalCheck(Girl, 350, "OI", TabM = 3) # 35, 50, 65, -120(155)
     elif action in ["footjob", "hotdog"]:
-        $ Approval = ApprovalCheck(character, 400, "OI", TabM = 3) # 35, 50, 65, -120(155)
+        $ Approval = ApprovalCheck(Girl, 400, "OI", TabM = 3) # 35, 50, 65, -120(155)
     elif action in ["titjob"]:
-        $ Approval = ApprovalCheck(character, 700, "OI", TabM = 4) # 70, 85, 100, -160(230)
+        $ Approval = ApprovalCheck(Girl, 700, "OI", TabM = 4) # 70, 85, 100, -160(230)
     elif action in ["dildo_ass"]:
-        $ Approval = ApprovalCheck(character, 1050, "OI", TabM = 3) # 105, 120, 135, -120(225)
+        $ Approval = ApprovalCheck(Girl, 1050, "OI", TabM = 3) # 105, 120, 135, -120(225)
     elif action in ["sex"]:
-        $ Approval = ApprovalCheck(character, 1150, "OI", TabM = 3) # 115, 130, 145, -120(235)
+        $ Approval = ApprovalCheck(Girl, 1150, "OI", TabM = 3) # 115, 130, 145, -120(235)
     elif action in ["anal"]:
-        $ Approval = ApprovalCheck(character, 1250, "OI", TabM = 3) # 125, 140, 155, -120(245)
+        $ Approval = ApprovalCheck(Girl, 1250, "OI", TabM = 3) # 125, 140, 155, -120(245)
 
-    if Approval > 1 or (Approval and character.Forced):
-        $ character.FaceChange("sad")
+    if Approval > 1 or (Approval and Girl.Forced):
+        $ Girl.change_face("sad")
 
         if action in ["fondle_thighs", "fondle_breasts", "fondle_ass"]:
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -1, 1)
+            $ Girl.change_stat("love", 70, -3, 1)
+            $ Girl.change_stat("love", 20, -1, 1)
         elif action in ["suck_breasts", "fondle_pussy", "eat_pussy", "finger_ass", "eat_ass"]:
-            $ character.Statup("Love", 70, -5, 1)
-            $ character.Statup("Love", 20, -2, 1)
+            $ Girl.change_stat("love", 70, -5, 1)
+            $ Girl.change_stat("love", 20, -2, 1)
         elif action in ["handjob", "footjob", "titjob", "blowjob"]:
-            $ character.Statup("Love", 70, -5, 1)
-            $ character.Statup("Love", 200, -2)
+            $ Girl.change_stat("love", 70, -5, 1)
+            $ Girl.change_stat("love", 200, -2)
         elif action in ["dildo_pussy", "dildo_ass", "sex", "anal"]:
-            $ character.Statup("Love", 70, -5, 1)
-            $ character.Statup("Love", 200, -5)
+            $ Girl.change_stat("love", 70, -5, 1)
+            $ Girl.change_stat("love", 200, -5)
         elif action in ["hotdog"]:
-            $ character.Statup("Love", 70, -2, 1)
-            $ character.Statup("Love", 200, -5)
+            $ Girl.change_stat("love", 70, -2, 1)
+            $ Girl.change_stat("love", 200, -5)
 
-        call forced_but_not_unwelcome_lines(character)
+        call forced_but_not_unwelcome_lines(Girl)
 
         if action == "fondle_thighs":
-            $ character.Statup("Obed", 50, 3)
-            $ character.Statup("Inbt", 60, 2)
+            $ Girl.change_stat("obedience", 50, 3)
+            $ Girl.change_stat("inhibition", 60, 2)
         elif action in ["fondle_breasts", "suck_breasts"]:
-            $ character.Statup("Obed", 90, 2)
-            $ character.Statup("Obed", 50, 4)
-            $ character.Statup("Inbt", 60, 3)
+            $ Girl.change_stat("obedience", 90, 2)
+            $ Girl.change_stat("obedience", 50, 4)
+            $ Girl.change_stat("inhibition", 60, 3)
         elif action in ["fondle_pussy", "eat_pussy", "finger_ass", "eat_ass", "handjob", "footjob", "titjob", "blowjob"]:
-            $ character.Statup("Obed", 50, 4)
-            $ character.Statup("Inbt", 80, 1)
-            $ character.Statup("Inbt", 60, 3)
+            $ Girl.change_stat("obedience", 50, 4)
+            $ Girl.change_stat("inhibition", 80, 1)
+            $ Girl.change_stat("inhibition", 60, 3)
         elif action in ["fondle_ass"]:
-            $ character.Statup("Obed", 50, 3)
-            $ character.Statup("Inbt", 60, 3)
+            $ Girl.change_stat("obedience", 50, 3)
+            $ Girl.change_stat("inhibition", 60, 3)
         elif action in ["dildo_pussy", "dildo_ass", "sex", "anal"]:
-            $ character.Statup("Obed", 80, 4)
-            $ character.Statup("Inbt", 80, 1)
-            $ character.Statup("Inbt", 60, 3)
+            $ Girl.change_stat("obedience", 80, 4)
+            $ Girl.change_stat("inhibition", 80, 1)
+            $ Girl.change_stat("inhibition", 60, 3)
         elif action in ["hotdog"]:
-            $ character.Statup("Obed", 80, 4)
-            $ character.Statup("Inbt", 60, 2)
+            $ Girl.change_stat("obedience", 80, 4)
+            $ Girl.change_stat("inhibition", 60, 2)
 
         if Approval < 2:
-            $ character.Forced = 1
+            $ Girl.Forced = 1
 
         if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
             jump before_fondle
@@ -1151,15 +1151,15 @@ label forced_action(character, action):
             jump before_action
     else:
         if action in ["fondle_thighs"]:
-            $ character.Statup("Love", 200, -8)
+            $ Girl.change_stat("love", 200, -8)
         elif action in ["fondle_breasts", "suck_breasts", "fondle_ass", "hotdog"]:
-            $ character.Statup("Love", 200, -10)
+            $ Girl.change_stat("love", 200, -10)
         elif action in ["fondle_pussy", "eat_pussy", "finger_ass", "eat_ass", "handjob", "footjob", "titjob", "blowjob"]:
-            $ character.Statup("Love", 200, -15)
+            $ Girl.change_stat("love", 200, -15)
         elif action in ["dildo_pussy", "dildo_ass", "sex", "anal"]:
-            $ character.Statup("Love", 200, -20)
+            $ Girl.change_stat("love", 200, -20)
 
-        $ character.FaceChange("angry", 1)
+        $ Girl.change_face("angry", 1)
 
         if action in ["fondle_thighs", "fondle_breasts", "fondle_pussy", "fondle_ass", "finger_ass"]:
             "She slaps your hand away."
@@ -1168,141 +1168,141 @@ label forced_action(character, action):
         elif action in ["eat_pussy", "eat_ass"]:
             "She shoves your head back."
 
-        $ character.AddWord(1, "angry", "angry")
+        $ Girl.AddWord(1, "angry", "angry")
 
     return
 
 label before_action:
-    if Player.primary_action not in ["sex", "anal", "hotdog"]:
-        if Player.primary_action in ["fondle_thighs", "fondle_breasts", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-            if Trigger == "kiss_you":
-                $ Trigger = Player.primary_action
+    if primary_action not in ["sex", "anal", "hotdog"]:
+        if primary_action in ["fondle_thighs", "fondle_breasts", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
+            if primary_action == "kiss_you":
+                $ primary_action = primary_action
 
                 return
 
-        if Trigger2 == Player.primary_action:
+        if offhand_action == primary_action:
             return
 
-        if Player.primary_action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]:
+        if primary_action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]:
             if Taboo:
-                $ Player.focused_girl.Inbt += int(Taboo/10)
-                $ Player.focused_girl.Lust += int(Taboo/5)
+                $ focused_Girl.inhibition += int(Taboo/10)
+                $ focused_Girl.lust += int(Taboo/5)
 
-            $ Player.focused_girl.FaceChange("sexy")
+            $ focused_Girl.change_face("sexy")
 
-    # we have to fix the launch functions to accept Player.primary_action
-    if Player.primary_action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-        if Player.primary_action in ["fondle_thighs", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-            if Player.focused_girl != EmmaX:
-                call pussy_launch(Player.focused_girl, trigger = Player.primary_action)
+    # we have to fix the launch functions to accept primary_action
+    if primary_action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
+        if primary_action in ["fondle_thighs", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
+            if focused_Girl != EmmaX:
+                call pussy_launch(focused_Girl, trigger = primary_action)
             else:
-                if Player.focused_girl.Pose in ["doggy", "sex"]:
-                    call ViewShift(Player.focused_girl, Player.focused_girl.Pose, 0, Player.primary_action)
+                if focused_Girl.Pose in ["doggy", "sex"]:
+                    call ViewShift(focused_Girl, focused_Girl.Pose, 0, primary_action)
                 else:
-                    call ViewShift(Player.focused_girl, "pussy", 0, Player.primary_action)
-        elif Player.primary_action in ["fondle_breasts", "suck_breasts"]:
-            call breasts_launch(Player.focused_girl, trigger = Player.primary_action)
+                    call ViewShift(focused_Girl, "pussy", 0, primary_action)
+        elif primary_action in ["fondle_breasts", "suck_breasts"]:
+            call breasts_launch(focused_Girl, trigger = primary_action)
 
-        if not Player.focused_girl.Forced and Situation != "auto":
+        if not focused_Girl.Forced and action_context != "auto":
             $ temp_modifier = 0
 
-            if Player.primary_action in ["eat_pussy", "eat_ass"] and Player.focused_girl.PantsNum() >= 6:
+            if primary_action in ["eat_pussy", "eat_ass"] and focused_Girl.PantsNum() >= 6:
                 $ temp_modifier = 15
 
-            if Player.primary_action in ["fondle_thighs", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
+            if primary_action in ["fondle_thighs", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
                 call Bottoms_Off
-            elif Player.primary_action in ["fondle_breasts", "suck_breasts"]:
+            elif primary_action in ["fondle_breasts", "suck_breasts"]:
                 call Top_Off
-            elif Player.primary_action == "finger_pussy":
-                call Girl_Undress(Player.focused_girl, "bottom")
+            elif primary_action == "finger_pussy":
+                call Girl_Undress(focused_Girl, "bottom")
 
-            if "angry" in Player.focused_girl.RecentActions:
+            if "angry" in focused_Girl.recent_history:
                 return
 
         $ temp_modifier = 0
-    elif Player.primary_action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]:
-        if Player.primary_action in ["handjob", "footjob", "titjob", "blowjob"]:
-            if Player.focused_girl.Forced:
-                $ Player.focused_girl.FaceChange("sad")
-            elif not Player.focused_girl.Hand:
-                $ Player.focused_girl.Brows = "confused"
-                $ Player.focused_girl.Eyes = "sexy"
-                $ Player.focused_girl.Mouth = "smile"
-        elif Player.primary_action in ["dildo_pussy", "dildo_ass"]:
-            if not Player.focused_girl.Forced and Situation != "auto":
-                if Player.primary_action == "dildo_pussy":
-                    $ temp_modifier = 15 if Player.focused_girl.PantsNum() > 6 else 0
-                elif Player.primary_action == "dildo_ass":
-                    $ temp_modifier = 20 if Player.focused_girl.PantsNum() > 6 else 0
+    elif primary_action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]:
+        if primary_action in ["handjob", "footjob", "titjob", "blowjob"]:
+            if focused_Girl.Forced:
+                $ focused_Girl.change_face("sad")
+            elif not focused_Girl.Hand:
+                $ focused_Girl.Brows = "confused"
+                $ focused_Girl.Eyes = "sexy"
+                $ focused_Girl.Mouth = "smile"
+        elif primary_action in ["dildo_pussy", "dildo_ass"]:
+            if not focused_Girl.Forced and action_context != "auto":
+                if primary_action == "dildo_pussy":
+                    $ temp_modifier = 15 if focused_Girl.PantsNum() > 6 else 0
+                elif primary_action == "dildo_ass":
+                    $ temp_modifier = 20 if focused_Girl.PantsNum() > 6 else 0
 
-                call Bottoms_Off(Player.focused_girl)
+                call Bottoms_Off(focused_Girl)
 
-                if "angry" in Player.focused_girl.RecentActions:
+                if "angry" in focused_Girl.recent_history:
                     return
 
             $ temp_modifier = 0
 
-        call Seen_First_Peen(Player.focused_girl, Partner, React = Situation)
+        call Seen_First_Peen(focused_Girl, Partner, React = action_context)
 
-        if Player.primary_action == "handjob":
-            call handjob_launch(Player.focused_girl, "L")
-        elif Player.primary_action == "footjob":
-            call sex_launch(Player.focused_girl, "foot")
-        elif Player.primary_action == "titjob":
-            call titjob_launch(Player.focused_girl, "L")
-        elif Player.primary_action == "blowjob":
-            call blowjob_launch(Player.focused_girl, "L")
-        elif Player.primary_action in ["dildo_pussy", "dildo_ass"]:
+        if primary_action == "handjob":
+            call handjob_launch(focused_Girl, "L")
+        elif primary_action == "footjob":
+            call sex_launch(focused_Girl, "foot")
+        elif primary_action == "titjob":
+            call titjob_launch(focused_Girl, "L")
+        elif primary_action == "blowjob":
+            call blowjob_launch(focused_Girl, "L")
+        elif primary_action in ["dildo_pussy", "dildo_ass"]:
             call pussy_launch
     elif Player.priamry_action in ["sex", "anal", "hotdog"]:
-        call Seen_First_Peen(Player.focused_girl, Partner, React = Situation)
+        call Seen_First_Peen(focused_Girl, Partner, React = action_context)
 
-        $ Player.focused_girl.Pose = "doggy"
+        $ focused_Girl.Pose = "doggy"
 
-        call sex_launch(Player.focused_girl, "hotdog")
+        call sex_launch(focused_Girl, "hotdog")
 
-    if Player.primary_action not in ["sex", "anal", "hotdog"]:
-        if Situation == Player.focused_girl:
-            $ Situation = 0
+    if primary_action not in ["sex", "anal", "hotdog"]:
+        if action_context == focused_Girl:
+            $ action_context = 0
 
-            call character_initated_action(Player.focused_girl, Player.primary_action)
-
-            if _return:
-                return
-    elif Player.primary_action in ["sex", "anal", "hotdog"]:
-        if Situation == Player.focused_girl:
-            $ Situation = 0
-
-            call Player.focused_girl_initiated_action(Player.focused_girl, Player.primary_action)
+            call Girl_initated_action(focused_Girl, primary_action)
 
             if _return:
                 return
+    elif primary_action in ["sex", "anal", "hotdog"]:
+        if action_context == focused_Girl:
+            $ action_context = 0
 
-            $ Player.focused_girl.PantiesDown = 1
+            call focused_Girl_initiated_action(focused_Girl, primary_action)
 
-            call first_bottomless(Player.focused_girl, 1)
-        elif Situation != "auto":
-            call AutoStrip(Player.focused_girl)
+            if _return:
+                return
 
-            call start_of_sex_narration(Player.focused_girl, Player.primary_action)
+            $ focused_Girl.PantiesDown = 1
+
+            call first_bottomless(focused_Girl, 1)
+        elif action_context != "auto":
+            call AutoStrip(focused_Girl)
+
+            call start_of_sex_narration(focused_Girl, primary_action)
         else:
-            if Player.primary_action in ["sex", "anal"]:
-                if Player.primary_action == "sex":
+            if primary_action in ["sex", "anal"]:
+                if primary_action == "sex":
                     $ word = renpy.random.choice(["slit"])
-                elif Player.primary_action == "anal":
+                elif primary_action == "anal":
                     $ word = renpy.random.choice(["ass", "back door"])
 
-                if (Player.focused_girl.PantsNum() > 6 and not Player.focused_girl.Upskirt) and (Player.focused_girl.Panties and not Player.focused_girl.PantiesDown):
-                    "You quickly pull down her pants and her [Player.focused_girl.Panties] and press against her [word]."
-                elif (Player.focused_girl.Panties and not Player.focused_girl.PantiesDown):
-                    "You quickly pull down her [Player.focused_girl.Panties] and press against her [word]."
+                if (focused_Girl.PantsNum() > 6 and not focused_Girl.Upskirt) and (focused_Girl.Panties and not focused_Girl.PantiesDown):
+                    "You quickly pull down her pants and her [focused_Girl.Panties] and press against her [word]."
+                elif (focused_Girl.Panties and not focused_Girl.PantiesDown):
+                    "You quickly pull down her [focused_Girl.Panties] and press against her [word]."
 
-                $ Player.focused_girl.Upskirt = 1
-                $ Player.focused_girl.PantiesDown = 1
-                $ Player.focused_girl.SeenPanties = 1
+                $ focused_Girl.Upskirt = 1
+                $ focused_Girl.PantiesDown = 1
+                $ focused_Girl.SeenPanties = 1
 
-                call first_bottomless(Player.focused_girl, 1)
-            elif Player.primary_action == "hotdog":
+                call first_bottomless(focused_Girl, 1)
+            elif primary_action == "hotdog":
                 $ line = renpy.random.choice(["You press yourself against her ass.",
                     "You press yourself against her mound.",
                     "You roll back, pulling her on top of you and your rigid member.",
@@ -1311,299 +1311,299 @@ label before_action:
                 "[line]"
 
         if Player.Focus >= 50:
-            if Player.focused_girl == EmmaX:
-                ch_e "My word [Player.focused_girl.Petname], your member is hard enough to crack diamond. . . and I should know."
-            elif Player.focused_girl == LauraX:
+            if focused_Girl == EmmaX:
+                ch_e "My word [focused_Girl.Petname], your member is hard enough to crack diamond. . . and I should know."
+            elif focused_Girl == LauraX:
                 ch_l "Nice to see you're ready for business. . ."
-            elif Player.focused_girl == JeanX:
+            elif focused_Girl == JeanX:
                 ch_j "I see you won't need any encouragement. . ."
-            elif Player.focused_girl == StormX:
-                ch_s "I must say [Player.focused_girl.Petname], you certainly do seem to be. . . excited."
+            elif focused_Girl == StormX:
+                ch_s "I must say [focused_Girl.Petname], you certainly do seem to be. . . excited."
 
-    call first_action_stats(Player.focused_girl, Player.primary_action)
+    call first_action_stats(focused_Girl, primary_action)
 
     if Taboo:
-        if Player.primary_action == "fondle_thighs":
-            $ Player.focused_girl.Statup("Lust", 200, (int(Taboo/5)))
-            $ Player.focused_girl.Statup("Inbt", 200, (2*(int(Taboo/5))))
-        elif Player.primary_action in ["fondle_breasts", "suck_breasts", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass"]:
-            $ Player.focused_girl.Inbt += int(Taboo/10)
-            $ Player.focused_girl.Lust += int(Taboo/5)
-        elif Player.primary_action in ["fondle_pussy", "eat_pussy", "finger_ass", "eat_ass"]:
-            if Player.focused_girl == JeanX and Player.focused_girl.Taboo:
-                $ Player.focused_girl.Statup("Inbt", 200, (int(Taboo/10)))
+        if primary_action == "fondle_thighs":
+            $ focused_Girl.change_stat("lust", 200, (int(Taboo/5)))
+            $ focused_Girl.change_stat("inhibition", 200, (2*(int(Taboo/5))))
+        elif primary_action in ["fondle_breasts", "suck_breasts", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass"]:
+            $ focused_Girl.inhibition += int(Taboo/10)
+            $ focused_Girl.lust += int(Taboo/5)
+        elif primary_action in ["fondle_pussy", "eat_pussy", "finger_ass", "eat_ass"]:
+            if focused_Girl == JeanX and focused_Girl.Taboo:
+                $ focused_Girl.change_stat("inhibition", 200, (int(Taboo/10)))
             elif Taboo:
-                $ Player.focused_girl.Inbt += int(Taboo/10)
+                $ focused_Girl.inhibition += int(Taboo/10)
 
-            $ Player.focused_girl.Lust += int(Taboo/5)
+            $ focused_Girl.lust += int(Taboo/5)
 
-    if Situation:
+    if action_context:
         $ renpy.pop_call()
 
-        $ Situation = 0
+        $ action_context = 0
 
-    if Player.primary_action in ["eat_pussy", "eat_ass"]:
-        if Player.focused_girl.PantsNum() == 5:
-            $ Player.focused_girl.Upskirt = 1
-            $ Player.focused_girl.SeenPanties = 1
+    if primary_action in ["eat_pussy", "eat_ass"]:
+        if focused_Girl.wearing_skirt:
+            $ focused_Girl.Upskirt = 1
+            $ focused_Girl.SeenPanties = 1
 
-        if not Player.focused_girl.Panties:
-            call first_bottomless(Player.focused_girl, 1)
+        if not focused_Girl.Panties:
+            call first_bottomless(focused_Girl, 1)
 
-    $ Line = 0
-    $ Cnt = 0
+    $ line = 0
+    $ counter = 0
 
-    if Player.primary_action == "finger_pussy":
-        $ Speed = 2
-    elif Player.primary_action == "sex":
+    if primary_action == "finger_pussy":
+        $ action_speed = 2
+    elif primary_action == "sex":
         $ Player.Cock = "in"
 
-        $ Trigger = Player.primary_action
-        $ Speed = 1
-    elif Player.primary_action == "anal":
+        $ primary_action = primary_action
+        $ action_speed = 1
+    elif primary_action == "anal":
         $ Player.Cock = "anal"
 
-        $ Trigger = Player.primary_action
-        $ Speed = 1
+        $ primary_action = primary_action
+        $ action_speed = 1
 
     if Taboo:
-        $ Player.focused_girl.DrainWord("tabno")
+        $ focused_Girl.DrainWord("tabno")
 
-    # we have to fix DrainWord and AddWord to accept Player.primary_action
-    $ Player.focused_girl.DrainWord("no_" + Player.primary_action)
-    $ Player.focused_girl.AddWord(0, Player.primary_action, Player.primary_action)
+    # we have to fix DrainWord and AddWord to accept primary_action
+    $ focused_Girl.DrainWord("no_" + primary_action)
+    $ focused_Girl.AddWord(0, primary_action, primary_action)
 
-    # we have to fix the launch functions to accept Player.primary_action
-    if Player.primary_action in ["fondle_thighs", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-        if Player.focused_girl != EmmaX:
-            call pussy_launch(Player.focused_girl, trigger = Player.primary_action)
+    # we have to fix the launch functions to accept primary_action
+    if primary_action in ["fondle_thighs", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
+        if focused_Girl != EmmaX:
+            call pussy_launch(focused_Girl, trigger = primary_action)
         else:
-            if Player.focused_girl.Pose in ["doggy", "sex"]:
-                call ViewShift(Player.focused_girl, Player.focused_girl.Pose, 0, Player.primary_action)
+            if focused_Girl.Pose in ["doggy", "sex"]:
+                call ViewShift(focused_Girl, focused_Girl.Pose, 0, primary_action)
             else:
-                call ViewShift(Player.focused_girl, "pussy", 0, Player.primary_action)
-    elif Player.primary_action in ["fondle_breasts", "suck_breasts"]:
-        call breasts_launch(Player.focused_girl, trigger = Player.primary_action)
+                call ViewShift(focused_Girl, "pussy", 0, primary_action)
+    elif primary_action in ["fondle_breasts", "suck_breasts"]:
+        call breasts_launch(focused_Girl, trigger = primary_action)
 
 label action_cycle:
-    if Player.primary_action in ["suck_breasts", "eat_pussy", "eat_ass"]:
-        if Trigger2 == "kiss_you":
-            $ Trigger2 = 0
+    if primary_action in ["suck_breasts", "eat_pussy", "eat_ass"]:
+        if offhand_action == "kiss_you":
+            $ offhand_action = 0
 
     while Round > 0:
-        call Shift_Focus(Player.focused_girl)
+        call Shift_Focus(focused_Girl)
 
-        if Player.primary_action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]
-            # we have to fix ViewShift to accept Player.primary_action
-            call ViewShift(Player.focused_girl, Player.focused_girl.Pose, 0, Player.primary_action)
-        elif Player.primary_action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]:
-            call handjob_launch(Player.focused_girl)
-        elif Player.primary_action in ["sex", "anal", "hotdog"]:
-            call sex_launch(Player.focused_girl, Player.primary_action)
+        if primary_action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]
+            # we have to fix ViewShift to accept primary_action
+            call ViewShift(focused_Girl, focused_Girl.Pose, 0, primary_action)
+        elif primary_action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]:
+            call handjob_launch(focused_Girl)
+        elif primary_action in ["sex", "anal", "hotdog"]:
+            call sex_launch(focused_Girl, primary_action)
 
-        $ Player.focused_girl.LustFace()
+        $ focused_Girl.lustFace()
 
         if Player.Focus < 100:
-            if Player.primary_action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]
+            if primary_action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]
                 jump fondle_menu
 
                 label fondle_menu_return:
-            elif Player.primary_action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]:
+            elif primary_action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]:
                 jump handjob_menu
 
                 label handjob_menu_return:
-            elif Player.primary_action in ["sex", "anal", "hotdog"]:
+            elif primary_action in ["sex", "anal", "hotdog"]:
                 jump sex_menu
 
                 label sex_menu_return:
 
-        if Player.primary_action in ["eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"]:
-            if Player.focused_girl.Panties or Player.focused_girl.PantsNum() >= 6 or Player.focused_girl.HoseNum() >= 5: #This checks if Rogue wants to strip down.
-                call Girl_Undress(Player.focused_girl, "auto")
+        if primary_action in ["eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"]:
+            if focused_Girl.Panties or focused_Girl.PantsNum() >= 6 or focused_Girl.HoseNum() >= 5: #This checks if Rogue wants to strip down.
+                call Girl_Undress(focused_Girl, "auto")
 
-        call Shift_Focus(Player.focused_girl)
-        call Sex_Dialog(Player.focused_girl, Partner)
+        call Shift_Focus(focused_Girl)
+        call Sex_Dialog(focused_Girl, Partner)
 
-        $ Cnt += 1
+        $ counter += 1
         $ Round -= 1
 
-        if (Player.primary_action in ["blowjob"] and Speed) or Player.primary_action in ["sex", "anal"[]]:
+        if (primary_action in ["blowjob"] and action_speed) or primary_action in ["sex", "anal"[]]:
             $ Player.Wet = 1
-            $ Player.Spunk = 0 if (Player.Spunk and "in" not in Player.focused_girl.Spunk) else Player.Spunk #cleans you off after one cycle
+            $ Player.Spunk = 0 if (Player.Spunk and "in" not in focused_Girl.Spunk) else Player.Spunk #cleans you off after one cycle
 
-        if Player.primary_action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]
-            call end_of_fondle_round(Player.focused_girl, Player.primary_action)
-        elif Player.primary_action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]:
-            end_of_handjob_round(Player.focused_girl, Player.primary_action)
-        elif Player.primary_action in ["sex", "anal", "hotdog"]:
-            call end_of_sex_round(Player.focused_girl, Player.primary_action)
+        if primary_action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]
+            call end_of_fondle_round(focused_Girl, primary_action)
+        elif primary_action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]:
+            end_of_handjob_round(focused_Girl, primary_action)
+        elif primary_action in ["sex", "anal", "hotdog"]:
+            call end_of_sex_round(focused_Girl, primary_action)
 
         if _return:
             return
 
-        if Player.primary_action in ["fondle_breasts", "suck_breasts"]:
-            if Player.focused_girl.Lust >= 50 and not Player.focused_girl.Uptop and (Player.focused_girl.Chest or Player.focused_girl.Over):
-                $ Player.focused_girl.Uptop = 1
+        if primary_action in ["fondle_breasts", "suck_breasts"]:
+            if focused_Girl.lust >= 50 and not focused_Girl.Uptop and (focused_Girl.Chest or focused_Girl.Over):
+                $ focused_Girl.Uptop = 1
 
-                if Player.focused_girl == RogueX:
-                    "[Player.focused_girl.Name] shrugs and pulls her top open."
-                elif Player.focused_girl == KittyX:
-                    "[KittyX.Name] laughs and pulls her top open."
-                elif Player.focused_girl in [EmmaX, StormX]:
-                    "[EmmaX.Name] sighs and tugs her breasts free of her clothes."
-                elif Player.focused_girl in [LauraX, JeanX, JubesX]:
-                    "[Player.focused_girl.Name] grunts and pulls her clothes aside."
+                if focused_Girl == RogueX:
+                    "[focused_Girl.name] shrugs and pulls her top open."
+                elif focused_Girl == KittyX:
+                    "[KittyX.name] laughs and pulls her top open."
+                elif focused_Girl in [EmmaX, StormX]:
+                    "[EmmaX.name] sighs and tugs her breasts free of her clothes."
+                elif focused_Girl in [LauraX, JeanX, JubesX]:
+                    "[focused_Girl.name] grunts and pulls her clothes aside."
 
                 call first_topless
 
-    $ Player.focused_girl.FaceChange("bemused", 0)
+    $ focused_Girl.change_face("bemused", 0)
 
-    $ Line = 0
+    $ line = 0
 
-    call im_done_lines(Player.focused_girl)
+    call im_done_lines(focused_Girl)
 
 label after_action:
-    if Player.primary_action in ["fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"] and not Situation:
-        if Player.primary_action in ["sex", "anal", "hotdog"]:
+    if primary_action in ["fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"] and not action_context:
+        if primary_action in ["sex", "anal", "hotdog"]:
             $ Player.Sprite = 0
             $ Player.Cock = "out"
 
-        call reset_position(character)
+        call reset_position(Girl)
 
-    $ Player.focused_girl.FaceChange("sexy")
-    $ Player.focused_girl.Action -= 1
+    $ focused_Girl.change_face("sexy")
+    $ focused_Girl.Action -= 1
 
-    call action_specific_consequences(Player.focused_girl, Player.primary_action)
+    call action_specific_consequences(focused_Girl, primary_action)
 
-    if Player.primary_action not in ["dildo_pussy", "dildo_ass"]:
-        $ Player.focused_girl.Addictionrate += 1
+    if primary_action not in ["dildo_pussy", "dildo_ass"]:
+        $ focused_Girl.Addictionrate += 1
 
         if "addictive" in Player.Traits:
-            $ Player.focused_girl.Addictionrate += 1
+            $ focused_Girl.Addictionrate += 1
 
-    if Player.primary_action in ["handjob", "footjob"]:
-        $ Player.focused_girl.Statup("Lust", 90, 5)
+    if primary_action in ["handjob", "footjob"]:
+        $ focused_Girl.change_stat("lust", 90, 5)
 
     if achievement is not None and achievement in Achievements:
         pass
-    elif Player.primary_action not in ["dildo_pussy", "dildo_ass"] and counter >= 10:
-        if Player.primary_action not in ["anal"]:
-            $ Player.focused_girl.SEXP += 5
+    elif primary_action not in ["dildo_pussy", "dildo_ass"] and counter >= 10:
+        if primary_action not in ["anal"]:
+            $ focused_Girl.SEXP += 5
         else:
-            $ Player.focused_girl.SEXP += 7
+            $ focused_Girl.SEXP += 7
 
         if achievement is not None:
             $ Achievements.append(achievement)
 
-        if Player.primary_action not in ["anal"] and not Situation:
-            $ Player.focused_girl.FaceChange("smile", 1)
+        if primary_action not in ["anal"] and not action_context:
+            $ focused_Girl.change_face("smile", 1)
 
             ch_r "I guess you can call me \"Handi-Queen.\""
             ch_r "I guess I've gotten used to this foot thing."
             ch_r "I'm really starting to enjoy this."
 
-            if Player.focused_girl == RogueX:
+            if focused_Girl == RogueX:
                 ch_r "I think I'm getting addicted to this."
-            elif Player.focused_girl == KittyX:
+            elif focused_Girl == KittyX:
                 ch_k "I just can't seem to quit you."
-            elif Player.focused_girl == EmmaX:
+            elif focused_Girl == EmmaX:
                 ch_e "I seem to fit you like a glove. . ."
-            elif Player.focused_girl == LauraX:
+            elif focused_Girl == LauraX:
                 ch_l "We're making this a regular thing, huh. . ."
-            elif Player.focused_girl == JeanX:
+            elif focused_Girl == JeanX:
                 ch_j "Hey, I just noticed we've been doing this a lot. . ."
-            elif Player.focused_girl == StormX:
+            elif focused_Girl == StormX:
                 ch_s "We do go well together. . ."
-            elif Player.focused_girl == JubesX:
+            elif focused_Girl == JubesX:
                 ch_v "We're making this a regular thing, huh. . ."
 
             ch_r "I think I'm getting addicted to this."
-        elif Player.primary_action in ["anal"] and not Situation:
-            $ Player.focused_girl.FaceChange("bemused", 1)
+        elif primary_action in ["anal"] and not action_context:
+            $ focused_Girl.change_face("bemused", 1)
 
-            if Player.focused_girl == RogueX:
+            if focused_Girl == RogueX:
                 ch_r "I. . . really think I enjoy this. . ."
-            elif Player.focused_girl == KittyX:
+            elif focused_Girl == KittyX:
                 ch_k "I didn't think I'd love this so much!"
-            elif Player.focused_girl == EmmaX:
+            elif focused_Girl == EmmaX:
                 ch_e "You're one of the better partners I've had at that."
-            elif Player.focused_girl == LauraX:
+            elif focused_Girl == LauraX:
                 ch_l "I think you've got a knack for that."
-            elif Player.focused_girl == JeanX:
+            elif focused_Girl == JeanX:
                 ch_j "This has been fun exercise."
-            elif Player.focused_girl == StormX:
+            elif focused_Girl == StormX:
                 ch_s "I have certainly come to enjoy this."
-            elif Player.focused_girl == JubesX:
+            elif focused_Girl == JubesX:
                 ch_v "I think you've got a knack for that."
     elif counter == 1:
-        call first_action_reaction(Player.focused_girl, Player.primary_action)
-    elif Player.primary_action in ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"] and counter == 5:
+        call first_action_reaction(focused_Girl, primary_action)
+    elif primary_action in ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"] and counter == 5:
         ch_r "I think I've got this well in hand."
         ch_r "I kinda like this sensation.{p}}Never thought about touching people with my feet."
         ch_r "I think I've got the hang of this."
 
-        if Player.focused_girl == RogueX:
+        if focused_Girl == RogueX:
             ch_r "We're making a regular habit of this."
-        elif Player.focused_girl == KittyX:
+        elif focused_Girl == KittyX:
             ch_k "Why did we not do this sooner?!"
-        elif Player.focused_girl == EmmaX:
+        elif focused_Girl == EmmaX:
             ch_e "We really should have done this sooner."
             ch_e "I can't imagine why I waited so long."
-        elif Player.focused_girl == LauraX:
+        elif focused_Girl == LauraX:
             ch_l "You know, this was a good idea."
-        elif Player.focused_girl == JeanX:
+        elif focused_Girl == JeanX:
             ch_j "You're pretty good at this. . ."
-        elif Player.focused_girl == StormX:
+        elif focused_Girl == StormX:
             ch_s "You are quite skilled at this."
             ch_s "I am glad you \"bumped into\" me."
-        elif Player.focused_girl == JubesX:
+        elif focused_Girl == JubesX:
             ch_v "You know, this was a good idea."
 
-        if Player.focused_girl == RogueX:
+        if focused_Girl == RogueX:
             ch_r "We're making a regular habit of this."
-        elif Player.focused_girl == KittyX:
+        elif focused_Girl == KittyX:
             ch_k "I'm really starting to love this."
-        elif Player.focused_girl == EmmaX:
+        elif focused_Girl == EmmaX:
             ch_e "You're pretty good at that."
-        elif Player.focused_girl == LauraX:
+        elif focused_Girl == LauraX:
             ch_l "I'm glad you're into this."
-        elif Player.focused_girl == JeanX:
+        elif focused_Girl == JeanX:
             ch_j "I'm glad we have similar interests. . ."
-        elif Player.focused_girl == StormX:
+        elif focused_Girl == StormX:
             ch_s "You do certainly make the experience enjoyable."
-        elif Player.focused_girl == JubesX:
+        elif focused_Girl == JubesX:
             ch_v "I'm glad you're into this."
 
-        if Player.focused_girl == RogueX:
+        if focused_Girl == RogueX:
             ch_r "This is. . . interesting."
-        elif Player.focused_girl == KittyX:
+        elif focused_Girl == KittyX:
             ch_k "I'm surprised how much I enjoy this."
-    elif Player.primary_action in ["sex", "anal", "hotdog"] and Situation not in ["auto", "pullback"]:
-        if "unsatisfied" in Player.focused_girl.RecentActions:
-            $ Player.focused_girl.FaceChange("angry")
+    elif primary_action in ["sex", "anal", "hotdog"] and action_context not in ["auto", "pullback"]:
+        if "unsatisfied" in focused_Girl.recent_history:
+            $ focused_Girl.change_face("angry")
 
-            if Player.focused_girl != JeanX:
-                $ Player.focused_girl.Eyes = "side"
+            if focused_Girl != JeanX:
+                $ focused_Girl.Eyes = "side"
 
-            call didnt_get_off_lines(Player.focused_girl)
+            call didnt_get_off_lines(focused_Girl)
 
     $ temp_modifier = 0
 
     call Checkout
 
-    if Situation:
-        call Sex_Basic_Dialog(Player.focused_girl, "switch")
+    if action_context:
+        call Sex_Basic_Dialog(focused_Girl, "switch")
         ch_r "Mmm, so what else did you have in mind?"
     else:
         if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-            call reset_position(character)
-        elif Player.primary_action == "handjob":
-            call handjob_reset(Player.focused_girl)
-        elif Player.primary_action == "footjob":
-            call doggy_reset(Player.focused_girl)
-        elif Player.primary_action == "titjob":
-            call titjob_reset(Player.focused_girl)
-        elif Player.primary_action == "blowjob":
-            call blowjob_reset(Player.focused_girl)
+            call reset_position(Girl)
+        elif primary_action == "handjob":
+            call handjob_reset(focused_Girl)
+        elif primary_action == "footjob":
+            call doggy_reset(focused_Girl)
+        elif primary_action == "titjob":
+            call titjob_reset(focused_Girl)
+        elif primary_action == "blowjob":
+            call blowjob_reset(focused_Girl)
 
     return

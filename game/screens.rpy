@@ -16,7 +16,7 @@ screen say(who, what, side_image=None, two_window=False, CountWords = 0): #Count
     # Decide if we want to use the one-window or two-window variant.
 
     if who == "N":
-            $ who = Ch_Focus.Name
+            $ who = focused_Girl.name
 
     if not two_window:
         # The one window variant. Used for caption boxes
@@ -40,7 +40,7 @@ screen say(who, what, side_image=None, two_window=False, CountWords = 0): #Count
             text what id "what" color "#000000" font "CRIMFBRG.ttf"
             #text what id "what"
     else:
-        # The two window variant. Used for character dialog
+        # The two window variant. Used for Girl dialog
         # start gag code
         if who == "Rogue" and RogueX.Gag:
             $ CountWords = 1
@@ -86,49 +86,49 @@ screen say(who, what, side_image=None, two_window=False, CountWords = 0): #Count
 
                     text what id "what" color "#000000" font "CRIMFBRG.ttf" text_align 0.5
 
-            if who == RogueX.Name: #"Rogue":              #rkeljsv
+            if who == RogueX.name: #"Rogue":              #rkeljsv
                     if RogueX.Loc != bg_current or RogueX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif RogueX.sprite_location == StageRight or RogueX.sprite_location == StageFarRight:
                         add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
                     else: #RogueX.sprite_location == StageCenter, Left, etc.:
                         add "arrow" xalign 0.8
-            elif who == KittyX.Name:
+            elif who == KittyX.name:
                     if KittyX.Loc != bg_current or KittyX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif KittyX.sprite_location == StageRight or KittyX.sprite_location == StageFarRight:
                         add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
                     else: #KittyX.sprite_location == StageCenter, Left, etc.:
                         add "arrow" xalign 0.8
-            elif who == EmmaX.Name:
+            elif who == EmmaX.name:
                     if EmmaX.Loc != bg_current or EmmaX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif EmmaX.sprite_location == StageRight or EmmaX.sprite_location == StageFarRight:
                         add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
                     else: #EmmaX.sprite_location == StageCenter, Left, etc.:
                         add "arrow" xalign 0.8
-            elif who == LauraX.Name:
+            elif who == LauraX.name:
                     if LauraX.Loc != bg_current or LauraX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif LauraX.sprite_location == StageRight or LauraX.sprite_location == StageFarRight:
                         add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
                     else: #LauraX.sprite_location == StageCenter, Left, etc.:
                         add "arrow" xalign 0.8
-            elif who == JeanX.Name:
+            elif who == JeanX.name:
                     if JeanX.Loc != bg_current or JeanX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif JeanX.sprite_location == StageRight or JeanX.sprite_location == StageFarRight:
                         add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
                     else: #JeanX.sprite_location == StageCenter, Left, etc.:
                         add "arrow" xalign 0.8
-            elif who == StormX.Name:
+            elif who == StormX.name:
                     if StormX.Loc != bg_current or StormX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif StormX.sprite_location == StageRight or StormX.sprite_location == StageFarRight:
                         add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
                     else: #StormX.sprite_location == StageCenter, Left, etc.:
                         add "arrow" xalign 0.8
-            elif who == JubesX.Name:
+            elif who == JubesX.name:
                     if JubesX.Loc != bg_current or JubesX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif JubesX.sprite_location == StageRight or JubesX.sprite_location == StageFarRight:
@@ -137,7 +137,7 @@ screen say(who, what, side_image=None, two_window=False, CountWords = 0): #Count
                         add "arrow" xalign 0.8
             elif who == GwenName:
                         add "arrowG" xalign 0.15   # xalign 0.8
-            elif who == Player.Name or who == "Danger Room": #elif who == Playername or who == "Danger Room":
+            elif who == Player.name or who == "Danger Room": #elif who == Playername or who == "Danger Room":
                     pass
             elif who == "Professor X":
                     add "arrow" xalign 0.8
@@ -504,7 +504,7 @@ screen preferences():
                 style_group "pref"
                 has vbox
 
-                label _("Text Speed")
+                label _("Text action_speed")
                 bar value Preference("text speed")
 
             frame:
@@ -744,7 +744,7 @@ screen Status_Screen:
     default tt = Tooltip(" ")
 
     #Under bar
-    if Partner in TotalGirls:
+    if Partner in all_Girls:
         frame:
             background None
             pos (-100,30)
@@ -756,63 +756,63 @@ screen Status_Screen:
                 background None
                 has vbox
                 hbox:
-                    imagebutton idle "images/iconlust.png" hover "images/iconlust.png" action NullAction() hovered tt.Action("Lust: [Partner.Lust]")
-                    bar range 100 value Partner.Lust xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                    imagebutton idle "images/iconlust.png" hover "images/iconlust.png" action NullAction() hovered tt.Action("lust: [Partner.lust]")
+                    bar range 100 value Partner.lust xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
 
-                    imagebutton idle "images/iconlove.png" hover "images/iconlove.png" action NullAction() hovered tt.Action("Love: [Partner.Love]")
-                    bar range 100 value (Partner.Love/10) xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                    imagebutton idle "images/iconlove.png" hover "images/iconlove.png" action NullAction() hovered tt.Action("love: [Partner.love]")
+                    bar range 100 value (Partner.love/10) xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
 
-                    imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("Obedience: [Partner.Obed]") #action NullAction("none")?
-                    bar range 100 value (Partner.Obed/10) xmaximum 100 left_bar "images/barfullO.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                    imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("obedienceience: [Partner.obedience]") #action NullAction("none")?
+                    bar range 100 value (Partner.obedience/10) xmaximum 100 left_bar "images/barfullO.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
 
-                    imagebutton idle "images/iconinbt.png" hover "images/iconinbt.png" action NullAction() hovered tt.Action("Inhibitions: [Partner.Inbt]")
-                    bar range 100 value (Partner.Inbt/10) xmaximum 100 left_bar "images/barfulli.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                    imagebutton idle "images/iconinbt.png" hover "images/iconinbt.png" action NullAction() hovered tt.Action("Inhibitions: [Partner.inhibition]")
+                    bar range 100 value (Partner.inhibition/10) xmaximum 100 left_bar "images/barfulli.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
 
     #end Under bar
 
     #Primary bar
     #Kitty's stats
 
-    if Ch_Focus in TotalGirls:
-        add "images/BarBackdrop_"+Ch_Focus.Tag+".png"
+    if focused_Girl in all_Girls:
+        add "images/BarBackdrop_"+focused_Girl.Tag+".png"
         frame:
             style_group "stat_bar"
             xminimum 130
             background None
             has vbox
             hbox:
-                imagebutton idle "images/iconlove.png" hover "images/iconlove.png" action NullAction() hovered tt.Action("Love: [Ch_Focus.Love]")
-                bar range 100 value (Ch_Focus.Love/10) xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                imagebutton idle "images/iconlove.png" hover "images/iconlove.png" action NullAction() hovered tt.Action("love: [focused_Girl.love]")
+                bar range 100 value (focused_Girl.love/10) xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
             hbox:
-                imagebutton idle "images/iconlust.png" hover "images/iconlust.png" action NullAction() hovered tt.Action("Lust: [Ch_Focus.Lust]")
-                bar range 100 value Ch_Focus.Lust xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                imagebutton idle "images/iconlust.png" hover "images/iconlust.png" action NullAction() hovered tt.Action("lust: [focused_Girl.lust]")
+                bar range 100 value focused_Girl.lust xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
         frame:
             xminimum 130
             xpos 130
             background None
             has vbox
             hbox:
-                imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("Obedience: [Ch_Focus.Obed]")
-                bar range 100 value (Ch_Focus.Obed/10) xmaximum 100 left_bar "images/barfullO.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("obedienceience: [focused_Girl.obedience]")
+                bar range 100 value (focused_Girl.obedience/10) xmaximum 100 left_bar "images/barfullO.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
             hbox:
-                imagebutton idle "images/iconaddict.png" hover "images/iconaddict.png" action NullAction() hovered tt.Action("Addiction: [Ch_Focus.Addict]")
-                bar range 100 value Ch_Focus.Addict xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 6 thumb None thumb_offset 0
+                imagebutton idle "images/iconaddict.png" hover "images/iconaddict.png" action NullAction() hovered tt.Action("Addiction: [focused_Girl.Addict]")
+                bar range 100 value focused_Girl.Addict xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 6 thumb None thumb_offset 0
         frame:
             xminimum 130
             xpos 260
             background None
             has vbox
             hbox:
-                imagebutton idle "images/iconinbt.png" hover "images/iconinbt.png" action NullAction() hovered tt.Action("Inhibitions: [Ch_Focus.Inbt]")
-                bar range 100 value (Ch_Focus.Inbt/10) xmaximum 100 left_bar "images/barfulli.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+                imagebutton idle "images/iconinbt.png" hover "images/iconinbt.png" action NullAction() hovered tt.Action("Inhibitions: [focused_Girl.inhibition]")
+                bar range 100 value (focused_Girl.inhibition/10) xmaximum 100 left_bar "images/barfulli.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
             hbox:
-                imagebutton idle "images/iconaddictrate.png" hover "images/iconaddictrate.png" action NullAction() hovered tt.Action("Addiction Rate: [Ch_Focus.Addictionrate]")
-                bar range 100 value (Ch_Focus.Addictionrate*10) xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
-        showif not Trigger:
+                imagebutton idle "images/iconaddictrate.png" hover "images/iconaddictrate.png" action NullAction() hovered tt.Action("Addiction Rate: [focused_Girl.Addictionrate]")
+                bar range 100 value (focused_Girl.Addictionrate*10) xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
+        showif not primary_action:
     #            imagebutton auto "images/Button_Emma_%s.png" action ui.callsinnewcontext("Shift_Focus", "Emma") xpos 690 ypos 5 focus_mask True
-            imagebutton auto "images/Button_"+Ch_Focus.Tag+"_%s.png" action ShowTransient("Focus_Map") xpos 690 ypos 5 focus_mask True #xpos 690 ypos 5
+            imagebutton auto "images/Button_"+focused_Girl.Tag+"_%s.png" action ShowTransient("Focus_Map") xpos 690 ypos 5 focus_mask True #xpos 690 ypos 5
         showif config.developer:
-            imagebutton auto "images/Button_"+Ch_Focus.Tag+"_%s.png" action ui.callsinnewcontext("StatHacks",Ch_Focus) xpos 730 ypos 5 focus
+            imagebutton auto "images/Button_"+focused_Girl.Tag+"_%s.png" action ui.callsinnewcontext("StatHacks",focused_Girl) xpos 730 ypos 5 focus
 
 
 
@@ -839,13 +839,13 @@ screen Status_Screen:
         hbox:
             text "Level: [Player.Lvl]" size 12
         hbox:
-            text "[Ch_Focus.Tag] Level: [Ch_Focus.Lvl]" size 12
+            text "[focused_Girl.Tag] Level: [focused_Girl.Lvl]" size 12
         # this block is the name tag
         window:
             pos (90,-40)#(-15,-8)
             anchor (0,0)
             style "say_who_window"
-            text "[Ch_Focus.Name]" size 12 font "CRIMFBRG.ttf" color "#000000" #id "Ch_Focus"
+            text "[focused_Girl.name]" size 12 font "CRIMFBRG.ttf" color "#000000" #id "focused_Girl"
 
     frame:
         #Clock
@@ -882,26 +882,26 @@ screen Status_Screen:
         hbox:
             text "Time: [Current_Time]" size 12
     frame:
-        #displays small icons for nearby characters
+        #displays small icons for nearby Girls
         xpos 920
         ypos 30
         background None
         vbox:
             hbox: #rkeljsv
                 if RogueX in Nearby:
-                        imagebutton auto "images/Button_Rogue_%s.png" action NullAction() hovered tt.Action(RogueX.Name) at TinyButtons
+                        imagebutton auto "images/Button_Rogue_%s.png" action NullAction() hovered tt.Action(RogueX.name) at TinyButtons
                 if KittyX in Nearby:
-                        imagebutton auto "images/Button_Kitty_%s.png" action NullAction() hovered tt.Action(KittyX.Name) at TinyButtons
+                        imagebutton auto "images/Button_Kitty_%s.png" action NullAction() hovered tt.Action(KittyX.name) at TinyButtons
                 if EmmaX in Nearby:
-                        imagebutton auto "images/Button_Emma_%s.png" action NullAction() hovered tt.Action(EmmaX.Name) at TinyButtons
+                        imagebutton auto "images/Button_Emma_%s.png" action NullAction() hovered tt.Action(EmmaX.name) at TinyButtons
                 if LauraX in Nearby:
-                        imagebutton auto "images/Button_Laura_%s.png" action NullAction() hovered tt.Action(LauraX.Name) at TinyButtons
+                        imagebutton auto "images/Button_Laura_%s.png" action NullAction() hovered tt.Action(LauraX.name) at TinyButtons
                 if JeanX in Nearby:
-                        imagebutton auto "images/Button_Jean_%s.png" action NullAction() hovered tt.Action(JeanX.Name) at TinyButtons
+                        imagebutton auto "images/Button_Jean_%s.png" action NullAction() hovered tt.Action(JeanX.name) at TinyButtons
                 if StormX in Nearby:
-                        imagebutton auto "images/Button_Storm_%s.png" action NullAction() hovered tt.Action(StormX.Name) at TinyButtons
+                        imagebutton auto "images/Button_Storm_%s.png" action NullAction() hovered tt.Action(StormX.name) at TinyButtons
                 if JubesX in Nearby:
-                        imagebutton auto "images/Button_Jubes_%s.png" action NullAction() hovered tt.Action(JubesX.Name) at TinyButtons
+                        imagebutton auto "images/Button_Jubes_%s.png" action NullAction() hovered tt.Action(JubesX.name) at TinyButtons
 
 
     if tt.value != " ":
@@ -915,7 +915,7 @@ transform TinyButtons:
     zoom .5
 
 screen Focus_Map: #rkeljsv
-    #changes focal character with dropdown box
+    #changes focal Girl with dropdown box
     imagebutton auto "images/Button_X_%s.png" action Hide("Focus_Map") xpos 690 ypos 5 focus_mask True
     frame:
         xpos 684
@@ -960,20 +960,20 @@ screen Inventory_screen: #rkeljsv
 #        hbox:
         text "Inventory:" size 20
         showif "dildo" in Player.Inventory:
-                $ Inventory_Count = Player.Inventory.count("dildo")
-                text "Dildos: [Inventory_Count]" size 15
+                $ inventory_count = Player.Inventory.count("dildo")
+                text "Dildos: [inventory_count]" size 15
         showif "vibrator" in Player.Inventory:
-                $ Inventory_Count = Player.Inventory.count("vibrator")
-                text "Vibrators: [Inventory_Count]" size 15
+                $ inventory_count = Player.Inventory.count("vibrator")
+                text "Vibrators: [inventory_count]" size 15
         showif "Dazzler and Longshot" in Player.Inventory:
-                $ Inventory_Count = Player.Inventory.count("Dazzler and Longshot")
-                text "Dazzler and Longshot: [Inventory_Count]" size 15
+                $ inventory_count = Player.Inventory.count("Dazzler and Longshot")
+                text "Dazzler and Longshot: [inventory_count]" size 15
         showif "256 Shades of Grey" in Player.Inventory:
-                $ Inventory_Count = Player.Inventory.count("256 Shades of Grey")
-                text "256 Shades of Grey: [Inventory_Count]" size 15
+                $ inventory_count = Player.Inventory.count("256 Shades of Grey")
+                text "256 Shades of Grey: [inventory_count]" size 15
         showif "Avengers Tower Penthouse" in Player.Inventory:
-                $ Inventory_Count = Player.Inventory.count("Avengers Tower Penthouse")
-                text "Avengers Tower Penthouse: [Inventory_Count]" size 15
+                $ inventory_count = Player.Inventory.count("Avengers Tower Penthouse")
+                text "Avengers Tower Penthouse: [inventory_count]" size 15
         showif "Xavier's photo" in Player.Inventory:
                 text "Xavier's Photo" size 15
         showif "Xavier's files" in Player.Inventory:
@@ -1067,14 +1067,14 @@ screen Inventory_screen: #rkeljsv
         #rkeljsv
         #colognes
         showif "Mandrill Cologne" in Player.Inventory:
-                $ Inventory_Count = Player.Inventory.count("Mandrill Cologne")
-                textbutton "Mandrill Cologne: [Inventory_Count] doses" action ui.callsinnewcontext("MandrillScreen") text_size 15
+                $ inventory_count = Player.Inventory.count("Mandrill Cologne")
+                textbutton "Mandrill Cologne: [inventory_count] doses" action ui.callsinnewcontext("MandrillScreen") text_size 15
         showif "Purple Rain Cologne" in Player.Inventory:
-                $ Inventory_Count = Player.Inventory.count("Purple Rain Cologne")
-                textbutton "Purple Rain Cologne: [Inventory_Count] doses" action ui.callsinnewcontext("PurpleRainScreen") text_size 15
+                $ inventory_count = Player.Inventory.count("Purple Rain Cologne")
+                textbutton "Purple Rain Cologne: [inventory_count] doses" action ui.callsinnewcontext("PurpleRainScreen") text_size 15
         showif "Corruption Cologne" in Player.Inventory:
-                $ Inventory_Count = Player.Inventory.count("Corruption Cologne")
-                textbutton "Corruption Cologne: [Inventory_Count] doses" action ui.callsinnewcontext("CorruptionScreen") text_size 15
+                $ inventory_count = Player.Inventory.count("Corruption Cologne")
+                textbutton "Corruption Cologne: [inventory_count] doses" action ui.callsinnewcontext("CorruptionScreen") text_size 15
         showif "Xavier" in Keys:
                 text "Xavier's Key" size 15
         showif RogueX in Keys:
@@ -1109,9 +1109,9 @@ label MandrillScreen:
     if "purple" in Player.Traits or "corruption" in Player.Traits:
             "You'll confuse the scent you already have on."
             return
-#    $ Inventory_Count = Inventory_Check("Mandrill Cologne")
-    $ Inventory_Count = Player.Inventory.count("Mandrill Cologne")
-    "This cologne is guaranteed to make women love you more [[+Love]. You have [Inventory_Count] doses left."
+#    $ inventory_count = Inventory_Check("Mandrill Cologne")
+    $ inventory_count = Player.Inventory.count("Mandrill Cologne")
+    "This cologne is guaranteed to make women love you more [[+love]. You have [inventory_count] doses left."
     "Product warning, any love gained while under the effects may be lost when this wears off, if the limits are reached."
     menu:
         "Use it now?"
@@ -1130,9 +1130,9 @@ label PurpleRainScreen:
     if "mandrill" in Player.Traits or "corruption" in Player.Traits:
         "You'll confuse the scent you already have on."
         return
-#    $ Inventory_Count = Inventory_Check("Purple Rain Cologne")
-    $ Inventory_Count = Player.Inventory.count("Purple Rain Cologne")
-    "This cologne is guaranteed to make women more suggestible to your orders until tomorrow [[+Obedience]. You have [Inventory_Count] doses left."
+#    $ inventory_count = Inventory_Check("Purple Rain Cologne")
+    $ inventory_count = Player.Inventory.count("Purple Rain Cologne")
+    "This cologne is guaranteed to make women more suggestible to your orders until tomorrow [[+obedienceience]. You have [inventory_count] doses left."
     "Product warning, any obedience gained whie under the effects may be lost when this wears off, if the limits are reached."
     menu:
         "Use it now?"
@@ -1150,9 +1150,9 @@ label CorruptionScreen:
     if "purple" in Player.Traits or "mandrill" in Player.Traits:
         "You'll confuse the scent you already have on."
         return
-#    $ Inventory_Count = Inventory_Check("Corruption Cologne")
-    $ Inventory_Count = Player.Inventory.count("Corruption Cologne")
-    "This cologne is guaranteed to make women let loose their wild side [[-Inhibition]. You have [Inventory_Count] doses left."
+#    $ inventory_count = Inventory_Check("Corruption Cologne")
+    $ inventory_count = Player.Inventory.count("Corruption Cologne")
+    "This cologne is guaranteed to make women let loose their wild side [[-Inhibition]. You have [inventory_count] doses left."
     "Product warning, any Inhibition lost whie under the effects may be regained when this wears off, if the limits are reached."
     menu:
         "Use it now?"
@@ -1174,7 +1174,7 @@ screen Disclaimer_screen:
         has vbox
         text "This is a work of parody fiction. It is intended to be distributed through Oniartist's Patreon page, please do not redistribute through other sources."
         text " "
-        text "As is noted in the game, this story takes place several years after the last episode of the TV series it is based on, and all characters involved are over the age of 18.The game references events of the TV series, but is not beholden to the canon of the series, and characters will behave differently or have different backstories."
+        text "As is noted in the game, this story takes place several years after the last episode of the TV series it is based on, and all Girls involved are over the age of 18.The game references events of the TV series, but is not beholden to the canon of the series, and Girls will behave differently or have different backstories."
         text " "
         text "I would like to thank Akabur for his help getting started with all this (definitely check out his games too), and the various documentation on the Renpy site for pointing me in the right directions. I've had a lot of fun coding this game, and look forward to continually improving on it. If you'd like to support my efforts, please sign up under my name at Hentai United, or join on to my Patreon page. I have some huge ambitions for where this project will end up."
         text " "

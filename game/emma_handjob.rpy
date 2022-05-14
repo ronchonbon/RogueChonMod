@@ -1,306 +1,306 @@
-﻿## character.Handjob //////////////////////////////////////////////////////////////////////
+﻿## Girl.Handjob //////////////////////////////////////////////////////////////////////
 label Emma_Handjob:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(character)
-    if character.Hand >= 7: # She loves it
+    call Shift_Focus(Girl)
+    if Girl.Hand >= 7: # She loves it
         $ temp_modifier += 10
-    elif character.Hand >= 3: #You've done it before several times
+    elif Girl.Hand >= 3: #You've done it before several times
         $ temp_modifier += 7
-    elif character.Hand: #You've done it before
+    elif Girl.Hand: #You've done it before
         $ temp_modifier += 3
 
-    if character.Addict >= 75 and character.Swallow >=3: #She's really strung out and has swallowed
+    if Girl.Addict >= 75 and Girl.Swallow >=3: #She's really strung out and has swallowed
         $ temp_modifier += 15
-    if character.Addict >= 75:
+    if Girl.Addict >= 75:
         $ temp_modifier += 5
 
-    if Situation == "shift":
+    if action_context == "shift":
         $ temp_modifier += 15
-    if "exhibitionist" in character.Traits:
+    if "exhibitionist" in Girl.Traits:
         $ temp_modifier += (3*Taboo)
-    if character in Player.Harem or "sex friend" in character.Petnames:
+    if Girl in Player.Harem or "sex friend" in Girl.Petnames:
         $ temp_modifier += 10
-    elif "ex" in character.Traits:
+    elif "ex" in Girl.Traits:
         $ temp_modifier -= 40
-    if character.ForcedCount and not character.Forced:
-        $ temp_modifier -= 5 * character.ForcedCount
+    if Girl.ForcedCount and not Girl.Forced:
+        $ temp_modifier -= 5 * Girl.ForcedCount
 
-    if Taboo and "tabno" in character.DailyActions:
+    if Taboo and "tabno" in Girl.daily_history:
         $ temp_modifier -= 10
 
-    if "no hand" in character.DailyActions:
+    if "no hand" in Girl.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no hand" in character.RecentActions else 0
+        $ temp_modifier -= 10 if "no hand" in Girl.recent_history else 0
 
-    $ Approval = ApprovalCheck(character, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)
+    $ Approval = ApprovalCheck(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)
 
-    if not character.Hand and "no hand" not in character.RecentActions:
-        $ character.FaceChange("sly", 2)
+    if not Girl.Hand and "no hand" not in Girl.recent_history:
+        $ Girl.change_face("sly", 2)
         ch_e "You'd like me to take care of that for you?"
 
-    if not character.Hand and Approval:                                                 #First time dialog
-        if character.Forced:
-            $ character.FaceChange("sad",1)
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
-        elif character.Love >= (character.Obed + character.Inbt):
-            $ character.FaceChange("sexy",1)
-            $ character.Brows = "sad"
-            $ character.Mouth = "smile"
+    if not Girl.Hand and Approval:                                                 #First time dialog
+        if Girl.Forced:
+            $ Girl.change_face("sad",1)
+            $ Girl.change_stat("love", 70, -3, 1)
+            $ Girl.change_stat("love", 20, -2, 1)
+        elif Girl.love >= (Girl.obedience + Girl.inhibition):
+            $ Girl.change_face("sexy",1)
+            $ Girl.Brows = "sad"
+            $ Girl.Mouth = "smile"
             ch_e "I suppose you've earned something. . ."
-        elif character.Obed >= character.Inbt:
-            $ character.FaceChange("normal",1)
-            ch_e "If that's what you'd like, [character.Petname]. . ."
-        elif character.Addict >= 50:
-            $ character.FaceChange("manic", 1)
+        elif Girl.obedience >= Girl.inhibition:
+            $ Girl.change_face("normal",1)
+            ch_e "If that's what you'd like, [Girl.Petname]. . ."
+        elif Girl.Addict >= 50:
+            $ Girl.change_face("manic", 1)
             ch_e "Mmmmmmmm. . ."
         else: # Uninhibited
-            $ character.FaceChange("lipbite",1,Eyes="side")
+            $ Girl.change_face("lipbite",1,Eyes="side")
             ch_e "I suppose. . ."
 
     elif Approval:                                                                       #Second time+ dialog
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("love", 70, -3, 1)
+            $ Girl.change_stat("love", 20, -2, 1)
             ch_e "No more than that?"
-        elif not Taboo and "tabno" in character.DailyActions:
+        elif not Taboo and "tabno" in Girl.daily_history:
             ch_e "Here, hmm?. . ."
-        elif "hand" in character.RecentActions:
-            $ character.FaceChange("sexy", 1)
+        elif "hand" in Girl.recent_history:
+            $ Girl.change_face("sexy", 1)
             ch_e "I will need to grade papers later, you know. . ."
             jump Emma_HJ_Prep
-        elif "hand" in character.DailyActions:
-            $ character.FaceChange("sexy", 1)
-            $ Line = renpy.random.choice(["Another?",
+        elif "hand" in Girl.daily_history:
+            $ Girl.change_face("sexy", 1)
+            $ line = renpy.random.choice(["Another?",
                 "You're going to wear out my arm.",
                 "Didn't get enough earlier?",
                 "My hand's a bit sore from earlier.",
                 "My hand's rather sore from before."])
-            ch_e "[Line]"
-        elif character.Hand < 3:
-            $ character.FaceChange("sly", 1)
+            ch_e "[line]"
+        elif Girl.Hand < 3:
+            $ Girl.change_face("sly", 1)
             ch_e "Enjoyed last time?. . ."
         else:
-            $ character.FaceChange("sexy", 1)
-            $ character.ArmPose = 2
-            $ Line = renpy.random.choice(["You want more?",
+            $ Girl.change_face("sexy", 1)
+            $ Girl.ArmPose = 2
+            $ line = renpy.random.choice(["You want more?",
                 "So you'd like another?",
                 "More of this? [fist pumping hand gestures]",
                 "Oh, did you want some attention?"])
-            ch_e "[Line]"
-        $ Line = 0
+            ch_e "[line]"
+        $ line = 0
 
     if Approval >= 2:                                                                   #She's into it. . .
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Obed", 90, 1)
-            $ character.Statup("Inbt", 60, 1)
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("obedience", 90, 1)
+            $ Girl.change_stat("inhibition", 60, 1)
             ch_e "Very well."
-        elif "no hand" in character.DailyActions:
+        elif "no hand" in Girl.daily_history:
             ch_e "Oh, fine!"
         else:
-            $ character.FaceChange("sexy", 1)
-            $ character.Statup("Love", 90, 1)
-            $ character.Statup("Inbt", 50, 3)
-            $ Line = renpy.random.choice(["Oh, I suppose.",
+            $ Girl.change_face("sexy", 1)
+            $ Girl.change_stat("love", 90, 1)
+            $ Girl.change_stat("inhibition", 50, 3)
+            $ line = renpy.random.choice(["Oh, I suppose.",
                 "I'll do it.",
                 "Well, give it here.",
                 "I suppose I could. . .",
                 "Fine. . . [She gestures for you to come over].",
                 "Ok, ok."])
-            ch_e "[Line]"
-            $ Line = 0
-        $ character.Statup("Obed", 20, 1)
-        $ character.Statup("Obed", 60, 1)
-        $ character.Statup("Inbt", 70, 2)
+            ch_e "[line]"
+            $ line = 0
+        $ Girl.change_stat("obedience", 20, 1)
+        $ Girl.change_stat("obedience", 60, 1)
+        $ Girl.change_stat("inhibition", 70, 2)
         jump Emma_HJ_Prep
 
     else:                                                                               #She's not into it, but maybe. . .
-        $ character.FaceChange("angry")
-        if "no hand" in character.RecentActions:
-            ch_e "You need to learn to take\"no\" for an answer, [character.Petname]."
-        elif "no hand" in character.DailyActions:
-            ch_e "I told you \"no,\" [character.Petname]."
-        elif Taboo and "tabno" in character.DailyActions:
+        $ Girl.change_face("angry")
+        if "no hand" in Girl.recent_history:
+            ch_e "You need to learn to take\"no\" for an answer, [Girl.Petname]."
+        elif "no hand" in Girl.daily_history:
+            ch_e "I told you \"no,\" [Girl.Petname]."
+        elif Taboo and "tabno" in Girl.daily_history:
             ch_e "I told you, this is too public!"
-        elif not character.Hand:
-            $ character.FaceChange("bemused")
-            ch_e "Are you sure though, [character.Petname]?. . ."
+        elif not Girl.Hand:
+            $ Girl.change_face("bemused")
+            ch_e "Are you sure though, [Girl.Petname]?. . ."
         else:
-            $ character.FaceChange("bemused")
+            $ Girl.change_face("bemused")
             ch_e "I'd rather not right now though."
         menu:
             extend ""
-            "Sorry, never mind." if "no hand" in character.DailyActions:
-                $ character.FaceChange("bemused")
+            "Sorry, never mind." if "no hand" in Girl.daily_history:
+                $ Girl.change_face("bemused")
                 ch_e "Quite alright."
                 return
-            "Maybe later?" if "no hand" not in character.DailyActions:
-                $ character.FaceChange("sexy")
+            "Maybe later?" if "no hand" not in Girl.daily_history:
+                $ Girl.change_face("sexy")
                 ch_e ". . ."
                 ch_e "I couldn't rule it out. . ."
-                $ character.Statup("Love", 80, 2)
-                $ character.Statup("Inbt", 70, 2)
+                $ Girl.change_stat("love", 80, 2)
+                $ Girl.change_stat("inhibition", 70, 2)
                 if Taboo:
-                    $ character.RecentActions.append("tabno")
-                    $ character.DailyActions.append("tabno")
-                $ character.RecentActions.append("no hand")
-                $ character.DailyActions.append("no hand")
+                    $ Girl.recent_history.append("tabno")
+                    $ Girl.daily_history.append("tabno")
+                $ Girl.recent_history.append("no hand")
+                $ Girl.daily_history.append("no hand")
                 return
             "I'd really appreciate it. . .":
                 if Approval:
-                    $ character.FaceChange("sexy")
-                    $ character.Statup("Obed", 90, 2)
-                    $ character.Statup("Obed", 50, 2)
-                    $ character.Statup("Inbt", 70, 3)
-                    $ character.Statup("Inbt", 40, 2)
-                    $ Line = renpy.random.choice(["Oh, I suppose.",
+                    $ Girl.change_face("sexy")
+                    $ Girl.change_stat("obedience", 90, 2)
+                    $ Girl.change_stat("obedience", 50, 2)
+                    $ Girl.change_stat("inhibition", 70, 3)
+                    $ Girl.change_stat("inhibition", 40, 2)
+                    $ line = renpy.random.choice(["Oh, I suppose.",
                         "I'll do it.",
                         "Well, give it here.",
                         "I suppose I could. . .",
                         "Fine. . . [She gestures for you to come over].",
                         "Ok, ok."])
-                    ch_e "[Line]"
-                    $ Line = 0
+                    ch_e "[line]"
+                    $ line = 0
                     jump Emma_HJ_Prep
 
             "Come on, get to work.":                                               # Pressured into it
-                call forced_action(character, "handjob")
+                call forced_action(Girl, "handjob")
 
     #She refused all offers.
-    $ character.ArmPose = 1
-    if "no hand" in character.DailyActions:
-        $ character.FaceChange("angry", 1)
-        $ character.RecentActions.append("angry")
-        $ character.DailyActions.append("angry")
-    elif character.Forced:
-        $ character.FaceChange("angry", 1)
+    $ Girl.ArmPose = 1
+    if "no hand" in Girl.daily_history:
+        $ Girl.change_face("angry", 1)
+        $ Girl.recent_history.append("angry")
+        $ Girl.daily_history.append("angry")
+    elif Girl.Forced:
+        $ Girl.change_face("angry", 1)
         ch_e "Even that is asking too much."
-        $ character.Statup("Lust", 200, 5)
-        if character.Love > 300:
-                $ character.Statup("Love", 70, -2)
-        $ character.Statup("Obed", 50, -2)
-        $ character.RecentActions.append("angry")
-        $ character.DailyActions.append("angry")
+        $ Girl.change_stat("lust", 200, 5)
+        if Girl.love > 300:
+                $ Girl.change_stat("love", 70, -2)
+        $ Girl.change_stat("obedience", 50, -2)
+        $ Girl.recent_history.append("angry")
+        $ Girl.daily_history.append("angry")
     elif Taboo:                             # she refuses and this is too public a place for her
-        $ character.FaceChange("angry", 1)
-        $ character.DailyActions.append("tabno")
+        $ Girl.change_face("angry", 1)
+        $ Girl.daily_history.append("tabno")
         ch_e "I couldn't possibly do that. . . here!"
-        $ character.Statup("Lust", 200, 5)
-        $ character.Statup("Obed", 50, -3)
-    elif character.Hand:
-        $ character.FaceChange("sad")
+        $ Girl.change_stat("lust", 200, 5)
+        $ Girl.change_stat("obedience", 50, -3)
+    elif Girl.Hand:
+        $ Girl.change_face("sad")
         ch_e "I'd really rather not. . ."
     else:
-        $ character.FaceChange("normal", 1)
-        ch_e "No, I don't think so, [character.Petname]."
-    $ character.RecentActions.append("no hand")
-    $ character.DailyActions.append("no hand")
+        $ Girl.change_face("normal", 1)
+        ch_e "No, I don't think so, [Girl.Petname]."
+    $ Girl.recent_history.append("no hand")
+    $ Girl.daily_history.append("no hand")
     $ temp_modifier = 0
     return
 
 
 label Emma_HJ_Prep:
-    if Trigger2 == "hand":
+    if offhand_action == "hand":
         return
 
     if Taboo:
-        $ character.Inbt += int(Taboo/10)
-        $ character.Lust += int(Taboo/5)
+        $ Girl.inhibition += int(Taboo/10)
+        $ Girl.lust += int(Taboo/5)
 
-    $ character.FaceChange("sexy")
-    if character.Forced:
-        $ character.FaceChange("sad")
-    elif not character.Hand:
-        $ character.Brows = "confused"
-        $ character.Eyes = "sexy"
-        $ character.Mouth = "smile"
+    $ Girl.change_face("sexy")
+    if Girl.Forced:
+        $ Girl.change_face("sad")
+    elif not Girl.Hand:
+        $ Girl.Brows = "confused"
+        $ Girl.Eyes = "sexy"
+        $ Girl.Mouth = "smile"
 
-    call Seen_First_Peen(character,Partner,React=Situation)
+    call Seen_First_Peen(Girl,Partner,React=action_context)
     call Emma_HJ_Launch("L")
 
-    if Situation == character:
+    if action_context == Girl:
             #Emma auto-starts
-            $ Situation = 0
-            if Trigger2 == "jackin":
-                "[character.Name] brushes your hand aside and starts stroking your cock."
+            $ action_context = 0
+            if offhand_action == "jackin":
+                "[Girl.name] brushes your hand aside and starts stroking your cock."
             else:
-                "[character.Name] draws her fingers across your cock, and begins to stroke it."
+                "[Girl.name] draws her fingers across your cock, and begins to stroke it."
             menu:
                 "What do you do?"
                 "Nothing.":
-                    $ character.Statup("Inbt", 70, 3)
-                    $ character.Statup("Inbt", 30, 2)
-                    "[character.Name] continues her actions."
+                    $ Girl.change_stat("inhibition", 70, 3)
+                    $ Girl.change_stat("inhibition", 30, 2)
+                    "[Girl.name] continues her actions."
                 "Praise her.":
-                    $ character.FaceChange("sexy", 1)
-                    $ character.Statup("Inbt", 70, 3)
-                    ch_p "Oooh, that's good, [character.Pet]."
-                    $ character.NameCheck() #checks reaction to petname
-                    "[character.Name] continues her actions."
-                    $ character.Statup("Love", 80, 1)
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 2)
+                    $ Girl.change_face("sexy", 1)
+                    $ Girl.change_stat("inhibition", 70, 3)
+                    ch_p "Oooh, that's good, [Girl.Pet]."
+                    $ Girl.nameCheck() #checks reaction to petname
+                    "[Girl.name] continues her actions."
+                    $ Girl.change_stat("love", 80, 1)
+                    $ Girl.change_stat("obedience", 90, 1)
+                    $ Girl.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ character.FaceChange("surprised")
-                    $ character.Statup("Inbt", 70, 1)
-                    ch_p "Let's not do that for now, [character.Pet]."
-                    $ character.NameCheck() #checks reaction to petname
-                    "[character.Name] puts it down."
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 1)
-                    $ character.Statup("Obed", 30, 2)
-                    $ Player.RecentActions.append("nope")
-                    $ character.AddWord(1,"refused","refused")
+                    $ Girl.change_face("surprised")
+                    $ Girl.change_stat("inhibition", 70, 1)
+                    ch_p "Let's not do that for now, [Girl.Pet]."
+                    $ Girl.nameCheck() #checks reaction to petname
+                    "[Girl.name] puts it down."
+                    $ Girl.change_stat("obedience", 90, 1)
+                    $ Girl.change_stat("obedience", 50, 1)
+                    $ Girl.change_stat("obedience", 30, 2)
+                    $ Player.recent_history.append("nope")
+                    $ Girl.AddWord(1,"refused","refused")
                     return
 
-    if not character.Hand:
-        if character.Forced:
-            $ character.Statup("Love", 90, -20)
-            $ character.Statup("Obed", 70, 25)
-            $ character.Statup("Inbt", 80, 30)
+    if not Girl.Hand:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -20)
+            $ Girl.change_stat("obedience", 70, 25)
+            $ Girl.change_stat("inhibition", 80, 30)
         else:
-            $ character.Statup("Love", 90, 5)
-            $ character.Statup("Obed", 70, 20)
-            $ character.Statup("Inbt", 80, 20)
+            $ Girl.change_stat("love", 90, 5)
+            $ Girl.change_stat("obedience", 70, 20)
+            $ Girl.change_stat("inhibition", 80, 20)
 
-    if Situation:
+    if action_context:
         $ renpy.pop_call()
-        $ Situation = 0
-    $ Line = 0
-    $ Cnt = 0
+        $ action_context = 0
+    $ line = 0
+    $ counter = 0
     if Taboo:
-        $ character.DrainWord("tabno")
-    $ character.DrainWord("no hand")
-    $ character.RecentActions.append("hand")
-    $ character.DailyActions.append("hand")
+        $ Girl.DrainWord("tabno")
+    $ Girl.DrainWord("no hand")
+    $ Girl.recent_history.append("hand")
+    $ Girl.daily_history.append("hand")
 
 label Emma_HJ_Cycle:
     while Round > 0:
-        call Shift_Focus(character)
+        call Shift_Focus(Girl)
         call Emma_HJ_Launch
-        $ character.LustFace()
+        $ Girl.lustFace()
 
         if  Player.Focus < 100:
                     #Player Command menu
                     menu:
-                        "Keep going. . ." if Speed:
+                        "Keep going. . ." if action_speed:
                                     pass
 
-                        "Start moving? . ." if not Speed:
-                                    $ Speed = 1
+                        "Start moving? . ." if not action_speed:
+                                    $ action_speed = 1
 
-                        "Speed up. . ." if Speed < 2:
-                                    $ Speed = 2
+                        "action_speed up. . ." if action_speed < 2:
+                                    $ action_speed = 2
                                     "You ask her to up the pace a bit."
-                        "Speed up. . . (locked)" if Speed >= 2:
+                        "action_speed up. . . (locked)" if action_speed >= 2:
                                     pass
 
-                        "Slow Down. . ." if Speed:
-                                    $ Speed -= 1
+                        "Slow Down. . ." if action_speed:
+                                    $ action_speed -= 1
                                     "You ask her to slow it down a bit."
-                        "Slow Down. . . (locked)" if not Speed:
+                        "Slow Down. . . (locked)" if not action_speed:
                                     pass
                         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
                                     pass
@@ -313,186 +313,186 @@ label Emma_HJ_Cycle:
 
                         "Other options":
                                 menu:
-                                    "I also want to fondle her breasts." if Trigger2 != "fondle breasts":
-                                            if character.Action and MultiAction:
-                                                $ Trigger2 = "fondle breasts"
+                                    "I also want to fondle her breasts." if offhand_action != "fondle breasts":
+                                            if Girl.Action and MultiAction:
+                                                $ offhand_action = "fondle breasts"
                                                 "You start to fondle her breasts."
-                                                $ character.Action -= 1
+                                                $ Girl.Action -= 1
                                             else:
-                                                call Sex_Basic_Dialog(character,"tired")
+                                                call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Shift primary action":
-                                            if character.Action and MultiAction:
+                                            if Girl.Action and MultiAction:
                                                     menu:
                                                         "How about a blowjob?":
-                                                                    if character.Action and MultiAction:
-                                                                        $ Situation = "shift"
+                                                                    if Girl.Action and MultiAction:
+                                                                        $ action_context = "shift"
                                                                         call Emma_HJ_After
                                                                         call Emma_Blowjob
                                                                     else:
-                                                                        call Sex_Basic_Dialog(character,"tired")
+                                                                        call Sex_Basic_Dialog(Girl,"tired")
 
                                                         "How about a titjob?":
-                                                                    if character.Action and MultiAction:
-                                                                        $ Situation = "shift"
+                                                                    if Girl.Action and MultiAction:
+                                                                        $ action_context = "shift"
                                                                         call Emma_HJ_After
                                                                         call Emma_Titjob
                                                                     else:
-                                                                        call Sex_Basic_Dialog(character,"tired")
+                                                                        call Sex_Basic_Dialog(Girl,"tired")
                                                         "Never Mind":
                                                                 jump Emma_HJ_Cycle
                                             else:
-                                                call Sex_Basic_Dialog(character,"tired")
+                                                call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Threesome actions (locked)" if not Partner:
                                         pass
                                     "Threesome actions" if Partner:
                                         menu:
-                                            "Asks [character.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(character)
-                                            "Asks [character.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
+                                            "Asks [Girl.name] to do something else with [Partner.name]" if primary_action == "lesbian":
+                                                        call Les_Change(Girl)
+                                            "Asks [Girl.name] to do something else with [Partner.name] (locked)" if primary_action != "lesbian":
                                                         pass
-                                            "Ask [Partner.Name] to do something else":
-                                                call Three_Change(character)
+                                            "Ask [Partner.name] to do something else":
+                                                call Three_Change(Girl)
 
-                                            "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
-                                                        $ ThreeCount = 0
-                                            "Don't stop what you're doing. . ." if ThreeCount and Trigger4:
-                                                        $ ThreeCount = 0
+                                            "Don't stop what you're doing. . .(locked)" if not position_change_timer or not Partner_primary_action:
+                                                        $ position_change_timer = 0
+                                            "Don't stop what you're doing. . ." if position_change_timer and Partner_primary_action:
+                                                        $ position_change_timer = 0
 
-                                            "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(character)
-                                            "Undress [Partner.Name]":
+                                            "Swap to [Partner.name]":
+                                                        call primary_action_Swap(Girl)
+                                            "Undress [Partner.name]":
                                                         call Girl_Undress(Partner)
                                                         jump Emma_HJ_Cycle
-                                            "Clean up [Partner.Name] (locked)" if not Partner.Spunk:
+                                            "Clean up [Partner.name] (locked)" if not Partner.Spunk:
                                                         pass
-                                            "Clean up [Partner.Name]" if Partner.Spunk:
+                                            "Clean up [Partner.name]" if Partner.Spunk:
                                                         call Girl_Cleanup(Partner,"ask")
                                                         jump Emma_HJ_Cycle
                                             "Never mind":
                                                         jump Emma_HJ_Cycle
-                                    "Undress [character.Name]":
-                                            call Girl_Undress(character)
-                                    "Clean up [character.Name] (locked)" if not character.Spunk:
+                                    "Undress [Girl.name]":
+                                            call Girl_Undress(Girl)
+                                    "Clean up [Girl.name] (locked)" if not Girl.Spunk:
                                             pass
-                                    "Clean up [character.Name]" if character.Spunk:
-                                            call Girl_Cleanup(character,"ask")
+                                    "Clean up [Girl.name]" if Girl.Spunk:
+                                            call Girl_Cleanup(Girl,"ask")
                                     "Never mind":
                                             jump Emma_HJ_Cycle
 
                         "Back to Sex Menu" if MultiAction:
                                     ch_p "Let's try something else."
                                     call Emma_HJ_Reset
-                                    $ Situation = "shift"
-                                    $ Line = 0
+                                    $ action_context = "shift"
+                                    $ line = 0
                                     jump Emma_HJ_After
                         "End Scene" if not MultiAction:
                                     ch_p "Let's stop for now."
                                     call Emma_HJ_Reset
-                                    $ Line = 0
+                                    $ line = 0
                                     jump Emma_HJ_After
-        #End menu (if Line)
+        #End menu (if line)
 
-        call Shift_Focus(character)
-        call Sex_Dialog(character,Partner)
+        call Shift_Focus(Girl)
+        call Sex_Dialog(Girl,Partner)
 
         #If either of you could cum
 
-        $ Cnt += 1
+        $ counter += 1
         $ Round -= 1
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-        if Player.Focus >= 100 or character.Lust >= 100:
+        if Player.Focus >= 100 or Girl.lust >= 100:
                     #If either of you could cum
                     if Player.Focus >= 100:
                             #If you can cum:
-                            call Player_Cumming(character)
-                            if "angry" in character.RecentActions:
+                            call Player_Cumming(Girl)
+                            if "angry" in Girl.recent_history:
                                 call Emma_HJ_Reset
                                 return
-                            $ character.Statup("Lust", 200, 5)
-                            if 100 > character.Lust >= 70 and character.OCount < 2 and character.SEXP >= 20:
-                                $ character.RecentActions.append("unsatisfied")
-                                $ character.DailyActions.append("unsatisfied")
+                            $ Girl.change_stat("lust", 200, 5)
+                            if 100 > Girl.lust >= 70 and Girl.OCount < 2 and Girl.SEXP >= 20:
+                                $ Girl.recent_history.append("unsatisfied")
+                                $ Girl.daily_history.append("unsatisfied")
 
                             if Player.Focus > 80:
                                 jump Emma_HJ_After
-                            $ Line = "came"
+                            $ line = "came"
 
-                    if character.Lust >= 100:
-                            #If [character.Name] can cum
-                            call Girl_Cumming(character)
-                            if Situation == "shift" or "angry" in character.RecentActions:
+                    if Girl.lust >= 100:
+                            #If [Girl.name] can cum
+                            call Girl_Cumming(Girl)
+                            if action_context == "shift" or "angry" in Girl.recent_history:
                                 jump Emma_HJ_After
 
-                    if Line == "came": #ex Player.Focus <= 20:
+                    if line == "came": #ex Player.Focus <= 20:
                             #If you've just cum,
-                            $ Line = 0
+                            $ line = 0
                             if not Player.Semen:
                                 "You're emptied out, you should probably take a break."
 
 
-                            if "unsatisfied" in character.RecentActions:#And [character.Name] is unsatisfied,
-                                    "[character.Name] still seems a bit unsatisfied with the experience."
+                            if "unsatisfied" in Girl.recent_history:#And [Girl.name] is unsatisfied,
+                                    "[Girl.name] still seems a bit unsatisfied with the experience."
                                     menu:
                                         "Finish her?"
                                         "Yes, keep going for a bit.":
-                                            $ Line = "You get back into it"
+                                            $ line = "You get back into it"
                                         "No, I'm done.":
                                             "You pull back."
                                             jump Emma_HJ_After
-        if Partner and Partner.Lust >= 100:
+        if Partner and Partner.lust >= 100:
                 #Checks if partner could orgasm
                 call Girl_Cumming(Partner)
         #End orgasm
 
         $ Player.Focus -= 10 if Player.FocusX and Player.Focus > 50 else 0
 
-        if Cnt == 20:
-                    $ character.Brows = "angry"
+        if counter == 20:
+                    $ Girl.Brows = "angry"
                     ch_e "Hmm, I'm getting a bit of a cramp here."
                     menu:
                         ch_e "Mind if we take a break?"
-                        "How about a BJ?" if character.Action and MultiAction:
-                                $ Situation = "shift"
+                        "How about a BJ?" if Girl.Action and MultiAction:
+                                $ action_context = "shift"
                                 call Emma_HJ_After
                                 call Emma_Blowjob
                         "Finish up." if Player.FocusX:
                                 "You release your concentration. . ."
                                 $ Player.FocusX = 0
                                 $ Player.Focus += 15
-                                $ Cnt += 1
-                                "[Line]"
+                                $ counter += 1
+                                "[line]"
                                 jump Emma_HJ_Cycle
                         "Let's try something else." if MultiAction:
-                                $ Line = 0
+                                $ line = 0
                                 call Emma_HJ_Reset
-                                $ Situation = "shift"
+                                $ action_context = "shift"
                                 jump Emma_HJ_After
                         "No, get back down there.":
-                                if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
-                                    $ character.Statup("Love", 200, -5)
-                                    $ character.Statup("Obed", 50, 3)
-                                    $ character.Statup("Obed", 80, 2)
+                                if ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "O"):
+                                    $ Girl.change_stat("love", 200, -5)
+                                    $ Girl.change_stat("obedience", 50, 3)
+                                    $ Girl.change_stat("obedience", 80, 2)
                                     "She scowls but gets back to work."
                                 else:
-                                    $ character.FaceChange("angry", 1)
+                                    $ Girl.change_face("angry", 1)
                                     "She scowls at you, drops you cock and pulls back."
                                     ch_e "You know, I do have better things to do with my time than this."
-                                    $ character.Statup("Love", 50, -3, 1)
-                                    $ character.Statup("Love", 80, -4, 1)
-                                    $ character.Statup("Obed", 30, -1, 1)
-                                    $ character.Statup("Obed", 50, -1, 1)
-                                    $ character.RecentActions.append("angry")
-                                    $ character.DailyActions.append("angry")
+                                    $ Girl.change_stat("love", 50, -3, 1)
+                                    $ Girl.change_stat("love", 80, -4, 1)
+                                    $ Girl.change_stat("obedience", 30, -1, 1)
+                                    $ Girl.change_stat("obedience", 50, -1, 1)
+                                    $ Girl.recent_history.append("angry")
+                                    $ Girl.daily_history.append("angry")
                                     jump Emma_HJ_After
-        elif Cnt == 10 and character.SEXP <= 100 and not ApprovalCheck(character, 1200, "LO"):
-                    $ character.Brows = "confused"
+        elif counter == 10 and Girl.SEXP <= 100 and not ApprovalCheck(Girl, 1200, "LO"):
+                    $ Girl.Brows = "confused"
                     ch_e "Are you certain you didn't have anything else in mind?"
         #End Count check
 
-        call Escalation(character) #sees if she wants to escalate things
+        call Escalation(Girl) #sees if she wants to escalate things
 
         if Round == 10:
             ch_e "It's about time for a break."
@@ -500,418 +500,418 @@ label Emma_HJ_Cycle:
             ch_e "Ok, that's enough, for now. . ."
 
     #Round = 0 loop breaks
-    $ character.FaceChange("bemused", 0)
-    $ Line = 0
+    $ Girl.change_face("bemused", 0)
+    $ line = 0
     ch_e "Ok, seriously, I'm putting it down for a minute."
 
 label Emma_HJ_After:
-    $ character.FaceChange("sexy")
+    $ Girl.change_face("sexy")
 
-    $ character.Hand += 1
-    $ character.Action -=1
-    $ character.Addictionrate += 1
+    $ Girl.Hand += 1
+    $ Girl.Action -=1
+    $ Girl.Addictionrate += 1
     if "addictive" in Player.Traits:
-        $ character.Addictionrate += 1
-    $ character.Statup("Lust", 90, 5)
+        $ Girl.Addictionrate += 1
+    $ Girl.change_stat("lust", 90, 5)
 
-    call Partner_Like(character,1)
+    call Partner_Like(Girl,1)
 
     if "Emma Handi-Queen" in Achievements:
             pass
-    elif character.Hand >= 10:
-            $ character.FaceChange("smile", 1)
+    elif Girl.Hand >= 10:
+            $ Girl.change_face("smile", 1)
             ch_e "I've apparently become the \"queen\" of handjobs as well."
             $ Achievements.append("Emma Handi-Queen")
-            $character.SEXP += 5
-    elif character.Hand == 1:
-            $character.SEXP += 10
-            if not character.Forced:
-                $ character.Mouth = "smile"
+            $Girl.SEXP += 5
+    elif Girl.Hand == 1:
+            $Girl.SEXP += 10
+            if not Girl.Forced:
+                $ Girl.Mouth = "smile"
                 ch_e "What a lovely experience. . ."
             elif Player.Focus <= 20:
-                $ character.Mouth = "sad"
+                $ Girl.Mouth = "sad"
                 ch_e "Was that sufficient?"
-    elif character.Hand == 5:
+    elif Girl.Hand == 5:
                 ch_e "Please do call again. . ."
 
     $ temp_modifier = 0
-    if Situation == "shift":
+    if action_context == "shift":
         ch_e "Very well, what did you want to do?"
     else:
         call Emma_HJ_Reset
     call Checkout
     return
 
-## end character.Handjob //////////////////////////////////////////////////////////////////////
+## end Girl.Handjob //////////////////////////////////////////////////////////////////////
 
 
 
 
-## character.Titjob //////////////////////////////////////////////////////////////////////
+## Girl.Titjob //////////////////////////////////////////////////////////////////////
 label Emma_Titjob:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(character)
-    if character.Tit >= 7: # She loves it
+    call Shift_Focus(Girl)
+    if Girl.Tit >= 7: # She loves it
         $ temp_modifier += 10
-    elif character.Tit >= 3: #You've done it before several times
+    elif Girl.Tit >= 3: #You've done it before several times
         $ temp_modifier += 7
-    elif character.Tit: #You've done it before
+    elif Girl.Tit: #You've done it before
         $ temp_modifier += 5
 
-    if character.Addict >= 75 and character.Swallow >=3: #She's really strung out and has swallowed
+    if Girl.Addict >= 75 and Girl.Swallow >=3: #She's really strung out and has swallowed
         $ temp_modifier += 15
-    elif character.Addict >= 75:
+    elif Girl.Addict >= 75:
         $ temp_modifier += 5
 
-    if character.SeenChest and ApprovalCheck(character, 500): # You've seen her tits.
+    if Girl.SeenChest and ApprovalCheck(Girl, 500): # You've seen her tits.
         $ temp_modifier += 10
-    if not character.Chest and not character.Over: #She's already topless
+    if not Girl.Chest and not Girl.Over: #She's already topless
         $ temp_modifier += 10
-    if character.Lust > 75: #She's really horny
+    if Girl.lust > 75: #She's really horny
         $ temp_modifier += 10
-    if Situation == "shift":
+    if action_context == "shift":
         $ temp_modifier += 15
-    if "exhibitionist" in character.Traits:
+    if "exhibitionist" in Girl.Traits:
         $ temp_modifier += (5*Taboo)
-    if character in Player.Harem or "sex friend" in character.Petnames:
+    if Girl in Player.Harem or "sex friend" in Girl.Petnames:
         $ temp_modifier += 10
-    elif "ex" in character.Traits:
+    elif "ex" in Girl.Traits:
         $ temp_modifier -= 30
-    if character.ForcedCount and not character.Forced:
-        $ temp_modifier -= 5 * character.ForcedCount
+    if Girl.ForcedCount and not Girl.Forced:
+        $ temp_modifier -= 5 * Girl.ForcedCount
 
-    if Taboo and "tabno" in character.DailyActions:
+    if Taboo and "tabno" in Girl.daily_history:
         $ temp_modifier -= 10
 
-    if "no titjob" in character.DailyActions:
+    if "no titjob" in Girl.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no titjob" in character.RecentActions else 0
+        $ temp_modifier -= 10 if "no titjob" in Girl.recent_history else 0
 
-    $ Approval = ApprovalCheck(character, 1200, TabM = 5) # 120, 135, 150, Taboo -200(320)
+    $ Approval = ApprovalCheck(Girl, 1200, TabM = 5) # 120, 135, 150, Taboo -200(320)
 
-    if not character.Tit and "no titjob" not in character.RecentActions:
-        $ character.FaceChange("surprised", 1)
-        $ character.Mouth = "kiss"
-        ch_e "Hmm, are you sure you can handle that, [character.Petname]?"
+    if not Girl.Tit and "no titjob" not in Girl.recent_history:
+        $ Girl.change_face("surprised", 1)
+        $ Girl.Mouth = "kiss"
+        ch_e "Hmm, are you sure you can handle that, [Girl.Petname]?"
 
-    if not character.Tit and Approval:
+    if not Girl.Tit and Approval:
         #First time dialog
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
-        elif character.Love >= (character.Obed + character.Inbt):
-            $ character.FaceChange("sexy")
-            $ character.Brows = "sad"
-            $ character.Mouth = "smile"
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("love", 70, -3, 1)
+            $ Girl.change_stat("love", 20, -2, 1)
+        elif Girl.love >= (Girl.obedience + Girl.inhibition):
+            $ Girl.change_face("sexy")
+            $ Girl.Brows = "sad"
+            $ Girl.Mouth = "smile"
             ch_e "I suppose you've earned something special. . ."
-        elif character.Obed >= character.Inbt:
-            $ character.FaceChange("normal")
+        elif Girl.obedience >= Girl.inhibition:
+            $ Girl.change_face("normal")
             ch_e "If that's what you want. . ."
-        elif character.Addict >= 50:
-            $ character.FaceChange("manic", 1)
+        elif Girl.Addict >= 50:
+            $ Girl.change_face("manic", 1)
             ch_e "Hmmmm. . . ."
         else: # Uninhibited
-            $ character.FaceChange("sad")
-            $ character.Mouth = "smile"
+            $ Girl.change_face("sad")
+            $ Girl.Mouth = "smile"
             ch_e "Hmm, I was wondering when you'd ask. . ."
 
     elif Approval:
         #Second time+ dialog
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("love", 70, -3, 1)
+            $ Girl.change_stat("love", 20, -2, 1)
             ch_e "You aren't getting used to this service, are you?"
-        elif not Taboo and "tabno" in character.DailyActions:
+        elif not Taboo and "tabno" in Girl.daily_history:
             ch_e "I suppose this is secluded enough. . ."
-        elif "titjob" in character.RecentActions:
-            $ character.FaceChange("sexy", 1)
+        elif "titjob" in Girl.recent_history:
+            $ Girl.change_face("sexy", 1)
             ch_e "Oh! Back for more?"
             jump Emma_TJ_Prep
-        elif "titjob" in character.DailyActions:
-            $ character.FaceChange("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",
+        elif "titjob" in Girl.daily_history:
+            $ Girl.change_face("sexy", 1)
+            $ line = renpy.random.choice(["Back again so soon?",
                 "You're going to wear them out.",
                 "Didn't get enough earlier?",
                 "I'm still a bit sore from earlier."])
-            ch_e "[Line]"
-        elif character.Tit < 3:
-            $ character.FaceChange("sly", 1)
+            ch_e "[line]"
+        elif Girl.Tit < 3:
+            $ Girl.change_face("sly", 1)
             ch_e "Hmm, another titjob?"
         else:
-            $ character.FaceChange("sexy", 1)
-            $ character.ArmPose = 2
-            $ Line = renpy.random.choice(["You want some of these? [jiggles her tits]",
+            $ Girl.change_face("sexy", 1)
+            $ Girl.ArmPose = 2
+            $ line = renpy.random.choice(["You want some of these? [jiggles her tits]",
                 "So you'd like another titjob?",
                 "A little. . . [bounces tits]?",
                 "A little warm embrace?"])
-            ch_e "[Line]"
-        $ Line = 0
+            ch_e "[line]"
+        $ line = 0
 
     if Approval >= 2:                                                                   #She's into it. . .
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Obed", 90, 1)
-            $ character.Statup("Inbt", 60, 1)
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("obedience", 90, 1)
+            $ Girl.change_stat("inhibition", 60, 1)
             ch_e "I suppose there are worst ways to get you off. . ."
-        elif "no titjob" in character.DailyActions:
+        elif "no titjob" in Girl.daily_history:
             ch_e "Oh, very well then. . ."
         else:
-            $ character.FaceChange("sexy", 1)
-            $ character.Statup("Love", 90, 1)
-            $ character.Statup("Inbt", 50, 3)
-            $ Line = renpy.random.choice(["Well, sure, come over here.",
+            $ Girl.change_face("sexy", 1)
+            $ Girl.change_stat("love", 90, 1)
+            $ Girl.change_stat("inhibition", 50, 3)
+            $ line = renpy.random.choice(["Well, sure, come over here.",
                 "Oh, very well.",
                 "Mmmmm.",
                 "Fine, whip it out.",
                 "Fine. . . [She drools a bit into her cleavage].",
                 "Oh, all right."])
-            ch_e "[Line]"
-            $ Line = 0
-        $ character.Statup("Obed", 20, 1)
-        $ character.Statup("Obed", 70, 1)
-        $ character.Statup("Inbt", 80, 2)
+            ch_e "[line]"
+            $ line = 0
+        $ Girl.change_stat("obedience", 20, 1)
+        $ Girl.change_stat("obedience", 70, 1)
+        $ Girl.change_stat("inhibition", 80, 2)
         jump Emma_TJ_Prep
 
     else:                                                                               #She's not into it, but maybe. . .
-        $ character.FaceChange("angry")
-        if "no titjob" in character.RecentActions:
-            ch_e "I {i}just{/i} refused, [character.Petname]."
-        elif Taboo and "tabno" in character.DailyActions and "no titjob" in character.DailyActions:
+        $ Girl.change_face("angry")
+        if "no titjob" in Girl.recent_history:
+            ch_e "I {i}just{/i} refused, [Girl.Petname]."
+        elif Taboo and "tabno" in Girl.daily_history and "no titjob" in Girl.daily_history:
             ch_e "This is not an appropriate location for that. !"
-        elif "no titjob" in character.DailyActions:
-            ch_e "I already refused, [character.Petname]."
-        elif Taboo and "tabno" in character.DailyActions:
+        elif "no titjob" in Girl.daily_history:
+            ch_e "I already refused, [Girl.Petname]."
+        elif Taboo and "tabno" in Girl.daily_history:
             ch_e "This is not an appropriate place for that."
         else:
-            $ character.FaceChange("bemused")
-            ch_e "Perhaps later, [character.Petname]. . ."
+            $ Girl.change_face("bemused")
+            ch_e "Perhaps later, [Girl.Petname]. . ."
         menu:
             extend ""
-            "Sorry, never mind." if "no titjob" in character.DailyActions:
-                $ character.FaceChange("bemused")
-                ch_e "That's all right, [character.Petname]."
+            "Sorry, never mind." if "no titjob" in Girl.daily_history:
+                $ Girl.change_face("bemused")
+                ch_e "That's all right, [Girl.Petname]."
                 return
-            "Maybe later?" if "no titjob" not in character.DailyActions:
-                $ character.FaceChange("sexy")
+            "Maybe later?" if "no titjob" not in Girl.daily_history:
+                $ Girl.change_face("sexy")
                 ch_e "Perhaps."
-                $ character.Statup("Love", 80, 2)
-                $ character.Statup("Inbt", 70, 2)
+                $ Girl.change_stat("love", 80, 2)
+                $ Girl.change_stat("inhibition", 70, 2)
                 if Taboo:
-                    $ character.RecentActions.append("tabno")
-                    $ character.DailyActions.append("tabno")
-                $ character.RecentActions.append("no titjob")
-                $ character.DailyActions.append("no titjob")
+                    $ Girl.recent_history.append("tabno")
+                    $ Girl.daily_history.append("tabno")
+                $ Girl.recent_history.append("no titjob")
+                $ Girl.daily_history.append("no titjob")
                 return
             "I think this could be fun for both of us. . .":
                 if Approval:
-                    $ character.FaceChange("sexy")
-                    $ character.Statup("Obed", 80, 2)
-                    $ character.Statup("Obed", 40, 2)
-                    $ character.Statup("Inbt", 70, 3)
-                    $ character.Statup("Inbt", 40, 2)
-                    $ Line = renpy.random.choice(["Well, sure, come over here.",
+                    $ Girl.change_face("sexy")
+                    $ Girl.change_stat("obedience", 80, 2)
+                    $ Girl.change_stat("obedience", 40, 2)
+                    $ Girl.change_stat("inhibition", 70, 3)
+                    $ Girl.change_stat("inhibition", 40, 2)
+                    $ line = renpy.random.choice(["Well, sure, come over here.",
                             "Oh, very well.",
                             "Mmmmm.",
                             "Fine, whip it out.",
                             "Fine. . . [She drools a bit into her cleavage].",
                             "Oh, all right."])
-                    ch_e "[Line]"
-                    $ Line = 0
+                    ch_e "[line]"
+                    $ line = 0
                     jump Emma_TJ_Prep
                 else:
-                    $ Approval = ApprovalCheck(character, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)             Handy instead?
+                    $ Approval = ApprovalCheck(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)             Handy instead?
                     if Approval >= 2:
-                        $ character.Statup("Inbt", 80, 1)
-                        $ character.Statup("Inbt", 60, 3)
-                        $ character.FaceChange("confused", 1)
-                        if character.Blow:
+                        $ Girl.change_stat("inhibition", 80, 1)
+                        $ Girl.change_stat("inhibition", 60, 3)
+                        $ Girl.change_face("confused", 1)
+                        if Girl.Blow:
                             ch_e "You seemed to enjoy blowjobs, would that work instead?"
                         else:
                             ch_e "Would you perhaps prefer a blowjob?"
                         menu:
                             extend ""
                             "Ok, get down there.":
-                                $ character.Statup("Love", 80, 2)
-                                $ character.Statup("Inbt", 60, 1)
-                                $ character.Statup("Obed", 50, 1)
+                                $ Girl.change_stat("love", 80, 2)
+                                $ Girl.change_stat("inhibition", 60, 1)
+                                $ Girl.change_stat("obedience", 50, 1)
                                 jump Emma_BJ_Prep
                             "Nah, it's all about dem titties.":
-                                $ Line = "no BJ"
+                                $ line = "no BJ"
                     if Approval:
-                        $ character.Statup("Inbt", 80, 1)
-                        $ character.Statup("Inbt", 60, 3)
-                        $ character.FaceChange("confused", 1)
+                        $ Girl.change_stat("inhibition", 80, 1)
+                        $ Girl.change_stat("inhibition", 60, 3)
+                        $ Girl.change_face("confused", 1)
                         ch_e "Perhaps a handjob?"
                         menu:
                             ch_e "Perhaps a handjob?"
                             "Sure, that's fine.":
-                                $ character.Statup("Love", 80, 2)
-                                $ character.Statup("Inbt", 60, 1)
-                                $ character.Statup("Obed", 50, 1)
+                                $ Girl.change_stat("love", 80, 2)
+                                $ Girl.change_stat("inhibition", 60, 1)
+                                $ Girl.change_stat("obedience", 50, 1)
                                 jump Emma_HJ_Prep
-                            "Seriously, titties." if Line == "no BJ":
-                                $ Line = 0
-                            "Nah, it's all about dem titties." if Line != "no BJ":
+                            "Seriously, titties." if line == "no BJ":
+                                $ line = 0
+                            "Nah, it's all about dem titties." if line != "no BJ":
                                 pass
-                    $ character.Statup("Love", 200, -2)
+                    $ Girl.change_stat("love", 200, -2)
                     ch_e "Well, that's too bad."
-                    $ character.Statup("Obed", 70, 2)
+                    $ Girl.change_stat("obedience", 70, 2)
 
 
-            "Come on, let me fuck those titties, [character.Pet]":                                               # Pressured into it
-                $ character.NameCheck() #checks reaction to petname
-                $ Approval = ApprovalCheck(character, 700, "OI", TabM = 4) # 70, 85, 100, -160(230)
-                if Approval > 1 or (Approval and character.Forced):
-                    $ character.FaceChange("sad")
-                    $ character.Statup("Love", 70, -5, 1)
-                    $ character.Statup("Love", 200, -2)
+            "Come on, let me fuck those titties, [Girl.Pet]":                                               # Pressured into it
+                $ Girl.nameCheck() #checks reaction to petname
+                $ Approval = ApprovalCheck(Girl, 700, "OI", TabM = 4) # 70, 85, 100, -160(230)
+                if Approval > 1 or (Approval and Girl.Forced):
+                    $ Girl.change_face("sad")
+                    $ Girl.change_stat("love", 70, -5, 1)
+                    $ Girl.change_stat("love", 200, -2)
                     ch_e
-                    $ character.Statup("Obed", 50, 4)
-                    $ character.Statup("Inbt", 80, 1)
-                    $ character.Statup("Inbt", 60, 3)
-                    $ character.Forced = 1
+                    $ Girl.change_stat("obedience", 50, 4)
+                    $ Girl.change_stat("inhibition", 80, 1)
+                    $ Girl.change_stat("inhibition", 60, 3)
+                    $ Girl.Forced = 1
                     jump Emma_TJ_Prep
                 else:
-                    $ character.Statup("Love", 200, -15)
-                    $ character.RecentActions.append("angry")
-                    $ character.DailyActions.append("angry")
+                    $ Girl.change_stat("love", 200, -15)
+                    $ Girl.recent_history.append("angry")
+                    $ Girl.daily_history.append("angry")
 
     #She refused all offers.
-    if "no titjob" in character.DailyActions:
-        $ character.FaceChange("angry", 1)
-        $ character.RecentActions.append("angry")
-        $ character.DailyActions.append("angry")
-    elif character.Forced:
-        $ character.FaceChange("angry", 1)
+    if "no titjob" in Girl.daily_history:
+        $ Girl.change_face("angry", 1)
+        $ Girl.recent_history.append("angry")
+        $ Girl.daily_history.append("angry")
+    elif Girl.Forced:
+        $ Girl.change_face("angry", 1)
         ch_e "I couldn't put you through that."
-        $ character.Statup("Lust", 200, 5)
-        if character.Love > 300:
-                $ character.Statup("Love", 70, -2)
-        $ character.Statup("Obed", 50, -2)
-        $ character.RecentActions.append("angry")
-        $ character.DailyActions.append("angry")
+        $ Girl.change_stat("lust", 200, 5)
+        if Girl.love > 300:
+                $ Girl.change_stat("love", 70, -2)
+        $ Girl.change_stat("obedience", 50, -2)
+        $ Girl.recent_history.append("angry")
+        $ Girl.daily_history.append("angry")
     elif Taboo:                             # she refuses and this is too public a place for her
-        $ character.FaceChange("angry", 1)
-        $ character.DailyActions.append("tabno")
+        $ Girl.change_face("angry", 1)
+        $ Girl.daily_history.append("tabno")
         ch_e "Can you imagine the scandal? Here?"
-        $ character.Statup("Lust", 200, 5)
-        $ character.Statup("Obed", 50, -3)
-    elif character.Tit:
-        $ character.FaceChange("sad")
+        $ Girl.change_stat("lust", 200, 5)
+        $ Girl.change_stat("obedience", 50, -3)
+    elif Girl.Tit:
+        $ Girl.change_face("sad")
         ch_e "I'm afraid you'll just have to remember the last time."
     else:
-        $ character.FaceChange("normal", 1)
-        ch_e "How about let's not, [character.Petname]."
-    $ character.RecentActions.append("no titjob")
-    $ character.DailyActions.append("no titjob")
+        $ Girl.change_face("normal", 1)
+        ch_e "How about let's not, [Girl.Petname]."
+    $ Girl.recent_history.append("no titjob")
+    $ Girl.daily_history.append("no titjob")
     $ temp_modifier = 0
     return
 
 label Emma_TJ_Prep:
 
     if Taboo:
-        $ character.Inbt += int(Taboo/10)
-        $ character.Lust += int(Taboo/5)
+        $ Girl.inhibition += int(Taboo/10)
+        $ Girl.lust += int(Taboo/5)
 
 
-    $ character.FaceChange("sexy")
-    if character.Forced:
-        $ character.FaceChange("sad")
-    elif not character.Tit:
-        $ character.Brows = "confused"
-        $ character.Eyes = "sexy"
-        $ character.Mouth = "smile"
+    $ Girl.change_face("sexy")
+    if Girl.Forced:
+        $ Girl.change_face("sad")
+    elif not Girl.Tit:
+        $ Girl.Brows = "confused"
+        $ Girl.Eyes = "sexy"
+        $ Girl.Mouth = "smile"
 
-    call Seen_First_Peen(character,Partner,React=Situation)
+    call Seen_First_Peen(Girl,Partner,React=action_context)
     call Emma_TJ_Launch("L")
 
-    if Situation == character:
+    if action_context == Girl:
             #Emma auto-starts
-            $ Situation = 0
+            $ action_context = 0
             call Emma_TJ_Launch("L")
-            "[character.Name] slides down and wraps her tits around your dick."
+            "[Girl.name] slides down and wraps her tits around your dick."
             menu:
                 "What do you do?"
                 "Nothing.":
-                    $ character.Statup("Inbt", 80, 3)
-                    $ character.Statup("Inbt", 40, 2)
-                    "[character.Name] starts to slide them up and down."
+                    $ Girl.change_stat("inhibition", 80, 3)
+                    $ Girl.change_stat("inhibition", 40, 2)
+                    "[Girl.name] starts to slide them up and down."
                 "Praise her.":
-                    $ character.FaceChange("sexy", 1)
-                    $ character.Statup("Inbt", 80, 3)
-                    ch_p "Oh, that sounds like a good idea, [character.Pet]."
-                    $ character.NameCheck() #checks reaction to petname
-                    "[character.Name] continues her actions."
-                    $ character.Statup("Love", 85, 1)
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 2)
+                    $ Girl.change_face("sexy", 1)
+                    $ Girl.change_stat("inhibition", 80, 3)
+                    ch_p "Oh, that sounds like a good idea, [Girl.Pet]."
+                    $ Girl.nameCheck() #checks reaction to petname
+                    "[Girl.name] continues her actions."
+                    $ Girl.change_stat("love", 85, 1)
+                    $ Girl.change_stat("obedience", 90, 1)
+                    $ Girl.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ character.FaceChange("confused")
-                    $ character.Statup("Inbt", 70, 1)
-                    ch_p "Let's not do that for now, [character.Pet]."
-                    $ character.NameCheck() #checks reaction to petname
-                    "[character.Name] lets it drop out from between her breasts."
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 3)
-                    $ Player.RecentActions.append("nope")
-                    $ character.AddWord(1,"refused","refused")
+                    $ Girl.change_face("confused")
+                    $ Girl.change_stat("inhibition", 70, 1)
+                    ch_p "Let's not do that for now, [Girl.Pet]."
+                    $ Girl.nameCheck() #checks reaction to petname
+                    "[Girl.name] lets it drop out from between her breasts."
+                    $ Girl.change_stat("obedience", 90, 1)
+                    $ Girl.change_stat("obedience", 50, 3)
+                    $ Player.recent_history.append("nope")
+                    $ Girl.AddWord(1,"refused","refused")
                     return
-    if not character.Tit:
-        if character.Forced:
-            $ character.Statup("Love", 90, -25)
-            $ character.Statup("Obed", 70, 30)
-            $ character.Statup("Inbt", 80, 35)
+    if not Girl.Tit:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -25)
+            $ Girl.change_stat("obedience", 70, 30)
+            $ Girl.change_stat("inhibition", 80, 35)
         else:
-            $ character.Statup("Love", 90, 5)
-            $ character.Statup("Obed", 70, 25)
-            $ character.Statup("Inbt", 80, 30)
+            $ Girl.change_stat("love", 90, 5)
+            $ Girl.change_stat("obedience", 70, 25)
+            $ Girl.change_stat("inhibition", 80, 30)
 
-    if Situation:
+    if action_context:
         $ renpy.pop_call()
-        $ Situation = 0
-    $ Line = 0
-    $ Cnt = 0
+        $ action_context = 0
+    $ line = 0
+    $ counter = 0
     if Taboo:
-        $ character.DrainWord("tabno")
-    $ character.DrainWord("no titjob")
-    $ character.RecentActions.append("titjob")
-    $ character.DailyActions.append("titjob")
+        $ Girl.DrainWord("tabno")
+    $ Girl.DrainWord("no titjob")
+    $ Girl.recent_history.append("titjob")
+    $ Girl.daily_history.append("titjob")
 
 
 label Emma_TJ_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(character)
+        call Shift_Focus(Girl)
         call Emma_TJ_Launch
-        $ character.LustFace()
+        $ Girl.lustFace()
 
         if  Player.Focus < 100:
                     #Player Command menu
                     menu:
-                        "Keep going. . ." if Speed:
+                        "Keep going. . ." if action_speed:
                                     pass
 
-                        "Start moving? . ." if Speed == 0:
-                                    $ Speed = 1
+                        "Start moving? . ." if action_speed == 0:
+                                    $ action_speed = 1
 
-                        "Speed up. . ." if  Speed == 1:
-                                    $ Speed = 2
+                        "action_speed up. . ." if  action_speed == 1:
+                                    $ action_speed = 2
                                     "You ask her to up the pace a bit."
-                        "Speed up. . . (locked)" if Speed >= 2:
+                        "action_speed up. . . (locked)" if action_speed >= 2:
                                     pass
 
-                        "Stop moving" if Speed == 1 or Speed == 3:
-                                    $ Speed = 0
-                        "Slow Down. . ." if Speed == 2:
-                                    $ Speed = 1
+                        "Stop moving" if action_speed == 1 or action_speed == 3:
+                                    $ action_speed = 0
+                        "Slow Down. . ." if action_speed == 2:
+                                    $ action_speed = 1
                                     "You ask her to slow it down a bit."
-                        "Slow Down. . . (locked)" if not Speed:
+                        "Slow Down. . . (locked)" if not action_speed:
                                     pass
 
-                        "Lick it" if Speed != 3:
-                                    $ Speed = 3
-                        "Lick it (locked)" if Speed == 3:
+                        "Lick it" if action_speed != 3:
+                                    $ action_speed = 3
+                        "Lick it (locked)" if action_speed == 3:
                                     pass
 
                         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
@@ -925,28 +925,28 @@ label Emma_TJ_Cycle: #Repeating strokes
 
                         "Other options":
                                 menu:
-                                    "I also want to fondle her breasts." if Trigger2 != "fondle breasts":
-                                            if character.Action and MultiAction:
-                                                $ Trigger2 = "fondle breasts"
+                                    "I also want to fondle her breasts." if offhand_action != "fondle breasts":
+                                            if Girl.Action and MultiAction:
+                                                $ offhand_action = "fondle breasts"
                                                 "You start to fondle her breasts."
-                                                $ character.Action -= 1
+                                                $ Girl.Action -= 1
                                             else:
                                                 ch_e "Actually, could we wrap this up soon?"
 
                                     "Shift primary action":
-                                            if character.Action and MultiAction:
+                                            if Girl.Action and MultiAction:
                                                     menu:
                                                         "How about a blowjob?":
-                                                                if character.Action and MultiAction:
-                                                                    $ Situation = "shift"
+                                                                if Girl.Action and MultiAction:
+                                                                    $ action_context = "shift"
                                                                     call Emma_TJ_After
                                                                     call Emma_Blowjob
                                                                 else:
                                                                     ch_e "Actually, could we wrap this up soon?"
 
                                                         "How about a handy?":
-                                                                if character.Action and MultiAction:
-                                                                    $ Situation = "shift"
+                                                                if Girl.Action and MultiAction:
+                                                                    $ action_context = "shift"
                                                                     call Emma_BJ_After
                                                                     call Emma_Handjob
                                                                 else:
@@ -960,118 +960,118 @@ label Emma_TJ_Cycle: #Repeating strokes
                                         pass
                                     "Threesome actions" if Partner:
                                         menu:
-                                            "Asks [character.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(character)
-                                            "Asks [character.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
+                                            "Asks [Girl.name] to do something else with [Partner.name]" if primary_action == "lesbian":
+                                                        call Les_Change(Girl)
+                                            "Asks [Girl.name] to do something else with [Partner.name] (locked)" if primary_action != "lesbian":
                                                         pass
-                                            "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(character)
+                                            "Ask [Partner.name] to do something else":
+                                                        call Three_Change(Girl)
 
-                                            "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
-                                                        $ ThreeCount = 0
-                                            "Don't stop what you're doing. . ." if ThreeCount and Trigger4:
-                                                        $ ThreeCount = 0
+                                            "Don't stop what you're doing. . .(locked)" if not position_change_timer or not Partner_primary_action:
+                                                        $ position_change_timer = 0
+                                            "Don't stop what you're doing. . ." if position_change_timer and Partner_primary_action:
+                                                        $ position_change_timer = 0
 
-                                            "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(character)
-                                            "Undress [Partner.Name]":
+                                            "Swap to [Partner.name]":
+                                                        call primary_action_Swap(Girl)
+                                            "Undress [Partner.name]":
                                                         call Girl_Undress(Partner)
                                                         jump Emma_TJ_Cycle
-                                            "Clean up [Partner.Name] (locked)" if not Partner.Spunk:
+                                            "Clean up [Partner.name] (locked)" if not Partner.Spunk:
                                                         pass
-                                            "Clean up [Partner.Name]" if Partner.Spunk:
+                                            "Clean up [Partner.name]" if Partner.Spunk:
                                                         call Girl_Cleanup(Partner,"ask")
                                                         jump Emma_TJ_Cycle
                                             "Never mind":
                                                         jump Emma_TJ_Cycle
-                                    "Undress [character.Name]":
-                                            call Girl_Undress(character)
-                                    "Clean up [character.Name] (locked)" if not character.Spunk:
+                                    "Undress [Girl.name]":
+                                            call Girl_Undress(Girl)
+                                    "Clean up [Girl.name] (locked)" if not Girl.Spunk:
                                             pass
-                                    "Clean up [character.Name]" if character.Spunk:
-                                            call Girl_Cleanup(character,"ask")
+                                    "Clean up [Girl.name]" if Girl.Spunk:
+                                            call Girl_Cleanup(Girl,"ask")
                                     "Never mind":
                                             jump Emma_TJ_Cycle
 
                         "Back to Sex Menu" if MultiAction:
                                     ch_p "Let's try something else."
                                     call Emma_TJ_Reset
-                                    $ Situation = "shift"
-                                    $ Line = 0
+                                    $ action_context = "shift"
+                                    $ line = 0
                                     jump Emma_TJ_After
                         "End Scene" if not MultiAction:
                                     ch_p "Let's stop for now."
                                     call Emma_TJ_Reset
-                                    $ Line = 0
+                                    $ line = 0
                                     jump Emma_TJ_After
-        #End menu (if Line)
+        #End menu (if line)
 
-        call Shift_Focus(character)
-        call Sex_Dialog(character,Partner)
+        call Shift_Focus(Girl)
+        call Sex_Dialog(Girl,Partner)
 
         #If either of you could cum
 
-        $ Cnt += 1
+        $ counter += 1
         $ Round -= 1
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-        if Player.Focus >= 100 or character.Lust >= 100:
+        if Player.Focus >= 100 or Girl.lust >= 100:
                     #If either of you could cum
                     if Player.Focus >= 100:
                             #If you can cum:
-                            call Player_Cumming(character)
-                            if "angry" in character.RecentActions:
+                            call Player_Cumming(Girl)
+                            if "angry" in Girl.recent_history:
                                 call Emma_TJ_Reset
                                 return
-                            $ character.Statup("Lust", 200, 5)
-                            if 100 > character.Lust >= 70 and character.OCount < 2 and character.SEXP >= 20:
-                                $ character.RecentActions.append("unsatisfied")
-                                $ character.DailyActions.append("unsatisfied")
+                            $ Girl.change_stat("lust", 200, 5)
+                            if 100 > Girl.lust >= 70 and Girl.OCount < 2 and Girl.SEXP >= 20:
+                                $ Girl.recent_history.append("unsatisfied")
+                                $ Girl.daily_history.append("unsatisfied")
 
                             if Player.Focus > 80:
                                 jump Emma_TJ_After
-                            $ Line = "came"
+                            $ line = "came"
 
-                    if character.Lust >= 100:
-                            #If [character.Name] can cum
-                            call Girl_Cumming(character)
-                            if Situation == "shift" or "angry" in character.RecentActions:
+                    if Girl.lust >= 100:
+                            #If [Girl.name] can cum
+                            call Girl_Cumming(Girl)
+                            if action_context == "shift" or "angry" in Girl.recent_history:
                                 jump Emma_TJ_After
 
-                    if Line == "came": #ex Player.Focus <= 20:
+                    if line == "came": #ex Player.Focus <= 20:
                             #If you've just cum,
-                            $ Line = 0
+                            $ line = 0
                             if not Player.Semen:
                                 "You're emptied out, you should probably take a break."
 
 
-                            if "unsatisfied" in character.RecentActions:#And [character.Name] is unsatisfied,
-                                "[character.Name] still seems a bit unsatisfied with the experience."
+                            if "unsatisfied" in Girl.recent_history:#And [Girl.name] is unsatisfied,
+                                "[Girl.name] still seems a bit unsatisfied with the experience."
                                 menu:
                                     "Finish her?"
                                     "Yes, keep going for a bit.":
-                                        $ Line = "You get back into it"
+                                        $ line = "You get back into it"
                                     "No, I'm done.":
                                         "You pull back."
                                         jump Emma_TJ_After
-        if Partner and Partner.Lust >= 100:
+        if Partner and Partner.lust >= 100:
                 #Checks if partner could orgasm
                 call Girl_Cumming(Partner)
         #End orgasm
 
         $ Player.Focus -= 10 if Player.FocusX and Player.Focus > 50 else 0
 
-        if character.SEXP >= 100 or ApprovalCheck(character, 1200, "LO"):
+        if Girl.SEXP >= 100 or ApprovalCheck(Girl, 1200, "LO"):
             pass
-        elif Cnt == (5 + character.Tit):
-                    $ character.Brows = "confused"
+        elif counter == (5 + Girl.Tit):
+                    $ Girl.Brows = "confused"
                     ch_e "Are you getting close here? I'm getting a bit sore."
-        elif Cnt == (10 + character.Tit):
-                    $ character.Brows = "angry"
+        elif counter == (10 + Girl.Tit):
+                    $ Girl.Brows = "angry"
                     menu:
                         ch_e "I'm getting a bit worn out, could we settle this some other way?"
-                        "How about a BJ?" if character.Action and MultiAction:
-                                $ Situation = "shift"
+                        "How about a BJ?" if Girl.Action and MultiAction:
+                                $ action_context = "shift"
                                 call Emma_TJ_After
                                 call Emma_Blowjob
                         "Finish up." if Player.FocusX:
@@ -1080,30 +1080,30 @@ label Emma_TJ_Cycle: #Repeating strokes
                                 $ Player.Focus += 15
                                 jump Emma_TJ_Cycle
                         "Let's try something else." if MultiAction:
-                                $ Line = 0
+                                $ line = 0
                                 call Emma_TJ_Reset
-                                $ Situation = "shift"
+                                $ action_context = "shift"
                                 jump Emma_TJ_After
                         "No, get back down there.":
-                                if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
-                                    $ character.Statup("Love", 200, -5)
-                                    $ character.Statup("Obed", 50, 3)
-                                    $ character.Statup("Obed", 80, 2)
+                                if ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "O"):
+                                    $ Girl.change_stat("love", 200, -5)
+                                    $ Girl.change_stat("obedience", 50, 3)
+                                    $ Girl.change_stat("obedience", 80, 2)
                                     "She grumbles but gets back to work."
                                 else:
-                                    $ character.FaceChange("angry", 1)
+                                    $ Girl.change_face("angry", 1)
                                     "She scowls at you, drops you cock and pulls back."
                                     ch_e "Then I suppose you can handle this yourself."
-                                    $ character.Statup("Love", 50, -3, 1)
-                                    $ character.Statup("Love", 80, -4, 1)
-                                    $ character.Statup("Obed", 30, -1, 1)
-                                    $ character.Statup("Obed", 50, -1, 1)
-                                    $ character.RecentActions.append("angry")
-                                    $ character.DailyActions.append("angry")
+                                    $ Girl.change_stat("love", 50, -3, 1)
+                                    $ Girl.change_stat("love", 80, -4, 1)
+                                    $ Girl.change_stat("obedience", 30, -1, 1)
+                                    $ Girl.change_stat("obedience", 50, -1, 1)
+                                    $ Girl.recent_history.append("angry")
+                                    $ Girl.daily_history.append("angry")
                                     jump Emma_TJ_After
         #End Count check
 
-        call Escalation(character) #sees if she wants to escalate things
+        call Escalation(Girl) #sees if she wants to escalate things
 
         if Round == 10:
             ch_e "You might want to wrap this up, it's getting late."
@@ -1111,293 +1111,293 @@ label Emma_TJ_Cycle: #Repeating strokes
             ch_e "Seriously, it'll be time to stop soon."
 
     #Round = 0 loop breaks
-    $ character.FaceChange("bemused", 0)
-    $ Line = 0
-    ch_e "All right, [character.Petname], that's plenty for now."
+    $ Girl.change_face("bemused", 0)
+    $ line = 0
+    ch_e "All right, [Girl.Petname], that's plenty for now."
 
 label Emma_TJ_After:
-    $ character.FaceChange("sexy")
+    $ Girl.change_face("sexy")
 
-    $ character.Tit += 1
-    $ character.Action -=1
-    $ character.Addictionrate += 1
+    $ Girl.Tit += 1
+    $ Girl.Action -=1
+    $ Girl.Addictionrate += 1
     if "addictive" in Player.Traits:
-        $ character.Addictionrate += 1
+        $ Girl.Addictionrate += 1
 
     if Partner == "Kitty":
-        call Partner_Like(character,4,2)
+        call Partner_Like(Girl,4,2)
     else:
-        call Partner_Like(character,3)
+        call Partner_Like(Girl,3)
 
-    if character.Tit > 5:
+    if Girl.Tit > 5:
             pass
-    elif character.Tit == 1:
-        $character.SEXP += 12
-        if character.Love >= 500:
-            $ character.Mouth = "smile"
+    elif Girl.Tit == 1:
+        $Girl.SEXP += 12
+        if Girl.love >= 500:
+            $ Girl.Mouth = "smile"
             ch_e "Mmm, was that as good for you as it was for me?"
         elif Player.Focus <= 20:
-            $ character.Mouth = "sad"
+            $ Girl.Mouth = "sad"
             ch_e "I hope that lived up to expectations."
-    elif character.Tit == 5:
+    elif Girl.Tit == 5:
             ch_e "You certainly get a lot of milage out of these."
 
 
     $ temp_modifier = 0
-    if Situation == "shift":
+    if action_context == "shift":
             ch_e "Mmm, so what else did you have in mind?"
     else:
             call Emma_TJ_Reset
     call Checkout
     return
 
-## end character.Titjob //////////////////////////////////////////////////////////////////////
+## end Girl.Titjob //////////////////////////////////////////////////////////////////////
 
 
-# character.Blowjob //////////////////////////////////////////////////////////////////////
+# Girl.Blowjob //////////////////////////////////////////////////////////////////////
 
 label Emma_Blowjob:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(character)
-    if character.Blow >= 7: # She loves it
+    call Shift_Focus(Girl)
+    if Girl.Blow >= 7: # She loves it
         $ temp_modifier += 15
-    elif character.Blow >= 3: #You've done it before several times
+    elif Girl.Blow >= 3: #You've done it before several times
         $ temp_modifier += 10
-    elif character.Blow: #You've done it before
+    elif Girl.Blow: #You've done it before
         $ temp_modifier += 7
 
-    if character.Addict >= 75 and character.Swallow >=3: #She's really strung out and has swallowed
+    if Girl.Addict >= 75 and Girl.Swallow >=3: #She's really strung out and has swallowed
         $ temp_modifier += 25
-    elif character.Addict >= 75: #She's really strung out
+    elif Girl.Addict >= 75: #She's really strung out
         $ temp_modifier += 15
 
-    if Situation == "shift":
+    if action_context == "shift":
         $ temp_modifier += 15
-    if "exhibitionist" in character.Traits:
+    if "exhibitionist" in Girl.Traits:
         $ temp_modifier += (4*Taboo)
-    if character in Player.Harem or "sex friend" in character.Petnames:
+    if Girl in Player.Harem or "sex friend" in Girl.Petnames:
         $ temp_modifier += 10
-    elif "ex" in character.Traits:
+    elif "ex" in Girl.Traits:
         $ temp_modifier -= 40
-    if character.ForcedCount and not character.Forced:
-        $ temp_modifier -= 5 * character.ForcedCount
+    if Girl.ForcedCount and not Girl.Forced:
+        $ temp_modifier -= 5 * Girl.ForcedCount
 
-    if Taboo and "tabno" in character.DailyActions:
+    if Taboo and "tabno" in Girl.daily_history:
         $ temp_modifier -= 10
 
-    if "no blow" in character.DailyActions:
+    if "no blow" in Girl.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no blow" in character.RecentActions else 0
+        $ temp_modifier -= 10 if "no blow" in Girl.recent_history else 0
 
-    $ Approval = ApprovalCheck(character, 1300, TabM = 4) # 130, 145, 160, Taboo -160(290)
+    $ Approval = ApprovalCheck(Girl, 1300, TabM = 4) # 130, 145, 160, Taboo -160(290)
 
-    if not character.Blow and "no blow" not in character.RecentActions:
-        $ character.FaceChange("sly")
+    if not Girl.Blow and "no blow" not in Girl.recent_history:
+        $ Girl.change_face("sly")
         ch_e "So you'd like me to suck you off?"
 
-    if not character.Blow and Approval:                                                 #First time dialog
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
-        elif character.Love >= (character.Obed + character.Inbt):
-            $ character.FaceChange("sexy")
-            $ character.Brows = "sad"
-            $ character.Mouth = "smile"
+    if not Girl.Blow and Approval:                                                 #First time dialog
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("love", 70, -3, 1)
+            $ Girl.change_stat("love", 20, -2, 1)
+        elif Girl.love >= (Girl.obedience + Girl.inhibition):
+            $ Girl.change_face("sexy")
+            $ Girl.Brows = "sad"
+            $ Girl.Mouth = "smile"
             ch_e "I am curious if it tastes as good as it looks. . ."
-        elif character.Obed >= character.Inbt:
-            $ character.FaceChange("normal")
+        elif Girl.obedience >= Girl.inhibition:
+            $ Girl.change_face("normal")
             ch_e "If that's what you want. . ."
-        elif character.Addict >= 50:
-            $ character.FaceChange("manic", 1)
+        elif Girl.Addict >= 50:
+            $ Girl.change_face("manic", 1)
             ch_e "I don't know if I could wait. . ."
         else: # Uninhibited
-            $ character.FaceChange("sad")
-            $ character.Mouth = "smile"
+            $ Girl.change_face("sad")
+            $ Girl.Mouth = "smile"
             ch_e "I suppose. . ."
     elif Approval:                                                                       #Second time+ dialog
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("love", 70, -3, 1)
+            $ Girl.change_stat("love", 20, -2, 1)
             ch_e "Ugh, that again?"
-        elif not Taboo and "tabno" in character.DailyActions:
+        elif not Taboo and "tabno" in Girl.daily_history:
             ch_e "Ok, I suppose this is secluded enough. . ."
-        elif "blow" in character.RecentActions:
-            $ character.FaceChange("sexy", 1)
+        elif "blow" in Girl.recent_history:
+            $ Girl.change_face("sexy", 1)
             ch_e "Mmm, again? [[yawns]"
             jump Emma_BJ_Prep
-        elif "blow" in character.DailyActions:
-            $ character.FaceChange("sexy", 1)
-            $ Line = renpy.random.choice(["Back so soon?",
+        elif "blow" in Girl.daily_history:
+            $ Girl.change_face("sexy", 1)
+            $ line = renpy.random.choice(["Back so soon?",
                 "Let me get some saliva going.",
                 "Didn't get enough earlier?",
                 "My jaw's still sore from our prior engagement.",
                 "My jaw's still a bit sore from earlier."])
-            ch_e "[Line]"
-        elif character.Blow < 3:
-            $ character.FaceChange("sexy", 1)
-            $ character.Brows = "confused"
-            $ character.Mouth = "kiss"
+            ch_e "[line]"
+        elif Girl.Blow < 3:
+            $ Girl.change_face("sexy", 1)
+            $ Girl.Brows = "confused"
+            $ Girl.Mouth = "kiss"
             ch_e "Another blowjob?"
         else:
-            $ character.FaceChange("sexy", 1)
-            $ character.ArmPose = 2
-            $ Line = renpy.random.choice(["You want me to [mimes blowing]?",
+            $ Girl.change_face("sexy", 1)
+            $ Girl.ArmPose = 2
+            $ line = renpy.random.choice(["You want me to [mimes blowing]?",
                 "So you want another blowjob?",
                 "You want me to suck you off?",
                 "Are you asking if I'm hungry?"])
-            ch_e "[Line]"
-        $ Line = 0
+            ch_e "[line]"
+        $ line = 0
 
     if Approval >= 2:                                                                   #She's into it. . .
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Obed", 90, 1)
-            $ character.Statup("Inbt", 60, 1)
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("obedience", 90, 1)
+            $ Girl.change_stat("inhibition", 60, 1)
             ch_e "Fine."
-        elif "no blow" in character.DailyActions:
+        elif "no blow" in Girl.daily_history:
             ch_e "Fine, I suppose you've earned it. . ."
         else:
-            $ character.FaceChange("sexy", 1)
-            $ character.Statup("Love", 90, 1)
-            $ character.Statup("Inbt", 50, 3)
-            $ Line = renpy.random.choice(["Well, ok.",
+            $ Girl.change_face("sexy", 1)
+            $ Girl.change_stat("love", 90, 1)
+            $ Girl.change_stat("inhibition", 50, 3)
+            $ line = renpy.random.choice(["Well, ok.",
                 "Well. . . ok.",
                 "Mmmm.",
                 "Sure, let me have it.",
                 "Mmmm. . . [She licks her lips].",
                 "Ok, fine."])
-            ch_e "[Line]"
-            $ Line = 0
-        $ character.Statup("Obed", 20, 1)
-        $ character.Statup("Obed", 70, 1)
-        $ character.Statup("Inbt", 80, 2)
+            ch_e "[line]"
+            $ line = 0
+        $ Girl.change_stat("obedience", 20, 1)
+        $ Girl.change_stat("obedience", 70, 1)
+        $ Girl.change_stat("inhibition", 80, 2)
         jump Emma_BJ_Prep
 
     else:                                                                               #She's not into it, but maybe. . .
-        $ character.FaceChange("angry")
-        if "no blow" in character.RecentActions:
+        $ Girl.change_face("angry")
+        if "no blow" in Girl.recent_history:
             ch_e "I believe I just told you, \"no.\""
-        elif Taboo and "tabno" in character.DailyActions and "no blow" in character.DailyActions:
+        elif Taboo and "tabno" in Girl.daily_history and "no blow" in Girl.daily_history:
             ch_e "I told you, this is too public!"
-        elif "no blow" in character.DailyActions:
-            ch_e "I told you \"no,\" [character.Petname]."
-        elif Taboo and "tabno" in character.DailyActions:
+        elif "no blow" in Girl.daily_history:
+            ch_e "I told you \"no,\" [Girl.Petname]."
+        elif Taboo and "tabno" in Girl.daily_history:
             ch_e "I told you this is too public!"
-        elif not character.Blow:
-            $ character.FaceChange("bemused")
-            ch_e "I'm not sure you're up to my usual tastes, [character.Petname]. . ."
+        elif not Girl.Blow:
+            $ Girl.change_face("bemused")
+            ch_e "I'm not sure you're up to my usual tastes, [Girl.Petname]. . ."
         else:
-            $ character.FaceChange("bemused")
-            ch_e "Perhaps later, [character.Petname]."
+            $ Girl.change_face("bemused")
+            ch_e "Perhaps later, [Girl.Petname]."
         menu:
             extend ""
-            "Sorry, never mind." if "no blow" in character.DailyActions:
-                $ character.FaceChange("bemused")
-                ch_e "No harm done, [character.Petname]."
+            "Sorry, never mind." if "no blow" in Girl.daily_history:
+                $ Girl.change_face("bemused")
+                ch_e "No harm done, [Girl.Petname]."
                 return
-            "Maybe later?" if "no blow" not in character.DailyActions:
-                $ character.FaceChange("sexy")
-                ch_e "I wouldn't rule it out, [character.Petname]."
-                $ character.Statup("Love", 80, 2)
-                $ character.Statup("Inbt", 70, 2)
+            "Maybe later?" if "no blow" not in Girl.daily_history:
+                $ Girl.change_face("sexy")
+                ch_e "I wouldn't rule it out, [Girl.Petname]."
+                $ Girl.change_stat("love", 80, 2)
+                $ Girl.change_stat("inhibition", 70, 2)
                 if Taboo:
-                    $ character.RecentActions.append("tabno")
-                    $ character.DailyActions.append("tabno")
-                $ character.RecentActions.append("no blow")
-                $ character.DailyActions.append("no blow")
+                    $ Girl.recent_history.append("tabno")
+                    $ Girl.daily_history.append("tabno")
+                $ Girl.recent_history.append("no blow")
+                $ Girl.daily_history.append("no blow")
                 return
             "Come on, please?":
                 if Approval:
-                    $ character.FaceChange("sexy")
-                    $ character.Statup("Obed", 90, 2)
-                    $ character.Statup("Obed", 50, 2)
-                    $ character.Statup("Inbt", 70, 3)
-                    $ character.Statup("Inbt", 40, 2)
-                    $ Line = renpy.random.choice(["Well, I suppose.",
+                    $ Girl.change_face("sexy")
+                    $ Girl.change_stat("obedience", 90, 2)
+                    $ Girl.change_stat("obedience", 50, 2)
+                    $ Girl.change_stat("inhibition", 70, 3)
+                    $ Girl.change_stat("inhibition", 40, 2)
+                    $ line = renpy.random.choice(["Well, I suppose.",
                         "Well. . . ok.",
                         "I could perhaps give it a try.",
                         "I suppose I could. . .",
                         "Fine. . . [She licks her lips].",
                         "Hmph, ok, fine."])
-                    ch_e "[Line]"
-                    $ Line = 0
+                    ch_e "[line]"
+                    $ line = 0
                     jump Emma_BJ_Prep
                 else:
-                    if ApprovalCheck(character, 1100, TabM = 3): # 110, 125, 140, Taboo -120(230)             Handy instead?
-                        $ character.Statup("Inbt", 80, 1)
-                        $ character.Statup("Inbt", 60, 3)
-                        $ character.FaceChange("confused", 1)
-                        $ character.ArmPose = 2
-                        if character.Hand:
+                    if ApprovalCheck(Girl, 1100, TabM = 3): # 110, 125, 140, Taboo -120(230)             Handy instead?
+                        $ Girl.change_stat("inhibition", 80, 1)
+                        $ Girl.change_stat("inhibition", 60, 3)
+                        $ Girl.change_face("confused", 1)
+                        $ Girl.ArmPose = 2
+                        if Girl.Hand:
                             ch_e "I could just stroke you off, perhaps?"
                         else:
                             ch_e "Would my hand be an adequate substitute?"
                         menu:
                             extend ""
                             "Sure, that's fine.":
-                                $ character.Statup("Love", 80, 2)
-                                $ character.Statup("Inbt", 60, 1)
-                                $ character.Statup("Obed", 50, 1)
+                                $ Girl.change_stat("love", 80, 2)
+                                $ Girl.change_stat("inhibition", 60, 1)
+                                $ Girl.change_stat("obedience", 50, 1)
                                 jump Emma_HJ_Prep
                             "Nah, if it's not your mouth, forget it.":
-                                $ character.Statup("Love", 200, -2)
-                                $ character.ArmPose = 1
+                                $ Girl.change_stat("love", 200, -2)
+                                $ Girl.ArmPose = 1
                                 ch_e "Pitty."
-                                $ character.Statup("Obed", 70, 2)
+                                $ Girl.change_stat("obedience", 70, 2)
 
 
-            "Suck it, [character.Pet]":                                               # Pressured into it
-                $ character.NameCheck() #checks reaction to petname
-                $ Approval = ApprovalCheck(character, 750, "OI", TabM = 3) # 75, 90, 105, -120(195)
-                if Approval > 1 or (Approval and character.Forced):
-                    $ character.FaceChange("sad")
-                    $ character.Statup("Love", 70, -5, 1)
-                    $ character.Statup("Love", 200, -2)
+            "Suck it, [Girl.Pet]":                                               # Pressured into it
+                $ Girl.nameCheck() #checks reaction to petname
+                $ Approval = ApprovalCheck(Girl, 750, "OI", TabM = 3) # 75, 90, 105, -120(195)
+                if Approval > 1 or (Approval and Girl.Forced):
+                    $ Girl.change_face("sad")
+                    $ Girl.change_stat("love", 70, -5, 1)
+                    $ Girl.change_stat("love", 200, -2)
                     ch_e
-                    $ character.Statup("Obed", 50, 4)
-                    $ character.Statup("Inbt", 80, 1)
-                    $ character.Statup("Inbt", 60, 3)
-                    $ character.Forced = 1
+                    $ Girl.change_stat("obedience", 50, 4)
+                    $ Girl.change_stat("inhibition", 80, 1)
+                    $ Girl.change_stat("inhibition", 60, 3)
+                    $ Girl.Forced = 1
                     jump Emma_BJ_Prep
                 else:
-                    $ character.Statup("Love", 200, -15)
-                    $ character.RecentActions.append("angry")
-                    $ character.DailyActions.append("angry")
+                    $ Girl.change_stat("love", 200, -15)
+                    $ Girl.recent_history.append("angry")
+                    $ Girl.daily_history.append("angry")
 
     #She refused all offers.
-    if "no blow" in character.DailyActions:
-        $ character.FaceChange("angry", 1)
-        $ character.RecentActions.append("angry")
-        $ character.DailyActions.append("angry")
-    elif character.Forced:
-        $ character.FaceChange("angry", 1)
+    if "no blow" in Girl.daily_history:
+        $ Girl.change_face("angry", 1)
+        $ Girl.recent_history.append("angry")
+        $ Girl.daily_history.append("angry")
+    elif Girl.Forced:
+        $ Girl.change_face("angry", 1)
         ch_e "You go too far!"
-        $ character.Statup("Lust", 200, 5)
-        if character.Love > 300:
-                $ character.Statup("Love", 70, -2)
-        $ character.Statup("Obed", 50, -2)
-        $ character.RecentActions.append("angry")
-        $ character.DailyActions.append("angry")
-        $ character.RecentActions.append("no blow")
-        $ character.DailyActions.append("no blow")
+        $ Girl.change_stat("lust", 200, 5)
+        if Girl.love > 300:
+                $ Girl.change_stat("love", 70, -2)
+        $ Girl.change_stat("obedience", 50, -2)
+        $ Girl.recent_history.append("angry")
+        $ Girl.daily_history.append("angry")
+        $ Girl.recent_history.append("no blow")
+        $ Girl.daily_history.append("no blow")
         return
     elif Taboo:                             # she refuses and this is too public a place for her
-        $ character.FaceChange("angry", 1)
-        $ character.DailyActions.append("tabno")
+        $ Girl.change_face("angry", 1)
+        $ Girl.daily_history.append("tabno")
         ch_e "This is way too exposed!"
-        $ character.Statup("Lust", 200, 5)
-        $ character.Statup("Obed", 50, -3)
+        $ Girl.change_stat("lust", 200, 5)
+        $ Girl.change_stat("obedience", 50, -3)
         return
-    elif character.Blow:
-        $ character.FaceChange("sad")
-        ch_e "I'm just not in the mood, [character.Petname]."
+    elif Girl.Blow:
+        $ Girl.change_face("sad")
+        ch_e "I'm just not in the mood, [Girl.Petname]."
     else:
-        $ character.FaceChange("normal", 1)
+        $ Girl.change_face("normal", 1)
         ch_e "I don't think I will."
-    $ character.RecentActions.append("no blow")
-    $ character.DailyActions.append("no blow")
+    $ Girl.recent_history.append("no blow")
+    $ Girl.daily_history.append("no blow")
     $ temp_modifier = 0
     return
 
@@ -1406,129 +1406,129 @@ label Emma_BJ_Prep:
     if renpy.showing("Emma_HJ_Animation"):
         hide Emma_HJ_Animation with easeoutbottom
     if Taboo:
-        $ character.Inbt += int(Taboo/10)
-        $ character.Lust += int(Taboo/5)
+        $ Girl.inhibition += int(Taboo/10)
+        $ Girl.lust += int(Taboo/5)
 
-    $ character.FaceChange("sexy")
-    if character.Forced:
-        $ character.FaceChange("sad")
+    $ Girl.change_face("sexy")
+    if Girl.Forced:
+        $ Girl.change_face("sad")
 
-    call Seen_First_Peen(character,Partner,React=Situation)
+    call Seen_First_Peen(Girl,Partner,React=action_context)
     call Emma_BJ_Launch("L")
 
-    if Situation == character:
+    if action_context == Girl:
             #Emma auto-starts
-            $ Situation = 0
-            "[character.Name] slides down and places your cock against her lips."
+            $ action_context = 0
+            "[Girl.name] slides down and places your cock against her lips."
             menu:
                 "What do you do?"
                 "Nothing.":
-                    $ character.Statup("Inbt", 80, 3)
-                    $ character.Statup("Inbt", 40, 2)
-                    "[character.Name] continues licking at it."
+                    $ Girl.change_stat("inhibition", 80, 3)
+                    $ Girl.change_stat("inhibition", 40, 2)
+                    "[Girl.name] continues licking at it."
                 "Praise her.":
-                    $ character.FaceChange("sexy", 1)
-                    $ character.Statup("Inbt", 80, 3)
-                    ch_p "Hmmm, keep doing that, [character.Pet]."
-                    $ character.NameCheck() #checks reaction to petname
-                    "[character.Name] continues her actions."
-                    $ character.Statup("Love", 85, 1)
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 2)
+                    $ Girl.change_face("sexy", 1)
+                    $ Girl.change_stat("inhibition", 80, 3)
+                    ch_p "Hmmm, keep doing that, [Girl.Pet]."
+                    $ Girl.nameCheck() #checks reaction to petname
+                    "[Girl.name] continues her actions."
+                    $ Girl.change_stat("love", 85, 1)
+                    $ Girl.change_stat("obedience", 90, 1)
+                    $ Girl.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ character.FaceChange("surprised")
-                    $ character.Statup("Inbt", 70, 1)
-                    ch_p "Let's not do that for now, [character.Pet]."
-                    $ character.NameCheck() #checks reaction to petname
-                    "[character.Name] puts it down."
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 3)
-                    $ Player.RecentActions.append("nope")
-                    $ character.AddWord(1,"refused","refused")
+                    $ Girl.change_face("surprised")
+                    $ Girl.change_stat("inhibition", 70, 1)
+                    ch_p "Let's not do that for now, [Girl.Pet]."
+                    $ Girl.nameCheck() #checks reaction to petname
+                    "[Girl.name] puts it down."
+                    $ Girl.change_stat("obedience", 90, 1)
+                    $ Girl.change_stat("obedience", 50, 3)
+                    $ Player.recent_history.append("nope")
+                    $ Girl.AddWord(1,"refused","refused")
                     return
-    if not character.Blow:
-        if character.Forced:
-            $ character.Statup("Love", 90, -70)
-            $ character.Statup("Obed", 70, 45)
-            $ character.Statup("Inbt", 80, 60)
+    if not Girl.Blow:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -70)
+            $ Girl.change_stat("obedience", 70, 45)
+            $ Girl.change_stat("inhibition", 80, 60)
         else:
-            $ character.Statup("Love", 90, 5)
-            $ character.Statup("Obed", 70, 35)
-            $ character.Statup("Inbt", 80, 40)
+            $ Girl.change_stat("love", 90, 5)
+            $ Girl.change_stat("obedience", 70, 35)
+            $ Girl.change_stat("inhibition", 80, 40)
 
-    if Situation:
+    if action_context:
         $ renpy.pop_call()
-        $ Situation = 0
-    $ Line = 0
-    $ Cnt = 0
+        $ action_context = 0
+    $ line = 0
+    $ counter = 0
     if Taboo:
-        $ character.DrainWord("tabno")
-    $ character.DrainWord("no blow")
-    $ character.RecentActions.append("blow")
-    $ character.DailyActions.append("blow")
+        $ Girl.DrainWord("tabno")
+    $ Girl.DrainWord("no blow")
+    $ Girl.recent_history.append("blow")
+    $ Girl.daily_history.append("blow")
 
 label Emma_BJ_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(character)
+        call Shift_Focus(Girl)
         call Emma_BJ_Launch
-        $ character.LustFace()
+        $ Girl.lustFace()
 
         if  Player.Focus < 100:
                     #Player Command menu
                     menu:
-                        "Keep going. . ." if Speed:
+                        "Keep going. . ." if action_speed:
                                     pass
 
-                        "Lick it. . ." if Speed != 1:
-                                $ Speed = 1
-                        "Lick it. . . (locked)" if Speed == 1:
+                        "Lick it. . ." if action_speed != 1:
+                                $ action_speed = 1
+                        "Lick it. . . (locked)" if action_speed == 1:
                                 pass
 
-                        "Just the head. . ." if Speed != 2:
-                            $ Speed = 2
-                        "Just the head. . . (locked)" if Speed == 2:
+                        "Just the head. . ." if action_speed != 2:
+                            $ action_speed = 2
+                        "Just the head. . . (locked)" if action_speed == 2:
                                 pass
 
-                        "Suck on it." if Speed != 3:
-                                $ Speed = 3
-                                if Trigger2 == "jackin":
+                        "Suck on it." if action_speed != 3:
+                                $ action_speed = 3
+                                if offhand_action == "jackin":
                                     "She dips her head a bit lower, and you move your hand out of the way."
 
-                        "Suck on it. (locked)" if Speed == 3:
+                        "Suck on it. (locked)" if action_speed == 3:
                                 pass
 
-                        "Take it deeper." if Speed != 4:
-                                if "pushed" not in character.RecentActions and character.Blow < 5:
-                                    $ character.Statup("Love", 80, -(20-(2*character.Blow)))
-                                    $ character.Statup("Obed", 80, (30-(3*character.Blow)))
-                                    $ character.RecentActions.append("pushed")
-                                if Trigger2 == "jackin" and Speed != 3:
+                        "Take it deeper." if action_speed != 4:
+                                if "pushed" not in Girl.recent_history and Girl.Blow < 5:
+                                    $ Girl.change_stat("love", 80, -(20-(2*Girl.Blow)))
+                                    $ Girl.change_stat("obedience", 80, (30-(3*Girl.Blow)))
+                                    $ Girl.recent_history.append("pushed")
+                                if offhand_action == "jackin" and action_speed != 3:
                                     "She takes it to the root, and you move your hand out of the way."
-                                $ Speed = 4
-                        "Take it deeper. (locked)" if Speed == 4:
+                                $ action_speed = 4
+                        "Take it deeper. (locked)" if action_speed == 4:
                                 pass
 
                         "Set your own pace. . .":
-                                "[character.Name] hums contentedly."
-                                if "setpace" not in character.RecentActions:
-                                    $ character.Statup("Love", 80, 2)
+                                "[Girl.name] hums contentedly."
+                                if "setpace" not in Girl.recent_history:
+                                    $ Girl.change_stat("love", 80, 2)
                                 $ D20 = renpy.random.randint(1, 20)
-                                if character.Blow < 5:
+                                if Girl.Blow < 5:
                                     $ D20 -= 10
-                                elif character.Blow < 10:
+                                elif Girl.Blow < 10:
                                     $ D20 -= 5
 
                                 if D20 > 15:
-                                    $ Speed = 4
-                                    if "setpace" not in character.RecentActions:
-                                        $ character.Statup("Inbt", 80, 3)
+                                    $ action_speed = 4
+                                    if "setpace" not in Girl.recent_history:
+                                        $ Girl.change_stat("inhibition", 80, 3)
                                 elif D20 > 10:
-                                    $ Speed = 3
+                                    $ action_speed = 3
                                 elif D20 > 5:
-                                    $ Speed = 2
+                                    $ action_speed = 2
                                 else:
-                                    $ Speed = 1
-                                $ character.RecentActions.append("setpace")
+                                    $ action_speed = 1
+                                $ Girl.recent_history.append("setpace")
 
                         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
                                     pass
@@ -1541,27 +1541,27 @@ label Emma_BJ_Cycle: #Repeating strokes
 
                         "Other options":
                                 menu:
-                                    "I also want to fondle her breasts." if Trigger2 != "fondle breasts":
-                                            if character.Action and MultiAction:
-                                                $ Trigger2 = "fondle breasts"
+                                    "I also want to fondle her breasts." if offhand_action != "fondle breasts":
+                                            if Girl.Action and MultiAction:
+                                                $ offhand_action = "fondle breasts"
                                                 "You start to fondle her breasts."
-                                                $ character.Action -= 1
+                                                $ Girl.Action -= 1
                                             else:
-                                                call Sex_Basic_Dialog(character,"tired")
+                                                call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Shift primary action":
-                                            if character.Action and MultiAction:
+                                            if Girl.Action and MultiAction:
                                                     menu:
                                                         "How about a handy?":
-                                                                if character.Action and MultiAction:
-                                                                    $ Situation = "shift"
+                                                                if Girl.Action and MultiAction:
+                                                                    $ action_context = "shift"
                                                                     call Emma_BJ_After
                                                                     call Emma_Handjob
                                                                 else:
                                                                     ch_e "I'm kinda tired, could we just wrap this up. . ."
                                                         "How about a titjob?":
-                                                                if character.Action and MultiAction:
-                                                                    $ Situation = "shift"
+                                                                if Girl.Action and MultiAction:
+                                                                    $ action_context = "shift"
                                                                     call Emma_BJ_After
                                                                     call Emma_Titjob
                                                                 else:
@@ -1569,124 +1569,124 @@ label Emma_BJ_Cycle: #Repeating strokes
                                                         "Never Mind":
                                                                 jump Emma_BJ_Cycle
                                             else:
-                                                call Sex_Basic_Dialog(character,"tired")
+                                                call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Threesome actions (locked)" if not Partner:
                                         pass
                                     "Threesome actions" if Partner:
                                         menu:
-                                            "Asks [character.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(character)
-                                            "Asks [character.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
+                                            "Asks [Girl.name] to do something else with [Partner.name]" if primary_action == "lesbian":
+                                                        call Les_Change(Girl)
+                                            "Asks [Girl.name] to do something else with [Partner.name] (locked)" if primary_action != "lesbian":
                                                         pass
-                                            "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(character)
+                                            "Ask [Partner.name] to do something else":
+                                                        call Three_Change(Girl)
 
-                                            "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
-                                                        $ ThreeCount = 0
-                                            "Don't stop what you're doing. . ." if ThreeCount and Trigger4:
-                                                        $ ThreeCount = 0
+                                            "Don't stop what you're doing. . .(locked)" if not position_change_timer or not Partner_primary_action:
+                                                        $ position_change_timer = 0
+                                            "Don't stop what you're doing. . ." if position_change_timer and Partner_primary_action:
+                                                        $ position_change_timer = 0
 
-                                            "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(character)
-                                            "Undress [Partner.Name]":
+                                            "Swap to [Partner.name]":
+                                                        call primary_action_Swap(Girl)
+                                            "Undress [Partner.name]":
                                                         call Girl_Undress(Partner)
                                                         jump Emma_BJ_Cycle
-                                            "Clean up [Partner.Name] (locked)" if not Partner.Spunk:
+                                            "Clean up [Partner.name] (locked)" if not Partner.Spunk:
                                                         pass
-                                            "Clean up [Partner.Name]" if Partner.Spunk:
+                                            "Clean up [Partner.name]" if Partner.Spunk:
                                                         call Girl_Cleanup(Partner,"ask")
                                                         jump Emma_BJ_Cycle
                                             "Never mind":
                                                         jump Emma_BJ_Cycle
-                                    "Undress [character.Name]":
-                                            call Girl_Undress(character)
-                                    "Clean up [character.Name] (locked)" if not character.Spunk:
+                                    "Undress [Girl.name]":
+                                            call Girl_Undress(Girl)
+                                    "Clean up [Girl.name] (locked)" if not Girl.Spunk:
                                             pass
-                                    "Clean up [character.Name]" if character.Spunk:
-                                            call Girl_Cleanup(character,"ask")
+                                    "Clean up [Girl.name]" if Girl.Spunk:
+                                            call Girl_Cleanup(Girl,"ask")
                                     "Never mind":
                                             jump Emma_BJ_Cycle
 
                         "Back to Sex Menu" if MultiAction:
                                     ch_p "Let's try something else."
                                     call Emma_BJ_Reset
-                                    $ Situation = "shift"
-                                    $ Line = 0
+                                    $ action_context = "shift"
+                                    $ line = 0
                                     jump Emma_BJ_After
                         "End Scene" if not MultiAction:
                                     ch_p "Let's stop for now."
                                     call Emma_BJ_Reset
-                                    $ Line = 0
+                                    $ line = 0
                                     jump Emma_BJ_After
-        #End menu (if Line)
+        #End menu (if line)
 
-        call Shift_Focus(character)
-        call Sex_Dialog(character,Partner)
+        call Shift_Focus(Girl)
+        call Sex_Dialog(Girl,Partner)
 
         #If either of you could cum
 
-        $ Cnt += 1
+        $ counter += 1
         $ Round -= 1
-        if Speed:
+        if action_speed:
             $ Player.Wet = 1 #wets penis
             $ Player.Spunk = 0 if Player.Spunk else Player.Spunk #cleans you off after one cycle
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-        if Player.Focus >= 100 or character.Lust >= 100:
+        if Player.Focus >= 100 or Girl.lust >= 100:
                     #If either of you could cum
                     if Player.Focus >= 100:
                             #If you can cum:
-                            call Player_Cumming(character)
-                            if "angry" in character.RecentActions:
+                            call Player_Cumming(Girl)
+                            if "angry" in Girl.recent_history:
                                 call Emma_BJ_Reset
                                 return
-                            $ character.Statup("Lust", 200, 5)
-                            if 100 > character.Lust >= 70 and character.OCount < 2 and character.SEXP >= 20:
-                                $ character.RecentActions.append("unsatisfied")
-                                $ character.DailyActions.append("unsatisfied")
+                            $ Girl.change_stat("lust", 200, 5)
+                            if 100 > Girl.lust >= 70 and Girl.OCount < 2 and Girl.SEXP >= 20:
+                                $ Girl.recent_history.append("unsatisfied")
+                                $ Girl.daily_history.append("unsatisfied")
 
                             if Player.Focus > 80:
                                 jump Emma_BJ_After
-                            $ Line = "came"
+                            $ line = "came"
 
-                    if character.Lust >= 100:
-                            #If [character.Name] can cum
-                            call Girl_Cumming(character)
-                            if Situation == "shift" or "angry" in character.RecentActions:
+                    if Girl.lust >= 100:
+                            #If [Girl.name] can cum
+                            call Girl_Cumming(Girl)
+                            if action_context == "shift" or "angry" in Girl.recent_history:
                                 jump Emma_BJ_After
 
-                    if Line == "came": #ex Player.Focus <= 20:
+                    if line == "came": #ex Player.Focus <= 20:
                             #If you've just cum,
-                            $ Line = 0
+                            $ line = 0
                             if not Player.Semen:
                                 "You're emptied out, you should probably take a break."
 
 
-                            if "unsatisfied" in character.RecentActions:#And [character.Name] is unsatisfied,
-                                    "[character.Name] still seems a bit unsatisfied with the experience."
+                            if "unsatisfied" in Girl.recent_history:#And [Girl.name] is unsatisfied,
+                                    "[Girl.name] still seems a bit unsatisfied with the experience."
                                     menu:
                                         "Finish her?"
                                         "Yes, keep going for a bit.":
-                                            $ Line = "You get back into it"
+                                            $ line = "You get back into it"
                                         "No, I'm done.":
                                             "You pull back."
                                             jump Emma_BJ_After
-        if Partner and Partner.Lust >= 100:
+        if Partner and Partner.lust >= 100:
                 #Checks if partner could orgasm
                 call Girl_Cumming(Partner)
         #End orgasm
 
         $ Player.Focus -= 12 if Player.FocusX and Player.Focus > 50 else 0
 
-        if character.SEXP >= 100 or ApprovalCheck(character, 1200, "LO"):
+        if Girl.SEXP >= 100 or ApprovalCheck(Girl, 1200, "LO"):
             pass
-        elif Cnt == (15 + character.Blow):
-                $ character.Brows = "angry"
+        elif counter == (15 + Girl.Blow):
+                $ Girl.Brows = "angry"
                 menu:
                     ch_e "I'm getting a bit worn out here, could we do something else?"
-                    "How about a Handy?" if character.Action and MultiAction:
-                            $ Situation = "shift"
+                    "How about a Handy?" if Girl.Action and MultiAction:
+                            $ action_context = "shift"
                             call Emma_BJ_After
                             call Emma_Handjob
                             return
@@ -1694,37 +1694,37 @@ label Emma_BJ_Cycle: #Repeating strokes
                             "You release your concentration. . ."
                             $ Player.FocusX = 0
                             $ Player.Focus += 15
-                            $ Cnt += 1
-                            "[Line]."
+                            $ counter += 1
+                            "[line]."
                             jump Emma_BJ_Cycle
                     "Let's try something else." if MultiAction:
-                            $ Line = 0
+                            $ line = 0
                             call Emma_BJ_Reset
-                            $ Situation = "shift"
+                            $ action_context = "shift"
                             jump Emma_BJ_After
                     "No, get back down there.":
-                            if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
-                                $ character.Statup("Love", 200, -5)
-                                $ character.Statup("Obed", 50, 3)
-                                $ character.Statup("Obed", 80, 2)
+                            if ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "O"):
+                                $ Girl.change_stat("love", 200, -5)
+                                $ Girl.change_stat("obedience", 50, 3)
+                                $ Girl.change_stat("obedience", 80, 2)
                                 "She scowls but gets back to work."
                             else:
-                                $ character.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                                 "She scowls at you, drops you cock and pulls back."
                                 ch_e "Well then."
-                                $ character.Statup("Love", 50, -3, 1)
-                                $ character.Statup("Love", 80, -4, 1)
-                                $ character.Statup("Obed", 30, -1, 1)
-                                $ character.Statup("Obed", 50, -1, 1)
-                                $ character.RecentActions.append("angry")
-                                $ character.DailyActions.append("angry")
+                                $ Girl.change_stat("love", 50, -3, 1)
+                                $ Girl.change_stat("love", 80, -4, 1)
+                                $ Girl.change_stat("obedience", 30, -1, 1)
+                                $ Girl.change_stat("obedience", 50, -1, 1)
+                                $ Girl.recent_history.append("angry")
+                                $ Girl.daily_history.append("angry")
                                 jump Emma_BJ_After
-        elif Cnt == (10 + character.Blow) and character.SEXP <= 100 and not ApprovalCheck(character, 1200, "LO"):
-                    $ character.Brows = "confused"
+        elif counter == (10 + Girl.Blow) and Girl.SEXP <= 100 and not ApprovalCheck(Girl, 1200, "LO"):
+                    $ Girl.Brows = "confused"
                     ch_e "Are you about done? I'm a little tired of this."
         #End Count check
 
-        call Escalation(character) #sees if she wants to escalate things
+        call Escalation(Girl) #sees if she wants to escalate things
 
         if Round == 10:
             ch_e "It's getting a bit late. . ."
@@ -1732,73 +1732,73 @@ label Emma_BJ_Cycle: #Repeating strokes
             ch_e "Do you mind if we take a break?"
 
     #Round = 0 loop breaks
-    $ character.FaceChange("bemused", 0)
-    $ Line = 0
+    $ Girl.change_face("bemused", 0)
+    $ line = 0
     ch_e "Ok, I need to rest my jaw for a minute. . ."
 
 label Emma_BJ_After:
-    $ character.FaceChange("sexy")
+    $ Girl.change_face("sexy")
 
-    $ character.Blow += 1
-    $ character.Action -=1
-    $ character.Addictionrate += 1
+    $ Girl.Blow += 1
+    $ Girl.Action -=1
+    $ Girl.Addictionrate += 1
     if "addictive" in Player.Traits:
-        $ character.Addictionrate += 1
+        $ Girl.Addictionrate += 1
 
-    call Partner_Like(character,2)
+    call Partner_Like(Girl,2)
 
     if "Emma Jobber" in Achievements:
         pass
-    elif character.Blow >= 10:
-        $ character.FaceChange("smile", 1)
-        ch_e "You taste positively intoxicating, [character.Petname]."
+    elif Girl.Blow >= 10:
+        $ Girl.change_face("smile", 1)
+        ch_e "You taste positively intoxicating, [Girl.Petname]."
         $ Achievements.append("Emma Jobber")
-        $character.SEXP += 5
-    elif Situation == "shift":
+        $Girl.SEXP += 5
+    elif action_context == "shift":
         pass
-    elif character.Blow == 1:
-            $character.SEXP += 15
-            if character.Love >= 500:
-                $ character.Mouth = "smile"
+    elif Girl.Blow == 1:
+            $Girl.SEXP += 15
+            if Girl.love >= 500:
+                $ Girl.Mouth = "smile"
                 ch_e "Hmm, better than I'd imagined. . ."
             elif Player.Focus <= 20:
-                $ character.Mouth = "sad"
+                $ Girl.Mouth = "sad"
                 ch_e "Was it all you dreamed of?"
-    elif character.Blow == 5:
+    elif Girl.Blow == 5:
         ch_e "Best you've had, I'm sure."
         menu:
             "[[nod]":
-                $ character.FaceChange("smile", 1)
-                $ character.Statup("Love", 90, 10)
-                $ character.Statup("Obed", 80, 5)
-                $ character.Statup("Inbt", 90, 10)
+                $ Girl.change_face("smile", 1)
+                $ Girl.change_stat("love", 90, 10)
+                $ Girl.change_stat("obedience", 80, 5)
+                $ Girl.change_stat("inhibition", 90, 10)
             "[[shake head \"no\"]":
-                if ApprovalCheck(character, 500, "O"):
-                    $ character.FaceChange("sad", 2)
-                    $ character.Statup("Love", 200, -5)
+                if ApprovalCheck(Girl, 500, "O"):
+                    $ Girl.change_face("sad", 2)
+                    $ Girl.change_stat("love", 200, -5)
                 else:
-                    $ character.FaceChange("angry", 2)
-                    $ character.Statup("Love", 200, -30)
-                $ character.Statup("Obed", 80, 20)
+                    $ Girl.change_face("angry", 2)
+                    $ Girl.change_stat("love", 200, -30)
+                $ Girl.change_stat("obedience", 80, 20)
                 ch_e ". . ."
-                $ character.FaceChange("sad", 1)
+                $ Girl.change_face("sad", 1)
 
     $ temp_modifier = 0
-    if Situation != "shift":
+    if action_context != "shift":
         call Emma_BJ_Reset
     call Checkout
     return
 
 
 
-# end character.Blowjob                                 //////////////////////////////////////////////////////////////////////////////
+# end Girl.Blowjob                                 //////////////////////////////////////////////////////////////////////////////
 
 # ////////////////////////////////////////////////////////////////////////Start Insert Pussy
 label Emma_Dildo_Check:
     if "dildo" in Player.Inventory:
         "You pull out a large rubber dildo. Lucky you remembered to keep it handy."
-    elif "dildo" in character.Inventory:
-        "You ask [character.Name] to get out her favorite Dildo."
+    elif "dildo" in Girl.Inventory:
+        "You ask [Girl.name] to get out her favorite Dildo."
     else:
         "You don't have one of those on you."
         return 0
@@ -1806,368 +1806,368 @@ label Emma_Dildo_Check:
 
 label Emma_Dildo_Pussy:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(character)
+    call Shift_Focus(Girl)
     call Emma_Dildo_Check
     if not _return:
         return
 
-    if character.DildoP: #You've done it before
+    if Girl.DildoP: #You've done it before
         $ temp_modifier += 15
-    if character.PantsNum() >= 6: # she's got pants on.
+    if Girl.PantsNum() >= 6: # she's got pants on.
         $ temp_modifier -= 20
 
-    if character.Lust > 95:
+    if Girl.lust > 95:
         $ temp_modifier += 20
-    elif character.Lust > 85: #She's really horny
+    elif Girl.lust > 85: #She's really horny
         $ temp_modifier += 15
 
-    if Situation == "shift":
+    if action_context == "shift":
         $ temp_modifier += 10
-    if "exhibitionist" in character.Traits:
+    if "exhibitionist" in Girl.Traits:
         $ temp_modifier += (5*Taboo)
-    if character in Player.Harem or "sex friend" in character.Petnames:
+    if Girl in Player.Harem or "sex friend" in Girl.Petnames:
         $ temp_modifier += 10
-    elif "ex" in character.Traits:
+    elif "ex" in Girl.Traits:
         $ temp_modifier -= 40
-    if character.ForcedCount and not character.Forced:
-        $ temp_modifier -= 5 * character.ForcedCount
+    if Girl.ForcedCount and not Girl.Forced:
+        $ temp_modifier -= 5 * Girl.ForcedCount
 
-    if Taboo and "tabno" in character.DailyActions:
+    if Taboo and "tabno" in Girl.daily_history:
         $ temp_modifier -= 10
 
-    if "no dildo" in character.DailyActions:
+    if "no dildo" in Girl.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no dildo" in character.RecentActions else 0
+        $ temp_modifier -= 10 if "no dildo" in Girl.recent_history else 0
 
-    $ Approval = ApprovalCheck(character, 1250, TabM = 4) # 125, 140, 155, Taboo -160(335)
+    $ Approval = ApprovalCheck(Girl, 1250, TabM = 4) # 125, 140, 155, Taboo -160(335)
 
-    if Situation == character:                                                                  #Emma auto-starts
+    if action_context == Girl:                                                                  #Emma auto-starts
                 if Approval > 2:                                                      # fix, add emma auto stuff here
-                    if character.PantsNum() == 5:
-                        "[character.Name] grabs her dildo, hiking up her skirt as she does."
-                        $ character.Upskirt = 1
-                    elif character.PantsNum() > 6:
-                        "[character.Name] grabs her dildo, pulling down her pants as she does."
-                        $ character.Legs = 0
+                    if Girl.wearing_skirt:
+                        "[Girl.name] grabs her dildo, hiking up her skirt as she does."
+                        $ Girl.Upskirt = 1
+                    elif Girl.PantsNum() > 6:
+                        "[Girl.name] grabs her dildo, pulling down her pants as she does."
+                        $ Girl.Legs = 0
                     else:
-                        "[character.Name] grabs her dildo, rubbing is suggestively against her crotch."
-                    $ character.SeenPanties = 1
+                        "[Girl.name] grabs her dildo, rubbing is suggestively against her crotch."
+                    $ Girl.SeenPanties = 1
                     "She slides the tip along her pussy and seems to want you to insert it."
                     menu:
                         "What do you do?"
                         "Nothing.":
-                            $ character.Statup("Inbt", 80, 3)
-                            $ character.Statup("Inbt", 50, 2)
-                            "[character.Name] slides it in."
+                            $ Girl.change_stat("inhibition", 80, 3)
+                            $ Girl.change_stat("inhibition", 50, 2)
+                            "[Girl.name] slides it in."
                         "Go for it.":
-                            $ character.FaceChange("sexy", 1)
-                            $ character.Statup("Inbt", 80, 3)
-                            ch_p "Oh yeah, [character.Pet], let's do this."
-                            $ character.NameCheck() #checks reaction to petname
+                            $ Girl.change_face("sexy", 1)
+                            $ Girl.change_stat("inhibition", 80, 3)
+                            ch_p "Oh yeah, [Girl.Pet], let's do this."
+                            $ Girl.nameCheck() #checks reaction to petname
                             "You grab the dildo and slide it in."
-                            $ character.Statup("Love", 85, 1)
-                            $ character.Statup("Obed", 90, 1)
-                            $ character.Statup("Obed", 50, 2)
+                            $ Girl.change_stat("love", 85, 1)
+                            $ Girl.change_stat("obedience", 90, 1)
+                            $ Girl.change_stat("obedience", 50, 2)
                         "Ask her to stop.":
-                            $ character.FaceChange("surprised")
-                            $ character.Statup("Inbt", 70, 1)
-                            ch_p "Let's not do that right now, [character.Pet]."
-                            $ character.NameCheck() #checks reaction to petname
-                            "[character.Name] sets the dildo down."
-                            $ character.OutfitChange()
-                            $ character.Statup("Obed", 90, 1)
-                            $ character.Statup("Obed", 50, 1)
-                            $ character.Statup("Obed", 30, 2)
+                            $ Girl.change_face("surprised")
+                            $ Girl.change_stat("inhibition", 70, 1)
+                            ch_p "Let's not do that right now, [Girl.Pet]."
+                            $ Girl.nameCheck() #checks reaction to petname
+                            "[Girl.name] sets the dildo down."
+                            $ Girl.OutfitChange()
+                            $ Girl.change_stat("obedience", 90, 1)
+                            $ Girl.change_stat("obedience", 50, 1)
+                            $ Girl.change_stat("obedience", 30, 2)
                             return
                     jump Emma_DP_Prep
                 else:
                     $ temp_modifier = 0                               # fix, add emma auto stuff here
-                    $ Trigger2 = 0
+                    $ offhand_action = 0
                 return
 
-    if Situation == "auto":
+    if action_context == "auto":
                 "You rub the dildo across her body, and along her moist slit."
-                $ character.FaceChange("surprised", 1)
+                $ Girl.change_face("surprised", 1)
 
-                if (character.DildoP and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
-                    "[character.Name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
-                    $ character.FaceChange("sexy")
-                    $ character.Statup("Obed", 70, 3)
-                    $ character.Statup("Inbt", 50, 3)
-                    $ character.Statup("Inbt", 70, 1)
-                    ch_e "Hmm, [character.Petname], toys!"
+                if (Girl.DildoP and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
+                    "[Girl.name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
+                    $ Girl.change_face("sexy")
+                    $ Girl.change_stat("obedience", 70, 3)
+                    $ Girl.change_stat("inhibition", 50, 3)
+                    $ Girl.change_stat("inhibition", 70, 1)
+                    ch_e "Hmm, [Girl.Petname], toys!"
                     jump Emma_DP_Prep
                 else:                                                                                                            #she's questioning it
-                    $ character.Brows = "angry"
+                    $ Girl.Brows = "angry"
                     menu:
                         ch_e "Excuse yourself, what are you planning to do with that?!"
                         "Sorry, sorry! Never mind.":
                             if Approval:
-                                $ character.FaceChange("sexy", 1)
-                                $ character.Statup("Obed", 70, 3)
-                                $ character.Statup("Inbt", 50, 3)
-                                $ character.Statup("Inbt", 70, 1)
+                                $ Girl.change_face("sexy", 1)
+                                $ Girl.change_stat("obedience", 70, 3)
+                                $ Girl.change_stat("inhibition", 50, 3)
+                                $ Girl.change_stat("inhibition", 70, 1)
                                 ch_e "Well, now that you mention it. . ."
                                 jump Emma_DP_Prep
                             "You pull back before you really get it in."
-                            $ character.FaceChange("bemused", 1)
-                            if character.DildoP:
-                                ch_e "Well, [character.Petname], maybe warn me next time?"
+                            $ Girl.change_face("bemused", 1)
+                            if Girl.DildoP:
+                                ch_e "Well, [Girl.Petname], maybe warn me next time?"
                             else:
-                                ch_e "Well, [character.Petname], that's a little much. . . for now . . ."
+                                ch_e "Well, [Girl.Petname], that's a little much. . . for now . . ."
                         "Just playing with my favorite toys.":
-                            $ character.Statup("Love", 80, -10, 1)
-                            $ character.Statup("Love", 200, -10)
+                            $ Girl.change_stat("love", 80, -10, 1)
+                            $ Girl.change_stat("love", 200, -10)
                             "You press it inside some more."
-                            $ character.Statup("Obed", 70, 3)
-                            $ character.Statup("Inbt", 50, 3)
-                            if not ApprovalCheck(character, 700, "O", TabM=1): #Checks if Obed is 700+
-                                $ character.FaceChange("angry")
-                                "[character.Name] shoves you away and slaps you in the face."
+                            $ Girl.change_stat("obedience", 70, 3)
+                            $ Girl.change_stat("inhibition", 50, 3)
+                            if not ApprovalCheck(Girl, 700, "O", TabM=1): #Checks if obedience is 700+
+                                $ Girl.change_face("angry")
+                                "[Girl.name] shoves you away and slaps you in the face."
                                 ch_e "Ask nicely before trying anything like that!"
-                                $ character.Statup("Love", 50, -10, 1)
-                                $ character.Statup("Obed", 50, 3)
+                                $ Girl.change_stat("love", 50, -10, 1)
+                                $ Girl.change_stat("obedience", 50, 3)
                                 $ renpy.pop_call()
-                                if Situation:
+                                if action_context:
                                     $ renpy.pop_call()
                                 if renpy.showing("Emma_SexSprite"):
                                     call Emma_Sex_Reset
-                                $ character.RecentActions.append("angry")
-                                $ character.DailyActions.append("angry")
+                                $ Girl.recent_history.append("angry")
+                                $ Girl.daily_history.append("angry")
                             else:
-                                $ character.FaceChange("sad")
-                                "[character.Name] doesn't seem to be into this, you're lucky she's so obedient."
+                                $ Girl.change_face("sad")
+                                "[Girl.name] doesn't seem to be into this, you're lucky she's so obedient."
                                 jump Emma_DP_Prep
                 return
     #end Auto
 
-    if not character.DildoP:
+    if not Girl.DildoP:
             #first time
-            $ character.FaceChange("surprised", 1)
-            $ character.Mouth = "kiss"
+            $ Girl.change_face("surprised", 1)
+            $ Girl.Mouth = "kiss"
             ch_e "Hmmm, so you'd like to try out some toys?"
-            if character.Forced:
-                $ character.FaceChange("sad")
+            if Girl.Forced:
+                $ Girl.change_face("sad")
                 ch_e "I suppose there are worst things you could ask for."
 
-    if not character.DildoP and Approval:
+    if not Girl.DildoP and Approval:
             #First time dialog
-            if character.Forced:
-                $ character.FaceChange("sad")
-                $ character.Statup("Love", 70, -3, 1)
-                $ character.Statup("Love", 20, -2, 1)
-            elif character.Love >= (character.Obed + character.Inbt):
-                $ character.FaceChange("sexy")
-                $ character.Brows = "sad"
-                $ character.Mouth = "smile"
+            if Girl.Forced:
+                $ Girl.change_face("sad")
+                $ Girl.change_stat("love", 70, -3, 1)
+                $ Girl.change_stat("love", 20, -2, 1)
+            elif Girl.love >= (Girl.obedience + Girl.inhibition):
+                $ Girl.change_face("sexy")
+                $ Girl.Brows = "sad"
+                $ Girl.Mouth = "smile"
                 ch_e "I've had a reasonable amount of experience with these, you know. . ."
-            elif character.Obed >= character.Inbt:
-                $ character.FaceChange("normal")
-                ch_e "If that's what you want, [character.Petname]. . ."
+            elif Girl.obedience >= Girl.inhibition:
+                $ Girl.change_face("normal")
+                ch_e "If that's what you want, [Girl.Petname]. . ."
             else: # Uninhibited
-                $ character.FaceChange("sad")
-                $ character.Mouth = "smile"
+                $ Girl.change_face("sad")
+                $ Girl.Mouth = "smile"
                 ch_e "I guess it could be fun with a partner. . ."
 
     elif Approval:
             #Second time+ dialog
-            if character.Forced:
-                $ character.FaceChange("sad")
-                $ character.Statup("Love", 70, -3, 1)
-                $ character.Statup("Love", 20, -2, 1)
+            if Girl.Forced:
+                $ Girl.change_face("sad")
+                $ Girl.change_stat("love", 70, -3, 1)
+                $ Girl.change_stat("love", 20, -2, 1)
                 ch_e "The toys again?"
-            elif not Taboo and "tabno" in character.DailyActions:
+            elif not Taboo and "tabno" in Girl.daily_history:
                 ch_e "Well, at least you got us some privacy this time. . ."
-            elif "dildo pussy" in character.RecentActions:
-                $ character.FaceChange("sexy", 1)
+            elif "dildo pussy" in Girl.recent_history:
+                $ Girl.change_face("sexy", 1)
                 ch_e "Mmm, again? Ok, let's get to it."
                 jump Emma_DP_Prep
-            elif "dildo pussy" in character.DailyActions:
-                $ character.FaceChange("sexy", 1)
-                $ Line = renpy.random.choice(["Breaking out the toys again?",
+            elif "dildo pussy" in Girl.daily_history:
+                $ Girl.change_face("sexy", 1)
+                $ line = renpy.random.choice(["Breaking out the toys again?",
                     "Didn't get enough earlier?",
                     "You're going to wear me out."])
-                ch_e "[Line]"
-            elif character.DildoP < 3:
-                $ character.FaceChange("sexy", 1)
-                $ character.Brows = "confused"
-                $ character.Mouth = "kiss"
+                ch_e "[line]"
+            elif Girl.DildoP < 3:
+                $ Girl.change_face("sexy", 1)
+                $ Girl.Brows = "confused"
+                $ Girl.Mouth = "kiss"
                 ch_e "You want to stick it in my pussy again?"
             else:
-                $ character.FaceChange("sexy", 1)
-                $ character.ArmPose = 2
-                $ Line = renpy.random.choice(["You want some of this action?",
+                $ Girl.change_face("sexy", 1)
+                $ Girl.ArmPose = 2
+                $ line = renpy.random.choice(["You want some of this action?",
                     "So you'd like another go?",
                     "You want to stick it in my pussy again?",
                     "You want me ta lube up your toy?"])
-                ch_e "[Line]"
-                $ Line = 0
+                ch_e "[line]"
+                $ line = 0
 
     if Approval >= 2:
             #She's into it. . .
-            if character.Forced:
-                $ character.FaceChange("sad")
-                $ character.Statup("Obed", 90, 1)
-                $ character.Statup("Inbt", 60, 1)
+            if Girl.Forced:
+                $ Girl.change_face("sad")
+                $ Girl.change_stat("obedience", 90, 1)
+                $ Girl.change_stat("inhibition", 60, 1)
                 ch_e "Ok, fine."
             else:
-                $ character.FaceChange("sexy", 1)
-                $ character.Statup("Love", 90, 1)
-                $ character.Statup("Inbt", 50, 3)
-                $ Line = renpy.random.choice(["Well, sure, stick it in.",
+                $ Girl.change_face("sexy", 1)
+                $ Girl.change_stat("love", 90, 1)
+                $ Girl.change_stat("inhibition", 50, 3)
+                $ line = renpy.random.choice(["Well, sure, stick it in.",
                     "Well. . . ok.",
                     "Sure!",
                     "I guess I could. . . stick it in.",
                     "Delightful.",
                     "Hmm, ok, ok."])
-                ch_e "[Line]"
-                $ Line = 0
-            $ character.Statup("Obed", 20, 1)
-            $ character.Statup("Obed", 60, 1)
-            $ character.Statup("Inbt", 70, 2)
+                ch_e "[line]"
+                $ line = 0
+            $ Girl.change_stat("obedience", 20, 1)
+            $ Girl.change_stat("obedience", 60, 1)
+            $ Girl.change_stat("inhibition", 70, 2)
             jump Emma_DP_Prep
 
     else:
             #She's not into it, but maybe. . .
-            $ character.FaceChange("angry")
-            if "no dildo" in character.RecentActions:
-                ch_e "What part of \"no,\" did you not get, [character.Petname]?"
-            elif Taboo and "tabno" in character.DailyActions and "no dildo" in character.DailyActions:
+            $ Girl.change_face("angry")
+            if "no dildo" in Girl.recent_history:
+                ch_e "What part of \"no,\" did you not get, [Girl.Petname]?"
+            elif Taboo and "tabno" in Girl.daily_history and "no dildo" in Girl.daily_history:
                 ch_e "Stop showing that thing around in public!"
-            elif "no dildo" in character.DailyActions:
-                ch_e "I already told you \"no,\" [character.Petname]."
-            elif Taboo and "tabno" in character.DailyActions:
+            elif "no dildo" in Girl.daily_history:
+                ch_e "I already told you \"no,\" [Girl.Petname]."
+            elif Taboo and "tabno" in Girl.daily_history:
                 ch_e "Stop showing that thing around in public!"
-            elif not character.DildoP:
-                $ character.FaceChange("bemused")
-                ch_e "I'm a bit past toys, [character.Petname]. . ."
+            elif not Girl.DildoP:
+                $ Girl.change_face("bemused")
+                ch_e "I'm a bit past toys, [Girl.Petname]. . ."
             else:
-                $ character.FaceChange("bemused")
-                ch_e "We don't need any toys, do we, [character.Petname]?"
+                $ Girl.change_face("bemused")
+                ch_e "We don't need any toys, do we, [Girl.Petname]?"
             menu:
                 extend ""
-                "Sorry, never mind." if "no dildo" in character.DailyActions:
-                    $ character.FaceChange("bemused")
-                    ch_e "I thought as much, [character.Petname]."
+                "Sorry, never mind." if "no dildo" in Girl.daily_history:
+                    $ Girl.change_face("bemused")
+                    ch_e "I thought as much, [Girl.Petname]."
                     return
-                "Maybe later?" if "no dildo" not in character.DailyActions:
-                    $ character.FaceChange("sexy")
-                    ch_e "Maybe I'll practice on my own time, [character.Petname]."
-                    $ character.Statup("Love", 80, 2)
-                    $ character.Statup("Inbt", 70, 2)
+                "Maybe later?" if "no dildo" not in Girl.daily_history:
+                    $ Girl.change_face("sexy")
+                    ch_e "Maybe I'll practice on my own time, [Girl.Petname]."
+                    $ Girl.change_stat("love", 80, 2)
+                    $ Girl.change_stat("inhibition", 70, 2)
                     if Taboo:
-                        $ character.RecentActions.append("tabno")
-                        $ character.DailyActions.append("tabno")
-                    $ character.RecentActions.append("no dildo")
-                    $ character.DailyActions.append("no dildo")
+                        $ Girl.recent_history.append("tabno")
+                        $ Girl.daily_history.append("tabno")
+                    $ Girl.recent_history.append("no dildo")
+                    $ Girl.daily_history.append("no dildo")
                     return
                 "I think you'd like it. . .":
                     if Approval:
-                        $ character.FaceChange("sexy")
-                        $ character.Statup("Obed", 90, 2)
-                        $ character.Statup("Obed", 50, 2)
-                        $ character.Statup("Inbt", 70, 3)
-                        $ character.Statup("Inbt", 40, 2)
-                        $ Line = renpy.random.choice(["Well, sure, stick it in.",
+                        $ Girl.change_face("sexy")
+                        $ Girl.change_stat("obedience", 90, 2)
+                        $ Girl.change_stat("obedience", 50, 2)
+                        $ Girl.change_stat("inhibition", 70, 3)
+                        $ Girl.change_stat("inhibition", 40, 2)
+                        $ line = renpy.random.choice(["Well, sure, stick it in.",
                             "I suppose. . .",
                             "You make a compelling argument."])
-                        ch_e "[Line]"
-                        $ Line = 0
+                        ch_e "[line]"
+                        $ line = 0
                         jump Emma_DP_Prep
                     else:
                         pass
 
                 "[[press it against her]":                                               # Pressured into it
-                    $ Approval = ApprovalCheck(character, 950, "OI", TabM = 3) # 95, 110, 125, -120(215)
-                    if Approval > 1 or (Approval and character.Forced):
-                        $ character.FaceChange("sad")
-                        $ character.Statup("Love", 70, -5, 1)
-                        $ character.Statup("Love", 200, -5)
+                    $ Approval = ApprovalCheck(Girl, 950, "OI", TabM = 3) # 95, 110, 125, -120(215)
+                    if Approval > 1 or (Approval and Girl.Forced):
+                        $ Girl.change_face("sad")
+                        $ Girl.change_stat("love", 70, -5, 1)
+                        $ Girl.change_stat("love", 200, -5)
                         ch_e
-                        $ character.Statup("Obed", 80, 4)
-                        $ character.Statup("Inbt", 80, 1)
-                        $ character.Statup("Inbt", 60, 3)
-                        $ character.Forced = 1
+                        $ Girl.change_stat("obedience", 80, 4)
+                        $ Girl.change_stat("inhibition", 80, 1)
+                        $ Girl.change_stat("inhibition", 60, 3)
+                        $ Girl.Forced = 1
                         jump Emma_DP_Prep
                     else:
-                        $ character.Statup("Love", 200, -20)
-                        $ character.RecentActions.append("angry")
-                        $ character.DailyActions.append("angry")
+                        $ Girl.change_stat("love", 200, -20)
+                        $ Girl.recent_history.append("angry")
+                        $ Girl.daily_history.append("angry")
 
     #She refused all offers.
-    $ character.ArmPose = 1
-    if "no dildo" in character.DailyActions:
-            $ character.RecentActions.append("angry")
-            $ character.DailyActions.append("angry")
-    elif character.Forced:
-            $ character.FaceChange("angry", 1)
+    $ Girl.ArmPose = 1
+    if "no dildo" in Girl.daily_history:
+            $ Girl.recent_history.append("angry")
+            $ Girl.daily_history.append("angry")
+    elif Girl.Forced:
+            $ Girl.change_face("angry", 1)
             ch_e "I'm not going to let you use that on me."
-            $ character.Statup("Lust", 200, 5)
-            if character.Love > 300:
-                    $ character.Statup("Love", 70, -2)
-            $ character.Statup("Obed", 50, -2)
-            $ character.RecentActions.append("angry")
-            $ character.DailyActions.append("angry")
+            $ Girl.change_stat("lust", 200, 5)
+            if Girl.love > 300:
+                    $ Girl.change_stat("love", 70, -2)
+            $ Girl.change_stat("obedience", 50, -2)
+            $ Girl.recent_history.append("angry")
+            $ Girl.daily_history.append("angry")
     elif Taboo:                             # she refuses and this is too public a place for her
-            $ character.FaceChange("angry", 1)
-            $ character.RecentActions.append("tabno")
-            $ character.DailyActions.append("tabno")
+            $ Girl.change_face("angry", 1)
+            $ Girl.recent_history.append("tabno")
+            $ Girl.daily_history.append("tabno")
             ch_e "Not here!"
-            $ character.Statup("Lust", 200, 5)
-            $ character.Statup("Obed", 50, -3)
-    elif character.DildoP:
-            $ character.FaceChange("sad")
+            $ Girl.change_stat("lust", 200, 5)
+            $ Girl.change_stat("obedience", 50, -3)
+    elif Girl.DildoP:
+            $ Girl.change_face("sad")
             ch_e "Sorry, you can keep your toys to yourself."
     else:
-            $ character.FaceChange("normal", 1)
+            $ Girl.change_face("normal", 1)
             ch_e "No way."
-    $ character.RecentActions.append("no dildo")
-    $ character.DailyActions.append("no dildo")
+    $ Girl.recent_history.append("no dildo")
+    $ Girl.daily_history.append("no dildo")
     $ temp_modifier = 0
     return
 
 label Emma_DP_Prep: #Animation set-up
-    if Trigger2 == "dildo pussy":
+    if offhand_action == "dildo pussy":
         return
 
-    if not character.Forced and Situation != "auto":
-        $ temp_modifier = 15 if character.PantsNum() > 6 else 0
-        call Bottoms_Off(character)
-        if "angry" in character.RecentActions:
+    if not Girl.Forced and action_context != "auto":
+        $ temp_modifier = 15 if Girl.PantsNum() > 6 else 0
+        call Bottoms_Off(Girl)
+        if "angry" in Girl.recent_history:
             return
 
     $ temp_modifier = 0
     call Emma_Pussy_Launch("dildo pussy")
-    if not character.DildoP:
-        if character.Forced:
-            $ character.Statup("Love", 90, -75)
-            $ character.Statup("Obed", 70, 60)
-            $ character.Statup("Inbt", 80, 35)
+    if not Girl.DildoP:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -75)
+            $ Girl.change_stat("obedience", 70, 60)
+            $ Girl.change_stat("inhibition", 80, 35)
         else:
-            $ character.Statup("Love", 90, 10)
-            $ character.Statup("Obed", 70, 20)
-            $ character.Statup("Inbt", 80, 45)
+            $ Girl.change_stat("love", 90, 10)
+            $ Girl.change_stat("obedience", 70, 20)
+            $ Girl.change_stat("inhibition", 80, 45)
     if Taboo:
-        $ character.Inbt += int(Taboo/10)
-        $ character.Lust += int(Taboo/5)
+        $ Girl.inhibition += int(Taboo/10)
+        $ Girl.lust += int(Taboo/5)
 
 
-    if Situation:
+    if action_context:
         $ renpy.pop_call()
-        $ Situation = 0
-    $ Line = 0
-    $ Cnt = 0
+        $ action_context = 0
+    $ line = 0
+    $ counter = 0
     if Taboo:
-        $ character.DrainWord("tabno")
-    $ character.DrainWord("no dildo")
-    $ character.RecentActions.append("dildo pussy")
-    $ character.DailyActions.append("dildo pussy")
+        $ Girl.DrainWord("tabno")
+    $ Girl.DrainWord("no dildo")
+    $ Girl.recent_history.append("dildo pussy")
+    $ Girl.daily_history.append("dildo pussy")
 
 label Emma_DP_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(character)
+        call Shift_Focus(Girl)
         call Emma_Pussy_Launch("dildo pussy")
-        $ character.LustFace()
+        $ Girl.lustFace()
 
         if  Player.Focus < 100:
                     #Player Command menu
@@ -2176,7 +2176,7 @@ label Emma_DP_Cycle: #Repeating strokes
                                     pass
 
                         "Slap her ass":
-                                call Slap_Ass(character)
+                                call Slap_Ass(Girl)
                                 jump Emma_DP_Cycle
 
                         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
@@ -2191,178 +2191,178 @@ label Emma_DP_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if character.Action and MultiAction:
+                                            if Girl.Action and MultiAction:
                                                 call Offhand_Set
-                                                if Trigger2:
-                                                     $ character.Action -= 1
+                                                if offhand_action:
+                                                     $ Girl.Action -= 1
                                             else:
-                                                call Sex_Basic_Dialog(character,"tired")
+                                                call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Shift primary action":
-                                            if character.Action and MultiAction:
+                                            if Girl.Action and MultiAction:
                                                     menu:
                                                         "I want to stick a finger in her ass.":
-                                                                $ Situation = "shift"
+                                                                $ action_context = "shift"
                                                                 call Emma_DP_After
                                                                 call Emma_Insert_Ass
                                                         "Just stick a finger in her ass without asking.":
-                                                                $ Situation = "auto"
+                                                                $ action_context = "auto"
                                                                 call Emma_DP_After
                                                                 call Emma_Insert_Ass
                                                         "I want to shift the dildo to her ass.":
-                                                                $ Situation = "shift"
+                                                                $ action_context = "shift"
                                                                 call Emma_DP_After
                                                                 call Emma_Dildo_Ass
                                                         "Never Mind":
                                                                 jump Emma_DP_Cycle
                                             else:
-                                                call Sex_Basic_Dialog(character,"tired")
+                                                call Sex_Basic_Dialog(Girl,"tired")
 
-                                    "Shift your focus" if Trigger2:
-                                                $ Situation = "shift focus"
+                                    "Shift your focus" if offhand_action:
+                                                $ action_context = "shift focus"
                                                 call Emma_DP_After
                                                 call Offhand_Set
-                                    "Shift your focus (locked)" if not Trigger2:
+                                    "Shift your focus (locked)" if not offhand_action:
                                                 pass
                                     "Threesome actions (locked)" if not Partner:
                                         pass
                                     "Threesome actions" if Partner:
                                         menu:
-                                            "Asks [character.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(character)
-                                            "Asks [character.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
+                                            "Asks [Girl.name] to do something else with [Partner.name]" if primary_action == "lesbian":
+                                                        call Les_Change(Girl)
+                                            "Asks [Girl.name] to do something else with [Partner.name] (locked)" if primary_action != "lesbian":
                                                         pass
-                                            "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(character)
+                                            "Ask [Partner.name] to do something else":
+                                                        call Three_Change(Girl)
 
-                                            "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
-                                                        $ ThreeCount = 0
-                                            "Don't stop what you're doing. . ." if ThreeCount and Trigger4:
-                                                        $ ThreeCount = 0
+                                            "Don't stop what you're doing. . .(locked)" if not position_change_timer or not Partner_primary_action:
+                                                        $ position_change_timer = 0
+                                            "Don't stop what you're doing. . ." if position_change_timer and Partner_primary_action:
+                                                        $ position_change_timer = 0
 
-                                            "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(character)
-                                            "Undress [Partner.Name]":
+                                            "Swap to [Partner.name]":
+                                                        call primary_action_Swap(Girl)
+                                            "Undress [Partner.name]":
                                                         call Girl_Undress(Partner)
                                                         jump Emma_DP_Cycle
-                                            "Clean up [Partner.Name] (locked)" if not Partner.Spunk:
+                                            "Clean up [Partner.name] (locked)" if not Partner.Spunk:
                                                         pass
-                                            "Clean up [Partner.Name]" if Partner.Spunk:
+                                            "Clean up [Partner.name]" if Partner.Spunk:
                                                         call Girl_Cleanup(Partner,"ask")
                                                         jump Emma_DP_Cycle
                                             "Never mind":
                                                         jump Emma_DP_Cycle
-                                    "Undress [character.Name]":
-                                            call Girl_Undress(character)
-                                    "Clean up [character.Name] (locked)" if not character.Spunk:
+                                    "Undress [Girl.name]":
+                                            call Girl_Undress(Girl)
+                                    "Clean up [Girl.name] (locked)" if not Girl.Spunk:
                                             pass
-                                    "Clean up [character.Name]" if character.Spunk:
-                                            call Girl_Cleanup(character,"ask")
+                                    "Clean up [Girl.name]" if Girl.Spunk:
+                                            call Girl_Cleanup(Girl,"ask")
                                     "Never mind":
                                             jump Emma_DP_Cycle
 
                         "Back to Sex Menu" if MultiAction:
                                     ch_p "Let's try something else."
                                     call Emma_Pos_Reset
-                                    $ Situation = "shift"
-                                    $ Line = 0
+                                    $ action_context = "shift"
+                                    $ line = 0
                                     jump Emma_DP_After
                         "End Scene" if not MultiAction:
                                     ch_p "Let's stop for now."
                                     call Emma_Pos_Reset
-                                    $ Line = 0
+                                    $ line = 0
                                     jump Emma_DP_After
-        #End menu (if Line)
+        #End menu (if line)
 
-        if character.Panties or character.PantsNum() > 6 or character.HoseNum() >= 5: #This checks if [character.Name] wants to strip down.
-                call Girl_Undress(character,"auto")
+        if Girl.Panties or Girl.PantsNum() > 6 or Girl.HoseNum() >= 5: #This checks if [Girl.name] wants to strip down.
+                call Girl_Undress(Girl,"auto")
 
-        call Shift_Focus(character)
-        call Sex_Dialog(character,Partner)
+        call Shift_Focus(Girl)
+        call Sex_Dialog(Girl,Partner)
 
         #If either of you could cum
 
-        $ Cnt += 1
+        $ counter += 1
         $ Round -= 1
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-        if Player.Focus >= 100 or character.Lust >= 100:
+        if Player.Focus >= 100 or Girl.lust >= 100:
                     #If either of you could cum
                     if Player.Focus >= 100:
                             #If you can cum:
-                            call Player_Cumming(character)
-                            if "angry" in character.RecentActions:
+                            call Player_Cumming(Girl)
+                            if "angry" in Girl.recent_history:
                                 call Emma_Pos_Reset
                                 return
-                            $ character.Statup("Lust", 200, 5)
-                            if 100 > character.Lust >= 70 and character.OCount < 2:
-                                $ character.RecentActions.append("unsatisfied")
-                                $ character.DailyActions.append("unsatisfied")
+                            $ Girl.change_stat("lust", 200, 5)
+                            if 100 > Girl.lust >= 70 and Girl.OCount < 2:
+                                $ Girl.recent_history.append("unsatisfied")
+                                $ Girl.daily_history.append("unsatisfied")
 
                             if Player.Focus > 80:
                                 jump Emma_DP_After
-                            $ Line = "came"
-                    if character.Lust >= 100:
-                            #If [character.Name] can cum
-                            call Girl_Cumming(character)
-                            if Situation == "shift" or "angry" in character.RecentActions:
+                            $ line = "came"
+                    if Girl.lust >= 100:
+                            #If [Girl.name] can cum
+                            call Girl_Cumming(Girl)
+                            if action_context == "shift" or "angry" in Girl.recent_history:
                                 jump Emma_DP_After
-                    if Line == "came": #ex Player.Focus <= 20:
+                    if line == "came": #ex Player.Focus <= 20:
                             #If you've just cum,
-                            $ Line = 0
+                            $ line = 0
                             if not Player.Semen:
                                 "You're emptied out, you should probably take a break."
-                            if "unsatisfied" in character.RecentActions:#And [character.Name] is unsatisfied,
-                                    "[character.Name] still seems a bit unsatisfied with the experience."
+                            if "unsatisfied" in Girl.recent_history:#And [Girl.name] is unsatisfied,
+                                    "[Girl.name] still seems a bit unsatisfied with the experience."
                                     menu:
                                         "Finish her?"
                                         "Yes, keep going for a bit.":
-                                            $ Line = "You get back into it"
+                                            $ line = "You get back into it"
                                         "No, I'm done.":
                                             "You pull back."
                                             jump Emma_DP_After
-        if Partner and Partner.Lust >= 100:
+        if Partner and Partner.lust >= 100:
                 #Checks if partner could orgasm
                 call Girl_Cumming(Partner)
         #End orgasm
 
         $ Player.Focus -= 12 if Player.FocusX and Player.Focus > 50 else 0
 
-        if character.SEXP >= 100 or ApprovalCheck(character, 1200, "LO"):
+        if Girl.SEXP >= 100 or ApprovalCheck(Girl, 1200, "LO"):
             pass
-        elif Cnt == (5 + character.DildoP):
-                    $ character.Brows = "confused"
+        elif counter == (5 + Girl.DildoP):
+                    $ Girl.Brows = "confused"
                     ch_e "What are you even doing down there?"
-        elif character.Lust >= 80:
+        elif Girl.lust >= 80:
                     pass
-        elif Cnt == (15 + character.DildoP) and character.SEXP >= 15 and not ApprovalCheck(character, 1500):
-                    $ character.Brows = "confused"
+        elif counter == (15 + Girl.DildoP) and Girl.SEXP >= 15 and not ApprovalCheck(Girl, 1500):
+                    $ Girl.Brows = "confused"
                     menu:
-                        ch_e "[character.Petname], this is getting uncomfortable, maybe we could try something else."
+                        ch_e "[Girl.Petname], this is getting uncomfortable, maybe we could try something else."
                         "Finish up.":
                                 "You let go. . ."
                                 jump Emma_DP_After
                         "Let's try something else." if MultiAction:
-                                $ Line = 0
-                                $ Situation = "shift"
+                                $ line = 0
+                                $ action_context = "shift"
                                 jump Emma_DP_After
                         "No, this is fun.":
-                                if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
-                                    $ character.Statup("Love", 200, -5)
-                                    $ character.Statup("Obed", 50, 3)
-                                    $ character.Statup("Obed", 80, 2)
+                                if ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "O"):
+                                    $ Girl.change_stat("love", 200, -5)
+                                    $ Girl.change_stat("obedience", 50, 3)
+                                    $ Girl.change_stat("obedience", 80, 2)
                                     "She grumbles but lets you keep going."
                                 else:
-                                    $ character.FaceChange("angry", 1)
+                                    $ Girl.change_face("angry", 1)
                                     call Emma_Pos_Reset
                                     "She scowls at you and pulls back."
                                     ch_e "Well if that's your attitude, I don't need your \"help\"."
-                                    $ character.Statup("Love", 50, -3, 1)
-                                    $ character.Statup("Love", 80, -4, 1)
-                                    $ character.Statup("Obed", 30, -1, 1)
-                                    $ character.Statup("Obed", 50, -1, 1)
-                                    $ character.RecentActions.append("angry")
-                                    $ character.DailyActions.append("angry")
+                                    $ Girl.change_stat("love", 50, -3, 1)
+                                    $ Girl.change_stat("love", 80, -4, 1)
+                                    $ Girl.change_stat("obedience", 30, -1, 1)
+                                    $ Girl.change_stat("obedience", 50, -1, 1)
+                                    $ Girl.recent_history.append("angry")
+                                    $ Girl.daily_history.append("angry")
                                     jump Emma_DP_After
         #End Count check
 
@@ -2372,409 +2372,409 @@ label Emma_DP_Cycle: #Repeating strokes
             ch_e "Seriously, it'll be time to stop soon."
 
     #Round = 0 loop breaks
-    $ character.FaceChange("bemused", 0)
-    $ Line = 0
-    ch_e "Ok, [character.Petname], that's enough of that for now."
+    $ Girl.change_face("bemused", 0)
+    $ line = 0
+    ch_e "Ok, [Girl.Petname], that's enough of that for now."
 
 
 label Emma_DP_After:
-    if not Situation: #fix  Situation != "shift" and Situation != "auto" and Situation != "pullback":
+    if not action_context: #fix  action_context != "shift" and action_context != "auto" and action_context != "pullback":
         call Emma_Pos_Reset
 
-    $ character.FaceChange("sexy")
+    $ Girl.change_face("sexy")
 
-    $ character.DildoP += 1
-    $ character.Action -=1
+    $ Girl.DildoP += 1
+    $ Girl.Action -=1
 
-    call Partner_Like(character,1)
+    call Partner_Like(Girl,1)
 
-    if character.DildoP == 1:
-            $ character.SEXP += 10
-            if not Situation:
-                if character.Love >= 500 and "unsatisfied" not in character.RecentActions:
+    if Girl.DildoP == 1:
+            $ Girl.SEXP += 10
+            if not action_context:
+                if Girl.love >= 500 and "unsatisfied" not in Girl.recent_history:
                     ch_e "I appreciate the work you put in. . ."
-                elif character.Obed <= 500 and Player.Focus <= 20:
-                    $ character.FaceChange("perplexed", 1)
+                elif Girl.obedience <= 500 and Player.Focus <= 20:
+                    $ Girl.change_face("perplexed", 1)
                     ch_e "Did you enjoy that?"
 
     $ temp_modifier = 0
-#    if Situation == "shift":
+#    if action_context == "shift":
 #        ch_e "Mmm, so what else did you have in mind?"
     call Checkout
     return
 
-# end character.Dildo Pussy /////////////////////////////////////////////////////////////////////////////
+# end Girl.Dildo Pussy /////////////////////////////////////////////////////////////////////////////
 
 
 # ////////////////////////////////////////////////////////////////////////Start Insert Ass
 
 label Emma_Dildo_Ass:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(character)
+    call Shift_Focus(Girl)
     call Emma_Dildo_Check
     if not _return:
         return
 
-    if character.Loose:
+    if Girl.Loose:
         $ temp_modifier += 30
-    elif "anal" in character.RecentActions or "dildo anal" in character.RecentActions:
+    elif "anal" in Girl.recent_history or "dildo anal" in Girl.recent_history:
         $ temp_modifier -= 20
-    elif "anal" in character.DailyActions or "dildo anal" in character.DailyActions:
+    elif "anal" in Girl.daily_history or "dildo anal" in Girl.daily_history:
         $ temp_modifier -= 10
-    elif (character.Anal + character.DildoA + character.Plug) > 0: #You've done it before
+    elif (Girl.Anal + Girl.DildoA + Girl.Plug) > 0: #You've done it before
         $ temp_modifier += 20
 
-    if character.PantsNum() >= 6: # she's got pants on.
+    if Girl.PantsNum() >= 6: # she's got pants on.
         $ temp_modifier -= 20
 
-    if character.Lust > 95:
+    if Girl.lust > 95:
         $ temp_modifier += 20
-    elif character.Lust > 85: #She's really horny
+    elif Girl.lust > 85: #She's really horny
         $ temp_modifier += 15
 
-    if Situation == "shift":
+    if action_context == "shift":
         $ temp_modifier += 10
-    if "exhibitionist" in character.Traits:
+    if "exhibitionist" in Girl.Traits:
         $ temp_modifier += (5*Taboo)
-    if character in Player.Harem or "sex friend" in character.Petnames:
+    if Girl in Player.Harem or "sex friend" in Girl.Petnames:
         $ temp_modifier += 10
-    elif "ex" in character.Traits:
+    elif "ex" in Girl.Traits:
         $ temp_modifier -= 40
-    if character.ForcedCount and not character.Forced:
-        $ temp_modifier -= 5 * character.ForcedCount
+    if Girl.ForcedCount and not Girl.Forced:
+        $ temp_modifier -= 5 * Girl.ForcedCount
 
-    if Taboo and "tabno" in character.DailyActions:
+    if Taboo and "tabno" in Girl.daily_history:
         $ temp_modifier -= 10
 
-    if "no dildo" in character.DailyActions:
+    if "no dildo" in Girl.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no dildo" in character.RecentActions else 0
+        $ temp_modifier -= 10 if "no dildo" in Girl.recent_history else 0
 
-    $ Approval = ApprovalCheck(character, 1450, TabM = 4) # 145, 160, 175, Taboo -160(355)
+    $ Approval = ApprovalCheck(Girl, 1450, TabM = 4) # 145, 160, 175, Taboo -160(355)
 
-    if Situation == character:
+    if action_context == Girl:
             #Emma auto-starts
             if Approval > 2:                                                      # fix, add emma auto stuff here
-                if character.PantsNum() == 5:
-                    "[character.Name] grabs her dildo, hiking up her skirt as she does."
-                    $ character.Upskirt = 1
-                elif character.PantsNum() > 6:
-                    "[character.Name] grabs her dildo, pulling down her pants as she does."
-                    $ character.Legs = 0
+                if Girl.wearing_skirt:
+                    "[Girl.name] grabs her dildo, hiking up her skirt as she does."
+                    $ Girl.Upskirt = 1
+                elif Girl.PantsNum() > 6:
+                    "[Girl.name] grabs her dildo, pulling down her pants as she does."
+                    $ Girl.Legs = 0
                 else:
-                    "[character.Name] grabs her dildo, rubbing is suggestively against her ass."
-                $ character.SeenPanties = 1
+                    "[Girl.name] grabs her dildo, rubbing is suggestively against her ass."
+                $ Girl.SeenPanties = 1
                 "She slides the tip against her asshole, and seems to want you to insert it."
                 menu:
                     "What do you do?"
                     "Nothing.":
-                        $ character.Statup("Inbt", 80, 3)
-                        $ character.Statup("Inbt", 50, 2)
-                        "[character.Name] slides it in."
+                        $ Girl.change_stat("inhibition", 80, 3)
+                        $ Girl.change_stat("inhibition", 50, 2)
+                        "[Girl.name] slides it in."
                     "Go for it.":
-                        $ character.FaceChange("sexy", 1)
-                        $ character.Statup("Inbt", 80, 3)
-                        ch_p "Oh yeah, [character.Pet], let's do this."
-                        $ character.NameCheck() #checks reaction to petname
+                        $ Girl.change_face("sexy", 1)
+                        $ Girl.change_stat("inhibition", 80, 3)
+                        ch_p "Oh yeah, [Girl.Pet], let's do this."
+                        $ Girl.nameCheck() #checks reaction to petname
                         "You grab the dildo and slide it in."
-                        $ character.Statup("Love", 85, 1)
-                        $ character.Statup("Obed", 90, 1)
-                        $ character.Statup("Obed", 50, 2)
+                        $ Girl.change_stat("love", 85, 1)
+                        $ Girl.change_stat("obedience", 90, 1)
+                        $ Girl.change_stat("obedience", 50, 2)
                     "Ask her to stop.":
-                        $ character.FaceChange("surprised")
-                        $ character.Statup("Inbt", 70, 1)
-                        ch_p "Let's not do that right now, [character.Pet]."
-                        $ character.NameCheck() #checks reaction to petname
-                        "[character.Name] sets the dildo down."
-                        $ character.OutfitChange()
-                        $ character.Statup("Obed", 90, 1)
-                        $ character.Statup("Obed", 50, 1)
-                        $ character.Statup("Obed", 30, 2)
+                        $ Girl.change_face("surprised")
+                        $ Girl.change_stat("inhibition", 70, 1)
+                        ch_p "Let's not do that right now, [Girl.Pet]."
+                        $ Girl.nameCheck() #checks reaction to petname
+                        "[Girl.name] sets the dildo down."
+                        $ Girl.OutfitChange()
+                        $ Girl.change_stat("obedience", 90, 1)
+                        $ Girl.change_stat("obedience", 50, 1)
+                        $ Girl.change_stat("obedience", 30, 2)
                         return
                 jump Emma_DA_Prep
             else:
                 $ temp_modifier = 0                               # fix, add emma auto stuff here
-                $ Trigger2 = 0
+                $ offhand_action = 0
             return
 
-    if Situation == "auto":
+    if action_context == "auto":
             "You rub the dildo across her body, and against her tight anus."
-            $ character.FaceChange("surprised", 1)
+            $ Girl.change_face("surprised", 1)
 
-            if (character.DildoA and Approval) or (Approval > 1):
+            if (Girl.DildoA and Approval) or (Approval > 1):
                 #this is not the first time you've had sex, or she's into it
-                "[character.Name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
-                $ character.FaceChange("sexy")
-                $ character.Statup("Obed", 70, 3)
-                $ character.Statup("Inbt", 50, 3)
-                $ character.Statup("Inbt", 70, 1)
-                ch_e "Mmmm, [character.Petname], toys. . ."
+                "[Girl.name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
+                $ Girl.change_face("sexy")
+                $ Girl.change_stat("obedience", 70, 3)
+                $ Girl.change_stat("inhibition", 50, 3)
+                $ Girl.change_stat("inhibition", 70, 1)
+                ch_e "Mmmm, [Girl.Petname], toys. . ."
                 jump Emma_DA_Prep
             else:
                 #she's questioning it
-                $ character.Brows = "angry"
+                $ Girl.Brows = "angry"
                 menu:
                     ch_e "Excuse yourself, what are you planning to do with that?!"
                     "Sorry, sorry! Never mind.":
                         if Approval:
-                            $ character.FaceChange("sexy", 1)
-                            $ character.Statup("Obed", 70, 3)
-                            $ character.Statup("Inbt", 50, 3)
-                            $ character.Statup("Inbt", 70, 1)
+                            $ Girl.change_face("sexy", 1)
+                            $ Girl.change_stat("obedience", 70, 3)
+                            $ Girl.change_stat("inhibition", 50, 3)
+                            $ Girl.change_stat("inhibition", 70, 1)
                             ch_e "Well, now that you mention it. . ."
                             jump Emma_DA_Prep
                         "You pull back before you really get it in."
-                        $ character.FaceChange("bemused", 1)
-                        if character.DildoA:
-                            ch_e "Well, [character.Petname], maybe warn me next time?"
+                        $ Girl.change_face("bemused", 1)
+                        if Girl.DildoA:
+                            ch_e "Well, [Girl.Petname], maybe warn me next time?"
                         else:
-                            ch_e "Well, [character.Petname], that's a little much. . . for now . . ."
+                            ch_e "Well, [Girl.Petname], that's a little much. . . for now . . ."
                     "Just playing with my favorite toys.":
-                        $ character.Statup("Love", 80, -10, 1)
-                        $ character.Statup("Love", 200, -10)
+                        $ Girl.change_stat("love", 80, -10, 1)
+                        $ Girl.change_stat("love", 200, -10)
                         "You press it inside some more."
-                        $ character.Statup("Obed", 70, 3)
-                        $ character.Statup("Inbt", 50, 3)
-                        if not ApprovalCheck(character, 700, "O", TabM=1): #Checks if Obed is 700+
-                            $ character.FaceChange("angry")
-                            "[character.Name] shoves you away and slaps you in the face."
+                        $ Girl.change_stat("obedience", 70, 3)
+                        $ Girl.change_stat("inhibition", 50, 3)
+                        if not ApprovalCheck(Girl, 700, "O", TabM=1): #Checks if obedience is 700+
+                            $ Girl.change_face("angry")
+                            "[Girl.name] shoves you away and slaps you in the face."
                             ch_e "Ask nicely if you want to stick something in my ass!"
-                            $ character.Statup("Love", 50, -10, 1)
-                            $ character.Statup("Obed", 50, 3)
+                            $ Girl.change_stat("love", 50, -10, 1)
+                            $ Girl.change_stat("obedience", 50, 3)
                             $ renpy.pop_call()
-                            if Situation:
+                            if action_context:
                                 $ renpy.pop_call()
                             if renpy.showing("Emma_SexSprite"):
                                 call Emma_Sex_Reset
-                            $ character.RecentActions.append("angry")
-                            $ character.DailyActions.append("angry")
+                            $ Girl.recent_history.append("angry")
+                            $ Girl.daily_history.append("angry")
                         else:
-                            $ character.FaceChange("sad")
-                            "[character.Name] doesn't seem to be into this, you're lucky she's so obedient."
+                            $ Girl.change_face("sad")
+                            "[Girl.name] doesn't seem to be into this, you're lucky she's so obedient."
                             jump Emma_DA_Prep
             return
     #end auto
 
-    if not character.DildoA:
+    if not Girl.DildoA:
             #first time
-            $ character.FaceChange("surprised", 1)
-            $ character.Mouth = "kiss"
+            $ Girl.change_face("surprised", 1)
+            $ Girl.Mouth = "kiss"
             ch_e "Hmm, you don't take half measures. . ."
-            if character.Forced:
-                $ character.FaceChange("sad")
+            if Girl.Forced:
+                $ Girl.change_face("sad")
                 ch_e "They always go for the butt. . ."
 
-    if not character.DildoA and Approval:
+    if not Girl.DildoA and Approval:
             #First time dialog
-            if character.Forced:
-                $ character.FaceChange("sad")
-                $ character.Statup("Love", 70, -3, 1)
-                $ character.Statup("Love", 20, -2, 1)
-            elif character.Love >= (character.Obed + character.Inbt):
-                $ character.FaceChange("sexy")
-                $ character.Brows = "sad"
-                $ character.Mouth = "smile"
+            if Girl.Forced:
+                $ Girl.change_face("sad")
+                $ Girl.change_stat("love", 70, -3, 1)
+                $ Girl.change_stat("love", 20, -2, 1)
+            elif Girl.love >= (Girl.obedience + Girl.inhibition):
+                $ Girl.change_face("sexy")
+                $ Girl.Brows = "sad"
+                $ Girl.Mouth = "smile"
                 ch_e "I suppose you might enjoy that. . ."
-            elif character.Obed >= character.Inbt:
-                $ character.FaceChange("normal")
-                ch_e "If that's what you want, [character.Petname]. . ."
+            elif Girl.obedience >= Girl.inhibition:
+                $ Girl.change_face("normal")
+                ch_e "If that's what you want, [Girl.Petname]. . ."
             else: # Uninhibited
-                $ character.FaceChange("sad")
-                $ character.Mouth = "smile"
+                $ Girl.change_face("sad")
+                $ Girl.Mouth = "smile"
                 ch_e "I suppose I could enjoy that. . ."
 
     elif Approval:
             #Second time+ dialog
-            if character.Forced:
-                $ character.FaceChange("sad")
-                $ character.Statup("Love", 70, -3, 1)
-                $ character.Statup("Love", 20, -2, 1)
+            if Girl.Forced:
+                $ Girl.change_face("sad")
+                $ Girl.change_stat("love", 70, -3, 1)
+                $ Girl.change_stat("love", 20, -2, 1)
                 ch_e "The toys again?"
-            elif not Taboo and "tabno" in character.DailyActions:
+            elif not Taboo and "tabno" in Girl.daily_history:
                 ch_e "Well, at least you got us some privacy this time. . ."
-            elif "dildo anal" in character.DailyActions and not character.Loose:
+            elif "dildo anal" in Girl.daily_history and not Girl.Loose:
                 pass
-            elif character.DildoA < 3:
-                $ character.FaceChange("sexy", 1)
-                $ character.Brows = "confused"
-                $ character.Mouth = "kiss"
+            elif Girl.DildoA < 3:
+                $ Girl.change_face("sexy", 1)
+                $ Girl.Brows = "confused"
+                $ Girl.Mouth = "kiss"
                 ch_e "You want to stick it in my ass again?"
             else:
-                $ character.FaceChange("sexy", 1)
-                $ character.ArmPose = 2
-                $ Line = renpy.random.choice(["You want some of this action?",
+                $ Girl.change_face("sexy", 1)
+                $ Girl.ArmPose = 2
+                $ line = renpy.random.choice(["You want some of this action?",
                     "So you'd like another go?",
                     "You'd like to stick it in my ass again?",
                     "You'd like me to lube up your toy?"])
-                ch_e "[Line]"
-                $ Line = 0
+                ch_e "[line]"
+                $ line = 0
 
     if Approval >= 2:
             #She's into it. . .
-            if character.Forced:
-                $ character.FaceChange("sad")
-                $ character.Statup("Obed", 90, 1)
-                $ character.Statup("Inbt", 60, 1)
+            if Girl.Forced:
+                $ Girl.change_face("sad")
+                $ Girl.change_stat("obedience", 90, 1)
+                $ Girl.change_stat("inhibition", 60, 1)
                 ch_e "Oh, fine."
             else:
-                $ character.FaceChange("sexy", 1)
-                $ character.Statup("Love", 90, 1)
-                $ character.Statup("Inbt", 50, 3)
-                $ Line = renpy.random.choice(["Well, sure, stick it in.",
+                $ Girl.change_face("sexy", 1)
+                $ Girl.change_stat("love", 90, 1)
+                $ Girl.change_stat("inhibition", 50, 3)
+                $ line = renpy.random.choice(["Well, sure, stick it in.",
                     "Hmm. . . ok.",
                     "Sure!",
                     "I guess I could. . . stick it in.",
                     "Delightful.",
                     "Hmm, ok, ok."])
-                ch_e "[Line]"
-                $ Line = 0
-            $ character.Statup("Obed", 20, 1)
-            $ character.Statup("Obed", 60, 1)
-            $ character.Statup("Inbt", 70, 2)
+                ch_e "[line]"
+                $ line = 0
+            $ Girl.change_stat("obedience", 20, 1)
+            $ Girl.change_stat("obedience", 60, 1)
+            $ Girl.change_stat("inhibition", 70, 2)
             jump Emma_DA_Prep
 
     else:
             #She's not into it, but maybe. . .
-            $ character.FaceChange("angry")
-            if "no dildo" in character.RecentActions:
-                ch_e "What part of \"no,\" did you not get, [character.Petname]?"
-            elif Taboo and "tabno" in character.DailyActions and "no dildo" in character.DailyActions:
+            $ Girl.change_face("angry")
+            if "no dildo" in Girl.recent_history:
+                ch_e "What part of \"no,\" did you not get, [Girl.Petname]?"
+            elif Taboo and "tabno" in Girl.daily_history and "no dildo" in Girl.daily_history:
                 ch_e "Stop swinging that thing around in public!"
-            elif "no dildo" in character.DailyActions:
-                ch_e "I already told you \"no,\" [character.Petname]."
-            elif Taboo and "tabno" in character.DailyActions:
+            elif "no dildo" in Girl.daily_history:
+                ch_e "I already told you \"no,\" [Girl.Petname]."
+            elif Taboo and "tabno" in Girl.daily_history:
                 ch_e "I already told you that I wouldn't do that out here!"
-            elif not character.DildoA:
-                $ character.FaceChange("bemused")
-                ch_e "I'm just not into toys, [character.Petname]. . ."
+            elif not Girl.DildoA:
+                $ Girl.change_face("bemused")
+                ch_e "I'm just not into toys, [Girl.Petname]. . ."
             else:
-                $ character.FaceChange("bemused")
-                ch_e "I don't think we need any toys, [character.Petname]."
+                $ Girl.change_face("bemused")
+                ch_e "I don't think we need any toys, [Girl.Petname]."
             menu:
                 extend ""
-                "Sorry, never mind." if "no dildo" in character.DailyActions:
-                    $ character.FaceChange("bemused")
-                    ch_e "I'm sure, [character.Petname]."
+                "Sorry, never mind." if "no dildo" in Girl.daily_history:
+                    $ Girl.change_face("bemused")
+                    ch_e "I'm sure, [Girl.Petname]."
                     return
-                "Maybe later?" if "no dildo" not in character.DailyActions:
-                    $ character.FaceChange("sexy")
-                    ch_e "Perhaps I'll practice on my own time, [character.Petname]."
-                    $ character.Statup("Love", 80, 2)
-                    $ character.Statup("Inbt", 70, 2)
+                "Maybe later?" if "no dildo" not in Girl.daily_history:
+                    $ Girl.change_face("sexy")
+                    ch_e "Perhaps I'll practice on my own time, [Girl.Petname]."
+                    $ Girl.change_stat("love", 80, 2)
+                    $ Girl.change_stat("inhibition", 70, 2)
                     if Taboo:
-                        $ character.RecentActions.append("tabno")
-                        $ character.DailyActions.append("tabno")
-                    $ character.RecentActions.append("no dildo")
-                    $ character.DailyActions.append("no dildo")
+                        $ Girl.recent_history.append("tabno")
+                        $ Girl.daily_history.append("tabno")
+                    $ Girl.recent_history.append("no dildo")
+                    $ Girl.daily_history.append("no dildo")
                     return
                 "I think you'd like it. . .":
                     if Approval:
-                        $ character.FaceChange("sexy")
-                        $ character.Statup("Obed", 90, 2)
-                        $ character.Statup("Obed", 50, 2)
-                        $ character.Statup("Inbt", 70, 3)
-                        $ character.Statup("Inbt", 40, 2)
-                        $ Line = renpy.random.choice(["Very well, stick it in.",
+                        $ Girl.change_face("sexy")
+                        $ Girl.change_stat("obedience", 90, 2)
+                        $ Girl.change_stat("obedience", 50, 2)
+                        $ Girl.change_stat("inhibition", 70, 3)
+                        $ Girl.change_stat("inhibition", 40, 2)
+                        $ line = renpy.random.choice(["Very well, stick it in.",
                             "I suppose. . .",
                             "You make a compelling argument."])
-                        ch_e "[Line]"
-                        $ Line = 0
+                        ch_e "[line]"
+                        $ line = 0
                         jump Emma_DA_Prep
                     else:
                         pass
 
                 "[[press it against her]":                                               # Pressured into it
-                    $ Approval = ApprovalCheck(character, 1050, "OI", TabM = 3) # 105, 120, 135, -120(225)
-                    if Approval > 1 or (Approval and character.Forced):
-                        $ character.FaceChange("sad")
-                        $ character.Statup("Love", 70, -5, 1)
-                        $ character.Statup("Love", 200, -5)
+                    $ Approval = ApprovalCheck(Girl, 1050, "OI", TabM = 3) # 105, 120, 135, -120(225)
+                    if Approval > 1 or (Approval and Girl.Forced):
+                        $ Girl.change_face("sad")
+                        $ Girl.change_stat("love", 70, -5, 1)
+                        $ Girl.change_stat("love", 200, -5)
 
-                        $ character.Statup("Obed", 80, 4)
-                        $ character.Statup("Inbt", 80, 1)
-                        $ character.Statup("Inbt", 60, 3)
-                        $ character.Forced = 1
+                        $ Girl.change_stat("obedience", 80, 4)
+                        $ Girl.change_stat("inhibition", 80, 1)
+                        $ Girl.change_stat("inhibition", 60, 3)
+                        $ Girl.Forced = 1
                         jump Emma_DA_Prep
                     else:
-                        $ character.Statup("Love", 200, -20)
-                        $ character.RecentActions.append("angry")
-                        $ character.DailyActions.append("angry")
+                        $ Girl.change_stat("love", 200, -20)
+                        $ Girl.recent_history.append("angry")
+                        $ Girl.daily_history.append("angry")
 
     #She refused all offers.
-    $ character.ArmPose = 1
-    if "no dildo" in character.DailyActions:
+    $ Girl.ArmPose = 1
+    if "no dildo" in Girl.daily_history:
 
-            $ character.RecentActions.append("angry")
-            $ character.DailyActions.append("angry")
-    elif character.Forced:
-            $ character.FaceChange("angry", 1)
+            $ Girl.recent_history.append("angry")
+            $ Girl.daily_history.append("angry")
+    elif Girl.Forced:
+            $ Girl.change_face("angry", 1)
             ch_e "I'm not going to let you use that on me."
-            $ character.Statup("Lust", 200, 5)
-            if character.Love > 300:
-                    $ character.Statup("Love", 70, -2)
-            $ character.Statup("Obed", 50, -2)
-            $ character.RecentActions.append("angry")
-            $ character.DailyActions.append("angry")
+            $ Girl.change_stat("lust", 200, 5)
+            if Girl.love > 300:
+                    $ Girl.change_stat("love", 70, -2)
+            $ Girl.change_stat("obedience", 50, -2)
+            $ Girl.recent_history.append("angry")
+            $ Girl.daily_history.append("angry")
     elif Taboo:                             # she refuses and this is too public a place for her
-            $ character.FaceChange("angry", 1)
-            $ character.RecentActions.append("tabno")
-            $ character.DailyActions.append("tabno")
+            $ Girl.change_face("angry", 1)
+            $ Girl.recent_history.append("tabno")
+            $ Girl.daily_history.append("tabno")
             ch_e "Not here!"
-            $ character.Statup("Lust", 200, 5)
-            $ character.Statup("Obed", 50, -3)
-    elif character.DildoA:
-            $ character.FaceChange("sad")
+            $ Girl.change_stat("lust", 200, 5)
+            $ Girl.change_stat("obedience", 50, -3)
+    elif Girl.DildoA:
+            $ Girl.change_face("sad")
             ch_e "Sorry, you can keep your toys out of there."
     else:
-            $ character.FaceChange("normal", 1)
+            $ Girl.change_face("normal", 1)
             ch_e "No, thank you."
-    $ character.RecentActions.append("no dildo")
-    $ character.DailyActions.append("no dildo")
+    $ Girl.recent_history.append("no dildo")
+    $ Girl.daily_history.append("no dildo")
     $ temp_modifier = 0
     return
 
 label Emma_DA_Prep: #Animation set-up
-    if Trigger2 == "dildo anal":
+    if offhand_action == "dildo anal":
         return
 
-    if not character.Forced and Situation != "auto":
-        $ temp_modifier = 20 if character.PantsNum() > 6 else 0
-        call Bottoms_Off(character)
-        if "angry" in character.RecentActions:
+    if not Girl.Forced and action_context != "auto":
+        $ temp_modifier = 20 if Girl.PantsNum() > 6 else 0
+        call Bottoms_Off(Girl)
+        if "angry" in Girl.recent_history:
             return
 
     $ temp_modifier = 0
     call Emma_Pussy_Launch("dildo anal")
-    if not character.DildoA:
-        if character.Forced:
-            $ character.Statup("Love", 90, -75)
-            $ character.Statup("Obed", 70, 60)
-            $ character.Statup("Inbt", 80, 35)
+    if not Girl.DildoA:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -75)
+            $ Girl.change_stat("obedience", 70, 60)
+            $ Girl.change_stat("inhibition", 80, 35)
         else:
-            $ character.Statup("Love", 90, 10)
-            $ character.Statup("Obed", 70, 20)
-            $ character.Statup("Inbt", 80, 45)
+            $ Girl.change_stat("love", 90, 10)
+            $ Girl.change_stat("obedience", 70, 20)
+            $ Girl.change_stat("inhibition", 80, 45)
     if Taboo:
-        $ character.Inbt += int(Taboo/10)
-        $ character.Lust += int(Taboo/5)
+        $ Girl.inhibition += int(Taboo/10)
+        $ Girl.lust += int(Taboo/5)
 
 
-    if Situation:
+    if action_context:
         $ renpy.pop_call()
-        $ Situation = 0
-    $ Line = 0
-    $ Cnt = 0
+        $ action_context = 0
+    $ line = 0
+    $ counter = 0
     if Taboo:
-        $ character.DrainWord("tabno")
-    $ character.DrainWord("no dildo")
-    $ character.RecentActions.append("dildo anal")
-    $ character.DailyActions.append("dildo anal")
+        $ Girl.DrainWord("tabno")
+    $ Girl.DrainWord("no dildo")
+    $ Girl.recent_history.append("dildo anal")
+    $ Girl.daily_history.append("dildo anal")
 
 label Emma_DA_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(character)
+        call Shift_Focus(Girl)
         call Emma_Pussy_Launch("dildo anal")
-        $ character.LustFace()
+        $ Girl.lustFace()
 
         if  Player.Focus < 100:
                     #Player Command menu
@@ -2783,7 +2783,7 @@ label Emma_DA_Cycle: #Repeating strokes
                                     pass
 
                         "Slap her ass":
-                                call Slap_Ass(character)
+                                call Slap_Ass(Girl)
                                 jump Emma_DA_Cycle
 
                         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
@@ -2798,182 +2798,182 @@ label Emma_DA_Cycle: #Repeating strokes
                         "Other options":
                                 menu:
                                     "Offhand action":
-                                            if character.Action and MultiAction:
+                                            if Girl.Action and MultiAction:
                                                 call Offhand_Set
-                                                if Trigger2:
-                                                     $ character.Action -= 1
+                                                if offhand_action:
+                                                     $ Girl.Action -= 1
                                             else:
-                                                call Sex_Basic_Dialog(character,"tired")
+                                                call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Shift primary action":
-                                            if character.Action and MultiAction:
+                                            if Girl.Action and MultiAction:
                                                     menu:
                                                         "I want to stick a finger in her pussy.":
-                                                                $ Situation = "shift"
+                                                                $ action_context = "shift"
                                                                 call Emma_DA_After
                                                                 call Emma_Fondle_Pussy
                                                         "Just stick a finger in her pussy without asking.":
-                                                                $ Situation = "auto"
+                                                                $ action_context = "auto"
                                                                 call Emma_DA_After
                                                                 call Emma_Fondle_Pussy
                                                         "I want to shift the dildo to her pussy.":
-                                                                $ Situation = "shift"
+                                                                $ action_context = "shift"
                                                                 call Emma_DA_After
                                                                 call Emma_Dildo_Pussy
                                                         "Never Mind":
                                                                 jump Emma_DA_Cycle
                                             else:
-                                                call Sex_Basic_Dialog(character,"tired")
+                                                call Sex_Basic_Dialog(Girl,"tired")
 
-                                    "Shift your focus" if Trigger2:
-                                                $ Situation = "shift focus"
+                                    "Shift your focus" if offhand_action:
+                                                $ action_context = "shift focus"
                                                 call Emma_DA_After
                                                 call Offhand_Set
-                                    "Shift your focus (locked)" if not Trigger2:
+                                    "Shift your focus (locked)" if not offhand_action:
                                                 pass
                                     "Threesome actions (locked)" if not Partner:
                                         pass
                                     "Threesome actions" if Partner:
                                         menu:
-                                            "Asks [character.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(character)
-                                            "Asks [character.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
+                                            "Asks [Girl.name] to do something else with [Partner.name]" if primary_action == "lesbian":
+                                                        call Les_Change(Girl)
+                                            "Asks [Girl.name] to do something else with [Partner.name] (locked)" if primary_action != "lesbian":
                                                         pass
-                                            "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(character)
+                                            "Ask [Partner.name] to do something else":
+                                                        call Three_Change(Girl)
 
-                                            "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
-                                                        $ ThreeCount = 0
-                                            "Don't stop what you're doing. . ." if ThreeCount and Trigger4:
-                                                        $ ThreeCount = 0
+                                            "Don't stop what you're doing. . .(locked)" if not position_change_timer or not Partner_primary_action:
+                                                        $ position_change_timer = 0
+                                            "Don't stop what you're doing. . ." if position_change_timer and Partner_primary_action:
+                                                        $ position_change_timer = 0
 
-                                            "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(character)
-                                            "Undress [Partner.Name]":
+                                            "Swap to [Partner.name]":
+                                                        call primary_action_Swap(Girl)
+                                            "Undress [Partner.name]":
                                                         call Girl_Undress(Partner)
                                                         jump Emma_DA_Cycle
-                                            "Clean up [Partner.Name] (locked)" if not Partner.Spunk:
+                                            "Clean up [Partner.name] (locked)" if not Partner.Spunk:
                                                         pass
-                                            "Clean up [Partner.Name]" if Partner.Spunk:
+                                            "Clean up [Partner.name]" if Partner.Spunk:
                                                         call Girl_Cleanup(Partner,"ask")
                                                         jump Emma_DA_Cycle
                                             "Never mind":
                                                         jump Emma_DA_Cycle
-                                    "Undress [character.Name]":
-                                            call Girl_Undress(character)
-                                    "Clean up [character.Name] (locked)" if not character.Spunk:
+                                    "Undress [Girl.name]":
+                                            call Girl_Undress(Girl)
+                                    "Clean up [Girl.name] (locked)" if not Girl.Spunk:
                                             pass
-                                    "Clean up [character.Name]" if character.Spunk:
-                                            call Girl_Cleanup(character,"ask")
+                                    "Clean up [Girl.name]" if Girl.Spunk:
+                                            call Girl_Cleanup(Girl,"ask")
                                     "Never mind":
                                             jump Emma_DA_Cycle
 
                         "Back to Sex Menu" if MultiAction:
                                     ch_p "Let's try something else."
                                     call Emma_Pos_Reset
-                                    $ Situation = "shift"
-                                    $ Line = 0
+                                    $ action_context = "shift"
+                                    $ line = 0
                                     jump Emma_DA_After
                         "End Scene" if not MultiAction:
                                     ch_p "Let's stop for now."
                                     call Emma_Pos_Reset
-                                    $ Line = 0
+                                    $ line = 0
                                     jump Emma_DA_After
-        #End menu (if Line)
+        #End menu (if line)
 
-        if character.Panties or character.PantsNum() > 6 or character.HoseNum() >= 5: #This checks if [character.Name] wants to strip down.
-                call Girl_Undress(character,"auto")
+        if Girl.Panties or Girl.PantsNum() > 6 or Girl.HoseNum() >= 5: #This checks if [Girl.name] wants to strip down.
+                call Girl_Undress(Girl,"auto")
 
-        call Shift_Focus(character)
-        call Sex_Dialog(character,Partner)
+        call Shift_Focus(Girl)
+        call Sex_Dialog(Girl,Partner)
 
         #If either of you could cum
 
-        $ Cnt += 1
+        $ counter += 1
         $ Round -= 1
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-        if Player.Focus >= 100 or character.Lust >= 100:
+        if Player.Focus >= 100 or Girl.lust >= 100:
                     #If either of you could cum
                     if Player.Focus >= 100:
                             #If you can cum:
-                            call Player_Cumming(character)
-                            if "angry" in character.RecentActions:
+                            call Player_Cumming(Girl)
+                            if "angry" in Girl.recent_history:
                                 call Emma_Pos_Reset
                                 return
-                            $ character.Statup("Lust", 200, 5)
-                            if 100 > character.Lust >= 70 and character.OCount < 2:
-                                $ character.RecentActions.append("unsatisfied")
-                                $ character.DailyActions.append("unsatisfied")
+                            $ Girl.change_stat("lust", 200, 5)
+                            if 100 > Girl.lust >= 70 and Girl.OCount < 2:
+                                $ Girl.recent_history.append("unsatisfied")
+                                $ Girl.daily_history.append("unsatisfied")
 
                             if Player.Focus > 80:
                                 jump Emma_DA_After
-                            $ Line = "came"
+                            $ line = "came"
 
-                    if character.Lust >= 100:
-                            #If [character.Name] can cum
-                            call Girl_Cumming(character)
-                            if Situation == "shift" or "angry" in character.RecentActions:
+                    if Girl.lust >= 100:
+                            #If [Girl.name] can cum
+                            call Girl_Cumming(Girl)
+                            if action_context == "shift" or "angry" in Girl.recent_history:
                                 jump Emma_DA_After
 
-                    if Line == "came": #ex Player.Focus <= 20:
+                    if line == "came": #ex Player.Focus <= 20:
                             #If you've just cum,
-                            $ Line = 0
+                            $ line = 0
                             if not Player.Semen:
                                 "You're emptied out, you should probably take a break."
 
 
-                            if "unsatisfied" in character.RecentActions:#And [character.Name] is unsatisfied,
-                                    "[character.Name] still seems a bit unsatisfied with the experience."
+                            if "unsatisfied" in Girl.recent_history:#And [Girl.name] is unsatisfied,
+                                    "[Girl.name] still seems a bit unsatisfied with the experience."
                                     menu:
                                         "Finish her?"
                                         "Yes, keep going for a bit.":
-                                            $ Line = "You get back into it"
+                                            $ line = "You get back into it"
                                         "No, I'm done.":
                                             "You pull back."
                                             jump Emma_DA_After
-        if Partner and Partner.Lust >= 100:
+        if Partner and Partner.lust >= 100:
                 #Checks if partner could orgasm
                 call Girl_Cumming(Partner)
         #End orgasm
 
         $ Player.Focus -= 12 if Player.FocusX and Player.Focus > 50 else 0
 
-        if character.SEXP >= 100 or ApprovalCheck(character, 1200, "LO"):
+        if Girl.SEXP >= 100 or ApprovalCheck(Girl, 1200, "LO"):
             pass
-        elif Cnt == (5 + character.DildoA):
-                    $ character.Brows = "confused"
+        elif counter == (5 + Girl.DildoA):
+                    $ Girl.Brows = "confused"
                     ch_e "What are you even doing down there?"
-        elif character.Lust >= 80:
+        elif Girl.lust >= 80:
                     pass
-        elif Cnt == (15 + character.DildoA) and character.SEXP >= 15 and not ApprovalCheck(character, 1500):
-                    $ character.Brows = "confused"
+        elif counter == (15 + Girl.DildoA) and Girl.SEXP >= 15 and not ApprovalCheck(Girl, 1500):
+                    $ Girl.Brows = "confused"
                     menu:
-                        ch_e "[character.Petname], this is getting uncomfortable, maybe we could try something else."
+                        ch_e "[Girl.Petname], this is getting uncomfortable, maybe we could try something else."
                         "Finish up.":
                                 "You let go. . ."
                                 jump Emma_DA_After
                         "Let's try something else." if MultiAction:
-                                $ Line = 0
-                                $ Situation = "shift"
+                                $ line = 0
+                                $ action_context = "shift"
                                 jump Emma_DA_After
                         "No, this is fun.":
-                                if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
-                                    $ character.Statup("Love", 200, -5)
-                                    $ character.Statup("Obed", 50, 3)
-                                    $ character.Statup("Obed", 80, 2)
+                                if ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "O"):
+                                    $ Girl.change_stat("love", 200, -5)
+                                    $ Girl.change_stat("obedience", 50, 3)
+                                    $ Girl.change_stat("obedience", 80, 2)
                                     "She grumbles but lets you keep going."
                                 else:
-                                    $ character.FaceChange("angry", 1)
+                                    $ Girl.change_face("angry", 1)
                                     call Emma_Pos_Reset
                                     "She scowls at you and pulls back."
                                     ch_e "Well if that's your attitude, I don't need your \"help\"."
-                                    $ character.Statup("Love", 50, -3, 1)
-                                    $ character.Statup("Love", 80, -4, 1)
-                                    $ character.Statup("Obed", 30, -1, 1)
-                                    $ character.Statup("Obed", 50, -1, 1)
-                                    $ character.RecentActions.append("angry")
-                                    $ character.DailyActions.append("angry")
+                                    $ Girl.change_stat("love", 50, -3, 1)
+                                    $ Girl.change_stat("love", 80, -4, 1)
+                                    $ Girl.change_stat("obedience", 30, -1, 1)
+                                    $ Girl.change_stat("obedience", 50, -1, 1)
+                                    $ Girl.recent_history.append("angry")
+                                    $ Girl.daily_history.append("angry")
                                     jump Emma_DA_After
         #End Count check
 
@@ -2983,387 +2983,387 @@ label Emma_DA_Cycle: #Repeating strokes
             ch_e "Seriously, it'll be time to stop soon."
 
     #Round = 0 loop breaks
-    $ character.FaceChange("bemused", 0)
-    $ Line = 0
-    ch_e "Ok, [character.Petname], that's enough of that for now."
+    $ Girl.change_face("bemused", 0)
+    $ line = 0
+    ch_e "Ok, [Girl.Petname], that's enough of that for now."
 
 
 label Emma_DA_After:
-    if not Situation: #fix  Situation != "shift" and Situation != "auto" and Situation != "pullback":
+    if not action_context: #fix  action_context != "shift" and action_context != "auto" and action_context != "pullback":
         call Emma_Pos_Reset
 
-    $ character.FaceChange("sexy")
+    $ Girl.change_face("sexy")
 
-    $ character.DildoA += 1
-    $ character.Action -=1
+    $ Girl.DildoA += 1
+    $ Girl.Action -=1
 
-    call Partner_Like(character,1)
+    call Partner_Like(Girl,1)
 
-    if character.DildoA == 1:
-            $ character.SEXP += 10
-            if not Situation:
-                if character.Love >= 500 and "unsatisfied" not in character.RecentActions:
+    if Girl.DildoA == 1:
+            $ Girl.SEXP += 10
+            if not action_context:
+                if Girl.love >= 500 and "unsatisfied" not in Girl.recent_history:
                     ch_e "That was. . . engaging. . ."
-                elif character.Obed <= 500 and Player.Focus <= 20:
-                    $ character.FaceChange("perplexed", 1)
+                elif Girl.obedience <= 500 and Player.Focus <= 20:
+                    $ Girl.change_face("perplexed", 1)
                     ch_e "Did you enjoy that?"
 
     $ temp_modifier = 0
-#    if Situation == "shift":
+#    if action_context == "shift":
 #        ch_e "Mmm, so what else did you have in mind?"
     call Checkout
     return
 
-# end character.Dildo Ass /////////////////////////////////////////////////////////////////////////////
+# end Girl.Dildo Ass /////////////////////////////////////////////////////////////////////////////
 
 label Emma_Vibrator_Check:                                                                                 #fix this whole section is copy/paste unfinished
     if "vibrator" in Player.Inventory:
         "You pull out the \"shocker\" vibrator, handy."
-    elif "vibrator" in character.Inventory:
-        "You ask [character.Name] to get out her vibrator."
+    elif "vibrator" in Girl.Inventory:
+        "You ask [Girl.name] to get out her vibrator."
     else:
         "You don't have one of those on you."
         return 0
     return 1
 
-## character.Footjob //////////////////////////////////////////////////////////////////////
+## Girl.Footjob //////////////////////////////////////////////////////////////////////
 label Emma_Footjob:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(character)
-    if character.Foot >= 7: # She loves it
+    call Shift_Focus(Girl)
+    if Girl.Foot >= 7: # She loves it
         $ temp_modifier += 10
-    elif character.Foot >= 3: #You've done it before several times
+    elif Girl.Foot >= 3: #You've done it before several times
         $ temp_modifier += 7
-    elif character.Foot: #You've done it before
+    elif Girl.Foot: #You've done it before
         $ temp_modifier += 3
 
-    if character.Addict >= 75 and character.Swallow >=3: #She's really strung out and has swallowed
+    if Girl.Addict >= 75 and Girl.Swallow >=3: #She's really strung out and has swallowed
         $ temp_modifier += 10
-    if character.Addict >= 75:
+    if Girl.Addict >= 75:
         $ temp_modifier += 5
 
-    if Situation == "shift":
+    if action_context == "shift":
         $ temp_modifier += 15
-    if "exhibitionist" in character.Traits:
+    if "exhibitionist" in Girl.Traits:
         $ temp_modifier += (3*Taboo)
-    if character in Player.Harem or "sex friend" in character.Petnames:
+    if Girl in Player.Harem or "sex friend" in Girl.Petnames:
         $ temp_modifier += 10
-    elif "ex" in character.Traits:
+    elif "ex" in Girl.Traits:
         $ temp_modifier -= 40
-    if character.ForcedCount and not character.Forced:
-        $ temp_modifier -= 5 * character.ForcedCount
+    if Girl.ForcedCount and not Girl.Forced:
+        $ temp_modifier -= 5 * Girl.ForcedCount
 
-    if Taboo and "tabno" in character.DailyActions:
+    if Taboo and "tabno" in Girl.daily_history:
         $ temp_modifier -= 10
 
-    if "no foot" in character.DailyActions:
+    if "no foot" in Girl.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no foot" in character.RecentActions else 0
+        $ temp_modifier -= 10 if "no foot" in Girl.recent_history else 0
 
-    $ Approval = ApprovalCheck(character, 1250, TabM = 3) # 110, 125, 140, Taboo -120(230)
+    $ Approval = ApprovalCheck(Girl, 1250, TabM = 3) # 110, 125, 140, Taboo -120(230)
 
-    if Situation == character:                                                                  #Emma auto-starts
+    if action_context == Girl:                                                                  #Emma auto-starts
         if Approval > 2:                                                      # fix, add emma auto stuff here
-            if Trigger2 == "jackin":
-                "[character.Name] sits back and starts rubbing her foot along your cock."
+            if offhand_action == "jackin":
+                "[Girl.name] sits back and starts rubbing her foot along your cock."
             else:
-                "[character.Name] gives you a mischevious smile, and starts to rub her foot along your cock."
+                "[Girl.name] gives you a mischevious smile, and starts to rub her foot along your cock."
             menu:
                 "What do you do?"
                 "Nothing.":
-                    $ character.Statup("Inbt", 70, 3)
-                    $ character.Statup("Inbt", 30, 2)
-                    "[character.Name] continues her actions."
+                    $ Girl.change_stat("inhibition", 70, 3)
+                    $ Girl.change_stat("inhibition", 30, 2)
+                    "[Girl.name] continues her actions."
                 "Praise her.":
-                    $ character.FaceChange("sexy", 1)
-                    $ character.Statup("Inbt", 70, 3)
-                    ch_p "Oooh, that's good, [character.Pet]."
-                    $ character.NameCheck() #checks reaction to petname
-                    "[character.Name] continues her actions."
-                    $ character.Statup("Love", 80, 1)
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 2)
+                    $ Girl.change_face("sexy", 1)
+                    $ Girl.change_stat("inhibition", 70, 3)
+                    ch_p "Oooh, that's good, [Girl.Pet]."
+                    $ Girl.nameCheck() #checks reaction to petname
+                    "[Girl.name] continues her actions."
+                    $ Girl.change_stat("love", 80, 1)
+                    $ Girl.change_stat("obedience", 90, 1)
+                    $ Girl.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ character.FaceChange("surprised")
-                    $ character.Statup("Inbt", 70, 1)
-                    ch_p "Let's not do that for now, [character.Pet]."
-                    $ character.NameCheck() #checks reaction to petname
-                    "[character.Name] puts it down."
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 1)
-                    $ character.Statup("Obed", 30, 2)
+                    $ Girl.change_face("surprised")
+                    $ Girl.change_stat("inhibition", 70, 1)
+                    ch_p "Let's not do that for now, [Girl.Pet]."
+                    $ Girl.nameCheck() #checks reaction to petname
+                    "[Girl.name] puts it down."
+                    $ Girl.change_stat("obedience", 90, 1)
+                    $ Girl.change_stat("obedience", 50, 1)
+                    $ Girl.change_stat("obedience", 30, 2)
                     return
-            if Trigger:
-                $ Trigger3 = "foot"
+            if primary_action:
+                $ girl_offhand_action = "foot"
                 return
             jump Emma_FJ_Prep
         else:
             $ temp_modifier = 0                               # fix, add emma auto stuff here
-            $ Trigger2 = 0
+            $ offhand_action = 0
             return
 
-    if not character.Foot and "no foot" not in character.RecentActions:
-        $ character.FaceChange("confused", 2)
-        ch_e "Mmm, so you're into feet then, [character.Petname]?"
-        $ character.Blush = 1
+    if not Girl.Foot and "no foot" not in Girl.recent_history:
+        $ Girl.change_face("confused", 2)
+        ch_e "Mmm, so you're into feet then, [Girl.Petname]?"
+        $ Girl.Blush = 1
 
-    if not character.Foot and Approval:                                                 #First time dialog
-        if character.Forced:
-            $ character.FaceChange("sad",1)
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
-        elif character.Love >= (character.Obed + character.Inbt):
-            $ character.FaceChange("sexy",1)
-            $ character.Brows = "sad"
-            $ character.Mouth = "smile"
+    if not Girl.Foot and Approval:                                                 #First time dialog
+        if Girl.Forced:
+            $ Girl.change_face("sad",1)
+            $ Girl.change_stat("love", 70, -3, 1)
+            $ Girl.change_stat("love", 20, -2, 1)
+        elif Girl.love >= (Girl.obedience + Girl.inhibition):
+            $ Girl.change_face("sexy",1)
+            $ Girl.Brows = "sad"
+            $ Girl.Mouth = "smile"
             ch_e "I suppose it couldn't hurt. . ."
-        elif character.Obed >= character.Inbt:
-            $ character.FaceChange("normal",1)
-            ch_e "If you enjoy that, [character.Petname]. . ."
-        elif character.Addict >= 50:
-            $ character.FaceChange("manic", 1)
+        elif Girl.obedience >= Girl.inhibition:
+            $ Girl.change_face("normal",1)
+            ch_e "If you enjoy that, [Girl.Petname]. . ."
+        elif Girl.Addict >= 50:
+            $ Girl.change_face("manic", 1)
             ch_e "Very well. . ."
         else: # Uninhibited
-            $ character.FaceChange("lipbite",1)
+            $ Girl.change_face("lipbite",1)
             ch_e "Very well. . ."
 
     elif Approval:                                                                       #Second time+ dialog
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("love", 70, -3, 1)
+            $ Girl.change_stat("love", 20, -2, 1)
             ch_e "That's it?"
-        elif not Taboo and "tabno" in character.DailyActions:
+        elif not Taboo and "tabno" in Girl.daily_history:
             ch_e "Um, I suppose this is secluded enough. . ."
-        elif "foot" in character.RecentActions:
-            $ character.FaceChange("sexy", 1)
+        elif "foot" in Girl.recent_history:
+            $ Girl.change_face("sexy", 1)
             ch_e "You know, heels are nightmare on the arches. . ."
             jump Emma_FJ_Prep
-        elif "foot" in character.DailyActions:
-            $ character.FaceChange("sexy", 1)
-            $ Line = renpy.random.choice(["Another?",
+        elif "foot" in Girl.daily_history:
+            $ Girl.change_face("sexy", 1)
+            $ line = renpy.random.choice(["Another?",
                 "I'd rather not get calluses.",
                 "Didn't get enough earlier?",
                 "My feet are rather sore from earlier.",
                 "My feet are rather sore from earlier."])
-            ch_e "[Line]"
-        elif character.Foot < 3:
-            $ character.FaceChange("sexy", 1)
-            $ character.Brows = "confused"
-            $ character.Mouth = "kiss"
+            ch_e "[line]"
+        elif Girl.Foot < 3:
+            $ Girl.change_face("sexy", 1)
+            $ Girl.Brows = "confused"
+            $ Girl.Mouth = "kiss"
             ch_e "Oh, very well. . ."
         else:
-            $ character.FaceChange("sexy", 1)
-            $ character.ArmPose = 2
-            $ Line = renpy.random.choice(["You'd like me to use my feet again?",
+            $ Girl.change_face("sexy", 1)
+            $ Girl.ArmPose = 2
+            $ line = renpy.random.choice(["You'd like me to use my feet again?",
                 "So you'd like another footjob?",
                 "Mmmm, some. . . [she rubs her foot along your leg]?",
                 "A little foot rub?"])
-            ch_e "[Line]"
-        $ Line = 0
+            ch_e "[line]"
+        $ line = 0
 
     if Approval >= 2:                                                                   #She's into it. . .
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Obed", 90, 1)
-            $ character.Statup("Inbt", 60, 1)
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("obedience", 90, 1)
+            $ Girl.change_stat("inhibition", 60, 1)
             ch_e "Oh, fine."
-        elif "no foot" in character.DailyActions:
+        elif "no foot" in Girl.daily_history:
             ch_e "Oh, very well."
         else:
-            $ character.FaceChange("sexy", 1)
-            $ character.Statup("Love", 90, 1)
-            $ character.Statup("Inbt", 50, 3)
-            $ Line = renpy.random.choice(["Sure, I suppose.",
+            $ Girl.change_face("sexy", 1)
+            $ Girl.change_stat("love", 90, 1)
+            $ Girl.change_stat("inhibition", 50, 3)
+            $ line = renpy.random.choice(["Sure, I suppose.",
                 "Fine.",
                 "Very well, bring it out.",
                 "I suppose I could. . .",
                 "Fine. . . [She gestures for you to come over].",
                 "Hmm, ok."])
-            ch_e "[Line]"
-            $ Line = 0
-        $ character.Statup("Obed", 20, 1)
-        $ character.Statup("Obed", 60, 1)
-        $ character.Statup("Inbt", 70, 2)
+            ch_e "[line]"
+            $ line = 0
+        $ Girl.change_stat("obedience", 20, 1)
+        $ Girl.change_stat("obedience", 60, 1)
+        $ Girl.change_stat("inhibition", 70, 2)
         jump Emma_FJ_Prep
 
     else:                                                                               #She's not into it, but maybe. . .
-        $ character.FaceChange("angry")
-        if "no foot" in character.RecentActions:
-            ch_e "Pay attention, [character.Petname]."
-        elif Taboo and "tabno" in character.DailyActions and "no foot" in character.DailyActions:
+        $ Girl.change_face("angry")
+        if "no foot" in Girl.recent_history:
+            ch_e "Pay attention, [Girl.Petname]."
+        elif Taboo and "tabno" in Girl.daily_history and "no foot" in Girl.daily_history:
             ch_e "I refuse to do this in public."
-        elif "no foot" in character.DailyActions:
-            ch_e "I said \"no,\" [character.Petname]."
-        elif Taboo and "tabno" in character.DailyActions:
+        elif "no foot" in Girl.daily_history:
+            ch_e "I said \"no,\" [Girl.Petname]."
+        elif Taboo and "tabno" in Girl.daily_history:
             ch_e "I told you, not in public!"
-        elif not character.Foot:
-            $ character.FaceChange("bemused")
-            ch_e "I'm unsure, [character.Petname]. . ."
+        elif not Girl.Foot:
+            $ Girl.change_face("bemused")
+            ch_e "I'm unsure, [Girl.Petname]. . ."
         else:
-            $ character.FaceChange("bemused")
-            ch_e "Not now, [character.Petname]. . ."
+            $ Girl.change_face("bemused")
+            ch_e "Not now, [Girl.Petname]. . ."
         menu:
             extend ""
-            "Sorry, never mind." if "no foot" in character.DailyActions:
-                $ character.FaceChange("bemused")
+            "Sorry, never mind." if "no foot" in Girl.daily_history:
+                $ Girl.change_face("bemused")
                 ch_e "Thank you."
                 return
-            "Maybe later?" if "no foot" not in character.DailyActions:
-                $ character.FaceChange("sexy")
+            "Maybe later?" if "no foot" not in Girl.daily_history:
+                $ Girl.change_face("sexy")
                 ch_e ". . ."
                 ch_e "Perhaps."
-                $ character.Statup("Love", 80, 2)
-                $ character.Statup("Inbt", 70, 2)
+                $ Girl.change_stat("love", 80, 2)
+                $ Girl.change_stat("inhibition", 70, 2)
                 if Taboo:
-                    $ character.RecentActions.append("tabno")
-                    $ character.DailyActions.append("tabno")
-                $ character.RecentActions.append("no foot")
-                $ character.DailyActions.append("no foot")
+                    $ Girl.recent_history.append("tabno")
+                    $ Girl.daily_history.append("tabno")
+                $ Girl.recent_history.append("no foot")
+                $ Girl.daily_history.append("no foot")
                 return
             "I'd really appreciate it. . .":
                 if Approval:
-                    $ character.FaceChange("sexy")
-                    $ character.Statup("Obed", 90, 2)
-                    $ character.Statup("Obed", 50, 2)
-                    $ character.Statup("Inbt", 70, 3)
-                    $ character.Statup("Inbt", 40, 2)
-                    $ Line = renpy.random.choice(["Sure, I suppose.",
+                    $ Girl.change_face("sexy")
+                    $ Girl.change_stat("obedience", 90, 2)
+                    $ Girl.change_stat("obedience", 50, 2)
+                    $ Girl.change_stat("inhibition", 70, 3)
+                    $ Girl.change_stat("inhibition", 40, 2)
+                    $ line = renpy.random.choice(["Sure, I suppose.",
                             "Fine.",
                             "Very well, bring it out.",
                             "I suppose I could. . .",
                             "Fine. . . [She gestures for you to come over].",
                             "Hmm, ok."])
-                    ch_e "[Line]"
-                    $ Line = 0
+                    ch_e "[line]"
+                    $ line = 0
                     jump Emma_FJ_Prep
                 else:
                     pass
 
             "Come on, get to work.":                                               # Pressured into it
-                $ Approval = ApprovalCheck(character, 400, "OI", TabM = 3) # 35, 50, 65, -120(155)
-                if Approval > 1 or (Approval and character.Forced):
-                    $ character.FaceChange("sad")
-                    $ character.Statup("Love", 70, -5, 1)
-                    $ character.Statup("Love", 200, -2)
+                $ Approval = ApprovalCheck(Girl, 400, "OI", TabM = 3) # 35, 50, 65, -120(155)
+                if Approval > 1 or (Approval and Girl.Forced):
+                    $ Girl.change_face("sad")
+                    $ Girl.change_stat("love", 70, -5, 1)
+                    $ Girl.change_stat("love", 200, -2)
 
-                    $ character.Statup("Obed", 50, 4)
-                    $ character.Statup("Inbt", 80, 1)
-                    $ character.Statup("Inbt", 60, 3)
-                    $ character.Forced = 1
+                    $ Girl.change_stat("obedience", 50, 4)
+                    $ Girl.change_stat("inhibition", 80, 1)
+                    $ Girl.change_stat("inhibition", 60, 3)
+                    $ Girl.Forced = 1
                     jump Emma_FJ_Prep
                 else:
-                    $ character.Statup("Love", 200, -15)
-                    $ character.RecentActions.append("angry")
-                    $ character.DailyActions.append("angry")
+                    $ Girl.change_stat("love", 200, -15)
+                    $ Girl.recent_history.append("angry")
+                    $ Girl.daily_history.append("angry")
 
     #She refused all offers.
-    $ character.ArmPose = 1
-    if "no foot" in character.DailyActions:
-        $ character.FaceChange("angry", 1)
-        $ character.RecentActions.append("angry")
-        $ character.DailyActions.append("angry")
-    elif character.Forced:
-        $ character.FaceChange("angry", 1)
+    $ Girl.ArmPose = 1
+    if "no foot" in Girl.daily_history:
+        $ Girl.change_face("angry", 1)
+        $ Girl.recent_history.append("angry")
+        $ Girl.daily_history.append("angry")
+    elif Girl.Forced:
+        $ Girl.change_face("angry", 1)
         ch_e "You really don't want my heels near your manhood."
-        $ character.Statup("Lust", 200, 5)
-        if character.Love > 300:
-                $ character.Statup("Love", 70, -2)
-        $ character.Statup("Obed", 50, -2)
-        $ character.RecentActions.append("angry")
-        $ character.DailyActions.append("angry")
+        $ Girl.change_stat("lust", 200, 5)
+        if Girl.love > 300:
+                $ Girl.change_stat("love", 70, -2)
+        $ Girl.change_stat("obedience", 50, -2)
+        $ Girl.recent_history.append("angry")
+        $ Girl.daily_history.append("angry")
     elif Taboo:                             # she refuses and this is too public a place for her
-        $ character.FaceChange("angry", 1)
-        $ character.DailyActions.append("tabno")
+        $ Girl.change_face("angry", 1)
+        $ Girl.daily_history.append("tabno")
         ch_e "This truly isn't an appropriate place for that."
-        $ character.Statup("Lust", 200, 5)
-        $ character.Statup("Obed", 50, -3)
-    elif character.Foot:
-        $ character.FaceChange("sad")
-        ch_e "I'm not in the mood, [character.Petname]. . ."
+        $ Girl.change_stat("lust", 200, 5)
+        $ Girl.change_stat("obedience", 50, -3)
+    elif Girl.Foot:
+        $ Girl.change_face("sad")
+        ch_e "I'm not in the mood, [Girl.Petname]. . ."
     else:
-        $ character.FaceChange("normal", 1)
+        $ Girl.change_face("normal", 1)
         ch_e "I'm not in the mood for footplay today. . ."
-    $ character.RecentActions.append("no foot")
-    $ character.DailyActions.append("no foot")
+    $ Girl.recent_history.append("no foot")
+    $ Girl.daily_history.append("no foot")
     $ temp_modifier = 0
     return
 
 
 label Emma_FJ_Prep:
-    if Trigger2 == "foot":
+    if offhand_action == "foot":
         return
 
     if Taboo:
-        $ character.Inbt += int(Taboo/10)
-        $ character.Lust += int(Taboo/5)
+        $ Girl.inhibition += int(Taboo/10)
+        $ Girl.lust += int(Taboo/5)
 
-    $ character.FaceChange("sexy")
-    if character.Forced:
-        $ character.FaceChange("sad")
-    elif not character.Foot:
-        $ character.Brows = "confused"
-        $ character.Eyes = "sexy"
-        $ character.Mouth = "smile"
+    $ Girl.change_face("sexy")
+    if Girl.Forced:
+        $ Girl.change_face("sad")
+    elif not Girl.Foot:
+        $ Girl.Brows = "confused"
+        $ Girl.Eyes = "sexy"
+        $ Girl.Mouth = "smile"
 
-    call Seen_First_Peen(character,Partner,React=Situation)
-    if not character.Foot:
-        if character.Forced:
-            $ character.Statup("Love", 90, -20)
-            $ character.Statup("Obed", 70, 25)
-            $ character.Statup("Inbt", 80, 30)
+    call Seen_First_Peen(Girl,Partner,React=action_context)
+    if not Girl.Foot:
+        if Girl.Forced:
+            $ Girl.change_stat("love", 90, -20)
+            $ Girl.change_stat("obedience", 70, 25)
+            $ Girl.change_stat("inhibition", 80, 30)
         else:
-            $ character.Statup("Love", 90, 5)
-            $ character.Statup("Obed", 70, 20)
-            $ character.Statup("Inbt", 80, 20)
+            $ Girl.change_stat("love", 90, 5)
+            $ Girl.change_stat("obedience", 70, 20)
+            $ Girl.change_stat("inhibition", 80, 20)
 
-    if Situation:
+    if action_context:
         $ renpy.pop_call()
-        $ Situation = 0
-    $ Line = 0
-    $ Cnt = 0
+        $ action_context = 0
+    $ line = 0
+    $ counter = 0
     if Taboo:
-        $ character.DrainWord("tabno")
-    $ character.DrainWord("no foot")
-    $ character.RecentActions.append("foot")
-    $ character.DailyActions.append("foot")
+        $ Girl.DrainWord("tabno")
+    $ Girl.DrainWord("no foot")
+    $ Girl.recent_history.append("foot")
+    $ Girl.daily_history.append("foot")
     ch_e "Did you want me facing you, or from behind?"
     menu:
         extend ""
         "Facing me":
-                $ character.Pose = "foot"
+                $ Girl.Pose = "foot"
         "From behind.":
-                $ character.Pose = "doggy"
+                $ Girl.Pose = "doggy"
 
 label Emma_FJ_Cycle:
     while Round > 0:
-        call Shift_Focus(character)
+        call Shift_Focus(Girl)
         call Emma_FJ_Launch
-        $ character.LustFace()
+        $ Girl.lustFace()
 
         if  Player.Focus < 100:
                     #Player Command menu
                     menu:
-                        "Keep going. . ." if Speed:
+                        "Keep going. . ." if action_speed:
                                     pass
 
-                        "Start moving? . ." if not Speed:
-                                    $ Speed = 1
+                        "Start moving? . ." if not action_speed:
+                                    $ action_speed = 1
 
-                        "Speed up. . ." if Speed < 2:
-                                    $ Speed = 2
+                        "action_speed up. . ." if action_speed < 2:
+                                    $ action_speed = 2
                                     "You ask her to up the pace a bit."
-                        "Speed up. . . (locked)" if Speed >= 2:
+                        "action_speed up. . . (locked)" if action_speed >= 2:
                                     pass
 
-                        "Slow Down. . ." if Speed:
-                                    $ Speed -= 1
+                        "Slow Down. . ." if action_speed:
+                                    $ action_speed -= 1
                                     "You ask her to slow it down a bit."
-                        "Slow Down. . . (locked)" if not Speed:
+                        "Slow Down. . . (locked)" if not action_speed:
                                     pass
 
                         "Turn her Around":
-                                    $ character.Pose = "doggy" if character.Pose != "doggy" else "foot"
+                                    $ Girl.Pose = "doggy" if Girl.Pose != "doggy" else "foot"
                                     "You turn her around. . ."
                                     jump Emma_FJ_Cycle
 
@@ -3379,196 +3379,196 @@ label Emma_FJ_Cycle:
 
                         "Other options":
                                 menu:
-                                    "I also want to fondle her thighs." if Trigger2 != "fondle thighs":
+                                    "I also want to fondle her thighs." if offhand_action != "fondle thighs":
                                             if MultiAction:
-                                                $ Trigger2 = "fondle thighs"
+                                                $ offhand_action = "fondle thighs"
                                                 "You start to fondle her thighs."
                                             else:
-                                                call Sex_Basic_Dialog(character,"tired")
+                                                call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Shift primary action":
-                                            if character.Action and MultiAction:
+                                            if Girl.Action and MultiAction:
                                                     menu:
                                                         "How about a blowjob?":
-                                                                    if character.Action and MultiAction:
-                                                                        $ Situation = "shift"
+                                                                    if Girl.Action and MultiAction:
+                                                                        $ action_context = "shift"
                                                                         call Emma_FJ_After
                                                                         call Emma_Blowjob
                                                                     else:
-                                                                        call Sex_Basic_Dialog(character,"tired")
+                                                                        call Sex_Basic_Dialog(Girl,"tired")
                                                         "How about a handjob?":
-                                                                    if character.Action and MultiAction:
-                                                                        $ Situation = "shift"
+                                                                    if Girl.Action and MultiAction:
+                                                                        $ action_context = "shift"
                                                                         call Emma_FJ_After
                                                                         call Emma_Handjob
                                                                     else:
-                                                                        call Sex_Basic_Dialog(character,"tired")
+                                                                        call Sex_Basic_Dialog(Girl,"tired")
 
                                                         "How about a titjob?":
-                                                                    if character.Action and MultiAction:
-                                                                        $ Situation = "shift"
+                                                                    if Girl.Action and MultiAction:
+                                                                        $ action_context = "shift"
                                                                         call Emma_FJ_After
                                                                         call Emma_Titjob
                                                                     else:
-                                                                        call Sex_Basic_Dialog(character,"tired")
+                                                                        call Sex_Basic_Dialog(Girl,"tired")
 
                                                         "Never Mind":
                                                                 jump Emma_FJ_Cycle
                                             else:
-                                                call Sex_Basic_Dialog(character,"tired")
+                                                call Sex_Basic_Dialog(Girl,"tired")
 
                                     "Threesome actions (locked)" if not Partner:
                                         pass
                                     "Threesome actions" if Partner:
                                         menu:
-                                            "Asks [character.Name] to do something else with [Partner.Name]" if Trigger == "lesbian":
-                                                        call Les_Change(character)
-                                            "Asks [character.Name] to do something else with [Partner.Name] (locked)" if Trigger != "lesbian":
+                                            "Asks [Girl.name] to do something else with [Partner.name]" if primary_action == "lesbian":
+                                                        call Les_Change(Girl)
+                                            "Asks [Girl.name] to do something else with [Partner.name] (locked)" if primary_action != "lesbian":
                                                         pass
-                                            "Ask [Partner.Name] to do something else":
-                                                        call Three_Change(character)
+                                            "Ask [Partner.name] to do something else":
+                                                        call Three_Change(Girl)
 
-                                            "Don't stop what you're doing. . .(locked)" if not ThreeCount or not Trigger4:
-                                                        $ ThreeCount = 0
-                                            "Don't stop what you're doing. . ." if ThreeCount and Trigger4:
-                                                        $ ThreeCount = 0
+                                            "Don't stop what you're doing. . .(locked)" if not position_change_timer or not Partner_primary_action:
+                                                        $ position_change_timer = 0
+                                            "Don't stop what you're doing. . ." if position_change_timer and Partner_primary_action:
+                                                        $ position_change_timer = 0
 
-                                            "Swap to [Partner.Name]":
-                                                        call Trigger_Swap(character)
-                                            "Undress [Partner.Name]":
+                                            "Swap to [Partner.name]":
+                                                        call primary_action_Swap(Girl)
+                                            "Undress [Partner.name]":
                                                         call Girl_Undress(Partner)
                                                         jump Emma_FJ_Cycle
-                                            "Clean up [Partner.Name] (locked)" if not Partner.Spunk:
+                                            "Clean up [Partner.name] (locked)" if not Partner.Spunk:
                                                         pass
-                                            "Clean up [Partner.Name]" if Partner.Spunk:
+                                            "Clean up [Partner.name]" if Partner.Spunk:
                                                         call Girl_Cleanup(Partner,"ask")
                                                         jump Emma_FJ_Cycle
                                             "Never mind":
                                                         jump Emma_FJ_Cycle
-                                    "Undress [character.Name]":
-                                            call Girl_Undress(character)
-                                    "Clean up [character.Name] (locked)" if not character.Spunk:
+                                    "Undress [Girl.name]":
+                                            call Girl_Undress(Girl)
+                                    "Clean up [Girl.name] (locked)" if not Girl.Spunk:
                                             pass
-                                    "Clean up [character.Name]" if character.Spunk:
-                                            call Girl_Cleanup(character,"ask")
+                                    "Clean up [Girl.name]" if Girl.Spunk:
+                                            call Girl_Cleanup(Girl,"ask")
                                     "Never mind":
                                             jump Emma_FJ_Cycle
 
                         "Back to Sex Menu" if MultiAction:
                                     ch_p "Let's try something else."
                                     call Emma_FJ_Reset
-                                    $ Situation = "shift"
-                                    $ Line = 0
+                                    $ action_context = "shift"
+                                    $ line = 0
                                     jump Emma_FJ_After
                         "End Scene" if not MultiAction:
                                     ch_p "Let's stop for now."
                                     call Emma_FJ_Reset
-                                    $ Line = 0
+                                    $ line = 0
                                     jump Emma_FJ_After
-        #End menu (if Line)
+        #End menu (if line)
 
-        call Shift_Focus(character)
-        call Sex_Dialog(character,Partner)
+        call Shift_Focus(Girl)
+        call Sex_Dialog(Girl,Partner)
 
         #If either of you could cum
 
-        $ Cnt += 1
+        $ counter += 1
         $ Round -= 1
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-        if Player.Focus >= 100 or character.Lust >= 100:
+        if Player.Focus >= 100 or Girl.lust >= 100:
                     #If either of you could cum
                     if Player.Focus >= 100:
                             #If you can cum:
-                            call Player_Cumming(character)
-                            if "angry" in character.RecentActions:
+                            call Player_Cumming(Girl)
+                            if "angry" in Girl.recent_history:
                                 call Emma_FJ_Reset
                                 return
-                            $ character.Statup("Lust", 200, 5)
-                            if 100 > character.Lust >= 70 and character.OCount < 2:
-                                $ character.RecentActions.append("unsatisfied")
-                                $ character.DailyActions.append("unsatisfied")
+                            $ Girl.change_stat("lust", 200, 5)
+                            if 100 > Girl.lust >= 70 and Girl.OCount < 2:
+                                $ Girl.recent_history.append("unsatisfied")
+                                $ Girl.daily_history.append("unsatisfied")
 
                             if Player.Focus > 80:
                                 jump Emma_FJ_After
-                            $ Line = "came"
+                            $ line = "came"
 
-                    if character.Lust >= 100:
-                            #If [character.Name] can cum
-                            call Girl_Cumming(character)
-                            if Situation == "shift" or "angry" in character.RecentActions:
+                    if Girl.lust >= 100:
+                            #If [Girl.name] can cum
+                            call Girl_Cumming(Girl)
+                            if action_context == "shift" or "angry" in Girl.recent_history:
                                 jump Emma_FJ_After
 
-                    if Line == "came": #ex Player.Focus <= 20:
+                    if line == "came": #ex Player.Focus <= 20:
                             #If you've just cum,
-                            $ Line = 0
+                            $ line = 0
                             if not Player.Semen:
                                 "You're emptied out, you should probably take a break."
 
 
-                            if "unsatisfied" in character.RecentActions:#And [character.Name] is unsatisfied,
-                                    "[character.Name] still seems a bit unsatisfied with the experience."
+                            if "unsatisfied" in Girl.recent_history:#And [Girl.name] is unsatisfied,
+                                    "[Girl.name] still seems a bit unsatisfied with the experience."
                                     menu:
                                         "Finish her?"
                                         "Yes, keep going for a bit.":
-                                            $ Line = "You get back into it"
+                                            $ line = "You get back into it"
                                         "No, I'm done.":
                                             "You pull back."
                                             jump Emma_FJ_After
-        if Partner and Partner.Lust >= 100:
+        if Partner and Partner.lust >= 100:
                 #Checks if partner could orgasm
                 call Girl_Cumming(Partner)
         #End orgasm
 
         $ Player.Focus -= 10 if Player.FocusX and Player.Focus > 50 else 0
 
-        if Cnt == 20:
-                    $ character.Brows = "angry"
+        if counter == 20:
+                    $ Girl.Brows = "angry"
                     menu:
                         ch_e "Hmm, foot cramp, could we take a short break?"
-                        "How about a BJ?" if character.Action and MultiAction:
-                                $ Situation = "shift"
+                        "How about a BJ?" if Girl.Action and MultiAction:
+                                $ action_context = "shift"
                                 call Emma_FJ_After
                                 call Emma_Blowjob
-                        "How about a Handy?" if character.Action and MultiAction:
-                                $ Situation = "shift"
+                        "How about a Handy?" if Girl.Action and MultiAction:
+                                $ action_context = "shift"
                                 call Emma_FJ_After
                                 call Emma_Handjob
                         "Finish up." if Player.FocusX:
                                 "You release your concentration. . ."
                                 $ Player.FocusX = 0
                                 $ Player.Focus += 15
-                                $ Cnt += 1
-                                "[Line]"
+                                $ counter += 1
+                                "[line]"
                                 jump Emma_FJ_Cycle
                         "Let's try something else." if MultiAction:
-                                $ Line = 0
+                                $ line = 0
                                 call Emma_Sex_Reset
-                                $ Situation = "shift"
+                                $ action_context = "shift"
                                 jump Emma_FJ_After
                         "No, keep going.":
-                                if ApprovalCheck(character, 1200) or ApprovalCheck(character, 500, "O"):
-                                    $ character.Statup("Love", 200, -5)
-                                    $ character.Statup("Obed", 50, 3)
-                                    $ character.Statup("Obed", 80, 2)
+                                if ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "O"):
+                                    $ Girl.change_stat("love", 200, -5)
+                                    $ Girl.change_stat("obedience", 50, 3)
+                                    $ Girl.change_stat("obedience", 80, 2)
                                     "She grumbles but gets back to work."
                                 else:
-                                    $ character.FaceChange("angry", 1)
+                                    $ Girl.change_face("angry", 1)
                                     "She scowls at you, drops you cock and pulls back."
                                     ch_e "I do have better things I could be doing."
-                                    $ character.Statup("Love", 50, -3, 1)
-                                    $ character.Statup("Love", 80, -4, 1)
-                                    $ character.Statup("Obed", 30, -1, 1)
-                                    $ character.Statup("Obed", 50, -1, 1)
-                                    $ character.RecentActions.append("angry")
-                                    $ character.DailyActions.append("angry")
+                                    $ Girl.change_stat("love", 50, -3, 1)
+                                    $ Girl.change_stat("love", 80, -4, 1)
+                                    $ Girl.change_stat("obedience", 30, -1, 1)
+                                    $ Girl.change_stat("obedience", 50, -1, 1)
+                                    $ Girl.recent_history.append("angry")
+                                    $ Girl.daily_history.append("angry")
                                     jump Emma_FJ_After
-        elif Cnt == 10 and character.SEXP <= 100 and not ApprovalCheck(character, 1200, "LO"):
-                    $ character.Brows = "confused"
+        elif counter == 10 and Girl.SEXP <= 100 and not ApprovalCheck(Girl, 1200, "LO"):
+                    $ Girl.Brows = "confused"
                     ch_e "Could we be done here, my feet are getting sore."
         #End Count check
 
-        call Escalation(character) #sees if she wants to escalate things
+        call Escalation(Girl) #sees if she wants to escalate things
 
         if Round == 10:
             ch_e "Ok, it's getting a bit late here."
@@ -3576,47 +3576,47 @@ label Emma_FJ_Cycle:
             ch_e "Seriously, it'll be time to stop soon."
 
     #Round = 0 loop breaks
-    $ character.FaceChange("bemused", 0)
-    $ Line = 0
-    ch_e "Ok, [character.Petname], that's enough of that for now."
+    $ Girl.change_face("bemused", 0)
+    $ line = 0
+    ch_e "Ok, [Girl.Petname], that's enough of that for now."
 
 label Emma_FJ_After:
-    $ character.FaceChange("sexy")
+    $ Girl.change_face("sexy")
 
-    $ character.Foot += 1
-    $ character.Action -=1
-    $ character.Addictionrate += 1
+    $ Girl.Foot += 1
+    $ Girl.Action -=1
+    $ Girl.Addictionrate += 1
     if "addictive" in Player.Traits:
-        $ character.Addictionrate += 1
-    $ character.Statup("Lust", 90, 5)
+        $ Girl.Addictionrate += 1
+    $ Girl.change_stat("lust", 90, 5)
 
-    call Partner_Like(character,1)
+    call Partner_Like(Girl,1)
 
     if "Emmapedi" in Achievements:
             pass
-    elif character.Foot >= 10:
-            $ character.FaceChange("smile", 1)
+    elif Girl.Foot >= 10:
+            $ Girl.change_face("smile", 1)
             ch_e "I'm glad that you enjoy my feet."
             ch_e "They've been trained well over the years."
             $ Achievements.append("Emmapedi")
-            $ character.SEXP += 5
-    elif character.Foot == 1:
-            $ character.SEXP += 10
-            if character.Love >= 500:
-                $ character.Mouth = "smile"
+            $ Girl.SEXP += 5
+    elif Girl.Foot == 1:
+            $ Girl.SEXP += 10
+            if Girl.love >= 500:
+                $ Girl.Mouth = "smile"
                 ch_e "Your cock was so warm . ."
             elif Player.Focus <= 20:
-                $ character.Mouth = "sad"
+                $ Girl.Mouth = "sad"
                 ch_e "Did you enjoy that?"
-    elif character.Foot == 5:
+    elif Girl.Foot == 5:
                 ch_e "I'm enjoying this experience."
 
     $ temp_modifier = 0
-    if Situation == "shift":
+    if action_context == "shift":
         ch_e "Ok then, what were you thinking?"
     else:
         call Emma_Sex_Reset
     call Checkout
     return
 
-## end character.Footjob //////////////////////////////////////////////////////////////////////
+## end Girl.Footjob //////////////////////////////////////////////////////////////////////

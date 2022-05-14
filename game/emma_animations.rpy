@@ -1,4 +1,4 @@
-﻿# Basic character Sprites
+﻿# Basic Girl Sprites
 image Emma_Sprite:
     LiveComposite(
         (402,965),
@@ -420,142 +420,142 @@ image Emma_Sprite:
 #            "True", Null(),
 #            ),
         (0,0), ConditionSwitch(
-            #UI tool for When Emma is masturbating using Trigger3 actions
+            #UI tool for When Emma is masturbating using girl_offhand_action actions
             "EmmaX.Loc == 'bg teacher'", Null(),
-            "Trigger == 'lesbian' or not Trigger3 or Ch_Focus != EmmaX", Null(),
+            "primary_action == 'lesbian' or not girl_offhand_action or focused_Girl != EmmaX", Null(),
 
             #this is not a lesbian thing, and a trigger is set, and Emma is the primary. . .
-            "Trigger3 == 'fondle pussy'", "GirlGropePussy_EmmaSelf",
-            "Trigger3 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts'", "GirlGropeLeftBreast_Emma",
+            "girl_offhand_action == 'fondle pussy'", "GirlGropePussy_EmmaSelf",
+            "girl_offhand_action == 'fondle breasts'", ConditionSwitch(
+                    "offhand_action == 'fondle breasts' or offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Emma",
                         #When zero is working the right breast, fondle left
-                    "Trigger == 'fondle breasts' or Trigger == 'suck breasts'", "GirlGropeRightBreast_Emma",
+                    "primary_action == 'fondle breasts' or primary_action == 'suck breasts'", "GirlGropeRightBreast_Emma",
                         #When zero is working the left breast, fondle right
                     "True", "GirlGropeBothBreast_Emma",
                         #else, fondle both
                     ),
-            "Trigger3 == 'vibrator breasts'", "VibratorRightBreast_Emma",
-            "Trigger3 == 'vibrator pussy'", "VibratorPussy_Emma",
-            "Trigger3 == 'vibrator pussy insert'", "VibratorPussy_Emma",
-            "Trigger3 == 'vibrator anal'", "VibratorAnal_Emma",
-            "Trigger3 == 'vibrator anal insert'", "VibratorPussy_Emma",
+            "girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast_Emma",
+            "girl_offhand_action == 'vibrator pussy'", "VibratorPussy_Emma",
+            "girl_offhand_action == 'vibrator pussy insert'", "VibratorPussy_Emma",
+            "girl_offhand_action == 'vibrator anal'", "VibratorAnal_Emma",
+            "girl_offhand_action == 'vibrator anal insert'", "VibratorPussy_Emma",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger5(Threesome masutrbation) actions
+            #UI tool for Partner_offhand_action(Threesome masutrbation) actions
             "EmmaX.Loc == 'bg teacher'", Null(),
-            "not Trigger5 or Trigger4 != 'masturbation' or Ch_Focus == EmmaX", Null(),
+            "not Partner_offhand_action or Partner_primary_action != 'masturbation' or focused_Girl == EmmaX", Null(),
 
             #Emma is not primary, and T4 is masturbation, and a T5 is selected
-            "Trigger5 == 'fondle pussy' and Trigger != 'sex' and EmmaX.Lust >= 70", "GirlFingerPussy_Emma",
-            "Trigger5 == 'fondle pussy'", "GirlGropePussy_Emma",
-            "Trigger5 == 'fondle breasts'", "GirlGropeRightBreast_Emma",
-            "Trigger5 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger5 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger5 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger5 == 'vibrator anal'", "VibratorAnal",
-            "Trigger5 == 'vibrator anal insert'", "VibratorPussy",
+            "Partner_offhand_action == 'fondle pussy' and primary_action != 'sex' and EmmaX.lust >= 70", "GirlFingerPussy_Emma",
+            "Partner_offhand_action == 'fondle pussy'", "GirlGropePussy_Emma",
+            "Partner_offhand_action == 'fondle breasts'", "GirlGropeRightBreast_Emma",
+            "Partner_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "Partner_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "Partner_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "Partner_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "Partner_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger1(primary) actions
+            #UI tool for primary_action1(primary) actions
             "EmmaX.Loc == 'bg teacher'", Null(),
-            "not Trigger or Ch_Focus != EmmaX", Null(),
+            "not primary_action or focused_Girl != EmmaX", Null(),
 
             # Emma is primary and a sex trigger is active
-            "Trigger == 'vibrator breasts'", "VibratorLeftBreast_Emma",
-            "Trigger == 'fondle thighs'", "GropeThigh_Emma",
-            "Trigger == 'fondle breasts'", "GropeLeftBreast_Emma",
-            "Trigger == 'suck breasts'", "LickRightBreast_Emma",
-            "Trigger == 'fondle pussy' and Speed == 2", "FingerPussy_Emma",
-            "Trigger == 'fondle pussy'", "GropePussy_Emma",
-            "Trigger == 'lick pussy'", "Lickpussy_Emma",
-            "Trigger == 'vibrator pussy'", "VibratorPussy_Emma",
-            "Trigger == 'vibrator pussy insert'", "VibratorPussy_Emma",
-            "Trigger == 'vibrator anal'", "VibratorAnal_Emma",
-            "Trigger == 'vibrator anal insert'", "VibratorPussy_Emma",
+            "primary_action == 'vibrator breasts'", "VibratorLeftBreast_Emma",
+            "primary_action == 'fondle thighs'", "GropeThigh_Emma",
+            "primary_action == 'fondle breasts'", "GropeLeftBreast_Emma",
+            "primary_action == 'suck breasts'", "LickRightBreast_Emma",
+            "primary_action == 'fondle pussy' and action_speed == 2", "FingerPussy_Emma",
+            "primary_action == 'fondle pussy'", "GropePussy_Emma",
+            "primary_action == 'lick pussy'", "Lickpussy_Emma",
+            "primary_action == 'vibrator pussy'", "VibratorPussy_Emma",
+            "primary_action == 'vibrator pussy insert'", "VibratorPussy_Emma",
+            "primary_action == 'vibrator anal'", "VibratorAnal_Emma",
+            "primary_action == 'vibrator anal insert'", "VibratorPussy_Emma",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger2(secondary) actions
+            #UI tool for offhand_action(secondary) actions
             "EmmaX.Loc == 'bg teacher'", Null(),
-            "not Trigger2 or Ch_Focus != EmmaX", Null(),
+            "not offhand_action or focused_Girl != EmmaX", Null(),
 
             #Emma is primary and an offhand trigger is active
-            "Trigger2 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger2 == 'fondle breasts' and Trigger == 'suck breasts'", "GropeLeftBreast_Emma",
+            "offhand_action == 'fondle breasts'", ConditionSwitch(
+                    "offhand_action == 'fondle breasts' and primary_action == 'suck breasts'", "GropeLeftBreast_Emma",
                         #When zero is sucking on the right breast, fondle left
                     "True", "GropeRightBreast_Emma",
                         #else, fondle right
                     ),
-            "Trigger2 == 'vibrator breasts' and Trigger == 'suck breasts'", "VibratorLeftBreast_Emma",
+            "offhand_action == 'vibrator breasts' and primary_action == 'suck breasts'", "VibratorLeftBreast_Emma",
                 #When sucking right breast, vibrator left
-            "Trigger2 == Trigger", Null(),
+            "offhand_action == primary_action", Null(),
                 #When both triggers are the same, do nothing
-            "Trigger2 == 'suck breasts'", "LickLeftBreast_Emma",
-            "Trigger2 == 'fondle pussy'", "GropePussy_Emma",
-            "Trigger2 == 'lick pussy'", "Lickpussy_Emma",
-            "Trigger2 == 'vibrator breasts'", "VibratorRightBreast_Emma",
-            "Trigger2 == 'vibrator pussy'", "VibratorPussy_Emma",
-            "Trigger2 == 'vibrator pussy insert'", "VibratorPussy_Emma",
-            "Trigger2 == 'vibrator anal'", "VibratorAnal_Emma",
-            "Trigger2 == 'vibrator anal insert'", "VibratorPussy_Emma",
+            "offhand_action == 'suck breasts'", "LickLeftBreast_Emma",
+            "offhand_action == 'fondle pussy'", "GropePussy_Emma",
+            "offhand_action == 'lick pussy'", "Lickpussy_Emma",
+            "offhand_action == 'vibrator breasts'", "VibratorRightBreast_Emma",
+            "offhand_action == 'vibrator pussy'", "VibratorPussy_Emma",
+            "offhand_action == 'vibrator pussy insert'", "VibratorPussy_Emma",
+            "offhand_action == 'vibrator anal'", "VibratorAnal_Emma",
+            "offhand_action == 'vibrator anal insert'", "VibratorPussy_Emma",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger4(Threesome) actions (ie Rogue's hand on her)
+            #UI tool for Partner_primary_action(Threesome) actions (ie Rogue's hand on her)
             "EmmaX.Loc == 'bg teacher'", Null(),
-            "not Trigger4 or Ch_Focus != EmmaX", Null(),
+            "not Partner_primary_action or focused_Girl != EmmaX", Null(),
 
             # There is a threesome trigger set and Emma is the target of it
-            "Trigger4 == 'fondle pussy' and Trigger != 'sex' and EmmaX.Lust >= 70", "GirlFingerPussy_Emma",
-            "Trigger4 == 'fondle pussy'", "GirlGropePussy_Emma",
-            "Trigger4 == 'lick pussy'", "Lickpussy_Emma",
-            "Trigger4 == 'suck breasts' and (Trigger2 != 'suck breasts' or Trigger == 'suck breasts')", "LickLeftBreast_Emma",
-            "Trigger4 == 'suck breasts'", "LickRightBreast_Emma",
-            "Trigger4 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger == 'fondle breasts' or Trigger == 'suck breasts'", "GirlGropeLeftBreast_Emma",
+            "Partner_primary_action == 'fondle pussy' and primary_action != 'sex' and EmmaX.lust >= 70", "GirlFingerPussy_Emma",
+            "Partner_primary_action == 'fondle pussy'", "GirlGropePussy_Emma",
+            "Partner_primary_action == 'lick pussy'", "Lickpussy_Emma",
+            "Partner_primary_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Emma",
+            "Partner_primary_action == 'suck breasts'", "LickRightBreast_Emma",
+            "Partner_primary_action == 'fondle breasts'", ConditionSwitch(
+                    "primary_action == 'fondle breasts' or primary_action == 'suck breasts'", "GirlGropeLeftBreast_Emma",
                         #When zero is working the right breast, fondle left
-#                    "Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts'", "GirlGropeRightBreast_Emma",
+#                    "offhand_action == 'fondle breasts' or offhand_action == 'suck breasts'", "GirlGropeRightBreast_Emma",
 #                        #When zero is working the left breast, fondle right
-#                    "Trigger3 == 'fondle breasts' or Trigger3 == 'suck breasts'", "GirlGropeRightBreast_Emma",
+#                    "girl_offhand_action == 'fondle breasts' or girl_offhand_action == 'suck breasts'", "GirlGropeRightBreast_Emma",
 #                        #When zero is working the left breast, fondle right
                     "True", "GirlGropeRightBreast_Emma",
                         #else, fondle right
                     ),
-            "Trigger4 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger4 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger4 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger4 == 'vibrator anal'", "VibratorAnal",
-            "Trigger4 == 'vibrator anal insert'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator breasts'", "VibratorRightBreast",
+            "Partner_primary_action == 'vibrator pussy'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator pussy insert'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator anal'", "VibratorAnal",
+            "Partner_primary_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger3(lesbian) actions (ie Rogue's hand on her when Emma is secondary)
+            #UI tool for girl_offhand_action(lesbian) actions (ie Rogue's hand on her when Emma is secondary)
             "EmmaX.Loc == 'bg teacher'", Null(),
-            "Trigger != 'lesbian' or Ch_Focus == EmmaX or not Trigger3", Null(),
+            "primary_action != 'lesbian' or focused_Girl == EmmaX or not girl_offhand_action", Null(),
 
-            # If there is a Trigger3 and Emma is not the focus
-            "Trigger3 == 'fondle pussy' and Trigger != 'sex' and EmmaX.Lust >= 70", "GirlFingerPussy_Emma",
-            "Trigger3 == 'fondle pussy'", "GirlGropePussy_Emma",
-            "Trigger3 == 'lick pussy'", "Lickpussy_Emma",
-            "Trigger3 == 'suck breasts' and (Trigger2 != 'suck breasts' or Trigger == 'suck breasts')", "LickLeftBreast_Emma",
-            "Trigger3 == 'suck breasts'", "LickRightBreast_Emma",
-            "Trigger3 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger == 'fondle breasts' or Trigger == 'suck breasts'", "GirlGropeLeftBreast_Emma",
+            # If there is a girl_offhand_action and Emma is not the focus
+            "girl_offhand_action == 'fondle pussy' and primary_action != 'sex' and EmmaX.lust >= 70", "GirlFingerPussy_Emma",
+            "girl_offhand_action == 'fondle pussy'", "GirlGropePussy_Emma",
+            "girl_offhand_action == 'lick pussy'", "Lickpussy_Emma",
+            "girl_offhand_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Emma",
+            "girl_offhand_action == 'suck breasts'", "LickRightBreast_Emma",
+            "girl_offhand_action == 'fondle breasts'", ConditionSwitch(
+                    "primary_action == 'fondle breasts' or primary_action == 'suck breasts'", "GirlGropeLeftBreast_Emma",
                         #When zero is working the right breast, fondle left
-                    "Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts'", "GirlGropeRightBreast_Emma",
+                    "offhand_action == 'fondle breasts' or offhand_action == 'suck breasts'", "GirlGropeRightBreast_Emma",
                         #When zero is working the left breast, fondle right
-                    "Trigger3 == 'fondle breasts' or Trigger3 == 'suck breasts'", "GirlGropeLeftBreast_Emma",
+                    "girl_offhand_action == 'fondle breasts' or girl_offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Emma",
                         #When zero is working the right breast, fondle left
                     "True", "GirlGropeRightBreast_Emma",
                         #else, fondle right
                     ),
-            "Trigger3 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger3 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger3 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger3 == 'vibrator anal'", "VibratorAnal",
-            "Trigger3 == 'vibrator anal insert'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "girl_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "girl_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         )
@@ -813,56 +813,56 @@ image Emma_SexSprite:
     contains:
         ConditionSwitch(
             # Emma's lower body
-            "Trigger == 'lick pussy' or Trigger == 'lick ass'", "Emma_Sex_Legs_Lick",#Static
+            "primary_action == 'lick pussy' or primary_action == 'lick ass'", "Emma_Sex_Legs_Lick",#Static
             "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
                     # If during sex
-                    "Speed == 1", "Emma_Sex_Legs_S1",#heading
-                    "Speed == 2", "Emma_Sex_Legs_S2",#slow
-                    "Speed == 3", "Emma_Sex_Legs_S3",#fast
-                    "Speed >= 4", "Emma_Sex_Legs_S4",#cumming
+                    "action_speed == 1", "Emma_Sex_Legs_S1",#heading
+                    "action_speed == 2", "Emma_Sex_Legs_S2",#slow
+                    "action_speed == 3", "Emma_Sex_Legs_S3",#fast
+                    "action_speed >= 4", "Emma_Sex_Legs_S4",#cumming
                     "True", "Emma_Sex_Legs_S0",#Static
                     ),
             "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
                     # If during Anal
-                    "Speed == 1", "Emma_Sex_Legs_A1",#heading
-                    "Speed == 2", "Emma_Sex_Legs_A2",#slow
-                    "Speed == 3", "Emma_Sex_Legs_A3",#fast
-                    "Speed >= 4", "Emma_Sex_Legs_A4",#cumming
+                    "action_speed == 1", "Emma_Sex_Legs_A1",#heading
+                    "action_speed == 2", "Emma_Sex_Legs_A2",#slow
+                    "action_speed == 3", "Emma_Sex_Legs_A3",#fast
+                    "action_speed >= 4", "Emma_Sex_Legs_A4",#cumming
                     "True", "Emma_Sex_Legs_A0",#Static
                     ),
             "True", ConditionSwitch(
                     # If neither
-                    "Speed == 1", "Emma_Sex_Legs_H1",#heading
-                    "Speed == 4", "Emma_Sex_Legs_H4",#cumming
-                    "Speed >= 2", "Emma_Sex_Legs_H2",#slow
+                    "action_speed == 1", "Emma_Sex_Legs_H1",#heading
+                    "action_speed == 4", "Emma_Sex_Legs_H4",#cumming
+                    "action_speed >= 2", "Emma_Sex_Legs_H2",#slow
                     "True", "Emma_Sex_Legs_H0",#Static
                     ),
             )
     contains:
         ConditionSwitch(
             # Emma's upper body
-            "Trigger == 'lick pussy' or Trigger == 'lick ass'",  "Emma_Sex_Body_Lick",#Static
+            "primary_action == 'lick pussy' or primary_action == 'lick ass'",  "Emma_Sex_Body_Lick",#Static
             "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
                     # If during sex
-                    "Speed == 1", "Emma_Sex_Body_S1",#heading
-                    "Speed == 2", "Emma_Sex_Body_S2",#slow
-                    "Speed == 3", "Emma_Sex_Body_S3",#fast
-                    "Speed >= 4", "Emma_Sex_Body_S4",#cumming
+                    "action_speed == 1", "Emma_Sex_Body_S1",#heading
+                    "action_speed == 2", "Emma_Sex_Body_S2",#slow
+                    "action_speed == 3", "Emma_Sex_Body_S3",#fast
+                    "action_speed >= 4", "Emma_Sex_Body_S4",#cumming
                     "True",       "Emma_Sex_Body_S0",#Static
                     ),
             "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
 #                    # If during Anal
-                    "Speed == 1", "Emma_Sex_Body_A1",#heading
-                    "Speed == 2", "Emma_Sex_Body_A2",#slow
-                    "Speed == 3", "Emma_Sex_Body_A3",#fast
-                    "Speed >= 4", "Emma_Sex_Body_A4",#cumming
+                    "action_speed == 1", "Emma_Sex_Body_A1",#heading
+                    "action_speed == 2", "Emma_Sex_Body_A2",#slow
+                    "action_speed == 3", "Emma_Sex_Body_A3",#fast
+                    "action_speed >= 4", "Emma_Sex_Body_A4",#cumming
                     "True",       "Emma_Sex_Body_A0",#Static
                     ),
             "True", ConditionSwitch(
                     # If neither
-                    "Speed == 1", "Emma_Sex_Body_H1",#heading
-                    "Speed == 4", "Emma_Sex_Body_H4",#cumming
-                    "Speed >= 2", "Emma_Sex_Body_H2",#slow
+                    "action_speed == 1", "Emma_Sex_Body_H1",#heading
+                    "action_speed == 4", "Emma_Sex_Body_H4",#cumming
+                    "action_speed >= 2", "Emma_Sex_Body_H2",#slow
                     "True",       "Emma_Sex_Body_H0",#Static
                     ),
             )
@@ -1015,14 +1015,14 @@ image Emma_Sex_Body:
     contains:
         ConditionSwitch(
             #breast licking animation
-            "(Trigger == 'suck breasts' or Trigger2 == 'suck breasts') and EmmaX.Chest and not EmmaX.Uptop", "Emma_Sex_Lick_Breasts_High",
-            "Trigger == 'suck breasts' or Trigger2 == 'suck breasts'", "Emma_Sex_Lick_Breasts",
+            "(primary_action == 'suck breasts' or offhand_action == 'suck breasts') and EmmaX.Chest and not EmmaX.Uptop", "Emma_Sex_Lick_Breasts_High",
+            "primary_action == 'suck breasts' or offhand_action == 'suck breasts'", "Emma_Sex_Lick_Breasts",
             "True", Null()
             )
     contains:
         ConditionSwitch(
             #breast fondling animation
-            "Trigger == 'fondle breasts' or Trigger2 == 'fondle breasts'", "Emma_Sex_Fondle_Breasts",
+            "primary_action == 'fondle breasts' or offhand_action == 'fondle breasts'", "Emma_Sex_Fondle_Breasts",
             "True", Null()
             )
     contains:
@@ -1118,7 +1118,7 @@ image Emma_Sex_Legs_S:
     contains:
             # Legs base
         ConditionSwitch(
-            "Trigger == 'hotdog'", "images/EmmaSex/Emma_Sex_Legs_Hotdog.png",
+            "primary_action == 'hotdog'", "images/EmmaSex/Emma_Sex_Legs_Hotdog.png",
             "True", "images/EmmaSex/Emma_Sex_Legs_Sex.png",
             )
     contains:
@@ -1231,7 +1231,7 @@ image Emma_Sex_Legs_A:
     contains:
             # anal spunk
         ConditionSwitch(
-            "'anal' in EmmaX.Spunk and not Speed", "images/EmmaSex/Emma_Spunk_Anal_Closed.png",
+            "'anal' in EmmaX.Spunk and not action_speed", "images/EmmaSex/Emma_Spunk_Anal_Closed.png",
             "True", Null(),
             )
     contains:
@@ -1240,9 +1240,9 @@ image Emma_Sex_Legs_A:
     contains:
             #Anus
         ConditionSwitch(
-            "Player.Sprite and Player.Cock == 'anal' and Speed", ConditionSwitch(
+            "Player.Sprite and Player.Cock == 'anal' and action_speed", ConditionSwitch(
                     # If during Anal
-                    "Speed == 1", "Emma_Sex_Anus_A1",#heading
+                    "action_speed == 1", "Emma_Sex_Anus_A1",#heading
                     "True", "Emma_Sex_Anus_A2",#faster
                     ),
             "True", "Emma_Sex_Anus_A0",
@@ -1352,8 +1352,8 @@ image Emma_Sex_Legs_A:
         ConditionSwitch(
             #pussy licking animation
             "Player.Sprite and Player.Cock", Null(),
-            "Trigger == 'lick pussy'", "Emma_Sex_Lick_Pussy",
-            "Trigger == 'lick ass'", "Emma_Sex_Lick_Ass",
+            "primary_action == 'lick pussy'", "Emma_Sex_Lick_Pussy",
+            "primary_action == 'lick ass'", "Emma_Sex_Lick_Ass",
             "True", Null()
             )
     zoom 1
@@ -2240,14 +2240,14 @@ image Emma_Doggy_Animation:
         (0,0), ConditionSwitch(
             #Shows different upper body motion depending on events
             "Player.Cock == 'anal'", ConditionSwitch(
-                    "Speed > 2", "Emma_Doggy_Boob_Fuck2",
-                    "Speed > 1", "Emma_Doggy_Boob_Fuck",
-                    "Speed", "Emma_Doggy_Boob",
+                    "action_speed > 2", "Emma_Doggy_Boob_Fuck2",
+                    "action_speed > 1", "Emma_Doggy_Boob_Fuck",
+                    "action_speed", "Emma_Doggy_Boob",
                     "True", "Emma_Doggy_Boob",
                     ),
             "Player.Cock == 'in'", ConditionSwitch(
-                    "Speed > 2", "Emma_Doggy_Boob_Fuck2",
-                    "Speed > 1", "Emma_Doggy_Boob_Fuck",
+                    "action_speed > 2", "Emma_Doggy_Boob_Fuck2",
+                    "action_speed > 1", "Emma_Doggy_Boob_Fuck",
                     "True", "Emma_Doggy_Boob",
                     ),
             "True", "Emma_Doggy_Boob",
@@ -2256,14 +2256,14 @@ image Emma_Doggy_Animation:
             #Shows different upper body motion depending on events
             "not Player.Sprite", "Emma_Doggy_Body",
             "Player.Cock == 'anal'", ConditionSwitch(
-                    "Speed > 2", "Emma_Doggy_Fuck2_Top",
-                    "Speed > 1", "Emma_Doggy_Fuck_Top",
-                    "Speed", "Emma_Doggy_Anal_Head_Top",
+                    "action_speed > 2", "Emma_Doggy_Fuck2_Top",
+                    "action_speed > 1", "Emma_Doggy_Fuck_Top",
+                    "action_speed", "Emma_Doggy_Anal_Head_Top",
                     "True", "Emma_Doggy_Body",
                     ),
             "Player.Cock == 'in'", ConditionSwitch(
-                    "Speed > 2", "Emma_Doggy_Fuck2_Top",
-                    "Speed > 1", "Emma_Doggy_Fuck_Top",
+                    "action_speed > 2", "Emma_Doggy_Fuck2_Top",
+                    "action_speed > 1", "Emma_Doggy_Fuck_Top",
                     "True", "Emma_Doggy_Body",
                     ),
             "True", "Emma_Doggy_Body",
@@ -2272,14 +2272,14 @@ image Emma_Doggy_Animation:
             #Shows different lower body motion depending on events
             "not Player.Sprite", "Emma_Doggy_Ass",
             "Player.Cock == 'anal'", ConditionSwitch(
-                    "Speed > 2", "Emma_Doggy_Fuck2_Ass",
-                    "Speed > 1", "Emma_Doggy_Fuck_Ass",
-                    "Speed", "Emma_Doggy_Anal_Head_Ass",
+                    "action_speed > 2", "Emma_Doggy_Fuck2_Ass",
+                    "action_speed > 1", "Emma_Doggy_Fuck_Ass",
+                    "action_speed", "Emma_Doggy_Anal_Head_Ass",
                     "True", "Emma_Doggy_Ass",
                     ),
             "Player.Cock == 'in'", ConditionSwitch(
-                    "Speed > 2", "Emma_Doggy_Fuck2_Ass",
-                    "Speed > 1", "Emma_Doggy_Fuck_Ass",
+                    "action_speed > 2", "Emma_Doggy_Fuck2_Ass",
+                    "action_speed > 1", "Emma_Doggy_Fuck_Ass",
                     "True", "Emma_Doggy_Ass",
                     ),
             "True", "Emma_Doggy_Ass",
@@ -2287,8 +2287,8 @@ image Emma_Doggy_Animation:
         (0,0), ConditionSwitch(
             #Shows different lower body motion depending on events
             "Player.Cock == 'foot'", ConditionSwitch(
-                    "Speed > 1", "Emma_Doggy_Feet2",
-                    "Speed", "Emma_Doggy_Feet1",
+                    "action_speed > 1", "Emma_Doggy_Feet2",
+                    "action_speed", "Emma_Doggy_Feet1",
                     "True", "Emma_Doggy_Feet0",
                     ),
             "not Player.Sprite and ShowFeet", "Emma_Doggy_Feet0",
@@ -2361,7 +2361,7 @@ image Emma_Doggy_Body:
             ),
         (0,0), ConditionSwitch(
             #breast fondling animation
-            "Trigger == 'fondle breasts' or Trigger2 == 'fondle breasts'", "Emma_Doggy_GropeBreast",
+            "primary_action == 'fondle breasts' or offhand_action == 'fondle breasts'", "Emma_Doggy_GropeBreast",
             "True", Null()
             ),
         (-12,0), "Emma_Doggy_Hair_Over",               #Head(165,0)
@@ -2550,16 +2550,16 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(
             #New ass base check
             "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
-#                    "Speed > 2", "Emma_Pussy_Fucking3",#Speed 3
-#                    "Speed > 1", "Emma_Pussy_Fucking2",#Speed 2
-                    "Speed", "images/EmmaDoggy/Emma_Doggy_Ass_Base.png",      #Speed 1
-                    "True", "images/EmmaDoggy/Emma_Doggy_Ass_Base.png",              #Speed 0
+#                    "action_speed > 2", "Emma_Pussy_Fucking3",#action_speed 3
+#                    "action_speed > 1", "Emma_Pussy_Fucking2",#action_speed 2
+                    "action_speed", "images/EmmaDoggy/Emma_Doggy_Ass_Base.png",      #action_speed 1
+                    "True", "images/EmmaDoggy/Emma_Doggy_Ass_Base.png",              #action_speed 0
                     ),
-            "Trigger == 'lick pussy'", "images/EmmaDoggy/Emma_Doggy_Ass_Open.png",
+            "primary_action == 'lick pussy'", "images/EmmaDoggy/Emma_Doggy_Ass_Open.png",
             "EmmaX.Legs and not EmmaX.Upskirt", "images/EmmaDoggy/Emma_Doggy_Ass_Closed.png",
             "EmmaX.Panties and not EmmaX.PantiesDown", "images/EmmaDoggy/Emma_Doggy_Ass_Closed.png",
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'", "images/EmmaDoggy/Emma_Doggy_Ass_Base.png",
-            "Trigger == 'dildo pussy'", "images/EmmaDoggy/Emma_Doggy_Ass_Base.png",
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'", "images/EmmaDoggy/Emma_Doggy_Ass_Base.png",
+            "primary_action == 'dildo pussy'", "images/EmmaDoggy/Emma_Doggy_Ass_Base.png",
             "True", "images/EmmaDoggy/Emma_Doggy_Ass_Closed.png",
             ),
 
@@ -2600,16 +2600,16 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Pussy Composite
             "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
-                    "Speed > 2", "Emma_Pussy_Fucking3",#Speed 3
-                    "Speed > 1", "Emma_Pussy_Fucking2",#Speed 2
-                    "Speed", "Emma_Pussy_Heading",      #Speed 1
-                    "True", "Emma_Pussy_Static",              #Speed 0
+                    "action_speed > 2", "Emma_Pussy_Fucking3",#action_speed 3
+                    "action_speed > 1", "Emma_Pussy_Fucking2",#action_speed 2
+                    "action_speed", "Emma_Pussy_Heading",      #action_speed 1
+                    "True", "Emma_Pussy_Static",              #action_speed 0
                     ),
-#            "Trigger == 'lick pussy'", "images/EmmaDoggy/Emma_Doggy_Pussy_Open.png",
+#            "primary_action == 'lick pussy'", "images/EmmaDoggy/Emma_Doggy_Pussy_Open.png",
 #            "EmmaX.Legs and not EmmaX.Upskirt", "images/EmmaDoggy/Emma_Doggy_Pussy_Closed.png",
 #            "EmmaX.Panties and not EmmaX.PantiesDown", "images/EmmaDoggy/Emma_Doggy_Pussy_Closed.png",
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'", "Emma_Pussy_Fingering",
-            "Trigger == 'dildo pussy'", "Emma_Pussy_Fucking2",
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'", "Emma_Pussy_Fingering",
+            "primary_action == 'dildo pussy'", "Emma_Pussy_Fucking2",
             "True",Null(),
 #            "True", "images/EmmaDoggy/Emma_Doggy_Pussy_Closed.png",
             ),
@@ -2626,22 +2626,22 @@ image Emma_Doggy_Ass:
             #pubes
             "not EmmaX.Pubes", Null(),
             "Player.Sprite and Player.Cock == 'in'", Null(), # "images/EmmaDoggy/Emma_Doggy_Pubes_Fucked.png",
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
             "(EmmaX.Legs and EmmaX.Legs != 'skirt') and not EmmaX.Upskirt", Null(),
-            "EmmaX.PantiesDown and Trigger == 'lick pussy'", "images/EmmaDoggy/Emma_Doggy_Pubes_Open.png",
+            "EmmaX.PantiesDown and primary_action == 'lick pussy'", "images/EmmaDoggy/Emma_Doggy_Pubes_Open.png",
             "EmmaX.Panties and EmmaX.PantiesDown", "images/EmmaDoggy/Emma_Doggy_Pubes_Closed.png",
             "EmmaX.Panties", "images/EmmaDoggy/Emma_Doggy_Pubes_ClosedC.png",
-            "EmmaX.Hose == 'pantyhose' and Trigger == 'lick pussy'", "images/EmmaDoggy/Emma_Doggy_Pubes_OpenC.png",
+            "EmmaX.Hose == 'pantyhose' and primary_action == 'lick pussy'", "images/EmmaDoggy/Emma_Doggy_Pubes_OpenC.png",
             "EmmaX.Hose == 'pantyhose'", "images/EmmaDoggy/Emma_Doggy_Pubes_ClosedC.png",
-            "Trigger == 'lick pussy'", "images/EmmaDoggy/Emma_Doggy_Pubes_Open.png",
+            "primary_action == 'lick pussy'", "images/EmmaDoggy/Emma_Doggy_Pubes_Open.png",
             "True", "images/EmmaDoggy/Emma_Doggy_Pubes_Closed.png",
             ),
         (0,0), ConditionSwitch(
             #Pussy Piercings
             "Player.Sprite", Null(),
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
             "EmmaX.Pierce == 'barbell'", "images/EmmaDoggy/Emma_Doggy_Pierce_Barbell.png",
             "EmmaX.Pierce == 'ring' and EmmaX.Panties and not EmmaX.PantiesDown", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
             "EmmaX.Pierce == 'ring' and EmmaX.Hose == 'pantyhose' and not (EmmaX.Panties and EmmaX.PantiesDown)", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
@@ -2653,17 +2653,17 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Anus Composite
             "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
-                    "Speed > 2", "Emma_Anal_Fucking2", #Speed 3
-                    "Speed > 1", "Emma_Anal_Fucking",  #Speed 2
-                    "Speed", "Emma_Anal_Heading",      #Speed 1
-                    "True", "Emma_Anal",               #Speed 0
+                    "action_speed > 2", "Emma_Anal_Fucking2", #action_speed 3
+                    "action_speed > 1", "Emma_Anal_Fucking",  #action_speed 2
+                    "action_speed", "Emma_Anal_Heading",      #action_speed 1
+                    "True", "Emma_Anal",               #action_speed 0
                     ),
 #            "Action == 'plug'", "Jean_Anal_Plug",
 #            "Action == 'plug'", "test_case",
 #            "EmmaX.Legs and not EmmaX.Upskirt", "images/EmmaDoggy/Emma_Doggy_Asshole_Loose.png",
 #            "EmmaX.Panties and not EmmaX.PantiesDown", "images/EmmaDoggy/Emma_Doggy_Asshole_Loose.png",
-            "Trigger == 'insert ass' or Trigger2 == 'insert ass'", "Emma_Anal_Fingering",
-            "Trigger == 'dildo anal'", "Emma_Anal_Fucking",
+            "primary_action == 'insert ass' or offhand_action == 'insert ass'", "Emma_Anal_Fingering",
+            "primary_action == 'dildo anal'", "Emma_Anal_Fucking",
 #            "EmmaX.Loose", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
 #            "True", "images/JeanDoggy/Jean_Doggy_Asshole_Tight.png",
             "True", Null(),
@@ -2681,8 +2681,8 @@ image Emma_Doggy_Ass:
             #Panties if up
             "EmmaX.PantiesDown or not EmmaX.Panties", Null(),
             "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
-#            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-#            "Trigger == 'dildo pussy'", Null(),
+#            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+#            "primary_action == 'dildo pussy'", Null(),
             "EmmaX.Panties == 'sports panties' and EmmaX.Wet", "images/EmmaDoggy/Emma_Doggy_Panties_Sport_Wet.png",
             "EmmaX.Panties == 'sports panties'", "images/EmmaDoggy/Emma_Doggy_Panties_Sport.png",
             "EmmaX.Panties == 'lace panties'", "images/EmmaDoggy/Emma_Doggy_Panties_Lace.png",
@@ -2693,8 +2693,8 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(        #fix // // // // // // fix // // // // // // fix // // // // // // fix // // // // // //
             #full hose/tights
             "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
 #            "EmmaX.Panties and EmmaX.PantiesDown and EmmaX.Hose == 'stockings and garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
             "EmmaX.Hose == 'garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_Garter.png",
             "EmmaX.Hose == 'stockings and garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
@@ -2707,8 +2707,8 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Pussy Piercings over clothes
             "Player.Sprite", Null(),
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
             "not EmmaX.Panties and EmmaX.Hose != 'pantyhose'", Null(),
             "((EmmaX.Panties or EmmaX.Hose == 'pantyhose') and EmmaX.PantiesDown)", Null(),
                 #if she has panties, but they are down, or pantyhose, or Legs that are not a skirt and are not down, skip these. . .
@@ -2729,12 +2729,12 @@ image Emma_Doggy_Ass:
                     "True", "images/EmmaDoggy/Emma_Doggy_Legs_Yoga.png",
                     ),
             "EmmaX.Legs == 'dress'", ConditionSwitch(
-                    "EmmaX.Upskirt and Player.Sprite and Player.Cock == 'anal' and Speed" , "images/EmmaDoggy/Emma_Doggy_Legs_Dress_Up.png",
+                    "EmmaX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/EmmaDoggy/Emma_Doggy_Legs_Dress_Up.png",
                     "EmmaX.Upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Dress_Up.png",
                     "True", "images/EmmaDoggy/Emma_Doggy_Legs_Dress.png",
                     ),
             "EmmaX.Legs == 'skirt'", ConditionSwitch(
-                    "EmmaX.Upskirt and Player.Sprite and Player.Cock == 'anal' and Speed" , "images/EmmaDoggy/Emma_Doggy_Legs_Skirt_Up.png",
+                    "EmmaX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/EmmaDoggy/Emma_Doggy_Legs_Skirt_Up.png",
                     "EmmaX.Upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Skirt_Up.png",
                     "True", "images/EmmaDoggy/Emma_Doggy_Legs_Skirt.png",
                     ),
@@ -2744,8 +2744,8 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Pussy Piercings over clothes
             "Player.Sprite", Null(),
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
             "not EmmaX.Legs", Null(),
             "EmmaX.Legs and EmmaX.Legs != 'skirt' and EmmaX.Upskirt", Null(),
                 #if she has panties, but they are down, or pantyhose, or Legs that are not a skirt and are not down, skip these. . .
@@ -2780,8 +2780,8 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(
             #pussy licking animation
             "Player.Sprite and Player.Cock", Null(),
-            "Trigger == 'lick pussy'", "Rogue_Doggy_Lick_Pussy",
-            "Trigger == 'lick ass'", "Rogue_Doggy_Lick_Ass",
+            "primary_action == 'lick pussy'", "Rogue_Doggy_Lick_Pussy",
+            "primary_action == 'lick ass'", "Rogue_Doggy_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -2793,9 +2793,9 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Hotdogging Cock w/ alpha
             "not Player.Sprite or Player.Cock != 'out'", Null(),
-            #"KittyX.Legs == 'skirt' and KittyX.Upskirt and Speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
+            #"KittyX.Legs == 'skirt' and KittyX.Upskirt and action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
             #"KittyX.Legs == 'skirt' and KittyX.Upskirt", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "Speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             "True", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             ),
 #        (0,0), ConditionSwitch(
@@ -3001,7 +3001,7 @@ image Emma_Pussy_Static:
         AlphaMask("Zero_Emma_Doggy_Static", "Emma_Pussy_Mask_Static")
 
 image Zero_Emma_Doggy_Static:
-    # Sex Speed 0 motions
+    # Sex action_speed 0 motions
     contains:
         subpixel True
         "Zero_Doggy_Insert"
@@ -3068,7 +3068,7 @@ image Emma_Pussy_Heading:
         AlphaMask("Zero_Emma_Doggy_Heading", "Emma_Pussy_Mask")
 
 image Zero_Emma_Doggy_Heading:
-    # Sex Speed 1 motions
+    # Sex action_speed 1 motions
     contains:
         subpixel True
         "Zero_Doggy_Insert"
@@ -3184,13 +3184,13 @@ image Emma_Pussy_Fucking2:
     contains:
         #Cock
         ConditionSwitch(
-            "Trigger == 'dildo pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
+            "primary_action == 'dildo pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
             "True",AlphaMask("Zero_Emma_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
             ),
 #        AlphaMask("Zero_Emma_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
 
 image Zero_Emma_Doggy_Fucking2:
-    # Sex Speed 2 motions
+    # Sex action_speed 2 motions
     contains:
         "Zero_Doggy_Insert"
         pos (169,500)
@@ -3223,7 +3223,7 @@ image Emma_Pussy_Fucking3:
         AlphaMask("Zero_Emma_Doggy_Fucking3", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
 
 image Zero_Emma_Doggy_Fucking3:
-    # Sex Speed 3 motions
+    # Sex action_speed 3 motions
     contains:
         "Zero_Doggy_Insert"
         pos (169,500)
@@ -3426,7 +3426,7 @@ image Emma_Anal_Fucking:
         #Cock
         ConditionSwitch(
             #full hose/tights
-            "Trigger == 'dildo anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
+            "primary_action == 'dildo anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
             "True", AlphaMask("Zero_Emma_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
             ),
 #        AlphaMask("Zero_Emma_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png")
@@ -3646,10 +3646,10 @@ image Emma_Doggy_Feet2:
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #Doggy Launch/Reset
-label Emma_Doggy_Launch(Line = Trigger):
+label Emma_Doggy_Launch(line = primary_action):
     if renpy.showing("Emma_Doggy_Animation"):
         return
-    $ Speed = 0
+    $ action_speed = 0
     call Emma_Hide(1)
     show Emma_Doggy_Animation at sprite_location(StageCenter+50) zorder 150
     with dissolve
@@ -3658,7 +3658,7 @@ label Emma_Doggy_Launch(Line = Trigger):
 label Emma_Doggy_Reset:
     if not renpy.showing("Emma_Doggy_Animation"):
         return
-#    $ Trigger = 0               #fix, not sure this is a good idea
+#    $ primary_action = 0               #fix, not sure this is a good idea
     $ EmmaX.ArmPose = 2
     $ EmmaX.SpriteVer = 0
     hide Emma_Doggy_Animation
@@ -3669,7 +3669,7 @@ label Emma_Doggy_Reset:
                     offset (0,0)
                     anchor (0.6, 0.0)
     with dissolve
-    $ Speed = 0
+    $ action_speed = 0
     return
 
 # End Emma Doggy Animations / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
@@ -3692,10 +3692,10 @@ image Emma_TJ_Animation:
             # Emma's upper body
             "Player.Sprite", ConditionSwitch(
                     # If during sex
-                    "Speed == 1", "Emma_TJ_Body_1",#slow
-                    "Speed == 2", "Emma_TJ_Body_2",#fast
-                    "Speed == 3", "Emma_TJ_Body_3",#licking
-                    "Speed == 5", "Emma_TJ_Body_5",#cumming
+                    "action_speed == 1", "Emma_TJ_Body_1",#slow
+                    "action_speed == 2", "Emma_TJ_Body_2",#fast
+                    "action_speed == 3", "Emma_TJ_Body_3",#licking
+                    "action_speed == 5", "Emma_TJ_Body_5",#cumming
                     "True",       "Emma_TJ_Body_0",#Static
                     ),
             "True","Emma_TJ_Body_0",#Static
@@ -3862,7 +3862,7 @@ image Emma_TJ_Body_0:
                 ease 1.5 rotate -3 #bottom
                 pause 0.1
                 repeat
-    #End TJ animation Speed 1
+    #End TJ animation action_speed 1
 
 
 image Emma_TJ_Body_1:
@@ -3937,7 +3937,7 @@ image Emma_TJ_Body_1:
 #                ease .7 rotate 1 #bottom
 #                ease .8 rotate 0 #bottom
 #                repeat
-    #End TJ animation Speed 1
+    #End TJ animation action_speed 1
 
 
 image Emma_TJ_Body_2:
@@ -4003,7 +4003,7 @@ image Emma_TJ_Body_2:
                 ease .3 ypos 300 #bottom
                 pause .1
                 repeat
-    #End TJ animation Speed 2
+    #End TJ animation action_speed 2
 
 image Emma_TJ_Body_3:
     #Her Body in the TJ pose, slow with licking
@@ -4072,7 +4072,7 @@ image Emma_TJ_Body_3:
                 ease .4 ypos 290 #bottom
                 pause .5
                 repeat
-    #End TJ animation Speed 3
+    #End TJ animation action_speed 3
 
 
 
@@ -4143,10 +4143,10 @@ image Emma_TJ_Body_5:
                 ease .9 ypos 290 #bottom
                 pause .5
                 repeat
-    #End TJ animation Speed 5
+    #End TJ animation action_speed 5
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-label Emma_TJ_Launch(Line = Trigger):    # The sequence to launch the Emma Titfuck animations
+label Emma_TJ_Launch(line = primary_action):    # The sequence to launch the Emma Titfuck animations
     if renpy.showing("Emma_TJ_Animation"):
         return
     call Emma_Hide
@@ -4156,11 +4156,11 @@ label Emma_TJ_Launch(Line = Trigger):    # The sequence to launch the Emma Titfu
     if Taboo: # Emma gets started. . .
         if len(Present) >= 2:
             if Present[0] != EmmaX:
-                    "[EmmaX.Name] looks back at [Present[0].Name] to see if she's watching."
+                    "[EmmaX.name] looks back at [Present[0].name] to see if she's watching."
             elif Present[1] != EmmaX:
-                    "[EmmaX.Name] looks back at [Present[1].Name] to see if she's watching."
+                    "[EmmaX.name] looks back at [Present[1].name] to see if she's watching."
         else:
-                    "[EmmaX.Name] looks around to see if anyone can see her."
+                    "[EmmaX.name] looks around to see if anyone can see her."
 
 #    if EmmaX.Chest and EmmaX.Over:
 #        "She throws off her [EmmaX.Over] and her [EmmaX.Chest]."
@@ -4174,33 +4174,33 @@ label Emma_TJ_Launch(Line = Trigger):    # The sequence to launch the Emma Titfu
 
     call Emma_First_Topless
 
-    if not EmmaX.Tit and Line == "L": #first time
+    if not EmmaX.Tit and line == "L": #first time
         if not EmmaX.Chest and not EmmaX.Over:
-            "As you pull out your cock, [EmmaX.Name] cautiously places it between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] cautiously places it between her breasts and starts to rub them up and down the shaft."
         elif EmmaX.Chest and not EmmaX.Over:
-            "As you pull out your cock, [EmmaX.Name] cautiously places it under her [EmmaX.Chest], between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] cautiously places it under her [EmmaX.Chest], between her breasts and starts to rub them up and down the shaft."
         elif EmmaX.Chest and EmmaX.Over:
-            "As you pull out your cock, [EmmaX.Name] cautiously places it under her [EmmaX.Over], between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] cautiously places it under her [EmmaX.Over], between her breasts and starts to rub them up and down the shaft."
         else:
-            "As you pull out your cock, [EmmaX.Name] cautiously places it under her clothes, between her breasts and starts to rub them up and down the shaft."
-    elif Line == "L": #any other time
+            "As you pull out your cock, [EmmaX.name] cautiously places it under her clothes, between her breasts and starts to rub them up and down the shaft."
+    elif line == "L": #any other time
         if not EmmaX.Chest and not EmmaX.Over:
-            "As you pull out your cock, [EmmaX.Name] places it between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] places it between her breasts and starts to rub them up and down the shaft."
         elif EmmaX.Chest and not EmmaX.Over:
-            "As you pull out your cock, [EmmaX.Name] places it under her [EmmaX.Chest], between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] places it under her [EmmaX.Chest], between her breasts and starts to rub them up and down the shaft."
         elif EmmaX.Chest and EmmaX.Over:
-            "As you pull out your cock, [EmmaX.Name] places it under her [EmmaX.Over], between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] places it under her [EmmaX.Over], between her breasts and starts to rub them up and down the shaft."
         else:
-            "As you pull out your cock, [EmmaX.Name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [EmmaX.name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
     else:
-            "[EmmaX.Name] wraps her tits around your cock."
+            "[EmmaX.name] wraps her tits around your cock."
 #    hide Emma_Sprite
     show blackscreen onlayer black with dissolve
     show Emma_Sprite zorder EmmaX.Layer:
         alpha 0
-    $ Speed = 0
-    if Line != "cum":
-        $ Trigger = "titjob"
+    $ action_speed = 0
+    if line != "cum":
+        $ primary_action = "titjob"
     show Emma_TJ_Animation zorder 150
     $ Player.Sprite = 1
     hide blackscreen onlayer black with dissolve
@@ -4219,73 +4219,73 @@ image Emma_BJ_Animation:#BJ_NewTest:                                            
         (858,928),
         (-270,-160), ConditionSwitch( #-270,-160
             # Emma's hair backside
-            "Speed == 0", At("Emma_BJ_HairBack", Emma_BJ_Head_0()),               #Static
-            "Speed == 1", At("Emma_BJ_HairBack", Emma_BJ_Head_1()),               #Licking
-            "Speed == 2", At("Emma_BJ_HairBack", Emma_BJ_Head_2()),               #Heading
-            "Speed == 3", At("Emma_BJ_HairBack", Emma_BJ_Head_3()),               #Sucking
-            "Speed == 4", At("Emma_BJ_HairBack", Emma_BJ_Head_4()),               #Deepthroat
-            "Speed == 5", At("Emma_BJ_HairBack", Emma_BJ_Head_5()),               #Cumming High
-            "Speed == 6", At("Emma_BJ_HairBack", Emma_BJ_Head_6()),               #Cumming Deep
+            "action_speed == 0", At("Emma_BJ_HairBack", Emma_BJ_Head_0()),               #Static
+            "action_speed == 1", At("Emma_BJ_HairBack", Emma_BJ_Head_1()),               #Licking
+            "action_speed == 2", At("Emma_BJ_HairBack", Emma_BJ_Head_2()),               #Heading
+            "action_speed == 3", At("Emma_BJ_HairBack", Emma_BJ_Head_3()),               #Sucking
+            "action_speed == 4", At("Emma_BJ_HairBack", Emma_BJ_Head_4()),               #Deepthroat
+            "action_speed == 5", At("Emma_BJ_HairBack", Emma_BJ_Head_5()),               #Cumming High
+            "action_speed == 6", At("Emma_BJ_HairBack", Emma_BJ_Head_6()),               #Cumming Deep
             "True", Null(),
             ),
         (-20,270), ConditionSwitch(
             # Emma's body, everything below the chin
-            "Speed == 0", At("Emma_BJ_Backdrop", Emma_BJ_Body_0()),           #Static
-            "Speed == 1", At("Emma_BJ_Backdrop", Emma_BJ_Body_1()),           #Licking
-            "Speed == 2", At("Emma_BJ_Backdrop", Emma_BJ_Body_2()),           #Heading
-            "Speed == 3", At("Emma_BJ_Backdrop", Emma_BJ_Body_3()),           #Sucking
-            "Speed == 4", At("Emma_BJ_Backdrop", Emma_BJ_Body_4()),           #Deepthroat
-            "Speed == 5", At("Emma_BJ_Backdrop", Emma_BJ_Body_5()),           #Cumming High
-            "Speed == 6", At("Emma_BJ_Backdrop", Emma_BJ_Body_6()),           #Cumming Deep
+            "action_speed == 0", At("Emma_BJ_Backdrop", Emma_BJ_Body_0()),           #Static
+            "action_speed == 1", At("Emma_BJ_Backdrop", Emma_BJ_Body_1()),           #Licking
+            "action_speed == 2", At("Emma_BJ_Backdrop", Emma_BJ_Body_2()),           #Heading
+            "action_speed == 3", At("Emma_BJ_Backdrop", Emma_BJ_Body_3()),           #Sucking
+            "action_speed == 4", At("Emma_BJ_Backdrop", Emma_BJ_Body_4()),           #Deepthroat
+            "action_speed == 5", At("Emma_BJ_Backdrop", Emma_BJ_Body_5()),           #Cumming High
+            "action_speed == 6", At("Emma_BJ_Backdrop", Emma_BJ_Body_6()),           #Cumming Deep
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
             # Emma's head Underlay
-            "Speed == 0", At("Emma_BJ_Head", Emma_BJ_Head_0()),               #Static
-            "Speed == 1", At("Emma_BJ_Head", Emma_BJ_Head_1()),               #Licking
-            "Speed == 2", At("Emma_BJ_Head", Emma_BJ_Head_2()),               #Heading
-            "Speed == 3", At("Emma_BJ_Head", Emma_BJ_Head_3()),               #Sucking
-            "Speed == 4", At("Emma_BJ_Head", Emma_BJ_Head_4()),               #Deepthroat
-            "Speed == 5", At("Emma_BJ_Head", Emma_BJ_Head_5()),               #Cumming High
-            "Speed == 6", At("Emma_BJ_Head", Emma_BJ_Head_6()),               #Cumming Deep
+            "action_speed == 0", At("Emma_BJ_Head", Emma_BJ_Head_0()),               #Static
+            "action_speed == 1", At("Emma_BJ_Head", Emma_BJ_Head_1()),               #Licking
+            "action_speed == 2", At("Emma_BJ_Head", Emma_BJ_Head_2()),               #Heading
+            "action_speed == 3", At("Emma_BJ_Head", Emma_BJ_Head_3()),               #Sucking
+            "action_speed == 4", At("Emma_BJ_Head", Emma_BJ_Head_4()),               #Deepthroat
+            "action_speed == 5", At("Emma_BJ_Head", Emma_BJ_Head_5()),               #Cumming High
+            "action_speed == 6", At("Emma_BJ_Head", Emma_BJ_Head_6()),               #Cumming Deep
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
             # Cock
-            "Speed == 0", At("Blowcock", Emma_BJ_Cock_0()),                    #Static
-            "Speed == 1", At("Blowcock", Emma_BJ_Cock_1()),                    #Licking
-            "Speed >= 2", At("Blowcock", Emma_BJ_Cock_2()),                    #Heading+
-#            "Speed == 2", At("Blowcock", Emma_BJ_Cock_2()),                    #Heading
-#            "Speed == 3", At("Blowcock", Emma_BJ_Cock_2()),                    #Sucking
-#            "Speed == 4", At("Blowcock", Emma_BJ_Cock_2()),                    #Deepthroat
+            "action_speed == 0", At("Blowcock", Emma_BJ_Cock_0()),                    #Static
+            "action_speed == 1", At("Blowcock", Emma_BJ_Cock_1()),                    #Licking
+            "action_speed >= 2", At("Blowcock", Emma_BJ_Cock_2()),                    #Heading+
+#            "action_speed == 2", At("Blowcock", Emma_BJ_Cock_2()),                    #Heading
+#            "action_speed == 3", At("Blowcock", Emma_BJ_Cock_2()),                    #Sucking
+#            "action_speed == 4", At("Blowcock", Emma_BJ_Cock_2()),                    #Deepthroat
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
             # the masked overlay for when her head overlaps the cock
-            "Speed < 3", Null(),
-            "Speed == 3", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MouthSuckingMask"), Emma_BJ_Head_3()), #Sucking
-            "Speed == 4", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MouthSuckingMask"), Emma_BJ_Head_4()), #Deepthroat
-            "Speed == 6", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MouthSuckingMask"), Emma_BJ_Head_6()), #Cumming Deep
+            "action_speed < 3", Null(),
+            "action_speed == 3", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MouthSuckingMask"), Emma_BJ_Head_3()), #Sucking
+            "action_speed == 4", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MouthSuckingMask"), Emma_BJ_Head_4()), #Deepthroat
+            "action_speed == 6", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MouthSuckingMask"), Emma_BJ_Head_6()), #Cumming Deep
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
             # same as above, but for the heading animation
-            "Speed == 2", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MaskHeadingComposite"), Emma_BJ_Head_2()), #Heading
-            "Speed == 5", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MaskHeadingComposite"), Emma_BJ_Head_5()), #Cumming High
+            "action_speed == 2", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MaskHeadingComposite"), Emma_BJ_Head_2()), #Heading
+            "action_speed == 5", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MaskHeadingComposite"), Emma_BJ_Head_5()), #Cumming High
             "True", Null(),
             ),
         (325,490), ConditionSwitch(
             # the over part of spunk
-            "Speed < 3 or 'mouth' not in EmmaX.Spunk", Null(),
-            "Speed == 3", At("EmmaSuckingSpunk", Emma_BJ_Head_3()), #Sucking
-            "Speed == 4", At("EmmaSuckingSpunk", Emma_BJ_Head_4()), #Deepthroat
-            "Speed == 6", At("EmmaSuckingSpunk", Emma_BJ_Head_6()), #Cumming Deep
+            "action_speed < 3 or 'mouth' not in EmmaX.Spunk", Null(),
+            "action_speed == 3", At("EmmaSuckingSpunk", Emma_BJ_Head_3()), #Sucking
+            "action_speed == 4", At("EmmaSuckingSpunk", Emma_BJ_Head_4()), #Deepthroat
+            "action_speed == 6", At("EmmaSuckingSpunk", Emma_BJ_Head_6()), #Cumming Deep
             "True", Null(),
             ),
         (325,490), ConditionSwitch(         #(325,490)
             # same as above, but for the heading animation
-            "Speed == 2 and 'mouth' in EmmaX.Spunk", At("Emma_BJ_MaskHeadingSpunk", Emma_BJ_Head_2()), #Heading
-#            "Speed == 5 and 'mouth' in EmmaX.Spunk", At("Emma_BJ_MaskHeadingSpunkB", Emma_BJ_Head_5()), #Cumming High
+            "action_speed == 2 and 'mouth' in EmmaX.Spunk", At("Emma_BJ_MaskHeadingSpunk", Emma_BJ_Head_2()), #Heading
+#            "action_speed == 5 and 'mouth' in EmmaX.Spunk", At("Emma_BJ_MaskHeadingSpunkB", Emma_BJ_Head_5()), #Cumming High
             "True", Null(),
             ),
         )
@@ -4305,7 +4305,7 @@ image Emma_BJ_Backdrop:
     contains:
             #blanket
             ConditionSwitch(
-                "'blanket' in EmmaX.RecentActions", "images/KittyBJFace/Kitty_BJFace_Blanket.png",
+                "'blanket' in EmmaX.recent_history", "images/KittyBJFace/Kitty_BJFace_Blanket.png",
                 "True", Null(),
                 ),
             zoom 2
@@ -4330,7 +4330,7 @@ image Emma_BJ_Head:                                                             
             ),
         (0,0), ConditionSwitch(
             # Basic Face layer
-            "Speed <= 2 or Speed == 5 or not renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
+            "action_speed <= 2 or action_speed == 5 or not renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
                     # If the animation isn't sucking, or if not in BJ pose
                     "EmmaX.Blush", "images/EmmaBJFace/Emma_BJ_FaceClosed_Blush.png",
                     "True", "images/EmmaBJFace/Emma_BJ_FaceClosed.png",
@@ -4340,20 +4340,20 @@ image Emma_BJ_Head:                                                             
             ),
         (0,0), ConditionSwitch(
             #Mouth
-#            "(Speed == 2 or Speed == 5) and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
+#            "(action_speed == 2 or action_speed == 5) and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
 #                    # If the Heading animation is active
 ##                    "EmmaX.Blush", "images/EmmaBJFace/Emma_BJ_FaceClosed_Blush.png",
 ##                    "True", "images/EmmaBJFace/Emma_BJ_FaceClosed.png"
 #                    ),
-            "Speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
                     # If in sucking position
-                    "Speed == 1", "images/EmmaBJFace/Emma_BJ_Mouth_Tongue.png",  #licking
-                    "(Speed == 2 or Speed == 5)", Null(),                          #heading
-                    "Speed == 3", "images/EmmaBJFace/Emma_BJ_Mouth_Sucking.png", #sucking
-                    "Speed == 4", "images/EmmaBJFace/Emma_BJ_Mouth_Sucking.png", #deepthroat
-                    "Speed == 6", "images/EmmaBJFace/Emma_BJ_Mouth_Sucking.png", #cumming
+                    "action_speed == 1", "images/EmmaBJFace/Emma_BJ_Mouth_Tongue.png",  #licking
+                    "(action_speed == 2 or action_speed == 5)", Null(),                          #heading
+                    "action_speed == 3", "images/EmmaBJFace/Emma_BJ_Mouth_Sucking.png", #sucking
+                    "action_speed == 4", "images/EmmaBJFace/Emma_BJ_Mouth_Sucking.png", #deepthroat
+                    "action_speed == 6", "images/EmmaBJFace/Emma_BJ_Mouth_Sucking.png", #cumming
                     ),
-            "Speed == 3 and renpy.showing('Emma_TJ_Animation')", "images/EmmaBJFace/Emma_BJ_Mouth_Tongue.png",
+            "action_speed == 3 and renpy.showing('Emma_TJ_Animation')", "images/EmmaBJFace/Emma_BJ_Mouth_Tongue.png",
             "EmmaX.Mouth == 'normal'", "images/EmmaBJFace/Emma_BJ_Mouth_Smile.png",
             "EmmaX.Mouth == 'lipbite'", "images/EmmaBJFace/Emma_BJ_Mouth_Lipbite.png",
             "EmmaX.Mouth == 'sucking'", "images/EmmaBJFace/Emma_BJ_Mouth_Sucking.png",
@@ -4368,23 +4368,23 @@ image Emma_BJ_Head:                                                             
             ),
         (428,605), ConditionSwitch(
             # Heading Mouth
-#            "Speed == 2 and Trigger == 'blow'", At("Emma_BJ_MouthHeading", Emma_BJ_MouthAnim()),  #heading
+#            "action_speed == 2 and primary_action == 'blow'", At("Emma_BJ_MouthHeading", Emma_BJ_MouthAnim()),  #heading
             "not renpy.showing('Emma_BJ_Animation')", Null(),                       #heading
-            "Speed == 2", At("Emma_BJ_MouthHeading", Emma_BJ_MouthAnim()),  #heading
-            "Speed == 5", At("Emma_BJ_MouthHeading", Emma_BJ_MouthAnimC()), #cumming high
+            "action_speed == 2", At("Emma_BJ_MouthHeading", Emma_BJ_MouthAnim()),  #heading
+            "action_speed == 5", At("Emma_BJ_MouthHeading", Emma_BJ_MouthAnimC()), #cumming high
             "True", Null(),
             ),
 
         (0,0), ConditionSwitch(
             #Spunk layer
             "'mouth' not in EmmaX.Spunk", Null(),
-            "Speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
                     # If in sucking position
-                    "Speed == 1", "images/EmmaBJFace/Emma_BJ_Spunk_Tongue.png",  #licking
-                    "(Speed == 2 or Speed == 5)", Null(),                          #heading
-                    "Speed == 3", "images/EmmaBJFace/Emma_BJ_Spunk_SuckingUnder.png", #sucking
-                    "Speed == 4", "images/EmmaBJFace/Emma_BJ_Spunk_SuckingUnder.png", #deepthroat
-                    "Speed == 6", "images/EmmaBJFace/Emma_BJ_Spunk_SuckingUnder.png", #cumming
+                    "action_speed == 1", "images/EmmaBJFace/Emma_BJ_Spunk_Tongue.png",  #licking
+                    "(action_speed == 2 or action_speed == 5)", Null(),                          #heading
+                    "action_speed == 3", "images/EmmaBJFace/Emma_BJ_Spunk_SuckingUnder.png", #sucking
+                    "action_speed == 4", "images/EmmaBJFace/Emma_BJ_Spunk_SuckingUnder.png", #deepthroat
+                    "action_speed == 6", "images/EmmaBJFace/Emma_BJ_Spunk_SuckingUnder.png", #cumming
                     ),
             "EmmaX.Mouth == 'normal'", "images/EmmaBJFace/Emma_BJ_Spunk_Smile.png",
             "EmmaX.Mouth == 'lipbite'", "images/EmmaBJFace/Emma_BJ_Spunk_Lipbite.png",
@@ -4421,7 +4421,7 @@ image Emma_BJ_Head:                                                             
 #        (0,0), ConditionSwitch(
 #            #Hair water overlay
 #            "not EmmaX.Water", Null(),
-#            "Speed > 2", "images/EmmaBJFace/Emma_BJ_Wet_HeadOpen.png",
+#            "action_speed > 2", "images/EmmaBJFace/Emma_BJ_Wet_HeadOpen.png",
 #            "True", "images/EmmaBJFace/Emma_BJ_Wet_HeadClosed.png",
 #            ),
 #        (0,0), ConditionSwitch(
@@ -4484,7 +4484,7 @@ image Emma_BJ_MouthSuckingMask:
 #    contains: #see if this works, if not remove it
 #        ConditionSwitch(
 #            "'mouth' not in EmmaX.Spunk", Null(),
-#            "Speed != 2 and Speed != 5", Null(),
+#            "action_speed != 2 and action_speed != 5", Null(),
 #            "True", "images/EmmaBJFace/Emma_BJ_Spunk_SuckingOver.png",
 #            )
 #        zoom 1.4
@@ -4500,8 +4500,8 @@ image Emma_BJ_MaskHeadingComposite:
     LiveComposite(
         (858,928),
         (300,462), ConditionSwitch(
-            "Speed == 2", At("Emma_BJ_MaskHeading", Emma_BJ_MouthAnim()),
-            "Speed == 5", At("Emma_BJ_MaskHeading", Emma_BJ_MouthAnimC()),
+            "action_speed == 2", At("Emma_BJ_MaskHeading", Emma_BJ_MouthAnim()),
+            "action_speed == 5", At("Emma_BJ_MaskHeading", Emma_BJ_MouthAnimC()),
             "True", Null(),
             ),
         )
@@ -4767,12 +4767,12 @@ transform Emma_BJ_Body_6():
                                                                #BJ Launchers
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-label Emma_BJ_Launch(Line = Trigger):    # The sequence to launch the Emma BJ animations
+label Emma_BJ_Launch(line = primary_action):    # The sequence to launch the Emma BJ animations
     if renpy.showing("Emma_BJ_Animation"):
         return
 
     call Emma_Hide
-    if Line == "L" or Line == "cum":
+    if line == "L" or line == "cum":
         show Emma_Sprite at sprite_location(StageCenter) zorder EmmaX.Layer:
             alpha 1
             ease 1 zoom 2.5 offset (150,80)
@@ -4783,22 +4783,22 @@ label Emma_BJ_Launch(Line = Trigger):    # The sequence to launch the Emma BJ an
             zoom 2.5 offset (150,80)
         with dissolve
 
-    $ Speed = 0
-    if Taboo and Line == "L": # Emma gets started. . .
+    $ action_speed = 0
+    if Taboo and line == "L": # Emma gets started. . .
             if len(Present) >= 2:
                 if Present[0] != EmmaX:
-                        "[EmmaX.Name] looks back at [Present[0].Name] to see if she's watching."
+                        "[EmmaX.name] looks back at [Present[0].name] to see if she's watching."
                 elif Present[1] != EmmaX:
-                        "[EmmaX.Name] looks back at [Present[1].Name] to see if she's watching."
+                        "[EmmaX.name] looks back at [Present[1].name] to see if she's watching."
             else:
-                        "[EmmaX.Name] looks around to see if anyone can see her."
+                        "[EmmaX.name] looks around to see if anyone can see her."
             "She then bends down and puts your cock to her mouth."
-    elif Line == "L":
-            "[EmmaX.Name] smoothly bends down and places your cock against her cheek."
+    elif line == "L":
+            "[EmmaX.name] smoothly bends down and places your cock against her cheek."
 
 
-    if Line != "cum":
-        $ Trigger = "blow"
+    if line != "cum":
+        $ primary_action = "blow"
 
     show Emma_Sprite zorder EmmaX.Layer:
         alpha 0
@@ -4811,7 +4811,7 @@ label Emma_BJ_Reset: # The sequence to the Emma animations from BJ to default
         return
 #    hide Emma_BJ_Animation
     call Emma_Hide
-    $ Speed = 0
+    $ action_speed = 0
 
     show Emma_Sprite at sprite_location(StageCenter) zorder EmmaX.Layer:
         alpha 1
@@ -4918,25 +4918,25 @@ transform Handcock_2E():
 image Emma_HJ_Animation:
     contains:
         ConditionSwitch(                                                # backside of the hand
-            "not Speed", Transform("Emma_Hand_Under"),
-            "Speed == 1", At("Emma_Hand_Under", Emma_Hand_1()),
-            "Speed >= 2", At("Emma_Hand_Under", Emma_Hand_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Emma_Hand_Under"),
+            "action_speed == 1", At("Emma_Hand_Under", Emma_Hand_1()),
+            "action_speed >= 2", At("Emma_Hand_Under", Emma_Hand_2()),
+            "action_speed", Null(),
             ),
     contains:
         ConditionSwitch(                                                # cock
-            "not Speed", Transform("Zero_Handcock"),
-            "Speed == 1", At("Zero_Handcock", Handcock_1E()),
-            "Speed >= 2", At("Zero_Handcock", Handcock_2E()),
-            "Speed", Null(),
+            "not action_speed", Transform("Zero_Handcock"),
+            "action_speed == 1", At("Zero_Handcock", Handcock_1E()),
+            "action_speed >= 2", At("Zero_Handcock", Handcock_2E()),
+            "action_speed", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(                                                # fingers of the hand
-            "not Speed", Transform("Emma_Hand_Over"),
-            "Speed == 1", At("Emma_Hand_Over", Emma_Hand_1()),
-            "Speed >= 2", At("Emma_Hand_Over", Emma_Hand_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Emma_Hand_Over"),
+            "action_speed == 1", At("Emma_Hand_Over", Emma_Hand_1()),
+            "action_speed >= 2", At("Emma_Hand_Over", Emma_Hand_2()),
+            "action_speed", Null(),
             ),
     anchor (0.51, -1.3)
     zoom 0.4#0.6
@@ -4945,7 +4945,7 @@ image Emma_HJ_Animation:
 label Emma_HJ_Reset: # The sequence to the Rogue animations from handjob to default
     if not renpy.showing("Emma_HJ_Animation"):
         return
-    $ Speed = 0
+    $ action_speed = 0
     $ EmmaX.ArmPose = 1
     hide Emma_HJ_Animation with easeoutbottom
     call Emma_Hide
@@ -5095,9 +5095,9 @@ image Emma_FJ_Animation:
             # Emma's lower body
 #            "Player.Cock != 'foot'", Null(),
             # If neither
-            "Speed == 1", "Emma_FJ_Legs_1",#slow
-            "Speed == 4", "Emma_FJ_Legs_4",#cumming
-            "Speed >= 2", "Emma_FJ_Legs_2",#faster
+            "action_speed == 1", "Emma_FJ_Legs_1",#slow
+            "action_speed == 4", "Emma_FJ_Legs_4",#cumming
+            "action_speed >= 2", "Emma_FJ_Legs_2",#faster
             "True", "Emma_FJ_Legs_0",#Static
             )
         pos (450,20) #(430,20)
@@ -5194,7 +5194,7 @@ image Emma_FJ_Legs_0:
             easein 1 rotate 0
             repeat
     anchor (0.6, 0.0)
-# End Emma Footjob Speed 0
+# End Emma Footjob action_speed 0
 
 image Emma_FJ_Legs_1:
     #Footjob speed 1 slow
@@ -5280,7 +5280,7 @@ image Emma_FJ_Legs_1:
             easeout 1 rotate 2
             repeat
     anchor (0.6, 0.0)
-# End Emma Footjob Speed 1
+# End Emma Footjob action_speed 1
 
 image Emma_FJ_Legs_2:
     #Footjob speed 1 Fast
@@ -5350,7 +5350,7 @@ image Emma_FJ_Legs_2:
             ease 1 rotate 0
             repeat
     anchor (0.6, 0.0)
-# End Emma Footjob Speed 2
+# End Emma Footjob action_speed 2
 
 
 image Emma_FJ_Legs_4:
@@ -5426,7 +5426,7 @@ image Emma_FJ_Legs_4:
             pause.5
             repeat
     anchor (0.6, 0.0)
-# End Emma Footjob Speed 4
+# End Emma Footjob action_speed 4
 
 
 image Zero_Emma_FootCock:
@@ -5464,8 +5464,8 @@ image Emma_FJ_Calf:
 
 # End footjob animations / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-label Emma_FJ_Launch(Line = Trigger):    # The sequence to launch the Emma footjob animations
-    $ Trigger = "foot"
+label Emma_FJ_Launch(line = primary_action):    # The sequence to launch the Emma footjob animations
+    $ primary_action = "foot"
     $ Player.Sprite = 1
     $ ShowFeet = 1
     if EmmaX.Pose == "doggy":
@@ -5493,7 +5493,7 @@ label Emma_FJ_Launch(Line = Trigger):    # The sequence to launch the Emma footj
         xpos 590
     show Emma_Sprite zorder EmmaX.Layer:
         alpha 0
-    $ Speed = 0
+    $ action_speed = 0
     show Emma_FJ_Animation zorder 150:
         ease .5 alpha 1
     pause 0.5
@@ -5523,7 +5523,7 @@ label Emma_FJ_Reset: # The sequence to the Emma animations from Titfuck to defau
         alpha 1
         zoom 1 offset (0,0) xpos EmmaX.sprite_location
 
-    "[EmmaX.Name] stands back up."
+    "[EmmaX.name] stands back up."
     return
 
 # End Emma Footjob animations  / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
@@ -5598,9 +5598,9 @@ image Emma_Behind_Podium:
             repeat
 
 
-label Emma_Middle_Launch(T = Trigger,Set=1):
+label Emma_Middle_Launch(T = primary_action,Set=1):
     call Emma_Hide
-    $ Trigger = T
+    $ primary_action = T
     $ EmmaX.Pose = "mid" if Set else EmmaX.Pose
     show Emma_Sprite at sprite_location(EmmaX.sprite_location) zorder EmmaX.Layer:
 #        ease 0.5 offset (-100,-200) zoom 2

@@ -1116,7 +1116,7 @@ label warm_hands_lines(character):
     elif character == EmmaX:
         $ line = renpy.random.choice(["Luxurious, yes?"
             "They really are magnificent, aren't they?"
-            "Lovely, aren't they?"
+            "lovely, aren't they?"
             "You like how that feels, huh?"
             "Isn't it just delicious?"
             "Mmmm I do enjoy that. . ."
@@ -1545,10 +1545,10 @@ label get_out_lines(character):
     character.voice "[line]"
 
     if character in [RogueX, KittyX, EmmaX, LauraX, JeanX, JubesX]:
-        $ line = renpy.random.choice([character.Name + " pushes you back into the hall and slams the door. You head back to your room."
-            character.Name + " shoves you back into the hall and slams the door. You head back to your room."])
+        $ line = renpy.random.choice([character.name + " pushes you back into the hall and slams the door. You head back to your room."
+            character.name + " shoves you back into the hall and slams the door. You head back to your room."])
     elif character == StormX:
-        $ line = renpy.random.choice([character.Name + " pushes you to the top of the stairs and slams the door. You head back to your room."])
+        $ line = renpy.random.choice([character.name + " pushes you to the top of the stairs and slams the door. You head back to your room."])
     "[line]"
 
     return
@@ -1575,63 +1575,63 @@ label first_time_pussy_eaten_lines(character):
 
 label first_time_ass_eaten_lines(character):
     if character == RogueX:
-        if character.Love >= character.Obed and character.Love >= character.Inbt:
+        if character.love >= character.obedience and character.love >= character.inhibition:
             "I'm not really sure I want you lick'in down there. . ."
-        elif character.Obed >= character.Inbt:
+        elif character.obedience >= character.inhibition:
             "You really don't have to if you don't want to."
         else:
             $ character.Eyes = "sexy"
 
             "Hmm. . . it's worth a shot. . ."
     elif character == KittyX:
-        if character.Love >= character.Obed and character.Love >= character.Inbt:
+        if character.love >= character.obedience and character.love >= character.inhibition:
             "That's, I don't know. . ."
-        elif character.Obed >= character.Inbt:
+        elif character.obedience >= character.inhibition:
             "You don't have to do that."
         else:
             $ character.Eyes = "sexy"
 
             "That's kinda gross. . ."
     elif character == EmmaX:
-        if character.Love >= character.Obed and character.Love >= character.Inbt:
+        if character.love >= character.obedience and character.love >= character.inhibition:
             "Oh, are we there now?"
-        elif character.Obed >= character.Inbt:
+        elif character.obedience >= character.inhibition:
             "Is that what gets you off?"
         else:
             $ character.Eyes = "sexy"
 
             "Hm, I didn't know that's what you were into."
     elif character == LauraX:
-        if character.Love >= character.Obed and character.Love >= character.Inbt:
+        if character.love >= character.obedience and character.love >= character.inhibition:
             "Oh, we're there now?"
-        elif character.Obed >= character.Inbt:
+        elif character.obedience >= character.inhibition:
             "Is that what gets you off?"
         else:
             $ character.Eyes = "sexy"
 
             "Hm, I didn't know that's what you were into."
     elif character == JeanX:
-        if character.Love >= character.Obed and character.Love >= (character.Inbt - character.IX):
+        if character.love >= character.obedience and character.love >= (character.inhibition - character.IX):
             "Oh, we're there now?"
-        elif character.Obed >= (character.Inbt - character.IX):
+        elif character.obedience >= (character.inhibition - character.IX):
             "Is that what gets you off?"
         else:
             $ character.Eyes = "sexy"
 
             "Mmmm, you're into that?"
     elif character == StormX:
-        if character.Love >= character.Obed and character.Love >= character.Inbt:
+        if character.love >= character.obedience and character.love >= character.inhibition:
             "Oh, that is a bit forward!"
-        elif character.Obed >= character.Inbt:
+        elif character.obedience >= character.inhibition:
             "That is what you want?"
         else:
             $ character.Eyes = "sexy"
 
             "Hmmm, an interesting proposal. . ."
     elif character == JubesX:
-        if character.Love >= character.Obed and character.Love >= character.Inbt:
+        if character.love >= character.obedience and character.love >= character.inhibition:
             "What? What're you talking about?"
-        elif character.Obed >= character.Inbt:
+        elif character.obedience >= character.inhibition:
             "Is that what gets you off?"
         else:
             $ character.Eyes = "sexy"
@@ -1906,8 +1906,8 @@ label lets_do_this_lines(character):
     return
 
 label were_done_here_lines(character):
-    $ line = renpy.random.choice(["[character.Name] shoves you away and slaps you in the face."
-        "[character.Name] shoves you away."])
+    $ line = renpy.random.choice(["[character.name] shoves you away and slaps you in the face."
+        "[character.name] shoves you away."])
 
     "[line]"
 
@@ -1920,8 +1920,8 @@ label were_done_here_lines(character):
     return
 
 label knows_her_place_lines(character):
-    $ line = renpy.random.choice(["[character.Name] doesn't seem to be into this, but she knows her place."
-        "[character.Name] doesn't seem to be into this, you're lucky she's so obedient."])
+    $ line = renpy.random.choice(["[character.name] doesn't seem to be into this, but she knows her place."
+        "[character.name] doesn't seem to be into this, you're lucky she's so obedient."])
 
     "[line]"
 

@@ -81,7 +81,7 @@ image Zero_Hotdog_Moving:
 
 
 image Zero_Doggy_Static:
-    # Sex Speed 0 motions
+    # Sex action_speed 0 motions
     contains:
         subpixel True
         "Zero_Doggy_Insert"
@@ -116,7 +116,7 @@ image Rogue_Sex_Lick_Ass:
 
 
 image Rogue_Sex_Dildo_Anim2:
-        #this is Rogue's sex animation, Speed 2 (slow)
+        #this is Rogue's sex animation, action_speed 2 (slow)
         contains:
             subpixel True
             "images/DildoIn.png"
@@ -145,7 +145,7 @@ image Rogue_Sex_FingerA_Anim1:
 
 #Start Animations for Zero's Cock during Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 image Rogue_Anal_Zero_Anim0:
-        #this is Rogue's sex animation, Speed 0 (static)
+        #this is Rogue's sex animation, action_speed 0 (static)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -153,7 +153,7 @@ image Rogue_Anal_Zero_Anim0:
             zoom 1.3
 
 image Rogue_Anal_Zero_Anim1:
-        #this is Rogue's sex animation, Speed 1 (heading)
+        #this is Rogue's sex animation, action_speed 1 (heading)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -166,7 +166,7 @@ image Rogue_Anal_Zero_Anim1:
                 repeat
 
 image Rogue_Anal_Zero_Anim2:
-        #this is Rogue's sex animation, Speed 2 (slow)
+        #this is Rogue's sex animation, action_speed 2 (slow)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -179,7 +179,7 @@ image Rogue_Anal_Zero_Anim2:
                 repeat
 
 image Rogue_Anal_Zero_Anim3:
-        #this is Rogue's sex animation, Speed 3 (fast)
+        #this is Rogue's sex animation, action_speed 3 (fast)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -194,7 +194,7 @@ image Rogue_Anal_Zero_Anim3:
 
 #Start Animations for Zero's Cock during Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 image Rogue_Hotdog_Zero_Anim0:
-        #this is Rogue's sex animation, Speed 0 (static)
+        #this is Rogue's sex animation, action_speed 0 (static)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -202,7 +202,7 @@ image Rogue_Hotdog_Zero_Anim0:
             zoom 1.3
 
 image Rogue_Hotdog_Zero_Anim1:
-        #this is Rogue's sex animation, Speed 1 (heading)
+        #this is Rogue's sex animation, action_speed 1 (heading)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -335,7 +335,7 @@ image Zero_Handcock:
     pos (200,400)#(200,400)
 
 image Rogue_Hotdog_Zero_Anim2:
-        #this is Rogue's sex animation, Speed 3 (fast)
+        #this is Rogue's sex animation, action_speed 3 (fast)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -348,7 +348,7 @@ image Rogue_Hotdog_Zero_Anim2:
                 repeat
 
 image Rogue_Anal_Dildo_Anim2:
-        #this is Rogue's sex animation, Speed 2 (slow)
+        #this is Rogue's sex animation, action_speed 2 (slow)
         contains:
             subpixel True
             "images/DildoIn.png"
@@ -362,7 +362,7 @@ image Rogue_Anal_Dildo_Anim2:
 
 #Start Animations for Zero's Cock during Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 image Rogue_Sex_Zero_Anim0:
-        #this is Rogue's sex animation, Speed 0 (static)
+        #this is Rogue's sex animation, action_speed 0 (static)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -370,7 +370,7 @@ image Rogue_Sex_Zero_Anim0:
             zoom 1.3#1.4
 
 image Rogue_Sex_Zero_Anim1:
-        #this is Rogue's sex animation, Speed 1 (heading)
+        #this is Rogue's sex animation, action_speed 1 (heading)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -383,7 +383,7 @@ image Rogue_Sex_Zero_Anim1:
                 repeat
 
 image Rogue_Sex_Zero_Anim2:
-        #this is Rogue's sex animation, Speed 2 (slow)
+        #this is Rogue's sex animation, action_speed 2 (slow)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -396,7 +396,7 @@ image Rogue_Sex_Zero_Anim2:
                 repeat
 
 image Rogue_Sex_Zero_Anim3:
-        #this is Rogue's sex animation, Speed 3 (fast)
+        #this is Rogue's sex animation, action_speed 3 (fast)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -520,7 +520,7 @@ image Zero_Doggy_Anal_HeadingJunk:
             repeat
 
 image Zero_Pussy_Finger:
-    # Sex Speed 1 motions
+    # Sex action_speed 1 motions
     contains:
         subpixel True
         "images/UI_Fingering.png"
@@ -532,7 +532,7 @@ image Zero_Pussy_Finger:
             repeat
 
 image Zero_Doggy_Heading:
-    # Sex Speed 1 motions
+    # Sex action_speed 1 motions
     contains:
         subpixel True
         "Zero_Doggy_Insert"
@@ -544,7 +544,7 @@ image Zero_Doggy_Heading:
             repeat
 
 image Zero_Doggy_Fucking2:
-    # Sex Speed 2 motions
+    # Sex action_speed 2 motions
     contains:
         "Zero_Doggy_Insert"
         pos (169,500)
@@ -555,7 +555,7 @@ image Zero_Doggy_Fucking2:
             repeat
 
 image Zero_Doggy_Fucking3:
-    # Sex Speed 3 motions
+    # Sex action_speed 3 motions
     contains:
         "Zero_Doggy_Insert"
         pos (169,500)
@@ -903,7 +903,7 @@ image Chibi_Handy:
     contains:
         subpixel True
         ConditionSwitch(
-            "(Partner == StormX and Trigger4 == 'hand') or (Ch_Focus == StormX and Trigger3 == 'hand')", "images/Chibi_Hand_S.png",
+            "(Partner == StormX and Partner_primary_action == 'hand') or (focused_Girl == StormX and girl_offhand_action == 'hand')", "images/Chibi_Hand_S.png",
             "True", "images/Chibi_Hand_G.png"
             )
 #        "images/Chibi_Hand_G.png"
@@ -988,10 +988,10 @@ image Chibi_UI:
     # The basic chibi-UI image that is called
     contains:
         ConditionSwitch(
-            "'cockout' not in Player.RecentActions", Null(),
-            "Trigger2 == 'jackin'", "Chibi_Jackin",
-            "Trigger3 == 'hand' or Trigger4 == 'hand'", "Chibi_Handy",
-            "Trigger4 == 'blow'", "Chibi_Sucking",
+            "'cockout' not in Player.recent_history", Null(),
+            "offhand_action == 'jackin'", "Chibi_Jackin",
+            "girl_offhand_action == 'hand' or Partner_primary_action == 'hand'", "Chibi_Handy",
+            "Partner_primary_action == 'blow'", "Chibi_Sucking",
             "True", "Chibi_Null",
             )
 #    anchor (0.5,0.5)

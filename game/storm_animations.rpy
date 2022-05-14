@@ -1,4 +1,4 @@
-﻿# Basic character Sprites
+﻿# Basic Girl Sprites
 
 image Storm_Sprite:
     LiveComposite(
@@ -395,131 +395,131 @@ image Storm_Sprite:
 
 
         (0,0), ConditionSwitch(
-            #UI tool for When Storm is masturbating using Trigger3 actions
-            "Trigger == 'lesbian' or not Trigger3 or Ch_Focus != StormX", Null(),
+            #UI tool for When Storm is masturbating using girl_offhand_action actions
+            "primary_action == 'lesbian' or not girl_offhand_action or focused_Girl != StormX", Null(),
 
             #this is not a lesbian thing, and a trigger is set, and Storm is the primary. . .
-            "Trigger3 == 'fondle pussy'", At('GirlGropePussy_StormSelf',GirlGropePussy_Storm1()),
-            "Trigger3 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts'", "GirlGropeLeftBreast_Storm",
+            "girl_offhand_action == 'fondle pussy'", At('GirlGropePussy_StormSelf',GirlGropePussy_Storm1()),
+            "girl_offhand_action == 'fondle breasts'", ConditionSwitch(
+                    "offhand_action == 'fondle breasts' or offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Storm",
                         #When zero is working the right breast, fondle left
-                    "Trigger == 'fondle breasts' or Trigger == 'suck breasts'", "GirlGropeRightBreast_Storm",
+                    "primary_action == 'fondle breasts' or primary_action == 'suck breasts'", "GirlGropeRightBreast_Storm",
                         #When zero is working the left breast, fondle right
                     "True", "GirlGropeBothBreast_Storm",
                         #else, fondle both
                     ),
-            "Trigger3 == 'vibrator breasts'", "VibratorRightBreast_Storm",
-            "Trigger3 == 'vibrator pussy'", "VibratorPussy_Storm",
-            "Trigger3 == 'vibrator pussy insert'", "VibratorPussy_Storm",
-            "Trigger3 == 'vibrator anal'", "VibratorAnal_Storm",
-            "Trigger3 == 'vibrator anal insert'", "VibratorPussy_Storm",
+            "girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast_Storm",
+            "girl_offhand_action == 'vibrator pussy'", "VibratorPussy_Storm",
+            "girl_offhand_action == 'vibrator pussy insert'", "VibratorPussy_Storm",
+            "girl_offhand_action == 'vibrator anal'", "VibratorAnal_Storm",
+            "girl_offhand_action == 'vibrator anal insert'", "VibratorPussy_Storm",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger5(Threesome masutrbation) actions
-            "not Trigger5 or Trigger4 != 'masturbation' or Ch_Focus == StormX", Null(),
+            #UI tool for Partner_offhand_action(Threesome masutrbation) actions
+            "not Partner_offhand_action or Partner_primary_action != 'masturbation' or focused_Girl == StormX", Null(),
 
             #Storm is not primary, and T4 is masturbation, and a T5 is selected
-            "Trigger5 == 'fondle pussy' and Trigger != 'sex' and StormX.Lust >= 70", "GirlFingerPussy_Storm",
-            "Trigger5 == 'fondle pussy'", "GirlGropePussy_Storm",
-            "Trigger5 == 'fondle breasts'", "GirlGropeRightBreast_Storm",
-            "Trigger5 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger5 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger5 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger5 == 'vibrator anal'", "VibratorAnal",
-            "Trigger5 == 'vibrator anal insert'", "VibratorPussy",
+            "Partner_offhand_action == 'fondle pussy' and primary_action != 'sex' and StormX.lust >= 70", "GirlFingerPussy_Storm",
+            "Partner_offhand_action == 'fondle pussy'", "GirlGropePussy_Storm",
+            "Partner_offhand_action == 'fondle breasts'", "GirlGropeRightBreast_Storm",
+            "Partner_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "Partner_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "Partner_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "Partner_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "Partner_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger1(primary) actions
+            #UI tool for primary_action1(primary) actions
             #Storm is primary and a sex trigger is active
-            "not Trigger or Ch_Focus != StormX", Null(),
-            "Trigger == 'vibrator breasts'", "VibratorLeftBreast_Storm",
-            "Trigger == 'fondle thighs'", "GropeThigh_Storm",
-            "Trigger == 'fondle breasts'", "GropeLeftBreast_Storm",
-            "Trigger == 'suck breasts'", "LickRightBreast_Storm",
-            "Trigger == 'fondle pussy' and Speed == 2", "FingerPussy_Storm",
-            "Trigger == 'fondle pussy'", "GropePussy_Storm",
-            "Trigger == 'lick pussy'", "Lickpussy_Storm",
-            "Trigger == 'vibrator pussy'", "VibratorPussy_Storm",
-            "Trigger == 'vibrator pussy insert'", "VibratorPussy_Storm",
-            "Trigger == 'vibrator anal'", "VibratorAnal_Storm",
-            "Trigger == 'vibrator anal insert'", "VibratorPussy_Storm",
+            "not primary_action or focused_Girl != StormX", Null(),
+            "primary_action == 'vibrator breasts'", "VibratorLeftBreast_Storm",
+            "primary_action == 'fondle thighs'", "GropeThigh_Storm",
+            "primary_action == 'fondle breasts'", "GropeLeftBreast_Storm",
+            "primary_action == 'suck breasts'", "LickRightBreast_Storm",
+            "primary_action == 'fondle pussy' and action_speed == 2", "FingerPussy_Storm",
+            "primary_action == 'fondle pussy'", "GropePussy_Storm",
+            "primary_action == 'lick pussy'", "Lickpussy_Storm",
+            "primary_action == 'vibrator pussy'", "VibratorPussy_Storm",
+            "primary_action == 'vibrator pussy insert'", "VibratorPussy_Storm",
+            "primary_action == 'vibrator anal'", "VibratorAnal_Storm",
+            "primary_action == 'vibrator anal insert'", "VibratorPussy_Storm",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger2(secondary) actions
-            "not Trigger2 or Ch_Focus != StormX", Null(),
+            #UI tool for offhand_action(secondary) actions
+            "not offhand_action or focused_Girl != StormX", Null(),
 
             #Storm is primary and an offhand trigger is active
-            "Trigger2 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger2 == 'fondle breasts' and Trigger == 'suck breasts'", "GropeLeftBreast_Storm",
+            "offhand_action == 'fondle breasts'", ConditionSwitch(
+                    "offhand_action == 'fondle breasts' and primary_action == 'suck breasts'", "GropeLeftBreast_Storm",
                         #When zero is sucking on the right breast, fondle left
                     "True", "GropeRightBreast_Storm",
                         #else, fondle right
                     ),
-            "Trigger2 == 'vibrator breasts' and Trigger == 'suck breasts'", "VibratorLeftBreast_Storm",
+            "offhand_action == 'vibrator breasts' and primary_action == 'suck breasts'", "VibratorLeftBreast_Storm",
                 #When sucking right breast, vibrator left
-            "Trigger2 == Trigger", Null(),
+            "offhand_action == primary_action", Null(),
                 #When both triggers are the same, do nothing
-            "Trigger2 == 'suck breasts'", "LickLeftBreast_Storm",
-            "Trigger2 == 'fondle pussy'", "GropePussy_Storm",
-            "Trigger2 == 'lick pussy'", "Lickpussy_Storm",
-            "Trigger2 == 'vibrator breasts'", "VibratorRightBreast_Storm",
-            "Trigger2 == 'vibrator pussy'", "VibratorPussy_Storm",
-            "Trigger2 == 'vibrator pussy insert'", "VibratorPussy_Storm",
-            "Trigger2 == 'vibrator anal'", "VibratorAnal_Storm",
-            "Trigger2 == 'vibrator anal insert'", "VibratorPussy_Storm",
+            "offhand_action == 'suck breasts'", "LickLeftBreast_Storm",
+            "offhand_action == 'fondle pussy'", "GropePussy_Storm",
+            "offhand_action == 'lick pussy'", "Lickpussy_Storm",
+            "offhand_action == 'vibrator breasts'", "VibratorRightBreast_Storm",
+            "offhand_action == 'vibrator pussy'", "VibratorPussy_Storm",
+            "offhand_action == 'vibrator pussy insert'", "VibratorPussy_Storm",
+            "offhand_action == 'vibrator anal'", "VibratorAnal_Storm",
+            "offhand_action == 'vibrator anal insert'", "VibratorPussy_Storm",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger4(Threesome) actions (ie Rogue's hand on her)
-            "not Trigger4 or Ch_Focus != StormX", Null(),
+            #UI tool for Partner_primary_action(Threesome) actions (ie Rogue's hand on her)
+            "not Partner_primary_action or focused_Girl != StormX", Null(),
 
             # There is a threesome trigger set and Storm is the target of it
-            "Trigger4 == 'fondle pussy'", At('UI_PartnerHand',GirlGropePussy_Storm1()),
-            "Trigger4 == 'lick pussy'", "Lickpussy_Storm",
-            "Trigger4 == 'suck breasts' and (Trigger2 != 'suck breasts' or Trigger == 'suck breasts')", "LickLeftBreast_Storm",
-            "Trigger4 == 'suck breasts'", "LickRightBreast_Storm",
-            "Trigger4 == 'fondle breasts'", At('UI_PartnerHand',GirlGropeRightBreast_Storm()),
-#            "Trigger4 == 'fondle breasts'", ConditionSwitch(
-#                    "Trigger == 'fondle breasts' or Trigger == 'suck breasts'", "GirlGropeLeftBreast_Storm", #When zero is working the right breast, fondle left
-##                    "Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts'", "GirlGropeRightBreast_Storm",  #When zero is working the left breast, fondle right
-##                    "Trigger3 == 'fondle breasts' or Trigger3 == 'suck breasts'", "GirlGropeRightBreast_Storm", #When zero is working the left breast, fondle right
+            "Partner_primary_action == 'fondle pussy'", At('UI_PartnerHand',GirlGropePussy_Storm1()),
+            "Partner_primary_action == 'lick pussy'", "Lickpussy_Storm",
+            "Partner_primary_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Storm",
+            "Partner_primary_action == 'suck breasts'", "LickRightBreast_Storm",
+            "Partner_primary_action == 'fondle breasts'", At('UI_PartnerHand',GirlGropeRightBreast_Storm()),
+#            "Partner_primary_action == 'fondle breasts'", ConditionSwitch(
+#                    "primary_action == 'fondle breasts' or primary_action == 'suck breasts'", "GirlGropeLeftBreast_Storm", #When zero is working the right breast, fondle left
+##                    "offhand_action == 'fondle breasts' or offhand_action == 'suck breasts'", "GirlGropeRightBreast_Storm",  #When zero is working the left breast, fondle right
+##                    "girl_offhand_action == 'fondle breasts' or girl_offhand_action == 'suck breasts'", "GirlGropeRightBreast_Storm", #When zero is working the left breast, fondle right
 #                    "True", "GirlGropeRightBreast_Storm",#else, fondle right
 #                    ),
-            "Trigger4 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger4 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger4 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger4 == 'vibrator anal'", "VibratorAnal",
-            "Trigger4 == 'vibrator anal insert'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator breasts'", "VibratorRightBreast",
+            "Partner_primary_action == 'vibrator pussy'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator pussy insert'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator anal'", "VibratorAnal",
+            "Partner_primary_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger3(lesbian) actions (ie Rogue's hand on her when Storm is secondary)
-            "Trigger != 'lesbian' or Ch_Focus == StormX or not Trigger3", Null(),
-            # If there is a Trigger3 and Storm is not the focus
-#            "Trigger3 == 'fondle pussy' and Trigger != 'sex' and StormX.Lust >= 70", "GirlFingerPussy_Storm",
-#            "Trigger3 == 'fondle pussy'", "GirlGropePussy_Storm",
-            "Trigger3 == 'fondle pussy'", At('GirlGropePussy_StormSelf',GirlGropePussy_Storm1()),
-            "Trigger3 == 'lick pussy'", "Lickpussy_Storm",
-            "Trigger3 == 'suck breasts' and (Trigger2 != 'suck breasts' or Trigger == 'suck breasts')", "LickLeftBreast_Storm",
-            "Trigger3 == 'suck breasts'", "LickRightBreast_Storm",
-            "Trigger3 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger == 'fondle breasts' or Trigger == 'suck breasts'", "GirlGropeLeftBreast_Storm",
+            #UI tool for girl_offhand_action(lesbian) actions (ie Rogue's hand on her when Storm is secondary)
+            "primary_action != 'lesbian' or focused_Girl == StormX or not girl_offhand_action", Null(),
+            # If there is a girl_offhand_action and Storm is not the focus
+#            "girl_offhand_action == 'fondle pussy' and primary_action != 'sex' and StormX.lust >= 70", "GirlFingerPussy_Storm",
+#            "girl_offhand_action == 'fondle pussy'", "GirlGropePussy_Storm",
+            "girl_offhand_action == 'fondle pussy'", At('GirlGropePussy_StormSelf',GirlGropePussy_Storm1()),
+            "girl_offhand_action == 'lick pussy'", "Lickpussy_Storm",
+            "girl_offhand_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Storm",
+            "girl_offhand_action == 'suck breasts'", "LickRightBreast_Storm",
+            "girl_offhand_action == 'fondle breasts'", ConditionSwitch(
+                    "primary_action == 'fondle breasts' or primary_action == 'suck breasts'", "GirlGropeLeftBreast_Storm",
                         #When zero is working the right breast, fondle left
-                    "Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts'", "GirlGropeRightBreast_Storm",
+                    "offhand_action == 'fondle breasts' or offhand_action == 'suck breasts'", "GirlGropeRightBreast_Storm",
                         #When zero is working the left breast, fondle right
-                    "Trigger3 == 'fondle breasts' or Trigger3 == 'suck breasts'", "GirlGropeLeftBreast_Storm",
+                    "girl_offhand_action == 'fondle breasts' or girl_offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Storm",
                         #When zero is working the right breast, fondle left
                     "True", "GirlGropeRightBreast_Storm",
                         #else, fondle right
                     ),
-            "Trigger3 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger3 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger3 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger3 == 'vibrator anal'", "VibratorAnal",
-            "Trigger3 == 'vibrator anal insert'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "girl_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "girl_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         )
@@ -597,11 +597,11 @@ image Storm_Sprite_Head:
                 ),
         (0,0), ConditionSwitch(#chin spunk
             "'chin' not in StormX.Spunk", Null(),
-#            "renpy.showing('Storm_BJ_Animation') and Speed >= 2", Null(),
+#            "renpy.showing('Storm_BJ_Animation') and action_speed >= 2", Null(),
             "True", "images/StormSprite/Storm_Sprite_Spunk_Chin.png",
             ),
 #        (0,0), ConditionSwitch(#Mouths
-#            "renpy.showing('Storm_BJ_Animation')", "images/StormSprite/Storm_Sprite_Mouth_SuckingBJ.png", #and Speed >= 2
+#            "renpy.showing('Storm_BJ_Animation')", "images/StormSprite/Storm_Sprite_Mouth_SuckingBJ.png", #and action_speed >= 2
 #            "StormX.Mouth == 'normal'", "images/StormSprite/Storm_Sprite_Mouth_Normal.png",
 #            "StormX.Mouth == 'lipbite'", "images/StormSprite/Storm_Sprite_Mouth_Lipbite.png",
 #            "StormX.Mouth == 'sucking'", "images/StormSprite/Storm_Sprite_Mouth_Sucking.png",
@@ -775,7 +775,7 @@ image Storm_Drip_MaskP:
 
 
 
-#label Storm_Sex_Launch(Line = Trigger):
+#label Storm_Sex_Launch(line = primary_action):
 #            # placeholder
 #            return
 
@@ -783,7 +783,7 @@ image Storm_Drip_MaskP:
 #            # placeholder
 #            return
 
-label Storm_Doggy_Launch(Line = Trigger):
+label Storm_Doggy_Launch(line = primary_action):
             # placeholder
             return
 
@@ -792,7 +792,7 @@ label Storm_Doggy_Reset:
             return
 
 
-#label Storm_BJ_Launch(Line = Trigger):
+#label Storm_BJ_Launch(line = primary_action):
 #            # placeholder
 #            return
 
@@ -800,7 +800,7 @@ label Storm_Doggy_Reset:
 #            # placeholder
 #            return
 
-#label Storm_TJ_Launch(Line = Trigger):
+#label Storm_TJ_Launch(line = primary_action):
 #            # placeholder
 #            return
 
@@ -808,7 +808,7 @@ label Storm_Doggy_Reset:
 #            # placeholder
 #            return
 
-#label Storm_HJ_Launch(Line = Trigger):
+#label Storm_HJ_Launch(line = primary_action):
 #            # placeholder
 #            return
 
@@ -828,59 +828,59 @@ image Storm_SexSprite:
 
 #        (0,0), ConditionSwitch(
 #                #Shows different upper body motion depending on events
-#                "True", "Storm_Sex_Speed2",
+#                "True", "Storm_Sex_action_speed2",
 #                ),
         (0,0), ConditionSwitch(
                 #Shows different motion depending on events
 #                "not Player.Sprite", "Storm_Sex_Body_Static",
                 "Player.Cock == 'in'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 3", "Storm_Sex_Fucking_Speed3",
-                        "Speed >= 2", "Storm_Sex_Fucking_Speed2",
-                        "Speed", "Storm_Sex_Fucking_Speed1",
-                        "True", "Storm_Sex_Fucking_Speed0",
+                        "action_speed >= 3", "Storm_Sex_Fucking_action_speed3",
+                        "action_speed >= 2", "Storm_Sex_Fucking_action_speed2",
+                        "action_speed", "Storm_Sex_Fucking_action_speed1",
+                        "True", "Storm_Sex_Fucking_action_speed0",
                         ),
                 "Player.Cock == 'anal'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 3", "Storm_Sex_Anal_Speed3",
-                        "Speed >= 2", "Storm_Sex_Anal_Speed2",
-                        "Speed", "Storm_Sex_Anal_Speed1",
-                        "True", "Storm_Sex_Anal_Speed0",
+                        "action_speed >= 3", "Storm_Sex_Anal_action_speed3",
+                        "action_speed >= 2", "Storm_Sex_Anal_action_speed2",
+                        "action_speed", "Storm_Sex_Anal_action_speed1",
+                        "True", "Storm_Sex_Anal_action_speed0",
                         ),
-                "Player.Sprite and Player.Cock == 'out' and Speed >= 2","Storm_Sex_Hotdog_Speed2",
-                "Player.Sprite and Player.Cock == 'out' and Speed >= 1","Storm_Sex_Hotdog_Speed1",
+                "Player.Sprite and Player.Cock == 'out' and action_speed >= 2","Storm_Sex_Hotdog_action_speed2",
+                "Player.Sprite and Player.Cock == 'out' and action_speed >= 1","Storm_Sex_Hotdog_action_speed1",
                 "Player.Cock == 'foot'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 2", "Storm_Sex_FJ_Speed2",
-                        "Speed", "Storm_Sex_FJ_Speed1",
-                        "True", "Storm_Sex_FJ_Speed0",
+                        "action_speed >= 2", "Storm_Sex_FJ_action_speed2",
+                        "action_speed", "Storm_Sex_FJ_action_speed1",
+                        "True", "Storm_Sex_FJ_action_speed0",
                         ),
-#                "Player.Cock == 'out' and Speed >= 2","Storm_Hotdog_Body_Anim2",
+#                "Player.Cock == 'out' and action_speed >= 2","Storm_Hotdog_Body_Anim2",
                 "True", "Storm_Sex_Static",
                 ),
 #        (0,0), ConditionSwitch(                                                         #Shows different lower body motion depending on events
 #                "not Player.Sprite", "Storm_Sex_Legs_Static",
 #                "Player.Cock == 'anal'", ConditionSwitch(
 #                        #if the top's down. . .
-#                        "Speed >= 3", "Storm_Sex_Legs_Anim3",
-#                        "Speed >= 2", "Storm_Sex_Legs_Anim2",
-#                        "Speed", "Storm_Sex_Legs_Anim1",
+#                        "action_speed >= 3", "Storm_Sex_Legs_Anim3",
+#                        "action_speed >= 2", "Storm_Sex_Legs_Anim2",
+#                        "action_speed", "Storm_Sex_Legs_Anim1",
 #                        "True", "Storm_Sex_Legs_Static",
 #                        ),
 #                "Player.Cock == 'in'", ConditionSwitch(
 #                        #if the top's down. . .
-#                        "Speed >= 3", "Storm_Sex_Legs_Anim3",
-#                        "Speed >= 2", "Storm_Sex_Legs_Anim2",
-#                        "Speed", "Storm_Sex_Legs_Anim1",
+#                        "action_speed >= 3", "Storm_Sex_Legs_Anim3",
+#                        "action_speed >= 2", "Storm_Sex_Legs_Anim2",
+#                        "action_speed", "Storm_Sex_Legs_Anim1",
 #                        "True", "Storm_Sex_Legs_Static",
 #                        ),
 #                "Player.Cock == 'foot'", ConditionSwitch(
 #                        #if the top's down. . .
-#                        "Speed >= 2", "Storm_Sex_Legs_FootAnim2",
-#                        "Speed", "Storm_Sex_Legs_FootAnim1",
+#                        "action_speed >= 2", "Storm_Sex_Legs_FootAnim2",
+#                        "action_speed", "Storm_Sex_Legs_FootAnim1",
 #                        "True", "Storm_Sex_Legs_FootAnimStatic",
 #                        ),
-#                "Player.Cock == 'out' and Speed >= 2","Storm_Hotdog_Legs_Anim2",
+#                "Player.Cock == 'out' and action_speed >= 2","Storm_Hotdog_Legs_Anim2",
 #                "True", "Storm_Sex_Legs_Static",
 #                ),
         )
@@ -1114,12 +1114,12 @@ image Storm_Sex_Tits:
             ),
         (0,0), ConditionSwitch(
             #breast licking animation
-            "Trigger == 'suck breasts' or Trigger2 == 'suck breasts'", "Storm_Sex_Lick_Breasts",
+            "primary_action == 'suck breasts' or offhand_action == 'suck breasts'", "Storm_Sex_Lick_Breasts",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
             #breast fondling animation
-            "Trigger == 'fondle breasts' or Trigger2 == 'fondle breasts'", "Storm_Sex_Fondle_Breasts",
+            "primary_action == 'fondle breasts' or offhand_action == 'fondle breasts'", "Storm_Sex_Fondle_Breasts",
             "True", Null()
             ),
 #        (260,-350), "Storm_Head_Sex",  #
@@ -1241,8 +1241,8 @@ image Storm_Sex_Legs:
         (0,0), ConditionSwitch(
             #Piercings
 #            "Player.Sprite", Null(),
-#            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-#            "Trigger == 'dildo pussy'", Null(),
+#            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+#            "primary_action == 'dildo pussy'", Null(),
             "not StormX.Panties and StormX.Hose != 'pantyhose'", Null(),
             "((StormX.Panties or StormX.Hose == 'pantyhose') and StormX.PantiesDown)", Null(),
                 #if she has panties, but they are down, or pantyhose, or Legs that are not a skirt and are not down, skip these. . .
@@ -1295,8 +1295,8 @@ image Storm_Sex_Legs:
         (0,0), ConditionSwitch(
             #Piercings
 #            "Player.Sprite", Null(),
-#            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-#            "Trigger == 'dildo pussy'", Null(),
+#            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+#            "primary_action == 'dildo pussy'", Null(),
             "not StormX.Legs", Null(),
             "StormX.Legs and StormX.Legs != 'skirt' and StormX.Upskirt", Null(),
                 #if she has panties, but they are down, or pantyhose, or Legs that are not a skirt and are not down, skip these. . .
@@ -1306,21 +1306,21 @@ image Storm_Sex_Legs:
             ),
 #        (0,0), ConditionSwitch(                                                                                 #hotdog cock Layer
 #            "not Player.Sprite or Player.Cock != 'out'", Null(),
-#            "Speed >= 2", "Storm_Hotdog_Zero_Anim2",
-#            "Speed", "Storm_Hotdog_Zero_Anim1",
+#            "action_speed >= 2", "Storm_Hotdog_Zero_Anim2",
+#            "action_speed", "Storm_Hotdog_Zero_Anim1",
 #            "True", "Storm_Hotdog_Zero_Anim0",
 #            ),
         (0,0), ConditionSwitch(
             #pussy licking animation
             "Player.Sprite and Player.Cock", Null(),
-            "Trigger == 'lick pussy'", "Storm_Sex_Lick_Pussy",
-            "Trigger == 'lick ass'", "Storm_Sex_Lick_Ass",
+            "primary_action == 'lick pussy'", "Storm_Sex_Lick_Pussy",
+            "primary_action == 'lick ass'", "Storm_Sex_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
             #pussy fondling animation
             "Player.Sprite and Player.Cock", Null(),
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'", "Storm_Sex_Fondle_Pussy",
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'", "Storm_Sex_Fondle_Pussy",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -1331,14 +1331,14 @@ image Storm_Sex_Legs:
             ),
 #        (0,0), ConditionSwitch(                                                                                 #footjob cock Layer
 #            "not Player.Sprite or Player.Cock != 'foot'", Null(),
-#            "Speed >= 2", "Storm_Footcock_Zero_Anim2",
-#            "Speed", "Storm_Footcock_Zero_Anim1",
+#            "action_speed >= 2", "Storm_Footcock_Zero_Anim2",
+#            "action_speed", "Storm_Footcock_Zero_Anim1",
 #            "True", "Storm_Footcock_Static",
 #            ),
 #        (0,0), ConditionSwitch(                                                                                 #footjob cock Layer
 #            "not Player.Sprite or Player.Cock != 'foot'", Null(),
-#            "Speed >= 2", At("Storm_Footcock", Storm_Footcock_Zero_Anim2A()),
-#            "Speed", At("Storm_Footcock", Storm_Footcock_Zero_Anim1A()),
+#            "action_speed >= 2", At("Storm_Footcock", Storm_Footcock_Zero_Anim2A()),
+#            "action_speed", At("Storm_Footcock", Storm_Footcock_Zero_Anim1A()),
 #            "True", At("Storm_Footcock", Storm_Footcock_StaticA()),
 #            ),
 #        (0,0), ConditionSwitch(                                                                                 #UI tool layer
@@ -1347,7 +1347,7 @@ image Storm_Sex_Legs:
 #            "True", Null(),
 #            ),
 #        (0,0), ConditionSwitch(                                                         #Shows different lower body motion depending on events
-#            "not Speed", "Storm_Sex_Feet",
+#            "not action_speed", "Storm_Sex_Feet",
 #            "Player.Cock == 'anal' or Player.Cock == 'in' or Player.Cock == 'out'", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_FeetMask.png"),
 #            "True", "Storm_Sex_Feet",
 #            ),
@@ -1384,35 +1384,35 @@ image Storm_Sex_Feet:
 
 # Start Storm Sex Pose Pussy / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 image Storm_Sex_Pussy:
-    # This is the visual for her pussy during the Speed 0 mode (static).
+    # This is the visual for her pussy during the action_speed 0 mode (static).
 
     contains:
             # The background plate of her pussy
             ConditionSwitch(
-                "Player.Sprite and Player.Cock == 'in' and Speed >= 2", "images/StormSex/Storm_Sex_Pussy_Fucking.png",
-                "Player.Sprite and Player.Cock == 'in' and Speed", "Storm_Sex_Heading_Pussy",
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/StormSex/Storm_Sex_Pussy_Fucking.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed", "Storm_Sex_Heading_Pussy",
                 "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'out')", "images/StormSex/Storm_Sex_Pussy_Open.png",
-                "Trigger == 'lick pussy'", "images/StormSex/Storm_Sex_Pussy_Open.png",
+                "primary_action == 'lick pussy'", "images/StormSex/Storm_Sex_Pussy_Open.png",
                 "True", "images/StormSex/Storm_Sex_Pussy_Closed.png",
                 )
 #    contains:
 #            # The background plate of her pussy
 #            ConditionSwitch(
 #                "not StormX.Wet", Null(),
-#                "Player.Sprite and Player.Cock == 'in' and Speed >= 2", "images/StormSex/Storm_Sex_WetPussy_F.png",
+#                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/StormSex/Storm_Sex_WetPussy_F.png",
 #                "True", "images/StormSex/Storm_Sex_WetPussy_C.png",
 #                )
     contains:
             # pubes
             ConditionSwitch(
                 "not StormX.Pubes", Null(),
-#                "Player.Sprite and Player.Cock == 'in' and Speed >= 2", "images/StormSex/Storm_Sex_Pubes_Fucking.png",
-                "Player.Sprite and Player.Cock == 'in' and Speed and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Fucking_FJ.png",
-                "Player.Sprite and Player.Cock == 'in' and Speed", "images/StormSex/Storm_Sex_Pubes_Fucking.png",
+#                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/StormSex/Storm_Sex_Pubes_Fucking.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Fucking_FJ.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed", "images/StormSex/Storm_Sex_Pubes_Fucking.png",
                 "Player.Sprite and Player.Cock == 'in' and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
                 "Player.Sprite and Player.Cock == 'in'", "images/StormSex/Storm_Sex_Pubes_Open.png",
-                "Trigger == 'lick pussy' and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
-                "Trigger == 'lick pussy'", "images/StormSex/Storm_Sex_Pubes_Open.png",
+                "primary_action == 'lick pussy' and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
+                "primary_action == 'lick pussy'", "images/StormSex/Storm_Sex_Pubes_Open.png",
                 "ShowFeet", "images/StormSex/Storm_Sex_Pubes_Closed_FJ.png",
                 "True", "images/StormSex/Storm_Sex_Pubes_Closed.png",
                 )
@@ -1440,17 +1440,17 @@ image Storm_Sex_Pussy:
             # The animation of Zero's moving penis, masked by her pussy shape
             ConditionSwitch(
 #                "not Player.Sprite", Null(),
-                "Player.Sprite and Player.Cock == 'in' and Speed >= 3", AlphaMask("Storm_Sex_Fucking_Zero_Anim3", "Storm_Sex_Fucking_Mask"),
-                "Player.Sprite and Player.Cock == 'in' and Speed >= 2", AlphaMask("Storm_Sex_Fucking_Zero_Anim2", "Storm_Sex_Fucking_Mask"),
-                "Player.Sprite and Player.Cock == 'in' and Speed == 1", AlphaMask("Storm_Sex_Fucking_Zero_Anim1", "Storm_Sex_Heading_Mask"),
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 3", AlphaMask("Storm_Sex_Fucking_Zero_Anim3", "Storm_Sex_Fucking_Mask"),
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", AlphaMask("Storm_Sex_Fucking_Zero_Anim2", "Storm_Sex_Fucking_Mask"),
+                "Player.Sprite and Player.Cock == 'in' and action_speed == 1", AlphaMask("Storm_Sex_Fucking_Zero_Anim1", "Storm_Sex_Heading_Mask"),
                 "Player.Sprite and Player.Cock == 'in'", "Storm_Sex_Fucking_Zero_Anim0",
                 "True", Null(),
                 )
     contains:
             #Piercings
             ConditionSwitch(
-                "StormX.Pierce == 'barbell' and Player.Sprite and Player.Cock == 'in' and Speed", "images/StormSex/Storm_Sex_Pierce_Pussy_BarbellF.png",
-                "StormX.Pierce == 'ring' and Player.Sprite and Player.Cock == 'in' and Speed", "images/StormSex/Storm_Sex_Pierce_Pussy_RingF.png",
+                "StormX.Pierce == 'barbell' and Player.Sprite and Player.Cock == 'in' and action_speed", "images/StormSex/Storm_Sex_Pierce_Pussy_BarbellF.png",
+                "StormX.Pierce == 'ring' and Player.Sprite and Player.Cock == 'in' and action_speed", "images/StormSex/Storm_Sex_Pierce_Pussy_RingF.png",
                 "StormX.Pierce == 'barbell'", "images/StormSex/Storm_Sex_Pierce_Pussy_Barbell.png",
                 "StormX.Pierce == 'ring'", "images/StormSex/Storm_Sex_Pierce_Pussy_Ring.png",
                 "True", Null(),
@@ -1458,15 +1458,15 @@ image Storm_Sex_Pussy:
     contains:
             #Spunk over penis
             ConditionSwitch(
-                "Player.Sprite and Player.Cock == 'in' and Speed == 1", "Storm_Pussy_Spunk_Heading",
+                "Player.Sprite and Player.Cock == 'in' and action_speed == 1", "Storm_Pussy_Spunk_Heading",
                 "True", Null(),
                 )
     contains:
             #Spunk over penis
             ConditionSwitch(
-                "Speed == 1", Null(),
-                "'in' not in StormX.Spunk or not Player.Sprite or Player.Cock != 'in' or not Speed", Null(),
-#                "Speed <= 1", Null(), #"Storm_Pussy_Spunk_Heading",
+                "action_speed == 1", Null(),
+                "'in' not in StormX.Spunk or not Player.Sprite or Player.Cock != 'in' or not action_speed", Null(),
+#                "action_speed <= 1", Null(), #"Storm_Pussy_Spunk_Heading",
                 "True", "images/StormSex/Storm_Sex_Spunk_Pussy_Over.png",
                 )
 
@@ -1513,7 +1513,7 @@ image Storm_Sex_Zero_Cock:
 
 image Storm_Sex_Fucking_Mask:
         #This is the mask image for Kitty's wide open pussy
-        # Used in "Storm_Sex_Speed2" and "Storm_Sex_Speed3"
+        # Used in "Storm_Sex_action_speed2" and "Storm_Sex_action_speed3"
         contains:
             "images/StormSex/Storm_Sex_Mask_Fucking.png"
             yoffset 3
@@ -1590,15 +1590,15 @@ image Storm_Sex_Static:
 #                repeat
 # End main animation for Sex Pose Static
 
-# End Storm Sex Pose Speed Static / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Storm Sex Pose action_speed Static / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
 
-# Start Storm Sex Pose Speed 0 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Storm Sex Pose action_speed 0 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Storm Sex Pose Speed 0 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Storm Sex Pose action_speed 0 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Storm_Sex_Fucking_Speed0:
+image Storm_Sex_Fucking_action_speed0:
     # Pose for Storm's Sex Pose in which she is fucking at speed 0 (static)
     contains:
             #Storm's underlying body
@@ -1635,11 +1635,11 @@ image Storm_Sex_Fucking_Speed0:
                 pause 0.8
                 ease 2 ypos -180 #-130
                 repeat
-# End main animation for Sex Pose Fucking Speed 1
+# End main animation for Sex Pose Fucking action_speed 1
 
 
 image Storm_Sex_Fucking_Zero_Anim0:
-        #this is Storm's sex animation, Speed 1 Fucking
+        #this is Storm's sex animation, action_speed 1 Fucking
         contains:
             subpixel True
             "Storm_Sex_Zero_Cock"
@@ -1655,12 +1655,12 @@ image Storm_Sex_Fucking_Zero_Anim0:
                 easein 1 ypos 40 #-10
                 repeat
 
-# End Storm Sex Pose Speed 0 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Storm Sex Pose action_speed 0 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# Start Storm Sex Pose Speed 1 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Storm Sex Pose action_speed 1 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Storm_Sex_Fucking_Speed1:
+image Storm_Sex_Fucking_action_speed1:
     # Pose for Storm's Sex Pose in which she is fucking at speed 1 (heading)
     contains:
             #Storm's underlying body
@@ -1696,11 +1696,11 @@ image Storm_Sex_Fucking_Speed1:
                 pause 0.8
                 ease 2 ypos -180 #-130
                 repeat
-# End main animation for Sex Pose Fucking Speed 1
+# End main animation for Sex Pose Fucking action_speed 1
 
 
 image Storm_Sex_Fucking_Zero_Anim1:
-        #this is Storm's sex animation, Speed 1 Fucking
+        #this is Storm's sex animation, action_speed 1 Fucking
         contains:
             subpixel True
             "Storm_Sex_Zero_Cock"
@@ -1751,7 +1751,7 @@ image Storm_Pussy_Spunk_Heading:
         #This is the image for Storm's heading pussy cum
         contains:
             ConditionSwitch(
-                "'in' in StormX.Spunk and Player.Sprite and Player.Cock == 'in' and Speed == 1", "images/StormSex/Storm_Sex_Spunk_Pussy_Over.png",
+                "'in' in StormX.Spunk and Player.Sprite and Player.Cock == 'in' and action_speed == 1", "images/StormSex/Storm_Sex_Spunk_Pussy_Over.png",
                 "True", Null(),
                 )
             anchor (0.5,0)
@@ -1768,11 +1768,11 @@ image Storm_Pussy_Spunk_Heading:
                 ease 1.8 xzoom .7
                 repeat
 
-# End Storm Sex Pose Speed 1 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Storm Sex Pose action_speed 1 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Storm Sex Pose Speed 2 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Storm Sex Pose action_speed 2 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Storm_Sex_Fucking_Speed2:
+image Storm_Sex_Fucking_action_speed2:
     # Pose for Storm's Sex Pose in which she is fucking at speed 2
     contains:
             #Storm's underlying body
@@ -1814,11 +1814,11 @@ image Storm_Sex_Fucking_Speed2:
 #    contains:
 #            #Zero's cock in the sex pose
 #            AlphaMask("Storm_Sex_Fucking_Zero_Anim2", "Storm_Sex_Fucking_Mask")
-# End main animation for Sex Pose Fucking Speed 2
+# End main animation for Sex Pose Fucking action_speed 2
 
 
 image Storm_Sex_Fucking_Zero_Anim2:
-        #this is Storm's sex animation, Speed 2 Fucking
+        #this is Storm's sex animation, action_speed 2 Fucking
         contains:
             subpixel True
             "Storm_Sex_Zero_Cock"
@@ -1833,11 +1833,11 @@ image Storm_Sex_Fucking_Zero_Anim2:
                 ease 2 ypos -10
                 repeat
 
-# End Storm Sex Pose Speed 2 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Storm Sex Pose action_speed 2 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Storm Sex Pose Speed 3 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Storm Sex Pose action_speed 3 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Storm_Sex_Fucking_Speed3:
+image Storm_Sex_Fucking_action_speed3:
     # Pose for Storm's Sex Pose in which she is fucking at speed 3
     contains:
             #Storm's underlying body
@@ -1875,11 +1875,11 @@ image Storm_Sex_Fucking_Speed3:
                 ease 0.75 ypos -100
                 repeat
 
-# End main animation for Sex Pose Fucking Speed 3
+# End main animation for Sex Pose Fucking action_speed 3
 
 
 image Storm_Sex_Fucking_Zero_Anim3:
-        #this is Storm's sex animation, Speed3 Fucking
+        #this is Storm's sex animation, action_speed3 Fucking
         contains:
             subpixel True
             "Storm_Sex_Zero_Cock"
@@ -1893,7 +1893,7 @@ image Storm_Sex_Fucking_Zero_Anim3:
                 ease 0.75 ypos -40
                 repeat
 
-# End Storm Sex Pose Speed 3 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Storm Sex Pose action_speed 3 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
 #Start Animations for Storm's Ass during Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
@@ -1904,9 +1904,9 @@ image Storm_Sex_Anus:
 #    contains:
 #            #Anus background plate
 #            ConditionSwitch(
-#            "Player.Sprite and Player.Cock == 'anal' and Speed >= 3", "images/StormSex/Storm_Sex_Hole_Open.png",
-#            "Player.Sprite and Player.Cock == 'anal' and Speed >= 2", "images/StormSex/Storm_Sex_Hole_Open.png",
-#            "Player.Sprite and Player.Cock == 'anal' and Speed", "Storm_Sex_Anal_Heading",
+#            "Player.Sprite and Player.Cock == 'anal' and action_speed >= 3", "images/StormSex/Storm_Sex_Hole_Open.png",
+#            "Player.Sprite and Player.Cock == 'anal' and action_speed >= 2", "images/StormSex/Storm_Sex_Hole_Open.png",
+#            "Player.Sprite and Player.Cock == 'anal' and action_speed", "Storm_Sex_Anal_Heading",
 #            "Player.Sprite and Player.Cock == 'anal'", "Storm_Sex_Anal_Tip",
 #            "StormX.Loose", "images/StormSex/Storm_Sex_Hole_Loose.png",
 #            "True", "images/StormSex/Storm_Sex_Hole_Tight.png",
@@ -1915,24 +1915,24 @@ image Storm_Sex_Anus:
 #            #Spunk under penis
 #            ConditionSwitch(
 #                "'anal' not in StormX.Spunk", Null(),
-#                "Player.Sprite and Player.Cock != 'anal' and Speed >= 1", "images/StormSex/Storm_Sex_Spunk_Anal_Under.png",
-#                "Player.Sprite and Player.Cock != 'anal' and Speed == 1", "Storm_Sex_Anal_Spunk_Heading_Under",
+#                "Player.Sprite and Player.Cock != 'anal' and action_speed >= 1", "images/StormSex/Storm_Sex_Spunk_Anal_Under.png",
+#                "Player.Sprite and Player.Cock != 'anal' and action_speed == 1", "Storm_Sex_Anal_Spunk_Heading_Under",
 #                "True", "images/StormSex/Storm_Sex_Spunk_Anal_Closed.png",
 #                )
     contains:
             # The animation of Zero's moving penis, masked by her anus shape
             ConditionSwitch(
                 "not Player.Sprite or Player.Cock != 'anal'", Null(),
-                "Speed >= 3",  AlphaMask("Storm_Sex_Anal_Zero_Anim3", "Storm_Sex_Anal_Mask"),
-                "Speed >= 2", AlphaMask("Storm_Sex_Anal_Zero_Anim2", "Storm_Sex_Anal_Mask"),
-                "Speed", AlphaMask("Storm_Sex_Anal_Zero_Anim1", "Storm_Sex_Anal_Mask"),
+                "action_speed >= 3",  AlphaMask("Storm_Sex_Anal_Zero_Anim3", "Storm_Sex_Anal_Mask"),
+                "action_speed >= 2", AlphaMask("Storm_Sex_Anal_Zero_Anim2", "Storm_Sex_Anal_Mask"),
+                "action_speed", AlphaMask("Storm_Sex_Anal_Zero_Anim1", "Storm_Sex_Anal_Mask"),
                 "True", AlphaMask("Storm_Sex_Anal_Zero_Anim0", "Storm_Sex_Anal_Mask"),
                 )
     contains:
             #Spunk over penis
             ConditionSwitch(
-                "'anal' not in StormX.Spunk or not Player.Sprite or Player.Cock != 'anal' or not Speed", Null(),
-                "Speed == 1", "Storm_Sex_Anal_Spunk_Heading_Over",
+                "'anal' not in StormX.Spunk or not Player.Sprite or Player.Cock != 'anal' or not action_speed", Null(),
+                "action_speed == 1", "Storm_Sex_Anal_Spunk_Heading_Over",
                 "True", "images/StormSex/Storm_Sex_Spunk_Anal_Over.png",
                 )
 
@@ -1964,14 +1964,14 @@ image Storm_Sex_Anal_Spunk_Heading_Under:
 
 image Storm_Sex_Anal_Mask:
         #This is the mask image for Kitty's wide open pussy
-        # Used in "Storm_Sex_Speed2" and "Storm_Sex_Speed3"
+        # Used in "Storm_Sex_action_speed2" and "Storm_Sex_action_speed3"
         contains:
             "images/StormSex/Storm_Sex_Mask_Anal.png"
             yoffset 3
 
-# Start Storm Sex Pose Speed 0 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Storm Sex Pose action_speed 0 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Storm_Sex_Anal_Speed0:
+image Storm_Sex_Anal_action_speed0:
     # Pose for Storm's Sex Pose in which she is fucking at speed 0 (static)
     contains:
             #Storm's underlying body
@@ -2023,7 +2023,7 @@ image Storm_Sex_Anal_Speed0:
                 pause 0.8
                 ease 2 ypos -235 #-180
                 repeat
-# End main animation for Sex Pose Anal Speed 0
+# End main animation for Sex Pose Anal action_speed 0
 
 image Storm_Sex_Anal_Zero_Anim0:
     contains:
@@ -2056,12 +2056,12 @@ image Storm_Sex_Anal_Zero_Anim0:
                 ease 2 ypos 95 #-10
                 repeat
 
-# End Storm Sex Pose Speed 0 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Storm Sex Pose action_speed 0 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# Start Storm Sex Pose Speed 1 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Storm Sex Pose action_speed 1 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Storm_Sex_Anal_Speed1:
+image Storm_Sex_Anal_action_speed1:
     # Pose for Storm's Sex Pose in which she is fucking at speed 1 (heading)
     contains:
             #Storm's underlying body
@@ -2111,11 +2111,11 @@ image Storm_Sex_Anal_Speed1:
                 pause 0.8
                 ease 2 ypos -230 #-180
                 repeat
-# End main animation for Sex Pose Anal Speed 1
+# End main animation for Sex Pose Anal action_speed 1
 
 
 image Storm_Sex_Anal_Zero_Anim1:
-        #this is Storm's sex animation, Speed 1 Anal
+        #this is Storm's sex animation, action_speed 1 Anal
         contains:
             subpixel True
             "Storm_Sex_Zero_Cock"
@@ -2130,12 +2130,12 @@ image Storm_Sex_Anal_Zero_Anim1:
                 ease 2 ypos 90 #-10
                 repeat
 
-# End Storm Sex Pose Speed 1 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Storm Sex Pose action_speed 1 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# Start Storm Sex Pose Speed 2 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Storm Sex Pose action_speed 2 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Storm_Sex_Anal_Speed2:
+image Storm_Sex_Anal_action_speed2:
     # Pose for Storm's Sex Pose in which she is doing anal at speed 2
     contains:
             #Storm's underlying body
@@ -2177,11 +2177,11 @@ image Storm_Sex_Anal_Speed2:
 #    contains:
 #            #Zero's cock in the sex pose
 #            AlphaMask("Storm_Sex_Fucking_Zero_Anim2", "Storm_Sex_Fucking_Mask")
-# End main animation for Sex Pose Fucking Speed 2
+# End main animation for Sex Pose Fucking action_speed 2
 
 
 image Storm_Sex_Anal_Zero_Anim2:
-        #this is Storm's sex animation, Speed 2 Fucking
+        #this is Storm's sex animation, action_speed 2 Fucking
         contains:
             subpixel True
             "Storm_Sex_Zero_Cock"
@@ -2196,12 +2196,12 @@ image Storm_Sex_Anal_Zero_Anim2:
                 ease 2 ypos -10
                 repeat
 
-# End Storm Sex Pose Speed 2 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Storm Sex Pose action_speed 2 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# Start Storm Sex Pose Speed 3 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Storm Sex Pose action_speed 3 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Storm_Sex_Anal_Speed3:
+image Storm_Sex_Anal_action_speed3:
     # Pose for Storm's Sex Pose in which she is Anal at speed 3
     contains:
             #Storm's underlying body
@@ -2239,11 +2239,11 @@ image Storm_Sex_Anal_Speed3:
                 pause 0.25
                 ease 0.75 ypos -100
                 repeat
-# End main animation for Sex Pose Fucking Speed 3
+# End main animation for Sex Pose Fucking action_speed 3
 
 
 image Storm_Sex_Anal_Zero_Anim3:
-        #this is Storm's sex animation, Speed3 Anal
+        #this is Storm's sex animation, action_speed3 Anal
         contains:
             subpixel True
             "Storm_Sex_Zero_Cock"
@@ -2257,15 +2257,15 @@ image Storm_Sex_Anal_Zero_Anim3:
                 ease 0.75 ypos -40
                 repeat
 
-# End Storm Sex Pose Speed 3 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Storm Sex Pose action_speed 3 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
 
 
 
-# Start Storm Sex Pose Speed 1 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Storm Sex Pose action_speed 1 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Storm_Sex_Hotdog_Speed1:
+image Storm_Sex_Hotdog_action_speed1:
     # Pose for Storm's Sex Pose in which she is fucking at speed 0 (static)
     contains:
             #Storm's underlying body
@@ -2330,14 +2330,14 @@ image Storm_Sex_Hotdog_Speed1:
                 ease 2 ypos -160 #-130
                 repeat
 
-# End main animation for Sex Pose Hotdog Speed 1
+# End main animation for Sex Pose Hotdog action_speed 1
 
-# End Storm Sex Pose Speed 1 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Storm Sex Pose action_speed 1 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# Start Storm Sex Pose Speed 2 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Storm Sex Pose action_speed 2 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Storm_Sex_Hotdog_Speed2:
+image Storm_Sex_Hotdog_action_speed2:
     # Pose for Storm's Sex Pose in which she is fucking at speed 0 (static)
     contains:
             #Storm's underlying body
@@ -2401,17 +2401,17 @@ image Storm_Sex_Hotdog_Speed2:
                 ease 1 ypos -160 #-130
                 repeat
 
-# End main animation for Sex Pose Hotdog Speed 2
+# End main animation for Sex Pose Hotdog action_speed 2
 
-# End Storm Sex Pose Speed 2 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-
-
+# End Storm Sex Pose action_speed 2 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
 
-# Start Storm Sex Pose Speed 0 Footjob / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Storm_Sex_FJ_Speed0:
+
+# Start Storm Sex Pose action_speed 0 Footjob / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+
+image Storm_Sex_FJ_action_speed0:
     # Pose for Storm's Sex Pose in which she is fucking at speed 0 (static)
     contains:
             #Storm's underlying body
@@ -2469,14 +2469,14 @@ image Storm_Sex_FJ_Speed0:
                 ease 2 ypos -200 #-130
                 repeat
 
-# End main animation for Sex Pose Footjob Speed 0
+# End main animation for Sex Pose Footjob action_speed 0
 
-# End Storm Sex Pose Speed 0 Footjob / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Storm Sex Pose action_speed 0 Footjob / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# Start Storm Sex Pose Speed 1 Footjob / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Storm Sex Pose action_speed 1 Footjob / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Storm_Sex_FJ_Speed1:
+image Storm_Sex_FJ_action_speed1:
     # Pose for Storm's Sex Pose in which she is fucking at speed 1 (slow)
     contains:
             #Storm's underlying body
@@ -2540,14 +2540,14 @@ image Storm_Sex_FJ_Speed1:
                 ease 2 ypos -200 #-130
                 repeat
 
-# End main animation for Sex Pose Footjob Speed 1
+# End main animation for Sex Pose Footjob action_speed 1
 
-# End Storm Sex Pose Speed 1 Footjob / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Storm Sex Pose action_speed 1 Footjob / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# Start Storm Sex Pose Speed 2 Footjob / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Storm Sex Pose action_speed 2 Footjob / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Storm_Sex_FJ_Speed2:
+image Storm_Sex_FJ_action_speed2:
     # Pose for Storm's Sex Pose in which she is fucking at speed 2 (fast)
     contains:
             #Storm's underlying body
@@ -2611,7 +2611,7 @@ image Storm_Sex_FJ_Speed2:
                 ease 1 ypos -250 #-130
                 repeat
 
-# End main animation for Sex Pose Footjob Speed 2
+# End main animation for Sex Pose Footjob action_speed 2
 
 # End Storm Sex
 
@@ -2706,27 +2706,27 @@ image Storm_HJ_Animation:
     contains:
         ConditionSwitch(
             # backside of the hand
-            "not Speed", Transform("Storm_Hand_Under"),
-            "Speed == 1", At("Storm_Hand_Under", Storm_Hand_1()),
-            "Speed >= 2", At("Storm_Hand_Under", Storm_Hand_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Storm_Hand_Under"),
+            "action_speed == 1", At("Storm_Hand_Under", Storm_Hand_1()),
+            "action_speed >= 2", At("Storm_Hand_Under", Storm_Hand_2()),
+            "action_speed", Null(),
             ),
     contains:
         ConditionSwitch(
             # cock
-            "not Speed", Transform("Zero_Handcock"),
-            "Speed == 1", At("Zero_Handcock", Handcock_1J()),
-            "Speed >= 2", At("Zero_Handcock", Handcock_2J()),
-            "Speed", Null(),
+            "not action_speed", Transform("Zero_Handcock"),
+            "action_speed == 1", At("Zero_Handcock", Handcock_1J()),
+            "action_speed >= 2", At("Zero_Handcock", Handcock_2J()),
+            "action_speed", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(
             # fingers of the hand
-            "not Speed", Transform("Storm_Hand_Over"),
-            "Speed == 1", At("Storm_Hand_Over", Storm_Hand_1()),
-            "Speed >= 2", At("Storm_Hand_Over", Storm_Hand_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Storm_Hand_Over"),
+            "action_speed == 1", At("Storm_Hand_Over", Storm_Hand_1()),
+            "action_speed >= 2", At("Storm_Hand_Over", Storm_Hand_2()),
+            "action_speed", Null(),
             ),
     anchor (0.51, -1.3)
     zoom 0.4#0.6
@@ -2735,7 +2735,7 @@ image Storm_HJ_Animation:
 label Storm_HJ_Reset: # The sequence to the Storm animations from handjob to default
     if not renpy.showing("Storm_HJ_Animation"):
         return
-    $ Speed = 0
+    $ action_speed = 0
     $ StormX.ArmPose = 1
     hide Storm_HJ_Animation with easeoutbottom
     call Storm_Hide
@@ -2766,13 +2766,13 @@ image Storm_BJ_Animation:#BJ_NewTest:                                           
         (858,928),
         (0,0), ConditionSwitch( #-270,-160
             # Storm's hair backside
-            "Speed == 0", "Storm_BJ_Anim0",               #Static
-            "Speed == 1", "Storm_BJ_Anim1",               #Licking
-            "Speed == 2", "Storm_BJ_Anim2",               #Heading
-            "Speed == 3", "Storm_BJ_Anim3",               #Sucking
-            "Speed == 4", "Storm_BJ_Anim4",               #Deepthroat
-            "Speed == 5", "Storm_BJ_Anim5",               #Cumming High
-            "Speed == 6", "Storm_BJ_Anim6",               #Cumming Deep
+            "action_speed == 0", "Storm_BJ_Anim0",               #Static
+            "action_speed == 1", "Storm_BJ_Anim1",               #Licking
+            "action_speed == 2", "Storm_BJ_Anim2",               #Heading
+            "action_speed == 3", "Storm_BJ_Anim3",               #Sucking
+            "action_speed == 4", "Storm_BJ_Anim4",               #Deepthroat
+            "action_speed == 5", "Storm_BJ_Anim5",               #Cumming High
+            "action_speed == 6", "Storm_BJ_Anim6",               #Cumming Deep
             "True", Null(),
             ),
         )
@@ -2814,7 +2814,7 @@ image Storm_BJ_Backdrop1: #delete if other works better. . .
     contains:
             #blanket
             ConditionSwitch(
-                "'blanket' in StormX.RecentActions", "images/KittyBJFace/Kitty_BJFace_Blanket.png",
+                "'blanket' in StormX.recent_history", "images/KittyBJFace/Kitty_BJFace_Blanket.png",
                 "True", Null(),
                 ),
             zoom 2
@@ -2840,7 +2840,7 @@ image Storm_BJ_Head:                                                            
 #            ),
         (0,0), ConditionSwitch(
             # Basic Face layer
-#            "Speed <= 2 or Speed == 5 or not renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
+#            "action_speed <= 2 or action_speed == 5 or not renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
 #                    # If the animation isn't sucking, or if not in BJ pose
 #                    "StormX.Blush", "images/StormBJFace/Storm_BJ_FaceClosed_Blush.png",
 #                    "True", "images/StormBJFace/Storm_BJ_FaceClosed.png",
@@ -2851,7 +2851,7 @@ image Storm_BJ_Head:                                                            
             ),
         (0,0), ConditionSwitch(
             #Mouth
-#            "(Speed == 2 or Speed == 5) and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
+#            "(action_speed == 2 or action_speed == 5) and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
 #                    # If the Heading animation is active
 ##                    "StormX.Blush", "images/StormBJFace/Storm_BJ_FaceClosed_Blush.png",
 ##                    "True", "images/StormBJFace/Storm_BJ_FaceClosed.png"
@@ -2859,15 +2859,15 @@ image Storm_BJ_Head:                                                            
 
 
 #            "True","images/StormBJFace/Storm_BJ_Mouth_Sucking.png", #sucking
-            "Speed and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
                     # If in sucking position
-                    "Speed == 1", "images/StormBJFace/Storm_BJ_Mouth_Tongue.png",  #licking
-                    "(Speed == 2 or Speed == 5)", Null(),                          #heading
-                    "Speed == 3", "images/StormBJFace/Storm_BJ_Mouth_Sucking.png", #sucking
-                    "Speed == 4", "images/StormBJFace/Storm_BJ_Mouth_Sucking.png", #deepthroat
-                    "Speed == 6", "images/StormBJFace/Storm_BJ_Mouth_Sucking.png", #cumming
+                    "action_speed == 1", "images/StormBJFace/Storm_BJ_Mouth_Tongue.png",  #licking
+                    "(action_speed == 2 or action_speed == 5)", Null(),                          #heading
+                    "action_speed == 3", "images/StormBJFace/Storm_BJ_Mouth_Sucking.png", #sucking
+                    "action_speed == 4", "images/StormBJFace/Storm_BJ_Mouth_Sucking.png", #deepthroat
+                    "action_speed == 6", "images/StormBJFace/Storm_BJ_Mouth_Sucking.png", #cumming
                     ),
-            "Speed == 3 and renpy.showing('Storm_TJ_Animation')", "images/StormBJFace/Storm_BJ_Mouth_Tongue.png",
+            "action_speed == 3 and renpy.showing('Storm_TJ_Animation')", "images/StormBJFace/Storm_BJ_Mouth_Tongue.png",
             "StormX.Mouth == 'normal'", "images/StormBJFace/Storm_BJ_Mouth_Smile.png",
             "StormX.Mouth == 'lipbite'", "images/StormBJFace/Storm_BJ_Mouth_Lipbite.png",
             "StormX.Mouth == 'sucking'", "images/StormBJFace/Storm_BJ_Mouth_Tongue.png",
@@ -2882,23 +2882,23 @@ image Storm_BJ_Head:                                                            
             ),
         (428,555), ConditionSwitch(   #(428,605)
             # Heading Mouth
-#            "Speed == 2 and Trigger == 'blow'", At("Storm_BJ_MouthHeading", Storm_BJ_MouthAnim()),  #heading
+#            "action_speed == 2 and primary_action == 'blow'", At("Storm_BJ_MouthHeading", Storm_BJ_MouthAnim()),  #heading
             "not renpy.showing('Storm_BJ_Animation')", Null(),                       #heading
-            "Speed == 2", "Storm_BJ_MouthHeading",#At("Storm_BJ_MouthHeading", Storm_BJ_MouthAnim()),  #heading
-            "Speed == 5", "Storm_BJ_MouthCumHigh",#At("Storm_BJ_MouthHeading", Storm_BJ_MouthAnimC()), #cumming high
+            "action_speed == 2", "Storm_BJ_MouthHeading",#At("Storm_BJ_MouthHeading", Storm_BJ_MouthAnim()),  #heading
+            "action_speed == 5", "Storm_BJ_MouthCumHigh",#At("Storm_BJ_MouthHeading", Storm_BJ_MouthAnimC()), #cumming high
             "True", Null(),
             ),
 
         (0,0), ConditionSwitch(
             #Spunk layer
             "'mouth' not in StormX.Spunk", Null(),
-            "Speed and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Storm_BJ_Animation')", ConditionSwitch(
                     # If in sucking position
-                    "Speed == 1", "images/StormBJFace/Storm_BJ_Spunk_Tongue.png",  #licking
-                    "(Speed == 2 or Speed == 5)", Null(),                          #heading
-                    "Speed == 3", "images/StormBJFace/Storm_BJ_Spunk_SuckingUnder.png", #sucking
-                    "Speed == 4", "images/StormBJFace/Storm_BJ_Spunk_SuckingUnder.png", #deepthroat
-                    "Speed == 6", "images/StormBJFace/Storm_BJ_Spunk_SuckingUnder.png", #cumming
+                    "action_speed == 1", "images/StormBJFace/Storm_BJ_Spunk_Tongue.png",  #licking
+                    "(action_speed == 2 or action_speed == 5)", Null(),                          #heading
+                    "action_speed == 3", "images/StormBJFace/Storm_BJ_Spunk_SuckingUnder.png", #sucking
+                    "action_speed == 4", "images/StormBJFace/Storm_BJ_Spunk_SuckingUnder.png", #deepthroat
+                    "action_speed == 6", "images/StormBJFace/Storm_BJ_Spunk_SuckingUnder.png", #cumming
                     ),
             "StormX.Mouth == 'normal'", "images/StormBJFace/Storm_BJ_Spunk_Smile.png",
 #            "StormX.Mouth == 'lipbite'", "images/StormBJFace/Storm_BJ_Spunk_Kiss.png",
@@ -3047,7 +3047,7 @@ image Storm_BJ_MouthSuckingMask:
 #    contains: #see if this works, if not remove it
 #        ConditionSwitch(
 #            "'mouth' not in StormX.Spunk", Null(),
-#            "Speed != 2 and Speed != 5", Null(),
+#            "action_speed != 2 and action_speed != 5", Null(),
 #            "True", "images/StormBJFace/Storm_BJ_Spunk_SuckingOver.png",
 #            )
 #        zoom 1.4
@@ -3063,13 +3063,13 @@ image Storm_BJ_MaskHeadingComposite:
     LiveComposite(
         (858,928),
         (300,462), ConditionSwitch(
-            "Speed == 2", "Storm_BJ_MouthHeadingComposite",#At("Storm_BJ_MaskHeading", Storm_BJ_MouthAnim()),
-            "Speed == 5", "Storm_BJ_MouthCumHighComposite",#At("Storm_BJ_MaskHeading", Storm_BJ_MouthAnimC()),
+            "action_speed == 2", "Storm_BJ_MouthHeadingComposite",#At("Storm_BJ_MaskHeading", Storm_BJ_MouthAnim()),
+            "action_speed == 5", "Storm_BJ_MouthCumHighComposite",#At("Storm_BJ_MaskHeading", Storm_BJ_MouthAnimC()),
             "True", Null(),
             ),
         (300,462), ConditionSwitch(
-            "Speed == 2 and 'mouth' in StormX.Spunk", "StormHeadingSpunk",#At("Storm_BJ_MaskHeading", Storm_BJ_MouthAnim()),
-            "Speed == 5 and 'mouth' in StormX.Spunk", "StormCumHighSpunk",#At("Storm_BJ_MaskHeading", Storm_BJ_MouthAnimC()),
+            "action_speed == 2 and 'mouth' in StormX.Spunk", "StormHeadingSpunk",#At("Storm_BJ_MaskHeading", Storm_BJ_MouthAnim()),
+            "action_speed == 5 and 'mouth' in StormX.Spunk", "StormCumHighSpunk",#At("Storm_BJ_MaskHeading", Storm_BJ_MouthAnimC()),
             "True", Null(),
             ),
         )
@@ -3183,7 +3183,7 @@ image Storm_BJ_Backdrop:
         contains:
             #blanket
             ConditionSwitch(
-                "'blanket' in StormX.RecentActions", "images/KittyBJFace/Kitty_BJFace_Blanket.png",
+                "'blanket' in StormX.recent_history", "images/KittyBJFace/Kitty_BJFace_Blanket.png",
                 "True", Null(),
                 )
             zoom 1.2
@@ -3659,7 +3659,7 @@ image Storm_BJ_Anim6:
                                                                #BJ Launchers
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-label Storm_BJ_Launch(Line = Trigger):    # The sequence to launch the Storm BJ animations
+label Storm_BJ_Launch(line = primary_action):    # The sequence to launch the Storm BJ animations
     if renpy.showing("Storm_BJ_Animation"):
         return
 
@@ -3668,7 +3668,7 @@ label Storm_BJ_Launch(Line = Trigger):    # The sequence to launch the Storm BJ 
             hide Storm_TJ_Animation
     else:
             call Storm_Hide
-            if Line == "L" or Line == "cum":
+            if line == "L" or line == "cum":
                 show Storm_Sprite at sprite_location(StageCenter) zorder StormX.Layer:
                     alpha 1
                     ease 1 zoom 2.5 offset (150,80)
@@ -3680,24 +3680,24 @@ label Storm_BJ_Launch(Line = Trigger):    # The sequence to launch the Storm BJ 
                 with dissolve
             hide Storm_Sprite
     #". . ."
-    $ Speed = 0
+    $ action_speed = 0
 
-    if Line != "cum":
-        $ Trigger = "blow"
+    if line != "cum":
+        $ primary_action = "blow"
 
     show Storm_BJ_Animation zorder 150:
         pos (630,650) #(645,510)
-    if Taboo and Line == "L": # Storm gets started. . .
+    if Taboo and line == "L": # Storm gets started. . .
             if len(Present) >= 2:
                 if Present[0] != StormX:
-                        "[StormX.Name] looks back at [Present[0].Name] to see if she's watching."
+                        "[StormX.name] looks back at [Present[0].name] to see if she's watching."
                 elif Present[1] != StormX:
-                        "[StormX.Name] looks back at [Present[1].Name] to see if she's watching."
+                        "[StormX.name] looks back at [Present[1].name] to see if she's watching."
             else:
-                        "[StormX.Name] looks around to see if anyone can see her."
+                        "[StormX.name] looks around to see if anyone can see her."
             "She then bends down and puts your cock to her mouth."
-    elif Line == "L":
-            "[StormX.Name] smoothly bends down and places your cock against her cheek."
+    elif line == "L":
+            "[StormX.name] smoothly bends down and places your cock against her cheek."
 
     return
 
@@ -3706,7 +3706,7 @@ label Storm_BJ_Reset: # The sequence to the Storm animations from BJ to default
         return
 #    hide Storm_BJ_Animation
     call Storm_Hide
-    $ Speed = 0
+    $ action_speed = 0
 
     show Storm_Sprite at sprite_location(StageCenter) zorder StormX.Layer:
         alpha 1
@@ -3737,11 +3737,11 @@ image Storm_TJ_Animation:
                 ConditionSwitch(
                     # Storm's upper body
                     "not Player.Sprite","Storm_TJ_0",#Static
-                    "Speed == 1", "Storm_TJ_1",#slow
-                    "Speed == 3", "Storm_TJ_3",#cumming low
-                    "Speed == 4", "Storm_TJ_4",#cumming high
-                    "Speed == 5", "Storm_TJ_5",#cumming low
-                    "Speed >= 2", "Storm_TJ_2",#fast
+                    "action_speed == 1", "Storm_TJ_1",#slow
+                    "action_speed == 3", "Storm_TJ_3",#cumming low
+                    "action_speed == 4", "Storm_TJ_4",#cumming high
+                    "action_speed == 5", "Storm_TJ_5",#cumming low
+                    "action_speed >= 2", "Storm_TJ_2",#fast
                     "True",       "Storm_TJ_0",#Static
                     )
             zoom .8 #.7
@@ -4913,20 +4913,20 @@ image Storm_TJ_5:
 
 # Storm's TJ animations end / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-label Storm_TJ_Launch(Line = Trigger):    # The sequence to launch the Storm Titfuck animations
+label Storm_TJ_Launch(line = primary_action):    # The sequence to launch the Storm Titfuck animations
     if renpy.showing("Storm_TJ_Animation"):
         return
 
-#    if Line == "L": # Storm gets started. . .
+#    if line == "L": # Storm gets started. . .
 #            if Taboo:
 #                if len(Present) >= 2:
 #                    if Present[0] != StormX:
-#                            "[StormX.Name] looks back at [Present[0].Name] to see if she's watching."
+#                            "[StormX.name] looks back at [Present[0].name] to see if she's watching."
 #                    elif Present[1] != StormX:
-#                            "[StormX.Name] looks back at [Present[1].Name] to see if she's watching."
+#                            "[StormX.name] looks back at [Present[1].name] to see if she's watching."
 #                else:
-#                            "[StormX.Name] casually glances around to see if anyone can see her."
-#            "[StormX.Name] bends over and places your cock between her breasts."
+#                            "[StormX.name] casually glances around to see if anyone can see her."
+#            "[StormX.name] bends over and places your cock between her breasts."
 
 #    if StormX.Chest and StormX.Over:
 #        "She throws off her [StormX.Over] and her [StormX.Chest]."
@@ -4955,9 +4955,9 @@ label Storm_TJ_Launch(Line = Trigger):    # The sequence to launch the Storm Tit
 #    if StormX.Over == "towel" or StormX.Chest == "corset": #pulls top down because these tops are incompatible with TJ.
 #        $ StormX.Uptop = 1
 
-    $ Speed = 0
-    if Line != "cum":
-        $ Trigger = "titjob"
+    $ action_speed = 0
+    if line != "cum":
+        $ primary_action = "titjob"
     show Storm_TJ_Animation zorder 150:
         pos (1000,1050)#(1000,1000)#(700,520)
     $ Player.Sprite = 1
@@ -4967,9 +4967,9 @@ label Storm_TJ_Launch(Line = Trigger):    # The sequence to launch the Storm Tit
 
 
 
-label Storm_Middle_Launch(T = Trigger,Set=1):
+label Storm_Middle_Launch(T = primary_action,Set=1):
     call Storm_Hide
-    $ Trigger = T
+    $ primary_action = T
     $ StormX.Pose = "mid" if Set else StormX.Pose
     show Storm_Sprite at sprite_location(StormX.sprite_location) zorder StormX.Layer:
 #        ease 0.5 offset (-100,-200) zoom 2

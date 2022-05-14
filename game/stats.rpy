@@ -58,39 +58,39 @@ screen StatHolder10(Value, Color, XPOS):
 # End Stat-ups popups / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 # Start Harem stat boost  / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-label HaremStatup(Girl=0,Check=1000,Value=0,Greater=0,BOA=[],BOB=[]): #rkeljsv
+label Haremchange_stat(Girl=0,Check=1000,Value=0,Greater=0,GirlsA=[],GirlsB=[]): #rkeljsv
         # This cycles through every Harem member and applies a like-up to each one.
         # if Girl == "All", it cycles all of them.
-        # call HaremStatup(LauraX,700,-5)
+        # call Haremchange_stat(LauraX,700,-5)
         if "Historia" in Player.Traits:
                 return
         if Girl == "All" or Girl == 0:
-                $ BOA = Player.Harem[:]
-        elif Girl in TotalGirls:
-                $ BOA = [Girl]
+                $ GirlsA = Player.Harem[:]
+        elif Girl in all_Girls:
+                $ GirlsA = [Girl]
         else:
                 return
-        while BOA:
+        while GirlsA:
                 #loops entire harem is "all," else just loops the one girl through.
-                $ BOB = Player.Harem[:]
-                if BOA[0] in BOB:
+                $ GirlsB = Player.Harem[:]
+                if GirlsA[0] in GirlsB:
                     # remove the girl being checked from the potential matches
-                    $ BOB.remove(BOA[0])
-                while BOB:
+                    $ GirlsB.remove(GirlsA[0])
+                while GirlsB:
                     # If Girl likes the Harem Member below the Check value, apply Value to it.
-                    $ BOA[0].GLG(BOB[0],Check,Value,1)
-                    $ BOB.remove(BOB[0])
-                $ BOA.remove(BOA[0])
+                    $ GirlsA[0].GLG(GirlsB[0],Check,Value,1)
+                    $ GirlsB.remove(GirlsB[0])
+                $ GirlsA.remove(GirlsA[0])
         return
 
 
 # Start Room Stat Booster / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-label RoomStatboost(Type=0,Check=0,Amount=0,BO=[]):
+label RoomStatboost(Type=0,Check=0,Amount=0,Girls=[]):
         # raises/lowers stats of all girls in the room by a fixed amount
-        # ie call RoomStatboost("Love",80,2)
-        $ BO = TotalGirls[:]
-        while BO:
-            if BO[0].Loc == bg_current or BO[0] in Nearby:
-                    $ BO[0].Statup(Type, Check, Amount)
-            $ BO.remove(BO[0])
+        # ie call RoomStatboost("love",80,2)
+        $ Girls = all_Girls[:]
+        while Girls:
+            if Girls[0].Loc == bg_current or Girls[0] in Nearby:
+                    $ Girls[0].change_stat(Type, Check, Amount)
+            $ Girls.remove(Girls[0])
         return

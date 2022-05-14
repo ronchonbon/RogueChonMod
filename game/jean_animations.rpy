@@ -1,4 +1,4 @@
-﻿# Basic character Sprites
+﻿# Basic Girl Sprites
 
 image Jean_Sprite:
     LiveComposite(
@@ -331,131 +331,131 @@ image Jean_Sprite:
 #            "True", Null(),
 #            ),
         (0,0), ConditionSwitch(
-            #UI tool for When Jean is masturbating using Trigger3 actions
-            "Trigger == 'lesbian' or not Trigger3 or Ch_Focus != JeanX", Null(),
+            #UI tool for When Jean is masturbating using girl_offhand_action actions
+            "primary_action == 'lesbian' or not girl_offhand_action or focused_Girl != JeanX", Null(),
 
             #this is not a lesbian thing, and a trigger is set, and Jean is the primary. . .
-            "Trigger3 == 'fondle pussy'", "GirlGropePussy_JeanSelf",
-            "Trigger3 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts'", "GirlGropeLeftBreast_Jean",
+            "girl_offhand_action == 'fondle pussy'", "GirlGropePussy_JeanSelf",
+            "girl_offhand_action == 'fondle breasts'", ConditionSwitch(
+                    "offhand_action == 'fondle breasts' or offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Jean",
                         #When zero is working the right breast, fondle left
-                    "Trigger == 'fondle breasts' or Trigger == 'suck breasts'", "GirlGropeRightBreast_Jean",
+                    "primary_action == 'fondle breasts' or primary_action == 'suck breasts'", "GirlGropeRightBreast_Jean",
                         #When zero is working the left breast, fondle right
                     "True", "GirlGropeBothBreast_Jean",
                         #else, fondle both
                     ),
-            "Trigger3 == 'vibrator breasts'", "VibratorRightBreast_Jean",
-            "Trigger3 == 'vibrator pussy'", "VibratorPussy_Jean",
-            "Trigger3 == 'vibrator pussy insert'", "VibratorPussy_Jean",
-            "Trigger3 == 'vibrator anal'", "VibratorAnal_Jean",
-            "Trigger3 == 'vibrator anal insert'", "VibratorPussy_Jean",
+            "girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast_Jean",
+            "girl_offhand_action == 'vibrator pussy'", "VibratorPussy_Jean",
+            "girl_offhand_action == 'vibrator pussy insert'", "VibratorPussy_Jean",
+            "girl_offhand_action == 'vibrator anal'", "VibratorAnal_Jean",
+            "girl_offhand_action == 'vibrator anal insert'", "VibratorPussy_Jean",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger5(Threesome masutrbation) actions
-            "not Trigger5 or Trigger4 != 'masturbation' or Ch_Focus == JeanX", Null(),
+            #UI tool for Partner_offhand_action(Threesome masutrbation) actions
+            "not Partner_offhand_action or Partner_primary_action != 'masturbation' or focused_Girl == JeanX", Null(),
 
             #Jean is not primary, and T4 is masturbation, and a T5 is selected
-            "Trigger5 == 'fondle pussy' and Trigger != 'sex' and JeanX.Lust >= 70", "GirlFingerPussy_Jean",
-            "Trigger5 == 'fondle pussy'", "GirlGropePussy_Jean",
-            "Trigger5 == 'fondle breasts'", "GirlGropeRightBreast_Jean",
-            "Trigger5 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger5 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger5 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger5 == 'vibrator anal'", "VibratorAnal",
-            "Trigger5 == 'vibrator anal insert'", "VibratorPussy",
+            "Partner_offhand_action == 'fondle pussy' and primary_action != 'sex' and JeanX.lust >= 70", "GirlFingerPussy_Jean",
+            "Partner_offhand_action == 'fondle pussy'", "GirlGropePussy_Jean",
+            "Partner_offhand_action == 'fondle breasts'", "GirlGropeRightBreast_Jean",
+            "Partner_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "Partner_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "Partner_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "Partner_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "Partner_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger1(primary) actions
+            #UI tool for primary_action1(primary) actions
             #Jean is primary and a sex trigger is active
-            "not Trigger or Ch_Focus != JeanX", Null(),
-            "Trigger == 'vibrator breasts'", "VibratorLeftBreast_Jean",
-            "Trigger == 'fondle thighs'", "GropeThigh_Jean",
-            "Trigger == 'fondle breasts'", "GropeLeftBreast_Jean",
-            "Trigger == 'suck breasts'", "LickRightBreast_Jean",
-            "Trigger == 'fondle pussy' and Speed == 2", "FingerPussy_Jean",
-            "Trigger == 'fondle pussy'", "GropePussy_Jean",
-            "Trigger == 'lick pussy'", "Lickpussy_Jean",
-            "Trigger == 'vibrator pussy'", "VibratorPussy_Jean",
-            "Trigger == 'vibrator pussy insert'", "VibratorPussy_Jean",
-            "Trigger == 'vibrator anal'", "VibratorAnal_Jean",
-            "Trigger == 'vibrator anal insert'", "VibratorPussy_Jean",
+            "not primary_action or focused_Girl != JeanX", Null(),
+            "primary_action == 'vibrator breasts'", "VibratorLeftBreast_Jean",
+            "primary_action == 'fondle thighs'", "GropeThigh_Jean",
+            "primary_action == 'fondle breasts'", "GropeLeftBreast_Jean",
+            "primary_action == 'suck breasts'", "LickRightBreast_Jean",
+            "primary_action == 'fondle pussy' and action_speed == 2", "FingerPussy_Jean",
+            "primary_action == 'fondle pussy'", "GropePussy_Jean",
+            "primary_action == 'lick pussy'", "Lickpussy_Jean",
+            "primary_action == 'vibrator pussy'", "VibratorPussy_Jean",
+            "primary_action == 'vibrator pussy insert'", "VibratorPussy_Jean",
+            "primary_action == 'vibrator anal'", "VibratorAnal_Jean",
+            "primary_action == 'vibrator anal insert'", "VibratorPussy_Jean",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger2(secondary) actions
-            "not Trigger2 or Ch_Focus != JeanX", Null(),
+            #UI tool for offhand_action(secondary) actions
+            "not offhand_action or focused_Girl != JeanX", Null(),
 
             #Jean is primary and an offhand trigger is active
-            "Trigger2 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger2 == 'fondle breasts' and Trigger == 'suck breasts'", "GropeLeftBreast_Jean",
+            "offhand_action == 'fondle breasts'", ConditionSwitch(
+                    "offhand_action == 'fondle breasts' and primary_action == 'suck breasts'", "GropeLeftBreast_Jean",
                         #When zero is sucking on the right breast, fondle left
                     "True", "GropeRightBreast_Jean",
                         #else, fondle right
                     ),
-            "Trigger2 == 'vibrator breasts' and Trigger == 'suck breasts'", "VibratorLeftBreast_Jean",
+            "offhand_action == 'vibrator breasts' and primary_action == 'suck breasts'", "VibratorLeftBreast_Jean",
                 #When sucking right breast, vibrator left
-            "Trigger2 == Trigger", Null(),
+            "offhand_action == primary_action", Null(),
                 #When both triggers are the same, do nothing
-            "Trigger2 == 'suck breasts'", "LickLeftBreast_Jean",
-            "Trigger2 == 'fondle pussy'", "GropePussy_Jean",
-            "Trigger2 == 'lick pussy'", "Lickpussy_Jean",
-            "Trigger2 == 'vibrator breasts'", "VibratorRightBreast_Jean",
-            "Trigger2 == 'vibrator pussy'", "VibratorPussy_Jean",
-            "Trigger2 == 'vibrator pussy insert'", "VibratorPussy_Jean",
-            "Trigger2 == 'vibrator anal'", "VibratorAnal_Jean",
-            "Trigger2 == 'vibrator anal insert'", "VibratorPussy_Jean",
+            "offhand_action == 'suck breasts'", "LickLeftBreast_Jean",
+            "offhand_action == 'fondle pussy'", "GropePussy_Jean",
+            "offhand_action == 'lick pussy'", "Lickpussy_Jean",
+            "offhand_action == 'vibrator breasts'", "VibratorRightBreast_Jean",
+            "offhand_action == 'vibrator pussy'", "VibratorPussy_Jean",
+            "offhand_action == 'vibrator pussy insert'", "VibratorPussy_Jean",
+            "offhand_action == 'vibrator anal'", "VibratorAnal_Jean",
+            "offhand_action == 'vibrator anal insert'", "VibratorPussy_Jean",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger4(Threesome) actions (ie Rogue's hand on her)
-            "not Trigger4 or Ch_Focus != JeanX", Null(),
+            #UI tool for Partner_primary_action(Threesome) actions (ie Rogue's hand on her)
+            "not Partner_primary_action or focused_Girl != JeanX", Null(),
 
             # There is a threesome trigger set and Jean is the target of it
-            "Trigger4 == 'fondle pussy' and Trigger != 'sex' and JeanX.Lust >= 70", "GirlFingerPussy_Jean",
-            "Trigger4 == 'fondle pussy'", "GirlGropePussy_Jean",
-            "Trigger4 == 'lick pussy'", "Lickpussy_Jean",
-            "Trigger4 == 'suck breasts' and (Trigger2 != 'suck breasts' or Trigger == 'suck breasts')", "LickLeftBreast_Jean",
-            "Trigger4 == 'suck breasts'", "LickRightBreast_Jean",
-            "Trigger4 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger == 'fondle breasts' or Trigger == 'suck breasts'", "GirlGropeLeftBreast_Jean", #When zero is working the right breast, fondle left
-#                    "Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts'", "GirlGropeRightBreast_Jean",  #When zero is working the left breast, fondle right
-#                    "Trigger3 == 'fondle breasts' or Trigger3 == 'suck breasts'", "GirlGropeRightBreast_Jean", #When zero is working the left breast, fondle right
+            "Partner_primary_action == 'fondle pussy' and primary_action != 'sex' and JeanX.lust >= 70", "GirlFingerPussy_Jean",
+            "Partner_primary_action == 'fondle pussy'", "GirlGropePussy_Jean",
+            "Partner_primary_action == 'lick pussy'", "Lickpussy_Jean",
+            "Partner_primary_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Jean",
+            "Partner_primary_action == 'suck breasts'", "LickRightBreast_Jean",
+            "Partner_primary_action == 'fondle breasts'", ConditionSwitch(
+                    "primary_action == 'fondle breasts' or primary_action == 'suck breasts'", "GirlGropeLeftBreast_Jean", #When zero is working the right breast, fondle left
+#                    "offhand_action == 'fondle breasts' or offhand_action == 'suck breasts'", "GirlGropeRightBreast_Jean",  #When zero is working the left breast, fondle right
+#                    "girl_offhand_action == 'fondle breasts' or girl_offhand_action == 'suck breasts'", "GirlGropeRightBreast_Jean", #When zero is working the left breast, fondle right
                     "True", "GirlGropeRightBreast_Jean",#else, fondle right
                     ),
-            "Trigger4 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger4 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger4 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger4 == 'vibrator anal'", "VibratorAnal",
-            "Trigger4 == 'vibrator anal insert'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator breasts'", "VibratorRightBreast",
+            "Partner_primary_action == 'vibrator pussy'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator pussy insert'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator anal'", "VibratorAnal",
+            "Partner_primary_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger3(lesbian) actions (ie Rogue's hand on her when Jean is secondary)
-            "Trigger != 'lesbian' or Ch_Focus == JeanX or not Trigger3", Null(),
+            #UI tool for girl_offhand_action(lesbian) actions (ie Rogue's hand on her when Jean is secondary)
+            "primary_action != 'lesbian' or focused_Girl == JeanX or not girl_offhand_action", Null(),
 
-            # If there is a Trigger3 and Jean is not the focus
-            "Trigger3 == 'fondle pussy' and Trigger != 'sex' and JeanX.Lust >= 70", "GirlFingerPussy_Jean",
-            "Trigger3 == 'fondle pussy'", "GirlGropePussy_Jean",
-            "Trigger3 == 'lick pussy'", "Lickpussy_Jean",
-            "Trigger3 == 'suck breasts' and (Trigger2 != 'suck breasts' or Trigger == 'suck breasts')", "LickLeftBreast_Jean",
-            "Trigger3 == 'suck breasts'", "LickRightBreast_Jean",
-            "Trigger3 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger == 'fondle breasts' or Trigger == 'suck breasts'", "GirlGropeLeftBreast_Jean",
+            # If there is a girl_offhand_action and Jean is not the focus
+            "girl_offhand_action == 'fondle pussy' and primary_action != 'sex' and JeanX.lust >= 70", "GirlFingerPussy_Jean",
+            "girl_offhand_action == 'fondle pussy'", "GirlGropePussy_Jean",
+            "girl_offhand_action == 'lick pussy'", "Lickpussy_Jean",
+            "girl_offhand_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Jean",
+            "girl_offhand_action == 'suck breasts'", "LickRightBreast_Jean",
+            "girl_offhand_action == 'fondle breasts'", ConditionSwitch(
+                    "primary_action == 'fondle breasts' or primary_action == 'suck breasts'", "GirlGropeLeftBreast_Jean",
                         #When zero is working the right breast, fondle left
-                    "Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts'", "GirlGropeRightBreast_Jean",
+                    "offhand_action == 'fondle breasts' or offhand_action == 'suck breasts'", "GirlGropeRightBreast_Jean",
                         #When zero is working the left breast, fondle right
-                    "Trigger3 == 'fondle breasts' or Trigger3 == 'suck breasts'", "GirlGropeLeftBreast_Jean",
+                    "girl_offhand_action == 'fondle breasts' or girl_offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Jean",
                         #When zero is working the right breast, fondle left
                     "True", "GirlGropeRightBreast_Jean",
                         #else, fondle right
                     ),
-            "Trigger3 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger3 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger3 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger3 == 'vibrator anal'", "VibratorAnal",
-            "Trigger3 == 'vibrator anal insert'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "girl_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "girl_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         )
@@ -518,11 +518,11 @@ image Jean_Sprite_Head:
                 ),
         (0,0), ConditionSwitch(#chin spunk
             "'chin' not in JeanX.Spunk", Null(),
-            "renpy.showing('Jean_BJ_Animation') and Speed >= 2", Null(),
+            "renpy.showing('Jean_BJ_Animation') and action_speed >= 2", Null(),
             "True", "images/JeanSprite/Jean_Sprite_Spunk_Chin.png",
             ),
 #        (0,0), ConditionSwitch(#Mouths
-#            "renpy.showing('Jean_BJ_Animation')", "images/JeanSprite/Jean_Sprite_Mouth_SuckingBJ.png", #and Speed >= 2
+#            "renpy.showing('Jean_BJ_Animation')", "images/JeanSprite/Jean_Sprite_Mouth_SuckingBJ.png", #and action_speed >= 2
 #            "JeanX.Mouth == 'normal'", "images/JeanSprite/Jean_Sprite_Mouth_Normal.png",
 #            "JeanX.Mouth == 'lipbite'", "images/JeanSprite/Jean_Sprite_Mouth_Lipbite.png",
 #            "JeanX.Mouth == 'sucking'", "images/JeanSprite/Jean_Sprite_Mouth_Sucking.png",
@@ -692,14 +692,14 @@ image Jean_Doggy_Animation: #nee Jean_Doggy
             #Shows different upper body motion depending on events
             "not Player.Sprite", "Jean_Doggy_Body",
             "Player.Cock == 'anal'", ConditionSwitch(
-                    "Speed > 2", "Jean_Doggy_Fuck2_Top",
-                    "Speed > 1", "Jean_Doggy_Fuck_Top",
-                    "Speed", "Jean_Doggy_Anal_Head_Top",
+                    "action_speed > 2", "Jean_Doggy_Fuck2_Top",
+                    "action_speed > 1", "Jean_Doggy_Fuck_Top",
+                    "action_speed", "Jean_Doggy_Anal_Head_Top",
                     "True", "Jean_Doggy_Body",
                     ),
             "Player.Cock == 'in'", ConditionSwitch(
-                    "Speed > 2", "Jean_Doggy_Fuck2_Top",
-                    "Speed > 1", "Jean_Doggy_Fuck_Top",
+                    "action_speed > 2", "Jean_Doggy_Fuck2_Top",
+                    "action_speed > 1", "Jean_Doggy_Fuck_Top",
                     "True", "Jean_Doggy_Body",
                     ),
             "True", "Jean_Doggy_Body",
@@ -708,14 +708,14 @@ image Jean_Doggy_Animation: #nee Jean_Doggy
             #Shows different lower body motion depending on events
             "not Player.Sprite", "Jean_Doggy_Ass",
             "Player.Cock == 'anal'", ConditionSwitch(
-                    "Speed > 2", "Jean_Doggy_Fuck2_Ass",
-                    "Speed > 1", "Jean_Doggy_Fuck_Ass",
-                    "Speed", "Jean_Doggy_Anal_Head_Ass",
+                    "action_speed > 2", "Jean_Doggy_Fuck2_Ass",
+                    "action_speed > 1", "Jean_Doggy_Fuck_Ass",
+                    "action_speed", "Jean_Doggy_Anal_Head_Ass",
                     "True", "Jean_Doggy_Ass",
                     ),
             "Player.Cock == 'in'", ConditionSwitch(
-                    "Speed > 2", "Jean_Doggy_Fuck2_Ass",
-                    "Speed > 1", "Jean_Doggy_Fuck_Ass",
+                    "action_speed > 2", "Jean_Doggy_Fuck2_Ass",
+                    "action_speed > 1", "Jean_Doggy_Fuck_Ass",
                     "True", "Jean_Doggy_Ass",
                     ),
             "True", "Jean_Doggy_Ass",
@@ -723,8 +723,8 @@ image Jean_Doggy_Animation: #nee Jean_Doggy
         (0,0), ConditionSwitch(
             #Shows different lower body motion depending on events
             "Player.Cock == 'foot'", ConditionSwitch(
-                    "Speed > 1", "Jean_Doggy_Feet2",
-                    "Speed", "Jean_Doggy_Feet1",
+                    "action_speed > 1", "Jean_Doggy_Feet2",
+                    "action_speed", "Jean_Doggy_Feet1",
                     "True", "Jean_Doggy_Feet0",
                     ),
             "not Player.Sprite and ShowFeet", "Jean_Doggy_Feet0",
@@ -796,7 +796,7 @@ image Jean_Doggy_Body:
             ),
         (0,0), ConditionSwitch(
             #breast fondling animation
-            "Trigger == 'fondle breasts' or Trigger2 == 'fondle breasts'", "Jean_Doggy_GropeBreast",
+            "primary_action == 'fondle breasts' or offhand_action == 'fondle breasts'", "Jean_Doggy_GropeBreast",
             "True", Null()
             ),
         #(161,-1), "Jean_Doggy_Head",               #Head
@@ -996,16 +996,16 @@ image Jean_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Pussy Composite
             "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
-                    "Speed > 2", "Jean_Pussy_Fucking3",#Speed 3
-                    "Speed > 1", "Jean_Pussy_Fucking2",#Speed 2
-                    "Speed", "Jean_Pussy_Heading",      #Speed 1
-                    "True", "Jean_Pussy_Static",              #Speed 0
+                    "action_speed > 2", "Jean_Pussy_Fucking3",#action_speed 3
+                    "action_speed > 1", "Jean_Pussy_Fucking2",#action_speed 2
+                    "action_speed", "Jean_Pussy_Heading",      #action_speed 1
+                    "True", "Jean_Pussy_Static",              #action_speed 0
                     ),
-            "Trigger == 'lick pussy'", "images/JeanDoggy/Jean_Doggy_Pussy_Open.png",
+            "primary_action == 'lick pussy'", "images/JeanDoggy/Jean_Doggy_Pussy_Open.png",
             "JeanX.Legs and not JeanX.Upskirt", "images/JeanDoggy/Jean_Doggy_Pussy_Closed.png",
             "JeanX.Panties and not JeanX.PantiesDown", "images/JeanDoggy/Jean_Doggy_Pussy_Closed.png",
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'", "Jean_Pussy_Fingering",
-            "Trigger == 'dildo pussy'", "Jean_Pussy_Fucking2",
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'", "Jean_Pussy_Fingering",
+            "primary_action == 'dildo pussy'", "Jean_Pussy_Fucking2",
             "True", "images/JeanDoggy/Jean_Doggy_Pussy_Closed.png",
             ),
 
@@ -1022,14 +1022,14 @@ image Jean_Doggy_Ass:
             #pubes
             "not JeanX.Pubes", Null(),
             "Player.Sprite and Player.Cock == 'in'", Null(), # "images/JeanDoggy/Jean_Doggy_Pubes_Fucked.png",
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
             "JeanX.Legs == 'pants' and not JeanX.Upskirt", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
-            "JeanX.PantiesDown and Trigger == 'lick pussy'", "images/JeanDoggy/Jean_Doggy_Pubes_Open.png",
+            "JeanX.PantiesDown and primary_action == 'lick pussy'", "images/JeanDoggy/Jean_Doggy_Pubes_Open.png",
             "JeanX.PantiesDown", "images/JeanDoggy/Jean_Doggy_Pubes.png",
             "JeanX.Panties", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
             "JeanX.Hose and JeanX.Hose != 'stockings'", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
-            "Trigger == 'lick pussy'", "images/JeanDoggy/Jean_Doggy_Pubes_Open.png",
+            "primary_action == 'lick pussy'", "images/JeanDoggy/Jean_Doggy_Pubes_Open.png",
             "True", "images/JeanDoggy/Jean_Doggy_Pubes.png",
             ),
         (0,0), ConditionSwitch(
@@ -1044,17 +1044,17 @@ image Jean_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Anus Composite
             "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
-                    "Speed > 2", "Jean_Anal_Fucking2", #Speed 3
-                    "Speed > 1", "Jean_Anal_Fucking",  #Speed 2
-                    "Speed", "Jean_Anal_Heading",      #Speed 1
-                    "True", "Jean_Anal",               #Speed 0
+                    "action_speed > 2", "Jean_Anal_Fucking2", #action_speed 3
+                    "action_speed > 1", "Jean_Anal_Fucking",  #action_speed 2
+                    "action_speed", "Jean_Anal_Heading",      #action_speed 1
+                    "True", "Jean_Anal",               #action_speed 0
                     ),
 #            "Action == 'plug'", "Jean_Anal_Plug",
 #            "Action == 'plug'", "test_case",
             "JeanX.Legs and not JeanX.Upskirt", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
             "JeanX.Panties and not JeanX.PantiesDown", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
-            "Trigger == 'insert ass' or Trigger2 == 'insert ass'", "Jean_Anal_Fingering",
-            "Trigger == 'dildo anal'", "Jean_Anal_Fucking",
+            "primary_action == 'insert ass' or offhand_action == 'insert ass'", "Jean_Anal_Fingering",
+            "primary_action == 'dildo anal'", "Jean_Anal_Fucking",
             "JeanX.Loose", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
             "True", "images/JeanDoggy/Jean_Doggy_Asshole_Tight.png",
             ),
@@ -1071,8 +1071,8 @@ image Jean_Doggy_Ass:
             #Panties if up
             "JeanX.PantiesDown or not JeanX.Panties", Null(),
             "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
-#            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-#            "Trigger == 'dildo pussy'", Null(),
+#            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+#            "primary_action == 'dildo pussy'", Null(),
             "JeanX.Panties == 'green panties' and JeanX.Wet", "images/JeanDoggy/Jean_Doggy_Panties_Green_Wet.png",
             "JeanX.Panties == 'green panties'", "images/JeanDoggy/Jean_Doggy_Panties_Green.png",
             "JeanX.Panties == 'lace panties'", "images/JeanDoggy/Jean_Doggy_Panties_Lace.png",
@@ -1083,8 +1083,8 @@ image Jean_Doggy_Ass:
         (0,0), ConditionSwitch(        #fix // // // // // // fix // // // // // // fix // // // // // // fix // // // // // //
             #full hose/tights
             "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
 #            "JeanX.Panties and JeanX.PantiesDown and JeanX.Hose == 'stockings and garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
             "JeanX.Hose == 'garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_Garter.png",
             "JeanX.Hose == 'stockings and garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_StockingandGarter.png",
@@ -1114,7 +1114,7 @@ image Jean_Doggy_Ass:
                     "True", "images/JeanDoggy/Jean_Doggy_Legs_Shorts.png",
                     ),
             "JeanX.Legs == 'skirt'", ConditionSwitch(
-                    "JeanX.Upskirt and Player.Sprite and Player.Cock == 'anal' and Speed" , "images/JeanDoggy/Jean_Doggy_Legs_Skirt_Up.png",   #Rogue_Doggy_Legs_Skirt_UpAnal.png",
+                    "JeanX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/JeanDoggy/Jean_Doggy_Legs_Skirt_Up.png",   #Rogue_Doggy_Legs_Skirt_UpAnal.png",
                     "JeanX.Upskirt", "images/JeanDoggy/Jean_Doggy_Legs_Skirt_Up.png",
                     "True", "images/JeanDoggy/Jean_Doggy_Legs_Skirt.png",
                     ),
@@ -1134,8 +1134,8 @@ image Jean_Doggy_Ass:
         (0,0), ConditionSwitch(
             #pussy licking animation
             "Player.Sprite and Player.Cock", Null(),
-            "Trigger == 'lick pussy'", "Rogue_Doggy_Lick_Pussy",
-            "Trigger == 'lick ass'", "Rogue_Doggy_Lick_Ass",
+            "primary_action == 'lick pussy'", "Rogue_Doggy_Lick_Pussy",
+            "primary_action == 'lick ass'", "Rogue_Doggy_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -1147,9 +1147,9 @@ image Jean_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Hotdogging Cock w/ alpha
             "not Player.Sprite or Player.Cock != 'out'", Null(),
-            #"JeanX.Legs == 'skirt' and JeanX.Upskirt and Speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
+            #"JeanX.Legs == 'skirt' and JeanX.Upskirt and action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
             #"JeanX.Legs == 'skirt' and JeanX.Upskirt", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "Speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             "True", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             ),
 #        (0,0), ConditionSwitch(
@@ -1281,7 +1281,7 @@ image Zero_Jean_Hotdog_Moving:
 #            ),
 
 image Zero_Jean_Doggy_Static:
-    # Sex Speed 0 motions
+    # Sex action_speed 0 motions
     contains:
         subpixel True
         "Zero_Doggy_Insert"
@@ -1293,7 +1293,7 @@ image Zero_Jean_Doggy_Static:
             repeat
 
 image Zero_Jean_Doggy_Heading:
-    # Sex Speed 1 motions
+    # Sex action_speed 1 motions
     contains:
         subpixel True
         "Zero_Doggy_Insert"
@@ -1305,7 +1305,7 @@ image Zero_Jean_Doggy_Heading:
             repeat
 
 image Zero_Jean_Doggy_Fucking2:
-    # Sex Speed 2 motions
+    # Sex action_speed 2 motions
     contains:
         "Zero_Doggy_Insert"
         pos (169,500)
@@ -1316,7 +1316,7 @@ image Zero_Jean_Doggy_Fucking2:
             repeat
 
 image Zero_Jean_Doggy_Fucking3:
-    # Sex Speed 3 motions
+    # Sex action_speed 3 motions
     contains:
         "Zero_Doggy_Insert"
         pos (169,500)
@@ -1592,7 +1592,7 @@ image Jean_Pussy_Fucking2:
         #Cock
 #        AlphaMask("Zero_Jean_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
         ConditionSwitch(
-            "Trigger == 'dildo pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
+            "primary_action == 'dildo pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
             "True",AlphaMask("Zero_Jean_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
             ),
 
@@ -1813,7 +1813,7 @@ image Jean_Anal_Fucking:
 #        AlphaMask("Zero_Jean_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png")
         ConditionSwitch(
             #full hose/tights
-            "Trigger == 'dildo anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
+            "primary_action == 'dildo anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
             "True", AlphaMask("Zero_Jean_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
             ),
 
@@ -2024,10 +2024,10 @@ image Jean_Doggy_Feet2:
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #Doggy Launch/Reset
-label Jean_Doggy_Launch(Line = Trigger):
+label Jean_Doggy_Launch(line = primary_action):
     if renpy.showing("Jean_Doggy_Animation"):
         return
-    $ Speed = 0
+    $ action_speed = 0
     call Jean_Hide(1)
     show Jean_Doggy_Animation at sprite_location(StageCenter+50) zorder 150
     with dissolve
@@ -2036,7 +2036,7 @@ label Jean_Doggy_Launch(Line = Trigger):
 label Jean_Doggy_Reset:
     if not renpy.showing("Jean_Doggy_Animation"):
         return
-#    $ Trigger = 0               #fix, not sure this is a good idea
+#    $ primary_action = 0               #fix, not sure this is a good idea
     $ JeanX.ArmPose = 2
     $ JeanX.SpriteVer = 0
     hide Jean_Doggy_Animation
@@ -2047,7 +2047,7 @@ label Jean_Doggy_Reset:
                     offset (0,0)
                     anchor (0.6, 0.0)
     with dissolve
-    $ Speed = 0
+    $ action_speed = 0
     return
 
 # End Jean Doggy Animations / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
@@ -2062,31 +2062,31 @@ image Jean_SexSprite:
         (1000,1000),
         (0,0), ConditionSwitch(
                 #Shows different motion depending on events
-                "Trigger == 'lick pussy'", "Jean_Sex_Lick",
+                "primary_action == 'lick pussy'", "Jean_Sex_Lick",
                 "not Player.Sprite", "Jean_Sex_Static",
                 "Player.Cock == 'in'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 3", "Jean_Sex_Fucking_Speed3",
-                        "Speed >= 2", "Jean_Sex_Fucking_Speed2",
-                        "Speed", "Jean_Sex_Fucking_Speed1",
-                        "True", "Jean_Sex_Fucking_Speed0",
+                        "action_speed >= 3", "Jean_Sex_Fucking_action_speed3",
+                        "action_speed >= 2", "Jean_Sex_Fucking_action_speed2",
+                        "action_speed", "Jean_Sex_Fucking_action_speed1",
+                        "True", "Jean_Sex_Fucking_action_speed0",
                         ),
                 "Player.Cock == 'anal'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 3", "Jean_Sex_Anal_Speed3",
-                        "Speed >= 2", "Jean_Sex_Anal_Speed2",
-                        "Speed", "Jean_Sex_Anal_Speed1",
-                        "True", "Jean_Sex_Anal_Speed0",
+                        "action_speed >= 3", "Jean_Sex_Anal_action_speed3",
+                        "action_speed >= 2", "Jean_Sex_Anal_action_speed2",
+                        "action_speed", "Jean_Sex_Anal_action_speed1",
+                        "True", "Jean_Sex_Anal_action_speed0",
                         ),
-                "Player.Sprite and Player.Cock == 'out' and Speed >= 2","Jean_Sex_Hotdog_Speed2",
-                "Player.Sprite and Player.Cock == 'out' and Speed >= 1","Jean_Sex_Hotdog_Speed1",
+                "Player.Sprite and Player.Cock == 'out' and action_speed >= 2","Jean_Sex_Hotdog_action_speed2",
+                "Player.Sprite and Player.Cock == 'out' and action_speed >= 1","Jean_Sex_Hotdog_action_speed1",
 #                "Player.Cock == 'foot'", ConditionSwitch(
 #                        #if the top's down. . .
-#                        "Speed >= 2", "Jean_Sex_FJ_Speed2",
-#                        "Speed", "Jean_Sex_FJ_Speed1",
-#                        "True", "Jean_Sex_FJ_Speed0",
+#                        "action_speed >= 2", "Jean_Sex_FJ_action_speed2",
+#                        "action_speed", "Jean_Sex_FJ_action_speed1",
+#                        "True", "Jean_Sex_FJ_action_speed0",
 #                        ),
-#                "Player.Cock == 'out' and Speed >= 2","Jean_Hotdog_Body_Anim2",
+#                "Player.Cock == 'out' and action_speed >= 2","Jean_Hotdog_Body_Anim2",
                 "True", "Jean_Sex_Static",
                 ),
         )
@@ -2218,14 +2218,14 @@ image Jean_Sex_Torso:
     contains:
         ConditionSwitch(
             #breast licking animation
-#            "(Trigger == 'suck breasts' or Trigger2 == 'suck breasts') and JeanX.Chest and not JeanX.Uptop", "Jean_Sex_Lick_Breasts_High",
-            "Trigger == 'suck breasts' or Trigger2 == 'suck breasts'", "Jean_Sex_Lick_Breasts",
+#            "(primary_action == 'suck breasts' or offhand_action == 'suck breasts') and JeanX.Chest and not JeanX.Uptop", "Jean_Sex_Lick_Breasts_High",
+            "primary_action == 'suck breasts' or offhand_action == 'suck breasts'", "Jean_Sex_Lick_Breasts",
             "True", Null()
             )
     contains:
         ConditionSwitch(
             #breast fondling animation
-            "Trigger == 'fondle breasts' or Trigger2 == 'fondle breasts'", "Jean_Sex_Fondle_Breasts",
+            "primary_action == 'fondle breasts' or offhand_action == 'fondle breasts'", "Jean_Sex_Fondle_Breasts",
             "True", Null()
             )
     zoom 1
@@ -2263,14 +2263,14 @@ image Jean_Sex_Body:
 #    contains:
 #        ConditionSwitch(
 #            #breast licking animation
-#            "(Trigger == 'suck breasts' or Trigger2 == 'suck breasts') and JeanX.Chest and not JeanX.Uptop", "Jean_Sex_Lick_Breasts_High",
-#            "Trigger == 'suck breasts' or Trigger2 == 'suck breasts'", "Jean_Sex_Lick_Breasts",
+#            "(primary_action == 'suck breasts' or offhand_action == 'suck breasts') and JeanX.Chest and not JeanX.Uptop", "Jean_Sex_Lick_Breasts_High",
+#            "primary_action == 'suck breasts' or offhand_action == 'suck breasts'", "Jean_Sex_Lick_Breasts",
 #            "True", Null()
 #            )
 #    contains:
 #        ConditionSwitch(
 #            #breast fondling animation
-#            "Trigger == 'fondle breasts' or Trigger2 == 'fondle breasts'", "Jean_Sex_Fondle_Breasts",
+#            "primary_action == 'fondle breasts' or offhand_action == 'fondle breasts'", "Jean_Sex_Fondle_Breasts",
 #            "True", Null()
 #            )
     contains:
@@ -2442,7 +2442,7 @@ image Jean_Sex_Legs_A:
     contains:
             # body
         ConditionSwitch(
-            "Trigger == 'lick pussy'", "images/JeanSex/Jean_Sex_Legs_Lick.png",
+            "primary_action == 'lick pussy'", "images/JeanSex/Jean_Sex_Legs_Lick.png",
             "True", "images/JeanSex/Jean_Sex_Legs_Anal.png",
             )
     contains:
@@ -2454,14 +2454,14 @@ image Jean_Sex_Legs_A:
     contains:
             # anal spunk
         ConditionSwitch(
-            "'anal' in JeanX.Spunk and not Speed", "images/JeanSex/Jean_Sex_Spunk_Pussy_S.png",
+            "'anal' in JeanX.Spunk and not action_speed", "images/JeanSex/Jean_Sex_Spunk_Pussy_S.png",
             "True", Null(),
             )
     contains:
             # pubes
         ConditionSwitch(
             "not JeanX.Pubes", Null(),
-            "Trigger == 'lick pussy'", "images/JeanSex/Jean_Sex_Pubes_Lick.png",
+            "primary_action == 'lick pussy'", "images/JeanSex/Jean_Sex_Pubes_Lick.png",
             "True", "images/JeanSex/Jean_Sex_Pubes_Anal.png",
             )
     contains:
@@ -2537,7 +2537,7 @@ image Jean_Sex_Legs_A:
             # legs
         ConditionSwitch(
             "JeanX.Legs == 'skirt' and JeanX.Upskirt", "images/JeanSex/Jean_Sex_Legs_Anal_Skirt_Up.png",
-            "JeanX.Legs == 'skirt' and Trigger == 'hotdog'", "images/JeanSex/Jean_Sex_Legs_Anal_Skirt_Up.png",
+            "JeanX.Legs == 'skirt' and primary_action == 'hotdog'", "images/JeanSex/Jean_Sex_Legs_Anal_Skirt_Up.png",
             "JeanX.Legs == 'skirt'", "images/JeanSex/Jean_Sex_Legs_Anal_Skirt.png",
             "JeanX.Upskirt", Null(),
             "JeanX.Legs == 'pants' and JeanX.Wet >=2", "images/JeanSex/Jean_Sex_Legs_Anal_Pants_W.png",
@@ -2583,8 +2583,8 @@ image Jean_Sex_Legs_A:
         ConditionSwitch(
             #pussy licking animation
             "Player.Sprite and Player.Cock", Null(),
-            "Trigger == 'lick pussy'", "Jean_Sex_Lick_Pussy",
-            "Trigger == 'lick ass'", "Jean_Sex_Lick_Ass",
+            "primary_action == 'lick pussy'", "Jean_Sex_Lick_Pussy",
+            "primary_action == 'lick ass'", "Jean_Sex_Lick_Ass",
             "True", Null()
             )
     zoom 1
@@ -2677,7 +2677,7 @@ image Jean_Sex_Static:
                 repeat
 # End main animation for Sex Pose Static
 
-# End Jean Sex Pose Speed Static / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Jean Sex Pose action_speed Static / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
 # Start Jean Sex Pose Lick / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
@@ -2715,13 +2715,13 @@ image Jean_Sex_Lick:
     offset (-500,-400)#(-600,-550)#(-300,-300)
 # End main animation for Sex Pose Lick
 
-# End Jean Sex Pose Speed Lick / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Jean Sex Pose action_speed Lick / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Jean Sex Pose Speed 0 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 0 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Jean Sex Pose Speed 0 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 0 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Jean_Sex_Fucking_Speed0:
+image Jean_Sex_Fucking_action_speed0:
     # Pose for Jean's Sex Pose in which she is fucking at speed 0 (static)
     contains:
             #Zero's cock
@@ -2751,13 +2751,13 @@ image Jean_Sex_Fucking_Speed0:
                 pause 0.2
                 repeat
 
-# End Jean Sex Pose Speed 0 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Jean Sex Pose action_speed 0 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Jean Sex Pose Speed 1 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 1 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Jean Sex Pose Speed 1 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 1 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Jean_Sex_Fucking_Speed1:
+image Jean_Sex_Fucking_action_speed1:
     # Pose for Jean's Sex Pose in which she is fucking at speed 0 (static)
     contains:
             #Zero's cock
@@ -2795,14 +2795,14 @@ image Jean_Sex_Fucking_Speed1:
                 pause 0.2
                 repeat
 
-# End Jean Sex Pose Speed 1 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Jean Sex Pose action_speed 1 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# Start Jean Sex Pose Speed 2 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 2 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Jean Sex Pose Speed 2 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 2 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Jean_Sex_Fucking_Speed2:
+image Jean_Sex_Fucking_action_speed2:
     # Pose for Jean's Sex Pose in which she is fucking at speed 2 (deep)
     contains:
             #Zero's cock
@@ -2842,14 +2842,14 @@ image Jean_Sex_Fucking_Speed2:
                 repeat
 
 
-# End Jean Sex Pose Speed 2 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Jean Sex Pose action_speed 2 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# Start Jean Sex Pose Speed 3 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 3 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Jean Sex Pose Speed 3 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 3 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Jean_Sex_Fucking_Speed3:
+image Jean_Sex_Fucking_action_speed3:
     # Pose for Jean's Sex Pose in which she is fucking at speed 3 (fast)
     contains:
             #Zero's cock
@@ -2888,7 +2888,7 @@ image Jean_Sex_Fucking_Speed3:
                 repeat
 
 
-# End Jean Sex Pose Speed 3 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Jean Sex Pose action_speed 3 Fucking / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
 #Start Animations for Jean's Ass during Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
@@ -2923,14 +2923,14 @@ image Jean_Sex_Anal_Spunk_Heading_Under:
 
 image Jean_Sex_Anal_Mask:
         #This is the mask image for Kitty's wide open pussy
-        # Used in "Jean_Sex_Speed2" and "Jean_Sex_Speed3"
+        # Used in "Jean_Sex_action_speed2" and "Jean_Sex_action_speed3"
         contains:
             "images/JeanSex/Jean_Sex_Mask_Anal.png"
             yoffset 3
 
-# Start Jean Sex Pose Speed 0 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 0 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Jean_Sex_Anal_Speed0:
+image Jean_Sex_Anal_action_speed0:
     # Pose for Jean's Sex Pose in which she is fucking at speed 0 (static)
     contains:
             #Zero's cock
@@ -2960,12 +2960,12 @@ image Jean_Sex_Anal_Speed0:
                 pause 0.2
                 repeat
 
-# End Jean Sex Pose Speed 0 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Jean Sex Pose action_speed 0 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# Start Jean Sex Pose Speed 1 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 1 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Jean_Sex_Anal_Speed1:
+image Jean_Sex_Anal_action_speed1:
     # Pose for Jean's Sex Pose in which she is fucking at speed 1 (heading)
     contains:
             #Zero's cock
@@ -3003,12 +3003,12 @@ image Jean_Sex_Anal_Speed1:
                 pause 0.2
                 repeat
 
-# End Jean Sex Pose Speed 1 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Jean Sex Pose action_speed 1 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# Start Jean Sex Pose Speed 2 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 2 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Jean_Sex_Anal_Speed2:
+image Jean_Sex_Anal_action_speed2:
     # Pose for Jean's Sex Pose in which she is doing anal at speed 2
     contains:
             #Zero's cock
@@ -3045,12 +3045,12 @@ image Jean_Sex_Anal_Speed2:
                 pause 0.2
                 repeat
 
-# End Jean Sex Pose Speed 2 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Jean Sex Pose action_speed 2 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# Start Jean Sex Pose Speed 3 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 3 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Jean_Sex_Anal_Speed3:
+image Jean_Sex_Anal_action_speed3:
     # Pose for Jean's Sex Pose in which she is Anal at speed 3
     contains:
             #Zero's cock
@@ -3091,17 +3091,17 @@ image Jean_Sex_Anal_Speed3:
 #                easein 0.4 ypos -190 #top -180
                 repeat
 
-# End Jean Sex Pose Speed 3 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Jean Sex Pose action_speed 3 Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
 
 
 
-# Start Jean Sex Pose Speed 1 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 1 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-# Start Jean Sex Pose Speed 1 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 1 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Jean_Sex_Hotdog_Speed1:
+image Jean_Sex_Hotdog_action_speed1:
     # Pose for Jean's Sex Pose in which she is doing Hotdog at speed 1
     contains:
             #Jean's Legs
@@ -3146,12 +3146,12 @@ image Jean_Sex_Hotdog_Speed1:
                 pause 0.2
                 repeat
 
-# End Jean Sex Pose Speed 1 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Jean Sex Pose action_speed 1 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# Start Jean Sex Pose Speed 2 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# Start Jean Sex Pose action_speed 2 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-image Jean_Sex_Hotdog_Speed2:
+image Jean_Sex_Hotdog_action_speed2:
     # Pose for Jean's Sex Pose in which she is Hotdog at speed 2
     contains:
             #Jean's Legs
@@ -3192,10 +3192,10 @@ image Jean_Sex_Hotdog_Speed2:
 #                easein 0.4 ypos -180 #top -150
                 repeat
 
-# End Jean Sex Pose Speed 2 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Jean Sex Pose action_speed 2 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
-# End Jean Sex Pose Speed 2 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# End Jean Sex Pose action_speed 2 Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
 
@@ -3214,74 +3214,74 @@ image Jean_BJ_Animation:#BJ_NewTest:                                            
         (858,928),
         (-270,-160), ConditionSwitch( #-270,-160
             # Jean's hair backside
-            "Speed == 0", At("Jean_BJ_HairBack", Jean_BJ_Head_0()),               #Static
-            "Speed == 1", At("Jean_BJ_HairBack", Jean_BJ_Head_1()),               #Licking
-            "Speed == 2", At("Jean_BJ_HairBack", Jean_BJ_Head_2()),               #Heading
-            "Speed == 3", At("Jean_BJ_HairBack", Jean_BJ_Head_3()),               #Sucking
-            "Speed == 4", At("Jean_BJ_HairBack", Jean_BJ_Head_4()),               #Deepthroat
-            "Speed == 5", At("Jean_BJ_HairBack", Jean_BJ_Head_5()),               #Cumming High
-            "Speed == 6", At("Jean_BJ_HairBack", Jean_BJ_Head_6()),               #Cumming Deep
+            "action_speed == 0", At("Jean_BJ_HairBack", Jean_BJ_Head_0()),               #Static
+            "action_speed == 1", At("Jean_BJ_HairBack", Jean_BJ_Head_1()),               #Licking
+            "action_speed == 2", At("Jean_BJ_HairBack", Jean_BJ_Head_2()),               #Heading
+            "action_speed == 3", At("Jean_BJ_HairBack", Jean_BJ_Head_3()),               #Sucking
+            "action_speed == 4", At("Jean_BJ_HairBack", Jean_BJ_Head_4()),               #Deepthroat
+            "action_speed == 5", At("Jean_BJ_HairBack", Jean_BJ_Head_5()),               #Cumming High
+            "action_speed == 6", At("Jean_BJ_HairBack", Jean_BJ_Head_6()),               #Cumming Deep
             "True", Null(),
             ),
         (-20,270), ConditionSwitch(
             # Jean's body, everything below the chin
-            "Speed == 0", At("Jean_BJ_Backdrop", Jean_BJ_Body_0()),           #Static
-            "Speed == 1", At("Jean_BJ_Backdrop", Jean_BJ_Body_1()),           #Licking
-            "Speed == 2", At("Jean_BJ_Backdrop", Jean_BJ_Body_2()),           #Heading
-            "Speed == 3", At("Jean_BJ_Backdrop", Jean_BJ_Body_3()),           #Sucking
-            "Speed == 4", At("Jean_BJ_Backdrop", Jean_BJ_Body_4()),           #Deepthroat
-            "Speed == 5", At("Jean_BJ_Backdrop", Jean_BJ_Body_5()),           #Cumming High
-            "Speed == 6", At("Jean_BJ_Backdrop", Jean_BJ_Body_6()),           #Cumming Deep
+            "action_speed == 0", At("Jean_BJ_Backdrop", Jean_BJ_Body_0()),           #Static
+            "action_speed == 1", At("Jean_BJ_Backdrop", Jean_BJ_Body_1()),           #Licking
+            "action_speed == 2", At("Jean_BJ_Backdrop", Jean_BJ_Body_2()),           #Heading
+            "action_speed == 3", At("Jean_BJ_Backdrop", Jean_BJ_Body_3()),           #Sucking
+            "action_speed == 4", At("Jean_BJ_Backdrop", Jean_BJ_Body_4()),           #Deepthroat
+            "action_speed == 5", At("Jean_BJ_Backdrop", Jean_BJ_Body_5()),           #Cumming High
+            "action_speed == 6", At("Jean_BJ_Backdrop", Jean_BJ_Body_6()),           #Cumming Deep
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
             # Jean's head Underlay
-            "Speed == 0", At("Jean_BJ_Head", Jean_BJ_Head_0()),               #Static
-            "Speed == 1", At("Jean_BJ_Head", Jean_BJ_Head_1()),               #Licking
-            "Speed == 2", At("Jean_BJ_Head", Jean_BJ_Head_2()),               #Heading
-            "Speed == 3", At("Jean_BJ_Head", Jean_BJ_Head_3()),               #Sucking
-            "Speed == 4", At("Jean_BJ_Head", Jean_BJ_Head_4()),               #Deepthroat
-            "Speed == 5", At("Jean_BJ_Head", Jean_BJ_Head_5()),               #Cumming High
-            "Speed == 6", At("Jean_BJ_Head", Jean_BJ_Head_6()),               #Cumming Deep
+            "action_speed == 0", At("Jean_BJ_Head", Jean_BJ_Head_0()),               #Static
+            "action_speed == 1", At("Jean_BJ_Head", Jean_BJ_Head_1()),               #Licking
+            "action_speed == 2", At("Jean_BJ_Head", Jean_BJ_Head_2()),               #Heading
+            "action_speed == 3", At("Jean_BJ_Head", Jean_BJ_Head_3()),               #Sucking
+            "action_speed == 4", At("Jean_BJ_Head", Jean_BJ_Head_4()),               #Deepthroat
+            "action_speed == 5", At("Jean_BJ_Head", Jean_BJ_Head_5()),               #Cumming High
+            "action_speed == 6", At("Jean_BJ_Head", Jean_BJ_Head_6()),               #Cumming Deep
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
             # Cock
-            "Speed == 0", At("Blowcock", Jean_BJ_Cock_0()),                    #Static
-            "Speed == 1", At("Blowcock", Jean_BJ_Cock_1()),                    #Licking
-            "Speed >= 2", At("Blowcock", Jean_BJ_Cock_2()),                    #Heading+
-#            "Speed == 2", At("Blowcock", Jean_BJ_Cock_2()),                    #Heading
-#            "Speed == 3", At("Blowcock", Jean_BJ_Cock_2()),                    #Sucking
-#            "Speed == 4", At("Blowcock", Jean_BJ_Cock_2()),                    #Deepthroat
+            "action_speed == 0", At("Blowcock", Jean_BJ_Cock_0()),                    #Static
+            "action_speed == 1", At("Blowcock", Jean_BJ_Cock_1()),                    #Licking
+            "action_speed >= 2", At("Blowcock", Jean_BJ_Cock_2()),                    #Heading+
+#            "action_speed == 2", At("Blowcock", Jean_BJ_Cock_2()),                    #Heading
+#            "action_speed == 3", At("Blowcock", Jean_BJ_Cock_2()),                    #Sucking
+#            "action_speed == 4", At("Blowcock", Jean_BJ_Cock_2()),                    #Deepthroat
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
             # the masked overlay for when her head overlaps the cock
-            "Speed < 3", Null(),
-            "Speed == 3", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MouthSuckingMask"), Jean_BJ_Head_3()), #Sucking
-            "Speed == 4", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MouthSuckingMask"), Jean_BJ_Head_4()), #Deepthroat
-            "Speed == 6", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MouthSuckingMask"), Jean_BJ_Head_6()), #Cumming Deep
+            "action_speed < 3", Null(),
+            "action_speed == 3", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MouthSuckingMask"), Jean_BJ_Head_3()), #Sucking
+            "action_speed == 4", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MouthSuckingMask"), Jean_BJ_Head_4()), #Deepthroat
+            "action_speed == 6", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MouthSuckingMask"), Jean_BJ_Head_6()), #Cumming Deep
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
             # same as above, but for the heading animation
-            "Speed == 2", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MaskHeadingComposite"), Jean_BJ_Head_2()), #Heading
-            "Speed == 5", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MaskHeadingComposite"), Jean_BJ_Head_5()), #Cumming High
+            "action_speed == 2", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MaskHeadingComposite"), Jean_BJ_Head_2()), #Heading
+            "action_speed == 5", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MaskHeadingComposite"), Jean_BJ_Head_5()), #Cumming High
             "True", Null(),
             ),
         (325,490), ConditionSwitch(
             # the over part of spunk
-            "Speed < 3 or 'mouth' not in JeanX.Spunk", Null(),
-            "Speed == 3", At("JeanSuckingSpunk", Jean_BJ_Head_3()), #Sucking
-            "Speed == 4", At("JeanSuckingSpunk", Jean_BJ_Head_4()), #Deepthroat
-            "Speed == 6", At("JeanSuckingSpunk", Jean_BJ_Head_6()), #Cumming Deep
+            "action_speed < 3 or 'mouth' not in JeanX.Spunk", Null(),
+            "action_speed == 3", At("JeanSuckingSpunk", Jean_BJ_Head_3()), #Sucking
+            "action_speed == 4", At("JeanSuckingSpunk", Jean_BJ_Head_4()), #Deepthroat
+            "action_speed == 6", At("JeanSuckingSpunk", Jean_BJ_Head_6()), #Cumming Deep
             "True", Null(),
             ),
 #        (325,490), ConditionSwitch(         #(325,490)
 #            # same as above, but for the heading animation
 #            "True", At("Jean_BJ_MaskHeadingSpunk", Jean_BJ_Head_2()), #Heading
-#            "Speed == 2 and 'mouth' in JeanX.Spunk", At("Jean_BJ_MaskHeadingSpunk", Jean_BJ_Head_2()), #Heading
-##            "Speed == 5 and 'mouth' in JeanX.Spunk", At("Jean_BJ_MaskHeadingSpunkB", Jean_BJ_Head_5()), #Cumming High
+#            "action_speed == 2 and 'mouth' in JeanX.Spunk", At("Jean_BJ_MaskHeadingSpunk", Jean_BJ_Head_2()), #Heading
+##            "action_speed == 5 and 'mouth' in JeanX.Spunk", At("Jean_BJ_MaskHeadingSpunkB", Jean_BJ_Head_5()), #Cumming High
 #            "True", Null(),
 #            ),
         )
@@ -3311,7 +3311,7 @@ image Jean_BJ_Backdrop1: #delete if other works better. . .
     contains:
             #blanket
             ConditionSwitch(
-                "'blanket' in JeanX.RecentActions", "images/KittyBJFace/Kitty_BJFace_Blanket.png",
+                "'blanket' in JeanX.recent_history", "images/KittyBJFace/Kitty_BJFace_Blanket.png",
                 "True", Null(),
                 ),
             zoom 2
@@ -3342,7 +3342,7 @@ image Jean_BJ_Head:                                                             
 
         (0,0), ConditionSwitch(
             # Basic Face layer
-#            "Speed <= 2 or Speed == 5 or not renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
+#            "action_speed <= 2 or action_speed == 5 or not renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
 #                    # If the animation isn't sucking, or if not in BJ pose
 #                    "JeanX.Blush", "images/JeanBJFace/Jean_BJ_FaceClosed_Blush.png",
 #                    "True", "images/JeanBJFace/Jean_BJ_FaceClosed.png",
@@ -3353,20 +3353,20 @@ image Jean_BJ_Head:                                                             
             ),
         (0,0), ConditionSwitch(
             #Mouth
-#            "(Speed == 2 or Speed == 5) and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
+#            "(action_speed == 2 or action_speed == 5) and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
 #                    # If the Heading animation is active
 ##                    "JeanX.Blush", "images/JeanBJFace/Jean_BJ_FaceClosed_Blush.png",
 ##                    "True", "images/JeanBJFace/Jean_BJ_FaceClosed.png"
 #                    ),
-            "Speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
                     # If in sucking position
-                    "Speed == 1", "images/JeanBJFace/Jean_BJ_Mouth_Tongue.png",  #licking
-                    "(Speed == 2 or Speed == 5)", Null(),                          #heading
-                    "Speed == 3", "images/JeanBJFace/Jean_BJ_Mouth_Sucking.png", #sucking
-                    "Speed == 4", "images/JeanBJFace/Jean_BJ_Mouth_Sucking.png", #deepthroat
-                    "Speed == 6", "images/JeanBJFace/Jean_BJ_Mouth_Sucking.png", #cumming
+                    "action_speed == 1", "images/JeanBJFace/Jean_BJ_Mouth_Tongue.png",  #licking
+                    "(action_speed == 2 or action_speed == 5)", Null(),                          #heading
+                    "action_speed == 3", "images/JeanBJFace/Jean_BJ_Mouth_Sucking.png", #sucking
+                    "action_speed == 4", "images/JeanBJFace/Jean_BJ_Mouth_Sucking.png", #deepthroat
+                    "action_speed == 6", "images/JeanBJFace/Jean_BJ_Mouth_Sucking.png", #cumming
                     ),
-            "Speed == 3 and renpy.showing('Jean_TJ_Animation')", "images/JeanBJFace/Jean_BJ_Mouth_Tongue.png",
+            "action_speed == 3 and renpy.showing('Jean_TJ_Animation')", "images/JeanBJFace/Jean_BJ_Mouth_Tongue.png",
             "JeanX.Mouth == 'normal'", "images/JeanBJFace/Jean_BJ_Mouth_Smile.png",
             "JeanX.Mouth == 'lipbite'", "images/JeanBJFace/Jean_BJ_Mouth_Lipbite.png",
             "JeanX.Mouth == 'sucking'", "images/JeanBJFace/Jean_BJ_Mouth_Tongue.png",
@@ -3381,23 +3381,23 @@ image Jean_BJ_Head:                                                             
             ),
         (428,605), ConditionSwitch(
             # Heading Mouth
-#            "Speed == 2 and Trigger == 'blow'", At("Jean_BJ_MouthHeading", Jean_BJ_MouthAnim()),  #heading
+#            "action_speed == 2 and primary_action == 'blow'", At("Jean_BJ_MouthHeading", Jean_BJ_MouthAnim()),  #heading
             "not renpy.showing('Jean_BJ_Animation')", Null(),                       #heading
-            "Speed == 2", At("Jean_BJ_MouthHeading", Jean_BJ_MouthAnim()),  #heading
-            "Speed == 5", At("Jean_BJ_MouthHeading", Jean_BJ_MouthAnimC()), #cumming high
+            "action_speed == 2", At("Jean_BJ_MouthHeading", Jean_BJ_MouthAnim()),  #heading
+            "action_speed == 5", At("Jean_BJ_MouthHeading", Jean_BJ_MouthAnimC()), #cumming high
             "True", Null(),
             ),
 
         (0,0), ConditionSwitch(
             #Spunk layer
             "'mouth' not in JeanX.Spunk", Null(),
-            "Speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
                     # If in sucking position
-                    "Speed == 1", "images/JeanBJFace/Jean_BJ_Spunk_Tongue.png",  #licking
-                    "(Speed == 2 or Speed == 5)", Null(),                          #heading
-                    "Speed == 3", "images/JeanBJFace/Jean_BJ_Spunk_SuckingUnder.png", #sucking
-                    "Speed == 4", "images/JeanBJFace/Jean_BJ_Spunk_SuckingUnder.png", #deepthroat
-                    "Speed == 6", "images/JeanBJFace/Jean_BJ_Spunk_SuckingUnder.png", #cumming
+                    "action_speed == 1", "images/JeanBJFace/Jean_BJ_Spunk_Tongue.png",  #licking
+                    "(action_speed == 2 or action_speed == 5)", Null(),                          #heading
+                    "action_speed == 3", "images/JeanBJFace/Jean_BJ_Spunk_SuckingUnder.png", #sucking
+                    "action_speed == 4", "images/JeanBJFace/Jean_BJ_Spunk_SuckingUnder.png", #deepthroat
+                    "action_speed == 6", "images/JeanBJFace/Jean_BJ_Spunk_SuckingUnder.png", #cumming
                     ),
             "JeanX.Mouth == 'normal'", "images/JeanBJFace/Jean_BJ_Spunk_Smile.png",
 #            "JeanX.Mouth == 'lipbite'", "images/JeanBJFace/Jean_BJ_Spunk_Kiss.png",
@@ -3430,7 +3430,7 @@ image Jean_BJ_Head:                                                             
 #        (0,0), ConditionSwitch(
 #            #Hair water overlay
 #            "not JeanX.Water", Null(),
-#            "Speed > 2", "images/JeanBJFace/Jean_BJ_Wet_HeadOpen.png",
+#            "action_speed > 2", "images/JeanBJFace/Jean_BJ_Wet_HeadOpen.png",
 #            "True", "images/JeanBJFace/Jean_BJ_Wet_HeadClosed.png",
 #            ),
 #        (0,0), ConditionSwitch(
@@ -3488,7 +3488,7 @@ image Jean_BJ_MouthSuckingMask:
 #    contains: #see if this works, if not remove it
 #        ConditionSwitch(
 #            "'mouth' not in JeanX.Spunk", Null(),
-#            "Speed != 2 and Speed != 5", Null(),
+#            "action_speed != 2 and action_speed != 5", Null(),
 #            "True", "images/JeanBJFace/Jean_BJ_Spunk_SuckingOver.png",
 #            )
 #        zoom 1.4
@@ -3504,8 +3504,8 @@ image Jean_BJ_MaskHeadingComposite:
     LiveComposite(
         (858,928),
         (300,462), ConditionSwitch(
-            "Speed == 2", At("Jean_BJ_MaskHeading", Jean_BJ_MouthAnim()),
-            "Speed == 5", At("Jean_BJ_MaskHeading", Jean_BJ_MouthAnimC()),
+            "action_speed == 2", At("Jean_BJ_MaskHeading", Jean_BJ_MouthAnim()),
+            "action_speed == 5", At("Jean_BJ_MaskHeading", Jean_BJ_MouthAnimC()),
             "True", Null(),
             ),
         )
@@ -3516,7 +3516,7 @@ image Jean_BJ_MaskHeadingSpunk:
     contains:
 #            "JeanSuckingSpunk"
             ConditionSwitch(
-                    "Speed == 2", "images/JeanBJFace/Jean_BJ_Spunk_SuckingOver.png",
+                    "action_speed == 2", "images/JeanBJFace/Jean_BJ_Spunk_SuckingOver.png",
                     "True", Null(),
                     )
 
@@ -3555,7 +3555,7 @@ image Jean_BJ_Backdrop:
         contains:
             #blanket
             ConditionSwitch(
-                "'blanket' in JeanX.RecentActions", "images/KittyBJFace/Kitty_BJFace_Blanket.png",
+                "'blanket' in JeanX.recent_history", "images/KittyBJFace/Kitty_BJFace_Blanket.png",
                 "True", Null(),
                 )
             zoom 1.2
@@ -3846,7 +3846,7 @@ transform Jean_BJ_Body_6():
                                                                #BJ Launchers
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-label Jean_BJ_Launch(Line = Trigger):    # The sequence to launch the Jean BJ animations
+label Jean_BJ_Launch(line = primary_action):    # The sequence to launch the Jean BJ animations
     if renpy.showing("Jean_BJ_Animation"):
         return
 
@@ -3855,7 +3855,7 @@ label Jean_BJ_Launch(Line = Trigger):    # The sequence to launch the Jean BJ an
             hide Jean_TJ_Animation
     else:
             call Jean_Hide
-            if Line == "L" or Line == "cum":
+            if line == "L" or line == "cum":
                 show Jean_Sprite at sprite_location(StageCenter) zorder JeanX.Layer:
                     alpha 1
                     ease 1 zoom 2.5 offset (150,80)
@@ -3867,24 +3867,24 @@ label Jean_BJ_Launch(Line = Trigger):    # The sequence to launch the Jean BJ an
                 with dissolve
             hide Jean_Sprite
     #". . ."
-    $ Speed = 0
+    $ action_speed = 0
 
-    if Line != "cum":
-        $ Trigger = "blow"
+    if line != "cum":
+        $ primary_action = "blow"
 
     show Jean_BJ_Animation zorder 150:
         pos (645,510)
-    if Taboo and Line == "L": # Jean gets started. . .
+    if Taboo and line == "L": # Jean gets started. . .
             if len(Present) >= 2:
                 if Present[0] != JeanX:
-                        "[JeanX.Name] looks back at [Present[0].Name] to see if she's watching."
+                        "[JeanX.name] looks back at [Present[0].name] to see if she's watching."
                 elif Present[1] != JeanX:
-                        "[JeanX.Name] looks back at [Present[1].Name] to see if she's watching."
+                        "[JeanX.name] looks back at [Present[1].name] to see if she's watching."
             else:
-                        "[JeanX.Name] looks around to see if anyone can see her."
+                        "[JeanX.name] looks around to see if anyone can see her."
             "She then bends down and puts your cock to her mouth."
-    elif Line == "L":
-            "[JeanX.Name] smoothly bends down and places your cock against her cheek."
+    elif line == "L":
+            "[JeanX.name] smoothly bends down and places your cock against her cheek."
 
     return
 
@@ -3893,7 +3893,7 @@ label Jean_BJ_Reset: # The sequence to the Jean animations from BJ to default
         return
 #    hide Jean_BJ_Animation
     call Jean_Hide
-    $ Speed = 0
+    $ action_speed = 0
 
     show Jean_Sprite at sprite_location(StageCenter) zorder JeanX.Layer:
         alpha 1
@@ -4007,27 +4007,27 @@ image Jean_HJ_Animation:
     contains:
         ConditionSwitch(
             # backside of the hand
-            "not Speed", Transform("Jean_Hand_Under"),
-            "Speed == 1", At("Jean_Hand_Under", Jean_Hand_1()),
-            "Speed >= 2", At("Jean_Hand_Under", Jean_Hand_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Jean_Hand_Under"),
+            "action_speed == 1", At("Jean_Hand_Under", Jean_Hand_1()),
+            "action_speed >= 2", At("Jean_Hand_Under", Jean_Hand_2()),
+            "action_speed", Null(),
             ),
     contains:
         ConditionSwitch(
             # cock
-            "not Speed", Transform("Zero_Handcock"),
-            "Speed == 1", At("Zero_Handcock", Handcock_1J()),
-            "Speed >= 2", At("Zero_Handcock", Handcock_2J()),
-            "Speed", Null(),
+            "not action_speed", Transform("Zero_Handcock"),
+            "action_speed == 1", At("Zero_Handcock", Handcock_1J()),
+            "action_speed >= 2", At("Zero_Handcock", Handcock_2J()),
+            "action_speed", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(
             # fingers of the hand
-            "not Speed", Transform("Jean_Hand_Over"),
-            "Speed == 1", At("Jean_Hand_Over", Jean_Hand_1()),
-            "Speed >= 2", At("Jean_Hand_Over", Jean_Hand_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Jean_Hand_Over"),
+            "action_speed == 1", At("Jean_Hand_Over", Jean_Hand_1()),
+            "action_speed >= 2", At("Jean_Hand_Over", Jean_Hand_2()),
+            "action_speed", Null(),
             ),
     anchor (0.51, -1.3)
     zoom 0.4#0.6
@@ -4036,7 +4036,7 @@ image Jean_HJ_Animation:
 label Jean_HJ_Reset: # The sequence to the Jean animations from handjob to default
     if not renpy.showing("Jean_HJ_Animation"):
         return
-    $ Speed = 0
+    $ action_speed = 0
     $ JeanX.ArmPose = 1
     hide Jean_HJ_Animation with easeoutbottom
     call Jean_Hide
@@ -4083,36 +4083,36 @@ image Jean_PJ_Animation:
 #    contains:
 #        ConditionSwitch(
 #            # backside of the hand
-#            "not Speed", Transform("Jean_Hand_Under"),
-#            "Speed == 1", At("Jean_Hand_Under", Jean_Hand_1()),
-#            "Speed >= 2", At("Jean_Hand_Under", Jean_Hand_2()),
-#            "Speed", Null(),
+#            "not action_speed", Transform("Jean_Hand_Under"),
+#            "action_speed == 1", At("Jean_Hand_Under", Jean_Hand_1()),
+#            "action_speed >= 2", At("Jean_Hand_Under", Jean_Hand_2()),
+#            "action_speed", Null(),
 #            ),
     contains:
         ConditionSwitch(
             # cock
 #            "True", Transform("Zero_Handcock"), #remove?
-            "not Speed", Transform("Zero_Handcock"),
-            "Speed == 1", At("Zero_Handcock", Handcock_1J()),
-            "Speed >= 2", At("Zero_Handcock", Handcock_2J()),
-            "Speed", Null(),
+            "not action_speed", Transform("Zero_Handcock"),
+            "action_speed == 1", At("Zero_Handcock", Handcock_1J()),
+            "action_speed >= 2", At("Zero_Handcock", Handcock_2J()),
+            "action_speed", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(
             # fingers of the hand
-            "not Speed", Transform("Jean_Hand_Psychic"),
-            "Speed == 1", At("Jean_Hand_Psychic", Jean_Hand_1()),
-            "Speed >= 2", At("Jean_Hand_Psychic", Jean_Hand_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Jean_Hand_Psychic"),
+            "action_speed == 1", At("Jean_Hand_Psychic", Jean_Hand_1()),
+            "action_speed >= 2", At("Jean_Hand_Psychic", Jean_Hand_2()),
+            "action_speed", Null(),
             ),
     anchor (0.51, -1.3)
     zoom 0.4#0.6
 
 
-label Jean_PJ_Launch(Line = Trigger):
+label Jean_PJ_Launch(line = primary_action):
     if renpy.showing("Jean_PJ_Animation"):
-        $ Trigger = "psy"
+        $ primary_action = "psy"
         return
 
     call Jean_Hide
@@ -4130,7 +4130,7 @@ label Jean_PJ_Launch(Line = Trigger):
 label Jean_PJ_Reset: # The sequence to the Jean animations from handjob to default
     if not renpy.showing("Jean_PJ_Animation"):
         return
-    $ Speed = 0
+    $ action_speed = 0
     $ JeanX.ArmPose = 1
     hide Jean_PJ_Animation with easeoutbottom
     return
@@ -4148,10 +4148,10 @@ image Jean_TJ_Animation:
                 ConditionSwitch(
                     # Jean's upper body
                     "not Player.Sprite","Jean_TJ_0",#Static
-                    "Speed == 1", "Jean_TJ_1",#slow
-                    "Speed == 4", "Jean_TJ_4",#cumming high
-                    "Speed == 5", "Jean_TJ_5",#cumming low
-                    "Speed >= 2", "Jean_TJ_2",#fast
+                    "action_speed == 1", "Jean_TJ_1",#slow
+                    "action_speed == 4", "Jean_TJ_4",#cumming high
+                    "action_speed == 5", "Jean_TJ_5",#cumming low
+                    "action_speed >= 2", "Jean_TJ_2",#fast
                     "True",       "Jean_TJ_0",#Static
                     )
             zoom .8 #.7
@@ -5040,20 +5040,20 @@ image Jean_TJ_5:
 
 # Jean's TJ animations end / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-label Jean_TJ_Launch(Line = Trigger):    # The sequence to launch the Jean Titfuck animations
+label Jean_TJ_Launch(line = primary_action):    # The sequence to launch the Jean Titfuck animations
     if renpy.showing("Jean_TJ_Animation"):
         return
 
-#    if Line == "L": # Jean gets started. . .
+#    if line == "L": # Jean gets started. . .
 #            if Taboo:
 #                if len(Present) >= 2:
 #                    if Present[0] != JeanX:
-#                            "[JeanX.Name] looks back at [Present[0].Name] to see if she's watching."
+#                            "[JeanX.name] looks back at [Present[0].name] to see if she's watching."
 #                    elif Present[1] != JeanX:
-#                            "[JeanX.Name] looks back at [Present[1].Name] to see if she's watching."
+#                            "[JeanX.name] looks back at [Present[1].name] to see if she's watching."
 #                else:
-#                            "[JeanX.Name] casually glances around to see if anyone can see her."
-#            "[JeanX.Name] bends over and places your cock between her breasts."
+#                            "[JeanX.name] casually glances around to see if anyone can see her."
+#            "[JeanX.name] bends over and places your cock between her breasts."
 
 #    if JeanX.Chest and JeanX.Over:
 #        "She throws off her [JeanX.Over] and her [JeanX.Chest]."
@@ -5082,9 +5082,9 @@ label Jean_TJ_Launch(Line = Trigger):    # The sequence to launch the Jean Titfu
     if JeanX.Over == "towel" or JeanX.Chest == "corset": #pulls top down because these tops are incompatible with TJ.
         $ JeanX.Uptop = 1
 
-    $ Speed = 0
-    if Line != "cum":
-        $ Trigger = "titjob"
+    $ action_speed = 0
+    if line != "cum":
+        $ primary_action = "titjob"
     show Jean_TJ_Animation zorder 150:
         pos (1000,1050)#(1000,1000)#(700,520)
     $ Player.Sprite = 1
@@ -5093,9 +5093,9 @@ label Jean_TJ_Launch(Line = Trigger):    # The sequence to launch the Jean Titfu
 
 
 
-label Jean_Middle_Launch(T = Trigger,Set=1):
+label Jean_Middle_Launch(T = primary_action,Set=1):
     call Jean_Hide
-    $ Trigger = T
+    $ primary_action = T
     $ JeanX.Pose = "mid" if Set else JeanX.Pose
     show Jean_Sprite at sprite_location(JeanX.sprite_location) zorder JeanX.Layer:
 #        ease 0.5 offset (-100,-200) zoom 2

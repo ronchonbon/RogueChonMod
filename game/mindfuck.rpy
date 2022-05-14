@@ -5,25 +5,25 @@ label MindFuck_Screen: #rkeljsv
                 call RoomMask #in Rogue Animations
 
 
-        elif bg_current == "bg classroom":
+        elif bg_current == "bg_classroom":
                     show bg_classmask onlayer black:
                         alpha .2
-        elif bg_current == "bg dangerroom":
+        elif bg_current == "bg_dangerroom":
                     show bg_danger onlayer black:
                         alpha .2
-        elif bg_current == "bg showerroom":
+        elif bg_current == "bg_showerroom":
                     show bg_shower onlayer black:
                         alpha .2
-        elif bg_current == "bg study":
+        elif bg_current == "bg_study":
                     show bg_study onlayer black:
                         alpha .2
-        elif bg_current == "bg movies":
+        elif bg_current == "bg_movies":
                     show bg_movies onlayer black:
                         alpha .2
-        elif bg_current == "bg restaurant":
+        elif bg_current == "bg_restaurant":
                     show bg_rest onlayer black:
                         alpha .2
-        elif bg_current == "bg pool":
+        elif bg_current == "bg_pool":
                     show bg_pool onlayer black:
                         alpha .2
         else: # if 'bg campus' or anything else
@@ -33,11 +33,11 @@ label MindFuck_Screen: #rkeljsv
 
 label PsychicFlash(Face="sly",TempLoc=0): #rkeljsv
         call MindFuck_Screen
-        $ Line = Girl.Loc
+        $ line = Girl.Loc
         $ Girl.Loc = bg_current
-        call Set_The_Scene(1,0,0,0,1)
+        call set_the_scene(1,0,0,0,1)
         if Face:
-                $ Girl.FaceChange(Face)
+                $ Girl.change_face(Face)
         $ Girl.ArmPose = 2
         $ Girl.Uptop = 1
         $ Girl.Upskirt = 1
@@ -50,8 +50,8 @@ label PsychicFlash(Face="sly",TempLoc=0): #rkeljsv
         $ Girl.OutfitChange(6,Changed=1)
         scene onlayer black
         $ Girl.ArmPose = 1
-        $ Line = 0
-        call AnyLine(Girl,". . .")
+        $ line = 0
+        call Anyline(Girl,". . .")
 
 
 label MindFuck(TempLoc=0): #rkeljsv
@@ -63,7 +63,7 @@ label MindFuck(TempLoc=0): #rkeljsv
         menu MindFuck_Menu:
             "Sure":
                     if Girl == EmmaX:
-                            ch_e "Lovely. . ."
+                            ch_e "lovely. . ."
                             ch_e "Just let me prepare us. . ."
                     elif Girl == JeanX:
                             ch_j "Great!"
@@ -72,10 +72,10 @@ label MindFuck(TempLoc=0): #rkeljsv
                     call MindFuck_Screen
                     $ TempLoc = Girl.Loc
                     $ Girl.Loc = bg_current
-                    $ Girl.FaceChange("sly")
+                    $ Girl.change_face("sly")
                     #call Display_Girl(EmmaX,0,0)
-                    call Set_The_Scene(1,0,0,0,1)
-                    call AnyLine(Girl,"There. . .")
+                    call set_the_scene(1,0,0,0,1)
+                    call Anyline(Girl,"There. . .")
 
                     $ Player.AddWord(1,"MindFuck","MindFuck",0,"MindFuck")
                     call expression Girl.Tag + "_SexMenu" #call Rogue_SexMenu
@@ -96,7 +96,7 @@ label MindFuck(TempLoc=0): #rkeljsv
                             hide Jean_Sprite with fade
                     scene onlayer black
                     jump Misplaced
-            "What is that?" if "mfuck?" not in Player.RecentActions and "MindFuck" not in Player.History:
+            "What is that?" if "mfuck?" not in Player.recent_history and "MindFuck" not in Player.History:
                     if Girl == EmmaX:
                             ch_e "Well, if you open your mind a bit, I could project into it."
                             ch_e "Then we could have. . . all sorts of fun. . ."

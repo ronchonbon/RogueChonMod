@@ -1,65 +1,65 @@
 label before_show:
-    $ Player.focused_girl.Upskirt = 1
-    $ Player.focused_girl.PantiesDown = 1
+    $ focused_Girl.Upskirt = 1
+    $ focused_Girl.PantiesDown = 1
 
-    call first_bottomless(Player.focused_girl, 1)
-    call Set_The_Scene(Dress=0)
+    call first_bottomless(focused_Girl, 1)
+    call set_the_scene(Dress=0)
 
-    if "unseen" in Player.focused_girl.RecentActions:
-        $ Player.focused_girl.FaceChange("sexy")
-        $ Player.focused_girl.Eyes = "closed"
-        $ Player.focused_girl.ArmPose = 2
+    if "unseen" in focused_Girl.recent_history:
+        $ focused_Girl.change_face("sexy")
+        $ focused_Girl.Eyes = "closed"
+        $ focused_Girl.ArmPose = 2
 
-        "You see [Player.focused_girl.Name] leaning back, masturbating. You don't think she's noticed you yet."
+        "You see [focused_Girl.name] leaning back, masturbating. You don't think she's noticed you yet."
     else:
-        $ Player.focused_girl.FaceChange("sexy")
-        $ Player.focused_girl.ArmPose = 2
+        $ focused_Girl.change_face("sexy")
+        $ focused_Girl.ArmPose = 2
 
-        "[Player.focused_girl.Name] lays back and starts to toy with herself."
+        "[focused_Girl.name] lays back and starts to toy with herself."
 
-        if not Player.focused_girl.Mast:#First time
-            if Player.focused_girl.Forced:
-                $ Player.focused_girl.Statup("Love", 90, -20)
-                $ Player.focused_girl.Statup("Obed", 70, 45)
-                $ Player.focused_girl.Statup("Inbt", 80, 35)
+        if not focused_Girl.Mast:#First time
+            if focused_Girl.Forced:
+                $ focused_Girl.change_stat("love", 90, -20)
+                $ focused_Girl.change_stat("obedience", 70, 45)
+                $ focused_Girl.change_stat("inhibition", 80, 35)
             else:
-                $ Player.focused_girl.Statup("Love", 90, 15)
-                $ Player.focused_girl.Statup("Obed", 70, 35)
-                $ Player.focused_girl.Statup("Inbt", 80, 40)
+                $ focused_Girl.change_stat("love", 90, 15)
+                $ focused_Girl.change_stat("obedience", 70, 35)
+                $ focused_Girl.change_stat("inhibition", 80, 40)
 
-    $ Trigger = "masturbation"
+    $ primary_action = "masturbation"
 
-    if not Trigger3:
-        $ Trigger3 = "fondle pussy"
+    if not girl_offhand_action:
+        $ girl_offhand_action = "fondle pussy"
 
-    if Situation:
+    if action_context:
         $ renpy.pop_call()
 
-        $ Situation = 0
+        $ action_context = 0
 
-    $ Line = 0
+    $ line = 0
 
     if Taboo:
-        $ Player.focused_girl.DrainWord("tabno")
+        $ focused_Girl.DrainWord("tabno")
 
-    $ Player.focused_girl.DrainWord("no masturbation")
-    $ Player.focused_girl.RecentActions.append("masturbation")
-    $ Player.focused_girl.DailyActions.append("masturbation")
+    $ focused_Girl.DrainWord("no masturbation")
+    $ focused_Girl.recent_history.append("masturbation")
+    $ focused_Girl.daily_history.append("masturbation")
 
 label show_cycle:
-    if Situation == "join":
+    if action_context == "join":
         $ renpy.pop_call()
 
-        $ Situation = 0
+        $ action_context = 0
 
     while Round > 0:
-        call reset_position(Player.focused_girl, trigger = "masturbation")
-        call Shift_Focus(Player.focused_girl)
+        call reset_position(focused_Girl, trigger = "masturbation")
+        call Shift_Focus(focused_Girl)
 
-        $ Player.focused_girl.LustFace
+        $ focused_Girl.lustFace
 
-        if "unseen" in Player.focused_girl.RecentActions:
-            $ Player.focused_girl.Eyes = "closed"
+        if "unseen" in focused_Girl.recent_history:
+            $ focused_Girl.Eyes = "closed"
 
         $ Player.Focus -= 12 if Player.FocusX and Player.Focus > 50 else 0
 
@@ -67,28 +67,28 @@ label show_cycle:
             menu:
                 "Keep Watching.":
                     pass
-                "[Player.focused_girl.Name]. . .[[jump in]" if "unseen" not in Player.focused_girl.RecentActions and "join" not in Player.RecentActions and Player.focused_girl.Loc == bg_current:
-                    "[Player.focused_girl.Name] slows what she's doing with a sly grin."
-                    ch_r "Yeah, did you want something, [Player.focused_girl.Petname]?"
+                "[focused_Girl.name]. . .[[jump in]" if "unseen" not in focused_Girl.recent_history and "join" not in Player.recent_history and focused_Girl.Loc == bg_current:
+                    "[focused_Girl.name] slows what she's doing with a sly grin."
+                    ch_r "Yeah, did you want something, [focused_Girl.Petname]?"
 
-                    $ Situation = "join"
+                    $ action_context = "join"
 
-                    call masturbate(Player.focused_girl)
-                "\"Ahem. . .\"" if "unseen" in Player.focused_girl.RecentActions:
+                    call masturbate(focused_Girl)
+                "\"Ahem. . .\"" if "unseen" in focused_Girl.recent_history:
                     jump after_show
-                "Start jack'in it." if Trigger2 != "jackin":
-                    call Jackin(Player.focused_girl)
-                "Stop jack'in it." if Trigger2 == "jackin":
-                    $ Trigger2 = 0
-                "Slap her ass" if Player.focused_girl.Loc == bg_current:
-                    if "unseen" in Player.focused_girl.RecentActions:
-                        "You smack [Player.focused_girl.Name] firmly on the ass!"
+                "Start jack'in it." if offhand_action != "jackin":
+                    call Jackin(focused_Girl)
+                "Stop jack'in it." if offhand_action == "jackin":
+                    $ offhand_action = 0
+                "Slap her ass" if focused_Girl.Loc == bg_current:
+                    if "unseen" in focused_Girl.recent_history:
+                        "You smack [focused_Girl.name] firmly on the ass!"
 
                         jump after_show
                     else:
-                        call Slap_Ass(Player.focused_girl)
+                        call Slap_Ass(focused_Girl)
 
-                        $ Cnt += 1
+                        $ counter += 1
                         $ Round -= 1
 
                         jump show_cycle
@@ -104,128 +104,128 @@ label show_cycle:
                     $ Player.FocusX = 0
                 "Change what I'm doing":
                     menu:
-                        "Offhand action" if Player.focused_girl.Loc == bg_current:
-                            if Player.focused_girl.Action and MultiAction:
+                        "Offhand action" if focused_Girl.Loc == bg_current:
+                            if focused_Girl.Action and MultiAction:
                                 call Offhand_Set
 
-                                if Trigger2:
-                                     $ Player.focused_girl.Action -= 1
+                                if offhand_action:
+                                     $ focused_Girl.Action -= 1
                             else:
-                                call tired_lines(Player.focused_girl)
-                        "Threesome actions (locked)" if not Partner or "unseen" in Player.focused_girl.RecentActions or Player.focused_girl.Loc == bg_current:
+                                call tired_lines(focused_Girl)
+                        "Threesome actions (locked)" if not Partner or "unseen" in focused_Girl.recent_history or focused_Girl.Loc == bg_current:
                             pass
-                        "Threesome actions" if Player.focused_girl.Loc == bg_current and Partner and "unseen" not in Player.focused_girl.RecentActions:
+                        "Threesome actions" if focused_Girl.Loc == bg_current and Partner and "unseen" not in focused_Girl.recent_history:
                             menu:
-                                "Ask [Partner.Name] to do something else":
-                                    call Three_Change(Player.focused_girl)
-                                "Swap to [Partner.Name]":
-                                    call Trigger_Swap(Player.focused_girl)
-                                "Undress [Partner.Name]":
+                                "Ask [Partner.name] to do something else":
+                                    call Three_Change(focused_Girl)
+                                "Swap to [Partner.name]":
+                                    call primary_action_Swap(focused_Girl)
+                                "Undress [Partner.name]":
                                     call Girl_Undress(Partner)
 
                                     jump show_cycle
-                                "Clean up [Partner.Name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
                                     pass
-                                "Clean up [Partner.Name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.Spunk:
                                     call Girl_Cleanup(Partner,"ask")
                                     jump show_cycle
                                 "Never mind":
                                     jump show_cycle
-                        "Show her feet" if not ShowFeet and (Player.focused_girl.Pose == "doggy" or Player.focused_girl.Pose == "sex"):
+                        "Show her feet" if not ShowFeet and (focused_Girl.Pose == "doggy" or focused_Girl.Pose == "sex"):
                             $ ShowFeet = 1
-                        "Hide her feet" if ShowFeet and (Player.focused_girl.Pose == "doggy" or Player.focused_girl.Pose == "sex"):
+                        "Hide her feet" if ShowFeet and (focused_Girl.Pose == "doggy" or focused_Girl.Pose == "sex"):
                             $ ShowFeet = 0
-                        "Undress [Player.focused_girl.Name]":
-                            if "unseen" in Player.focused_girl.RecentActions:
+                        "Undress [focused_Girl.name]":
+                            if "unseen" in focused_Girl.recent_history:
                                 ch_p "Oh, yeah, take it off. . ."
 
                                 jump after_show
                             else:
-                                call Girl_Undress(Player.focused_girl)
-                        "Clean up [Player.focused_girl.Name] (locked)" if not Player.focused_girl.Spunk:
+                                call Girl_Undress(focused_Girl)
+                        "Clean up [focused_Girl.name] (locked)" if not focused_Girl.Spunk:
                                 pass
-                        "Clean up [Player.focused_girl.Name]" if Player.focused_girl.Spunk:
-                            if "unseen" in Player.focused_girl.RecentActions:
+                        "Clean up [focused_Girl.name]" if focused_Girl.Spunk:
+                            if "unseen" in focused_Girl.recent_history:
                                 ch_p "You've got a little something on you. . ."
 
                                 jump after_show
                             else:
-                                call Girl_Cleanup(Player.focused_girl,"ask")
+                                call Girl_Cleanup(focused_Girl,"ask")
                         "Never mind":
                             jump show_cycle
-                "Back to Sex Menu" if MultiAction and Player.focused_girl.Loc == bg_current:
+                "Back to Sex Menu" if MultiAction and focused_Girl.Loc == bg_current:
                     ch_p "Let's try something else."
 
-                    call reset_position(Player.focused_girl)
+                    call reset_position(focused_Girl)
 
-                    $ Situation = "shift"
-                    $ Line = 0
+                    $ action_context = "shift"
+                    $ line = 0
 
                     jump after_show
-                "End Scene" if not MultiAction or Player.focused_girl.Loc != bg_current:
+                "End Scene" if not MultiAction or focused_Girl.Loc != bg_current:
                     ch_p "Let's stop for now."
 
-                    call reset_position(Player.focused_girl)
+                    call reset_position(focused_Girl)
 
-                    $ Line = 0
+                    $ line = 0
 
                     jump after_show
 
-        call Shift_Focus(Player.focused_girl)
-        call Sex_Dialog(Player.focused_girl,Partner)
+        call Shift_Focus(focused_Girl)
+        call Sex_Dialog(focused_Girl,Partner)
 
-        $ Cnt += 1
+        $ counter += 1
         $ Round -= 1
 
         $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
 
-        if Player.Focus >= 100 or Player.focused_girl.Lust >= 100:
+        if Player.Focus >= 100 or focused_Girl.lust >= 100:
             if Player.Focus >= 100:
-                if "unseen" not in Player.focused_girl.RecentActions:
-                    call Player_Cumming(Player.focused_girl)
+                if "unseen" not in focused_Girl.recent_history:
+                    call Player_Cumming(focused_Girl)
 
-                    if "angry" in Player.focused_girl.RecentActions:
-                        call reset_position(Player.focused_girl)
+                    if "angry" in focused_Girl.recent_history:
+                        call reset_position(focused_Girl)
 
                         return
 
-                    $ Player.focused_girl.Statup("Lust", 200, 5)
+                    $ focused_Girl.change_stat("lust", 200, 5)
 
-                    if 100 > Player.focused_girl.Lust >= 70 and Player.focused_girl.OCount < 2:
-                        $ Player.focused_girl.RecentActions.append("unsatisfied")
-                        $ Player.focused_girl.DailyActions.append("unsatisfied")
+                    if 100 > focused_Girl.lust >= 70 and focused_Girl.OCount < 2:
+                        $ focused_Girl.recent_history.append("unsatisfied")
+                        $ focused_Girl.daily_history.append("unsatisfied")
 
-                    $ Line = "came"
+                    $ line = "came"
                 else: #If she wasn't aware you were there
                     "You grunt and try to hold it in."
 
                     $ Player.Focus = 95
 
-                    if Player.focused_girl.Loc == bg_current:
+                    if focused_Girl.Loc == bg_current:
                         jump after_show
 
             #If Rogue can cum
-            if Player.focused_girl.Lust >= 100:
-                call Girl_Cumming(Player.focused_girl)
+            if focused_Girl.lust >= 100:
+                call Girl_Cumming(focused_Girl)
 
-                if Player.focused_girl.Loc == bg_current:
+                if focused_Girl.Loc == bg_current:
                     jump after_show
 
-            if Line == "came":
-                $ Line = 0
+            if line == "came":
+                $ line = 0
 
                 if not Player.Semen:
                     "You're emptied out, you should probably take a break."
 
-                    $ Trigger2 = 0 if Trigger2 == "jackin" else Trigger2
+                    $ offhand_action = 0 if offhand_action == "jackin" else offhand_action
 
-                if "unsatisfied" in Player.focused_girl.RecentActions:#And Rogue is unsatisfied,
-                    "[Player.focused_girl.Name] still seems a bit unsatisfied with the experience."
+                if "unsatisfied" in focused_Girl.recent_history:#And Rogue is unsatisfied,
+                    "[focused_Girl.name] still seems a bit unsatisfied with the experience."
 
                     menu:
                         "Let her keep going?"
                         "Yes, keep going for a bit.":
-                            $ Line = "You let her get back into it"
+                            $ line = "You let her get back into it"
 
                             jump show_cycle
                         "No, I'm done.":
@@ -233,258 +233,258 @@ label show_cycle:
 
                             return
 
-        if Partner and Partner.Lust >= 100:
+        if Partner and Partner.lust >= 100:
             call Girl_Cumming(Partner)
 
-        if "unseen" in Player.focused_girl.RecentActions:
+        if "unseen" in focused_Girl.recent_history:
             if Round == 10:
-                "It's getting a bit late, [Player.focused_girl.Name] will probably be wrapping up soon."
+                "It's getting a bit late, [focused_Girl.name] will probably be wrapping up soon."
             elif Round == 5:
                 "She's definitely going to stop soon."
         else:
-            if Player.focused_girl.Loc == bg_current:
-                call Escalation(Player.focused_girl) #sees if she wants to escalate things
+            if focused_Girl.Loc == bg_current:
+                call Escalation(focused_Girl) #sees if she wants to escalate things
 
             if Round == 10:
                 ch_r "We might want to wrap this up, it's getting late."
 
-                $ Player.focused_girl.Lust += 10
+                $ focused_Girl.lust += 10
             elif Round == 5:
                 ch_r "Seriously, it'll be time to stop soon."
 
-                $ Player.focused_girl.Lust += 25
+                $ focused_Girl.lust += 25
 
-    $ Player.focused_girl.FaceChange("bemused", 0)
+    $ focused_Girl.change_face("bemused", 0)
 
-    $ Line = 0
+    $ line = 0
 
-    if "unseen" not in Player.focused_girl.RecentActions:
-        ch_r "Ok, [Player.focused_girl.Petname], that's enough of that for now."
+    if "unseen" not in focused_Girl.recent_history:
+        ch_r "Ok, [focused_Girl.Petname], that's enough of that for now."
 
 label after_show:
-    if "unseen" in Player.focused_girl.RecentActions:
-        $ Player.focused_girl.FaceChange("surprised", 1)
+    if "unseen" in focused_Girl.recent_history:
+        $ focused_Girl.change_face("surprised", 1)
 
-        "[Player.focused_girl.Name] stops what she's doing with a start, eyes wide."
+        "[focused_Girl.name] stops what she's doing with a start, eyes wide."
 
-        call first_bottomless(Player.focused_girl, 1)
+        call first_bottomless(focused_Girl, 1)
 
-        $ Player.focused_girl.FaceChange("surprised", 1)
+        $ focused_Girl.change_face("surprised", 1)
 
-        if Trigger2 == "jackin":
-            ch_r "H- how long you been stand'in there, [Player.focused_girl.Petname]?"
+        if offhand_action == "jackin":
+            ch_r "H- how long you been stand'in there, [focused_Girl.Petname]?"
 
-            $ Player.focused_girl.Eyes = "down"
+            $ focused_Girl.Eyes = "down"
 
             menu:
                 ch_r "And why is your cock out like that?!"
                 "Long enough, it was an excellent show.":
-                    $ Player.focused_girl.FaceChange("sexy")
-                    $ Player.focused_girl.Statup("Obed", 50, 3)
-                    $ Player.focused_girl.Statup("Obed", 70, 2)
+                    $ focused_Girl.change_face("sexy")
+                    $ focused_Girl.change_stat("obedience", 50, 3)
+                    $ focused_Girl.change_stat("obedience", 70, 2)
 
                     ch_r "Well, I imagine it was. . ."
 
-                    if Player.focused_girl.Love >= 800 or Player.focused_girl.Obed >= 500 or Player.focused_girl.Inbt >= 500:
+                    if focused_Girl.love >= 800 or focused_Girl.obedience >= 500 or focused_Girl.inhibition >= 500:
                         $ temp_modifier += 10
 
-                        $ Player.focused_girl.Statup("Lust", 90, 5)
+                        $ focused_Girl.change_stat("lust", 90, 5)
 
                         ch_r "And the view from this angle ain't so bad either. . ."
                 "I. . . just got here?":
-                    $ Player.focused_girl.FaceChange("angry")
-                    $ Player.focused_girl.Statup("Love", 70, 2)
-                    $ Player.focused_girl.Statup("Love", 90, 1)
-                    $ Player.focused_girl.Statup("Obed", 50, 2)
-                    $ Player.focused_girl.Statup("Obed", 70, 2)
+                    $ focused_Girl.change_face("angry")
+                    $ focused_Girl.change_stat("love", 70, 2)
+                    $ focused_Girl.change_stat("love", 90, 1)
+                    $ focused_Girl.change_stat("obedience", 50, 2)
+                    $ focused_Girl.change_stat("obedience", 70, 2)
 
                     "She looks pointedly at your cock,"
                     ch_r "A likely story . . ."
 
-                    if Player.focused_girl.Love >= 800 or Player.focused_girl.Obed >= 500 or Player.focused_girl.Inbt >= 500:
+                    if focused_Girl.love >= 800 or focused_Girl.obedience >= 500 or focused_Girl.inhibition >= 500:
                         $ temp_modifier += 10
 
-                        $ Player.focused_girl.Statup("Lust", 90, 5)
-                        $ Player.focused_girl.FaceChange("bemused", 1)
+                        $ focused_Girl.change_stat("lust", 90, 5)
+                        $ focused_Girl.change_face("bemused", 1)
 
                         ch_r "Still, can't blame a fella for take'in inspirations."
                     else:
                         $ temp_modifier -= 10
 
-                        $ Player.focused_girl.Statup("Lust", 200, -5)
+                        $ focused_Girl.change_stat("lust", 200, -5)
 
-            call Seen_First_Peen(Player.focused_girl,Partner)
+            call Seen_First_Peen(focused_Girl,Partner)
             ch_r "Hmm. . ."
         else:
-            ch_r "H- how long you been stand'in there, [Player.focused_girl.Petname]?"
+            ch_r "H- how long you been stand'in there, [focused_Girl.Petname]?"
 
             menu:
                 extend ""
                 "Long enough.":
-                    $ Player.focused_girl.FaceChange("sexy", 1)
-                    $ Player.focused_girl.Statup("Obed", 50, 3)
-                    $ Player.focused_girl.Statup("Obed", 70, 2)
+                    $ focused_Girl.change_face("sexy", 1)
+                    $ focused_Girl.change_stat("obedience", 50, 3)
+                    $ focused_Girl.change_stat("obedience", 70, 2)
 
                     ch_r "Well I hope you got a good show out of it. . ."
                 "I just got here.":
-                    $ Player.focused_girl.FaceChange("bemused", 1)
-                    $ Player.focused_girl.Statup("Love", 70, 2)
-                    $ Player.focused_girl.Statup("Love", 90, 1)
+                    $ focused_Girl.change_face("bemused", 1)
+                    $ focused_Girl.change_stat("love", 70, 2)
+                    $ focused_Girl.change_stat("love", 90, 1)
 
                     ch_r "A likely story . . ."
 
-                    $ Player.focused_girl.Statup("Obed", 50, 2)
-                    $ Player.focused_girl.Statup("Obed", 70, 2)
+                    $ focused_Girl.change_stat("obedience", 50, 2)
+                    $ focused_Girl.change_stat("obedience", 70, 2)
 
-        $ Player.focused_girl.DrainWord("unseen",1,0) #She sees you, so remove unseens
-        $ Player.focused_girl.Mast += 1
+        $ focused_Girl.DrainWord("unseen",1,0) #She sees you, so remove unseens
+        $ focused_Girl.Mast += 1
 
         if Round <= 10:
             ch_r "It's getting too late to do much about it right now though."
 
             return
 
-        $ Situation = "join"
+        $ action_context = "join"
 
-        call masturbate(Player.focused_girl)
+        call masturbate(focused_Girl)
 
-    $ Player.focused_girl.Action -= 1
-    $ Player.focused_girl.Mast += 1
+    $ focused_Girl.Action -= 1
+    $ focused_Girl.Mast += 1
 
     if Partner == EmmaX:
-        call Partner_Like(Player.focused_girl,4)
+        call Partner_Like(focused_Girl,4)
     else:
-        call Partner_Like(Player.focused_girl,3)
+        call Partner_Like(focused_Girl,3)
 
     call Checkout
 
-    if Situation == "shift":
-        $ Situation = 0
+    if action_context == "shift":
+        $ action_context = 0
 
         return
 
-    $ Situation = 0
+    $ action_context = 0
 
-    if Player.focused_girl.Loc != bg_current:
+    if focused_Girl.Loc != bg_current:
         return
 
     if Round <= 10:
-        ch_r "I need to take a little break here, [Player.focused_girl.Petname]."
+        ch_r "I need to take a little break here, [focused_Girl.Petname]."
 
         return
 
-    $ Player.focused_girl.FaceChange("sexy", 1)
+    $ focused_Girl.change_face("sexy", 1)
 
-    if Player.focused_girl.Lust < 20:
-        ch_r "That really worked for me, [Player.focused_girl.Petname]. How about you?"
+    if focused_Girl.lust < 20:
+        ch_r "That really worked for me, [focused_Girl.Petname]. How about you?"
     else:
         ch_r "Yeah, what did you want?"
 
     menu:
         extend ""
-        "Well, I have something you could take care of. . ." if Player.Semen and Player.focused_girl.Action:
-            $ Situation = "shift"
+        "Well, I have something you could take care of. . ." if Player.Semen and focused_Girl.Action:
+            $ action_context = "shift"
 
             return
         "You could just keep going. . ." if Player.Semen:
-            $ Player.focused_girl.FaceChange("sly")
+            $ focused_Girl.change_face("sly")
 
-            if Player.focused_girl.Action and Round >= 10:
+            if focused_Girl.Action and Round >= 10:
                 ch_r "Well, alright. . ."
 
                 jump show_cycle
             else:
                 ch_r "I'm kinda worn out, maybe time for a break. . ."
         "I'm good here. [[Stop]":
-            if Player.focused_girl.Love < 800 and Player.focused_girl.Inbt < 500 and Player.focused_girl.Obed < 500:
-                $ Player.focused_girl.OutfitChange(Changed=0)
+            if focused_Girl.love < 800 and focused_Girl.inhibition < 500 and focused_Girl.obedience < 500:
+                $ focused_Girl.OutfitChange(Changed=0)
 
-            $ Player.focused_girl.FaceChange("normal")
-            $ Player.focused_girl.Brows = "confused"
+            $ focused_Girl.change_face("normal")
+            $ focused_Girl.Brows = "confused"
 
             ch_r "Well. . . ok then. . ."
 
-            $ Player.focused_girl.Brows = "normal"
-        "You should probably stop for now." if Player.focused_girl.Lust > 30:
-            $ Player.focused_girl.FaceChange("angry")
+            $ focused_Girl.Brows = "normal"
+        "You should probably stop for now." if focused_Girl.lust > 30:
+            $ focused_Girl.change_face("angry")
 
             ch_r "Well if you say so."
 
     return
 
-label masturbate(character):
+label masturbate(Girl):
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(character)
+    call Shift_Focus(Girl)
 
-    if character.Mast:
+    if Girl.Mast:
         $ temp_modifier += 10
-    if character.SEXP >= 50:
+    if Girl.SEXP >= 50:
         $ temp_modifier += 25
-    elif character.SEXP >= 30:
+    elif Girl.SEXP >= 30:
         $ temp_modifier += 15
-    elif character.SEXP >= 15:
+    elif Girl.SEXP >= 15:
         $ temp_modifier += 5
-    if character.Lust >= 90:
+    if Girl.lust >= 90:
         $ temp_modifier += 20
-    elif character.Lust >= 75:
+    elif Girl.lust >= 75:
         $ temp_modifier += 5
-    if "exhibitionist" in character.Traits:
+    if "exhibitionist" in Girl.Traits:
         $ temp_modifier += (3*Taboo)
-    if character in Player.Harem or "sex friend" in character.Petnames:
+    if Girl in Player.Harem or "sex friend" in Girl.Petnames:
         $ temp_modifier += 10
-    elif "ex" in character.Traits:
+    elif "ex" in Girl.Traits:
         $ temp_modifier -= 40
-    if character.ForcedCount and not character.Forced:
-        $ temp_modifier -= 5 * character.ForcedCount
+    if Girl.ForcedCount and not Girl.Forced:
+        $ temp_modifier -= 5 * Girl.ForcedCount
 
-    $ Approval = ApprovalCheck(character, 1200, TabM = 2) # 120, 135, 150, Taboo -80(200)
+    $ Approval = ApprovalCheck(Girl, 1200, TabM = 2) # 120, 135, 150, Taboo -80(200)
 
-    $ character.DrainWord("unseen",1,0) #She sees you, so remove unseens
+    $ Girl.DrainWord("unseen",1,0) #She sees you, so remove unseens
 
-    if Situation == "join":       # This triggers if you ask to join in
-        if Approval > 1 or (Approval and character.Lust >= 50):
+    if action_context == "join":       # This triggers if you ask to join in
+        if Approval > 1 or (Approval and Girl.lust >= 50):
             $ Player.AddWord(1,"join")
 
             menu:
                 extend ""
-                "Would you like some help? I could lend some helping hands. . ."  if Player.Semen and character.Action:
-                    $ character.Statup("Love", 90, 1)
-                    $ character.Statup("Obed", 50, 2)
-                    $ character.FaceChange("sexy")
+                "Would you like some help? I could lend some helping hands. . ."  if Player.Semen and Girl.Action:
+                    $ Girl.change_stat("love", 90, 1)
+                    $ Girl.change_stat("obedience", 50, 2)
+                    $ Girl.change_face("sexy")
 
-                    ch_r "Well, [character.Petname], I suppose I could use some help with these. . ."
+                    ch_r "Well, [Girl.Petname], I suppose I could use some help with these. . ."
 
-                    $ character.Statup("Obed", 70, 2)
-                    $ character.Statup("Inbt", 70, 1)
+                    $ Girl.change_stat("obedience", 70, 2)
+                    $ Girl.change_stat("inhibition", 70, 1)
 
-                    $ Trigger2 = "fondle breasts"
+                    $ offhand_action = "fondle breasts"
 
-                    $ character.Mast += 1
+                    $ Girl.Mast += 1
 
                     jump show_cycle
-                "Would you like some help? I could. . . up to you, I guess." if Player.Semen and character.Action:
-                    $ character.Statup("Love", 70, 2)
-                    $ character.Statup("Love", 90, 1)
-                    $ character.FaceChange("sexy")
+                "Would you like some help? I could. . . up to you, I guess." if Player.Semen and Girl.Action:
+                    $ Girl.change_stat("love", 70, 2)
+                    $ Girl.change_stat("love", 90, 1)
+                    $ Girl.change_face("sexy")
 
-                    ch_r "Well, [character.Petname], I suppose you could help me with these. . ."
+                    ch_r "Well, [Girl.Petname], I suppose you could help me with these. . ."
 
-                    $ character.Statup("Obed", 70, 2)
-                    $ character.Statup("Inbt", 70, 1)
+                    $ Girl.change_stat("obedience", 70, 2)
+                    $ Girl.change_stat("inhibition", 70, 1)
 
                     $ D20 = renpy.random.randint(1, 20)
 
                     if D20 > 10:
-                        $ Trigger2 = "fondle breasts"
+                        $ offhand_action = "fondle breasts"
                     else:
-                        $ Trigger2 = "suck breasts"
+                        $ offhand_action = "suck breasts"
 
-                    $ character.Mast += 1
+                    $ Girl.Mast += 1
 
                     jump show_cycle
-                "Why don't we take care of each other?" if Player.Semen and character.Action:
-                    $ character.FaceChange("sexy")
+                "Why don't we take care of each other?" if Player.Semen and Girl.Action:
+                    $ Girl.change_face("sexy")
 
                     ch_r "Well what did you have in mind?"
 
@@ -492,56 +492,56 @@ label masturbate(character):
 
                     return                      #returns to sexmenu=
                 "You look like you have things well in hand. . .":
-                    if character.Lust >= 50:
-                        $ character.Statup("Love", 70, 2)
-                        $ character.Statup("Love", 90, 1)
-                        $ character.FaceChange("sexy")
+                    if Girl.lust >= 50:
+                        $ Girl.change_stat("love", 70, 2)
+                        $ Girl.change_stat("love", 90, 1)
+                        $ Girl.change_face("sexy")
 
-                        ch_r "Well, [character.Petname], I suppose I do at that . ."
+                        ch_r "Well, [Girl.Petname], I suppose I do at that . ."
 
-                        $ character.Statup("Obed", 80, 3)
-                        $ character.Statup("Inbt", 80, 5)
+                        $ Girl.change_stat("obedience", 80, 3)
+                        $ Girl.change_stat("inhibition", 80, 5)
 
                         jump show_cycle
-                    elif ApprovalCheck(character, 1000):
-                        $ character.FaceChange("sly")
+                    elif ApprovalCheck(Girl, 1000):
+                        $ Girl.change_face("sly")
 
                         ch_r "Well I did, but I think I've got it taken care of for now. . ."
                     else:
-                        $ character.FaceChange("angry")
+                        $ Girl.change_face("angry")
 
                         ch_r "Well I did, but now you've blown the mood."
 
-        $ character.ArmPose = 1
-        $ character.OutfitChange(Changed=0)
-        $ character.Action -= 1
-        $ Player.Statup("Focus", 50, 30)
+        $ Girl.ArmPose = 1
+        $ Girl.OutfitChange(Changed=0)
+        $ Girl.Action -= 1
+        $ Player.change_stat("Focus", 50, 30)
 
         call Checkout(1)
 
-        $ Line = 0
-        $ Situation = 0
+        $ line = 0
+        $ action_context = 0
 
         $ renpy.pop_call()
 
         if Approval:
-            $ character.FaceChange("bemused", 2)
+            $ Girl.change_face("bemused", 2)
 
-            if bg_current == character.Home:
-                ch_r "So what did you come over for anyway, [character.Petname]?"
+            if bg_current == Girl.Home:
+                ch_r "So what did you come over for anyway, [Girl.Petname]?"
             else:
-                ch_r "So . . . fancy bumping into you here, [character.Petname]. . ."
+                ch_r "So . . . fancy bumping into you here, [Girl.Petname]. . ."
 
-            $ character.Blush = 1
+            $ Girl.Blush = 1
         else:
-            $ character.Statup("Love", 200, -5)
-            $ character.FaceChange("angry")
-            $ character.RecentActions.append("angry")
-            $ character.DailyActions.append("angry")
+            $ Girl.change_stat("love", 200, -5)
+            $ Girl.change_face("angry")
+            $ Girl.recent_history.append("angry")
+            $ Girl.daily_history.append("angry")
 
-            if bg_current == character.Home:
+            if bg_current == Girl.Home:
                 ch_r "Well if you don't mind, I'd kind of appreciate you getting out of here. Maybe knock next time?"
-                "[character.Name] kicks you out of her room."
+                "[Girl.name] kicks you out of her room."
 
                 $ renpy.pop_call()
 
@@ -549,261 +549,261 @@ label masturbate(character):
             else:
                 ch_r "Well if you don't mind, I'm getting out of here. Maybe knock next time?"
 
-                call Remove_Girl(character)
+                call Remove_Girl(Girl)
         return
 
-    if Situation == character:                                                                  #Rogue auto-starts
+    if action_context == Girl:                                                                  #Rogue auto-starts
         if Approval > 2:                                                      # fix, add rogue auto stuff here
-            if character.PantsNum() == 5:
-                "[character.Name]'s hand snakes down her body, and hikes up her skirt."
+            if Girl.wearing_skirt:
+                "[Girl.name]'s hand snakes down her body, and hikes up her skirt."
 
-                $ character.Upskirt = 1
-            elif character.PantsNum() > 6:
-                "[character.Name] slides her hand down her body and into her jeans."
-            elif character.HoseNum() >= 5:
-                "[character.Name]'s hand slides down her body and under her [character.Hose]."
-            elif character.Panties:
-                "[character.Name]'s hand slides down her body and under her [character.Panties]."
+                $ Girl.Upskirt = 1
+            elif Girl.PantsNum() > 6:
+                "[Girl.name] slides her hand down her body and into her jeans."
+            elif Girl.HoseNum() >= 5:
+                "[Girl.name]'s hand slides down her body and under her [Girl.Hose]."
+            elif Girl.Panties:
+                "[Girl.name]'s hand slides down her body and under her [Girl.Panties]."
             else:
-                "[character.Name]'s hand slides down her body and begins to caress her pussy."
+                "[Girl.name]'s hand slides down her body and begins to caress her pussy."
 
-            $ character.SeenPanties = 1
+            $ Girl.SeenPanties = 1
 
             "She starts to slowly rub herself."
 
-            call first_bottomless(character)
+            call first_bottomless(Girl)
 
             menu:
                 "What do you do?"
                 "Nothing.":
-                    $ character.Statup("Inbt", 80, 3)
-                    $ character.Statup("Inbt", 60, 2)
+                    $ Girl.change_stat("inhibition", 80, 3)
+                    $ Girl.change_stat("inhibition", 60, 2)
 
-                    "[character.Name] begins to masturbate."
+                    "[Girl.name] begins to masturbate."
                 "Go for it.":
-                    $ character.FaceChange("sexy, 1")
-                    $ character.Statup("Inbt", 80, 3)
+                    $ Girl.change_face("sexy, 1")
+                    $ Girl.change_stat("inhibition", 80, 3)
 
-                    ch_p "That is so sexy, [character.Pet]."
+                    ch_p "That is so sexy, [Girl.Pet]."
 
-                    $ character.NameCheck() #checks reaction to petname
+                    $ Girl.nameCheck() #checks reaction to petname
 
                     "You lean back and enjoy the show."
 
-                    $ character.Statup("Love", 80, 1)
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 2)
+                    $ Girl.change_stat("love", 80, 1)
+                    $ Girl.change_stat("obedience", 90, 1)
+                    $ Girl.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ character.FaceChange("surprised")
-                    $ character.Statup("Inbt", 70, 1)
+                    $ Girl.change_face("surprised")
+                    $ Girl.change_stat("inhibition", 70, 1)
 
-                    ch_p "Let's not do that right now, [character.Pet]."
+                    ch_p "Let's not do that right now, [Girl.Pet]."
 
-                    $ character.NameCheck() #checks reaction to petname
+                    $ Girl.nameCheck() #checks reaction to petname
 
-                    "[character.Name] pulls her hands away from herself."
+                    "[Girl.name] pulls her hands away from herself."
 
-                    $ character.OutfitChange(Changed=0)
-                    $ character.Statup("Obed", 90, 1)
-                    $ character.Statup("Obed", 50, 1)
-                    $ character.Statup("Obed", 30, 2)
+                    $ Girl.OutfitChange(Changed=0)
+                    $ Girl.change_stat("obedience", 90, 1)
+                    $ Girl.change_stat("obedience", 50, 1)
+                    $ Girl.change_stat("obedience", 30, 2)
 
                     return
             jump before_show
         else:
             $ temp_modifier = 0                               # fix, add rogue auto stuff here
-            $ Trigger2 = 0
+            $ offhand_action = 0
         return
 
-    if not character.Mast:
-        $ character.FaceChange("surprised", 1)
-        $ character.Mouth = "kiss"
+    if not Girl.Mast:
+        $ Girl.change_face("surprised", 1)
+        $ Girl.Mouth = "kiss"
 
         ch_r "You want me to get myself off, while you watch?"
 
-        if character.Forced:
-            $ character.FaceChange("sad")
+        if Girl.Forced:
+            $ Girl.change_face("sad")
             ch_r "So you just want to watch then?"
 
-    if not character.Mast and Approval:
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
-        elif character.Love >= (character.Obed + character.Inbt):
-            $ character.FaceChange("sexy")
-            $ character.Brows = "sad"
-            $ character.Mouth = "smile"
+    if not Girl.Mast and Approval:
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("love", 70, -3, 1)
+            $ Girl.change_stat("love", 20, -2, 1)
+        elif Girl.love >= (Girl.obedience + Girl.inhibition):
+            $ Girl.change_face("sexy")
+            $ Girl.Brows = "sad"
+            $ Girl.Mouth = "smile"
 
             ch_r "Since my love life's been a bit. . . limited, I've gotten pretty good at this."
-        elif character.Obed >= character.Inbt:
-            $ character.FaceChange("normal")
+        elif Girl.obedience >= Girl.inhibition:
+            $ Girl.change_face("normal")
 
-            ch_r "If that's what you want, [character.Petname]. . ."
+            ch_r "If that's what you want, [Girl.Petname]. . ."
         else: # Uninhibited
-            $ character.FaceChange("sad")
-            $ character.Mouth = "smile"
+            $ Girl.change_face("sad")
+            $ Girl.Mouth = "smile"
 
             ch_r "I guess it could be fun with you watching. . ."
     elif Approval:
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Love", 70, -3, 1)
-            $ character.Statup("Love", 20, -2, 1)
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("love", 70, -3, 1)
+            $ Girl.change_stat("love", 20, -2, 1)
 
             ch_r "You want to watch me again?"
-        elif Approval and "masturbation" in character.RecentActions:
-            $ character.FaceChange("sexy", 1)
+        elif Approval and "masturbation" in Girl.recent_history:
+            $ Girl.change_face("sexy", 1)
 
             ch_r "I guess I have a bit more in me. . ."
 
             jump before_show
-        elif Approval and "masturbation" in character.DailyActions:
-            $ character.FaceChange("sexy", 1)
+        elif Approval and "masturbation" in Girl.daily_history:
+            $ Girl.change_face("sexy", 1)
 
-            $ Line = renpy.random.choice(["You enjoyed the show?",
+            $ line = renpy.random.choice(["You enjoyed the show?",
                 "Didn't get enough earlier?",
                 "It is nice to have an audience. . ."])
-            ch_r "[Line]"
-        elif character.Mast < 3:
-            $ character.FaceChange("sexy", 1)
-            $ character.Brows = "confused"
+            ch_r "[line]"
+        elif Girl.Mast < 3:
+            $ Girl.change_face("sexy", 1)
+            $ Girl.Brows = "confused"
 
             ch_r "You like to watch, huh?"
         else:
-            $ character.FaceChange("sexy", 1)
-            $ character.ArmPose = 2
+            $ Girl.change_face("sexy", 1)
+            $ Girl.ArmPose = 2
 
-            $ Line = renpy.random.choice(["You sure do like to watch.",
+            $ line = renpy.random.choice(["You sure do like to watch.",
                 "So you'd like me to go again?",
                 "You want to watch some more?",
                 "You want me ta diddle myself?"])
-            ch_r "[Line]"
+            ch_r "[line]"
 
-            $ Line = 0
+            $ line = 0
 
     if Approval >= 2:
-        if character.Forced:
-            $ character.FaceChange("sad")
-            $ character.Statup("Obed", 90, 1)
-            $ character.Statup("Inbt", 60, 1)
+        if Girl.Forced:
+            $ Girl.change_face("sad")
+            $ Girl.change_stat("obedience", 90, 1)
+            $ Girl.change_stat("inhibition", 60, 1)
 
             ch_r "I suppose, let me get comfortable. . ."
         else:
-            $ character.FaceChange("sexy", 1)
-            $ character.Statup("Love", 90, 1)
-            $ character.Statup("Inbt", 50, 3)
+            $ Girl.change_face("sexy", 1)
+            $ Girl.change_stat("love", 90, 1)
+            $ Girl.change_stat("inhibition", 50, 3)
 
-            $ Line = renpy.random.choice(["Well. . . ok.",
+            $ line = renpy.random.choice(["Well. . . ok.",
                 "I suppose it would help to have something nice to look at. . .",
                 "I've kind of needed this anyways. . .",
                 "Sure!",
                 "I guess I could. . . give it a go.",
                 "Heh, ok, ok."])
-            ch_r "[Line]"
+            ch_r "[line]"
 
-            $ Line = 0
+            $ line = 0
 
-        $ character.Statup("Obed", 20, 1)
-        $ character.Statup("Obed", 60, 1)
-        $ character.Statup("Inbt", 70, 2)
+        $ Girl.change_stat("obedience", 20, 1)
+        $ Girl.change_stat("obedience", 60, 1)
+        $ Girl.change_stat("inhibition", 70, 2)
 
         jump before_show
     else:
         menu:
-            ch_r "That's. . . a little intimate, [character.Petname]."
+            ch_r "That's. . . a little intimate, [Girl.Petname]."
 
             "Maybe later?":
-                $ character.FaceChange("sexy", 1)
+                $ Girl.change_face("sexy", 1)
 
-                if character.Lust > 50:
+                if Girl.lust > 50:
                     ch_r "Well, definitely later. . . but I'll have to think about inviting you."
                 else:
                     ch_r "Hmm, maybe. . . I'll let you know."
 
-                $ character.Statup("Love", 80, 2)
-                $ character.Statup("Inbt", 70, 2)
+                $ Girl.change_stat("love", 80, 2)
+                $ Girl.change_stat("inhibition", 70, 2)
 
                 return
             "You look like you could use it. . .":
                 if Approval:
-                    $ character.FaceChange("sexy")
-                    $ character.Statup("Obed", 90, 2)
-                    $ character.Statup("Obed", 50, 2)
-                    $ character.Statup("Inbt", 70, 3)
-                    $ character.Statup("Inbt", 40, 2)
+                    $ Girl.change_face("sexy")
+                    $ Girl.change_stat("obedience", 90, 2)
+                    $ Girl.change_stat("obedience", 50, 2)
+                    $ Girl.change_stat("inhibition", 70, 3)
+                    $ Girl.change_stat("inhibition", 40, 2)
 
-                    $ Line = renpy.random.choice(["Well. . . ok.",
+                    $ line = renpy.random.choice(["Well. . . ok.",
                         "I suppose it would help to have something nice to look at. . .",
                         "I've kind of needed this anyways. . .",
                         "Sure!",
                         "I guess I could. . . give it a go.",
                         "Heh, ok, ok."])
-                    ch_r "[Line]"
+                    ch_r "[line]"
 
-                    $ Line = 0
+                    $ line = 0
 
                     jump before_show
             "Just get at it already.":                                               # Pressured into it
-                $ Approval = ApprovalCheck(character, 450, "OI", TabM = 2) # 45, 60, 75, -80(125)
+                $ Approval = ApprovalCheck(Girl, 450, "OI", TabM = 2) # 45, 60, 75, -80(125)
 
-                if Approval > 1 or (Approval and character.Forced):
-                    $ character.FaceChange("sad")
-                    $ character.Statup("Love", 70, -5, 1)
-                    $ character.Statup("Love", 200, -5)
+                if Approval > 1 or (Approval and Girl.Forced):
+                    $ Girl.change_face("sad")
+                    $ Girl.change_stat("love", 70, -5, 1)
+                    $ Girl.change_stat("love", 200, -5)
 
                     ch_r "Ok, fine. I'll give it a try."
 
-                    $ character.Statup("Obed", 80, 4)
-                    $ character.Statup("Inbt", 80, 1)
-                    $ character.Statup("Inbt", 60, 3)
-                    $ character.Forced = 1
+                    $ Girl.change_stat("obedience", 80, 4)
+                    $ Girl.change_stat("inhibition", 80, 1)
+                    $ Girl.change_stat("inhibition", 60, 3)
+                    $ Girl.Forced = 1
 
                     jump before_show
                 else:
-                    $ character.Statup("Love", 200, -20)
-                    $ character.RecentActions.append("angry")
-                    $ character.DailyActions.append("angry")
+                    $ Girl.change_stat("love", 200, -20)
+                    $ Girl.recent_history.append("angry")
+                    $ Girl.daily_history.append("angry")
 
-    $ character.ArmPose = 1
+    $ Girl.ArmPose = 1
 
-    if character.Forced:
-        $ character.FaceChange("angry", 1)
+    if Girl.Forced:
+        $ Girl.change_face("angry", 1)
 
         ch_r "I'm not doing something so. . . intimate with you watching."
 
-        $ character.Statup("Lust", 90, 5)
-        if character.Love > 300:
-            $ character.Statup("Love", 70, -2)
+        $ Girl.change_stat("lust", 90, 5)
+        if Girl.love > 300:
+            $ Girl.change_stat("love", 70, -2)
 
-        $ character.Statup("Obed", 50, -2)
-        $ character.RecentActions.append("angry")
-        $ character.DailyActions.append("angry")
-        $ character.RecentActions.append("no masturbation")
-        $ character.DailyActions.append("no masturbation")
+        $ Girl.change_stat("obedience", 50, -2)
+        $ Girl.recent_history.append("angry")
+        $ Girl.daily_history.append("angry")
+        $ Girl.recent_history.append("no masturbation")
+        $ Girl.daily_history.append("no masturbation")
 
         return
     elif Taboo:                             # she refuses and this is too public a place for her
-        $ character.FaceChange("angry", 1)
-        $ character.DailyActions.append("tabno")
+        $ Girl.change_face("angry", 1)
+        $ Girl.daily_history.append("tabno")
 
         ch_r "I can't do that here!"
 
-        $ character.Statup("Lust", 90, 5)
-        $ character.Statup("Obed", 50, -3)
+        $ Girl.change_stat("lust", 90, 5)
+        $ Girl.change_stat("obedience", 50, -3)
 
         return
-    elif character.Mast:
-        $ character.FaceChange("sad")
+    elif Girl.Mast:
+        $ Girl.change_face("sad")
 
         ch_r "Nope, not anymore, you'll have to go back to Internet porn."
     else:
-        $ character.FaceChange("normal", 1)
+        $ Girl.change_face("normal", 1)
 
         ch_r "Heh, no, I'm not doing that."
 
-    $ character.RecentActions.append("no masturbation")
-    $ character.DailyActions.append("no masturbation")
+    $ Girl.recent_history.append("no masturbation")
+    $ Girl.daily_history.append("no masturbation")
 
     $ temp_modifier = 0
 
@@ -815,14 +815,14 @@ label masturbate(character):
 
 
 
-label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],BO=[]): #rkeljsv
+label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],Girls=[]): #rkeljsv
         #Note, this event would break during a date, since it manipulates Adjacent. Perhaps use unique list?
         $ Present = []
-        $ BO = TotalGirls[:]
-        while BO:
-                if BO[0].Loc == bg_current:
-                        $ Present.append(BO[0])
-                $ BO.remove(BO[0])
+        $ Girls = all_Girls[:]
+        while Girls:
+                if Girls[0].Loc == bg_current:
+                        $ Present.append(Girls[0])
+                $ Girls.remove(Girls[0])
 
         if not Present:
                 "Nobody's here."
@@ -845,71 +845,71 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],BO=[
         call Shift_Focus(Present[0])
 
         $ Round -= 5 if Round > 5 else (Round-1)
-        call Set_The_Scene(1,0,0,0)
+        call set_the_scene(1,0,0,0)
 
-        $ Present[0].FaceChange("sexy",1)
+        $ Present[0].change_face("sexy",1)
         if len(Present) >= 2:
-                if Present[1] in TotalGirls:
-                        $ Present[1].FaceChange("sexy",1)
+                if Present[1] in all_Girls:
+                        $ Present[1].change_face("sexy",1)
                 else:
                         $ Present.remove(Present[1])
 
-        $ Cnt = len(Present) #max 2
-        while Cnt:
-            $ Cnt -= 1 #max 1
-            if Girl == EmmaX and "classcaught" in EmmaX.RecentActions and AloneCheck(EmmaX):
+        $ counter = len(Present) #max 2
+        while counter:
+            $ counter -= 1 #max 1
+            if Girl == EmmaX and "classcaught" in EmmaX.recent_history and AloneCheck(EmmaX):
                         #skip this step if during classcaught sequence
                         pass
-            elif not ApprovalCheck(Present[Cnt], 600, TabM = 1,Alt=[[EmmaX],(650+Taboo*10)]) or (Present[Cnt] == EmmaX and Taboo and "taboo" not in EmmaX.History):
-                    if not ApprovalCheck(Present[Cnt], 400):
-                        if Present[Cnt] == RogueX:
+            elif not ApprovalCheck(Present[counter], 600, TabM = 1,Alt=[[EmmaX],(650+Taboo*10)]) or (Present[counter] == EmmaX and Taboo and "taboo" not in EmmaX.History):
+                    if not ApprovalCheck(Present[counter], 400):
+                        if Present[counter] == RogueX:
                                 ch_r "I'm just some sort'a gogo dancer now?"
-                        elif Present[Cnt] == KittyX:
+                        elif Present[counter] == KittyX:
                                 ch_k "Like I would just dance for you?"
-                        elif Present[Cnt] == EmmaX:
+                        elif Present[counter] == EmmaX:
                                 ch_e "Oh, you think I'll dance to your tune?"
-                        elif Present[Cnt] == LauraX:
+                        elif Present[counter] == LauraX:
                                 ch_l "I don't dance."
-                        elif Present[Cnt] == JeanX:
+                        elif Present[counter] == JeanX:
                                 ch_j "I'm not in the mood."
-                        elif Present[Cnt] == StormX:
+                        elif Present[counter] == StormX:
                                 ch_s "I do not dance."
-                        elif Present[Cnt] == JubesX:
+                        elif Present[counter] == JubesX:
                                 ch_v "I don't wanna dance, weirdo. . ."
-                    elif Present[Cnt].Taboo:
-                        if Present[Cnt] == RogueX:
+                    elif Present[counter].Taboo:
+                        if Present[counter] == RogueX:
                                 ch_r "I don't think this is the best place for dance'n."
-                        elif Present[Cnt] == KittyX:
+                        elif Present[counter] == KittyX:
                                 ch_k "I don't know, this really isn't a good place for it?"
-                        elif Present[Cnt] == EmmaX:
+                        elif Present[counter] == EmmaX:
                                 ch_e "You must be joking. Here?"
-                        elif Present[Cnt] == LauraX:
+                        elif Present[counter] == LauraX:
                                 if ApprovalCheck(LauraX, 600, TabM = 0):    #should add a second Laura, then the first gets removed.
                                         $ Present.append(LauraX)            #This restores the "taboo is irrelevant to her" state
                                 else:
                                         ch_l "I don't feel like it."
-                        elif Present[Cnt] == JeanX:
+                        elif Present[counter] == JeanX:
                                 ch_j "I don't want to just randomly dance in public."
-                        elif Present[Cnt] == StormX:
+                        elif Present[counter] == StormX:
                                 ch_s "I would not want to make a scene."
-                        elif Present[Cnt] == JubesX:
+                        elif Present[counter] == JubesX:
                                 ch_v "This isn't really the place for it. . ."
                     else:
-                        if Present[Cnt] == RogueX:
+                        if Present[counter] == RogueX:
                                 ch_r "I dont feel it right now."
-                        elif Present[Cnt] == KittyX:
+                        elif Present[counter] == KittyX:
                                 ch_k "I don't know, I don't really feel like dancing right now."
-                        elif Present[Cnt] == EmmaX:
+                        elif Present[counter] == EmmaX:
                                 ch_e "I don't really feel like dancing at the moment."
-                        elif Present[Cnt] == LauraX:
+                        elif Present[counter] == LauraX:
                                 ch_l "I don't feel like it."
-                        elif Present[Cnt] == JeanX:
+                        elif Present[counter] == JeanX:
                                 ch_j "I'm not in the mood."
-                        elif Present[Cnt] == StormX:
+                        elif Present[counter] == StormX:
                                 ch_s "I do not wish to dance right now."
-                        elif Present[Cnt] == JubesX:
+                        elif Present[counter] == JubesX:
                                 ch_v "Yeah, I don't feel like dancing right now. . ."
-                    $ Present.remove(Present[Cnt])
+                    $ Present.remove(Present[counter])
 
         if not Present:
                 return
@@ -926,84 +926,84 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],BO=[
                                 ch_e "I should really be going."
                                 call Remove_Girl(EmmaX)
 
-        if "stripping" in Present[0].DailyActions and ApprovalCheck(Present[0], 500, TabM = 3):
-                $ Line = renpy.random.choice(["You liked the show earlier?",
+        if "stripping" in Present[0].daily_history and ApprovalCheck(Present[0], 500, TabM = 3):
+                $ line = renpy.random.choice(["You liked the show earlier?",
                     "Didn't get enough earlier?",
                     "You're going to wear me out."])
         else:
-                $ Line = renpy.random.choice(["Ok, that sounds fun.",
+                $ line = renpy.random.choice(["Ok, that sounds fun.",
                     "I could get into that.",
                     "Yeah, ok."])
 
-        call AnyLine(Present[0],Line)
-        $ Line = 0
+        call Anyline(Present[0],line)
+        $ line = 0
 
         call AllReset("All")
 
 
-        $ Cnt = len(Present) #max 2
-        while Cnt:
-                $ Cnt -= 1 #max 1
-                if Present[Cnt] == RogueX:
+        $ counter = len(Present) #max 2
+        while counter:
+                $ counter -= 1 #max 1
+                if Present[counter] == RogueX:
                             show Rogue_Sprite at Girl_Dance1(RogueX)
-                elif Present[Cnt] == KittyX:
+                elif Present[counter] == KittyX:
                             show Kitty_Sprite at Girl_Dance1(KittyX)
-                elif Present[Cnt] == EmmaX:
+                elif Present[counter] == EmmaX:
                             show Emma_Sprite at Girl_Dance1(EmmaX)
-                elif Present[Cnt] == LauraX:
+                elif Present[counter] == LauraX:
                             show Laura_Sprite at Girl_Dance1(LauraX)
-                elif Present[Cnt] == JeanX:
+                elif Present[counter] == JeanX:
                             show Jean_Sprite at Girl_Dance1(JeanX)
-                elif Present[Cnt] == StormX:
+                elif Present[counter] == StormX:
                             show Storm_Sprite at Girl_Dance1(StormX)
-                elif Present[Cnt] == JubesX:
+                elif Present[counter] == JubesX:
                             show Jubes_Sprite at Girl_Dance1(JubesX)
-                $ Present[Cnt].RecentActions.append("stripping")
-                $ Present[Cnt].DailyActions.append("stripping")
-                $ Present[Cnt].Strip += 1
-                $ Present[Cnt].Action -= 1
-                $ temp_modifierP[Cnt] = temp_modifier
-                if Present[Cnt].SeenChest or Present[Cnt].SeenPussy:
+                $ Present[counter].recent_history.append("stripping")
+                $ Present[counter].daily_history.append("stripping")
+                $ Present[counter].Strip += 1
+                $ Present[counter].Action -= 1
+                $ temp_modifierP[counter] = temp_modifier
+                if Present[counter].SeenChest or Present[counter].SeenPussy:
                         #You've seen her tits.
-                        $ temp_modifierP[Cnt] += 20
-                if Present[Cnt].SeenPanties:
+                        $ temp_modifierP[counter] += 20
+                if Present[counter].SeenPanties:
                         #You've seen her panties.
-                        $ temp_modifierP[Cnt] += 5
-                if "exhibitionist" in Present[Cnt].Traits:
-                        $ temp_modifierP[Cnt] += (4*Taboo)
-                if ("sex friend" in Present[Cnt].Petnames or Present[Cnt] in Player.Harem) and not Taboo:
-                        $ temp_modifierP[Cnt] += 15
-                elif "ex" in Present[Cnt].Traits:
-                        $ temp_modifierP[Cnt] -= 40
-                elif Present[Cnt].ForcedCount and not Present[Cnt].Forced:
-                        $ temp_modifierP[Cnt] -= 5 * Present[Cnt].ForcedCount
+                        $ temp_modifierP[counter] += 5
+                if "exhibitionist" in Present[counter].Traits:
+                        $ temp_modifierP[counter] += (4*Taboo)
+                if ("sex friend" in Present[counter].Petnames or Present[counter] in Player.Harem) and not Taboo:
+                        $ temp_modifierP[counter] += 15
+                elif "ex" in Present[counter].Traits:
+                        $ temp_modifierP[counter] -= 40
+                elif Present[counter].ForcedCount and not Present[counter].Forced:
+                        $ temp_modifierP[counter] -= 5 * Present[counter].ForcedCount
 
         if len(Present) >= 2:
                 "They start to dance."
                 $ Partner = Present[1]
-                $ Count2 = 1
+                $ between_event_count = 1
         else:
                 "She starts to dance."
-                $ Count2 = 0
+                $ between_event_count = 0
                 $ Partner = 0
 
 
-        if Girl == EmmaX and "classcaught" in EmmaX.RecentActions and AloneCheck(EmmaX):
+        if Girl == EmmaX and "classcaught" in EmmaX.recent_history and AloneCheck(EmmaX):
                 #skip this step if during classcaught sequence
                 $ Count = 0
                 jump Group_Stripping
 
         #this portion adds back in girls who dropped out, but sets their "stop" flag.
-        $ BO = TotalGirls[:]
-        while BO:
-                if BO[0].Loc == bg_current and BO[0] not in Present:
-                        $ Present.append(BO[0])
-                        if "stopdancing" not in BO[0].RecentActions:
-                                $ BO[0].RecentActions.append("stopdancing")
-                $ BO.remove(BO[0])
+        $ Girls = all_Girls[:]
+        while Girls:
+                if Girls[0].Loc == bg_current and Girls[0] not in Present:
+                        $ Present.append(Girls[0])
+                        if "stopdancing" not in Girls[0].recent_history:
+                                $ Girls[0].recent_history.append("stopdancing")
+                $ Girls.remove(Girls[0])
 
         $ temp_modifier = temp_modifierP[0]
-        $ Trigger = "strip"
+        $ primary_action = "strip"
         $ Count = 1
 
         while Count and Round >=10:
@@ -1017,7 +1017,7 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],BO=[
                             pass
                     "Would you kindly take off some clothes?":
                             #add checks here
-                            call AnyLine(Present[0],"Hmm?")
+                            call Anyline(Present[0],"Hmm?")
                             $ Count = 0
                     "Stop":
                             jump Group_Strip_End
@@ -1026,7 +1026,7 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],BO=[
         if EmmaX.Loc == bg_current and len(Present) >= 2:
                 #If Emma is here, but does not agree to this,
                 if "classcaught" not in EmmaX.History or "three" not in EmmaX.History or (Taboo and "taboo" not in EmmaX.History):
-                    if EmmaX.Loc == "bg emma":
+                    if EmmaX.Loc == "bg_emma":
                             #if it's her room. . .
                             ch_e "If the two of you would like to get indecent, please do it elsewhere."
                             $ Present = []
@@ -1039,7 +1039,7 @@ label Group_Stripping:
         while Round >= 10 and Present:
             $ Round -= 2 if Round > 2 else Round
 
-            if Present[Count] != Ch_Focus:
+            if Present[Count] != focused_Girl:
                     call Shift_Focus(Present[Count])
 
             call Girl_Stripping(Present[Count])
@@ -1048,53 +1048,53 @@ label Group_Stripping:
                     $ Count = 0
             if not Present or not Present[Count]: #threw "list index" errors?
                     jump Group_Strip_End
-            if "stopdancing" in Present[Count].RecentActions:
+            if "stopdancing" in Present[Count].recent_history:
                     #if she's just standing around, cut back to the other girl
-                    if len(Present) >= 2 and "stopdancing" in Present[0].RecentActions and "stopdancing" in Present[1].RecentActions:
+                    if len(Present) >= 2 and "stopdancing" in Present[0].recent_history and "stopdancing" in Present[1].recent_history:
                             jump Group_Strip_End
 
-            $ Trigger = "strip"
+            $ primary_action = "strip"
 
             if not Present:
                     #If everyone leaves, quit out
                     jump Group_Strip_End
 
-            if len(Present) >= 2 and Count != Count2:
-                $ Present[Count].GLG(Present[Count2],800,2,1)
-                $ Present[Count2].GLG(Present[Count],800,2,1)
+            if len(Present) >= 2 and Count != between_event_count:
+                $ Present[Count].GLG(Present[between_event_count],800,2,1)
+                $ Present[between_event_count].GLG(Present[Count],800,2,1)
 
             if len(Present) >= 2:
                     # Flips the numbers if in a group
                     # Count starts at 0
-                    if Count == 0 and "stopdancing" not in Present[1].RecentActions:
+                    if Count == 0 and "stopdancing" not in Present[1].recent_history:
                             $ Count = 1
-                            $ Count2 = 0
+                            $ between_event_count = 0
                             $ temp_modifierP[1] = temp_modifier
                             $ temp_modifier = temp_modifierP[0]
-                    elif Count == 1 and "stopdancing" not in Present[0].RecentActions:
+                    elif Count == 1 and "stopdancing" not in Present[0].recent_history:
                             $ Count = 0
-                            $ Count2 = 1
+                            $ between_event_count = 1
                             $ temp_modifierP[0] = temp_modifier
                             $ temp_modifier = temp_modifierP[1]
                     call Shift_Focus(Present[Count])
-    #                $ Partner = Present[Count2]
+    #                $ Partner = Present[between_event_count]
 
-                    call Activity_Check(Ch_Focus,Partner)
+                    call Activity_Check(focused_Girl,Partner)
 
-            if len(Present) < 2 or "stopdancing" in Present[1].RecentActions:
+            if len(Present) < 2 or "stopdancing" in Present[1].recent_history:
                     #Plays if only one girl is dancing
                     $ temp_modifier = temp_modifierP[Count]
                     $ Count = 0
-                    $ Count2 = 0
+                    $ between_event_count = 0
                     $ Partner = 0
 
-                    call Activity_Check(Ch_Focus,Partner)
+                    call Activity_Check(focused_Girl,Partner)
 
-                    if not Present or "stopdancing" in Present[0].RecentActions:
+                    if not Present or "stopdancing" in Present[0].recent_history:
                             jump Group_Strip_End
             #ends loop
         if Present and Round <=15:
-                call AnyLine(Present[0],"It's getting late, we should probably take a break.")
+                call Anyline(Present[0],"It's getting late, we should probably take a break.")
 
 label Group_Strip_End:
         #add like-ups here. . .
@@ -1105,9 +1105,9 @@ label Group_Strip_End:
                 $ Present[1].DrainWord("stopdancing",1,0,0)
                 $ Present[1].DrainWord("keepdancing",1,0,0)
 
-        call Set_The_Scene(1,0,0,0)
+        call set_the_scene(1,0,0,0)
         $ Count = 0
-        $ Count2 = 0
+        $ between_event_count = 0
     #    $ renpy.pop_call()
         return
 
@@ -1116,12 +1116,12 @@ label Group_Strip_End:
 
 label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
         #This gets called by Group_Stripping, and returns there at the end.
-        if "stopdancing" in Girl.RecentActions:
+        if "stopdancing" in Girl.recent_history:
                 #if she's just standing around, cut back to the other girl
                 return
 
         $ Girl.ArmPose = 2
-        $ Girl.LustFace(1) #sets her lusty face
+        $ Girl.lustFace(1) #sets her lusty face
 
         if Girl == StormX and (StormX in Rules or Girl.Taboo <= 20):
                 #if it's Storm and either you're in private or have broken Xavier, she doesn't fight you
@@ -1129,63 +1129,63 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
                         $ Nudist = -40
                 else:
                         $ Nudist = Girl.Taboo
-        if "keepdancing" not in Girl.RecentActions:
+        if "keepdancing" not in Girl.recent_history:
                 # if Count isn't 2, it loops.
                 if Girl == JubesX and Girl.Acc and (Girl.Over or Girl.Chest) and (Girl.Panties or Girl.Legs or Girl.HoseNum() >= 10):
                     #will she lose the jacket when she's dressed under?
                     if ApprovalCheck(Girl, 750, TabM = 3):
-                            $ Girl.Statup("Obed", 50, 1)
-                            $ Girl.Statup("Inbt", 25, 1)
-                            $ Player.Statup("Focus", 60, 3)
-                            $ Line = Girl.Acc
+                            $ Girl.change_stat("obedience", 50, 1)
+                            $ Girl.change_stat("inhibition", 25, 1)
+                            $ Player.change_stat("Focus", 60, 3)
+                            $ line = Girl.Acc
                             $ Girl.Acc = 0
-                            "She shrugs off her [Line] and throws it behind her."
+                            "She shrugs off her [line] and throws it behind her."
                     else:
                             jump Strip_Ultimatum
                 elif Girl == JubesX and Girl.Acc and Girl.Over and (Girl.Panties or Girl.Legs or Girl.HoseNum() >= 10):
                     #will she lose the jacket when she's dressed under?
                     if ApprovalCheck(Girl, 750, TabM = 3):
-                            $ Girl.Statup("Obed", 50, 1)
-                            $ Girl.Statup("Inbt", 25, 1)
-                            $ Player.Statup("Focus", 60, 3)
-                            $ Line = Girl.Acc
+                            $ Girl.change_stat("obedience", 50, 1)
+                            $ Girl.change_stat("inhibition", 25, 1)
+                            $ Player.change_stat("Focus", 60, 3)
+                            $ line = Girl.Acc
                             $ Girl.Acc = 0
-                            "She shrugs off her [Line] and throws it behind her."
+                            "She shrugs off her [line] and throws it behind her."
                     else:
                             jump Strip_Ultimatum
                 elif Girl.Over and Girl.Chest and (Girl.Panties or Girl.Legs or Girl.HoseNum() >= 10):
                     #will she lose the overshirt when she's dressed under?
                     if ApprovalCheck(Girl, 750, TabM = 3,Alt=[[StormX],(300-Nudist*3)]):
-                            $ Girl.Statup("Obed", 50, 1)
-                            $ Girl.Statup("Inbt", 25, 1)
-                            $ Player.Statup("Focus", 60, 3)
-                            $ Line = Girl.Over
+                            $ Girl.change_stat("obedience", 50, 1)
+                            $ Girl.change_stat("inhibition", 25, 1)
+                            $ Player.change_stat("Focus", 60, 3)
+                            $ line = Girl.Over
                             $ Girl.Over = 0
                             if Girl == KittyX:
-                                    "She drops her shoulders and her [Line] falls to the floor."
+                                    "She drops her shoulders and her [line] falls to the floor."
                             else:
-                                    "She pulls her [Line] over her head and throws it behind her."
+                                    "She pulls her [line] over her head and throws it behind her."
                     else:
                             jump Strip_Ultimatum
 
                 elif Girl.Legs and (Girl.Panties or Girl.HoseNum() >= 10):
                     #will she lose the pants/skirt if she has panties on?
                     if ApprovalCheck(Girl, 1200, TabM = 3,Alt=[[StormX],(600-Nudist*3)]) or (Girl.SeenPanties and ApprovalCheck(Girl, 900, TabM = 3) and not Girl.Taboo):
-                            $ Girl.Statup("Lust", 50, 5)
-                            $ Girl.Statup("Obed", 50, 1)
-                            $ Girl.Statup("Inbt", 30, 1)
-                            $ Player.Statup("Focus", 60, 5)
-                            $ Line = Girl.Legs
+                            $ Girl.change_stat("lust", 50, 5)
+                            $ Girl.change_stat("obedience", 50, 1)
+                            $ Girl.change_stat("inhibition", 30, 1)
+                            $ Player.change_stat("Focus", 60, 5)
+                            $ line = Girl.Legs
                             $ Girl.Legs = 0
                             if Girl == KittyX:
-                                    "Her [Line] slide through her legs until they're only on her toes, before she kicks them to the floor."
+                                    "Her [line] slide through her legs until they're only on her toes, before she kicks them to the floor."
                             else:
-                                    "She unzips and pulls down her [Line], dropping them to the floor."
+                                    "She unzips and pulls down her [line], dropping them to the floor."
                             if not Girl.SeenPanties:
-                                    $ Girl.Statup("Obed", 50, 2)
-                                    $ Girl.Statup("Obed", 200, 3)
-                                    $ Girl.Statup("Inbt", 50, 3)
-                                    $ Girl.Statup("Inbt", 200, 2)
+                                    $ Girl.change_stat("obedience", 50, 2)
+                                    $ Girl.change_stat("obedience", 200, 3)
+                                    $ Girl.change_stat("inhibition", 50, 3)
+                                    $ Girl.change_stat("inhibition", 200, 2)
                                     $ Girl.SeenPanties = 1
                     else:
                             jump Strip_Ultimatum
@@ -1194,274 +1194,274 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
                     # Will she lose the hose?
                     if Girl.HoseNum() >= 10:
                             if ApprovalCheck(Girl, 1200, TabM = 3):
-                                    $ Girl.Statup("Lust", 50, 6)
-                                    $ Player.Statup("Focus", 60, 6)
+                                    $ Girl.change_stat("lust", 50, 6)
+                                    $ Player.change_stat("Focus", 60, 6)
                             else:
                                     jump Strip_Ultimatum
 
                     elif Girl.HoseNum() >= 6 and ApprovalCheck(Girl, 1200, TabM = 3):
                             if ApprovalCheck(Girl, 1200, TabM = 3,Alt=[[StormX],(600-Nudist*3)]):
-                                $ Girl.Statup("Lust", 50, 4)
-                                $ Player.Statup("Focus", 60, 4)
+                                $ Girl.change_stat("lust", 50, 4)
+                                $ Player.change_stat("Focus", 60, 4)
                             else:
                                 jump Strip_Ultimatum
                     else:
-                            $ Player.Statup("Focus", 60, 3)
-                    $ Line = Girl.Hose
+                            $ Player.change_stat("Focus", 60, 3)
+                    $ line = Girl.Hose
                     $ Girl.Hose = 0
                     if Girl == KittyX:
-                            "Her [Line] slide down off her legs, leaving them in a small pile."
+                            "Her [line] slide down off her legs, leaving them in a small pile."
                     else:
-                            "She rolls the [Line] down off her legs, leaving them in a small pile."
+                            "She rolls the [line] down off her legs, leaving them in a small pile."
                     call expression Girl.Tag + "_First_Bottomless" pass (1)
 
                 elif Girl == JubesX and Girl.Acc and (Girl.Panties or Girl.Legs or Girl.HoseNum() >= 10):
                     #will she lose the jacket when she's topless under?
                     if ApprovalCheck(Girl, 1250, TabM = 3) or (Girl.SeenChest and ApprovalCheck(Girl, 1000, TabM = 3) and not Girl.Taboo):
-                            $ Girl.Statup("Lust", 60, 5)
-                            $ Girl.Statup("Obed", 50, 2)
-                            $ Girl.Statup("Inbt", 50, 10)
-                            $ Player.Statup("Focus", 80, 15)
-                            $ Line = Girl.Acc
+                            $ Girl.change_stat("lust", 60, 5)
+                            $ Girl.change_stat("obedience", 50, 2)
+                            $ Girl.change_stat("inhibition", 50, 10)
+                            $ Player.change_stat("Focus", 80, 15)
+                            $ line = Girl.Acc
                             $ Girl.Acc = 0
-                            "She shrugs off her [Line] and throws it behind her."
+                            "She shrugs off her [line] and throws it behind her."
                             if not Girl.SeenChest:
-                                    $ Girl.FaceChange("bemused", 1)
-                                    $ Girl.Statup("Obed", 50, 3)
-                                    $ Girl.Statup("Obed", 200, 4)
-                                    $ Girl.Statup("Inbt", 50, 3)
-                                    $ Girl.Statup("Inbt", 200, 3)
-                                    "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                                    $ Girl.change_face("bemused", 1)
+                                    $ Girl.change_stat("obedience", 50, 3)
+                                    $ Girl.change_stat("obedience", 200, 4)
+                                    $ Girl.change_stat("inhibition", 50, 3)
+                                    $ Girl.change_stat("inhibition", 200, 3)
+                                    "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                                     call first_topless(Girl, silent = True)
                     else:
                             jump Strip_Ultimatum
                 elif Girl.Over and not Girl.Chest and (Girl.Panties or Girl.HoseNum() >= 10):
                     #will she lose the top when she's topless with panties?
                     if ApprovalCheck(Girl, 1250, TabM = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.SeenChest and ApprovalCheck(Girl, 1000, TabM = 3) and not Girl.Taboo):
-                            $ Girl.Statup("Lust", 60, 5)
-                            $ Girl.Statup("Obed", 50, 2)
-                            $ Girl.Statup("Inbt", 50, 10)
-                            $ Player.Statup("Focus", 80, 15)
-                            $ Line = Girl.Over
+                            $ Girl.change_stat("lust", 60, 5)
+                            $ Girl.change_stat("obedience", 50, 2)
+                            $ Girl.change_stat("inhibition", 50, 10)
+                            $ Player.change_stat("Focus", 80, 15)
+                            $ line = Girl.Over
                             $ Girl.Over = 0
                             if not Girl.SeenChest:
-                                    $ Girl.FaceChange("bemused", 1)
-                                    $ Girl.Statup("Obed", 50, 3)
-                                    $ Girl.Statup("Obed", 200, 4)
-                                    $ Girl.Statup("Inbt", 50, 3)
-                                    $ Girl.Statup("Inbt", 200, 3)
+                                    $ Girl.change_face("bemused", 1)
+                                    $ Girl.change_stat("obedience", 50, 3)
+                                    $ Girl.change_stat("obedience", 200, 4)
+                                    $ Girl.change_stat("inhibition", 50, 3)
+                                    $ Girl.change_stat("inhibition", 200, 3)
                                     if Girl == KittyX:
-                                            "She hesitantly glances your way, and then with tug her [Line] passes through her, tossing it to the ground."
+                                            "She hesitantly glances your way, and then with tug her [line] passes through her, tossing it to the ground."
                                     elif Girl in (EmmaX,LauraX,StormX):
-                                            "She glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                                            "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                                     else:
-                                            "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                                            "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                                     call first_topless(Girl, silent = True)
                             else:
                                 if Girl == KittyX:
-                                        "She drops her shoulders and her [Line] falls to the floor."
+                                        "She drops her shoulders and her [line] falls to the floor."
                                 else:
-                                        "She pulls her [Line] over her head, tossing it to the ground."
+                                        "She pulls her [line] over her head, tossing it to the ground."
                     else:
                             jump Strip_Ultimatum
 
                 elif Girl.Chest and not Girl.Over:
                     # Will she lose the bra?
                     if ApprovalCheck(Girl, 1250, TabM = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.SeenChest and ApprovalCheck(Girl, 1000, TabM = 3) and not Girl.Taboo):
-                            $ Girl.Statup("Lust", 60, 5)
-                            $ Girl.Statup("Obed", 50, 2)
-                            $ Girl.Statup("Inbt", 50, 1)
-                            $ Player.Statup("Focus", 80, 15)
-                            $ Line = Girl.Chest
+                            $ Girl.change_stat("lust", 60, 5)
+                            $ Girl.change_stat("obedience", 50, 2)
+                            $ Girl.change_stat("inhibition", 50, 1)
+                            $ Player.change_stat("Focus", 80, 15)
+                            $ line = Girl.Chest
                             $ Girl.Chest = 0
                             if not Girl.SeenChest:
-                                    $ Girl.FaceChange("bemused", 1)
+                                    $ Girl.change_face("bemused", 1)
                                     if Girl == KittyX:
-                                            "She hesitantly glances your way, and then with a shrug pulls her [Line] through herself, tossing it to the ground."
+                                            "She hesitantly glances your way, and then with a shrug pulls her [line] through herself, tossing it to the ground."
                                     elif Girl in (EmmaX,LauraX,StormX):
-                                            "She glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                                            "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                                     else:
-                                            "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
-                                    $ Girl.Statup("Obed", 50, 3)
-                                    $ Girl.Statup("Obed", 200, 4)
-                                    $ Girl.Statup("Inbt", 50, 3)
-                                    $ Girl.Statup("Inbt", 200, 3)
+                                            "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
+                                    $ Girl.change_stat("obedience", 50, 3)
+                                    $ Girl.change_stat("obedience", 200, 4)
+                                    $ Girl.change_stat("inhibition", 50, 3)
+                                    $ Girl.change_stat("inhibition", 200, 3)
                                     call first_topless(Girl, silent = True)
                             else:
-                                    $ Girl.FaceChange("sexy")
+                                    $ Girl.change_face("sexy")
                                     if Girl == KittyX:
-                                            "She pulls her [Line] through herself, tossing it to the ground."
+                                            "She pulls her [line] through herself, tossing it to the ground."
                                     else:
-                                            "She pulls her [Line] over her head, tossing it to the ground."
+                                            "She pulls her [line] over her head, tossing it to the ground."
                     else:
                             jump Strip_Ultimatum
 
                 elif Girl.Legs:
                     #will she lose the pants/skirt if she has no panties on?
                     if ApprovalCheck(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
-                            $ Girl.Statup("Lust", 75, 10)
-                            $ Line = Girl.Legs
+                            $ Girl.change_stat("lust", 75, 10)
+                            $ line = Girl.Legs
                             $ Girl.Legs = 0
                             if not Girl.SeenPussy:
-                                    $ Girl.Statup("Obed", 60, 3)
-                                    $ Girl.Statup("Obed", 200, 5)
-                                    $ Girl.Statup("Inbt", 50, 4)
-                                    $ Girl.Statup("Inbt", 200, 4)
+                                    $ Girl.change_stat("obedience", 60, 3)
+                                    $ Girl.change_stat("obedience", 200, 5)
+                                    $ Girl.change_stat("inhibition", 50, 4)
+                                    $ Girl.change_stat("inhibition", 200, 4)
                                     if Girl == KittyX:
-                                            "She shyly looks up at you, and then slowly lets her [Line] slide to the floor."
+                                            "She shyly looks up at you, and then slowly lets her [line] slide to the floor."
                                     elif Girl in (EmmaX,LauraX,JeanX):
-                                            "She hesitantly looks up at you, and then slowly unzips and pulls down her [Line], dropping them to the floor."
+                                            "She hesitantly looks up at you, and then slowly unzips and pulls down her [line], dropping them to the floor."
                                     else:
-                                            "She shyly looks up at you, and then slowly unzips and pulls down her [Line], dropping them to the floor."
+                                            "She shyly looks up at you, and then slowly unzips and pulls down her [line], dropping them to the floor."
                                     call expression Girl.Tag + "_First_Bottomless" pass (1)
                             else:
-                                    $ Girl.Statup("Obed", 50, 1)
-                                    $ Girl.Statup("Obed", 75, 1)
+                                    $ Girl.change_stat("obedience", 50, 1)
+                                    $ Girl.change_stat("obedience", 75, 1)
                                     if Girl == KittyX:
-                                            "She lets her [Line] pass through her legs, dropping them to the floor."
+                                            "She lets her [line] pass through her legs, dropping them to the floor."
                                     else:
-                                            "She unzips and pulls down her [Line], dropping them to the floor."
-                                    $ Girl.Statup("Inbt", 70, 2)
-                            $ Player.Statup("Focus", 85, 15)
+                                            "She unzips and pulls down her [line], dropping them to the floor."
+                                    $ Girl.change_stat("inhibition", 70, 2)
+                            $ Player.change_stat("Focus", 85, 15)
                     else:
                             jump Strip_Ultimatum
 
                 elif Girl == JubesX and Girl.Acc:
                     #will she lose the jacket when she's naked under?
                     if ApprovalCheck(Girl, 1350, TabM = 3) or (Girl.SeenPussy and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
-                            $ Line = Girl.Acc
+                            $ line = Girl.Acc
                             $ Girl.Acc = 0
                             if not Girl.SeenPussy:
-                                    $ Girl.Statup("Obed", 60, 3)
-                                    $ Girl.Statup("Obed", 200, 5)
-                                    $ Girl.Statup("Inbt", 50, 4)
-                                    $ Girl.Statup("Inbt", 200, 4)
-                                    "She hesitantly glances your way, and then with a shrug pulls her [Line] off, tossing it to the ground."
+                                    $ Girl.change_stat("obedience", 60, 3)
+                                    $ Girl.change_stat("obedience", 200, 5)
+                                    $ Girl.change_stat("inhibition", 50, 4)
+                                    $ Girl.change_stat("inhibition", 200, 4)
+                                    "She hesitantly glances your way, and then with a shrug pulls her [line] off, tossing it to the ground."
                                     call expression Girl.Tag + "_First_Bottomless" pass (1)
                             else:
-                                    "She shrugs her [Line] off, tossing it to the ground."
+                                    "She shrugs her [line] off, tossing it to the ground."
 
                             if not Girl.Chest or Girl.Uptop:
                                 if not Girl.SeenChest:
-                                        $ Girl.Statup("Obed", 50, 3)
-                                        $ Girl.Statup("Inbt", 50, 3)
+                                        $ Girl.change_stat("obedience", 50, 3)
+                                        $ Girl.change_stat("inhibition", 50, 3)
                                         call first_topless(Girl, silent = True)
                                 else:
-                                        $ Girl.Statup("Lust", 60, 15)
-                                        $ Girl.Statup("Obed", 50, 3)
-                                        $ Girl.Statup("Obed", 75, 1)
-                                        $ Girl.Statup("Inbt", 50, 3)
+                                        $ Girl.change_stat("lust", 60, 15)
+                                        $ Girl.change_stat("obedience", 50, 3)
+                                        $ Girl.change_stat("obedience", 75, 1)
+                                        $ Girl.change_stat("inhibition", 50, 3)
                             else:
-                                    $ Girl.Statup("Lust", 75, 10)
-                                    $ Girl.Statup("Obed", 50, 1)
-                                    $ Girl.Statup("Obed", 75, 1)
-                                    $ Girl.Statup("Inbt", 70, 2)
-                            $ Player.Statup("Focus", 85, 15)
+                                    $ Girl.change_stat("lust", 75, 10)
+                                    $ Girl.change_stat("obedience", 50, 1)
+                                    $ Girl.change_stat("obedience", 75, 1)
+                                    $ Girl.change_stat("inhibition", 70, 2)
+                            $ Player.change_stat("Focus", 85, 15)
                     else:
                             jump Strip_Ultimatum
                 elif Girl.Over and not Girl.Panties:
                     #will she lose the overshirt when she's bottomless under?
                     if ApprovalCheck(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
-                            $ Line = Girl.Over
+                            $ line = Girl.Over
                             $ Girl.Over = 0
                             if not Girl.SeenPussy:
-                                    $ Girl.Statup("Obed", 60, 3)
-                                    $ Girl.Statup("Obed", 200, 5)
-                                    $ Girl.Statup("Inbt", 50, 4)
-                                    $ Girl.Statup("Inbt", 200, 4)
+                                    $ Girl.change_stat("obedience", 60, 3)
+                                    $ Girl.change_stat("obedience", 200, 5)
+                                    $ Girl.change_stat("inhibition", 50, 4)
+                                    $ Girl.change_stat("inhibition", 200, 4)
                                     if Girl == KittyX:
-                                            "She hesitantly glances your way, and then with a tug pulls her [Line] through herself, tossing it to the ground."
+                                            "She hesitantly glances your way, and then with a tug pulls her [line] through herself, tossing it to the ground."
                                     elif Girl in (EmmaX,LauraX,StormX):
-                                            "She glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                                            "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                                     else:
-                                            "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                                            "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                                     call expression Girl.Tag + "_First_Bottomless" pass (1)
                             else:
                                 if Girl == KittyX:
-                                        "She drops her shoulders and her [Line] falls to the floor."
+                                        "She drops her shoulders and her [line] falls to the floor."
                                 else:
-                                        "She pulls her [Line] over her head, tossing it to the ground."
+                                        "She pulls her [line] over her head, tossing it to the ground."
 
                             if not Girl.Chest or Girl.Uptop:
                                 if not Girl.SeenChest:
-                                        $ Girl.Statup("Obed", 50, 3)
-                                        $ Girl.Statup("Inbt", 50, 3)
+                                        $ Girl.change_stat("obedience", 50, 3)
+                                        $ Girl.change_stat("inhibition", 50, 3)
                                         call first_topless(Girl, silent = True)
                                 else:
-                                        $ Girl.Statup("Lust", 60, 15)
-                                        $ Girl.Statup("Obed", 50, 3)
-                                        $ Girl.Statup("Obed", 75, 1)
-                                        $ Girl.Statup("Inbt", 50, 3)
+                                        $ Girl.change_stat("lust", 60, 15)
+                                        $ Girl.change_stat("obedience", 50, 3)
+                                        $ Girl.change_stat("obedience", 75, 1)
+                                        $ Girl.change_stat("inhibition", 50, 3)
                             else:
-                                    $ Girl.Statup("Lust", 75, 10)
-                                    $ Girl.Statup("Obed", 50, 1)
-                                    $ Girl.Statup("Obed", 75, 1)
-                                    $ Girl.Statup("Inbt", 70, 2)
-                            $ Player.Statup("Focus", 85, 15)
+                                    $ Girl.change_stat("lust", 75, 10)
+                                    $ Girl.change_stat("obedience", 50, 1)
+                                    $ Girl.change_stat("obedience", 75, 1)
+                                    $ Girl.change_stat("inhibition", 70, 2)
+                            $ Player.change_stat("Focus", 85, 15)
                     else:
                             jump Strip_Ultimatum
 
                 elif Girl.Chest:
                     # Will she go topless?
                     if ApprovalCheck(Girl, 1250, TabM = 3,Alt=[[StormX],(750-Nudist*3)]) or (Girl.SeenChest and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
-                            $ Girl.Statup("Lust", 60, 5)
-                            $ Line = Girl.Chest
+                            $ Girl.change_stat("lust", 60, 5)
+                            $ line = Girl.Chest
                             $ Girl.Chest = 0
                             if not Girl.SeenChest:
-                                    $ Girl.Statup("Obed", 50, 3)
-                                    $ Girl.Statup("Obed", 200, 4)
-                                    $ Girl.Statup("Inbt", 50, 3)
-                                    $ Girl.Statup("Inbt", 200, 3)
+                                    $ Girl.change_stat("obedience", 50, 3)
+                                    $ Girl.change_stat("obedience", 200, 4)
+                                    $ Girl.change_stat("inhibition", 50, 3)
+                                    $ Girl.change_stat("inhibition", 200, 3)
                                     if Girl == KittyX:
-                                            "She hesitantly glances your way, and then with a tug pulls her [Line] through herself, tossing it to the ground."
+                                            "She hesitantly glances your way, and then with a tug pulls her [line] through herself, tossing it to the ground."
                                     elif Girl in (EmmaX,LauraX,StormX):
-                                            "She glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                                            "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                                     else:
-                                            "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                                            "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                                     call first_topless(Girl, silent = True)
                             else:
-                                    $ Girl.Statup("Obed", 50, 2)
+                                    $ Girl.change_stat("obedience", 50, 2)
                                     if Girl == KittyX:
-                                            "She drops her shoulders and her [Line] falls to the floor."
+                                            "She drops her shoulders and her [line] falls to the floor."
                                     else:
-                                            "She pulls her [Line] over her head, tossing it to the ground."
-                                    $ Girl.Statup("Inbt", 50, 1)
-                            $ Player.Statup("Focus", 80, 15)
+                                            "She pulls her [line] over her head, tossing it to the ground."
+                                    $ Girl.change_stat("inhibition", 50, 1)
+                            $ Player.change_stat("Focus", 80, 15)
                     else:
                             jump Strip_Ultimatum
 
                 elif Girl.Panties:
                     # Will she go bottomless?
                     if ApprovalCheck(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
-                            $ Girl.Statup("Lust", 75, 10)
-                            $ Line = Girl.Panties
+                            $ Girl.change_stat("lust", 75, 10)
+                            $ line = Girl.Panties
                             $ Girl.Panties = 0
                             if not Girl.SeenPussy:
-                                    $ Girl.Statup("Obed", 60, 3)
-                                    $ Girl.Statup("Obed", 200, 5)
-                                    $ Girl.Statup("Inbt", 50, 4)
-                                    $ Girl.Statup("Inbt", 200, 4)
+                                    $ Girl.change_stat("obedience", 60, 3)
+                                    $ Girl.change_stat("obedience", 200, 5)
+                                    $ Girl.change_stat("inhibition", 50, 4)
+                                    $ Girl.change_stat("inhibition", 200, 4)
                                     if Girl == KittyX:
-                                            "She shyly looks up at you, and then slowly tugs her [Line] off, flinging them to the side."
+                                            "She shyly looks up at you, and then slowly tugs her [line] off, flinging them to the side."
                                     elif Girl in (EmmaX,LauraX):
-                                            "She looks up at you, and then slowly pulls her [Line] down, kicking them off to the side."
+                                            "She looks up at you, and then slowly pulls her [line] down, kicking them off to the side."
                                     else:
-                                            "She shyly looks up at you, and then slowly pulls her [Line] down, kicking them off to the side."
+                                            "She shyly looks up at you, and then slowly pulls her [line] down, kicking them off to the side."
                                     call expression Girl.Tag + "_First_Bottomless" pass (1)
                             else:
-                                    $ Girl.Statup("Obed", 50, 1)
-                                    $ Girl.Statup("Obed", 75, 1)
+                                    $ Girl.change_stat("obedience", 50, 1)
+                                    $ Girl.change_stat("obedience", 75, 1)
                                     if Girl == KittyX:
-                                            "She  looks up at you, and then gently pulls her [Line] off, flicking them to the side."
+                                            "She  looks up at you, and then gently pulls her [line] off, flicking them to the side."
                                     else:
-                                            "She  looks up at you, and then gently pulls her [Line] down, kicking them off to the side."
-                                    $ Girl.Statup("Inbt", 70, 2)
-                            $ Player.Statup("Focus", 85, 15)
+                                            "She  looks up at you, and then gently pulls her [line] down, kicking them off to the side."
+                                    $ Girl.change_stat("inhibition", 70, 2)
+                            $ Player.change_stat("Focus", 85, 15)
                     else:
                             jump Strip_Ultimatum
 
                 else:
-                    $ Girl.FaceChange("sexy")
+                    $ Girl.change_face("sexy")
                     if Girl == RogueX:
                             ch_r "I'm afraid that's all I have on, [Girl.Petname]. . ."
                     elif Girl == KittyX:
@@ -1479,44 +1479,44 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
                     menu:
                             extend ""
                             "Ok, you can stop":
-                                    $ Girl.RecentActions.append("stopdancing")
+                                    $ Girl.recent_history.append("stopdancing")
                                     call reset_position(Girl)
 
                                     return
                             "Keep on dancing":
-                                    $ Girl.RecentActions.append("keepdancing")
-        # end "nude" not in Girl.RecentActions loop
+                                    $ Girl.recent_history.append("keepdancing")
+        # end "nude" not in Girl.recent_history loop
 
-        $ Girl.Statup("Lust", 70, 2)               #lust/Focus
+        $ Girl.change_stat("lust", 70, 2)               #lust/Focus
         if "exhibitionist" in Girl.Traits:
-                $ Girl.Statup("Lust", 200, 2)
-        $ Player.Statup("Focus", 60, 3)
-        if Trigger2 == "jackin":
-                $ Girl.Statup("Lust", 200, 2)
-                $ Player.Statup("Focus", 200, 5)
+                $ Girl.change_stat("lust", 200, 2)
+        $ Player.change_stat("Focus", 60, 3)
+        if offhand_action == "jackin":
+                $ Girl.change_stat("lust", 200, 2)
+                $ Player.change_stat("Focus", 200, 5)
 
         if not Player.Semen and Player.Focus >= 50:
                 $ Player.Focus = 50
 
-        if Player.Focus >= 100 or Girl.Lust >= 100:
+        if Player.Focus >= 100 or Girl.lust >= 100:
                 #If either of you could cum
 
                 if Player.Focus >= 100:
                     #You cum
                     call Player_Cumming(Girl)
-                    if "angry" in Girl.RecentActions:
+                    if "angry" in Girl.recent_history:
                             return
-                    $ Girl.Statup("Lust", 200, 5)
-                    if not Player.Semen and Trigger2 == "jackin":
+                    $ Girl.change_stat("lust", 200, 5)
+                    if not Player.Semen and offhand_action == "jackin":
                             "You're spitting dust here, maybe just watch quietly for a while."
-                            $ Trigger2 = 0
+                            $ offhand_action = 0
                     if Player.Focus > 80:
                             jump Group_Strip_End
 
-                if Girl.Lust >= 100:
+                if Girl.lust >= 100:
                     #and girl cums
                     call Girl_Cumming(Girl)
-                    if Situation == "shift" or "angry" in Girl.RecentActions:
+                    if action_context == "shift" or "angry" in Girl.recent_history:
                             $ Count = 0
                             jump Group_Strip_End
 
@@ -1537,31 +1537,31 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
                 elif Girl == JubesX:
                             show Jubes_Sprite at Girl_Dance1(Girl)
 
-                "[Girl.Name] begins to dance again."
+                "[Girl.name] begins to dance again."
 
-        if Partner and Partner.Lust >= 100:
+        if Partner and Partner.lust >= 100:
                 #Checks if partner could orgasm
                 call Girl_Cumming(Partner)
 
         menu:
-            "[Girl.Name] should. . ."
-            "Keep Going. . ." if "keepdancing" not in Girl.RecentActions:
+            "[Girl.name] should. . ."
+            "Keep Going. . ." if "keepdancing" not in Girl.recent_history:
                     $ Girl.Eyes = "sexy"
-                    if Girl.Love >= 700 or Girl.Obed >= 500:
+                    if Girl.love >= 700 or Girl.obedience >= 500:
                         if not temp_modifier:
                             $ temp_modifier = 10
                         elif temp_modifier <= 20:
                             $ temp_modifier += 1
                     if Taboo and Girl.Strip <= 10:
-                        $ Girl.Statup("Obed", 50, 7)
+                        $ Girl.change_stat("obedience", 50, 7)
                     elif Taboo or Girl.Strip <= 10:
-                        $ Girl.Statup("Obed", 50, 5)
+                        $ Girl.change_stat("obedience", 50, 5)
                     elif Girl.Strip <= 50:
-                        $ Girl.Statup("Obed", 50, 3)
-            "Keep Dancing. . ." if "keepdancing" in Girl.RecentActions:
+                        $ Girl.change_stat("obedience", 50, 3)
+            "Keep Dancing. . ." if "keepdancing" in Girl.recent_history:
                     $ Girl.Eyes = "sexy"
 
-            "Stop stripping, keep dancing" if "keepdancing" not in Girl.RecentActions:
+            "Stop stripping, keep dancing" if "keepdancing" not in Girl.recent_history:
                     if Girl == RogueX:
                             ch_r "Ok. . ."
                     elif Girl == KittyX:
@@ -1576,42 +1576,42 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
                             ch_s "Fine. . ."
                     elif Girl == JubesX:
                             ch_v "Oh, well ok. . ."
-                    $ Girl.RecentActions.append("keepdancing")
+                    $ Girl.recent_history.append("keepdancing")
 
-            "Start stripping again" if "keepdancing" in Girl.RecentActions:
-                    $ Girl.RecentActions.remove("keepdancing")
-                    if "stripforced" in Girl.RecentActions:
-                            call AnyLine(Girl,". . .")
+            "Start stripping again" if "keepdancing" in Girl.recent_history:
+                    $ Girl.recent_history.remove("keepdancing")
+                    if "stripforced" in Girl.recent_history:
+                            call Anyline(Girl,". . .")
                     else:
                             if Girl == RogueX:
                                     ch_r "Hmm. . ."
                             elif Girl == KittyX:
                                     ch_k "Huh?"
                             else:
-                                    call AnyLine(Girl,"Hmm. . .")
+                                    call Anyline(Girl,"Hmm. . .")
 
             "Just watch silently":
-                if "watching" not in Girl.RecentActions:
-                    if "keepdancing" not in Girl.RecentActions:
+                if "watching" not in Girl.recent_history:
+                    if "keepdancing" not in Girl.recent_history:
                         if Taboo and Girl.Strip <= 10:
-                            $ Girl.Statup("Inbt", 50, 3)
+                            $ Girl.change_stat("inhibition", 50, 3)
                         elif Taboo or Girl.Strip <= 10:
-                            $ Girl.Statup("Inbt", 50, 1)
+                            $ Girl.change_stat("inhibition", 50, 1)
                     elif Girl.Strip <= 50:
-                            $ Girl.Statup("Inbt", 50, 2)
-                            $ Girl.Statup("Lust", 70, 2)
-                    $ Girl.RecentActions.append("watching")
+                            $ Girl.change_stat("inhibition", 50, 2)
+                            $ Girl.change_stat("lust", 70, 2)
+                    $ Girl.recent_history.append("watching")
 
-            "Start jack'in it." if Trigger2 != "jackin":
+            "Start jack'in it." if offhand_action != "jackin":
                     call Jackin(Girl)
-            "Stop jack'in it." if Trigger2 == "jackin":
-                    $ Trigger2 = 0
+            "Stop jack'in it." if offhand_action == "jackin":
+                    $ offhand_action = 0
 
             "Lose the [Girl.Arms]. . ." if Girl.Arms:
-                    $ Girl.FaceChange("surprised")
+                    $ Girl.change_face("surprised")
                     $ Girl.Mouth = "kiss"
-                    call AnyLine(Girl,"All right, "+Girl.Petname+".")
-                    $ Girl.FaceChange("sexy")
+                    call Anyline(Girl,"All right, "+Girl.Petname+".")
+                    $ Girl.change_face("sexy")
                     $ Girl.Arms = 0
 
             "Ok, that's enough.":
@@ -1620,7 +1620,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
                     elif Girl == KittyX:
                             ch_k "Ok. . ."
                     else:
-                            call AnyLine(Girl,"Alright, "+Girl.Petname+".")
+                            call Anyline(Girl,"Alright, "+Girl.Petname+".")
                     $ renpy.pop_call()
                     jump Group_Strip_End
 
@@ -1628,14 +1628,14 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
 
 
 label Strip_Ultimatum: #rkeljsv
-        if "keepdancing" in Girl.RecentActions:
+        if "keepdancing" in Girl.recent_history:
             return
 
         call reset_position(Girl)
 
-        $ Girl.FaceChange("bemused", 1)
-        if "stripforced" in Girl.RecentActions:
-                    $ Girl.FaceChange("sad", 1)
+        $ Girl.change_face("bemused", 1)
+        if "stripforced" in Girl.recent_history:
+                    $ Girl.change_face("sad", 1)
                     if Girl == RogueX:
                             ch_r "That's as far as I care to go, [Girl.Petname]."
                     elif Girl == KittyX:
@@ -1668,22 +1668,22 @@ label Strip_Ultimatum: #rkeljsv
         menu:
             extend ""
             "That's ok, you can stop.":
-                    if "ultimatum" not in Girl.DailyActions:
-                            $ Girl.Statup("Love", 50, 2)
-                            $ Girl.Statup("Love", 90, 2)
-                            $ Girl.Statup("Inbt", 50, 2)
-                            $ Girl.DailyActions.append("ultimatum")
-                    $ Girl.RecentActions.append("stopdancing")
+                    if "ultimatum" not in Girl.daily_history:
+                            $ Girl.change_stat("love", 50, 2)
+                            $ Girl.change_stat("love", 90, 2)
+                            $ Girl.change_stat("inhibition", 50, 2)
+                            $ Girl.daily_history.append("ultimatum")
+                    $ Girl.recent_history.append("stopdancing")
                     return
             "That's ok, but keep dancing for a bit. . .":
-                    if "ultimatum" not in Girl.DailyActions:
-                            $ Girl.Statup("Love", 50, 2)
-                            $ Girl.Statup("Obed", 50, 2)
-                            $ Girl.Statup("Inbt", 50, 2)
-                            $ Girl.DailyActions.append("ultimatum")
-                    $ Girl.RecentActions.append("keepdancing")
-                    if "stripforced" in Girl.RecentActions:
-                            call AnyLine(Girl,". . .")
+                    if "ultimatum" not in Girl.daily_history:
+                            $ Girl.change_stat("love", 50, 2)
+                            $ Girl.change_stat("obedience", 50, 2)
+                            $ Girl.change_stat("inhibition", 50, 2)
+                            $ Girl.daily_history.append("ultimatum")
+                    $ Girl.recent_history.append("keepdancing")
+                    if "stripforced" in Girl.recent_history:
+                            call Anyline(Girl,". . .")
                     else:
                             if Girl == RogueX:
                                     ch_r "Heh, ok [Girl.Petname]."
@@ -1701,7 +1701,7 @@ label Strip_Ultimatum: #rkeljsv
                                     ch_v "Ok, sure. . ."
             "You'd better." if Girl.Forced:
                     if not ApprovalCheck(Girl, 500, "O", TabM=5) and not ApprovalCheck(Girl, 800, "L", TabM=5):
-                            $ Girl.FaceChange("angry")
+                            $ Girl.change_face("angry")
                             if Girl == RogueX:
                                     ch_r "I don't know who you think I am, but I ain't gonna just jump when you say \"toad\"."
                                     ch_r "I think we're done here for now."
@@ -1719,16 +1719,16 @@ label Strip_Ultimatum: #rkeljsv
                                     ch_s "I do not appreciate that tone."
                             elif Girl == JubesX:
                                     ch_v "I'd better not break your face either. . ."
-                            $ Girl.RecentActions.append("angry")
-                            $ Girl.DailyActions.append("angry")
+                            $ Girl.recent_history.append("angry")
+                            $ Girl.daily_history.append("angry")
                             call Remove_Girl(Girl)
                             return
                     $ temp_modifier += 20
                     $ Girl.Forced += 1
-                    $ Girl.FaceChange("sad")
-                    if "stripforced" in Girl.RecentActions:
-                            $ Girl.FaceChange("angry")
-                            call AnyLine(Girl,". . .")
+                    $ Girl.change_face("sad")
+                    if "stripforced" in Girl.recent_history:
+                            $ Girl.change_face("angry")
+                            call Anyline(Girl,". . .")
                     else:
                             if Girl == RogueX:
                                     ch_r "I. . . guess I could. . ."
@@ -1744,11 +1744,11 @@ label Strip_Ultimatum: #rkeljsv
                                     ch_s ". . ."
                             elif Girl == JubesX:
                                     ch_v "Well. . . ok. . ."
-                            $ Girl.RecentActions.append("stripforced")
-                    $ Girl.Statup("Love", 200, -40)
+                            $ Girl.recent_history.append("stripforced")
+                    $ Girl.change_stat("love", 200, -40)
             "You can do better than that. Keep going." if not Girl.Forced:
                     if not ApprovalCheck(Girl, 300, "O", TabM=5) and not ApprovalCheck(Girl, 700, "L", TabM=5):
-                            $ Girl.FaceChange("angry")
+                            $ Girl.change_face("angry")
                             if Girl == RogueX:
                                     ch_r "I don't know who you think I am, but I ain't gonna just jump when you say \"toad\"."
                                     ch_r "I think we're done here for now."
@@ -1766,16 +1766,16 @@ label Strip_Ultimatum: #rkeljsv
                                     ch_s "No, I do not think so."
                             elif Girl == JubesX:
                                     ch_v "Oh, I can, but you're not goinna see it. . ."
-                            $ Girl.RecentActions.append("angry")
-                            $ Girl.DailyActions.append("angry")
+                            $ Girl.recent_history.append("angry")
+                            $ Girl.daily_history.append("angry")
                             call Remove_Girl(Girl)
                             return
-                    $ Girl.Statup("Love", 200, -10)
-                    $ Girl.Statup("Obed", 50, 3)
-                    $ Girl.Statup("Obed", 75, 5)
+                    $ Girl.change_stat("love", 200, -10)
+                    $ Girl.change_stat("obedience", 50, 3)
+                    $ Girl.change_stat("obedience", 75, 5)
                     $ temp_modifier += 20
                     $ Girl.Forced += 1
-                    $ Girl.FaceChange("sad")
+                    $ Girl.change_face("sad")
                     if Girl == RogueX:
                             ch_r "Well, if you insist. . ."
                     elif Girl == KittyX:
@@ -1790,8 +1790,8 @@ label Strip_Ultimatum: #rkeljsv
                             ch_s "We shall see. . ."
                     elif Girl == JubesX:
                             ch_v "Ok, how about this. . ."
-        if "ultimatum" not in Girl.DailyActions:
-                    $ Girl.DailyActions.append("ultimatum")
+        if "ultimatum" not in Girl.daily_history:
+                    $ Girl.daily_history.append("ultimatum")
 
         if Girl == RogueX:
                     show Rogue_Sprite at Girl_Dance1(Girl)
@@ -1807,5 +1807,5 @@ label Strip_Ultimatum: #rkeljsv
                     show Storm_Sprite at Girl_Dance1(Girl)
         elif Girl == JubesX:
                     show Jubes_Sprite at Girl_Dance1(Girl)
-        "[Girl.Name] begins to dance again."
+        "[Girl.name] begins to dance again."
         return

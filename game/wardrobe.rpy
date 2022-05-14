@@ -1,15 +1,15 @@
-label WardrobeEditor(Chr=0): #rkeljs
+label WardrobeEditor(Girl=0): #rkeljs
     while True:
         menu Wardrobe_Menu:
             "View" if True:
                 while True:
                     menu:
                         "Default":
-                            call expression Chr.Tag + "_Pos_Reset" pass (0)
+                            call expression Girl.Tag + "_Pos_Reset" pass (0)
                         "Face":
-                            call expression Chr.Tag + "_Kissing_Launch" pass (0)
+                            call expression Girl.Tag + "_Kissing_Launch" pass (0)
                         "Body":
-                            call expression Chr.Tag + "_Pussy_Launch" pass (0)
+                            call expression Girl.Tag + "_Pussy_Launch" pass (0)
                         "Face Low":
                             call Storm_Hide
                             show Storm_Sprite at sprite_location(StormX.sprite_location) zorder StormX.Layer
@@ -17,173 +17,173 @@ label WardrobeEditor(Chr=0): #rkeljs
                                 ease 0.5 offset (100,200) zoom 1.5 alpha 1
 
                         "BJ":
-                            if not renpy.showing(Chr.Tag+"_BJ_Animation"):
-                                call expression Chr.Tag + "_BJ_Launch"
+                            if not renpy.showing(Girl.Tag+"_BJ_Animation"):
+                                call expression Girl.Tag + "_BJ_Launch"
                             else:
-                                call expression Chr.Tag + "_BJ_Reset"
+                                call expression Girl.Tag + "_BJ_Reset"
                         "HJ":
-                            if not renpy.showing(Chr.Tag+"_HJ_Animation"):
-                                call expression Chr.Tag + "_HJ_Launch"
+                            if not renpy.showing(Girl.Tag+"_HJ_Animation"):
+                                call expression Girl.Tag + "_HJ_Launch"
                             else:
-                                call expression Chr.Tag + "_HJ_Reset"
+                                call expression Girl.Tag + "_HJ_Reset"
                         "TJ":
-                            if not renpy.showing(Chr.Tag+"_TJ_Animation"):
-                                call expression Chr.Tag + "_TJ_Launch"
+                            if not renpy.showing(Girl.Tag+"_TJ_Animation"):
+                                call expression Girl.Tag + "_TJ_Launch"
                             else:
-                                call expression Chr.Tag + "_TJ_Reset"
-                        "Doggy" if Chr == RogueX:
-                            $ Chr.Pose = "doggy"
-                            if not renpy.showing(Chr.Tag+"_Doggy"):
-                                call expression Chr.Tag + "_Sex_Launch" #call expression Chr.Tag + "_Doggy_Launch"
+                                call expression Girl.Tag + "_TJ_Reset"
+                        "Doggy" if Girl == RogueX:
+                            $ Girl.Pose = "doggy"
+                            if not renpy.showing(Girl.Tag+"_Doggy"):
+                                call expression Girl.Tag + "_Sex_Launch" #call expression Girl.Tag + "_Doggy_Launch"
                             else:
-                                call expression Chr.Tag + "_Sex_Reset" #call expression Chr.Tag + "_Doggy_Reset"
-                        "Sexpose" if Chr != RogueX:
-                            if not renpy.showing(Chr.Tag+"_SexSprite"):
-                                call expression Chr.Tag + "_Sex_Launch"
+                                call expression Girl.Tag + "_Sex_Reset" #call expression Girl.Tag + "_Doggy_Reset"
+                        "Sexpose" if Girl != RogueX:
+                            if not renpy.showing(Girl.Tag+"_SexSprite"):
+                                call expression Girl.Tag + "_Sex_Launch"
                             else:
-                                call expression Chr.Tag + "_Sex_Reset"
+                                call expression Girl.Tag + "_Sex_Reset"
                         "Back":
                             jump Wardrobe_Menu
             # Outfits
             "First casual outfit":
-                $ Chr.OutfitChange("casual1")
+                $ Girl.OutfitChange("casual1")
             "Second casual outfit":
-                $ Chr.OutfitChange("casual2")
+                $ Girl.OutfitChange("casual2")
             "Nude":
-                $ Chr.OutfitChange("nude")
+                $ Girl.OutfitChange("nude")
             "Shirts":
                 while True:
                     menu:
-                        "Remove [Chr.Over]" if Chr.Over:
-                            $ Chr.Over = 0
-                        "Add mesh top" if Chr == RogueX:
-                            $ Chr.Over = "mesh top"
-                            $ Chr.Neck = "spiked collar"
-                            $ Chr.Arms = "gloves"
-                            if Chr.Chest == "buttoned tank":
-                                $ Chr.Chest = "tank"
-                        "Add pink top" if Chr == RogueX:
-                            $ Chr.Over = "pink top"
-                            $ Chr.Arms = "gloves"
-                        "Add pink top" if Chr == KittyX:
-                            $ Chr.Over = "pink top"
-                        "Add red top" if Chr == KittyX or Chr == JubesX:
-                            $ Chr.Over = "red shirt"
-                        "Add black top" if Chr == JubesX:
-                            $ Chr.Over = "black shirt"
-                        "Add tube top" if Chr == JubesX:
-                            $ Chr.Over = "tube top"
-                        "Add pink shirt" if Chr == JeanX:
-                            $ Chr.Over = "pink shirt"
-                        "Add green shirt" if Chr == JeanX:
-                            $ Chr.Over = "green shirt"
-                        "Add yellow shirt" if Chr == JeanX:
-                            $ Chr.Over = "yellow shirt"
+                        "Remove [Girl.Over]" if Girl.Over:
+                            $ Girl.Over = 0
+                        "Add mesh top" if Girl == RogueX:
+                            $ Girl.Over = "mesh top"
+                            $ Girl.Neck = "spiked collar"
+                            $ Girl.Arms = "gloves"
+                            if Girl.Chest == "buttoned tank":
+                                $ Girl.Chest = "tank"
+                        "Add pink top" if Girl == RogueX:
+                            $ Girl.Over = "pink top"
+                            $ Girl.Arms = "gloves"
+                        "Add pink top" if Girl == KittyX:
+                            $ Girl.Over = "pink top"
+                        "Add red top" if Girl == KittyX or Girl == JubesX:
+                            $ Girl.Over = "red shirt"
+                        "Add black top" if Girl == JubesX:
+                            $ Girl.Over = "black shirt"
+                        "Add tube top" if Girl == JubesX:
+                            $ Girl.Over = "tube top"
+                        "Add pink shirt" if Girl == JeanX:
+                            $ Girl.Over = "pink shirt"
+                        "Add green shirt" if Girl == JeanX:
+                            $ Girl.Over = "green shirt"
+                        "Add yellow shirt" if Girl == JeanX:
+                            $ Girl.Over = "yellow shirt"
                         "Add jacket":
-                            if Chr == JubesX:
-                                    $ Chr.Acc = "jacket"
+                            if Girl == JubesX:
+                                    $ Girl.Acc = "jacket"
                             else:
-                                    $ Chr.Acc = "jacket"
-                        "Open/shut jacket" if Chr == JubesX:
-                            if Chr.Acc == "jacket":
-                                    $ Chr.Acc = "shut jacket"
+                                    $ Girl.Acc = "jacket"
+                        "Open/shut jacket" if Girl == JubesX:
+                            if Girl.Acc == "jacket":
+                                    $ Girl.Acc = "shut jacket"
                             else:
-                                    $ Chr.Acc = "jacket"
-                        "wide open jacket" if Chr == JubesX:
-                            if Chr.Acc == "jacket":
-                                    $ Chr.Acc = "open jacket"
+                                    $ Girl.Acc = "jacket"
+                        "wide open jacket" if Girl == JubesX:
+                            if Girl.Acc == "jacket":
+                                    $ Girl.Acc = "open jacket"
                             else:
-                                    $ Chr.Acc = "jacket"
-                        "Remove jacket" if Chr.Acc == "jacket":
-                                    $ Chr.Acc = 0
+                                    $ Girl.Acc = "jacket"
+                        "Remove jacket" if Girl.Acc == "jacket":
+                                    $ Girl.Acc = 0
 
-                        "Add white shirt" if Chr == StormX:
-                            $ Chr.Over = "white shirt"
-                        "Dress" if Chr == EmmaX:
-                            $ Chr.Over = "dress"
+                        "Add white shirt" if Girl == StormX:
+                            $ Girl.Over = "white shirt"
+                        "Dress" if Girl == EmmaX:
+                            $ Girl.Over = "dress"
                         "Add nighty":
-                            $ Chr.Over = "nighty"
-                            $ Chr.Arms = 0
+                            $ Girl.Over = "nighty"
+                            $ Girl.Arms = 0
                         "Add towel":
-                            $ Chr.Over = "towel"
-                            $ Chr.Arms = 0
+                            $ Girl.Over = "towel"
+                            $ Girl.Arms = 0
                         "Toggle Pierce":
-                            if Chr.Pierce == "ring":
-                                $ Chr.Pierce = "barbell"
-                            elif Chr.Pierce == "barbell":
-                                $ Chr.Pierce = 0
+                            if Girl.Pierce == "ring":
+                                $ Girl.Pierce = "barbell"
+                            elif Girl.Pierce == "barbell":
+                                $ Girl.Pierce = 0
                             else:
-                                $ Chr.Pierce = "ring"
+                                $ Girl.Pierce = "ring"
                         "Toggle up-top":
-                            if Chr.Uptop:
-                                $ Chr.Uptop = 0
+                            if Girl.Uptop:
+                                $ Girl.Uptop = 0
                             else:
-                                $ Chr.Uptop = 1
+                                $ Girl.Uptop = 1
                         "Toggle Arms":
-                            if Chr.ArmPose == 1:
-                                $ Chr.ArmPose = 2
+                            if Girl.ArmPose == 1:
+                                $ Girl.ArmPose = 2
                             else:
-                                $ Chr.ArmPose = 1
+                                $ Girl.ArmPose = 1
                         "Back":
                             jump Wardrobe_Menu
             "Bra":
                 while True:
                     menu:
                         # Tops
-                        "Remove [Chr.Chest]" if Chr.Chest:
-                            $ Chr.Chest = 0
-                        "Add tank top" if Chr == RogueX:
-                            $ Chr.Chest = "tank"
+                        "Remove [Girl.Chest]" if Girl.Chest:
+                            $ Girl.Chest = 0
+                        "Add tank top" if Girl == RogueX:
+                            $ Girl.Chest = "tank"
                         "Add sports bra":
-                            $ Chr.Chest = "sports bra"
-                        "Add leather bra" if Chr == LauraX:
-                            $ Chr.Chest = "leather bra"
-                        "Add white tank" if Chr == LauraX:
-                            $ Chr.Chest = "white tank"
-                        "Add buttoned tank top" if Chr == RogueX:
-                            $ Chr.Chest = "buttoned tank"
+                            $ Girl.Chest = "sports bra"
+                        "Add leather bra" if Girl == LauraX:
+                            $ Girl.Chest = "leather bra"
+                        "Add white tank" if Girl == LauraX:
+                            $ Girl.Chest = "white tank"
+                        "Add buttoned tank top" if Girl == RogueX:
+                            $ Girl.Chest = "buttoned tank"
                         "Add lace bra":
-                            $ Chr.Chest = "lace bra"
-                        "Add cami" if Chr == KittyX:
-                            $ Chr.Chest = "cami"
-                        "Add dress" if Chr == KittyX:
-                            $ Chr.Chest = "dress"
-                        "Add wolvie top" if Chr == LauraX:
-                            $ Chr.Chest = "wolvie top"
-                        "Add green bra" if Chr == JeanX:
-                            $ Chr.Chest = "green bra"
-                        "Add tube top" if Chr == StormX or Chr == RogueX:
-                            $ Chr.Chest = "tube top"
+                            $ Girl.Chest = "lace bra"
+                        "Add cami" if Girl == KittyX:
+                            $ Girl.Chest = "cami"
+                        "Add dress" if Girl == KittyX:
+                            $ Girl.Chest = "dress"
+                        "Add wolvie top" if Girl == LauraX:
+                            $ Girl.Chest = "wolvie top"
+                        "Add green bra" if Girl == JeanX:
+                            $ Girl.Chest = "green bra"
+                        "Add tube top" if Girl == StormX or Girl == RogueX:
+                            $ Girl.Chest = "tube top"
                         "Add bra":
-                            if Chr == StormX:
-                                    $ Chr.Chest = "black bra"
+                            if Girl == StormX:
+                                    $ Girl.Chest = "black bra"
                             else:
-                                    $ Chr.Chest = "bra"
-                        "Add cosplay bra" if Chr == StormX:
-                            $ Chr.Chest = "cos bra"
+                                    $ Girl.Chest = "bra"
+                        "Add cosplay bra" if Girl == StormX:
+                            $ Girl.Chest = "cos bra"
                         "Add bikini":
-                            $ Chr.Chest = "bikini top"
+                            $ Girl.Chest = "bikini top"
                         "Add corset":
-                            $ Chr.Chest = "corset"
+                            $ Girl.Chest = "corset"
                         "Add lace corset":
-                            $ Chr.Chest = "lace corset"
+                            $ Girl.Chest = "lace corset"
                         "Toggle up-top":
-                            if Chr.Uptop:
-                                $ Chr.Uptop = 0
+                            if Girl.Uptop:
+                                $ Girl.Uptop = 0
                             else:
-                                $ Chr.Uptop = 1
+                                $ Girl.Uptop = 1
                         "Toggle Piercings":
-                            if Chr.Pierce == "ring":
-                                $ Chr.Pierce = "barbell"
-                            elif Chr.Pierce == "barbell":
-                                $ Chr.Pierce = 0
+                            if Girl.Pierce == "ring":
+                                $ Girl.Pierce = "barbell"
+                            elif Girl.Pierce == "barbell":
+                                $ Girl.Pierce = 0
                             else:
-                                $ Chr.Pierce = "ring"
+                                $ Girl.Pierce = "ring"
                         "Toggle Arms":
-                            if Chr.ArmPose == 1:
-                                $ Chr.ArmPose = 2
+                            if Girl.ArmPose == 1:
+                                $ Girl.ArmPose = 2
                             else:
-                                $ Chr.ArmPose = 1
+                                $ Girl.ArmPose = 1
                         "Back":
                             jump Wardrobe_Menu
 
@@ -191,54 +191,54 @@ label WardrobeEditor(Chr=0): #rkeljs
                 while True:
                     menu:
                         # Legs
-                        "Remove legs" if Chr.Legs:
-                            $ Chr.Legs = 0
-                        "Add Skirt" if Chr != KittyX:
-                            $ Chr.Legs = "skirt"
-                        "Add cosplay Skirt" if Chr == LauraX:
-                            $ Chr.Legs = "other skirt"
-                        "Add blue Skirt" if Chr == KittyX:
-                            $ Chr.Legs = "blue skirt"
-                        "Add pants" if Chr != KittyX:
-                            $ Chr.Legs = "pants"
-                        "Add black jeans" if Chr == KittyX:
-                            $ Chr.Legs = "black jeans"
-                        "Add capri pants" if Chr == KittyX:
-                            $ Chr.Legs = "capris"
-                        "Add shorts" if Chr == KittyX or Chr == JeanX or Chr == JubesX:
-                            $ Chr.Legs = "shorts"
-                        "Add leather pants" if Chr == LauraX:
-                            $ Chr.Legs = "leather pants"
+                        "Remove legs" if Girl.Legs:
+                            $ Girl.Legs = 0
+                        "Add Skirt" if Girl != KittyX:
+                            $ Girl.Legs = "skirt"
+                        "Add cosplay Skirt" if Girl == LauraX:
+                            $ Girl.Legs = "other skirt"
+                        "Add blue Skirt" if Girl == KittyX:
+                            $ Girl.Legs = "blue skirt"
+                        "Add pants" if Girl != KittyX:
+                            $ Girl.Legs = "pants"
+                        "Add black jeans" if Girl == KittyX:
+                            $ Girl.Legs = "black jeans"
+                        "Add capri pants" if Girl == KittyX:
+                            $ Girl.Legs = "capris"
+                        "Add shorts" if Girl == KittyX or Girl == JeanX or Girl == JubesX:
+                            $ Girl.Legs = "shorts"
+                        "Add leather pants" if Girl == LauraX:
+                            $ Girl.Legs = "leather pants"
                         "Add yoga pants":
-                            $ Chr.Legs = "yoga pants"
-                        "Dress" if Chr == EmmaX or Chr == KittyX:
-                            $ Chr.Legs = "dress"
-                        "Boots" if Chr == EmmaX:
+                            $ Girl.Legs = "yoga pants"
+                        "Dress" if Girl == EmmaX or Girl == KittyX:
+                            $ Girl.Legs = "dress"
+                        "Boots" if Girl == EmmaX:
                                 $ EmmaX.Acc = "thigh boots" if EmmaX.Acc != "thigh boots" else 0
                         "Toggle upskirt":
-                            if Chr.Upskirt:
-                                $ Chr.Upskirt = 0
+                            if Girl.Upskirt:
+                                $ Girl.Upskirt = 0
                             else:
-                                $ Chr.Upskirt = 1
+                                $ Girl.Upskirt = 1
                         "pull down-up panties":
-                            if Chr.PantiesDown:
-                                $ Chr.PantiesDown = 0
+                            if Girl.PantiesDown:
+                                $ Girl.PantiesDown = 0
                             else:
-                                $ Chr.PantiesDown = 1
+                                $ Girl.PantiesDown = 1
                         "Toggle Pierce":
-                            if Chr.Pierce == "ring":
-                                $ Chr.Pierce = "barbell"
-                            elif Chr.Pierce == "barbell":
-                                $ Chr.Pierce = 0
+                            if Girl.Pierce == "ring":
+                                $ Girl.Pierce = "barbell"
+                            elif Girl.Pierce == "barbell":
+                                $ Girl.Pierce = 0
                             else:
-                                $ Chr.Pierce = "ring"
+                                $ Girl.Pierce = "ring"
                         "Toggle Wetness":
-                            if not Chr.Wet:
-                                $ Chr.Wet = 1
-                            elif Chr.Wet == 1:
-                                $ Chr.Wet = 2
+                            if not Girl.Wet:
+                                $ Girl.Wet = 1
+                            elif Girl.Wet == 1:
+                                $ Girl.Wet = 2
                             else:
-                                $ Chr.Wet  = 0
+                                $ Girl.Wet  = 0
                         "Back":
                             jump Wardrobe_Menu
 
@@ -249,251 +249,251 @@ label WardrobeEditor(Chr=0): #rkeljs
                         "Hose":
                             menu:
                                 "Add hose":
-                                    $ Chr.Hose = "stockings"
+                                    $ Girl.Hose = "stockings"
                                 "Add garter":
-                                    $ Chr.Hose = "garterbelt"
+                                    $ Girl.Hose = "garterbelt"
                                 "Add stockings and garter":
-                                    $ Chr.Hose = "stockings and garterbelt"
+                                    $ Girl.Hose = "stockings and garterbelt"
                                 "Add pantyhose":
-                                    $ Chr.Hose = "pantyhose"
+                                    $ Girl.Hose = "pantyhose"
                                 "Add tights":
-                                    $ Chr.Hose = "tights"
+                                    $ Girl.Hose = "tights"
                                 "Add ripped hose":
-                                    $ Chr.Hose = "ripped pantyhose"
+                                    $ Girl.Hose = "ripped pantyhose"
                                 "Add ripped tights":
-                                    $ Chr.Hose = "ripped tights"
+                                    $ Girl.Hose = "ripped tights"
                                 "Add tights":
-                                    $ Chr.Hose = "tights"
-                                "Add knee stockings" if Chr == KittyX:
-                                    $ Chr.Hose = "knee stockings"
-                                "Add socks" if Chr == JubesX:
-                                    $ Chr.Hose = "socks"
-                                "Add black stockings" if Chr == LauraX:
-                                    $ Chr.Hose = "black stockings"
-                                "Remove hose" if Chr.Hose:
-                                    $ Chr.Hose = 0
-                        "Remove panties" if Chr.Panties:
-                            $ Chr.Panties = 0
+                                    $ Girl.Hose = "tights"
+                                "Add knee stockings" if Girl == KittyX:
+                                    $ Girl.Hose = "knee stockings"
+                                "Add socks" if Girl == JubesX:
+                                    $ Girl.Hose = "socks"
+                                "Add black stockings" if Girl == LauraX:
+                                    $ Girl.Hose = "black stockings"
+                                "Remove hose" if Girl.Hose:
+                                    $ Girl.Hose = 0
+                        "Remove panties" if Girl.Panties:
+                            $ Girl.Panties = 0
                         "Add black panties":
-                            $ Chr.Panties = "black panties"
-                        "Add white panties" if Chr == StormX or Chr == EmmaX:
-                            $ Chr.Panties = "white panties"
-                        "Add cosplay panties" if Chr == StormX:
-                            $ Chr.Panties = "cos panties"
+                            $ Girl.Panties = "black panties"
+                        "Add white panties" if Girl == StormX or Girl == EmmaX:
+                            $ Girl.Panties = "white panties"
+                        "Add cosplay panties" if Girl == StormX:
+                            $ Girl.Panties = "cos panties"
                         "Add bikini":
-                            $ Chr.Panties = "bikini bottoms"
+                            $ Girl.Panties = "bikini bottoms"
                         "Add shorts":
-                            $ Chr.Panties = "shorts"
+                            $ Girl.Panties = "shorts"
                         "Add green panties":
-                            $ Chr.Panties = "green panties"
+                            $ Girl.Panties = "green panties"
                         "Add lace panties":
-                            $ Chr.Panties = "lace panties"
-                        "Add wolvie panties" if Chr == LauraX:
-                            $ Chr.Panties = "wolvie panties"
-                        "Add sports panties" if Chr == EmmaX:
-                            $ Chr.Panties = "sports panties"
+                            $ Girl.Panties = "lace panties"
+                        "Add wolvie panties" if Girl == LauraX:
+                            $ Girl.Panties = "wolvie panties"
+                        "Add sports panties" if Girl == EmmaX:
+                            $ Girl.Panties = "sports panties"
                         "Toggle Pierce":
-                            if Chr.Pierce == "ring":
-                                $ Chr.Pierce = "barbell"
-                            elif Chr.Pierce == "barbell":
-                                $ Chr.Pierce = 0
+                            if Girl.Pierce == "ring":
+                                $ Girl.Pierce = "barbell"
+                            elif Girl.Pierce == "barbell":
+                                $ Girl.Pierce = 0
                             else:
-                                $ Chr.Pierce = "ring"
+                                $ Girl.Pierce = "ring"
                         "pull down-up panties":
-                            if Chr.PantiesDown:
-                                $ Chr.PantiesDown = 0
+                            if Girl.PantiesDown:
+                                $ Girl.PantiesDown = 0
                             else:
-                                $ Chr.PantiesDown = 1
+                                $ Girl.PantiesDown = 1
                         "Toggle Wetness":
-                            if not Chr.Wet:
-                                $ Chr.Wet = 1
-                            elif Chr.Wet == 1:
-                                $ Chr.Wet = 2
+                            if not Girl.Wet:
+                                $ Girl.Wet = 1
+                            elif Girl.Wet == 1:
+                                $ Girl.Wet = 2
                             else:
-                                $ Chr.Wet  = 0
+                                $ Girl.Wet  = 0
                         "Back":
                             jump Wardrobe_Menu
             "Misc":
                 while True:
                     menu:
                         "Emotions":
-                            call EmotionEditor(Chr)
+                            call EmotionEditor(Girl)
                         "Toggle Arms":
-                            if Chr.ArmPose == 1:
-                                $ Chr.ArmPose = 2
+                            if Girl.ArmPose == 1:
+                                $ Girl.ArmPose = 2
                             else:
-                                $ Chr.ArmPose = 1
+                                $ Girl.ArmPose = 1
                         "Toggle Wetness":
-                            if not Chr.Wet:
-                                $ Chr.Wet = 1
-                            elif Chr.Wet == 1:
-                                $ Chr.Wet = 2
+                            if not Girl.Wet:
+                                $ Girl.Wet = 1
+                            elif Girl.Wet == 1:
+                                $ Girl.Wet = 2
                             else:
-                                $ Chr.Wet  = 0
+                                $ Girl.Wet  = 0
                         "Toggle wet look":
-                            if not Chr.Water:
-                                $ Chr.Water = 1
-                            elif Chr.Water == 1:
-                                $ Chr.Water = 3
+                            if not Girl.Water:
+                                $ Girl.Water = 1
+                            elif Girl.Water == 1:
+                                $ Girl.Water = 3
                             else:
-                                $ Chr.Water  = 0
+                                $ Girl.Water  = 0
                         "Toggle pubes":
-                            if not Chr.Pubes:
-                                $ Chr.Pubes = 1
+                            if not Girl.Pubes:
+                                $ Girl.Pubes = 1
                             else:
-                                $ Chr.Pubes = 0
-                        "Toggle Short Hair" if Chr == KittyX:
-                            if Chr.Hair == "long":
-                                $ Chr.Hair = "evo"
+                                $ Girl.Pubes = 0
+                        "Toggle Short Hair" if Girl == KittyX:
+                            if Girl.Hair == "long":
+                                $ Girl.Hair = "evo"
                             else:
-                                $ Chr.Hair = "long"
-                        "Toggle Mohawk" if Chr == StormX:
-                            if Chr.Hair == "long":
-                                $ Chr.Hair = "mohawk"
+                                $ Girl.Hair = "long"
+                        "Toggle Mohawk" if Girl == StormX:
+                            if Girl.Hair == "long":
+                                $ Girl.Hair = "mohawk"
                             else:
-                                $ Chr.Hair = "long"
-                        "Toggle Short Hair" if Chr == StormX:
-                            if Chr.Hair == "long":
-                                $ Chr.Hair = "short"
+                                $ Girl.Hair = "long"
+                        "Toggle Short Hair" if Girl == StormX:
+                            if Girl.Hair == "long":
+                                $ Girl.Hair = "short"
                             else:
-                                $ Chr.Hair = "long"
-                        "Toggle Ponytailr" if Chr == JeanX:
-                            if Chr.Hair == "pont":
-                                $ Chr.Hair = "short"
+                                $ Girl.Hair = "long"
+                        "Toggle Ponytailr" if Girl == JeanX:
+                            if Girl.Hair == "pont":
+                                $ Girl.Hair = "short"
                             else:
-                                $ Chr.Hair = "pony"
-                        "Toggle Hat" if Chr == EmmaX:
-                            if Chr.Hair == "wavy":
-                                $ Chr.Hair = "hat"
-                            elif Chr.Hair == "wet":
-                                $ Chr.Hair = "hat wet"
-                            elif Chr.Hair == "hat wet":
-                                $ Chr.Hair = "wet"
+                                $ Girl.Hair = "pony"
+                        "Toggle Hat" if Girl == EmmaX:
+                            if Girl.Hair == "wavy":
+                                $ Girl.Hair = "hat"
+                            elif Girl.Hair == "wet":
+                                $ Girl.Hair = "hat wet"
+                            elif Girl.Hair == "hat wet":
+                                $ Girl.Hair = "wet"
                             else:
-                                $ Chr.Hair = "wavy"
-                        "Cosplay Hair" if Chr == RogueX:
-                            if Chr.Hair == "cosplay":
-                                $ Chr.Hair = "evo"
+                                $ Girl.Hair = "wavy"
+                        "Cosplay Hair" if Girl == RogueX:
+                            if Girl.Hair == "cosplay":
+                                $ Girl.Hair = "evo"
                             else:
-                                $ Chr.Hair = "cosplay"
-                        "Ponytail Hair" if Chr == JeanX:
-                            if Chr.Hair == "pony":
-                                $ Chr.Hair = "short"
+                                $ Girl.Hair = "cosplay"
+                        "Ponytail Hair" if Girl == JeanX:
+                            if Girl.Hair == "pony":
+                                $ Girl.Hair = "short"
                             else:
-                                $ Chr.Hair = "pony"
+                                $ Girl.Hair = "pony"
                         "Toggle held":
-                            if not Chr.Held:
-                                $ Chr.Held  = "phone"
-                            elif Chr.Held == "phone":
-                                $ Chr.Held  = "dildo"
-                            elif Chr.Held == "dildo":
-                                $ Chr.Held  = "vibrator"
-                            elif Chr.Held == "vibrator":
-                                $ Chr.Held  = "panties"
+                            if not Girl.Held:
+                                $ Girl.Held  = "phone"
+                            elif Girl.Held == "phone":
+                                $ Girl.Held  = "dildo"
+                            elif Girl.Held == "dildo":
+                                $ Girl.Held  = "vibrator"
+                            elif Girl.Held == "vibrator":
+                                $ Girl.Held  = "panties"
                             else:
-                                $ Chr.Held  = 0
-                        "Toggle gold Necklace" if Chr == StormX:
-                            if not Chr.Neck:
-                                $ Chr.Neck = 'gold'
+                                $ Girl.Held  = 0
+                        "Toggle gold Necklace" if Girl == StormX:
+                            if not Girl.Neck:
+                                $ Girl.Neck = 'gold'
                             else:
-                                $ Chr.Neck = 0
+                                $ Girl.Neck = 0
                         "Toggle flower Necklace":
-                            if not Chr.Neck:
-                                $ Chr.Neck = 'flower necklace'
+                            if not Girl.Neck:
+                                $ Girl.Neck = 'flower necklace'
                             else:
-                                $ Chr.Neck = 0
-                        "Toggle ring Necklace" if Chr == StormX:
-                            if not Chr.Neck:
-                                $ Chr.Neck = 'rings'
+                                $ Girl.Neck = 0
+                        "Toggle ring Necklace" if Girl == StormX:
+                            if not Girl.Neck:
+                                $ Girl.Neck = 'rings'
                             else:
-                                $ Chr.Neck = 0
-                        "Toggle Rings" if Chr == StormX:
-                            if not Chr.Acc:
-                                $ Chr.Acc = 'rings'
+                                $ Girl.Neck = 0
+                        "Toggle Rings" if Girl == StormX:
+                            if not Girl.Acc:
+                                $ Girl.Acc = 'rings'
                             else:
-                                $ Chr.Acc = 0
-                        "Toggle choker" if Chr == EmmaX or Chr == RogueX:
-                            if Chr.Neck != 'choker':
-                                $ Chr.Neck ='choker'
+                                $ Girl.Acc = 0
+                        "Toggle choker" if Girl == EmmaX or Girl == RogueX:
+                            if Girl.Neck != 'choker':
+                                $ Girl.Neck ='choker'
                             else:
-                                $ Chr.Neck = 0
-                        "Toggle boots" if Chr == EmmaX:
-                            if Chr.Acc != "thigh boots":
-                                $ Chr.Acc ='thigh boots'
+                                $ Girl.Neck = 0
+                        "Toggle boots" if Girl == EmmaX:
+                            if Girl.Acc != "thigh boots":
+                                $ Girl.Acc ='thigh boots'
                             else:
-                                $ Chr.Acc = 0
-                        "Toggle sweater" if Chr == RogueX:
-                            if Chr.Acc != "sweater":
-                                $ Chr.Acc ='sweater'
+                                $ Girl.Acc = 0
+                        "Toggle sweater" if Girl == RogueX:
+                            if Girl.Acc != "sweater":
+                                $ Girl.Acc ='sweater'
                             else:
-                                $ Chr.Acc = 0
-                        "Toggle suspenders" if Chr == LauraX or Chr == JeanX:
-                            if Chr.Acc == "suspenders":
-                                $ Chr.Acc = "suspenders2"
-                            elif Chr.Acc == "suspenders2":
-                                $ Chr.Acc = 0
+                                $ Girl.Acc = 0
+                        "Toggle suspenders" if Girl == LauraX or Girl == JeanX:
+                            if Girl.Acc == "suspenders":
+                                $ Girl.Acc = "suspenders2"
+                            elif Girl.Acc == "suspenders2":
+                                $ Girl.Acc = 0
                             else:
-                                $ Chr.Acc = "suspenders"
+                                $ Girl.Acc = "suspenders"
                         "Spunk Level":
                             menu:
                                 "Mouth":
-                                    if "mouth" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("mouth")
+                                    if "mouth" in Girl.Spunk:
+                                        $ Girl.Spunk.remove("mouth")
                                     else:
-                                        $ Chr.Spunk.append("mouth")
+                                        $ Girl.Spunk.append("mouth")
                                 "Chin":
-                                    if "chin" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("chin")
+                                    if "chin" in Girl.Spunk:
+                                        $ Girl.Spunk.remove("chin")
                                     else:
-                                        $ Chr.Spunk.append("chin")
+                                        $ Girl.Spunk.append("chin")
                                 "Facial":
-                                    if "facial" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("facial")
+                                    if "facial" in Girl.Spunk:
+                                        $ Girl.Spunk.remove("facial")
                                     else:
-                                        $ Chr.Spunk.append("facial")
+                                        $ Girl.Spunk.append("facial")
                                 "Hair":
-                                    if "hair" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("hair")
+                                    if "hair" in Girl.Spunk:
+                                        $ Girl.Spunk.remove("hair")
                                     else:
-                                        $ Chr.Spunk.append("hair")
+                                        $ Girl.Spunk.append("hair")
                                 "Tits":
-                                    if "tits" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("tits")
+                                    if "tits" in Girl.Spunk:
+                                        $ Girl.Spunk.remove("tits")
                                     else:
-                                        $ Chr.Spunk.append("tits")
+                                        $ Girl.Spunk.append("tits")
                                 "Belly":
-                                    if "belly" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("belly")
+                                    if "belly" in Girl.Spunk:
+                                        $ Girl.Spunk.remove("belly")
                                     else:
-                                        $ Chr.Spunk.append("belly")
+                                        $ Girl.Spunk.append("belly")
                                 "Back":
-                                    if "back" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("back")
+                                    if "back" in Girl.Spunk:
+                                        $ Girl.Spunk.remove("back")
                                     else:
-                                        $ Chr.Spunk.append("back")
+                                        $ Girl.Spunk.append("back")
                                 "Pussy":
-                                    if "in" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("in")
+                                    if "in" in Girl.Spunk:
+                                        $ Girl.Spunk.remove("in")
                                     else:
-                                        $ Chr.Spunk.append("in")
+                                        $ Girl.Spunk.append("in")
                                 "Ass":
-                                    if "anal" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("anal")
+                                    if "anal" in Girl.Spunk:
+                                        $ Girl.Spunk.remove("anal")
                                     else:
-                                        $ Chr.Spunk.append("anal")
+                                        $ Girl.Spunk.append("anal")
                                 "Return":
                                     pass
                         "Toggle Pierce":
-                            if Chr.Pierce == "ring":
-                                $ Chr.Pierce = "barbell"
-                            elif Chr.Pierce == "barbell":
-                                $ Chr.Pierce = 0
+                            if Girl.Pierce == "ring":
+                                $ Girl.Pierce = "barbell"
+                            elif Girl.Pierce == "barbell":
+                                $ Girl.Pierce = 0
                             else:
-                                $ Chr.Pierce = "ring"
-                        "Add Gloves" if not Chr.Arms:
-                            $ Chr.Arms = "gloves"
-                        "Remove Gloves" if Chr.Arms:
-                            $ Chr.Arms = 0
+                                $ Girl.Pierce = "ring"
+                        "Add Gloves" if not Girl.Arms:
+                            $ Girl.Arms = "gloves"
+                        "Remove Gloves" if Girl.Arms:
+                            $ Girl.Arms = 0
                         "Back":
                             jump Wardrobe_Menu
             "Nothing":
@@ -630,8 +630,8 @@ label Emergency_Clothing_Reset: #rkeljsv
                 pass
         return
 
-label Clothes_Schedule(Girl=0,Cnt = 0): #rkeljsv
-        #Sets clothing for different days, if Cnt is 3 it's all days, 2 is TuThu, 1 is only weekends
+label Clothes_Schedule(Girl=0,counter = 0): #rkeljsv
+        #Sets clothing for different days, if counter is 3 it's all days, 2 is TuThu, 1 is only weekends
         #Schedule 0-6= mon-fri, Schedule 7 is dates, 9 is private
         $ Girl = GirlCheck(Girl)
         call Shift_Focus(Girl)
@@ -639,91 +639,91 @@ label Clothes_Schedule(Girl=0,Cnt = 0): #rkeljsv
         if Girl == RogueX:
                 if ApprovalCheck(Girl, 1500, "LO"):
                         ch_r "So, you'd like to choose what I wear for the week? Ok, shoot."
-                        $ Cnt = 3
+                        $ counter = 3
                 elif ApprovalCheck(Girl, 1200, "LO"):
                         ch_r "I guess I could set aside a few schooldays for you."
-                        $ Cnt = 2
+                        $ counter = 2
                 elif ApprovalCheck(Girl, 1000, "LO"):
                         ch_r "We can talk about what I wear outside of classes."
-                        $ Cnt = 1
+                        $ counter = 1
                 else:
                         ch_r "You know, I don't really need fashion advice from you."
                         return
         elif Girl == KittyX:
                 if ApprovalCheck(Girl, 1500, "LO"):
                         ch_k "Let me know what you like."
-                        $ Cnt = 3
+                        $ counter = 3
                 elif ApprovalCheck(Girl, 1200, "LO"):
                         ch_k "I could let you pick a few days. . ."
-                        $ Cnt = 2
+                        $ counter = 2
                 elif ApprovalCheck(Girl, 1000, "LO"):
                         ch_k "We could talk about weekends, maybe. . ."
-                        $ Cnt = 1
+                        $ counter = 1
                 else:
                         ch_k "I think I'll[Girl.like]figure out my own outfits."
                         return
         elif Girl == EmmaX:
                 if ApprovalCheck(Girl, 1500, "LO"):
                         ch_e "I'm open to suggestions."
-                        $ Cnt = 3
+                        $ counter = 3
                 elif ApprovalCheck(Girl, 1200, "LO"):
                         ch_e "I could let you choose a few days. . ."
-                        $ Cnt = 2
+                        $ counter = 2
                 elif ApprovalCheck(Girl, 1000, "LO"):
                         ch_e "Perhaps when I'm off the clock. . ."
-                        $ Cnt = 1
+                        $ counter = 1
                 else:
                         ch_e "I'd prefer to handle my own wardrobe."
                         return
         elif Girl == LauraX:
                 if ApprovalCheck(Girl, 1500, "LO"):
                         ch_l "Fine, you pick, whatever."
-                        $ Cnt = 3
+                        $ counter = 3
                 elif ApprovalCheck(Girl, 1200, "LO"):
                         ch_l "I don't know, you could pick a few days. . ."
-                        $ Cnt = 2
+                        $ counter = 2
                 elif ApprovalCheck(Girl, 1000, "LO"):
                         ch_l "Maybe on weekends. . ."
-                        $ Cnt = 1
+                        $ counter = 1
                 else:
                         ch_l "Nah, I got it covered."
                         return
         elif Girl == JeanX:
                 if ApprovalCheck(Girl, 1500, "LO"):
                         ch_j "Ok, I'm tired of having to pick outfits. . ."
-                        $ Cnt = 3
+                        $ counter = 3
                 elif ApprovalCheck(Girl, 1200, "LO"):
                         ch_j "I guess you do have some taste. . ."
-                        $ Cnt = 2
+                        $ counter = 2
                 elif ApprovalCheck(Girl, 1000, "LO"):
                         ch_j "I guess my weekends are free. . ."
-                        $ Cnt = 1
+                        $ counter = 1
                 else:
                         ch_j "Huh? No."
                         return
         elif Girl == StormX:
                 if ApprovalCheck(Girl, 1500, "LO"):
                         ch_s "I'm willing to listen."
-                        $ Cnt = 3
+                        $ counter = 3
                 elif ApprovalCheck(Girl, 1200, "LO"):
                         ch_s "I suppose you could choose a few days. . ."
-                        $ Cnt = 2
+                        $ counter = 2
                 elif ApprovalCheck(Girl, 1000, "LO"):
                         ch_s "Perhaps when I'm not working. . ."
-                        $ Cnt = 1
+                        $ counter = 1
                 else:
                         ch_s "I think I'd rather choose my own clothing."
                         return
         elif Girl == JubesX:
                 if ApprovalCheck(Girl, 1500, "LO"):
                         ch_v "What're you thinking?"
-                        $ Cnt = 3
+                        $ counter = 3
                 elif ApprovalCheck(Girl, 1200, "LO"):
                         ch_v "You could help with a few days?"
-                        $ Cnt = 2
+                        $ counter = 2
                 elif ApprovalCheck(Girl, 1000, "LO"):
                         ch_v "I don't know, weekends maybe?"
-                        $ Cnt = 1
+                        $ counter = 1
                 else:
                         ch_v "Nah, I'll figure it out myself."
                         return
@@ -737,11 +737,11 @@ label Clothes_Schedule(Girl=0,Cnt = 0): #rkeljsv
                         menu:
                             "Pick an outfit to wear":
                                 call Clothes_ScheduleB
-                                if Cnt > 1:
+                                if counter > 1:
                                         $ Girl.Clothing[0] = _return
                                         $ Girl.Clothing[2] = _return
                                         $ Girl.Clothing[4] = _return
-                                if Cnt > 2:
+                                if counter > 2:
                                         $ Girl.Clothing[1] = _return
                                         $ Girl.Clothing[3] = _return
                                 $ Girl.Clothing[5] = _return
@@ -750,66 +750,66 @@ label Clothes_Schedule(Girl=0,Cnt = 0): #rkeljsv
                                 pass
                     "Weekdays":
                         menu:
-                            "On Monday you should wear. . ." if Cnt > 1:
+                            "On Monday you should wear. . ." if counter > 1:
                                 call Clothes_ScheduleB
                                 $ Girl.Clothing[0] = _return
-                            "On Monday you should wear. . . (locked)" if Cnt <= 1:
+                            "On Monday you should wear. . . (locked)" if counter <= 1:
                                 pass
 
-                            "On Tuesday you should wear. . ." if Cnt > 2:
+                            "On Tuesday you should wear. . ." if counter > 2:
                                 call Clothes_ScheduleB
                                 $ Girl.Clothing[1] = _return
-                            "On Tuesday you should wear. . . (locked)" if Cnt <= 2:
+                            "On Tuesday you should wear. . . (locked)" if counter <= 2:
                                 pass
 
-                            "On Wednesday you should wear. . ." if Cnt > 1:
+                            "On Wednesday you should wear. . ." if counter > 1:
                                 call Clothes_ScheduleB
                                 $ Girl.Clothing[2] = _return
-                            "On Wednesday you should wear. . . (locked)" if Cnt <= 1:
+                            "On Wednesday you should wear. . . (locked)" if counter <= 1:
                                 pass
 
-                            "On Thursday you should wear. . ." if Cnt > 2:
+                            "On Thursday you should wear. . ." if counter > 2:
                                 call Clothes_ScheduleB
                                 $ Girl.Clothing[3] = _return
-                            "On Thursday you should wear. . . (locked)" if Cnt <= 2:
+                            "On Thursday you should wear. . . (locked)" if counter <= 2:
                                 pass
 
-                            "On Friday you should wear. . ." if Cnt > 1:
+                            "On Friday you should wear. . ." if counter > 1:
                                 call Clothes_ScheduleB
                                 $ Girl.Clothing[4] = _return
-                            "On Friday you should wear. . . (locked)" if Cnt <= 1:
+                            "On Friday you should wear. . . (locked)" if counter <= 1:
                                 pass
                             "Back":
                                 pass
                     "Other":
                         menu:
-                            "On Saturday you should wear. . . (locked)" if Cnt < 1:
+                            "On Saturday you should wear. . . (locked)" if counter < 1:
                                 pass
-                            "On Saturday you should wear. . ." if Cnt >= 1:
+                            "On Saturday you should wear. . ." if counter >= 1:
                                 call Clothes_ScheduleB
                                 $ Girl.Clothing[5] = _return
 
-                            "On Sunday you should wear. . . (locked)" if Cnt < 1:
+                            "On Sunday you should wear. . . (locked)" if counter < 1:
                                 pass
-                            "On Sunday you should wear. . ." if Cnt >= 1:
+                            "On Sunday you should wear. . ." if counter >= 1:
                                 call Clothes_ScheduleB
                                 $ Girl.Clothing[6] = _return
 
-                            "In our rooms you should wear. . . (locked)" if Cnt < 1:
+                            "In our rooms you should wear. . . (locked)" if counter < 1:
                                 pass
-                            "In our rooms you should wear. . ." if Cnt >= 1:
+                            "In our rooms you should wear. . ." if counter >= 1:
                                 call Clothes_ScheduleB(Girl,99)
                                 $ Girl.Clothing[9] = _return
 
-                            "On dates you should wear. . . (locked)" if Cnt < 1:
+                            "On dates you should wear. . . (locked)" if counter < 1:
                                 pass
-                            "On dates you should wear. . ." if Cnt >= 1:
+                            "On dates you should wear. . ." if counter >= 1:
                                 call Clothes_ScheduleB
                                 $ Girl.Clothing[7] = _return
 
-                            "When teaching you should wear. . . (locked)" if Girl in (EmmaX,StormX) and Cnt < 3:
+                            "When teaching you should wear. . . (locked)" if Girl in (EmmaX,StormX) and counter < 3:
                                 pass
-                            "When teaching you should wear. . ." if Girl in (EmmaX,StormX) and Cnt >= 3:
+                            "When teaching you should wear. . ." if Girl in (EmmaX,StormX) and counter >= 3:
                                 call Clothes_ScheduleB(Girl,90)
                                 $ Girl.Clothing[8] = _return
 
@@ -820,10 +820,10 @@ label Clothes_Schedule(Girl=0,Cnt = 0): #rkeljsv
                         menu:
                             ch_p "You asked me before about your gym clothes?"
                             "Don't ask before changing into gym clothes" if "no ask gym" not in Girl.Traits:
-                                        call AnyLine(Girl,"Sure.")
+                                        call Anyline(Girl,"Sure.")
                                         $ Girl.Traits.append("no ask gym")
                             "Ask me before changing into gym clothes" if "no ask gym" in Girl.Traits:
-                                        call AnyLine(Girl,"Sure.")
+                                        call Anyline(Girl,"Sure.")
                                         $ Girl.Traits.remove("no ask gym")
                             "Never Mind":
                                 pass
@@ -832,16 +832,16 @@ label Clothes_Schedule(Girl=0,Cnt = 0): #rkeljsv
                                 #if comfy is in LauraX.Traits, she won't ask before changing
                                 ch_p "You know that outfit you wear in private?"
                                 if Girl in (EmmaX,StormX):
-                                        call AnyLine(Girl,"Yes?")
+                                        call Anyline(Girl,"Yes?")
                                 else:
-                                        call AnyLine(Girl,"Yeah?")
+                                        call Anyline(Girl,"Yeah?")
                                 menu:
                                     extend ""
                                     "Just put them on without asking me about it." if "comfy" not in Girl.Traits:
-                                        call AnyLine(Girl,"Sure.")
+                                        call Anyline(Girl,"Sure.")
                                         $ Girl.Traits.append("comfy")
                                     "Ask before changing into that." if "comfy" in Girl.Traits:
-                                        call AnyLine(Girl,"Sure.")
+                                        call Anyline(Girl,"Sure.")
                                         $ Girl.Traits.remove("comfy")
                                     "Never Mind":
                                         pass
@@ -914,39 +914,39 @@ label Clothes_ScheduleB(Girl=0,Count = 0): #rkeljsv
                                         if Girl.Custom1[0] == 2 or Count == 99:
                                             $ Count = 3
                                         else:
-                                            call AnyLine(Girl,"Well. . .")
+                                            call Anyline(Girl,"Well. . .")
                                             call QuickOutfitCheck(Girl,3) #re-checks ot see if it will work
                                             if Girl.Custom1[0] == 2:
                                                     $ Count = 3
                                             else:
-                                                    $ Line = "no"
+                                                    $ line = "no"
                             "The second one. (locked)" if not Girl.Custom2[0]:
                                         pass
                             "The second one." if Girl.Custom2[0]:
                                         if Girl.Custom2[0] == 2 or Count == 99:
                                             $ Count = 5
                                         else:
-                                            call AnyLine(Girl,"Well. . .")
+                                            call Anyline(Girl,"Well. . .")
                                             call QuickOutfitCheck(Girl,5)  #re-checks ot see if it will work
                                             if Girl.Custom2[0] == 2:
                                                     $ Count = 5
                                             else:
-                                                    $ Line = "no"
+                                                    $ line = "no"
                             "The third one. (locked)" if not Girl.Custom3[0]:
                                         pass
                             "The third one." if Girl.Custom3[0]:
                                         if Girl.Custom3[0] == 2 or Count == 99:
                                             $ Count = 6
                                         else:
-                                            call AnyLine(Girl,"Well. . .")
+                                            call Anyline(Girl,"Well. . .")
                                             call QuickOutfitCheck(Girl,6) #re-checks ot see if it will work
                                             if Girl.Custom3[0] == 2:
                                                     $ Count = 6
                                             else:
-                                                    $ Line = "no"
+                                                    $ line = "no"
                             "Never mind":
                                         pass
-                        if Line == "no":
+                        if line == "no":
                                 if Girl == RogueX:
                                         ch_r "No, I'm not wearing that outside, [Girl.Petname]."
                                 elif Girl == KittyX:
@@ -961,13 +961,13 @@ label Clothes_ScheduleB(Girl=0,Count = 0): #rkeljsv
                                         ch_s "I cannot wear that one in public."
                                 elif Girl == JubesX:
                                         ch_v "That one's private. . ."
-                                $ Line = 0
+                                $ line = 0
                         else:
-                                call AnyLine(Girl,"Fine. . .")
+                                call Anyline(Girl,"Fine. . .")
 
             "Your gym clothes.":
                 if Count == 90:
-                    call AnyLine(Girl,"Not in class, "+Girl.Petname+".")
+                    call Anyline(Girl,"Not in class, "+Girl.Petname+".")
                     $ Count = 0
                 else:
                     $ Count = 4
@@ -975,11 +975,11 @@ label Clothes_ScheduleB(Girl=0,Count = 0): #rkeljsv
                 if Count == 99:
                     $ Count = 7
                 else:
-                    call AnyLine(Girl,"Well. . .")
+                    call Anyline(Girl,"Well. . .")
                     call QuickOutfitCheck(Girl,7)  #re-checks ot see if it will work
                     if Girl.Custom1[0] == 2:
                             $ Count = 7
-                            call AnyLine(Girl,"Fine. . .")
+                            call Anyline(Girl,"Fine. . .")
                     else:
                             if Girl == RogueX:
                                     ch_r "I don't know about that, [Girl.Petname]."
@@ -1066,18 +1066,18 @@ label AltClothes(Girl=0,Outfit=1):
 label Private_Outfit(Girl=0): #rkeljsv
         #sets Girl's private outfit in private
         $ Girl = GirlCheck(Girl)
-        if Girl.Break[0] or "angry" in Girl.DailyActions:
+        if Girl.Break[0] or "angry" in Girl.daily_history:
                 return
         if Girl.Outfit == "temporary" or not Girl.Clothing[9]:
                 #if you manually set a different option, keep it
                 #if no alternate is set, return
                 return
-        if "comfy" in Girl.RecentActions or "comfy" in Girl.Traits or Girl.Outfit == Girl.Clothing[9]:
+        if "comfy" in Girl.recent_history or "comfy" in Girl.Traits or Girl.Outfit == Girl.Clothing[9]:
                 call AltClothes(Girl,9)
                 $ Girl.OutfitChange(Changed=1)
-        elif "no comfy" in Girl.RecentActions:
+        elif "no comfy" in Girl.recent_history:
                 pass
-        elif ApprovalCheck(Girl, 1200, "LI") and (2 * Girl.Inbt) >= (Girl.Love + Girl.Obed +100):
+        elif ApprovalCheck(Girl, 1200, "LI") and (2 * Girl.inhibition) >= (Girl.love + Girl.obedience +100):
                 # if her inhibition is much higher than her obedience to you. . .
                 call Shift_Focus(Girl)
                 if Girl == RogueX:
@@ -1102,7 +1102,7 @@ label Private_Outfit(Girl=0): #rkeljsv
                         ch_v "I wanna slip something else on. . ."
                 call AltClothes(Girl,9)
                 $ Girl.OutfitChange(Changed=1)
-                $ Girl.RecentActions.append("comfy")
+                $ Girl.recent_history.append("comfy")
         else:
                 call Shift_Focus(Girl)
                 if Girl == RogueX:
@@ -1110,13 +1110,13 @@ label Private_Outfit(Girl=0): #rkeljsv
                         menu:
                             ch_r "Should I throw on somethin' more comfortable?"
                             "Sure.":
-                                    ch_r "Love to. . ."
+                                    ch_r "love to. . ."
                                     call AltClothes(Girl,9)
                                     $ Girl.OutfitChange(Changed=1)
-                                    $ Girl.RecentActions.append("comfy")
+                                    $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_r "Suit yourself."
-                                    $ Girl.RecentActions.append("no comfy")
+                                    $ Girl.recent_history.append("no comfy")
                 elif Girl == KittyX:
                         ch_k "Gimme a sec. . ."
                         menu:
@@ -1125,22 +1125,22 @@ label Private_Outfit(Girl=0): #rkeljsv
                                     ch_k "Hehe. . ."
                                     call AltClothes(Girl,9)
                                     $ Girl.OutfitChange(Changed=1)
-                                    $ Girl.RecentActions.append("comfy")
+                                    $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_k "Oh, ok."
-                                    $ Girl.RecentActions.append("no comfy")
+                                    $ Girl.recent_history.append("no comfy")
                 elif Girl == EmmaX:
                         ch_e "I'll be just a moment. . ."
                         menu:
                             ch_e "Would you like me to change into something more comfortable?"
                             "Sure.":
-                                    ch_e "Lovely. . ."
+                                    ch_e "lovely. . ."
                                     call AltClothes(Girl,9)
                                     $ Girl.OutfitChange(Changed=1)
-                                    $ Girl.RecentActions.append("comfy")
+                                    $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_e "Very well."
-                                    $ Girl.RecentActions.append("no comfy")
+                                    $ Girl.recent_history.append("no comfy")
                 elif Girl == LauraX:
                         ch_l "One minute. . ."
                         menu:
@@ -1149,20 +1149,20 @@ label Private_Outfit(Girl=0): #rkeljsv
                                     ch_l "Cool. . ."
                                     call AltClothes(Girl,9)
                                     $ Girl.OutfitChange(Changed=1)
-                                    $ Girl.RecentActions.append("comfy")
+                                    $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_l "Oh, ok."
-                                    $ Girl.RecentActions.append("no comfy")
+                                    $ Girl.recent_history.append("no comfy")
                 elif Girl == JeanX:
                         menu:
                             ch_j "I do have a more fun look. . ."
                             "Sure.":
                                     call AltClothes(Girl,9)
                                     $ Girl.OutfitChange(Changed=1)
-                                    $ Girl.RecentActions.append("comfy")
+                                    $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_j "Huh. Ok. . ."
-                                    $ Girl.RecentActions.append("no comfy")
+                                    $ Girl.recent_history.append("no comfy")
                 elif Girl == StormX:
                         ch_s "I'll be just a moment. . ."
                         menu:
@@ -1171,10 +1171,10 @@ label Private_Outfit(Girl=0): #rkeljsv
                                     ch_s "Excellent. . ."
                                     call AltClothes(Girl,9)
                                     $ Girl.OutfitChange(Changed=1)
-                                    $ Girl.RecentActions.append("comfy")
+                                    $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_s "Very well."
-                                    $ Girl.RecentActions.append("no comfy")
+                                    $ Girl.recent_history.append("no comfy")
                 elif Girl == JubesX:
                         ch_v "Gimme a minute. . ."
                         menu:
@@ -1183,17 +1183,17 @@ label Private_Outfit(Girl=0): #rkeljsv
                                     ch_v "Cool. . ."
                                     call AltClothes(Girl,9)
                                     $ Girl.OutfitChange(Changed=1)
-                                    $ Girl.RecentActions.append("comfy")
+                                    $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_v "Ok, fine."
-                                    $ Girl.RecentActions.append("no comfy")
+                                    $ Girl.recent_history.append("no comfy")
         return
 
 label Custom_Out(Girl=0,Custom = 3, Shame = 0, Agree = 0): #rkeljsv
         #If Custom1 = 3, if custom2 = 5, if custom3 = 6
         $ Girl = GirlCheck(Girl)
         call Shift_Focus(Girl)
-        $ Girl.FaceChange("sexy", 1)
+        $ Girl.change_face("sexy", 1)
 
         if Custom == 3:
                 $ Shame = Girl.Custom1[10]
@@ -1237,20 +1237,20 @@ label Custom_Out(Girl=0,Custom = 3, Shame = 0, Agree = 0): #rkeljsv
                         elif Shame >= 25:
                             ch_r "This is pretty shameless. . ."
                         elif Shame >= 15:
-                            $ Girl.FaceChange("bemused", 1)
+                            $ Girl.change_face("bemused", 1)
                             ch_r "I don't know, I guess I could try it. . ."
                         else:
                             ch_r "Sure, [Girl.Petname], that one's nice."
                 else:
                         #She's decided not to wear this out
                         if Shame >= 50:
-                            $ Girl.FaceChange("angry", 1)
+                            $ Girl.change_face("angry", 1)
                             ch_r "Come on, I'd be totally nude!"
                         elif Shame >= 25:
-                            $ Girl.FaceChange("angry", 1)
+                            $ Girl.change_face("angry", 1)
                             ch_r "You're lucky I show {i}you{/i} this."
                         else:
-                            $ Girl.FaceChange("bemused", 1)
+                            $ Girl.change_face("bemused", 1)
                             ch_r "It's kind of daring for me, sorry."
         elif Girl == KittyX:
                 if Agree:
@@ -1263,20 +1263,20 @@ label Custom_Out(Girl=0,Custom = 3, Shame = 0, Agree = 0): #rkeljsv
                         elif Shame >= 25:
                             ch_k "I'm not really comfortable with this one. . ."
                         elif Shame >= 15:
-                            $ Girl.FaceChange("bemused", 1)
+                            $ Girl.change_face("bemused", 1)
                             ch_k "I'll give it a shot. . ."
                         else:
                             ch_k "Yeah, I like that one too."
                 else:
                         #She's decided not to wear this out
                         if Shame >= 50:
-                            $ Girl.FaceChange("angry", 1)
+                            $ Girl.change_face("angry", 1)
                             ch_k "You have GOT to be kidding me here."
                         elif Shame >= 25:
-                            $ Girl.FaceChange("angry", 1)
+                            $ Girl.change_face("angry", 1)
                             ch_k "This is just between us."
                         else:
-                            $ Girl.FaceChange("bemused", 1)
+                            $ Girl.change_face("bemused", 1)
                             ch_k "I can't wear this out!"
         elif Girl == EmmaX:
                 if Agree:
@@ -1289,20 +1289,20 @@ label Custom_Out(Girl=0,Custom = 3, Shame = 0, Agree = 0): #rkeljsv
                         elif Shame >= 25:
                             ch_e "I'm a bit uncomfortable with this one. . ."
                         elif Shame >= 15:
-                            $ Girl.FaceChange("bemused", 1)
+                            $ Girl.change_face("bemused", 1)
                             ch_e "I'll try it. . ."
                         else:
                             ch_e "Yeah, I like that one too."
                 else:
                         #She's decided not to wear this out
                         if Shame >= 50:
-                            $ Girl.FaceChange("angry", 1)
+                            $ Girl.change_face("angry", 1)
                             ch_e "You have GOT to be kidding me here."
                         elif Shame >= 25:
-                            $ Girl.FaceChange("angry", 1)
+                            $ Girl.change_face("angry", 1)
                             ch_e "This is just between us."
                         else:
-                            $ Girl.FaceChange("bemused", 1)
+                            $ Girl.change_face("bemused", 1)
                             ch_e "I can't wear this out!"
         elif Girl == LauraX:
                 if Agree:
@@ -1315,20 +1315,20 @@ label Custom_Out(Girl=0,Custom = 3, Shame = 0, Agree = 0): #rkeljsv
                         elif Shame >= 25:
                             ch_l "This one's pretty skimpy. . ."
                         elif Shame >= 15:
-                            $ Girl.FaceChange("bemused", 1)
+                            $ Girl.change_face("bemused", 1)
                             ch_l "Yeah, ok. . ."
                         else:
                             ch_l "Yup."
                 else:
                         #She's decided not to wear this out
                         if Shame >= 50:
-                            $ Girl.FaceChange("angry", 1)
+                            $ Girl.change_face("angry", 1)
                             ch_l "Perv."
                         elif Shame >= 25:
-                            $ Girl.FaceChange("angry", 1)
+                            $ Girl.change_face("angry", 1)
                             ch_l "Yeah, not in public."
                         else:
-                            $ Girl.FaceChange("bemused", 1)
+                            $ Girl.change_face("bemused", 1)
                             ch_l "Nah."
         elif Girl == JeanX:
                 if Agree:
@@ -1341,23 +1341,23 @@ label Custom_Out(Girl=0,Custom = 3, Shame = 0, Agree = 0): #rkeljsv
                         elif Shame >= 25:
                             ch_j "Kinda skimpy. . ."
                         elif Shame >= 15:
-                            $ Girl.FaceChange("bemused", 1)
+                            $ Girl.change_face("bemused", 1)
                             ch_j "Sure, whatever. . ."
                         else:
                             ch_j "Sure."
                 else:
                         #She's decided not to wear this out
                         if Shame >= 50:
-                            $ Girl.FaceChange("angry", 1)
+                            $ Girl.change_face("angry", 1)
                             ch_j "Gross."
                         elif Shame >= 25:
-                            $ Girl.FaceChange("angry", 1)
+                            $ Girl.change_face("angry", 1)
                             ch_j "You wish."
                         else:
-                            $ Girl.FaceChange("bemused", 1)
+                            $ Girl.change_face("bemused", 1)
                             ch_j "No way."
         elif Girl == StormX:
-                $ Girl.FaceChange("bemused", 1)
+                $ Girl.change_face("bemused", 1)
                 if Agree:
                         #she's decided to wear this out.
                         $ Girl.Shame = Shame
@@ -1369,10 +1369,10 @@ label Custom_Out(Girl=0,Custom = 3, Shame = 0, Agree = 0): #rkeljsv
                             ch_s "Yes, this will do nicely."
                 else:
                         #She's decided not to wear this out
-                        $ Girl.FaceChange("bemused", 1)
+                        $ Girl.change_face("bemused", 1)
                         ch_s "I am afraid cannot wear this out."
         elif Girl == JubesX:
-                $ Girl.FaceChange("bemused", 1)
+                $ Girl.change_face("bemused", 1)
                 if Agree:
                         #she's decided to wear this out.
                         $ Girl.Shame = Shame
@@ -1384,7 +1384,7 @@ label Custom_Out(Girl=0,Custom = 3, Shame = 0, Agree = 0): #rkeljsv
                             ch_s "Oh, yeah, this'll do. . ."
                 else:
                         #She's decided not to wear this out
-                        $ Girl.FaceChange("bemused", 1)
+                        $ Girl.change_face("bemused", 1)
                         ch_s "I really can't wear this one out. . ."
         return
 
@@ -1401,7 +1401,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 #if this is not a custom check and you're in a safe space,
                 if Girl.Clothing[9] and bg_current in PersonalRooms:
                         #if there is a "private outfit" set, ask to change. (skips if halloween)
-                        if "halloween" not in Player.DailyActions:
+                        if "halloween" not in Player.daily_history:
                                 call Private_Outfit
                 return
 
@@ -1434,7 +1434,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
         if Girl.Pierce and Count <= 10:
                 $ Count = -5
 
-        $ Girl.FaceChange("sexy", 0)
+        $ Girl.change_face("sexy", 0)
         if Custom == 9 or Custom == 7:
             pass
         elif Count >= 20:
@@ -1464,12 +1464,12 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 elif Count >= 5 and (ApprovalCheck(Girl, 2300, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
                         ch_r "Not leaving much to the imagination. . ."
                 elif Count >= 5:
-                        $ Girl.FaceChange("startled", 1)
+                        $ Girl.change_face("startled", 1)
                         ch_r "I really think this is a bit scandalous to wear out. . ."
                 elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
                         ch_r "Oooh, I'm getting turned on already. . ."
                 else:
-                        $ Girl.FaceChange("bemused", 1)
+                        $ Girl.change_face("bemused", 1)
                         ch_r "This is just for in private, right. . ."
         elif Girl == KittyX:
                 if Count >= 10 and (ApprovalCheck(Girl, 1200, TabM=0) or ApprovalCheck(Girl, 500, "I", TabM=0)):
@@ -1479,12 +1479,12 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 elif Count >= 5 and (ApprovalCheck(Girl, 2300, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
                         ch_k "This top is is[Girl.like]kinda breezy. . ."
                 elif Count >= 5:
-                        $ Girl.FaceChange("startled", 1)
+                        $ Girl.change_face("startled", 1)
                         ch_k "This top is[Girl.like]way too slutty."
                 elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
                         ch_k "Is it hot in here? Whew. . ."
                 else:
-                        $ Girl.FaceChange("bemused", 1)
+                        $ Girl.change_face("bemused", 1)
                         ch_k "I wouldn't wear this out, but maybe indoors."
         elif Girl == EmmaX:
                 if Count >= 10:
@@ -1496,12 +1496,12 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                         if ApprovalCheck(Girl, 2300, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0):
                                 ch_e "I typically cover a {i}bit{/i} more than this."
                         else:
-                                $ Girl.FaceChange("startled", 1)
+                                $ Girl.change_face("startled", 1)
                                 ch_e "This is a bit more cleavage than even I'm comforable with."
                 elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
                         ch_e "Aren't my assets a bit. . . exposed here?"
                 else:
-                        $ Girl.FaceChange("bemused", 1)
+                        $ Girl.change_face("bemused", 1)
                         ch_e "This is considerably more cleavage than even I'm comforable with."
         elif Girl == LauraX:
                 if Count >= 10 and (ApprovalCheck(Girl, 1200, TabM=0) or ApprovalCheck(Girl, 500, "I", TabM=0)):
@@ -1511,12 +1511,12 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 elif Count >= 5 and (ApprovalCheck(Girl, 2300, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
                     ch_l "I don't know, the top's a little light."
                 elif Count >= 5:
-                    $ Girl.FaceChange("startled", 1)
+                    $ Girl.change_face("startled", 1)
                     ch_l "I can't really wear this top out."
                 elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
                     ch_l ". . ."
                 else:
-                    $ Girl.FaceChange("bemused", 1)
+                    $ Girl.change_face("bemused", 1)
                     ch_l "I wouldn't go out with my tits out."
         elif Girl == JeanX:
                 if Count >= 10:# and (ApprovalCheck(Girl, 1200, TabM=0) or ApprovalCheck(Girl, 500, "I", TabM=0)):
@@ -1526,12 +1526,12 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 elif Count >= 5:# and (ApprovalCheck(Girl, 2300, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
                     ch_j "I've kinda got my tits out here. . ."
                 #elif Count >= 5:
-                    #$ Girl.FaceChange("startled", 1)
+                    #$ Girl.change_face("startled", 1)
                     #ch_j "I can't really wear this top out."
                 elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
                     ch_j ". . ."
                 else:
-                    $ Girl.FaceChange("bemused", 1)
+                    $ Girl.change_face("bemused", 1)
                     ch_j "You think I'd go out with my tits on display?"
         elif Girl == StormX:
                 if Count >= 10:
@@ -1540,12 +1540,12 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                         if StormX not in Rules:
                                 ch_s "I do typically cover more than this around the school."
                         else:
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_s "I'm not sure Charles would approve of this top."
                 elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
                                 ch_s "Aren't my assets a bit. . . exposed here?"
                 else:
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_s "I'm not sure Charles would approve of this top."
         elif Girl == JubesX:
                 if Count >= 10 and (ApprovalCheck(Girl, 1200, TabM=0) or ApprovalCheck(Girl, 500, "I", TabM=0)):
@@ -1555,12 +1555,12 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 elif Count >= 5 and (ApprovalCheck(Girl, 2300, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
                     ch_v "I don't know, the top's a little skimpy."
                 elif Count >= 5:
-                    $ Girl.FaceChange("startled", 1)
+                    $ Girl.change_face("startled", 1)
                     ch_v "I can't really wear this top out."
                 elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
                     ch_v "I don't know. . ."
                 else:
-                    $ Girl.FaceChange("bemused", 1)
+                    $ Girl.change_face("bemused", 1)
                     ch_v "Well, I wouldn't go anywhere with my tits out like this. . ."
         #end top check dialog
 
@@ -1573,7 +1573,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                     if Girl.PantsNum() > 5:
                         #If wearing pants commando
                         $ Count = 25
-                    elif Girl.PantsNum() == 5:
+                    elif Girl.wearing_skirt:
                         #If wearing a skirt commando
                         $ Count = 20
                     elif Girl.PantiesNum() >= 8:
@@ -1609,7 +1609,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 if Count >= 20:
                             if Girl.PantsNum() > 6:
                                 ch_r "Oh, I think these pants will work fine."
-                            elif Girl.PantsNum() == 5:
+                            elif Girl.wearing_skirt:
                                 ch_r "Oh, I think this skirt will work fine."
                             elif Girl.HoseNum() >= 10:
                                 ch_r "Oh, these [Girl.Hose] will work."
@@ -1626,7 +1626,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 elif Count >= 10 and (ApprovalCheck(Girl, 2000, TabM=0) or ApprovalCheck(Girl, 700, "I", TabM=0)):
                     ch_r "These don't really leave much to the imagination. . ."
                 elif Count >= 10:
-                    $ Girl.FaceChange("angry", 1)
+                    $ Girl.change_face("angry", 1)
                     ch_r "I'm warning you, I'm not running around in my panties. . ."
                 elif (ApprovalCheck(Girl, 2500, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
                     ch_r "Hmm, Breezy. . ."
@@ -1651,7 +1651,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 elif Count >= 10 and (ApprovalCheck(Girl, 2000, TabM=0) or ApprovalCheck(Girl, 700, "I", TabM=0)):
                         ch_k "I'm not sure about the coverage down here. . ."
                 elif Count >= 10:
-                        $ Girl.FaceChange("angry", 1)
+                        $ Girl.change_face("angry", 1)
                         ch_k "I'm barely covered down here. . ."
                 elif (ApprovalCheck(Girl, 2500, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
                         ch_k "kinda chilly. . ."
@@ -1678,7 +1678,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                     if ApprovalCheck(Girl, 2000, TabM=0) or ApprovalCheck(Girl, 700, "I", TabM=0):
                             ch_e "I hope you don't expect me to wear this out. . ."
                     else:
-                            $ Girl.FaceChange("angry", 1)
+                            $ Girl.change_face("angry", 1)
                             ch_e "I don't know about wearing this outside. . ."
                 elif (ApprovalCheck(Girl, 2500, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
                             ch_e "This really tests my limits."
@@ -1703,7 +1703,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 elif Count >= 10 and (ApprovalCheck(Girl, 2000, TabM=0) or ApprovalCheck(Girl, 700, "I", TabM=0)):
                         ch_l "I don't think I'm fully covered. . ."
                 elif Count >= 10:
-                        $ Girl.FaceChange("angry", 1)
+                        $ Girl.change_face("angry", 1)
                         ch_l "I'm not covered like this. . ."
                 elif (ApprovalCheck(Girl, 2500, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
                         ch_l "It's pretty minimal. . ."
@@ -1729,9 +1729,9 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                         #ch_j "I don't think I'm fully covered. . ."
                 elif Count >= 10:
                         if (ApprovalCheck(Girl, 2000, TabM=0) or ApprovalCheck(Girl, 700, "I", TabM=0)):
-                                $ Girl.FaceChange("sly", 1)
+                                $ Girl.change_face("sly", 1)
                         else:
-                                $ Girl.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                         ch_j "So you want my puss on display? . ."
                 elif (ApprovalCheck(Girl, 2500, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
                         ch_j "This is basically \"nothing\". . ."
@@ -1754,7 +1754,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                     else:
                             ch_s "Certainly quite exposed without panties. . ."
                 if Count >= 10 and StormX not in Rules:
-                            $ Girl.FaceChange("bemused", 1)
+                            $ Girl.change_face("bemused", 1)
                             ch_s "I don't know that Charles would let me roam the halls in such an exposed state."
                 elif StormX in Rules and (ApprovalCheck(Girl, 1200, TabM=0) or ApprovalCheck(Girl, 500, "I", TabM=0)):
                             ch_s "This is quite the daring look you've put together."
@@ -1781,7 +1781,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 elif Count >= 10 and (ApprovalCheck(Girl, 2000, TabM=0) or ApprovalCheck(Girl, 700, "I", TabM=0)):
                         ch_v "This is pretty skimpy. . ."
                 elif Count >= 10:
-                        $ Girl.FaceChange("angry", 1)
+                        $ Girl.change_face("angry", 1)
                         ch_v "This is pretty skimpy. . ."
                 elif (ApprovalCheck(Girl, 2500, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
                         ch_v "Wow, this look is. . . a lot. . ."
@@ -1802,7 +1802,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 else:
                     ch_p "So would you wear that outside?"
 
-                $ Girl.FaceChange("sexy", 0)
+                $ Girl.change_face("sexy", 0)
                 if Girl.PantsNum() > 2:
                     pass        #if she's wearing pants
                 elif Girl == StormX and StormX in Rules:
@@ -1830,7 +1830,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 if Check == 2 and Agree:
                             #if checking to see if she'll drop the dressing screen. . .
                             $ Girl.Shame = Tempshame
-                            $ Girl.FaceChange("sly")
+                            $ Girl.change_face("sly")
                             if Girl == RogueX:
                                     ch_r "This ain't a bad look, I guess. . ."
                             elif Girl == KittyX:
@@ -1849,7 +1849,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                             return 1
                 if not Agree:
                             #she isn't even comfortable with you seeing it
-                            $ Girl.FaceChange("bemused", 2,Eyes="side")
+                            $ Girl.change_face("bemused", 2,Eyes="side")
                             if Girl == RogueX:
                                     ch_r "I don't really feel comfortable in this. . ."
                             elif Girl == KittyX:
@@ -1871,7 +1871,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                                             hide DressScreen
                                 "Ok, we can keep tweaking it.":
                                             pass
-                            $ Girl.FaceChange("smile", 1)
+                            $ Girl.change_face("smile", 1)
                             if Girl == RogueX:
                                     ch_r "Thanks, [Girl.Petname]."
                             elif Girl == KittyX:
@@ -1889,15 +1889,15 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                             return
                 if Girl == RogueX:
                         if Girl.Taboo >= 40:
-                                $ Girl.FaceChange("confused",1)
+                                $ Girl.change_face("confused",1)
                                 $ Girl.Mouth = "smile"
                                 ch_r "It's a little late to worry about that, right?"
                         if "exhibitionist" in Girl.Traits and Tempshame >= 20:
                                 ch_r "Hmm. . . yeah, I'd love to. . ."
-                                $ Girl.Statup("Lust", 80, 10)
+                                $ Girl.change_stat("lust", 80, 10)
                         elif Custom == 7:
                                 #Sleepwear
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 if Tempshame >= 30:
                                         ch_r "A bit scandalous, but yeah."
                                 elif Tempshame >= 15:
@@ -1905,49 +1905,49 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                                 else:
                                         ch_r "Sure, it's cute."
                         elif Tempshame <= 5:
-                                $ Girl.FaceChange("smile")
+                                $ Girl.change_face("smile")
                                 ch_r "Yeah, I think I like this style, I'd wear this."
                         elif Tempshame <= 15:
                             if ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0):
                                 ch_r "It's pretty skimpy, but I can make it work."
                             else:
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_r "I think this looks is a bit daring to wear."
                                 $ Agree = 0
                         elif Custom == 10 and Tempshame <= 20:
                                 #if it's a swimsuit. . .
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_r "Sure, I can swim in this. . ."
                         elif Tempshame <= 25:
                             if ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0):
                                 ch_r "Kinky, but I can rock this."
                             else:
-                                $ Girl.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                                 ch_r "I'm definitely not going out in this."
                                 $ Agree = 0
                         elif ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0):
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_r "I can't believe it. . . but yeah."
                         else:
-                                $ Girl.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                                 ch_r "You have got to be kidding."
                                 $ Agree = 0
                 elif Girl == KittyX:
-                        if Girl.Taboo >= 40: #Girl.Loc != "bg player" and Girl.Loc != "bg kitty":
-                                $ Girl.FaceChange("confused",1)
+                        if Girl.Taboo >= 40: #Girl.Loc != "bg_player" and Girl.Loc != "bg_kitty":
+                                $ Girl.change_face("confused",1)
                                 $ Girl.Mouth = "smile"
                                 ch_k "Kinda late to ask, right?"
                         if "exhibitionist" in Girl.Traits and Tempshame >= 20:
                                 ch_k "I'm getting wet just thinking about it. . ."
-                                $ Girl.Statup("Lust", 80, 10)
+                                $ Girl.change_stat("lust", 80, 10)
                         elif Tempshame <= 5:
-                                $ Girl.FaceChange("smile")
+                                $ Girl.change_face("smile")
                                 ch_k "Sure, it's a cute look!"
                         elif Tempshame <= 15 and (ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0)):
                                 ch_k "It's pretty hot, right?"
                         elif Custom == 7:
                                 #if it's sleepwear
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 if Tempshame >= 30:
                                     ch_k "This is[Girl.like]pretty exposed, but ok."
                                 elif Tempshame >= 15:
@@ -1955,54 +1955,54 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                                 else:
                                     ch_k "Yeah, these are fine."
                         elif Tempshame <= 15:
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_k "It's too slutty to wear out."
                                 $ Agree = 0
                         elif Custom == 10 and Tempshame <= 20:
                                 #if it's a swimsuit. . .
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_k "This is a cute swimsuit. . ."
                         elif Tempshame <= 25 and (ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0)):
                                 ch_k "So sexy, but I can handle it."
                         elif Tempshame <= 25:
-                                $ Girl.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                                 ch_k "{i}Way{/i} too sexy for outside."
                                 $ Agree = 0
                         elif (ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0)):
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_k "OMG, I can't believe I'm doing this."
                         else:
-                                $ Girl.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                                 ch_k "I - can't - even."
                                 $ Agree = 0
                 elif Girl == EmmaX:
                         if Girl.Taboo >= 40:
-                                $ Girl.FaceChange("confused",1)
+                                $ Girl.change_face("confused",1)
                                 $ Girl.Mouth = "smile"
                                 "She glances around."
                                 ch_e "Is that a trick question?"
                         if "exhibitionist" in Girl.Traits and Tempshame >= 20:
                                 ch_e "The thought of it gets me moist. . ."
-                                $ Girl.Statup("Lust", 80, 10)
+                                $ Girl.change_stat("lust", 80, 10)
                         elif Tempshame <= 5:
-                                $ Girl.FaceChange("smile")
+                                $ Girl.change_face("smile")
                                 ch_e "Yes, it's a fine choice."
                         elif Tempshame <= 15 and (ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0)):
                                 ch_e "Rather daring, how could I resist?"
                         elif Custom == 7:
                                 #if it's sleepwear
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 if Tempshame >= 30:
                                     ch_e "You understand I only wear this sort of thing in private."
                                 else:
                                     ch_e "It is a comfortable outfit."
                         elif Tempshame <= 15:
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_e "Rather too daring, don't you think?"
                                 $ Agree = 0
                         elif Custom == 10 and Tempshame <= 20:
                                 #if it's a swimsuit. . .
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_e "Fine, this is decent swimwear. . ."
                         elif Tempshame >= 15 and "public" not in Girl.History:
                                 ch_e "I doubt I could get away with this in public, [Girl.Petname]."
@@ -2010,34 +2010,34 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                         elif Tempshame <= 25 and (ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0)):
                                 ch_e "This is particularly inappropriate. . . in the best ways."
                         elif Tempshame <= 25:
-                                $ Girl.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                                 ch_e "I don't believe even I could pull off this look, [Girl.Petname]."
                                 $ Agree = 0
                         elif (ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0)):
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_e "This look certainly pushes the boundaries."
                         else:
-                                $ Girl.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                                 ch_e "Even I can't pull this off."
                                 $ Agree = 0
                 elif Girl == LauraX:
                         if Girl.Taboo >= 40:
-                                $ Girl.FaceChange("confused",1)
+                                $ Girl.change_face("confused",1)
                                 $ Girl.Mouth = "smile"
                                 ch_l "Well a bit late for that, I guess."
                         if "exhibitionist" in Girl.Traits and Tempshame >= 20:
-                                $ Girl.Statup("Lust", 80, 10)
-                                $ Girl.FaceChange("sexy", 2)
+                                $ Girl.change_stat("lust", 80, 10)
+                                $ Girl.change_face("sexy", 2)
                                 ch_l ". . ."
-                                $ Girl.FaceChange("sexy", 1)
+                                $ Girl.change_face("sexy", 1)
                         elif Tempshame <= 5:
-                                $ Girl.FaceChange("smile")
+                                $ Girl.change_face("smile")
                                 ch_l "I don't see why not."
                         elif Tempshame <= 15 and (ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0)):
                                 ch_l "It looks good, right?"
                         elif Custom == 7:
                                 #if it's sleepwear
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 if Tempshame >= 30:
                                     ch_l "Sure, perv."
                                 elif Tempshame >= 15:
@@ -2045,44 +2045,44 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                                 else:
                                     ch_l "Yeah, I guess."
                         elif Tempshame <= 15:
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_l "I can't move freely in this without showing off the goods."
                                 $ Agree = 0
                         elif Custom == 10 and Tempshame <= 20:
                                 #if it's a swimsuit. . .
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_l "Yeah, I can swim in this. . ."
                         elif Tempshame <= 25 and (ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0)):
                                 ch_l "I can handle this."
                         elif Tempshame <= 25:
-                                $ Girl.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                                 ch_l "Nah, too slutty."
                                 $ Agree = 0
                         elif (ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0)):
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_l "Pretty daring, eh?"
                         else:
-                                $ Girl.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                                 ch_l "As if."
                                 $ Agree = 0
                 elif Girl == JeanX:
                         if Girl.Taboo >= 40:
-                                $ Girl.FaceChange("confused",1)
+                                $ Girl.change_face("confused",1)
                                 $ Girl.Mouth = "smile"
                                 ch_j "Well, I guess so, right?"
                         if "exhibitionist" in Girl.Traits and Tempshame >= 20:
-                                $ Girl.Statup("Lust", 80, 10)
-                                $ Girl.FaceChange("sexy", 2)
+                                $ Girl.change_stat("lust", 80, 10)
+                                $ Girl.change_face("sexy", 2)
                                 ch_j ". . ."
-                                $ Girl.FaceChange("sexy", 1)
+                                $ Girl.change_face("sexy", 1)
                         elif Tempshame <= 5:
-                                $ Girl.FaceChange("smile")
+                                $ Girl.change_face("smile")
                                 ch_j "Sure, whatever."
                         elif Tempshame <= 15 and (ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0)):
                                 ch_j "I almost have to. . ."
                         elif Custom == 7:
                                 #if it's sleepwear
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 if Tempshame >= 30:
                                     ch_j "If it'll keep you hard. . ."
                                 elif Tempshame >= 15:
@@ -2090,42 +2090,42 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                                 else:
                                     ch_j "Why not."
                         elif Tempshame <= 15:
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_j "I can pull this one off. . ."
                                 $ Agree = 0
                         elif Custom == 10 and Tempshame <= 20:
                                 #if it's a swimsuit. . .
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_j "Yeah, sure."
                         elif Tempshame <= 25 and (ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0)):
                                 ch_j "This'll turn some heads. . ."
                         elif Tempshame <= 25:
-                                $ Girl.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                                 ch_j "I wouldn't want to break anyone. . ."
                                 $ Agree = 0
                         elif (ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0)):
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_j "Kinky, but sure."
                         else:
-                                $ Girl.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                                 ch_j "You have to be joking."
                                 $ Agree = 0
                 elif Girl == StormX:
                         #Storm will approve anything if you clear it with Xavier, and is more likely to be fine with risky looks
                         if Girl.Taboo >= 40:
-                                $ Girl.FaceChange("confused",1)
+                                $ Girl.change_face("confused",1)
                                 $ Girl.Mouth = "smile"
                                 "She glances around."
                                 ch_s "It seems a bit late for that question. . ."
                         if "exhibitionist" in Girl.Traits and Tempshame >= 20:
                                 ch_s "I do find the idea. . . exciting. . ."
-                                $ Girl.Statup("Lust", 80, 10)
+                                $ Girl.change_stat("lust", 80, 10)
                         elif Tempshame <= 10:
-                                $ Girl.FaceChange("smile")
+                                $ Girl.change_face("smile")
                                 ch_s "Yes, it's a fine choice."
                         elif Custom == 7:
                                 #if it's sleepwear
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 if Tempshame >= 20:
                                     ch_s "This is a fine outfit."
                                 else:
@@ -2134,42 +2134,42 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                                 ch_s "I don't see why not. . ."
                         elif Custom == 10 and Tempshame <= 20:
                                 #if it's a swimsuit. . .
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_s "I suppose I could swim well like this. . ."
                         elif Tempshame <= 20 and (ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0)):
                                 ch_s "This certainly does push the limits of good taste. . ."
                         elif Tempshame <= 25 and (ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0)):
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_s "I doubt Charles would approve, but so what?"
                         elif Tempshame <= 25:
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_s "I'm afraid that Charles would never approve."
                                 $ Agree = 0
                         elif (ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0)):
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_s "I doubt Charles would approve, but so what?"
                         else:
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_s "I'm afraid that Charles would never approve."
                                 $ Agree = 0
                 elif Girl == JubesX:
                         if Girl.Taboo >= 40:
-                                $ Girl.FaceChange("confused",1)
+                                $ Girl.change_face("confused",1)
                                 $ Girl.Mouth = "smile"
                                 ch_v "I guess that ship has sailed. . ."
                         if "exhibitionist" in Girl.Traits and Tempshame >= 20:
-                                $ Girl.Statup("Lust", 80, 10)
-                                $ Girl.FaceChange("sexy", 2)
+                                $ Girl.change_stat("lust", 80, 10)
+                                $ Girl.change_face("sexy", 2)
                                 ch_v ". . ."
-                                $ Girl.FaceChange("sexy", 1)
+                                $ Girl.change_face("sexy", 1)
                         elif Tempshame <= 5:
-                                $ Girl.FaceChange("smile")
+                                $ Girl.change_face("smile")
                                 ch_v "I guess?"
                         elif Tempshame <= 15 and (ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0)):
                                 ch_v "It looks totally hot, right?"
                         elif Custom == 7:
                                 #if it's sleepwear
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 if Tempshame >= 30:
                                     ch_v "Whatever, perv."
                                 elif Tempshame >= 15:
@@ -2177,24 +2177,24 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                                 else:
                                     ch_v "Sure, I guess."
                         elif Tempshame <= 15:
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_v "I think this is too breezy."
                                 $ Agree = 0
                         elif Custom == 10 and Tempshame <= 20:
                                 #if it's a swimsuit. . .
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_v "I could swim in this. . ."
                         elif Tempshame <= 25 and (ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0)):
                                 ch_v "I guess this is fine. . ."
                         elif Tempshame <= 25:
-                                $ Girl.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                                 ch_v "I really couldn't wear this out."
                                 $ Agree = 0
                         elif (ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0)):
-                                $ Girl.FaceChange("bemused", 1)
+                                $ Girl.change_face("bemused", 1)
                                 ch_v "It's pretty hot, right?"
                         else:
-                                $ Girl.FaceChange("angry", 1)
+                                $ Girl.change_face("angry", 1)
                                 ch_v "As if."
                                 $ Agree = 0
                 #End check dialog
@@ -2237,7 +2237,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
 
         if Check:
                 pass
-        elif bg_current == "HW Party" or (bg_current == "bg player" and "halloween" in Player.DailyActions):
+        elif bg_current == "HW Party" or (bg_current == "bg_player" and "halloween" in Player.daily_history):
                 #skips because it's at the party and they should be in costume only
                 pass
         elif "exhibitionist" in Girl.Traits and Tempshame <= 20:
@@ -2248,13 +2248,13 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
         elif Tempshame <= 12:
                 #If the outfit is tame
                 pass
-        elif Girl.Over == "towel" and Girl.Loc == "bg showerroom":
+        elif Girl.Over == "towel" and Girl.Loc == "bg_showerroom":
                 #If she's in a towel but it's appropriate
                 pass
         elif Tempshame <= 15 and (ApprovalCheck(Girl, 1500) or ApprovalCheck(Girl, 500, "I")):
                 #If the outfit is hot but she's ok
                 pass
-        elif Tempshame <= 20 and (Girl.Loc == "bg dangerroom" or Girl.Loc == "bg pool"):
+        elif Tempshame <= 20 and (Girl.Loc == "bg_dangerroom" or Girl.Loc == "bg_pool"):
                 #If the outfit is light but she's in the gym or pool
                 pass
         elif Tempshame <= 20 and (ApprovalCheck(Girl, 1800) or ApprovalCheck(Girl, 650, "I")):
@@ -2266,15 +2266,15 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
         elif (ApprovalCheck(Girl, 2500) or ApprovalCheck(Girl, 800, "I")):
                 #If the outfit is very scandalous but she's ok with that
                 pass
-        elif Girl.Loc == "bg dangerroom" and Girl.Outfit == "gym":
+        elif Girl.Loc == "bg_dangerroom" and Girl.Outfit == "gym":
                 $ Girl.OutfitChange("gym",Changed = 1)
         elif not Girl.Taboo:
                 pass
-        elif Girl.Outfit == "swimwear" and bg_current == "bg pool":
+        elif Girl.Outfit == "swimwear" and bg_current == "bg_pool":
                 pass
-        elif bg_current == "bg pool" and Girl.ChestNum() >= 3 and Girl.PantiesNum() >= 6:
+        elif bg_current == "bg_pool" and Girl.ChestNum() >= 3 and Girl.PantiesNum() >= 6:
                 pass
-        elif Girl.Outfit == "gym" and bg_current == "bg dangerroom":
+        elif Girl.Outfit == "gym" and bg_current == "bg_dangerroom":
                 pass
         else:
                 #if this is a called outfit modesty check. . .
@@ -2293,9 +2293,9 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                                 ch_s "I'll need to change into something more substantial."
                         elif Girl == JubesX:
                                 ch_v "I need to throw something on real quick. . ."
-                if Girl.Loc == "bg dangerroom":
+                if Girl.Loc == "bg_dangerroom":
                         $ Girl.Outfit =  "gym"
-                elif Girl.Loc == "bg pool" and Girl.Swim[0]:
+                elif Girl.Loc == "bg_pool" and Girl.Swim[0]:
                         $ Girl.Outfit =  "swimwear"
                 else:
                         $ Girl.Outfit = renpy.random.choice(["casual1", "casual2"])
@@ -2459,7 +2459,7 @@ label QuickOutfitCheck(Girl=0, Custom = 3, Count = 0, Tempshame = 50, Agree = 1,
                 $ RogueX.gibberish = 5
         return
 
-label Display_DressScreen(Girl=Ch_Focus): #rkeljsv
+label Display_DressScreen(Girl=focused_Girl): #rkeljsv
         #asks if you're willing to put up a protective dressing screen, XTaboo is the girl's local taboo
         # call Display_DressScreen(Girl)
         if renpy.showing('DressScreen'):
@@ -2474,8 +2474,8 @@ label Display_DressScreen(Girl=Ch_Focus): #rkeljsv
         if Girl.Taboo:
                 return 0
 
-        $ Girl.FaceChange("bemused",1,Eyes="side")
-        if "screen" in Girl.DailyActions:
+        $ Girl.change_face("bemused",1,Eyes="side")
+        if "screen" in Girl.daily_history:
                 pass
         elif Girl == RogueX:
                 ch_r "I'm not really comfortable like this."
@@ -2492,8 +2492,8 @@ label Display_DressScreen(Girl=Ch_Focus): #rkeljsv
         elif Girl == JubesX:
                 ch_v "I don't know, this is moving a little fast. . ."
         $ Girl.AddWord(1,0,"screen") #adds screen to daily
-        $ Girl.FaceChange("bemused",1)
-        call AnyLine(Girl,"Mind if I get behind a dressing screen?")
+        $ Girl.change_face("bemused",1)
+        call Anyline(Girl,"Mind if I get behind a dressing screen?")
         menu:
             extend ""
             "Go ahead":

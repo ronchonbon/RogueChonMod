@@ -19,17 +19,17 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
         $ EGirls.remove(EGirls[0]) #remove her from the list
         while EGirls:
                 #clears out remaining options, if applicable
-                if "wannafap" in EGirls[0].DailyActions and "nofap" not in EGirls[0].DailyActions:
+                if "wannafap" in EGirls[0].daily_history and "nofap" not in EGirls[0].daily_history:
                         #if she's wants to fap and is allowed to, she will
                         $ EGirls[0].AddWord(1,0,"gonnafap",0,0)  #adds "gonnafap" tag to daily
                 $ EGirls.remove(EGirls[0])
                 #any girls who are under "nofap" orders are out of luck this turn. . .
 
-        $ Player.DailyActions.append("fapcall")
+        $ Player.daily_history.append("fapcall")
 
         show Cellphone at sprite_location(StageLeft)
 
-        "[Girl.Name] calls you up. . ."
+        "[Girl.name] calls you up. . ."
         if Girl == RogueX:
                 ch_r "So. . . I was wondering. . ."
                 ch_r "I know you didn't want me to. . . um. . . "
@@ -72,12 +72,12 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
 
         menu:
             "Sure, no problem.":
-                            $ Girl.Statup("Love", 90, 5)
-                            $ Girl.Statup("Love", 80, 5)
-                            $ Girl.Statup("Love", 200, 1)
-                            $ Girl.Statup("Obed", 80, 2)
-                            $ Girl.Statup("Inbt", 80, 3)
-                            $ Girl.Statup("Lust", 50, 5)
+                            $ Girl.change_stat("love", 90, 5)
+                            $ Girl.change_stat("love", 80, 5)
+                            $ Girl.change_stat("love", 200, 1)
+                            $ Girl.change_stat("obedience", 80, 2)
+                            $ Girl.change_stat("inhibition", 80, 3)
+                            $ Girl.change_stat("lust", 50, 5)
                             if Girl == RogueX:
                                     ch_r "Thanks, I really appreciate that."
                             elif Girl == KittyX:
@@ -94,12 +94,12 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
                                     ch_v "Nice. . ."
                             $ Fap = 1
             "If you really have to. . .":
-                    if (Girl.Love + Girl.Obed) >= 2*Girl.Inbt:
-                            #if she agrees to not do it (Love+Obed >= double Inbt)
-                            $ Girl.Statup("Love", 80, 2)
-                            $ Girl.Statup("Obed", 60, 3)
-                            $ Girl.Statup("Obed", 80, 1)
-                            $ Girl.Statup("Lust", 80, 5)
+                    if (Girl.love + Girl.obedience) >= 2*Girl.inhibition:
+                            #if she agrees to not do it (love+obedience >= double inhibition)
+                            $ Girl.change_stat("love", 80, 2)
+                            $ Girl.change_stat("obedience", 60, 3)
+                            $ Girl.change_stat("obedience", 80, 1)
+                            $ Girl.change_stat("lust", 80, 5)
                             if Girl == RogueX:
                                     ch_r "Oh, well. . .."
                                     ch_r "I suppose I could restrain myself. . ."
@@ -122,13 +122,13 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
 
                     else:
                             #if she insists on doing it
-                            $ Girl.Statup("Love", 80, 3)
-                            $ Girl.Statup("Love", 200, 1)
-                            $ Girl.Statup("Obed", 50, -4)
-                            $ Girl.Statup("Obed", 90, -1)
-                            $ Girl.Statup("Inbt", 50, 2)
-                            $ Girl.Statup("Inbt", 80, 5)
-                            $ Girl.Statup("Lust", 50, 5)
+                            $ Girl.change_stat("love", 80, 3)
+                            $ Girl.change_stat("love", 200, 1)
+                            $ Girl.change_stat("obedience", 50, -4)
+                            $ Girl.change_stat("obedience", 90, -1)
+                            $ Girl.change_stat("inhibition", 50, 2)
+                            $ Girl.change_stat("inhibition", 80, 5)
+                            $ Girl.change_stat("lust", 50, 5)
                             if Girl == RogueX:
                                     ch_r "I would REALLY appreciate that."
                                     ch_r "Thank you."
@@ -147,14 +147,14 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
                                     ch_v "Nice. . ."
                             $ Fap = 1
             "No, you may not.":
-                    if ApprovalCheck(Girl,600,"O") and (Girl.Obed >= Girl.Inbt):
-                            #if she agrees to not do it (Obed >= Inbt)
-                            $ Girl.Statup("Love", 50, -5)
-                            $ Girl.Statup("Obed", 60, 5)
-                            $ Girl.Statup("Obed", 200, 2)
-                            $ Girl.Statup("Lust", 80, 5)
+                    if ApprovalCheck(Girl,600,"O") and (Girl.obedience >= Girl.inhibition):
+                            #if she agrees to not do it (obedience >= inhibition)
+                            $ Girl.change_stat("love", 50, -5)
+                            $ Girl.change_stat("obedience", 60, 5)
+                            $ Girl.change_stat("obedience", 200, 2)
+                            $ Girl.change_stat("lust", 80, 5)
                             if ApprovalCheck(Girl,800,"O"):
-                                    $ Girl.Statup("Lust", 200, 5)
+                                    $ Girl.change_stat("lust", 200, 5)
                             if Girl == RogueX:
                                     ch_r "Oh, well. . .."
                                     ch_r "I suppose I could restrain myself. . ."
@@ -176,12 +176,12 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
                             $ Girl.Thirst += 10
                     elif ApprovalCheck(Girl,1000,"LO"):
                             #she is apologetic about it
-                            $ Girl.Statup("Love", 70, -5)
-                            $ Girl.Statup("Obed", 50, -3)
-                            $ Girl.Statup("Obed", 80, -2)
-                            $ Girl.Statup("Inbt", 50, 3)
-                            $ Girl.Statup("Inbt", 80, 2)
-                            $ Girl.Statup("Lust", 80, 5)
+                            $ Girl.change_stat("love", 70, -5)
+                            $ Girl.change_stat("obedience", 50, -3)
+                            $ Girl.change_stat("obedience", 80, -2)
+                            $ Girl.change_stat("inhibition", 50, 3)
+                            $ Girl.change_stat("inhibition", 80, 2)
+                            $ Girl.change_stat("lust", 80, 5)
                             if Girl == RogueX:
                                     ch_r "Well, I mean, I kind of started. . ."
                             elif Girl == KittyX:
@@ -202,11 +202,11 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
                             $ Fap = 1
                     else:
                             #if she is mad at you
-                            $ Girl.Statup("Love", 70, -5)
-                            $ Girl.Statup("Love", 90, -5)
-                            $ Girl.Statup("Obed", 80, -5)
-                            $ Girl.Statup("Inbt", 50, 4)
-                            $ Girl.Statup("Inbt", 80, 3)
+                            $ Girl.change_stat("love", 70, -5)
+                            $ Girl.change_stat("love", 90, -5)
+                            $ Girl.change_stat("obedience", 80, -5)
+                            $ Girl.change_stat("inhibition", 50, 4)
+                            $ Girl.change_stat("inhibition", 80, 3)
                             if Girl == RogueX:
                                     ch_r "You know what? Screw it, and screw you!"
                             elif Girl == KittyX:
@@ -218,7 +218,7 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
                             elif Girl == JeanX:
                                     ch_j "Fine!"
                                     ch_j "You can just imagine what I'm *not* doing right now."
-                                    $ Girl.FaceChange("angry",Mouth="smirk")
+                                    $ Girl.change_face("angry",Mouth="smirk")
                                     call PsychicFlash(0)
                             elif Girl == StormX:
                                     ch_s ". . ."
@@ -228,11 +228,11 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
                             $ Girl.Thirst += 10
                             $ Fap = 1
             "I could come over and take care of that. . .":
-                            $ Girl.Statup("Love", 80, 4)
-                            $ Girl.Statup("Love", 200, 1)
-                            $ Girl.Statup("Obed", 80, 2)
-                            $ Girl.Statup("Inbt", 80, 2)
-                            $ Girl.Statup("Lust", 80, 5)
+                            $ Girl.change_stat("love", 80, 4)
+                            $ Girl.change_stat("love", 200, 1)
+                            $ Girl.change_stat("obedience", 80, 2)
+                            $ Girl.change_stat("inhibition", 80, 2)
+                            $ Girl.change_stat("lust", 80, 5)
                             if Girl == EmmaX:
                                     ch_e "I think you could at that, [EmmaX.Petname]."
                             elif Girl == LauraX:
@@ -242,17 +242,17 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
                             elif Girl == JubesX:
                                     ch_v "That might be nice."
                             else: #Rogue, Kitty, Jean
-                                    call AnyLine(Girl,"Oh, you would, would you. . .")
+                                    call Anyline(Girl,"Oh, you would, would you. . .")
                             $ Fap = 3
             "Only if I can watch." if AloneCheck(): #only works if you're alone
                     if ApprovalCheck(Girl, 1200):
                             #She agrees
-                            $ Girl.Statup("Love", 80, 4)
-                            $ Girl.Statup("Obed", 60, 2)
-                            $ Girl.Statup("Obed", 80, 2)
-                            $ Girl.Statup("Inbt", 50, 2)
-                            $ Girl.Statup("Inbt", 80, 3)
-                            $ Girl.Statup("Lust", 80, 5)
+                            $ Girl.change_stat("love", 80, 4)
+                            $ Girl.change_stat("obedience", 60, 2)
+                            $ Girl.change_stat("obedience", 80, 2)
+                            $ Girl.change_stat("inhibition", 50, 2)
+                            $ Girl.change_stat("inhibition", 80, 3)
+                            $ Girl.change_stat("lust", 80, 5)
                             if Girl == RogueX: #R_Mast
                                     ch_r "Hmm. . . that sounds like fun. . ."
                             elif Girl == KittyX:
@@ -271,10 +271,10 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
                             $ Fap = 2
                     else:
                             #she's not into it.
-                            $ Girl.Statup("Love", 60, -3)
-                            $ Girl.Statup("Obed", 60, -2)
-                            $ Girl.Statup("Inbt", 80, 3)
-                            $ Girl.Statup("Lust", 50, 5)
+                            $ Girl.change_stat("love", 60, -3)
+                            $ Girl.change_stat("obedience", 60, -2)
+                            $ Girl.change_stat("inhibition", 80, 3)
+                            $ Girl.change_stat("lust", 50, 5)
                             if Girl == RogueX: #R_Mast
                                     ch_r "I, um, I don't know about that. . ."
                             elif Girl == KittyX:
@@ -308,7 +308,7 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
         elif Fap == 2:
                 #if you agree to watch her. . .
                 $ del Options[:]
-                if Girl in (EmmaX,StormX) and Girl.Loc == "bg classroom" and Time_Count >= 2:
+                if Girl in (EmmaX,StormX) and Girl.Loc == "bg_classroom" and time_index >= 2:
                         pass             #if it's Emma and she's in class and it's a good time, stay
                 else:
                         $ Girl.Loc = Girl.Home
@@ -331,11 +331,11 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
 label PhoneSex(Girl=0): #rkeljsv
         # called by Eventcalls->CalltoFap
         # make sure to adjust orgasm options to work when you aren't in the room.
-        if bg_current != "bg player":
+        if bg_current != "bg_player":
                 "You rush back to your room."
-                $ bg_current = "bg player"
+                $ bg_current = "bg_player"
                 call Taboo_Level
-                call Set_The_Scene
+                call set_the_scene
         if Girl in (EmmaX,JeanX):
                 #telepathic sex?
                 call MindFuck
@@ -347,7 +347,7 @@ label PhoneSex(Girl=0): #rkeljsv
         show PhoneSex zorder 150
 
         $ Girl.AddWord(1,"phonesex","phonesex",0,"phonesex")  #adds "phonesex" tag to recent and daily actions, and history
-        $ Trigger = 1
+        $ primary_action = 1
         if Girl == RogueX:
                 ch_r "Ok, I think that should get the video running, right?"
                 call Rogue_M_Prep
@@ -391,103 +391,103 @@ label PhoneSex(Girl=0): #rkeljsv
         call Get_Dressed
         $ Girl.OutfitChange(5) #resets her clothes
         call Checkout(1)
-        $ Player.RecentActions.remove("phonesex")
+        $ Player.recent_history.remove("phonesex")
         return
 #add option for girl to strip herself. . .
 # End Phone Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 #start Call_For_Les / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-label Call_For_Les(Girl=0,Girl2=0,BO=[]): #rkeljsv
+label Call_For_Les(Girl=0,Girl2=0,Girls=[]): #rkeljsv
         #called by JumperCheck if girls are lesing and Girl approves
 
-        if Girl not in ActiveGirls:
-                $ BO = ActiveGirls[:]
-                while BO and Girl not in ActiveGirls:
-                        if BO[0] not in Party and BO[0].Loc != bg_current and "les" in BO[0].RecentActions:
+        if Girl not in active_Girls:
+                $ Girls = active_Girls[:]
+                while Girls and Girl not in active_Girls:
+                        if Girls[0] not in Party and Girls[0].Loc != bg_current and "les" in Girls[0].recent_history:
                                 # if this girl is not already the focal girl, is at the current location but not in a party,
                                 # and was queued for a les action, set her up as girl 1.
-                                $ Girl = BO[0]
-                                $ BO = [1]
-                        $ BO.remove(BO[0])
-        if Girl in ActiveGirls and not Girl2:
+                                $ Girl = Girls[0]
+                                $ Girls = [1]
+                        $ Girls.remove(Girls[0])
+        if Girl in active_Girls and not Girl2:
                 #if a Girl was either offered or produced by first loop. . .
-                $ BO = ActiveGirls[:]
-                $ BO.remove(Girl)
-                while BO:
-                        if BO[0] not in Party and BO[0].Loc != bg_current and "les" in BO[0].RecentActions:
+                $ Girls = active_Girls[:]
+                $ Girls.remove(Girl)
+                while Girls:
+                        if Girls[0] not in Party and Girls[0].Loc != bg_current and "les" in Girls[0].recent_history:
                                 # if this girl is not already the focal girl, is at the current location but not in a party,
                                 # and was queued for a les action, set her up as girl 2.
-                                if ApprovalCheck(BO[0], 1600 - BO[0].SEXP, TabM=0):
-                                        $ Girl2 = BO[0]
-                                        $ BO = [1]
+                                if ApprovalCheck(Girls[0], 1600 - Girls[0].SEXP, TabM=0):
+                                        $ Girl2 = Girls[0]
+                                        $ Girls = [1]
                                 else:
                                         return 0
-                        $ BO.remove(BO[0])
-        if Girl not in ActiveGirls or Girl2 not in ActiveGirls:
+                        $ Girls.remove(Girls[0])
+        if Girl not in active_Girls or Girl2 not in active_Girls:
                 #if either girl refuses, continue with Jumper check
                 return 0
 
         show Cellphone at sprite_location(StageLeft)
 
-        $ Line = 0
-        "You get a call from [Girl.Name]."
+        $ line = 0
+        "You get a call from [Girl.name]."
         if Girl == RogueX:
-                ch_r "Hey, [Player.Name]. . . I was just over here with [Girl2.Name] and. . ."
+                ch_r "Hey, [Player.name]. . . I was just over here with [Girl2.name] and. . ."
                 ch_r "One thing lead to another, you know how that goes. . . and we were just wondering,"
                 ch_r "Would you like to come over and join us?"
         elif Girl == KittyX:
-                ch_k "Oh, hi, [Girl.Petname]. . . I was just hanging out with [Girl2.Name] and. . ."
+                ch_k "Oh, hi, [Girl.Petname]. . . I was just hanging out with [Girl2.name] and. . ."
                 ch_k "we got to thinking[Girl.like]"
                 ch_k "Did you wanna come over and join us?"
         elif Girl == EmmaX:
-                ch_e "[Girl.Petname]. . . I was just here entertaining [Girl2.Name]. . ."
+                ch_e "[Girl.Petname]. . . I was just here entertaining [Girl2.name]. . ."
                 ch_e "One thing lead to another, I'm sure you get the picture. . . and we were just wondering,"
                 ch_e "Would you like to come lend us a hand?"
                 ch_e "Or other bits. . ."
         elif Girl == LauraX:
-                ch_l "Hey, [Player.Name]. . . I was with [Girl2.Name] here, and. . ."
+                ch_l "Hey, [Player.name]. . . I was with [Girl2.name] here, and. . ."
                 ch_l "You know, feeling each other up-"
-                call AnyLine(Girl2,"Hey!{w=0.3}{nw}")
+                call Anyline(Girl2,"Hey!{w=0.3}{nw}")
                 ch_l ". . . so . . ."
                 ch_l "Want in on this action?"
         elif Girl == JeanX:
-                ch_j "Oh, [Girl.Petname]. . . I was hanging out with [Girl2.Name]. . ."
+                ch_j "Oh, [Girl.Petname]. . . I was hanging out with [Girl2.name]. . ."
                 ch_j "Did you want to swing by and pound some sense into her?"
-                call AnyLine(Girl2,"Hey!{w=0.3}{nw}")
+                call Anyline(Girl2,"Hey!{w=0.3}{nw}")
                 ch_j ". . ."
         elif Girl == StormX:
-                ch_s "Hello, [Girl.Petname]? . . I was having a. . . chat with [Girl2.Name]. . ."
+                ch_s "Hello, [Girl.Petname]? . . I was having a. . . chat with [Girl2.name]. . ."
                 ch_s "We were having a good time, and were wondering if perhaps you wanted to join us?"
         elif Girl == JubesX:
-                ch_v "Oh, hey, [Girl.Petname]. . . [Girl2.Name]'s over here and. . ."
+                ch_v "Oh, hey, [Girl.Petname]. . . [Girl2.name]'s over here and. . ."
                 ch_v "we were having some fun, and. . ."
                 ch_v "Did you want to join us?"
-        while not Line and Line != "what":
+        while not line and line != "what":
                 menu:
                     extend ""
                     "Sure, I'll be right there!":
-                            $ Girl.Statup("Love", 95, 5)
-                            $ Girl.Statup("Obed", 95, 3)
-                            $ Girl.Statup("Inbt", 95, 2)
+                            $ Girl.change_stat("love", 95, 5)
+                            $ Girl.change_stat("obedience", 95, 3)
+                            $ Girl.change_stat("inhibition", 95, 2)
                             if Girl in (EmmaX,StormX):
-                                ch_e "Lovely, see you in a bit."
+                                ch_e "lovely, see you in a bit."
                             else:
-                                call AnyLine(Girl,"Cool. See you here.")
-                            $ Girl2.Statup("Love", 95, 5)
-                            $ Girl2.Statup("Obed", 95, 3)
-                            $ Girl2.Statup("Inbt", 95, 2)
-                            $ Line = "yes"
+                                call Anyline(Girl,"Cool. See you here.")
+                            $ Girl2.change_stat("love", 95, 5)
+                            $ Girl2.change_stat("obedience", 95, 3)
+                            $ Girl2.change_stat("inhibition", 95, 2)
+                            $ line = "yes"
                     "Nah, have fun though.":
-                            $ Girl.Statup("Love", 90, -4)
-                            $ Girl.Statup("Obed", 95, 2)
-                            $ Girl.Statup("Inbt", 90, -2)
+                            $ Girl.change_stat("love", 90, -4)
+                            $ Girl.change_stat("obedience", 95, 2)
+                            $ Girl.change_stat("inhibition", 90, -2)
                             if Girl == RogueX:
                                     ch_r "Oh. Ok then. . ."
                             elif Girl == KittyX:
                                     ch_k "Wow, ok, I guess."
                             elif Girl == EmmaX:
                                     ch_e "I admire your restraint. . ."
-                                    $ Girl.Statup("Obed", 95, 2)
+                                    $ Girl.change_stat("obedience", 95, 2)
                                     ch_e "If not your wisdom. . ."
                             elif Girl == LauraX:
                                     ch_l "Huh. Ok."
@@ -498,23 +498,23 @@ label Call_For_Les(Girl=0,Girl2=0,BO=[]): #rkeljsv
                                     ch_s "That is unfortunate. . ."
                             elif Girl == JubesX:
                                     ch_v "Ok, but you're missing out!"
-                            $ Girl2.Statup("Love", 90, -4)
-                            $ Girl2.Statup("Obed", 95, 2)
-                            $ Girl2.Statup("Inbt", 90, -2)
-                            $ Player.RecentActions.append("no les")
+                            $ Girl2.change_stat("love", 90, -4)
+                            $ Girl2.change_stat("obedience", 95, 2)
+                            $ Girl2.change_stat("inhibition", 90, -2)
+                            $ Player.recent_history.append("no les")
                             "She hangs up."
                             hide Cellphone
                             jump Misplaced
-                    "What, are you watching a movie?" if Line != "what" and Girl != JeanX:
-                            $ Girl.Statup("Love", 80, 2)
-                            $ Girl.Statup("Inbt", 80, 2)
+                    "What, are you watching a movie?" if line != "what" and Girl != JeanX:
+                            $ Girl.change_stat("love", 80, 2)
+                            $ Girl.change_stat("inhibition", 80, 2)
                             if Girl == RogueX:
                                     ch_r "Oh, we're putting on quite the show, but no."
                             elif Girl == KittyX:
-                                    $ Girl.Statup("Inbt", 80, 2)
+                                    $ Girl.change_stat("inhibition", 80, 2)
                                     ch_k "Um. . . no. . .we're, um. . ."
                             elif Girl == EmmaX:
-                                    $ Girl.Statup("Love", 80, 1)
+                                    $ Girl.change_stat("love", 80, 1)
                                     ch_e "Oh, that's adorable. No, of course not."
                             elif Girl == LauraX:
                                     ch_l "You hit your head or something?"
@@ -523,13 +523,13 @@ label Call_For_Les(Girl=0,Girl2=0,BO=[]): #rkeljsv
                             elif Girl == JubesX:
                                     ch_v "Heh, no! We aren't. . . it's more fun than that. . ."
 
-                            $ Girl2.Statup("Love", 80, 2)
-                            $ Girl2.Statup("Inbt", 80, 2)
+                            $ Girl2.change_stat("love", 80, 2)
+                            $ Girl2.change_stat("inhibition", 80, 2)
                             if Girl2 == RogueX:
                                     ch_r "We're bumpin uglies, [Girl2.Petname]."
                                     ch_r "Thought you might want in."
                             elif Girl2 == KittyX:
-                                    $ Girl2.Statup("Inbt", 80, 2)
+                                    $ Girl2.change_stat("inhibition", 80, 2)
                                     ch_k "It's, um. . . sex."
                                     ch_k "We're having sex."
                                     ch_k "-thought you might wanna join us?"
@@ -546,23 +546,23 @@ label Call_For_Les(Girl=0,Girl2=0,BO=[]): #rkeljsv
                             elif Girl2 == JubesX:
                                     ch_v "I was eating her out, basically."
                                     ch_v "Did you want in on this?"
-                            $ Line = "what"
+                            $ line = "what"
                             #loops back through. . .
 
         hide Cellphone
         #if you decide to come over. . .
         if bg_current == Girl.Home:
                 #swaps girls if for some reason you're in the other one's room
-                $ Line = Girl
+                $ line = Girl
                 $ Girl = Girl2
-                $ Girl2 = Line
+                $ Girl2 = line
         $ Girl.Loc = Girl.Home
         $ Girl2.Loc = Girl.Home
         $ bg_current = Girl.Home
         $ Taboo= 0
         $ Girl.Taboo = 0
         $ Girl2.Taboo = 0
-        $ Line = 0
+        $ line = 0
 
         $ Girl.DrainWord("les",1,0) #removes general "les" tag from recent actions
         $ Girl2.DrainWord("les",1,0) #removes general "les" tag from recent actions
@@ -572,9 +572,9 @@ label Call_For_Les(Girl=0,Girl2=0,BO=[]): #rkeljsv
         $ Girl.AddWord(1,0,0,0,"les "+Girl2.Tag)  #adds "les Rogue" tag to recent actions
         $ Girl2.AddWord(1,0,0,0,"les "+Girl.Tag)  #adds "les Kitty" tag to recent actions
 
-        call Set_The_Scene(0,1,0,0)
+        call set_the_scene(0,1,0,0)
         "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
-        while Line < 2:
+        while line < 2:
             menu:
                 extend ""
                 "Knock politely":
@@ -592,35 +592,35 @@ label Call_For_Les(Girl=0,Girl2=0,BO=[]): #rkeljsv
                                 ch_s "Come in!"
                         elif Girl == JubesX:
                                 ch_v "You may enter!"
-                        $ Line = 2
-                "Peek inside" if Line != 1:
-                        call Set_The_Scene
-                        $ Girl.FaceChange("kiss",1,Eyes = "closed")
-                        $ Girl2.FaceChange("kiss",1,Eyes = "closed")
-                        $ Trigger = "lesbian"
-                        $ Trigger3 = "fondle pussy"
-                        $ Trigger4 = "fondle pussy"
-                        "You see [Girl.Name] and [Girl2.Name], eyes closed and stroking each other vigorously."
-                        $ Line = 1
+                        $ line = 2
+                "Peek inside" if line != 1:
+                        call set_the_scene
+                        $ Girl.change_face("kiss",1,Eyes = "closed")
+                        $ Girl2.change_face("kiss",1,Eyes = "closed")
+                        $ primary_action = "lesbian"
+                        $ primary_action3 = "fondle pussy"
+                        $ primary_action4 = "fondle pussy"
+                        "You see [Girl.name] and [Girl2.name], eyes closed and stroking each other vigorously."
+                        $ line = 1
                 "Enter quietly":
-                        $ Line = 2
+                        $ line = 2
                 "Leave quietly":
                         "You leave the girls to their business and slip out."
                         $ Girl.Thirst -= 30
-                        $ Girl.Lust = 20
+                        $ Girl.lust = 20
                         $ Girl2.Thirst -= 30
-                        $ Girl2.Lust = 20
-                        $ Girl.Statup("Love", 90, -3)
-                        $ Girl2.Statup("Love", 90, -3)
+                        $ Girl2.lust = 20
+                        $ Girl.change_stat("love", 90, -3)
+                        $ Girl2.change_stat("love", 90, -3)
                         $ renpy.pop_call()
-                        $ bg_current = "bg campus"
-                        $ Line = 0
+                        $ bg_current = "bg_campus"
+                        $ line = 0
                         jump Misplaced
 
-        $ Line = 0
-        $ Girl.FaceChange("sly",1)
-        $ Girl2.FaceChange("sly",1)
-        call Set_The_Scene(1,0,0,0)  #no clothes or trigger resets
+        $ line = 0
+        $ Girl.change_face("sly",1)
+        $ Girl2.change_face("sly",1)
+        call set_the_scene(1,0,0,0)  #no clothes or trigger resets
         if Girl == RogueX:
                 ch_r "Sorry we got started without you."
         elif Girl == KittyX:
@@ -636,9 +636,9 @@ label Call_For_Les(Girl=0,Girl2=0,BO=[]): #rkeljsv
         elif Girl == JubesX:
                 ch_v "Get over here."
 
-        $ Trigger = "lesbian"
-        $ Trigger3 = "fondle pussy"
-        $ Trigger4 = "fondle pussy"
+        $ primary_action = "lesbian"
+        $ primary_action3 = "fondle pussy"
+        $ primary_action4 = "fondle pussy"
         $ Partner = Girl2
         call expression Girl.Tag + "_SexAct" pass ("lesbian") #call Rogue_SexAct("lesbian")
         jump Misplaced

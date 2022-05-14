@@ -363,108 +363,108 @@ image Kitty_Sprite:
             ),
 
         (0,0), ConditionSwitch(
-            #UI tool for When Kitty is masturbating using Trigger3 actions
-            "Trigger == 'lesbian' or not Trigger3 or Ch_Focus != KittyX", Null(),
-            "Trigger3 == 'fondle pussy' and Trigger != 'sex' and KittyX.Lust >= 70", "GirlFingerPussy_Kitty",
-            "Trigger3 == 'fondle pussy'", "GirlGropePussy_Kitty",
-            "Trigger3 == 'fondle breasts' and (Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts')", "GirlGropeLeftBreast_Kitty",    #When zero is working the right breast, fondle left
-            "Trigger3 == 'fondle breasts' and (Trigger == 'fondle breasts' or Trigger == 'suck breasts')", "GirlGropeRightBreast_Kitty", #When zero is working the left breast, fondle right
-            "Trigger3 == 'fondle breasts'", "GirlGropeRightBreast_Kitty",
-            "Trigger3 == 'vibrator breasts'", "VibratorRightBreast_Kitty",
-            "Trigger3 == 'vibrator pussy'", "VibratorPussy_Kitty",
-            "Trigger3 == 'vibrator pussy insert'", "VibratorPussy_Kitty",
-            "Trigger3 == 'vibrator anal'", "VibratorAnal_Kitty",
-            "Trigger3 == 'vibrator anal insert'", "VibratorPussy_Kitty",
+            #UI tool for When Kitty is masturbating using girl_offhand_action actions
+            "primary_action == 'lesbian' or not girl_offhand_action or focused_Girl != KittyX", Null(),
+            "girl_offhand_action == 'fondle pussy' and primary_action != 'sex' and KittyX.lust >= 70", "GirlFingerPussy_Kitty",
+            "girl_offhand_action == 'fondle pussy'", "GirlGropePussy_Kitty",
+            "girl_offhand_action == 'fondle breasts' and (offhand_action == 'fondle breasts' or offhand_action == 'suck breasts')", "GirlGropeLeftBreast_Kitty",    #When zero is working the right breast, fondle left
+            "girl_offhand_action == 'fondle breasts' and (primary_action == 'fondle breasts' or primary_action == 'suck breasts')", "GirlGropeRightBreast_Kitty", #When zero is working the left breast, fondle right
+            "girl_offhand_action == 'fondle breasts'", "GirlGropeRightBreast_Kitty",
+            "girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast_Kitty",
+            "girl_offhand_action == 'vibrator pussy'", "VibratorPussy_Kitty",
+            "girl_offhand_action == 'vibrator pussy insert'", "VibratorPussy_Kitty",
+            "girl_offhand_action == 'vibrator anal'", "VibratorAnal_Kitty",
+            "girl_offhand_action == 'vibrator anal insert'", "VibratorPussy_Kitty",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger5(Threesome masutrbation) actions
-            "not Trigger5 or Trigger4 != 'masturbation' or Ch_Focus == KittyX", Null(),
+            #UI tool for Partner_offhand_action(Threesome masutrbation) actions
+            "not Partner_offhand_action or Partner_primary_action != 'masturbation' or focused_Girl == KittyX", Null(),
             #this doesn't activate unless Kitty is not primary, and actively masturbating
-            "Trigger5 == 'fondle pussy' and Trigger != 'sex' and KittyX.Lust >= 70", "GirlFingerPussy_Kitty",
-            "Trigger5 == 'fondle pussy'", "GirlGropePussy_Kitty",
-            "Trigger5 == 'fondle breasts'", "GirlGropeRightBreast_Kitty",
-            "Trigger5 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger5 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger5 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger5 == 'vibrator anal'", "VibratorAnal",
-            "Trigger5 == 'vibrator anal insert'", "VibratorPussy",
+            "Partner_offhand_action == 'fondle pussy' and primary_action != 'sex' and KittyX.lust >= 70", "GirlFingerPussy_Kitty",
+            "Partner_offhand_action == 'fondle pussy'", "GirlGropePussy_Kitty",
+            "Partner_offhand_action == 'fondle breasts'", "GirlGropeRightBreast_Kitty",
+            "Partner_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "Partner_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "Partner_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "Partner_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "Partner_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger1(primary) actions
-            "not Trigger or Ch_Focus != KittyX", Null(),
-            "Trigger == 'vibrator breasts'", "VibratorLeftBreast_Kitty",
-            "Trigger == 'fondle thighs'", "GropeThigh_Kitty",
-            "Trigger == 'fondle breasts'", "GropeLeftBreast_Kitty",
-            "Trigger == 'suck breasts'", "LickRightBreast_Kitty",
-            "Trigger == 'fondle pussy' and Speed == 2", "FingerPussy_Kitty",
-            "Trigger == 'fondle pussy'", "GropePussy_Kitty",
-            "Trigger == 'lick pussy'", "Lickpussy_Kitty",
-            "Trigger == 'vibrator pussy'", "VibratorPussy_Kitty",
-            "Trigger == 'vibrator pussy insert'", "VibratorPussy_Kitty",
-            "Trigger == 'vibrator anal'", "VibratorAnal_Kitty",
-            "Trigger == 'vibrator anal insert'", "VibratorPussy_Kitty",
+            #UI tool for primary_action1(primary) actions
+            "not primary_action or focused_Girl != KittyX", Null(),
+            "primary_action == 'vibrator breasts'", "VibratorLeftBreast_Kitty",
+            "primary_action == 'fondle thighs'", "GropeThigh_Kitty",
+            "primary_action == 'fondle breasts'", "GropeLeftBreast_Kitty",
+            "primary_action == 'suck breasts'", "LickRightBreast_Kitty",
+            "primary_action == 'fondle pussy' and action_speed == 2", "FingerPussy_Kitty",
+            "primary_action == 'fondle pussy'", "GropePussy_Kitty",
+            "primary_action == 'lick pussy'", "Lickpussy_Kitty",
+            "primary_action == 'vibrator pussy'", "VibratorPussy_Kitty",
+            "primary_action == 'vibrator pussy insert'", "VibratorPussy_Kitty",
+            "primary_action == 'vibrator anal'", "VibratorAnal_Kitty",
+            "primary_action == 'vibrator anal insert'", "VibratorPussy_Kitty",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger2(secondary) actions
-            "not Trigger2 or Ch_Focus != KittyX", Null(),
-            "not Trigger2 and not Trigger4 and Trigger == 'fondle breasts'", "GropeRightBreast_Kitty",
+            #UI tool for offhand_action(secondary) actions
+            "not offhand_action or focused_Girl != KittyX", Null(),
+            "not offhand_action and not Partner_primary_action and primary_action == 'fondle breasts'", "GropeRightBreast_Kitty",
             #When doing nothing offhand, use both hands on breasts.
-            "Trigger2 == 'fondle breasts' and Trigger == 'suck breasts'", "GropeLeftBreast_Kitty",
+            "offhand_action == 'fondle breasts' and primary_action == 'suck breasts'", "GropeLeftBreast_Kitty",
             #When sucking right breast, fondle left
-            "Trigger2 == 'fondle breasts'", "GropeRightBreast_Kitty",
-            "Trigger2 == 'vibrator breasts' and Trigger == 'suck breasts'", "VibratorLeftBreast_Kitty",
+            "offhand_action == 'fondle breasts'", "GropeRightBreast_Kitty",
+            "offhand_action == 'vibrator breasts' and primary_action == 'suck breasts'", "VibratorLeftBreast_Kitty",
             #When sucking right breast, vibrator left
-            "Trigger2 == Trigger", Null(),
+            "offhand_action == primary_action", Null(),
             #When both triggers are the same, do nothing
-            "Trigger2 == 'suck breasts'", "LickLeftBreast_Kitty",
-            "Trigger2 == 'fondle pussy'", "GropePussy_Kitty",
-            "Trigger2 == 'lick pussy'", "Lickpussy_Kitty",
-            "Trigger2 == 'vibrator breasts'", "VibratorRightBreast_Kitty",
-            "Trigger2 == 'vibrator pussy'", "VibratorPussy_Kitty",
-            "Trigger2 == 'vibrator pussy insert'", "VibratorPussy_Kitty",
-            "Trigger2 == 'vibrator anal'", "VibratorAnal_Kitty",
-            "Trigger2 == 'vibrator anal insert'", "VibratorPussy_Kitty",
+            "offhand_action == 'suck breasts'", "LickLeftBreast_Kitty",
+            "offhand_action == 'fondle pussy'", "GropePussy_Kitty",
+            "offhand_action == 'lick pussy'", "Lickpussy_Kitty",
+            "offhand_action == 'vibrator breasts'", "VibratorRightBreast_Kitty",
+            "offhand_action == 'vibrator pussy'", "VibratorPussy_Kitty",
+            "offhand_action == 'vibrator pussy insert'", "VibratorPussy_Kitty",
+            "offhand_action == 'vibrator anal'", "VibratorAnal_Kitty",
+            "offhand_action == 'vibrator anal insert'", "VibratorPussy_Kitty",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger4(Threesome) actions (ie Rogue's hand on her)
-            "not Trigger4 or Ch_Focus != KittyX", Null(),
-            "Trigger4 == 'fondle pussy' and Trigger != 'sex' and KittyX.Lust >= 70", "GirlFingerPussy_Kitty",
-            "Trigger4 == 'fondle pussy'", "GirlGropePussy_Kitty",
-            "Trigger4 == 'lick pussy'", "Lickpussy_Kitty",
-            "Trigger4 == 'suck breasts' and (Trigger2 != 'suck breasts' or Trigger == 'suck breasts')", "LickLeftBreast_Kitty",
-            "Trigger4 == 'suck breasts'", "LickRightBreast_Kitty",
-            "Trigger4 == 'fondle breasts' and (Trigger == 'fondle breasts' or Trigger == 'suck breasts')", "GirlGropeLeftBreast_Kitty",    #When zero is working the right breast, fondle left
-            "Trigger4 == 'fondle breasts' and (Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts')", "GirlGropeRightBreast_Kitty", #When zero is working the left breast, fondle right
-            "Trigger4 == 'fondle breasts' and (Trigger3 == 'fondle breasts' or Trigger3 == 'suck breasts')", "GirlGropeLeftBreast_Kitty", #When zero is working the left breast, fondle right
-            "Trigger4 == 'fondle breasts'", "GirlGropeRightBreast_Kitty",
-            "Trigger4 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger4 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger4 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger4 == 'vibrator anal'", "VibratorAnal",
-            "Trigger4 == 'vibrator anal insert'", "VibratorPussy",
+            #UI tool for Partner_primary_action(Threesome) actions (ie Rogue's hand on her)
+            "not Partner_primary_action or focused_Girl != KittyX", Null(),
+            "Partner_primary_action == 'fondle pussy' and primary_action != 'sex' and KittyX.lust >= 70", "GirlFingerPussy_Kitty",
+            "Partner_primary_action == 'fondle pussy'", "GirlGropePussy_Kitty",
+            "Partner_primary_action == 'lick pussy'", "Lickpussy_Kitty",
+            "Partner_primary_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Kitty",
+            "Partner_primary_action == 'suck breasts'", "LickRightBreast_Kitty",
+            "Partner_primary_action == 'fondle breasts' and (primary_action == 'fondle breasts' or primary_action == 'suck breasts')", "GirlGropeLeftBreast_Kitty",    #When zero is working the right breast, fondle left
+            "Partner_primary_action == 'fondle breasts' and (offhand_action == 'fondle breasts' or offhand_action == 'suck breasts')", "GirlGropeRightBreast_Kitty", #When zero is working the left breast, fondle right
+            "Partner_primary_action == 'fondle breasts' and (girl_offhand_action == 'fondle breasts' or girl_offhand_action == 'suck breasts')", "GirlGropeLeftBreast_Kitty", #When zero is working the left breast, fondle right
+            "Partner_primary_action == 'fondle breasts'", "GirlGropeRightBreast_Kitty",
+            "Partner_primary_action == 'vibrator breasts'", "VibratorRightBreast",
+            "Partner_primary_action == 'vibrator pussy'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator pussy insert'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator anal'", "VibratorAnal",
+            "Partner_primary_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger3(lesbian) actions (ie Rogue's hand on her when Kitty is secondary)
-            "Trigger != 'lesbian' or not Trigger3 or Ch_Focus == KittyX", Null(),
-            "Trigger3 == 'fondle pussy' and Trigger != 'sex' and KittyX.Lust >= 70", "GirlFingerPussy_Kitty",
-            "Trigger3 == 'fondle pussy'", "GirlGropePussy_Kitty",
-            "Trigger3 == 'lick pussy'", "Lickpussy_Kitty",
-            "Trigger3 == 'suck breasts' and (Trigger2 != 'suck breasts' or Trigger == 'suck breasts')", "LickLeftBreast_Kitty",
-            "Trigger3 == 'suck breasts'", "LickRightBreast_Kitty",
-            "Trigger3 == 'fondle breasts' and (Trigger == 'fondle breasts' or Trigger == 'suck breasts')", "GirlGropeLeftBreast_Kitty",    #When zero is working the right breast, fondle left
-            "Trigger3 == 'fondle breasts' and (Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts')", "GirlGropeRightBreast_Kitty", #When zero is working the left breast, fondle right
-            "Trigger3 == 'fondle breasts' and (Trigger3 == 'fondle breasts' or Trigger3 == 'suck breasts')", "GirlGropeLeftBreast_Kitty", #When zero is working the left breast, fondle right
-            "Trigger3 == 'fondle breasts'", "GirlGropeRightBreast_Kitty",
-            "Trigger3 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger3 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger3 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger3 == 'vibrator anal'", "VibratorAnal",
-            "Trigger3 == 'vibrator anal insert'", "VibratorPussy",
+            #UI tool for girl_offhand_action(lesbian) actions (ie Rogue's hand on her when Kitty is secondary)
+            "primary_action != 'lesbian' or not girl_offhand_action or focused_Girl == KittyX", Null(),
+            "girl_offhand_action == 'fondle pussy' and primary_action != 'sex' and KittyX.lust >= 70", "GirlFingerPussy_Kitty",
+            "girl_offhand_action == 'fondle pussy'", "GirlGropePussy_Kitty",
+            "girl_offhand_action == 'lick pussy'", "Lickpussy_Kitty",
+            "girl_offhand_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Kitty",
+            "girl_offhand_action == 'suck breasts'", "LickRightBreast_Kitty",
+            "girl_offhand_action == 'fondle breasts' and (primary_action == 'fondle breasts' or primary_action == 'suck breasts')", "GirlGropeLeftBreast_Kitty",    #When zero is working the right breast, fondle left
+            "girl_offhand_action == 'fondle breasts' and (offhand_action == 'fondle breasts' or offhand_action == 'suck breasts')", "GirlGropeRightBreast_Kitty", #When zero is working the left breast, fondle right
+            "girl_offhand_action == 'fondle breasts' and (girl_offhand_action == 'fondle breasts' or girl_offhand_action == 'suck breasts')", "GirlGropeLeftBreast_Kitty", #When zero is working the left breast, fondle right
+            "girl_offhand_action == 'fondle breasts'", "GirlGropeRightBreast_Kitty",
+            "girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "girl_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "girl_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         )
@@ -635,50 +635,50 @@ image Kitty_SexSprite:
                 "not Player.Sprite", "Kitty_Sex_Body_Static",
                 "Player.Cock == 'anal'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 3", "Kitty_Sex_Body_Anim3",
-                        "Speed >= 2", "Kitty_Sex_Body_Anim2",
-                        "Speed", "Kitty_Sex_Body_Anim1",
+                        "action_speed >= 3", "Kitty_Sex_Body_Anim3",
+                        "action_speed >= 2", "Kitty_Sex_Body_Anim2",
+                        "action_speed", "Kitty_Sex_Body_Anim1",
                         "True", "Kitty_Sex_Body_Static",
                         ),
                 "Player.Cock == 'in'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 3", "Kitty_Sex_Body_Anim3",
-                        "Speed >= 2", "Kitty_Sex_Body_Anim2",
-                        "Speed", "Kitty_Sex_Body_Anim1",
+                        "action_speed >= 3", "Kitty_Sex_Body_Anim3",
+                        "action_speed >= 2", "Kitty_Sex_Body_Anim2",
+                        "action_speed", "Kitty_Sex_Body_Anim1",
                         "True", "Kitty_Sex_Body_Static",
                         ),
                 "Player.Cock == 'foot'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 2", "Kitty_Sex_Body_FootAnim2",
-                        "Speed", "Kitty_Sex_Body_FootAnim1",
+                        "action_speed >= 2", "Kitty_Sex_Body_FootAnim2",
+                        "action_speed", "Kitty_Sex_Body_FootAnim1",
                         "True", "Kitty_Sex_Body_FootAnimStatic",
                         ),
-                "Player.Cock == 'out' and Speed >= 2","Kitty_Hotdog_Body_Anim2",
+                "Player.Cock == 'out' and action_speed >= 2","Kitty_Hotdog_Body_Anim2",
                 "True", "Kitty_Sex_Body_Static",
                 ),
         (0,0), ConditionSwitch(                                                         #Shows different lower body motion depending on events
                 "not Player.Sprite", "Kitty_Sex_Legs_Static",
                 "Player.Cock == 'anal'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 3", "Kitty_Sex_Legs_Anim3",
-                        "Speed >= 2", "Kitty_Sex_Legs_Anim2",
-                        "Speed", "Kitty_Sex_Legs_Anim1",
+                        "action_speed >= 3", "Kitty_Sex_Legs_Anim3",
+                        "action_speed >= 2", "Kitty_Sex_Legs_Anim2",
+                        "action_speed", "Kitty_Sex_Legs_Anim1",
                         "True", "Kitty_Sex_Legs_Static",
                         ),
                 "Player.Cock == 'in'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 3", "Kitty_Sex_Legs_Anim3",
-                        "Speed >= 2", "Kitty_Sex_Legs_Anim2",
-                        "Speed", "Kitty_Sex_Legs_Anim1",
+                        "action_speed >= 3", "Kitty_Sex_Legs_Anim3",
+                        "action_speed >= 2", "Kitty_Sex_Legs_Anim2",
+                        "action_speed", "Kitty_Sex_Legs_Anim1",
                         "True", "Kitty_Sex_Legs_Static",
                         ),
                 "Player.Cock == 'foot'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 2", "Kitty_Sex_Legs_FootAnim2",
-                        "Speed", "Kitty_Sex_Legs_FootAnim1",
+                        "action_speed >= 2", "Kitty_Sex_Legs_FootAnim2",
+                        "action_speed", "Kitty_Sex_Legs_FootAnim1",
                         "True", "Kitty_Sex_Legs_FootAnimStatic",
                         ),
-                "Player.Cock == 'out' and Speed >= 2","Kitty_Hotdog_Legs_Anim2",
+                "Player.Cock == 'out' and action_speed >= 2","Kitty_Hotdog_Legs_Anim2",
                 "True", "Kitty_Sex_Legs_Static",
                 ),
         )
@@ -802,12 +802,12 @@ image Kitty_Sex_Body = LiveComposite(
             ),
         (0,0), ConditionSwitch(
             #breast licking animation
-            "Trigger == 'suck breasts' or Trigger2 == 'suck breasts'", "Kitty_Sex_Lick_Breasts",
+            "primary_action == 'suck breasts' or offhand_action == 'suck breasts'", "Kitty_Sex_Lick_Breasts",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
             #breast fondling animation
-            "Trigger == 'fondle breasts' or Trigger2 == 'fondle breasts'", "Kitty_Sex_Fondle_Breasts",
+            "primary_action == 'fondle breasts' or offhand_action == 'fondle breasts'", "Kitty_Sex_Fondle_Breasts",
             "True", Null()
             ),
         )
@@ -904,27 +904,27 @@ image Kitty_Sex_Legs:
             ),
         (0,0), ConditionSwitch(                                                                                 #hotdog cock Layer
             "not Player.Sprite or Player.Cock != 'out'", Null(),
-            "Speed >= 2", "Kitty_Hotdog_Zero_Anim2",
-            "Speed", "Kitty_Hotdog_Zero_Anim1",
+            "action_speed >= 2", "Kitty_Hotdog_Zero_Anim2",
+            "action_speed", "Kitty_Hotdog_Zero_Anim1",
             "True", "Kitty_Hotdog_Zero_Anim0",
             ),
         (0,0), ConditionSwitch(
             #pussy licking animation
             "Player.Sprite and Player.Cock", Null(),
-            "Trigger == 'lick pussy'", "Kitty_Sex_Lick_Pussy",
-            "Trigger == 'lick ass'", "Kitty_Sex_Lick_Ass",
+            "primary_action == 'lick pussy'", "Kitty_Sex_Lick_Pussy",
+            "primary_action == 'lick ass'", "Kitty_Sex_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(                                                                                 #footjob cock Layer
             "not Player.Sprite or Player.Cock != 'foot'", Null(),
-            "Speed >= 2", "Kitty_Footcock_Zero_Anim2",
-            "Speed", "Kitty_Footcock_Zero_Anim1",
+            "action_speed >= 2", "Kitty_Footcock_Zero_Anim2",
+            "action_speed", "Kitty_Footcock_Zero_Anim1",
             "True", "Kitty_Footcock_Static",
             ),
 #        (0,0), ConditionSwitch(                                                                                 #footjob cock Layer
 #            "not Player.Sprite or Player.Cock != 'foot'", Null(),
-#            "Speed >= 2", At("Kitty_Footcock", Kitty_Footcock_Zero_Anim2A()),
-#            "Speed", At("Kitty_Footcock", Kitty_Footcock_Zero_Anim1A()),
+#            "action_speed >= 2", At("Kitty_Footcock", Kitty_Footcock_Zero_Anim2A()),
+#            "action_speed", At("Kitty_Footcock", Kitty_Footcock_Zero_Anim1A()),
 #            "True", At("Kitty_Footcock", Kitty_Footcock_StaticA()),
 #            ),
 #        (0,0), ConditionSwitch(                                                                                 #UI tool layer
@@ -933,7 +933,7 @@ image Kitty_Sex_Legs:
 #            "True", Null(),
 #            ),
         (0,0), ConditionSwitch(                                                         #Shows different lower body motion depending on events
-            "not Speed", "Kitty_Sex_Feet",
+            "not action_speed", "Kitty_Sex_Feet",
             "Player.Cock == 'anal' or Player.Cock == 'in' or Player.Cock == 'out'", AlphaMask("Kitty_Sex_Feet", "images/KittySex/Kitty_Sex_FeetMask.png"),
             "True", "Kitty_Sex_Feet",
             ),
@@ -1014,7 +1014,7 @@ image TestingSolid:
 
 #Start Animations for Kitty's Pussy during Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 image Kitty_Pussy_Fucking0:
-    # This is the visual for her pussy during the Speed 0 mode (static).
+    # This is the visual for her pussy during the action_speed 0 mode (static).
     contains:
             # The background plate of her pussy
             "images/KittySex/Kitty_Sex_Pussy_Open.png"
@@ -1029,7 +1029,7 @@ image Kitty_Pussy_Fucking0:
             AlphaMask("Kitty_Sex_Zero_Anim0", "Kitty_Pussy_Open_Mask")
 
 image Kitty_Pussy_Fucking1:
-    # This is the visual for her pussy during the Speed 1 mode (heading).
+    # This is the visual for her pussy during the action_speed 1 mode (heading).
     contains:
             # The background plate of her pussy
             "images/KittySex/Kitty_Sex_Pussy_Open.png"
@@ -1044,7 +1044,7 @@ image Kitty_Pussy_Fucking1:
             AlphaMask("Kitty_Sex_Zero_Anim1", "Kitty_Pussy_Open_Mask")
 
 image Kitty_Pussy_Fucking2:
-    # This is the visual for her pussy during the Speed 2 mode (slow).
+    # This is the visual for her pussy during the action_speed 2 mode (slow).
     contains:
             # The background plate of her pussy
             "images/KittySex/Kitty_Sex_Pussy_Fucking.png"
@@ -1058,7 +1058,7 @@ image Kitty_Pussy_Fucking2:
             # The animation of Zero's moving penis, masked by her pussy shape
             AlphaMask("Kitty_Sex_Zero_Anim2", "Kitty_Pussy_Fucking_Mask")
 image Kitty_Pussy_Fucking3:  #rename this to 3
-    # This is the visual for her pussy during the Speed 3 mode (fast).
+    # This is the visual for her pussy during the action_speed 3 mode (fast).
     contains:
             # The background plate of her pussy
             "images/KittySex/Kitty_Sex_Pussy_Fucking.png"
@@ -1104,45 +1104,45 @@ image Kitty_Pussy_Spunk_Heading:
     xzoom 0.8
 
 image Kitty_Sex_Pussy:
-    # This is the visual for her pussy during the Speed 0 mode (static).
+    # This is the visual for her pussy during the action_speed 0 mode (static).
     contains:
             # The background plate of her pussy
             ConditionSwitch(
-                "Player.Sprite and Player.Cock == 'in' and Speed >= 2", "images/KittySex/Kitty_Sex_Pussy_Fucking.png",
-                "Player.Sprite and Player.Cock == 'in' and Speed", "images/KittySex/Kitty_Sex_Pussy_Open.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/KittySex/Kitty_Sex_Pussy_Fucking.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed", "images/KittySex/Kitty_Sex_Pussy_Open.png",
                 "Player.Sprite and Player.Cock == 'in'", "images/KittySex/Kitty_Sex_Pussy_Closed.png",
-                "Trigger == 'lick pussy'", "images/KittySex/Kitty_Sex_Pussy_Open.png",
+                "primary_action == 'lick pussy'", "images/KittySex/Kitty_Sex_Pussy_Open.png",
                 "True", "images/KittySex/Kitty_Sex_Pussy_Closed.png",
                 )
     contains:
             # The background plate of her pussy
             ConditionSwitch(
                 "not KittyX.Wet", Null(),
-                "Player.Sprite and Player.Cock == 'in' and Speed >= 2", "images/KittySex/Kitty_Sex_WetPussy_F.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/KittySex/Kitty_Sex_WetPussy_F.png",
                 "True", "images/KittySex/Kitty_Sex_WetPussy_C.png",
                 )
     contains:
             #ring piercing
             ConditionSwitch(
                 "KittyX.Pierce != 'ring'", Null(),
-                "not Player.Sprite or Player.Cock != 'in' or Speed <= 1", "images/KittySex/Kitty_Sex_Pussy_Ring.png",
+                "not Player.Sprite or Player.Cock != 'in' or action_speed <= 1", "images/KittySex/Kitty_Sex_Pussy_Ring.png",
                 "True", "images/KittySex/Kitty_Sex_Pussy_RingF.png",
                 )
     contains:
             #barbell piercing
             ConditionSwitch(
                 "KittyX.Pierce != 'barbell'", Null(),
-                "not Player.Sprite or Player.Cock != 'in' or Speed <= 1", "images/KittySex/Kitty_Sex_Pussy_Barbell.png",
+                "not Player.Sprite or Player.Cock != 'in' or action_speed <= 1", "images/KittySex/Kitty_Sex_Pussy_Barbell.png",
                 "True", "images/KittySex/Kitty_Sex_Pussy_BarbellF.png",
                 )
     contains:
             # pubes
             ConditionSwitch(
                 "not KittyX.Pubes", Null(),
-                "Player.Sprite and Player.Cock == 'in' and Speed >= 2", "images/KittySex/Kitty_Sex_Pubes_Fucking.png",
-                "Player.Sprite and Player.Cock == 'in' and Speed", "images/KittySex/Kitty_Sex_Pubes_Open.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/KittySex/Kitty_Sex_Pubes_Fucking.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed", "images/KittySex/Kitty_Sex_Pubes_Open.png",
                 "Player.Sprite and Player.Cock == 'in'", "images/KittySex/Kitty_Sex_Pubes_Closed.png",
-                "Trigger == 'lick pussy'", "images/KittySex/Kitty_Sex_Pubes_Open.png",
+                "primary_action == 'lick pussy'", "images/KittySex/Kitty_Sex_Pubes_Open.png",
                 "True", "images/KittySex/Kitty_Sex_Pubes_Closed.png",
                 )
     contains:
@@ -1162,17 +1162,17 @@ image Kitty_Sex_Pussy:
             # The animation of Zero's moving penis, masked by her pussy shape
             ConditionSwitch(
                 "not Player.Sprite", Null(),
-                "Player.Sprite and Player.Cock == 'in' and Speed >= 3", AlphaMask("Kitty_Sex_Zero_Anim3", "Kitty_Pussy_Fucking_Mask"),
-                "Player.Sprite and Player.Cock == 'in' and Speed >= 2", AlphaMask("Kitty_Sex_Zero_Anim2", "Kitty_Pussy_Fucking_Mask"),
-                "Player.Sprite and Player.Cock == 'in' and Speed", AlphaMask("Kitty_Sex_Zero_Anim1", "Kitty_Pussy_Open_Mask"),
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 3", AlphaMask("Kitty_Sex_Zero_Anim3", "Kitty_Pussy_Fucking_Mask"),
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", AlphaMask("Kitty_Sex_Zero_Anim2", "Kitty_Pussy_Fucking_Mask"),
+                "Player.Sprite and Player.Cock == 'in' and action_speed", AlphaMask("Kitty_Sex_Zero_Anim1", "Kitty_Pussy_Open_Mask"),
                 "Player.Sprite and Player.Cock == 'in'", AlphaMask("Kitty_Sex_Zero_Anim0", "Kitty_Pussy_Open_Mask"),
                 "True", Null(),
                 )
     contains:
             #Spunk over penis
             ConditionSwitch(
-                "'in' not in KittyX.Spunk or not Player.Sprite or Player.Cock != 'in' or not Speed", Null(),
-                "Speed <= 1", "Kitty_Pussy_Spunk_Heading",
+                "'in' not in KittyX.Spunk or not Player.Sprite or Player.Cock != 'in' or not action_speed", Null(),
+                "action_speed <= 1", "Kitty_Pussy_Spunk_Heading",
                 "True", "images/KittySex/Kitty_Sex_Spunk_Puss_Over.png",
                 )
 
@@ -1182,7 +1182,7 @@ image Kitty_Sex_Pussy:
 
 #Start Animations for Zero's Cock during Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 image Kitty_Sex_Zero_Anim0:
-        #this is Kitty's sex animation, Speed 0 (static)
+        #this is Kitty's sex animation, action_speed 0 (static)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -1190,7 +1190,7 @@ image Kitty_Sex_Zero_Anim0:
             zoom 1.4
 
 image Kitty_Sex_Zero_Anim1:
-        #this is Kitty's sex animation, Speed 1 (heading)
+        #this is Kitty's sex animation, action_speed 1 (heading)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -1203,7 +1203,7 @@ image Kitty_Sex_Zero_Anim1:
                 repeat
 
 image Kitty_Sex_Zero_Anim2:
-        #this is Kitty's sex animation, Speed 2 (slow)
+        #this is Kitty's sex animation, action_speed 2 (slow)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -1216,7 +1216,7 @@ image Kitty_Sex_Zero_Anim2:
                 repeat
 
 image Kitty_Sex_Zero_Anim3:
-        #this is Kitty's sex animation, Speed 3 (fast)
+        #this is Kitty's sex animation, action_speed 3 (fast)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -1231,7 +1231,7 @@ image Kitty_Sex_Zero_Anim3:
 
 #Start Animations for Kitty's Legs during Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 image Kitty_Sex_Legs_Anim1:
-        #this is the animation for Kitty's lower body during sex, Speed 1 (heading)
+        #this is the animation for Kitty's lower body during sex, action_speed 1 (heading)
         contains:
             subpixel True
             "Kitty_Sex_Legs"
@@ -1245,7 +1245,7 @@ image Kitty_Sex_Legs_Anim1:
                 repeat
 
 image Kitty_Sex_Legs_Anim2:
-        #this is the animation for Kitty's lower body during sex, Speed 2 (slow)
+        #this is the animation for Kitty's lower body during sex, action_speed 2 (slow)
         contains:
             subpixel True
             "Kitty_Sex_Legs"
@@ -1260,7 +1260,7 @@ image Kitty_Sex_Legs_Anim2:
                 repeat
 
 image Kitty_Sex_Legs_Anim3:
-        #this is the animation for Kitty's lower body during sex, Speed 3 (fast)
+        #this is the animation for Kitty's lower body during sex, action_speed 3 (fast)
         contains:
             subpixel True
             "Kitty_Sex_Legs"
@@ -1277,7 +1277,7 @@ image Kitty_Sex_Legs_Anim3:
 
 #Start Animations for Kitty's Body during Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 image Kitty_Sex_Body_Anim1:
-        #this is the animation for Kitty's upper body during sex, Speed 1 (heading)
+        #this is the animation for Kitty's upper body during sex, action_speed 1 (heading)
         contains:
             subpixel True
             "Kitty_Sex_Body"
@@ -1291,7 +1291,7 @@ image Kitty_Sex_Body_Anim1:
                 repeat
 
 image Kitty_Sex_Body_Anim2:
-        #this is the animation for Kitty's upper body during sex, Speed 2 (slow)
+        #this is the animation for Kitty's upper body during sex, action_speed 2 (slow)
         contains:
             subpixel True
             "Kitty_Sex_Body"
@@ -1306,7 +1306,7 @@ image Kitty_Sex_Body_Anim2:
                 repeat
 
 image Kitty_Sex_Body_Anim3:
-        #this is the animation for Kitty's upper body during sex, Speed 3 (fast)
+        #this is the animation for Kitty's upper body during sex, action_speed 3 (fast)
         contains:
             subpixel True
             "Kitty_Sex_Body"
@@ -1331,9 +1331,9 @@ image Kitty_Sex_Anus:
     contains:
             #Anus background plate
             ConditionSwitch(
-            "Player.Sprite and Player.Cock == 'anal' and Speed >= 3", "images/KittySex/Kitty_Sex_Hole_Open.png",
-            "Player.Sprite and Player.Cock == 'anal' and Speed >= 2", "images/KittySex/Kitty_Sex_Hole_Open.png",
-            "Player.Sprite and Player.Cock == 'anal' and Speed", "Kitty_Sex_Anal_Heading",
+            "Player.Sprite and Player.Cock == 'anal' and action_speed >= 3", "images/KittySex/Kitty_Sex_Hole_Open.png",
+            "Player.Sprite and Player.Cock == 'anal' and action_speed >= 2", "images/KittySex/Kitty_Sex_Hole_Open.png",
+            "Player.Sprite and Player.Cock == 'anal' and action_speed", "Kitty_Sex_Anal_Heading",
             "Player.Sprite and Player.Cock == 'anal'", "Kitty_Sex_Anal_Tip",
             "KittyX.Loose", "images/KittySex/Kitty_Sex_Hole_Loose.png",
             "True", "images/KittySex/Kitty_Sex_Hole_Tight.png",
@@ -1342,30 +1342,30 @@ image Kitty_Sex_Anus:
             #Spunk under penis
             ConditionSwitch(
                 "'anal' not in KittyX.Spunk", Null(),
-                "Player.Sprite and Player.Cock != 'anal' and Speed >= 1", "images/KittySex/Kitty_Sex_Spunk_Anal_Under.png",
-                "Player.Sprite and Player.Cock != 'anal' and Speed == 1", "Kitty_Sex_Anal_Spunk_Heading_Under",
+                "Player.Sprite and Player.Cock != 'anal' and action_speed >= 1", "images/KittySex/Kitty_Sex_Spunk_Anal_Under.png",
+                "Player.Sprite and Player.Cock != 'anal' and action_speed == 1", "Kitty_Sex_Anal_Spunk_Heading_Under",
                 "True", "images/KittySex/Kitty_Sex_Spunk_Anal_Closed.png",
                 )
     contains:
             # The animation of Zero's moving penis, masked by her anus shape
             ConditionSwitch(
             "not Player.Sprite or Player.Cock != 'anal'", Null(),
-            "Speed >= 3",  AlphaMask("Kitty_Anal_Zero_Anim3", "Kitty_Sex_Anal_Fucking_Mask"),
-            "Speed >= 2", AlphaMask("Kitty_Anal_Zero_Anim2", "Kitty_Sex_Anal_Fucking_Mask"),
-            "Speed", AlphaMask("Kitty_Anal_Zero_Anim1", "Kitty_Sex_Anal_Fucking_Mask"),
+            "action_speed >= 3",  AlphaMask("Kitty_Anal_Zero_Anim3", "Kitty_Sex_Anal_Fucking_Mask"),
+            "action_speed >= 2", AlphaMask("Kitty_Anal_Zero_Anim2", "Kitty_Sex_Anal_Fucking_Mask"),
+            "action_speed", AlphaMask("Kitty_Anal_Zero_Anim1", "Kitty_Sex_Anal_Fucking_Mask"),
             "True", AlphaMask("Kitty_Anal_Zero_Anim0", "Kitty_Sex_Anal_Fucking_Mask"),
             )
     contains:
             #Spunk over penis
             ConditionSwitch(
-                "'anal' not in KittyX.Spunk or not Player.Sprite or Player.Cock != 'anal' or not Speed", Null(),
-                "Speed == 1", "Kitty_Sex_Anal_Spunk_Heading_Over",
+                "'anal' not in KittyX.Spunk or not Player.Sprite or Player.Cock != 'anal' or not action_speed", Null(),
+                "action_speed == 1", "Kitty_Sex_Anal_Spunk_Heading_Over",
                 "True", "images/KittySex/Kitty_Sex_Spunk_Anal_Over.png",
                 )
 
 
 image Kitty_Sex_Anal_Fucking0:
-    # This is the visual for her pussy during the Speed 0 mode (static).
+    # This is the visual for her pussy during the action_speed 0 mode (static).
     contains:
             # The background plate of her pussy
             "Kitty_Sex_Anal_Tip"
@@ -1374,7 +1374,7 @@ image Kitty_Sex_Anal_Fucking0:
             AlphaMask("Kitty_Anal_Zero_Anim0", "Kitty_Sex_Anal_Fucking_Mask")
 
 image Kitty_Sex_Anal_Fucking1:
-    # This is the visual for her pussy during the Speed 1 mode (heading).
+    # This is the visual for her pussy during the action_speed 1 mode (heading).
     contains:
             # The background plate of her pussy
             "Kitty_Anal_Heading"
@@ -1384,7 +1384,7 @@ image Kitty_Sex_Anal_Fucking1:
             AlphaMask("Kitty_Anal_Zero_Anim1", "Kitty_Sex_Anal_Fucking_Mask")
 
 image Kitty_Sex_Anal_Fucking2:
-    # This is the visual for her pussy during the Speed 2 mode (slow).
+    # This is the visual for her pussy during the action_speed 2 mode (slow).
     contains:
             # The background plate of her pussy
             "images/KittySex/Kitty_Sex_Hole_Open.png"
@@ -1393,7 +1393,7 @@ image Kitty_Sex_Anal_Fucking2:
             AlphaMask("Kitty_Anal_Zero_Anim2", "Kitty_Sex_Anal_Fucking_Mask")
 
 image Kitty_Sex_Anal_Fucking3:
-    # This is the visual for her pussy during the Speed 3 mode (fast).
+    # This is the visual for her pussy during the action_speed 3 mode (fast).
     contains:
             # The background plate of her pussy
             "images/KittySex/Kitty_Sex_Hole_Open.png"
@@ -1462,7 +1462,7 @@ image Kitty_Sex_Anal_Tip:
 
 #Start Animations for Zero's Cock during Anal / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 image Kitty_Anal_Zero_Anim0:
-        #this is Kitty's sex animation, Speed 0 (static)
+        #this is Kitty's sex animation, action_speed 0 (static)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -1470,7 +1470,7 @@ image Kitty_Anal_Zero_Anim0:
             zoom 1.4
 
 image Kitty_Anal_Zero_Anim1:
-        #this is Kitty's sex animation, Speed 1 (heading)
+        #this is Kitty's sex animation, action_speed 1 (heading)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -1483,7 +1483,7 @@ image Kitty_Anal_Zero_Anim1:
                 repeat
 
 image Kitty_Anal_Zero_Anim2:
-        #this is Kitty's sex animation, Speed 2 (slow)
+        #this is Kitty's sex animation, action_speed 2 (slow)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -1496,7 +1496,7 @@ image Kitty_Anal_Zero_Anim2:
                 repeat
 
 image Kitty_Anal_Zero_Anim3:
-        #this is Kitty's sex animation, Speed 3 (fast)
+        #this is Kitty's sex animation, action_speed 3 (fast)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -1511,7 +1511,7 @@ image Kitty_Anal_Zero_Anim3:
 
 #Start Animations for Zero's Cock during Hotdog / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 image Kitty_Hotdog_Zero_Anim0:
-        #this is Kitty's sex animation, Speed 0 (static)
+        #this is Kitty's sex animation, action_speed 0 (static)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -1519,7 +1519,7 @@ image Kitty_Hotdog_Zero_Anim0:
             zoom 1.4
 
 image Kitty_Hotdog_Zero_Anim1:
-        #this is Kitty's sex animation, Speed 1 (heading)
+        #this is Kitty's sex animation, action_speed 1 (heading)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -1532,7 +1532,7 @@ image Kitty_Hotdog_Zero_Anim1:
                 repeat
 
 image Kitty_Hotdog_Zero_Anim2:
-        #this is Kitty's sex animation, Speed 3 (fast)
+        #this is Kitty's sex animation, action_speed 3 (fast)
         contains:
             subpixel True
             "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -1545,7 +1545,7 @@ image Kitty_Hotdog_Zero_Anim2:
                 repeat
 
 image Kitty_Hotdog_Body_Anim2:
-        #this is the animation for Kitty's lower body during sex, Speed 3 (fast)
+        #this is the animation for Kitty's lower body during sex, action_speed 3 (fast)
         contains:
             subpixel True
             "Kitty_Sex_Body"
@@ -1559,7 +1559,7 @@ image Kitty_Hotdog_Body_Anim2:
                 repeat
 
 image Kitty_Hotdog_Legs_Anim2:
-        #this is the animation for Kitty's lower body during sex, Speed 3 (fast)
+        #this is the animation for Kitty's lower body during sex, action_speed 3 (fast)
         contains:
             subpixel True
             "Kitty_Sex_Legs"
@@ -1665,7 +1665,7 @@ transform Kitty_Footcock_StaticA():
                 repeat
 
 image Kitty_Sex_Legs_FootAnim1:
-        #this is the animation for Kitty's lower body during Footjobs, Speed 2 (slow)
+        #this is the animation for Kitty's lower body during Footjobs, action_speed 2 (slow)
         contains:
             subpixel True
             "Kitty_Sex_Legs"
@@ -1681,7 +1681,7 @@ image Kitty_Sex_Legs_FootAnim1:
         pos (750,230)
 
 image Kitty_Sex_Legs_FootAnim2:
-        #this is the animation for Kitty's lower body during Footjobs, Speed 2 (slow)
+        #this is the animation for Kitty's lower body during Footjobs, action_speed 2 (slow)
         contains:
             subpixel True
             "Kitty_Sex_Legs"
@@ -1697,7 +1697,7 @@ image Kitty_Sex_Legs_FootAnim2:
         pos (750,230)
 
 image Kitty_Sex_Legs_FootAnimStatic:
-        #this is the animation for Kitty's lower body during Footjobs, Speed 2 (slow)
+        #this is the animation for Kitty's lower body during Footjobs, action_speed 2 (slow)
         contains:
             subpixel True
             "Kitty_Sex_Legs"
@@ -1705,7 +1705,7 @@ image Kitty_Sex_Legs_FootAnimStatic:
         pos (750,230)
 
 transform Kitty_Sex_Legs_FootAnim1A():
-        #this is the animation for Kitty's lower body during Footjobs, Speed 2 (slow)
+        #this is the animation for Kitty's lower body during Footjobs, action_speed 2 (slow)
             subpixel True
             offset (0,0) #X less is left, Y less is up
             block:
@@ -1718,7 +1718,7 @@ transform Kitty_Sex_Legs_FootAnim1A():
                 repeat
 
 transform Kitty_Sex_Legs_FootAnim2A():
-        #this is the animation for Kitty's lower body during Footjobs, Speed 2 (slow)
+        #this is the animation for Kitty's lower body during Footjobs, action_speed 2 (slow)
             subpixel True
             offset (0,0) #X less is left, Y less is up
             block:
@@ -1736,7 +1736,7 @@ transform Kitty_Sex_Legs_FootAnim2A():
                 repeat
 
 transform Kitty_Sex_Legs_FootAnimStaticA():
-        #this is the animation for Kitty's lower body during Footjobs, Speed 2 (slow)
+        #this is the animation for Kitty's lower body during Footjobs, action_speed 2 (slow)
             subpixel True
             offset (0,0) #X less is left, Y less is up
             block:
@@ -1752,7 +1752,7 @@ transform Kitty_Sex_Legs_FootAnimStaticA():
 #Start Animations for Kitty's Body during Footjobs / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 image Kitty_Sex_Body_FootAnim1:
-        #this is the animation for Kitty's upper body during Footjobs, Speed 2 (slow)
+        #this is the animation for Kitty's upper body during Footjobs, action_speed 2 (slow)
         contains:
             subpixel True
             "Kitty_Sex_Body"
@@ -1768,7 +1768,7 @@ image Kitty_Sex_Body_FootAnim1:
         pos (750,230)
 
 image Kitty_Sex_Body_FootAnim2:
-        #this is the animation for Kitty's upper body during Footjobs, Speed 2 (slow)
+        #this is the animation for Kitty's upper body during Footjobs, action_speed 2 (slow)
         contains:
             subpixel True
             "Kitty_Sex_Body"
@@ -1784,7 +1784,7 @@ image Kitty_Sex_Body_FootAnim2:
         pos (750,230)
 
 image Kitty_Sex_Body_FootAnimStatic:
-        #this is the animation for Kitty's upper body during Footjobs, Speed 2 (slow)
+        #this is the animation for Kitty's upper body during Footjobs, action_speed 2 (slow)
         contains:
             subpixel True
             "Kitty_Sex_Body"
@@ -1792,7 +1792,7 @@ image Kitty_Sex_Body_FootAnimStatic:
         pos (750,230)
 
 transform Kitty_Sex_Body_FootAnim1A():
-        #this is the animation for Kitty's upper body during Footjobs, Speed 2 (slow)
+        #this is the animation for Kitty's upper body during Footjobs, action_speed 2 (slow)
             subpixel True
             offset (0,0) #X less is left, Y less is up
             block:
@@ -1805,7 +1805,7 @@ transform Kitty_Sex_Body_FootAnim1A():
                 repeat
 
 transform Kitty_Sex_Body_FootAnim2A():
-        #this is the animation for Kitty's upper body during Footjobs, Speed 2 (slow)
+        #this is the animation for Kitty's upper body during Footjobs, action_speed 2 (slow)
             subpixel True
             offset (0,0) #X less is left, Y less is up
             block:
@@ -1823,7 +1823,7 @@ transform Kitty_Sex_Body_FootAnim2A():
                 repeat
 
 transform Kitty_Sex_Body_FootAnimStaticA():
-        #this is the animation for Kitty's upper body during Footjobs, Speed 2 (slow)
+        #this is the animation for Kitty's upper body during Footjobs, action_speed 2 (slow)
             subpixel True
             offset (0,0) #X less is left, Y less is up
             block:
@@ -1857,14 +1857,14 @@ image Kitty_Doggy_Animation: #nee Kitty_Doggy
             #Shows different upper body motion depending on events
             "not Player.Sprite", "Kitty_Doggy_Body",
             "Player.Cock == 'anal'", ConditionSwitch(
-                    "Speed > 2", "Kitty_Doggy_Fuck2_Top",
-                    "Speed > 1", "Kitty_Doggy_Fuck_Top",
-                    "Speed", "Kitty_Doggy_Anal_Head_Top",
+                    "action_speed > 2", "Kitty_Doggy_Fuck2_Top",
+                    "action_speed > 1", "Kitty_Doggy_Fuck_Top",
+                    "action_speed", "Kitty_Doggy_Anal_Head_Top",
                     "True", "Kitty_Doggy_Body",
                     ),
             "Player.Cock == 'in'", ConditionSwitch(
-                    "Speed > 2", "Kitty_Doggy_Fuck2_Top",
-                    "Speed > 1", "Kitty_Doggy_Fuck_Top",
+                    "action_speed > 2", "Kitty_Doggy_Fuck2_Top",
+                    "action_speed > 1", "Kitty_Doggy_Fuck_Top",
                     "True", "Kitty_Doggy_Body",
                     ),
             "True", "Kitty_Doggy_Body",
@@ -1873,14 +1873,14 @@ image Kitty_Doggy_Animation: #nee Kitty_Doggy
             #Shows different lower body motion depending on events
             "not Player.Sprite", "Kitty_Doggy_Ass",
             "Player.Cock == 'anal'", ConditionSwitch(
-                    "Speed > 2", "Kitty_Doggy_Fuck2_Ass",
-                    "Speed > 1", "Kitty_Doggy_Fuck_Ass",
-                    "Speed", "Kitty_Doggy_Anal_Head_Ass",
+                    "action_speed > 2", "Kitty_Doggy_Fuck2_Ass",
+                    "action_speed > 1", "Kitty_Doggy_Fuck_Ass",
+                    "action_speed", "Kitty_Doggy_Anal_Head_Ass",
                     "True", "Kitty_Doggy_Ass",
                     ),
             "Player.Cock == 'in'", ConditionSwitch(
-                    "Speed > 2", "Kitty_Doggy_Fuck2_Ass",
-                    "Speed > 1", "Kitty_Doggy_Fuck_Ass",
+                    "action_speed > 2", "Kitty_Doggy_Fuck2_Ass",
+                    "action_speed > 1", "Kitty_Doggy_Fuck_Ass",
                     "True", "Kitty_Doggy_Ass",
                     ),
             "True", "Kitty_Doggy_Ass",
@@ -1888,8 +1888,8 @@ image Kitty_Doggy_Animation: #nee Kitty_Doggy
         (0,0), ConditionSwitch(
             #Shows different lower body motion depending on events
             "Player.Cock == 'foot'", ConditionSwitch(
-                    "Speed > 1", "Kitty_Doggy_Feet2",
-                    "Speed", "Kitty_Doggy_Feet1",
+                    "action_speed > 1", "Kitty_Doggy_Feet2",
+                    "action_speed", "Kitty_Doggy_Feet1",
                     "True", "Kitty_Doggy_Feet0",
                     ),
             "not Player.Sprite and ShowFeet", "Kitty_Doggy_Feet0",
@@ -1950,7 +1950,7 @@ image Kitty_Doggy_Body:
             ),
         (0,0), ConditionSwitch(
             #breast fondling animation
-            "Trigger == 'fondle breasts' or Trigger2 == 'fondle breasts'", "Kitty_Doggy_GropeBreast",
+            "primary_action == 'fondle breasts' or offhand_action == 'fondle breasts'", "Kitty_Doggy_GropeBreast",
             "True", Null()
             ),
         #(161,-1), "Jean_Doggy_Head",               #Head
@@ -2165,16 +2165,16 @@ image Kitty_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Pussy Composite
             "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
-                    "Speed > 2", "Kitty_Pussy_Fucking3",#Speed 3
-                    "Speed > 1", "Kitty_Pussy_Fucking2",#Speed 2
-                    "Speed", "Kitty_Pussy_Heading",      #Speed 1
-                    "True", "Kitty_Pussy_Static",              #Speed 0
+                    "action_speed > 2", "Kitty_Pussy_Fucking3",#action_speed 3
+                    "action_speed > 1", "Kitty_Pussy_Fucking2",#action_speed 2
+                    "action_speed", "Kitty_Pussy_Heading",      #action_speed 1
+                    "True", "Kitty_Pussy_Static",              #action_speed 0
                     ),
-            "Trigger == 'lick pussy'", "images/KittyDoggy/Kitty_Doggy_Pussy_Open.png",
+            "primary_action == 'lick pussy'", "images/KittyDoggy/Kitty_Doggy_Pussy_Open.png",
             "KittyX.Legs and not KittyX.Upskirt", "images/KittyDoggy/Kitty_Doggy_Pussy_Closed.png",
             "KittyX.Panties and not KittyX.PantiesDown", "images/KittyDoggy/Kitty_Doggy_Pussy_Closed.png",
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'", "Kitty_Pussy_Fingering",
-            "Trigger == 'dildo pussy'", "Kitty_Pussy_Fucking2",
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'", "Kitty_Pussy_Fingering",
+            "primary_action == 'dildo pussy'", "Kitty_Pussy_Fucking2",
             "True", "images/KittyDoggy/Kitty_Doggy_Pussy_Closed.png",
             ),
 
@@ -2190,22 +2190,22 @@ image Kitty_Doggy_Ass:
             #pubes
             "not KittyX.Pubes", Null(),
             "Player.Sprite and Player.Cock == 'in'", Null(), # "images/KittyDoggy/Kitty_Doggy_Pubes_Fucked.png",
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
             "(KittyX.Legs and KittyX.Legs != 'blue skirt') and not KittyX.Upskirt", Null(),
-            "KittyX.PantiesDown and Trigger == 'lick pussy'", "images/KittyDoggy/Kitty_Doggy_Pubes_Open.png",
+            "KittyX.PantiesDown and primary_action == 'lick pussy'", "images/KittyDoggy/Kitty_Doggy_Pubes_Open.png",
             "KittyX.Panties and KittyX.PantiesDown", "images/KittyDoggy/Kitty_Doggy_Pubes.png",
             "KittyX.Panties", "images/KittyDoggy/Kitty_Doggy_PubesC.png",
-            "KittyX.Hose == 'pantyhose' and Trigger == 'lick pussy'", "images/KittyDoggy/Kitty_Doggy_Pubes_OpenC.png",
+            "KittyX.Hose == 'pantyhose' and primary_action == 'lick pussy'", "images/KittyDoggy/Kitty_Doggy_Pubes_OpenC.png",
             "KittyX.Hose == 'pantyhose'", "images/KittyDoggy/Kitty_Doggy_PubesC.png",
-            "Trigger == 'lick pussy'", "images/KittyDoggy/Kitty_Doggy_Pubes_Open.png",
+            "primary_action == 'lick pussy'", "images/KittyDoggy/Kitty_Doggy_Pubes_Open.png",
             "True", "images/KittyDoggy/Kitty_Doggy_Pubes.png",
             ),
         (0,0), ConditionSwitch(
             #Pussy Piercings
             "Player.Sprite", Null(),
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
             "KittyX.Pierce == 'barbell'", "images/KittyDoggy/Kitty_Doggy_Pierce_Barbell.png",
             "KittyX.Pierce == 'ring' and KittyX.Panties and not KittyX.PantiesDown", "images/KittyDoggy/Kitty_Doggy_Pierce_RingC.png",
             "KittyX.Pierce == 'ring' and KittyX.Hose == 'pantyhose' and not (KittyX.Panties and KittyX.PantiesDown)", "images/KittyDoggy/Kitty_Doggy_Pierce_RingC.png",
@@ -2218,17 +2218,17 @@ image Kitty_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Anus Composite
             "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
-                    "Speed > 2", "Kitty_Anal_Fucking2", #Speed 3
-                    "Speed > 1", "Kitty_Anal_Fucking",  #Speed 2
-                    "Speed", "Kitty_Anal_Heading",      #Speed 1
-                    "True", "Kitty_Anal",               #Speed 0
+                    "action_speed > 2", "Kitty_Anal_Fucking2", #action_speed 3
+                    "action_speed > 1", "Kitty_Anal_Fucking",  #action_speed 2
+                    "action_speed", "Kitty_Anal_Heading",      #action_speed 1
+                    "True", "Kitty_Anal",               #action_speed 0
                     ),
 #            "Action == 'plug'", "Jean_Anal_Plug",
 #            "Action == 'plug'", "test_case",
             "KittyX.Legs and not KittyX.Upskirt", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
             "KittyX.Panties and not KittyX.PantiesDown", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
-            "Trigger == 'insert ass' or Trigger2 == 'insert ass'", "Kitty_Anal_Fingering",
-            "Trigger == 'dildo anal'", "Kitty_Anal_Fucking",
+            "primary_action == 'insert ass' or offhand_action == 'insert ass'", "Kitty_Anal_Fingering",
+            "primary_action == 'dildo anal'", "Kitty_Anal_Fucking",
             "KittyX.Loose", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
             "True", "images/JeanDoggy/Jean_Doggy_Asshole_Tight.png",
             ),
@@ -2245,8 +2245,8 @@ image Kitty_Doggy_Ass:
             #Panties if up
             "KittyX.PantiesDown or not KittyX.Panties", Null(),
             "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
-#            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-#            "Trigger == 'dildo pussy'", Null(),
+#            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+#            "primary_action == 'dildo pussy'", Null(),
             "KittyX.Panties == 'green panties' and KittyX.Wet", "images/KittyDoggy/Kitty_Doggy_Panties_GreenW.png",
             "KittyX.Panties == 'green panties'", "images/KittyDoggy/Kitty_Doggy_Panties_Green.png",
             "KittyX.Panties == 'lace panties'", "images/KittyDoggy/Kitty_Doggy_Panties_Lace.png",
@@ -2257,8 +2257,8 @@ image Kitty_Doggy_Ass:
         (0,0), ConditionSwitch(        #fix // // // // // // fix // // // // // // fix // // // // // // fix // // // // // //
             #full hose/tights
             "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
 #            "KittyX.Panties and KittyX.PantiesDown and KittyX.Hose == 'stockings and garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
             "KittyX.Hose == 'garterbelt'", "images/KittyDoggy/Kitty_Doggy_Hose_Garter.png",
             "KittyX.Hose == 'stockings and garterbelt'", "images/KittyDoggy/Kitty_Doggy_Hose_StockingGarter.png",
@@ -2271,12 +2271,12 @@ image Kitty_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Legs Layer
             "KittyX.Legs == 'dress'", ConditionSwitch(
-                    "KittyX.Upskirt and Player.Sprite and Player.Cock == 'anal' and Speed" , "images/KittyDoggy/Kitty_Doggy_Legs_Dress_Up.png",
+                    "KittyX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/KittyDoggy/Kitty_Doggy_Legs_Dress_Up.png",
                     "KittyX.Upskirt", "images/KittyDoggy/Kitty_Doggy_Legs_Dress_Up.png",
                     "True", "images/KittyDoggy/Kitty_Doggy_Legs_Dress.png",
                     ),
             "KittyX.Legs == 'blue skirt'", ConditionSwitch(
-                    "KittyX.Upskirt and Player.Sprite and Player.Cock == 'anal' and Speed" , "images/KittyDoggy/Kitty_Doggy_Legs_BlueSkirt_Up.png",   #Rogue_Doggy_Legs_Skirt_UpAnal.png",
+                    "KittyX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/KittyDoggy/Kitty_Doggy_Legs_BlueSkirt_Up.png",   #Rogue_Doggy_Legs_Skirt_UpAnal.png",
                     "KittyX.Upskirt", "images/KittyDoggy/Kitty_Doggy_Legs_BlueSkirt_Up.png",
                     "True", "images/KittyDoggy/Kitty_Doggy_Legs_BlueSkirt.png",
                     ),
@@ -2303,7 +2303,7 @@ image Kitty_Doggy_Ass:
                     "True", "images/KittyDoggy/Kitty_Doggy_Legs_Shorts.png",
                     ),
 #            "KittyX.Legs == 'skirt'", ConditionSwitch(
-#                    "KittyX.Upskirt and Player.Sprite and Player.Cock == 'anal' and Speed" , "images/KittyDoggy/Kitty_Doggy_Legs_Skirt_Up.png",   #Rogue_Doggy_Legs_Skirt_UpAnal.png",
+#                    "KittyX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/KittyDoggy/Kitty_Doggy_Legs_Skirt_Up.png",   #Rogue_Doggy_Legs_Skirt_UpAnal.png",
 #                    "KittyX.Upskirt", "images/KittyDoggy/Kitty_Doggy_Legs_Skirt_Up.png",
 #                    "True", "images/KittyDoggy/Kitty_Doggy_Legs_Skirt.png",
 #                    ),
@@ -2332,8 +2332,8 @@ image Kitty_Doggy_Ass:
         (0,0), ConditionSwitch(
             #pussy licking animation
             "Player.Sprite and Player.Cock", Null(),
-            "Trigger == 'lick pussy'", "Rogue_Doggy_Lick_Pussy",
-            "Trigger == 'lick ass'", "Rogue_Doggy_Lick_Ass",
+            "primary_action == 'lick pussy'", "Rogue_Doggy_Lick_Pussy",
+            "primary_action == 'lick ass'", "Rogue_Doggy_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -2345,9 +2345,9 @@ image Kitty_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Hotdogging Cock w/ alpha
             "not Player.Sprite or Player.Cock != 'out'", Null(),
-            #"KittyX.Legs == 'skirt' and KittyX.Upskirt and Speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
+            #"KittyX.Legs == 'skirt' and KittyX.Upskirt and action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
             #"KittyX.Legs == 'skirt' and KittyX.Upskirt", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "Speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             "True", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             ),
 #        (0,0), ConditionSwitch(
@@ -2479,7 +2479,7 @@ image Zero_Kitty_Hotdog_Moving:
 #            ),
 
 image Zero_Kitty_Doggy_Static:
-    # Sex Speed 0 motions
+    # Sex action_speed 0 motions
     contains:
         subpixel True
         "Zero_Doggy_Insert"
@@ -2491,7 +2491,7 @@ image Zero_Kitty_Doggy_Static:
             repeat
 
 image Zero_Kitty_Doggy_Heading:
-    # Sex Speed 1 motions
+    # Sex action_speed 1 motions
     contains:
         subpixel True
         "Zero_Doggy_Insert"
@@ -2503,7 +2503,7 @@ image Zero_Kitty_Doggy_Heading:
             repeat
 
 image Zero_Kitty_Doggy_Fucking2:
-    # Sex Speed 2 motions
+    # Sex action_speed 2 motions
     contains:
         "Zero_Doggy_Insert"
         pos (169,500)
@@ -2514,7 +2514,7 @@ image Zero_Kitty_Doggy_Fucking2:
             repeat
 
 image Zero_Kitty_Doggy_Fucking3:
-    # Sex Speed 3 motions
+    # Sex action_speed 3 motions
     contains:
         "Zero_Doggy_Insert"
         pos (169,500)
@@ -2788,7 +2788,7 @@ image Kitty_Pussy_Fucking2:
     contains:
         #Cock
         ConditionSwitch(
-            "Trigger == 'dildo pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
+            "primary_action == 'dildo pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
             "True",AlphaMask("Zero_Kitty_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
             ),
 #        AlphaMask("Zero_Kitty_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
@@ -3009,7 +3009,7 @@ image Kitty_Anal_Fucking:
         #Cock
         ConditionSwitch(
             #full hose/tights
-            "Trigger == 'dildo anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
+            "primary_action == 'dildo anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
             "True", AlphaMask("Zero_Kitty_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
             ),
 #        AlphaMask("Zero_Kitty_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png")
@@ -3229,10 +3229,10 @@ image Kitty_Doggy_Feet2:
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #Doggy Launch/Reset
-label Kitty_Doggy_Launch(Line = Trigger):
+label Kitty_Doggy_Launch(line = primary_action):
     if renpy.showing("Kitty_Doggy_Animation"):
         return
-    $ Speed = 0
+    $ action_speed = 0
     call Kitty_Hide(1)
     show Kitty_Doggy_Animation at sprite_location(StageCenter+50) zorder 150
     with dissolve
@@ -3251,62 +3251,62 @@ image Kitty_BJ_Animation:#BJ_NewTest:                                           
         (858,928),
         (0,0), ConditionSwitch(
             # Kitty's body, everything below the chin
-            "Speed == 0", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_0()),           #Static
-            "Speed == 1", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_1()),           #Licking
-            "Speed == 2", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_2()),           #Heading
-            "Speed == 3", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_3()),           #Sucking
-            "Speed == 4", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_4()),           #Deepthroat
-            "Speed == 5", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_5()),           #Cumming High
-            "Speed == 6", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_6()),           #Cumming Deep
+            "action_speed == 0", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_0()),           #Static
+            "action_speed == 1", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_1()),           #Licking
+            "action_speed == 2", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_2()),           #Heading
+            "action_speed == 3", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_3()),           #Sucking
+            "action_speed == 4", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_4()),           #Deepthroat
+            "action_speed == 5", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_5()),           #Cumming High
+            "action_speed == 6", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_6()),           #Cumming Deep
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
             # Kitty's head Underlay
-            "Speed == 0", At("Kitty_BJ_Head", Kitty_BJ_Head_0()),               #Static
-            "Speed == 1", At("Kitty_BJ_Head", Kitty_BJ_Head_1()),               #Licking
-            "Speed == 2", At("Kitty_BJ_Head", Kitty_BJ_Head_2()),               #Heading
-            "Speed == 3", At("Kitty_BJ_Head", Kitty_BJ_Head_3()),               #Sucking
-            "Speed == 4", At("Kitty_BJ_Head", Kitty_BJ_Head_4()),               #Deepthroat
-            "Speed == 5", At("Kitty_BJ_Head", Kitty_BJ_Head_5()),               #Cumming High
-            "Speed == 6", At("Kitty_BJ_Head", Kitty_BJ_Head_6()),               #Cumming Deep
+            "action_speed == 0", At("Kitty_BJ_Head", Kitty_BJ_Head_0()),               #Static
+            "action_speed == 1", At("Kitty_BJ_Head", Kitty_BJ_Head_1()),               #Licking
+            "action_speed == 2", At("Kitty_BJ_Head", Kitty_BJ_Head_2()),               #Heading
+            "action_speed == 3", At("Kitty_BJ_Head", Kitty_BJ_Head_3()),               #Sucking
+            "action_speed == 4", At("Kitty_BJ_Head", Kitty_BJ_Head_4()),               #Deepthroat
+            "action_speed == 5", At("Kitty_BJ_Head", Kitty_BJ_Head_5()),               #Cumming High
+            "action_speed == 6", At("Kitty_BJ_Head", Kitty_BJ_Head_6()),               #Cumming Deep
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
             # Cock
-            "Speed == 0", At("Blowcock", Kitty_BJ_Cock_0()),                    #Static
-            "Speed == 1", At("Blowcock", Kitty_BJ_Cock_1()),                    #Licking
-            "Speed >= 2", At("Blowcock", Kitty_BJ_Cock_2()),                    #Heading+
-#            "Speed == 2", At("Blowcock", Kitty_BJ_Cock_2()),                    #Heading
-#            "Speed == 3", At("Blowcock", Kitty_BJ_Cock_2()),                    #Sucking
-#            "Speed == 4", At("Blowcock", Kitty_BJ_Cock_2()),                    #Deepthroat
+            "action_speed == 0", At("Blowcock", Kitty_BJ_Cock_0()),                    #Static
+            "action_speed == 1", At("Blowcock", Kitty_BJ_Cock_1()),                    #Licking
+            "action_speed >= 2", At("Blowcock", Kitty_BJ_Cock_2()),                    #Heading+
+#            "action_speed == 2", At("Blowcock", Kitty_BJ_Cock_2()),                    #Heading
+#            "action_speed == 3", At("Blowcock", Kitty_BJ_Cock_2()),                    #Sucking
+#            "action_speed == 4", At("Blowcock", Kitty_BJ_Cock_2()),                    #Deepthroat
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
             # the masked overlay for when her head overlaps the cock
-            "Speed < 3", Null(),
-            "Speed == 3", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MouthSuckingMask"), Kitty_BJ_Head_3()), #Sucking
-            "Speed == 4", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MouthSuckingMask"), Kitty_BJ_Head_4()), #Deepthroat
-            "Speed == 6", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MouthSuckingMask"), Kitty_BJ_Head_6()), #Cumming Deep
+            "action_speed < 3", Null(),
+            "action_speed == 3", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MouthSuckingMask"), Kitty_BJ_Head_3()), #Sucking
+            "action_speed == 4", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MouthSuckingMask"), Kitty_BJ_Head_4()), #Deepthroat
+            "action_speed == 6", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MouthSuckingMask"), Kitty_BJ_Head_6()), #Cumming Deep
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
             # same as above, but for the heading animation
-            "Speed == 2", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MaskHeadingComposite"), Kitty_BJ_Head_2()), #Heading
-            "Speed == 5", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MaskHeadingComposite"), Kitty_BJ_Head_5()), #Cumming High
+            "action_speed == 2", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MaskHeadingComposite"), Kitty_BJ_Head_2()), #Heading
+            "action_speed == 5", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MaskHeadingComposite"), Kitty_BJ_Head_5()), #Cumming High
             "True", Null(),
             ),
         (325,490), ConditionSwitch(
             # the over part of spunk
-            "Speed < 3 or 'mouth' not in KittyX.Spunk", Null(),
-            "Speed == 3", At("KittySuckingSpunk", Kitty_BJ_Head_3()), #Sucking
-            "Speed == 4", At("KittySuckingSpunk", Kitty_BJ_Head_4()), #Deepthroat
-            "Speed == 6", At("KittySuckingSpunk", Kitty_BJ_Head_6()), #Cumming Deep
+            "action_speed < 3 or 'mouth' not in KittyX.Spunk", Null(),
+            "action_speed == 3", At("KittySuckingSpunk", Kitty_BJ_Head_3()), #Sucking
+            "action_speed == 4", At("KittySuckingSpunk", Kitty_BJ_Head_4()), #Deepthroat
+            "action_speed == 6", At("KittySuckingSpunk", Kitty_BJ_Head_6()), #Cumming Deep
             "True", Null(),
             ),
         (325,490), ConditionSwitch(
             # same as above, but for the heading animation
-            "Speed == 2 and 'mouth' in KittyX.Spunk", At("Kitty_BJ_MaskHeadingSpunk", Kitty_BJ_Head_2()), #Heading
-            "Speed == 5 and 'mouth' in KittyX.Spunk", At("Kitty_BJ_MaskHeadingSpunk", Kitty_BJ_Head_5()), #Cumming High
+            "action_speed == 2 and 'mouth' in KittyX.Spunk", At("Kitty_BJ_MaskHeadingSpunk", Kitty_BJ_Head_2()), #Heading
+            "action_speed == 5 and 'mouth' in KittyX.Spunk", At("Kitty_BJ_MaskHeadingSpunk", Kitty_BJ_Head_5()), #Cumming High
             "True", Null(),
             ),
         )
@@ -3336,7 +3336,7 @@ image Kitty_BJ_Backdrop:
         (858,928),
         (-375,250), ConditionSwitch(
             #blanket
-            "'blanket' in KittyX.RecentActions", "images/KittyBJFace/Kitty_BJFace_Blanket.png",
+            "'blanket' in KittyX.recent_history", "images/KittyBJFace/Kitty_BJFace_Blanket.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -3401,7 +3401,7 @@ image Kitty_BJ_Head:                                                            
             ),
 #        (0,0), ConditionSwitch(       #Legacy, the bellow version should do the same role
 #            # Underface for sucking
-#            "Speed > 2 and Speed != 5", Null(),
+#            "action_speed > 2 and action_speed != 5", Null(),
 #            "KittyX.Water and KittyX.Blush", "images/KittyBJFace/Kitty_BJ_FaceClosed_Wet_Blush.png",
 #            "KittyX.Water", "images/KittyBJFace/Kitty_BJ_FaceClosed_Wet.png",
 #            "KittyX.Blush", "images/KittyBJFace/Kitty_BJ_FaceClosed_Blush.png",
@@ -3409,7 +3409,7 @@ image Kitty_BJ_Head:                                                            
 #            ),
 #        (0,0), ConditionSwitch(
 #            # Underface for not sucking
-#            "Speed <= 2 or Speed == 5", Null(),   #"Speed <= 2 or Trigger != 'blow' or Speed == 5", Null(),
+#            "action_speed <= 2 or action_speed == 5", Null(),   #"action_speed <= 2 or primary_action != 'blow' or action_speed == 5", Null(),
 #            "KittyX.Water and KittyX.Blush", "images/KittyBJFace/Kitty_BJ_FaceOpen_Wet_Blush.png",
 #            "KittyX.Water", "images/KittyBJFace/Kitty_BJ_FaceOpen_Wet.png",
 #            "KittyX.Blush", "images/KittyBJFace/Kitty_BJ_FaceOpen_Blush.png",
@@ -3417,7 +3417,7 @@ image Kitty_BJ_Head:                                                            
 #            ),
         (0,0), ConditionSwitch(
             # Basic Face layer
-            "Speed <= 2 or Speed == 5 or not renpy.showing('Kitty_BJ_Animation')", ConditionSwitch(
+            "action_speed <= 2 or action_speed == 5 or not renpy.showing('Kitty_BJ_Animation')", ConditionSwitch(
                     # If the animation isn't sucking, or if not in BJ pose
                     "KittyX.Water", ConditionSwitch(
                             # If she's wet
@@ -3438,17 +3438,17 @@ image Kitty_BJ_Head:                                                            
             ),
         (0,0), ConditionSwitch(
             #Mouth
-            "Speed and renpy.showing('Kitty_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Kitty_BJ_Animation')", ConditionSwitch(
                     # If in sucking position
-                    "Speed == 1", "images/KittyBJFace/Kitty_BJ_Mouth_Tongue.png",  #licking
-                    "(Speed == 2 or Speed == 5)", Null(),                          #heading
-                    "Speed == 3", "images/KittyBJFace/Kitty_BJ_Mouth_Sucking.png", #sucking
-                    "Speed == 4", "images/KittyBJFace/Kitty_BJ_Mouth_Sucking.png", #deepthroat
-                    "Speed == 6", "images/KittyBJFace/Kitty_BJ_Mouth_Sucking.png", #cumming
+                    "action_speed == 1", "images/KittyBJFace/Kitty_BJ_Mouth_Tongue.png",  #licking
+                    "(action_speed == 2 or action_speed == 5)", Null(),                          #heading
+                    "action_speed == 3", "images/KittyBJFace/Kitty_BJ_Mouth_Sucking.png", #sucking
+                    "action_speed == 4", "images/KittyBJFace/Kitty_BJ_Mouth_Sucking.png", #deepthroat
+                    "action_speed == 6", "images/KittyBJFace/Kitty_BJ_Mouth_Sucking.png", #cumming
                     "True", "images/KittyBJFace/Kitty_BJ_Mouth_Sucking.png", #cumming
                     ),
-            "Speed == 3 and renpy.showing('Kitty_TJ_Animation')", "images/KittyBJFace/Kitty_BJ_Mouth_Tongue.png",
-            "Speed >= 5 and renpy.showing('Kitty_TJ_Animation')", "images/KittyBJFace/Kitty_BJ_Mouth_Kiss.png",
+            "action_speed == 3 and renpy.showing('Kitty_TJ_Animation')", "images/KittyBJFace/Kitty_BJ_Mouth_Tongue.png",
+            "action_speed >= 5 and renpy.showing('Kitty_TJ_Animation')", "images/KittyBJFace/Kitty_BJ_Mouth_Kiss.png",
             "KittyX.Mouth == 'normal'", "images/KittyBJFace/Kitty_BJ_Mouth_Smile.png",
             "KittyX.Mouth == 'lipbite'", "images/KittyBJFace/Kitty_BJ_Mouth_Lipbite.png",
             "KittyX.Mouth == 'sucking'", "images/KittyBJFace/Kitty_BJ_Mouth_Sucking.png",
@@ -3462,24 +3462,24 @@ image Kitty_BJ_Head:                                                            
             ),
         (428,605), ConditionSwitch(
             # Heading Mouth
-#            "Speed == 2 and Trigger == 'blow'", At("Kitty_BJ_MouthHeading", Kitty_BJ_MouthAnim()),  #heading
+#            "action_speed == 2 and primary_action == 'blow'", At("Kitty_BJ_MouthHeading", Kitty_BJ_MouthAnim()),  #heading
             "not renpy.showing('Kitty_BJ_Animation')", Null(),
-            "Speed == 2", At("Kitty_BJ_MouthHeading", Kitty_BJ_MouthAnim()),  #heading
-            "Speed == 5", At("Kitty_BJ_MouthHeading", Kitty_BJ_MouthAnimC()), #cumming high
+            "action_speed == 2", At("Kitty_BJ_MouthHeading", Kitty_BJ_MouthAnim()),  #heading
+            "action_speed == 5", At("Kitty_BJ_MouthHeading", Kitty_BJ_MouthAnimC()), #cumming high
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
             #Spunk layer
             "'mouth' not in KittyX.Spunk", Null(),
-            "Speed and renpy.showing('Kitty_BJ_Animation')", ConditionSwitch(
+            "action_speed and renpy.showing('Kitty_BJ_Animation')", ConditionSwitch(
                     # If in sucking position
-                    "Speed == 1", "images/KittyBJFace/Kitty_BJ_Spunk_Tongue.png",  #licking
-                    "(Speed == 2 or Speed == 5)", Null(),                          #heading
-                    "Speed == 3", "images/KittyBJFace/Kitty_BJ_Spunk_SuckingU.png", #sucking
-                    "Speed == 4", "images/KittyBJFace/Kitty_BJ_Spunk_SuckingU.png", #deepthroat
+                    "action_speed == 1", "images/KittyBJFace/Kitty_BJ_Spunk_Tongue.png",  #licking
+                    "(action_speed == 2 or action_speed == 5)", Null(),                          #heading
+                    "action_speed == 3", "images/KittyBJFace/Kitty_BJ_Spunk_SuckingU.png", #sucking
+                    "action_speed == 4", "images/KittyBJFace/Kitty_BJ_Spunk_SuckingU.png", #deepthroat
                     "True", "images/KittyBJFace/Kitty_BJ_Spunk_SuckingU.png", #cumming
                     ),
-            "Speed >= 5 and renpy.showing('Kitty_TJ_Animation')", "images/KittyBJFace/Kitty_BJ_Spunk_Kiss.png",
+            "action_speed >= 5 and renpy.showing('Kitty_TJ_Animation')", "images/KittyBJFace/Kitty_BJ_Spunk_Kiss.png",
             "KittyX.Mouth == 'normal'", "images/KittyBJFace/Kitty_BJ_Spunk_Smile.png",
             "KittyX.Mouth == 'lipbite'", "images/KittyBJFace/Kitty_BJ_Spunk_Lipbite.png",
             "KittyX.Mouth == 'kiss'", "images/KittyBJFace/Kitty_BJ_Spunk_Kiss.png",
@@ -3516,7 +3516,7 @@ image Kitty_BJ_Head:                                                            
         (0,0), ConditionSwitch(
             #Hair water overlay
             "not KittyX.Water", Null(),
-            "Speed > 2", "images/KittyBJFace/Kitty_BJ_Wet_HeadOpen.png",
+            "action_speed > 2", "images/KittyBJFace/Kitty_BJ_Wet_HeadOpen.png",
             "True", "images/KittyBJFace/Kitty_BJ_Wet_HeadClosed.png",
             ),
         (0,0), ConditionSwitch(
@@ -3567,7 +3567,7 @@ image Kitty_BJ_MouthSuckingMask:
     contains: #see if this works, if not remove it
         ConditionSwitch(
             "'mouth' not in KittyX.Spunk", Null(),
-            "Speed != 2 and Speed != 5", Null(),
+            "action_speed != 2 and action_speed != 5", Null(),
             "True", "images/KittyBJFace/Kitty_BJ_Spunk_SuckingU.png",
             )
         zoom 1.4
@@ -3583,8 +3583,8 @@ image Kitty_BJ_MaskHeadingComposite:
     LiveComposite(
         (858,928),
         (300,462), ConditionSwitch(
-            "Speed == 2", At("Kitty_BJ_MaskHeading", Kitty_BJ_MouthAnim()),
-            "Speed == 5", At("Kitty_BJ_MaskHeading", Kitty_BJ_MouthAnimC()),
+            "action_speed == 2", At("Kitty_BJ_MaskHeading", Kitty_BJ_MouthAnim()),
+            "action_speed == 5", At("Kitty_BJ_MaskHeading", Kitty_BJ_MouthAnimC()),
             "True", Null(),
             ),
         )
@@ -3795,12 +3795,12 @@ transform Kitty_BJ_Body_6():
                                                                #BJ Launchers
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-label Kitty_BJ_Launch(Line = Trigger):    # The sequence to launch the Kitty BJ animations
+label Kitty_BJ_Launch(line = primary_action):    # The sequence to launch the Kitty BJ animations
     if renpy.showing("Kitty_BJ_Animation"):
             return
 
     call Kitty_Hide
-    if Line == "L" or Line == "cum":
+    if line == "L" or line == "cum":
         show Kitty_Sprite at sprite_location(StageCenter) zorder KittyX.Layer:
             alpha 1
             ease 1 zoom 2.5 offset (150,80)
@@ -3811,24 +3811,24 @@ label Kitty_BJ_Launch(Line = Trigger):    # The sequence to launch the Kitty BJ 
             zoom 2.5 offset (150,80)
         with dissolve
 
-    if Line == "L":
+    if line == "L":
             if Taboo:
                 if len(Present) >= 2:
                     if Present[0] != KittyX:
-                            "[KittyX.Name] looks back at [Present[0].Name] to see if she's watching."
+                            "[KittyX.name] looks back at [Present[0].name] to see if she's watching."
                     elif Present[1] != KittyX:
-                            "[KittyX.Name] looks back at [Present[1].Name] to see if she's watching."
+                            "[KittyX.name] looks back at [Present[1].name] to see if she's watching."
                 else:
-                            "[KittyX.Name] casually glances around to see if anyone can see her."
+                            "[KittyX.name] casually glances around to see if anyone can see her."
             if not KittyX.Blow:
-                "[KittyX.Name] hesitantly kneels down and touches her mouth to your cock."
+                "[KittyX.name] hesitantly kneels down and touches her mouth to your cock."
             else:
-                "[KittyX.Name] kneels down and begins to suck on your cock."
+                "[KittyX.name] kneels down and begins to suck on your cock."
 
-    $ Speed = 0
+    $ action_speed = 0
 
-    if Line != "cum":
-        $ Trigger = "blow"
+    if line != "cum":
+        $ primary_action = "blow"
 
     show Kitty_Sprite zorder KittyX.Layer:
         alpha 0
@@ -3840,7 +3840,7 @@ label Kitty_BJ_Reset: # The sequence to the Kitty animations from BJ to default
     if not renpy.showing("Kitty_BJ_Animation"):
             return
     call Kitty_Hide
-    $ Speed = 0
+    $ action_speed = 0
 
     show Kitty_Sprite at sprite_location(StageCenter) zorder KittyX.Layer:
         alpha 1
@@ -3873,10 +3873,10 @@ image Kitty_TJ_Animation:
             # Kitty's upper body
             "Player.Sprite", ConditionSwitch(
                     # If during sex
-                    "Speed == 1", "Kitty_TJ_Body_1",#slow
-                    "Speed == 2", "Kitty_TJ_Body_2",#fast
-                    "Speed == 3", "Kitty_TJ_Body_3",#licking
-                    "Speed >= 5", "Kitty_TJ_Body_5",#cumming
+                    "action_speed == 1", "Kitty_TJ_Body_1",#slow
+                    "action_speed == 2", "Kitty_TJ_Body_2",#fast
+                    "action_speed == 3", "Kitty_TJ_Body_3",#licking
+                    "action_speed >= 5", "Kitty_TJ_Body_5",#cumming
                     "True",       "Kitty_TJ_Body_0",#Static
                     ),
             "True","Kitty_TJ_Body_0",#Static
@@ -3947,7 +3947,7 @@ image Kitty_TJ_Tits:
             #base layer
 #            "images/KittyBJFace/Kitty_TJ_Tits.png"
         ConditionSwitch(
-            "Player.Sprite and Speed", "images/KittyBJFace/Kitty_TJ_Tits_Smooshed.png",
+            "Player.Sprite and action_speed", "images/KittyBJFace/Kitty_TJ_Tits_Smooshed.png",
             "True", "images/KittyBJFace/Kitty_TJ_Tits.png",
             )
 #    contains:
@@ -4081,7 +4081,7 @@ image Kitty_TJ_Body_0:
                 pos (640,150) #bottom #150
                 anchor (0.5,0.5)
                 zoom 0.4
-#End TJ animation Speed 0
+#End TJ animation action_speed 0
 
 
 image Kitty_TJ_Mask_1:
@@ -4173,7 +4173,7 @@ image Kitty_TJ_Body_1:
                     ease .8 ypos 500 #bottom
                     pause .4
                     repeat
-#End TJ animation Speed 1
+#End TJ animation action_speed 1
 
 
 image Kitty_TJ_Mask_2:
@@ -4266,7 +4266,7 @@ image Kitty_TJ_Body_2:
                     ease .27 ypos 500 #bottom
                     pause .01
                     repeat
-#End TJ animation Speed 2
+#End TJ animation action_speed 2
 
 
 image Kitty_TJ_Mask_3:
@@ -4420,7 +4420,7 @@ image Kitty_TJ_Body_3:
                 pos (665,500) #bottom #150
                 anchor (0.5,0.5)
                 zoom 0.4
-#End TJ animation Speed 3
+#End TJ animation action_speed 3
 
 
 image Kitty_TJ_Mask_5:
@@ -4550,26 +4550,26 @@ image Kitty_TJ_Body_5:
     #                ease .6 ypos 360 #bottom
     #                pause .2
     #                repeat
-#End TJ animation Speed 5 (cumming)
+#End TJ animation action_speed 5 (cumming)
 
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 
-label Kitty_TJ_Launch(Line = Trigger):    # The sequence to launch the Kitty Titfuck animations
+label Kitty_TJ_Launch(line = primary_action):    # The sequence to launch the Kitty Titfuck animations
     if renpy.showing("Kitty_TJ_Animation"):
         return
     call Kitty_Hide
     show Kitty_Sprite at sprite_location(KittyX.sprite_location) zorder KittyX.Layer:
         alpha 1
         ease 1 zoom 2 xpos 700 yoffset 50 #offset (-100,50)
-    if Line == "L" and Taboo:
+    if line == "L" and Taboo:
                 if len(Present) >= 2:
                     if Present[0] != KittyX:
-                            "[KittyX.Name] looks back at [Present[0].Name] to see if she's watching."
+                            "[KittyX.name] looks back at [Present[0].name] to see if she's watching."
                     elif Present[1] != KittyX:
-                            "[KittyX.Name] looks back at [Present[1].Name] to see if she's watching."
+                            "[KittyX.name] looks back at [Present[1].name] to see if she's watching."
                 else:
-                            "[KittyX.Name] casually glances around to see if anyone can see her."
+                            "[KittyX.name] casually glances around to see if anyone can see her."
     if KittyX.Chest and KittyX.Over:
         "She throws off her [KittyX.Over] and her [KittyX.Chest]."
     elif KittyX.Over:
@@ -4580,7 +4580,7 @@ label Kitty_TJ_Launch(Line = Trigger):    # The sequence to launch the Kitty Tit
     $ KittyX.Chest = 0
     $ KittyX.ArmPose = 0
     call Kitty_First_Topless      #restore if topless
-    if Line == "L":
+    if line == "L":
             if not KittyX.Tit:
                 "She hesitantly presses your cock against her chest."
             else:
@@ -4590,9 +4590,9 @@ label Kitty_TJ_Launch(Line = Trigger):    # The sequence to launch the Kitty Tit
     show blackscreen onlayer black with dissolve
     show Kitty_Sprite zorder KittyX.Layer:
         alpha 0
-    $ Speed = 0
-    if Line != "cum":
-        $ Trigger = "titjob"
+    $ action_speed = 0
+    if line != "cum":
+        $ primary_action = "titjob"
     show Kitty_TJ_Animation zorder 150
     $ Player.Sprite = 1
     hide blackscreen onlayer black with dissolve
@@ -4666,25 +4666,25 @@ transform Kitty_Hand_2():
 image Kitty_HJ_Animation:
     contains:
         ConditionSwitch(                                                # backside of the hand
-            "not Speed", Transform("Kitty_Hand_Under"),
-            "Speed == 1", At("Kitty_Hand_Under", Kitty_Hand_1()),
-            "Speed >= 2", At("Kitty_Hand_Under", Kitty_Hand_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Kitty_Hand_Under"),
+            "action_speed == 1", At("Kitty_Hand_Under", Kitty_Hand_1()),
+            "action_speed >= 2", At("Kitty_Hand_Under", Kitty_Hand_2()),
+            "action_speed", Null(),
             ),
     contains:
         ConditionSwitch(                                                # cock
-            "not Speed", Transform("Zero_Handcock"),
-            "Speed == 1", At("Zero_Handcock", Handcock_1()),
-            "Speed >= 2", At("Zero_Handcock", Handcock_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Zero_Handcock"),
+            "action_speed == 1", At("Zero_Handcock", Handcock_1()),
+            "action_speed >= 2", At("Zero_Handcock", Handcock_2()),
+            "action_speed", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(                                                # fingers of the hand
-            "not Speed", Transform("Kitty_Hand_Over"),
-            "Speed == 1", At("Kitty_Hand_Over", Kitty_Hand_1()),
-            "Speed >= 2", At("Kitty_Hand_Over", Kitty_Hand_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Kitty_Hand_Over"),
+            "action_speed == 1", At("Kitty_Hand_Over", Kitty_Hand_1()),
+            "action_speed >= 2", At("Kitty_Hand_Over", Kitty_Hand_2()),
+            "action_speed", Null(),
             ),
     anchor (0.51, -1.3)
     zoom 0.4#0.6
@@ -4693,7 +4693,7 @@ image Kitty_HJ_Animation:
 label Kitty_HJ_Reset: # The sequence to the Rogue animations from handjob to default
     if not renpy.showing("Kitty_HJ_Animation"):
             return
-    $ Speed = 0
+    $ action_speed = 0
     hide Kitty_HJ_Animation with easeoutbottom
     call Kitty_Hide
     show Kitty_Sprite at sprite_location(KittyX.sprite_location) zorder KittyX.Layer:
@@ -4709,9 +4709,9 @@ label Kitty_HJ_Reset: # The sequence to the Rogue animations from handjob to def
             zoom 1 offset (0,0)
     return
 
-label Kitty_Middle_Launch(T = Trigger,Set=1):
+label Kitty_Middle_Launch(T = primary_action,Set=1):
     call Kitty_Hide
-    $ Trigger = T
+    $ primary_action = T
     $ KittyX.Pose = "mid" if Set else KittyX.Pose
     show Kitty_Sprite at sprite_location(KittyX.sprite_location) zorder KittyX.Layer:
 #        ease 0.5 offset (-100,-200) zoom 2

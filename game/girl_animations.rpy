@@ -1,330 +1,330 @@
-label hide_girl(character, sprite = False):
-    call sex_reset(character)
+label hide_Girl(Girl, sprite = False):
+    call sex_reset(Girl)
 
-    $ renpy.hide(character.Tag + "_SexSprite")
-    $ renpy.hide(character.Tag + "_Doggy_Animation")
-    $ renpy.hide(character.Tag + "_HJ_Animation")
-    $ renpy.hide(character.Tag + "_BJ_Animation")
-    $ renpy.hide(character.Tag + "_TJ_Animation")
+    $ renpy.hide(Girl.Tag + "_SexSprite")
+    $ renpy.hide(Girl.Tag + "_Doggy_Animation")
+    $ renpy.hide(Girl.Tag + "_HJ_Animation")
+    $ renpy.hide(Girl.Tag + "_BJ_Animation")
+    $ renpy.hide(Girl.Tag + "_TJ_Animation")
 
-    if character == EmmaX:
-        $ renpy.hide(character.Tag + "_FJ_Animation")
+    if Girl == EmmaX:
+        $ renpy.hide(Girl.Tag + "_FJ_Animation")
 
-    if character == JeanX:
-        $ renpy.hide(character.Tag + "_PJ_Animation")
+    if Girl == JeanX:
+        $ renpy.hide(Girl.Tag + "_PJ_Animation")
 
     if sprite:
-        $ renpy.hide(character.Tag = "_Sprite")
+        $ renpy.hide(Girl.Tag = "_Sprite")
 
     return
 
-label reset_position(character, trigger = Trigger, set = True):
-    if character.Loc != bg_current:
+label reset_position(Girl, trigger = primary_action, set = True):
+    if Girl.Loc != bg_current:
         return
 
-    call hide_girl(character)
+    call hide_Girl(Girl)
 
-    if character == RogueX:
+    if Girl == RogueX:
         $ x_anchor = 0.6
     else:
         $ x_anchor = 0.5
 
-    show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         ease 0.5 offset (0,0) anchor (x_anchor, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
 
-    $ character.Pose = "full" if set else 0
-    $ Trigger = trigger
+    $ Girl.Pose = "full" if set else 0
+    $ primary_action = trigger
 
     return
 
-label kissing_launch(character, trigger = Trigger, set = True):
-    call hide_girl(character)
+label kissing_launch(Girl, trigger = primary_action, set = True):
+    call hide_Girl(Girl)
 
-    $ Trigger = trigger
+    $ primary_action = trigger
 
-    $ character.Pose = "kiss" if set else character.Pose
+    $ Girl.Pose = "kiss" if set else Girl.Pose
 
-    show expression character.Tag + "_Sprite" at sprite_location(StageCenter) zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" at sprite_location(StageCenter) zorder Girl.Layer:
         ease 0.5 offset (0, 0) zoom 2 alpha 1
 
     return
 
-label kissing_smooch(character):
-    call hide_girl(character)
+label kissing_smooch(Girl):
+    call hide_Girl(Girl)
 
-    $ character.FaceChange("kiss")
+    $ Girl.change_face("kiss")
 
-    show expression character.Tag + "_Sprite" at sprite_location(StageCenter) zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" at sprite_location(StageCenter) zorder Girl.Layer:
         ease 0.5 xpos StageCenter offset (0,0) zoom 2 alpha 1
         pause 1
-        ease 0.5 xpos character.sprite_location zoom 1
+        ease 0.5 xpos Girl.sprite_location zoom 1
 
-    $ character.FaceChange("sexy")
+    $ Girl.change_face("sexy")
 
     return
 
-label breasts_launch(character, trigger = Trigger, set = True):
-    call hide_girl(character)
+label breasts_launch(Girl, trigger = primary_action, set = True):
+    call hide_Girl(Girl)
 
-    $ Trigger = trigger
+    $ primary_action = trigger
 
-    $ character.Pose = "breasts" if set else character.Pose
+    $ Girl.Pose = "breasts" if set else Girl.Pose
 
-    show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         ease 0.5 pos (700,-50) zoom 2 offset (0,0) alpha 1
 
     return
 
-label pussy_launch(character, trigger = Trigger, set = True):
-    call hide_girl(character)
+label pussy_launch(Girl, trigger = primary_action, set = True):
+    call hide_Girl(Girl)
 
-    $ Trigger = trigger
+    $ primary_action = trigger
 
-    $ character.Pose = "pussy" if set else character.Pose
+    $ Girl.Pose = "pussy" if set else Girl.Pose
 
-    show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         ease 0.5 pos (700, -400) zoom 2 offset (0,0) alpha 1
 
     return
 
-label handjob_launch(character, trigger = Trigger):
-    if renpy.showing(character.Tag + "_HJ_Animation"):
-        $ Trigger = "hand"
+label handjob_launch(Girl, trigger = primary_action):
+    if renpy.showing(Girl.Tag + "_HJ_Animation"):
+        $ primary_action = "hand"
 
         return
 
-    call hide_girl(character)
+    call hide_Girl(Girl)
 
-    if character == RogueX:
-        $ character.Arms = 0
+    if Girl == RogueX:
+        $ Girl.Arms = 0
 
-    if character in [RogueX, EmmaX, LauraX, JeanX, JubesX]:
-        $ character.ArmPose = 1
-    elif character in [StormX]:
-        $ character.ArmPose = 2
+    if Girl in [RogueX, EmmaX, LauraX, JeanX, JubesX]:
+        $ Girl.ArmPose = 1
+    elif Girl in [StormX]:
+        $ Girl.ArmPose = 2
 
-    if character in [RogueX, KittyX, EmmaX]:
+    if Girl in [RogueX, KittyX, EmmaX]:
         $ x_offset = 0
         $ y_offset = 200
-    elif character in [LauraX, JubesX]:
+    elif Girl in [LauraX, JubesX]:
         $ x_offset = -150
         $ y_offset = 200
-    elif character in [JeanX, StormX]:
+    elif Girl in [JeanX, StormX]:
         $ x_offset = -150
         $ y_offset = 350
 
-    if character in [RogueX, LauraX]:
+    if Girl in [RogueX, LauraX]:
         if trigger == "L":
-            show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+            show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
                 alpha 1
                 ease 1 zoom 1.7 xpos 700 offset (x_offset, y_offset)
         else:
-            show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+            show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
                 alpha 1
                 ease 1 zoom 1.7 xpos 700 offset (x_offset, y_offset)
             with dissolve
-    elif character in [KittyX, EmmaX, JeanX, StormX]:
+    elif Girl in [KittyX, EmmaX, JeanX, StormX]:
         if trigger == "L":
-            show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+            show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
                 alpha 1
                 ease 1 zoom 1.7 offset (x_offset, y_offset)
         else:
-            show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+            show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
                 alpha 1
                 ease 1 zoom 1.7 offset (x_offset, y_offset)
             with dissolve
 
     if Taboo and trigger == "L":
         if len(Present) >= 2:
-            if Present[0] != character:
-                "[character.Name] looks back at [Present[0].Name] to see if she's watching."
-            elif Present[1] != character:
-                "[character.Name] looks back at [Present[1].Name] to see if she's watching."
+            if Present[0] != Girl:
+                "[Girl.name] looks back at [Present[0].name] to see if she's watching."
+            elif Present[1] != Girl:
+                "[Girl.name] looks back at [Present[1].name] to see if she's watching."
         else:
             $ line = renpy.random.choice(["casually glances around to see if anyone can see her"
                 "looks around to see if anyone can see her"])
 
-            "[character.Name] [line]."
+            "[Girl.name] [line]."
 
-        if character == RogueX and not character.Hand and character.Arms:
-            "As you pull out your cock, [character.Name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
+        if Girl == RogueX and not Girl.Hand and Girl.Arms:
+            "As you pull out your cock, [Girl.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
         else:
             "She then leans over and grabs your cock."
     elif trigger == "L":
-        if character == RogueX and not character.Hand and character.Arms:
-            "As you pull out your cock, [character.Name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
+        if Girl == RogueX and not Girl.Hand and Girl.Arms:
+            "As you pull out your cock, [Girl.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
         else:
-            "[character.Name] bends down and grabs your cock."
+            "[Girl.name] bends down and grabs your cock."
     else:
-        "[character.Name] bends down and grabs your cock."
+        "[Girl.name] bends down and grabs your cock."
 
-    $ Speed = 0
+    $ action_speed = 0
 
     if trigger != "cum":
-        $ Trigger = "hand"
+        $ primary_action = "hand"
 
     pause 0.5
 
-    if character in [RogueX]:
-        show expression character.Tag + "_HJ_Animation" at sprite_location(character.sprite_location) zorder 150 with easeinbottom
-    elif character in [KittyX, EmmaX]:
-        show expression character.Tag + "_HJ_Animation" at sprite_location(character.sprite_location) zorder 150 with easeinbottom:
+    if Girl in [RogueX]:
+        show expression Girl.Tag + "_HJ_Animation" at sprite_location(Girl.sprite_location) zorder 150 with easeinbottom
+    elif Girl in [KittyX, EmmaX]:
+        show expression Girl.Tag + "_HJ_Animation" at sprite_location(Girl.sprite_location) zorder 150 with easeinbottom:
             offset (100, 250)
-    elif character in [LauraX, JeanX, StormX, JubesX]:
-        show expression character.Tag + "_HJ_Animation" at sprite_location(character.sprite_location) zorder 150 with easeinbottom:
+    elif Girl in [LauraX, JeanX, StormX, JubesX]:
+        show expression Girl.Tag + "_HJ_Animation" at sprite_location(Girl.sprite_location) zorder 150 with easeinbottom:
             offset (250, 250)
 
     return
 
-label handjob_reset(character): # The sequence to the Rogue animations from handjob to default
-    if not renpy.showing(character.Tag + "_HJ_Animation"):
+label handjob_reset(Girl): # The sequence to the Rogue animations from handjob to default
+    if not renpy.showing(Girl.Tag + "_HJ_Animation"):
         return
 
-    $ Speed = 0
+    $ action_speed = 0
 
-    $ renpy.hide(character.Tag + "_HJ_Animation")
+    $ renpy.hide(Girl.Tag + "_HJ_Animation")
     with dissolve
 
-    call hide_girl(character)
+    call hide_Girl(Girl)
 
-    show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
         zoom 1.7 xpos 700 offset (0,200)
 
-    show expression character.Tag + "_Sprite" zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" zorder Girl.Layer:
         alpha 1
         ease 1 zoom 1.5 offset (0,50)
         pause .5
-        ease .5 zoom 1 xpos character.sprite_location yoffset 0
+        ease .5 zoom 1 xpos Girl.sprite_location yoffset 0
 
-    show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
-        zoom 1 xpos character.sprite_location yoffset 0
+        zoom 1 xpos Girl.sprite_location yoffset 0
 
     return
 
-label titjob_launch(character, trigger = Trigger):
-    if renpy.showing(character.Tag + "_TJ_Animation"):
+label titjob_launch(Girl, trigger = primary_action):
+    if renpy.showing(Girl.Tag + "_TJ_Animation"):
         return
 
-    call hide_girl(character)
+    call hide_Girl(Girl)
 
-    show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
         ease 1 zoom 2 xpos 550 offset (0,50)
 
     if Taboo: # Rogue gets started. . .
         if len(Present) >= 2:
             if Present[0] != RogueX:
-                "[character.Name] looks back at [Present[0].Name] to see if she's watching."
+                "[Girl.name] looks back at [Present[0].name] to see if she's watching."
             elif Present[1] != RogueX:
-                "[character.Name] looks back at [Present[1].Name] to see if she's watching."
+                "[Girl.name] looks back at [Present[1].name] to see if she's watching."
         else:
-            "[character.Name] looks around to see if anyone can see her."
+            "[Girl.name] looks around to see if anyone can see her."
 
-    if character.Chest and character.Over:
-        "She throws off her [character.Over] and her [character.Chest]."
-    elif character.Over:
-        "She throws off her [character.Over], baring her breasts underneath."
-    elif character.Chest:
-        "She tugs off her [character.Chest] and throws it aside."
+    if Girl.Chest and Girl.Over:
+        "She throws off her [Girl.Over] and her [Girl.Chest]."
+    elif Girl.Over:
+        "She throws off her [Girl.Over], baring her breasts underneath."
+    elif Girl.Chest:
+        "She tugs off her [Girl.Chest] and throws it aside."
 
-    $ character.Over = 0
-    $ character.Chest = 0
-    $ character.Arms = 0
+    $ Girl.Over = 0
+    $ Girl.Chest = 0
+    $ Girl.Arms = 0
 
-    call first_topless(character)
+    call first_topless(Girl)
 
-    if not character.Tit and trigger == "L": #first time
-        if not character.Chest and not character.Over:
-            "As you pull out your cock, [character.Name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
-        elif character.Chest and not character.Over:
-            "As you pull out your cock, [character.Name] hesitantly places it under her [character.Chest], between her breasts and starts to rub them up and down the shaft."
-        elif character.Chest and character.Over:
-            "As you pull out your cock, [character.Name] hesitantly places it under her [character.Over], between her breasts and starts to rub them up and down the shaft."
+    if not Girl.Tit and trigger == "L": #first time
+        if not Girl.Chest and not Girl.Over:
+            "As you pull out your cock, [Girl.name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
+        elif Girl.Chest and not Girl.Over:
+            "As you pull out your cock, [Girl.name] hesitantly places it under her [Girl.Chest], between her breasts and starts to rub them up and down the shaft."
+        elif Girl.Chest and Girl.Over:
+            "As you pull out your cock, [Girl.name] hesitantly places it under her [Girl.Over], between her breasts and starts to rub them up and down the shaft."
         else:
-            "As you pull out your cock, [character.Name] hesitantly places it under her clothes, between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [Girl.name] hesitantly places it under her clothes, between her breasts and starts to rub them up and down the shaft."
     elif trigger == "L": #any other time
-        if not character.Chest and not character.Over:
-            "As you pull out your cock, [character.Name] places it between her breasts and starts to rub them up and down the shaft."
-        elif character.Chest and not character.Over:
-            "As you pull out your cock, [character.Name] places it under her [character.Chest], between her breasts and starts to rub them up and down the shaft."
-        elif character.Chest and character.Over:
-            "As you pull out your cock, [character.Name] places it under her [character.Over], between her breasts and starts to rub them up and down the shaft."
+        if not Girl.Chest and not Girl.Over:
+            "As you pull out your cock, [Girl.name] places it between her breasts and starts to rub them up and down the shaft."
+        elif Girl.Chest and not Girl.Over:
+            "As you pull out your cock, [Girl.name] places it under her [Girl.Chest], between her breasts and starts to rub them up and down the shaft."
+        elif Girl.Chest and Girl.Over:
+            "As you pull out your cock, [Girl.name] places it under her [Girl.Over], between her breasts and starts to rub them up and down the shaft."
         else:
-            "As you pull out your cock, [character.Name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
+            "As you pull out your cock, [Girl.name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
     else:
-        "[character.Name] wraps her tits around your cock."
+        "[Girl.name] wraps her tits around your cock."
 
     show blackscreen onlayer black with dissolve
 
-    show expression character.Tag + "_Sprite" zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" zorder Girl.Layer:
         alpha 0
 
-    $ Speed = 0
+    $ action_speed = 0
 
     if trigger != "cum":
-        $ Trigger = "titjob"
+        $ primary_action = "titjob"
 
-    show expression character.Tag + "_TJ_Animation" at sprite_location(StageRight) zorder 150
+    show expression Girl.Tag + "_TJ_Animation" at sprite_location(StageRight) zorder 150
 
     hide blackscreen onlayer black with dissolve
 
     return
 
-label titjob_reset(character):
-    if not renpy.showing(character.Tag + "_TJ_Animation"):
+label titjob_reset(Girl):
+    if not renpy.showing(Girl.Tag + "_TJ_Animation"):
         return
 
-    call hide_girl(character)
+    call hide_Girl(Girl)
 
     $ Player.Sprite = 0
 
-    if character in [RogueX, KittyX, EmmaX]:
+    if Girl in [RogueX, KittyX, EmmaX]:
         $ initial_zoom = 2
         $ initial_y_offset = 50
-    elif character in [LauraX, JeanX, StormX, JubesX]:
+    elif Girl in [LauraX, JeanX, StormX, JubesX]:
         $ initial_zoom = 2.3
         $ initial_y_offset = -100
 
-    if character in [RogueX, KittyX, EmmaX, LauraX, JubesX]:
+    if Girl in [RogueX, KittyX, EmmaX, LauraX, JubesX]:
         $ initial_x_position = 550
-    elif character in [JeanX, StormX]:
+    elif Girl in [JeanX, StormX]:
         $ initial_x_position = 750
 
-    if character in [RogueX, EmmaX]:
+    if Girl in [RogueX, EmmaX]:
         $ mid_x_position = 500
-    elif character in [KittyX, LauraX, JeanX, StormX, JubesX]:
+    elif Girl in [KittyX, LauraX, JeanX, StormX, JubesX]:
         $ mid_x_position = 700
 
-    show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         zoom initial_zoom xpos initial_x_position yoffset initial_y_offset
-    show expression character.Tag + "_Sprite" zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" zorder Girl.Layer:
         alpha 1
         ease 1 zoom 1.5 xpos mid_x_position yoffset 50
         pause 0.5
-        ease 0.5 zoom 1 xpos character.sprite_location yoffset 0
-    show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+        ease 0.5 zoom 1 xpos Girl.sprite_location yoffset 0
+    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
-        zoom 1 xpos character.sprite_location yoffset 0
+        zoom 1 xpos Girl.sprite_location yoffset 0
 
-    "[character.Name] pulls back"
+    "[Girl.name] pulls back"
 
     return
 
-label blowjob_launch(character, trigger = Trigger):
-    if renpy.showing(character.Tag + "_BJ_Animation"):
+label blowjob_launch(Girl, trigger = primary_action):
+    if renpy.showing(Girl.Tag + "_BJ_Animation"):
         return
 
-    call hide_girl(character)
+    call hide_Girl(Girl)
 
     if trigger == "L" or trigger == "cum":
-        show expression character.Tag + "_Sprite" at sprite_location(StageCenter) zorder character.Layer:
+        show expression Girl.Tag + "_Sprite" at sprite_location(StageCenter) zorder Girl.Layer:
             alpha 1
             ease 1 zoom 2.5 offset (70,140) #(-90,140) offset (150,80)
         with dissolve
     else:
-        show expression character.Tag + "_Sprite" at sprite_location(StageCenter) zorder character.Layer:
+        show expression Girl.Tag + "_Sprite" at sprite_location(StageCenter) zorder Girl.Layer:
             alpha 1
             zoom 2.5 offset (70,140) #(-90,140)
         with dissolve
@@ -332,39 +332,39 @@ label blowjob_launch(character, trigger = Trigger):
     if Taboo and trigger == "L":
         if len(Present) >= 2:
             if Present[0] != RogueX:
-                "[character.Name] looks back at [Present[0].Name] to see if she's watching."
+                "[Girl.name] looks back at [Present[0].name] to see if she's watching."
             elif Present[1] != RogueX:
-                "[character.Name] looks back at [Present[1].Name] to see if she's watching."
+                "[Girl.name] looks back at [Present[1].name] to see if she's watching."
         else:
-            "[character.Name] looks around to see if anyone can see her."
+            "[Girl.name] looks around to see if anyone can see her."
     if trigger == "L":
-        if not character.Blow:
-            "[character.Name] hesitantly pulls down your pants and touches her mouth to your cock."
+        if not Girl.Blow:
+            "[Girl.name] hesitantly pulls down your pants and touches her mouth to your cock."
         else:
-            "[character.Name] bends down and begins to suck on your cock."
+            "[Girl.name] bends down and begins to suck on your cock."
 
-    $ Speed = 0
+    $ action_speed = 0
 
     if trigger != "cum":
-        $ Trigger = "blow"
+        $ primary_action = "blow"
 
-    show expression character.Tag + "_Sprite" zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" zorder Girl.Layer:
         alpha 0
 
-    show expression character.Tag + "_BJ_Animation" zorder 150:
+    show expression Girl.Tag + "_BJ_Animation" zorder 150:
         pos (645,510)
 
     return
 
-label blowjob_reset(character): # The sequence to the Rogue animations from BJ to default
-    if not renpy.showing(character.Tag + "_BJ_Animation"):
+label blowjob_reset(Girl): # The sequence to the Rogue animations from BJ to default
+    if not renpy.showing(Girl.Tag + "_BJ_Animation"):
         return
 
-    call hide_girl(character)
+    call hide_Girl(Girl)
 
-    $ Speed = 0
+    $ action_speed = 0
 
-    show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         zoom 2 offset (70,140)
         alpha 1
         block:
@@ -373,16 +373,16 @@ label blowjob_reset(character): # The sequence to the Rogue animations from BJ t
             pause .5
             ease .5 zoom 1 offset (0,0)
 
-    show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
         zoom 1 offset (0,0)
 
-    $ character.FaceChange("sexy")
+    $ Girl.change_face("sexy")
 
     return
 
-label sex_launch(character, trigger = Trigger):
-    $ Trigger3 = 0 if Trigger3 == "hand" else Trigger3
+label sex_launch(Girl, trigger = primary_action):
+    $ girl_offhand_action = 0 if girl_offhand_action == "hand" else girl_offhand_action
 
     $ trigger = "solo" if not trigger else trigger
 
@@ -391,18 +391,18 @@ label sex_launch(character, trigger = Trigger):
     if trigger == "sex":
         $ Player.Cock = "in"
 
-        if Trigger2 in ["fondle_pussy", "lick_pussy", "dildo_pussy"]:
-            $ Trigger2 = 0
+        if offhand_action in ["fondle_pussy", "lick_pussy", "dildo_pussy"]:
+            $ offhand_action = 0
     elif trigger == "anal":
         $ Player.Cock = "anal"
 
-        if Trigger2 in ["finger_ass", "lick_ass", "dildo_ass"]:
-            $ Trigger2 = 0
+        if offhand_action in ["finger_ass", "lick_ass", "dildo_ass"]:
+            $ offhand_action = 0
     elif trigger == "hotdog":
         $ Player.Cock = "out"
 
-        if character.PantsNum() == 5:
-            $ character.Upskirt = 1
+        if Girl.wearing_skirt:
+            $ Girl.Upskirt = 1
     elif trigger == "foot":
         $ ShowFeet = 1
 
@@ -414,101 +414,101 @@ label sex_launch(character, trigger = Trigger):
         $ Player.Sprite = 0
         $ Player.Cock = "out"
 
-        $ Speed = 0
+        $ action_speed = 0
 
-    $ Trigger = trigger
+    $ primary_action = trigger
 
-    if character.Pose == "doggy":
-        call doggy_launch(character, trigger)
+    if Girl.Pose == "doggy":
+        call doggy_launch(Girl, trigger)
 
         return
 
-    if renpy.showing(character.Tag + "_SexSprite"):
+    if renpy.showing(Girl.Tag + "_SexSprite"):
         return
 
-    $ Speed = 0
+    $ action_speed = 0
 
-    call hide_girl(character, sprite = True)
+    call hide_Girl(Girl, sprite = True)
 
-    if Trigger == "in" or Trigger == "anal":
-        if character.Legs or character.HoseNum() >= 5:
-            $ character.Upskirt = 1
+    if primary_action == "in" or primary_action == "anal":
+        if Girl.Legs or Girl.HoseNum() >= 5:
+            $ Girl.Upskirt = 1
 
-        if character.Panties:
-            $ character.PantiesDown = 1
+        if Girl.Panties:
+            $ Girl.PantiesDown = 1
 
-    if character in [RogueX, KittyX, JeanX, StormX]:
-        show expression character.Tag + "_SexSprite" zorder 150
-    elif character in [EmmaX]:
-        show expression character.Tag + "_SexSprite" zorder 150
+    if Girl in [RogueX, KittyX, JeanX, StormX]:
+        show expression Girl.Tag + "_SexSprite" zorder 150
+    elif Girl in [EmmaX]:
+        show expression Girl.Tag + "_SexSprite" zorder 150
             pos (575, 470)
-    elif character in [LauraX, JubesX]:
-        show expression character.Tag + "_SexSprite" zorder 150
+    elif Girl in [LauraX, JubesX]:
+        show expression Girl.Tag + "_SexSprite" zorder 150
             pos (450, 500)
 
     with dissolve
 
     return
 
-label sex_reset(character):
-    if renpy.showing(character.Tag + "_Doggy_Animation"):
-        call doggy_reset(character)
+label sex_reset(Girl):
+    if renpy.showing(Girl.Tag + "_Doggy_Animation"):
+        call doggy_reset(Girl)
 
         return
-    if not renpy.showing(character.Tag + "_SexSprite"):
+    if not renpy.showing(Girl.Tag + "_SexSprite"):
         return
 
-    $ character.ArmPose = 2
+    $ Girl.ArmPose = 2
 
-    hide_girl(character)
+    hide_Girl(Girl)
 
-    show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
         zoom 1 offset (0,0)
         anchor (0.5, 0.0)
     with dissolve
 
-    $ Speed = 0
+    $ action_speed = 0
 
     return
 
-label doggy_launch(character, trigger = Trigger):
-    if renpy.showing(character.Tag + "_Doggy_Animation"):
+label doggy_launch(Girl, trigger = primary_action):
+    if renpy.showing(Girl.Tag + "_Doggy_Animation"):
         return
 
-    $ Speed = 0
+    $ action_speed = 0
 
-    call hide_girl(character, sprite = True)
+    call hide_Girl(Girl, sprite = True)
 
-    show expression character.Tag + "_Doggy_Animation" at sprite_location(StageCenter+50) zorder 150
+    show expression Girl.Tag + "_Doggy_Animation" at sprite_location(StageCenter+50) zorder 150
     with dissolve
 
     return
 
-label doggy_reset(character):
-    if renpy.showing(character.Tag + "_Doggy_Animation"):
+label doggy_reset(Girl):
+    if renpy.showing(Girl.Tag + "_Doggy_Animation"):
         return
 
-    $ character.ArmPose = 2
-    $ character.SpriteVer = 0
+    $ Girl.ArmPose = 2
+    $ Girl.SpriteVer = 0
 
-    if character in [RogueX, KittyX]:
+    if Girl in [RogueX, KittyX]:
         x_anchor = 0.6
-    elif character in [EmmaX]:
+    elif Girl in [EmmaX]:
         x_anchor = 0.5
 
-    $ renpy.hide(expression character.Tag + "_Doggy_Animation")
+    $ renpy.hide(expression Girl.Tag + "_Doggy_Animation")
 
-    call hide_girl(character)
+    call hide_Girl(Girl)
 
-    show expression character.Tag + "_Sprite" at sprite_location(character.sprite_location) zorder character.Layer:
+    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
         zoom 1
         offset (0,0)
         anchor (x_anchor, 0.0)
     with dissolve
 
-    $ Speed = 0
+    $ action_speed = 0
 
     return
 
@@ -681,7 +681,7 @@ transform Rogue_BJ_MouthAnim():
 
 
 transform Rogue_Sex_Legs_FootAnim1A():
-        #this is the animation for Rogue's lower body during Footjobs, Speed 2 (slow)
+        #this is the animation for Rogue's lower body during Footjobs, action_speed 2 (slow)
             subpixel True
             offset (0,0) #X less is left, Y less is up
             block:
@@ -694,7 +694,7 @@ transform Rogue_Sex_Legs_FootAnim1A():
                 repeat
 
 transform Rogue_Sex_Legs_FootAnim2A():
-        #this is the animation for Rogue's lower body during Footjobs, Speed 2 (slow)
+        #this is the animation for Rogue's lower body during Footjobs, action_speed 2 (slow)
             subpixel True
             offset (0,0) #X less is left, Y less is up
             block:
@@ -742,7 +742,7 @@ transform Rogue_Footcock_Zero_Anim2A():
 
 
 image Rogue_Sex_Anal_Fucking2:
-    # This is the visual for her pussy during the Speed 2 mode (slow).
+    # This is the visual for her pussy during the action_speed 2 mode (slow).
     contains:
             # The background plate of her pussy
             "images/KittySex/Kitty_Sex_Hole_Open.png"
@@ -751,7 +751,7 @@ image Rogue_Sex_Anal_Fucking2:
             AlphaMask("Rogue_Anal_Zero_Anim2", "Rogue_Anal_Fucking_Mask")
 
 image Rogue_Sex_Anal_Fucking3:
-    # This is the visual for her pussy during the Speed 3 mode (fast).
+    # This is the visual for her pussy during the action_speed 3 mode (fast).
     contains:
             # The background plate of her pussy
             "images/KittySex/Kitty_Sex_Hole_Open.png"
@@ -829,7 +829,7 @@ transform Rogue_Footcock_StaticA():
                 repeat
 
 transform Rogue_Sex_Legs_FootAnimStaticA():
-        #this is the animation for Rogue's lower body during Footjobs, Speed 2 (slow)
+        #this is the animation for Rogue's lower body during Footjobs, action_speed 2 (slow)
             subpixel True
             offset (0,0) #X less is left, Y less is up
             block:
@@ -842,7 +842,7 @@ transform Rogue_Sex_Legs_FootAnimStaticA():
 
 
 transform Rogue_Sex_Body_FootAnim1A():
-        #this is the animation for Rogue's upper body during Footjobs, Speed 2 (slow)
+        #this is the animation for Rogue's upper body during Footjobs, action_speed 2 (slow)
             subpixel True
             offset (0,0) #X less is left, Y less is up
             block:
@@ -855,7 +855,7 @@ transform Rogue_Sex_Body_FootAnim1A():
                 repeat
 
 transform Rogue_Sex_Body_FootAnim2A():
-        #this is the animation for Rogue's upper body during Footjobs, Speed 2 (slow)
+        #this is the animation for Rogue's upper body during Footjobs, action_speed 2 (slow)
             subpixel True
             offset (0,0) #X less is left, Y less is up
             block:
@@ -873,7 +873,7 @@ transform Rogue_Sex_Body_FootAnim2A():
                 repeat
 
 transform Rogue_Sex_Body_FootAnimStaticA():
-        #this is the animation for Rogue's upper body during Footjobs, Speed 2 (slow)
+        #this is the animation for Rogue's upper body during Footjobs, action_speed 2 (slow)
             subpixel True
             offset (0,0) #X less is left, Y less is up
             block:
@@ -940,42 +940,42 @@ label Close_Launch(GirlA=0,GirlB=0,XLoc=0,YLoc=0,XZoom=0):  #rkelj
     # Girl is the lead, Partner is the other girl
     # the Loc and Zoom values are generated based on which is which
     if GirlB:
-            $ BO = [GirlA,GirlB]
+            $ Girls = [GirlA,GirlB]
     elif GirlA:
-            $ BO = [GirlA]
-    while BO:
-            if BO[0] == KittyX or BO[0] == LauraX:
-                $ BO[0].ArmPose = 1
+            $ Girls = [GirlA]
+    while Girls:
+            if Girls[0] == KittyX or Girls[0] == LauraX:
+                $ Girls[0].ArmPose = 1
             else:
-                $ BO[0].ArmPose = 2
+                $ Girls[0].ArmPose = 2
             $ YLoc = 100
-            if GirlA == BO[0]:
+            if GirlA == Girls[0]:
                     #If this girl is lead
-                    if BO[0] == KittyX:
+                    if Girls[0] == KittyX:
                         $ XLoc = 450
-                    elif BO[0] == RogueX:
+                    elif Girls[0] == RogueX:
                         $ XLoc = 550
                     else:
                         $ XLoc = 500
-                    $ BO[0].Layer = 100
+                    $ Girls[0].Layer = 100
                     $ XZoom = -1.3
-            elif GirlB == BO[0]:
+            elif GirlB == Girls[0]:
                     #If the other girl is lead
-                    if BO[0] == EmmaX or LauraX:
+                    if Girls[0] == EmmaX or LauraX:
                         $ XLoc = 700
                     else:
                         $ XLoc = 715
-                    $ BO[0].Layer = 75
+                    $ Girls[0].Layer = 75
                     $ XZoom = 1.3
 
-            if BO[0] in [RogueX, StormX, JubesX]:
+            if Girls[0] in [RogueX, StormX, JubesX]:
                 $ x_anchor = 0.6
-            elif BO[0] in [KittyX, EmmaX, LauraX, JeanX]:
+            elif Girls[0] in [KittyX, EmmaX, LauraX, JeanX]:
                 $ x_anchor = 0.5
 
-            call hide_girl(BO[0])
+            call hide_Girl(Girls[0])
 
-            show expression BO[0].Tag + "_Sprite" at sprite_location(XLoc,YLoc) zorder BO[0].Layer:
+            show expression Girls[0].Tag + "_Sprite" at sprite_location(XLoc,YLoc) zorder Girls[0].Layer:
                 alpha 1
                 zoom 1
                 xzoom XZoom
@@ -983,7 +983,7 @@ label Close_Launch(GirlA=0,GirlB=0,XLoc=0,YLoc=0,XZoom=0):  #rkelj
                 offset (0,0)
                 anchor (x_anchor, 0.0)
 
-            $ BO.remove(BO[0])
+            $ Girls.remove(Girls[0])
     return
 
 #Lesbian action animations.
@@ -1108,64 +1108,64 @@ image GirlFingerPussy:
 
 
 
-label Les_Launch(Girl=0,XLoc=0,YLoc=0,XZoom=0,BO=[]): #rkeljs
+label Les_Launch(Girl=0,XLoc=0,YLoc=0,XZoom=0,Girls=[]): #rkeljs
     # Launches the lesbian sex positions
     # Girl is the lead, Partner is the other girl
     # the Loc and Zoom values are generated based on which is which
-    if Partner not in TotalGirls:
+    if Partner not in all_Girls:
             return
-    $ BO = [Girl,Partner]
-    while BO:
-            if "unseen" in BO[0].RecentActions:
-                        $ BO[0].Eyes = "closed"
-            elif Girl == BO[0]:
+    $ Girls = [Girl,Partner]
+    while Girls:
+            if "unseen" in Girls[0].recent_history:
+                        $ Girls[0].Eyes = "closed"
+            elif Girl == Girls[0]:
                 if Girl == RogueX:
-                        $ BO[0].Eyes = "side"
+                        $ Girls[0].Eyes = "side"
                 elif Girl == EmmaX:
-                        $ BO[0].Eyes = "sly"
+                        $ Girls[0].Eyes = "sly"
                 else:
-                        $ BO[0].Eyes = "leftside"
+                        $ Girls[0].Eyes = "leftside"
             else:
-                        $ BO[0].Eyes = "side"
+                        $ Girls[0].Eyes = "side"
 
-            if BO[0] == KittyX or BO[0] == LauraX:
-                $ BO[0].ArmPose = 1
+            if Girls[0] == KittyX or Girls[0] == LauraX:
+                $ Girls[0].ArmPose = 1
             else:
-                $ BO[0].ArmPose = 2
+                $ Girls[0].ArmPose = 2
             $ YLoc = 100
-            if Girl == BO[0]:
+            if Girl == Girls[0]:
                     #If this girl is lead
-                    if BO[0] == KittyX:
+                    if Girls[0] == KittyX:
                         $ XLoc = 450
-                    elif BO[0] == RogueX:
+                    elif Girls[0] == RogueX:
                         $ XLoc = 550
                     else:
                         $ XLoc = 500
-                    $ BO[0].Layer = 100
+                    $ Girls[0].Layer = 100
                     $ XZoom = -1.3
-            else: #Partner == BO[0]:
+            else: #Partner == Girls[0]:
                     #If the other girl is lead
-                    if BO[0] == EmmaX or LauraX:
+                    if Girls[0] == EmmaX or LauraX:
                         $ XLoc = 700
                     else:
                         $ XLoc = 715
-                    if BO[0] == KittyX:
-                            if character in (Partner,Girl):
+                    if Girls[0] == KittyX:
+                            if Girl in (Partner,Girl):
                                     $ KittyX.Layer = 100
                             else:
                                     $ KittyX.Layer = 25
                     else:
-                                    $ BO[0].Layer = 75
+                                    $ Girls[0].Layer = 75
                     $ XZoom = 1.3
 
-            if BO[0] in [RogueX, StormX, JubesX]:
+            if Girls[0] in [RogueX, StormX, JubesX]:
                 $ x_anchor = 0.6
-            elif BO[0] in [KittyX, EmmaX, LauraX, JeanX]:
+            elif Girls[0] in [KittyX, EmmaX, LauraX, JeanX]:
                 $ x_anchor = 0.5
 
-            call hide_girl(BO[0])
+            call hide_Girl(Girls[0])
 
-            show expression BO[0].Tag + "_Sprite" at sprite_location(XLoc,YLoc) zorder BO[0].Layer:
+            show expression Girls[0].Tag + "_Sprite" at sprite_location(XLoc,YLoc) zorder Girls[0].Layer:
                 alpha 1
                 zoom 1
                 xzoom XZoom
@@ -1173,14 +1173,14 @@ label Les_Launch(Girl=0,XLoc=0,YLoc=0,XZoom=0,BO=[]): #rkeljs
                 offset (0,0)
                 anchor (x_anchor, 0.0)
 
-            $ BO.remove(BO[0])
+            $ Girls.remove(Girls[0])
     return
 
 
 
-transform Girl_Dance1(Chr=Ch_Focus):
+transform Girl_Dance1(Girl=focused_Girl):
         subpixel True
-        pos (Chr.sprite_location, 50)
+        pos (Girl.sprite_location, 50)
         xoffset 0
         yoffset 0
         choice:

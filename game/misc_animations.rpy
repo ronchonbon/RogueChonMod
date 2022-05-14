@@ -348,15 +348,15 @@ image PhoneScreen:
     contains:
         #backdrop
         ConditionSwitch(
-            "Ch_Focus.Loc == 'bg rogue'","PhoneRG",
-            "Ch_Focus.Loc == 'bg kitty'", "bg_kitty",
-            "Ch_Focus.Loc == 'bg emma'", "bg_emma",
-            "Ch_Focus.Loc == 'bg laura'", "bg_laura",
-            "Ch_Focus.Loc == 'bg jean'", "bg_jean",
-            "Ch_Focus.Loc == 'bg storm'", "bg_storm",
-            "Ch_Focus.Loc == 'bg jubes'", "bg_jubes",
-            "Ch_Focus.Loc == 'bg classroom'", "bg_class",
-            "Ch_Focus.Loc == 'bg teacher'", "bg_class",
+            "focused_Girl.Loc == 'bg rogue'","PhoneRG",
+            "focused_Girl.Loc == 'bg kitty'", "bg_kitty",
+            "focused_Girl.Loc == 'bg emma'", "bg_emma",
+            "focused_Girl.Loc == 'bg laura'", "bg_laura",
+            "focused_Girl.Loc == 'bg jean'", "bg_jean",
+            "focused_Girl.Loc == 'bg storm'", "bg_storm",
+            "focused_Girl.Loc == 'bg jubes'", "bg_jubes",
+            "focused_Girl.Loc == 'bg classroom'", "bg_class",
+            "focused_Girl.Loc == 'bg teacher'", "bg_class",
             "True", "bg_shower",
             )
         offset (-800,-300)
@@ -364,13 +364,13 @@ image PhoneScreen:
     contains:
         #girl
         ConditionSwitch(
-            "Ch_Focus.Tag == 'Rogue'", "Rogue_Sprite",
-            "Ch_Focus.Tag == 'Kitty'", "Kitty_Sprite",
-            "Ch_Focus.Tag == 'Emma'", "Emma_Sprite",
-            "Ch_Focus.Tag == 'Laura'", "Laura_Sprite",
-            "Ch_Focus.Tag == 'Jean'", "Jean_Sprite",
-            "Ch_Focus.Tag == 'Storm'", "Storm_Sprite",
-            "Ch_Focus.Tag == 'Jubes'", "Jubes_Sprite",
+            "focused_Girl.Tag == 'Rogue'", "Rogue_Sprite",
+            "focused_Girl.Tag == 'Kitty'", "Kitty_Sprite",
+            "focused_Girl.Tag == 'Emma'", "Emma_Sprite",
+            "focused_Girl.Tag == 'Laura'", "Laura_Sprite",
+            "focused_Girl.Tag == 'Jean'", "Jean_Sprite",
+            "focused_Girl.Tag == 'Storm'", "Storm_Sprite",
+            "focused_Girl.Tag == 'Jubes'", "Jubes_Sprite",
             "True", Null(),
             )
         pos (0,0)
@@ -402,10 +402,10 @@ image DressShadow:
             "JeanX.Layer == 100", "Jean_Sprite",
             "StormX.Layer == 100", "Storm_Sprite",
             "JubesX.Layer == 100", "Jubes_Sprite",
-#            "Ch_Focus == RogueX", "Rogue_Sprite",
-#            "Ch_Focus == 'Kitty'", "Kitty_Sprite",
-#            "Ch_Focus == 'Emma'", "Emma_Sprite",
-#            "Ch_Focus == 'Laura'", "Laura_Sprite",
+#            "focused_Girl == RogueX", "Rogue_Sprite",
+#            "focused_Girl == 'Kitty'", "Kitty_Sprite",
+#            "focused_Girl == 'Emma'", "Emma_Sprite",
+#            "focused_Girl == 'Laura'", "Laura_Sprite",
             "True", Null(),
             )
         offset (210,-170)

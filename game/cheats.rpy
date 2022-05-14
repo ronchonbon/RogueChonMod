@@ -1,74 +1,74 @@
-label StatHacks(Chr=0,Cnt=0):
+label StatHacks(Girl=0,counter=0):
     while True:
             menu:
-                "[Chr.Name]: Love: [Chr.Love], Obedience: [Chr.Obed], Inhibition:[Chr.Inbt], Lust: [Chr.Lust] Taboo: [Taboo], Location: [Chr.Loc]"
+                "[Girl.name]: love: [Girl.love], obedienceience: [Girl.obedience], Inhibition:[Girl.inhibition], lust: [Girl.lust] Taboo: [Taboo], Location: [Girl.Loc]"
                 "Activities":
                     menu:
                         "Recent Actions":
-                            "[Chr.RecentActions]"
+                            "[Girl.recent_history]"
                         "Daily Actions":
-                            "[Chr.DailyActions]"
+                            "[Girl.daily_history]"
                         "Traits":
-                            "[Chr.Traits]"
+                            "[Girl.Traits]"
                         "History":
-                            "[Chr.History]"
+                            "[Girl.History]"
                 "Gwen's face" if False:
                     call Gwen_FaceEditor
-                "Raise Love":
-                    $ Chr.Love += 100
-                "Lower Love":
-                    $ Chr.Love -= 100
-                "Raise Obedience":
-                    $ Chr.Obed += 100
-                "Lower Obedience":
-                    $ Chr.Obed -= 100
+                "Raise love":
+                    $ Girl.love += 100
+                "Lower love":
+                    $ Girl.love -= 100
+                "Raise obedienceience":
+                    $ Girl.obedience += 100
+                "Lower obedienceience":
+                    $ Girl.obedience -= 100
                 "Raise Inhibitions":
-                    $ Chr.Inbt += 100
+                    $ Girl.inhibition += 100
                 "Lower Inhibitions":
-                    $ Chr.Inbt -= 100
+                    $ Girl.inhibition -= 100
                 "Taboo toggle":
                     $ Taboo = 40 if Taboo != 40 else 0
                     "[Taboo]"
                 "Small":
-                    $ Cnt = 1
-                    while Cnt:
+                    $ counter = 1
+                    while counter:
                         menu:
-                            "Raise Love":
-                                $ Chr.Love += 10
-                            "Lower Love":
-                                $ Chr.Love -= 10
-                            "Raise Obedience":
-                                $ Chr.Obed += 10
-                            "Lower Obedience":
-                                $ Chr.Obed -= 10
+                            "Raise love":
+                                $ Girl.love += 10
+                            "Lower love":
+                                $ Girl.love -= 10
+                            "Raise obedienceience":
+                                $ Girl.obedience += 10
+                            "Lower obedienceience":
+                                $ Girl.obedience -= 10
                             "Raise Inhibitions":
-                                $ Chr.Inbt += 10
+                                $ Girl.inhibition += 10
                             "Lower Inhibitions":
-                                $ Chr.Inbt -= 10
+                                $ Girl.inhibition -= 10
                             "Back":
-                                $ Cnt = 0
+                                $ counter = 0
                 "Other":
                     menu:
-                        "Raise Lust":
-                            $ Chr.Lust += 10
-                        "Lower Lust":
-                            $ Chr.Lust -= 10
+                        "Raise lust":
+                            $ Girl.lust += 10
+                        "Lower lust":
+                            $ Girl.lust -= 10
                         "Raise Addiction":
-                            $ Chr.Addict += 10
+                            $ Girl.Addict += 10
                         "Lower Addiction":
-                            $ Chr.Addict -= 10
+                            $ Girl.Addict -= 10
                         "Back":
                             pass
                 "Wardrobe":
-                    call WardrobeEditor(Chr)
+                    call WardrobeEditor(Girl)
 
                 "Return":
                     call Checkout
                     return
 
 label Cheat_Menu(Girl=0):
-        if Girl not in TotalGirls:
-                $ Girl = Ch_Focus
+        if Girl not in all_Girls:
+                $ Girl = focused_Girl
         menu:
             "Level-Up":
                 $ Girl.Hand += 5
@@ -113,28 +113,28 @@ label Cheat_Menu(Girl=0):
                 else:
                     $ Taboo = 0
             "Maxed":
-                    $ Girl.Love = 1000
-                    $ Girl.Inbt = 1000
-                    $ Girl.Obed = 1000
-                    $ Girl.Lust = 50
+                    $ Girl.love = 1000
+                    $ Girl.inhibition = 1000
+                    $ Girl.obedience = 1000
+                    $ Girl.lust = 50
                     $ Girl.Addict = 0 #how addicted she is
                     $ Girl.Addictionrate = 0 #How faster her addiciton rises
                     $ Girl.Kissed = 1 #How many times they've kissed
                     $ Girl.Swallow = 0
             "50\%":
-                    $ Girl.Love = 500
-                    $ Girl.Inbt = 500
-                    $ Girl.Obed = 500
-                    $ Girl.Lust = 65
+                    $ Girl.love = 500
+                    $ Girl.inhibition = 500
+                    $ Girl.obedience = 500
+                    $ Girl.lust = 65
                     $ Girl.Addict = 0 #how addicted she is
                     $ Girl.Addictionrate = 10 #How faster her addiciton rises
                     $ Girl.Kissed = 10 #How many times they've kissed
                     $ Girl.Swallow = 0
             "25\%":
-                    $ Girl.Love = 250
-                    $ Girl.Inbt = 250
-                    $ Girl.Obed = 250
-                    $ Girl.Lust = 85
+                    $ Girl.love = 250
+                    $ Girl.inhibition = 250
+                    $ Girl.obedience = 250
+                    $ Girl.lust = 85
                     $ Girl.Addict = 10 #how addicted she is
                     $ Girl.Addictionrate = 50 #How faster her addiciton rises
                     $ Girl.Kissed = 10 #How many times they've kissed

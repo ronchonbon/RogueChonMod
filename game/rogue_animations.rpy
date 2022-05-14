@@ -234,7 +234,7 @@ image Rogue_Pussy_Fucking2:
 
         #Cock
         ConditionSwitch(
-            "Trigger == 'dildo pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
+            "primary_action == 'dildo pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
             "True",AlphaMask("Zero_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
             ),
 
@@ -458,7 +458,7 @@ image Rogue_Anal_Fucking:
         #Cock
         ConditionSwitch(
             #full hose/tights
-            "Trigger == 'dildo anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
+            "primary_action == 'dildo anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
             "True", AlphaMask("Zero_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
             ),
 
@@ -668,7 +668,7 @@ image Rogue_Doggy_Feet2:
 
 
 image Rogue_Sex_Pussy_Fucking0:
-    # This is the visual for her pussy during the Speed 0 mode (static).
+    # This is the visual for her pussy during the action_speed 0 mode (static).
     contains:
             # The background plate of her pussy
             "images/RogueSex/Rogue_Sex_Pussy_Open.png"
@@ -683,7 +683,7 @@ image Rogue_Sex_Pussy_Fucking0:
             AlphaMask("Rogue_Sex_Zero_Anim0", "Rogue_Pussy_Open_Mask")
 
 image Rogue_Sex_Pussy_Fucking1:
-    # This is the visual for her pussy during the Speed 1 mode (heading).
+    # This is the visual for her pussy during the action_speed 1 mode (heading).
     contains:
             # The background plate of her pussy
             "images/RogueSex/Rogue_Sex_Pussy_Open.png"
@@ -698,7 +698,7 @@ image Rogue_Sex_Pussy_Fucking1:
             AlphaMask("Rogue_Sex_Zero_Anim1", "Rogue_Pussy_Open_Mask")
 
 image Rogue_Sex_Pussy_Fucking2:
-    # This is the visual for her pussy during the Speed 2 mode (slow).
+    # This is the visual for her pussy during the action_speed 2 mode (slow).
     contains:
             # The background plate of her pussy
             "images/RogueSex/Rogue_Sex_Pussy_Fucking.png"
@@ -713,7 +713,7 @@ image Rogue_Sex_Pussy_Fucking2:
             AlphaMask("Rogue_Sex_Zero_Anim2", "Rogue_Pussy_Fucking_Mask")
 
 image Rogue_Sex_Pussy_Fucking3:  #rename this to 3
-    # This is the visual for her pussy during the Speed 3 mode (fast).
+    # This is the visual for her pussy during the action_speed 3 mode (fast).
     contains:
             # The background plate of her pussy
             "images/RogueSex/Rogue_Sex_Pussy_Fucking.png"
@@ -745,47 +745,47 @@ image Rogue_Sex_Pussy_Spunk_Heading:
     xzoom 0.8
 
 image Rogue_Sex_Pussy:
-    # This is the visual for her pussy during the Speed 0 mode (static).
+    # This is the visual for her pussy during the action_speed 0 mode (static).
     contains:
             # The background plate of her pussy
             ConditionSwitch(
-                "Player.Sprite and Player.Cock == 'in' and Speed >= 2", "images/RogueSex/Rogue_Sex_Pussy_Fucking.png",
-                "Player.Sprite and Player.Cock == 'in' and Speed", "images/RogueSex/Rogue_Sex_Pussy_Open.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/RogueSex/Rogue_Sex_Pussy_Fucking.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed", "images/RogueSex/Rogue_Sex_Pussy_Open.png",
                 "Player.Sprite and Player.Cock == 'in'", "images/RogueSex/Rogue_Sex_Pussy_Closed.png",
-                "Trigger == 'dildo pussy'", "images/RogueSex/Rogue_Sex_Pussy_Fucking.png",
-                "Trigger == 'lick pussy' or Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'", "images/RogueSex/Rogue_Sex_Pussy_Open.png",
+                "primary_action == 'dildo pussy'", "images/RogueSex/Rogue_Sex_Pussy_Fucking.png",
+                "primary_action == 'lick pussy' or primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'", "images/RogueSex/Rogue_Sex_Pussy_Open.png",
                 "True", "images/RogueSex/Rogue_Sex_Pussy_Closed.png",
                 )
     contains:
             # The background plate of her pussy
             ConditionSwitch(
                 "not RogueX.Wet", Null(),
-                "Player.Sprite and Player.Cock == 'in' and Speed >= 2", "images/KittySex/Kitty_Sex_WetPussy_F.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/KittySex/Kitty_Sex_WetPussy_F.png",
                 "True", "images/KittySex/Kitty_Sex_WetPussy_C.png",
                 )
     contains:
             #ring piercing
             ConditionSwitch(
                 "RogueX.Pierce != 'ring'", Null(),
-                "not Player.Sprite or Player.Cock != 'in' or Speed <= 1", "images/RogueSex/Rogue_Sex_Pussy_Ring.png",
+                "not Player.Sprite or Player.Cock != 'in' or action_speed <= 1", "images/RogueSex/Rogue_Sex_Pussy_Ring.png",
                 "True", "images/RogueSex/Rogue_Sex_Pussy_RingF.png",
                 )
     contains:
             #barbell piercing
             ConditionSwitch(
                 "RogueX.Pierce != 'barbell'", Null(),
-                "not Player.Sprite or Player.Cock != 'in' or Speed <= 1", "images/RogueSex/Rogue_Sex_Pussy_Barbell.png",
+                "not Player.Sprite or Player.Cock != 'in' or action_speed <= 1", "images/RogueSex/Rogue_Sex_Pussy_Barbell.png",
                 "True", "images/RogueSex/Rogue_Sex_Pussy_BarbellF.png",
                 )
     contains:
             # pubes
             ConditionSwitch(
                 "not RogueX.Pubes", Null(),
-                "Player.Sprite and Player.Cock == 'in' and Speed >= 2", "images/RogueSex/Rogue_Sex_Pubes_Fucking.png",
-                "Player.Sprite and Player.Cock == 'in' and Speed", "images/RogueSex/Rogue_Sex_Pubes_Open.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/RogueSex/Rogue_Sex_Pubes_Fucking.png",
+                "Player.Sprite and Player.Cock == 'in' and action_speed", "images/RogueSex/Rogue_Sex_Pubes_Open.png",
                 "Player.Sprite and Player.Cock == 'in'", "images/RogueSex/Rogue_Sex_Pubes_Closed.png",
-                "Trigger == 'lick pussy' or Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'", "images/RogueSex/Rogue_Sex_Pubes_Open.png",
-                "Trigger == 'dildo pussy'", "images/RogueSex/Rogue_Sex_Pubes_Fucking.png",
+                "primary_action == 'lick pussy' or primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'", "images/RogueSex/Rogue_Sex_Pubes_Open.png",
+                "primary_action == 'dildo pussy'", "images/RogueSex/Rogue_Sex_Pubes_Fucking.png",
                 "True", "images/RogueSex/Rogue_Sex_Pubes_Closed.png",
                 )
     contains:
@@ -797,19 +797,19 @@ image Rogue_Sex_Pussy:
     contains:
             # The animation of Zero's moving penis, masked by her pussy shape
             ConditionSwitch(
-                "Player.Sprite and Player.Cock == 'in' and Speed >= 3", AlphaMask("Rogue_Sex_Zero_Anim3", "Rogue_Pussy_Fucking_Mask"),
-                "Player.Sprite and Player.Cock == 'in' and Speed >= 2", AlphaMask("Rogue_Sex_Zero_Anim2", "Rogue_Pussy_Fucking_Mask"),
-                "Player.Sprite and Player.Cock == 'in' and Speed", AlphaMask("Rogue_Sex_Zero_Anim1", "Rogue_Pussy_Open_Mask"),
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 3", AlphaMask("Rogue_Sex_Zero_Anim3", "Rogue_Pussy_Fucking_Mask"),
+                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", AlphaMask("Rogue_Sex_Zero_Anim2", "Rogue_Pussy_Fucking_Mask"),
+                "Player.Sprite and Player.Cock == 'in' and action_speed", AlphaMask("Rogue_Sex_Zero_Anim1", "Rogue_Pussy_Open_Mask"),
                 "Player.Sprite and Player.Cock == 'in'", AlphaMask("Rogue_Sex_Zero_Anim0", "Rogue_Pussy_Open_Mask"),
-                "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'", AlphaMask("Rogue_Sex_FingerP_Anim1", "Rogue_Pussy_Open_Mask"),
-                "Trigger == 'dildo pussy'", AlphaMask("Rogue_Sex_Dildo_Anim2", "Rogue_Pussy_Fucking_Mask"),
+                "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'", AlphaMask("Rogue_Sex_FingerP_Anim1", "Rogue_Pussy_Open_Mask"),
+                "primary_action == 'dildo pussy'", AlphaMask("Rogue_Sex_Dildo_Anim2", "Rogue_Pussy_Fucking_Mask"),
                 "True", Null(),
                 )
     contains:
             #Spunk over penis
             ConditionSwitch(
-                "'in' not in RogueX.Spunk or not Player.Sprite or Player.Cock != 'in' or not Speed", Null(),
-                "Speed <= 1", "Rogue_Sex_Pussy_Spunk_Heading",
+                "'in' not in RogueX.Spunk or not Player.Sprite or Player.Cock != 'in' or not action_speed", Null(),
+                "action_speed <= 1", "Rogue_Sex_Pussy_Spunk_Heading",
                 "True", "images/KittySex/Kitty_Sex_Spunk_Puss_Over.png",
                 )
 
@@ -819,7 +819,7 @@ image Rogue_Sex_Pussy:
 
 #Start Animations for Rogue's Legs during Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 image Rogue_Sex_Legs_Anim1:
-        #this is the animation for Rogue's lower body during sex, Speed 1 (heading)
+        #this is the animation for Rogue's lower body during sex, action_speed 1 (heading)
         contains:
             subpixel True
             "Rogue_Sex_Legs"
@@ -833,7 +833,7 @@ image Rogue_Sex_Legs_Anim1:
                 repeat
 
 image Rogue_Sex_Legs_Anim2:
-        #this is the animation for Rogue's lower body during sex, Speed 2 (slow)
+        #this is the animation for Rogue's lower body during sex, action_speed 2 (slow)
         contains:
             subpixel True
             "Rogue_Sex_Legs"
@@ -848,7 +848,7 @@ image Rogue_Sex_Legs_Anim2:
                 repeat
 
 image Rogue_Sex_Legs_Anim3:
-        #this is the animation for Rogue's lower body during sex, Speed 3 (fast)
+        #this is the animation for Rogue's lower body during sex, action_speed 3 (fast)
         contains:
             subpixel True
             "Rogue_Sex_Legs"
@@ -865,7 +865,7 @@ image Rogue_Sex_Legs_Anim3:
 
 #Start Animations for Rogue's Body during Sex / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 image Rogue_Sex_Body_Anim1:
-        #this is the animation for Rogue's upper body during sex, Speed 1 (heading)
+        #this is the animation for Rogue's upper body during sex, action_speed 1 (heading)
         contains:
             subpixel True
             "Rogue_Sex_Body"
@@ -879,7 +879,7 @@ image Rogue_Sex_Body_Anim1:
                 repeat
 
 image Rogue_Sex_Body_Anim2:
-        #this is the animation for Rogue's upper body during sex, Speed 2 (slow)
+        #this is the animation for Rogue's upper body during sex, action_speed 2 (slow)
         contains:
             subpixel True
             "Rogue_Sex_Body"
@@ -894,7 +894,7 @@ image Rogue_Sex_Body_Anim2:
                 repeat
 
 image Rogue_Sex_Body_Anim3:
-        #this is the animation for Rogue's upper body during sex, Speed 3 (fast)
+        #this is the animation for Rogue's upper body during sex, action_speed 3 (fast)
         contains:
             subpixel True
             "Rogue_Sex_Body"
@@ -919,12 +919,12 @@ image Rogue_Sex_Anus:
     contains:
             #Anus background plate
             ConditionSwitch(
-            "Player.Sprite and Player.Cock == 'anal' and Speed >= 3", "images/KittySex/Kitty_Sex_Hole_Open.png",
-            "Player.Sprite and Player.Cock == 'anal' and Speed >= 2", "images/KittySex/Kitty_Sex_Hole_Open.png",
-            "Player.Sprite and Player.Cock == 'anal' and Speed", "Rogue_Sex_Anal_Heading",
+            "Player.Sprite and Player.Cock == 'anal' and action_speed >= 3", "images/KittySex/Kitty_Sex_Hole_Open.png",
+            "Player.Sprite and Player.Cock == 'anal' and action_speed >= 2", "images/KittySex/Kitty_Sex_Hole_Open.png",
+            "Player.Sprite and Player.Cock == 'anal' and action_speed", "Rogue_Sex_Anal_Heading",
             "Player.Sprite and Player.Cock == 'anal'", "Rogue_Sex_Anal_Tip",
-            "Trigger == 'insert ass' or Trigger2 == 'insert ass'", "Rogue_Sex_Anal_Tip",
-            "Trigger == 'dildo anal'", "images/KittySex/Kitty_Sex_Hole_Open.png",
+            "primary_action == 'insert ass' or offhand_action == 'insert ass'", "Rogue_Sex_Anal_Tip",
+            "primary_action == 'dildo anal'", "images/KittySex/Kitty_Sex_Hole_Open.png",
             "RogueX.Loose", "images/RogueSex/Rogue_Sex_Hole_Loose.png",
             "True", "images/RogueSex/Rogue_Sex_Hole_Tight.png",
             )
@@ -932,32 +932,32 @@ image Rogue_Sex_Anus:
             #Spunk under penis
             ConditionSwitch(
                 "'anal' not in RogueX.Spunk", Null(),
-                "Player.Sprite and Player.Cock != 'anal' and Speed >= 1", "images/KittySex/Kitty_Sex_Spunk_Anal_Under.png",
-                "Player.Sprite and Player.Cock != 'anal' and Speed == 1", "Rogue_Anal_Spunk_Heading_Under",
+                "Player.Sprite and Player.Cock != 'anal' and action_speed >= 1", "images/KittySex/Kitty_Sex_Spunk_Anal_Under.png",
+                "Player.Sprite and Player.Cock != 'anal' and action_speed == 1", "Rogue_Anal_Spunk_Heading_Under",
                 "True", "images/KittySex/Kitty_Sex_Spunk_Anal_Closed.png",
                 )
     contains:
             # The animation of Zero's moving penis, masked by her anus shape
             ConditionSwitch(
-            "Trigger == 'insert ass' or Trigger2 == 'insert ass'", AlphaMask("Rogue_Sex_FingerA_Anim1", "Rogue_Anal_Fucking_Mask"),
-            "Trigger == 'dildo anal'", AlphaMask("Rogue_Anal_Dildo_Anim2", "Rogue_Anal_Fucking_Mask"),
+            "primary_action == 'insert ass' or offhand_action == 'insert ass'", AlphaMask("Rogue_Sex_FingerA_Anim1", "Rogue_Anal_Fucking_Mask"),
+            "primary_action == 'dildo anal'", AlphaMask("Rogue_Anal_Dildo_Anim2", "Rogue_Anal_Fucking_Mask"),
             "not Player.Sprite or Player.Cock != 'anal'", Null(),
-            "Speed >= 3",  AlphaMask("Rogue_Anal_Zero_Anim3", "Rogue_Anal_Fucking_Mask"),
-            "Speed >= 2", AlphaMask("Rogue_Anal_Zero_Anim2", "Rogue_Anal_Fucking_Mask"),
-            "Speed", AlphaMask("Rogue_Anal_Zero_Anim1", "Rogue_Anal_Fucking_Mask"),
+            "action_speed >= 3",  AlphaMask("Rogue_Anal_Zero_Anim3", "Rogue_Anal_Fucking_Mask"),
+            "action_speed >= 2", AlphaMask("Rogue_Anal_Zero_Anim2", "Rogue_Anal_Fucking_Mask"),
+            "action_speed", AlphaMask("Rogue_Anal_Zero_Anim1", "Rogue_Anal_Fucking_Mask"),
             "True", AlphaMask("Rogue_Anal_Zero_Anim0", "Rogue_Anal_Fucking_Mask"),
             )
     contains:
             #Spunk over penis
             ConditionSwitch(
-                "'anal' not in RogueX.Spunk or not Player.Sprite or Player.Cock != 'anal' or not Speed", Null(),
-                "Speed == 1", "Rogue_Anal_Spunk_Heading_Over",
+                "'anal' not in RogueX.Spunk or not Player.Sprite or Player.Cock != 'anal' or not action_speed", Null(),
+                "action_speed == 1", "Rogue_Anal_Spunk_Heading_Over",
                 "True", "images/KittySex/Kitty_Sex_Spunk_Anal_Over.png",
                 )
 
 
 image Rogue_Sex_Anal_Fucking0:
-    # This is the visual for her pussy during the Speed 0 mode (static).
+    # This is the visual for her pussy during the action_speed 0 mode (static).
     contains:
             # The background plate of her pussy
             "Rogue_Anal_Tip"
@@ -966,7 +966,7 @@ image Rogue_Sex_Anal_Fucking0:
             AlphaMask("Rogue_Anal_Zero_Anim0", "Rogue_Anal_Fucking_Mask")
 
 image Rogue_Sex_Anal_Fucking1:
-    # This is the visual for her pussy during the Speed 1 mode (heading).
+    # This is the visual for her pussy during the action_speed 1 mode (heading).
     contains:
             # The background plate of her pussy
             "Rogue_Anal_Heading"
@@ -979,7 +979,7 @@ image Rogue_Sex_Anal_Fucking1:
 
 
 image Rogue_Hotdog_Body_Anim2:
-        #this is the animation for Rogue's lower body during sex, Speed 3 (fast)
+        #this is the animation for Rogue's lower body during sex, action_speed 3 (fast)
         contains:
             subpixel True
             "Rogue_Sex_Body"
@@ -993,7 +993,7 @@ image Rogue_Hotdog_Body_Anim2:
                 repeat
 
 image Rogue_Hotdog_Legs_Anim2:
-        #this is the animation for Rogue's lower body during sex, Speed 3 (fast)
+        #this is the animation for Rogue's lower body during sex, action_speed 3 (fast)
         contains:
             subpixel True
             "Rogue_Sex_Legs"
@@ -1060,7 +1060,7 @@ image Rogue_Footcock_Zero_Anim2:
     offset (0,-100)
 
 image Rogue_Sex_Legs_FootAnim1:
-        #this is the animation for Rogue's lower body during Footjobs, Speed 2 (slow)
+        #this is the animation for Rogue's lower body during Footjobs, action_speed 2 (slow)
         contains:
             subpixel True
             "Rogue_Sex_Legs"
@@ -1077,7 +1077,7 @@ image Rogue_Sex_Legs_FootAnim1:
         offset (0,100)
 
 image Rogue_Sex_Legs_FootAnim2:
-        #this is the animation for Rogue's lower body during Footjobs, Speed 2 (slow)
+        #this is the animation for Rogue's lower body during Footjobs, action_speed 2 (slow)
         contains:
             subpixel True
             "Rogue_Sex_Legs"
@@ -1093,7 +1093,7 @@ image Rogue_Sex_Legs_FootAnim2:
         offset (0,100)
 
 image Rogue_Sex_Legs_FootAnimStatic:
-        #this is the animation for Rogue's lower body during Footjobs, Speed 2 (slow)
+        #this is the animation for Rogue's lower body during Footjobs, action_speed 2 (slow)
         contains:
             subpixel True
             "Rogue_Sex_Legs"
@@ -1105,7 +1105,7 @@ image Rogue_Sex_Legs_FootAnimStatic:
 #Start Animations for Rogue's Body during Footjobs / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 image Rogue_Sex_Body_FootAnim1:
-        #this is the animation for Rogue's upper body during Footjobs, Speed 2 (slow)
+        #this is the animation for Rogue's upper body during Footjobs, action_speed 2 (slow)
         contains:
             subpixel True
             "Rogue_Sex_Body"
@@ -1122,7 +1122,7 @@ image Rogue_Sex_Body_FootAnim1:
         offset (0,100)
 
 image Rogue_Sex_Body_FootAnim2:
-        #this is the animation for Rogue's upper body during Footjobs, Speed 2 (slow)
+        #this is the animation for Rogue's upper body during Footjobs, action_speed 2 (slow)
         contains:
             subpixel True
             "Rogue_Sex_Body"
@@ -1138,7 +1138,7 @@ image Rogue_Sex_Body_FootAnim2:
         offset (0,100)
 
 image Rogue_Sex_Body_FootAnimStatic:
-        #this is the animation for Rogue's upper body during Footjobs, Speed 2 (slow)
+        #this is the animation for Rogue's upper body during Footjobs, action_speed 2 (slow)
         contains:
             subpixel True
             "Rogue_Sex_Body"
@@ -1160,49 +1160,49 @@ image Rogue_BJ_Animation:#BJ_NewTest:                                           
         (787,913),
         (0,0), ConditionSwitch(
             # back of the hair, which needs to go behind the body
-            "Speed == 0", At("Rogue_BJ_HairBack", Rogue_BJ_Starting()),
-            "Speed == 1", At("Rogue_BJ_HairBack", Rogue_BJ_Licking()),
-            "Speed == 2", At("Rogue_BJ_HairBack", Rogue_BJ_Heading()),
-            "Speed == 3", At("Rogue_BJ_HairBack", Rogue_BJ_Sucking()),
-            "Speed >= 4", At("Rogue_BJ_HairBack", Rogue_BJ_Deep()),
+            "action_speed == 0", At("Rogue_BJ_HairBack", Rogue_BJ_Starting()),
+            "action_speed == 1", At("Rogue_BJ_HairBack", Rogue_BJ_Licking()),
+            "action_speed == 2", At("Rogue_BJ_HairBack", Rogue_BJ_Heading()),
+            "action_speed == 3", At("Rogue_BJ_HairBack", Rogue_BJ_Sucking()),
+            "action_speed >= 4", At("Rogue_BJ_HairBack", Rogue_BJ_Deep()),
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
             # body, everything below the chin
-            "Speed == 0", At("Rogue_BJ_Backdrop", Rogue_BJ_StartingBody()),
-            "Speed == 1", At("Rogue_BJ_Backdrop", Rogue_BJ_LickingBody()),
-            "Speed == 2", At("Rogue_BJ_Backdrop", Rogue_BJ_HeadingBody()),
-            "Speed == 3", At("Rogue_BJ_Backdrop", Rogue_BJ_SuckingBody()),
-            "Speed >= 4", At("Rogue_BJ_Backdrop", Rogue_BJ_DeepBody()),
+            "action_speed == 0", At("Rogue_BJ_Backdrop", Rogue_BJ_StartingBody()),
+            "action_speed == 1", At("Rogue_BJ_Backdrop", Rogue_BJ_LickingBody()),
+            "action_speed == 2", At("Rogue_BJ_Backdrop", Rogue_BJ_HeadingBody()),
+            "action_speed == 3", At("Rogue_BJ_Backdrop", Rogue_BJ_SuckingBody()),
+            "action_speed >= 4", At("Rogue_BJ_Backdrop", Rogue_BJ_DeepBody()),
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
             # her head
-            "Speed == 0", At("Rogue_BJ_Head", Rogue_BJ_Starting()),
-            "Speed == 1", At("Rogue_BJ_Head", Rogue_BJ_Licking()),
-            "Speed == 2", At("Rogue_BJ_Head", Rogue_BJ_Heading()),
-            "Speed == 3", At("Rogue_BJ_Head", Rogue_BJ_Sucking()),
-            "Speed >= 4", At("Rogue_BJ_Head", Rogue_BJ_Deep()),
+            "action_speed == 0", At("Rogue_BJ_Head", Rogue_BJ_Starting()),
+            "action_speed == 1", At("Rogue_BJ_Head", Rogue_BJ_Licking()),
+            "action_speed == 2", At("Rogue_BJ_Head", Rogue_BJ_Heading()),
+            "action_speed == 3", At("Rogue_BJ_Head", Rogue_BJ_Sucking()),
+            "action_speed >= 4", At("Rogue_BJ_Head", Rogue_BJ_Deep()),
             "True", Null(),
             ),
 #        (0,0), Transform("images/RogueBJFace/Rogue_bj_markercard.png", alpha=(.2)),
         (0,0), ConditionSwitch(
             # cock
-            "Speed == 0", At("Blowcock", Rogue_Cock_BJ_Starting()),
-            "Speed == 1", At("Blowcock", Rogue_Cock_BJ_Licking()),
-            "Speed == 2", At("Blowcock", Rogue_Cock_BJ_Straight()),
-            "Speed == 3", At("Blowcock", Rogue_Cock_BJ_Straight()),
-            "Speed >= 4", At("Blowcock", Rogue_Cock_BJ_Straight()),
+            "action_speed == 0", At("Blowcock", Rogue_Cock_BJ_Starting()),
+            "action_speed == 1", At("Blowcock", Rogue_Cock_BJ_Licking()),
+            "action_speed == 2", At("Blowcock", Rogue_Cock_BJ_Straight()),
+            "action_speed == 3", At("Blowcock", Rogue_Cock_BJ_Straight()),
+            "action_speed >= 4", At("Blowcock", Rogue_Cock_BJ_Straight()),
             "True", Null(),
             ),
         (0,0), ConditionSwitch(                                                                 # the masked overlay for when her head overlaps the cock
-            "Speed < 3", Null(),
-            "Speed == 3", At(AlphaMask("Rogue_BJ_Head", "images/RogueBJFace/Rogue_bj_facemask.png"), Rogue_BJ_Sucking()),
-            "Speed >= 4", At(AlphaMask("Rogue_BJ_Head", "images/RogueBJFace/Rogue_bj_facemask.png"), Rogue_BJ_Deep()),
+            "action_speed < 3", Null(),
+            "action_speed == 3", At(AlphaMask("Rogue_BJ_Head", "images/RogueBJFace/Rogue_bj_facemask.png"), Rogue_BJ_Sucking()),
+            "action_speed >= 4", At(AlphaMask("Rogue_BJ_Head", "images/RogueBJFace/Rogue_bj_facemask.png"), Rogue_BJ_Deep()),
             "True", Null(),
             ),
         (0,0), ConditionSwitch(                                                                 # same as above, but for the heading animation
-            "Speed == 2", At(AlphaMask("Rogue_BJ_Head", "Rogue_BJ_MaskHeadingComposite"), Rogue_BJ_Heading()),
+            "action_speed == 2", At(AlphaMask("Rogue_BJ_Head", "Rogue_BJ_MaskHeadingComposite"), Rogue_BJ_Heading()),
             "True", Null(),
             ),
         )
@@ -1247,7 +1247,7 @@ image Rogue_BJ_MaskHeadingComposite:
     LiveComposite(
         (787,913),
         (316,590), ConditionSwitch(      #600
-            "Speed == 2", At("Rogue_BJ_MaskHeading", Rogue_BJ_MouthAnim()),
+            "action_speed == 2", At("Rogue_BJ_MaskHeading", Rogue_BJ_MouthAnim()),
             "True", Null(),
             ),
         )
@@ -1294,26 +1294,26 @@ image Rogue_TJ_Animation:
     #core TJ animation
     contains:
         ConditionSwitch(
-            "not Speed", Transform("Rogue_TJ_Under"),
-            "Speed == 1", At("Rogue_TJ_Under", Rogue_TJ_Under_1()),
-            "Speed >= 2", At("Rogue_TJ_Under", Rogue_TJ_Under_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Rogue_TJ_Under"),
+            "action_speed == 1", At("Rogue_TJ_Under", Rogue_TJ_Under_1()),
+            "action_speed >= 2", At("Rogue_TJ_Under", Rogue_TJ_Under_2()),
+            "action_speed", Null(),
             ),
 
     contains:
         ConditionSwitch(
-            "not Speed", At("Zero_Blowcock", Zero_TJ_Cock()),
-            "Speed == 1", At("Zero_Blowcock", Zero_TJ_Cock_1()),
-            "Speed >= 2", At("Zero_Blowcock", Zero_TJ_Cock_2()),
-            "Speed", Null(),
+            "not action_speed", At("Zero_Blowcock", Zero_TJ_Cock()),
+            "action_speed == 1", At("Zero_Blowcock", Zero_TJ_Cock_1()),
+            "action_speed >= 2", At("Zero_Blowcock", Zero_TJ_Cock_2()),
+            "action_speed", Null(),
             ),
 
     contains:
         ConditionSwitch(
-            "not Speed", Transform("Rogue_TJ_Over"),
-            "Speed == 1", At("Rogue_TJ_Over", Rogue_TJ_Over_1()),
-            "Speed >= 2", At("Rogue_TJ_Over", Rogue_TJ_Over_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Rogue_TJ_Over"),
+            "action_speed == 1", At("Rogue_TJ_Over", Rogue_TJ_Over_1()),
+            "action_speed >= 2", At("Rogue_TJ_Over", Rogue_TJ_Over_2()),
+            "action_speed", Null(),
             ),
     anchor (0.6, 0.0)
     offset (-75, 250)
@@ -1337,25 +1337,25 @@ image Rogue_Hand_Over:
 image Rogue_HJ_Animation:
     contains:
         ConditionSwitch(                                                # backside of the hand
-            "not Speed", "Rogue_Hand_Under",
-            "Speed == 1", At("Rogue_Hand_Under", Rogue_Hand_1()),
-            "Speed >= 2", At("Rogue_Hand_Under", Rogue_Hand_2()),
-            "Speed", Null(),
+            "not action_speed", "Rogue_Hand_Under",
+            "action_speed == 1", At("Rogue_Hand_Under", Rogue_Hand_1()),
+            "action_speed >= 2", At("Rogue_Hand_Under", Rogue_Hand_2()),
+            "action_speed", Null(),
             ),
     contains:
         ConditionSwitch(                                                # cock
-            "not Speed", "Zero_Handcock",
-            "Speed == 1", At("Zero_Handcock", Handcock_1()),
-            "Speed >= 2", At("Zero_Handcock", Handcock_2()),
-            "Speed", Null(),
+            "not action_speed", "Zero_Handcock",
+            "action_speed == 1", At("Zero_Handcock", Handcock_1()),
+            "action_speed >= 2", At("Zero_Handcock", Handcock_2()),
+            "action_speed", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(                                                # fingers of the hand
-            "not Speed", "Rogue_Hand_Over",
-            "Speed == 1", At("Rogue_Hand_Over", Rogue_Hand_1()),
-            "Speed >= 2", At("Rogue_Hand_Over", Rogue_Hand_2()),
-            "Speed", Null(),
+            "not action_speed", "Rogue_Hand_Over",
+            "action_speed == 1", At("Rogue_Hand_Over", Rogue_Hand_1()),
+            "action_speed >= 2", At("Rogue_Hand_Over", Rogue_Hand_2()),
+            "action_speed", Null(),
             ),
     anchor (0.5,0.5)#anchor (0.51, -1.3)
     offset (200,800)
@@ -1363,9 +1363,9 @@ image Rogue_HJ_Animation:
 
 
 
-label Rogue_Middle_Launch(T = Trigger,Set=1):
-    call hide_girl(RogueX)
-    $ Trigger = T
+label Rogue_Middle_Launch(T = primary_action,Set=1):
+    call hide_Girl(RogueX)
+    $ primary_action = T
     $ RogueX.Pose = "mid" if Set else RogueX.Pose
     show Rogue_Sprite at sprite_location(RogueX.sprite_location) zorder RogueX.Layer:
 #        ease 0.5 offset (-100,-200) zoom 2

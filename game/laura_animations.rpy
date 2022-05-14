@@ -1,4 +1,4 @@
-﻿# Basic character Sprites
+﻿# Basic Girl Sprites
 
 image Laura_Sprite:
     LiveComposite(
@@ -329,131 +329,131 @@ image Laura_Sprite:
 #            "True", Null(),
 #            ),
         (0,0), ConditionSwitch(
-            #UI tool for When Laura is masturbating using Trigger3 actions
-            "Trigger == 'lesbian' or not Trigger3 or Ch_Focus != LauraX", Null(),
+            #UI tool for When Laura is masturbating using girl_offhand_action actions
+            "primary_action == 'lesbian' or not girl_offhand_action or focused_Girl != LauraX", Null(),
 
             #this is not a lesbian thing, and a trigger is set, and Laura is the primary. . .
-            "Trigger3 == 'fondle pussy'", "GirlGropePussy_LauraSelf",
-            "Trigger3 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts'", "GirlGropeLeftBreast_Laura",
+            "girl_offhand_action == 'fondle pussy'", "GirlGropePussy_LauraSelf",
+            "girl_offhand_action == 'fondle breasts'", ConditionSwitch(
+                    "offhand_action == 'fondle breasts' or offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Laura",
                         #When zero is working the right breast, fondle left
-                    "Trigger == 'fondle breasts' or Trigger == 'suck breasts'", "GirlGropeRightBreast_Laura",
+                    "primary_action == 'fondle breasts' or primary_action == 'suck breasts'", "GirlGropeRightBreast_Laura",
                         #When zero is working the left breast, fondle right
                     "True", "GirlGropeBothBreast_Laura",
                         #else, fondle both
                     ),
-            "Trigger3 == 'vibrator breasts'", "VibratorRightBreast_Laura",
-            "Trigger3 == 'vibrator pussy'", "VibratorPussy_Laura",
-            "Trigger3 == 'vibrator pussy insert'", "VibratorPussy_Laura",
-            "Trigger3 == 'vibrator anal'", "VibratorAnal_Laura",
-            "Trigger3 == 'vibrator anal insert'", "VibratorPussy_Laura",
+            "girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast_Laura",
+            "girl_offhand_action == 'vibrator pussy'", "VibratorPussy_Laura",
+            "girl_offhand_action == 'vibrator pussy insert'", "VibratorPussy_Laura",
+            "girl_offhand_action == 'vibrator anal'", "VibratorAnal_Laura",
+            "girl_offhand_action == 'vibrator anal insert'", "VibratorPussy_Laura",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger5(Threesome masutrbation) actions
-            "not Trigger5 or Trigger4 != 'masturbation' or Ch_Focus == LauraX", Null(),
+            #UI tool for Partner_offhand_action(Threesome masutrbation) actions
+            "not Partner_offhand_action or Partner_primary_action != 'masturbation' or focused_Girl == LauraX", Null(),
 
             #Laura is not primary, and T4 is masturbation, and a T5 is selected
-            "Trigger5 == 'fondle pussy' and Trigger != 'sex' and LauraX.Lust >= 70", "GirlFingerPussy_Laura",
-            "Trigger5 == 'fondle pussy'", "GirlGropePussy_Laura",
-            "Trigger5 == 'fondle breasts'", "GirlGropeRightBreast_Laura",
-            "Trigger5 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger5 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger5 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger5 == 'vibrator anal'", "VibratorAnal",
-            "Trigger5 == 'vibrator anal insert'", "VibratorPussy",
+            "Partner_offhand_action == 'fondle pussy' and primary_action != 'sex' and LauraX.lust >= 70", "GirlFingerPussy_Laura",
+            "Partner_offhand_action == 'fondle pussy'", "GirlGropePussy_Laura",
+            "Partner_offhand_action == 'fondle breasts'", "GirlGropeRightBreast_Laura",
+            "Partner_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "Partner_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "Partner_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "Partner_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "Partner_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger1(primary) actions
+            #UI tool for primary_action1(primary) actions
             #Laura is primary and a sex trigger is active
-            "not Trigger or Ch_Focus != LauraX", Null(),
-            "Trigger == 'vibrator breasts'", "VibratorLeftBreast_Laura",
-            "Trigger == 'fondle thighs'", "GropeThigh_Laura",
-            "Trigger == 'fondle breasts'", "GropeLeftBreast_Laura",
-            "Trigger == 'suck breasts'", "LickRightBreast_Laura",
-            "Trigger == 'fondle pussy' and Speed == 2", "FingerPussy_Laura",
-            "Trigger == 'fondle pussy'", "GropePussy_Laura",
-            "Trigger == 'lick pussy'", "Lickpussy_Laura",
-            "Trigger == 'vibrator pussy'", "VibratorPussy_Laura",
-            "Trigger == 'vibrator pussy insert'", "VibratorPussy_Laura",
-            "Trigger == 'vibrator anal'", "VibratorAnal_Laura",
-            "Trigger == 'vibrator anal insert'", "VibratorPussy_Laura",
+            "not primary_action or focused_Girl != LauraX", Null(),
+            "primary_action == 'vibrator breasts'", "VibratorLeftBreast_Laura",
+            "primary_action == 'fondle thighs'", "GropeThigh_Laura",
+            "primary_action == 'fondle breasts'", "GropeLeftBreast_Laura",
+            "primary_action == 'suck breasts'", "LickRightBreast_Laura",
+            "primary_action == 'fondle pussy' and action_speed == 2", "FingerPussy_Laura",
+            "primary_action == 'fondle pussy'", "GropePussy_Laura",
+            "primary_action == 'lick pussy'", "Lickpussy_Laura",
+            "primary_action == 'vibrator pussy'", "VibratorPussy_Laura",
+            "primary_action == 'vibrator pussy insert'", "VibratorPussy_Laura",
+            "primary_action == 'vibrator anal'", "VibratorAnal_Laura",
+            "primary_action == 'vibrator anal insert'", "VibratorPussy_Laura",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger2(secondary) actions
-            "not Trigger2 or Ch_Focus != LauraX", Null(),
+            #UI tool for offhand_action(secondary) actions
+            "not offhand_action or focused_Girl != LauraX", Null(),
 
             #Laura is primary and an offhand trigger is active
-            "Trigger2 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger2 == 'fondle breasts' and Trigger == 'suck breasts'", "GropeLeftBreast_Laura",
+            "offhand_action == 'fondle breasts'", ConditionSwitch(
+                    "offhand_action == 'fondle breasts' and primary_action == 'suck breasts'", "GropeLeftBreast_Laura",
                         #When zero is sucking on the right breast, fondle left
                     "True", "GropeRightBreast_Laura",
                         #else, fondle right
                     ),
-            "Trigger2 == 'vibrator breasts' and Trigger == 'suck breasts'", "VibratorLeftBreast_Laura",
+            "offhand_action == 'vibrator breasts' and primary_action == 'suck breasts'", "VibratorLeftBreast_Laura",
                 #When sucking right breast, vibrator left
-            "Trigger2 == Trigger", Null(),
+            "offhand_action == primary_action", Null(),
                 #When both triggers are the same, do nothing
-            "Trigger2 == 'suck breasts'", "LickLeftBreast_Laura",
-            "Trigger2 == 'fondle pussy'", "GropePussy_Laura",
-            "Trigger2 == 'lick pussy'", "Lickpussy_Laura",
-            "Trigger2 == 'vibrator breasts'", "VibratorRightBreast_Laura",
-            "Trigger2 == 'vibrator pussy'", "VibratorPussy_Laura",
-            "Trigger2 == 'vibrator pussy insert'", "VibratorPussy_Laura",
-            "Trigger2 == 'vibrator anal'", "VibratorAnal_Laura",
-            "Trigger2 == 'vibrator anal insert'", "VibratorPussy_Laura",
+            "offhand_action == 'suck breasts'", "LickLeftBreast_Laura",
+            "offhand_action == 'fondle pussy'", "GropePussy_Laura",
+            "offhand_action == 'lick pussy'", "Lickpussy_Laura",
+            "offhand_action == 'vibrator breasts'", "VibratorRightBreast_Laura",
+            "offhand_action == 'vibrator pussy'", "VibratorPussy_Laura",
+            "offhand_action == 'vibrator pussy insert'", "VibratorPussy_Laura",
+            "offhand_action == 'vibrator anal'", "VibratorAnal_Laura",
+            "offhand_action == 'vibrator anal insert'", "VibratorPussy_Laura",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger4(Threesome) actions (ie Rogue's hand on her)
-            "not Trigger4 or Ch_Focus != LauraX", Null(),
+            #UI tool for Partner_primary_action(Threesome) actions (ie Rogue's hand on her)
+            "not Partner_primary_action or focused_Girl != LauraX", Null(),
 
             # There is a threesome trigger set and Laura is the target of it
-            "Trigger4 == 'fondle pussy' and Trigger != 'sex' and LauraX.Lust >= 70", "GirlFingerPussy_Laura",
-            "Trigger4 == 'fondle pussy'", "GirlGropePussy_Laura",
-            "Trigger4 == 'lick pussy'", "Lickpussy_Laura",
-            "Trigger4 == 'suck breasts' and (Trigger2 != 'suck breasts' or Trigger == 'suck breasts')", "LickLeftBreast_Laura",
-            "Trigger4 == 'suck breasts'", "LickRightBreast_Laura",
-            "Trigger4 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger == 'fondle breasts' or Trigger == 'suck breasts'", "GirlGropeLeftBreast_Laura", #When zero is working the right breast, fondle left
-#                    "Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts'", "GirlGropeRightBreast_Laura",  #When zero is working the left breast, fondle right
-#                    "Trigger3 == 'fondle breasts' or Trigger3 == 'suck breasts'", "GirlGropeRightBreast_Laura", #When zero is working the left breast, fondle right
+            "Partner_primary_action == 'fondle pussy' and primary_action != 'sex' and LauraX.lust >= 70", "GirlFingerPussy_Laura",
+            "Partner_primary_action == 'fondle pussy'", "GirlGropePussy_Laura",
+            "Partner_primary_action == 'lick pussy'", "Lickpussy_Laura",
+            "Partner_primary_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Laura",
+            "Partner_primary_action == 'suck breasts'", "LickRightBreast_Laura",
+            "Partner_primary_action == 'fondle breasts'", ConditionSwitch(
+                    "primary_action == 'fondle breasts' or primary_action == 'suck breasts'", "GirlGropeLeftBreast_Laura", #When zero is working the right breast, fondle left
+#                    "offhand_action == 'fondle breasts' or offhand_action == 'suck breasts'", "GirlGropeRightBreast_Laura",  #When zero is working the left breast, fondle right
+#                    "girl_offhand_action == 'fondle breasts' or girl_offhand_action == 'suck breasts'", "GirlGropeRightBreast_Laura", #When zero is working the left breast, fondle right
                     "True", "GirlGropeRightBreast_Laura",#else, fondle right
                     ),
-            "Trigger4 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger4 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger4 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger4 == 'vibrator anal'", "VibratorAnal",
-            "Trigger4 == 'vibrator anal insert'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator breasts'", "VibratorRightBreast",
+            "Partner_primary_action == 'vibrator pussy'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator pussy insert'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator anal'", "VibratorAnal",
+            "Partner_primary_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            #UI tool for Trigger3(lesbian) actions (ie Rogue's hand on her when Laura is secondary)
-            "Trigger != 'lesbian' or Ch_Focus == LauraX or not Trigger3", Null(),
+            #UI tool for girl_offhand_action(lesbian) actions (ie Rogue's hand on her when Laura is secondary)
+            "primary_action != 'lesbian' or focused_Girl == LauraX or not girl_offhand_action", Null(),
 
-            # If there is a Trigger3 and Laura is not the focus
-            "Trigger3 == 'fondle pussy' and Trigger != 'sex' and LauraX.Lust >= 70", "GirlFingerPussy_Laura",
-            "Trigger3 == 'fondle pussy'", "GirlGropePussy_Laura",
-            "Trigger3 == 'lick pussy'", "Lickpussy_Laura",
-            "Trigger3 == 'suck breasts' and (Trigger2 != 'suck breasts' or Trigger == 'suck breasts')", "LickLeftBreast_Laura",
-            "Trigger3 == 'suck breasts'", "LickRightBreast_Laura",
-            "Trigger3 == 'fondle breasts'", ConditionSwitch(
-                    "Trigger == 'fondle breasts' or Trigger == 'suck breasts'", "GirlGropeLeftBreast_Laura",
+            # If there is a girl_offhand_action and Laura is not the focus
+            "girl_offhand_action == 'fondle pussy' and primary_action != 'sex' and LauraX.lust >= 70", "GirlFingerPussy_Laura",
+            "girl_offhand_action == 'fondle pussy'", "GirlGropePussy_Laura",
+            "girl_offhand_action == 'lick pussy'", "Lickpussy_Laura",
+            "girl_offhand_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast_Laura",
+            "girl_offhand_action == 'suck breasts'", "LickRightBreast_Laura",
+            "girl_offhand_action == 'fondle breasts'", ConditionSwitch(
+                    "primary_action == 'fondle breasts' or primary_action == 'suck breasts'", "GirlGropeLeftBreast_Laura",
                         #When zero is working the right breast, fondle left
-                    "Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts'", "GirlGropeRightBreast_Laura",
+                    "offhand_action == 'fondle breasts' or offhand_action == 'suck breasts'", "GirlGropeRightBreast_Laura",
                         #When zero is working the left breast, fondle right
-                    "Trigger3 == 'fondle breasts' or Trigger3 == 'suck breasts'", "GirlGropeLeftBreast_Laura",
+                    "girl_offhand_action == 'fondle breasts' or girl_offhand_action == 'suck breasts'", "GirlGropeLeftBreast_Laura",
                         #When zero is working the right breast, fondle left
                     "True", "GirlGropeRightBreast_Laura",
                         #else, fondle right
                     ),
-            "Trigger3 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger3 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger3 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger3 == 'vibrator anal'", "VibratorAnal",
-            "Trigger3 == 'vibrator anal insert'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "girl_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "girl_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null(),
             ),
         )
@@ -517,11 +517,11 @@ image Laura_Sprite_Head:
                 ),
         (0,0), ConditionSwitch(#chin spunk
             "'chin' not in LauraX.Spunk", Null(),
-            "renpy.showing('Laura_BJ_Animation') and Speed >= 2", Null(),
+            "renpy.showing('Laura_BJ_Animation') and action_speed >= 2", Null(),
             "True", "images/LauraSprite/Laura_Sprite_Spunk_Chin.png",
             ),
         (0,0), ConditionSwitch(#Mouths
-            "renpy.showing('Laura_BJ_Animation')", "images/LauraSprite/Laura_Sprite_Mouth_SuckingBJ.png", #and Speed >= 2
+            "renpy.showing('Laura_BJ_Animation')", "images/LauraSprite/Laura_Sprite_Mouth_SuckingBJ.png", #and action_speed >= 2
             "LauraX.Mouth == 'normal'", "images/LauraSprite/Laura_Sprite_Mouth_Normal.png",
             "LauraX.Mouth == 'lipbite'", "images/LauraSprite/Laura_Sprite_Mouth_Lipbite.png",
             "LauraX.Mouth == 'sucking'", "images/LauraSprite/Laura_Sprite_Mouth_Sucking.png",
@@ -537,7 +537,7 @@ image Laura_Sprite_Head:
             ),
         (0,0), ConditionSwitch(#Mouth spunk
             "'mouth' not in LauraX.Spunk", Null(),
-            "renpy.showing('Laura_BJ_Animation')", "images/LauraSprite/Laura_Sprite_Spunk_MouthSuck.png", #and Speed >= 2
+            "renpy.showing('Laura_BJ_Animation')", "images/LauraSprite/Laura_Sprite_Spunk_MouthSuck.png", #and action_speed >= 2
             "LauraX.Mouth == 'normal'", "images/LauraSprite/Laura_Sprite_Spunk_MouthNeutral.png",
             "LauraX.Mouth == 'lipbite'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmirk.png",
             "LauraX.Mouth == 'sucking'", "images/LauraSprite/Laura_Sprite_Spunk_MouthTongue.png",
@@ -677,19 +677,19 @@ image Laura_Doggy_Animation: #nee Laura_Doggy
             #Shows different upper body motion depending on events
             "not Player.Sprite", "Laura_Doggy_Body",
             "Player.Cock == 'anal'", ConditionSwitch(
-                    "Speed > 2", "Laura_Doggy_Fuck2_Top",
-                    "Speed > 1", "Laura_Doggy_Fuck_Top",
-                    "Speed", "Laura_Doggy_Anal_Head_Top",
+                    "action_speed > 2", "Laura_Doggy_Fuck2_Top",
+                    "action_speed > 1", "Laura_Doggy_Fuck_Top",
+                    "action_speed", "Laura_Doggy_Anal_Head_Top",
                     "True", "Laura_Doggy_Body",
                     ),
             "Player.Cock == 'in'", ConditionSwitch(
-                    "Speed > 2", "Laura_Doggy_Fuck2_Top",
-                    "Speed > 1", "Laura_Doggy_Fuck_Top",
+                    "action_speed > 2", "Laura_Doggy_Fuck2_Top",
+                    "action_speed > 1", "Laura_Doggy_Fuck_Top",
                     "True", "Laura_Doggy_Body",
                     ),
             "Player.Cock == 'foot'", ConditionSwitch(
-                    "Speed > 1", "Laura_Doggy_Foot2_Top",
-                    "Speed", "Laura_Doggy_Foot1_Top",
+                    "action_speed > 1", "Laura_Doggy_Foot2_Top",
+                    "action_speed", "Laura_Doggy_Foot1_Top",
                     "True", "Laura_Doggy_Foot0_Top",
                     ),
             "True", "Laura_Doggy_Body",
@@ -698,19 +698,19 @@ image Laura_Doggy_Animation: #nee Laura_Doggy
             #Shows different lower body motion depending on events
             "not Player.Sprite", "Laura_Doggy_Ass",
             "Player.Cock == 'anal'", ConditionSwitch(
-                    "Speed > 2", "Laura_Doggy_Fuck2_Ass",
-                    "Speed > 1", "Laura_Doggy_Fuck_Ass",
-                    "Speed", "Laura_Doggy_Anal_Head_Ass",
+                    "action_speed > 2", "Laura_Doggy_Fuck2_Ass",
+                    "action_speed > 1", "Laura_Doggy_Fuck_Ass",
+                    "action_speed", "Laura_Doggy_Anal_Head_Ass",
                     "True", "Laura_Doggy_Ass",
                     ),
             "Player.Cock == 'in'", ConditionSwitch(
-                    "Speed > 2", "Laura_Doggy_Fuck2_Ass",
-                    "Speed > 1", "Laura_Doggy_Fuck_Ass",
+                    "action_speed > 2", "Laura_Doggy_Fuck2_Ass",
+                    "action_speed > 1", "Laura_Doggy_Fuck_Ass",
                     "True", "Laura_Doggy_Ass",
                     ),
             "Player.Cock == 'foot'", ConditionSwitch(
-                    "Speed > 1", "Laura_Doggy_Foot2_Ass",
-                    "Speed", "Laura_Doggy_Foot1_Ass",
+                    "action_speed > 1", "Laura_Doggy_Foot2_Ass",
+                    "action_speed", "Laura_Doggy_Foot1_Ass",
                     "True", "Laura_Doggy_Foot0_Ass",
                     ),
             "True", "Laura_Doggy_Ass",
@@ -718,8 +718,8 @@ image Laura_Doggy_Animation: #nee Laura_Doggy
         (0,0), ConditionSwitch(
             #Shows different lower body motion depending on events        #fix // // // // // // fix // // // // // // fix // // // // // // fix // // // // // //
             "Player.Cock == 'foot'", ConditionSwitch(
-                    "Speed > 1", "Laura_Doggy_Feet2",
-                    "Speed", "Laura_Doggy_Feet1",
+                    "action_speed > 1", "Laura_Doggy_Feet2",
+                    "action_speed", "Laura_Doggy_Feet1",
                     "True", "Laura_Doggy_Feet0",
                     ),
             "not Player.Sprite and ShowFeet", "Laura_Doggy_Shins",
@@ -789,7 +789,7 @@ image Laura_Doggy_Body:
             ),
         (0,0), ConditionSwitch(
             #breast fondling animation
-            "Trigger == 'fondle breasts' or Trigger2 == 'fondle breasts'", "Laura_Doggy_GropeBreast",
+            "primary_action == 'fondle breasts' or offhand_action == 'fondle breasts'", "Laura_Doggy_GropeBreast",
             "True", Null()
             ),
         #(161,-1), "Laura_Doggy_Head",               #Head
@@ -987,19 +987,19 @@ image Laura_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
             #Pussy Composite
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'", "Laura_Pussy_Fingering",
-            "Trigger == 'dildo pussy'", "Laura_Pussy_Fucking2",
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'", "Laura_Pussy_Fingering",
+            "primary_action == 'dildo pussy'", "Laura_Pussy_Fucking2",
             "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
-                    "Speed > 2", "Laura_Pussy_Fucking3",#Speed 3
-                    "Speed > 1", "Laura_Pussy_Fucking2",#Speed 2
-                    "Speed", "Laura_Pussy_Heading",      #Speed 1
-                    "True", "Laura_Pussy_Static",              #Speed 0
+                    "action_speed > 2", "Laura_Pussy_Fucking3",#action_speed 3
+                    "action_speed > 1", "Laura_Pussy_Fucking2",#action_speed 2
+                    "action_speed", "Laura_Pussy_Heading",      #action_speed 1
+                    "True", "Laura_Pussy_Static",              #action_speed 0
                     ),
-            "Trigger == 'lick pussy'", "images/LauraDoggy/Laura_Doggy_Pussy_Open.png",
+            "primary_action == 'lick pussy'", "images/LauraDoggy/Laura_Doggy_Pussy_Open.png",
             "LauraX.Legs and not LauraX.Upskirt", "images/LauraDoggy/Laura_Doggy_Pussy_Closed.png",
             "LauraX.Panties and not LauraX.PantiesDown", "images/LauraDoggy/Laura_Doggy_Pussy_Closed.png",
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'", "Laura_Pussy_Fingering",
-            "Trigger == 'dildo pussy'", "Laura_Pussy_Fucking2",
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'", "Laura_Pussy_Fingering",
+            "primary_action == 'dildo pussy'", "Laura_Pussy_Fucking2",
             "True", "images/LauraDoggy/Laura_Doggy_Pussy_Closed.png",
             ),
 
@@ -1016,14 +1016,14 @@ image Laura_Doggy_Ass:
             #pubes
             "not LauraX.Pubes", Null(),
             "Player.Sprite and Player.Cock == 'in'", Null(), # "images/LauraDoggy/Laura_Doggy_Pubes_Fucked.png",
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
             "LauraX.Legs == 'pants' and not LauraX.Upskirt", "images/LauraDoggy/Laura_Doggy_Pubes_Panties.png",
-            "LauraX.PantiesDown and Trigger == 'lick pussy'", "images/LauraDoggy/Laura_Doggy_Pubes_Open.png",
+            "LauraX.PantiesDown and primary_action == 'lick pussy'", "images/LauraDoggy/Laura_Doggy_Pubes_Open.png",
             "LauraX.PantiesDown", "images/LauraDoggy/Laura_Doggy_Pubes.png",
             "LauraX.Panties", "images/LauraDoggy/Laura_Doggy_Pubes_Panties.png",
             "LauraX.Hose and LauraX.Hose != 'stockings'", "images/LauraDoggy/Laura_Doggy_Pubes_Panties.png",
-            "Trigger == 'lick pussy'", "images/LauraDoggy/Laura_Doggy_Pubes_Open.png",
+            "primary_action == 'lick pussy'", "images/LauraDoggy/Laura_Doggy_Pubes_Open.png",
             "True", "images/LauraDoggy/Laura_Doggy_Pubes.png",
             ),
         (0,0), ConditionSwitch(
@@ -1036,17 +1036,17 @@ image Laura_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Anus Composite
             "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
-                    "Speed > 2", "Laura_Anal_Fucking2", #Speed 3
-                    "Speed > 1", "Laura_Anal_Fucking",  #Speed 2
-                    "Speed", "Laura_Anal_Heading",      #Speed 1
-                    "True", "Laura_Anal",               #Speed 0
+                    "action_speed > 2", "Laura_Anal_Fucking2", #action_speed 3
+                    "action_speed > 1", "Laura_Anal_Fucking",  #action_speed 2
+                    "action_speed", "Laura_Anal_Heading",      #action_speed 1
+                    "True", "Laura_Anal",               #action_speed 0
                     ),
 #            "Action == 'plug'", "Laura_Anal_Plug",
 #            "Action == 'plug'", "test_case",
             "LauraX.Legs and not LauraX.Upskirt", "images/LauraDoggy/Laura_Doggy_Asshole_Loose.png",
             "LauraX.Panties and not LauraX.PantiesDown", "images/LauraDoggy/Laura_Doggy_Asshole_Loose.png",
-            "Trigger == 'insert ass' or Trigger2 == 'insert ass'", "Laura_Anal_Fingering",
-            "Trigger == 'dildo anal'", "Laura_Anal_Fucking",
+            "primary_action == 'insert ass' or offhand_action == 'insert ass'", "Laura_Anal_Fingering",
+            "primary_action == 'dildo anal'", "Laura_Anal_Fucking",
             "LauraX.Loose", "images/LauraDoggy/Laura_Doggy_Asshole_Loose.png",
             "True", "images/LauraDoggy/Laura_Doggy_Asshole_Tight.png",
             ),
@@ -1063,8 +1063,8 @@ image Laura_Doggy_Ass:
             #Panties if up
             "LauraX.PantiesDown or not LauraX.Panties", Null(),
             "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
-#            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-#            "Trigger == 'dildo pussy'", Null(),
+#            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+#            "primary_action == 'dildo pussy'", Null(),
             "LauraX.Panties == 'wolvie panties' and LauraX.Wet", "images/LauraDoggy/Laura_Doggy_Panties_Wolvie_Wet.png",
             "LauraX.Panties == 'wolvie panties'", "images/LauraDoggy/Laura_Doggy_Panties_Wolvie.png",
             "LauraX.Panties == 'lace panties'", "images/LauraDoggy/Laura_Doggy_Panties_Lace.png",
@@ -1099,12 +1099,12 @@ image Laura_Doggy_Ass:
 #                    "True", "images/LauraDoggy/Laura_Doggy_Legs_Yoga.png",
 #                    ),
             "LauraX.Legs == 'other skirt'", ConditionSwitch(
-                    "LauraX.Upskirt and Player.Sprite and Player.Cock == 'anal' and Speed" , "images/LauraDoggy/Laura_Doggy_Legs_SkirtCos_Up.png",   #Rogue_Doggy_Legs_Skirt_UpAnal.png",
+                    "LauraX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/LauraDoggy/Laura_Doggy_Legs_SkirtCos_Up.png",   #Rogue_Doggy_Legs_Skirt_UpAnal.png",
                     "LauraX.Upskirt", "images/LauraDoggy/Laura_Doggy_Legs_SkirtCos_Up.png",
                     "True", "images/LauraDoggy/Laura_Doggy_Legs_SkirtCos.png",
                     ),
             "LauraX.Legs == 'skirt'", ConditionSwitch(
-                    "LauraX.Upskirt and Player.Sprite and Player.Cock == 'anal' and Speed" , "images/LauraDoggy/Laura_Doggy_Legs_Skirt_Up.png",   #Rogue_Doggy_Legs_Skirt_UpAnal.png",
+                    "LauraX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/LauraDoggy/Laura_Doggy_Legs_Skirt_Up.png",   #Rogue_Doggy_Legs_Skirt_UpAnal.png",
                     "LauraX.Upskirt", "images/LauraDoggy/Laura_Doggy_Legs_Skirt_Up.png",
                     "True", "images/LauraDoggy/Laura_Doggy_Legs_Skirt.png",
                     ),
@@ -1132,8 +1132,8 @@ image Laura_Doggy_Ass:
         (0,0), ConditionSwitch(
             #pussy licking animation
             "Player.Sprite and Player.Cock", Null(),
-            "Trigger == 'lick pussy'", "Rogue_Doggy_Lick_Pussy",
-            "Trigger == 'lick ass'", "Rogue_Doggy_Lick_Ass",
+            "primary_action == 'lick pussy'", "Rogue_Doggy_Lick_Pussy",
+            "primary_action == 'lick ass'", "Rogue_Doggy_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -1145,9 +1145,9 @@ image Laura_Doggy_Ass:
         (0,0), ConditionSwitch(
             #Hotdogging Cock w/ alpha
             "not Player.Sprite or Player.Cock != 'out'", Null(),
-            "LauraX.Legs == 'skirt' and LauraX.Upskirt and Speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
+            "LauraX.Legs == 'skirt' and LauraX.Upskirt and action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
             "LauraX.Legs == 'skirt' and LauraX.Upskirt", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "Speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             "True", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             ),
 #        (0,0), ConditionSwitch(
@@ -1268,7 +1268,7 @@ image Zero_Laura_Hotdog_Moving:
 #            ),
 
 image Zero_Laura_Doggy_Static:
-    # Sex Speed 0 motions
+    # Sex action_speed 0 motions
     contains:
         subpixel True
         "Zero_Doggy_Insert"
@@ -1280,7 +1280,7 @@ image Zero_Laura_Doggy_Static:
             repeat
 
 image Zero_Laura_Doggy_Heading:
-    # Sex Speed 1 motions
+    # Sex action_speed 1 motions
     contains:
         subpixel True
         "Zero_Doggy_Insert"
@@ -1292,7 +1292,7 @@ image Zero_Laura_Doggy_Heading:
             repeat
 
 image Zero_Laura_Doggy_Fucking2:
-    # Sex Speed 2 motions
+    # Sex action_speed 2 motions
     contains:
         "Zero_Doggy_Insert"
         pos (169,500)
@@ -1303,7 +1303,7 @@ image Zero_Laura_Doggy_Fucking2:
             repeat
 
 image Zero_Laura_Doggy_Fucking3:
-    # Sex Speed 3 motions
+    # Sex action_speed 3 motions
     contains:
         "Zero_Doggy_Insert"
         pos (169,500)
@@ -1578,7 +1578,7 @@ image Laura_Pussy_Fucking2:
     contains:
         #Cock
         ConditionSwitch(
-            "Trigger == 'dildo pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
+            "primary_action == 'dildo pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
             "True",AlphaMask("Zero_Laura_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
             ),
 #        AlphaMask("Zero_Laura_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
@@ -1799,7 +1799,7 @@ image Laura_Anal_Fucking:
         #Cock
         ConditionSwitch(
             #full hose/tights
-            "Trigger == 'dildo anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
+            "primary_action == 'dildo anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
             "True", AlphaMask("Zero_Laura_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
             ),
 #        AlphaMask("Zero_Laura_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png")
@@ -2093,10 +2093,10 @@ image Laura_Doggy_Foot2_Ass:
 
 #>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #Doggy Launch/Reset
-label Laura_Doggy_Launch(Line = Trigger):
+label Laura_Doggy_Launch(line = primary_action):
     if renpy.showing("Laura_Doggy_Animation"):
         return
-    $ Speed = 0
+    $ action_speed = 0
     call Laura_Hide(1)
     show Laura_Doggy_Animation at sprite_location(StageCenter+150) zorder 150
     with dissolve
@@ -2105,7 +2105,7 @@ label Laura_Doggy_Launch(Line = Trigger):
 label Laura_Doggy_Reset:
     if not renpy.showing("Laura_Doggy_Animation"):
         return
-#    $ Trigger = 0               #fix, not sure this is a good idea
+#    $ primary_action = 0               #fix, not sure this is a good idea
     $ LauraX.ArmPose = 2
     $ LauraX.SpriteVer = 0
     hide Laura_Doggy_Animation
@@ -2116,7 +2116,7 @@ label Laura_Doggy_Reset:
                     offset (0,0)
                     anchor (0.6, 0.0)
     with dissolve
-    $ Speed = 0
+    $ action_speed = 0
     return
 
 # End Laura Doggy Animations / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
@@ -2134,35 +2134,35 @@ image Laura_SexSprite:
             # Laura's upper body
             "Player.Cock == 'in'", ConditionSwitch(
                     # If during sex
-                    "Speed == 1", "Laura_Sex_Body_S1",#heading
-                    "Speed == 2", "Laura_Sex_Body_S2",#slow
-                    "Speed == 3", "Laura_Sex_Body_S3",#fast
-                    "Speed >= 4", "Laura_Sex_Body_S4",#cumming
+                    "action_speed == 1", "Laura_Sex_Body_S1",#heading
+                    "action_speed == 2", "Laura_Sex_Body_S2",#slow
+                    "action_speed == 3", "Laura_Sex_Body_S3",#fast
+                    "action_speed >= 4", "Laura_Sex_Body_S4",#cumming
                     "True",       "Laura_Sex_Body_S0",#Static
                     ),
             "Player.Cock == 'anal'", ConditionSwitch(
 #                    # If during Anal
-                    "Speed == 1", "Laura_Sex_Body_A1",#heading
-                    "Speed == 2", "Laura_Sex_Body_A2",#slow
-                    "Speed == 3", "Laura_Sex_Body_A3",#fast
-                    "Speed >= 4", "Laura_Sex_Body_A4",#cumming
+                    "action_speed == 1", "Laura_Sex_Body_A1",#heading
+                    "action_speed == 2", "Laura_Sex_Body_A2",#slow
+                    "action_speed == 3", "Laura_Sex_Body_A3",#fast
+                    "action_speed >= 4", "Laura_Sex_Body_A4",#cumming
                     "True",       "Laura_Sex_Body_A0",#Static
                     ),
             "Player.Cock == 'foot'", ConditionSwitch(
                     # If during Footjob
                     "not Player.Sprite","Laura_Sex_Body_F0",#Static
-                    "Speed == 1", "Laura_Sex_Body_F1",#heading
-                    "Speed >= 4", "Laura_Sex_Body_F0",#cumming
-                    "Speed >= 2", "Laura_Sex_Body_F2",#slow
+                    "action_speed == 1", "Laura_Sex_Body_F1",#heading
+                    "action_speed >= 4", "Laura_Sex_Body_F0",#cumming
+                    "action_speed >= 2", "Laura_Sex_Body_F2",#slow
                     "True",       "Laura_Sex_Body_F0",#Static
                     ),
 
             "True", ConditionSwitch(
                     # If neither
                     "not Player.Sprite","Laura_Sex_Body_H0",#Static
-                    "Speed == 1", "Laura_Sex_Body_H1",#slow
-                    "Speed == 4", "Laura_Sex_Body_H0",#cumming
-                    "Speed >= 2", "Laura_Sex_Body_H2",#fast
+                    "action_speed == 1", "Laura_Sex_Body_H1",#slow
+                    "action_speed == 4", "Laura_Sex_Body_H0",#cumming
+                    "action_speed >= 2", "Laura_Sex_Body_H2",#fast
                     "True",       "Laura_Sex_Body_H0",#Static
                     ),
             )
@@ -2171,34 +2171,34 @@ image Laura_SexSprite:
             # Laura's lower body
             "Player.Cock == 'in'", ConditionSwitch(
                     # If during sex
-                    "Speed == 1", "Laura_Sex_Legs_S1",#heading
-                    "Speed == 2", "Laura_Sex_Legs_S2",#slow
-                    "Speed == 3", "Laura_Sex_Legs_S3",#fast
-                    "Speed >= 4", "Laura_Sex_Legs_S4",#cumming
+                    "action_speed == 1", "Laura_Sex_Legs_S1",#heading
+                    "action_speed == 2", "Laura_Sex_Legs_S2",#slow
+                    "action_speed == 3", "Laura_Sex_Legs_S3",#fast
+                    "action_speed >= 4", "Laura_Sex_Legs_S4",#cumming
                     "True", "Laura_Sex_Legs_S0",#Static
                     ),
             "Player.Cock == 'anal'", ConditionSwitch(
                     # If during Anal
-                    "Speed == 1", "Laura_Sex_Legs_A1",#heading
-                    "Speed == 2", "Laura_Sex_Legs_A2",#slow
-                    "Speed == 3", "Laura_Sex_Legs_A3",#fast
-                    "Speed >= 4", "Laura_Sex_Legs_A4",#cumming
+                    "action_speed == 1", "Laura_Sex_Legs_A1",#heading
+                    "action_speed == 2", "Laura_Sex_Legs_A2",#slow
+                    "action_speed == 3", "Laura_Sex_Legs_A3",#fast
+                    "action_speed >= 4", "Laura_Sex_Legs_A4",#cumming
                     "True", "Laura_Sex_Legs_A0",#Static
                     ),
             "Player.Cock == 'foot'", ConditionSwitch(
                     # If during Footjob
                     "not Player.Sprite","Laura_Sex_Legs_F0",#Static
-                    "Speed == 1", "Laura_Sex_Legs_F1",#heading
-                    "Speed >= 4", "Laura_Sex_Legs_F0",#cumming
-                    "Speed >= 2", "Laura_Sex_Legs_F2",#slow
+                    "action_speed == 1", "Laura_Sex_Legs_F1",#heading
+                    "action_speed >= 4", "Laura_Sex_Legs_F0",#cumming
+                    "action_speed >= 2", "Laura_Sex_Legs_F2",#slow
                     "True",       "Laura_Sex_Legs_F0",#Static
                     ),
             "True", ConditionSwitch(
                     # If neither
                     "not Player.Sprite","Laura_Sex_Legs_H0",#Static
-                    "Speed == 1", "Laura_Sex_Legs_H1",#heading
-                    "Speed == 4", "Laura_Sex_Legs_H0",#cumming
-                    "Speed >= 2", "Laura_Sex_Legs_H2",#slow
+                    "action_speed == 1", "Laura_Sex_Legs_H1",#heading
+                    "action_speed == 4", "Laura_Sex_Legs_H0",#cumming
+                    "action_speed >= 2", "Laura_Sex_Legs_H2",#slow
                     "True", "Laura_Sex_Legs_H0",#Static
                     ),
             )
@@ -2355,13 +2355,13 @@ image Laura_Sex_Body:
     contains:
             ConditionSwitch(
                 #breast licking animation
-                "Trigger == 'suck breasts' or Trigger2 == 'suck breasts'", "Laura_Sex_Lick_Breasts",
+                "primary_action == 'suck breasts' or offhand_action == 'suck breasts'", "Laura_Sex_Lick_Breasts",
                 "True", Null()
                 )
     contains:
             ConditionSwitch(
                 #breast fondling animation
-                "Trigger == 'fondle breasts' or Trigger2 == 'fondle breasts'", "Laura_Sex_Fondle_Breasts",
+                "primary_action == 'fondle breasts' or offhand_action == 'fondle breasts'", "Laura_Sex_Fondle_Breasts",
                 "True", Null()
                 )
     contains:
@@ -2405,8 +2405,8 @@ image Laura_Sex_Legs:
     contains:
             # anus
         ConditionSwitch(
-            "Player.Cock == 'anal' and Speed > 1", "images/LauraSex/Laura_Sex_Anus_L.png", #and speed above heading?
-            "Player.Cock == 'anal' and Speed > 0", "images/LauraSex/Laura_Sex_Anus_M.png", #and speed above heading?
+            "Player.Cock == 'anal' and action_speed > 1", "images/LauraSex/Laura_Sex_Anus_L.png", #and speed above heading?
+            "Player.Cock == 'anal' and action_speed > 0", "images/LauraSex/Laura_Sex_Anus_M.png", #and speed above heading?
             "'anal' in LauraX.Spunk", "images/LauraSex/Laura_Sex_Anus_M.png", # If it's full. . .
             "True", "images/LauraSex/Laura_Sex_Anus_S.png",
             )
@@ -2414,15 +2414,15 @@ image Laura_Sex_Legs:
             # anal spunk
         ConditionSwitch(
             "'anal' not in LauraX.Spunk", Null(),
-            "Player.Cock == 'anal' and Speed > 1", "images/LauraSex/Laura_Sex_Spunk_Anal_U.png", #speed above heading?
+            "Player.Cock == 'anal' and action_speed > 1", "images/LauraSex/Laura_Sex_Spunk_Anal_U.png", #speed above heading?
             "True", "images/LauraSex/Laura_Sex_Spunk_Anal.png",
             )
     contains:
             # pussy
         ConditionSwitch(
-            "Player.Cock == 'in' and Speed > 1", "images/LauraSex/Laura_Sex_Pussy_Open.png", #and speed above heading?
-            "Player.Cock == 'in' and Speed > 0", "images/LauraSex/Laura_Sex_Pussy_Mid.png", #and speed heading?
-            "Trigger == 'lick pussy'", "images/LauraSex/Laura_Sex_Pussy_Mid.png", #pussy licking
+            "Player.Cock == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Pussy_Open.png", #and speed above heading?
+            "Player.Cock == 'in' and action_speed > 0", "images/LauraSex/Laura_Sex_Pussy_Mid.png", #and speed heading?
+            "primary_action == 'lick pussy'", "images/LauraSex/Laura_Sex_Pussy_Mid.png", #pussy licking
             "True", "images/LauraSex/Laura_Sex_Pussy_Closed.png",
             )
     contains:
@@ -2435,24 +2435,24 @@ image Laura_Sex_Legs:
             # pussy spunk
         ConditionSwitch(
             "'in' not in LauraX.Spunk", Null(),
-            "Player.Cock == 'in' and Speed > 1", "images/LauraSex/Laura_Sex_Spunk_Pussy_Open.png", #and speed above heading?
+            "Player.Cock == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Spunk_Pussy_Open.png", #and speed above heading?
             "True", "images/LauraSex/Laura_Sex_Spunk_Pussy.png",
             )
     contains:
             # pubes
         ConditionSwitch(
             "not LauraX.Pubes", Null(),
-            "Player.Cock == 'in' and Speed > 1", "images/LauraSex/Laura_Sex_Pubes_Open.png", #and speed above heading?
-            "Player.Cock == 'in' and Speed > 0", "images/LauraSex/Laura_Sex_Pubes_Mid.png", #and speed heading?
-            "Trigger == 'lick pussy'", "images/LauraSex/Laura_Sex_Pubes_Mid.png", #pussy licking
+            "Player.Cock == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Pubes_Open.png", #and speed above heading?
+            "Player.Cock == 'in' and action_speed > 0", "images/LauraSex/Laura_Sex_Pubes_Mid.png", #and speed heading?
+            "primary_action == 'lick pussy'", "images/LauraSex/Laura_Sex_Pubes_Mid.png", #pussy licking
             "True", "images/LauraSex/Laura_Sex_Pubes_Closed.png",
             )
     contains:
             # piercings
         ConditionSwitch(
-            "LauraX.Pierce == 'barbell' and Player.Cock == 'in' and Speed > 1", "images/LauraSex/Laura_Sex_Barbell_Pussy_O.png", #and speed above heading?
+            "LauraX.Pierce == 'barbell' and Player.Cock == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Barbell_Pussy_O.png", #and speed above heading?
             "LauraX.Pierce == 'barbell'", "images/LauraSex/Laura_Sex_Barbell_Pussy.png",
-            "LauraX.Pierce == 'ring' and Player.Cock == 'in' and Speed > 1", "images/LauraSex/Laura_Sex_Ring_Pussy_O.png", #and speed above heading?
+            "LauraX.Pierce == 'ring' and Player.Cock == 'in' and action_speed > 1", "images/LauraSex/Laura_Sex_Ring_Pussy_O.png", #and speed above heading?
             "LauraX.Pierce == 'ring'", "images/LauraSex/Laura_Sex_Ring_Pussy.png",
             "True", Null(),
             )
@@ -2489,8 +2489,8 @@ image Laura_Sex_Legs:
         ConditionSwitch(
             #pussy licking animation
             "Player.Sprite and Player.Cock", Null(),
-            "Trigger == 'lick pussy'", "Laura_Sex_Lick_Pussy",
-            "Trigger == 'lick ass'", "Laura_Sex_Lick_Ass",
+            "primary_action == 'lick pussy'", "Laura_Sex_Lick_Pussy",
+            "primary_action == 'lick ass'", "Laura_Sex_Lick_Ass",
             "True", Null()
             ),
     contains:
@@ -2634,7 +2634,7 @@ image Laura_Sex_Legs_S0:
     # End Legs Sex static
 
 image Laura_Sex_Zero_Anim_S0:
-    #this is the cock for Laura's sex animation, Speed0 (static)
+    #this is the cock for Laura's sex animation, action_speed0 (static)
     contains:
         subpixel True
         "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -2694,7 +2694,7 @@ image Laura_Sex_Legs_S1:
     # End Legs Sex heading
 
 image Laura_Sex_Zero_Anim_S1:
-    #this is the cock for Laura's sex animation, Speed1 (heading)
+    #this is the cock for Laura's sex animation, action_speed1 (heading)
     contains:
         subpixel True
         "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -2766,7 +2766,7 @@ image Laura_Sex_Legs_S2:
     # End Legs Sex slow
 
 image Laura_Sex_Zero_Anim_S2:
-    #this is the cock for Laura's sex animation, Speed 1 (slow)
+    #this is the cock for Laura's sex animation, action_speed 1 (slow)
     contains:
         subpixel True
         "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -2845,7 +2845,7 @@ image Laura_Sex_Legs_S3:
     # End Legs Sex fast
 
 image Laura_Sex_Zero_Anim_S3:
-    #this is the cock for Laura's sex animation, Speed3 (fast)
+    #this is the cock for Laura's sex animation, action_speed3 (fast)
     contains:
         subpixel True
         "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -2917,7 +2917,7 @@ image Laura_Sex_Legs_S4:
     # End Legs Sex fast
 
 image Laura_Sex_Zero_Anim_S4:
-    #this is the cock for Laura's sex animation, Speed4 (cumming)
+    #this is the cock for Laura's sex animation, action_speed4 (cumming)
     contains:
         subpixel True
         "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -2980,7 +2980,7 @@ image Laura_Sex_Legs_A0:
     # End Legs anal static
 
 image Laura_Sex_Zero_Anim_A0:
-    #this is the cock for Laura's anal animation, Speed0 (static)
+    #this is the cock for Laura's anal animation, action_speed0 (static)
     contains:
         subpixel True
         "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -3041,7 +3041,7 @@ image Laura_Sex_Legs_A1:
     # End Legs anal heading
 
 image Laura_Sex_Zero_Anim_A1:
-    #this is the cock for Laura's anal animation, Speed1 (heading)
+    #this is the cock for Laura's anal animation, action_speed1 (heading)
     contains:
         subpixel True
         "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -3113,7 +3113,7 @@ image Laura_Sex_Legs_A2:
     # End Legs anal slow
 
 image Laura_Sex_Zero_Anim_A2:
-    #this is the cock for Laura's anal animation, Speed2 (slow)
+    #this is the cock for Laura's anal animation, action_speed2 (slow)
     contains:
         subpixel True
         "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -3184,7 +3184,7 @@ image Laura_Sex_Legs_A3:
     # End Legs Anal fast
 
 image Laura_Sex_Zero_Anim_A3:
-    #this is the cock for Laura's anal animation, Speed3 (fast)
+    #this is the cock for Laura's anal animation, action_speed3 (fast)
     contains:
         subpixel True
         "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -3256,7 +3256,7 @@ image Laura_Sex_Legs_A4:
     # End Legs Anal cumming
 
 image Laura_Sex_Zero_Anim_A4:
-    #this is the cock for Laura's anal animation, Speed4 (cumming)
+    #this is the cock for Laura's anal animation, action_speed4 (cumming)
     contains:
         subpixel True
         "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -3318,7 +3318,7 @@ image Laura_Sex_Legs_H0:
     # End Legs hotdogging static
 
 image Laura_Sex_Zero_Anim_H0:
-    #this is the cock for Laura's hotdogging animation, Speed0 (static)
+    #this is the cock for Laura's hotdogging animation, action_speed0 (static)
     contains:
         subpixel True
         ConditionSwitch(
@@ -3383,7 +3383,7 @@ image Laura_Sex_Legs_H1:
     # End Legs hotdogging slow
 
 image Laura_Sex_Zero_Anim_H1:
-    #this is the cock for Laura's hotdogging animation, Speed1 (slow)
+    #this is the cock for Laura's hotdogging animation, action_speed1 (slow)
     contains:
         subpixel True
         "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -3443,7 +3443,7 @@ image Laura_Sex_Legs_H2:
     # End Legs anal fast
 
 image Laura_Sex_Zero_Anim_H2:
-    #this is the cock for Laura's hotdogging animation, Speed1 (fast)
+    #this is the cock for Laura's hotdogging animation, action_speed1 (fast)
     contains:
         subpixel True
         "Zero_Doggy_Insert" # Zero's cock, changes color and properties
@@ -3748,7 +3748,7 @@ image Laura_SexMaskX:
 #    rotate 30
 
 image Laura_Sex_Zero_AnimX:
-        #this is the cock for Laura's sex animation, Speed 0 (static)
+        #this is the cock for Laura's sex animation, action_speed 0 (static)
         contains:
             Solid("#159457", xysize=(401,606))#(1264,1061))
             alpha 0.9
@@ -3847,12 +3847,12 @@ image Laura_BJ_Animation:
             # Laura's upper body
 #            "Player.Sprite", ConditionSwitch(
 #                    # If during sex
-            "Speed == 1", "Laura_BJ_Body_1",#Licking
-            "Speed == 2", "Laura_BJ_Body_2",#Heading
-            "Speed == 3", "Laura_BJ_Body_3",#Sucking
-            "Speed == 4", "Laura_BJ_Body_4",#Deepthroat
-            "Speed == 5", "Laura_BJ_Body_5",#Cumming high
-            "Speed == 6", "Laura_BJ_Body_6",#Cumming deep
+            "action_speed == 1", "Laura_BJ_Body_1",#Licking
+            "action_speed == 2", "Laura_BJ_Body_2",#Heading
+            "action_speed == 3", "Laura_BJ_Body_3",#Sucking
+            "action_speed == 4", "Laura_BJ_Body_4",#Deepthroat
+            "action_speed == 5", "Laura_BJ_Body_5",#Cumming high
+            "action_speed == 6", "Laura_BJ_Body_6",#Cumming deep
 #                    "True",     "Laura_BJ_Body_0",#Static
 #                    ),
             "True","Laura_BJ_Body_0",#Static
@@ -3897,12 +3897,12 @@ image Laura_Sprite_BJ_Head:
                 ),
         (0,0), ConditionSwitch(#chin spunk
             "'chin' not in LauraX.Spunk", Null(),
-            "Speed >= 2", Null(),
+            "action_speed >= 2", Null(),
             "True", "images/LauraSprite/Laura_Sprite_Spunk_Chin.png",
             ),
         (0,0), ConditionSwitch(#Mouths
-            "Speed >= 2", "images/LauraSprite/Laura_Sprite_Mouth_SuckingBJ.png",   #sucking
-            "Speed == 1", "images/LauraSprite/Laura_Sprite_Mouth_Tongue.png",     #licking
+            "action_speed >= 2", "images/LauraSprite/Laura_Sprite_Mouth_SuckingBJ.png",   #sucking
+            "action_speed == 1", "images/LauraSprite/Laura_Sprite_Mouth_Tongue.png",     #licking
             "LauraX.Mouth == 'normal'", "images/LauraSprite/Laura_Sprite_Mouth_Normal.png",
             "LauraX.Mouth == 'lipbite'", "images/LauraSprite/Laura_Sprite_Mouth_Lipbite.png",
             "LauraX.Mouth == 'sucking'", "images/LauraSprite/Laura_Sprite_Mouth_Sucking.png",
@@ -3918,8 +3918,8 @@ image Laura_Sprite_BJ_Head:
             ),
         (0,0), ConditionSwitch(#Mouth spunk
             "'mouth' not in LauraX.Spunk", Null(),
-            "Speed >= 2", "images/LauraSprite/Laura_Sprite_Spunk_MouthSuck.png",   #sucking
-            "Speed == 1", "images/LauraSprite/Laura_Sprite_Spunk_MouthTongue.png",     #licking
+            "action_speed >= 2", "images/LauraSprite/Laura_Sprite_Spunk_MouthSuck.png",   #sucking
+            "action_speed == 1", "images/LauraSprite/Laura_Sprite_Spunk_MouthTongue.png",     #licking
             "LauraX.Mouth == 'normal'", "images/LauraSprite/Laura_Sprite_Spunk_MouthNeutral.png",
             "LauraX.Mouth == 'lipbite'", "images/LauraSprite/Laura_Sprite_Spunk_MouthSmirk.png",
             "LauraX.Mouth == 'sucking'", "images/LauraSprite/Laura_Sprite_Spunk_MouthTongue.png",
@@ -3933,11 +3933,11 @@ image Laura_Sprite_BJ_Head:
             "True", "images/LauraSprite/Laura_Sprite_Spunk_MouthNeutral.png",
             ),
         (0,0), ConditionSwitch(#Mouth spunk over
-            "Speed >= 2 and 'mouth' in LauraX.Spunk", "images/LauraSprite/Laura_Sprite_SpunkSuckingO.png",   #sucking
+            "action_speed >= 2 and 'mouth' in LauraX.Spunk", "images/LauraSprite/Laura_Sprite_SpunkSuckingO.png",   #sucking
             "True", Null(),
             ),
         (0,0), ConditionSwitch(#wet tongue
-            "Speed == 1", "images/LauraSprite/Laura_Sprite_Wet_Tongue.png",     #licking
+            "action_speed == 1", "images/LauraSprite/Laura_Sprite_Wet_Tongue.png",     #licking
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -3996,7 +3996,7 @@ image Laura_Sprite_BJ_Head:
 #    zoom .5
 
 image Laura_BlowCock_Mask:
-    #This is a mask used by the blockcock during the Speed 3 sucking animation
+    #This is a mask used by the blockcock during the action_speed 3 sucking animation
     #it is a block moving in and out to prevent the cock sticking out the back.
     contains:
         Solid("#159457", xysize=(190,950))
@@ -4010,7 +4010,7 @@ image Laura_BlowCock_Mask:
 
 
 #image Laura_BlowCock_Mask_3:
-#    This is a mask used by the blockcock during the Speed 4 deep throat animation
+#    This is a mask used by the blockcock during the action_speed 4 deep throat animation
 #    it is a block moving in and out to prevent the cock sticking out the back.
 #    contains:
 #        Solid("#159457", xysize=(190,950))
@@ -4092,7 +4092,7 @@ image Laura_BJ_Body_0:
                 pause 0.4
                 ease 1.95 pos (420,292) #top 412
                 repeat
-    #End BJ animation Speed 0
+    #End BJ animation action_speed 0
 
 
 image Laura_BJ_Body_1:
@@ -4206,7 +4206,7 @@ image Laura_BJ_Body_1:
                 pause 0.4
                 ease 1.2 pos (412,292) #top
                 repeat
-    #End BJ animation Speed 1
+    #End BJ animation action_speed 1
 
 image Laura_BJ_Body_2:
     #Her Body in the BJ pose, heading
@@ -4345,12 +4345,12 @@ image Laura_BJ_Body_2:
                 pause 0.1
                 ease 1.4 ypos 355 #top
                 repeat
-    #End BJ animation Speed 2
+    #End BJ animation action_speed 2
 
 
 
 image Laura_BlowCock_Mask_3:
-    #This is a mask used by the blockcock during the Speed 3 sucking animation
+    #This is a mask used by the blockcock during the action_speed 3 sucking animation
     #it is a block moving in and out to prevent the cock sticking out the back.
     contains:
         Solid("#159457", xysize=(190,950))
@@ -4499,11 +4499,11 @@ image Laura_BJ_Body_3:
 #                pause 0.1
                 ease 1 ypos 380 #top
                 repeat
-    #End BJ animation Speed 3
+    #End BJ animation action_speed 3
 
 
 image Laura_BlowCock_Mask_4:
-    #This is a mask used by the blockcock during the Speed 4 deep throat animation
+    #This is a mask used by the blockcock during the action_speed 4 deep throat animation
     #it is a block moving in and out to prevent the cock sticking out the back.
     contains:
         Solid("#159457", xysize=(190,950))
@@ -4652,7 +4652,7 @@ image Laura_BJ_Body_4:
                 pause 0.1
                 ease 1.4 ypos 380 #top
                 repeat
-    #End BJ animation Speed 4
+    #End BJ animation action_speed 4
 
 
 image Laura_BJ_Body_5:
@@ -4796,10 +4796,10 @@ image Laura_BJ_Body_5:
                 easein .5 ypos 375 #bottom
                 pause .5
                 repeat
-    #End BJ animation Speed 5
+    #End BJ animation action_speed 5
 
 image Laura_BlowCock_Mask_6:
-    #This is a mask used by the blockcock during the Speed 4 deep throat animation
+    #This is a mask used by the blockcock during the action_speed 4 deep throat animation
     #it is a block moving in and out to prevent the cock sticking out the back.
     contains:
         Solid("#159457", xysize=(190,950))
@@ -4952,21 +4952,21 @@ image Laura_BJ_Body_6:
                 easein .5 ypos 500 #bottom
                 pause .5
                 repeat
-    #End BJ animation Speed 6
+    #End BJ animation action_speed 6
 #Head and Body Animations for Laura's BJ Scenes / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
                                                                #BJ Launchers
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
                                                                #BJ Launchers
 #<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
-label Laura_BJ_Launch(Line = Trigger):
+label Laura_BJ_Launch(line = primary_action):
     # The sequence to launch the Laura BJ animations
     $ LauraX.ArmPose = 1
     if renpy.showing("Laura_BJ_Animation"):
         return
 
     call Laura_Hide
-    if Line == "L" or Line == "cum":
+    if line == "L" or line == "cum":
         show Laura_Sprite at sprite_location(StageCenter) zorder LauraX.Layer:
             alpha 1
             ease 1 zoom 2.5 offset (150,80)
@@ -4977,20 +4977,20 @@ label Laura_BJ_Launch(Line = Trigger):
             zoom 2.5 offset (150,80)
         with dissolve
 
-    $ Speed = 0
-    if Line == "L": # Laura gets started. . .
+    $ action_speed = 0
+    if line == "L": # Laura gets started. . .
             if Taboo:
                 if len(Present) >= 2:
                     if Present[0] != LauraX:
-                            "[LauraX.Name] looks back at [Present[0].Name] to see if she's watching."
+                            "[LauraX.name] looks back at [Present[0].name] to see if she's watching."
                     elif Present[1] != LauraX:
-                            "[LauraX.Name] looks back at [Present[1].Name] to see if she's watching."
+                            "[LauraX.name] looks back at [Present[1].name] to see if she's watching."
                 else:
-                            "[LauraX.Name] casually glances around to see if anyone can see her."
-            "[LauraX.Name] smoothly bends down and places your cock against her cheek."
+                            "[LauraX.name] casually glances around to see if anyone can see her."
+            "[LauraX.name] smoothly bends down and places your cock against her cheek."
 
-    if Line != "cum":
-        $ Trigger = "blow"
+    if line != "cum":
+        $ primary_action = "blow"
 
     show Laura_Sprite zorder LauraX.Layer:
         alpha 0
@@ -5003,7 +5003,7 @@ label Laura_BJ_Reset: # The sequence to the Laura animations from BJ to default
         return
 #    hide Laura_BJ_Animation
     call Laura_Hide
-    $ Speed = 0
+    $ action_speed = 0
 
     show Laura_Sprite at sprite_location(StageCenter) zorder LauraX.Layer:
         alpha 1
@@ -5110,27 +5110,27 @@ image Laura_HJ_Animation:
     contains:
         ConditionSwitch(
             # backside of the hand
-            "not Speed", Transform("Laura_Hand_Under"),
-            "Speed == 1", At("Laura_Hand_Under", Laura_Hand_1()),
-            "Speed >= 2", At("Laura_Hand_Under", Laura_Hand_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Laura_Hand_Under"),
+            "action_speed == 1", At("Laura_Hand_Under", Laura_Hand_1()),
+            "action_speed >= 2", At("Laura_Hand_Under", Laura_Hand_2()),
+            "action_speed", Null(),
             ),
     contains:
         ConditionSwitch(
             # cock
-            "not Speed", Transform("Zero_Handcock"),
-            "Speed == 1", At("Zero_Handcock", Handcock_1L()),
-            "Speed >= 2", At("Zero_Handcock", Handcock_2L()),
-            "Speed", Null(),
+            "not action_speed", Transform("Zero_Handcock"),
+            "action_speed == 1", At("Zero_Handcock", Handcock_1L()),
+            "action_speed >= 2", At("Zero_Handcock", Handcock_2L()),
+            "action_speed", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(
             # fingers of the hand
-            "not Speed", Transform("Laura_Hand_Over"),
-            "Speed == 1", At("Laura_Hand_Over", Laura_Hand_1()),
-            "Speed >= 2", At("Laura_Hand_Over", Laura_Hand_2()),
-            "Speed", Null(),
+            "not action_speed", Transform("Laura_Hand_Over"),
+            "action_speed == 1", At("Laura_Hand_Over", Laura_Hand_1()),
+            "action_speed >= 2", At("Laura_Hand_Over", Laura_Hand_2()),
+            "action_speed", Null(),
             ),
     anchor (0.51, -1.3)
     zoom 0.4#0.6
@@ -5139,7 +5139,7 @@ image Laura_HJ_Animation:
 label Laura_HJ_Reset: # The sequence to the Laura animations from handjob to default
     if not renpy.showing("Laura_HJ_Animation"):
         return
-    $ Speed = 0
+    $ action_speed = 0
     $ LauraX.ArmPose = 1
     hide Laura_HJ_Animation with easeoutbottom
     call Laura_Hide
@@ -5171,10 +5171,10 @@ image Laura_TJ_Animation:
                 ConditionSwitch(
                     # Laura's upper body
                     "not Player.Sprite","Laura_TJ_0",#Static
-                    "Speed == 1", "Laura_TJ_1",#slow
-                    "Speed == 4", "Laura_TJ_4",#cumming high
-                    "Speed == 5", "Laura_TJ_5",#cumming low
-                    "Speed >= 2", "Laura_TJ_2",#fast
+                    "action_speed == 1", "Laura_TJ_1",#slow
+                    "action_speed == 4", "Laura_TJ_4",#cumming high
+                    "action_speed == 5", "Laura_TJ_5",#cumming low
+                    "action_speed >= 2", "Laura_TJ_2",#fast
                     "True",       "Laura_TJ_0",#Static
                     )
             zoom .7 #0.6
@@ -6231,23 +6231,23 @@ image Laura_TJ_5:
 
 # Laura's TJ animations end / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-label Laura_TJ_Launch(Line = Trigger):    # The sequence to launch the Laura Titfuck animations
+label Laura_TJ_Launch(line = primary_action):    # The sequence to launch the Laura Titfuck animations
     if renpy.showing("Laura_TJ_Animation"):
         return
     call Laura_Hide
     show Laura_Sprite at sprite_location(LauraX.sprite_location) zorder LauraX.Layer:
         alpha 1
         ease 1 zoom 2.3 xpos 750 yoffset -100
-    if Line == "L": # Laura gets started. . .
+    if line == "L": # Laura gets started. . .
             if Taboo:
                 if len(Present) >= 2:
                     if Present[0] != LauraX:
-                            "[LauraX.Name] looks back at [Present[0].Name] to see if she's watching."
+                            "[LauraX.name] looks back at [Present[0].name] to see if she's watching."
                     elif Present[1] != LauraX:
-                            "[LauraX.Name] looks back at [Present[1].Name] to see if she's watching."
+                            "[LauraX.name] looks back at [Present[1].name] to see if she's watching."
                 else:
-                            "[LauraX.Name] casually glances around to see if anyone can see her."
-            "[LauraX.Name] bends over and places your cock between her breasts."
+                            "[LauraX.name] casually glances around to see if anyone can see her."
+            "[LauraX.name] bends over and places your cock between her breasts."
 
     if LauraX.Chest and LauraX.Over:
         "She throws off her [LauraX.Over] and her [LauraX.Chest]."
@@ -6264,9 +6264,9 @@ label Laura_TJ_Launch(Line = Trigger):    # The sequence to launch the Laura Tit
     show blackscreen onlayer black with dissolve
     show Laura_Sprite zorder LauraX.Layer:
         alpha 0
-    $ Speed = 0
-    if Line != "cum":
-        $ Trigger = "titjob"
+    $ action_speed = 0
+    if line != "cum":
+        $ primary_action = "titjob"
     show Laura_TJ_Animation zorder 150:
         pos (700,520) #700,420)
     $ Player.Sprite = 1
@@ -6274,9 +6274,9 @@ label Laura_TJ_Launch(Line = Trigger):    # The sequence to launch the Laura Tit
     return
 
 
-label Laura_Middle_Launch(T = Trigger,Set=1):
+label Laura_Middle_Launch(T = primary_action,Set=1):
     call Laura_Hide
-    $ Trigger = T
+    $ primary_action = T
     $ LauraX.Pose = "mid" if Set else LauraX.Pose
     show Laura_Sprite at sprite_location(LauraX.sprite_location) zorder LauraX.Layer:
 #        ease 0.5 offset (-100,-200) zoom 2

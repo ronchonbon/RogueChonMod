@@ -201,96 +201,96 @@ image Rogue_Sprite:
             "True", Null()),
 
         (0,0), ConditionSwitch(
-            "Trigger == 'lesbian' or not Trigger3 or Ch_Focus != RogueX", Null(),
-            "Trigger3 == 'fondle pussy' and Trigger != 'sex' and RogueX.Lust >= 70", "GirlFingerPussy",
-            "Trigger3 == 'fondle pussy'", "GirlGropePussy",
-            "Trigger3 == 'fondle breasts' and (Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts')", "GirlGropeLeftBreast",    #When zero is working the right breast, fondle left
-            "Trigger3 == 'fondle breasts' and (Trigger == 'fondle breasts' or Trigger == 'suck breasts')", "GirlGropeRightBreast", #When zero is working the left breast, fondle right
-            "Trigger3 == 'fondle breasts'", "GirlGropeRightBreast",
-            "Trigger3 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger3 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger3 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger3 == 'vibrator anal'", "VibratorAnal",
-            "Trigger3 == 'vibrator anal insert'", "VibratorPussy",
+            "primary_action == 'lesbian' or not girl_offhand_action or focused_Girl != RogueX", Null(),
+            "girl_offhand_action == 'fondle pussy' and primary_action != 'sex' and RogueX.lust >= 70", "GirlFingerPussy",
+            "girl_offhand_action == 'fondle pussy'", "GirlGropePussy",
+            "girl_offhand_action == 'fondle breasts' and (offhand_action == 'fondle breasts' or offhand_action == 'suck breasts')", "GirlGropeLeftBreast",    #When zero is working the right breast, fondle left
+            "girl_offhand_action == 'fondle breasts' and (primary_action == 'fondle breasts' or primary_action == 'suck breasts')", "GirlGropeRightBreast", #When zero is working the left breast, fondle right
+            "girl_offhand_action == 'fondle breasts'", "GirlGropeRightBreast",
+            "girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "girl_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "girl_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null()),
 
         (0,0), ConditionSwitch(
-            "not Trigger5 or Trigger4 != 'masturbation' or Ch_Focus == RogueX", Null(),
-            "Trigger5 == 'fondle pussy' and Trigger != 'sex' and RogueX.Lust >= 70", "GirlFingerPussy",
-            "Trigger5 == 'fondle pussy'", "GirlGropePussy",
-            "Trigger5 == 'fondle breasts'", "GirlGropeRightBreast",
-            "Trigger5 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger5 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger5 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger5 == 'vibrator anal'", "VibratorAnal",
-            "Trigger5 == 'vibrator anal insert'", "VibratorPussy",
+            "not Partner_offhand_action or Partner_primary_action != 'masturbation' or focused_Girl == RogueX", Null(),
+            "Partner_offhand_action == 'fondle pussy' and primary_action != 'sex' and RogueX.lust >= 70", "GirlFingerPussy",
+            "Partner_offhand_action == 'fondle pussy'", "GirlGropePussy",
+            "Partner_offhand_action == 'fondle breasts'", "GirlGropeRightBreast",
+            "Partner_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "Partner_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "Partner_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "Partner_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "Partner_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null()),
 
         (0,0), ConditionSwitch(
-            "not Trigger or Ch_Focus != RogueX", Null(),
-            "Trigger == 'vibrator breasts'", "VibratorLeftBreast",
-            "Trigger == 'fondle thighs'", "GropeThigh",
-            "Trigger == 'fondle breasts'", "GropeRightBreast",
-            "Trigger == 'suck breasts'", "LickRightBreast",
-            "Trigger == 'vibrator pussy'", "VibratorPussy",
-            "Trigger == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger == 'vibrator anal'", "VibratorAnal",
-            "Trigger == 'vibrator anal insert'", "VibratorPussy",
-            "Trigger == 'fondle pussy' and Speed == 2", "FingerPussy",
-            "Trigger == 'fondle pussy'", "GropePussy",
-            "Trigger == 'lick pussy'", "Lickpussy",
+            "not primary_action or focused_Girl != RogueX", Null(),
+            "primary_action == 'vibrator breasts'", "VibratorLeftBreast",
+            "primary_action == 'fondle thighs'", "GropeThigh",
+            "primary_action == 'fondle breasts'", "GropeRightBreast",
+            "primary_action == 'suck breasts'", "LickRightBreast",
+            "primary_action == 'vibrator pussy'", "VibratorPussy",
+            "primary_action == 'vibrator pussy insert'", "VibratorPussy",
+            "primary_action == 'vibrator anal'", "VibratorAnal",
+            "primary_action == 'vibrator anal insert'", "VibratorPussy",
+            "primary_action == 'fondle pussy' and action_speed == 2", "FingerPussy",
+            "primary_action == 'fondle pussy'", "GropePussy",
+            "primary_action == 'lick pussy'", "Lickpussy",
             "True", Null()),
 
         (0,0), ConditionSwitch(
-            "not Trigger2 or Ch_Focus != RogueX", Null(),
-            "Trigger == 'fondle breasts' and not Trigger3 and not Trigger4 and not Trigger5", "GropeRightBreast",
-            "Trigger2 == 'fondle breasts' and Trigger == 'suck breasts'", "GropeLeftBreast",
-            "Trigger2 == 'fondle breasts'", "GropeLeftBreast",
-            "Trigger2 == 'vibrator breasts' and Trigger == 'suck breasts'", "VibratorLeftBreast",
-            "Trigger2 == Trigger", Null(),
-            "Trigger2 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger2 == 'suck breasts'", "LickLeftBreast",
-            "Trigger2 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger2 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger2 == 'vibrator anal'", "VibratorAnal",
-            "Trigger2 == 'vibrator anal insert'", "VibratorPussy",
-            "Trigger2 == 'fondle pussy'", "GropePussy",
-            "Trigger2 == 'lick pussy'", "Lickpussy",
-            "Trigger2 == 'fondle thighs'", "GropeThigh",
+            "not offhand_action or focused_Girl != RogueX", Null(),
+            "primary_action == 'fondle breasts' and not girl_offhand_action and not Partner_primary_action and not Partner_offhand_action", "GropeRightBreast",
+            "offhand_action == 'fondle breasts' and primary_action == 'suck breasts'", "GropeLeftBreast",
+            "offhand_action == 'fondle breasts'", "GropeLeftBreast",
+            "offhand_action == 'vibrator breasts' and primary_action == 'suck breasts'", "VibratorLeftBreast",
+            "offhand_action == primary_action", Null(),
+            "offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "offhand_action == 'suck breasts'", "LickLeftBreast",
+            "offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "offhand_action == 'vibrator anal'", "VibratorAnal",
+            "offhand_action == 'vibrator anal insert'", "VibratorPussy",
+            "offhand_action == 'fondle pussy'", "GropePussy",
+            "offhand_action == 'lick pussy'", "Lickpussy",
+            "offhand_action == 'fondle thighs'", "GropeThigh",
             "True", Null()),
 
         (0,0), ConditionSwitch(
-            "not Trigger4 or Ch_Focus != RogueX", Null(),
-            "Trigger4 == 'fondle pussy' and Trigger != 'sex' and RogueX.Lust >= 70", "GirlFingerPussy",
-            "Trigger4 == 'fondle pussy'", "GirlGropePussy",
-            "Trigger4 == 'lick pussy'", "Lickpussy",
-            "Trigger4 == 'suck breasts' and (Trigger2 != 'suck breasts' or Trigger == 'suck breasts')", "LickLeftBreast",
-            "Trigger4 == 'suck breasts'", "LickRightBreast",
-            "Trigger4 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger4 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger4 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger4 == 'vibrator anal'", "VibratorAnal",
-            "Trigger4 == 'vibrator anal insert'", "VibratorPussy",
-            "Trigger4 == 'fondle breasts' and (Trigger == 'fondle breasts' or Trigger == 'suck breasts')", "GirlGropeLeftBreast",    #When zero is working the right breast, fondle left
-            "Trigger4 == 'fondle breasts' and (Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts')", "GirlGropeRightBreast", #When zero is working the left breast, fondle right
-            "Trigger4 == 'fondle breasts'", "GirlGropeRightBreast",
+            "not Partner_primary_action or focused_Girl != RogueX", Null(),
+            "Partner_primary_action == 'fondle pussy' and primary_action != 'sex' and RogueX.lust >= 70", "GirlFingerPussy",
+            "Partner_primary_action == 'fondle pussy'", "GirlGropePussy",
+            "Partner_primary_action == 'lick pussy'", "Lickpussy",
+            "Partner_primary_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast",
+            "Partner_primary_action == 'suck breasts'", "LickRightBreast",
+            "Partner_primary_action == 'vibrator breasts'", "VibratorRightBreast",
+            "Partner_primary_action == 'vibrator pussy'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator pussy insert'", "VibratorPussy",
+            "Partner_primary_action == 'vibrator anal'", "VibratorAnal",
+            "Partner_primary_action == 'vibrator anal insert'", "VibratorPussy",
+            "Partner_primary_action == 'fondle breasts' and (primary_action == 'fondle breasts' or primary_action == 'suck breasts')", "GirlGropeLeftBreast",    #When zero is working the right breast, fondle left
+            "Partner_primary_action == 'fondle breasts' and (offhand_action == 'fondle breasts' or offhand_action == 'suck breasts')", "GirlGropeRightBreast", #When zero is working the left breast, fondle right
+            "Partner_primary_action == 'fondle breasts'", "GirlGropeRightBreast",
             "True", Null()),
 
         (0,0), ConditionSwitch(
-            "Trigger != 'lesbian' or not Trigger3 or Ch_Focus == RogueX", Null(),
-            "Trigger3 == 'fondle pussy' and Trigger != 'sex' and RogueX.Lust >= 70", "GirlFingerPussy",
-            "Trigger3 == 'fondle pussy'", "GirlGropePussy",
-            "Trigger3 == 'lick pussy'", "Lickpussy",
-            "Trigger3 == 'suck breasts' and (Trigger2 != 'suck breasts' or Trigger == 'suck breasts')", "LickLeftBreast",
-            "Trigger3 == 'suck breasts'", "LickRightBreast",
-            "Trigger3 == 'fondle breasts' and (Trigger == 'fondle breasts' or Trigger == 'suck breasts')", "GirlGropeLeftBreast",    #When zero is working the right breast, fondle left
-            "Trigger3 == 'fondle breasts' and (Trigger2 == 'fondle breasts' or Trigger2 == 'suck breasts')", "GirlGropeRightBreast", #When zero is working the left breast, fondle right
-            "Trigger3 == 'fondle breasts'", "GirlGropeRightBreast",
-            "Trigger3 == 'vibrator breasts'", "VibratorRightBreast",
-            "Trigger3 == 'vibrator pussy'", "VibratorPussy",
-            "Trigger3 == 'vibrator pussy insert'", "VibratorPussy",
-            "Trigger3 == 'vibrator anal'", "VibratorAnal",
-            "Trigger3 == 'vibrator anal insert'", "VibratorPussy",
+            "primary_action != 'lesbian' or not girl_offhand_action or focused_Girl == RogueX", Null(),
+            "girl_offhand_action == 'fondle pussy' and primary_action != 'sex' and RogueX.lust >= 70", "GirlFingerPussy",
+            "girl_offhand_action == 'fondle pussy'", "GirlGropePussy",
+            "girl_offhand_action == 'lick pussy'", "Lickpussy",
+            "girl_offhand_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast",
+            "girl_offhand_action == 'suck breasts'", "LickRightBreast",
+            "girl_offhand_action == 'fondle breasts' and (primary_action == 'fondle breasts' or primary_action == 'suck breasts')", "GirlGropeLeftBreast",    #When zero is working the right breast, fondle left
+            "girl_offhand_action == 'fondle breasts' and (offhand_action == 'fondle breasts' or offhand_action == 'suck breasts')", "GirlGropeRightBreast", #When zero is working the left breast, fondle right
+            "girl_offhand_action == 'fondle breasts'", "GirlGropeRightBreast",
+            "girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "girl_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "girl_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "girl_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null())
         )
 
@@ -302,7 +302,7 @@ image Rogue_Head:                                                               
         (787,913),
 
         (0,0), ConditionSwitch(
-            "not Speed or not renpy.showing('Rogue_BJ_Animation')", ConditionSwitch(
+            "not action_speed or not renpy.showing('Rogue_BJ_Animation')", ConditionSwitch(
                 "RogueX.Blush > 1", "images/RogueBJFace/Rogue_bj_face_base_blush2.png",
                 "RogueX.Blush", "images/RogueBJFace/Rogue_bj_face_base_blush.png",
                 "True", "images/RogueBJFace/Rogue_bj_face_base.png"),
@@ -311,11 +311,11 @@ image Rogue_Head:                                                               
             "True", "images/RogueBJFace/Rogue_bj_face_base_s.png"),
 
         (0,0), ConditionSwitch(                                                                                 #Mouth for under layer
-            "renpy.showing('Rogue_BJ_Animation') and Speed", ConditionSwitch(
-                "Speed == 1", "images/RogueBJFace/Rogue_bj_mouth_licking.png", #licking
-                "Speed == 2", Null(),                                               #heading Rogue_BJ_HeadingMouth()
-                "Speed == 3", "images/RogueBJFace/Rogue_bj_mouth_sucking.png", #sucking
-                "Speed >= 4", "images/RogueBJFace/Rogue_bj_mouth_sucking.png", #deepthroat
+            "renpy.showing('Rogue_BJ_Animation') and action_speed", ConditionSwitch(
+                "action_speed == 1", "images/RogueBJFace/Rogue_bj_mouth_licking.png", #licking
+                "action_speed == 2", Null(),                                               #heading Rogue_BJ_HeadingMouth()
+                "action_speed == 3", "images/RogueBJFace/Rogue_bj_mouth_sucking.png", #sucking
+                "action_speed >= 4", "images/RogueBJFace/Rogue_bj_mouth_sucking.png", #deepthroat
                 "True", Null()),
             "True", ConditionSwitch(
                 "RogueX.Mouth == 'normal'", "images/RogueBJFace/Rogue_bj_mouth_normal.png",
@@ -335,9 +335,9 @@ image Rogue_Head:                                                               
 
         (0,0), ConditionSwitch(
             "'mouth' not in RogueX.Spunk", Null(),
-            "renpy.showing('Rogue_BJ_Animation') and Speed == 2",  Null(),
-            "renpy.showing('Rogue_BJ_Animation') and Speed == 1",  "images/RogueBJFace/Rogue_bj_spunk_licking.png",
-            "renpy.showing('Rogue_BJ_Animation') and Speed",  "images/RogueBJFace/Rogue_bj_spunk_sucking.png",
+            "renpy.showing('Rogue_BJ_Animation') and action_speed == 2",  Null(),
+            "renpy.showing('Rogue_BJ_Animation') and action_speed == 1",  "images/RogueBJFace/Rogue_bj_spunk_licking.png",
+            "renpy.showing('Rogue_BJ_Animation') and action_speed",  "images/RogueBJFace/Rogue_bj_spunk_sucking.png",
             "True", ConditionSwitch(
                 "RogueX.Mouth == 'normal'", "images/RogueBJFace/Rogue_bj_spunk_normal.png",
                 "RogueX.Mouth == 'lipbite'", "images/RogueBJFace/Rogue_bj_spunk_lipbite.png",
@@ -351,7 +351,7 @@ image Rogue_Head:                                                               
                 "True", "images/RogueBJFace/Rogue_bj_spunk_normal.png")),
 
         (316,590), ConditionSwitch(      #600
-            "renpy.showing('Rogue_BJ_Animation') and Speed == 2", At("Rogue_BJ_MouthHeading", Rogue_BJ_MouthAnim()),
+            "renpy.showing('Rogue_BJ_Animation') and action_speed == 2", At("Rogue_BJ_MouthHeading", Rogue_BJ_MouthAnim()),
             "True", Null()),
 
         (0,0), ConditionSwitch(                                                                 #Brows
@@ -370,9 +370,9 @@ image Rogue_Head:                                                               
 
         (0,0), "Rogue Blink",                                                                #Eyes
         (0,0), ConditionSwitch(
-            "not RogueX.Spunk or Trigger != 'blow' or 'mouth' not in RogueX.Spunk", Null(),
-            "Speed == 3", "images/RogueBJFace/Rogue_bj_face_over_sucking_cum.png",
-            "Speed == 4", "images/RogueBJFace/Rogue_bj_face_over_sucking_cum.png",
+            "not RogueX.Spunk or primary_action != 'blow' or 'mouth' not in RogueX.Spunk", Null(),
+            "action_speed == 3", "images/RogueBJFace/Rogue_bj_face_over_sucking_cum.png",
+            "action_speed == 4", "images/RogueBJFace/Rogue_bj_face_over_sucking_cum.png",
             "True", Null()),
 
         (0,0), ConditionSwitch(                                                                 #Hair overlay
@@ -457,33 +457,33 @@ image Rogue_Doggy_Animation:
         (0,0), ConditionSwitch(
             "not Player.Sprite", "Rogue_Doggy_Body",
             "Player.Cock == 'anal'", ConditionSwitch(
-                "Speed > 2", "Rogue_Doggy_Fuck2_Top",
-                "Speed > 1", "Rogue_Doggy_Fuck_Top",
-                "Speed", "Rogue_Doggy_Anal_Head_Top",
+                "action_speed > 2", "Rogue_Doggy_Fuck2_Top",
+                "action_speed > 1", "Rogue_Doggy_Fuck_Top",
+                "action_speed", "Rogue_Doggy_Anal_Head_Top",
                 "True", "Rogue_Doggy_Body"),
             "Player.Cock == 'in'", ConditionSwitch(
-                "Speed > 2", "Rogue_Doggy_Fuck2_Top",
-                "Speed > 1", "Rogue_Doggy_Fuck_Top",
+                "action_speed > 2", "Rogue_Doggy_Fuck2_Top",
+                "action_speed > 1", "Rogue_Doggy_Fuck_Top",
                 "True", "Rogue_Doggy_Body"),
             "True", "Rogue_Doggy_Body"),
 
         (0,0), ConditionSwitch(
             "not Player.Sprite", "Rogue_Doggy_Ass",
             "Player.Cock == 'anal'", ConditionSwitch(
-                "Speed > 2", "Rogue_Doggy_Fuck2_Ass",
-                "Speed > 1", "Rogue_Doggy_Fuck_Ass",
-                "Speed", "Rogue_Doggy_Anal_Head_Ass",
+                "action_speed > 2", "Rogue_Doggy_Fuck2_Ass",
+                "action_speed > 1", "Rogue_Doggy_Fuck_Ass",
+                "action_speed", "Rogue_Doggy_Anal_Head_Ass",
                 "True", "Rogue_Doggy_Ass"),
             "Player.Cock == 'in'", ConditionSwitch(
-                "Speed > 2", "Rogue_Doggy_Fuck2_Ass",
-                "Speed > 1", "Rogue_Doggy_Fuck_Ass",
+                "action_speed > 2", "Rogue_Doggy_Fuck2_Ass",
+                "action_speed > 1", "Rogue_Doggy_Fuck_Ass",
                 "True", "Rogue_Doggy_Ass"),
             "True", "Rogue_Doggy_Ass"),
 
         (0,0), ConditionSwitch(
             "Player.Cock == 'foot'", ConditionSwitch(
-                "Speed > 1", "Rogue_Doggy_Feet2",
-                "Speed", "Rogue_Doggy_Feet1",
+                "action_speed > 1", "Rogue_Doggy_Feet2",
+                "action_speed", "Rogue_Doggy_Feet1",
                 "True", "Rogue_Doggy_Feet0"),
             "not Player.Sprite and ShowFeet", "Rogue_Doggy_Feet0",
             "True", Null()),
@@ -581,7 +581,7 @@ image Rogue_Doggy_Body:
             "True", Null()),
 
         (0,0), ConditionSwitch(
-            "Trigger == 'fondle breasts' or Trigger2 == 'fondle breasts'", "Rogue_Doggy_GropeBreast",
+            "primary_action == 'fondle breasts' or offhand_action == 'fondle breasts'", "Rogue_Doggy_GropeBreast",
             "True", Null()),
         )
 
@@ -619,22 +619,22 @@ image Rogue_Doggy_Ass:
 
         (0,0), ConditionSwitch(
             "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
-                "Speed > 2", "Rogue_Pussy_Fucking3",#Speed 3
-                "Speed > 1", "Rogue_Pussy_Fucking2",#Speed 2
-                "Speed", "Rogue_Pussy_Heading",      #Speed 1
+                "action_speed > 2", "Rogue_Pussy_Fucking3",#action_speed 3
+                "action_speed > 1", "Rogue_Pussy_Fucking2",#action_speed 2
+                "action_speed", "Rogue_Pussy_Heading",      #action_speed 1
                 "True", "Rogue_Pussy_Static"),
-            "Trigger == 'lick pussy'", "images/RogueDoggy/Rogue_Doggy_Pussy_Open.png",
+            "primary_action == 'lick pussy'", "images/RogueDoggy/Rogue_Doggy_Pussy_Open.png",
             "RogueX.Legs and not RogueX.Upskirt", "images/RogueDoggy/Rogue_Doggy_Pussy_Closed.png",
             "RogueX.Panties and not RogueX.PantiesDown", "images/RogueDoggy/Rogue_Doggy_Pussy_Closed.png",
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'", "Rogue_Pussy_Fingering",
-            "Trigger == 'dildo pussy'", "Rogue_Pussy_Fucking2",
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'", "Rogue_Pussy_Fingering",
+            "primary_action == 'dildo pussy'", "Rogue_Pussy_Fucking2",
             "True", "images/RogueDoggy/Rogue_Doggy_Pussy_Closed.png"),
 
         (0,0), ConditionSwitch(
             "not RogueX.Pubes", Null(),
             "Player.Sprite and Player.Cock == 'in'", Null(),
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
             "RogueX.Legs == 'pants' and not RogueX.Upskirt", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
             "RogueX.PantiesDown", "images/RogueDoggy/Rogue_Doggy_Pubes.png",
             "RogueX.Panties", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
@@ -643,22 +643,22 @@ image Rogue_Doggy_Ass:
 
         (0,0), ConditionSwitch(
             "Player.Sprite", Null(),
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
             "RogueX.Pierce == 'ring'", "images/RogueDoggy/Rogue_Doggy_PussyRing.png",
             "RogueX.Pierce == 'barbell'", "images/RogueDoggy/Rogue_Doggy_PussyBarbell.png",
             "True", Null()),
 
         (0,0), ConditionSwitch(
             "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
-                "Speed > 2", "Rogue_Anal_Fucking2", #Speed 3
-                "Speed > 1", "Rogue_Anal_Fucking",  #Speed 2
-                "Speed", "Rogue_Anal_Heading",      #Speed 1
+                "action_speed > 2", "Rogue_Anal_Fucking2", #action_speed 3
+                "action_speed > 1", "Rogue_Anal_Fucking",  #action_speed 2
+                "action_speed", "Rogue_Anal_Heading",      #action_speed 1
                 "True", "Rogue_Anal"),
             "RogueX.Legs and not RogueX.Upskirt", "images/RogueDoggy/Rogue_Doggy_Asshole_Loose.png",
             "RogueX.Panties and not RogueX.PantiesDown", "images/RogueDoggy/Rogue_Doggy_Asshole_Loose.png",
-            "Trigger == 'insert ass' or Trigger2 == 'insert ass'", "Rogue_Anal_Fingering",
-            "Trigger == 'dildo anal'", "Rogue_Anal_Fucking",
+            "primary_action == 'insert ass' or offhand_action == 'insert ass'", "Rogue_Anal_Fingering",
+            "primary_action == 'dildo anal'", "Rogue_Anal_Fucking",
             "RogueX.Loose", "images/RogueDoggy/Rogue_Doggy_Asshole_Loose.png",
             "True", "images/RogueDoggy/Rogue_Doggy_Asshole_Tight.png"),
 
@@ -681,8 +681,8 @@ image Rogue_Doggy_Ass:
 
         (0,0), ConditionSwitch(
             "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
-            "Trigger == 'fondle pussy' or Trigger2 == 'fondle pussy'",Null(),
-            "Trigger == 'dildo pussy'", Null(),
+            "primary_action == 'fondle pussy' or offhand_action == 'fondle pussy'",Null(),
+            "primary_action == 'dildo pussy'", Null(),
             "RogueX.Hose == 'garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
             "RogueX.Hose == 'stockings and garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings.png",
             "RogueX.Panties and RogueX.PantiesDown", Null(),
@@ -699,7 +699,7 @@ image Rogue_Doggy_Ass:
                 "RogueX.Wet > 1", "images/RogueDoggy/Rogue_Doggy_Legs_Pants_Wet.png",
                 "True", "images/RogueDoggy/Rogue_Doggy_Legs_Pants.png"),
             "RogueX.Legs == 'skirt'", ConditionSwitch(
-                    "RogueX.Upskirt and Player.Sprite and Player.Cock == 'anal' and Speed" , "images/RogueDoggy/Rogue_Doggy_Legs_Skirt_UpAnal.png",
+                    "RogueX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/RogueDoggy/Rogue_Doggy_Legs_Skirt_UpAnal.png",
                     "RogueX.Upskirt", "images/RogueDoggy/Rogue_Doggy_Legs_Skirt_Up.png",
                     "True", "images/RogueDoggy/Rogue_Doggy_Legs_Skirt.png"),
             "True", Null()),
@@ -722,8 +722,8 @@ image Rogue_Doggy_Ass:
 
         (0,0), ConditionSwitch(
             "Player.Sprite and Player.Cock", Null(),
-            "Trigger == 'lick pussy'", "Rogue_Doggy_Lick_Pussy",
-            "Trigger == 'lick ass'", "Rogue_Doggy_Lick_Ass",
+            "primary_action == 'lick pussy'", "Rogue_Doggy_Lick_Pussy",
+            "primary_action == 'lick ass'", "Rogue_Doggy_Lick_Ass",
             "True", Null()),
 
         (0,0), ConditionSwitch(
@@ -733,9 +733,9 @@ image Rogue_Doggy_Ass:
 
         (0,0), ConditionSwitch(
             "not Player.Sprite or Player.Cock != 'out'", Null(),
-            "RogueX.Legs == 'skirt' and RogueX.Upskirt and Speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
+            "RogueX.Legs == 'skirt' and RogueX.Upskirt and action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
             "RogueX.Legs == 'skirt' and RogueX.Upskirt", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "Speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             "True", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png")),
         )
 
@@ -794,50 +794,50 @@ image Rogue_SexSprite:
                 "not Player.Sprite", "Rogue_Sex_Body_Static",
                 "Player.Cock == 'anal'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 3", "Rogue_Sex_Body_Anim3",
-                        "Speed >= 2", "Rogue_Sex_Body_Anim2",
-                        "Speed", "Rogue_Sex_Body_Anim1",
+                        "action_speed >= 3", "Rogue_Sex_Body_Anim3",
+                        "action_speed >= 2", "Rogue_Sex_Body_Anim2",
+                        "action_speed", "Rogue_Sex_Body_Anim1",
                         "True", "Rogue_Sex_Body_Static",
                         ),
                 "Player.Cock == 'in'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 3", "Rogue_Sex_Body_Anim3",
-                        "Speed >= 2", "Rogue_Sex_Body_Anim2",
-                        "Speed", "Rogue_Sex_Body_Anim1",
+                        "action_speed >= 3", "Rogue_Sex_Body_Anim3",
+                        "action_speed >= 2", "Rogue_Sex_Body_Anim2",
+                        "action_speed", "Rogue_Sex_Body_Anim1",
                         "True", "Rogue_Sex_Body_Static",
                         ),
                 "Player.Cock == 'foot'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 2", "Rogue_Sex_Body_FootAnim2",
-                        "Speed", "Rogue_Sex_Body_FootAnim1",
+                        "action_speed >= 2", "Rogue_Sex_Body_FootAnim2",
+                        "action_speed", "Rogue_Sex_Body_FootAnim1",
                         "True", "Rogue_Sex_Body_FootAnimStatic",
                         ),
-                "Player.Cock == 'out' and Speed >= 2","Rogue_Hotdog_Body_Anim2",
+                "Player.Cock == 'out' and action_speed >= 2","Rogue_Hotdog_Body_Anim2",
                 "True", "Rogue_Sex_Body_Static",
                 ),
         (0,0), ConditionSwitch(                                                         #Shows different lower body motion depending on events
                 "not Player.Sprite", "Rogue_Sex_Legs_Static",
                 "Player.Cock == 'anal'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 3", "Rogue_Sex_Legs_Anim3",
-                        "Speed >= 2", "Rogue_Sex_Legs_Anim2",
-                        "Speed", "Rogue_Sex_Legs_Anim1",
+                        "action_speed >= 3", "Rogue_Sex_Legs_Anim3",
+                        "action_speed >= 2", "Rogue_Sex_Legs_Anim2",
+                        "action_speed", "Rogue_Sex_Legs_Anim1",
                         "True", "Rogue_Sex_Legs_Static",
                         ),
                 "Player.Cock == 'in'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 3", "Rogue_Sex_Legs_Anim3",
-                        "Speed >= 2", "Rogue_Sex_Legs_Anim2",
-                        "Speed", "Rogue_Sex_Legs_Anim1",
+                        "action_speed >= 3", "Rogue_Sex_Legs_Anim3",
+                        "action_speed >= 2", "Rogue_Sex_Legs_Anim2",
+                        "action_speed", "Rogue_Sex_Legs_Anim1",
                         "True", "Rogue_Sex_Legs_Static",
                         ),
                 "Player.Cock == 'foot'", ConditionSwitch(
                         #if the top's down. . .
-                        "Speed >= 2", "Rogue_Sex_Legs_FootAnim2",
-                        "Speed", "Rogue_Sex_Legs_FootAnim1",
+                        "action_speed >= 2", "Rogue_Sex_Legs_FootAnim2",
+                        "action_speed", "Rogue_Sex_Legs_FootAnim1",
                         "True", "Rogue_Sex_Legs_FootAnimStatic",
                         ),
-                "Player.Cock == 'out' and Speed >= 2","Rogue_Hotdog_Legs_Anim2",
+                "Player.Cock == 'out' and action_speed >= 2","Rogue_Hotdog_Legs_Anim2",
                 "True", "Rogue_Sex_Legs_Static",
                 ),
         )
@@ -940,12 +940,12 @@ image Rogue_Sex_Body:
             ),
         (0,0), ConditionSwitch(
             #breast licking animation
-            "Trigger == 'suck breasts' or Trigger2 == 'suck breasts'", "Rogue_Sex_Lick_Breasts",
+            "primary_action == 'suck breasts' or offhand_action == 'suck breasts'", "Rogue_Sex_Lick_Breasts",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
             #breast fondling animation
-            "Trigger == 'fondle breasts' or Trigger2 == 'fondle breasts'", "Rogue_Sex_Fondle_Breasts",
+            "primary_action == 'fondle breasts' or offhand_action == 'fondle breasts'", "Rogue_Sex_Fondle_Breasts",
             "True", Null()
             ),
         (320,-135), "Rogue_Head_Sex",  #check positioning (260,-350)
@@ -1044,29 +1044,29 @@ image Rogue_Sex_Legs:
         (0,0), ConditionSwitch(
             #hotdog cock Layer
             "not Player.Sprite or Player.Cock != 'out'", Null(),
-            "Speed >= 2", "Rogue_Hotdog_Zero_Anim2",
-            "Speed", "Rogue_Hotdog_Zero_Anim1",
+            "action_speed >= 2", "Rogue_Hotdog_Zero_Anim2",
+            "action_speed", "Rogue_Hotdog_Zero_Anim1",
             "True", "Rogue_Hotdog_Zero_Anim0",
             ),
 
         (0,0), ConditionSwitch(
             #pussy licking animation
             "Player.Sprite and Player.Cock", Null(),
-            "Trigger == 'lick pussy'", "Rogue_Sex_Lick_Pussy",
-            "Trigger == 'lick ass'", "Rogue_Sex_Lick_Ass",
+            "primary_action == 'lick pussy'", "Rogue_Sex_Lick_Pussy",
+            "primary_action == 'lick ass'", "Rogue_Sex_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
             #footjob cock Layer
             "not Player.Sprite or Player.Cock != 'foot'", Null(),
-            "Speed >= 2", "Rogue_Footcock_Zero_Anim2",
-            "Speed", "Rogue_Footcock_Zero_Anim1",
+            "action_speed >= 2", "Rogue_Footcock_Zero_Anim2",
+            "action_speed", "Rogue_Footcock_Zero_Anim1",
             "True", "Rogue_Footcock_Static",
             ),
 
         (0,0), ConditionSwitch(
             #Shows different lower body motion depending on events
-            "not Speed or Player.Cock == 'foot' or ShowFeet", "Rogue_Sex_Feet",
+            "not action_speed or Player.Cock == 'foot' or ShowFeet", "Rogue_Sex_Feet",
             #"Player.Cock == 'anal' or Player.Cock == 'in' or Player.Cock == 'out'", AlphaMask("Rogue_Sex_Feet", "images/KittySex/Kitty_Sex_FeetMask.png"),
             "True", AlphaMask("Rogue_Sex_Feet","images/RogueSex/Rogue_Sex_FeetMask2.png")
             ),

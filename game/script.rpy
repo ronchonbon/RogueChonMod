@@ -28,18 +28,18 @@ image blackscreen:
         alpha 1.0
         linear 0.4 alpha 0.0
 
-define ch_r = Character('[RogueX.Name]', color="#85bb65", image = "arrow", show_two_window = True)
-define ch_p = Character('[Player.Name]', color="#87CEEB", show_two_window = True)
+define ch_r = Character('[RogueX.name]', color="#85bb65", image = "arrow", show_two_window = True)
+define ch_p = Character('[Player.name]', color="#87CEEB", show_two_window = True)
 define ch_x = Character('Professor X', color="#a09400", image = "arrow", show_two_window = True)
-define ch_k = Character('[KittyX.Name]', color="#F5A9D0", image = "arrow", show_two_window = True)
-define ch_e = Character('[EmmaX.Name]', color="#98bee7", image = "arrow", show_two_window = True)
+define ch_k = Character('[KittyX.name]', color="#F5A9D0", image = "arrow", show_two_window = True)
+define ch_e = Character('[EmmaX.name]', color="#98bee7", image = "arrow", show_two_window = True)
 define ch_b = Character('Dr. McCoy', color="#1033b2", image = "arrow", show_two_window = True)
-define ch_l = Character('[LauraX.Name]', color="#d8b600", image = "arrow", show_two_window = True)
-define ch_j = Character('[JeanX.Name]', color="#b2d950", image = "arrow", show_two_window = True)
-define ch_s = Character('[StormX.Name]', color="#b2d950", image = "arrow", show_two_window = True)
-define ch_v = Character('[JubesX.Name]', color="#b2d950", image = "arrow", show_two_window = True) #fix, color change
+define ch_l = Character('[LauraX.name]', color="#d8b600", image = "arrow", show_two_window = True)
+define ch_j = Character('[JeanX.name]', color="#b2d950", image = "arrow", show_two_window = True)
+define ch_s = Character('[StormX.name]', color="#b2d950", image = "arrow", show_two_window = True)
+define ch_v = Character('[JubesX.name]', color="#b2d950", image = "arrow", show_two_window = True) #fix, color change
 define ch_u = Character('???', color="#85bb65", image = "arrow", show_two_window = True)
-define ch_n = Character('N', image = "arrow", show_two_window = True) #non-character, uses Ch_Focus #rmoved color, test that. . .
+define ch_n = Character('N', image = "arrow", show_two_window = True) #non-Girl, uses focused_Girl #rmoved color, test that. . .
 define ch_g = Character('[GwenName]', color="#F08080", image = "arrowG", show_two_window = True,background=Frame("images/WordballoonG.png",50,50))
 define ch_usher = Character('Usher', color="#DF0174", show_two_window = True)
 define ch_danger = Character('Danger Room:', color="#1033b2",what_color="#1033b2",what_font="dungeon.ttf",show_two_window=False)
@@ -67,51 +67,48 @@ init -1:
     default Cheat = 0
     default Round = 100                 #Tracks time within a turn
     default Time_Options = ["Morning", "Midday", "Evening", "Night"]
-    default Time_Count = 2
-    default Current_Time = Time_Options[(Time_Count)]
+    default time_index = 2
+    default Current_Time = Time_Options[(time_index)]
     default Week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     default Weekday = 6
     default DayofWeek = Week[Weekday]
-    default bg_current = "bg study"
-    default Ch_Focus = 0
+    default bg_current = "bg_study"
+    default focused_Girl = 0
     default Party = []
-    default TotalGirls = []
-    default ActiveGirls = []
+    default all_Girls = []
+    default active_Girls = []
     default TotalSEXP = 0               #tallies the total combined SEXP daily
-    default PersonalRooms = ["bg player"] #,"bg rogue","bg kitty","bg emma","bg laura"]
+    default PersonalRooms = ["bg_player"] #,"bg_rogue","bg_kitty","bg_emma","bg_laura"]
     default Taboo = 0
     default Rules = []
     default Digits = []
     default Keys = []
-    default Line = 0
-    default TempLine = 0
-    default PassLine = 0                #used by AnyLine to pass lines around
-    default Situation = 0               #Whether Auto/Shift
+    default action_context = 0               #Whether Auto/Shift
     default MultiAction = 1             #0 if the action cannot continue, 1 if it can
-    default Trigger = 0                 #Mainhand
-    default Trigger2 = 0                #Offhand
-    default Trigger3 = 0                #Girl's offhand
-    default Trigger4 = 0                #this is the 4th sexual act performed by the second girl
-    default Trigger5 = 0                #this is the 5th sexual act performed by the second girl if masturbating
-    default ThreeCount = 100            #This is a timer for changing sexual positions on auto
+    default primary_action = 0                 #Mainhand
+    default offhand_action = 0                #Offhand
+    default girl_offhand_action = 0                #Girl's offhand
+    default second_Girl_primary_action = 0                #this is the 4th sexual act performed by the second girl
+    default second_Girl_offhand_action = 0                #this is the 5th sexual act performed by the second girl if masturbating
+    default position_change_timer = 100            #This is a timer for changing sexual positions on auto
 
     default Nearby = []                 #this tracks girls in the same room, but distant from you
     default Present = []                #This list tracks which girls are in this scene
     default Shop_Inventory = []         #These are updated with books available for purchase       ["DL","DL","DL","DL","G","G","G","G","G","A","A","A","A"]
-    default Inventory_Count = 0         #used in screens to keep track of inventory
+    default inventory_count = 0         #used in screens to keep track of inventory
     default StackDepth = 0
 
-    default Partner = 0                 #this is the second character involved in a sex act, make sure to set Partner to 0 after each sex act
+    default Partner = 0                 #this is the second Girl involved in a sex act, make sure to set Partner to 0 after each sex act
     default Events = []
     default PunishmentX = 0             #countdown on your punishment
     default temp_modifier = 0
     default Approval = 0                #for approval checks
     default Count = 0                   #For within an event
-    default Count2 = 0                  #For between several events
-    default CountStore = 0              #Stores values for after an event ends
-    default Cnt = 0                     #a mini Count variable for discrete operations
+    default between_event_count = 0                  #For between several events
+    default stored_count = 0              #Stores values for after an event ends
+    default counter = 0                     #a mini Count variable for discrete operations
     default Stealth = 0                 #How careful you're being
-    default Speed = 0                   #pace of sex acts
+    default action_speed = 0                   #pace of sex acts
     default Achievements = []
     default Options = []
     default Vibration = 0
@@ -131,7 +128,7 @@ init -1:
     default X_Mouth = "happy"
     default X_Eyes = "happy"
     default X_Psychic = 0
-    default X_Emote = "happy"
+    default X_emotion = "happy"
     default Xsprite_location = StageCenter
     default GwenName = "????"
     default Load_Options = []
@@ -162,7 +159,7 @@ label start:
     $ StormX.OutfitChange(6,Changed=1)
     $ JubesX.OutfitChange(6,Changed=1)
 
-    $ Ch_Focus = RogueX
+    $ focused_Girl = RogueX
     show screen Status_Screen
     show screen Inventorybutton
 
@@ -172,7 +169,7 @@ label after_load:
     label VersionNumber:
         $ SaveVersion = 0 if "SaveVersion" not in globals().keys() else SaveVersion
 
-        $ Load_Options = TotalGirls[:]
+        $ Load_Options = all_Girls[:]
         while Load_Options:
                 #removes girls with "poly themselves" in traits
                 $ Load_Options[0].Pose = "breasts" if Load_Options[0].Pose == "breast" else Load_Options[0].Pose
@@ -183,15 +180,15 @@ label after_load:
         if "JubesX" not in globals().keys():
                 $ JubesX = GirlClass("Jubes",500,50,50,10)
                 $ JubesX.Introduction()
-        if "bg teacher" in JubesX.Schedule:
-                $ JubesX.Schedule = [["bg jubes","bg dangerroom","bg dangerroom","bg jubes"],
-                                ["bg classroom","bg classroom","bg jubes","bg jubes"],
-                                ["bg jubes","bg dangerroom","bg dangerroom","bg jubes"],
-                                ["bg dangerroom","bg dangerroom","bg jubes","bg jubes"],
-                                ["bg pool","bg campus","bg campus","bg jubes"],
-                                ["bg jubes","bg campus","bg jubes","bg pool"],
-                                ["bg jubes","bg campus","bg jubes","bg pool"],
-                                ] #Schedule[0-6][0-4] = Schedule[Weekday][Time_Count]
+        if "bg_teacher" in JubesX.Schedule:
+                $ JubesX.Schedule = [["bg_jubes","bg_dangerroom","bg_dangerroom","bg_jubes"],
+                                ["bg_classroom","bg_classroom","bg_jubes","bg_jubes"],
+                                ["bg_jubes","bg_dangerroom","bg_dangerroom","bg_jubes"],
+                                ["bg_dangerroom","bg_dangerroom","bg_jubes","bg_jubes"],
+                                ["bg_pool","bg_campus","bg_campus","bg_jubes"],
+                                ["bg_jubes","bg_campus","bg_jubes","bg_pool"],
+                                ["bg_jubes","bg_campus","bg_jubes","bg_pool"],
+                                ] #Schedule[0-6][0-4] = Schedule[Weekday][time_index]
         $ JubesX.Blow = 0
         $ JubesX.Hand = 0
 
@@ -204,13 +201,13 @@ label after_load:
             if not renpy.has_label(StackCheck):
                 #"[StackCheck]"
                 "This save may have some issues, so you are being returned to the player's room."
-                "Progress should be properly saved, although if you were in the middle of a character scene, there might be issues continuing forward."
+                "Progress should be properly saved, although if you were in the middle of a Girl scene, there might be issues continuing forward."
                 "Try to load a save in which you were in a neutral situation if you want to keep playing from there."
                 "Let Oni know if this happened on a save made in version 0.991 or later."
                 "If you would prefer to try your luck, you can see if the save will load, but it will more likely return to the main menu."
                 menu:
                     "Return to player's room [[safer]":
-                        $ bg_current = "bg player"
+                        $ bg_current = "bg_player"
                         jump Misplaced
                     "See if save works [[probably won't]":
                         return

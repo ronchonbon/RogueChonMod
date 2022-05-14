@@ -1,63 +1,63 @@
-label Slap_Ass(girl = 0):  #rkeljsv
-        if girl not in TotalGirls:
+label Slap_Ass(Girl = 0):  #rkeljsv
+        if Girl not in all_Girls:
                 return
-        call Shift_Focus(girl)
+        call Shift_Focus(Girl)
         # fix add sound here?
         call Punch
 
-        $ girl.Slap += 1 #add in slap-base obedience
+        $ Girl.Slap += 1 #add in slap-base obedience
 
-        $ girl.Blush = 2 if Taboo else 1
-        if ApprovalCheck(girl, 200, "O", TabM=1):
-                $ girl.FaceChange("sexy", 1)
-                $ girl.Mouth = "surprised"
-                $ girl.Statup("Lust", 51, 3, 1)
-                $ girl.Statup("Lust", 80, 1)
-                if girl.RecentActions.count("slap") < 4:
-                        $ girl.Statup("Lust", 200, 1)
-                        if girl.Slap <= 5:
-                                $ girl.Statup("Obed", 50, 2)
-                        if girl.Slap <= 10:
-                                $ girl.Statup("Obed", 80, 1)
+        $ Girl.Blush = 2 if Taboo else 1
+        if ApprovalCheck(Girl, 200, "O", TabM=1):
+                $ Girl.change_face("sexy", 1)
+                $ Girl.Mouth = "surprised"
+                $ Girl.change_stat("lust", 51, 3, 1)
+                $ Girl.change_stat("lust", 80, 1)
+                if Girl.recent_history.count("slap") < 4:
+                        $ Girl.change_stat("lust", 200, 1)
+                        if Girl.Slap <= 5:
+                                $ Girl.change_stat("obedience", 50, 2)
+                        if Girl.Slap <= 10:
+                                $ Girl.change_stat("obedience", 80, 1)
                 "You slap her ass and she jumps with pleasure."
         else:
-                $ girl.FaceChange("surprised", 1)
-                if girl.RecentActions.count("slap") < 4:
-                        $ girl.Statup("Obed", 70, 2)
-                        $ girl.Statup("Love", 50, -1)
+                $ Girl.change_face("surprised", 1)
+                if Girl.recent_history.count("slap") < 4:
+                        $ Girl.change_stat("obedience", 70, 2)
+                        $ Girl.change_stat("love", 50, -1)
                 "You slap her ass and she looks back at you a bit startled."
 
-        if Trigger and girl.Lust >= 100:
+        if primary_action and Girl.lust >= 100:
                 #If you're still going at it and Rogue can cum
-                call girl_Cumming(girl)
+                call Girl_Cumming(Girl)
 
         if Taboo:
-                if not ApprovalCheck(girl, 800, TabM=2):
-                        if girl.Slap <= 5:
-                                $ girl.Statup("Obed", 80, 2)
-                                $ girl.Statup("Obed", 50, 2)
-                        $ girl.Statup("Love", 70, -2)
-                        $ girl.Statup("Love", 50, -1)
+                if not ApprovalCheck(Girl, 800, TabM=2):
+                        if Girl.Slap <= 5:
+                                $ Girl.change_stat("obedience", 80, 2)
+                                $ Girl.change_stat("obedience", 50, 2)
+                        $ Girl.change_stat("love", 70, -2)
+                        $ Girl.change_stat("love", 50, -1)
                         "She looks pretty mad though."
-                elif not ApprovalCheck(girl, 1500, TabM=2):
-                        if girl.Slap <= 5:
-                                $ girl.Statup("Obed", 80, 2)
-                        $ girl.Statup("Love", 70, -1)
+                elif not ApprovalCheck(Girl, 1500, TabM=2):
+                        if Girl.Slap <= 5:
+                                $ Girl.change_stat("obedience", 80, 2)
+                        $ Girl.change_stat("love", 70, -1)
                         "She looks a bit embarrassed."
                 else:                         #Over 1500
-                        $ girl.FaceChange("sexy")
-                        $ girl.Mouth = "smile"
-                        if girl.Slap <= 5:
-                                $ girl.Statup("Obed", 80, 1)
+                        $ Girl.change_face("sexy")
+                        $ Girl.Mouth = "smile"
+                        if Girl.Slap <= 5:
+                                $ Girl.change_stat("obedience", 80, 1)
                         "She gives you a naughty grin."
-                $ girl.Blush = 1
-        if girl.PantsNum() < 5 and girl.PantiesNum() < 5:
-                if ApprovalCheck(girl, 500, "O") and girl.RecentActions.count("slap") < 4:
-                        $ girl.Statup("Obed", 90, 1)
-                        $ girl.Statup("Lust", 200, 3)
+                $ Girl.Blush = 1
+        if Girl.PantsNum() < 5 and Girl.PantiesNum() < 5:
+                if ApprovalCheck(Girl, 500, "O") and Girl.recent_history.count("slap") < 4:
+                        $ Girl.change_stat("obedience", 90, 1)
+                        $ Girl.change_stat("lust", 200, 3)
                 else:
-                        $ girl.Statup("Lust", 80, 1)
-                $ girl.Addict -= 1
-        $ girl.RecentActions.append("slap") if girl.RecentActions.count("slap") < 4 else girl.RecentActions
-        $ girl.DailyActions.append("slap") if girl.DailyActions.count("slap") < 10 else girl.DailyActions
+                        $ Girl.change_stat("lust", 80, 1)
+                $ Girl.Addict -= 1
+        $ Girl.recent_history.append("slap") if Girl.recent_history.count("slap") < 4 else Girl.recent_history
+        $ Girl.daily_history.append("slap") if Girl.daily_history.count("slap") < 10 else Girl.daily_history
         return

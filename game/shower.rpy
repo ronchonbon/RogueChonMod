@@ -1,11 +1,11 @@
 label Shower_Room_Entry:
     call Jubes_Entry_Check
-    $ bg_current = "bg showerroom"
+    $ bg_current = "bg_showerroom"
     $ Player.DrainWord("locked",0,0,1)
     $ Nearby = []
     $ Present = []
     call Taboo_Level
-    call Set_The_Scene(0,1,0)
+    call set_the_scene(0,1,0)
     $ Round -= 5 if Round >= 5 else Round
     if Round <= 10 or len(Party) >= 2:
             jump Shower_Room
@@ -16,14 +16,14 @@ label Shower_Room_Entry:
             jump Shower_Room
 
     $ Options = []
-    $ Line = ActiveGirls[:]   #make sure this is initialized
-    while Line:
+    $ line = active_Girls[:]   #make sure this is initialized
+    while line:
             #loops through and adds populates Occupants with locals
-            if Line[0] not in Party and "showered" not in Line[0].DailyActions and (Line[0].Loc == Line[0].Home or Line[0].Loc == "bg dangerroom"):
+            if line[0] not in Party and "showered" not in line[0].daily_history and (line[0].Loc == line[0].Home or line[0].Loc == "bg_dangerroom"):
                     #Checks if girl is in the shower
-                    $ Options.append(Line[0])
-            $ Line.remove(Line[0])
-    $ Line = 0
+                    $ Options.append(line[0])
+            $ line.remove(line[0])
+    $ line = 0
 
     if Options:
                 $ renpy.random.shuffle(Options)
@@ -40,7 +40,7 @@ label Shower_Room_Entry:
                         $ Options[0].Loc = "nearby"     #adds this girl to the nearby roster
                         $ Options.remove(Options[0])    #subs this girl from Options
 
-    if not Party and Options and Options[0] in TotalGirls:
+    if not Party and Options and Options[0] in all_Girls:
             if D20 > 15:
                     call Girl_Caught_Shower(Options[0])
                     jump Shower_Room
@@ -51,78 +51,78 @@ label Shower_Room_Entry:
     #End Caught Check
 
     # If none of the caught dialogs plays, checks to see if anyone is in the room, and allows them to be there if they are.
-    $ Line = Options[:]
-    while Line:
+    $ line = Options[:]
+    while line:
             #loops through and adds populates nearby with locals
-            $ Line[0].Loc = bg_current
-            $ Line.remove(Line[0])
-    $ Line = 0
+            $ line[0].Loc = bg_current
+            $ line.remove(line[0])
+    $ line = 0
 
     call Present_Check(0)
 
-    $ Line = Options[:]
-    while Line:
+    $ line = Options[:]
+    while line:
             #loops through and puts towels on them, maybe the "showered" trait
-            if Line[0].Loc == bg_current and Line[0] not in Party:
+            if line[0].Loc == bg_current and line[0] not in Party:
                     if D20 >= 10:
-                            $ Line[0].AddWord(1,"showered","showered",0,0)
-                    $ Line[0].OutfitChange("towel")
-            $ Line.remove(Line[0])
-    $ Line = 0
+                            $ line[0].AddWord(1,"showered","showered",0,0)
+                    $ line[0].OutfitChange("towel")
+            $ line.remove(line[0])
+    $ line = 0
     #End Count set-up
 
-    call Set_The_Scene(Dress=0)
+    call set_the_scene(Dress=0)
     if Party:
-        $ Line = " and " + Party[0].Name
+        $ line = " and " + Party[0].name
     else:
-        $ Line = ""
+        $ line = ""
     if len(Options) >= 2:
-        "As you enter, you[Line] see [Options[0].Name] and [Options[1].Name] standing there."
+        "As you enter, you[line] see [Options[0].name] and [Options[1].name] standing there."
     elif Options:
-        "As you enter, you[Line] see [Options[0].Name] standing there."
-    $ Line = 0
+        "As you enter, you[line] see [Options[0].name] standing there."
+    $ line = 0
 
     if Options:
-            $ Line = 0
+            $ line = 0
             if Options[0] == RogueX:
                     ch_r "Hey, [RogueX.Petname]."
-                    if "showered" in RogueX.RecentActions:
+                    if "showered" in RogueX.recent_history:
                             ch_r "I was just getting ready to head out."
                     if not ApprovalCheck(Options[0], 900):
                             ch_r "See ya later."
             if Options[0]  == KittyX:
                     ch_k "Hey, [KittyX.Petname]."
-                    if "showered" in KittyX.RecentActions:
+                    if "showered" in KittyX.recent_history:
                             ch_k "I just got finished."
                     if not ApprovalCheck(Options[0], 900):
                             ch_k "Oh, um, I should get out of your way. . ."
             if Options[0]  == EmmaX:
                     ch_e "Oh, hello, [EmmaX.Petname]."
-                    if "showered" in EmmaX.RecentActions:
+                    if "showered" in EmmaX.recent_history:
                             ch_e "I was about finished here."
                     if not ApprovalCheck(Options[0], 900):
                             ch_e "I should get going."
             if Options[0]  == LauraX:
                     ch_l "Oh, hey."
-                    if "showered" in LauraX.RecentActions:
+                    if "showered" in LauraX.recent_history:
                             ch_l "I'm done here."
                     if not ApprovalCheck(Options[0], 900):
                             ch_l "See you later."
             if Options[0]  == JeanX:
                     ch_j "Oh, hey. . . you."
-                    if "showered" in JeanX.RecentActions:
+                    if "showered" in JeanX.recent_history:
                             ch_j "I'm wrapping up here."
                     if not ApprovalCheck(Options[0], 900):
                             ch_j "Later."
             if Options[0]  == StormX:
                     ch_s "Oh, hello, [StormX.Petname]."
-                    if "showered" in StormX.RecentActions:
+                    if "showered" in StormX.recent_history:
                             ch_s "I was finishing up here."
                     if not ApprovalCheck(Options[0], 600):
                             ch_s "I am heading out at the moment."
             if Options[0]  == JubesX:
                     ch_v "Yo, [JubesX.Petname]."
-                    if "showered" in JubesX.RecentActions:
+                    if "showered" in JubesX.recent_history:
                             ch_v "I just finished up here."
                     if not ApprovalCheck(Options[0], 900):
                             ch_v "I should, uh, get going. . ."
@@ -187,32 +187,32 @@ label Shower_Room_Entry:
             # End welcomes
             if Options:
                     if RogueX in Party:
-                            ch_r "Hey, [Options[0].Name]."
+                            ch_r "Hey, [Options[0].name]."
                     if KittyX in Party:
-                            ch_k "Hi, [Options[0].Name]."
+                            ch_k "Hi, [Options[0].name]."
                     if EmmaX in Party:
-                            ch_e "Oh, hello, [Options[0].Name]."
+                            ch_e "Oh, hello, [Options[0].name]."
                     if LauraX in Party:
                             ch_l "Hey."
                     if JeanX in Party:
                             ch_j "Yeah, hey."
                     if StormX in Party:
-                            ch_s "Hello, [Options[0].Name]."
+                            ch_s "Hello, [Options[0].name]."
                     if JubesX in Party:
-                            ch_v "Hey, [Options[0].Name]."
-    $ Line = 0
+                            ch_v "Hey, [Options[0].name]."
+    $ line = 0
     # End Reply portion
     $ Options = []
 
 label Shower_Room:
-    $ bg_current = "bg showerroom"
+    $ bg_current = "bg_showerroom"
     $ Player.DrainWord("traveling",1,0)
     call Taboo_Level
-    call Set_The_Scene(Dress=0)
+    call set_the_scene(Dress=0)
     call QuickEvents
     call Checkout(1)
     if Round <= 10:
-                if Time_Count == 3: #night time
+                if time_index == 3: #night time
                         "You're getting tired, you head back to your room."
                         jump player_room
                 call Wait
@@ -232,7 +232,7 @@ label Shower_Room:
         "Shower [[no time](locked)" if Round <= 30:
                 pass
 
-        "Wait." if Time_Count < 3: #not night time
+        "Wait." if time_index < 3: #not night time
                 "You hang out for a bit."
                 if Round > 30:
                         "In the showers."
@@ -241,17 +241,17 @@ label Shower_Room:
                 call EventCalls
                 call Girls_Location
 
-                #this bit sets up drop-in characters
+                #this bit sets up drop-in Girls
                 if renpy.random.randint(1, 20) < 5:
                         $ Nearby = []
-                        $ Line = ActiveGirls[:]   #make sure this is initialized
-                        while Line:
+                        $ line = active_Girls[:]   #make sure this is initialized
+                        while line:
                                 #loops through and adds populates Occupants with locals
-                                if Line[0].Loc != bg_current and "showered" not in Line[0].DailyActions and (Line[0].Loc == Line[0].Home or Line[0].Loc == "bg dangerroom"):
+                                if line[0].Loc != bg_current and "showered" not in line[0].daily_history and (line[0].Loc == line[0].Home or line[0].Loc == "bg_dangerroom"):
                                         #Checks if girl is in the shower
-                                        $ Nearby.append(Line[0])
-                                $ Line.remove(Line[0])
-                        $ Line = 0
+                                        $ Nearby.append(line[0])
+                                $ line.remove(line[0])
+                        $ line = 0
                         if Nearby:
                                 $ renpy.random.shuffle(Nearby)
                                 while len(Nearby) > 2:
@@ -260,7 +260,7 @@ label Shower_Room:
                                 if len(Nearby) > 1:
                                         $ Nearby[1].Loc = "nearby"
                                 $ Nearby[0].Loc = "nearby"
-        "Wait.  [[no time](locked)" if Time_Count >= 3: # night time
+        "Wait.  [[no time](locked)" if time_index >= 3: # night time
                 pass
 
         "Go to the Danger Room" if TravelMode:
@@ -271,25 +271,25 @@ label Shower_Room:
                 jump player_room_entry
         "Girl's Rooms" if TravelMode:
             menu:
-                "[RogueX.Name]'s Room":
+                "[RogueX.name]'s Room":
                             call No_Towels
                             call girls_room_entry(RogueX)
-                "[KittyX.Name]'s Room" if "met" in KittyX.History:
+                "[KittyX.name]'s Room" if "met" in KittyX.History:
                             call No_Towels
                             call girls_room_entry(KittyX)
-                "[EmmaX.Name]'s Room" if "met" in EmmaX.History:
+                "[EmmaX.name]'s Room" if "met" in EmmaX.History:
                             call No_Towels
                             call girls_room_entry(EmmaX)
-                "[LauraX.Name]'s Room" if "met" in LauraX.History:
+                "[LauraX.name]'s Room" if "met" in LauraX.History:
                             call No_Towels
                             call girls_room_entry(LauraX)
-                "[JeanX.Name]'s Room" if "met" in JeanX.History:
+                "[JeanX.name]'s Room" if "met" in JeanX.History:
                             call No_Towels
                             call girls_room_entry(JeanX)
-                "[StormX.Name]'s Room" if "met" in StormX.History:
+                "[StormX.name]'s Room" if "met" in StormX.History:
                             call No_Towels
                             call girls_room_entry(StormX)
-                "[JubesX.Name]'s Room" if "met" in JubesX.History:
+                "[JubesX.name]'s Room" if "met" in JubesX.History:
                             call No_Towels
                             call girls_room_entry(JubesX)
 
@@ -308,73 +308,73 @@ label Shower_Room:
 
 label No_Towels:
     #Removes their towels if player is leaving the showers
-    $ BO = TotalGirls[:]
-    while BO:
+    $ Girls = all_Girls[:]
+    while Girls:
             #loops through and adds populates Occupants with locals
-            if BO[0].Loc == "bg showerroom":
-                    $ BO[0].AddWord(1,"showered","showered")
-            if "met" in BO[0].History and BO[0] not in Party:
-                    $ BO[0].Loc = BO[0].Schedule[Weekday][Time_Count]
-            $ BO[0].OutfitChange(BO[0].OutfitDay)
-            $ BO.remove(BO[0])
+            if Girls[0].Loc == "bg_showerroom":
+                    $ Girls[0].AddWord(1,"showered","showered")
+            if "met" in Girls[0].History and Girls[0] not in Party:
+                    $ Girls[0].Loc = Girls[0].Schedule[Weekday][time_index]
+            $ Girls[0].OutfitChange(Girls[0].OutfitDay)
+            $ Girls.remove(Girls[0])
     return
 
-label Showering(Occupants = [], StayCount=[] , Showered = 0, Line = 0, BO=[]):
+label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[]):
     # Occupants tallies how many girls are here.
     # StayCount tallies how many girls are willing to stick around.
-    $ BO = TotalGirls[:]
-    while BO:
+    $ Girls = all_Girls[:]
+    while Girls:
             #loops through and adds populates Occupants with locals
-            if BO[0] not in ActiveGirls:
-                    $ BO[0].Loc = "hold"
-            if BO[0].Loc == "bg showerroom" and BO[0] not in Occupants:
-                    $ Occupants.append(BO[0])
-            $ BO.remove(BO[0])
+            if Girls[0] not in active_Girls:
+                    $ Girls[0].Loc = "hold"
+            if Girls[0].Loc == "bg_showerroom" and Girls[0] not in Occupants:
+                    $ Occupants.append(Girls[0])
+            $ Girls.remove(Girls[0])
     if Occupants:
             ch_p "I'm taking a shower, care to join me?"
-            if Occupants[0] == RogueX and "showered" in RogueX.RecentActions:
+            if Occupants[0] == RogueX and "showered" in RogueX.recent_history:
                     if len(Occupants) > 1:
                         #if there are multiple girls in there
                         ch_r "We actually just finished up, so we'll head out."
                     else:
                         ch_r "I actually just finished up, so I'll head out."
                     $ Showered = 1
-            elif Occupants[0] == KittyX and "showered" in KittyX.RecentActions:
+            elif Occupants[0] == KittyX and "showered" in KittyX.recent_history:
                     if len(Occupants) > 1:
                         #if there are multiple girls in there
                         ch_k "We actually just showered, so we're heading out."
                     else:
                         ch_k "I actually just showered, so I'm heading out."
                     $ Showered = 1
-            elif Occupants[0] == EmmaX and "showered" in EmmaX.RecentActions:
+            elif Occupants[0] == EmmaX and "showered" in EmmaX.recent_history:
                     if len(Occupants) > 1:
                         #if there are multiple girls in there
                         ch_e "We were actually finishing up, so we're heading out."
                     else:
                         ch_e "I was actually finishing up, so I'm heading out."
                     $ Showered = 1
-            elif Occupants[0] == LauraX and "showered" in LauraX.RecentActions:
+            elif Occupants[0] == LauraX and "showered" in LauraX.recent_history:
                     if len(Occupants) > 1:
                         #if there are multiple girls in there
                         ch_l "We were done, actually."
                     else:
                         ch_l "I'm heading out now."
                     $ Showered = 1
-            elif Occupants[0] == JeanX and "showered" in JeanX.RecentActions:
+            elif Occupants[0] == JeanX and "showered" in JeanX.recent_history:
                     if len(Occupants) > 1:
                         #if there are multiple girls in there
                         ch_j "We were done."
                     else:
                         ch_j "I'm heading out."
                     $ Showered = 1
-            elif Occupants[0] == StormX and "showered" in StormX.RecentActions:
+            elif Occupants[0] == StormX and "showered" in StormX.recent_history:
                     if len(Occupants) > 1:
                         #if there are multiple girls in there
                         ch_s "I think we're about finished and heading out now."
                     else:
                         ch_s "I was about finished and heading out now."
                     $ Showered = 1
-            elif Occupants[0] == JubesX and "showered" in JubesX.RecentActions:
+            elif Occupants[0] == JubesX and "showered" in JubesX.recent_history:
                     if len(Occupants) > 1:
                         #if there are multiple girls in there
                         ch_v "We finished getting showered, so we're taking off."
@@ -576,38 +576,38 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, Line = 0, BO=[]):
                                     ch_v "Laters!"
 
                         "Sure you got every spot?" if Showered:
-                                $ Line = "spot"
+                                $ line = "spot"
 
                         #fix Add "Take off your own clothes" option.
 
                         "Maybe you could stay and watch?":
-                                $ Line = "watch me"
+                                $ line = "watch me"
 
                         "But I didn't get to watch." if Showered:
-                                $ Line = "watch you"
-                    if Line:
-                        $ BO = Occupants[:]
-                        while BO:
+                                $ line = "watch you"
+                    if line:
+                        $ Girls = Occupants[:]
+                        while Girls:
                                 #loops through and adds populates Occupants with locals
-                                if BO[0].Loc == bg_current and BO[0] not in StayCount:
-                                        if BO[0] == EmmaX and (not "classcaught" in EmmaX.History or (StayCount and "three" not in EmmaX.History)):
+                                if Girls[0].Loc == bg_current and Girls[0] not in StayCount:
+                                        if Girls[0] == EmmaX and (not "classcaught" in EmmaX.History or (StayCount and "three" not in EmmaX.History)):
                                             #if it's Emma, and she isn't comfortable with threesomes or public stuff, skip her
                                             pass
-                                        elif BO[0] == JeanX and ApprovalCheck(BO[0], 600):
-                                            $ StayCount.append(BO[0])
-                                        elif BO[0] == StormX:
-                                            if ApprovalCheck(BO[0], 700, "LO"):
-                                                $ StayCount.append(BO[0])
-                                        elif ApprovalCheck(BO[0], 1200,Alt=[[KittyX],1400]) or (ApprovalCheck(BO[0], 600,Alt=[[KittyX],700]) and BO[0].SeenChest and BO[0].SeenPussy): #1400/700 for Kitty?
-                                            $ StayCount.append(BO[0])
-                                        elif Line == "spot" and ApprovalCheck(BO[0], 1000, "LI",Alt=[[KittyX],1200]):   #1200 for Kitty?
-                                            $ StayCount.append(BO[0])
-                                        elif Line == "watch you" and ApprovalCheck(BO[0], 600, "O",Alt=[[EmmaX],500]):   #500 for Emma?
-                                            $ StayCount.append(BO[0])
+                                        elif Girls[0] == JeanX and ApprovalCheck(Girls[0], 600):
+                                            $ StayCount.append(Girls[0])
+                                        elif Girls[0] == StormX:
+                                            if ApprovalCheck(Girls[0], 700, "LO"):
+                                                $ StayCount.append(Girls[0])
+                                        elif ApprovalCheck(Girls[0], 1200,Alt=[[KittyX],1400]) or (ApprovalCheck(Girls[0], 600,Alt=[[KittyX],700]) and Girls[0].SeenChest and Girls[0].SeenPussy): #1400/700 for Kitty?
+                                            $ StayCount.append(Girls[0])
+                                        elif line == "spot" and ApprovalCheck(Girls[0], 1000, "LI",Alt=[[KittyX],1200]):   #1200 for Kitty?
+                                            $ StayCount.append(Girls[0])
+                                        elif line == "watch you" and ApprovalCheck(Girls[0], 600, "O",Alt=[[EmmaX],500]):   #500 for Emma?
+                                            $ StayCount.append(Girls[0])
                                         #else, she doesn't agree
-                                $ BO.remove(BO[0])
+                                $ Girls.remove(Girls[0])
 
-                        if Line == "spot":
+                        if line == "spot":
                                 #"Sure you got every spot?"
                                 if StayCount:
                                         #if at least one girl agreed to stay
@@ -682,7 +682,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, Line = 0, BO=[]):
                                             ch_v "Nah, I'm good. Later, [JubesX.Petname]."
                                 #end "missed a spot?"
 
-                        elif Line == "watch me":
+                        elif line == "watch me":
                                 #"Maybe you could stay and watch?"
                                 if StayCount:
                                         if StayCount[0] == RogueX:
@@ -754,7 +754,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, Line = 0, BO=[]):
                                             ch_v "Um, no thanks."
                                 #end "Watch me"
 
-                        elif Line == "watch you":
+                        elif line == "watch you":
                                 #"But I didn't get to watch."
                                 if StayCount:
                                         if StayCount[0] == RogueX:
@@ -859,33 +859,33 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, Line = 0, BO=[]):
                             elif StayCount[1] == JubesX:
                                 ch_v "Um, yeah, let's do this."
                     #end "if you asked then a question"
-            $ BO = Occupants[:]
-            while BO:
+            $ Girls = Occupants[:]
+            while Girls:
                     #loops through and adds populates Occupants with locals
-                    if BO[0].Loc == bg_current:
-                            if BO[0] in StayCount:
+                    if Girls[0].Loc == bg_current:
+                            if Girls[0] in StayCount:
                                     #If the girl Stays
-                                    $ BO[0].OutfitChange("nude")
-                                    $ BO[0].Water = 1
-                                    $ BO[0].Spunk = []
-                                    $ BO[0].RecentActions.append("showered")
-                                    $ BO[0].DailyActions.append("showered")
-                                    call expression BO[0].Tag + "_First_Bottomless" pass (1)
-                                    call first_topless(BO[0], silent = 1)
+                                    $ Girls[0].OutfitChange("nude")
+                                    $ Girls[0].Water = 1
+                                    $ Girls[0].Spunk = []
+                                    $ Girls[0].recent_history.append("showered")
+                                    $ Girls[0].daily_history.append("showered")
+                                    call expression Girls[0].Tag + "_First_Bottomless" pass (1)
+                                    call first_topless(Girls[0], silent = 1)
                             else:
                                     #If the girl leaves
-                                    call Remove_Girl(BO[0])
-                            while BO[0] in Nearby:
-                                    $ Nearby.remove(BO[0])
-                    $ BO.remove(BO[0])
+                                    call Remove_Girl(Girls[0])
+                            while Girls[0] in Nearby:
+                                    $ Nearby.remove(Girls[0])
+                    $ Girls.remove(Girls[0])
 
     call Seen_First_Peen(0,0,0,1) #You get naked
 
     while len(StayCount) >= 2 and StayCount[1] in Nearby:
-            # removes any staying characters from Nearby
+            # removes any staying Girls from Nearby
             $ Nearby.remove(StayCount[1])
     while StayCount and StayCount[0] in Nearby:
-            # removes any staying characters from Nearby
+            # removes any staying Girls from Nearby
             $ Nearby.remove(StayCount[0])
 
     if Nearby and len(StayCount) < 2:
@@ -893,83 +893,83 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, Line = 0, BO=[]):
             $ renpy.random.shuffle(Nearby)
 
             while Nearby and (len(Nearby) + len(StayCount)) > 2:
-                        # while Nearby is more than 2-Staying characters
+                        # while Nearby is more than 2-Staying Girls
                         $ Nearby.remove(Nearby[0]) #culls it to 1
 
             if len(Nearby) >= 2:
-                "As you finish getting undressed, [Nearby[0].Name] and [Nearby[1].Name] enter the room."
+                "As you finish getting undressed, [Nearby[0].name] and [Nearby[1].name] enter the room."
                 $ Nearby[1].Loc = bg_current
             else:
-                "As you finish getting undressed, [Nearby[0].Name] enters the room."
+                "As you finish getting undressed, [Nearby[0].name] enters the room."
             $ Nearby[0].Loc = bg_current
 
-            $ BO = Nearby[:]
+            $ Girls = Nearby[:]
 
             #call Present_Check ?
-            call Set_The_Scene(Dress=0)
+            call set_the_scene(Dress=0)
 
             call Seen_First_Peen(0,0,1,1) #You get naked, silent reactions
 
-            if RogueX in BO:# in Nearby:
+            if RogueX in Girls:# in Nearby:
                     if RogueX.SeenPeen == 1:
-                            $ RogueX.FaceChange("surprised",2,Eyes="down")
+                            $ RogueX.change_face("surprised",2,Eyes="down")
                             ch_r "Oh!"
-                            $ RogueX.FaceChange("bemused",1,Eyes="side")
+                            $ RogueX.change_face("bemused",1,Eyes="side")
                             ch_r "I am so sorry, I should {i}not{/i} have just barged in like that."
                     else:
-                            $ RogueX.FaceChange("bemused",1,Eyes="side")
+                            $ RogueX.change_face("bemused",1,Eyes="side")
                             ch_r "I simply {i}must{/i} be more careful. . ."
-            if KittyX in BO:
-                    $ KittyX.FaceChange("bemused",2,Eyes="side")
+            if KittyX in Girls:
+                    $ KittyX.change_face("bemused",2,Eyes="side")
                     if KittyX.SeenPeen == 1:
                             ch_k "Sorry! Sorry! I need to stop just casually phasing into places!"
                     else:
                             ch_k "I have {i}got{/i} to knock more. . ."
-            if EmmaX in BO:
+            if EmmaX in Girls:
                     if EmmaX.SeenPeen == 1:
-                            $ EmmaX.FaceChange("surprised")
+                            $ EmmaX.change_face("surprised")
                             ch_e "Oh! Dreadfully sorry."
-                            $ EmmaX.FaceChange("sexy",Eyes="down")
+                            $ EmmaX.change_face("sexy",Eyes="down")
                             ch_e "I hope we can meet again under. . . different circumstances."
                     else:
-                            $ EmmaX.FaceChange("sexy",Eyes="down")
+                            $ EmmaX.change_face("sexy",Eyes="down")
                             ch_e "I really should pay closer attention. . ."
                     if "classcaught" not in EmmaX.History or ((StayCount or len(Nearby) >= 2) and "three" not in EmmaX.History):
                             #if Emma just showed up, but there are other girls around and she's not ok with that
-                            "[EmmaX.Name] decides to leave immediately."
+                            "[EmmaX.name] decides to leave immediately."
                             call Remove_Girl(EmmaX)
-                            $ BO.remove(EmmaX)
+                            $ Girls.remove(EmmaX)
                             $ EmmaX.OutfitChange()
-            if LauraX in BO:
+            if LauraX in Girls:
                     if LauraX.SeenPeen == 1:
-                            $ LauraX.FaceChange("surprised",Eyes="down")
+                            $ LauraX.change_face("surprised",Eyes="down")
                             ch_l "Hey. That's interesting. . ."
                     else:
-                            $ LauraX.FaceChange("normal",Eyes="down")
+                            $ LauraX.change_face("normal",Eyes="down")
                             ch_l ". . ."
-                            $ LauraX.FaceChange("normal")
+                            $ LauraX.change_face("normal")
                             ch_l "I'm supposed to knock, aren't I."
-            if JeanX in BO:
+            if JeanX in Girls:
                     if JeanX.SeenPeen == 1:
-                            $ JeanX.FaceChange("surprised",Eyes="down")
+                            $ JeanX.change_face("surprised",Eyes="down")
                             ch_j "Well what do we have here? . ."
                     else:
-                            $ JeanX.FaceChange("normal",Eyes="down")
+                            $ JeanX.change_face("normal",Eyes="down")
                             ch_j ". . ."
-                            $ JeanX.FaceChange("normal")
+                            $ JeanX.change_face("normal")
                             ch_j "Oh, nice to catch you. . . like this. . ."
-            if StormX in BO:
+            if StormX in Girls:
                     if StormX.SeenPeen == 1:
-                            $ StormX.FaceChange("surprised")
+                            $ StormX.change_face("surprised")
                             ch_s "Oh! Hello there."
-                            $ StormX.FaceChange("sexy",Eyes="down")
+                            $ StormX.change_face("sexy",Eyes="down")
                             ch_s "And hello to you as well. . ."
                     else:
-                            $ StormX.FaceChange("sexy",Eyes="down")
+                            $ StormX.change_face("sexy",Eyes="down")
                             ch_s "I'm sorry to intrude. . ."
-                    $ StormX.FaceChange("sexy")
-            if JubesX in BO:
-                    $ JubesX.FaceChange("bemused",2,Eyes="side")
+                    $ StormX.change_face("sexy")
+            if JubesX in Girls:
+                    $ JubesX.change_face("bemused",2,Eyes="side")
                     if JubesX.SeenPeen == 1:
                             ch_v "Oh, sorry! I wasn't paying attention."
                             $ JubesX.Eyes = "down"
@@ -981,70 +981,70 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, Line = 0, BO=[]):
 
             if EmmaX in StayCount and "three" not in EmmaX.History:
                             #if Emma was already here, but there are other girls around and she's not ok with that
-                            if len(BO) >= 2:
-                                    "Seeing the other girls arrive, [EmmaX.Name] quickly excuses herself."
+                            if len(Girls) >= 2:
+                                    "Seeing the other girls arrive, [EmmaX.name] quickly excuses herself."
                             else:
-                                    "Seeing [BO[0].Name] arrive, [EmmaX.Name] quickly excuses herself."
+                                    "Seeing [Girls[0].name] arrive, [EmmaX.name] quickly excuses herself."
                             $ StayCount.remove(EmmaX)
                             call Remove_Girl(EmmaX)
                             $ EmmaX.OutfitChange()
 
-            if BO:
+            if Girls:
                 #if there are still girls around to join in. . .
-                if ApprovalCheck(BO[0], 1200):
-                        $ StayCount.append(BO[0])
-                if len(BO) >=2 and ApprovalCheck(BO[1], 1200) and len(StayCount) < 2:
-                        $ StayCount.append(BO[1])
+                if ApprovalCheck(Girls[0], 1200):
+                        $ StayCount.append(Girls[0])
+                if len(Girls) >=2 and ApprovalCheck(Girls[1], 1200) and len(StayCount) < 2:
+                        $ StayCount.append(Girls[1])
 
-                if len(BO) >=2:
-                        if BO[0] not in StayCount and BO[1] not in StayCount:
+                if len(Girls) >=2:
+                        if Girls[0] not in StayCount and Girls[1] not in StayCount:
                                 "They both turn right back around."
-                                call Remove_Girl(BO[0])
-                                call Remove_Girl(BO[1])
-                                $ BO = []
-                        elif BO[0] not in StayCount:
-                                "[BO[0].Name] turns right back around, but [BO[1].Name] stays."
-                                call Remove_Girl(BO[0])
-                                $ BO.remove(BO[0])
-                        elif BO[1] not in StayCount:
-                                "[BO[1].Name] turns right back around, but [BO[0].Name] stays."
-                                call Remove_Girl(BO[1])
-                                $ BO.remove(BO[1])
-                elif BO[0] not in StayCount:
+                                call Remove_Girl(Girls[0])
+                                call Remove_Girl(Girls[1])
+                                $ Girls = []
+                        elif Girls[0] not in StayCount:
+                                "[Girls[0].name] turns right back around, but [Girls[1].name] stays."
+                                call Remove_Girl(Girls[0])
+                                $ Girls.remove(Girls[0])
+                        elif Girls[1] not in StayCount:
+                                "[Girls[1].name] turns right back around, but [Girls[0].name] stays."
+                                call Remove_Girl(Girls[1])
+                                $ Girls.remove(Girls[1])
+                elif Girls[0] not in StayCount:
                                 "She turns right back around."
-                                call Remove_Girl(BO[0])
-                                $ BO.remove(BO[0])
+                                call Remove_Girl(Girls[0])
+                                $ Girls.remove(Girls[0])
 
-                while BO:
+                while Girls:
                         #loops deals with "Nearby"s joining the party, removes others
                         #If Rogue Stays
-                        $ BO[0].OutfitChange("nude")
-                        $ BO[0].Water = 1
-                        $ BO[0].Spunk = []
-                        $ BO[0].RecentActions.append("showered")
-                        $ BO[0].DailyActions.append("showered")
-                        call expression BO[0].Tag + "_First_Bottomless" pass (1)
-                        call first_topless(BO[0], silent = 1)
-                        if BO[0] == RogueX:
+                        $ Girls[0].OutfitChange("nude")
+                        $ Girls[0].Water = 1
+                        $ Girls[0].Spunk = []
+                        $ Girls[0].recent_history.append("showered")
+                        $ Girls[0].daily_history.append("showered")
+                        call expression Girls[0].Tag + "_First_Bottomless" pass (1)
+                        call first_topless(Girls[0], silent = 1)
+                        if Girls[0] == RogueX:
                                     ch_r "I wouldn't mind stick'in around though."
-                        elif BO[0] == KittyX:
+                        elif Girls[0] == KittyX:
                                     ch_k "I {i}could{/i} get in on this."
-                        elif BO[0] == EmmaX:
+                        elif Girls[0] == EmmaX:
                                     ch_e "But, I could use some face time."
-                        elif BO[0] == LauraX:
+                        elif Girls[0] == LauraX:
                                     ch_l "Scoot over."
-                        elif BO[0] == JeanX:
+                        elif Girls[0] == JeanX:
                                     ch_j "You're hogging the water."
-                        elif BO[0] == StormX:
+                        elif Girls[0] == StormX:
                                     ch_s "Oh, goodbye then. . ."
-                        elif BO[0] == JubesX:
+                        elif Girls[0] == JubesX:
                                     ch_v "Well, I could always join ya."
-                        $ BO.remove(BO[0])
+                        $ Girls.remove(Girls[0])
 
     #End "girl crashes in"
 
     $ Round -= 30 if Round >= 30 else Round
-    $ Trigger = 0
+    $ primary_action = 0
 
     if StayCount:
                 #If at least one stays
@@ -1053,10 +1053,10 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, Line = 0, BO=[]):
                 if len(StayCount) > 1:
                         #If both stay
                         call Shift_Focus(StayCount[0], StayCount[1])
-                        "You take a quick shower with [StayCount[0].Name] and [StayCount[1].Name]."
+                        "You take a quick shower with [StayCount[0].name] and [StayCount[1].name]."
                 else:
                         call Shift_Focus(StayCount[0])
-                        "You take a quick shower with [StayCount[0].Name]."
+                        "You take a quick shower with [StayCount[0].name]."
 
                 call Shower_Sex
 
@@ -1108,15 +1108,15 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, Line = 0, BO=[]):
 
     else:
                 #solo shower
-                $ Line = "You take a quick shower" + renpy.random.choice([". It was fairly uneventful.",
+                $ line = "You take a quick shower" + renpy.random.choice([". It was fairly uneventful.",
                         ". A few people came and went as you did so.",
                         ". That was refreshing."])
-                "[Line]"
+                "[line]"
     #insert random events here
-    $ Player.RecentActions.append("showered")
-    $ Player.DailyActions.append("showered")
-    if "scent" in Player.DailyActions:
-            $ Player.DailyActions.remove("scent")
+    $ Player.recent_history.append("showered")
+    $ Player.daily_history.append("showered")
+    if "scent" in Player.daily_history:
+            $ Player.daily_history.remove("scent")
 
     call Get_Dressed
     if RogueX.Loc == bg_current:
@@ -1136,7 +1136,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, Line = 0, BO=[]):
 
     return
 
-label Shower_Sex(Options=0,Line=0):
+label Shower_Sex(Options=0,line=0):
         #called from showering if sex is on the table.
         if len(StayCount) > 1 and (ApprovalCheck(StayCount[1], 1800,Check=1) > ApprovalCheck(StayCount[0], 1800,Check=1)):
                 $ renpy.random.shuffle(StayCount) #swaps girls if second girl likes you more
@@ -1145,78 +1145,78 @@ label Shower_Sex(Options=0,Line=0):
         $ D20 = renpy.random.randint(1,20)
         $ D20 += 5 if ApprovalCheck(StayCount[0], 1800) else 0 #bonus if girl really likes you
 
-        if "showered" in Player.RecentActions:
+        if "showered" in Player.recent_history:
                 $ D20 = 0
 
-        $ StayCount[0].FaceChange("sly")
+        $ StayCount[0].change_face("sly")
         #A set
         if len(StayCount) > 1 and D20 >= 10:
                 "As you do so, both girls press their bodies body up against yours."
-                $ Line = StayCount[0].Name
+                $ line = StayCount[0].name
                 call Close_Launch(StayCount[0],StayCount[1])
         elif D20 >= 5:
-                "As you do so, [StayCount[0].Name] presses her body up against you."
-                $ Line = "She"
+                "As you do so, [StayCount[0].name] presses her body up against you."
+                $ line = "She"
                 call Close_Launch(StayCount[0])
         else:
-                $ Line = renpy.random.choice(["It was fairly uneventful.",
+                $ line = renpy.random.choice(["It was fairly uneventful.",
                     "A few people came and went as you did so.",
                     "That was refreshing."])
-                "[Line]"
+                "[line]"
                 if len(StayCount) > 1:
-                        $ StayCount[0].Statup("Lust", 50, 15)
-                        $ StayCount[1].Statup("Lust", 50, 15)
-                        $ StayCount[0].Statup("Lust", 90, 10)
-                        $ StayCount[1].Statup("Lust", 90, 10)
+                        $ StayCount[0].change_stat("lust", 50, 15)
+                        $ StayCount[1].change_stat("lust", 50, 15)
+                        $ StayCount[0].change_stat("lust", 90, 10)
+                        $ StayCount[1].change_stat("lust", 90, 10)
                         "You got a good look at them washing off, and they didn't seem to mind the view either."
                         $ StayCount[0].GLG(StayCount[1],600,4,1)
                         $ StayCount[1].GLG(StayCount[0],600,4,1)
                         $ StayCount[0].GLG(StayCount[1],800,2,1)
                         $ StayCount[1].GLG(StayCount[0],800,2,1)
                 else:
-                        $ StayCount[0].Statup("Lust", 50, 15)
-                        $ StayCount[0].Statup("Lust", 90, 10)
+                        $ StayCount[0].change_stat("lust", 50, 15)
+                        $ StayCount[0].change_stat("lust", 90, 10)
                         "You got a good look at her washing off, and she didn't seem to mind the view either."
                 return
 
-        if Line:
+        if line:
             if len(StayCount) > 1:
-                    $ StayCount[0].Statup("Lust", 50, 5)
-                    $ StayCount[0].Statup("Lust", 70, 3)
-                    $ StayCount[1].Statup("Lust", 50, 5)
-                    $ StayCount[1].Statup("Lust", 70, 3)
+                    $ StayCount[0].change_stat("lust", 50, 5)
+                    $ StayCount[0].change_stat("lust", 70, 3)
+                    $ StayCount[1].change_stat("lust", 50, 5)
+                    $ StayCount[1].change_stat("lust", 70, 3)
             else:
-                    $ StayCount[0].Statup("Lust", 50, 6)
-                    $ StayCount[0].Statup("Lust", 70, 3)
-            $ Player.Statup("Focus", 50, 5)
-            $ Player.Statup("Focus", 80, 2)
+                    $ StayCount[0].change_stat("lust", 50, 6)
+                    $ StayCount[0].change_stat("lust", 70, 3)
+            $ Player.change_stat("Focus", 50, 5)
+            $ Player.change_stat("Focus", 80, 2)
             menu:
                 extend ""
                 "Continue?":
                         pass
                 "Stop her." if len(StayCount) < 2: #if one
-                        $Line = 0
+                        $line = 0
                         call reset_position(StayCount[0])
                         "You take a step back, pulling away from her."
-                        $ StayCount[0].Statup("Love", 80, -1)
-                        $ StayCount[0].Statup("Obed", 80, 5)
-                        $ StayCount[0].Statup("Inbt", 80, -1)
-                        $ StayCount[0].FaceChange("sad")
+                        $ StayCount[0].change_stat("love", 80, -1)
+                        $ StayCount[0].change_stat("obedience", 80, 5)
+                        $ StayCount[0].change_stat("inhibition", 80, -1)
+                        $ StayCount[0].change_face("sad")
                         "She seems a bit disappointed."
                 "Stop them." if len(StayCount) > 1: #if both
-                        $Line = 0
+                        $line = 0
                         call reset_position(StayCount[1])
                         call reset_position(StayCount[0])
                         "You take a step back, pulling away from them."
-                        $ StayCount[0].Statup("Love", 80, -1)
-                        $ StayCount[0].Statup("Obed", 80, 5)
-                        $ StayCount[0].Statup("Inbt", 80, -1)
-                        $ StayCount[1].Statup("Obed", 80, 5)
-                        $ StayCount[1].Statup("Inbt", 80, -1)
-                        $ StayCount[0].FaceChange("sad")
-                        $ StayCount[1].FaceChange("sad")
+                        $ StayCount[0].change_stat("love", 80, -1)
+                        $ StayCount[0].change_stat("obedience", 80, 5)
+                        $ StayCount[0].change_stat("inhibition", 80, -1)
+                        $ StayCount[1].change_stat("obedience", 80, 5)
+                        $ StayCount[1].change_stat("inhibition", 80, -1)
+                        $ StayCount[0].change_face("sad")
+                        $ StayCount[1].change_face("sad")
                         "They seem a bit disappointed."
-        if Line:
+        if line:
             #B set
             $ Options = [1]
             if len(StayCount) > 1:
@@ -1248,103 +1248,103 @@ label Shower_Sex(Options=0,Line=0):
 
             $ renpy.random.shuffle(Options)
 
-            #"Line" will be either the first girl's name, or "She"
+            #"line" will be either the first girl's name, or "She"
             #lesbian
             if Options[0] == 2:
-                    $ StayCount[0].Statup("Lust", 50, 5)
-                    $ StayCount[0].Statup("Lust", 70, 2)
-                    $ StayCount[1].Statup("Lust", 50, 7)
-                    $ StayCount[1].Statup("Lust", 70, 3)
-                    $ Player.Statup("Focus", 50, 8)
-                    $ Player.Statup("Focus", 80, 4)
-                    "[Line] reaches over to [StayCount[1].Name] and begins soaping up her chest."
+                    $ StayCount[0].change_stat("lust", 50, 5)
+                    $ StayCount[0].change_stat("lust", 70, 2)
+                    $ StayCount[1].change_stat("lust", 50, 7)
+                    $ StayCount[1].change_stat("lust", 70, 3)
+                    $ Player.change_stat("Focus", 50, 8)
+                    $ Player.change_stat("Focus", 80, 4)
+                    "[line] reaches over to [StayCount[1].name] and begins soaping up her chest."
             elif Options[0] == 3:
-                    $ StayCount[0].Statup("Lust", 50, 7)
-                    $ StayCount[0].Statup("Lust", 70, 3)
-                    $ StayCount[1].Statup("Lust", 50, 8)
-                    $ StayCount[1].Statup("Lust", 70, 4)
-                    $ Player.Statup("Focus", 50, 8)
-                    $ Player.Statup("Focus", 80, 5)
-                    "[Line] reaches over to [StayCount[1].Name] and begins soaping up her pussy."
+                    $ StayCount[0].change_stat("lust", 50, 7)
+                    $ StayCount[0].change_stat("lust", 70, 3)
+                    $ StayCount[1].change_stat("lust", 50, 8)
+                    $ StayCount[1].change_stat("lust", 70, 4)
+                    $ Player.change_stat("Focus", 50, 8)
+                    $ Player.change_stat("Focus", 80, 5)
+                    "[line] reaches over to [StayCount[1].name] and begins soaping up her pussy."
 
             #fondling you
             elif Options[0] == 4:
                     if len(StayCount) > 1:
-                            $ StayCount[0].Statup("Lust", 50, 10)
-                            $ StayCount[0].Statup("Lust", 70, 7)
+                            $ StayCount[0].change_stat("lust", 50, 10)
+                            $ StayCount[0].change_stat("lust", 70, 7)
                     else:
-                            $ StayCount[0].Statup("Lust", 50, 8)
-                            $ StayCount[0].Statup("Lust", 70, 5)
-                    $ Player.Statup("Focus", 50, 10)
-                    $ Player.Statup("Focus", 80, 6)
-                    "[Line] reaches down and takes your cock in her hand, soaping it up."
+                            $ StayCount[0].change_stat("lust", 50, 8)
+                            $ StayCount[0].change_stat("lust", 70, 5)
+                    $ Player.change_stat("Focus", 50, 10)
+                    $ Player.change_stat("Focus", 80, 6)
+                    "[line] reaches down and takes your cock in her hand, soaping it up."
             elif Options[0] == 5:
                     if len(StayCount) > 1:
-                            $ StayCount[0].Statup("Lust", 50, 12)
-                            $ StayCount[0].Statup("Lust", 70, 8)
+                            $ StayCount[0].change_stat("lust", 50, 12)
+                            $ StayCount[0].change_stat("lust", 70, 8)
                     else:
-                            $ StayCount[0].Statup("Lust", 50, 9)
-                            $ StayCount[0].Statup("Lust", 70, 6)
-                    $ Player.Statup("Focus", 50, 10)
-                    $ Player.Statup("Focus", 80, 4)
-                    "[Line] kneels down and wraps her breasts around your cock, soaping it up."
+                            $ StayCount[0].change_stat("lust", 50, 9)
+                            $ StayCount[0].change_stat("lust", 70, 6)
+                    $ Player.change_stat("Focus", 50, 10)
+                    $ Player.change_stat("Focus", 80, 4)
+                    "[line] kneels down and wraps her breasts around your cock, soaping it up."
 
             #msturbation
             elif Options[0] == 6:
                     if len(StayCount) > 1:
-                            $ StayCount[0].Statup("Lust", 50, 11)
-                            $ StayCount[0].Statup("Lust", 70, 6)
+                            $ StayCount[0].change_stat("lust", 50, 11)
+                            $ StayCount[0].change_stat("lust", 70, 6)
                     else:
-                            $ StayCount[0].Statup("Lust", 50, 9)
-                            $ StayCount[0].Statup("Lust", 70, 5)
-                    $ Player.Statup("Focus", 50, 9)
-                    $ Player.Statup("Focus", 80, 4)
-                    "[Line] reaches down and begins fondling her own pussy, building a nice lather."
+                            $ StayCount[0].change_stat("lust", 50, 9)
+                            $ StayCount[0].change_stat("lust", 70, 5)
+                    $ Player.change_stat("Focus", 50, 9)
+                    $ Player.change_stat("Focus", 80, 4)
+                    "[line] reaches down and begins fondling her own pussy, building a nice lather."
             elif Options[0] == 7:
                     if len(StayCount) > 1:
-                            $ StayCount[0].Statup("Lust", 50, 10)
-                            $ StayCount[0].Statup("Lust", 70, 5)
+                            $ StayCount[0].change_stat("lust", 50, 10)
+                            $ StayCount[0].change_stat("lust", 70, 5)
                     else:
-                            $ StayCount[0].Statup("Lust", 50, 9)
-                            $ StayCount[0].Statup("Lust", 70, 4)
-                    $ Player.Statup("Focus", 50, 8)
-                    $ Player.Statup("Focus", 80, 3)
-                    "[Line] begins rubbing her own breasts in circles, building a nice lather."
+                            $ StayCount[0].change_stat("lust", 50, 9)
+                            $ StayCount[0].change_stat("lust", 70, 4)
+                    $ Player.change_stat("Focus", 50, 8)
+                    $ Player.change_stat("Focus", 80, 3)
+                    "[line] begins rubbing her own breasts in circles, building a nice lather."
 
             #gentle tease
             elif Options[0] == 8:
-                    $ StayCount[0].Statup("Lust", 50, 6)
-                    $ StayCount[0].Statup("Lust", 70, 3)
-                    $ Player.Statup("Focus", 50, 7)
-                    $ Player.Statup("Focus", 80, 3)
-                    "[Line] draws her breasts up and down your arm, the soap bubbles squirting out."
+                    $ StayCount[0].change_stat("lust", 50, 6)
+                    $ StayCount[0].change_stat("lust", 70, 3)
+                    $ Player.change_stat("Focus", 50, 7)
+                    $ Player.change_stat("Focus", 80, 3)
+                    "[line] draws her breasts up and down your arm, the soap bubbles squirting out."
             elif Options[0] == 9:
-                    $ StayCount[0].Statup("Lust", 50, 8)
-                    $ StayCount[0].Statup("Lust", 70, 3)
-                    $ Player.Statup("Focus", 50, 8)
-                    $ Player.Statup("Focus", 80, 3)
-                    "[Line] kneels down and rubs her breasts against your leg, soaping it up."
+                    $ StayCount[0].change_stat("lust", 50, 8)
+                    $ StayCount[0].change_stat("lust", 70, 3)
+                    $ Player.change_stat("Focus", 50, 8)
+                    $ Player.change_stat("Focus", 80, 3)
+                    "[line] kneels down and rubs her breasts against your leg, soaping it up."
             elif Options[0] == 10:
-                    $ StayCount[0].Statup("Lust", 50, 7)
-                    $ StayCount[0].Statup("Lust", 70, 3)
-                    $ Player.Statup("Focus", 50, 6)
-                    $ Player.Statup("Focus", 80, 3)
-                    "[Line] presses against your back, her soapy breasts rubbing back and forth against it."
+                    $ StayCount[0].change_stat("lust", 50, 7)
+                    $ StayCount[0].change_stat("lust", 70, 3)
+                    $ Player.change_stat("Focus", 50, 6)
+                    $ Player.change_stat("Focus", 80, 3)
+                    "[line] presses against your back, her soapy breasts rubbing back and forth against it."
             elif Options[0] == 11:
-                    $ StayCount[0].Statup("Lust", 50, 7)
-                    $ StayCount[0].Statup("Lust", 70, 3)
-                    $ Player.Statup("Focus", 50, 8)
-                    $ Player.Statup("Focus", 80, 4)
-                    "[Line] presses against your chest, her soapy breasts rubbing back and forth against it."
+                    $ StayCount[0].change_stat("lust", 50, 7)
+                    $ StayCount[0].change_stat("lust", 70, 3)
+                    $ Player.change_stat("Focus", 50, 8)
+                    $ Player.change_stat("Focus", 80, 4)
+                    "[line] presses against your chest, her soapy breasts rubbing back and forth against it."
             elif Options[0] == 1:
-                    $ StayCount[0].Statup("Lust", 50, 5)
-                    $ StayCount[0].Statup("Lust", 70, 2)
-                    $ Player.Statup("Focus", 50, 6)
-                    $ Player.Statup("Focus", 80, 3)
-                    "[Line] stares silently at you as she moves her hands along her soapy body. . ."
-                    $ Line = 0
+                    $ StayCount[0].change_stat("lust", 50, 5)
+                    $ StayCount[0].change_stat("lust", 70, 2)
+                    $ Player.change_stat("Focus", 50, 6)
+                    $ Player.change_stat("Focus", 80, 3)
+                    "[line] stares silently at you as she moves her hands along her soapy body. . ."
+                    $ line = 0
 
-        if Line and len(StayCount) > 1:
+        if line and len(StayCount) > 1:
             #C Set, check what the other girl thinks. . .
             $ D20 += 5 if ApprovalCheck(StayCount[1], 1800) else 0
             if StayCount[1].GirlLikeCheck(StayCount[0]) <= 800 and 2 <= Options[0] <=3:
@@ -1355,96 +1355,96 @@ label Shower_Sex(Options=0,Line=0):
             if 2 <= Options[0] <= 3:
                 # if it's lesbian stuff. . .
                 if ApprovalCheck(StayCount[1], 1300) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 800:
-                        $ StayCount[1].FaceChange("sexy",1)
-                        $ StayCount[0].Statup("Lust", 50, 5)
-                        $ StayCount[0].Statup("Lust", 70, 5)
-                        $ StayCount[1].Statup("Lust", 50, 12)
-                        $ StayCount[1].Statup("Lust", 70, 12)
+                        $ StayCount[1].change_face("sexy",1)
+                        $ StayCount[0].change_stat("lust", 50, 5)
+                        $ StayCount[0].change_stat("lust", 70, 5)
+                        $ StayCount[1].change_stat("lust", 50, 12)
+                        $ StayCount[1].change_stat("lust", 70, 12)
                         call Close_Launch(StayCount[0],StayCount[1])
-                        "[StayCount[1].Name] seems really into this, and returns the favor."
-                        $ Player.Statup("Focus", 50, 7)
-                        $ Player.Statup("Focus", 80, 3)
-                        $ Line = 4
+                        "[StayCount[1].name] seems really into this, and returns the favor."
+                        $ Player.change_stat("Focus", 50, 7)
+                        $ Player.change_stat("Focus", 80, 3)
+                        $ line = 4
                 elif ApprovalCheck(StayCount[1], 1200) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 700:
-                        $ StayCount[1].FaceChange("sexy",2,Eyes="closed")
-                        $ StayCount[1].Statup("Lust", 50, 10)
-                        $ StayCount[1].Statup("Lust", 70, 10)
-                        $ Player.Statup("Focus", 50, 5)
-                        $ Player.Statup("Focus", 80, 3)
+                        $ StayCount[1].change_face("sexy",2,Eyes="closed")
+                        $ StayCount[1].change_stat("lust", 50, 10)
+                        $ StayCount[1].change_stat("lust", 70, 10)
+                        $ Player.change_stat("Focus", 50, 5)
+                        $ Player.change_stat("Focus", 80, 3)
                         call Close_Launch(StayCount[0],StayCount[1])
-                        "[StayCount[1].Name] seems really into this, and leans into it."
+                        "[StayCount[1].name] seems really into this, and leans into it."
                 else:
-                        $ StayCount[1].Statup("Lust", 50, 10)
-                        $ StayCount[1].FaceChange("sadside",Brows="confused")
-                        "[StayCount[1].Name] doesn't really seem to appreciate this."
+                        $ StayCount[1].change_stat("lust", 50, 10)
+                        $ StayCount[1].change_face("sadside",Brows="confused")
+                        "[StayCount[1].name] doesn't really seem to appreciate this."
                         "She pulls away."
-                        $ Line = 3
+                        $ line = 3
             else:
                 # if it's not lesbian stuff. . .
                 if (ApprovalCheck(StayCount[1], 1300) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 700) or ApprovalCheck(StayCount[1], 2000):
                     if Options[0] == 5: #titjob
-                        $ StayCount[1].Statup("Lust", 50, 10)
-                        $ StayCount[1].Statup("Lust", 70, 5)
-                        $ Player.Statup("Focus", 50, 6)
-                        $ Player.Statup("Focus", 80, 3)
+                        $ StayCount[1].change_stat("lust", 50, 10)
+                        $ StayCount[1].change_stat("lust", 70, 5)
+                        $ Player.change_stat("Focus", 50, 6)
+                        $ Player.change_stat("Focus", 80, 3)
                         call Close_Launch(StayCount[0],StayCount[1])
-                        "[StayCount[1].Name] seems really into this, slowly rubbing against you as she watches."
+                        "[StayCount[1].name] seems really into this, slowly rubbing against you as she watches."
                     else:
-                        $ StayCount[1].Statup("Lust", 50, 10)
-                        $ StayCount[1].Statup("Lust", 70, 5)
-                        $ Player.Statup("Focus", 50, 5)
-                        $ Player.Statup("Focus", 80, 3)
+                        $ StayCount[1].change_stat("lust", 50, 10)
+                        $ StayCount[1].change_stat("lust", 70, 5)
+                        $ Player.change_stat("Focus", 50, 5)
+                        $ Player.change_stat("Focus", 80, 3)
                         call Close_Launch(StayCount[0],StayCount[1])
-                        "[StayCount[1].Name] seems really into this, and joins her on the other side."
-                    $ Line = 4
+                        "[StayCount[1].name] seems really into this, and joins her on the other side."
+                    $ line = 4
                 elif ((ApprovalCheck(StayCount[1], 1200) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 600)) or ApprovalCheck(StayCount[1], 1600):
-                        $ StayCount[1].FaceChange("sexy",2,Eyes="down")
-                        $ StayCount[1].Statup("Lust", 50, 10)
-                        $ StayCount[1].Statup("Lust", 70, 5)
-                        "[StayCount[1].Name] seems really into this, and watches her do it."
+                        $ StayCount[1].change_face("sexy",2,Eyes="down")
+                        $ StayCount[1].change_stat("lust", 50, 10)
+                        $ StayCount[1].change_stat("lust", 70, 5)
+                        "[StayCount[1].name] seems really into this, and watches her do it."
                 else:
-                        $ StayCount[1].FaceChange("sadside",Brows="confused")
-                        $ StayCount[1].Statup("Lust", 50, 5)
-                        "[StayCount[1].Name] doesn't really seem to appreciate this."
-                        $ Line = 3
-        if Line:
+                        $ StayCount[1].change_face("sadside",Brows="confused")
+                        $ StayCount[1].change_stat("lust", 50, 5)
+                        "[StayCount[1].name] doesn't really seem to appreciate this."
+                        $ line = 3
+        if line:
             menu:
                 extend ""
                 "Continue?":
                     pass
                 "Stop her." if len(StayCount) < 2: #if one
-                    $ Line = 0
+                    $ line = 0
                     call reset_position(StayCount[0])
                     "You take a step back, pulling away from her."
-                    $ StayCount[0].Statup("Love", 80, -2)
-                    $ StayCount[0].Statup("Obed", 80, 5)
-                    $ StayCount[0].Statup("Inbt", 80, -2)
-                    $ StayCount[0].FaceChange("sad")
+                    $ StayCount[0].change_stat("love", 80, -2)
+                    $ StayCount[0].change_stat("obedience", 80, 5)
+                    $ StayCount[0].change_stat("inhibition", 80, -2)
+                    $ StayCount[0].change_face("sad")
                     "She seems a bit disappointed."
                 "Stop them." if len(StayCount) > 1: #if both
-                    $Line = 0
+                    $line = 0
                     call reset_position(StayCount[1])
                     call reset_position(StayCount[0])
                     "You take a step back, pulling away from them."
-                    $ StayCount[0].FaceChange("sad")
-                    $ StayCount[0].Statup("Love", 80, -2)
-                    $ StayCount[0].Statup("Obed", 80, 5)
-                    $ StayCount[0].Statup("Inbt", 80, -2)
-                    if Line == 3:
-                        $ StayCount[1].Statup("Love", 80, 4)
-                        $ StayCount[1].Statup("Obed", 80, 5)
-                        $ StayCount[1].FaceChange("bemused")
-                        "[StayCount[0].Name] seems a bit disappointed, but [StayCount[1].Name] seems pleased."
+                    $ StayCount[0].change_face("sad")
+                    $ StayCount[0].change_stat("love", 80, -2)
+                    $ StayCount[0].change_stat("obedience", 80, 5)
+                    $ StayCount[0].change_stat("inhibition", 80, -2)
+                    if line == 3:
+                        $ StayCount[1].change_stat("love", 80, 4)
+                        $ StayCount[1].change_stat("obedience", 80, 5)
+                        $ StayCount[1].change_face("bemused")
+                        "[StayCount[0].name] seems a bit disappointed, but [StayCount[1].name] seems pleased."
                     else:
-                        $ StayCount[1].Statup("Love", 80, -1)
-                        $ StayCount[1].Statup("Obed", 80, 5)
-                        $ StayCount[1].Statup("Inbt", 80, -1)
-                        $ StayCount[1].FaceChange("sad")
+                        $ StayCount[1].change_stat("love", 80, -1)
+                        $ StayCount[1].change_stat("obedience", 80, 5)
+                        $ StayCount[1].change_stat("inhibition", 80, -1)
+                        $ StayCount[1].change_face("sad")
                         "They seem a bit disappointed."
 
-        if Line:
+        if line:
             #D set, wrap-up
-            if len(StayCount) > 1 and Line != 3: #if second didn't disapprove
+            if len(StayCount) > 1 and line != 3: #if second didn't disapprove
                     $ StayCount[0].GLG(StayCount[1],600,4,1)
                     $ StayCount[1].GLG(StayCount[0],600,4,1)
                     $ StayCount[0].GLG(StayCount[1],800,3,1)
@@ -1454,19 +1454,19 @@ label Shower_Sex(Options=0,Line=0):
             if 2 <= Options[0] <= 3 and D20 >= 15:
                     #if it's lesbian. . .
                     $ StayCount[1].GLG(StayCount[0],900,4,1)
-                    $ Player.Statup("Focus", 50, 10)
-                    $ Player.Statup("Focus", 80, 5)
-                    "After a few minutes of this, it looks like [StayCount[1].Name] gets off."
+                    $ Player.change_stat("Focus", 50, 10)
+                    $ Player.change_stat("Focus", 80, 5)
+                    "After a few minutes of this, it looks like [StayCount[1].name] gets off."
                     call Girl_Cumming(StayCount[1],1)
-                    if Line == 4:
+                    if line == 4:
                             $ StayCount[0].GLG(StayCount[1],900,3,1)
-                            "It looks like [StayCount[0].Name] is reacting positively to it as well. . ."
+                            "It looks like [StayCount[0].name] is reacting positively to it as well. . ."
                             call Girl_Cumming(StayCount[0],1)
                     if len(StayCount) > 1:
                             "The girls take a step back."
                             call reset_position(StayCount[1])
                     else:
-                            "[StayCount[0].Name] takes a step back."
+                            "[StayCount[0].name] takes a step back."
                     call reset_position(StayCount[0])
 
             elif 4 <= Options[0] <= 5 and D20 >= 10:
@@ -1475,14 +1475,14 @@ label Shower_Sex(Options=0,Line=0):
                     if Options[0] == 5: #if it was titjob
                             $ StayCount[0].Spunk.append("tits")
 
-                    if Line == 4:
-                            $ StayCount[0].Statup("Inbt", 90, 7)
-                            $ StayCount[1].Statup("Inbt", 90, 4)
+                    if line == 4:
+                            $ StayCount[0].change_stat("inhibition", 90, 7)
+                            $ StayCount[1].change_stat("inhibition", 90, 4)
                             $ StayCount[0].GLG(StayCount[1],900,3,1)
                             $ StayCount[1].GLG(StayCount[0],900,3,1)
                             "After a few minutes of this, the two of them manage to get you off."
                     else:
-                            $ StayCount[0].Statup("Inbt", 90, 5)
+                            $ StayCount[0].change_stat("inhibition", 90, 5)
                             "After a few minutes of this, she manages to get you off."
                     "A little more work is needed to clean up the mess."
                     if Options[0] == 5: #if it was titjob
@@ -1491,35 +1491,35 @@ label Shower_Sex(Options=0,Line=0):
                             "The girls take a step back."
                             call reset_position(StayCount[1])
                     else:
-                            "[StayCount[0].Name] takes a step back."
+                            "[StayCount[0].name] takes a step back."
                     call reset_position(StayCount[0])
 
             elif 6 <= Options[0] <= 7 and D20 >= 15:
                     #if it's her masturbation. . .
-                    $ StayCount[0].Statup("Inbt", 90, 7)
-                    $ Player.Statup("Focus", 50, 15)
-                    $ Player.Statup("Focus", 80, 5)
-                    "After a few minutes of this, it looks like [StayCount[0].Name] gets off."
+                    $ StayCount[0].change_stat("inhibition", 90, 7)
+                    $ Player.change_stat("Focus", 50, 15)
+                    $ Player.change_stat("Focus", 80, 5)
+                    "After a few minutes of this, it looks like [StayCount[0].name] gets off."
                     call Girl_Cumming(StayCount[0],1)
-                    if Line == 4:
-                            $ StayCount[1].Statup("Inbt", 90, 6)
+                    if line == 4:
+                            $ StayCount[1].change_stat("inhibition", 90, 6)
                             $ StayCount[0].GLG(StayCount[1],900,3,1)
-                            "It looks like [StayCount[1].Name] is enjoying herself as well. . ."
+                            "It looks like [StayCount[1].name] is enjoying herself as well. . ."
                             call Girl_Cumming(StayCount[1],1)
                     if len(StayCount) > 1:
                             $ StayCount[1].GLG(StayCount[0],900,3,1)
                             "The girls take a step back."
                             call reset_position(StayCount[1])
                     else:
-                            "[StayCount[0].Name] takes a step back."
+                            "[StayCount[0].name] takes a step back."
                     call reset_position(StayCount[0])
             else:
                 #nobody got off
                 if len(StayCount) > 1:
                         call reset_position(StayCount[1])
                 call reset_position(StayCount[0])
-                $ Player.Statup("Focus", 50, 15)
-                $ Player.Statup("Focus", 80, 5)
+                $ Player.change_stat("Focus", 50, 15)
+                $ Player.change_stat("Focus", 80, 5)
                 if D20 >= 15:
                     "After a minute or two, it sounds like someone is coming, so you scramble apart."
                     "Disappointing. . ."
