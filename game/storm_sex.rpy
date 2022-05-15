@@ -3,7 +3,7 @@ label Storm_SexAct(Act = 0):
         if AloneCheck(StormX) and StormX.Taboo == 20:
                 $ StormX.Taboo = 0
                 $ Taboo = 0
-        call Shift_Focus(StormX)
+        call shift_focus(StormX)
         if Act == "SkipTo":
             $ renpy.pop_call() #causes it to skip past the primary_action Swap
             $ renpy.pop_call() #causes it to skip past the cycle you were in before
@@ -29,11 +29,11 @@ label Storm_SexAct(Act = 0):
             call Storm_Fondle_Breasts
             if not action_context:
                 return
-        elif Act == "blow":
+        elif Act == "blowjob":
             call Storm_BJ_Prep
             if not action_context:
                 return
-        elif Act == "hand":
+        elif Act == "handjob":
             call Storm_HJ_Prep
             if not action_context:
                 return
@@ -46,7 +46,7 @@ label Storm_SexAct(Act = 0):
 # counter 1 means she's seen you, counter 0 means she hasn't.
 label Storm_Masturbate: #(action_context = action_context):
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(StormX)
+    call shift_focus(StormX)
     if StormX.Mast:
         $ temp_modifier += 10
     if StormX.SEXP >= 50:
@@ -84,7 +84,7 @@ label Storm_Masturbate: #(action_context = action_context):
                                 ch_s "You could give me a breast massage. . ."
                                 $ StormX.change_stat("obedience", 70, 2)
                                 $ StormX.change_stat("inhibition", 70, 1)
-                                $ offhand_action = "fondle breasts"
+                                $ offhand_action = "fondle_breasts"
                                 $ StormX.Mast += 1
                                 jump Storm_M_Cycle
                         "Would you like some help? I could. . . up to you, I guess." if Player.Semen and StormX.Action:
@@ -96,9 +96,9 @@ label Storm_Masturbate: #(action_context = action_context):
                                 $ StormX.change_stat("inhibition", 70, 1)
                                 $ D20 = renpy.random.randint(1, 20)
                                 if D20 > 10:
-                                    $ offhand_action = "fondle breasts"
+                                    $ offhand_action = "fondle_breasts"
                                 else:
-                                    $ offhand_action = "suck breasts"
+                                    $ offhand_action = "suck_breasts"
                                 $ StormX.Mast += 1
                                 jump Storm_M_Cycle
                         "Why don't we take care of each other?" if Player.Semen and StormX.Action:
@@ -150,7 +150,7 @@ label Storm_Masturbate: #(action_context = action_context):
                             jump Campus_Map
                         else:
                             ch_s "I will be leaving now, if you do not mind."
-                            call Remove_Girl(StormX)
+                            call remove_girl(StormX)
                 return                      #returns to sexmenu, which returns to original
     #End of "Join" option
 
@@ -347,8 +347,8 @@ label Storm_Masturbate: #(action_context = action_context):
             $ StormX.change_stat("obedience", 50, -2)
             $ StormX.recent_history.append("angry")
             $ StormX.daily_history.append("angry")
-            $ StormX.recent_history.append("no masturbation")
-            $ StormX.daily_history.append("no masturbation")
+            $ StormX.recent_history.append("no_masturbation")
+            $ StormX.daily_history.append("no_masturbation")
             return
     elif Taboo:                             # she refuses and this is too public a place for her
             $ StormX.change_face("angry", 1)
@@ -363,8 +363,8 @@ label Storm_Masturbate: #(action_context = action_context):
     else:
             $ StormX.change_face("normal", 1)
             ch_s "I do not think so, [StormX.Petname]."
-    $ StormX.recent_history.append("no masturbation")
-    $ StormX.daily_history.append("no masturbation")
+    $ StormX.recent_history.append("no_masturbation")
+    $ StormX.daily_history.append("no_masturbation")
     $ temp_modifier = 0
     return
 
@@ -397,7 +397,7 @@ label Storm_M_Prep:
 
     $ primary_action = "masturbation"
     if not girl_offhand_action:
-        $ girl_offhand_action = "fondle pussy"
+        $ girl_offhand_action = "fondle_pussy"
 
     if action_context:
         $ renpy.pop_call()
@@ -405,7 +405,7 @@ label Storm_M_Prep:
     $ line = 0
     if Taboo:
         $ StormX.DrainWord("tabno")
-    $ StormX.DrainWord("no masturbation")
+    $ StormX.DrainWord("no_masturbation")
     $ StormX.recent_history.append("masturbation")
     $ StormX.daily_history.append("masturbation")
 
@@ -416,7 +416,7 @@ label Storm_M_Cycle:
 
     while Round >=0:
         call Storm_Pos_Reset("masturbation")
-        call Shift_Focus(StormX)
+        call shift_focus(StormX)
         $ StormX.lustFace()
         if "unseen" in StormX.recent_history:
                 $ StormX.Eyes = "closed"
@@ -429,12 +429,12 @@ label Storm_M_Cycle:
                         "Keep Watching.":
                                 pass
 
-                        "[StormX.name]. . .[[jump in]" if "unseen" not in StormX.recent_history and "join" not in Player.recent_history and StormX.Loc == bg_current:
+                        "[StormX.name]. . .[[jump in]" if "unseen" not in StormX.recent_history and "join" not in Player.recent_history and StormX.location == bg_current:
                                 "[StormX.name] slows what she's doing with a sly grin."
                                 ch_s "Enjoying yourself?"
                                 $ action_context = "join"
                                 call Storm_Masturbate
-                        "\"Ahem. . .\"" if "unseen" in StormX.recent_history and StormX.Loc == bg_current:
+                        "\"Ahem. . .\"" if "unseen" in StormX.recent_history and StormX.location == bg_current:
                                 jump Storm_M_Interupted
 
                         "Start jack'in it." if offhand_action != "jackin":
@@ -442,7 +442,7 @@ label Storm_M_Cycle:
                         "Stop jack'in it." if offhand_action == "jackin":
                                 $ offhand_action = 0
 
-                        "Slap her ass" if StormX.Loc == bg_current:
+                        "Slap her ass" if StormX.location == bg_current:
                                 if "unseen" in StormX.recent_history:
                                         "You smack [StormX.name] firmly on the ass!"
                                         jump Storm_M_Interupted
@@ -463,7 +463,7 @@ label Storm_M_Cycle:
 
                         "Change what I'm doing":
                                 menu:
-                                    "Offhand action" if StormX.Loc == bg_current:
+                                    "Offhand action" if StormX.location == bg_current:
                                             if StormX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
@@ -471,9 +471,9 @@ label Storm_M_Cycle:
                                             else:
                                                     call Sex_Basic_Dialog(StormX,"tired")
 
-                                    "Threesome actions (locked)" if not Partner or "unseen" in StormX.recent_history or StormX.Loc != bg_current:
+                                    "Threesome actions (locked)" if not Partner or "unseen" in StormX.recent_history or StormX.location != bg_current:
                                         pass
-                                    "Threesome actions" if Partner and "unseen" not in StormX.recent_history and StormX.Loc == bg_current:
+                                    "Threesome actions" if Partner and "unseen" not in StormX.recent_history and StormX.location == bg_current:
                                         menu:
                                             "Ask [Partner.name] to do something else":
                                                         call Three_Change(StormX)
@@ -512,20 +512,20 @@ label Storm_M_Cycle:
                                     "Never mind":
                                             jump Storm_M_Cycle
 
-                        "Back to Sex Menu" if multi_action and StormX.Loc == bg_current:
+                        "Back to Sex Menu" if multi_action and StormX.location == bg_current:
                                     ch_p "Let's try something else."
                                     call Storm_Pos_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Storm_M_Interupted
-                        "End Scene" if not multi_action or StormX.Loc != bg_current:
+                        "End Scene" if not multi_action or StormX.location != bg_current:
                                     ch_p "Let's stop for now."
                                     call Storm_Pos_Reset
                                     $ line = 0
                                     jump Storm_M_Interupted
         #End menu (if line)
 
-        call Shift_Focus(StormX)
+        call shift_focus(StormX)
         call Sex_Dialog(StormX,Partner)
 
         #If either of you could cum
@@ -552,13 +552,13 @@ label Storm_M_Cycle:
                         else: #If she wasn't aware you were there
                             "You grunt and try to hold it in."
                             $ Player.Focus = 95
-                            if StormX.Loc == bg_current or StormX.Loc == "bg_desk":
+                            if StormX.location == bg_current or StormX.location == "bg_desk":
                                     jump Storm_M_Interupted
 
                     #If [StormX.name] can cum
                     if StormX.lust >= 100:
                         call Girl_Cumming(StormX)
-                        if StormX.Loc == bg_current or StormX.Loc == "bg_desk":
+                        if StormX.location == bg_current or StormX.location == "bg_desk":
                                 jump Storm_M_Interupted
 
                     if line == "came":
@@ -589,7 +589,7 @@ label Storm_M_Cycle:
                 elif Round == 5:
                     "She's definitely going to stop soon."
         else:
-                if StormX.Loc == bg_current:
+                if StormX.location == bg_current:
                         call Escalation(StormX) #sees if she wants to escalate things
 
                 if Round == 10:
@@ -613,8 +613,8 @@ label Storm_M_Interupted:
                 "[StormX.name] stops what she's doing with a start, eyes wide."
                 call Storm_First_Bottomless(1)
                 $ StormX.change_face("confused", 1, Eyes="surprised")
-                if StormX.Loc == "bg_desk":
-                        $ StormX.Loc = bg_current
+                if StormX.location == "bg_desk":
+                        $ StormX.location = bg_current
                         call Display_Girl(StormX)
                         "She approaches you."
 
@@ -653,7 +653,7 @@ label Storm_M_Interupted:
                                             $ temp_modifier -= 10
                                             $ StormX.change_stat("lust", 200, -5)
 
-                        if "Historia" not in Player.Traits:
+                        if not simulation:
                                     call Seen_First_Peen(StormX,Partner)
                                     ch_s "Hmm. . ."
 
@@ -678,7 +678,7 @@ label Storm_M_Interupted:
 
                 $ StormX.DrainWord("unseen",1,0) #She sees you, so remove unseens
                 $ StormX.Mast += 1
-                if "classcaught" not in StormX.History or "Historia" in Player.Traits:
+                if "classcaught" not in StormX.History or simulation:
                     # this activates if it's the first time in class
                     return
                 if Round <= 10:
@@ -704,7 +704,7 @@ label Storm_M_Interupted:
     else:
         call Partner_Like(StormX,3,2)
 
-    if StormX.Loc != bg_current and StormX.Loc != "bg_desk":
+    if StormX.location != bg_current and StormX.location != "bg_desk":
             return
 
     if Round <= 10:
@@ -748,7 +748,7 @@ label Storm_M_Interupted:
 
 label Storm_Sex_P:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(StormX)
+    call shift_focus(StormX)
     if StormX.Sex >= 7: # She loves it
         $ temp_modifier += 15
     elif StormX.Sex >= 3: #You've done it before several times
@@ -782,9 +782,9 @@ label Storm_Sex_P:
     if Taboo and "tabno" in StormX.daily_history:
         $ temp_modifier -= 10
 
-    if "no sex" in StormX.daily_history:
+    if "no_sex" in StormX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no sex" in StormX.recent_history else 0
+        $ temp_modifier -= 10 if "no_sex" in StormX.recent_history else 0
 
 
     $ Approval = ApprovalCheck(StormX, 1400, TabM = 5) # 135, 150, 165, Taboo -200(335)
@@ -859,7 +859,7 @@ label Storm_Sex_P:
     #End Auto
 
 
-    if not StormX.Sex and "no sex" not in StormX.recent_history:
+    if not StormX.Sex and "no_sex" not in StormX.recent_history:
             #first time
             $ StormX.change_face("surprised", 1)
             $ StormX.Mouth = "kiss"
@@ -933,7 +933,7 @@ label Storm_Sex_P:
                 $ StormX.change_stat("obedience", 90, 1)
                 $ StormX.change_stat("inhibition", 60, 1)
                 ch_s "Oh, very well, if it will satisfy you."
-            elif "no sex" in StormX.daily_history:
+            elif "no_sex" in StormX.daily_history:
                 ch_s "Very well, I am convinced. . ."
             else:
                 $ StormX.change_face("sexy", 1)
@@ -954,11 +954,11 @@ label Storm_Sex_P:
     else:
             #She's not into it, but maybe. . .
             $ StormX.change_face("angry")
-            if "no sex" in StormX.recent_history:
+            if "no_sex" in StormX.recent_history:
                 ch_s "I am afraid that \"no\" is my final answer, [StormX.Petname]."
-            elif Taboo and "tabno" in StormX.daily_history and "no sex" in StormX.daily_history:
+            elif Taboo and "tabno" in StormX.daily_history and "no_sex" in StormX.daily_history:
                 ch_s "I have already informed you. . . not in such an exposed location."
-            elif "no sex" in StormX.daily_history:
+            elif "no_sex" in StormX.daily_history:
                 ch_s "I believe that I just told you \"no,\" [StormX.Petname]."
             elif Taboo and "tabno" in StormX.daily_history:
                 ch_s "I have already informed you, this is too public!"
@@ -970,11 +970,11 @@ label Storm_Sex_P:
                 ch_s "Perhaps another time? . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no sex" in StormX.daily_history:
+                "Sorry, never mind." if "no_sex" in StormX.daily_history:
                         $ StormX.change_face("bemused")
                         ch_s "I can appreciate your. . . desires."
                         return
-                "Maybe later?" if "no sex" not in StormX.daily_history:
+                "Maybe later?" if "no_sex" not in StormX.daily_history:
                         $ StormX.change_face("sexy")
                         ch_s "Oh, of that I am certain. . ."
                         $ StormX.change_stat("love", 80, 2)
@@ -982,8 +982,8 @@ label Storm_Sex_P:
                         if Taboo:
                             $ StormX.recent_history.append("tabno")
                             $ StormX.daily_history.append("tabno")
-                        $ StormX.recent_history.append("no sex")
-                        $ StormX.daily_history.append("no sex")
+                        $ StormX.recent_history.append("no_sex")
+                        $ StormX.daily_history.append("no_sex")
                         return
                 "I think you'd enjoy it as much as I would. . .":
                         if Approval:
@@ -1019,7 +1019,7 @@ label Storm_Sex_P:
 
     #She refused all offers.
     $ StormX.ArmPose = 1
-    if "no sex" in StormX.daily_history:
+    if "no_sex" in StormX.daily_history:
         ch_s "Do not question me again."
         $ StormX.recent_history.append("angry")
         $ StormX.daily_history.append("angry")
@@ -1045,8 +1045,8 @@ label Storm_Sex_P:
     else:
         $ StormX.change_face("normal", 1)
         ch_s "I must refuse."
-    $ StormX.recent_history.append("no sex")
-    $ StormX.daily_history.append("no sex")
+    $ StormX.recent_history.append("no_sex")
+    $ StormX.daily_history.append("no_sex")
     $ temp_modifier = 0
     return
 
@@ -1149,13 +1149,13 @@ label Storm_SexPrep:
     $ action_speed = 1
     if Taboo:
         $ StormX.DrainWord("tabno")
-    $ StormX.DrainWord("no sex")
+    $ StormX.DrainWord("no_sex")
     $ StormX.recent_history.append("sex")
     $ StormX.daily_history.append("sex")
 
 label Storm_Sex_Cycle: #Repeating strokes
     while Round >=0:
-        call Shift_Focus(StormX)
+        call shift_focus(StormX)
         call Storm_Sex_Launch("sex")
         $ action_speed = 2 if action_speed >= 4 else action_speed
         $ StormX.lustFace()
@@ -1289,7 +1289,7 @@ label Storm_Sex_Cycle: #Repeating strokes
                                     jump Storm_SexAfter
         #End menu (if line)
 
-        call Shift_Focus(StormX)
+        call shift_focus(StormX)
         call Sex_Dialog(StormX,Partner)
 
         $ counter += 1
@@ -1411,7 +1411,7 @@ label Storm_Sex_Cycle: #Repeating strokes
 
 label Storm_Sex_A:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(StormX)
+    call shift_focus(StormX)
     if StormX.Anal >= 7: # She loves it
         $ temp_modifier += 20
     elif StormX.Anal >= 3: #You've done it before several times
@@ -1445,9 +1445,9 @@ label Storm_Sex_A:
 
     if Taboo and "tabno" in StormX.daily_history:
         $ temp_modifier -= 10
-    if "no anal" in StormX.daily_history:
+    if "no_anal" in StormX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no anal" in StormX.recent_history else 0
+        $ temp_modifier -= 10 if "no_anal" in StormX.recent_history else 0
 
     $ Approval = ApprovalCheck(StormX, 1550, TabM = 5) # 155, 170, 185, Taboo -200(355)
 
@@ -1521,7 +1521,7 @@ label Storm_Sex_A:
             #end "auto"
 
 
-    if not StormX.Anal and "no anal" not in StormX.recent_history:
+    if not StormX.Anal and "no_anal" not in StormX.recent_history:
             #first time
             $ StormX.change_face("surprised", 1)
             $ StormX.Mouth = "kiss"
@@ -1598,7 +1598,7 @@ label Storm_Sex_A:
                 $ StormX.change_stat("obedience", 90, 1)
                 $ StormX.change_stat("inhibition", 60, 1)
                 ch_s "Oh very well."
-            elif "no anal" in StormX.daily_history:
+            elif "no_anal" in StormX.daily_history:
                 ch_s "After some consideration. . ."
                 ch_s "It might entertain me."
             else:
@@ -1620,11 +1620,11 @@ label Storm_Sex_A:
     else:
             #She's not into it, but maybe. . .
             $ StormX.change_face("angry")
-            if "no anal" in StormX.recent_history:
+            if "no_anal" in StormX.recent_history:
                 ch_s "I am afraid that \"no\" is my final answer, [StormX.Petname]."
-            elif Taboo and "tabno" in StormX.daily_history and "no anal" in StormX.daily_history:
+            elif Taboo and "tabno" in StormX.daily_history and "no_anal" in StormX.daily_history:
                 ch_s "I have already informed you. . . not in such an exposed location."
-            elif "no anal" in StormX.daily_history:
+            elif "no_anal" in StormX.daily_history:
                 ch_s "I believe that I just told you \"no,\" [StormX.Petname]."
             elif Taboo and "tabno" in StormX.daily_history:
                 ch_s "I have already informed you, this is too public!"
@@ -1636,11 +1636,11 @@ label Storm_Sex_A:
                 ch_s "Perhaps we could work up to that."
             menu:
                 extend ""
-                "Sorry, never mind." if "no anal" in StormX.daily_history:
+                "Sorry, never mind." if "no_anal" in StormX.daily_history:
                     $ StormX.change_face("bemused")
                     ch_s "I cannot blame you for your. . . desires."
                     return
-                "Maybe later?" if "no anal" not in StormX.daily_history:
+                "Maybe later?" if "no_anal" not in StormX.daily_history:
                     $ StormX.change_face("sexy")
                     ch_s "I imagine at some point we shall. . ."
                     ch_s ". . . frequently."
@@ -1649,8 +1649,8 @@ label Storm_Sex_A:
                     if Taboo:
                         $ StormX.recent_history.append("tabno")
                         $ StormX.daily_history.append("tabno")
-                    $ StormX.recent_history.append("no anal")
-                    $ StormX.daily_history.append("no anal")
+                    $ StormX.recent_history.append("no_anal")
+                    $ StormX.daily_history.append("no_anal")
                     return
                 "I bet it would feel really good. . .":
                     if Approval:
@@ -1687,7 +1687,7 @@ label Storm_Sex_A:
 
     #She refused all offers.
     $ StormX.ArmPose = 1
-    if "no anal" in StormX.daily_history:
+    if "no_anal" in StormX.daily_history:
         ch_s "Do not question me again."
         $ StormX.recent_history.append("angry")
         $ StormX.daily_history.append("angry")
@@ -1717,14 +1717,14 @@ label Storm_Sex_A:
     else:
         $ StormX.change_face("normal", 1)
         ch_s "I do not think you have earned that yet."
-    $ StormX.recent_history.append("no anal")
-    $ StormX.daily_history.append("no anal")
+    $ StormX.recent_history.append("no_anal")
+    $ StormX.daily_history.append("no_anal")
     $ temp_modifier = 0
     return
 
 label Storm_Anal_Cycle: #Repeating strokes
     while Round >=0:
-        call Shift_Focus(StormX)
+        call shift_focus(StormX)
         call Storm_Sex_Launch("anal")
         $ action_speed = 2 if action_speed >= 4 else action_speed
         $ StormX.lustFace()
@@ -1856,7 +1856,7 @@ label Storm_Anal_Cycle: #Repeating strokes
                                     jump Storm_AnalAfter
         #End menu (if line)
 
-        call Shift_Focus(StormX)
+        call shift_focus(StormX)
         call Sex_Dialog(StormX,Partner)
 
         $ counter += 1
@@ -1978,7 +1978,7 @@ label Storm_Anal_Cycle: #Repeating strokes
 
 label Storm_Sex_H:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(StormX)
+    call shift_focus(StormX)
     if StormX.Hotdog >= 3: #You've done it before several times
         $ temp_modifier += 10
     elif StormX.Hotdog: #You've done it before
@@ -2002,9 +2002,9 @@ label Storm_Sex_H:
     if Taboo and "tabno" in StormX.daily_history:
         $ temp_modifier -= 10
 
-    if "no hotdog" in StormX.daily_history:
+    if "no_hotdog" in StormX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no hotdog" in StormX.recent_history else 0
+        $ temp_modifier -= 10 if "no_hotdog" in StormX.recent_history else 0
 
     $ Approval = ApprovalCheck(StormX, 1000, TabM = 3) # 100, 115, 130, Taboo -120(220)
 
@@ -2062,7 +2062,7 @@ label Storm_Sex_H:
             #end auto
 
 
-    if not StormX.Hotdog and "no hotdog" not in StormX.recent_history:
+    if not StormX.Hotdog and "no_hotdog" not in StormX.recent_history:
             #first time
             $ StormX.change_face("surprised", 1)
             $ StormX.Mouth = "kiss"
@@ -2132,7 +2132,7 @@ label Storm_Sex_H:
                 $ StormX.change_stat("obedience", 80, 1)
                 $ StormX.change_stat("inhibition", 60, 1)
                 ch_s "Fine then."
-            elif "no hotdog" in StormX.daily_history:
+            elif "no_hotdog" in StormX.daily_history:
                 ch_s "It was rather entertaining. . ."
             else:
                 $ StormX.change_face("sexy", 1)
@@ -2153,11 +2153,11 @@ label Storm_Sex_H:
     else:
             #She's not into it, but maybe. . .
             $ StormX.change_face("angry")
-            if "no hotdog" in StormX.recent_history:
+            if "no_hotdog" in StormX.recent_history:
                 ch_s "I am afraid that \"no\" is my final answer, [StormX.Petname]."
-            elif Taboo and "tabno" in StormX.daily_history and "no hotdog" in StormX.daily_history:
+            elif Taboo and "tabno" in StormX.daily_history and "no_hotdog" in StormX.daily_history:
                 ch_s "I just informed you. . .not in such an exposed location."
-            elif "no hotdog" in StormX.daily_history:
+            elif "no_hotdog" in StormX.daily_history:
                 ch_s "I believe that I just told you \"no,\" [StormX.Petname]."
             elif Taboo and "tabno" in StormX.daily_history:
                 ch_s "I already informed you. . .not in such an exposed location."
@@ -2169,11 +2169,11 @@ label Storm_Sex_H:
                 ch_s "I do not believe that would be appropriate. . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no hotdog" in StormX.daily_history:
+                "Sorry, never mind." if "no_hotdog" in StormX.daily_history:
                     $ StormX.change_face("bemused")
                     ch_s "There is no harm in asking."
                     return
-                "Maybe later?" if "no hotdog" not in StormX.daily_history:
+                "Maybe later?" if "no_hotdog" not in StormX.daily_history:
                     $ StormX.change_face("sexy")
                     ch_s "I expect it will happen at some point, [StormX.Petname]."
                     $ StormX.change_stat("love", 80, 1)
@@ -2181,8 +2181,8 @@ label Storm_Sex_H:
                     if Taboo:
                         $ StormX.recent_history.append("tabno")
                         $ StormX.daily_history.append("tabno")
-                    $ StormX.recent_history.append("no hotdog")
-                    $ StormX.daily_history.append("no hotdog")
+                    $ StormX.recent_history.append("no_hotdog")
+                    $ StormX.daily_history.append("no_hotdog")
                     return
                 "You might like it. . .":
                     if Approval:
@@ -2217,7 +2217,7 @@ label Storm_Sex_H:
     #She refused all offers.
     $ StormX.ArmPose = 1
 
-    if "no hotdog" in StormX.daily_history:
+    if "no_hotdog" in StormX.daily_history:
         ch_s "I believe I have made myself clear."
         $ StormX.recent_history.append("angry")
         $ StormX.daily_history.append("angry")
@@ -2243,14 +2243,14 @@ label Storm_Sex_H:
     else:
         $ StormX.change_face("normal", 1)
         ch_s "Thank you, but no."
-    $ StormX.recent_history.append("no hotdog")
-    $ StormX.daily_history.append("no hotdog")
+    $ StormX.recent_history.append("no_hotdog")
+    $ StormX.daily_history.append("no_hotdog")
     $ temp_modifier = 0
     return
 
 label Storm_Hotdog_Cycle: #Repeating strokes
     while Round >=0:
-        call Shift_Focus(StormX)
+        call shift_focus(StormX)
         call Storm_Sex_Launch("hotdog")
         $ action_speed = 2 if action_speed >= 4 else action_speed
         $ StormX.lustFace()
@@ -2386,7 +2386,7 @@ label Storm_Hotdog_Cycle: #Repeating strokes
                                     jump Storm_HotdogAfter
         #End menu (if line)
 
-        call Shift_Focus(StormX)
+        call shift_focus(StormX)
         call Sex_Dialog(StormX,Partner)
 
         $ counter += 1

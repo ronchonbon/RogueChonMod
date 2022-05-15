@@ -9,13 +9,13 @@ label Gym_Entry(Girls=[],GirlsNum = 0):  #rkeljsv
         $ Girls = all_Girls[:]
         while Girls:
                 #while there are still girls to do or the Mode is exit. . .
-                if Girls[0].Loc != "bg_dangerroom" and Girls[0].Outfit == "gym":
+                if Girls[0].location != "bg_dangerroom" and Girls[0].Outfit == "gym":
                                 #If she isn't in the dangerroom, switch to her day clothes
                                 $ Girls[0].Outfit = Girls[0].OutfitDay
                 elif Girls[0].Outfit == "gym":
                                 #If she's already in gym clothes, skip this
                                 pass
-                elif Girls[0].Loc == "bg_dangerroom" and Girls[0] not in Party:
+                elif Girls[0].location == "bg_dangerroom" and Girls[0] not in Party:
                                 #If she was already here
                                 $ Girls[0].Outfit = "gym"
                 $ Girls.remove(Girls[0])
@@ -33,7 +33,7 @@ label Gym_Entry(Girls=[],GirlsNum = 0):  #rkeljsv
                         else:
                             $ line = "no"
 
-                        if line == "no" or "asked gym" in Girls[0].daily_history or "no ask gym" in Girls[0].Traits:
+                        if line == "no" or "asked gym" in Girls[0].daily_history or "no_ask gym" in Girls[0].Traits:
                                 #If she decides not to ask you
                                 show blackscreen onlayer black
                                 if Girls[0] == EmmaX:
@@ -162,16 +162,16 @@ label Gym_Clothes_Off(Girls=[]):  #rkeljsv
         while Girls: #or Mode == "exit"?
                 #while there are still girls to do or the Mode is exit. . .
                 if Girls[0] not in Party:
-                    if Girls[0].Outfit == "gym" and Girls[0].Loc != "bg_dangerroom":
+                    if Girls[0].Outfit == "gym" and Girls[0].location != "bg_dangerroom":
                             $ Girls[0].Outfit = Girls[0].OutfitDay
-                    elif Girls[0].Loc == "bg_dangerroom":
+                    elif Girls[0].location == "bg_dangerroom":
                             $ Girls[0].Outfit = "gym"
                 $ Girls.remove(Girls[0])
         return
 
 label Danger_Room_Entry:
     call Jubes_Entry_Check
-    $ Player.DrainWord("locked",0,0,1)
+    $ door_locked = False
     $ bg_current = "bg_dangerroom"
     $ Nearby = []
     call Taboo_Level
@@ -215,19 +215,19 @@ label Danger_Room:
         "Historical Simulator":
                     ch_danger "This function allows you to revisit previous events in your history."
                     ch_danger "Unfortunately, this function is temporarily disabled."
-                    #call Danger_Room_Historia
+                    #call historical_simulator
 
-        "Lock the door" if "locked" not in Player.Traits:
+        "Lock the door" if not door_locked:
                     if time_index >= 3: #night time
                             "You lock the door"
-                            $ Player.Traits.append("locked")
+                            $ door_locked = True
                             call Taboo_Level
                     else:
                             "You can't really do that during free hours."
 
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if door_locked:
                     "You unlock the door"
-                    $ Player.Traits.remove("locked")
+                    $ door_locked = False
                     call Taboo_Level
 
         "Wait. (locked)" if time_index >= 3: #night time
@@ -300,7 +300,7 @@ label Training:
     $ Options = active_Girls[:]
     while Options:
             #Runs through all active girls, if they are in the room, checks to see if their hose were ripped.
-            if Options[0].Loc == bg_current:
+            if Options[0].location == bg_current:
                     call Girl_TightsRipped(Options[0])
             $ Options.remove(Options[0])
     call Wait
@@ -364,7 +364,7 @@ label Rogue_TightsRipped(Count = 0):
                     $ RogueX.change_face("startled", 2)
                     ch_r "I, um, I should get out of here."
                     $ RogueX.Blush = 1
-                    call Remove_Girl(RogueX)
+                    call remove_girl(RogueX)
                     $ RogueX.OutfitChange()
                 #end "if they ripped"
         return

@@ -3828,7 +3828,7 @@ label Kitty_BJ_Launch(line = primary_action):    # The sequence to launch the Ki
     $ action_speed = 0
 
     if line != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show Kitty_Sprite zorder KittyX.Layer:
         alpha 0

@@ -2,8 +2,8 @@
 
 label Emma_Chat_Minimal:
     $ EmmaX.change_face()
-    call Shift_Focus(EmmaX)
-    if EmmaX.Loc != bg_current:
+    call shift_focus(EmmaX)
+    if EmmaX.location != bg_current:
                 show Cellphone at sprite_location(EmmaX.sprite_location)
     else:
                 hide Cellphone
@@ -15,24 +15,24 @@ label Emma_Chat_Minimal:
                 return
     menu:
         ch_e "What was it you wished to discuss, [EmmaX.Petname]?"
-        "Come on over." if EmmaX.Loc != bg_current:
+        "Come on over." if EmmaX.location != bg_current:
                     ch_e "I don't think I should be visiting students at their whim."
                     ch_e "You know my office hours."
-        "Ask [EmmaX.name] to leave" if EmmaX.Loc == bg_current:
+        "Ask [EmmaX.name] to leave" if EmmaX.location == bg_current:
                     ch_e "I'll come and go as I see fit, thank you."
         "Romance her":
                 menu:
-                    "Flirt with her (locked)" if EmmaX.Chat[5]:
+                    "Flirt with her (locked)" if not EmmaX.can_flirt:
                                 pass
-                    "Flirt with her" if not EmmaX.Chat[5]:
+                    "Flirt with her" if EmmaX.can_flirt:
                                 call Emma_Flirt_Minimal
-                    "Sex Menu" if EmmaX.Loc == bg_current:
+                    "Sex Menu" if EmmaX.location == bg_current:
                                 ch_p "Did you want to fool around?"
                                 ch_e "With a student? You should know better than that, [EmmaX.Petname]."
                     "Date":
                                 ch_p "Do you want to go on a date tonight?"
                                 ch_e "Well that certainly doesn't seem appropriate."
-                    "Gifts" if EmmaX.Loc == bg_current:
+                    "Gifts" if EmmaX.location == bg_current:
                                 ch_p "I'd like to give you something."
                                 ch_e "I'm not sure that would be appropriate at the moment."
                     "Back":
@@ -58,7 +58,7 @@ label Emma_Chat_Minimal:
         "Change [EmmaX.name]":
                     ch_p "Let's talk about you."
                     ch_e "I doubt that's any of your business."
-        "Party up" if EmmaX not in Party and EmmaX.Loc == bg_current:
+        "Party up" if EmmaX not in Party and EmmaX.location == bg_current:
                     ch_p "Could you follow me for a bit?"
                     ch_e "I don't think I should."
         "Disband party" if EmmaX in Party:
@@ -113,7 +113,8 @@ label Emma_Flirt_Minimal:
                         ch_e "Don't get too close to me, [EmmaX.Petname]."
             "Never mind":
                 return
-        $ EmmaX.Chat[5] = 1
+
+        $ EmmaX.can_flirt = False
         return
 #Emma Relationship ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -711,10 +712,10 @@ label Emma_SexChat:
 
                             "Blowjobs.":
                                         $ EmmaX.change_face("sly")
-                                        if EmmaX.PlayerFav == "blow":
+                                        if EmmaX.PlayerFav == "blowjob":
                                             $ EmmaX.change_stat("lust", 80, 3)
                                             ch_e "Yes, so you've said. . ."
-                                        elif EmmaX.Favorite == "blow":
+                                        elif EmmaX.Favorite == "blowjob":
                                             $ EmmaX.change_stat("love", 90, 5)
                                             $ EmmaX.change_stat("lust", 80, 5)
                                             ch_e "Hmm, you are delicious. . ."
@@ -726,7 +727,7 @@ label Emma_SexChat:
                                         else:
                                             $ EmmaX.change_face("bemused")
                                             ch_e "Yes, I enjoy it as well. . . ."
-                                        $ EmmaX.PlayerFav = "blow"
+                                        $ EmmaX.PlayerFav = "blowjob"
 
                             "Titjobs.":
                                         $ EmmaX.change_face("sly")
@@ -749,10 +750,10 @@ label Emma_SexChat:
 
                             "Footjobs.":
                                         $ EmmaX.change_face("sly")
-                                        if EmmaX.PlayerFav == "foot":
+                                        if EmmaX.PlayerFav == "footjob":
                                             $ EmmaX.change_stat("lust", 80, 5)
                                             ch_e "Yes, so you've said. . ."
-                                        elif EmmaX.Favorite == "foot":
+                                        elif EmmaX.Favorite == "footjob":
                                             $ EmmaX.change_stat("love", 90, 5)
                                             $ EmmaX.change_stat("lust", 80, 7)
                                             ch_e "It certainly is a diversion. . ."
@@ -764,14 +765,14 @@ label Emma_SexChat:
                                         else:
                                             $ EmmaX.change_face("bemused")
                                             ch_e "It certainly is a diversion. . ."
-                                        $ EmmaX.PlayerFav = "foot"
+                                        $ EmmaX.PlayerFav = "footjob"
 
                             "Handjobs.":
                                         $ EmmaX.change_face("sly")
-                                        if EmmaX.PlayerFav == "hand":
+                                        if EmmaX.PlayerFav == "handjob":
                                             $ EmmaX.change_stat("lust", 80, 5)
                                             ch_e "Yes, so you've said. . ."
-                                        if EmmaX.Favorite == "hand":
+                                        if EmmaX.Favorite == "handjob":
                                             $ EmmaX.change_stat("love", 90, 5)
                                             $ EmmaX.change_stat("lust", 80, 7)
                                             ch_e "It certainly is a diversion. . ."
@@ -783,7 +784,7 @@ label Emma_SexChat:
                                         else:
                                             $ EmmaX.change_face("bemused")
                                             ch_e "It certainly is a diversion. . ."
-                                        $ EmmaX.PlayerFav = "hand"
+                                        $ EmmaX.PlayerFav = "handjob"
 
                             "Feeling you up.":
                                         $ counter = EmmaX.FondleB + EmmaX.FondleT + EmmaX.SuckB + EmmaX.Hotdog
@@ -791,7 +792,7 @@ label Emma_SexChat:
                                         if EmmaX.PlayerFav == "fondle":
                                             $ EmmaX.change_stat("lust", 80, 3)
                                             ch_e "I've heard that before. . ."
-                                        elif EmmaX.Favorite in ("hotdog","suck breasts","fondle breasts","fondle thighs"):
+                                        elif EmmaX.Favorite in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
                                             $ EmmaX.change_stat("love", 90, 5)
                                             $ EmmaX.change_stat("lust", 80, 5)
                                             ch_e "You do have a way with my body . ."
@@ -843,31 +844,31 @@ label Emma_SexChat:
                                             ch_e "Call me a romantic, but I enjoy kissing you. . ."
                                         elif EmmaX.Favorite == "anal":
                                                 ch_e "I really enjoy anal."
-                                        elif EmmaX.Favorite == "lick ass":
+                                        elif EmmaX.Favorite == "eat_ass":
                                                 ch_e "I enjoy it when you lick my asshole."
-                                        elif EmmaX.Favorite == "insert ass":
+                                        elif EmmaX.Favorite == "finger_ass":
                                                 ch_e "I enjoy it when you stick a finger in my ass."
                                         elif EmmaX.Favorite == "sex":
                                                 ch_e "I like when you fuck me hard."
-                                        elif EmmaX.Favorite == "lick pussy":
+                                        elif EmmaX.Favorite == "eat_pussy":
                                                 ch_e "I like when you lick my pussy."
-                                        elif EmmaX.Favorite == "fondle pussy":
+                                        elif EmmaX.Favorite == "fondle_pussy":
                                                 ch_e "I like when you finger me."
-                                        elif EmmaX.Favorite == "blow":
+                                        elif EmmaX.Favorite == "blowjob":
                                                 ch_e "I quite enjoy sucking you, is that a problem?"
-                                        elif EmmaX.Favorite == "tit":
+                                        elif EmmaX.Favorite == "titjob":
                                                 ch_e "I enjoy using my tits."
-                                        elif EmmaX.Favorite == "foot":
+                                        elif EmmaX.Favorite == "footjob":
                                                 ch_e "I do enjoy using my feet."
-                                        elif EmmaX.Favorite == "hand":
+                                        elif EmmaX.Favorite == "handjob":
                                                 ch_e "I enjoy stroking you off."
                                         elif EmmaX.Favorite == "hotdog":
                                                 ch_e "I enjoy it when you grind against me."
-                                        elif EmmaX.Favorite == "suck breasts":
+                                        elif EmmaX.Favorite == "suck_breasts":
                                                 ch_e "You are good at sucking my tits."
-                                        elif EmmaX.Favorite == "fondle breasts":
+                                        elif EmmaX.Favorite == "fondle_breasts":
                                                 ch_e "You are good at fondling my tits."
-                                        elif EmmaX.Favorite == "fondle thighs":
+                                        elif EmmaX.Favorite == "fondle_thighs":
                                                 ch_e "I enjoy when you massage my thighs."
                                         else:
                                                 ch_e "I'm really not sure. . ."
@@ -1049,11 +1050,11 @@ label Emma_Chitchat(O=0, Options = ["default","default","default"]):
                     $ Digits.append(EmmaX)
                     return
 
-        if "hungry" not in EmmaX.Traits and (EmmaX.Swallow + EmmaX.Chat[2]) >= 10 and EmmaX.Loc == bg_current:  #She's swallowed a lot
+        if "hungry" not in EmmaX.Traits and (EmmaX.Swallow + EmmaX.Chat[2]) >= 10 and EmmaX.location == bg_current:  #She's swallowed a lot
                     call Emma_Hungry
                     return
         if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or ApprovalCheck(EmmaX, 800, "I")):
-                    if EmmaX.Loc == bg_current and EmmaX.Thirst >= 30 and "refused" not in EmmaX.daily_history and "quicksex" not in EmmaX.daily_history:
+                    if EmmaX.location == bg_current and EmmaX.Thirst >= 30 and "refused" not in EmmaX.daily_history and "quicksex" not in EmmaX.daily_history:
                             $ Girl.change_face("sly",1,Eyes="down")
                             ch_e "I've got an itch. . . "
                             "[EmmaX.name] draws her hand down her body and grazes her pussy."
@@ -1074,12 +1075,8 @@ label Emma_Chitchat(O=0, Options = ["default","default","default"]):
             if "lover" in EmmaX.Petnames and ApprovalCheck(EmmaX, 900, "L"): # luvy dovey
                 $ Options.append("luv")
 
-            if "mandrill" in Player.Traits and "cologne chat" not in EmmaX.daily_history:
-                $ Options.append("mandrill")
-            if "purple" in Player.Traits and "cologne chat" not in EmmaX.daily_history:
-                $ Options.append("purple")
-            if "corruption" in Player.Traits and "cologne chat" not in EmmaX.daily_history:
-                $ Options.append("corruption")
+            if Player.cologne and "cologne_chat" not in EmmaX.daily_history:
+                $ Options.append(Player.cologne)
 
             if EmmaX.Date >= 1 and bg_current != "bg_restaurant":
                 #if you've dated before
@@ -1096,7 +1093,7 @@ label Emma_Chitchat(O=0, Options = ["default","default","default"]):
             if "showered" in EmmaX.daily_history:
                 #If you've caught Emma showering today
                 $ Options.append("showercaught")
-            if "fondle breasts" in EmmaX.daily_history or "fondle pussy" in EmmaX.daily_history or "fondle ass" in EmmaX.daily_history:
+            if "fondle_breasts" in EmmaX.daily_history or "fondle_pussy" in EmmaX.daily_history or "fondle_ass" in EmmaX.daily_history:
                 #If you've fondled Emma today
                 $ Options.append("fondled")
             if "Dazzler and Longshot" in EmmaX.Inventory and "256 Shades of Grey" in EmmaX.Inventory and "Avengers Tower Penthouse" in EmmaX.Inventory:
@@ -1117,7 +1114,7 @@ label Emma_Chitchat(O=0, Options = ["default","default","default"]):
 
             if EmmaX.Hand:
                 #If Emma's given a handjob
-                $ Options.append("handy")
+                $ Options.append("handjob")
             if EmmaX.Swallow:
                 #If Emma's swallowed before
                 $ Options.append("swallowed")
@@ -1150,7 +1147,7 @@ label Emma_Chitchat(O=0, Options = ["default","default","default"]):
                     $ Options.append("master?")
                 elif "sex friend" not in EmmaX.Petnames and EmmaX.inhibition >= 500 and bg_current == "bg_classroom" and time_index == 2: # EmmaX.Event[9]
                     $ Options.append("sexfriend?")
-                elif "fuck buddy" not in EmmaX.Petnames and EmmaX.inhibition >= 800 and bg_current != EmmaX.Loc: # EmmaX.Event[10]
+                elif "fuck buddy" not in EmmaX.Petnames and EmmaX.inhibition >= 800 and bg_current != EmmaX.location: # EmmaX.Event[10]
                     $ Options.append("fuckbuddy?")
 
 
@@ -1160,18 +1157,18 @@ label Emma_Chitchat(O=0, Options = ["default","default","default"]):
     $ renpy.random.shuffle(Options)             #shuffles options and picks out the first one
 
     if Options[0] == "mandrill":
-        $ EmmaX.daily_history.append("cologne chat")
+        $ EmmaX.daily_history.append("cologne_chat")
         $ EmmaX.change_face("confused")
         ch_e "(sniff, sniff). . . you aren't using that cheap baboon musk, are you? . ."
         $ EmmaX.change_face("perplexed", 1)
         ch_e ". . . though I suppose. . . he wasn't that bad. . ."
     elif Options[0] == "purple":
-        $ EmmaX.daily_history.append("cologne chat")
+        $ EmmaX.daily_history.append("cologne_chat")
         $ EmmaX.change_face("sly",1)
         ch_e "(sniff, sniff). . . huh, what's that smell? . ."
         ch_e ". . . was there anything I could do for you?"
     elif Options[0] == "corruption":
-        $ EmmaX.daily_history.append("cologne chat")
+        $ EmmaX.daily_history.append("cologne_chat")
         $ EmmaX.change_face("confused")
         ch_e "(sniff, sniff). . . that's. . . ripe. . ."
         $ EmmaX.change_face("sly")
@@ -1349,7 +1346,7 @@ label Emma_Chitchat(O=0, Options = ["default","default","default"]):
             ch_e "They look wonderful."
             $ EmmaX.Chat.append("lingerie")
 
-    elif Options[0] == "handy":
+    elif Options[0] == "handjob":
             #Emma's response after giving the Player a handjob.
             $ EmmaX.change_face("sly", Eyes="side")
             ch_e "You know, I was thinking about my hand,"
@@ -1358,8 +1355,8 @@ label Emma_Chitchat(O=0, Options = ["default","default","default"]):
             ch_e "Oh, that expression is priceless. . ."
             ch_e "I suppose I'll have to repeat that service sometime. . ."
 
-    elif Options[0] == "blow":
-            if "blow" not in EmmaX.Chat:
+    elif Options[0] == "blowjob":
+            if "blowjob" not in EmmaX.Chat:
                     #Emma's response after giving the Player a blowjob.
                     $ EmmaX.change_face("sly",2)
                     ch_e "You know, [EmmaX.Petname], you have a very unique flavor to you."
@@ -1386,7 +1383,7 @@ label Emma_Chitchat(O=0, Options = ["default","default","default"]):
                                     $ EmmaX.change_face("sly")
                                     ch_e "Are you trying to imply something about my. . . experience?"
                     $ EmmaX.Blush = 1
-                    $ EmmaX.Chat.append("blow")
+                    $ EmmaX.Chat.append("blowjob")
             else:
                     $ line = renpy.random.choice(["You've a taste that's easy to acquire.",
                             "My jaw is a bit sore lately.",
@@ -1892,7 +1889,7 @@ label Emma_Clothes(Public=0,Bonus=0):
             $ renpy.pop_call()
     $ line = 0
     $ Girl = EmmaX
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
 
     $ Public = 0
     if "exhibitionist" in EmmaX.Traits:
@@ -1924,7 +1921,7 @@ label Emma_Wardrobe_Menu:
             "Let's talk about what you wear around.":
                         call Clothes_Schedule(EmmaX)
 
-            "Could I get a look at it?" if EmmaX.Loc != bg_current:
+            "Could I get a look at it?" if EmmaX.location != bg_current:
                     # checks to see if she'll drop the screen
                     call OutfitShame(EmmaX,0,2)
                     if _return:
@@ -1939,7 +1936,7 @@ label Emma_Wardrobe_Menu:
                         hide DressScreen
             "Would you be more comfortable behind a screen? (locked)" if EmmaX.Taboo:
                     pass
-            "Would you be more comfortable behind a screen?" if EmmaX.Loc == bg_current and not EmmaX.Taboo and not renpy.showing('DressScreen'):
+            "Would you be more comfortable behind a screen?" if EmmaX.location == bg_current and not EmmaX.Taboo and not renpy.showing('DressScreen'):
                     # checks to see if she'll drop the screen
                     if ApprovalCheck(EmmaX, 1500) or (EmmaX.SeenChest and EmmaX.SeenPussy):
                             ch_e "Oh, I think we can handle this."
@@ -1947,9 +1944,9 @@ label Emma_Wardrobe_Menu:
                             show DressScreen zorder 150
                             ch_e "Yes, this will be more comfortable."
 
-            "Gift for you (locked)" if Girl.Loc != bg_current:
+            "Gift for you (locked)" if Girl.location != bg_current:
                             pass
-            "Gift for you" if Girl.Loc == bg_current:
+            "Gift for you" if Girl.location == bg_current:
                             ch_p "I'd like to give you something."
                             call Gifts #(Girl)
 
@@ -1967,7 +1964,7 @@ label Emma_Wardrobe_Menu:
                             ch_p "I wanted to talk about your clothes."
                             call expression Girl.Tag +"_Clothes"
                     $ Girl = EmmaX
-                    call Shift_Focus(Girl)
+                    call shift_focus(Girl)
             "Never mind, you look good like that.":
                     if "wardrobe" not in EmmaX.recent_history:
                             #Apply stat boosts only if it's the first time this turn
@@ -2631,10 +2628,10 @@ label Emma_Wardrobe_Menu:
                             if not renpy.showing('DressScreen'):
                                     call Emma_First_Bottomless
                         elif ApprovalCheck(EmmaX, 1200, TabM=4):
-                            $ primary_action = EmmaX.Legs
+                            $ temp = EmmaX.Legs
                             $ EmmaX.Legs = 0
                             pause 0.5
-                            $ EmmaX.Legs = primary_action
+                            $ EmmaX.Legs = temp
                             "She pulls off her [EmmaX.Legs] and [line], then pulls the [EmmaX.Legs] back on."
                             $ primary_action = 1
                             call Emma_First_Bottomless(1)

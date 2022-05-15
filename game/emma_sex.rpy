@@ -3,7 +3,7 @@ label Emma_SexAct(Act = 0):
         if AloneCheck(EmmaX) and EmmaX.Taboo == 20:
                 $ EmmaX.Taboo = 0
                 $ Taboo = 0
-        call Shift_Focus(EmmaX)
+        call shift_focus(EmmaX)
         if Taboo > 20 and "taboo" not in EmmaX.History:
                 # If she's yet to agree to taboo stuff
                 call Emma_Taboo_Talk
@@ -40,11 +40,11 @@ label Emma_SexAct(Act = 0):
             call Emma_Fondle_Breasts
             if not action_context:
                 return
-        elif Act == "blow":
+        elif Act == "blowjob":
             call Emma_BJ_Prep
             if not action_context:
                 return
-        elif Act == "hand":
+        elif Act == "handjob":
             call Emma_HJ_Prep
             if not action_context:
                 return
@@ -57,7 +57,7 @@ label Emma_SexAct(Act = 0):
 # counter 1 means she's seen you, counter 0 means she hasn't.
 label Emma_Masturbate: #(action_context = action_context):
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(EmmaX)
+    call shift_focus(EmmaX)
     if EmmaX.Mast:
         $ temp_modifier += 10
     if EmmaX.SEXP >= 50:
@@ -95,7 +95,7 @@ label Emma_Masturbate: #(action_context = action_context):
                                 ch_e "Hm, well I do have my hands full with these. . ."
                                 $ EmmaX.change_stat("obedience", 70, 2)
                                 $ EmmaX.change_stat("inhibition", 70, 1)
-                                $ offhand_action = "fondle breasts"
+                                $ offhand_action = "fondle_breasts"
                                 $ EmmaX.Mast += 1
                                 jump Emma_M_Cycle
                         "Would you like some help? I could. . . up to you, I guess." if Player.Semen and EmmaX.Action:
@@ -107,9 +107,9 @@ label Emma_Masturbate: #(action_context = action_context):
                                 $ EmmaX.change_stat("inhibition", 70, 1)
                                 $ D20 = renpy.random.randint(1, 20)
                                 if D20 > 10:
-                                    $ offhand_action = "fondle breasts"
+                                    $ offhand_action = "fondle_breasts"
                                 else:
-                                    $ offhand_action = "suck breasts"
+                                    $ offhand_action = "suck_breasts"
                                 $ EmmaX.Mast += 1
                                 jump Emma_M_Cycle
                         "Why don't we take care of each other?" if Player.Semen and EmmaX.Action:
@@ -359,8 +359,8 @@ label Emma_Masturbate: #(action_context = action_context):
             $ EmmaX.change_stat("obedience", 50, -2)
             $ EmmaX.recent_history.append("angry")
             $ EmmaX.daily_history.append("angry")
-            $ EmmaX.recent_history.append("no masturbation")
-            $ EmmaX.daily_history.append("no masturbation")
+            $ EmmaX.recent_history.append("no_masturbation")
+            $ EmmaX.daily_history.append("no_masturbation")
             return
     elif Taboo:                             # she refuses and this is too public a place for her
             $ EmmaX.change_face("angry", 1)
@@ -375,8 +375,8 @@ label Emma_Masturbate: #(action_context = action_context):
     else:
             $ EmmaX.change_face("normal", 1)
             ch_e "I don't think so, [EmmaX.Petname]."
-    $ EmmaX.recent_history.append("no masturbation")
-    $ EmmaX.daily_history.append("no masturbation")
+    $ EmmaX.recent_history.append("no_masturbation")
+    $ EmmaX.daily_history.append("no_masturbation")
     $ temp_modifier = 0
     return
 
@@ -409,7 +409,7 @@ label Emma_M_Prep:
 
     $ primary_action = "masturbation"
     if not girl_offhand_action:
-        $ girl_offhand_action = "fondle pussy"
+        $ girl_offhand_action = "fondle_pussy"
 
     if action_context:
         $ renpy.pop_call()
@@ -417,7 +417,7 @@ label Emma_M_Prep:
     $ line = 0
     if Taboo:
         $ EmmaX.DrainWord("tabno")
-    $ EmmaX.DrainWord("no masturbation")
+    $ EmmaX.DrainWord("no_masturbation")
     $ EmmaX.recent_history.append("masturbation")
     $ EmmaX.daily_history.append("masturbation")
 
@@ -428,7 +428,7 @@ label Emma_M_Cycle:
 
     while Round > 0:
         call reset_position(EmmaX, trigger = "masturbation")
-        call Shift_Focus(EmmaX)
+        call shift_focus(EmmaX)
         $ EmmaX.lustFace()
         if "unseen" in EmmaX.recent_history:
                 $ EmmaX.Eyes = "closed"
@@ -441,12 +441,12 @@ label Emma_M_Cycle:
                         "Keep Watching.":
                                 pass
 
-                        "[EmmaX.name]. . .[[jump in]" if "unseen" not in EmmaX.recent_history and "join" not in Player.recent_history and EmmaX.Loc == bg_current:
+                        "[EmmaX.name]. . .[[jump in]" if "unseen" not in EmmaX.recent_history and "join" not in Player.recent_history and EmmaX.location == bg_current:
                                 "[EmmaX.name] slows what she's doing with a sly grin."
                                 ch_e "Enjoying the show?"
                                 $ action_context = "join"
                                 call Emma_Masturbate
-                        "\"Ahem. . .\"" if "unseen" in EmmaX.recent_history and EmmaX.Loc == bg_current:
+                        "\"Ahem. . .\"" if "unseen" in EmmaX.recent_history and EmmaX.location == bg_current:
                                 jump Emma_M_Interupted
 
                         "Start jack'in it." if offhand_action != "jackin":
@@ -454,7 +454,7 @@ label Emma_M_Cycle:
                         "Stop jack'in it." if offhand_action == "jackin":
                                 $ offhand_action = 0
 
-                        "Slap her ass" if EmmaX.Loc == bg_current:
+                        "Slap her ass" if EmmaX.location == bg_current:
                                 if "unseen" in EmmaX.recent_history:
                                         "You smack [EmmaX.name] firmly on the ass!"
                                         jump Emma_M_Interupted
@@ -475,7 +475,7 @@ label Emma_M_Cycle:
 
                         "Change what I'm doing":
                                 menu:
-                                    "Offhand action" if EmmaX.Loc == bg_current:
+                                    "Offhand action" if EmmaX.location == bg_current:
                                             if EmmaX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
@@ -483,9 +483,9 @@ label Emma_M_Cycle:
                                             else:
                                                 ch_e "I'm actually getting a little tired, perhaps we could wrap this up?"
 
-                                    "Threesome actions (locked)" if not Partner or "unseen" in EmmaX.recent_history or EmmaX.Loc != bg_current:
+                                    "Threesome actions (locked)" if not Partner or "unseen" in EmmaX.recent_history or EmmaX.location != bg_current:
                                         pass
-                                    "Threesome actions" if Partner and "unseen" not in EmmaX.recent_history and EmmaX.Loc == bg_current:
+                                    "Threesome actions" if Partner and "unseen" not in EmmaX.recent_history and EmmaX.location == bg_current:
                                         menu:
                                             "Ask [Partner.name] to do something else":
                                                         call Three_Change(EmmaX)
@@ -524,20 +524,20 @@ label Emma_M_Cycle:
                                     "Never mind":
                                             jump Emma_M_Cycle
 
-                        "Back to Sex Menu" if multi_action and EmmaX.Loc == bg_current:
+                        "Back to Sex Menu" if multi_action and EmmaX.location == bg_current:
                                     ch_p "Let's try something else."
                                     call reset_position(EmmaX)
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Emma_M_Interupted
-                        "End Scene" if not multi_action or EmmaX.Loc != bg_current:
+                        "End Scene" if not multi_action or EmmaX.location != bg_current:
                                     ch_p "Let's stop for now."
                                     call reset_position(EmmaX)
                                     $ line = 0
                                     jump Emma_M_Interupted
         #End menu (if line)
 
-        call Shift_Focus(EmmaX)
+        call shift_focus(EmmaX)
         call Sex_Dialog(EmmaX,Partner)
 
         #If either of you could cum
@@ -564,13 +564,13 @@ label Emma_M_Cycle:
                         else: #If she wasn't aware you were there
                             "You grunt and try to hold it in."
                             $ Player.Focus = 95
-                            if EmmaX.Loc == bg_current or EmmaX.Loc == "bg_desk":
+                            if EmmaX.location == bg_current or EmmaX.location == "bg_desk":
                                     jump Emma_M_Interupted
 
                     #If [EmmaX.name] can cum
                     if EmmaX.lust >= 100:
                         call Girl_Cumming(EmmaX)
-                        if EmmaX.Loc == bg_current or EmmaX.Loc == "bg_desk":
+                        if EmmaX.location == bg_current or EmmaX.location == "bg_desk":
                                 jump Emma_M_Interupted
 
                     if line == "came":
@@ -601,7 +601,7 @@ label Emma_M_Cycle:
                 elif Round == 5:
                     "She's definitely going to stop soon."
         else:
-                if EmmaX.Loc == bg_current:
+                if EmmaX.location == bg_current:
                         call Escalation(EmmaX) #sees if she wants to escalate things
 
                 if Round == 10:
@@ -625,8 +625,8 @@ label Emma_M_Interupted:
                 "[EmmaX.name] stops what she's doing with a start, eyes wide."
                 call Emma_First_Bottomless(1)
                 $ EmmaX.change_face("confused", 1, Eyes="surprised")
-                if EmmaX.Loc == "bg_desk":
-                        $ EmmaX.Loc = bg_current
+                if EmmaX.location == "bg_desk":
+                        $ EmmaX.location = bg_current
                         call Display_Girl(EmmaX)
                         "She approaches you."
 
@@ -665,7 +665,7 @@ label Emma_M_Interupted:
                                             $ temp_modifier -= 10
                                             $ EmmaX.change_stat("lust", 200, -5)
 
-                        if "Historia" not in Player.Traits:
+                        if not simulation:
                                     call Seen_First_Peen(EmmaX,Partner)
                                     ch_e "Hmm. . ."
 
@@ -690,7 +690,7 @@ label Emma_M_Interupted:
 
                 $ EmmaX.DrainWord("unseen",1,0) #She sees you, so remove unseens
                 $ EmmaX.Mast += 1
-                if "classcaught" not in EmmaX.History or "Historia" in Player.Traits:
+                if "classcaught" not in EmmaX.History or simulation:
                     # this activates if it's the first time in class
                     return
                 if Round <= 10:
@@ -716,7 +716,7 @@ label Emma_M_Interupted:
     else:
         call Partner_Like(EmmaX,3,2)
 
-    if EmmaX.Loc != bg_current and EmmaX.Loc != "bg_desk":
+    if EmmaX.location != bg_current and EmmaX.location != "bg_desk":
             return
 
     if Round <= 10:
@@ -760,7 +760,7 @@ label Emma_M_Interupted:
 
 label Emma_Sex_P:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(EmmaX)
+    call shift_focus(EmmaX)
     if EmmaX.Sex >= 7: # She loves it
         $ temp_modifier += 15
     elif EmmaX.Sex >= 3: #You've done it before several times
@@ -794,9 +794,9 @@ label Emma_Sex_P:
     if Taboo and "tabno" in EmmaX.daily_history:
         $ temp_modifier -= 10
 
-    if "no sex" in EmmaX.daily_history:
+    if "no_sex" in EmmaX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no sex" in EmmaX.recent_history else 0
+        $ temp_modifier -= 10 if "no_sex" in EmmaX.recent_history else 0
 
 
     $ Approval = ApprovalCheck(EmmaX, 1400, TabM = 5) # 135, 150, 165, Taboo -200(335)
@@ -871,7 +871,7 @@ label Emma_Sex_P:
     #End Auto
 
 
-    if not EmmaX.Sex and "no sex" not in EmmaX.recent_history:
+    if not EmmaX.Sex and "no_sex" not in EmmaX.recent_history:
             #first time
             $ EmmaX.change_face("surprised", 1)
             $ EmmaX.Mouth = "kiss"
@@ -945,7 +945,7 @@ label Emma_Sex_P:
                 $ EmmaX.change_stat("obedience", 90, 1)
                 $ EmmaX.change_stat("inhibition", 60, 1)
                 ch_e "Oh, fine, if it will shut you up."
-            elif "no sex" in EmmaX.daily_history:
+            elif "no_sex" in EmmaX.daily_history:
                 ch_e "Very well, you've convinced me. . ."
             else:
                 $ EmmaX.change_face("sexy", 1)
@@ -966,11 +966,11 @@ label Emma_Sex_P:
     else:
             #She's not into it, but maybe. . .
             $ EmmaX.change_face("angry")
-            if "no sex" in EmmaX.recent_history:
+            if "no_sex" in EmmaX.recent_history:
                 ch_e "I'm afraid that \"no\" is my final answer, [EmmaX.Petname]."
-            elif Taboo and "tabno" in EmmaX.daily_history and "no sex" in EmmaX.daily_history:
+            elif Taboo and "tabno" in EmmaX.daily_history and "no_sex" in EmmaX.daily_history:
                 ch_e "I already told you. . .not in such an exposed location."
-            elif "no sex" in EmmaX.daily_history:
+            elif "no_sex" in EmmaX.daily_history:
                 ch_e "I believe I just told you \"no,\" [EmmaX.Petname]."
             elif Taboo and "tabno" in EmmaX.daily_history:
                 ch_e "I already told you this is too public!"
@@ -982,11 +982,11 @@ label Emma_Sex_P:
                 ch_e "Perhaps another time would be better? . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no sex" in EmmaX.daily_history:
+                "Sorry, never mind." if "no_sex" in EmmaX.daily_history:
                         $ EmmaX.change_face("bemused")
                         ch_e "I can appreciate your. . . drive."
                         return
-                "Maybe later?" if "no sex" not in EmmaX.daily_history:
+                "Maybe later?" if "no_sex" not in EmmaX.daily_history:
                         $ EmmaX.change_face("sexy")
                         ch_e "Oh, most certainly. . ."
                         $ EmmaX.change_stat("love", 80, 2)
@@ -994,8 +994,8 @@ label Emma_Sex_P:
                         if Taboo:
                             $ EmmaX.recent_history.append("tabno")
                             $ EmmaX.daily_history.append("tabno")
-                        $ EmmaX.recent_history.append("no sex")
-                        $ EmmaX.daily_history.append("no sex")
+                        $ EmmaX.recent_history.append("no_sex")
+                        $ EmmaX.daily_history.append("no_sex")
                         return
                 "I think you'd enjoy it as much as I would. . .":
                         if Approval:
@@ -1031,7 +1031,7 @@ label Emma_Sex_P:
 
     #She refused all offers.
     $ EmmaX.ArmPose = 1
-    if "no sex" in EmmaX.daily_history:
+    if "no_sex" in EmmaX.daily_history:
         ch_e "Don't question me again."
         $ EmmaX.recent_history.append("angry")
         $ EmmaX.daily_history.append("angry")
@@ -1057,14 +1057,14 @@ label Emma_Sex_P:
     else:
         $ EmmaX.change_face("normal", 1)
         ch_e "I'm afraid not."
-    $ EmmaX.recent_history.append("no sex")
-    $ EmmaX.daily_history.append("no sex")
+    $ EmmaX.recent_history.append("no_sex")
+    $ EmmaX.daily_history.append("no_sex")
     $ temp_modifier = 0
     return
 
 label Emma_Sex_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(EmmaX)
+        call shift_focus(EmmaX)
         call Emma_Sex_Launch("sex")
         $ action_speed = 2 if action_speed >= 4 else action_speed
         $ EmmaX.lustFace()
@@ -1203,7 +1203,7 @@ label Emma_Sex_Cycle: #Repeating strokes
                                     jump Emma_SexAfter
         #End menu (if line)
 
-        call Shift_Focus(EmmaX)
+        call shift_focus(EmmaX)
         call Sex_Dialog(EmmaX,Partner)
 
         $ counter += 1
@@ -1325,7 +1325,7 @@ label Emma_Sex_Cycle: #Repeating strokes
 
 label Emma_Sex_A:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(EmmaX)
+    call shift_focus(EmmaX)
     if EmmaX.Anal >= 7: # She loves it
         $ temp_modifier += 20
     elif EmmaX.Anal >= 3: #You've done it before several times
@@ -1359,9 +1359,9 @@ label Emma_Sex_A:
 
     if Taboo and "tabno" in EmmaX.daily_history:
         $ temp_modifier -= 10
-    if "no anal" in EmmaX.daily_history:
+    if "no_anal" in EmmaX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no anal" in EmmaX.recent_history else 0
+        $ temp_modifier -= 10 if "no_anal" in EmmaX.recent_history else 0
 
     $ Approval = ApprovalCheck(EmmaX, 1550, TabM = 5) # 155, 170, 185, Taboo -200(355)
 
@@ -1435,7 +1435,7 @@ label Emma_Sex_A:
             #end "auto"
 
 
-    if not EmmaX.Anal and "no anal" not in EmmaX.recent_history:
+    if not EmmaX.Anal and "no_anal" not in EmmaX.recent_history:
             #first time
             $ EmmaX.change_face("surprised", 1)
             $ EmmaX.Mouth = "kiss"
@@ -1513,7 +1513,7 @@ label Emma_Sex_A:
                 $ EmmaX.change_stat("obedience", 90, 1)
                 $ EmmaX.change_stat("inhibition", 60, 1)
                 ch_e "Oh very well."
-            elif "no anal" in EmmaX.daily_history:
+            elif "no_anal" in EmmaX.daily_history:
                 ch_e "After some consideration. . ."
                 ch_e "It might be entertaining."
             else:
@@ -1535,11 +1535,11 @@ label Emma_Sex_A:
     else:
             #She's not into it, but maybe. . .
             $ EmmaX.change_face("angry")
-            if "no anal" in EmmaX.recent_history:
+            if "no_anal" in EmmaX.recent_history:
                 ch_e "I'm afraid that \"no\" is my final answer, [EmmaX.Petname]."
-            elif Taboo and "tabno" in EmmaX.daily_history and "no anal" in EmmaX.daily_history:
+            elif Taboo and "tabno" in EmmaX.daily_history and "no_anal" in EmmaX.daily_history:
                 ch_e "I already told you. . .not in such an exposed location."
-            elif "no anal" in EmmaX.daily_history:
+            elif "no_anal" in EmmaX.daily_history:
                 ch_e "I believe I just told you \"no,\" [EmmaX.Petname]."
             elif Taboo and "tabno" in EmmaX.daily_history:
                 ch_e "I already told you this is too public!"
@@ -1551,11 +1551,11 @@ label Emma_Sex_A:
                 ch_e "Perhaps we can work up to that."
             menu:
                 extend ""
-                "Sorry, never mind." if "no anal" in EmmaX.daily_history:
+                "Sorry, never mind." if "no_anal" in EmmaX.daily_history:
                     $ EmmaX.change_face("bemused")
                     ch_e "I don't blame you for your. . . enthusiasm."
                     return
-                "Maybe later?" if "no anal" not in EmmaX.daily_history:
+                "Maybe later?" if "no_anal" not in EmmaX.daily_history:
                     $ EmmaX.change_face("sexy")
                     ch_e "I imagine we will. . ."
                     ch_e ". . . often."
@@ -1564,8 +1564,8 @@ label Emma_Sex_A:
                     if Taboo:
                         $ EmmaX.recent_history.append("tabno")
                         $ EmmaX.daily_history.append("tabno")
-                    $ EmmaX.recent_history.append("no anal")
-                    $ EmmaX.daily_history.append("no anal")
+                    $ EmmaX.recent_history.append("no_anal")
+                    $ EmmaX.daily_history.append("no_anal")
                     return
                 "I bet it would feel really good. . .":
                     if Approval:
@@ -1602,7 +1602,7 @@ label Emma_Sex_A:
 
     #She refused all offers.
     $ EmmaX.ArmPose = 1
-    if "no anal" in EmmaX.daily_history:
+    if "no_anal" in EmmaX.daily_history:
         ch_e "Don't question me again."
         $ EmmaX.recent_history.append("angry")
         $ EmmaX.daily_history.append("angry")
@@ -1637,8 +1637,8 @@ label Emma_Sex_A:
     else:
         $ EmmaX.change_face("normal", 1)
         ch_e "I don't think you've earned that yet."
-    $ EmmaX.recent_history.append("no anal")
-    $ EmmaX.daily_history.append("no anal")
+    $ EmmaX.recent_history.append("no_anal")
+    $ EmmaX.daily_history.append("no_anal")
     $ temp_modifier = 0
     return
 
@@ -1747,13 +1747,13 @@ label Emma_AnalPrep:
     $ action_speed = 1
     if Taboo:
         $ EmmaX.DrainWord("tabno")
-    $ EmmaX.DrainWord("no anal")
+    $ EmmaX.DrainWord("no_anal")
     $ EmmaX.recent_history.append("anal")
     $ EmmaX.daily_history.append("anal")
 
 label Emma_Anal_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(EmmaX)
+        call shift_focus(EmmaX)
         call Emma_Sex_Launch("anal")
         $ action_speed = 2 if action_speed >= 4 else action_speed
         $ EmmaX.lustFace()
@@ -1890,7 +1890,7 @@ label Emma_Anal_Cycle: #Repeating strokes
                                     jump Emma_AnalAfter
         #End menu (if line)
 
-        call Shift_Focus(EmmaX)
+        call shift_focus(EmmaX)
         call Sex_Dialog(EmmaX,Partner)
 
         $ counter += 1
@@ -2019,7 +2019,7 @@ label Emma_Anal_Cycle: #Repeating strokes
 
 label Emma_Sex_H:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(EmmaX)
+    call shift_focus(EmmaX)
     if EmmaX.Hotdog >= 3: #You've done it before several times
         $ temp_modifier += 10
     elif EmmaX.Hotdog: #You've done it before
@@ -2043,9 +2043,9 @@ label Emma_Sex_H:
     if Taboo and "tabno" in EmmaX.daily_history:
         $ temp_modifier -= 10
 
-    if "no hotdog" in EmmaX.daily_history:
+    if "no_hotdog" in EmmaX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no hotdog" in EmmaX.recent_history else 0
+        $ temp_modifier -= 10 if "no_hotdog" in EmmaX.recent_history else 0
 
     $ Approval = ApprovalCheck(EmmaX, 1000, TabM = 3) # 100, 115, 130, Taboo -120(220)
 
@@ -2103,7 +2103,7 @@ label Emma_Sex_H:
             #end auto
 
 
-    if not EmmaX.Hotdog and "no hotdog" not in EmmaX.recent_history:
+    if not EmmaX.Hotdog and "no_hotdog" not in EmmaX.recent_history:
             #first time
             $ EmmaX.change_face("surprised", 1)
             $ EmmaX.Mouth = "kiss"
@@ -2173,7 +2173,7 @@ label Emma_Sex_H:
                 $ EmmaX.change_stat("obedience", 80, 1)
                 $ EmmaX.change_stat("inhibition", 60, 1)
                 ch_e "Ok, fine."
-            elif "no hotdog" in EmmaX.daily_history:
+            elif "no_hotdog" in EmmaX.daily_history:
                 ch_e "It was rather entertaining. . ."
             else:
                 $ EmmaX.change_face("sexy", 1)
@@ -2194,11 +2194,11 @@ label Emma_Sex_H:
     else:
             #She's not into it, but maybe. . .
             $ EmmaX.change_face("angry")
-            if "no hotdog" in EmmaX.recent_history:
+            if "no_hotdog" in EmmaX.recent_history:
                 ch_e "I'm afraid that \"no\" is my final answer, [EmmaX.Petname]."
-            elif Taboo and "tabno" in EmmaX.daily_history and "no hotdog" in EmmaX.daily_history:
+            elif Taboo and "tabno" in EmmaX.daily_history and "no_hotdog" in EmmaX.daily_history:
                 ch_e "I just told you. . .not in such an exposed location."
-            elif "no hotdog" in EmmaX.daily_history:
+            elif "no_hotdog" in EmmaX.daily_history:
                 ch_e "I believe I just told you \"no,\" [EmmaX.Petname]."
             elif Taboo and "tabno" in EmmaX.daily_history:
                 ch_e "I already told you. . .not in such an exposed location."
@@ -2210,11 +2210,11 @@ label Emma_Sex_H:
                 ch_e "I don't think that would be appropriate. . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no hotdog" in EmmaX.daily_history:
+                "Sorry, never mind." if "no_hotdog" in EmmaX.daily_history:
                     $ EmmaX.change_face("bemused")
                     ch_e "No harm in asking. Once."
                     return
-                "Maybe later?" if "no hotdog" not in EmmaX.daily_history:
+                "Maybe later?" if "no_hotdog" not in EmmaX.daily_history:
                     $ EmmaX.change_face("sexy")
                     ch_e "I imagine it will happen at some point, [EmmaX.Petname]."
                     $ EmmaX.change_stat("love", 80, 1)
@@ -2222,8 +2222,8 @@ label Emma_Sex_H:
                     if Taboo:
                         $ EmmaX.recent_history.append("tabno")
                         $ EmmaX.daily_history.append("tabno")
-                    $ EmmaX.recent_history.append("no hotdog")
-                    $ EmmaX.daily_history.append("no hotdog")
+                    $ EmmaX.recent_history.append("no_hotdog")
+                    $ EmmaX.daily_history.append("no_hotdog")
                     return
                 "You might like it. . .":
                     if Approval:
@@ -2258,7 +2258,7 @@ label Emma_Sex_H:
     #She refused all offers.
     $ EmmaX.ArmPose = 1
 
-    if "no hotdog" in EmmaX.daily_history:
+    if "no_hotdog" in EmmaX.daily_history:
         ch_e "I've made myself clear."
         $ EmmaX.recent_history.append("angry")
         $ EmmaX.daily_history.append("angry")
@@ -2284,14 +2284,14 @@ label Emma_Sex_H:
     else:
         $ EmmaX.change_face("normal", 1)
         ch_e "No, thank you."
-    $ EmmaX.recent_history.append("no hotdog")
-    $ EmmaX.daily_history.append("no hotdog")
+    $ EmmaX.recent_history.append("no_hotdog")
+    $ EmmaX.daily_history.append("no_hotdog")
     $ temp_modifier = 0
     return
 
 label Emma_Hotdog_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(EmmaX)
+        call shift_focus(EmmaX)
         call Emma_Sex_Launch("hotdog")
         $ action_speed = 2 if action_speed >= 4 else action_speed
         $ EmmaX.lustFace()
@@ -2432,7 +2432,7 @@ label Emma_Hotdog_Cycle: #Repeating strokes
                                     jump Emma_HotdogAfter
         #End menu (if line)
 
-        call Shift_Focus(EmmaX)
+        call shift_focus(EmmaX)
         call Sex_Dialog(EmmaX,Partner)
 
         $ counter += 1

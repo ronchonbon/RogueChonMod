@@ -20,12 +20,12 @@ label Halloween_Chat(Girl=0):  #rkeljs
             while Present:
                     # Removes all girls from Present to Nearby
                     $ Nearby.append(Present[0])
-                    $ Present[0].Loc = "nearby"
+                    $ Present[0].location = "nearby"
                     $ Present.remove(Present[0])
             #Makes the current focus girl presant and at the party location.
             $ Nearby.remove(Girl)
             $ Present.append(Girl)
-            $ Girl.Loc = "HW Party"
+            $ Girl.location = "HW Party"
 
             call Display_Girl(Girl)
         hide blackscreen onlayer black
@@ -54,7 +54,7 @@ label Halloween_Chat(Girl=0):  #rkeljs
 label Halloween_Chat_Menu: #rkeljs
         $ Girl = GirlCheck(Girl)
         $ Girl.change_face()
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         if "angry" in Girl.recent_history:
                     if Girl == RogueX:
@@ -80,9 +80,9 @@ label Halloween_Chat_Menu: #rkeljs
                                     call Flirt(Girl)
                                     return
 
-                        "Sex Menu (locked)" if Girl.Loc != bg_current:
+                        "Sex Menu (locked)" if Girl.location != bg_current:
                                     pass
-                        "Sex Menu" if Girl.Loc == bg_current:
+                        "Sex Menu" if Girl.location == bg_current:
                                     if Girl.love >= Girl.obedience:
                                             ch_p "Did you want to fool around?"
                                     else:
@@ -209,14 +209,14 @@ label Halloween_Chat_Menu: #rkeljs
 
 label Emma_HWChat_Minimal:
     $ EmmaX.change_face()
-    call Shift_Focus(EmmaX)
+    call shift_focus(EmmaX)
     menu:
         ch_e "What was it you wished to discuss, [EmmaX.Petname]?"
         "Romance her":
                 menu:
-                    "Flirt with her (locked)" if EmmaX.Chat[5]:
+                    "Flirt with her (locked)" if not EmmaX.can_flirt:
                                 pass
-                    "Flirt with her" if not EmmaX.Chat[5]:
+                    "Flirt with her" if EmmaX.can_flirt:
                                 call Emma_Flirt_Minimal
                     "Sex Menu":
                                 ch_p "Did you want to fool around?"
@@ -263,7 +263,7 @@ label Halloween_Party_Entry(HWEvents=[],HWParty=[],Costume=0,HWline=[]):
         # HWline is used to play lines related to your costume
         #add introductory scene-setting here
         $ bg_current = "HW Party"
-        call Remove_Girl("All")
+        call remove_girl("all")
         call display_background
         $ Party = []
         $ Present = []
@@ -277,13 +277,13 @@ label Halloween_Party_Entry(HWEvents=[],HWParty=[],Costume=0,HWline=[]):
         #display Rogue here in costume
 #        call AllHide(1) #removes all girls
         $ Present.append(RogueX)
-        $ RogueX.Loc = "HW Party"
+        $ RogueX.location = "HW Party"
         $ RogueX.AddWord(1,0,RogueX.Hair,0,"halloween")#adds "hair style" to Daily #adds "halloween" to History
         $ RogueX.OutfitDay = "costume"
         $ RogueX.Outfit = RogueX.OutfitDay
         $ RogueX.OutfitChange(Changed=1)
 #        call Display_Girl(RogueX)
-        call Shift_Focus(RogueX)
+        call shift_focus(RogueX)
         show Rogue_Sprite at sprite_location(1200,50):
                 offset (0,0)
                 anchor (0.5, 0.0)
@@ -422,7 +422,7 @@ label Halloween_Party_Entry(HWEvents=[],HWParty=[],Costume=0,HWline=[]):
         $ RogueX.change_face("smile")
         $ Present.remove(RogueX)
         $ Nearby.append(RogueX)
-        $ RogueX.Loc = "nearby"
+        $ RogueX.location = "nearby"
         show Rogue_Sprite:
                 ease 0.8 pos (-200,50)
         pause 0.8
@@ -438,13 +438,13 @@ label Halloween_Party_Entry(HWEvents=[],HWParty=[],Costume=0,HWline=[]):
 
         #display Kitty here in costume
         $ Present.append(KittyX)
-        $ KittyX.Loc = "HW Party"
+        $ KittyX.location = "HW Party"
         $ KittyX.AddWord(1,0,KittyX.Hair,0,"halloween") #adds "halloween" to History
         $ KittyX.OutfitDay = "costume"
         $ KittyX.Outfit = KittyX.OutfitDay
         $ KittyX.OutfitChange(Changed=1)
 #        call Display_Girl(KittyX)
-        call Shift_Focus(KittyX)
+        call shift_focus(KittyX)
         show Kitty_Sprite at sprite_location(1200,50):
                 offset (0,0)
                 anchor (0.5, 0.0)
@@ -596,7 +596,7 @@ label Halloween_Party_Entry(HWEvents=[],HWParty=[],Costume=0,HWline=[]):
                 call AllHide(1) #removes all girls
                 $ Present.remove(KittyX)
                 $ Nearby.append(KittyX)
-                $ KittyX.Loc = "nearby"
+                $ KittyX.location = "nearby"
                 jump Halloween_Emma
 
 #Start Laura Portion / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
@@ -607,13 +607,13 @@ label Halloween_Party_Entry(HWEvents=[],HWParty=[],Costume=0,HWline=[]):
 
         #display Laura here in costume
         $ Present.append(LauraX)
-        $ LauraX.Loc = "HW Party"
+        $ LauraX.location = "HW Party"
         $ LauraX.AddWord(1,0,LauraX.Hair,0,"halloween") #adds "halloween" to History
         $ LauraX.OutfitDay = "costume"
         $ LauraX.Outfit = LauraX.OutfitDay
         $ LauraX.OutfitChange(Changed=1)
 #        call Display_Girl(LauraX)
-        call Shift_Focus(LauraX)
+        call shift_focus(LauraX)
         show Laura_Sprite at sprite_location(1200,50):
                 offset (0,0)
                 anchor (0.5, 0.0)
@@ -715,7 +715,7 @@ label Halloween_Party_Entry(HWEvents=[],HWParty=[],Costume=0,HWline=[]):
                                 ease 0.8 pos (1200,50)
                         pause 0.8
                         "[LauraX.name] stalks out of the party for the night."
-                        call Remove_Girl(LauraX)
+                        call remove_girl(LauraX)
 
                         $ KittyX.change_face("angry")
                         call HWchange_stat(KittyX,"love", 70, 2)
@@ -730,7 +730,7 @@ label Halloween_Party_Entry(HWEvents=[],HWParty=[],Costume=0,HWline=[]):
                         call AllHide(1) #removes all girls
                         $ Present.remove(KittyX)
                         $ Nearby.append(KittyX)
-                        $ KittyX.Loc = "nearby"
+                        $ KittyX.location = "nearby"
                         jump Halloween_Jean
 
             "Tifa?":
@@ -810,10 +810,10 @@ label Halloween_Party_Entry(HWEvents=[],HWParty=[],Costume=0,HWline=[]):
         call AllHide(1) #removes all girls
         $ Present.remove(KittyX)
         $ Nearby.append(KittyX)
-        $ KittyX.Loc = "nearby"
+        $ KittyX.location = "nearby"
         $ Present.remove(LauraX)
         $ Nearby.append(LauraX)
-        $ LauraX.Loc = "nearby"
+        $ LauraX.location = "nearby"
 
 #End LauraPortion / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
@@ -829,13 +829,13 @@ label Halloween_Jean:
 
         #add Jean arriving
         $ Present.append(JeanX)
-        $ JeanX.Loc = "HW Party"
+        $ JeanX.location = "HW Party"
         $ JeanX.AddWord(1,0,JeanX.Hair,0,"halloween") #adds "halloween" to History
         $ JeanX.OutfitDay = "costume"
         $ JeanX.Outfit = JeanX.OutfitDay
         $ JeanX.OutfitChange(Changed=1)
 #        call Display_Girl(JeanX)
-        call Shift_Focus(JeanX)
+        call shift_focus(JeanX)
         show Jean_Sprite at sprite_location(1200,50):
                 offset (0,0)
                 anchor (0.5, 0.0)
@@ -1068,7 +1068,7 @@ label Halloween_Jean:
         call AllHide(1) #removes all girls
         $ Present.remove(JeanX)
         $ Nearby.append(JeanX)
-        $ JeanX.Loc = "nearby"
+        $ JeanX.location = "nearby"
         $ JeanX.change_face("normal")
 
         #End Jean Portion / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
@@ -1083,13 +1083,13 @@ label Halloween_Jean:
         #display Storm
         $ Present.append(StormX)
         $ StormX.change_face("smile")
-        $ StormX.Loc = "HW Party"
+        $ StormX.location = "HW Party"
         $ StormX.AddWord(1,0,StormX.Hair,0,"halloween") #adds "halloween" to History
         $ StormX.OutfitDay = "costume"
         $ StormX.Outfit = StormX.OutfitDay
         $ StormX.OutfitChange(Changed=1)
 #        call Display_Girl(StormX)
-        call Shift_Focus(StormX)
+        call shift_focus(StormX)
         show Storm_Sprite at sprite_location(1200,50):
                 offset (0,0)
                 anchor (0.5, 0.0)
@@ -1235,7 +1235,7 @@ label Halloween_Jean:
         call AllHide(1) #removes all girls
         $ Present.remove(StormX)
         $ Nearby.append(StormX)
-        $ StormX.Loc = "nearby"
+        $ StormX.location = "nearby"
 
         #End Storm Portion / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
@@ -1249,14 +1249,14 @@ label Halloween_Emma:
 
         #display Emma here in costume
         $ Present.append(EmmaX)
-        $ EmmaX.Loc = "HW Party"
+        $ EmmaX.location = "HW Party"
         $ EmmaX.change_face("smile")
         $ EmmaX.AddWord(1,0,EmmaX.Hair,0,"halloween") #adds "halloween" to History
         $ EmmaX.OutfitDay = "costume"
         $ EmmaX.Outfit = EmmaX.OutfitDay
         $ EmmaX.OutfitChange(Changed=1)
 #        call Display_Girl(EmmaX)
-        call Shift_Focus(EmmaX)
+        call shift_focus(EmmaX)
         show Emma_Sprite at sprite_location(-200,50):
                 offset (0,0)
                 anchor (0.5, 0.0)
@@ -1519,7 +1519,7 @@ label Halloween_Emma:
         call AllHide(1) #removes all girls
         $ Present.remove(EmmaX)
         $ Nearby.append(EmmaX)
-        $ EmmaX.Loc = "nearby"
+        $ EmmaX.location = "nearby"
 
         #End Emma Portion / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
@@ -1538,7 +1538,7 @@ label Halloween_Skip:
                         $ Present.remove(Options[0])
                 if Options[0] not in Nearby:
                         $ Nearby.append(Options[0])
-                $ Options[0].Loc = "HW Party"
+                $ Options[0].location = "HW Party"
                 $ Options[0].OutfitDay = "costume"
                 $ Options[0].Outfit = EmmaX.OutfitDay
                 $ Options[0].OutfitChange(Changed=1)
@@ -1554,17 +1554,17 @@ label Halloween_Party:
             call Halloween_Ending
         menu:
             "You are at the Halloween Party. What would you like to do?"
-            "Talk to [RogueX.name]." if RogueX.Loc == "HW Party" or RogueX.Loc == "nearby":
+            "Talk to [RogueX.name]." if RogueX.location == "HW Party" or RogueX.location == "nearby":
                         call Halloween_Chat(RogueX)
-            "Talk to [KittyX.name]." if KittyX.Loc == "HW Party" or KittyX.Loc == "nearby":
+            "Talk to [KittyX.name]." if KittyX.location == "HW Party" or KittyX.location == "nearby":
                         call Halloween_Chat(KittyX)
-            "Talk to [EmmaX.name]." if EmmaX.Loc == "HW Party" or EmmaX.Loc == "nearby":
+            "Talk to [EmmaX.name]." if EmmaX.location == "HW Party" or EmmaX.location == "nearby":
                         call Halloween_Chat(EmmaX)
-            "Talk to [LauraX.name]." if LauraX.Loc == "HW Party" or LauraX.Loc == "nearby":
+            "Talk to [LauraX.name]." if LauraX.location == "HW Party" or LauraX.location == "nearby":
                         call Halloween_Chat(LauraX)
-            "Talk to [JeanX.name]." if JeanX.Loc == "HW Party" or JeanX.Loc == "nearby":
+            "Talk to [JeanX.name]." if JeanX.location == "HW Party" or JeanX.location == "nearby":
                         call Halloween_Chat(JeanX)
-            "Talk to [StormX.name]." if StormX.Loc == "HW Party" or StormX.Loc == "nearby":
+            "Talk to [StormX.name]." if StormX.location == "HW Party" or StormX.location == "nearby":
                         call Halloween_Chat(StormX)
             "Leave the party":
                         call Halloween_Ending
@@ -1605,23 +1605,23 @@ label Halloween_Events:
 label Halloween_Ending(Girl=0):
         "As the evening comes to a close, did you want to meet up with anyone in particular?"
         menu:
-            "Talk to [RogueX.name]." if RogueX.Loc == "HW Party" or RogueX.Loc == "nearby":
+            "Talk to [RogueX.name]." if RogueX.location == "HW Party" or RogueX.location == "nearby":
                             $ Girl = RogueX
-            "Talk to [KittyX.name]." if KittyX.Loc == "HW Party" or KittyX.Loc == "nearby":
+            "Talk to [KittyX.name]." if KittyX.location == "HW Party" or KittyX.location == "nearby":
                             $ Girl = KittyX
-            "Talk to [EmmaX.name]." if EmmaX.Loc == "HW Party" or EmmaX.Loc == "nearby":
+            "Talk to [EmmaX.name]." if EmmaX.location == "HW Party" or EmmaX.location == "nearby":
                     if "classcaught" in EmmaX.History:
                             $ Girl = EmmaX
                     else:
                             ch_e "I really had a lovely time tonight, but I have to call it an evening."
                             ch_e "I hope to see you tomorrow. . ."
-                            $ EmmaX.Loc = "bg_emma"
+                            $ EmmaX.location = "bg_emma"
                             call Halloween_Ending
-            "Talk to [LauraX.name]." if LauraX.Loc == "HW Party" or LauraX.Loc == "nearby":
+            "Talk to [LauraX.name]." if LauraX.location == "HW Party" or LauraX.location == "nearby":
                             $ Girl = LauraX
-            "Talk to [JeanX.name]." if JeanX.Loc == "HW Party" or JeanX.Loc == "nearby":
+            "Talk to [JeanX.name]." if JeanX.location == "HW Party" or JeanX.location == "nearby":
                             $ Girl = JeanX
-            "Talk to [StormX.name]." if StormX.Loc == "HW Party" or StormX.Loc == "nearby":
+            "Talk to [StormX.name]." if StormX.location == "HW Party" or StormX.location == "nearby":
                             $ Girl = StormX
             "No thanks.":
                             $ Girl = 0
@@ -1630,7 +1630,7 @@ label Halloween_Ending(Girl=0):
         call Wait
         call Girls_Location
         if Girl:
-            $ Girl.Loc = "bg_player"
+            $ Girl.location = "bg_player"
             #put girl in costume
             call set_the_scene(Quiet=1)
             $ Girl.change_face("smile",1)

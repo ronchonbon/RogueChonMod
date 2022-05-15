@@ -6,9 +6,9 @@ label StormMeetPrelude:
 
 label StormMeetAsk:
     $ bg_current = "bg_classroom"
-    $ EmmaX.Loc = "bg_classroom"
-    call CleartheRoom(EmmaX,0,1)
-    call Shift_Focus(EmmaX)
+    $ EmmaX.location = "bg_classroom"
+    call clear_the_room(EmmaX,0,1)
+    call shift_focus(EmmaX)
     call set_the_scene
     "Before class, you approach [EmmaX.name]."
     ch_p "I've been hearing creaking noises above me, do you have any idea what that could be?"
@@ -54,7 +54,7 @@ label StormMeetAsk:
     $ Player.AddWord(1,0,0,0,"attic") #adds tag to History
     $ StormX.Break[0] = 104 #gives you three days to go to the attic
     $ Player.History.remove("noise")
-    $ EmmaX.Loc = "bg_teacher"
+    $ EmmaX.location = "bg_teacher"
     return
 
 label StormMeetWater:
@@ -69,13 +69,13 @@ label StormMeetWater:
             "Stop being a pussy."
     if len(Party) > 1:
             call Anyline(Party[0],"I think we'll sit this one out.")
-            call Remove_Girl(Party[0])
+            call remove_girl(Party[0])
             call Anyline(Party[0],"Have fun though.")
-            call Remove_Girl(Party[0])
+            call remove_girl(Party[0])
     elif Party:
             call Anyline(Party[0],"I think I'll sit this one out.")
             call Anyline(Party[0],"Have fun though.")
-            call Remove_Girl(Party[0])
+            call remove_girl(Party[0])
     "You head for the door marked \"Attic. . .\""
     $ Player.AddWord(1,"water",0,0,0) #adds "water" tag to Recent
     jump StormMeet
@@ -97,18 +97,18 @@ label StormMeet:
     $ StormX.OutfitDay = "casual1"
     $ StormX.Outfit = "casual1"
     $ StormX.OutfitChange("casual1")
-    call CleartheRoom("All",0,1)
+    call clear_the_room("all",0,1)
     $ StormX.Break[0] = 0            #resets counter
-    $ StormX.Loc = 0
+    $ StormX.location = 0
     $ StormX.love = 500
     $ StormX.obedience = 0
     $ StormX.inhibition = 100
     $ StormX.Petname = 0
     $ StormX.names = ["Ororo"]
     "You climb the stairs up to the attic. Once you reach the top, you hit a wave of humidity."
-    call Shift_Focus(StormX)
+    call shift_focus(StormX)
     call set_the_scene
-    $ StormX.Loc = "bg_storm"
+    $ StormX.location = "bg_storm"
     $ StormX.sprite_location = StageCenter
     "Greeting you at the top is what appears to be an indoor garden. Bright sunlight streams through the windows."
     #attempt a sillhouette effect here by creating a mask and then masking it with Storm's sprite like the display screen
@@ -615,10 +615,10 @@ label Storm_Peter:
     if Player.name == "Peter Parker":
             return
     $ bg_current = "bg_classroom"
-    call CleartheRoom(StormX,0,1)
+    call clear_the_room(StormX,0,1)
     "Before class begins, [StormX.name] rushes up to you."
-    $ StormX.Loc = "bg_classroom"
-    call Shift_Focus(StormX)
+    $ StormX.location = "bg_classroom"
+    call shift_focus(StormX)
     call set_the_scene
     $ StormX.change_face("angry",2,Eyes="surprised")
     ch_s "[Player.name]!"
@@ -660,7 +660,7 @@ label Storm_Teacher_Caught(Girl = 0):
     else:
             "[Girl.name] jumps and dashes out of the room."
             call Partner_Like(StormX,-2,-3,500,Girl) #if likes emma 500+, -2, else -3
-            call Remove_Girl(Girl)
+            call remove_girl(Girl)
 
     $ Girl.Rep -= 1
     call Partner_Like(Girl,3,2,800,StormX)  #if likes the girl 800+, +3, else +2
@@ -673,10 +673,10 @@ label Storm_Teacher_Caught(Girl = 0):
 
 label Storm_Hairtalk:
     #called from Events after class is over
-    call Shift_Focus(StormX)
+    call shift_focus(StormX)
     $ bg_current = "bg_classroom"
-    $ StormX.Loc = "bg_classroom"
-    call CleartheRoom(StormX,0,1)
+    $ StormX.location = "bg_classroom"
+    call clear_the_room(StormX,0,1)
     call set_the_scene
     call AltClothes(StormX,8)
     $ StormX.change_face("normal")
@@ -867,8 +867,8 @@ label Storm_Hairtalk:
 
 label Storm_Detention:
             #This label is called from a Location
-            call Shift_Focus(StormX)
-            call CleartheRoom(StormX,0,1)
+            call shift_focus(StormX)
+            call clear_the_room(StormX,0,1)
             if "traveling" in Player.recent_history:
                     "You enter the room and see [StormX.name] waiting for you at the back of the room."
             else:
@@ -876,13 +876,13 @@ label Storm_Detention:
                     "Once the last student leaves, [StormX.name] approaches you."
             show blackscreen onlayer black
             $ bg_current = "bg_classroom"
-            $ StormX.Loc = "bg_classroom"
+            $ StormX.location = "bg_classroom"
             $ StormX.OutfitChange()
             call set_the_scene
             $ StormX.change_face("sly")
             $ StormX.ArmPose = 2
             $ Count = 0
-            call CleartheRoom(StormX,0,1)
+            call clear_the_room(StormX,0,1)
             hide blackscreen onlayer black
             $ line = 0
             if "detention" in Player.daily_history:
@@ -913,7 +913,7 @@ label Storm_Detention:
             "[StormX.name] walks to the door and locks it behind her."
             $ Taboo = 0
             $ StormX.Taboo = 0
-            $ Player.Traits.append("locked")
+            $ door_locked = True
             menu:
                 extend ""
                 "I guess I should focus on my studies.":
@@ -984,22 +984,22 @@ label Storm_Detention:
             ch_s "You wouldn't want to make this a habit. . ."
             $ temp_modifier = 0
             $ StormX.OutfitChange()
-            $ Player.DrainWord("locked",0,0,1)
+            $ door_locked = False
             return
 
 label Storm_love:
         # StormX.Event[6] += 1 if you're being a jerk
         $ StormX.DrainWord("asked meet")
-        if StormX.Loc == bg_current or StormX in Party:
+        if StormX.location == bg_current or StormX in Party:
                 "[StormX.name] glances over at you with an apprising look on her face."
         else:
                 "[StormX.name] turns a corner and notices you."
         if bg_current != "bg_storm" and bg_current != "bg_player":
                 "With little word, she takes your hand and pulls you up to her room."
                 $ bg_current = "bg_storm"
-        $ StormX.Loc = bg_current
+        $ StormX.location = bg_current
         call set_the_scene
-        call CleartheRoom(StormX)
+        call clear_the_room(StormX)
         call Taboo_Level
         $ StormX.daily_history.append("relationship")
 
@@ -1387,20 +1387,20 @@ label Storm_love_Badend:
         ch_s "You know, I do not think you're ready to have this conversation."
         $ StormX.recent_history.append("angry")
         $ StormX.daily_history.append("angry")
-        call Remove_Girl(StormX)
+        call remove_girl(StormX)
         return
 
 label Storm_Sub:
-        call Shift_Focus(StormX)
+        call shift_focus(StormX)
         $ StormX.DrainWord("asked meet")
 
-        $ StormX.Loc = bg_current
+        $ StormX.location = bg_current
         call set_the_scene
-        if StormX.Loc != bg_current and StormX not in Party:
+        if StormX.location != bg_current and StormX not in Party:
                 "[StormX.name] shows up and says she needs to talk to you."
         else:
                 "[StormX.name] approaches you, looking to talk."
-        call CleartheRoom(StormX)
+        call clear_the_room(StormX)
         call Taboo_Level
         $ StormX.daily_history.append("relationship")
 
@@ -1525,7 +1525,7 @@ label Storm_Sub:
                     ch_s ". . .fine."
                     $ StormX.change_stat("obedience", 90, -10)
                     ch_s "Perhaps some other time. . ."
-                    call Remove_Girl(StormX)
+                    call remove_girl(StormX)
                     $ StormX.change_face("normal",1)
                     $ StormX.History.append("sir")
                     return
@@ -1652,7 +1652,7 @@ label Storm_Sub_Asked: #Storm_Update
         if line == "rude":
                 #If line hasn't been set to "rude" by something above, then it skips right past this
                 hide Storm_Sprite with easeoutright
-                call Remove_Girl(StormX)
+                call remove_girl(StormX)
                 $ StormX.recent_history.append("angry")
                 $ renpy.pop_call()
                 "[StormX.name] marches out the door, leaving you alone.  She looked pretty upset."
@@ -1674,14 +1674,14 @@ label Storm_Sub_Asked: #Storm_Update
 
 label Storm_Master:  #Storm_Update
         $ StormX.DrainWord("asked meet")
-        call Shift_Focus(StormX)
-        $ StormX.Loc = bg_current
+        call shift_focus(StormX)
+        $ StormX.location = bg_current
         call set_the_scene
-        if StormX.Loc != bg_current and StormX not in Party:
+        if StormX.location != bg_current and StormX not in Party:
             "[StormX.name] shows up and says she needs to talk to you."
         else:
             "[StormX.name] approaches you, looking to talk."
-        call CleartheRoom(StormX)
+        call clear_the_room(StormX)
         $ StormX.daily_history.append("relationship")
         call Taboo_Level
         $ line = 0
@@ -1922,10 +1922,10 @@ label Storm_Sexfriend:   #Storm_Update
         return
 
 label Storm_Poolnight:
-        call Shift_Focus(StormX)
+        call shift_focus(StormX)
         call set_the_scene
-        call CleartheRoom(StormX,1,1)
-        $ StormX.Loc = "bg_pool"
+        call clear_the_room(StormX,1,1)
+        $ StormX.location = "bg_pool"
         call ShowPool([StormX])
         $ Taboo = 0
         $ StormX.Taboo = 0
@@ -1992,11 +1992,11 @@ label Storm_Poolnight:
 
 label Storm_Fuckbuddy:   #Storm_Update
         $ StormX.daily_history.append("relationship")
-        $ StormX.Loc = "bg_classroom"
+        $ StormX.location = "bg_classroom"
         $ bg_current = "bg_classroom"
-        call CleartheRoom(StormX,1,1)
+        call clear_the_room(StormX,1,1)
         call set_the_scene(Dress=0)
-        $ Player.Traits.append("locked")
+        $ door_locked = True
         $ Nearby = []
         call Taboo_Level
         $ StormX.change_face("sly", 1,Eyes="side")

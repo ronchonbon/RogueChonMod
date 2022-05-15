@@ -3,7 +3,7 @@ label Jean_SexAct(Act = 0):
         if AloneCheck(JeanX) and JeanX.Taboo == 20:
                 $ JeanX.Taboo = 0
                 $ Taboo = 0
-        call Shift_Focus(JeanX)
+        call shift_focus(JeanX)
         if Act == "SkipTo":
             $ renpy.pop_call() #causes it to skip past the primary_action Swap
             $ renpy.pop_call() #causes it to skip past the cycle you were in before
@@ -29,11 +29,11 @@ label Jean_SexAct(Act = 0):
             call Jean_Fondle_Breasts
             if not action_context:
                 return
-        elif Act == "blow":
+        elif Act == "blowjob":
             call Jean_BJ_Prep
             if not action_context:
                 return
-        elif Act == "hand":
+        elif Act == "handjob":
             call Jean_HJ_Prep
             if not action_context:
                 return
@@ -46,7 +46,7 @@ label Jean_SexAct(Act = 0):
 # counter 1 means she's seen you, counter 0 means she hasn't.
 label Jean_Masturbate: #(action_context = action_context):
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JeanX)
+    call shift_focus(JeanX)
     if JeanX.Mast:
         $ temp_modifier += 10
     if JeanX.SEXP >= 50:
@@ -84,7 +84,7 @@ label Jean_Masturbate: #(action_context = action_context):
                                 ch_j "Hmm, ok, give these a squeeze. . ."
                                 $ JeanX.change_stat("obedience", 70, 2)
                                 $ JeanX.change_stat("inhibition", 70, 1)
-                                $ offhand_action = "fondle breasts"
+                                $ offhand_action = "fondle_breasts"
                                 $ JeanX.Mast += 1
                                 jump Jean_M_Cycle
                         "Would you like some help? I could. . . up to you, I guess." if Player.Semen and JeanX.Action:
@@ -96,9 +96,9 @@ label Jean_Masturbate: #(action_context = action_context):
                                 $ JeanX.change_stat("inhibition", 70, 1)
                                 $ D20 = renpy.random.randint(1, 20)
                                 if D20 > 10:
-                                    $ offhand_action = "fondle breasts"
+                                    $ offhand_action = "fondle_breasts"
                                 else:
-                                    $ offhand_action = "suck breasts"
+                                    $ offhand_action = "suck_breasts"
                                 $ JeanX.Mast += 1
                                 jump Jean_M_Cycle
                         "Why don't we take care of each other?" if Player.Semen and JeanX.Action:
@@ -150,7 +150,7 @@ label Jean_Masturbate: #(action_context = action_context):
                             jump Campus_Map
                         else:
                             ch_j "I'm leaving, but maybe knock next time?"
-                            call Remove_Girl(JeanX)
+                            call remove_girl(JeanX)
                 return                      #returns to sexmenu, which returns to original
     #End of "Join" option
 
@@ -348,8 +348,8 @@ label Jean_Masturbate: #(action_context = action_context):
             $ JeanX.change_stat("obedience", 50, -2)
             $ JeanX.recent_history.append("angry")
             $ JeanX.daily_history.append("angry")
-            $ JeanX.recent_history.append("no masturbation")
-            $ JeanX.daily_history.append("no masturbation")
+            $ JeanX.recent_history.append("no_masturbation")
+            $ JeanX.daily_history.append("no_masturbation")
             return
     elif JeanX.Taboo:                             # she refuses and this is too public a place for her
             $ JeanX.change_face("angry", 1)
@@ -364,8 +364,8 @@ label Jean_Masturbate: #(action_context = action_context):
     else:
             $ JeanX.change_face("normal", 1)
             ch_j "Um, no."
-    $ JeanX.recent_history.append("no masturbation")
-    $ JeanX.daily_history.append("no masturbation")
+    $ JeanX.recent_history.append("no_masturbation")
+    $ JeanX.daily_history.append("no_masturbation")
     $ temp_modifier = 0
     return
 
@@ -398,7 +398,7 @@ label Jean_M_Prep:
 
     $ primary_action = "masturbation"
     if not girl_offhand_action:
-        $ girl_offhand_action = "fondle pussy"
+        $ girl_offhand_action = "fondle_pussy"
 
     if action_context:
         $ renpy.pop_call()
@@ -406,7 +406,7 @@ label Jean_M_Prep:
     $ line = 0
     if JeanX.Taboo:
         $ JeanX.DrainWord("tabno")
-    $ JeanX.DrainWord("no masturbation")
+    $ JeanX.DrainWord("no_masturbation")
     $ JeanX.recent_history.append("masturbation")
     $ JeanX.daily_history.append("masturbation")
 
@@ -417,7 +417,7 @@ label Jean_M_Cycle:
 
     while Round > 0:
         call Jean_Pos_Reset("masturbation")
-        call Shift_Focus(JeanX)
+        call shift_focus(JeanX)
         $ JeanX.lustFace()
 
         $ Player.Focus -= 12 if Player.FocusX and Player.Focus > 50 else 0
@@ -428,12 +428,12 @@ label Jean_M_Cycle:
                         "Keep Watching.":
                                 pass
 
-                        "[JeanX.name]. . .[[jump in]" if "unseen" not in JeanX.recent_history and "join" not in Player.recent_history and JeanX.Loc == bg_current:
+                        "[JeanX.name]. . .[[jump in]" if "unseen" not in JeanX.recent_history and "join" not in Player.recent_history and JeanX.location == bg_current:
                                 "[JeanX.name] slows what she's doing with a sly grin."
                                 ch_j "Like what you see?"
                                 $ action_context = "join"
                                 call Jean_Masturbate
-                        "\"Ahem. . .\"" if "unseen" in JeanX.recent_history and JeanX.Loc == bg_current:
+                        "\"Ahem. . .\"" if "unseen" in JeanX.recent_history and JeanX.location == bg_current:
                                 jump Jean_M_Interupted
 
                         "Start jack'in it." if offhand_action != "jackin":
@@ -441,7 +441,7 @@ label Jean_M_Cycle:
                         "Stop jack'in it." if offhand_action == "jackin":
                                 $ offhand_action = 0
 
-                        "Slap her ass" if JeanX.Loc == bg_current:
+                        "Slap her ass" if JeanX.location == bg_current:
                                 if "unseen" in JeanX.recent_history:
                                         "You smack [JeanX.name] firmly on the ass!"
                                         jump Jean_M_Interupted
@@ -462,7 +462,7 @@ label Jean_M_Cycle:
 
                         "Change what I'm doing":
                                 menu:
-                                    "Offhand action" if JeanX.Loc == bg_current:
+                                    "Offhand action" if JeanX.location == bg_current:
                                             if JeanX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
@@ -470,9 +470,9 @@ label Jean_M_Cycle:
                                             else:
                                                 ch_j "I'd like to stick with this."
 
-                                    "Threesome actions (locked)" if not Partner or "unseen" in JeanX.recent_history or JeanX.Loc != bg_current:
+                                    "Threesome actions (locked)" if not Partner or "unseen" in JeanX.recent_history or JeanX.location != bg_current:
                                         pass
-                                    "Threesome actions" if Partner and "unseen" not in JeanX.recent_history and JeanX.Loc == bg_current:
+                                    "Threesome actions" if Partner and "unseen" not in JeanX.recent_history and JeanX.location == bg_current:
                                         menu:
                                             "Ask [Partner.name] to do something else":
                                                         call Three_Change(JeanX)
@@ -509,20 +509,20 @@ label Jean_M_Cycle:
                                     "Never mind":
                                                     jump Jean_M_Cycle
 
-                        "Back to Sex Menu" if multi_action and JeanX.Loc == bg_current:
+                        "Back to Sex Menu" if multi_action and JeanX.location == bg_current:
                                     ch_p "Let's try something else."
                                     call Jean_Pos_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Jean_M_Interupted
-                        "End Scene" if not multi_action or JeanX.Loc != bg_current:
+                        "End Scene" if not multi_action or JeanX.location != bg_current:
                                     ch_p "Let's stop for now."
                                     call Jean_Pos_Reset
                                     $ line = 0
                                     jump Jean_M_Interupted
         #End menu (if line)
 
-        call Shift_Focus(JeanX)
+        call shift_focus(JeanX)
         call Sex_Dialog(JeanX,Partner)
 
         #If either of you could cum
@@ -549,13 +549,13 @@ label Jean_M_Cycle:
                         else: #If she wasn't aware you were there
                             "You grunt and try to hold it in."
                             $ Player.Focus = 95
-                            if JeanX.Loc == bg_current:
+                            if JeanX.location == bg_current:
                                     jump Jean_M_Interupted
 
                     #If Jean can cum
                     if JeanX.lust >= 100:
                         call Girl_Cumming(JeanX)
-                        if JeanX.Loc == bg_current:
+                        if JeanX.location == bg_current:
                                 jump Jean_M_Interupted
 
                     if line == "came":
@@ -586,7 +586,7 @@ label Jean_M_Cycle:
                 elif Round == 5:
                     "She's definitely going to stop soon."
         else:
-                if JeanX.Loc == bg_current:
+                if JeanX.location == bg_current:
                         call Escalation(JeanX) #sees if she wants to escalate things
 
                 if Round == 10:
@@ -691,7 +691,7 @@ label Jean_M_Interupted:
     else:
         call Partner_Like(JeanX,2)
 
-    if JeanX.Loc != bg_current:
+    if JeanX.location != bg_current:
         return
 
     if Round <= 10:
@@ -736,7 +736,7 @@ label Jean_M_Interupted:
 label Jean_Sex_P:
 
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JeanX)
+    call shift_focus(JeanX)
     if JeanX.Sex >= 7: # She loves it
         $ temp_modifier += 15
     elif JeanX.Sex >= 3: #You've done it before several times
@@ -770,8 +770,8 @@ label Jean_Sex_P:
     if JeanX.Taboo and "tabno" in JeanX.daily_history:
         $ temp_modifier -= 10
 
-    if "no sex" in JeanX.daily_history:
-        $ temp_modifier -= 15 if "no sex" in JeanX.recent_history else 5
+    if "no_sex" in JeanX.daily_history:
+        $ temp_modifier -= 15 if "no_sex" in JeanX.recent_history else 5
 
 
     $ Approval = ApprovalCheck(JeanX, 1400, TabM = 5) # 135, 150, 165, Taboo -200(335)
@@ -845,7 +845,7 @@ label Jean_Sex_P:
     #End Auto
 
 
-    if not JeanX.Sex and "no sex" not in JeanX.recent_history:
+    if not JeanX.Sex and "no_sex" not in JeanX.recent_history:
             #first time
             $ JeanX.change_face("surprised", 1)
             $ JeanX.Mouth = "kiss"
@@ -919,7 +919,7 @@ label Jean_Sex_P:
                 $ JeanX.change_stat("obedience", 90, 1)
                 $ JeanX.change_stat("inhibition", 60, 1)
                 ch_j "Ok, fine. Just make it good."
-            elif "no sex" in JeanX.daily_history:
+            elif "no_sex" in JeanX.daily_history:
                 ch_j "Ok, whatever. . ."
             else:
                 $ JeanX.change_face("sexy", 1)
@@ -940,11 +940,11 @@ label Jean_Sex_P:
     else:
             #She's not into it, but maybe. . .
             $ JeanX.change_face("angry")
-            if "no sex" in JeanX.recent_history:
+            if "no_sex" in JeanX.recent_history:
                 ch_j "I don't repeat myself."
-            elif JeanX.Taboo and "tabno" in JeanX.daily_history and "no sex" in JeanX.daily_history:
+            elif JeanX.Taboo and "tabno" in JeanX.daily_history and "no_sex" in JeanX.daily_history:
                 ch_j "I'm not comfortable with that. . ."
-            elif "no sex" in JeanX.daily_history:
+            elif "no_sex" in JeanX.daily_history:
                 ch_j "Not today."
             elif JeanX.Taboo and "tabno" in JeanX.daily_history:
                 ch_j "I told you, I'm not comfortable with that. . ."
@@ -956,11 +956,11 @@ label Jean_Sex_P:
                 ch_j "I'm not in the mood right now . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no sex" in JeanX.daily_history:
+                "Sorry, never mind." if "no_sex" in JeanX.daily_history:
                         $ JeanX.change_face("bemused")
                         ch_j "Keep trying. . ."
                         return
-                "Maybe later?" if "no sex" not in JeanX.daily_history:
+                "Maybe later?" if "no_sex" not in JeanX.daily_history:
                         $ JeanX.change_face("sexy")
                         ch_j "Sure, whatever. . ."
                         $ JeanX.change_stat("love", 80, 2)
@@ -968,8 +968,8 @@ label Jean_Sex_P:
                         if JeanX.Taboo:
                             $ JeanX.recent_history.append("tabno")
                             $ JeanX.daily_history.append("tabno")
-                        $ JeanX.recent_history.append("no sex")
-                        $ JeanX.daily_history.append("no sex")
+                        $ JeanX.recent_history.append("no_sex")
+                        $ JeanX.daily_history.append("no_sex")
                         return
                 "I think you'd enjoy it as much as I would. . .":
                         if Approval:
@@ -1006,7 +1006,7 @@ label Jean_Sex_P:
 
     #She refused all offers.
     $ JeanX.ArmPose = 1
-    if "no sex" in JeanX.daily_history:
+    if "no_sex" in JeanX.daily_history:
         ch_j "Don't push your luck, [JeanX.Petname]."
         $ JeanX.recent_history.append("angry")
         $ JeanX.daily_history.append("angry")
@@ -1033,14 +1033,14 @@ label Jean_Sex_P:
     else:
         $ JeanX.change_face("normal", 1)
         ch_j "Not interested."
-    $ JeanX.recent_history.append("no sex")
-    $ JeanX.daily_history.append("no sex")
+    $ JeanX.recent_history.append("no_sex")
+    $ JeanX.daily_history.append("no_sex")
     $ temp_modifier = 0
     return
 
 label Jean_Sex_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(JeanX)
+        call shift_focus(JeanX)
         call Jean_Sex_Launch("sex")
         if action_speed >= 4:
             $ action_speed = 2
@@ -1182,7 +1182,7 @@ label Jean_Sex_Cycle: #Repeating strokes
                                     jump Jean_SexAfter
         #End menu (if line)
 
-        call Shift_Focus(JeanX)
+        call shift_focus(JeanX)
         call Sex_Dialog(JeanX,Partner)
 
         $ counter += 1
@@ -1304,7 +1304,7 @@ label Jean_Sex_Cycle: #Repeating strokes
 
 label Jean_Sex_A:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JeanX)
+    call shift_focus(JeanX)
     if JeanX.Anal >= 7: # She loves it
         $ temp_modifier += 20
     elif JeanX.Anal >= 3: #You've done it before several times
@@ -1338,9 +1338,9 @@ label Jean_Sex_A:
 
     if JeanX.Taboo and "tabno" in JeanX.daily_history:
         $ temp_modifier -= 10
-    if "no anal" in JeanX.daily_history:
+    if "no_anal" in JeanX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no anal" in JeanX.recent_history else 0
+        $ temp_modifier -= 10 if "no_anal" in JeanX.recent_history else 0
 
     $ Approval = ApprovalCheck(JeanX, 1550, TabM = 5) # 155, 170, 185, Taboo -200(355)
 
@@ -1414,7 +1414,7 @@ label Jean_Sex_A:
             #end "auto"
 
 
-    if not JeanX.Anal and "no anal" not in JeanX.recent_history:
+    if not JeanX.Anal and "no_anal" not in JeanX.recent_history:
             #first time
             $ JeanX.change_face("surprised", 1)
             $ JeanX.Mouth = "kiss"
@@ -1492,7 +1492,7 @@ label Jean_Sex_A:
                 $ JeanX.change_stat("obedience", 90, 1)
                 $ JeanX.change_stat("inhibition", 60, 1)
                 ch_j "Whatever."
-            elif "no anal" in JeanX.daily_history:
+            elif "no_anal" in JeanX.daily_history:
                 ch_j "Well, if you're going to keep asking. . ."
                 ch_j "Might be fun. . ."
             else:
@@ -1514,11 +1514,11 @@ label Jean_Sex_A:
     else:
             #She's not into it, but maybe. . .
             $ JeanX.change_face("angry")
-            if "no anal" in JeanX.recent_history:
+            if "no_anal" in JeanX.recent_history:
                 ch_j "I don't repeat myself."
-            elif JeanX.Taboo and "tabno" in JeanX.daily_history and "no anal" in JeanX.daily_history:
+            elif JeanX.Taboo and "tabno" in JeanX.daily_history and "no_anal" in JeanX.daily_history:
                 ch_j "I'm not comfortable with that. . ."
-            elif "no anal" in JeanX.daily_history:
+            elif "no_anal" in JeanX.daily_history:
                 ch_j "Not today."
             elif JeanX.Taboo and "tabno" in JeanX.daily_history:
                 ch_j "I told you, I'm not comfortable with that. . ."
@@ -1530,11 +1530,11 @@ label Jean_Sex_A:
                 ch_j "Maybe eventually. . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no anal" in JeanX.daily_history:
+                "Sorry, never mind." if "no_anal" in JeanX.daily_history:
                     $ JeanX.change_face("bemused")
                     ch_j "I get it."
                     return
-                "Maybe later?" if "no anal" not in JeanX.daily_history:
+                "Maybe later?" if "no_anal" not in JeanX.daily_history:
                     $ JeanX.change_face("sexy")
                     ch_j "Oh, probably. . ."
                     $ JeanX.change_stat("love", 80, 2)
@@ -1542,8 +1542,8 @@ label Jean_Sex_A:
                     if JeanX.Taboo:
                         $ JeanX.recent_history.append("tabno")
                         $ JeanX.daily_history.append("tabno")
-                    $ JeanX.recent_history.append("no anal")
-                    $ JeanX.daily_history.append("no anal")
+                    $ JeanX.recent_history.append("no_anal")
+                    $ JeanX.daily_history.append("no_anal")
                     return
                 "I bet it would feel really good. . .":
                     if Approval:
@@ -1581,7 +1581,7 @@ label Jean_Sex_A:
 
     #She refused all offers.
     $ JeanX.ArmPose = 1
-    if "no anal" in JeanX.daily_history:
+    if "no_anal" in JeanX.daily_history:
         ch_j "Know when to stop."
         $ JeanX.recent_history.append("angry")
         $ JeanX.daily_history.append("angry")
@@ -1611,14 +1611,14 @@ label Jean_Sex_A:
     else:
         $ JeanX.change_face("normal", 1)
         ch_j "You haven't earned it yet."
-    $ JeanX.recent_history.append("no anal")
-    $ JeanX.daily_history.append("no anal")
+    $ JeanX.recent_history.append("no_anal")
+    $ JeanX.daily_history.append("no_anal")
     $ temp_modifier = 0
     return
 
 label Jean_Anal_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(JeanX)
+        call shift_focus(JeanX)
         call Jean_Sex_Launch("anal")
         if action_speed >= 4:
             $ Shift = 2
@@ -1758,7 +1758,7 @@ label Jean_Anal_Cycle: #Repeating strokes
                                     jump Jean_AnalAfter
         #End menu (if line)
 
-        call Shift_Focus(JeanX)
+        call shift_focus(JeanX)
         call Sex_Dialog(JeanX,Partner)
 
         $ counter += 1
@@ -1883,7 +1883,7 @@ label Jean_Anal_Cycle: #Repeating strokes
 
 label Jean_Sex_H:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JeanX)
+    call shift_focus(JeanX)
     if JeanX.Hotdog >= 3: #You've done it before several times
         $ temp_modifier += 10
     elif JeanX.Hotdog: #You've done it before
@@ -1907,9 +1907,9 @@ label Jean_Sex_H:
     if JeanX.Taboo and "tabno" in JeanX.daily_history:
         $ temp_modifier -= 10
 
-    if "no hotdog" in JeanX.daily_history:
+    if "no_hotdog" in JeanX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no hotdog" in JeanX.recent_history else 0
+        $ temp_modifier -= 10 if "no_hotdog" in JeanX.recent_history else 0
 
     $ Approval = ApprovalCheck(JeanX, 1000, TabM = 3) # 100, 115, 130, Taboo -120(220)
 
@@ -1967,7 +1967,7 @@ label Jean_Sex_H:
             #end auto
 
 
-    if not JeanX.Hotdog and "no hotdog" not in JeanX.recent_history:
+    if not JeanX.Hotdog and "no_hotdog" not in JeanX.recent_history:
             #first time
             $ JeanX.change_face("surprised", 1)
             $ JeanX.Mouth = "kiss"
@@ -2039,7 +2039,7 @@ label Jean_Sex_H:
                 $ JeanX.change_stat("obedience", 80, 1)
                 $ JeanX.change_stat("inhibition", 60, 1)
                 ch_j "Ok, fine."
-            elif "no hotdog" in JeanX.daily_history:
+            elif "no_hotdog" in JeanX.daily_history:
                 ch_j "It was fun enough. . ."
             else:
                 $ JeanX.change_face("sexy", 1)
@@ -2060,11 +2060,11 @@ label Jean_Sex_H:
     else:
             #She's not into it, but maybe. . .
             $ JeanX.change_face("angry")
-            if "no hotdog" in JeanX.recent_history:
+            if "no_hotdog" in JeanX.recent_history:
                 ch_j "I don't repeat myself."
-            elif JeanX.Taboo and "tabno" in JeanX.daily_history and "no hotdog" in JeanX.daily_history:
+            elif JeanX.Taboo and "tabno" in JeanX.daily_history and "no_hotdog" in JeanX.daily_history:
                 ch_j "I just told you. . .not in such an exposed location."
-            elif "no hotdog" in JeanX.daily_history:
+            elif "no_hotdog" in JeanX.daily_history:
                 ch_j "I'm believe I just told you \"no,\" [JeanX.Petname]."
             elif JeanX.Taboo and "tabno" in JeanX.daily_history:
                 ch_j "I'm not comfortable with that. . ."
@@ -2076,11 +2076,11 @@ label Jean_Sex_H:
                 ch_j "I don't think that would be appropriate. . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no hotdog" in JeanX.daily_history:
+                "Sorry, never mind." if "no_hotdog" in JeanX.daily_history:
                     $ JeanX.change_face("bemused")
                     ch_j "So long as you don't push it."
                     return
-                "Maybe later?" if "no hotdog" not in JeanX.daily_history:
+                "Maybe later?" if "no_hotdog" not in JeanX.daily_history:
                     $ JeanX.change_face("sexy")
                     ch_j "I guess eventually. . ."
                     $ JeanX.change_stat("love", 80, 1)
@@ -2088,8 +2088,8 @@ label Jean_Sex_H:
                     if JeanX.Taboo:
                         $ JeanX.recent_history.append("tabno")
                         $ JeanX.daily_history.append("tabno")
-                    $ JeanX.recent_history.append("no hotdog")
-                    $ JeanX.daily_history.append("no hotdog")
+                    $ JeanX.recent_history.append("no_hotdog")
+                    $ JeanX.daily_history.append("no_hotdog")
                     return
                 "You might like it. . .":
                     if Approval:
@@ -2125,7 +2125,7 @@ label Jean_Sex_H:
     #She refused all offers.
     $ JeanX.ArmPose = 1
 
-    if "no hotdog" in JeanX.daily_history:
+    if "no_hotdog" in JeanX.daily_history:
         ch_j "What did I tell you?"
         $ JeanX.recent_history.append("angry")
         $ JeanX.daily_history.append("angry")
@@ -2151,14 +2151,14 @@ label Jean_Sex_H:
     else:
         $ JeanX.change_face("normal", 1)
         ch_j "No thanks."
-    $ JeanX.recent_history.append("no hotdog")
-    $ JeanX.daily_history.append("no hotdog")
+    $ JeanX.recent_history.append("no_hotdog")
+    $ JeanX.daily_history.append("no_hotdog")
     $ temp_modifier = 0
     return
 
 label Jean_Hotdog_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(JeanX)
+        call shift_focus(JeanX)
         call Jean_Sex_Launch("hotdog")
         if action_speed >= 4:
             $ action_speed = 2
@@ -2302,7 +2302,7 @@ label Jean_Hotdog_Cycle: #Repeating strokes
                                     jump Jean_HotdogAfter
         #End menu (if line)
 
-        call Shift_Focus(JeanX)
+        call shift_focus(JeanX)
         call Sex_Dialog(JeanX,Partner)
 
         $ counter += 1

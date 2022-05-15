@@ -3,7 +3,7 @@ label kiss(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
 
     $ Approval = ApprovalCheck(Girl, 700, TabM=1,Alt=[[RogueX,JeanX],500]) #reduced check for Rogue
 
@@ -12,8 +12,8 @@ label kiss(Girl):
 
         ch_e "Not when we barely know each other. . ."
 
-        $ Girl.recent_history.append("no kissing")
-        $ Girl.daily_history.append("no kissing")
+        $ Girl.recent_history.append("no_kissing")
+        $ Girl.daily_history.append("no_kissing")
         return
     if Approval > 1 and not Girl.Kissed and not Girl.Forced:
         $ Girl.change_face("sexy")
@@ -199,8 +199,8 @@ label kiss(Girl):
         elif Girl == JubesX:
             ch_v "No thanks. . ."
 
-        $ Girl.recent_history.append("no kissing")
-        $ Girl.daily_history.append("no kissing")
+        $ Girl.recent_history.append("no_kissing")
+        $ Girl.daily_history.append("no_kissing")
 
         return
 
@@ -210,7 +210,7 @@ label before_kiss:
     $ focused_Girl.change_stat("inhibition", 10, 1)
     $ focused_Girl.change_stat("inhibition", 20, 1)
 
-    call kissing_launch(focused_Girl, "kiss_you")
+    call kissing_launch(focused_Girl, "kiss")
 
     if focused_Girl.Kissed >= 10 and focused_Girl.inhibition >= 300:
         $ focused_Girl.change_face("sucking")
@@ -222,7 +222,7 @@ label before_kiss:
     if Taboo:
         $ focused_Girl.DrainWord("tabno")
 
-    $ focused_Girl.DrainWord("no kissing")
+    $ focused_Girl.DrainWord("no_kissing")
 
     if focused_Girl == RogueX and not focused_Girl.Kissed:
         "You lean in and your lips meet [focused_Girl.name]'s."
@@ -305,7 +305,7 @@ label before_kiss:
     "[line]"
 
     $ counter = 0
-    $ primary_action = "kiss_you"
+    $ primary_action = "kiss"
     $ line = 0
 
     if action_context:
@@ -315,8 +315,8 @@ label before_kiss:
 
 label kiss_cycle:
     while Round > 0:
-        call Shift_Focus(focused_Girl)
-        call kissing_launch(focused_Girl, "kiss_you")
+        call shift_focus(focused_Girl)
+        call kissing_launch(focused_Girl, "kiss")
 
         $ focused_Girl.lustFace()
 
@@ -369,14 +369,14 @@ label kiss_cycle:
                                             call after_kiss
                                             call fondle_breasts(focused_Girl)
 
-                                            if primary_action == "fondle breasts":
-                                                $ offhand_action = "kiss_you"
+                                            if primary_action == "fondle_breasts":
+                                                $ offhand_action = "kiss"
 
                                                 $ primary_action = "fondle_breasts"
 
                                                 call before_fondle
                                             else:
-                                                $ primary_action = "kiss_you"
+                                                $ primary_action = "kiss"
                                         else:
                                             "As your hands creep upwards, she grabs your wrists."
 
@@ -388,14 +388,14 @@ label kiss_cycle:
                                             call after_kiss
                                             call fondle_thighs
 
-                                            if primary_action == "fondle thighs":
-                                                    $ offhand_action = "kiss_you"
+                                            if primary_action == "fondle_thighs":
+                                                    $ offhand_action = "kiss"
 
                                                     $ primary_action = "fondle_thighs"
 
                                                     call before_fondle
                                             else:
-                                                $ primary_action = "kiss_you"
+                                                $ primary_action = "kiss"
                                         else:
                                             "As your hands creep downwards, she grabs your wrists."
 
@@ -422,7 +422,7 @@ label kiss_cycle:
                                     call primary_action_Swap(focused_Girl)
                                 "Undress [Partner.name]":
                                     call Girl_Undress(Partner)
-                                    call Shift_Focus(Partner)
+                                    call shift_focus(Partner)
 
                                     jump kiss_cycle
                                 "Clean up Partner":
@@ -453,7 +453,7 @@ label kiss_cycle:
 
                     jump after_kiss
 
-        call Shift_Focus(focused_Girl)
+        call shift_focus(focused_Girl)
         call Sex_Dialog(focused_Girl,Partner)
 
         $ counter += 1
@@ -517,7 +517,7 @@ label after_kiss:
     $ focused_Girl.Kissed += 1
     $ focused_Girl.Action -= 1
     $ focused_Girl.Addictionrate += 2 if focused_Girl.Addictionrate < 5 else 1
-    $ focused_Girl.Addictionrate += 1 if "addictive" in Player.Traits else 0
+    $ focused_Girl.Addictionrate += 1 if Player.addictive else 0
 
     call Partner_Like(focused_Girl, 1) #raises other girl's like levels if watching
 

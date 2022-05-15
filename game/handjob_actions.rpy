@@ -97,9 +97,9 @@ label handjob_menu:
             jump handjob_cycle
         "Other options":
                 menu:
-                    "I also want to fondle her breasts." if offhand_action != "fondle breasts":
+                    "I also want to fondle her breasts." if offhand_action != "fondle_breasts":
                         if focused_Girl.Action and multi_action:
-                            $ offhand_action = "fondle breasts"
+                            $ offhand_action = "fondle_breasts"
 
                             "You start to fondle her breasts."
 
@@ -382,9 +382,9 @@ label handjob_set_modifier(Girl, action):
     elif action == "dildo_ass":
         if Girl.Loose:
             $ temp_modifier += 30
-        elif "anal" in Girl.recent_history or "dildo anal" in Girl.recent_history:
+        elif "anal" in Girl.recent_history or "dildo_anal" in Girl.recent_history:
             $ temp_modifier -= 20
-        elif "anal" in Girl.daily_history or "dildo anal" in Girl.daily_history:
+        elif "anal" in Girl.daily_history or "dildo_anal" in Girl.daily_history:
             $ temp_modifier -= 10
         elif (Girl.Anal + Girl.DildoA + Girl.Plug) > 0: #You've done it before
             $ temp_modifier += 20
@@ -596,12 +596,12 @@ label handjob(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call handjob_set_modifier(Girl, "handjob")
 
     $ Approval = ApprovalCheck(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)
 
-    if not Girl.Hand and "no hand" not in Girl.recent_history:
+    if not Girl.Hand and "no_hand" not in Girl.recent_history:
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
@@ -630,7 +630,7 @@ label footjob(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call handjob_set_modifier(Girl, "footjob")
 
     $ Approval = ApprovalCheck(Girl, 1250, TabM = 3) # 110, 125, 140, Taboo -120(230)
@@ -643,7 +643,7 @@ label footjob(Girl):
                 return
 
             if primary_action:
-                $ girl_offhand_action = "foot"
+                $ girl_offhand_action = "footjob"
                 return
 
             call before_action(Girl, "footjob")
@@ -653,7 +653,7 @@ label footjob(Girl):
 
             return
 
-    if not Girl.Foot and "no foot" not in Girl.recent_history:
+    if not Girl.Foot and "no_foot" not in Girl.recent_history:
         $ Girl.change_face("confused", 2)
 
         ch_r "Huh, so like a handy, but with my feet?"
@@ -683,12 +683,12 @@ label titjob(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call handjob_set_modifier(Girl, "titjob")
 
     $ Approval = ApprovalCheck(Girl, 1200, TabM = 5) # 120, 135, 150, Taboo -200(320)
 
-    if not Girl.Tit and "no titjob" not in Girl.recent_history:
+    if not Girl.Tit and "no_titjob" not in Girl.recent_history:
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
@@ -722,12 +722,12 @@ label blowjob(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call handjob_set_modifier(Girl, "blowjob")
 
     $ Approval = ApprovalCheck(Girl, 1300, TabM = 4) # 130, 145, 160, Taboo -160(290)
 
-    if not Girl.Blow and "no blow" not in Girl.recent_history:
+    if not Girl.Blow and "no_blow" not in Girl.recent_history:
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
@@ -759,7 +759,7 @@ label dildo_pussy(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call Rogue_Dildo_Check
 
     if not _return:
@@ -892,7 +892,7 @@ label dildo_ass(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call Rogue_Dildo_Check
 
     if not _return:
@@ -1001,7 +1001,7 @@ label dildo_ass(Girl):
 
             ch_r "You had to go for the butt, uh?"
 
-    if not Girl.Loose and ("dildo anal" in Girl.recent_history or "anal" in Girl.recent_history or "dildo anal" in Girl.daily_history or "anal" in Girl.daily_history):
+    if not Girl.Loose and ("dildo_anal" in Girl.recent_history or "anal" in Girl.recent_history or "dildo_anal" in Girl.daily_history or "anal" in Girl.daily_history):
         $ Girl.change_face("bemused", 1)
 
         ch_r "I'm still a bit sore from earlier. . ."

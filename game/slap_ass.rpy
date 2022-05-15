@@ -1,7 +1,7 @@
 label Slap_Ass(Girl = 0):  #rkeljsv
         if Girl not in all_Girls:
                 return
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         # fix add sound here?
         call Punch
 

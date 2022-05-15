@@ -606,10 +606,10 @@ label Laura_SexChat:
 
                             "Blowjobs.":
                                         $ LauraX.change_face("sly")
-                                        if LauraX.PlayerFav == "blow":
+                                        if LauraX.PlayerFav == "blowjob":
                                             $ LauraX.change_stat("lust", 80, 3)
                                             ch_l "Yeah, I know."
-                                        elif LauraX.Favorite == "blow":
+                                        elif LauraX.Favorite == "blowjob":
                                             $ LauraX.change_stat("love", 90, 5)
                                             $ LauraX.change_stat("lust", 80, 5)
                                             ch_l "I love your dick!"
@@ -621,7 +621,7 @@ label Laura_SexChat:
                                         else:
                                             $ LauraX.change_face("bemused")
                                             ch_l "I'm. . . getting used to the taste. . ."
-                                        $ LauraX.PlayerFav = "blow"
+                                        $ LauraX.PlayerFav = "blowjob"
 
                             "Titjobs.":
                                         $ LauraX.change_face("sly")
@@ -646,10 +646,10 @@ label Laura_SexChat:
 
                             "Footjobs.":
                                         $ LauraX.change_face("sly")
-                                        if LauraX.PlayerFav == "foot":
+                                        if LauraX.PlayerFav == "footjob":
                                             $ LauraX.change_stat("lust", 80, 5)
                                             ch_l "Yeah, you've said that. . ."
-                                        elif LauraX.Favorite == "foot":
+                                        elif LauraX.Favorite == "footjob":
                                             $ LauraX.change_stat("love", 90, 5)
                                             $ LauraX.change_stat("lust", 80, 7)
                                             ch_l "I do like using my feet. . ."
@@ -661,14 +661,14 @@ label Laura_SexChat:
                                         else:
                                             $ LauraX.change_face("bemused")
                                             ch_l "Yeah, it's nice. . ."
-                                        $ LauraX.PlayerFav = "foot"
+                                        $ LauraX.PlayerFav = "footjob"
 
                             "Handjobs.":
                                         $ LauraX.change_face("sly")
-                                        if LauraX.PlayerFav == "hand":
+                                        if LauraX.PlayerFav == "handjob":
                                             $ LauraX.change_stat("lust", 80, 5)
                                             ch_l "Yeah, you've said that. . ."
-                                        elif LauraX.Favorite == "hand":
+                                        elif LauraX.Favorite == "handjob":
                                             $ LauraX.change_stat("love", 90, 5)
                                             $ LauraX.change_stat("lust", 80, 7)
                                             ch_l "You do feel pretty comfy. . ."
@@ -680,7 +680,7 @@ label Laura_SexChat:
                                         else:
                                             $ LauraX.change_face("bemused")
                                             ch_l "Yeah, it's nice. . ."
-                                        $ LauraX.PlayerFav = "hand"
+                                        $ LauraX.PlayerFav = "handjob"
 
                             "Feeling you up.":
                                         $ counter = LauraX.FondleB + LauraX.FondleT + LauraX.SuckB + LauraX.Hotdog
@@ -688,7 +688,7 @@ label Laura_SexChat:
                                         if LauraX.PlayerFav == "fondle":
                                             $ LauraX.change_stat("lust", 80, 3)
                                             ch_l "Yeah, I think we're clear on that. . ."
-                                        elif LauraX.Favorite in ("hotdog","suck breasts","fondle breasts","fondle thighs"):
+                                        elif LauraX.Favorite in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
                                             $ LauraX.change_stat("love", 90, 5)
                                             $ LauraX.change_stat("lust", 80, 5)
                                             ch_l "I love when you touch me. . ."
@@ -742,31 +742,31 @@ label Laura_SexChat:
                                             ch_l "Kissing?"
                                         elif LauraX.Favorite == "anal":
                                                 ch_l "Probably anal."
-                                        elif LauraX.Favorite == "lick ass":
+                                        elif LauraX.Favorite == "eat_ass":
                                                 ch_l "When you lick my ass."
-                                        elif LauraX.Favorite == "insert ass":
+                                        elif LauraX.Favorite == "finger_ass":
                                                 ch_l "Fingering my asshole, probably."
                                         elif LauraX.Favorite == "sex":
                                                 ch_l "Just the usual pounding."
-                                        elif LauraX.Favorite == "lick pussy":
+                                        elif LauraX.Favorite == "eat_pussy":
                                                 ch_l "When you lick my pussy."
-                                        elif LauraX.Favorite == "fondle pussy":
+                                        elif LauraX.Favorite == "fondle_pussy":
                                                 ch_l "When you finger me."
-                                        elif LauraX.Favorite == "blow":
+                                        elif LauraX.Favorite == "blowjob":
                                                 ch_l "I like how your cock tastes."
-                                        elif LauraX.Favorite == "tit":
+                                        elif LauraX.Favorite == "titjob":
                                                 ch_l "When I use my tits."
-                                        elif LauraX.Favorite == "foot":
+                                        elif LauraX.Favorite == "footjob":
                                                 ch_l "Footjobs are pretty fun."
-                                        elif LauraX.Favorite == "hand":
+                                        elif LauraX.Favorite == "handjob":
                                                 ch_l "I like jerking you off."
                                         elif LauraX.Favorite == "hotdog":
                                                 ch_l "When you grind against me."
-                                        elif LauraX.Favorite == "suck breasts":
+                                        elif LauraX.Favorite == "suck_breasts":
                                                 ch_l "When you suck my tits."
-                                        elif LauraX.Favorite == "fondle breasts":
+                                        elif LauraX.Favorite == "fondle_breasts":
                                                 ch_l "When you grab my tits."
-                                        elif LauraX.Favorite == "fondle thighs":
+                                        elif LauraX.Favorite == "fondle_thighs":
                                                 ch_l "When you rub my thighs."
                                         else:
                                                 ch_l "How should I know?"
@@ -918,7 +918,7 @@ label Laura_Chitchat(O=0, Options = ["default","default","default"]):
                     $ Digits.append(LauraX)
                     return
 
-        if "hungry" not in LauraX.Traits and (LauraX.Swallow + LauraX.Chat[2]) >= 10 and LauraX.Loc == bg_current:  #She's swallowed a lot
+        if "hungry" not in LauraX.Traits and (LauraX.Swallow + LauraX.Chat[2]) >= 10 and LauraX.location == bg_current:  #She's swallowed a lot
                     call Laura_Hungry
                     return
 
@@ -927,7 +927,7 @@ label Laura_Chitchat(O=0, Options = ["default","default","default"]):
                     return
 
         if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or ApprovalCheck(LauraX, 800, "I")):
-                    if LauraX.Loc == bg_current and LauraX.Thirst >= 30 and "refused" not in LauraX.daily_history and "quicksex" not in LauraX.daily_history:
+                    if LauraX.location == bg_current and LauraX.Thirst >= 30 and "refused" not in LauraX.daily_history and "quicksex" not in LauraX.daily_history:
                             $ LauraX.change_face("sly",1)
                             ch_l "Hey, wanna bone?"
                             call Quick_Sex(LauraX)
@@ -939,12 +939,8 @@ label Laura_Chitchat(O=0, Options = ["default","default","default"]):
         if LauraX.Event[0] and "key" not in LauraX.Chat:
             $ Options.append("key")
 
-        if "mandrill" in Player.Traits and "cologne chat" not in LauraX.daily_history:
-            $ Options.append("mandrill")
-        if "purple" in Player.Traits and "cologne chat" not in LauraX.daily_history:
-            $ Options.append("purple")
-        if "corruption" in Player.Traits and "cologne chat" not in LauraX.daily_history:
-            $ Options.append("corruption")
+        if Player.cologne and "cologne_chat" not in LauraX.daily_history:
+            $ Options.append(Player.cologne)
 
         if "Laura" not in LauraX.names:
             $ Options.append("laura")
@@ -964,7 +960,7 @@ label Laura_Chitchat(O=0, Options = ["default","default","default"]):
         if "showered" in LauraX.daily_history:
             #If you've caught Laura showering today
             $ Options.append("showercaught")
-        if "fondle breasts" in LauraX.daily_history or "fondle pussy" in LauraX.daily_history or "fondle ass" in LauraX.daily_history:
+        if "fondle_breasts" in LauraX.daily_history or "fondle_pussy" in LauraX.daily_history or "fondle_ass" in LauraX.daily_history:
             #If you've fondled Laura today
             $ Options.append("fondled")
         if "Dazzler and Longshot" in LauraX.Inventory and "256 Shades of Grey" in LauraX.Inventory and "Avengers Tower Penthouse" in LauraX.Inventory:
@@ -977,7 +973,7 @@ label Laura_Chitchat(O=0, Options = ["default","default","default"]):
                 $ Options.append("lingerie")
         if LauraX.Hand:
             #If Laura's given a handjob
-            $ Options.append("handy")
+            $ Options.append("handjob")
         if LauraX.Swallow:
             #If Laura's swallowed before
             $ Options.append("swallowed")
@@ -1028,19 +1024,19 @@ label Laura_Chitchat(O=0, Options = ["default","default","default"]):
     $ renpy.random.shuffle(Options)             #shuffles options and picks out the first one
 
     if Options[0] == "mandrill":
-        $ LauraX.daily_history.append("cologne chat")
+        $ LauraX.daily_history.append("cologne_chat")
         $ LauraX.change_face("confused")
         ch_l "(sniff, sniff). . . smells like. . . ape . . ."
         $ LauraX.change_face("sexy", 2)
         ch_l ". . . did you want to do something later?"
     elif Options[0] == "purple":
-        $ LauraX.daily_history.append("cologne chat")
+        $ LauraX.daily_history.append("cologne_chat")
         $ LauraX.change_face("sly",1)
         ch_l "(sniff, sniff). . . what is that? . ."
         $ LauraX.change_face("normal",0)
         ch_l ". . . what was it you wanted?"
     elif Options[0] == "corruption":
-        $ LauraX.daily_history.append("cologne chat")
+        $ LauraX.daily_history.append("cologne_chat")
         $ LauraX.change_face("confused")
         ch_l "(sniff, sniff). . . that's a strong scent. . ."
         $ LauraX.change_face("angry")
@@ -1188,15 +1184,15 @@ label Laura_Chitchat(O=0, Options = ["default","default","default"]):
             $ LauraX.Blush = 1
             $ LauraX.Chat.append("lingerie")
 
-    elif Options[0] == "handy":
+    elif Options[0] == "handjob":
             #Laura's response after giving the Player a handjob.
             $ LauraX.change_face("sly",1)
             ch_l "I was thinking about having your cock in my hand the other day. . ."
             ch_l "You seemed to enjoy it."
             $ LauraX.Blush = 0
 
-    elif Options[0] == "blow":
-            if "blow" not in LauraX.Chat:
+    elif Options[0] == "blowjob":
+            if "blowjob" not in LauraX.Chat:
                     #Laura's response after giving the Player a blowjob.
                     $ LauraX.change_face("sly",2)
                     ch_l "Hey, so did you like that blowjob?"
@@ -1227,7 +1223,7 @@ label Laura_Chitchat(O=0, Options = ["default","default","default"]):
                                 $ LauraX.change_face("angry",2)
                                 ch_l "Well, good luck with that then."
                     $ LauraX.Blush = 1
-                    $ LauraX.Chat.append("blow")
+                    $ LauraX.Chat.append("blowjob")
             else:
                     $ line = renpy.random.choice(["I gotta tell you, your dick tastes great.",
                             "I think I nearly dislocated my jaw last time.",
@@ -1719,7 +1715,7 @@ label Laura_Clothes:
             $ renpy.pop_call()
     $ line = 0
     $ Girl = LauraX
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
 
 label Laura_Wardrobe_Menu:
     $ LauraX.change_face()
@@ -1740,7 +1736,7 @@ label Laura_Wardrobe_Menu:
             "Let's talk about what you wear around.":
                         call Clothes_Schedule(LauraX)
 
-            "Could I get a look at it?" if LauraX.Loc != bg_current:
+            "Could I get a look at it?" if LauraX.location != bg_current:
                     # checks to see if she'll drop the screen
                     call OutfitShame(LauraX,0,2)
                     if _return:
@@ -1754,7 +1750,7 @@ label Laura_Wardrobe_Menu:
                         hide DressScreen
             "Would you be more comfortable behind a screen? (locked)" if LauraX.Taboo:
                     pass
-            "Would you be more comfortable behind a screen?" if LauraX.Loc == bg_current and not LauraX.Taboo and not renpy.showing('DressScreen'):
+            "Would you be more comfortable behind a screen?" if LauraX.location == bg_current and not LauraX.Taboo and not renpy.showing('DressScreen'):
                     # checks to see if she'll drop the screen
                     if ApprovalCheck(LauraX, 1500) or (LauraX.SeenChest and LauraX.SeenPussy):
                             ch_l "Probably won't need it, thanks."
@@ -1762,9 +1758,9 @@ label Laura_Wardrobe_Menu:
                             show DressScreen zorder 150
                             ch_l "Yeah, this is better, thanks."
 
-            "Gift for you (locked)" if Girl.Loc != bg_current:
+            "Gift for you (locked)" if Girl.location != bg_current:
                             pass
-            "Gift for you" if Girl.Loc == bg_current:
+            "Gift for you" if Girl.location == bg_current:
                             ch_p "I'd like to give you something."
                             call Gifts #(Girl)
 
@@ -1782,7 +1778,7 @@ label Laura_Wardrobe_Menu:
                             ch_p "I wanted to talk about your clothes."
                             call expression Girl.Tag +"_Clothes"
                     $ Girl = LauraX
-                    call Shift_Focus(Girl)
+                    call shift_focus(Girl)
 
             "Never mind, you look good like that.":
                     if "wardrobe" not in LauraX.recent_history:
@@ -2421,10 +2417,10 @@ label Laura_Wardrobe_Menu:
                             if not renpy.showing('DressScreen'):
                                     call Laura_First_Bottomless
                         elif ApprovalCheck(LauraX, 1200, TabM=4):
-                            $ primary_action = LauraX.Legs
+                            $ temp = LauraX.Legs
                             $ LauraX.Legs = 0
                             pause 0.5
-                            $ LauraX.Legs = primary_action
+                            $ LauraX.Legs = temp
                             "She pulls off her [LauraX.Legs] and [line], then pulls the [LauraX.Legs] back on."
                             $ primary_action = 1
                             call Laura_First_Bottomless(1)

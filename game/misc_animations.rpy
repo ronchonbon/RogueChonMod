@@ -348,15 +348,15 @@ image PhoneScreen:
     contains:
         #backdrop
         ConditionSwitch(
-            "focused_Girl.Loc == 'bg rogue'","PhoneRG",
-            "focused_Girl.Loc == 'bg kitty'", "bg_kitty",
-            "focused_Girl.Loc == 'bg emma'", "bg_emma",
-            "focused_Girl.Loc == 'bg laura'", "bg_laura",
-            "focused_Girl.Loc == 'bg jean'", "bg_jean",
-            "focused_Girl.Loc == 'bg storm'", "bg_storm",
-            "focused_Girl.Loc == 'bg jubes'", "bg_jubes",
-            "focused_Girl.Loc == 'bg classroom'", "bg_class",
-            "focused_Girl.Loc == 'bg teacher'", "bg_class",
+            "focused_Girl.location == 'bg rogue'","PhoneRG",
+            "focused_Girl.location == 'bg kitty'", "bg_kitty",
+            "focused_Girl.location == 'bg emma'", "bg_emma",
+            "focused_Girl.location == 'bg laura'", "bg_laura",
+            "focused_Girl.location == 'bg jean'", "bg_jean",
+            "focused_Girl.location == 'bg storm'", "bg_storm",
+            "focused_Girl.location == 'bg jubes'", "bg_jubes",
+            "focused_Girl.location == 'bg classroom'", "bg_class",
+            "focused_Girl.location == 'bg teacher'", "bg_class",
             "True", "bg_shower",
             )
         offset (-800,-300)

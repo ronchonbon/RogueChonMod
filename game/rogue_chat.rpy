@@ -614,10 +614,10 @@ label Rogue_SexChat:
 
                             "Blowjobs.":
                                         $ RogueX.change_face("sly")
-                                        if RogueX.PlayerFav == "blow":
+                                        if RogueX.PlayerFav == "blowjob":
                                             $ RogueX.change_stat("lust", 80, 3)
                                             ch_r "I'm not surprised. . ."
-                                        elif RogueX.Favorite == "blow":
+                                        elif RogueX.Favorite == "blowjob":
                                             $ RogueX.change_stat("love", 90, 5)
                                             $ RogueX.change_stat("lust", 80, 5)
                                             ch_r "I guess I have developed a real taste for you. . ."
@@ -629,7 +629,7 @@ label Rogue_SexChat:
                                         else:
                                             $ RogueX.change_face("bemused")
                                             ch_r "I'm. . . getting used to the taste. . ."
-                                        $ RogueX.PlayerFav = "blow"
+                                        $ RogueX.PlayerFav = "blowjob"
 
                             "Titjobs.":
                                         $ RogueX.change_face("sly")
@@ -652,10 +652,10 @@ label Rogue_SexChat:
 
                             "Footjobs.":
                                         $ RogueX.change_face("sly")
-                                        if RogueX.PlayerFav == "foot":
+                                        if RogueX.PlayerFav == "footjob":
                                             $ RogueX.change_stat("lust", 80, 5)
                                             ch_r "Yeah, you've said that before. . ."
-                                        elif RogueX.Favorite == "foot":
+                                        elif RogueX.Favorite == "footjob":
                                             $ RogueX.change_stat("love", 90, 5)
                                             $ RogueX.change_stat("lust", 80, 7)
                                             ch_r "I do enjoy that sensation. . ."
@@ -667,14 +667,14 @@ label Rogue_SexChat:
                                         else:
                                             $ RogueX.change_face("bemused")
                                             ch_r "I do like the sensation. . ."
-                                        $ RogueX.PlayerFav = "foot"
+                                        $ RogueX.PlayerFav = "footjob"
 
                             "Handjobs.":
                                         $ RogueX.change_face("sly")
-                                        if RogueX.PlayerFav == "hand":
+                                        if RogueX.PlayerFav == "handjob":
                                             $ RogueX.change_stat("lust", 80, 5)
                                             ch_r "Yeah, you've said that before. . ."
-                                        elif RogueX.Favorite == "hand":
+                                        elif RogueX.Favorite == "handjob":
                                             $ RogueX.change_stat("love", 90, 5)
                                             $ RogueX.change_stat("lust", 80, 7)
                                             ch_r "I love how you feel in my hand. . ."
@@ -686,7 +686,7 @@ label Rogue_SexChat:
                                         else:
                                             $ RogueX.change_face("bemused")
                                             ch_r "I do like the sensation. . ."
-                                        $ RogueX.PlayerFav = "hand"
+                                        $ RogueX.PlayerFav = "handjob"
 
                             "Feeling you up.":
                                         $ counter = RogueX.FondleB + RogueX.FondleT + RogueX.SuckB + RogueX.Hotdog
@@ -694,7 +694,7 @@ label Rogue_SexChat:
                                         if RogueX.PlayerFav == "fondle":
                                             $ RogueX.change_stat("lust", 80, 3)
                                             ch_r "Yeah, I think we've established that. . ."
-                                        elif RogueX.Favorite in ("hotdog","suck breasts","fondle breasts","fondle thighs"):
+                                        elif RogueX.Favorite in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
                                             $ RogueX.change_stat("love", 90, 5)
                                             $ RogueX.change_stat("lust", 80, 5)
                                             ch_r "I love how you touch me. . ."
@@ -751,31 +751,31 @@ label Rogue_SexChat:
                                                 ch_r "I like when you fuck my ass."
                                             else:
                                                 ch_r "I like when you stick it in my. . . butt."
-                                        elif RogueX.Favorite == "lick ass":
+                                        elif RogueX.Favorite == "eat_ass":
                                                 ch_r "I like when you lick my. . . asshole."
-                                        elif RogueX.Favorite == "insert ass":
+                                        elif RogueX.Favorite == "finger_ass":
                                                 ch_r "I like when you . . . finger my asshole."
                                         elif RogueX.Favorite == "sex":
                                                 ch_r "I like when you fuck me hard."
-                                        elif RogueX.Favorite == "lick pussy":
+                                        elif RogueX.Favorite == "eat_pussy":
                                                 ch_r "I like when you lick my pussy."
-                                        elif RogueX.Favorite == "fondle pussy":
+                                        elif RogueX.Favorite == "fondle_pussy":
                                                 ch_r "I like when you fingerblast me."
-                                        elif RogueX.Favorite == "blow":
+                                        elif RogueX.Favorite == "blowjob":
                                                 ch_r "I kind of like to suck your cock."
-                                        elif RogueX.Favorite == "tit":
+                                        elif RogueX.Favorite == "titjob":
                                                 ch_r "I like to work your cock with my tits."
-                                        elif RogueX.Favorite == "hand":
+                                        elif RogueX.Favorite == "handjob":
                                                 ch_r "I like the feel of your cock in my hand."
-                                        elif RogueX.Favorite == "foot":
+                                        elif RogueX.Favorite == "footjob":
                                                 ch_r "I kinda like to use my feet."
                                         elif RogueX.Favorite == "hotdog":
                                                 ch_r "I like it when you grind against me."
-                                        elif RogueX.Favorite == "suck breasts":
+                                        elif RogueX.Favorite == "suck_breasts":
                                                 ch_r "I like it when you suck on my tits."
-                                        elif RogueX.Favorite == "fondle breasts":
+                                        elif RogueX.Favorite == "fondle_breasts":
                                                 ch_r "I like it when you feel up my tits."
-                                        elif RogueX.Favorite == "fondle thighs":
+                                        elif RogueX.Favorite == "fondle_thighs":
                                                 ch_r "I like it when you massage my thighs."
                                         else:
                                                 ch_r "I don't really know. . ."
@@ -922,23 +922,23 @@ label Rogue_Chitchat(O=0, Options = ["default","default","default"]):
                     ch_r "You know, you should probably have my number, here you go."
                     $ Digits.append(RogueX)
                     return
-        if "hungry" not in RogueX.Traits and (RogueX.Swallow + RogueX.Chat[2]) >= 10 and RogueX.Loc == bg_current:  #She's swallowed a lot
+        if "hungry" not in RogueX.Traits and (RogueX.Swallow + RogueX.Chat[2]) >= 10 and RogueX.location == bg_current:  #She's swallowed a lot
                     call Rogue_Hungry
                     return
         if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or ApprovalCheck(RogueX, 800, "I")):
-                    if RogueX.Loc == bg_current and RogueX.Thirst >= 30 and "refused" not in RogueX.daily_history and "quicksex" not in RogueX.daily_history:
+                    if RogueX.location == bg_current and RogueX.Thirst >= 30 and "refused" not in RogueX.daily_history and "quicksex" not in RogueX.daily_history:
                             $ RogueX.change_face("sly",1)
                             ch_r "Hey, do you want to get a little frisky?"
                             call Quick_Sex(RogueX)
                             return
 
         #adds options based on accomplishments
-        if ApprovalCheck(RogueX, 1200) and bg_current == RogueX.Loc and bg_current != "bg_restaurant":
+        if ApprovalCheck(RogueX, 1200) and bg_current == RogueX.location and bg_current != "bg_restaurant":
             $ Options.append("dance")
         if ApprovalCheck(RogueX, 800, "L") and "nametag chat" not in RogueX.daily_history:
             $ Options.append("close")
         if RogueX.Blow >= 2:
-            $ Options.append("blow")
+            $ Options.append("blowjob")
         if "steal" in RogueX.Traits:
             $ Options.append("steal")
         if PunishmentX and "caught chat" not in RogueX.daily_history:
@@ -948,12 +948,8 @@ label Rogue_Chitchat(O=0, Options = ["default","default","default"]):
         if "lover" in RogueX.Petnames and ApprovalCheck(RogueX, 900, "L"): # luvy dovey
             $ Options.append("luv")
 
-        if "mandrill" in Player.Traits and "cologne chat" not in RogueX.daily_history:
-            $ Options.append("mandrill")
-        if "purple" in Player.Traits and "cologne chat" not in RogueX.daily_history:
-            $ Options.append("purple")
-        if "corruption" in Player.Traits and "cologne chat" not in RogueX.daily_history:
-            $ Options.append("corruption")
+        if Player.cologne and "cologne_chat" not in RogueX.daily_history:
+            $ Options.append(Player.cologne)
 
         if not RogueX.Chat[0] and RogueX.Sex:
             $ Options.append("virgin")
@@ -992,24 +988,24 @@ label Rogue_Chitchat(O=0, Options = ["default","default","default"]):
         call Rogue_Not_Virgin
 
     elif Options[0] == "mandrill":
-        $ RogueX.daily_history.append("cologne chat")
+        $ RogueX.daily_history.append("cologne_chat")
         $ RogueX.change_face("confused")
         ch_r "(sniff, sniff). . . something kind of smells like monkey butt in here. . ."
         $ RogueX.change_face("sly", 1)
         ch_r ". . . but you're looking pretty handsome today, [RogueX.Petname]."
     elif Options[0] == "purple":
-        $ RogueX.daily_history.append("cologne chat")
+        $ RogueX.daily_history.append("cologne_chat")
         $ RogueX.change_face("sly",1)
         ch_r "(sniff, sniff). . . hmm, you're smelling good today. . ."
         ch_r ". . . was there anything I could do to make you happy?"
     elif Options[0] == "corruption":
-        $ RogueX.daily_history.append("cologne chat")
+        $ RogueX.daily_history.append("cologne_chat")
         $ RogueX.change_face("confused")
         ch_r "(sniff, sniff). . . that's a pretty strong scent you've got there. . ."
         $ RogueX.change_face("sly")
         ch_r ". . . I'm gettin some pretty naughty thoughts over here, [RogueX.Petname]. . ."
 
-    elif Options[0] == "blow":
+    elif Options[0] == "blowjob":
         $ line = renpy.random.choice(["You know, you taste better than I thought.",
                 "You're making my jaw a bit sore there.",
                 "Let me know if you want a little mouth attention.",
@@ -1515,7 +1511,7 @@ label Rogue_Clothes:
             $ renpy.pop_call()
     $ line = 0
     $ Girl = RogueX
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
 
 label Rogue_Wardrobe_Menu:
     while True:
@@ -1536,7 +1532,7 @@ label Rogue_Wardrobe_Menu:
             "Let's talk about what you wear around.":
                     call Clothes_Schedule(RogueX)
 
-            "Could I get a look at it?" if RogueX.Loc != bg_current:
+            "Could I get a look at it?" if RogueX.location != bg_current:
                     # checks to see if she'll drop the screen
                     call OutfitShame(RogueX,0,2)
                     if _return:
@@ -1551,7 +1547,7 @@ label Rogue_Wardrobe_Menu:
 
             "Would you be more comfortable behind a screen? (locked)" if RogueX.Taboo:
                     pass
-            "Would you be more comfortable behind a screen?" if RogueX.Loc == bg_current and not RogueX.Taboo and not renpy.showing('DressScreen'):
+            "Would you be more comfortable behind a screen?" if RogueX.location == bg_current and not RogueX.Taboo and not renpy.showing('DressScreen'):
                     # checks to see if she'll drop the screen
                     if ApprovalCheck(RogueX, 1500) or (RogueX.SeenChest and RogueX.SeenPussy):
                             ch_r "Don't really need that, thanks."
@@ -1559,9 +1555,9 @@ label Rogue_Wardrobe_Menu:
                             show DressScreen zorder 150
                             ch_r "This is more comfortable, thanks."
 
-            "Gift for you (locked)" if Girl.Loc != bg_current:
+            "Gift for you (locked)" if Girl.location != bg_current:
                             pass
-            "Gift for you" if Girl.Loc == bg_current:
+            "Gift for you" if Girl.location == bg_current:
                             ch_p "I'd like to give you something."
                             call Gifts #(Girl)
 
@@ -1579,7 +1575,7 @@ label Rogue_Wardrobe_Menu:
                             ch_p "I wanted to talk about your clothes."
                             call expression Girl.Tag +"_Clothes"
                     $ Girl = RogueX
-                    call Shift_Focus(Girl)
+                    call shift_focus(Girl)
 
             "Never mind, you look good like that. [[return]":
                     if "wardrobe" not in RogueX.recent_history:
@@ -2287,10 +2283,10 @@ label Rogue_Wardrobe_Menu:
                                 if not renpy.showing('DressScreen'):
                                         call Rogue_First_Bottomless
                             elif ApprovalCheck(RogueX, 1200, TabM=4):
-                                $ primary_action = RogueX.Legs
+                                $ temp = RogueX.Legs
                                 $ RogueX.Legs = 0
                                 pause 0.5
-                                $ RogueX.Legs = primary_action
+                                $ RogueX.Legs = temp
                                 "She pulls off her [RogueX.Legs] and [line], then pulls the [RogueX.Legs] back on."
                                 $ primary_action = 1
                                 call Rogue_First_Bottomless(1)

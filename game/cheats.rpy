@@ -1,7 +1,7 @@
 label StatHacks(Girl=0,counter=0):
     while True:
             menu:
-                "[Girl.name]: love: [Girl.love], obedienceience: [Girl.obedience], Inhibition:[Girl.inhibition], lust: [Girl.lust] Taboo: [Taboo], Location: [Girl.Loc]"
+                "[Girl.name]: love: [Girl.love], obedienceience: [Girl.obedience], Inhibition:[Girl.inhibition], lust: [Girl.lust] Taboo: [Taboo], Location: [Girl.location]"
                 "Activities":
                     menu:
                         "Recent Actions":

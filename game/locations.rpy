@@ -69,10 +69,10 @@ label Misplaced:
         if primary_action and primary_action in all_Girls:
                 #sent here by a broken sex action, primary_action should be girl's name
                 call expression  primary_action.Tag + "_SexMenu"
-        #if "Historia" in Player.Traits:
-                #call Historia_Clear
+        #if simulation:
+                #call clear_simulation
         scene onlayer black #removes MindFuck and black screen
-        $ Player.DrainWord("locked",0,0,1)
+        $ door_locked = False
         $ StackDepth = renpy.call_stack_depth() #Count = number of items in the call stack
         while StackDepth > 0:
                 $ StackDepth -= 1
@@ -118,7 +118,7 @@ label Campus_Map:
     $ Partner_primary_action = 0
     $ Partner_offhand_action = 0
     $ bg_current = "bg_campus"
-    $ Player.DrainWord("locked",0,0,1)
+    $ door_locked = False
     call set_the_scene
     if not TravelMode:
         call Worldmap
@@ -126,7 +126,7 @@ label Campus_Map:
 
 label Campus_Entry:
     call Jubes_Entry_Check
-    $ Player.DrainWord("locked",0,0,1)
+    $ door_locked = False
     $ bg_current = "bg_campus"
     $ Nearby = []
     call Gym_Clothes_Off #call Gym_Clothes
@@ -218,7 +218,7 @@ label Campus:
 
 label Study_Room_Entry:
     call Jubes_Entry_Check
-    $ Player.DrainWord("locked",0,0,1)
+    $ door_locked = False
     $ Nearby = []
     $ bg_current = "bg_study"
     call Gym_Clothes_Off #call Gym_Clothes
@@ -264,7 +264,7 @@ label Study_Room_Entry:
                             if "Sneakthief" in KittyX.Traits:
                                 ch_k "No problem. . ."
                                 jump Study_Room
-                            elif "no thief" in KittyX.recent_history:
+                            elif "no_thief" in KittyX.recent_history:
                                 ch_k "I told you, no."
                             elif ApprovalCheck(KittyX, 400, "I") or ApprovalCheck(KittyX, 1400):
                                 $ KittyX.change_stat("love", 90, 3)
@@ -278,12 +278,12 @@ label Study_Room_Entry:
                                 $ KittyX.change_stat("obedience", 50, 2)
                                 $ KittyX.change_stat("inhibition", 60, 2)
                                 ch_k "Um, I don't really feel comfortable doing that. . ."
-                                $ KittyX.recent_history.append("no thief")
+                                $ KittyX.recent_history.append("no_thief")
                     "Open the door.":
                             if "Sneakthief" in KittyX.Traits:
                                 ch_k "No problem. . ."
                                 jump Study_Room
-                            elif "no thief" in KittyX.recent_history:
+                            elif "no_thief" in KittyX.recent_history:
                                 ch_k "I told you, no."
                             elif ApprovalCheck(KittyX, 500, "O") or ApprovalCheck(KittyX, 1600):
                                 $ KittyX.change_stat("obedience", 50, 15)
@@ -296,7 +296,7 @@ label Study_Room_Entry:
                                 $ KittyX.change_stat("obedience", 50, 2)
                                 $ KittyX.change_stat("inhibition", 60, 2)
                                 ch_k "Um, no."
-                                $ KittyX.recent_history.append("no thief")
+                                $ KittyX.recent_history.append("no_thief")
                     "Never mind. [[Leave]":
                             "You head back."
                             jump Campus_Map
@@ -307,7 +307,7 @@ label Study_Room_Entry:
                 menu:
                     extend ""
                     "Do you think you could pick that lock?" if "Sneakthief" not in StormX.Traits:
-                            if "no thief" in StormX.recent_history:
+                            if "no_thief" in StormX.recent_history:
                                 ch_s "I told you, I won't do that."
                             elif ApprovalCheck(StormX, 400, "I") or ApprovalCheck(StormX, 1400):
                                 $ StormX.change_stat("love", 90, 3)
@@ -326,7 +326,7 @@ label Study_Room_Entry:
                                 $ StormX.change_stat("obedience", 50, 2)
                                 $ StormX.change_stat("inhibition", 60, 2)
                                 ch_s "I don't think that's really appropriate behavior. . ."
-                                $ StormX.recent_history.append("no thief")
+                                $ StormX.recent_history.append("no_thief")
                     "Could you pick the lock again?" if "Sneakthief" in StormX.Traits:
                                 ch_s "No problem. . ."
                                 jump Study_Room
@@ -366,43 +366,43 @@ label Study_Room:
         "Chat" if time_index >= 3: #night time #fix, open up once sex while in office is fine
                     call Chat
 
-        "Plan Omega!" if time_index < 3 and RogueX.Loc == bg_current and Player.Lvl >= 5:
+        "Plan Omega!" if time_index < 3 and RogueX.location == bg_current and Player.Lvl >= 5:
                     if ApprovalCheck(RogueX, 1500, TabM=1, Loc="No"):
                         call Xavier_Plan(RogueX) #Plan_Omega
                     else:
                         ch_r "I don't want to do that. . ."
-        "Plan Kappa!" if time_index < 3 and KittyX.Loc == bg_current and Player.Lvl >= 5:
+        "Plan Kappa!" if time_index < 3 and KittyX.location == bg_current and Player.Lvl >= 5:
                     if "Xavier's photo" in Player.Inventory and ApprovalCheck(KittyX, 1500, TabM=1, Loc="No"):
                         call Xavier_Plan(KittyX) #Plan_Kappa
                     elif "Xavier's photo" in Player.Inventory:
                         ch_k "I don't really want to do that. . ."
                     else:
                         ch_k "What?"
-        "Plan Psi!" if time_index < 3 and EmmaX.Loc == bg_current and Player.Lvl >= 5:
+        "Plan Psi!" if time_index < 3 and EmmaX.location == bg_current and Player.Lvl >= 5:
                     if ApprovalCheck(EmmaX, 1500, TabM=1, Loc="No"):
                         call Xavier_Plan(EmmaX) #Plan_Psi
                     else:
                         ch_e "I'd rather not. . ."
-        "Plan Chi!" if time_index < 3 and LauraX.Loc == bg_current and Player.Lvl >= 5:
+        "Plan Chi!" if time_index < 3 and LauraX.location == bg_current and Player.Lvl >= 5:
                     if LauraX.Lvl >= 2 and ApprovalCheck(LauraX, 1500, TabM=1, Loc="No") and ApprovalCheck(LauraX, 750, "I"):
                         call Xavier_Plan(LauraX) #Plan_Chi
                     elif LauraX.Lvl < 2 or not ApprovalCheck(LauraX, 750, "I"):
                         ch_l "I'm not ready for that."
                     else:
                         ch_l "Huh?"
-        "Plan Alpha!" if time_index < 3 and JeanX.Loc == bg_current and Player.Lvl >= 5:
+        "Plan Alpha!" if time_index < 3 and JeanX.location == bg_current and Player.Lvl >= 5:
                     if ApprovalCheck(JeanX, 1500, TabM=1, Loc="No"):
                         call Xavier_Plan(JeanX) #Plan_Chi
                     else:
                         ch_j "You're on your own there."
-        "Plan Rho!" if time_index < 3 and StormX.Loc == bg_current and Player.Lvl >= 5:
+        "Plan Rho!" if time_index < 3 and StormX.location == bg_current and Player.Lvl >= 5:
                     if "Xavier's files" in Player.Inventory and ApprovalCheck(StormX, 1500, TabM=1, Loc="No"):
                         call Xavier_Plan(StormX) #Plan_Rho
                     elif "Xavier's files" in Player.Inventory:
                         ch_s "I do not believe that would be approrpriate."
                     else:
                         ch_s "What is that?"
-        "Plan Zeta!" if time_index < 3 and JubesX.Loc == bg_current and Player.Lvl >= 5:
+        "Plan Zeta!" if time_index < 3 and JubesX.location == bg_current and Player.Lvl >= 5:
                     if ApprovalCheck(JubesX, 1500, TabM=1, Loc="No"):
                         call Xavier_Plan(JubesX) #Plan_Zeta
                     else:
@@ -445,7 +445,7 @@ label Study_Room_Explore:
                     "As you search the bookshelf, you accidentally knock one of the books off."
                     "It hammers against the floor, and a little light blinks on the desk."
         "Left Desk Drawer":
-            if KittyX.Loc != bg_current and StormX.Loc != bg_current:
+            if KittyX.location != bg_current and StormX.location != bg_current:
                     "You can't seem to get it open, it would be nice to have someone open the catch from the inside."
             elif D20 >= 10 + counter:
                     $ line = "left"
@@ -453,7 +453,7 @@ label Study_Room_Explore:
                     "As you open the drawer, it makes a loud a squeak."
                     "As you look around, you notice a little light starts blinking on the desk."
         "Middle Desk Drawer":
-            if KittyX.Loc != bg_current and StormX.Loc != bg_current:
+            if KittyX.location != bg_current and StormX.location != bg_current:
                     "You can't seem to get it open, it would be nice to have someone open the catch from the inside."
             elif D20 >= 15 + counter:
                     $ line = "mid"
@@ -461,7 +461,7 @@ label Study_Room_Explore:
                     "As you open the drawer, it makes a loud a squeak."
                     "As you look around, you notice a little light starts blinking on the desk."
         "Right Desk Drawer":
-            if KittyX.Loc != bg_current and StormX.Loc != bg_current:
+            if KittyX.location != bg_current and StormX.location != bg_current:
                     "You can't seem to get it open, it would be nice to have someone open the catch from the inside."
             elif D20 >= 5 + counter:
                     $ line = "right"
@@ -479,7 +479,7 @@ label Study_Room_Explore:
     elif line == "book":
             if D20 >= 15 and "Well Studied" not in Achievements:
                 "As you check the books on the shelf, you notice that one of them is actually a disguised lockbox."
-                if KittyX.Loc == bg_current:
+                if KittyX.location == bg_current:
                     menu:
                         "Since [KittyX.name] is around, have her check inside?"
                         "Check in the box":
@@ -502,7 +502,7 @@ label Study_Room_Explore:
                                 ch_k "I really don't think we should do that."
                         "Put it back.":
                             "You place the box back on the shelf."
-                elif StormX.Loc == bg_current:
+                elif StormX.location == bg_current:
                     menu:
                         "Since [StormX.name] is around, have her check inside?"
                         "Check in the box":
@@ -539,7 +539,7 @@ label Study_Room_Explore:
                         "Buried under a pile of documents, you find a printed out photo."
                         "It appears to be a selfie of Mystique making out with Xavier."
                         "She's reaching down to adjust his . . . oh, {i}that's{/i} interesting."
-                        if StormX.Loc == bg_current:
+                        if StormX.location == bg_current:
                                 ch_s "You should probably put that back, it looks personal."
                         else:
                                 "[[Xavier's photo acquired.]"
@@ -552,7 +552,7 @@ label Study_Room_Explore:
             else:
                         "There doesn't seem to be anything more of interest in here."
     elif line == "mid":
-            if "All" not in Keys:
+            if "all" not in Keys:
                 "Under a few trinkets, you find a small keyring."
                 "[[Keyring acquired.]"
                 if "Xavier" not in Keys:
@@ -571,8 +571,8 @@ label Study_Room_Explore:
                         $ Keys.append(StormX)
                 if JubesX not in Keys:
                         $ Keys.append(JubesX)
-                if "All" not in Keys:
-                        $ Keys.append("All")
+                if "all" not in Keys:
+                        $ Keys.append("all")
             else:
                 "There doesn't seem to be anything interesting in here."
     elif line == "right":
@@ -580,7 +580,7 @@ label Study_Room_Explore:
             if "Xavier's files" not in Player.Inventory:
                 if D20 >= 10:
                         "You search through some documents, but don't find anything."
-                        if StormX.Loc == bg_current:
+                        if StormX.location == bg_current:
                                 ch_s "Hmm. . ."
                                 "She reaches under some of the documents and finds a small notch."
                                 "With a soft \"click\"a panel flips open in the drawer, revealing some file folders."

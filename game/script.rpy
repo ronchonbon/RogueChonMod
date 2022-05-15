@@ -133,6 +133,16 @@ init -1:
     default GwenName = "????"
     default Load_Options = []
 
+    default door_locked = False
+
+    default simulation = False
+
+    default hand_actions = ["massage", "fondle_thighs", "fondle_breasts", "fondle_pussy", "finger_pussy", "fondle_ass", "finger_ass"]
+    default mouth_actions = ["kiss", "suck_breasts", "eat_pussy", "eat_ass"]
+    default cock_actions = ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
+    default dildo_actions = ["dildo_pussy", "dildo_ass"]
+    default anal_insert_actions = ["finger_ass", "dildo_ass", "anal"]
+
 label start:
     $ Player = PlayerClass()
     $ RogueX = GirlClass("Rogue",500,0,0,10)

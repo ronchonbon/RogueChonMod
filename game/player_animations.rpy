@@ -26,12 +26,12 @@ image lick_animation:
         repeat
 
 image doggy_lick_pussy:
-    "lick_animation"
+    "eat_animation"
     zoom 0.5
     offset (195,540)
 
 image doggy_lick_Ass:
-    "lick_animation"
+    "eat_animation"
     zoom 0.5
     offset (195,500)
 

@@ -637,7 +637,7 @@ label fondle_thighs(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call fondle_set_modifier(Girl, "fondle_thighs")
 
     $ Approval = ApprovalCheck(Girl, 750, TabM=1)
@@ -701,7 +701,7 @@ label fondle_breasts(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call fondle_set_modifier(Girl, "fondle_breasts")
 
     $ Approval = ApprovalCheck(Girl, 950, TabM = 3)
@@ -766,7 +766,7 @@ label suck_breasts(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call fondle_set_modifier(Girl, "suck_breasts")
 
     $ Approval = ApprovalCheck(Girl, 1050, TabM = 4) # 105, 120, 135, Taboo -160(265)
@@ -819,7 +819,7 @@ label fondle_pussy(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call fondle_set_modifier(Girl, "fondle_pussy")
 
     if Girl in [EmmaX, LauraX, JeanX, StormX, JubesX] and Taboo and "public" not in Girl.History:
@@ -890,7 +890,7 @@ label fondle_pussy(Girl):
 label finger_pussy(Girl):
     $ primary_action = "finger_pussy"
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
 
     if action_context == "auto":                                                                  #You auto-start
         if ApprovalCheck(Girl, 1100, TabM = 2):
@@ -938,7 +938,7 @@ label eat_pussy(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call fondle_set_modifier(Girl, "eat_pussy")
 
     $ Approval = ApprovalCheck(Girl, 1250, TabM = 4) # 125, 140, 155, Taboo -160(285)
@@ -1000,7 +1000,7 @@ label fondle_ass(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call fondle_set_modifier(Girl, "fondle_ass")
 
     $ Approval = ApprovalCheck(Girl, 850, TabM=1, Alt = [[StormX], 750]) # 85, 100, 115, Taboo -40(125)
@@ -1072,7 +1072,7 @@ label finger_ass(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call fondle_set_modifier(Girl, "finger_ass")
 
     $ Approval = ApprovalCheck(Girl, 1300, TabM = 3) # 130, 145, 160, Taboo -120(250)
@@ -1128,7 +1128,7 @@ label eat_ass(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call fondle_set_modifier(Girl, "eat_ass")
 
     $ Approval = ApprovalCheck(Girl, 1550, TabM = 4) # 155, 170, 185, Taboo -160(315)

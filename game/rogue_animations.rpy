@@ -1364,7 +1364,7 @@ image Rogue_HJ_Animation:
 
 
 label Rogue_Middle_Launch(T = primary_action,Set=1):
-    call hide_Girl(RogueX)
+    call hide_girl(RogueX)
     $ primary_action = T
     $ RogueX.Pose = "mid" if Set else RogueX.Pose
     show Rogue_Sprite at sprite_location(RogueX.sprite_location) zorder RogueX.Layer:

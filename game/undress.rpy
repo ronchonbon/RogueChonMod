@@ -44,12 +44,12 @@ label AutoStrip(Girl=0):  #rkeljsv
 label Girl_Undress(Girl=0,Region = "ask",stored_count=0): #rkeljsv
         #Called mostly from sex act menus when you want a girl to strip down
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         $ stored_count = temp_modifier
         if Partner == Girl:
                 $ temp_modifier = 0
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         if Region == "auto":
                 if Girl.Upskirt and Girl.PantiesDown:
@@ -94,7 +94,7 @@ label Girl_Undress(Girl=0,Region = "ask",stored_count=0): #rkeljsv
                         pass
                 elif not Girl.Legs and not Girl.Panties and not Girl.Hose:
                         pass
-                elif "no topless" in Girl.recent_history:
+                elif "no_topless" in Girl.recent_history:
                         if Girl == RogueX:
                                 ch_r "You might want to rethink your next question."
                         elif Girl == KittyX:
@@ -125,7 +125,7 @@ label Girl_Undress(Girl=0,Region = "ask",stored_count=0): #rkeljsv
 label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
         # Will she take her top off? Modifiers
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         if not Girl.Over and not Girl.Chest:
                 # If she's already topless. Just skip back.
@@ -158,7 +158,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                 $ temp_modifier += 10
         elif "ex" in Girl.Traits:
                 $ temp_modifier -= 40
-        if "no topless" in Girl.recent_history:
+        if "no_topless" in Girl.recent_history:
                 $ temp_modifier -= 10
         elif Girl == StormX and (not Taboo or Girl in Rules):
                 #Storm is more up for it if in private or with Xavier cleared
@@ -252,7 +252,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
 
         if Approval >= 2: #(Girl.love + Girl.obedience + Girl.inhibition + (2*temp_modifier) - (4*Taboo)) >= 1250:
             # Does she assume top off?
-            if "no topless" in Girl.daily_history:
+            if "no_topless" in Girl.daily_history:
                     if Girl == RogueX:
                             ch_r "Ok, fine, top off."
                     elif Girl == KittyX:
@@ -393,14 +393,14 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
         if Girl == RogueX:
                 if Intro == "massage" and not Approval:
                     ch_r "I'm ok with a massage, but my top stays on."
-                elif "no topless" in Girl.recent_history:
+                elif "no_topless" in Girl.recent_history:
                     $ Girl.change_face("angry")
                     ch_r "I just told you no, [Girl.Petname]."
                 elif Approval and not Girl.SeenChest:
                     ch_r "I'd like to leave something to the imagination. . ."
                 elif not Girl.SeenChest:
                     ch_r "I'm not ready to show you those yet. . ."
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                     ch_r "I wasn't into it earlier, [Girl.Petname], what's changed?"
                 elif "ask topless" in Girl.recent_history:
                     ch_r "Changed your mind, [Girl.Petname]?"
@@ -413,14 +413,14 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
         elif Girl == KittyX:
                 if Intro == "massage" and not Approval:
                     ch_k "A massage is fine, but I'm keeping my top on, ok?"
-                elif "no topless" in Girl.recent_history:
+                elif "no_topless" in Girl.recent_history:
                     $ Girl.change_face("angry")
                     ch_k "I[Girl.like]already told you, no way!"
                 elif Approval and not Girl.SeenChest:
                     ch_k "I'm[Girl.like]not really comfortable with that."
                 elif not Girl.SeenChest:
                     ch_k "I'd[Girl.like]really rather not, ok?"
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                     ch_k "Do you[Girl.like]think something's changed since earlier?"
                 elif "ask topless" in Girl.recent_history:
                     ch_k "Did you[Girl.like]want something else off?"
@@ -433,14 +433,14 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
         elif Girl == EmmaX:
                 if Intro == "massage" and not Approval:
                     ch_e "I welcome a massage, but I'm staying fully dressed."
-                elif "no topless" in Girl.recent_history:
+                elif "no_topless" in Girl.recent_history:
                     $ Girl.change_face("angry")
                     ch_e "Learn from previous mistakes, [Girl.Petname]."
                 elif Approval and not Girl.SeenChest:
                     ch_e "I don't know if that would be appropriate."
                 elif not Girl.SeenChest:
                     ch_e "I don't think you're ready for that."
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                     ch_e "Are you still that obsessed?"
                 elif "ask topless" in Girl.recent_history:
                     ch_e "You want more?"
@@ -453,14 +453,14 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
         elif Girl == LauraX:
                 if Intro == "massage" and not Approval:
                     ch_l "I could use a massage, but I'm keeping my clothes on."
-                elif "no topless" in Girl.recent_history:
+                elif "no_topless" in Girl.recent_history:
                     $ Girl.change_face("angry")
                     ch_l "Don't push it, [Girl.Petname]."
                 elif Approval and not Girl.SeenChest:
                     ch_l "I don't know, man."
                 elif not Girl.SeenChest:
                     ch_l "I really don't think so."
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                     ch_l "Dude, relax."
                 elif "ask topless" in Girl.recent_history:
                     ch_l "Again?"
@@ -473,14 +473,14 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
         elif Girl == JeanX:
                 if Intro == "massage" and not Approval:
                     ch_j "Massage, yes, but top on."
-                elif "no topless" in Girl.recent_history:
+                elif "no_topless" in Girl.recent_history:
                     $ JeanX.change_face("angry")
                     ch_j "Relax, [Girl.Petname]."
                 #elif Approval and not Girl.SeenChest:
                     #ch_j "Hmm. . ."
                 #elif not Girl.SeenChest:
                     #ch_j "Hm. . ."
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                     ch_j "Not happening."
                 elif "ask topless" in Girl.recent_history:
                     ch_j "So soon?"
@@ -493,12 +493,12 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
         elif Girl == StormX:
                 if Intro == "massage" and not Approval:
                     ch_s "I would enjoy a massage, but I'm staying fully clothed."
-                elif "no topless" in Girl.recent_history:
+                elif "no_topless" in Girl.recent_history:
                     $ Girl.change_face("angry")
                     ch_s "I am not so pliable as that, [Girl.Petname]."
                 elif Approval and not Girl.SeenChest:
                     ch_s "I don't know if that would be appropriate."
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                     ch_s "Do not ask again."
                 elif "ask topless" in Girl.recent_history:
                     ch_s "Oh, you'd like to see them again?"
@@ -511,14 +511,14 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
         elif Girl == JubesX:
                 if Intro == "massage" and not Approval:
                     ch_v "I could use a massage, but I'm keeping my clothes on."
-                elif "no topless" in Girl.recent_history:
+                elif "no_topless" in Girl.recent_history:
                     $ Girl.change_face("angry")
                     ch_v "Don't push it, [Girl.Petname]."
                 elif Approval and not Girl.SeenChest:
                     ch_v "I don't know, man."
                 elif not Girl.SeenChest:
                     ch_v "I'm not cool with that."
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                     ch_v "Dude, relax."
                 elif "ask topless" in Girl.recent_history:
                     ch_v "Again?"
@@ -530,7 +530,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                     ch_v "Nah."
         menu:
             extend ""
-            "Sorry, sorry." if "no topless" in Girl.recent_history:
+            "Sorry, sorry." if "no_topless" in Girl.recent_history:
                 $ Girl.change_face("bemused", 1)
                 if Girl == RogueX:
                         ch_r "Ok, just. . . give it a rest, huh?"
@@ -547,7 +547,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                 elif Girl == JubesX:
                         ch_v "Well, you can't win if the don't play, right?"
 
-            "Ok, that's fine." if "no topless" not in Girl.recent_history:
+            "Ok, that's fine." if "no_topless" not in Girl.recent_history:
                 if "ask topless" not in Girl.daily_history:
                         $ Girl.change_stat("lust", 80, 3)
                         $ Girl.change_stat("love", 70, 1)
@@ -750,24 +750,24 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                         $ Girl.change_stat("obedience", 40, 2)
                         $ Girl.change_face("sexy")
                         if Girl == RogueX:
-                                if "no topless" in Girl.recent_history:
+                                if "no_topless" in Girl.recent_history:
                                     ch_r "You're pretty persistent, [Girl.Petname]. I guess this time it'll be rewarded. . ."
                                 else:
                                     ch_r "Heh, I suppose I can hardly refuse ya when you use the magic words . . ."
                         elif Girl == KittyX:
-                                if "no topless" in Girl.recent_history:
+                                if "no_topless" in Girl.recent_history:
                                     ch_k "You just don't know when to quit. . . but you got lucky this time. . ."
                                 else:
                                     ch_k "You[Girl.like]know how to ask nicely . . ."
                         elif Girl == EmmaX:
-                                if "no topless" in Girl.recent_history:
+                                if "no_topless" in Girl.recent_history:
                                     ch_e "Fine, I can't take your constant begging."
                                 else:
                                     ch_e "Well, I suppose if you ask nicely . . ."
                         elif Girl == LauraX:
                                     ch_l "Fine, you thirsty weirdo."
                         elif Girl == JeanX:
-                                if "no topless" in Girl.recent_history:
+                                if "no_topless" in Girl.recent_history:
                                     ch_j "Oh, whatever."
                                 else:
                                     ch_j "I guess. . ."
@@ -781,7 +781,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                         $ Girl.change_stat("inhibition", 30, 2)
                         $ Girl.change_stat("inhibition", 60, 1)
                         call first_topless(Girl)
-                elif "no topless" in Girl.recent_history:
+                elif "no_topless" in Girl.recent_history:
                         $ Girl.change_face("angry")
                         if Girl == RogueX:
                                 ch_r "Nuh uh, [Girl.Petname]."
@@ -826,70 +826,70 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
 label Top_Off_Refused(Girl=0): #rkeljsv
         #Called form Top_Off when you insist but she refuses
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         $ Girl.change_face("angry")
         if Girl == RogueX:
-                if "no topless" in Girl.recent_history:
+                if "no_topless" in Girl.recent_history:
                         ch_r "Get a clue, [Girl.Petname]."
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                         ch_r "Give it a rest, [Girl.Petname]."
                 else:
                         $ Girl.change_face("sad")
                         ch_r "I'm afraid not this time, [Girl.Petname]. Sure we can't have some fun anyway?"
         elif Girl == KittyX:
-                if "no topless" in Girl.recent_history:
+                if "no_topless" in Girl.recent_history:
                         ch_k "[Girl.Like]back off."
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                         ch_k "Not today, maybe not ever, [Girl.Petname]."
                 else:
                         $ KittyX.change_face("sad")
                         ch_k "[Girl.Like], no way, but I don't want to go. . ."
         elif Girl == EmmaX:
-                if "no topless" in Girl.recent_history:
+                if "no_topless" in Girl.recent_history:
                         ch_e "You should probably back off now."
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                         ch_e "I'm tired of this, [Girl.Petname]."
                 else:
                         ch_e "Is this a dealbreaker for you?"
         elif Girl == LauraX:
-                if "no topless" in Girl.recent_history:
+                if "no_topless" in Girl.recent_history:
                         ch_l "You're getting real close to the line, [Girl.Petname]."
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                         ch_l "You keep coming back with this, [Girl.Petname]."
                 else:
                         ch_l "Let it go?"
         elif Girl == JeanX:
-                if "no topless" in Girl.recent_history:
+                if "no_topless" in Girl.recent_history:
                         ch_j "Step carefully, [Girl.Petname]."
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                         ch_j "Still on about that?"
                 else:
                         ch_j "Careful. . ."
         elif Girl == StormX:
-                if "no topless" in Girl.recent_history:
+                if "no_topless" in Girl.recent_history:
                         ch_s "I will not move on this."
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                         ch_s "Find your joy elsewhere, [Girl.Petname]."
                 else:
                         ch_s "Do you insist on this path?"
         elif Girl == JubesX:
-                if "no topless" in Girl.recent_history:
+                if "no_topless" in Girl.recent_history:
                         ch_v "I thought I was clear. . ."
-                elif "no topless" in Girl.daily_history:
+                elif "no_topless" in Girl.daily_history:
                         ch_v "Look, cut it out, [Girl.Petname]."
                 else:
                         ch_v "Whoa, slow your roll there. . ."
         menu:
             extend ""
-            "Sure, never mind." if "no topless" not in Girl.recent_history:
+            "Sure, never mind." if "no_topless" not in Girl.recent_history:
                     $ Girl.change_face("sexy")
                     $ Girl.change_stat("love", 70, 2)
                     if Girl == RogueX or Girl == KittyX:
                             call Anyline(Girl,"Great!")
                     else:
                             call Anyline(Girl,"Good.")
-            "Sorry, I'll drop it." if "no topless" in Girl.recent_history:
+            "Sorry, I'll drop it." if "no_topless" in Girl.recent_history:
                     if Girl == RogueX:
                             ch_r "Fine. . ."
                     elif Girl == KittyX:
@@ -916,18 +916,18 @@ label Top_Off_Refused(Girl=0): #rkeljsv
                             ch_v "Too bad then. . ."
                     $ Girl.change_stat("lust", 50, 5)
                     $ Girl.change_stat("love", 70, -2, 1)
-                    if "no topless" not in Girl.recent_history:
+                    if "no_topless" not in Girl.recent_history:
                             $ Girl.change_stat("obedience", 60, 4)
                     $ Girl.recent_history.append("angry")
                     $ Girl.daily_history.append("angry")
-        $ Girl.recent_history.append("no topless")
-        $ Girl.daily_history.append("no topless")
+        $ Girl.recent_history.append("no_topless")
+        $ Girl.daily_history.append("no_topless")
         return
 
 label ToplessorNothing(Girl=0): #rkeljsv
         #Called from Top_Off if you insist she go topless after she's declined.
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         $ Girl.change_face("angry")
         if ApprovalCheck(Girl, 800, "OI", TabM = 4) and ApprovalCheck(Girl, 400, "O", TabM = 3):
@@ -936,42 +936,42 @@ label ToplessorNothing(Girl=0): #rkeljsv
             $ Girl.change_stat("inhibition", 60, 3)
             $ Girl.change_face("sad")
             if Girl == RogueX:
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         ch_r "Ok, ok, whatever."
                     else:
                         ch_r "Fine, if that's what you want."
             elif Girl == KittyX:
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         ch_k "Ok, fine. This time."
                     else:
                         $ Girl.change_face("sad")
                         ch_k "Whatever."
             elif Girl == EmmaX:
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         ch_e "Oh, very well. . ."
                     else:
                         $ Girl.change_face("sad")
                         ch_e "Fine."
             elif Girl == LauraX:
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         ch_l "Hrmph, whatever. . ."
                     else:
                         $ Girl.change_face("sad")
                         ch_l "Ugh, whatever."
             elif Girl == JeanX:
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         ch_j "Ok, fine. . ."
                     else:
                         $ Girl.change_face("sad")
                         ch_j "Fine! . . whatever."
             elif Girl == StormX:
                     $ Girl.change_face("sad")
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         ch_s "I suppose sometimes I must. . ."
                     else:
                         ch_s "Fine."
             elif Girl == JubesX:
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         ch_v "Ok, fine, just quit asking."
                     else:
                         ch_v "Ok, fine, whatever."
@@ -984,56 +984,56 @@ label ToplessorNothing(Girl=0): #rkeljsv
             $ Girl.change_stat("love", 200, -10)
             $ Girl.change_stat("obedience", 40, -1, 1)
             if Girl == RogueX:
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         ch_r "Seriously, cut this shit out."
                     else:
                         $Girl.Brows = "confused"
                         ch_r "\"Nothing\" it is then."
             elif Girl == KittyX:
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         ch_k "It[Girl.like]wasn't cute the first time."
                     else:
                         $ Girl.Brows = "angry"
                         ch_k "[Girl.Like]no way!"
             elif Girl == EmmaX:
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         $ Girl.Brows = "angry"
                         ch_e "Learn to take \"no\" for an answer."
                     else:
                         ch_e "I'm afraid not."
             elif Girl == LauraX:
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         $ Girl.Brows = "angry"
                         ch_l "You have got to chill."
                     else:
                         ch_l "Nope."
             elif Girl == JeanX:
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         $ Girl.Brows = "angry"
                         ch_j "Keep it under control."
                     else:
                         ch_j "Oh, no."
             elif Girl == StormX:
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         $ Girl.Brows = "angry"
                         ch_s "I say again, \"no.\"."
                     else:
                         ch_s "Then that would be a \"no.\"."
             elif Girl == JubesX:
-                    if "no topless" in Girl.recent_history:
+                    if "no_topless" in Girl.recent_history:
                         $ Girl.Brows = "angry"
                         ch_v "Look, I told you, \"no.\"."
                     else:
                         ch_v "Sorry, no go."
-            $ Girl.recent_history.append("no topless")
-            $ Girl.daily_history.append("no topless")
+            $ Girl.recent_history.append("no_topless")
+            $ Girl.daily_history.append("no_topless")
             $ Girl.recent_history.append("angry")
             $ Girl.daily_history.append("angry")
         return
 
 label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         if not Girl.Legs and not Girl.Panties and not Girl.Hose:
                 # If she's already bottomless. Just skip back.
@@ -1073,7 +1073,7 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                 $ temp_modifier += 10
         elif "ex" in Girl.Traits:
                 $ temp_modifier -= 40
-        if "no bottomless" in Girl.recent_history:
+        if "no_bottomless" in Girl.recent_history:
                 $ temp_modifier -= 20
         elif Girl == StormX and (not Taboo or Girl in Rules):
                 #Storm is more up for it if in private or with Xavier cleared
@@ -1243,17 +1243,17 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
             # She'd rather not strip but might
             $ Girl.change_face("bemused", 1)
             if Girl == RogueX:
-                    if "no bottomless" in Girl.recent_history:
+                    if "no_bottomless" in Girl.recent_history:
                         $ Girl.change_face("angry")
                         ch_r "What did I just tell you, [Girl.Petname]?"
-                    elif "no topless" in Girl.recent_history:
+                    elif "no_topless" in Girl.recent_history:
                         $ Girl.change_face("angry")
                         ch_r "I doubt your odds will be better here, [Girl.Petname]. . ."
                     elif Approval and not Girl.SeenPussy:
                         ch_r "Not everything, right?"
                     elif not Girl.SeenPussy and "ask topless" in Girl.recent_history:
                         ch_r "I'm not ready to show you that either."
-                    elif "no bottomless" in Girl.daily_history:
+                    elif "no_bottomless" in Girl.daily_history:
                         ch_r "Have you forgot what I said earlier, [Girl.Petname]?"
                     elif Taboo:
                         ch_r "I don't know about doing it here. . ."
@@ -1264,17 +1264,17 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                     else:
                         ch_r "I'm not taking my bottoms off."
             elif Girl == KittyX:
-                    if "no bottomless" in Girl.recent_history:
+                    if "no_bottomless" in Girl.recent_history:
                         $ KittyX.change_face("angry")
                         ch_k "Last warning, [Girl.Petname]. No."
-                    elif "no topless" in Girl.recent_history:
+                    elif "no_topless" in Girl.recent_history:
                         $ KittyX.change_face("angry")
                         ch_k "Not learning from your mistakes here, [Girl.Petname]. . ."
                     elif Approval and not Girl.SeenPussy:
                         ch_k "I'm not sure about that. . ."
                     elif not Girl.SeenPussy and "ask topless" in Girl.recent_history:
                         ch_k "That's a bit too far."
-                    elif "no bottomless" in Girl.daily_history:
+                    elif "no_bottomless" in Girl.daily_history:
                         ch_k "Short memory, [Girl.Petname]?"
                     elif Taboo:
                         ch_k "This is[Girl.like]kinda public. . ."
@@ -1289,17 +1289,17 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                     else:
                         ch_k "I'm keeping my panties on."
             elif Girl == EmmaX:
-                    if "no bottomless" in Girl.recent_history:
+                    if "no_bottomless" in Girl.recent_history:
                         $ EmmaX.change_face("angry")
                         ch_e "Stop asking, you're embarrassing yourself."
-                    elif "no topless" in Girl.recent_history:
+                    elif "no_topless" in Girl.recent_history:
                         $ EmmaX.change_face("angry")
                         ch_e "Do you really think that's likely?"
                     elif Approval and not Girl.SeenPussy:
                         ch_e "I don't know if you're ready for that."
                     elif not Girl.SeenPussy and "ask topless" in Girl.recent_history:
                         ch_e "Be careful how far you push it. . ."
-                    elif "no bottomless" in Girl.daily_history:
+                    elif "no_bottomless" in Girl.daily_history:
                         ch_e "Don't you learn anything, [Girl.Petname]?"
                     elif Taboo:
                         ch_e "Not with so many eyes around, [Girl.Petname]. . ."
@@ -1316,17 +1316,17 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                     else:
                         ch_e "I'm keeping my panties on."
             elif Girl == LauraX:
-                    if "no bottomless" in Girl.recent_history:
+                    if "no_bottomless" in Girl.recent_history:
                         $ LauraX.change_face("angry")
                         ch_l "Now you're just embarrassing yourself."
-                    elif "no topless" in Girl.recent_history:
+                    elif "no_topless" in Girl.recent_history:
                         $ LauraX.change_face("angry")
                         ch_l "This is really pushing it."
                     elif Approval and not Girl.SeenPussy:
                         ch_l "I don't know if you're earned that yet."
                     elif not Girl.SeenPussy and "ask topless" in Girl.recent_history:
                         ch_l "Kinda pushing it, [Girl.Petname]. . ."
-                    elif "no bottomless" in Girl.daily_history:
+                    elif "no_bottomless" in Girl.daily_history:
                         ch_l "So thirsty. . ."
                     elif Taboo:
                         ch_l "This is pretty exposed, [Girl.Petname]. . ."
@@ -1343,15 +1343,15 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                     else:
                         ch_l "Well, I'm keeping my panties on."
             elif Girl == JeanX:
-                    if "no bottomless" in Girl.recent_history:
+                    if "no_bottomless" in Girl.recent_history:
                         $ JeanX.change_face("angry")
                         ch_j "Look, it's just not happening."
-                    elif "no topless" in Girl.recent_history:
+                    elif "no_topless" in Girl.recent_history:
                         $ JeanX.change_face("angry")
                         ch_j "Why did you think that would be different?"
                     elif Approval and not Girl.SeenPussy:
                         ch_j "Hmm. . . have your earned that. . ."
-                    elif "no bottomless" in Girl.daily_history:
+                    elif "no_bottomless" in Girl.daily_history:
                         ch_j "Again with this?"
                     elif Taboo:
                         ch_j "Not here, [Girl.Petname]. . ."
@@ -1368,7 +1368,7 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                     else:
                         ch_j "I'm keeping my panties on though."
             elif Girl == StormX:
-                    if "no bottomless" in Girl.recent_history:
+                    if "no_bottomless" in Girl.recent_history:
                         $ StormX.change_face("angry")
                         ch_s "You need to stop asking about that."
                     elif Taboo and Girl not in Rules:
@@ -1384,17 +1384,17 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                     else:
                         ch_s "I will be keeping my panties on."
             elif Girl == JubesX:
-                    if "no bottomless" in Girl.recent_history:
+                    if "no_bottomless" in Girl.recent_history:
                         $ JubesX.change_face("angry")
                         ch_v "Don't have a cow, dude."
-                    elif "no topless" in Girl.recent_history:
+                    elif "no_topless" in Girl.recent_history:
                         $ JubesX.change_face("angry")
                         ch_v "Don't push it, [Girl.Petname]."
                     elif Approval and not Girl.SeenPussy:
                         ch_v "I don't know, man."
                     elif not Girl.SeenPussy and "ask topless" in Girl.recent_history:
                         ch_v "Kinda pushing it, [Girl.Petname]. . ."
-                    elif "no bottomless" in Girl.daily_history:
+                    elif "no_bottomless" in Girl.daily_history:
                         ch_v "So thirsty. . ."
                     elif Taboo:
                         ch_v "[Girl.Petname], it's just public here?"
@@ -1410,7 +1410,7 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                         ch_v "Well, I'm keeping my panties on."
             menu:
                 extend ""
-                "Ok, never mind." if "no bottomless" not in Girl.recent_history:
+                "Ok, never mind." if "no_bottomless" not in Girl.recent_history:
                     if "ask bottomless" not in Girl.daily_history:
                             $ Girl.change_stat("lust", 80, 2)
                             $ Girl.change_stat("love", 70, 1)
@@ -1437,7 +1437,7 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                                     $ Girl.change_stat("love", 70, 4)
                                     $ Girl.change_stat("inhibition", 60, 2)
 
-                "Sorry, sorry." if "no bottomless" in Girl.recent_history:
+                "Sorry, sorry." if "no_bottomless" in Girl.recent_history:
                             if Girl == RogueX:
                                     ch_r "Ok, fine, just chill out about it."
                             elif Girl == KittyX:
@@ -1446,7 +1446,7 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                                     call Anyline(Girl,"Good.")
 
                 "Come on, Please?":
-                        if "no bottomless" in Girl.daily_history:
+                        if "no_bottomless" in Girl.daily_history:
                                 $ Girl.change_face("angry", 1)
                                 if Girl == RogueX:
                                         ch_r "Listen up when I tell you \"no.\""
@@ -1488,7 +1488,7 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                                 call Bottoms_Off_Refused(Girl)
 
                 "It doesn't have to be everything. . ." if Girl.Legs or Girl.HoseNum() >= 10 or Girl.Panties == "shorts":
-                    if Approval and "no bottomless" not in Girl.daily_history:
+                    if Approval and "no_bottomless" not in Girl.daily_history:
                             $ Girl.change_face("bemused", 1)
                             $ line = "Well what did you have in mind then?"
                             call Bottoms_Off_Legs(Girl)
@@ -1558,8 +1558,8 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                                         ch_v "Nah. . ."
                                 $ Girl.recent_history.append("angry")
                                 $ Girl.daily_history.append("angry")
-                        $ Girl.recent_history.append("no bottomless")
-                        $ Girl.daily_history.append("no bottomless")
+                        $ Girl.recent_history.append("no_bottomless")
+                        $ Girl.daily_history.append("no_bottomless")
 
         $ temp_modifier = 0
         $ Girl.recent_history.append("ask bottomless")
@@ -1568,7 +1568,7 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
 
 label Bottoms_Off_Legs(Girl=0):  #rkeljsv
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         if Girl.Forced:
             $ Girl.change_face("sad", 1)
@@ -1705,8 +1705,8 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                                         ch_s "I would rather not."
                                 elif Girl == JubesX:
                                         ch_v "Um, no thanks. . ."
-                                $ Girl.recent_history.append("no bottomless")
-                                $ Girl.daily_history.append("no bottomless")
+                                $ Girl.recent_history.append("no_bottomless")
+                                $ Girl.daily_history.append("no_bottomless")
                                 return
                         elif Girl.PantsNum() >= 6 or Girl.HoseNum() >= 6:
                             if Girl == RogueX:
@@ -1785,8 +1785,8 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                                 $ Girl.Upskirt = 1
                         else:
                                 call Anyline(Girl,"No.")
-                                $ Girl.recent_history.append("no bottomless")
-                                $ Girl.daily_history.append("no bottomless")
+                                $ Girl.recent_history.append("no_bottomless")
+                                $ Girl.daily_history.append("no_bottomless")
                                 return
                         call first_bottomless(Girl)
 
@@ -1889,7 +1889,7 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
 label NoPantiesOn(Girl=0):  #rkeljsv
         #called when asked to remove pants with nothing on under
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         if not Girl.Panties:
             return
@@ -1990,12 +1990,12 @@ label NoPantiesOn(Girl=0):  #rkeljsv
 
 label Bottoms_Off_Refused(Girl=0):  #rkeljsv
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         if Girl == RogueX:
-                if "no bottomless" in Girl.recent_history:
+                if "no_bottomless" in Girl.recent_history:
                         ch_r "What part of \"no\" escapes you, [Girl.Petname]?"
-                elif "no bottomless" in Girl.daily_history:
+                elif "no_bottomless" in Girl.daily_history:
                         ch_r "If you keep this up, not ever, [Girl.Petname]."
                 else:
                     $ Girl.change_face("sad")
@@ -2004,9 +2004,9 @@ label Bottoms_Off_Refused(Girl=0):  #rkeljsv
                     else:
                         ch_r "I'm afraid not this time, [Girl.Petname]. Sure we can't have some fun anyway?"
         elif Girl == KittyX:
-                if "no bottomless" in Girl.recent_history:
+                if "no_bottomless" in Girl.recent_history:
                         ch_k "You're[Girl.like]on my last nerve here."
-                elif "no bottomless" in Girl.daily_history:
+                elif "no_bottomless" in Girl.daily_history:
                         ch_k "Give it a rest."
                 else:
                     $ Girl.change_face("sad")
@@ -2015,9 +2015,9 @@ label Bottoms_Off_Refused(Girl=0):  #rkeljsv
                     else:
                         ch_k "The answer's \"no,\" but[Girl.like]can't we still have some fun?"
         elif Girl == EmmaX:
-                if "no bottomless" in Girl.recent_history:
+                if "no_bottomless" in Girl.recent_history:
                         ch_e "Try to control your impulses."
-                elif "no bottomless" in Girl.daily_history:
+                elif "no_bottomless" in Girl.daily_history:
                         ch_e "Not today."
                 else:
                     $ Girl.change_face("sad")
@@ -2026,9 +2026,9 @@ label Bottoms_Off_Refused(Girl=0):  #rkeljsv
                     else:
                         ch_e "I'm afraid not, is that a deal-breaker?"
         elif Girl == LauraX:
-                if "no bottomless" in Girl.recent_history:
+                if "no_bottomless" in Girl.recent_history:
                         ch_l "Reign it in."
-                elif "no bottomless" in Girl.daily_history:
+                elif "no_bottomless" in Girl.daily_history:
                         ch_l "No, not today."
                 else:
                     $ Girl.change_face("sad")
@@ -2037,9 +2037,9 @@ label Bottoms_Off_Refused(Girl=0):  #rkeljsv
                     else:
                         ch_l "Nope, is that going to be a problem?"
         elif Girl == JeanX:
-                if "no bottomless" in Girl.recent_history:
+                if "no_bottomless" in Girl.recent_history:
                         ch_j "Take a breath, [Girl.Petname]."
-                elif "no bottomless" in Girl.daily_history:
+                elif "no_bottomless" in Girl.daily_history:
                         ch_j "I made myself clear."
                 else:
                     $ Girl.change_face("sad")
@@ -2048,7 +2048,7 @@ label Bottoms_Off_Refused(Girl=0):  #rkeljsv
                     #else:
                     ch_j "Do we have a problem?"
         elif Girl == StormX:
-                if "no bottomless" in Girl.recent_history:
+                if "no_bottomless" in Girl.recent_history:
                         ch_s "Show some restraint."
                 else:
                     $ Girl.change_face("sad")
@@ -2057,14 +2057,14 @@ label Bottoms_Off_Refused(Girl=0):  #rkeljsv
                     else:
                         ch_s "I would rather not, can we continue without it?"
         elif Girl == JubesX:
-                if "no bottomless" in Girl.daily_history:
+                if "no_bottomless" in Girl.daily_history:
                         ch_v "Like I said, nope."
                 else:
                     $ Girl.change_face("sad")
                     ch_v "This is it, ok?"
         menu:
             extend ""
-            "Sure, never mind." if "no bottomless" not in Girl.recent_history:
+            "Sure, never mind." if "no_bottomless" not in Girl.recent_history:
                     $ Girl.Mouth = "smile"
                     $ Girl.change_stat("love", 70, 2)
                     $ Girl.change_stat("obedience", 60, 2)
@@ -2083,7 +2083,7 @@ label Bottoms_Off_Refused(Girl=0):  #rkeljsv
                     elif Girl == JubesX:
                             ch_v "Cool."
 
-            "Sorry, I'll drop it." if "no bottomless" in Girl.recent_history:
+            "Sorry, I'll drop it." if "no_bottomless" in Girl.recent_history:
                     if Girl == EmmaX:
                             ch_e "Good."
                     elif Girl == LauraX:
@@ -2105,12 +2105,12 @@ label Bottoms_Off_Refused(Girl=0):  #rkeljsv
                             call Anyline(Girl,"Your loss.")
                     $ Girl.change_stat("lust", 50, 5)
                     $ Girl.change_stat("love", 70, -2, 1)
-                    if "no bottomless" not in Girl.recent_history:
+                    if "no_bottomless" not in Girl.recent_history:
                             $ Girl.change_stat("obedience", 60, 4)
                     $ Girl.recent_history.append("angry")
                     $ Girl.daily_history.append("angry")
 
-        $ Girl.recent_history.append("no bottomless")
-        $ Girl.daily_history.append("no bottomless")
+        $ Girl.recent_history.append("no_bottomless")
+        $ Girl.daily_history.append("no_bottomless")
         $ temp_modifier = 0
         return

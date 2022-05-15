@@ -1,6 +1,6 @@
 ﻿# Kitty_SexMenu //////////////////////////////////////////////////////////////////////
 label Kitty_SexAct(Act = 0):
-        call Shift_Focus(KittyX)
+        call shift_focus(KittyX)
         if AloneCheck(KittyX) and KittyX.Taboo == 20:
                 $ KittyX.Taboo = 0
                 $ Taboo = 0
@@ -29,11 +29,11 @@ label Kitty_SexAct(Act = 0):
             call Kitty_Fondle_Breasts
             if not action_context:
                 return
-        elif Act == "blow":
+        elif Act == "blowjob":
             call Kitty_BJ_Prep
             if not action_context:
                 return
-        elif Act == "hand":
+        elif Act == "handjob":
             call Kitty_HJ_Prep
             if not action_context:
                 return
@@ -46,7 +46,7 @@ label Kitty_SexAct(Act = 0):
 # counter 1 means she's seen you, counter 0 means she hasn't.
 label Kitty_Masturbate: #(action_context = action_context):
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(KittyX)
+    call shift_focus(KittyX)
     if KittyX.Mast:
         $ temp_modifier += 10
     if KittyX.SEXP >= 50:
@@ -84,7 +84,7 @@ label Kitty_Masturbate: #(action_context = action_context):
                                 ch_k "Um, you know, maybe start up top?"
                                 $ KittyX.change_stat("obedience", 70, 2)
                                 $ KittyX.change_stat("inhibition", 70, 1)
-                                $ offhand_action = "fondle breasts"
+                                $ offhand_action = "fondle_breasts"
                                 $ KittyX.Mast += 1
                                 jump Kitty_M_Cycle
                         "Would you like some help? I could. . . up to you, I guess." if Player.Semen and KittyX.Action:
@@ -96,9 +96,9 @@ label Kitty_Masturbate: #(action_context = action_context):
                                 $ KittyX.change_stat("inhibition", 70, 1)
                                 $ D20 = renpy.random.randint(1, 20)
                                 if D20 > 10:
-                                    $ offhand_action = "fondle breasts"
+                                    $ offhand_action = "fondle_breasts"
                                 else:
-                                    $ offhand_action = "suck breasts"
+                                    $ offhand_action = "suck_breasts"
                                 $ KittyX.Mast += 1
                                 jump Kitty_M_Cycle
                         "Why don't we take care of each other?" if Player.Semen and KittyX.Action:
@@ -151,7 +151,7 @@ label Kitty_Masturbate: #(action_context = action_context):
                         else:
                             ch_k "So. . . I'm getting out of here? Maybe knock sometime?"
                             hide Kitty_Sprite with easeoutbottom
-                            call Remove_Girl(KittyX)
+                            call remove_girl(KittyX)
                 return                      #returns to sexmenu, which returns to original
     #End of "Join" option
 
@@ -355,8 +355,8 @@ label Kitty_Masturbate: #(action_context = action_context):
             $ KittyX.change_stat("obedience", 50, -2)
             $ KittyX.recent_history.append("angry")
             $ KittyX.daily_history.append("angry")
-            $ KittyX.recent_history.append("no masturbation")
-            $ KittyX.daily_history.append("no masturbation")
+            $ KittyX.recent_history.append("no_masturbation")
+            $ KittyX.daily_history.append("no_masturbation")
             return
     elif Taboo:                             # she refuses and this is too public a place for her
             $ KittyX.change_face("angry", 1)
@@ -371,8 +371,8 @@ label Kitty_Masturbate: #(action_context = action_context):
     else:
             $ KittyX.change_face("normal", 1)
             ch_k "Um, no."
-    $ KittyX.recent_history.append("no masturbation")
-    $ KittyX.daily_history.append("no masturbation")
+    $ KittyX.recent_history.append("no_masturbation")
+    $ KittyX.daily_history.append("no_masturbation")
     $ temp_modifier = 0
     return
 
@@ -405,14 +405,14 @@ label Kitty_M_Prep:
 
     $ primary_action = "masturbation"
     if not girl_offhand_action:
-        $ girl_offhand_action = "fondle pussy"
+        $ girl_offhand_action = "fondle_pussy"
     if action_context:
         $ renpy.pop_call()
         $ action_context = 0
     $ line = 0
     if Taboo:
         $ KittyX.DrainWord("tabno")
-    $ KittyX.DrainWord("no masturbation")
+    $ KittyX.DrainWord("no_masturbation")
     $ KittyX.recent_history.append("masturbation")
     $ KittyX.daily_history.append("masturbation")
 
@@ -423,7 +423,7 @@ label Kitty_M_Cycle:
 
     while Round > 0:
         call Kitty_Pos_Reset("masturbation")
-        call Shift_Focus(KittyX)
+        call shift_focus(KittyX)
         $ KittyX.lustFace()
         if "unseen" in KittyX.recent_history:
                 $ KittyX.Eyes = "closed"
@@ -436,12 +436,12 @@ label Kitty_M_Cycle:
                         "Keep Watching.":
                                 pass
 
-                        "[KittyX.name]. . .[[jump in]" if "unseen" not in KittyX.recent_history and "join" not in Player.recent_history and KittyX.Loc == bg_current:
+                        "[KittyX.name]. . .[[jump in]" if "unseen" not in KittyX.recent_history and "join" not in Player.recent_history and KittyX.location == bg_current:
                                 "[KittyX.name] slows what she's doing with a sly grin."
                                 ch_k "Like what you see?"
                                 $ action_context = "join"
                                 call Kitty_Masturbate
-                        "\"Ahem. . .\"" if "unseen" in KittyX.recent_history and KittyX.Loc == bg_current:
+                        "\"Ahem. . .\"" if "unseen" in KittyX.recent_history and KittyX.location == bg_current:
                                 jump Kitty_M_Interupted
 
                         "Start jack'in it." if offhand_action != "jackin":
@@ -449,7 +449,7 @@ label Kitty_M_Cycle:
                         "Stop jack'in it." if offhand_action == "jackin":
                                 $ offhand_action = 0
 
-                        "Slap her ass" if KittyX.Loc == bg_current:
+                        "Slap her ass" if KittyX.location == bg_current:
                                 if "unseen" in KittyX.recent_history:
                                         "You smack [KittyX.name] firmly on the ass!"
                                         jump Kitty_M_Interupted
@@ -470,7 +470,7 @@ label Kitty_M_Cycle:
 
                         "Change what I'm doing":
                                 menu:
-                                    "Offhand action" if KittyX.Loc == bg_current:
+                                    "Offhand action" if KittyX.location == bg_current:
                                             if KittyX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
@@ -478,9 +478,9 @@ label Kitty_M_Cycle:
                                             else:
                                                 ch_k "I'm actually getting a little tired, so maybe we could wrap this up?"
 
-                                    "Threesome actions (locked)" if not Partner or "unseen" in KittyX.recent_history or KittyX.Loc != bg_current:
+                                    "Threesome actions (locked)" if not Partner or "unseen" in KittyX.recent_history or KittyX.location != bg_current:
                                         pass
-                                    "Threesome actions" if Partner and "unseen" not in KittyX.recent_history and KittyX.Loc == bg_current:
+                                    "Threesome actions" if Partner and "unseen" not in KittyX.recent_history and KittyX.location == bg_current:
                                         menu:
                                             "Ask [Partner.name] to do something else":
                                                         call Three_Change(KittyX)
@@ -519,20 +519,20 @@ label Kitty_M_Cycle:
                                     "Never mind":
                                             jump Kitty_M_Cycle
 
-                        "Back to Sex Menu" if multi_action and KittyX.Loc == bg_current:
+                        "Back to Sex Menu" if multi_action and KittyX.location == bg_current:
                                     ch_p "Let's try something else."
                                     call Kitty_Pos_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Kitty_M_Interupted
-                        "End Scene" if not multi_action or KittyX.Loc != bg_current:
+                        "End Scene" if not multi_action or KittyX.location != bg_current:
                                     ch_p "Let's stop for now."
                                     call Kitty_Pos_Reset
                                     $ line = 0
                                     jump Kitty_M_Interupted
         #End menu (if line)
 
-        call Shift_Focus(KittyX)
+        call shift_focus(KittyX)
         call Sex_Dialog(KittyX,Partner)
 
         #If either of you could cum
@@ -559,13 +559,13 @@ label Kitty_M_Cycle:
                         else: #If she wasn't aware you were there
                             "You grunt and try to hold it in."
                             $ Player.Focus = 95
-                            if KittyX.Loc == bg_current:
+                            if KittyX.location == bg_current:
                                     jump Kitty_M_Interupted
 
                     #If Kitty can cum
                     if KittyX.lust >= 100:
                         call Girl_Cumming(KittyX)
-                        if KittyX.Loc == bg_current:
+                        if KittyX.location == bg_current:
                                 jump Kitty_M_Interupted
 
                     if line == "came":
@@ -596,7 +596,7 @@ label Kitty_M_Cycle:
                 elif Round == 5:
                     "She's definitely going to stop soon."
         else:
-                if KittyX.Loc == bg_current:
+                if KittyX.location == bg_current:
                         call Escalation(KittyX) #sees if she wants to escalate things
 
                 if Round == 10:
@@ -698,7 +698,7 @@ label Kitty_M_Interupted:
 
     call Partner_Like(KittyX,3)
 
-    if KittyX.Loc != bg_current:
+    if KittyX.location != bg_current:
         return
 
     if Round <= 10:
@@ -740,7 +740,7 @@ label Kitty_M_Interupted:
 
 label Kitty_Sex_P:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(KittyX)
+    call shift_focus(KittyX)
     if KittyX.Sex >= 7: # She loves it
         $ temp_modifier += 15
     elif KittyX.Sex >= 3: #You've done it before several times
@@ -774,9 +774,9 @@ label Kitty_Sex_P:
     if Taboo and "tabno" in KittyX.daily_history:
         $ temp_modifier -= 10
 
-    if "no sex" in KittyX.daily_history:
+    if "no_sex" in KittyX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no sex" in KittyX.recent_history else 0
+        $ temp_modifier -= 10 if "no_sex" in KittyX.recent_history else 0
 
 
     $ Approval = ApprovalCheck(KittyX, 1400, TabM = 5) # 135, 150, 165, Taboo -200(335)
@@ -854,7 +854,7 @@ label Kitty_Sex_P:
     #End Auto
 
 
-    if not KittyX.Sex and "no sex" not in KittyX.recent_history:
+    if not KittyX.Sex and "no_sex" not in KittyX.recent_history:
             #first time
             $ KittyX.change_face("surprised", 1)
             $ KittyX.Mouth = "kiss"
@@ -928,7 +928,7 @@ label Kitty_Sex_P:
                 $ KittyX.change_stat("obedience", 90, 1)
                 $ KittyX.change_stat("inhibition", 60, 1)
                 ch_k "Ok, fiiiiine."
-            elif "no sex" in KittyX.daily_history:
+            elif "no_sex" in KittyX.daily_history:
                 ch_k "You've made your case. . ."
             else:
                 $ KittyX.change_face("sexy", 1)
@@ -949,11 +949,11 @@ label Kitty_Sex_P:
     else:
             #She's not into it, but maybe. . .
             $ KittyX.change_face("angry")
-            if "no sex" in KittyX.recent_history:
+            if "no_sex" in KittyX.recent_history:
                 ch_k "I{i}just{/i}[KittyX.like]told you \"no!\""
-            elif Taboo and "tabno" in KittyX.daily_history and "no sex" in KittyX.daily_history:
+            elif Taboo and "tabno" in KittyX.daily_history and "no_sex" in KittyX.daily_history:
                 ch_k "I already told you. . .not in public!"
-            elif "no sex" in KittyX.daily_history:
+            elif "no_sex" in KittyX.daily_history:
                 ch_k "I already[KittyX.like]told you \"no.\""
             elif Taboo and "tabno" in KittyX.daily_history:
                 ch_k "I already told you this is too public!"
@@ -965,11 +965,11 @@ label Kitty_Sex_P:
                 ch_k "Maybe[KittyX.like]not right now? . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no sex" in KittyX.daily_history:
+                "Sorry, never mind." if "no_sex" in KittyX.daily_history:
                         $ KittyX.change_face("bemused")
                         ch_k "It's cool."
                         return
-                "Maybe later?" if "no sex" not in KittyX.daily_history:
+                "Maybe later?" if "no_sex" not in KittyX.daily_history:
                         $ KittyX.change_face("sexy")
                         ch_k "Maybe, you never know."
                         $ KittyX.change_stat("love", 80, 2)
@@ -977,8 +977,8 @@ label Kitty_Sex_P:
                         if Taboo:
                             $ KittyX.recent_history.append("tabno")
                             $ KittyX.daily_history.append("tabno")
-                        $ KittyX.recent_history.append("no sex")
-                        $ KittyX.daily_history.append("no sex")
+                        $ KittyX.recent_history.append("no_sex")
+                        $ KittyX.daily_history.append("no_sex")
                         return
                 "I think you'd enjoy it as much as I would. . .":
                         if Approval:
@@ -1014,7 +1014,7 @@ label Kitty_Sex_P:
 
     #She refused all offers.
     $ KittyX.ArmPose = 1
-    if "no sex" in KittyX.daily_history:
+    if "no_sex" in KittyX.daily_history:
         ch_k "Maybe[KittyX.like]take \"no\" for an answer?"
         $ KittyX.recent_history.append("angry")
         $ KittyX.daily_history.append("angry")
@@ -1040,14 +1040,14 @@ label Kitty_Sex_P:
     else:
         $ KittyX.change_face("normal", 1)
         ch_k "Nuhuh."
-    $ KittyX.recent_history.append("no sex")
-    $ KittyX.daily_history.append("no sex")
+    $ KittyX.recent_history.append("no_sex")
+    $ KittyX.daily_history.append("no_sex")
     $ temp_modifier = 0
     return
 
 label Kitty_Sex_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(KittyX)
+        call shift_focus(KittyX)
         call Kitty_Sex_Launch("sex")
         $ KittyX.lustFace()
         $ Player.Cock = "in"
@@ -1185,7 +1185,7 @@ label Kitty_Sex_Cycle: #Repeating strokes
                                     jump Kitty_SexAfter
         #End menu (if line)
 
-        call Shift_Focus(KittyX)
+        call shift_focus(KittyX)
         call Sex_Dialog(KittyX,Partner)
 
         $ counter += 1
@@ -1308,7 +1308,7 @@ label Kitty_Sex_Cycle: #Repeating strokes
 
 label Kitty_Sex_A:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(KittyX)
+    call shift_focus(KittyX)
     if KittyX.Anal >= 7: # She loves it
         $ temp_modifier += 20
     elif KittyX.Anal >= 3: #You've done it before several times
@@ -1347,9 +1347,9 @@ label Kitty_Sex_A:
 
     if Taboo and "tabno" in KittyX.daily_history:
         $ temp_modifier -= 10
-    if "no anal" in KittyX.daily_history:
+    if "no_anal" in KittyX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no anal" in KittyX.recent_history else 0
+        $ temp_modifier -= 10 if "no_anal" in KittyX.recent_history else 0
 
     $ Approval = ApprovalCheck(KittyX, 1550, TabM = 5) # 155, 170, 185, Taboo -200(355)
 
@@ -1429,7 +1429,7 @@ label Kitty_Sex_A:
             #end "auto"
 
 
-    if not KittyX.Anal and "no anal" not in KittyX.recent_history:
+    if not KittyX.Anal and "no_anal" not in KittyX.recent_history:
             #first time
             $ KittyX.change_face("surprised", 1)
             $ KittyX.Mouth = "kiss"
@@ -1439,7 +1439,7 @@ label Kitty_Sex_A:
                 $ KittyX.change_face("sad")
                 ch_k "Anal? Really?"
 
-    if not KittyX.Loose and ("dildo anal" in KittyX.daily_history or "anal" in KittyX.daily_history):
+    if not KittyX.Loose and ("dildo_anal" in KittyX.daily_history or "anal" in KittyX.daily_history):
             #if she's done anal stuff today
             $ KittyX.change_face("bemused", 1)
             ch_k "I'm not really over the last time, but. . ."
@@ -1511,7 +1511,7 @@ label Kitty_Sex_A:
                 $ KittyX.change_stat("obedience", 90, 1)
                 $ KittyX.change_stat("inhibition", 60, 1)
                 ch_k "Ok, fine."
-            elif "no anal" in KittyX.daily_history:
+            elif "no_anal" in KittyX.daily_history:
                 ch_k "Well, ok, I've given it some thought, fine. . ."
             else:
                 $ KittyX.change_face("sexy", 1)
@@ -1532,11 +1532,11 @@ label Kitty_Sex_A:
     else:
             #She's not into it, but maybe. . .
             $ KittyX.change_face("angry")
-            if "no anal" in KittyX.recent_history:
+            if "no_anal" in KittyX.recent_history:
                 ch_k "I{i}just{/i}[KittyX.like]told you \"no!\""
-            elif Taboo and "tabno" in KittyX.daily_history and "no anal" in KittyX.daily_history:
+            elif Taboo and "tabno" in KittyX.daily_history and "no_anal" in KittyX.daily_history:
                 ch_k "I already told you. . .not in public!"
-            elif "no anal" in KittyX.daily_history:
+            elif "no_anal" in KittyX.daily_history:
                 ch_k "I already[KittyX.like]told you \"no.\""
             elif Taboo and "tabno" in KittyX.daily_history:
                 ch_k "I already told you this is too public!"
@@ -1551,11 +1551,11 @@ label Kitty_Sex_A:
                 ch_k "Maybe[KittyX.like]not right now? . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no anal" in KittyX.daily_history:
+                "Sorry, never mind." if "no_anal" in KittyX.daily_history:
                     $ KittyX.change_face("bemused")
                     ch_k "It's cool."
                     return
-                "Maybe later?" if "no anal" not in KittyX.daily_history:
+                "Maybe later?" if "no_anal" not in KittyX.daily_history:
                     $ KittyX.change_face("sexy")
                     ch_k "Maybe, you never know."
                     $ KittyX.change_stat("love", 80, 2)
@@ -1563,8 +1563,8 @@ label Kitty_Sex_A:
                     if Taboo:
                         $ KittyX.recent_history.append("tabno")
                         $ KittyX.daily_history.append("tabno")
-                    $ KittyX.recent_history.append("no anal")
-                    $ KittyX.daily_history.append("no anal")
+                    $ KittyX.recent_history.append("no_anal")
+                    $ KittyX.daily_history.append("no_anal")
                     return
                 "I bet it would feel really good. . .":
                     if Approval:
@@ -1601,7 +1601,7 @@ label Kitty_Sex_A:
 
     #She refused all offers.
     $ KittyX.ArmPose = 1
-    if "no anal" in KittyX.daily_history:
+    if "no_anal" in KittyX.daily_history:
         ch_k "Maybe[KittyX.like]take \"no\" for an answer?"
         $ KittyX.recent_history.append("angry")
         $ KittyX.daily_history.append("angry")
@@ -1631,14 +1631,14 @@ label Kitty_Sex_A:
     else:
         $ KittyX.change_face("normal", 1)
         ch_k "Noooope."
-    $ KittyX.recent_history.append("no anal")
-    $ KittyX.daily_history.append("no anal")
+    $ KittyX.recent_history.append("no_anal")
+    $ KittyX.daily_history.append("no_anal")
     $ temp_modifier = 0
     return
 
 label Kitty_Anal_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(KittyX)
+        call shift_focus(KittyX)
         call Kitty_Sex_Launch("anal")
         $ KittyX.lustFace()
         $ Player.Cock = "anal"
@@ -1773,7 +1773,7 @@ label Kitty_Anal_Cycle: #Repeating strokes
                                     jump Kitty_AnalAfter
         #End menu (if line)
 
-        call Shift_Focus(KittyX)
+        call shift_focus(KittyX)
         call Sex_Dialog(KittyX,Partner)
 
         $ counter += 1
@@ -1911,7 +1911,7 @@ label Kitty_Anal_Cycle: #Repeating strokes
 
 label Kitty_Sex_H:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(KittyX)
+    call shift_focus(KittyX)
     if KittyX.Hotdog >= 3: #You've done it before several times
         $ temp_modifier += 10
     elif KittyX.Hotdog: #You've done it before
@@ -1935,9 +1935,9 @@ label Kitty_Sex_H:
     if Taboo and "tabno" in KittyX.daily_history:
         $ temp_modifier -= 10
 
-    if "no hotdog" in KittyX.daily_history:
+    if "no_hotdog" in KittyX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no hotdog" in KittyX.recent_history else 0
+        $ temp_modifier -= 10 if "no_hotdog" in KittyX.recent_history else 0
 
     $ Approval = ApprovalCheck(KittyX, 1000, TabM = 3) # 100, 115, 130, Taboo -120(220)
 
@@ -1996,7 +1996,7 @@ label Kitty_Sex_H:
             #end auto
 
 
-    if not KittyX.Hotdog and "no hotdog" not in KittyX.recent_history:
+    if not KittyX.Hotdog and "no_hotdog" not in KittyX.recent_history:
             #first time
             $ KittyX.change_face("surprised", 1)
             $ KittyX.Mouth = "kiss"
@@ -2066,7 +2066,7 @@ label Kitty_Sex_H:
                 $ KittyX.change_stat("obedience", 80, 1)
                 $ KittyX.change_stat("inhibition", 60, 1)
                 ch_k "Ok, fine."
-            elif "no hotdog" in KittyX.daily_history:
+            elif "no_hotdog" in KittyX.daily_history:
                 ch_k "Well, I guess it's not so bad. . ."
             else:
                 $ KittyX.change_face("sexy", 1)
@@ -2087,11 +2087,11 @@ label Kitty_Sex_H:
     else:
             #She's not into it, but maybe. . .
             $ KittyX.change_face("angry")
-            if "no hotdog" in KittyX.recent_history:
+            if "no_hotdog" in KittyX.recent_history:
                 ch_k "I{i}just{/i}[KittyX.like]told you \"no!\""
-            elif Taboo and "tabno" in KittyX.daily_history and "no hotdog" in KittyX.daily_history:
+            elif Taboo and "tabno" in KittyX.daily_history and "no_hotdog" in KittyX.daily_history:
                 ch_k "I{i}just{/i}[KittyX.like]told, not in public!"
-            elif "no hotdog" in KittyX.daily_history:
+            elif "no_hotdog" in KittyX.daily_history:
                 ch_k "I{i}just{/i}[KittyX.like]told you \"no\" earlier!"
             elif Taboo and "tabno" in KittyX.daily_history:
                 ch_k "I{i}just{/i}[KittyX.like]told you, not in public!"
@@ -2103,11 +2103,11 @@ label Kitty_Sex_H:
                 ch_k "Not. . . now. . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no hotdog" in KittyX.daily_history:
+                "Sorry, never mind." if "no_hotdog" in KittyX.daily_history:
                     $ KittyX.change_face("bemused")
                     ch_k "No problem."
                     return
-                "Maybe later?" if "no hotdog" not in KittyX.daily_history:
+                "Maybe later?" if "no_hotdog" not in KittyX.daily_history:
                     $ KittyX.change_face("sexy")
                     ch_k "Yeah, maybe, [KittyX.Petname]."
                     $ KittyX.change_stat("love", 80, 1)
@@ -2115,8 +2115,8 @@ label Kitty_Sex_H:
                     if Taboo:
                         $ KittyX.recent_history.append("tabno")
                         $ KittyX.daily_history.append("tabno")
-                    $ KittyX.recent_history.append("no hotdog")
-                    $ KittyX.daily_history.append("no hotdog")
+                    $ KittyX.recent_history.append("no_hotdog")
+                    $ KittyX.daily_history.append("no_hotdog")
                     return
                 "You might like it. . .":
                     if Approval:
@@ -2151,7 +2151,7 @@ label Kitty_Sex_H:
     #She refused all offers.
     $ KittyX.ArmPose = 1
 
-    if "no hotdog" in KittyX.daily_history:
+    if "no_hotdog" in KittyX.daily_history:
         ch_k "I'm just not into that."
         $ KittyX.recent_history.append("angry")
         $ KittyX.daily_history.append("angry")
@@ -2177,14 +2177,14 @@ label Kitty_Sex_H:
     else:
         $ KittyX.change_face("normal", 1)
         ch_k "Noooop."
-    $ KittyX.recent_history.append("no hotdog")
-    $ KittyX.daily_history.append("no hotdog")
+    $ KittyX.recent_history.append("no_hotdog")
+    $ KittyX.daily_history.append("no_hotdog")
     $ temp_modifier = 0
     return
 
 label Kitty_Hotdog_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(KittyX)
+        call shift_focus(KittyX)
         call Kitty_Sex_Launch("hotdog")
         $ KittyX.lustFace()
         $ Player.Cock = "out"
@@ -2323,7 +2323,7 @@ label Kitty_Hotdog_Cycle: #Repeating strokes
                                     jump Kitty_HotdogAfter
         #End menu (if line)
 
-        call Shift_Focus(KittyX)
+        call shift_focus(KittyX)
         call Sex_Dialog(KittyX,Partner)
 
         $ counter += 1

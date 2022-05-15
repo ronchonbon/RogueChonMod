@@ -1,7 +1,7 @@
 label Shower_Room_Entry:
     call Jubes_Entry_Check
     $ bg_current = "bg_showerroom"
-    $ Player.DrainWord("locked",0,0,1)
+    $ door_locked = False
     $ Nearby = []
     $ Present = []
     call Taboo_Level
@@ -19,7 +19,7 @@ label Shower_Room_Entry:
     $ line = active_Girls[:]   #make sure this is initialized
     while line:
             #loops through and adds populates Occupants with locals
-            if line[0] not in Party and "showered" not in line[0].daily_history and (line[0].Loc == line[0].Home or line[0].Loc == "bg_dangerroom"):
+            if line[0] not in Party and "showered" not in line[0].daily_history and (line[0].location == line[0].Home or line[0].location == "bg_dangerroom"):
                     #Checks if girl is in the shower
                     $ Options.append(line[0])
             $ line.remove(line[0])
@@ -37,7 +37,7 @@ label Shower_Room_Entry:
                 while Options and (D20 < 5 or len(Options) + len(Party) > 2):
                         #Loops through while Options and Party are more than 2
                         $ Nearby.append(Options[0])     #adds this girl to the nearby roster
-                        $ Options[0].Loc = "nearby"     #adds this girl to the nearby roster
+                        $ Options[0].location = "nearby"     #adds this girl to the nearby roster
                         $ Options.remove(Options[0])    #subs this girl from Options
 
     if not Party and Options and Options[0] in all_Girls:
@@ -54,7 +54,7 @@ label Shower_Room_Entry:
     $ line = Options[:]
     while line:
             #loops through and adds populates nearby with locals
-            $ line[0].Loc = bg_current
+            $ line[0].location = bg_current
             $ line.remove(line[0])
     $ line = 0
 
@@ -63,7 +63,7 @@ label Shower_Room_Entry:
     $ line = Options[:]
     while line:
             #loops through and puts towels on them, maybe the "showered" trait
-            if line[0].Loc == bg_current and line[0] not in Party:
+            if line[0].location == bg_current and line[0] not in Party:
                     if D20 >= 10:
                             $ line[0].AddWord(1,"showered","showered",0,0)
                     $ line[0].OutfitChange("towel")
@@ -181,9 +181,9 @@ label Shower_Room_Entry:
                                     ch_v "Yeah, hey."
 
                     if not ApprovalCheck(Options[1], 900):
-                            call Remove_Girl(Options[1])
+                            call remove_girl(Options[1])
             if not ApprovalCheck(Options[0], 900):
-                            call Remove_Girl(Options[0])
+                            call remove_girl(Options[0])
             # End welcomes
             if Options:
                     if RogueX in Party:
@@ -247,7 +247,7 @@ label Shower_Room:
                         $ line = active_Girls[:]   #make sure this is initialized
                         while line:
                                 #loops through and adds populates Occupants with locals
-                                if line[0].Loc != bg_current and "showered" not in line[0].daily_history and (line[0].Loc == line[0].Home or line[0].Loc == "bg_dangerroom"):
+                                if line[0].location != bg_current and "showered" not in line[0].daily_history and (line[0].location == line[0].Home or line[0].location == "bg_dangerroom"):
                                         #Checks if girl is in the shower
                                         $ Nearby.append(line[0])
                                 $ line.remove(line[0])
@@ -258,8 +258,8 @@ label Shower_Room:
                                             # culls out list to 2 if there is a party
                                             $ Nearby.remove(Nearby[0])
                                 if len(Nearby) > 1:
-                                        $ Nearby[1].Loc = "nearby"
-                                $ Nearby[0].Loc = "nearby"
+                                        $ Nearby[1].location = "nearby"
+                                $ Nearby[0].location = "nearby"
         "Wait.  [[no time](locked)" if time_index >= 3: # night time
                 pass
 
@@ -311,10 +311,10 @@ label No_Towels:
     $ Girls = all_Girls[:]
     while Girls:
             #loops through and adds populates Occupants with locals
-            if Girls[0].Loc == "bg_showerroom":
+            if Girls[0].location == "bg_showerroom":
                     $ Girls[0].AddWord(1,"showered","showered")
             if "met" in Girls[0].History and Girls[0] not in Party:
-                    $ Girls[0].Loc = Girls[0].Schedule[Weekday][time_index]
+                    $ Girls[0].location = Girls[0].Schedule[Weekday][time_index]
             $ Girls[0].OutfitChange(Girls[0].OutfitDay)
             $ Girls.remove(Girls[0])
     return
@@ -326,8 +326,8 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
     while Girls:
             #loops through and adds populates Occupants with locals
             if Girls[0] not in active_Girls:
-                    $ Girls[0].Loc = "hold"
-            if Girls[0].Loc == "bg_showerroom" and Girls[0] not in Occupants:
+                    $ Girls[0].location = "hold"
+            if Girls[0].location == "bg_showerroom" and Girls[0] not in Occupants:
                     $ Occupants.append(Girls[0])
             $ Girls.remove(Girls[0])
     if Occupants:
@@ -560,19 +560,19 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                     menu:
                         extend ""
                         "Ok, see you later then.":
-                                if RogueX.Loc == bg_current and RogueX not in StayCount:
+                                if RogueX.location == bg_current and RogueX not in StayCount:
                                     ch_r "Yeah, later."
-                                if KittyX.Loc == bg_current and KittyX not in StayCount:
+                                if KittyX.location == bg_current and KittyX not in StayCount:
                                     ch_k "Bye!"
-                                if EmmaX.Loc == bg_current and EmmaX not in StayCount:
+                                if EmmaX.location == bg_current and EmmaX not in StayCount:
                                     ch_e "Yes, later."
-                                if LauraX.Loc == bg_current and LauraX not in StayCount:
+                                if LauraX.location == bg_current and LauraX not in StayCount:
                                     ch_l "Yup."
-                                if JeanX.Loc == bg_current and JeanX not in StayCount:
+                                if JeanX.location == bg_current and JeanX not in StayCount:
                                     ch_j "Ok."
-                                if StormX.Loc == bg_current and StormX not in StayCount:
+                                if StormX.location == bg_current and StormX not in StayCount:
                                     ch_s "Yes, I'll see you."
-                                if JubesX.Loc == bg_current and JubesX not in StayCount:
+                                if JubesX.location == bg_current and JubesX not in StayCount:
                                     ch_v "Laters!"
 
                         "Sure you got every spot?" if Showered:
@@ -589,7 +589,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                         $ Girls = Occupants[:]
                         while Girls:
                                 #loops through and adds populates Occupants with locals
-                                if Girls[0].Loc == bg_current and Girls[0] not in StayCount:
+                                if Girls[0].location == bg_current and Girls[0] not in StayCount:
                                         if Girls[0] == EmmaX and (not "classcaught" in EmmaX.History or (StayCount and "three" not in EmmaX.History)):
                                             #if it's Emma, and she isn't comfortable with threesomes or public stuff, skip her
                                             pass
@@ -632,48 +632,48 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                         elif StayCount[0] == JubesX:
                                             #Jubes agreed
                                             ch_v "I mean, you can never be -too- clean. . ."
-                                if RogueX.Loc == bg_current and RogueX not in StayCount: #RogueCount == 1:
+                                if RogueX.location == bg_current and RogueX not in StayCount: #RogueCount == 1:
                                     #Rogue refused
                                     if StayCount:
                                             ch_r "Well, [RogueX.Petname], I think I'm fine."
                                     else:
                                             ch_r "No, [RogueX.Petname], I think I'm covered."
-                                if KittyX.Loc == bg_current and KittyX not in StayCount: # KittyCount == 1:
+                                if KittyX.location == bg_current and KittyX not in StayCount: # KittyCount == 1:
                                     #Kitty refused
                                     if StayCount:
                                             ch_k "Oh, well I think I[KittyX.like]got it?"
                                             ch_k "See you later, [KittyX.Petname]."
                                     else:
                                             ch_k "Ha, I'm squeaky clean, [KittyX.Petname], see you later."
-                                if EmmaX.Loc == bg_current and EmmaX not in StayCount:
+                                if EmmaX.location == bg_current and EmmaX not in StayCount:
                                     #Emma refused
                                     if StayCount:
                                             ch_e "Well it appears you'll be taken care of."
                                             ch_e "I'll be going, [EmmaX.Petname]."
                                     else:
                                             ch_e "I'm afraid not, [EmmaX.Petname], I'll be going."
-                                if LauraX.Loc == bg_current and LauraX not in StayCount:
+                                if LauraX.location == bg_current and LauraX not in StayCount:
                                     #Laura refused
                                     if StayCount:
                                             ch_l "Looks like you got this handled."
                                             ch_l "I'm out, [LauraX.Petname]."
                                     else:
                                             ch_l "I'm out."
-                                if JeanX.Loc == bg_current and JeanX not in StayCount:
+                                if JeanX.location == bg_current and JeanX not in StayCount:
                                     #Jean refused
                                     if StayCount:
                                             ch_j "Well, looks like you guys are going to have fun."
                                             ch_j "I'll head out, [JeanX.Petname]."
                                     else:
                                             ch_j "I'll head out."
-                                if StormX.Loc == bg_current and StormX not in StayCount:
+                                if StormX.location == bg_current and StormX not in StayCount:
                                     #Storm refused
                                     if StayCount:
                                             ch_s "It looks like you'll be occupied."
                                             ch_s "I'll be going, [StormX.Petname]."
                                     else:
                                             ch_s "I really doubt that I could have, [StormX.Petname], I'll be going."
-                                if JubesX.Loc == bg_current and JubesX not in StayCount: # JubesCount == 1:
+                                if JubesX.location == bg_current and JubesX not in StayCount: # JubesCount == 1:
                                     #Jubes refused
                                     if StayCount:
                                             ch_v "Nah, I think you'll be fine."
@@ -704,48 +704,48 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                             #Jubes agreed
                                             ch_v ". . . Yeah, ok."
 
-                                if RogueX.Loc == bg_current and RogueX not in StayCount: #RogueCount == 1:
+                                if RogueX.location == bg_current and RogueX not in StayCount: #RogueCount == 1:
                                     #Rogue refused
                                     if StayCount:
                                             ch_r "Oh, well, I'm gonna pass on that, [RogueX.Petname]."
                                     else:
                                             ch_r "Yeah, I'm gonna pass on that, [RogueX.Petname]."
-                                if KittyX.Loc == bg_current and KittyX not in StayCount: # KittyCount == 1:
+                                if KittyX.location == bg_current and KittyX not in StayCount: # KittyCount == 1:
                                     #Kitty refused
                                     if StayCount:
                                             ch_k "Well, [KittyX.like]I don't need to see that."
                                             ch_k "See you later, [KittyX.Petname]."
                                     else:
                                             ch_k "[KittyX.Like]I don't need to see that."
-                                if EmmaX.Loc == bg_current and EmmaX not in StayCount:
+                                if EmmaX.location == bg_current and EmmaX not in StayCount:
                                     #Emma refused
                                     if StayCount:
                                             ch_e "You appear to have enough of an audience."
                                             ch_e "I'll be going, [EmmaX.Petname]."
                                     else:
                                             ch_e "I think I'll be fine, [EmmaX.Petname], I'll be going."
-                                if LauraX.Loc == bg_current and LauraX not in StayCount:
+                                if LauraX.location == bg_current and LauraX not in StayCount:
                                     #Laura refused
                                     if StayCount:
                                             ch_l "She's got you covered."
                                             ch_l "I'm out, [LauraX.Petname]."
                                     else:
                                             ch_l "I'm out."
-                                if JeanX.Loc == bg_current and JeanX not in StayCount:
+                                if JeanX.location == bg_current and JeanX not in StayCount:
                                     #Jean refused
                                     if StayCount:
                                             ch_j "Well, looks like you guys are going to have fun."
                                             ch_j "I'll head out, [JeanX.Petname]."
                                     else:
                                             ch_j "I'll head out."
-                                if StormX.Loc == bg_current and StormX not in StayCount:
+                                if StormX.location == bg_current and StormX not in StayCount:
                                     #Storm refused
                                     if StayCount:
                                             ch_s "Oh, I think someone else wants the show."
                                             ch_s "I'll be going, [StormX.Petname]."
                                     else:
                                             ch_s "I don't see why I would, [StormX.Petname]. I'll be going."
-                                if JubesX.Loc == bg_current and JubesX not in StayCount: # JubesCount == 1:
+                                if JubesX.location == bg_current and JubesX not in StayCount: # JubesCount == 1:
                                     #Jubes refused
                                     if StayCount:
                                             ch_v "Um, no thanks. . ."
@@ -780,21 +780,21 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                             #Jubes agreed
                                             ch_v "Well. . . I guess we should make up for that. . ."
 
-                                if RogueX.Loc == bg_current and RogueX not in StayCount: #RogueCount == 1:
+                                if RogueX.location == bg_current and RogueX not in StayCount: #RogueCount == 1:
                                     #Rogue refused
                                     if StayCount:
                                             ch_r "Really? Well not me."
                                             ch_r "Have fun, [RogueX.Petname]."
                                     else:
                                             ch_r "Keep dreaming, [RogueX.Petname]."
-                                if KittyX.Loc == bg_current and KittyX not in StayCount: # KittyCount == 1:
+                                if KittyX.location == bg_current and KittyX not in StayCount: # KittyCount == 1:
                                     #Kitty refused
                                     if StayCount:
                                             ch_k "Seriously?! Well I'm not into that."
                                             ch_k "Later, [KittyX.Petname]."
                                     else:
                                             ch_k "[KittyX.Like]no way!"
-                                if EmmaX.Loc == bg_current and EmmaX not in StayCount:
+                                if EmmaX.location == bg_current and EmmaX not in StayCount:
                                     #Emma refused
                                     if StayCount:
                                             ch_e "I wouldn't want to intrude."
@@ -802,21 +802,21 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                     else:
                                             ch_e "Hmm, I doubt you could handle it."
                                             ch_e "I'll be going."
-                                if LauraX.Loc == bg_current and LauraX not in StayCount:
+                                if LauraX.location == bg_current and LauraX not in StayCount:
                                     #Laura refused
                                     if StayCount:
                                             ch_l "She's got you covered."
                                             ch_l "I'm out, [LauraX.Petname]."
                                     else:
                                             ch_l "I'm out."
-                                if JeanX.Loc == bg_current and JeanX not in StayCount:
+                                if JeanX.location == bg_current and JeanX not in StayCount:
                                     #Jean refused
                                     if StayCount:
                                             ch_j "Well, looks like you guys are going to have fun."
                                             ch_j "I'll head out, [JeanX.Petname]."
                                     else:
                                             ch_j "I'll head out."
-                                if StormX.Loc == bg_current and StormX not in StayCount:
+                                if StormX.location == bg_current and StormX not in StayCount:
                                     #Storm refused
                                     if StayCount:
                                             ch_s "Well, you two enjoy yourselves."
@@ -824,7 +824,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                     else:
                                             ch_s "I'm flattered, but no."
                                             ch_s "I'll be going."
-                                if JubesX.Loc == bg_current and JubesX not in StayCount: # JubesCount == 1:
+                                if JubesX.location == bg_current and JubesX not in StayCount: # JubesCount == 1:
                                     #Jubes refused
                                     if StayCount:
                                             ch_v "Ok, looks like you two can have fun with that."
@@ -862,7 +862,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
             $ Girls = Occupants[:]
             while Girls:
                     #loops through and adds populates Occupants with locals
-                    if Girls[0].Loc == bg_current:
+                    if Girls[0].location == bg_current:
                             if Girls[0] in StayCount:
                                     #If the girl Stays
                                     $ Girls[0].OutfitChange("nude")
@@ -874,7 +874,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                     call first_topless(Girls[0], silent = 1)
                             else:
                                     #If the girl leaves
-                                    call Remove_Girl(Girls[0])
+                                    call remove_girl(Girls[0])
                             while Girls[0] in Nearby:
                                     $ Nearby.remove(Girls[0])
                     $ Girls.remove(Girls[0])
@@ -898,10 +898,10 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
 
             if len(Nearby) >= 2:
                 "As you finish getting undressed, [Nearby[0].name] and [Nearby[1].name] enter the room."
-                $ Nearby[1].Loc = bg_current
+                $ Nearby[1].location = bg_current
             else:
                 "As you finish getting undressed, [Nearby[0].name] enters the room."
-            $ Nearby[0].Loc = bg_current
+            $ Nearby[0].location = bg_current
 
             $ Girls = Nearby[:]
 
@@ -937,7 +937,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                     if "classcaught" not in EmmaX.History or ((StayCount or len(Nearby) >= 2) and "three" not in EmmaX.History):
                             #if Emma just showed up, but there are other girls around and she's not ok with that
                             "[EmmaX.name] decides to leave immediately."
-                            call Remove_Girl(EmmaX)
+                            call remove_girl(EmmaX)
                             $ Girls.remove(EmmaX)
                             $ EmmaX.OutfitChange()
             if LauraX in Girls:
@@ -986,7 +986,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                             else:
                                     "Seeing [Girls[0].name] arrive, [EmmaX.name] quickly excuses herself."
                             $ StayCount.remove(EmmaX)
-                            call Remove_Girl(EmmaX)
+                            call remove_girl(EmmaX)
                             $ EmmaX.OutfitChange()
 
             if Girls:
@@ -999,20 +999,20 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                 if len(Girls) >=2:
                         if Girls[0] not in StayCount and Girls[1] not in StayCount:
                                 "They both turn right back around."
-                                call Remove_Girl(Girls[0])
-                                call Remove_Girl(Girls[1])
+                                call remove_girl(Girls[0])
+                                call remove_girl(Girls[1])
                                 $ Girls = []
                         elif Girls[0] not in StayCount:
                                 "[Girls[0].name] turns right back around, but [Girls[1].name] stays."
-                                call Remove_Girl(Girls[0])
+                                call remove_girl(Girls[0])
                                 $ Girls.remove(Girls[0])
                         elif Girls[1] not in StayCount:
                                 "[Girls[1].name] turns right back around, but [Girls[0].name] stays."
-                                call Remove_Girl(Girls[1])
+                                call remove_girl(Girls[1])
                                 $ Girls.remove(Girls[1])
                 elif Girls[0] not in StayCount:
                                 "She turns right back around."
-                                call Remove_Girl(Girls[0])
+                                call remove_girl(Girls[0])
                                 $ Girls.remove(Girls[0])
 
                 while Girls:
@@ -1052,10 +1052,10 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                         $ StayCount.remove(StayCount[0])
                 if len(StayCount) > 1:
                         #If both stay
-                        call Shift_Focus(StayCount[0], StayCount[1])
+                        call shift_focus(StayCount[0], StayCount[1])
                         "You take a quick shower with [StayCount[0].name] and [StayCount[1].name]."
                 else:
-                        call Shift_Focus(StayCount[0])
+                        call shift_focus(StayCount[0])
                         "You take a quick shower with [StayCount[0].name]."
 
                 call Shower_Sex
@@ -1119,17 +1119,17 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
             $ Player.daily_history.remove("scent")
 
     call Get_Dressed
-    if RogueX.Loc == bg_current:
+    if RogueX.location == bg_current:
             $ RogueX.OutfitChange("towel")
-    if KittyX.Loc == bg_current:
+    if KittyX.location == bg_current:
             $ KittyX.OutfitChange("towel")
-    if EmmaX.Loc == bg_current:
+    if EmmaX.location == bg_current:
             $ EmmaX.OutfitChange("towel")
-    if LauraX.Loc == bg_current:
+    if LauraX.location == bg_current:
             $ LauraX.OutfitChange("towel")
-    if JeanX.Loc == bg_current:
+    if JeanX.location == bg_current:
             $ JeanX.OutfitChange("towel")
-    if JubesX.Loc == bg_current:
+    if JubesX.location == bg_current:
             $ JubesX.OutfitChange("towel")
 
     $ Options = []
@@ -1140,7 +1140,7 @@ label Shower_Sex(Options=0,line=0):
         #called from showering if sex is on the table.
         if len(StayCount) > 1 and (ApprovalCheck(StayCount[1], 1800,Check=1) > ApprovalCheck(StayCount[0], 1800,Check=1)):
                 $ renpy.random.shuffle(StayCount) #swaps girls if second girl likes you more
-        call Shift_Focus(StayCount[0])
+        call shift_focus(StayCount[0])
 
         $ D20 = renpy.random.randint(1,20)
         $ D20 += 5 if ApprovalCheck(StayCount[0], 1800) else 0 #bonus if girl really likes you
@@ -1531,5 +1531,5 @@ label Shower_Sex(Options=0,line=0):
                     "After a minute or so of this, she draws back and finshes washing herself off."
                     if 4 <= Options[0] <= 5:
                             "You're left pretty hard."
-        call Shift_Focus(StayCount[0])
+        call shift_focus(StayCount[0])
         return

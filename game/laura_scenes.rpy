@@ -4,13 +4,13 @@ label LauraMeet(Topics=[],Loop=1):
     $ LauraX.names.remove("Laura")
     $ LauraX.names.append("X-23")
     $ bg_current = "bg_dangerroom"
-    call CleartheRoom("All",0,1)
-    $ LauraX.Loc = "bg_dangerroom"
+    call clear_the_room("all",0,1)
+    $ LauraX.location = "bg_dangerroom"
     $ LauraX.love = 400
     $ LauraX.obedience = 0
     $ LauraX.inhibition = 200
     $ LauraX.lust = 10
-    call Shift_Focus(LauraX)
+    call shift_focus(LauraX)
     $ LauraX.sprite_location = StageCenter
     call set_the_scene(0)
     $ LauraX.Petname = Player.name
@@ -232,7 +232,7 @@ label LauraMeet(Topics=[],Loop=1):
             $ LauraX.change_face("smile", 1, Brows="confused")
             ch_l "We should. . . spar."
 
-    $ LauraX.Loc = "hold"
+    $ LauraX.location = "hold"
     call set_the_scene
 
     "She dashes out of the room, headed for the hangar."
@@ -242,7 +242,7 @@ label LauraMeet(Topics=[],Loop=1):
 
     $ bg_current = "bg_dangerroom"
     $ Round -= 10
-    call Shift_Focus(RogueX)
+    call shift_focus(RogueX)
     $ active_Girls.remove(LauraX) if LauraX in active_Girls else active_Girls
 
     return
@@ -256,16 +256,16 @@ label Laura_Cleanhouse:
                         $ LauraX.Event[5] = 2
                         return
 
-        if LauraX.Loc == bg_current or LauraX in Party:
+        if LauraX.location == bg_current or LauraX in Party:
                 "[LauraX.name] glances over at you with a scowl."
         else:
                 "[LauraX.name] turns a corner and notices you."
         if bg_current != "bg_laura" and bg_current != "bg_player":
                 "With little word, she moves behind you and pushes you towards her room."
                 $ bg_current = "bg_laura"
-        $ LauraX.Loc = bg_current
+        $ LauraX.location = bg_current
         call set_the_scene
-        call CleartheRoom(LauraX)
+        call clear_the_room(LauraX)
         call set_the_scene
         call Taboo_Level
         $ LauraX.daily_history.append("relationship")
@@ -328,7 +328,7 @@ label Laura_Cleanhouse:
                 $ LauraX.change_stat("inhibition", 80, 10)
                 $ LauraX.change_face("angry",1,Eyes="side")
                 ch_l "Ok, fine, whatever. I'm in too."
-                if "Historia" not in Player.Traits:
+                if not simulation:
                         $ Player.Harem.append(LauraX)
                         if "LauraYes" in Player.Traits:
                                 $ Player.Traits.remove("LauraYes")
@@ -354,16 +354,16 @@ label Laura_love(Shipping=[],Shipshape=0,Topics=[],Girls=[]):
             $ Girls.remove(Girls[0])
         $ Shipshape = len(Shipping)
 
-        if LauraX.Loc == bg_current or LauraX in Party:
+        if LauraX.location == bg_current or LauraX in Party:
                 "[LauraX.name] glances over at you with a concerned look."
         else:
                 "[LauraX.name] turns a corner and notices you."
         if bg_current != "bg_laura" and bg_current != "bg_player":
                 "With little word, she moves behind you and pushes you towards her room."
                 $ bg_current = "bg_laura"
-        $ LauraX.Loc = bg_current
+        $ LauraX.location = bg_current
         call set_the_scene
-        call CleartheRoom(LauraX)
+        call clear_the_room(LauraX)
         call set_the_scene
         call Taboo_Level
         $ LauraX.daily_history.append("relationship")
@@ -633,8 +633,8 @@ label Laura_love(Shipping=[],Shipshape=0,Topics=[],Girls=[]):
                 $ LauraX.recent_history.append("angry")
                 $ LauraX.daily_history.append("angry")
                 hide Laura_Sprite with easeoutright
-                call Remove_Girl(LauraX)
-                $ LauraX.Loc = "hold" #puts her off the board for the day
+                call remove_girl(LauraX)
+                $ LauraX.location = "hold" #puts her off the board for the day
                 return
 
         $ LauraX.change_face("bemused",0,Eyes="down")
@@ -759,8 +759,8 @@ label Laura_love_End:
         if "lover" not in LauraX.Petnames:
                 $ LauraX.Event[6] = 20
                 hide Laura_Sprite with easeoutright
-                call Remove_Girl(LauraX)
-                $ LauraX.Loc = "hold" #puts her off the board for the day
+                call remove_girl(LauraX)
+                $ LauraX.location = "hold" #puts her off the board for the day
                 return
 
         $ LauraX.Event[6] = 5
@@ -878,14 +878,14 @@ label Laura_love_Redux:
 
 label Laura_Sub:
     $ LauraX.DrainWord("asked meet")
-    call Shift_Focus(LauraX)
-    if LauraX.Loc != bg_current and LauraX not in Party:
+    call shift_focus(LauraX)
+    if LauraX.location != bg_current and LauraX not in Party:
         "Suddenly, [LauraX.name] shows up and says she needs to talk to you."
 
-    $ LauraX.Loc = bg_current
+    $ LauraX.location = bg_current
     call set_the_scene(0)
     call Display_Girl(LauraX)
-    call CleartheRoom(LauraX)
+    call clear_the_room(LauraX)
     call set_the_scene
     call Taboo_Level
     $ LauraX.daily_history.append("relationship")
@@ -1129,16 +1129,16 @@ label Laura_Sub:
             $ LauraX.Petnames.append("sir")
             #put in stuff that happens if this succeeds
     elif line == "rude":
-            call Remove_Girl(LauraX)
-            if "Historia" not in Player.Traits:
+            call remove_girl(LauraX)
+            if not simulation:
                     $ renpy.pop_call()
             "[LauraX.name] knocks her way past you and storms off."
     elif line == "embarrassed":
             $ LauraX.change_face("sadside", 2)
             ch_l "Huh, ok, if you're not interested. . .."
             hide Laura_Sprite with easeoutright
-            call Remove_Girl(LauraX)
-            if "Historia" not in Player.Traits:
+            call remove_girl(LauraX)
+            if not simulation:
                     $ renpy.pop_call()
             "[LauraX.name] heads out of the room."
     return
@@ -1222,9 +1222,9 @@ label Laura_Sub_Asked:
     if line == "rude":
             #If line hasn't been set to "rude" by something above, then it skips right past this
             hide Laura_Sprite with easeoutright
-            call Remove_Girl(LauraX)
+            call remove_girl(LauraX)
             $ LauraX.recent_history.append("angry")
-            if "Historia" not in Player.Traits:
+            if not simulation:
                     $ renpy.pop_call()
             "[LauraX.name] checks you as she stomps out of the room."
     elif "sir" in LauraX.Petnames:
@@ -1245,14 +1245,14 @@ label Laura_Sub_Asked:
 
 label Laura_Master:
     $ LauraX.DrainWord("asked meet")
-    call Shift_Focus(LauraX)
-    if LauraX.Loc != bg_current and LauraX not in Party:
+    call shift_focus(LauraX)
+    if LauraX.location != bg_current and LauraX not in Party:
         "Suddenly, [LauraX.name] shows up and says she needs to talk to you."
 
-    $ LauraX.Loc = bg_current
+    $ LauraX.location = bg_current
     call set_the_scene(0)
     call Display_Girl(LauraX)
-    call CleartheRoom(LauraX)
+    call clear_the_room(LauraX)
     call set_the_scene
     $ LauraX.daily_history.append("relationship")
     call Taboo_Level
@@ -1402,16 +1402,16 @@ label Laura_Master:
     if line == "rude":
             $ LauraX.recent_history.append("angry")
             hide Laura_Sprite with easeoutright
-            call Remove_Girl(LauraX)
-            if "Historia" not in Player.Traits:
+            call remove_girl(LauraX)
+            if not simulation:
                     $ renpy.pop_call()
             "[LauraX.name] stomps out of the room."
     elif line == "embarrassed":
             ch_l "Ok, fine then."
             ch_l "And here I was, about to \"elevate your clearance.\""
             hide Laura_Sprite with easeoutright
-            call Remove_Girl(LauraX)
-            if "Historia" not in Player.Traits:
+            call remove_girl(LauraX)
+            if not simulation:
                     $ renpy.pop_call()
             "[LauraX.name] brushes past you on her way out."
     elif line == "fail":
@@ -1427,7 +1427,7 @@ label Laura_Master:
 label Laura_Sexfriend:   #Laura_Update
         #set this to occur after class
         $ LauraX.lust = 70
-        $ LauraX.Loc = bg_current
+        $ LauraX.location = bg_current
         $ LauraX.DrainWord("asked meet")
         call set_the_scene
         $ LauraX.daily_history.append("relationship")
@@ -1538,8 +1538,8 @@ label Laura_Sexfriend:   #Laura_Update
                                         $ bg_current = "bg_laura"
                                 else:
                                         $ bg_current = "bg_player"
-                                $ LauraX.Loc = bg_current
-                                call CleartheRoom(LauraX)
+                                $ LauraX.location = bg_current
+                                call clear_the_room(LauraX)
                                 call set_the_scene
                                 $ Taboo = 0
                                 $ LauraX.Taboo = 0
@@ -1564,8 +1564,8 @@ label Laura_Fuckbuddy:
         # Conditions, in your room, laura not there.
         "You hear a knock on the door, and go to answer it."
         #change laura's outfit to default
-        $ LauraX.Loc = bg_current
-        call Shift_Focus(LauraX)
+        $ LauraX.location = bg_current
+        call shift_focus(LauraX)
         call set_the_scene(0)
         $ LauraX.Outfit = "casual1"
         $ LauraX.OutfitDay = "casual1"
@@ -1573,7 +1573,7 @@ label Laura_Fuckbuddy:
         call Display_Girl(LauraX)
         call Taboo_Level
         $ primary_action = "masturbation"
-        $ primary_action3 = "fondle pussy"
+        $ primary_action3 = "fondle_pussy"
         $ LauraX.change_face("sly",2,Mouth="lipbite")
         "[LauraX.name] is standing in the doorway, with her hand down her pants."
         "You can tell she's been masturbating furiously, her scent is overpowering."
@@ -1594,7 +1594,7 @@ label Laura_Fuckbuddy:
 
 label Gwentro:
         $ Player.AddWord(1,"interruption") #adds to Recent
-        if Taboo > 5 or RogueX.Loc == bg_current or KittyX.Loc == bg_current or EmmaX.Loc == bg_current:
+        if Taboo > 5 or RogueX.location == bg_current or KittyX.location == bg_current or EmmaX.location == bg_current:
             #returns if other girls are present, this is a one on one thing.
             return
         $ LauraX.History.append("Gwentro")
@@ -1776,10 +1776,10 @@ label Laura_Dressup:
         #(Condition: X23 has returned to school)
         #(location: campus square)
         $ active_Girls.append(LauraX) if LauraX not in active_Girls else active_Girls
-        call Shift_Focus(LauraX)
+        call shift_focus(LauraX)
         $ bg_current = "bg_campus"
-        call Remove_Girl("All")
-        $ LauraX.Loc = bg_current
+        call remove_girl("all")
+        $ LauraX.location = bg_current
         call set_the_scene(0)
 
         $ LauraX.Outfit = "casual1"
@@ -1825,11 +1825,11 @@ label Laura_Dressup:
                     ch_l "Not really."
 
         hide Laura_Sprite with easeoutright
-        call Remove_Girl(LauraX)
+        call remove_girl(LauraX)
         "[LauraX.name] walks away, and as you watch her go you feel a tap on your shoulder."
 
-        call Shift_Focus(KittyX)
-        $ KittyX.Loc = bg_current
+        call shift_focus(KittyX)
+        $ KittyX.location = bg_current
         call set_the_scene(0)
         $ KittyX.Outfit = KittyX.OutfitDay
         $ KittyX.OutfitChange()
@@ -1977,10 +1977,10 @@ label Laura_Dressup3:
                     ch_p "Hey, [KittyX.name], what's going on?"
                     ch_k "Hey, [KittyX.Petname]! Come on in!"
 
-                    call CleartheRoom("All",0,1)
-                    call Shift_Focus(LauraX)
-                    $ KittyX.Loc = "bg_kitty"
-                    $ LauraX.Loc = "bg_kitty"
+                    call clear_the_room("all",0,1)
+                    call shift_focus(LauraX)
+                    $ KittyX.location = "bg_kitty"
+                    $ LauraX.location = "bg_kitty"
                     call set_the_scene(Dress=0)
 
                     $ LauraX.change_face("sad",2,Eyes="squint",Brows="confused")
@@ -2022,10 +2022,10 @@ label Laura_Dressup3:
                     ch_k "Sure, [KittyX.Petname]! Gimme a sec!"
                     "[KittyX.name] unlocks the door and it swings open."
 
-                    call CleartheRoom("All",0,1)
-                    call Shift_Focus(LauraX)
-                    $ KittyX.Loc = "bg_kitty"
-                    $ LauraX.Loc = "bg_kitty"
+                    call clear_the_room("all",0,1)
+                    call shift_focus(LauraX)
+                    $ KittyX.location = "bg_kitty"
+                    $ LauraX.location = "bg_kitty"
                     call set_the_scene(Dress=0)
 
                     $ LauraX.change_face("sad",2,Brows="surprised")
@@ -2170,16 +2170,16 @@ label Laura_Foul:
                 $ LauraX.History.remove("partysolved")
         $ LauraX.AddWord(1,0,0,0,"partyfix") #adds "partysolved" to History
         $ LauraX.change_face("sad",1)
-        if LauraX.Loc == bg_current or LauraX in Party:
+        if LauraX.location == bg_current or LauraX in Party:
                 "[LauraX.name] glances over at you with a distressed look."
         else:
                 "[LauraX.name] turns a corner and notices you."
         if bg_current != "bg_laura" and bg_current != "bg_player":
                 "With little word, she moves behind you and pushes you towards her room."
                 $ bg_current = "bg_laura"
-        $ LauraX.Loc = bg_current
+        $ LauraX.location = bg_current
         call set_the_scene
-        call CleartheRoom(LauraX)
+        call clear_the_room(LauraX)
         call set_the_scene
         call Taboo_Level
         ch_l "Hey. . ."

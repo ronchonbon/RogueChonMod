@@ -9,7 +9,7 @@ label Group_Strip_Study(Girls=[],QuizOrder=[]):
     if EmmaX in Party and Party[0] != EmmaX:
             # Forces Emma into the lead
             $ Party.reverse()
-            call Shift_Focus(Party[0])
+            call shift_focus(Party[0])
 
     # intros
     if Party[0] == RogueX:
@@ -208,7 +208,7 @@ label Group_Strip_Study(Girls=[],QuizOrder=[]):
                             elif Party[1] == JubesX:
                                     ch_v "Sorry, guys, this is -your- party. . ."
                             "[Party[1].name] leaves the room"
-                            call Remove_Girl(Party[1])
+                            call remove_girl(Party[1])
 
     #Primary loop
     while between_event_count:
@@ -234,7 +234,7 @@ label Group_Strip_Study(Girls=[],QuizOrder=[]):
             if len(Party) >= 2 and counter != 3 and Party[1].ClothingCheck:
                     #if there are multiple girls, and the other girl is not nude, alternate
                     $ Party.reverse()
-                    call Shift_Focus(Party[0])
+                    call shift_focus(Party[0])
     #Loop ends when between_event_count is 0 due to failures, returns to sender
 
     return
@@ -1318,7 +1318,7 @@ label Jubes_Quiz_Question:
 label Emma_StripStudy_Intro:
     if Party[0] != EmmaX:
             $ Party.reverse()
-    call Shift_Focus(Party[0])
+    call shift_focus(Party[0])
     if not EmmaX.Over and not EmmaX.Legs:
             #if she's mostly naked, cheat
             $ EmmaX.change_face("sly")
@@ -1518,7 +1518,7 @@ label Study_Session(Girls=[]): #rkeljsv
 
             $ Girls = all_Girls[:]
             while Girls:
-                    if Girls[0].Loc == bg_current:
+                    if Girls[0].location == bg_current:
                             $ Party.append(Girls[0])
                     $ Girls.remove(Girls[0])
 
@@ -1656,7 +1656,7 @@ label Frisky_Study(Prime_Bonus=0,Second=0,line=0,Second_Bonus=0): #rkeljsv
             # Prime_Bonus,Second_Bonus=0 is needed by the Datebreak code but does nothing
             # Prime_Bonus is reappropriated to denote a second pass through
 
-            call Shift_Focus(Party[0])
+            call shift_focus(Party[0])
 
             if len(Party) >= 2:
                     $ Second = Party[1]
@@ -1670,11 +1670,11 @@ label Frisky_Study(Prime_Bonus=0,Second=0,line=0,Second_Bonus=0): #rkeljsv
                     $ Party[0].change_face("sly",1,Eyes="side")
                     "She stops immediately and looks a bit embarrassed."
             elif D20 > 17 and ApprovalCheck(Party[0], 1000) and Party[0].Blow > 5:
-                    $ line = "blow"
+                    $ line = "blowjob"
             elif D20 > 14 and Party[0] == JubesX and ApprovalCheck(Party[0], 1000) and Party[0].Blow > 5:
-                    $ line = "blow"
+                    $ line = "blowjob"
             elif D20 > 14 and ApprovalCheck(Party[0], 1000) and Party[0].Hand >= 5:
-                    $ line = "hand"
+                    $ line = "handjob"
             elif D20 > 10 and (ApprovalCheck(Party[0], 1300) or (Party[0].Mast and ApprovalCheck(Party[0], 1000))) and Party[0].lust >= 70:
                     $ line = "masturbate"
             elif D20 > 10 and ApprovalCheck(Party[0], 1200) and Party[0].lust >= 30:
@@ -1698,7 +1698,7 @@ label Frisky_Study(Prime_Bonus=0,Second=0,line=0,Second_Bonus=0): #rkeljsv
                         return
             elif not line or line == "strip":
                         pass
-            elif line == "blow":
+            elif line == "blowjob":
                         $ Party[0].change_face("sly")
                         if Party[0] == KittyX:
                                 "[KittyX.name] reaches her hand through your textbook and you can feel it in your lap."
@@ -1707,7 +1707,7 @@ label Frisky_Study(Prime_Bonus=0,Second=0,line=0,Second_Bonus=0): #rkeljsv
                         else:
                                 "[Party[0].name] get predatory grin, and begins to unzip your pants."
                                 "She pulls your dick out and pops it into her mouth."
-            elif line == "hand":
+            elif line == "handjob":
                         $ Party[0].change_face("sly")
                         if Party[0] == KittyX:
                                 "[KittyX.name] reaches her hand through your textbook and you can feel it in your lap."
@@ -1770,10 +1770,10 @@ label Frisky_Study(Prime_Bonus=0,Second=0,line=0,Second_Bonus=0): #rkeljsv
                                 call Date_Sex_Break(Party[0],Second)
 
                     if _return == 4:
-                            if line == "blow":
+                            if line == "blowjob":
                                     "[Party[0].name] lets your dick fall out of her mouth."
                                     "You zip your pants back up."
-                            elif line == "hand":
+                            elif line == "handjob":
                                     "[Party[0].name] lets your dick drop into your lap."
                                     "You zip your pants back up."
                             else:

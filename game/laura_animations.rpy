@@ -4990,7 +4990,7 @@ label Laura_BJ_Launch(line = primary_action):
             "[LauraX.name] smoothly bends down and places your cock against her cheek."
 
     if line != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show Laura_Sprite zorder LauraX.Layer:
         alpha 0

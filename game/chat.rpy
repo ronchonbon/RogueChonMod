@@ -1,45 +1,45 @@
 label Chat(Girl=0):  #rkeljsv
         if not Girl:
                 menu:
-                    "Chat with [RogueX.name]" if RogueX.Loc == bg_current:
+                    "Chat with [RogueX.name]" if RogueX.location == bg_current:
                             $ Girl = RogueX
-                    "Text [RogueX.name]" if RogueX.Loc != bg_current:
+                    "Text [RogueX.name]" if RogueX.location != bg_current:
                             $ Girl = RogueX
 
-                    "Chat with [KittyX.name]" if KittyX.Loc == bg_current:
+                    "Chat with [KittyX.name]" if KittyX.location == bg_current:
                             $ Girl = KittyX
-                    "Text [KittyX.name]" if KittyX.Loc != bg_current and "met" in KittyX.History:
+                    "Text [KittyX.name]" if KittyX.location != bg_current and "met" in KittyX.History:
                             $ Girl = KittyX
 
-                    "Chat with [EmmaX.name]" if EmmaX.Loc == bg_current:
+                    "Chat with [EmmaX.name]" if EmmaX.location == bg_current:
                             $ Girl = EmmaX
-                    "Text [EmmaX.name]" if EmmaX.Loc != bg_current and "met" in EmmaX.History:
+                    "Text [EmmaX.name]" if EmmaX.location != bg_current and "met" in EmmaX.History:
                             $ Girl = EmmaX
 
-                    "Chat with [LauraX.name]" if LauraX.Loc == bg_current:
+                    "Chat with [LauraX.name]" if LauraX.location == bg_current:
                             $ Girl = LauraX
-                    "Text [LauraX.name]" if LauraX.Loc != bg_current and "met" in LauraX.History:
+                    "Text [LauraX.name]" if LauraX.location != bg_current and "met" in LauraX.History:
                             $ Girl = LauraX
 
-                    "Chat with [JeanX.name]" if JeanX.Loc == bg_current:
+                    "Chat with [JeanX.name]" if JeanX.location == bg_current:
                             $ Girl = JeanX
-                    "Text [JeanX.name]" if JeanX.Loc != bg_current and "met" in JeanX.History:
+                    "Text [JeanX.name]" if JeanX.location != bg_current and "met" in JeanX.History:
                             $ Girl = JeanX
 
-                    "Chat with [StormX.name]" if StormX.Loc == bg_current:
+                    "Chat with [StormX.name]" if StormX.location == bg_current:
                             $ Girl = StormX
-                    "Text [StormX.name]" if StormX.Loc != bg_current and "met" in StormX.History:
+                    "Text [StormX.name]" if StormX.location != bg_current and "met" in StormX.History:
                             $ Girl = StormX
 
-                    "Chat with [JubesX.name]" if JubesX.Loc == bg_current:
+                    "Chat with [JubesX.name]" if JubesX.location == bg_current:
                             $ Girl = JubesX
-                    "Text [JubesX.name]" if JubesX.Loc != bg_current and "met" in JubesX.History:
+                    "Text [JubesX.name]" if JubesX.location != bg_current and "met" in JubesX.History:
                             $ Girl = JubesX
 
                     "Never Mind":
                         pass
         if Girl:
-                if Girl.Loc == bg_current:
+                if Girl.location == bg_current:
                         if Girl == EmmaX and "classcaught" not in EmmaX.History:
                                         jump Emma_Chat_Minimal
                         if "caught" in Girl.daily_history:
@@ -58,7 +58,7 @@ label Chat(Girl=0):  #rkeljsv
                                 elif Girl == JubesX:
                                         ch_v "I want to keep my distance for now. . ."
                                 return
-                        if Girl == LauraX and Girl.Loc == bg_current and "scent" in Player.daily_history:
+                        if Girl == LauraX and Girl.location == bg_current and "scent" in Player.daily_history:
                                 #if you've fucked another girl, and not showered, Laura will know.
                                 if not ApprovalCheck(Girl, 1700) and not ApprovalCheck(Girl, 600,"O"):
                                         $ Options = all_Girls[:]
@@ -127,21 +127,21 @@ label Chat(Girl=0):  #rkeljsv
                         call Chat_Menu
                         #call expression Girl.Tag + "_Chat_Set" pass ("chat")
                 elif Girl in Digits:
-                    if Girl.Loc == "hold":
+                    if Girl.location == "hold":
                         "She doesn't seem to be picking up."
                     else:
                         if Girl == EmmaX:
-                                    if EmmaX.Loc == "bg_teacher" and bg_current == "bg_classroom":
+                                    if EmmaX.location == "bg_teacher" and bg_current == "bg_classroom":
                                             "She texts back, \"We can speak after class, [EmmaX.Petname].\""
                                             return
                                     elif "classcaught" not in EmmaX.History:
                                             call Emma_Chat_Minimal
                                             return
                         if Girl == StormX:
-                                    if StormX.Loc == "bg_teacher" and bg_current == "bg_classroom":
+                                    if StormX.location == "bg_teacher" and bg_current == "bg_classroom":
                                             "She texts back, \"This can wait until after class, [StormX.Petname].\""
                                             return
-                        if Girl.Loc != bg_current:
+                        if Girl.location != bg_current:
                                     show Cellphone at sprite_location(StageLeft)
                         else:
                                     hide Cellphone
@@ -171,8 +171,8 @@ label Chat_Menu: #rkeljsv
         #Primary chat menu, called by "Chat", carries over "Girl"
         $ Girl = GirlCheck(Girl)
         $ Girl.change_face()
-        call Shift_Focus(Girl)
-        if Girl.Loc != bg_current:
+        call shift_focus(Girl)
+        if Girl.location != bg_current:
                     show Cellphone at sprite_location(StageLeft)
         else:
                     hide Cellphone
@@ -199,7 +199,7 @@ label Chat_Menu: #rkeljsv
                 call Readytogo(Girl)
 
         menu:
-            "Come on over." if Girl.Loc != bg_current:
+            "Come on over." if Girl.location != bg_current:
                         if Girl in Nearby and bg_current != "bg_showerrroom":
                                 call Swap_Nearby(Girl)
                         elif Room_Full():
@@ -207,20 +207,20 @@ label Chat_Menu: #rkeljsv
                                 call Dismissed
                         else:
                                 call summon(Girl)
-            "Ask [Girl.name] to leave" if Girl.Loc == bg_current:
+            "Ask [Girl.name] to leave" if Girl.location == bg_current:
                                 call Girl_Dismissed(Girl)
                                 return
 
             "Romance her":
                     menu:
-                        "Flirt with her (locked)" if Girl.Chat[5]:
+                        "Flirt with her (locked)" if not Girl.can_flirt:
                                     pass
-                        "Flirt with her" if not Girl.Chat[5]:
+                        "Flirt with her" if Girl.can_flirt:
                                     call Flirt(Girl)
 
-                        "Sex Menu (locked)" if Girl.Loc != bg_current:
+                        "Sex Menu (locked)" if Girl.location != bg_current:
                                     pass
-                        "Sex Menu" if Girl.Loc == bg_current:
+                        "Sex Menu" if Girl.location == bg_current:
                                     if Girl.love >= Girl.obedience:
                                             ch_p "Did you want to fool around?"
                                     else:
@@ -304,9 +304,9 @@ label Chat_Menu: #rkeljsv
                                         ch_p "Do you want to go on a date tonight?"
                                         call Date_Ask(Girl)
 
-                        "Gifts (locked)" if Girl.Loc != bg_current:
+                        "Gifts (locked)" if Girl.location != bg_current:
                                         pass
-                        "Gifts" if Girl.Loc == bg_current:
+                        "Gifts" if Girl.location == bg_current:
                                         ch_p "I'd like to give you something."
                                         call Gifts #(Girl)
                         "Back":
@@ -318,7 +318,7 @@ label Chat_Menu: #rkeljsv
                                     call expression Girl.Tag + "_Chitchat" #call Rogue_Chitchat
                         "Relationship status":
                                     ch_p "Could we talk about us?"
-                                    if Girl.Loc == bg_current:
+                                    if Girl.location == bg_current:
                                         call expression Girl.Tag + "_Relationship" #call Rogue_Relationship
                                     else:
                                         if Girl == RogueX:
@@ -418,7 +418,7 @@ label Chat_Menu: #rkeljsv
             "Change her":
                         call Girl_Settings
 
-            "Add her to party" if Girl not in Party and Girl.Loc == bg_current:
+            "Add her to party" if Girl not in Party and Girl.location == bg_current:
                         ch_p "Could you follow me for a bit?"
                         if Girl == EmmaX and ApprovalCheck(Girl, 1250):
                                 $ Party.append(Girl)
@@ -481,45 +481,45 @@ label Chat_Menu: #rkeljsv
                                 if "leaving" in Options[0].recent_history:
                                         $ Options[0].DrainWord("leaving")
                                 if Options[0] == RogueX:
-                                        if Options[0].Loc == bg_current:
+                                        if Options[0].location == bg_current:
                                                 ch_r "Ok, I'll probably stick around for a bit anyway."
                                         else:
                                                 ch_r "Ok, see you later then."
                                 elif Options[0] == KittyX:
-                                        if Options[0].Loc == bg_current:
+                                        if Options[0].location == bg_current:
                                                 ch_k "Good to know, but I'm[Options[0].like] fine here."
                                         else:
                                                 ch_k "Cool, later."
                                 elif Options[0] == EmmaX:
-                                        if Options[0].Loc == bg_current:
+                                        if Options[0].location == bg_current:
                                                 ch_e "I'm glad I have your \"permission\" to leave, but I'd rather be here."
-                                        elif Options[0].Loc == "bg_teacher" and bg_current == "bg_classroom":
+                                        elif Options[0].location == "bg_teacher" and bg_current == "bg_classroom":
                                                 ch_e "I'm glad I have your \"permission\" to leave, but I {i}do{/i} have a class to teach."
                                         else:
                                                 ch_e "If that's all then, I'll see you later."
                                 elif Options[0] == LauraX:
-                                        if Options[0].Loc == bg_current:
+                                        if Options[0].location == bg_current:
                                                 ch_l "I think I'm fine here."
                                         else:
                                                 ch_l "Ok, see ya then."
                                 elif Options[0] == JeanX:
-                                        #if Options[0].Loc == bg_current:
+                                        #if Options[0].location == bg_current:
                                                 #ch_j "Ok."
                                         #else:
                                                 ch_j "Ok."
                                 elif Options[0] == StormX:
-                                        if Options[0].Loc == bg_current:
+                                        if Options[0].location == bg_current:
                                                 ch_s "I would rather stay, thank you."
-                                        elif Options[0].Loc == "bg_teacher" and bg_current == "bg_classroom":
+                                        elif Options[0].location == "bg_teacher" and bg_current == "bg_classroom":
                                                 ch_s "I do have a class to teach. I think that I'll stay."
                                         else:
                                                 ch_s "Ah, fine, I'll see you later."
                                 elif Options[0] == JubesX:
-                                        if Options[0].Loc == bg_current:
+                                        if Options[0].location == bg_current:
                                                 ch_v "Ok, but I'll stick around."
                                         else:
                                                 ch_v "Ok, ok. Laters."
-                                if Options[0].Loc != bg_current:
+                                if Options[0].location != bg_current:
                                         call set_the_scene
                                 $ Options.remove(Options[0])
                         return
@@ -570,7 +570,7 @@ label Switch_Chat: #rkeljsv
                 $ line = 0
                 return
 
-    if Girl.Loc != bg_current:
+    if Girl.location != bg_current:
         if Girl in Digits:
                 "You give [Girl.name] a call."
                 if Girl == EmmaX and "classcaught" not in EmmaX.History:
@@ -584,7 +584,7 @@ label Switch_Chat: #rkeljsv
             $ Girl = line
             $ line = 0
             return
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     if "angry" not in Girl.recent_history and Girl != line:
             if Girl == RogueX:
                     ch_r "So what did you want to talk about, [Girl.Petname]?"
@@ -608,12 +608,12 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
     if Girl in Party:
             $ Party.remove(Girl)
     call Girls_Schedule([Girl],0)
-    #if Girl.Loc == bg_current then it means she wants to stay here
+    #if Girl.location == bg_current then it means she wants to stay here
     if "leaving" in Girl.recent_history:
                 $ Girl.DrainWord("leaving")
     menu:
         "You can leave if you like.":
-                if Girl.Loc == bg_current and not ApprovalCheck(Girl, 700, "O"):
+                if Girl.location == bg_current and not ApprovalCheck(Girl, 700, "O"):
                         if Girl == RogueX:
                                 ch_r "Thanks, but I think I'll stick around."
                         elif Girl == KittyX:
@@ -646,7 +646,7 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
                         $ Leaving = 1
                 # End "You can leave if you like."
         "Could you give me the room please?":
-                if Girl.Loc == bg_current and not ApprovalCheck(Girl, 800, "LO"):
+                if Girl.location == bg_current and not ApprovalCheck(Girl, 800, "LO"):
                         if Girl == RogueX:
                                 ch_r "I'd rather stick around."
                         elif Girl == KittyX:
@@ -697,7 +697,7 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
                         $ Leaving = 1
                 #end "Could you give me the room please?"
         "You can go now.":
-                if Girl.Loc == bg_current and not ApprovalCheck(Girl, 500, "O"):
+                if Girl.location == bg_current and not ApprovalCheck(Girl, 500, "O"):
                         if Girl == RogueX:
                                 ch_r "I think I'll stay."
                         elif Girl == KittyX:
@@ -753,13 +753,13 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
 
     if not Leaving and bg_current in ("bg_campus","bg_classroom","bg_dangerroom"):
             #if there is space nearby. . .
-            call Remove_Girl(Girl,1,1)
+            call remove_girl(Girl,1,1)
     elif not Leaving:
             #if she's refused to leave yet. . .
             menu:
                 extend ""
                 "I insist, get going.":
-                        if Girl.Loc != bg_current and (ApprovalCheck(Girl, 1200, "LO") or ApprovalCheck(Girl, 500, "O")):
+                        if Girl.location != bg_current and (ApprovalCheck(Girl, 1200, "LO") or ApprovalCheck(Girl, 500, "O")):
                                 #If she has someplace to be and is obedient
                                 if "dismissed" not in Girl.daily_history:
                                         $ Girl.change_stat("love", 70, -5, 1)
@@ -781,7 +781,7 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
                                 elif Girl == JubesX:
                                         ch_v "Ok, fine. . ."
                                 $ Leaving = 1
-                        elif Girl.Loc != bg_current and (ApprovalCheck(Girl, 1000, "LO") or ApprovalCheck(Girl, 300, "O")):
+                        elif Girl.location != bg_current and (ApprovalCheck(Girl, 1000, "LO") or ApprovalCheck(Girl, 300, "O")):
                                 #If she has someplace to be and is less obedient
                                 if "dismissed" not in Girl.daily_history:
                                         $ Girl.change_stat("love", 50, -5, 1)
@@ -805,7 +805,7 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
                                 elif Girl == JubesX:
                                         ch_v "Whatever. . ."
                                 $ Leaving = 1
-                        elif Girl.Loc != bg_current:
+                        elif Girl.location != bg_current:
                                 #If she has someplace to be but is not obedient
                                 if "dismissed" not in Girl.daily_history:
                                         $ Girl.change_stat("love", 50, -5, 1)
@@ -883,15 +883,15 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
             "You shift a bit away from [Girl.name]"
     elif Leaving == 0:
             # Stay
-            $ Girl.Loc = bg_current
+            $ Girl.location = bg_current
     else:
             # Go
-            if Girl.Loc != bg_current: #it stays the same
+            if Girl.location != bg_current: #it stays the same
                 pass
             elif bg_current == Girl.Home:
-                $ Girl.Loc = "bg_campus"
+                $ Girl.location = "bg_campus"
             else:
-                $ Girl.Loc = Girl.Home
+                $ Girl.location = Girl.Home
             call AllReset(Girl)
             "[Girl.name] heads out."
     return
@@ -925,13 +925,13 @@ label Favorite_Actions(Girl=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp
                         $ ATemp += 20
                     elif Girl.PlayerFav == "sex":
                         $ PTemp += 20
-                    elif Girl.PlayerFav == "blow":
+                    elif Girl.PlayerFav == "blowjob":
                         $ BTemp += 20
-                    elif Girl.PlayerFav == "tit":
+                    elif Girl.PlayerFav == "titjob":
                         $ TTemp += 20
-                    elif Girl.PlayerFav == "foot":
+                    elif Girl.PlayerFav == "footjob":
                         $ XTemp += 20
-                    elif Girl.PlayerFav == "hand":
+                    elif Girl.PlayerFav == "handjob":
                         $ HTemp += 20
                     else:
                         $ FTemp += 20
@@ -940,13 +940,13 @@ label Favorite_Actions(Girl=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp
                         $ ATemp += 5
                     elif Girl.PlayerFav == "sex":
                         $ PTemp += 5
-                    elif Girl.PlayerFav == "blow":
+                    elif Girl.PlayerFav == "blowjob":
                         $ BTemp += 5
-                    elif Girl.PlayerFav == "tit":
+                    elif Girl.PlayerFav == "titjob":
                         $ TTemp += 5
-                    elif Girl.PlayerFav == "foot":
+                    elif Girl.PlayerFav == "footjob":
                         $ XTemp += 5
-                    elif Girl.PlayerFav == "hand":
+                    elif Girl.PlayerFav == "handjob":
                         $ HTemp += 5
                     else:
                         $ FTemp += 5
@@ -964,38 +964,38 @@ label Favorite_Actions(Girl=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp
                         if Girl.Anal >= 5:
                             $ Temp = "anal"
                         elif Girl.LickA >= 5:
-                            $ Temp = "lick ass"
+                            $ Temp = "eat_ass"
                         else:
-                            $ Temp = "insert ass"
+                            $ Temp = "finger_ass"
             elif D20F <= ATemp + PTemp:
                         #if the result is someplace under the "sex" category. . .
                         if Girl.Sex >= 5:
                             $ Temp = "sex"
                         elif Girl.LickP >= 5:
-                            $ Temp = "lick pussy"
+                            $ Temp = "eat_pussy"
                         else:
-                            $ Temp = "fondle pussy"
+                            $ Temp = "fondle_pussy"
             elif D20F <= ATemp + PTemp + BTemp:
-                            $ Temp = "blow"
+                            $ Temp = "blowjob"
             elif D20F <= ATemp + PTemp + BTemp + TTemp:
-                            $ Temp = "tit"
+                            $ Temp = "titjob"
             elif D20F <= ATemp + PTemp + BTemp + TTemp + XTemp + HTemp:
-                            $ Temp = "foot"
+                            $ Temp = "footjob"
             elif D20F <= ATemp + PTemp + BTemp + TTemp + XTemp + HTemp:
-                            $ Temp = "hand"
+                            $ Temp = "handjob"
             elif D20F <= ATemp + PTemp + BTemp + TTemp + XTemp + HTemp + FTemp:
                         #if the result failed the higher tier categories. . .
                         $ D20F = renpy.random.randint(1, 20)
                         if D20F >= 15 and Girl.Hotdog:
                             $ Temp = "hotdog"
                         elif D20F >= 10 and Girl.SuckB:
-                            $ Temp = "suck breasts"
+                            $ Temp = "suck_breasts"
                         elif D20F >= 5 and Girl.FondleB:
                             $ Temp = "fondle_breasts"
                         else:
                             $ Temp = "fondle_thighs"
             else:
-                            $ Temp = "kiss_you"
+                            $ Temp = "kiss"
 
             if not Quick:
                 $ Girl.Favorite = Temp
@@ -1007,7 +1007,7 @@ label Favorite_Actions(Girl=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp
 label Girl_Settings: #rkeljsv
     if Girl not in all_Girls:
         $ Girl == focused_Girl
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     while True:
         menu:
             ch_p "Let's talk about you."
@@ -1250,10 +1250,10 @@ label AskDateOther: #rkeljsv
 label summon(Girl, temp_modifier = temp_modifier):
     $ Girl.OutfitChange()
 
-    if "no summon" in Girl.recent_history:
+    if "no_summon" in Girl.recent_history:
         if "angry" in Girl.recent_history:
             call already_said_no_dialog(Girl)
-        elif Girl.recent_history.count("no summon") > 1:
+        elif Girl.recent_history.count("no_summon") > 1:
             call already_said_no_dialog(Girl)
 
             $ Girl.recent_history.append("angry")
@@ -1280,31 +1280,31 @@ label summon(Girl, temp_modifier = temp_modifier):
             elif Girl == JubesX:
                 ch_v "Like I said, I'm busy."
 
-        $ Girl.recent_history.append("no summon")
+        $ Girl.recent_history.append("no_summon")
 
         return
 
     $ D20 = renpy.random.randint(1, 20)
     $ line = 0
 
-    if Girl.Loc == "bg_classroom": #fix change these if changed function
+    if Girl.location == "bg_classroom": #fix change these if changed function
         if Girl != StormX:
             $ temp_modifier = -10
         else:
             $ temp_modifier = -30
-    elif Girl.Loc == "bg_dangerroom":
+    elif Girl.location == "bg_dangerroom":
         if Girl == EmmaX:
             $ temp_modifier = -20
         else:
             $ temp_modifier = -10
-    elif Girl in [JeanX] and Girl.Loc == Girl.Home:
+    elif Girl in [JeanX] and Girl.location == Girl.Home:
         $ temp_modifier = -10
-    elif Girl.Loc == "bg_showerroom":
+    elif Girl.location == "bg_showerroom":
         if Girl in [EmmaX, StormX, JubesX]:
             $ temp_modifier = -30
         else:
             $ temp_modifier = -40
-    elif Girl in [EmmaX, StormX] and Girl.Loc == "bg_teacher":
+    elif Girl in [EmmaX, StormX] and Girl.location == "bg_teacher":
         $ temp_modifier = -30
 
     if D20 <= 3:
@@ -1371,7 +1371,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_v "Oh, um, I kinda have a guest."
                 ch_v "I'll see you later, though?"
 
-            $ Girl.recent_history.append("no summon")
+            $ Girl.recent_history.append("no_summon")
 
             return
     elif time_index >= 3:
@@ -1391,7 +1391,7 @@ label summon(Girl, temp_modifier = temp_modifier):
             elif Girl == JubesX:
                 ch_v "You're up too? Sure, we can hang."
 
-            $ Girl.Loc = bg_current
+            $ Girl.location = bg_current
 
             call set_the_scene
         else:
@@ -1410,7 +1410,7 @@ label summon(Girl, temp_modifier = temp_modifier):
             elif Girl == JubesX:
                 ch_v "Nah."
 
-            $ Girl.recent_history.append("no summon")
+            $ Girl.recent_history.append("no_summon")
         return
     elif not ApprovalCheck(Girl, 700, "L") or not ApprovalCheck(Girl, 600, "O"):
         if not ApprovalCheck(Girl, 300):
@@ -1429,7 +1429,7 @@ label summon(Girl, temp_modifier = temp_modifier):
             elif Girl == JubesX:
                 ch_v "I'm kinda busy, [JubesX.Petname]."
 
-            $ Girl.recent_history.append("no summon")
+            $ Girl.recent_history.append("no_summon")
 
             return
 
@@ -1450,7 +1450,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_s "You were just over here."
             elif Girl == JubesX:
                 ch_v "You just left!"
-        elif Girl.Loc == "bg_classroom" or Girl.Loc == "bg_teacher":
+        elif Girl.location == "bg_classroom" or Girl.location == "bg_teacher":
             if Girl == RogueX:
                 ch_r "I'm kinda in class right now, [Girl.Petname], you could join me."
             elif Girl == KittyX:
@@ -1465,7 +1465,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_s "You can find me in the classroom."
             elif Girl == JubesX:
                 ch_v "I'm in class, did you want to come too?"
-        elif Girl.Loc == "bg_dangerroom":
+        elif Girl.location == "bg_dangerroom":
             if Girl == RogueX:
                 ch_r "I'm training at the moment, [Girl.Petname], care to join me?"
             elif Girl == KittyX:
@@ -1480,7 +1480,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_s "I am in the Danger Room, [StormX.Petname], care to join me?"
             elif Girl == JubesX:
                 ch_v "I'm in the Danger Room, [JubesX.Petname], want in?"
-        elif Girl.Loc == "bg_campus":
+        elif Girl.location == "bg_campus":
             if Girl == RogueX:
                 ch_r "I'm hanging out on campus, [Girl.Petname], want to hang with me?"
             elif Girl == KittyX:
@@ -1495,7 +1495,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_s "I am relaxing in the courtyard, care to join me?"
             elif Girl == JubesX:
                 ch_v "I'm just enjoying the sun, want to come?"
-        elif Girl.Loc == Girl.Home:
+        elif Girl.location == Girl.Home:
             if Girl == RogueX:
                 ch_r "I'm in my room, [Girl.Petname], want to swing by?"
             elif Girl == KittyX:
@@ -1510,7 +1510,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_s "I am in my room, [StormX.Petname], care to join me?"
             elif Girl == JubesX:
                 ch_v "I'm in my room, [JubesX.Petname], did you wanna drop by?"
-        elif Girl.Loc == "bg_player":
+        elif Girl.location == "bg_player":
             if Girl == RogueX:
                 ch_r "I happen to be in your room, [Girl.Petname], I'm waiting for you. . ."
             elif Girl == KittyX:
@@ -1525,7 +1525,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_s "I am in your room, [StormX.Petname], coming home soon?"
             elif Girl == JubesX:
                 ch_v "I'm in your room, [JubesX.Petname], are you coming back?"
-        elif Girl.Loc == "bg_showerroom":
+        elif Girl.location == "bg_showerroom":
             if ApprovalCheck(Girl, 1600):
                 if Girl == RogueX:
                     ch_r "I'm kinda in the shower right now, [Girl.Petname], care to join me?"
@@ -1558,10 +1558,10 @@ label summon(Girl, temp_modifier = temp_modifier):
                 elif Girl == JubesX:
                     ch_v "I'm in the shower right now, [JubesX.Petname]. We can hang later."
 
-                $ Girl.recent_history.append("no summon")
+                $ Girl.recent_history.append("no_summon")
 
                 return
-        elif Girl.Loc == "hold":
+        elif Girl.location == "hold":
             if Girl == RogueX:
                 ch_r "I'm not really around right now, see you later?"
             elif Girl == KittyX:
@@ -1577,7 +1577,7 @@ label summon(Girl, temp_modifier = temp_modifier):
             elif Girl == JubesX:
                 ch_v "I'm a little busy right now. Sorry?"
 
-            $ Girl.recent_history.append("no summon")
+            $ Girl.recent_history.append("no_summon")
 
             return
         else:
@@ -1872,11 +1872,11 @@ label summon(Girl, temp_modifier = temp_modifier):
     $ temp_modifier = 0
 
     if not line:
-        $ Girl.recent_history.append("no summon")
+        $ Girl.recent_history.append("no_summon")
 
         return
     elif line == "no":
-        if Girl.Loc == "bg_classroom":
+        if Girl.location == "bg_classroom":
             if Girl == RogueX:
                 ch_r "I seriously can't, [Girl.Petname], big test coming up."
             elif Girl == KittyX:
@@ -1891,7 +1891,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_s "I cannot leave class like this."
             elif Girl == JubesX:
                 ch_v "I can't skip this lecture."
-        elif Girl.Loc == "bg_dangerroom":
+        elif Girl.location == "bg_dangerroom":
             if Girl == RogueX:
                 ch_r "Wish I could, [Girl.Petname], but I need to get some hours in."
             elif Girl == KittyX:
@@ -1906,7 +1906,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_s "I have work to put in here."
             elif Girl == JubesX:
                 ch_v "I'm just getting into it."
-        elif Girl in [EmmaX, StormX] and Girl.Loc == "bg_teacher":
+        elif Girl in [EmmaX, StormX] and Girl.location == "bg_teacher":
             if Girl == EmmaX:
                 ch_e "I can't exactly leave class, [EmmaX.Petname]."
             elif Girl == StormX:
@@ -1927,7 +1927,7 @@ label summon(Girl, temp_modifier = temp_modifier):
             elif Girl == JubesX:
                 ch_v "Sorry, [JubesX.Petname], I'm kinda busy."
 
-        $ Girl.recent_history.append("no summon")
+        $ Girl.recent_history.append("no_summon")
 
         return
     elif line == "go to":
@@ -1937,7 +1937,7 @@ label summon(Girl, temp_modifier = temp_modifier):
         $ Girl.recent_history.append("goto")
         $ Player.recent_history.append("goto")
 
-        if Girl.Loc == "bg_classroom" or Girl.Loc == "bg_teacher":
+        if Girl.location == "bg_classroom" or Girl.location == "bg_teacher":
             if Girl == RogueX:
                 ch_r "See you then!"
             elif Girl == KittyX:
@@ -1954,7 +1954,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_v "K, there's room next to me."
 
             jump Class_Room
-        elif Girl.Loc == "bg_dangerroom":
+        elif Girl.location == "bg_dangerroom":
             if Girl == RogueX:
                 ch_r "I'll be warming up!"
             elif Girl == KittyX:
@@ -1971,7 +1971,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_v "Don't be long. . ."
 
             jump Danger_Room
-        elif Girl.Loc == Girl.Home:
+        elif Girl.location == Girl.Home:
             if Girl == RogueX:
                 ch_r "I'll get tidied up."
             elif Girl == KittyX:
@@ -1990,7 +1990,7 @@ label summon(Girl, temp_modifier = temp_modifier):
             call girls_room(Girl)
 
             return
-        elif Girl.Loc == "bg_player":
+        elif Girl.location == "bg_player":
             if Girl == RogueX:
                 ch_r "I'll be waiting."
             elif Girl == KittyX:
@@ -2007,7 +2007,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_v "I'll be waiting."
 
             jump player_room
-        elif Girl.Loc == "bg_showerroom":
+        elif Girl.location == "bg_showerroom":
             if Girl == RogueX:
                 ch_r "I guess I'll be here."
             elif Girl == KittyX:
@@ -2024,7 +2024,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_v "I'll leave you some hot water."
 
             jump Shower_Room
-        elif Girl.Loc == "bg_campus":
+        elif Girl.location == "bg_campus":
             if Girl == RogueX:
                 ch_r "I'll keep an eye out for you."
             elif Girl == KittyX:
@@ -2041,7 +2041,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                 ch_v "I'm still in the shade a bit. . ."
 
             jump Campus
-        elif Girl.Loc in PersonalRooms:
+        elif Girl.location in PersonalRooms:
             if Girl == RogueX:
                 ch_r "I'll see you there."
             elif Girl == KittyX:
@@ -2057,7 +2057,7 @@ label summon(Girl, temp_modifier = temp_modifier):
             elif Girl == JubesX:
                 ch_v "Yeah, see you."
 
-            $ bg_current = Girl.Loc
+            $ bg_current = Girl.location
 
             jump Misplaced
         else:
@@ -2076,7 +2076,7 @@ label summon(Girl, temp_modifier = temp_modifier):
             elif Girl == JubesX:
                 ch_v "Um, I'll just meet you in my room."
 
-            $ Girl.Loc = Girl.Home
+            $ Girl.location = Girl.Home
 
             call girls_room(Girl)
 
@@ -2116,7 +2116,7 @@ label summon(Girl, temp_modifier = temp_modifier):
 
     $ line = 0
 
-    if "locked" in Player.Traits:
+    if door_locked:
         call Locked_Door(Girl)
 
         return
@@ -2124,7 +2124,7 @@ label summon(Girl, temp_modifier = temp_modifier):
     call Taboo_Level(0)
 
     $ Girl.OutfitChange()
-    $ Girl.Loc = bg_current
+    $ Girl.location = bg_current
 
     call set_the_scene
 
@@ -2139,7 +2139,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
     if bg_current == "bg_dangerroom":
         call Gym_Exit([Girl])
 
-    if Girl.Loc == "hold":
+    if Girl.location == "hold":
         if Girl == RogueX:
             ch_r "I'm heading out for a while, see you later."
         elif Girl == KittyX:
@@ -2158,7 +2158,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
         return
 
     if Girl in Party or "lockedtravels" in Girl.Traits:
-        $ Girl.Loc = bg_current
+        $ Girl.location = bg_current
 
         return
 
@@ -2182,12 +2182,12 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
         if not ApprovalCheck(Girl, 600, "LO"):
             if Girl == RogueX:
                 ch_r "I'm headed out, see you later."
-        elif Girl in [EmmaX, StormX] in Girl.Loc == "bg_teacher":
+        elif Girl in [EmmaX, StormX] in Girl.location == "bg_teacher":
             if Girl == EmmaX:
                 ch_e "I have a class to teach."
             elif Girl == StormX:
                 ch_s "I've got class to teach."
-        elif Girl.Loc == "bg_classroom":
+        elif Girl.location == "bg_classroom":
             if Girl == RogueX:
                 ch_r "I'm headed to class right now, [Girl.Petname]."
             elif Girl == KittyX:
@@ -2202,7 +2202,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 ch_s "I've got class to teach."
             elif Girl == JubesX:
                 ch_v "I've got class."
-        elif Girl.Loc == "bg_dangerroom":
+        elif Girl.location == "bg_dangerroom":
             if Girl == RogueX:
                 ch_r "I'm hitting the danger room, [Girl.Petname]."
             elif Girl == KittyX:
@@ -2217,7 +2217,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 ch_s "I am heading for the Danger Room."
             elif Girl == JubesX:
                 ch_v "I'm hitting the Danger Room."
-        elif Girl.Loc == "bg_campus":
+        elif Girl.location == "bg_campus":
             if Girl == RogueX:
                 ch_r "I'm going to hang out on campus, [Girl.Petname]."
             elif Girl == KittyX:
@@ -2232,7 +2232,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 ch_s "I am going to relax in the courtyard."
             elif Girl == JubesX:
                 ch_v "I'm gonna get some sun."
-        elif Girl.Loc == Girl.Home:
+        elif Girl.location == Girl.Home:
             if Girl == RogueX:
                 ch_r "I'm heading back to my room, [Girl.Petname]."
             elif Girl == KittyX:
@@ -2247,7 +2247,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 ch_s "I am returning to my room."
             elif Girl == JubesX:
                 ch_v "I'm headed back to my room."
-        elif Girl.Loc == "bg_player":
+        elif Girl.location == "bg_player":
             if Girl == RogueX:
                 ch_r "I'll be heading to your room, [Girl.Petname]."
             elif Girl == KittyX:
@@ -2262,7 +2262,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 ch_s "I am planning to relax in your room."
             elif Girl == JubesX:
                 ch_v "I'm gonna hang out in your room for a bit."
-        elif Girl.Loc == "bg_pool":
+        elif Girl.location == "bg_pool":
             if Girl == RogueX:
                 ch_r "I'm headed for the pool."
             elif Girl == KittyX:
@@ -2277,7 +2277,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 ch_s "I was going to take a swim."
             elif Girl == JubesX:
                 ch_v "I was hitting the pool."
-        elif Girl.Loc == "bg_showerroom":
+        elif Girl.location == "bg_showerroom":
             if ApprovalCheck(Girl, 1400):
                 if Girl == RogueX:
                     ch_r "I'm hitting the showers, later."
@@ -2337,16 +2337,16 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
     $ D20 = renpy.random.randint(1, 20)
     $ line = 0
 
-    if Girl.Loc == "bg_classroom": #fix change these if changed function
+    if Girl.location == "bg_classroom": #fix change these if changed function
         $ temp_modifier = 10
-    elif Girl.Loc == "bg_dangerroom":
+    elif Girl.location == "bg_dangerroom":
         $ temp_modifier = 20
-    elif Girl.Loc == "bg_showerroom":
+    elif Girl.location == "bg_showerroom":
         if Girl in [EmmaX, StormX, JubesX]:
             $ temp_modifier = 40
         else:
             $ temp_modifier = 20
-    elif Girl in [EmmaX, StormX] and Girl.Loc == "bg_teacher":
+    elif Girl in [EmmaX, StormX] and Girl.location == "bg_teacher":
         $ temp_modifier = -40
 
     if number_of_Girls:
@@ -2363,7 +2363,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
         elif Girl == JubesX:
             ch_v "Yeah, I'm headed out too."
 
-    if Girl.Loc == "bg_classroom":
+    if Girl.location == "bg_classroom":
         if Girl == RogueX:
             ch_r "I'm headed to class right now, [Girl.Petname], you could join me."
         elif Girl == KittyX:
@@ -2378,12 +2378,12 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
             ch_s "I've got class to teach, are you attending?"
         elif Girl == JubesX:
             ch_v "I've got class, you interested?"
-    elif Girl in [EmmaX, StormX] and Girl.Loc == "bg_teacher":
+    elif Girl in [EmmaX, StormX] and Girl.location == "bg_teacher":
         if Girl == EmmaX:
             ch_e "I've got a class to teach, but you could probably learn a thing or two from it."
         elif Girl == StormX:
             ch_s "I've got class to teach, are you attending?"
-    elif Girl.Loc == "bg_dangerroom":
+    elif Girl.location == "bg_dangerroom":
         if Girl == RogueX:
             ch_r "I'm hitting the danger room, [Girl.Petname], care to join me?"
         elif Girl == KittyX:
@@ -2398,7 +2398,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
             ch_s "I am heading for the Danger Room, care to join me?"
         elif Girl == JubesX:
             ch_v "I've got some Danger Room time, you interested?"
-    elif Girl.Loc == "bg_campus":
+    elif Girl.location == "bg_campus":
         if Girl == RogueX:
             ch_r "I'm going to hang out on campus, [Girl.Petname], want to hang with me?"
         elif Girl == KittyX:
@@ -2413,7 +2413,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
             ch_s "I am going to relax in the courtyard, care to join me?"
         elif Girl == JubesX:
             ch_v "I'm gonna get some sun on the quad, you interested?"
-    elif Girl.Loc == Girl.Home:
+    elif Girl.location == Girl.Home:
         if Girl == RogueX:
             ch_r "I'm heading back to my room, [Girl.Petname], want to swing by?"
         elif Girl == KittyX:
@@ -2428,7 +2428,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
             ch_s "I am returning to my room, care to join me?"
         elif Girl == JubesX:
             ch_v "I'm headed back to my room, you interested?"
-    elif Girl.Loc == "bg_player":
+    elif Girl.location == "bg_player":
         if Girl == RogueX:
             ch_r "I'll be heading to your room, [Girl.Petname]."
         elif Girl == KittyX:
@@ -2443,7 +2443,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
             ch_s "I am planning to relax in your room, care to join me?"
         elif Girl == JubesX:
             ch_v "I'm going to hang out in your room for a bit, you interested?"
-    elif Girl.Loc == "bg_showerroom":
+    elif Girl.location == "bg_showerroom":
         if ApprovalCheck(Girl, 1600):
             if Girl == RogueX:
                 ch_r "I'm hitting the showers, [Girl.Petname], care to join me?"
@@ -2476,7 +2476,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 ch_v "I'm hitting the showers, laters."
 
             return
-    elif Girl.Loc == "bg_pool":
+    elif Girl.location == "bg_pool":
         if Girl == RogueX:
             ch_r "I'm headed for the pool. Wanna come?"
         elif Girl == KittyX:
@@ -2648,7 +2648,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
         return
 
     if line == "no":
-        if Girl.Loc == "bg_classroom":
+        if Girl.location == "bg_classroom":
             if Girl == RogueX:
                 ch_r "I seriously can't, [Girl.Petname], big test coming up."
             elif Girl == KittyX:
@@ -2663,12 +2663,12 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 ch_s "I cannot skip class like this."
             elif Girl == JubesX:
                 ch_v "I really can't miss this one."
-        elif Girl in [EmmaX, StormX] and Girl.Loc == "bg_teacher":
+        elif Girl in [EmmaX, StormX] and Girl.location == "bg_teacher":
             if Girl == EmmaX:
                 ch_e "I'm not \"cutting class,\" [EmmaX.Petname]."
             elif Girl == StormX:
                 ch_s "I cannot skip class like this."
-        elif Girl.Loc == "bg_dangerroom":
+        elif Girl.location == "bg_dangerroom":
             if Girl == RogueX:
                 ch_r "Wish I could, [Girl.Petname], but I need to get some hours in."
             elif Girl == KittyX:
@@ -2719,7 +2719,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
 
         call Gym_Clothes_Off([Girl])
 
-        if Girl.Loc == "bg_classroom":
+        if Girl.location == "bg_classroom":
             if Girl == RogueX:
                 ch_r "See you then!"
             elif Girl == KittyX:
@@ -2736,12 +2736,12 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 ch_v "Ok, get a move on then."
 
             jump Class_Room_Entry
-        elif Girl in [EmmaX, StormX] and Girl.Loc == "bg_teacher":
+        elif Girl in [EmmaX, StormX] and Girl.location == "bg_teacher":
             if Girl == EmmaX:
                 ch_e "I'll see you there."
             elif Girl == StormX:
                 ch_s "I will see you soon then."
-        elif Girl.Loc == "bg_dangerroom":
+        elif Girl.location == "bg_dangerroom":
             if Girl == RogueX:
                 ch_r "I'll be warming up!"
             elif Girl == KittyX:
@@ -2758,7 +2758,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 ch_v "I'll get warmed up."
 
             jump Danger_Room_Entry
-        elif Girl.Loc == Girl.Home:
+        elif Girl.location == Girl.Home:
             if Girl == RogueX:
                 ch_r "I'll meet you there."
             elif Girl == KittyX:
@@ -2777,7 +2777,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
             call girls_room(Girl)
 
             return
-        elif Girl.Loc == "bg_player":
+        elif Girl.location == "bg_player":
             if Girl == RogueX:
                 ch_r "I'll be waiting."
             elif Girl == KittyX:
@@ -2794,7 +2794,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 ch_v "Good."
 
             jump player_room
-        elif Girl.Loc == "bg_showerroom":
+        elif Girl.location == "bg_showerroom":
             if Girl == RogueX:
                 ch_r "I guess I'll see you there."
             elif Girl == KittyX:
@@ -2811,7 +2811,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 ch_v "Ok, nice."
 
             jump Shower_Room_Entry
-        elif Girl.Loc == "bg_campus":
+        elif Girl.location == "bg_campus":
             if Girl == RogueX:
                 ch_r "Let's head over there."
             elif Girl == KittyX:
@@ -2828,7 +2828,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 ch_v "Ok, nice."
 
             jump Campus_Entry
-        elif Girl.Loc == "bg_pool":
+        elif Girl.location == "bg_pool":
             if Girl == RogueX:
                 ch_r "Let's head over there."
             elif Girl == KittyX:
@@ -2849,7 +2849,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
             if Girl in [RogueX, KittyX, EmmaX]:
                 ch_r "You know, I'll just meet you in my room."
 
-                $ Girl.Loc = Girl.Home
+                $ Girl.location = Girl.Home
 
                 call girls_room(Girl)
 
@@ -2857,7 +2857,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
             elif Girl in [LauraX, JeanX, StormX, JubesX]:
                 ch_l "I'll just meet you in your room."
 
-                $ Girl.Loc = "bg_player"
+                $ Girl.location = "bg_player"
 
                 jump player_room
     elif line == "lonely":
@@ -2908,7 +2908,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
     elif Girl == JubesX:
         ch_v "I'll stay here."
 
-    $ Girl.Loc = bg_current
+    $ Girl.location = bg_current
 
     call Taboo_Level(0)
 

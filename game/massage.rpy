@@ -1,6 +1,6 @@
 label Massage(Girl=0,Current=0,Past=0,MCount=0): #rkeljsv
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         $ temp_modifier = 0
         if "angry" in Girl.recent_history:
             return
@@ -36,7 +36,7 @@ label Massage(Girl=0,Current=0,Past=0,MCount=0): #rkeljsv
 
         else:
             $ Girl.change_face("angry", 1)
-            if "no massage" in Girl.recent_history:
+            if "no_massage" in Girl.recent_history:
                     if Girl == RogueX:
                             ch_r "Heh, I {i}just{/i} told you \"no,\" [Girl.Petname]."
                     elif Girl == KittyX:
@@ -51,7 +51,7 @@ label Massage(Girl=0,Current=0,Past=0,MCount=0): #rkeljsv
                             ch_s "I have made myself clear on the matter."
                     elif Girl == JubesX:
                             ch_v "Ok, you can stop asking."
-            elif "no massage" in Girl.daily_history:
+            elif "no_massage" in Girl.daily_history:
                     if Girl == RogueX:
                             ch_r "I told you \"no,\" earlier [Girl.Petname]."
                     elif Girl == KittyX:
@@ -84,7 +84,7 @@ label Massage(Girl=0,Current=0,Past=0,MCount=0): #rkeljsv
                             ch_v "Nah, that's ok."
             menu:
                 extend ""
-                "Sorry, never mind." if "no massage" in Girl.daily_history:
+                "Sorry, never mind." if "no_massage" in Girl.daily_history:
                         $ Girl.change_face("bemused")
                         if Girl == RogueX:
                                 ch_r "Ok, no problem, [Girl.Petname]."
@@ -101,7 +101,7 @@ label Massage(Girl=0,Current=0,Past=0,MCount=0): #rkeljsv
                         elif Girl == JubesX:
                                 ch_v "No prob."
                         return
-                "Maybe later?" if "no massage" not in Girl.daily_history:
+                "Maybe later?" if "no_massage" not in Girl.daily_history:
                         $ Girl.change_face("sexy")
                         $ Girl.change_stat("love", 80, 1)
                         $ Girl.change_stat("inhibition", 20, 1)
@@ -120,8 +120,8 @@ label Massage(Girl=0,Current=0,Past=0,MCount=0): #rkeljsv
                                 ch_s "It is certainly possible."
                         elif Girl == JubesX:
                                 ch_v "Maybe, I guess."
-                        $ Girl.recent_history.append("no massage")
-                        $ Girl.daily_history.append("no massage")
+                        $ Girl.recent_history.append("no_massage")
+                        $ Girl.daily_history.append("no_massage")
                         return
                 "Come on, Please?":
                     if Approval:
@@ -154,7 +154,7 @@ label Massage(Girl=0,Current=0,Past=0,MCount=0): #rkeljsv
                                 $ Girl.change_face("sly", Brows="confused")
                                 call Anyline(Girl,"No.")
 
-        if "no massage" in Girl.daily_history:
+        if "no_massage" in Girl.daily_history:
                 if Girl == RogueX:
                         ch_r "You're starting to skeeve me out, [Girl.Petname]."
                 elif Girl == KittyX:
@@ -224,19 +224,19 @@ label Massage(Girl=0,Current=0,Past=0,MCount=0): #rkeljsv
                         ch_s "Stop."
                 elif Girl == JubesX:
                         ch_v "No way."
-        $ Girl.recent_history.append("no massage")
-        $ Girl.daily_history.append("no massage")
+        $ Girl.recent_history.append("no_massage")
+        $ Girl.daily_history.append("no_massage")
         $ temp_modifier = 0
         return
 
 label Massage_Prep(Girl=focused_Girl,Current=0,Past=0,MCount=0): #rkeljsv
         call Top_Off(Girl,"massage")
-        if not Girl.Over and "no topless" not in Girl.recent_history:
+        if not Girl.Over and "no_topless" not in Girl.recent_history:
                         $ Girl.change_stat("obedience", 50, 3)
                         $ Girl.change_stat("inhibition", 50, 3)
         elif Girl.Forced:
                 #if it was during an addiction session or something. . .
-                if "no topless" in Girl.recent_history:
+                if "no_topless" in Girl.recent_history:
                         if Girl == RogueX:
                                 ch_r "Look, we can still do this, so long as I can touch you after."
                         elif Girl == KittyX:
@@ -304,7 +304,7 @@ label Massage_Cycle: #rkeljsv
         $ primary_action = "massage"
 
         while Round >= 10 and MCount < 10:
-                call Shift_Focus(Girl)
+                call shift_focus(Girl)
                 $ Girl.lustFace()
 
                 call ViewShift(Girl,Girl.Pose,0)
@@ -803,7 +803,7 @@ label Massage_Cycle: #rkeljsv
                                 $ line3 = line + "."
 
                 $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-                $ Player.Focus = 80 if Player.Focus >= 80 and primary_action3 != "hand" else Player.Focus #Resets Player.Focus if higher than 80
+                $ Player.Focus = 80 if Player.Focus >= 80 and primary_action3 != "handjob" else Player.Focus #Resets Player.Focus if higher than 80
 
                 if Player.Focus >= 100 or Girl.lust >= 100:
                             #If either of you can cum:
@@ -879,7 +879,7 @@ label Massage_After: #rkeljsv
         $ Girl.Massage += 1
         $ Girl.Action -= 1
         $ Girl.Addictionrate += 2 if Girl.Addictionrate < 5 else Girl.Addictionrate
-        if "addictive" in Player.Traits:
+        if Player.addictive:
                 $ Girl.Addictionrate += 1
 
         $ Girl.change_face("smile",1)
@@ -955,7 +955,7 @@ label Massage_BadEnd: #rkeljsv
                 $ Girl.Massage += 1
                 $ Girl.Action -=1
                 $ Girl.Addictionrate += 2 if Girl.Addictionrate < 5 else Girl.Addictionrate
-                if "addictive" in Player.Traits:
+                if Player.addictive:
                         $ Girl.Addictionrate += 1
                 if Girl == RogueX:
                         ch_r "Ok, enough out of you, [Girl.Petname]."

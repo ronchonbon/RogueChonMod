@@ -2,7 +2,7 @@ label First_Addicted(Girl=0): #rkeljs
         # Girl.Event[1] starts at zero, +1 each time, jumps to 10 if you agree to help her
         $ Girl.DrainWord("asked meet")
         call set_the_scene
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         $ Girl.Event[1] += 1
 
         $ Player.AddWord(1,0,"fix") #adds to daily
@@ -12,22 +12,22 @@ label First_Addicted(Girl=0): #rkeljs
                 #if the door is locked and you refused entry. . .
                 return
         if bg_current != "bg_player":
-                if Girl.Loc == bg_current or Girl in Party:
+                if Girl.location == bg_current or Girl in Party:
                         "Out of the blue, [Girl.name] says she wants to talk to you in your room and drags you over there."
                 else:
                         "[Girl.name] shows up, hurriedly says she wants to talk to you in your room and drags you over there."
         else:
-                if Girl.Loc == bg_current or Girl in Party:
+                if Girl.location == bg_current or Girl in Party:
                         "[Girl.name] turns to you with a bit of a dazed look."
                 else:
                         "[Girl.name] barges into your room in a tizzy."
         $ Taboo = 0
         $ Girl.Taboo = 0
         $ bg_current = "bg_player"
-        $ Girl.Loc = bg_current
+        $ Girl.location = bg_current
         $ Girl.OutfitChange(Changed=1)
         call set_the_scene
-        call CleartheRoom(Girl)
+        call clear_the_room(Girl)
 
         if Girl.Event[1] == 1:
                 #first time through. . .
@@ -358,7 +358,7 @@ label First_Addicted2:   #rkeljs
         if Girl == RogueX:
                 ch_r "Ok, so remember the other day, when I wanted to touch you, but you refused?"
         elif Girl == KittyX:
-                ch_k "Hey, remember when I wanted to touch you, but you were[Girl.like]\"no way?\""
+                ch_k "Hey, remember when I wanted to touch you, but you were[Girl.like]\"no_way?\""
         elif Girl == EmmaX:
                 ch_e "Do you recall a while back, I wanted to touch you, and you refused me?"
         elif Girl == LauraX:
@@ -655,7 +655,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
         elif Girl == JubesX:
                 ch_v "What do you want here?"
 
-        if "locked" not in Player.Traits:
+        if not door_locked:
                 menu:
                     "Do you want to lock the door first?"
                     "Yes":
@@ -679,7 +679,9 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                                         ch_s "I don't know that I'm comfortable with this. . ."
                                 elif Girl == JubesX:
                                         ch_v "Ooooh, kay?"
-                            $ Player.Traits.append("locked")
+
+                            $ door_locked = True
+
                             call Taboo_Level
                     "No":
                             pass
@@ -820,7 +822,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                                     call Top_Off(Girl,2)
                                     $ temp_modifier = stored_count
                                     call fondle_breasts(Girl)
-                                    if "fondle breasts" in Girl.recent_history:
+                                    if "fondle_breasts" in Girl.recent_history:
                                             $ Girl.change_stat("obedience", 80, 10)
                                             $ Girl.change_stat("inhibition", 80, 10)
                                             if Girl == RogueX:
@@ -858,7 +860,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                                             elif Girl == JubesX:
                                                     ch_v "Ok, we'll see. . ."
                                     call fondle_thighs(Girl)
-                                    if "fondle thighs" in Girl.recent_history:
+                                    if "fondle_thighs" in Girl.recent_history:
                                             $ Girl.change_stat("obedience", 50, 5)
                                             $ Girl.change_stat("inhibition", 50, 5)
                                             if Girl == RogueX:
@@ -883,7 +885,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                                     call Bottoms_Off(Girl,0)
                                     $ temp_modifier = stored_count
                                     call expression Girl.Tag + "_Fondle_Pussy"
-                                    if "fondle pussy" in Girl.recent_history:
+                                    if "fondle_pussy" in Girl.recent_history:
                                             $ Girl.change_stat("obedience", 50, 10)
                                             $ Girl.change_stat("obedience", 80, 5)
                                             $ Girl.change_stat("inhibition", 50, 10)
@@ -919,7 +921,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                                     jump Addict_Ultimatum_Menu
 
                         if "angry" not in Girl.recent_history:
-                                if "blow" in Girl.recent_history or "handjob" in Girl.recent_history or "titjob" in Girl.recent_history:
+                                if "blowjob" in Girl.recent_history or "handjob" in Girl.recent_history or "titjob" in Girl.recent_history:
                                             $ Girl.change_stat("obedience", 50, 10)
                                             $ Girl.change_stat("obedience", 80, 5)
                                             $ Girl.change_stat("inhibition", 50, 10)
@@ -943,7 +945,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                 "How about you strip for me, and then I let you touch me?":
                         $ stored_count = Girl.ClothingCheck()
                         call Group_Strip(Girl)
-                        if Girl.Loc != bg_current:
+                        if Girl.location != bg_current:
                                     jump Misplaced
                         menu:
                             "Ok, that was enough, you can touch me now.":
@@ -1047,7 +1049,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                                         ch_v "Sleep-"
                                         ch_v "-Tight."
                                 "[Girl.name] gives one last look over her shoulder before slamming the door and storming out."
-                                call Remove_Girl(Girl)
+                                call remove_girl(Girl)
                                 jump Addicted_Bad_End
 
             if "angry" in Girl.recent_history:
@@ -1400,9 +1402,9 @@ label Addicted_Bad_End: #rkeljs
                 if bg_current == Girl.Home:
                         "You head back to your room."
                         $ bg_current = "bg_player"
-                elif bg_current == "bg_player" and Girl.Loc == bg_current:
+                elif bg_current == "bg_player" and Girl.location == bg_current:
                         "[Girl.name] heads out."
-                call Remove_Girl(Girl)
+                call remove_girl(Girl)
         $ renpy.pop_call()
         jump Misplaced
 
@@ -1522,25 +1524,25 @@ label Addiction_Fix(Girl=0): #rkeljs
         $ Girl.DrainWord("asked meet")
         $ Girl = GirlCheck(Girl)
         call set_the_scene
-        call Shift_Focus(Girl)
-        $ Girl.Loc = bg_current
+        call shift_focus(Girl)
+        $ Girl.location = bg_current
         $ Girl.OutfitChange(Changed=1)
         call Locked_Door(Girl)
         if not _return:
                 #if the door is locked and you refused entry. . .
                 return
         call set_the_scene
-        call CleartheRoom(Girl)
+        call clear_the_room(Girl)
         $ Girl.change_face("manic")
         $ Taboo = 0
         $ Girl.Taboo = 0
         if bg_current != "bg_player" and bg_current != Girl.Home:
-                if Girl.Loc == bg_current or Girl in Party:
+                if Girl.location == bg_current or Girl in Party:
                         "[Girl.name] says she wants to talk to you in your room and drags you over there."
                 else:
                         "[Girl.name] shows up, says she wants to talk to you in your room and drags you over there."
         else:
-                if Girl.Loc == bg_current or Girl in Party:
+                if Girl.location == bg_current or Girl in Party:
                         "[Girl.name] turns to you with a hungry look."
                 else:
                         "[Girl.name] pops into your room in a bit of a tizzy."
@@ -1947,7 +1949,7 @@ label Addicted_Serum: #rkeljs
         # if Girl.Chat[2], she's tried it before
         # if Girl.Chat[3], she knows it's jiz
 
-        if "no serum" in Girl.recent_history:
+        if "no_serum" in Girl.recent_history:
                 if Girl == RogueX:
                         ch_r "No, we tried that and you blew it."
                 elif Girl == KittyX:
@@ -2573,7 +2575,7 @@ label Addicted_Serum: #rkeljs
                             else:
                                     ch_v "Mmmmm. . ."
                                     ch_v "Um, I mean, what about this serum?"
-            elif "handjob" in Girl.recent_history or "blow" in Girl.recent_history:
+            elif "handjob" in Girl.recent_history or "blowjob" in Girl.recent_history:
                             #not swallowed
                             if Girl == RogueX:
                                     ch_r "Ok, I think I worked that one off, now how about that serum?"
@@ -2773,7 +2775,7 @@ label Addicted_Serum: #rkeljs
                 $ Girl.daily_history.append("serum")
                 $ Girl.Addict = 20 if Girl.Addict >= 20 else 0
                 $ Girl.Addictionrate += 2
-                if "addictive" in Player.Traits:
+                if Player.addictive:
                         $ Girl.Addictionrate += 2
                 $ Girl.Chat[2] += 1
         else:
@@ -2792,6 +2794,6 @@ label Addicted_Serum: #rkeljs
                         ch_s "We should have been able to negotiate here."
                 elif Girl == JubesX:
                         ch_v "We need to work something out here, right?"
-                $ Girl.recent_history.append("no serum")
+                $ Girl.recent_history.append("no_serum")
         $ Girl.Action = stored_count
         return

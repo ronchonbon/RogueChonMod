@@ -1,7 +1,7 @@
 ﻿#Start Date_Shopping   / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Mall_Entry(First=0,Second=0,Girl=0,Cart=[]):
         call Jubes_Entry_Check
-        $ Player.DrainWord("locked",0,0,1)
+        $ door_locked = False
         $ bg_current = "bg_mall"
         $ Nearby = []
         call Gym_Clothes_Off #call Gym_Clothes
@@ -16,7 +16,7 @@ label Shopping_Mall(First=0,Second=0,Girl=0,Cart=[]):
         $ Player.daily_history.append("shopping")
         $ Girls = Party[:]
         while Girls:
-            $ Girls[0].Loc = "bg_mall"
+            $ Girls[0].location = "bg_mall"
             $ Girls.remove(Girls[0])
 
         call set_the_scene
@@ -124,7 +124,7 @@ label Sex_Shop:
         $ bg_current = "bg_shop"
         $ Girls = Party[:]
         while Girls:
-            $ Girls[0].Loc = "bg_shop"
+            $ Girls[0].location = "bg_shop"
             $ Girls.remove(Girls[0])
 
         call set_the_scene
@@ -248,7 +248,7 @@ label Sex_Shop:
                             $ bg_current = "bg_mall"
                             $ Girls = Party[:]
                             while Girls:
-                                $ Girls[0].Loc = "bg_mall"
+                                $ Girls[0].location = "bg_mall"
                                 $ Girls.remove(Girls[0])
 
                             call set_the_scene
@@ -553,7 +553,7 @@ label Swim_Shop:
         $ bg_current = "bg_shop"
         $ Girls = Party[:]
         while Girls:
-            $ Girls[0].Loc = "bg_shop"
+            $ Girls[0].location = "bg_shop"
             $ Girls.remove(Girls[0])
 
         call set_the_scene
@@ -579,7 +579,7 @@ label Swim_Shop:
                             $ bg_current = "bg_mall"
                             $ Girls = Party[:]
                             while Girls:
-                                $ Girls[0].Loc = "bg_mall"
+                                $ Girls[0].location = "bg_mall"
                                 $ Girls.remove(Girls[0])
 
                             call set_the_scene
@@ -643,18 +643,18 @@ label Swim_Shop:
                     #if she agreed to shop for a suit. . .
                     "You grab some things and head into one of the dressing rooms with [Girl.name]."
                     $ bg_current = "bg_dressing"
-                    $ Girl.Loc = "bg_dressing"
+                    $ Girl.location = "bg_dressing"
                     if Second:
                         #if there is a second girl
                         "Should [Second.name] come too?"
                         menu:
                             "Sure":
                                     "[Second.name] follows you in."
-                                    $ Second.Loc = "bg_dressing"
+                                    $ Second.location = "bg_dressing"
                             "Probably not.":
                                     ch_p "[Second.name], probably hang back."
                                     call Anyline(Second,"Fine. I'll just wait here then.")
-                    if Second and Second.Loc == bg_current:
+                    if Second and Second.location == bg_current:
                             #if the other girl agreed to come along
                             call set_the_scene
                     else:
@@ -667,7 +667,7 @@ label Swim_Shop:
                             call Display_Girl(Girl,0,0)
 
                             hide blackscreen onlayer black
-                    $ Player.Traits.append("locked")
+                    $ door_locked = True
                     call Taboo_Level
 
                     while Girl:
@@ -750,7 +750,7 @@ label Swim_Shop:
 
                             "Leave Dressing Area.":
                                     if Cart and Second:
-                                        if Second.Loc == bg_current and Second not in (LauraX,JeanX) and Second.GirlLikeCheck(Girl) >= 500:
+                                        if Second.location == bg_current and Second not in (LauraX,JeanX) and Second.GirlLikeCheck(Girl) >= 500:
                                             $ Second.change_face("smile")
                                             if Second == RogueX:
                                                     ch_r "Look'in good there. . ."
@@ -784,11 +784,11 @@ label Swim_Shop:
 
                                     $ Girl.OutfitChange(Changed=0) #puts clothes back on
                                     $ Round -= 20 if Round > 30 else (Round-10) #reduces Round to at minimum 10
-                                    $ Player.DrainWord("locked",0,0,1)
+                                    $ door_locked = False
                                     $ bg_current = "bg_shop"
                                     $ Girls = Party[:]
                                     while Girls:
-                                        $ Girls[0].Loc = "bg_shop"
+                                        $ Girls[0].location = "bg_shop"
                                         $ Girls.remove(Girls[0])
 
                                     call Taboo_Level
@@ -971,7 +971,7 @@ label Lingerie_Shop:
         $ bg_current = "bg_shop"
         $ Girls = Party[:]
         while Girls:
-            $ Girls[0].Loc = "bg_shop"
+            $ Girls[0].location = "bg_shop"
             $ Girls.remove(Girls[0])
 
         call set_the_scene
@@ -997,7 +997,7 @@ label Lingerie_Shop:
                             $ bg_current = "bg_mall"
                             $ Girls = Party[:]
                             while Girls:
-                                $ Girls[0].Loc = "bg_mall"
+                                $ Girls[0].location = "bg_mall"
                                 $ Girls.remove(Girls[0])
                             call set_the_scene
                             return
@@ -1044,18 +1044,18 @@ label Lingerie_Shop:
                     #if she agreed to shop for a suit. . .
                     "You grab some things and head into one of the dressing rooms with [Girl.name]."
                     $ bg_current = "bg_dressing"
-                    $ Girl.Loc = "bg_dressing"
+                    $ Girl.location = "bg_dressing"
                     if Second:
                         #if there is a second girl
                         "Should [Second.name] come too?"
                         menu:
                             "Sure":
                                     "[Second.name] follows you in."
-                                    $ Second.Loc = "bg_dressing"
+                                    $ Second.location = "bg_dressing"
                             "Probably not.":
                                     ch_p "[Second.name], probably hang back."
                                     call Anyline(Second,"Fine. I'll just wait here then.")
-                    if Second and Second.Loc == bg_current:
+                    if Second and Second.location == bg_current:
                             #if the other girl agreed to come along
                             call set_the_scene
                     else:
@@ -1068,7 +1068,7 @@ label Lingerie_Shop:
                             call Display_Girl(Girl,0,0)
 
                             hide blackscreen onlayer black
-                    $ Player.Traits.append("locked")
+                    $ door_locked = True
                     call Taboo_Level
 
                     while Girl:
@@ -1077,7 +1077,7 @@ label Lingerie_Shop:
                             "Lace Bra (locked)" if Girl.Chest == "lace bra":
                                             pass
                             "Lace Bra" if Girl.Chest != "lace bra" and Girl != LauraX:
-                                    if "no gift bra" in Girl.recent_history:
+                                    if "no_gift bra" in Girl.recent_history:
                                             call Anyline(Girl,"I said no. . .")
                                     elif not Girl.SeenChest and not ApprovalCheck(Girl, 900):
                                             $ Girl.change_face("angry",2)
@@ -1088,7 +1088,7 @@ label Lingerie_Shop:
                                             else:
                                                     call Anyline(Girl,"Um, no, definitely not. . .")
                                             $ Girl.change_face("angry",1)
-                                            $ Girl.recent_history.append("no gift bra")
+                                            $ Girl.recent_history.append("no_gift bra")
                                     else:
                                             if Girl.SeenChest or ApprovalCheck(Girl, 1000, TabM=2):
                                                 call Dressing_Strip_Bra("lace bra")
@@ -1112,7 +1112,7 @@ label Lingerie_Shop:
                             "Corset (locked)" if Girl.Chest == "corset":
                                             pass
                             "Corset" if Girl.Chest != "corset" and Girl in (LauraX,JeanX):
-                                    if "no gift bra" in Girl.recent_history:
+                                    if "no_gift bra" in Girl.recent_history:
                                             call Anyline(Girl,"I said no. . .")
                                     elif not Girl.SeenChest and not ApprovalCheck(Girl, 900):
                                             $ Girl.change_face("angry",2)
@@ -1123,7 +1123,7 @@ label Lingerie_Shop:
                                             else:
                                                     call Anyline(Girl,"Um, no, definitely not. . .")
                                             $ Girl.change_face("angry",1)
-                                            $ Girl.recent_history.append("no gift bra")
+                                            $ Girl.recent_history.append("no_gift bra")
                                     else:
                                             if Girl.SeenChest or ApprovalCheck(Girl, 1000, TabM=2):
                                                 call Dressing_Strip_Bra("corset")
@@ -1147,7 +1147,7 @@ label Lingerie_Shop:
                             "Lace Corset (locked)" if Girl.Chest == "lace corset":
                                             pass
                             "Lace Corset" if Girl.Chest != "lace corset" and Girl == LauraX:
-                                    if "no gift bra" in Girl.recent_history:
+                                    if "no_gift bra" in Girl.recent_history:
                                             call Anyline(Girl,"I said no. . .")
                                     elif not Girl.SeenChest and not ApprovalCheck(Girl, 900):
                                             $ Girl.change_face("angry",2)
@@ -1158,7 +1158,7 @@ label Lingerie_Shop:
                                             else:
                                                     call Anyline(Girl,"Um, no, definitely not. . .")
                                             $ Girl.change_face("angry",1)
-                                            $ Girl.recent_history.append("no gift bra")
+                                            $ Girl.recent_history.append("no_gift bra")
                                     else:
                                             if Girl.SeenChest or ApprovalCheck(Girl, 1000, TabM=2):
                                                 call Dressing_Strip_Bra("lace corset")
@@ -1181,7 +1181,7 @@ label Lingerie_Shop:
                             "Lace Panties (locked)" if Girl.Panties == "lace panties":
                                             pass
                             "Lace Panties" if Girl.Panties != "lace panties":
-                                    if "no gift panties" in Girl.recent_history:
+                                    if "no_gift panties" in Girl.recent_history:
                                             call Anyline(Girl,"I said no. . .")
                                     elif not Girl.SeenPussy and not ApprovalCheck(Girl, 1000):
                                             $ Girl.change_face("angry",2)
@@ -1192,7 +1192,7 @@ label Lingerie_Shop:
                                             else:
                                                     call Anyline(Girl,"Um, no, definitely not. . .")
                                             $ Girl.change_face("angry",1)
-                                            $ Girl.recent_history.append("no gift panties")
+                                            $ Girl.recent_history.append("no_gift panties")
                                     else:
                                             if Girl.SeenPussy or ApprovalCheck(Girl, 1200, TabM=2):
                                                 call Dressing_Strip_Panties("lace panties")
@@ -1215,13 +1215,13 @@ label Lingerie_Shop:
                             "Tiger-Striped Panties (locked)" if Girl.Panties == "tiger panties":
                                             pass
                             "Tiger-Striped Panties" if Girl.Panties != "tiger panties" and Girl == JubesX:
-                                    if "no gift panties" in Girl.recent_history:
+                                    if "no_gift panties" in Girl.recent_history:
                                             call Anyline(Girl,"I said no. . .")
                                     elif not Girl.SeenPussy and not ApprovalCheck(Girl, 1000):
                                             $ Girl.change_face("angry",2)
                                             call Anyline(Girl,"Um, no, not really interested. . .")
                                             $ Girl.change_face("angry",1)
-                                            $ Girl.recent_history.append("no gift panties")
+                                            $ Girl.recent_history.append("no_gift panties")
                                     else:
                                             if Girl.SeenPussy or ApprovalCheck(Girl, 1200, TabM=2):
                                                 call Dressing_Strip_Panties("tiger panties")
@@ -1356,7 +1356,7 @@ label Lingerie_Shop:
                             "Nighty (locked)" if Girl.Over == "nighty":
                                             pass
                             "Nighty" if Girl.Over != "nighty" and Girl == RogueX:
-                                    if "no gift bra" in Girl.recent_history:
+                                    if "no_gift bra" in Girl.recent_history:
                                             call Anyline(Girl,"I said no. . .")
                                     elif not Girl.SeenChest and not ApprovalCheck(Girl, 900):
                                             $ Girl.change_face("angry",2)
@@ -1367,7 +1367,7 @@ label Lingerie_Shop:
                                             else:
                                                     call Anyline(Girl,"Um, no, definitely not. . .")
                                             $ Girl.change_face("angry",1)
-                                            $ Girl.recent_history.append("no gift bra")
+                                            $ Girl.recent_history.append("no_gift bra")
                                     else:
                                             if Girl.SeenChest or ApprovalCheck(Girl, 900, TabM=2):
                                                 $ Girl.change_face("sexy")
@@ -1403,7 +1403,7 @@ label Lingerie_Shop:
 
                             "Leave Dressing Area.":
                                     if Cart and Second:
-                                        if Second.Loc == bg_current and Second not in (LauraX,JeanX) and Second.GirlLikeCheck(Girl) >= 500:
+                                        if Second.location == bg_current and Second not in (LauraX,JeanX) and Second.GirlLikeCheck(Girl) >= 500:
                                             $ Second.change_face("sexy")
                                             if Second == RogueX:
                                                     ch_r "Look'in good there. . ."
@@ -1435,11 +1435,11 @@ label Lingerie_Shop:
                                             $ Second.GirlLikeUp(Girl,3)
 
                                     $ Round -= 20 if Round > 30 else (Round-10) #reduces Round to at minimum 10
-                                    $ Player.DrainWord("locked",0,0,1)
+                                    $ door_locked = False
                                     $ bg_current = "bg_shop"
                                     $ Girls = Party[:]
                                     while Girls:
-                                        $ Girls[0].Loc = "bg_shop"
+                                        $ Girls[0].location = "bg_shop"
                                         $ Girls.remove(Girls[0])
 
                                     call Taboo_Level

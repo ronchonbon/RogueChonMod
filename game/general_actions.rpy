@@ -1174,12 +1174,6 @@ label forced_action(Girl, action):
 
 label before_action:
     if primary_action not in ["sex", "anal", "hotdog"]:
-        if primary_action in ["fondle_thighs", "fondle_breasts", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-            if primary_action == "kiss_you":
-                $ primary_action = primary_action
-
-                return
-
         if offhand_action == primary_action:
             return
 
@@ -1247,7 +1241,7 @@ label before_action:
         if primary_action == "handjob":
             call handjob_launch(focused_Girl, "L")
         elif primary_action == "footjob":
-            call sex_launch(focused_Girl, "foot")
+            call sex_launch(focused_Girl, "footjob")
         elif primary_action == "titjob":
             call titjob_launch(focused_Girl, "L")
         elif primary_action == "blowjob":
@@ -1358,12 +1352,10 @@ label before_action:
     elif primary_action == "sex":
         $ Player.Cock = "in"
 
-        $ primary_action = primary_action
         $ action_speed = 1
     elif primary_action == "anal":
         $ Player.Cock = "anal"
 
-        $ primary_action = primary_action
         $ action_speed = 1
 
     if Taboo:
@@ -1387,11 +1379,11 @@ label before_action:
 
 label action_cycle:
     if primary_action in ["suck_breasts", "eat_pussy", "eat_ass"]:
-        if offhand_action == "kiss_you":
+        if offhand_action == "kiss":
             $ offhand_action = 0
 
     while Round > 0:
-        call Shift_Focus(focused_Girl)
+        call shift_focus(focused_Girl)
 
         if primary_action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]
             # we have to fix ViewShift to accept primary_action
@@ -1421,7 +1413,7 @@ label action_cycle:
             if focused_Girl.Panties or focused_Girl.PantsNum() >= 6 or focused_Girl.HoseNum() >= 5: #This checks if Rogue wants to strip down.
                 call Girl_Undress(focused_Girl, "auto")
 
-        call Shift_Focus(focused_Girl)
+        call shift_focus(focused_Girl)
         call Sex_Dialog(focused_Girl, Partner)
 
         $ counter += 1
@@ -1478,7 +1470,7 @@ label after_action:
     if primary_action not in ["dildo_pussy", "dildo_ass"]:
         $ focused_Girl.Addictionrate += 1
 
-        if "addictive" in Player.Traits:
+        if Player.addictive:
             $ focused_Girl.Addictionrate += 1
 
     if primary_action in ["handjob", "footjob"]:

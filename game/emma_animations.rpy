@@ -421,7 +421,7 @@ image Emma_Sprite:
 #            ),
         (0,0), ConditionSwitch(
             #UI tool for When Emma is masturbating using girl_offhand_action actions
-            "EmmaX.Loc == 'bg teacher'", Null(),
+            "EmmaX.location == 'bg teacher'", Null(),
             "primary_action == 'lesbian' or not girl_offhand_action or focused_Girl != EmmaX", Null(),
 
             #this is not a lesbian thing, and a trigger is set, and Emma is the primary. . .
@@ -443,7 +443,7 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
             #UI tool for Partner_offhand_action(Threesome masutrbation) actions
-            "EmmaX.Loc == 'bg teacher'", Null(),
+            "EmmaX.location == 'bg teacher'", Null(),
             "not Partner_offhand_action or Partner_primary_action != 'masturbation' or focused_Girl == EmmaX", Null(),
 
             #Emma is not primary, and T4 is masturbation, and a T5 is selected
@@ -459,7 +459,7 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
             #UI tool for primary_action1(primary) actions
-            "EmmaX.Loc == 'bg teacher'", Null(),
+            "EmmaX.location == 'bg teacher'", Null(),
             "not primary_action or focused_Girl != EmmaX", Null(),
 
             # Emma is primary and a sex trigger is active
@@ -478,7 +478,7 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
             #UI tool for offhand_action(secondary) actions
-            "EmmaX.Loc == 'bg teacher'", Null(),
+            "EmmaX.location == 'bg teacher'", Null(),
             "not offhand_action or focused_Girl != EmmaX", Null(),
 
             #Emma is primary and an offhand trigger is active
@@ -504,7 +504,7 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
             #UI tool for Partner_primary_action(Threesome) actions (ie Rogue's hand on her)
-            "EmmaX.Loc == 'bg teacher'", Null(),
+            "EmmaX.location == 'bg teacher'", Null(),
             "not Partner_primary_action or focused_Girl != EmmaX", Null(),
 
             # There is a threesome trigger set and Emma is the target of it
@@ -532,7 +532,7 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
             #UI tool for girl_offhand_action(lesbian) actions (ie Rogue's hand on her when Emma is secondary)
-            "EmmaX.Loc == 'bg teacher'", Null(),
+            "EmmaX.location == 'bg teacher'", Null(),
             "primary_action != 'lesbian' or focused_Girl == EmmaX or not girl_offhand_action", Null(),
 
             # If there is a girl_offhand_action and Emma is not the focus
@@ -4798,7 +4798,7 @@ label Emma_BJ_Launch(line = primary_action):    # The sequence to launch the Emm
 
 
     if line != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show Emma_Sprite zorder EmmaX.Layer:
         alpha 0
@@ -5465,11 +5465,11 @@ image Emma_FJ_Calf:
 # End footjob animations / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 label Emma_FJ_Launch(line = primary_action):    # The sequence to launch the Emma footjob animations
-    $ primary_action = "foot"
+    $ primary_action = "footjob"
     $ Player.Sprite = 1
     $ ShowFeet = 1
     if EmmaX.Pose == "doggy":
-            call Emma_Sex_Launch("foot")
+            call Emma_Sex_Launch("footjob")
             return
 
     if renpy.showing("Emma_FJ_Animation"):

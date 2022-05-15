@@ -4,14 +4,14 @@ label prologue:
     $ Current_Time = "Evening"
     call display_background
 
-    if "Historia" in Player.Traits:
+    if simulation:
         show BlueScreen onlayer black
 
     "You recently discovered that you were a mutant when a Sentinel attacked your home.\nYou were rescued by a squad of X-Men and given this address."
     "You've arrived in the early evening at the Xavier Institute, where you've been promised a new home."
     "Things have been tough for mutants in the years since Apocalypse's fall, but this sounds like it might be a good deal."
 
-    if "Historia" not in Player.Traits:
+    if not simulation:
         python:
             Player.name = renpy.input("What is your name?", default="Zero", length = 10)
             Player.name = Player.name.strip()
@@ -46,7 +46,7 @@ label prologue:
     ch_x "Nonsense, my boy. You have an incredibly useful ability. . ."
     ch_x "the power to negate other powers, even including my own."
 
-    $ RogueX.Loc = bg_current
+    $ RogueX.location = bg_current
     $ RogueX.change_face("surprised")
     $ RogueX.sprite_location = StageFarRight
 
@@ -131,7 +131,7 @@ label prologue:
 label tour_start:
     $ bg_current = "bg_campus"
 
-    $ RogueX.Loc = bg_current
+    $ RogueX.location = bg_current
 
     call set_the_scene(0)
 
@@ -141,7 +141,7 @@ label tour_start:
 
     $ bg_current = "bg_player"
 
-    $ RogueX.Loc = bg_current
+    $ RogueX.location = bg_current
 
     call set_the_scene(0)
 
@@ -171,9 +171,9 @@ label tour_start:
 
     $ bg_current = "bg_classroom"
 
-    $ RogueX.Loc = bg_current
+    $ RogueX.location = bg_current
 
-    call CleartheRoom("All",0,1)
+    call clear_the_room("all",0,1)
     call set_the_scene(0)
 
     show Rogue_Sprite at sprite_location(RogueX.sprite_location)
@@ -184,7 +184,7 @@ label tour_start:
 
     $ bg_current = "bg_dangerroom"
 
-    $ RogueX.Loc = bg_current
+    $ RogueX.location = bg_current
 
     call set_the_scene(0)
 
@@ -221,7 +221,7 @@ label tour_start:
 
 label tour_end:
     $ bg_current = "bg_campus"
-    $ RogueX.Loc = bg_current
+    $ RogueX.location = bg_current
 
     call set_the_scene(0)
 
@@ -338,7 +338,7 @@ label tour_end:
     if RogueX.love >= 500:
         ch_r "Maybe I'll see you around though. Here's my number, you can give me a call."
 
-        if "Historia" not in Player.Traits:
+        if not simulation:
             $ Digits.append(RogueX)
 
     $ RogueX.Arms = "gloves"
@@ -364,7 +364,7 @@ label tour_parting:
                 $ RogueX.change_stat("inhibition", 10, 20)
                 $ RogueX.change_stat("inhibition", 50, 10)
 
-                if "Historia" in Player.Traits:
+                if simulation:
                     return 1
 
                 call Makeout(RogueX)
@@ -413,9 +413,9 @@ label tour_parting:
 
                     $ RogueX.emotion = "normal"
 
-    $ RogueX.Loc = "bg_rogue"
+    $ RogueX.location = "bg_rogue"
 
-    if "Historia" in Player.Traits:
+    if simulation:
         return 0
 
     $ bg_current = "bg_player"
@@ -432,11 +432,11 @@ label tour_parting:
     return
 
 label Rogue_love:
-    call Shift_Focus(RogueX)
+    call shift_focus(RogueX)
     $ RogueX.DrainWord("asked meet")
 
     if bg_current != "bg_rogue":
-        if RogueX.Loc == bg_current or RogueX in Party:
+        if RogueX.location == bg_current or RogueX in Party:
             "Suddenly, [RogueX.name] says she wants to talk to you in her room and drags you over there."
         else:
             "[RogueX.name] shows up, hurridly says she wants to talk to you in her room and drags you over there."
@@ -445,10 +445,10 @@ label Rogue_love:
 
     $ Player.AddWord(1,"interruption") #adds to Recent
     $ bg_current = "bg_rogue"
-    $ RogueX.Loc = bg_current
+    $ RogueX.location = bg_current
     call set_the_scene(0)
     call Display_Girl(RogueX)
-    call CleartheRoom(RogueX)
+    call clear_the_room(RogueX)
     call Taboo_Level
     $ RogueX.daily_history.append("relationship")
     $ RogueX.change_face("bemused", 1)
@@ -520,7 +520,7 @@ label Rogue_love:
             "Yeah. . . [[have sex]":
                     $ RogueX.change_stat("inhibition", 30, 30)
                     ch_r "Hmm. . ."
-                    if "Historia" in Player.Traits:
+                    if simulation:
                         return 1
                     call Rogue_SexAct("sex")
                     return
@@ -538,7 +538,7 @@ label Rogue_love:
                     return
     else:
             ch_r "Now, lover. . . was there anything else you felt like doing to celebrate?"
-    if "Historia" in Player.Traits:
+    if simulation:
             return 1
     if "stockings and garterbelt" not in RogueX.Inventory:
             $ RogueX.Inventory.append("stockings and garterbelt")
@@ -548,7 +548,7 @@ label Rogue_love:
     return
 
 label Rogue_love_Jerk:
-    if "Historia" not in Player.Traits:
+    if not simulation:
             $ renpy.pop_call()
     $ RogueX.change_face("angry", 1)
     ch_r "Well fine!"
@@ -559,24 +559,24 @@ label Rogue_love_Jerk:
             $ RogueX.change_face("sad")
             ch_r "I. . . I don't care, I love you too much anyways."
             ch_r "I need some time to myself though."
-            if "Historia" in Player.Traits:
+            if simulation:
                     return 1
             $ RogueX.Petnames.append("lover")
             $ Achievements.append("One Sided love")
-            $ RogueX.Loc = "bg_rogue"
+            $ RogueX.location = "bg_rogue"
             $ bg_current = "bg_player"
-            call Remove_Girl(RogueX)
+            call remove_girl(RogueX)
             jump player_room
     if RogueX.Event[6] > 1:
             ch_r "Fool me once, shame on you. . . I thought you'd grown."
     ch_r "If that's how you want to be, you can get the hell out of here!"
     $ Count = (100* RogueX.Event[6])
     $ RogueX.change_stat("love", 200, -Count)
-    if "Historia" in Player.Traits:
+    if simulation:
             return 0
-    $ RogueX.Loc = "bg_rogue"
+    $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
-    call Remove_Girl(RogueX)
+    call remove_girl(RogueX)
     jump player_room
 
 label Rogue_AnnaMarie:
@@ -626,16 +626,16 @@ label Rogue_AnnaMarie:
     return
 
 label Rogue_Sub:
-    call Shift_Focus(RogueX)
+    call shift_focus(RogueX)
     $ RogueX.DrainWord("asked meet")
-    if RogueX.Loc != bg_current and RogueX not in Party:
+    if RogueX.location != bg_current and RogueX not in Party:
             "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
     $ Player.AddWord(1,"interruption") #adds to Recent
-    $ RogueX.Loc = bg_current
+    $ RogueX.location = bg_current
     call set_the_scene(0)
     call Display_Girl(RogueX)
-    call CleartheRoom(RogueX)
+    call clear_the_room(RogueX)
     call Taboo_Level
     $ RogueX.daily_history.append("relationship")
     $ RogueX.change_face("bemused", 1)
@@ -699,7 +699,7 @@ label Rogue_Sub:
                 jump Rogue_Sub_Jerk
     $ RogueX.change_face("sexy")
     ch_r "Now, sir. . . was there anything else you wished me to do to celebrate?"
-    if "Historia" in Player.Traits:
+    if simulation:
             return 1
     if "stockings and garterbelt" not in RogueX.Inventory:
             $ RogueX.Inventory.append("stockings and garterbelt")
@@ -714,42 +714,42 @@ label Rogue_Sub_Jerk:
     $ Count = (20* RogueX.Event[7])
     $ RogueX.change_stat("inhibition", 50, 30)
     $ RogueX.change_stat("inhibition", 200, Count)
-    if "Historia" not in Player.Traits:
+    if not simulation:
             $ renpy.pop_call()
     if RogueX.Event[7] == 2:
             $ RogueX.change_face("sad")
             ch_r "I need some time to myself though."
-            if "Historia" in Player.Traits:
+            if simulation:
                     return
             $ RogueX.Petnames.append("sir")
             $ Achievements.append("Nosiree")
             $ bg_current = "bg_player"
-            $ RogueX.Loc = "bg_rogue"
-            call Remove_Girl(RogueX)
+            $ RogueX.location = "bg_rogue"
+            call remove_girl(RogueX)
             jump player_room
     if RogueX.Event[7] > 1:
             ch_r "I thought you may have learned to respect my needs by now."
     ch_r "If that's how it is, I would appreciate some time alone."
     $ Count = (20* RogueX.Event[7])
     $ RogueX.change_stat("obedience", 200, -Count)
-    if "Historia" in Player.Traits:
+    if simulation:
             return
-    $ RogueX.Loc = "bg_rogue"
+    $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
-    call Remove_Girl(RogueX)
+    call remove_girl(RogueX)
     jump player_room
 
 label Rogue_Master:
-    call Shift_Focus(RogueX)
+    call shift_focus(RogueX)
     $ RogueX.DrainWord("asked meet")
-    if RogueX.Loc != bg_current and RogueX not in Party:
+    if RogueX.location != bg_current and RogueX not in Party:
             "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
     $ Player.AddWord(1,"interruption") #adds to Recent
-    $ RogueX.Loc = bg_current
+    $ RogueX.location = bg_current
     call set_the_scene(0)
     call Display_Girl(RogueX)
-    call CleartheRoom(RogueX)
+    call clear_the_room(RogueX)
     call Taboo_Level
     $ RogueX.daily_history.append("relationship")
     $ RogueX.change_face("bemused", 1)
@@ -819,7 +819,7 @@ label Rogue_Master:
                 jump Rogue_obedience_Jerk
     $ RogueX.change_face("sexy")
     ch_r "Now, master. . . was there anything else you wished me to do to celebrate?"
-    if "Historia" in Player.Traits:
+    if simulation:
             return 1
     $ temp_modifier = 20
     call Rogue_SexMenu
@@ -832,37 +832,37 @@ label Rogue_obedience_Jerk:
     $ Count = (20* RogueX.Event[8])
     $ RogueX.change_stat("inhibition", 50, 30)
     $ RogueX.change_stat("inhibition", 200, Count)
-    if "Historia" not in Player.Traits:
+    if not simulation:
             $ renpy.pop_call()
     if RogueX.Event[8] == 2:
             $ RogueX.change_face("sad")
             ch_r "I don't care what you say, this is something I need. MASTER."
             ch_r "I need some time to myself though."
-            if "Historia" in Player.Traits:
+            if simulation:
                     return
             $ RogueX.Petnames.append("master")
             $ Achievements.append("Heavy is the Head")
             $ bg_current = "bg_player"
-            $ RogueX.Loc = "bg_rogue"
-            call Remove_Girl(RogueX)
+            $ RogueX.location = "bg_rogue"
+            call remove_girl(RogueX)
             jump player_room
     if RogueX.Event[8] > 1:
             ch_r "I thought you may have learned to respect my needs by now."
     ch_r "If that's how it is, I would appreciate some time alone."
     $ Count = (50* RogueX.Event[8])
     $ RogueX.change_stat("obedience", 200, -Count)
-    if "Historia" in Player.Traits:
+    if simulation:
         return
-    $ RogueX.Loc = "bg_rogue"
+    $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
-    call Remove_Girl(RogueX)
+    call remove_girl(RogueX)
     jump player_room
 
 label Rogue_Sexfriend:
-    call Shift_Focus(RogueX)
+    call shift_focus(RogueX)
     $ RogueX.daily_history.append("relationship")
     if RogueX in Player.Harem:
-            if RogueX.Loc != bg_current and RogueX not in Party:
+            if RogueX.location != bg_current and RogueX not in Party:
                     return
             $ RogueX.DrainWord("asked meet")
             if "stockings and garterbelt" not in RogueX.Inventory:
@@ -873,16 +873,16 @@ label Rogue_Sexfriend:
             return
 
     $ RogueX.DrainWord("asked meet")
-    if RogueX.Loc != bg_current and RogueX not in Party:
+    if RogueX.location != bg_current and RogueX not in Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
     if "stockings and garterbelt" not in RogueX.Inventory:
             $ RogueX.Inventory.append("stockings and garterbelt")
     $ RogueX.Petnames.append("sex friend")
-    $ RogueX.Loc = bg_current
+    $ RogueX.location = bg_current
     call set_the_scene(0)
     call Display_Girl(RogueX)
-    call CleartheRoom(RogueX)
+    call clear_the_room(RogueX)
     call Taboo_Level
     $ RogueX.change_face("smile", 1)
     ch_r ". . ."
@@ -935,7 +935,7 @@ label Rogue_Sexfriend:
                         jump Rogue_Sexfriend_Jerk
             $ RogueX.change_face("sexy")
             ch_r "Now, sex friend. . . how would you like to celebrate?"
-            if "Historia" in Player.Traits:
+            if simulation:
                     return 1
     $ Player.AddWord(1,"interruption") #adds to Recent
     $ temp_modifier = 25
@@ -948,19 +948,19 @@ label Rogue_Sexfriend_Jerk:
     $ RogueX.daily_history.append("relationship")
     ch_r "Your loss."
     $ RogueX.change_stat("obedience", 50, 30)
-    if "Historia" not in Player.Traits:
+    if not simulation:
             $ renpy.pop_call()
     if RogueX.Event[9] == 3:
             ch_r "Well, it's not really up to you anyways."
             ch_r "Just let me know if you want a roll in the hay."
             ch_r "I need some alone time though."
-            if "Historia" in Player.Traits:
+            if simulation:
                     return
             $ RogueX.Petnames.append("sex friend")
             $ Achievements.append("Man of Virtue")
             $ bg_current = "bg_player"
-            $ RogueX.Loc = "bg_rogue"
-            call Remove_Girl(RogueX)
+            $ RogueX.location = "bg_rogue"
+            call remove_girl(RogueX)
             jump player_room
     $ Count = (10 * RogueX.Event[9])
     $ RogueX.change_stat("inhibition", 200, -Count)
@@ -969,30 +969,30 @@ label Rogue_Sexfriend_Jerk:
             $ bg_current = "bg_player"
     else:
             ch_r "Ok, I'm out."
-            $ RogueX.Loc = "bg_rogue"
-    if "Historia" in Player.Traits:
+            $ RogueX.location = "bg_rogue"
+    if simulation:
             return
-    call Remove_Girl(RogueX)
+    call remove_girl(RogueX)
     jump player_room
 
 label Rogue_Fuckbuddy:
-    call Shift_Focus(RogueX)
+    call shift_focus(RogueX)
     $ RogueX.DrainWord("asked meet")
     if RogueX in Player.Harem:
-            if RogueX.Loc != bg_current and RogueX not in Party:
+            if RogueX.location != bg_current and RogueX not in Party:
                     return
             $ RogueX.Petnames.append("fuck buddy")
             $ RogueX.change_stat("inhibition", 200, 50)
             "[RogueX.name] suddenly reaches down and gives your package a little squeeze."
             return
 
-    if RogueX.Loc != bg_current and RogueX not in Party:
+    if RogueX.location != bg_current and RogueX not in Party:
             "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
-    $ RogueX.Loc = bg_current
+    $ RogueX.location = bg_current
     call set_the_scene(0)
     call Display_Girl(RogueX)
-    call CleartheRoom(RogueX)
+    call clear_the_room(RogueX)
     call Taboo_Level
     $ RogueX.change_face("bemused", 1)
     ch_r ". . ."
@@ -1025,7 +1025,7 @@ label Rogue_Fuckbuddy:
                         ch_r "Whoo hoo!"
                         $ RogueX.Over = 0
                         $ RogueX.Chest = 0
-                        if "Historia" in Player.Traits:
+                        if simulation:
                                     return 1
                         call first_topless(RogueX, silent = 1)
                         call Rogue_Breasts_Launch
@@ -1045,7 +1045,7 @@ label Rogue_Fuckbuddy:
                     jump Rogue_Fuckbuddy_Jerk
             $ RogueX.change_face("sexy")
             ch_r "Now, -heh-, fuck buddy. . . let's make this official!"
-    if "Historia" in Player.Traits:
+    if simulation:
             return 1
     $ temp_modifier = 30
     $ Player.AddWord(1,"interruption") #adds to Recent
@@ -1063,7 +1063,7 @@ label Rogue_Fuckbuddy_Jerk:
             ch_r "I offer these things on a silver platter, and nothing!"
             $ RogueX.OutfitChange()
             ch_r "Look, I don't care what you call it. Just let me know if you want a tumble."
-            if "Historia" in Player.Traits:
+            if simulation:
                     return 1
             call first_topless(RogueX, silent = 1)
             $ RogueX.Petnames.append("fuck buddy")
@@ -1071,7 +1071,7 @@ label Rogue_Fuckbuddy_Jerk:
             return
     else:
             ch_r "Too bad."
-    if "Historia" in Player.Traits:
+    if simulation:
             return
     $ renpy.pop_call()
     $ Count = (10*RogueX.Event[10])
@@ -1081,6 +1081,6 @@ label Rogue_Fuckbuddy_Jerk:
             $ bg_current = "bg_player"
     else:
             ch_r "Ok, I'm out."
-            $ RogueX.Loc = "bg_rogue"
-    call Remove_Girl(RogueX)
+            $ RogueX.location = "bg_rogue"
+    call remove_girl(RogueX)
     jump player_room

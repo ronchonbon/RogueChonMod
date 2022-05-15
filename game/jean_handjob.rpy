@@ -1,7 +1,7 @@
 ﻿## Girl.Handjob //////////////////////////////////////////////////////////////////////
 label Jean_Handjob:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     if Girl.Hand >= 7: # She loves it
         $ temp_modifier += 10
     elif Girl.Hand >= 3: #You've done it before several times
@@ -28,13 +28,13 @@ label Jean_Handjob:
     if Girl.Taboo and "tabno" in Girl.daily_history:
         $ temp_modifier -= 10
 
-    if "no hand" in Girl.daily_history:
+    if "no_hand" in Girl.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no hand" in Girl.recent_history else 0
+        $ temp_modifier -= 10 if "no_hand" in Girl.recent_history else 0
 
     $ Approval = ApprovalCheck(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)
 
-    if not Girl.Hand and "no hand" not in Girl.recent_history:
+    if not Girl.Hand and "no_hand" not in Girl.recent_history:
         $ Girl.change_face("confused", 2)
         ch_j "You want a handjob, hmm. . ."
         $ Girl.Blush = 1
@@ -65,11 +65,11 @@ label Jean_Handjob:
             ch_j "And that's it?"
         elif not Girl.Taboo and "tabno" in Girl.daily_history:
             ch_j "Well, I guess here might not be that bad. . ."
-        elif "hand" in Girl.recent_history:
+        elif "handjob" in Girl.recent_history:
             $ Girl.change_face("sexy", 1)
             ch_j "Well, I guess another wouldn't hurt. . ."
             jump Jean_HJ_Prep
-        elif "hand" in Girl.daily_history:
+        elif "handjob" in Girl.daily_history:
             $ Girl.change_face("sexy", 1)
             $ line = renpy.random.choice(["Another one?",
                 "Didn't get enough earlier?",
@@ -101,7 +101,7 @@ label Jean_Handjob:
             $ Girl.change_stat("obedience", 90, 1)
             $ Girl.change_stat("inhibition", 60, 1)
             ch_j "Ok, fine."
-        elif "no hand" in Girl.daily_history:
+        elif "no_hand" in Girl.daily_history:
             ch_j "Oh, -fine-. . ."
         else:
             $ Girl.change_face("sexy", 1)
@@ -122,11 +122,11 @@ label Jean_Handjob:
 
     else:                                                                               #She's not into it, but maybe. . .
         $ Girl.change_face("angry")
-        if "no hand" in Girl.recent_history:
+        if "no_hand" in Girl.recent_history:
             ch_j "I just told you no, [Girl.Petname]."
-        elif Girl.Taboo and "tabno" in Girl.daily_history and "no hand" in Girl.daily_history:
+        elif Girl.Taboo and "tabno" in Girl.daily_history and "no_hand" in Girl.daily_history:
             ch_j "I told you I wasn't comfortable in public. . ."
-        elif "no hand" in Girl.daily_history:
+        elif "no_hand" in Girl.daily_history:
             ch_j "I told you \"no,\" [Girl.Petname]."
         elif Girl.Taboo and "tabno" in Girl.daily_history:
             ch_j "I told you I wasn't comfortable in public. . ."
@@ -138,11 +138,11 @@ label Jean_Handjob:
             ch_j "Nope."
         menu:
             extend ""
-            "Sorry, never mind." if "no hand" in Girl.daily_history:
+            "Sorry, never mind." if "no_hand" in Girl.daily_history:
                 $ Girl.change_face("bemused")
                 ch_j "It's fine."
                 return
-            "Maybe later?" if "no hand" not in Girl.daily_history:
+            "Maybe later?" if "no_hand" not in Girl.daily_history:
                 $ Girl.change_face("bemused")
                 ch_j "Maybe."
                 $ Girl.change_stat("love", 80, 2)
@@ -150,8 +150,8 @@ label Jean_Handjob:
                 if Girl.Taboo:
                     $ Girl.recent_history.append("tabno")
                     $ Girl.daily_history.append("tabno")
-                $ Girl.recent_history.append("no hand")
-                $ Girl.daily_history.append("no hand")
+                $ Girl.recent_history.append("no_hand")
+                $ Girl.daily_history.append("no_hand")
                 return
             "I'd really appreciate it. . .":
                 if Approval:
@@ -177,7 +177,7 @@ label Jean_Handjob:
 
     #She refused all offers.
     $ Girl.ArmPose = 1
-    if "no hand" in Girl.daily_history:
+    if "no_hand" in Girl.daily_history:
         $ Girl.change_face("angry", 1)
 
         $ Girl.recent_history.append("angry")
@@ -203,14 +203,14 @@ label Jean_Handjob:
     else:
         $ Girl.change_face("normal", 1)
         ch_j "I'd really prefer not touching that."
-    $ Girl.recent_history.append("no hand")
-    $ Girl.daily_history.append("no hand")
+    $ Girl.recent_history.append("no_hand")
+    $ Girl.daily_history.append("no_hand")
     $ temp_modifier = 0
     return
 
 
 label Jean_HJ_Prep:
-    if offhand_action == "hand":
+    if offhand_action == "handjob":
         return
 
     if Girl.Taboo:
@@ -280,13 +280,13 @@ label Jean_HJ_Prep:
     $ counter = 0
     if Girl.Taboo:
         $ Girl.DrainWord("tabno")
-    $ Girl.DrainWord("no hand")
-    $ Girl.recent_history.append("hand")
-    $ Girl.daily_history.append("hand")
+    $ Girl.DrainWord("no_hand")
+    $ Girl.recent_history.append("handjob")
+    $ Girl.daily_history.append("handjob")
 
 label Jean_HJ_Cycle:
     while Round > 0:
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         call Jean_HJ_Launch
         $ Girl.lustFace()
 
@@ -321,9 +321,9 @@ label Jean_HJ_Cycle:
 
                         "Other options":
                                 menu:
-                                    "I also want to fondle her breasts." if offhand_action != "fondle breasts":
+                                    "I also want to fondle her breasts." if offhand_action != "fondle_breasts":
                                             if Girl.Action and multi_action:
-                                                $ offhand_action = "fondle breasts"
+                                                $ offhand_action = "fondle_breasts"
                                                 "You start to fondle her breasts."
                                                 $ Girl.Action -= 1
                                             else:
@@ -400,7 +400,7 @@ label Jean_HJ_Cycle:
                                     jump Jean_HJ_After
         #End menu (if line)
 
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         call Sex_Dialog(Girl,Partner)
 
         #If either of you could cum
@@ -513,7 +513,7 @@ label Jean_HJ_After:
     $ Girl.Hand += 1
     $ Girl.Action -=1
     $ Girl.Addictionrate += 1
-    if "addictive" in Player.Traits:
+    if Player.addictive:
         $ Girl.Addictionrate += 1
     $ Girl.change_stat("lust", 90, 5)
 
@@ -551,7 +551,7 @@ label Jean_HJ_After:
 ## Girl.Titjob //////////////////////////////////////////////////////////////////////
 label Jean_Titjob:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     if Girl.Tit >= 7: # She loves it
         $ temp_modifier += 10
     elif Girl.Tit >= 3: #You've done it before several times
@@ -584,13 +584,13 @@ label Jean_Titjob:
     if Girl.Taboo and "tabno" in Girl.daily_history:
         $ temp_modifier -= 10
 
-    if "no titjob" in Girl.daily_history:
+    if "no_titjob" in Girl.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no titjob" in Girl.recent_history else 0
+        $ temp_modifier -= 10 if "no_titjob" in Girl.recent_history else 0
 
     $ Approval = ApprovalCheck(Girl, 1200, TabM = 4) # 120, 135, 150, Taboo -200(320)
 
-    if not Girl.Tit and "no titjob" not in Girl.recent_history:
+    if not Girl.Tit and "no_titjob" not in Girl.recent_history:
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
         ch_j "Oh, you want me to put these to work. . ."
@@ -659,7 +659,7 @@ label Jean_Titjob:
             $ Girl.change_stat("obedience", 90, 1)
             $ Girl.change_stat("inhibition", 60, 1)
             ch_j "I can't fault your taste. . ."
-        elif "no titjob" in Girl.daily_history:
+        elif "no_titjob" in Girl.daily_history:
             ch_j "Hmm, I guess. . ."
         else:
             $ Girl.change_face("sexy", 1)
@@ -679,11 +679,11 @@ label Jean_Titjob:
 
     else:                                                                               #She's not into it, but maybe. . .
         $ Girl.change_face("angry")
-        if "no titjob" in Girl.recent_history:
+        if "no_titjob" in Girl.recent_history:
             ch_j "I {i}just{/i} told you \"no,\" [Girl.Petname]."
-        elif Girl.Taboo and "tabno" in Girl.daily_history and "no titjob" in Girl.daily_history:
+        elif Girl.Taboo and "tabno" in Girl.daily_history and "no_titjob" in Girl.daily_history:
             ch_j "I don't want to show off the goods like that!"
-        elif "no titjob" in Girl.daily_history:
+        elif "no_titjob" in Girl.daily_history:
             ch_j "I already told you \"no,\" [Girl.Petname]."
         elif Girl.Taboo and "tabno" in Girl.daily_history:
             ch_j "I don't want to show off the goods like that!"
@@ -696,11 +696,11 @@ label Jean_Titjob:
 
         menu:
             extend ""
-            "Sorry, never mind." if "no titjob" in Girl.daily_history:
+            "Sorry, never mind." if "no_titjob" in Girl.daily_history:
                 $ Girl.change_face("bemused")
                 ch_j "Ok, fine, [Girl.Petname]."
                 return
-            "Maybe later?" if "no titjob" not in Girl.daily_history:
+            "Maybe later?" if "no_titjob" not in Girl.daily_history:
                 $ Girl.change_face("sexy")
                 ch_j ". . . maybe."
                 $ Girl.change_stat("love", 80, 2)
@@ -708,8 +708,8 @@ label Jean_Titjob:
                 if Girl.Taboo:
                     $ Girl.recent_history.append("tabno")
                     $ Girl.daily_history.append("tabno")
-                $ Girl.recent_history.append("no titjob")
-                $ Girl.daily_history.append("no titjob")
+                $ Girl.recent_history.append("no_titjob")
+                $ Girl.daily_history.append("no_titjob")
                 return
             "I think this could be fun for both of us. . .":
                 if Approval:
@@ -741,7 +741,7 @@ label Jean_Titjob:
                                 $ Girl.change_stat("obedience", 50, 1)
                                 jump Jean_BJ_Prep
                             "Nah, it's all about dem titties.":
-                                $ line = "no BJ"
+                                $ line = "no_BJ"
                     if Approval and Girl.Hand:
                         $ Girl.change_stat("inhibition", 80, 1)
                         $ Girl.change_stat("inhibition", 60, 3)
@@ -754,9 +754,9 @@ label Jean_Titjob:
                                 $ Girl.change_stat("inhibition", 60, 1)
                                 $ Girl.change_stat("obedience", 50, 1)
                                 jump Jean_HJ_Prep
-                            "Seriously, titties." if line == "no BJ":
+                            "Seriously, titties." if line == "no_BJ":
                                 $ line = 0
-                            "Nah, it's all about dem titties." if line != "no BJ":
+                            "Nah, it's all about dem titties." if line != "no_BJ":
                                 pass
                     $ Girl.change_stat("love", 200, -2)
                     ch_j "Well then too bad, I guess."
@@ -784,7 +784,7 @@ label Jean_Titjob:
                     $ Girl.daily_history.append("angry")
 
     #She refused all offers.
-    if "no titjob" in Girl.daily_history:
+    if "no_titjob" in Girl.daily_history:
         $ Girl.change_face("angry", 1)
 
         $ Girl.recent_history.append("angry")
@@ -811,8 +811,8 @@ label Jean_Titjob:
     else:
         $ Girl.change_face("normal", 1)
         ch_j "Nah."
-    $ Girl.recent_history.append("no titjob")
-    $ Girl.daily_history.append("no titjob")
+    $ Girl.recent_history.append("no_titjob")
+    $ Girl.daily_history.append("no_titjob")
     $ temp_modifier = 0
     return
 
@@ -881,13 +881,13 @@ label Jean_TJ_Prep:
     $ counter = 0
     if Girl.Taboo:
         $ Girl.DrainWord("tabno")
-    $ Girl.DrainWord("no titjob")
+    $ Girl.DrainWord("no_titjob")
     $ Girl.recent_history.append("titjob")
     $ Girl.daily_history.append("titjob")
 
 label Jean_TJ_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         call Jean_TJ_Launch
         $ Girl.lustFace()
 
@@ -926,9 +926,9 @@ label Jean_TJ_Cycle: #Repeating strokes
 
                         "Other options":
                                 menu:
-                                    "I also want to fondle her breasts." if offhand_action != "fondle breasts":
+                                    "I also want to fondle her breasts." if offhand_action != "fondle_breasts":
                                             if Girl.Action and multi_action:
-                                                $ offhand_action = "fondle breasts"
+                                                $ offhand_action = "fondle_breasts"
                                                 "You start to fondle her breasts."
                                                 $ Girl.Action -= 1
                                             else:
@@ -998,7 +998,7 @@ label Jean_TJ_Cycle: #Repeating strokes
                                     jump Jean_TJ_After
         #End menu (if line)
 
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         call Sex_Dialog(Girl,Partner)
 
         #If either of you could cum
@@ -1116,7 +1116,7 @@ label Jean_TJ_After:
     $ Girl.Tit += 1
     $ Girl.Action -=1
     $ Girl.Addictionrate += 1
-    if "addictive" in Player.Traits:
+    if Player.addictive:
         $ Girl.Addictionrate += 1
 
     call Partner_Like(Girl,4)
@@ -1151,7 +1151,7 @@ label Jean_TJ_After:
 
 label Jean_Blowjob:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     if Girl.Blow >= 7: # She loves it
         $ temp_modifier += 15
     elif Girl.Blow >= 3: #You've done it before several times
@@ -1178,13 +1178,13 @@ label Jean_Blowjob:
     if Girl.Taboo and "tabno" in Girl.daily_history:
         $ temp_modifier -= 10
 
-    if "no blow" in Girl.daily_history:
+    if "no_blow" in Girl.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no blow" in Girl.recent_history else 0
+        $ temp_modifier -= 10 if "no_blow" in Girl.recent_history else 0
 
     $ Approval = ApprovalCheck(Girl, 1300, TabM = 4) # 130, 145, 160, Taboo -160(290)
 
-    if not Girl.Blow and "no blow" not in Girl.recent_history:
+    if not Girl.Blow and "no_blow" not in Girl.recent_history:
         $ Girl.change_face("surprised", 2)
         $ Girl.Mouth = "kiss"
         ch_j "Oh! You want me to suck you off?"
@@ -1217,11 +1217,11 @@ label Jean_Blowjob:
             ch_j "Again?"
         elif not Girl.Taboo and "tabno" in Girl.daily_history:
             ch_j "Hmm, this is private enough. . ."
-        elif "blow" in Girl.recent_history:
+        elif "blowjob" in Girl.recent_history:
             $ Girl.change_face("sexy", 1)
             ch_j "Mmm, again?"
             jump Jean_BJ_Prep
-        elif "blow" in Girl.daily_history:
+        elif "blowjob" in Girl.daily_history:
             $ Girl.change_face("sexy", 1)
             $ line = renpy.random.choice(["Back again so soon?",
                 "You're wearing me out here.",
@@ -1250,7 +1250,7 @@ label Jean_Blowjob:
             $ Girl.change_stat("obedience", 90, 1)
             $ Girl.change_stat("inhibition", 60, 1)
             ch_j "Fine, let's get this over with."
-        elif "no blow" in Girl.daily_history:
+        elif "no_blow" in Girl.daily_history:
             ch_j "Fine. . ."
         else:
             $ Girl.change_face("sexy", 1)
@@ -1271,11 +1271,11 @@ label Jean_Blowjob:
 
     else:                                                                               #She's not into it, but maybe. . .
         $ Girl.change_face("angry")
-        if "no blow" in Girl.recent_history:
+        if "no_blow" in Girl.recent_history:
             ch_j "Just told you I wouldn't, [Girl.Petname]."
-        elif Girl.Taboo and "tabno" in Girl.daily_history and "no blow" in Girl.daily_history:
+        elif Girl.Taboo and "tabno" in Girl.daily_history and "no_blow" in Girl.daily_history:
             ch_j "Like I said, not in public."
-        elif "no blow" in Girl.daily_history:
+        elif "no_blow" in Girl.daily_history:
             ch_j "Told you \"no,\" [Girl.Petname]."
         elif Girl.Taboo and "tabno" in Girl.daily_history:
             ch_j "Like I said, too public!"
@@ -1287,11 +1287,11 @@ label Jean_Blowjob:
             ch_j "I don't know, [Girl.Petname]. . ."
         menu:
             extend ""
-            "Sorry, never mind." if "no blow" in Girl.daily_history:
+            "Sorry, never mind." if "no_blow" in Girl.daily_history:
                 $ Girl.change_face("bemused")
                 ch_j "Ok then."
                 return
-            "Maybe later?" if "no blow" not in Girl.daily_history:
+            "Maybe later?" if "no_blow" not in Girl.daily_history:
                 $ Girl.change_face("sexy")
                 ch_j "Sure, whatever, [Girl.Petname]."
                 $ Girl.change_stat("love", 80, 2)
@@ -1299,8 +1299,8 @@ label Jean_Blowjob:
                 if Girl.Taboo:
                     $ Girl.recent_history.append("tabno")
                     $ Girl.daily_history.append("tabno")
-                $ Girl.recent_history.append("no blow")
-                $ Girl.daily_history.append("no blow")
+                $ Girl.recent_history.append("no_blow")
+                $ Girl.daily_history.append("no_blow")
                 return
             "Come on, please?":
                 if Approval:
@@ -1367,7 +1367,7 @@ label Jean_Blowjob:
                     $ Girl.daily_history.append("angry")
 
     #She refused all offers.
-    if "no blow" in Girl.daily_history:
+    if "no_blow" in Girl.daily_history:
         $ Girl.change_face("angry", 1)
         $ Girl.ArmPose = 2
 
@@ -1385,8 +1385,8 @@ label Jean_Blowjob:
         $ Girl.change_stat("obedience", 50, -2)
         $ Girl.recent_history.append("angry")
         $ Girl.daily_history.append("angry")
-        $ Girl.recent_history.append("no blow")
-        $ Girl.daily_history.append("no blow")
+        $ Girl.recent_history.append("no_blow")
+        $ Girl.daily_history.append("no_blow")
         return
     elif Girl.Taboo:                             # she refuses and this is too public a place for her
         $ Girl.change_face("angry", 1)
@@ -1401,8 +1401,8 @@ label Jean_Blowjob:
     else:
         $ Girl.change_face("smile", 1)
         ch_j "Ha! Good one."
-    $ Girl.recent_history.append("no blow")
-    $ Girl.daily_history.append("no blow")
+    $ Girl.recent_history.append("no_blow")
+    $ Girl.daily_history.append("no_blow")
     $ temp_modifier = 0
     return
 
@@ -1471,13 +1471,13 @@ label Jean_BJ_Prep:
     $ counter = 0
     if Girl.Taboo:
         $ Girl.DrainWord("tabno")
-    $ Girl.DrainWord("no blow")
-    $ Girl.recent_history.append("blow")
-    $ Girl.daily_history.append("blow")
+    $ Girl.DrainWord("no_blow")
+    $ Girl.recent_history.append("blowjob")
+    $ Girl.daily_history.append("blowjob")
 
 label Jean_BJ_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         call Jean_BJ_Launch
         $ Girl.lustFace()
 
@@ -1545,9 +1545,9 @@ label Jean_BJ_Cycle: #Repeating strokes
 
                         "Other options":
                                 menu:
-                                    "I also want to fondle her breasts." if offhand_action != "fondle breasts":
+                                    "I also want to fondle her breasts." if offhand_action != "fondle_breasts":
                                             if Girl.Action and multi_action:
-                                                $ offhand_action = "fondle breasts"
+                                                $ offhand_action = "fondle_breasts"
                                                 "You start to fondle her breasts."
                                                 $ Girl.Action -= 1
                                             else:
@@ -1617,7 +1617,7 @@ label Jean_BJ_Cycle: #Repeating strokes
                                     jump Jean_BJ_After
         #End menu (if line)
 
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         call Sex_Dialog(Girl,Partner)
 
         #If either of you could cum
@@ -1735,7 +1735,7 @@ label Jean_BJ_After:
     $ Girl.Blow += 1
     $ Girl.Action -=1
     $ Girl.Addictionrate += 1
-    if "addictive" in Player.Traits:
+    if Player.addictive:
         $ Girl.Addictionrate += 1
 
     call Partner_Like(Girl,2)
@@ -1807,7 +1807,7 @@ label Jean_Dildo_Pussy:
     return
 
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call Jean_Dildo_Check
     if not _return:
         return
@@ -1836,9 +1836,9 @@ label Jean_Dildo_Pussy:
     if Girl.Taboo and "tabno" in Girl.daily_history:
         $ temp_modifier -= 10
 
-    if "no dildo" in Girl.daily_history:
+    if "no_dildo" in Girl.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no dildo" in Girl.recent_history else 0
+        $ temp_modifier -= 10 if "no_dildo" in Girl.recent_history else 0
 
     $ Approval = ApprovalCheck(Girl, 1250, TabM = 4) # 125, 140, 155, Taboo -160(335)
 
@@ -1981,11 +1981,11 @@ label Jean_Dildo_Pussy:
                 ch_j "The toys again?"
             elif not Girl.Taboo and "tabno" in Girl.daily_history:
                 ch_j "Well, at least you got us some privacy this time. . ."
-            elif "dildo pussy" in Girl.recent_history:
+            elif "dildo_pussy" in Girl.recent_history:
                 $ Girl.change_face("sexy", 1)
                 ch_j "Mmm, again? Ok, let's get to it."
                 jump Jean_DP_Prep
-            elif "dildo pussy" in Girl.daily_history:
+            elif "dildo_pussy" in Girl.daily_history:
                 $ Girl.change_face("sexy", 1)
                 $ line = renpy.random.choice(["Breaking out the toys again?",
                     "Didn't get enough earlier?",
@@ -2033,11 +2033,11 @@ label Jean_Dildo_Pussy:
     else:
             #She's not into it, but maybe. . .
             $ Girl.change_face("angry")
-            if "no dildo" in Girl.recent_history:
+            if "no_dildo" in Girl.recent_history:
                 ch_j "What part of \"no,\" did you not get, [Girl.Petname]?"
-            elif Girl.Taboo and "tabno" in Girl.daily_history and "no dildo" in Girl.daily_history:
+            elif Girl.Taboo and "tabno" in Girl.daily_history and "no_dildo" in Girl.daily_history:
                 ch_j "Stop swinging that thing around in public!"
-            elif "no dildo" in Girl.daily_history:
+            elif "no_dildo" in Girl.daily_history:
                 ch_j "I already told you \"no,\" [Girl.Petname]."
             elif Girl.Taboo and "tabno" in Girl.daily_history:
                 ch_j "Stop swinging that thing around in public!"
@@ -2049,11 +2049,11 @@ label Jean_Dildo_Pussy:
                 ch_j "I don't think we need any toys, [Girl.Petname]."
             menu:
                 extend ""
-                "Sorry, never mind." if "no dildo" in Girl.daily_history:
+                "Sorry, never mind." if "no_dildo" in Girl.daily_history:
                     $ Girl.change_face("bemused")
                     ch_j "Yeah, ok, [Girl.Petname]."
                     return
-                "Maybe later?" if "no dildo" not in Girl.daily_history:
+                "Maybe later?" if "no_dildo" not in Girl.daily_history:
                     $ Girl.change_face("sexy")
                     ch_j "Maybe I'll practice on my own time, [Girl.Petname]."
                     $ Girl.change_stat("love", 80, 2)
@@ -2061,8 +2061,8 @@ label Jean_Dildo_Pussy:
                     if Girl.Taboo:
                         $ Girl.recent_history.append("tabno")
                         $ Girl.daily_history.append("tabno")
-                    $ Girl.recent_history.append("no dildo")
-                    $ Girl.daily_history.append("no dildo")
+                    $ Girl.recent_history.append("no_dildo")
+                    $ Girl.daily_history.append("no_dildo")
                     return
                 "I think you'd like it. . .":
                     if Approval:
@@ -2099,7 +2099,7 @@ label Jean_Dildo_Pussy:
 
     #She refused all offers.
     $ Girl.ArmPose = 1
-    if "no dildo" in Girl.daily_history:
+    if "no_dildo" in Girl.daily_history:
 
             $ Girl.recent_history.append("angry")
             $ Girl.daily_history.append("angry")
@@ -2125,13 +2125,13 @@ label Jean_Dildo_Pussy:
     else:
             $ Girl.change_face("normal", 1)
             ch_j "No way."
-    $ Girl.recent_history.append("no dildo")
-    $ Girl.daily_history.append("no dildo")
+    $ Girl.recent_history.append("no_dildo")
+    $ Girl.daily_history.append("no_dildo")
     $ temp_modifier = 0
     return
 
 label Jean_DP_Prep: #Animation set-up
-    if offhand_action == "dildo pussy":
+    if offhand_action == "dildo_pussy":
         return
 
     if not Girl.Forced and action_context != "auto":
@@ -2141,7 +2141,7 @@ label Jean_DP_Prep: #Animation set-up
             return
 
     $ temp_modifier = 0
-    call Jean_Pussy_Launch("dildo pussy")
+    call Jean_Pussy_Launch("dildo_pussy")
     if not Girl.DildoP:
         if Girl.Forced:
             $ Girl.change_stat("love", 90, -75)
@@ -2163,14 +2163,14 @@ label Jean_DP_Prep: #Animation set-up
     $ counter = 0
     if Girl.Taboo:
         $ Girl.DrainWord("tabno")
-    $ Girl.DrainWord("no dildo")
-    $ Girl.recent_history.append("dildo pussy")
-    $ Girl.daily_history.append("dildo pussy")
+    $ Girl.DrainWord("no_dildo")
+    $ Girl.recent_history.append("dildo_pussy")
+    $ Girl.daily_history.append("dildo_pussy")
 
 label Jean_DP_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(Girl)
-        call Jean_Pussy_Launch("dildo pussy")
+        call shift_focus(Girl)
+        call Jean_Pussy_Launch("dildo_pussy")
         $ Girl.lustFace()
 
         if  Player.Focus < 100:
@@ -2279,7 +2279,7 @@ label Jean_DP_Cycle: #Repeating strokes
         if Girl.Panties or Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5: #This checks if Jean wants to strip down.
                 call Girl_Undress(Girl,"auto")
 
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         call Sex_Dialog(Girl,Partner)
 
         #If either of you could cum
@@ -2420,16 +2420,16 @@ label Jean_Dildo_Ass:
     return
 
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call Jean_Dildo_Check
     if not _return:
         return
 
     if Girl.Loose:
         $ temp_modifier += 30
-    elif "anal" in Girl.recent_history or "dildo anal" in Girl.recent_history:
+    elif "anal" in Girl.recent_history or "dildo_anal" in Girl.recent_history:
         $ temp_modifier -= 20
-    elif "anal" in Girl.daily_history or "dildo anal" in Girl.daily_history:
+    elif "anal" in Girl.daily_history or "dildo_anal" in Girl.daily_history:
         $ temp_modifier -= 10
     elif (Girl.Anal + Girl.DildoA + Girl.Plug) > 0: #You've done it before
         $ temp_modifier += 20
@@ -2456,9 +2456,9 @@ label Jean_Dildo_Ass:
     if Girl.Taboo and "tabno" in Girl.daily_history:
         $ temp_modifier -= 10
 
-    if "no dildo" in Girl.daily_history:
+    if "no_dildo" in Girl.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no dildo" in Girl.recent_history else 0
+        $ temp_modifier -= 10 if "no_dildo" in Girl.recent_history else 0
 
     $ Approval = ApprovalCheck(Girl, 1450, TabM = 4) # 145, 160, 175, Taboo -160(355)
 
@@ -2576,7 +2576,7 @@ label Jean_Dildo_Ass:
                 $ Girl.change_face("sad")
                 ch_j "Always about the butt, huh?"
 
-    if not Girl.Loose and ("dildo anal" in Girl.recent_history or "anal" in Girl.recent_history or "dildo anal" in Girl.daily_history or "anal" in Girl.daily_history):
+    if not Girl.Loose and ("dildo_anal" in Girl.recent_history or "anal" in Girl.recent_history or "dildo_anal" in Girl.daily_history or "anal" in Girl.daily_history):
             $ Girl.change_face("bemused", 1)
             ch_j "I'm still sore from earlier. . ."
 
@@ -2608,9 +2608,9 @@ label Jean_Dildo_Ass:
                 ch_j "The toys again?"
             elif not Girl.Taboo and "tabno" in Girl.daily_history:
                 ch_j "Well, at least you got us some privacy this time. . ."
-            elif "dildo anal" in Girl.daily_history and not Girl.Loose:
+            elif "dildo_anal" in Girl.daily_history and not Girl.Loose:
                 pass
-            elif "dildo anal" in Girl.daily_history:
+            elif "dildo_anal" in Girl.daily_history:
                 $ Girl.change_face("sexy", 1)
                 $ line = renpy.random.choice(["Breaking out the toys again?",
                     "Didn't get enough earlier?",
@@ -2659,18 +2659,18 @@ label Jean_Dildo_Ass:
     else:
             #She's not into it, but maybe. . .
             $ Girl.change_face("angry")
-            if "no dildo" in Girl.recent_history:
+            if "no_dildo" in Girl.recent_history:
                 ch_j "What part of \"no,\" did you not get, [Girl.Petname]?"
-            elif Girl.Taboo and "tabno" in Girl.daily_history and "no dildo" in Girl.daily_history:
+            elif Girl.Taboo and "tabno" in Girl.daily_history and "no_dildo" in Girl.daily_history:
                 ch_j "Stop swinging that thing around in public!"
-            elif "no dildo" in Girl.daily_history:
+            elif "no_dildo" in Girl.daily_history:
                 ch_j "I already told you \"no,\" [Girl.Petname]."
             elif Girl.Taboo and "tabno" in Girl.daily_history:
                 ch_j "I already told you that I wouldn't do that out here!"
             elif not Girl.DildoA:
                 $ Girl.change_face("bemused")
                 ch_j "I'm just not into toys, [Girl.Petname]. . ."
-            elif not Girl.Loose and "dildo anal" not in Girl.daily_history:
+            elif not Girl.Loose and "dildo_anal" not in Girl.daily_history:
                 $ Girl.change_face("perplexed")
                 ch_j "You could have been a bit more gentle last time, [Girl.Petname]. . ."
             else:
@@ -2678,11 +2678,11 @@ label Jean_Dildo_Ass:
                 ch_j "I don't think we need any toys, [Girl.Petname]."
             menu:
                 extend ""
-                "Sorry, never mind." if "no dildo" in Girl.daily_history:
+                "Sorry, never mind." if "no_dildo" in Girl.daily_history:
                     $ Girl.change_face("bemused")
                     ch_j "Yeah, ok, [Girl.Petname]."
                     return
-                "Maybe later?" if "no dildo" not in Girl.daily_history:
+                "Maybe later?" if "no_dildo" not in Girl.daily_history:
                     $ Girl.change_face("sexy")
                     ch_j "Maybe I'll practice on my own time, [Girl.Petname]."
                     $ Girl.change_stat("love", 80, 2)
@@ -2690,8 +2690,8 @@ label Jean_Dildo_Ass:
                     if Girl.Taboo:
                         $ Girl.recent_history.append("tabno")
                         $ Girl.daily_history.append("tabno")
-                    $ Girl.recent_history.append("no dildo")
-                    $ Girl.daily_history.append("no dildo")
+                    $ Girl.recent_history.append("no_dildo")
+                    $ Girl.daily_history.append("no_dildo")
                     return
                 "I think you'd like it. . .":
                     if Approval:
@@ -2728,7 +2728,7 @@ label Jean_Dildo_Ass:
 
     #She refused all offers.
     $ Girl.ArmPose = 1
-    if "no dildo" in Girl.daily_history:
+    if "no_dildo" in Girl.daily_history:
 
             $ Girl.recent_history.append("angry")
             $ Girl.daily_history.append("angry")
@@ -2748,7 +2748,7 @@ label Jean_Dildo_Ass:
             ch_j "Not here!"
             $ Girl.change_stat("lust", 200, 5)
             $ Girl.change_stat("obedience", 50, -3)
-    elif not Girl.Loose and "dildo anal" in Girl.daily_history:
+    elif not Girl.Loose and "dildo_anal" in Girl.daily_history:
             $ Girl.change_face("bemused")
             ch_j "Sorry, I just need a little break back there, [Girl.Petname]."
     elif Girl.DildoA:
@@ -2757,13 +2757,13 @@ label Jean_Dildo_Ass:
     else:
             $ Girl.change_face("normal", 1)
             ch_j "No way."
-    $ Girl.recent_history.append("no dildo")
-    $ Girl.daily_history.append("no dildo")
+    $ Girl.recent_history.append("no_dildo")
+    $ Girl.daily_history.append("no_dildo")
     $ temp_modifier = 0
     return
 
 label Jean_DA_Prep: #Animation set-up
-    if offhand_action == "dildo anal":
+    if offhand_action == "dildo_anal":
         return
 
     if not Girl.Forced and action_context != "auto":
@@ -2773,7 +2773,7 @@ label Jean_DA_Prep: #Animation set-up
             return
 
     $ temp_modifier = 0
-    call Jean_Pussy_Launch("dildo anal")
+    call Jean_Pussy_Launch("dildo_anal")
     if not Girl.DildoA:
         if Girl.Forced:
             $ Girl.change_stat("love", 90, -75)
@@ -2795,14 +2795,14 @@ label Jean_DA_Prep: #Animation set-up
     $ counter = 0
     if Girl.Taboo:
         $ Girl.DrainWord("tabno")
-    $ Girl.DrainWord("no dildo")
-    $ Girl.recent_history.append("dildo anal")
-    $ Girl.daily_history.append("dildo anal")
+    $ Girl.DrainWord("no_dildo")
+    $ Girl.recent_history.append("dildo_anal")
+    $ Girl.daily_history.append("dildo_anal")
 
 label Jean_DA_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(Girl)
-        call Jean_Pussy_Launch("dildo anal")
+        call shift_focus(Girl)
+        call Jean_Pussy_Launch("dildo_anal")
         $ Girl.lustFace()
 
         if  Player.Focus < 100:
@@ -2903,7 +2903,7 @@ label Jean_DA_Cycle: #Repeating strokes
         if Girl.Panties or Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5: #This checks if Jean wants to strip down.
                 call Girl_Undress(Girl,"auto")
 
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         call Sex_Dialog(Girl,Partner)
 
         #If either of you could cum
@@ -3050,7 +3050,7 @@ label Jean_Vibrator_Check:                                                      
 ## Girl.Footjob //////////////////////////////////////////////////////////////////////
 label Jean_Footjob:
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     if Girl.Foot >= 7: # She loves it
         $ temp_modifier += 10
     elif Girl.Foot >= 3: #You've done it before several times
@@ -3077,9 +3077,9 @@ label Jean_Footjob:
     if Girl.Taboo and "tabno" in Girl.daily_history:
         $ temp_modifier -= 10
 
-    if "no foot" in Girl.daily_history:
+    if "no_foot" in Girl.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no foot" in Girl.recent_history else 0
+        $ temp_modifier -= 10 if "no_foot" in Girl.recent_history else 0
 
     $ Approval = ApprovalCheck(Girl, 1250, TabM = 3) # 110, 125, 140, Taboo -120(230)
 
@@ -3112,7 +3112,7 @@ label Jean_Footjob:
                     $ Girl.change_stat("obedience", 30, 2)
                     return
             if primary_action:
-                $ girl_offhand_action = "foot"
+                $ girl_offhand_action = "footjob"
                 return
             jump Jean_FJ_Prep
         else:
@@ -3120,7 +3120,7 @@ label Jean_Footjob:
             $ offhand_action = 0
             return
 
-    if not Girl.Foot and "no foot" not in Girl.recent_history:
+    if not Girl.Foot and "no_foot" not in Girl.recent_history:
         $ Girl.change_face("confused", 2)
         ch_j "Oh, a foot person, eh?"
         $ Girl.Blush = 1
@@ -3153,11 +3153,11 @@ label Jean_Footjob:
             ch_j "That's it?"
         elif not Girl.Taboo and "tabno" in Girl.daily_history:
             ch_j "Um, I guess we're alone enough like this. . ."
-        elif "foot" in Girl.daily_history:
+        elif "footjob" in Girl.daily_history:
             $ Girl.change_face("sexy", 1)
             ch_j "More of that, huh. . ."
             jump Jean_FJ_Prep
-#        elif "foot" in Girl.daily_history:
+#        elif "footjob" in Girl.daily_history:
 #            $ Girl.change_face("sexy", 1)
 #            $ line = renpy.random.choice(["Another one?",
 #                "Didn't get enough earlier?",
@@ -3185,7 +3185,7 @@ label Jean_Footjob:
             $ Girl.change_stat("obedience", 90, 1)
             $ Girl.change_stat("inhibition", 60, 1)
             ch_j "Ok, sure."
-        elif "no foot" in Girl.daily_history:
+        elif "no_foot" in Girl.daily_history:
             ch_j "Fine."
         else:
             $ Girl.change_face("sexy", 1)
@@ -3206,11 +3206,11 @@ label Jean_Footjob:
 
     else:                                                                               #She's not into it, but maybe. . .
         $ Girl.change_face("angry")
-        if "no foot" in Girl.recent_history:
+        if "no_foot" in Girl.recent_history:
             ch_j "Don't make me repeat myself again, [Girl.Petname]."
-        elif Girl.Taboo and "tabno" in Girl.daily_history and "no foot" in Girl.daily_history:
+        elif Girl.Taboo and "tabno" in Girl.daily_history and "no_foot" in Girl.daily_history:
             ch_j "I told you I wasn't comfortable in public. . ."
-        elif "no foot" in Girl.daily_history:
+        elif "no_foot" in Girl.daily_history:
             ch_j "I told you \"no,\" [Girl.Petname]."
         elif Girl.Taboo and "tabno" in Girl.daily_history:
             ch_j "I said not in public!"
@@ -3222,11 +3222,11 @@ label Jean_Footjob:
             ch_j "Not now, ok?"
         menu:
             extend ""
-            "Sorry, never mind." if "no foot" in Girl.daily_history:
+            "Sorry, never mind." if "no_foot" in Girl.daily_history:
                 $ Girl.change_face("bemused")
                 ch_j "Sure, it's fine."
                 return
-            "Maybe later?" if "no foot" not in Girl.daily_history:
+            "Maybe later?" if "no_foot" not in Girl.daily_history:
                 $ Girl.change_face("sexy")
                 ch_j "Well. . ."
                 ch_j "Maybe."
@@ -3235,8 +3235,8 @@ label Jean_Footjob:
                 if Girl.Taboo:
                     $ Girl.recent_history.append("tabno")
                     $ Girl.daily_history.append("tabno")
-                $ Girl.recent_history.append("no foot")
-                $ Girl.daily_history.append("no foot")
+                $ Girl.recent_history.append("no_foot")
+                $ Girl.daily_history.append("no_foot")
                 return
             "I'd really appreciate it. . .":
                 if Approval:
@@ -3276,7 +3276,7 @@ label Jean_Footjob:
 
     #She refused all offers.
     $ Girl.ArmPose = 1
-    if "no foot" in Girl.daily_history:
+    if "no_foot" in Girl.daily_history:
         $ Girl.change_face("angry", 1)
 
         $ Girl.recent_history.append("angry")
@@ -3302,14 +3302,14 @@ label Jean_Footjob:
     else:
         $ Girl.change_face("normal", 1)
         ch_j "I'd rather not."
-    $ Girl.recent_history.append("no foot")
-    $ Girl.daily_history.append("no foot")
+    $ Girl.recent_history.append("no_foot")
+    $ Girl.daily_history.append("no_foot")
     $ temp_modifier = 0
     return
 
 
 label Jean_FJ_Prep:
-    if offhand_action == "foot":
+    if offhand_action == "footjob":
         return
 
     if Girl.Taboo:
@@ -3343,14 +3343,14 @@ label Jean_FJ_Prep:
     $ counter = 0
     if Girl.Taboo:
         $ Girl.DrainWord("tabno")
-    $ Girl.DrainWord("no foot")
-    $ Girl.recent_history.append("foot")
-    $ Girl.daily_history.append("foot")
+    $ Girl.DrainWord("no_foot")
+    $ Girl.recent_history.append("footjob")
+    $ Girl.daily_history.append("footjob")
 
 label Jean_FJ_Cycle:
     while Round > 0:
-        call Shift_Focus(Girl)
-        call Jean_Sex_Launch("foot")
+        call shift_focus(Girl)
+        call Jean_Sex_Launch("footjob")
         $ Girl.lustFace()
 
         if  Player.Focus < 100:
@@ -3473,7 +3473,7 @@ label Jean_FJ_Cycle:
                                     jump Jean_FJ_After
         #End menu (if line)
 
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         call Sex_Dialog(Girl,Partner)
 
         #If either of you could cum
@@ -3592,7 +3592,7 @@ label Jean_FJ_After:
     $ Girl.Foot += 1
     $ Girl.Action -=1
     $ Girl.Addictionrate += 1
-    if "addictive" in Player.Traits:
+    if Player.addictive:
         $ Girl.Addictionrate += 1
     $ Girl.change_stat("lust", 90, 5)
 
@@ -3735,7 +3735,7 @@ label Jean_PJ_Prep:
 label Jean_PJ_Cycle:
     $ primary_action = "psy"
     while Round > 0:
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         call Jean_PJ_Launch
         $ Girl.lustFace()
 
@@ -3775,7 +3775,7 @@ label Jean_PJ_Cycle:
                                         "What do you want to feel?"
                                         "Hand":
                                             if ApprovalCheck(Girl, 1000):
-                                                    $ Psychic = "hand"
+                                                    $ Psychic = "handjob"
                                             else:
                                                     ch_j "I'd rather not."
                                         "Mouth":
@@ -3800,9 +3800,9 @@ label Jean_PJ_Cycle:
                                                     ch_j "You wish."
                         "Other options":
                                 menu:
-                                    "I also want to fondle her breasts." if offhand_action != "fondle breasts":
+                                    "I also want to fondle her breasts." if offhand_action != "fondle_breasts":
                                             if Girl.Action and multi_action:
-                                                $ offhand_action = "fondle breasts"
+                                                $ offhand_action = "fondle_breasts"
                                                 "You start to fondle her breasts."
                                                 $ Girl.Action -= 1
                                             else:
@@ -3879,7 +3879,7 @@ label Jean_PJ_Cycle:
                                     jump Jean_PJ_After
         #End menu (if line)
 
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         call Sex_Dialog(Girl,Partner)
 
         #If either of you could cum

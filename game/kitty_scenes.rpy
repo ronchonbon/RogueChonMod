@@ -3,12 +3,12 @@ label KittyMeet:
         $ KittyX.OutfitDay = "casual1"
         $ KittyX.Outfit = "casual1"
         $ KittyX.OutfitChange("casual1")
-        call CleartheRoom("All",0,1)
-        $ KittyX.Loc = "bg_kitty"
+        call clear_the_room("all",0,1)
+        $ KittyX.location = "bg_kitty"
         $ KittyX.love = 400
         $ KittyX.obedience = 100
         $ KittyX.inhibition = 0
-        call Shift_Focus(KittyX)
+        call shift_focus(KittyX)
         call set_the_scene(0)
         $ KittyX.sprite_location = StageCenter
         $ KittyX.Petname = Player.name[:1]
@@ -18,7 +18,7 @@ label KittyMeet:
         "She crashes into you at a full jog, and you both fall to the ground."
         "You scramble to your feet and offer the girl a hand up."
         show Kitty_Sprite at sprite_location(KittyX.sprite_location) with vpunch
-        $ KittyX.Loc = "bg_campus"
+        $ KittyX.location = "bg_campus"
         $ KittyX.change_stat("love", 90, -25)
         $ KittyX.change_face("surprised")
         $ KittyX.ArmPose = 1
@@ -178,7 +178,7 @@ label KittyMeet:
                 $ KittyX.change_face("normal")
                 ch_k "I'll see you around I guess. Like, bye!"
 
-        $ KittyX.Loc = "bg_kitty"
+        $ KittyX.location = "bg_kitty"
         call set_the_scene
 
         "She jogs off down the path, and you continue on to class."
@@ -186,19 +186,19 @@ label KittyMeet:
         $ active_Girls.append(KittyX) if KittyX not in active_Girls else active_Girls
         $ bg_current = "bg_classroom"
         $ Round -= 10
-        call Shift_Focus(RogueX)
+        call shift_focus(RogueX)
         return
 
 label Kitty_love:
     #First time through, KittyX.Event[6] is 0, each time adds 1, automatically ends at 5,
     # it gets set at 20 if you refuse her advances, if it's 25 it means you've asked for a second chance and been refused
-    call Shift_Focus(KittyX)
+    call shift_focus(KittyX)
     $ KittyX.DrainWord("asked meet")
     if KittyX.Event[6]:
             #on repeat attempts
             "[KittyX.name] seems kind of shy and shuffles up to you, as if working up her nerve."
     elif bg_current != "bg_kitty":
-        if KittyX.Loc == bg_current or KittyX in Party:
+        if KittyX.location == bg_current or KittyX in Party:
             "Suddenly, [KittyX.name] says she wants to talk to you in her room and drags you over there."
         else:
             "[KittyX.name] shows up, hurridly says she wants to talk to you in her room and drags you over there."
@@ -206,10 +206,10 @@ label Kitty_love:
     else:
             "[KittyX.name] suddenly stares at you very intently."
 
-    $ KittyX.Loc = bg_current
+    $ KittyX.location = bg_current
     call set_the_scene(0)
     call Display_Girl(KittyX)
-    call CleartheRoom(KittyX)
+    call clear_the_room(KittyX)
     call Taboo_Level
     $ KittyX.daily_history.append("relationship")
     $ KittyX.change_face("bemused", 1)
@@ -233,7 +233,7 @@ label Kitty_love:
             ch_k "Never mind!"
             "Kitty dashes off and phases through the nearest wall."
             hide Kitty_Sprite with easeoutright
-            call Remove_Girl(KittyX)
+            call remove_girl(KittyX)
             return
     if KittyX.Event[6] == 2:
         ch_k "Sorry about before, I don't think I was ready maybe. . ."
@@ -429,7 +429,7 @@ label Kitty_love:
                 ch_k "Oh, well I mean if you don't love me-"
                 ch_k "You don't have to love me, that's ok."
                 ch_k "I'll, um. . . never mind."
-                if "Historia" not in Player.Traits:
+                if not simulation:
                         $ KittyX.recent_history.append("angry")
         $ KittyX.Event[6] = 20 #this means it shuts down future attempts
     else:
@@ -446,15 +446,15 @@ label Kitty_love:
 label Kitty_love_End:
     if line == "awkward" or "lover" not in KittyX.Petnames:
             hide Kitty_Sprite with easeoutright
-            call Remove_Girl(KittyX)
+            call remove_girl(KittyX)
             return
     ch_k "So I was thinking. . . did you want to . . ."
     if bg_current != "bg_player" and bg_current != "bg_kitty":
             ch_k "Wait, let's take this someplace more private. . ."
             $ bg_current = "bg_kitty"
-            $ KittyX.Loc = bg_current
+            $ KittyX.location = bg_current
             call set_the_scene
-            call CleartheRoom(KittyX)
+            call clear_the_room(KittyX)
             call Taboo_Level
             ch_k "Ok, so like I was saying. . ."
     $ KittyX.change_stat("obedience", 70, 10)
@@ -464,14 +464,14 @@ label Kitty_love_End:
         "Yeah, let's do this. . . [[have sex]":
                 $ KittyX.change_stat("inhibition", 30, 30)
                 ch_k "Hmm. . ."
-                if "Historia" in Player.Traits:
+                if simulation:
                         return 1
                 call Kitty_SexAct("sex")
         "I have something else in mind. . .[[choose another activity]":
                 $ KittyX.Brows = "confused"
                 $ KittyX.change_stat("obedience", 70, 20)
                 ch_k "Something like. . ."
-                if "Historia" in Player.Traits:
+                if simulation:
                         return 1
                 $ temp_modifier = 20
                 call Kitty_SexMenu
@@ -538,15 +538,15 @@ label Kitty_love_Redux:
     return
 
 label Kitty_Sub:
-    call Shift_Focus(KittyX)
+    call shift_focus(KittyX)
     $ KittyX.DrainWord("asked meet")
-    if KittyX.Loc != bg_current and KittyX not in Party:
+    if KittyX.location != bg_current and KittyX not in Party:
         "Suddenly, [KittyX.name] shows up and says she needs to talk to you."
 
-    $ KittyX.Loc = bg_current
+    $ KittyX.location = bg_current
     call set_the_scene(0)
     call Display_Girl(KittyX)
-    call CleartheRoom(KittyX)
+    call clear_the_room(KittyX)
     call Taboo_Level
     $ KittyX.daily_history.append("relationship")
     $ KittyX.change_face("bemused", 1)
@@ -718,8 +718,8 @@ label Kitty_Sub:
             #put in stuff that happens if this succeeds
     elif line == "rude":
             hide Kitty_Sprite with easeoutbottom
-            call Remove_Girl(KittyX)
-            if "Historia" not in Player.Traits:
+            call remove_girl(KittyX)
+            if not simulation:
                     $ renpy.pop_call()
             "[KittyX.name] phases through the floor in a huff, leaving you alone."
     elif line == "embarrassed":
@@ -730,8 +730,8 @@ label Kitty_Sub:
             ch_k "I should go.  I think I hear Professor Xavier calling me."
             $ KittyX.Blush = 1
             hide Kitty_Sprite with easeoutbottom
-            call Remove_Girl(KittyX)
-            if "Historia" not in Player.Traits:
+            call remove_girl(KittyX)
+            if not simulation:
                     $ renpy.pop_call()
             "[KittyX.name] phases through the floor, leaving you alone. It didn't look like she could get away fast enough."
     return
@@ -817,9 +817,9 @@ label Kitty_Sub_Asked:
     if line == "rude":
             #If line hasn't been set to "rude" by something above, then it skips right past this
             hide Kitty_Sprite with easeoutbottom
-            call Remove_Girl(KittyX)
+            call remove_girl(KittyX)
             $ KittyX.recent_history.append("angry")
-            if "Historia" not in Player.Traits:
+            if not simulation:
                     $ renpy.pop_call()
             "[KittyX.name] phases through the floor, leaving you alone.  She looked pretty upset."
     elif "sir" in KittyX.Petnames:
@@ -839,15 +839,15 @@ label Kitty_Sub_Asked:
     return
 
 label Kitty_Master:
-    call Shift_Focus(KittyX)
+    call shift_focus(KittyX)
     $ KittyX.DrainWord("asked meet")
-    if KittyX.Loc != bg_current and KittyX not in Party:
+    if KittyX.location != bg_current and KittyX not in Party:
         "Suddenly, [KittyX.name] shows up and says she needs to talk to you."
 
-    $ KittyX.Loc = bg_current
+    $ KittyX.location = bg_current
     call set_the_scene(0)
     call Display_Girl(KittyX)
-    call CleartheRoom(KittyX)
+    call clear_the_room(KittyX)
     $ KittyX.daily_history.append("relationship")
     call Taboo_Level
     $ line = 0
@@ -941,14 +941,14 @@ label Kitty_Master:
     if line == "rude":
             $ KittyX.recent_history.append("angry")
             hide Kitty_Sprite with easeoutbottom
-            call Remove_Girl(KittyX)
-            if "Historia" not in Player.Traits:
+            call remove_girl(KittyX)
+            if not simulation:
                     $ renpy.pop_call()
             "[KittyX.name] phases through the floor in a huff.  She might have been crying."
     elif line == "embarrassed":
             hide Kitty_Sprite with easeoutbottom
-            call Remove_Girl(KittyX)
-            if "Historia" not in Player.Traits:
+            call remove_girl(KittyX)
+            if not simulation:
                     $ renpy.pop_call()
             "[KittyX.name] phases through the floor, leaving you alone.  She looked really embarrassed."
     elif line != "fail":
@@ -959,10 +959,10 @@ label Kitty_Master:
     return
 
 label Kitty_Sexfriend:
-    $ KittyX.Loc = bg_current
+    $ KittyX.location = bg_current
     call set_the_scene(0)
     call Display_Girl(KittyX)
-    call CleartheRoom(KittyX)
+    call clear_the_room(KittyX)
     $ KittyX.daily_history.append("relationship")
     call Taboo_Level
     $ line = 0
@@ -1148,7 +1148,7 @@ label Kitty_Sexfriend:
             ch_k "I'll definitely be seeing {i}you{/i} later, [KittyX.Petname]."
             hide Kitty_Sprite with easeoutright
             "She passes through a nearby wall. "
-    call Remove_Girl(KittyX)
+    call remove_girl(KittyX)
     return
 
 label Kitty_Fuckbuddy:
@@ -1177,28 +1177,28 @@ label Kitty_Yoink(Girl=0,TempBonus=0,Shy=0):  #rkeljsv
             ch_k "We've had enough fun with that."
             return
 
-    if RogueX.Loc == bg_current:
+    if RogueX.location == bg_current:
             $ Girl = RogueX
-    elif EmmaX.Loc == bg_current:
+    elif EmmaX.location == bg_current:
             $ Girl = EmmaX
-    elif LauraX.Loc == bg_current:
+    elif LauraX.location == bg_current:
             $ Girl = LauraX
-    elif JeanX.Loc == bg_current:
+    elif JeanX.location == bg_current:
             $ Girl = JeanX
-    elif StormX.Loc == bg_current:
+    elif StormX.location == bg_current:
             $ Girl = StormX
-    elif JubesX.Loc == bg_current:
+    elif JubesX.location == bg_current:
             $ Girl = JubesX
 
-    if (EmmaX.Loc == "bg_teacher" or StormX.Loc == "bg_teacher") and bg_current == "bg_classroom":
+    if (EmmaX.location == "bg_teacher" or StormX.location == "bg_teacher") and bg_current == "bg_classroom":
             #if Emma is teaching. . .
             menu:
                 "About who?"
                 "[Girl.name]?" if Girl:
                         pass
-                "[EmmaX.name]" if EmmaX.Loc == "bg_teacher":
+                "[EmmaX.name]" if EmmaX.location == "bg_teacher":
                         $ Girl = EmmaX
-                "[StormX.name]" if StormX.Loc == "bg_teacher":
+                "[StormX.name]" if StormX.location == "bg_teacher":
                         $ Girl = StormX
                 "Never mind":
                         return
@@ -1503,7 +1503,7 @@ label Kitty_Yoink(Girl=0,TempBonus=0,Shy=0):  #rkeljsv
             $ KittyX.GLG(Girl,900,(2*Shy),1)
             $ Girl.AddWord(1,"yoinked")  #sets a flag that this has happened before
     else:
-            call Remove_Girl(Girl)
+            call remove_girl(Girl)
             $ Girl.GLG(KittyX,900,-(2*Shy),1)
 
     if Girl == JeanX and Approval < 2:
@@ -1536,7 +1536,7 @@ label Kitty_Yoink(Girl=0,TempBonus=0,Shy=0):  #rkeljsv
     return
 
 label Kitty_Kate:
-        $ KittyX.Loc = bg_current
+        $ KittyX.location = bg_current
         call set_the_scene(0)
         call Display_Girl(KittyX)
         call Taboo_Level

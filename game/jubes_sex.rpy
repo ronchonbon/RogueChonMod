@@ -3,7 +3,7 @@ label Jubes_SexAct(Act = 0): #rkeljsv
         if AloneCheck(JubesX) and JubesX.Taboo == 20:
                 $ JubesX.Taboo = 0
                 $ Taboo = 0
-        call Shift_Focus(JubesX)
+        call shift_focus(JubesX)
         if Act == "SkipTo":
             $ renpy.pop_call() #causes it to skip past the primary_action Swap
             $ renpy.pop_call() #causes it to skip past the cycle you were in before
@@ -29,11 +29,11 @@ label Jubes_SexAct(Act = 0): #rkeljsv
             call Jubes_Fondle_Breasts
             if not action_context:
                 return
-        elif Act == "blow":
+        elif Act == "blowjob":
             call Jubes_BJ_Prep
             if not action_context:
                 return
-        elif Act == "hand":
+        elif Act == "handjob":
             call Jubes_HJ_Prep
             if not action_context:
                 return
@@ -46,7 +46,7 @@ label Jubes_SexAct(Act = 0): #rkeljsv
 # counter 1 means she's seen you, counter 0 means she hasn't.
 label Jubes_Masturbate:  #rkeljs
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JubesX)
+    call shift_focus(JubesX)
     if JubesX.Mast:
         $ temp_modifier += 10
     if JubesX.SEXP >= 50:
@@ -84,7 +84,7 @@ label Jubes_Masturbate:  #rkeljs
                                 ch_v "Well, ok, gimme a hand with these?"
                                 $ JubesX.change_stat("obedience", 70, 2)
                                 $ JubesX.change_stat("inhibition", 70, 1)
-                                $ offhand_action = "fondle breasts"
+                                $ offhand_action = "fondle_breasts"
                                 $ JubesX.Mast += 1
                                 jump Jubes_M_Cycle
                         "Would you like some help? I could. . . up to you, I guess." if Player.Semen and JubesX.Action:
@@ -96,9 +96,9 @@ label Jubes_Masturbate:  #rkeljs
                                 $ JubesX.change_stat("inhibition", 70, 1)
                                 $ D20 = renpy.random.randint(1, 20)
                                 if D20 > 10:
-                                    $ offhand_action = "fondle breasts"
+                                    $ offhand_action = "fondle_breasts"
                                 else:
-                                    $ offhand_action = "suck breasts"
+                                    $ offhand_action = "suck_breasts"
                                 $ JubesX.Mast += 1
                                 jump Jubes_M_Cycle
                         "Why don't we take care of each other?" if Player.Semen and JubesX.Action:
@@ -150,7 +150,7 @@ label Jubes_Masturbate:  #rkeljs
                             jump Campus_Map
                         else:
                             ch_v "Ugh, I've got to get going anyway."
-                            call Remove_Girl(JubesX)
+                            call remove_girl(JubesX)
                 return                      #returns to sexmenu, which returns to original
     #End of "Join" option
 
@@ -348,8 +348,8 @@ label Jubes_Masturbate:  #rkeljs
             $ JubesX.change_stat("obedience", 50, -2)
             $ JubesX.recent_history.append("angry")
             $ JubesX.daily_history.append("angry")
-            $ JubesX.recent_history.append("no masturbation")
-            $ JubesX.daily_history.append("no masturbation")
+            $ JubesX.recent_history.append("no_masturbation")
+            $ JubesX.daily_history.append("no_masturbation")
             return
     elif Taboo:                             # she refuses and this is too public a place for her
             $ JubesX.change_face("angry", 1)
@@ -364,8 +364,8 @@ label Jubes_Masturbate:  #rkeljs
     else:
             $ JubesX.change_face("normal", 1)
             ch_v "Um. . . no."
-    $ JubesX.recent_history.append("no masturbation")
-    $ JubesX.daily_history.append("no masturbation")
+    $ JubesX.recent_history.append("no_masturbation")
+    $ JubesX.daily_history.append("no_masturbation")
     $ temp_modifier = 0
     return
 
@@ -398,7 +398,7 @@ label Jubes_M_Prep:  #rkelj
 
     $ primary_action = "masturbation"
     if not girl_offhand_action:
-        $ girl_offhand_action = "fondle pussy"
+        $ girl_offhand_action = "fondle_pussy"
 
     if action_context:
         $ renpy.pop_call()
@@ -406,7 +406,7 @@ label Jubes_M_Prep:  #rkelj
     $ line = 0
     if Taboo:
         $ JubesX.DrainWord("tabno")
-    $ JubesX.DrainWord("no masturbation")
+    $ JubesX.DrainWord("no_masturbation")
     $ JubesX.recent_history.append("masturbation")
     $ JubesX.daily_history.append("masturbation")
 
@@ -417,7 +417,7 @@ label Jubes_M_Cycle:
 
     while Round > 0:
         call Jubes_Pos_Reset("masturbation")
-        call Shift_Focus(JubesX)
+        call shift_focus(JubesX)
         $ JubesX.lustFace()
 
         $ Player.Focus -= 12 if Player.FocusX and Player.Focus > 50 else 0
@@ -428,12 +428,12 @@ label Jubes_M_Cycle:
                         "Keep Watching.":
                                 pass
 
-                        "[JubesX.name]. . .[[jump in]" if "unseen" not in JubesX.recent_history and "join" not in Player.recent_history and JubesX.Loc == bg_current:
+                        "[JubesX.name]. . .[[jump in]" if "unseen" not in JubesX.recent_history and "join" not in Player.recent_history and JubesX.location == bg_current:
                                 "[JubesX.name] slows what she's doing with a sly grin."
                                 ch_v "Oh, are you having fun?"
                                 $ action_context = "join"
                                 call Jubes_Masturbate
-                        "\"Ahem. . .\"" if "unseen" in JubesX.recent_history and JubesX.Loc == bg_current:
+                        "\"Ahem. . .\"" if "unseen" in JubesX.recent_history and JubesX.location == bg_current:
                                 jump Jubes_M_Interupted
 
                         "Start jack'in it." if offhand_action != "jackin":
@@ -441,7 +441,7 @@ label Jubes_M_Cycle:
                         "Stop jack'in it." if offhand_action == "jackin":
                                 $ offhand_action = 0
 
-                        "Slap her ass" if JubesX.Loc == bg_current:
+                        "Slap her ass" if JubesX.location == bg_current:
                                 if "unseen" in JubesX.recent_history:
                                         "You smack [JubesX.name] firmly on the ass!"
                                         jump Jubes_M_Interupted
@@ -461,7 +461,7 @@ label Jubes_M_Cycle:
 
                         "Change what I'm doing":
                                 menu:
-                                    "Offhand action" if JubesX.Loc == bg_current:
+                                    "Offhand action" if JubesX.location == bg_current:
                                             if JubesX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
@@ -469,9 +469,9 @@ label Jubes_M_Cycle:
                                             else:
                                                 ch_v "Maybe we could finish this up for now?"
 
-                                    "Threesome actions (locked)" if not Partner or "unseen" in JubesX.recent_history or JubesX.Loc != bg_current:
+                                    "Threesome actions (locked)" if not Partner or "unseen" in JubesX.recent_history or JubesX.location != bg_current:
                                         pass
-                                    "Threesome actions" if Partner and "unseen" not in JubesX.recent_history and JubesX.Loc == bg_current:
+                                    "Threesome actions" if Partner and "unseen" not in JubesX.recent_history and JubesX.location == bg_current:
                                         menu:
                                             "Ask [Partner.name] to do something else":
                                                         call Three_Change(JubesX)
@@ -508,20 +508,20 @@ label Jubes_M_Cycle:
                                     "Never mind":
                                                     jump Jubes_M_Cycle
 
-                        "Back to Sex Menu" if multi_action and JubesX.Loc == bg_current:
+                        "Back to Sex Menu" if multi_action and JubesX.location == bg_current:
                                     ch_p "Let's try something else."
                                     call Jubes_Pos_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Jubes_M_Interupted
-                        "End Scene" if not multi_action or JubesX.Loc != bg_current:
+                        "End Scene" if not multi_action or JubesX.location != bg_current:
                                     ch_p "Let's stop for now."
                                     call Jubes_Pos_Reset
                                     $ line = 0
                                     jump Jubes_M_Interupted
         #End menu (if line)
 
-        call Shift_Focus(JubesX)
+        call shift_focus(JubesX)
         call Sex_Dialog(JubesX,Partner)
 
         #If either of you could cum
@@ -548,13 +548,13 @@ label Jubes_M_Cycle:
                         else: #If she wasn't aware you were there
                             "You grunt and try to hold it in."
                             $ Player.Focus = 95
-                            if JubesX.Loc == bg_current:
+                            if JubesX.location == bg_current:
                                     jump Jubes_M_Interupted
 
                     #If Jubes can cum
                     if JubesX.lust >= 100:
                         call Girl_Cumming(JubesX)
-                        if JubesX.Loc == bg_current:
+                        if JubesX.location == bg_current:
                                 jump Jubes_M_Interupted
 
                     if line == "came":
@@ -585,7 +585,7 @@ label Jubes_M_Cycle:
                 elif Round == 5:
                     "She's definitely going to stop soon."
         else:
-                if JubesX.Loc == bg_current:
+                if JubesX.location == bg_current:
                         call Escalation(JubesX) #sees if she wants to escalate things
 
                 if Round == 10:
@@ -689,7 +689,7 @@ label Jubes_M_Interupted:
     else:
         call Partner_Like(JubesX,2)
 
-    if JubesX.Loc != bg_current:
+    if JubesX.location != bg_current:
         return
 
     if Round <= 10:
@@ -738,7 +738,7 @@ label Jubes_Sex_P:   #rkeljs
     #fix remove
 
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JubesX)
+    call shift_focus(JubesX)
     if JubesX.Sex >= 7: # She loves it
         $ temp_modifier += 15
     elif JubesX.Sex >= 3: #You've done it before several times
@@ -772,8 +772,8 @@ label Jubes_Sex_P:   #rkeljs
     if Taboo and "tabno" in JubesX.daily_history:
         $ temp_modifier -= 10
 
-    if "no sex" in JubesX.daily_history:
-        $ temp_modifier -= 15 if "no sex" in JubesX.recent_history else 5
+    if "no_sex" in JubesX.daily_history:
+        $ temp_modifier -= 15 if "no_sex" in JubesX.recent_history else 5
 
 
     $ Approval = ApprovalCheck(JubesX, 1400, TabM = 5) # 135, 150, 165, Taboo -200(335)
@@ -848,7 +848,7 @@ label Jubes_Sex_P:   #rkeljs
     #End Auto
 
 
-    if not JubesX.Sex and "no sex" not in JubesX.recent_history:
+    if not JubesX.Sex and "no_sex" not in JubesX.recent_history:
             #first time
             $ JubesX.change_face("surprised", 1)
             $ JubesX.Mouth = "kiss"
@@ -922,7 +922,7 @@ label Jubes_Sex_P:   #rkeljs
                 $ JubesX.change_stat("obedience", 90, 1)
                 $ JubesX.change_stat("inhibition", 60, 1)
                 ch_v "Ok, fine. Just make it good."
-            elif "no sex" in JubesX.daily_history:
+            elif "no_sex" in JubesX.daily_history:
                 ch_v "Ok, whatever. . ."
             else:
                 $ JubesX.change_face("sexy", 1)
@@ -943,11 +943,11 @@ label Jubes_Sex_P:   #rkeljs
     else:
             #She's not into it, but maybe. . .
             $ JubesX.change_face("angry")
-            if "no sex" in JubesX.recent_history:
+            if "no_sex" in JubesX.recent_history:
                 ch_v "Sorry, [JubesX.Petname] \"no.\""
-            elif Taboo and "tabno" in JubesX.daily_history and "no sex" in JubesX.daily_history:
+            elif Taboo and "tabno" in JubesX.daily_history and "no_sex" in JubesX.daily_history:
                 ch_v "I told you. . . this place is too exposed."
-            elif "no sex" in JubesX.daily_history:
+            elif "no_sex" in JubesX.daily_history:
                 ch_v "I just told you \"no.\""
             elif Taboo and "tabno" in JubesX.daily_history:
                 ch_v "I already told you this is too public!"
@@ -959,11 +959,11 @@ label Jubes_Sex_P:   #rkeljs
                 ch_v "Maybe later? . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no sex" in JubesX.daily_history:
+                "Sorry, never mind." if "no_sex" in JubesX.daily_history:
                         $ JubesX.change_face("bemused")
                         ch_v "Well, you are persistant."
                         return
-                "Maybe later?" if "no sex" not in JubesX.daily_history:
+                "Maybe later?" if "no_sex" not in JubesX.daily_history:
                         $ JubesX.change_face("sexy")
                         ch_v "Probably. . ."
                         $ JubesX.change_stat("love", 80, 2)
@@ -971,8 +971,8 @@ label Jubes_Sex_P:   #rkeljs
                         if Taboo:
                             $ JubesX.recent_history.append("tabno")
                             $ JubesX.daily_history.append("tabno")
-                        $ JubesX.recent_history.append("no sex")
-                        $ JubesX.daily_history.append("no sex")
+                        $ JubesX.recent_history.append("no_sex")
+                        $ JubesX.daily_history.append("no_sex")
                         return
                 "I think you'd enjoy it as much as I would. . .":
                         if Approval:
@@ -1008,7 +1008,7 @@ label Jubes_Sex_P:   #rkeljs
 
     #She refused all offers.
     $ JubesX.ArmPose = 1
-    if "no sex" in JubesX.daily_history:
+    if "no_sex" in JubesX.daily_history:
         ch_v "Don't push me."
         $ JubesX.recent_history.append("angry")
         $ JubesX.daily_history.append("angry")
@@ -1034,14 +1034,14 @@ label Jubes_Sex_P:   #rkeljs
     else:
         $ JubesX.change_face("normal", 1)
         ch_v "Yeah, no."
-    $ JubesX.recent_history.append("no sex")
-    $ JubesX.daily_history.append("no sex")
+    $ JubesX.recent_history.append("no_sex")
+    $ JubesX.daily_history.append("no_sex")
     $ temp_modifier = 0
     return
 
 label Jubes_Sex_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(JubesX)
+        call shift_focus(JubesX)
         call Jubes_Sex_Launch("sex")
         if action_speed >= 4:
             $ action_speed = 2
@@ -1177,7 +1177,7 @@ label Jubes_Sex_Cycle: #Repeating strokes
                                     jump Jubes_SexAfter
         #End menu (if line)
 
-        call Shift_Focus(JubesX)
+        call shift_focus(JubesX)
         call Sex_Dialog(JubesX,Partner)
 
         $ counter += 1
@@ -1303,7 +1303,7 @@ label Jubes_Sex_A: #rkelj
     #fix remove
 
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JubesX)
+    call shift_focus(JubesX)
     if JubesX.Anal >= 7: # She loves it
         $ temp_modifier += 20
     elif JubesX.Anal >= 3: #You've done it before several times
@@ -1337,9 +1337,9 @@ label Jubes_Sex_A: #rkelj
 
     if Taboo and "tabno" in JubesX.daily_history:
         $ temp_modifier -= 10
-    if "no anal" in JubesX.daily_history:
+    if "no_anal" in JubesX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no anal" in JubesX.recent_history else 0
+        $ temp_modifier -= 10 if "no_anal" in JubesX.recent_history else 0
 
     $ Approval = ApprovalCheck(JubesX, 1550, TabM = 5) # 155, 170, 185, Taboo -200(355)
 
@@ -1413,7 +1413,7 @@ label Jubes_Sex_A: #rkelj
             #end "auto"
 
 
-    if not JubesX.Anal and "no anal" not in JubesX.recent_history:
+    if not JubesX.Anal and "no_anal" not in JubesX.recent_history:
             #first time
             $ JubesX.change_face("surprised", 1)
             $ JubesX.Mouth = "kiss"
@@ -1491,7 +1491,7 @@ label Jubes_Sex_A: #rkelj
                 $ JubesX.change_stat("obedience", 90, 1)
                 $ JubesX.change_stat("inhibition", 60, 1)
                 ch_v "Whatever."
-            elif "no anal" in JubesX.daily_history:
+            elif "no_anal" in JubesX.daily_history:
                 ch_v "Well, if you're going to keep asking. . ."
                 ch_v "Might be fun. . ."
             else:
@@ -1513,11 +1513,11 @@ label Jubes_Sex_A: #rkelj
     else:
             #She's not into it, but maybe. . .
             $ JubesX.change_face("angry")
-            if "no anal" in JubesX.recent_history:
+            if "no_anal" in JubesX.recent_history:
                 ch_v "Sorry, [JubesX.Petname] \"no.\""
-            elif Taboo and "tabno" in JubesX.daily_history and "no anal" in JubesX.daily_history:
+            elif Taboo and "tabno" in JubesX.daily_history and "no_anal" in JubesX.daily_history:
                 ch_v "I told you. . . this place is too exposed."
-            elif "no anal" in JubesX.daily_history:
+            elif "no_anal" in JubesX.daily_history:
                 ch_v "I just told you \"no.\""
             elif Taboo and "tabno" in JubesX.daily_history:
                 ch_v "I already told you this is too public!"
@@ -1529,11 +1529,11 @@ label Jubes_Sex_A: #rkelj
                 ch_v "Maybe eventually. . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no anal" in JubesX.daily_history:
+                "Sorry, never mind." if "no_anal" in JubesX.daily_history:
                     $ JubesX.change_face("bemused")
                     ch_v "Hey, I can't blame you."
                     return
-                "Maybe later?" if "no anal" not in JubesX.daily_history:
+                "Maybe later?" if "no_anal" not in JubesX.daily_history:
                     $ JubesX.change_face("sexy")
                     ch_v "Oh, probably. . ."
                     ch_v ". . . often."
@@ -1542,8 +1542,8 @@ label Jubes_Sex_A: #rkelj
                     if Taboo:
                         $ JubesX.recent_history.append("tabno")
                         $ JubesX.daily_history.append("tabno")
-                    $ JubesX.recent_history.append("no anal")
-                    $ JubesX.daily_history.append("no anal")
+                    $ JubesX.recent_history.append("no_anal")
+                    $ JubesX.daily_history.append("no_anal")
                     return
                 "I bet it would feel really good. . .":
                     if Approval:
@@ -1580,7 +1580,7 @@ label Jubes_Sex_A: #rkelj
 
     #She refused all offers.
     $ JubesX.ArmPose = 1
-    if "no anal" in JubesX.daily_history:
+    if "no_anal" in JubesX.daily_history:
         ch_v "Don't push it."
         $ JubesX.recent_history.append("angry")
         $ JubesX.daily_history.append("angry")
@@ -1610,8 +1610,8 @@ label Jubes_Sex_A: #rkelj
     else:
         $ JubesX.change_face("normal", 1)
         ch_v "You haven't earned it yet."
-    $ JubesX.recent_history.append("no anal")
-    $ JubesX.daily_history.append("no anal")
+    $ JubesX.recent_history.append("no_anal")
+    $ JubesX.daily_history.append("no_anal")
     $ temp_modifier = 0
     return
 
@@ -1719,13 +1719,13 @@ label Jubes_AnalPrep:  #rkelj
     $ action_speed = 1
     if Taboo:
         $ JubesX.DrainWord("tabno")
-    $ JubesX.DrainWord("no anal")
+    $ JubesX.DrainWord("no_anal")
     $ JubesX.recent_history.append("anal")
     $ JubesX.daily_history.append("anal")
 
 label Jubes_Anal_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(JubesX)
+        call shift_focus(JubesX)
         call Jubes_Sex_Launch("anal")
         if action_speed >= 4:
             $ Shift = 2
@@ -1865,7 +1865,7 @@ label Jubes_Anal_Cycle: #Repeating strokes
                                     jump Jubes_AnalAfter
         #End menu (if line)
 
-        call Shift_Focus(JubesX)
+        call shift_focus(JubesX)
         call Sex_Dialog(JubesX,Partner)
 
         $ counter += 1
@@ -1995,7 +1995,7 @@ label Jubes_Sex_H: #rkelj
     #fix remove
 
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(JubesX)
+    call shift_focus(JubesX)
     if JubesX.Hotdog >= 3: #You've done it before several times
         $ temp_modifier += 10
     elif JubesX.Hotdog: #You've done it before
@@ -2019,9 +2019,9 @@ label Jubes_Sex_H: #rkelj
     if Taboo and "tabno" in JubesX.daily_history:
         $ temp_modifier -= 10
 
-    if "no hotdog" in JubesX.daily_history:
+    if "no_hotdog" in JubesX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no hotdog" in JubesX.recent_history else 0
+        $ temp_modifier -= 10 if "no_hotdog" in JubesX.recent_history else 0
 
     $ Approval = ApprovalCheck(JubesX, 1000, TabM = 3) # 100, 115, 130, Taboo -120(220)
 
@@ -2079,7 +2079,7 @@ label Jubes_Sex_H: #rkelj
             #end auto
 
 
-    if not JubesX.Hotdog and "no hotdog" not in JubesX.recent_history:
+    if not JubesX.Hotdog and "no_hotdog" not in JubesX.recent_history:
             #first time
             $ JubesX.change_face("surprised", 1)
             $ JubesX.Mouth = "kiss"
@@ -2149,7 +2149,7 @@ label Jubes_Sex_H: #rkelj
                 $ JubesX.change_stat("obedience", 80, 1)
                 $ JubesX.change_stat("inhibition", 60, 1)
                 ch_v "Ok, fine."
-            elif "no hotdog" in JubesX.daily_history:
+            elif "no_hotdog" in JubesX.daily_history:
                 ch_v "It was rather entertaining. . ."
             else:
                 $ JubesX.change_face("sexy", 1)
@@ -2170,11 +2170,11 @@ label Jubes_Sex_H: #rkelj
     else:
             #She's not into it, but maybe. . .
             $ JubesX.change_face("angry")
-            if "no hotdog" in JubesX.recent_history:
+            if "no_hotdog" in JubesX.recent_history:
                 ch_v "Sorry, [JubesX.Petname] \"no.\""
-            elif Taboo and "tabno" in JubesX.daily_history and "no hotdog" in JubesX.daily_history:
+            elif Taboo and "tabno" in JubesX.daily_history and "no_hotdog" in JubesX.daily_history:
                 ch_v "I just told you. . .not in such an exposed location."
-            elif "no hotdog" in JubesX.daily_history:
+            elif "no_hotdog" in JubesX.daily_history:
                 ch_v "I'm believe I just told you \"no,\" [JubesX.Petname]."
             elif Taboo and "tabno" in JubesX.daily_history:
                 ch_v "I told you. . . this place is too exposed."
@@ -2186,11 +2186,11 @@ label Jubes_Sex_H: #rkelj
                 ch_v "I don't think that would be appropriate. . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no hotdog" in JubesX.daily_history:
+                "Sorry, never mind." if "no_hotdog" in JubesX.daily_history:
                     $ JubesX.change_face("bemused")
                     ch_v "So long as you don't push it."
                     return
-                "Maybe later?" if "no hotdog" not in JubesX.daily_history:
+                "Maybe later?" if "no_hotdog" not in JubesX.daily_history:
                     $ JubesX.change_face("sexy")
                     ch_v "I gues eventually. . ."
                     $ JubesX.change_stat("love", 80, 1)
@@ -2198,8 +2198,8 @@ label Jubes_Sex_H: #rkelj
                     if Taboo:
                         $ JubesX.recent_history.append("tabno")
                         $ JubesX.daily_history.append("tabno")
-                    $ JubesX.recent_history.append("no hotdog")
-                    $ JubesX.daily_history.append("no hotdog")
+                    $ JubesX.recent_history.append("no_hotdog")
+                    $ JubesX.daily_history.append("no_hotdog")
                     return
                 "You might like it. . .":
                     if Approval:
@@ -2234,7 +2234,7 @@ label Jubes_Sex_H: #rkelj
     #She refused all offers.
     $ JubesX.ArmPose = 1
 
-    if "no hotdog" in JubesX.daily_history:
+    if "no_hotdog" in JubesX.daily_history:
         ch_v "What did I tell you?"
         $ JubesX.recent_history.append("angry")
         $ JubesX.daily_history.append("angry")
@@ -2260,14 +2260,14 @@ label Jubes_Sex_H: #rkelj
     else:
         $ JubesX.change_face("normal", 1)
         ch_v "No thanks."
-    $ JubesX.recent_history.append("no hotdog")
-    $ JubesX.daily_history.append("no hotdog")
+    $ JubesX.recent_history.append("no_hotdog")
+    $ JubesX.daily_history.append("no_hotdog")
     $ temp_modifier = 0
     return
 
 label Jubes_Hotdog_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(JubesX)
+        call shift_focus(JubesX)
         call Jubes_Sex_Launch("hotdog")
         if action_speed >= 4:
             $ action_speed = 2
@@ -2411,7 +2411,7 @@ label Jubes_Hotdog_Cycle: #Repeating strokes
                                     jump Jubes_HotdogAfter
         #End menu (if line)
 
-        call Shift_Focus(JubesX)
+        call shift_focus(JubesX)
         call Sex_Dialog(JubesX,Partner)
 
         $ counter += 1

@@ -33,8 +33,8 @@ label MindFuck_Screen: #rkeljsv
 
 label PsychicFlash(Face="sly",TempLoc=0): #rkeljsv
         call MindFuck_Screen
-        $ line = Girl.Loc
-        $ Girl.Loc = bg_current
+        $ line = Girl.location
+        $ Girl.location = bg_current
         call set_the_scene(1,0,0,0,1)
         if Face:
                 $ Girl.change_face(Face)
@@ -70,8 +70,8 @@ label MindFuck(TempLoc=0): #rkeljsv
                             ch_j "Ok, looping you in. . ."
 
                     call MindFuck_Screen
-                    $ TempLoc = Girl.Loc
-                    $ Girl.Loc = bg_current
+                    $ TempLoc = Girl.location
+                    $ Girl.location = bg_current
                     $ Girl.change_face("sly")
                     #call Display_Girl(EmmaX,0,0)
                     call set_the_scene(1,0,0,0,1)
@@ -80,7 +80,7 @@ label MindFuck(TempLoc=0): #rkeljsv
                     $ Player.AddWord(1,"MindFuck","MindFuck",0,"MindFuck")
                     call expression Girl.Tag + "_SexMenu" #call Rogue_SexMenu
 
-                    $ Girl.Loc = TempLoc
+                    $ Girl.location = TempLoc
                     if Girl == EmmaX:
                             ch_e "That'll be all for now. . ."
                             ch_e "I'll see you in your dreams. . ."

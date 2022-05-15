@@ -599,10 +599,10 @@ label Jubes_SexChat:
 
                             "Blowjobs.":
                                         $ JubesX.change_face("sly")
-                                        if JubesX.PlayerFav == "blow":
+                                        if JubesX.PlayerFav == "blowjob":
                                             $ JubesX.change_stat("lust", 80, 3)
                                             ch_v "Definitely."
-                                        elif JubesX.Favorite == "blow":
+                                        elif JubesX.Favorite == "blowjob":
                                             $ JubesX.change_stat("love", 90, 5)
                                             $ JubesX.change_stat("lust", 80, 5)
                                             ch_v "Me too!"
@@ -614,7 +614,7 @@ label Jubes_SexChat:
                                         else:
                                             $ JubesX.change_face("bemused")
                                             ch_v "I'm. . . it's really good. . ."
-                                        $ JubesX.PlayerFav = "blow"
+                                        $ JubesX.PlayerFav = "blowjob"
 
                             "Titjobs.":
                                         $ JubesX.change_face("sly")
@@ -639,10 +639,10 @@ label Jubes_SexChat:
 
                             "Footjobs.":
                                         $ JubesX.change_face("sly")
-                                        if JubesX.PlayerFav == "foot":
+                                        if JubesX.PlayerFav == "footjob":
                                             $ JubesX.change_stat("lust", 80, 5)
                                             ch_v "Yeah, you've said that. . ."
-                                        elif JubesX.Favorite == "foot":
+                                        elif JubesX.Favorite == "footjob":
                                             $ JubesX.change_stat("love", 90, 5)
                                             $ JubesX.change_stat("lust", 80, 7)
                                             ch_v "I do like using my feet. . ."
@@ -654,14 +654,14 @@ label Jubes_SexChat:
                                         else:
                                             $ JubesX.change_face("bemused")
                                             ch_v "Yeah, it's nice. . ."
-                                        $ JubesX.PlayerFav = "foot"
+                                        $ JubesX.PlayerFav = "footjob"
 
                             "Handjobs.":
                                         $ JubesX.change_face("sly")
-                                        if JubesX.PlayerFav == "hand":
+                                        if JubesX.PlayerFav == "handjob":
                                             $ JubesX.change_stat("lust", 80, 5)
                                             ch_v "Yeah, you've said that. . ."
-                                        elif JubesX.Favorite == "hand":
+                                        elif JubesX.Favorite == "handjob":
                                             $ JubesX.change_stat("love", 90, 5)
                                             $ JubesX.change_stat("lust", 80, 7)
                                             ch_v "You do feel pretty comfy. . ."
@@ -673,7 +673,7 @@ label Jubes_SexChat:
                                         else:
                                             $ JubesX.change_face("bemused")
                                             ch_v "Yeah, it's nice. . ."
-                                        $ JubesX.PlayerFav = "hand"
+                                        $ JubesX.PlayerFav = "handjob"
 
                             "Feeling you up.":
                                         $ counter = JubesX.FondleB + JubesX.FondleT + JubesX.SuckB + JubesX.Hotdog
@@ -681,7 +681,7 @@ label Jubes_SexChat:
                                         if JubesX.PlayerFav == "fondle":
                                             $ JubesX.change_stat("lust", 80, 3)
                                             ch_v "Yeah, I think we're clear on that. . ."
-                                        elif JubesX.Favorite in ("hotdog","suck breasts","fondle breasts","fondle thighs"):
+                                        elif JubesX.Favorite in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
                                             $ JubesX.change_stat("love", 90, 5)
                                             $ JubesX.change_stat("lust", 80, 5)
                                             ch_v "I love when you touch me. . ."
@@ -735,31 +735,31 @@ label Jubes_SexChat:
                                                 ch_v "Kissing?"
                                         elif JubesX.Favorite == "anal":
                                                 ch_v "Probably anal."
-                                        elif JubesX.Favorite == "lick ass":
+                                        elif JubesX.Favorite == "eat_ass":
                                                 ch_v "When you lick my ass."
-                                        elif JubesX.Favorite == "insert ass":
+                                        elif JubesX.Favorite == "finger_ass":
                                                 ch_v "Fingering my asshole, probably."
                                         elif JubesX.Favorite == "sex":
                                                 ch_v "Just the usual pounding."
-                                        elif JubesX.Favorite == "lick pussy":
+                                        elif JubesX.Favorite == "eat_pussy":
                                                 ch_v "When you lick my pussy."
-                                        elif JubesX.Favorite == "fondle pussy":
+                                        elif JubesX.Favorite == "fondle_pussy":
                                                 ch_v "When you finger me."
-                                        elif JubesX.Favorite == "blow":
+                                        elif JubesX.Favorite == "blowjob":
                                                 ch_v "I -love- how your cock tastes."
-                                        elif JubesX.Favorite == "tit":
+                                        elif JubesX.Favorite == "titjob":
                                                 ch_v "When I use my tits."
-                                        elif JubesX.Favorite == "foot":
+                                        elif JubesX.Favorite == "footjob":
                                                 ch_v "Footjobs are pretty fun."
-                                        elif JubesX.Favorite == "hand":
+                                        elif JubesX.Favorite == "handjob":
                                                 ch_v "I like jerking you off."
                                         elif JubesX.Favorite == "hotdog":
                                                 ch_v "When you grind against me."
-                                        elif JubesX.Favorite == "suck breasts":
+                                        elif JubesX.Favorite == "suck_breasts":
                                                 ch_v "When you suck my tits."
-                                        elif JubesX.Favorite == "fondle breasts":
+                                        elif JubesX.Favorite == "fondle_breasts":
                                                 ch_v "When you grab my tits."
-                                        elif JubesX.Favorite == "fondle thighs":
+                                        elif JubesX.Favorite == "fondle_thighs":
                                                 ch_v "When you rub my thighs."
                                         else:
                                                 ch_v "How should I know?"
@@ -911,12 +911,12 @@ label Jubes_Chitchat(O=0, Options = ["default","default","default"]):
                     $ Digits.append(JubesX)
                     return
 
-        if "hungry" not in JubesX.Traits and JubesX.Swallow >= 3 and JubesX.Loc == bg_current:  #She's swallowed a lot
+        if "hungry" not in JubesX.Traits and JubesX.Swallow >= 3 and JubesX.location == bg_current:  #She's swallowed a lot
                     call Jubes_Hungry
                     return
 
         if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or ApprovalCheck(JubesX, 800, "I")):
-                    if JubesX.Loc == bg_current and JubesX.Thirst >= 30 and "refused" not in JubesX.daily_history and "quicksex" not in JubesX.daily_history:
+                    if JubesX.location == bg_current and JubesX.Thirst >= 30 and "refused" not in JubesX.daily_history and "quicksex" not in JubesX.daily_history:
                             $ JubesX.change_face("sly",1)
                             ch_v "Hey, did you. . . wanna do something?"
                             call Quick_Sex(JubesX)
@@ -928,12 +928,8 @@ label Jubes_Chitchat(O=0, Options = ["default","default","default"]):
         if JubesX.Event[0] and "key" not in JubesX.Chat:
             $ Options.append("key")
 
-        if "mandrill" in Player.Traits and "cologne chat" not in JubesX.daily_history:
-            $ Options.append("mandrill")
-        if "purple" in Player.Traits and "cologne chat" not in JubesX.daily_history:
-            $ Options.append("purple")
-        if "corruption" in Player.Traits and "cologne chat" not in JubesX.daily_history:
-            $ Options.append("corruption")
+        if Player.cologne and "cologne_chat" not in JubesX.daily_history:
+            $ Options.append(Player.cologne)
 
         if "Jubes" not in JubesX.names:
             $ Options.append("jubes")
@@ -956,7 +952,7 @@ label Jubes_Chitchat(O=0, Options = ["default","default","default"]):
         if "showered" in JubesX.daily_history:
             #If you've caught Jubes showering today
             $ Options.append("showercaught")
-        if "fondle breasts" in JubesX.daily_history or "fondle pussy" in JubesX.daily_history or "fondle ass" in JubesX.daily_history:
+        if "fondle_breasts" in JubesX.daily_history or "fondle_pussy" in JubesX.daily_history or "fondle_ass" in JubesX.daily_history:
             #If you've fondled Jubes today
             $ Options.append("fondled")
         if "Dazzler and Longshot" in JubesX.Inventory and "256 Shades of Grey" in JubesX.Inventory and "Avengers Tower Penthouse" in JubesX.Inventory:
@@ -969,7 +965,7 @@ label Jubes_Chitchat(O=0, Options = ["default","default","default"]):
                 $ Options.append("lingerie")
         if JubesX.Hand:
             #If Jubes's given a handjob
-            $ Options.append("handy")
+            $ Options.append("handjob")
         if JubesX.Swallow:
             #If Jubes's swallowed before
             $ Options.append("swallowed")
@@ -1020,19 +1016,19 @@ label Jubes_Chitchat(O=0, Options = ["default","default","default"]):
     $ renpy.random.shuffle(Options)             #shuffles options and picks out the first one
 
     if Options[0] == "mandrill":
-        $ JubesX.daily_history.append("cologne chat")
+        $ JubesX.daily_history.append("cologne_chat")
         $ JubesX.change_face("confused")
         ch_v "(sniff, sniff). . . you smell like monkey butt . . ."
         ch_v ". . . why is that turning me on?"
         $ JubesX.change_face("sexy", 2)
     elif Options[0] == "purple":
-        $ JubesX.daily_history.append("cologne chat")
+        $ JubesX.daily_history.append("cologne_chat")
         $ JubesX.change_face("sly",1)
         ch_v "(sniff, sniff). . . that's an unusual scent. . ."
         $ JubesX.change_face("normal",0)
         ch_v ". . . did you want something?"
     elif Options[0] == "corruption":
-        $ JubesX.daily_history.append("cologne chat")
+        $ JubesX.daily_history.append("cologne_chat")
         $ JubesX.change_face("confused")
         ch_v "(sniff, sniff). . . that's. . . um, overpowering. . ."
         $ JubesX.change_face("angry")
@@ -1191,15 +1187,15 @@ label Jubes_Chitchat(O=0, Options = ["default","default","default"]):
             $ JubesX.Blush = 1
             $ JubesX.Chat.append("lingerie")
 
-    elif Options[0] == "handy":
+    elif Options[0] == "handjob":
             #Jubes's response after giving the Player a handjob.
             $ JubesX.change_face("sly",1)
             ch_v "I was daydreaming about having your cock in my hand. . ."
             ch_v "Maybe I should take it out of the dream. . ."
             $ JubesX.Blush = 0
 
-    elif Options[0] == "blow":
-            if "blow" not in JubesX.Chat:
+    elif Options[0] == "blowjob":
+            if "blowjob" not in JubesX.Chat:
                     #Jubes's response after giving the Player a blowjob.
                     $ JubesX.change_face("sly",2)
                     ch_v "Hey, I didn't bite or anything, did I?"
@@ -1230,7 +1226,7 @@ label Jubes_Chitchat(O=0, Options = ["default","default","default"]):
                                     $ JubesX.change_face("sad",2)
                                     ch_v "Well. . . sorry about that. . ."
                     $ JubesX.Blush = 1
-                    $ JubesX.Chat.append("blow")
+                    $ JubesX.Chat.append("blowjob")
             else:
                     $ line = renpy.random.choice(["You know, your dick tastes great.",
                             "I think I nearly dislocated my jaw last time.",
@@ -1703,26 +1699,26 @@ label Jubes_Personality(counter = 0):
 
 label Jubes_Summon(temp_modifier=temp_modifier):
     $ JubesX.OutfitChange()
-    if "no summon" in JubesX.recent_history:
+    if "no_summon" in JubesX.recent_history:
                 if "angry" in JubesX.recent_history:
                     ch_v "Grrrrrrrrr."
-                elif JubesX.recent_history.count("no summon") > 1:
+                elif JubesX.recent_history.count("no_summon") > 1:
                     ch_v "Back off!"
                     $ JubesX.recent_history.append("angry")
 #                elif Current_Time == "Night":
 #                    ch_v "Like I said, it's too late for that."
                 else:
                     ch_v "Like I said, I'm busy."
-                $ JubesX.recent_history.append("no summon")
+                $ JubesX.recent_history.append("no_summon")
                 return
 
     $ D20 = renpy.random.randint(1, 20)
     $ line = 0
-    if JubesX.Loc == "bg_classroom": #fix change these if changed function
+    if JubesX.location == "bg_classroom": #fix change these if changed function
         $ temp_modifier = -10
-    elif JubesX.Loc == "bg_dangerroom":
+    elif JubesX.location == "bg_dangerroom":
         $ temp_modifier = -10
-    elif JubesX.Loc == "bg_showerroom":
+    elif JubesX.location == "bg_showerroom":
         $ temp_modifier = -30
 
     if D20 <= 3:
@@ -1732,12 +1728,12 @@ label Jubes_Summon(temp_modifier=temp_modifier):
 #                if ApprovalCheck(JubesX, 500, "L") or ApprovalCheck(JubesX, 400, "O"):
 #                        #It's night time but she likes you.
 #                        ch_v "You're up too? Sure, we can hang."
-#                        $ JubesX.Loc = bg_current
+#                        $ JubesX.location = bg_current
 #                        call set_the_scene
 #                else:
 #                        #It's night time and she isn't into you
 #                        ch_v "Nah."
-#                        $ JubesX.recent_history.append("no summon")
+#                        $ JubesX.recent_history.append("no_summon")
 #                return
     if "les" in JubesX.recent_history:
             #if she's with another girl. . .
@@ -1753,13 +1749,13 @@ label Jubes_Summon(temp_modifier=temp_modifier):
             else:
                     ch_v "Oh, um, I kinda have a guest."
                     ch_v "I'll see you later, though?"
-                    $ JubesX.recent_history.append("no summon")
+                    $ JubesX.recent_history.append("no_summon")
                     return
     elif not ApprovalCheck(JubesX, 700, "L") or not ApprovalCheck(JubesX, 600, "O"):
         #It's not night time, but she's busy
         if not ApprovalCheck(JubesX, 300):
                 ch_v "I'm kinda busy, [JubesX.Petname]."
-                $ JubesX.recent_history.append("no summon")
+                $ JubesX.recent_history.append("no_summon")
                 return
 
 
@@ -1767,26 +1763,26 @@ label Jubes_Summon(temp_modifier=temp_modifier):
                 pass
         elif "goto" in JubesX.recent_history:
                 ch_v "You just left!"
-        elif JubesX.Loc == "bg_classroom":
+        elif JubesX.location == "bg_classroom":
                 ch_v "I'm in class, did you want to come too?"
-        elif JubesX.Loc == "bg_dangerroom":
+        elif JubesX.location == "bg_dangerroom":
                 ch_v "I'm in the Danger Room, [JubesX.Petname], want in?"
-        elif JubesX.Loc == "bg_campus":
+        elif JubesX.location == "bg_campus":
                 ch_v "I'm just enjoying the sun, want to come?"
-        elif JubesX.Loc == "bg_jubes":
+        elif JubesX.location == "bg_jubes":
                 ch_v "I'm in my room, [JubesX.Petname], did you wanna drop by?"
-        elif JubesX.Loc == "bg_player":
+        elif JubesX.location == "bg_player":
                 ch_v "I'm in your room, [JubesX.Petname], are you coming back?"
-        elif JubesX.Loc == "bg_showerroom":
+        elif JubesX.location == "bg_showerroom":
             if ApprovalCheck(JubesX, 1600):
                 ch_v "I'm in the shower right now. Join me?"
             else:
                 ch_v "I'm in the shower right now, [JubesX.Petname]. We can hang later."
-                $ JubesX.recent_history.append("no summon")
+                $ JubesX.recent_history.append("no_summon")
                 return
-        elif JubesX.Loc == "hold":
+        elif JubesX.location == "hold":
                 ch_v "I'm a little busy right now. Sorry?"
-                $ JubesX.recent_history.append("no summon")
+                $ JubesX.recent_history.append("no_summon")
                 return
         else:
                 ch_v "Why don't you come to me?"
@@ -1901,18 +1897,18 @@ label Jubes_Summon(temp_modifier=temp_modifier):
 
     if not line:
             #You end the dialog neutrally
-            $ JubesX.recent_history.append("no summon")
+            $ JubesX.recent_history.append("no_summon")
             return
 
     if line == "no":
             # She's refused, context based dialog
-            if JubesX.Loc == "bg_classroom":
+            if JubesX.location == "bg_classroom":
                 ch_v "I can't skip this lecture."
-            elif JubesX.Loc == "bg_dangerroom":
+            elif JubesX.location == "bg_dangerroom":
                 ch_v "I'm just getting into it."
             else:
                 ch_v "Sorry, [JubesX.Petname], I'm kinda busy."
-            $ JubesX.recent_history.append("no summon")
+            $ JubesX.recent_history.append("no_summon")
             return
 
     elif line == "go to":
@@ -1921,31 +1917,31 @@ label Jubes_Summon(temp_modifier=temp_modifier):
             $ JubesX.recent_history.append("goto")
             $ Player.recent_history.append("goto")
             $ line = 0
-            if JubesX.Loc == "bg_classroom":
+            if JubesX.location == "bg_classroom":
                     ch_v "K, there's room next to me."
                     jump Class_Room
-            elif JubesX.Loc == "bg_dangerroom":
+            elif JubesX.location == "bg_dangerroom":
                     ch_v "Don't be long. . ."
                     jump Danger_Room
-            elif JubesX.Loc == "bg_jubes":
+            elif JubesX.location == "bg_jubes":
                     ch_v "I'll. . . get ready."
                     jump Jubes_Room
-            elif JubesX.Loc == "bg_player":
+            elif JubesX.location == "bg_player":
                     ch_v "I'll be waiting."
                     jump Player_Room
-            elif JubesX.Loc == "bg_showerroom":
+            elif JubesX.location == "bg_showerroom":
                     ch_v "I'll leave you some hot water."
                     jump Shower_Room
-            elif JubesX.Loc == "bg_campus":
+            elif JubesX.location == "bg_campus":
                     ch_v "I'm still in the shade a bit. . ."
                     jump Campus
-            elif JubesX.Loc in PersonalRooms:
+            elif JubesX.location in PersonalRooms:
                     ch_v "Yeah, see you."
-                    $ bg_current = JubesX.Loc
+                    $ bg_current = JubesX.location
                     jump Misplaced
             else:
                     ch_v "Um, I'll just meet you in my room."
-                    $ JubesX.Loc = "bg_jubes"
+                    $ JubesX.location = "bg_jubes"
                     jump Jubes_Room
 
     #She's agreed to come over
@@ -1958,15 +1954,15 @@ label Jubes_Summon(temp_modifier=temp_modifier):
             call Jubes_Sunshock
             if _return:
                     #if she couldn't go out and refused, then head back.
-                    $ JubesX.recent_history.append("no summon")
+                    $ JubesX.recent_history.append("no_summon")
                     return
 
     $ JubesX.recent_history.append("summoned")
     $ line = 0
-    if "locked" in Player.Traits:
+    if door_locked:
             call Locked_Door(JubesX)
             return
-    $ JubesX.Loc = bg_current
+    $ JubesX.location = bg_current
     call Taboo_Level(0)
     $ JubesX.OutfitChange()
     call set_the_scene
@@ -1993,7 +1989,7 @@ label Jubes_Clothes:
             $ renpy.pop_call()
     $ line = 0
     $ Girl = JubesX
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
 
 label Jubes_Wardrobe_Menu:
     $ JubesX.change_face()
@@ -2014,7 +2010,7 @@ label Jubes_Wardrobe_Menu:
             "Let's talk about what you wear around.":
                         call Clothes_Schedule(JubesX)
 
-            "Could I get a look at it?" if JubesX.Loc != bg_current:
+            "Could I get a look at it?" if JubesX.location != bg_current:
                     # checks to see if she'll drop the screen
                     call OutfitShame(JubesX,0,2)
                     if _return:
@@ -2028,7 +2024,7 @@ label Jubes_Wardrobe_Menu:
                         hide DressScreen
             "Would you be more comfortable behind a screen? (locked)" if JubesX.Taboo:
                     pass
-            "Would you be more comfortable behind a screen?" if JubesX.Loc == bg_current and not JubesX.Taboo and not renpy.showing('DressScreen'):
+            "Would you be more comfortable behind a screen?" if JubesX.location == bg_current and not JubesX.Taboo and not renpy.showing('DressScreen'):
                     # checks to see if she'll drop the screen
                     if ApprovalCheck(JubesX, 1500) or (JubesX.SeenChest and JubesX.SeenPussy):
                             ch_v "I think I'm fine. . ."
@@ -2036,9 +2032,9 @@ label Jubes_Wardrobe_Menu:
                             show DressScreen zorder 150
                             ch_v "Yeah, this is better, thanks."
 
-            "Gift for you (locked)" if Girl.Loc != bg_current:
+            "Gift for you (locked)" if Girl.location != bg_current:
                             pass
-            "Gift for you" if Girl.Loc == bg_current:
+            "Gift for you" if Girl.location == bg_current:
                             ch_p "I'd like to give you something."
                             call Gifts #(Girl)
 
@@ -2056,7 +2052,7 @@ label Jubes_Wardrobe_Menu:
                             ch_p "I wanted to talk about your clothes."
                             call expression Girl.Tag +"_Clothes"
                     $ Girl = JubesX
-                    call Shift_Focus(Girl)
+                    call shift_focus(Girl)
 
             "Never mind, you look good like that.":
                     if "wardrobe" not in JubesX.recent_history:
@@ -2769,10 +2765,10 @@ label Jubes_Wardrobe_Menu:
                             if not renpy.showing('DressScreen'):
                                     call Jubes_First_Bottomless
                         elif ApprovalCheck(JubesX, 1200, TabM=4):
-                            $ primary_action = JubesX.Legs
+                            $ temp = JubesX.Legs
                             $ JubesX.Legs = 0
                             pause 0.5
-                            $ JubesX.Legs = primary_action
+                            $ JubesX.Legs = temp
                             "She pulls off her [JubesX.Legs] and [line], then pulls the [JubesX.Legs] back on."
                             $ primary_action = 1
                             call Jubes_First_Bottomless(1)

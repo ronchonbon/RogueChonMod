@@ -8,15 +8,15 @@ label Storm_Relationship: #rkeljs
             "Do you want to be my girlfriend?" if StormX not in Player.Harem and "ex" not in StormX.Traits and "story" not in Player.History:
                     $ StormX.daily_history.append("relationship")
                     if "asked boyfriend" in StormX.daily_history and "angry" in StormX.daily_history:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             ch_s "Please stop."
                             return
                     elif "asked boyfriend" in StormX.daily_history:
-                            $ StormX.FaceChange("sad", 1)
+                            $ StormX.change_face("sad", 1)
                             ch_s "Oh, [Girl.Petname], no."
                             return
                     elif StormX.Break[0]:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             ch_s "I. . . do not share."
                             if Player.Harem:
                                     $ StormX.daily_history.append("asked boyfriend")
@@ -34,17 +34,17 @@ label Storm_Relationship: #rkeljs
                         return
 
                     if StormX.Event[5]:
-                            $ StormX.FaceChange("bemused", 1)
+                            $ StormX.change_face("bemused", 1)
                             ch_s "When I asked, you said \"no\". . ."
                     else:
-                            $ StormX.FaceChange("surprised", 2)
+                            $ StormX.change_face("surprised", 2)
                             ch_s "What? . ."
-                            $ StormX.FaceChange("smile", 1)
+                            $ StormX.change_face("smile", 1)
 
                     call Storm_OtherWoman
 
                     if StormX.Love >= 800:
-                            $ StormX.FaceChange("surprised", 1)
+                            $ StormX.change_face("surprised", 1)
                             $ StormX.Mouth = "smile"
                             $ StormX.Statup("Love", 200, 40)
                             ch_s "I would love to!"
@@ -55,26 +55,26 @@ label Storm_Relationship: #rkeljs
                             $ Player.Harem.append(StormX)
                             call Harem_Initiation
                             "[StormX.Name] moves in and kisses you deeply."
-                            $ StormX.FaceChange("kiss", 1)
+                            $ StormX.change_face("kiss", 1)
                             $ StormX.Kissed += 1
                     elif StormX.Obed >= 500:
-                            $ StormX.FaceChange("perplexed")
+                            $ StormX.change_face("perplexed")
                             ch_s "I'm unsure, \"dating\". . ."
                     elif StormX.Inbt >= 500:
-                            $ StormX.FaceChange("smile")
+                            $ StormX.change_face("smile")
                             ch_s "Can't we just keep it casual?"
                     else:
-                            $ StormX.FaceChange("perplexed", 1)
+                            $ StormX.change_face("perplexed", 1)
                             ch_s "I don't know about that, [StormX.Petname]."
 
             "Do you want to get back together?" if "ex" in StormX.Traits:
                     $ StormX.daily_history.append("relationship")
                     if "asked boyfriend" in StormX.daily_history and "angry" in StormX.daily_history:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             ch_s "Please stop."
                             return
                     elif "asked boyfriend" in StormX.daily_history:
-                            $ StormX.FaceChange("sad", 1)
+                            $ StormX.change_face("sad", 1)
                             ch_s "Oh, [Girl.Petname], no."
                             return
 
@@ -91,7 +91,7 @@ label Storm_Relationship: #rkeljs
                     call Storm_OtherWoman
 
                     if StormX.Love >= 800:
-                            $ StormX.FaceChange("surprised", 1)
+                            $ StormX.change_face("surprised", 1)
                             $ StormX.Mouth = "smile"
                             $ StormX.Statup("Love", 90, 5)
                             ch_s "I suppose I could give you another chance."
@@ -103,10 +103,10 @@ label Storm_Relationship: #rkeljs
                             $ Player.Harem.append(StormX)
                             call Harem_Initiation
                             "[StormX.Name] pulls you in and kisses you deeply."
-                            $ StormX.FaceChange("kiss", 1)
+                            $ StormX.change_face("kiss", 1)
                             $ StormX.Kissed += 1
                     elif StormX.Love >= 600 and ApprovalCheck(StormX, 1500):
-                            $ StormX.FaceChange("smile", 1)
+                            $ StormX.change_face("smile", 1)
                             $ StormX.Statup("Love", 90, 5)
                             ch_s "I suppose I could give it another chance."
                             if "boyfriend" not in StormX.Petnames:
@@ -116,18 +116,18 @@ label Storm_Relationship: #rkeljs
                                     $ Player.Traits.remove("StormYes")
                             $ Player.Harem.append(StormX)
                             call Harem_Initiation
-                            $ StormX.FaceChange("kiss", 1)
+                            $ StormX.change_face("kiss", 1)
                             "[StormX.Name] gives you a quick kiss."
-                            $ StormX.FaceChange("sly", 1)
+                            $ StormX.change_face("sly", 1)
                             $ StormX.Kissed += 1
                     elif StormX.Obed >= 500:
-                            $ StormX.FaceChange("sad")
+                            $ StormX.change_face("sad")
                             ch_s "Perhaps \"relationships\" are beyond us."
                     elif StormX.Inbt >= 500:
-                            $ StormX.FaceChange("perplexed")
+                            $ StormX.change_face("perplexed")
                             ch_s "Let's keep things casual."
                     else:
-                            $ StormX.FaceChange("perplexed", 1)
+                            $ StormX.change_face("perplexed", 1)
                             ch_s "You've lost my trust."
 
                     # End Back Together
@@ -187,7 +187,7 @@ label Storm_OtherWoman(Cnt = 0): #rkeljs
             return
     $ Cnt = int((StormX.GirlLikeCheck(Player.Harem[0]) - 500)/2)
 
-    $ StormX.FaceChange("perplexed")
+    $ StormX.change_face("perplexed")
     if len(Player.Harem) >= 2:
         ch_s "But you are with [Player.Harem[0].Name] right now, and others as well."
     else:
@@ -196,7 +196,7 @@ label Storm_OtherWoman(Cnt = 0): #rkeljs
         extend ""
         "She said I can be with you too." if "StormYes" in Player.Traits:
                 if ApprovalCheck(StormX, 1800, Bonus = Cnt):
-                    $ StormX.FaceChange("smile", 1)
+                    $ StormX.change_face("smile", 1)
                     if StormX.Love >= StormX.Obed:
                             ch_s "I suppose I can share with her."
                     elif StormX.Obed >= StormX.Inbt:
@@ -204,14 +204,14 @@ label Storm_OtherWoman(Cnt = 0): #rkeljs
                     else:
                             ch_s "Fine."
                 else:
-                    $ StormX.FaceChange("angry", 1)
+                    $ StormX.change_face("angry", 1)
                     ch_s "Yes, I suppose that she would, but I'm unwilling to share."
                     $ renpy.pop_call()
                     #This causes it to jump past the previous menu on the return
 
         "I could ask if she'd be ok with me dating you both." if "StormYes" not in Player.Traits:
                 if ApprovalCheck(StormX, 1800, Bonus = Cnt):
-                        $ StormX.FaceChange("smile", 1)
+                        $ StormX.change_face("smile", 1)
                         if StormX.Love >= StormX.Obed:
                             ch_s "I guess I can share you."
                         elif StormX.Obed >= StormX.Inbt:
@@ -220,20 +220,20 @@ label Storm_OtherWoman(Cnt = 0): #rkeljs
                             ch_s "Fine."
                         ch_s "Well ask her and tell me in the morning."
                 else:
-                        $ StormX.FaceChange("angry", 1)
+                        $ StormX.change_face("angry", 1)
                         ch_s "Yeah, I imagine she would, but I'm not sharing."
                 $ renpy.pop_call()
 
         "What she doesn't know won't hurt her.":
                 if not ApprovalCheck(StormX, 1800, Bonus = -Cnt): #checks if Storm likes you more than the other girl
-                        $ StormX.FaceChange("angry", 1)
+                        $ StormX.change_face("angry", 1)
                         if not ApprovalCheck(StormX, 1800):
                                 ch_s "It would hurt us both."
                         else:
                                 ch_s "That sounds beneath you."
                         $ renpy.pop_call()
                 else:
-                        $ StormX.FaceChange("smile", 1)
+                        $ StormX.change_face("smile", 1)
                         if StormX.Love >= StormX.Obed:
                                 ch_s "I suppose I could get past it. . ."
                         elif StormX.Obed >= StormX.Inbt:
@@ -243,12 +243,12 @@ label Storm_OtherWoman(Cnt = 0): #rkeljs
                         $ StormX.Traits.append("downlow")
 
         "I can break it off with her.":
-                    $ StormX.FaceChange("sad")
+                    $ StormX.change_face("sad")
                     ch_s "Then after you do, we can discuss this again."
                     $ renpy.pop_call()
 
         "You're right, I was dumb to ask.":
-                    $ StormX.FaceChange("sad")
+                    $ StormX.change_face("sad")
                     ch_s "Very."
                     $ renpy.pop_call()
 
@@ -383,25 +383,25 @@ label Storm_Monogamy: #rkeljs
             "Could you not hook up with other girls?" if "mono" not in StormX.Traits:
                     if StormX.Thirst >= 60 and not ApprovalCheck(StormX, 1700, "LO", TabM=0):
                             #she's too thirsty
-                            $ StormX.FaceChange("sly",1)
+                            $ StormX.change_face("sly",1)
                             if "mono" not in StormX.daily_history:
                                     $ StormX.Statup("Obed", 90, -2)
                             ch_s "I do have needs that must be met. . ."
                             return
                     elif ApprovalCheck(StormX, 1200, "LO", TabM=0) and StormX.Love >= StormX.Obed:
                             #she cares
-                            $ StormX.FaceChange("sly",1)
+                            $ StormX.change_face("sly",1)
                             if "mono" not in StormX.daily_history:
                                     $ StormX.Statup("Love", 90, 1)
                             ch_s "I did not take you for the jealous type."
                             ch_s "Very well, for now. . ."
                     elif ApprovalCheck(StormX, 700, "O", TabM=0):
                             #she is obedient
-                            $ StormX.FaceChange("sly",1,Eyes="side")
+                            $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "Fine."
                     else:
                             #she doesn't care
-                            $ StormX.FaceChange("sly",1)
+                            $ StormX.change_face("sly",1)
                             ch_s "I do have needs. No."
                             return
                     if "mono" not in StormX.daily_history:
@@ -411,26 +411,26 @@ label Storm_Monogamy: #rkeljs
             "Don't hook up with other girls." if "mono" not in StormX.Traits:
                     if ApprovalCheck(StormX, 900, "O", TabM=0):
                             #she is obedient
-                            $ StormX.FaceChange("sly",1,Eyes="side")
+                            $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "If that is what you want."
                     elif StormX.Thirst >= 60 and not ApprovalCheck(StormX, 1700, "LO", TabM=0):
                             #she's too thirsty
-                            $ StormX.FaceChange("sly",1)
+                            $ StormX.change_face("sly",1)
                             if "mono" not in StormX.daily_history:
                                     $ StormX.Statup("Obed", 90, -2)
                             ch_s "I do have needs that must be met. . ."
                             return
                     elif ApprovalCheck(StormX, 600, "O", TabM=0):
                             #she is obedient
-                            $ StormX.FaceChange("sly",1,Eyes="side")
+                            $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "Fine."
                     elif ApprovalCheck(StormX, 1400, "LO", TabM=0):
                             #she cares
-                            $ StormX.FaceChange("sly",1)
+                            $ StormX.change_face("sly",1)
                             ch_s "Take care with your words, but I will consider it."
                     else:
                             #she doesn't care
-                            $ StormX.FaceChange("sly",1,Brows="confused")
+                            $ StormX.change_face("sly",1,Brows="confused")
                             ch_s "I would watch your tone."
                             return
                     if "mono" not in StormX.daily_history:
@@ -439,13 +439,13 @@ label Storm_Monogamy: #rkeljs
                     $ StormX.Traits.append("mono")
             "It's ok if you hook up with other girls." if "mono" in StormX.Traits:
                     if ApprovalCheck(StormX, 700, "O", TabM=0):
-                            $ StormX.FaceChange("sly",1,Eyes="side")
+                            $ StormX.change_face("sly",1,Eyes="side")
                             ch_s ". . . ok then."
                     elif ApprovalCheck(StormX, 800, "L", TabM=0):
-                            $ StormX.FaceChange("sly",1)
+                            $ StormX.change_face("sly",1)
                             ch_s "Fine. . ."
                     else:
-                            $ StormX.FaceChange("sly",1,Brows="confused")
+                            $ StormX.change_face("sly",1,Brows="confused")
                             if "mono" not in StormX.daily_history:
                                     $ StormX.Statup("Love", 90, -2)
                             ch_s "It sounds like I have some weekend plans to make then."
@@ -463,32 +463,32 @@ label Storm_Monogamy: #rkeljs
 label Storm_Jumped: #rkeljs
         #called from Storm_Settings to ask her not to jump you
         ch_p "Hey, Remember that time you threw yourself at me?"
-        $ StormX.FaceChange("sly",1,Brows="confused")
+        $ StormX.change_face("sly",1,Brows="confused")
         menu:
             ch_s "Yeah?"
             "Could you maybe just ask instead?" if "chill" not in StormX.Traits:
                     if StormX.Thirst >= 60 and not ApprovalCheck(StormX, 1500, "LO", TabM=0):
                             #she's too thirsty
-                            $ StormX.FaceChange("sly",1)
+                            $ StormX.change_face("sly",1)
                             if "chill" not in StormX.daily_history:
                                     $ StormX.Statup("Obed", 90, -2)
                             ch_s "I would if you would come to me more often. . ."
                             return
                     elif ApprovalCheck(StormX, 1000, "LO", TabM=0) and StormX.Love >= StormX.Obed:
                             #she cares
-                            $ StormX.FaceChange("surprised",1)
+                            $ StormX.change_face("surprised",1)
                             if "chill" not in StormX.daily_history:
                                     $ StormX.Statup("Love", 90, 1)
                             ch_s "I am sorry, but I have needs. . ."
-                            $ StormX.FaceChange("sly",1,Eyes="side")
+                            $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "I will -try- to keep them in check. . ."
                     elif ApprovalCheck(StormX, 500, "O", TabM=0):
                             #she is obedient
-                            $ StormX.FaceChange("sly",1,Eyes="side")
+                            $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "I am sorry about that. . ."
                     else:
                             #she doesn't care
-                            $ StormX.FaceChange("sly",1)
+                            $ StormX.change_face("sly",1)
                             ch_s "I will take what I need."
                             return
                     if "chill" not in StormX.daily_history:
@@ -498,27 +498,27 @@ label Storm_Jumped: #rkeljs
             "Don't bother me like that." if "chill" not in StormX.Traits:
                     if ApprovalCheck(StormX, 800, "O", TabM=0):
                             #she is obedient
-                            $ StormX.FaceChange("sly",1,Eyes="side")
+                            $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "Very well."
                     elif StormX.Thirst >= 60 and not ApprovalCheck(StormX, 500, "O", TabM=0):
                             #she's too thirsty
-                            $ StormX.FaceChange("sly",1)
+                            $ StormX.change_face("sly",1)
                             if "chill" not in StormX.daily_history:
                                     $ StormX.Statup("Obed", 90, -2)
                             ch_s "I would if you would come to me more often. . ."
                             return
                     elif ApprovalCheck(StormX, 400, "O", TabM=0):
                             #she is obedient
-                            $ StormX.FaceChange("sly",1,Eyes="side")
+                            $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "Fine. . ."
                     elif ApprovalCheck(StormX, 500, "LO", TabM=0) and not ApprovalCheck(StormX, 500, "I", TabM=0):
                             #she cares
-                            $ StormX.FaceChange("sly",1)
+                            $ StormX.change_face("sly",1)
                             ch_s "Watch your language."
                             ch_s "I will -try- to keep my needs in check. . ."
                     else:
                             #she doesn't care
-                            $ StormX.FaceChange("sly",1)
+                            $ StormX.change_face("sly",1)
                             ch_s "I will take what I need."
                             return
                     if "chill" not in StormX.daily_history:
@@ -527,13 +527,13 @@ label Storm_Jumped: #rkeljs
                     $ StormX.Traits.append("chill")
             "Knock yourself out.":
                     if ApprovalCheck(StormX, 800, "L", TabM=0):
-                            $ StormX.FaceChange("sly",1)
+                            $ StormX.change_face("sly",1)
                             ch_s "Noted. . ."
                     elif ApprovalCheck(StormX, 700, "O", TabM=0):
-                            $ StormX.FaceChange("sly",1,Eyes="side")
+                            $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "Very well. . .."
                     else:
-                            $ StormX.FaceChange("sly",1,Brows="confused")
+                            $ StormX.change_face("sly",1,Brows="confused")
                             if "chill" not in StormX.daily_history:
                                     $ StormX.Statup("Love", 90, -2)
                             ch_s "If I find myself in need, certainly."
@@ -574,7 +574,7 @@ label Storm_SexChat:#rkeljs
                     else:
                         menu:
                             "Sex.":
-                                        $ StormX.FaceChange("sly")
+                                        $ StormX.change_face("sly")
                                         if StormX.PlayerFav == "sex":
                                             $ StormX.Statup("Lust", 80, 5)
                                             ch_s "Yes, so you've said."
@@ -585,15 +585,15 @@ label Storm_SexChat:#rkeljs
                                         elif StormX.Sex >= 5:
                                             ch_s "It certainly is enjoyable. . ."
                                         elif not StormX.Sex:
-                                            $ StormX.FaceChange("perplexed")
+                                            $ StormX.change_face("perplexed")
                                             ch_s "And who is fucking you?"
                                         else:
-                                            $ StormX.FaceChange("bemused")
+                                            $ StormX.change_face("bemused")
                                             ch_s "Yes. . . um. . . it is fine. . ."
                                         $ StormX.PlayerFav = "sex"
 
                             "Anal.":
-                                        $ StormX.FaceChange("sly")
+                                        $ StormX.change_face("sly")
                                         if StormX.PlayerFav == "anal":
                                             $ StormX.Statup("Lust", 80, 5)
                                             ch_s "Yes, so you've said."
@@ -604,34 +604,34 @@ label Storm_SexChat:#rkeljs
                                         elif StormX.Anal >= 10:
                                             ch_s "It certainly is enjoyable. . ."
                                         elif not StormX.Anal:
-                                            $ StormX.FaceChange("perplexed")
+                                            $ StormX.change_face("perplexed")
                                             ch_s "And who is fucking you?"
                                         else:
-                                            $ StormX.FaceChange("bemused",Eyes="side")
+                                            $ StormX.change_face("bemused",Eyes="side")
                                             ch_s "Yes. . . um. . . it is fine. . ."
                                         $ StormX.PlayerFav = "anal"
 
                             "Blowjobs.":
-                                        $ StormX.FaceChange("sly")
-                                        if StormX.PlayerFav == "blow":
+                                        $ StormX.change_face("sly")
+                                        if StormX.PlayerFav == "blowjob":
                                             $ StormX.Statup("Lust", 80, 3)
                                             ch_s "Yes, so you've said."
-                                        elif StormX.Favorite == "blow":
+                                        elif StormX.Favorite == "blowjob":
                                             $ StormX.Statup("Love", 90, 5)
                                             $ StormX.Statup("Lust", 80, 5)
                                             ch_s "I would have to agree. . ."
                                         elif StormX.Blow >= 10:
                                             ch_s "You are quite delicious. . ."
                                         elif not StormX.Blow:
-                                            $ StormX.FaceChange("perplexed")
+                                            $ StormX.change_face("perplexed")
                                             ch_s "Who's sucking your dick?!"
                                         else:
-                                            $ StormX.FaceChange("bemused")
+                                            $ StormX.change_face("bemused")
                                             ch_s "I'm. . . getting used to the taste. . ."
-                                        $ StormX.PlayerFav = "blow"
+                                        $ StormX.PlayerFav = "blowjob"
 
                             "Titjobs.":
-                                        $ StormX.FaceChange("sly")
+                                        $ StormX.change_face("sly")
                                         if StormX.PlayerFav == "titjob":
                                             $ StormX.Statup("Lust", 80, 5)
                                             ch_s "Yes, so you've said."
@@ -642,76 +642,76 @@ label Storm_SexChat:#rkeljs
                                         elif StormX.Tit >= 10:
                                             ch_s "It certainly is enjoyable. . ."
                                         elif not StormX.Tit:
-                                            $ StormX.FaceChange("perplexed")
+                                            $ StormX.change_face("perplexed")
                                             ch_s "And who is titfucking you?"
                                         else:
-                                            $ StormX.FaceChange("bemused")
+                                            $ StormX.change_face("bemused")
                                             ch_s "Yes. . . um. . . it is fine. . ."
                                             $ StormX.Statup("Love", 80, 5)
                                             $ StormX.Statup("Inbt", 50, 10)
                                         $ StormX.PlayerFav = "titjob"
 
                             "Footjobs.":
-                                        $ StormX.FaceChange("sly")
-                                        if StormX.PlayerFav == "foot":
+                                        $ StormX.change_face("sly")
+                                        if StormX.PlayerFav == "footjob":
                                             $ StormX.Statup("Lust", 80, 5)
                                             ch_s "Yes, so you've said."
-                                        elif StormX.Favorite == "foot":
+                                        elif StormX.Favorite == "footjob":
                                             $ StormX.Statup("Love", 90, 5)
                                             $ StormX.Statup("Lust", 80, 7)
                                             ch_s "I also enjoy that. . ."
                                         elif StormX.Foot >= 10:
                                             ch_s "I like it too . . ."
                                         elif not StormX.Foot:
-                                            $ StormX.FaceChange("perplexed")
+                                            $ StormX.change_face("perplexed")
                                             ch_s "And who is playing footsie with you?"
                                         else:
-                                            $ StormX.FaceChange("bemused")
+                                            $ StormX.change_face("bemused")
                                             ch_s "Yes. . . um. . . it is fine. . ."
-                                        $ StormX.PlayerFav = "foot"
+                                        $ StormX.PlayerFav = "footjob"
 
                             "Handjobs.":
-                                        $ StormX.FaceChange("sly")
-                                        if StormX.PlayerFav == "hand":
+                                        $ StormX.change_face("sly")
+                                        if StormX.PlayerFav == "handjob":
                                             $ StormX.Statup("Lust", 80, 5)
                                             ch_s "Yes, so you've said."
-                                        elif StormX.Favorite == "hand":
+                                        elif StormX.Favorite == "handjob":
                                             $ StormX.Statup("Love", 90, 5)
                                             $ StormX.Statup("Lust", 80, 7)
                                             ch_s "I also enjoy that. . ."
                                         elif StormX.Hand >= 10:
                                             ch_s "I like it too . . ."
                                         elif not StormX.Hand:
-                                            $ StormX.FaceChange("perplexed")
+                                            $ StormX.change_face("perplexed")
                                             ch_s "And who is jerking you off?"
                                         else:
-                                            $ StormX.FaceChange("bemused")
+                                            $ StormX.change_face("bemused")
                                             ch_s "Yes. . . um. . . it is fine. . ."
-                                        $ StormX.PlayerFav = "hand"
+                                        $ StormX.PlayerFav = "handjob"
 
                             "Feeling you up.":
                                         $ Cnt = StormX.FondleB + StormX.FondleT + StormX.SuckB + StormX.Hotdog
-                                        $ StormX.FaceChange("sly")
+                                        $ StormX.change_face("sly")
                                         if StormX.PlayerFav == "fondle":
                                             $ StormX.Statup("Lust", 80, 3)
                                             ch_s "Yes, so you've said."
-                                        elif StormX.Favorite in ("hotdog","suck breasts","fondle breasts","fondle thighs"):
+                                        elif StormX.Favorite in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
                                             $ StormX.Statup("Love", 90, 5)
                                             $ StormX.Statup("Lust", 80, 5)
                                             ch_s "I do not mind that myself. . ."
                                         elif Cnt >= 10:
                                             ch_s "It certainly is enjoyable. . ."
                                         elif not Cnt:
-                                            $ StormX.FaceChange("perplexed")
+                                            $ StormX.change_face("perplexed")
                                             ch_s "And who is letting you feel her up?"
                                         else:
-                                            $ StormX.FaceChange("bemused")
+                                            $ StormX.change_face("bemused")
                                             ch_s "I do enjoy how that feels. . ."
                                         $ StormX.PlayerFav = "fondle"
                                         $ Cnt = 0
 
                             "Kissing you.":
-                                        $ StormX.FaceChange("sly")
+                                        $ StormX.change_face("sly")
                                         if StormX.PlayerFav == "kiss you":
                                             $ StormX.Statup("Love", 90, 3)
                                             ch_s "Yes, so you've said."
@@ -722,10 +722,10 @@ label Storm_SexChat:#rkeljs
                                         elif StormX.Kissed >= 10:
                                             ch_s "It certainly is enjoyable. . ."
                                         elif not StormX.Kissed:
-                                            $ StormX.FaceChange("perplexed")
+                                            $ StormX.change_face("perplexed")
                                             ch_s "And who are you kissing?"
                                         else:
-                                            $ StormX.FaceChange("bemused")
+                                            $ StormX.change_face("bemused")
                                             ch_s "I enjoy kissing you as well. . ."
                                         $ StormX.PlayerFav = "kiss you"
 
@@ -733,14 +733,14 @@ label Storm_SexChat:#rkeljs
 
                 "What's your favorite thing to do?":
                                 if not ApprovalCheck(StormX, 800):
-                                        $ StormX.FaceChange("perplexed")
+                                        $ StormX.change_face("perplexed")
                                         ch_s ". . . I would rather not say."
                                 else:
                                         if StormX.SEXP >= 50:
-                                            $ StormX.FaceChange("sly")
+                                            $ StormX.change_face("sly")
                                             ch_s "You should be aware. . ."
                                         else:
-                                            $ StormX.FaceChange("bemused")
+                                            $ StormX.change_face("bemused")
                                             $ StormX.Eyes = "side"
                                             ch_s "Well. . ."
 
@@ -749,31 +749,31 @@ label Storm_SexChat:#rkeljs
                                                 ch_s "Kissing?"
                                         elif StormX.Favorite == "anal":
                                                 ch_s "Probably anal."
-                                        elif StormX.Favorite == "lick ass":
+                                        elif StormX.Favorite == "eat_ass":
                                                 ch_s "When you lick my ass."
-                                        elif StormX.Favorite == "insert ass":
+                                        elif StormX.Favorite == "finger_ass":
                                                 ch_s "Fingering my asshole, probably."
                                         elif StormX.Favorite == "sex":
                                                 ch_s "I enjoy sex the most."
-                                        elif StormX.Favorite == "lick pussy":
+                                        elif StormX.Favorite == "eat_pussy":
                                                 ch_s "When you lick my pussy."
-                                        elif StormX.Favorite == "fondle pussy":
+                                        elif StormX.Favorite == "fondle_pussy":
                                                 ch_s "When you finger me."
-                                        elif StormX.Favorite == "blow":
+                                        elif StormX.Favorite == "blowjob":
                                                 ch_s "I enjoy the taste of your cock."
-                                        elif StormX.Favorite == "tit":
+                                        elif StormX.Favorite == "titjob":
                                                 ch_s "When I use my breasts."
-                                        elif StormX.Favorite == "foot":
+                                        elif StormX.Favorite == "footjob":
                                                 ch_s "Footjobs are quite fun."
-                                        elif StormX.Favorite == "hand":
+                                        elif StormX.Favorite == "handjob":
                                                 ch_s "I enjoy jerking you off."
                                         elif StormX.Favorite == "hotdog":
                                                 ch_s "When you grind against me."
-                                        elif StormX.Favorite == "suck breasts":
+                                        elif StormX.Favorite == "suck_breasts":
                                                 ch_s "When you suck my breasts."
-                                        elif StormX.Favorite == "fondle breasts":
+                                        elif StormX.Favorite == "fondle_breasts":
                                                 ch_s "When you grab my breasts."
-                                        elif StormX.Favorite == "fondle thighs":
+                                        elif StormX.Favorite == "fondle_thighs":
                                                 ch_s "When you rub my thighs."
                                         else:
                                                 ch_s "I'm unsure, actually."
@@ -782,27 +782,27 @@ label Storm_SexChat:#rkeljs
 
                 "Don't talk as much during sex." if "vocal" in StormX.Traits:
                         if "setvocal" in StormX.daily_history:
-                                $ StormX.FaceChange("perplexed")
+                                $ StormX.change_face("perplexed")
                                 ch_s "I do wish you would make up your mind."
                         else:
                             if ApprovalCheck(StormX, 1000) and StormX.Obed <= StormX.Love:
-                                $ StormX.FaceChange("bemused")
+                                $ StormX.change_face("bemused")
                                 $ StormX.Statup("Obed", 90, 1)
                                 ch_s "I can be silent if you wish."
                                 $ StormX.Traits.remove("vocal")
                             elif ApprovalCheck(StormX, 700, "O"):
-                                $ StormX.FaceChange("sadside")
+                                $ StormX.change_face("sadside")
                                 $ StormX.Statup("Obed", 90, 1)
                                 ch_s ". . ."
                                 $ StormX.Traits.remove("vocal")
                             elif ApprovalCheck(StormX, 600):
-                                $ StormX.FaceChange("sly")
+                                $ StormX.change_face("sly")
                                 $ StormX.Statup("Love", 90, -3)
                                 $ StormX.Statup("Obed", 50, -1)
                                 $ StormX.Statup("Inbt", 90, 5)
                                 ch_s "Do not presume to control me, [StormX.Petname]."
                             else:
-                                $ StormX.FaceChange("angry")
+                                $ StormX.change_face("angry")
                                 $ StormX.Statup("Love", 90, -5)
                                 $ StormX.Statup("Obed", 60, -3)
                                 $ StormX.Statup("Inbt", 90, 10)
@@ -811,26 +811,26 @@ label Storm_SexChat:#rkeljs
                             $ StormX.daily_history.append("setvocal")
                 "Talk dirty to me during sex." if "vocal" not in StormX.Traits:
                         if "setvocal" in StormX.daily_history:
-                                $ StormX.FaceChange("perplexed")
+                                $ StormX.change_face("perplexed")
                                 ch_s "I do wish you would make up your mind."
                         else:
                             if ApprovalCheck(StormX, 1000) and StormX.Obed <= StormX.Love:
-                                $ StormX.FaceChange("sly")
+                                $ StormX.change_face("sly")
                                 $ StormX.Statup("Obed", 90, 2)
                                 ch_s "I believe I can make myself known. . ."
                                 $ StormX.Traits.append("vocal")
                             elif ApprovalCheck(StormX, 700, "O"):
-                                $ StormX.FaceChange("sadside")
+                                $ StormX.change_face("sadside")
                                 $ StormX.Statup("Obed", 90, 2)
                                 ch_s "If that is what you want, [StormX.Petname]."
                                 $ StormX.Traits.append("vocal")
                             elif ApprovalCheck(StormX, 600):
-                                $ StormX.FaceChange("sly")
+                                $ StormX.change_face("sly")
                                 $ StormX.Statup("Obed", 90, 3)
                                 ch_s "I suppose that I could. . ."
                                 $ StormX.Traits.append("vocal")
                             else:
-                                $ StormX.FaceChange("angry")
+                                $ StormX.change_face("angry")
                                 $ StormX.Statup("Inbt", 90, 5)
                                 ch_s ". . . I would rather not."
 
@@ -839,27 +839,27 @@ label Storm_SexChat:#rkeljs
 
                 "Don't do your own thing as much during sex." if "passive" not in StormX.Traits:
                         if "initiative" in StormX.daily_history:
-                                $ StormX.FaceChange("perplexed")
+                                $ StormX.change_face("perplexed")
                                 ch_s "I do wish you would make up your mind."
                         else:
                             if ApprovalCheck(StormX, 1200) and StormX.Obed <= StormX.Love:
-                                $ StormX.FaceChange("bemused")
+                                $ StormX.change_face("bemused")
                                 $ StormX.Statup("Obed", 90, 1)
                                 ch_s "Allow you to take the lead? Fine."
                                 $ StormX.Traits.append("passive")
                             elif ApprovalCheck(StormX, 700, "O"):
-                                $ StormX.FaceChange("sadside")
+                                $ StormX.change_face("sadside")
                                 $ StormX.Statup("Obed", 90, 1)
                                 ch_s "I will try to restrain myself."
                                 $ StormX.Traits.append("passive")
                             elif ApprovalCheck(StormX, 600):
-                                $ StormX.FaceChange("sly")
+                                $ StormX.change_face("sly")
                                 $ StormX.Statup("Love", 90, -3)
                                 $ StormX.Statup("Obed", 50, -1)
                                 $ StormX.Statup("Inbt", 90, 5)
                                 ch_s "We shall see."
                             else:
-                                $ StormX.FaceChange("angry")
+                                $ StormX.change_face("angry")
                                 $ StormX.Statup("Love", 90, -5)
                                 $ StormX.Statup("Obed", 60, -3)
                                 $ StormX.Statup("Inbt", 90, 10)
@@ -868,26 +868,26 @@ label Storm_SexChat:#rkeljs
                             $ StormX.daily_history.append("initiative")
                 "Take more initiative during sex." if "passive" in StormX.Traits:
                         if "initiative" in StormX.daily_history:
-                                $ StormX.FaceChange("perplexed")
+                                $ StormX.change_face("perplexed")
                                 ch_s "I do wish you would make up your mind."
                         else:
                             if ApprovalCheck(StormX, 1000) and StormX.Obed <= StormX.Love:
-                                $ StormX.FaceChange("bemused")
+                                $ StormX.change_face("bemused")
                                 $ StormX.Statup("Obed", 90, 1)
                                 ch_s "You would prefer I choose? Very Well."
                                 $ StormX.Traits.remove("passive")
                             elif ApprovalCheck(StormX, 700, "O"):
-                                $ StormX.FaceChange("sadside")
+                                $ StormX.change_face("sadside")
                                 $ StormX.Statup("Obed", 90, 1)
                                 ch_s "If you insist."
                                 $ StormX.Traits.remove("passive")
                             elif ApprovalCheck(StormX, 600):
-                                $ StormX.FaceChange("sly")
+                                $ StormX.change_face("sly")
                                 $ StormX.Statup("Obed", 90, 3)
                                 ch_s "We shall see."
                                 $ StormX.Traits.remove("passive")
                             else:
-                                $ StormX.FaceChange("angry")
+                                $ StormX.change_face("angry")
                                 $ StormX.Statup("Inbt", 90, 5)
                                 ch_s "I would rather not."
 
@@ -925,13 +925,13 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
                     $ Digits.append(StormX)
                     return
 
-        if "hungry" not in StormX.Traits and (StormX.Swallow + StormX.Chat[2]) >= 10 and StormX.Loc == bg_current:  #She's swallowed a lot
+        if "hungry" not in StormX.Traits and (StormX.Swallow + StormX.Chat[2]) >= 10 and StormX.location == bg_current:  #She's swallowed a lot
                     call Storm_Hungry
                     return
 
         if bg_current != "bg restaurant" and bg_current != "HW Party" and (not Taboo or ApprovalCheck(StormX, 800, "I")):
-                    if StormX.Loc == bg_current and StormX.Thirst >= 30 and "refused" not in StormX.daily_history and "quicksex" not in StormX.daily_history:
-                            $ StormX.FaceChange("sly",1)
+                    if StormX.location == bg_current and StormX.Thirst >= 30 and "refused" not in StormX.daily_history and "quicksex" not in StormX.daily_history:
+                            $ StormX.change_face("sly",1)
                             ch_s "I was wondering if you wanted to. . ."
                             ch_s "\"get intimate\" with me?"
                             call Quick_Sex(StormX)
@@ -943,12 +943,8 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
         if StormX.Event[0] and "key" not in StormX.Chat:
             $ Options.append("key")
 
-        if "mandrill" in Player.Traits and "cologne chat" not in StormX.daily_history:
-            $ Options.append("mandrill")
-        if "purple" in Player.Traits and "cologne chat" not in StormX.daily_history:
-            $ Options.append("purple")
-        if "corruption" in Player.Traits and "cologne chat" not in StormX.daily_history:
-            $ Options.append("corruption")
+        if Player.cologne and "cologne_chat" not in StormX.daily_history:
+            $ Options.append(Player.cologne)
 
         if StormX.Date >= 1 and bg_current != "bg restaurant" :
             #if you've dated before
@@ -965,7 +961,7 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
 #        if "showered" in StormX.daily_history:
 #            #If you've caught Storm showering today
             $ Options.append("showercaught")
-        if "fondle breasts" in StormX.daily_history or "fondle pussy" in StormX.daily_history or "fondle ass" in StormX.daily_history:
+        if "fondle_breasts" in StormX.daily_history or "fondle_pussy" in StormX.daily_history or "fondle_ass" in StormX.daily_history:
             #If you've fondled Storm today
             $ Options.append("fondled")
         if "Dazzler and Longshot" in StormX.Inventory and "256 Shades of Grey" in StormX.Inventory and "Avengers Tower Penthouse" in StormX.Inventory:
@@ -978,7 +974,7 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
                 $ Options.append("lingerie")
         if StormX.Hand:
             #If Storm's given a handjob
-            $ Options.append("handy")
+            $ Options.append("handjob")
         if StormX.Swallow:
             #If Storm's swallowed before
             $ Options.append("swallowed")
@@ -1031,24 +1027,24 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
     $ renpy.random.shuffle(Options)             #shuffles options and picks out the first one
 
     if Options[0] == "mandrill":
-        $ StormX.daily_history.append("cologne chat")
-        $ StormX.FaceChange("confused")
+        $ StormX.daily_history.append("cologne_chat")
+        $ StormX.change_face("confused")
         ch_s "(sniff, sniff). . . I can smell. . . some type of ape . . ."
-        $ StormX.FaceChange("sexy", 2)
+        $ StormX.change_face("sexy", 2)
         ch_s ". . . you are looking quite fetching though. . ."
     elif Options[0] == "purple":
-        $ StormX.daily_history.append("cologne chat")
-        $ StormX.FaceChange("sly",1)
+        $ StormX.daily_history.append("cologne_chat")
+        $ StormX.change_face("sly",1)
         ch_s "(sniff, sniff). . . what is that odor? . ."
-        $ StormX.FaceChange("normal",0)
+        $ StormX.change_face("normal",0)
         ch_s ". . . was there anything that you wanted?"
     elif Options[0] == "corruption":
-        $ StormX.daily_history.append("cologne chat")
-        $ StormX.FaceChange("confused")
+        $ StormX.daily_history.append("cologne_chat")
+        $ StormX.change_face("confused")
         ch_s "(sniff, sniff). . . that's a strong odor. . ."
-        $ StormX.FaceChange("angry")
+        $ StormX.change_face("angry")
         ch_s ". . . I'm feeling quite dangerous. . ."
-        $ StormX.FaceChange("sly")
+        $ StormX.change_face("sly")
 
     elif Options[0] == "caught": # Xavier's caught you
             if "caught chat" in StormX.Chat:
@@ -1073,7 +1069,7 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
 #            #Storm's response to having her cheek touched.
 #            ch_s "So,[StormX.Petname]. . .y'know how you[StormX.like]kinda just brushed my cheek before?"
 #            ch_p "Yeah?  Was that okay?"
-#            $ StormX.FaceChange("smile",1)
+#            $ StormX.change_face("smile",1)
 #            ch_s "More than just {i}okay{/i}."
 #            $ StormX.Chat.append("cheek")
 
@@ -1084,14 +1080,14 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
 
     elif Options[0] == "kissed":
             #Storm's response to having been kissed by the Player.
-            $ StormX.FaceChange("normal",1)
+            $ StormX.change_face("normal",1)
             ch_s "You know, [StormX.Petname], you are a quite good kisser."
             menu:
                 extend ""
                 "Hey. . .I'm the best there is at what I do.":
-                        $ StormX.FaceChange("bemused",1,Eyes="leftside")
+                        $ StormX.change_face("bemused",1,Eyes="leftside")
                         ch_s "Well, one of the best, perhaps."
-                        $ StormX.FaceChange("smile",1)
+                        $ StormX.change_face("smile",1)
                         ch_s "But we'll get you there. . ."
                 "No. You think?":
                         ch_s "I'm quie certain. . ."
@@ -1099,7 +1095,7 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
 
     elif Options[0] == "dangerroom":
             #Storm's response to Player working out in the Danger Room while Storm is present
-            $ StormX.FaceChange("sly",1)
+            $ StormX.change_face("sly",1)
             ch_s "Hey,[StormX.Petname].  I saw your work in the Danger Room."
             ch_s "You might want to stay close to a \"tank\" to avoid damage. . ."
     elif Options[0] == "nudity":
@@ -1120,38 +1116,38 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
 #                            $ StormX.Statup("Love", 50, 5)
 #                            $ StormX.Statup("Love", 90, 2)
 #                            if ApprovalCheck(StormX, 1200):
-#                                $ StormX.FaceChange("sly",1)
+#                                $ StormX.change_face("sly",1)
 #                                ch_s "I didn't mind."
-#                            $ StormX.FaceChange("smile")
+#                            $ StormX.change_face("smile")
 #                            ch_s "We all make mistakes."
 #                    "Just with you.":
 #                            $ StormX.Statup("Obed", 40, 5)
 #                            if ApprovalCheck(StormX, 1000) or ApprovalCheck(StormX, 700, "L"):
 #                                    $ StormX.Statup("Love", 90, 3)
-#                                    $ StormX.FaceChange("sly",1)
+#                                    $ StormX.change_face("sly",1)
 #                                    ch_s "Hmm, I guess that's a compliment."
 #                            else:
 #                                    $ StormX.Statup("Love", 70, -5)
-#                                    $ StormX.FaceChange("angry")
+#                                    $ StormX.change_face("angry")
 #                                    ch_s "I think I should be insulted."
 #                    "Totally on purpose. I regret nothing.":
 #                            if ApprovalCheck(StormX, 1200):
 #                                    $ StormX.Statup("Love", 90, 3)
 #                                    $ StormX.Statup("Obed", 70, 10)
 #                                    $ StormX.Statup("Inbt", 50, 5)
-#                                    $ StormX.FaceChange("sly",1)
+#                                    $ StormX.change_face("sly",1)
 #                                    ch_s "You seem to know what you want."
 #                            elif ApprovalCheck(StormX, 800):
 #                                    $ StormX.Statup("Obed", 60, 5)
 #                                    $ StormX.Statup("Inbt", 50, 5)
-#                                    $ StormX.FaceChange("perplexed",2)
+#                                    $ StormX.change_face("perplexed",2)
 #                                    ch_s "I guess you show initiative."
 #                                    $ StormX.Blush = 1
 #                            else:
 #                                    $ StormX.Statup("Love", 50, -10)
 #                                    $ StormX.Statup("Love", 80, -10)
 #                                    $ StormX.Statup("Obed", 50, 10)
-#                                    $ StormX.FaceChange("angry")
+#                                    $ StormX.change_face("angry")
 #                                    ch_s "That's a bit disturbing."
 
     elif Options[0] == "fondled":
@@ -1167,44 +1163,44 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
             menu:
                 extend ""
                 "Yeah?  Did you like them?":
-                        $ StormX.FaceChange("sly",2)
+                        $ StormX.change_face("sly",2)
                         ch_s "They were. . .{i}interesting{/i}."
                 "Good.  You looked like you could use to learn a thing or two from them.":
                         $ StormX.Statup("Love", 90, -3)
                         $ StormX.Statup("Obed", 70, 5)
                         $ StormX.Statup("Inbt", 50, 5)
-                        $ StormX.FaceChange("angry")
+                        $ StormX.change_face("angry")
                         ch_s "Well, I cannot say they I din't learn a thing or so."
             $ StormX.Blush = 1
             $ StormX.Chat.append("book")
 
     elif Options[0] == "lingerie":
             #Storm's response to being given lingerie.
-            $ StormX.FaceChange("sly",2)
+            $ StormX.change_face("sly",2)
             ch_s "I have enjoyed that lingerie you purchased for me."
             $ StormX.Blush = 1
             $ StormX.Chat.append("lingerie")
 
-    elif Options[0] == "handy":
+    elif Options[0] == "handjob":
             #Storm's response after giving the Player a handjob.
-            $ StormX.FaceChange("sly",1)
+            $ StormX.change_face("sly",1)
             ch_s "I was thinking about having your cock in my hand the other day. . ."
             ch_s "Were you?"
             $ StormX.Blush = 0
 
-    elif Options[0] == "blow":
-            if "blow" not in StormX.Chat:
+    elif Options[0] == "blowjob":
+            if "blowjob" not in StormX.Chat:
                     #Storm's response after giving the Player a blowjob.
-                    $ StormX.FaceChange("sly",2)
+                    $ StormX.change_face("sly",2)
                     ch_s "I was curious, did you enjoy that blowjob earlier?"
                     menu:
                         extend ""
                         "You were totally amazing.":
                                     $ StormX.Statup("Love", 90, 5)
                                     $ StormX.Statup("Inbt", 60, 10)
-                                    $ StormX.FaceChange("normal",1)
+                                    $ StormX.change_face("normal",1)
                                     ch_s ". . . "
-                                    $ StormX.FaceChange("sexy",1)
+                                    $ StormX.change_face("sexy",1)
                                     ch_s "As I had hoped. . ."
                                     ch_s "Let me know if you're like a repeat. . ."
                         "Honestly? It was good. . .but you could use a little practice, I think.":
@@ -1212,20 +1208,20 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
                                     $ StormX.Statup("Love", 90, -5)
                                     $ StormX.Statup("Obed", 60, 10)
                                     $ StormX.Statup("Inbt", 50, 10)
-                                    $ StormX.FaceChange("perplexed",1)
+                                    $ StormX.change_face("perplexed",1)
                                     ch_s "Oh? Well I am sorry I was not up to your usual standards. . ."
                                 else:
                                     $ StormX.Statup("Obed", 70, 15)
                                     $ StormX.Statup("Inbt", 50, 5)
-                                    $ StormX.FaceChange("sexy",1)
+                                    $ StormX.change_face("sexy",1)
                                     ch_s "Oh? I'm certain that I can improve on the experience. . ."
                         "I guess. If you're into weird sounds and too much teeth. Spoiler, I'm not.":
                                     $ StormX.Statup("Love", 90, -10)
                                     $ StormX.Statup("Obed", 60, 10)
-                                    $ StormX.FaceChange("angry",2)
+                                    $ StormX.change_face("angry",2)
                                     ch_s "Oh, then I suppose you will not miss it."
                     $ StormX.Blush = 1
-                    $ StormX.Chat.append("blow")
+                    $ StormX.Chat.append("blowjob")
             else:
                     $ Line = renpy.random.choice(["You know, I really do enjoy the taste of your cock.",
                             "I think I nearly dislocated my jaw last time.",
@@ -1240,14 +1236,14 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
             else:
                 ch_s "So. . . the other day. . ."
                 ch_s "I really enjoyed the taste of your semen."
-                $ StormX.FaceChange("sly",1)
+                $ StormX.change_face("sly",1)
                 ch_s "Fairly surpirsing, all things considered."
                 $ StormX.Chat.append("swallow")
 
     elif Options[0] == "facial":
             #Storm's response after taking a facial from the Player.
             ch_s ". . .I know this is a bit unusual, but. . ."
-            $ StormX.FaceChange("sexy",2)
+            $ StormX.change_face("sexy",2)
             ch_s "I do so enjoy when you cum on my face. . ."
             $ StormX.Blush = 1
 
@@ -1264,24 +1260,24 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
     elif Options[0] == "sexed":
             #A final response from Storm after having sex with the Player.
             ch_s "So. . . you should know. . ."
-            $ StormX.FaceChange("sexy",2)
+            $ StormX.change_face("sexy",2)
             ch_s ". . .when I. . . care for my own needs. . ."
             ch_s "It is you that I imagine with me. . ."
             $ StormX.Blush = 1
 
     elif Options[0] == "anal":
             #Storm's response after getting anal from the Player.
-            $ StormX.FaceChange("sly")
+            $ StormX.change_face("sly")
             ch_s "I never much cared for anal sex."
-            $ StormX.FaceChange("sexy",1)
+            $ StormX.change_face("sexy",1)
             ch_s ". . . but you have turned me around on the idea."
 
     elif Options[0] == "seenpeen": # first seen peen skipped
-            $ StormX.FaceChange("sly",1, Eyes="leftside")
+            $ StormX.change_face("sly",1, Eyes="leftside")
             ch_s "Oh, just so you are aware, I was impressed by your. . ."
-            $ StormX.FaceChange("sly",2, Eyes="down")
+            $ StormX.change_face("sly",2, Eyes="down")
             ch_s ". . . manhood. . ."
-            $ StormX.FaceChange("bemused",1)
+            $ StormX.change_face("bemused",1)
             $ StormX.Statup("Love", 50, 5)
             $ StormX.History.remove("seenpeen")
 #    elif Options[0] == "topless": # first seen breasts skipped
@@ -1319,72 +1315,72 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
     else: #all else fell through. . .
 #            $ D20 = renpy.random.randint(1, 15)
 #            if D20 == 1:
-#                    $ StormX.FaceChange("smile")
+#                    $ StormX.change_face("smile")
 #                    ch_s "I noticed you did well on your last exam."
 #            elif D20 == 2:
-#                    $ StormX.FaceChange("annoyed")
+#                    $ StormX.change_face("annoyed")
 #                    ch_s "If I have to hear him say \"I'm the best there is\" one more time, I swear I'm going ..."
 #            elif D20 == 3:
-#                    $ StormX.FaceChange("surprised")
+#                    $ StormX.change_face("surprised")
 #                    ch_s "Huh? Oh, sorry. I sort of spaced out. That's not like me."
 #            elif D20 == 4:
-#                    $ StormX.FaceChange("sad")
+#                    $ StormX.change_face("sad")
 #                    ch_s "Oh, [StormX.Petname]. I was just remembering something. Don't worry about it."
 #            elif D20 == 5:
-#                    $ StormX.FaceChange("smile")
+#                    $ StormX.change_face("smile")
 #                    ch_s "I had a good nap. It's nice to be somewhere I can just doze off without worry."
 #            elif D20 == 6:
-#                    $ StormX.FaceChange("perplexed")
+#                    $ StormX.change_face("perplexed")
 #                    ch_s "Oh, [StormX.Petname]. I think I just saw Emma Frost staring at Cyclops. That's... wierd."
 #            elif D20 == 7:
-#                    $ StormX.FaceChange("smile")
+#                    $ StormX.change_face("smile")
 #                    ch_s "I just got a new personal best time in the Danger Room."
 #            elif D20 == 8:
-#                    $ StormX.FaceChange("sad")
+#                    $ StormX.change_face("sad")
 #                    ch_s "I like being here, but sometimes there's just so much noise..."
 #            elif D20 == 9:
-#                    $ StormX.FaceChange("confused")
+#                    $ StormX.change_face("confused")
 #                    ch_s "I'm still trying to figure out what the mystery meat in the cafeteria was today."
 #                    ch_s "I have enhanced senses, this shouldn't be so difficult!"
 #            elif D20 == 10:
-#                    $ StormX.FaceChange("smile")
+#                    $ StormX.change_face("smile")
 #                    ch_s "Kitty, Rogue and some of the others asked me if I wanted to go grab some ice cream with them tomorrow."
 #            elif D20 == 11:
-#                    $ StormX.FaceChange("smile")
+#                    $ StormX.change_face("smile")
 #                    ch_s "I tried out a dance class like Kitty said. Apparently I'm good at it."
 #            elif D20 == 12:
-#                    $ StormX.FaceChange("sad")
+#                    $ StormX.change_face("sad")
 #                    ch_s "I like talking to Kitty and the others. It makes me feel, I don't know. . ."
 #                    ch_s "{i}not{/i} like a really dangerous mutant who could kill everyone around me if I flipped out."
 #            elif D20 == 13:
-#                    $ StormX.FaceChange("smile")
+#                    $ StormX.change_face("smile")
 #                    ch_s "Kitty and Rogue dared me to call Logan \"Dad\". I think we might've given him a heart attack."
 #            elif D20 == 14:
-#                    $ StormX.FaceChange("sad")
+#                    $ StormX.change_face("sad")
 #                    ch_s "I like going out on missions, but catching up with what's been going on while I'm gone is always a pain."
 #            elif D20 == 15:
-#                    $ StormX.FaceChange("perplexed")
+#                    $ StormX.change_face("perplexed")
 #                    ch_s "So they're called the \"Avengers\", but do they ever do any avenging?"
 #                    ch_s "At least the Fantastic Four really do things that are strange and fantastic."
 #            elif D20 == 16:
-#                    $ StormX.FaceChange("perplexed")
+#                    $ StormX.change_face("perplexed")
 #                    ch_s "Have you ever been to New York? Sometimes I'm surprised anyone still wants to live there."
 #            elif D20 == 17:
-#                    $ StormX.FaceChange("perplexed")
+#                    $ StormX.change_face("perplexed")
 #                    ch_s "Logan just walked up and told me that if I ever meet someone called. . ."
 #                    ch_s "\"Dead...Poole?\"...I should just go ahead and stab him in the face."
 #                    ch_s "What's up with that?"
 #            elif D20 == 18:
-#                    $ StormX.FaceChange("smile")
+#                    $ StormX.change_face("smile")
 #                    ch_s "Don't tell anyone this, but I think Cyclops is kind of wound up tight."
 #            elif D20 == 19:
-#                    $ StormX.FaceChange("confused")
+#                    $ StormX.change_face("confused")
 #                    ch_s "Do you smell something? Is that... nachos and... chocolate syrup?!"
 #            elif D20 == 20:
-#                    $ StormX.FaceChange("smile")
+#                    $ StormX.change_face("smile")
 #                    ch_s "I like being able to just talk about nothing in particular. It's... nice."
 #            else:
-                    $ StormX.FaceChange("smile")
+                    $ StormX.change_face("smile")
                     ch_s "I do enjoy being with you. . ."
 
     $ Line = 0
@@ -1445,64 +1441,64 @@ label Storm_Pet: #rkeljs
                     "Stormy.":
                         $ StormX.Pet = "Stormy"
                         if ApprovalCheck(StormX, 600):
-                            $ StormX.FaceChange("smile", 1)
+                            $ StormX.change_face("smile", 1)
                             ch_s "I don't see why not, [StormX.Petname]."
                         else:
-                            $ StormX.FaceChange("normal", 1)
+                            $ StormX.change_face("normal", 1)
                             ch_s "I would rather you weren't so familiar, [StormX.Petname]."
                     "'Ro.":
                         $ StormX.Pet = "'Ro"
                         if ApprovalCheck(StormX, 700):
-                            $ StormX.FaceChange("smile", 1)
+                            $ StormX.change_face("smile", 1)
                             ch_s "I don't see why not, [StormX.Petname]."
                         else:
-                            $ StormX.FaceChange("normal", 1)
+                            $ StormX.change_face("normal", 1)
                             ch_s "I would rather you weren't so familiar, [StormX.Petname]."
 
                     "Ms. Munroe." if "Ms. Munroe" in StormX.Names:
                         $ StormX.Pet = "Ms. Munroe"
                         if ApprovalCheck(StormX, 700):
-                            $ StormX.FaceChange("bemused", 1)
+                            $ StormX.change_face("bemused", 1)
                             ch_s "I don't see why not, [StormX.Petname]."
                         else:
-                            $ StormX.FaceChange("normal", 1)
+                            $ StormX.change_face("normal", 1)
                             ch_s "That would be a bit much, [StormX.Petname]."
 
 
                     "\"girl\".":
                         $ StormX.Pet = "girl"
                         if "boyfriend" in StormX.Petnames or ApprovalCheck(StormX, 600, "L"):
-                            $ StormX.FaceChange("sexy", 1)
+                            $ StormX.change_face("sexy", 1)
                             ch_s "I can be your girl, [StormX.Petname]."
                         else:
-                            $ StormX.FaceChange("angry")
+                            $ StormX.change_face("angry")
                             ch_s "I'm NOT your girl, [StormX.Petname]."
 
                     "\"boo\".":
                         $ StormX.Pet = "boo"
                         if "boyfriend" in StormX.Petnames or ApprovalCheck(StormX, 700, "L"):
-                            $ StormX.FaceChange("sexy", 1)
+                            $ StormX.change_face("sexy", 1)
                             ch_s "I can be your boo, [StormX.Petname]."
                         else:
-                            $ StormX.FaceChange("angry")
+                            $ StormX.change_face("angry")
                             ch_s "I'm NOT your boo,  [StormX.Petname]."
 
                     "\"bae\".":
                         $ StormX.Pet = "bae"
                         if "boyfriend" in StormX.Petnames or ApprovalCheck(StormX, 600, "L"):
-                            $ StormX.FaceChange("sexy", 1)
+                            $ StormX.change_face("sexy", 1)
                             ch_s "I can be your bae, [StormX.Petname]."
                         else:
-                            $ StormX.FaceChange("angry")
+                            $ StormX.change_face("angry")
                             ch_s "I'm NOT your bae,  [StormX.Petname]."
 
                     "\"baby\".":
                         $ StormX.Pet = "baby"
                         if "boyfriend" in StormX.Petnames or ApprovalCheck(StormX, 500, "L"):
-                            $ StormX.FaceChange("sexy", 1)
+                            $ StormX.change_face("sexy", 1)
                             ch_s "Cute, [StormX.Petname]."
                         else:
-                            $ StormX.FaceChange("angry")
+                            $ StormX.change_face("angry")
                             ch_s "I am not your baby."
 
 
@@ -1511,25 +1507,25 @@ label Storm_Pet: #rkeljs
                         if "boyfriend" in StormX.Petnames or ApprovalCheck(StormX, 600, "L"):
                             ch_s "That is so sweet, [StormX.Petname]."
                         else:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             ch_s "Perhaps too sweet, [StormX.Petname]."
 
                     "\"sexy\".":
                         $ StormX.Pet = "sexy"
                         if "lover" in StormX.Petnames or ApprovalCheck(StormX, 800):
-                            $ StormX.FaceChange("sexy", 1)
+                            $ StormX.change_face("sexy", 1)
                             ch_s "I suppose that I am, [StormX.Petname]."
                         else:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             ch_s "Crossing a line there, [StormX.Petname]."
 
                     "\"lover\".":
                         $ StormX.Pet = "lover"
                         if "lover" in StormX.Petnames or ApprovalCheck(StormX, 1200):
-                            $ StormX.FaceChange("sexy", 1)
+                            $ StormX.change_face("sexy", 1)
                             ch_s "I am, I suppose."
                         else:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             ch_s "I do not think so, [StormX.Petname]."
 
                     "Back":
@@ -1541,75 +1537,75 @@ label Storm_Pet: #rkeljs
                     "\"slave\".":
                         $ StormX.Pet = "slave"
                         if "master" in StormX.Petnames or ApprovalCheck(StormX, 850, "O"):
-                            $ StormX.FaceChange("bemused", 1)
+                            $ StormX.change_face("bemused", 1)
                             ch_s "As you wish, [StormX.Petname]."
                         else:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             ch_s "I am no one's slave, [StormX.Petname]."
 
                     "\"pet\".":
                         $ StormX.Pet = "pet"
                         if "master" in StormX.Petnames or ApprovalCheck(StormX, 700, "O"):
-                            $ StormX.FaceChange("bemused", 1)
+                            $ StormX.change_face("bemused", 1)
                             ch_s "You can pet me if you want, [StormX.Petname]."
                         else:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             ch_s "I am no one's pet, [StormX.Petname]."
 
                     "\"slut\".":
                         $ StormX.Pet = "slut"
                         if "sex friend" in StormX.Petnames or ApprovalCheck(StormX, 900, "OI"):
-                            $ StormX.FaceChange("sexy")
+                            $ StormX.change_face("sexy")
                             ch_s "Fair enough."
                         else:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             $ StormX.Mouth = "surprised"
                             ch_s "You would do well to avoid that."
 
                     "\"whore\".":
                         $ StormX.Pet = "whore"
                         if "fuckbuddy" in StormX.Petnames or ApprovalCheck(StormX, 1000, "OI"):
-                            $ StormX.FaceChange("sly")
+                            $ StormX.change_face("sly")
                             ch_s ". . ."
                         else:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             ch_s "Do not tempt me to harm you. . ."
 
                     "\"sugartits\".":
                         $ StormX.Pet = "sugartits"
                         if "sex friend" in StormX.Petnames or ApprovalCheck(StormX, 1400):
-                            $ StormX.FaceChange("sly", 1)
+                            $ StormX.change_face("sly", 1)
                             ch_s "I suppose. . ."
                         else:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             ch_s "Why would you even-."
 
                     "\"sex friend\".":
                         $ StormX.Pet = "sex friend"
                         if "sex friend" in StormX.Petnames or ApprovalCheck(StormX, 600, "I"):
-                            $ StormX.FaceChange("sly")
+                            $ StormX.change_face("sly")
                             ch_s "Yes. . ."
                         else:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             ch_s "Keep it quiet, [StormX.Petname]."
 
                     "\"fuckbuddy\".":
                         $ StormX.Pet = "fuckbuddy"
                         if "fuckbuddy" in StormX.Petnames or ApprovalCheck(StormX, 700, "I"):
-                            $ StormX.FaceChange("sly")
+                            $ StormX.change_face("sly")
                             ch_s "Sure."
                         else:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             $ StormX.Mouth = "surprised"
                             ch_s "That is not even funny, [StormX.Petname]."
 
                     "\"baby girl\".":
                         $ StormX.Pet = "baby girl"
                         if "daddy" in StormX.Petnames or ApprovalCheck(StormX, 1200):
-                            $ StormX.FaceChange("smile", 1)
+                            $ StormX.change_face("smile", 1)
                             ch_s "I suppose?"
                         else:
-                            $ StormX.FaceChange("angry", 1)
+                            $ StormX.change_face("angry", 1)
                             ch_s "How odd. . ."
 
                     "Back":
@@ -1713,10 +1709,10 @@ label Storm_Clothes:  #rkeljs
             $ renpy.pop_call()
     $ Line = 0
     $ Girl = StormX
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
 
 label Storm_Wardrobe_Menu:
-    $ StormX.FaceChange()
+    $ StormX.change_face()
     $ Trigger = 1 # to prevent Focus swapping. . .
     while True:
         menu:
@@ -1734,7 +1730,7 @@ label Storm_Wardrobe_Menu:
             "Let's talk about what you wear around.":
                         call Clothes_Schedule(StormX)
 
-            "Could I get a look at it?" if StormX.Loc != bg_current:
+            "Could I get a look at it?" if StormX.location != bg_current:
                     # checks to see if she'll drop the screen
                     call OutfitShame(StormX,0,2)
                     if _return:
@@ -1748,7 +1744,7 @@ label Storm_Wardrobe_Menu:
                         hide DressScreen
             "Would you be more comfortable behind a screen? (locked)" if StormX.Taboo:
                     pass
-            "Would you be more comfortable behind a screen?" if StormX.Loc == bg_current and not StormX.Taboo and not renpy.showing('DressScreen'):
+            "Would you be more comfortable behind a screen?" if StormX.location == bg_current and not StormX.Taboo and not renpy.showing('DressScreen'):
                     # checks to see if she'll drop the screen
                     #if ApprovalCheck(StormX, 1500) or (StormX.SeenChest and StormX.SeenPussy):
                             ch_s "I won't need it, but I appreciate the offer."
@@ -1756,9 +1752,9 @@ label Storm_Wardrobe_Menu:
 #                            show DressScreen zorder 150
 #                            ch_s "Yeah, this is better."
 
-            "Gift for you (locked)" if Girl.Loc != bg_current:
+            "Gift for you (locked)" if Girl.location != bg_current:
                             pass
-            "Gift for you" if Girl.Loc == bg_current:
+            "Gift for you" if Girl.location == bg_current:
                             ch_p "I'd like to give you something."
                             call Gifts #(Girl)
 
@@ -1776,16 +1772,16 @@ label Storm_Wardrobe_Menu:
                             ch_p "I wanted to talk about your clothes."
                             call expression Girl.Tag +"_Clothes"
                     $ Girl = StormX
-                    call Shift_Focus(Girl)
+                    call shift_focus(Girl)
 
             "Never mind, you look good like that.":
                     if "wardrobe" not in StormX.RecentActions:
                             #Apply stat boosts only if it's the first time this turn
                             if (StormX.OverNum()+StormX.ChestNum()<4) or (StormX.PantiesNum()+StormX.PantsNum() < 5):
                                     #if she's half-naked
-                                    $ StormX.FaceChange("sly",Eyes="down")
+                                    $ StormX.change_face("sly",Eyes="down")
                                     ch_s "I understand why -you- would think so. . ."
-                                    $ StormX.FaceChange("sly")
+                                    $ StormX.change_face("sly")
                             elif StormX.Chat[1] <= 1:
                                     $ StormX.Statup("Love", 70, 15)
                                     $ StormX.Statup("Obed", 40, 20)
@@ -1955,7 +1951,7 @@ label Storm_Wardrobe_Menu:
 
         "Your birthday suit looks really great. . .":
                 #Nude
-                $ StormX.FaceChange("sexy", 1)
+                $ StormX.change_face("sexy", 1)
                 $ Line = 0
                 if not StormX.Chest and not StormX.Panties and not StormX.Over and not StormX.Legs and not StormX.Hose:
                         ch_s "Thank you."
@@ -1966,17 +1962,17 @@ label Storm_Wardrobe_Menu:
                         ch_s "No foreplay?"
                         $ Line = 1
                 elif not ApprovalCheck(StormX, 500, TabM=0):
-                        $ StormX.FaceChange("confused", 1,Mouth="smirk")
+                        $ StormX.change_face("confused", 1,Mouth="smirk")
                         ch_s "I don't exactly get nude on command, you know. . ."
-                        $ StormX.FaceChange("bemused", 0)
+                        $ StormX.change_face("bemused", 0)
                 elif StormX.Taboo and StormX not in Rules: #StormX.SeenChest and StormX.SeenPussy and ApprovalCheck(StormX, 1200, TabM=0)
                         ch_s "Maybe, but not here. . ."
                 elif ApprovalCheck(StormX, 1000, TabM=0):
-                        $ StormX.FaceChange("confused", 1,Mouth="smirk")
+                        $ StormX.change_face("confused", 1,Mouth="smirk")
                         ch_s "Yeah, but I'm not exactly showing it off."
-                        $ StormX.FaceChange("bemused", 0)
+                        $ StormX.change_face("bemused", 0)
                 else:
-                        $ StormX.FaceChange("angry", 1)
+                        $ StormX.change_face("angry", 1)
                         ch_s "I would rather not."
 
                 if Line:
@@ -1985,7 +1981,7 @@ label Storm_Wardrobe_Menu:
                     "She throws her clothes off at her feet."
                     call Storm_First_Topless
                     call Storm_First_Bottomless(1)
-                    $ StormX.FaceChange("sexy")
+                    $ StormX.change_face("sexy")
                     menu:
                         "You know, you should wear this one out. [[set current outfit]":
                             if "exhibitionist" in StormX.Traits:
@@ -1999,7 +1995,7 @@ label Storm_Wardrobe_Menu:
                                     $ StormX.Outfit = "nude"
                                     $ StormX.Shame = 50
                             else:
-                                    $ StormX.FaceChange("sexy", 1)
+                                    $ StormX.change_face("sexy", 1)
                                     $ StormX.Eyes = "surprised"
                                     ch_s "I probably shouldn't. I am sorry."
 
@@ -2007,11 +2003,11 @@ label Storm_Wardrobe_Menu:
                             if "exhibitionist" in StormX.Traits:
                                     ch_s "Are you certain?"
                             elif ApprovalCheck(StormX, 800, "I") or ApprovalCheck(StormX, 2800, TabM=0) or StormX in Rules:
-                                    $ StormX.FaceChange("bemused", 1)
+                                    $ StormX.change_face("bemused", 1)
                                     ch_s "I expected that you wanted me to go out like this."
                                     ch_s ". . ."
                             else:
-                                    $ StormX.FaceChange("confused", 1)
+                                    $ StormX.change_face("confused", 1)
                                     ch_s "I don't mind you seeing my body, but Charles does have his rules. . ."
                 $ Line = 0
 
@@ -2026,7 +2022,7 @@ label Storm_Wardrobe_Menu:
     menu Storm_Clothes_Over:
         # Overshirts
         "Why don't you go with no [StormX.Over]?" if StormX.Over:
-                $ StormX.FaceChange("bemused", 1)
+                $ StormX.change_face("bemused", 1)
                 if ApprovalCheck(StormX, 800, TabM=3):# and (StormX.Chest or StormX.SeenChest):
                     ch_s "Fine."
                 elif ApprovalCheck(StormX, 600, TabM=0):
@@ -2052,7 +2048,7 @@ label Storm_Wardrobe_Menu:
                         call Storm_First_Topless
 
         "Try on that white shirt." if StormX.Over != "white shirt":
-                $ StormX.FaceChange("bemused")
+                $ StormX.change_face("bemused")
                 if not StormX.Over or StormX.ChestNum() >= 5:
                     #if she's not already wearing a top, or has fair clothes on under
                     ch_s "Very well."
@@ -2061,13 +2057,13 @@ label Storm_Wardrobe_Menu:
                 else:
                     call Display_DressScreen(StormX)
                     if not _return:
-                            $ StormX.FaceChange("bemused", 1)
+                            $ StormX.change_face("bemused", 1)
                             ch_s "I cannot really take this [StormX.Over] off at the moment."
                             return #jump Storm_Clothes
                 $ StormX.Over = "white shirt"
 
         "Try on that leather jacket." if StormX.Over != "jacket":
-                $ StormX.FaceChange("bemused")
+                $ StormX.change_face("bemused")
                 if not StormX.Over or StormX.ChestNum() >= 5:
                     #if she's not already wearing a top, or has fair clothes on under
                     ch_s "Very well."
@@ -2076,17 +2072,17 @@ label Storm_Wardrobe_Menu:
                 else:
                     call Display_DressScreen(StormX)
                     if not _return:
-                            $ StormX.FaceChange("bemused", 1)
+                            $ StormX.change_face("bemused", 1)
                             ch_s "I cannot really take this [StormX.Over] off at the moment."
                             return #jump Storm_Clothes
                 $ StormX.Over = "jacket"
 
         "Maybe just throw on a towel?" if StormX.Over != "towel":
-                $ StormX.FaceChange("bemused", 1)
+                $ StormX.change_face("bemused", 1)
                 if StormX.ChestNum() >= 5: #or StormX.SeenChest
                     ch_s "If that's what you want. . ."
                 elif ApprovalCheck(StormX, 1000, TabM=3):
-                    $ StormX.FaceChange("perplexed", 1)
+                    $ StormX.change_face("perplexed", 1)
                     ch_s "If that's what you want. . ."
                 else:
                     call Display_DressScreen(StormX)
@@ -2144,7 +2140,7 @@ label Storm_Wardrobe_Menu:
                         elif ApprovalCheck(StormX, 1300, TabM=2):
                                 ch_s "Okay, fine."
                         else:
-                                $ StormX.FaceChange("sadside")
+                                $ StormX.change_face("sadside")
                                 if StormX.Taboo > 20:
                                     ch_s "Not in public, I'm afraid"
                                 else:
@@ -2161,7 +2157,7 @@ label Storm_Wardrobe_Menu:
     menu Storm_Clothes_Legs:
         # Leggings
         "Maybe go without the [StormX.Legs]." if StormX.Legs:
-                $ StormX.FaceChange("sexy", 1)
+                $ StormX.change_face("sexy", 1)
                 if StormX.Taboo <= 20 or StormX.HoseNum() >= 5 or StormX.PantiesNum() >= 5 or StormX in Rules:
                     ch_s "Fine."
 #                elif StormX.SeenPanties and StormX.Panties and ApprovalCheck(StormX, 500, TabM=5):
@@ -2268,7 +2264,7 @@ label Storm_Wardrobe_Menu:
                         elif ApprovalCheck(StormX, 1300, TabM=3):
                                 ch_s "Fine."
                         else:
-                                $ StormX.FaceChange("bemused")
+                                $ StormX.change_face("bemused")
                                 if StormX.Taboo > 20:
                                     ch_s "Obviously, but not in public, [StormX.Petname]."
                                 else:
@@ -2287,7 +2283,7 @@ label Storm_Wardrobe_Menu:
         "Tops":
             menu:
                 "How about you lose the [StormX.Chest]?" if StormX.Chest:
-                        $ StormX.FaceChange("bemused", 1)
+                        $ StormX.change_face("bemused", 1)
 
                         if StormX.Taboo <= 20 or StormX in Rules or StormX.OverNum() >= 5:
                                 ch_s "Fine."
@@ -2416,7 +2412,7 @@ label Storm_Wardrobe_Menu:
         "Panties":
             menu:
                 "You could lose those panties. . ." if StormX.Panties:
-                        $ StormX.FaceChange("bemused", 1)
+                        $ StormX.change_face("bemused", 1)
                         if StormX.Taboo <= 20 or StormX.HoseNum() >= 5 or StormX.PantsNum() >= 5 or StormX in Rules:
                                 ch_s "Sure."
 #                        elif ApprovalCheck(StormX, 900) and (StormX.Legs or (StormX.SeenPussy and not StormX.Taboo)):
@@ -2441,7 +2437,7 @@ label Storm_Wardrobe_Menu:
                                 else:
                                         call Display_DressScreen(StormX)
                                         if not _return:
-                                            $ StormX.FaceChange("bemused")
+                                            $ StormX.change_face("bemused")
                                             if StormX.Taboo >= 20:
                                                 ch_s "Obviously, but not in public, [StormX.Petname]."
                                             else:
@@ -2544,7 +2540,7 @@ label Storm_Wardrobe_Menu:
                                     $ StormX.Panties = "cos panties"
 
                 "You know, you could wear some panties with that. . ." if not StormX.Panties:
-                        $ StormX.FaceChange("bemused", 1)
+                        $ StormX.change_face("bemused", 1)
                         if StormX.Legs and (StormX.Love+StormX.Obed) <= (2 * StormX.Inbt):
                             $ StormX.Mouth = "smile"
                             ch_s "I don't know about that."
@@ -2553,11 +2549,11 @@ label Storm_Wardrobe_Menu:
                                     return #jump Storm_Clothes
                                 "I insist, put some on.":
                                     if (StormX.Love+StormX.Obed) <= (1.5 * StormX.Inbt):
-                                        $ StormX.FaceChange("angry", Eyes="side")
+                                        $ StormX.change_face("angry", Eyes="side")
                                         ch_s "Well I insist otherwise."
                                         return #jump Storm_Clothes
                                     else:
-                                        $ StormX.FaceChange("sadside")
+                                        $ StormX.change_face("sadside")
                                         ch_s "Oh, fine. . ."
                         else:
                             ch_s "Which?"
@@ -2674,14 +2670,14 @@ label Storm_Wardrobe_Menu:
         "Grow pubes" if not StormX.Pubes:
                 ch_p "You know, I like some nice hair down there. Maybe grow it out."
                 if "pubes" in StormX.Todo:
-                        $ StormX.FaceChange("bemused", 1)
+                        $ StormX.change_face("bemused", 1)
                         ch_s "It's not as though it grows instantly!"
                 else:
-                        $ StormX.FaceChange("bemused", 1)
+                        $ StormX.change_face("bemused", 1)
                         if ApprovalCheck(StormX, 500, TabM=0):
                             ch_s "I do prefer it that way. . ."
                         else:
-                            $ StormX.FaceChange("surprised")
+                            $ StormX.change_face("surprised")
                             $ StormX.Brows = "angry"
                             ch_s "I do not need your advice."
                             return #jump Storm_Clothes
@@ -2689,14 +2685,14 @@ label Storm_Wardrobe_Menu:
                         $ StormX.PubeC = 6
         "Shave pubes" if StormX.Pubes == 1:
                 ch_p "I like it waxed clean down there."
-                $ StormX.FaceChange("bemused", 1)
+                $ StormX.change_face("bemused", 1)
                 if "shave" in StormX.Todo:
                     ch_s "Yes, I will get around to it."
                 else:
                     if ApprovalCheck(StormX, 1100, TabM=0):
                         ch_s "You do? I suppose I could shave. . ."
                     else:
-                        $ StormX.FaceChange("surprised")
+                        $ StormX.change_face("surprised")
                         $ StormX.Brows = "angry"
                         ch_s "I think I will do what I want down there."
                         return #jump Storm_Clothes
@@ -2710,7 +2706,7 @@ label Storm_Wardrobe_Menu:
                 if "ring" in StormX.Todo:
                     ch_s "I know, I will do it."
                 else:
-                    $ StormX.FaceChange("bemused", 1)
+                    $ StormX.change_face("bemused", 1)
                     $ Approval = ApprovalCheck(StormX, 1150, TabM=0)
                     if ApprovalCheck(StormX, 900, "L", TabM=0) or (Approval and StormX.Love > 2* StormX.Obed):
                         ch_s "You like the way they'd look on me?"
@@ -2719,7 +2715,7 @@ label Storm_Wardrobe_Menu:
                     elif ApprovalCheck(StormX, 500, "O", TabM=0) or Approval:
                         ch_s "Yes, [StormX.Petname]."
                     else:
-                        $ StormX.FaceChange("bemused")
+                        $ StormX.change_face("bemused")
                         ch_s "I would rather not, [StormX.Petname]."
                         return #jump Storm_Clothes
                     $ StormX.Todo.append("ring")
@@ -2729,7 +2725,7 @@ label Storm_Wardrobe_Menu:
                 if "barbell" in StormX.Todo:
                     ch_s "I know, I will do it."
                 else:
-                    $ StormX.FaceChange("bemused", 1)
+                    $ StormX.change_face("bemused", 1)
                     $ Approval = ApprovalCheck(StormX, 1150, TabM=0)
                     if ApprovalCheck(StormX, 900, "L", TabM=0) or (Approval and StormX.Love > 2 * StormX.Obed):
                         ch_s "You like the way they'd look on me?"
@@ -2738,14 +2734,14 @@ label Storm_Wardrobe_Menu:
                     elif ApprovalCheck(StormX, 500, "O", TabM=0) or Approval:
                         ch_s "Yes, [StormX.Petname]."
                     else:
-                        $ StormX.FaceChange("bemused")
+                        $ StormX.change_face("bemused")
                         ch_s "I would rather not, [StormX.Petname]."
                         return #jump Storm_Clothes
                     $ StormX.Todo.append("barbell")
 
         "Remove Piercings" if StormX.Pierce:
                 ch_p "You know, you'd look better without those piercings."
-                $ StormX.FaceChange("bemused", 1)
+                $ StormX.change_face("bemused", 1)
                 $ Approval = ApprovalCheck(StormX, 1350, TabM=0)
                 if ApprovalCheck(StormX, 950, "L", TabM=0) or (Approval and StormX.Love > StormX.Obed):
                     ch_s "Really? Very well . ."
@@ -2754,7 +2750,7 @@ label Storm_Wardrobe_Menu:
                 elif ApprovalCheck(StormX, 600, "O", TabM=0) or Approval:
                     ch_s "Fine."
                 else:
-                    $ StormX.FaceChange("surprised")
+                    $ StormX.change_face("surprised")
                     $ StormX.Brows = "angry"
                     ch_s "I grown rather attached."
                     return #jump Storm_Clothes

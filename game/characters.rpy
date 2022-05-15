@@ -30,6 +30,11 @@ init python:
             self.Spunk = 0
             self.Wet = 0
 
+            self.addictive = False
+            self.nonaddictive = False
+
+            self.cologne = None
+
         def AddWord(self, Only = 0, Recent = 0, Daily = 0, Trait = 0, History = 0):
             if (Recent and not Only) or (Recent and Recent not in self.recent_history):
                 self.recent_history.append(Recent)
@@ -77,15 +82,16 @@ init python:
             return
 
     class GirlClass(object):
-        def __init__(self,Name="no name",love=0,obedience=0,inhibition=0,lust=0):
+        def __init__(self, Name, love = 0, obedience = 0, inhibition = 0, lust = 0):
             self.name = Name        #changable by player, used in dialog
             self.Tag = Name         #Permanent label, used in code
             self.names = [Name]     #this is a list of primary names you're allowed to use
-            self.voice = None
+
             self.love = love
             self.obedience = obedience
             self.inhibition = inhibition
             self.lust = lust
+
             self.Thirst = 0         #how much she wants sex
             self.Addict = 0         #how much she needs a fix, goes 0-100
             self.Addictionrate = 0  #how fast her Addict rises, goes from 0-10
@@ -101,11 +107,14 @@ init python:
             self.MaxAction = 3      #max times the girl can do something per turn
             self.Pose = 0           #The sex pose the girl is in. If "doggy," show doggy style
             self.Rep = 600
+
             self.recent_history = []
             self.daily_history = []
             self.Traits = []
             self.History = []
-            self.Date = 0                           #how many dates you've been on
+
+            self.Date = 0
+            self.discussed_                           #how many dates you've been on
             self.Chat = [0,0,0,0,0,0]               #whether certain dialogs occurred
             self.Event = [0,0,0,0,0,0,0,0,0,0,0]    #whether certain relationship milestones happened
             self.Petname = "Zero"
@@ -116,7 +125,7 @@ init python:
             self.Break = [0,0]      #minimum time between break-ups/number of total break-ups
             self.Forced = 0         #are they being coerced
             self.ForcedCount = 0    #countdown for how long they stay mad
-            self.Loc = "hold"       #Where she is right now
+            self.location = "hold"       #Where she is right now
             self.Home = 0           #where she lives
 
             self.Outfit = "casual1"         #current outfit
@@ -167,13 +176,13 @@ init python:
             self.Gag = 0
             self.Todo = []                  #todo list, piercing, pubes, etc.
             self.PubeC = 0                  #countdown for when pubes grow back
-            self.Schedule = [["MM","MA","ME","MN"],
-                            ["TM","TA","TE","TN"],
-                            ["WM","WA","WE","WN"],
-                            ["ThM","ThA","ThE","ThN"],
-                            ["FM","FA","FE","FN"],
-                            ["SaM","SaA","SaE","SaN"],
-                            ["SuM","SuA","SuE","SuN"],
+            self.Schedule = [["MM", "MA", "ME", "MN"],
+                            ["TM", "TA", "TE", "TN"],
+                            ["WM", "WA", "WE", "WN"],
+                            ["ThM", "ThA", "ThE", "ThN"],
+                            ["FM", "FA", "FE", "FN"],
+                            ["SaM", "SaA", "SaE", "SaN"],
+                            ["SuM", "SuA", "SuE", "SuN"],
                             ] #Schedule[0-6][0-4] = Schedule[Day][Time]
             self.Clothing = [0,0,0,0,0,0,0,0,0,0]                      #schedules when she wears what: (0-6) = Mon-Sun, (7) Datewear, (8) Teachingwear, (9) Private
 
@@ -218,27 +227,27 @@ init python:
             self.Favorite = 0                               #her favorite activity
 
             if self.Tag == "Rogue":
-                    self.narrator = ch_r
+                    self.voice = ch_r
 
-                    self.Casual1 = [2,"gloves","skirt","mesh top","spiked collar","tank","black panties",0,0,"tights",0]
-                    self.Casual2 = [2,"gloves","pants","pink top",0,"buttoned tank","black panties",0,0,0,0]
-                    self.Gym = [0,"gloves",0,"hoodie",0,"sports bra","shorts",0,0,0,10]
-                    self.Sleepwear = [0,0,0,0,0,"tank","green panties",0,0,0,20]
-                    self.Swim = [0,0,0,"hoodie",0,"bikini top","bikini bottoms",0,0,0,0]
-                    self.Costume = [2,"gloves","skirt",0,0,"tube top","black panties","sweater","cosplay",0,0]
+                    self.Casual1 = [2,"gloves", "skirt", "mesh top", "spiked collar", "tank", "black panties", 0,0, "tights", 0]
+                    self.Casual2 = [2,"gloves", "pants", "pink top", 0, "buttoned tank", "black panties", 0,0,0,0]
+                    self.Gym = [0, "gloves", 0, "hoodie", 0, "sports bra", "shorts", 0,0,0,10]
+                    self.Sleepwear = [0,0,0,0,0, "tank", "green panties", 0,0,0,20]
+                    self.Swim = [0,0,0, "hoodie", 0, "bikini top", "bikini bottoms", 0,0,0,0]
+                    self.Costume = [2,"gloves", "skirt", 0,0, "tube top", "black panties", "sweater", "cosplay", 0,0]
 
                     self.Home = "bg_rogue"
                     self.Hair = "evo"
                     self.LikeKitty = 600
                     self.LikeEmma = 500
                     self.LikeLaura = 500
-                    self.Schedule = [["bg_rogue","bg_classroom","bg_dangerroom","bg_rogue"],
-                                    ["bg_classroom","bg_dangerroom","bg_rogue","bg_rogue"],
-                                    ["bg_rogue","bg_classroom","bg_dangerroom","bg_rogue"],
-                                    ["bg_classroom","bg_dangerroom","bg_rogue","bg_rogue"],
-                                    ["bg_rogue","bg_classroom","bg_dangerroom","bg_rogue"],
-                                    ["bg_dangerroom","bg_pool","bg_rogue","bg_rogue"],
-                                    ["bg_dangerroom","bg_pool","bg_rogue","bg_rogue"]] #Schedule[0-6][0-4] = Schedule[Weekday][time_index]
+                    self.Schedule = [["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
+                                    ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
+                                    ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
+                                    ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
+                                    ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
+                                    ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"],
+                                    ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"]] #Schedule[0-6][0-4] = Schedule[Weekday][time_index]
 
                     self.SexKitty = 0
                     self.SexEmma = 0
@@ -246,16 +255,16 @@ init python:
 
                     self.History = ["met"]
 
-                    self.MassageChart = ["shoulders","arms","arms","hands","hands","back","hips","back","breasts","breasts"]
+                    self.MassageChart = ["shoulders", "arms", "arms", "hands", "hands", "back", "hips", "back", "breasts", "breasts"]
             elif self.Tag == "Kitty":
-                    self.narrator = ch_k
+                    self.voice = ch_k
 
-                    self.Casual1 = [2,0,"capris","pink top","gold necklace","cami","green panties",0,0,0,0]
-                    self.Casual2 = [2,0,"black jeans","red shirt","star necklace","bra","green panties",0,0,0,0]
-                    self.Gym = [0,0,"shorts",0,0,"sports bra","green panties",0,0,0,10]
-                    self.Sleepwear = [0,0,"shorts",0,0,"cami","green panties",0,0,0,20]
-                    self.Swim = [0,0,"blue skirt",0,0,"bikini top","bikini bottoms",0,0,0,0]
-                    self.Costume = [2,0,"dress","jacket","flower necklace","dress","lace panties",0,0,0,0]
+                    self.Casual1 = [2,0, "capris", "pink top", "gold necklace", "cami", "green panties", 0,0,0,0]
+                    self.Casual2 = [2,0, "black jeans", "red shirt", "star necklace", "bra", "green panties", 0,0,0,0]
+                    self.Gym = [0,0, "shorts", 0,0, "sports bra", "green panties", 0,0,0,10]
+                    self.Sleepwear = [0,0, "shorts", 0,0, "cami", "green panties", 0,0,0,20]
+                    self.Swim = [0,0, "blue skirt", 0,0, "bikini top", "bikini bottoms", 0,0,0,0]
+                    self.Costume = [2,0, "dress", "jacket", "flower necklace", "dress", "lace panties", 0,0,0,0]
 
                     self.Home = "bg_kitty"
                     self.Hair = "evo"
@@ -264,57 +273,57 @@ init python:
                     self.LikeLaura = 500
                     self.like = ", like, "
                     self.Like = "Like, "
-                    self.Schedule = [["bg_classroom","bg_dangerroom","bg_kitty","bg_kitty"],
-                                    ["bg_classroom","bg_pool","bg_kitty","bg_kitty"],
-                                    ["bg_classroom","bg_dangerroom","bg_kitty","bg_kitty"],
-                                    ["bg_classroom","bg_pool","bg_kitty","bg_kitty"],
-                                    ["bg_classroom","bg_dangerroom","bg_kitty","bg_kitty"],
-                                    ["bg_campus","bg_dangerroom","bg_kitty","bg_kitty"],
-                                    ["bg_campus","bg_dangerroom","bg_kitty","bg_kitty"]] #Schedule[0-6][0-4] = Schedule[Weekday][time_index]
+                    self.Schedule = [["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                                    ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
+                                    ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                                    ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
+                                    ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                                    ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                                    ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"]] #Schedule[0-6][0-4] = Schedule[Weekday][time_index]
 
                     self.SexRogue = 0
                     self.SexEmma = 0
                     self.SexLaura = 0
 
-                    self.MassageChart = ["shoulders","back","hips","thighs","calves","feet","feet","hips","ass","pussy"]
+                    self.MassageChart = ["shoulders", "back", "hips", "thighs", "calves", "feet", "feet", "hips", "ass", "pussy"]
             elif self.Tag == "Emma":
                     self.voice = ch_e
 
-                    self.Casual1 = [2,0,"pants","jacket","choker","corset","white panties",0,0,0,0]
-                    self.Casual2 = [2,"gloves","pants",0,"choker","corset","white panties",0,0,0,5]
-                    self.Gym = [0,0,0,0,0,"sports bra","sports panties",0,0,0,10]
-                    self.Sleepwear = [0,0,0,0,0,"corset","white panties",0,0,0,25]
-                    self.Swim = [0,0,0,0,0,"bikini top","bikini bottoms",0,0,0,0]
-                    self.Costume =  [2,"gloves","dress","dress","choker",0,"lace panties",0,"hat","stockings and garterbelt",0]
+                    self.Casual1 = [2,0, "pants", "jacket", "choker", "corset", "white panties", 0,0,0,0]
+                    self.Casual2 = [2,"gloves", "pants", 0, "choker", "corset", "white panties", 0,0,0,5]
+                    self.Gym = [0,0,0,0,0, "sports bra", "sports panties", 0,0,0,10]
+                    self.Sleepwear = [0,0,0,0,0, "corset", "white panties", 0,0,0,25]
+                    self.Swim = [0,0,0,0,0, "bikini top", "bikini bottoms", 0,0,0,0]
+                    self.Costume =  [2,"gloves", "dress", "dress", "choker", 0, "lace panties", 0, "hat", "stockings and garterbelt", 0]
                     self.Home = "bg_emma"
                     self.Hair = "wavy"
                     self.Pubes = 0
                     self.LikeRogue = 500
                     self.LikeKitty = 500
                     self.LikeLaura = 500
-                    self.Schedule = [["bg_teacher","bg_teacher","bg_classroom","bg_emma"],
-                                    ["bg_teacher","bg_teacher","bg_dangerroom","bg_emma"],
-                                    ["bg_teacher","bg_teacher","bg_classroom","bg_emma"],
-                                    ["bg_teacher","bg_teacher","bg_dangerroom","bg_emma"],
-                                    ["bg_teacher","bg_teacher","bg_classroom","bg_emma"],
-                                    ["bg_pool","bg_pool","bg_emma","bg_emma"],
-                                    ["bg_pool","bg_pool","bg_emma","bg_emma"],
+                    self.Schedule = [["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
+                                    ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
+                                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
+                                    ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
+                                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
+                                    ["bg_pool", "bg_pool", "bg_emma", "bg_emma"],
+                                    ["bg_pool", "bg_pool", "bg_emma", "bg_emma"],
                                     ] #Schedule[0-6][0-4] = Schedule[Weekday][time_index]
                     self.SexRogue = 0
                     self.SexKitty = 0
                     self.SexLaura = 0
                     self.Loose = 2
-                    self.MassageChart = ["shoulders","neck","neck","back","hips","ass","ass","back","breasts","breasts"]
+                    self.MassageChart = ["shoulders", "neck", "neck", "back", "hips", "ass", "ass", "back", "breasts", "breasts"]
 
             elif self.Tag == "Laura":
                     self.voice = ch_l
 
-                    self.Casual1 = [2,"wrists","leather pants",0,"leash choker","leather bra","black panties",0,0,0,0]
-                    self.Casual2 = [2,0,"skirt","jacket","leash choker","leather bra","black panties",0,0,0,0]
-                    self.Gym = [2,"wrists","leather pants",0,0,"leather bra","black panties",0,0,0,0]
-                    self.Sleepwear = [0,0,0,0,0,"leather bra","leather panties",0,0,0,20]
-                    self.Swim = [0,0,0,0,0,"bikini top","bikini bottoms",0,0,0,0]
-                    self.Costume = [2,"gloves","other skirt",0,0,"white tank","black panties","suspenders",0,"black stockings",0]
+                    self.Casual1 = [2,"wrists", "leather pants", 0, "leash choker", "leather bra", "black panties", 0,0,0,0]
+                    self.Casual2 = [2,0, "skirt", "jacket", "leash choker", "leather bra", "black panties", 0,0,0,0]
+                    self.Gym = [2,"wrists", "leather pants", 0,0, "leather bra", "black panties", 0,0,0,0]
+                    self.Sleepwear = [0,0,0,0,0, "leather bra", "leather panties", 0,0,0,20]
+                    self.Swim = [0,0,0,0,0, "bikini top", "bikini bottoms", 0,0,0,0]
+                    self.Costume = [2,"gloves", "other skirt", 0,0, "white tank", "black panties", "suspenders", 0, "black stockings", 0]
                     self.Home = "bg_laura"
                     self.Hair = "long"
                     self.LikeRogue = 500
@@ -322,19 +331,19 @@ init python:
                     self.LikeEmma = 500
                     self.ScentTimer = 0 #this timer gives you X seconds of watching Laura before she notices you there
                     self.Claws = 0
-                    self.Schedule = [["bg_pool","bg_classroom","bg_dangerroom","bg_laura"],
-                                    ["bg_dangerroom","bg_classroom","bg_campus","bg_laura"],
-                                    ["bg_pool","bg_classroom","bg_dangerroom","bg_laura"],
-                                    ["bg_dangerroom","bg_classroom","bg_campus","bg_laura"],
-                                    ["bg_pool","bg_classroom","bg_dangerroom","bg_laura"],
-                                    ["bg_pool","bg_laura","bg_dangerroom","bg_laura"],
-                                    ["bg_pool","bg_laura","bg_dangerroom","bg_laura"],
+                    self.Schedule = [["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
+                                    ["bg_dangerroom", "bg_classroom", "bg_campus", "bg_laura"],
+                                    ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
+                                    ["bg_dangerroom", "bg_classroom", "bg_campus", "bg_laura"],
+                                    ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
+                                    ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"],
+                                    ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"],
                                     ] #Schedule[0-6][0-4] = Schedule[Weekday][time_index]
                     self.SexRogue = 0
                     self.SexKitty = 0
                     self.SexEmma = 0
                     self.Loose = 2
-                    self.MassageChart = ["shoulders","back","arms","hips","thighs","calves","ass","ass","pussy","pussy"]
+                    self.MassageChart = ["shoulders", "back", "arms", "hips", "thighs", "calves", "ass", "ass", "pussy", "pussy"]
 
             elif self.Tag == "Jean":
                     self.voice = ch_j
@@ -343,12 +352,12 @@ init python:
                     self.StatStore = 0      #this stores love stat above 500 and distributes it later.
                     self.IX = 500           #this is an amount subtracted from her inhibition in most checks, and reduces over time
 
-                    self.Casual1 = [2,0,"pants","pink shirt",0,"green bra","green panties",0,0,0,0]
-                    self.Casual2 = [2,0,"skirt","green shirt",0,"green bra","green panties",0,0,0,0]
-                    self.Gym = [0,0,"yoga pants",0,0,"sports bra","green panties",0,0,0,0]
-                    self.Sleepwear = [0,0,0,"pink shirt",0,"green bra","green panties",0,0,0,0]
-                    self.Swim = [0,0,0,0,0,"bikini top","bikini bottoms",0,0,0,0]
-                    self.Costume =  [2,0,"shorts","yellow shirt",0,"green bra","green panties","suspenders","pony",0,0]
+                    self.Casual1 = [2,0, "pants", "pink shirt", 0, "green bra", "green panties", 0,0,0,0]
+                    self.Casual2 = [2,0, "skirt", "green shirt", 0, "green bra", "green panties", 0,0,0,0]
+                    self.Gym = [0,0, "yoga pants", 0,0, "sports bra", "green panties", 0,0,0,0]
+                    self.Sleepwear = [0,0,0, "pink shirt", 0, "green bra", "green panties", 0,0,0,0]
+                    self.Swim = [0,0,0,0,0, "bikini top", "bikini bottoms", 0,0,0,0]
+                    self.Costume =  [2,0, "shorts", "yellow shirt", 0, "green bra", "green panties", "suspenders", "pony", 0,0]
                     self.Home = "bg_jean"
                     self.Hair = "short"
 
@@ -377,26 +386,26 @@ init python:
                     self.LikeSEmma = 0
                     self.LikeSLaura = 0
 
-                    self.Schedule = [["bg_classroom","bg_classroom","bg_dangerroom","bg_jean"],
-                                    ["bg_jean","bg_classroom","bg_jean","bg_jean"],
-                                    ["bg_jean","bg_classroom","bg_dangerroom","bg_jean"],
-                                    ["bg_classroom","bg_classroom","bg_jean","bg_jean"],
-                                    ["bg_jean","bg_classroom","bg_dangerroom","bg_jean"],
-                                    ["bg_dangerroom","bg_campus","bg_pool","bg_jean"],
-                                    ["bg_dangerroom","bg_campus","bg_pool","bg_jean"],
+                    self.Schedule = [["bg_classroom", "bg_classroom", "bg_dangerroom", "bg_jean"],
+                                    ["bg_jean", "bg_classroom", "bg_jean", "bg_jean"],
+                                    ["bg_jean", "bg_classroom", "bg_dangerroom", "bg_jean"],
+                                    ["bg_classroom", "bg_classroom", "bg_jean", "bg_jean"],
+                                    ["bg_jean", "bg_classroom", "bg_dangerroom", "bg_jean"],
+                                    ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"],
+                                    ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"],
                                     ] #Schedule[0-6][0-4] = Schedule[Weekday][time_index]
 
-                    self.MassageChart = ["back","shoulders","neck","neck","back","hips","ass","ass","pussy","pussy"]
+                    self.MassageChart = ["back", "shoulders", "neck", "neck", "back", "hips", "ass", "ass", "pussy", "pussy"]
 
             elif self.Tag == "Storm":
                     self.voice = ch_s
 
-                    self.Casual1 = [2,0,"skirt","white shirt",0,"black bra","white panties",0,0,0,0]
-                    self.Casual2 = [2,0,"pants","jacket",0,"sports bra","white panties",0,0,0,0]
-                    self.Gym = [0,0,"yoga pants",0,0,"sports bra","white panties",0,0,0,10]
-                    self.Sleepwear = [0,0,0,"white shirt",0,0,"white panties",0,0,0,25]
-                    self.Swim = [0,0,0,0,0,"bikini top","bikini bottoms",0,0,0,0]
-                    self.Costume = [2,0,0,0,"ring necklace","cos bra","cos panties","rings","short",0,0]
+                    self.Casual1 = [2,0, "skirt", "white shirt", 0, "black bra", "white panties", 0,0,0,0]
+                    self.Casual2 = [2,0, "pants", "jacket", 0, "sports bra", "white panties", 0,0,0,0]
+                    self.Gym = [0,0, "yoga pants", 0,0, "sports bra", "white panties", 0,0,0,10]
+                    self.Sleepwear = [0,0,0, "white shirt", 0,0, "white panties", 0,0,0,25]
+                    self.Swim = [0,0,0,0,0, "bikini top", "bikini bottoms", 0,0,0,0]
+                    self.Costume = [2,0,0,0, "ring necklace", "cos bra", "cos panties", "rings", "short", 0,0]
                     self.Home = "bg_storm"
                     self.Hair = "long"
 
@@ -424,26 +433,26 @@ init python:
                     LauraX.SexStorm = 0
                     JeanX.SexStorm = 0
 
-                    self.Schedule = [["bg_storm","bg_dangerroom","bg_dangerroom","bg_storm"],
-                                    ["bg_teacher","bg_teacher","bg_classroom","bg_storm"],
-                                    ["bg_storm","bg_dangerroom","bg_dangerroom","bg_storm"],
-                                    ["bg_teacher","bg_teacher","bg_classroom","bg_storm"],
-                                    ["bg_pool","bg_campus","bg_classroom","bg_storm"],
-                                    ["bg_storm","bg_campus","bg_storm","bg_pool"],
-                                    ["bg_storm","bg_campus","bg_storm","bg_pool"],
+                    self.Schedule = [["bg_storm", "bg_dangerroom", "bg_dangerroom", "bg_storm"],
+                                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_storm"],
+                                    ["bg_storm", "bg_dangerroom", "bg_dangerroom", "bg_storm"],
+                                    ["bg_teacher", "bg_teacher", "bg_classroom", "bg_storm"],
+                                    ["bg_pool", "bg_campus", "bg_classroom", "bg_storm"],
+                                    ["bg_storm", "bg_campus", "bg_storm", "bg_pool"],
+                                    ["bg_storm", "bg_campus", "bg_storm", "bg_pool"],
                                     ] #Schedule[0-6][0-4] = Schedule[Weekday][time_index]
 
-                    self.MassageChart = ["feet","calves","thighs","hips","ass","ass","pussy","ass","pussy","pussy"]
+                    self.MassageChart = ["feet", "calves", "thighs", "hips", "ass", "ass", "pussy", "ass", "pussy", "pussy"]
 
             elif self.Tag == "Jubes":
                     self.voice = ch_v
 
-                    self.Casual1 = [2,0,"shorts","red shirt",0,"sports bra","blue panties","jacket",0,0,0]
-                    self.Casual2 = [2,0,"pants","black shirt",0,"sports bra","blue panties","jacket",0,0,0]
-                    self.Gym = [0,0,"pants",0,0,"sports bra","blue panties",0,0,0,10]
-                    self.Sleepwear = [0,0,0,0,0,"sports bra","blue panties",0,0,0,25]
-                    self.Swim = [0,0,0,0,0,"bikini top","bikini bottoms",0,0,0,0]
-                    self.Costume = [0,0,"pants","black shirt",0,"sports bra","blue panties","jacket",0,0,0]
+                    self.Casual1 = [2,0, "shorts", "red shirt", 0, "sports bra", "blue panties", "jacket", 0,0,0]
+                    self.Casual2 = [2,0, "pants", "black shirt", 0, "sports bra", "blue panties", "jacket", 0,0,0]
+                    self.Gym = [0,0, "pants", 0,0, "sports bra", "blue panties", 0,0,0,10]
+                    self.Sleepwear = [0,0,0,0,0, "sports bra", "blue panties", 0,0,0,25]
+                    self.Swim = [0,0,0,0,0, "bikini top", "bikini bottoms", 0,0,0,0]
+                    self.Costume = [0,0, "pants", "black shirt", 0, "sports bra", "blue panties", "jacket", 0,0,0]
                     self.Home = "bg_jubes"
                     self.Hair = "shades"
 
@@ -475,16 +484,16 @@ init python:
                     JeanX.SexJubes = 0
                     StormX.SexJubes = 0
 
-                    self.Schedule = [["bg_jubes","bg_dangerroom","bg_dangerroom","bg_jubes"],
-                                    ["bg_classroom","bg_classroom","bg_jubes","bg_jubes"],
-                                    ["bg_jubes","bg_dangerroom","bg_dangerroom","bg_jubes"],
-                                    ["bg_dangerroom","bg_dangerroom","bg_jubes","bg_jubes"],
-                                    ["bg_pool","bg_campus","bg_campus","bg_jubes"],
-                                    ["bg_jubes","bg_campus","bg_jubes","bg_pool"],
-                                    ["bg_jubes","bg_campus","bg_jubes","bg_pool"],
+                    self.Schedule = [["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
+                                    ["bg_classroom", "bg_classroom", "bg_jubes", "bg_jubes"],
+                                    ["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
+                                    ["bg_dangerroom", "bg_dangerroom", "bg_jubes", "bg_jubes"],
+                                    ["bg_pool", "bg_campus", "bg_campus", "bg_jubes"],
+                                    ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"],
+                                    ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"],
                                     ] #Schedule[0-6][0-4] = Schedule[Weekday][time_index]
 
-                    self.MassageChart = ["neck","shoulders","calves","feet","neck","shoulders","calves","feet","pussy","pussy"]
+                    self.MassageChart = ["neck", "shoulders", "calves", "feet", "neck", "shoulders", "calves", "feet", "pussy", "pussy"]
 
             self.OutfitChange(Changed=1) #assigns their default outfit, hopefully
 
@@ -506,12 +515,12 @@ init python:
                         self.Petname = "young man"
                         self.Petnames = ["young man",Player.name]
                         self.Pet = EmmaX.name
-                        self.Pets = ["Emma","Ms. Frost"]
+                        self.Pets = ["Emma", "Ms. Frost"]
                 elif self == LauraX:
                         self.Petname = "guy"
                         self.Petnames = ["guy",Player.name]
                         self.Pet = "Laura"
-                        self.Pets = ["Laura","X-23"]
+                        self.Pets = ["Laura", "X-23"]
                 elif self.Tag == "Jean":
                         self.Petname = "um. . ."
                         self.Petnames = ["um. . ."]
@@ -521,18 +530,18 @@ init python:
                         self.Petname = "Player.name"
                         self.Petnames = ["Player.name"]
                         self.Pet = StormX.name
-                        self.Pets = ["Storm","Ororo","Ms. Munroe"]
+                        self.Pets = ["Storm", "Ororo", "Ms. Munroe"]
                 elif self.Tag == "Jubes":
                         self.Petname = "Bro"
-                        self.Petnames = ["Bro","Player.name"]
+                        self.Petnames = ["Bro", "Player.name"]
                         self.Pet = JubesX.name
-                        self.Pets = ["Jubes","Jubilee"]
+                        self.Pets = ["Jubes", "Jubilee"]
 
                 self.OutfitChange(6,Changed=1) #assigns their default outfit, hopefully
                 global all_Girls
                 if self not in all_Girls:
                         all_Girls.append(self)                 #These are the girls you have met at all
-                Shop_Inventory.extend(["DL","G","A"])     #adds these three items to the store for each girl added
+                Shop_Inventory.extend(["DL", "G", "A"])     #adds these three items to the store for each girl added
                 PersonalRooms.append(self.Home)
 
         def SluttyClothes(self):
@@ -597,7 +606,7 @@ init python:
 
         def AddWord(self,Only=0,Recent=0,Daily=0,Trait=0,History=0):
                 #applies variables to appropriate Girl stats
-                # $ RogueX.AddWord(1,"angry",0,0,0)
+                # $ RogueX.AddWord(1,"angry", 0,0,0)
                 #if Only, then only apply it if it's not already there
                 if (Recent and not Only) or (Recent and Recent not in self.recent_history):
                         self.recent_history.append(Recent)
@@ -611,7 +620,7 @@ init python:
 
         def DrainWord(self, Word = "word", Recent = 1, Daily = 1, Traits=0):
                 # to remove words from the daily/recent lists ,
-                # $ RogueX.DrainWord("angry",0,1)
+                # $ RogueX.DrainWord("angry", 0,1)
                 if Recent and Word in self.recent_history:
                     while Word in self.recent_history:
                             self.recent_history.remove(Word)
@@ -716,21 +725,21 @@ init python:
                         setattr(self, flavor, 1000)
 
                         if flavor == "love":
-                            if self.Chat[4] == 1:       #[love to obedienceience]
+                            if self.Chat[4] == 1:       #[love to obedience]
                                 flavor = "obedience"
                             elif self.Chat[4] == 2:     #[love to Inhibition]
                                 flavor = "inhibition"
                             else:
                                 value = 0
                         elif flavor == "obedience":
-                            if self.Chat[4] == 3:       #[obedienceience to Inhibition]
+                            if self.Chat[4] == 3:       #[obedience to Inhibition]
                                 flavor = "inhibition"
                             elif self.Chat[4] == 4:
-                                flavor = "love"   #[obedienceience to love]
+                                flavor = "love"   #[obedience to love]
                             else:
                                 value = 0
                         elif flavor == "inhibition":
-                            if self.Chat[4] == 5:       #[Inhibition to obedienceience]
+                            if self.Chat[4] == 5:       #[Inhibition to obedience]
                                 flavor = "obedience"
                             elif self.Chat[4] == 6:
                                 flavor = "love"    #[Inhibition to love]
@@ -974,9 +983,9 @@ init python:
                         Kissing = 1
                 elif Partner != self:
                         #If the called girl is kissing and is primary
-                        if Trigger == "kiss_you" or offhand_action == "kiss_you":
+                        if Trigger == "kiss" or offhand_action == "kiss":
                             Kissing = 1
-                elif Partner_primary_action == "kiss_you":
+                elif Partner_primary_action == "kiss":
                         #If the called girl is kissing you in a threesome action
                         Kissing = 1
 
@@ -1024,9 +1033,9 @@ init python:
                         if self.Tag == "Laura" and self.lust < 50 and not Extreme and not Approvalcheck(self, 1000):
                                 self.Eyes = "side"
 
-                if Partner == self and Partner_primary_action in ("lick pussy", "lick ass", "blow", "suck breasts"):
+                if Partner == self and Partner_primary_action in ("eat_pussy", "eat_ass", "blowjob", "suck_breasts"):
                                 self.Mouth = "tongue"
-                elif girl_offhand_action in ("lick pussy", "lick ass", "suck breasts"):
+                elif girl_offhand_action in ("eat_pussy", "eat_ass", "suck_breasts"):
                                 self.Mouth = "tongue"
 
                 if self.OCount >= 10:
@@ -1036,7 +1045,7 @@ init python:
 
                 if not self.Loose:
                         #if anal hurts. . .
-                        if Partner != self and (Trigger == "anal" or Trigger == "dildo anal" or girl_offhand_action == "dildo anal"):
+                        if Partner != self and (Trigger == "anal" or Trigger == "dildo_anal" or girl_offhand_action == "dildo_anal"):
                             self.Eyes = "closed"
                             self.Brows = "angry"
 
@@ -1055,11 +1064,11 @@ init python:
 
                 OutfitTemp = OutfitTemp if OutfitTemp else self.Outfit
 
-                if self.Loc == bg_current and renpy.showing("NightMask", layer='nightmask') and time_index == 0: #morning time
+                if self.location == bg_current and renpy.showing("NightMask", layer='nightmask') and time_index == 0: #morning time
                         #Skips this check if it's a sleepover
                         return
 
-                if self.Loc not in ("bg_showerroom","bg_pool") or (OutfitTemp not in ("nude","swimwear","towel")):
+                if self.location not in ("bg_showerroom", "bg_pool") or (OutfitTemp not in ("nude", "swimwear", "towel")):
                         #Dries her off
                         self.Water = 0
                 if self.Spunk:
@@ -1101,7 +1110,7 @@ init python:
                 elif OutfitTemp == "nude":
                         HolderOutfit = [0,0,0,0,0,0,0,0,0,0,50] #fills Holder with the values of the sent uni. . .
                 elif OutfitTemp == "towel":
-                        HolderOutfit = [0,0,0,"towel",0,0,0,0,0,0,35] #fills Holder with the values of the sent uni. . .
+                        HolderOutfit = [0,0,0, "towel", 0,0,0,0,0,0,35] #fills Holder with the values of the sent uni. . .
                 elif OutfitTemp == "custom1":
                         HolderOutfit = self.Custom1[:] #fills Holder with the values of the sent uni. . .
                 elif OutfitTemp == "custom2":
@@ -1196,7 +1205,7 @@ init python:
                         if OutfitTemp != "sleep" and OutfitTemp != "gym":
                                 self.Panties = 0
 
-                if not Changed and OutfitTemp == self.Outfit and self.Loc == bg_current:
+                if not Changed and OutfitTemp == self.Outfit and self.location == bg_current:
                         #If she was partially dressed then it says she gets dressed
                         if Undressed == 2:
                                 renpy.say(None,self.name+" throws on a towel.", interact=True)
@@ -1232,10 +1241,10 @@ init python:
                     if Up and self.Uptop and self.Chest:
                         return 1
                     if self == RogueX:
-                            if self.Chest in ("tank","buttoned tank"):
+                            if self.Chest in ("tank", "buttoned tank"):
                                 return 5
                     if self == LauraX:
-                            if self.Chest in ("leather bra","white tank"):
+                            if self.Chest in ("leather bra", "white tank"):
                                 return 5
                             elif self.Chest == "wolvie top":
                                 return 3
@@ -1558,13 +1567,13 @@ init python:
                         counter = int(self.Taboo/10)
 
                 #easy options
-                if self.Pet in ("girl","boo","bae","baby","sweetie"):
+                if self.Pet in ("girl", "boo", "bae", "baby", "sweetie"):
                     if Approvalcheck(self, 500, "L", TabM=1,Alt=[[LauraX],600]):
                         self.change_stat("love", 80, 1)
                     else:
                         self.change_stat("love", 50, -1)
                         return 1
-                elif self.Pet in ("sexy","lover","beloved"):
+                elif self.Pet in ("sexy", "lover", "beloved"):
                     if Approvalcheck(self, 900, TabM=1,Alt=[[LauraX],1100]):
                         self.change_stat("love", 80, 2)
                         self.change_stat("obedience", 80, 1)
@@ -1691,7 +1700,7 @@ init python:
                             self.change_stat("obedience", 60, 1)
                             self.change_stat("inhibition", 20, -1)
                             return 1
-                elif self.Pet in ("baby girl","mommy"):
+                elif self.Pet in ("baby girl", "mommy"):
                         if Approvalcheck(self, 1200, TabM=1):
                             self.change_stat("obedience", 80, 1)
                             self.change_stat("obedience", 50, 2)
@@ -1800,10 +1809,10 @@ label EmotionEditor(Girl=0):
                     else:
                         $ Girl.Spunk.append("mouth")
                 "Toggle hand Spunk":
-                    if "hand" in Girl.Spunk:
-                        $ Girl.Spunk.remove("hand")
+                    if "handjob" in Girl.Spunk:
+                        $ Girl.Spunk.remove("handjob")
                     else:
-                        $ Girl.Spunk.append("hand")
+                        $ Girl.Spunk.append("handjob")
 
                 "Toggle Facial Spunk":
                     if "facial" in Girl.Spunk and "hair" not in Girl.Spunk:
@@ -1831,7 +1840,7 @@ label GirlsAngry(Girls = 0,Girls=[]):
         $ temp_modifier = 0
         $ Girls = all_Girls[:]
         while Girls:
-                if Girls[0].Loc == bg_current and "angry" in Girls[0].recent_history:
+                if Girls[0].location == bg_current and "angry" in Girls[0].recent_history:
                         if bg_current == Girls[0].Home:
                                 if Girls[0] == RogueX:
                                         ch_r "You should get out, I'm fix'in ta throw down."
@@ -1852,7 +1861,7 @@ label GirlsAngry(Girls = 0,Girls=[]):
                                 $ renpy.pop_call()
                                 jump player_room_entry
                         else:
-                                $ Girls[0].Loc = Girls[0].Home
+                                $ Girls[0].location = Girls[0].Home
                         if Girls[0] in Party:
                                 $ Party.remove(Girls[0])
                         if Girls:

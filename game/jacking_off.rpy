@@ -5,7 +5,7 @@ label Jackin(Girl=0,counter=0,Girls=[]): #rkeljsv
         if not Girl or Girl not in all_Girls:
                 $ Girls = all_Girls[:]
                 while Girls:
-                        if Girls[0].Loc == bg_current:
+                        if Girls[0].location == bg_current:
                                 $ Girl = Girls[0]
                                 $ Girls = [1]
                         $ Girls.remove(Girls[0])
@@ -90,21 +90,21 @@ label Jackin(Girl=0,counter=0,Girls=[]): #rkeljsv
                         $ Girl.AddWord(0,"angry","angry",0,0)
                         return
 
-                if Girl.Action and Girl.Loc == bg_current:
+                if Girl.Action and Girl.location == bg_current:
                     $ Girls = ["none"]
 
                     if Girl.Hand >= 5 and ApprovalCheck(Girl, 1100, TabM = 3):
                             $ counter = Girl.Hand - 4
                             $ counter = 10 if counter > 10 else counter
                             while counter:
-                                $ Girls.append("hand")
+                                $ Girls.append("handjob")
                                 $ counter -= 1
                     if Girl.Blow >= 5 and ApprovalCheck(Girl, 1300, TabM = 3):
                             $ counter = Girl.Blow - 4
                             $ counter = 10 if counter > 10 else counter
                             $ counter += 5 if "hungry" in Girl.Traits else 0
                             while counter:
-                                $ Girls.append("blow")
+                                $ Girls.append("blowjob")
                                 $ counter -= 1
                     if Girl.Tit >= 5 and ApprovalCheck(Girl, 1200, TabM = 5):
                             $ counter = Girl.Tit - 4
@@ -129,7 +129,7 @@ label Jackin(Girl=0,counter=0,Girls=[]): #rkeljsv
 
                     $ renpy.random.shuffle(Girls)
 
-                    if Girls[0] == "hand":
+                    if Girls[0] == "handjob":
                             if Girl == RogueX:
                                     ch_r "Sure you don't want me to handle that for you?"
                             elif Girl == KittyX:
@@ -144,7 +144,7 @@ label Jackin(Girl=0,counter=0,Girls=[]): #rkeljsv
                                     ch_s "Did you want a hand?"
                             elif Girl == JubesX:
                                     ch_v "I could, uh, give you a hand there. . ."
-                    elif Girls[0] == "blow" or (Girl == JubesX and JubesX.Blow):
+                    elif Girls[0] == "blowjob" or (Girl == JubesX and JubesX.Blow):
                             if Girl == RogueX:
                                     ch_r "Sure my mouth wouldn't do better?"
                             elif Girl == KittyX:
@@ -260,9 +260,9 @@ label Jackin(Girl=0,counter=0,Girls=[]): #rkeljsv
 
                     show blackscreen onlayer black
                     hide blackscreen onlayer black
-                    if Girls[0] == "hand":
+                    if Girls[0] == "handjob":
                             jump expression Girl.Tag + "_HJ_Prep"
-                    elif Girls[0] == "blow":
+                    elif Girls[0] == "blowjob":
                             jump expression Girl.Tag + "_BJ_Prep"
                     elif Girls[0] == "tit":
                             jump expression Girl.Tag + "_TJ_Prep"
@@ -277,7 +277,7 @@ label Jackin(Girl=0,counter=0,Girls=[]): #rkeljsv
 label Girl_Tag(Girl=0,Forced = 0,Gloves=0): #rkeljsv
         #Called mostly by Addiction
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         $ Gloves = Girl.Arms
         $ Girl.ArmPose = 2
         if not Forced:
@@ -302,7 +302,7 @@ label Girl_Tag(Girl=0,Forced = 0,Gloves=0): #rkeljsv
                                 $ Girl.Eyes = "manic"
                                 "She lashes out and leaps at you, grabbing you by the chin."
                                 $ Girl.Eyes = "sly"
-                                if "no tag" not in Girl.recent_history:
+                                if "no_tag" not in Girl.recent_history:
                                         $ Girl.change_stat("obedience", 50, -5)
                                         $ Girl.change_stat("inhibition", 30, 5)
                                         $ Girl.change_stat("inhibition", 90, 1)
@@ -322,11 +322,11 @@ label Girl_Tag(Girl=0,Forced = 0,Gloves=0): #rkeljsv
                                         ch_s "Do not toy with me, [Girl.Petname]."
                                 elif Girl == JubesX:
                                         ch_v "Please. . ."
-                                if "no tag" not in Girl.recent_history:
+                                if "no_tag" not in Girl.recent_history:
                                         $ Girl.change_stat("obedience", 50, 5)
                                         $ Girl.change_stat("obedience", 80, 5)
-                                $ Girl.recent_history.append("no tag")
-                                $ Girl.daily_history.append("no tag")
+                                $ Girl.recent_history.append("no_tag")
+                                $ Girl.daily_history.append("no_tag")
                                 $ Girl.Arms = Gloves
                                 $ Girl.ArmPose = 1
                                 return

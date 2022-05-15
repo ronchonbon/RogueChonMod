@@ -645,10 +645,10 @@ label Kitty_SexChat:
 
                             "Blowjobs.":
                                         $ KittyX.change_face("sly")
-                                        if KittyX.PlayerFav == "blow":
+                                        if KittyX.PlayerFav == "blowjob":
                                             $ KittyX.change_stat("lust", 80, 3)
                                             ch_k "Yeah, I know."
-                                        elif KittyX.Favorite == "blow":
+                                        elif KittyX.Favorite == "blowjob":
                                             $ KittyX.change_stat("love", 90, 5)
                                             $ KittyX.change_stat("lust", 80, 5)
                                             ch_k "I love your dick!"
@@ -660,7 +660,7 @@ label Kitty_SexChat:
                                         else:
                                             $ KittyX.change_face("bemused")
                                             ch_k "I'm. . . getting used to the taste. . ."
-                                        $ KittyX.PlayerFav = "blow"
+                                        $ KittyX.PlayerFav = "blowjob"
 
                             "Titjobs.":
                                         $ KittyX.change_face("sly")
@@ -685,10 +685,10 @@ label Kitty_SexChat:
 
                             "Footjobs.":
                                         $ KittyX.change_face("sly")
-                                        if KittyX.PlayerFav == "foot":
+                                        if KittyX.PlayerFav == "footjob":
                                             $ KittyX.change_stat("lust", 80, 5)
                                             ch_k "Yeah, you've said that. . ."
-                                        elif KittyX.Favorite == "foot":
+                                        elif KittyX.Favorite == "footjob":
                                             $ KittyX.change_stat("love", 90, 5)
                                             $ KittyX.change_stat("lust", 80, 7)
                                             ch_k "You do feel pretty nice. . ."
@@ -700,14 +700,14 @@ label Kitty_SexChat:
                                         else:
                                             $ KittyX.change_face("bemused")
                                             ch_k "Yeah, it's nice. . ."
-                                        $ KittyX.PlayerFav = "foot"
+                                        $ KittyX.PlayerFav = "footjob"
 
                             "Handjobs.":
                                         $ KittyX.change_face("sly")
-                                        if KittyX.PlayerFav == "hand":
+                                        if KittyX.PlayerFav == "handjob":
                                             $ KittyX.change_stat("lust", 80, 5)
                                             ch_k "Yeah, you've said that. . ."
-                                        elif KittyX.Favorite == "hand":
+                                        elif KittyX.Favorite == "handjob":
                                             $ KittyX.change_stat("love", 90, 5)
                                             $ KittyX.change_stat("lust", 80, 7)
                                             ch_k "You do feel pretty comfy. . ."
@@ -719,7 +719,7 @@ label Kitty_SexChat:
                                         else:
                                             $ KittyX.change_face("bemused")
                                             ch_k "Yeah, it's nice. . ."
-                                        $ KittyX.PlayerFav = "hand"
+                                        $ KittyX.PlayerFav = "handjob"
 
                             "Feeling you up.":
                                         $ counter = KittyX.FondleB + KittyX.FondleT + KittyX.SuckB + KittyX.Hotdog
@@ -727,7 +727,7 @@ label Kitty_SexChat:
                                         if KittyX.PlayerFav == "fondle":
                                             $ KittyX.change_stat("lust", 80, 3)
                                             ch_k "Yeah, I think we're clear on that. . ."
-                                        elif KittyX.Favorite in ("hotdog","suck breasts","fondle breasts","fondle thighs"):
+                                        elif KittyX.Favorite in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
                                             $ KittyX.change_stat("love", 90, 5)
                                             $ KittyX.change_stat("lust", 80, 5)
                                             ch_k "I love when you touch me. . ."
@@ -784,31 +784,31 @@ label Kitty_SexChat:
                                                 ch_k "I like when you. . . fuck my ass."
                                             else:
                                                 ch_k "I like it. . . in the butt."
-                                        elif KittyX.Favorite == "lick ass":
+                                        elif KittyX.Favorite == "eat_ass":
                                                 ch_k "I like when you lick my. . . asshole."
-                                        elif KittyX.Favorite == "insert ass":
+                                        elif KittyX.Favorite == "finger_ass":
                                                 ch_k "I like when you . . . finger my asshole."
                                         elif KittyX.Favorite == "sex":
                                                 ch_k "I like when you fuck me."
-                                        elif KittyX.Favorite == "lick pussy":
+                                        elif KittyX.Favorite == "eat_pussy":
                                                 ch_k "I like when you lick my pussy."
-                                        elif KittyX.Favorite == "fondle pussy":
+                                        elif KittyX.Favorite == "fondle_pussy":
                                                 ch_k "I like when you finger me."
-                                        elif KittyX.Favorite == "blow":
+                                        elif KittyX.Favorite == "blowjob":
                                                 ch_k "I kinda like to suck your cock."
-                                        elif KittyX.Favorite == "tit":
+                                        elif KittyX.Favorite == "titjob":
                                                 ch_k "I don't mind using my tits."
-                                        elif KittyX.Favorite == "foot":
+                                        elif KittyX.Favorite == "footjob":
                                                 ch_k "I kinda like giving footjobs."
-                                        elif KittyX.Favorite == "hand":
+                                        elif KittyX.Favorite == "handjob":
                                                 ch_k "I like jerking you off."
                                         elif KittyX.Favorite == "hotdog":
                                                 ch_k "I like it when you grind against me."
-                                        elif KittyX.Favorite == "suck breasts":
+                                        elif KittyX.Favorite == "suck_breasts":
                                                 ch_k "I like it when you suck on my tits."
-                                        elif KittyX.Favorite == "fondle breasts":
+                                        elif KittyX.Favorite == "fondle_breasts":
                                                 ch_k "I like it when you feel up my tits."
-                                        elif KittyX.Favorite == "fondle thighs":
+                                        elif KittyX.Favorite == "fondle_thighs":
                                                 ch_k "I like it when you massage my thighs."
                                         else:
                                                 ch_k "I don't really know. . ."
@@ -957,11 +957,11 @@ label Kitty_Chitchat(O=0, Options = ["default","default","default"]):
                     $ Digits.append(KittyX)
                     return
 
-        if "hungry" not in KittyX.Traits and (KittyX.Swallow + KittyX.Chat[2]) >= 10 and KittyX.Loc == bg_current:  #She's swallowed a lot
+        if "hungry" not in KittyX.Traits and (KittyX.Swallow + KittyX.Chat[2]) >= 10 and KittyX.location == bg_current:  #She's swallowed a lot
                     call Kitty_Hungry
                     return
         if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or ApprovalCheck(KittyX, 800, "I")):
-                    if KittyX.Loc == bg_current and KittyX.Thirst >= 30 and "refused" not in KittyX.daily_history and "quicksex" not in KittyX.daily_history:
+                    if KittyX.location == bg_current and KittyX.Thirst >= 30 and "refused" not in KittyX.daily_history and "quicksex" not in KittyX.daily_history:
                             $ Girl.change_face("smile",2,Brows="sad")
                             ch_k "Hey, um . . . did you want to. . ."
                             ch_k ". . . sex?"
@@ -979,12 +979,8 @@ label Kitty_Chitchat(O=0, Options = ["default","default","default"]):
             #You don't know Kitty's full name
             $ Options.append("Shadowcat")
 
-        if "mandrill" in Player.Traits and "cologne chat" not in KittyX.daily_history:
-            $ Options.append("mandrill")
-        if "purple" in Player.Traits and "cologne chat" not in KittyX.daily_history:
-            $ Options.append("purple")
-        if "corruption" in Player.Traits and "cologne chat" not in KittyX.daily_history:
-            $ Options.append("corruption")
+        if Player.cologne and "cologne_chat" not in KittyX.daily_history:
+            $ Options.append(Player.cologne)
 
         if "seenpeen" in KittyX.History:
             $ Options.append("seenpeen")
@@ -1010,7 +1006,7 @@ label Kitty_Chitchat(O=0, Options = ["default","default","default"]):
         if "showered" in KittyX.daily_history:
             #If you've caught Kitty showering today
             $ Options.append("showercaught")
-        if "fondle breasts" in KittyX.daily_history or "fondle pussy" in KittyX.daily_history or "fondle ass" in KittyX.daily_history:
+        if "fondle_breasts" in KittyX.daily_history or "fondle_pussy" in KittyX.daily_history or "fondle_ass" in KittyX.daily_history:
             #If you've fondled Kitty today
             $ Options.append("fondled")
         if "Dazzler and Longshot" in KittyX.Inventory and "256 Shades of Grey" in KittyX.Inventory and "Avengers Tower Penthouse" in KittyX.Inventory:
@@ -1023,7 +1019,7 @@ label Kitty_Chitchat(O=0, Options = ["default","default","default"]):
                 $ Options.append("lingerie")
         if KittyX.Hand:
             #If Kitty's given a handjob
-            $ Options.append("handy")
+            $ Options.append("handjob")
         if KittyX.Swallow:
             #If Kitty's swallowed before
             $ Options.append("swallowed")
@@ -1062,18 +1058,18 @@ label Kitty_Chitchat(O=0, Options = ["default","default","default"]):
     $ renpy.random.shuffle(Options)             #shuffles options and picks out the first one
 
     if Options[0] == "mandrill":
-        $ KittyX.daily_history.append("cologne chat")
+        $ KittyX.daily_history.append("cologne_chat")
         $ KittyX.change_face("confused")
         ch_k "(sniff, sniff). . . is that. . . chimp? . . ."
         $ KittyX.change_face("perplexed", 1)
         ch_k ". . . but it's[KittyX.like]. . . {i}sexy{/i} chimp?"
     elif Options[0] == "purple":
-        $ KittyX.daily_history.append("cologne chat")
+        $ KittyX.daily_history.append("cologne_chat")
         $ KittyX.change_face("sly",1)
         ch_k "(sniff, sniff). . . huh, what's that smell? . ."
         ch_k ". . . could I get you something?"
     elif Options[0] == "corruption":
-        $ KittyX.daily_history.append("cologne chat")
+        $ KittyX.daily_history.append("cologne_chat")
         $ KittyX.change_face("confused")
         ch_k "(sniff, sniff). . . that's pretty overpowering. . ."
         $ KittyX.change_face("sly")
@@ -1205,15 +1201,15 @@ label Kitty_Chitchat(O=0, Options = ["default","default","default"]):
             $ KittyX.Blush = 1
             $ KittyX.Chat.append("lingerie")
 
-    elif Options[0] == "handy":
+    elif Options[0] == "handjob":
             #Kitty's response after giving the Player a handjob.
             $ KittyX.change_face("sly",2)
             ch_k "I was just thinking about how I[KittyX.like]stroked your cock the other day. . ."
             ch_k "I loved the expression on your face. . .knowing I could[KittyX.like]make you {i}feel{/i} like that."
             $ KittyX.Blush = 1
 
-    elif Options[0] == "blow":
-            if "blow" not in KittyX.Chat:
+    elif Options[0] == "blowjob":
+            if "blowjob" not in KittyX.Chat:
                     #Kitty's response after giving the Player a blowjob.
                     $ KittyX.change_face("sly",2)
                     ch_k "So. . .uhm, be honest with me, [KittyX.Petname]?"
@@ -1244,7 +1240,7 @@ label Kitty_Chitchat(O=0, Options = ["default","default","default"]):
                                 $ KittyX.change_face("angry",2)
                                 ch_k "Guess you're gonna have to[KittyX.like]figure out a way to get it to suck itself then from now on. . .{i}jerk{/i}."
                     $ KittyX.Blush = 1
-                    $ KittyX.Chat.append("blow")
+                    $ KittyX.Chat.append("blowjob")
             else:
                     $ line = renpy.random.choice(["You know, I kinda like how you taste.",
                             "You're a real jaw-breaker.",
@@ -1770,7 +1766,7 @@ label Kitty_Clothes:
             $ renpy.pop_call()
     $ line = 0
     $ Girl = KittyX
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
 
 label Kitty_Wardrobe_Menu:
     $ primary_action = 1 # to prevent Focus swapping. . .
@@ -1791,7 +1787,7 @@ label Kitty_Wardrobe_Menu:
             "Let's talk about what you wear around.":
                         call Clothes_Schedule(KittyX)
 
-            "Could I get a look at it?" if KittyX.Loc != bg_current:
+            "Could I get a look at it?" if KittyX.location != bg_current:
                     # checks to see if she'll drop the screen
                     call OutfitShame(KittyX,0,2)
                     if _return:
@@ -1805,7 +1801,7 @@ label Kitty_Wardrobe_Menu:
                         hide DressScreen
             "Would you be more comfortable behind a screen? (locked)" if KittyX.Taboo:
                     pass
-            "Would you be more comfortable behind a screen?" if KittyX.Loc == bg_current and not KittyX.Taboo and not renpy.showing('DressScreen'):
+            "Would you be more comfortable behind a screen?" if KittyX.location == bg_current and not KittyX.Taboo and not renpy.showing('DressScreen'):
                     # checks to see if she'll drop the screen
                     if ApprovalCheck(KittyX, 1500) or (KittyX.SeenChest and KittyX.SeenPussy):
                             ch_k "Probably won't need it, thanks."
@@ -1813,9 +1809,9 @@ label Kitty_Wardrobe_Menu:
                             show DressScreen zorder 150
                             ch_k "Yeah, this is a bit more comfortable, thanks."
 
-            "Gift for you (locked)" if Girl.Loc != bg_current:
+            "Gift for you (locked)" if Girl.location != bg_current:
                             pass
-            "Gift for you" if Girl.Loc == bg_current:
+            "Gift for you" if Girl.location == bg_current:
                             ch_p "I'd like to give you something."
                             call Gifts #(Girl)
 
@@ -1833,7 +1829,7 @@ label Kitty_Wardrobe_Menu:
                             ch_p "I wanted to talk about your clothes."
                             call expression Girl.Tag +"_Clothes"
                     $ Girl = KittyX
-                    call Shift_Focus(Girl)
+                    call shift_focus(Girl)
 
             "Never mind, you look good like that.":
                     if "wardrobe" not in KittyX.recent_history:

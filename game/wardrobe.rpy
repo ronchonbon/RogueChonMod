@@ -634,7 +634,7 @@ label Clothes_Schedule(Girl=0,counter = 0): #rkeljsv
         #Sets clothing for different days, if counter is 3 it's all days, 2 is TuThu, 1 is only weekends
         #Schedule 0-6= mon-fri, Schedule 7 is dates, 9 is private
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         if Girl == RogueX:
                 if ApprovalCheck(Girl, 1500, "LO"):
@@ -819,12 +819,12 @@ label Clothes_Schedule(Girl=0,counter = 0): #rkeljsv
                     "About Gym clothes":
                         menu:
                             ch_p "You asked me before about your gym clothes?"
-                            "Don't ask before changing into gym clothes" if "no ask gym" not in Girl.Traits:
+                            "Don't ask before changing into gym clothes" if "no_ask gym" not in Girl.Traits:
                                         call Anyline(Girl,"Sure.")
-                                        $ Girl.Traits.append("no ask gym")
-                            "Ask me before changing into gym clothes" if "no ask gym" in Girl.Traits:
+                                        $ Girl.Traits.append("no_ask gym")
+                            "Ask me before changing into gym clothes" if "no_ask gym" in Girl.Traits:
                                         call Anyline(Girl,"Sure.")
-                                        $ Girl.Traits.remove("no ask gym")
+                                        $ Girl.Traits.remove("no_ask gym")
                             "Never Mind":
                                 pass
 
@@ -854,7 +854,7 @@ label Clothes_ScheduleB(Girl=0,Count = 0): #rkeljsv
         #This is called by Clothes_Schedule when setting her outfit for a given day
         #If Count by the end, yes, if not count, no. If count is 99 then it's an auto-yes, if 90 it's for Emma teaching
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         menu:
             "Your green outfit." if Girl == RogueX:
                 $ Count = 1
@@ -1075,11 +1075,11 @@ label Private_Outfit(Girl=0): #rkeljsv
         if "comfy" in Girl.recent_history or "comfy" in Girl.Traits or Girl.Outfit == Girl.Clothing[9]:
                 call AltClothes(Girl,9)
                 $ Girl.OutfitChange(Changed=1)
-        elif "no comfy" in Girl.recent_history:
+        elif "no_comfy" in Girl.recent_history:
                 pass
         elif ApprovalCheck(Girl, 1200, "LI") and (2 * Girl.inhibition) >= (Girl.love + Girl.obedience +100):
                 # if her inhibition is much higher than her obedience to you. . .
-                call Shift_Focus(Girl)
+                call shift_focus(Girl)
                 if Girl == RogueX:
                         ch_r "Be right there [Girl.Petname]. . ."
                         ch_r "I'm slippin' inta somethin' more comfortable. . ."
@@ -1104,7 +1104,7 @@ label Private_Outfit(Girl=0): #rkeljsv
                 $ Girl.OutfitChange(Changed=1)
                 $ Girl.recent_history.append("comfy")
         else:
-                call Shift_Focus(Girl)
+                call shift_focus(Girl)
                 if Girl == RogueX:
                         ch_r "Be right there [Girl.Petname]. . ."
                         menu:
@@ -1116,7 +1116,7 @@ label Private_Outfit(Girl=0): #rkeljsv
                                     $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_r "Suit yourself."
-                                    $ Girl.recent_history.append("no comfy")
+                                    $ Girl.recent_history.append("no_comfy")
                 elif Girl == KittyX:
                         ch_k "Gimme a sec. . ."
                         menu:
@@ -1128,7 +1128,7 @@ label Private_Outfit(Girl=0): #rkeljsv
                                     $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_k "Oh, ok."
-                                    $ Girl.recent_history.append("no comfy")
+                                    $ Girl.recent_history.append("no_comfy")
                 elif Girl == EmmaX:
                         ch_e "I'll be just a moment. . ."
                         menu:
@@ -1140,7 +1140,7 @@ label Private_Outfit(Girl=0): #rkeljsv
                                     $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_e "Very well."
-                                    $ Girl.recent_history.append("no comfy")
+                                    $ Girl.recent_history.append("no_comfy")
                 elif Girl == LauraX:
                         ch_l "One minute. . ."
                         menu:
@@ -1152,7 +1152,7 @@ label Private_Outfit(Girl=0): #rkeljsv
                                     $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_l "Oh, ok."
-                                    $ Girl.recent_history.append("no comfy")
+                                    $ Girl.recent_history.append("no_comfy")
                 elif Girl == JeanX:
                         menu:
                             ch_j "I do have a more fun look. . ."
@@ -1162,7 +1162,7 @@ label Private_Outfit(Girl=0): #rkeljsv
                                     $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_j "Huh. Ok. . ."
-                                    $ Girl.recent_history.append("no comfy")
+                                    $ Girl.recent_history.append("no_comfy")
                 elif Girl == StormX:
                         ch_s "I'll be just a moment. . ."
                         menu:
@@ -1174,7 +1174,7 @@ label Private_Outfit(Girl=0): #rkeljsv
                                     $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_s "Very well."
-                                    $ Girl.recent_history.append("no comfy")
+                                    $ Girl.recent_history.append("no_comfy")
                 elif Girl == JubesX:
                         ch_v "Gimme a minute. . ."
                         menu:
@@ -1186,13 +1186,13 @@ label Private_Outfit(Girl=0): #rkeljsv
                                     $ Girl.recent_history.append("comfy")
                             "No thanks.":
                                     ch_v "Ok, fine."
-                                    $ Girl.recent_history.append("no comfy")
+                                    $ Girl.recent_history.append("no_comfy")
         return
 
 label Custom_Out(Girl=0,Custom = 3, Shame = 0, Agree = 0): #rkeljsv
         #If Custom1 = 3, if custom2 = 5, if custom3 = 6
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         $ Girl.change_face("sexy", 1)
 
         if Custom == 3:
@@ -1933,7 +1933,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                                 ch_r "You have got to be kidding."
                                 $ Agree = 0
                 elif Girl == KittyX:
-                        if Girl.Taboo >= 40: #Girl.Loc != "bg_player" and Girl.Loc != "bg_kitty":
+                        if Girl.Taboo >= 40: #Girl.location != "bg_player" and Girl.location != "bg_kitty":
                                 $ Girl.change_face("confused",1)
                                 $ Girl.Mouth = "smile"
                                 ch_k "Kinda late to ask, right?"
@@ -2248,13 +2248,13 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
         elif Tempshame <= 12:
                 #If the outfit is tame
                 pass
-        elif Girl.Over == "towel" and Girl.Loc == "bg_showerroom":
+        elif Girl.Over == "towel" and Girl.location == "bg_showerroom":
                 #If she's in a towel but it's appropriate
                 pass
         elif Tempshame <= 15 and (ApprovalCheck(Girl, 1500) or ApprovalCheck(Girl, 500, "I")):
                 #If the outfit is hot but she's ok
                 pass
-        elif Tempshame <= 20 and (Girl.Loc == "bg_dangerroom" or Girl.Loc == "bg_pool"):
+        elif Tempshame <= 20 and (Girl.location == "bg_dangerroom" or Girl.location == "bg_pool"):
                 #If the outfit is light but she's in the gym or pool
                 pass
         elif Tempshame <= 20 and (ApprovalCheck(Girl, 1800) or ApprovalCheck(Girl, 650, "I")):
@@ -2266,7 +2266,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
         elif (ApprovalCheck(Girl, 2500) or ApprovalCheck(Girl, 800, "I")):
                 #If the outfit is very scandalous but she's ok with that
                 pass
-        elif Girl.Loc == "bg_dangerroom" and Girl.Outfit == "gym":
+        elif Girl.location == "bg_dangerroom" and Girl.Outfit == "gym":
                 $ Girl.OutfitChange("gym",Changed = 1)
         elif not Girl.Taboo:
                 pass
@@ -2278,7 +2278,7 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                 pass
         else:
                 #if this is a called outfit modesty check. . .
-                if Girl.Loc == bg_current:
+                if Girl.location == bg_current:
                         if Girl == RogueX:
                                 ch_r "I'll be right back, I've got to change out of this."
                         elif Girl == KittyX:
@@ -2293,9 +2293,9 @@ label OutfitShame(Girl=0, Custom = 3, Check = 0, Count = 0, Tempshame = 50, Agre
                                 ch_s "I'll need to change into something more substantial."
                         elif Girl == JubesX:
                                 ch_v "I need to throw something on real quick. . ."
-                if Girl.Loc == "bg_dangerroom":
+                if Girl.location == "bg_dangerroom":
                         $ Girl.Outfit =  "gym"
-                elif Girl.Loc == "bg_pool" and Girl.Swim[0]:
+                elif Girl.location == "bg_pool" and Girl.Swim[0]:
                         $ Girl.Outfit =  "swimwear"
                 else:
                         $ Girl.Outfit = renpy.random.choice(["casual1", "casual2"])

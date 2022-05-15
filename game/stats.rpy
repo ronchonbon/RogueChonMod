@@ -60,11 +60,11 @@ screen StatHolder10(Value, Color, XPOS):
 # Start Harem stat boost  / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Haremchange_stat(Girl=0,Check=1000,Value=0,Greater=0,GirlsA=[],GirlsB=[]): #rkeljsv
         # This cycles through every Harem member and applies a like-up to each one.
-        # if Girl == "All", it cycles all of them.
+        # if Girl == "all", it cycles all of them.
         # call Haremchange_stat(LauraX,700,-5)
-        if "Historia" in Player.Traits:
+        if simulation:
                 return
-        if Girl == "All" or Girl == 0:
+        if Girl == "all" or Girl == 0:
                 $ GirlsA = Player.Harem[:]
         elif Girl in all_Girls:
                 $ GirlsA = [Girl]
@@ -90,7 +90,7 @@ label RoomStatboost(Type=0,Check=0,Amount=0,Girls=[]):
         # ie call RoomStatboost("love",80,2)
         $ Girls = all_Girls[:]
         while Girls:
-            if Girls[0].Loc == bg_current or Girls[0] in Nearby:
+            if Girls[0].location == bg_current or Girls[0] in Nearby:
                     $ Girls[0].change_stat(Type, Check, Amount)
             $ Girls.remove(Girls[0])
         return

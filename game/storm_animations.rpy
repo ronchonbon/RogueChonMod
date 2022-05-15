@@ -3683,7 +3683,7 @@ label Storm_BJ_Launch(line = primary_action):    # The sequence to launch the St
     $ action_speed = 0
 
     if line != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show Storm_BJ_Animation zorder 150:
         pos (630,650) #(645,510)
@@ -3956,17 +3956,17 @@ image Storm_TJ_Tits:
             contains:
                 #Chest
                 ConditionSwitch(
-                        "StormX.Chest == 'black bra' and StormX.Uptop and StormX.Over","images/StormBJFace/Storm_TJ_Chest_Bra_TopUS.png",  #fix, add "no straps" version here
+                        "StormX.Chest == 'black bra' and StormX.Uptop and StormX.Over","images/StormBJFace/Storm_TJ_Chest_Bra_TopUS.png",  #fix, add "no_straps" version here
                         "StormX.Chest == 'black bra' and StormX.Uptop","images/StormBJFace/Storm_TJ_Chest_Bra_TopU.png",
-                        "StormX.Chest == 'lace bra' and StormX.Uptop and StormX.Over","images/StormBJFace/Storm_TJ_Chest_Bra_TopUS.png",    #fix, add "no straps" version here
+                        "StormX.Chest == 'lace bra' and StormX.Uptop and StormX.Over","images/StormBJFace/Storm_TJ_Chest_Bra_TopUS.png",    #fix, add "no_straps" version here
                         "StormX.Chest == 'lace bra' and StormX.Uptop","images/StormBJFace/Storm_TJ_Chest_Bra_TopU.png",
                         "StormX.Chest == 'sports bra' and StormX.Uptop","images/StormBJFace/Storm_TJ_Chest_SportsBra_TopU.png",
                         "StormX.Chest == 'bikini top' and StormX.Uptop","images/StormBJFace/Storm_TJ_Chest_Bikini_TopU.png",
 
                         "StormX.Chest == 'tube top' and not StormX.Uptop","images/StormBJFace/Storm_TJ_Chest_TubeD.png",
-                        "StormX.Chest == 'black bra' and StormX.Over","images/StormBJFace/Storm_TJ_Chest_Bra_TopDS.png",  #fix, add "no straps" version here
+                        "StormX.Chest == 'black bra' and StormX.Over","images/StormBJFace/Storm_TJ_Chest_Bra_TopDS.png",  #fix, add "no_straps" version here
                         "StormX.Chest == 'black bra'","images/StormBJFace/Storm_TJ_Chest_Bra_TopD.png",
-                        "StormX.Chest == 'lace bra' and StormX.Over","images/StormBJFace/Storm_TJ_Chest_Lacebra_TopDS.png",  #fix, add "no straps" version here
+                        "StormX.Chest == 'lace bra' and StormX.Over","images/StormBJFace/Storm_TJ_Chest_Lacebra_TopDS.png",  #fix, add "no_straps" version here
                         "StormX.Chest == 'lace bra'","images/StormBJFace/Storm_TJ_Chest_Lacebra_TopD.png",
                         "StormX.Chest == 'sports bra'","images/StormBJFace/Storm_TJ_Chest_Sportsbra_TopD.png",
                         "StormX.Chest == 'bikini top'","images/StormBJFace/Storm_TJ_Chest_Bikini_TopD.png",

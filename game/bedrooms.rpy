@@ -9,9 +9,9 @@ label bedroom_entry(Girl):
 
 label girls_room_entry(Girl):
     $ bg_current = Girl.Home
-    $ Player.DrainWord("locked", 0, 0, 1)
+    $ door_locked = False
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
 
     $ Nearby = []
 
@@ -101,7 +101,7 @@ label girls_room_entry(Girl):
 
         call girls_room(Girl)
 
-    if Round >= 10 and Girl.Loc == bg_current and "les" in Girl.recent_history:
+    if Round >= 10 and Girl.location == bg_current and "les" in Girl.recent_history:
         call Girls_Caught_Lesing(Girl)
 
         if not _return:
@@ -112,7 +112,7 @@ label girls_room_entry(Girl):
         $ bg_current = "bg_campus"
         jump Misplaced
 
-    if Round >= 10 and Girl.Loc == bg_current and "gonnafap" in Girl.daily_history and D20 >= 5:
+    if Round >= 10 and Girl.location == bg_current and "gonnafap" in Girl.daily_history and D20 >= 5:
         call Girl_Caught_Mastubating(Girl)
     else:
         if Girl in Keys:
@@ -124,7 +124,7 @@ label girls_room_entry(Girl):
                     call set_the_scene
 
         if line != "knock" and Girl in Keys:
-            if Girl.Loc == bg_current:
+            if Girl.location == bg_current:
                 if Round <= 10:        #add "no" condtion here
                     if time_index >= 3: #night time
                         "She's asleep in bed. You slip out quietly." #fix add options here.
@@ -138,7 +138,7 @@ label girls_room_entry(Girl):
                     call girls_room(Girl)
         else:
             "You knock on [Girl.name]'s door."
-            if Girl.Loc == bg_current:
+            if Girl.location == bg_current:
                 if Round <= 10:
                     if time_index >= 3: #night time
                         "There's no answer, she's probably asleep."
@@ -204,7 +204,7 @@ label girls_room_entry(Girl):
                     "[Girl.name] opens the door and leans out."
                     "You ask if you can come inside."
 
-        if Girl.Loc != bg_current:
+        if Girl.location != bg_current:
             "Looks like she's not home right now."
             if Girl in Keys:
                 menu:
@@ -370,7 +370,7 @@ label girls_room(Girl):
 
     call GirlsAngry
 
-    if Girl.Loc == bg_current:
+    if Girl.location == bg_current:
         $ line = "You are in "+Girl.name+"'s room. What would you like to do?"
     else:
         $ line = "You are in "+Girl.name+"'s room, but she isn't here. What would you like to do?"
@@ -382,8 +382,8 @@ label girls_room(Girl):
             call Chat
         "Would you like to study?":
             call Study_Session
-        "Lock the door" if "locked" not in Player.Traits:
-            if Girl.Loc == bg_current and not ApprovalCheck(Girl, 1000, Alt = [[LauraX, JeanX], 1200]):
+        "Lock the door" if not door_locked:
+            if Girl.location == bg_current and not ApprovalCheck(Girl, 1000, Alt = [[LauraX, JeanX], 1200]):
                 if Girl == RogueX:
                     ch_r "Hey, could you maybe keep that open, [RogueX.Petname]?"
                 elif Girl == KittyX:
@@ -401,13 +401,13 @@ label girls_room(Girl):
             else:
                 "You lock the door"
 
-                $ Player.Traits.append("locked")
+                $ door_locked = True
 
                 call Taboo_Level
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if door_locked:
             "You unlock the door"
 
-            $ Player.Traits.remove("locked")
+            $ door_locked = False
 
             call Taboo_Level
         "Sleep" if time_index >= 3: #night time
@@ -458,7 +458,8 @@ label girls_room(Girl):
     call girls_room(Girl)
 
 label player_room_entry:
-    $ Player.DrainWord("locked",0,0,1)
+    $ door_locked = False
+
     $ bg_current = "bg_player"
 
     call Gym_Clothes_Off
@@ -495,16 +496,16 @@ label player_room:
             call Chat
         "Study":
             call Study_Session
-        "Lock the door" if "locked" not in Player.Traits:
+        "Lock the door" if not door_locked:
             "You lock the door"
 
-            $ Player.Traits.append("locked")
+            $ door_locked = True
 
             call Taboo_Level
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if door_locked:
             "You unlock the door"
 
-            $ Player.Traits.remove("locked")
+            $ door_locked = False
 
             call Taboo_Level
         "Sleep" if time_index >= 3: #night time

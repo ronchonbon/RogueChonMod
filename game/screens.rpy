@@ -87,49 +87,49 @@ screen say(who, what, side_image=None, two_window=False, CountWords = 0): #Count
                     text what id "what" color "#000000" font "CRIMFBRG.ttf" text_align 0.5
 
             if who == RogueX.name: #"Rogue":              #rkeljsv
-                    if RogueX.Loc != bg_current or RogueX.sprite_location == StageFarLeft:
+                    if RogueX.location != bg_current or RogueX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif RogueX.sprite_location == StageRight or RogueX.sprite_location == StageFarRight:
                         add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
                     else: #RogueX.sprite_location == StageCenter, Left, etc.:
                         add "arrow" xalign 0.8
             elif who == KittyX.name:
-                    if KittyX.Loc != bg_current or KittyX.sprite_location == StageFarLeft:
+                    if KittyX.location != bg_current or KittyX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif KittyX.sprite_location == StageRight or KittyX.sprite_location == StageFarRight:
                         add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
                     else: #KittyX.sprite_location == StageCenter, Left, etc.:
                         add "arrow" xalign 0.8
             elif who == EmmaX.name:
-                    if EmmaX.Loc != bg_current or EmmaX.sprite_location == StageFarLeft:
+                    if EmmaX.location != bg_current or EmmaX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif EmmaX.sprite_location == StageRight or EmmaX.sprite_location == StageFarRight:
                         add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
                     else: #EmmaX.sprite_location == StageCenter, Left, etc.:
                         add "arrow" xalign 0.8
             elif who == LauraX.name:
-                    if LauraX.Loc != bg_current or LauraX.sprite_location == StageFarLeft:
+                    if LauraX.location != bg_current or LauraX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif LauraX.sprite_location == StageRight or LauraX.sprite_location == StageFarRight:
                         add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
                     else: #LauraX.sprite_location == StageCenter, Left, etc.:
                         add "arrow" xalign 0.8
             elif who == JeanX.name:
-                    if JeanX.Loc != bg_current or JeanX.sprite_location == StageFarLeft:
+                    if JeanX.location != bg_current or JeanX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif JeanX.sprite_location == StageRight or JeanX.sprite_location == StageFarRight:
                         add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
                     else: #JeanX.sprite_location == StageCenter, Left, etc.:
                         add "arrow" xalign 0.8
             elif who == StormX.name:
-                    if StormX.Loc != bg_current or StormX.sprite_location == StageFarLeft:
+                    if StormX.location != bg_current or StormX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif StormX.sprite_location == StageRight or StormX.sprite_location == StageFarRight:
                         add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
                     else: #StormX.sprite_location == StageCenter, Left, etc.:
                         add "arrow" xalign 0.8
             elif who == JubesX.name:
-                    if JubesX.Loc != bg_current or JubesX.sprite_location == StageFarLeft:
+                    if JubesX.location != bg_current or JubesX.sprite_location == StageFarLeft:
                         add "arrow" xalign 0.1 #xzoom -1
                     elif JubesX.sprite_location == StageRight or JubesX.sprite_location == StageFarRight:
                         add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
@@ -497,7 +497,7 @@ screen preferences():
                 has vbox
 
                 label _("Transitions")
-                textbutton _("All") action Preference("transitions", "all")
+                textbutton _("all") action Preference("transitions", "all")
                 textbutton _("None") action Preference("transitions", "none")
 
             frame:
@@ -809,7 +809,7 @@ screen Status_Screen:
                 imagebutton idle "images/iconaddictrate.png" hover "images/iconaddictrate.png" action NullAction() hovered tt.Action("Addiction Rate: [focused_Girl.Addictionrate]")
                 bar range 100 value (focused_Girl.Addictionrate*10) xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
         showif not primary_action:
-    #            imagebutton auto "images/Button_Emma_%s.png" action ui.callsinnewcontext("Shift_Focus", "Emma") xpos 690 ypos 5 focus_mask True
+    #            imagebutton auto "images/Button_Emma_%s.png" action ui.callsinnewcontext("shift_focus", "Emma") xpos 690 ypos 5 focus_mask True
             imagebutton auto "images/Button_"+focused_Girl.Tag+"_%s.png" action ShowTransient("Focus_Map") xpos 690 ypos 5 focus_mask True #xpos 690 ypos 5
         showif config.developer:
             imagebutton auto "images/Button_"+focused_Girl.Tag+"_%s.png" action ui.callsinnewcontext("StatHacks",focused_Girl) xpos 730 ypos 5 focus
@@ -922,23 +922,23 @@ screen Focus_Map: #rkeljsv
         ypos 44
         hbox:
             vbox:
-                imagebutton auto "images/Button_Rogue_%s.png" action ui.callsinnewcontext("Shift_Focus", RogueX) focus_mask True
+                imagebutton auto "images/Button_Rogue_%s.png" action ui.callsinnewcontext("shift_focus", RogueX) focus_mask True
                 if "met" in KittyX.History:
-                        imagebutton auto "images/Button_Kitty_%s.png" action ui.callsinnewcontext("Shift_Focus", KittyX) focus_mask True
-                        # old way. . . imagebutton auto "images/Button_Kitty_%s.png" action ui.callsinnewcontext("Shift_Focus", "Kitty") focus_mask True
+                        imagebutton auto "images/Button_Kitty_%s.png" action ui.callsinnewcontext("shift_focus", KittyX) focus_mask True
+                        # old way. . . imagebutton auto "images/Button_Kitty_%s.png" action ui.callsinnewcontext("shift_focus", "Kitty") focus_mask True
             vbox:
                 if "met" in EmmaX.History:
-                        imagebutton auto "images/Button_Emma_%s.png" action ui.callsinnewcontext("Shift_Focus", EmmaX) focus_mask True
+                        imagebutton auto "images/Button_Emma_%s.png" action ui.callsinnewcontext("shift_focus", EmmaX) focus_mask True
                 if "met" in LauraX.History:
-                        imagebutton auto "images/Button_Laura_%s.png" action ui.callsinnewcontext("Shift_Focus", LauraX) focus_mask True
+                        imagebutton auto "images/Button_Laura_%s.png" action ui.callsinnewcontext("shift_focus", LauraX) focus_mask True
             vbox:
                 if "met" in JeanX.History:
-                        imagebutton auto "images/Button_Jean_%s.png" action ui.callsinnewcontext("Shift_Focus", JeanX) focus_mask True
+                        imagebutton auto "images/Button_Jean_%s.png" action ui.callsinnewcontext("shift_focus", JeanX) focus_mask True
                 if "met" in StormX.History:
-                        imagebutton auto "images/Button_Storm_%s.png" action ui.callsinnewcontext("Shift_Focus", StormX) focus_mask True
+                        imagebutton auto "images/Button_Storm_%s.png" action ui.callsinnewcontext("shift_focus", StormX) focus_mask True
             vbox:
                 if "met" in JubesX.History:
-                        imagebutton auto "images/Button_Jubes_%s.png" action ui.callsinnewcontext("Shift_Focus", JubesX) focus_mask True
+                        imagebutton auto "images/Button_Jubes_%s.png" action ui.callsinnewcontext("shift_focus", JubesX) focus_mask True
 
 transform rotate_white(x):
     rotate -(int(x *3.6))

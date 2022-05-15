@@ -3,7 +3,7 @@ label Laura_SexAct(Act = 0): #rkeljs
         if AloneCheck(LauraX) and LauraX.Taboo == 20:
                 $ LauraX.Taboo = 0
                 $ Taboo = 0
-        call Shift_Focus(LauraX)
+        call shift_focus(LauraX)
         if Act == "SkipTo":
             $ renpy.pop_call() #causes it to skip past the primary_action Swap
             $ renpy.pop_call() #causes it to skip past the cycle you were in before
@@ -29,11 +29,11 @@ label Laura_SexAct(Act = 0): #rkeljs
             call Laura_Fondle_Breasts
             if not action_context:
                 return
-        elif Act == "blow":
+        elif Act == "blowjob":
             call Laura_BJ_Prep
             if not action_context:
                 return
-        elif Act == "hand":
+        elif Act == "handjob":
             call Laura_HJ_Prep
             if not action_context:
                 return
@@ -46,7 +46,7 @@ label Laura_SexAct(Act = 0): #rkeljs
 # counter 1 means she's seen you, counter 0 means she hasn't.
 label Laura_Masturbate:  #rkelj
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(LauraX)
+    call shift_focus(LauraX)
     if LauraX.Mast:
         $ temp_modifier += 10
     if LauraX.SEXP >= 50:
@@ -84,7 +84,7 @@ label Laura_Masturbate:  #rkelj
                                 ch_l "Huh. Well I guess you could work the top?"
                                 $ LauraX.change_stat("obedience", 70, 2)
                                 $ LauraX.change_stat("inhibition", 70, 1)
-                                $ offhand_action = "fondle breasts"
+                                $ offhand_action = "fondle_breasts"
                                 $ LauraX.Mast += 1
                                 jump Laura_M_Cycle
                         "Would you like some help? I could. . . up to you, I guess." if Player.Semen and LauraX.Action:
@@ -96,9 +96,9 @@ label Laura_Masturbate:  #rkelj
                                 $ LauraX.change_stat("inhibition", 70, 1)
                                 $ D20 = renpy.random.randint(1, 20)
                                 if D20 > 10:
-                                    $ offhand_action = "fondle breasts"
+                                    $ offhand_action = "fondle_breasts"
                                 else:
-                                    $ offhand_action = "suck breasts"
+                                    $ offhand_action = "suck_breasts"
                                 $ LauraX.Mast += 1
                                 jump Laura_M_Cycle
                         "Why don't we take care of each other?" if Player.Semen and LauraX.Action:
@@ -150,7 +150,7 @@ label Laura_Masturbate:  #rkelj
                             jump Campus_Map
                         else:
                             ch_l "I'm getting out of here, but maybe knock next time."
-                            call Remove_Girl(LauraX)
+                            call remove_girl(LauraX)
                 return                      #returns to sexmenu, which returns to original
     #End of "Join" option
 
@@ -348,8 +348,8 @@ label Laura_Masturbate:  #rkelj
             $ LauraX.change_stat("obedience", 50, -2)
             $ LauraX.recent_history.append("angry")
             $ LauraX.daily_history.append("angry")
-            $ LauraX.recent_history.append("no masturbation")
-            $ LauraX.daily_history.append("no masturbation")
+            $ LauraX.recent_history.append("no_masturbation")
+            $ LauraX.daily_history.append("no_masturbation")
             return
     elif Taboo:                             # she refuses and this is too public a place for her
             $ LauraX.change_face("angry", 1)
@@ -364,8 +364,8 @@ label Laura_Masturbate:  #rkelj
     else:
             $ LauraX.change_face("normal", 1)
             ch_l "Um, no."
-    $ LauraX.recent_history.append("no masturbation")
-    $ LauraX.daily_history.append("no masturbation")
+    $ LauraX.recent_history.append("no_masturbation")
+    $ LauraX.daily_history.append("no_masturbation")
     $ temp_modifier = 0
     return
 
@@ -398,7 +398,7 @@ label Laura_M_Prep:  #rkelj
 
     $ primary_action = "masturbation"
     if not girl_offhand_action:
-        $ girl_offhand_action = "fondle pussy"
+        $ girl_offhand_action = "fondle_pussy"
 
     if action_context:
         $ renpy.pop_call()
@@ -406,7 +406,7 @@ label Laura_M_Prep:  #rkelj
     $ line = 0
     if Taboo:
         $ LauraX.DrainWord("tabno")
-    $ LauraX.DrainWord("no masturbation")
+    $ LauraX.DrainWord("no_masturbation")
     $ LauraX.recent_history.append("masturbation")
     $ LauraX.daily_history.append("masturbation")
 
@@ -417,9 +417,9 @@ label Laura_M_Cycle:
 
     while Round > 0:
         call Laura_Pos_Reset("masturbation")
-        call Shift_Focus(LauraX)
+        call shift_focus(LauraX)
         $ LauraX.lustFace()
-        if "unseen" in LauraX.recent_history and LauraX.Loc == bg_current:
+        if "unseen" in LauraX.recent_history and LauraX.location == bg_current:
                 $ LauraX.Eyes = "closed"
                 if LauraX.ScentTimer >= 3:
                         $ LauraX.ScentTimer = 0
@@ -435,12 +435,12 @@ label Laura_M_Cycle:
                         "Keep Watching.":
                                 pass
 
-                        "[LauraX.name]. . .[[jump in]" if "unseen" not in LauraX.recent_history and "join" not in Player.recent_history and LauraX.Loc == bg_current:
+                        "[LauraX.name]. . .[[jump in]" if "unseen" not in LauraX.recent_history and "join" not in Player.recent_history and LauraX.location == bg_current:
                                 "[LauraX.name] slows what she's doing with a sly grin."
                                 ch_l "Are you enjoying this?"
                                 $ action_context = "join"
                                 call Laura_Masturbate
-                        "\"Ahem. . .\"" if "unseen" in LauraX.recent_history and LauraX.Loc == bg_current:
+                        "\"Ahem. . .\"" if "unseen" in LauraX.recent_history and LauraX.location == bg_current:
                                 jump Laura_M_Interupted
 
                         "Start jack'in it." if offhand_action != "jackin":
@@ -448,7 +448,7 @@ label Laura_M_Cycle:
                         "Stop jack'in it." if offhand_action == "jackin":
                                 $ offhand_action = 0
 
-                        "Slap her ass" if LauraX.Loc == bg_current:
+                        "Slap her ass" if LauraX.location == bg_current:
                                 if "unseen" in LauraX.recent_history:
                                         "You smack [LauraX.name] firmly on the ass!"
                                         jump Laura_M_Interupted
@@ -468,7 +468,7 @@ label Laura_M_Cycle:
 
                         "Change what I'm doing":
                                 menu:
-                                    "Offhand action" if LauraX.Loc == bg_current:
+                                    "Offhand action" if LauraX.location == bg_current:
                                             if LauraX.Action and multi_action:
                                                 call Offhand_Set
                                                 if offhand_action:
@@ -476,9 +476,9 @@ label Laura_M_Cycle:
                                             else:
                                                 ch_l "Maybe we could finish this up for now?"
 
-                                    "Threesome actions (locked)" if not Partner or "unseen" in LauraX.recent_history or LauraX.Loc != bg_current:
+                                    "Threesome actions (locked)" if not Partner or "unseen" in LauraX.recent_history or LauraX.location != bg_current:
                                         pass
-                                    "Threesome actions" if Partner and "unseen" not in LauraX.recent_history and LauraX.Loc == bg_current:
+                                    "Threesome actions" if Partner and "unseen" not in LauraX.recent_history and LauraX.location == bg_current:
                                         menu:
                                             "Ask [Partner.name] to do something else":
                                                         call Three_Change(LauraX)
@@ -515,20 +515,20 @@ label Laura_M_Cycle:
                                     "Never mind":
                                                     jump Laura_M_Cycle
 
-                        "Back to Sex Menu" if multi_action and LauraX.Loc == bg_current:
+                        "Back to Sex Menu" if multi_action and LauraX.location == bg_current:
                                     ch_p "Let's try something else."
                                     call Laura_Pos_Reset
                                     $ action_context = "shift"
                                     $ line = 0
                                     jump Laura_M_Interupted
-                        "End Scene" if not multi_action or LauraX.Loc != bg_current:
+                        "End Scene" if not multi_action or LauraX.location != bg_current:
                                     ch_p "Let's stop for now."
                                     call Laura_Pos_Reset
                                     $ line = 0
                                     jump Laura_M_Interupted
         #End menu (if line)
 
-        call Shift_Focus(LauraX)
+        call shift_focus(LauraX)
         call Sex_Dialog(LauraX,Partner)
 
         #If either of you could cum
@@ -555,13 +555,13 @@ label Laura_M_Cycle:
                         else: #If she wasn't aware you were there
                             "You grunt and try to hold it in."
                             $ Player.Focus = 95
-                            if LauraX.Loc == bg_current:
+                            if LauraX.location == bg_current:
                                     jump Laura_M_Interupted
 
                     #If Laura can cum
                     if LauraX.lust >= 100:
                         call Girl_Cumming(LauraX)
-                        if LauraX.Loc == bg_current:
+                        if LauraX.location == bg_current:
                                 jump Laura_M_Interupted
 
                     if line == "came":
@@ -592,7 +592,7 @@ label Laura_M_Cycle:
                 elif Round == 5:
                     "She's definitely going to stop soon."
         else:
-                if LauraX.Loc == bg_current:
+                if LauraX.location == bg_current:
                         call Escalation(LauraX) #sees if she wants to escalate things
 
                 if Round == 10:
@@ -697,7 +697,7 @@ label Laura_M_Interupted:
     else:
         call Partner_Like(LauraX,2)
 
-    if LauraX.Loc != bg_current:
+    if LauraX.location != bg_current:
         return
 
     if Round <= 10:
@@ -741,7 +741,7 @@ label Laura_M_Interupted:
 
 label Laura_Sex_P:   #rkelj
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(LauraX)
+    call shift_focus(LauraX)
     if LauraX.Sex >= 7: # She loves it
         $ temp_modifier += 15
     elif LauraX.Sex >= 3: #You've done it before several times
@@ -775,8 +775,8 @@ label Laura_Sex_P:   #rkelj
     if Taboo and "tabno" in LauraX.daily_history:
         $ temp_modifier -= 10
 
-    if "no sex" in LauraX.daily_history:
-        $ temp_modifier -= 15 if "no sex" in LauraX.recent_history else 5
+    if "no_sex" in LauraX.daily_history:
+        $ temp_modifier -= 15 if "no_sex" in LauraX.recent_history else 5
 
 
     $ Approval = ApprovalCheck(LauraX, 1400, TabM = 5) # 135, 150, 165, Taboo -200(335)
@@ -851,7 +851,7 @@ label Laura_Sex_P:   #rkelj
     #End Auto
 
 
-    if not LauraX.Sex and "no sex" not in LauraX.recent_history:
+    if not LauraX.Sex and "no_sex" not in LauraX.recent_history:
             #first time
             $ LauraX.change_face("surprised", 1)
             $ LauraX.Mouth = "kiss"
@@ -925,7 +925,7 @@ label Laura_Sex_P:   #rkelj
                 $ LauraX.change_stat("obedience", 90, 1)
                 $ LauraX.change_stat("inhibition", 60, 1)
                 ch_l "Ok, fine. Just make it good."
-            elif "no sex" in LauraX.daily_history:
+            elif "no_sex" in LauraX.daily_history:
                 ch_l "Ok, whatever. . ."
             else:
                 $ LauraX.change_face("sexy", 1)
@@ -946,11 +946,11 @@ label Laura_Sex_P:   #rkelj
     else:
             #She's not into it, but maybe. . .
             $ LauraX.change_face("angry")
-            if "no sex" in LauraX.recent_history:
+            if "no_sex" in LauraX.recent_history:
                 ch_l "Sorry, [LauraX.Petname] \"no.\""
-            elif Taboo and "tabno" in LauraX.daily_history and "no sex" in LauraX.daily_history:
+            elif Taboo and "tabno" in LauraX.daily_history and "no_sex" in LauraX.daily_history:
                 ch_l "I told you. . . this place is too exposed."
-            elif "no sex" in LauraX.daily_history:
+            elif "no_sex" in LauraX.daily_history:
                 ch_l "I just told you \"no.\""
             elif Taboo and "tabno" in LauraX.daily_history:
                 ch_l "I already told you this is too public!"
@@ -962,11 +962,11 @@ label Laura_Sex_P:   #rkelj
                 ch_l "Maybe later? . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no sex" in LauraX.daily_history:
+                "Sorry, never mind." if "no_sex" in LauraX.daily_history:
                         $ LauraX.change_face("bemused")
                         ch_l "Well, you are persistant."
                         return
-                "Maybe later?" if "no sex" not in LauraX.daily_history:
+                "Maybe later?" if "no_sex" not in LauraX.daily_history:
                         $ LauraX.change_face("sexy")
                         ch_l "Probably. . ."
                         $ LauraX.change_stat("love", 80, 2)
@@ -974,8 +974,8 @@ label Laura_Sex_P:   #rkelj
                         if Taboo:
                             $ LauraX.recent_history.append("tabno")
                             $ LauraX.daily_history.append("tabno")
-                        $ LauraX.recent_history.append("no sex")
-                        $ LauraX.daily_history.append("no sex")
+                        $ LauraX.recent_history.append("no_sex")
+                        $ LauraX.daily_history.append("no_sex")
                         return
                 "I think you'd enjoy it as much as I would. . .":
                         if Approval:
@@ -1011,7 +1011,7 @@ label Laura_Sex_P:   #rkelj
 
     #She refused all offers.
     $ LauraX.ArmPose = 1
-    if "no sex" in LauraX.daily_history:
+    if "no_sex" in LauraX.daily_history:
         ch_l "Don't push me."
         $ LauraX.recent_history.append("angry")
         $ LauraX.daily_history.append("angry")
@@ -1037,14 +1037,14 @@ label Laura_Sex_P:   #rkelj
     else:
         $ LauraX.change_face("normal", 1)
         ch_l "Yeah, no."
-    $ LauraX.recent_history.append("no sex")
-    $ LauraX.daily_history.append("no sex")
+    $ LauraX.recent_history.append("no_sex")
+    $ LauraX.daily_history.append("no_sex")
     $ temp_modifier = 0
     return
 
 label Laura_Sex_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(LauraX)
+        call shift_focus(LauraX)
         call Laura_Sex_Launch("sex")
         if action_speed >= 4:
             $ action_speed = 2
@@ -1180,7 +1180,7 @@ label Laura_Sex_Cycle: #Repeating strokes
                                     jump Laura_SexAfter
         #End menu (if line)
 
-        call Shift_Focus(LauraX)
+        call shift_focus(LauraX)
         call Sex_Dialog(LauraX,Partner)
 
         $ counter += 1
@@ -1308,7 +1308,7 @@ label Laura_SexAfter:
     $ LauraX.Sex += 1
     $ LauraX.Action -=1
     $ LauraX.Addictionrate += 1
-    if "addictive" in Player.Traits:
+    if Player.addictive:
         $ LauraX.Addictionrate += 1
     $ LauraX.change_stat("inhibition", 30, 2)
     $ LauraX.change_stat("inhibition", 70, 1)
@@ -1353,7 +1353,7 @@ label Laura_SexAfter:
 
 label Laura_Sex_A: #rkelj
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(LauraX)
+    call shift_focus(LauraX)
     if LauraX.Anal >= 7: # She loves it
         $ temp_modifier += 20
     elif LauraX.Anal >= 3: #You've done it before several times
@@ -1387,9 +1387,9 @@ label Laura_Sex_A: #rkelj
 
     if Taboo and "tabno" in LauraX.daily_history:
         $ temp_modifier -= 10
-    if "no anal" in LauraX.daily_history:
+    if "no_anal" in LauraX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no anal" in LauraX.recent_history else 0
+        $ temp_modifier -= 10 if "no_anal" in LauraX.recent_history else 0
 
     $ Approval = ApprovalCheck(LauraX, 1550, TabM = 5) # 155, 170, 185, Taboo -200(355)
 
@@ -1463,7 +1463,7 @@ label Laura_Sex_A: #rkelj
             #end "auto"
 
 
-    if not LauraX.Anal and "no anal" not in LauraX.recent_history:
+    if not LauraX.Anal and "no_anal" not in LauraX.recent_history:
             #first time
             $ LauraX.change_face("surprised", 1)
             $ LauraX.Mouth = "kiss"
@@ -1541,7 +1541,7 @@ label Laura_Sex_A: #rkelj
                 $ LauraX.change_stat("obedience", 90, 1)
                 $ LauraX.change_stat("inhibition", 60, 1)
                 ch_l "Whatever."
-            elif "no anal" in LauraX.daily_history:
+            elif "no_anal" in LauraX.daily_history:
                 ch_l "Well, if you're going to keep asking. . ."
                 ch_l "Might be fun. . ."
             else:
@@ -1563,11 +1563,11 @@ label Laura_Sex_A: #rkelj
     else:
             #She's not into it, but maybe. . .
             $ LauraX.change_face("angry")
-            if "no anal" in LauraX.recent_history:
+            if "no_anal" in LauraX.recent_history:
                 ch_l "Sorry, [LauraX.Petname] \"no.\""
-            elif Taboo and "tabno" in LauraX.daily_history and "no anal" in LauraX.daily_history:
+            elif Taboo and "tabno" in LauraX.daily_history and "no_anal" in LauraX.daily_history:
                 ch_l "I told you. . . this place is too exposed."
-            elif "no anal" in LauraX.daily_history:
+            elif "no_anal" in LauraX.daily_history:
                 ch_l "I just told you \"no.\""
             elif Taboo and "tabno" in LauraX.daily_history:
                 ch_l "I already told you this is too public!"
@@ -1579,11 +1579,11 @@ label Laura_Sex_A: #rkelj
                 ch_l "Maybe eventually. . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no anal" in LauraX.daily_history:
+                "Sorry, never mind." if "no_anal" in LauraX.daily_history:
                     $ LauraX.change_face("bemused")
                     ch_l "Hey, I can't blame you."
                     return
-                "Maybe later?" if "no anal" not in LauraX.daily_history:
+                "Maybe later?" if "no_anal" not in LauraX.daily_history:
                     $ LauraX.change_face("sexy")
                     ch_l "Oh, probably. . ."
                     ch_l ". . . often."
@@ -1592,8 +1592,8 @@ label Laura_Sex_A: #rkelj
                     if Taboo:
                         $ LauraX.recent_history.append("tabno")
                         $ LauraX.daily_history.append("tabno")
-                    $ LauraX.recent_history.append("no anal")
-                    $ LauraX.daily_history.append("no anal")
+                    $ LauraX.recent_history.append("no_anal")
+                    $ LauraX.daily_history.append("no_anal")
                     return
                 "I bet it would feel really good. . .":
                     if Approval:
@@ -1630,7 +1630,7 @@ label Laura_Sex_A: #rkelj
 
     #She refused all offers.
     $ LauraX.ArmPose = 1
-    if "no anal" in LauraX.daily_history:
+    if "no_anal" in LauraX.daily_history:
         ch_l "Don't push it."
         $ LauraX.recent_history.append("angry")
         $ LauraX.daily_history.append("angry")
@@ -1660,14 +1660,14 @@ label Laura_Sex_A: #rkelj
     else:
         $ LauraX.change_face("normal", 1)
         ch_l "You haven't earned it yet."
-    $ LauraX.recent_history.append("no anal")
-    $ LauraX.daily_history.append("no anal")
+    $ LauraX.recent_history.append("no_anal")
+    $ LauraX.daily_history.append("no_anal")
     $ temp_modifier = 0
     return
 
 label Laura_Anal_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(LauraX)
+        call shift_focus(LauraX)
         call Laura_Sex_Launch("anal")
         if action_speed >= 4:
             $ Shift = 2
@@ -1807,7 +1807,7 @@ label Laura_Anal_Cycle: #Repeating strokes
                                     jump Laura_AnalAfter
         #End menu (if line)
 
-        call Shift_Focus(LauraX)
+        call shift_focus(LauraX)
         call Sex_Dialog(LauraX,Partner)
 
         $ counter += 1
@@ -1930,7 +1930,7 @@ label Laura_Anal_Cycle: #Repeating strokes
 
 label Laura_Sex_H: #rkelj
     $ Round -= 5 if Round > 5 else (Round-1)
-    call Shift_Focus(LauraX)
+    call shift_focus(LauraX)
     if LauraX.Hotdog >= 3: #You've done it before several times
         $ temp_modifier += 10
     elif LauraX.Hotdog: #You've done it before
@@ -1954,9 +1954,9 @@ label Laura_Sex_H: #rkelj
     if Taboo and "tabno" in LauraX.daily_history:
         $ temp_modifier -= 10
 
-    if "no hotdog" in LauraX.daily_history:
+    if "no_hotdog" in LauraX.daily_history:
         $ temp_modifier -= 5
-        $ temp_modifier -= 10 if "no hotdog" in LauraX.recent_history else 0
+        $ temp_modifier -= 10 if "no_hotdog" in LauraX.recent_history else 0
 
     $ Approval = ApprovalCheck(LauraX, 1000, TabM = 3) # 100, 115, 130, Taboo -120(220)
 
@@ -2014,7 +2014,7 @@ label Laura_Sex_H: #rkelj
             #end auto
 
 
-    if not LauraX.Hotdog and "no hotdog" not in LauraX.recent_history:
+    if not LauraX.Hotdog and "no_hotdog" not in LauraX.recent_history:
             #first time
             $ LauraX.change_face("surprised", 1)
             $ LauraX.Mouth = "kiss"
@@ -2084,7 +2084,7 @@ label Laura_Sex_H: #rkelj
                 $ LauraX.change_stat("obedience", 80, 1)
                 $ LauraX.change_stat("inhibition", 60, 1)
                 ch_l "Ok, fine."
-            elif "no hotdog" in LauraX.daily_history:
+            elif "no_hotdog" in LauraX.daily_history:
                 ch_l "It was rather entertaining. . ."
             else:
                 $ LauraX.change_face("sexy", 1)
@@ -2105,11 +2105,11 @@ label Laura_Sex_H: #rkelj
     else:
             #She's not into it, but maybe. . .
             $ LauraX.change_face("angry")
-            if "no hotdog" in LauraX.recent_history:
+            if "no_hotdog" in LauraX.recent_history:
                 ch_l "Sorry, [LauraX.Petname] \"no.\""
-            elif Taboo and "tabno" in LauraX.daily_history and "no hotdog" in LauraX.daily_history:
+            elif Taboo and "tabno" in LauraX.daily_history and "no_hotdog" in LauraX.daily_history:
                 ch_l "I just told you. . .not in such an exposed location."
-            elif "no hotdog" in LauraX.daily_history:
+            elif "no_hotdog" in LauraX.daily_history:
                 ch_l "I'm believe I just told you \"no,\" [LauraX.Petname]."
             elif Taboo and "tabno" in LauraX.daily_history:
                 ch_l "I told you. . . this place is too exposed."
@@ -2121,11 +2121,11 @@ label Laura_Sex_H: #rkelj
                 ch_l "I don't think that would be appropriate. . ."
             menu:
                 extend ""
-                "Sorry, never mind." if "no hotdog" in LauraX.daily_history:
+                "Sorry, never mind." if "no_hotdog" in LauraX.daily_history:
                     $ LauraX.change_face("bemused")
                     ch_l "So long as you don't push it."
                     return
-                "Maybe later?" if "no hotdog" not in LauraX.daily_history:
+                "Maybe later?" if "no_hotdog" not in LauraX.daily_history:
                     $ LauraX.change_face("sexy")
                     ch_l "I gues eventually. . ."
                     $ LauraX.change_stat("love", 80, 1)
@@ -2133,8 +2133,8 @@ label Laura_Sex_H: #rkelj
                     if Taboo:
                         $ LauraX.recent_history.append("tabno")
                         $ LauraX.daily_history.append("tabno")
-                    $ LauraX.recent_history.append("no hotdog")
-                    $ LauraX.daily_history.append("no hotdog")
+                    $ LauraX.recent_history.append("no_hotdog")
+                    $ LauraX.daily_history.append("no_hotdog")
                     return
                 "You might like it. . .":
                     if Approval:
@@ -2169,7 +2169,7 @@ label Laura_Sex_H: #rkelj
     #She refused all offers.
     $ LauraX.ArmPose = 1
 
-    if "no hotdog" in LauraX.daily_history:
+    if "no_hotdog" in LauraX.daily_history:
         ch_l "What did I tell you?"
         $ LauraX.recent_history.append("angry")
         $ LauraX.daily_history.append("angry")
@@ -2195,14 +2195,14 @@ label Laura_Sex_H: #rkelj
     else:
         $ LauraX.change_face("normal", 1)
         ch_l "No thanks."
-    $ LauraX.recent_history.append("no hotdog")
-    $ LauraX.daily_history.append("no hotdog")
+    $ LauraX.recent_history.append("no_hotdog")
+    $ LauraX.daily_history.append("no_hotdog")
     $ temp_modifier = 0
     return
 
 label Laura_Hotdog_Cycle: #Repeating strokes
     while Round > 0:
-        call Shift_Focus(LauraX)
+        call shift_focus(LauraX)
         call Laura_Sex_Launch("hotdog")
         if action_speed >= 4:
             $ action_speed = 2
@@ -2346,7 +2346,7 @@ label Laura_Hotdog_Cycle: #Repeating strokes
                                     jump Laura_HotdogAfter
         #End menu (if line)
 
-        call Shift_Focus(LauraX)
+        call shift_focus(LauraX)
         call Sex_Dialog(LauraX,Partner)
 
         $ counter += 1

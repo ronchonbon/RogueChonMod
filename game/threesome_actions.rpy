@@ -239,7 +239,7 @@ label Les_Interupted(Girl=0,Girls=[]): #rkeljsv
 
 label LesScene(Girl=0,Bonus = 0,Girls=[]): #rkeljsv
         $ Girl = GirlCheck(Girl)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         if not Girl.Action:
                 #this is often called by the sex menu, and reverts if she's worn out.
@@ -278,7 +278,7 @@ label LesScene(Girl=0,Bonus = 0,Girls=[]): #rkeljsv
                 $ Girls = all_Girls[:]
                 $ Girls.remove(Girl)
                 while Girls:
-                        if Girls[0].Loc == bg_current:
+                        if Girls[0].location == bg_current:
                                 $ Partner = Girls[0]
                                 $ Girls = [1]
                         $ Girls.remove(Girls[0])
@@ -1032,8 +1032,8 @@ label LesScene(Girl=0,Bonus = 0,Girls=[]): #rkeljsv
                         ch_s "I'm afraid not."
                 elif Girl == JubesX:
                         ch_v "Nope."
-        $ Girl.recent_history.append("no lesbian")
-        $ Girl.daily_history.append("no lesbian")
+        $ Girl.recent_history.append("no_lesbian")
+        $ Girl.daily_history.append("no_lesbian")
         $ temp_modifier = 0
         call Taboo_Level
         return
@@ -1045,7 +1045,7 @@ label Les_Partner:
         $ Girls = all_Girls[:]
         $ Girls.remove(Girl)
         while Girls:
-                if Girls[0].Loc == bg_current:
+                if Girls[0].location == bg_current:
                         call Les_Response(Girls[0],Girl,2)
                         if not _return:
                                 # If she refused
@@ -1067,14 +1067,14 @@ label Les_Prep(Girl=focused_Girl,Girls=[]):
                 $ Girls = all_Girls[:]
                 $ Girls.remove(Girl)
                 while Girls:
-                        if Girls[0].Loc == bg_current:
+                        if Girls[0].location == bg_current:
                                 $ Partner = Girls[0]
                                 $ Girls = [1]
                         $ Girls.remove(Girls[0])
 
         if line:
                 #if for some reason the Partner and lead were jumbled, swap them.
-                call Shift_Focus(Partner)
+                call shift_focus(Partner)
 
         $ line = 0
 
@@ -1107,14 +1107,14 @@ label Les_Prep(Girl=focused_Girl,Girls=[]):
         $ line = 0
         if Girl.Taboo:
             $ Girl.DrainWord("tabno")
-        $ Girl.DrainWord("no lesbian")
+        $ Girl.DrainWord("no_lesbian")
         $ Girl.AddWord(0,"lesbian","lesbian") #adds "lesbian" to daily and recent
         $ Partner.AddWord(0,"lesbian","lesbian") #adds "lesbian" to daily and recent
 
 label Les_Cycle(Girl=focused_Girl):
         $ Girl = GirlCheck(Girl)
         while Round > 0:
-            call Shift_Focus(Girl)
+            call shift_focus(Girl)
             call Les_Launch(Girl)
             $ Girl.LustFace()
 
@@ -1183,7 +1183,7 @@ label Les_Cycle(Girl=focused_Girl):
                                                                 jump Les_Interupted
                                                         else:
                                                                 call Girl_Undress(Partner)
-                                                                call Shift_Focus(Partner)
+                                                                call shift_focus(Partner)
                                                                 jump Les_Cycle
                                                 "Clean up Partner":
                                                         if "unseen" in Girl.recent_history:
@@ -1191,7 +1191,7 @@ label Les_Cycle(Girl=focused_Girl):
                                                                 jump Les_Interupted
                                                         else:
                                                                 call Girl_Cleanup(Partner,"ask")
-                                                                #call Shift_Focus(Partner)
+                                                                #call shift_focus(Partner)
                                                                 jump Les_Cycle
                                                 "Never mind":
                                                                 jump Les_Cycle
@@ -1223,7 +1223,7 @@ label Les_Cycle(Girl=focused_Girl):
                                         jump Les_After
             #End menu (if line)
 
-            call Shift_Focus(Girl)
+            call shift_focus(Girl)
             call Sex_Dialog(Girl,Partner)
 
             $ counter += 1
@@ -1466,8 +1466,8 @@ label Les_Response(Speaker=0,Subject=0, Step=1, B=0, B2=0, temp_modifier=0, Resu
         if Speaker == EmmaX:
                 #if Emma's not open to public sex yet, bailout
                 if "three" not in EmmaX.History or "classcaught" not in EmmaX.History or (Taboo > 20 and "taboo" not in EmmaX.History):
-                    $ EmmaX.recent_history.append("no lesbian")
-                    $ EmmaX.daily_history.append("no lesbian")
+                    $ EmmaX.recent_history.append("no_lesbian")
+                    $ EmmaX.daily_history.append("no_lesbian")
                     $ EmmaX.Statup("Obed", 70, 5)
                     $ EmmaX.Statup("Inbt", 80, 5)
                     $ EmmaX.Statup("Lust", 50, 10)
@@ -1480,7 +1480,7 @@ label Les_Response(Speaker=0,Subject=0, Step=1, B=0, B2=0, temp_modifier=0, Resu
                             ch_s "Oh, yes, Ms. Frost. We would not wish to give the wrong impression."
                     else:
                             ch_e "I can't imagine why you would think I would engage in such behavior with a student!"
-                    call Remove_Girl(EmmaX)
+                    call remove_girl(EmmaX)
                     "She quickly leaves the room."
                     return 0
 
@@ -1888,8 +1888,8 @@ label Les_Response(Speaker=0,Subject=0, Step=1, B=0, B2=0, temp_modifier=0, Resu
                                 ch_v "Nah, not into it."
         if not Result:
                 #response if all falls through and it fails. . .
-                $ Speaker.recent_history.append("no lesbian")
-                $ Speaker.daily_history.append("no lesbian")
+                $ Speaker.recent_history.append("no_lesbian")
+                $ Speaker.daily_history.append("no_lesbian")
                 $ Speaker.change_face("sadside", 1)
                 $ Partner = 0
                 if Speaker == RogueX:
@@ -2031,18 +2031,18 @@ label Les_Change(Primary = 0, Secondary=Partner, D20S=0, PrimaryLust=0, Secondar
             "Hey [Primary.name]. . ."
             "why don't you kiss her?" if Partner_offhand_action != "kiss girl" and Partner_offhand_action != "kiss both":
                         call Threeway_Set(Primary,"kiss girl", "lesbian", girl_offhand_action,Secondary)
-            "why don't you grab her tits?" if girl_offhand_action != "fondle breasts":
-                        call Threeway_Set(Primary,"fondle breasts", "lesbian", girl_offhand_action,Secondary)
-            "why don't you suck her breasts?" if girl_offhand_action != "suck breasts":
-                        call Threeway_Set(Primary,"suck breasts", "lesbian", girl_offhand_action,Secondary)
-            "why don't you finger her?" if girl_offhand_action != "fondle pussy":
-                        call Threeway_Set(Primary,"fondle pussy", "lesbian", girl_offhand_action,Secondary)
-            "why don't you go down on her?" if girl_offhand_action != "lick pussy":
-                        call Threeway_Set(Primary,"lick pussy", "lesbian", girl_offhand_action,Secondary)
-            "why don't you grab her ass?" if girl_offhand_action != "fondle ass":
-                        call Threeway_Set(Primary,"fondle ass", "lesbian", girl_offhand_action,Secondary)
-            "why don't you lick her ass?" if girl_offhand_action != "lick ass":
-                        call Threeway_Set(Primary,"lick ass", "lesbian", girl_offhand_action,Secondary)
+            "why don't you grab her tits?" if girl_offhand_action != "fondle_breasts":
+                        call Threeway_Set(Primary,"fondle_breasts", "lesbian", girl_offhand_action,Secondary)
+            "why don't you suck her breasts?" if girl_offhand_action != "suck_breasts":
+                        call Threeway_Set(Primary,"suck_breasts", "lesbian", girl_offhand_action,Secondary)
+            "why don't you finger her?" if girl_offhand_action != "fondle_pussy":
+                        call Threeway_Set(Primary,"fondle_pussy", "lesbian", girl_offhand_action,Secondary)
+            "why don't you go down on her?" if girl_offhand_action != "eat_pussy":
+                        call Threeway_Set(Primary,"eat_pussy", "lesbian", girl_offhand_action,Secondary)
+            "why don't you grab her ass?" if girl_offhand_action != "fondle_ass":
+                        call Threeway_Set(Primary,"fondle_ass", "lesbian", girl_offhand_action,Secondary)
+            "why don't you lick her ass?" if girl_offhand_action != "eat_ass":
+                        call Threeway_Set(Primary,"eat_ass", "lesbian", girl_offhand_action,Secondary)
             "never mind.":
                 pass
         if not line:

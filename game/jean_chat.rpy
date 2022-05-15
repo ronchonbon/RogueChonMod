@@ -614,10 +614,10 @@ label Jean_SexChat: #rkelj
 
                             "Blowjobs.":
                                         $ JeanX.change_face("sly")
-                                        if JeanX.PlayerFav == "blow":
+                                        if JeanX.PlayerFav == "blowjob":
                                             $ JeanX.change_stat("lust", 80, 3)
                                             ch_j "Yeah, I know."
-                                        elif JeanX.Favorite == "blow":
+                                        elif JeanX.Favorite == "blowjob":
                                             $ JeanX.change_stat("love", 90, 5)
                                             $ JeanX.change_stat("lust", 80, 5)
                                             ch_j "I can't say I hate it either. . ."
@@ -629,7 +629,7 @@ label Jean_SexChat: #rkelj
                                         else:
                                             $ JeanX.change_face("bemused")
                                             ch_j "You're lucky you taste so good."
-                                        $ JeanX.PlayerFav = "blow"
+                                        $ JeanX.PlayerFav = "blowjob"
 
                             "Titjobs.":
                                         $ JeanX.change_face("sly")
@@ -654,10 +654,10 @@ label Jean_SexChat: #rkelj
 
                             "Footjobs.":
                                         $ JeanX.change_face("sly")
-                                        if JeanX.PlayerFav == "foot":
+                                        if JeanX.PlayerFav == "footjob":
                                             $ JeanX.change_stat("lust", 80, 5)
                                             ch_j "Yeah, you've said that. . ."
-                                        elif JeanX.Favorite == "foot":
+                                        elif JeanX.Favorite == "footjob":
                                             $ JeanX.change_stat("love", 90, 5)
                                             $ JeanX.change_stat("lust", 80, 7)
                                             ch_j "I do like using my feet. . ."
@@ -669,14 +669,14 @@ label Jean_SexChat: #rkelj
                                         else:
                                             $ JeanX.change_face("bemused")
                                             ch_j "Yeah, it's nice. . ."
-                                        $ JeanX.PlayerFav = "foot"
+                                        $ JeanX.PlayerFav = "footjob"
 
                             "Handjobs.":
                                         $ JeanX.change_face("sly")
-                                        if JeanX.PlayerFav == "hand":
+                                        if JeanX.PlayerFav == "handjob":
                                             $ JeanX.change_stat("lust", 80, 5)
                                             ch_j "Yeah, you've said that. . ."
-                                        elif JeanX.Favorite == "hand":
+                                        elif JeanX.Favorite == "handjob":
                                             $ JeanX.change_stat("love", 90, 5)
                                             $ JeanX.change_stat("lust", 80, 7)
                                             ch_j "I do have quite the touch. . ."
@@ -688,7 +688,7 @@ label Jean_SexChat: #rkelj
                                         else:
                                             $ JeanX.change_face("bemused")
                                             ch_j "Yeah, it's nice. . ."
-                                        $ JeanX.PlayerFav = "hand"
+                                        $ JeanX.PlayerFav = "handjob"
 
                             "Feeling you up.":
                                         $ counter = JeanX.FondleB + JeanX.FondleT + JeanX.SuckB + JeanX.Hotdog
@@ -696,7 +696,7 @@ label Jean_SexChat: #rkelj
                                         if JeanX.PlayerFav == "fondle":
                                             $ JeanX.change_stat("lust", 80, 3)
                                             ch_j "Yeah, I think we're clear on that. . ."
-                                        elif JeanX.Favorite in ("hotdog","suck breasts","fondle breasts","fondle thighs"):
+                                        elif JeanX.Favorite in ("hotdog","suck_breasts","fondle_breasts","fondle_thighs"):
                                             $ JeanX.change_stat("love", 90, 5)
                                             $ JeanX.change_stat("lust", 80, 5)
                                             ch_j "I love when you touch me. . ."
@@ -750,31 +750,31 @@ label Jean_SexChat: #rkelj
                                             ch_j "Kissing?"
                                         elif JeanX.Favorite == "anal":
                                                 ch_j "Probably anal."
-                                        elif JeanX.Favorite == "lick ass":
+                                        elif JeanX.Favorite == "eat_ass":
                                                 ch_j "When you lick my ass."
-                                        elif JeanX.Favorite == "insert ass":
+                                        elif JeanX.Favorite == "finger_ass":
                                                 ch_j "Fingering my asshole, probably."
                                         elif JeanX.Favorite == "sex":
                                                 ch_j "Just stick it in me."
-                                        elif JeanX.Favorite == "lick pussy":
+                                        elif JeanX.Favorite == "eat_pussy":
                                                 ch_j "When you lick my pussy."
-                                        elif JeanX.Favorite == "fondle pussy":
+                                        elif JeanX.Favorite == "fondle_pussy":
                                                 ch_j "When you finger me."
-                                        elif JeanX.Favorite == "blow":
+                                        elif JeanX.Favorite == "blowjob":
                                                 ch_j "I do like how your cock tastes. . ."
-                                        elif JeanX.Favorite == "tit":
+                                        elif JeanX.Favorite == "titjob":
                                                 ch_j "When I use my tits."
-                                        elif JeanX.Favorite == "foot":
+                                        elif JeanX.Favorite == "footjob":
                                                 ch_j "Footjobs are pretty fun."
-                                        elif JeanX.Favorite == "hand":
+                                        elif JeanX.Favorite == "handjob":
                                                 ch_j "I like to jerk you off."
                                         elif JeanX.Favorite == "hotdog":
                                                 ch_j "When you grind against me."
-                                        elif JeanX.Favorite == "suck breasts":
+                                        elif JeanX.Favorite == "suck_breasts":
                                                 ch_j "When you suck my tits."
-                                        elif JeanX.Favorite == "fondle breasts":
+                                        elif JeanX.Favorite == "fondle_breasts":
                                                 ch_j "When you massage my tits."
-                                        elif JeanX.Favorite == "fondle thighs":
+                                        elif JeanX.Favorite == "fondle_thighs":
                                                 ch_j "When you massage my thighs."
                                         else:
                                                 ch_j "I don't know, surprise me."
@@ -1008,12 +1008,12 @@ label Jean_Chitchat(O=0, Options = ["default","default","default"]): #rkel
                     $ Digits.append(JeanX)
                     return
 
-        if "hungry" not in JeanX.Traits and (JeanX.Swallow + JeanX.Chat[2]) >= 10 and JeanX.Loc == bg_current:  #She's swallowed a lot
+        if "hungry" not in JeanX.Traits and (JeanX.Swallow + JeanX.Chat[2]) >= 10 and JeanX.location == bg_current:  #She's swallowed a lot
                     call Jean_Hungry
                     return
 
         if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or ApprovalCheck(JeanX, 800, "I")):
-                    if JeanX.Loc == bg_current and JeanX.Thirst >= 30 and "refused" not in JeanX.daily_history and "quicksex" not in JeanX.daily_history:
+                    if JeanX.location == bg_current and JeanX.Thirst >= 30 and "refused" not in JeanX.daily_history and "quicksex" not in JeanX.daily_history:
                             $ JeanX.change_face("sly",1)
                             ch_j "I could use some stress relief, you busy?"
                             call Quick_Sex(JeanX)
@@ -1025,12 +1025,8 @@ label Jean_Chitchat(O=0, Options = ["default","default","default"]): #rkel
         if JeanX.Event[0] and "key" not in JeanX.Chat:
             $ Options.append("key")
 
-        if "mandrill" in Player.Traits and "cologne chat" not in JeanX.daily_history:
-            $ Options.append("mandrill")
-        if "purple" in Player.Traits and "cologne chat" not in JeanX.daily_history:
-            $ Options.append("purple")
-        if "corruption" in Player.Traits and "cologne chat" not in JeanX.daily_history:
-            $ Options.append("corruption")
+        if Player.cologne and "cologne_chat" not in JeanX.daily_history:
+            $ Options.append(Player.cologne)
 
         if JeanX.Date >= 1 and bg_current != "bg_restaurant":
             #if you've dated before
@@ -1047,7 +1043,7 @@ label Jean_Chitchat(O=0, Options = ["default","default","default"]): #rkel
         if "showered" in JeanX.daily_history:
             #If you've caught Jean showering today
             $ Options.append("showercaught")
-        if "fondle breasts" in JeanX.daily_history or "fondle pussy" in JeanX.daily_history or "fondle ass" in JeanX.daily_history:
+        if "fondle_breasts" in JeanX.daily_history or "fondle_pussy" in JeanX.daily_history or "fondle_ass" in JeanX.daily_history:
             #If you've fondled Jean today
             $ Options.append("fondled")
         if "Dazzler and Longshot" in JeanX.Inventory and "256 Shades of Grey" in JeanX.Inventory and "Avengers Tower Penthouse" in JeanX.Inventory:
@@ -1060,7 +1056,7 @@ label Jean_Chitchat(O=0, Options = ["default","default","default"]): #rkel
                 $ Options.append("lingerie")
         if JeanX.Hand:
             #If Jean's given a handjob
-            $ Options.append("handy")
+            $ Options.append("handjob")
         if JeanX.Swallow:
             #If Jean's swallowed before
             $ Options.append("swallowed")
@@ -1093,19 +1089,19 @@ label Jean_Chitchat(O=0, Options = ["default","default","default"]): #rkel
     $ renpy.random.shuffle(Options)             #shuffles options and picks out the first one
 
     if Options[0] == "mandrill":
-        $ JeanX.daily_history.append("cologne chat")
+        $ JeanX.daily_history.append("cologne_chat")
         $ JeanX.change_face("confused")
         ch_j "(sniff, sniff). . . have you been fucking Hank? . ."
         $ JeanX.change_face("sexy", 2)
         ch_j ". . . still, you do smell kinda good. . ."
     elif Options[0] == "purple":
-        $ JeanX.daily_history.append("cologne chat")
+        $ JeanX.daily_history.append("cologne_chat")
         $ JeanX.change_face("sly",1)
         ch_j "(sniff, sniff). . . what is that? . ."
         $ JeanX.change_face("normal",0)
         ch_j ". . . what was it you wanted?"
     elif Options[0] == "corruption":
-        $ JeanX.daily_history.append("cologne chat")
+        $ JeanX.daily_history.append("cologne_chat")
         $ JeanX.change_face("confused")
         ch_j "(sniff, sniff). . . that's a strong scent. . ."
         $ JeanX.change_face("angry")
@@ -1250,15 +1246,15 @@ label Jean_Chitchat(O=0, Options = ["default","default","default"]): #rkel
             $ JeanX.Blush = 1
             $ JeanX.Chat.append("lingerie")
 
-    elif Options[0] == "handy":
+    elif Options[0] == "handjob":
             #Jean's response after giving the Player a handjob.
             $ JeanX.change_face("sly",1)
             ch_j "I was thinking about your cock in my hand. . ."
             ch_j "I think we should do that again some time. . ."
             $ JeanX.Blush = 0
 
-    elif Options[0] == "blow":
-            if "blow" not in JeanX.Chat:
+    elif Options[0] == "blowjob":
+            if "blowjob" not in JeanX.Chat:
                     #Jean's response after giving the Player a blowjob.
                     $ JeanX.change_face("sly",2)
                     ch_j "Hey, so did you enjoy that blowjob?"
@@ -1290,7 +1286,7 @@ label Jean_Chitchat(O=0, Options = ["default","default","default"]): #rkel
                                 $ JeanX.change_face("angry",2)
                                 ch_j "You just don't know quality."
                     $ JeanX.Blush = 1
-                    $ JeanX.Chat.append("blow")
+                    $ JeanX.Chat.append("blowjob")
             else:
                     $ line = renpy.random.choice(["I gotta tell you, your dick tastes great.",
                             "I think I nearly dislocated my jaw last time.",
@@ -1774,7 +1770,7 @@ label Jean_Clothes:    #rkelj
             $ renpy.pop_call()
     $ line = 0
     $ Girl = JeanX
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
 
 label Jean_Wardrobe_Menu:
     $ JeanX.change_face()
@@ -1795,7 +1791,7 @@ label Jean_Wardrobe_Menu:
             "Let's talk about what you wear around.":
                         call Clothes_Schedule(JeanX)
 
-            "Could I get a look at it?" if JeanX.Loc != bg_current:
+            "Could I get a look at it?" if JeanX.location != bg_current:
                     # checks to see if she'll drop the screen
                     call OutfitShame(JeanX,0,2)
                     if _return:
@@ -1809,7 +1805,7 @@ label Jean_Wardrobe_Menu:
                         hide DressScreen
             "Would you be more comfortable behind a screen? (locked)" if JeanX.Taboo:
                     pass
-            "Would you be more comfortable behind a screen?" if JeanX.Loc == bg_current and not JeanX.Taboo and not renpy.showing('DressScreen'):
+            "Would you be more comfortable behind a screen?" if JeanX.location == bg_current and not JeanX.Taboo and not renpy.showing('DressScreen'):
                     # checks to see if she wants a screen
                     if ApprovalCheck(JeanX, 1500) or (JeanX.SeenChest and JeanX.SeenPussy):
                             ch_j "I don't see why."
@@ -1817,9 +1813,9 @@ label Jean_Wardrobe_Menu:
                             show DressScreen zorder 150
                             ch_j "Yeah, this'll work."
 
-            "Gift for you (locked)" if Girl.Loc != bg_current:
+            "Gift for you (locked)" if Girl.location != bg_current:
                             pass
-            "Gift for you" if Girl.Loc == bg_current:
+            "Gift for you" if Girl.location == bg_current:
                             ch_p "I'd like to give you something."
                             call Gifts #(Girl)
 
@@ -1837,7 +1833,7 @@ label Jean_Wardrobe_Menu:
                             ch_p "I wanted to talk about your clothes."
                             call expression Girl.Tag +"_Clothes"
                     $ Girl = JeanX
-                    call Shift_Focus(Girl)
+                    call shift_focus(Girl)
 
             "Never mind, you look good like that.":
                     if "wardrobe" not in JeanX.recent_history:
@@ -2452,10 +2448,10 @@ label Jean_Wardrobe_Menu:
                             if not renpy.showing('DressScreen'):
                                     call Jean_First_Bottomless
                         elif ApprovalCheck(JeanX, 1200, TabM=4):
-                            $ primary_action = JeanX.Legs
+                            $ temp = JeanX.Legs
                             $ JeanX.Legs = 0
                             pause 0.5
-                            $ JeanX.Legs = primary_action
+                            $ JeanX.Legs = temp
                             "She pulls off her [JeanX.Legs] and [line], then pulls the [JeanX.Legs] back on."
                             $ primary_action = 1
                             call Jean_First_Bottomless(1)

@@ -30,7 +30,7 @@ label before_show:
     $ primary_action = "masturbation"
 
     if not girl_offhand_action:
-        $ girl_offhand_action = "fondle pussy"
+        $ girl_offhand_action = "fondle_pussy"
 
     if action_context:
         $ renpy.pop_call()
@@ -42,7 +42,7 @@ label before_show:
     if Taboo:
         $ focused_Girl.DrainWord("tabno")
 
-    $ focused_Girl.DrainWord("no masturbation")
+    $ focused_Girl.DrainWord("no_masturbation")
     $ focused_Girl.recent_history.append("masturbation")
     $ focused_Girl.daily_history.append("masturbation")
 
@@ -54,7 +54,7 @@ label show_cycle:
 
     while Round > 0:
         call reset_position(focused_Girl, trigger = "masturbation")
-        call Shift_Focus(focused_Girl)
+        call shift_focus(focused_Girl)
 
         $ focused_Girl.lustFace
 
@@ -67,7 +67,7 @@ label show_cycle:
             menu:
                 "Keep Watching.":
                     pass
-                "[focused_Girl.name]. . .[[jump in]" if "unseen" not in focused_Girl.recent_history and "join" not in Player.recent_history and focused_Girl.Loc == bg_current:
+                "[focused_Girl.name]. . .[[jump in]" if "unseen" not in focused_Girl.recent_history and "join" not in Player.recent_history and focused_Girl.location == bg_current:
                     "[focused_Girl.name] slows what she's doing with a sly grin."
                     ch_r "Yeah, did you want something, [focused_Girl.Petname]?"
 
@@ -80,7 +80,7 @@ label show_cycle:
                     call Jackin(focused_Girl)
                 "Stop jack'in it." if offhand_action == "jackin":
                     $ offhand_action = 0
-                "Slap her ass" if focused_Girl.Loc == bg_current:
+                "Slap her ass" if focused_Girl.location == bg_current:
                     if "unseen" in focused_Girl.recent_history:
                         "You smack [focused_Girl.name] firmly on the ass!"
 
@@ -104,7 +104,7 @@ label show_cycle:
                     $ Player.FocusX = 0
                 "Change what I'm doing":
                     menu:
-                        "Offhand action" if focused_Girl.Loc == bg_current:
+                        "Offhand action" if focused_Girl.location == bg_current:
                             if focused_Girl.Action and multi_action:
                                 call Offhand_Set
 
@@ -112,9 +112,9 @@ label show_cycle:
                                      $ focused_Girl.Action -= 1
                             else:
                                 call tired_lines(focused_Girl)
-                        "Threesome actions (locked)" if not Partner or "unseen" in focused_Girl.recent_history or focused_Girl.Loc == bg_current:
+                        "Threesome actions (locked)" if not Partner or "unseen" in focused_Girl.recent_history or focused_Girl.location == bg_current:
                             pass
-                        "Threesome actions" if focused_Girl.Loc == bg_current and Partner and "unseen" not in focused_Girl.recent_history:
+                        "Threesome actions" if focused_Girl.location == bg_current and Partner and "unseen" not in focused_Girl.recent_history:
                             menu:
                                 "Ask [Partner.name] to do something else":
                                     call Three_Change(focused_Girl)
@@ -153,7 +153,7 @@ label show_cycle:
                                 call Girl_Cleanup(focused_Girl,"ask")
                         "Never mind":
                             jump show_cycle
-                "Back to Sex Menu" if multi_action and focused_Girl.Loc == bg_current:
+                "Back to Sex Menu" if multi_action and focused_Girl.location == bg_current:
                     ch_p "Let's try something else."
 
                     call reset_position(focused_Girl)
@@ -162,7 +162,7 @@ label show_cycle:
                     $ line = 0
 
                     jump after_show
-                "End Scene" if not multi_action or focused_Girl.Loc != bg_current:
+                "End Scene" if not multi_action or focused_Girl.location != bg_current:
                     ch_p "Let's stop for now."
 
                     call reset_position(focused_Girl)
@@ -171,7 +171,7 @@ label show_cycle:
 
                     jump after_show
 
-        call Shift_Focus(focused_Girl)
+        call shift_focus(focused_Girl)
         call Sex_Dialog(focused_Girl,Partner)
 
         $ counter += 1
@@ -201,14 +201,14 @@ label show_cycle:
 
                     $ Player.Focus = 95
 
-                    if focused_Girl.Loc == bg_current:
+                    if focused_Girl.location == bg_current:
                         jump after_show
 
             #If Rogue can cum
             if focused_Girl.lust >= 100:
                 call Girl_Cumming(focused_Girl)
 
-                if focused_Girl.Loc == bg_current:
+                if focused_Girl.location == bg_current:
                     jump after_show
 
             if line == "came":
@@ -242,7 +242,7 @@ label show_cycle:
             elif Round == 5:
                 "She's definitely going to stop soon."
         else:
-            if focused_Girl.Loc == bg_current:
+            if focused_Girl.location == bg_current:
                 call Escalation(focused_Girl) #sees if she wants to escalate things
 
             if Round == 10:
@@ -365,7 +365,7 @@ label after_show:
 
     $ action_context = 0
 
-    if focused_Girl.Loc != bg_current:
+    if focused_Girl.location != bg_current:
         return
 
     if Round <= 10:
@@ -415,7 +415,7 @@ label after_show:
 label masturbate(Girl):
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
 
     if Girl.Mast:
         $ temp_modifier += 10
@@ -458,7 +458,7 @@ label masturbate(Girl):
                     $ Girl.change_stat("obedience", 70, 2)
                     $ Girl.change_stat("inhibition", 70, 1)
 
-                    $ offhand_action = "fondle breasts"
+                    $ offhand_action = "fondle_breasts"
 
                     $ Girl.Mast += 1
 
@@ -476,9 +476,9 @@ label masturbate(Girl):
                     $ D20 = renpy.random.randint(1, 20)
 
                     if D20 > 10:
-                        $ offhand_action = "fondle breasts"
+                        $ offhand_action = "fondle_breasts"
                     else:
-                        $ offhand_action = "suck breasts"
+                        $ offhand_action = "suck_breasts"
 
                     $ Girl.Mast += 1
 
@@ -549,7 +549,7 @@ label masturbate(Girl):
             else:
                 ch_r "Well if you don't mind, I'm getting out of here. Maybe knock next time?"
 
-                call Remove_Girl(Girl)
+                call remove_girl(Girl)
         return
 
     if action_context == Girl:                                                                  #Rogue auto-starts
@@ -779,8 +779,8 @@ label masturbate(Girl):
         $ Girl.change_stat("obedience", 50, -2)
         $ Girl.recent_history.append("angry")
         $ Girl.daily_history.append("angry")
-        $ Girl.recent_history.append("no masturbation")
-        $ Girl.daily_history.append("no masturbation")
+        $ Girl.recent_history.append("no_masturbation")
+        $ Girl.daily_history.append("no_masturbation")
 
         return
     elif Taboo:                             # she refuses and this is too public a place for her
@@ -802,8 +802,8 @@ label masturbate(Girl):
 
         ch_r "Heh, no, I'm not doing that."
 
-    $ Girl.recent_history.append("no masturbation")
-    $ Girl.daily_history.append("no masturbation")
+    $ Girl.recent_history.append("no_masturbation")
+    $ Girl.daily_history.append("no_masturbation")
 
     $ temp_modifier = 0
 
@@ -820,7 +820,7 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],Girl
         $ Present = []
         $ Girls = all_Girls[:]
         while Girls:
-                if Girls[0].Loc == bg_current:
+                if Girls[0].location == bg_current:
                         $ Present.append(Girls[0])
                 $ Girls.remove(Girls[0])
 
@@ -831,7 +831,7 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],Girl
 
         while len(Present) > 2:
                 #culls out extra members
-                call Remove_Girl(Present[2])
+                call remove_girl(Present[2])
     #            $ Present.remove(Present[2])
 
         if len(Present) == 2:
@@ -842,7 +842,7 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],Girl
                     # If second one likes you more, pick her
                     $ Present.reverse()
 
-        call Shift_Focus(Present[0])
+        call shift_focus(Present[0])
 
         $ Round -= 5 if Round > 5 else (Round-1)
         call set_the_scene(1,0,0,0)
@@ -914,17 +914,17 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],Girl
         if not Present:
                 return
 
-        if EmmaX.Loc == bg_current and EmmaX not in Present:
+        if EmmaX.location == bg_current and EmmaX not in Present:
                 #If Emma is here, but does not agree to this,
                 if "classcaught" not in EmmaX.History:
-                        if EmmaX.Loc == EmmaX.Home:
+                        if EmmaX.location == EmmaX.Home:
                                 #if it's her room. . .
                                 ch_e "If the two of you would like to dance, please do it elsewhere."
                                 $ Present = []
                                 return
                         else:
                                 ch_e "I should really be going."
-                                call Remove_Girl(EmmaX)
+                                call remove_girl(EmmaX)
 
         if "stripping" in Present[0].daily_history and ApprovalCheck(Present[0], 500, TabM = 3):
                 $ line = renpy.random.choice(["You liked the show earlier?",
@@ -938,7 +938,7 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],Girl
         call Anyline(Present[0],line)
         $ line = 0
 
-        call AllReset("All")
+        call AllReset("all")
 
 
         $ counter = len(Present) #max 2
@@ -996,7 +996,7 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],Girl
         #this portion adds back in girls who dropped out, but sets their "stop" flag.
         $ Girls = all_Girls[:]
         while Girls:
-                if Girls[0].Loc == bg_current and Girls[0] not in Present:
+                if Girls[0].location == bg_current and Girls[0] not in Present:
                         $ Present.append(Girls[0])
                         if "stopdancing" not in Girls[0].recent_history:
                                 $ Girls[0].recent_history.append("stopdancing")
@@ -1023,24 +1023,24 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],Girl
                             jump Group_Strip_End
 
 
-        if EmmaX.Loc == bg_current and len(Present) >= 2:
+        if EmmaX.location == bg_current and len(Present) >= 2:
                 #If Emma is here, but does not agree to this,
                 if "classcaught" not in EmmaX.History or "three" not in EmmaX.History or (Taboo and "taboo" not in EmmaX.History):
-                    if EmmaX.Loc == "bg_emma":
+                    if EmmaX.location == "bg_emma":
                             #if it's her room. . .
                             ch_e "If the two of you would like to get indecent, please do it elsewhere."
                             $ Present = []
                             return
                     else:
                             ch_e "I should really be going."
-                            call Remove_Girl(EmmaX)
+                            call remove_girl(EmmaX)
 
 label Group_Stripping:
         while Round >= 10 and Present:
             $ Round -= 2 if Round > 2 else Round
 
             if Present[Count] != focused_Girl:
-                    call Shift_Focus(Present[Count])
+                    call shift_focus(Present[Count])
 
             call Girl_Stripping(Present[Count])
 
@@ -1076,7 +1076,7 @@ label Group_Stripping:
                             $ between_event_count = 1
                             $ temp_modifierP[0] = temp_modifier
                             $ temp_modifier = temp_modifierP[1]
-                    call Shift_Focus(Present[Count])
+                    call shift_focus(Present[Count])
     #                $ Partner = Present[between_event_count]
 
                     call Activity_Check(focused_Girl,Partner)
@@ -1721,7 +1721,7 @@ label Strip_Ultimatum: #rkeljsv
                                     ch_v "I'd better not break your face either. . ."
                             $ Girl.recent_history.append("angry")
                             $ Girl.daily_history.append("angry")
-                            call Remove_Girl(Girl)
+                            call remove_girl(Girl)
                             return
                     $ temp_modifier += 20
                     $ Girl.Forced += 1
@@ -1768,7 +1768,7 @@ label Strip_Ultimatum: #rkeljsv
                                     ch_v "Oh, I can, but you're not goinna see it. . ."
                             $ Girl.recent_history.append("angry")
                             $ Girl.daily_history.append("angry")
-                            call Remove_Girl(Girl)
+                            call remove_girl(Girl)
                             return
                     $ Girl.change_stat("love", 200, -10)
                     $ Girl.change_stat("obedience", 50, 3)

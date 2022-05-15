@@ -1,13 +1,13 @@
 label JeanMeet:
-        call Shift_Focus(JeanX)
+        call shift_focus(JeanX)
 
         $ JeanX.name = "???"
         $ JeanX.AddWord(1,"showered","showered",0,0)
-        call Remove_Girl("All")
+        call remove_girl("all")
         call JeanName(1)
 
 
-        $ JeanX.Loc = "bg showerroom"
+        $ JeanX.location = "bg showerroom"
         $ bg_current = "bg showerroom"
         $ active_Girls.append(JeanX) if JeanX not in active_Girls else active_Girls
         $ line = 0
@@ -326,8 +326,8 @@ label JeanMeet:
         $ JeanX.History.append("met")
         $ bg_current = "bg showerroom"
         $ Round -= 10
-        call Shift_Focus(RogueX)
-        $ JeanX.Loc = "hold"
+        call shift_focus(RogueX)
+        $ JeanX.location = "hold"
         call set_the_scene
         $ JeanX.Outfit = "casual1"
         $ JeanX.OutfitDay = "casual1"
@@ -354,7 +354,7 @@ label JeanMeet:
         $ EmmaX.change_face("angry",1,Eyes="leftside")
         show Emma_Sprite at sprite_location(-100) zorder 25
         show Emma_Sprite at sprite_location(500) zorder 25 with easeinleft
-        call Shift_Focus(EmmaX)
+        call shift_focus(EmmaX)
         ch_e "I mean, that was Jean mother fucking Grey."
         $ JeanX.name = "Jean"
         pause .1
@@ -379,8 +379,8 @@ label JeanMeet:
         ch_e "Do try to avoid that relentless black hole of drama. . ."
         show Emma_Sprite at sprite_location(-100) with easeinleft
         pause 0.2
-        call Remove_Girl(EmmaX)
-        call Shift_Focus(RogueX)
+        call remove_girl(EmmaX)
+        call shift_focus(RogueX)
         call set_the_scene
         return
 
@@ -390,12 +390,12 @@ image JeanMFGrey:
 
 label Jean_Like:
         #if Jean's love value hits 500
-        if JeanX.Loc != bg_current:
-                $ JeanX.Loc = bg_current
+        if JeanX.location != bg_current:
+                $ JeanX.location = bg_current
                 "[JeanX.name] walks up to you."
         call set_the_scene(0)
         call Display_Girl(JeanX)
-        call CleartheRoom(JeanX)
+        call clear_the_room(JeanX)
         call set_the_scene
         $ JeanX.daily_history.append("relationship")
         call Taboo_Level
@@ -515,12 +515,12 @@ label Jean_Like:
 
 label Jean_love:
         #if her love hits 800 and obedience over 600
-        if JeanX.Loc != bg_current:
-                $ JeanX.Loc = bg_current
+        if JeanX.location != bg_current:
+                $ JeanX.location = bg_current
                 "[JeanX.name] walks up to you."
         call set_the_scene(0)
         call Display_Girl(JeanX)
-        call CleartheRoom(JeanX)
+        call clear_the_room(JeanX)
         call set_the_scene
         $ JeanX.daily_history.append("relationship")
         call Taboo_Level
@@ -732,12 +732,12 @@ label Jean_love:
 
 label Jean_Sub:
         # if her obedienceience hits 500
-        if JeanX.Loc != bg_current:
-                $ JeanX.Loc = bg_current
+        if JeanX.location != bg_current:
+                $ JeanX.location = bg_current
                 "[JeanX.name] walks up to you."
         call set_the_scene(0)
         call Display_Girl(JeanX)
-        call CleartheRoom(JeanX)
+        call clear_the_room(JeanX)
         call set_the_scene
         $ JeanX.daily_history.append("relationship")
         call Taboo_Level
@@ -866,12 +866,12 @@ label Jean_Sub:
         return
 
 label Jean_Master:
-        if JeanX.Loc != bg_current:
-                $ JeanX.Loc = bg_current
+        if JeanX.location != bg_current:
+                $ JeanX.location = bg_current
                 "[JeanX.name] walks up to you."
         call set_the_scene(0)
         call Display_Girl(JeanX)
-        call CleartheRoom(JeanX)
+        call clear_the_room(JeanX)
         call set_the_scene
         $ JeanX.daily_history.append("relationship")
         call Taboo_Level

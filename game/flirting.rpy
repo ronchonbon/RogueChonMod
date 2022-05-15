@@ -1,13 +1,13 @@
 label Flirt(Girl =0): #rkeljsv
     # call Flirt(RogueX)
     $ Girl = GirlCheck(Girl)
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
 
-    if Girl.Loc != bg_current:
+    if Girl.location != bg_current:
             #menu for if over the phone
             menu:
                 "Compliment her":
-                        $ Girl.Chat[5] = 1 #can only flirt once per cycle.
+                        $ Girl.can_flirt = False #can only flirt once per cycle.
                         call Compliment(Girl)
                 "Phone Sex" if bg_current == "bg_player":
                         ch_p "Want to do some phone sex?"
@@ -55,10 +55,10 @@ label Flirt(Girl =0): #rkeljsv
                                 elif Girl == JubesX:
                                         ch_v "Oh. . . that might be fun. . ."
                                         ch_v "Let me just find a place. . ."
-                                if Girl in (EmmaX,StormX) and Girl.Loc == "bg_classroom" and time_index >= 2:
+                                if Girl in (EmmaX,StormX) and Girl.location == "bg_classroom" and time_index >= 2:
                                         pass             #if it's Emma and she's in class and it's a good time, stay
                                 else:
-                                        $ Girl.Loc = Girl.Home
+                                        $ Girl.location = Girl.Home
                         elif ApprovalCheck(Girl, 1200):
                                 #she agrees
                                 if Girl == RogueX: #R_Mast
@@ -122,7 +122,7 @@ label Flirt(Girl =0): #rkeljsv
                         pass
     else:
             #Menu for if local.
-            $ Girl.Chat[5] = 1 #can only flirt once per cycle.
+            $ Girl.can_flirt = False #can only flirt once per cycle.
             menu:
                 "Compliment her":
                             call Compliment(Girl)
@@ -1844,7 +1844,7 @@ label Flirt(Girl =0): #rkeljsv
                             call Kitty_Yoink
 
                 "Never mind [[exit]":
-                            $ Girl.Chat[5] = 0
+                            $ Girl.can_flirt = True
     return
 
 label Compliment(Girl=0,line0=0,line1=0,line2=0,Options=[],CountList=[],line=0,D20=0): #rkeljsv
@@ -1883,7 +1883,7 @@ label Compliment(Girl=0,line0=0,line1=0,line2=0,Options=[],CountList=[],line=0,D
                 call Compliment(Girl)
                 return
             "Never mind":
-                $ Girl.Chat[5] = 0 #can only flirt once per cycle.
+                $ Girl.can_flirt = True #can only flirt once per cycle.
                 return
 
     $ D20 = renpy.random.randint(5, 20)
@@ -2769,9 +2769,9 @@ label love_You(Girl=0): #rkeljsv
 label TouchCheek(Girl=0): #rkeljsv
         if Girl not in all_Girls:
                 return
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         $ Girl.change_face("surprised", 1)
-        if "no cheek" in Girl.daily_history:
+        if "no_cheek" in Girl.daily_history:
                 "You reach out to brush [Girl.name]'s face with your hand, but she slaps it away."
                 $ Girl.change_face("angry")
                 if Girl == RogueX:
@@ -2792,7 +2792,7 @@ label TouchCheek(Girl=0): #rkeljsv
                 "You reach out and brush [Girl.name]'s face with your hand, a shiver runs through her."
         $ Girl.change_stat("obedience", 50, 1)
 
-        if Girl == RogueX or "addictive" in Player.Traits:
+        if Girl == RogueX or Player.addictive:
                 $ Girl.Addict -= 2
                 $ Girl.Addictionrate += 1 if Girl.Addictionrate < 5 else 0
                 $ Girl.Addictionrate = 3 if Girl.Addictionrate < 3 else Girl.Addictionrate
@@ -2834,7 +2834,7 @@ label TouchCheek(Girl=0): #rkeljsv
                 else:
                         call Anyline(Girl,"Hey, I warned you, "+Girl.Petname+".")
                 $ Girl.change_stat("love", 50, -2)
-                $ Girl.daily_history.append("no cheek")
+                $ Girl.daily_history.append("no_cheek")
         elif ApprovalCheck(Girl, 250): #400
                 $ Girl.Mouth = "smile"
                 $ Girl.Brows = "normal"
@@ -2864,7 +2864,7 @@ label TouchCheek(Girl=0): #rkeljsv
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 30, 1)
 
-        if "no cheek" in Girl.daily_history:
+        if "no_cheek" in Girl.daily_history:
             menu:
                 "Sorry, sorry, won't happen again.":
                         if ApprovalCheck(Girl, 300):
@@ -3188,9 +3188,9 @@ label Hold_Hands(Girl=0,Gloves=0): #rkeljsv
 
 label Girl_Headpat(Girl=0): #rkeljsv
     $ Girl = GirlCheck(Girl)
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     $ Girl.change_face("surprised", 1)
-    if "no headpat" in Girl.daily_history:
+    if "no_headpat" in Girl.daily_history:
             "You reach out to pat [Girl.name] on the head, but she slaps it away."
             $ Girl.change_face("angry")
             if Girl == RogueX:
@@ -3243,7 +3243,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
             elif Girl == JubesX:
                     ch_v "What'd I tell you?"
             $ Girl.change_stat("love", 50, -2)
-            $ Girl.daily_history.append("no headpat")
+            $ Girl.daily_history.append("no_headpat")
     elif ApprovalCheck(Girl, 400,Alt=[[EmmaX],600]):
             $ Girl.Mouth = "smile"
             $ Girl.Brows = "normal"
@@ -3287,7 +3287,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
             $ Girl.change_stat("obedience", 50, 1)
             $ Girl.change_stat("inhibition", 30, 1)
 
-    if "no headpat" in Girl.daily_history:
+    if "no_headpat" in Girl.daily_history:
         menu:
             "Sorry, sorry, won't happen again.":
                 if ApprovalCheck(Girl, 300):
@@ -3766,7 +3766,7 @@ label AskPanties(Girl=0,Store = 0): #rkeljsv
                     $ temp_modifier += (Girl.Taboo * 5)
         if Girl in Player.Harem or ("sex friend" in Girl.Petnames and not Taboo):
                     $ temp_modifier += 10
-        if "no bottomless" in Girl.recent_history:
+        if "no_bottomless" in Girl.recent_history:
                     $ temp_modifier -= 20
 
         $ line = 0
@@ -3975,13 +3975,13 @@ label AskPanties(Girl=0,Store = 0): #rkeljsv
                     $ Girl.change_stat("lust", 60, 2)
                     $ Girl.change_stat("obedience", 60, 4)
                     $ Girl.change_stat("inhibition", 60, 4)
-                    $ Girl.Loc = "hold"
+                    $ Girl.location = "hold"
                     call set_the_scene
                     "[Girl.name] nods and leaves for a minute."
                     $ Girl.daily_history.append("pantyless")
                     $ Girl.OutfitChange()
                     call OutfitShame(Girl,20)
-                    $ Girl.Loc = bg_current
+                    $ Girl.location = bg_current
                     call set_the_scene
                     "She returns and quietly hands you her balled up panties."
         else:

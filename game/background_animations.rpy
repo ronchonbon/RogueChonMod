@@ -111,12 +111,12 @@ image bg_class:
         "images/Classroom.jpg"
     contains:
         ConditionSwitch(
-            "EmmaX.Loc == 'bg teacher' and 'frisky' in EmmaX.recent_history", "Emma_Behind_Podium",
-            "EmmaX.Loc == 'bg teacher'", "Emma_At_Podium",
-            "EmmaX.Loc == 'bg desk'", "Emma_At_Desk",
-            "StormX.Loc == 'bg teacher' and 'frisky' in StormX.recent_history", "Storm_Behind_Podium",
-            "StormX.Loc == 'bg teacher'", "Storm_At_Podium",
-            "StormX.Loc == 'bg desk'", "Storm_At_Desk",
+            "EmmaX.location == 'bg teacher' and 'frisky' in EmmaX.recent_history", "Emma_Behind_Podium",
+            "EmmaX.location == 'bg teacher'", "Emma_At_Podium",
+            "EmmaX.location == 'bg desk'", "Emma_At_Desk",
+            "StormX.location == 'bg teacher' and 'frisky' in StormX.recent_history", "Storm_Behind_Podium",
+            "StormX.location == 'bg teacher'", "Storm_At_Podium",
+            "StormX.location == 'bg desk'", "Storm_At_Desk",
             "True", Null())
     contains:
         "images/ClassroomFront.png"

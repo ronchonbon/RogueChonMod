@@ -5,7 +5,7 @@ label Girls_Caught_Lesing(Girl=0,Girl2=0,Girls=[]): #rkeljsv
         if Girl in all_Girls:
                 $ Girls.remove(Girl)
         while Girls and not Girl:
-                if Girls[0] not in Party and Girls[0].Loc == bg_current and "les" in Girls[0].recent_history:
+                if Girls[0] not in Party and Girls[0].location == bg_current and "les" in Girls[0].recent_history:
                         # if this girl is not already the focal girl, is at the current location but not in a party,
                         # and was queued for a les action, set her up as girl 1.
                         $ Girl = Girls[0]
@@ -16,7 +16,7 @@ label Girls_Caught_Lesing(Girl=0,Girl2=0,Girls=[]): #rkeljsv
                 $ Girls = active_Girls[:]
                 $ Girls.remove(Girl)
                 while Girls:
-                        if Girls[0] not in Party and Girls[0].Loc == bg_current and "les" in Girls[0].recent_history:
+                        if Girls[0] not in Party and Girls[0].location == bg_current and "les" in Girls[0].recent_history:
                                 # if this girl is not already the focal girl, is at the current location but not in a party,
                                 # and was queued for a les action, set her up as girl 2.
                                 $ Girl2 = Girls[0]
@@ -45,9 +45,9 @@ label Girls_Caught_Lesing(Girl=0,Girl2=0,Girls=[]): #rkeljsv
                         $ Girl.change_face("confused",2,Eyes = "surprised",Mouth = "smile")
                         $ Girl2.change_face("confused",2,Eyes = "surprised",Mouth = "smile")
                         $ primary_action = 0
-                        $ primary_action3 = 0
-                        $ primary_action4 = 0
-                        $ primary_action5 = 0
+                        $ girl_offhand_action = 0
+                        $ Partner_primary_action = 0
+                        $ Partner_offhand_action = 0
                         call set_the_scene
                         if Girl == RogueX:
                                 ch_r "Sorry about that [Girl.Petname], we were, um. . . working out."
@@ -73,16 +73,16 @@ label Girls_Caught_Lesing(Girl=0,Girl2=0,Girls=[]): #rkeljsv
                         $ Girl.change_face("kiss",1,Eyes = "closed")
                         $ Girl2.change_face("kiss",1,Eyes = "closed")
                         $ primary_action = "lesbian"
-                        $ primary_action3 = "fondle pussy"
-                        $ primary_action4 = "fondle pussy"
+                        $ girl_offhand_action = "fondle_pussy"
+                        $ Partner_primary_action = "fondle_pussy"
                         "You see [Girl.name] and [Girl2.name], eyes closed and stroking each other vigorously."
                 "Enter quietly":
                         call set_the_scene(Quiet=1)
                         $ Girl.change_face("kiss",1,Eyes = "closed")
                         $ Girl2.change_face("kiss",1,Eyes = "closed")
                         $ primary_action = "lesbian"
-                        $ primary_action3 = "fondle pussy"
-                        $ primary_action4 = "fondle pussy"
+                        $ girl_offhand_action = "fondle_pussy"
+                        $ Partner_primary_action = "fondle_pussy"
                         $ Girl.AddWord(1,"unseen","unseen")
                         $ Girl2.AddWord(1,"unseen","unseen")
                         $ Partner = Girl2
@@ -102,16 +102,16 @@ label Girls_Caught_Lesing(Girl=0,Girl2=0,Girls=[]): #rkeljsv
 label Girl_Caught_Shower(Girl=0): #rkeljsv
         if Girl not in all_Girls:
                 return
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         $ Options = []
         $ Girl.AddWord(1,"showered","showered",0,0)
-        call Remove_Girl("All")
+        call remove_girl("all")
 
         $ Girl.OutfitChange("nude")
         $ Girl.change_face("smile",1)
 
-        $ Girl.Loc = "bg_showerroom"
+        $ Girl.location = "bg_showerroom"
         $ Girl.Water = 1
         $ Girl.Wet = 2
 
@@ -126,7 +126,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                 "Knock":
                     $ line = "knock"
                 "Come back later":
-                    call Remove_Girl(Girl)
+                    call remove_girl(Girl)
                     $ Girl.OutfitChange(6) #dresses her
                     $ Girl.DrainWord("gonnafap",0,1) #removes "gonnafap" tag from daily
                     $ Girl.lust = 25
@@ -189,7 +189,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                     call set_the_scene(Dress=0)
                     $ Count = 0
                     $ primary_action = "masturbation"
-                    $ primary_action3 = "fondle pussy"
+                    $ girl_offhand_action = "fondle_pussy"
                     "You see [Girl.name] under the shower, feeling herself up."
                     call expression Girl.Tag + "_SexAct" pass ("masturbate") #call Laura_SexAct("masturbate")
                     $ bg_current = "bg_showerroom"
@@ -383,7 +383,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
         menu:
             extend ""
             "Sure, see you later then.":
-                    call Remove_Girl(Girl)
+                    call remove_girl(Girl)
             "Actually, could you stick around a minute?":
                 if ApprovalCheck(Girl, 900) or Girl == StormX:
                     if Girl == RogueX:
@@ -393,7 +393,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                     elif Girl == EmmaX:
                             ch_e "Very well, what did you need?"
                     elif Girl == LauraX:
-                            $ LauraX.Loc = "bg_showerroom"
+                            $ LauraX.location = "bg_showerroom"
                             ch_l "Huh? Ok, what's up?"
                     elif Girl == JeanX:
                             ch_j "What? Why?"
@@ -419,7 +419,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                             ch_j "I'd rather not."
                     elif Girl == JubesX:
                             ch_v "Um. . . nah. . ."
-                    call Remove_Girl(Girl)
+                    call remove_girl(Girl)
 
         if line == "leaving":
                 $ Girl.OutfitChange(6)
@@ -427,7 +427,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
         return 0
 
 label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkeljsv
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call Checkout
     call Anyline(Girl,"!!!")
     $ line = primary_action
@@ -435,8 +435,8 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
     $ Girl.OutfitChange()
     $ Girls = all_Girls[:]
     while Girls:
-            if Girls[0].Loc == bg_current:
-                    $ Girls[0].Loc = "bg_study"
+            if Girls[0].location == bg_current:
+                    $ Girls[0].location = "bg_study"
             $ TotalCaught += Girls[0].Caught
             $ Girls.remove(Girls[0])
     $ bg_current = "bg_study"
@@ -488,13 +488,13 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
     else:
             ch_x "I'm very disappointed in your behavior, the both of you."
 
-    if line == "fondle thighs" or line == "fondle breasts" or line == "fondle pussy" or line == "hotdog" or line == "hand":
+    if line == "fondle_thighs" or line == "fondle_breasts" or line == "fondle_pussy" or line == "hotdog" or line == "handjob":
         ch_x "The two of you, feeling each other up like animals!"
-    elif line == "dildo pussy" or line == "dildo anal":
+    elif line == "dildo_pussy" or line == "dildo_anal":
         ch_x "Using those. . . devices on each other, unsanitary!"
-    elif line == "lick pussy":
+    elif line == "eat_pussy":
         ch_x "Engaging in. . . cunnilingus. . . dripping everywhere. . ."
-    elif line == "blow":
+    elif line == "blowjob":
         ch_x "Right there in public with his {i}penis{/i} in your mouth. . ."
     else:
         ch_x "Having sexual relations in such a public location, it shows very poor Girl of you!"
@@ -505,7 +505,7 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
             show blackscreen onlayer black
             $ Girls = all_Girls[:]
             while Girls:
-                    if Girls[0].Loc == bg_current and (not Girls[0].Over and not Girls[0].Chest):
+                    if Girls[0].location == bg_current and (not Girls[0].Over and not Girls[0].Chest):
                             $ Girls[0].Over = "towel"
                     $ Girls.remove(Girls[0])
             hide blackscreen onlayer black
@@ -540,7 +540,7 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
                     ch_x "And [Partner.name], you were just watching this occur!"
             $ Partner.change_face("bemused",1, Eyes="side")
 
-    if EmmaX.Loc == bg_current and EmmaX not in Rules:
+    if EmmaX.location == bg_current and EmmaX not in Rules:
         if not EmmaX.Caught:
                 ch_x "Emma, you are entrusted as a teacher here, I can't have you fraternizing with the students."
                 ch_x "This is especially true in the school's public spaces!"
@@ -549,7 +549,7 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
                 call XavierFace("hypno")
                 ch_x "Just. . . running my hands along her firm little body without a care in the world. . ."
                 call XavierFace("happy")
-                if JeanX.Loc == bg_current:
+                if JeanX.location == bg_current:
                         "You glance over at [JeanX.name], she shrugs."
                 ch_x ". . ."
                 call XavierFace("shocked")
@@ -557,9 +557,9 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
         else:
                 ch_x "Emma, I don't believe this is the first time we've had this talk."
                 ch_x "I should hope it will be the last."
-    if StormX.Loc == bg_current and StormX not in Rules:
+    if StormX.location == bg_current and StormX not in Rules:
         if not StormX.Caught:
-                if EmmaX.Loc == bg_current and EmmaX not in Rules:
+                if EmmaX.location == bg_current and EmmaX not in Rules:
                         ch_x "And Ororo! You also know better than to be fraternizing with the students!"
                 else:
                         ch_x "Ororo, you are entrusted as a teacher here, I can't have you fraternizing with the students."
@@ -573,7 +573,7 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
                 call XavierFace("shocked")
                 ch_x "Do not distract me! . ."
         else:
-                if EmmaX.Loc == bg_current and EmmaX not in Rules:
+                if EmmaX.location == bg_current and EmmaX not in Rules:
                         ch_x "And Ororo! We've also been over this before."
                 else:
                         ch_x "Ororo, I don't believe this is the first time we've had this talk."
@@ -583,27 +583,27 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
     menu:
         ch_x "Well what have you to say for yourselves?"
         "Sorry sir, won't do it again.":
-                if RogueX.Loc == bg_current and RogueX.Caught < 3:
+                if RogueX.location == bg_current and RogueX.Caught < 3:
                             $ RogueX.change_stat("love", 70, 20)
                             $ RogueX.change_stat("inhibition", 50, -15)
                             $ RogueX.change_stat("love", 90, 5)
-                if KittyX.Loc == bg_current and KittyX.Caught < 3:
+                if KittyX.location == bg_current and KittyX.Caught < 3:
                             $ KittyX.change_stat("love", 70, 10)
                             $ KittyX.change_stat("inhibition", 30, -25)
                             $ KittyX.change_stat("inhibition", 50, -10)
-                if EmmaX.Loc == bg_current and EmmaX.Caught < 3:
+                if EmmaX.location == bg_current and EmmaX.Caught < 3:
                             $ EmmaX.change_stat("love", 70, 5)
                             $ EmmaX.change_stat("inhibition", 30, -15)
-                if LauraX.Loc == bg_current and LauraX.Caught < 3:
+                if LauraX.location == bg_current and LauraX.Caught < 3:
                             $ LauraX.change_stat("inhibition", 30, -20)
                             $ LauraX.change_stat("inhibition", 50, -10)
-                if JeanX.Loc == bg_current and JeanX.Caught < 3:
+                if JeanX.location == bg_current and JeanX.Caught < 3:
                             $ JeanX.change_stat("obedience", 30, -20)
                             $ JeanX.change_stat("obedience", 50, -10)
-                if StormX.Loc == bg_current and StormX.Caught < 3:
+                if StormX.location == bg_current and StormX.Caught < 3:
                             $ StormX.change_stat("love", 70, 5)
                             $ StormX.change_stat("inhibition", 30, -5)
-                if JubesX.Loc == bg_current and JubesX.Caught < 3:
+                if JubesX.location == bg_current and JubesX.Caught < 3:
                             $ JubesX.change_stat("love", 70, 10)
                             $ JubesX.change_stat("obedience", 70, 5)
                             $ JubesX.change_stat("inhibition", 30, -10)
@@ -638,29 +638,29 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
                 $ Girl.nameCheck() #checks reaction to petname
                 $ Girl.change_face("bemused")
                 $ Girl.change_stat("lust", 90, 5)
-                if RogueX.Loc == bg_current and RogueX.Caught < 5:
+                if RogueX.location == bg_current and RogueX.Caught < 5:
                         $ RogueX.change_stat("love", 70, 20)
                         $ RogueX.change_stat("love", 90, 10)
-                if KittyX.Loc == bg_current and KittyX.Caught < 5:
+                if KittyX.location == bg_current and KittyX.Caught < 5:
                         $ KittyX.change_stat("inhibition", 90, 10)
                         $ KittyX.change_stat("love", 90, 10)
-                if EmmaX.Loc == bg_current and EmmaX.Caught < 5:
+                if EmmaX.location == bg_current and EmmaX.Caught < 5:
                         $ EmmaX.change_stat("inhibition", 90, 10)
                         $ EmmaX.change_stat("love", 90, 10)
-                if LauraX.Loc == bg_current and LauraX.Caught < 5:
+                if LauraX.location == bg_current and LauraX.Caught < 5:
                         $ LauraX.change_stat("inhibition", 90, 10)
                         $ LauraX.change_stat("obedience", 90, 5)
                         $ LauraX.change_stat("love", 90, 5)
-                if JeanX.Loc == bg_current and JeanX.Caught < 5:
+                if JeanX.location == bg_current and JeanX.Caught < 5:
                         $ JeanX.change_stat("inhibition", 200, 10)
                         $ JeanX.change_stat("obedience", 50, 5)
                         $ JeanX.change_stat("obedience", 90, 5)
                         $ JeanX.change_stat("love", 90, 5)
-                if StormX.Loc == bg_current and StormX.Caught < 5:
+                if StormX.location == bg_current and StormX.Caught < 5:
                         $ StormX.change_stat("inhibition", 90, 15)
                         $ StormX.change_stat("obedience", 50, 5)
                         $ StormX.change_stat("love", 90, 5)
-                if JubesX.Loc == bg_current and JubesX.Caught < 5:
+                if JubesX.location == bg_current and JubesX.Caught < 5:
                         $ JubesX.change_stat("inhibition", 90, 5)
                         $ JubesX.change_stat("obedience", 80, 5)
                         $ JubesX.change_stat("love", 90, 10)
@@ -673,30 +673,30 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
                 else:
                     ch_x "I'm halving your daily stipend for [Count] days."
 
-                if RogueX.Loc == bg_current and RogueX.Caught < 3:
+                if RogueX.location == bg_current and RogueX.Caught < 3:
                         $ RogueX.change_stat("obedience", 50, 20)
                         $ RogueX.change_stat("obedience", 90, 20)
                         $ RogueX.change_stat("inhibition", 30, -20)
                         $ RogueX.change_stat("inhibition", 50, -10)
-                if KittyX.Loc == bg_current and KittyX.Caught < 3:
+                if KittyX.location == bg_current and KittyX.Caught < 3:
                         $ KittyX.change_stat("obedience", 50, 20)
                         $ KittyX.change_stat("obedience", 90, 20)
                         $ KittyX.change_stat("inhibition", 30, -20)
-                if EmmaX.Loc == bg_current and EmmaX.Caught < 3:
+                if EmmaX.location == bg_current and EmmaX.Caught < 3:
                         $ EmmaX.change_stat("obedience", 50, 20)
                         $ EmmaX.change_stat("obedience", 90, 20)
                         $ EmmaX.change_stat("inhibition", 30, -20)
-                if LauraX.Loc == bg_current and LauraX.Caught < 3:
+                if LauraX.location == bg_current and LauraX.Caught < 3:
                         $ LauraX.change_stat("obedience", 50, 20)
                         $ LauraX.change_stat("obedience", 90, 20)
                         $ LauraX.change_stat("inhibition", 30, -20)
-                if JeanX.Loc == bg_current and JeanX.Caught < 3:
+                if JeanX.location == bg_current and JeanX.Caught < 3:
                         $ JeanX.change_stat("obedience", 50, 20)
                         $ JeanX.change_stat("obedience", 90, 20)
-                if StormX.Loc == bg_current and StormX.Caught < 3:
+                if StormX.location == bg_current and StormX.Caught < 3:
                         $ StormX.change_stat("obedience", 50, 20)
                         $ StormX.change_stat("inhibition", 30, -10)
-                if JubesX.Loc == bg_current and JubesX.Caught < 3:
+                if JubesX.location == bg_current and JubesX.Caught < 3:
                         $ JubesX.change_stat("obedience", 70, 10)
                         $ JubesX.change_stat("inhibition", 30, -10)
 
@@ -723,30 +723,30 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
         "You can suck it, old man.":
                 $ Girl.change_face("surprised")
                 $ Girl.change_stat("lust", 90, 10)
-                if RogueX.Loc == bg_current and RogueX.Caught < 3:
+                if RogueX.location == bg_current and RogueX.Caught < 3:
                         $ RogueX.change_stat("obedience", 50, 20)
                         $ RogueX.change_stat("obedience", 90, 40)
-                if KittyX.Loc == bg_current and KittyX.Caught < 3:
+                if KittyX.location == bg_current and KittyX.Caught < 3:
                         $ KittyX.change_stat("obedience", 50, 25)
                         $ KittyX.change_stat("obedience", 90, 40)
-                if EmmaX.Loc == bg_current and EmmaX.Caught < 3:
+                if EmmaX.location == bg_current and EmmaX.Caught < 3:
                         $ EmmaX.change_stat("love", 90, 5)
                         $ EmmaX.change_stat("obedience", 50, 20)
                         $ EmmaX.change_stat("obedience", 90, 30)
-                if LauraX.Loc == bg_current and LauraX.Caught < 3:
+                if LauraX.location == bg_current and LauraX.Caught < 3:
                         $ LauraX.change_stat("love", 90, 5)
                         $ LauraX.change_stat("obedience", 50, 25)
                         $ LauraX.change_stat("obedience", 90, 30)
-                if JeanX.Loc == bg_current and JeanX.Caught < 3:
+                if JeanX.location == bg_current and JeanX.Caught < 3:
                         $ JeanX.change_stat("love", 50, 5)
                         $ JeanX.change_stat("love", 90, 10)
                         $ JeanX.change_stat("obedience", 50, 25)
                         $ JeanX.change_stat("obedience", 90, 30)
-                if StormX.Loc == bg_current and StormX.Caught < 3:
+                if StormX.location == bg_current and StormX.Caught < 3:
                         $ StormX.change_stat("love", 90, -5)
                         $ StormX.change_stat("obedience", 50, 20)
                         $ StormX.change_stat("obedience", 90, 30)
-                if JubesX.Loc == bg_current and JubesX.Caught < 3:
+                if JubesX.location == bg_current and JubesX.Caught < 3:
                         $ JubesX.change_stat("love", 80, 10)
                         $ JubesX.change_stat("obedience", 50, 25)
                         $ JubesX.change_stat("obedience", 90, 30)
@@ -759,34 +759,34 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
                 else:
                     ch_x "I'm halving your daily stipend for [Count] days!"
 
-                if RogueX.Loc == bg_current and RogueX.Caught < 3:
+                if RogueX.location == bg_current and RogueX.Caught < 3:
                         if RogueX.inhibition > 500:
                             $ RogueX.change_stat("inhibition", 90, 15)
                         $ RogueX.change_stat("inhibition", 30, -20)
                         $ RogueX.change_stat("inhibition", 50, -10)
-                if KittyX.Loc == bg_current and KittyX.Caught < 3:
+                if KittyX.location == bg_current and KittyX.Caught < 3:
                         if KittyX.inhibition > 500:
                             $ KittyX.change_stat("inhibition", 90, 15)
                         $ KittyX.change_stat("inhibition", 30, -20)
                         $ KittyX.change_stat("inhibition", 50, -10)
-                if EmmaX.Loc == bg_current and EmmaX.Caught < 3:
+                if EmmaX.location == bg_current and EmmaX.Caught < 3:
                         if EmmaX.inhibition > 500:
                             $ EmmaX.change_stat("inhibition", 90, 15)
                         $ EmmaX.change_stat("inhibition", 30, -20)
                         $ EmmaX.change_stat("inhibition", 50, -10)
-                if LauraX.Loc == bg_current and LauraX.Caught < 3:
+                if LauraX.location == bg_current and LauraX.Caught < 3:
                         if LauraX.inhibition > 500:
                             $ LauraX.change_stat("inhibition", 90, 15)
                         $ LauraX.change_stat("inhibition", 30, -15)
                         $ LauraX.change_stat("inhibition", 50, -10)
-                if JeanX.Loc == bg_current and JeanX.Caught < 3:
+                if JeanX.location == bg_current and JeanX.Caught < 3:
                         $ JeanX.change_stat("inhibition", 90, 15)
-                if StormX.Loc == bg_current and StormX.Caught < 3:
+                if StormX.location == bg_current and StormX.Caught < 3:
                         if StormX.inhibition > 500:
                             $ StormX.change_stat("inhibition", 90, 5)
                         $ StormX.change_stat("inhibition", 30, -10)
                         $ StormX.change_stat("inhibition", 50, -5)
-                if JubesX.Loc == bg_current and JubesX.Caught < 3:
+                if JubesX.location == bg_current and JubesX.Caught < 3:
                         if JubesX.inhibition > 500:
                             $ JubesX.change_stat("inhibition", 90, 15)
                         $ JubesX.change_stat("inhibition", 30, -15)
@@ -978,30 +978,30 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
             else:
                 ch_x "I'm halving your daily stipend for [Count] days."
 
-                if RogueX.Loc == bg_current and RogueX.Caught < 3:
+                if RogueX.location == bg_current and RogueX.Caught < 3:
                         $ RogueX.change_stat("obedience", 50, 10)
                         $ RogueX.change_stat("obedience", 90, 10)
                         $ RogueX.change_stat("inhibition", 30, -10)
                         $ RogueX.change_stat("inhibition", 50, -5)
-                if KittyX.Loc == bg_current and KittyX.Caught < 3:
+                if KittyX.location == bg_current and KittyX.Caught < 3:
                         $ KittyX.change_stat("obedience", 50, 10)
                         $ KittyX.change_stat("obedience", 90, 10)
                         $ KittyX.change_stat("inhibition", 30, -10)
                         $ KittyX.change_stat("inhibition", 50, -5)
-                if EmmaX.Loc == bg_current and EmmaX.Caught < 3:
+                if EmmaX.location == bg_current and EmmaX.Caught < 3:
                         $ EmmaX.change_stat("obedience", 50, 10)
                         $ EmmaX.change_stat("inhibition", 50, -5)
-                if LauraX.Loc == bg_current and LauraX.Caught < 3:
+                if LauraX.location == bg_current and LauraX.Caught < 3:
                         $ LauraX.change_stat("obedience", 50, 10)
                         $ LauraX.change_stat("obedience", 90, 10)
                         $ LauraX.change_stat("inhibition", 30, -10)
                         $ LauraX.change_stat("inhibition", 50, -5)
-                if JeanX.Loc == bg_current and JeanX.Caught < 3:
+                if JeanX.location == bg_current and JeanX.Caught < 3:
                         $ JeanX.change_stat("obedience", 50, -10)
-                if StormX.Loc == bg_current and StormX.Caught < 3:
+                if StormX.location == bg_current and StormX.Caught < 3:
                         $ StormX.change_stat("obedience", 50, 10)
                         $ StormX.change_stat("inhibition", 50, -5)
-                if JubesX.Loc == bg_current and JubesX.Caught < 3:
+                if JubesX.location == bg_current and JubesX.Caught < 3:
                         $ JubesX.change_stat("obedience", 50, 5)
                         $ JubesX.change_stat("obedience", 90, 5)
                         $ JubesX.change_stat("inhibition", 30, -8)
@@ -1057,14 +1057,14 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
             $ JeanX.Traits.append("nowhammy")
             $ Girl.change_face("normal")
 
-    if EmmaX.Loc == bg_current and EmmaX not in Rules:
+    if EmmaX.location == bg_current and EmmaX not in Rules:
             ch_x "Emma, I'd like you to stay after for a brief discussion about \"boundaries\". . ."
             if EmmaX.Caught:
                     $ EmmaX.change_stat("love", 90, -5)
                     $ Girl.change_face("angry",Eyes="closed")
                     ch_e "Not again. . ."
-    if StormX.Loc == bg_current and StormX not in Rules:
-            if EmmaX.Loc == bg_current and EmmaX not in Rules:
+    if StormX.location == bg_current and StormX not in Rules:
+            if EmmaX.location == bg_current and EmmaX not in Rules:
                     ch_x "And Ororo, I'm afraid we will have to have words as well. . ."
             else:
                     ch_x "Ororo, I'd like you to stay after for a brief discussion about \"boundaries\". . ."
@@ -1081,7 +1081,7 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
                     if StormX.Caught > 3:
                         "I bet there's something in that righthand drawer. . ."
 
-    call Remove_Girl("All")
+    call remove_girl("all")
     "You return to your room"
     hide Professor
     $ bg_current = "bg_player"
@@ -1096,7 +1096,7 @@ label Xavier_Plan(GirlX=0): #rkeljsv
             jump Misplaced
 
     #$ GirlX = GirlCheck(GirlX)
-    call Shift_Focus(GirlX)
+    call shift_focus(GirlX)
     $ GirlX.change_face("sly")
     "As you say this, a sly grin crosses [GirlX.name]'s face."
     "You quickly approach Xavier and place your hands on his head."
@@ -1131,7 +1131,7 @@ label Xavier_Plan(GirlX=0): #rkeljsv
                 else:
                         $ Partner.change_face("surprised")
                         "[Partner.name] looks a bit uncomfortable with what's happening and takes off."
-                        call Remove_Girl(Partner)
+                        call remove_girl(Partner)
 
             else:
                         $ Partner.change_face("sly")
@@ -1286,7 +1286,7 @@ label Xavier_Plan(GirlX=0): #rkeljsv
                     ch_x "I could remove her mind-wiping ban. . ."
                     $ JeanX.Traits.remove("nowhammy")
                     $ JeanX.Traits.append("whammy")
-                    if JeanX.Loc == bg_current:
+                    if JeanX.location == bg_current:
                             $ JeanX.change_stat("obedience", 50, 5)
                             $ JeanX.change_stat("love", 50, 5)
                             $ JeanX.change_stat("love", 70, 5)
@@ -1297,7 +1297,7 @@ label Xavier_Plan(GirlX=0): #rkeljsv
                     ch_x "I could reinstate her mind-wiping ban. . ."
                     $ JeanX.Traits.append("nowhammy")
                     $ JeanX.Traits.remove("whammy")
-                    if JeanX.Loc == bg_current:
+                    if JeanX.location == bg_current:
                             $ JeanX.change_stat("obedience", 50, 5)
                             $ JeanX.change_stat("obedience", 80, 5)
                             $ JeanX.change_stat("love", 70, -5)
@@ -1360,7 +1360,7 @@ label Xavier_Plan(GirlX=0): #rkeljsv
                             #if you picked someone. . .
                             ch_x "Very well, I suppose I can keep her occupied with various tasks around the campus. . ."
                             ch_x "She should be out of your hair for the time being."
-                            if line.Loc == bg_current:
+                            if line.location == bg_current:
                                     #if she's in the room
                                     $ line.change_stat("love", 90, -10)
                                     $ line.change_stat("obedience", 50, 3)
@@ -1612,7 +1612,7 @@ label Xavier_Plan(GirlX=0): #rkeljsv
             $ GirlX.ArmPose = 0
 
     $ Player.daily_history.append("Xavier")
-    call Remove_Girl("All")
+    call remove_girl("all")
     hide Professor
     $ bg_current = "bg_player"
     call set_the_scene
@@ -1622,11 +1622,11 @@ label Xavier_Plan(GirlX=0): #rkeljsv
 label Girl_Caught_Changing(Girl=0): #rkeljsv
         if Girl not in all_Girls:
                 return
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         $ D20 = renpy.random.randint(1, 20)
 
         $ Girl.change_face("surprised", 1,Mouth="kiss")
-        call Remove_Girl("All")
+        call remove_girl("all")
 
         if D20 > 17:
                 #She's naked
@@ -1651,7 +1651,7 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
                         #She's wearing pants/skirt but no shirt
                         $ Girl.Over = 0 #Over
         #else: #fully dressed
-        $ Girl.Loc = bg_current
+        $ Girl.location = bg_current
         call set_the_scene(Dress=0)
         if D20 > 17:
                 #She's naked
@@ -1931,8 +1931,8 @@ label Girl_Caught_Mastubating(Girl=0): #rkeljsv
         if Girl not in all_Girls:
             return
         $ Girl.DrainWord("gonnafap")
-        call Remove_Girl("All")
-        $ Girl.Loc = bg_current
+        call remove_girl("all")
+        $ Girl.location = bg_current
         "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
         menu:
             extend ""
@@ -1942,7 +1942,7 @@ label Girl_Caught_Mastubating(Girl=0): #rkeljsv
                 call set_the_scene
                 $ Girl.change_face("kiss",1,Eyes = "closed")
                 $ primary_action = "masturbation"
-                $ primary_action3 = "fondle pussy"
+                $ girl_offhand_action = "fondle_pussy"
                 "You see [Girl.name], eyes closed and stroking herself vigorously."
                 menu:
                     extend ""
@@ -1968,7 +1968,7 @@ label Girl_Caught_Mastubating(Girl=0): #rkeljsv
                 "After several seconds and some more shuffling of clothing, [Girl.name] comes to the door."
                 $ Girl.change_face("confused",1,Eyes = "surprised",Mouth = "smile")
                 $ primary_action = 0
-                $ primary_action3 = 0
+                $ girl_offhand_action = 0
                 call set_the_scene
                 if Girl == RogueX:
                         ch_r "Sorry about that [RogueX.Petname], I was. . . working out."
@@ -1986,12 +1986,12 @@ label Girl_Caught_Mastubating(Girl=0): #rkeljsv
                         ch_v "Oh, hey, [Girl.Petname]. . . I was. . ."
                 $ temp_modifier += 10
         elif line == "enter":
-                call Shift_Focus(Girl)
+                call shift_focus(Girl)
                 show blackscreen onlayer black
                 $ Girl.Upskirt = 1
                 $ Girl.PantiesDown = 1
-                $ Girl.Loc = bg_current
-                #call CleartheRoom(Girl,1,1)
+                $ Girl.location = bg_current
+                #call clear_the_room(Girl,1,1)
                 call set_the_scene
                 $ Girl.change_face("sexy")
                 $ Girl.Eyes = "closed"

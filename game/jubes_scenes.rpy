@@ -6,8 +6,8 @@ label Jubes_Meet:
         $ JubesX.OutfitDay = "casual2"
         $ JubesX.Outfit = "casual2"
         $ JubesX.OutfitChange("casual2")
-        call CleartheRoom("All",0,1)
-        $ JubesX.Loc = bg_current
+        call clear_the_room("all",0,1)
+        $ JubesX.location = bg_current
         $ JubesX.love = 500
         $ JubesX.obedience = 50
         $ JubesX.inhibition = 50
@@ -37,7 +37,7 @@ label Jubes_Meet:
         $ JubesX.change_stat("lust", 80, 5)
 
         "Wait. . . no it's not. . ."
-        call Shift_Focus(JubesX)
+        call shift_focus(JubesX)
 
         $ JubesX.ArmPose = 2
         show Jubes_Sprite at sprite_location(StageRight) zorder JubesX.Layer:
@@ -528,16 +528,16 @@ label Jubes_Meet:
         $ JubesX.AddWord(1,0,0,0,"met") #adds "word" tag to History
         $ active_Girls.append(JubesX) if JubesX not in active_Girls else active_Girls
         hide Jubes_Sprite with easeoutright
-        call Remove_Girl(JubesX)
+        call remove_girl(JubesX)
         "[JubesX.name] leaves the room, you might as well get some sleep. . ."
         return
 
 label Jubes_Sunshine:
         #called from EventCalls if "sunshine" not in JubesX.History and "traveling" in Player.recent_history and bg_current in ("bg_classroom","bg_campus"):
-        call Shift_Focus(JubesX)
+        call shift_focus(JubesX)
         $ bg_current = "bg_campus"
-        $ JubesX.Loc = "bg_campus"
-        call CleartheRoom(JubesX,0,1)
+        $ JubesX.location = "bg_campus"
+        call clear_the_room(JubesX,0,1)
         call AltClothes(JubesX,1)
         call set_the_scene
         $ JubesX.change_face("smile")
@@ -629,7 +629,7 @@ label Jubes_Sunshine:
         ch_v "Anyway, I just wanted to say \"thank you,\" this is great!"
         $ JubesX.AddWord(1,0,0,0,"sunshine") #adds "word" tag to History
         hide Jubes_Sprite with easeoutright
-        call Remove_Girl(JubesX)
+        call remove_girl(JubesX)
         "[JubesX.name] dashes off, and you continue on your way. . ."
         return
 
@@ -715,12 +715,12 @@ label Jubes_Sunshock:
                     ch_v "Thanks for understanding. . ."
                     return 1
 
-            "I could always. . . come get you?" if bg_current != JubesX.Loc and JubesX not in Party:
+            "I could always. . . come get you?" if bg_current != JubesX.location and JubesX not in Party:
                     #if she's not local. . .
                     ch_v "Oh, that could be nice. I'll see you then."
                     return 1
 
-            "I could always. . . top you off?" if bg_current == JubesX.Loc or JubesX in Party:
+            "I could always. . . top you off?" if bg_current == JubesX.location or JubesX in Party:
                     # only works if she is local to you
                     $ JubesX.change_stat("love", 80, 1)
                     $ JubesX.change_face("confused",1)
@@ -778,7 +778,7 @@ label Jubes_Sunshock:
                                             call Top_Off(Girl,2)
                                             $ temp_modifier = stored_count
                                             call expression Girl.Tag + "_Fondle_Breasts"
-                                            if "fondle breasts" in Girl.recent_history:
+                                            if "fondle_breasts" in Girl.recent_history:
                                                     $ Girl.change_stat("obedience", 80, 10)
                                                     $ Girl.change_stat("inhibition", 80, 10)
                                                     ch_v "So, fair trade?"
@@ -790,7 +790,7 @@ label Jubes_Sunshock:
                                             if Girl.PantsNum() > 6 or Girl.HoseNum() >= 5:
                                                     ch_v "Well, we'll see. . ."
                                             call expression Girl.Tag + "_Fondle_Thighs"
-                                            if "fondle thighs" in Girl.recent_history:
+                                            if "fondle_thighs" in Girl.recent_history:
                                                     $ Girl.change_stat("obedience", 50, 5)
                                                     $ Girl.change_stat("inhibition", 50, 5)
                                                     ch_v "So, fair trade?"
@@ -802,7 +802,7 @@ label Jubes_Sunshock:
                                             call Bottoms_Off(Girl,0)
                                             $ temp_modifier = stored_count
                                             call expression Girl.Tag + "_Fondle_Pussy"
-                                            if "fondle pussy" in Girl.recent_history:
+                                            if "fondle_pussy" in Girl.recent_history:
                                                     $ Girl.change_stat("obedience", 50, 10)
                                                     $ Girl.change_stat("obedience", 80, 5)
                                                     $ Girl.change_stat("inhibition", 50, 10)
@@ -890,13 +890,13 @@ label Jubes_Sunshock:
 label Jubes_Mall(Girls=[]):
         #this is called to introduce the mall element
 
-        call Shift_Focus(JubesX)
-        if JubesX.Loc == bg_current:
+        call shift_focus(JubesX)
+        if JubesX.location == bg_current:
                 "[JubesX.name] suddently freezes up, then turns to you."
         else:
-                $ JubesX.Loc = bg_current
+                $ JubesX.location = bg_current
                 "[JubesX.name] rushes into the room."
-        call CleartheRoom(JubesX,0,0) #she asks
+        call clear_the_room(JubesX,0,0) #she asks
         call set_the_scene
         $ Player.AddWord(1,0,0,0,"mall") #history
 
@@ -1013,8 +1013,8 @@ label Jubes_Mall(Girls=[]):
         "You arrive at what appears to be a mid-sized suburban shopping complex, often referred to as a \"mall.\""
 
         $ bg_current = "bg_mall"
-        $ JubesX.Loc = bg_current
-        call CleartheRoom(JubesX,0,1) #it's silent
+        $ JubesX.location = bg_current
+        call clear_the_room(JubesX,0,1) #it's silent
         call set_the_scene
 
         $ JubesX.change_face("smile")
@@ -1126,8 +1126,8 @@ label Jubes_Mall(Girls=[]):
 
         "You both head back to campus."
         $ bg_current = "bg_campus"
-        $ JubesX.Loc = bg_current
-        call CleartheRoom(JubesX,0,1) #it's silent
+        $ JubesX.location = bg_current
+        call clear_the_room(JubesX,0,1) #it's silent
         call set_the_scene
         ch_v "Anyway, it was nice to hang out with you."
         ch_v "I hope we can do it again some time!"
@@ -1143,16 +1143,16 @@ label Jubes_Cleanhouse:
                         $ JubesX.Event[5] = 2
                         return
 
-        if JubesX.Loc == bg_current or JubesX in Party:
+        if JubesX.location == bg_current or JubesX in Party:
                 "[JubesX.name] glances over at you with a scowl."
         else:
                 "[JubesX.name] turns a corner and notices you."
         if bg_current != "bg_jubes" and bg_current != "bg_player":
                 "With little word, she moves behind you and pushes you towards her room."
                 $ bg_current = "bg_jubes"
-        $ JubesX.Loc = bg_current
+        $ JubesX.location = bg_current
         call set_the_scene
-        call CleartheRoom(JubesX)
+        call clear_the_room(JubesX)
         call set_the_scene
         call Taboo_Level
         $ JubesX.daily_history.append("relationship")
@@ -1215,7 +1215,7 @@ label Jubes_Cleanhouse:
                 $ JubesX.change_stat("inhibition", 80, 10)
                 $ JubesX.change_face("angry",1,Eyes="side")
                 ch_v "Ok, fine, whatever. I'm in too."
-                if "Historia" not in Player.Traits:
+                if not simulation:
                         $ Player.Harem.append(JubesX)
                         if "JubesYes" in Player.Traits:
                                 $ Player.Traits.remove("JubesYes")
@@ -1241,16 +1241,16 @@ label Jubes_love(Shipping=[],Shipshape=0,Topics=[],Girls=[]):
             $ Girls.remove(Girls[0])
         $ Shipshape = len(Shipping)
 
-        if JubesX.Loc == bg_current or JubesX in Party:
+        if JubesX.location == bg_current or JubesX in Party:
                 "[JubesX.name] glances over at you with a concerned look."
         else:
                 "[JubesX.name] turns a corner and notices you."
         if bg_current != "bg_jubes" and bg_current != "bg_player":
                 "With little word, she moves behind you and pushes you towards her room."
                 $ bg_current = "bg_jubes"
-        $ JubesX.Loc = bg_current
+        $ JubesX.location = bg_current
         call set_the_scene
-        call CleartheRoom(JubesX)
+        call clear_the_room(JubesX)
         call set_the_scene
         call Taboo_Level
         $ JubesX.daily_history.append("relationship")
@@ -1520,8 +1520,8 @@ label Jubes_love(Shipping=[],Shipshape=0,Topics=[],Girls=[]):
                 $ JubesX.recent_history.append("angry")
                 $ JubesX.daily_history.append("angry")
                 hide Jubes_Sprite with easeoutright
-                call Remove_Girl(JubesX)
-                $ JubesX.Loc = "hold" #puts her off the board for the day
+                call remove_girl(JubesX)
+                $ JubesX.location = "hold" #puts her off the board for the day
                 return
 
         $ JubesX.change_face("bemused",0,Eyes="down")
@@ -1646,8 +1646,8 @@ label Jubes_love_End:
         if "lover" not in JubesX.Petnames:
                 $ JubesX.Event[6] = 20
                 hide Jubes_Sprite with easeoutright
-                call Remove_Girl(JubesX)
-                $ JubesX.Loc = "hold" #puts her off the board for the day
+                call remove_girl(JubesX)
+                $ JubesX.location = "hold" #puts her off the board for the day
                 return
 
         $ JubesX.Event[6] = 5
@@ -1765,14 +1765,14 @@ label Jubes_love_Redux:
 
 label Jubes_Sub:
     $ JubesX.DrainWord("asked meet")
-    call Shift_Focus(JubesX)
-    if JubesX.Loc != bg_current and JubesX not in Party:
+    call shift_focus(JubesX)
+    if JubesX.location != bg_current and JubesX not in Party:
         "Suddenly, [JubesX.name] shows up and says she needs to talk to you."
 
-    $ JubesX.Loc = bg_current
+    $ JubesX.location = bg_current
     call set_the_scene(0)
     call Display_Girl(JubesX)
-    call CleartheRoom(JubesX)
+    call clear_the_room(JubesX)
     call set_the_scene
     call Taboo_Level
     $ JubesX.daily_history.append("relationship")
@@ -2016,16 +2016,16 @@ label Jubes_Sub:
             $ JubesX.Petnames.append("sir")
             #put in stuff that happens if this succeeds
     elif line == "rude":
-            call Remove_Girl(JubesX)
-            if "Historia" not in Player.Traits:
+            call remove_girl(JubesX)
+            if not simulation:
                     $ renpy.pop_call()
             "[JubesX.name] knocks her way past you and storms off."
     elif line == "embarrassed":
             $ JubesX.change_face("sadside", 2)
             ch_v "Huh, ok, if you're not interested. . .."
             hide Jubes_Sprite with easeoutright
-            call Remove_Girl(JubesX)
-            if "Historia" not in Player.Traits:
+            call remove_girl(JubesX)
+            if not simulation:
                     $ renpy.pop_call()
             "[JubesX.name] heads out of the room."
     return
@@ -2109,9 +2109,9 @@ label Jubes_Sub_Asked:
     if line == "rude":
             #If line hasn't been set to "rude" by something above, then it skips right past this
             hide Jubes_Sprite with easeoutright
-            call Remove_Girl(JubesX)
+            call remove_girl(JubesX)
             $ JubesX.recent_history.append("angry")
-            if "Historia" not in Player.Traits:
+            if not simulation:
                     $ renpy.pop_call()
             "[JubesX.name] checks you as she stomps out of the room."
     elif "sir" in JubesX.Petnames:
@@ -2132,14 +2132,14 @@ label Jubes_Sub_Asked:
 
 label Jubes_Master:
     $ JubesX.DrainWord("asked meet")
-    call Shift_Focus(JubesX)
-    if JubesX.Loc != bg_current and JubesX not in Party:
+    call shift_focus(JubesX)
+    if JubesX.location != bg_current and JubesX not in Party:
         "Suddenly, [JubesX.name] shows up and says she needs to talk to you."
 
-    $ JubesX.Loc = bg_current
+    $ JubesX.location = bg_current
     call set_the_scene(0)
     call Display_Girl(JubesX)
-    call CleartheRoom(JubesX)
+    call clear_the_room(JubesX)
     call set_the_scene
     $ JubesX.daily_history.append("relationship")
     call Taboo_Level
@@ -2289,16 +2289,16 @@ label Jubes_Master:
     if line == "rude":
             $ JubesX.recent_history.append("angry")
             hide Jubes_Sprite with easeoutright
-            call Remove_Girl(JubesX)
-            if "Historia" not in Player.Traits:
+            call remove_girl(JubesX)
+            if not simulation:
                     $ renpy.pop_call()
             "[JubesX.name] stomps out of the room."
     elif line == "embarrassed":
             ch_v "Ok, fine then."
             ch_v "And here I was, about to \"elevate your clearance.\""
             hide Jubes_Sprite with easeoutright
-            call Remove_Girl(JubesX)
-            if "Historia" not in Player.Traits:
+            call remove_girl(JubesX)
+            if not simulation:
                     $ renpy.pop_call()
             "[JubesX.name] brushes past you on her way out."
     elif line == "fail":
@@ -2314,7 +2314,7 @@ label Jubes_Master:
 label Jubes_Sexfriend:   #Jubes_Update
         #set this to occur after class
         $ JubesX.lust = 70
-        $ JubesX.Loc = bg_current
+        $ JubesX.location = bg_current
         $ JubesX.DrainWord("asked meet")
         call set_the_scene
         $ JubesX.daily_history.append("relationship")
@@ -2425,8 +2425,8 @@ label Jubes_Sexfriend:   #Jubes_Update
                                         $ bg_current = "bg_jubes"
                                 else:
                                         $ bg_current = "bg_player"
-                                $ JubesX.Loc = bg_current
-                                call CleartheRoom(JubesX)
+                                $ JubesX.location = bg_current
+                                call clear_the_room(JubesX)
                                 call set_the_scene
                                 $ Taboo = 0
                                 $ JubesX.Taboo = 0
@@ -2451,8 +2451,8 @@ label Jubes_Fuckbuddy:
         # Conditions, in your room, jubes not there.
         "You hear a knock on the door, and go to answer it."
         #change jubes's outfit to default
-        $ JubesX.Loc = bg_current
-        call Shift_Focus(JubesX)
+        $ JubesX.location = bg_current
+        call shift_focus(JubesX)
         call set_the_scene(0)
         $ JubesX.Outfit = "casual1"
         $ JubesX.OutfitDay = "casual1"
@@ -2460,7 +2460,7 @@ label Jubes_Fuckbuddy:
         call Display_Girl(JubesX)
         call Taboo_Level
         $ primary_action = "masturbation"
-        $ primary_action3 = "fondle pussy"
+        $ primary_action3 = "fondle_pussy"
         $ JubesX.change_face("sly",2,Mouth="lipbite")
         "[JubesX.name] is standing in the doorway, with her hand down her pants."
         "You can tell she's been masturbating furiously, her scent is overpowering."

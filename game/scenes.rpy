@@ -49,9 +49,9 @@ label Poly_Start(Newbie=0,Round2=0,Asked=0): #rkeljsv
 
 
         $ Party = [Player.Harem[0]]
-        call Shift_Focus(Player.Harem[0])
+        call shift_focus(Player.Harem[0])
         call set_the_scene
-        call CleartheRoom(Player.Harem[0])
+        call clear_the_room(Player.Harem[0])
 
 
         if Round2:
@@ -557,7 +557,7 @@ label Poly_Start(Newbie=0,Round2=0,Asked=0): #rkeljsv
                             $ Party[0].Traits.append("ex")
                             $ Party[0].Break[0] = 5 + Party[0].Break[1] + Party[0].Cheated
                             $ Player.Harem.remove(Party[0])
-                            call Remove_Girl(Party[0])
+                            call remove_girl(Party[0])
         #end "she said no but you insisted"
 
         $ Party = []
@@ -586,7 +586,7 @@ label Harem_Start(Newbie=0,Round2=0): #rkeljsv
         # Adds first two harem members to party, removed everyone else from the room.
         call Present_Check
         $ Party = [Player.Harem[0],Player.Harem[1]]
-        call Shift_Focus(Player.Harem[0])
+        call shift_focus(Player.Harem[0])
         call set_the_scene
 
         $ Party[0].change_face("bemused")
@@ -1221,7 +1221,7 @@ label Harem_Start(Newbie=0,Round2=0): #rkeljsv
                                 $ Party[Count].Break[0] = 5 + Party[Count].Break[1] + Party[Count].Cheated
 
                                 $ Player.Harem.remove(Party[Count])
-                                call Remove_Girl(Party[Count])
+                                call remove_girl(Party[Count])
                         $ Count += 1
             #end "she said no but you insisted"
 
@@ -1269,7 +1269,7 @@ label CheatCheck(Girls=[],Girls2=[]):
         $ Girls = all_Girls[:]
         $ renpy.random.shuffle(Girls)
         while Girls:
-                if "locked" in Player.Traits and Girls[0].Loc != bg_current:
+                if door_locked and Girls[0].location != bg_current:
                         #exits if the door is locked and she is not in the room with you
                         pass
                 else:
@@ -1353,7 +1353,7 @@ label AddictCheck(Girls=[]):
                             call ReturnToRoom
                             return
         while Girls:
-                if "locked" in Player.Traits and Girls[0].Loc != bg_current:
+                if door_locked and Girls[0].location != bg_current:
                         #if the door's locked and she's not in the room, skip it
                         pass
                 elif "asked fix" in Player.daily_history and "asked meet" not in Girls[0].daily_history:
@@ -1480,19 +1480,19 @@ label Cheated(Girl=0,Other=0, Resolution = 0, B = 0): #rkeljsv
         # Called by EventCalls->CheatCheck if you got caught cheating
         #Resolution is Resolution count, you want this over 2 at least. B is the bonus modifier
         $ Girl.AddWord(1,0,"relationship",0,0)
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
 
         $ Girl.change_face("angry")
-        if Girl.Loc != bg_current and Girl not in Party:
+        if Girl.location != bg_current and Girl not in Party:
                 "Suddenly, [Girl.name] shows up and says she needs to talk to you."
-        $ Girl.Loc = bg_current
+        $ Girl.location = bg_current
 
         $ Girl.DrainWord("asked meet",0,1) #removes "asked meet" from daily
         if "meet girl" in Player.daily_history:
                 $ Player.daily_history.remove("meet girl")
 
         call set_the_scene
-        call CleartheRoom(Girl)
+        call clear_the_room(Girl)
         call Taboo_Level(1)
 
         if Girl.GirlLikeCheck(Other) >= 900:
@@ -2166,7 +2166,7 @@ label Cheated(Girl=0,Other=0, Resolution = 0, B = 0): #rkeljsv
                 $ bg_current = "bg_player"
                 jump Misplaced
         else:
-                call Remove_Girl(Girl)
+                call remove_girl(Girl)
         return
 
 label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
@@ -2452,7 +2452,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                             if Girl == RogueX:
                                     ch_r "I guess if it means so much to you. . ."
                             elif Girl == KittyX:
-                                    ch_k "I guess I could do \"no fap no-\" what month even is this? . ."
+                                    ch_k "I guess I could do \"no_fap no-\" what month even is this? . ."
                             elif Girl == EmmaX:
                                     ch_e "Well, aren't you being dominant. . ."
                                     ch_e "I suppose I could restrain myself. . ."
@@ -2681,7 +2681,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
         return
 
 label girl_key(Girl):
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call set_the_scene
 
     $ Girl.change_face("bemused")
@@ -2725,13 +2725,13 @@ label girl_key(Girl):
     return
 
 label girl_boyfriend(Girl):
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
 
     $ Player.AddWord(1, "interruption")
     $ Girl.DrainWord("asked meet")
 
-    if Girl.Loc != bg_current and Girl not in Party:
-        $ Girl.Loc = bg_current
+    if Girl.location != bg_current and Girl not in Party:
+        $ Girl.location = bg_current
 
         if Girl == RogueX:
             "Suddenly, [Girl.name] shows up and says she needs to talk to you."
@@ -2766,7 +2766,7 @@ label girl_boyfriend(Girl):
         "She looks a bit concerned and you can tell she's a bit anxious about whatever she has to say."
 
     call Taboo_Level
-    call CleartheRoom(Girl)
+    call clear_the_room(Girl)
 
     $ Girl.daily_history.append("relationship")
 
@@ -2965,7 +2965,7 @@ label girl_boyfriend(Girl):
 
                     $ Girl.Event[5] = 20
 
-                    call Remove_Girl(Girl)
+                    call remove_girl(Girl)
 
                     $ line = 0
 
@@ -3236,7 +3236,7 @@ label girl_boyfriend(Girl):
 
                 $ Girl.Event[5] = 20
 
-                call Remove_Girl(Girl)
+                call remove_girl(Girl)
                 $ line = 0
 
                 return
@@ -3305,7 +3305,7 @@ label girl_boyfriend(Girl):
                 if line == "no":
                     $ Girl.Event[5] = 20
 
-                    call Remove_Girl(Girl)
+                    call remove_girl(Girl)
                     $ line = 0
 
                     return
@@ -3334,7 +3334,7 @@ label girl_boyfriend(Girl):
 
                     $ Girl.Event[5] = 20
 
-                    call Remove_Girl(Girl)
+                    call remove_girl(Girl)
 
                     $ line = 0
 
@@ -3392,7 +3392,7 @@ label girl_boyfriend(Girl):
                 ch_s "Then I won't take more of your time."
                 ch_s "Let me know when your. . . schedule clears up."
 
-                call Remove_Girl(Girl)
+                call remove_girl(Girl)
 
                 $ Player.History.append("story")
 
@@ -3451,7 +3451,7 @@ label girl_boyfriend(Girl):
 
                 ch_s "Let me know if you should reconsider then."
 
-                call Remove_Girl(Girl)
+                call remove_girl(Girl)
 
                 $ line = 0
 
@@ -3514,7 +3514,7 @@ label girl_boyfriend(Girl):
 
                             $ Girl.Event[5] = 20
 
-                            call Remove_Girl(Girl)
+                            call remove_girl(Girl)
 
                             $ line = 0
 
@@ -3552,7 +3552,7 @@ label girl_boyfriend(Girl):
 
                     $ Girl.Event[5] = 20
 
-                    call Remove_Girl(Girl)
+                    call remove_girl(Girl)
 
                     $ line = 0
 
@@ -3566,7 +3566,7 @@ label girl_boyfriend(Girl):
                     ch_s "Very well then."
                     ch_s "I will take no more of your time."
 
-                    call Remove_Girl(Girl)
+                    call remove_girl(Girl)
 
                     $ line = 0
 
@@ -3589,7 +3589,7 @@ label girl_boyfriend(Girl):
                     ch_s ". . .oh."
                     ch_s "Well that is a disappointment."
 
-                    call Remove_Girl(Girl)
+                    call remove_girl(Girl)
 
                     $ line = 0
 
@@ -3610,13 +3610,13 @@ label girl_boyfriend(Girl):
                         ch_s ". . . that was not the reaction I had expected. . ."
                         ch_s "Perhaps I should give this further consideration. . ."
 
-                        call Remove_Girl(Girl)
+                        call remove_girl(Girl)
 
                         $ line = 0
 
                         return
 
-    if "Historia" not in Player.Traits:
+    if not simulation:
         $ Player.Harem.append(Girl)
 
         if Girl == RogueX:
@@ -3654,7 +3654,7 @@ label girl_boyfriend(Girl):
 
         ch_l "So, did you have any plans for the next few minutes? . ."
 
-    if "Historia" in Player.Traits:
+    if simulation:
         return 1
 
     $ temp_modifier = 10
@@ -3695,7 +3695,7 @@ label girl_boyfriend_jerk_ending:
             ch_e "I'm doing to consider us a couple whether you approve or not."
             ch_e "And with that, adieu."
 
-        if "Historia" in Player.Traits:
+        if simulation:
             return 1
 
         $ Player.focused_Girl.Petnames.append("boyfriend")
@@ -3704,7 +3704,7 @@ label girl_boyfriend_jerk_ending:
 
         $ bg_current = "bg_player"
 
-        call Remove_Girl(Player.focused_Girl)
+        call remove_girl(Player.focused_Girl)
         call set_the_scene
         $ renpy.pop_call()
         jump Player_Room
@@ -3733,18 +3733,18 @@ label girl_boyfriend_jerk_ending:
             ch_e "Get away from me."
 
         $ bg_current = "bg_player"
-        call Remove_Girl(Player.focused_Girl)
+        call remove_girl(Player.focused_Girl)
         call set_the_scene
         $ renpy.pop_call()
         jump Player_Room
     else:
         "[Player.focused_Girl.name] storms off."
 
-        call Remove_Girl(Player.focused_Girl)
+        call remove_girl(Player.focused_Girl)
         call set_the_scene
         $ renpy.pop_call()
 
-    if "Historia" in Player.Traits:
+    if simulation:
         return 1
 
 label girl_daddy(Girl):
@@ -3753,7 +3753,7 @@ label girl_daddy(Girl):
     if Girl != JeanX:
         $ Girl.DrainWord("asked meet")
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call set_the_scene
 
     if Girl == RogueX:
@@ -4164,7 +4164,7 @@ label girl_daddy(Girl):
                     ch_s ". . . I suppose that it is."
                     ch_s "Never mind. . ."
 
-                    call Remove_Girl(Girl)
+                    call remove_girl(Girl)
 
                     $ line = 0
                 "I'd rather not." if "callyouthat" in Girl.recent_history or "whycare" in Girl.recent_history:
@@ -4176,7 +4176,7 @@ label girl_daddy(Girl):
                     ch_s ". . . I suppose that is fine."
                     ch_s "Never mind. . ."
 
-                    call Remove_Girl(Girl)
+                    call remove_girl(Girl)
 
                     $ line = 0
 
@@ -4188,12 +4188,12 @@ label first_topless(Girl, silent = 0, temporary_line = 0): #rkeljsv
     if Girl.ChestNum() > 1 or Girl.OverNum() > 2 and not temporary_line:
         return
 
-    if Girl.Loc != bg_current and "phonesex" not in Player.recent_history:
+    if Girl.location != bg_current and "phonesex" not in Player.recent_history:
         return
 
     $ Girl.recent_history.append("topless")
     $ Girl.daily_history.append("topless")
-    $ Girl.DrainWord("no topless")
+    $ Girl.DrainWord("no_topless")
     $ Girl.SeenChest += 1
 
     if Girl.SeenChest > 1:
@@ -4556,8 +4556,8 @@ label first_topless(Girl, silent = 0, temporary_line = 0): #rkeljsv
 
                         $ Girl.OutfitChange()
 
-                        $ Girl.recent_history.append("no topless")
-                        $ Girl.daily_history.append("no topless")
+                        $ Girl.recent_history.append("no_topless")
+                        $ Girl.daily_history.append("no_topless")
                         $ Girl.recent_history.append("angry")
                         $ Girl.daily_history.append("angry")
     else:
@@ -4598,12 +4598,12 @@ label first_bottomless(Girl, silent = 0): #rkeljsv
     if Girl.PantiesNum() > 1 or Girl.PantsNum() > 2 or Girl.HoseNum() > 9:
         return
 
-    if Girl.Loc != bg_current and "phonesex" not in Player.recent_history:
+    if Girl.location != bg_current and "phonesex" not in Player.recent_history:
         return
 
     $ Girl.recent_history.append("bottomless")
     $ Girl.daily_history.append("bottomless")
-    $ Girl.DrainWord("no bottomless")
+    $ Girl.DrainWord("no_bottomless")
 
     $ Girl.SeenPussy += 1
 
@@ -4652,11 +4652,11 @@ label Kitty_First_Bottomless(Silent = 0):
     if KittyX.PantiesNum() > 1 or KittyX.PantsNum() > 2 or KittyX.HoseNum() > 9:
             #if she's wearing substantial clothing. . .
             return
-    if KittyX.Loc != bg_current and "phonesex" not in Player.recent_history:
+    if KittyX.location != bg_current and "phonesex" not in Player.recent_history:
             return
     $ KittyX.recent_history.append("bottomless")
     $ KittyX.daily_history.append("bottomless")
-    $ KittyX.DrainWord("no bottomless")
+    $ KittyX.DrainWord("no_bottomless")
     $ KittyX.SeenPussy += 1
     if KittyX.SeenPussy > 1:
             return                  #ends portion if you've already seen them
@@ -4719,11 +4719,11 @@ label Emma_First_Bottomless(Silent = 0):
     if EmmaX.PantiesNum() > 1 or EmmaX.PantsNum() > 2 or EmmaX.HoseNum() > 9:
             #if she's wearing substantial clothing. . .
             return
-    if EmmaX.Loc != bg_current and "phonesex" not in Player.recent_history:
+    if EmmaX.location != bg_current and "phonesex" not in Player.recent_history:
             return
     $ EmmaX.recent_history.append("bottomless")
     $ EmmaX.daily_history.append("bottomless")
-    $ EmmaX.DrainWord("no bottomless")
+    $ EmmaX.DrainWord("no_bottomless")
     $ EmmaX.SeenPussy += 1
     if EmmaX.SeenPussy > 1:
             return                  #ends portion if you've already seen them
@@ -4803,11 +4803,11 @@ label Laura_First_Bottomless(Silent = 0):
     if LauraX.PantiesNum() > 1 or LauraX.PantsNum() > 2 or LauraX.HoseNum() > 9:
             #if she's wearing substantial clothing. . .
             return
-    if LauraX.Loc != bg_current and "phonesex" not in Player.recent_history:
+    if LauraX.location != bg_current and "phonesex" not in Player.recent_history:
             return
     $ LauraX.recent_history.append("bottomless")
     $ LauraX.daily_history.append("bottomless")
-    $ LauraX.DrainWord("no bottomless")
+    $ LauraX.DrainWord("no_bottomless")
     $ LauraX.SeenPussy += 1
     if LauraX.SeenPussy > 1:
             return                  #ends portion if you've already seen them
@@ -4891,11 +4891,11 @@ label Jean_First_Bottomless(Silent = 0):
     if JeanX.PantiesNum() > 1 or JeanX.PantsNum() > 2 or JeanX.HoseNum() > 9:
             #if she's wearing substantial clothing. . .
             return
-    if JeanX.Loc != bg_current and "phonesex" not in Player.recent_history:
+    if JeanX.location != bg_current and "phonesex" not in Player.recent_history:
             return
     $ JeanX.recent_history.append("bottomless")
     $ JeanX.daily_history.append("bottomless")
-    $ JeanX.DrainWord("no bottomless")
+    $ JeanX.DrainWord("no_bottomless")
     $ JeanX.SeenPussy += 1
     if JeanX.SeenPussy > 1:
             return                  #ends portion if you've already seen them
@@ -4986,11 +4986,11 @@ label Jubes_First_Bottomless(Silent = 0):
     if JubesX.PantiesNum() > 1 or JubesX.PantsNum() > 2 or JubesX.HoseNum() > 9:
             #if she's wearing substantial clothing. . .
             return
-    if JubesX.Loc != bg_current and "phonesex" not in Player.recent_history:
+    if JubesX.location != bg_current and "phonesex" not in Player.recent_history:
             return
     $ JubesX.recent_history.append("bottomless")
     $ JubesX.daily_history.append("bottomless")
-    $ JubesX.DrainWord("no bottomless")
+    $ JubesX.DrainWord("no_bottomless")
     $ JubesX.SeenPussy += 1
     if JubesX.SeenPussy > 1:
             return                  #ends portion if you've already seen them

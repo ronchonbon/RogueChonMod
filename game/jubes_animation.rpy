@@ -4978,7 +4978,7 @@ label Jubes_BJ_Launch(line = primary_action):
             "[JubesX.name] smoothly bends down and places your cock against her cheek."
 
     if line != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show Jubes_Sprite zorder JubesX.Layer:
         alpha 0

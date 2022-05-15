@@ -3870,7 +3870,7 @@ label Jean_BJ_Launch(line = primary_action):    # The sequence to launch the Jea
     $ action_speed = 0
 
     if line != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show Jean_BJ_Animation zorder 150:
         pos (645,510)
@@ -4116,7 +4116,7 @@ label Jean_PJ_Launch(line = primary_action):
         return
 
     call Jean_Hide
-    if JeanX.Loc == bg_current:
+    if JeanX.location == bg_current:
             #hides alternate sex poses and displays Jean again
             show Jean_Sprite at sprite_location(JeanX.sprite_location) zorder JeanX.Layer:
                 alpha 1
@@ -4322,15 +4322,15 @@ image Jean_TJ_Tits:
             contains:
                 #Chest
                 ConditionSwitch(
-                        "JeanX.Chest == 'green bra' and JeanX.Uptop and JeanX.Over == 'green shirt'","images/JeanBJFace/Jean_TJ_Chest_Bra_UpS.png",  #fix, add "no straps" version here
+                        "JeanX.Chest == 'green bra' and JeanX.Uptop and JeanX.Over == 'green shirt'","images/JeanBJFace/Jean_TJ_Chest_Bra_UpS.png",  #fix, add "no_straps" version here
                         "JeanX.Chest == 'green bra' and JeanX.Uptop","images/JeanBJFace/Jean_TJ_Chest_Bra_Up.png",
-                        "JeanX.Chest == 'lace bra' and JeanX.Uptop and JeanX.Over == 'green shirt'","images/JeanBJFace/Jean_TJ_Chest_Bra_UpS.png",    #fix, add "no straps" version here
+                        "JeanX.Chest == 'lace bra' and JeanX.Uptop and JeanX.Over == 'green shirt'","images/JeanBJFace/Jean_TJ_Chest_Bra_UpS.png",    #fix, add "no_straps" version here
                         "JeanX.Chest == 'lace bra' and JeanX.Uptop","images/JeanBJFace/Jean_TJ_Chest_Bra_Up.png",
                         "JeanX.Chest == 'sports bra' and JeanX.Uptop","images/JeanBJFace/Jean_TJ_Chest_SportsBra_Up.png",
                         "JeanX.Chest == 'bikini top' and JeanX.Uptop","images/JeanBJFace/Jean_TJ_Chest_Bikini_Up.png",
-                        "JeanX.Chest == 'green bra' and JeanX.Over == 'green shirt'","images/JeanBJFace/Jean_TJ_Chest_Bra_Strapless.png",  #fix, add "no straps" version here
+                        "JeanX.Chest == 'green bra' and JeanX.Over == 'green shirt'","images/JeanBJFace/Jean_TJ_Chest_Bra_Strapless.png",  #fix, add "no_straps" version here
                         "JeanX.Chest == 'green bra'","images/JeanBJFace/Jean_TJ_Chest_Bra_Top.png",
-                        "JeanX.Chest == 'lace bra' and JeanX.Over == 'green shirt'","images/JeanBJFace/Jean_TJ_Chest_LaceBra_Strapless.png",  #fix, add "no straps" version here
+                        "JeanX.Chest == 'lace bra' and JeanX.Over == 'green shirt'","images/JeanBJFace/Jean_TJ_Chest_LaceBra_Strapless.png",  #fix, add "no_straps" version here
                         "JeanX.Chest == 'lace bra'","images/JeanBJFace/Jean_TJ_Chest_LaceBra_Top.png",
                         "JeanX.Chest == 'sports bra'","images/JeanBJFace/Jean_TJ_Chest_SportsBra_Top.png",
                         "JeanX.Chest == 'bikini top'","images/JeanBJFace/Jean_TJ_Chest_Bikini_Top.png",

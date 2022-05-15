@@ -14,13 +14,13 @@ label enter_main_sex_menu:
                 ch_e "We certainly could. . ."
                 "[Player.focused_girl.name] walks to the door and locks it behind her."
 
-                $ Player.Traits.append("locked")
+                $ door_locked = True
 
                 call Taboo_Level
             else:
                 return
 
-    call Shift_Focus(Player.focused_girl)
+    call shift_focus(Player.focused_girl)
 
     $ primary_action = 0
     $ offhand_action = 0
@@ -45,7 +45,7 @@ label enter_main_sex_menu:
         "[Player.focused_girl.name]'s looking a bit tired out, maybe let her rest a bit."
 
     if "caught" in Player.focused_girl.recent_history or "angry" in Player.focused_girl.recent_history:
-        if Player.focused_girl.Loc == bg_current:
+        if Player.focused_girl.location == bg_current:
             call angry_lines(Player.focused_girl)
 
         $ Player.focused_girl.OutfitChange()
@@ -68,7 +68,7 @@ label enter_main_sex_menu:
     if _return:
         return
 
-    if Player.focused_girl.Loc != bg_current:
+    if Player.focused_girl.location != bg_current:
         call set_the_scene
         call Trig_Reset
 
@@ -198,17 +198,17 @@ label Girl_sex_menu(Girl):
                         call masturbate(Girl)
                     else:
                         call out_of_action_lines(Girl)
-                "Maybe make out with [RogueX.name]?" if Girl != RogueX and RogueX.Loc == bg_current:
+                "Maybe make out with [RogueX.name]?" if Girl != RogueX and RogueX.location == bg_current:
                     call LesScene(RogueX)
-                "Maybe make out with [KittyX.name]?" if Girl != KittyX and  KittyX.Loc == bg_current:
+                "Maybe make out with [KittyX.name]?" if Girl != KittyX and  KittyX.location == bg_current:
                     call LesScene(KittyX)
-                "Maybe make out with [LauraX.name]?" if Girl != LauraX and LauraX.Loc == bg_current:
+                "Maybe make out with [LauraX.name]?" if Girl != LauraX and LauraX.location == bg_current:
                     call LesScene(LauraX)
-                "Maybe make out with [JeanX.name]?" if Girl != JeanX and JeanX.Loc == bg_current:
+                "Maybe make out with [JeanX.name]?" if Girl != JeanX and JeanX.location == bg_current:
                     call LesScene(JeanX)
-                "Maybe make out with [StormX.name]?" if Girl != StormX and StormX.Loc == bg_current:
+                "Maybe make out with [StormX.name]?" if Girl != StormX and StormX.location == bg_current:
                     call LesScene(StormX)
-                "Maybe make out with [JubesX.name]?" if Girl != JubesX and JubesX.Loc == bg_current:
+                "Maybe make out with [JubesX.name]?" if Girl != JubesX and JubesX.location == bg_current:
                     call LesScene(JubesX)
                 "Never mind [[something else]":
                     jump main_sex_menu
@@ -616,7 +616,7 @@ label begging_menu(Girl, action):
                                 $ Girl.change_stat("inhibition", 60, 1)
                                 $ Girl.change_stat("obedience", 50, 1)
 
-                                $ Player.primary_action = "handjob"
+                                $ primary_action = "handjob"
 
                                 jump before_handjob
                             "Nah, if it's not a BJ, forget it.":
@@ -736,11 +736,11 @@ label begging_menu(Girl, action):
                             $ Girl.change_stat("inhibition", 60, 1)
                             $ Girl.change_stat("obedience", 50, 1)
 
-                            $ Player.primary_action = "blowjob"
+                            $ primary_action = "blowjob"
 
                             jump before_handjob
                         "Nah, it's all about dem titties.":
-                            $ line = "no BJ"
+                            $ line = "no_BJ"
                 if Approval:
                     $ Girl.change_stat("inhibition", 80, 1)
                     $ Girl.change_stat("inhibition", 60, 3)
@@ -758,12 +758,12 @@ label begging_menu(Girl, action):
                             $ Girl.change_stat("inhibition", 60, 1)
                             $ Girl.change_stat("obedience", 50, 1)
 
-                            $ Player.primary_action = "handjob"
+                            $ primary_action = "handjob"
 
                             jump before_handjob
-                        "Seriously, titties." if line == "no BJ":
+                        "Seriously, titties." if line == "no_BJ":
                             $ line = 0
-                        "Nah, it's all about dem titties." if line != "no BJ":
+                        "Nah, it's all about dem titties." if line != "no_BJ":
                             pass
 
                 $ Girl.change_stat("love", 200, -2)

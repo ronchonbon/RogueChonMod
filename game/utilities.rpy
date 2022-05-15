@@ -15,7 +15,7 @@ init python:
 
             Girls = all_Girls[:]
             while Girls:
-                    if Girls[0].Loc == bg_current and Girls[0] not in Party:
+                    if Girls[0].location == bg_current and Girls[0] not in Party:
                                 Here.append(Girls[0])
                     Girls.remove(Girls[0])
             if len(Party) + len(Here) >= 2:
@@ -50,7 +50,7 @@ label Round10(Girls=[],Occupant=0): #rkeljsv
                 call Wait
                 return
         #else
-        if Occupant.Loc == bg_current:
+        if Occupant.location == bg_current:
                 #If they are home
                 if Occupant == RogueX:
                         ch_r "Sure, you can wait around a bit."
@@ -74,7 +74,7 @@ label Round10(Girls=[],Occupant=0): #rkeljsv
 
         call Girls_Location #new here
 
-        if time_index < 3 or Occupant.Loc != bg_current:
+        if time_index < 3 or Occupant.location != bg_current:
                 #if it's not nightime or the girl is not home. . .
                 return
 
@@ -221,12 +221,9 @@ label Wait (Outfit = 1, Lights = 1, Girls=[]):
                 $ TotalSEXP = 0 #zeros out so that next bit and add to it
 
                 #Clearing colognes
-                if "mandrill" in Player.Traits:
-                        $ Player.Traits.remove("mandrill")
-                if "purple" in Player.Traits:
-                        $ Player.Traits.remove("purple")
-                if "corruption" in Player.Traits:
-                        $ Player.Traits.remove("corruption")
+                if Player.cologne:
+                    $ Player.cologne = None
+
                 call Favorite_Actions # Sets the girl's favorite activities once per day
 
         # Things about the girls when you sleep:
@@ -259,8 +256,8 @@ label Wait (Outfit = 1, Lights = 1, Girls=[]):
                 $ Girls = all_Girls[:]
                 while Girls:
                         #loops through and makes choices.
-                        if Girls[0] in active_Girls and Girls[0].Loc != bg_current:
-                                $ Girls[0].Loc = Girls[0].Home
+                        if Girls[0] in active_Girls and Girls[0].location != bg_current:
+                                $ Girls[0].location = Girls[0].Home
                         if Girls[0].Todo:
                                 call Todo(Girls[0])
                         $ Girls[0].Outfit = "sleep"
@@ -269,10 +266,10 @@ label Wait (Outfit = 1, Lights = 1, Girls=[]):
                         #Addiction
                         $ Girls[0].Addict += Girls[0].Addictionrate   #(0-10)
                         $ Girls[0].Addict -= (3*Girls[0].Resistance)  #(0,3,6, or 9)
-                        if "nonaddictive" in Player.Traits:
+                        if Player.nonaddictive:
                                     $ Girls[0].Addictionrate -= 2
                                     $ Girls[0].Addict -= 5
-                        if "addictive" not in Player.Traits:
+                        if not Player.addictive:
                                     $ Girls[0].Addictionrate -= Girls[0].Resistance
                                     if Girls[0] != RogueX and Girls[0].Addictionrate >= 3:
                                             # further bonus for anyone other than Rogue
@@ -302,7 +299,7 @@ label Wait (Outfit = 1, Lights = 1, Girls=[]):
                                 $ Girls[0].Thirst -= 5 if Girls[0].Break[0] else 0
                                 $ Girls[0].Thirst += 1 if Girls[0].lust >= 50 else 0
 
-                        if "gonnafap" in Girls[0].daily_history and Girls[0].Loc != bg_current:
+                        if "gonnafap" in Girls[0].daily_history and Girls[0].location != bg_current:
                                 #if it's morning and she wanted to fap yesterday, so she did. . .
                                 $ Girls[0].lust = 25
                                 $ Girls[0].Thirst -= int(Girls[0].Thirst/2) if Girls[0].Thirst >= 50 else int(Girls[0].Thirst/4)
@@ -385,17 +382,17 @@ label Wait (Outfit = 1, Lights = 1, Girls=[]):
                         $ Girls[0].lust = 20
 
             #Resets her flirt  options
-            $ Girls[0].Chat[5] = 0
+            $ Girls[0].can_flirt = True
             #Resets her addiction fix attempts            :
             $ Girls[0].Event[3] -= 1 if Girls[0].Event[3] else 0 #resets her addiction fix, takes at least five turns before she hassles you again
 
             $ Girls[0].Forced = 0
-            if Girls[0].Loc == "bg_classroom" or Girls[0].Loc == "bg_dangerroom" or Girls[0].Loc == "bg_teacher":
+            if Girls[0].location == "bg_classroom" or Girls[0].location == "bg_dangerroom" or Girls[0].location == "bg_teacher":
                     $ Girls[0].XP += 10
-            elif (bg_current == "bg_classroom" or bg_current == "bg_dangerroom") and Girls[0].Loc == "nearby":
+            elif (bg_current == "bg_classroom" or bg_current == "bg_dangerroom") and Girls[0].location == "nearby":
                     $ Girls[0].XP += 10
-            elif Girls[0].Loc == "bg_showerroom":
-                    call Remove_Girl(Girls[0])
+            elif Girls[0].location == "bg_showerroom":
+                    call remove_girl(Girls[0])
 
             if Girls[0] in active_Girls and "met" not in Girls[0].History:
                 $ active_Girls.remove(Girls[0])
@@ -411,7 +408,7 @@ label Wait (Outfit = 1, Lights = 1, Girls=[]):
 
             #Adjusts shame rate
             if Girls[0].Taboo and Girls[0].Shame and Girls[0] in active_Girls:
-                        if Girls[0].Loc == "bg_dangerroom":
+                        if Girls[0].location == "bg_dangerroom":
                                 $ Girls[0].Shame -= 10 if Girls[0].Shame >=10 else Girls[0].Shame
                         $ Count = int((Girls[0].Taboo * Girls[0].Shame) / 200)
                         $ Girls[0].change_stat("obedience", 90, Count)
@@ -546,33 +543,33 @@ label Girls_Schedule(Girls = [], Clothes = 1, Location = 1, LocTemp = 0):
                         #End clothing portion
 
                         #Location portion
-                        $ LocTemp = Girls[0].Loc
+                        $ LocTemp = Girls[0].location
                         if Girls[0] not in active_Girls:
                                 $ LocTemp = "hold"
-                                $ Girls[0].Loc = "hold"
-                        elif Girls[0] in Party or Girls[0].Loc == "hold":
+                                $ Girls[0].location = "hold"
+                        elif Girls[0] in Party or Girls[0].location == "hold":
                                 pass
                         else:
-                                $ Girls[0].Loc = Girls[0].Schedule[Weekday][time_index]
+                                $ Girls[0].location = Girls[0].Schedule[Weekday][time_index]
                                 if Girls[0] == JubesX and JubesX.Addict > 60:
                                                 #Jubliee will not leave her room voluntarily if it's higher than 60
-                                                $ JubesX.Loc = JubesX.Home
+                                                $ JubesX.location = JubesX.Home
 
-                        if Girls[0].Loc != LocTemp and Girls[0] not in Party:
+                        if Girls[0].location != LocTemp and Girls[0] not in Party:
                                 #if she moved
                                 if LocTemp == bg_current:
-                                        if ApprovalCheck(Girls[0], 1200) and Girls[0].Loc not in ("bg_classroom","bg_teacher","bg_dangerroom"):
+                                        if ApprovalCheck(Girls[0], 1200) and Girls[0].location not in ("bg_classroom","bg_teacher","bg_dangerroom"):
                                                 # if she's contented, then she just sticks around
-                                                $ Girls[0].Loc = LocTemp
+                                                $ Girls[0].location = LocTemp
                                         else:
                                                 #If she was where you were, but left
                                                 $ Girls[0].recent_history.append("leaving")
-                                elif Girls[0].Loc == bg_current:
+                                elif Girls[0].location == bg_current:
                                                 #If she's showed up
                                                 $ Girls[0].recent_history.append("arriving")
                         if Girls[0] in Nearby:
                                                 $ Nearby.remove(Girls[0])
-                if Girls[0].Loc == "bg_teacher":
+                if Girls[0].location == "bg_teacher":
                         call AltClothes(Girls[0],8) #Sets teaching outfit
                         $ Girls[0].OutfitChange()
 
@@ -584,7 +581,7 @@ label Study_Time(Girls=[],Studiers=[]):
     #this finds girls that are alone in their rooms and has them study together in the evenings.
     $ Girls = all_Girls[:]
     while Girls:
-            if Girls[0].Loc != bg_current and Girls[0].Loc in PersonalRooms:
+            if Girls[0].location != bg_current and Girls[0].location in PersonalRooms:
                     #if they aren't with you, and are in a Girl room, they study
                     $ Studiers.append(Girls[0])
             $ Girls.remove(Girls[0])
@@ -614,7 +611,7 @@ label Todo(Girl=0): #rkeljs
                 if "mission" in Girl.Todo: #puts her on ice until a week after the first meeting
                         $ Girl.PubeC -= 1
                         if Girl.PubeC >= 1:
-                                $ Girl.Loc = "hold"
+                                $ Girl.location = "hold"
                         else:
                                 $ Girl.History.append("dress0") #starts dress event where you'll meet again
                                 $ Girl.Todo.remove("mission")
@@ -697,7 +694,7 @@ label EventCalls(EGirls=[]): #rkeljs
     #
     # #Activates Kitty meet
     #     if KittyX in active_Girls:
-    #             if "Kate" not in KittyX.names and KittyX.inhibition >= 500 and KittyX.Loc == bg_current:
+    #             if "Kate" not in KittyX.names and KittyX.inhibition >= 500 and KittyX.location == bg_current:
     #                     #She calls herself Kate now.
     #                     call Kitty_Kate
     #                     return
@@ -741,7 +738,7 @@ label EventCalls(EGirls=[]): #rkeljs
     #
     #                     if Round >= 70:
     #                             #if you are in class and not travelling. . .
-    #                             $ EmmaX.Loc = "bg_classroom"
+    #                             $ EmmaX.location = "bg_classroom"
     #     else:
     #             #Emma is not in active_Girls
     #             if Day >= 4 and "met" not in EmmaX.History and "traveling" in Player.recent_history and bg_current == "bg_classroom" and Weekday < 5:   #was day 6
@@ -751,7 +748,7 @@ label EventCalls(EGirls=[]): #rkeljs
     #
     # #Activates Storm meet
     #     if StormX in active_Girls:
-    #                 if bg_current == "bg_classroom" and StormX.Loc == "bg_teacher" and "Peter" in StormX.History and "traveling" in Player.recent_history:
+    #                 if bg_current == "bg_classroom" and StormX.location == "bg_teacher" and "Peter" in StormX.History and "traveling" in Player.recent_history:
     #                         #if you told her your name was Peter Parker
     #                         call Storm_Peter
     #                         return
@@ -761,7 +758,7 @@ label EventCalls(EGirls=[]): #rkeljs
     #                                 return
     #                         if Round >= 70:
     #                                 #if you are in class and not travelling. . .
-    #                                 $ StormX.Loc = "bg_classroom"
+    #                                 $ StormX.location = "bg_classroom"
     #                 if time_index == 3 and bg_current == "bg_pool" and "poolnight" in Player.History:
     #                         if "sex friend" not in StormX.Petnames or (D20 < 5 and "poolnight" not in Player.recent_history):
     #                                 #call's Storm's skinny dipping thing at night if it's the first time or a 25% chance.
@@ -791,7 +788,7 @@ label EventCalls(EGirls=[]): #rkeljs
                 return
 
     #locked door check
-        if "locked" in Player.Traits:
+        if door_locked:
                 #exits if the door is locked, but maybe open this up a bit later.
                 return
 
@@ -858,7 +855,7 @@ label EventCalls(EGirls=[]): #rkeljs
                                         #skip all this if you're broken up
                                         pass
                         elif not EGirls[0].Event[0] and EGirls[0].Sleep >= 5:
-                                if EGirls[0].Loc == bg_current or EGirls[0] in Party:
+                                if EGirls[0].location == bg_current or EGirls[0] in Party:
                                     call girl_key(EGirls[0])
 
                                     return
@@ -875,7 +872,7 @@ label EventCalls(EGirls=[]): #rkeljs
                                 elif JeanX.love >= 800 and JeanX.obedience >= 600 and not JeanX.Event[5]:
                                         call Jean_love
                                 elif "daddy" not in JeanX.Petnames and ApprovalCheck(JeanX, 750, "L"):
-                                        if (bg_current == EGirls[0].Home or bg_current == "bg_player") and EGirls[0].Loc == bg_current:
+                                        if (bg_current == EGirls[0].Home or bg_current == "bg_player") and EGirls[0].location == bg_current:
                                             call girl_daddy(JeanX)
                                 return
                         elif "boyfriend" not in EGirls[0].Petnames and EGirls[0].love >= 800 and EGirls[0].Event[5] != 20 and EGirls[0].Tag + "No" not in Player.Traits: # EGirls[0].Event[5]
@@ -912,12 +909,12 @@ label EventCalls(EGirls=[]): #rkeljs
                                         call AskedMeet(EGirls[0],"bemused")
                                 return
                         elif "daddy" not in EGirls[0].Petnames and ApprovalCheck(EGirls[0], 750, "L") and ApprovalCheck(EGirls[0], 500, "O") and ApprovalCheck(EGirls[0], 500, "I"): # EGirls[0].Event[5]
-                                if (bg_current == EGirls[0].Home or bg_current == "bg_player") and EGirls[0].Loc == bg_current:
+                                if (bg_current == EGirls[0].Home or bg_current == "bg_player") and EGirls[0].location == bg_current:
                                         call girl_daddy(EGirls[0])
                                 return
                         elif "sex friend" not in EGirls[0].Petnames and EGirls[0].inhibition >= 500: # EGirls[0].Event[9]  Fix this one
                                 if EGirls[0] == EmmaX:
-                                    if bg_current == "bg_classroom" and (EmmaX.Loc == "bg_teacher" or EmmaX.Loc == "bg_classroom") and time_index == 2:
+                                    if bg_current == "bg_classroom" and (EmmaX.location == "bg_teacher" or EmmaX.location == "bg_classroom") and time_index == 2:
                                             call Emma_Sexfriend
                                             return
                                 elif EGirls[0] == StormX:
@@ -929,7 +926,7 @@ label EventCalls(EGirls=[]): #rkeljs
                                 elif bg_current == EGirls[0].Home or bg_current == "bg_player":
                                         call expression EGirls[0].Tag + "_Sexfriend"
                                         return
-                                elif EGirls[0] in Player.Harem and EGirls[0].Loc == bg_current:
+                                elif EGirls[0] in Player.Harem and EGirls[0].location == bg_current:
                                         call expression EGirls[0].Tag + "_Sexfriend"
                                         return
                                 elif EGirls[0] == LauraX:
@@ -937,11 +934,11 @@ label EventCalls(EGirls=[]): #rkeljs
                                         return
                         elif "fuck buddy" not in EGirls[0].Petnames and EGirls[0].inhibition >= 800: # EGirls[0].Event[10]  Fix this one
                                 if EGirls[0] == RogueX:
-                                    if bg_current != EGirls[0].Loc:
+                                    if bg_current != EGirls[0].location:
                                         call expression EGirls[0].Tag + "_Fuckbuddy"
                                         return
                                 elif EGirls[0] == LauraX:
-                                    if bg_current == "bg_player" and EGirls[0].Loc != bg_current:
+                                    if bg_current == "bg_player" and EGirls[0].location != bg_current:
                                         call expression EGirls[0].Tag + "_Fuckbuddy"
                                         return
                                 elif EGirls[0] == StormX:
@@ -951,7 +948,7 @@ label EventCalls(EGirls=[]): #rkeljs
                                 elif bg_current == EGirls[0].Home or bg_current == "bg_player":
                                         call expression EGirls[0].Tag + "_Fuckbuddy"
                                         return
-                                elif EGirls[0] in Player.Harem and EGirls[0].Loc == bg_current:
+                                elif EGirls[0] in Player.Harem and EGirls[0].location == bg_current:
                                         call expression EGirls[0].Tag + "_Fuckbuddy"
                                         return
                 $ EGirls.remove(EGirls[0])
@@ -969,7 +966,7 @@ label QuickEvents(EGirls=[]):
         $ EGirls = all_Girls[:]
         $ renpy.random.shuffle(EGirls)
         while EGirls:
-                if EGirls[0].Loc == bg_current:
+                if EGirls[0].location == bg_current:
                         if EGirls[0].lust >= 90:
                                 $ EGirls[0].Blush = 1
                                 $ EGirls[0].Wet = 2
@@ -988,9 +985,9 @@ label QuickEvents(EGirls=[]):
                                 elif bg_current != "bg_showerroom":
                                         "[EGirls[0].name] gets an embarrassed look on her face and suddenly leaves the room."
                                         #"gonnafap" in Girl.daily_history
-                                        call Remove_Girl(EGirls[0])
+                                        call remove_girl(EGirls[0])
                                         call set_the_scene
-                                        $ EGirls[0].Loc = EGirls[0].Home if bg_current != EGirls[0].Home else "bg_campus"
+                                        $ EGirls[0].location = EGirls[0].Home if bg_current != EGirls[0].Home else "bg_campus"
                                         if "nofap" in EGirls[0].Traits:
                                                 $ EGirls[0].AddWord(1,0,"wannafap",0,0) #adds "wannafap" tag to daily
                                                 call CalltoFap(EGirls[0]) #checks to see if she's allowed
@@ -998,12 +995,12 @@ label QuickEvents(EGirls=[]):
                                                 $ EGirls[0].AddWord(1,0,"gonnafap",0,0) #adds "wannafap" tag to daily
                 else:
                         #if Girl is not around
-                        if EGirls[0].Loc == "bg_showerroom" and "showered" in EGirls[0].daily_history:
+                        if EGirls[0].location == "bg_showerroom" and "showered" in EGirls[0].daily_history:
                                 #if she's recently showered and still in the shower, send her elsewhere
-                                $ EGirls[0].Loc = EGirls[0].Schedule[Weekday][time_index]
+                                $ EGirls[0].location = EGirls[0].Schedule[Weekday][time_index]
                                 if EGirls[0] == JubesX and JubesX.Addict > 60:
                                                 #Jubliee will not leave her room voluntarily if it's higher than 60
-                                                $ JubesX.Loc = JubesX.Home
+                                                $ JubesX.location = JubesX.Home
                                 $ EGirls[0].Spunk = []
                                 $ EGirls[0].OutfitChange()
                 #End girl's Quick Events
@@ -1013,7 +1010,7 @@ label QuickEvents(EGirls=[]):
 
 label AskedMeet(Girl = 0, Emotion = "bemused",Why=0): # Use AskedMeet(RogueX,"angry")
     #This asks the player to meet the chosen Girl later
-    if "asked meet" not in Girl.daily_history and Girl.Loc != bg_current:
+    if "asked meet" not in Girl.daily_history and Girl.location != bg_current:
                     $ Girl.change_face(Emotion)
                     "[Girl.name] asks if you could meet her in your room later."
                     $ Girl.AddWord(1,"asked meet","asked meet",0,0) # adds "asked meet" to recent and daily
@@ -1073,14 +1070,14 @@ menu Tutorial:
                                 $ RogueX.change_stat("love", 200, 1)
                                 "You can also lower this number if you do things that make the girl upset, which is represented by a red -X."
                                 $ RogueX.change_stat("love", 200, -1)
-                        "obedienceience Stat":
-                                "The blue bar to the right of that is the \"obedienceience level.\""
+                        "obedience Stat":
+                                "The blue bar to the right of that is the \"obedience level.\""
                                 "This represents the girl's willingness to do what you want, and raises when you convince her to do something."
                                 $ RogueX.change_stat("obedience", 200, 1)
                                 "It lowers when you push her too far and she refuses."
                                 $ RogueX.change_stat("obedience", 200, -1)
-                        "Inhibition Stat":
-                                "The yellow bar to the right of that is the \"Inhibition level.\""
+                        "inhibition Stat":
+                                "The yellow bar to the right of that is the \"inhibition level.\""
                                 "This represent's the girl's own sexual interest, and raises when she decides to do something on her own, or something naughty for the first time."
                                 $ RogueX.change_stat("inhibition", 200, 1)
                                 "It lowers when she becomes overly ashamed, like when caught doing something sexier than she's comfortable with."
@@ -1100,7 +1097,7 @@ menu Tutorial:
                                 $ RogueX.change_stat("lust", 200, 1)
                                 $ RogueX.lust -= 1
                         "Player Excitement":
-                                "The rather \"suggestive\" bar to the right of Inhibitions represents your own excitement."
+                                "The rather \"suggestive\" bar to the right of inhibitions represents your own excitement."
                                 $ Player.change_stat("Focus", 200, 1)
                                 $ Player.Focus -= 1
                                 "When it reaches 100\%, you orgasm. If you wish to delay this, you can learn to \"focus\" during sex and slow the progression."
@@ -1117,7 +1114,7 @@ menu Tutorial:
                     "The girls also gain traits which unlock new abilities."
                     "You also have an income level, based on the stipend Xavier grants you. This rises as you level, but may be reduced for bad behavior."
             "Addiction":
-                    "The Addiction stat is represented by the bar below obedienceience. This stat rises as she begins to crave your touch."
+                    "The Addiction stat is represented by the bar below obedience. This stat rises as she begins to crave your touch."
                     "It lowers when she comes into physical contact with you, the more intense the contact, the lower the craving gets."
                     "At high Addiction levels, she is highly susceptible to your advances, but will not be happy about it if you press her."
                     "The Addiction Rate is represented by the bar to the right of it. This stat represents how quickly her cravings build, and falls off over time."
@@ -1392,31 +1389,31 @@ label Level_Up(Girl=Player):
                             "Cancel.":
                                         pass
 
-                    "Increase your addictiveness. [[One point]" if "addict control" not in Player.Traits and "nonaddictive" not in Player.Traits and "addictive" not in Player.Traits:
+                    "Increase your addictiveness. [[One point]" if "addict control" not in Player.Traits and not Player.nonaddictive and not Player.addictive:
                         menu:
                             "This trait will increase the addictiveness of your touch, making you harder for girls to quit."
                             "Increase addictiveness.":
                                 if Player.StatPoints > 0:
                                         $ Player.StatPoints -= 1
-                                        $ Player.Traits.append("addictive")
+                                        $ Player.addictive = True
                                 else:
                                         "You don't have enough points for that."
                             "Cancel.":
                                         pass
 
-                    "Reduce your addictiveness. [[One point]" if "addict control" not in Player.Traits and "nonaddictive" not in Player.Traits and "addictive" not in Player.Traits:
+                    "Reduce your addictiveness. [[One point]" if "addict control" not in Player.Traits and not Player.nonaddictive and not Player.addictive:
                         menu:
                             "This trait will reduce the addictiveness of your touch, making it easier for girls to resist it."
                             "Reduce addictiveness.":
                                 if Player.StatPoints > 0:
                                         $ Player.StatPoints -= 1
-                                        $ Player.Traits.append("nonaddictive")
+                                        $ Player.nonaddictive = True
                                 else:
                                         "You don't have enough points for that."
                             "Cancel.":
                                         pass
 
-                    "Control your Addiction level. [[Two points]" if "addict control" not in Player.Traits and ("nonaddictive" in Player.Traits or "addictive" in Player.Traits):
+                    "Control your Addiction level. [[Two points]" if "addict control" not in Player.Traits and (Player.nonaddictive or Player.addictive):
                         menu:
                             "This trait will allow you to freely control the amount you addict girls to your touch."
                             "Gain addiction control.":
@@ -1432,11 +1429,11 @@ label Level_Up(Girl=Player):
                         menu:
                             "This trait will increase the addictiveness of your touch, making you harder for girls to quit."
                             "Increase addictiveness, no cost.":
-                                if "nonaddictive" in Player.Traits:
-                                        $ Player.Traits.remove("nonaddictive")
+                                if Player.nonaddictive:
+                                        $ Player.nonaddictive = False
                                         "You are now at the baseline addictiveness level."
-                                elif "addictive" not in Player.Traits:
-                                        $ Player.Traits.append("addictive")
+                                elif not Player.addictive:
+                                        $ Player.addictive = True
                                         "You are now at the enhanced addictiveness level."
                                 else:
                                         "You are already at the max addictiveness level."
@@ -1446,21 +1443,16 @@ label Level_Up(Girl=Player):
                         menu:
                             "This trait will reduce the addictiveness of your touch, making it easier for girls to resist it."
                             "Reduce addictiveness.":
-                                if "addictive" in Player.Traits:
-                                        $ Player.Traits.remove("addictive")
-                                        "You are now at the baseline addictiveness level."
-                                elif "nonaddictive" not in Player.Traits:
-                                        $ Player.Traits.append("nonaddictive")
-                                        "You are now at the reduced addictiveness level."
-                                else:
-                                        "You are already at the minimum addictiveness level."
+                                if Player.addictive:
+                                    $ Player.addictive = False
 
-                                if "addictive" in Player.Traits:
-                                        $ Player.Traits.remove("addictive")
-                                        $ Player.Traits.append("nonaddictive")
-                                        $ Player.Traits.append("addict control")
+                                    "You are now at the baseline addictiveness level."
+                                elif not Player.nonaddictive:
+                                    $ Player.nonaddictive = True
+
+                                    "You are now at the reduced addictiveness level."
                                 else:
-                                        $ Player.Traits.append("nonaddictive")
+                                    "You are already at the minimum addictiveness level."
                             "Cancel.":
                                         pass
 
@@ -1553,204 +1545,197 @@ label Level_Up(Girl=Player):
 
         return
 
-label Remove_Girl(Girl = 0, HideGirl = 1, Hold=0,Girls=[]):
-        # Girl is the girl being removed, this is for putting girls in a safe location if they run.
-        # "Hold" is sent by Present_Check/Girls_Arrive, if active, and you are in public, it sets the girl nearby
-
-        if Girl == "All":
-                $ Party = []
-                $ Nearby = []
-                $ Partner = 0
-                $ Girls = all_Girls[:]
+label remove_girl(Girl = None, hide_girls = True, place_on_hold = False):
+        if Girl == "all":
+            $ Party = []
+            $ Nearby = []
+            $ Partner = 0
+            $ Girls = all_Girls[:]
         else:
-                while Girl in Party:
-                        $ Party.remove(Girl)
-                while Girl in Present:
-                        $ Present.remove(Girl)
-                while Girl in Nearby:
-                        $ Nearby.remove(Girl)
-                if Partner == Girl:
-                        $ Partner = 0
-                $ Girls = [Girl]
+            while Girl in Party:
+                $ Party.remove(Girl)
+            while Girl in Present:
+                $ Present.remove(Girl)
+            while Girl in Nearby:
+                $ Nearby.remove(Girl)
+            if Partner == Girl:
+                $ Partner = 0
+
+            $ Girls = [Girl]
 
         while Girls:
-                $ Girls[0].DrainWord("leaving",1,0,0)
-                $ Girls[0].DrainWord("arriving",1,0,0)
+            $ Girls[0].DrainWord("leaving",1,0,0)
+            $ Girls[0].DrainWord("arriving",1,0,0)
 
-                if Girls[0].Loc == bg_current or (bg_current == "bg_classroom" and Girls[0].Loc == "bg_teacher"):
-                    if Hold and bg_current in ("bg_campus","bg_classroom","bg_dangerroom","bg_pool"):
-                            # "Hold" is sent by Present_Check/Girls_Arrive, if active, and you are in public, it sets the girl nearby
-                            if Girls[0] not in Nearby:
-                                    $ Nearby.append(Girls[0])
-                            $ Girls[0].Loc = "nearby"
-                    elif bg_current == Girls[0].Home:
-                            #if you are in the girl's room, send her to the campus
-                            if Girls[0] == JubesX and JubesX.Addict >= 60:
-                                        $ Girls[0].Loc = "bg_showerroom"
-                            $ Girls[0].Loc = "bg_campus"
-                            $ Player.DrainWord("locked",0,0,1)
-                    else:
-                            #if you are not in the girl's room, send her home
-                            $ Girls[0].Loc = Girls[0].Home
-                            $ Player.DrainWord("locked",0,0,1)
+            if Girls[0].location == bg_current or (bg_current == "bg_classroom" and Girls[0].location == "bg_teacher"):
+                if place_on_hold and bg_current in ("bg_campus","bg_classroom","bg_dangerroom","bg_pool"):
+                    if Girls[0] not in Nearby:
+                        $ Nearby.append(Girls[0])
 
-                #below portion visually removes girls.
-                if HideGirl:
-                            call hide_Girl(Girls[0], sprite = True)
-                $ Girls.remove(Girls[0])
+                    $ Girls[0].location = "nearby"
+                elif bg_current == Girls[0].Home:
+                    if Girls[0] == JubesX and JubesX.Addict >= 60:
+                        $ Girls[0].location = "bg_showerroom"
+
+                    $ Girls[0].location = "bg_campus"
+                    $ door_locked = False
+                else:
+                    $ Girls[0].location = Girls[0].Home
+                    $ door_locked = False
+
+            if hide_girls:
+                call hide_girl(Girls[0], sprite = True)
+
+            $ Girls.remove(Girls[0])
+
         return
 
-label CleartheRoom(Character = 0, Passive = 0, Silent = 0, Girls=[],Girls=[]): #rkeljsv
-        #This is intended to clear the room of non-essential Girls
-        #the named Girl is the one who stays, everyone else is kicked out.
-        #Character is the one asking to clear the room.
-        #Passive is when the second person leaves on their own.
-        #Silent removes dialog
-        # call CleartheRoom(RogueX,1,1)
+label clear_the_room(Girl = None, passive = False, silent = False, Girls_to_remove = []):
+    $ other_Girls = all_Girls[:]
+    $ other_Girls.remove(Girl) if Girl in all_Girls else other_Girls
 
-        #this populates a list of other girls at the current location
+    while other_Girls:
+        if other_Girls[0].location == bg_current or other_Girls[0] in Party:
+            $ Girls_to_remove.append(other_Girls[0])
+        elif other_Girls[0].location == "bg teacher" and bg_current == "bg classroom":
+            $ Girls_to_remove.append(other_Girls[0])
 
-        $ Girls = all_Girls[:]
-        $ Girls.remove(Character) if Character in all_Girls else Girls
-        while Girls:
-                if Girls[0].Loc == bg_current or Girls[0] in Party:
-                        #if she is at current location, or in your Party
-                        $ Girls.append(Girls[0])
-                elif Girls[0].Loc == "bg_teacher" and bg_current == "bg_classroom":
-                        #or is not the Girl asking people to leave, but is in a teacher role in class. . .
-                        $ Girls.append(Girls[0])
+        $ other_Girls.remove(other_Girls[0])
 
-                $ Girls.remove(Girls[0])
+    $ Nearby = [] #empties the nearby list
 
-        $ Nearby = [] #empties the nearby list
+    if not silent and not passive:
+        if Girl.location != bg_current:
+            "[Girl.Name] enters the room."
 
-        if not Silent and not Passive:
-                #this section asks a question that a later phase will answer
-                if Character.Loc != bg_current:
-                        "[Character.name] enters the room."
-                        $ Character.Loc = bg_current
-                if not Girls:
-                        #if there is no other girl. . .
-                        if Character in all_Girls:
-                                call Display_Girl(Character)
-                        return
-                if Character == RogueX:
-                        # if the clearing Girl is Rogue
-                        if len(Girls) > 1:
-                            #if there is at least two other girls. . .
-                            ch_r "Ladies, could I talk to [Player.name] alone for a minute?"
-                        elif Girls:
-                            #if there is at least one other girl. . .
-                            ch_r "[Girls[0].name], could I talk to [Player.name] alone for a minute?"
-                elif Character == KittyX:
-                        if len(Girls) > 1:
-                            ch_k "Girls, could I talk to [Player.name] alone for a sec?"
-                        elif Girls:
-                            ch_k "[Girls[0].name], could I talk to [Player.name] alone for a sec?"
-                elif Character == EmmaX:
-                        if len(Girls) > 1:
-                            ch_e "Girls, would you mind if I had a word alone with [Player.name]?"
-                        elif Girls:
-                            ch_e "[Girls[0].name], would you mind if I had a word alone with [Player.name]?"
-                elif Character == LauraX:
-                        if len(Girls) > 1:
-                            ch_l "Hey, clear out, I need to talk with [Player.name]."
-                        elif Girls:
-                            ch_l "[Girls[0].name], clear out, I need to talk with [Player.name]."
-                elif Character == JeanX:
-                        if len(Girls) > 1:
-                            ch_j "Let me have the room, ladies."
-                        elif Girls:
-                            ch_j "You there, clear out."
-                elif Character == StormX:
-                        if len(Girls) > 1:
-                            ch_s "If I could have the room, ladies?"
-                        elif Girls:
-                            ch_s "If you could give me the room, [Girls[0].name], I need to speak with [Player.name]."
-                elif Character == JubesX:
-                        if len(Girls) > 1:
-                            ch_v "Hey, could you gals check out? I've gotta talk to [Player.name]."
-                        elif Girls:
-                            ch_v "Hey, could you check out, [Girls[0].name]? I've gotta talk to [Player.name]."
-        #end portion asking about each girl
+            $ Girl.location = bg_current
+        if not Girls_to_remove:
+            if Girl in all_Girls:
+                call Display_Girl(Girl)
+            return
 
-        $ renpy.random.shuffle(Girls)
-        while Girls:
-                if Girls[0] in Party:
-                        $ Party.remove(Girls[0])
-                $ Girls[0].DrainWord("leaving",1,0,0)
-                $ Girls[0].DrainWord("arriving",1,0,0)
+        if Girl == RogueX:
+            if len(Girls_to_remove) > 1:
+                ch_r "Ladies, could I talk to [Player.Name] alone for a minute?"
+            elif Girls_to_remove:
+                ch_r "[Girls_to_remove[0].Name], could I talk to [Player.Name] alone for a minute?"
+        elif Girl == KittyX:
+            if len(Girls_to_remove) > 1:
+                ch_k "Girls, could I talk to [Player.Name] alone for a sec?"
+            elif Girls_to_remove:
+                ch_k "[Girls_to_remove[0].Name], could I talk to [Player.Name] alone for a sec?"
+        elif Girl == EmmaX:
+            if len(Girls_to_remove) > 1:
+                ch_e "Girls, would you mind if I had a word alone with [Player.Name]?"
+            elif Girls_to_remove:
+                ch_e "[Girls_to_remove[0].Name], would you mind if I had a word alone with [Player.Name]?"
+        elif Girl == LauraX:
+            if len(Girls_to_remove) > 1:
+                ch_l "Hey, clear out, I need to talk with [Player.Name]."
+            elif Girls_to_remove:
+                ch_l "[Girls_to_remove[0].Name], clear out, I need to talk with [Player.Name]."
+        elif Girl == JeanX:
+            if len(Girls_to_remove) > 1:
+                ch_j "Let me have the room, ladies."
+            elif Girls_to_remove:
+                ch_j "You there, clear out."
+        elif Girl == StormX:
+            if len(Girls_to_remove) > 1:
+                ch_s "If I could have the room, ladies?"
+            elif Girls_to_remove:
+                ch_s "If you could give me the room, [Girls_to_remove[0].Name], I need to speak with [Player.Name]."
+        elif Girl == JubesX:
+            if len(Girls_to_remove) > 1:
+                ch_v "Hey, could you gals check out? I've gotta talk to [Player.Name]."
+            elif Girls_to_remove:
+                ch_v "Hey, could you check out, [Girls_to_remove[0].Name]? I've gotta talk to [Player.Name]."
 
-                if Silent:
-                        pass
-                elif not Passive and Character != "All":
-                        #if there are other girls. . .
-                        if Girls[0] == RogueX:
-                                ch_r "No problem, I'll see you later then."
-                        elif Girls[0] == KittyX:
-                                ch_k "[KittyX.Like]sure, I'll see you later."
-                        elif Girls[0] == EmmaX:
-                                ch_e "Fine, I'll see you later then."
-                        elif Girls[0] == LauraX:
-                                ch_l "Ok. I'm leaving."
-                        elif Girls[0] == JeanX:
-                                ch_j "I'll pretend you were less rude. . ."
-                        elif Girls[0] == StormX:
-                                ch_s "I will see you all later. . ."
-                        elif Girls[0] == JubesX:
-                                ch_v "I'm gonna peace out. . ."
-                else:
-                        if Girls[0] == RogueX:
-                                ch_r "I should get going, see you later, [RogueX.Petname]."
-                        elif Girls[0] == KittyX:
-                                ch_k "I think I'll head out, I'll see you later."
-                        elif Girls[0] == EmmaX:
-                                ch_e "I think I should be going now."
-                        elif Girls[0] == LauraX:
-                                ch_l "I'm leaving."
-                        elif Girls[0] == JeanX:
-                                "[JeanX.name] wanders off."
-                        elif Girls[0] == StormX:
-                                ch_s "I should go. . ."
-                        elif Girls[0] == JubesX:
-                                ch_v "I'm gonna peace out. . ."
+    $ renpy.random.shuffle(Girls_to_remove)
 
-                if bg_current == Girls[0].Home:
-                        if Character != "All": #if it's not clearing all girls. . .
-                                #if the girl is not Rogue but you're in Rogue's room, the girl takes you to her room
-                                $ bg_current = Character.Home
-                                $ Character.Loc = Character.Home
-                                call set_the_scene
-                                call CleartheRoom(Character)
-                                call Taboo_Level
-                                if not Silent:
-                                    "[Character.name] brings you back to her room. . ."
-                                jump Misplaced
-                                return
-                        else:
-                                $ Girls[0].Loc = "bg_campus"
-                else:
-                                $ Girls[0].Loc = Girls[0].Home
+    while Girls_to_remove:
+        if Girls_to_remove[0] in Party:
+            $ Party.remove(Girls_to_remove[0])
 
-                if Girls[0] == RogueX:
-                        hide Rogue_Sprite with easeoutright
-                elif Girls[0] == KittyX:
-                        hide Kitty_Sprite with easeoutbottom
-                elif Girls[0] == EmmaX:
-                        hide Emma_Sprite with easeoutright
-                elif Girls[0] == LauraX:
-                        hide Laura_Sprite with easeoutright
-                elif Girls[0] == JeanX:
-                        hide Jean_Sprite with easeoutright
-                elif Girls[0] == StormX:
-                        hide Storm_Sprite with easeoutright
-                elif Girls[0] == JubesX:
-                        hide Jubes_Sprite with easeoutright
-                $ Girls.remove(Girls[0])
-        if Character in all_Girls:
-                call Display_Girl(Character)
-        call Taboo_Level
-        return
+        $ Girls_to_remove[0].DrainWord("leaving",1,0,0)
+        $ Girls_to_remove[0].DrainWord("arriving",1,0,0)
+
+        if silent:
+            pass
+        elif not passive and Girl != "all":
+            if Girls_to_remove[0] == RogueX:
+                ch_r "No problem, I'll see you later then."
+            elif Girls_to_remove[0] == KittyX:
+                ch_k "[KittyX.Like]sure, I'll see you later."
+            elif Girls_to_remove[0] == EmmaX:
+                ch_e "Fine, I'll see you later then."
+            elif Girls_to_remove[0] == LauraX:
+                ch_l "Ok. I'm leaving."
+            elif Girls_to_remove[0] == JeanX:
+                ch_j "I'll pretend you were less rude. . ."
+            elif Girls_to_remove[0] == StormX:
+                ch_s "I will see you all later. . ."
+            elif Girls_to_remove[0] == JubesX:
+                ch_v "I'm gonna peace out. . ."
+        else:
+            if Girls_to_remove[0] == RogueX:
+                ch_r "I should get going, see you later, [RogueX.Petname]."
+            elif Girls_to_remove[0] == KittyX:
+                ch_k "I think I'll head out, I'll see you later."
+            elif Girls_to_remove[0] == EmmaX:
+                ch_e "I think I should be going now."
+            elif Girls_to_remove[0] == LauraX:
+                ch_l "I'm leaving."
+            elif Girls_to_remove[0] == JeanX:
+                "[JeanX.Name] wanders off."
+            elif Girls_to_remove[0] == StormX:
+                ch_s "I should go. . ."
+            elif Girls_to_remove[0] == JubesX:
+                ch_v "I'm gonna peace out. . ."
+
+        if bg_current == Girls_to_remove[0].Home:
+            if Girl != "all": #if it's not clearing all girls. . .
+                $ bg_current = Girl.Home
+
+                $ Girl.location = Girl.Home
+
+                call Set_The_Scene
+                call clear_the_room(Girl)
+                call Taboo_Level
+
+                if not silent:
+                    "[Girl.Name] brings you back to her room. . ."
+
+                jump Misplaced
+
+                return
+            else:
+                $ Girls_to_remove[0].location = "bg campus"
+        else:
+            $ Girls_to_remove[0].location = Girls_to_remove[0].Home
+
+        if Girls_to_remove[0] == RogueX:
+            hide Rogue_Sprite with easeoutright
+        elif Girls_to_remove[0] == KittyX:
+            hide Kitty_Sprite with easeoutbottom
+        elif Girls_to_remove[0] == EmmaX:
+            hide Emma_Sprite with easeoutright
+        elif Girls_to_remove[0] == LauraX:
+            hide Laura_Sprite with easeoutright
+        elif Girls_to_remove[0] == JeanX:
+            hide Jean_Sprite with easeoutright
+        elif Girls_to_remove[0] == StormX:
+            hide Storm_Sprite with easeoutright
+        elif Girls_to_remove[0] == JubesX:
+            hide Jubes_Sprite with easeoutright
+
+        $ Girls_to_remove.remove(Girls_to_remove[0])
+
+    if Girl in all_Girls:
+        call Display_Girl(Girl)
+
+    call Taboo_Level
+
+    return
 
 label Girls_Location(GirlsNum = 0, Change=0, Girlsptions=[]):
         #this figures out where girls are and where to put spares.
@@ -1767,13 +1752,13 @@ label Girls_Location(GirlsNum = 0, Change=0, Girlsptions=[]):
                         if "sleepover" in Girlsptions[0].Traits:
                                 $ Girlsptions[0].DrainWord("sleepover",0,0,1)  #remove from Traits
                         call leave(Girlsptions[0])
-                        if Girlsptions[0].Loc != bg_current:
+                        if Girlsptions[0].location != bg_current:
                                 if Girlsptions[0] in Present:
                                         $ Present.remove(Girlsptions[0])
                                 $ Change = 1
                         $ GirlsNum += 1
                 #if Girl was in Nearby, but was moved to a new location
-                if Girlsptions[0] in Nearby and Girlsptions[0].Loc != "nearby": #and Girlsptions[0].Loc != bg_current
+                if Girlsptions[0] in Nearby and Girlsptions[0].location != "nearby": #and Girlsptions[0].location != bg_current
                                 $ Nearby.remove(Girlsptions[0])
                 $ Girlsptions.remove(Girlsptions[0])
 
@@ -1825,23 +1810,23 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                 $ Secondary = 0
         $ Options = []
 
-        if "locked" in Player.Traits:
+        if door_locked:
                 if Primary == KittyX:
                         call Locked_Door(KittyX)
-                        if KittyX.Loc != bg_current:
+                        if KittyX.location != bg_current:
                             $ Primary = 0
                         elif Secondary:
                             #since Kitty can just barg right in, if she does so,
                             "You hear a \"thump\" as if someone was trying to follow Kitty."
                             call Locked_Door(Secondary)
-                            if Secondary.Loc != bg_current:
+                            if Secondary.location != bg_current:
                                     $ Secondary = 0
                 elif Primary.Home == bg_current:
                         #if it's the girl's room. . .
                         "You hear a key jiggling in the lock."
                 else:
                         call Locked_Door(Primary)
-                        if Primary.Loc != bg_current:
+                        if Primary.location != bg_current:
                             $ Primary = 0
         #End "if the door was locked."
 
@@ -1851,7 +1836,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
         #This sequence sets the pecking order, more important once there are more girls
         #girls left out of this are put into "Nearby" for the current space
 
-        call Shift_Focus(Primary)
+        call shift_focus(Primary)
         if bg_current == "bg_dangerroom":
                     #call Gym_Clothes("auto")
                     #puts incoming girls into gym clothes
@@ -1962,7 +1947,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                                             ch_s "Ah, then we'll leave you to it."
                                     elif Primary == JubesX:
                                             ch_v "Oh. Ok. . ."
-                                    call Remove_Girl(Secondary)
+                                    call remove_girl(Secondary)
                             elif Primary == RogueX:
                                     ch_r "Um, ok."
                             elif Primary == KittyX:
@@ -1985,7 +1970,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                                     ch_j "Uh-huh."
                                     "She doesn't leave."
                             if Primary != JeanX:
-                                    call Remove_Girl(Primary)
+                                    call remove_girl(Primary)
                             #end "later"
                     if line == "no":
                             $ Primary.change_stat("obedience", 50, 5)
@@ -2032,7 +2017,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                                     ch_j "Uh-huh."
                                     "She doesn't leave."
                             if Primary != JeanX:
-                                    call Remove_Girl(Primary)
+                                    call remove_girl(Primary)
                             if Secondary and Secondary != JeanX:
                                     $ Secondary.change_stat("obedience", 50, 5)
                                     if ApprovalCheck(Secondary, 1800) or ApprovalCheck(Secondary, 500, "O"):
@@ -2073,7 +2058,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                                                 ch_s ". . . I see. . ."
                                         elif Primary == JubesX:
                                                 ch_v "Oh, so you're going to be like -that-. . ."
-                                    call Remove_Girl(Secondary)
+                                    call remove_girl(Secondary)
                                     if Primary == JeanX:
                                             "[Secondary.name] storms out."
                                     else:
@@ -2444,9 +2429,9 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                 if line:
                     "[line]."
 
-                if EmmaX.Loc == "bg_teacher":
+                if EmmaX.location == "bg_teacher":
                         "[EmmaX.name] takes her position behind the podium."
-                elif StormX.Loc == "bg_teacher":
+                elif StormX.location == "bg_teacher":
                         "[StormX.name] takes her position behind the podium."
                 #end girls showed up to class
         elif bg_current == "bg_dangerroom":
@@ -2500,8 +2485,8 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
         $ Girls = all_Girls[:]
         while Girls:
                 if Girls[0] in Nearby:
-                        $ Girls[0].Loc = "nearby"
-                elif Girls[0].Loc == bg_current:
+                        $ Girls[0].location = "nearby"
+                elif Girls[0].location == bg_current:
                         $ Present.append(Girls[0])
                 $ Girls.remove(Girls[0])
         if Nearby:
@@ -2513,15 +2498,15 @@ label ReturnToSender:
         #Set's girl's location back to where she's meant to be if she stuck around in an area you've since left
         $ Girls = active_Girls[:]
         while Girls:
-            #if Girls[0].Loc != bg_current and Girls[0].Loc == "nearby":
-            #if Girls[0].Loc != bg_current and Girls[0] not in Party:
+            #if Girls[0].location != bg_current and Girls[0].location == "nearby":
+            #if Girls[0].location != bg_current and Girls[0] not in Party:
 
             if Girls[0] not in Party and Girls[0].Schedule[Weekday][time_index] != bg_current:
                     # so long as she is not scehduled to be in the current location,
-                    $ Girls[0].Loc = Girls[0].Schedule[Weekday][time_index]
+                    $ Girls[0].location = Girls[0].Schedule[Weekday][time_index]
                     if Girls[0] == JubesX and JubesX.Addict > 60:
                                     #Jubliee will not leave her room voluntarily if it's higher than 60
-                                    $ JubesX.Loc = JubesX.Home
+                                    $ JubesX.location = JubesX.Home
             $ Girls.remove(Girls[0])
         return
 
@@ -2540,34 +2525,34 @@ label Swap_Nearby(Girl=0): #rkeljsv
             call Anyline(Girl,"It's a little crowded over there.")
             menu:
                 "Move away from an adjacent girl?"
-                "[RogueX.name]" if RogueX.Loc == bg_current:
+                "[RogueX.name]" if RogueX.location == bg_current:
                         "You shift away from [RogueX.name]"
-                        call Remove_Girl(RogueX,1,1)    #Hide+moveto nearby
-                "[KittyX.name]" if KittyX.Loc == bg_current:
+                        call remove_girl(RogueX,1,1)    #Hide+moveto nearby
+                "[KittyX.name]" if KittyX.location == bg_current:
                         "You shift away from [KittyX.name]"
-                        call Remove_Girl(KittyX,1,1)    #Hide+moveto nearby
-                "[EmmaX.name]" if EmmaX.Loc == bg_current:
+                        call remove_girl(KittyX,1,1)    #Hide+moveto nearby
+                "[EmmaX.name]" if EmmaX.location == bg_current:
                         "You shift away from [EmmaX.name]"
-                        call Remove_Girl(EmmaX,1,1)     #Hide+moveto nearby
-                "[LauraX.name]" if LauraX.Loc == bg_current:
+                        call remove_girl(EmmaX,1,1)     #Hide+moveto nearby
+                "[LauraX.name]" if LauraX.location == bg_current:
                         "You shift away from [LauraX.name]"
-                        call Remove_Girl(LauraX,1,1)    #Hide+moveto nearby
-                "[JeanX.name]" if JeanX.Loc == bg_current:
+                        call remove_girl(LauraX,1,1)    #Hide+moveto nearby
+                "[JeanX.name]" if JeanX.location == bg_current:
                         "You shift away from [JeanX.name]"
-                        call Remove_Girl(JeanX,1,1)    #Hide+moveto nearby
-                "[StormX.name]" if StormX.Loc == bg_current:
+                        call remove_girl(JeanX,1,1)    #Hide+moveto nearby
+                "[StormX.name]" if StormX.location == bg_current:
                         "You shift away from [StormX.name]"
-                        call Remove_Girl(StormX,1,1)    #Hide+moveto nearby
-                "[JubesX.name]" if JubesX.Loc == bg_current:
+                        call remove_girl(StormX,1,1)    #Hide+moveto nearby
+                "[JubesX.name]" if JubesX.location == bg_current:
                         "You shift away from [JubesX.name]"
-                        call Remove_Girl(JubesX,1,1)    #Hide+moveto nearby
+                        call remove_girl(JubesX,1,1)    #Hide+moveto nearby
                 "No, never mind.":
                     return
         "[Girl.name] comes over and joins you."
         $ Nearby.remove(Girl)
         $ Present.append(Girl)
-        call Shift_Focus(Girl)
-        $ Girl.Loc = bg_current
+        call shift_focus(Girl)
+        $ Girl.location = bg_current
         call set_the_scene(1,0,0,0)
         return
 
@@ -2575,19 +2560,19 @@ label Dismissed:  #rkeljsv
         # this is called to dismiss any girl in the local area.
         menu:
             "Did you want to ask someone to leave?"
-            "[RogueX.name]" if RogueX.Loc == bg_current or RogueX in Party:
+            "[RogueX.name]" if RogueX.location == bg_current or RogueX in Party:
                 call Girl_Dismissed(RogueX)
-            "[KittyX.name]" if KittyX.Loc == bg_current or KittyX in Party:
+            "[KittyX.name]" if KittyX.location == bg_current or KittyX in Party:
                 call Girl_Dismissed(KittyX)
-            "[EmmaX.name]" if EmmaX.Loc == bg_current or EmmaX in Party:
+            "[EmmaX.name]" if EmmaX.location == bg_current or EmmaX in Party:
                 call Girl_Dismissed(EmmaX)
-            "[LauraX.name]" if LauraX.Loc == bg_current or LauraX in Party:
+            "[LauraX.name]" if LauraX.location == bg_current or LauraX in Party:
                 call Girl_Dismissed(LauraX)
-            "[JeanX.name]" if JeanX.Loc == bg_current or JeanX in Party:
+            "[JeanX.name]" if JeanX.location == bg_current or JeanX in Party:
                 call Girl_Dismissed(JeanX)
-            "[StormX.name]" if StormX.Loc == bg_current or StormX in Party:
+            "[StormX.name]" if StormX.location == bg_current or StormX in Party:
                 call Girl_Dismissed(StormX)
-            "[JubesX.name]" if JubesX.Loc == bg_current or JubesX in Party:
+            "[JubesX.name]" if JubesX.location == bg_current or JubesX in Party:
                 call Girl_Dismissed(JubesX)
             "Nevermind.":
                 pass
@@ -2610,14 +2595,14 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
                         "Suddently, [Girl.name] rounds a corner."
                 else:
                         "You look to the door just as [KittyX.name] phases into the room."
-                $ KittyX.Loc = bg_current
+                $ KittyX.location = bg_current
                 call Taboo_Level
                 $ KittyX.OutfitChange()
                 call Display_Girl(KittyX,reset_actions=0)
                 ch_k "Hi, [KittyX.Petname]!"
                 return 1
-        if "locked" not in Player.Traits:
-                $ Girl.Loc = bg_current
+        if door_locked:
+                $ Girl.location = bg_current
                 if entering:
                         call Display_Girl(Girl,reset_actions=0)
                         if bg_current == "bg_campus" or bg_current == "bg_pool":
@@ -2637,13 +2622,13 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
                         elif Girl == JubesX:
                                 ch_v "Hey, [Girl.Petname]."
                 return 1
-        if Girl.Loc == Girl.Home:
+        if Girl.location == Girl.Home:
                 "You hear a key in the lock, and [Girl.name] enters the room."
         elif Girl == JeanX:
                 "You hear a rattle at the door."
                 "After a moment, and some clicking in the lock, the door pops open."
                 "[JeanX.name] walks into the room."
-                $ JeanX.Loc = bg_current
+                $ JeanX.location = bg_current
                 call Taboo_Level
                 $ JeanX.OutfitChange()
                 call Display_Girl(JeanX,reset_actions=0)
@@ -2664,15 +2649,15 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
             menu:
                 extend ""
                 "Open door":
-                        ch_p "Hold on, [Girl.name]!"
+                        ch_p "place_on_hold on, [Girl.name]!"
                         "You unlock the door and let her in."
-                        $ Girl.Loc = bg_current
+                        $ Girl.location = bg_current
                         $ Girl.OutfitChange()
                 "Open door [[but stop fucking first]" if primary_action:
-                        ch_p "Hold on, [Girl.name]!"
+                        ch_p "place_on_hold on, [Girl.name]!"
                         call Sex_Over(1,Primary) #Cleans up after the sex stuff
                         "You unlock the door and let her in."
-                        $ Girl.Loc = bg_current
+                        $ Girl.location = bg_current
                         $ Girl.OutfitChange()
                         call Display_Girl(Girl,reset_actions=0)
                         if Girl == RogueX:
@@ -2691,20 +2676,20 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
                         $ Girl.change_stat("love", 80, -2)
                         if Girl == RogueX:
                                 ch_r "C'mon, [Girl.Petname], don't yank my chain like this!"
-                                if Girl.Loc == bg_current:
-                                    call Remove_Girl(Girl)
+                                if Girl.location == bg_current:
+                                    call remove_girl(Girl)
                                 return 0
                         elif Girl == EmmaX:
                                 $ Girl.change_stat("obedience", 80, -2)
                                 ch_e "I have to say, [EmmaX.Petname], I understand the appeal of having someone at your beck and call. . ."
                                 ch_e "but I don't appreciate being on the receiving end!"
-                                if Girl.Loc == bg_current:
-                                    call Remove_Girl(Girl)
+                                if Girl.location == bg_current:
+                                    call remove_girl(Girl)
                                 return 0
                         elif Girl in (LauraX,JubesX):
                             "[Girl.name] goes quiet."
                             if ApprovalCheck(Girl, 500,"I") and not ApprovalCheck(Girl, 500,"O"):
-                                    $ Girl.Loc = bg_current
+                                    $ Girl.location = bg_current
                                     $ Girl.OutfitChange()
                                     if Girl == LauraX:
                                             $ LauraX.ArmPose = 2
@@ -2724,12 +2709,12 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
                                     $ Girl.change_stat("obedience", 80, 3)
                                     call Anyline(Girl,"Ok.")
                                     "You hear her shuffling off."
-                                    if Girl.Loc == bg_current:
-                                        call Remove_Girl(Girl)
+                                    if Girl.location == bg_current:
+                                        call remove_girl(Girl)
                                     return 0
                         elif Girl == StormX:
                             if ApprovalCheck(Girl, 800,"LI") and not ApprovalCheck(Girl, 500,"O"):
-                                    $ Girl.Loc = bg_current
+                                    $ Girl.location = bg_current
                                     $ Girl.OutfitChange()
                                     call Display_Girl(Girl,reset_actions=0)
                                     "You hear some clicking from the door."
@@ -2741,8 +2726,8 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
                                     $ Girl.change_stat("obedience", 80, 3)
                                     ch_s ". . ."
                                     ch_s "Very well, I can respect that."
-                                    if Girl.Loc == bg_current:
-                                        call Remove_Girl(Girl)
+                                    if Girl.location == bg_current:
+                                        call remove_girl(Girl)
                                     return 0
         if Current:
             if Current == EmmaX and ("three" not in EmmaX.History or "classcaught" not in EmmaX.History):
@@ -2752,11 +2737,11 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
                             #if you're in her room. . .
                             ch_e "I. . . This isn't what it looks like. . ."
                             "She shoves the two of you out of her room and slams the door."
-                            $ Girl.Loc = "bg_player"
-                            call Remove_Girl(EmmaX)
+                            $ Girl.location = "bg_player"
+                            call remove_girl(EmmaX)
                     else:
                             ch_e "I. . . This isn't what it looks like. . ."
-                            call Remove_Girl(EmmaX)
+                            call remove_girl(EmmaX)
                             "She seems uncomfortable with the situation and leaves the room."
                             "Perhaps you should ask her about it later."
                     jump Misplaced
@@ -2812,8 +2797,8 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
                                     ch_v "Oh, yes! Sorry!"
                             $ Girl.change_face("sad", 1)
                             $ Current.change_face("sexy", 1)
-                            if Girl.Loc == bg_current:
-                                    call Remove_Girl(Girl)
+                            if Girl.location == bg_current:
+                                    call remove_girl(Girl)
                             return 0
             if Current == RogueX:
                     ch_r "Oh, [Girl.Tag], did you want to join in?"
@@ -2830,15 +2815,15 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
             elif Current == JubesX:
                     ch_v "Hey, [Girl.Tag], did you need something?"
         #end current stuff
-        $ Girl.Loc = bg_current
+        $ Girl.location = bg_current
         call Taboo_Level
         $ Girl.OutfitChange(5)
-        $ Player.DrainWord("locked",0,0,1)
+        $ door_locked = False
         call set_the_scene(1,0,0,0)#Girls, no entry, no clothes changes, no triggers
 
         if Partner == Girl:
                 #if this is already a Partner, skip this dialog
-                $ Silent = 1
+                $ silent = 1
         $ Partner = Girl
         $ line = 0
         return 1
@@ -2848,11 +2833,11 @@ label Taboo_Level(Taboo_Loc=1,Teach=0,Girls=[]): #rkeljsv
         # if Taboo_Loc, will only work on local Girls.
         #Set your taboo level
 
-        if EmmaX.Loc == "bg_teacher":
-                $ EmmaX.Loc = "bg_classroom" #Sets Emma to being in class if she's teaching
+        if EmmaX.location == "bg_teacher":
+                $ EmmaX.location = "bg_classroom" #Sets Emma to being in class if she's teaching
                 $ Teach = 1
-        elif StormX.Loc == "bg_teacher":
-                $ StormX.Loc = "bg_classroom" #Sets Storm to being in class if she's teaching
+        elif StormX.location == "bg_teacher":
+                $ StormX.location = "bg_classroom" #Sets Storm to being in class if she's teaching
                 $ Teach = 2
 
         call CheckTaboo(Player,bg_current)
@@ -2866,20 +2851,20 @@ label Taboo_Level(Taboo_Loc=1,Teach=0,Girls=[]): #rkeljsv
                 #cycles through each girl possible, setting them to local if they are in the party
                 #Then it checks their taboo level
                 if Girls[0] in Party:
-                        $ Girls[0].Loc = bg_current
-                if Girls[0].Loc == "nearby":
+                        $ Girls[0].location = bg_current
+                if Girls[0].location == "nearby":
                         $ Taboo_Check = bg_current
                 else:
-                        $ Taboo_Check = Girls[0].Loc
+                        $ Taboo_Check = Girls[0].location
                 if not Taboo_Loc or Taboo_Check == bg_current:
                         #only checks if they are local if it's not a general check
                         call CheckTaboo(Girls[0],Taboo_Check)
                 $ Girls.remove(Girls[0])
 
         if Teach == 2:
-                $ StormX.Loc = "bg_teacher" #Sets Storm to being a teacher again
+                $ StormX.location = "bg_teacher" #Sets Storm to being a teacher again
         elif Teach:
-                $ EmmaX.Loc = "bg_teacher" #Sets Emma to being a teacher again
+                $ EmmaX.location = "bg_teacher" #Sets Emma to being a teacher again
         return
         #end taboo level
 
@@ -3271,7 +3256,7 @@ label Shop: #rkeljs
                         "You don't have enough for that."
                 "Examine the Purple Rain Cologne (\"They can't resist your charms\").":
                     menu:
-                        "This cologne is guaranteed to make women more suggestible to your orders until tomorrow [[+obedienceience]."
+                        "This cologne is guaranteed to make women more suggestible to your orders until tomorrow [[+obedience]."
                         "Buy Purple Rain Cologne for $200":
                             pass
                         "Never mind.":
@@ -3291,7 +3276,7 @@ label Shop: #rkeljs
                         "You don't have enough for that."
                 "Examine the Corruption Cologne (\"Let the wild out\").":
                     menu:
-                        "This cologne is guaranteed to make women let loose their wild side [[-Inhibition]."
+                        "This cologne is guaranteed to make women let loose their wild side [[-inhibition]."
                         "Buy Corruption Cologne for $250":
                             pass
                         "Never mind.":
@@ -3353,7 +3338,7 @@ label set_the_scene(show_characters = True, entering = False, check_if_dressed =
 
             $ Girls.remove(Girls[0])
 
-        if focused_Girl.Loc == bg_current:
+        if focused_Girl.location == bg_current:
             $ focused_Girl.sprite_location = StageCenter
             $ focused_Girl.Layer = 100
 
@@ -3371,9 +3356,9 @@ label set_the_scene(show_characters = True, entering = False, check_if_dressed =
     hide Cellphone
 
     if bg_current == "bg_classroom":
-        if EmmaX.Loc == "bg_teacher":
+        if EmmaX.location == "bg_teacher":
             $ EmmaX.OutfitChange()
-        if StormX.Loc == "bg_teacher":
+        if StormX.location == "bg_teacher":
             $ StormX.OutfitChange()
 
     if bg_current != "bg_pool":
@@ -3383,7 +3368,7 @@ label set_the_scene(show_characters = True, entering = False, check_if_dressed =
 
     hide DressScreen
 
-    if "Historia" in Player.Traits: #Simulation haze
+    if simulation: #Simulation haze
         show BlueScreen onlayer black
     else:
         hide BlueScreen onlayer black
@@ -3392,169 +3377,136 @@ label set_the_scene(show_characters = True, entering = False, check_if_dressed =
 
     return
 
-label Shift_Focus(Girl = RogueX, Second = 0,Girls=[],Return=0):
+label shift_focus(Girl, second_Girl = 0):
+    if Girl.location == bg_current:
+        $ Girls = all_Girls[:]
+        $ Girls.remove(Girl)
 
-        #When used like Shift_Focus(KittyX), changes the focus Girl and relative default positions
-        if Girl not in all_Girls:
-                "Tell Oni [Girl]"
-                "Then Tell Oni [Girl.Tag]"
-        if Girl == focused_Girl == Partner:
-                #if somehow the partner and chosen girl are the same. . .
-                $ Girls = all_Girls[:]
-                if Partner in all_Girls:
-                        $ Girls.remove(Partner)
-                else:
-                        "Tell Oni, in Shift Focus, P:[Partner]"
-                while Girls:
-                        #loops through and makes choices.
-                        if Girls[0].Loc == bg_current:
-                                $ Partner = Girls[0]
-                        $ Girls.remove(Girls[0])
-                #if anyone else is in the room, make her the partner. Do I want this?
-        if Girl.Loc == bg_current:
-                #If she is where you're at. . .
-                $ Girls = all_Girls[:]
-                if Girl in all_Girls:
-                        $ Girls.remove(Girl)
-                else:
-                        "Tell Oni, in Shift Focus, C:[Girl]"
-                while Girls:
-                        #loops through and makes choices.
-                        if Girls[0].Loc == bg_current:
-                                #if other girl is in the room, shift her to second position
-                                $ Girls[0].sprite_location = StageRight
-                                $ Girls[0].Layer = 75
-                                $ Girls = [1]
-                        $ Girls.remove(Girls[0])
-                #and move Girl to first position
-                $ Girl.sprite_location = StageCenter
-                $ Girl.Layer = 100
-        if focused_Girl == Girl:
-                #If Girl was already the focal Girl, return
-                pass
-        elif Second and Second != Girl:
-                #if a deliberate partner was offered to the call, use it
-                $ Partner = Second
-        elif Partner == Girl:
-                #If Girl was the Partner in a scene, make the existing focal Girl the Partner
-                $ Partner = focused_Girl
-        $ focused_Girl = Girl
-        if Partner == Girl:
-                $ Partner = 0
+        while Girls:
+            if Girls[0].location == bg_current:
+                $ Girls[0].sprite_location = StageRight
+                $ Girls[0].Layer = 75
+                $ Girls = [1]
 
-        $ focused_Girl = focused_Girl
+            $ Girls.remove(Girls[0])
 
-        $ renpy.restart_interaction()
-        return
+        $ Girl.sprite_location = StageCenter
+        $ Girl.Layer = 100
+
+    if focused_Girl == Girl:
+        pass
+    elif second_Girl and second_Girl != Girl:
+        $ Partner = second_Girl
+    elif Partner == Girl:
+        $ Partner = focused_Girl
+
+    $ focused_Girl = Girl
+
+    if Partner == Girl:
+        $ Partner = 0
+
+    $ renpy.restart_interaction()
+
+    return
 
 transform sprite_location(x_location = StageRight, y_location = 50):
     pos (x_location, y_location)
 
-label Display_Girl(Girl=0,Dress = 1, reset_actions = 1, DLoc = 0, YLoc=50): #rkeljsv
-                # If Dress, then check whether the Girl is underdressed when displaying her
-                # call Display_Girl(RogueX,0,0)
-                if Girl not in all_Girls:
-                        "Tell Oni that in Display_Girl, Girl is [Girl]"
-                        return
+label Display_Girl(Girl, check_if_dressed = True, reset_actions = True, x_location = 0, y_location = 50): #rkeljsv
+    if Girl not in Party and Girl.location != bg_current:
+        call hide_girl(Girl, sprite = True)
 
-                if Girl not in Party and Girl.Loc != bg_current:
-                        # If girl isn't there, put her away
-                        call hide_Girl(Girl, sprite = True)
-                        $ Girl.OutfitChange(Changed=1)
-                        return
+        $ Girl.OutfitChange(Changed=1)
 
-                if Dress:
-                        if Girl.Outfit == "swimwear":
-                                if Girl.Loc == "bg_pool":
-                                        $ Girl.OutfitChange(Changed=1)
-                                elif Girl.OutfitDay != "swimwear":
-                                        $ Girl.Outfit = Girl.OutfitDay
-                                        $ Girl.OutfitChange(Changed=1)
-                        elif Taboo: #If not in the showers, get dressed and dry off
-                                $ Girl.OutfitChange(Changed=1)
-                        elif Girl.Loc != "bg_dangerroom" and Girl.OutfitDay != "gym":
-                                #if she's not in the gym and arw wearing gym clothes. . .
-                                $ Girl.Outfit = Girl.OutfitDay
-                                $ Girl.OutfitChange(Changed=1)
+        return
 
-                elif Girl.Loc != "bg_showerroom" and Girl.Loc != "bg_pool":
-                        $ Girl.Water = 0
+    if check_if_dressed:
+        if Girl.Outfit == "swimwear":
+            if Girl.location == "bg_pool":
+                $ Girl.OutfitChange(Changed=1)
+            elif Girl.OutfitDay != "swimwear":
+                $ Girl.Outfit = Girl.OutfitDay
+                $ Girl.OutfitChange(Changed=1)
+        elif Taboo: #If not in the showers, get dressed and dry off
+            $ Girl.OutfitChange(Changed=1)
+        elif Girl.location != "bg_dangerroom" and Girl.OutfitDay != "gym":
+            $ Girl.Outfit = Girl.OutfitDay
+            $ Girl.OutfitChange(Changed=1)
 
-                if reset_actions:
-                        # resets triggers
-                        $ primary_action = 0
-                        $ offhand_action = 0 if offhand_action != "jackin" else "jackin"
-                        $ girl_offhand_action = 0
-                        $ Partner_primary_action = 0
-                        $ Partner_offhand_action = 0
+    elif Girl.location != "bg_showerroom" and Girl.location != "bg_pool":
+        $ Girl.Water = 0
 
-                if Partner == Girl:
-                        $ DLoc = StageRight #Moves Girl over if she's secondary
+    if reset_actions:
+        $ primary_action = 0
+        $ offhand_action = 0 if offhand_action != "jackin" else "jackin"
+        $ girl_offhand_action = 0
+        $ Partner_primary_action = 0
+        $ Partner_offhand_action = 0
 
-                if DLoc: #if sent a pre-location, use that, otherwise, accept the existing one.
-                        $ Girl.sprite_location = DLoc
-                else:
-                        $ DLoc = Girl.sprite_location
+    if Partner == Girl:
+        $ x_location = StageRight #Moves Girl over if she's secondary
 
-                call hide_Girl(Girl)
+    if x_location: #if sent a pre-location, use that, otherwise, accept the existing one.
+        $ Girl.sprite_location = x_location
+    else:
+        $ x_location = Girl.sprite_location
 
-                #displays girl if present, Sets her as local if in a party
-                $ Girl.Loc = bg_current
+    call hide_girl(Girl)
 
-                if Dress:
-                        #If in public, check to see if clothes are too sexy, and change them if necessary
-                        call OutfitShame(Girl)
+    $ Girl.location = bg_current
 
-                if bg_current == "bg_movies" or bg_current == "bg_restaurant":
-                        #shifts them downward if on a date
-                        $ YLoc = 250
+    if check_if_dressed:
+        call OutfitShame(Girl)
 
-                #Display Girl
-                if Girl == RogueX:
-                        show Rogue_Sprite at sprite_location(DLoc,YLoc) zorder Girl.Layer:
-                                alpha 1
-                                zoom 1
-                                offset (0,0)
-                                anchor (0.5, 0.0)
-                elif Girl == KittyX:
-                        show Kitty_Sprite at sprite_location(DLoc,YLoc) zorder Girl.Layer:
-                                alpha 1
-                                zoom 1
-                                offset (0,0)
-                                anchor (0.5, 0.0)
-                elif Girl == EmmaX:
-                        show Emma_Sprite at sprite_location(DLoc,YLoc) zorder Girl.Layer:
-                                alpha 1
-                                zoom 1
-                                offset (0,0)
-                                anchor (0.5, 0.0)
-                elif Girl == LauraX:
-                        $ Girl.Claws = 0 # Resets her claws
-                        show Laura_Sprite at sprite_location(DLoc,YLoc) zorder Girl.Layer:
-                                alpha 1
-                                zoom 1
-                                offset (0,0)
-                                anchor (0.5, 0.0)
-                elif Girl == JeanX:
-                        show Jean_Sprite at sprite_location(DLoc,YLoc) zorder Girl.Layer:
-                                alpha 1
-                                zoom 1
-                                offset (0,0)
-                                anchor (0.5, 0.0)
-                elif Girl == StormX:
-                        show Storm_Sprite at sprite_location(DLoc,YLoc) zorder Girl.Layer:
-                                alpha 1
-                                zoom 1
-                                offset (0,0)
-                                anchor (0.5, 0.0)
-                elif Girl == JubesX:
-                        show Jubes_Sprite at sprite_location(DLoc,YLoc) zorder Girl.Layer:
-                                alpha 1
-                                zoom 1
-                                offset (0,0)
-                                anchor (0.5, 0.0)
-                #End show Girl
-                return
+    if bg_current == "bg_movies" or bg_current == "bg_restaurant":
+        $ y_location = 250
+
+    if Girl == RogueX:
+        show Rogue_Sprite at sprite_location(x_location,y_location) zorder Girl.Layer:
+            alpha 1
+            zoom 1
+            offset (0,0)
+            anchor (0.5, 0.0)
+    elif Girl == KittyX:
+        show Kitty_Sprite at sprite_location(x_location,y_location) zorder Girl.Layer:
+            alpha 1
+            zoom 1
+            offset (0,0)
+            anchor (0.5, 0.0)
+    elif Girl == EmmaX:
+        show Emma_Sprite at sprite_location(x_location,y_location) zorder Girl.Layer:
+            alpha 1
+            zoom 1
+            offset (0,0)
+            anchor (0.5, 0.0)
+    elif Girl == LauraX:
+        $ Girl.Claws = 0 # Resets her claws
+
+        show Laura_Sprite at sprite_location(x_location,y_location) zorder Girl.Layer:
+            alpha 1
+            zoom 1
+            offset (0,0)
+            anchor (0.5, 0.0)
+    elif Girl == JeanX:
+        show Jean_Sprite at sprite_location(x_location,y_location) zorder Girl.Layer:
+            alpha 1
+            zoom 1
+            offset (0,0)
+            anchor (0.5, 0.0)
+    elif Girl == StormX:
+        show Storm_Sprite at sprite_location(x_location,y_location) zorder Girl.Layer:
+            alpha 1
+            zoom 1
+            offset (0,0)
+            anchor (0.5, 0.0)
+    elif Girl == JubesX:
+        show Jubes_Sprite at sprite_location(x_location,y_location) zorder Girl.Layer:
+            alpha 1
+            zoom 1
+            offset (0,0)
+            anchor (0.5, 0.0)
+
+    return
 
 label ViewShift(Girl=0,View=0,ShouldHide=1,ViewTrig=primary_action):
     # Allows you to shift the viewpoint of a girl in fondling modes
@@ -3587,7 +3539,7 @@ label ViewShift(Girl=0,View=0,ShouldHide=1,ViewTrig=primary_action):
                             pass
     else:
                     if ShouldHide:
-                            call hide_Girl(Girl)
+                            call hide_girl(Girl)
                     if View == "full":
                             call reset_position(Girl, trigger = ViewTrig, set = True)
                     elif View == "breasts":
@@ -3625,9 +3577,9 @@ label AllReset(Girl = 0,Girls=[]): #rkeljsv
             call handjob_reset(Girls[0])
             call sex_reset(Girls[0])
             call doggy_reset(Girls[0])
-            call hide_Girl(Girls[0])
+            call hide_girl(Girls[0])
             if Girls[0] == RogueX:
-                if RogueX.Loc == bg_current:
+                if RogueX.location == bg_current:
                         show Rogue_Sprite at sprite_location(RogueX.sprite_location,50) zorder RogueX.Layer:
                                 ease .5 zoom 1 xzoom 1 yzoom 1 offset (0,0) anchor (0.6, 0.0)
                         show Rogue_Sprite:
@@ -3635,7 +3587,7 @@ label AllReset(Girl = 0,Girls=[]): #rkeljsv
                 else:
                         hide Rogue_Sprite
             elif Girls[0] == KittyX:
-                if KittyX.Loc == bg_current:
+                if KittyX.location == bg_current:
                         show Kitty_Sprite at sprite_location(KittyX.sprite_location,50) zorder KittyX.Layer:
                                 ease .5 zoom 1 xzoom 1 yzoom 1 offset (0,0) anchor (0.5, 0.0)
                         show Kitty_Sprite:
@@ -3643,7 +3595,7 @@ label AllReset(Girl = 0,Girls=[]): #rkeljsv
                 else:
                         hide Kitty_Sprite
             elif Girls[0] == EmmaX:
-                if EmmaX.Loc == bg_current:
+                if EmmaX.location == bg_current:
                         show Emma_Sprite at sprite_location(EmmaX.sprite_location,50) zorder EmmaX.Layer:
                                 ease .5 zoom 1 xzoom 1 yzoom 1 offset (0,0) anchor (0.5, 0.0)
                         show Emma_Sprite:
@@ -3651,7 +3603,7 @@ label AllReset(Girl = 0,Girls=[]): #rkeljsv
                 else:
                         hide Emma_Sprite
             elif Girls[0] == LauraX:
-                if LauraX.Loc == bg_current:
+                if LauraX.location == bg_current:
                         show Laura_Sprite at sprite_location(LauraX.sprite_location,50) zorder LauraX.Layer:
                                 ease .5 zoom 1 xzoom 1 yzoom 1 offset (0,0) anchor (0.5, 0.0)
                         show Laura_Sprite:
@@ -3659,7 +3611,7 @@ label AllReset(Girl = 0,Girls=[]): #rkeljsv
                 else:
                         hide Laura_Sprite
             elif Girls[0] == JeanX:
-                if JeanX.Loc == bg_current:
+                if JeanX.location == bg_current:
                         show Jean_Sprite at sprite_location(JeanX.sprite_location,50) zorder JeanX.Layer:
                                 ease .5 zoom 1 xzoom 1 yzoom 1 offset (0,0) anchor (0.5, 0.0)
                         show Jean_Sprite:
@@ -3667,7 +3619,7 @@ label AllReset(Girl = 0,Girls=[]): #rkeljsv
                 else:
                         hide Jean_Sprite
             elif Girls[0] == StormX:
-                if StormX.Loc == bg_current:
+                if StormX.location == bg_current:
                         show Storm_Sprite at sprite_location(StormX.sprite_location,50) zorder StormX.Layer:
                                 ease .5 zoom 1 xzoom 1 yzoom 1 offset (0,0) anchor (0.5, 0.0)
                         show Storm_Sprite:
@@ -3675,7 +3627,7 @@ label AllReset(Girl = 0,Girls=[]): #rkeljsv
                 else:
                         hide Storm_Sprite
             elif Girls[0] == JubesX:
-                if JubesX.Loc == bg_current:
+                if JubesX.location == bg_current:
                         show Jubes_Sprite at sprite_location(JubesX.sprite_location,50) zorder JubesX.Layer:
                                 ease .5 zoom 1 xzoom 1 yzoom 1 offset (0,0) anchor (0.5, 0.0)
                         show Jubes_Sprite:
@@ -3686,20 +3638,20 @@ label AllReset(Girl = 0,Girls=[]): #rkeljsv
     return
 
 label AllHide(Cull=0): #rkeljsv
-        if Cull or RogueX.Loc != bg_current:
-            call hide_Girl(RogueX, sprite = True)
-        if Cull or KittyX.Loc != bg_current:
-            call hide_Girl(KittyX, sprite = True)
-        if Cull or EmmaX.Loc != bg_current:
-            call hide_Girl(EmmaX, sprite = True)
-        if Cull or LauraX.Loc != bg_current:
-            call hide_Girl(LauraX, sprite = True)
-        if Cull or JeanX.Loc != bg_current:
-            call hide_Girl(JeanX, sprite = True)
-        if Cull or StormX.Loc != bg_current:
-            call hide_Girl(StormX, sprite = True)
-        if Cull or JubesX.Loc != bg_current:
-            call hide_Girl(JubesX, sprite = True)
+        if Cull or RogueX.location != bg_current:
+            call hide_girl(RogueX, sprite = True)
+        if Cull or KittyX.location != bg_current:
+            call hide_girl(KittyX, sprite = True)
+        if Cull or EmmaX.location != bg_current:
+            call hide_girl(EmmaX, sprite = True)
+        if Cull or LauraX.location != bg_current:
+            call hide_girl(LauraX, sprite = True)
+        if Cull or JeanX.location != bg_current:
+            call hide_girl(JeanX, sprite = True)
+        if Cull or StormX.location != bg_current:
+            call hide_girl(StormX, sprite = True)
+        if Cull or JubesX.location != bg_current:
+            call hide_girl(JubesX, sprite = True)
         if Cull or "bg_study" != bg_current:
                 hide Professor
         return
@@ -3709,7 +3661,7 @@ label Sex_Menu_Threesome(Girl=0): #rkeljsv
             return
 
         menu:
-            "Do you want to join us [RogueX.name]?" if RogueX.Loc == bg_current and Girl != RogueX:
+            "Do you want to join us [RogueX.name]?" if RogueX.location == bg_current and Girl != RogueX:
                     if Partner == RogueX:
                         #if she's already involved
                         ch_r "If I'd been do'in it right you wouldn't hafta ask. . ."
@@ -3718,16 +3670,16 @@ label Sex_Menu_Threesome(Girl=0): #rkeljsv
                                 #this raises a girl's like-Jean stat if Jean wants to sleep with her
                                 call Girl_Whammy(RogueX)
                         call Girls_Noticed(Girl,RogueX,1)
-                        if Girl.Loc != bg_current:
+                        if Girl.location != bg_current:
                             # if the lead ran away
                             ch_r "Oh, well. . . I'm still game. . ."
                             call Rogue_SexAct("switch")
-                        elif RogueX.Loc == bg_current:
+                        elif RogueX.location == bg_current:
                             ch_r "I s'pose I could lend a hand . ."
                         else:
                             "She seems uncomfortable with this situation and leaves the room."
 
-            "Do you want to join us [KittyX.name]?" if KittyX.Loc == bg_current and Girl != KittyX:
+            "Do you want to join us [KittyX.name]?" if KittyX.location == bg_current and Girl != KittyX:
                     if Partner == KittyX:
                         #if she's already involved
                         ch_k "Lol, what are you even talking about?"
@@ -3736,16 +3688,16 @@ label Sex_Menu_Threesome(Girl=0): #rkeljsv
                                 #this raises a girl's like-Jean stat if Jean wants to sleep with her
                                 call Girl_Whammy(KittyX)
                         call Girls_Noticed(Girl,KittyX,1)
-                        if Girl.Loc != bg_current:
+                        if Girl.location != bg_current:
                             # if the lead ran away
                             ch_k "Whoa, drama much? . ."
                             call Kitty_SexAct("switch")
-                        elif KittyX.Loc == bg_current:
+                        elif KittyX.location == bg_current:
                             ch_k "I could[KittyX.like]give it a try. . ."
                         else:
                             "She seems uncomfortable with this situation and leaves the room."
 
-            "Do you want to join us [EmmaX.name]?" if EmmaX.Loc == bg_current and Girl != EmmaX:
+            "Do you want to join us [EmmaX.name]?" if EmmaX.location == bg_current and Girl != EmmaX:
                     if Partner == EmmaX:
                         #if she's already involved
                         ch_e "Have I not been keeping up?"
@@ -3754,16 +3706,16 @@ label Sex_Menu_Threesome(Girl=0): #rkeljsv
                                 #this raises a girl's like-Jean stat if Jean wants to sleep with her
                                 call Girl_Whammy(EmmaX)
                         call Girls_Noticed(Girl,EmmaX,1)
-                        if Girl.Loc != bg_current:
+                        if Girl.location != bg_current:
                             # if the lead ran away
                             ch_e "Pity. . ."
                             call Emma_SexAct("switch")
-                        elif EmmaX.Loc == bg_current:
+                        elif EmmaX.location == bg_current:
                             ch_e "So what did you have in mind for us. . ."
                         else:
                             "She seems uncomfortable with this situation and leaves the room."
 
-            "Do you want to join us [LauraX.name]?" if LauraX.Loc == bg_current and Girl != LauraX:
+            "Do you want to join us [LauraX.name]?" if LauraX.location == bg_current and Girl != LauraX:
                     if Partner == LauraX:
                         #if she's already involved
                         ch_l "I already am."
@@ -3772,31 +3724,31 @@ label Sex_Menu_Threesome(Girl=0): #rkeljsv
                                 #this raises a girl's like-Jean stat if Jean wants to sleep with her
                                 call Girl_Whammy(LauraX)
                         call Girls_Noticed(Girl,LauraX,1)
-                        if Girl.Loc != bg_current:
+                        if Girl.location != bg_current:
                             # if the lead ran away
                             ch_l "Her loss. . ."
                             call Laura_SexAct("switch")
-                        elif LauraX.Loc == bg_current:
+                        elif LauraX.location == bg_current:
                             ch_l "Hm, ok. . ."
                         else:
                             "She seems uncomfortable with this situation and leaves the room."
 
-            "Do you want to join us [JeanX.name]?" if JeanX.Loc == bg_current and Girl != JeanX:
+            "Do you want to join us [JeanX.name]?" if JeanX.location == bg_current and Girl != JeanX:
                     if Partner == JeanX:
                         #if she's already involved
                         ch_j "I've been here the entire time. . ."
                     else:
                         call Girls_Noticed(Girl,JeanX,1)
-                        if Girl.Loc != bg_current:
+                        if Girl.location != bg_current:
                             # if the lead ran away
                             ch_j "Huh. Her loss. . ."
                             call Jean_SexAct("switch")
-                        elif JeanX.Loc == bg_current:
+                        elif JeanX.location == bg_current:
                             ch_j "Sure."
                         else:
                             "She seems annoyed with this whole situation and leaves the room."
 
-            "Do you want to join us [StormX.name]?" if StormX.Loc == bg_current and Girl != StormX:
+            "Do you want to join us [StormX.name]?" if StormX.location == bg_current and Girl != StormX:
                     if Partner == StormX:
                         #if she's already involved
                         ch_s "You hadn't noticed?"
@@ -3805,16 +3757,16 @@ label Sex_Menu_Threesome(Girl=0): #rkeljsv
                                 #this raises a girl's like-Jean stat if Jean wants to sleep with her
                                 call Girl_Whammy(StormX)
                         call Girls_Noticed(Girl,StormX,1)
-                        if Girl.Loc != bg_current:
+                        if Girl.location != bg_current:
                             # if the lead ran away
                             ch_s "Oh, that's too bad. . ."
                             call Storm_SexAct("switch")
-                        elif StormX.Loc == bg_current:
+                        elif StormX.location == bg_current:
                             ch_s "Delighted. . ."
                         else:
                             "She seems uncomfortable with this situation and leaves the room."
 
-            "Do you want to join us [JubesX.name]?" if JubesX.Loc == bg_current and Girl != JubesX:
+            "Do you want to join us [JubesX.name]?" if JubesX.location == bg_current and Girl != JubesX:
                     if Partner == JubesX:
                         #if she's already involved
                         ch_v "I thought I already was!"
@@ -3823,11 +3775,11 @@ label Sex_Menu_Threesome(Girl=0): #rkeljsv
                                 #this raises a girl's like-Jean stat if Jean wants to sleep with her
                                 call Girl_Whammy(JubesX)
                         call Girls_Noticed(Girl,JubesX,1)
-                        if Girl.Loc != bg_current:
+                        if Girl.location != bg_current:
                             # if the lead ran away
                             ch_v "Oh, well. . ."
                             call Jubes_SexAct("switch")
-                        elif JubesX.Loc == bg_current:
+                        elif JubesX.location == bg_current:
                             ch_v "Sure!"
                         else:
                             "She seems uncomfortable with this situation and leaves the room."
@@ -3851,9 +3803,9 @@ label Partner_Like(Girl=0,Value=1,AltValue=1,Measure=800,Partner=Partner):
                 # if the Partner is doing a secondary action. . .
                 if Partner_primary_action == "watch":
                         pass
-                elif Partner_primary_action in ("hand","blow"):
+                elif Partner_primary_action in ("handjob","blowjob"):
                         $ Value += 1
-                elif Partner_primary_action in ("lick pussy","lick ass"):
+                elif Partner_primary_action in ("eat_pussy","eat_ass"):
                         $ Value += 3
                 else:
                         $ Value += 2
@@ -3872,11 +3824,11 @@ label GirlWaitUp(Local=0,Check=70,D20=0,Teach=0,GirlsA=[],GirlsB=[]):  #rkeljsv
 
         $ D20 = renpy.random.randint(0,1) if not D20 else D20
 
-        if EmmaX.Loc == "bg_teacher":
-                $ EmmaX.Loc = "bg_classroom" #Sets Emma to being in class if she's teaching
+        if EmmaX.location == "bg_teacher":
+                $ EmmaX.location = "bg_classroom" #Sets Emma to being in class if she's teaching
                 $ Teach = 1
-        elif StormX.Loc == "bg_teacher":
-                $ StormX.Loc = "bg_classroom" #Sets Storm to being in class if she's teaching
+        elif StormX.location == "bg_teacher":
+                $ StormX.location = "bg_classroom" #Sets Storm to being in class if she's teaching
                 $ Teach = 2
         $ GirlsA = all_Girls[:]
         #$ GirlsA.extend(all_Girls)
@@ -3885,15 +3837,15 @@ label GirlWaitUp(Local=0,Check=70,D20=0,Teach=0,GirlsA=[],GirlsB=[]):  #rkeljsv
             $ GirlsB = all_Girls[:]
             while GirlsB:
                     #loops through the girls in an inner loop
-                    if GirlsA[0] != GirlsB[0] and GirlsA[0].Loc == GirlsB[0].Loc:
+                    if GirlsA[0] != GirlsB[0] and GirlsA[0].location == GirlsB[0].location:
                             #if the two girls are not identical, and are in the same location. . .
-                            if GirlsA[0].Loc == "bg_classroom":
+                            if GirlsA[0].location == "bg_classroom":
                                             $ GirlsA[0].GLG(GirlsB[0],700,1,1)
                                             #R_LikeKitty += 1
-                            elif GirlsA[0].Loc == "bg_dangerroom":
+                            elif GirlsA[0].location == "bg_dangerroom":
                                             $ GirlsA[0].GLG(GirlsB[0],700,(1+D20),1)
                                             #R_LikeKitty += 1+D20
-                            elif GirlsA[0].Loc == "bg_showerroom":
+                            elif GirlsA[0].location == "bg_showerroom":
                                     if GirlsA[0] == EmmaX:
                                             #if it's EmmaX. . .
                                             $ GirlsA[0].GLG(GirlsB[0],900,3,1)
@@ -3926,9 +3878,9 @@ label GirlWaitUp(Local=0,Check=70,D20=0,Teach=0,GirlsA=[],GirlsB=[]):  #rkeljsv
             $ GirlsA.remove(GirlsA[0])
 
         if Teach == 2:
-                $ StormX.Loc = "bg_teacher" #Sets Storm to being a teacher again
+                $ StormX.location = "bg_teacher" #Sets Storm to being a teacher again
         elif Teach:
-                $ EmmaX.Loc = "bg_teacher" #Sets Emma to being a teacher again
+                $ EmmaX.location = "bg_teacher" #Sets Emma to being a teacher again
         return
 
 label Jumped(Act=0): #rkeljsv
@@ -3948,10 +3900,10 @@ label Jumped(Act=0): #rkeljsv
         if not Girls:
                 return
 
-        if Girls[0].Loc != bg_current and "locked" in Player.Traits:
+        if Girls[0].location != bg_current and door_locked:
             #if the girl is not in the room with you, and your door is locked. . .
             call Locked_Door(Girls[0])
-            if not Girls or Girls[0].Loc != bg_current:
+            if not Girls or Girls[0].location != bg_current:
                     #if you refused her entry. . .
                     $ Player.recent_history.append("nope")
                     return
@@ -3959,7 +3911,7 @@ label Jumped(Act=0): #rkeljsv
         #sets their location
         $ Girls = Girls[:]
         while Girls:
-                $ Girls[0].Loc = bg_current
+                $ Girls[0].location = bg_current
                 $ Girls.remove(Girls[0])
         $ Girls[0].AddWord(1,"jumped","jumped")
 
@@ -3980,14 +3932,14 @@ label Jumped(Act=0): #rkeljsv
         if Room_Full(): #if the room is full. . .
                 $ Act = "leave"
 
-        call Shift_Focus(Girls[0]) #this is not working, sometimes?
+        call shift_focus(Girls[0]) #this is not working, sometimes?
         call set_the_scene
 
         $ Player.recent_history.append("jumped")
         $ Girls[0].change_face("sly",1)
         if Act == "leave":
                 #if she's not supercool with public stuff. . .
-                "Suddenly, [Girls[0].name] grabs your arm with a miscevious smile, and starts to lead you back towards your room."
+                "Suddenly, [Girls[0].name] grabs your arm with a mischievous smile, and starts to lead you back towards your room."
                 menu:
                     "Go along with it":
                         $ Girls[0].change_stat("inhibition", 95, 3)
@@ -4009,7 +3961,7 @@ label Jumped(Act=0): #rkeljsv
                         "[Partner.name] also follows along behind you."
 
                 $ bg_current = "bg_player"
-                call CleartheRoom(Girls[0],1,1)
+                call clear_the_room(Girls[0],1,1)
 
                 #call Taboo_Level #makes sure Taboo level is accurate, moved lower in chain
         else:
@@ -4025,7 +3977,7 @@ label Jumped(Act=0): #rkeljsv
                         $ Girls[0].change_stat("inhibition", 95, 1)
                         "You head to your room first."
                         $ bg_current = "bg_player"
-                        call CleartheRoom(Girls[0],1,1)
+                        call clear_the_room(Girls[0],1,1)
                     "Pull away from her and head back.":
                         $ Girls[0].change_stat("love", 90, -10)
                         $ Girls[0].change_stat("obedience", 50, 10)
@@ -4041,7 +3993,7 @@ label Jumped(Act=0): #rkeljsv
 
         $ Girls = Girls[:]
         while Girls:
-                $ Girls[0].Loc = bg_current
+                $ Girls[0].location = bg_current
                 $ Girls.remove(Girls[0])
 
         call Taboo_Level #makes sure Taboo level is accurate
@@ -4073,13 +4025,13 @@ label Jumped(Act=0): #rkeljsv
         $ Act = _return
         $ action_context = Girls[0]
 
-        if Act in ("anal","sex","blow","tit","hand","hotdog"):
+        if Act in ("anal","sex","blowjob","titjob","handjob","hotdog"):
                 # if cock needs to be out. . .
                 "[Girls[0].name] reaches down and unzips your fly. . ."
                 if not Player.Semen:
                     "You wish you weren't already drained. . . you stop her hands."
                     ch_p "I could actually use a break right now. . "
-                    $ Act = "fondle breasts"
+                    $ Act = "fondle_breasts"
                 else:
                     call Seen_First_Peen(Girls[0],Partner,1)
 
@@ -4091,23 +4043,23 @@ label Jumped(Act=0): #rkeljsv
                 call expression Girls[0].Tag + "_AnalPrep" #call R_AnalPrep
         elif Act == "sex":
                 call expression Girls[0].Tag + "_SexPrep" #call R_SexPrep
-        elif Act ==  "lick pussy":
+        elif Act ==  "eat_pussy":
                 call expression Girls[0].Tag + "_LP_Prep" #call R_LPlayer.Prep
-        elif Act == "fondle pussy":
+        elif Act == "fondle_pussy":
                 call expression Girls[0].Tag + "_FP_Prep" #call R_FPlayer.Prep
-        elif Act == "blow":
+        elif Act == "blowjob":
                 call expression Girls[0].Tag + "_BJ_Prep" #call R_BJ_Prep
-        elif Act == "tit":
+        elif Act == "titjob":
                 call expression Girls[0].Tag + "_TJ_Prep" #call R_TJ_Prep
-        elif Act == "hand":
+        elif Act == "handjob":
                 call expression Girls[0].Tag + "_HJ_Prep" #call R_HJ_Prep
         elif Act == "hotdog":
                 call expression Girls[0].Tag + "_HotdogPrep" #call R_HotdogPrep
         elif Act == "suck breasts":
                 call expression Girls[0].Tag + "_SB_Prep" #call R_SB_Prep
-        elif Act == "fondle breasts":
+        elif Act == "fondle_breasts":
                 call expression Girls[0].Tag + "_FB_Prep" #call R_FB_Prep
-        elif Act == "insert ass" or Act == "lick ass":
+        elif Act == "finger_ass" or Act == "eat_ass":
                 call expression Girls[0].Tag + "_IA_Prep" #call R_IA_Prep
         else: #Act == "kiss you"
                 call KissPrep(Girls[0]) #call R_KissPrep
@@ -4228,7 +4180,7 @@ label Quick_Sex(Girl=focused_Girl,Act=0): #rkeljsv
                                                 $ Girl.change_stat("love", 85, -2)
                                                 $ Girl.change_stat("obedience", 90, 3)
                                                 if ApprovalCheck(Girl, 1500+(5*counter)-(10*Girl.Thirst), "LI"):
-                                                            #if she's obedient, or her horniness is higher than her Inhibition
+                                                            #if she's obedient, or her horniness is higher than her inhibition
                                                             $ line = "beg"
                                                 elif not counter and Count:
                                                             #if you've never refused before
@@ -4256,7 +4208,7 @@ label Quick_Sex(Girl=focused_Girl,Act=0): #rkeljsv
                                                             $ counter += 25
                                     if line == "beg":
                                             if ApprovalCheck(Girl, 600+counter, "O") or ApprovalCheck(Girl, 1500+(5*counter)-(10*Girl.Thirst)):
-                                                    #if she's obedient, or her horniness is higher than her Inhibition
+                                                    #if she's obedient, or her horniness is higher than her inhibition
                                                     if counter < 50:
                                                             #first time
                                                             $ Girl.change_face("sad",2)
@@ -4385,13 +4337,13 @@ label Quick_Sex(Girl=focused_Girl,Act=0): #rkeljsv
         call Favorite_Actions(Girl,1) #returns a string of the action
         $ Act = _return
 
-        if Act in ("anal","sex","blow","tit","hand","hotdog"):
+        if Act in ("anal","sex","blowjob","titjob","handjob","hotdog"):
                 # if cock needs to be out. . .
                 "[Girl.name] reaches down and unzips your fly. . ."
                 if not Player.Semen:
                     "You wish you weren't already drained. . . you stop her hands."
                     ch_p "I could actually use a break right now. . "
-                    $ Act = "fondle breasts"
+                    $ Act = "fondle_breasts"
                 else:
                     call Seen_First_Peen(Girl,Partner,1)
 
@@ -4402,23 +4354,23 @@ label Quick_Sex(Girl=focused_Girl,Act=0): #rkeljsv
                 call expression Girl.Tag + "_AnalPrep" #call R_AnalPrep
         elif Act == "sex":
                 call expression Girl.Tag + "_SexPrep" #call R_SexPrep
-        elif Act ==  "lick pussy":
+        elif Act ==  "eat_pussy":
                 call expression Girl.Tag + "_LP_Prep" #call R_LPlayer.Prep
-        elif Act == "fondle pussy":
+        elif Act == "fondle_pussy":
                 call expression Girl.Tag + "_FP_Prep" #call R_FPlayer.Prep
-        elif Act == "blow":
+        elif Act == "blowjob":
                 call expression Girl.Tag + "_BJ_Prep" #call R_BJ_Prep
-        elif Act == "tit":
+        elif Act == "titjob":
                 call expression Girl.Tag + "_TJ_Prep" #call R_TJ_Prep
-        elif Act == "hand":
+        elif Act == "handjob":
                 call expression Girl.Tag + "_HJ_Prep" #call R_HJ_Prep
         elif Act == "hotdog":
                 call expression Girl.Tag + "_HotdogPrep" #call R_HotdogPrep
         elif Act == "suck breasts":
                 call expression Girl.Tag + "_SB_Prep" #call R_SB_Prep
-        elif Act == "fondle breasts":
+        elif Act == "fondle_breasts":
                 call expression Girl.Tag + "_FB_Prep" #call R_FB_Prep
-        elif Act == "insert ass" or Act == "lick ass":
+        elif Act == "finger_ass" or Act == "eat_ass":
                 call expression Girl.Tag + "_IA_Prep" #call R_IA_Prep
         else: #Act == "kiss you"
                 call KissPrep(Girl) #call R_KissPrep
@@ -4433,7 +4385,7 @@ label Escalation(Girl=0): #rkeljsv
 
         $ action_context = Girl
 
-        if primary_action == "fondle breast" and ApprovalCheck(Girl,1050,TabM=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.SuckB:
+        if primary_action == "fondle_breast" and ApprovalCheck(Girl,1050,TabM=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.SuckB:
                     #if you're fondling her breasts, she has over 30 lust, and she's had her breasts sucked before. . .
                     if offhand_action == "suck breasts":
                             $ offhand_action = 0
@@ -4442,13 +4394,13 @@ label Escalation(Girl=0): #rkeljsv
                     if "suck breasts" in Girl.recent_history:
                             # If you went through with it, drop one phase back when returning to this point
                             $ renpy.pop_call()
-        elif primary_action == "fondle thighs" and ApprovalCheck(Girl,1050,TabM=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.FondleP:
+        elif primary_action == "fondle_thighs" and ApprovalCheck(Girl,1050,TabM=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.FondleP:
                     #if you're fondling her thighs, she has over 30 lust, and she's had her pussy fondled before. . .
-                    if offhand_action == "fondle thighs":
+                    if offhand_action == "fondle_thighs":
                             $ offhand_action = 0
                     $ Girl.change_stat("inhibition", 80, 4)
                     call expression Girl.Tag + "_FP_Prep" #call Rogue_FPlayer.Prep
-                    if "fondle pussy" in Girl.recent_history:
+                    if "fondle_pussy" in Girl.recent_history:
                             # If you went through with it, drop one phase back when returning to this point
                             $ renpy.pop_call()
         elif not Player.Semen:
@@ -4458,7 +4410,7 @@ label Escalation(Girl=0): #rkeljsv
                     #if she's giving a handy, she has over 30 lust, and she's sucked cock before. . .
                     $ Girl.change_stat("inhibition", 80, 3)
                     call expression Girl.Tag + "_BJ_Prep" #call Rogue_BJ_Prep
-                    if "blow" in Girl.recent_history:
+                    if "blowjob" in Girl.recent_history:
                             # If you went through with it, drop one phase back when returning to this point
                             $ renpy.pop_call()
         elif primary_action not in ("sex","anal") and ApprovalCheck(Girl,1400,TabM=5,Alt=[[JeanX],1200]) and Girl.lust >= 60 and Girl.Sex >= 3:
@@ -4545,14 +4497,14 @@ label Sex_Dialog(Primary=focused_Girl,Secondary=0,TempFocus=0,Primarylust=0,Seco
         "[line1]"
         if line3:
                 #If there's a secondary line, play it
-                call Seen_First_Peen(Primary,Secondary,Passive=3)
+                call Seen_First_Peen(Primary,Secondary,passive=3)
                 "[line3]"
         if line4:
                 #add call to First Les here."
                 #If there's a third person line, play it
-                call Seen_First_Peen(Primary,Secondary,Passive=4)
+                call Seen_First_Peen(Primary,Secondary,passive=4)
                 "[line4]"
-                if Partner_primary_action == "suck breasts" or Partner_primary_action == "fondle breasts":
+                if Partner_primary_action == "suck breasts" or Partner_primary_action == "fondle_breasts":
                     #if breastplay is involved. . .
                     if ApprovalCheck(Primary,500,"I",TabM=2) and Primary.lust >= 50 and (Primary.ChestNum() > 1 or Primary.OverNum() > 1):
                             # if the girl is horny and her top is on. . .
@@ -4566,7 +4518,7 @@ label Sex_Dialog(Primary=focused_Girl,Secondary=0,TempFocus=0,Primarylust=0,Seco
                         #if you're coercing her, it just reverts to the previous tier
                         #$ renpy.pop_call() #negates call to Sex Dialog
                         return
-                if Secondary and Secondary.Loc == bg_current:
+                if Secondary and Secondary.location == bg_current:
                         #if the first girl leaves, but there is another,
                         $ primary_action = Secondary
                         $ Partner = 0
@@ -4611,13 +4563,13 @@ label primary_action_Swap(Active = 0, primary_actionX1 = primary_action, primary
                     $ primary_action = "masturbation"
                     $ girl_offhand_action = Partner_offhand_action
                     $ Partner_primary_action = 0
-                    #"hand","fondle breasts","suck breasts","fondle pussy","dildo pussy",
-                    #"vibrator pussy","fondle ass","dildo anal"
+                    #"handjob","fondle_breasts","suck breasts","fondle_pussy","dildo_pussy",
+                    #"vibrator pussy","fondle_ass","dildo_anal"
             elif primary_actionX1 == "lesbian":
                     $ primary_action = "lesbian"
                     $ girl_offhand_action = Partner_primary_action
                     $ Partner_primary_action = 0
-            elif Partner_primary_action in ("hand","blow","kiss you"):
+            elif Partner_primary_action in ("handjob","blowjob","kiss you"):
                     $ primary_action = Partner_primary_action
                     $ girl_offhand_action = 0
                     $ Partner_primary_action = 0
@@ -4625,20 +4577,20 @@ label primary_action_Swap(Active = 0, primary_actionX1 = primary_action, primary
                     $ primary_action = 0
                     $ girl_offhand_action = 0
                     $ Partner_primary_action = 0
-                    #"fondle breasts","suck breasts","fondle pussy","lick pussy",
-                    #"fondle ass","lick ass",
+                    #"fondle_breasts","suck breasts","fondle_pussy","eat_pussy",
+                    #"fondle_ass","eat_ass",
     else:
                     #if the second girl is not already doing anything
                     $ primary_action = 0
                     $ girl_offhand_action = 0
 
-    call Shift_Focus(Primary)
+    call shift_focus(Primary)
     if not Active:
             #if no girl is sent to this system, cycle active girls and place any locals into the Partner role
             $ Girls = active_Girls[:]
             $ Girls.remove(Primary) if Primary in Girls else Girls
             while Girls:
-                    if Girls[0].Loc == bg_current:
+                    if Girls[0].location == bg_current:
                             $ Partner = Girls[0]
                             $ Girls = [1]
                     $ Girls.remove(Girls[0])
@@ -4649,33 +4601,33 @@ label primary_action_Swap(Active = 0, primary_actionX1 = primary_action, primary
     if primary_actionX1 == "masturbation":
                 $ Partner_primary_action = "masturbation"
                 $ Partner_offhand_action = primary_actionX3
-                #"hand","fondle breasts","suck breasts","fondle pussy","dildo pussy",
-                #"vibrator pussy","fondle ass","dildo anal"
+                #"handjob","fondle_breasts","suck breasts","fondle_pussy","dildo_pussy",
+                #"vibrator pussy","fondle_ass","dildo_anal"
     elif primary_actionX1 == "lesbian":
                 $ Partner_primary_action = primary_actionX3
     else:
-            if primary_actionX1 in ("hand","blow","kiss you"):
+            if primary_actionX1 in ("handjob","blowjob","kiss you"):
                 $ Partner_primary_action = primary_actionX1
                 $ Partner_offhand_action = 0
             else:
                 $ Partner_primary_action = "masturbation"
-                if primary_actionX1 in ("fondle thighs","fondle ass","insert ass","lick ass"):
-                        $ Partner_offhand_action = "fondle ass"
+                if primary_actionX1 in ("fondle_thighs","fondle_ass","finger_ass","eat_ass"):
+                        $ Partner_offhand_action = "fondle_ass"
                         "You pull back from [Partner.name]."
-                elif primary_actionX1 in ("dildo pussy","dildo anal"):
+                elif primary_actionX1 in ("dildo_pussy","dildo_anal"):
                         $ Partner_offhand_action = primary_actionX1
                         "You pull back from [Partner.name]."
-                elif primary_actionX1 in ("titjob","hotdog","fondle breasts","suck breasts"):
-                        $ Partner_offhand_action = "fondle breasts"
+                elif primary_actionX1 in ("titjob","hotdog","fondle_breasts","suck breasts"):
+                        $ Partner_offhand_action = "fondle_breasts"
                         "You pull back from [Partner.name]."
-                elif primary_actionX1 in ("fondle pussy","lick pussy"):
-                        $ Partner_offhand_action = "fondle pussy"
+                elif primary_actionX1 in ("fondle_pussy","eat_pussy"):
+                        $ Partner_offhand_action = "fondle_pussy"
                         "You pull back from [Partner.name]."
                 elif primary_actionX1 == "sex":
-                        $ Partner_offhand_action = "fondle pussy"
+                        $ Partner_offhand_action = "fondle_pussy"
                         "You pull out of [Partner.name] and shift your attention to [Primary.name]."
                 elif primary_actionX1 == "anal":
-                        $ Partner_offhand_action = "fondle ass"
+                        $ Partner_offhand_action = "fondle_ass"
                         "You pull out of [Partner.name] and shift your attention to [Primary.name]."
                 else:
                         $ Partner_offhand_action = 0
@@ -4715,13 +4667,13 @@ label primary_action_Swap(Active = 0, primary_actionX1 = primary_action, primary
                     call expression Primary.Tag + "_SexAct" pass ("SkipTo") #call Kitty_SexAct("SkipTo")
     return
 
-label Seen_First_Peen(Primary=0, Secondary=0, Silent=0, Undress=0, Passive=0, GirlsNum=0, React=0, Girlsptions=[]):
-    # call Seen_First_Peen(Primary,Secondary,Silent,Undress)
+label Seen_First_Peen(Primary=0, Secondary=0, silent=0, Undress=0, passive=0, GirlsNum=0, React=0, Girlsptions=[]):
+    # call Seen_First_Peen(Primary,Secondary,silent,Undress)
     # Primary is the first girl, Secondary the second, if there is one
     # _return will be 0 if other girl didn't comment,
     # 1 = if the other girl commented, 2 = didn't like it
     # Girlsnum will pass Second to the next girl, and keep track of whether anyone acted
-    # Passive will be 3 or 4 if linked to Sex dialog acts 3 or 4
+    # passive will be 3 or 4 if linked to Sex dialog acts 3 or 4
     if not Primary:
             #if this is not during a sex act
             $ Girlsptions = Present[:]  #loads up all local girls
@@ -4731,8 +4683,8 @@ label Seen_First_Peen(Primary=0, Secondary=0, Silent=0, Undress=0, Passive=0, Gi
                     #If girl is around, check to see if she noticed your cock yet
                     if (focused_Girl == Girlsptions[0] or D20 >= 10) and "peen" not in Girlsptions[0].recent_history:
                             #If Girlsptions[0] is the prinary or secondary Girl, and hasn't seen your cock yet, call the thing
-                            #call expression Girlsptions[0].Tag + "_First_Peen" pass (Silent,Undress)
-                            call Girl_First_Peen(Girlsptions[0],Silent,Undress)
+                            #call expression Girlsptions[0].Tag + "_First_Peen" pass (silent,Undress)
+                            call Girl_First_Peen(Girlsptions[0],silent,Undress)
                             $ GirlsNum = _return
                     $ Girlsptions.remove(Girlsptions[0])
 
@@ -4749,24 +4701,24 @@ label Seen_First_Peen(Primary=0, Secondary=0, Silent=0, Undress=0, Passive=0, Gi
     #end if not during a sex act
     else:
             #It's during a sex act
-            if Passive:
-                    #if in Passive mode, during sex dialog, it only activates if cock is already out.
-                    if Approval == Passive and "cockout" not in Player.recent_history:
+            if passive:
+                    #if in passive mode, during sex dialog, it only activates if cock is already out.
+                    if Approval == passive and "cockout" not in Player.recent_history:
                         #if both are 3 or both are 4, meaning the activities matched up,
                         call CockOut
                     if "cockout" not in Player.recent_history:
                         return
 
-            #call expression Primary.Tag + "_First_Peen" pass (Silent,Undress,React=React)
-            call Girl_First_Peen(Primary,Silent,Undress,React=React)
+            #call expression Primary.Tag + "_First_Peen" pass (silent,Undress,React=React)
+            call Girl_First_Peen(Primary,silent,Undress,React=React)
 
             if Secondary:
-                    #call expression Secondary.Tag + "_First_Peen" pass (Silent,Undress,Second = _return)
-                    call Girl_First_Peen(Secondary,Silent,Undress,Second = _return)
+                    #call expression Secondary.Tag + "_First_Peen" pass (silent,Undress,Second = _return)
+                    call Girl_First_Peen(Secondary,silent,Undress,Second = _return)
     return
 
 label CockOut:
-        # Passive and therefore Approval will be 3 or 4 if linked to Sex dialog acts 3 or 4
+        # passive and therefore Approval will be 3 or 4 if linked to Sex dialog acts 3 or 4
         if Approval == 3:
                     #if attached to line 3, use the Primary girl
                     #call expression Primary.Tag + "_First_Peen" pass (React=1)
@@ -4789,17 +4741,17 @@ label Get_Dressed: #checked each time she sees your cock
                 $ Player.DrainWord("cockout")
         return
 
-label Girls_Noticed(Girl=Primary,Other=0,Silent=0,B=0,Girls=[]): #rkeljsv
+label Girls_Noticed(Girl=Primary,Other=0,silent=0,B=0,Girls=[]): #rkeljsv
         # Called by Sex_Dialog or Girls_Taboo
         # Girl is lead girl, Other is a girl who notices you
-        # if Silent, no dialog plays, B is a carried bonus value.
+        # if silent, no dialog plays, B is a carried bonus value.
         if not Girl or Girl not in all_Girls:
                         "Tell Oni that in noticed, no primary is set."
                         return
         $ Girls = all_Girls[:]
         $ Girls.remove(Girl)
         while Girls:
-                if Girls[0].Loc == bg_current and Girls[0] != Girl:
+                if Girls[0].location == bg_current and Girls[0] != Girl:
                         # if there is a girl who is not primary, but is in the location
                         # set her as the one being noticed by the primary girl
                         $ Other = Girls[0]
@@ -4812,7 +4764,7 @@ label Girls_Noticed(Girl=Primary,Other=0,Silent=0,B=0,Girls=[]): #rkeljsv
         if Partner == Other and "noticed " + Girl.Tag in Other.recent_history:
                 return
 
-        if not Silent:
+        if not silent:
             if Partner != Other:
                     #if there has been no connection yet. . .
                     $ Other.change_face("surprised", 1)
@@ -4840,10 +4792,10 @@ label Girls_Noticed(Girl=Primary,Other=0,Silent=0,B=0,Girls=[]): #rkeljsv
                             #if you're in her room. . .
                             ch_e "If the two of you cannot keep your hands off each other, please do so elsewhere. . ."
                             "She shoves the two of you out of her room and slams the door."
-                            $ Girl.Loc = "bg_player"
+                            $ Girl.location = "bg_player"
                             jump Misplaced
-                    call Remove_Girl(EmmaX)
-                    if not Silent:
+                    call remove_girl(EmmaX)
+                    if not silent:
                             "She seems uncomfortable with the situation and leaves the room."
                             "Perhaps you should ask her about it later."
                     return
@@ -4862,13 +4814,13 @@ label Girls_Noticed(Girl=Primary,Other=0,Silent=0,B=0,Girls=[]): #rkeljsv
         call Display_Girl(Other,0,0)
         if Partner == Other:
                 #if this is already a Partner, skip this dialog
-                $ Silent = 1
+                $ silent = 1
         $ Partner = Other
         $ line = 0
         if ApprovalCheck(Other, 2000, TabM=2, Bonus = B) or ApprovalCheck(Other, 950, "L", TabM=2, Bonus = (B/3)):
                     #if she's very loose or really likes you
                     $ Other.change_face("sexy", 1)
-                    if not Silent:
+                    if not silent:
                             "She decides to join you."
                     $ Other.change_stat("obedience", 90, 5)
                     $ Other.change_stat("inhibition", 90, 5)
@@ -4878,7 +4830,7 @@ label Girls_Noticed(Girl=Primary,Other=0,Silent=0,B=0,Girls=[]): #rkeljsv
         elif ApprovalCheck(Other, 650, "O", TabM=2) and ApprovalCheck(Other, 450, "L", TabM=1) or ApprovalCheck(Other, 800, "O", TabM=2, Bonus = (B/3)):
                     #if she likes you, but is very obedient
                     $ Other.change_face("sexy")
-                    if not Silent:
+                    if not silent:
                             "She sits down patiently off to the side and watches."
                     $ Other.change_stat("love", 90, 5)
                     $ Other.change_stat("inhibition", 90, 5)
@@ -4888,7 +4840,7 @@ label Girls_Noticed(Girl=Primary,Other=0,Silent=0,B=0,Girls=[]): #rkeljsv
         elif ApprovalCheck(Other, 650, "I", TabM=2) and ApprovalCheck(Other, 450, "L", TabM=1) or ApprovalCheck(Other, 800, "I", TabM=2, Bonus = (B/3)):
                     #if she likes you, but is very uninhibited
                     $ Other.change_face("sexy")
-                    if not Silent:
+                    if not silent:
                             "She sits down and watches you with a hungry look."
                     $ Other.change_stat("love", 90, 5)
                     $ Other.change_stat("obedience", 90, 2)
@@ -4898,7 +4850,7 @@ label Girls_Noticed(Girl=Primary,Other=0,Silent=0,B=0,Girls=[]): #rkeljsv
                     call Threeway_Set(Other,"watch",Mode="start",GirlB=Girl)
         elif ApprovalCheck(Other, 1500, TabM=2, Bonus = B):
                     $ Other.change_face("perplexed", 1)
-                    if not Silent:
+                    if not silent:
                             "She looks a little confused at what's happening, but she stays put and watches."
                     if Other.love >= Other.obedience and Other.love >= Other.inhibition:
                         $ Other.change_stat("obedience", 90, 2)
@@ -4935,7 +4887,7 @@ label Girls_Noticed(Girl=Primary,Other=0,Silent=0,B=0,Girls=[]): #rkeljsv
                     if bg_current == Other.Home: #Kicks you out if in Rogue's room
                             $ Other.recent_history.append("angry")
                             call GirlsAngry
-                    call Remove_Girl(Other)
+                    call remove_girl(Other)
         else:
                     #if she doesn't like you much
                     $ Other.change_face("surprised", 2)
@@ -4963,7 +4915,7 @@ label Girls_Noticed(Girl=Primary,Other=0,Silent=0,B=0,Girls=[]): #rkeljsv
                     if bg_current == Other.Home: #Kicks you out if in Rogue's room
                             $ Other.recent_history.append("angry")
                             call GirlsAngry
-                    call Remove_Girl(Other)
+                    call remove_girl(Other)
         if AloneCheck(Girl) and Girl.Taboo == 20:
                 #if the second girl ran away, it removes the taboo factor she added.
                 $ Girl.Taboo = 0
@@ -4977,29 +4929,29 @@ label Girls_Noticed(Girl=Primary,Other=0,Silent=0,B=0,Girls=[]): #rkeljsv
 label CloseOut(Girl = focused_Girl): #rkeljsv
         # This exits out of the current sex act, whichever it might be, then returns
         $ Girl = GirlCheck(Girl)
-        if primary_action == "blow":
+        if primary_action == "blowjob":
             call expression Girl.Tag + "_BJ_After"
-        elif primary_action == "hand":
+        elif primary_action == "handjob":
             call expression Girl.Tag + "_HJ_After"
         elif primary_action == "titjob":
             call expression Girl.Tag + "_TJ_After"
         elif primary_action == "kiss you":
             call Kiss_After
-        elif primary_action == "fondle breasts":
+        elif primary_action == "fondle_breasts":
             call expression Girl.Tag + "_FB_After"
         elif primary_action == "suck breasts":
             call expression Girl.Tag + "_SB_After"
-        elif primary_action == "fondle thighs":
+        elif primary_action == "fondle_thighs":
             call expression Girl.Tag + "_FT_After"
-        elif primary_action == "fondle pussy":
+        elif primary_action == "fondle_pussy":
             call expression Girl.Tag + "_FP_After"
-        elif primary_action == "lick pussy":
+        elif primary_action == "eat_pussy":
             call expression Girl.Tag + "_LP_After"
-        elif primary_action == "fondle ass":
+        elif primary_action == "fondle_ass":
             call expression Girl.Tag + "_FA_After"
-        elif primary_action == "insert ass":
+        elif primary_action == "finger_ass":
             call expression Girl.Tag + "_IA_After"
-        elif primary_action == "lick ass":
+        elif primary_action == "eat_ass":
             call expression Girl.Tag + "_LA_After"
         elif primary_action == "sex":
             call expression Girl.Tag + "_SexAfter"
@@ -5007,9 +4959,9 @@ label CloseOut(Girl = focused_Girl): #rkeljsv
             call expression Girl.Tag + "_HotdogAfter"
         elif primary_action == "anal":
             call expression Girl.Tag + "_AnalAfter"
-        elif primary_action == "dildo pussy":
+        elif primary_action == "dildo_pussy":
             call expression Girl.Tag + "_DP_After"
-        elif primary_action == "dildo anal":
+        elif primary_action == "dildo_anal":
             call expression Girl.Tag + "_DA_After"
         elif primary_action == "strip":
             call Group_Strip_End
@@ -5035,7 +4987,7 @@ label Sex_Over(Clothes=1,Girls=0,Girls=[]): #rkeljsv
                 $ Girls = all_Girls[:]
                 $ renpy.random.shuffle(Girls)
         while Girls:
-                if Girls[0].Loc == bg_current:
+                if Girls[0].location == bg_current:
                         # if this girl is present
                         $ Girls[0].OCount = 0
                         call Girl_Cleanup(Girls[0],"after")
@@ -5065,7 +5017,7 @@ label Sex_Over(Clothes=1,Girls=0,Girls=[]): #rkeljsv
 
         if Girls == Partner and Girls in all_Girls:
                 #swaps lead back to original
-                call Shift_Focus(Girls)
+                call shift_focus(Girls)
         $ Girls = 0
         call AllReset("all") #resets all sex positions.
 
@@ -5073,7 +5025,7 @@ label Sex_Over(Clothes=1,Girls=0,Girls=[]): #rkeljsv
                 #if asked to put their clothes back on.
                 $ Girls = all_Girls[:]
                 while Girls:
-                        if Girls[0].Loc == bg_current:
+                        if Girls[0].location == bg_current:
                                 if Girls[0].OutfitChange(Changed=1) == 2:
                                         if line:
                                             $ line = line + " and " + Girls[0].name
@@ -5092,29 +5044,29 @@ label Sex_Over(Clothes=1,Girls=0,Girls=[]): #rkeljsv
 label SkipTo(Girl = focused_Girl): #rkeljsv
         # This jumps to the chosen sex act, called from the sex menu
         $ Girl = GirlCheck(Girl)
-        if primary_action == "blow":
+        if primary_action == "blowjob":
             call expression Girl.Tag + "_BJ_Cycle"
-        elif primary_action == "hand":
+        elif primary_action == "handjob":
             call expression Girl.Tag + "_HJ_Cycle"
         elif primary_action == "titjob":
             call expression Girl.Tag + "_TJ_Cycle"
         elif primary_action == "kiss you":
             call KissCycle(Girl)
-        elif primary_action == "fondle breasts":
+        elif primary_action == "fondle_breasts":
             call expression Girl.Tag + "_FB_Cycle"
         elif primary_action == "suck breasts":
             call expression Girl.Tag + "_SB_Cycle"
-        elif primary_action == "fondle thighs":
+        elif primary_action == "fondle_thighs":
             call expression Girl.Tag + "_FT_Cycle"
-        elif primary_action == "fondle pussy":
+        elif primary_action == "fondle_pussy":
             call expression Girl.Tag + "_FP_Cycle"
-        elif primary_action == "lick pussy":
+        elif primary_action == "eat_pussy":
             call expression Girl.Tag + "_LP_Cycle"
-        elif primary_action == "fondle ass":
+        elif primary_action == "fondle_ass":
             call expression Girl.Tag + "_FA_Cycle"
-        elif primary_action == "insert ass":
+        elif primary_action == "finger_ass":
             call expression Girl.Tag + "_IA_Cycle"
-        elif primary_action == "lick ass":
+        elif primary_action == "eat_ass":
             call expression Girl.Tag + "_LA_Cycle"
         elif primary_action == "sex":
             call expression Girl.Tag + "_SexCycle"
@@ -5122,9 +5074,9 @@ label SkipTo(Girl = focused_Girl): #rkeljsv
             call expression Girl.Tag + "_HotdogCycle"
         elif primary_action == "anal":
             call expression Girl.Tag + "_AnalCycle"
-        elif primary_action == "dildo pussy":
+        elif primary_action == "dildo_pussy":
             call expression Girl.Tag + "_DP_Cycle"
-        elif primary_action == "dildo anal":
+        elif primary_action == "dildo_anal":
             call expression Girl.Tag + "_DA_Cycle"
         elif primary_action == "strip":
             call Group_Strip_End
@@ -5286,7 +5238,7 @@ label Girl_TightsRipped(Girl=0,Count = 0):
                             $ Girl.change_face("bemused", 0)
                             ch_s "I really probably should change."
                     $ Girl.Blush = 1
-                    call Remove_Girl(Girl)
+                    call remove_girl(Girl)
                     $ Girl.OutfitChange()
                 #end "if they ripped"
         return

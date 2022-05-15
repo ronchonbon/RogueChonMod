@@ -1,4 +1,4 @@
-label hide_Girl(Girl, sprite = False):
+label hide_girl(Girl, sprite = False):
     call sex_reset(Girl)
 
     $ renpy.hide(Girl.Tag + "_SexSprite")
@@ -19,10 +19,10 @@ label hide_Girl(Girl, sprite = False):
     return
 
 label reset_position(Girl, trigger = primary_action, set = True):
-    if Girl.Loc != bg_current:
+    if Girl.location != bg_current:
         return
 
-    call hide_Girl(Girl)
+    call hide_girl(Girl)
 
     if Girl == RogueX:
         $ x_anchor = 0.6
@@ -38,7 +38,7 @@ label reset_position(Girl, trigger = primary_action, set = True):
     return
 
 label kissing_launch(Girl, trigger = primary_action, set = True):
-    call hide_Girl(Girl)
+    call hide_girl(Girl)
 
     $ primary_action = trigger
 
@@ -50,7 +50,7 @@ label kissing_launch(Girl, trigger = primary_action, set = True):
     return
 
 label kissing_smooch(Girl):
-    call hide_Girl(Girl)
+    call hide_girl(Girl)
 
     $ Girl.change_face("kiss")
 
@@ -64,7 +64,7 @@ label kissing_smooch(Girl):
     return
 
 label breasts_launch(Girl, trigger = primary_action, set = True):
-    call hide_Girl(Girl)
+    call hide_girl(Girl)
 
     $ primary_action = trigger
 
@@ -76,7 +76,7 @@ label breasts_launch(Girl, trigger = primary_action, set = True):
     return
 
 label pussy_launch(Girl, trigger = primary_action, set = True):
-    call hide_Girl(Girl)
+    call hide_girl(Girl)
 
     $ primary_action = trigger
 
@@ -89,11 +89,11 @@ label pussy_launch(Girl, trigger = primary_action, set = True):
 
 label handjob_launch(Girl, trigger = primary_action):
     if renpy.showing(Girl.Tag + "_HJ_Animation"):
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
 
         return
 
-    call hide_Girl(Girl)
+    call hide_girl(Girl)
 
     if Girl == RogueX:
         $ Girl.Arms = 0
@@ -161,7 +161,7 @@ label handjob_launch(Girl, trigger = primary_action):
     $ action_speed = 0
 
     if trigger != "cum":
-        $ primary_action = "hand"
+        $ primary_action = "handjob"
 
     pause 0.5
 
@@ -185,7 +185,7 @@ label handjob_reset(Girl): # The sequence to the Rogue animations from handjob t
     $ renpy.hide(Girl.Tag + "_HJ_Animation")
     with dissolve
 
-    call hide_Girl(Girl)
+    call hide_girl(Girl)
 
     show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
@@ -207,7 +207,7 @@ label titjob_launch(Girl, trigger = primary_action):
     if renpy.showing(Girl.Tag + "_TJ_Animation"):
         return
 
-    call hide_Girl(Girl)
+    call hide_girl(Girl)
 
     show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
@@ -276,7 +276,7 @@ label titjob_reset(Girl):
     if not renpy.showing(Girl.Tag + "_TJ_Animation"):
         return
 
-    call hide_Girl(Girl)
+    call hide_girl(Girl)
 
     $ Player.Sprite = 0
 
@@ -316,7 +316,7 @@ label blowjob_launch(Girl, trigger = primary_action):
     if renpy.showing(Girl.Tag + "_BJ_Animation"):
         return
 
-    call hide_Girl(Girl)
+    call hide_girl(Girl)
 
     if trigger == "L" or trigger == "cum":
         show expression Girl.Tag + "_Sprite" at sprite_location(StageCenter) zorder Girl.Layer:
@@ -346,7 +346,7 @@ label blowjob_launch(Girl, trigger = primary_action):
     $ action_speed = 0
 
     if trigger != "cum":
-        $ primary_action = "blow"
+        $ primary_action = "blowjob"
 
     show expression Girl.Tag + "_Sprite" zorder Girl.Layer:
         alpha 0
@@ -360,7 +360,7 @@ label blowjob_reset(Girl): # The sequence to the Rogue animations from BJ to def
     if not renpy.showing(Girl.Tag + "_BJ_Animation"):
         return
 
-    call hide_Girl(Girl)
+    call hide_girl(Girl)
 
     $ action_speed = 0
 
@@ -382,7 +382,7 @@ label blowjob_reset(Girl): # The sequence to the Rogue animations from BJ to def
     return
 
 label sex_launch(Girl, trigger = primary_action):
-    $ girl_offhand_action = 0 if girl_offhand_action == "hand" else girl_offhand_action
+    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
 
     $ trigger = "solo" if not trigger else trigger
 
@@ -391,22 +391,22 @@ label sex_launch(Girl, trigger = primary_action):
     if trigger == "sex":
         $ Player.Cock = "in"
 
-        if offhand_action in ["fondle_pussy", "lick_pussy", "dildo_pussy"]:
+        if offhand_action in ["fondle_pussy", "eat_pussy", "dildo_pussy"]:
             $ offhand_action = 0
     elif trigger == "anal":
         $ Player.Cock = "anal"
 
-        if offhand_action in ["finger_ass", "lick_ass", "dildo_ass"]:
+        if offhand_action in ["finger_ass", "eat_ass", "dildo_ass"]:
             $ offhand_action = 0
     elif trigger == "hotdog":
         $ Player.Cock = "out"
 
         if Girl.wearing_skirt:
             $ Girl.Upskirt = 1
-    elif trigger == "foot":
+    elif trigger == "footjob":
         $ ShowFeet = 1
 
-        $ Player.Cock = "foot"
+        $ Player.Cock = "footjob"
     elif trigger == "massage":
         $ Player.Sprite = 0
         $ Player.Cock = 0
@@ -428,7 +428,7 @@ label sex_launch(Girl, trigger = primary_action):
 
     $ action_speed = 0
 
-    call hide_Girl(Girl, sprite = True)
+    call hide_girl(Girl, sprite = True)
 
     if primary_action == "in" or primary_action == "anal":
         if Girl.Legs or Girl.HoseNum() >= 5:
@@ -460,7 +460,7 @@ label sex_reset(Girl):
 
     $ Girl.ArmPose = 2
 
-    hide_Girl(Girl)
+    hide_girl(Girl)
 
     show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
@@ -478,7 +478,7 @@ label doggy_launch(Girl, trigger = primary_action):
 
     $ action_speed = 0
 
-    call hide_Girl(Girl, sprite = True)
+    call hide_girl(Girl, sprite = True)
 
     show expression Girl.Tag + "_Doggy_Animation" at sprite_location(StageCenter+50) zorder 150
     with dissolve
@@ -499,7 +499,7 @@ label doggy_reset(Girl):
 
     $ renpy.hide(expression Girl.Tag + "_Doggy_Animation")
 
-    call hide_Girl(Girl)
+    call hide_girl(Girl)
 
     show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
@@ -973,7 +973,7 @@ label Close_Launch(GirlA=0,GirlB=0,XLoc=0,YLoc=0,XZoom=0):  #rkelj
             elif Girls[0] in [KittyX, EmmaX, LauraX, JeanX]:
                 $ x_anchor = 0.5
 
-            call hide_Girl(Girls[0])
+            call hide_girl(Girls[0])
 
             show expression Girls[0].Tag + "_Sprite" at sprite_location(XLoc,YLoc) zorder Girls[0].Layer:
                 alpha 1
@@ -1163,7 +1163,7 @@ label Les_Launch(Girl=0,XLoc=0,YLoc=0,XZoom=0,Girls=[]): #rkeljs
             elif Girls[0] in [KittyX, EmmaX, LauraX, JeanX]:
                 $ x_anchor = 0.5
 
-            call hide_Girl(Girls[0])
+            call hide_girl(Girls[0])
 
             show expression Girls[0].Tag + "_Sprite" at sprite_location(XLoc,YLoc) zorder Girls[0].Layer:
                 alpha 1

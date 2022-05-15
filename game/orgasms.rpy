@@ -9,8 +9,8 @@ label Player_Cumming(Girl=0,temp_modifier = temp_modifier): #rkeljsv
 
     $ Girl = GirlCheck(Girl)
 
-    call Shift_Focus(Girl)
-    if primary_action == "blow":
+    call shift_focus(Girl)
+    if primary_action == "blowjob":
             $ temp_modifier += 5
 
     if Girl.Addict > 75:
@@ -34,9 +34,9 @@ label Player_Cumming(Girl=0,temp_modifier = temp_modifier): #rkeljsv
     if action_context == "swap":
             #if you swapped to the partner
             $ line = "So what would you like "+Girl.name+" to do?"
-    elif primary_action == "hand":
+    elif primary_action == "handjob":
             $ line = "As she strokes, you're about ready to come. . ."
-    elif primary_action == "blow":
+    elif primary_action == "blowjob":
             $ line = "As she sucks at you, you start to feel about to come. . ."
     elif primary_action == "titjob":
             $ line = "As you rub into her cleavage, you start to feel about to come. . ."
@@ -58,7 +58,7 @@ label Player_Cumming(Girl=0,temp_modifier = temp_modifier): #rkeljsv
         "Ask to cum in her mouth":
                 $ action_context = "asked"
                 jump Girl_In_Mouth
-        "Cum in her mouth without asking" if primary_action == "blow" or primary_action == "hand" or primary_action == "titjob" and action_context != "swap":
+        "Cum in her mouth without asking" if primary_action == "blowjob" or primary_action == "handjob" or primary_action == "titjob" and action_context != "swap":
                 $ action_context = "auto"
                 jump Girl_In_Mouth
 
@@ -81,21 +81,21 @@ label Player_Cumming(Girl=0,temp_modifier = temp_modifier): #rkeljsv
                         jump Girl_Facial
                 "Cum on her tits":
                         jump Girl_TitSpunk
-                "Cum on her ass": #if (Girl == RogueX or Girl == JeanX)and (primary_action == "sex" or primary_action == "anal" or primary_action == "hotdog" or primary_action == "foot"):
+                "Cum on her ass": #if (Girl == RogueX or Girl == JeanX)and (primary_action == "sex" or primary_action == "anal" or primary_action == "hotdog" or primary_action == "footjob"):
                         $ Girl.Pose = "doggy"
                         jump Girl_Cum_Outside
-                "Cum on her belly": #if (Girl != RogueX and Girl != JeanX) and (primary_action == "sex" or primary_action == "anal" or primary_action == "hotdog" or primary_action == "foot" or primary_action == "psy"):
+                "Cum on her belly": #if (Girl != RogueX and Girl != JeanX) and (primary_action == "sex" or primary_action == "anal" or primary_action == "hotdog" or primary_action == "footjob" or primary_action == "psy"):
                         $ Girl.Pose = "sex"
                         jump Girl_Cum_Outside
 
         "Actually, let [Partner.name] take it." if Partner in all_Girls and action_context != "swap":
                 $ action_context = "swap"
                 $ temp_modifier = 0
-                call Shift_Focus(Partner) #makes the partner the lead and the lead the partner
+                call shift_focus(Partner) #makes the partner the lead and the lead the partner
                 call AllReset(Partner) #resets the position of the orignal lead
                 call Player_Cumming(focused_Girl,temp_modifier = 0) #Does the cumshot focused on the original Partner
 
-                call Shift_Focus(Partner) #makes the original partner the partner again
+                call shift_focus(Partner) #makes the original partner the partner again
                 call AllReset(Partner)  #resets the position of the partner
 
                 $ action_context = 0
@@ -111,7 +111,7 @@ label Player_Cumming(Girl=0,temp_modifier = temp_modifier): #rkeljsv
                 else:
                         "You spray jizz across the room."
                 jump Girl_Orgasm_After
-        "Pull back" if primary_action != "psy" and Girl.Loc == bg_current and action_context != "swap":
+        "Pull back" if primary_action != "psy" and Girl.location == bg_current and action_context != "swap":
             if renpy.showing(Girl.Tag+"_BJ_Animation"): #if renpy.showing("Rogue_BJ_Animation"):
                     if Girl.Addict >= 60 and ApprovalCheck(Girl, 1000, "I", Bonus = ((Girl.Addict*10)- Girl.obedience)) and Girl.Swallow:
                             jump Manic_Suck
@@ -514,10 +514,10 @@ label Girl_In_Mouth: #rkeljsv
                         call Anyline(Girl,". . .")
                         $ Girl.Spunk.remove("mouth")
                         $ Girl.Spunk.append("chin")
-                        $ Girl.Spunk.append("hand")
+                        $ Girl.Spunk.append("handjob")
                         $ action_speed = 0
                         "She gags and spits it into her palm. Then she licks her lips, looks down at her dripping hand, blushes, and quickly wipes it off."
-                        $ Girl.Spunk.remove("hand")
+                        $ Girl.Spunk.remove("handjob")
                         if Girl == RogueX:
                                 ch_r "I. . . don't really like the taste of that."
                         elif Girl == KittyX:
@@ -532,7 +532,7 @@ label Girl_In_Mouth: #rkeljsv
                                 ch_s "An uncommon flavor. . ."
                         #elif Girl == JubesX:
                         $ Girl.Addictionrate += 1
-                        if "addictive" in Player.Traits:
+                        if Player.addictive:
                             $ Girl.Addictionrate += 1
                         $ Girl.change_face()
                         jump Girl_Orgasm_After
@@ -543,10 +543,10 @@ label Girl_In_Mouth: #rkeljsv
                         call Anyline(Girl,". . .")
                         $ Girl.Spunk.remove("mouth")
                         $ Girl.Spunk.append("chin")
-                        $ Girl.Spunk.append("hand")
+                        $ Girl.Spunk.append("handjob")
                         $ action_speed = 0
                         "She gags and spits it into her palm. Then she licks her lips, looks down, and drinks up what's in her palm."
-                        $ Girl.Spunk.remove("hand")
+                        $ Girl.Spunk.remove("handjob")
                         if Girl == RogueX:
                                 ch_r "I would be mad, but you taste so sweet, [Girl.Petname]."
                         elif Girl == KittyX:
@@ -580,7 +580,7 @@ label Girl_In_Mouth: #rkeljsv
                                 $ Girl.Spunk.append("mouth")
                         $ Girl.Spunk.append("chin")
                         call Anyline(Girl,". . .")
-                        $ Girl.Spunk.append("hand")
+                        $ Girl.Spunk.append("handjob")
                         $ action_speed = 0
                         "She gags and spits it into her palm."
                         if action_context != "warn":
@@ -603,7 +603,7 @@ label Girl_In_Mouth: #rkeljsv
                             "Sorry about that.":
                                     $ Girl.change_stat("love", 80, 1)
                                     $ Girl.Addictionrate += 1
-                                    if "addictive" in Player.Traits:
+                                    if Player.addictive:
                                             $ Girl.Addictionrate += 1
                                     $ Girl.change_face("smile", 1)
                                     if action_context != "warn":
@@ -629,7 +629,7 @@ label Girl_In_Mouth: #rkeljsv
                             "Why don't you try swallowing it?":
                                     if ApprovalCheck(Girl, 1200):
                                             "She tentatively licks her hand, and then gulps it down."
-                                            $ Girl.Spunk.remove("hand")
+                                            $ Girl.Spunk.remove("handjob")
                                             $ Girl.change_face("sexy", 1)
                                             $ Girl.Spunk.append("mouth")
                                             $ Girl.Spunk.append("chin")
@@ -651,7 +651,7 @@ label Girl_In_Mouth: #rkeljsv
                                             $ Girl.change_face("bemused", 1)
                                             $ Girl.Brows = "normal"
                                             $ Girl.Mouth = "sad"
-                                            $ Girl.Spunk.remove("hand")
+                                            $ Girl.Spunk.remove("handjob")
                                             $ Girl.Spunk.append("mouth")
                                             $ Girl.Spunk.append("chin")
                                             "She scowls a bit, but licks her hand clean as she does so, and swallows it down."
@@ -670,7 +670,7 @@ label Girl_In_Mouth: #rkeljsv
                                                     ch_s "That was. . . fine. . ."
                                             $ Girl.change_stat("obedience", 50, 10, alternates = {"Jean": {"check": 90, "value": 10}) #+10 for Jean
                                     else:
-                                            $ Girl.Spunk.remove("hand")
+                                            $ Girl.Spunk.remove("handjob")
                                             "She scowls at you and wipes her hand off. Then she licks her lips."
                                             jump Girl_Orgasm_After
                             #end "why not swallow"
@@ -682,7 +682,7 @@ label Girl_In_Mouth: #rkeljsv
                                             $ Girl.change_face("sad", 1)
                                             $ Girl.Spunk.append("mouth")
                                             $ Girl.Spunk.append("chin")
-                                            $ Girl.Spunk.remove("hand")
+                                            $ Girl.Spunk.remove("handjob")
                                             "She scowls a bit, but licks her hand clean as she does so, and swallows it down."
                                             $ Girl.Spunk.remove("mouth")
                                             if Girl == RogueX:
@@ -699,7 +699,7 @@ label Girl_In_Mouth: #rkeljsv
                                                     ch_s "That is. . . fine. . ."
                                             $ Girl.change_stat("obedience", 50, 10, alternates = {"Jean": {"check": 90, "value": 10}) #+10 for Jean
                                     else:
-                                            $ Girl.Spunk.remove("hand")
+                                            $ Girl.Spunk.remove("handjob")
                                             "She scowls at you and wipes her hand off. Then she licks her lips."
                                             jump Girl_Orgasm_After
 
@@ -844,7 +844,7 @@ label Girl_In_Mouth: #rkeljsv
         "Sorry about that.":
                 $ Girl.change_stat("love", 80, 3)
                 $ Girl.Addictionrate += 1
-                if "addictive" in Player.Traits:
+                if Player.addictive:
                         $ Girl.Addictionrate += 1
                 $ Girl.change_face("smile", 1)
                 if Girl == RogueX:
@@ -904,7 +904,7 @@ label Girl_In_Mouth: #rkeljsv
                                 ch_v "I, um. . . Maybe? . ."
                 else:
                         $ Girl.Addictionrate += 1
-                        if "addictive" in Player.Traits:
+                        if Player.addictive:
                             $ Girl.Addictionrate += 1
                         $ Girl.Blush = 1
                         if Girl == RogueX:
@@ -1352,7 +1352,7 @@ label Girl_TitSpunk:  #rkeljsv
 
 # Start Spunk back  / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Girl_Cum_Outside:  #rkeljsv
-        if primary_action != "foot":
+        if primary_action != "footjob":
             if renpy.showing(Girl.Tag+"_PJ_Animation"): #if renpy.showing("Rogue_PJ_Animation"):
                 call expression Girl.Tag + "_Middle_Launch" pass (primary_action,0)
 
@@ -1394,7 +1394,7 @@ label Girl_Cum_Outside:  #rkeljsv
                 $ Girl.change_stat("obedience", 80, -5)
                 $ Girl.change_stat("inhibition", 200, 10)
                 jump Girl_Swallowed
-        if primary_action != "foot":
+        if primary_action != "footjob":
             $ Player.Cock = "out"
         if Girl.Pose == "doggy":
                 $ Girl.Spunk.append("back")
@@ -1462,7 +1462,7 @@ label Girl_Cum_Outside:  #rkeljsv
 
    # Start Spunk back  / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 #label Girl_SpunkBelly: #dead?
-#        if primary_action != "foot":
+#        if primary_action != "footjob":
 #            $ Girl.Pose = "sex"
 #            call expression Girl.Tag+"_Sex_Launch" pass ("hotdog") #call Rogue_Doggy_Launch("hotdog")
 #        $ action_speed = 0
@@ -1494,7 +1494,7 @@ label Girl_Cum_Outside:  #rkeljsv
 #                $ Girl.change_stat("obedience", 80, -5)
 #                $ Girl.change_stat("inhibition", 200, 10)
 #                jump Girl_Swallowed
-#        if primary_action != "foot":
+#        if primary_action != "footjob":
 #            $ Player.Cock = "out"
 #        $ Girl.Spunk.append("back")
 #        if primary_action == "sex":
@@ -1562,13 +1562,13 @@ label Girl_Handy_Finish: #rkeljsv
         else:
                 call expression Girl.Tag+"_HJ_Launch" pass ("cum")
                 $ action_speed = 2
-        $ Girl.Spunk.append("hand")
+        $ Girl.Spunk.append("handjob")
         "She grins and speeds up her efforts, placing her left hand over your tip. You burst all over her hands."
         $ action_speed = 0
 
         if Girl.Addict > 80 or "hungry" in Girl.Traits:
                 $ Girl.Eyes = "manic"
-                $ Girl.Spunk.remove("hand")
+                $ Girl.Spunk.remove("handjob")
                 $ Girl.Spunk.append("mouth")
                 $ Girl.Mouth = "smile"
                 "She licks her hands off with a satisfied grin."
@@ -1576,7 +1576,7 @@ label Girl_Handy_Finish: #rkeljsv
                 call Anyline(Girl,"Hmmm. . .")
         else:
                 $ Girl.change_face("bemused")
-                $ Girl.Spunk.remove("hand")
+                $ Girl.Spunk.remove("handjob")
                 "She wipes her hands off, but takes a quick sniff when she's done and smiles."
                 call Sex_Basic_Dialog(Girl,"warned") #"Thanks for the head's up."
                 jump Girl_Orgasm_After
@@ -1629,7 +1629,7 @@ label Girl_Swallowed:  #rkeljsv
         $ Girl.recent_history.append("swallowed")
         $ Girl.daily_history.append("swallowed")
         $ Girl.Addictionrate += 2
-        if "addictive" in Player.Traits:
+        if Player.addictive:
                 $ Girl.Addictionrate += 2
         if primary_action == "anal":
                 $ Girl.change_stat("obedience", 50, 2)
@@ -1654,7 +1654,7 @@ label Girl_Creampied:
         $ Girl.change_stat("inhibition", 50, 3)
         $ Girl.Addict -= 30
         $ Girl.Addictionrate += 2
-        if "addictive" in Player.Traits:
+        if Player.addictive:
                 $ Girl.Addictionrate += 3
         if Girl.CreamP == 1:
                 $Girl.SEXP += 10
@@ -1675,11 +1675,11 @@ label Girl_Orgasm_After:
                 "Yes":
                         call Girl_CleanCock
                 "Actually, let [Partner.name] do it." if Partner in all_Girls:
-                        call Shift_Focus(Partner) #makes the partner the lead and the lead the partner
+                        call shift_focus(Partner) #makes the partner the lead and the lead the partner
                         call AllReset(Partner) #resets the position of the orignal lead
                         call Girl_CleanCock(focused_Girl) #Does the cleanup focused on the original Partner
 
-                        call Shift_Focus(Partner) #makes the original partner the partner again
+                        call shift_focus(Partner) #makes the original partner the partner again
                         call AllReset(Partner)  #resets the position of the partner
 
                         "[Partner.name] Steps back."
@@ -1745,9 +1745,9 @@ label Girl_CleanCock(Girl=0):
                                 "She wipes your cock clean."
         $ Player.Spunk = 0
         $ Girl.change_face("sexy")
-        if primary_action in ("fondle breast","suck breast"):
+        if primary_action in ("fondle_breast","suck breast"):
                 call ViewShift(Girl,"breasts")
-        elif primary_action in ("fondle pussy","lick pussy","fondle ass","insert ass","lick ass","fondle thighs"):
+        elif primary_action in ("fondle_pussy","eat_pussy","fondle_ass","finger_ass","eat_ass","fondle_thighs"):
                 call ViewShift(Girl,"pussy")
         return
 
@@ -1764,9 +1764,9 @@ label Girl_Cumming(Girl=0,Quick=0,Girls=[]): #rename from Girl_Cumming  #rkeljsv
     $ Girl.DrainWord("gonnafap",1,1,0)  #removes these flags when you've had sex
     $ Girl.DrainWord("wannafap",1,1,0)
 
-    if Girl.Loc == "bg_teacher" and bg_current == "bg_classroom":
+    if Girl.location == "bg_teacher" and bg_current == "bg_classroom":
             pass
-    elif Girl.Loc != bg_current and "phonesex" not in Player.recent_history:
+    elif Girl.location != bg_current and "phonesex" not in Player.recent_history:
             #if she's not even in the room. . .
             $ Girl.lust = 25
             return
@@ -1882,7 +1882,7 @@ label Girl_Cumming(Girl=0,Quick=0,Girls=[]): #rename from Girl_Cumming  #rkeljsv
             $ Girls = all_Girls[:]
             $ Girls.remove(Girl)
             while Girls:
-                    if Girls[0].Loc == bg_current and "noticed "+Girl.Tag in Girls[0].recent_history:
+                    if Girls[0].location == bg_current and "noticed "+Girl.Tag in Girls[0].recent_history:
                             $ Girls[0].lust += 15 if Girls[0].GirlLikeCheck(Girl) >= 500 else 10
                             $ Girls[0].lust += 5 if Girls[0].Les >= 5 else 0
                     if Girls[0].lust >= 100:
@@ -1890,7 +1890,7 @@ label Girl_Cumming(Girl=0,Quick=0,Girls=[]): #rename from Girl_Cumming  #rkeljsv
                     $ Girls.remove(Girls[0])
 
             #Orgasm count
-            if (primary_action == "blow" or primary_action == "hand") and not offhand_action:
+            if (primary_action == "blowjob" or primary_action == "handjob") and not offhand_action:
                 pass
             elif Partner != Girl:
                 if Girl.OCount == 2:
@@ -2070,7 +2070,7 @@ label Girl_Cleanup(Girl=0,Choice = "random",Options=[],counter=0,Cleaned=0,Origi
                     $ Original = Partner
             else:
                     $ Original = Girl
-            call Shift_Focus(Girl)
+            call shift_focus(Girl)
 
     if Choice == "ask":
             $ Choice = "random"
@@ -2620,8 +2620,8 @@ label Girl_Cleanup(Girl=0,Choice = "random",Options=[],counter=0,Cleaned=0,Origi
             $ Girl.change_stat("inhibition", 80, 2)
             $ Girl.change_stat("inhibition", 200, 1)
             "She leaves the jiz right where it is and gives you a wink."
-            if "hand" in Girl.Spunk:
-                    $ Girl.Spunk.remove("hand")
+            if "handjob" in Girl.Spunk:
+                    $ Girl.Spunk.remove("handjob")
                     if Girl.Swallow:
                         "She does lick off her hand though."
                     else:
@@ -2635,7 +2635,7 @@ label Girl_Cleanup(Girl=0,Choice = "random",Options=[],counter=0,Cleaned=0,Origi
 
     if Original in all_Girls and focused_Girl != Original:
             # if Girl wasn't the lead, swap that one back
-            call Shift_Focus(Original)
+            call shift_focus(Original)
     return
 
 # End Girl Clean-Up /////////////////////////////////////////////////////////////////////////////////////
@@ -2660,7 +2660,7 @@ label Self_Cleanup(Girl=0):         #rkeljsv
             if "chin" not in Girl.Spunk:
                 $ Girl.Spunk.append("chin")
     if Girl.Spunk:
-            $ Girl.Spunk.append("hand")
+            $ Girl.Spunk.append("handjob")
     if "chin" in Girl.Spunk:
             $ Girl.Spunk.remove("chin")
             if counter:
@@ -2721,8 +2721,8 @@ label Self_Cleanup(Girl=0):         #rkeljsv
             else:
                 "[Girl.name] wipes the spunk dripping our of her ass,"
             $ counter += 1
-    if "hand" in Girl.Spunk:
-            $ Girl.Spunk.remove("hand")
+    if "handjob" in Girl.Spunk:
+            $ Girl.Spunk.remove("handjob")
             if Choice == "eat":
                     $ Girl.Spunk.append("mouth")
                     $ Player.change_stat("Focus",80,3)
@@ -3192,7 +3192,7 @@ label Partner_Clean_Girl(Girl=0): #rkeljsv
     if Choice == "partner lick":
             $ Partner.change_face("tongue")
     else:
-            $ Partner.Spunk.append("hand")
+            $ Partner.Spunk.append("handjob")
     $ counter = 0
     if "chin" in Girl.Spunk or "mouth" in Girl.Spunk:
             while "chin" in Girl.Spunk:
@@ -3359,8 +3359,8 @@ label Partner_Clean_Girl(Girl=0): #rkeljsv
             $ counter += 1
 
     $ Partner.change_face("sly")
-    if "hand" in Girl.Spunk:
-            $ Girl.Spunk.remove("hand")
+    if "handjob" in Girl.Spunk:
+            $ Girl.Spunk.remove("handjob")
             if Choice == "partner lick":
                     if "mouth" not in Partner.Spunk:
                             $ Partner.Spunk.append("mouth")

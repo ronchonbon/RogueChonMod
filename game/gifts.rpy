@@ -2,7 +2,7 @@
 label Gifts: #rkeljsv
     # call Gifts(RogueX)
     $ Girl = GirlCheck(Girl)
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     while True:
             if not Player.Inventory:
                 "You don't have anything to give her."
@@ -521,7 +521,7 @@ label Gifts: #rkeljsv
                                             if Girl == LauraX:
                                                     ch_l "I don't know why you'd give me this, it's not like I'd wear it. . ."
                                             $ Girl.change_face("bemused",1)
-                                    elif "no gift bra" in Girl.daily_history:
+                                    elif "no_gift bra" in Girl.daily_history:
                                             $ Girl.change_face("angry",2)
                                             if Girl == LauraX:
                                                     ch_l "I just told you no."
@@ -530,7 +530,7 @@ label Gifts: #rkeljsv
                                             $ Girl.change_stat("love", 50, -10)
                                             $ Girl.change_stat("obedience", 20, 10)
                                             $ Girl.change_stat("inhibition", 20, 20)
-                                            if "no gift panties" in Girl.daily_history:
+                                            if "no_gift panties" in Girl.daily_history:
                                                 if Girl == LauraX:
                                                         ch_l "I don't want this either."
                                             else:
@@ -539,8 +539,8 @@ label Gifts: #rkeljsv
                                             $ Girl.change_stat("lust", 89, 5)
                                             $ Girl.Blush = 1
                                             "She hands it back to you."
-                                            $ Girl.recent_history.append("no gift bra")
-                                            $ Girl.daily_history.append("no gift bra")
+                                            $ Girl.recent_history.append("no_gift bra")
+                                            $ Girl.daily_history.append("no_gift bra")
                                 else:
                                             call Anyline(Girl,"I already have one of those.")
                         #End Corset
@@ -576,7 +576,7 @@ label Gifts: #rkeljsv
                                             $ Girl.change_stat("inhibition", 200, 25)
                                             ch_l "I don't know why you'd give me this, it's not like I'd wear it. . ."
                                             $ Girl.change_face("bemused",1)
-                                    elif "no gift bra" in Girl.daily_history:
+                                    elif "no_gift bra" in Girl.daily_history:
                                             $ Girl.change_face("angry",2)
                                             ch_l "I just told you no."
                                     else:
@@ -584,15 +584,15 @@ label Gifts: #rkeljsv
                                             $ Girl.change_stat("love", 50, -10)
                                             $ Girl.change_stat("obedience", 20, 10)
                                             $ Girl.change_stat("inhibition", 20, 20)
-                                            if "no gift panties" in Girl.daily_history:
+                                            if "no_gift panties" in Girl.daily_history:
                                                 ch_l "I don't want this either."
                                             else:
                                                 ch_l "You have too much time on your hands."
                                             $ Girl.change_stat("lust", 89, 5)
                                             $ Girl.Blush = 1
                                             "She hands it back to you."
-                                            $ Girl.recent_history.append("no gift bra")
-                                            $ Girl.daily_history.append("no gift bra")
+                                            $ Girl.recent_history.append("no_gift bra")
+                                            $ Girl.daily_history.append("no_gift bra")
                                 else:
                                             call Anyline(Girl,"I already have one of those.")
                         #End Lace Corset
@@ -643,7 +643,7 @@ label Gifts: #rkeljsv
                                                     ch_s "It is not that I do not appreciate it, but. . ."
                                             elif Girl == JubesX:
                                                     ch_v "It's not my usual style. . ."
-                                    elif "no gift bra" in Girl.daily_history:
+                                    elif "no_gift bra" in Girl.daily_history:
                                             $ Girl.change_face("angry",2)
                                             if Girl == RogueX:
                                                     ch_r "You can't even give me 24 hours?!"
@@ -661,17 +661,17 @@ label Gifts: #rkeljsv
                                             $ Girl.change_stat("obedience", 20, 10)
                                             $ Girl.change_stat("inhibition", 20, 20)
                                             if Girl == RogueX:
-                                                    if "no gift panties" in Girl.daily_history:
+                                                    if "no_gift panties" in Girl.daily_history:
                                                         ch_r "I don't want these neither!"
                                                     else:
                                                         ch_r "I don't know why you would focus on my rack, [Girl.Petname]"
                                             elif Girl == KittyX:
-                                                    if "no gift panties" in Girl.daily_history:
+                                                    if "no_gift panties" in Girl.daily_history:
                                                         ch_k "I don't want these either!"
                                                     else:
                                                         ch_k "You just- just don't be thinking about my breasts!"
                                             elif Girl == EmmaX:
-                                                    if "no gift panties" in Girl.daily_history:
+                                                    if "no_gift panties" in Girl.daily_history:
                                                         ch_e "This isn't any better than the last."
                                                     else:
                                                         ch_e "I don't think it's appropriate for you to be so focused on my breasts."
@@ -681,8 +681,8 @@ label Gifts: #rkeljsv
                                                     ch_v "I definitely don't want this. . ."
                                             $ Girl.change_stat("lust", 89, 5)
                                             "She hands it back to you."
-                                            $ Girl.recent_history.append("no gift bra")
-                                            $ Girl.daily_history.append("no gift bra")
+                                            $ Girl.recent_history.append("no_gift bra")
+                                            $ Girl.daily_history.append("no_gift bra")
                                     $ Girl.change_face("bemused")
                                 else:
                                             call Anyline(Girl,"I already have one of those.")
@@ -740,7 +740,7 @@ label Gifts: #rkeljsv
                                                     ch_s "I suppose I could always use another pair. . ."
                                             elif Girl == JubesX:
                                                     ch_v "A little. . . intimate. . ."
-                                    elif "no gift panties" in Girl.daily_history:
+                                    elif "no_gift panties" in Girl.daily_history:
                                             $ Girl.change_face("angry",2)
                                             if Girl == RogueX:
                                                     ch_r "Not today, [Girl.Petname]!"
@@ -760,26 +760,26 @@ label Gifts: #rkeljsv
                                             $ Girl.change_stat("obedience", 20, 10)
                                             $ Girl.change_stat("inhibition", 20, 20)
                                             if Girl == RogueX:
-                                                    if "no gift bra" in Girl.daily_history:
+                                                    if "no_gift bra" in Girl.daily_history:
                                                         ch_r "I don't want these neither!"
                                                     else:
                                                         ch_r "I think I'll pick out my own unmentionables, thank you."
                                             elif Girl == KittyX:
-                                                    if "no gift bra" in Girl.daily_history:
+                                                    if "no_gift bra" in Girl.daily_history:
                                                         ch_k "I don't want these either!"
                                                     elif Girl.SeenPanties:
                                                         ch_k "Just because you've seen my panties doesn't mean you get to pick them out."
                                                     else:
                                                         ch_k "Oh, don't you worry what I've got on down there."
                                             elif Girl == EmmaX:
-                                                    if "no gift bra" in Girl.daily_history:
+                                                    if "no_gift bra" in Girl.daily_history:
                                                         ch_e "These aren't appropriate either."
                                                     elif Girl.SeenPanties:
                                                         ch_e "Just because you've seen my panties doesn't mean you get to pick them out."
                                                     else:
                                                         ch_e "I don't believe these are appropriate thoughts for you to be having."
                                             elif Girl == LauraX:
-                                                    if "no gift bra" in Girl.daily_history:
+                                                    if "no_gift bra" in Girl.daily_history:
                                                         ch_l "I don't want these either!"
                                                     elif Girl.SeenPanties:
                                                         ch_l "Did you not like the ones I had?"
@@ -791,8 +791,8 @@ label Gifts: #rkeljsv
                                                     ch_v "I'm a bit uncomfortable with this. . ."
                                             $ Girl.change_stat("lust", 89, 5)
                                             "She hands them back to you."
-                                            $ Girl.recent_history.append("no gift panties")
-                                            $ Girl.daily_history.append("no gift panties")
+                                            $ Girl.recent_history.append("no_gift panties")
+                                            $ Girl.daily_history.append("no_gift panties")
                                     $ Girl.change_face("bemused")
                                 else:
                                             call Anyline(Girl,"I already have one of those.")
@@ -931,7 +931,7 @@ label Gifts: #rkeljsv
                                             elif Girl == JubesX:
                                                     ch_v "I guess that works for me. . ."
                                             $ Girl.change_face("bemused",1)
-                                    elif "no gift bra" in Girl.daily_history:
+                                    elif "no_gift bra" in Girl.daily_history:
                                             $ Girl.change_face("angry",2)
                                             if Girl == RogueX:
                                                     ch_r "My answer's still no, stop asking!"
@@ -950,7 +950,7 @@ label Gifts: #rkeljsv
                                         $ Girl.change_stat("love", 50, -5)
                                         $ Girl.change_stat("obedience", 20, 5)
                                         $ Girl.change_stat("inhibition", 20, 10)
-                                        if "no gift panties" in Girl.daily_history:
+                                        if "no_gift panties" in Girl.daily_history:
                                                 call Anyline(Girl,"I don't want these either!")
                                         else:
                                                 if Girl == RogueX:
@@ -967,8 +967,8 @@ label Gifts: #rkeljsv
                                                         ch_v "Nah, I don't think it works for me. . ."
                                         $ Girl.Blush = 1
                                         "She hands it back to you."
-                                        $ Girl.recent_history.append("no gift bra")
-                                        $ Girl.daily_history.append("no gift bra")
+                                        $ Girl.recent_history.append("no_gift bra")
+                                        $ Girl.daily_history.append("no_gift bra")
                                     if "bikini top" in Girl.Inventory and "bikini bottoms" in Girl.Inventory:
                                         if Girl == StormX:
                                                 ch_s "Oh! I understand the purpose of the flap now!"
@@ -1050,7 +1050,7 @@ label Gifts: #rkeljsv
                                             elif Girl == JubesX:
                                                     ch_v "I'm not sure I can wear these. . ."
                                             $ Girl.change_face("bemused",1)
-                                    elif "no gift panties" in Girl.daily_history:
+                                    elif "no_gift panties" in Girl.daily_history:
                                             $ Girl.change_face("angry",2)
                                             if Girl == RogueX:
                                                     ch_r "My answer's still no, stop asking!"
@@ -1069,7 +1069,7 @@ label Gifts: #rkeljsv
                                             $ Girl.change_stat("love", 50, -5)
                                             $ Girl.change_stat("obedience", 20, 5)
                                             $ Girl.change_stat("inhibition", 20, 10)
-                                            if "no gift bra" in Girl.daily_history:
+                                            if "no_gift bra" in Girl.daily_history:
                                                 call Anyline(Girl,"I don't want these either!")
                                             else:
                                                 if Girl == RogueX:
@@ -1086,8 +1086,8 @@ label Gifts: #rkeljsv
                                                         ch_v "Oh no. . ."
                                             $ Girl.Blush = 1
                                             "She hands them back to you."
-                                            $ Girl.recent_history.append("no gift panties")
-                                            $ Girl.daily_history.append("no gift panties")
+                                            $ Girl.recent_history.append("no_gift panties")
+                                            $ Girl.daily_history.append("no_gift panties")
                                     if "bikini top" in Girl.Inventory and "bikini bottoms" in Girl.Inventory:
                                         if Girl == StormX:
                                                 ch_s "Oh! I understand the purpose of the flap now!"
@@ -1131,10 +1131,10 @@ label Gifts: #rkeljsv
                                             $ Girl.change_stat("inhibition", 200, 5)
                                             ch_k "It'd go well with a swimsuit. . ."
                                             $ Girl.change_face("bemused",1)
-                                    elif "no gift skirt" in Girl.recent_history:
+                                    elif "no_gift skirt" in Girl.recent_history:
                                             $ Girl.change_face("angry",2)
                                             ch_k "I just don't want that."
-                                    elif "no gift skirt" in Girl.daily_history:
+                                    elif "no_gift skirt" in Girl.daily_history:
                                             $ Girl.change_face("angry",2)
                                             ch_k "Look, my answer's still no, stop asking!"
                                     else:
@@ -1145,8 +1145,8 @@ label Gifts: #rkeljsv
                                             ch_k "Oh, don't you worry what I'm wearing."
                                             $ Girl.Blush = 1
                                             "She hands it back to you."
-                                            $ Girl.recent_history.append("no gift skirt")
-                                            $ Girl.daily_history.append("no gift skirt")
+                                            $ Girl.recent_history.append("no_gift skirt")
+                                            $ Girl.daily_history.append("no_gift skirt")
                                     if Girl == KittyX and "bikini top" in Girl.Inventory and "bikini bottoms" in Girl.Inventory:
                                             $ Girl.Swim[0] = 1
                                 else:
@@ -1166,7 +1166,7 @@ label Gifts: #rkeljsv
                 "Switch to. . .":
                         call Switch_Chat
                         ch_p "I'd like to give you something."
-                        if Girl.Loc != bg_current:
+                        if Girl.location != bg_current:
                                 call Anyline(Girl,"I don't see how, if I'm not there.")
                                 return
                         jump Gifts

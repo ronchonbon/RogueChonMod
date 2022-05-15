@@ -396,7 +396,7 @@ label sex(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call sex_set_modifier(Girl, "sex")
 
     $ Approval = ApprovalCheck(Girl, 1400, TabM = 5) # 135, 150, 165, Taboo -200(335)
@@ -492,7 +492,7 @@ label sex(Girl):
                         jump before_action
         return
 
-    if not Girl.Sex and "no sex" not in Girl.recent_history:                           #first time
+    if not Girl.Sex and "no_sex" not in Girl.recent_history:                           #first time
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
@@ -526,7 +526,7 @@ label anal(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call sex_set_modifier(Girl, "anal")
 
     $ Approval = ApprovalCheck(Girl, 1550, TabM = 5) # 155, 170, 185, Taboo -200(355)
@@ -622,7 +622,7 @@ label anal(Girl):
                         jump before_action
         return
 
-    if not Girl.Anal and "no anal" not in Girl.recent_history:                                                               #first time
+    if not Girl.Anal and "no_anal" not in Girl.recent_history:                                                               #first time
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
@@ -633,7 +633,7 @@ label anal(Girl):
 
             ch_r "Seriously?"
 
-    if not Girl.Loose and ("dildo anal" in Girl.daily_history or "anal" in Girl.daily_history):
+    if not Girl.Loose and ("dildo_anal" in Girl.daily_history or "anal" in Girl.daily_history):
         $ Girl.change_face("bemused", 1)
 
         call ass_sore_lines(Girl)
@@ -666,7 +666,7 @@ label hotdog(Girl):
 
     $ Round -= 5 if Round > 5 else (Round-1)
 
-    call Shift_Focus(Girl)
+    call shift_focus(Girl)
     call sex_set_modifier(Girl, "hotdog")
 
     $ Approval = ApprovalCheck(Girl, 1000, TabM = 3) # 100, 115, 130, Taboo -120(220)
@@ -749,7 +749,7 @@ label hotdog(Girl):
                         jump before_action
         return
 
-    if not Girl.Hotdog and "no hotdog" not in Girl.recent_history:                                                               #first time
+    if not Girl.Hotdog and "no_hotdog" not in Girl.recent_history:                                                               #first time
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 

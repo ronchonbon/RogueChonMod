@@ -1,6 +1,6 @@
 label Class_Room_Entry:
     call Jubes_Entry_Check
-    $ Player.DrainWord("locked",0,0,1)
+    door_locked = False
     $ Present = []
     $ bg_current = "bg_classroom"
     $ Nearby = []
@@ -34,9 +34,9 @@ label Class_Room:
     call GirlsAngry
 
     if line == "entry":
-            if EmmaX.Loc == "bg_teacher":
+            if EmmaX.location == "bg_teacher":
                     $ line = "As you sit down, you see "+ EmmaX.name +" at the podium. What would you like to do?"
-            elif StormX.Loc == "bg_teacher":
+            elif StormX.location == "bg_teacher":
                     $ line = "As you sit down, you see "+ StormX.name +" at the podium. What would you like to do?"
             elif time_index == 2 or Weekday > 5: #evening
                     $ line = "You enter the classroom. What would you like to do?"
@@ -66,17 +66,17 @@ label Class_Room:
                 call Chat
                 $ line = "You are in class right now. What would you like to do?"
 
-        "Lock the door" if "locked" not in Player.Traits:
+        "Lock the door" if not door_locked:
                     if Weekday >=5 or time_index >= 2: #evening+
                             "You lock the door"
-                            $ Player.Traits.append("locked")
+                            $ door_locked = True
                             call Taboo_Level
                     else:
                             "You can't really do that during class."
 
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if door_locked:
                     "You unlock the door"
-                    $ Player.Traits.remove("locked")
+                    $ door_locked = False
                     call Taboo_Level
 
         "Wait" if time_index < 3: #not night time
@@ -156,7 +156,7 @@ label Class_Room_Seating(Girls=[],GirlB=0,GirlLike=0,line=0,D20=0,Girls=[]):
     $ Girls = active_Girls[:]
     while Girls:
         #fills the list with all girls in the room
-        if Girls[0].Loc == bg_current:
+        if Girls[0].location == bg_current:
                 $ Girls.append(Girls[0])
         $ Girls.remove(Girls[0])
 
@@ -248,11 +248,11 @@ label Class_Room_Seating(Girls=[],GirlB=0,GirlLike=0,line=0,D20=0,Girls=[]):
             $ Present.remove("junk")
     if len(Present) == 2:
             "You sit between [Present[0].name] and [Present[1].name]."
-            $ Present[0].Loc = "bg_classroom"
-            $ Present[1].Loc = "bg_classroom"
+            $ Present[0].location = "bg_classroom"
+            $ Present[1].location = "bg_classroom"
     elif Present:
             "You sit next to [Present[0].name]."
-            $ Present[0].Loc = "bg_classroom"
+            $ Present[0].location = "bg_classroom"
     else:
             "You sit off to the side."
 
@@ -265,11 +265,11 @@ label Class_Room_Seating(Girls=[],GirlB=0,GirlLike=0,line=0,D20=0,Girls=[]):
                     #if she wasn't added to present, move her to Nearby
                     if Girls[0] not in Nearby:
                             $ Nearby.append(Girls[0])
-                    $ Girls[0].Loc = "nearby"
+                    $ Girls[0].location = "nearby"
             $ Girls.remove(Girls[0])
 
     if Present:
-            call Shift_Focus(Present[0])
+            call shift_focus(Present[0])
     call set_the_scene(Quiet=1)
 
     return
@@ -308,12 +308,12 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                     ease .5 ypos 250
         $ Girls.remove(Girls[0])
 
-    call Shift_Focus(Girl)
-    if EmmaX.Loc == "bg_teacher":
+    call shift_focus(Girl)
+    if EmmaX.location == "bg_teacher":
         "[EmmaX.name] is giving a lecture on mutant relations. Sitting next to you, you notice [Girl.name] shifting uncomfortably in her seat."
 
         $ Teacher = EmmaX
-    elif StormX.Loc == "bg_teacher":
+    elif StormX.location == "bg_teacher":
         "[StormX.name] is giving a lecture on geography and politics. Sitting next to you, you notice [Girl.name] shifting uncomfortably in her seat."
 
         $ Teacher = StormX
@@ -519,11 +519,11 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
         while D20 <= 21 or "go on" in Player.recent_history:
             menu Frisky_Class_Loop:
                 "Pull away from her.":
-                    if line == "fondle pussy":
+                    if line == "fondle_pussy":
                         "You slowly slide your hand from her lap and start taking notes again."
 
                         $ line = "tease"
-                    elif line == "fondle breast":
+                    elif line == "fondle_breast":
                         "With a final squeeze, you move your hand back to the desktop."
 
                         $ line = "tease"
@@ -556,8 +556,8 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                     "[Girl.name] sighs contentedly and holds your hand for the remainder of class."
 
                     jump Frisky_Class_End
-                "Try and slip your hand to her lap." if line != "fondle pussy":
-                    $ line = "fondle pussy"
+                "Try and slip your hand to her lap." if line != "fondle_pussy":
+                    $ line = "fondle_pussy"
 
                     if ApprovalCheck(Girl, 1200) and Girl.FondleP and Girl.SEXP >= 40:
                         $ Girl.change_face("sly")
@@ -586,7 +586,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                     else:
                         $ line = "too far"
 
-                    if line == "fondle pussy":
+                    if line == "fondle_pussy":
                         $ Girl.change_face("sly")
                         $ Girl.change_stat("lust", 94, 5)
                         if Girl.wearing_skirt:
@@ -607,9 +607,9 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                         else:
                             "You feel her lips moisten as you stroke the soft flesh. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
 
-                        $ primary_action = "fondle pussy"
+                        $ primary_action = "fondle_pussy"
                         $ D20 += 5
-                "Keep fondling her pussy." if line == "fondle pussy":
+                "Keep fondling her pussy." if line == "fondle_pussy":
                     $ Girl.change_stat("obedience", 70, 5)
                     $ Girl.change_stat("inhibition", 60, 3)
                     $ Girl.change_stat("lust", 89, 5)
@@ -622,8 +622,8 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                     "[lineB]"
 
                     $ D20 += 5
-                "Start fondling her tits." if line != "fondle breasts":
-                    $ line = "fondle breasts"
+                "Start fondling her tits." if line != "fondle_breasts":
+                    $ line = "fondle_breasts"
                     if ApprovalCheck(Girl, 1100) and Girl.FondleB and Girl.SEXP >= 40:
                         $ Girl.change_stat("love", 80, 5)
                         $ Girl.change_stat("obedience", 70, 5)
@@ -650,7 +650,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                     else:
                         $ line = "too far"
 
-                    if line == "fondle breasts":
+                    if line == "fondle_breasts":
                         $ Girl.change_face("sly")
                         $ Girl.change_stat("lust", 94, 5)
 
@@ -658,8 +658,8 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                         "Her nipples begin to firm up and she lets out a small moan of pleasure."
 
                         $ D20 += 7
-                        $ primary_action = "fondle breasts"
-                "Keep fondling her tits." if line == "fondle breasts":
+                        $ primary_action = "fondle_breasts"
+                "Keep fondling her tits." if line == "fondle_breasts":
                     $ Girl.change_stat("obedience", 70, 5)
                     $ Girl.change_stat("inhibition", 60, 2)
                     $ Girl.change_stat("lust", 95, 3)
@@ -668,7 +668,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
 
                     $ D20 += 7
                 "Try and pull her hand toward your lap." if not offhand_action and Player.Semen:
-                    if "hand" in Girl.recent_history:
+                    if "handjob" in Girl.recent_history:
                         "[Girl.name] grins and her hand grasps your cock again."
                     elif ApprovalCheck(Girl, 1200) and Girl.Hand and Girl.SEXP >= 40:
                         $ Girl.change_face("sly")
@@ -709,13 +709,13 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
 
                             $ Girl.change_stat("lust", 94, 5)
 
-                        $ offhand_action = "hand"
-                        $ Girl.recent_history.append("hand")
-                        $ Girl.daily_history.append("hand")
+                        $ offhand_action = "handjob"
+                        $ Girl.recent_history.append("handjob")
+                        $ Girl.daily_history.append("handjob")
 
                         "She begins to gently stroke it. . ."
 
-                        if "hand" not in Girl.recent_history:
+                        if "handjob" not in Girl.recent_history:
                             $ Girl.Hand += 1
                         $ D20 += 5
                 "Stop her handjob." if offhand_action:
@@ -769,14 +769,14 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
 
                                 $ Girl.change_stat("lust", 94, 5)
 
-                            $ offhand_action = "hand"
+                            $ offhand_action = "handjob"
 
-                            $ Girl.recent_history.append("hand")
-                            $ Girl.daily_history.append("hand")
+                            $ Girl.recent_history.append("handjob")
+                            $ Girl.daily_history.append("handjob")
 
                             "She begins to gently stroke it. . ."
 
-                            if "hand" not in Girl.recent_history:
+                            if "handjob" not in Girl.recent_history:
                                 $ Girl.Hand += 1
 
                             $ D20 += 10
@@ -914,7 +914,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                         $ Present[1].GirlLikeUp(Girl,-4)
                         $ Girl.GirlLikeUp(Present[1],-2)
 
-                        call Remove_Girl(Present[1])
+                        call remove_girl(Present[1])
                     elif ApprovalCheck(Present[1], 1500) and Present[1].GirlLikeCheck(Girl) >= 600:
                         $ Present[1].Eyes = "leftside"
 
@@ -1083,7 +1083,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                 else:
                     "Since Xavier isn't concerned with your activities, you both head back to your room instead."
 
-                    $ Girl.Loc = "bg_player"
+                    $ Girl.location = "bg_player"
 
                     call CleartheRoom(Girl,0,1)
                     jump player_room

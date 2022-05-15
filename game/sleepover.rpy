@@ -7,14 +7,14 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
 
             $ Girls = all_Girls[:]
             while Girls:
-                    if Girls[0].Loc == bg_current:
+                    if Girls[0].location == bg_current:
                             $ Party.append(Girls[0])
                     $ Girls.remove(Girls[0])
 
 
             if bg_current == "bg_player" and "met" in StormX.History and "met" not in JubesX.History:
                     #Jubilee intro
-                    call CleartheRoom("All",1,0)
+                    call clear_the_room("all",1,0)
                     "It's getting late, so you go to sleep."
                     call Jubes_Meet
                     call Wait
@@ -22,7 +22,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
 
             if not Party and bg_current == "bg_player":
                     #if nobody is around.
-                    call CleartheRoom("All",1)
+                    call clear_the_room("all",1)
                     #if nobody is here, you just go to sleep
                     "It's getting late, so you go to sleep."
                     if "met" in StormX.History and "met" not in JubesX.History:
@@ -38,7 +38,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
                     # prevents anyone agreeing before day 7.
                     $ Party = []
             elif Party and Party[0]:
-                    call Shift_Focus(Party[0])
+                    call shift_focus(Party[0])
 
             if bg_current != "bg_player":
                     #if this isn't your room, sets "room" to the name of the room's owner
@@ -48,7 +48,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
                                     if Girls[0] not in Party:
                                             #either another girl is around
                                             "[Girls[0].name] probably wouldn't appreciate you staying over, you head back to your own room."
-                                            call Remove_Girl("All")
+                                            call remove_girl("all")
                                             jump Return_Player
                                     if Girls[0] != Party[0]:
                                             $ Party.reverse() #makes sure the room's owner is first
@@ -111,7 +111,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
                                     jump Return_Player
                             else:
                                     ch_e "I should probably get going, we wouldn't want any rumors to spread."
-                                    call Remove_Girl(EmmaX)
+                                    call remove_girl(EmmaX)
                     elif len(Party) >= 2 and "three" not in EmmaX.History:
                             #if Emma's around but can't do threesome stuff yet
                             if (bg_current == EmmaX.Home or bg_current == "bg_player") and ApprovalCheck(EmmaX, 1100, "LI"):
@@ -120,12 +120,12 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
                                 ch_e "[Party[1].name] dear, I need a moment with [Player.name], but you can leave."
                                 $ Party[1].change_face("confused",1)
                                 call Anyline(Party[1],"Oh, ok. . .")
-                                call Remove_Girl(Party[1])
+                                call remove_girl(Party[1])
                                 ch_e "Sorry about that, but I had to discuss something with you in private."
                             else:
                                 #if it's not her room, or she doesn't like you enough to stay
                                 ch_e "Yes, I really should be leaving, don't let me bother you two."
-                                call Remove_Girl(EmmaX)
+                                call remove_girl(EmmaX)
                             if "sleeptime" not in EmmaX.History:
                                 $ EmmaX.History.append("sleeptime")
                     if not Party or (EmmaX not in Party and bg_current == EmmaX.Home):
@@ -373,11 +373,11 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
                     #if the primary girl refused to sleep over
                     if Party[0].Home == bg_current:
                             #if it's her room, removes any other girls around
-                            call CleartheRoom(Party[0],1)
+                            call clear_the_room(Party[0],1)
                             jump Return_Player
                     else:
                             #if it's not her room, remove her, and try again
-                            call Remove_Girl(Party[0])
+                            call remove_girl(Party[0])
                             call Sleepover
                             return
 
@@ -605,13 +605,13 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
                         elif Party[1] == JubesX:
                                 ch_v "Night!"
                     if Party:
-                        call CleartheRoom(Party[0],1,1) #removes any other girls around
+                        call clear_the_room(Party[0],1,1) #removes any other girls around
 
             if not Party:
                     #if nobody is around.
                     if bg_current != "bg_player":
                             jump Return_Player
-                    call CleartheRoom("All",1)
+                    call clear_the_room("all",1)
                     #if nobody is here, you just go to sleep
                     "It's getting late, so you go to sleep."
                     call Wait
@@ -620,7 +620,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
             if bg_current != "bg_player" and bg_current != Party[0].Home:
                     #if the room's owner left you in her room. . .
                     "You probably shouldn't sleep here, you head back to your own room."
-                    call Remove_Girl("All")
+                    call remove_girl("all")
                     $ renpy.pop_call()
                     jump Player_Room
 
@@ -633,9 +633,9 @@ label Return_Player:
         $ Girls = all_Girls[:]
         $ renpy.random.shuffle(Girls)
         while Girls:
-                if bg_current != Girls[0].Home and Girls[0].Loc == bg_current:
+                if bg_current != Girls[0].Home and Girls[0].location == bg_current:
                         "[Girls[0].name] heads out."
-                        $ Girls[0].Loc = Girls[0].Home
+                        $ Girls[0].location = Girls[0].Home
                 $ Girls.remove(Girls[0])
         if bg_current != "bg_player":
                 "You head back to your room."
@@ -649,11 +649,11 @@ label Sleepover_Morning: #rkeljsv
         #This label is jumped too from Sleepover if you successfully stay the night
         $ Girls = all_Girls[:]
         while Girls:
-                if Girls[0].Loc == bg_current and Girls[0] not in Party:
-                        call Remove_Girl(Girls[0])
+                if Girls[0].location == bg_current and Girls[0] not in Party:
+                        call remove_girl(Girls[0])
                 $ Girls.remove(Girls[0])
 
-        call Shift_Focus(Party[0])
+        call shift_focus(Party[0])
 
         if Party[0] == StormX and not StormX.Sleepwear[0] and StormX.Taboo < 20:
                 #if it's Storm, you haven't set Sleepwear, and there's nobody else that would mind, go nude
@@ -1278,17 +1278,17 @@ label Sleepover_Morning: #rkeljsv
 
         $ Girls = all_Girls[:]
         while Girls:
-                if "leaving" in Girls[0].recent_history or Girls[0].Loc == bg_current:
+                if "leaving" in Girls[0].recent_history or Girls[0].location == bg_current:
                         #should add to the party any girls who are staying in the room for the morning
                         #or who were in the room but are leaving
                         $ Party.append(Girls[0])
-                        $ Girls[0].Loc = bg_current
+                        $ Girls[0].location = bg_current
                         if "leaving" in Girls[0].recent_history:
                             $ Girls[0].recent_history.remove("leaving")
                 if "morningwood" in Girls[0].Traits:
                         #if a morning wood event happened, apply these traits to them
-                        $ Girls[0].recent_history.append("blow")
-                        $ Girls[0].daily_history.append("blow")
+                        $ Girls[0].recent_history.append("blowjob")
+                        $ Girls[0].daily_history.append("blowjob")
                         $ Girls[0].daily_history.append("morningwood")
                         $ Girls[0].Traits.remove("morningwood")
                 $ Girls.remove(Girls[0])
@@ -1500,15 +1500,15 @@ label Morningwood_Check(Girls=[0,-3],D20=0): #rkeljsv
                                 return
             elif line == "double":
                         # it's a threesome
-                        $ primary_action4 = "blow"
-                        $ Party[1].recent_history.append("blow")
-                        $ Party[1].daily_history.append("blow")
+                        $ primary_action4 = "blowjob"
+                        $ Party[1].recent_history.append("blowjob")
+                        $ Party[1].daily_history.append("blowjob")
                         $ Party[1].daily_history.append("morningwood")
                         $ Party[1].Traits.append("morningwood")
             # it's a solo act with girl 1
-            $ primary_action = "blow"
-            $ Party[0].recent_history.append("blow")
-            $ Party[0].daily_history.append("blow")
+            $ primary_action = "blowjob"
+            $ Party[0].recent_history.append("blowjob")
+            $ Party[0].daily_history.append("blowjob")
             $ Party[0].daily_history.append("morningwood")
             $ Party[0].Traits.append("morningwood")
             call Sleepover_MorningWood
@@ -1530,9 +1530,9 @@ label Morningwood_Check(Girls=[0,-3],D20=0): #rkeljsv
 label Sleepover_MorningWood: #rkeljsv
         # this label is called from Morningwood_Check, which was called from Sleepover_Morning
         $ Player.AddWord(1,"interruption") #prevents interruption
-        call Shift_Focus(Party[0])
+        call shift_focus(Party[0])
         $ Player.Focus = 30
-        if primary_action == "blow":
+        if primary_action == "blowjob":
                     ch_u "\"Slurp, slurp, slurp.\""
         else:
                     ch_u "\"Squish, squish, squish.\""
@@ -1578,7 +1578,7 @@ label Sleepover_MorningWood: #rkeljsv
                 $ Partner.change_face("closed",1,Mouth="tongue")
 
         "You feel a pleasant sensation. . ."
-        if primary_action == "blow":
+        if primary_action == "blowjob":
                 if primary_action4:
                     ch_u "\"Slurp, slurp, slurp.\" \n \ \"Slurp, slurp, slurp.\""
                 else:
@@ -1592,7 +1592,7 @@ label Sleepover_MorningWood: #rkeljsv
         $ Party[0].change_stat("lust", 80, 5)
 
         "It's somewhere below your waist. . ."
-        if primary_action == "blow":
+        if primary_action == "blowjob":
                 if primary_action4:
                     ch_u "\"Slurp, slurp, slurp.\" \n \ \"Slurp, slurp, slurp.\""
                 else:
@@ -1634,7 +1634,7 @@ label Sleepover_MorningWood: #rkeljsv
                                 "You wouldn't want to disturb them. . ."
                             else:
                                 "You wouldn't want to disturb her. . ."
-                        if primary_action == "blow":
+                        if primary_action == "blowjob":
                                 call Anyline(Party[0],"\"Slurp, slurp, slurp.\"")
                         else:
                                 call Anyline(Party[0],"\"Squish, squish, squish.\"")
@@ -1760,42 +1760,42 @@ label Sleepover_MorningWood: #rkeljsv
                                 $ Party[1].change_face("angry",1,Brows="confused")
 
                 if Partner == RogueX:
-                        if "blow" in RogueX.recent_history:
+                        if "blowjob" in RogueX.recent_history:
                             ch_r "I don't know 'bout that, [RogueX.Petname]."
                         else:
                             "[RogueX.name] rolls over in bed."
                             ch_r "Don't stop on my account, [RogueX.Petname]."
                 elif Partner == KittyX:
-                        if "blow" in KittyX.recent_history:
+                        if "blowjob" in KittyX.recent_history:
                             ch_k "Huh. . ."
                         else:
                             "[KittyX.name] rolls over in bed."
                             ch_k "Looked like you were having some fun there . . ."
                 elif Partner == EmmaX:
-                        if "blow" in EmmaX.recent_history:
+                        if "blowjob" in EmmaX.recent_history:
                             ch_e "Well. . ."
                         else:
                             "[EmmaX.name] rolls over in bed."
                             ch_e "Oh, don't let me stop you two."
                 elif Partner == LauraX:
-                        if "blow" in LauraX.recent_history:
+                        if "blowjob" in LauraX.recent_history:
                             ch_l "Hmm. . ."
                         else:
                             "[LauraX.name] rolls over in bed and stares at you both."
                 elif Partner == JeanX:
-                        if "blow" in JeanX.recent_history:
+                        if "blowjob" in JeanX.recent_history:
                             ch_j "Hmm. . ."
                         else:
                             "[JeanX.name] rolls over in bed and puts a pillow over her head."
                 elif Partner == StormX:
-                        if "blow" in StormX.recent_history:
+                        if "blowjob" in StormX.recent_history:
                             ch_s "Hm?"
                         else:
                             "[StormX.name] rolls over in bed."
                             ch_s "Ah."
                             ch_s "Go on then. . ."
                 elif Partner == JubesX:
-                        if "blow" in JubesX.recent_history:
+                        if "blowjob" in JubesX.recent_history:
                             ch_v "Mmmm. . ."
                         else:
                             "[JubesX.name] rolls over in bed."
@@ -2120,9 +2120,9 @@ label Sleepover_MorningWood: #rkeljsv
                         $ action_speed = 1
                         $ action_context = 0
                         if Partner:
-                                $ primary_action4 = "blow"
+                                $ primary_action4 = "blowjob"
                         call Morning_Partner
-                        call expression Party[0].Tag + "_SexAct" pass ("blow")
+                        call expression Party[0].Tag + "_SexAct" pass ("blowjob")
         return
 
 # end Event Morning Wood / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /

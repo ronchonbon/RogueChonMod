@@ -11,7 +11,7 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
                 $ Girl.AddWord(1,0,"gonnafap",0,0)  #adds "gonnafap" tag to daily
                 return
 
-        if Girl.Loc == bg_current:
+        if Girl.location == bg_current:
                 #if she's in the room with you, this won't come up.
                 return
 
@@ -299,7 +299,7 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
                 #if you decide to come over. . .
                 $ del Options[:]
 
-                $ Girl.Loc = Girl.Home
+                $ Girl.location = Girl.Home
                 $ bg_current = Girl.Home
                 call Taboo_Level(1)
 
@@ -308,10 +308,10 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
         elif Fap == 2:
                 #if you agree to watch her. . .
                 $ del Options[:]
-                if Girl in (EmmaX,StormX) and Girl.Loc == "bg_classroom" and time_index >= 2:
+                if Girl in (EmmaX,StormX) and Girl.location == "bg_classroom" and time_index >= 2:
                         pass             #if it's Emma and she's in class and it's a good time, stay
                 else:
-                        $ Girl.Loc = Girl.Home
+                        $ Girl.location = Girl.Home
                 call Taboo_Level(0)
                 call PhoneSex(Girl)
                 $ renpy.pop_call() #skips past EventCall
@@ -343,7 +343,7 @@ label PhoneSex(Girl=0): #rkeljsv
         $ Player.AddWord(1,"phonesex","phonesex",0,"phonesex") #Recent and History
         #display the phone sex graphics
 
-        call Shift_Focus(Girl)
+        call shift_focus(Girl)
         show PhoneSex zorder 150
 
         $ Girl.AddWord(1,"phonesex","phonesex",0,"phonesex")  #adds "phonesex" tag to recent and daily actions, and history
@@ -403,7 +403,7 @@ label Call_For_Les(Girl=0,Girl2=0,Girls=[]): #rkeljsv
         if Girl not in active_Girls:
                 $ Girls = active_Girls[:]
                 while Girls and Girl not in active_Girls:
-                        if Girls[0] not in Party and Girls[0].Loc != bg_current and "les" in Girls[0].recent_history:
+                        if Girls[0] not in Party and Girls[0].location != bg_current and "les" in Girls[0].recent_history:
                                 # if this girl is not already the focal girl, is at the current location but not in a party,
                                 # and was queued for a les action, set her up as girl 1.
                                 $ Girl = Girls[0]
@@ -414,7 +414,7 @@ label Call_For_Les(Girl=0,Girl2=0,Girls=[]): #rkeljsv
                 $ Girls = active_Girls[:]
                 $ Girls.remove(Girl)
                 while Girls:
-                        if Girls[0] not in Party and Girls[0].Loc != bg_current and "les" in Girls[0].recent_history:
+                        if Girls[0] not in Party and Girls[0].location != bg_current and "les" in Girls[0].recent_history:
                                 # if this girl is not already the focal girl, is at the current location but not in a party,
                                 # and was queued for a les action, set her up as girl 2.
                                 if ApprovalCheck(Girls[0], 1600 - Girls[0].SEXP, TabM=0):
@@ -501,7 +501,7 @@ label Call_For_Les(Girl=0,Girl2=0,Girls=[]): #rkeljsv
                             $ Girl2.change_stat("love", 90, -4)
                             $ Girl2.change_stat("obedience", 95, 2)
                             $ Girl2.change_stat("inhibition", 90, -2)
-                            $ Player.recent_history.append("no les")
+                            $ Player.recent_history.append("no_les")
                             "She hangs up."
                             hide Cellphone
                             jump Misplaced
@@ -556,8 +556,8 @@ label Call_For_Les(Girl=0,Girl2=0,Girls=[]): #rkeljsv
                 $ line = Girl
                 $ Girl = Girl2
                 $ Girl2 = line
-        $ Girl.Loc = Girl.Home
-        $ Girl2.Loc = Girl.Home
+        $ Girl.location = Girl.Home
+        $ Girl2.location = Girl.Home
         $ bg_current = Girl.Home
         $ Taboo= 0
         $ Girl.Taboo = 0
@@ -598,8 +598,8 @@ label Call_For_Les(Girl=0,Girl2=0,Girls=[]): #rkeljsv
                         $ Girl.change_face("kiss",1,Eyes = "closed")
                         $ Girl2.change_face("kiss",1,Eyes = "closed")
                         $ primary_action = "lesbian"
-                        $ primary_action3 = "fondle pussy"
-                        $ primary_action4 = "fondle pussy"
+                        $ primary_action3 = "fondle_pussy"
+                        $ primary_action4 = "fondle_pussy"
                         "You see [Girl.name] and [Girl2.name], eyes closed and stroking each other vigorously."
                         $ line = 1
                 "Enter quietly":
@@ -637,8 +637,8 @@ label Call_For_Les(Girl=0,Girl2=0,Girls=[]): #rkeljsv
                 ch_v "Get over here."
 
         $ primary_action = "lesbian"
-        $ primary_action3 = "fondle pussy"
-        $ primary_action4 = "fondle pussy"
+        $ primary_action3 = "fondle_pussy"
+        $ primary_action4 = "fondle_pussy"
         $ Partner = Girl2
         call expression Girl.Tag + "_SexAct" pass ("lesbian") #call Rogue_SexAct("lesbian")
         jump Misplaced
