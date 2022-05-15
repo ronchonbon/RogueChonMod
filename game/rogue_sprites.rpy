@@ -215,15 +215,15 @@ image Rogue_Sprite:
             "True", Null()),
 
         (0,0), ConditionSwitch(
-            "not Partner_offhand_action or Partner_primary_action != 'masturbation' or focused_Girl == RogueX", Null(),
-            "Partner_offhand_action == 'fondle pussy' and primary_action != 'sex' and RogueX.lust >= 70", "GirlFingerPussy",
-            "Partner_offhand_action == 'fondle pussy'", "GirlGropePussy",
-            "Partner_offhand_action == 'fondle breasts'", "GirlGropeRightBreast",
-            "Partner_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
-            "Partner_offhand_action == 'vibrator pussy'", "VibratorPussy",
-            "Partner_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
-            "Partner_offhand_action == 'vibrator anal'", "VibratorAnal",
-            "Partner_offhand_action == 'vibrator anal insert'", "VibratorPussy",
+            "not second_girl_offhand_action or second_girl_primary_action != 'masturbation' or focused_Girl == RogueX", Null(),
+            "second_girl_offhand_action == 'fondle pussy' and primary_action != 'sex' and RogueX.lust >= 70", "GirlFingerPussy",
+            "second_girl_offhand_action == 'fondle pussy'", "GirlGropePussy",
+            "second_girl_offhand_action == 'fondle breasts'", "GirlGropeRightBreast",
+            "second_girl_offhand_action == 'vibrator breasts'", "VibratorRightBreast",
+            "second_girl_offhand_action == 'vibrator pussy'", "VibratorPussy",
+            "second_girl_offhand_action == 'vibrator pussy insert'", "VibratorPussy",
+            "second_girl_offhand_action == 'vibrator anal'", "VibratorAnal",
+            "second_girl_offhand_action == 'vibrator anal insert'", "VibratorPussy",
             "True", Null()),
 
         (0,0), ConditionSwitch(
@@ -243,7 +243,7 @@ image Rogue_Sprite:
 
         (0,0), ConditionSwitch(
             "not offhand_action or focused_Girl != RogueX", Null(),
-            "primary_action == 'fondle breasts' and not girl_offhand_action and not Partner_primary_action and not Partner_offhand_action", "GropeRightBreast",
+            "primary_action == 'fondle breasts' and not girl_offhand_action and not second_girl_primary_action and not second_girl_offhand_action", "GropeRightBreast",
             "offhand_action == 'fondle breasts' and primary_action == 'suck breasts'", "GropeLeftBreast",
             "offhand_action == 'fondle breasts'", "GropeLeftBreast",
             "offhand_action == 'vibrator breasts' and primary_action == 'suck breasts'", "VibratorLeftBreast",
@@ -260,20 +260,20 @@ image Rogue_Sprite:
             "True", Null()),
 
         (0,0), ConditionSwitch(
-            "not Partner_primary_action or focused_Girl != RogueX", Null(),
-            "Partner_primary_action == 'fondle pussy' and primary_action != 'sex' and RogueX.lust >= 70", "GirlFingerPussy",
-            "Partner_primary_action == 'fondle pussy'", "GirlGropePussy",
-            "Partner_primary_action == 'lick pussy'", "Lickpussy",
-            "Partner_primary_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast",
-            "Partner_primary_action == 'suck breasts'", "LickRightBreast",
-            "Partner_primary_action == 'vibrator breasts'", "VibratorRightBreast",
-            "Partner_primary_action == 'vibrator pussy'", "VibratorPussy",
-            "Partner_primary_action == 'vibrator pussy insert'", "VibratorPussy",
-            "Partner_primary_action == 'vibrator anal'", "VibratorAnal",
-            "Partner_primary_action == 'vibrator anal insert'", "VibratorPussy",
-            "Partner_primary_action == 'fondle breasts' and (primary_action == 'fondle breasts' or primary_action == 'suck breasts')", "GirlGropeLeftBreast",    #When zero is working the right breast, fondle left
-            "Partner_primary_action == 'fondle breasts' and (offhand_action == 'fondle breasts' or offhand_action == 'suck breasts')", "GirlGropeRightBreast", #When zero is working the left breast, fondle right
-            "Partner_primary_action == 'fondle breasts'", "GirlGropeRightBreast",
+            "not second_girl_primary_action or focused_Girl != RogueX", Null(),
+            "second_girl_primary_action == 'fondle pussy' and primary_action != 'sex' and RogueX.lust >= 70", "GirlFingerPussy",
+            "second_girl_primary_action == 'fondle pussy'", "GirlGropePussy",
+            "second_girl_primary_action == 'lick pussy'", "Lickpussy",
+            "second_girl_primary_action == 'suck breasts' and (offhand_action != 'suck breasts' or primary_action == 'suck breasts')", "LickLeftBreast",
+            "second_girl_primary_action == 'suck breasts'", "LickRightBreast",
+            "second_girl_primary_action == 'vibrator breasts'", "VibratorRightBreast",
+            "second_girl_primary_action == 'vibrator pussy'", "VibratorPussy",
+            "second_girl_primary_action == 'vibrator pussy insert'", "VibratorPussy",
+            "second_girl_primary_action == 'vibrator anal'", "VibratorAnal",
+            "second_girl_primary_action == 'vibrator anal insert'", "VibratorPussy",
+            "second_girl_primary_action == 'fondle breasts' and (primary_action == 'fondle breasts' or primary_action == 'suck breasts')", "GirlGropeLeftBreast",    #When zero is working the right breast, fondle left
+            "second_girl_primary_action == 'fondle breasts' and (offhand_action == 'fondle breasts' or offhand_action == 'suck breasts')", "GirlGropeRightBreast", #When zero is working the left breast, fondle right
+            "second_girl_primary_action == 'fondle breasts'", "GirlGropeRightBreast",
             "True", Null()),
 
         (0,0), ConditionSwitch(
@@ -1072,7 +1072,8 @@ image Rogue_Sex_Legs:
             ),
         )
 
-image Rogue_Sex_Feet = LiveComposite(
+image Rogue_Sex_Feet:
+    LiveComposite(
         #the lower legs used in the sex pose, referenced by Kitty_Sex_Legs
         (1120,840),
         (0,0), "images/RogueSex/Rogue_Sex_Feet.png",                                                         #Legs Base

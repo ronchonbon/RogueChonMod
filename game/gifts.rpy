@@ -1,7 +1,7 @@
 #Start Gifts menu / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Gifts: #rkeljsv
     # call Gifts(RogueX)
-    $ Girl = GirlCheck(Girl)
+    $ Girl = Girlcheck(Girl)
     call shift_focus(Girl)
     while True:
             if not Player.Inventory:
@@ -18,7 +18,7 @@ label Gifts: #rkeljsv
                                     $ Girl.Blush = 1
                                     $ Girl.ArmPose = 2
                                     $ Girl.Held = "dildo"
-                                    if ApprovalCheck(Girl, 800):
+                                    if Approvalcheck(Girl, 800):
                                             $ Girl.change_face("bemused")
                                             $ Player.Inventory.remove("dildo")
                                             $ Girl.Inventory.append("dildo")
@@ -32,7 +32,7 @@ label Gifts: #rkeljsv
                                             else:
                                                     call Anyline(Girl,"I'm sure I can find some place to store it. . .")
                                             $ Girl.change_stat("lust", 89, 10)
-                                    elif ApprovalCheck(Girl, 500):
+                                    elif Approvalcheck(Girl, 500):
                                             $ Girl.change_face("confused")
                                             $ Player.Inventory.remove("dildo")
                                             $ Girl.Inventory.append("dildo")
@@ -171,7 +171,7 @@ label Gifts: #rkeljsv
                                 $ Girl.Blush = 1
                                 $ Girl.ArmPose = 2
                                 $ Girl.Held = "vibrator"
-                                if ApprovalCheck(Girl, 700):
+                                if Approvalcheck(Girl, 700):
                                         $ Girl.change_face("bemused")
                                         $ Player.Inventory.remove("vibrator")
                                         $ Girl.Inventory.append("vibrator")
@@ -200,7 +200,7 @@ label Gifts: #rkeljsv
                                         elif Girl == JubesX:
                                                 ch_v "Oh, this could be nice. . ."
                                         $ Girl.change_stat("lust", 89, 10)
-                                elif ApprovalCheck(Girl, 400):
+                                elif Approvalcheck(Girl, 400):
                                         $ Girl.change_face("confused")
                                         $ Player.Inventory.remove("vibrator")
                                         $ Girl.Inventory.append("vibrator")
@@ -296,7 +296,7 @@ label Gifts: #rkeljsv
                             if "Dazzler and Longshot" not in Girl.Inventory:
                                 "You give [Girl.name] the book."
                                 $ Girl.Blush = 1
-                                if ApprovalCheck(Girl, 600, "L"):
+                                if Approvalcheck(Girl, 600, "L"):
                                         $ Girl.change_face("smile")
                                         if Girl == RogueX:
                                                 ch_r "Oh, I've heard of this one, very romantic!"
@@ -350,7 +350,7 @@ label Gifts: #rkeljsv
                             if "256 Shades of Grey" not in Girl.Inventory:
                                 "You give [Girl.name] the book."
                                 $ Girl.Blush = 1
-                                if ApprovalCheck(Girl, 500, "O"):
+                                if Approvalcheck(Girl, 500, "O"):
                                         $ Girl.change_face("bemused")
                                         if Girl == RogueX:
                                                 ch_r "I'll research it thoroughly."
@@ -396,7 +396,7 @@ label Gifts: #rkeljsv
                                         $ Girl.change_face("bemused")
                                 $ Player.Inventory.remove("256 Shades of Grey")
                                 $ Girl.Inventory.append("256 Shades of Grey")
-                                $ Girl.change_stat("obedience", 200, 50, alternates = {"Jean": {"check": 200, "value": 10})
+                                $ Girl.change_stat("obedience", 200, 50, alternates = {"Jean": {"check": 200, "value": 10}})
                             else:
                                 if Girl == EmmaX:
                                         ch_e "You're repeating yourself."
@@ -408,7 +408,7 @@ label Gifts: #rkeljsv
                             if "Avengers Tower Penthouse" not in Girl.Inventory:
                                 "You give [Girl.name] the book."
                                 $ Girl.Blush = 1
-                                if ApprovalCheck(Girl, 500, "I"):
+                                if Approvalcheck(Girl, 500, "I"):
                                         $ Girl.change_face("bemused")
                                         if Girl == RogueX:
                                                 ch_r "Oh. . . I think I can work with this. . ."
@@ -462,7 +462,7 @@ label Gifts: #rkeljsv
                                 if "nighty" not in Girl.Inventory:
                                     "You give [Girl.name] the nighty."
                                     $ Girl.Blush = 1
-                                    if ApprovalCheck(Girl, 600):
+                                    if Approvalcheck(Girl, 600):
                                             $ Girl.change_face("bemused")
                                             $ Player.Inventory.remove(Girl.Tag + " nighty")
                                             $ Girl.Inventory.append("nighty")
@@ -487,7 +487,7 @@ label Gifts: #rkeljsv
                                 #If you have a bra, you'll give it.
                                 if "corset" not in Girl.Inventory:
                                     "You give [Girl.name] the corset."
-                                    if ApprovalCheck(Girl, 1000):
+                                    if Approvalcheck(Girl, 1000):
                                             $ Girl.change_face("bemused")
                                             $ Player.Inventory.remove(Girl.Tag + " corset")
                                             $ Girl.Inventory.append("corset")
@@ -499,7 +499,7 @@ label Gifts: #rkeljsv
                                             elif Girl == JeanX:
                                                     ch_j "Ok, I can get into this one. . ."
                                             $ Girl.change_stat("lust", 89, 10)
-                                    elif ApprovalCheck(Girl, 700) or Girl == JeanX:
+                                    elif Approvalcheck(Girl, 700) or Girl == JeanX:
                                             $ Girl.change_face("confused",1)
                                             $ Player.Inventory.remove(Girl.Tag + " corset")
                                             $ Girl.Inventory.append("corset")
@@ -511,7 +511,7 @@ label Gifts: #rkeljsv
                                             elif Girl == JeanX:
                                                     ch_j "Thanks?"
                                             $ Girl.change_face("bemused",1)
-                                    elif ApprovalCheck(Girl, 600):
+                                    elif Approvalcheck(Girl, 600):
                                             $ Girl.change_face("confused",2)
                                             $ Player.Inventory.remove(Girl.Tag + " corset")
                                             $ Girl.Inventory.append("corset")
@@ -549,7 +549,7 @@ label Gifts: #rkeljsv
                                 #If you have a bra, you'll give it.
                                 if "lace corset" not in Girl.Inventory:
                                     "You give [Girl.name] the lace corset."
-                                    if ApprovalCheck(Girl, 1200):
+                                    if Approvalcheck(Girl, 1200):
                                             $ Girl.change_face("bemused")
                                             $ Player.Inventory.remove(Girl.Tag + " lace corset")
                                             $ Girl.Inventory.append("lace corset")
@@ -558,7 +558,7 @@ label Gifts: #rkeljsv
                                             $ Girl.change_stat("inhibition", 200, 20)
                                             ch_l "You think this'd look good on me?"
                                             $ Girl.change_stat("lust", 89, 10)
-                                    elif ApprovalCheck(Girl, 1000):
+                                    elif Approvalcheck(Girl, 1000):
                                             $ Girl.change_face("confused",1)
                                             $ Player.Inventory.remove(Girl.Tag + " lace corset")
                                             $ Girl.Inventory.append("lace corset")
@@ -567,7 +567,7 @@ label Gifts: #rkeljsv
                                             $ Girl.change_stat("inhibition", 200, 15)
                                             ch_l "This is. . . kinda flimsy. . ."
                                             $ Girl.change_face("bemused",1)
-                                    elif ApprovalCheck(Girl, 800):
+                                    elif Approvalcheck(Girl, 800):
                                             $ Girl.change_face("confused",2)
                                             $ Player.Inventory.remove(Girl.Tag + " lace corset")
                                             $ Girl.Inventory.append("lace corset")
@@ -602,7 +602,7 @@ label Gifts: #rkeljsv
                                 if "lace bra" not in Girl.Inventory:
                                     "You give [Girl.name] the lace bra."
                                     $ Girl.Blush = 1
-                                    if ApprovalCheck(Girl, 1000) or Girl == JeanX:
+                                    if Approvalcheck(Girl, 1000) or Girl == JeanX:
                                             $ Girl.change_face("bemused")
                                             $ Player.Inventory.remove(Girl.Tag + " lace bra")
                                             $ Girl.Inventory.append("lace bra")
@@ -622,7 +622,7 @@ label Gifts: #rkeljsv
                                             elif Girl == JubesX:
                                                     ch_v "You like how this would look on me. . ."
                                             $ Girl.change_stat("lust", 89, 10)
-                                    elif ApprovalCheck(Girl, 700,Alt=[[EmmaX],600]):
+                                    elif Approvalcheck(Girl, 700,Alt=[[EmmaX],600]):
                                             $ Girl.change_face("confused")
                                             $ Player.Inventory.remove(Girl.Tag + " lace bra")
                                             $ Girl.Inventory.append("lace bra")
@@ -635,7 +635,7 @@ label Gifts: #rkeljsv
                                                     ch_k "This is. . . see-through. . ."
                                                     ch_k "I don't know why you'd give me this, it's not like I'd wear it. . ."
                                             elif Girl == EmmaX:
-                                                if ApprovalCheck(Girl, 700):
+                                                if Approvalcheck(Girl, 700):
                                                     ch_e "I'm not exactly running low on this sort of thing. . ."
                                                 else:
                                                     ch_e "This is an . . . unusual gift from a student. . ."
@@ -693,7 +693,7 @@ label Gifts: #rkeljsv
                                 if "lace panties" not in Girl.Inventory:
                                     "You give [Girl.name] the lace panties."
                                     $ Girl.Blush = 1
-                                    if ApprovalCheck(Girl, 1100) or Girl == JeanX:
+                                    if Approvalcheck(Girl, 1100) or Girl == JeanX:
                                             $ Girl.change_face("bemused")
                                             $ Player.Inventory.remove(Girl.Tag + " lace panties")
                                             $ Girl.Inventory.append("lace panties")
@@ -715,7 +715,7 @@ label Gifts: #rkeljsv
                                             elif Girl == JubesX:
                                                     ch_v "You think I'd look good in frills?"
                                             $ Girl.change_stat("lust", 89, 10)
-                                    elif ApprovalCheck(Girl, 800):
+                                    elif Approvalcheck(Girl, 800):
                                             $ Girl.change_face("confused")
                                             $ Player.Inventory.remove(Girl.Tag + " lace panties")
                                             $ Girl.Inventory.append("lace panties")
@@ -868,7 +868,7 @@ label Gifts: #rkeljsv
                                 if "bikini top" not in Girl.Inventory:
                                     "You give [Girl.name] the bikini top."
                                     $ Girl.Blush = 1
-                                    if ApprovalCheck(Girl, 1200):
+                                    if Approvalcheck(Girl, 1200):
                                             $ Girl.change_face("bemused")
                                             $ Player.Inventory.remove(Girl.Tag + " bikini top")
                                             $ Girl.Inventory.append("bikini top")
@@ -889,7 +889,7 @@ label Gifts: #rkeljsv
                                                     ch_s "Oh! I think that I recognize this one."
                                             elif Girl == JubesX:
                                                     ch_v "Ooo, so Cal. . ."
-                                    elif ApprovalCheck(Girl, 900) or Girl == JeanX:
+                                    elif Approvalcheck(Girl, 900) or Girl == JeanX:
                                             $ Girl.change_face("confused",1)
                                             $ Player.Inventory.remove(Girl.Tag + " bikini top")
                                             $ Girl.Inventory.append("bikini top")
@@ -911,7 +911,7 @@ label Gifts: #rkeljsv
                                             elif Girl == JubesX:
                                                     ch_v "Not a bad choice. . ."
                                             $ Girl.change_face("bemused",1)
-                                    elif ApprovalCheck(Girl, 700):
+                                    elif Approvalcheck(Girl, 700):
                                             $ Girl.change_face("confused",2)
                                             $ Player.Inventory.remove(Girl.Tag + " bikini top")
                                             $ Girl.Inventory.append("bikini top")
@@ -987,7 +987,7 @@ label Gifts: #rkeljsv
                                 if "bikini bottoms" not in Girl.Inventory:
                                     "You give [Girl.name] the bikini bottoms."
                                     $ Girl.Blush = 1
-                                    if ApprovalCheck(Girl, 1200):
+                                    if Approvalcheck(Girl, 1200):
                                             $ Girl.change_face("bemused")
                                             $ Player.Inventory.remove(Girl.Tag + " bikini bottoms")
                                             $ Girl.Inventory.append("bikini bottoms")
@@ -1008,7 +1008,7 @@ label Gifts: #rkeljsv
                                                     ch_s "lovely, but where have I seen this cut before. . ."
                                             elif Girl == JubesX:
                                                     ch_v "Wow, super sexy. . ."
-                                    elif ApprovalCheck(Girl, 900) or Girl == JeanX:
+                                    elif Approvalcheck(Girl, 900) or Girl == JeanX:
                                             $ Girl.change_face("confused",1)
                                             $ Player.Inventory.remove(Girl.Tag + " bikini bottoms")
                                             $ Girl.Inventory.append("bikini bottoms")
@@ -1030,7 +1030,7 @@ label Gifts: #rkeljsv
                                             elif Girl == JubesX:
                                                     ch_v "Maybe a little small. . ."
                                             $ Girl.change_face("bemused",1)
-                                    elif ApprovalCheck(Girl, 700):
+                                    elif Approvalcheck(Girl, 700):
                                             $ Girl.change_face("confused",2)
                                             $ Player.Inventory.remove(Girl.Tag + " bikini bottoms")
                                             $ Girl.Inventory.append("bikini bottoms")
@@ -1105,7 +1105,7 @@ label Gifts: #rkeljsv
                                 if "blue skirt" not in Girl.Inventory:
                                     "You give [Girl.name] the blue skirt."
                                     $ Girl.Blush = 1
-                                    if ApprovalCheck(Girl, 1000):
+                                    if Approvalcheck(Girl, 1000):
                                             $ Girl.change_face("bemused")
                                             $ Player.Inventory.remove(Girl.Tag + " blue skirt")
                                             $ Girl.Inventory.append("blue skirt")
@@ -1113,7 +1113,7 @@ label Gifts: #rkeljsv
                                             $ Girl.change_stat("obedience", 200, 10)
                                             $ Girl.change_stat("inhibition", 200, 10)
                                             ch_k "This is a cute skirt. . ."
-                                    elif ApprovalCheck(Girl, 800):
+                                    elif Approvalcheck(Girl, 800):
                                             $ Girl.change_face("confused",1)
                                             $ Player.Inventory.remove(Girl.Tag + " blue skirt")
                                             $ Girl.Inventory.append("blue skirt")
@@ -1122,7 +1122,7 @@ label Gifts: #rkeljsv
                                             $ Girl.change_stat("inhibition", 200, 5)
                                             ch_k "This is kinda daring. . ."
                                             $ Girl.change_face("bemused",1)
-                                    elif ApprovalCheck(Girl, 600):
+                                    elif Approvalcheck(Girl, 600):
                                             $ Girl.change_face("confused",2)
                                             $ Player.Inventory.remove(Girl.Tag + " blue skirt")
                                             $ Girl.Inventory.append("blue skirt")

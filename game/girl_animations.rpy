@@ -1,20 +1,15 @@
 label hide_girl(Girl, sprite = False):
     call sex_reset(Girl)
 
-    $ renpy.hide(Girl.Tag + "_SexSprite")
-    $ renpy.hide(Girl.Tag + "_Doggy_Animation")
-    $ renpy.hide(Girl.Tag + "_HJ_Animation")
-    $ renpy.hide(Girl.Tag + "_BJ_Animation")
-    $ renpy.hide(Girl.Tag + "_TJ_Animation")
+    if Girl == RogueX:
+        hide Rogue_SexSprite
+        hide Rogue_Doggy_Animation
+        hide Rogue_HJ_Animation
+        hide Rogue_BJ_Animation
+        hide Rogue_TJ_Animation
 
-    if Girl == EmmaX:
-        $ renpy.hide(Girl.Tag + "_FJ_Animation")
-
-    if Girl == JeanX:
-        $ renpy.hide(Girl.Tag + "_PJ_Animation")
-
-    if sprite:
-        $ renpy.hide(Girl.Tag = "_Sprite")
+        if sprite:
+            hide Rogue_Sprite
 
     return
 
@@ -440,10 +435,10 @@ label sex_launch(Girl, trigger = primary_action):
     if Girl in [RogueX, KittyX, JeanX, StormX]:
         show expression Girl.Tag + "_SexSprite" zorder 150
     elif Girl in [EmmaX]:
-        show expression Girl.Tag + "_SexSprite" zorder 150
+        show expression Girl.Tag + "_SexSprite" zorder 150:
             pos (575, 470)
     elif Girl in [LauraX, JubesX]:
-        show expression Girl.Tag + "_SexSprite" zorder 150
+        show expression Girl.Tag + "_SexSprite" zorder 150:
             pos (450, 500)
 
     with dissolve
@@ -460,7 +455,7 @@ label sex_reset(Girl):
 
     $ Girl.ArmPose = 2
 
-    hide_girl(Girl)
+    call hide_girl(Girl)
 
     show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
@@ -493,11 +488,12 @@ label doggy_reset(Girl):
     $ Girl.SpriteVer = 0
 
     if Girl in [RogueX, KittyX]:
-        x_anchor = 0.6
+        $ x_anchor = 0.6
     elif Girl in [EmmaX]:
-        x_anchor = 0.5
+        $ x_anchor = 0.5
 
-    $ renpy.hide(expression Girl.Tag + "_Doggy_Animation")
+    if Girl == RogueX:
+        hide Rogue_Doggy_Animation
 
     call hide_girl(Girl)
 

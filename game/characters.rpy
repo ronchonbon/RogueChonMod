@@ -114,7 +114,6 @@ init python:
             self.History = []
 
             self.Date = 0
-            self.discussed_                           #how many dates you've been on
             self.Chat = [0,0,0,0,0,0]               #whether certain dialogs occurred
             self.Event = [0,0,0,0,0,0,0,0,0,0,0]    #whether certain relationship milestones happened
             self.Petname = "Zero"
@@ -161,6 +160,7 @@ init python:
             self.Shame = 0
             self.Inventory = []
 
+            self.can_flirt = True
             self.wearing_skirt = False
 
             # toggle(0),arms/gloves(1),pants(2),shirt(3),necklace(4),bra(5),panties(6),accessory(7),hair(8),hose(9)
@@ -704,7 +704,7 @@ init python:
 
                     CallHolder(value, Color, x_position) #show popup
 
-                    if flavor == "lust" and stat >= 100 and not Trigger:
+                    if flavor == "lust" and stat >= 100 and not primary_action:
                         renpy.call("Girl_Cumming",self,1)
 
                         return
@@ -978,14 +978,14 @@ init python:
                 if girl_offhand_action == "kiss both" or girl_offhand_action == "kiss girl":
                         #if the girls are kissing or all three are
                         Kissing = 1
-                elif Partner_primary_action == "kiss both" or girl_offhand_action == "kiss girl":
+                elif second_girl_primary_action == "kiss both" or girl_offhand_action == "kiss girl":
                         #if the girls are kissing or all three are
                         Kissing = 1
                 elif Partner != self:
                         #If the called girl is kissing and is primary
-                        if Trigger == "kiss" or offhand_action == "kiss":
+                        if primary_action == "kiss" or offhand_action == "kiss":
                             Kissing = 1
-                elif Partner_primary_action == "kiss":
+                elif second_girl_primary_action == "kiss":
                         #If the called girl is kissing you in a threesome action
                         Kissing = 1
 
@@ -1033,7 +1033,7 @@ init python:
                         if self.Tag == "Laura" and self.lust < 50 and not Extreme and not Approvalcheck(self, 1000):
                                 self.Eyes = "side"
 
-                if Partner == self and Partner_primary_action in ("eat_pussy", "eat_ass", "blowjob", "suck_breasts"):
+                if Partner == self and second_girl_primary_action in ("eat_pussy", "eat_ass", "blowjob", "suck_breasts"):
                                 self.Mouth = "tongue"
                 elif girl_offhand_action in ("eat_pussy", "eat_ass", "suck_breasts"):
                                 self.Mouth = "tongue"
@@ -1045,7 +1045,7 @@ init python:
 
                 if not self.Loose:
                         #if anal hurts. . .
-                        if Partner != self and (Trigger == "anal" or Trigger == "dildo_anal" or girl_offhand_action == "dildo_anal"):
+                        if Partner != self and (primary_action == "anal" or primary_action == "dildo_anal" or girl_offhand_action == "dildo_anal"):
                             self.Eyes = "closed"
                             self.Brows = "angry"
 
@@ -1187,7 +1187,7 @@ init python:
                 self.Hose = HolderOutfit[9]
                 self.Shame = HolderOutfit[10]
 
-                if "skirt" in self.Legs or "dress" in self.Legs:
+                if self.Legs in ["skirt", "dress"]:
                     self.wearing_skirt = True
                 elif self == JubesX and self.Acc in ["slut jacket"]:
                     self.wearing_skirt = True
@@ -1656,8 +1656,8 @@ init python:
                         if Approvalcheck(self, 1500, TabM=1,Alt=[[EmmaX],1300]):
                             self.change_stat("obedience", 80, 1)
                             self.change_stat("obedience", 50, 2)
-                            self.change_stat("inhibition", 70, 1, alternates = {"Emma": {"check": 70, "value": 2})
-                            self.change_stat("inhibition", 30, 2, alternates = {"Storm": {"check": 60, "value": 3})
+                            self.change_stat("inhibition", 70, 1, alternates = {"Emma": {"check": 70, "value": 2}})
+                            self.change_stat("inhibition", 30, 2, alternates = {"Storm": {"check": 60, "value": 3}})
                         else:
                             self.change_stat("love", 200, (-2-counter))
                             self.change_stat("love", 50, (-1-counter))
@@ -1835,58 +1835,59 @@ label EmotionEditor(Girl=0):
             $ Girl.change_face() #applies change
         #end Emotion Editor
 
-label GirlsAngry(Girls = 0,Girls=[]):
+label GirlsAngry(Girls = 0,other_Girls=[]): #rkeljsv
         # Causes girls to storm off if you've pissed them off.
         $ temp_modifier = 0
-        $ Girls = all_Girls[:]
-        while Girls:
-                if Girls[0].location == bg_current and "angry" in Girls[0].recent_history:
-                        if bg_current == Girls[0].Home:
-                                if Girls[0] == RogueX:
+        $ other_Girls = all_Girls[:]
+        while other_Girls:
+                if other_Girls[0].location == bg_current and "angry" in other_Girls[0].recent_history:
+                        if bg_current == other_Girls[0].Home:
+                                if other_Girls[0] == RogueX:
                                         ch_r "You should get out, I'm fix'in ta throw down."
-                                elif Girls[0] == KittyX:
+                                elif other_Girls[0] == KittyX:
                                         ch_k "You should get out of here, I can't even look at you right now."
-                                elif Girls[0] == EmmaX:
+                                elif other_Girls[0] == EmmaX:
                                         ch_e "You should leave, or do you want to test me?"
-                                elif Girls[0] == LauraX:
+                                elif other_Girls[0] == LauraX:
                                         ch_l "You should leave."
-                                elif Girls[0] == JeanX:
+                                elif other_Girls[0] == JeanX:
                                         ch_j "Out, NOW!"
-                                elif Girls[0] == StormX:
+                                elif other_Girls[0] == StormX:
                                         ch_s "Out!"
-                                elif Girls[0] == JubesX:
+                                elif other_Girls[0] == JubesX:
                                         ch_v "Get out!"
                                 "You head back to your room."
                                 $ Party = []
                                 $ renpy.pop_call()
                                 jump player_room_entry
                         else:
-                                $ Girls[0].location = Girls[0].Home
-                        if Girls[0] in Party:
-                                $ Party.remove(Girls[0])
+                                $ other_Girls[0].location = other_Girls[0].Home
+                        if other_Girls[0] in Party:
+                                $ Party.remove(other_Girls[0])
                         if Girls:
-                            ". . . and so does [Girls[0].name]."
+                            ". . . and so does [other_Girls[0].Name]."
                         else:
-                            "[Girls[0].name] storms off."
-                            if Girls[0] == StormX:
+                            "[other_Girls[0].Name] storms off."
+                            if other_Girls[0] == StormX:
                                     ". . . so to speak."
                         $ Girls += 1
-                        if Girls[0] == RogueX:
+                        if other_Girls[0] == RogueX:
                                 hide Rogue_Sprite with easeoutleft
-                        elif Girls[0] == KittyX:
+                        elif other_Girls[0] == KittyX:
                                 hide Kitty_Sprite with easeoutleft
-                        elif Girls[0] == EmmaX:
+                        elif other_Girls[0] == EmmaX:
                                 hide Emma_Sprite with easeoutleft
-                        elif Girls[0] == LauraX:
+                        elif other_Girls[0] == LauraX:
                                 hide Laura_Sprite with easeoutleft
-                        elif Girls[0] == JeanX:
+                        elif other_Girls[0] == JeanX:
                                 hide Jean_Sprite with easeoutleft
-                        elif Girls[0] == StormX:
+                        elif other_Girls[0] == StormX:
                                 hide Storm_Sprite with easeoutleft
-                        elif Girls[0] == JubesX:
+                        elif other_Girls[0] == JubesX:
                                 hide Jubes_Sprite with easeoutleft
-                $ Girls.remove(Girls[0])
+                $ other_Girls.remove(other_Girls[0])
         return
+
 
 label LastNamer(Wordcount = 0, Splitname = 0, Lastname = 0):
         # Wordcount = number of words

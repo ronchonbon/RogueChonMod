@@ -58,7 +58,7 @@ screen StatHolder10(Value, Color, XPOS):
 # End Stat-ups popups / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 # Start Harem stat boost  / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-label Haremchange_stat(Girl=0,Check=1000,Value=0,Greater=0,GirlsA=[],GirlsB=[]): #rkeljsv
+label Haremchange_stat(Girl=0,check=1000,Value=0,Greater=0,GirlsA=[],GirlsB=[]): #rkeljsv
         # This cycles through every Harem member and applies a like-up to each one.
         # if Girl == "all", it cycles all of them.
         # call Haremchange_stat(LauraX,700,-5)
@@ -77,20 +77,20 @@ label Haremchange_stat(Girl=0,Check=1000,Value=0,Greater=0,GirlsA=[],GirlsB=[]):
                     # remove the girl being checked from the potential matches
                     $ GirlsB.remove(GirlsA[0])
                 while GirlsB:
-                    # If Girl likes the Harem Member below the Check value, apply Value to it.
-                    $ GirlsA[0].GLG(GirlsB[0],Check,Value,1)
+                    # If Girl likes the Harem Member below the check value, apply Value to it.
+                    $ GirlsA[0].GLG(GirlsB[0],check,Value,1)
                     $ GirlsB.remove(GirlsB[0])
                 $ GirlsA.remove(GirlsA[0])
         return
 
 
 # Start Room Stat Booster / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-label RoomStatboost(Type=0,Check=0,Amount=0,Girls=[]):
+label RoomStatboost(Type=0,check=0,Amount=0,Girls=[]):
         # raises/lowers stats of all girls in the room by a fixed amount
         # ie call RoomStatboost("love",80,2)
         $ Girls = all_Girls[:]
         while Girls:
             if Girls[0].location == bg_current or Girls[0] in Nearby:
-                    $ Girls[0].change_stat(Type, Check, Amount)
+                    $ Girls[0].change_stat(Type, check, Amount)
             $ Girls.remove(Girls[0])
         return

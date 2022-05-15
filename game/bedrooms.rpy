@@ -16,7 +16,7 @@ label girls_room_entry(Girl):
     $ Nearby = []
 
     call Gym_Clothes_Off #call Gym_Clothes
-    call set_the_scene(Entry = 1)
+    call set_the_scene(entering = 1)
     call Taboo_Level
 
     $ Player.recent_history.append("traveling")
@@ -26,7 +26,7 @@ label girls_room_entry(Girl):
 
     if Girl in Party:
         if time_index >= 3 or (time_index == 2 and Round <= 10):
-            if ApprovalCheck(Girl, 1000, "LI", Alt = [[JubesX], 500]) or ApprovalCheck(Girl, 600, "OI",Alt = [[JubesX], 300]):
+            if Approvalcheck(Girl, 1000, "LI", Alt = [[JubesX], 500]) or Approvalcheck(Girl, 600, "OI",Alt = [[JubesX], 300]):
                 if Girl == RogueX:
                     ch_r "It's pretty late, [Girl.Petname], but you can come in for a little bit."
                 elif Girl == KittyX:
@@ -56,7 +56,7 @@ label girls_room_entry(Girl):
                     ch_s "Oh, yes, come in."
                 elif Girl == JubesX:
                     ch_v "Oh, yes, do come in. . ."
-            elif ApprovalCheck(Girl, 500, "LI") or ApprovalCheck(Girl, 300, "OI"):
+            elif Approvalcheck(Girl, 500, "LI") or Approvalcheck(Girl, 300, "OI"):
                 if Girl == RogueX:
                     ch_r "It's a little late [Girl.Petname]. See you tomorrow."
                 elif Girl == KittyX:
@@ -194,7 +194,7 @@ label girls_room_entry(Girl):
 
                     $ primary_action = 0
 
-                    call get_out_dialog(Girl)
+                    call get_out_lines(Girl)
 
                     $ bg_current = "bg_campus"
                     jump Misplaced
@@ -240,7 +240,7 @@ label girls_room_entry(Girl):
         elif "noentry" in Girl.recent_history or "angry" in Girl.recent_history:
             $ Girl.change_face("angry")
 
-            call get_out_dialog(Girl)
+            call get_out_lines(Girl)
 
             $ bg_current = "bg_campus"
             jump Misplaced
@@ -260,7 +260,7 @@ label girls_room_entry(Girl):
                 ch_s "Hello, [Girl.Petname], it's almost bedtime."
             elif Girl == JubesX:
                 ch_v "Oh, hey, [Girl.Petname] come on in."
-        elif time_index >= 3 and (ApprovalCheck(Girl, 1000, "LI") or ApprovalCheck(Girl, 600, "OI") or Girl == JubesX):
+        elif time_index >= 3 and (Approvalcheck(Girl, 1000, "LI") or Approvalcheck(Girl, 600, "OI") or Girl == JubesX):
             if Girl == RogueX:
                 ch_r "It's pretty late, [Girl.Petname], but you can come in for a little bit."
             elif Girl == KittyX:
@@ -292,7 +292,7 @@ label girls_room_entry(Girl):
                 ch_s "Oh, yes, come in."
             elif Girl == JubesX:
                 ch_v "Oh, yes, do come in. . ."
-        elif time_index >= 3 and (ApprovalCheck(Girl, 500, "LI") or ApprovalCheck(Girl, 300, "OI")):
+        elif time_index >= 3 and (Approvalcheck(Girl, 500, "LI") or Approvalcheck(Girl, 300, "OI")):
             if Girl == RogueX:
                 ch_r "It's a little late [Girl.Petname]. Maybe tomorrow."
             elif Girl == KittyX:
@@ -313,7 +313,7 @@ label girls_room_entry(Girl):
 
             $ bg_current = "bg_campus"
             jump Misplaced
-        elif ApprovalCheck(Girl, 600, "LI") or ApprovalCheck(Girl, 300, "OI"):
+        elif Approvalcheck(Girl, 600, "LI") or Approvalcheck(Girl, 300, "OI"):
             if Girl == RogueX:
                 ch_r "Sure, come on in [Girl.Petname]."
             elif Girl == KittyX:
@@ -359,13 +359,13 @@ label girls_room(Girl):
     $ Player.DrainWord("traveling", 1, 0)
 
     call Taboo_Level
-    call set_the_scene(Quiet=1)
+    call set_the_scene(silent=1)
     call QuickEvents
-    call Checkout(1)
+    call checkout(1)
 
     if Round <= 10:
         call Round10
-        call Girls_Location
+        call Girls_location
         call EventCalls
 
     call GirlsAngry
@@ -383,7 +383,7 @@ label girls_room(Girl):
         "Would you like to study?":
             call Study_Session
         "Lock the door" if not door_locked:
-            if Girl.location == bg_current and not ApprovalCheck(Girl, 1000, Alt = [[LauraX, JeanX], 1200]):
+            if Girl.location == bg_current and not Approvalcheck(Girl, 1000, Alt = [[LauraX, JeanX], 1200]):
                 if Girl == RogueX:
                     ch_r "Hey, could you maybe keep that open, [RogueX.Petname]?"
                 elif Girl == KittyX:
@@ -412,11 +412,11 @@ label girls_room(Girl):
             call Taboo_Level
         "Sleep" if time_index >= 3: #night time
             call Round10
-            call Girls_Location
+            call Girls_location
             call EventCalls
         "Wait" if time_index < 3: #not night time
             call Round10
-            call Girls_Location
+            call Girls_location
             call EventCalls
         "Return to Your Room" if TravelMode:
             jump player_room_entry
@@ -448,7 +448,7 @@ label girls_room(Girl):
     if "angry" in Girl.recent_history:
         $ Girl.change_face("angry")
 
-        call get_out_dialog(Girl)
+        call get_out_lines(Girl)
 
         $ line = 0
         $ primary_action = 0
@@ -479,13 +479,13 @@ label player_room:
     $ Player.DrainWord("traveling", 1, 0)
 
     call Taboo_Level
-    call set_the_scene(Quiet=1)
+    call set_the_scene(silent=1)
     call QuickEvents
-    call Checkout(1)
+    call checkout(1)
 
     if Round <= 10:
         call Round10
-        call Girls_Location
+        call Girls_location
         call EventCalls
 
     call GirlsAngry
@@ -510,13 +510,13 @@ label player_room:
             call Taboo_Level
         "Sleep" if time_index >= 3: #night time
             call Round10
-            call Girls_Location
+            call Girls_location
             call EventCalls
         "Wait" if time_index < 3: #not night time
             "You wait around a bit."
 
             call Round10
-            call Girls_Location
+            call Girls_location
             call EventCalls
         "Shop":
             call Shop

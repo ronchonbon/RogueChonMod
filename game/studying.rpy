@@ -21,7 +21,7 @@ label Group_Strip_Study(Girls=[],QuizOrder=[]):
                     ch_r "but it looks like I got ahead of myself. . ."
                     $ RogueX.Eyes = "squint"
                     ch_r "Did you have anything else in mind?"
-                    call Rogue_SexMenu
+                    call enter_main_sex_menu
                     return
             "[RogueX.name] moves a bit closer to you, and then suggests \"strip studying.\""
             ch_r "Alright, [RogueX.Petname], I'll make this simple. I'll ask you a quiz question, get it right, I take something off. . ."
@@ -36,7 +36,7 @@ label Group_Strip_Study(Girls=[],QuizOrder=[]):
                     ch_k "but it would be a pretty short game. . ."
                     $ KittyX.Eyes = "squint"
                     ch_k "Was there something you'd rather do?"
-                    call Kitty_SexMenu
+                    call enter_main_sex_menu
                     return
             "She then asks if maybe you want to do some \"strip studying?\""
             $ KittyX.change_face("perplexed", 2)
@@ -81,14 +81,14 @@ label Group_Strip_Study(Girls=[],QuizOrder=[]):
                         call Laura_FB_Prep
                         if action_context:
                                 #if she quits back having wanted to try something else. . .
-                                jump Laura_SexMenu
+                                jump enter_main_sex_menu
                 "I really think we should be studying.":
                         $ LauraX.change_face("perplexed", 1)
                         ch_l "?"
                         $ LauraX.change_stat("love", 80, -5)
                         $ LauraX.change_stat("obedience", 70, 10)
                         $ LauraX.change_stat("inhibition", 70, -5)
-                        if ApprovalCheck(LauraX,600,"L"):
+                        if Approvalcheck(LauraX,600,"L"):
                                 $ LauraX.change_face("sadside", 1)
                         else:
                                 $ LauraX.change_face("angry", 1)
@@ -121,14 +121,14 @@ label Group_Strip_Study(Girls=[],QuizOrder=[]):
                         call Jean_FB_Prep
                         if action_context:
                                 #if she quits back having wanted to try something else. . .
-                                jump Jean_SexMenu
+                                jump enter_main_sex_menu
                 "I really think we should be studying.":
                         $ JeanX.change_face("perplexed", 1)
                         ch_j "Seriously?"
                         $ JeanX.change_stat("love", 80, -5)
                         $ JeanX.change_stat("obedience", 70, 10)
                         $ JeanX.change_stat("inhibition", 70, -5)
-                        if ApprovalCheck(JeanX,600,"L"):
+                        if Approvalcheck(JeanX,600,"L"):
                                 $ JeanX.change_face("sadside", 1)
                         else:
                                 $ JeanX.change_face("angry", 1)
@@ -153,7 +153,7 @@ label Group_Strip_Study(Girls=[],QuizOrder=[]):
                     ch_v "but where would be the fun in that? . ."
                     $ JubesX.Eyes = "squint"
                     ch_v "Was there anything else you'd wanna do instead?"
-                    call Jubes_SexMenu
+                    call enter_main_sex_menu
                     return
             "Hey, would you maybe be interested in \"strip studying?\""
             $ JubesX.change_face("perplexed", 2)
@@ -173,7 +173,7 @@ label Group_Strip_Study(Girls=[],QuizOrder=[]):
             if counter == 3:
                     #if from the Emma menu she didn't agree to participate. . .
                     pass
-            elif ApprovalCheck(Party[1], 1300) or ApprovalCheck(Party[1], 500,"I"):
+            elif Approvalcheck(Party[1], 1300) or Approvalcheck(Party[1], 500,"I"):
                     if Party[1] == RogueX:
                             ch_r "I guess we'll take turns."
                     elif Party[1] == KittyX:
@@ -222,16 +222,16 @@ label Group_Strip_Study(Girls=[],QuizOrder=[]):
             else:
                     $ Count += 1
                     call Strip_Study_Wrong
-                    if between_event_count == 0 and len(Party) >= 2 and not Party[1].ClothingCheck:
+                    if between_event_count == 0 and len(Party) >= 2 and not Party[1].Clothingcheck:
                             #if you failed out, but the other girl is nude. . .
                             menu:
                                 "Well, [Party[1].name], you and I could still have some fun. . .":
                                         $ temp_modifier = 50
-                                        call expression Party[0].Tag + "_SexMenu"
+                                        call enter_main_sex_menu
                                 "Bummer":
                                         pass
 
-            if len(Party) >= 2 and counter != 3 and Party[1].ClothingCheck:
+            if len(Party) >= 2 and counter != 3 and Party[1].Clothingcheck:
                     #if there are multiple girls, and the other girl is not nude, alternate
                     $ Party.reverse()
                     call shift_focus(Party[0])
@@ -255,7 +255,7 @@ label Strip_Study_Right:
 
         if Party[0].Over:
             #will she lose the top?
-            if Party[0] == StormX or Party[0].SeenChest or (Party[0].Chest and ApprovalCheck(Party[0], 300)) or ApprovalCheck(Party[0], 850):
+            if Party[0] == StormX or Party[0].SeenChest or (Party[0].Chest and Approvalcheck(Party[0], 300)) or Approvalcheck(Party[0], 850):
                 $ Party[0].change_stat("inhibition", 25, 1)
                 $ Party[0].change_stat("inhibition", 50, 1)
                 $ line = Party[0].Over
@@ -284,7 +284,7 @@ label Strip_Study_Right:
 
         if Party[0].Legs:
             #will she lose the pants/skirt?
-            if Party[0] == StormX or (Party[0].SeenPanties and Party[0].SeenPussy) or (Party[0].Panties and (ApprovalCheck(Party[0], 700) or Party[0].SeenPanties)) or ApprovalCheck(Party[0], 950):
+            if Party[0] == StormX or (Party[0].SeenPanties and Party[0].SeenPussy) or (Party[0].Panties and (Approvalcheck(Party[0], 700) or Party[0].SeenPanties)) or Approvalcheck(Party[0], 950):
                     $ Party[0].change_stat("lust", 50, 5)
                     $ Party[0].change_stat("inhibition", 30, 1)
                     $ Party[0].change_stat("inhibition", 50, 1)
@@ -318,7 +318,7 @@ label Strip_Study_Right:
             return
 
         if Party[0].Chest: # Will she go topless?
-            if Party[0] == StormX or ApprovalCheck(Party[0], 900) or (Party[0].SeenChest and ApprovalCheck(Party[0], 600)):
+            if Party[0] == StormX or Approvalcheck(Party[0], 900) or (Party[0].SeenChest and Approvalcheck(Party[0], 600)):
                     $ Party[0].change_stat("lust", 60, 5)
                     $ Party[0].change_stat("inhibition", 50, 2)
                     $ Party[0].change_stat("inhibition", 200, 1)
@@ -350,7 +350,7 @@ label Strip_Study_Right:
             return
 
         if Party[0].Panties: # Will she go bottomless?
-            if Party[0] == StormX or ApprovalCheck(Party[0], 950) or (Party[0].SeenPussy and ApprovalCheck(Party[0], 600)):
+            if Party[0] == StormX or Approvalcheck(Party[0], 950) or (Party[0].SeenPussy and Approvalcheck(Party[0], 600)):
                     $ Party[0].change_stat("lust", 70, 10)
                     $ Party[0].change_stat("inhibition", 70, 2)
                     $ Party[0].change_stat("inhibition", 200, 2)
@@ -426,12 +426,12 @@ label Strip_Study_Right:
                 menu:
                     "Well I could think of something else you could do. . .":
                             pass
-                    "It looks like [Party[1].name] has some questions for me. . ." if Party[1].ClothingCheck:
+                    "It looks like [Party[1].name] has some questions for me. . ." if Party[1].Clothingcheck:
                             #if the other girl has anything on. . .
                             return
         $ between_event_count = 0
         $ temp_modifier = 50
-        call expression Party[0].Tag + "_SexMenu"
+        call enter_main_sex_menu
         if Party[0] == RogueX:
                 ch_r "Well I sure enjoyed that."
         elif Party[0] == KittyX:
@@ -1327,7 +1327,7 @@ label Emma_StripStudy_Intro:
             ch_e "but but I suppose we're already past that. . ."
             $ EmmaX.Eyes = "squint"
             ch_e "Do you have any ideas?"
-            call Emma_SexMenu
+            call enter_main_sex_menu
     else:
             "[EmmaX.name] moves a bit closer to you. . ."
             ch_e "I was curious, [EmmaX.Petname]. . ."
@@ -1349,12 +1349,12 @@ label Emma_StripStudy_Intro:
                                 "Um. . . oh, OH! Yeah, sounds good. [[Strip tutoring]":
                                             $ line = "strip"
                                 "Looks like I am. . .":
-                                    if ApprovalCheck(EmmaX, 500, "O"):
+                                    if Approvalcheck(EmmaX, 500, "O"):
                                             $ EmmaX.change_stat("obedience", 80, 5)
                                             $ EmmaX.change_stat("inhibition", 50, 5)
                                             $ EmmaX.change_face("sly", 2)
                                             $ line = "ask"
-                                    elif ApprovalCheck(EmmaX, 500, "LO"):
+                                    elif Approvalcheck(EmmaX, 500, "LO"):
                                             $ EmmaX.change_face("confused", 2)
                                             $ EmmaX.change_stat("love", 70, -5)
                                             $ EmmaX.change_stat("obedience", 80, 5)
@@ -1366,11 +1366,11 @@ label Emma_StripStudy_Intro:
                                             $ EmmaX.change_face("angry", 1)
                                             ch_e "Oh, never mind then."
                                 ". . .":
-                                    if ApprovalCheck(EmmaX, 400, "O"):
+                                    if Approvalcheck(EmmaX, 400, "O"):
                                             $ EmmaX.change_face("confused", 2)
                                             $ EmmaX.change_stat("inhibition", 50, 5)
                                             $ line = "ask"
-                                    elif ApprovalCheck(EmmaX, 500, "LO"):
+                                    elif Approvalcheck(EmmaX, 500, "LO"):
                                             $ EmmaX.change_face("confused", 1, Brows="angry")
                                             $ EmmaX.change_stat("obedience", 50, 5)
                                             $ EmmaX.change_stat("inhibition", 50, 5)
@@ -1412,7 +1412,7 @@ label Emma_StripStudy_Intro:
                                 ch_e "Yes."
                                 $ line = "strip"
                         "Yes? . .":
-                                if ApprovalCheck(EmmaX, 500, "O"):
+                                if Approvalcheck(EmmaX, 500, "O"):
                                     $ EmmaX.change_face("confused", 2)
                                     if "frisky" in EmmaX.History:
                                             $ EmmaX.change_stat("love", 200, -5)
@@ -1421,7 +1421,7 @@ label Emma_StripStudy_Intro:
                                             $ EmmaX.change_stat("obedience", 80, 5)
                                             $ EmmaX.change_stat("inhibition", 50, -5)
                                     $ line = "ask"
-                                elif ApprovalCheck(EmmaX, 500, "LO"):
+                                elif Approvalcheck(EmmaX, 500, "LO"):
                                     $ EmmaX.change_face("confused", 1, Brows="angry")
                                     if "frisky" in EmmaX.History:
                                             $ EmmaX.change_stat("love", 200, -5)
@@ -1431,7 +1431,7 @@ label Emma_StripStudy_Intro:
                                             $ EmmaX.change_stat("inhibition", 50, -5)
                                     $ line = "ask"
                         ". . .":
-                                if ApprovalCheck(EmmaX, 500, "O"):
+                                if Approvalcheck(EmmaX, 500, "O"):
                                     $ EmmaX.change_face("confused", 2)
                                     if "frisky" in EmmaX.History:
                                             $ EmmaX.change_stat("obedience", 50, 5)
@@ -1440,7 +1440,7 @@ label Emma_StripStudy_Intro:
                                             $ EmmaX.change_stat("obedience", 50, 5)
                                             $ EmmaX.change_stat("inhibition", 50, -5)
                                     $ line = "ask"
-                                elif ApprovalCheck(EmmaX, 500, "LO"):
+                                elif Approvalcheck(EmmaX, 500, "LO"):
                                     $ EmmaX.change_face("confused", 1, Brows="angry")
                                     if "frisky" in EmmaX.History:
                                             $ EmmaX.change_stat("love", 200, -5)
@@ -1648,7 +1648,7 @@ label Study_Session(Girls=[]): #rkeljsv
                     $ Round = 10
                     return
             call Wait
-            call Girls_Location
+            call Girls_location
             return
 
 label Frisky_Study(Prime_Bonus=0,Second=0,line=0,Second_Bonus=0): #rkeljsv
@@ -1669,21 +1669,21 @@ label Frisky_Study(Prime_Bonus=0,Second=0,line=0,Second_Bonus=0): #rkeljsv
                     "[EmmaX.name] starts to lean close to you, but then notices [Second.name]."
                     $ Party[0].change_face("sly",1,Eyes="side")
                     "She stops immediately and looks a bit embarrassed."
-            elif D20 > 17 and ApprovalCheck(Party[0], 1000) and Party[0].Blow > 5:
+            elif D20 > 17 and Approvalcheck(Party[0], 1000) and Party[0].Blow > 5:
                     $ line = "blowjob"
-            elif D20 > 14 and Party[0] == JubesX and ApprovalCheck(Party[0], 1000) and Party[0].Blow > 5:
+            elif D20 > 14 and Party[0] == JubesX and Approvalcheck(Party[0], 1000) and Party[0].Blow > 5:
                     $ line = "blowjob"
-            elif D20 > 14 and ApprovalCheck(Party[0], 1000) and Party[0].Hand >= 5:
+            elif D20 > 14 and Approvalcheck(Party[0], 1000) and Party[0].Hand >= 5:
                     $ line = "handjob"
-            elif D20 > 10 and (ApprovalCheck(Party[0], 1300) or (Party[0].Mast and ApprovalCheck(Party[0], 1000))) and Party[0].lust >= 70:
+            elif D20 > 10 and (Approvalcheck(Party[0], 1300) or (Party[0].Mast and Approvalcheck(Party[0], 1000))) and Party[0].lust >= 70:
                     $ line = "masturbate"
-            elif D20 > 10 and ApprovalCheck(Party[0], 1200) and Party[0].lust >= 30:
+            elif D20 > 10 and Approvalcheck(Party[0], 1200) and Party[0].lust >= 30:
                     $ line = "strip"
-            elif ApprovalCheck(Party[0], 700) and Party[0].Kissed > 1:
+            elif Approvalcheck(Party[0], 700) and Party[0].Kissed > 1:
                     $ line = "kissing"
-            elif ApprovalCheck(Party[0], 500):
+            elif Approvalcheck(Party[0], 500):
                     $ line = "snuggle"
-                    if Party[0] != JeanX or ApprovalCheck(Party[0], 700,"L"):
+                    if Party[0] != JeanX or Approvalcheck(Party[0], 700,"L"):
                             $ line = "snuggle"
                     else:
                             "[Party[0].name] briefly rests against your shoulder, but then shakes herself and pulls back."
@@ -1746,7 +1746,7 @@ label Frisky_Study(Prime_Bonus=0,Second=0,line=0,Second_Bonus=0): #rkeljsv
 
 
             if line == "strip":
-                    if Party[0] != EmmaX and EmmaX in Party and ApprovalCheck(EmmaX, 1200) and EmmaX.lust >= 30:
+                    if Party[0] != EmmaX and EmmaX in Party and Approvalcheck(EmmaX, 1200) and EmmaX.lust >= 30:
                             $ Party.reverse()
                             # Emma always takes priority
                     if StormX in Party and renpy.random.randint(1,2) > 1:

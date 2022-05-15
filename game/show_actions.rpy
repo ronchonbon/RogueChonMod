@@ -3,7 +3,7 @@ label before_show:
     $ focused_Girl.PantiesDown = 1
 
     call first_bottomless(focused_Girl, 1)
-    call set_the_scene(Dress=0)
+    call set_the_scene(check_if_dressed=0)
 
     if "unseen" in focused_Girl.recent_history:
         $ focused_Girl.change_face("sexy")
@@ -356,7 +356,7 @@ label after_show:
     else:
         call Partner_Like(focused_Girl,3)
 
-    call Checkout
+    call checkout
 
     if action_context == "shift":
         $ action_context = 0
@@ -438,7 +438,7 @@ label masturbate(Girl):
     if Girl.ForcedCount and not Girl.Forced:
         $ temp_modifier -= 5 * Girl.ForcedCount
 
-    $ Approval = ApprovalCheck(Girl, 1200, TabM = 2) # 120, 135, 150, Taboo -80(200)
+    $ Approval = Approvalcheck(Girl, 1200, TabM = 2) # 120, 135, 150, Taboo -80(200)
 
     $ Girl.DrainWord("unseen",1,0) #She sees you, so remove unseens
 
@@ -503,7 +503,7 @@ label masturbate(Girl):
                         $ Girl.change_stat("inhibition", 80, 5)
 
                         jump show_cycle
-                    elif ApprovalCheck(Girl, 1000):
+                    elif Approvalcheck(Girl, 1000):
                         $ Girl.change_face("sly")
 
                         ch_r "Well I did, but I think I've got it taken care of for now. . ."
@@ -517,7 +517,7 @@ label masturbate(Girl):
         $ Girl.Action -= 1
         $ Player.change_stat("Focus", 50, 30)
 
-        call Checkout(1)
+        call checkout(1)
 
         $ line = 0
         $ action_context = 0
@@ -586,7 +586,7 @@ label masturbate(Girl):
 
                     ch_p "That is so sexy, [Girl.Pet]."
 
-                    $ Girl.nameCheck() #checks reaction to petname
+                    $ Girl.namecheck() #checks reaction to petname
 
                     "You lean back and enjoy the show."
 
@@ -599,7 +599,7 @@ label masturbate(Girl):
 
                     ch_p "Let's not do that right now, [Girl.Pet]."
 
-                    $ Girl.nameCheck() #checks reaction to petname
+                    $ Girl.namecheck() #checks reaction to petname
 
                     "[Girl.name] pulls her hands away from herself."
 
@@ -745,7 +745,7 @@ label masturbate(Girl):
 
                     jump before_show
             "Just get at it already.":                                               # Pressured into it
-                $ Approval = ApprovalCheck(Girl, 450, "OI", TabM = 2) # 45, 60, 75, -80(125)
+                $ Approval = Approvalcheck(Girl, 450, "OI", TabM = 2) # 45, 60, 75, -80(125)
 
                 if Approval > 1 or (Approval and Girl.Forced):
                     $ Girl.change_face("sad")
@@ -838,7 +838,7 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],Girl
             $ renpy.random.shuffle(Present)
             if Girl and Present[0] != Girl:
                     $ Party.reverse()
-            elif ApprovalCheck(Present[0],Check=1) <= ApprovalCheck(Present[1],Check=1):
+            elif Approvalcheck(Present[0],check=1) <= Approvalcheck(Present[1],check=1):
                     # If second one likes you more, pick her
                     $ Present.reverse()
 
@@ -857,11 +857,11 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],Girl
         $ counter = len(Present) #max 2
         while counter:
             $ counter -= 1 #max 1
-            if Girl == EmmaX and "classcaught" in EmmaX.recent_history and AloneCheck(EmmaX):
+            if Girl == EmmaX and "classcaught" in EmmaX.recent_history and Alonecheck(EmmaX):
                         #skip this step if during classcaught sequence
                         pass
-            elif not ApprovalCheck(Present[counter], 600, TabM = 1,Alt=[[EmmaX],(650+Taboo*10)]) or (Present[counter] == EmmaX and Taboo and "taboo" not in EmmaX.History):
-                    if not ApprovalCheck(Present[counter], 400):
+            elif not Approvalcheck(Present[counter], 600, TabM = 1,Alt=[[EmmaX],(650+Taboo*10)]) or (Present[counter] == EmmaX and Taboo and "taboo" not in EmmaX.History):
+                    if not Approvalcheck(Present[counter], 400):
                         if Present[counter] == RogueX:
                                 ch_r "I'm just some sort'a gogo dancer now?"
                         elif Present[counter] == KittyX:
@@ -884,7 +884,7 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],Girl
                         elif Present[counter] == EmmaX:
                                 ch_e "You must be joking. Here?"
                         elif Present[counter] == LauraX:
-                                if ApprovalCheck(LauraX, 600, TabM = 0):    #should add a second Laura, then the first gets removed.
+                                if Approvalcheck(LauraX, 600, TabM = 0):    #should add a second Laura, then the first gets removed.
                                         $ Present.append(LauraX)            #This restores the "taboo is irrelevant to her" state
                                 else:
                                         ch_l "I don't feel like it."
@@ -926,7 +926,7 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],Girl
                                 ch_e "I should really be going."
                                 call remove_girl(EmmaX)
 
-        if "stripping" in Present[0].daily_history and ApprovalCheck(Present[0], 500, TabM = 3):
+        if "stripping" in Present[0].daily_history and Approvalcheck(Present[0], 500, TabM = 3):
                 $ line = renpy.random.choice(["You liked the show earlier?",
                     "Didn't get enough earlier?",
                     "You're going to wear me out."])
@@ -988,7 +988,7 @@ label Group_Strip(Girl=0,temp_modifier = temp_modifier,temp_modifierP=[0,0],Girl
                 $ Partner = 0
 
 
-        if Girl == EmmaX and "classcaught" in EmmaX.recent_history and AloneCheck(EmmaX):
+        if Girl == EmmaX and "classcaught" in EmmaX.recent_history and Alonecheck(EmmaX):
                 #skip this step if during classcaught sequence
                 $ Count = 0
                 jump Group_Stripping
@@ -1079,7 +1079,7 @@ label Group_Stripping:
                     call shift_focus(Present[Count])
     #                $ Partner = Present[between_event_count]
 
-                    call Activity_Check(focused_Girl,Partner)
+                    call Activity_check(focused_Girl,Partner)
 
             if len(Present) < 2 or "stopdancing" in Present[1].recent_history:
                     #Plays if only one girl is dancing
@@ -1088,7 +1088,7 @@ label Group_Stripping:
                     $ between_event_count = 0
                     $ Partner = 0
 
-                    call Activity_Check(focused_Girl,Partner)
+                    call Activity_check(focused_Girl,Partner)
 
                     if not Present or "stopdancing" in Present[0].recent_history:
                             jump Group_Strip_End
@@ -1133,7 +1133,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
                 # if Count isn't 2, it loops.
                 if Girl == JubesX and Girl.Acc and (Girl.Over or Girl.Chest) and (Girl.Panties or Girl.Legs or Girl.HoseNum() >= 10):
                     #will she lose the jacket when she's dressed under?
-                    if ApprovalCheck(Girl, 750, TabM = 3):
+                    if Approvalcheck(Girl, 750, TabM = 3):
                             $ Girl.change_stat("obedience", 50, 1)
                             $ Girl.change_stat("inhibition", 25, 1)
                             $ Player.change_stat("Focus", 60, 3)
@@ -1144,7 +1144,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
                             jump Strip_Ultimatum
                 elif Girl == JubesX and Girl.Acc and Girl.Over and (Girl.Panties or Girl.Legs or Girl.HoseNum() >= 10):
                     #will she lose the jacket when she's dressed under?
-                    if ApprovalCheck(Girl, 750, TabM = 3):
+                    if Approvalcheck(Girl, 750, TabM = 3):
                             $ Girl.change_stat("obedience", 50, 1)
                             $ Girl.change_stat("inhibition", 25, 1)
                             $ Player.change_stat("Focus", 60, 3)
@@ -1155,7 +1155,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
                             jump Strip_Ultimatum
                 elif Girl.Over and Girl.Chest and (Girl.Panties or Girl.Legs or Girl.HoseNum() >= 10):
                     #will she lose the overshirt when she's dressed under?
-                    if ApprovalCheck(Girl, 750, TabM = 3,Alt=[[StormX],(300-Nudist*3)]):
+                    if Approvalcheck(Girl, 750, TabM = 3,Alt=[[StormX],(300-Nudist*3)]):
                             $ Girl.change_stat("obedience", 50, 1)
                             $ Girl.change_stat("inhibition", 25, 1)
                             $ Player.change_stat("Focus", 60, 3)
@@ -1170,7 +1170,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
 
                 elif Girl.Legs and (Girl.Panties or Girl.HoseNum() >= 10):
                     #will she lose the pants/skirt if she has panties on?
-                    if ApprovalCheck(Girl, 1200, TabM = 3,Alt=[[StormX],(600-Nudist*3)]) or (Girl.SeenPanties and ApprovalCheck(Girl, 900, TabM = 3) and not Girl.Taboo):
+                    if Approvalcheck(Girl, 1200, TabM = 3,Alt=[[StormX],(600-Nudist*3)]) or (Girl.SeenPanties and Approvalcheck(Girl, 900, TabM = 3) and not Girl.Taboo):
                             $ Girl.change_stat("lust", 50, 5)
                             $ Girl.change_stat("obedience", 50, 1)
                             $ Girl.change_stat("inhibition", 30, 1)
@@ -1193,14 +1193,14 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
                 elif Girl.Hose:
                     # Will she lose the hose?
                     if Girl.HoseNum() >= 10:
-                            if ApprovalCheck(Girl, 1200, TabM = 3):
+                            if Approvalcheck(Girl, 1200, TabM = 3):
                                     $ Girl.change_stat("lust", 50, 6)
                                     $ Player.change_stat("Focus", 60, 6)
                             else:
                                     jump Strip_Ultimatum
 
-                    elif Girl.HoseNum() >= 6 and ApprovalCheck(Girl, 1200, TabM = 3):
-                            if ApprovalCheck(Girl, 1200, TabM = 3,Alt=[[StormX],(600-Nudist*3)]):
+                    elif Girl.HoseNum() >= 6 and Approvalcheck(Girl, 1200, TabM = 3):
+                            if Approvalcheck(Girl, 1200, TabM = 3,Alt=[[StormX],(600-Nudist*3)]):
                                 $ Girl.change_stat("lust", 50, 4)
                                 $ Player.change_stat("Focus", 60, 4)
                             else:
@@ -1217,7 +1217,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
 
                 elif Girl == JubesX and Girl.Acc and (Girl.Panties or Girl.Legs or Girl.HoseNum() >= 10):
                     #will she lose the jacket when she's topless under?
-                    if ApprovalCheck(Girl, 1250, TabM = 3) or (Girl.SeenChest and ApprovalCheck(Girl, 1000, TabM = 3) and not Girl.Taboo):
+                    if Approvalcheck(Girl, 1250, TabM = 3) or (Girl.SeenChest and Approvalcheck(Girl, 1000, TabM = 3) and not Girl.Taboo):
                             $ Girl.change_stat("lust", 60, 5)
                             $ Girl.change_stat("obedience", 50, 2)
                             $ Girl.change_stat("inhibition", 50, 10)
@@ -1237,7 +1237,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
                             jump Strip_Ultimatum
                 elif Girl.Over and not Girl.Chest and (Girl.Panties or Girl.HoseNum() >= 10):
                     #will she lose the top when she's topless with panties?
-                    if ApprovalCheck(Girl, 1250, TabM = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.SeenChest and ApprovalCheck(Girl, 1000, TabM = 3) and not Girl.Taboo):
+                    if Approvalcheck(Girl, 1250, TabM = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.SeenChest and Approvalcheck(Girl, 1000, TabM = 3) and not Girl.Taboo):
                             $ Girl.change_stat("lust", 60, 5)
                             $ Girl.change_stat("obedience", 50, 2)
                             $ Girl.change_stat("inhibition", 50, 10)
@@ -1267,7 +1267,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
 
                 elif Girl.Chest and not Girl.Over:
                     # Will she lose the bra?
-                    if ApprovalCheck(Girl, 1250, TabM = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.SeenChest and ApprovalCheck(Girl, 1000, TabM = 3) and not Girl.Taboo):
+                    if Approvalcheck(Girl, 1250, TabM = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.SeenChest and Approvalcheck(Girl, 1000, TabM = 3) and not Girl.Taboo):
                             $ Girl.change_stat("lust", 60, 5)
                             $ Girl.change_stat("obedience", 50, 2)
                             $ Girl.change_stat("inhibition", 50, 1)
@@ -1298,7 +1298,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
 
                 elif Girl.Legs:
                     #will she lose the pants/skirt if she has no panties on?
-                    if ApprovalCheck(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
+                    if Approvalcheck(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and Approvalcheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
                             $ Girl.change_stat("lust", 75, 10)
                             $ line = Girl.Legs
                             $ Girl.Legs = 0
@@ -1328,7 +1328,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
 
                 elif Girl == JubesX and Girl.Acc:
                     #will she lose the jacket when she's naked under?
-                    if ApprovalCheck(Girl, 1350, TabM = 3) or (Girl.SeenPussy and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
+                    if Approvalcheck(Girl, 1350, TabM = 3) or (Girl.SeenPussy and Approvalcheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
                             $ line = Girl.Acc
                             $ Girl.Acc = 0
                             if not Girl.SeenPussy:
@@ -1361,7 +1361,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
                             jump Strip_Ultimatum
                 elif Girl.Over and not Girl.Panties:
                     #will she lose the overshirt when she's bottomless under?
-                    if ApprovalCheck(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
+                    if Approvalcheck(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and Approvalcheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
                             $ line = Girl.Over
                             $ Girl.Over = 0
                             if not Girl.SeenPussy:
@@ -1403,7 +1403,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
 
                 elif Girl.Chest:
                     # Will she go topless?
-                    if ApprovalCheck(Girl, 1250, TabM = 3,Alt=[[StormX],(750-Nudist*3)]) or (Girl.SeenChest and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
+                    if Approvalcheck(Girl, 1250, TabM = 3,Alt=[[StormX],(750-Nudist*3)]) or (Girl.SeenChest and Approvalcheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
                             $ Girl.change_stat("lust", 60, 5)
                             $ line = Girl.Chest
                             $ Girl.Chest = 0
@@ -1432,7 +1432,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
 
                 elif Girl.Panties:
                     # Will she go bottomless?
-                    if ApprovalCheck(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
+                    if Approvalcheck(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and Approvalcheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
                             $ Girl.change_stat("lust", 75, 10)
                             $ line = Girl.Panties
                             $ Girl.Panties = 0
@@ -1540,7 +1540,7 @@ label Girl_Stripping(Girl=0,Nudist=0): #rkeljsv
                 "[Girl.name] begins to dance again."
 
         if Partner and Partner.lust >= 100:
-                #Checks if partner could orgasm
+                #checks if partner could orgasm
                 call Girl_Cumming(Partner)
 
         menu:
@@ -1700,7 +1700,7 @@ label Strip_Ultimatum: #rkeljsv
                             elif Girl == JubesX:
                                     ch_v "Ok, sure. . ."
             "You'd better." if Girl.Forced:
-                    if not ApprovalCheck(Girl, 500, "O", TabM=5) and not ApprovalCheck(Girl, 800, "L", TabM=5):
+                    if not Approvalcheck(Girl, 500, "O", TabM=5) and not Approvalcheck(Girl, 800, "L", TabM=5):
                             $ Girl.change_face("angry")
                             if Girl == RogueX:
                                     ch_r "I don't know who you think I am, but I ain't gonna just jump when you say \"toad\"."
@@ -1747,7 +1747,7 @@ label Strip_Ultimatum: #rkeljsv
                             $ Girl.recent_history.append("stripforced")
                     $ Girl.change_stat("love", 200, -40)
             "You can do better than that. Keep going." if not Girl.Forced:
-                    if not ApprovalCheck(Girl, 300, "O", TabM=5) and not ApprovalCheck(Girl, 700, "L", TabM=5):
+                    if not Approvalcheck(Girl, 300, "O", TabM=5) and not Approvalcheck(Girl, 700, "L", TabM=5):
                             $ Girl.change_face("angry")
                             if Girl == RogueX:
                                     ch_r "I don't know who you think I am, but I ain't gonna just jump when you say \"toad\"."

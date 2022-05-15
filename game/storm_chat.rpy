@@ -105,7 +105,7 @@ label Storm_Relationship: #rkeljs
                             "[StormX.Name] pulls you in and kisses you deeply."
                             $ StormX.change_face("kiss", 1)
                             $ StormX.Kissed += 1
-                    elif StormX.Love >= 600 and ApprovalCheck(StormX, 1500):
+                    elif StormX.Love >= 600 and Approvalcheck(StormX, 1500):
                             $ StormX.change_face("smile", 1)
                             $ StormX.Statup("Love", 90, 5)
                             ch_s "I suppose I could give it another chance."
@@ -150,7 +150,7 @@ label Storm_Relationship: #rkeljs
                             ch_s "Ah, yes, I did have a story to tell you. . ."
                             call Storm_BF_Story
                     "I feel you were trying to tell me something before. . ." if "lover" not in StormX.Traits and StormX.Event[6] >= 5:
-                            if ApprovalCheck(StormX, 900, "L"):
+                            if Approvalcheck(StormX, 900, "L"):
                                     $ StormX.Event[6] = 3
                                     ch_s "Yes, I supposed that I did. . ."
                                     $ StormX.daily_history.append("relationship")
@@ -185,7 +185,7 @@ label Storm_OtherWoman(Cnt = 0): #rkeljs
     #Other is the other woman, Poly is whether she'd be cool with a threesome
     if not Player.Harem:
             return
-    $ Cnt = int((StormX.GirlLikeCheck(Player.Harem[0]) - 500)/2)
+    $ Cnt = int((StormX.GirlLikecheck(Player.Harem[0]) - 500)/2)
 
     $ StormX.change_face("perplexed")
     if len(Player.Harem) >= 2:
@@ -195,7 +195,7 @@ label Storm_OtherWoman(Cnt = 0): #rkeljs
     menu:
         extend ""
         "She said I can be with you too." if "StormYes" in Player.Traits:
-                if ApprovalCheck(StormX, 1800, Bonus = Cnt):
+                if Approvalcheck(StormX, 1800, Bonus = Cnt):
                     $ StormX.change_face("smile", 1)
                     if StormX.Love >= StormX.Obed:
                             ch_s "I suppose I can share with her."
@@ -210,7 +210,7 @@ label Storm_OtherWoman(Cnt = 0): #rkeljs
                     #This causes it to jump past the previous menu on the return
 
         "I could ask if she'd be ok with me dating you both." if "StormYes" not in Player.Traits:
-                if ApprovalCheck(StormX, 1800, Bonus = Cnt):
+                if Approvalcheck(StormX, 1800, Bonus = Cnt):
                         $ StormX.change_face("smile", 1)
                         if StormX.Love >= StormX.Obed:
                             ch_s "I guess I can share you."
@@ -225,9 +225,9 @@ label Storm_OtherWoman(Cnt = 0): #rkeljs
                 $ renpy.pop_call()
 
         "What she doesn't know won't hurt her.":
-                if not ApprovalCheck(StormX, 1800, Bonus = -Cnt): #checks if Storm likes you more than the other girl
+                if not Approvalcheck(StormX, 1800, Bonus = -Cnt): #checks if Storm likes you more than the other girl
                         $ StormX.change_face("angry", 1)
-                        if not ApprovalCheck(StormX, 1800):
+                        if not Approvalcheck(StormX, 1800):
                                 ch_s "It would hurt us both."
                         else:
                                 ch_s "That sounds beneath you."
@@ -255,12 +255,12 @@ label Storm_OtherWoman(Cnt = 0): #rkeljs
     return
 
 
-label Storm_About(Check=0): #rkeljsv
-    if Check not in TotalGirls:
+label Storm_About(check=0): #rkeljsv
+    if check not in TotalGirls:
             ch_s "Who?"
             return
     ch_s "What do I think about her? Well. . ."
-    if Check == RogueX:
+    if check == RogueX:
             if "poly Rogue" in StormX.Traits:
                 ch_s "We have enjoyed each other's company. . ."
             elif StormX.LikeRogue >= 900:
@@ -279,7 +279,7 @@ label Storm_About(Check=0): #rkeljsv
                 ch_s "I hate her."
             else:
                 ch_s "Bitch."
-    elif Check == KittyX:
+    elif check == KittyX:
             if "poly Kitty" in StormX.Traits:
                 ch_s "We have enjoyed each other's company. . ."
             elif StormX.LikeKitty >= 900:
@@ -298,7 +298,7 @@ label Storm_About(Check=0): #rkeljsv
                 ch_s "I stongly dislike her."
             else:
                 ch_s "Bitch."
-    elif Check == EmmaX:
+    elif check == EmmaX:
             if "poly Emma" in StormX.Traits:
                 ch_s "We have enjoyed each other's company. . ."
             elif StormX.LikeEmma >= 900:
@@ -317,7 +317,7 @@ label Storm_About(Check=0): #rkeljsv
                 ch_s "She needs to stay out of my head."
             else:
                 ch_s "Bitch."
-    if Check == LauraX:
+    if check == LauraX:
             if "poly Laura" in StormX.Traits:
                 ch_s "We have enjoyed each other's company. . ."
             elif StormX.LikeLaura >= 900:
@@ -336,7 +336,7 @@ label Storm_About(Check=0): #rkeljsv
                 ch_s "I hate her."
             else:
                 ch_s "Bitch."
-    elif Check == JeanX:
+    elif check == JeanX:
             if "poly Jean" in StormX.Traits:
                 ch_s "We have enjoyed each other's company. . ."
             elif StormX.LikeJean >= 900:
@@ -355,7 +355,7 @@ label Storm_About(Check=0): #rkeljsv
                 ch_s "I seriously dislike her."
             else:
                 ch_s "Bitch."
-    elif Check == JubesX:
+    elif check == JubesX:
             if "poly Jubes" in StormX.Traits:
                 ch_s "We have enjoyed each other's company. . ."
             elif StormX.LikeJubes >= 900:
@@ -381,21 +381,21 @@ label Storm_Monogamy: #rkeljs
         #called from Storm_Settings to ask her not to hook up with other girls
         menu:
             "Could you not hook up with other girls?" if "mono" not in StormX.Traits:
-                    if StormX.Thirst >= 60 and not ApprovalCheck(StormX, 1700, "LO", TabM=0):
+                    if StormX.Thirst >= 60 and not Approvalcheck(StormX, 1700, "LO", TabM=0):
                             #she's too thirsty
                             $ StormX.change_face("sly",1)
                             if "mono" not in StormX.daily_history:
                                     $ StormX.Statup("Obed", 90, -2)
                             ch_s "I do have needs that must be met. . ."
                             return
-                    elif ApprovalCheck(StormX, 1200, "LO", TabM=0) and StormX.Love >= StormX.Obed:
+                    elif Approvalcheck(StormX, 1200, "LO", TabM=0) and StormX.Love >= StormX.Obed:
                             #she cares
                             $ StormX.change_face("sly",1)
                             if "mono" not in StormX.daily_history:
                                     $ StormX.Statup("Love", 90, 1)
                             ch_s "I did not take you for the jealous type."
                             ch_s "Very well, for now. . ."
-                    elif ApprovalCheck(StormX, 700, "O", TabM=0):
+                    elif Approvalcheck(StormX, 700, "O", TabM=0):
                             #she is obedient
                             $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "Fine."
@@ -409,22 +409,22 @@ label Storm_Monogamy: #rkeljs
                     $ StormX.AddWord(1,0,"mono") #Daily
                     $ StormX.Traits.append("mono")
             "Don't hook up with other girls." if "mono" not in StormX.Traits:
-                    if ApprovalCheck(StormX, 900, "O", TabM=0):
+                    if Approvalcheck(StormX, 900, "O", TabM=0):
                             #she is obedient
                             $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "If that is what you want."
-                    elif StormX.Thirst >= 60 and not ApprovalCheck(StormX, 1700, "LO", TabM=0):
+                    elif StormX.Thirst >= 60 and not Approvalcheck(StormX, 1700, "LO", TabM=0):
                             #she's too thirsty
                             $ StormX.change_face("sly",1)
                             if "mono" not in StormX.daily_history:
                                     $ StormX.Statup("Obed", 90, -2)
                             ch_s "I do have needs that must be met. . ."
                             return
-                    elif ApprovalCheck(StormX, 600, "O", TabM=0):
+                    elif Approvalcheck(StormX, 600, "O", TabM=0):
                             #she is obedient
                             $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "Fine."
-                    elif ApprovalCheck(StormX, 1400, "LO", TabM=0):
+                    elif Approvalcheck(StormX, 1400, "LO", TabM=0):
                             #she cares
                             $ StormX.change_face("sly",1)
                             ch_s "Take care with your words, but I will consider it."
@@ -438,10 +438,10 @@ label Storm_Monogamy: #rkeljs
                     $ StormX.AddWord(1,0,"mono") #Daily
                     $ StormX.Traits.append("mono")
             "It's ok if you hook up with other girls." if "mono" in StormX.Traits:
-                    if ApprovalCheck(StormX, 700, "O", TabM=0):
+                    if Approvalcheck(StormX, 700, "O", TabM=0):
                             $ StormX.change_face("sly",1,Eyes="side")
                             ch_s ". . . ok then."
-                    elif ApprovalCheck(StormX, 800, "L", TabM=0):
+                    elif Approvalcheck(StormX, 800, "L", TabM=0):
                             $ StormX.change_face("sly",1)
                             ch_s "Fine. . ."
                     else:
@@ -467,14 +467,14 @@ label Storm_Jumped: #rkeljs
         menu:
             ch_s "Yeah?"
             "Could you maybe just ask instead?" if "chill" not in StormX.Traits:
-                    if StormX.Thirst >= 60 and not ApprovalCheck(StormX, 1500, "LO", TabM=0):
+                    if StormX.Thirst >= 60 and not Approvalcheck(StormX, 1500, "LO", TabM=0):
                             #she's too thirsty
                             $ StormX.change_face("sly",1)
                             if "chill" not in StormX.daily_history:
                                     $ StormX.Statup("Obed", 90, -2)
                             ch_s "I would if you would come to me more often. . ."
                             return
-                    elif ApprovalCheck(StormX, 1000, "LO", TabM=0) and StormX.Love >= StormX.Obed:
+                    elif Approvalcheck(StormX, 1000, "LO", TabM=0) and StormX.Love >= StormX.Obed:
                             #she cares
                             $ StormX.change_face("surprised",1)
                             if "chill" not in StormX.daily_history:
@@ -482,7 +482,7 @@ label Storm_Jumped: #rkeljs
                             ch_s "I am sorry, but I have needs. . ."
                             $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "I will -try- to keep them in check. . ."
-                    elif ApprovalCheck(StormX, 500, "O", TabM=0):
+                    elif Approvalcheck(StormX, 500, "O", TabM=0):
                             #she is obedient
                             $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "I am sorry about that. . ."
@@ -496,22 +496,22 @@ label Storm_Jumped: #rkeljs
                     $ StormX.AddWord(1,0,"chill") #Daily
                     $ StormX.Traits.append("chill")
             "Don't bother me like that." if "chill" not in StormX.Traits:
-                    if ApprovalCheck(StormX, 800, "O", TabM=0):
+                    if Approvalcheck(StormX, 800, "O", TabM=0):
                             #she is obedient
                             $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "Very well."
-                    elif StormX.Thirst >= 60 and not ApprovalCheck(StormX, 500, "O", TabM=0):
+                    elif StormX.Thirst >= 60 and not Approvalcheck(StormX, 500, "O", TabM=0):
                             #she's too thirsty
                             $ StormX.change_face("sly",1)
                             if "chill" not in StormX.daily_history:
                                     $ StormX.Statup("Obed", 90, -2)
                             ch_s "I would if you would come to me more often. . ."
                             return
-                    elif ApprovalCheck(StormX, 400, "O", TabM=0):
+                    elif Approvalcheck(StormX, 400, "O", TabM=0):
                             #she is obedient
                             $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "Fine. . ."
-                    elif ApprovalCheck(StormX, 500, "LO", TabM=0) and not ApprovalCheck(StormX, 500, "I", TabM=0):
+                    elif Approvalcheck(StormX, 500, "LO", TabM=0) and not Approvalcheck(StormX, 500, "I", TabM=0):
                             #she cares
                             $ StormX.change_face("sly",1)
                             ch_s "Watch your language."
@@ -526,10 +526,10 @@ label Storm_Jumped: #rkeljs
                     $ StormX.AddWord(1,0,"chill") #Daily
                     $ StormX.Traits.append("chill")
             "Knock yourself out.":
-                    if ApprovalCheck(StormX, 800, "L", TabM=0):
+                    if Approvalcheck(StormX, 800, "L", TabM=0):
                             $ StormX.change_face("sly",1)
                             ch_s "Noted. . ."
-                    elif ApprovalCheck(StormX, 700, "O", TabM=0):
+                    elif Approvalcheck(StormX, 700, "O", TabM=0):
                             $ StormX.change_face("sly",1,Eyes="side")
                             ch_s "Very well. . .."
                     else:
@@ -732,7 +732,7 @@ label Storm_SexChat:#rkeljs
                         $ StormX.daily_history.append("setfav")
 
                 "What's your favorite thing to do?":
-                                if not ApprovalCheck(StormX, 800):
+                                if not Approvalcheck(StormX, 800):
                                         $ StormX.change_face("perplexed")
                                         ch_s ". . . I would rather not say."
                                 else:
@@ -785,17 +785,17 @@ label Storm_SexChat:#rkeljs
                                 $ StormX.change_face("perplexed")
                                 ch_s "I do wish you would make up your mind."
                         else:
-                            if ApprovalCheck(StormX, 1000) and StormX.Obed <= StormX.Love:
+                            if Approvalcheck(StormX, 1000) and StormX.Obed <= StormX.Love:
                                 $ StormX.change_face("bemused")
                                 $ StormX.Statup("Obed", 90, 1)
                                 ch_s "I can be silent if you wish."
                                 $ StormX.Traits.remove("vocal")
-                            elif ApprovalCheck(StormX, 700, "O"):
+                            elif Approvalcheck(StormX, 700, "O"):
                                 $ StormX.change_face("sadside")
                                 $ StormX.Statup("Obed", 90, 1)
                                 ch_s ". . ."
                                 $ StormX.Traits.remove("vocal")
-                            elif ApprovalCheck(StormX, 600):
+                            elif Approvalcheck(StormX, 600):
                                 $ StormX.change_face("sly")
                                 $ StormX.Statup("Love", 90, -3)
                                 $ StormX.Statup("Obed", 50, -1)
@@ -814,17 +814,17 @@ label Storm_SexChat:#rkeljs
                                 $ StormX.change_face("perplexed")
                                 ch_s "I do wish you would make up your mind."
                         else:
-                            if ApprovalCheck(StormX, 1000) and StormX.Obed <= StormX.Love:
+                            if Approvalcheck(StormX, 1000) and StormX.Obed <= StormX.Love:
                                 $ StormX.change_face("sly")
                                 $ StormX.Statup("Obed", 90, 2)
                                 ch_s "I believe I can make myself known. . ."
                                 $ StormX.Traits.append("vocal")
-                            elif ApprovalCheck(StormX, 700, "O"):
+                            elif Approvalcheck(StormX, 700, "O"):
                                 $ StormX.change_face("sadside")
                                 $ StormX.Statup("Obed", 90, 2)
                                 ch_s "If that is what you want, [StormX.Petname]."
                                 $ StormX.Traits.append("vocal")
-                            elif ApprovalCheck(StormX, 600):
+                            elif Approvalcheck(StormX, 600):
                                 $ StormX.change_face("sly")
                                 $ StormX.Statup("Obed", 90, 3)
                                 ch_s "I suppose that I could. . ."
@@ -842,17 +842,17 @@ label Storm_SexChat:#rkeljs
                                 $ StormX.change_face("perplexed")
                                 ch_s "I do wish you would make up your mind."
                         else:
-                            if ApprovalCheck(StormX, 1200) and StormX.Obed <= StormX.Love:
+                            if Approvalcheck(StormX, 1200) and StormX.Obed <= StormX.Love:
                                 $ StormX.change_face("bemused")
                                 $ StormX.Statup("Obed", 90, 1)
                                 ch_s "Allow you to take the lead? Fine."
                                 $ StormX.Traits.append("passive")
-                            elif ApprovalCheck(StormX, 700, "O"):
+                            elif Approvalcheck(StormX, 700, "O"):
                                 $ StormX.change_face("sadside")
                                 $ StormX.Statup("Obed", 90, 1)
                                 ch_s "I will try to restrain myself."
                                 $ StormX.Traits.append("passive")
-                            elif ApprovalCheck(StormX, 600):
+                            elif Approvalcheck(StormX, 600):
                                 $ StormX.change_face("sly")
                                 $ StormX.Statup("Love", 90, -3)
                                 $ StormX.Statup("Obed", 50, -1)
@@ -871,17 +871,17 @@ label Storm_SexChat:#rkeljs
                                 $ StormX.change_face("perplexed")
                                 ch_s "I do wish you would make up your mind."
                         else:
-                            if ApprovalCheck(StormX, 1000) and StormX.Obed <= StormX.Love:
+                            if Approvalcheck(StormX, 1000) and StormX.Obed <= StormX.Love:
                                 $ StormX.change_face("bemused")
                                 $ StormX.Statup("Obed", 90, 1)
                                 ch_s "You would prefer I choose? Very Well."
                                 $ StormX.Traits.remove("passive")
-                            elif ApprovalCheck(StormX, 700, "O"):
+                            elif Approvalcheck(StormX, 700, "O"):
                                 $ StormX.change_face("sadside")
                                 $ StormX.Statup("Obed", 90, 1)
                                 ch_s "If you insist."
                                 $ StormX.Traits.remove("passive")
-                            elif ApprovalCheck(StormX, 600):
+                            elif Approvalcheck(StormX, 600):
                                 $ StormX.change_face("sly")
                                 $ StormX.Statup("Obed", 90, 3)
                                 ch_s "We shall see."
@@ -916,11 +916,11 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
     else:
 
         if StormX not in Digits:
-                if ApprovalCheck(StormX, 500, "L") or ApprovalCheck(StormX, 250, "I"):
+                if Approvalcheck(StormX, 500, "L") or Approvalcheck(StormX, 250, "I"):
                     ch_s "Oh, here's my number, in case you need back-up."
                     $ Digits.append(StormX)
                     return
-                elif ApprovalCheck(StormX, 250, "O"):
+                elif Approvalcheck(StormX, 250, "O"):
                     ch_s "If you need to contact me, here's my number."
                     $ Digits.append(StormX)
                     return
@@ -929,7 +929,7 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
                     call Storm_Hungry
                     return
 
-        if bg_current != "bg restaurant" and bg_current != "HW Party" and (not Taboo or ApprovalCheck(StormX, 800, "I")):
+        if bg_current != "bg restaurant" and bg_current != "HW Party" and (not Taboo or Approvalcheck(StormX, 800, "I")):
                     if StormX.location == bg_current and StormX.Thirst >= 30 and "refused" not in StormX.daily_history and "quicksex" not in StormX.daily_history:
                             $ StormX.change_face("sly",1)
                             ch_s "I was wondering if you wanted to. . ."
@@ -1007,21 +1007,21 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
 #            $ Options.append("virgin")
 
 #        if (bg_current == "bg laura" or bg_current == "bg player") and "relationship" not in StormX.daily_history:
-#            if "lover" not in StormX.Petnames and ApprovalCheck(StormX, 900, "L"): # StormX.Event[6]
+#            if "lover" not in StormX.Petnames and Approvalcheck(StormX, 900, "L"): # StormX.Event[6]
 #                $ Options.append("lover?")
-#            elif "sir" not in StormX.Petnames and ApprovalCheck(StormX, 500, "O"): # StormX.Event[7]
+#            elif "sir" not in StormX.Petnames and Approvalcheck(StormX, 500, "O"): # StormX.Event[7]
 #                $ Options.append("sir?")
-#            elif "daddy" not in StormX.Petnames and ApprovalCheck(StormX, 750, "L") and ApprovalCheck(StormX, 500, "O") and ApprovalCheck(StormX, 500, "I"): # StormX.Event[5]
+#            elif "daddy" not in StormX.Petnames and Approvalcheck(StormX, 750, "L") and Approvalcheck(StormX, 500, "O") and Approvalcheck(StormX, 500, "I"): # StormX.Event[5]
 #                $ Options.append("daddy?")
-#            elif "master" not in StormX.Petnames and ApprovalCheck(StormX, 900, "O"): # StormX.Event[8]
+#            elif "master" not in StormX.Petnames and Approvalcheck(StormX, 900, "O"): # StormX.Event[8]
 #                $ Options.append("master?")
-#            elif "sex friend" not in StormX.Petnames and ApprovalCheck(StormX, 500, "I"): # StormX.Event[9]
+#            elif "sex friend" not in StormX.Petnames and Approvalcheck(StormX, 500, "I"): # StormX.Event[9]
 #                $ Options.append("sexfriend?")
-#            elif "fuck buddy" not in StormX.Petnames and ApprovalCheck(StormX, 900, "I"): # StormX.Event[10]
+#            elif "fuck buddy" not in StormX.Petnames and Approvalcheck(StormX, 900, "I"): # StormX.Event[10]
 #                $ Options.append("fuckbuddy?")
 
 
-        if not ApprovalCheck(StormX, 300):            #She dislikes you
+        if not Approvalcheck(StormX, 300):            #She dislikes you
             $ Options.append("hate")
 
     $ renpy.random.shuffle(Options)             #shuffles options and picks out the first one
@@ -1049,11 +1049,11 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
     elif Options[0] == "caught": # Xavier's caught you
             if "caught chat" in StormX.Chat:
                     ch_s "We should be more careful where we're seen together. . ."
-                    if not ApprovalCheck(StormX, 500, "I"):
+                    if not Approvalcheck(StormX, 500, "I"):
                          ch_s "Not that this should stop us. . ."
             else:
                     ch_s "I am sorry for that unforunate business with Charles."
-                    if not ApprovalCheck(StormX, 500, "I"):
+                    if not Approvalcheck(StormX, 500, "I"):
                         ch_s "I suppose we should avoid activities in public."
                     else:
                         ch_s "I did enjoy the thrill though. . ."
@@ -1115,14 +1115,14 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
 #                    "It was a total accident!  I promise!":
 #                            $ StormX.Statup("Love", 50, 5)
 #                            $ StormX.Statup("Love", 90, 2)
-#                            if ApprovalCheck(StormX, 1200):
+#                            if Approvalcheck(StormX, 1200):
 #                                $ StormX.change_face("sly",1)
 #                                ch_s "I didn't mind."
 #                            $ StormX.change_face("smile")
 #                            ch_s "We all make mistakes."
 #                    "Just with you.":
 #                            $ StormX.Statup("Obed", 40, 5)
-#                            if ApprovalCheck(StormX, 1000) or ApprovalCheck(StormX, 700, "L"):
+#                            if Approvalcheck(StormX, 1000) or Approvalcheck(StormX, 700, "L"):
 #                                    $ StormX.Statup("Love", 90, 3)
 #                                    $ StormX.change_face("sly",1)
 #                                    ch_s "Hmm, I guess that's a compliment."
@@ -1131,13 +1131,13 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
 #                                    $ StormX.change_face("angry")
 #                                    ch_s "I think I should be insulted."
 #                    "Totally on purpose. I regret nothing.":
-#                            if ApprovalCheck(StormX, 1200):
+#                            if Approvalcheck(StormX, 1200):
 #                                    $ StormX.Statup("Love", 90, 3)
 #                                    $ StormX.Statup("Obed", 70, 10)
 #                                    $ StormX.Statup("Inbt", 50, 5)
 #                                    $ StormX.change_face("sly",1)
 #                                    ch_s "You seem to know what you want."
-#                            elif ApprovalCheck(StormX, 800):
+#                            elif Approvalcheck(StormX, 800):
 #                                    $ StormX.Statup("Obed", 60, 5)
 #                                    $ StormX.Statup("Inbt", 50, 5)
 #                                    $ StormX.change_face("perplexed",2)
@@ -1204,7 +1204,7 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
                                     ch_s "As I had hoped. . ."
                                     ch_s "Let me know if you're like a repeat. . ."
                         "Honestly? It was good. . .but you could use a little practice, I think.":
-                                if ApprovalCheck(StormX, 300, "I") or not ApprovalCheck(StormX, 800):
+                                if Approvalcheck(StormX, 300, "I") or not Approvalcheck(StormX, 800):
                                     $ StormX.Statup("Love", 90, -5)
                                     $ StormX.Statup("Obed", 60, 10)
                                     $ StormX.Statup("Inbt", 50, 10)
@@ -1440,7 +1440,7 @@ label Storm_Pet: #rkeljs
                         ch_s "I don't see why not, [StormX.Petname]."
                     "Stormy.":
                         $ StormX.Pet = "Stormy"
-                        if ApprovalCheck(StormX, 600):
+                        if Approvalcheck(StormX, 600):
                             $ StormX.change_face("smile", 1)
                             ch_s "I don't see why not, [StormX.Petname]."
                         else:
@@ -1448,7 +1448,7 @@ label Storm_Pet: #rkeljs
                             ch_s "I would rather you weren't so familiar, [StormX.Petname]."
                     "'Ro.":
                         $ StormX.Pet = "'Ro"
-                        if ApprovalCheck(StormX, 700):
+                        if Approvalcheck(StormX, 700):
                             $ StormX.change_face("smile", 1)
                             ch_s "I don't see why not, [StormX.Petname]."
                         else:
@@ -1457,7 +1457,7 @@ label Storm_Pet: #rkeljs
 
                     "Ms. Munroe." if "Ms. Munroe" in StormX.Names:
                         $ StormX.Pet = "Ms. Munroe"
-                        if ApprovalCheck(StormX, 700):
+                        if Approvalcheck(StormX, 700):
                             $ StormX.change_face("bemused", 1)
                             ch_s "I don't see why not, [StormX.Petname]."
                         else:
@@ -1467,7 +1467,7 @@ label Storm_Pet: #rkeljs
 
                     "\"girl\".":
                         $ StormX.Pet = "girl"
-                        if "boyfriend" in StormX.Petnames or ApprovalCheck(StormX, 600, "L"):
+                        if "boyfriend" in StormX.Petnames or Approvalcheck(StormX, 600, "L"):
                             $ StormX.change_face("sexy", 1)
                             ch_s "I can be your girl, [StormX.Petname]."
                         else:
@@ -1476,7 +1476,7 @@ label Storm_Pet: #rkeljs
 
                     "\"boo\".":
                         $ StormX.Pet = "boo"
-                        if "boyfriend" in StormX.Petnames or ApprovalCheck(StormX, 700, "L"):
+                        if "boyfriend" in StormX.Petnames or Approvalcheck(StormX, 700, "L"):
                             $ StormX.change_face("sexy", 1)
                             ch_s "I can be your boo, [StormX.Petname]."
                         else:
@@ -1485,7 +1485,7 @@ label Storm_Pet: #rkeljs
 
                     "\"bae\".":
                         $ StormX.Pet = "bae"
-                        if "boyfriend" in StormX.Petnames or ApprovalCheck(StormX, 600, "L"):
+                        if "boyfriend" in StormX.Petnames or Approvalcheck(StormX, 600, "L"):
                             $ StormX.change_face("sexy", 1)
                             ch_s "I can be your bae, [StormX.Petname]."
                         else:
@@ -1494,7 +1494,7 @@ label Storm_Pet: #rkeljs
 
                     "\"baby\".":
                         $ StormX.Pet = "baby"
-                        if "boyfriend" in StormX.Petnames or ApprovalCheck(StormX, 500, "L"):
+                        if "boyfriend" in StormX.Petnames or Approvalcheck(StormX, 500, "L"):
                             $ StormX.change_face("sexy", 1)
                             ch_s "Cute, [StormX.Petname]."
                         else:
@@ -1504,7 +1504,7 @@ label Storm_Pet: #rkeljs
 
                     "\"sweetie\".":
                         $ StormX.Pet = "sweetie"
-                        if "boyfriend" in StormX.Petnames or ApprovalCheck(StormX, 600, "L"):
+                        if "boyfriend" in StormX.Petnames or Approvalcheck(StormX, 600, "L"):
                             ch_s "That is so sweet, [StormX.Petname]."
                         else:
                             $ StormX.change_face("angry", 1)
@@ -1512,7 +1512,7 @@ label Storm_Pet: #rkeljs
 
                     "\"sexy\".":
                         $ StormX.Pet = "sexy"
-                        if "lover" in StormX.Petnames or ApprovalCheck(StormX, 800):
+                        if "lover" in StormX.Petnames or Approvalcheck(StormX, 800):
                             $ StormX.change_face("sexy", 1)
                             ch_s "I suppose that I am, [StormX.Petname]."
                         else:
@@ -1521,7 +1521,7 @@ label Storm_Pet: #rkeljs
 
                     "\"lover\".":
                         $ StormX.Pet = "lover"
-                        if "lover" in StormX.Petnames or ApprovalCheck(StormX, 1200):
+                        if "lover" in StormX.Petnames or Approvalcheck(StormX, 1200):
                             $ StormX.change_face("sexy", 1)
                             ch_s "I am, I suppose."
                         else:
@@ -1536,7 +1536,7 @@ label Storm_Pet: #rkeljs
                     "I think I'll call you. . ."
                     "\"slave\".":
                         $ StormX.Pet = "slave"
-                        if "master" in StormX.Petnames or ApprovalCheck(StormX, 850, "O"):
+                        if "master" in StormX.Petnames or Approvalcheck(StormX, 850, "O"):
                             $ StormX.change_face("bemused", 1)
                             ch_s "As you wish, [StormX.Petname]."
                         else:
@@ -1545,7 +1545,7 @@ label Storm_Pet: #rkeljs
 
                     "\"pet\".":
                         $ StormX.Pet = "pet"
-                        if "master" in StormX.Petnames or ApprovalCheck(StormX, 700, "O"):
+                        if "master" in StormX.Petnames or Approvalcheck(StormX, 700, "O"):
                             $ StormX.change_face("bemused", 1)
                             ch_s "You can pet me if you want, [StormX.Petname]."
                         else:
@@ -1554,7 +1554,7 @@ label Storm_Pet: #rkeljs
 
                     "\"slut\".":
                         $ StormX.Pet = "slut"
-                        if "sex friend" in StormX.Petnames or ApprovalCheck(StormX, 900, "OI"):
+                        if "sex friend" in StormX.Petnames or Approvalcheck(StormX, 900, "OI"):
                             $ StormX.change_face("sexy")
                             ch_s "Fair enough."
                         else:
@@ -1564,7 +1564,7 @@ label Storm_Pet: #rkeljs
 
                     "\"whore\".":
                         $ StormX.Pet = "whore"
-                        if "fuckbuddy" in StormX.Petnames or ApprovalCheck(StormX, 1000, "OI"):
+                        if "fuckbuddy" in StormX.Petnames or Approvalcheck(StormX, 1000, "OI"):
                             $ StormX.change_face("sly")
                             ch_s ". . ."
                         else:
@@ -1573,7 +1573,7 @@ label Storm_Pet: #rkeljs
 
                     "\"sugartits\".":
                         $ StormX.Pet = "sugartits"
-                        if "sex friend" in StormX.Petnames or ApprovalCheck(StormX, 1400):
+                        if "sex friend" in StormX.Petnames or Approvalcheck(StormX, 1400):
                             $ StormX.change_face("sly", 1)
                             ch_s "I suppose. . ."
                         else:
@@ -1582,7 +1582,7 @@ label Storm_Pet: #rkeljs
 
                     "\"sex friend\".":
                         $ StormX.Pet = "sex friend"
-                        if "sex friend" in StormX.Petnames or ApprovalCheck(StormX, 600, "I"):
+                        if "sex friend" in StormX.Petnames or Approvalcheck(StormX, 600, "I"):
                             $ StormX.change_face("sly")
                             ch_s "Yes. . ."
                         else:
@@ -1591,7 +1591,7 @@ label Storm_Pet: #rkeljs
 
                     "\"fuckbuddy\".":
                         $ StormX.Pet = "fuckbuddy"
-                        if "fuckbuddy" in StormX.Petnames or ApprovalCheck(StormX, 700, "I"):
+                        if "fuckbuddy" in StormX.Petnames or Approvalcheck(StormX, 700, "I"):
                             $ StormX.change_face("sly")
                             ch_s "Sure."
                         else:
@@ -1601,7 +1601,7 @@ label Storm_Pet: #rkeljs
 
                     "\"baby girl\".":
                         $ StormX.Pet = "baby girl"
-                        if "daddy" in StormX.Petnames or ApprovalCheck(StormX, 1200):
+                        if "daddy" in StormX.Petnames or Approvalcheck(StormX, 1200):
                             $ StormX.change_face("smile", 1)
                             ch_s "I suppose?"
                         else:
@@ -1615,7 +1615,7 @@ label Storm_Pet: #rkeljs
                 return
     return
 
-#label Storm_Namecheck(StormX.Pet = StormX.Pet, Cnt = 0, Ugh = 0): #replaced with $ Girl.NameCheck() #checks reaction to petname
+#label Storm_Namecheck(StormX.Pet = StormX.Pet, Cnt = 0, Ugh = 0): #replaced with $ Girl.Namecheck() #checks reaction to petname
 
 
 # start Storm_Rename//////////////////////////////////////////////////////////
@@ -1692,13 +1692,13 @@ label Storm_Clothes:  #rkeljs
     if StormX.Taboo and StormX not in Rules:
             if "exhibitionist" in StormX.Traits:
                 ch_s "Oh, here? . ."
-            elif ApprovalCheck(StormX, 900, TabM=4) or ApprovalCheck(StormX, 400, "I", TabM=3):
+            elif Approvalcheck(StormX, 900, TabM=4) or Approvalcheck(StormX, 400, "I", TabM=3):
                 ch_s "I'm not supposed to undress here. . ."
             else:
                 ch_s "I'm not supposed to undress here. . ."
                 ch_s "Can we talk about this in our rooms?"
                 return
-    elif ApprovalCheck(StormX, 900, TabM=4) or ApprovalCheck(StormX, 600, "L") or ApprovalCheck(StormX, 300, "O"):
+    elif Approvalcheck(StormX, 900, TabM=4) or Approvalcheck(StormX, 600, "L") or Approvalcheck(StormX, 300, "O"):
                 ch_s "Oh? What about them?"
     else:
                 ch_s "I don't really need fashion advice, thank you."
@@ -1746,7 +1746,7 @@ label Storm_Wardrobe_Menu:
                     pass
             "Would you be more comfortable behind a screen?" if StormX.location == bg_current and not StormX.Taboo and not renpy.showing('DressScreen'):
                     # checks to see if she'll drop the screen
-                    #if ApprovalCheck(StormX, 1500) or (StormX.SeenChest and StormX.SeenPussy):
+                    #if Approvalcheck(StormX, 1500) or (StormX.SeenChest and StormX.SeenPussy):
                             ch_s "I won't need it, but I appreciate the offer."
                     #else:
 #                            show DressScreen zorder 150
@@ -1921,7 +1921,7 @@ label Storm_Wardrobe_Menu:
                 $ StormX.OutfitChange("gym")
 
         "Sleepwear?" if not StormX.Taboo:
-                if ApprovalCheck(StormX, 1200):
+                if Approvalcheck(StormX, 1200):
                         $ StormX.OutfitChange("sleep")
                 else:
                         call Display_DressScreen(StormX)
@@ -1938,7 +1938,7 @@ label Storm_Wardrobe_Menu:
                 if StormX.Taboo <= 20 or StormX in Rules or StormX.PantsNum() >= 5:
                         ch_s "Fine."
                         $ StormX.OutfitChange("costume")
-                elif ApprovalCheck(StormX, 1100, TabM=3):
+                elif Approvalcheck(StormX, 1100, TabM=3):
                         ch_s "Ok."
                         $ StormX.OutfitChange("costume")
                 else:
@@ -1955,19 +1955,19 @@ label Storm_Wardrobe_Menu:
                 $ Line = 0
                 if not StormX.Chest and not StormX.Panties and not StormX.Over and not StormX.Legs and not StormX.Hose:
                         ch_s "Thank you."
-                elif ApprovalCheck(StormX, 1200, TabM=4): #and StormX.SeenChest and StormX.SeenPussy
+                elif Approvalcheck(StormX, 1200, TabM=4): #and StormX.SeenChest and StormX.SeenPussy
                         ch_s "Certainly. . ."
                         $ Line = 1
-                elif ApprovalCheck(StormX, 2000, TabM=4):
+                elif Approvalcheck(StormX, 2000, TabM=4):
                         ch_s "No foreplay?"
                         $ Line = 1
-                elif not ApprovalCheck(StormX, 500, TabM=0):
+                elif not Approvalcheck(StormX, 500, TabM=0):
                         $ StormX.change_face("confused", 1,Mouth="smirk")
                         ch_s "I don't exactly get nude on command, you know. . ."
                         $ StormX.change_face("bemused", 0)
-                elif StormX.Taboo and StormX not in Rules: #StormX.SeenChest and StormX.SeenPussy and ApprovalCheck(StormX, 1200, TabM=0)
+                elif StormX.Taboo and StormX not in Rules: #StormX.SeenChest and StormX.SeenPussy and Approvalcheck(StormX, 1200, TabM=0)
                         ch_s "Maybe, but not here. . ."
-                elif ApprovalCheck(StormX, 1000, TabM=0):
+                elif Approvalcheck(StormX, 1000, TabM=0):
                         $ StormX.change_face("confused", 1,Mouth="smirk")
                         ch_s "Yeah, but I'm not exactly showing it off."
                         $ StormX.change_face("bemused", 0)
@@ -1990,7 +1990,7 @@ label Storm_Wardrobe_Menu:
                                     $ StormX.Statup("Lust", 50, 10)
                                     $ StormX.Statup("Lust", 70, 5)
                                     $ StormX.Shame = 50
-                            elif ApprovalCheck(StormX, 800, "I") or ApprovalCheck(StormX, 2800, TabM=0) or StormX in Rules:
+                            elif Approvalcheck(StormX, 800, "I") or Approvalcheck(StormX, 2800, TabM=0) or StormX in Rules:
                                     ch_s "You know, I might. . ."
                                     $ StormX.Outfit = "nude"
                                     $ StormX.Shame = 50
@@ -2002,7 +2002,7 @@ label Storm_Wardrobe_Menu:
                         "Let's try something else though.":
                             if "exhibitionist" in StormX.Traits:
                                     ch_s "Are you certain?"
-                            elif ApprovalCheck(StormX, 800, "I") or ApprovalCheck(StormX, 2800, TabM=0) or StormX in Rules:
+                            elif Approvalcheck(StormX, 800, "I") or Approvalcheck(StormX, 2800, TabM=0) or StormX in Rules:
                                     $ StormX.change_face("bemused", 1)
                                     ch_s "I expected that you wanted me to go out like this."
                                     ch_s ". . ."
@@ -2023,12 +2023,12 @@ label Storm_Wardrobe_Menu:
         # Overshirts
         "Why don't you go with no [StormX.Over]?" if StormX.Over:
                 $ StormX.change_face("bemused", 1)
-                if ApprovalCheck(StormX, 800, TabM=3):# and (StormX.Chest or StormX.SeenChest):
+                if Approvalcheck(StormX, 800, TabM=3):# and (StormX.Chest or StormX.SeenChest):
                     ch_s "Fine."
-                elif ApprovalCheck(StormX, 600, TabM=0):
+                elif Approvalcheck(StormX, 600, TabM=0):
                     call Storm_NoBra
                     if not _return:
-                        if not ApprovalCheck(StormX, 1200):
+                        if not Approvalcheck(StormX, 1200):
                             call Display_DressScreen(StormX)
                             if not _return:
                                 return #jump Storm_Clothes
@@ -2052,7 +2052,7 @@ label Storm_Wardrobe_Menu:
                 if not StormX.Over or StormX.ChestNum() >= 5:
                     #if she's not already wearing a top, or has fair clothes on under
                     ch_s "Very well."
-                elif ApprovalCheck(StormX, 800, TabM=3):
+                elif Approvalcheck(StormX, 800, TabM=3):
                     ch_s "Very well."
                 else:
                     call Display_DressScreen(StormX)
@@ -2067,7 +2067,7 @@ label Storm_Wardrobe_Menu:
                 if not StormX.Over or StormX.ChestNum() >= 5:
                     #if she's not already wearing a top, or has fair clothes on under
                     ch_s "Very well."
-                elif ApprovalCheck(StormX, 800, TabM=3):
+                elif Approvalcheck(StormX, 800, TabM=3):
                     ch_s "Very well."
                 else:
                     call Display_DressScreen(StormX)
@@ -2081,7 +2081,7 @@ label Storm_Wardrobe_Menu:
                 $ StormX.change_face("bemused", 1)
                 if StormX.ChestNum() >= 5: #or StormX.SeenChest
                     ch_s "If that's what you want. . ."
-                elif ApprovalCheck(StormX, 1000, TabM=3):
+                elif Approvalcheck(StormX, 1000, TabM=3):
                     $ StormX.change_face("perplexed", 1)
                     ch_s "If that's what you want. . ."
                 else:
@@ -2104,23 +2104,23 @@ label Storm_Wardrobe_Menu:
             "Then you could slip something on under it. . .":
                         if StormX in Rules or StormX.Taboo < 20 :
                                 ch_s "No, I suppose it's fine, for now at least."
-                        elif StormX.SeenChest and ApprovalCheck(StormX, 1000, TabM=3):
+                        elif StormX.SeenChest and Approvalcheck(StormX, 1000, TabM=3):
                                 $ StormX.Blush = 2
                                 ch_s "I truly don't mind though. . ."
                                 $ StormX.Blush = 0
-#                        elif ApprovalCheck(StormX, 1200, TabM=4):
+#                        elif Approvalcheck(StormX, 1200, TabM=4):
 #                                $ StormX.Blush = 1
 #                                ch_s "-I didn't say that I minded. . ."
 #                                $ StormX.Blush = 0
-                        elif ApprovalCheck(StormX, 900, TabM=2) and "lace bra" in StormX.Inventory:
+                        elif Approvalcheck(StormX, 900, TabM=2) and "lace bra" in StormX.Inventory:
                                 ch_s "Fine."
                                 $ StormX.Chest  = "lace bra"
                                 "She pulls out her lace bra and slips it under her [StormX.Over]."
-                        elif ApprovalCheck(StormX, 700, TabM=2) and "corset" in StormX.Inventory:
+                        elif Approvalcheck(StormX, 700, TabM=2) and "corset" in StormX.Inventory:
                                 ch_s "Fine."
                                 $ StormX.Chest  = "black bra"
                                 "She pulls out her black bra and slips it under her [StormX.Over]."
-                        elif ApprovalCheck(StormX, 600, TabM=2):
+                        elif Approvalcheck(StormX, 600, TabM=2):
                                 ch_s "Fine."
                                 $ StormX.Chest = "tube top"
                                 "She pulls out her tube top and slips it on under her [StormX.Over]."
@@ -2131,13 +2131,13 @@ label Storm_Wardrobe_Menu:
             "You could always just wear nothing at all. . .":
                         if StormX in Rules or not StormX.Taboo:
                                 ch_s "I suppose it's fine, for now at least."
-                        elif ApprovalCheck(StormX, 1100, "LI", TabM=2) and StormX.Love > StormX.Inbt:
+                        elif Approvalcheck(StormX, 1100, "LI", TabM=2) and StormX.Love > StormX.Inbt:
                                 ch_s "For you? I suppose. . ."
-                        elif ApprovalCheck(StormX, 700, "OI", TabM=2) and StormX.Obed > StormX.Inbt:
+                        elif Approvalcheck(StormX, 700, "OI", TabM=2) and StormX.Obed > StormX.Inbt:
                                 ch_s "Fine. . ."
-                        elif ApprovalCheck(StormX, 600, "I", TabM=2):
+                        elif Approvalcheck(StormX, 600, "I", TabM=2):
                                 ch_s "Yes. . ."
-                        elif ApprovalCheck(StormX, 1300, TabM=2):
+                        elif Approvalcheck(StormX, 1300, TabM=2):
                                 ch_s "Okay, fine."
                         else:
                                 $ StormX.change_face("sadside")
@@ -2160,16 +2160,16 @@ label Storm_Wardrobe_Menu:
                 $ StormX.change_face("sexy", 1)
                 if StormX.Taboo <= 20 or StormX.HoseNum() >= 5 or StormX.PantiesNum() >= 5 or StormX in Rules:
                     ch_s "Fine."
-#                elif StormX.SeenPanties and StormX.Panties and ApprovalCheck(StormX, 500, TabM=5):
+#                elif StormX.SeenPanties and StormX.Panties and Approvalcheck(StormX, 500, TabM=5):
 #                    ch_s "Ok, sure."
-#                elif StormX.SeenPussy and ApprovalCheck(StormX, 900, TabM=4):
+#                elif StormX.SeenPussy and Approvalcheck(StormX, 900, TabM=4):
 #                    ch_s "Yeah, ok."
-                elif ApprovalCheck(StormX, 1300, TabM=2) and StormX.Panties:
+                elif Approvalcheck(StormX, 1300, TabM=2) and StormX.Panties:
                     ch_s "For you, fine. . ."
-                elif ApprovalCheck(StormX, 700) and not StormX.Panties:
+                elif Approvalcheck(StormX, 700) and not StormX.Panties:
                     call Storm_NoPantiesOn
                     if not _return and not StormX.Panties:
-                        if not ApprovalCheck(StormX, 1500):
+                        if not Approvalcheck(StormX, 1500):
                             call Display_DressScreen(StormX)
                             if not _return:
                                 return #jump Storm_Clothes
@@ -2221,21 +2221,21 @@ label Storm_Wardrobe_Menu:
             "Then you could slip on a pair of panties. . .":
                         if StormX.Taboo <= 20 or StormX.HoseNum() >= 5 or StormX in Rules:
                                 ch_s "No, it's fine."
-                        elif StormX.SeenPussy and ApprovalCheck(StormX, 1100, TabM=4):
+                        elif StormX.SeenPussy and Approvalcheck(StormX, 1100, TabM=4):
                                 $ StormX.Blush = 1
                                 ch_s "No, commando's fine. . ."
                                 $ StormX.Blush = 0
-#                        elif ApprovalCheck(StormX, 1500, TabM=4):
+#                        elif Approvalcheck(StormX, 1500, TabM=4):
 #                                $ StormX.Blush = 1
 #                                ch_s "No, commando's fine. . ."
 #                                $ StormX.Blush = 0
-                        elif ApprovalCheck(StormX, 700, TabM=4):
+                        elif Approvalcheck(StormX, 700, TabM=4):
                                 ch_s "Fine."
                                 if "lace panties" in StormX.Inventory:
                                         $ StormX.Panties  = "lace panties"
                                 else:
                                         $ StormX.Panties = "black panties"
-                                if ApprovalCheck(StormX, 1200, TabM=4):
+                                if Approvalcheck(StormX, 1200, TabM=4):
                                     $ Line = StormX.Legs
                                     $ StormX.Legs = 0
                                     "She pulls off her [Line] and slips on the [StormX.Panties]."
@@ -2255,13 +2255,13 @@ label Storm_Wardrobe_Menu:
             "You could always just wear nothing at all. . .":
                         if StormX.Taboo <= 20 or StormX.HoseNum() >= 5 or StormX in Rules:
                                 ch_s "True."
-                        elif ApprovalCheck(StormX, 1100, "LI", TabM=3) and StormX.Love > StormX.Inbt:
+                        elif Approvalcheck(StormX, 1100, "LI", TabM=3) and StormX.Love > StormX.Inbt:
                                 ch_s "True. . ."
-                        elif ApprovalCheck(StormX, 700, "OI", TabM=3) and StormX.Obed > StormX.Inbt:
+                        elif Approvalcheck(StormX, 700, "OI", TabM=3) and StormX.Obed > StormX.Inbt:
                                 ch_s "Yes. . ."
-                        elif ApprovalCheck(StormX, 600, "I", TabM=3):
+                        elif Approvalcheck(StormX, 600, "I", TabM=3):
                                 ch_s "Hrmm. . ."
-                        elif ApprovalCheck(StormX, 1300, TabM=3):
+                        elif Approvalcheck(StormX, 1300, TabM=3):
                                 ch_s "Fine."
                         else:
                                 $ StormX.change_face("bemused")
@@ -2287,16 +2287,16 @@ label Storm_Wardrobe_Menu:
 
                         if StormX.Taboo <= 20 or StormX in Rules or StormX.OverNum() >= 5:
                                 ch_s "Fine."
-                        elif StormX.SeenChest and ApprovalCheck(StormX, 900, TabM=2.7):
+                        elif StormX.SeenChest and Approvalcheck(StormX, 900, TabM=2.7):
                             ch_s "Fine."
-#                        elif ApprovalCheck(StormX, 1100, TabM=2):
+#                        elif Approvalcheck(StormX, 1100, TabM=2):
 #                            if StormX.Taboo:
 #                                ch_s "I don't know, here. . ."
 #                            else:
 #                                ch_s "Maybe. . ."
-                        elif StormX.Over == "jacket" and ApprovalCheck(StormX, 600, TabM=2):
+                        elif StormX.Over == "jacket" and Approvalcheck(StormX, 600, TabM=2):
                             ch_s "This jacket is a bit revealing. . ."
-#                        elif StormX.Over and ApprovalCheck(StormX, 500, TabM=2):
+#                        elif StormX.Over and Approvalcheck(StormX, 500, TabM=2):
 #                            ch_s "I guess I could. . ."
                         elif not StormX.Over:
                             call Display_DressScreen(StormX)
@@ -2330,7 +2330,7 @@ label Storm_Wardrobe_Menu:
                         if StormX.Taboo <= 20 or StormX in Rules or StormX.OverNum() >= 5:
                             ch_s "Fine."
                             $ StormX.Chest = "black bra"
-                        elif StormX.SeenChest or ApprovalCheck(StormX, 1100, TabM=2):
+                        elif StormX.SeenChest or Approvalcheck(StormX, 1100, TabM=2):
                             ch_s "Fine."
                             $ StormX.Chest = "black bra"
                         else:
@@ -2344,7 +2344,7 @@ label Storm_Wardrobe_Menu:
                         if StormX.Taboo <= 20 or StormX in Rules or StormX.OverNum() >= 5:
                             ch_s "Fine."
                             $ StormX.Chest = "lace bra"
-                        elif StormX.SeenChest or ApprovalCheck(StormX, 1300, TabM=2):
+                        elif StormX.SeenChest or Approvalcheck(StormX, 1300, TabM=2):
                             ch_s "Fine."
                             $ StormX.Chest = "lace bra"
                         else:
@@ -2362,7 +2362,7 @@ label Storm_Wardrobe_Menu:
                                 if StormX.Taboo <= 20 or StormX in Rules or StormX.OverNum() >= 5:
                                     ch_s "Fine."
                                     $ StormX.Chest = "bikini top"
-                                elif StormX.SeenChest or ApprovalCheck(StormX, 1000, TabM=2):
+                                elif StormX.SeenChest or Approvalcheck(StormX, 1000, TabM=2):
                                     ch_s "Fine."
                                     $ StormX.Chest = "bikini top"
                                 else:
@@ -2376,7 +2376,7 @@ label Storm_Wardrobe_Menu:
                         if StormX.Taboo <= 20 or StormX in Rules or StormX.OverNum() >= 5:
                             ch_s "Fine."
                             $ StormX.Chest = "cos bra"
-                        elif StormX.SeenChest or ApprovalCheck(StormX, 1100, TabM=2):
+                        elif StormX.SeenChest or Approvalcheck(StormX, 1100, TabM=2):
                             ch_s "Fine."
                             $ StormX.Chest = "cos bra"
                         else:
@@ -2415,24 +2415,24 @@ label Storm_Wardrobe_Menu:
                         $ StormX.change_face("bemused", 1)
                         if StormX.Taboo <= 20 or StormX.HoseNum() >= 5 or StormX.PantsNum() >= 5 or StormX in Rules:
                                 ch_s "Sure."
-#                        elif ApprovalCheck(StormX, 900) and (StormX.Legs or (StormX.SeenPussy and not StormX.Taboo)):
+#                        elif Approvalcheck(StormX, 900) and (StormX.Legs or (StormX.SeenPussy and not StormX.Taboo)):
 #                                #If you've got decent approval and either she's wearing pants or you've seen her pussy and it's not in public
-#                                if ApprovalCheck(StormX, 850, "L"):
+#                                if Approvalcheck(StormX, 850, "L"):
 #                                        ch_s "True. . ."
-#                                elif ApprovalCheck(StormX, 500, "O"):
+#                                elif Approvalcheck(StormX, 500, "O"):
 #                                        ch_s "Agreed."
-#                                elif ApprovalCheck(StormX, 350, "I"):
+#                                elif Approvalcheck(StormX, 350, "I"):
 #                                        ch_s "Heh."
 #                                else:
 #                                        ch_s "Sure, I guess."
                         else:                       #low approval or not wearing pants or in public
-                                if ApprovalCheck(StormX, 1100, "LI", TabM=3) and StormX.Love > StormX.Inbt:
+                                if Approvalcheck(StormX, 1100, "LI", TabM=3) and StormX.Love > StormX.Inbt:
                                         ch_s "I suppose I could, but. . ."
-                                elif ApprovalCheck(StormX, 700, "OI", TabM=3) and StormX.Obed > StormX.Inbt:
+                                elif Approvalcheck(StormX, 700, "OI", TabM=3) and StormX.Obed > StormX.Inbt:
                                         ch_s "Well. . ."
-                                elif ApprovalCheck(StormX, 600, "I", TabM=3):
+                                elif Approvalcheck(StormX, 600, "I", TabM=3):
                                         ch_s "Hrmm. . ."
-                                elif ApprovalCheck(StormX, 1300, TabM=3):
+                                elif Approvalcheck(StormX, 1300, TabM=3):
                                         ch_s "Okay, okay."
                                 else:
                                         call Display_DressScreen(StormX)
@@ -2449,7 +2449,7 @@ label Storm_Wardrobe_Menu:
                             "She pulls off her [Line], then drops them to the ground."
                             if not renpy.showing('DressScreen'):
                                     call Storm_First_Bottomless
-                        elif ApprovalCheck(StormX, 1200, TabM=4):
+                        elif Approvalcheck(StormX, 1200, TabM=4):
                             $ Trigger = StormX.Legs
                             $ StormX.Legs = 0
                             pause 0.5
@@ -2469,7 +2469,7 @@ label Storm_Wardrobe_Menu:
                         if StormX.Taboo <= 20 or StormX in Rules or StormX.PantsNum() >= 5:
                                 ch_s "Fine."
                                 $ StormX.Panties = "white panties"
-                        elif ApprovalCheck(StormX, 1100, TabM=3):
+                        elif Approvalcheck(StormX, 1100, TabM=3):
                                 ch_s "Ok."
                                 $ StormX.Panties = "white panties"
                         else:
@@ -2483,7 +2483,7 @@ label Storm_Wardrobe_Menu:
                         if StormX.Taboo <= 20 or StormX in Rules or StormX.PantsNum() >= 5:
                                 ch_s "Fine."
                                 $ StormX.Panties = "black panties"
-                        elif ApprovalCheck(StormX, 1100, TabM=3):
+                        elif Approvalcheck(StormX, 1100, TabM=3):
                                 ch_s "Ok."
                                 $ StormX.Panties = "black panties"
                         else:
@@ -2497,7 +2497,7 @@ label Storm_Wardrobe_Menu:
                         if StormX.Taboo <= 20 or StormX in Rules or StormX.PantsNum() >= 5:
                                 ch_s "Fine."
                                 $ StormX.Panties = "lace panties"
-                        elif ApprovalCheck(StormX, 1300, TabM=3):
+                        elif Approvalcheck(StormX, 1300, TabM=3):
                                 ch_s "I guess."
                                 $ StormX.Panties = "lace panties"
                         else:
@@ -2515,7 +2515,7 @@ label Storm_Wardrobe_Menu:
                                 if StormX.Taboo <= 20 or StormX in Rules or StormX.PantsNum() >= 5:
                                     ch_s "Fine."
                                     $ StormX.Panties = "bikini bottoms"
-                                elif ApprovalCheck(StormX, 1000, TabM=2):
+                                elif Approvalcheck(StormX, 1000, TabM=2):
                                     ch_s "Fine."
                                     $ StormX.Panties = "bikini bottoms"
                                 else:
@@ -2529,7 +2529,7 @@ label Storm_Wardrobe_Menu:
                         if StormX.Taboo <= 20 or StormX in Rules or StormX.PantsNum() >= 5:
                                 ch_s "Fine."
                                 $ StormX.Panties = "cos panties"
-                        elif ApprovalCheck(StormX, 1100, TabM=3):
+                        elif Approvalcheck(StormX, 1100, TabM=3):
                                 ch_s "Ok."
                                 $ StormX.Panties = "cos panties"
                         else:
@@ -2590,7 +2590,7 @@ label Storm_Wardrobe_Menu:
                 ch_p "You looked good with long hair."
                 if "hair" in StormX.RecentActions:
                     ch_s "I have already messed with it too much today."
-                elif ApprovalCheck(StormX, 900):
+                elif Approvalcheck(StormX, 900):
                     ch_s "Oh, you did?"
                     ch_s "I suppose I could speak to Hank about that. . ."
                     show blackscreen onlayer black
@@ -2610,7 +2610,7 @@ label Storm_Wardrobe_Menu:
                 ch_p "You looked good with a mohawk."
                 if "hair" in StormX.RecentActions:
                     ch_s "I have already messed with it too much today."
-                elif ApprovalCheck(StormX, 900):
+                elif Approvalcheck(StormX, 900):
                     ch_s "You liked it?"
                     show blackscreen onlayer black
                     $ Round -5 if Round >= 10 else 0
@@ -2629,7 +2629,7 @@ label Storm_Wardrobe_Menu:
                 ch_p "You looked good with short hair."
                 if "hair" in StormX.RecentActions:
                     ch_s "I have already messed with it too much today."
-                elif ApprovalCheck(StormX, 900):
+                elif Approvalcheck(StormX, 900):
                     ch_s "Oh, you did?"
                     ch_s "I suppose I could speak to Hank about that. . ."
                     show blackscreen onlayer black
@@ -2644,7 +2644,7 @@ label Storm_Wardrobe_Menu:
 
         "Wet look hairstyle" if StormX.Hair != "wet" and StormX.Hair != "wethawk":
                 ch_p "You should go for that wet look with your hair."
-                if ApprovalCheck(StormX, 800):
+                if Approvalcheck(StormX, 800):
                     ch_s "Really?"
                     if StormX.Hair == "mohawk":
                             $ StormX.Hair = "wethawk"
@@ -2657,7 +2657,7 @@ label Storm_Wardrobe_Menu:
 
         "Dry out hair" if StormX.Hair == "wet" or StormX.Hair == "wethawk":
                 ch_p "Maybe dry out your hair."
-                if ApprovalCheck(StormX, 600):
+                if Approvalcheck(StormX, 600):
                     ch_s "Fine."
                     "A gust of wind swirls around her hair."
                     if StormX.Hair == "wethawk":
@@ -2674,7 +2674,7 @@ label Storm_Wardrobe_Menu:
                         ch_s "It's not as though it grows instantly!"
                 else:
                         $ StormX.change_face("bemused", 1)
-                        if ApprovalCheck(StormX, 500, TabM=0):
+                        if Approvalcheck(StormX, 500, TabM=0):
                             ch_s "I do prefer it that way. . ."
                         else:
                             $ StormX.change_face("surprised")
@@ -2689,7 +2689,7 @@ label Storm_Wardrobe_Menu:
                 if "shave" in StormX.Todo:
                     ch_s "Yes, I will get around to it."
                 else:
-                    if ApprovalCheck(StormX, 1100, TabM=0):
+                    if Approvalcheck(StormX, 1100, TabM=0):
                         ch_s "You do? I suppose I could shave. . ."
                     else:
                         $ StormX.change_face("surprised")
@@ -2707,12 +2707,12 @@ label Storm_Wardrobe_Menu:
                     ch_s "I know, I will do it."
                 else:
                     $ StormX.change_face("bemused", 1)
-                    $ Approval = ApprovalCheck(StormX, 1150, TabM=0)
-                    if ApprovalCheck(StormX, 900, "L", TabM=0) or (Approval and StormX.Love > 2* StormX.Obed):
+                    $ Approval = Approvalcheck(StormX, 1150, TabM=0)
+                    if Approvalcheck(StormX, 900, "L", TabM=0) or (Approval and StormX.Love > 2* StormX.Obed):
                         ch_s "You like the way they'd look on me?"
-                    elif ApprovalCheck(StormX, 600, "I", TabM=0) or (Approval and StormX.Inbt > StormX.Obed):
+                    elif Approvalcheck(StormX, 600, "I", TabM=0) or (Approval and StormX.Inbt > StormX.Obed):
                         ch_s "I have been considering that for a while."
-                    elif ApprovalCheck(StormX, 500, "O", TabM=0) or Approval:
+                    elif Approvalcheck(StormX, 500, "O", TabM=0) or Approval:
                         ch_s "Yes, [StormX.Petname]."
                     else:
                         $ StormX.change_face("bemused")
@@ -2726,12 +2726,12 @@ label Storm_Wardrobe_Menu:
                     ch_s "I know, I will do it."
                 else:
                     $ StormX.change_face("bemused", 1)
-                    $ Approval = ApprovalCheck(StormX, 1150, TabM=0)
-                    if ApprovalCheck(StormX, 900, "L", TabM=0) or (Approval and StormX.Love > 2 * StormX.Obed):
+                    $ Approval = Approvalcheck(StormX, 1150, TabM=0)
+                    if Approvalcheck(StormX, 900, "L", TabM=0) or (Approval and StormX.Love > 2 * StormX.Obed):
                         ch_s "You like the way they'd look on me?"
-                    elif ApprovalCheck(StormX, 600, "I", TabM=0) or (Approval and StormX.Inbt > StormX.Obed):
+                    elif Approvalcheck(StormX, 600, "I", TabM=0) or (Approval and StormX.Inbt > StormX.Obed):
                         ch_s "I have been considering that for a while."
-                    elif ApprovalCheck(StormX, 500, "O", TabM=0) or Approval:
+                    elif Approvalcheck(StormX, 500, "O", TabM=0) or Approval:
                         ch_s "Yes, [StormX.Petname]."
                     else:
                         $ StormX.change_face("bemused")
@@ -2742,12 +2742,12 @@ label Storm_Wardrobe_Menu:
         "Remove Piercings" if StormX.Pierce:
                 ch_p "You know, you'd look better without those piercings."
                 $ StormX.change_face("bemused", 1)
-                $ Approval = ApprovalCheck(StormX, 1350, TabM=0)
-                if ApprovalCheck(StormX, 950, "L", TabM=0) or (Approval and StormX.Love > StormX.Obed):
+                $ Approval = Approvalcheck(StormX, 1350, TabM=0)
+                if Approvalcheck(StormX, 950, "L", TabM=0) or (Approval and StormX.Love > StormX.Obed):
                     ch_s "Really? Very well . ."
-                elif ApprovalCheck(StormX, 700, "I", TabM=0) or (Approval and StormX.Inbt > StormX.Obed):
+                elif Approvalcheck(StormX, 700, "I", TabM=0) or (Approval and StormX.Inbt > StormX.Obed):
                     ch_s "Oh, I was growing rather attached. . ."
-                elif ApprovalCheck(StormX, 600, "O", TabM=0) or Approval:
+                elif Approvalcheck(StormX, 600, "O", TabM=0) or Approval:
                     ch_s "Fine."
                 else:
                     $ StormX.change_face("surprised")

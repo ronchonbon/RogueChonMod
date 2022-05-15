@@ -24,11 +24,11 @@ label Gym_Entry(Girls=[],GirlsNum = 0):  #rkeljsv
         while Girls:
                 if Girls[0].Outfit != "gym":
                         #If girl is in the gym, see if she'll change clothes
-                        if ApprovalCheck(Girls[0], 1300, "LO") or "passive" in Girls[0].Traits:
+                        if Approvalcheck(Girls[0], 1300, "LO") or "passive" in Girls[0].Traits:
                             pass
-                        elif ApprovalCheck(Girls[0], 800, "LO") and Girls[0].Custom1[0]:
+                        elif Approvalcheck(Girls[0], 800, "LO") and Girls[0].Custom1[0]:
                             pass
-                        elif ApprovalCheck(Girls[0], 600, "LO") and Girls[0].Gym[0] != 1:
+                        elif Approvalcheck(Girls[0], 600, "LO") and Girls[0].Gym[0] != 1:
                             pass
                         else:
                             $ line = "no"
@@ -170,7 +170,7 @@ label Gym_Clothes_Off(Girls=[]):  #rkeljsv
         return
 
 label Danger_Room_Entry:
-    call Jubes_Entry_Check
+    call Jubes_Entry_check
     $ door_locked = False
     $ bg_current = "bg_dangerroom"
     $ Nearby = []
@@ -187,7 +187,7 @@ label Danger_Room:
     call Taboo_Level
     call set_the_scene(Quiet=1)
     call QuickEvents
-    call Checkout(1)
+    call checkout(1)
     if Round <= 10:
                 "Looks like shifts are changing. . ."
                 if time_index >=3: # night time
@@ -334,17 +334,17 @@ label Rogue_TightsRipped(Count = 0):
                 if not RogueX.Legs and RogueX.Panties != "shorts":
                         if RogueX.Panties:
                             if RogueX.SeenPanties:
-                                $ Count = 3 if not ApprovalCheck(RogueX, 600) else Count
+                                $ Count = 3 if not Approvalcheck(RogueX, 600) else Count
                             else:
                                 $ RogueX.SeenPanties = 1
-                                $ Count = 3 if not ApprovalCheck(RogueX, 900) else Count
+                                $ Count = 3 if not Approvalcheck(RogueX, 900) else Count
                             $ RogueX.change_stat("lust", 60, 2)
                         else:
                             if RogueX.SeenPussy:
-                                $ Count = 3 if not ApprovalCheck(RogueX, 900) else Count
+                                $ Count = 3 if not Approvalcheck(RogueX, 900) else Count
                             else:
                                 call Rogue_First_Bottomless
-                                $ Count = 3 if not ApprovalCheck(RogueX, 1400) else Count
+                                $ Count = 3 if not Approvalcheck(RogueX, 1400) else Count
 
                 if Count == 2:
                         #first time

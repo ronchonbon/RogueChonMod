@@ -34,7 +34,7 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
             call Anyline(Girl,"A bit late in the day for that. . .")
             $ Girl.change_face("normal")
             return
-    if not Girl.ClothingCheck():
+    if not Girl.Clothingcheck():
             #if she's already nude. . .
             $ Girl.change_face("sly")
             call Anyline(Girl,"Little late for that.")
@@ -60,7 +60,7 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                         ch_e "[EmmaX.Petname], we can't be seen like that in public. . ."
                         return
             if "three" not in EmmaX.History:
-                if not AloneCheck(EmmaX):
+                if not Alonecheck(EmmaX):
                         $ Girl.change_face("bemused",2)
                         ch_e "Not with this sort of company. . ."
                         return
@@ -150,20 +150,20 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                     $ Girl.change_face("bemused",1)
                     call Anyline(Girl,"I don't have a top on under this. . .")
 
-            if (Girl.SeenPussy and Girl.SeenChest) and AloneCheck(): #makes it easier if you've already seen her
+            if (Girl.SeenPussy and Girl.SeenChest) and Alonecheck(): #makes it easier if you've already seen her
                     $ Mod -= 100
 
             # This is the primary check to see whether she's into it.
             if "exhibitionist" in Girl.Traits:
                     #if she's an exhibitionist
                     $ line = "sure"
-            elif ApprovalCheck(Girl, 700+Mod, "I"):
+            elif Approvalcheck(Girl, 700+Mod, "I"):
                     #if she's generally slutty
                     $ line = "sure"
-            elif ApprovalCheck(Girl, 1400+Mod) or (Girl == StormX and StormX in Rules):
+            elif Approvalcheck(Girl, 1400+Mod) or (Girl == StormX and StormX in Rules):
                     # if she really likes you.
                     $ line = "sure"
-            elif ApprovalCheck(Girl, 900):
+            elif Approvalcheck(Girl, 900):
                     # if she is fairly casual, not not enough
                     $ line = "sorry"
             else:
@@ -216,7 +216,7 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                                     elif Girl == JubesX:
                                             ch_v "Well, I'm keeping it on."
                         "Take it off anyway.":
-                            if line == "sure" or (line == "sorry" and Girl != StormX and ApprovalCheck(Girl, 600+Mod, "O")):
+                            if line == "sure" or (line == "sorry" and Girl != StormX and Approvalcheck(Girl, 600+Mod, "O")):
                                     if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
                                         $ Girl.change_stat("obedience", 50, 1)
                                         $ Girl.change_stat("obedience", 80, 2)
@@ -474,7 +474,7 @@ label Pool_Sunbathe(Girl=0,Type=0,Mod=0): #rkeljsv
                         $ Girl.OutfitChange("nude") #removes remaining clothing.
             $ Mod = 0
             $ line = 0
-            if Girl.ClothingCheck():
+            if Girl.Clothingcheck():
                 "Anything else?" #loops back to menu
             else:
                 return
@@ -535,12 +535,12 @@ label Pool_Skinnydip(Girl=0,line=0,Type=0,Mod=0): #rkeljsv
                     ch_e "[EmmaX.Petname], I couldn't risk us getting caught. . ."
                     return
             if "three" not in EmmaX.History:
-                    if not AloneCheck(EmmaX):
+                    if not Alonecheck(EmmaX):
                             $ Girl.change_face("bemused",2)
                             ch_e "Not with this sort of company. . ."
                             return
 
-    if not Girl.ClothingCheck():
+    if not Girl.Clothingcheck():
             #if she's already nude. . .
             $ Girl.change_face("sly")
             if Girl == RogueX:
@@ -567,13 +567,13 @@ label Pool_Skinnydip(Girl=0,line=0,Type=0,Mod=0): #rkeljsv
             if "exhibitionist" in Girl.Traits:
                     #if she's an exhibitionist
                     $ line = "sure"
-            elif ApprovalCheck(Girl, 700-Mod, "I"):
+            elif Approvalcheck(Girl, 700-Mod, "I"):
                     #if she's generally slutty
                     $ line = "sure"
-            elif ApprovalCheck(Girl, 1200-Mod) or (Girl == StormX and StormX in Rules):
+            elif Approvalcheck(Girl, 1200-Mod) or (Girl == StormX and StormX in Rules):
                     # if she really likes you.
                     $ line = "sure"
-            elif ApprovalCheck(Girl, 800):
+            elif Approvalcheck(Girl, 800):
                     # if she is fairly casual, not not enough
                     $ line = "sorry"
             else:
@@ -676,10 +676,10 @@ label Pool_Skinnydip(Girl=0,line=0,Type=0,Mod=0): #rkeljsv
                                     menu:
                                         extend ""
                                         "Then what about your undies?":
-                                                if Girl.ChestNum() > 2 and Girl.PantiesNum() > 2 and ApprovalCheck(Girl, 1000):
+                                                if Girl.ChestNum() > 2 and Girl.PantiesNum() > 2 and Approvalcheck(Girl, 1000):
                                                         #if she mostly likes you, and is wearing decent undies. . .
                                                         pass
-                                                elif Girl.ChestNum() > 1 and Girl.PantiesNum() > 1 and ApprovalCheck(Girl, 1200):
+                                                elif Girl.ChestNum() > 1 and Girl.PantiesNum() > 1 and Approvalcheck(Girl, 1200):
                                                         #if she mostly likes you, and is wearing scandelous undies. . .
                                                         pass
                                                 else:
@@ -805,12 +805,12 @@ label Pool_Topless(Girl=focused_Girl,Girls=[]): #rkeljsv
             "Say nothing":
                     $ Girl.change_face("surprised",2,Eyes="down")
                     "After a few moments, [Girl.name] seems to notice that her top rode up."
-                    if ApprovalCheck(Girl, 1200):
+                    if Approvalcheck(Girl, 1200):
                             $ Count = 0
                     else:
                             $ Count = -100
 
-        if ApprovalCheck(Girl, 800-Count,"I") or ApprovalCheck(Girl, 1600-Count) or (Girl == StormX and StormX in Rules):
+        if Approvalcheck(Girl, 800-Count,"I") or Approvalcheck(Girl, 1600-Count) or (Girl == StormX and StormX in Rules):
                 $ Girl.change_face("sly")
                 $ Girl.Chest = 0 #loses top
                 $ Girl.Over = 0 #loses top
@@ -820,7 +820,7 @@ label Pool_Topless(Girl=focused_Girl,Girls=[]): #rkeljsv
                 $ Girl.change_stat("lust", 50, 5)
                 "She smiles and tosses her top over her head."
                 call first_topless(Girl)
-        elif ApprovalCheck(Girl, 500-Count,"I") or ApprovalCheck(Girl, 1200-Count):
+        elif Approvalcheck(Girl, 500-Count,"I") or Approvalcheck(Girl, 1200-Count):
                 $ Girl.change_face("sly",1)
                 $ Girl.change_stat("obedience", 60, 2)
                 $ Girl.change_stat("inhibition", 50, 3)
@@ -829,7 +829,7 @@ label Pool_Topless(Girl=focused_Girl,Girls=[]): #rkeljsv
                 "She smiles, and leaves the top how it is."
                 call first_topless(Girl)
         else:
-                if ApprovalCheck(Girl, 800-Count) or (Girl == StormX):
+                if Approvalcheck(Girl, 800-Count) or (Girl == StormX):
                         #she's ok with it
                         $ Girl.change_stat("obedience", 60, 2)
                         $ Girl.change_stat("inhibition", 70, 2)
@@ -853,7 +853,7 @@ label Pool_Topless(Girl=focused_Girl,Girls=[]): #rkeljsv
         return
 
 label Pool_Entry:
-    call Jubes_Entry_Check
+    call Jubes_Entry_check
     $ door_locked = False
     $ bg_current = "bg_pool"
     $ Nearby = []
@@ -871,7 +871,7 @@ label Pool_Room:
     call Taboo_Level
     call set_the_scene(Quiet=1,Dress=0)
     call QuickEvents
-    call Checkout(1)
+    call checkout(1)
     if Round <= 10:
                 if time_index >= 3: #night time
                     "You're getting tired, you head back to your room."
@@ -893,7 +893,7 @@ label Pool_Room:
                 $ Round -= 20 if Round >= 20 else Round
                 "You just hang out for a little while."
         "Want to swim?":
-            if time_index >= 3 and AloneCheck():
+            if time_index >= 3 and Alonecheck():
                 "It's a bit late for a swim."
             else:
                 call Pool_Swim
@@ -927,7 +927,7 @@ label Pool_Swim(Swimmers=[],Girls=[]):
     $ Passline = 0
     $ Girls = all_Girls[:]
     while Girls:
-            if bg_current == Girls[0].location and ApprovalCheck(Girls[0], 700):
+            if bg_current == Girls[0].location and Approvalcheck(Girls[0], 700):
                     if Girls[0].Chest == Girls[0].Swim[5] and Girls[0].Panties == Girls[0].Swim[6]:
                                 # if she's already in swimwear . . .
                                 $ Swimmers.append(Girls[0])

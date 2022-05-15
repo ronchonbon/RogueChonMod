@@ -88,8 +88,8 @@ init -1:
     default primary_action = 0                 #Mainhand
     default offhand_action = 0                #Offhand
     default girl_offhand_action = 0                #Girl's offhand
-    default second_Girl_primary_action = 0                #this is the 4th sexual act performed by the second girl
-    default second_Girl_offhand_action = 0                #this is the 5th sexual act performed by the second girl if masturbating
+    default second_girl_primary_action = 0                #this is the 4th sexual act performed by the second girl
+    default second_girl_offhand_action = 0                #this is the 5th sexual act performed by the second girl if masturbating
     default position_change_timer = 100            #This is a timer for changing sexual positions on auto
 
     default Nearby = []                 #this tracks girls in the same room, but distant from you
@@ -141,7 +141,16 @@ init -1:
     default mouth_actions = ["kiss", "suck_breasts", "eat_pussy", "eat_ass"]
     default cock_actions = ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"]
     default dildo_actions = ["dildo_pussy", "dildo_ass"]
-    default anal_insert_actions = ["finger_ass", "dildo_ass", "anal"]
+    default breast_actions = ["fondle_breasts", "suck_breasts"]
+    default pussy_actions = ["fondle_pussy", "finger_pussy", "eat_pussy", "dildo_pussy"]
+    default ass_actions = ["fondle_ass", "finger_ass", "eat_ass", "dildo_ass"]
+    default active_actions = ["kiss", "massage", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]
+    default passive_actions = ["strip", "masturbation", "handjob", "footjob", "titjob", "blowjob"]
+    default fondle_actions = ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]
+    default job_actions = ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass"]
+    default sex_actions = ["sex", "anal", "hotdog"]
+    default inside_panties_actions = ["fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"]
+    default anal_insertion_actions = ["finger_ass", "dildo_ass", "anal"]
 
 label start:
     $ Player = PlayerClass()
@@ -207,9 +216,9 @@ label after_load:
         $ Stack = renpy.get_return_stack()
         #"[Stack]"
         while StackDepth > 0:
-            $ StackCheck = Stack[StackDepth-1]
-            if not renpy.has_label(StackCheck):
-                #"[StackCheck]"
+            $ Stackcheck = Stack[StackDepth-1]
+            if not renpy.has_label(Stackcheck):
+                #"[Stackcheck]"
                 "This save may have some issues, so you are being returned to the player's room."
                 "Progress should be properly saved, although if you were in the middle of a Girl scene, there might be issues continuing forward."
                 "Try to load a save in which you were in a neutral situation if you want to keep playing from there."

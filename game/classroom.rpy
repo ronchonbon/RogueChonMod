@@ -1,6 +1,6 @@
 label Class_Room_Entry:
-    call Jubes_Entry_Check
-    door_locked = False
+    call Jubes_Entry_check
+    $ door_locked = False
     $ Present = []
     $ bg_current = "bg_classroom"
     $ Nearby = []
@@ -21,16 +21,16 @@ label Class_Room:
             $ Player.DrainWord("goto",1,0)
             $ Player.DrainWord("traveling",1,0)
     call Taboo_Level
-    call set_the_scene(Quiet=1)
+    call set_the_scene(silent=1)
     call QuickEvents
-    call Checkout(1)
+    call checkout(1)
     if Round <= 10:
                 if time_index >= 3: # night time
                     "You're getting tired, you head back to your room."
                     jump Player_Room
                 call Wait
                 call EventCalls
-                call Girls_Location
+                call Girls_location
     call GirlsAngry
 
     if line == "entry":
@@ -83,7 +83,7 @@ label Class_Room:
                 "You hang out for a bit."
                 call Wait
                 call EventCalls
-                call Girls_Location
+                call Girls_location
 
                 if time_index < 2: #not evening
                             $ line = "A new class is in session. What would you like to do?"
@@ -112,7 +112,7 @@ label Take_Class:
 
     $ D20 = renpy.random.randint(1, 20)
 
-    if D20 > 15 and Present and ApprovalCheck(Present[0], 300, "I"):
+    if D20 > 15 and Present and Approvalcheck(Present[0], 300, "I"):
             #if there is another girl in the room, and she is reasonably loose, call Frisky Class
             "[line]"
             call Frisky_Class(Present[0])
@@ -143,57 +143,57 @@ label Take_Class:
     $ Player.XP += (5 + (int(Round / 10)))
 
     call Wait
-    call Girls_Location
+    call Girls_location
     call set_the_scene
     call EventCalls
     $ line = "What would you like to do next?"
     jump Class_Room
 
-label Class_Room_Seating(Girls=[],GirlB=0,GirlLike=0,line=0,D20=0,Girls=[]):
+label Class_Room_Seating(Girls=[],GirlB=0,GirlLike=0,Line=0,D20=0,other_Girls=[]): #rkeljsv
     # Girls is the amount of girls in the room.
     # active ones get priority, then shuffled, then nearby girls
     $ Present = []
-    $ Girls = active_Girls[:]
-    while Girls:
+    $ other_Girls = active_Girls[:]
+    while other_Girls:
         #fills the list with all girls in the room
-        if Girls[0].location == bg_current:
-                $ Girls.append(Girls[0])
-        $ Girls.remove(Girls[0])
+        if other_Girls[0].location == bg_current:
+                $ Girls.append(other_Girls[0])
+        $ other_Girls.remove(other_Girls[0])
 
     $ renpy.random.shuffle(Girls)
 
-    $ Girls = Nearby[:]
-    while Girls:
+    $ other_Girls = Nearby[:]
+    while other_Girls:
         # adds any girls nearby to the back of the list
-        if Girls[0] not in Girls:
-                $ Girls.append(Girls[0])
-        $ Girls.remove(Girls[0])
+        if other_Girls[0] not in Girls:
+                $ Girls.append(other_Girls[0])
+        $ other_Girls.remove(other_Girls[0])
 
     #End Girl selections
 
     $ Nearby = []
 
-    call set_the_scene(0) #won't display Girls yet)
+    call set_the_scene(0) #won't display characters yet)
     if len(Girls) == 2:
             # there are two girls
             $ D20 = renpy.random.randint(500, 1500)
-            if (Girls[0].GirlLikeCheck(Girls[1]) + Girls[1].GirlLikeCheck(Girls[0])) >= D20:
-                "You see that [Girls[0].name] and [Girls[1].name] are sitting next to each other, which do you sit next to?"
+            if (Girls[0].GirlLikecheck(Girls[1]) + Girls[1].GirlLikecheck(Girls[0])) >= D20:
+                "You see that [Girls[0].Name] and [Girls[1].Name] are sitting next to each other, which do you sit next to?"
             else:
-                "You see that [Girls[0].name] and [Girls[1].name] are in the room, but on opposite sides."
-                $ Girls = Girls[:]
-                while Girls:
+                "You see that [Girls[0].Name] and [Girls[1].Name] are in the room, but on opposite sides."
+                $ other_Girls = Girls[:]
+                while other_Girls:
                     # adds both girls to Nearby
-                    if Girls[0] not in Nearby:
-                            $ Nearby.append(Girls[0])
-                    $ Girls.remove(Girls[0])
+                    if other_Girls[0] not in Nearby:
+                            $ Nearby.append(other_Girls[0])
+                    $ other_Girls.remove(other_Girls[0])
             menu:
                 extend ""
-                "[Girls[0].name]":
+                "[Girls[0].Name]":
                         $ Present = [Girls[0]]
                         if Girls[0] in Nearby:
                                 $ Nearby.remove(Girls[0])
-                "[Girls[1].name]":
+                "[Girls[1].Name]":
                         $ Present = [Girls[1]]
                         if Girls[1] in Nearby:
                                 $ Nearby.remove(Girls[1])
@@ -205,12 +205,12 @@ label Class_Room_Seating(Girls=[],GirlB=0,GirlLike=0,line=0,D20=0,Girls=[]):
                                 $ Nearby.remove(Girls[0])
                 "Neither":
                         "You decide to sit a distance away from either of them."
-                        $ Girls = Girls[:]
-                        while Girls:
+                        $ other_Girls = Girls[:]
+                        while other_Girls:
                             # adds both girls to Nearby
-                            if Girls[0] not in Nearby:
-                                    $ Nearby.append(Girls[0])
-                            $ Girls.remove(Girls[0])
+                            if other_Girls[0] not in Nearby:
+                                    $ Nearby.append(other_Girls[0])
+                            $ other_Girls.remove(other_Girls[0])
     #end two-girl option
     elif len(Girls) > 2:
             # there are two+ girls
@@ -218,15 +218,15 @@ label Class_Room_Seating(Girls=[],GirlB=0,GirlLike=0,line=0,D20=0,Girls=[]):
             while len(Present) < 2:
                     menu:
                         "Select up to two."
-                        "[RogueX.name]" if RogueX in Girls and RogueX not in Present:
+                        "[RogueX.Name]" if RogueX in Girls and RogueX not in Present:
                                 $ Present.append(RogueX)
-                        "[KittyX.name]" if KittyX in Girls and KittyX not in Present:
+                        "[KittyX.Name]" if KittyX in Girls and KittyX not in Present:
                                 $ Present.append(KittyX)
-                        "[LauraX.name]" if LauraX in Girls and LauraX not in Present:
+                        "[LauraX.Name]" if LauraX in Girls and LauraX not in Present:
                                 $ Present.append(LauraX)
-                        "[JeanX.name]" if JeanX in Girls and JeanX not in Present:
+                        "[JeanX.Name]" if JeanX in Girls and JeanX not in Present:
                                 $ Present.append(JeanX)
-                        "[JubesX.name]" if JubesX in Girls and JubesX not in Present:
+                        "[JubesX.Name]" if JubesX in Girls and JubesX not in Present:
                                 $ Present.append(JubesX)
                         "Done":
                                 $ Present.append("junk")
@@ -236,7 +236,7 @@ label Class_Room_Seating(Girls=[],GirlB=0,GirlLike=0,line=0,D20=0,Girls=[]):
     elif Girls:
             # there is one girl
             menu:
-                "You see [Girls[0].name] is there, do you sit next to her?"
+                "You see [Girls[0].Name] is there, do you sit next to her?"
                 "Yes":
                         $ Present.append(Girls[0])
                 "No, I'll sit away from her a bit.":
@@ -247,12 +247,12 @@ label Class_Room_Seating(Girls=[],GirlB=0,GirlLike=0,line=0,D20=0,Girls=[]):
     while "junk" in Present:
             $ Present.remove("junk")
     if len(Present) == 2:
-            "You sit between [Present[0].name] and [Present[1].name]."
-            $ Present[0].location = "bg_classroom"
-            $ Present[1].location = "bg_classroom"
+            "You sit between [Present[0].Name] and [Present[1].Name]."
+            $ Present[0].location = "bg classroom"
+            $ Present[1].location = "bg classroom"
     elif Present:
-            "You sit next to [Present[0].name]."
-            $ Present[0].location = "bg_classroom"
+            "You sit next to [Present[0].Name]."
+            $ Present[0].location = "bg classroom"
     else:
             "You sit off to the side."
 
@@ -270,7 +270,7 @@ label Class_Room_Seating(Girls=[],GirlB=0,GirlLike=0,line=0,D20=0,Girls=[]):
 
     if Present:
             call shift_focus(Present[0])
-    call set_the_scene(Quiet=1)
+    call set_the_scene(silent=1)
 
     return
 
@@ -407,13 +407,13 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
             $ line = "her"
 
     if line == "her":
-        if ApprovalCheck(Girl, 500, "I") or Girl.SEXP >= 30:
+        if Approvalcheck(Girl, 500, "I") or Girl.SEXP >= 30:
             $ Girl.change_face("sly")
 
             "[Girl.name] reads your note and smiles at you suggestively."
 
             $ line = "flirt"
-        elif ApprovalCheck(Girl, 900):
+        elif Approvalcheck(Girl, 900):
             if Girl in [RogueX, KittyX]:
                 $ Girl.change_face("confused",2)
 
@@ -480,7 +480,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
 
                 return
             "We could get some \"studying\" done right now.":
-                    if ApprovalCheck(Girl, 1000):
+                    if Approvalcheck(Girl, 1000):
                         $ Girl.change_face("sly",1)
                         $ Girl.change_stat("love", 80, 3)
                         $ Girl.change_stat("inhibition", 60, 3)
@@ -488,7 +488,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                         "[Girl.name] gets a mischevious grin on her face and leans towards you."
 
                         $ line = "flirt"
-                    elif ApprovalCheck(Girl, 700):
+                    elif Approvalcheck(Girl, 700):
                         $ Girl.change_face("smile",1)
                         $ Girl.change_stat("inhibition", 60, 2)
 
@@ -559,21 +559,21 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                 "Try and slip your hand to her lap." if line != "fondle_pussy":
                     $ line = "fondle_pussy"
 
-                    if ApprovalCheck(Girl, 1200) and Girl.FondleP and Girl.SEXP >= 40:
+                    if Approvalcheck(Girl, 1200) and Girl.FondleP and Girl.SEXP >= 40:
                         $ Girl.change_face("sly")
                         $ Girl.change_stat("love", 90, 5)
                         $ Girl.change_stat("obedience", 70, 5)
                         $ Girl.change_stat("inhibition", 60, 5)
 
                         "[Girl.name] gets a mischievous grin and places her hand on your arm."
-                    elif ApprovalCheck(Girl, 1400) and Girl.FondleP:
+                    elif Approvalcheck(Girl, 1400) and Girl.FondleP:
                         $ Girl.change_face("smile")
                         $ Girl.change_stat("love", 80, 3)
                         $ Girl.change_stat("obedience", 70, 7)
                         $ Girl.change_stat("inhibition", 60, 3)
 
                         "[Girl.name] starts slightly as your hand travels up her thigh, but then she lets out a slight grin."
-                    elif ApprovalCheck(Girl, 1500):
+                    elif Approvalcheck(Girl, 1500):
                         $ Girl.change_face("perplexed",2)
                         $ Girl.change_stat("obedience", 70, 10)
                         $ Girl.change_stat("inhibition", 60, 3)
@@ -624,21 +624,21 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                     $ D20 += 5
                 "Start fondling her tits." if line != "fondle_breasts":
                     $ line = "fondle_breasts"
-                    if ApprovalCheck(Girl, 1100) and Girl.FondleB and Girl.SEXP >= 40:
+                    if Approvalcheck(Girl, 1100) and Girl.FondleB and Girl.SEXP >= 40:
                         $ Girl.change_stat("love", 80, 5)
                         $ Girl.change_stat("obedience", 70, 5)
                         $ Girl.change_stat("inhibition", 60, 3)
                         $ Girl.change_face("sly")
 
                         "[Girl.name] closes her eyes and caresses your arm."
-                    elif ApprovalCheck(Girl, 1300) and Girl.FondleB:
+                    elif Approvalcheck(Girl, 1300) and Girl.FondleB:
                         $ Girl.change_stat("love", 80, 3)
                         $ Girl.change_stat("obedience", 70, 7)
                         $ Girl.change_stat("inhibition", 60, 3)
                         $ Girl.change_face("smile",1)
 
                         "[Girl.name] flinches as your hand travels up her ribcage, but she grins as you reach her breast."
-                    elif ApprovalCheck(Girl, 1400):
+                    elif Approvalcheck(Girl, 1400):
                         $ Girl.change_stat("obedience", 70, 10)
                         $ Girl.change_stat("inhibition", 60, 3)
                         $ Girl.change_face("perplexed",2)
@@ -670,21 +670,21 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                 "Try and pull her hand toward your lap." if not offhand_action and Player.Semen:
                     if "handjob" in Girl.recent_history:
                         "[Girl.name] grins and her hand grasps your cock again."
-                    elif ApprovalCheck(Girl, 1200) and Girl.Hand and Girl.SEXP >= 40:
+                    elif Approvalcheck(Girl, 1200) and Girl.Hand and Girl.SEXP >= 40:
                         $ Girl.change_face("sly")
                         $ Girl.change_stat("love", 90, 5)
                         $ Girl.change_stat("obedience", 70, 5)
                         $ Girl.change_stat("inhibition", 60, 5)
 
                         "[Girl.name] gets a mischievous grin and her hand starts to caress your crotch."
-                    elif ApprovalCheck(Girl, 1400) and Girl.FondleP:
+                    elif Approvalcheck(Girl, 1400) and Girl.FondleP:
                         $ Girl.change_face("smile")
                         $ Girl.change_stat("love", 80, 3)
                         $ Girl.change_stat("obedience", 70, 7)
                         $ Girl.change_stat("inhibition", 60, 3)
 
                         "[Girl.name] starts slightly as your move her hand up your thigh, but then she lets out a slight grin."
-                    elif ApprovalCheck(Girl, 1500):
+                    elif Approvalcheck(Girl, 1500):
                         $ Girl.change_face("perplexed",2)
                         $ Girl.change_stat("obedience", 70, 10)
                         $ Girl.change_stat("inhibition", 60, 3)
@@ -720,7 +720,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                         $ D20 += 5
                 "Stop her handjob." if offhand_action:
                     "You put a hand on her wrist and nudge her hand away."
-                    if ApprovalCheck(Girl, 1800) or ApprovalCheck(Girl, 700, "O") or (Girl.love+Girl.obedience) >= (2*Girl.inhibition):
+                    if Approvalcheck(Girl, 1800) or Approvalcheck(Girl, 700, "O") or (Girl.love+Girl.obedience) >= (2*Girl.inhibition):
                         $ Girl.change_face("sad")
                         $ Girl.change_stat("love", 90, -1)
                         $ Girl.change_stat("obedience", 60, 2)
@@ -744,7 +744,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                             $ D20 += 2
 
             if not offhand_action and Player.Semen and "stophand" not in Girl.recent_history:
-                if ApprovalCheck(Girl, 1200) and ApprovalCheck(Girl, 400, "I") and Girl.Hand and Girl.SEXP >= 40:
+                if Approvalcheck(Girl, 1200) and Approvalcheck(Girl, 400, "I") and Girl.Hand and Girl.SEXP >= 40:
                     $ Girl.change_face("sly")
 
                     "[Girl.name] gets a mischievous grin and her hand starts to caress your crotch."
@@ -785,7 +785,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
 
                             $ Girl.recent_history.append("stophand")
 
-                            if ApprovalCheck(Girl, 1800) or ApprovalCheck(Girl, 700, "O") or (Girl.love+Girl.obedience) >= (2*Girl.inhibition):
+                            if Approvalcheck(Girl, 1800) or Approvalcheck(Girl, 700, "O") or (Girl.love+Girl.obedience) >= (2*Girl.inhibition):
                                 $ Girl.change_face("sad")
                                 $ Girl.change_stat("love", 90, -1)
                                 $ Girl.change_stat("obedience", 60, 2)
@@ -818,7 +818,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
 
                     $ Player.Semen -= 1
 
-                    if (Girl.Blow and ApprovalCheck(Girl, 1200)) or Girl == JubesX:
+                    if (Girl.Blow and Approvalcheck(Girl, 1200)) or Girl == JubesX:
                         "She quickly licks it all up."
 
                         $ Girl.Addict -= 20
@@ -915,7 +915,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                         $ Girl.GirlLikeUp(Present[1],-2)
 
                         call remove_girl(Present[1])
-                    elif ApprovalCheck(Present[1], 1500) and Present[1].GirlLikeCheck(Girl) >= 600:
+                    elif Approvalcheck(Present[1], 1500) and Present[1].GirlLikecheck(Girl) >= 600:
                         $ Present[1].Eyes = "leftside"
 
                         "[Present[1].name] seems to notice what you and [Girl.name] are doing."
@@ -924,7 +924,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
 
                         "She seems to be kinda into it. . ."
 
-                        if ApprovalCheck(Present[1], 800, "I") or "exhibitionist" in Present[1].Traits:
+                        if Approvalcheck(Present[1], 800, "I") or "exhibitionist" in Present[1].Traits:
                             $ Girl.change_stat("inhibition", 90, 3)
                             $ Present[1].GirlLikeUp(Girl,3)
                             $ Girl.GirlLikeUp(Present[1],5)
@@ -1012,7 +1012,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
                     if lineB:
                         "[lineB]"
 
-        if "exhibitionist" not in Girl.Traits and not ApprovalCheck(Girl, 700,"I"):
+        if "exhibitionist" not in Girl.Traits and not Approvalcheck(Girl, 700,"I"):
             $ line = "too far"
 
         if line not in ("rejected", "handholding", "tease"):
@@ -1023,7 +1023,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
 
                     "[Teacher.name] stops her lecture in mid-sentence when she notices what you and [Girl.name] are up to."
 
-                    if ApprovalCheck(Teacher, 1500) and Teacher.GirlLikeCheck(Girl) >= 600:
+                    if Approvalcheck(Teacher, 1500) and Teacher.GirlLikecheck(Girl) >= 600:
                         $ Teacher.change_face("sly",1)
 
                         if line == "too far":
@@ -1040,7 +1040,7 @@ label Frisky_Class(Girl = 0, Teacher = 0, lineB = 0, Girls = []):
 
                         $ Girl.change_face("sly",1)
 
-                        if ApprovalCheck(Teacher, 800, "I") or "exhibitionist" in Teacher.Traits:
+                        if Approvalcheck(Teacher, 800, "I") or "exhibitionist" in Teacher.Traits:
                             $ Teacher.change_stat("inhibition", 90, 3)
                             $ Teacher.GirlLikeUp(Girl,3)
                             $ Girl.GirlLikeUp(Teacher,5)

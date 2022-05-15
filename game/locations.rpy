@@ -115,8 +115,8 @@ label Campus_Map:
     $ primary_action = 0
     $ offhand_action = 0
     $ girl_offhand_action = 0
-    $ Partner_primary_action = 0
-    $ Partner_offhand_action = 0
+    $ second_girl_primary_action = 0
+    $ second_girl_offhand_action = 0
     $ bg_current = "bg_campus"
     $ door_locked = False
     call set_the_scene
@@ -125,7 +125,7 @@ label Campus_Map:
     jump Campus
 
 label Campus_Entry:
-    call Jubes_Entry_Check
+    call Jubes_Entry_check
     $ door_locked = False
     $ bg_current = "bg_campus"
     $ Nearby = []
@@ -139,9 +139,9 @@ label Campus:
     $ bg_current = "bg_campus"
     $ Player.DrainWord("traveling",1,0)
     call Taboo_Level
-    call set_the_scene(Quiet=1)
+    call set_the_scene(silent=1)
     call QuickEvents
-    call Checkout(1)
+    call checkout(1)
     call GirlsAngry
     if time_index == 2 and "yesdate" in Player.daily_history: #evening
             #if it's evening and you have a date lined up. . .
@@ -217,7 +217,7 @@ label Campus:
     jump Campus
 
 label Study_Room_Entry:
-    call Jubes_Entry_Check
+    call Jubes_Entry_check
     $ door_locked = False
     $ Nearby = []
     $ bg_current = "bg_study"
@@ -266,7 +266,7 @@ label Study_Room_Entry:
                                 jump Study_Room
                             elif "no_thief" in KittyX.recent_history:
                                 ch_k "I told you, no."
-                            elif ApprovalCheck(KittyX, 400, "I") or ApprovalCheck(KittyX, 1400):
+                            elif Approvalcheck(KittyX, 400, "I") or Approvalcheck(KittyX, 1400):
                                 $ KittyX.change_stat("love", 90, 3)
                                 $ KittyX.change_stat("obedience", 50, 10)
                                 $ KittyX.change_stat("inhibition", 60, 10)
@@ -285,7 +285,7 @@ label Study_Room_Entry:
                                 jump Study_Room
                             elif "no_thief" in KittyX.recent_history:
                                 ch_k "I told you, no."
-                            elif ApprovalCheck(KittyX, 500, "O") or ApprovalCheck(KittyX, 1600):
+                            elif Approvalcheck(KittyX, 500, "O") or Approvalcheck(KittyX, 1600):
                                 $ KittyX.change_stat("obedience", 50, 15)
                                 $ KittyX.change_stat("inhibition", 60, 10)
                                 ch_k "Heh, if you say so. . ."
@@ -309,7 +309,7 @@ label Study_Room_Entry:
                     "Do you think you could pick that lock?" if "Sneakthief" not in StormX.Traits:
                             if "no_thief" in StormX.recent_history:
                                 ch_s "I told you, I won't do that."
-                            elif ApprovalCheck(StormX, 400, "I") or ApprovalCheck(StormX, 1400):
+                            elif Approvalcheck(StormX, 400, "I") or Approvalcheck(StormX, 1400):
                                 $ StormX.change_stat("love", 90, 3)
                                 $ StormX.change_stat("obedience", 80, 10)
                                 $ StormX.change_stat("inhibition", 60, 10)
@@ -343,9 +343,9 @@ label Study_Room:
     $ bg_current = "bg_study"
     $ Player.DrainWord("traveling",1,0)
     call Taboo_Level
-    call set_the_scene(Quiet=1)
+    call set_the_scene(silent=1)
     call QuickEvents
-    call Checkout(1)
+    call checkout(1)
     if Round <= 10:
             if time_index >= 3: #night time
                 "It's late, you head back to your room."
@@ -367,43 +367,43 @@ label Study_Room:
                     call Chat
 
         "Plan Omega!" if time_index < 3 and RogueX.location == bg_current and Player.Lvl >= 5:
-                    if ApprovalCheck(RogueX, 1500, TabM=1, Loc="No"):
+                    if Approvalcheck(RogueX, 1500, TabM=1, Loc="No"):
                         call Xavier_Plan(RogueX) #Plan_Omega
                     else:
                         ch_r "I don't want to do that. . ."
         "Plan Kappa!" if time_index < 3 and KittyX.location == bg_current and Player.Lvl >= 5:
-                    if "Xavier's photo" in Player.Inventory and ApprovalCheck(KittyX, 1500, TabM=1, Loc="No"):
+                    if "Xavier's photo" in Player.Inventory and Approvalcheck(KittyX, 1500, TabM=1, Loc="No"):
                         call Xavier_Plan(KittyX) #Plan_Kappa
                     elif "Xavier's photo" in Player.Inventory:
                         ch_k "I don't really want to do that. . ."
                     else:
                         ch_k "What?"
         "Plan Psi!" if time_index < 3 and EmmaX.location == bg_current and Player.Lvl >= 5:
-                    if ApprovalCheck(EmmaX, 1500, TabM=1, Loc="No"):
+                    if Approvalcheck(EmmaX, 1500, TabM=1, Loc="No"):
                         call Xavier_Plan(EmmaX) #Plan_Psi
                     else:
                         ch_e "I'd rather not. . ."
         "Plan Chi!" if time_index < 3 and LauraX.location == bg_current and Player.Lvl >= 5:
-                    if LauraX.Lvl >= 2 and ApprovalCheck(LauraX, 1500, TabM=1, Loc="No") and ApprovalCheck(LauraX, 750, "I"):
+                    if LauraX.Lvl >= 2 and Approvalcheck(LauraX, 1500, TabM=1, Loc="No") and Approvalcheck(LauraX, 750, "I"):
                         call Xavier_Plan(LauraX) #Plan_Chi
-                    elif LauraX.Lvl < 2 or not ApprovalCheck(LauraX, 750, "I"):
+                    elif LauraX.Lvl < 2 or not Approvalcheck(LauraX, 750, "I"):
                         ch_l "I'm not ready for that."
                     else:
                         ch_l "Huh?"
         "Plan Alpha!" if time_index < 3 and JeanX.location == bg_current and Player.Lvl >= 5:
-                    if ApprovalCheck(JeanX, 1500, TabM=1, Loc="No"):
+                    if Approvalcheck(JeanX, 1500, TabM=1, Loc="No"):
                         call Xavier_Plan(JeanX) #Plan_Chi
                     else:
                         ch_j "You're on your own there."
         "Plan Rho!" if time_index < 3 and StormX.location == bg_current and Player.Lvl >= 5:
-                    if "Xavier's files" in Player.Inventory and ApprovalCheck(StormX, 1500, TabM=1, Loc="No"):
+                    if "Xavier's files" in Player.Inventory and Approvalcheck(StormX, 1500, TabM=1, Loc="No"):
                         call Xavier_Plan(StormX) #Plan_Rho
                     elif "Xavier's files" in Player.Inventory:
                         ch_s "I do not believe that would be approrpriate."
                     else:
                         ch_s "What is that?"
         "Plan Zeta!" if time_index < 3 and JubesX.location == bg_current and Player.Lvl >= 5:
-                    if ApprovalCheck(JubesX, 1500, TabM=1, Loc="No"):
+                    if Approvalcheck(JubesX, 1500, TabM=1, Loc="No"):
                         call Xavier_Plan(JubesX) #Plan_Zeta
                     else:
                         ch_v "What's a \"Zeta?\""
@@ -482,8 +482,8 @@ label Study_Room_Explore:
                 if KittyX.location == bg_current:
                     menu:
                         "Since [KittyX.name] is around, have her check inside?"
-                        "Check in the box":
-                            if ApprovalCheck(KittyX, 700, "I") or ApprovalCheck(KittyX, 1800):
+                        "check in the box":
+                            if Approvalcheck(KittyX, 700, "I") or Approvalcheck(KittyX, 1800):
                                 if "Well Studied" not in Achievements:
                                         $ KittyX.change_stat("obedience", 50, 10)
                                         $ KittyX.change_stat("inhibition", 60, 15)
@@ -505,8 +505,8 @@ label Study_Room_Explore:
                 elif StormX.location == bg_current:
                     menu:
                         "Since [StormX.name] is around, have her check inside?"
-                        "Check in the box":
-                            if ApprovalCheck(StormX, 700, "I") or ApprovalCheck(StormX, 1800):
+                        "check in the box":
+                            if Approvalcheck(StormX, 700, "I") or Approvalcheck(StormX, 1800):
                                 if "Well Studied" not in Achievements:
                                         $ StormX.change_stat("obedience", 50, 10)
                                         $ StormX.change_stat("inhibition", 60, 15)

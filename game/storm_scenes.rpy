@@ -641,7 +641,7 @@ label Storm_Teacher_Caught(Girl = 0):
     #add options for getting away with it
     if  "noticed " + Girl.Tag in StormX.recent_history:
             return
-    if ApprovalCheck(StormX, 500, "I") and ApprovalCheck(StormX, 1500) and StormX.GirlLikeCheck(Girl) >= 500:
+    if Approvalcheck(StormX, 500, "I") and Approvalcheck(StormX, 1500) and StormX.GirlLikecheck(Girl) >= 500:
             "[StormX.name] notices the two of you, but just nods in approval and continues on."
             $ StormX.GLG(Girl,800,3,1)
             $ Girl.GLG(StormX,800,3,1)
@@ -649,21 +649,21 @@ label Storm_Teacher_Caught(Girl = 0):
             return
 
     ch_s "[Player.name]? [Girl.name]? Could you please stop what you are doing there?"
-    call Checkout(1)
+    call checkout(1)
 
     $ Girl.change_face("bemused", 2, Eyes="side")
     call AllReset(Girl)
-    if ApprovalCheck(Girl, 700, "I"):
+    if Approvalcheck(Girl, 700, "I"):
             $ Girl.change_face("bemused", 1)
             "[Girl.name] shrugs and returns to her seat."
-            call Partner_Like(StormX,2,-1,500,Girl) #if likes emma 500+, +2, else -1
+            call second_girl_Like(StormX,2,-1,500,Girl) #if likes emma 500+, +2, else -1
     else:
             "[Girl.name] jumps and dashes out of the room."
-            call Partner_Like(StormX,-2,-3,500,Girl) #if likes emma 500+, -2, else -3
+            call second_girl_Like(StormX,-2,-3,500,Girl) #if likes emma 500+, -2, else -3
             call remove_girl(Girl)
 
     $ Girl.Rep -= 1
-    call Partner_Like(Girl,3,2,800,StormX)  #if likes the girl 800+, +3, else +2
+    call second_girl_Like(Girl,3,2,800,StormX)  #if likes the girl 800+, +3, else +2
     $ StormX.GLG(Girl,800,3,1)
 
     $ Player.Rep -= 1
@@ -706,7 +706,7 @@ label Storm_Hairtalk:
                 $ StormX.change_stat("inhibition", 80, 2)
                 $ StormX.change_face("surprised")
                 ch_s ". . ."
-                if ApprovalCheck(StormX, 700):
+                if Approvalcheck(StormX, 700):
                     $ StormX.change_face("confused",Eyes="side")
                     $ StormX.change_stat("love", 70, 2)
                     ch_s "That is. . . sweet."
@@ -743,7 +743,7 @@ label Storm_Hairtalk:
                 $ StormX.Eyes = "leftside"
                 pause 0.4
                 $ StormX.Eyes = "squint"
-                if ApprovalCheck(StormX, 700):
+                if Approvalcheck(StormX, 700):
                     $ StormX.change_stat("love", 70, 2)
                     $ StormX.change_stat("inhibition", 60, 1)
                     ch_s "I. . . suppose that I might accomodate that. . ."
@@ -766,7 +766,7 @@ label Storm_Hairtalk:
                 $ StormX.Eyes = "leftside"
                 pause 0.4
                 $ StormX.Eyes = "squint"
-                if ApprovalCheck(StormX, 800):
+                if Approvalcheck(StormX, 800):
                     $ StormX.change_stat("inhibition", 50, 1)
                     $ StormX.change_stat("inhibition", 80, 2)
                     $ Taboo = 0
@@ -782,7 +782,7 @@ label Storm_Hairtalk:
         "Maybe a kiss?":
                 $ StormX.change_stat("love", 70, 1)
                 $ StormX.change_face("bemused")
-                if ApprovalCheck(StormX, 700) or StormX.Kiss:
+                if Approvalcheck(StormX, 700) or StormX.Kiss:
                     $ StormX.change_stat("love", 80, 3)
                     $ StormX.change_stat("obedience", 80, 1)
                     $ StormX.change_stat("inhibition", 80, 1)
@@ -793,7 +793,7 @@ label Storm_Hairtalk:
                     ch_s "I do not think that I should do that. . ."
         "Maybe some fondling?":
                 $ StormX.change_stat("obedience", 80, 2)
-                if ApprovalCheck(StormX, 900) or ((StormX.FondleB + StormX.FondleP + StormX.FondleA) > 0):
+                if Approvalcheck(StormX, 900) or ((StormX.FondleB + StormX.FondleP + StormX.FondleA) > 0):
                     $ StormX.change_face("bemused", 1,Eyes="side")
                     pause 0.4
                     $ StormX.Eyes = "leftside"
@@ -832,7 +832,7 @@ label Storm_Hairtalk:
                             $ StormX.change_stat("love", 50, 1)
                             $ StormX.change_stat("love", 70, 1)
                             $ StormX.change_stat("obedience", 80, 2)
-                            if ApprovalCheck(StormX, 700):
+                            if Approvalcheck(StormX, 700):
                                 ch_s "I think that I shall."
                                 $ StormX.Todo.append("hair")
                             else:
@@ -917,7 +917,7 @@ label Storm_Detention:
             menu:
                 extend ""
                 "I guess I should focus on my studies.":
-                        if ApprovalCheck(StormX, 900) and "classcaught" in StormX.History:
+                        if Approvalcheck(StormX, 900) and "classcaught" in StormX.History:
                                 $ StormX.change_face("perplexed")
                                 $ StormX.change_stat("inhibition", 70, -3)
                                 $ StormX.change_stat("lust", 80, 5)
@@ -957,7 +957,7 @@ label Storm_Detention:
                                         $ StormX.change_stat("lust", 80, 5)
                                         $ Player.XP += 10
                 "I could think of a few things. . . [[sex stuff]":
-                        if ApprovalCheck(StormX, 900) and "classcaught" in StormX.History:
+                        if Approvalcheck(StormX, 900) and "classcaught" in StormX.History:
                                 $ StormX.change_face("sly")
                                 $ StormX.change_stat("lust", 80, 5)
                                 $ StormX.change_stat("love", 90, 5)
@@ -1026,7 +1026,7 @@ label Storm_love:
             "Ok.":
                     $ StormX.change_stat("love", 200, -3)
                     $ StormX.change_face("confused",1)
-                    if not ApprovalCheck(StormX, 800, "OI"):
+                    if not Approvalcheck(StormX, 800, "OI"):
                             $ StormX.Event[6] += 1
                             $ StormX.change_stat("love", 200, -2)
                     ch_s ". . ."
@@ -1056,7 +1056,7 @@ label Storm_love:
                     $ StormX.change_stat("obedience", 90, 3)
                     $ StormX.change_stat("inhibition", 80, 5)
                     $ StormX.change_face("confused",1)
-                    if not ApprovalCheck(StormX, 600, "OI"):
+                    if not Approvalcheck(StormX, 600, "OI"):
                             $ StormX.change_stat("love", 200, -3)
                             $ StormX.Event[6] += 1
                             $ StormX.change_face("sly",1)
@@ -1065,7 +1065,7 @@ label Storm_love:
             "Ok":
                     $ StormX.change_stat("obedience", 70, 2)
                     $ StormX.change_face("confused",1)
-                    if not ApprovalCheck(StormX, 800, "OI"):
+                    if not Approvalcheck(StormX, 800, "OI"):
                             $ StormX.change_stat("love", 200, -2)
                             $ StormX.Event[6] += 1
                             $ StormX.change_face("angry",1)
@@ -1092,7 +1092,7 @@ label Storm_love:
             "Wow.":
                     $ StormX.change_stat("obedience", 90, 2)
                     $ StormX.change_face("confused",1)
-                    if not ApprovalCheck(StormX, 600, "OI"):
+                    if not Approvalcheck(StormX, 600, "OI"):
                             $ StormX.change_stat("love", 200, -3)
                             $ StormX.change_stat("inhibition", 80, -2)
                             $ StormX.Event[6] += 1
@@ -1111,7 +1111,7 @@ label Storm_love:
                     $ StormX.change_stat("obedience", 80, 2)
                     $ StormX.change_stat("inhibition", 80, 1)
                     $ StormX.change_face("sadside",1)
-                    if not ApprovalCheck(StormX, 800, "OI"):
+                    if not Approvalcheck(StormX, 800, "OI"):
                             $ StormX.change_stat("love", 200, -3)
                             $ StormX.Event[6] += 1
                             $ StormX.change_face("angry",1)
@@ -1232,7 +1232,7 @@ label Storm_love:
                         ch_s "It is not. . . \"lady problems.\""
                 "[[shrug]":
                         $ StormX.change_stat("love", 200, -3)
-                        if not ApprovalCheck(StormX, 800, "OI"):
+                        if not Approvalcheck(StormX, 800, "OI"):
                             $ StormX.change_stat("love", 200, -2)
                             $ StormX.Event[6] += 2
                         $ StormX.change_face("angry",1)
@@ -1271,7 +1271,7 @@ label Storm_love_Redux:
                     $ StormX.change_stat("obedience", 80, 2)
                     $ StormX.change_stat("inhibition", 90, 3)
                     $ StormX.change_face("sly",1)
-                    if not ApprovalCheck(StormX, 600, "OI"):
+                    if not Approvalcheck(StormX, 600, "OI"):
                             $ StormX.change_stat("love", 200, -3)
                             $ StormX.Event[6] += 1
                             $ StormX.change_face("angry",1,Mouth="smile")
@@ -1284,7 +1284,7 @@ label Storm_love_Redux:
             "Ok.":
                     $ StormX.change_stat("love", 200, -2)
                     $ StormX.change_face("bemused",1)
-                    if not ApprovalCheck(StormX, 800, "OI"):
+                    if not Approvalcheck(StormX, 800, "OI"):
                             $ StormX.change_stat("love", 200, -3)
                             $ StormX.Event[6] += 1
                             $ StormX.change_face("angry",2)
@@ -1312,7 +1312,7 @@ label Storm_love_Redux:
                     $ StormX.change_stat("obedience", 80, 2)
                     $ StormX.change_stat("inhibition", 80, -2)
                     $ StormX.change_face("confused",1)
-                    if not ApprovalCheck(StormX, 1200):
+                    if not Approvalcheck(StormX, 1200):
                             $ StormX.change_stat("love", 200, -5)
                             $ StormX.Event[6] += 1
                     ch_s "You have nothing more to add than that?"
@@ -1327,12 +1327,12 @@ label Storm_love_Redux:
                     $ StormX.change_stat("obedience", 90, 5)
                     $ StormX.change_stat("inhibition", 80, -2)
                     $ StormX.change_face("bemused",1)
-                    if not ApprovalCheck(StormX, 1200):
+                    if not Approvalcheck(StormX, 1200):
                             $ StormX.change_face("angry",1)
                             $ StormX.Event[6] += 1
                     ch_s "Please, do not overwhelm me with your affections. . ."
             "Ok.":
-                    if not ApprovalCheck(StormX, 800, "OI"):
+                    if not Approvalcheck(StormX, 800, "OI"):
                             $ StormX.change_face("angry",1)
                             $ StormX.change_stat("love", 200, -2)
                             $ StormX.Event[6] += 1
@@ -1373,7 +1373,7 @@ label Storm_love_Redux:
                     $ StormX.change_stat("inhibition", 80, 2)
                     $ StormX.change_face("confused",1)
                     ch_s ". . ."
-                    if not ApprovalCheck(StormX, 900, "L"):
+                    if not Approvalcheck(StormX, 900, "L"):
                             $ StormX.change_stat("love", 200, (901-StormX.love))
                     $ StormX.change_face("smile",1,Eyes="side")
                     ch_s "Ok."
@@ -1587,10 +1587,10 @@ label Storm_Sub_Asked: #Storm_Update
         menu:
             extend ""
             "Well, I wanted to say I was sorry.  And I was hoping maybe we could give it another shot.":
-                    if "sir" in StormX.Petnames and ApprovalCheck(StormX, 850, "O"):
-                            #if this is asking about the "master" name, and her obedienceience is higher than 700
+                    if "sir" in StormX.Petnames and Approvalcheck(StormX, 850, "O"):
+                            #if this is asking about the "master" name, and her obedience is higher than 700
                             pass
-                    elif ApprovalCheck(StormX, 550, "O"):
+                    elif Approvalcheck(StormX, 550, "O"):
                             #if it's instead about earning the "sir" title, and her approval is over 500
                             pass
                     else: #if it failed both those things,
@@ -1603,10 +1603,10 @@ label Storm_Sub_Asked: #Storm_Update
                             ch_s "I appreciate that. . ."
                             ch_s "Fine, we can give it another try."
             "I get it now.":
-                    if "sir" in StormX.Petnames and ApprovalCheck(StormX, 850, "O"):
-                            #if this is asking about the "master" name, and her obedienceience is higher than 700
+                    if "sir" in StormX.Petnames and Approvalcheck(StormX, 850, "O"):
+                            #if this is asking about the "master" name, and her obedience is higher than 700
                             pass
-                    elif ApprovalCheck(StormX, 550, "O"):
+                    elif Approvalcheck(StormX, 550, "O"):
                             #if it's instead about earning the "sir" title, and her approval is over 500
                             pass
                     else: #if it failed both those things,
@@ -1620,10 +1620,10 @@ label Storm_Sub_Asked: #Storm_Update
                             $ StormX.change_face("sly",1)
                             ch_s "We will see."
             "You know you want it.":
-                    if "sir" in StormX.Petnames and ApprovalCheck(StormX, 850, "O"):
-                            #if this is asking about the "master" name, and her obedienceience is higher than 700
+                    if "sir" in StormX.Petnames and Approvalcheck(StormX, 850, "O"):
+                            #if this is asking about the "master" name, and her obedience is higher than 700
                             pass
-                    elif ApprovalCheck(StormX, 550, "O"):
+                    elif Approvalcheck(StormX, 550, "O"):
                             #if it's instead about earning the "sir" title, and her approval is over 500
                             pass
                     else: #if it failed both those things,

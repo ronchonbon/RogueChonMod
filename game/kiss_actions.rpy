@@ -5,9 +5,9 @@ label kiss(Girl):
 
     call shift_focus(Girl)
 
-    $ Approval = ApprovalCheck(Girl, 700, TabM=1,Alt=[[RogueX,JeanX],500]) #reduced check for Rogue
+    $ Approval = Approvalcheck(Girl, 700, TabM=1,Alt=[[RogueX,JeanX],500]) #reduced check for Rogue
 
-    if Girl == EmmaX and not ApprovalCheck(Girl, 1000):
+    if Girl == EmmaX and not Approvalcheck(Girl, 1000):
         $ Girl.change_face("sadside")
 
         ch_e "Not when we barely know each other. . ."
@@ -57,7 +57,7 @@ label kiss(Girl):
         if Girl == KittyX:
             ch_k "Prrr. . ."
         else:
-            call Anyline(Girl,"Mmmm. . .")
+            Girl.voice "Mmmm. . ."
 
         jump before_kiss
     elif Approval and "kissing" in Girl.daily_history:
@@ -65,7 +65,7 @@ label kiss(Girl):
 
         $ line = renpy.random.choice(["A","B","C"])
         if line == "A":
-            call Anyline(Girl,"Didn't get enough earlier?")
+            Girl.voice "Didn't get enough earlier?"
         elif Girl == RogueX:
             if line == "B":
                 ch_r "{i}I'm{/i} used to being the one sucking people dry. . ."
@@ -120,7 +120,7 @@ label kiss(Girl):
             ch_s "Hrm. . ."
         elif Girl == JubesX:
             ch_v "Mmmm. . ."
-    elif ApprovalCheck(Girl, 500, "O") and Girl.obedience > Girl.love:
+    elif Approvalcheck(Girl, 500, "O") and Girl.obedience > Girl.love:
         $ Girl.change_face("normal")
 
         if Girl == RogueX:
@@ -139,10 +139,10 @@ label kiss(Girl):
             ch_v "Sure. . ."
 
         $ Girl.change_stat("obedience", 60, 1)
-    elif ApprovalCheck(Girl, 250, "O",Alt=[[KittyX,LauraX],300]) and ApprovalCheck(Girl, 250, "L",Alt=[[KittyX,LauraX],200]):
+    elif Approvalcheck(Girl, 250, "O",Alt=[[KittyX,LauraX],300]) and Approvalcheck(Girl, 250, "L",Alt=[[KittyX,LauraX],200]):
         $ Girl.change_face("bemused")
 
-        call Anyline(Girl,"Ok, fine.")
+        Girl.voice "Ok, fine."
 
         $ Girl.change_stat("obedience", 50, 3)
     elif Girl.Addict >= 50:
@@ -264,7 +264,7 @@ label before_kiss:
 
                     ch_p "Mmm, this is a nice surprise, [focused_Girl.Pet]."
 
-                    $ focused_Girl.nameCheck() #checks reaction to petname
+                    $ focused_Girl.namecheck() #checks reaction to petname
 
                     "You lean in to the kiss."
 
@@ -278,7 +278,7 @@ label before_kiss:
 
                     ch_p "Let's not do that right now, [focused_Girl.Pet]."
 
-                    $ focused_Girl.nameCheck() #checks reaction to petname
+                    $ focused_Girl.namecheck() #checks reaction to petname
                     $ focused_Girl.change_stat("obedience", 90, 1)
                     $ focused_Girl.change_stat("obedience", 50, 1)
                     $ focused_Girl.change_stat("obedience", 30, 2)
@@ -374,7 +374,7 @@ label kiss_cycle:
 
                                                 $ primary_action = "fondle_breasts"
 
-                                                call before_fondle
+                                                call before_action
                                             else:
                                                 $ primary_action = "kiss"
                                         else:
@@ -386,14 +386,14 @@ label kiss_cycle:
                                             $ action_context = "auto"
 
                                             call after_kiss
-                                            call fondle_thighs
+                                            call fondle_thighs(focused_Girl)
 
                                             if primary_action == "fondle_thighs":
                                                     $ offhand_action = "kiss"
 
                                                     $ primary_action = "fondle_thighs"
 
-                                                    call before_fondle
+                                                    call before_action
                                             else:
                                                 $ primary_action = "kiss"
                                         else:
@@ -414,9 +414,9 @@ label kiss_cycle:
                                     pass
                                 "Ask [Partner.name] to do something else":
                                     call Three_Change(focused_Girl)
-                                "Don't stop what you're doing. . .(locked)" if not position_change_timer or not Partner_primary_action:
+                                "Don't stop what you're doing. . .(locked)" if not position_change_timer or not second_girl_primary_action:
                                     $ position_change_timer = 0
-                                "Don't stop what you're doing. . ." if position_change_timer and Partner_primary_action:
+                                "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
                                     $ position_change_timer = 0
                                 "Swap to [Partner.name]":
                                     call primary_action_Swap(focused_Girl)
@@ -519,7 +519,7 @@ label after_kiss:
     $ focused_Girl.Addictionrate += 2 if focused_Girl.Addictionrate < 5 else 1
     $ focused_Girl.Addictionrate += 1 if Player.addictive else 0
 
-    call Partner_Like(focused_Girl, 1) #raises other girl's like levels if watching
+    call second_girl_Like(focused_Girl, 1) #raises other girl's like levels if watching
 
     if "kissing" not in focused_Girl.recent_history:
         if focused_Girl.love > 300:
@@ -572,7 +572,7 @@ label after_kiss:
 
         $ focused_Girl.SEXP += 1
 
-    if not action_context and focused_Girl.Kissed > 5 and focused_Girl.lust > 50 and ApprovalCheck(focused_Girl, 950):
+    if not action_context and focused_Girl.Kissed > 5 and focused_Girl.lust > 50 and Approvalcheck(focused_Girl, 950):
         $ focused_Girl.change_face("sexy", 1)
         $ focused_Girl.Brows = "sad"
 
@@ -593,7 +593,7 @@ label after_kiss:
 
     $ temp_modifier = 0
 
-    call Checkout
+    call checkout
 
     if action_context:
         call Sex_Basic_Dialog(focused_Girl, "switch")

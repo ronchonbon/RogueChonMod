@@ -38,7 +38,7 @@ label Jackin(Girl=0,counter=0,Girls=[]): #rkeljsv
                         $ Girl.change_face("angry", 1)
                         ch_e "That really isn't appropriate."
                         $ Girl.change_stat("lust", 50, 7)
-                        if not ApprovalCheck(EmmaX, 1200, TabM = 3):
+                        if not Approvalcheck(EmmaX, 1200, TabM = 3):
                                 $ Girl.AddWord(0,"angry","angry",0,0)
                                 $ renpy.pop_call()
                                 return
@@ -53,7 +53,7 @@ label Jackin(Girl=0,counter=0,Girls=[]): #rkeljsv
                                 "[Girl.name] blushes furiously, shocked at your behavior."
                         $ Girl.change_face("angry", 1)
                         $ Girl.change_stat("lust", 50, 5)
-                        if not ApprovalCheck(Girl, 1200, TabM = 3):
+                        if not Approvalcheck(Girl, 1200, TabM = 3):
                                 $ Girl.AddWord(0,"angry","angry",0,0)
                                 $ renpy.pop_call()
                                 return
@@ -68,20 +68,20 @@ label Jackin(Girl=0,counter=0,Girls=[]): #rkeljsv
                                 "[Girl.name] looks down at your cock with surprise."
                         $ Girl.change_face("perplexed", 1)
                         $ Girl.change_stat("lust", 60, 8)
-                        if not ApprovalCheck(Girl, 1200, TabM = 3) and Girl != JeanX:
+                        if not Approvalcheck(Girl, 1200, TabM = 3) and Girl != JeanX:
                                 return
-                elif ApprovalCheck(Girl, 1100, TabM = 3):
+                elif Approvalcheck(Girl, 1100, TabM = 3):
                         $ Girl.change_face("surprised", 1)
                         $ Girl.Eyes = "down"
                         "[Girl.name] looks down at your cock and smiles."
                         $ Girl.change_face("sly", 1)
-                        $ Girl.change_stat("lust", 70, 8, alternates = {"Emma": {"check": 60, "value": 12})
-                elif ApprovalCheck(Girl, 500, "I", TabM=2):
+                        $ Girl.change_stat("lust", 70, 8, alternates = {"Emma": {"check": 60, "value": 12}})
+                elif Approvalcheck(Girl, 500, "I", TabM=2):
                         $ Girl.change_face("surprised", 1)
                         $ Girl.Eyes = "down"
                         "[Girl.name] glances at it, but just smiles in amusement."
                         $ Girl.change_face("sly", 1)
-                        $ Girl.change_stat("lust", 70, 10, alternates = {"Emma": {"check": 60, "value": 15})
+                        $ Girl.change_stat("lust", 70, 10, alternates = {"Emma": {"check": 60, "value": 15}})
                 else:
                         $ Girl.change_face("angry", 1)
                         $ Girl.Eyes = "down"
@@ -93,33 +93,33 @@ label Jackin(Girl=0,counter=0,Girls=[]): #rkeljsv
                 if Girl.Action and Girl.location == bg_current:
                     $ Girls = ["none"]
 
-                    if Girl.Hand >= 5 and ApprovalCheck(Girl, 1100, TabM = 3):
+                    if Girl.Hand >= 5 and Approvalcheck(Girl, 1100, TabM = 3):
                             $ counter = Girl.Hand - 4
                             $ counter = 10 if counter > 10 else counter
                             while counter:
                                 $ Girls.append("handjob")
                                 $ counter -= 1
-                    if Girl.Blow >= 5 and ApprovalCheck(Girl, 1300, TabM = 3):
+                    if Girl.Blow >= 5 and Approvalcheck(Girl, 1300, TabM = 3):
                             $ counter = Girl.Blow - 4
                             $ counter = 10 if counter > 10 else counter
                             $ counter += 5 if "hungry" in Girl.Traits else 0
                             while counter:
                                 $ Girls.append("blowjob")
                                 $ counter -= 1
-                    if Girl.Tit >= 5 and ApprovalCheck(Girl, 1200, TabM = 5):
+                    if Girl.Tit >= 5 and Approvalcheck(Girl, 1200, TabM = 5):
                             $ counter = Girl.Tit - 4
                             $ counter = 10 if counter > 10 else counter
                             while counter:
                                 $ Girls.append("Tit")
                                 $ counter -= 1
-                    if Girl.Sex >= 5 and ApprovalCheck(Girl, 1400, TabM = 5):
+                    if Girl.Sex >= 5 and Approvalcheck(Girl, 1400, TabM = 5):
                             $ counter = Girl.Sex - 4
                             $ counter = 10 if counter > 10 else counter
                             $ counter += 5 if Girl.lust >= 70 else 0
                             while counter:
                                 $ Girls.append("sex")
                                 $ counter -= 1
-                    if Girl.Anal >= 5 and ApprovalCheck(Girl, 1550, TabM = 5):
+                    if Girl.Anal >= 5 and Approvalcheck(Girl, 1550, TabM = 5):
                             $ counter = Girl.Anal - 4
                             $ counter = 10 if counter > 10 else counter
                             $ counter += 5 if Girl.lust >= 70 and Girl.Loose else 0
@@ -254,7 +254,7 @@ label Jackin(Girl=0,counter=0,Girls=[]): #rkeljsv
                     elif primary_action == "masturbation":
                             $ Girl.Action -= 1
                             $ Girl.Mast += 1
-                            call Checkout
+                            call checkout
                     elif primary_action:
                             call CloseOut(Girl)
 
@@ -276,7 +276,7 @@ label Jackin(Girl=0,counter=0,Girls=[]): #rkeljsv
 # For when she tags you to drain you start / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Girl_Tag(Girl=0,Forced = 0,Gloves=0): #rkeljsv
         #Called mostly by Addiction
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         call shift_focus(Girl)
         $ Gloves = Girl.Arms
         $ Girl.ArmPose = 2
@@ -297,7 +297,7 @@ label Girl_Tag(Girl=0,Forced = 0,Gloves=0): #rkeljsv
                         "As she reaches out, you bat her arm away. The brief contact isn't enough for her."
                         $ Girl.change_face("angry")
                         $ Girl.change_stat("love", 80, -10)
-                        if Girl.Addict >= 80 and not ApprovalCheck(Girl, 400, "O",Alt=[[RogueX],600]):
+                        if Girl.Addict >= 80 and not Approvalcheck(Girl, 400, "O",Alt=[[RogueX],600]):
                                 #if she's strung out and not obedient
                                 $ Girl.Eyes = "manic"
                                 "She lashes out and leaps at you, grabbing you by the chin."

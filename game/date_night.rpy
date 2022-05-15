@@ -1,6 +1,6 @@
 ﻿label Date_Ask(Girl=0): #rkeljsv
         #From the chat menu, you ask Rogue to meet you
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         call shift_focus(Girl)
         if "yesdate" in Girl.daily_history:
                 $ Girl.change_face("bemused")
@@ -71,7 +71,7 @@
                         ch_v "I'm kinda still pissed at you right now?"
                 return
         if "ex" in Girl.Traits:
-            if ApprovalCheck(Girl, 1200):
+            if Approvalcheck(Girl, 1200):
                     $ Girl.change_face("bemused",Brows = "sad" )
                     if Girl == RogueX:
                             ch_r "We had some fun, I guess we could go out, as friends maybe."
@@ -162,7 +162,7 @@
             menu:
                 extend ""
                 "Sorry about that, I'll take care of it this time.":
-                        if ApprovalCheck(Girl, 650):
+                        if Approvalcheck(Girl, 650):
                                 $ Girl.change_face("sad")
                                 if Girl == RogueX:
                                         ch_r "Ok, [Girl.Petname], you'd better."
@@ -196,7 +196,7 @@
                                         ch_v "Well that's what I expected last time. . ."
                                 return
                 "Yeah, so?":
-                        if ApprovalCheck(Girl, 1400,Alt=[[EmmaX],1500]):
+                        if Approvalcheck(Girl, 1400,Alt=[[EmmaX],1500]):
                                 $ Girl.change_face("angry", Mouth = "grimace")
                                 if Girl == RogueX:
                                         ch_r "It's a good thing you're so pretty."
@@ -217,7 +217,7 @@
                                         ch_v "So?! Well. . . so. . ."
                                         ch_v "Whatever."
                                 $ Girl.change_face("bemused")
-                        elif ApprovalCheck(Girl, 500, "O",Alt=[[EmmaX],700]):
+                        elif Approvalcheck(Girl, 500, "O",Alt=[[EmmaX],700]):
                                 $ Girl.change_face("surprised")
                                 call Anyline(Girl,". . .")
                                 $ Girl.change_face("sad")
@@ -236,7 +236,7 @@
                                         ch_s ". . . I can give you another chance."
                                 elif Girl == JubesX:
                                         ch_v "I guess we could try it. . ."
-                        elif ApprovalCheck(Girl, 650):
+                        elif Approvalcheck(Girl, 650):
                                 $ Girl.change_face("angry")
                                 $ Girl.change_stat("love", 80, -5)
                                 $ Girl.change_stat("inhibition", 60, 2)
@@ -280,7 +280,7 @@
             $ Girl.change_stat("obedience", 30, 3)
             $ Girl.change_stat("obedience", 80, 2)
         #end "if stoodup or deadbeat". . .
-        elif ApprovalCheck(Girl, 650):
+        elif Approvalcheck(Girl, 650):
                 $ Girl.change_face("smile")
                 if Girl == RogueX:
                         ch_r "Yeah, sounds good. See ya in a bit, [Girl.Petname]."
@@ -296,7 +296,7 @@
                         ch_s "I will see you then, [Girl.Petname]."
                 elif Girl == JubesX:
                         ch_v "Ok, so see you then. . ."
-        elif ApprovalCheck(Girl, 400):
+        elif Approvalcheck(Girl, 400):
                 $ Girl.change_face("angry",Eyes = "side")
                 if Girl == RogueX:
                         ch_r "I think I'm washing my hair tonight. . ."
@@ -375,7 +375,7 @@
                                                 ch_p "I'll meet you in the campus square then."
         if Count:
             #If you asked about another girl. . .
-            if Count >= 600 and ApprovalCheck(Girl, 800, "OI"): #Count is "Girl.LikeX"
+            if Count >= 600 and Approvalcheck(Girl, 800, "OI"): #Count is "Girl.LikeX"
                     $ Girl.change_face("smile")
                     if Girl == RogueX:
                             ch_r "Oh, yeah, sounds good."
@@ -407,7 +407,7 @@
                             ch_s "That could be. . . distracting."
                     elif Girl == JubesX:
                             ch_v "Well, ok. . ."
-            elif ApprovalCheck(Girl, 1300, "LO"):
+            elif Approvalcheck(Girl, 1300, "LO"):
                     $ Girl.change_face("sad")
                     if Girl == RogueX:
                             ch_r "If that's what you're into. . ."
@@ -510,7 +510,7 @@ label Date_Stood_Up(Girl=0): #rkeljsv
     menu:
             extend ""
             "Oh, sorry about that, slipped my mind.":
-                if ApprovalCheck(Girl, 800, "LO") or ApprovalCheck(Girl, 1200):
+                if Approvalcheck(Girl, 800, "LO") or Approvalcheck(Girl, 1200):
                         $ Girl.change_face("angry")
                         $ Girl.change_stat("love", 80, 5)
                         if Girl == RogueX:
@@ -582,7 +582,7 @@ label Date_Stood_Up(Girl=0): #rkeljsv
             # end "sorry"
 
             "I can't imagine that happening, maybe you got the date wrong?":
-                if "stoodup" in Girl.History and ApprovalCheck(Girl, 800, "O",Alt=[[EmmaX],900]):
+                if "stoodup" in Girl.History and Approvalcheck(Girl, 800, "O",Alt=[[EmmaX],900]):
                         $ Girl.change_face("confused")
                         $ Girl.change_stat("obedience", 90, 15)
                         if Girl == RogueX:
@@ -615,7 +615,7 @@ label Date_Stood_Up(Girl=0): #rkeljsv
                                 ch_v "Huh? . . . well. . ."
                                 $ Girl.change_face("confused",Eyes="side")
                                 ch_v ". . . maybe. . ."
-                elif ApprovalCheck(Girl, 700, "O",Alt=[[EmmaX],800]):
+                elif Approvalcheck(Girl, 700, "O",Alt=[[EmmaX],800]):
                         $ Girl.change_face("angry")
                         $ Girl.change_stat("obedience", 80, 5)
                         $ Girl.change_stat("obedience", 90, 10)
@@ -633,7 +633,7 @@ label Date_Stood_Up(Girl=0): #rkeljsv
                                 ch_s "Do not attempt to confuse me."
                         elif Girl == JubesX:
                                 ch_v "That won't work on me!"
-                elif Girl == EmmaX and not ApprovalCheck(Girl, 700, "L"):
+                elif Girl == EmmaX and not Approvalcheck(Girl, 700, "L"):
                         $ Girl.change_face("angry")
                         $ Girl.recent_history.append("angry")
                         $ Girl.daily_history.append("angry")
@@ -642,7 +642,7 @@ label Date_Stood_Up(Girl=0): #rkeljsv
                         $ Girl.change_stat("inhibition", 70, 10)
                         ch_e "Don't even try that nonsense on me, [Girl.Petname]!"
                         ch_e "I INVENTED gaslighting."
-                elif Girl != EmmaX and ApprovalCheck(Girl, 500, "I"):
+                elif Girl != EmmaX and Approvalcheck(Girl, 500, "I"):
                         $ Girl.change_face("angry")
                         $ Girl.recent_history.append("angry")
                         $ Girl.daily_history.append("angry")
@@ -684,7 +684,7 @@ label Date_Stood_Up(Girl=0): #rkeljsv
             #end "gaslight"
 
             "Yeah, I found something better to do.":
-                if ApprovalCheck(Girl, 1200, "LO"):
+                if Approvalcheck(Girl, 1200, "LO"):
                         $ Girl.change_face("sad",Eyes="side")
                         $ Girl.change_stat("love", 80, -5)
                         $ Girl.change_stat("obedience", 80, 5)
@@ -737,7 +737,7 @@ label Date_Stood_Up(Girl=0): #rkeljsv
                                 else:
                                         ch_v "Yeah, well. . . "
                                         ch_v ". . . don't do it again!"
-                elif ApprovalCheck(Girl, 800, "LO"):
+                elif Approvalcheck(Girl, 800, "LO"):
                         $ Girl.change_face("angry",Eyes="side")
                         $ Girl.change_stat("love", 80, -10)
                         $ Girl.change_stat("obedience", 80, 20)
@@ -849,15 +849,15 @@ label Readytogo(Girl=0,R=0,Girls=[]):  #rkeljsv
                 pass
         "Let's cancel that date, just hang out." if R and not Room_Full():
                 #won't work if the room is full.
-                if R == RogueX:  #Checks if Rogue is in
+                if R == RogueX:  #checks if Rogue is in
                         ch_r "Yeah, ok, that's fine."
-                elif R == KittyX:   #Checks if Kitty is in
+                elif R == KittyX:   #checks if Kitty is in
                         ch_k "Yeah, ok."
-                elif R == EmmaX:   #Checks if Emma is in
+                elif R == EmmaX:   #checks if Emma is in
                         ch_e "Suit yourself."
-                elif R == LauraX:   #Checks if Laura is in
+                elif R == LauraX:   #checks if Laura is in
                         ch_l "Ok, whatever."
-                elif R == JeanX:    #Checks if Jean is in
+                elif R == JeanX:    #checks if Jean is in
                         ch_j "What?"
                         ch_j "Ok?"
                 elif R == StormX:
@@ -889,7 +889,7 @@ label DateNight(Date_Bonus=[0,0],Play_Cost=0,Date_Cost=[0,0],Girls=[]):  #rkeljs
 
     $ Girls = active_Girls[:]
     while Girls:
-        if "yesdate" in Girls[0].daily_history:  #Checks if which girls are in
+        if "yesdate" in Girls[0].daily_history:  #checks if which girls are in
                 $ Party.append(Girls[0])
                 $ Girls[0].daily_history.remove("yesdate")
         $ Girls.remove(Girls[0])
@@ -1034,13 +1034,13 @@ label DateNight(Date_Bonus=[0,0],Play_Cost=0,Date_Cost=[0,0],Girls=[]):  #rkeljs
 
             "And then a movie?":
                     $ line = "dinner"
-                    if ApprovalCheck(JeanX, 500, "LO"):
+                    if Approvalcheck(JeanX, 500, "LO"):
                             ch_j "Sure, movie after, whatever."
                     else:
                             ch_j "I don't want this to take all night."
 
             "No, we're going shopping." if "mall" in Player.History:
-                    if ApprovalCheck(JeanX, 700, "LO"):
+                    if Approvalcheck(JeanX, 700, "LO"):
                             ch_j "Ok, fine, shopping, whatever."
                             $ line = "shopping"
                     else:
@@ -1049,7 +1049,7 @@ label DateNight(Date_Bonus=[0,0],Play_Cost=0,Date_Cost=[0,0],Girls=[]):  #rkeljs
                             #if only girl, quit?
 
             "No, we're just going to a movie.":
-                    if ApprovalCheck(JeanX, 700, "LO"):
+                    if Approvalcheck(JeanX, 700, "LO"):
                             ch_j "Ok, fine, movie, whatever."
                             $ line = "movie"
                     else:
@@ -1169,7 +1169,7 @@ label DateNight(Date_Bonus=[0,0],Play_Cost=0,Date_Cost=[0,0],Girls=[]):  #rkeljs
             $ bg_current = "bg_campus"
             jump Misplaced
 
-label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
+label Date_Crossed(Girls=[],check=0,Count=0,counter=0): #rkeljsv
     #this checks to make sure both girls are on the same page.
     #"girls" is the girls that are not cool with a double date.
 
@@ -1246,16 +1246,16 @@ label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
 
     menu:
         "I thought we could have fun together.":
-                $ Check = "fun"
+                $ check = "fun"
         "Oh, I forgot to tell you?":
-                $ Check = "cute"
+                $ check = "cute"
         "You're both coming with me.":
-                $ Check = "order"
+                $ check = "order"
 
         "Never mind [[ditch one or both]":
                 menu:
                     "[RogueX.name], you can go" if RogueX in Party:
-                            if ApprovalCheck(RogueX, 1400, "LO"):
+                            if Approvalcheck(RogueX, 1400, "LO"):
                                     $ RogueX.change_face("sad", 1)
                                     ch_r "Oh, ok, I guess. Later then?"
                                     "[RogueX.name] heads off."
@@ -1263,7 +1263,7 @@ label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
                             else:
                                     call Girl_Date_Over(RogueX)
                     "[KittyX.name], you can go" if KittyX in Party:
-                            if ApprovalCheck(KittyX, 1400, "LO"):
+                            if Approvalcheck(KittyX, 1400, "LO"):
                                     $ KittyX.change_face("sad", 1)
                                     ch_k "Huh? Well, ok, I guess?"
                                     "[KittyX.name] heads off."
@@ -1271,7 +1271,7 @@ label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
                             else:
                                     call Girl_Date_Over(KittyX)
                     "[EmmaX.name], you can go" if EmmaX in Party:
-                            if ApprovalCheck(EmmaX, 1500, "LO"):
+                            if Approvalcheck(EmmaX, 1500, "LO"):
                                     $ EmmaX.change_face("sad", 1)
                                     ch_e "Hm. You'll have to make this up to me later."
                                     "[EmmaX.name] walks off."
@@ -1279,7 +1279,7 @@ label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
                             else:
                                     call Girl_Date_Over(EmmaX)
                     "[LauraX.name], you can go" if LauraX in Party:
-                            if ApprovalCheck(LauraX, 1500, "LO"):
+                            if Approvalcheck(LauraX, 1500, "LO"):
                                     $ LauraX.change_face("sad", 1)
                                     ch_l "This choice will have consequences."
                                     "[LauraX.name] walks off."
@@ -1287,7 +1287,7 @@ label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
                             else:
                                     call Girl_Date_Over(LauraX)
                     "[JeanX.name], you can go" if JeanX in Party:
-                            if ApprovalCheck(JeanX, 800, "LO"):
+                            if Approvalcheck(JeanX, 800, "LO"):
                                     $ JeanX.change_face("normal", 1,Eyes="side")
                                     if JeanX == Party[0]:
                                             ch_j "You heard him, get going [Party[1].name]."
@@ -1301,7 +1301,7 @@ label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
                                     ch_j "I don't have time for this."
                                     call Girl_Date_Over(JeanX)
                     "[StormX.name], you can go" if StormX in Party:
-                            if ApprovalCheck(StormX, 1400, "LO"):
+                            if Approvalcheck(StormX, 1400, "LO"):
                                     $ StormX.change_face("sad", 1)
                                     ch_s "You will have much to explain later."
                                     "[StormX.name] walks off."
@@ -1309,7 +1309,7 @@ label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
                             else:
                                     call Girl_Date_Over(StormX)
                     "[JubesX.name], you can go" if JubesX in Party:
-                            if ApprovalCheck(JubesX, 1400, "LO"):
+                            if Approvalcheck(JubesX, 1400, "LO"):
                                     $ JubesX.change_face("sad", 1)
                                     ch_v "What? Ok, fine. . ."
                                     "[JubesX.name] heads off."
@@ -1320,49 +1320,49 @@ label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
 
                     "Never mind. [[Go home]":
                             if RogueX in Party:
-                                    if ApprovalCheck(RogueX, 1400, "LO"):
+                                    if Approvalcheck(RogueX, 1400, "LO"):
                                         $ RogueX.change_face("sad", 1)
                                         ch_r "Oh, ok, I guess. Later then?"
                                         call Girl_Date_Over(RogueX,0)
                                     else:
                                         call Girl_Date_Over(RogueX)
                             if KittyX in Party:
-                                    if ApprovalCheck(KittyX, 1400, "LO"):
+                                    if Approvalcheck(KittyX, 1400, "LO"):
                                         $ KittyX.change_face("sad", 1)
                                         ch_k "Huh? Well, ok, I guess?"
                                         call Girl_Date_Over(KittyX,0)
                                     else:
                                         call Girl_Date_Over(KittyX)
                             if EmmaX in Party:
-                                    if ApprovalCheck(EmmaX, 1500, "LO"):
+                                    if Approvalcheck(EmmaX, 1500, "LO"):
                                         $ EmmaX.change_face("sad", 1)
                                         ch_e "Hm. You'll have to make this up to me later."
                                         call Girl_Date_Over(EmmaX,0)
                                     else:
                                         call Girl_Date_Over(EmmaX)
                             if LauraX in Party:
-                                    if ApprovalCheck(LauraX, 1500, "LO"):
+                                    if Approvalcheck(LauraX, 1500, "LO"):
                                         $ LauraX.change_face("sad", 1)
                                         ch_l "This choice will have consequences."
                                         call Girl_Date_Over(LauraX,0)
                                     else:
                                         call Girl_Date_Over(LauraX)
                             if JeanX in Party:
-                                    if ApprovalCheck(JeanX, 1500, "LO"):
+                                    if Approvalcheck(JeanX, 1500, "LO"):
                                         $ JeanX.change_face("sad", 1)
                                         ch_j "Don't waste my time."
                                         call Girl_Date_Over(JeanX,0)
                                     else:
                                         call Girl_Date_Over(JeanX)
                             if StormX in Party:
-                                    if ApprovalCheck(StormX, 1500, "LO"):
+                                    if Approvalcheck(StormX, 1500, "LO"):
                                         $ StormX.change_face("sad", 1)
                                         ch_s "You will have much to explain later."
                                         call Girl_Date_Over(StormX,0)
                                     else:
                                         call Girl_Date_Over(StormX)
                             if JubesX in Party:
-                                    if ApprovalCheck(JubesX, 1400, "LO"):
+                                    if Approvalcheck(JubesX, 1400, "LO"):
                                         $ JubesX.change_face("sad", 1)
                                         ch_v "What? Ok, fine. . ."
                                         call Girl_Date_Over(JubesX,0)
@@ -1384,7 +1384,7 @@ label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
             $ counter -= 1 #first time through is 1, second time through is 0, then out
             if len(Party) < 2:
                     #if the other girl's dropped out
-                    if not ApprovalCheck(Party[0], 1000,Alt=[[EmmaX,LauraX],800]):
+                    if not Approvalcheck(Party[0], 1000,Alt=[[EmmaX,LauraX],800]):
                             #if the remaining girl isn't interested, this quits out.
                             if Party[0] == RogueX:
                                     ch_r "So. . . I'm going to get going too?"
@@ -1405,23 +1405,23 @@ label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
                             call Girl_Date_Over(Party[0],0)
                     return
 
-            if Check == "fun":
-                    if ApprovalCheck(Party[counter],1000):
-                        $ Check = 0
+            if check == "fun":
+                    if Approvalcheck(Party[counter],1000):
+                        $ check = 0
                     else:
-                        $ Check = -200
-            elif Check == "cute":
-                    if ApprovalCheck(Party[counter],1000,"LI"):
-                        $ Check = 200
+                        $ check = -200
+            elif check == "cute":
+                    if Approvalcheck(Party[counter],1000,"LI"):
+                        $ check = 200
                     else:
-                        $ Check = -100
-            elif Check == "order":
-                    if ApprovalCheck(Party[counter],1200,"LO"):
-                        $ Check = 100
+                        $ check = -100
+            elif check == "order":
+                    if Approvalcheck(Party[counter],1200,"LO"):
+                        $ check = 100
                     else:
-                        $ Check = -300
+                        $ check = -300
             else:
-                        $ Check = 0
+                        $ check = 0
 
             if counter == 1:
                     $ Count = 0
@@ -1430,7 +1430,7 @@ label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
 
             if Party[counter] == JeanX:
                     ch_j "Fine, let's get going. . ."
-            elif ApprovalCheck(Party[counter], 800, "OI", Bonus = Check) and Party[counter].GirlLikeCheck(Party[Count]) >= 600:
+            elif Approvalcheck(Party[counter], 800, "OI", Bonus = check) and Party[counter].GirlLikecheck(Party[Count]) >= 600:
                     # If they like you well enough and get along with the other girl
                     # if the current iteration is 1, then it's Party[1].LikesParty[0]
                     # if the current iteration is 0, then it's Party[0].LikesParty[1]
@@ -1447,7 +1447,7 @@ label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
                             ch_s "I do not mind her company."
                     elif Party[counter] == JubesX:
                             ch_v "Sure, she's great."
-            elif Party[counter].GirlLikeCheck(Party[Count]) >= 750:
+            elif Party[counter].GirlLikecheck(Party[Count]) >= 750:
                     # if they really like the other girl
                     $ Party[counter].change_face("bemused")
                     if Party[counter] == RogueX:
@@ -1462,7 +1462,7 @@ label Date_Crossed(Girls=[],Check=0,Count=0,counter=0): #rkeljsv
                             ch_s "I do not mind her company."
                     elif Party[counter] == JubesX:
                             ch_v "K, that's cool."
-            elif ApprovalCheck(Party[counter], 1300, "LO", Bonus = Check):
+            elif Approvalcheck(Party[counter], 1300, "LO", Bonus = check):
                     # if they especially like you
                     $ Party[counter].change_face("sad")
                     if Party[counter] == RogueX:
@@ -1825,7 +1825,7 @@ label Laura_Dinner(GirlCost=0):
 
 label Jean_Dinner(GirlCost=0):
     #Called by Date Dinner, picked Jean's food
-    if not ApprovalCheck(JeanX, 500, "O"):
+    if not Approvalcheck(JeanX, 500, "O"):
             ch_j "I'll have the surf and turf."
             $ Passline = renpy.random.choice(["-but I want to substitute the steak for veal.",
                     "-but I want two lobsters.",
@@ -1874,7 +1874,7 @@ label Jean_Dinner(GirlCost=0):
                         $ JeanX.change_stat("obedience", 70, 2)
                         $ JeanX.change_stat("inhibition", 60, 2)
                         ch_j "Righ- wait, what?"
-                        if ApprovalCheck(JeanX, 700, "O"):
+                        if Approvalcheck(JeanX, 700, "O"):
                                 $ JeanX.change_stat("love", 60, 5)
                                 $ JeanX.change_stat("obedience", 80, 2)
                                 $ JeanX.change_stat("obedience", 90, 3)
@@ -1886,7 +1886,7 @@ label Jean_Dinner(GirlCost=0):
                                 $ JeanX.change_stat("obedience", 70, 2)
                                 $ JeanX.change_stat("inhibition", 60, 2)
                                 ch_j "No, Steak."
-                                if ApprovalCheck(JeanX, 800, "O"):
+                                if Approvalcheck(JeanX, 800, "O"):
                                         $ GirlCost = 15
                                         $ JeanX.recent_history.append("ribeye")
                                 else:
@@ -2022,7 +2022,7 @@ label Dinner_Sex(Girl=0,Previous=0,GirlBonus=0,OptionsDS=[],Girls=[]):#rkeljsv
     if 0 in Girls:
         $ Girls.remove(0)
     while Girls: #add option later to make Jubilee more likely here
-            if ApprovalCheck(Girls[0], 1000):  #Checks if Girls[0] is in
+            if Approvalcheck(Girls[0], 1000):  #checks if Girls[0] is in
                     $ OptionsDS.append(Girls[0])
                     if Party[0] == Girls[0] and Date_Bonus[0] > 10:
                             $ OptionsDS.append(Girls[0])
@@ -2053,17 +2053,17 @@ label Dinner_Sex(Girl=0,Previous=0,GirlBonus=0,OptionsDS=[],Girls=[]):#rkeljsv
     else:
         $ GirlBonus = Date_Bonus[1] + Date_Cost[1]
 
-    if Girl.Anal and ApprovalCheck(Girl, 1500) and GirlBonus >=15:
+    if Girl.Anal and Approvalcheck(Girl, 1500) and GirlBonus >=15:
             $ OptionsDS.append("anal")
-    if Girl.Sex and ApprovalCheck(Girl, 1500) and GirlBonus >=10:
+    if Girl.Sex and Approvalcheck(Girl, 1500) and GirlBonus >=10:
             $ OptionsDS.append("sex")
-    if Girl.Blow and ApprovalCheck(Girl, 1300) and GirlBonus >=10:
+    if Girl.Blow and Approvalcheck(Girl, 1300) and GirlBonus >=10:
             $ OptionsDS.append("blowjob")
-    if Girl.Hand and ApprovalCheck(Girl, 1000) and GirlBonus >=10:
+    if Girl.Hand and Approvalcheck(Girl, 1000) and GirlBonus >=10:
             $ OptionsDS.append("handjob")
-    if Girl.FondleP and ApprovalCheck(Girl, 1000) and GirlBonus >=10:
+    if Girl.FondleP and Approvalcheck(Girl, 1000) and GirlBonus >=10:
             $ OptionsDS.append("pussy")
-    if ApprovalCheck(Girl, 1000) and GirlBonus >=10:
+    if Approvalcheck(Girl, 1000) and GirlBonus >=10:
             $ OptionsDS.append("footjob")
 
     $ renpy.random.shuffle(OptionsDS)
@@ -2268,7 +2268,7 @@ label Dinner_Sex(Girl=0,Previous=0,GirlBonus=0,OptionsDS=[],Girls=[]):#rkeljsv
                 else:
                         "She unzips your pants under the table, and proceeds to caress your cock."
                         $ line = "She"
-                if Girl.Blow and (ApprovalCheck(Girl, 1200) or Girl == JubesX):
+                if Girl.Blow and (Approvalcheck(Girl, 1200) or Girl == JubesX):
                         "Just as you're about to cum, [Girl.name] ducks her head under the table and comes up with a mouth full."
                         $ Girl.SeenPeen += 1
                         $ Girl.Blow += 1
@@ -2775,7 +2775,7 @@ label Movie_Sex(Girl=0,Previous=0,GirlBonus=0, OptionsDS=[],Girls=[]):#rkeljsv
     if 0 in Girls:
         $ Girls.remove(0)
     while Girls:
-            if ApprovalCheck(Girls[0], 1000):  #Checks if Girls[0] is in
+            if Approvalcheck(Girls[0], 1000):  #checks if Girls[0] is in
                     $ OptionsDS.append(Girls[0])
                     if Party[0] == Girls[0] and Date_Bonus[0] > 10:
                             $ OptionsDS.append(Girls[0])
@@ -2812,7 +2812,7 @@ label Movie_Sex(Girl=0,Previous=0,GirlBonus=0, OptionsDS=[],Girls=[]):#rkeljsv
     else:
         $ GirlBonus = Date_Bonus[1] + Date_Cost[1]
 
-    if ApprovalCheck(Girl, 500, Bonus=(10*GirlBonus)):
+    if Approvalcheck(Girl, 500, Bonus=(10*GirlBonus)):
         $ Girl.change_face("kiss", 1)
         if "romcom" in Player.recent_history:
                 "Halfway through the movie, inspired by the action on screen, [Girl.name] turns to you and starts to make out with you."
@@ -2845,22 +2845,22 @@ label Movie_Sex(Girl=0,Previous=0,GirlBonus=0, OptionsDS=[],Girls=[]):#rkeljsv
                 #the other girl is mad. . .
                 "You get back to it, [Previous.name] settles back into her seat with a glare."
 
-        if Girl.Anal and ApprovalCheck(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.PantsNum() <= 5:
+        if Girl.Anal and Approvalcheck(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.PantsNum() <= 5:
                 $ OptionsDS.append("anal")
-        if Girl.Sex and ApprovalCheck(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.PantsNum() <= 5:
+        if Girl.Sex and Approvalcheck(Girl, 2000, Bonus=(10*GirlBonus)) and Girl.PantsNum() <= 5:
                 $ OptionsDS.append("sex")
-        if Girl.Blow and ApprovalCheck(Girl, 1300, Bonus=(10*GirlBonus)):
+        if Girl.Blow and Approvalcheck(Girl, 1300, Bonus=(10*GirlBonus)):
                 $ OptionsDS.append("blowjob")
                 if Girl == JubesX:
                     $ OptionsDS.append("blowjob")
                     $ OptionsDS.append("blowjob")
-        if Girl.Hand and ApprovalCheck(Girl, 1000, Bonus=(10*GirlBonus)):
+        if Girl.Hand and Approvalcheck(Girl, 1000, Bonus=(10*GirlBonus)):
                 $ OptionsDS.append("handjob")
-        if Girl.FondleP and ApprovalCheck(Girl, 900, Bonus=(10*GirlBonus)):
+        if Girl.FondleP and Approvalcheck(Girl, 900, Bonus=(10*GirlBonus)):
                 $ OptionsDS.append("pussy")
-        elif ApprovalCheck(Girl, 1200, Bonus=(5*GirlBonus)) and Girl.Panties:
+        elif Approvalcheck(Girl, 1200, Bonus=(5*GirlBonus)) and Girl.Panties:
                 $ OptionsDS.append("panties")
-        elif ApprovalCheck(Girl, 1200, Bonus=(5*GirlBonus)):
+        elif Approvalcheck(Girl, 1200, Bonus=(5*GirlBonus)):
                 $ OptionsDS.append("flash")
 
         $ renpy.random.shuffle(OptionsDS)
@@ -3266,11 +3266,11 @@ label Date_Sex_Break(Girl=0,Previous=0,Repeat=0):#rkeljsv
         if Girl == Previous:
             "Tell Oni that on a date, a girl and previous were the same, [Girl.Tag], DSB"
 
-        if Girl.GirlLikeCheck(Previous) >= 700 and Previous.GirlLikeCheck(Girl) >= 700:
+        if Girl.GirlLikecheck(Previous) >= 700 and Previous.GirlLikecheck(Girl) >= 700:
                 #They like each other and will share
                 $ Previous.recent_history.append("noticed " + Girl.Tag)
                 return 1
-        elif Previous == JeanX and not ApprovalCheck(Previous, 500, "L"):
+        elif Previous == JeanX and not Approvalcheck(Previous, 500, "L"):
                 #if it's Jean and she doesn't particularly care. . .
                 $ Previous.change_face("sly",1,Eyes="side")
                 if bg_current == "bg_restaurant":
@@ -3284,7 +3284,7 @@ label Date_Sex_Break(Girl=0,Previous=0,Repeat=0):#rkeljsv
                 $ Previous.GLG(Girl,500,3)
                 $ Previous.GLG(Girl,900,3)
                 return 2
-        elif ApprovalCheck(Previous, 1400) and Previous.GirlLikeCheck(Girl) >= 500:
+        elif Approvalcheck(Previous, 1400) and Previous.GirlLikecheck(Girl) >= 500:
                 #girl2 likes you, and likes girl1 enough to be chill
                 $ Previous.change_face("sly")
                 "[Previous.name] winks at you, but doesn't move to get involved."
@@ -3293,7 +3293,7 @@ label Date_Sex_Break(Girl=0,Previous=0,Repeat=0):#rkeljsv
                 $ Girl.GLG(Previous,900,3,1)
                 $ Previous.GLG(Girl,900,2,1)
                 return 2
-        elif ApprovalCheck(Previous, 1400) and Previous.GirlLikeCheck(Girl) < 500:
+        elif Approvalcheck(Previous, 1400) and Previous.GirlLikecheck(Girl) < 500:
                 pass
 
 
@@ -3511,14 +3511,14 @@ label Date_Paying(Activity="dinner", Total_Cost=0):  #rkeljsv
                     elif RogueX in Party and Play_Cost > Date_Cost[1]:
                         $ RogueX.change_stat("love", 200, -10)
                         $ RogueX.change_stat("obedience", 80, 4)
-            if ApprovalCheck(RogueX, 1100) and len(Party) < 2:
+            if Approvalcheck(RogueX, 1100) and len(Party) < 2:
                     $ RogueX.change_face("sad")
                     ch_r "Well, ok, I guess I can cover it this time."
                     $ RogueX.change_stat("obedience", 30, 3)
                     $ RogueX.change_stat("obedience", 80, 2)
                     if bg_current == "bg_restaurant" and "dinnersex" in RogueX.recent_history:
                             call Date_Bonus(RogueX, -Total_Cost)
-            elif ApprovalCheck(RogueX, 1300) and len(Party) >= 2:
+            elif Approvalcheck(RogueX, 1300) and len(Party) >= 2:
                     $ RogueX.change_face("sad")
                     ch_r "Hm, ok, I guess I can cover it this time."
                     $ RogueX.change_stat("love", 80, -5)
@@ -3550,14 +3550,14 @@ label Date_Paying(Activity="dinner", Total_Cost=0):  #rkeljsv
                     elif KittyX in Party and Play_Cost > Date_Cost[1]:
                         $ KittyX.change_stat("love", 200, -10)
                         $ KittyX.change_stat("obedience", 80, 4)
-            if ApprovalCheck(KittyX, 1000) and not len(Party) < 2:
+            if Approvalcheck(KittyX, 1000) and not len(Party) < 2:
                     $ KittyX.change_face("sad")
                     ch_k "Huh? I mean I guess I can. . ."
                     $ KittyX.change_stat("obedience", 30, 3)
                     $ KittyX.change_stat("obedience", 80, 2)
                     if bg_current == "bg_restaurant" and "dinnersex" in KittyX.recent_history:
                             call Date_Bonus(KittyX, -Total_Cost)
-            elif ApprovalCheck(KittyX, 1300) and len(Party) >= 2:
+            elif Approvalcheck(KittyX, 1300) and len(Party) >= 2:
                     $ KittyX.change_face("sad")
                     ch_k "Huh? I mean I guess I can. . ."
                     $ KittyX.change_stat("love", 80, -5)
@@ -3589,14 +3589,14 @@ label Date_Paying(Activity="dinner", Total_Cost=0):  #rkeljsv
                     elif EmmaX in Party and Play_Cost > Date_Cost[1]:
                         $ EmmaX.change_stat("love", 200, -5)
                         $ EmmaX.change_stat("obedience", 80, 4)
-            if ApprovalCheck(EmmaX, 900) and len(Party) < 2:
+            if Approvalcheck(EmmaX, 900) and len(Party) < 2:
                     $ EmmaX.change_face("sad")
                     ch_e "I suppose you a student, after all. . ."
                     $ EmmaX.change_stat("obedience", 30, 3)
                     $ EmmaX.change_stat("obedience", 80, 2)
                     if bg_current == "bg_restaurant" and "dinnersex" in EmmaX.recent_history:
                             call Date_Bonus(EmmaX, -Play_Cost)
-            elif ApprovalCheck(EmmaX, 1100) and len(Party) >= 2:
+            elif Approvalcheck(EmmaX, 1100) and len(Party) >= 2:
                     $ EmmaX.change_face("sad")
                     ch_e "I suppose you are students, after all. . ."
                     $ EmmaX.change_stat("love", 80, -5)
@@ -3629,14 +3629,14 @@ label Date_Paying(Activity="dinner", Total_Cost=0):  #rkeljsv
                     elif LauraX in Party and Play_Cost > Date_Cost[1]:
                         $ LauraX.change_stat("love", 200, -5)
                         $ LauraX.change_stat("obedience", 80, 4)
-            if ApprovalCheck(LauraX, 900) and len(Party) < 2:
+            if Approvalcheck(LauraX, 900) and len(Party) < 2:
                     $ LauraX.change_face("sad")
                     ch_l "Down on your luck? . ."
                     $ LauraX.change_stat("obedience", 30, 3)
                     $ LauraX.change_stat("obedience", 80, 2)
                     if bg_current == "bg_restaurant" and "dinnersex" in LauraX.recent_history:
                             call Date_Bonus(LauraX, -Play_Cost)
-            elif ApprovalCheck(LauraX, 1100) and len(Party) >= 2:
+            elif Approvalcheck(LauraX, 1100) and len(Party) >= 2:
                     $ LauraX.change_face("sad")
                     ch_l "Down on your luck? . ."
                     $ LauraX.change_stat("love", 80, -5)
@@ -3667,14 +3667,14 @@ label Date_Paying(Activity="dinner", Total_Cost=0):  #rkeljsv
                     elif JeanX in Party and Play_Cost > Date_Cost[1]:
                         $ JeanX.change_stat("love", 200, -5)
                         $ JeanX.change_stat("obedience", 80, 4)
-            if ApprovalCheck(JeanX, 900) and len(Party) < 2:
+            if Approvalcheck(JeanX, 900) and len(Party) < 2:
                     $ JeanX.change_face("confused",Mouth="smirk")
                     ch_j "Ooh, bad move . ."
                     $ JeanX.change_stat("obedience", 30, 3)
                     $ JeanX.change_stat("obedience", 80, 2)
                     if bg_current == "bg_restaurant" and "dinnersex" in JeanX.recent_history:
                             call Date_Bonus(JeanX, -Play_Cost)
-            elif ApprovalCheck(JeanX, 1100) and len(Party) >= 2:
+            elif Approvalcheck(JeanX, 1100) and len(Party) >= 2:
                     $ JeanX.change_face("confused",Mouth="smirk")
                     ch_j "Seriously? . ."
                     $ JeanX.change_stat("love", 80, -5)
@@ -3701,14 +3701,14 @@ label Date_Paying(Activity="dinner", Total_Cost=0):  #rkeljsv
                     elif StormX in Party and Play_Cost > Date_Cost[1]:
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 80, 4)
-            if ApprovalCheck(StormX, 900) and len(Party) < 2:
+            if Approvalcheck(StormX, 900) and len(Party) < 2:
                     $ StormX.change_face("sad")
                     ch_s "You are only a child, I suppose. . ."
                     $ StormX.change_stat("obedience", 30, 3)
                     $ StormX.change_stat("obedience", 80, 2)
                     if bg_current == "bg_restaurant" and "dinnersex" in StormX.recent_history:
                             call Date_Bonus(StormX, -Play_Cost)
-            elif ApprovalCheck(StormX, 1100) and len(Party) >= 2:
+            elif Approvalcheck(StormX, 1100) and len(Party) >= 2:
                     $ StormX.change_face("sad")
                     ch_s "You are children, I suppose. . ."
                     $ StormX.change_stat("love", 80, -5)
@@ -3740,14 +3740,14 @@ label Date_Paying(Activity="dinner", Total_Cost=0):  #rkeljsv
                     elif JubesX in Party and Play_Cost > Date_Cost[1]:
                         $ JubesX.change_stat("love", 200, -10)
                         $ JubesX.change_stat("obedience", 80, 4)
-            if ApprovalCheck(JubesX, 1000) and not len(Party) < 2:
+            if Approvalcheck(JubesX, 1000) and not len(Party) < 2:
                     $ JubesX.change_face("sad")
                     ch_v "What? I guess I could. . ."
                     $ JubesX.change_stat("obedience", 30, 3)
                     $ JubesX.change_stat("obedience", 80, 2)
                     if bg_current == "bg_restaurant" and "dinnersex" in JubesX.recent_history:
                             call Date_Bonus(JubesX, -Total_Cost)
-            elif ApprovalCheck(JubesX, 1300) and len(Party) >= 2:
+            elif Approvalcheck(JubesX, 1300) and len(Party) >= 2:
                     $ JubesX.change_face("sad")
                     ch_v "What?. . . I guess. . ."
                     $ JubesX.change_stat("love", 80, -5)
@@ -3775,7 +3775,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):  #rkeljsv
             $ Count = len(Party)
             while Count > 0:
                     $ Count -= 1
-                    if ApprovalCheck(Party[Count], 600):
+                    if Approvalcheck(Party[Count], 600):
                         $ Party[Count].change_face("sad",Mouth="normal")
                         $ Party[Count].change_stat("obedience", 50, 2)
                         if Party[Count] == RogueX:
@@ -3799,9 +3799,9 @@ label Date_Paying(Activity="dinner", Total_Cost=0):  #rkeljsv
                     else:
                         if Date_Cost[Count] >=15:
                                 # if it cost more than 15, they like you less.
-                                $ Party[Count].change_stat("love", 200, -5, alternates = {"Laura": {"check": 200, "value": 3})
+                                $ Party[Count].change_stat("love", 200, -5, alternates = {"Laura": {"check": 200, "value": 3}})
                         else:
-                                $ Party[Count].change_stat("love", 200, -3, alternates = {"Laura": {"check": 200, "value": 0})
+                                $ Party[Count].change_stat("love", 200, -3, alternates = {"Laura": {"check": 200, "value": 0}})
                         if Party[Count] == RogueX:
                                 $ RogueX.change_face("angry",Eyes="side")
                                 ch_r "Tch. Cheapskate."
@@ -3838,13 +3838,13 @@ label Date_Paying(Activity="dinner", Total_Cost=0):  #rkeljsv
                     if Total_Cost >=15:
                             $ Party[Count].change_stat("love", 200, -4)
                             if Play_Cost > Date_Cost[Count]:
-                                    $ Party[Count].change_stat("love", 200, -10, alternates = {"Emma": {"check": 200, "value": -5}, "Laura": {"check": 200, "value": -5})
-                                    $ Party[Count].change_stat("obedience", 200, 0, alternates = {"Emma": {"check": 200, "value": -2}, "Laura": {"check": 200, "value": -2})
+                                    $ Party[Count].change_stat("love", 200, -10, alternates = {"Emma": {"check": 200, "value": -5}, "Laura": {"check": 200, "value": -5}})
+                                    $ Party[Count].change_stat("obedience", 200, 0, alternates = {"Emma": {"check": 200, "value": -2}, "Laura": {"check": 200, "value": -2}})
                     if bg_current == "bg_restaurant" and "dinnersex" in Party[Count].recent_history:
                                     call Date_Bonus(Party[Count], -Total_Cost)
-                    $ Party[Count].change_stat("obedience", 50, -2, alternates = {"Laura": {"check": 500, "value": -3})
+                    $ Party[Count].change_stat("obedience", 50, -2, alternates = {"Laura": {"check": 500, "value": -3}})
                     $ Party[Count].change_face("sad")
-                    if ApprovalCheck(Party[Count], 800):
+                    if Approvalcheck(Party[Count], 800):
                             #pity
                             if Party[Count] == RogueX:
                                     ch_r "Aw, poor baby."
@@ -3897,12 +3897,12 @@ label Date_Paying(Activity="dinner", Total_Cost=0):  #rkeljsv
     $ Count = int(Date_Bonus[0]/2)
     $ Count = 10 if Count >= 10 else Count
 
-    $ Party[0].change_stat("lust", 60, Count, alternates = {"Emma": {"check": 75, "value": Count})
+    $ Party[0].change_stat("lust", 60, Count, alternates = {"Emma": {"check": 75, "value": Count}})
 
     $ Count = int(Date_Bonus[1]/2)
     $ Count = 10 if Count >= 10 else Count
     if len(Party) >= 2:
-            $ Party[1].change_stat("lust", 60, Count, alternates = {"Emma": {"check": 75, "value": Count})
+            $ Party[1].change_stat("lust", 60, Count, alternates = {"Emma": {"check": 75, "value": Count}})
 
     $ Count = 0
     $ Play_Cost = 0
@@ -4137,7 +4137,7 @@ label Girl_Date_End(Girl=0): #nee R_Date_End
         menu:
             extend ""
             "Could I get a good night kiss?":
-                    if ApprovalCheck(Girl, 600, Bonus=(10*Date_Bonus[0])):
+                    if Approvalcheck(Girl, 600, Bonus=(10*Date_Bonus[0])):
                         $ Girl.Mouth = "smile"
                         if Girl == RogueX:
                                 ch_r "Ok, [Girl.Petname]. I suppose you've earned it."
@@ -4157,7 +4157,7 @@ label Girl_Date_End(Girl=0): #nee R_Date_End
                         $ multi_action = 0
                         call KissPrep(Girl)
                         $ multi_action = 1
-                    if ApprovalCheck(Girl, 900, Bonus=(10*Date_Bonus[0])):
+                    if Approvalcheck(Girl, 900, Bonus=(10*Date_Bonus[0])):
                         $ Girl.change_face("sexy", 1)
                         if Girl == RogueX:
                                 if bg_current == "bg_player":
@@ -4221,7 +4221,7 @@ label Girl_Date_End(Girl=0): #nee R_Date_End
                         jump Date_End
 
             "Want to have a little fun first?" if bg_current != "bg_player":
-                    if ApprovalCheck(Girl, 800, Bonus=(10*Date_Bonus[0])):
+                    if Approvalcheck(Girl, 800, Bonus=(10*Date_Bonus[0])):
                         $ Girl.change_face("sexy", 1)
                         if Girl == RogueX:
                                 ch_r "Alright, [Girl.Petname]. I think you've earned it."
@@ -4243,7 +4243,7 @@ label Girl_Date_End(Girl=0): #nee R_Date_End
                                 call Girl_Date_Over(Girl,0)
                                 jump Date_End
             "Could you come in for a bit?" if bg_current == "bg_player":
-                    if ApprovalCheck(Girl, 800, Bonus=(10*Date_Bonus[0])):
+                    if Approvalcheck(Girl, 800, Bonus=(10*Date_Bonus[0])):
                         $ Girl.change_face("sexy", 1)
                         if Girl == RogueX:
                                 ch_r "Alright, [Girl.Petname]. I think you've earned it."
@@ -4349,7 +4349,7 @@ label Date_Ditched(Girls=0):  #rkeljsv
                                 ch_j "What? Yeah, bye."
                         else:
                                 ch_j "Oh, bye then."
-                elif ApprovalCheck(Party[0], 1200):
+                elif Approvalcheck(Party[0], 1200):
                     $ Party[0].change_face("confused")
                     if Party[0] == RogueX:
                             if Girls:
@@ -4381,7 +4381,7 @@ label Date_Ditched(Girls=0):  #rkeljsv
                                     ch_v "Ok then. . . bye?"
                             else:
                                     ch_v "Um, bye?"
-                elif ApprovalCheck(Party[0], 400):
+                elif Approvalcheck(Party[0], 400):
                     $ Party[0].change_face("smile")
                     if Party[0] == RogueX:
                             if Girls:

@@ -1,6 +1,6 @@
 label Flirt(Girl =0): #rkeljsv
     # call Flirt(RogueX)
-    $ Girl = GirlCheck(Girl)
+    $ Girl = Girlcheck(Girl)
     call shift_focus(Girl)
 
     if Girl.location != bg_current:
@@ -12,7 +12,7 @@ label Flirt(Girl =0): #rkeljsv
                 "Phone Sex" if bg_current == "bg_player":
                         ch_p "Want to do some phone sex?"
                         call Taboo_Level(0)
-                        if not ApprovalCheck(Girl, 900) or Girl.SEXP < 15:
+                        if not Approvalcheck(Girl, 900) or Girl.SEXP < 15:
                                 #she hates the idea
                                 $ Girl.change_stat("love", 70, -2)
                                 $ Girl.change_stat("love", 90, -2)
@@ -33,7 +33,7 @@ label Flirt(Girl =0): #rkeljsv
                                 elif Girl == JubesX:
                                         ch_v "Def not. . ."
                                 return
-                        if Girl.Taboo and ApprovalCheck(Girl, 1400):
+                        if Girl.Taboo and Approvalcheck(Girl, 1400):
                                 #she agrees to move
                                 if Girl == RogueX: #R_Mast
                                         ch_r "Hmm. . . that sounds like fun. . ."
@@ -59,7 +59,7 @@ label Flirt(Girl =0): #rkeljsv
                                         pass             #if it's Emma and she's in class and it's a good time, stay
                                 else:
                                         $ Girl.location = Girl.Home
-                        elif ApprovalCheck(Girl, 1200):
+                        elif Approvalcheck(Girl, 1200):
                                 #she agrees
                                 if Girl == RogueX: #R_Mast
                                         ch_r "Hmm. . . that sounds like fun. . ."
@@ -141,7 +141,7 @@ label Flirt(Girl =0): #rkeljsv
 
                 "Kiss her cheek":
                             "You lean over, brush her hair aside and kiss her on the cheek."
-                            if ApprovalCheck(Girl, 650, "L", TabM=1):
+                            if Approvalcheck(Girl, 650, "L", TabM=1):
                                         $ Girl.change_face("sexy", 1)
                                         $ Girl.change_stat("love", 90, 1)
                                         $ Girl.change_stat("obedience", 40, 2)
@@ -163,7 +163,7 @@ label Flirt(Girl =0): #rkeljsv
                                                 ch_s "Oh, hello there. . ."
                                         elif Girl == JubesX:
                                                 ch_v "Oh, hey. . ."
-                            elif ApprovalCheck(Girl, 500, "L", TabM=1):
+                            elif Approvalcheck(Girl, 500, "L", TabM=1):
                                         $ Girl.change_face("surprised", 1)
                                         $ Girl.change_stat("love", 70, 2)
                                         $ Girl.change_stat("obedience", 40, 2)
@@ -183,9 +183,9 @@ label Flirt(Girl =0): #rkeljsv
                                                 ch_s "Oh?"
                                         elif Girl == JubesX:
                                                 ch_v "Oh, hey. . ."
-                            elif ApprovalCheck(Girl, 300, "L", TabM=1):
+                            elif Approvalcheck(Girl, 300, "L", TabM=1):
                                         $ Girl.change_face("angry", 1)
-                                        $ Girl.change_stat("love", 90, -1, alternates = {"Jean": {"check": 50, "value": 2})
+                                        $ Girl.change_stat("love", 90, -1, alternates = {"Jean": {"check": 50, "value": 2}})
                                         $ Girl.change_stat("obedience", 60, 2)
                                         $ Girl.change_stat("inhibition", 40, 1)
                                         if Girl == RogueX:
@@ -206,7 +206,7 @@ label Flirt(Girl =0): #rkeljsv
                                                 ch_v "What was that? . ."
                             else:
                                         $ Girl.change_face("angry", 1)
-                                        $ Girl.change_stat("love", 90, -5, alternates = {"Jean": {"check": 50, "value": 2})
+                                        $ Girl.change_stat("love", 90, -5, alternates = {"Jean": {"check": 50, "value": 2}})
                                         $ Girl.change_stat("obedience", 90, 5)
                                         $ Girl.change_stat("inhibition", 40, 3)
                                         if Girl == RogueX:
@@ -232,15 +232,15 @@ label Flirt(Girl =0): #rkeljsv
                             $ Girl.Addictionrate = 3 if Girl.Addictionrate < 3 else Girl.Addictionrate
 
                 "Kiss her lips":
-                            if ApprovalCheck(Girl, 1000, TabM=2,Alt=[[RogueX],800]) or ApprovalCheck(Girl, 600, "L", TabM=2):
+                            if Approvalcheck(Girl, 1000, TabM=2,Alt=[[RogueX],800]) or Approvalcheck(Girl, 600, "L", TabM=2):
                                     $ line = renpy.random.choice(["You lean over, put your hand against her cheek, and plant a kiss on her lips.",
                                                                     "You lean down, tilt her head back, and plant a kiss on her lips.",
                                                                     "You turn "+Girl.name+" around and plant a deep kiss on her."])
                                     "[line]"
-                            elif ApprovalCheck(Girl, 1000,Alt=[[RogueX],800]) or ApprovalCheck(Girl, 600, "L"):
+                            elif Approvalcheck(Girl, 1000,Alt=[[RogueX],800]) or Approvalcheck(Girl, 600, "L"):
                                     $ Girl.change_face("bemused", 1)
                                     $ Girl.Eyes = "side"
-                                    $ Girl.change_stat("obedience", 50, -1, alternates = {"Jean": {"check": 50, "value": 2})
+                                    $ Girl.change_stat("obedience", 50, -1, alternates = {"Jean": {"check": 50, "value": 2}})
                                     $ Girl.change_stat("inhibition", 40, 2)
                                     if Girl == RogueX:
                                             "You lean close for a kiss, but [Girl.name] plants a hand on your face and pushes you back."
@@ -266,8 +266,8 @@ label Flirt(Girl =0): #rkeljsv
                                     return
                             else:
                                     $ Girl.change_face("angry", 1)
-                                    $ Girl.change_stat("love", 90, -5, alternates = {"Jean": {"check": 50, "value": 2})
-                                    $ Girl.change_stat("obedience", 50, -1, alternates = {"Jean": {"check": 50, "value": 1})
+                                    $ Girl.change_stat("love", 90, -5, alternates = {"Jean": {"check": 50, "value": 2}})
+                                    $ Girl.change_stat("obedience", 50, -1, alternates = {"Jean": {"check": 50, "value": 1}})
                                     $ Girl.change_stat("inhibition", 40, 5)
                                     if Girl == RogueX:
                                             "You lean close for a kiss, but [Girl.name] plants a hand on your face and pushes you back."
@@ -293,7 +293,7 @@ label Flirt(Girl =0): #rkeljsv
                                     return
                             if Girl.Kissed:
                                     #if this wasn't the first kiss. . .
-                                    if ApprovalCheck(Girl, 750, "L", TabM=1):
+                                    if Approvalcheck(Girl, 750, "L", TabM=1):
                                             $ Girl.change_face("sexy", 1)
                                             $ Girl.change_stat("love", 90, 2)
                                             $ Girl.change_stat("obedience", 50, 2)
@@ -301,7 +301,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_r "Hmm we should do that again, [Girl.Petname]."
                                             else:
                                                     call Anyline(Girl,"Mmmmmmm. . .")
-                                    elif ApprovalCheck(Girl, 650, "L", TabM=1):
+                                    elif Approvalcheck(Girl, 650, "L", TabM=1):
                                             $ Girl.change_face("sexy", 1)
                                             $ Girl.change_stat("love", 90, 2)
                                             $ Girl.change_stat("obedience", 50, 2)
@@ -319,7 +319,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_s "Hmm. . ."
                                             elif Girl == JubesX:
                                                     ch_v "Mmmmm. . ."
-                                    elif ApprovalCheck(Girl, 500, "L", TabM=1):
+                                    elif Approvalcheck(Girl, 500, "L", TabM=1):
                                             $ Girl.change_face("surprised", 1)
                                             $ Girl.change_stat("love", 70, 3)
                                             $ Girl.change_stat("obedience", 50, 2)
@@ -337,9 +337,9 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_s "Hey. . ."
                                             elif Girl == JubesX:
                                                     ch_v "Hey, that's not cool. . ."
-                                    elif ApprovalCheck(Girl, 300, "L", TabM=1):
+                                    elif Approvalcheck(Girl, 300, "L", TabM=1):
                                             $ Girl.change_face("angry", 1)
-                                            $ Girl.change_stat("love", 90, -3, alternates = {"Jean": {"check": 50, "value": -1})
+                                            $ Girl.change_stat("love", 90, -3, alternates = {"Jean": {"check": 50, "value": -1}})
                                             $ Girl.change_stat("obedience", 60, 3)
                                             $ Girl.change_stat("inhibition", 40, 2)
                                             if Girl == RogueX:
@@ -360,7 +360,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_v "Back off."
                                     else:
                                             $ Girl.change_face("angry", 1)
-                                            $ Girl.change_stat("love", 90, -8, alternates = {"Jean": {"check": 50, "value": -3})
+                                            $ Girl.change_stat("love", 90, -8, alternates = {"Jean": {"check": 50, "value": -3}})
                                             $ Girl.change_stat("obedience", 90, 6)
                                             $ Girl.change_stat("inhibition", 40, 3)
                                             if Girl == RogueX:
@@ -379,7 +379,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_v "Nope."
                             else:
                                     #If this is the first kiss
-                                    if ApprovalCheck(Girl, 750, "L", TabM=1):
+                                    if Approvalcheck(Girl, 750, "L", TabM=1):
                                             $ Girl.change_face("surprised", 1)
                                             $ Girl.change_stat("love", 70, 45)
                                             $ Girl.change_stat("obedience", 50, 20)
@@ -414,7 +414,7 @@ label Flirt(Girl =0): #rkeljsv
                                             elif Girl == JubesX:
                                                     ch_v "Mmmmm. . ."
                                                     ch_v "Oh, wait. . . what was that about?"
-                                    elif ApprovalCheck(Girl, 650, "L", TabM=1):
+                                    elif Approvalcheck(Girl, 650, "L", TabM=1):
                                             $ Girl.change_face("surprised", 1)
                                             $ Girl.change_stat("love", 80, 30)
                                             $ Girl.change_stat("obedience", 50, 25)
@@ -438,7 +438,7 @@ label Flirt(Girl =0): #rkeljsv
                                             elif Girl == JubesX:
                                                     ch_v "Mmmmm. . .wait, what?"
                                                     ch_v "What was that for?"
-                                    elif ApprovalCheck(Girl, 500, "L", TabM=1):
+                                    elif Approvalcheck(Girl, 500, "L", TabM=1):
                                             $ Girl.change_face("surprised", 1)
                                             $ Girl.change_stat("obedience", 70, 30)
                                             $ Girl.change_stat("inhibition", 70, 35)
@@ -456,9 +456,9 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_s "That isn't appropriate."
                                             elif Girl == JubesX:
                                                     ch_v "That was. . . give a girl some warning. . ."
-                                    elif ApprovalCheck(Girl, 700, TabM=1):
+                                    elif Approvalcheck(Girl, 700, TabM=1):
                                             $ Girl.change_face("angry", 1)
-                                            $ Girl.change_stat("love", 60, -5, alternates = {"Jean": {"check": 50, "value": -2})
+                                            $ Girl.change_stat("love", 60, -5, alternates = {"Jean": {"check": 50, "value": -2}})
                                             $ Girl.change_stat("obedience", 70, 40)
                                             $ Girl.change_stat("inhibition", 70, 40)
                                             if Girl == RogueX:
@@ -477,7 +477,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_v "Hey!"
                                     else:
                                             $ Girl.change_face("angry", 1)
-                                            $ Girl.change_stat("love", 60, -15, alternates = {"Jean": {"check": 50, "value": -5})
+                                            $ Girl.change_stat("love", 60, -15, alternates = {"Jean": {"check": 50, "value": -5}})
                                             $ Girl.change_stat("obedience", 70, 50)
                                             $ Girl.change_stat("inhibition", 70, 40)
                                             if Girl == RogueX:
@@ -502,10 +502,10 @@ label Flirt(Girl =0): #rkeljsv
 
                             if Girl.Taboo and Girl == EmmaX:
                                         if "three" not in EmmaX.History:
-                                            if not AloneCheck(EmmaX):
+                                            if not Alonecheck(EmmaX):
                                                     # if there are other girls in the room. . .
-                                                    call Emma_ThreeCheck
-                            if ApprovalCheck(Girl, 650, TabM=1):
+                                                    call Emma_Threecheck
+                            if Approvalcheck(Girl, 650, TabM=1):
                                 if Girl.love > Girl.obedience and Girl.love > Girl.inhibition:
                                         if Girl == RogueX:
                                                 ch_r "Gimme some more sugar, [Girl.Petname]."
@@ -622,7 +622,7 @@ label Flirt(Girl =0): #rkeljsv
                 #end Kiss
 
                 "Hug her":
-                            if ApprovalCheck(Girl, 200, TabM=1):
+                            if Approvalcheck(Girl, 200, TabM=1):
                                     "You lean over and wrap [Girl.name] in a warm hug."
                             else:
                                     $ Girl.change_face("angry", 1)
@@ -662,7 +662,7 @@ label Flirt(Girl =0): #rkeljsv
                                             ch_s "Hmm, what did you have in mind?"
                                     elif Girl == JubesX:
                                             ch_v "Oh, what was that for. . ."
-                            elif ApprovalCheck(Girl, 600, "L", TabM=1):
+                            elif Approvalcheck(Girl, 600, "L", TabM=1):
                                     $ Girl.change_face("sexy")
                                     $ Girl.change_stat("love", 90, 1)
                                     $ Girl.change_stat("obedience", 40, 2)
@@ -681,7 +681,7 @@ label Flirt(Girl =0): #rkeljsv
                                             ch_s "Hmmm."
                                     elif Girl == JubesX:
                                             ch_v "Oh, hey. . ."
-                            elif ApprovalCheck(Girl, 450, TabM=1,Alt=[[JeanX],500]):
+                            elif Approvalcheck(Girl, 450, TabM=1,Alt=[[JeanX],500]):
                                     $ Girl.change_face("surprised", 1)
                                     $ Girl.change_stat("love", 90, 1)
                                     $ Girl.change_stat("love", 70, 1)
@@ -701,7 +701,7 @@ label Flirt(Girl =0): #rkeljsv
                                             ch_s "Oh, hello there."
                                     elif Girl == JubesX:
                                             ch_v "Hello. . ."
-                            elif ApprovalCheck(Girl, 350, TabM=1,Alt=[[JeanX],400]):
+                            elif Approvalcheck(Girl, 350, TabM=1,Alt=[[JeanX],400]):
                                     $ Girl.change_face("angry", 1)
                                     $ Girl.change_stat("love", 70, 1)
                                     $ Girl.change_stat("obedience", 50, 3)
@@ -746,7 +746,7 @@ label Flirt(Girl =0): #rkeljsv
 
                 "Pinch her ass":
                             $ Girl.change_face("surprised", 1)
-                            if Girl.SEXP < 5 or not ApprovalCheck(Girl, 600, TabM=1):
+                            if Girl.SEXP < 5 or not Approvalcheck(Girl, 600, TabM=1):
                                     "You come up to [Girl.name] from behind and quickly pinch her butt."
                                     $ Girl.change_face("angry")
                                     $ Girl.change_stat("love", 90, -4)
@@ -788,7 +788,7 @@ label Flirt(Girl =0): #rkeljsv
                                             ch_s "Oh!"
                                     elif Girl == JubesX:
                                             ch_v "Ooo!"
-                            elif ApprovalCheck(Girl, 800, "L", TabM=1):
+                            elif Approvalcheck(Girl, 800, "L", TabM=1):
                                     $ Girl.change_face("sexy")
                                     $ Girl.change_stat("love", 90, 1)
                                     $ Girl.change_stat("obedience", 60, 2)
@@ -808,7 +808,7 @@ label Flirt(Girl =0): #rkeljsv
                                             ch_s "Hello. . ."
                                     elif Girl == JubesX:
                                             ch_v "Ooo. . . hey there. . ."
-                            elif ApprovalCheck(Girl, 900, TabM=1):
+                            elif Approvalcheck(Girl, 900, TabM=1):
                                     $ Girl.change_face("surprised")
                                     $ Girl.change_stat("love", 90, 1)
                                     $ Girl.change_stat("obedience", 60, 3)
@@ -828,7 +828,7 @@ label Flirt(Girl =0): #rkeljsv
                                             ch_s "What was that?"
                                     elif Girl == JubesX:
                                             ch_v "What're you up to?"
-                            elif ApprovalCheck(Girl, 800, TabM=1):
+                            elif Approvalcheck(Girl, 800, TabM=1):
                                     $ Girl.change_face("angry")
                                     $ Girl.change_stat("love", 60, -3)
                                     $ Girl.change_stat("love", 90, -1)
@@ -879,7 +879,7 @@ label Flirt(Girl =0): #rkeljsv
                             $ Girl.Upskirt = 0
                             if Girl.Panties and not Girl.Taboo:
                                     #if this is in private and she's wearing panties
-                                    if ApprovalCheck(Girl, 750, "L", TabM=2):
+                                    if Approvalcheck(Girl, 750, "L", TabM=2):
                                             $ Girl.change_face("sexy", 1)
                                             if Girl == RogueX:
                                                     ch_r "Oh, naughty, [Girl.Petname]!"
@@ -900,7 +900,7 @@ label Flirt(Girl =0): #rkeljsv
                                             elif Girl == JubesX:
                                                     ch_v "Heh, hey there!"
                                             $ Girl.change_stat("love", 90, 3)
-                                    elif ApprovalCheck(Girl, 650, "L", TabM=2):
+                                    elif Approvalcheck(Girl, 650, "L", TabM=2):
                                             $ Girl.change_face("sexy", 1)
                                             if Girl == RogueX:
                                                     ch_r "Naughty naughty, [Girl.Petname]!"
@@ -916,13 +916,13 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_s "Cheeky monkey."
                                             elif Girl == JubesX:
                                                     ch_v "Heh, hey there!"
-                                    elif ApprovalCheck(Girl, 300, "I", TabM=1):
+                                    elif Approvalcheck(Girl, 300, "I", TabM=1):
                                             $ Girl.change_face("sexy", 1)
                                             if Girl == KittyX:
                                                     ch_k "What's the deal?"
                                             else:
                                                     call Anyline(Girl,"Hey, what do you think you're doing, "+Girl.Petname+"?")
-                                    elif ApprovalCheck(Girl, 300, TabM=1) or Girl == LauraX:
+                                    elif Approvalcheck(Girl, 300, TabM=1) or Girl == LauraX:
                                             $ Girl.change_face("angry", 1)
                                             $ Girl.change_stat("love", 90, -3)
                                             $ Girl.change_stat("obedience", 80, 1)
@@ -962,7 +962,7 @@ label Flirt(Girl =0): #rkeljsv
 
                             elif Girl.Panties:
                                     #panties on, but in public
-                                    if ApprovalCheck(Girl, 750, "L") and ApprovalCheck(Girl, 1300, TabM=2):
+                                    if Approvalcheck(Girl, 750, "L") and Approvalcheck(Girl, 1300, TabM=2):
                                             $ Girl.change_face("sexy", 1)
                                             if Girl == RogueX:
                                                     ch_r "Oh, naughty, [Girl.Petname]!"
@@ -983,7 +983,7 @@ label Flirt(Girl =0): #rkeljsv
                                             elif Girl == JubesX:
                                                     ch_v "Heh, hey there!"
                                             $ Girl.change_stat("love", 90, 3)
-                                    elif ApprovalCheck(Girl, 600, "L") and ApprovalCheck(Girl, 1200, TabM=2):
+                                    elif Approvalcheck(Girl, 600, "L") and Approvalcheck(Girl, 1200, TabM=2):
                                             $ Girl.change_face("sexy", 1)
                                             if Girl == RogueX:
                                                     ch_r "[Girl.Petname]! A little warning!"
@@ -1000,7 +1000,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_s "Cheeky monkey."
                                             elif Girl == JubesX:
                                                     ch_v "Heh, maybe not here!"
-                                    elif ApprovalCheck(Girl, 600, "L"):
+                                    elif Approvalcheck(Girl, 600, "L"):
                                             $ Girl.change_face("angry", 1)
                                             $ Girl.change_stat("love", 90, -3)
                                             $ Girl.change_stat("obedience", 80, 3)
@@ -1018,7 +1018,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_s "What are you doing?"
                                             elif Girl == JubesX:
                                                     ch_v "-the hell?"
-                                    elif ApprovalCheck(Girl, 800, TabM=2):
+                                    elif Approvalcheck(Girl, 800, TabM=2):
                                             $ Girl.change_face("angry", 1)
                                             $ Girl.change_stat("love", 90, -5)
                                             $ Girl.change_stat("obedience", 80, 2)
@@ -1052,7 +1052,7 @@ label Flirt(Girl =0): #rkeljsv
 
                             elif not Girl.Taboo:
                                     #no panties, in private
-                                    if ApprovalCheck(Girl, 850, "L"):
+                                    if Approvalcheck(Girl, 850, "L"):
                                             if Girl == RogueX:
                                                     ch_r "Oh, naughty, [Girl.Petname]!"
                                                     ch_r "You could have just asked, you know. . ."
@@ -1071,7 +1071,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_s "Cheeky monkey."
                                             elif Girl == JubesX:
                                                     ch_v "Heh, hey there!"
-                                    elif ApprovalCheck(Girl, 700, "L"):
+                                    elif Approvalcheck(Girl, 700, "L"):
                                             $ Girl.change_face("sexy", 1)
                                             if Girl == RogueX:
                                                     ch_r "[Girl.Petname]! A little warning!"
@@ -1088,7 +1088,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_s "Cheeky monkey."
                                             elif Girl == JubesX:
                                                     ch_v "Heh, hey there!"
-                                    elif ApprovalCheck(Girl, 600, "L"):
+                                    elif Approvalcheck(Girl, 600, "L"):
                                             $ Girl.change_face("bemused", 1)
                                             $ Girl.change_stat("love", 90, -3)
                                             $ Girl.change_stat("obedience", 80, 3)
@@ -1108,7 +1108,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_s "Surprised?"
                                             elif Girl == JubesX:
                                                     ch_v "Um, surprised?"
-                                    elif ApprovalCheck(Girl, 500):
+                                    elif Approvalcheck(Girl, 500):
                                             $ Girl.change_face("angry", 1)
                                             $ Girl.change_stat("love", 90, -5)
                                             $ Girl.change_stat("obedience", 80, 2)
@@ -1145,7 +1145,7 @@ label Flirt(Girl =0): #rkeljsv
                             #end no panties, in private
                             else:
                                     #no panties, in public
-                                    if ApprovalCheck(Girl, 850, "L") and ApprovalCheck(Girl, 1500):
+                                    if Approvalcheck(Girl, 850, "L") and Approvalcheck(Girl, 1500):
                                             $ Girl.change_face("sexy", 1)
                                             if Girl == RogueX:
                                                     ch_r "Oh, naughty, [Girl.Petname]!"
@@ -1165,7 +1165,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_s "Cheeky monkey."
                                             elif Girl == JubesX:
                                                     ch_v "Heh, hey there!"
-                                    elif ApprovalCheck(Girl, 700, "L") and ApprovalCheck(Girl, 1500):
+                                    elif Approvalcheck(Girl, 700, "L") and Approvalcheck(Girl, 1500):
                                             $ Girl.change_face("sexy", 1)
                                             if Girl == RogueX:
                                                     ch_r "[Girl.Petname]! A little warning!"
@@ -1182,7 +1182,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_s "Best not in public."
                                             elif Girl == JubesX:
                                                     ch_v "Heh, hey not there!"
-                                    elif ApprovalCheck(Girl, 700):
+                                    elif Approvalcheck(Girl, 700):
                                             $ Girl.change_face("bemused", 1)
                                             $ Girl.change_stat("love", 90, -3)
                                             $ Girl.change_stat("obedience", 80, 3)
@@ -1200,7 +1200,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     ch_s "Best not in public."
                                             elif Girl == JubesX:
                                                     ch_v "Probably not here?"
-                                    elif ApprovalCheck(Girl, 1000):
+                                    elif Approvalcheck(Girl, 1000):
                                             $ Girl.change_face("angry", 1)
                                             $ Girl.change_stat("love", 90, -5)
                                             $ Girl.change_stat("obedience", 80, 2)
@@ -1244,7 +1244,7 @@ label Flirt(Girl =0): #rkeljsv
                 "Grab her tit":
                             $ Girl.change_face("surprised", 1)
                             "You come up to [Girl.name] and quickly honk her boob."
-                            if Girl.SEXP < 5 or not ApprovalCheck(Girl, 600, TabM=2):
+                            if Girl.SEXP < 5 or not Approvalcheck(Girl, 600, TabM=2):
                                     "You come up to [Girl.name] and quickly honk her boob."
                                     $ Girl.change_face("angry")
                                     $ Girl.change_stat("love", 90, -5)
@@ -1297,7 +1297,7 @@ label Flirt(Girl =0): #rkeljsv
                                     elif Girl == JubesX:
                                             ch_v "Oh, hello. . ."
                                     $ Count = 10
-                            elif ApprovalCheck(Girl, 800, "L", TabM=1):
+                            elif Approvalcheck(Girl, 800, "L", TabM=1):
                                     $ Girl.change_face("sexy")
                                     $ Girl.change_stat("lust", 60, 2)
                                     $ Girl.change_stat("love", 90, 1)
@@ -1316,7 +1316,7 @@ label Flirt(Girl =0): #rkeljsv
                                     elif Girl == JubesX:
                                             ch_v "Oh, hello. . ."
                                     $ Count = 7
-                            elif ApprovalCheck(Girl, 1000, TabM=1):
+                            elif Approvalcheck(Girl, 1000, TabM=1):
                                     $ Girl.change_face("perplexed")
                                     $ Girl.change_stat("lust", 60, 1)
                                     if Girl == RogueX:
@@ -1334,7 +1334,7 @@ label Flirt(Girl =0): #rkeljsv
                                     elif Girl == JubesX:
                                             ch_v "Little handsy there, [Girl.Petname]. . ."
                                     $ Count = 5
-                            elif ApprovalCheck(Girl, 800, TabM=1):
+                            elif Approvalcheck(Girl, 800, TabM=1):
                                     $ Girl.change_face("angry")
                                     $ Girl.change_stat("love", 90, -3)
                                     $ Girl.change_stat("obedience", 90, 4)
@@ -1582,7 +1582,7 @@ label Flirt(Girl =0): #rkeljsv
                                             $ Count = 0
 
                                         "Fondle it a little":
-                                                if Girl.FondleB and ApprovalCheck(Girl, 1000, TabM=2):
+                                                if Girl.FondleB and Approvalcheck(Girl, 1000, TabM=2):
                                                         $ Girl.change_face("sexy",1)
                                                         $ Girl.Eyes = "closed"
                                                         $ Girl.change_stat("lust", 90, 5)
@@ -1627,16 +1627,16 @@ label Flirt(Girl =0): #rkeljsv
                             elif bg_current == "HW Party":
                                     "She shrugs away from you and winks."
                                     call Anyline(Girl,"Not now. . .")
-                            elif Girl.FondleB and ApprovalCheck(Girl, 1100, TabM = 3):
+                            elif Girl.FondleB and Approvalcheck(Girl, 1100, TabM = 3):
                                     $ Girl.change_face("sexy", 1)
                                     if Girl == RogueX:
                                             ch_r "You know, maybe we could keep this party roll'in. . ."
                                     elif Girl == KittyX:
                                             ch_k "I wouldn't mind if we kept. . . you know. . ."
                                     elif Girl == EmmaX:
-                                            if "three" not in EmmaX.History and not AloneCheck(EmmaX):
+                                            if "three" not in EmmaX.History and not Alonecheck(EmmaX):
                                                         # if there are other girls in the room. . .
-                                                        call Emma_ThreeCheck
+                                                        call Emma_Threecheck
                                             ch_e "Were you just sampling, or did you want to continue?"
                                     elif Girl == LauraX:
                                             ch_l "We could keep going. . ."
@@ -1676,7 +1676,7 @@ label Flirt(Girl =0): #rkeljsv
                                                         ch_s "That is unfortunate."
                                                 elif Girl == JubesX:
                                                         ch_v "Aw. . ."
-                            elif ApprovalCheck(Girl, 800, TabM = 3):
+                            elif Approvalcheck(Girl, 800, TabM = 3):
                                     $ Girl.Brows = "confused"
                                     $ Girl.Eyes = "sexy"
                                     $ Girl.Mouth = "smile"
@@ -1694,7 +1694,7 @@ label Flirt(Girl =0): #rkeljsv
                                             ch_s "I'm sure you were impressed."
                                     elif Girl == JubesX:
                                             ch_v "Well, if you were thinking more. . ."
-                            elif ApprovalCheck(Girl, 800):
+                            elif Approvalcheck(Girl, 800):
                                     $ Girl.change_face("angry", 1)
                                     if Girl == RogueX:
                                             ch_r "I can't believe you'd do that in public!"
@@ -1749,7 +1749,7 @@ label Flirt(Girl =0): #rkeljsv
                                             ch_s "Hmmm. . ."
                                     elif Girl == JubesX:
                                             ch_v "Ohhh. . . hay there. . ."
-                            elif ApprovalCheck(Girl, 650, "L",Alt=[[RogueX],600]):
+                            elif Approvalcheck(Girl, 650, "L",Alt=[[RogueX],600]):
                                     $ Girl.change_face("sexy")
                                     $ Girl.change_stat("lust", 60, 1)
                                     $ Girl.change_stat("love", 90, 2)
@@ -1767,7 +1767,7 @@ label Flirt(Girl =0): #rkeljsv
                                             ch_s "That's lovely, [Girl.Petname]."
                                     elif Girl == JubesX:
                                             ch_v "Ohhh. . . hay there. . ."
-                            elif ApprovalCheck(Girl, 500,Alt=[[RogueX],450]):
+                            elif Approvalcheck(Girl, 500,Alt=[[RogueX],450]):
                                     $ Girl.change_face("surprised", 1)
                                     $ Girl.change_stat("love", 90, 1)
                                     if Girl == EmmaX:
@@ -1778,7 +1778,7 @@ label Flirt(Girl =0): #rkeljsv
                                             ch_s "Hello, [Girl.Petname]."
                                     else:
                                             call Anyline(Girl,"Oh, hey, "+Girl.Petname+". What's up?")
-                            elif ApprovalCheck(Girl, 350):
+                            elif Approvalcheck(Girl, 350):
                                     $ Girl.change_face("angry", 1)
                                     $ Girl.change_stat("love", 90, -1)
                                     if Girl == RogueX:
@@ -1893,7 +1893,7 @@ label Compliment(Girl=0,line0=0,line1=0,line2=0,Options=[],CountList=[],line=0,D
     #responses based on compliment <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <> <>
     if line == 0:
             #"You really nailed that Danger Room exercise",  #0
-            if ApprovalCheck(Girl, 1000):
+            if Approvalcheck(Girl, 1000):
                     $ D20 += 5
 
             $ Girl.change_stat("love", 60, 3)
@@ -1965,7 +1965,7 @@ label Compliment(Girl=0,line0=0,line1=0,line2=0,Options=[],CountList=[],line=0,D
             #"You really nailed that Danger Room exercise",  #0
     elif line == 1:
             #"Great job in class the other day",             #1
-            if not ApprovalCheck(Girl, 700):
+            if not Approvalcheck(Girl, 700):
                     $ D20 -= 5
 
             if D20 >= 10:
@@ -2010,7 +2010,7 @@ label Compliment(Girl=0,line0=0,line1=0,line2=0,Options=[],CountList=[],line=0,D
             #"Great job in class the other day",             #1
     elif line == 2:
             #"You're looking extra beautiful today",         #2
-            if not ApprovalCheck(Girl, 900):
+            if not Approvalcheck(Girl, 900):
                     $ D20 -= 10
             if Girl in (RogueX, KittyX, JeanX, JubesX):
                     $ D20 += 5
@@ -2063,7 +2063,7 @@ label Compliment(Girl=0,line0=0,line1=0,line2=0,Options=[],CountList=[],line=0,D
             #"You're looking extra beautiful today",         #2
     elif line == 3:
             #"Hey there, gorgeous",                          #3
-            if not ApprovalCheck(Girl, 900):
+            if not Approvalcheck(Girl, 900):
                     $ D20 -= 10
             if Girl in (KittyX, EmmaX, JeanX, JubesX):
                     $ D20 += 5
@@ -2115,9 +2115,9 @@ label Compliment(Girl=0,line0=0,line1=0,line2=0,Options=[],CountList=[],line=0,D
             #"Hey there, gorgeous",                          #3
     elif line == 4:
             #"I'm sorry, I got lost in your eyes",           #4
-            if ApprovalCheck(Girl, 900, "L") and Girl != EmmaX:
+            if Approvalcheck(Girl, 900, "L") and Girl != EmmaX:
                     pass
-            elif not ApprovalCheck(Girl, 1000):
+            elif not Approvalcheck(Girl, 1000):
                     $ D20 -= 10
             if Girl in (RogueX, KittyX):
                     $ D20 += 10
@@ -2172,9 +2172,9 @@ label Compliment(Girl=0,line0=0,line1=0,line2=0,Options=[],CountList=[],line=0,D
             #"I'm sorry, I got lost in your eyes",           #4
     elif line == 5:
             #"You're looking really toned lately",           #5
-            if not ApprovalCheck(Girl, 600):
+            if not Approvalcheck(Girl, 600):
                     $ D20 -= 12
-            elif not ApprovalCheck(Girl, 1200):
+            elif not Approvalcheck(Girl, 1200):
                     $ D20 -= 8
 
             if Girl in (LauraX,StormX):
@@ -2231,11 +2231,11 @@ label Compliment(Girl=0,line0=0,line1=0,line2=0,Options=[],CountList=[],line=0,D
             #"You're looking really toned lately",           #5
     elif line == 6:
             #"You have some really nice tits",               #6
-            if ApprovalCheck(Girl, 700, "I"):
+            if Approvalcheck(Girl, 700, "I"):
                     pass
-            elif not ApprovalCheck(Girl, 900):
+            elif not Approvalcheck(Girl, 900):
                     $ D20 -= 15
-            elif not ApprovalCheck(Girl, 1400):
+            elif not Approvalcheck(Girl, 1400):
                     $ D20 -= 10
 
             if Girl in (KittyX, EmmaX):
@@ -2307,11 +2307,11 @@ label Compliment(Girl=0,line0=0,line1=0,line2=0,Options=[],CountList=[],line=0,D
             #"You have some really nice tits",               #6
     elif line == 7:
             #"Your ass looks really great",                  #7
-            if ApprovalCheck(Girl, 700, "I"):
+            if Approvalcheck(Girl, 700, "I"):
                     pass
-            elif not ApprovalCheck(Girl, 900):
+            elif not Approvalcheck(Girl, 900):
                     $ D20 -= 15
-            elif not ApprovalCheck(Girl, 1300):
+            elif not Approvalcheck(Girl, 1300):
                     $ D20 -= 10
 
             if Girl in (RogueX, EmmaX, StormX):
@@ -2367,9 +2367,9 @@ label Compliment(Girl=0,line0=0,line1=0,line2=0,Options=[],CountList=[],line=0,D
             #"Your ass looks really great",                  #7
     elif line == 8:
             #"Oh, what's that fragrance? It suits you",      #8
-            if ApprovalCheck(Girl, 800, "L"):
+            if Approvalcheck(Girl, 800, "L"):
                     pass
-            elif not ApprovalCheck(Girl, 1300):
+            elif not Approvalcheck(Girl, 1300):
                     $ D20 -= 10
             if Girl in (EmmaX, LauraX, StormX):
                     $ D20 += 15
@@ -2426,9 +2426,9 @@ label Compliment(Girl=0,line0=0,line1=0,line2=0,Options=[],CountList=[],line=0,D
             #"Oh, what's that fragrance? It suits you",      #8
     elif line == 9:
             #"I'm so into you"                               #9
-            if ApprovalCheck(Girl, 900, "L"):
+            if Approvalcheck(Girl, 900, "L"):
                     pass
-            elif not ApprovalCheck(Girl, 1100):
+            elif not Approvalcheck(Girl, 1100):
                     $ D20 -= 10
             if Girl in (RogueX, LauraX, JeanX):
                     $ D20 += 5
@@ -2533,7 +2533,7 @@ label love_You(Girl=0): #rkeljsv
             #if you didn't clear the love scene with her. . .
             if "love" in Girl.History:
                     #you've tried this before. . .
-                    if ApprovalCheck(Girl, 800,"L"):
+                    if Approvalcheck(Girl, 800,"L"):
                             #she kind of likes you
                             $ Girl.change_stat("love", 90, 2)
                             $ Girl.change_stat("obedience", 80, 2)
@@ -2556,7 +2556,7 @@ label love_You(Girl=0): #rkeljsv
                             elif Girl == JubesX:
                                     ch_v "I don't know. . ."
 
-                    elif ApprovalCheck(Girl, 600,"L"):
+                    elif Approvalcheck(Girl, 600,"L"):
                             #she is friendly enough. . .
                             $ Girl.change_stat("love", 95, 2)
                             $ Girl.change_stat("obedience", 80, 3)
@@ -2649,11 +2649,11 @@ label love_You(Girl=0): #rkeljsv
 
             if line == "never":
                     # if you've never had the "love" talk. . .
-                    if ApprovalCheck(Girl, 800,"L"):
+                    if Approvalcheck(Girl, 800,"L"):
                             $ Girl.change_stat("love", 90, 10)
                             $ Girl.change_stat("lust", 50, 5)
                             $ Girl.change_face("smile",2,Eyes="surprised")
-                    elif ApprovalCheck(Girl, 600,"L"):
+                    elif Approvalcheck(Girl, 600,"L"):
                             $ Girl.change_stat("love", 90, 5)
                             $ Girl.change_face("confused",2,Eyes="surprised")
                     else:
@@ -2717,7 +2717,7 @@ label love_You(Girl=0): #rkeljsv
                 elif Girl == JubesX:
                         ch_v "Seriously, give me time to think. . ."
 
-        elif ApprovalCheck(Girl, 800,"L"):
+        elif Approvalcheck(Girl, 800,"L"):
                 #if she still loves you
                 $ Girl.change_stat("love", 90, 5)
                 $ Girl.change_stat("love", 200, 5)
@@ -2802,7 +2802,7 @@ label TouchCheek(Girl=0): #rkeljsv
                 $ Girl.Addictionrate += 1 if Girl.Addictionrate < 5 else 0
                 $ Girl.change_stat("lust", 40, 5)
 
-        if ApprovalCheck(Girl, 1000):
+        if Approvalcheck(Girl, 1000):
                 $ Girl.change_face("sexy", 1)
                 if Girl == RogueX:
                         ch_r "A promise of things to come, [Girl.Petname]?"
@@ -2813,7 +2813,7 @@ label TouchCheek(Girl=0): #rkeljsv
                 else:
                         call Anyline(Girl,"Hmmm, what were you thinking, " + Girl.Petname + "?")
                 $ Girl.change_stat("love", 80, 1)
-        elif ApprovalCheck(Girl, 800,Alt=[[RogueX],500]) or ApprovalCheck(Girl, 700,"L"):
+        elif Approvalcheck(Girl, 800,Alt=[[RogueX],500]) or Approvalcheck(Girl, 700,"L"):
                 $ Girl.change_face("smile", 1)
                 if Girl == RogueX:
                         ch_r "That was. . . nice."
@@ -2835,7 +2835,7 @@ label TouchCheek(Girl=0): #rkeljsv
                         call Anyline(Girl,"Hey, I warned you, "+Girl.Petname+".")
                 $ Girl.change_stat("love", 50, -2)
                 $ Girl.daily_history.append("no_cheek")
-        elif ApprovalCheck(Girl, 250): #400
+        elif Approvalcheck(Girl, 250): #400
                 $ Girl.Mouth = "smile"
                 $ Girl.Brows = "normal"
                 if Girl == RogueX:
@@ -2867,7 +2867,7 @@ label TouchCheek(Girl=0): #rkeljsv
         if "no_cheek" in Girl.daily_history:
             menu:
                 "Sorry, sorry, won't happen again.":
-                        if ApprovalCheck(Girl, 300):
+                        if Approvalcheck(Girl, 300):
                                 $ Girl.change_face("sexy", 1)
                                 if Girl == RogueX:
                                         ch_r "Well, ok, just cut it out though."
@@ -2893,7 +2893,7 @@ label TouchCheek(Girl=0): #rkeljsv
                 # end "Sorry, sorry, won't happen again.":
 
                 "You know you wanted it.":
-                        if ApprovalCheck(Girl, 400, "OI",Alt=[[RogueX],300]) or ApprovalCheck(Girl, 800,Alt=[[RogueX,LauraX],1500]):
+                        if Approvalcheck(Girl, 400, "OI",Alt=[[RogueX],300]) or Approvalcheck(Girl, 800,Alt=[[RogueX,LauraX],1500]):
                                 $ Girl.change_face("normal", 1)
                                 $ Girl.Eyes = "squint"
                                 if Girl == RogueX:
@@ -2926,7 +2926,7 @@ label TouchCheek(Girl=0): #rkeljsv
         else:
             menu:
                 "Sorry, you looked so cute there.":
-                        if ApprovalCheck(Girl, 850, "LI"):
+                        if Approvalcheck(Girl, 850, "LI"):
                                 $ Girl.change_face("sexy", 1)
                                 if Girl == RogueX:
                                         ch_r "I'll make sure to collect on that later."
@@ -2944,7 +2944,7 @@ label TouchCheek(Girl=0): #rkeljsv
                                 elif Girl == JubesX:
                                         ch_v "Aw."
                                 $ Girl.change_stat("love", 80, 2)
-                        elif ApprovalCheck(Girl, 500, "LI"):
+                        elif Approvalcheck(Girl, 500, "LI"):
                                 $ Girl.change_face("smile", 1)
                                 if Girl == RogueX:
                                         ch_r "Aw, you're sweet."
@@ -2984,7 +2984,7 @@ label TouchCheek(Girl=0): #rkeljsv
                 # end "Sorry, you looked so cute there."
 
                 "You had a fly on you.":
-                        if ApprovalCheck(Girl, 850, "LI"):
+                        if Approvalcheck(Girl, 850, "LI"):
                                 $ Girl.change_face("sexy", 1)
                                 if Girl == RogueX:
                                         ch_r "Oh? Was that all. . ."
@@ -3001,7 +3001,7 @@ label TouchCheek(Girl=0): #rkeljsv
                                         call Anyline(Girl,"Oh? Sorry. . .")
                                 $ Girl.change_stat("love", 60, 1)
                                 $ Girl.change_stat("inhibition", 40, 1)
-                        elif ApprovalCheck(Girl, 600):
+                        elif Approvalcheck(Girl, 600):
                                 $ Girl.change_face("normal")
                                 call Anyline(Girl,"A fly, right. . .")
                         else:
@@ -3023,7 +3023,7 @@ label TouchCheek(Girl=0): #rkeljsv
                 #end "fly on you"
 
                 "Are you sure you didn't enjoy that?":
-                        if ApprovalCheck(Girl, 650, "LI") or ApprovalCheck(Girl, 1000):
+                        if Approvalcheck(Girl, 650, "LI") or Approvalcheck(Girl, 1000):
                                 $ Girl.change_face("sexy", 1)
                                 $ Girl.Eyes = "side"
                                 if Girl == RogueX:
@@ -3042,7 +3042,7 @@ label TouchCheek(Girl=0): #rkeljsv
                                 $ Girl.change_stat("obedience", 50, 2)
                                 $ Girl.change_stat("obedience", 30, 1)
                                 $ Girl.change_stat("inhibition", 40, 1)
-                        elif ApprovalCheck(Girl, 500, "OI"):
+                        elif Approvalcheck(Girl, 500, "OI"):
                                 $ Girl.change_face("normal", 1)
                                 if Girl == EmmaX:
                                         ch_e "Don't push it. . . too far."
@@ -3098,15 +3098,15 @@ label Hold_Hands(Girl=0,Gloves=0): #rkeljsv
                     $ Gloves = "gloves"
                     $ Girl.Arms = 0
         "You reach down and grab [Girl.name]'s hand in yours."
-        if ApprovalCheck(Girl, 800,"L"):
+        if Approvalcheck(Girl, 800,"L"):
                 $ Girl.change_face("smile",1,Eyes="closed")
                 "She squeezes your hand back and leans her shoulder against yours."
                 $ Count = 10
-        elif ApprovalCheck(Girl, 1200):
+        elif Approvalcheck(Girl, 1200):
                 $ Girl.change_face("bemused",1,Brows="confused")
                 "She gives your hand a light squeeze in return."
                 $ Count = 4
-        elif ApprovalCheck(Girl, 800):
+        elif Approvalcheck(Girl, 800):
                 $ Girl.change_face("bemused",2,Brows="confused")
                 "She stiffens a bit, but leaves her hand in yours."
                 $ Girl.change_face("bemused",1,Eyes="down")
@@ -3137,17 +3137,17 @@ label Hold_Hands(Girl=0,Gloves=0): #rkeljsv
 
         while Count:
             $ Round -= 5
-            if ApprovalCheck(Girl, 800,"L"):
+            if Approvalcheck(Girl, 800,"L"):
                 if Count >= 8:
                     $ Girl.change_stat("love", 90, 2)
                     $ Girl.change_stat("obedience", 70, 2)
                     $ Girl.change_stat("lust", 30, 2)
-            elif ApprovalCheck(Girl, 1200):
+            elif Approvalcheck(Girl, 1200):
                 if Count >= 3:
                     $ Girl.change_stat("love", 80, 3)
                     $ Girl.change_stat("obedience", 70, 2)
                     $ Girl.change_stat("lust", 30, 1)
-            elif ApprovalCheck(Girl, 800):
+            elif Approvalcheck(Girl, 800):
                     $ Girl.change_stat("love", 70, 2)
                     $ Girl.change_stat("obedience", 50, 2)
             if Girl.Arms != "gloves" and Girl.Addictionrate >= 3 and Girl.Addict >= 5:
@@ -3171,7 +3171,7 @@ label Hold_Hands(Girl=0,Gloves=0): #rkeljsv
 
         $ Girl.AddWord(1,"holdhands","holdhands") #adds the "holdhands" trait to recent and daily actions
 
-        if not ApprovalCheck(Girl, 800,"L") and not ApprovalCheck(Girl, 1200):
+        if not Approvalcheck(Girl, 800,"L") and not Approvalcheck(Girl, 1200):
                 # she's a little creeped out
                 $ Girl.change_face("sadside",1,Brows="confused")
                 $ Girl.change_stat("love", 60, -2)
@@ -3187,7 +3187,7 @@ label Hold_Hands(Girl=0,Gloves=0): #rkeljsv
         return
 
 label Girl_Headpat(Girl=0): #rkeljsv
-    $ Girl = GirlCheck(Girl)
+    $ Girl = Girlcheck(Girl)
     call shift_focus(Girl)
     $ Girl.change_face("surprised", 1)
     if "no_headpat" in Girl.daily_history:
@@ -3216,14 +3216,14 @@ label Girl_Headpat(Girl=0): #rkeljsv
             "You reach out and pat [Girl.name] on the head."
     $ Girl.change_stat("obedience", 50, 2)
 
-    if ApprovalCheck(Girl, 1200,Alt=[[LauraX],1000]):
+    if Approvalcheck(Girl, 1200,Alt=[[LauraX],1000]):
             $ Girl.change_face("sexy", 1)
             if Girl == EmmaX:
                     ch_e "Hmmmm?"
             else:
                     call Anyline(Girl,"Mmmmm. . .")
             $ Girl.change_stat("love", 85, 1)
-    elif ApprovalCheck(Girl, 800,Alt=[[EmmaX],1200]) or ApprovalCheck(Girl, 750, "L",Alt=[[LauraX],600]):
+    elif Approvalcheck(Girl, 800,Alt=[[EmmaX],1200]) or Approvalcheck(Girl, 750, "L",Alt=[[LauraX],600]):
             $ Girl.change_face("smile", 1)
             call Anyline(Girl,"Mmmmm. . .")
     elif "headpat" in Girl.daily_history:
@@ -3244,7 +3244,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
                     ch_v "What'd I tell you?"
             $ Girl.change_stat("love", 50, -2)
             $ Girl.daily_history.append("no_headpat")
-    elif ApprovalCheck(Girl, 400,Alt=[[EmmaX],600]):
+    elif Approvalcheck(Girl, 400,Alt=[[EmmaX],600]):
             $ Girl.Mouth = "smile"
             $ Girl.Brows = "normal"
             if Girl == RogueX:
@@ -3290,7 +3290,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
     if "no_headpat" in Girl.daily_history:
         menu:
             "Sorry, sorry, won't happen again.":
-                if ApprovalCheck(Girl, 300):
+                if Approvalcheck(Girl, 300):
                         $ Girl.change_face("sexy", 1)
                         if Girl == RogueX:
                                 ch_r "Heard that before. . ."
@@ -3327,7 +3327,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
                         $ Girl.change_stat("obedience", 20, 1)
 
             "You know you wanted it.":
-                if ApprovalCheck(Girl, 400, "OI",Alt=[[EmmaX],600]) or ApprovalCheck(Girl, 800,Alt=[[EmmaX],900]):
+                if Approvalcheck(Girl, 400, "OI",Alt=[[EmmaX],600]) or Approvalcheck(Girl, 800,Alt=[[EmmaX],900]):
                         $ Girl.change_face("normal", 1)
                         $ Girl.Eyes = "squint"
                         if Girl == RogueX:
@@ -3373,7 +3373,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
         #if she hasn't refused this today. . .
         menu:
             "Sorry, you looked so cute there.":
-                if ApprovalCheck(Girl, 850, "LI",Alt=[[EmmaX],1050]):
+                if Approvalcheck(Girl, 850, "LI",Alt=[[EmmaX],1050]):
                         $ Girl.change_face("sexy", 1)
                         $ Count = 7
                         if Girl == RogueX:
@@ -3396,7 +3396,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
                         elif Girl == JubesX:
                                 ch_v "Always. . ."
                         $ Girl.change_stat("love", 80, 2)
-                elif ApprovalCheck(Girl, 500, "LI",Alt=[[EmmaX],700]):
+                elif Approvalcheck(Girl, 500, "LI",Alt=[[EmmaX],700]):
                         $ Girl.change_face("smile", 1)
                         $ Count = 5
                         if Girl == RogueX:
@@ -3437,7 +3437,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
                         $ Count = 1
 
             "You had a loose hair going on.":
-                if ApprovalCheck(Girl, 700, "LI",Alt=[[EmmaX,JeanX],850]):
+                if Approvalcheck(Girl, 700, "LI",Alt=[[EmmaX,JeanX],850]):
                         $ Girl.change_face("sexy", 1)
                         $ Count = 4
                         if Girl == RogueX:
@@ -3457,7 +3457,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
                                 ch_v "Not with this style."
                         $ Girl.change_stat("love", 60, 1)
                         $ Girl.change_stat("inhibition", 40, 1)
-                elif ApprovalCheck(Girl, 700):
+                elif Approvalcheck(Girl, 700):
                         $ Girl.change_face("normal")
                         $ Count = 3
                         if Girl == RogueX:
@@ -3494,7 +3494,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
                         $ Count = 1
 
             "Are you sure you didn't enjoy that?":
-                if ApprovalCheck(Girl, 850,Alt=[[EmmaX,JeanX],1000]):
+                if Approvalcheck(Girl, 850,Alt=[[EmmaX,JeanX],1000]):
                         $ Girl.change_face("sexy", 1)
                         $ Girl.Eyes = "side"
                         if Girl == RogueX:
@@ -3515,7 +3515,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
                         $ Girl.change_stat("obedience", 30, 1)
                         $ Girl.change_stat("inhibition", 40, 1)
                         $ Count = 4
-                elif ApprovalCheck(Girl, 500, "OI"):
+                elif Approvalcheck(Girl, 500, "OI"):
                         $ Girl.change_face("normal", 1)
                         $ Count = 2
                         if Girl == RogueX:
@@ -3568,7 +3568,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
                     "You continue to hold your hand on top of [Girl.name]'s head, rubbing it softly."
                     if Count <= 0:
                         #timed out
-                        if ApprovalCheck(Girl, 800):
+                        if Approvalcheck(Girl, 800):
                                 $ Girl.change_face("bemused", 2)
                                 $ Girl.change_stat("love", 80, 2)
                                 $ Girl.change_stat("inhibition", 40, 2)
@@ -3610,7 +3610,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
                                 $ Girl.change_face("angry", 1)
                     elif Count == 1:
                         #nearly timed out
-                        if ApprovalCheck(Girl, 800,Alt=[[EmmaX],900]):
+                        if Approvalcheck(Girl, 800,Alt=[[EmmaX],900]):
                                 $ Girl.change_face("bemused", 1)
                                 $ Girl.change_stat("love", 80, 1)
                                 $ Girl.change_stat("obedience", 50, 2)
@@ -3654,7 +3654,7 @@ label Girl_Headpat(Girl=0): #rkeljsv
                                         ch_v "Ok, cut it out."
                     else:
                         #she's ok with it. . .
-                        if ApprovalCheck(Girl, 800,Alt=[[EmmaX],900]):
+                        if Approvalcheck(Girl, 800,Alt=[[EmmaX],900]):
                                 $ Girl.change_face("bemused", 2,Eyes="closed")
                                 if Count > 5:
                                         $ Girl.change_stat("love", 90, 1)
@@ -3697,7 +3697,7 @@ label AskPanties(Girl=0,Store = 0): #rkeljsv
     $ Store = temp_modifier
     $ line = 0
     if not Girl.Panties or Girl.Panties == "shorts":
-            if ApprovalCheck(Girl, 900):
+            if Approvalcheck(Girl, 900):
                 $ Girl.change_face("sexy", 1)
                 $ Girl.change_stat("lust", 80, 5)
                 $ Girl.change_stat("lust", 60, 5)
@@ -3756,10 +3756,10 @@ label AskPanties(Girl=0,Store = 0): #rkeljsv
                         ch_v "I, um, can't right now."
     else:
         #if she is wearing some panties
-        if Girl.SeenPussy and ApprovalCheck(Girl, 500):
+        if Girl.SeenPussy and Approvalcheck(Girl, 500):
                     #You've seen her Pussy.
                     $ temp_modifier += 15
-        elif Girl.SeenPanties and ApprovalCheck(Girl, 500):
+        elif Girl.SeenPanties and Approvalcheck(Girl, 500):
                     #You've seen her panties.
                     $ temp_modifier += 5
         if "exhibitionist" in Girl.Traits:
@@ -3772,18 +3772,18 @@ label AskPanties(Girl=0,Store = 0): #rkeljsv
         $ line = 0
         if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 10:
                 #pants or something similar
-                if ApprovalCheck(Girl, 1000, "OI", TabM = 5) or "exhibitionist" in Girl.Traits:
+                if Approvalcheck(Girl, 1000, "OI", TabM = 5) or "exhibitionist" in Girl.Traits:
                     $ line = "here"
-                elif ApprovalCheck(Girl, 900, TabM = 5):
+                elif Approvalcheck(Girl, 900, TabM = 5):
                     $ line = "change"
         elif Girl.wearing_skirt:
                 #skirt
-                if ApprovalCheck(Girl, 600, "OI", TabM = 5) or "exhibitionist" in Girl.Traits:
+                if Approvalcheck(Girl, 600, "OI", TabM = 5) or "exhibitionist" in Girl.Traits:
                     $ line = "here"
-                elif ApprovalCheck(Girl, 1100, TabM = 5):
+                elif Approvalcheck(Girl, 1100, TabM = 5):
                     $ line = "change"
         else:
-                if ApprovalCheck(Girl, 1200, TabM = 5) or "exhibitionist" in Girl.Traits:
+                if Approvalcheck(Girl, 1200, TabM = 5) or "exhibitionist" in Girl.Traits:
                     $ line = "here"
 
         if Girl == StormX and line == "change":
@@ -3883,7 +3883,7 @@ label AskPanties(Girl=0,Store = 0): #rkeljsv
                                 $ line = 0
 
                         "And miss the show?":
-                            if ApprovalCheck(Girl, 1000, "LI"):
+                            if Approvalcheck(Girl, 1000, "LI"):
                                     $ Girl.change_stat("lust", 70, 5)
                                     $ Girl.change_stat("obedience", 60, 5)
                                     $ Girl.change_stat("inhibition", 60, 5)
@@ -3920,7 +3920,7 @@ label AskPanties(Girl=0,Store = 0): #rkeljsv
                                     $ line = 0
 
                         "Nope, I'm staying.":
-                            if ApprovalCheck(Girl, 600, "OI"):
+                            if Approvalcheck(Girl, 600, "OI"):
                                     $ Girl.change_face("perplexed", 1)
                                     $ Girl.change_stat("lust", 70, 5)
                                     $ Girl.change_stat("obedience", 60, 10)
@@ -3987,7 +3987,7 @@ label AskPanties(Girl=0,Store = 0): #rkeljsv
         else:
             #She refuses.
             $ Girl.change_face("angry", 2)
-            if not ApprovalCheck(Girl, 500):
+            if not Approvalcheck(Girl, 500):
                     $ Girl.change_stat("lust", 60, 5)
                     $ Girl.change_stat("love", 90, -10)
                     $ Girl.change_stat("obedience", 60, 3)
@@ -4008,7 +4008,7 @@ label AskPanties(Girl=0,Store = 0): #rkeljsv
                             ch_v "No thanks."
                     $ Girl.recent_history.append("angry")
                     $ Girl.daily_history.append("angry")
-            elif not ApprovalCheck(Girl, 500, TabM = 5):
+            elif not Approvalcheck(Girl, 500, TabM = 5):
                     $ Girl.change_stat("lust", 60, 5)
                     $ Girl.change_stat("love", 90, -5)
                     $ Girl.change_stat("obedience", 60, 5)
@@ -4096,7 +4096,7 @@ label Remove_Panties(Girl = 0, Type=0,Store = 0, Store2 = 0):  #rkeljsv
             $ Girl.OutfitChange()
             call OutfitShame(Girl,20)
             return
-    elif Girl == JeanX and Girl.wearing_skirt and not ApprovalCheck(Girl, 400, "L"): #skirt
+    elif Girl == JeanX and Girl.wearing_skirt and not Approvalcheck(Girl, 400, "L"): #skirt
             $ Girl.Panties = 0
             $ Girl.change_face("bemused",Eyes="psychic")
             "You notice some movement as her panties shoot down her legs and she quickly steps out of them."

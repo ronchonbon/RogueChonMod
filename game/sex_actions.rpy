@@ -1,3 +1,48 @@
+label sex_acts(action = 0):
+    if Alonecheck(focused_Girl) and focused_Girl.Taboo == 20:
+        $ focused_Girl.Taboo = 0
+        $ Taboo = 0
+
+    call shift_focus(focused_Girl)
+
+    if action == "SkipTo":
+        $ renpy.pop_call() #causes it to skip past the Trigger Swap
+        $ renpy.pop_call()
+
+        call SkipTo(focused_Girl)
+    elif action == "switch":
+        $ renpy.pop_call()
+    elif action == "masturbation":
+        call before_show
+
+        if not action_context:
+            return
+    elif action == "lesbian":
+        call Les_Prep(focused_Girl)
+
+        if not action_context:
+            return
+    elif action == "kiss":
+        call before_kiss(focused_Girl)
+
+        if not action_context:
+            return
+    elif action == "fondle_breasts":
+        call fondle_breasts(focused_Girl)
+
+        if not action_context:
+            return
+    elif action in ["handjob", "blowjob"]:
+        call before_action
+
+        if not action_context:
+            return
+    elif action == "sex":
+        call before_action
+
+        if not action_context:
+            return
+
 label sex_menu:
     menu:
         "Keep going. . ." if action_speed:
@@ -44,15 +89,15 @@ label sex_menu:
         "Other options":
             menu:
                 "Offhand action":
-                    if focused_Girl.Action and multi_action:
+                    if focused_Girl.actionion and multi_action:
                         call Offhand_Set
 
                         if offhand_action:
-                            $ focused_Girl.Action -= 1
+                            $ focused_Girl.actionion -= 1
                     else:
                         call Sex_Basic_Dialog(focused_Girl,"tired")
                 "Shift primary action":
-                    if focused_Girl.Action and multi_action:
+                    if focused_Girl.actionion and multi_action:
                         menu:
                             "How about sex?" if primary_action != "sex":
                                 $ action_context = "shift"
@@ -93,9 +138,9 @@ label sex_menu:
                             pass
                         "Ask [Partner.name] to do something else":
                             call Three_Change(focused_Girl)
-                        "Don't stop what you're doing. . .(locked)" if not position_change_timer or not Partner_primary_action:
+                        "Don't stop what you're doing. . .(locked)" if not position_change_timer or not second_girl_primary_action:
                             $ position_change_timer = 0
-                        "Don't stop what you're doing. . ." if position_change_timer and Partner_primary_action:
+                        "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
                             $ position_change_timer = 0
                         "Swap to [Partner.name]":
                             call primary_action_Swap(focused_Girl)
@@ -302,7 +347,7 @@ label end_of_sex_round(Girl, action):
     elif action == "hotdog":
         $ bonus = Girl.Hotdog
 
-    if Girl.SEXP >= 100 or ApprovalCheck(Girl, 1200, "LO"):
+    if Girl.SEXP >= 100 or Approvalcheck(Girl, 1200, "LO"):
         pass
     elif counter == (5 + bonus):
         $ Girl.Brows = "confused"
@@ -316,7 +361,7 @@ label end_of_sex_round(Girl, action):
 
         menu:
             extend ""
-            "How about a BJ?" if Girl.Action and multi_action:
+            "How about a BJ?" if Girl.actionion and multi_action:
                 if action != "anal":
                     $ action_context = "shift"
 
@@ -335,7 +380,7 @@ label end_of_sex_round(Girl, action):
 
                         call after_action(Girl, action)
                         call before_handjob(Girl, "handjob")
-            "How about a Handy?" if Girl.Action and multi_action:
+            "How about a Handy?" if Girl.actionion and multi_action:
                 $ action_context = "shift"
 
                 call after_action(Girl, action)
@@ -357,7 +402,7 @@ label end_of_sex_round(Girl, action):
 
                 return True
             "No, get back down there.":
-                if ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "O"):
+                if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
                     $ Girl.change_stat("love", 200, -5)
                     $ Girl.change_stat("obedience", 50, 3)
                     $ Girl.change_stat("obedience", 80, 2)
@@ -399,7 +444,7 @@ label sex(Girl):
     call shift_focus(Girl)
     call sex_set_modifier(Girl, "sex")
 
-    $ Approval = ApprovalCheck(Girl, 1400, TabM = 5) # 135, 150, 165, Taboo -200(335)
+    $ Approval = Approvalcheck(Girl, 1400, TabM = 5) # 135, 150, 165, Taboo -200(335)
 
     if action_context == "auto":
         $ Girl.Pose = "doggy"
@@ -437,8 +482,10 @@ label sex(Girl):
         else:                                                                                                            #she's questioning it
             $ Girl.Brows = "angry"
 
+            call what_do_you_think_youre_doing_lines(Girl)
+
             menu:
-                ch_r "Hey, what do you think you're doing back there?!"
+                extend ""
                 "Sorry, sorry! Never mind.":
                     if Approval:
                         $ Girl.change_face("sexy", 1)
@@ -454,10 +501,7 @@ label sex(Girl):
 
                     $ Girl.change_face("bemused", 1)
 
-                    if Girl.Sex:
-                        ch_r "Well ok, [Girl.Petname], no harm done. Just give me a little warning next time."
-                    else:
-                        ch_r "Well ok, [Girl.Petname], I'm not really ready for that, but maybe if you ask nicely next time . . ."
+                    call pull_back_before_get_in_lines(Girl)
                 "Just fucking.":
                     $ Girl.change_stat("love", 80, -10, 1)
                     $ Girl.change_stat("love", 200, -10)
@@ -467,7 +511,7 @@ label sex(Girl):
                     $ Girl.change_stat("obedience", 70, 3)
                     $ Girl.change_stat("inhibition", 50, 3)
 
-                    if not ApprovalCheck(Girl, 700, "O", TabM=1):   #Checks if obedience is 700+
+                    if not Approvalcheck(Girl, 700, "O", TabM=1):   #checks if obedience is 700+
                         $ Girl.change_face("angry")
 
                         call were_done_here_lines(Girl)
@@ -496,12 +540,12 @@ label sex(Girl):
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
-        ch_r "So, you'd like to take this to the next level? Actual sex? . . ."
+        call first_time_asking_lines(Girl)
 
         if Girl.Forced:
             $ Girl.change_face("sad")
 
-            ch_r "You'd really take it that far?"
+            call first_time_forcing_lines(Girl)
 
     if not Girl.Sex and Approval:                                                  #First time dialog
         call first_action_approval(Girl, "sex")
@@ -529,7 +573,7 @@ label anal(Girl):
     call shift_focus(Girl)
     call sex_set_modifier(Girl, "anal")
 
-    $ Approval = ApprovalCheck(Girl, 1550, TabM = 5) # 155, 170, 185, Taboo -200(355)
+    $ Approval = Approvalcheck(Girl, 1550, TabM = 5) # 155, 170, 185, Taboo -200(355)
 
     if action_context == "auto":
         $ Girl.Pose = "doggy"
@@ -561,14 +605,16 @@ label anal(Girl):
             $ Girl.change_stat("inhibition", 50, 3)
             $ Girl.change_stat("inhibition", 70, 1)
 
-            ch_r "Hmm, stick it in. . ."
+            call lets_do_this_lines(Girl)
 
             jump before_action
         else:                                                                                                            #she's questioning it
             $ Girl.Brows = "angry"
 
+            call what_do_you_think_youre_doing_lines(Girl)
+
             menu:
-                ch_r "Hey, what do you think you're doing back there?!"
+                extend ""
                 "Sorry, sorry! Never mind.":
                     if Approval:
                         $ Girl.change_face("sexy", 1)
@@ -584,10 +630,7 @@ label anal(Girl):
 
                     $ Girl.change_face("bemused", 1)
 
-                    if Girl.Anal:
-                        ch_r "Well ok, [Girl.Petname], no harm done. Just give me a little warning next time."
-                    else:
-                        ch_r "Well ok, [Girl.Petname], I'm not really ready for that, but maybe if you ask nicely next time . . ."
+                    call pull_back_before_get_in_lines(Girl)
                 "Just fucking.":
                     $ Girl.change_stat("love", 80, -10, 1)
                     $ Girl.change_stat("love", 200, -8)
@@ -597,7 +640,7 @@ label anal(Girl):
                     $ Girl.change_stat("obedience", 70, 3)
                     $ Girl.change_stat("inhibition", 50, 3)
 
-                    if not ApprovalCheck(Girl, 700, "O", TabM=1):
+                    if not Approvalcheck(Girl, 700, "O", TabM=1):
                         $ Girl.change_face("angry")
 
                         call were_done_here_lines(Girl)
@@ -626,12 +669,12 @@ label anal(Girl):
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
-        ch_r "Wait, so you want to stick it in my butt?!"
+        call first_time_asking_lines(Girl)
 
         if Girl.Forced:
             $ Girl.change_face("sad")
 
-            ch_r "Seriously?"
+            call first_time_forcing_lines(Girl)
 
     if not Girl.Loose and ("dildo_anal" in Girl.daily_history or "anal" in Girl.daily_history):
         $ Girl.change_face("bemused", 1)
@@ -669,7 +712,7 @@ label hotdog(Girl):
     call shift_focus(Girl)
     call sex_set_modifier(Girl, "hotdog")
 
-    $ Approval = ApprovalCheck(Girl, 1000, TabM = 3) # 100, 115, 130, Taboo -120(220)
+    $ Approval = Approvalcheck(Girl, 1000, TabM = 3) # 100, 115, 130, Taboo -120(220)
 
     if action_context == "auto":
         $ Girl.Pose = "doggy"
@@ -688,14 +731,16 @@ label hotdog(Girl):
             $ Girl.change_stat("inhibition", 50, 3)
             $ Girl.change_stat("inhibition", 70, 1)
 
-            ch_r "Hmm, I've apparently got someone's attention. . ."
+            call lets_do_this_lines(Girl)
 
             jump before_action
         else:                                                                                                            #she's questioning it
             $ Girl.Brows = "angry"
 
+            call what_do_you_think_youre_doing_lines(Girl)
+
             menu:
-                ch_r "Hmm, kinda rude, [Girl.Petname]."
+                extend ""
                 "Sorry, sorry! Never mind.":
                     if Approval:
                         $ Girl.change_face("sexy", 1)
@@ -711,10 +756,7 @@ label hotdog(Girl):
 
                     $ Girl.change_face("bemused", 1)
 
-                    if Girl.Hotdog:
-                        ch_r "Well ok, [Girl.Petname], it has been kinda fun."
-                    else:
-                        ch_r "Well ok, [Girl.Petname], that's a bit dirty, maybe ask a girl?"
+                    call pull_back_before_get_in_lines(Girl)
                 "You'll see.":
                     $ Girl.change_stat("love", 80, -10, 1)
                     $ Girl.change_stat("love", 200, -8)
@@ -724,7 +766,7 @@ label hotdog(Girl):
                     $ Girl.change_stat("obedience", 70, 3)
                     $ Girl.change_stat("inhibition", 50, 3)
 
-                    if not ApprovalCheck(Girl, 500, "O", TabM=1): #Checks if obedience is 700+
+                    if not Approvalcheck(Girl, 500, "O", TabM=1): #checks if obedience is 700+
                         $ Girl.change_face("angry")
 
                         call were_done_here_lines(Girl)
@@ -753,12 +795,12 @@ label hotdog(Girl):
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
-        ch_r "Wait, so you want to grind against my butt?!"
+        call first_time_asking_lines(Girl)
 
         if Girl.Forced:
             $ Girl.change_face("sad")
 
-            ch_r ". . . That's all?"
+            call first_time_forcing_lines(Girl)
 
     if not Girl.Hotdog and Approval:                                                 #First time dialog
         call first_action_approval(Girl, "hotdog")

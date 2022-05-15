@@ -218,9 +218,9 @@ label handjob_menu:
                                 pass
                             "Ask [Partner.name] to do something else":
                                 call Three_Change(focused_Girl)
-                            "Don't stop what you're doing. . .(locked)" if not position_change_timer or not Partner_primary_action:
+                            "Don't stop what you're doing. . .(locked)" if not position_change_timer or not second_girl_primary_action:
                                 $ position_change_timer = 0
-                            "Don't stop what you're doing. . ." if position_change_timer and Partner_primary_action:
+                            "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
                                 $ position_change_timer = 0
                             "Swap to [Partner.name]":
                                 call primary_action_Swap(focused_Girl)
@@ -315,7 +315,7 @@ label handjob_set_modifier(Girl, action):
         elif Girl.Tit: #You've done it before
             $ temp_modifier += 5
 
-        if Girl.SeenChest and ApprovalCheck(Girl, 500): # You've seen her tits.
+        if Girl.SeenChest and Approvalcheck(Girl, 500): # You've seen her tits.
             $ temp_modifier += 10
         if not Girl.Chest and not Girl.Over: #She's already topless
             $ temp_modifier += 10
@@ -484,7 +484,7 @@ label end_of_handjob_round(Girl, action):
     elif action == "dildo_ass":
         $ bonus = Girl.DildoA
 
-    if Girl.SEXP >= 100 or ApprovalCheck(RogueX, 1200, "LO"):
+    if Girl.SEXP >= 100 or Approvalcheck(RogueX, 1200, "LO"):
         pass
     elif counter == (5 + bonus):
         $ Girl.Brows = "confused"
@@ -492,7 +492,7 @@ label end_of_handjob_round(Girl, action):
         call getting_close_lines(Girl)
     elif action in ["dildo_pussy", "dildo_ass"] and Girl.lust >= 80:
         pass
-    elif (action in ["handjob, footjob, titjob, blowjob"] and counter == (10 + bonus)) or (action in ["dildo_pussy", "dildo_ass"] and (counter == (15 + bonus) and Girl.SEXP <= 100 and not ApprovalCheck(Girl, 1200, "LO"))):
+    elif (action in ["handjob, footjob, titjob, blowjob"] and counter == (10 + bonus)) or (action in ["dildo_pussy", "dildo_ass"] and (counter == (15 + bonus) and Girl.SEXP <= 100 and not Approvalcheck(Girl, 1200, "LO"))):
         $ Girl.Brows = "angry"
 
         call getting_rugburn_lines(Girl)
@@ -536,7 +536,7 @@ label end_of_handjob_round(Girl, action):
 
                 jump after_action
             "No, get back down there." if action in ["handjob", "footjob", "titjob", "blowjob"]:
-                if ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "O"):
+                if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
                     $ Girl.change_stat("love", 200, -5)
                     $ Girl.change_stat("obedience", 50, 3)
                     $ Girl.change_stat("obedience", 80, 2)
@@ -559,7 +559,7 @@ label end_of_handjob_round(Girl, action):
 
                     jump after_action
             "No, this is fun." if action in ["dildo_pussy", "dildo_ass"]:
-                if ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "O"):
+                if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
                     $ Girl.change_stat("love", 200, -5)
                     $ Girl.change_stat("obedience", 50, 3)
                     $ Girl.change_stat("obedience", 80, 2)
@@ -599,13 +599,13 @@ label handjob(Girl):
     call shift_focus(Girl)
     call handjob_set_modifier(Girl, "handjob")
 
-    $ Approval = ApprovalCheck(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)
+    $ Approval = Approvalcheck(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)
 
     if not Girl.Hand and "no_hand" not in Girl.recent_history:
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
-        ch_r "You want me to rub your cock, with my hand?"
+        call first_time_asking_lines(Girl)
 
     if not Girl.Hand and Approval:                                                 #First time dialog
         call first_action_approval(Girl, "handjob")
@@ -633,7 +633,7 @@ label footjob(Girl):
     call shift_focus(Girl)
     call handjob_set_modifier(Girl, "footjob")
 
-    $ Approval = ApprovalCheck(Girl, 1250, TabM = 3) # 110, 125, 140, Taboo -120(230)
+    $ Approval = Approvalcheck(Girl, 1250, TabM = 3) # 110, 125, 140, Taboo -120(230)
 
     if action_context == Girl:                                                                  #Rogue auto-starts
         if Approval > 2:                                                      # fix, add rogue auto stuff here
@@ -656,7 +656,7 @@ label footjob(Girl):
     if not Girl.Foot and "no_foot" not in Girl.recent_history:
         $ Girl.change_face("confused", 2)
 
-        ch_r "Huh, so like a handy, but with my feet?"
+        call first_time_asking_lines(Girl)
 
         $ Girl.Blush = 1
 
@@ -686,22 +686,22 @@ label titjob(Girl):
     call shift_focus(Girl)
     call handjob_set_modifier(Girl, "titjob")
 
-    $ Approval = ApprovalCheck(Girl, 1200, TabM = 5) # 120, 135, 150, Taboo -200(320)
+    $ Approval = Approvalcheck(Girl, 1200, TabM = 5) # 120, 135, 150, Taboo -200(320)
 
     if not Girl.Tit and "no_titjob" not in Girl.recent_history:
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
-        ch_r "You want me to rub your cock with my breasts?"
+        call first_time_asking_lines(Girl)
 
         if Girl.Blow:
             $ Girl.Mouth = "smile"
 
-            ch_r "My mouth wasn't enough?"
+            call mouth_not_enough(Girl)
         elif Girl.Hand:
             $ Girl.Mouth = "smile"
 
-            ch_r "My hand wasn't enough?"
+            call hand_not_enough(Girl)
 
     if not Girl.Tit and Approval:                                                 #First time dialog
         call first_action_approval(Girl)
@@ -725,18 +725,18 @@ label blowjob(Girl):
     call shift_focus(Girl)
     call handjob_set_modifier(Girl, "blowjob")
 
-    $ Approval = ApprovalCheck(Girl, 1300, TabM = 4) # 130, 145, 160, Taboo -160(290)
+    $ Approval = Approvalcheck(Girl, 1300, TabM = 4) # 130, 145, 160, Taboo -160(290)
 
     if not Girl.Blow and "no_blow" not in Girl.recent_history:
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
-        ch_r "You want me to put your dick. . . in my mouth?"
+        call first_time_asking_lines(Girl)
 
         if Girl.Hand:
             $ Girl.Mouth = "smile"
 
-            ch_r "My hand wasn't enough?"
+            call hand_not_enough(Girl)
 
     if not Girl.Blow and Approval:                                                 #First time dialog
         call first_action_approval(Girl)
@@ -760,14 +760,14 @@ label dildo_pussy(Girl):
     $ Round -= 5 if Round > 5 else (Round-1)
 
     call shift_focus(Girl)
-    call Rogue_Dildo_Check
+    call Rogue_Dildo_check
 
     if not _return:
         return
 
     call handjob_set_modifier(Girl, "dildo_pussy")
 
-    $ Approval = ApprovalCheck(Girl, 1250, TabM = 4) # 125, 140, 155, Taboo -160(335)
+    $ Approval = Approvalcheck(Girl, 1250, TabM = 4) # 125, 140, 155, Taboo -160(335)
 
     if action_context == Girl:                                                                  #Rogue auto-starts
         if Approval > 2:                                                      # fix, add rogue auto stuff here
@@ -796,14 +796,16 @@ label dildo_pussy(Girl):
             $ Girl.change_stat("inhibition", 50, 3)
             $ Girl.change_stat("inhibition", 70, 1)
 
-            ch_r "Ok, [Girl.Petname], let's do this."
+            call lets_do_this_lines(Girl)
 
             jump before_action
         else:                                                                                                            #she's questioning it
             $ Girl.Brows = "angry"
 
+            call what_do_you_think_youre_doing_lines(Girl)
+
             menu:
-                ch_r "Hey, what do you think you're doing back there?!"
+                extend ""
                 "Sorry, sorry! Never mind.":
                     if Approval:
                         $ Girl.change_face("sexy", 1)
@@ -819,10 +821,7 @@ label dildo_pussy(Girl):
 
                     $ Girl.change_face("bemused", 1)
 
-                    if Girl.DildoP:
-                        ch_r "Well ok, [Girl.Petname], no harm done. Just give me a little warning next time."
-                    else:
-                        ch_r "Well ok, [Girl.Petname], I'm not really ready for that, but maybe if you ask nicely next time . . ."
+                    call pull_back_before_get_in_lines(Girl)
                 "Just playing with my favorite toys.":
                     $ Girl.change_stat("love", 80, -10, 1)
                     $ Girl.change_stat("love", 200, -10)
@@ -832,12 +831,10 @@ label dildo_pussy(Girl):
                     $ Girl.change_stat("obedience", 70, 3)
                     $ Girl.change_stat("inhibition", 50, 3)
 
-                    if not ApprovalCheck(Girl, 700, "O", TabM=1): #Checks if obedience is 700+
+                    if not Approvalcheck(Girl, 700, "O", TabM=1): #checks if obedience is 700+
                         $ Girl.change_face("angry")
 
-                        "[Girl.name] shoves you away and slaps you in the face."
-                        ch_r "Jackass!"
-                        ch_r "If that's how you want to treat me, we're done here!"
+                        call were_done_here_lines(Girl)
 
                         $ Girl.change_stat("love", 50, -10, 1)
                         $ Girl.change_stat("obedience", 50, 3)
@@ -864,12 +861,12 @@ label dildo_pussy(Girl):
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
-        ch_r "Hmmm, so you'd like to try out some toys?"
+        call first_time_asking_lines(Girl)
 
         if Girl.Forced:
             $ Girl.change_face("sad")
 
-            ch_r "I suppose there are worst things you could ask for."
+            call first_time_forcing_lines(Girl)
 
     if not Girl.DildoP and Approval:
         call first_action_approval(Girl, "dildo_pussy")
@@ -893,14 +890,14 @@ label dildo_ass(Girl):
     $ Round -= 5 if Round > 5 else (Round-1)
 
     call shift_focus(Girl)
-    call Rogue_Dildo_Check
+    call Rogue_Dildo_check
 
     if not _return:
         return
 
     call handjob_set_modifier(Girl, "dildo_ass")
 
-    $ Approval = ApprovalCheck(Girl, 1450, TabM = 4) # 145, 160, 175, Taboo -160(355)
+    $ Approval = Approvalcheck(Girl, 1450, TabM = 4) # 145, 160, 175, Taboo -160(355)
 
     if action_context == Girl:
         if Approval > 2:                                                      # fix, add rogue auto stuff here
@@ -927,14 +924,16 @@ label dildo_ass(Girl):
             $ Girl.change_stat("inhibition", 50, 3)
             $ Girl.change_stat("inhibition", 70, 1)
 
-            ch_r "Ok, [Girl.Petname], let's do this."
+            call lets_do_this_lines(Girl)
 
             jump before_action
         else:
             $ Girl.Brows = "angry"
 
+            call what_do_you_think_youre_doing_lines(Girl)
+
             menu:
-                ch_r "Hey, what do you think you're doing back there?!"
+                extend ""
                 "Sorry, sorry! Never mind.":
                     if Approval:
                         $ Girl.change_face("sexy", 1)
@@ -950,10 +949,7 @@ label dildo_ass(Girl):
 
                     $ Girl.change_face("bemused", 1)
 
-                    if Girl.DildoA:
-                        ch_r "Well ok, [Girl.Petname], no harm done. Just give me a little warning next time."
-                    else:
-                        ch_r "Well ok, [Girl.Petname], I'm not really ready for that, but maybe if you ask nicely next time . . ."
+                    call pull_back_before_get_in_lines(Girl)
                 "Just playing with my favorite toys.":
                     $ Girl.change_stat("love", 80, -10, 1)
                     $ Girl.change_stat("love", 200, -10)
@@ -962,12 +958,10 @@ label dildo_ass(Girl):
                     $ Girl.change_stat("obedience", 70, 3)
                     $ Girl.change_stat("inhibition", 50, 3)
 
-                    if not ApprovalCheck(Girl, 700, "O", TabM=1): #Checks if obedience is 700+
+                    if not Approvalcheck(Girl, 700, "O", TabM=1): #checks if obedience is 700+
                         $ Girl.change_face("angry")
 
-                        "[Girl.name] shoves you away and slaps you in the face."
-                        ch_r "Jackass!"
-                        ch_r "If that's how you want to treat me, we're done here!"
+                        call were_done_here_lines(Girl)
 
                         $ Girl.change_stat("love", 50, -10, 1)
                         $ Girl.change_stat("obedience", 50, 3)
@@ -994,17 +988,17 @@ label dildo_ass(Girl):
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
-        ch_r "Hmmm, so you'd like to try out some toys?"
+        call first_time_asking_lines(Girl)
 
         if Girl.Forced:
             $ Girl.change_face("sad")
 
-            ch_r "You had to go for the butt, uh?"
+            call first_time_forcing_lines(Girl)
 
     if not Girl.Loose and ("dildo_anal" in Girl.recent_history or "anal" in Girl.recent_history or "dildo_anal" in Girl.daily_history or "anal" in Girl.daily_history):
         $ Girl.change_face("bemused", 1)
 
-        ch_r "I'm still a bit sore from earlier. . ."
+        call ass_sore_lines(Girl)
 
     if not Girl.DildoA and Approval:
         call first_action_approval(Girl, "dildo_ass")

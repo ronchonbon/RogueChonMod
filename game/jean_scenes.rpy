@@ -731,7 +731,7 @@ label Jean_love:
         return
 
 label Jean_Sub:
-        # if her obedienceience hits 500
+        # if her obedience hits 500
         if JeanX.location != bg_current:
                 $ JeanX.location = bg_current
                 "[JeanX.name] walks up to you."

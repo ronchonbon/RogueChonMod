@@ -1,7 +1,7 @@
 
 # Start Girl_Lesbian / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Les_Interupted(Girl=0,Girls=[]): #rkeljsv
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         # Called if you catch them fucking
         if "unseen" not in Girl.recent_history:
                 if Girl.Org < 3 and Girl.Action:
@@ -43,7 +43,7 @@ label Les_Interupted(Girl=0,Girls=[]): #rkeljsv
         elif Girl == JubesX:
                 ch_v "Oh? hey [Girl.Petname]. What'd you see?"
         $ Girl.Action -= 1 if Girl.Action > 0 else 0
-        call Checkout(1)
+        call checkout(1)
         $ line = 0
 
         #If you've been jacking it
@@ -191,7 +191,7 @@ label Les_Interupted(Girl=0,Girls=[]): #rkeljsv
                             $ Girl.Statup("Obed", 50, 2)
                             $ Girl.Statup("Obed", 70, 2)
 
-        if not ApprovalCheck(Girl, 1350):
+        if not Approvalcheck(Girl, 1350):
                 #If she doesn't like you enough to have you around. . .
                 $ Girl.Statup("Love", 200, -5)
                 $ Girl.change_face("angry")
@@ -238,7 +238,7 @@ label Les_Interupted(Girl=0,Girls=[]): #rkeljsv
         $ action_context = "interrupted"
 
 label LesScene(Girl=0,Bonus = 0,Girls=[]): #rkeljsv
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         call shift_focus(Girl)
 
         if not Girl.Action:
@@ -290,7 +290,7 @@ label LesScene(Girl=0,Bonus = 0,Girls=[]): #rkeljsv
                 #this raises a girl's like-Jean stat if Jean wants to sleep with her
                 call Girl_Whammy(Girl)
 
-        $ line = Girl.GirlLikeCheck(Partner)
+        $ line = Girl.GirlLikecheck(Partner)
         if line >= 900:
                 $ Bonus += 150
         elif line >= 800 or "poly "+Partner.Tag in Girl.Traits:
@@ -314,7 +314,7 @@ label LesScene(Girl=0,Bonus = 0,Girls=[]): #rkeljsv
         if Girl.ForcedCount and not Girl.Forced:
                 $ temp_modifier -= 5 * Girl.ForcedCount
 
-        $ Approval = ApprovalCheck(Girl, 1350, TabM = 2, Bonus = Bonus) # 1350, 1500, 1650, Taboo -800
+        $ Approval = Approvalcheck(Girl, 1350, TabM = 2, Bonus = Bonus) # 1350, 1500, 1650, Taboo -800
 
         $ Girl.DrainWord("unseen",1,0) #She sees you, so remove unseens
 
@@ -860,7 +860,7 @@ label LesScene(Girl=0,Bonus = 0,Girls=[]): #rkeljsv
 
                 "Just get at it already.":
                         # Pressured into it
-                        $ Approval = ApprovalCheck(Girl, 550, "OI", TabM = 2) # 55, 70, 85
+                        $ Approval = Approvalcheck(Girl, 550, "OI", TabM = 2) # 55, 70, 85
                         if Approval > 1 or (Approval and Girl.Forced):
                                 $ Girl.change_face("sad")
                                 $ Girl.Statup("Love", 70, -5, 1)
@@ -1098,7 +1098,7 @@ label Les_Prep(Girl=focused_Girl,Girls=[]):
                             $ Girl.Statup("Inbt", 80, 60)
                 call Les_FirstKiss
                 $ girl_offhand_action == "kiss girl"
-                $ Partner_primary_action == "kiss girl"
+                $ second_girl_primary_action == "kiss girl"
 
         $ primary_action = "lesbian"
         if action_context:
@@ -1112,7 +1112,7 @@ label Les_Prep(Girl=focused_Girl,Girls=[]):
         $ Partner.AddWord(0,"lesbian","lesbian") #adds "lesbian" to daily and recent
 
 label Les_Cycle(Girl=focused_Girl):
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         while Round > 0:
             call shift_focus(Girl)
             call Les_Launch(Girl)
@@ -1166,9 +1166,9 @@ label Les_Cycle(Girl=focused_Girl):
                                                         else:
                                                                 call Three_Change(Girl)
 
-                                                "Don't stop what you're doing. . .(locked)" if not position_change_timer or not Partner_primary_action:
+                                                "Don't stop what you're doing. . .(locked)" if not position_change_timer or not second_girl_primary_action:
                                                             $ position_change_timer = 0
-                                                "Don't stop what you're doing. . ." if position_change_timer and Partner_primary_action:
+                                                "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
                                                         if "unseen" in Girl.recent_history:
                                                                 ch_p "Oh, that's good. . ."
                                                                 jump Les_Interupted
@@ -1261,7 +1261,7 @@ label Les_Cycle(Girl=focused_Girl):
                                         if not Player.Semen:
                                                 "You're emptied out, you should probably take a break."
             if Partner and Partner.Lust >= 100:
-                    #Checks if partner could orgasm
+                    #checks if partner could orgasm
                     call Girl_Cumming(Partner)
 
             #End orgasm
@@ -1289,14 +1289,14 @@ label Les_After: #rkeljsv
         call expression Girl.Tag + "_Pos_Reset"
         if not Partner:
                 $ temp_modifier = 0
-                call Checkout
+                call checkout
                 return
         call expression Partner.Tag + "_Pos_Reset"
         $ Girl.change_face("sexy")
         if Partner == EmmaX:
-                call Partner_Like(Girl,4)
+                call second_girl_Like(Girl,4)
         else:
-                call Partner_Like(Girl,3)
+                call second_girl_Like(Girl,3)
 
         $ Girl.LesWatch += 1
         $ Partner.LesWatch += 1
@@ -1343,7 +1343,7 @@ label Les_After: #rkeljsv
         $ Girl.AddWord(1,0,0,0,"les "+Partner.Tag) #ie $ Girl.recent_history.append("noticed Partner")
         $ Partner.AddWord(1,0,0,0,"les "+Girl.Tag) #ie $ Partner.recent_history.append("noticed Girl")
         $ temp_modifier = 0
-        call Checkout
+        call checkout
         return
     # End LesScene
 
@@ -1384,7 +1384,7 @@ label Post_Les_Dialog: #rkeljsv
         else:
                 # If this is the first time they've done this. . .
                 # "les Kitty" not in RogueX.History. . .
-                if Girl.GirlLikeCheck(Partner) >= 600:
+                if Girl.GirlLikecheck(Partner) >= 600:
                         #if the Lead girl likes the Partner. . .
                         if Girl == RogueX:
                                 ch_r "You. . . really know what you're doing down there. . ."
@@ -1418,7 +1418,7 @@ label Post_Les_Dialog: #rkeljsv
                                 ch_v "You. . . tried. . ."
 
                 #second girl response. . .
-                if Partner.GirlLikeCheck(Girl) >= 600:
+                if Partner.GirlLikecheck(Girl) >= 600:
                         #if the Partner girl likes the Lead. . .
                         if Partner == RogueX:
                                 ch_r "Um, yeah, you too. . ."
@@ -1523,21 +1523,21 @@ label Les_Response(Speaker=0,Subject=0, Step=1, B=0, B2=0, temp_modifier=0, Resu
                 $ temp_modifier -= 40
 
         # Provides a bonus based on how much the speaker likes the subject girl
-        if Speaker.GirlLikeCheck(Subject) >= 900:
+        if Speaker.GirlLikecheck(Subject) >= 900:
                 $ B += 150
-        elif Speaker.GirlLikeCheck(Subject) >= 800 or "poly " + Subject.Tag in Speaker.Traits:
+        elif Speaker.GirlLikecheck(Subject) >= 800 or "poly " + Subject.Tag in Speaker.Traits:
                 $ B += 100
-        elif Speaker.GirlLikeCheck(Subject) >= 700:
+        elif Speaker.GirlLikecheck(Subject) >= 700:
                 $ B += 50
-        elif Speaker.GirlLikeCheck(Subject) <= 200:
+        elif Speaker.GirlLikecheck(Subject) <= 200:
                 $ B -= 200
-        elif Speaker.GirlLikeCheck(Subject) <= 500:
+        elif Speaker.GirlLikecheck(Subject) <= 500:
                 $ B -= 100
 
         if Speaker == JeanX:
                 $ B += 100
 
-        $ Approval = ApprovalCheck(Speaker, 1300, TabM = 2, Bonus = B) # 1300, 1450, 1600, Taboo -800
+        $ Approval = Approvalcheck(Speaker, 1300, TabM = 2, Bonus = B) # 1300, 1450, 1600, Taboo -800
 
         if not Approval:
                 #if there's no chance, skip to the end
@@ -1695,7 +1695,7 @@ label Les_Response(Speaker=0,Subject=0, Step=1, B=0, B2=0, temp_modifier=0, Resu
                                 elif Speaker == JubesX:
                                         ch_v "I don't know, I don't think so. . ."
                 "Get in there, now.":
-                        if ApprovalCheck(Speaker, 550, "OI", TabM = 2):
+                        if Approvalcheck(Speaker, 550, "OI", TabM = 2):
                                 $ Speaker.change_face("sadside", 1)
                                 if Speaker == RogueX:
                                         ch_r "Fine, whatever."
@@ -2029,7 +2029,7 @@ label Les_Change(Primary = 0, Secondary=Partner, D20S=0, PrimaryLust=0, Secondar
         $ line = 0
         menu:
             "Hey [Primary.name]. . ."
-            "why don't you kiss her?" if Partner_offhand_action != "kiss girl" and Partner_offhand_action != "kiss both":
+            "why don't you kiss her?" if second_girl_offhand_action != "kiss girl" and second_girl_offhand_action != "kiss both":
                         call Threeway_Set(Primary,"kiss girl", "lesbian", girl_offhand_action,Secondary)
             "why don't you grab her tits?" if girl_offhand_action != "fondle_breasts":
                         call Threeway_Set(Primary,"fondle_breasts", "lesbian", girl_offhand_action,Secondary)

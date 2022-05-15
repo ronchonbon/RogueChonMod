@@ -303,15 +303,15 @@ label Laura_Cleanhouse:
         ch_l "I can't believe you're putting me through this."
         ch_l "Making me choose between you and putting up with this whole arrangement."
         $ line = 0
-        if ApprovalCheck(LauraX, 1400) and ApprovalCheck(LauraX, 600,"O"):
+        if Approvalcheck(LauraX, 1400) and Approvalcheck(LauraX, 600,"O"):
                 #if she's very obedient. . .
                 pass
-        elif ApprovalCheck(LauraX, 1200) and ApprovalCheck(LauraX, 500,"O"):
+        elif Approvalcheck(LauraX, 1200) and Approvalcheck(LauraX, 500,"O"):
                 #second chance on if she likes you well enough. . .
                 $ Girls = Player.Harem[:]
                 while Girls and line != "no":
                     # Spits out a "no" if she doesn't like another girl
-                    if LauraX.GirlLikeCheck(Girls[0]) <= 400:
+                    if LauraX.GirlLikecheck(Girls[0]) <= 400:
                             $ line = "no"
                     $ Girls.remove(Girls[0])
         else:
@@ -349,7 +349,7 @@ label Laura_love(Shipping=[],Shipshape=0,Topics=[],Girls=[]):
         $ Girls = all_Girls[:]
         $ Girls.remove(LauraX)
         while Girls:
-            if ApprovalCheck(Girls[0], 1200, "LO"):
+            if Approvalcheck(Girls[0], 1200, "LO"):
                     $ Shipping.append(Girls[0])
             $ Girls.remove(Girls[0])
         $ Shipshape = len(Shipping)
@@ -720,7 +720,7 @@ label Laura_love(Shipping=[],Shipshape=0,Topics=[],Girls=[]):
                         $ LauraX.change_stat("obedience", 90, 15)
                         $ LauraX.change_stat("inhibition", 90, 5)
                         $ LauraX.change_face("sad",1)
-                        if ApprovalCheck(LauraX, 1000, "OI"):
+                        if Approvalcheck(LauraX, 1000, "OI"):
                             ch_l "I guess that's something."
                         else:
                             ch_l ". . ."
@@ -737,7 +737,7 @@ label Laura_love(Shipping=[],Shipshape=0,Topics=[],Girls=[]):
 
         if line:
                 #If you called out a girl,
-                if LauraX.GirlLikeCheck(line) >= 800:
+                if LauraX.GirlLikecheck(line) >= 800:
                         $ LauraX.change_stat("love", 200, 5)
                         $ LauraX.change_stat("obedience", 90, 20)
                         $ LauraX.change_stat("inhibition", 90, 5)
@@ -801,7 +801,7 @@ label Laura_love_Redux:
                 #if this is the second time through
                 ch_p "I hope you've forgiven me, I still love you."
                 $ LauraX.change_stat("love", 95, 10)
-                if ApprovalCheck(LauraX, 950, "L"):
+                if Approvalcheck(LauraX, 950, "L"):
                     $ line = "love"
                 else:
                     $ LauraX.change_face("angry")
@@ -814,7 +814,7 @@ label Laura_love_Redux:
                 #if you pissed her off the first time
                 ch_p "I was rude when you opened up to me before."
                 $ LauraX.change_stat("love", 95, 10)
-                if ApprovalCheck(LauraX, 950, "L"):
+                if Approvalcheck(LauraX, 950, "L"):
                     ch_l "And. . ."
                 else:
                     $ LauraX.change_face("angry")
@@ -839,13 +839,13 @@ label Laura_love_Redux:
                         ch_l "That's awfully convenient."
                         ch_p "Yeah. I mean, yes, I love you, [LauraX.name]."
                         $ LauraX.change_stat("love", 200, 10)
-                        if ApprovalCheck(LauraX, 950, "L"):
+                        if Approvalcheck(LauraX, 950, "L"):
                             $ line = "love"
                         else:
                             $ LauraX.change_face("sadside")
                             ch_l "Well, maybe I don't, anymore. . ."
                     "I've changed my mind, I do love you, so. . .":
-                        if ApprovalCheck(LauraX, 950, "L"):
+                        if Approvalcheck(LauraX, 950, "L"):
                             $ line = "love"
                             ch_l "Well that's great."
                         else:
@@ -944,7 +944,7 @@ label Laura_Sub:
                 $ line = "facility"
                 jump Laura_Sub_Question
         "Get with the program.":
-                if ApprovalCheck(LauraX, 1000, "LO"):
+                if Approvalcheck(LauraX, 1000, "LO"):
                         $ LauraX.change_face("sly", 1)
                         $ LauraX.change_stat("obedience", 200, 20)
                         $ LauraX.change_stat("inhibition", 50, 10)
@@ -1021,7 +1021,7 @@ label Laura_Sub:
             menu:
                 extend ""
                 "Good. If you wanna be with me, then you follow my orders.":
-                        if ApprovalCheck(LauraX, 1000, "LO"):
+                        if Approvalcheck(LauraX, 1000, "LO"):
                             $ LauraX.change_face("sly", 1)
                             $ LauraX.change_stat("obedience", 200, 15)
                             $ LauraX.change_stat("inhibition", 50, 10)
@@ -1150,10 +1150,10 @@ label Laura_Sub_Asked:
     menu:
         extend ""
         "Well, I wanted to say I was sorry.  And I was hoping maybe we could give it another shot.":
-                if "sir" in LauraX.Petnames and ApprovalCheck(LauraX, 850, "O"):
-                        #if this is asking about the "master" name, and her obedienceience is higher than 700
+                if "sir" in LauraX.Petnames and Approvalcheck(LauraX, 850, "O"):
+                        #if this is asking about the "master" name, and her obedience is higher than 700
                         pass
-                elif ApprovalCheck(LauraX, 550, "O"):
+                elif Approvalcheck(LauraX, 550, "O"):
                         #if it's instead about earning the "sir" title, and her approval is over 500
                         pass
                 else: #if it failed both those things,
@@ -1170,12 +1170,12 @@ label Laura_Sub_Asked:
         "I know it's what you want. Do you want to try again, or not?":
                 $ LauraX.change_face("bemused", 1)
                 if "sir" in LauraX.Petnames:
-                    if ApprovalCheck(LauraX, 850, "O"):
+                    if Approvalcheck(LauraX, 850, "O"):
                         ch_l "Ok, fine."
                     else:
                         ch_l "Nah, I'm good."
                         $ line = "rude"
-                elif ApprovalCheck(LauraX, 600, "O"):
+                elif Approvalcheck(LauraX, 600, "O"):
                         #if it's instead about earning the "sir" title, and her approval is over 500
                         $ LauraX.change_face("confused", 1)
                         ch_l "Kinda wishy-washy there."
@@ -1191,11 +1191,11 @@ label Laura_Sub_Asked:
                                             $ LauraX.Eyes = "side"
                                             ch_l "Ok then."
                             "You're damned right I am, bitch.":
-                                    if "sir" in LauraX.Petnames and ApprovalCheck(LauraX, 900, "O"):
+                                    if "sir" in LauraX.Petnames and Approvalcheck(LauraX, 900, "O"):
                                             $ LauraX.change_stat("love", 200, -5)
                                             $ LauraX.change_stat("obedience", 200, 10)
                                             ch_l ". . ."
-                                    elif ApprovalCheck(LauraX,700, "O"):
+                                    elif Approvalcheck(LauraX,700, "O"):
                                             $ LauraX.change_stat("love", 200, -5)
                                             $ LauraX.change_stat("obedience", 200, 10)
                                             ch_l "Hmmm. . ."
@@ -1357,7 +1357,7 @@ label Laura_Master:
                     menu:
                         ch_l "Excuse me?"
                         "Sorry. I just don't care what you want.":
-                                if ApprovalCheck(LauraX, 1400, "LO"):
+                                if Approvalcheck(LauraX, 1400, "LO"):
                                         $ LauraX.change_stat("obedience", 200, 10)
                                         ch_l ". . ."
                                         $ LauraX.change_face("sly", 1)
@@ -1376,7 +1376,7 @@ label Laura_Master:
                                 $ LauraX.change_stat("love", 200, 10)
                                 $ LauraX.change_stat("obedience", 200, 10)
                                 $ LauraX.change_stat("inhibition", 50, 5)
-                                if ApprovalCheck(LauraX, 1400, "LO"):
+                                if Approvalcheck(LauraX, 1400, "LO"):
                                         $ LauraX.change_stat("obedience", 200, 10)
                                         ch_l ". . ."
                                         $ LauraX.change_face("sly", 1)
@@ -1847,7 +1847,7 @@ label Laura_Dressup:
                     ch_k "Oh, I see, [LauraX.name]."
                     ch_k "She's back?"
             "I was checking out that fine piece over there.":
-                if ApprovalCheck(KittyX,1200,"LO") or KittyX.Les >= 10:
+                if Approvalcheck(KittyX,1200,"LO") or KittyX.Les >= 10:
                         $ KittyX.change_stat("obedience", 80, 5)
                         $ KittyX.change_stat("inhibition", 80, 5)
                         $ KittyX.change_face("bemused",1)
@@ -1996,7 +1996,7 @@ label Laura_Dressup3:
                             # you probably stole it from Xavier
                             $ KittyX.change_face("confused",Eyes="side")
                             ch_k "Yeah, I'm not really sure how he got a key. . ."
-                            if not ApprovalCheck(KittyX,1200):
+                            if not Approvalcheck(KittyX,1200):
                                     #if she doesn't like you a lot yet. . .
                                     $ KittyX.change_face("angry",1)
                                     ch_k "Ok, that's enough, out, out!"
@@ -2013,7 +2013,7 @@ label Laura_Dressup3:
                     "You knock on the door."
                     ch_k "Who is it?"
                     ch_p "It's [Player.name], mind if I come in?"
-                    if not ApprovalCheck(KittyX, 1000):
+                    if not Approvalcheck(KittyX, 1000):
                             ch_k "Um, sorry [KittyX.Petname], we're a little busy in here."
                             ch_k "[KittyX.Like]maybe check back later?"
                             ch_p "Sure, no problem."
@@ -2121,7 +2121,7 @@ label Laura_Dressup3:
             "Go right ahead!":
                     $ LauraX.change_stat("obedience", 40, 3)
                     $ LauraX.change_stat("inhibition", 40, 3)
-                    if (not LauraX.SeenChest or not LauraX.SeenPussy) and not ApprovalCheck(LauraX,1400):
+                    if (not LauraX.SeenChest or not LauraX.SeenPussy) and not Approvalcheck(LauraX,1400):
                             $ LauraX.change_stat("love", 70, -5)
                             $ LauraX.change_face("angry",1)
                             ch_l "I don't think so."
@@ -2131,12 +2131,12 @@ label Laura_Dressup3:
                     else:
                         if LauraX.SeenChest and LauraX.SeenPussy:
                                 ch_l "Fair enough. . ."
-                        elif ApprovalCheck(LauraX,1400):
+                        elif Approvalcheck(LauraX,1400):
                                 ch_l "Bold choice. . ."
                         $ KittyX.change_face("surprised",2,Eyes="side")
                         $ LauraX.Chest = 0
                         "[LauraX.name] starts stripping out of the new clothes. . ."
-                        if ApprovalCheck(KittyX,1200):
+                        if Approvalcheck(KittyX,1200):
                                 $ KittyX.change_face("sly",1)
                         else:
                                 $ KittyX.change_face("angry",1,Eyes="side")
@@ -2148,7 +2148,7 @@ label Laura_Dressup3:
                         $ LauraX.OutfitChange(LauraX.OutfitDay,Changed=1)
                         "And then puts on her usual outfit."
 
-                        if ApprovalCheck(KittyX,1200):
+                        if Approvalcheck(KittyX,1200):
                                 $ KittyX.change_face("sly",1)
                         else:
                                 $ KittyX.change_face("angry",1)
@@ -2317,7 +2317,7 @@ label Laura_Foul:
                     ch_l "Thanks."
                     $ LauraX.AddWord(1,"sorry",0,0,0) #adds "sorry" to Recent
             "Oh, ok.":
-                    if ApprovalCheck(LauraX, 1200) or ApprovalCheck(LauraX, 400, "O"):
+                    if Approvalcheck(LauraX, 1200) or Approvalcheck(LauraX, 400, "O"):
                         $ LauraX.change_stat("obedience", 60, 3)
                         $ LauraX.change_stat("obedience", 90, 2)
                         $ LauraX.change_stat("inhibition", 60, 3)
@@ -2349,7 +2349,7 @@ label Laura_Foul:
                                         $ LauraX.AddWord(1,"sorry",0,0,0) #adds "sorry" to Recent
                                 "Eh, I guess?":
                                         ch_l ". . ."
-                                        if ApprovalCheck(LauraX, 1200) or ApprovalCheck(LauraX, 400, "O"):
+                                        if Approvalcheck(LauraX, 1200) or Approvalcheck(LauraX, 400, "O"):
                                                 $ LauraX.change_face("normal",1)
                                                 $ LauraX.change_stat("love", 80, 2)
                                                 $ LauraX.change_stat("love", 200, 2)

@@ -7,7 +7,7 @@ label First_Addicted(Girl=0): #rkeljs
 
         $ Player.AddWord(1,0,"fix") #adds to daily
 
-        call Locked_Door(Girl)
+        call locked_door(Girl)
         if not _return:
                 #if the door is locked and you refused entry. . .
                 return
@@ -145,7 +145,7 @@ label First_Addicted(Girl=0): #rkeljs
         menu:
             extend ""
             "Another kiss?" if Girl.Kissed:
-                    if ApprovalCheck(Girl, 660, "LI",Alt=[[RogueX,JeanX],560]):
+                    if Approvalcheck(Girl, 660, "LI",Alt=[[RogueX,JeanX],560]):
                             $ Girl.change_stat("lust", 80, 3)
                             $ Girl.change_stat("love", 80, 6)
                             $ Girl.change_face("sexy")
@@ -164,7 +164,7 @@ label First_Addicted(Girl=0): #rkeljs
                             elif Girl == JubesX:
                                     ch_v "Well, that's not usually how \"vampire\" works, but we could give it a shot. . ."
                             "She leans in for another kiss."
-                            call KissPrep(Girl)
+                            call before_kiss
                     else:
                             $ Girl.change_face("sad",2)
                             if Girl == RogueX:
@@ -183,7 +183,7 @@ label First_Addicted(Girl=0): #rkeljs
                                     ch_v "Nah. . ."
                             jump Addicted_Bad_End
             "How about a kiss?" if not Girl.Kissed:
-                    if ApprovalCheck(Girl, 660, "LI",Alt=[[RogueX,JeanX],560]):
+                    if Approvalcheck(Girl, 660, "LI",Alt=[[RogueX,JeanX],560]):
                             $ Girl.change_stat("lust", 80, 3)
                             $ Girl.change_stat("love", 80, 6)
                             $ Girl.change_face("bemused",1)
@@ -202,7 +202,7 @@ label First_Addicted(Girl=0): #rkeljs
                             elif Girl == JubesX:
                                     ch_v "Well, that's not usually how \"vampire\" works, but we could give it a shot. . ."
                             "She leans in for a kiss."
-                            call KissPrep(Girl)
+                            call before_kiss
                     else:
                             $ Girl.change_face("sad",2)
                             if Girl == RogueX:
@@ -221,7 +221,7 @@ label First_Addicted(Girl=0): #rkeljs
                                     ch_v "That's not usually how \"vampire\" works. . ."
                             jump Addicted_Bad_End
             "Sure, if it would make you feel better." if Girl != JubesX:
-                    if ApprovalCheck(Girl, 700, "LI",Alt=[[RogueX],600]):
+                    if Approvalcheck(Girl, 700, "LI",Alt=[[RogueX],600]):
                             $ Girl.change_stat("lust", 80, 3)
                             $ Girl.change_stat("love", 90, 1)
                             $ Girl.change_stat("love", 80, 3)
@@ -240,7 +240,7 @@ label First_Addicted(Girl=0): #rkeljs
                             elif Girl == StormX:
                                     ch_s "Perhaps a kiss then. . ."
                             "She leans in for a kiss."
-                            call KissPrep(Girl)
+                            call before_kiss
                     else:
                             $ Girl.change_stat("lust", 80, 3)
                             $ Girl.change_stat("love", 90, 1)
@@ -250,7 +250,7 @@ label First_Addicted(Girl=0): #rkeljs
                             call Girl_Tag(Girl)
 
             "What, you just want to touch my face? No thanks." if Girl != JubesX:
-                    if ApprovalCheck(Girl, 500, "L",Alt=[[RogueX,JeanX],400]) or Girl.Kissed:
+                    if Approvalcheck(Girl, 500, "L",Alt=[[RogueX,JeanX],400]) or Girl.Kissed:
                             $ Girl.change_stat("love", 200, -3)
                             $ Girl.change_stat("inhibition", 50, 3)
                             $ Girl.Brows = "confused"
@@ -276,7 +276,7 @@ label First_Addicted(Girl=0): #rkeljs
                                         $ Girl.change_stat("love", 80, 5)
                                         $ Girl.change_face("sexy")
                                         "She leans in for a kiss."
-                                        call KissPrep(Girl)
+                                        call before_kiss
                                 "Only if we can make out a bit." if Girl not in (LauraX,JeanX):
                                         $ Girl.change_stat("love", 80, 3)
                                         $ Girl.change_stat("obedience", 40, 5)
@@ -289,7 +289,7 @@ label First_Addicted(Girl=0): #rkeljs
                                                 ch_e "I don't see why not."
                                         elif Girl == StormX:
                                                 ch_s "Oh. I suppose we could. . ."
-                                        call KissPrep(Girl)
+                                        call before_kiss
                                 "Not good enough.":
                                         $ Girl.change_stat("love", 200, -5)
                                         $ Girl.Brows = "angry"
@@ -301,7 +301,7 @@ label First_Addicted(Girl=0): #rkeljs
                                         call Addicted_Ultimatum
 
             "You could just touch my face or something." if Girl == JubesX:
-                    if ApprovalCheck(Girl, 700, "LI"):
+                    if Approvalcheck(Girl, 700, "LI"):
                             $ Girl.change_stat("lust", 80, 3)
                             $ Girl.change_stat("love", 90, 1)
                             $ Girl.change_stat("love", 80, 3)
@@ -309,7 +309,7 @@ label First_Addicted(Girl=0): #rkeljs
                             $ Girl.change_face("sexy")
                             ch_v "Well, we may as well do more than that. . ."
                             "She leans in for a kiss."
-                            call KissPrep(Girl)
+                            call before_kiss
                     else:
                             $ Girl.change_stat("lust", 80, 3)
                             $ Girl.change_stat("love", 90, 1)
@@ -320,7 +320,7 @@ label First_Addicted(Girl=0): #rkeljs
                             call Girl_Tag(Girl)
 
             "You want to drink my blood? No thanks." if Girl == JubesX:
-                    if ApprovalCheck(Girl, 500, "L") or Girl.Kissed:
+                    if Approvalcheck(Girl, 500, "L") or Girl.Kissed:
                             $ Girl.change_stat("love", 200, -3)
                             $ Girl.change_stat("inhibition", 50, 3)
                             $ Girl.Brows = "confused"
@@ -334,13 +334,13 @@ label First_Addicted(Girl=0): #rkeljs
                                         $ Girl.change_stat("love", 80, 5)
                                         $ Girl.change_face("sexy")
                                         "She leans in for a kiss."
-                                        call KissPrep(Girl)
+                                        call before_kiss
                                 "Only if we can make out a bit.":
                                         $ Girl.change_stat("love", 80, 3)
                                         $ Girl.change_stat("obedience", 40, 5)
                                         $ Girl.change_face("sexy")
                                         ch_v "I think I could manage. . ."
-                                        call KissPrep(Girl)
+                                        call before_kiss
                                 "Not good enough.":
                                         $ Girl.change_stat("love", 200, -5)
                                         $ Girl.Brows = "angry"
@@ -660,7 +660,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                     "Do you want to lock the door first?"
                     "Yes":
                             "You go to lock the door"
-                            if not ApprovalCheck(Girl, 1000):
+                            if not Approvalcheck(Girl, 1000):
                                 $ Girl.change_face("perplexed")
                                 $ Girl.change_stat("obedience", 60, 2)
                                 if Girl == RogueX:
@@ -687,7 +687,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                             pass
         while between_event_count:
             $ stored_count = temp_modifier
-            if not ApprovalCheck(Girl, 1200, "LO"):
+            if not Approvalcheck(Girl, 1200, "LO"):
                     $ Girl.Forced = 1
                     $ multi_action = 0
             menu Addict_Ultimatum_Menu:
@@ -716,8 +716,8 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                                 elif Girl == JubesX:
                                         ch_v "Then I suppose I choose. . ."
                                 "She leans in for a kiss."
-                                call KissPrep(Girl)
-                        elif ApprovalCheck(Girl, 650, "LI",Alt=[[RogueX],600]):
+                                call before_kiss
+                        elif Approvalcheck(Girl, 650, "LI",Alt=[[RogueX],600]):
                                 $ Girl.change_stat("lust", 80, 3)
                                 $ Girl.change_stat("love", 80, 5)
                                 $ Girl.change_face("sexy")
@@ -739,7 +739,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                                 elif Girl == JubesX:
                                         ch_v "Oh! Then how about I just try a simple touch. . ."
                                 "She leans in for a kiss."
-                                call KissPrep(Girl)
+                                call before_kiss
                         else:
                                 $ Girl.change_stat("lust", 80, 3)
                                 $ Girl.change_stat("love", 80, 6)
@@ -753,7 +753,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                                         call Anyline(Girl,"I suppose we don't have time for any more than that.")
 
                 "How about a kiss?":
-                        if Girl.Kissed or ApprovalCheck(Girl, 600, "LI",Alt=[[RogueX,JeanX],560]) or Girl.Petname in ("master", "sir"):
+                        if Girl.Kissed or Approvalcheck(Girl, 600, "LI",Alt=[[RogueX,JeanX],560]) or Girl.Petname in ("master", "sir"):
                                 $ Girl.Forced = 0
                                 $ Girl.change_stat("lust", 80, 3)
                                 $ Girl.change_stat("love", 80, 6)
@@ -773,7 +773,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                                 elif Girl == JubesX:
                                         ch_v "You've convinced me. . ."
                                 "She leans in for a kiss."
-                                call KissPrep(Girl)
+                                call before_kiss
                                 $ Girl.Addict = 20 if Girl.Addict > 20 else Girl.Addict
                                 $ Girl.Addict = 5 if Girl == JubesX else Girl.Addict
                         else:
@@ -943,7 +943,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
 
 
                 "How about you strip for me, and then I let you touch me?":
-                        $ stored_count = Girl.ClothingCheck()
+                        $ stored_count = Girl.Clothingcheck()
                         call Group_Strip(Girl)
                         if Girl.location != bg_current:
                                     jump Misplaced
@@ -954,7 +954,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                                     $ Girl.change_stat("inhibition", 50, 10)
                             "That was pretty weak, I'll need a bit more.":
                                     $ Girl.change_face("angry")
-                                    if stored_count > Girl.ClothingCheck() and Girl.ClothingCheck() < 3:
+                                    if stored_count > Girl.Clothingcheck() and Girl.Clothingcheck() < 3:
                                             #if she is wearing less than before. . .
                                             $ Girl.change_stat("love", 200, -40)
                                             $ Girl.change_stat("inhibition", 50, 5)
@@ -1130,7 +1130,7 @@ label Addicted_Ultimatum(AddictStore=Girl.Addict): #rkeljs
                             elif Girl == JubesX:
                                     ch_v "[[pant, pant] I really can't. . ."
                             jump Addicted_Bad_End
-            if not between_event_count and ApprovalCheck(Girl, 1200, "LO"):
+            if not between_event_count and Approvalcheck(Girl, 1200, "LO"):
                     # if she likes/obeys you, she'll keep giving you chances.
                     $ between_event_count += 1
             if between_event_count and Girl.Addict <= AddictStore:
@@ -1396,7 +1396,7 @@ label Addicted_Bad_End: #rkeljs
         $ multi_action = 1
         $ Girl.Addictionrate += 2
         call Sex_Over
-        call Checkout
+        call checkout
         $ Girl.ArmPose = 1
         if Girl not in Party: #allows you to stay if she's added to a party
                 if bg_current == Girl.Home:
@@ -1522,12 +1522,12 @@ label Addicted_Fix_Beg: #rkeljs
 
 label Addiction_Fix(Girl=0): #rkeljs
         $ Girl.DrainWord("asked meet")
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         call set_the_scene
         call shift_focus(Girl)
         $ Girl.location = bg_current
         $ Girl.OutfitChange(Changed=1)
-        call Locked_Door(Girl)
+        call locked_door(Girl)
         if not _return:
                 #if the door is locked and you refused entry. . .
                 return
@@ -1703,7 +1703,7 @@ label Addicted_Fix_End: #rkeljs
                     elif not Girl.Forced:
                             ch_r "Thanks. I really appreciate this. I can't really explain it, but if I don't get. . . "
                             ch_r "access every now and then, I just feel awful, crawling out of my skin. Being with you, helps calm me down."
-                            if ApprovalCheck(Girl, 750):
+                            if Approvalcheck(Girl, 750):
                                 ch_r "And, you know, we had a lot of fun in the process."
                             else: #not good with you
                                 ch_r "And thanks for, you know, not taking advantage of the situation."
@@ -1725,7 +1725,7 @@ label Addicted_Fix_End: #rkeljs
                             ch_k "Could you maybe not force me into that though?"
                     elif not Girl.Forced:
                             ch_k "Thanks for helping me out. It really feels awful when I let it go too long."
-                            if ApprovalCheck(Girl, 850):
+                            if Approvalcheck(Girl, 850):
                                 ch_k "And we got to have some fun with it too. . ."
                             else: #not good with you
                                 ch_k "And thanks for[Girl.like]not taking advantage. . . you know?"
@@ -1749,7 +1749,7 @@ label Addicted_Fix_End: #rkeljs
                     elif not Girl.Forced:
                             ch_e "I appreciate your. . . assistance."
                             ch_e "This really is quite inconvenient, but I suppose it could be worse."
-                            if ApprovalCheck(Girl, 800):
+                            if Approvalcheck(Girl, 800):
                                 ch_e "You really aren't the worst company out there. . ."
                             else: #not good with you
                                 ch_e "I appreciate your. . . restraint in handling our situation."
@@ -1773,7 +1773,7 @@ label Addicted_Fix_End: #rkeljs
                     elif not Girl.Forced:
                             ch_l "Mmmm, that's a weight off. . ."
                             ch_l "Thanks for helping to sort me out there, [Girl.Petname]."
-                            if ApprovalCheck(Girl, 750):
+                            if Approvalcheck(Girl, 750):
                                 ch_l "And hey, not a bad way to spend some time, right?"
                             else: #not good with you
                                 ch_l "And thanks for not pushing things, eh?"
@@ -1801,7 +1801,7 @@ label Addicted_Fix_End: #rkeljs
                             $ Girl.change_stat("obedience", 80, 2)
                             ch_j "Ok, that's the stuff. . ."
                             ch_j "Thanks, [Girl.Petname]."
-                            if ApprovalCheck(Girl, 750):
+                            if Approvalcheck(Girl, 750):
                                 ch_j "And it worked out pretty well for you, right?"
                             else: #not good with you
                                 ch_j "and at least you didn't go \"full perv\" on me."
@@ -1831,7 +1831,7 @@ label Addicted_Fix_End: #rkeljs
                     elif not Girl.Forced:
                             ch_s "Thank you for. . . indulging me."
                             ch_s "I find these urges. . . inconvenient. . ."
-                            if ApprovalCheck(Girl, 800):
+                            if Approvalcheck(Girl, 800):
                                 ch_s ". . . but there are far worse I could be stuck with. . ."
                             else: #not good with you
                                 ch_s "I do appreciate you limiting your excesses."
@@ -1858,7 +1858,7 @@ label Addicted_Fix_End: #rkeljs
                     elif not Girl.Forced:
                             ch_v "Thanks. . . "
                             ch_v "You really don't miss the sunlight until it's gone, uh?"
-                            if ApprovalCheck(Girl, 750):
+                            if Approvalcheck(Girl, 750):
                                 ch_v "And that wasn't so bad, right?"
                             else: #not good with you
                                 ch_v "And thanks for, you know, not taking advantage of the situation."
@@ -1883,7 +1883,7 @@ label Addicted_Fix_End: #rkeljs
                 "Bye":
                         pass
                 "See you next time. . .":
-                    if not Girl.Forced and ApprovalCheck(Girl, 800):
+                    if not Girl.Forced and Approvalcheck(Girl, 800):
                             $ Girl.change_face("bemused",1,Eyes="side")
                             if Girl == RogueX:
                                     ch_r "Yeah, later."
@@ -1907,7 +1907,7 @@ label Addicted_Fix_End: #rkeljs
                             $ Girl.change_stat("obedience", 70, 2)
                             "She scowls"
                 "Did you want to stick around?":
-                    if not Girl.Forced and ApprovalCheck(Girl, 800, "LI"):
+                    if not Girl.Forced and Approvalcheck(Girl, 800, "LI"):
                             $ Girl.change_face("smile",1)
                             $ Party.append(Girl)
                             if Girl == RogueX:
@@ -2019,7 +2019,7 @@ label Addicted_Serum: #rkeljs
                                 else:
                                         $ Girl.change_face("surprised")
                                         ch_r "Your what? . . . You want me to drink your jiz?"
-                                if ApprovalCheck(Girl, 750) and not Girl.Forced:     #if she likes you, she offers sex instead
+                                if Approvalcheck(Girl, 750) and not Girl.Forced:     #if she likes you, she offers sex instead
                                         $ Girl.change_face("sexy")
                                         ch_r "Well if that's the plan, couldn't I just get some from the source?"
                                 else:
@@ -2032,7 +2032,7 @@ label Addicted_Serum: #rkeljs
                                         $ Girl.change_face("surprised",2)
                                         ch_k "Your what? . . . You want me to. . ."
                                         ch_k ". . . drink your jiz?"
-                                if ApprovalCheck(Girl, 850) and not Girl.Forced:     #if she likes you, she offers sex instead
+                                if Approvalcheck(Girl, 850) and not Girl.Forced:     #if she likes you, she offers sex instead
                                         $ Girl.change_face("sexy")
                                         ch_k "I mean, I don't -could- drink it from the bottle. . ."
                                 else:
@@ -2044,7 +2044,7 @@ label Addicted_Serum: #rkeljs
                                 else:
                                         $ Girl.change_face("surprised")
                                         ch_e "Well. . . I suppose it does make a certain amount of sense. . ."
-                                if ApprovalCheck(Girl, 950) and not Girl.Forced:     #if she likes you, she offers sex instead
+                                if Approvalcheck(Girl, 950) and not Girl.Forced:     #if she likes you, she offers sex instead
                                         $ Girl.change_face("sexy")
                                         ch_e "I might be convinced to drink it from the source, you know. . ."
                                 else:
@@ -2056,7 +2056,7 @@ label Addicted_Serum: #rkeljs
                                 else:
                                         $ Girl.change_face("surprised")
                                         ch_l "Huh? Huh. . . yeah, makes sense."
-                                if ApprovalCheck(Girl, 850):     #if she likes you, she offers sex instead
+                                if Approvalcheck(Girl, 850):     #if she likes you, she offers sex instead
                                         $ Girl.change_face("sexy")
                                         ch_l "Do you want me to just get down there?"
                                 else:
@@ -2072,7 +2072,7 @@ label Addicted_Serum: #rkeljs
                                 else:
                                         $ Girl.change_face("surprised")
                                         ch_j "Well, I guess maybe if it comes from you. . ."
-                                if ApprovalCheck(Girl, 850):     #if she likes you, she offers sex instead
+                                if Approvalcheck(Girl, 850):     #if she likes you, she offers sex instead
                                         $ Girl.change_face("sexy")
                                         ch_j "Did you want me to just get it from you, or. . ."
                                 else:
@@ -2084,7 +2084,7 @@ label Addicted_Serum: #rkeljs
                                 else:
                                         $ Girl.change_face("surprised")
                                         ch_s "Hmmm. . . with the ways your powers function, that may work. . ."
-                                if ApprovalCheck(Girl, 950):     #if she likes you, she offers sex instead
+                                if Approvalcheck(Girl, 950):     #if she likes you, she offers sex instead
                                         $ Girl.change_face("sexy")
                                         ch_s "I wouldn't mind. . . taking some directly. . ."
                                 else:
@@ -2096,7 +2096,7 @@ label Addicted_Serum: #rkeljs
                                 else:
                                         $ Girl.change_face("surprised")
                                         ch_v "Your what? . . . Jiz, uh?"
-                                if ApprovalCheck(Girl, 750) and not Girl.Forced:     #if she likes you, she offers sex instead
+                                if Approvalcheck(Girl, 750) and not Girl.Forced:     #if she likes you, she offers sex instead
                                         $ Girl.change_face("sexy")
                                         ch_v "I could always just suck you dry myself. . ."
                                 else:
@@ -2114,7 +2114,7 @@ label Addicted_Serum: #rkeljs
                 $ temp_modifier += 20
                 if Girl == RogueX:
                         ch_r "Hmm, it was good last time. . ."
-                        if ApprovalCheck(Girl, 750) and not Girl.Forced:
+                        if Approvalcheck(Girl, 750) and not Girl.Forced:
                                 $ Girl.change_face("sexy")
                                 ch_r "I'd really rather get it straight off the tap. . ."
                         else:
@@ -2123,7 +2123,7 @@ label Addicted_Serum: #rkeljs
                                 ch_r "I guess this is as good a \"treatment\" as any."
                 elif Girl == KittyX:
                         ch_k "Well, it was tasty. . ."
-                        if ApprovalCheck(Girl, 850) and not Girl.Forced:
+                        if Approvalcheck(Girl, 850) and not Girl.Forced:
                                 $ Girl.change_face("sexy")
                                 ch_k "I take my milk from the bottle. . ."
                         else:
@@ -2132,7 +2132,7 @@ label Addicted_Serum: #rkeljs
                                 ch_k "This'll work out, I guess."
                 elif Girl == EmmaX:
                         ch_e "You do possess a unique bouquet. . ."
-                        if ApprovalCheck(Girl, 950) and not Girl.Forced:
+                        if Approvalcheck(Girl, 950) and not Girl.Forced:
                                 $ Girl.change_face("sexy")
                                 ch_e "I'd rather take my medicine. . . directly."
                         else:
@@ -2141,7 +2141,7 @@ label Addicted_Serum: #rkeljs
                                 ch_e "I suppose we can make this work."
                 elif Girl == LauraX:
                         ch_l "Yeah, I mean it was pretty good. . ."
-                        if ApprovalCheck(Girl, 850) and not Girl.Forced:
+                        if Approvalcheck(Girl, 850) and not Girl.Forced:
                                 $ Girl.change_face("sexy")
                                 ch_l "I'd really rather get it straight off the tap. . ."
                         else:
@@ -2150,7 +2150,7 @@ label Addicted_Serum: #rkeljs
                                 ch_l "I guess this works."
                 elif Girl == JeanX:
                         ch_j "Well, it is tasty. . ."
-                        if ApprovalCheck(Girl, 850) and not Girl.Forced:
+                        if Approvalcheck(Girl, 850) and not Girl.Forced:
                                 $ Girl.change_face("sexy")
                                 ch_j "I could just suck you off or something. . ."
                         else:
@@ -2159,7 +2159,7 @@ label Addicted_Serum: #rkeljs
                                 ch_j "I guess I don't mind. . ."
                 elif Girl == StormX:
                         ch_s "I did enjoy it last time. . ."
-                        if ApprovalCheck(Girl, 950) and not Girl.Forced:
+                        if Approvalcheck(Girl, 950) and not Girl.Forced:
                                 $ Girl.change_face("sexy")
                                 ch_s "We could be more direct about it. . ."
                         else:
@@ -2168,7 +2168,7 @@ label Addicted_Serum: #rkeljs
                                 ch_s "I suppose I could work with that."
                 elif Girl == JubesX:
                         ch_v "I guess one smoothie is as good as another. . ."
-                        if ApprovalCheck(Girl, 750) and not Girl.Forced:
+                        if Approvalcheck(Girl, 750) and not Girl.Forced:
                                 $ Girl.change_face("sexy")
                                 ch_v "I could always just suck you dry myself. . ."
                         else:
@@ -2205,13 +2205,13 @@ label Addicted_Serum: #rkeljs
                 "Give it to her":
                         $ Girl.Forced = 0
                         $ Girl.Mouth = "smile"
-                        $ Girl.change_stat("love", 50, 1, alternates = {"Jean": {"check": 50, "value": 3})
+                        $ Girl.change_stat("love", 50, 1, alternates = {"Jean": {"check": 50, "value": 3}})
                         ch_p "No problem."
                         $ Girl.recent_history.append("has serum")
 
                 "Well, a handy might do the trick. . .":
                         $ Girl.change_face("sexy")
-                        if ApprovalCheck(Girl, 1100) or (ApprovalCheck(Girl, 800) and Girl.Chat[2]):
+                        if Approvalcheck(Girl, 1100) or (Approvalcheck(Girl, 800) and Girl.Chat[2]):
                                 $ Girl.ArmPose = 2
                                 if Girl == RogueX:
                                         if Girl.Chat[3]:
@@ -2261,7 +2261,7 @@ label Addicted_Serum: #rkeljs
 
                 "How about a blowjob?":
                         $ Girl.change_face("sexy")
-                        if ApprovalCheck(Girl, 1300) or (ApprovalCheck(Girl, 800) and Girl.Chat[3]):
+                        if Approvalcheck(Girl, 1300) or (Approvalcheck(Girl, 800) and Girl.Chat[3]):
                                 if Girl == RogueX:
                                         if Girl.Chat[3]:
                                                 ch_r "Heh, I guess I could get it straight from the source."
@@ -2476,7 +2476,7 @@ label Addicted_Serum: #rkeljs
                                 $ Girl.change_stat("obedience", 50, 2)
                                 $ Girl.change_stat("obedience", 90, 3)
                                 $ Girl.change_stat("inhibition", 70, 2)
-                                if not ApprovalCheck(Girl, 1200, "LI"):
+                                if not Approvalcheck(Girl, 1200, "LI"):
                                         $ Girl.Forced = 1
                                         $ multi_action = 0
                                 $ Player.Cash += 10
@@ -2500,7 +2500,7 @@ label Addicted_Serum: #rkeljs
                                 $ Girl.change_stat("obedience", 50, 4)
                                 $ Girl.change_stat("obedience", 70, 2)
                                 $ Girl.change_stat("inhibition", 70, 4)
-                                if not ApprovalCheck(Girl, 1200, "LI"):
+                                if not Approvalcheck(Girl, 1200, "LI"):
                                         $ Girl.Forced = 1
                                         $ multi_action = 0
                                 $ Player.Cash += 5

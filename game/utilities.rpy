@@ -72,7 +72,7 @@ label Round10(Girls=[],Occupant=0): #rkeljsv
 
         call Wait
 
-        call Girls_Location #new here
+        call Girls_location #new here
 
         if time_index < 3 or Occupant.location != bg_current:
                 #if it's not nightime or the girl is not home. . .
@@ -96,7 +96,7 @@ label Round10(Girls=[],Occupant=0): #rkeljsv
                 elif Occupant == StormX:
                         ch_s "I am going to bed soon, care to join me?"
 
-        elif ApprovalCheck(Occupant, 1000, "LI") or ApprovalCheck(Occupant, 600, "OI"):
+        elif Approvalcheck(Occupant, 1000, "LI") or Approvalcheck(Occupant, 600, "OI"):
                 #It's late but she really likes you
                 if Occupant == RogueX:
                         ch_r "It's pretty late, [Occupant.Petname], but you can stay for a little bit."
@@ -128,7 +128,7 @@ label Round10(Girls=[],Occupant=0): #rkeljsv
                 jump Misplaced
         return
 
-label Checkout(Total = 0,Girls=[]):
+label checkout(Total = 0,Girls=[]):
         $ Girls = all_Girls[:]
         while Girls:
                 $ Girls[0].love = 1000 if Girls[0].love > 1000 else Girls[0].love
@@ -170,8 +170,8 @@ label Checkout(Total = 0,Girls=[]):
                 $ primary_action = 0
                 $ offhand_action = 0
                 $ girl_offhand_action = 0
-                $ Partner_primary_action = 0
-                $ Partner_offhand_action = 0
+                $ second_girl_primary_action = 0
+                $ second_girl_offhand_action = 0
                 $ position_change_timer = 100
                 $ Partner = 0
                 $ Player.FocusX = 0
@@ -182,7 +182,7 @@ label Wait (Outfit = 1, Lights = 1, Girls=[]):
     # If Lights is 1, it removes the blackout screen, otherwise it does not.
     show blackscreen onlayer black
 
-    call Checkout(1)
+    call checkout(1)
     $ Player.XP = 3330 if Player.XP > 3330 else Player.XP
 
     if time_index < 3:  #not sleep time
@@ -277,7 +277,7 @@ label Wait (Outfit = 1, Lights = 1, Girls=[]):
 
                         $ Girls[0].ForcedCount -= 1 if Girls[0].ForcedCount > 0 else 0
                         if Girls[0].ForcedCount > 0:
-                                $ Girls[0].ForcedCount -= 1 if ApprovalCheck(Girls[0], 1000, "LO") else 0
+                                $ Girls[0].ForcedCount -= 1 if Approvalcheck(Girls[0], 1000, "LO") else 0
                         $ Girls[0].Action = Girls[0].MaxAction
 
                         $ Girls[0].Rep = 0 if Girls[0].Rep < 0 else Girls[0].Rep
@@ -485,28 +485,28 @@ label Wait (Outfit = 1, Lights = 1, Girls=[]):
 
     #End Hourly actions / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-    call LesCheck #checks to see if the girls hook up with each other. . .
+    call Lescheck #checks to see if the girls hook up with each other. . .
     #end wait items:
 
-    call Checkout
+    call checkout
     if time_index < 3:
             hide NightMask onlayer nightmask
     if Lights:
             hide blackscreen onlayer black
     return
 
-label Girls_Schedule(Girls = [], Clothes = 1, Location = 1, LocTemp = 0):
+label Girls_Schedule(Girls = [], Clothes = 1, location = 1, locationTemp = 0):
         # Set the girl's natural movements
         # If not Clothes, don't bother with her outfit in the schedule
         # Clothes 2 is ordered to change regardless of time of day
-        # If not Location, don't bother with the location portion of the schedule
+        # If not location, don't bother with the location portion of the schedule
         if not Girls:
                 #fills list unless a specific girl is sent
                 $ Girls = active_Girls[:]
         elif Girls[0] not in all_Girls:
                 return
         while Girls:
-                if Girls[0] in Party and Clothes != 2 or not Location:
+                if Girls[0] in Party and Clothes != 2 or not location:
                         #if she's in a party, never mind
                         pass
                 elif Clothes != 2 and "sleepover" in Girls[0].Traits and time_index == 0:
@@ -542,10 +542,10 @@ label Girls_Schedule(Girls = [], Clothes = 1, Location = 1, LocTemp = 0):
                                 $ Girls[0].Outfit = Girls[0].OutfitDay
                         #End clothing portion
 
-                        #Location portion
-                        $ LocTemp = Girls[0].location
+                        #location portion
+                        $ locationTemp = Girls[0].location
                         if Girls[0] not in active_Girls:
-                                $ LocTemp = "hold"
+                                $ locationTemp = "hold"
                                 $ Girls[0].location = "hold"
                         elif Girls[0] in Party or Girls[0].location == "hold":
                                 pass
@@ -555,12 +555,12 @@ label Girls_Schedule(Girls = [], Clothes = 1, Location = 1, LocTemp = 0):
                                                 #Jubliee will not leave her room voluntarily if it's higher than 60
                                                 $ JubesX.location = JubesX.Home
 
-                        if Girls[0].location != LocTemp and Girls[0] not in Party:
+                        if Girls[0].location != locationTemp and Girls[0] not in Party:
                                 #if she moved
-                                if LocTemp == bg_current:
-                                        if ApprovalCheck(Girls[0], 1200) and Girls[0].location not in ("bg_classroom","bg_teacher","bg_dangerroom"):
+                                if locationTemp == bg_current:
+                                        if Approvalcheck(Girls[0], 1200) and Girls[0].location not in ("bg_classroom","bg_teacher","bg_dangerroom"):
                                                 # if she's contented, then she just sticks around
-                                                $ Girls[0].location = LocTemp
+                                                $ Girls[0].location = locationTemp
                                         else:
                                                 #If she was where you were, but left
                                                 $ Girls[0].recent_history.append("leaving")
@@ -656,7 +656,7 @@ label Todo(Girl=0): #rkeljs
         return
 
 label EventCalls(EGirls=[]): #rkeljs
-        call Present_Check
+        call Present_check
         $ D20 = renpy.random.randint(1, 20)
         call Get_Dressed
 
@@ -753,7 +753,7 @@ label EventCalls(EGirls=[]): #rkeljs
     #                         call Storm_Peter
     #                         return
     #                 if bg_current == "bg_classroom" and time_index == 2 and Weekday in (1,3):
-    #                         if "mohawk" not in StormX.History and "traveling" not in Player.recent_history and ApprovalCheck(StormX, 200, "I"):
+    #                         if "mohawk" not in StormX.History and "traveling" not in Player.recent_history and Approvalcheck(StormX, 200, "I"):
     #                                 jump Storm_Hairtalk
     #                                 return
     #                         if Round >= 70:
@@ -800,7 +800,7 @@ label EventCalls(EGirls=[]): #rkeljs
 
     #activates if you haven't done an addiction event today
         if "fix" not in Player.daily_history:
-                call AddictCheck
+                call Addictcheck
 
         if bg_current == "bg_player":
                 #only activates while in player room
@@ -815,17 +815,17 @@ label EventCalls(EGirls=[]): #rkeljs
                 #these events only play if you lack a prior commitment.
 
                 #This scene has Girl A asks Girl B off camera if she wants to have a poly Relationship with you
-                    call ShareCheck
+                    call Sharecheck
 
                 #Activates if any girl caught you cheating
                     #checks to see if any of the girls noticed you cheating on them
                     #returns if not
-                    call CheatCheck
+                    call Cheatcheck
 
                 #checks to see if a girl wants to jump you. . .
-                    call JumperCheck
+                    call Jumpercheck
 
-                #Checks to see if any girls want to fap.
+                #checks to see if any girls want to fap.
                     #If they have "wannafap" in their daily, and "nofap" in their traits, and are not in the room, they will ask you
                     #otherwise, they will automatically fap. If you meet them after this, they will be fapping,
                     #if you keep them busy, they will do it overnight
@@ -871,7 +871,7 @@ label EventCalls(EGirls=[]): #rkeljs
                                         call Jean_Like
                                 elif JeanX.love >= 800 and JeanX.obedience >= 600 and not JeanX.Event[5]:
                                         call Jean_love
-                                elif "daddy" not in JeanX.Petnames and ApprovalCheck(JeanX, 750, "L"):
+                                elif "daddy" not in JeanX.Petnames and Approvalcheck(JeanX, 750, "L"):
                                         if (bg_current == EGirls[0].Home or bg_current == "bg_player") and EGirls[0].location == bg_current:
                                             call girl_daddy(JeanX)
                                 return
@@ -908,7 +908,7 @@ label EventCalls(EGirls=[]): #rkeljs
                                 else:
                                         call AskedMeet(EGirls[0],"bemused")
                                 return
-                        elif "daddy" not in EGirls[0].Petnames and ApprovalCheck(EGirls[0], 750, "L") and ApprovalCheck(EGirls[0], 500, "O") and ApprovalCheck(EGirls[0], 500, "I"): # EGirls[0].Event[5]
+                        elif "daddy" not in EGirls[0].Petnames and Approvalcheck(EGirls[0], 750, "L") and Approvalcheck(EGirls[0], 500, "O") and Approvalcheck(EGirls[0], 500, "I"): # EGirls[0].Event[5]
                                 if (bg_current == EGirls[0].Home or bg_current == "bg_player") and EGirls[0].location == bg_current:
                                         call girl_daddy(EGirls[0])
                                 return
@@ -955,13 +955,13 @@ label EventCalls(EGirls=[]): #rkeljs
 
         #activates if you have done an addiction event today
         if "fix" in Player.daily_history:
-                call AddictCheck
+                call Addictcheck
         # EndPrimary Event Calls / / / / / / / / / / / / / / / / / Drops down to. . .
 
 label QuickEvents(EGirls=[]):
         #These events get checked every screen refresh
         $ Options = []
-        call Present_Check
+        call Present_check
 
         $ EGirls = all_Girls[:]
         $ renpy.random.shuffle(EGirls)
@@ -1737,9 +1737,9 @@ label clear_the_room(Girl = None, passive = False, silent = False, Girls_to_remo
 
     return
 
-label Girls_Location(GirlsNum = 0, Change=0, Girlsptions=[]):
+label Girls_location(GirlsNum = 0, Change=0, Girlsptions=[]):
         #this figures out where girls are and where to put spares.
-        #it's called most often by Locations, after Waits
+        #it's called most often by locations, after Waits
         #Girlsnum sets the number of girls that have already talked
         #"arriving" is set by the "Schedule" code, and will not be applied unless
         # the girl in questions was someplace else, and just showed up here on their own.
@@ -1775,14 +1775,14 @@ label Girls_Location(GirlsNum = 0, Change=0, Girlsptions=[]):
         return
 
 label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
-        # Called by Girls_Location after a Wait period
+        # Called by Girls_location after a Wait period
         #"arriving" is set by the "Schedule" code, and will not be applied unless
         # the girl in questions was someplace else, and just showed up here on their own.
         # Present contains all girls already local
 
         $ Options = []
 
-        call Present_Check
+        call Present_check
         $ Girls = Present[:]
         while Girls:
                 #Each girl trying to arrive is added to the Options
@@ -1812,20 +1812,20 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
 
         if door_locked:
                 if Primary == KittyX:
-                        call Locked_Door(KittyX)
+                        call locked_door(KittyX)
                         if KittyX.location != bg_current:
                             $ Primary = 0
                         elif Secondary:
                             #since Kitty can just barg right in, if she does so,
                             "You hear a \"thump\" as if someone was trying to follow Kitty."
-                            call Locked_Door(Secondary)
+                            call locked_door(Secondary)
                             if Secondary.location != bg_current:
                                     $ Secondary = 0
                 elif Primary.Home == bg_current:
                         #if it's the girl's room. . .
                         "You hear a key jiggling in the lock."
                 else:
-                        call Locked_Door(Primary)
+                        call locked_door(Primary)
                         if Primary.location != bg_current:
                             $ Primary = 0
         #End "if the door was locked."
@@ -1974,7 +1974,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                             #end "later"
                     if line == "no":
                             $ Primary.change_stat("obedience", 50, 5)
-                            if ApprovalCheck(Primary, 1800) or ApprovalCheck(Primary, 500, "O"):
+                            if Approvalcheck(Primary, 1800) or Approvalcheck(Primary, 500, "O"):
                                 # She accepts it
                                 $ Primary.change_stat("obedience", 80, 2)
                                 if Primary == RogueX:
@@ -2020,7 +2020,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                                     call remove_girl(Primary)
                             if Secondary and Secondary != JeanX:
                                     $ Secondary.change_stat("obedience", 50, 5)
-                                    if ApprovalCheck(Secondary, 1800) or ApprovalCheck(Secondary, 500, "O"):
+                                    if Approvalcheck(Secondary, 1800) or Approvalcheck(Secondary, 500, "O"):
                                         $ Secondary.change_stat("obedience", 80, 2)
                                         if Secondary == RogueX:
                                                 ch_r "I guess that's ok. See you later then."
@@ -2095,7 +2095,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                                             elif Primary == JubesX:
                                                             ch_v "\"Tread not into my lair\". . ."
 
-                                    elif time_index >= 3 and ApprovalCheck(Primary, 1000, "LI") and ApprovalCheck(Primary, 600, "OI"):
+                                    elif time_index >= 3 and Approvalcheck(Primary, 1000, "LI") and Approvalcheck(Primary, 600, "OI"):
                                             #it's night and she likes you
                                             if Primary == RogueX:
                                                             ch_r "Oh, hey, [RogueX.Petname], it's pretty late, but I guess you can stick around for a bit."
@@ -2112,7 +2112,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                                             elif Primary == JubesX:
                                                             ch_v "Kinda late, [JubesX.Petname], s'up?"
                                             $ line = "stay"
-                                    elif ApprovalCheck(Primary, 1300) or ApprovalCheck(Primary, 500, "O") or Primary == JubesX:
+                                    elif Approvalcheck(Primary, 1300) or Approvalcheck(Primary, 500, "O") or Primary == JubesX:
                                             #it's not night and she likes you
                                             if Primary == RogueX:
                                                             ch_r "Oh, hey, [RogueX.Petname], nice to see you here."
@@ -2145,7 +2145,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                                                             ch_s "I'm afraid that the hour is a bit late for visits. . ."
                                             #elif Primary == JubesX:
                                                             #not a factor since she does not sleep
-                                    elif ApprovalCheck(Primary, 600, "LI") or ApprovalCheck(Primary, 300, "OI"):
+                                    elif Approvalcheck(Primary, 600, "LI") or Approvalcheck(Primary, 300, "OI"):
                                             #it's not night and she's neutral
                                             if Primary == RogueX:
                                                             ch_r "Oh, hey, [RogueX.Petname]. You can stick around, I guess."
@@ -2220,7 +2220,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                                                                                 $ Primary.change_face("angry",Mouth="open")
                                                                                 ch_v "-YES.-"
                                                                                 $ Primary.change_face("angry")
-                                                        elif time_index >= 3 and ApprovalCheck(Primary, 800, "LI") and ApprovalCheck(Primary, 400, "OI"):
+                                                        elif time_index >= 3 and Approvalcheck(Primary, 800, "LI") and Approvalcheck(Primary, 400, "OI"):
                                                                 $ Primary.change_face("sadside")
                                                                 if Primary == RogueX:
                                                                                 ch_r "I suppose I can make an exception this once."
@@ -2253,7 +2253,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                                                                 elif Primary == JubesX:
                                                                                 ch_v "Sure."
                                                                                 $ line = "stay"
-                                                        elif ApprovalCheck(Primary, 750):
+                                                        elif Approvalcheck(Primary, 750):
                                                                 if Primary == RogueX:
                                                                                 ch_r "Oh, fine. For a little bit."
                                                                 elif Primary == KittyX:
@@ -2294,7 +2294,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                                                                 "[Primary.name] kicks you out of the room."
 
                                             "I'm sticking around, thanks.":
-                                                        if "angry" in Primary.daily_history or (not ApprovalCheck(Primary, 1800) and not ApprovalCheck(Primary, 500, "O")):
+                                                        if "angry" in Primary.daily_history or (not Approvalcheck(Primary, 1800) and not Approvalcheck(Primary, 500, "O")):
                                                                 $ Primary.change_face("angry")
                                                                 if Primary == RogueX:
                                                                                 ch_r "No way, buster! Out!"
@@ -2394,7 +2394,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                                 $ Primary = 0
                 if Primary:
                         #Determines who sits next to you
-                        if ApprovalCheck(Primary, 1000):
+                        if Approvalcheck(Primary, 1000):
                                 if len(Present) < 2 and D20 >= 10:
                                         $ line = Primary.name + " takes the seat next to you"
                                         $ Present.append(Primary)
@@ -2406,7 +2406,7 @@ label Girls_Arrive(Primary = 0, Secondary = 0, GirlsNum = 0,Girls=[]): #rkeljsv
                                         $ Nearby.append(Primary)
 
                 if Secondary:
-                        if ApprovalCheck(Secondary, 1000):
+                        if Approvalcheck(Secondary, 1000):
                             if len(Present) < 2 and D20 >= 10:
                                         #changes dialog based on whether she does the same or differently than the last person
                                         if Primary in Present:
@@ -2578,7 +2578,7 @@ label Dismissed:  #rkeljsv
                 pass
         return
 
-label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
+label locked_door(Girl=0,entering=0,Current=0): #rkeljsv
         # called when a girl tries to enter a locked room, mainly from the summon function
         # Girl is the indicated girl, entering is True if you want to always have her enter with dialog
         # Current is a girl you are currently with
@@ -2601,7 +2601,7 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
                 call Display_Girl(KittyX,reset_actions=0)
                 ch_k "Hi, [KittyX.Petname]!"
                 return 1
-        if door_locked:
+        if not door_locked:
                 $ Girl.location = bg_current
                 if entering:
                         call Display_Girl(Girl,reset_actions=0)
@@ -2649,12 +2649,12 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
             menu:
                 extend ""
                 "Open door":
-                        ch_p "place_on_hold on, [Girl.name]!"
+                        ch_p "Hold on, [Girl.name]!"
                         "You unlock the door and let her in."
                         $ Girl.location = bg_current
                         $ Girl.OutfitChange()
                 "Open door [[but stop fucking first]" if primary_action:
-                        ch_p "place_on_hold on, [Girl.name]!"
+                        ch_p "Hold on, [Girl.name]!"
                         call Sex_Over(1,Primary) #Cleans up after the sex stuff
                         "You unlock the door and let her in."
                         $ Girl.location = bg_current
@@ -2688,7 +2688,7 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
                                 return 0
                         elif Girl in (LauraX,JubesX):
                             "[Girl.name] goes quiet."
-                            if ApprovalCheck(Girl, 500,"I") and not ApprovalCheck(Girl, 500,"O"):
+                            if Approvalcheck(Girl, 500,"I") and not Approvalcheck(Girl, 500,"O"):
                                     $ Girl.location = bg_current
                                     $ Girl.OutfitChange()
                                     if Girl == LauraX:
@@ -2713,7 +2713,7 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
                                         call remove_girl(Girl)
                                     return 0
                         elif Girl == StormX:
-                            if ApprovalCheck(Girl, 800,"LI") and not ApprovalCheck(Girl, 500,"O"):
+                            if Approvalcheck(Girl, 800,"LI") and not Approvalcheck(Girl, 500,"O"):
                                     $ Girl.location = bg_current
                                     $ Girl.OutfitChange()
                                     call Display_Girl(Girl,reset_actions=0)
@@ -2751,7 +2751,7 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
                     pass
             else:
                     #if they don't have a relationship. . .
-                    if ApprovalCheck(Current, 1500, TabM=2, Bonus = (Girl.GirlLikeCheck(Current) - 500)):
+                    if Approvalcheck(Current, 1500, TabM=2, Bonus = (Girl.GirlLikecheck(Current) - 500)):
                             #if the current girl approves of starting something. . .
                             $ Current.change_face("sexy", 1)
                             $ Current.change_stat("obedience", 90, 5)
@@ -2828,9 +2828,9 @@ label Locked_Door(Girl=0,entering=0,Current=0): #rkeljsv
         $ line = 0
         return 1
 
-label Taboo_Level(Taboo_Loc=1,Teach=0,Girls=[]): #rkeljsv
+label Taboo_Level(Taboo_location=1,Teach=0,Girls=[]): #rkeljsv
         #cycles through each girl, setting their taboo level.
-        # if Taboo_Loc, will only work on local Girls.
+        # if Taboo_location, will only work on local Girls.
         #Set your taboo level
 
         if EmmaX.location == "bg_teacher":
@@ -2840,7 +2840,7 @@ label Taboo_Level(Taboo_Loc=1,Teach=0,Girls=[]): #rkeljsv
                 $ StormX.location = "bg_classroom" #Sets Storm to being in class if she's teaching
                 $ Teach = 2
 
-        call CheckTaboo(Player,bg_current)
+        call checkTaboo(Player,bg_current)
 
         $ Girls = all_Girls[:]
         if JeanX in Girls and "nowhammy" not in JeanX.Traits:
@@ -2853,12 +2853,12 @@ label Taboo_Level(Taboo_Loc=1,Teach=0,Girls=[]): #rkeljsv
                 if Girls[0] in Party:
                         $ Girls[0].location = bg_current
                 if Girls[0].location == "nearby":
-                        $ Taboo_Check = bg_current
+                        $ Taboo_check = bg_current
                 else:
-                        $ Taboo_Check = Girls[0].location
-                if not Taboo_Loc or Taboo_Check == bg_current:
+                        $ Taboo_check = Girls[0].location
+                if not Taboo_location or Taboo_check == bg_current:
                         #only checks if they are local if it's not a general check
-                        call CheckTaboo(Girls[0],Taboo_Check)
+                        call checkTaboo(Girls[0],Taboo_check)
                 $ Girls.remove(Girls[0])
 
         if Teach == 2:
@@ -2921,7 +2921,7 @@ label Shop: #rkeljs
                         $ Player.Cash -= 110
                     else:
                         "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "stockings and garterbelt" not in RogueX.Inventory and "stockings and garterbelt" not in Player.Inventory and ApprovalCheck(RogueX, 1500):
+                "Buy stockings and garterbelt for $100." if "stockings and garterbelt" not in RogueX.Inventory and "stockings and garterbelt" not in Player.Inventory and Approvalcheck(RogueX, 1500):
                     if Player.Cash >= 100:
                         "You purchase the stockings, these will look nice on [RogueX.name]."
                         $ Player.Inventory.append("stockings and garterbelt")
@@ -3029,7 +3029,7 @@ label Shop: #rkeljs
                         $ Player.Cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "stockings and garterbelt" not in EmmaX.Inventory and "stockings and garterbelt" not in Player.Inventory and ApprovalCheck(EmmaX, 1500):
+                "Buy stockings and garterbelt for $100." if "stockings and garterbelt" not in EmmaX.Inventory and "stockings and garterbelt" not in Player.Inventory and Approvalcheck(EmmaX, 1500):
                     if Player.Cash >= 100:
                         "You purchase the stockings, these will look nice on [EmmaX.name]."
                         $ Player.Inventory.append("stockings and garterbelt")
@@ -3136,7 +3136,7 @@ label Shop: #rkeljs
                         $ Player.Cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "stockings and garterbelt" not in JeanX.Inventory and "stockings and garterbelt" not in Player.Inventory and ApprovalCheck(JeanX, 800):
+                "Buy stockings and garterbelt for $100." if "stockings and garterbelt" not in JeanX.Inventory and "stockings and garterbelt" not in Player.Inventory and Approvalcheck(JeanX, 800):
                     if Player.Cash >= 100:
                         "You purchase the stockings, these will look nice on [JeanX.name]."
                         $ Player.Inventory.append("stockings and garterbelt")
@@ -3168,7 +3168,7 @@ label Shop: #rkeljs
                         $ Player.Cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "stockings and garterbelt" not in StormX.Inventory and "stockings and garterbelt" not in Player.Inventory and ApprovalCheck(StormX, 1500):
+                "Buy stockings and garterbelt for $100." if "stockings and garterbelt" not in StormX.Inventory and "stockings and garterbelt" not in Player.Inventory and Approvalcheck(StormX, 1500):
                     if Player.Cash >= 100:
                         "You purchase the stockings, these will look nice on [StormX.name]."
                         $ Player.Inventory.append("stockings and garterbelt")
@@ -3196,7 +3196,7 @@ label Shop: #rkeljs
             menu Shop_Books:
                 "Buy \"Dazzler and Longshot\" for $20.":
                     "A sappy romantic novel about two starcrossed lovers."
-                    if "DL" not in Shop_Inventory: #if Inventory_Check("Dazzler and Longshot") >= 4:
+                    if "DL" not in Shop_Inventory: #if Inventory_check("Dazzler and Longshot") >= 4:
                         "They seem to be out of stock at the moment."
                     elif Player.Cash >= 20:
                         "You purchase the book."
@@ -3319,13 +3319,13 @@ label set_the_scene(show_characters = True, entering = False, check_if_dressed =
         $ primary_action = 0
         $ offhand_action = 0 if offhand_action != "jackin" else "jackin"
         $ girl_offhand_action = 0
-        $ Partner_primary_action = 0
-        $ Partner_offhand_action = 0
+        $ second_girl_primary_action = 0
+        $ second_girl_offhand_action = 0
 
         $ reset_actions = False
 
     if show_characters:
-        call Present_Check  #culls out Party to 2,
+        call Present_check  #culls out Party to 2,
 
         $ Girls = all_Girls[:]
 
@@ -3440,8 +3440,8 @@ label Display_Girl(Girl, check_if_dressed = True, reset_actions = True, x_locati
         $ primary_action = 0
         $ offhand_action = 0 if offhand_action != "jackin" else "jackin"
         $ girl_offhand_action = 0
-        $ Partner_primary_action = 0
-        $ Partner_offhand_action = 0
+        $ second_girl_primary_action = 0
+        $ second_girl_offhand_action = 0
 
     if Partner == Girl:
         $ x_location = StageRight #Moves Girl over if she's secondary
@@ -3786,7 +3786,7 @@ label Sex_Menu_Threesome(Girl=0): #rkeljsv
 
             "Never mind [[something else]":
                     pass
-        if AloneCheck(Girl) and Girl.Taboo == 20:
+        if Alonecheck(Girl) and Girl.Taboo == 20:
                 $ Girl.Taboo = 0
                 $ Taboo = 0
         return
@@ -3799,25 +3799,25 @@ label Partner_Like(Girl=0,Value=1,AltValue=1,Measure=800,Partner=Partner):
         if Girl not in all_Girls or Partner not in all_Girls: #should remove "Girl don't exist" errors
                 return
 
-        if Partner_primary_action:
+        if second_girl_primary_action:
                 # if the Partner is doing a secondary action. . .
-                if Partner_primary_action == "watch":
+                if second_girl_primary_action == "watch":
                         pass
-                elif Partner_primary_action in ("handjob","blowjob"):
+                elif second_girl_primary_action in ("handjob","blowjob"):
                         $ Value += 1
-                elif Partner_primary_action in ("eat_pussy","eat_ass"):
+                elif second_girl_primary_action in ("eat_pussy","eat_ass"):
                         $ Value += 3
                 else:
                         $ Value += 2
-        #End Partner_primary_action bonuses
+        #End second_girl_primary_action bonuses
 
         $ Partner.GLG(Girl,Measure,Value,1)
         $ Girl.GLG(Partner,Measure,Value,1)
         return
 
-label GirlWaitUp(Local=0,Check=70,D20=0,Teach=0,GirlsA=[],GirlsB=[]):  #rkeljsv
+label GirlWaitUp(locational=0,check=70,D20=0,Teach=0,GirlsA=[],GirlsB=[]):  #rkeljsv
         #This adjusts girl's liking each other based on shared activities
-        #Local =1 only checks if they are in the room with you.
+        #locational =1 only checks if they are in the room with you.
         #it goes R+K, R+E, R+L, K+E, K+L, E+L, etc.
         # was call GirlWaitAttract()
         # now call GirlWaitUp
@@ -3858,7 +3858,7 @@ label GirlWaitUp(Local=0,Check=70,D20=0,Teach=0,GirlsA=[],GirlsB=[]):  #rkeljsv
                                             $ GirlsA[0].GLG(GirlsB[0],900,2,1)
                                             #RogueX.LikeKitty += 2
                             else:
-                                    $ GirlsA[0].GLG(GirlsB[0],Check, D20,1)
+                                    $ GirlsA[0].GLG(GirlsB[0],check, D20,1)
                                     #RogueX.LikeKitty += D20
 
                             #RogueX.LikeKitty += (int(KittyX.Shame/5)) #Rogue likes Kitty based on how slutty Kitty looks
@@ -3884,7 +3884,7 @@ label GirlWaitUp(Local=0,Check=70,D20=0,Teach=0,GirlsA=[],GirlsB=[]):  #rkeljsv
         return
 
 label Jumped(Act=0): #rkeljsv
-        # called by JumperCheck if a girl jumps you
+        # called by Jumpercheck if a girl jumps you
         # Girls[0] is the girl
         # make sure that this puts people in the right rooms after they do stuff. . .
 
@@ -3902,7 +3902,7 @@ label Jumped(Act=0): #rkeljsv
 
         if Girls[0].location != bg_current and door_locked:
             #if the girl is not in the room with you, and your door is locked. . .
-            call Locked_Door(Girls[0])
+            call locked_door(Girls[0])
             if not Girls or Girls[0].location != bg_current:
                     #if you refused her entry. . .
                     $ Player.recent_history.append("nope")
@@ -3917,7 +3917,7 @@ label Jumped(Act=0): #rkeljsv
 
         call Taboo_Level #makes sure Taboo level is accurate
 
-        if Taboo and (not ApprovalCheck(Girls[0], 1500, TabM=3) or (Girls[0] == EmmaX and Taboo and "taboo" not in EmmaX.History)):
+        if Taboo and (not Approvalcheck(Girls[0], 1500, TabM=3) or (Girls[0] == EmmaX and Taboo and "taboo" not in EmmaX.History)):
                 #causes you to leave if the girl is not ready for public stuff
                 $ Act = "leave"
 
@@ -3953,7 +3953,7 @@ label Jumped(Act=0): #rkeljsv
                         "You tell her to cut it out, and head back to what you were doing."
                         $ Player.recent_history.append("nope")
                         $ Girls[0].AddWord(1,"refused","refused")
-                        if not ApprovalCheck(Girls[0], 500, "O"):
+                        if not Approvalcheck(Girls[0], 500, "O"):
                                 $ Girls[0].AddWord(1,"angry","angry")
                         return
 
@@ -3987,7 +3987,7 @@ label Jumped(Act=0): #rkeljsv
                         "You tell her to cut it out, and head back to what you were doing."
                         $ Player.recent_history.append("nope")
                         $ Girls[0].AddWord(1,"refused","refused")
-                        if not ApprovalCheck(Girls[0], 500, "O"):
+                        if not Approvalcheck(Girls[0], 500, "O"):
                                 $ Girls[0].AddWord(1,"angry","angry")
                         return
 
@@ -4105,7 +4105,7 @@ label Quick_Sex(Girl=focused_Girl,Act=0): #rkeljsv
                                         $ line = "ask"
                                 ". . . [[say nothing, still no].":
                                         pass
-                    elif (ApprovalCheck(Girl, 600, "I") and Girl.Thirst >= 30) or Girl.Thirst >= 50:
+                    elif (Approvalcheck(Girl, 600, "I") and Girl.Thirst >= 30) or Girl.Thirst >= 50:
                                         #she's pretty horny
                                         $ Girl.change_face("confused",1,Eyes="surprised")
                                         $ Girl.change_stat("love", 80, -1)
@@ -4179,7 +4179,7 @@ label Quick_Sex(Girl=focused_Girl,Act=0): #rkeljsv
                                         "Still no.":
                                                 $ Girl.change_stat("love", 85, -2)
                                                 $ Girl.change_stat("obedience", 90, 3)
-                                                if ApprovalCheck(Girl, 1500+(5*counter)-(10*Girl.Thirst), "LI"):
+                                                if Approvalcheck(Girl, 1500+(5*counter)-(10*Girl.Thirst), "LI"):
                                                             #if she's obedient, or her horniness is higher than her inhibition
                                                             $ line = "beg"
                                                 elif not counter and Count:
@@ -4207,7 +4207,7 @@ label Quick_Sex(Girl=focused_Girl,Act=0): #rkeljsv
                                                                     ch_v "Bummer. . ."
                                                             $ counter += 25
                                     if line == "beg":
-                                            if ApprovalCheck(Girl, 600+counter, "O") or ApprovalCheck(Girl, 1500+(5*counter)-(10*Girl.Thirst)):
+                                            if Approvalcheck(Girl, 600+counter, "O") or Approvalcheck(Girl, 1500+(5*counter)-(10*Girl.Thirst)):
                                                     #if she's obedient, or her horniness is higher than her inhibition
                                                     if counter < 50:
                                                             #first time
@@ -4385,7 +4385,7 @@ label Escalation(Girl=0): #rkeljsv
 
         $ action_context = Girl
 
-        if primary_action == "fondle_breast" and ApprovalCheck(Girl,1050,TabM=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.SuckB:
+        if primary_action == "fondle_breast" and Approvalcheck(Girl,1050,TabM=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.SuckB:
                     #if you're fondling her breasts, she has over 30 lust, and she's had her breasts sucked before. . .
                     if offhand_action == "suck breasts":
                             $ offhand_action = 0
@@ -4394,7 +4394,7 @@ label Escalation(Girl=0): #rkeljsv
                     if "suck breasts" in Girl.recent_history:
                             # If you went through with it, drop one phase back when returning to this point
                             $ renpy.pop_call()
-        elif primary_action == "fondle_thighs" and ApprovalCheck(Girl,1050,TabM=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.FondleP:
+        elif primary_action == "fondle_thighs" and Approvalcheck(Girl,1050,TabM=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.FondleP:
                     #if you're fondling her thighs, she has over 30 lust, and she's had her pussy fondled before. . .
                     if offhand_action == "fondle_thighs":
                             $ offhand_action = 0
@@ -4406,21 +4406,21 @@ label Escalation(Girl=0): #rkeljsv
         elif not Player.Semen:
                     #can't do the rest if you're tapped out
                     pass
-        elif primary_action == "handjob" and ApprovalCheck(Girl,1200,TabM=4) and Girl.lust >= 30 and Girl.Blow:
+        elif primary_action == "handjob" and Approvalcheck(Girl,1200,TabM=4) and Girl.lust >= 30 and Girl.Blow:
                     #if she's giving a handy, she has over 30 lust, and she's sucked cock before. . .
                     $ Girl.change_stat("inhibition", 80, 3)
                     call expression Girl.Tag + "_BJ_Prep" #call Rogue_BJ_Prep
                     if "blowjob" in Girl.recent_history:
                             # If you went through with it, drop one phase back when returning to this point
                             $ renpy.pop_call()
-        elif primary_action not in ("sex","anal") and ApprovalCheck(Girl,1400,TabM=5,Alt=[[JeanX],1200]) and Girl.lust >= 60 and Girl.Sex >= 3:
+        elif primary_action not in ("sex","anal") and Approvalcheck(Girl,1400,TabM=5,Alt=[[JeanX],1200]) and Girl.lust >= 60 and Girl.Sex >= 3:
                     #if you're not having sex, she has over 60 lust, and she's had sex before. . .
                     $ Girl.change_stat("inhibition", 80, 4)
                     call expression Girl.Tag + "_SexPrep" #call Rogue_SexPrep
                     if "sex" in Girl.recent_history:
                             # If you went through with it, drop one phase back when returning to this point
                             $ renpy.pop_call()
-        elif primary_action != "anal" and ApprovalCheck(Girl,1400,TabM=5,Alt=[[JeanX],1200]) and Girl.lust >= 70 and Girl.Anal >= 5:
+        elif primary_action != "anal" and Approvalcheck(Girl,1400,TabM=5,Alt=[[JeanX],1200]) and Girl.lust >= 70 and Girl.Anal >= 5:
                     #if you're not having anal, she has over 70 lust, and she's had anal before. . .
                     $ Girl.change_stat("inhibition", 80, 5)
                     call expression Girl.Tag + "_AnalPrep" #call Rogue_AnalPrep
@@ -4443,7 +4443,7 @@ label Sex_Dialog(Primary=focused_Girl,Secondary=0,TempFocus=0,Primarylust=0,Seco
         $ D20S = renpy.random.randint(1, 20) if not D20S else D20S
         $ line = 0
 
-        # Checks for Taboo, and if it passes through, calls the first sex dialog
+        # checks for Taboo, and if it passes through, calls the first sex dialog
         call Girls_Taboo(Primary)
         if not primary_action:
                 return
@@ -4472,7 +4472,7 @@ label Sex_Dialog(Primary=focused_Girl,Secondary=0,TempFocus=0,Primarylust=0,Seco
         #End Primary girl offhand
 
         #primary_action 4
-        if Secondary and (not Partner_primary_action or 7 <= D20S <= 17 or Partner_primary_action == "watch"):
+        if Secondary and (not second_girl_primary_action or 7 <= D20S <= 17 or second_girl_primary_action == "watch"):
                     # If there is a Secondary Girl and the random value is 5-15, add a threeway dialog
                     $ line = 0
                     call SexDialog_Threeway
@@ -4489,7 +4489,7 @@ label Sex_Dialog(Primary=focused_Girl,Secondary=0,TempFocus=0,Primarylust=0,Seco
 
         #Applying secondary girl's satisfaction
         if Secondary:
-                $ Secondarylust += (int(Primarylust/10)) if Secondary.GirlLikeCheck(Primary) >= 700 else 0
+                $ Secondarylust += (int(Primarylust/10)) if Secondary.GirlLikecheck(Primary) >= 700 else 0
                 $ Secondary.change_stat("lust", 200, Secondarylust)
                 $ Secondary.lustFace()
 
@@ -4504,14 +4504,14 @@ label Sex_Dialog(Primary=focused_Girl,Secondary=0,TempFocus=0,Primarylust=0,Seco
                 #If there's a third person line, play it
                 call Seen_First_Peen(Primary,Secondary,passive=4)
                 "[line4]"
-                if Partner_primary_action == "suck breasts" or Partner_primary_action == "fondle_breasts":
+                if second_girl_primary_action == "suck breasts" or second_girl_primary_action == "fondle_breasts":
                     #if breastplay is involved. . .
-                    if ApprovalCheck(Primary,500,"I",TabM=2) and Primary.lust >= 50 and (Primary.ChestNum() > 1 or Primary.OverNum() > 1):
+                    if Approvalcheck(Primary,500,"I",TabM=2) and Primary.lust >= 50 and (Primary.ChestNum() > 1 or Primary.OverNum() > 1):
                             # if the girl is horny and her top is on. . .
                             $ Primary.Uptop = 1
                             "[Primary.name] seems frustrated and pulls her top open."
 
-        call Activity_Check(Primary,Secondary,0)
+        call Activity_check(Primary,Secondary,0)
         if not _return:
                 #sees if girl is cool with what's happening, if not, removes her.
                 if Primary.Forced:
@@ -4522,8 +4522,8 @@ label Sex_Dialog(Primary=focused_Girl,Secondary=0,TempFocus=0,Primarylust=0,Seco
                         #if the first girl leaves, but there is another,
                         $ primary_action = Secondary
                         $ Partner = 0
-                        $ Partner_primary_action = 0
-                        $ Partner_offhand_action = 0
+                        $ second_girl_primary_action = 0
+                        $ second_girl_offhand_action = 0
                         #$ renpy.pop_call() #negates call to Sex Dialog
                         #$ renpy.pop_call() #negates call to sexaction in progress
                         #$ renpy.pop_call() #negates call to sex menu
@@ -4540,8 +4540,8 @@ label Trig_Reset(Visual=0):
         $ primary_action = 0
         $ offhand_action = 0
         $ girl_offhand_action = 0
-        $ Partner_primary_action = 0
-        $ Partner_offhand_action = 0
+        $ second_girl_primary_action = 0
+        $ second_girl_offhand_action = 0
         $ action_context = 0
         if Visual:
                 call AllReset
@@ -4557,26 +4557,26 @@ label primary_action_Swap(Active = 0, primary_actionX1 = primary_action, primary
     $ offhand_action = 0 if offhand_action != "jackin" else offhand_action
     $ temp_modifier = 0
 
-    if Partner_primary_action:
+    if second_girl_primary_action:
             #if the second girl is already doing something
-            if Partner_primary_action == "masturbation":
+            if second_girl_primary_action == "masturbation":
                     $ primary_action = "masturbation"
-                    $ girl_offhand_action = Partner_offhand_action
-                    $ Partner_primary_action = 0
+                    $ girl_offhand_action = second_girl_offhand_action
+                    $ second_girl_primary_action = 0
                     #"handjob","fondle_breasts","suck breasts","fondle_pussy","dildo_pussy",
                     #"vibrator pussy","fondle_ass","dildo_anal"
             elif primary_actionX1 == "lesbian":
                     $ primary_action = "lesbian"
-                    $ girl_offhand_action = Partner_primary_action
-                    $ Partner_primary_action = 0
-            elif Partner_primary_action in ("handjob","blowjob","kiss you"):
-                    $ primary_action = Partner_primary_action
+                    $ girl_offhand_action = second_girl_primary_action
+                    $ second_girl_primary_action = 0
+            elif second_girl_primary_action in ("handjob","blowjob","kiss you"):
+                    $ primary_action = second_girl_primary_action
                     $ girl_offhand_action = 0
-                    $ Partner_primary_action = 0
+                    $ second_girl_primary_action = 0
             else:
                     $ primary_action = 0
                     $ girl_offhand_action = 0
-                    $ Partner_primary_action = 0
+                    $ second_girl_primary_action = 0
                     #"fondle_breasts","suck breasts","fondle_pussy","eat_pussy",
                     #"fondle_ass","eat_ass",
     else:
@@ -4599,38 +4599,38 @@ label primary_action_Swap(Active = 0, primary_actionX1 = primary_action, primary
 
     #if the primary girl was doing something
     if primary_actionX1 == "masturbation":
-                $ Partner_primary_action = "masturbation"
-                $ Partner_offhand_action = primary_actionX3
+                $ second_girl_primary_action = "masturbation"
+                $ second_girl_offhand_action = primary_actionX3
                 #"handjob","fondle_breasts","suck breasts","fondle_pussy","dildo_pussy",
                 #"vibrator pussy","fondle_ass","dildo_anal"
     elif primary_actionX1 == "lesbian":
-                $ Partner_primary_action = primary_actionX3
+                $ second_girl_primary_action = primary_actionX3
     else:
             if primary_actionX1 in ("handjob","blowjob","kiss you"):
-                $ Partner_primary_action = primary_actionX1
-                $ Partner_offhand_action = 0
+                $ second_girl_primary_action = primary_actionX1
+                $ second_girl_offhand_action = 0
             else:
-                $ Partner_primary_action = "masturbation"
+                $ second_girl_primary_action = "masturbation"
                 if primary_actionX1 in ("fondle_thighs","fondle_ass","finger_ass","eat_ass"):
-                        $ Partner_offhand_action = "fondle_ass"
+                        $ second_girl_offhand_action = "fondle_ass"
                         "You pull back from [Partner.name]."
                 elif primary_actionX1 in ("dildo_pussy","dildo_anal"):
-                        $ Partner_offhand_action = primary_actionX1
+                        $ second_girl_offhand_action = primary_actionX1
                         "You pull back from [Partner.name]."
                 elif primary_actionX1 in ("titjob","hotdog","fondle_breasts","suck breasts"):
-                        $ Partner_offhand_action = "fondle_breasts"
+                        $ second_girl_offhand_action = "fondle_breasts"
                         "You pull back from [Partner.name]."
                 elif primary_actionX1 in ("fondle_pussy","eat_pussy"):
-                        $ Partner_offhand_action = "fondle_pussy"
+                        $ second_girl_offhand_action = "fondle_pussy"
                         "You pull back from [Partner.name]."
                 elif primary_actionX1 == "sex":
-                        $ Partner_offhand_action = "fondle_pussy"
+                        $ second_girl_offhand_action = "fondle_pussy"
                         "You pull out of [Partner.name] and shift your attention to [Primary.name]."
                 elif primary_actionX1 == "anal":
-                        $ Partner_offhand_action = "fondle_ass"
+                        $ second_girl_offhand_action = "fondle_ass"
                         "You pull out of [Partner.name] and shift your attention to [Primary.name]."
                 else:
-                        $ Partner_offhand_action = 0
+                        $ second_girl_offhand_action = 0
     call AllReset(Partner)
 
     if not primary_action:
@@ -4805,7 +4805,7 @@ label Girls_Noticed(Girl=Primary,Other=0,silent=0,B=0,Girls=[]): #rkeljsv
                 $ B = (1000-(20*Taboo))
         else:
                 #if they don't have a relationship. . .
-                $ B = (Other.GirlLikeCheck(Girl) - 500) #RogueX.LikeLaura - 500
+                $ B = (Other.GirlLikecheck(Girl) - 500) #RogueX.LikeLaura - 500
                 if Other in Player.Harem:
                         #if you and the other girl have a relationship. . .
                         $ B -= 200
@@ -4817,7 +4817,7 @@ label Girls_Noticed(Girl=Primary,Other=0,silent=0,B=0,Girls=[]): #rkeljsv
                 $ silent = 1
         $ Partner = Other
         $ line = 0
-        if ApprovalCheck(Other, 2000, TabM=2, Bonus = B) or ApprovalCheck(Other, 950, "L", TabM=2, Bonus = (B/3)):
+        if Approvalcheck(Other, 2000, TabM=2, Bonus = B) or Approvalcheck(Other, 950, "L", TabM=2, Bonus = (B/3)):
                     #if she's very loose or really likes you
                     $ Other.change_face("sexy", 1)
                     if not silent:
@@ -4827,7 +4827,7 @@ label Girls_Noticed(Girl=Primary,Other=0,silent=0,B=0,Girls=[]): #rkeljsv
                     $ Other.change_stat("lust", 90, 3)
                     $ Other.AddWord(1,0,0,"poly " + Girl.Tag)
                     call Threeway_Set(Other,Mode="start",GirlB=Girl)
-        elif ApprovalCheck(Other, 650, "O", TabM=2) and ApprovalCheck(Other, 450, "L", TabM=1) or ApprovalCheck(Other, 800, "O", TabM=2, Bonus = (B/3)):
+        elif Approvalcheck(Other, 650, "O", TabM=2) and Approvalcheck(Other, 450, "L", TabM=1) or Approvalcheck(Other, 800, "O", TabM=2, Bonus = (B/3)):
                     #if she likes you, but is very obedient
                     $ Other.change_face("sexy")
                     if not silent:
@@ -4837,7 +4837,7 @@ label Girls_Noticed(Girl=Primary,Other=0,silent=0,B=0,Girls=[]): #rkeljsv
                     $ Other.change_stat("lust", 90, 2)
                     $ Other.AddWord(1,0,0,"poly " + Girl.Tag)
                     call Threeway_Set(Other,"watch",Mode="start",GirlB=Girl)
-        elif ApprovalCheck(Other, 650, "I", TabM=2) and ApprovalCheck(Other, 450, "L", TabM=1) or ApprovalCheck(Other, 800, "I", TabM=2, Bonus = (B/3)):
+        elif Approvalcheck(Other, 650, "I", TabM=2) and Approvalcheck(Other, 450, "L", TabM=1) or Approvalcheck(Other, 800, "I", TabM=2, Bonus = (B/3)):
                     #if she likes you, but is very uninhibited
                     $ Other.change_face("sexy")
                     if not silent:
@@ -4848,7 +4848,7 @@ label Girls_Noticed(Girl=Primary,Other=0,silent=0,B=0,Girls=[]): #rkeljsv
                     $ Other.change_stat("lust", 90, 5)
                     $ Other.AddWord(1,0,0,"poly " + Girl.Tag)
                     call Threeway_Set(Other,"watch",Mode="start",GirlB=Girl)
-        elif ApprovalCheck(Other, 1500, TabM=2, Bonus = B):
+        elif Approvalcheck(Other, 1500, TabM=2, Bonus = B):
                     $ Other.change_face("perplexed", 1)
                     if not silent:
                             "She looks a little confused at what's happening, but she stays put and watches."
@@ -4864,7 +4864,7 @@ label Girls_Noticed(Girl=Primary,Other=0,silent=0,B=0,Girls=[]): #rkeljsv
                         $ Other.change_stat("inhibition", 90, 1)
                     $ Other.change_stat("lust", 90, 5)
                     call Threeway_Set(Other,"watch",Mode="start",GirlB=Girl)
-        elif ApprovalCheck(Other, 650, "L", TabM=1) or ApprovalCheck(Other, 400, "O", TabM=2):
+        elif Approvalcheck(Other, 650, "L", TabM=1) or Approvalcheck(Other, 400, "O", TabM=2):
                     #if she likes you or is obedient, but not enough
                     $ Other.change_face("angry", 2)
                     if bg_current == Other.Home:
@@ -4916,7 +4916,7 @@ label Girls_Noticed(Girl=Primary,Other=0,silent=0,B=0,Girls=[]): #rkeljsv
                             $ Other.recent_history.append("angry")
                             call GirlsAngry
                     call remove_girl(Other)
-        if AloneCheck(Girl) and Girl.Taboo == 20:
+        if Alonecheck(Girl) and Girl.Taboo == 20:
                 #if the second girl ran away, it removes the taboo factor she added.
                 $ Girl.Taboo = 0
                 $ Taboo = 0
@@ -4928,7 +4928,7 @@ label Girls_Noticed(Girl=Primary,Other=0,silent=0,B=0,Girls=[]): #rkeljsv
 
 label CloseOut(Girl = focused_Girl): #rkeljsv
         # This exits out of the current sex act, whichever it might be, then returns
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         if primary_action == "blowjob":
             call expression Girl.Tag + "_BJ_After"
         elif primary_action == "handjob":
@@ -4974,46 +4974,46 @@ label CloseOut(Girl = focused_Girl): #rkeljsv
             "That's odd, tell Oni how you got here, Close [Girl.name] [primary_action]."
         return
 
-label Sex_Over(Clothes=1,Girls=0,Girls=[]): #rkeljsv
+label Sex_Over(Clothes=1,Girls=0,other_Girls=[]): #rkeljsv
         #this routine plays out at the end of any sex menu session
         #it cleans them up and puts their clothes on, only returning a line of dialog if they were undressed
         # call Sex_Over(1,Girl)
-        $ line = 0
+        $ Line = 0
         call Trig_Reset
         if Girls in all_Girls:
                 # in this case, "Girls" would be a single girl, ie RogueX
-                $ Girls = [Girls]
+                $ other_Girls = [Girls]
         else:
-                $ Girls = all_Girls[:]
-                $ renpy.random.shuffle(Girls)
-        while Girls:
-                if Girls[0].location == bg_current:
+                $ other_Girls = all_Girls[:]
+                $ renpy.random.shuffle(other_Girls)
+        while other_Girls:
+                if other_Girls[0].location == bg_current:
                         # if this girl is present
-                        $ Girls[0].OCount = 0
-                        call Girl_Cleanup(Girls[0],"after")
+                        $ other_Girls[0].OCount = 0
+                        call Girl_Cleanup(other_Girls[0],"after")
                         if Player.Spunk:
-                                if Girls[0] == RogueX:
+                                if other_Girls[0] == RogueX:
                                         ch_r "Let me take care of that for you. . ."
-                                elif Girls[0] == KittyX:
+                                elif other_Girls[0] == KittyX:
                                         ch_k "You've got a little something. . ."
                                         ch_k "just let me get that."
-                                elif Girls[0] == EmmaX:
+                                elif other_Girls[0] == EmmaX:
                                         ch_e "[EmmaX.Petname], let's get you presentable. . ."
-                                elif Girls[0] == LauraX:
+                                elif other_Girls[0] == LauraX:
                                         ch_l "[LauraX.Petname], you've got a little something. . ."
-                                elif Girls[0] == JeanX:
+                                elif other_Girls[0] == JeanX:
                                         ch_j "[JeanX.Petname], you might want to clean up. . ."
-                                elif Girls[0] == StormX:
+                                elif other_Girls[0] == StormX:
                                         ch_s "Allow me to take care of that, [StormX.Petname]. . ."
-                                elif Girls[0] == JubesX:
+                                elif other_Girls[0] == JubesX:
                                         ch_v "Oh, I can clean that up for you, [JubesX.Petname]. . ."
-                                call Girl_CleanCock(Girls[0])
+                                call Girl_CleanCock(other_Girls[0])
 
-                if "nowhammy" not in JeanX.Traits and "saw with Jean" in Girls[0].Traits:
+                if "nowhammy" not in JeanX.Traits and "saw with Jean" in other_Girls[0].Traits:
                                 #if a girl saw you with Jean and got pissed, she forgets. . .
-                                $ Girls[0].Traits.remove("saw with Jean")
-                                $ Girls[0].Traits.append("sawJeanW") #got whammied tag
-                $ Girls.remove(Girls[0])
+                                $ other_Girls[0].Traits.remove("saw with Jean")
+                                $ other_Girls[0].Traits.append("sawJeanW") #got whammied tag
+                $ other_Girls.remove(other_Girls[0])
 
         if Girls == Partner and Girls in all_Girls:
                 #swaps lead back to original
@@ -5023,27 +5023,27 @@ label Sex_Over(Clothes=1,Girls=0,Girls=[]): #rkeljsv
 
         if Clothes:
                 #if asked to put their clothes back on.
-                $ Girls = all_Girls[:]
-                while Girls:
-                        if Girls[0].location == bg_current:
-                                if Girls[0].OutfitChange(Changed=1) == 2:
-                                        if line:
-                                            $ line = line + " and " + Girls[0].name
+                $ other_Girls = all_Girls[:]
+                while other_Girls:
+                        if other_Girls[0].location == bg_current:
+                                if other_Girls[0].OutfitChange(Changed=1) == 2:
+                                        if Line:
+                                            $ Line = Line + " and " + other_Girls[0].Name
                                         else:
-                                            $ line = Girls[0].name
+                                            $ Line = other_Girls[0].Name
                                         $ Girls += 1
-                        $ Girls.remove(Girls[0])
+                        $ other_Girls.remove(other_Girls[0])
                 if Girls > 1:
-                    "[line] throw their clothes back on."
+                    "[Line] throw their clothes back on."
                 elif Girls:
-                    "[line] throws her clothes back on."
+                    "[Line] throws her clothes back on."
         call Get_Dressed
-        call Checkout(1)
+        call checkout(1)
         return
 
 label SkipTo(Girl = focused_Girl): #rkeljsv
         # This jumps to the chosen sex act, called from the sex menu
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         if primary_action == "blowjob":
             call expression Girl.Tag + "_BJ_Cycle"
         elif primary_action == "handjob":
@@ -5155,17 +5155,17 @@ label Girl_TightsRipped(Girl=0,Count = 0):
                             pass
                         elif Girl.Panties:
                             if Girl.SeenPanties:
-                                $ Count = 3 if not ApprovalCheck(Girl, 600) else Count
+                                $ Count = 3 if not Approvalcheck(Girl, 600) else Count
                             else:
                                 $ Girl.SeenPanties = 1
-                                $ Count = 3 if not ApprovalCheck(Girl, 900) else Count
+                                $ Count = 3 if not Approvalcheck(Girl, 900) else Count
                             $ Girl.change_stat("lust", 60, 2)
                         else:
                             if Girl.SeenPussy:
-                                $ Count = 3 if not ApprovalCheck(Girl, 900) else Count
+                                $ Count = 3 if not Approvalcheck(Girl, 900) else Count
                             else:
                                 call Rogue_First_Bottomless
-                                $ Count = 3 if not ApprovalCheck(Girl, 1400) else Count
+                                $ Count = 3 if not Approvalcheck(Girl, 1400) else Count
 
                 if Count != 3:
                         $ Girl.AddWord(1,"ripped","ripped")

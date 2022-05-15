@@ -60,10 +60,10 @@ label Chat(Girl=0):  #rkeljsv
                                 return
                         if Girl == LauraX and Girl.location == bg_current and "scent" in Player.daily_history:
                                 #if you've fucked another girl, and not showered, Laura will know.
-                                if not ApprovalCheck(Girl, 1700) and not ApprovalCheck(Girl, 600,"O"):
+                                if not Approvalcheck(Girl, 1700) and not Approvalcheck(Girl, 600,"O"):
                                         $ Options = all_Girls[:]
                                         while Options:
-                                                if Options[0] in Player.daily_history and "saw with " + Options[0].Tag not in Girl.Traits and Girl.GirlLikeCheck(Options[0]) <= 700:
+                                                if Options[0] in Player.daily_history and "saw with " + Options[0].Tag not in Girl.Traits and Girl.GirlLikecheck(Options[0]) <= 700:
                                                         $ Girl.Traits.append("saw with " + Options[0].Tag)
                                                 $ Options.remove(Options[0])
                                 $ Player.daily_history.remove("scent")
@@ -169,7 +169,7 @@ label Chat(Girl=0):  #rkeljsv
 
 label Chat_Menu: #rkeljsv
         #Primary chat menu, called by "Chat", carries over "Girl"
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         $ Girl.change_face()
         call shift_focus(Girl)
         if Girl.location != bg_current:
@@ -240,7 +240,7 @@ label Chat_Menu: #rkeljsv
                                                     ch_s "I am uninterested."
                                             elif Girl == JubesX:
                                                     ch_v "Not in the mood, [Girl.Petname]?"
-                                    elif ApprovalCheck(Girl, 600, "LI"):
+                                    elif Approvalcheck(Girl, 600, "LI"):
                                             $ Girl.change_face("sexy")
                                             if Girl == RogueX:
                                                     ch_r "Heh, all right, [Girl.Petname]."
@@ -258,7 +258,7 @@ label Chat_Menu: #rkeljsv
                                                     ch_v "Yeah?"
                                             call enter_main_sex_menu
                                             return
-                                    elif ApprovalCheck(Girl, 400, "OI"):
+                                    elif Approvalcheck(Girl, 400, "OI"):
                                             if Girl == RogueX:
                                                     ch_r "If that's what you want, [Girl.Petname]."
                                             elif Girl == KittyX:
@@ -364,10 +364,10 @@ label Chat_Menu: #rkeljsv
                                                 pass
 
                         "Could I get your number?" if Girl not in Digits:
-                                    if Girl == EmmaX and ApprovalCheck(Girl, 800, "LI"):
+                                    if Girl == EmmaX and Approvalcheck(Girl, 800, "LI"):
                                             ch_e "I don't see why not."
                                             $ Digits.append(Girl)
-                                    elif Girl != EmmaX and (ApprovalCheck(Girl, 400, "L") or ApprovalCheck(Girl, 200, "I")):
+                                    elif Girl != EmmaX and (Approvalcheck(Girl, 400, "L") or Approvalcheck(Girl, 200, "I")):
                                             if Girl == RogueX:
                                                     ch_r "Sure, I suppose."
                                             elif Girl == KittyX:
@@ -381,7 +381,7 @@ label Chat_Menu: #rkeljsv
                                             elif Girl == JubesX:
                                                     ch_v "Sure, yeah."
                                             $ Digits.append(Girl)
-                                    elif ApprovalCheck(Girl, 200, "O",Alt=[[EmmaX],500-EmmaX.inhibition]):
+                                    elif Approvalcheck(Girl, 200, "O",Alt=[[EmmaX],500-EmmaX.inhibition]):
                                             if Girl == RogueX:
                                                     ch_r "If you want it, I guess."
                                             elif Girl == KittyX:
@@ -420,11 +420,11 @@ label Chat_Menu: #rkeljsv
 
             "Add her to party" if Girl not in Party and Girl.location == bg_current:
                         ch_p "Could you follow me for a bit?"
-                        if Girl == EmmaX and ApprovalCheck(Girl, 1250):
+                        if Girl == EmmaX and Approvalcheck(Girl, 1250):
                                 $ Party.append(Girl)
                                 ch_e "Lead away."
                                 return
-                        if ApprovalCheck(Girl, 600,Alt=[[EmmaX,JeanX],900]):
+                        if Approvalcheck(Girl, 600,Alt=[[EmmaX,JeanX],900]):
                                 $ Party.append(Girl)
                                 if Girl == RogueX:
                                         ch_r "Ok, Where did you want to go?"
@@ -441,7 +441,7 @@ label Chat_Menu: #rkeljsv
                                 elif Girl == JubesX:
                                         ch_v "Sure, what's up?"
                                 return
-                        elif not ApprovalCheck(Girl, 400):
+                        elif not Approvalcheck(Girl, 400):
                                 if Girl == RogueX:
                                         ch_r "Um, no thanks."
                                 elif Girl == KittyX:
@@ -604,7 +604,7 @@ label Switch_Chat: #rkeljsv
     return
 
 label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
-    $ Girl = GirlCheck(Girl)
+    $ Girl = Girlcheck(Girl)
     if Girl in Party:
             $ Party.remove(Girl)
     call Girls_Schedule([Girl],0)
@@ -613,7 +613,7 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
                 $ Girl.DrainWord("leaving")
     menu:
         "You can leave if you like.":
-                if Girl.location == bg_current and not ApprovalCheck(Girl, 700, "O"):
+                if Girl.location == bg_current and not Approvalcheck(Girl, 700, "O"):
                         if Girl == RogueX:
                                 ch_r "Thanks, but I think I'll stick around."
                         elif Girl == KittyX:
@@ -646,7 +646,7 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
                         $ Leaving = 1
                 # End "You can leave if you like."
         "Could you give me the room please?":
-                if Girl.location == bg_current and not ApprovalCheck(Girl, 800, "LO"):
+                if Girl.location == bg_current and not Approvalcheck(Girl, 800, "LO"):
                         if Girl == RogueX:
                                 ch_r "I'd rather stick around."
                         elif Girl == KittyX:
@@ -661,7 +661,7 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
                                 ch_s "I'd rather stay."
                         elif Girl == JubesX:
                                 ch_v "Nah, I'm good here."
-                elif not ApprovalCheck(Girl, 500, "LO"):
+                elif not Approvalcheck(Girl, 500, "LO"):
                         if Girl == RogueX:
                                 ch_r "I think I should probably stick around."
                         elif Girl == KittyX:
@@ -697,7 +697,7 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
                         $ Leaving = 1
                 #end "Could you give me the room please?"
         "You can go now.":
-                if Girl.location == bg_current and not ApprovalCheck(Girl, 500, "O"):
+                if Girl.location == bg_current and not Approvalcheck(Girl, 500, "O"):
                         if Girl == RogueX:
                                 ch_r "I think I'll stay."
                         elif Girl == KittyX:
@@ -712,7 +712,7 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
                                 ch_s "But I would rather stay."
                         elif Girl == JubesX:
                                 ch_v "Yeah, but I'm not."
-                elif not ApprovalCheck(Girl, 300, "O"):
+                elif not Approvalcheck(Girl, 300, "O"):
                         $ Girl.change_face("confused")
                         if Girl == RogueX:
                                 ch_r "Well if you want me to go, then maybe I should stick around."
@@ -759,7 +759,7 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
             menu:
                 extend ""
                 "I insist, get going.":
-                        if Girl.location != bg_current and (ApprovalCheck(Girl, 1200, "LO") or ApprovalCheck(Girl, 500, "O")):
+                        if Girl.location != bg_current and (Approvalcheck(Girl, 1200, "LO") or Approvalcheck(Girl, 500, "O")):
                                 #If she has someplace to be and is obedient
                                 if "dismissed" not in Girl.daily_history:
                                         $ Girl.change_stat("love", 70, -5, 1)
@@ -781,7 +781,7 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
                                 elif Girl == JubesX:
                                         ch_v "Ok, fine. . ."
                                 $ Leaving = 1
-                        elif Girl.location != bg_current and (ApprovalCheck(Girl, 1000, "LO") or ApprovalCheck(Girl, 300, "O")):
+                        elif Girl.location != bg_current and (Approvalcheck(Girl, 1000, "LO") or Approvalcheck(Girl, 300, "O")):
                                 #If she has someplace to be and is less obedient
                                 if "dismissed" not in Girl.daily_history:
                                         $ Girl.change_stat("love", 50, -5, 1)
@@ -828,7 +828,7 @@ label Girl_Dismissed(Girl=0,Leaving = 0): #rkeljsv
                                         ch_s "I would definitely prefer to stay now."
                                 elif Girl == JubesX:
                                         ch_v "Well now I'm -definitely- sticking around. . ."
-                        elif ApprovalCheck(Girl, 1400, "LO") or ApprovalCheck(Girl, 400, "O"):
+                        elif Approvalcheck(Girl, 1400, "LO") or Approvalcheck(Girl, 400, "O"):
                                 #If she has nowhere to be to be but is obedient
                                 if "dismissed" not in Girl.daily_history:
                                         $ Girl.change_stat("love", 50, -5, 1)
@@ -920,7 +920,7 @@ label Favorite_Actions(Girl=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp
             $ FTemp = Girl.FondleB + Girl.FondleT + Girl.SuckB + Girl.Hotdog
 
             #This portion sets a bonus based on the player's favorite activity with her.
-            if Girl.PlayerFav and ApprovalCheck(Girl, 1500):
+            if Girl.PlayerFav and Approvalcheck(Girl, 1500):
                     if Girl.PlayerFav == "anal":
                         $ ATemp += 20
                     elif Girl.PlayerFav == "sex":
@@ -935,7 +935,7 @@ label Favorite_Actions(Girl=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp
                         $ HTemp += 20
                     else:
                         $ FTemp += 20
-            elif Girl.PlayerFav and ApprovalCheck(Girl, 800):
+            elif Girl.PlayerFav and Approvalcheck(Girl, 800):
                     if Girl.PlayerFav == "anal":
                         $ ATemp += 5
                     elif Girl.PlayerFav == "sex":
@@ -1019,7 +1019,7 @@ label Girl_Settings: #rkeljsv
                                 call Taboo_Level
                                 call expression Girl.Tag + "_Clothes" #call Rogue_Clothes
 
-            "Shift her Personality" if ApprovalCheck(Girl, 900, "L", TabM=0) or ApprovalCheck(Girl, 900, "O", TabM=0)or ApprovalCheck(Girl, 900, "I", TabM=0):
+            "Shift her Personality" if Approvalcheck(Girl, 900, "L", TabM=0) or Approvalcheck(Girl, 900, "O", TabM=0)or Approvalcheck(Girl, 900, "I", TabM=0):
                         ch_p "Could we talk about us?"
                         call expression Girl.Tag + "_Personality" #call Rogue_Personality
 
@@ -1093,7 +1093,7 @@ label Girl_Settings: #rkeljsv
                                     $ line = "ask"
 
                             "Don't ever leave when I'm around." if "lockedtravels" not in Girl.Traits or "freetravels" in Girl.Traits:
-                                if ApprovalCheck(Girl, 500, "O",Alt=[[EmmaX,JeanX],600]) or ApprovalCheck(Girl, 900, "L"):
+                                if Approvalcheck(Girl, 500, "O",Alt=[[EmmaX,JeanX],600]) or Approvalcheck(Girl, 900, "L"):
                                     $ Girl.change_face("sexy")
                                     if Girl == RogueX:
                                             ch_r "Oh, Ok."
@@ -1171,7 +1171,7 @@ label Girl_Settings: #rkeljsv
 
             "\"Like\" options" if Girl == KittyX:
                     ch_p "So you[Girl.like]say \"[Girl.like]\" a lot. . ."
-                    if ApprovalCheck(Girl, 800):
+                    if Approvalcheck(Girl, 800):
                             call KittyLike
                     else:
                             ch_k "[Girl.Like]what's it to you?"
@@ -1310,7 +1310,7 @@ label summon(Girl, temp_modifier = temp_modifier):
     if D20 <= 3:
         $ line = "no"
     elif "les" in Girl.recent_history:
-        if ApprovalCheck(Girl, 2000):
+        if Approvalcheck(Girl, 2000):
             if Girl == RogueX:
                 ch_r "I'm enjoying some company right now, [Girl.Petname], care to join us?"
             elif Girl == KittyX:
@@ -1375,7 +1375,7 @@ label summon(Girl, temp_modifier = temp_modifier):
 
             return
     elif time_index >= 3:
-        if ApprovalCheck(Girl, 700, "L", Alt = [[StormX], 500]) or ApprovalCheck(Girl, 300, "O", Alt = [[StormX], 400]):
+        if Approvalcheck(Girl, 700, "L", Alt = [[StormX], 500]) or Approvalcheck(Girl, 300, "O", Alt = [[StormX], 400]):
             if Girl == RogueX:
                 ch_r "Ok, it's getting late but I can hang out for a bit."
             elif Girl == KittyX:
@@ -1412,8 +1412,8 @@ label summon(Girl, temp_modifier = temp_modifier):
 
             $ Girl.recent_history.append("no_summon")
         return
-    elif not ApprovalCheck(Girl, 700, "L") or not ApprovalCheck(Girl, 600, "O"):
-        if not ApprovalCheck(Girl, 300):
+    elif not Approvalcheck(Girl, 700, "L") or not Approvalcheck(Girl, 600, "O"):
+        if not Approvalcheck(Girl, 300):
             if Girl == RogueX:
                 ch_r "Not really interested, [Girl.Petname]."
             elif Girl == KittyX:
@@ -1526,7 +1526,7 @@ label summon(Girl, temp_modifier = temp_modifier):
             elif Girl == JubesX:
                 ch_v "I'm in your room, [JubesX.Petname], are you coming back?"
         elif Girl.location == "bg_showerroom":
-            if ApprovalCheck(Girl, 1600):
+            if Approvalcheck(Girl, 1600):
                 if Girl == RogueX:
                     ch_r "I'm kinda in the shower right now, [Girl.Petname], care to join me?"
                 elif Girl == KittyX:
@@ -1649,14 +1649,14 @@ label summon(Girl, temp_modifier = temp_modifier):
                     elif Girl == JubesX:
                         ch_v "Ok, later then."
                 "But I'd {i}really{/i} like to see you over here.":
-                    if ApprovalCheck(Girl, 600, "L") or ApprovalCheck(Girl, 1400):
+                    if Approvalcheck(Girl, 600, "L") or Approvalcheck(Girl, 1400):
                         $ line = "lonely"
                     else:
                         $ line = "no"
                 "I said come over here.":
-                    if ApprovalCheck(Girl, 600, "O"):
+                    if Approvalcheck(Girl, 600, "O"):
                         $ line = "command"
-                    elif D20 >= 7 and ApprovalCheck(Girl, 1400):
+                    elif D20 >= 7 and Approvalcheck(Girl, 1400):
                         if Girl == RogueX:
                             ch_r "I suppose I can, [Girl.Petname]."
                         elif Girl == KittyX:
@@ -1673,7 +1673,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                             ch_v "Fine."
 
                         $ line = "yes"
-                    elif ApprovalCheck(Girl, 200, "O"):
+                    elif Approvalcheck(Girl, 200, "O"):
                         if Girl == RogueX:
                             ch_r "I don't think so."
                             ch_r "If you want to see me, you know where to find me."
@@ -1736,7 +1736,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                     elif Girl == JubesX:
                         ch_v "Ok. Later then."
                 "Could you please come visit me? I'm lonely.":
-                    if ApprovalCheck(Girl, 600, "L") or ApprovalCheck(Girl, 1400):
+                    if Approvalcheck(Girl, 600, "L") or Approvalcheck(Girl, 1400):
                         $ Girl.change_stat("love", 70, 1)
                         $ Girl.change_stat("obedience", 50, 1)
 
@@ -1753,7 +1753,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                         elif Girl == JubesX:
                             ch_v "Aw, how could I say \"no\"?"
                 "Come on, it'll be fun." if Girl in [LauraX, JeanX, StormX, JubesX]:
-                    if ApprovalCheck(Girl, 400, "L") and ApprovalCheck(Girl, 800):
+                    if Approvalcheck(Girl, 400, "L") and Approvalcheck(Girl, 800):
                         $ Girl.change_stat("love", 70, 1)
                         $ Girl.change_stat("obedience", 50, 1)
 
@@ -1763,13 +1763,13 @@ label summon(Girl, temp_modifier = temp_modifier):
 
                         $ line = "no"
                 "I said come over here.":
-                    if ApprovalCheck(Girl, 600, "O"):
+                    if Approvalcheck(Girl, 600, "O"):
                         $ Girl.change_stat("love", 50, 1, 1)
                         $ Girl.change_stat("love", 40, -1)
                         $ Girl.change_stat("obedience", 90, 1)
 
                         $ line = "command"
-                    elif D20 >= 7 and ApprovalCheck(Girl, 1400):
+                    elif D20 >= 7 and Approvalcheck(Girl, 1400):
                         $ Girl.change_stat("love", 70, -2)
                         $ Girl.change_stat("love", 90, -1)
                         $ Girl.change_stat("obedience", 50, 2)
@@ -1791,7 +1791,7 @@ label summon(Girl, temp_modifier = temp_modifier):
                             ch_v "Ok, fine."
 
                         $ line = "yes"
-                    elif ApprovalCheck(Girl, 200, "O"):
+                    elif Approvalcheck(Girl, 200, "O"):
                         $ Girl.change_stat("love", 70, -4)
                         $ Girl.change_stat("love", 90, -2)
 
@@ -2117,7 +2117,7 @@ label summon(Girl, temp_modifier = temp_modifier):
     $ line = 0
 
     if door_locked:
-        call Locked_Door(Girl)
+        call locked_door(Girl)
 
         return
 
@@ -2162,7 +2162,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
 
         return
 
-    elif "freetravels" in Girl.Traits or not ApprovalCheck(Girl, 700):
+    elif "freetravels" in Girl.Traits or not Approvalcheck(Girl, 700):
         $ Girl.OutfitChange()
 
         if number_of_Girls:
@@ -2179,7 +2179,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
             elif Girl == JubesX:
                 ch_v "Yes, I'm leaving too."
 
-        if not ApprovalCheck(Girl, 600, "LO"):
+        if not Approvalcheck(Girl, 600, "LO"):
             if Girl == RogueX:
                 ch_r "I'm headed out, see you later."
         elif Girl in [EmmaX, StormX] in Girl.location == "bg_teacher":
@@ -2278,7 +2278,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
             elif Girl == JubesX:
                 ch_v "I was hitting the pool."
         elif Girl.location == "bg_showerroom":
-            if ApprovalCheck(Girl, 1400):
+            if Approvalcheck(Girl, 1400):
                 if Girl == RogueX:
                     ch_r "I'm hitting the showers, later."
                 elif Girl == KittyX:
@@ -2444,7 +2444,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
         elif Girl == JubesX:
             ch_v "I'm going to hang out in your room for a bit, you interested?"
     elif Girl.location == "bg_showerroom":
-        if ApprovalCheck(Girl, 1600):
+        if Approvalcheck(Girl, 1600):
             if Girl == RogueX:
                 ch_r "I'm hitting the showers, [Girl.Petname], care to join me?"
             elif Girl == KittyX:
@@ -2535,7 +2535,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
             elif Girl == JubesX:
                 ch_v "Sure, whatever."
         "Could you please stay with me? I'll get lonely.":
-            if ApprovalCheck(Girl, 600, "L", Alt = [[JubesX], 650]) or ApprovalCheck(Girl, 1400, Alt = [[JubesX], 1500]):
+            if Approvalcheck(Girl, 600, "L", Alt = [[JubesX], 650]) or Approvalcheck(Girl, 1400, Alt = [[JubesX], 1500]):
                 if "followed" not in Girl.recent_history:
                     $ Girl.change_stat("love", 70, 1)
                     $ Girl.change_stat("obedience", 50, 1)
@@ -2554,7 +2554,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                 elif Girl == JubesX:
                     ch_v "Aw, how could I say \"no\"?"
         "Come on, it'll be fun." if Girl in [LauraX, JeanX, StormX, JubesX]:
-            if ApprovalCheck(Girl, 400, "L") and ApprovalCheck(Girl, 800):
+            if Approvalcheck(Girl, 400, "L") and Approvalcheck(Girl, 800):
                 $ Girl.change_stat("love", 70, 1)
                 $ Girl.change_stat("obedience", 50, 1)
 
@@ -2564,14 +2564,14 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
 
                 $ line = "no"
         "No, stay here.":
-            if ApprovalCheck(Girl, 600, "O"):
+            if Approvalcheck(Girl, 600, "O"):
                 if "followed" not in Girl.recent_history:
                     $ Girl.change_stat("love", 50, 1, 1)
                     $ Girl.change_stat("love", 40, -1)
                     $ Girl.change_stat("obedience", 90, 1)
 
                 $ line = "command"
-            elif D20 >= 7 and ApprovalCheck(Girl, 1400):
+            elif D20 >= 7 and Approvalcheck(Girl, 1400):
                 if "followed" not in Girl.recent_history:
                     $ Girl.change_stat("love", 70, -2)
                     $ Girl.change_stat("love", 90, -1)
@@ -2594,7 +2594,7 @@ label leave(Girl, temp_modifier = temp_modifier, number_of_Girls = 0):
                     ch_v "I guess I could. . ."
 
                 $ line = "yes"
-            elif ApprovalCheck(Girl, 200, "O"):
+            elif Approvalcheck(Girl, 200, "O"):
                 if "followed" not in Girl.recent_history:
                     $ Girl.change_stat("love", 70, -4)
                     $ Girl.change_stat("love", 90, -2)

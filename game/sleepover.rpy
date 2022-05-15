@@ -59,12 +59,12 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
             if bg_current == "bg_player":
                     if len(Party) == 2:
                         $ renpy.random.shuffle(Party)
-                        if ApprovalCheck(Party[0],Check=1) <= ApprovalCheck(Party[1],Check=1):
+                        if Approvalcheck(Party[0],check=1) <= Approvalcheck(Party[1],check=1):
                             # If second one likes you more, pick her
                             $ Party.reverse()
                     if not Party:
                         pass
-                    elif Party[0].Sleep >= 3 and ApprovalCheck(Party[0], 800):
+                    elif Party[0].Sleep >= 3 and Approvalcheck(Party[0], 800):
                         pass
                     elif Party[0] == RogueX:
                             ch_r "It's getting late and I'm getting a bit tired."
@@ -114,7 +114,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
                                     call remove_girl(EmmaX)
                     elif len(Party) >= 2 and "three" not in EmmaX.History:
                             #if Emma's around but can't do threesome stuff yet
-                            if (bg_current == EmmaX.Home or bg_current == "bg_player") and ApprovalCheck(EmmaX, 1100, "LI"):
+                            if (bg_current == EmmaX.Home or bg_current == "bg_player") and Approvalcheck(EmmaX, 1100, "LI"):
                                 if Party[0] != EmmaX:
                                         $ Party.reverse()
                                 ch_e "[Party[1].name] dear, I need a moment with [Player.name], but you can leave."
@@ -135,7 +135,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
             $ Party[0].change_face("sexy",1)
 
             $ line = 0
-            if Party[0].Sleep >= 3 and ApprovalCheck(Party[0], 800):
+            if Party[0].Sleep >= 3 and Approvalcheck(Party[0], 800):
                     #You've slept over several times and she still likes you
                     if Party[0].Home == bg_current:
                             call Anyline(Party[0],"Are you staying over tonight?")
@@ -143,7 +143,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
                             call Anyline(Party[0],"I'm staying over, right?")
                     $ line = 1
 
-            elif Party[0].Sleep < 3 and ApprovalCheck(Party[0], 1100, "LI"):
+            elif Party[0].Sleep < 3 and Approvalcheck(Party[0], 1100, "LI"):
                     #You haven't slept over much, but she wants you to
                     $ Party[0].change_face("bemused",1)
                     if Party[0] == RogueX:
@@ -272,7 +272,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
 
                         "That's not what you said the other night . ." if Party[0].Sleep:
                                 #if she wants you gone
-                                if ApprovalCheck(Party[0],900)or ApprovalCheck(Party[0],700,"L") or ApprovalCheck(Party[0],500,"O"):
+                                if Approvalcheck(Party[0],900)or Approvalcheck(Party[0],700,"L") or Approvalcheck(Party[0],500,"O"):
                                     $ Party[0].change_face("bemused",1)
                                     $ line = 1
                                     if Party[0] == RogueX:
@@ -334,7 +334,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
 
             if line == "please":
                     #if she said no but you asked nicely
-                    if ApprovalCheck(Party[0],1000) or ApprovalCheck(Party[0],700,"L") or ApprovalCheck(Party[0],500,"O"):
+                    if Approvalcheck(Party[0],1000) or Approvalcheck(Party[0],700,"L") or Approvalcheck(Party[0],500,"O"):
                         $ Party[0].change_face("bemused")
                         $ line = 1
                         if Party[0] == RogueX:
@@ -384,7 +384,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
             #If the primary girl agreed
             if len(Party) >= 2:
                 #if there is another girl
-                if Party[0].GirlLikeCheck(Party[1]) >= 700 and ApprovalCheck(Party[0], 1200):
+                if Party[0].GirlLikecheck(Party[1]) >= 700 and Approvalcheck(Party[0], 1200):
                         # If she likes the other girl quite a bit and likes you a decent amount
                         if Party[0] == RogueX:
                                 ch_r "And you, [Party[1].name]?"
@@ -420,7 +420,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
                         elif Party[0] == JubesX:
                                 ch_v "You've gotta go though, -right- [Party[1].name]?"
 
-                if Party[1].GirlLikeCheck(Party[0]) >= 500 and ApprovalCheck(Party[1], 1200):
+                if Party[1].GirlLikecheck(Party[0]) >= 500 and Approvalcheck(Party[1], 1200):
                         # If second girl likes the other girl a bit and likes you a decent amount
                         $ Party[1].change_face("smile")
                         if Party[1] == RogueX:
@@ -460,7 +460,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
                     extend ""
                     "You should stay, [Party[1].name].":
                             #this checks the second girl's response.
-                            if Party[1].GirlLikeCheck(Party[0]) >= 500 and ApprovalCheck(Party[1], 1200):
+                            if Party[1].GirlLikecheck(Party[0]) >= 500 and Approvalcheck(Party[1], 1200):
                                     # If second girl likes the first girl a bit and likes you a decent amount
                                     if Party[1] == RogueX:
                                             ch_r "Oh, I'd love to."
@@ -500,7 +500,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
 
                             #This checks the first girl's response
                             if line:
-                                if Party[0].GirlLikeCheck(Party[1]) >= 700 and ApprovalCheck(Party[0], 1200):
+                                if Party[0].GirlLikecheck(Party[1]) >= 700 and Approvalcheck(Party[0], 1200):
                                     # If first girl likes the other girl quite a bit and likes you a decent amount
                                     if Party[0] == RogueX:
                                             ch_r "Great!"
@@ -517,7 +517,7 @@ label Sleepover(line = 0,Girls=[]): #rkeljsv
                                     elif Party[0] == JubesX:
                                             ch_v "Oh, cool!"
                                     $ Party[1].GLG(Party[0],800,5,1)
-                                elif Party[0].GirlLikeCheck(Party[1]) >= 400 and ApprovalCheck(Party[0], 1400):
+                                elif Party[0].GirlLikecheck(Party[1]) >= 400 and Approvalcheck(Party[0], 1400):
                                     # If she barely likes the other girl but likes you a a lot
                                     $ Party[0].change_face("sadside",1,Mouth="smile")
                                     if Party[0] == RogueX:
@@ -754,7 +754,7 @@ label Sleepover_Morning: #rkeljsv
             $ Girls[0].Action = Girls[0].MaxAction
             $ Girls.remove(Girls[0])
 
-        call Morningwood_Check # / / / / / / / checks for morning wood event here / / / / / / / checks for morning wood event here / / / / / / / checks for morning wood event here
+        call Morningwood_check # / / / / / / / checks for morning wood event here / / / / / / / checks for morning wood event here / / / / / / / checks for morning wood event here
 
         $ Party[0].change_face("smile")
         if len(Party) >= 2:
@@ -845,7 +845,7 @@ label Sleepover_Morning: #rkeljsv
                             $ Party[0].change_stat("obedience", 80, 10)
                             $ Party[0].change_stat("inhibition", 35, 8)
                     $ Party[0].change_stat("obedience", 50, 8)
-                    if ApprovalCheck(Party[0], 800, "L"):
+                    if Approvalcheck(Party[0], 800, "L"):
                             $ Party[0].change_face("bemused")
                     else:
                             $ Party[0].change_face("confused")
@@ -870,7 +870,7 @@ label Sleepover_Morning: #rkeljsv
 
             "You were constantly tossing around.":
                     $ Party[0].Blush = 1
-                    if ApprovalCheck(Party[0], 800, "L") or ApprovalCheck(Party[0], 1200):
+                    if Approvalcheck(Party[0], 800, "L") or Approvalcheck(Party[0], 1200):
                             $ Party[0].change_face("bemused")
                             call Anyline(Party[0],"Hmm?")
                     else:
@@ -916,7 +916,7 @@ label Sleepover_Morning: #rkeljsv
                     if Party[0].Sleep < 5:
                             $ Party[0].change_stat("love", 80, -8)
                             $ Party[0].change_stat("obedience", 50, 40)
-                    if ApprovalCheck(Party[0], 500, "O"):
+                    if Approvalcheck(Party[0], 500, "O"):
                             $ Party[0].change_stat("love", 80, -2)
                             $ Party[0].change_stat("obedience", 90, 5)
                             $ Party[0].change_face("normal")
@@ -1080,7 +1080,7 @@ label Sleepover_Morning: #rkeljsv
                                 $ Party[1].change_stat("obedience", 80, 10)
                                 $ Party[1].change_stat("inhibition", 35, 8)
                         $ Party[1].change_stat("obedience", 50, 8)
-                        if ApprovalCheck(Party[1], 800, "L"):
+                        if Approvalcheck(Party[1], 800, "L"):
                                 $ Party[1].change_face("bemused")
                         else:
                                 $ Party[1].change_face("confused")
@@ -1166,7 +1166,7 @@ label Sleepover_Morning: #rkeljsv
 
             elif line == "toss":
                         $ Party[1].Blush = 1
-                        if ApprovalCheck(Party[1], 800, "L") or ApprovalCheck(Party[1], 1200):
+                        if Approvalcheck(Party[1], 800, "L") or Approvalcheck(Party[1], 1200):
                                 $ Party[1].change_face("bemused")
                                 call Anyline(Party[1],"Hmm?")
                         else:
@@ -1210,7 +1210,7 @@ label Sleepover_Morning: #rkeljsv
                         if Party[1].Sleep < 5:
                                 $ Party[1].change_stat("love", 80, -8)
                                 $ Party[1].change_stat("obedience", 50, 40)
-                        if ApprovalCheck(Party[1], 500, "O"):
+                        if Approvalcheck(Party[1], 500, "O"):
                                 $ Party[1].change_stat("love", 80, -2)
                                 $ Party[1].change_stat("obedience", 90, 5)
                                 $ Party[1].change_face("normal")
@@ -1317,9 +1317,9 @@ label Sleepover_Morning: #rkeljsv
 
 
 # start Event Morning Wood / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
-# start Morning Wood Check / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# start Morning Wood check / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-label Morningwood_Check(Girls=[0,-3],D20=0): #rkeljsv
+label Morningwood_check(Girls=[0,-3],D20=0): #rkeljsv
         #This element sends player to the Morningwood event or returns them
         #it is called from Sleepover_Morning
 
@@ -1328,25 +1328,25 @@ label Morningwood_Check(Girls=[0,-3],D20=0): #rkeljsv
 
         if len(Party) >= 2:
                 #builds a modifier for how the girls like each other
-                if Party[0].GirlLikeCheck(Party[1]) >= 900:
+                if Party[0].GirlLikecheck(Party[1]) >= 900:
                         # If the first girl really likes the second
                         $ Girls[0] = 2
-                elif Party[0].GirlLikeCheck(Party[1]) >= 750:
+                elif Party[0].GirlLikecheck(Party[1]) >= 750:
                         # If the first girl kinda likes the second
                         $ Girls[0] = 0
-                elif Party[0].GirlLikeCheck(Party[1]) <= 400:
+                elif Party[0].GirlLikecheck(Party[1]) <= 400:
                         # If the first girl really hates the second
                         $ Girls[0] = 2
                 else:
                         $ Girls[0] = 0
 
-                if Party[1].GirlLikeCheck(Party[0]) >= 900:
+                if Party[1].GirlLikecheck(Party[0]) >= 900:
                         # If the second girl really likes the first
                         $ Girls[1] = 2
-                elif Party[1].GirlLikeCheck(Party[0]) >= 750:
+                elif Party[1].GirlLikecheck(Party[0]) >= 750:
                         # If the second girl kinda likes the first
                         $ Girls[1] = 0
-                elif Party[1].GirlLikeCheck(Party[0]) <= 400:
+                elif Party[1].GirlLikecheck(Party[0]) <= 400:
                         # If the second girl really hates the first
                         $ Girls[1] = -5
                 else:
@@ -1359,13 +1359,13 @@ label Morningwood_Check(Girls=[0,-3],D20=0): #rkeljsv
                 #if you've told her to chill, she stops here.
                 $ Girls[0] = 0
         else:
-                if Party[0].Blow >= 5 or ApprovalCheck(Party[0], 900, "I"):
+                if Party[0].Blow >= 5 or Approvalcheck(Party[0], 900, "I"):
                         $ Girls[0] += 3
-                elif Party[0].Blow and ApprovalCheck(Party[0], 900):
+                elif Party[0].Blow and Approvalcheck(Party[0], 900):
                         $ Girls[0] += 2
-                elif ApprovalCheck(Party[0], 1400):
+                elif Approvalcheck(Party[0], 1400):
                         $ Girls[0] += 2
-                elif Party[0].Blow or ApprovalCheck(Party[0], 900):
+                elif Party[0].Blow or Approvalcheck(Party[0], 900):
                         $ Girls[0] += 1
 
                 if "hungry" in Party[0].Traits and D20 >= 2:
@@ -1403,13 +1403,13 @@ label Morningwood_Check(Girls=[0,-3],D20=0): #rkeljsv
         #end first girl check, Girls[0] maybe "yes," maybe 0
 
         if len(Party) >= 2:
-                if Party[1].Blow >= 5 or ApprovalCheck(Party[1], 900, "I"):
+                if Party[1].Blow >= 5 or Approvalcheck(Party[1], 900, "I"):
                         $ Girls[1] += 3
-                elif Party[1].Blow and ApprovalCheck(Party[1], 900):
+                elif Party[1].Blow and Approvalcheck(Party[1], 900):
                         $ Girls[1] += 2
-                elif ApprovalCheck(Party[1], 1400):
+                elif Approvalcheck(Party[1], 1400):
                         $ Girls[1] += 2
-                elif Party[1].Blow or ApprovalCheck(Party[1], 900):
+                elif Party[1].Blow or Approvalcheck(Party[1], 900):
                         $ Girls[1] += 1
 
                 if "hungry" in Party[1].Traits and D20 >= 2:
@@ -1449,7 +1449,7 @@ label Morningwood_Check(Girls=[0,-3],D20=0): #rkeljsv
                         $ line = "no"
                 #else: stays "yes"
 
-                if line == "other" and Party[0].GirlLikeCheck(Party[1]) >= 500 and "chill" not in Party[1].Traits:
+                if line == "other" and Party[0].GirlLikecheck(Party[1]) >= 500 and "chill" not in Party[1].Traits:
                     # If Girl 1 wasn't into it, but liked girl 2 and girl 2 was, swap them
                     $ Party.reverse()
                     $ Girls[0] = "yes"
@@ -1523,12 +1523,12 @@ label Morningwood_Check(Girls=[0,-3],D20=0): #rkeljsv
         return
 
 
-# end Morning Wood Check / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+# end Morning Wood check / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
 
 label Sleepover_MorningWood: #rkeljsv
-        # this label is called from Morningwood_Check, which was called from Sleepover_Morning
+        # this label is called from Morningwood_check, which was called from Sleepover_Morning
         $ Player.AddWord(1,"interruption") #prevents interruption
         call shift_focus(Party[0])
         $ Player.Focus = 30
@@ -1821,7 +1821,7 @@ label Sleepover_MorningWood: #rkeljsv
                                     ch_s "I would love to. . ."
                             elif Party[0] == JubesX:
                                     ch_v "Sure would."
-                    elif line == "no" and ApprovalCheck(Party[0], 1750):
+                    elif line == "no" and Approvalcheck(Party[0], 1750):
                             #if you were a dick but she's ok
                             $ Party[0].change_stat("obedience", 80, 3)
                             $ Party[0].change_stat("inhibition", 60, 2)
@@ -1882,7 +1882,7 @@ label Sleepover_MorningWood: #rkeljsv
                             elif Party[0] == JubesX:
                                     ch_v "Sure, I guess. . ."
                             $ line = "sex"
-                    elif line == "no" and ApprovalCheck(Party[0], 1650):
+                    elif line == "no" and Approvalcheck(Party[0], 1650):
                             #if you were a dick but she's ok
                             $ Party[0].change_stat("obedience", 80, 3)
                             $ Party[0].change_stat("inhibition", 60, 3)
@@ -1925,7 +1925,7 @@ label Sleepover_MorningWood: #rkeljsv
                             elif Party[0] == JubesX:
                                     ch_v "Lol, no. . ."
             "Sorry, sorry, please continue." if line == "no":
-                    if ApprovalCheck(Party[0], 1450):
+                    if Approvalcheck(Party[0], 1450):
                             #if you were a dick but she's ok
                             $ Party[0].change_stat("love", 90, 3)
                             $ Party[0].change_stat("obedience", 80, 2)
@@ -1968,7 +1968,7 @@ label Sleepover_MorningWood: #rkeljsv
                             elif Party[0] == JubesX:
                                     ch_v "Nah, I got enough. . ."
             "Sorry, but we could do something else." if line == "no":
-                    if ApprovalCheck(Party[0], 1350):
+                    if Approvalcheck(Party[0], 1350):
                             #if you were a dick but she's ok
                             $ Party[0].change_stat("love", 90, 3)
                             $ Party[0].change_face("sexy",1)

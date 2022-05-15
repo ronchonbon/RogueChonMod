@@ -79,9 +79,9 @@ label Poly_Start(Newbie=0,Round2=0,Asked=0): #rkeljsv
                 #end line 1
 
 
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].GirlLikecheck(Newbie) >= 800:
                 $ Party[0].change_face("sly")
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].GirlLikecheck(Newbie) >= 600:
                 pass
         else:
                 # neither likes her much
@@ -89,70 +89,70 @@ label Poly_Start(Newbie=0,Round2=0,Asked=0): #rkeljsv
 
         # We like her or not
         if Party[0] == RogueX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_r "She is pretty sexy, I guess."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_r "I like her just fine, I was just wondering where it was headed."
                 else:
                         # neither likes her much
                         ch_r "I'm not really a fan'a hers."
         elif Party[0] == KittyX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_k "She's kinda hot, I get that. . ."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_k "She's ok, sure, but I'm not sure. . ."
                 else:
                         # neither likes her much
                         ch_k "I don't really like her much."
         elif Party[0] == EmmaX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_e "I think she's quite the catch."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_e "I do like her, but have some concerns."
                 else:
                         # neither likes her much
                         ch_e "I don't really approve."
         elif Party[0] == LauraX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_l "She's pretty hot, I get it."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_l "She's ok, I guess."
                 else:
                         # neither likes her much
                         ch_l "I don't like her."
         elif Party[0] == JeanX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_j "I get it, she's hot enough."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_j "She's. . . fine."
                 else:
                         # neither likes her much
                         ch_j "You probably shouldn't be seen around her."
         elif Party[0] == StormX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_s "She is very beautiful, certainly."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_s "She is a good girl, certainly. . ."
                 else:
                         # neither likes her much
                         ch_s "I do not think I like her much."
         elif Party[0] == JubesX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_v "Ok, she's totally hot, but. . ."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_v "She's. . . fine, but. . ."
                 else:
@@ -195,17 +195,17 @@ label Poly_Start(Newbie=0,Round2=0,Asked=0): #rkeljsv
                 $ line = "n"
 
         if line == "y":
-            if Party[0].GirlLikeCheck(Newbie) >= 800:
+            if Party[0].GirlLikecheck(Newbie) >= 800:
                     # if they like her a lot
                     $ line = "yy"
                     $ Party[0].change_stat("love", 90, 5)
                     $ Party[0].change_stat("obedience", 50, 5)
                     $ Party[0].change_stat("inhibition", 90, 10)
-            elif ApprovalCheck(Party[0], 1800):
+            elif Approvalcheck(Party[0], 1800):
                     # if they really like you enough to put up with it
                     $ line = "ym"
                     $ Party[0].change_stat("obedience", 50, 5)
-            elif ApprovalCheck(Party[0], 1500) and Party[0].GirlLikeCheck(Newbie) >= 500:
+            elif Approvalcheck(Party[0], 1500) and Party[0].GirlLikecheck(Newbie) >= 500:
                     # if they like her well enough
                     $ line = "ym"
             else:
@@ -214,14 +214,14 @@ label Poly_Start(Newbie=0,Round2=0,Asked=0): #rkeljsv
                     $ Party[0].change_stat("love", 90, -10)
         #end line = y
         if line == "m":
-            if Party[0].GirlLikeCheck(Newbie) >= 800:
+            if Party[0].GirlLikecheck(Newbie) >= 800:
                     # if they both like her a lot
                     $ line = "my"
                     $ Party[0].change_stat("inhibition", 90, 5)
-            elif ApprovalCheck(Party[0], 1800):
+            elif Approvalcheck(Party[0], 1800):
                     # if they both really like you enough to put up with it
                     $ line = "mm"
-            elif ApprovalCheck(Party[0], 1500) and Party[0].GirlLikeCheck(Newbie) >= 600:
+            elif Approvalcheck(Party[0], 1500) and Party[0].GirlLikecheck(Newbie) >= 600:
                     # if they both like her well enough
                     $ line = "mm"
             else:
@@ -229,15 +229,15 @@ label Poly_Start(Newbie=0,Round2=0,Asked=0): #rkeljsv
                     $ line = "mn"
         #end line = m
         if line == "n":
-            if Party[0].GirlLikeCheck(Newbie) >= 800:
+            if Party[0].GirlLikecheck(Newbie) >= 800:
                     # if they both like her a lot
                     $ line = "ny"
                     $ Party[0].change_stat("inhibition", 90, 10)
-            elif ApprovalCheck(Party[0], 1700):
+            elif Approvalcheck(Party[0], 1700):
                     # if they both really like you enough to put up with it
                     $ line = "nm"
                     $ Party[0].change_stat("inhibition", 90, 5)
-            elif ApprovalCheck(Party[0], 1300) and Party[0].GirlLikeCheck(Newbie) >= 500:
+            elif Approvalcheck(Party[0], 1300) and Party[0].GirlLikecheck(Newbie) >= 500:
                     # if they both like her well enough
                     $ line = "nm"
                     $ Party[0].change_stat("love", 90, 5)
@@ -509,7 +509,7 @@ label Poly_Start(Newbie=0,Round2=0,Asked=0): #rkeljsv
         if line == "mn" or line == "yn":
                 # if you said yes/maybe and they said no, but you insisted anyway
 
-                if ApprovalCheck(Party[0], 1600) and Party[0].GirlLikeCheck(Newbie) >= 500:
+                if Approvalcheck(Party[0], 1600) and Party[0].GirlLikecheck(Newbie) >= 500:
                             $ Party[0].change_face("sadside")
                             $ Party[0].change_stat("love", 90, -5)
                             $ Party[0].change_stat("obedience", 50, 15)
@@ -584,7 +584,7 @@ label Harem_Start(Newbie=0,Round2=0): #rkeljsv
 
         $ Party = [Player.Harem[0],Player.Harem[1]]
         # Adds first two harem members to party, removed everyone else from the room.
-        call Present_Check
+        call Present_check
         $ Party = [Player.Harem[0],Player.Harem[1]]
         call shift_focus(Player.Harem[0])
         call set_the_scene
@@ -633,12 +633,12 @@ label Harem_Start(Newbie=0,Round2=0): #rkeljsv
 
         # We like her or not line 3
 
-        if Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+        if Party[0].GirlLikecheck(Newbie) >= 600 and Party[1].GirlLikecheck(Newbie) >= 600:
                 pass
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
+        elif Party[0].GirlLikecheck(Newbie) >= 700:
                 # only first girl likes her
                 $ Party[1].change_face("angry",Mouth="normal")
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
+        elif Party[1].GirlLikecheck(Newbie) >= 700:
                 # only second girl likes her
                 $ Party[0].change_face("angry",Mouth="normal")
         else:
@@ -647,81 +647,81 @@ label Harem_Start(Newbie=0,Round2=0): #rkeljsv
                 $ Party[1].change_face("angry",Mouth="normal")
 
         if Party[0] == RogueX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800 and Party[1].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_r "Now we like her just fine, and we can't say we don't like the idea much."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600 and Party[1].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_r "Now we like her just fine, but we don't know about share'in."
-                elif Party[0].GirlLikeCheck(Newbie) >= 700:
+                elif Party[0].GirlLikecheck(Newbie) >= 700:
                         # only first girl likes her
                         ch_r "Now I like her just fine, but [Party[1].name] ain't so sure."
-                elif Party[1].GirlLikeCheck(Newbie) >= 700:
+                elif Party[1].GirlLikecheck(Newbie) >= 700:
                         # only second girl likes her
                         ch_r "Now [Party[1].name] seems to like her, but I'm not so sure."
                 else:
                         # neither likes her much
                         ch_r "Neither'a us is really cool with that."
         elif Party[0] == KittyX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800 and Party[1].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_k "She's kinda hot, we get that. . ."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600 and Party[1].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_k "She's ok, sure, but we're not sure. . ."
-                elif Party[0].GirlLikeCheck(Newbie) >= 700:
+                elif Party[0].GirlLikecheck(Newbie) >= 700:
                         # only first girl likes her
                         ch_k "I like her, but I don't know about [Party[1].name]."
-                elif Party[1].GirlLikeCheck(Newbie) >= 700:
+                elif Party[1].GirlLikecheck(Newbie) >= 700:
                         # only second girl likes her
                         ch_k "[Party[1].name] likes her, but I don't know."
                 else:
                         # neither likes her much
                         ch_k "We don't really like her much."
         elif Party[0] == EmmaX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800 and Party[1].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_e "I think we agree that she's a nice catch."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600 and Party[1].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_e "We do like her, but we have some concerns."
-                elif Party[0].GirlLikeCheck(Newbie) >= 700:
+                elif Party[0].GirlLikecheck(Newbie) >= 700:
                         # only first girl likes her
                         ch_e "[Party[1].name] doesn't really approve."
-                elif Party[1].GirlLikeCheck(Newbie) >= 700:
+                elif Party[1].GirlLikecheck(Newbie) >= 700:
                         # only second girl likes her
                         ch_e "[Party[1].name] seems to think she's acceptable."
                 else:
                         # neither likes her much
                         ch_e "We don't really approve."
         elif Party[0] == LauraX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800 and Party[1].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_l "She's pretty hot, we get it."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600 and Party[1].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_l "She's ok, I guess."
-                elif Party[0].GirlLikeCheck(Newbie) >= 700:
+                elif Party[0].GirlLikecheck(Newbie) >= 700:
                         # only first girl likes her
                         ch_l "She's fine, but [Party[1].name] doesn't like her."
-                elif Party[1].GirlLikeCheck(Newbie) >= 700:
+                elif Party[1].GirlLikecheck(Newbie) >= 700:
                         # only second girl likes her
                         ch_l "[Party[1].name] likes her. I don't."
                 else:
                         # neither likes her much
                         ch_l "We don't like her."
         elif Party[0] == JeanX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800 and Party[1].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_j "I get it, she's hot enough."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600 and Party[1].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_j "She's. . . fine."
-                elif Party[0].GirlLikeCheck(Newbie) >= 700:
+                elif Party[0].GirlLikecheck(Newbie) >= 700:
                         # only first girl likes her
                         ch_j "I think she's fine, but [Party[1].name] doesn't like her."
                         ch_j "For whatever that's worth. . ."
-                elif Party[1].GirlLikeCheck(Newbie) >= 700:
+                elif Party[1].GirlLikecheck(Newbie) >= 700:
                         # only second girl likes her
                         ch_j "[Party[1].name] likes her. I don't."
                         ch_j "So I think you know the right answer to this one. . ."
@@ -729,16 +729,16 @@ label Harem_Start(Newbie=0,Round2=0): #rkeljsv
                         # neither likes her much
                         ch_j "You probably shouldn't be seen around her."
         elif Party[0] == StormX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800 and Party[1].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_s "We agree that she is very beautiful. . ."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600 and Party[1].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_s "She is a good girl, but we do have some concerns. . ."
-                elif Party[0].GirlLikeCheck(Newbie) >= 700:
+                elif Party[0].GirlLikecheck(Newbie) >= 700:
                         # only first girl likes her
                         ch_s "I like her, but [Party[1].name] does not approve."
-                elif Party[1].GirlLikeCheck(Newbie) >= 700:
+                elif Party[1].GirlLikecheck(Newbie) >= 700:
                         # only second girl likes her
                         ch_s "[Party[1].name] appears to like her, I am unsure."
                 else:
@@ -746,16 +746,16 @@ label Harem_Start(Newbie=0,Round2=0): #rkeljsv
                         ch_s "We do not like her very much."
 
         elif Party[0] == JubesX:
-                if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+                if Party[0].GirlLikecheck(Newbie) >= 800 and Party[1].GirlLikecheck(Newbie) >= 800:
                         # if they both like her a lot
                         ch_v "Ok, she's totally hot, but. . ."
-                elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+                elif Party[0].GirlLikecheck(Newbie) >= 600 and Party[1].GirlLikecheck(Newbie) >= 600:
                         # if they both like her well enough
                         ch_v "She's. . . fine, but. . ."
-                elif Party[0].GirlLikeCheck(Newbie) >= 700:
+                elif Party[0].GirlLikecheck(Newbie) >= 700:
                         # only first girl likes her
                         ch_v "She's. . . fine, but, [Party[1].name]. . ."
-                elif Party[1].GirlLikeCheck(Newbie) >= 700:
+                elif Party[1].GirlLikecheck(Newbie) >= 700:
                         # only second girl likes her
                         ch_v "[Party[1].name] likes her, but I don't know."
                 else:
@@ -792,7 +792,7 @@ label Harem_Start(Newbie=0,Round2=0): #rkeljsv
                 $ line = "n"
 
         if line == "y":
-            if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+            if Party[0].GirlLikecheck(Newbie) >= 800 and Party[1].GirlLikecheck(Newbie) >= 800:
                     # if they both like her a lot
                     $ line = "yy"
                     $ Party[0].change_stat("love", 90, 5)
@@ -801,13 +801,13 @@ label Harem_Start(Newbie=0,Round2=0): #rkeljsv
                     $ Party[1].change_stat("love", 90, 5)
                     $ Party[1].change_stat("obedience", 50, 5)
                     $ Party[1].change_stat("inhibition", 90, 10)
-            elif ApprovalCheck(Party[0], 1800) and ApprovalCheck(Party[1], 1800):
+            elif Approvalcheck(Party[0], 1800) and Approvalcheck(Party[1], 1800):
                     # if they both really like you enough to put up with it
                     $ line = "ym"
                     $ Party[0].change_stat("obedience", 50, 10)
                     $ Party[1].change_stat("obedience", 50, 10)
-            elif ApprovalCheck(Party[0], 1500) and ApprovalCheck(Party[1], 1500):
-                    if Party[0].GirlLikeCheck(Newbie) >= 500 and Party[1].GirlLikeCheck(Newbie) >= 500:
+            elif Approvalcheck(Party[0], 1500) and Approvalcheck(Party[1], 1500):
+                    if Party[0].GirlLikecheck(Newbie) >= 500 and Party[1].GirlLikecheck(Newbie) >= 500:
                             # if they both like her well enough
                             $ line = "ym"
                             $ Party[0].change_stat("obedience", 80, 15)
@@ -828,16 +828,16 @@ label Harem_Start(Newbie=0,Round2=0): #rkeljsv
                             $ Party[1].change_stat("obedience", 50, -5)
         #end line = y
         if line == "m":
-            if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+            if Party[0].GirlLikecheck(Newbie) >= 800 and Party[1].GirlLikecheck(Newbie) >= 800:
                     # if they both like her a lot
                     $ line = "my"
                     $ Party[0].change_stat("inhibition", 90, 5)
                     $ Party[1].change_stat("inhibition", 90, 5)
-            elif ApprovalCheck(Party[0], 1800) and ApprovalCheck(Party[1], 1800):
+            elif Approvalcheck(Party[0], 1800) and Approvalcheck(Party[1], 1800):
                     # if they both really like you enough to put up with it
                     $ line = "mm"
-            elif ApprovalCheck(Party[0], 1500) and ApprovalCheck(Party[1], 1500):
-                    if Party[0].GirlLikeCheck(Newbie) >= 600 or Party[1].GirlLikeCheck(Newbie) >= 600:
+            elif Approvalcheck(Party[0], 1500) and Approvalcheck(Party[1], 1500):
+                    if Party[0].GirlLikecheck(Newbie) >= 600 or Party[1].GirlLikecheck(Newbie) >= 600:
                             # if they both like her well enough
                             $ line = "mm"
                     else:
@@ -848,17 +848,17 @@ label Harem_Start(Newbie=0,Round2=0): #rkeljsv
                             $ line = "mn"
         #end line = m
         if line == "n":
-            if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+            if Party[0].GirlLikecheck(Newbie) >= 800 and Party[1].GirlLikecheck(Newbie) >= 800:
                     # if they both like her a lot
                     $ line = "ny"
                     $ Party[0].change_stat("inhibition", 90, 10)
                     $ Party[1].change_stat("inhibition", 90, 10)
-            elif ApprovalCheck(Party[0], 1700) and ApprovalCheck(Party[1], 1700):
+            elif Approvalcheck(Party[0], 1700) and Approvalcheck(Party[1], 1700):
                     # if they both really like you enough to put up with it
                     $ line = "nm"
                     $ Party[0].change_stat("inhibition", 90, 5)
-            elif ApprovalCheck(Party[0], 1300) and ApprovalCheck(Party[1], 1300):
-                    if Party[0].GirlLikeCheck(Newbie) >= 500 and Party[1].GirlLikeCheck(Newbie) >= 500:
+            elif Approvalcheck(Party[0], 1300) and Approvalcheck(Party[1], 1300):
+                    if Party[0].GirlLikecheck(Newbie) >= 500 and Party[1].GirlLikecheck(Newbie) >= 500:
                             # if they both like her well enough
                             $ line = "nm"
                     else:
@@ -1172,7 +1172,7 @@ label Harem_Start(Newbie=0,Round2=0): #rkeljsv
                     # if you said yes/maybe and they said no, but you insisted anyway
                     $Count = 0
                     while Count < 2:
-                        if ApprovalCheck(Party[Count], 1600) and Party[Count].GirlLikeCheck(Newbie) >= 500:
+                        if Approvalcheck(Party[Count], 1600) and Party[Count].GirlLikecheck(Newbie) >= 500:
                                 # She likes you enough to roll over
                                 $ Party[Count].change_face("sadside")
                                 $ Party[Count].change_stat("love", 90, -5)
@@ -1258,7 +1258,7 @@ label Harem_Initiation(Girls=[],Girls2=[]):
             $ Girls.remove(Girls[0])
     return
 
-label CheatCheck(Girls=[],Girls2=[]):
+label Cheatcheck(Girls=[],Girls2=[]):
         # This checks whether any girl saw you with any other girl today.
         # Called by EventCalls
         # If you're in the room with that girl, it launches the cheated scene, otherwise, it has her ask you about it later.
@@ -1295,7 +1295,7 @@ label CheatCheck(Girls=[],Girls2=[]):
                 $ Girls.remove(Girls[0])
         return
 
-label ShareCheck(Girls=[],Girls2=[]):
+label Sharecheck(Girls=[],Girls2=[]):
         # This checks whether one of the girls is supposed to ask the other about joining the harem
         # Called by EventCalls
         # Roster[Counter] is the first girl, Roster[Counter2] is the second girl
@@ -1322,7 +1322,7 @@ label ShareCheck(Girls=[],Girls2=[]):
                 $ Girls.remove(Girls[0])
         return
 
-label AddictCheck(Girls=[]):
+label Addictcheck(Girls=[]):
         # Called to see if the girl is in an addiction spiral
         # Called by EventCalls
         $ Girls = active_Girls[:]
@@ -1431,7 +1431,7 @@ label Share(Girl=0,Other=0): #rkeljsv
                 call Anyline(Girl,"I guess we can see if she comes around on the idea.")
 
         else:
-                if Other == JeanX or Other.GirlLikeCheck(Girl) >= 800 or ApprovalCheck(Other, 1800) or (ApprovalCheck(Other, 1500) and Other.GirlLikeCheck(Girl) >= 500):
+                if Other == JeanX or Other.GirlLikecheck(Girl) >= 800 or Approvalcheck(Other, 1800) or (Approvalcheck(Other, 1500) and Other.GirlLikecheck(Girl) >= 500):
                         # if she likes the other girl a lot, or likes you a lot, or sort of likes you both. . .
                         $ Other.AddWord(1,0,0,"poly "+Girl.Tag,0) #adds "poly Kitty" to RogueX.Traits
                         #$ Other.AddWord(1,0,0,"dating?",0) #adds "dating" to KittyX.Traits
@@ -1452,7 +1452,7 @@ label Share(Girl=0,Other=0): #rkeljsv
                                 if Other.Tag+"Yes" not in Player.Traits:
                                         $ Player.Traits.append(Other.Tag+"Yes")
                                 call expression Other.Tag + "_BF" #call Rogue_BF
-                                $ renpy.pop_call() #skips return to ShareCheck
+                                $ renpy.pop_call() #skips return to Sharecheck
                                 $ renpy.pop_call() #skips return to EventCalls
                         else:
                                 # if not in a Girl room, ask later
@@ -1463,7 +1463,7 @@ label Share(Girl=0,Other=0): #rkeljsv
                         #If Girl refuses to share you
                         "[Girl.name] sends you a text."
                         call Anyline(Girl,"I talked to "+Other.name+" about sharing you, and she said she wasn't into that sort of thing,")
-                        if not ApprovalCheck(Other, 2000):
+                        if not Approvalcheck(Other, 2000):
                                 $ Other.change_stat("love", 200, -15)
                                 $ Other.change_stat("obedience", 50, -5)
                                 $ Other.change_stat("inhibition", 50, 5)
@@ -1477,7 +1477,7 @@ label Share(Girl=0,Other=0): #rkeljsv
         return
 
 label Cheated(Girl=0,Other=0, Resolution = 0, B = 0): #rkeljsv
-        # Called by EventCalls->CheatCheck if you got caught cheating
+        # Called by EventCalls->Cheatcheck if you got caught cheating
         #Resolution is Resolution count, you want this over 2 at least. B is the bonus modifier
         $ Girl.AddWord(1,0,"relationship",0,0)
         call shift_focus(Girl)
@@ -1495,11 +1495,11 @@ label Cheated(Girl=0,Other=0, Resolution = 0, B = 0): #rkeljsv
         call clear_the_room(Girl)
         call Taboo_Level(1)
 
-        if Girl.GirlLikeCheck(Other) >= 900:
+        if Girl.GirlLikecheck(Other) >= 900:
                 $ Resolution += 2
-        elif Girl.GirlLikeCheck(Other) >= 800:
+        elif Girl.GirlLikecheck(Other) >= 800:
                 $ Resolution += 1
-        $ B = int((Girl.GirlLikeCheck(Other) - 500)/2)
+        $ B = int((Girl.GirlLikecheck(Other) - 500)/2)
 
         $ Resolution -= Girl.Cheated if Girl.Cheated <= 3 else 3 #Adds to Resolution 3 or less based on cheating
 
@@ -1664,7 +1664,7 @@ label Cheated(Girl=0,Other=0, Resolution = 0, B = 0): #rkeljsv
                         elif Girl == EmmaX:
                                 ch_e "I'll be the judge of what is or is not \"serious.\""
                         elif Girl == LauraX:
-                                if ApprovalCheck(Girl, 1500):
+                                if Approvalcheck(Girl, 1500):
                                         ch_l "Ok, that's fair."
                                 else:
                                         ch_l "Do you want to try that one again?"
@@ -1682,11 +1682,11 @@ label Cheated(Girl=0,Other=0, Resolution = 0, B = 0): #rkeljsv
                                 ch_v "Oh, is that supposed to be an excuse?"
                         $ Girl.change_stat("love", 200, -25)
 
-                        if not ApprovalCheck(Girl, 700, "O", Bonus = (B/3)):
+                        if not Approvalcheck(Girl, 700, "O", Bonus = (B/3)):
                             $ Resolution -= 2
 
                 "I think she's really hot.":
-                    if B >= 100 or ApprovalCheck(Girl, 500, "I", Bonus = (B/3)):
+                    if B >= 100 or Approvalcheck(Girl, 500, "I", Bonus = (B/3)):
                             # if Like trait is 700 or more. . .
                             $ Girl.change_face("confused",Eyes="side")
                             if Girl == StormX:
@@ -1718,7 +1718,7 @@ label Cheated(Girl=0,Other=0, Resolution = 0, B = 0): #rkeljsv
 
                 "Don't you like her?":
                     $ Girl.change_stat("obedience", 80, 30)
-                    if B >= 100 or ApprovalCheck(Girl,500,"I"):
+                    if B >= 100 or Approvalcheck(Girl,500,"I"):
                             # if Like trait is 700 or more. . .
                             $ Girl.change_face("confused",Eyes="side")
                             $ Girl.change_stat("inhibition", 90, 25)
@@ -1790,11 +1790,11 @@ label Cheated(Girl=0,Other=0, Resolution = 0, B = 0): #rkeljsv
 
                 "Have you considered maybe letting her join us?":
                         $ Girl.change_face("confused",Mouth="smile")
-                        if ApprovalCheck(Girl, 2200, Bonus = B) or ApprovalCheck(Girl, 950, "L", Bonus = (B/3)):
+                        if Approvalcheck(Girl, 2200, Bonus = B) or Approvalcheck(Girl, 950, "L", Bonus = (B/3)):
                                 $ Girl.change_stat("inhibition", 90, 30)
                                 $ Girl.change_stat("lust", 89, 10)
                                 $ Resolution += 2
-                        elif ApprovalCheck(Girl, 1500, Bonus = B) or Girl.GirlLikeCheck(Other) >= 700:
+                        elif Approvalcheck(Girl, 1500, Bonus = B) or Girl.GirlLikecheck(Other) >= 700:
                                 $ Girl.change_stat("inhibition", 90, 10)
                                 $ Girl.change_stat("lust", 90, 5)
                         else:
@@ -2185,7 +2185,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
 
         elif "askedfap" in Girl.History:
                 #if it's not the first time you asked. . .
-                if not ApprovalCheck(Girl, 800):
+                if not Approvalcheck(Girl, 800):
                         #rude response
                         $ Girl.change_face("angry",2,Eyes="surprised")
                         $ Girl.change_stat("love", 80, -1)
@@ -2227,7 +2227,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
 
         else:
                 #if this is the first time you've asked her. . .
-                if not ApprovalCheck(Girl, 800):
+                if not Approvalcheck(Girl, 800):
                         #rude response
                         $ Girl.change_face("angry",2,Eyes="surprised")
                         $ Girl.change_stat("love", 90, -5)
@@ -2255,7 +2255,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                                 ch_v "Do I. . ."
                                 ch_v "What? What business is that of yours?!"
                         $ Girl.change_face("angry",1)
-                elif not ApprovalCheck(Girl, 500, "I"): # or RogueX.SEXP <= 30?
+                elif not Approvalcheck(Girl, 500, "I"): # or RogueX.SEXP <= 30?
                         #shy response
                         $ Girl.change_stat("love", 90, -5)
                         $ Girl.change_stat("obedience", 50, 3)
@@ -2283,7 +2283,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                         elif Girl == JubesX:
                                 ch_v "Do I. . ."
                                 ch_v "What? Um. . . I don't wanna talk about it."
-                elif ApprovalCheck(Girl, 500, "O"):
+                elif Approvalcheck(Girl, 500, "O"):
                         #submissive response
                         $ Girl.change_stat("obedience", 90, 5)
                         $ Girl.change_stat("inhibition", 50, 2)
@@ -2318,7 +2318,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                     if "askedfap" not in Girl.daily_history:
                             $ Girl.change_stat("obedience", 200, 2)
                             $ Girl.change_stat("inhibition", 90, 1)
-                    if ApprovalCheck(Girl, 1400, "LO"):
+                    if Approvalcheck(Girl, 1400, "LO"):
                             #loving response
                             if "askedfap" not in Girl.History:
                                     $ Girl.change_stat("love", 90, 4)
@@ -2348,7 +2348,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                                     ch_v "I do have needs. . ."
                                     ch_v "You would need to make sure they get. . . taken care of."
                             $ Girl.change_face("bemused",1)
-                    elif ApprovalCheck(Girl, 1600) and not ApprovalCheck(Girl, 500, "I") and Girl != JeanX:
+                    elif Approvalcheck(Girl, 1600) and not Approvalcheck(Girl, 500, "I") and Girl != JeanX:
                             #shy response
                             if "askedfap" not in Girl.History:
                                     $ Girl.change_stat("obedience", 200, 5)
@@ -2370,7 +2370,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                                     ch_v "I don't really. . ."
                                     ch_v "Ok, we'll see. . ."
                             $ Girl.change_face("bemused",1)
-                    elif ApprovalCheck(Girl, 700, "O",Alt=[[JeanX],800]):
+                    elif Approvalcheck(Girl, 700, "O",Alt=[[JeanX],800]):
                             #submissive response
                             if "askedfap" not in Girl.History:
                                     $ Girl.change_stat("love", 90, 3)
@@ -2379,7 +2379,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                                     $ Girl.change_stat("lust", 70, 5)
                             $ Girl.change_face("sly",1)
                             call Anyline(Girl,"Yes,"+Girl.Petname+".")
-                    elif not ApprovalCheck(Girl, 800):
+                    elif not Approvalcheck(Girl, 800):
                             #rude response
                             if "askedfap" not in Girl.History:
                                     $ Girl.change_stat("love", 90, -5)
@@ -2429,7 +2429,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
             "Don't do that without permission." if "nofap" not in Girl.Traits:
                     if "askedfap" not in Girl.daily_history:
                             $ Girl.change_stat("obedience", 200, 3)
-                    if ApprovalCheck(Girl, 600, "O"):
+                    if Approvalcheck(Girl, 600, "O"):
                             #submissive response
                             if "askedfap" not in Girl.History:
                                     $ Girl.change_stat("love", 90, 3)
@@ -2440,7 +2440,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                                     $ Girl.change_stat("lust", 70, 5)
                             $ Girl.change_face("sly")
                             call Anyline(Girl,"Yes,"+Girl.Petname+".")
-                    elif ApprovalCheck(Girl, 1200, "LO"):
+                    elif Approvalcheck(Girl, 1200, "LO"):
                             #positive response
                             if "askedfap" not in Girl.History:
                                     $ Girl.change_stat("love", 90, 4)
@@ -2469,7 +2469,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                                     ch_v "Well, I mean. . ."
                                     ch_v "I do have needs. . ."
                                     ch_v "You would need to make sure they get. . . taken care of."
-                    elif not ApprovalCheck(Girl, 500, "I"):
+                    elif not Approvalcheck(Girl, 500, "I"):
                             #shy response
                             if "askedfap" not in Girl.History:
                                     $ Girl.change_stat("obedience", 200, 5)
@@ -2493,7 +2493,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                                     ch_v "Um, I don't know about that. . ."
                             $ Girl.change_face("normal",1)
                             $ counter = 1
-                    elif not ApprovalCheck(Girl, 800):
+                    elif not Approvalcheck(Girl, 800):
                             #rude response
                             if "askedfap" not in Girl.History:
                                     $ Girl.change_stat("love", 70, -5)
@@ -2553,7 +2553,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                             $ Girl.change_stat("love", 90, 1)
                             $ Girl.change_stat("obedience", 90, 1)
                             $ Girl.change_stat("inhibition", 90, 1)
-                    if not ApprovalCheck(Girl, 500, "I"):
+                    if not Approvalcheck(Girl, 500, "I"):
                             #shy response
                             if "okfap" not in Girl.History:
                                     $ Girl.change_stat("love", 60, 1)
@@ -2578,7 +2578,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                             elif Girl == JubesX:
                                     ch_v "Huh? Ok then. . ."
                             $ Girl.change_face("smile",1)
-                    elif ApprovalCheck(Girl, 750, "O"):
+                    elif Approvalcheck(Girl, 750, "O"):
                             #submissive response
                             if "okfap" not in Girl.History:
                                     $ Girl.change_stat("love", 90, 20)
@@ -2619,7 +2619,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
             #end "return permission"
 
             "Nevermind":
-                    if not ApprovalCheck(Girl, 500, "I"):
+                    if not Approvalcheck(Girl, 500, "I"):
                             #shy response
                             if "askedfap" not in Girl.History:
                                     $ Girl.change_stat("love", 80, 10)
@@ -2638,7 +2638,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                                     $ Girl.change_face("surprised",2)
                                     call Anyline(Girl,"Right! What were we even talking about?")
                                     $ Girl.change_face("smile",1)
-                    elif ApprovalCheck(Girl, 500, "O"):
+                    elif Approvalcheck(Girl, 500, "O"):
                             #submissive response
                             if "askedfap" not in Girl.History:
                                     $ Girl.change_stat("obedience", 60, 5)
@@ -2649,7 +2649,7 @@ label NoFap(Girl=0,TabStore=Taboo,counter=0): #rkeljsv
                                     call Anyline(Girl,"Very Well. . .")
                             else:#Rogue, Kitty, Laura, Jean, Jubuilee
                                     call Anyline(Girl,"Ok.")
-                    elif not ApprovalCheck(Girl, 800):
+                    elif not Approvalcheck(Girl, 800):
                             #rude response
                             if "askedfap" not in Girl.History:
                                     $ Girl.change_stat("love", 80, 5)
@@ -3242,7 +3242,7 @@ label girl_boyfriend(Girl):
                 return
 
         if Player.Harem:
-            if not ApprovalCheck(Girl, 1400):
+            if not Approvalcheck(Girl, 1400):
                 if len(Player.Harem) >= 2:
                     ch_l "So you'll break up with the others?"
                 else:
@@ -3265,11 +3265,11 @@ label girl_boyfriend(Girl):
                         $ Girl.Event[5] = 10
                     "I'd rather you join us.":
                         $ line = 0
-                        if ApprovalCheck(Girl, 1200):
+                        if Approvalcheck(Girl, 1200):
                             $ Girls = Player.Harem[:]
 
                             while Girls and line != "no":
-                                if Girl.GirlLikeCheck(Girls[0]) <= 500:
+                                if Girl.GirlLikecheck(Girls[0]) <= 500:
                                     $ line = "no"
 
                                 $ Girls.remove(Girls[0])
@@ -3418,7 +3418,7 @@ label girl_boyfriend(Girl):
             else:
                 ch_s "And I know that you have been sharing your time with [Player.Harem[0].name],"
 
-            if ApprovalCheck(Girl, 1500):
+            if Approvalcheck(Girl, 1500):
                 $ Girl.change_stat("obedience", 60, 2)
                 $ Girl.change_stat("inhibition", 70, 2)
 
@@ -3465,7 +3465,7 @@ label girl_boyfriend(Girl):
                 ch_s "That is. . . not exactly the answer I was looking for. . ."
 
         if Player.Harem:
-            if ApprovalCheck(Girl, 1500):
+            if Approvalcheck(Girl, 1500):
                 $ Girl.change_face("sly",Eyes="side")
                 $ Girl.change_stat("obedience", 80, 5)
                 $ Girl.change_stat("inhibition", 80, 5)
@@ -3509,7 +3509,7 @@ label girl_boyfriend(Girl):
                         ch_s ". . .oh."
                         ch_s "Well that is a disappointment."
 
-                        if not ApprovalCheck(Girl, 1000):
+                        if not Approvalcheck(Girl, 1000):
                             ch_s "I suppose that will be all then."
 
                             $ Girl.Event[5] = 20
@@ -3597,7 +3597,7 @@ label girl_boyfriend(Girl):
                 "Suit yourself.":
                     $ Girl.change_stat("love", 90, -5)
 
-                    if ApprovalCheck(Girl, 1000):
+                    if Approvalcheck(Girl, 1000):
                         $ Girl.change_face("confused")
                         $ Girl.change_stat("obedience", 50, 5)
                         $ Girl.change_stat("obedience", 80, 5)
@@ -4464,7 +4464,7 @@ label first_topless(Girl, silent = 0, temporary_line = 0): #rkeljsv
                     $ Girl.Mouth = "sad"
 
                     if temporary_line in [EmmaX, StormX]:
-                        if Girl.GirlLikeCheck(temporary_line) >= 800:
+                        if Girl.GirlLikecheck(temporary_line) >= 800:
                             $ Girl.change_face("sly", 2, Eyes="side")
                             $ Girl.change_stat("obedience", 80, 5)
 
@@ -4482,7 +4482,7 @@ label first_topless(Girl, silent = 0, temporary_line = 0): #rkeljsv
                                 ch_v "Well they are really ginormous. . ."
 
                             $ Girl.GirlLikeUp(temporary_line, 20) # +20
-                        elif Girl.GirlLikeCheck(temporary_line) >= 700:
+                        elif Girl.GirlLikecheck(temporary_line) >= 700:
                             $ Girl.Eyes = "side"
                             $ Girl.change_stat("obedience", 80, 5)
 
@@ -4503,7 +4503,7 @@ label first_topless(Girl, silent = 0, temporary_line = 0): #rkeljsv
 
                             $ temporary_line = "bad"
                     elif temporary_line == KittyX:
-                        if Girl.GirlLikeCheck(temporary_line) >= 800:
+                        if Girl.GirlLikecheck(temporary_line) >= 800:
                             $ Girl.change_face("sly",2,Eyes="side")
                             $ Girl.change_stat("obedience", 80, 5)
 
@@ -4519,7 +4519,7 @@ label first_topless(Girl, silent = 0, temporary_line = 0): #rkeljsv
                                 ch_v ". . . I guess they are really cute. . ."
 
                             $ Girl.GirlLikeUp(temporary_line, 20)
-                        elif Girl.GirlLikeCheck(temporary_line) >= 700:
+                        elif Girl.GirlLikecheck(temporary_line) >= 700:
                             $ Girl.Eyes = "side"
                             $ Girl.change_stat("obedience", 80, 5)
 
@@ -4563,7 +4563,7 @@ label first_topless(Girl, silent = 0, temporary_line = 0): #rkeljsv
     else:
         $ Girl.AddWord(1,0,0,0,"topless") #$ Girl.History.append("topless")
 
-        if ApprovalCheck(Girl, 800) and not Girl.Forced:
+        if Approvalcheck(Girl, 800) and not Girl.Forced:
             $ Girl.change_stat("inhibition", 70, 5)
 
             if Girl in [RogueX, EmmaX]:
@@ -4639,7 +4639,7 @@ label first_bottomless(Girl, silent = 0): #rkeljsv
     else:
         $ Girl.AddWord(1,0,0,0,"bottomless") #$ Girl.History.append("bottomless")
 
-        if ApprovalCheck(Girl, 500):
+        if Approvalcheck(Girl, 500):
             $ Girl.change_stat("inhibition", 60, 30)
         else:
             $ Girl.change_stat("love", 90, -5)
@@ -4684,7 +4684,7 @@ label Kitty_First_Bottomless(Silent = 0):
             "Pretty messy down there." if KittyX.Pubes:
                     $ KittyX.change_face("surprised",2)
                     ch_k "!"
-                    if ApprovalCheck(KittyX, 800, "LO"):
+                    if Approvalcheck(KittyX, 800, "LO"):
                             $ KittyX.change_face("bemused",1)
                             $ KittyX.change_stat("obedience", 50, 30)
                             $ KittyX.change_stat("inhibition", 60, 25)
@@ -4705,7 +4705,7 @@ label Kitty_First_Bottomless(Silent = 0):
                     $ KittyX.change_stat("obedience", 70, 35)
     else:
             $ KittyX.AddWord(1,0,0,0,"bottomless") #$ KittyX.History.append("bottomless")
-            if ApprovalCheck(KittyX, 800) and not KittyX.Forced:
+            if Approvalcheck(KittyX, 800) and not KittyX.Forced:
                     $ KittyX.change_stat("inhibition", 60, 15)
                     $ KittyX.change_stat("obedience", 70, 10)
             else:
@@ -4745,12 +4745,12 @@ label Emma_First_Bottomless(Silent = 0):
             "I see you keep it smooth down there." if not EmmaX.Pubes:
                 $ EmmaX.change_face("confused",1)
                 ch_e "Yes?"
-                if ApprovalCheck(EmmaX, 700, "LO"):
+                if Approvalcheck(EmmaX, 700, "LO"):
                         $ EmmaX.change_face("bemused")
                         menu:
                             ch_e "Do you prefer more fuzz?"
                             "Yes":
-                                if ApprovalCheck(EmmaX, 900, "LO"):
+                                if Approvalcheck(EmmaX, 900, "LO"):
                                         $ EmmaX.change_stat("obedience", 50, 30)
                                         $ EmmaX.change_stat("inhibition", 60, 25)
                                         ch_e "I suppose I could let it go. . ."
@@ -4762,7 +4762,7 @@ label Emma_First_Bottomless(Silent = 0):
                                         $ EmmaX.change_stat("love", 80, 10)
                                         ch_e "I'm glad you agree."
                             "No, leave it that way.":
-                                        if ApprovalCheck(EmmaX, 900, "LO"):
+                                        if Approvalcheck(EmmaX, 900, "LO"):
                                                 $ EmmaX.change_face("sly")
                                                 $ EmmaX.change_stat("love", 80, 10)
                                         else:
@@ -4781,7 +4781,7 @@ label Emma_First_Bottomless(Silent = 0):
                 $ EmmaX.change_stat("obedience", 50, 25)
                 $ EmmaX.change_stat("inhibition", 70, -30)
                 $ EmmaX.change_face("angry",2)
-                if not EmmaX.Forced and not ApprovalCheck(EmmaX, 900, "LO"):
+                if not EmmaX.Forced and not Approvalcheck(EmmaX, 900, "LO"):
                         $ EmmaX.recent_history.append("angry")
                         $ EmmaX.daily_history.append("angry")
                         $ EmmaX.change_stat("obedience", 70, 25)
@@ -4789,7 +4789,7 @@ label Emma_First_Bottomless(Silent = 0):
     else:
 
         $ EmmaX.AddWord(1,0,0,0,"bottomless") #$ EmmaX.History.append("bottomless")
-        if ApprovalCheck(EmmaX, 800) and not EmmaX.Forced:
+        if Approvalcheck(EmmaX, 800) and not EmmaX.Forced:
                 $ EmmaX.change_stat("inhibition", 60, 5)
                 $ EmmaX.change_stat("obedience", 70, 10)
         else:
@@ -4833,12 +4833,12 @@ label Laura_First_Bottomless(Silent = 0):
             "I see you keep it natural down there." if LauraX.Pubes:
                 $ LauraX.change_face("confused",1)
                 ch_l "Well. . . yeah."
-                if ApprovalCheck(LauraX, 700, "LO"):
+                if Approvalcheck(LauraX, 700, "LO"):
                     $ LauraX.change_face("bemused")
                     menu:
                         ch_l "What, am I supposed to shave it?"
                         "Yes":
-                            if ApprovalCheck(LauraX, 900, "LO"):
+                            if Approvalcheck(LauraX, 900, "LO"):
                                     $ LauraX.change_stat("obedience", 50, 30)
                                     $ LauraX.change_stat("inhibition", 60, 25)
                                     ch_l "I guess I could. . ."
@@ -4851,7 +4851,7 @@ label Laura_First_Bottomless(Silent = 0):
                                     $ LauraX.change_stat("love", 80, 10)
                                     ch_l "Yeah, I mean, shaving would be a lot of work."
                         "No, leave it that way.":
-                                    if ApprovalCheck(LauraX, 900, "LO"):
+                                    if Approvalcheck(LauraX, 900, "LO"):
                                             $ LauraX.change_face("sly")
                                             $ LauraX.change_stat("love", 80, 10)
                                     else:
@@ -4870,14 +4870,14 @@ label Laura_First_Bottomless(Silent = 0):
                     $ LauraX.change_stat("obedience", 50, 25)
                     $ LauraX.change_stat("inhibition", 70, -30)
                     $ LauraX.change_face("angry",2)
-                    if not LauraX.Forced and not ApprovalCheck(LauraX, 900, "LO"):
+                    if not LauraX.Forced and not Approvalcheck(LauraX, 900, "LO"):
                             $ LauraX.recent_history.append("angry")
                             $ LauraX.daily_history.append("angry")
                             $ LauraX.change_stat("obedience", 70, 25)
                     ch_l "I'll make you a mess. . ."
     else:
         $ LauraX.AddWord(1,0,0,0,"bottomless") #$ LauraX.History.append("bottomless")
-        if ApprovalCheck(LauraX, 800) and not LauraX.Forced:
+        if Approvalcheck(LauraX, 800) and not LauraX.Forced:
                 $ LauraX.change_stat("inhibition", 60, 5)
                 $ LauraX.change_stat("obedience", 70, 10)
         else:
@@ -4919,12 +4919,12 @@ label Jean_First_Bottomless(Silent = 0):
             "I see you got a fire crotch down there." if JeanX.Pubes:
                 $ JeanX.change_face("confused",1)
                 ch_j "Well. . . yeah."
-                if ApprovalCheck(JeanX, 700, "LO"):
+                if Approvalcheck(JeanX, 700, "LO"):
                     $ JeanX.change_face("bemused")
                     menu:
                         ch_j "Do you prefer it smooth?"
                         "Yes":
-                            if ApprovalCheck(JeanX, 900, "LO"):
+                            if Approvalcheck(JeanX, 900, "LO"):
                                     $ JeanX.change_stat("obedience", 90, 30)
                                     $ JeanX.change_stat("inhibition", 200, 25)
                                     ch_j "Hmm, I guess. . ."
@@ -4936,7 +4936,7 @@ label Jean_First_Bottomless(Silent = 0):
                                     $ JeanX.change_stat("love", 80, 10)
                                     ch_j "Of course it is."
                         "No, leave it that way.":
-                                    if ApprovalCheck(JeanX, 900, "LO"):
+                                    if Approvalcheck(JeanX, 900, "LO"):
                                             $ JeanX.change_face("sly")
                                             $ JeanX.change_stat("love", 80, 10)
                                     else:
@@ -4955,7 +4955,7 @@ label Jean_First_Bottomless(Silent = 0):
                     $ JeanX.change_stat("obedience", 90, 25)
                     $ JeanX.change_stat("inhibition", 200, -30)
                     $ JeanX.change_face("angry",2)
-                    if not JeanX.Forced and not ApprovalCheck(JeanX, 900, "LO"):
+                    if not JeanX.Forced and not Approvalcheck(JeanX, 900, "LO"):
                             $ JeanX.recent_history.append("angry")
                             $ JeanX.daily_history.append("angry")
                             $ JeanX.change_stat("obedience", 90, 25)
@@ -4965,14 +4965,14 @@ label Jean_First_Bottomless(Silent = 0):
                     $ JeanX.change_stat("obedience", 90, 25)
                     $ JeanX.change_stat("inhibition", 200, -30)
                     $ JeanX.change_face("angry",2)
-                    if not JeanX.Forced and not ApprovalCheck(JeanX, 900, "LO"):
+                    if not JeanX.Forced and not Approvalcheck(JeanX, 900, "LO"):
                             $ JeanX.recent_history.append("angry")
                             $ JeanX.daily_history.append("angry")
                             $ JeanX.change_stat("obedience", 90, 25)
                     ch_j "Oh, so it's not saggy like [EmmaX.name]'s?"
     else:
         $ JeanX.AddWord(1,0,0,0,"bottomless") #$ JeanX.History.append("bottomless")
-        if ApprovalCheck(JeanX, 800) and not JeanX.Forced:
+        if Approvalcheck(JeanX, 800) and not JeanX.Forced:
                 $ JeanX.change_stat("inhibition", 60, 5)
                 $ JeanX.change_stat("obedience", 90, 10)
         else:
@@ -5017,12 +5017,12 @@ label Jubes_First_Bottomless(Silent = 0):
             "I see you keep it natural down there." if JubesX.Pubes:
                 $ JubesX.change_face("confused",2)
                 ch_v "Well. . . yeah."
-                if ApprovalCheck(JubesX, 700, "LO"):
+                if Approvalcheck(JubesX, 700, "LO"):
                     $ JubesX.change_face("bemused",1)
                     menu:
                         ch_v "Did you. . . prefer it shaved?"
                         "Yes":
-                            if ApprovalCheck(JubesX, 900, "LO"):
+                            if Approvalcheck(JubesX, 900, "LO"):
                                     $ JubesX.change_stat("obedience", 50, 30)
                                     $ JubesX.change_stat("inhibition", 60, 25)
                                     ch_v "I guess I could. . ."
@@ -5033,11 +5033,11 @@ label Jubes_First_Bottomless(Silent = 0):
                         "Up to you, I guess.":
                                     $ JubesX.change_stat("love", 80, 10)
                                     ch_v "Well, yeah, right? Of course."
-                                    if ApprovalCheck(JubesX, 900, "LO"):
+                                    if Approvalcheck(JubesX, 900, "LO"):
                                             $ JubesX.change_stat("inhibition", 60, 10)
                                             $ JubesX.Todo.append("pubes")
                         "No, leave it that way.":
-                                    if ApprovalCheck(JubesX, 900, "LO"):
+                                    if Approvalcheck(JubesX, 900, "LO"):
                                             $ JubesX.change_face("sly")
                                             $ JubesX.change_stat("love", 80, 10)
                                     else:
@@ -5056,14 +5056,14 @@ label Jubes_First_Bottomless(Silent = 0):
                     $ JubesX.change_stat("obedience", 50, 25)
                     $ JubesX.change_stat("inhibition", 70, -30)
                     $ JubesX.change_face("angry",2)
-                    if not JubesX.Forced and not ApprovalCheck(JubesX, 900, "LO"):
+                    if not JubesX.Forced and not Approvalcheck(JubesX, 900, "LO"):
                             $ JubesX.recent_history.append("angry")
                             $ JubesX.daily_history.append("angry")
                             $ JubesX.change_stat("obedience", 70, 25)
                     ch_v "Oh, them's fighting words. . ."
     else:
         $ JubesX.AddWord(1,0,0,0,"bottomless") #$ JubesX.History.append("bottomless")
-        if ApprovalCheck(JubesX, 800) and not JubesX.Forced:
+        if Approvalcheck(JubesX, 800) and not JubesX.Forced:
                 $ JubesX.change_stat("inhibition", 60, 5)
                 $ JubesX.change_stat("obedience", 70, 10)
         else:

@@ -392,7 +392,7 @@ label Primary_SexDialog(GirlA=Primary,phrase = 0, Templust = 0, Templust2 = 0): 
     # end GirlA.Blowjob                                 //////////////////////////////////////////////////////////////////////////////
 
     elif primary_action == "sex":
-            #Partner_primary_action not available
+            #second_girl_primary_action not available
 
             if not action_speed:
                     #if Rog*ue is not moving
@@ -477,7 +477,7 @@ label Primary_SexDialog(GirlA=Primary,phrase = 0, Templust = 0, Templust2 = 0): 
     # end GirlA.Sex                                 //////////////////////////////////////////////////////////////////////////////
 
     elif primary_action == "hotdog":
-            #Partner_primary_action not available
+            #second_girl_primary_action not available
             #Templust2 in this action is how much lower body clothing she has on, it gets cleared at the end.
             $ Templust2 = 2
             if GirlA.Panties and not GirlA.PantiesDown:
@@ -552,7 +552,7 @@ label Primary_SexDialog(GirlA=Primary,phrase = 0, Templust = 0, Templust2 = 0): 
 
 
     elif primary_action == "anal":
-            #Partner_primary_action not available
+            #second_girl_primary_action not available
 
             if not action_speed:
                 $ line = "She seems to be waiting for you to do something. . "
@@ -745,7 +745,7 @@ label Primary_SexDialog(GirlA=Primary,phrase = 0, Templust = 0, Templust2 = 0): 
 
     # end Suck breasts                                 //////////////////////////////////////////////////////////////////////////////
 
-    elif primary_action == "fondle_thighs":  #Partner_primary_action not available
+    elif primary_action == "fondle_thighs":  #second_girl_primary_action not available
                     $ line = "You continue to massage " + GirlA.name + "'s thighs. "
 
                     if GirlA.PantsNum() > 6 and not GirlA.Upskirt:
@@ -1665,7 +1665,7 @@ label Primary_SexDialog(GirlA=Primary,phrase = 0, Templust = 0, Templust2 = 0): 
 
     #End Psychic dialog ////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    elif primary_action == "kiss_you":
+    elif primary_action == "kiss":
                         $ GirlA.Addict -= 3
                         $ GirlA.Addict -= 3 if GirlA == JubesX else 0
                         if GirlA.Kissed > 10 and GirlA.love >= 700:#Loving
@@ -1724,7 +1724,7 @@ label Offhand_Dialog(Girl=Primary, phrase=0):
 
     $ D20X = renpy.random.randint(1,20)
 
-    if offhand_action == "kiss_you":
+    if offhand_action == "kiss":
                 $ line = renpy.random.choice([" Your lips gently slide across hers.",
                         " Her lips part as you hold her close.",
                         " You nibble her neck as she groans in pleasure.",
@@ -1865,7 +1865,7 @@ label Offhand_Dialog(Girl=Primary, phrase=0):
 label Offhand_Set(action_context = action_context, Tempprimary_action = offhand_action,Girl=0):
     #called by various sex activities to set primary_action 2, which is the player's secondary action related to the primary girl
     #if the action_context is "shift focus," it means that the player is attempting to make his secondary action into his primary one.
-    $ Girl = GirlCheck(Girl)
+    $ Girl = Girlcheck(Girl)
     if action_context == "shift focus":
             if Tempprimary_action:
                 $ offhand_action = 0
@@ -1893,7 +1893,7 @@ label Offhand_Set(action_context = action_context, Tempprimary_action = offhand_
                         "You shift your attention to her ass."
 
                         jump before_fondle
-                else: #If offhand_action is "kiss_you"
+                else: #If offhand_action is "kiss"
                         "You go back to kissing her deeply."
                         jump KissPrep
             else: #if there's no offhand_action
@@ -1906,9 +1906,9 @@ label Offhand_Set(action_context = action_context, Tempprimary_action = offhand_
         menu:
             "Also kiss her." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "sex", "anal", "hotdog", "dildo_pussy", "dildo_anal"):
                     "You lean in and start kissing her."
-                    $ offhand_action = "kiss_you"
+                    $ offhand_action = "kiss"
 
-            "Also fondle her breasts." if primary_action in ("kiss_you","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
+            "Also fondle her breasts." if primary_action in ("kiss","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
                     $ offhand_action = "fondle_breasts"
                     call fondle_breasts(Girl)
 
@@ -1916,11 +1916,11 @@ label Offhand_Set(action_context = action_context, Tempprimary_action = offhand_
                     $ offhand_action = "suck_breasts"
                     call suck_breasts(Girl)
 
-            "Also fondle her pussy." if primary_action in ("kiss_you","fondle_breasts","fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
+            "Also fondle her pussy." if primary_action in ("kiss","fondle_breasts","fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
                     $ offhand_action = "fondle_pussy"
                     call fondle_pussy(Girl)
 
-            "Also fondle her ass." if primary_action in ("kiss_you","fondle_breasts","fondle_pussy", "fondle_thighs", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
+            "Also fondle her ass." if primary_action in ("kiss","fondle_breasts","fondle_pussy", "fondle_thighs", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
                     $ offhand_action = "fondle_ass"
                     call fondle_ass(Girl)
 
@@ -1940,8 +1940,8 @@ label Offhand_Set(action_context = action_context, Tempprimary_action = offhand_
     return
 
 label Girl_Self_lines(GirlA = Primary, Mode = "T3", Action = girl_offhand_action, TemplustX = 0, TempFocusX = 0, D20X=0):
-    # The Mode can be T3 for primary_action 3 for a masturbation option, or T5/Partner_offhand_action if it's setting a Threeway action.
-    # call Girl_Self_lines(GirlA,"T5",Partner_offhand_action)  X Rogu*e_Self_lines("T5",Partner_offhand_action)
+    # The Mode can be T3 for primary_action 3 for a masturbation option, or T5/second_girl_offhand_action if it's setting a Threeway action.
+    # call Girl_Self_lines(GirlA,"T5",second_girl_offhand_action)  X Rogu*e_Self_lines("T5",second_girl_offhand_action)
     # This sets a Action if there isn't one, or sets an intitial line
     # Primary if called from main sex dialog, secondary if called from Threesome
 
@@ -1961,7 +1961,7 @@ label Girl_Self_lines(GirlA = Primary, Mode = "T3", Action = girl_offhand_action
                     $ Action = girl_offhand_action
             else:
                     #if Mode == "T5"
-                    $ Action = Partner_offhand_action
+                    $ Action = second_girl_offhand_action
             if not Action:
                     return
             elif Action == "handjob" and not line:
@@ -2151,7 +2151,7 @@ label Girl_Self_lines(GirlA = Primary, Mode = "T3", Action = girl_offhand_action
                 #If this is a primary, girl_offhand_action action
                 $ Templust = TemplustX
         else:
-                #If this is a Secondary, Partner_offhand_action action
+                #If this is a Secondary, second_girl_offhand_action action
                 $ Templust2 = TemplustX
 
 
@@ -2162,17 +2162,17 @@ label Girl_Self_lines(GirlA = Primary, Mode = "T3", Action = girl_offhand_action
 label Girl_Self_Set(GirlA=Primary, Mode = "T3", Action = girl_offhand_action, Length=0, between_event_count=0, Options =[]):
     #nee Rog*ue_Self_Set(Mode = "T3", Action = girl_offhand_action, Length=0, between_event_count=0, Options =[]):
     #If T3/girl_offhand_action is sent, this is for Primary role, offhand behavior
-    #If T5/Partner_offhand_action is sent, this is for Secondary role, threesome masturbation behavior
+    #If T5/second_girl_offhand_action is sent, this is for Secondary role, threesome masturbation behavior
     if Mode == "T3" and primary_action != "masturbation":
                 # This cuts it out if she's submissive or not horny enough to get busy
                 if "sub" in GirlA.Traits:
                         return
 
                 #if she's inexperienced or shy, skip this
-                if GirlA.SEXP >= 50 or ApprovalCheck(GirlA, 500, "I"):
+                if GirlA.SEXP >= 50 or Approvalcheck(GirlA, 500, "I"):
                     if GirlA.lust <= 30:
                         return
-                elif GirlA.SEXP >= 25 or ApprovalCheck(GirlA, 300, "I"):
+                elif GirlA.SEXP >= 25 or Approvalcheck(GirlA, 300, "I"):
                     if GirlA.lust <= 50:
                         return
                 else:
@@ -2189,7 +2189,7 @@ label Girl_Self_Set(GirlA=Primary, Mode = "T3", Action = girl_offhand_action, Le
                         $ Options.append("vibrator pussy")
 
     else:
-                if GirlA.Hand >= 5 and Mode != "T5" and primary_action in ("fondle_pussy", "fondle_breasts", "fondle_thighs", "kiss_you", "fondle_ass", "suck_breasts"):
+                if GirlA.Hand >= 5 and Mode != "T5" and primary_action in ("fondle_pussy", "fondle_breasts", "fondle_thighs", "kiss", "fondle_ass", "suck_breasts"):
                         #if this is about the primary girl, and she's done handys, and you're feeling her up, she might feel you up
                         $ Options.append("handjob")
 
@@ -2262,7 +2262,7 @@ label Girl_Self_Set(GirlA=Primary, Mode = "T3", Action = girl_offhand_action, Le
     if Mode == "T3": #Sets Action based on the result
         $ girl_offhand_action = Action
     else:
-        $ Partner_offhand_action = Action
+        $ second_girl_offhand_action = Action
 
     return
 
@@ -2280,7 +2280,7 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
             $ Action = girl_offhand_action
             $ GirlB = Secondary
     else:
-            $ Action = Partner_primary_action
+            $ Action = second_girl_primary_action
 
     if line:
             #if it picked something, it should have set a line and returned
@@ -2338,7 +2338,7 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                                         GirlA.name + " licks " + GirlB.name + "'s palm as she works",
                                         GirlA.name + " takes a turn to stroke a few times before passing it back",
                                         GirlA.name + " and " + GirlB.name + " get into an alternating rhythm"])
-                            $ Templust2 += 1 if GirlB.GirlLikeCheck(GirlA) >= 800 else 0
+                            $ Templust2 += 1 if GirlB.GirlLikecheck(GirlA) >= 800 else 0
                         else:
                             if primary_action == "blowjob": #if another girl is also blowing
                                     $ line = GirlA.name + " also continues to lick your cock"
@@ -2369,8 +2369,8 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                                         ", then moves her hands from her breasts to rub her neck",
                                         ", firmly pinching her nipples and giving them a tug",
                                         ", passing repeatedly against her rigid nipples"])
-                        $ Templust += 2 if ApprovalCheck(GirlA, 500, "I") else 1  # GirlA's lust
-                        $ Templust2 += 5 if GirlB.GirlLikeCheck(GirlA) >= 800 else 2
+                        $ Templust += 2 if Approvalcheck(GirlA, 500, "I") else 1  # GirlA's lust
+                        $ Templust2 += 5 if GirlB.GirlLikecheck(GirlA) >= 800 else 2
                         $ TempFocus += 1
     # end Fondle breasts Threeway                                //////////////////////////////////////////////////////////////////////////////
 
@@ -2387,8 +2387,8 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                                         ", licking slowly up her chest",
                                         ", firmly nibbling her nipples and giving them a tug",
                                         ", nibbling repeatedly at her rigid nipples"])
-                        $ Templust += 2 if ApprovalCheck(GirlA, 500, "I") else 1  # GirlA's lust
-                        $ Templust2 += 4 if GirlB.GirlLikeCheck(GirlA) >= 800 else 2
+                        $ Templust += 2 if Approvalcheck(GirlA, 500, "I") else 1  # GirlA's lust
+                        $ Templust2 += 4 if GirlB.GirlLikecheck(GirlA) >= 800 else 2
                         $ TempFocus += 1
     # end Suck breasts Threeway                                //////////////////////////////////////////////////////////////////////////////
 
@@ -2447,8 +2447,8 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                                 #End if the other girl is not fondling
                         $ line = line + phrase
 
-                        $ Templust += 2 if ApprovalCheck(GirlA, 500, "I") else 1  # GirlA's lust
-                        $ Templust2 += 5 if GirlB.GirlLikeCheck(GirlA) >= 800 else 3
+                        $ Templust += 2 if Approvalcheck(GirlA, 500, "I") else 1  # GirlA's lust
+                        $ Templust2 += 5 if GirlB.GirlLikecheck(GirlA) >= 800 else 3
                         $ TempFocus += 1
 
     # end fondle pussy Threeway                              /////////////////////////////////////////////////////////////////////////////
@@ -2506,8 +2506,8 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
 
                         $ line = line + phrase
 
-                        $ Templust += 3 if ApprovalCheck(GirlA, 600, "I") else 1  # GirlA's lust
-                        $ Templust2 += 7 if GirlB.GirlLikeCheck(GirlA) >= 800 else 4
+                        $ Templust += 3 if Approvalcheck(GirlA, 600, "I") else 1  # GirlA's lust
+                        $ Templust2 += 7 if GirlB.GirlLikecheck(GirlA) >= 800 else 4
                         $ TempFocus += 3
 
     # end lick pussy Threeway                              /////////////////////////////////////////////////////////////////////////////
@@ -2533,8 +2533,8 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                                         ", kneeding it with slow undulating motions",
                                         ", moving with slow undulating motions"])
 
-                        $ Templust += 1 if ApprovalCheck(GirlA, 500, "I") else 0  # GirlA's lust
-                        $ Templust2 += 3 if GirlB.GirlLikeCheck(GirlA) >= 800 else 1
+                        $ Templust += 1 if Approvalcheck(GirlA, 500, "I") else 0  # GirlA's lust
+                        $ Templust2 += 3 if GirlB.GirlLikecheck(GirlA) >= 800 else 1
                         $ TempFocus += 1
     # end fondle ass Threeway                              /////////////////////////////////////////////////////////////////////////////
 
@@ -2586,8 +2586,8 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
 
                         if not GirlB.Loose:
                                         $ Templust2 -= 3
-                        $ Templust += 2 if ApprovalCheck(GirlA, 700, "I") else 1  # GirlA's lust
-                        $ Templust2 += 5 if GirlB.GirlLikeCheck(GirlA) >= 800 else 3
+                        $ Templust += 2 if Approvalcheck(GirlA, 700, "I") else 1  # GirlA's lust
+                        $ Templust2 += 5 if GirlB.GirlLikecheck(GirlA) >= 800 else 3
                         $ TempFocus += 1
 
     # end insert ass Threeway                             /////////////////////////////////////////////////////////////////////////////
@@ -2643,27 +2643,27 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
 
                         $ line = line + phrase
 
-                        $ Templust += 3 if ApprovalCheck(GirlA, 800, "I") else 1  # GirlA's lust
-                        $ Templust2 += 4 if GirlB.GirlLikeCheck(GirlA) >= 800 else 2
+                        $ Templust += 3 if Approvalcheck(GirlA, 800, "I") else 1  # GirlA's lust
+                        $ Templust2 += 4 if GirlB.GirlLikecheck(GirlA) >= 800 else 2
                         $ TempFocus += 3
 
     # end lick ass Threeway                              /////////////////////////////////////////////////////////////////////////////
 
     elif Action == "masturbation":
-                        call Girl_Self_lines(GirlA,"T5",Partner_offhand_action)  #nee Rog*ue_Self_lines
+                        call Girl_Self_lines(GirlA,"T5",second_girl_offhand_action)  #nee Rog*ue_Self_lines
                         $ Templust = 0
 
     # end Masturbation Threeway                              /////////////////////////////////////////////////////////////////////////////
 
-    elif Action in ("kiss_you", "kiss girl", "kiss both"):
-                        if primary_action == "blowjob" and GirlA.Blow > 5 and Partner_primary_action == "kiss girl":
+    elif Action in ("kiss", "kiss girl", "kiss both"):
+                        if primary_action == "blowjob" and GirlA.Blow > 5 and second_girl_primary_action == "kiss girl":
                                     $ line = GirlA.name + " also continues to kiss " + GirlB.name
                                     $ line = line + renpy.random.choice([", occasionally taking a lick of your cock as well",
                                             ", licking along her cheek",
                                             ", nudging you out of her mouth to get a deep kiss in",
                                             ", taking the occasional lick down your shaft",
                                             ", nudging her aside to kiss the head of your cock"])
-                        elif primary_action == "blowjob" and Partner_primary_action == "kiss girl":
+                        elif primary_action == "blowjob" and second_girl_primary_action == "kiss girl":
                                     $ line = GirlA.name + " also continues to kiss " + GirlB.name
                                     $ line = line + renpy.random.choice([", occasionally bumping into your cock as well",
                                             ", licking along her cheek",
@@ -2681,7 +2681,7 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                                                 ", their tongues swirl around each other",
                                                 ", occasionally nibbling at her ears",
                                                 ", trailing kisses down her neck"])
-                                    elif Action == "kiss_you":
+                                    elif Action == "kiss":
                                         $ line = GirlA.name + " also continues to make out with you"
                                         $ line = line + renpy.random.choice([", occasionally coming up for air",
                                                 ", licking along your cheek",
@@ -2704,9 +2704,9 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                                                 ", their tongues swirl around each other",
                                                 ", occasionally nibbling at her ears",
                                                 ", trailing kisses down her neck"])
-                        $ Templust += 1 if ApprovalCheck(GirlA, 500, "I") else 0  # GirlA's lust
-                        $ Templust += 1 if GirlA.GirlLikeCheck(GirlB) >= 800 else 0
-                        $ Templust2 += 2 if GirlB.GirlLikeCheck(GirlA) >= 800 else 1
+                        $ Templust += 1 if Approvalcheck(GirlA, 500, "I") else 0  # GirlA's lust
+                        $ Templust += 1 if GirlA.GirlLikecheck(GirlB) >= 800 else 0
+                        $ Templust2 += 2 if GirlB.GirlLikecheck(GirlA) >= 800 else 1
                         $ TempFocus += 1
     # end Kissing Threeway                              /////////////////////////////////////////////////////////////////////////////
 
@@ -2717,15 +2717,15 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
                                         ", glancing at the door",
                                         ", taking in " + GirlB.name + "'s body",
                                         ", transfixed by the action"])
-                        $ Templust += 1 if GirlA.GirlLikeCheck(GirlB) >= 600 else 0  # GirlA's lust
-                        $ Templust += 2 if GirlA.GirlLikeCheck(GirlB) >= 800 else 1  # GirlA's lust
-                        $ Templust2 += 1 if ApprovalCheck(GirlB, 500, "I") else 0
-                        $ Templust2 += 1 if ApprovalCheck(GirlB, 700, "I") else 0
+                        $ Templust += 1 if GirlA.GirlLikecheck(GirlB) >= 600 else 0  # GirlA's lust
+                        $ Templust += 2 if GirlA.GirlLikecheck(GirlB) >= 800 else 1  # GirlA's lust
+                        $ Templust2 += 1 if Approvalcheck(GirlB, 500, "I") else 0
+                        $ Templust2 += 1 if Approvalcheck(GirlB, 700, "I") else 0
                         $ TempFocus += 1
     # end watching Threeway                              /////////////////////////////////////////////////////////////////////////////
 
     else:
-        "Nothing triggered. 1:[primary_action], 2:[offhand_action], 3:[girl_offhand_action], 4:[Partner_primary_action], 5:[Partner_offhand_action]" #diagnostic
+        "Nothing triggered. 1:[primary_action], 2:[offhand_action], 3:[girl_offhand_action], 4:[second_girl_primary_action], 5:[second_girl_offhand_action]" #diagnostic
 
     # Wrap-up
     $ Templust2 += 2
@@ -2742,9 +2742,9 @@ label SexDialog_Threeway(GirlA = Secondary, Mode = 0, Action = 0, GirlB = Primar
 label Three_Change(LeadGirl = Primary, SecondGirl = Partner, D20S=0, Primarylust=0, Secondarylust=0):
         #this is called when the player wants to change over a threeway behavior, and revolves around the partner girl
         # if changes what the Partner does to the lead girl
-        # for Threeway secondary activity: #nee Rogue_Threeway_Set("preset", 0, Partner_primary_action, "ActiveGirl")
+        # for Threeway secondary activity: #nee Rogue_Threeway_Set("preset", 0, second_girl_primary_action, "ActiveGirl")
         # call Three_Change(Primary,Partner)
-        # call Threeway_Set(KittyX,"preset",0,Partner_primary_action,RogueX)
+        # call Threeway_Set(KittyX,"preset",0,second_girl_primary_action,RogueX)
         if LeadGirl not in all_Girls:
                 return
         if Partner == LeadGirl:
@@ -2755,47 +2755,47 @@ label Three_Change(LeadGirl = Primary, SecondGirl = Partner, D20S=0, Primarylust
             "about [LeadGirl.name]. . .": #about the primary girl. . .
                 menu:
                     ch_p "about [LeadGirl.name]. . ."
-                    "why don't you kiss her?" if Partner_offhand_action != "kiss girl" and Partner_offhand_action != "kiss both":
-                                    call Threeway_Set(SecondGirl,"kiss girl", 0, Partner_primary_action, LeadGirl)
-                    "why don't you grab her tits?" if Partner_primary_action != "fondle_breasts":
-                                    call Threeway_Set(SecondGirl,"fondle_breasts",0, Partner_primary_action, LeadGirl)
-                    "why don't you suck her breasts?" if Partner_primary_action != "suck_breasts":
-                                    call Threeway_Set(SecondGirl,"suck_breasts",0, Partner_primary_action, LeadGirl)
-                    "why don't you finger her?" if Partner_primary_action != "fondle_pussy":
-                                    call Threeway_Set(SecondGirl,"fondle_pussy",0, Partner_primary_action, LeadGirl)
-                    "why don't you go down on her?" if Partner_primary_action != "eat_pussy":
-                                    call Threeway_Set(SecondGirl,"eat_pussy", 0, Partner_primary_action, LeadGirl)
-                    "why don't you grab her ass?" if Partner_primary_action != "fondle_ass":
-                                    call Threeway_Set(SecondGirl,"fondle_ass", 0, Partner_primary_action, LeadGirl)
-                    "why don't you lick her ass?" if Partner_primary_action != "eat_ass":
-                                    call Threeway_Set(SecondGirl,"eat_ass", 0, Partner_primary_action, LeadGirl)
+                    "why don't you kiss her?" if second_girl_offhand_action != "kiss girl" and second_girl_offhand_action != "kiss both":
+                                    call Threeway_Set(SecondGirl,"kiss girl", 0, second_girl_primary_action, LeadGirl)
+                    "why don't you grab her tits?" if second_girl_primary_action != "fondle_breasts":
+                                    call Threeway_Set(SecondGirl,"fondle_breasts",0, second_girl_primary_action, LeadGirl)
+                    "why don't you suck her breasts?" if second_girl_primary_action != "suck_breasts":
+                                    call Threeway_Set(SecondGirl,"suck_breasts",0, second_girl_primary_action, LeadGirl)
+                    "why don't you finger her?" if second_girl_primary_action != "fondle_pussy":
+                                    call Threeway_Set(SecondGirl,"fondle_pussy",0, second_girl_primary_action, LeadGirl)
+                    "why don't you go down on her?" if second_girl_primary_action != "eat_pussy":
+                                    call Threeway_Set(SecondGirl,"eat_pussy", 0, second_girl_primary_action, LeadGirl)
+                    "why don't you grab her ass?" if second_girl_primary_action != "fondle_ass":
+                                    call Threeway_Set(SecondGirl,"fondle_ass", 0, second_girl_primary_action, LeadGirl)
+                    "why don't you lick her ass?" if second_girl_primary_action != "eat_ass":
+                                    call Threeway_Set(SecondGirl,"eat_ass", 0, second_girl_primary_action, LeadGirl)
                     "wait, I meant. . .":
                                     jump Three_Change_Menu
 
             "about me. . .":
                 menu:
                     ch_p "about me. . ."
-                    "why don't you kiss me?" if Partner_offhand_action != "kiss_you" and Partner_offhand_action != "kiss both":
-                                    call Threeway_Set(SecondGirl,"kiss_you", 0, Partner_primary_action, LeadGirl)
-                    "maybe take me in hand?" if Partner_primary_action != "handjob":
-                                    call Threeway_Set(SecondGirl,"handjob", 0, Partner_primary_action, LeadGirl)
-                    "maybe give me a lick?" if Partner_primary_action != "blowjob":
-                                    call Threeway_Set(SecondGirl,"blowjob", 0, Partner_primary_action, LeadGirl)
-                    "why don't you give me a show?" if Partner_primary_action != "masturbation":
-                                    call Threeway_Set(SecondGirl,"masturbation", 0, Partner_primary_action, LeadGirl)
+                    "why don't you kiss me?" if second_girl_offhand_action != "kiss" and second_girl_offhand_action != "kiss both":
+                                    call Threeway_Set(SecondGirl,"kiss", 0, second_girl_primary_action, LeadGirl)
+                    "maybe take me in hand?" if second_girl_primary_action != "handjob":
+                                    call Threeway_Set(SecondGirl,"handjob", 0, second_girl_primary_action, LeadGirl)
+                    "maybe give me a lick?" if second_girl_primary_action != "blowjob":
+                                    call Threeway_Set(SecondGirl,"blowjob", 0, second_girl_primary_action, LeadGirl)
+                    "why don't you give me a show?" if second_girl_primary_action != "masturbation":
+                                    call Threeway_Set(SecondGirl,"masturbation", 0, second_girl_primary_action, LeadGirl)
                     "wait, I meant. . .":
                                     jump Three_Change_Menu
             "never mind.":
                 pass
         return
 
-label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primary_action, GirlB = Primary, State = "watcher", Templust = 0, Templust2 = 0, TempFocus = 0): #rkeljsv
+label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = second_girl_primary_action, GirlB = Primary, State = "watcher", Templust = 0, Templust2 = 0, TempFocus = 0): #rkeljsv
             #nee Rog*ue_Threeway_Set(Preset = 0, Mode = 0,
-            # Action defaults to Partner_primary_action, the action of the seondary girl and GirlB to the lead girl in the scene
+            # Action defaults to second_girl_primary_action, the action of the seondary girl and GirlB to the lead girl in the scene
             # In lesbian mode, Action becomes girl_offhand_action, the secondary action of the primary girl, and GirlB is the secondary girl
             # If Set gets passed a preset, it chooses that preset, otherwise it chooses one randomly
             # for Lesbian: call Threeway_Set(Primary,"suck_breasts", "lesbian", girl_offhand_action,Secondary)
-            # for Threeway: call Threeway_Set(SecondGirl,"fondle_breasts",0, Partner_primary_action, LeadGirl)
+            # for Threeway: call Threeway_Set(SecondGirl,"fondle_breasts",0, second_girl_primary_action, LeadGirl)
             # position_change_timer is a value that gets set to a few digits lower then the current Round
             # The girl will not arbitrarily change motions until after this value has been passed.
 
@@ -2810,10 +2810,10 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                             elif girl_offhand_action and position_change_timer <= Round:
                                     # If a girl_offhand_action is already set and it's under the count, return
                                     return
-                    elif Partner_primary_action and D20 < 15 and Partner_primary_action != "watch":
+                    elif second_girl_primary_action and D20 < 15 and second_girl_primary_action != "watch":
                                     #If there is a trigger, it's not set to "watch," and the roll is good, continue
                                     return
-                    elif Partner_primary_action and position_change_timer <= Round:
+                    elif second_girl_primary_action and position_change_timer <= Round:
                                     # if there's not a Preset, and it's only been X turns since the last change, return.
                                     return
             $ Options = ["watch", "masturbation", "masturbation", "masturbation"]
@@ -2830,12 +2830,12 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                     # if this was sent from a Lesbian action. . .
                     $ State = "lesbian"
                     $ Options = ["kiss girl","kiss girl"]
-                    if Preset in ("handjob","blowjob","kiss_you","kiss both"):
+                    if Preset in ("handjob","blowjob","kiss","kiss both"):
                             #if you send it presets that you want the other girl to touch you. . .
                             $ State = "threeway"
                     elif Preset:
                             pass
-                    elif GirlA.GirlLikeCheck(GirlB) >= 600 and ApprovalCheck(GirlA, 500, "I"):
+                    elif GirlA.GirlLikecheck(GirlB) >= 600 and Approvalcheck(GirlA, 500, "I"):
                             #if she likes the other girl, and is unihibited. . .
                             pass
                     else:
@@ -2848,16 +2848,16 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                                             $ GirlA.Les += 1
                                             $ GirlA.recent_history.append("lesbian")
                             return
-            elif not ApprovalCheck(GirlA, 500, "I"):
+            elif not Approvalcheck(GirlA, 500, "I"):
                     # If GirlA is too timid to do anything, stick to neutral options
                     pass
-            elif GirlA.GirlLikeCheck(GirlB) >= 600 and ApprovalCheck(GirlA, (1500-(10*GirlA.Les)-(10*(GirlA.GirlLikeCheck(GirlB)-60)))):
+            elif GirlA.GirlLikecheck(GirlB) >= 600 and Approvalcheck(GirlA, (1500-(10*GirlA.Les)-(10*(GirlA.GirlLikecheck(GirlB)-60)))):
                     #If she likes both of you a lot, threeway
                     $ State = "threeway"
-            elif ApprovalCheck(GirlA, 1000):
+            elif Approvalcheck(GirlA, 1000):
                     #If she likes you well enough, Hetero
                     $ State = "hetero"
-            elif GirlA.GirlLikeCheck(GirlB) >= 700:
+            elif GirlA.GirlLikecheck(GirlB) >= 700:
                     #if she doesn't like you but likes the other girl, lesbian
                     $ State = "lesbian"
 
@@ -2865,18 +2865,18 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                 #if she's into girls, add girl-touching options
                 $ Options.extend(("fondle_breasts","suck_breasts","fondle_pussy","fondle_ass","kiss girl"))
 
-                if ApprovalCheck(GirlA, 800, "I") or GirlA.GirlLikeCheck(GirlB) >= 800:
+                if Approvalcheck(GirlA, 800, "I") or GirlA.GirlLikecheck(GirlB) >= 800:
                     $ Options.append("eat_pussy")
-                if ApprovalCheck(GirlA, 900, "I") and GirlA.GirlLikeCheck(GirlB) >= 900:
+                if Approvalcheck(GirlA, 900, "I") and GirlA.GirlLikecheck(GirlB) >= 900:
                     $ Options.append("eat_ass")
 
 
             if State == "hetero" or State == "threeway":
                 #if she's into you, add you-touching options
                 if primary_action == "anal":
-                    $ Options.extend(("handjob","kiss_you","kiss_you"))
+                    $ Options.extend(("handjob","kiss","kiss"))
                 else:
-                    $ Options.extend(("handjob","blowjob","kiss_you"))
+                    $ Options.extend(("handjob","blowjob","kiss"))
             $ renpy.random.shuffle(Options)
 
             if Preset:
@@ -2897,7 +2897,7 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                                 ch_s "Ok, we can do that. . ."
                         elif GirlA == JubesX:
                                 ch_v "Ok, I can do that. . ."
-                elif ApprovalCheck(GirlA, 750, "I") or ApprovalCheck(GirlA, 1500):
+                elif Approvalcheck(GirlA, 750, "I") or Approvalcheck(GirlA, 1500):
                         #if the suggestion is not in the options, but she's game anyway
                         $ Options[0] = Preset
                         if GirlA == RogueX:
@@ -2937,7 +2937,7 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                     return
             elif Mode == "lesbian":
                     $ line = GirlA.name + " shifts her position"
-            elif not Partner_primary_action or Partner_primary_action == "masturbation":
+            elif not second_girl_primary_action or second_girl_primary_action == "masturbation":
                     #If this is the first action,
                     $ line = GirlA.name + " moves closer"
             else:
@@ -2947,7 +2947,7 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
 
             if Options[0] == "masturbation":
                         $ Action = "masturbation"
-                        call Girl_Self_lines(GirlA,"T5",Partner_offhand_action)  #nee Rog*ue_Self_lines
+                        call Girl_Self_lines(GirlA,"T5",second_girl_offhand_action)  #nee Rog*ue_Self_lines
             elif Options[0] == "handjob":
                         call Seen_First_Peen(GirlA,GirlB,React=1)
                         $ line = line + " before she slides her hand down and firmly grabs your dick"
@@ -3020,8 +3020,8 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                         if "lesbian" not in GirlB.recent_history:
                                 $ GirlB.Les += 1
                                 $ GirlB.recent_history.append("lesbian")
-                        $ Templust += 2 if ApprovalCheck(GirlA, 500, "I") else 1  # GirlA's lust
-                        $ Templust2 += 4 if GirlB.GirlLikeCheck(GirlA) >= 800 else 2
+                        $ Templust += 2 if Approvalcheck(GirlA, 500, "I") else 1  # GirlA's lust
+                        $ Templust2 += 4 if GirlB.GirlLikecheck(GirlA) >= 800 else 2
                         $ TempFocus += 1
             elif Options[0] == "suck_breasts":
 
@@ -3033,8 +3033,8 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                         if "lesbian" not in GirlB.recent_history:
                                 $ GirlB.Les += 1
                                 $ GirlB.recent_history.append("lesbian")
-                        $ Templust += 2 if ApprovalCheck(GirlA, 500, "I") else 1  # GirlA's lust
-                        $ Templust2 += 5 if GirlB.GirlLikeCheck(GirlA) >= 800 else 2
+                        $ Templust += 2 if Approvalcheck(GirlA, 500, "I") else 1  # GirlA's lust
+                        $ Templust2 += 5 if GirlB.GirlLikecheck(GirlA) >= 800 else 2
                         $ TempFocus += 1
             elif Options[0] == "fondle_pussy":
 
@@ -3046,8 +3046,8 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                         if "lesbian" not in GirlB.recent_history:
                                 $ GirlB.Les += 1
                                 $ GirlB.recent_history.append("lesbian")
-                        $ Templust += 2 if ApprovalCheck(GirlA, 500, "I") else 1  # GirlA's lust
-                        $ Templust2 += 5 if GirlB.GirlLikeCheck(GirlA) >= 800 else 3
+                        $ Templust += 2 if Approvalcheck(GirlA, 500, "I") else 1  # GirlA's lust
+                        $ Templust2 += 5 if GirlB.GirlLikecheck(GirlA) >= 800 else 3
                         $ TempFocus += 2
             elif Options[0] == "eat_pussy":
 
@@ -3059,8 +3059,8 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                         if "lesbian" not in GirlB.recent_history:
                                 $ GirlB.Les += 1
                                 $ GirlB.recent_history.append("lesbian")
-                        $ Templust += 3 if ApprovalCheck(GirlA, 600, "I") else 1  # GirlA's lust
-                        $ Templust2 += 8 if GirlB.GirlLikeCheck(GirlA) >= 800 else 5
+                        $ Templust += 3 if Approvalcheck(GirlA, 600, "I") else 1  # GirlA's lust
+                        $ Templust2 += 8 if GirlB.GirlLikecheck(GirlA) >= 800 else 5
                         $ TempFocus += 3
             elif Options[0] == "fondle_ass":
 
@@ -3072,8 +3072,8 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                         if "lesbian" not in GirlB.recent_history:
                                 $ GirlB.Les += 1
                                 $ GirlB.recent_history.append("lesbian")
-                        $ Templust += 1 if ApprovalCheck(GirlA, 400, "I") else 0  # GirlA's lust
-                        $ Templust2 += 3 if GirlB.GirlLikeCheck(GirlA) >= 600 else 2
+                        $ Templust += 1 if Approvalcheck(GirlA, 400, "I") else 0  # GirlA's lust
+                        $ Templust2 += 3 if GirlB.GirlLikecheck(GirlA) >= 600 else 2
                         $ TempFocus += 1
             elif Options[0] == "eat_ass":
 
@@ -3085,30 +3085,30 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                         if "lesbian" not in GirlB.recent_history:
                                 $ GirlB.Les += 1
                                 $ GirlB.recent_history.append("lesbian")
-                        $ Templust += 3 if ApprovalCheck(GirlA, 800, "I") else 1  # GirlA's lust
-                        $ Templust2 += 6 if GirlB.GirlLikeCheck(GirlA) >= 800 else 4
+                        $ Templust += 3 if Approvalcheck(GirlA, 800, "I") else 1  # GirlA's lust
+                        $ Templust2 += 6 if GirlB.GirlLikecheck(GirlA) >= 800 else 4
                         $ TempFocus += 2
 
             elif Options[0] == "kiss girl" or Mode == "lesbian":
                         $ line = line + " and gives " + GirlB.name + " a passionate kiss"
                         $ Action = "kiss girl"
-                        if Mode != "lesbian" and "kiss_you" in Options:
-                                if primary_action == "kiss_you":
+                        if Mode != "lesbian" and "kiss" in Options:
+                                if primary_action == "kiss":
                                         $ Action = "kiss both"
-                                elif girl_offhand_action == "kiss_you":
+                                elif girl_offhand_action == "kiss":
                                         $ Action = "kiss both"
-                                elif Partner_primary_action == "kiss_you":
+                                elif second_girl_primary_action == "kiss":
                                         $ Action = "kiss both"
                         $ TempFocus += 1
-            elif Options[0] == "kiss_you":
+            elif Options[0] == "kiss":
                         $ line = line + " and gives you a passionate kiss"
-                        $ Action = "kiss_you"
+                        $ Action = "kiss"
                         if "kiss girl" in Options:
-                                if primary_action == "kiss_you":
+                                if primary_action == "kiss":
                                         $ Action = "kiss both"
-                                elif girl_offhand_action == "kiss_you":
+                                elif girl_offhand_action == "kiss":
                                         $ Action = "kiss both"
-                                elif Partner_primary_action == "kiss_you":
+                                elif second_girl_primary_action == "kiss":
                                         $ Action = "kiss both"
                         $ Templust += 1
                         $ TempFocus += 1
@@ -3116,10 +3116,10 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
             else:
                         $ line = GirlA.name + " is just watching the two of you intently"
                         $ Action = "watch"
-                        $ Templust += 1 if GirlA.GirlLikeCheck(GirlB) >= 600 else 0  # GirlA's lust
-                        $ Templust += 2 if GirlA.GirlLikeCheck(GirlB) >= 800 else 1  # GirlA's lust
-                        $ Templust2 += 1 if ApprovalCheck(GirlB, 500, "I") else 0
-                        $ Templust2 += 1 if ApprovalCheck(GirlB, 700, "I") else 0
+                        $ Templust += 1 if GirlA.GirlLikecheck(GirlB) >= 600 else 0  # GirlA's lust
+                        $ Templust += 2 if GirlA.GirlLikecheck(GirlB) >= 800 else 1  # GirlA's lust
+                        $ Templust2 += 1 if Approvalcheck(GirlB, 500, "I") else 0
+                        $ Templust2 += 1 if Approvalcheck(GirlB, 700, "I") else 0
                         $ TempFocus += 1
 
             if Action == "kiss girl" or Action == "kiss both":
@@ -3130,9 +3130,9 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                         if "lesbian" not in GirlB.recent_history:
                                 $ GirlB.Les += 1
                                 $ GirlB.recent_history.append("lesbian")
-                        $ Templust += 1 if ApprovalCheck(GirlA, 500, "I") else 0  # GirlA's lust
-                        $ Templust += 1 if GirlA.GirlLikeCheck(GirlB) >= 800 else 0
-                        $ Templust2 += 2 if GirlB.GirlLikeCheck(GirlA) >= 800 else 1
+                        $ Templust += 1 if Approvalcheck(GirlA, 500, "I") else 0  # GirlA's lust
+                        $ Templust += 1 if GirlA.GirlLikecheck(GirlB) >= 800 else 0
+                        $ Templust2 += 2 if GirlB.GirlLikecheck(GirlA) >= 800 else 1
                         $ TempFocus += 1
 
             # Wrap-up
@@ -3149,11 +3149,11 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
                     $ Secondarylust += (Templust2 * 3)
             elif Mode == "start":
                     #Sets Rog*ue's action and lust if this is a starting action
-                    $ Partner_primary_action = Action
+                    $ second_girl_primary_action = Action
                     $ GirlA.lust += Templust2
             else:
                     #Sets Secondary girl's action
-                    $ Partner_primary_action = Action
+                    $ second_girl_primary_action = Action
                     $ Secondarylust += Templust
                     $ Primarylust += Templust2
             if Preset:
@@ -3164,7 +3164,7 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = Partner_primar
 
             return
 
-label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_action=Partner_primary_action, ActiveGirl=0):
+label Dirty_Talk(Girl = Primary, D20=0, Tempcheck=0, phrase=0, Tempprimary_action=second_girl_primary_action, ActiveGirl=0):
     if primary_action == "strip" or not primary_action:
         return
 
@@ -3176,13 +3176,13 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
             #RNG said partner says a line
             $ Girl = Partner
             $ ActiveGirl = Primary
-            $ TempCheck = Partner_primary_action
-            $ Tempprimary_action = Partner_primary_action
+            $ Tempcheck = second_girl_primary_action
+            $ Tempprimary_action = second_girl_primary_action
     else: #if D20 == 2 or 3
             #RNG said lead girl says a line
             $ Girl = Primary
             $ ActiveGirl = Secondary
-            $ TempCheck = primary_action
+            $ Tempcheck = primary_action
             $ Tempprimary_action = girl_offhand_action
 
     $ D20 = renpy.random.randint(1, 20)
@@ -3225,7 +3225,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Ya like that, " + ActiveGirl.name + "?"
                                     ])
 
-            elif TempCheck == "masturbation":
+            elif Tempcheck == "masturbation":
                     if "unseen" not in RogueX.recent_history:
                             #if she knows you're watching
                             if D20 <= 3:
@@ -3258,7 +3258,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
 
                     if D20 <= 10:
                             pass
-                    elif RogueX.SEXP <= 20 or TempCheck == "kiss_you":
+                    elif RogueX.SEXP <= 20 or Tempcheck == "kiss":
                             #If she's relatively inexperienced
                             $ phrase = renpy.random.choice([
                                     "Touching ya is so amazing, " + RogueX.Petname + ".",
@@ -3267,13 +3267,13 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Am I doing that right?",
                                     "Ya like that, " + RogueX.Petname + "?"
                                     ])
-                    elif TempCheck == "handjob":
+                    elif Tempcheck == "handjob":
                         $ phrase = renpy.random.choice([
                                     "Your cock is so warm. . .",
                                     "Seems like you like my hand, huh, " + RogueX.Petname + "?",
                                     "I can feel you get harder in my hand. . .",
                                     ])
-                    elif TempCheck == "blowjob":
+                    elif Tempcheck == "blowjob":
                         $ phrase = renpy.random.choice([
                                     "Your cock is so warm. . .",
                                     "You taste so nice, " + RogueX.Petname + ".",
@@ -3281,14 +3281,14 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Mmhmhm. . .",
                                     "-gulp-. . .",
                                     ])
-                    elif TempCheck == "titjob":
+                    elif Tempcheck == "titjob":
                         $ phrase = renpy.random.choice([
                                     "Your cock is so warm. . .",
                                     "I can feel you between my breasts, " + RogueX.Petname + ".",
                                     "I can feel you get harder in there. . ."
                                     ])
-                    elif TempCheck == "sex" or TempCheck == "anal":
-                        if D20 <= 3 and TempCheck == "anal" and RogueX.Loose <= 1:
+                    elif Tempcheck == "sex" or Tempcheck == "anal":
+                        if D20 <= 3 and Tempcheck == "anal" and RogueX.Loose <= 1:
                             $ phrase = "It. . .hurts. But it kinda feels good, too." #anal
                         else:
                             $ phrase = renpy.random.choice([
@@ -3360,7 +3360,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "You taste so good. . ."
                                     ])
 
-            elif TempCheck == "masturbation":
+            elif Tempcheck == "masturbation":
                     if "unseen" not in KittyX.recent_history:
                             #if she knows you're watching
                             if D20 <= 3:
@@ -3393,7 +3393,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
 
                     if D20 <= 10:
                             pass
-                    elif KittyX.SEXP <= 30 or TempCheck == "kiss_you":
+                    elif KittyX.SEXP <= 30 or Tempcheck == "kiss":
                             #If she's relatively inexperienced
                             $ phrase = renpy.random.choice([
                                     "You're so amazing, " + KittyX.Petname + ".",
@@ -3401,14 +3401,14 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Heh. . .{i}somebody{/i} seems to like that.",
                                     "That's, like, {i}so{/i} good."
                                     ])
-                    elif TempCheck == "handjob":
+                    elif Tempcheck == "handjob":
                         $ phrase = renpy.random.choice([
                                     "Your cock is so warm. . .",
                                     "I love the way it"+KittyX.like+"feels in my hands.",
                                     "Seems like you like my hand, huh, " + RogueX.Petname + "?",
                                     "I can feel you get harder in my hand. . .",
                                     ])
-                    elif TempCheck == "blowjob":
+                    elif Tempcheck == "blowjob":
                         if D20 <= 3:
                             ch_k "I hope you don't think I'm[KittyX.like]a slut for saying this. . ."
                             $ phrase = "but I love how you taste, " + KittyX.Petname + "."
@@ -3420,14 +3420,14 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                         "Mmhmhm. . .",
                                         "-gulp-. . .",
                                         ])
-                    elif TempCheck == "titjob":
+                    elif Tempcheck == "titjob":
                         $ phrase = renpy.random.choice([
                                     "Your cock is so warm. . .",
                                     "I can feel you between my breasts, " + KittyX.Petname + ".",
                                     "I can feel you get harder in there. . ."
                                     ])
-                    elif TempCheck == "sex" or TempCheck == "anal":
-                        if D20 <= 3 and TempCheck == "anal" and KittyX.Loose <= 1:
+                    elif Tempcheck == "sex" or Tempcheck == "anal":
+                        if D20 <= 3 and Tempcheck == "anal" and KittyX.Loose <= 1:
                             $ phrase = "Please. . .go slow, 'kay?  You feel so {i}big{/i}."
                         else:
                             $ phrase = renpy.random.choice([
@@ -3496,7 +3496,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Delicious. . ."
                                     ])
 
-            elif TempCheck == "masturbation":
+            elif Tempcheck == "masturbation":
                     if "unseen" not in EmmaX.recent_history:
                             #if she knows you're watching
                             if D20 <= 3:
@@ -3529,7 +3529,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
 
                     if D20 <= 10:
                             pass
-                    elif EmmaX.SEXP <= 30 or TempCheck == "kiss_you":
+                    elif EmmaX.SEXP <= 30 or Tempcheck == "kiss":
                             #If she's relatively inexperienced
                             $ phrase = renpy.random.choice([
                                     "You're incredible, " + EmmaX.Petname + ".",
@@ -3537,14 +3537,14 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Well, that certainly got a positive response.",
                                     "Exceptional work, darling.",
                                     ])
-                    elif TempCheck == "handjob":
+                    elif Tempcheck == "handjob":
                         $ phrase = renpy.random.choice([
                                     "Your cock is so very warm. . .",
                                     "I trust you're enjoying the massage?",
                                     "I take it you're enjoying yourself, " + EmmaX.Petname + "?",
                                     "I can feel you grow harder. . .",
                                     ])
-                    elif TempCheck == "blowjob":
+                    elif Tempcheck == "blowjob":
                         $ phrase = renpy.random.choice([
                                     "So delicious. . .",
                                     "I must say, I enjoy the flavor, " + EmmaX.Petname + ".",
@@ -3552,14 +3552,14 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Mmhmhm. . .",
                                     "-gulp-. . .",
                                     ])
-                    elif TempCheck == "titjob":
+                    elif Tempcheck == "titjob":
                         $ phrase = renpy.random.choice([
                                     "Your cock is so warm. . .",
                                     "I can feel you between my breasts, " + EmmaX.Petname + ".",
                                     "Don't get lost in there now . .",
                                     "I can feel you get harder in there. . ."
                                     ])
-                    elif TempCheck == "sex" or TempCheck == "anal":
+                    elif Tempcheck == "sex" or Tempcheck == "anal":
                             $ phrase = renpy.random.choice([
                                     "Mmmm, give me more like that. . .",
                                     "Nngh, how filling. . .",
@@ -3595,9 +3595,9 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
     #end Primary Emma
     elif Girl == LauraX:
             # if the Girl is Laura. . .
-            if ApprovalCheck(LauraX, 1500):
+            if Approvalcheck(LauraX, 1500):
                     $ D20 -= 5
-            elif ApprovalCheck(LauraX, 1200):
+            elif Approvalcheck(LauraX, 1200):
                     $ D20 -= 3
             if D20 >= 10:
                     #drops it down to the generic grunts
@@ -3640,7 +3640,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Tasty. . ."
                                     ])
 
-            elif TempCheck == "masturbation":
+            elif Tempcheck == "masturbation":
                     if "unseen" not in LauraX.recent_history:
                             #if she knows you're watching
                             if D20 <= 3:
@@ -3672,7 +3672,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
 
                     if D20 <= 5:
                             pass
-                    elif LauraX.SEXP <= 30 or TempCheck == "kiss_you":
+                    elif LauraX.SEXP <= 30 or Tempcheck == "kiss":
                             #If she's relatively inexperienced
                             $ phrase = renpy.random.choice([
                                     "You're good at this, " + LauraX.Petname + ".",
@@ -3680,14 +3680,14 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Oh, hey down there.",
                                     "Hmm, like that.",
                                     ])
-                    elif TempCheck == "handjob":
+                    elif Tempcheck == "handjob":
                         $ phrase = renpy.random.choice([
                                     "Hmm, your dick's so warm. . .",
                                     "This working for you?",
                                     "Seems like you're having fun, " + LauraX.Petname + "?",
                                     "You seem to be getting harder. . .",
                                     ])
-                    elif TempCheck == "blowjob":
+                    elif Tempcheck == "blowjob":
                         $ phrase = renpy.random.choice([
                                     "Mmm, delicious. . .",
                                     "That's an interesting taste, " + LauraX.Petname + ".",
@@ -3696,13 +3696,13 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Mmhmhm. . .",
                                     "-gulp-. . .",
                                     ])
-                    elif TempCheck == "titjob":
+                    elif Tempcheck == "titjob":
                         $ phrase = renpy.random.choice([
                                     "Your cock is so warm. . .",
                                     "I can feel you between my breasts, " + LauraX.Petname + ".",
                                     "I can feel you get harder in there. . ."
                                     ])
-                    elif TempCheck == "sex" or TempCheck == "anal":
+                    elif Tempcheck == "sex" or Tempcheck == "anal":
                             $ phrase = renpy.random.choice([
                                     "Mmmm, yeah, gimme more like that. . .",
                                     "Nngh, how filling. . .",
@@ -3738,9 +3738,9 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
 
     elif Girl == JeanX:
             # if the Girl is Jean. . .
-            if ApprovalCheck(JeanX, 1500):
+            if Approvalcheck(JeanX, 1500):
                     $ D20 -= 5
-            elif ApprovalCheck(JeanX, 1200):
+            elif Approvalcheck(JeanX, 1200):
                     $ D20 -= 3
             if D20 >= 10:
                     #drops it down to the generic grunts
@@ -3771,7 +3771,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Tasty. . ."
                                     ])
 
-            elif TempCheck == "masturbation":
+            elif Tempcheck == "masturbation":
                     if "unseen" not in JeanX.recent_history:
                             #if she knows you're watching
                             if D20 <= 3:
@@ -3803,7 +3803,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
 
                     if D20 <= 5:
                             pass
-                    elif JeanX.SEXP <= 30 or TempCheck == "kiss_you":
+                    elif JeanX.SEXP <= 30 or Tempcheck == "kiss":
                             #If she's relatively inexperienced
                             $ phrase = renpy.random.choice([
                                     "You're good at this, " + JeanX.Petname + ".",
@@ -3811,14 +3811,14 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Oh, hey down there.",
                                     "Hmm, like that.",
                                     ])
-                    elif TempCheck == "handjob":
+                    elif Tempcheck == "handjob":
                         $ phrase = renpy.random.choice([
                                     "Hmm, your dick's so warm. . .",
                                     "This working for you?",
                                     "Seems like you're having fun, " + JeanX.Petname + "?",
                                     "You seem to be getting harder. . .",
                                     ])
-                    elif TempCheck == "blowjob":
+                    elif Tempcheck == "blowjob":
                         $ phrase = renpy.random.choice([
                                     "Mmm, delicious. . .",
                                     "That's an interesting flavor, " + JeanX.Petname + ".",
@@ -3827,13 +3827,13 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Mmhmhm. . .",
                                     "-gulp-. . .",
                                     ])
-                    elif TempCheck == "titjob":
+                    elif Tempcheck == "titjob":
                         $ phrase = renpy.random.choice([
                                     "Your cock is so warm. . .",
                                     "I can feel you between my breasts, " + JeanX.Petname + ".",
                                     "I can feel you get harder in there. . ."
                                     ])
-                    elif TempCheck == "sex" or TempCheck == "anal":
+                    elif Tempcheck == "sex" or Tempcheck == "anal":
                             $ phrase = renpy.random.choice([
                                     "Mmmm, yeah, gimme more like that. . .",
                                     "Nngh, how filling. . .",
@@ -3896,7 +3896,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Delicious. . ."
                                     ])
 
-            elif TempCheck == "masturbation":
+            elif Tempcheck == "masturbation":
                     if "unseen" not in StormX.recent_history:
                             #if she knows you're watching
                             if D20 <= 3:
@@ -3929,7 +3929,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
 
                     if D20 <= 10:
                             pass
-                    elif StormX.SEXP <= 30 or TempCheck == "kiss_you":
+                    elif StormX.SEXP <= 30 or Tempcheck == "kiss":
                             #If she's relatively inexperienced
                             $ phrase = renpy.random.choice([
                                     "You are incredible, " + StormX.Petname + ".",
@@ -3937,14 +3937,14 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "You appear to have enjoyed that. . .",
                                     "Exceptional!",
                                     ])
-                    elif TempCheck == "handjob":
+                    elif Tempcheck == "handjob":
                         $ phrase = renpy.random.choice([
                                     "Your cock is so very warm. . .",
                                     "You appear to be enjoying the massage?",
                                     "You appear to be enjoying yourself, " + StormX.Petname + "?",
                                     "I can feel you grow harder. . .",
                                     ])
-                    elif TempCheck == "blowjob":
+                    elif Tempcheck == "blowjob":
                         $ phrase = renpy.random.choice([
                                     "So delicious. . .",
                                     "I do enjoy this flavor, " + StormX.Petname + ".",
@@ -3952,14 +3952,14 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Mmhmhm. . .",
                                     "-gulp-. . .",
                                     ])
-                    elif TempCheck == "titjob":
+                    elif Tempcheck == "titjob":
                         $ phrase = renpy.random.choice([
                                     "Your cock is so warm. . .",
                                     "I can feel you between my breasts, " + StormX.Petname + ".",
                                     "Do not get lost in there now . .",
                                     "I can feel you get harder in there. . ."
                                     ])
-                    elif TempCheck == "sex" or TempCheck == "anal":
+                    elif Tempcheck == "sex" or Tempcheck == "anal":
                             $ phrase = renpy.random.choice([
                                     "Mmmm, more like that. . .",
                                     "Nngh, how. . . filling. . .",
@@ -4035,7 +4035,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Yum. . ."
                                     ])
 
-            elif TempCheck == "masturbation":
+            elif Tempcheck == "masturbation":
                     if "unseen" not in JubesX.recent_history:
                             #if she knows you're watching
                             if D20 <= 3:
@@ -4067,7 +4067,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
 
                     if D20 <= 5:
                             pass
-                    elif JubesX.SEXP <= 30 or TempCheck == "kiss_you":
+                    elif JubesX.SEXP <= 30 or Tempcheck == "kiss":
                             #If she's relatively inexperienced
                             $ phrase = renpy.random.choice([
                                     "Oh, um, you seem to know what you're doing, " + JubesX.Petname + ".",
@@ -4075,14 +4075,14 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Oh, nice. . .",
                                     "Hmm, do that one again. . .",
                                     ])
-                    elif TempCheck == "handjob":
+                    elif Tempcheck == "handjob":
                         $ phrase = renpy.random.choice([
                                     "Hmm, your cock's so warm. . .",
                                     "Do you like this?",
                                     "You seem to be having fun, " + JubesX.Petname + ". . .",
                                     "Mmmm, you're getting harder in my hand. . .",
                                     ])
-                    elif TempCheck == "blowjob":
+                    elif Tempcheck == "blowjob":
                         $ phrase = renpy.random.choice([
                                     "Mmm, delicious. . .",
                                     "I can't believe how you taste, " + JubesX.Petname + ".",
@@ -4091,13 +4091,13 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                                     "Mmhmhm. . .",
                                     "-gulp-. . .",
                                     ])
-                    elif TempCheck == "titjob":
+                    elif Tempcheck == "titjob":
                         $ phrase = renpy.random.choice([
                                     "Your cock is so warm. . .",
                                     "I can feel you between my breasts, " + JubesX.Petname + ".",
                                     "I can feel you get harder in there. . ."
                                     ])
-                    elif TempCheck == "sex" or TempCheck == "anal":
+                    elif Tempcheck == "sex" or Tempcheck == "anal":
                             $ phrase = renpy.random.choice([
                                     "Gimme more. . . & more. . .",
                                     "Nngh, filling me. . .",
@@ -4133,7 +4133,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
 
     if not phrase:
             #if nothing else was chosen. . .
-            if not ActiveGirl or Partner_primary_action == "masturbation":
+            if not ActiveGirl or second_girl_primary_action == "masturbation":
                     $ phrase = Girl.Petname
             else:
                     $ phrase = ActiveGirl.name
@@ -4144,7 +4144,7 @@ label Dirty_Talk(Girl = Primary, D20=0, TempCheck=0, phrase=0, Tempprimary_actio
                     "Oooh, " + phrase + ", yes. . ."
                     ])
 
-    call Anyline(Girl,phrase)
+    Girl.voice "[phrase]"
 
     return
 
@@ -4291,9 +4291,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
         if Girl not in all_Girls:
                 return
         if Girl == RogueX:
-                if Type == "switch":
-                                ch_r "Mmm, so what else did you have in mind?"
-                elif Type == "partner": #if a partner leaves during a scene
+                if Type == "partner": #if a partner leaves during a scene
                                 ch_r "Sorry about that."
                 elif Type == "swallowgood":
                                 ch_r "That was real sweet, [Girl.Petname]."
@@ -4308,9 +4306,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
 
         elif Girl == KittyX:
-                if Type == "switch":
-                                ch_k "Mmm, so what else did you have in mind?"
-                elif Type == "partner":
+                if Type == "partner":
                                 ch_k "Well that was awkward."
                 elif Type == "swallowgood":
                                 ch_k "Mmm, creamy."
@@ -4325,9 +4321,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
 
         elif Girl == EmmaX:
-                if Type == "switch":
-                                ch_e "Ok then, what were you thinking?"
-                elif Type == "partner":
+                if Type == "partner":
                                 ch_e "Hmm, that was uncomfortable."
                 elif Type == "swallowgood":
                                 ch_e "Delectable, [Girl.Petname]."
@@ -4342,9 +4336,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
 
         elif Girl == LauraX:
-                if Type == "switch":
-                                ch_l "Ok then, what next?"
-                elif Type == "partner":
+                if Type == "partner":
                                 ch_l "I wonder if she's coming back."
                 elif Type == "swallowgood":
                                 ch_l "Yum."
@@ -4359,9 +4351,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
 
         elif Girl == JeanX:
-                if Type == "switch":
-                                ch_j "Ok, what'd you have in mind?"
-                elif Type == "partner":
+                if Type == "partner":
                                 ch_j "I'm sure she'll be missed."
                 elif Type == "swallowgood":
                                 ch_j "Mmm. . ."
@@ -4376,9 +4366,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
 
         elif Girl == StormX:
-                if Type == "switch":
-                                ch_s "Very well, what were you thinking?"
-                elif Type == "partner":
+                if Type == "partner":
                                 ch_s "I am sorry for the awkwardness."
                 elif Type == "swallowgood":
                                 ch_s "That is. . . delicious. . ."
@@ -4393,9 +4381,7 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
 
 
         elif Girl == JubesX:
-                if Type == "switch":
-                                ch_v "Ok then, what else?"
-                elif Type == "partner":
+                if Type == "partner":
                                 ch_v "Aw, that's a bummer. Anyway. . ."
                 elif Type == "swallowgood":
                                 $ Girl.Eyes = "closed"

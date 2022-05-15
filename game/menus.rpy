@@ -1,18 +1,18 @@
 label enter_main_sex_menu:
-    if Player.focused_girl == EmmaX:
-        if "classcaught" not in Player.focused_girl.History:
+    if focused_Girl == EmmaX:
+        if "classcaught" not in focused_Girl.History:
             ch_e "I can't imagine being a part of something so. . . tawdry."
 
             return
-        if "three" not in Player.focused_girl.History and not AloneCheck(Player.focused_girl):
-            call expression Player.focused_girl.Tag + "_ThreeCheck"
-        if Taboo > 20 and "taboo" not in Player.focused_girl.History:
-            call expression Player.focused_girl.Tag + "_Taboo_Talk"
+        if "three" not in focused_Girl.History and not Alonecheck(focused_Girl):
+            call expression focused_Girl.Tag + "_Threecheck"
+        if Taboo > 20 and "taboo" not in focused_Girl.History:
+            call expression focused_Girl.Tag + "_Taboo_Talk"
 
-            if bg_current == "bg_classroom" or bg_current in PersonalRooms and AloneCheck(Player.focused_girl):
+            if bg_current == "bg_classroom" or bg_current in PersonalRooms and Alonecheck(focused_Girl):
                 ch_p "We could just lock the door, right?"
                 ch_e "We certainly could. . ."
-                "[Player.focused_girl.name] walks to the door and locks it behind her."
+                "[focused_Girl.name] walks to the door and locks it behind her."
 
                 $ door_locked = True
 
@@ -20,41 +20,41 @@ label enter_main_sex_menu:
             else:
                 return
 
-    call shift_focus(Player.focused_girl)
+    call shift_focus(focused_Girl)
 
     $ primary_action = 0
     $ offhand_action = 0
     $ girl_offhand_action = 0
     $ action_context = 0
 
-    call hide_girl(Player.focused_girl, sprite = True)
+    call hide_girl(focused_Girl, sprite = True)
 
-    $ Player.focused_girl.ArmPose = 1
+    $ focused_Girl.ArmPose = 1
 
     call set_the_scene(1,0,0,0,1)
 
-    if Player.focused_girl in [EmmaX, StormX]:
-        if "detention" in Player.focused_girl.recent_history:
+    if focused_Girl in [EmmaX, StormX]:
+        if "detention" in focused_Girl.recent_history:
             $ temp_modifier = 20 if temp_modifier <= 20 else temp_modifier
 
     if not Player.Semen:
         "You're a little out of juice at the moment, you might want to wait a bit."
     if Player.Focus >= 95:
         "You're practically buzzing, the slightest breeze could set you off."
-    if not Player.focused_girl.Action:
-        "[Player.focused_girl.name]'s looking a bit tired out, maybe let her rest a bit."
+    if not focused_Girl.Action:
+        "[focused_Girl.name]'s looking a bit tired out, maybe let her rest a bit."
 
-    if "caught" in Player.focused_girl.recent_history or "angry" in Player.focused_girl.recent_history:
-        if Player.focused_girl.location == bg_current:
-            call angry_lines(Player.focused_girl)
+    if "caught" in focused_Girl.recent_history or "angry" in focused_Girl.recent_history:
+        if focused_Girl.location == bg_current:
+            call angry_lines(focused_Girl)
 
-        $ Player.focused_girl.OutfitChange()
-        $ Player.focused_girl.DrainWord("caught",1,0)
+        $ focused_Girl.OutfitChange()
+        $ focused_Girl.DrainWord("caught",1,0)
 
         return
 
     if Round < 5:
-        call take_a_breather_lines(Player.focused_girl)
+        call take_a_breather_lines(focused_Girl)
 
         return
 
@@ -63,12 +63,12 @@ label enter_main_sex_menu:
     $ handjob_line = None
     $ show_line = None
 
-    call Girl_sex_menu(Player.focused_girl)
+    call girl_sex_menu(focused_Girl)
 
     if _return:
         return
 
-    if Player.focused_girl.location != bg_current:
+    if focused_Girl.location != bg_current:
         call set_the_scene
         call Trig_Reset
 
@@ -77,9 +77,9 @@ label enter_main_sex_menu:
     if not multi_action:
         call set_the_scene
 
-        call thats_it_for_now_lines(Player.focused_girl)
+        call thats_it_for_now_lines(focused_Girl)
 
-        $ Player.focused_girl.OCount = 0
+        $ focused_Girl.OCount = 0
 
         call Trig_Reset
 
@@ -88,7 +88,7 @@ label enter_main_sex_menu:
     call GirlsAngry
     jump enter_main_sex_menu
 
-label Girl_sex_menu(Girl):
+label girl_sex_menu(Girl):
     if Girl == RogueX:
         $ main_line = "So what would you like to do?"
         $ fondle_line = "Well where exactly were you interested in touching, " + Girl.Petname + "?"
@@ -599,7 +599,7 @@ label begging_menu(Girl, action):
 
                     call please_not_good_enough_lines(Girl)
                 elif action in ["blowjob"]:
-                    if ApprovalCheck(Girl, 1100, TabM = 3): # 110, 125, 140, Taboo -120(230)             Handy instead?
+                    if Approvalcheck(Girl, 1100, TabM = 3): # 110, 125, 140, Taboo -120(230)             Handy instead?
                         $ Girl.change_stat("inhibition", 80, 1)
                         $ Girl.change_stat("inhibition", 60, 3)
                         $ Girl.change_face("confused", 1)
@@ -717,7 +717,7 @@ label begging_menu(Girl, action):
 
                 jump before_handjob
             else:
-                $ Approval = ApprovalCheck(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)             Handy instead?
+                $ Approval = Approvalcheck(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)             Handy instead?
 
                 if Approval >= 2:
                     $ Girl.change_stat("inhibition", 80, 1)
@@ -856,11 +856,11 @@ label begging_menu(Girl, action):
         "Come on, get to work." if action in ["handjob", "footjob"]:                                               # Pressured into it
             call forced_action(Girl, action)
         "Come on, let me fuck those titties, [Girl.Pet]" if action in ["titjob"]:
-            $ Girl.nameCheck() #checks reaction to petname
+            $ Girl.namecheck() #checks reaction to petname
 
             call forced_action(Girl, action)
         "Suck it, [Girl.Pet]" if action in ["blowjob"]:                                               # Pressured into it
-            $ Girl.nameCheck() #checks reaction to petname
+            $ Girl.namecheck() #checks reaction to petname
 
             call forced_action(Girl, action)
         "[[Press it against her.]]" if action in ["dildo_pussy", "dildo_ass"]:

@@ -282,9 +282,9 @@ label fondle_menu:
                             pass
                         "Ask [Partner.name] to do something else":
                             call Three_Change
-                        "Don't stop what you're doing. . . (locked)" if not position_change_timer or not Partner_primary_action:
+                        "Don't stop what you're doing. . . (locked)" if not position_change_timer or not second_girl_primary_action:
                             $ position_change_timer = 0
-                        "Don't stop what you're doing. . ." if position_change_timer and Partner_primary_action:
+                        "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
                             $ position_change_timer = 0
                         "Swap to [Partner.name]":
                             call primary_action_Swap
@@ -313,7 +313,7 @@ label fondle_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            call reset_position(Girl)
+            call reset_position(focused_Girl)
 
             $ action_context = "shift"
             $ line = 0
@@ -322,7 +322,7 @@ label fondle_menu:
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            call reset_position(Girl)
+            call reset_position(focused_Girl)
 
             $ line = 0
 
@@ -577,13 +577,13 @@ label end_of_fondle_round(Girl, action):
     elif action == "eat_ass":
         $ bonus = Girl.LickA
 
-    if Girl.SEXP >= 100 or ApprovalCheck(Girl, 1200, "LO"):
+    if Girl.SEXP >= 100 or Approvalcheck(Girl, 1200, "LO"):
         pass
     elif counter == (5 + bonus):
         $ Girl.Brows = "confused"
 
         call warm_hands_lines(Girl)
-    elif counter == (15 + bonus) and Girl.SEXP >= 15 and not ApprovalCheck(Girl, 1500):
+    elif counter == (15 + bonus) and Girl.SEXP >= 15 and not Approvalcheck(Girl, 1500):
         $ Girl.Brows = "confused"
 
         call try_something_else_lines(Girl)
@@ -600,7 +600,7 @@ label end_of_fondle_round(Girl, action):
 
                 jump after_action
             "No, this is fun.":
-                if ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "O"):
+                if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
                     $ Girl.change_stat("love", 200, -5)
                     $ Girl.change_stat("obedience", 50, 3)
                     $ Girl.change_stat("obedience", 80, 2)
@@ -640,7 +640,7 @@ label fondle_thighs(Girl):
     call shift_focus(Girl)
     call fondle_set_modifier(Girl, "fondle_thighs")
 
-    $ Approval = ApprovalCheck(Girl, 750, TabM=1)
+    $ Approval = Approvalcheck(Girl, 750, TabM=1)
 
     if action_context == "auto":
         if Approval:
@@ -704,7 +704,7 @@ label fondle_breasts(Girl):
     call shift_focus(Girl)
     call fondle_set_modifier(Girl, "fondle_breasts")
 
-    $ Approval = ApprovalCheck(Girl, 950, TabM = 3)
+    $ Approval = Approvalcheck(Girl, 950, TabM = 3)
 
     if action_context == "auto":
         if Approval:
@@ -769,7 +769,7 @@ label suck_breasts(Girl):
     call shift_focus(Girl)
     call fondle_set_modifier(Girl, "suck_breasts")
 
-    $ Approval = ApprovalCheck(Girl, 1050, TabM = 4) # 105, 120, 135, Taboo -160(265)
+    $ Approval = Approvalcheck(Girl, 1050, TabM = 4) # 105, 120, 135, Taboo -160(265)
 
     if action_context == "auto":                                                                  #You auto-start
         if Approval:
@@ -829,7 +829,7 @@ label fondle_pussy(Girl):
         $ temp_modifier -= 5
         $ temp_modifier -= 10 if "no_fondle_pussy" in Girl.recent_history else 0
 
-    $ Approval = ApprovalCheck(Girl, 1050, TabM = 2) # 105, 120, 135, Taboo -80(185)
+    $ Approval = Approvalcheck(Girl, 1050, TabM = 2) # 105, 120, 135, Taboo -80(185)
 
     if action_context == "auto":                                                                  #You auto-start
         if Approval:
@@ -893,7 +893,7 @@ label finger_pussy(Girl):
     call shift_focus(Girl)
 
     if action_context == "auto":                                                                  #You auto-start
-        if ApprovalCheck(Girl, 1100, TabM = 2):
+        if Approvalcheck(Girl, 1100, TabM = 2):
             $ Girl.change_face("surprised")
             $ Girl.change_stat("obedience", 90, 1)
             $ Girl.change_stat("obedience", 70, 2)
@@ -917,7 +917,7 @@ label finger_pussy(Girl):
 
             return
 
-    if ApprovalCheck(Girl, 1100, TabM = 2):                           #She's into it. . .
+    if Approvalcheck(Girl, 1100, TabM = 2):                           #She's into it. . .
         call action_accepted(Girl, "finger_pussy")
 
         return
@@ -941,7 +941,7 @@ label eat_pussy(Girl):
     call shift_focus(Girl)
     call fondle_set_modifier(Girl, "eat_pussy")
 
-    $ Approval = ApprovalCheck(Girl, 1250, TabM = 4) # 125, 140, 155, Taboo -160(285)
+    $ Approval = Approvalcheck(Girl, 1250, TabM = 4) # 125, 140, 155, Taboo -160(285)
 
     if action_context == "auto":                                                                  #You auto-start
         if Approval:
@@ -1003,7 +1003,7 @@ label fondle_ass(Girl):
     call shift_focus(Girl)
     call fondle_set_modifier(Girl, "fondle_ass")
 
-    $ Approval = ApprovalCheck(Girl, 850, TabM=1, Alt = [[StormX], 750]) # 85, 100, 115, Taboo -40(125)
+    $ Approval = Approvalcheck(Girl, 850, TabM=1, Alt = [[StormX], 750]) # 85, 100, 115, Taboo -40(125)
 
     if action_context == "auto":                                                                  #You auto-start
         if Approval:
@@ -1075,7 +1075,7 @@ label finger_ass(Girl):
     call shift_focus(Girl)
     call fondle_set_modifier(Girl, "finger_ass")
 
-    $ Approval = ApprovalCheck(Girl, 1300, TabM = 3) # 130, 145, 160, Taboo -120(250)
+    $ Approval = Approvalcheck(Girl, 1300, TabM = 3) # 130, 145, 160, Taboo -120(250)
 
     if action_context == "auto":                                                                  #You auto-start
         if Approval:
@@ -1131,7 +1131,7 @@ label eat_ass(Girl):
     call shift_focus(Girl)
     call fondle_set_modifier(Girl, "eat_ass")
 
-    $ Approval = ApprovalCheck(Girl, 1550, TabM = 4) # 155, 170, 185, Taboo -160(315)
+    $ Approval = Approvalcheck(Girl, 1550, TabM = 4) # 155, 170, 185, Taboo -160(315)
 
     if action_context == "auto":                                                                  #You auto-start
         if Approval:

@@ -903,7 +903,7 @@ image Chibi_Handy:
     contains:
         subpixel True
         ConditionSwitch(
-            "(Partner == StormX and Partner_primary_action == 'hand') or (focused_Girl == StormX and girl_offhand_action == 'hand')", "images/Chibi_Hand_S.png",
+            "(Partner == StormX and second_girl_primary_action == 'hand') or (focused_Girl == StormX and girl_offhand_action == 'hand')", "images/Chibi_Hand_S.png",
             "True", "images/Chibi_Hand_G.png"
             )
 #        "images/Chibi_Hand_G.png"
@@ -990,8 +990,8 @@ image Chibi_UI:
         ConditionSwitch(
             "'cockout' not in Player.recent_history", Null(),
             "offhand_action == 'jackin'", "Chibi_Jackin",
-            "girl_offhand_action == 'hand' or Partner_primary_action == 'hand'", "Chibi_Handy",
-            "Partner_primary_action == 'blow'", "Chibi_Sucking",
+            "girl_offhand_action == 'hand' or second_girl_primary_action == 'hand'", "Chibi_Handy",
+            "second_girl_primary_action == 'blow'", "Chibi_Sucking",
             "True", "Chibi_Null",
             )
 #    anchor (0.5,0.5)

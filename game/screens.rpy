@@ -756,13 +756,13 @@ screen Status_Screen:
                 background None
                 has vbox
                 hbox:
-                    imagebutton idle "images/iconlust.png" hover "images/iconlust.png" action NullAction() hovered tt.Action("lust: [Partner.lust]")
+                    imagebutton idle "images/iconlust.png" hover "images/iconlust.png" action NullAction() hovered tt.Action("Lust: [Partner.lust]")
                     bar range 100 value Partner.lust xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
 
-                    imagebutton idle "images/iconlove.png" hover "images/iconlove.png" action NullAction() hovered tt.Action("love: [Partner.love]")
+                    imagebutton idle "images/iconlove.png" hover "images/iconlove.png" action NullAction() hovered tt.Action("Love: [Partner.love]")
                     bar range 100 value (Partner.love/10) xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
 
-                    imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("obedienceience: [Partner.obedience]") #action NullAction("none")?
+                    imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("Obedience: [Partner.obedience]") #action NullAction("none")?
                     bar range 100 value (Partner.obedience/10) xmaximum 100 left_bar "images/barfullO.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
 
                     imagebutton idle "images/iconinbt.png" hover "images/iconinbt.png" action NullAction() hovered tt.Action("Inhibitions: [Partner.inhibition]")
@@ -792,7 +792,7 @@ screen Status_Screen:
             background None
             has vbox
             hbox:
-                imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("obedienceience: [focused_Girl.obedience]")
+                imagebutton idle "images/iconobed.png" hover "images/iconobed.png" action NullAction() hovered tt.Action("obedience: [focused_Girl.obedience]")
                 bar range 100 value (focused_Girl.obedience/10) xmaximum 100 left_bar "images/barfullO.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
             hbox:
                 imagebutton idle "images/iconaddict.png" hover "images/iconaddict.png" action NullAction() hovered tt.Action("Addiction: [focused_Girl.Addict]")
@@ -1109,7 +1109,7 @@ label MandrillScreen:
     if "purple" in Player.Traits or "corruption" in Player.Traits:
             "You'll confuse the scent you already have on."
             return
-#    $ inventory_count = Inventory_Check("Mandrill Cologne")
+#    $ inventory_count = Inventory_check("Mandrill Cologne")
     $ inventory_count = Player.Inventory.count("Mandrill Cologne")
     "This cologne is guaranteed to make women love you more [[+love]. You have [inventory_count] doses left."
     "Product warning, any love gained while under the effects may be lost when this wears off, if the limits are reached."
@@ -1130,9 +1130,9 @@ label PurpleRainScreen:
     if "mandrill" in Player.Traits or "corruption" in Player.Traits:
         "You'll confuse the scent you already have on."
         return
-#    $ inventory_count = Inventory_Check("Purple Rain Cologne")
+#    $ inventory_count = Inventory_check("Purple Rain Cologne")
     $ inventory_count = Player.Inventory.count("Purple Rain Cologne")
-    "This cologne is guaranteed to make women more suggestible to your orders until tomorrow [[+obedienceience]. You have [inventory_count] doses left."
+    "This cologne is guaranteed to make women more suggestible to your orders until tomorrow [[+obedience]. You have [inventory_count] doses left."
     "Product warning, any obedience gained whie under the effects may be lost when this wears off, if the limits are reached."
     menu:
         "Use it now?"
@@ -1150,7 +1150,7 @@ label CorruptionScreen:
     if "purple" in Player.Traits or "mandrill" in Player.Traits:
         "You'll confuse the scent you already have on."
         return
-#    $ inventory_count = Inventory_Check("Corruption Cologne")
+#    $ inventory_count = Inventory_check("Corruption Cologne")
     $ inventory_count = Player.Inventory.count("Corruption Cologne")
     "This cologne is guaranteed to make women let loose their wild side [[-Inhibition]. You have [inventory_count] doses left."
     "Product warning, any Inhibition lost whie under the effects may be regained when this wears off, if the limits are reached."

@@ -1,16 +1,16 @@
 init python:
 
-    def ApprovalCheck(Girl = 0, T = 1000, Type = "LOI", Spread = 150, TmpM = 1, TabM = 0, C = 1, Bonus = 0, Loc = 0, Check=0, Alt=[[],0]):
-            # $ Count = ApprovalCheck(Rogue,125,"L")
+    def Approvalcheck(Girl = 0, T = 1000, Type = "LOI", Spread = 150, TmpM = 1, TabM = 0, C = 1, Bonus = 0, location = 0, check=0, Alt=[[],0]):
+            # $ Count = Approvalcheck(Rogue,125,"L")
             # T is the value being checked against, Type is the LOI condition in play, Spread is the difference between basic approval and high approval
-            # TmpM is temp_modifier multiplier, TabM is the taboo modifier, C is cologne modifiers, Bonus is a random bonus applied, and Loc is the girl's location
-            #figure out a way to send a matrix variable for altering the results based on Girl Alt=[[RogueX,KittyX],800]
+            # TmpM is temp_modifier multiplier, TabM is the taboo modifier, C is cologne modifiers, Bonus is a random bonus applied, and location is the girl's location
+            #figure out a way to send a matrix variable for altering the results based on character Alt=[[RogueX,KittyX],800]
 
-            if Girl not in all_Girls: #should remove "Girl don't exist" errors
+            if Girl not in all_Girls: #should remove "character don't exist" errors
                 return 0
 
             while Alt[0]:
-                    #if there is an alternate Girl option. . .
+                    #if there is an alternate character option. . .
                     if Girl in Alt[0]:
                             T = Alt[1] if Alt[1] else T
                     Alt[0].remove(Alt[0][0])
@@ -19,30 +19,30 @@ init python:
             O = Girl.obedience
             I = Girl.inhibition
             LocalTaboo = Girl.Taboo
-            Loc = Girl.location if not Loc else Loc
+            location = Girl.location if not location else Loc
 
             if Girl.Tag == "Jean" and (O <= 800 or JeanX.Taboo):
                     # Reduces effective value of Inhibition by 500 to a minimum of 0.
                     I = (I - JeanX.IX) #IX is a value of up to 500
 
-            if Loc == bg_current and C:
+            if location == bg_current and C:
                     #Bumps stats based on colognes
                     if Girl == LauraX:
-                            if Player.cologne = "mandrill":
+                            if Player.cologne == "mandrill":
                                     if L <= 400:
                                         L += 600
                                     else:
                                         L = 1200
                                     if "drugged" not in Girl.Traits:
                                             Girl.Traits.append("drugged")
-                            elif Player.cologne = "purple":
+                            elif Player.cologne == "purple":
                                     if O <= 400:
                                         O += 600
                                     else:
                                         O = 1200
                                     if "drugged" not in Girl.Traits:
                                             Girl.Traits.append("drugged")
-                            elif Player.cologne = "corruption":
+                            elif Player.cologne == "corruption":
                                     if I <= 400:
                                         I += 600
                                     else:
@@ -50,17 +50,17 @@ init python:
                                     if "drugged" not in Girl.Traits:
                                             Girl.Traits.append("drugged")
                     else:
-                            if Player.cologne = "mandrill":
+                            if Player.cologne == "mandrill":
                                     if L <= 500:
                                         L += 500
                                     else:
                                         L = 1000
-                            elif Player.cologne = "purple:
+                            elif Player.cologne == "purple":
                                     if O <= 500:
                                         O += 500
                                     else:
                                         O = 1000
-                            elif Player.cologne = "corruption":
+                            elif Player.cologne == "corruption":
                                     if I <= 500:
                                         I += 500
                                     else:
@@ -107,10 +107,10 @@ init python:
 
             TabM = 0 if TabM <= 0 else TabM #test this, makes sure TabM is positive
 
-            if Check:
+            if check:
                     #this returns the actual value of the tested stat.
-                    Check = (L + O + I + Bonus + (TmpM * Localtemp_modifier) - (TabM * LocalTaboo))
-                    return Check
+                    check = (L + O + I + Bonus + (TmpM * Localtemp_modifier) - (TabM * LocalTaboo))
+                    return check
 
             if (L + O + I + Bonus + (TmpM * Localtemp_modifier) - (TabM * LocalTaboo)) >= (T + (2 * Spread)):
                     #She passes and loves it
@@ -124,7 +124,7 @@ init python:
             else:
                     return 0
 
-    def AloneCheck(Girl=0,Girls=[]):
+    def Alonecheck(Girl=0,Girls=[]):
             # returns a positive value if alone
             # if Girl, it checks if she's the only one in the room
             Girls = all_Girls[:]
@@ -136,14 +136,14 @@ init python:
                     Girls.remove(Girls[0])
             return 1
 
-    def GirlCheck(Check=0,Local=0,Girls=[]):
+    def Girlcheck(check=0,local=0,Girls=[]):
             #checks whether the indicated girl is available for this activity
-            # $ Girl = GirlCheck(Girl,1)
+            # $ Girl = Girlcheck(Girl,1)
             global focused_Girl
-            if Check in all_Girls and (not Local or bg_current == Check.location):
+            if check in all_Girls and (not local or bg_current == check.location):
                         #if the sent girl is valid and the game does not care about location
                         #or if the sent girl is valid and the girl is nearby
-                        return Check
+                        return check
             elif bg_current == focused_Girl.location:
                         #if this sent girl is in the room and focal, make her the choice.
                         return focused_Girl
@@ -161,6 +161,8 @@ init python:
             ch_u("Tell Oni, no appropriate Girl was found.", interact=True)
             return focused_Girl
 
+
+# Start Seen Peen / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Girl_First_Peen(Girl = 0, Silent = 0, Undress = 0, Second = 0, React = 0):  #rkeljsv
         #checked each time she sees your cock  ## call Girl_First_Peen(RogueX,0,1)
         #if Silent it doesn't say anything
@@ -213,7 +215,7 @@ label Girl_First_Peen(Girl = 0, Silent = 0, Undress = 0, Second = 0, React = 0):
                                 $ Girl.change_face("bemused", 1)
                 elif Second == 1:
                         # The other girl liked it
-                        if not ApprovalCheck(Girl, 800) and not ApprovalCheck(Girl, 500, "I"):
+                        if not Approvalcheck(Girl, 800) and not Approvalcheck(Girl, 500, "I"):
                                 $ Girl.change_face("sad", 1)
                                 if Girl == RogueX:
                                         ch_r "If you're inta that sorta thing. . ."
@@ -246,8 +248,7 @@ label Girl_First_Peen(Girl = 0, Silent = 0, Undress = 0, Second = 0, React = 0):
                                 elif Girl == JubesX:
                                         ch_v "Right?"
                 elif Second == 2:
-                        # The other girl didn't like it
-                        if not ApprovalCheck(Girl, 800) and not ApprovalCheck(Girl, 500, "I"):
+                        if not Approvalcheck(Girl, 800) and not Approvalcheck(Girl, 500, "I"):
                                 $ Girl.change_face("sad", 1)
                                 if Girl == RogueX:
                                         ch_r "Right, whatever. . ."
@@ -302,9 +303,9 @@ label Girl_First_Peen(Girl = 0, Silent = 0, Undress = 0, Second = 0, React = 0):
             else:
                     "You whip your cock out."
             $ Player.AddWord(1,"cockout")
-            if not Girl.Forced and not React and Taboo > 20 and (not ApprovalCheck(Girl, 1500) or Girl.SEXP < 10) and bg_current != "bg_showerroom" and Girl not in (JeanX,StormX):
+            if not Girl.Forced and not React and Taboo > 20 and (not Approvalcheck(Girl, 1500) or Girl.SEXP < 10) and bg_current != "bg_showerroom" and Girl not in (JeanX,StormX):
                 #if it's a semi-public space that isn't the showers, and she is not down with this. . .
-                if not ApprovalCheck(Girl, 800) and not ApprovalCheck(Girl, 500, "I"):
+                if not Approvalcheck(Girl, 800) and not Approvalcheck(Girl, 500, "I"):
                         #If the girl is very not into it. . .
                         if Girl == EmmaX and ("detention" in Girl.recent_history or "classcaught" in Girl.recent_history):
                             #special exceptions for detention and classcaught events
@@ -361,7 +362,6 @@ label Girl_First_Peen(Girl = 0, Silent = 0, Undress = 0, Second = 0, React = 0):
                                 elif Girl == JubesX:
                                         ch_v "Keep it in your pants. . ."
                                 if Girl.daily_history.count("peen") >= 2:
-                                        #if she's seen more than one peen today
                                         $ Girl.change_stat("love", 90, -1)
                                         $ Girl.change_stat("obedience", 50, 1)
                                         $ Girl.change_stat("inhibition", 60, 2)
@@ -369,9 +369,9 @@ label Girl_First_Peen(Girl = 0, Silent = 0, Undress = 0, Second = 0, React = 0):
                                         $ Girl.change_stat("love", 90, -5)
                                         $ Girl.change_stat("obedience", 50, 10)
                                         $ Girl.change_stat("inhibition", 60, 10)
-                #end if bg_current != "bg_showerroom" and not ApprovalCheck(Girl, 800) and not ApprovalCheck(Girl, 500, "I"):
+                #end if bg_current != "bg_showerroom" and not Approvalcheck(Girl, 800) and not Approvalcheck(Girl, 500, "I"):
                 else:
-                            #if ApprovalCheck is 800-1500 and not ApprovalCheck(Girl, 500, "I"):
+                            #if Approvalcheck is 800-1500 and not Approvalcheck(Girl, 500, "I"):
                             $ Girl.change_face("surprised", 2)
                             if Girl == RogueX:
                                     ch_r "What are you- you should really put that thing away!"
@@ -401,11 +401,11 @@ label Girl_First_Peen(Girl = 0, Silent = 0, Undress = 0, Second = 0, React = 0):
                                     $ Girl.change_stat("inhibition", 60, 30)
                             $ React = 2
 
-                #end if not Girl.Forced and not React and Taboo > 20 and (not ApprovalCheck(Girl, 1500) or Girl.SEXP < 10) and bg_current != "bg_showerroom" and Girl != JeanX:
+                #end if not Girl.Forced and not React and Taboo > 20 and (not Approvalcheck(Girl, 1500) or Girl.SEXP < 10) and bg_current != "bg_showerroom" and Girl != JeanX:
             elif Girl.SeenPeen > 10:
                         #if it's been more than 10 times, return
                         return 0
-            elif ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "L"):
+            elif Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "L"):
                     #She basically likes it
                     $ Girl.change_face("sly",1)
                     if Girl.SeenPeen == 1:
@@ -637,7 +637,7 @@ label Girl_First_Peen(Girl = 0, Silent = 0, Undress = 0, Second = 0, React = 0):
                     $ Player.recent_history.append("cockout")
                     if Girl.SeenPeen > 10:
                         return
-                    elif ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "L"):
+                    elif Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "L"):
                             if Girl.SeenPeen == 1:
                                 $ Girl.change_stat("love", 90, 5)
                             elif Girl.SeenPeen == 2:
@@ -667,17 +667,14 @@ label Girl_First_Peen(Girl = 0, Silent = 0, Undress = 0, Second = 0, React = 0):
                 elif Girl == JubesX:
                         $ Girl.change_stat("obedience", 80, 3)
                 $ Girl.change_stat("love", 90, 15)
-                $ Girl.change_stat("obedience", 90, 20, alternates = {"Storm": {"check": 90, "value": 0})
+                $ Girl.change_stat("obedience", 90, 20, alternates = {"Storm": {"check": 90, "value": 0}})
                 $ Girl.change_stat("inhibition", 60, 20)
                 $ Girl.change_stat("lust", 200, 5)
         $ Girl.change_face("sly",1)
         return React
 
-label Girls_Taboo(Girl=0,counter= 1,Choice=0,D20=0):  #nee  Rogue_Taboo(counter= 1,Choice=0) #rkeljsv
-        #Called by Sex_Dialog
-        #Girl is the Primary actor, counter is a count of how many times you've been spotted,
-        #Choice is how the girl is reacting, D20 is a randomizer
-        #With Jean, Taboo should not be a factor if she can whammy people
+
+label Girls_Taboo(Girl=0,counter= 1,Choice=0,D20=0):
         if Girl not in all_Girls:
                 $ Girl = focused_Girl
         $ Player.AddWord(1,0,Girl.Tag) #$ Player.daily_history.append(Girl.Tag)
@@ -696,7 +693,6 @@ label Girls_Taboo(Girl=0,counter= 1,Choice=0,D20=0):  #nee  Rogue_Taboo(counter=
                 #You've told Jean/Emma to screen Xavier's perceptions
                 $ D20 += 8
         if D20 < 10:
-                #if you're at the point where the girls would notice you. . .
                 if Taboo > 20:
                         if (primary_action == "kiss" and not offhand_action and not girl_offhand_action):
                                 #if it's very innocent, skip this part
@@ -726,21 +722,21 @@ label Girls_Taboo(Girl=0,counter= 1,Choice=0,D20=0):  #nee  Rogue_Taboo(counter=
                 elif "interruption" in Player.recent_history:
                                 #skips locked door event if it's already happened lately.
                                 pass
-                elif D20 == 1 and AloneCheck(Girl) and time_index < 3:
+                elif D20 == 1 and Alonecheck(Girl) and time_index < 3:
                                 #bad luck, a girl showed up out of nowhere. . .
                                 $ Choice = active_Girls[:]
                                 $ Choice.remove(Girl)
                                 $ renpy.random.shuffle(Choice)
                                 while Choice:
                                         if Choice[0].location != bg_current and "lockedout" not in Girl.Traits:
-                                                $ Partner_offhand_action = Choice[0]
+                                                $ second_girl_offhand_action = Choice[0]
                                                 $ Choice = [1]
                                         $ Choice.remove(Choice[0])
-                                if Partner_offhand_action:
-                                        call Locked_Door(Partner_offhand_action,1,Girl)
+                                if second_girl_offhand_action:
+                                        call locationked_Door(second_girl_offhand_action,1,Girl)
                                 # either this new girl will be allowed in and stay, or she will run away
                                 $ Choice = 0
-                                $ Partner_offhand_action = 0
+                                $ second_girl_offhand_action = 0
 
 
                 #now the girls get their turn to notice. . .
@@ -797,7 +793,7 @@ label Girls_Taboo(Girl=0,counter= 1,Choice=0,D20=0):  #nee  Rogue_Taboo(counter=
                                         ch_v "I'm good if you are. . ."
                         $ Girl.change_stat("lust", 200, 4)
                         $ Choice = "A"
-                elif ApprovalCheck(Girl, 650, "I", TabM=counter):
+                elif Approvalcheck(Girl, 650, "I", TabM=counter):
                         #not an exhibitionist but very uninhibited
                         $ Girl.change_face("sexy", 1, Brows="sad")
                         if "spotted" not in Girl.recent_history:
@@ -819,7 +815,7 @@ label Girls_Taboo(Girl=0,counter= 1,Choice=0,D20=0):  #nee  Rogue_Taboo(counter=
                                         ch_v "Oh, um, they're looking. . ."
                         $ Girl.change_stat("lust", 200, 3)
                         $ Choice = "B"
-                elif ApprovalCheck(Girl, 1000, "OI", TabM=counter):
+                elif Approvalcheck(Girl, 1000, "OI", TabM=counter):
                         #not an exhibitionist but obedient/uninhibited
                         $ Girl.change_face("surprised", 2)
                         if Girl in (EmmaX,StormX):
@@ -1012,12 +1008,12 @@ label Girls_Taboo(Girl=0,counter= 1,Choice=0,D20=0):  #nee  Rogue_Taboo(counter=
         $ Girl.daily_history.append("spotted")  if "spotted" not in Girl.daily_history else Girl.daily_history
         return
 
-label Activity_Check(Girl=0,Girl2=0,Silent=0,Removal=1,ClothesCheck=1,Mod=0,Approval=1,Tempshame=0,TabooM=1): #rkeljsv
+label Activity_check(Girl=0,Girl2=0,Silent=0,Removal=1,Clothescheck=1,Mod=0,Approval=1,Tempshame=0,TabooM=1): #rkeljsv
         # This checks whether a girl is up for watching a given activity
         # Silent is whether it plays dialog or not, Removal is whether it auto-removes the girl on a fail,
-        # ClothesCheck is whether it bothers checking clothing, 2 if skip first girl
+        # Clothescheck is whether it bothers checking clothing, 2 if skip first girl
         # Mod gets set to her Like stat -600, so 600 Like, you break even, otherwise it's a penalty
-        # call Activity_Check("Rogue",0,1,0)
+        # call Activity_check("Rogue",0,1,0)
 
         if Girl == Girl2:
             "Tell oni that the activity check failed after [primary_action]."
@@ -1030,16 +1026,16 @@ label Activity_Check(Girl=0,Girl2=0,Silent=0,Removal=1,ClothesCheck=1,Mod=0,Appr
         $ Mod += 200 if Girl.Forced else 0             #bonus if in the Forced state
         $ Mod += (Girl.lust*5) if Girl.lust >= 50 else 0  #bonus if high lust (50 = +250, 75= +375, 90 = +450)
 
-        if Girl2 and ClothesCheck != 2:
+        if Girl2 and Clothescheck != 2:
                 #if there is a second girl and it's not told to skip it
                 $ Mod = int(Mod/2) if Mod > 0 else Mod
                 #halves the benefits from the above mechanisms
-                $ Mod = (Girl.GirlLikeCheck(Girl2)-600)
+                $ Mod = (Girl.GirlLikecheck(Girl2)-600)
                 # if 500 = -100, if 700 = +100 if 900 = +300
                 if Girl in Player.Harem and Girl2 in Player.Harem: #bonus for if both in harem
                         $ Mod += 500
 
-        if ClothesCheck and Girl2:
+        if Clothescheck and Girl2:
                 #sets her shame level to be accurate to current look
                 #call expression Girl2.Tag + "_OutfitShame" pass (20)
                 call OutfitShame(Girl2,20)
@@ -1048,29 +1044,29 @@ label Activity_Check(Girl=0,Girl2=0,Silent=0,Removal=1,ClothesCheck=1,Mod=0,Appr
                 if Girl == StormX:
                         #Storm doesn't care
                                 $ Approval = 2
-                elif Tempshame <= 15 and (ApprovalCheck(Girl, 600,Bonus=Mod) or ApprovalCheck(Girl, 350, "I")):
+                elif Tempshame <= 15 and (Approvalcheck(Girl, 600,Bonus=Mod) or Approvalcheck(Girl, 350, "I")):
                         #If the outfit is hot but she's ok
-                        if ApprovalCheck(Girl, 900,Bonus=Mod) or ApprovalCheck(Girl, 450, "I"):
+                        if Approvalcheck(Girl, 900,Bonus=Mod) or Approvalcheck(Girl, 450, "I"):
                                 $ Approval = 2
-                elif Tempshame <= 20 and (ApprovalCheck(Girl, 900,Bonus=Mod) or ApprovalCheck(Girl, 450, "I")):
+                elif Tempshame <= 20 and (Approvalcheck(Girl, 900,Bonus=Mod) or Approvalcheck(Girl, 450, "I")):
                         #If the outfit is sexy but she's cool with that
-                        if ApprovalCheck(Girl, 1100,Bonus=Mod) or ApprovalCheck(Girl, 550, "I"):
+                        if Approvalcheck(Girl, 1100,Bonus=Mod) or Approvalcheck(Girl, 550, "I"):
                                 $ Approval = 2
-                elif Tempshame <= 25 and (ApprovalCheck(Girl, 1100,Bonus=Mod) or ApprovalCheck(Girl, 550, "I")):
+                elif Tempshame <= 25 and (Approvalcheck(Girl, 1100,Bonus=Mod) or Approvalcheck(Girl, 550, "I")):
                         #If the outfit is sexy but she's cool with that
-                        if ApprovalCheck(Girl, 1400,Bonus=Mod) or ApprovalCheck(Girl, 650, "I"):
+                        if Approvalcheck(Girl, 1400,Bonus=Mod) or Approvalcheck(Girl, 650, "I"):
                                 $ Approval = 2
-                elif (ApprovalCheck(Girl, 1400,Bonus=Mod) or ApprovalCheck(Girl, 650, "I")):
+                elif (Approvalcheck(Girl, 1400,Bonus=Mod) or Approvalcheck(Girl, 650, "I")):
                         #If the outfit is very scandelous but she's ok with that
-                        if ApprovalCheck(Girl, 1600,Bonus=Mod) or ApprovalCheck(Girl, 850, "I"):
+                        if Approvalcheck(Girl, 1600,Bonus=Mod) or Approvalcheck(Girl, 850, "I"):
                                 $ Approval = 2
                 else:
                                 $ Approval = 0
 
-        if "exhibitionist" in Girl.Traits or ApprovalCheck(Girl,900,"I"):
+        if "exhibitionist" in Girl.Traits or Approvalcheck(Girl,900,"I"):
                     #this negates or reduces the taboo modifier if they are slutty
                     $ TabooM = 0
-        elif ApprovalCheck(Girl,50,"X") or ApprovalCheck(Girl,800,"I"):
+        elif Approvalcheck(Girl,50,"X") or Approvalcheck(Girl,800,"I"):
                     $ TabooM = .5
 
         if not Approval:
@@ -1081,85 +1077,85 @@ label Activity_Check(Girl=0,Girl2=0,Silent=0,Removal=1,ClothesCheck=1,Mod=0,Appr
         elif not primary_action:
                     pass
         elif primary_action == "eat_ass":
-                    $ Approval = ApprovalCheck(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
+                    $ Approval = Approvalcheck(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
         elif primary_action == "anal":
-                    $ Approval = ApprovalCheck(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
+                    $ Approval = Approvalcheck(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
         elif primary_action == "sex":
-                    $ Approval = ApprovalCheck(Girl,1400,Bonus=Mod, TabM = (TabooM* 3 ))
+                    $ Approval = Approvalcheck(Girl,1400,Bonus=Mod, TabM = (TabooM* 3 ))
         elif primary_action == "eat_pussy":
-                    $ Approval = ApprovalCheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+                    $ Approval = Approvalcheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
         elif offhand_action == "jackin":
-                    $ Approval = ApprovalCheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+                    $ Approval = Approvalcheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
         elif primary_action == "blowjob":
-                    $ Approval = ApprovalCheck(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
+                    $ Approval = Approvalcheck(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
         elif primary_action == "titjob":
-                    $ Approval = ApprovalCheck(Girl,1200,Bonus=Mod, TabM = (TabooM* 3 ))
+                    $ Approval = Approvalcheck(Girl,1200,Bonus=Mod, TabM = (TabooM* 3 ))
         elif primary_action == "hotdog":
-                    $ Approval = ApprovalCheck(Girl,1000,Bonus=Mod, TabM = (TabooM* 3 ))
+                    $ Approval = Approvalcheck(Girl,1000,Bonus=Mod, TabM = (TabooM* 3 ))
         elif primary_action == "handjob" or girl_offhand_action == "handjob":
-                    $ Approval = ApprovalCheck(Girl,1100,Bonus=Mod, TabM = (TabooM* 2 ))
+                    $ Approval = Approvalcheck(Girl,1100,Bonus=Mod, TabM = (TabooM* 2 ))
         elif primary_action == "footjob":
-                    $ Approval = ApprovalCheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+                    $ Approval = Approvalcheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
         elif primary_action == "dildo_anal":
-                    $ Approval = ApprovalCheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+                    $ Approval = Approvalcheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
         elif primary_action == "dildo_pussy":
-                    $ Approval = ApprovalCheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+                    $ Approval = Approvalcheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
         elif primary_action == "finger_ass":
-                    $ Approval = ApprovalCheck(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
+                    $ Approval = Approvalcheck(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
         elif primary_action == "fondle_pussy" or primary_action == "finger_pussy":
-                    $ Approval = ApprovalCheck(Girl,1050,Bonus=Mod, TabM = (TabooM* 2 ))
+                    $ Approval = Approvalcheck(Girl,1050,Bonus=Mod, TabM = (TabooM* 2 ))
         elif primary_action == "suck_breasts":
-                    $ Approval = ApprovalCheck(Girl,1050,Bonus=Mod, TabM = (TabooM* 3 ))
+                    $ Approval = Approvalcheck(Girl,1050,Bonus=Mod, TabM = (TabooM* 3 ))
         elif primary_action == "fondle_breasts":
-                    $ Approval = ApprovalCheck(Girl,950,Bonus=Mod, TabM = (TabooM* 2 ))
+                    $ Approval = Approvalcheck(Girl,950,Bonus=Mod, TabM = (TabooM* 2 ))
         elif primary_action == "fondle_ass":
-                    $ Approval = ApprovalCheck(Girl,850,Bonus=Mod, TabM = (TabooM* 1 ))
+                    $ Approval = Approvalcheck(Girl,850,Bonus=Mod, TabM = (TabooM* 1 ))
 
         elif primary_action == "masturbation":
-                    $ Approval = ApprovalCheck(Girl,1200,Bonus=Mod, TabM = (TabooM* 2 ))
+                    $ Approval = Approvalcheck(Girl,1200,Bonus=Mod, TabM = (TabooM* 2 ))
 
         elif primary_action == "kiss":
-                    $ Approval = ApprovalCheck(Girl,500,Bonus=Mod, TabM = 0)
+                    $ Approval = Approvalcheck(Girl,500,Bonus=Mod, TabM = 0)
         elif primary_action == "fondle_thighs":
-                    $ Approval = ApprovalCheck(Girl,750,Bonus=Mod, TabM = 0)
+                    $ Approval = Approvalcheck(Girl,750,Bonus=Mod, TabM = 0)
 
         elif primary_action == "lesbian":
-                    $ Approval = ApprovalCheck(Girl,1350,Bonus=Mod, TabM = (TabooM* 2 ))
+                    $ Approval = Approvalcheck(Girl,1350,Bonus=Mod, TabM = (TabooM* 2 ))
 
         #Threesomecheck
         if not Approval:
                     # If it fails the primary trigger check, skip the next part
                     pass
-        elif not Partner_primary_action:
+        elif not second_girl_primary_action:
                     pass
-        elif Partner_primary_action == "eat_ass":
-                    $ Approval = ApprovalCheck(Girl,1750,Bonus=(Mod+200), TabM = (TabooM* 3 ))
-        elif Partner_primary_action == "eat_pussy":
-                    $ Approval = ApprovalCheck(Girl,1450,Bonus=(Mod+200), TabM = (TabooM* 2 ))
-        elif Partner_primary_action == "blowjob":
-                    $ Approval = ApprovalCheck(Girl,1300,Bonus=(Mod+200), TabM = (TabooM* 2 ))
-        elif Partner_primary_action == "handjob":
-                    $ Approval = ApprovalCheck(Girl,1200,Bonus=(Mod+200), TabM = (TabooM* 2 ))
-        elif Partner_primary_action == "finger_ass":
-                    $ Approval = ApprovalCheck(Girl,1500,Bonus=(Mod+200), TabM = (TabooM* 2 ))
-        elif Partner_primary_action == "fondle_pussy":
-                    $ Approval = ApprovalCheck(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 2 ))
-        elif Partner_primary_action == "suck_breasts":
-                    $ Approval = ApprovalCheck(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 3 ))
-        elif Partner_primary_action == "fondle_breasts":
-                    $ Approval = ApprovalCheck(Girl,1150,Bonus=(Mod+200), TabM = (TabooM* 2 ))
-        elif Partner_primary_action == "kiss girl":
-                    $ Approval = ApprovalCheck(Girl,1050,Bonus=(Mod+200), TabM = 0)
-        elif Partner_primary_action == "kiss both":
-                    $ Approval = ApprovalCheck(Girl,1050,Bonus=(Mod+200), TabM = 0)
-        elif Partner_primary_action == "fondle_ass":
-                    $ Approval = ApprovalCheck(Girl,1050,Bonus=(Mod+200), TabM = (TabooM* 1 ))
-        elif Partner_primary_action == "masturbation":
-                    $ Approval = ApprovalCheck(Girl,1400,Bonus=(Mod+200), TabM = (TabooM* 2 ))
-        elif Partner_primary_action == "watch":
-                    $ Approval = ApprovalCheck(Girl,1000,Bonus=(Mod+200), TabM = 0)
-        elif Partner_primary_action == "kiss":
-                    $ Approval = ApprovalCheck(Girl,600,Bonus=Mod, TabM = 0)
+        elif second_girl_primary_action == "eat_ass":
+                    $ Approval = Approvalcheck(Girl,1750,Bonus=(Mod+200), TabM = (TabooM* 3 ))
+        elif second_girl_primary_action == "eat_pussy":
+                    $ Approval = Approvalcheck(Girl,1450,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        elif second_girl_primary_action == "blowjob":
+                    $ Approval = Approvalcheck(Girl,1300,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        elif second_girl_primary_action == "handjob":
+                    $ Approval = Approvalcheck(Girl,1200,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        elif second_girl_primary_action == "finger_ass":
+                    $ Approval = Approvalcheck(Girl,1500,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        elif second_girl_primary_action == "fondle_pussy":
+                    $ Approval = Approvalcheck(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        elif second_girl_primary_action == "suck_breasts":
+                    $ Approval = Approvalcheck(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 3 ))
+        elif second_girl_primary_action == "fondle_breasts":
+                    $ Approval = Approvalcheck(Girl,1150,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        elif second_girl_primary_action == "kiss girl":
+                    $ Approval = Approvalcheck(Girl,1050,Bonus=(Mod+200), TabM = 0)
+        elif second_girl_primary_action == "kiss both":
+                    $ Approval = Approvalcheck(Girl,1050,Bonus=(Mod+200), TabM = 0)
+        elif second_girl_primary_action == "fondle_ass":
+                    $ Approval = Approvalcheck(Girl,1050,Bonus=(Mod+200), TabM = (TabooM* 1 ))
+        elif second_girl_primary_action == "masturbation":
+                    $ Approval = Approvalcheck(Girl,1400,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        elif second_girl_primary_action == "watch":
+                    $ Approval = Approvalcheck(Girl,1000,Bonus=(Mod+200), TabM = 0)
+        elif second_girl_primary_action == "kiss":
+                    $ Approval = Approvalcheck(Girl,600,Bonus=Mod, TabM = 0)
 
         if not Silent and not Approval and not Girl.Forced:
             $ Girl.change_face("sadside",1)
@@ -1200,31 +1196,35 @@ label Activity_Check(Girl=0,Girl2=0,Silent=0,Removal=1,ClothesCheck=1,Mod=0,Appr
 
         return Approval
 
-label JumperCheck(Girls=[],Girls=[]): #rkeljsv
+
+
+# Start Jumping check / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+
+label Jumpercheck(Girls=[],other_Girls=[]): #rkeljsv
         #decides whether a girl wants to jump you unexpectedly
         if "nope" in Player.recent_history or Party:
                 #if you refused sex. . .
                 return
 
-        $ Girls = active_Girls[:]
-        while Girls:
-                if "les" in Girls[0].recent_history and "no_les" not in Player.recent_history and ApprovalCheck(Girls[0], 1600 - Girls[0].SEXP, TabM=0):
+        $ other_Girls = active_Girls[:]
+        while other_Girls:
+                if "les" in other_Girls[0].recent_history and "no les" not in Player.recent_history and Approvalcheck(other_Girls[0], 1600 - other_Girls[0].SEXP, TabM=0):
                         #if they might be into you joining their lesbian adventure. . .
-                        call Call_For_Les(Girls[0])
+                        call Call_For_Les(other_Girls[0])
 
-                if door_locked and Girls[0].location != bg_current:
+                if "locked" in Player.Traits and other_Girls[0].location != bg_current:
                         #if the door's locked and she's not in the room, skip it
                         pass
-                elif Girls[0].Action and Girls[0].Thirst >= 30 and ApprovalCheck(Girls[0], 500, "I") and "refused" not in Girls[0].daily_history and "met" in Girls[0].History:
-                        if "chill" not in Girls[0].Traits and Girls[0].Tag not in Player.daily_history and "jumped" not in Girls[0].daily_history and Girls[0].location != "bg_teacher":
+                elif other_Girls[0].Action and other_Girls[0].Thirst >= 30 and Approvalcheck(other_Girls[0], 500, "I") and "refused" not in other_Girls[0].daily_history and "met" in other_Girls[0].History:
+                        if "chill" not in other_Girls[0].Traits and other_Girls[0].Tag not in Player.daily_history and "jumped" not in other_Girls[0].daily_history and other_Girls[0].location != "bg teacher":
                             # I rule out if she is teaching, she won't jump you. . .
                             if renpy.random.randint(0,3) > 1:
-                                    $ Girls.append(Girls[0])
-                            if Girls[0].Thirst >= 60:
-                                    $ Girls.append(Girls[0])
-                        if Girls[0].Thirst >= 90:
-                                    $ Girls.append(Girls[0])
-                $ Girls.remove(Girls[0])
+                                    $ Girls.append(other_Girls[0])
+                            if other_Girls[0].Thirst >= 60:
+                                    $ Girls.append(other_Girls[0])
+                        if other_Girls[0].Thirst >= 90:
+                                    $ Girls.append(other_Girls[0])
+                $ other_Girls.remove(other_Girls[0])
 
         if not Girls:
             return
@@ -1241,7 +1241,7 @@ label JumperCheck(Girls=[],Girls=[]): #rkeljsv
             #if there are two girls, it adds the second as a potential partner
             if Girls[0] in Player.Harem and Girls[1] in Player.Harem:
                     $ Partner = Girls[1]
-            elif Girls[0].GirlLikeCheck(Girls[1]) >= 800 and Girls[1].GirlLikeCheck(Girls[0]) >= 800:
+            elif Girls[0].GirlLikecheck(Girls[1]) >= 800 and Girls[1].GirlLikecheck(Girls[0]) >= 800:
                     $ Partner = Girls[1]
 
         call Jumped #Launches the main event
@@ -1249,7 +1249,7 @@ label JumperCheck(Girls=[],Girls=[]): #rkeljsv
         if "nope" in Player.recent_history:
                 #if you refused sex. . .
                 while Girls:         #clears list
-                        call remove_girl(Girls[0])
+                        call Remove_Girl(Girls[0])
                         $ Girls.remove(Girls[0])
                 jump Misplaced
         elif Girls:
@@ -1257,37 +1257,41 @@ label JumperCheck(Girls=[],Girls=[]): #rkeljsv
                 if Girls[0].location == bg_current:
                         call expression Girls[0].Tag + "_SexMenu" #call Rogue_SexMenu
 
-        if bg_current == "bg_player":
+        if bg_current == "bg player":
                 #if it jumped to your room. . .
                 jump Player_Room
         return
+#End Jumper_check, checking to see if a girl wants to jump you
 
-label LesCheck(Girls=[],Girls=[]): #rkeljsv
-        #Called by Wait, Checks if any girls will jump each other behind the scenes. . .
+
+# Start Lesbian Jumping check / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+
+label Lescheck(Girls=[],other_Girls=[]): #rkeljsv
+        #Called by Wait, checks if any girls will jump each other behind the scenes. . .
         # They will if they have over 500 inhibition and are thirsty
 
         if "three" not in EmmaX.History:
                 #this addes threecheck if she's really slutty
-                if EmmaX.Thirst >= 30 and ApprovalCheck(EmmaX, 800, "I"):
+                if EmmaX.Thirst >= 30 and Approvalcheck(EmmaX, 800, "I"):
                         $ EmmaX.History.append("three")
 
-        $ Girls = active_Girls[:]
-        while Girls:
+        $ other_Girls = active_Girls[:]
+        while other_Girls:
                 #loops through and makes choices.
-                if Girls[0] == RogueX and "touch" not in RogueX.Traits:
+                if other_Girls[0] == RogueX and "touch" not in RogueX.Traits:
                         #skip if Rogue and she doesn't have touch upgrade
                         pass
-                elif Girls[0] == EmmaX and "three" not in EmmaX.History:
+                elif other_Girls[0] == EmmaX and "three" not in EmmaX.History:
                         #skip if it's Emma and she doesn't do threesomes
                         pass
-                elif ApprovalCheck(Girls[0], 500, "I",Alt=[[EmmaX,JeanX],300]) and Girls[0].Thirst >= 30: #and "refused" not in R_daily_history?
-                        if ("mono" not in Girls[0].Traits or Girls[0].Break[0]) and Girls[0] not in Party:
-                            $ Girls.append(Girls[0])
-                            if Girls[0].Thirst >= 60:
-                                    $ Girls.append(Girls[0])
-                        if Girls[0].Thirst >= 90:
-                                $ Girls.append(Girls[0])
-                $ Girls.remove(Girls[0])
+                elif Approvalcheck(other_Girls[0], 500, "I",Alt=[[EmmaX,JeanX],300]) and other_Girls[0].Thirst >= 30: #and "refused" not in R_daily_history?
+                        if ("mono" not in other_Girls[0].Traits or other_Girls[0].Break[0]) and other_Girls[0] not in Party:
+                            $ Girls.append(other_Girls[0])
+                            if other_Girls[0].Thirst >= 60:
+                                    $ Girls.append(other_Girls[0])
+                        if other_Girls[0].Thirst >= 90:
+                                $ Girls.append(other_Girls[0])
+                $ other_Girls.remove(other_Girls[0])
         if not Girls:
             return
 
@@ -1305,14 +1309,14 @@ label LesCheck(Girls=[],Girls=[]): #rkeljsv
                         # if the second girl in the list is the same as the first, remove her
                         # if the second girl is at your location, remove her too
                         $ Girls.remove(Girls[1])
-                elif Girls[0] == JeanX and Girls[1].GirlLikeCheck(Girls[0]) >= 500:
+                elif Girls[0] == JeanX and Girls[1].GirlLikecheck(Girls[0]) >= 500:
                         # Jean tends to get her way. . .
                         $ Partner = Girls[1]
-                elif (Girls[1] in Player.Harem and Girls[0] in Player.Harem) and Girls[0].GirlLikeCheck(Girls[1]) >= 600:
+                elif (Girls[1] in Player.Harem and Girls[0] in Player.Harem) and Girls[0].GirlLikecheck(Girls[1]) >= 600:
                         $ Partner = Girls[1]
-                elif Girls[1].GirlLikeCheck(Girls[0]) >= 800 and Girls[0].GirlLikeCheck(Girls[1]) >= 800:
+                elif Girls[1].GirlLikecheck(Girls[0]) >= 800 and Girls[0].GirlLikecheck(Girls[1]) >= 800:
                         $ Partner = Girls[1]
-                elif Girls[1].Thirst >= 90 and Girls[0].GirlLikeCheck(Girls[1]) >= 600:
+                elif Girls[1].Thirst >= 90 and Girls[0].GirlLikecheck(Girls[1]) >= 600:
                         $ Partner = Girls[1]
                 else:
                         #if not picked, remove this girl from the list
@@ -1350,39 +1354,41 @@ label LesCheck(Girls=[],Girls=[]): #rkeljsv
         $ Girls[0].DrainWord("arriving",1,0) #removes "arriving" from recent
         $ Girls[1].DrainWord("arriving",1,0) #removes "arriving" from recent
 
-        $ Girls[0].change_stat("lust", 60, 20)
-        $ Girls[1].change_stat("lust", 60, 20)
+        $ Girls[0].Statup("lust", 60, 20)
+        $ Girls[1].Statup("lust", 60, 20)
 
         $ Girls[0].Thirst -= 5
         $ Girls[1].Thirst -= 5
         return
+# end Les_check, checking to see if the girls jump each other / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
-label CheckTaboo(Girl=0,Taboo_Check=0,Girl2=[]): #rkeljsv
+
+label checkTaboo(Girl=0,Taboo_check=0,Girl2=[]): #rkeljsv
         #Girl is the girl being tested
-        # Taboo_Check is the location she is at
+        # Taboo_check is the location she is at
 
-        if Taboo_Check in PersonalRooms or Taboo_Check == "hold":
+        if Taboo_check in PersonalRooms or Taboo_check == "hold":
                             $ Girl.Taboo = 0
-        elif door_locked and Taboo_Check == bg_current:
+        elif door_locked and Taboo_check == bg_current:
                             $ Girl.Taboo = 0
-        elif Taboo_Check in ("bg_classroom", "bg_study"):
+        elif Taboo_check in ("bg_classroom", "bg_study"):
                 if time_index >= 3:
                             $ Girl.Taboo = 10
                 elif time_index == 2 or Weekday >= 5:
                             $ Girl.Taboo = 30
                 else:
                             $ Girl.Taboo = 40
-        elif Taboo_Check == "bg_dangerroom":
+        elif Taboo_check == "bg_dangerroom":
                 if time_index >= 3:
                             $ Girl.Taboo = 20
                 else:
                             $ Girl.Taboo = 40
-        elif Taboo_Check == "bg_campus" or Taboo_Check == "bg_pool":
+        elif Taboo_check == "bg_campus" or Taboo_check == "bg_pool":
                 if time_index >= 3:
                             $ Girl.Taboo = 20
                 else:
                             $ Girl.Taboo = 40
-        elif Taboo_Check == "bg_showerroom":
+        elif Taboo_check == "bg_showerroom":
                             $ Girl.Taboo = 20
         else:
                             $ Girl.Taboo = 40
@@ -1399,7 +1405,7 @@ label CheckTaboo(Girl=0,Taboo_Check=0,Girl2=[]): #rkeljsv
                 #compares the first girl to each of the others.
                 if Girl2[0] != Girl:
                         #loops through the girls in an inner loop if they are not the same
-                        if Girl.location == Girl2[0].location and Girl.GirlLikeCheck(Girl2[0]) <= 700 and not (Girl in Player.Harem and Girl2[0] in Player.Harem):
+                        if Girl.location == Girl2[0].location and Girl.GirlLikecheck(Girl2[0]) <= 700 and not (Girl in Player.Harem and Girl2[0] in Player.Harem):
                                 #if either she likes the second girl, or both are in the harem, skip
                                 $ Girl.Taboo = 20
                 $ Girl2.remove(Girl2[0])
@@ -1408,9 +1414,9 @@ label CheckTaboo(Girl=0,Taboo_Check=0,Girl2=[]): #rkeljsv
 
         return
 
-label Present_Check(Hold=1,Girls=[],TempList=[]):
+label Present_check(Hold=1,Girls=[],TempList=[]):
         # Culls parties down to 2 max
-        # call Present Check will cull inhabitants of the room down to zero
+        # call Present check will cull inhabitants of the room down to zero
 
         while len(Party) > 2:
                 # If two or more members in the party

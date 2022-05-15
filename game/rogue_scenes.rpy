@@ -12,6 +12,8 @@ label prologue:
     "Things have been tough for mutants in the years since Apocalypse's fall, but this sounds like it might be a good deal."
 
     if not simulation:
+        $ line = None
+
         python:
             Player.name = renpy.input("What is your name?", default="Zero", length = 10)
             Player.name = Player.name.strip()
@@ -21,10 +23,12 @@ label prologue:
 
             if Player.name in ("master", "sir", "lover", "boyfriend", "sex friend", "fuck buddy"):
                 line = "Nice try, smartass."
+                
                 Player.name = "Zero"
 
         if line:
             "[line]"
+
         menu:
             "What is your skin color?"
             "Green":

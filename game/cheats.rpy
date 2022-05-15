@@ -1,7 +1,7 @@
 label StatHacks(Girl=0,counter=0):
     while True:
             menu:
-                "[Girl.name]: love: [Girl.love], obedienceience: [Girl.obedience], Inhibition:[Girl.inhibition], lust: [Girl.lust] Taboo: [Taboo], Location: [Girl.location]"
+                "[Girl.name]: love: [Girl.love], obedience: [Girl.obedience], Inhibition:[Girl.inhibition], lust: [Girl.lust] Taboo: [Taboo], Location: [Girl.location]"
                 "Activities":
                     menu:
                         "Recent Actions":
@@ -18,9 +18,9 @@ label StatHacks(Girl=0,counter=0):
                     $ Girl.love += 100
                 "Lower love":
                     $ Girl.love -= 100
-                "Raise obedienceience":
+                "Raise obedience":
                     $ Girl.obedience += 100
-                "Lower obedienceience":
+                "Lower obedience":
                     $ Girl.obedience -= 100
                 "Raise Inhibitions":
                     $ Girl.inhibition += 100
@@ -37,9 +37,9 @@ label StatHacks(Girl=0,counter=0):
                                 $ Girl.love += 10
                             "Lower love":
                                 $ Girl.love -= 10
-                            "Raise obedienceience":
+                            "Raise obedience":
                                 $ Girl.obedience += 10
-                            "Lower obedienceience":
+                            "Lower obedience":
                                 $ Girl.obedience -= 10
                             "Raise Inhibitions":
                                 $ Girl.inhibition += 10
@@ -63,7 +63,7 @@ label StatHacks(Girl=0,counter=0):
                     call WardrobeEditor(Girl)
 
                 "Return":
-                    call Checkout
+                    call checkout
                     return
 
 label Cheat_Menu(Girl=0):

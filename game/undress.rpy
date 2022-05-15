@@ -1,7 +1,7 @@
 
 label AutoStrip(Girl=0):  #rkeljsv
         #this is called if they MUST strip to do a sex act, ie sex/anal
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         if (Girl.Panties and not Girl.PantiesDown) or Girl.PantsNum() >= 6 or Girl.HoseNum() >= 6: #If she refuses to take off her pants but agreed to anal
             if Girl == RogueX:
                     ch_r "Well, I guess some things are necessary, [RogueX.Petname]."
@@ -43,7 +43,7 @@ label AutoStrip(Girl=0):  #rkeljsv
 
 label Girl_Undress(Girl=0,Region = "ask",stored_count=0): #rkeljsv
         #Called mostly from sex act menus when you want a girl to strip down
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         call shift_focus(Girl)
 
         $ stored_count = temp_modifier
@@ -124,7 +124,7 @@ label Girl_Undress(Girl=0,Region = "ask",stored_count=0): #rkeljsv
 
 label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
         # Will she take her top off? Modifiers
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         call shift_focus(Girl)
 
         if not Girl.Over and not Girl.Chest:
@@ -149,7 +149,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                         ch_v "The top stays on. . ."
                 return
 
-        if Girl.SeenChest and ApprovalCheck(Girl, 500) and not Taboo:
+        if Girl.SeenChest and Approvalcheck(Girl, 500) and not Taboo:
                 #You've seen her tits.
                 $ temp_modifier += 20
         if "exhibitionist" in Girl.Traits:
@@ -189,11 +189,11 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                                 ch_p "This might be easier without your [Girl.Chest] on."
 
 
-        $ Approval = ApprovalCheck(Girl, 1100, TabM = 4) # 110, 125, 140, 300 taboo, -20 if already seen
+        $ Approval = Approvalcheck(Girl, 1100, TabM = 4) # 110, 125, 140, 300 taboo, -20 if already seen
 
         if action_context == "auto" and  (Girl.Over or Girl.Chest or (Girl == JubesX and Girl.Acc)) and not Girl.Uptop:
                 $ line = 0
-                if ApprovalCheck(Girl, 1250, TabM = 1) or (Girl.SeenChest and ApprovalCheck(Girl, 500) and not Taboo):
+                if Approvalcheck(Girl, 1250, TabM = 1) or (Girl.SeenChest and Approvalcheck(Girl, 500) and not Taboo):
                         #if she'd go topless
                         $ Girl.change_stat("inhibition", 70, 1)
                         $ Girl.Uptop = 1
@@ -216,7 +216,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                         if Taboo:
                             $ Girl.change_stat("inhibition", 90, (int(Taboo/20)))
                         call first_topless(Girl, silent = 1)
-                elif Girl.Over and Girl.Chest and ApprovalCheck(Girl, 800, TabM = 1):
+                elif Girl.Over and Girl.Chest and Approvalcheck(Girl, 800, TabM = 1):
                         #if she won't go topless, but has a bra on. . .
                         $ Girl.change_stat("inhibition", 40, 1)
                         $ line = Girl.Over
@@ -581,7 +581,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                         ch_v "Sure, I guess. . ."
                         $ Girl.Acc = 0
                         "[Girl.name] shrugs off her Jacket."
-                elif ApprovalCheck(Girl, 800, TabM = 2) and Girl.Chest: #80, 160 taboo
+                elif Approvalcheck(Girl, 800, TabM = 2) and Girl.Chest: #80, 160 taboo
                         $ Girl.change_face("sexy")
                         ch_v "Well, I guess. . ."
                         $ Girl.change_face("bemused", 1)
@@ -602,7 +602,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                                     ch_v "Whew, thanks. . ."
 
                             "That doesn't bother me any.":
-                                if ApprovalCheck(Girl, 500, "I", TabM=3) or ApprovalCheck(Girl, 1000, "LI", TabM=3):
+                                if Approvalcheck(Girl, 500, "I", TabM=3) or Approvalcheck(Girl, 1000, "LI", TabM=3):
                                     $ Girl.change_face("bemused", 1)
                                     ch_v "Whoa, spicy. . ."
                                     $ Girl.change_stat("obedience", 20, 2)
@@ -627,7 +627,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
             #end "just the jacket?"
             "How about just the [Girl.Over]?" if Girl.Over:
                 # asked to go shirtless.
-                if ApprovalCheck(Girl, 800, TabM = 2) and Girl.Chest: #80, 160 taboo
+                if Approvalcheck(Girl, 800, TabM = 2) and Girl.Chest: #80, 160 taboo
                         $ Girl.change_face("sexy")
                         if Girl == RogueX:
                                 ch_r "Well, that's no big deal I guess. . ."
@@ -697,7 +697,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                                             ch_v "Whew, thanks. . ."
 
                             "That doesn't bother me any.":
-                                if ApprovalCheck(Girl, 500, "I", TabM=3) or ApprovalCheck(Girl, 1000, "LI", TabM=3):
+                                if Approvalcheck(Girl, 500, "I", TabM=3) or Approvalcheck(Girl, 1000, "LI", TabM=3):
                                     $ Girl.change_face("bemused", 1)
                                     if Girl == RogueX:
                                             ch_r "Ooh, at least you know what you like"
@@ -746,7 +746,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
 
             "Come on, Please? [[take it all off]":
                 # asked to go topless. 110, 270 Taboo
-                if Approval and ApprovalCheck(Girl, 600, "L", TabM=1):
+                if Approval and Approvalcheck(Girl, 600, "L", TabM=1):
                         $ Girl.change_stat("obedience", 40, 2)
                         $ Girl.change_face("sexy")
                         if Girl == RogueX:
@@ -825,7 +825,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
 
 label Top_Off_Refused(Girl=0): #rkeljsv
         #Called form Top_Off when you insist but she refuses
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         call shift_focus(Girl)
 
         $ Girl.change_face("angry")
@@ -926,11 +926,11 @@ label Top_Off_Refused(Girl=0): #rkeljsv
 
 label ToplessorNothing(Girl=0): #rkeljsv
         #Called from Top_Off if you insist she go topless after she's declined.
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         call shift_focus(Girl)
 
         $ Girl.change_face("angry")
-        if ApprovalCheck(Girl, 800, "OI", TabM = 4) and ApprovalCheck(Girl, 400, "O", TabM = 3):
+        if Approvalcheck(Girl, 800, "OI", TabM = 4) and Approvalcheck(Girl, 400, "O", TabM = 3):
             $ Girl.change_stat("love", 20, -2, 1)
             $ Girl.change_stat("love", 70, -5, 1)
             $ Girl.change_stat("inhibition", 60, 3)
@@ -1032,7 +1032,7 @@ label ToplessorNothing(Girl=0): #rkeljsv
         return
 
 label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         call shift_focus(Girl)
 
         if not Girl.Legs and not Girl.Panties and not Girl.Hose:
@@ -1059,11 +1059,11 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                 return
 
         # Will she take her bottoms off Modifiers
-        if Girl.SeenPussy and ApprovalCheck(Girl, 700): #You've seen her Pussy.
+        if Girl.SeenPussy and Approvalcheck(Girl, 700): #You've seen her Pussy.
                 $ temp_modifier += 20
         elif not Girl.Panties:
                 $ temp_modifier -= 20
-        elif Girl.SeenPanties and ApprovalCheck(Girl, 500): #You've seen her panties.
+        elif Girl.SeenPanties and Approvalcheck(Girl, 500): #You've seen her panties.
                 $ temp_modifier += 5
         if Intro == "dildo":
                 $ temp_modifier += 20
@@ -1102,7 +1102,7 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                         elif Girl.Panties and not Girl.PantiesDown:
                                 ch_p "This might be easier without your [Girl.Panties] on."
 
-        $ Approval = ApprovalCheck(Girl, 1200, TabM = 5) # 120, 135, 150, -200(320) taboo, -25 if already seen
+        $ Approval = Approvalcheck(Girl, 1200, TabM = 5) # 120, 135, 150, -200(320) taboo, -25 if already seen
 
         if action_context == "auto":
             $ counter = 0
@@ -1463,7 +1463,7 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                                 elif Girl == JubesX:
                                         ch_v "No."
                         else:
-                            if Approval and ApprovalCheck(Girl, 600, "L", TabM=1):
+                            if Approval and Approvalcheck(Girl, 600, "L", TabM=1):
                                 $ Girl.change_face("sexy", 1)
                                 $ D20 = renpy.random.randint(1, 3)
                                 $ Approval += 1 if D20 == 3 else 0
@@ -1500,7 +1500,7 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                             pass
 
                 "No, lose 'em.":            #85 and -200 taboo
-                    if (Approval and Girl.obedience >= 250) or (ApprovalCheck(Girl, 850, "OI", TabM = 5) and ApprovalCheck(Girl, 400, "O")):
+                    if (Approval and Girl.obedience >= 250) or (Approvalcheck(Girl, 850, "OI", TabM = 5) and Approvalcheck(Girl, 400, "O")):
                                 $ Girl.change_stat("love", 20, -1, 1)
                                 $ Girl.change_stat("love", 70, -5, 1)
                                 $ Girl.change_stat("obedience", 50, 4)
@@ -1525,7 +1525,7 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                                 call Bottoms_Off_Legs(Girl)
                     else:
                         $ Girl.change_stat("love", 200, -10)
-                        if ApprovalCheck(Girl, 400, "O"):
+                        if Approvalcheck(Girl, 400, "O"):
                                 if Girl == RogueX:
                                         ch_r "I. . . I really can't."
                                 elif Girl == KittyX:
@@ -1567,14 +1567,14 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
         return
 
 label Bottoms_Off_Legs(Girl=0):  #rkeljsv
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         call shift_focus(Girl)
 
         if Girl.Forced:
             $ Girl.change_face("sad", 1)
-        elif ApprovalCheck(Girl, 1100, "OI", TabM = 3):
+        elif Approvalcheck(Girl, 1100, "OI", TabM = 3):
             $ Girl.change_face("sly")
-        elif ApprovalCheck(Girl, 1400, TabM = 3):
+        elif Approvalcheck(Girl, 1400, TabM = 3):
             $ Girl.change_face("sexy", 1)
         else:
             $ Girl.change_face("bemused", 1)
@@ -1854,7 +1854,7 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                                 $ Girl.Inventory.append(Girl.Hose)
                         $ Girl.AddWord(1,"ripped","ripped")
                         "You tear holes in her [line]."
-                        if not ApprovalCheck(Girl, 1200, TabM=0):
+                        if not Approvalcheck(Girl, 1200, TabM=0):
                                 $ Girl.change_face("angry", 1,Eyes="down")
                                 if Girl == RogueX:
                                         ch_r "Dammit, [Girl.Petname], those are gettin expensive!"
@@ -1888,7 +1888,7 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
 
 label NoPantiesOn(Girl=0):  #rkeljsv
         #called when asked to remove pants with nothing on under
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         call shift_focus(Girl)
 
         if not Girl.Panties:
@@ -1932,7 +1932,7 @@ label NoPantiesOn(Girl=0):  #rkeljsv
         menu:
             extend ""
             "Could you do it anyway?":
-                if ApprovalCheck(Girl, 1000, "LI", TabM=1):
+                if Approvalcheck(Girl, 1000, "LI", TabM=1):
                         if Girl == RogueX:
                                 ch_r "Well, if you're gonna ask so nicely. . . "
                         elif Girl == KittyX:
@@ -1965,7 +1965,7 @@ label NoPantiesOn(Girl=0):  #rkeljsv
                         call Bottoms_Off_Refused(Girl)
                         $ renpy.pop_call()
             "Don't care, lose'em.":
-                if ApprovalCheck(Girl, 800, "OI", TabM=1):
+                if Approvalcheck(Girl, 800, "OI", TabM=1):
                         if Girl == RogueX:
                                 ch_r "Fine, whatever."
                         elif Girl == KittyX:
@@ -1989,7 +1989,7 @@ label NoPantiesOn(Girl=0):  #rkeljsv
         return
 
 label Bottoms_Off_Refused(Girl=0):  #rkeljsv
-        $ Girl = GirlCheck(Girl)
+        $ Girl = Girlcheck(Girl)
         call shift_focus(Girl)
 
         if Girl == RogueX:

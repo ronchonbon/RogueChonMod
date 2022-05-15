@@ -1,5 +1,5 @@
 label Shower_Room_Entry:
-    call Jubes_Entry_Check
+    call Jubes_Entry_check
     $ bg_current = "bg_showerroom"
     $ door_locked = False
     $ Nearby = []
@@ -20,7 +20,7 @@ label Shower_Room_Entry:
     while line:
             #loops through and adds populates Occupants with locals
             if line[0] not in Party and "showered" not in line[0].daily_history and (line[0].location == line[0].Home or line[0].location == "bg_dangerroom"):
-                    #Checks if girl is in the shower
+                    #checks if girl is in the shower
                     $ Options.append(line[0])
             $ line.remove(line[0])
     $ line = 0
@@ -48,7 +48,7 @@ label Shower_Room_Entry:
                     $ Options[0].AddWord(1,"showered","showered",0,0)
                     call Girl_Caught_Changing(Options[0])
                     jump Shower_Room
-    #End Caught Check
+    #End Caught check
 
     # If none of the caught dialogs plays, checks to see if anyone is in the room, and allows them to be there if they are.
     $ line = Options[:]
@@ -58,7 +58,7 @@ label Shower_Room_Entry:
             $ line.remove(line[0])
     $ line = 0
 
-    call Present_Check(0)
+    call Present_check(0)
 
     $ line = Options[:]
     while line:
@@ -71,7 +71,7 @@ label Shower_Room_Entry:
     $ line = 0
     #End Count set-up
 
-    call set_the_scene(Dress=0)
+    call set_the_scene(check_if_dressed=0)
     if Party:
         $ line = " and " + Party[0].name
     else:
@@ -88,101 +88,101 @@ label Shower_Room_Entry:
                     ch_r "Hey, [RogueX.Petname]."
                     if "showered" in RogueX.recent_history:
                             ch_r "I was just getting ready to head out."
-                    if not ApprovalCheck(Options[0], 900):
+                    if not Approvalcheck(Options[0], 900):
                             ch_r "See ya later."
             if Options[0]  == KittyX:
                     ch_k "Hey, [KittyX.Petname]."
                     if "showered" in KittyX.recent_history:
                             ch_k "I just got finished."
-                    if not ApprovalCheck(Options[0], 900):
+                    if not Approvalcheck(Options[0], 900):
                             ch_k "Oh, um, I should get out of your way. . ."
             if Options[0]  == EmmaX:
                     ch_e "Oh, hello, [EmmaX.Petname]."
                     if "showered" in EmmaX.recent_history:
                             ch_e "I was about finished here."
-                    if not ApprovalCheck(Options[0], 900):
+                    if not Approvalcheck(Options[0], 900):
                             ch_e "I should get going."
             if Options[0]  == LauraX:
                     ch_l "Oh, hey."
                     if "showered" in LauraX.recent_history:
                             ch_l "I'm done here."
-                    if not ApprovalCheck(Options[0], 900):
+                    if not Approvalcheck(Options[0], 900):
                             ch_l "See you later."
             if Options[0]  == JeanX:
                     ch_j "Oh, hey. . . you."
                     if "showered" in JeanX.recent_history:
                             ch_j "I'm wrapping up here."
-                    if not ApprovalCheck(Options[0], 900):
+                    if not Approvalcheck(Options[0], 900):
                             ch_j "Later."
             if Options[0]  == StormX:
                     ch_s "Oh, hello, [StormX.Petname]."
                     if "showered" in StormX.recent_history:
                             ch_s "I was finishing up here."
-                    if not ApprovalCheck(Options[0], 600):
+                    if not Approvalcheck(Options[0], 600):
                             ch_s "I am heading out at the moment."
             if Options[0]  == JubesX:
                     ch_v "Yo, [JubesX.Petname]."
                     if "showered" in JubesX.recent_history:
                             ch_v "I just finished up here."
-                    if not ApprovalCheck(Options[0], 900):
+                    if not Approvalcheck(Options[0], 900):
                             ch_v "I should, uh, get going. . ."
             if len(Options) >= 2:
                     if Options[1] == RogueX:
-                            if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 900):
+                            if not Approvalcheck(Options[0], 900) and not Approvalcheck(Options[1], 900):
                                     #if both decide to leave
                                     ch_r "Yeah, I'll see you too."
-                            elif not ApprovalCheck(Options[1], 900):
+                            elif not Approvalcheck(Options[1], 900):
                                     #if only person 2 decides to leave
                                     ch_r "Yeah, I should get going though."
                             else:
                                     #if both stay
                                     ch_r "Yeah, hey."
                     if Options[1] == KittyX:
-                            if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 900):
+                            if not Approvalcheck(Options[0], 900) and not Approvalcheck(Options[1], 900):
                                     ch_k "Yeah, see ya."
-                            elif not ApprovalCheck(Options[1], 900):
+                            elif not Approvalcheck(Options[1], 900):
                                     ch_k "Oh, well. . . I should get going."
                             else:
                                     ch_k "Yeah, hi."
                     if Options[1] == EmmaX:
-                            if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 900):
+                            if not Approvalcheck(Options[0], 900) and not Approvalcheck(Options[1], 900):
                                     ch_e "Yes, I should also get going."
-                            elif not ApprovalCheck(Options[1], 900):
+                            elif not Approvalcheck(Options[1], 900):
                                     ch_e "You two look like you have some business. . ."
                             else:
                                     ch_e "Yes, hello."
                     if Options[1] == LauraX:
-                            if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 900):
+                            if not Approvalcheck(Options[0], 900) and not Approvalcheck(Options[1], 900):
                                     ch_l "Yeah, I'm heading out too."
-                            elif not ApprovalCheck(Options[1], 900):
+                            elif not Approvalcheck(Options[1], 900):
                                     ch_l "I'll get out of your way."
                             else:
                                     ch_l "Hey."
                     if Options[1] == JeanX:
-                            if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 900):
+                            if not Approvalcheck(Options[0], 900) and not Approvalcheck(Options[1], 900):
                                     ch_j "Yeah, I'm done too."
-                            elif not ApprovalCheck(Options[1], 900):
+                            elif not Approvalcheck(Options[1], 900):
                                     ch_j "I'm headed out."
                             else:
                                     ch_j "Hey."
                     if Options[1] == StormX:
-                            if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 600):
+                            if not Approvalcheck(Options[0], 900) and not Approvalcheck(Options[1], 600):
                                     ch_s "Yes, I am also leaving."
-                            elif not ApprovalCheck(Options[1], 900):
+                            elif not Approvalcheck(Options[1], 900):
                                     ch_s "I wouldn't want to be a bother. . ."
                             else:
                                     ch_s "Yes, hello."
                     if Options[1] == JubesX:
-                            if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 900):
+                            if not Approvalcheck(Options[0], 900) and not Approvalcheck(Options[1], 900):
                                     ch_v "Yeah, see ya."
-                            elif not ApprovalCheck(Options[1], 900):
+                            elif not Approvalcheck(Options[1], 900):
                                     ch_v "Oh, so. . . I should head out."
                             else:
                                     ch_v "Yeah, hey."
 
-                    if not ApprovalCheck(Options[1], 900):
+                    if not Approvalcheck(Options[1], 900):
                             call remove_girl(Options[1])
-            if not ApprovalCheck(Options[0], 900):
+            if not Approvalcheck(Options[0], 900):
                             call remove_girl(Options[0])
             # End welcomes
             if Options:
@@ -208,16 +208,16 @@ label Shower_Room:
     $ bg_current = "bg_showerroom"
     $ Player.DrainWord("traveling",1,0)
     call Taboo_Level
-    call set_the_scene(Dress=0)
+    call set_the_scene(check_if_dressed=0)
     call QuickEvents
-    call Checkout(1)
+    call checkout(1)
     if Round <= 10:
                 if time_index == 3: #night time
                         "You're getting tired, you head back to your room."
                         jump player_room
                 call Wait
                 call EventCalls
-                call Girls_Location
+                call Girls_location
     call GirlsAngry
     #End Room Set-up
 
@@ -239,7 +239,7 @@ label Shower_Room:
                         "Not gonna lie, kinda weird."
                 call Wait
                 call EventCalls
-                call Girls_Location
+                call Girls_location
 
                 #this bit sets up drop-in Girls
                 if renpy.random.randint(1, 20) < 5:
@@ -248,7 +248,7 @@ label Shower_Room:
                         while line:
                                 #loops through and adds populates Occupants with locals
                                 if line[0].location != bg_current and "showered" not in line[0].daily_history and (line[0].location == line[0].Home or line[0].location == "bg_dangerroom"):
-                                        #Checks if girl is in the shower
+                                        #checks if girl is in the shower
                                         $ Nearby.append(line[0])
                                 $ line.remove(line[0])
                         $ line = 0
@@ -384,7 +384,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
             else:
                 #None of them have showered yet
                 if Occupants[0] == RogueX:
-                        if ApprovalCheck(RogueX, 1200) or (ApprovalCheck(RogueX, 600) and RogueX.SeenChest and RogueX.SeenPussy):
+                        if Approvalcheck(RogueX, 1200) or (Approvalcheck(RogueX, 600) and RogueX.SeenChest and RogueX.SeenPussy):
                                     # Rogue says yes
                                     ch_r "I suppose I could stick around. . ."
                                     $ StayCount.append(RogueX)
@@ -392,7 +392,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                     # Rogue says no
                                     ch_r "Nah, I should probably get going."
                 elif Occupants[0] == KittyX:
-                        if ApprovalCheck(KittyX, 1400) or (ApprovalCheck(KittyX, 700) and KittyX.SeenChest and KittyX.SeenPussy):
+                        if Approvalcheck(KittyX, 1400) or (Approvalcheck(KittyX, 700) and KittyX.SeenChest and KittyX.SeenPussy):
                                     ch_k "Yeah, I could stick around."
                                     $ StayCount.append(KittyX)
                         else:
@@ -400,31 +400,31 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                 elif Occupants[0] == EmmaX:
                         if not "classcaught" in EmmaX.History or "three" not in EmmaX.History:
                                 ch_e "I really should be going. . ."
-                        elif ApprovalCheck(EmmaX, 1400) or (ApprovalCheck(EmmaX, 700) and EmmaX.SeenChest and EmmaX.SeenPussy):
+                        elif Approvalcheck(EmmaX, 1400) or (Approvalcheck(EmmaX, 700) and EmmaX.SeenChest and EmmaX.SeenPussy):
                                     ch_e "I suppose I could stay, for a bit."
                                     $ StayCount.append(EmmaX)
                         else:
                                     ch_e "I'm afraid I really must be going."
                 elif Occupants[0] == LauraX:
-                        if ApprovalCheck(LauraX, 1400) or (ApprovalCheck(LauraX, 700) and LauraX.SeenChest and LauraX.SeenPussy):
+                        if Approvalcheck(LauraX, 1400) or (Approvalcheck(LauraX, 700) and LauraX.SeenChest and LauraX.SeenPussy):
                                     ch_l "I got nothing better to do."
                                     $ StayCount.append(LauraX)
                         else:
                                     ch_l "I gotta get going."
                 elif Occupants[0] == JeanX:
-                        if ApprovalCheck(JeanX, 1400) or (ApprovalCheck(JeanX, 700) and JeanX.SeenChest and JeanX.SeenPussy):
+                        if Approvalcheck(JeanX, 1400) or (Approvalcheck(JeanX, 700) and JeanX.SeenChest and JeanX.SeenPussy):
                                     ch_j "Sure, why not."
                                     $ StayCount.append(JeanX)
                         else:
                                     ch_j "Nah, lol."
                 elif Occupants[0] == StormX:
-                        if ApprovalCheck(StormX, 700):
+                        if Approvalcheck(StormX, 700):
                                     ch_s "I could stay, I suppose."
                                     $ StayCount.append(StormX)
                         else:
                                     ch_s "I really do have things to do, [StormX.Petname]."
                 elif Occupants[0] == JubesX:
-                        if ApprovalCheck(JubesX, 1400) or (ApprovalCheck(JubesX, 700) and JubesX.SeenChest and JubesX.SeenPussy):
+                        if Approvalcheck(JubesX, 1400) or (Approvalcheck(JubesX, 700) and JubesX.SeenChest and JubesX.SeenPussy):
                                     ch_v "I guess I could stay a minute. . ."
                                     $ StayCount.append(JubesX)
                         else:
@@ -434,7 +434,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                 if len(Occupants) >= 2:
                     #seond girls
                     if Occupants[1] == RogueX:
-                        if ApprovalCheck(RogueX, 1200) or (ApprovalCheck(RogueX, 600) and RogueX.SeenChest and RogueX.SeenPussy):
+                        if Approvalcheck(RogueX, 1200) or (Approvalcheck(RogueX, 600) and RogueX.SeenChest and RogueX.SeenPussy):
                                 if StayCount:
                                     #If Rogue said yes
                                     ch_r "I could stick around too. . ."
@@ -451,7 +451,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                     ch_r "I should get going too."
 
                     elif Occupants[1] == KittyX:
-                        if ApprovalCheck(KittyX, 1400) or (ApprovalCheck(KittyX, 700) and KittyX.SeenChest and KittyX.SeenPussy):
+                        if Approvalcheck(KittyX, 1400) or (Approvalcheck(KittyX, 700) and KittyX.SeenChest and KittyX.SeenPussy):
                                 if StayCount:
                                     #If Kitty said yes
                                     ch_k "I guess I could stay too. . ."
@@ -470,7 +470,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                     elif Occupants[1] == EmmaX:
                         if not "classcaught" in EmmaX.History or "three" not in EmmaX.History:
                                     ch_e "I really should be going. . ."
-                        elif ApprovalCheck(EmmaX, 1400) or (ApprovalCheck(EmmaX, 700) and EmmaX.SeenChest and EmmaX.SeenPussy):
+                        elif Approvalcheck(EmmaX, 1400) or (Approvalcheck(EmmaX, 700) and EmmaX.SeenChest and EmmaX.SeenPussy):
                                 if StayCount:
                                     #If Emma said yes
                                     ch_e "I suppose I could also stay. . ."
@@ -487,7 +487,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                     ch_e "Yes, let's go."
 
                     elif Occupants[1] == LauraX:
-                        if ApprovalCheck(LauraX, 1400) or (ApprovalCheck(LauraX, 700) and LauraX.SeenChest and LauraX.SeenPussy):
+                        if Approvalcheck(LauraX, 1400) or (Approvalcheck(LauraX, 700) and LauraX.SeenChest and LauraX.SeenPussy):
                                 if StayCount:
                                     #If Laura said yes
                                     ch_l "I could stay too. . ."
@@ -504,7 +504,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                     ch_l "Yeah, me too."
 
                     elif Occupants[1] == JeanX:
-                        if ApprovalCheck(JeanX, 1000) or (ApprovalCheck(JeanX, 600) and JeanX.SeenChest and JeanX.SeenPussy):
+                        if Approvalcheck(JeanX, 1000) or (Approvalcheck(JeanX, 600) and JeanX.SeenChest and JeanX.SeenPussy):
                                 if StayCount:
                                     #If Jean said yes
                                     ch_j "I guess I could stay too. . ."
@@ -521,7 +521,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                     ch_j "Yeah."
 
                     elif Occupants[1] == StormX:
-                        if ApprovalCheck(StormX, 700):
+                        if Approvalcheck(StormX, 700):
                                 if StayCount:
                                     #If Storm said yes
                                     ch_s "I could also stay. . ."
@@ -538,7 +538,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                     ch_s "Yes, let's."
 
                     elif Occupants[1] == JubesX:
-                        if ApprovalCheck(JubesX, 1400) or (ApprovalCheck(JubesX, 700) and JubesX.SeenChest and JubesX.SeenPussy):
+                        if Approvalcheck(JubesX, 1400) or (Approvalcheck(JubesX, 700) and JubesX.SeenChest and JubesX.SeenPussy):
                                 if StayCount:
                                     #If Jubes said yes
                                     ch_k "I could kinda stay too. . ."
@@ -593,16 +593,16 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                         if Girls[0] == EmmaX and (not "classcaught" in EmmaX.History or (StayCount and "three" not in EmmaX.History)):
                                             #if it's Emma, and she isn't comfortable with threesomes or public stuff, skip her
                                             pass
-                                        elif Girls[0] == JeanX and ApprovalCheck(Girls[0], 600):
+                                        elif Girls[0] == JeanX and Approvalcheck(Girls[0], 600):
                                             $ StayCount.append(Girls[0])
                                         elif Girls[0] == StormX:
-                                            if ApprovalCheck(Girls[0], 700, "LO"):
+                                            if Approvalcheck(Girls[0], 700, "LO"):
                                                 $ StayCount.append(Girls[0])
-                                        elif ApprovalCheck(Girls[0], 1200,Alt=[[KittyX],1400]) or (ApprovalCheck(Girls[0], 600,Alt=[[KittyX],700]) and Girls[0].SeenChest and Girls[0].SeenPussy): #1400/700 for Kitty?
+                                        elif Approvalcheck(Girls[0], 1200,Alt=[[KittyX],1400]) or (Approvalcheck(Girls[0], 600,Alt=[[KittyX],700]) and Girls[0].SeenChest and Girls[0].SeenPussy): #1400/700 for Kitty?
                                             $ StayCount.append(Girls[0])
-                                        elif line == "spot" and ApprovalCheck(Girls[0], 1000, "LI",Alt=[[KittyX],1200]):   #1200 for Kitty?
+                                        elif line == "spot" and Approvalcheck(Girls[0], 1000, "LI",Alt=[[KittyX],1200]):   #1200 for Kitty?
                                             $ StayCount.append(Girls[0])
-                                        elif line == "watch you" and ApprovalCheck(Girls[0], 600, "O",Alt=[[EmmaX],500]):   #500 for Emma?
+                                        elif line == "watch you" and Approvalcheck(Girls[0], 600, "O",Alt=[[EmmaX],500]):   #500 for Emma?
                                             $ StayCount.append(Girls[0])
                                         #else, she doesn't agree
                                 $ Girls.remove(Girls[0])
@@ -835,7 +835,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
 
                     if len(StayCount) > 1:
                             #if there are multiple girls
-                            if StayCount[1].GirlLikeCheck(StayCount[0]) > 500:
+                            if StayCount[1].GirlLikecheck(StayCount[0]) > 500:
                                     #if she likes the other girl. . .
                                     if StayCount[1] == RogueX:
                                         ch_r "I guess I could too."
@@ -870,7 +870,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                     $ Girls[0].Spunk = []
                                     $ Girls[0].recent_history.append("showered")
                                     $ Girls[0].daily_history.append("showered")
-                                    call expression Girls[0].Tag + "_First_Bottomless" pass (1)
+                                    call first_bottomless(Girls[0], 1)
                                     call first_topless(Girls[0], silent = 1)
                             else:
                                     #If the girl leaves
@@ -905,8 +905,8 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
 
             $ Girls = Nearby[:]
 
-            #call Present_Check ?
-            call set_the_scene(Dress=0)
+            #call Present_check ?
+            call set_the_scene(check_if_dressed=0)
 
             call Seen_First_Peen(0,0,1,1) #You get naked, silent reactions
 
@@ -991,9 +991,9 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
 
             if Girls:
                 #if there are still girls around to join in. . .
-                if ApprovalCheck(Girls[0], 1200):
+                if Approvalcheck(Girls[0], 1200):
                         $ StayCount.append(Girls[0])
-                if len(Girls) >=2 and ApprovalCheck(Girls[1], 1200) and len(StayCount) < 2:
+                if len(Girls) >=2 and Approvalcheck(Girls[1], 1200) and len(StayCount) < 2:
                         $ StayCount.append(Girls[1])
 
                 if len(Girls) >=2:
@@ -1023,7 +1023,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                         $ Girls[0].Spunk = []
                         $ Girls[0].recent_history.append("showered")
                         $ Girls[0].daily_history.append("showered")
-                        call expression Girls[0].Tag + "_First_Bottomless" pass (1)
+                        call first_bottomless(Girls[0], 1)
                         call first_topless(Girls[0], silent = 1)
                         if Girls[0] == RogueX:
                                     ch_r "I wouldn't mind stick'in around though."
@@ -1138,12 +1138,12 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
 
 label Shower_Sex(Options=0,line=0):
         #called from showering if sex is on the table.
-        if len(StayCount) > 1 and (ApprovalCheck(StayCount[1], 1800,Check=1) > ApprovalCheck(StayCount[0], 1800,Check=1)):
+        if len(StayCount) > 1 and (Approvalcheck(StayCount[1], 1800,check=1) > Approvalcheck(StayCount[0], 1800,check=1)):
                 $ renpy.random.shuffle(StayCount) #swaps girls if second girl likes you more
         call shift_focus(StayCount[0])
 
         $ D20 = renpy.random.randint(1,20)
-        $ D20 += 5 if ApprovalCheck(StayCount[0], 1800) else 0 #bonus if girl really likes you
+        $ D20 += 5 if Approvalcheck(StayCount[0], 1800) else 0 #bonus if girl really likes you
 
         if "showered" in Player.recent_history:
                 $ D20 = 0
@@ -1220,30 +1220,30 @@ label Shower_Sex(Options=0,line=0):
             #B set
             $ Options = [1]
             if len(StayCount) > 1:
-                    if ApprovalCheck(StayCount[0], 1300) and StayCount[0].GirlLikeCheck(StayCount[1]) >= 800:
+                    if Approvalcheck(StayCount[0], 1300) and StayCount[0].GirlLikecheck(StayCount[1]) >= 800:
                         $ Options.append(2)     #"She reaches over to [StayCount[1]] and begins soaping up her pussy."
-                    if ApprovalCheck(StayCount[0], 1200) and StayCount[0].GirlLikeCheck(StayCount[1]) >= 700:
+                    if Approvalcheck(StayCount[0], 1200) and StayCount[0].GirlLikecheck(StayCount[1]) >= 700:
                         $ Options.append(3)     #"She reaches over to [StayCount[1]] and begins soaping up her chest."
 
-            if ApprovalCheck(StayCount[0], 1300):
+            if Approvalcheck(StayCount[0], 1300):
                 $ Options.append(4)     #"She reaches down and takes your cock in her hand, soaping it up."
-            if ApprovalCheck(StayCount[0], 1400):
+            if Approvalcheck(StayCount[0], 1400):
                 $ Options.append(5)     #"She kneels down and wraps her breasts around your cock, soaping it up."
 
-            if ApprovalCheck(StayCount[0], 1300):
+            if Approvalcheck(StayCount[0], 1300):
                 $ Options.append(6)     #"She reaches down and begins fondling her own pussy, building a nice lather."
-            if ApprovalCheck(StayCount[0], 1200):
+            if Approvalcheck(StayCount[0], 1200):
                 $ Options.append(7)     #"She begins rubbing her own breasts in circles, building a nice lather."
 
-            if not ApprovalCheck(StayCount[0], 1400):
+            if not Approvalcheck(StayCount[0], 1400):
                 #only adds these if there's not much in there.
-                if ApprovalCheck(StayCount[0], 1000):
+                if Approvalcheck(StayCount[0], 1000):
                     $ Options.append(8)         #"She draws her breasts up and down your arm, the soap bubbles squirting out."
-                if ApprovalCheck(StayCount[0], 1100):
+                if Approvalcheck(StayCount[0], 1100):
                     $ Options.append(9)         #"She kneels down and rubs her breasts against your leg, soaping it up."
-                if ApprovalCheck(StayCount[0], 1000):
+                if Approvalcheck(StayCount[0], 1000):
                     $ Options.append(10)        #"She presses against your back, her soapy breasts rubbing back and forth against it."
-                if ApprovalCheck(StayCount[0], 1100):
+                if Approvalcheck(StayCount[0], 1100):
                     $ Options.append(11)        #"She presses against your chest, her soapy breasts rubbing back and forth against it."
 
             $ renpy.random.shuffle(Options)
@@ -1346,15 +1346,15 @@ label Shower_Sex(Options=0,line=0):
 
         if line and len(StayCount) > 1:
             #C Set, check what the other girl thinks. . .
-            $ D20 += 5 if ApprovalCheck(StayCount[1], 1800) else 0
-            if StayCount[1].GirlLikeCheck(StayCount[0]) <= 800 and 2 <= Options[0] <=3:
+            $ D20 += 5 if Approvalcheck(StayCount[1], 1800) else 0
+            if StayCount[1].GirlLikecheck(StayCount[0]) <= 800 and 2 <= Options[0] <=3:
                 $ D20 -= 5
-            if StayCount[1].GirlLikeCheck(StayCount[0]) <= 600:
+            if StayCount[1].GirlLikecheck(StayCount[0]) <= 600:
                 $ D20 -= 5
 
             if 2 <= Options[0] <= 3:
                 # if it's lesbian stuff. . .
-                if ApprovalCheck(StayCount[1], 1300) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 800:
+                if Approvalcheck(StayCount[1], 1300) and StayCount[1].GirlLikecheck(StayCount[0]) >= 800:
                         $ StayCount[1].change_face("sexy",1)
                         $ StayCount[0].change_stat("lust", 50, 5)
                         $ StayCount[0].change_stat("lust", 70, 5)
@@ -1365,7 +1365,7 @@ label Shower_Sex(Options=0,line=0):
                         $ Player.change_stat("Focus", 50, 7)
                         $ Player.change_stat("Focus", 80, 3)
                         $ line = 4
-                elif ApprovalCheck(StayCount[1], 1200) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 700:
+                elif Approvalcheck(StayCount[1], 1200) and StayCount[1].GirlLikecheck(StayCount[0]) >= 700:
                         $ StayCount[1].change_face("sexy",2,Eyes="closed")
                         $ StayCount[1].change_stat("lust", 50, 10)
                         $ StayCount[1].change_stat("lust", 70, 10)
@@ -1381,7 +1381,7 @@ label Shower_Sex(Options=0,line=0):
                         $ line = 3
             else:
                 # if it's not lesbian stuff. . .
-                if (ApprovalCheck(StayCount[1], 1300) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 700) or ApprovalCheck(StayCount[1], 2000):
+                if (Approvalcheck(StayCount[1], 1300) and StayCount[1].GirlLikecheck(StayCount[0]) >= 700) or Approvalcheck(StayCount[1], 2000):
                     if Options[0] == 5: #titjob
                         $ StayCount[1].change_stat("lust", 50, 10)
                         $ StayCount[1].change_stat("lust", 70, 5)
@@ -1397,7 +1397,7 @@ label Shower_Sex(Options=0,line=0):
                         call Close_Launch(StayCount[0],StayCount[1])
                         "[StayCount[1].name] seems really into this, and joins her on the other side."
                     $ line = 4
-                elif ((ApprovalCheck(StayCount[1], 1200) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 600)) or ApprovalCheck(StayCount[1], 1600):
+                elif ((Approvalcheck(StayCount[1], 1200) and StayCount[1].GirlLikecheck(StayCount[0]) >= 600)) or Approvalcheck(StayCount[1], 1600):
                         $ StayCount[1].change_face("sexy",2,Eyes="down")
                         $ StayCount[1].change_stat("lust", 50, 10)
                         $ StayCount[1].change_stat("lust", 70, 5)

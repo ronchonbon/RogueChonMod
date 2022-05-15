@@ -114,16 +114,16 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
         if not Other:
                 #"denial":
                 $ Girl.change_face("sad")
-                if ApprovalCheck(Girl, 900, "O"):
+                if Approvalcheck(Girl, 900, "O"):
                         #high obedience
                         call Anyline(Girl,"If that's really what you want. . .")
-                elif ApprovalCheck(Girl, 900, "L"):
+                elif Approvalcheck(Girl, 900, "L"):
                         #high love
                         call Anyline(Girl,"But I love you so much!")
-                elif ApprovalCheck(Girl, 900, "I") or Girl == JeanX:
+                elif Approvalcheck(Girl, 900, "I") or Girl == JeanX:
                         #super casual
                         call Anyline(Girl,"If that's how you feel. . .")
-                elif ApprovalCheck(Girl, 1500):
+                elif Approvalcheck(Girl, 1500):
                         #general mix
                         call Anyline(Girl,"But we mean so much to each other!")
                 else:
@@ -133,10 +133,10 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
 
         else:
             #if there's another girl. . .
-            #GirlLikeCheck(RogueX,KittyX) if Rogue is the girl talking and Kitty is the "other girl"
-            $ counter = int((Girl.GirlLikeCheck(Other) - 500)/2)
+            #GirlLikecheck(RogueX,KittyX) if Rogue is the girl talking and Kitty is the "other girl"
+            $ counter = int((Girl.GirlLikecheck(Other) - 500)/2)
 
-            if Girl.GirlLikeCheck(Other) >= 800:
+            if Girl.GirlLikecheck(Other) >= 800:
                     $ Girl.change_stat("lust", 70, 5)
                     $ Girl.change_stat("obedience", 50, 5)
                     $ Girl.change_stat("obedience", 200, 5)
@@ -145,7 +145,7 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
                     $ Girl.change_face(5,2) #blush2
                     call Anyline(Girl,"Well, you have good tastes, at least.")
                     $ Girl.change_face(5,1) #blush1
-            elif Girl.GirlLikeCheck(Other) >= 600:
+            elif Girl.GirlLikecheck(Other) >= 600:
                     $ Girl.change_stat("love", 50, -5, 1)
                     $ Girl.change_stat("love", 80, -10, 1)
                     $ Girl.change_stat("obedience", 50, 5)
@@ -168,14 +168,14 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
                             call Anyline(Girl,"With one of my friends?!")
                     $ Girl.change_face("normal")
                     $ Anger += 1
-            elif Girl.GirlLikeCheck(Other) >= 400:
+            elif Girl.GirlLikecheck(Other) >= 400:
                     $ Girl.change_stat("love", 50, -3, 1)
                     $ Girl.change_stat("love", 80, -5, 1)
                     $ Girl.change_stat("obedience", 80, 5)
                     $ Girl.change_stat("inhibition", 50, 1)
                     $ Girl.change_stat("inhibition", 80, 3)
                     call Anyline(Girl,"You know you can do better.")
-            else: #Girl.GirlLikeCheck(Other) < 400
+            else: #Girl.GirlLikecheck(Other) < 400
                     $ Girl.change_stat("love", 50, -5, 1)
                     $ Girl.change_stat("obedience", 80, 3)
                     $ Girl.change_stat("inhibition", 50, 2)
@@ -184,7 +184,7 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
                     call Anyline(Girl,"With that skank?!")
                     $ Anger += 2
 
-            if ApprovalCheck(Girl, 2000, Bonus = counter):
+            if Approvalcheck(Girl, 2000, Bonus = counter):
                     $ Girl.change_stat("lust", 70, 5)
                     $ Girl.change_face("sexy")
                     call Anyline(Girl,"Why not both of us?")
@@ -236,14 +236,14 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
                         extend ""
                         "She said it would be ok with her." if "poly "+ Girl.Tag in Other.Traits or Girl.Tag+"Yes" in Player.Traits:
                                 #"poly Rogue" in KittyX.Traits, or "KittyYes" in Player.Traits
-                                if ApprovalCheck(Girl, 1800, Bonus = counter):
+                                if Approvalcheck(Girl, 1800, Bonus = counter):
                                         $ Girl.change_face("smile", 1)
                                         $ Girl.change_stat("lust", 70, 5)
                                         $ Girl.change_stat("obedience", 50, 5)
                                         $ Girl.change_stat("obedience", 80, 3)
                                         $ Girl.change_stat("inhibition", 50, 3)
                                         $ Girl.change_stat("inhibition", 80, 1)
-                                        if Girl.GirlLikeCheck(Other) < 400:
+                                        if Girl.GirlLikecheck(Other) < 400:
                                                 $ Girl.change_face("angry")
                                                 if Girl == RogueX:
                                                         ch_r "I can't stand that bitch, but for you I'll put up with her."
@@ -262,7 +262,7 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
                                                         ch_v "Well, this is not cool. . . but I can deal. . ."
                                         elif Girl == StormX:
                                                 ch_s "Then that is all I need to know."
-                                        elif Girl.GirlLikeCheck(Other) >= 700 or Girl == JeanX:
+                                        elif Girl.GirlLikecheck(Other) >= 700 or Girl == JeanX:
                                                 $ Girl.change_face("sexy")
                                                 call Anyline(Girl,"I have to say I've kind of been thinking about it myself.")
                                         elif Girl.love >= Girl.obedience:
@@ -292,22 +292,22 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
                                 $ line = "ask " + Other.Tag #"ask Kitty"
 
                         "She's not into it.": #if KittyX.Break[0]:
-                                if Girl.GirlLikeCheck(Other) >= 700:
+                                if Girl.GirlLikecheck(Other) >= 700:
                                         $ Girl.change_stat("love", 200, -5)
-                                elif Girl.GirlLikeCheck(Other) <= 400:
+                                elif Girl.GirlLikecheck(Other) <= 400:
                                         $ Girl.change_stat("love", 90, 5)
                                 call Anyline(Girl,"Well then why even bring it up?")
 
 
                         "Well, even if she doesn't agree. . .":
                                 $ line = "ask " + Other.Tag #"ask Kitty"
-                                if Girl.GirlLikeCheck(Other) >= 700:
+                                if Girl.GirlLikecheck(Other) >= 700:
                                         $ Girl.change_face("angry")
                                         $ Girl.change_stat("love", 200, -5)
-                                elif Girl.GirlLikeCheck(Other) <= 400:
+                                elif Girl.GirlLikecheck(Other) <= 400:
                                         $ Girl.change_stat("love", 90, 5)
 
-                if line == "ask " + Other.Tag and Girl.GirlLikeCheck(Other) >= 700:
+                if line == "ask " + Other.Tag and Girl.GirlLikecheck(Other) >= 700:
                                 #if previous responses had her wanting to ask the other girl about it
                                 call Anyline(Girl,"You want me to ask her for you?")
                                 menu:
@@ -332,14 +332,14 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
                 elif line != "bargaining" and "poly "+ Other.Tag not in Girl.Traits:
                         #if the answer is not "bargaining," but also the girl has not agreed yet. . .
                         #"poly Kitty" not in RogueX.Traits:
-                        if "ask "+ Other.Tag not in Girl.Traits and not ApprovalCheck(Girl, 1800, Bonus = -(int((Girl.GirlLikeCheck(Other) - 600)/2))):
+                        if "ask "+ Other.Tag not in Girl.Traits and not Approvalcheck(Girl, 1800, Bonus = -(int((Girl.GirlLikecheck(Other) - 600)/2))):
                                 #"ask Kitty" not in RogueX.Traits
                                 #checks if Girl likes you more than Other
                                 $ Girl.change_stat("love", 50, -5, 1)
                                 $ Girl.change_stat("obedience", 80, -10, 1)
                                 $ Girl.change_stat("inhibition", 50, 5)
                                 $ Girl.change_face("angry", 1)
-                                if not ApprovalCheck(Girl, 1800):
+                                if not Approvalcheck(Girl, 1800):
                                         call Anyline(Girl,"Maybe I don't like you that much either.")
                                 else:
                                         $ Girl.change_stat("love", 80, -10, 1)
@@ -366,7 +366,7 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
                                 $ Girl.change_stat("inhibition", 50, 5)
                                 $ Girl.change_stat("inhibition", 80, 1)
                                 $ Girl.change_face("sad")
-                                if Girl.GirlLikeCheck(Other) < 400:
+                                if Girl.GirlLikecheck(Other) < 400:
                                         $ Girl.change_face("angry")
                                         if Girl == RogueX:
                                                 ch_r "I can't stand that bitch, but for you I'll put up with her."
@@ -383,7 +383,7 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
                                                 ch_s "I dislike her, but I will put up with her."
                                         elif Girl == JubesX:
                                                 ch_v "Well, this is not cool. . . but I can deal. . ."
-                                elif Girl.GirlLikeCheck(Other) >= 700:
+                                elif Girl.GirlLikecheck(Other) >= 700:
                                         $ Girl.change_face("sexy")
                                         call Anyline(Girl,"I have to say I've kind of been thinking about it myself.")
                                 elif Girl.love >= Girl.obedience:
@@ -415,9 +415,9 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
                                         elif Girl == JubesX:
                                                 ch_v "I can keep to myself. . ."
 
-                                        if Girl.GirlLikeCheck(Other) >= 800 and Girl != JeanX:
+                                        if Girl.GirlLikecheck(Other) >= 800 and Girl != JeanX:
                                                 call Anyline(Girl, "Please talk to "+Other.name+" about sharing you openly though.")
-                                        elif Girl.GirlLikeCheck(Other) >= 500 and Girl != JeanX:
+                                        elif Girl.GirlLikecheck(Other) >= 500 and Girl != JeanX:
                                                 call Anyline(Girl,"I really don't like going behind "+Other.name+"'s back though.")
                                         else:
                                                 call Anyline(Girl,"Might be fun, sneaking around behind her back.")
@@ -430,7 +430,7 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
                     extend ""
                     "Sorry, I've changed my mind.":
                             $ Girl.change_stat("obedience", 80, 5)
-                            if ApprovalCheck(Girl, 1500):
+                            if Approvalcheck(Girl, 1500):
                                     $ line = "makeup"
                                     $ Girl.change_stat("love", 80, 5)
                                     if Girl == RogueX:
@@ -520,10 +520,10 @@ label Breakup(Girl=0,Other=0,Anger = 0,Girls=[]): #rkeljsv
                                         $ Girls.remove(Girl)
                                         $ Count = 0
                                         while Girls:
-                                                if Girl.GirlLikeCheck(Girls[0]) > Count:
+                                                if Girl.GirlLikecheck(Girls[0]) > Count:
                                                         # if she likes this girl more than the last, she's the pick
                                                         $ Other = Girls[0]
-                                                        $ Count = Girl.GirlLikeCheck(Girls[0])
+                                                        $ Count = Girl.GirlLikecheck(Girls[0])
                                                 $ Girls.remove(Girls[0])
                                         $ Count = 0
                                         call Anyline(Girl,Other.name+"?")

@@ -147,13 +147,13 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
                                     ch_v "Nice. . ."
                             $ Fap = 1
             "No, you may not.":
-                    if ApprovalCheck(Girl,600,"O") and (Girl.obedience >= Girl.inhibition):
+                    if Approvalcheck(Girl,600,"O") and (Girl.obedience >= Girl.inhibition):
                             #if she agrees to not do it (obedience >= inhibition)
                             $ Girl.change_stat("love", 50, -5)
                             $ Girl.change_stat("obedience", 60, 5)
                             $ Girl.change_stat("obedience", 200, 2)
                             $ Girl.change_stat("lust", 80, 5)
-                            if ApprovalCheck(Girl,800,"O"):
+                            if Approvalcheck(Girl,800,"O"):
                                     $ Girl.change_stat("lust", 200, 5)
                             if Girl == RogueX:
                                     ch_r "Oh, well. . .."
@@ -174,7 +174,7 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
                             elif Girl == JubesX:
                                     ch_v "Well. . . Ok. . ."
                             $ Girl.Thirst += 10
-                    elif ApprovalCheck(Girl,1000,"LO"):
+                    elif Approvalcheck(Girl,1000,"LO"):
                             #she is apologetic about it
                             $ Girl.change_stat("love", 70, -5)
                             $ Girl.change_stat("obedience", 50, -3)
@@ -244,8 +244,8 @@ label CalltoFap(Girl=0,Fap=0): #rkeljsv
                             else: #Rogue, Kitty, Jean
                                     call Anyline(Girl,"Oh, you would, would you. . .")
                             $ Fap = 3
-            "Only if I can watch." if AloneCheck(): #only works if you're alone
-                    if ApprovalCheck(Girl, 1200):
+            "Only if I can watch." if Alonecheck(): #only works if you're alone
+                    if Approvalcheck(Girl, 1200):
                             #She agrees
                             $ Girl.change_stat("love", 80, 4)
                             $ Girl.change_stat("obedience", 60, 2)
@@ -390,7 +390,7 @@ label PhoneSex(Girl=0): #rkeljsv
 
         call Get_Dressed
         $ Girl.OutfitChange(5) #resets her clothes
-        call Checkout(1)
+        call checkout(1)
         $ Player.recent_history.remove("phonesex")
         return
 #add option for girl to strip herself. . .
@@ -398,7 +398,7 @@ label PhoneSex(Girl=0): #rkeljsv
 
 #start Call_For_Les / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Call_For_Les(Girl=0,Girl2=0,Girls=[]): #rkeljsv
-        #called by JumperCheck if girls are lesing and Girl approves
+        #called by Jumpercheck if girls are lesing and Girl approves
 
         if Girl not in active_Girls:
                 $ Girls = active_Girls[:]
@@ -417,7 +417,7 @@ label Call_For_Les(Girl=0,Girl2=0,Girls=[]): #rkeljsv
                         if Girls[0] not in Party and Girls[0].location != bg_current and "les" in Girls[0].recent_history:
                                 # if this girl is not already the focal girl, is at the current location but not in a party,
                                 # and was queued for a les action, set her up as girl 2.
-                                if ApprovalCheck(Girls[0], 1600 - Girls[0].SEXP, TabM=0):
+                                if Approvalcheck(Girls[0], 1600 - Girls[0].SEXP, TabM=0):
                                         $ Girl2 = Girls[0]
                                         $ Girls = [1]
                                 else:

@@ -46,8 +46,8 @@ label Girls_Caught_Lesing(Girl=0,Girl2=0,Girls=[]): #rkeljsv
                         $ Girl2.change_face("confused",2,Eyes = "surprised",Mouth = "smile")
                         $ primary_action = 0
                         $ girl_offhand_action = 0
-                        $ Partner_primary_action = 0
-                        $ Partner_offhand_action = 0
+                        $ second_girl_primary_action = 0
+                        $ second_girl_offhand_action = 0
                         call set_the_scene
                         if Girl == RogueX:
                                 ch_r "Sorry about that [Girl.Petname], we were, um. . . working out."
@@ -74,7 +74,7 @@ label Girls_Caught_Lesing(Girl=0,Girl2=0,Girls=[]): #rkeljsv
                         $ Girl2.change_face("kiss",1,Eyes = "closed")
                         $ primary_action = "lesbian"
                         $ girl_offhand_action = "fondle_pussy"
-                        $ Partner_primary_action = "fondle_pussy"
+                        $ second_girl_primary_action = "fondle_pussy"
                         "You see [Girl.name] and [Girl2.name], eyes closed and stroking each other vigorously."
                 "Enter quietly":
                         call set_the_scene(Quiet=1)
@@ -82,12 +82,12 @@ label Girls_Caught_Lesing(Girl=0,Girl2=0,Girls=[]): #rkeljsv
                         $ Girl2.change_face("kiss",1,Eyes = "closed")
                         $ primary_action = "lesbian"
                         $ girl_offhand_action = "fondle_pussy"
-                        $ Partner_primary_action = "fondle_pussy"
+                        $ second_girl_primary_action = "fondle_pussy"
                         $ Girl.AddWord(1,"unseen","unseen")
                         $ Girl2.AddWord(1,"unseen","unseen")
                         $ Partner = Girl2
                         $ line = 0
-                        call expression Girl.Tag + "_SexAct" pass ("lesbian") #call Rogue_SexAct("lesbian")
+                        call sex_acts("lesbian") #call Rogue_SexAct("lesbian")
                 "Leave quietly":
                         "You leave the girls to their business and slip out."
                         $ Girl.Thirst -= 30
@@ -191,7 +191,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                     $ primary_action = "masturbation"
                     $ girl_offhand_action = "fondle_pussy"
                     "You see [Girl.name] under the shower, feeling herself up."
-                    call expression Girl.Tag + "_SexAct" pass ("masturbate") #call Laura_SexAct("masturbate")
+                    call sex_acts("masturbation") #call Laura_SexAct("masturbation")
                     $ bg_current = "bg_showerroom"
                     jump Misplaced
 
@@ -202,7 +202,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                     "As you enter the showers, you see [Girl.name] washing up."
                     call expression Girl.Tag + "_First_Bottomless" pass (1)
                     call first_topless(Girl, silent = 1)
-                    if not ApprovalCheck(Girl, 1200) or not Girl.SeenPussy or not Girl.SeenChest:
+                    if not Approvalcheck(Girl, 1200) or not Girl.SeenPussy or not Girl.SeenChest:
                             $ Girl.Brows="angry"
                             $ Girl.Over = "towel"
                             "She grabs a towel and covers up."
@@ -242,7 +242,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                                             $ Girl.change_stat("obedience", 80, 2)
                                             $ Girl.change_stat("inhibition", 60, 1)
                             "Why, would it have made a difference?":
-                                    if not ApprovalCheck(Girl, 500,"I"):
+                                    if not Approvalcheck(Girl, 500,"I"):
                                             $ Girl.change_stat("love", 50, -3)
                                             $ Girl.change_stat("obedience", 50, 2)
                                     $ Girl.change_stat("obedience", 80, 2)
@@ -258,7 +258,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                     $ Girl.Over = "towel"
                     call set_the_scene(Dress=0)
                     "As you enter the showers, you see [Girl.name] putting on a towel."
-                    if not ApprovalCheck(Girl, 1100) and (not Girl.SeenPussy or not Girl.SeenChest):
+                    if not Approvalcheck(Girl, 1100) and (not Girl.SeenPussy or not Girl.SeenChest):
                             $ Girl.change_face("angry",Brows="confused")
                             $ Girl.change_stat("love", 80, -5)
                     else:
@@ -291,7 +291,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                                             $ Girl.change_stat("obedience", 80, 2)
                                             $ Girl.change_stat("inhibition", 60, 1)
                             "I still like the view. . ." if Girl != EmmaX:
-                                if ApprovalCheck(Girl, 500,"I"):
+                                if Approvalcheck(Girl, 500,"I"):
                                     $ Girl.change_stat("love", 80, 1)
                                 else:
                                     $ Girl.change_stat("love", 50, -1)
@@ -308,7 +308,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
             if Girl == StormX:
                             ch_s "Oh, that's fine, [Girl.Petname]."
                             ch_s "You might want to be careful with the other girls though."
-            elif not ApprovalCheck(Girl, 1000) or not Girl.SeenPussy or not Girl.SeenChest:
+            elif not Approvalcheck(Girl, 1000) or not Girl.SeenPussy or not Girl.SeenChest:
                     if Girl == RogueX:
                             ch_r "Well, it happens, just be careful next time."
                     elif Girl == KittyX:
@@ -322,7 +322,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                             ch_j "Well, just. . . be more careful."
                     elif Girl == JubesX:
                             ch_v "Gimme some warning next time."
-            elif not ApprovalCheck(Girl, 1300):
+            elif not Approvalcheck(Girl, 1300):
                     if Girl == RogueX:
                             ch_r "Well, it happens, just be careful next time."
                     elif Girl == KittyX:
@@ -385,7 +385,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
             "Sure, see you later then.":
                     call remove_girl(Girl)
             "Actually, could you stick around a minute?":
-                if ApprovalCheck(Girl, 900) or Girl == StormX:
+                if Approvalcheck(Girl, 900) or Girl == StormX:
                     if Girl == RogueX:
                             ch_r "Sure, what's up?"
                     elif Girl == KittyX:
@@ -428,7 +428,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
 
 label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkeljsv
     call shift_focus(Girl)
-    call Checkout
+    call checkout
     call Anyline(Girl,"!!!")
     $ line = primary_action
     call Trig_Reset
@@ -635,7 +635,7 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
         #End "sorry"
 
         "Just having a little fun, right [Girl.Pet]?":
-                $ Girl.nameCheck() #checks reaction to petname
+                $ Girl.namecheck() #checks reaction to petname
                 $ Girl.change_face("bemused")
                 $ Girl.change_stat("lust", 90, 5)
                 if RogueX.location == bg_current and RogueX.Caught < 5:
@@ -797,10 +797,10 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
 
     if line:
             if line == "Omega":
-                    if ApprovalCheck(RogueX, 1500, TabM=1, Loc="No"):
+                    if Approvalcheck(RogueX, 1500, TabM=1, Loc="No"):
                             call Xavier_Plan(RogueX) #Plan_OmegaPlan_Alpha
                             return
-                    elif ApprovalCheck(RogueX, 1000, TabM=1, Loc="No"):
+                    elif Approvalcheck(RogueX, 1000, TabM=1, Loc="No"):
                             $ Girl.change_face("perplexed",Brows = "sad")
                             ch_r "I'm not comfortable with something that extreme, [RogueX.Petname]. . ."
                             menu:
@@ -819,10 +819,10 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
                             $ Girl.change_face("bemused")
                     #End "Plan Omega"
             elif line == "Kappa":
-                    if "Xavier's photo" in Player.Inventory and ApprovalCheck(KittyX, 1500, TabM=1, Loc="No"):
+                    if "Xavier's photo" in Player.Inventory and Approvalcheck(KittyX, 1500, TabM=1, Loc="No"):
                             call Xavier_Plan(KittyX) #Plan_KappaPlan_Alpha
                             return
-                    elif ApprovalCheck(KittyX, 1000, TabM=1, Loc="No"):
+                    elif Approvalcheck(KittyX, 1000, TabM=1, Loc="No"):
                             $ Girl.change_face("perplexed",Brows = "sad")
                             if "Xavier's photo" in Player.Inventory:
                                     ch_k "You know. . . I really don't think that's a good idea. . ."
@@ -848,10 +848,10 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
                             $ Girl.change_face("bemused")
                     #End "Plan Kappa"
             elif line == "Psi":
-                    if ApprovalCheck(EmmaX, 1500, TabM=1, Loc="No"):
+                    if Approvalcheck(EmmaX, 1500, TabM=1, Loc="No"):
                             call Xavier_Plan(EmmaX) #Plan_PsiPlan_Alpha
                             return
-                    elif ApprovalCheck(EmmaX, 1000, TabM=1, Loc="No"):
+                    elif Approvalcheck(EmmaX, 1000, TabM=1, Loc="No"):
                             $ Girl.change_face("perplexed",Brows = "sad")
                             ch_e "Um, I don't believe we're quite at that point yet, [EmmaX.Petname]. . ."
                             menu:
@@ -870,10 +870,10 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
                             $ Girl.change_face("bemused")
                     #End "Plan Psi"
             elif line == "Chi":
-                    if LauraX.Lvl >= 2 and ApprovalCheck(LauraX, 1500, TabM=1, Loc="No") and ApprovalCheck(LauraX, 750, "I"):
+                    if LauraX.Lvl >= 2 and Approvalcheck(LauraX, 1500, TabM=1, Loc="No") and Approvalcheck(LauraX, 750, "I"):
                             call Xavier_Plan(LauraX) #Plan_ChiPlan_Alpha
                             return
-                    elif ApprovalCheck(LauraX, 1000, TabM=1, Loc="No"):
+                    elif Approvalcheck(LauraX, 1000, TabM=1, Loc="No"):
                             $ Girl.change_face("angry",Eyes="side",Brows = "angry")
                             ch_l "I told you that was a stupid idea. . ."
                             menu:
@@ -895,10 +895,10 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
                             $ Girl.change_face("bemused")
                     #End "Plan Chi"
             elif line == "Alpha":
-                    if ApprovalCheck(JeanX, 1500, TabM=1, Loc="No"):
+                    if Approvalcheck(JeanX, 1500, TabM=1, Loc="No"):
                             call Xavier_Plan(JeanX) #Plan_Alpha
                             return
-                    elif ApprovalCheck(JeanX, 1000, TabM=1, Loc="No"):
+                    elif Approvalcheck(JeanX, 1000, TabM=1, Loc="No"):
                             $ Girl.change_face("perplexed",Brows = "sad")
                             ch_j "Look, this is your mess, I'm not going to clean it up, [JeanX.Petname]. . ."
                             menu:
@@ -917,10 +917,10 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
                             $ Girl.change_face("bemused")
                     #End "Plan Alpha"
             elif line == "Rho":
-                    if "Xavier's files" in Player.Inventory and ApprovalCheck(StormX, 1500, TabM=1, Loc="No"):
+                    if "Xavier's files" in Player.Inventory and Approvalcheck(StormX, 1500, TabM=1, Loc="No"):
                             call Xavier_Plan(StormX)
                             return
-                    elif ApprovalCheck(StormX, 1000, TabM=1, Loc="No"):
+                    elif Approvalcheck(StormX, 1000, TabM=1, Loc="No"):
                             $ Girl.change_face("perplexed",Brows = "sad")
                             if "Xavier's files" in Player.Inventory:
                                     ch_s "I really doubt that we should attempt that. . ."
@@ -947,10 +947,10 @@ label Girls_Caught(Girl=0,TotalCaught=0,Shame=0,Count=0,T_Pet=0,Girls=[]): #rkel
                             $ Girl.change_face("bemused")
                     #End "Plan Rho"
             elif line == "Zeta":
-                    if ApprovalCheck(JubesX, 1500, TabM=1, Loc="No"):
+                    if Approvalcheck(JubesX, 1500, TabM=1, Loc="No"):
                             call Xavier_Plan(JubesX) #Plan_PsiPlan_Alpha
                             return
-                    elif ApprovalCheck(JubesX, 1000, TabM=1, Loc="No"):
+                    elif Approvalcheck(JubesX, 1000, TabM=1, Loc="No"):
                             $ Girl.change_face("perplexed",Brows = "sad")
                             ch_v "What?! Um, no, let's not."
                             menu:
@@ -1095,7 +1095,7 @@ label Xavier_Plan(GirlX=0): #rkeljsv
             $ bg_current = "bg_player"
             jump Misplaced
 
-    #$ GirlX = GirlCheck(GirlX)
+    #$ GirlX = Girlcheck(GirlX)
     call shift_focus(GirlX)
     $ GirlX.change_face("sly")
     "As you say this, a sly grin crosses [GirlX.name]'s face."
@@ -1123,7 +1123,7 @@ label Xavier_Plan(GirlX=0): #rkeljsv
 
             if line == "first":
                 #if the Partner has never done this. . .
-                if ApprovalCheck(Partner, 1000) or Partner == JeanX:
+                if Approvalcheck(Partner, 1000) or Partner == JeanX:
                         #if she's cool with it.
                         $ Partner.change_face("surprised")
                         "[Partner.name] looks a bit caught off guard, but goes along with the idea."
@@ -1211,7 +1211,7 @@ label Xavier_Plan(GirlX=0): #rkeljsv
                     ch_p "[LauraX.name] and I were talking, and it seems like neither of us appreciates you bothering us."
                     ch_x "And if I continue?"
                     ch_p "My little [LauraX.Pet] here has a very particular set of skills, you know. . ."
-                    $ GirlX.nameCheck() #checks reaction to petname
+                    $ GirlX.namecheck() #checks reaction to petname
                     $ LauraX.Claws = 1
                     $ GirlX.change_face("sly")
                     ch_p "She could cause a lot of trouble if she keeps getting called down here. . ."
@@ -1382,7 +1382,7 @@ label Xavier_Plan(GirlX=0): #rkeljsv
                                         extend ""
                                         "Oh, sorry, never mind.":
                                                 $ line = 0
-                                                if ApprovalCheck(line, 2000):
+                                                if Approvalcheck(line, 2000):
                                                         #if she accepts it
                                                         $ line.change_face("confused")
                                                         $ line.change_stat("love", 90, 3)
@@ -1425,7 +1425,7 @@ label Xavier_Plan(GirlX=0): #rkeljsv
                                                 $ line.change_stat("obedience", 50, 5)
                                                 $ line.change_stat("obedience", 90, 2)
                                                 $ line.change_stat("inhibition", 60, 2)
-                                                if ApprovalCheck(line, 900, "L") or ApprovalCheck(line, 2000):
+                                                if Approvalcheck(line, 900, "L") or Approvalcheck(line, 2000):
                                                         #if she accepts it
                                                         $ line.change_face("sadside")
                                                         if line == RogueX:
@@ -1464,7 +1464,7 @@ label Xavier_Plan(GirlX=0): #rkeljsv
                                                 $ line.change_stat("love", 80, -5)
                                                 $ line.change_stat("love", 90, -5)
                                                 $ line.change_stat("obedience", 80, 5)
-                                                if ApprovalCheck(line, 850, "O") or ApprovalCheck(line, 1500, "LO"):
+                                                if Approvalcheck(line, 850, "O") or Approvalcheck(line, 1500, "LO"):
                                                         #if she accepts it
                                                         $ line.change_face("sadside")
                                                         $ line.change_stat("obedience", 200, 10)
@@ -1671,7 +1671,7 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
 
         if Girl == StormX:
                 ch_s "Oh, hello, [Girl.Petname]."
-        elif ApprovalCheck(Girl, 1400):
+        elif Approvalcheck(Girl, 1400):
                 if Girl == RogueX:
                         ch_r "Oh, hey."
                 elif Girl == KittyX:
@@ -1686,7 +1686,7 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
                         ch_v "Yo."
         else:
                 if D20 > 5:
-                        if not ApprovalCheck(Girl, (D20 *70)) and (not Girl.SeenPussy or not Girl.SeenChest):
+                        if not Approvalcheck(Girl, (D20 *70)) and (not Girl.SeenPussy or not Girl.SeenChest):
                                 # if D20*70 is less than her approval, and this is the first you've seen of her bits. . .
                                 $ Girl.change_face("surprised",Brows="angry")
                                 $ Girl.change_stat("love", 80, -50)
@@ -1739,7 +1739,7 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
                         #end if she's partially nude
                 else:
                         #She's fully dressed
-                        if not ApprovalCheck(Girl, 800) and (not Girl.SeenPussy or not Girl.SeenChest):
+                        if not Approvalcheck(Girl, 800) and (not Girl.SeenPussy or not Girl.SeenChest):
                                 $ Girl.change_face("angry",Brows="confused")
                                 $ Girl.change_stat("love", 80, -5)
                         else:
@@ -1770,7 +1770,7 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
                                     $ Girl.change_stat("obedience", 80, 2)
                                     $ Girl.change_stat("inhibition", 60, 1)
                 $ Girl.change_face("sexy")
-                if ApprovalCheck(Girl, 1000):
+                if Approvalcheck(Girl, 1000):
                         #she flashes you
                         if Girl == RogueX:
                                 ch_r "You could have just asked, [RogueX.Petname]."
@@ -1840,7 +1840,7 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
                                 "She finishes getting changed."
                                 $ Girl.OutfitChange(6,Changed=0)
                 "Actually, you could leave them off.":
-                        if ApprovalCheck(Girl, 350+(10*D20)): #400-550
+                        if Approvalcheck(Girl, 350+(10*D20)): #400-550
                                 $ Girl.change_stat("love", 70, 3)
                                 $ Girl.change_stat("obedience", 50, 1)
                                 $ Girl.change_stat("obedience", 80, 2)
@@ -1855,7 +1855,7 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
                                 $ Girl.OutfitChange(6,Changed=0)
                 "Why not lose the rest too?":
                         $ Girl.change_face("sexy")
-                        if ApprovalCheck(Girl, 700):
+                        if Approvalcheck(Girl, 700):
                                 $ Girl.change_stat("love", 50, 1)
                                 $ Girl.change_stat("love", 70, 1)
                                 $ Girl.change_stat("obedience", 50, 1)
@@ -1864,7 +1864,7 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
                                 ch_s "Oh, you are a naughty one. . ."
                                 $ Girl.OutfitChange("nude")
                                 $ Girl.Set_Temp_Outfit() #sets current outfit as temporary
-                        elif ApprovalCheck(Girl, 350+(10*D20)): #400-550
+                        elif Approvalcheck(Girl, 350+(10*D20)): #400-550
                                 $ Girl.change_stat("love", 80, 1)
                                 $ Girl.change_stat("obedience", 50, 1)
                                 $ Girl.change_stat("obedience", 80, 1)
@@ -1879,13 +1879,13 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
                                 $ Girl.OutfitChange(6,Changed=0)
                 "Don't, stay like that.":
                         $ Girl.change_stat("obedience", 80, 2)
-                        if ApprovalCheck(Girl,1100):
+                        if Approvalcheck(Girl,1100):
                                 $ Girl.change_stat("obedience", 50, 2)
                                 $ Girl.change_stat("inhibition", 60, 1)
                                 $ Girl.change_face("sexy")
                                 ch_s "If you want. . ."
                                 $ Girl.Set_Temp_Outfit() #sets current outfit as temporary
-                        elif ApprovalCheck(Girl, 350+(10*D20)) and ApprovalCheck(Girl, 400, "O"):
+                        elif Approvalcheck(Girl, 350+(10*D20)) and Approvalcheck(Girl, 400, "O"):
                                 $ Girl.change_stat("love", 50, -2)
                                 $ Girl.change_stat("love", 80, -1)
                                 $ Girl.change_stat("obedience", 50, 2)
@@ -1900,14 +1900,14 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
                                 $ Girl.OutfitChange(6,Changed=0)
                 "Lose the rest of it.":
                         $ Girl.change_stat("obedience", 80, 2)
-                        if ApprovalCheck(Girl,1300):
+                        if Approvalcheck(Girl,1300):
                                 $ Girl.change_stat("obedience", 50, 2)
                                 $ Girl.change_stat("inhibition", 60, 1)
                                 $ Girl.change_face("sexy")
                                 ch_s "Fine. . ."
                                 $ Girl.OutfitChange("nude")
                                 $ Girl.Set_Temp_Outfit() #sets current outfit as temporary
-                        elif ApprovalCheck(Girl,800) and ApprovalCheck(Girl, 500, "O"):
+                        elif Approvalcheck(Girl,800) and Approvalcheck(Girl, 500, "O"):
                                 $ Girl.change_stat("love", 50, -2)
                                 $ Girl.change_stat("love", 80, -2)
                                 $ Girl.change_stat("obedience", 50, 2)
@@ -2001,7 +2001,7 @@ label Girl_Caught_Mastubating(Girl=0): #rkeljsv
                 hide blackscreen onlayer black
                 $ Girl.daily_history.append("unseen")
                 $ Girl.recent_history.append("unseen")
-                call expression Girl.Tag + "_SexAct" pass ("masturbate")
+                call sex_acts("masturbation")
                 if "angry" in Girl.recent_history:
                         return
 
