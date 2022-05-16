@@ -1909,7 +1909,7 @@ label Emma_Sexfriend:   #Emma_Update
                                             $ EmmaX.change_stat("inhibition", 200, 50)
                                             $ EmmaX.change_stat("lust", 200, 5)
                                             "[EmmaX.name] leans in and gives you a passionate kiss."
-                                            $ EmmaX.Kissed += 1
+                                            $ EmmaX.action_counter["kiss"] += 1
                                             ch_e "I can't wait to get started, [EmmaX.Petname]."
                                 "That's pretty slutty, [EmmaX.name].":
                                         if Approvalcheck(EmmaX, 2000):

@@ -5,7 +5,7 @@ label Slap_Ass(Girl = 0):  #rkeljsv
         # fix add sound here?
         call Punch
 
-        $ Girl.Slap += 1 #add in slap-base obedience
+        $ Girl.event_counter["ass_slapped"] += 1 #add in slap-base obedience
 
         $ Girl.Blush = 2 if Taboo else 1
         if Approvalcheck(Girl, 200, "O", TabM=1):
@@ -15,9 +15,9 @@ label Slap_Ass(Girl = 0):  #rkeljsv
                 $ Girl.change_stat("lust", 80, 1)
                 if Girl.recent_history.count("slap") < 4:
                         $ Girl.change_stat("lust", 200, 1)
-                        if Girl.Slap <= 5:
+                        if Girl.event_counter["ass_slapped"] <= 5:
                                 $ Girl.change_stat("obedience", 50, 2)
-                        if Girl.Slap <= 10:
+                        if Girl.event_counter["ass_slapped"] <= 10:
                                 $ Girl.change_stat("obedience", 80, 1)
                 "You slap her ass and she jumps with pleasure."
         else:
@@ -33,21 +33,21 @@ label Slap_Ass(Girl = 0):  #rkeljsv
 
         if Taboo:
                 if not Approvalcheck(Girl, 800, TabM=2):
-                        if Girl.Slap <= 5:
+                        if Girl.event_counter["ass_slapped"] <= 5:
                                 $ Girl.change_stat("obedience", 80, 2)
                                 $ Girl.change_stat("obedience", 50, 2)
                         $ Girl.change_stat("love", 70, -2)
                         $ Girl.change_stat("love", 50, -1)
                         "She looks pretty mad though."
                 elif not Approvalcheck(Girl, 1500, TabM=2):
-                        if Girl.Slap <= 5:
+                        if Girl.event_counter["ass_slapped"] <= 5:
                                 $ Girl.change_stat("obedience", 80, 2)
                         $ Girl.change_stat("love", 70, -1)
                         "She looks a bit embarrassed."
                 else:                         #Over 1500
                         $ Girl.change_face("sexy")
                         $ Girl.Mouth = "smile"
-                        if Girl.Slap <= 5:
+                        if Girl.event_counter["ass_slapped"] <= 5:
                                 $ Girl.change_stat("obedience", 80, 1)
                         "She gives you a naughty grin."
                 $ Girl.Blush = 1

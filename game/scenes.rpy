@@ -1334,7 +1334,7 @@ label Addictcheck(Girls=[]):
                 elif bg_current == JubesX.Home or bg_current == "bg_player":
                             if not JubesX.Resistance:
                                     #"I'm addicted" event
-                                    call First_Addicted(JubesX)
+                                    call first_addicted(JubesX)
                             else:
                                     call Addiction_Fix(JubesX)
                 else:
@@ -1391,13 +1391,13 @@ label Addictcheck(Girls=[]):
                                 pass    #she skips until she hits 50%
                         elif Girls[0].Addict >= 35 and not Girls[0].Event[1]:
                                 #"I'm addicted" event
-                                call First_Addicted(Girls[0])
+                                call first_addicted(Girls[0])
                         elif Girls[0].Addict >= 60 and Girls[0].Event[1] <= 2:
                                 #"I'm super-addicted" event
-                                call First_Addicted(Girls[0])
+                                call first_addicted(Girls[0])
                         elif Girls[0].Addict >= 90:
                                 #"I'm crazy-addicted" event
-                                call First_Addicted(Girls[0])
+                                call first_addicted(Girls[0])
                 $ Girls.remove(Girls[0])
         return
 
@@ -2891,7 +2891,7 @@ label girl_boyfriend(Girl):
                 "[Girl.name] leaps in and kisses you deeply."
 
                 $ Girl.change_face("kiss")
-                $ Girl.Kissed += 1
+                $ Girl.action_counter["kiss"] += 1
             "Are you kidding? I'd love to!" if Girl in [KittyX, EmmaX]:
                 $ Girl.change_stat("love", 200, 30)
 
@@ -2901,7 +2901,7 @@ label girl_boyfriend(Girl):
 
                 call girl_kissing_launch(Girl, "kiss you")
 
-                $ Girl.Kissed += 1
+                $ Girl.action_counter["kiss"] += 1
             "Um, ok." if Girl in [RogueX, EmmaX]:
                 $ Girl.Brows = "confused"
 
@@ -2932,7 +2932,7 @@ label girl_boyfriend(Girl):
                         "[Girl.name] leaps in and kisses you deeply."
 
                         $ Girl.change_face("kiss")
-                        $ Girl.Kissed += 1
+                        $ Girl.action_counter["kiss"] += 1
                     "Yes. Absolutely." if (Girl == KittyX and "KittyYes" in Player.Traits) or (Girl == EmmaX and "EmmaYes" in Player.Traits):
                         $ Girl.change_stat("love", 200, 30)
 
@@ -2942,7 +2942,7 @@ label girl_boyfriend(Girl):
 
                         call girl_kissing_launch(Girl, "kiss you")
 
-                        $ Girl.Kissed += 1
+                        $ Girl.action_counter["kiss"] += 1
                     "She wouldn't understand." if len(Player.Harem) == 1:
                         $ line = "no."
                     "They wouldn't be cool with that." if len(Player.Harem) > 1:

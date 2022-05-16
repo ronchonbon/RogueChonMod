@@ -843,7 +843,7 @@ label Massage_Cycle: #rkeljsv
                                                     ch_l "Good job."
                                             elif Girl == JeanX:
                                                     ch_j "Wow, you really know what you're doing there. . ."
-                                                    if Girl.Org < 2:
+                                                    if Girl.event_counter["orgasm"] < 2:
                                                         $ Girl.change_stat("love", 80, 2)
                                                         $ Girl.change_stat("obedience", 50, 2)
                                             elif Girl == StormX:

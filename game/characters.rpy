@@ -186,41 +186,21 @@ init python:
                             ] #Schedule[0-6][0-4] = Schedule[Day][Time]
             self.Clothing = [0,0,0,0,0,0,0,0,0,0]                      #schedules when she wears what: (0-6) = Mon-Sun, (7) Datewear, (8) Teachingwear, (9) Private
 
-            self.Org = 0                    #lifetime orgasms
-            self.OCount = 0                 #orgasms per encounter
-            self.Caught = 0
-            self.Kissed = 0                 #How many times they've kissed
-            self.Sleep = 0                  #How many times they've slept over
-            self.Hand = 0
-            self.Foot = 0
-            self.Slap = 0
-            self.Strip = 0
-            self.Tit = 0
-            self.Sex = 0
-            self.Anal = 0
+            self.action_counter = {}
+
+            for action in all_actions:
+                self.action_counter[action] = 0
+
+            self.event_counter = {"orgasm": 0, "caught": 0, "sleepover": 0, "ass_slapped": 0, "stripped": 0,
+                "swallowed": 0, "creampied": 0, "anal_creampied": 0,
+                "been_with_girl": 0, "been_watched_with_girl": 0}
+
+            self.OCount = 0
             self.Loose = 0
-            self.Hotdog = 0
-            self.Mast = 0
-            self.Massage = 0
-            self.FondleB = 0
-            self.FondleT = 0
-            self.FondleP = 0
-            self.FondleA = 0
-            self.DildoP = 0
-            self.DildoA = 0
+
             self.Vib = 0
             self.Plug = 0
-            self.SuckB = 0
-            self.InsertP = 0
-            self.InsertA = 0
-            self.LickP = 0
-            self.LickA = 0
-            self.Blow = 0
-            self.Swallow = 0
-            self.CreamP = 0
-            self.CreamA = 0
-            self.Les = 0                                    #how many times she's done les stuff
-            self.LesWatch = 0                               #how many times you've watched her lesing
+
             self.SEXP = 0
             self.MassageChart = [0,0,0,0,0,0,0,0,0,0]
             self.PlayerFav = 0                              #you favorite activity with her
@@ -993,9 +973,9 @@ init python:
                         self.Eyes = "closed"
                         if self.Tag == "Emma":
                             self.Mouth = "kiss"
-                        elif self.Kissed >= 10 and self.inhibition >= 300:
+                        elif self.action_counter["kiss"] >= 10 and self.inhibition >= 300:
                             self.Mouth = "sucking"
-                        elif self.Kissed > 1 and self.Addict >= 50:
+                        elif self.action_counter["kiss"] > 1 and self.Addict >= 50:
                             self.Mouth = "sucking"
                         else:
                             self.Mouth = "kiss"
@@ -1865,9 +1845,9 @@ label GirlsAngry(Girls = 0,other_Girls=[]): #rkeljsv
                         if other_Girls[0] in Party:
                                 $ Party.remove(other_Girls[0])
                         if Girls:
-                            ". . . and so does [other_Girls[0].Name]."
+                            ". . . and so does [other_Girls[0].name]."
                         else:
-                            "[other_Girls[0].Name] storms off."
+                            "[other_Girls[0].name] storms off."
                             if other_Girls[0] == StormX:
                                     ". . . so to speak."
                         $ Girls += 1

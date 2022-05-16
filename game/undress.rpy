@@ -374,7 +374,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
 
                     "That's enough. [[exit]":
                             $ Girl.change_face("bemused", 1)
-                            call Anyline(Girl,"All right, "+Girl.Petname+".")
+                            Girl.voice "All right, [Girl.Petname]."
                             $ counter = 0
             if Girl.ChestNum() < 3 and Girl.OverNum() < 3:
                     #if her top's are off. . .
@@ -807,7 +807,7 @@ label Top_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
 
             "Lose the [Girl.Arms], at least. . ." if Girl.Arms:
                     $ Girl.change_face("sexy")
-                    call Anyline(Girl,"Oh, all right.")
+                    Girl.voice "Oh, all right."
                     $ line = Girl.Arms
                     $ Girl.Arms = 0
                     "She pulls off her [line]."
@@ -886,16 +886,16 @@ label Top_Off_Refused(Girl=0): #rkeljsv
                     $ Girl.change_face("sexy")
                     $ Girl.change_stat("love", 70, 2)
                     if Girl == RogueX or Girl == KittyX:
-                            call Anyline(Girl,"Great!")
+                            Girl.voice "Great!"
                     else:
-                            call Anyline(Girl,"Good.")
+                            Girl.voice "Good."
             "Sorry, I'll drop it." if "no_topless" in Girl.recent_history:
                     if Girl == RogueX:
                             ch_r "Fine. . ."
                     elif Girl == KittyX:
                             ch_k "Good!"
                     else:
-                            call Anyline(Girl,"Good.")
+                            Girl.voice "Good."
             "No, I insist. . .":
                     $ Girl.Brows = "angry"
                     if Girl == RogueX:
@@ -1443,7 +1443,7 @@ label Bottoms_Off(Girl=0,Intro = 1, line = 0, counter = 0): #rkeljsv
                             elif Girl == KittyX:
                                     ch_k "[Girl.Like], fine, whatever."
                             else:
-                                    call Anyline(Girl,"Good.")
+                                    Girl.voice "Good."
 
                 "Come on, Please?":
                         if "no_bottomless" in Girl.daily_history:
@@ -1582,7 +1582,7 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
         $ line = "Well what did you want off?" if not line else line
         $ counter = 1
         while counter and (Girl.Legs or Girl.Panties or Girl.Hose):
-            call Anyline(Girl,line)
+            Girl.voice "[line]"
             menu:
                 # She's asking what you'd like to see.
                 extend ""
@@ -1731,7 +1731,7 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                             elif Girl == StormX:
                                     ch_s "Fine."
                             else:
-                                    call Anyline(Girl,"Ok, sure, "+Girl.Petname+".")
+                                    Girl.voice "Ok, sure, [Girl.Petname]."
                         $ line = Girl.Panties
                         $ Girl.Panties = 0
                         if Girl == KittyX:
@@ -1760,7 +1760,7 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                                 if Girl == LauraX:
                                         ch_l "Whatever."
                                 else:
-                                        call Anyline(Girl,"Fine.")
+                                        Girl.voice "Fine."
                                 $ Girl.PantiesDown = 1 if Girl.Panties else 0
                                 $ Girl.Upskirt = 1 if Girl.Legs else 0
                                 if Girl.Legs:
@@ -1784,7 +1784,7 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                                         ch_v "I guess. . . how 'bout this. . ."
                                 $ Girl.Upskirt = 1
                         else:
-                                call Anyline(Girl,"No.")
+                                Girl.voice "No."
                                 $ Girl.recent_history.append("no_bottomless")
                                 $ Girl.daily_history.append("no_bottomless")
                                 return
@@ -1793,20 +1793,20 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                 "Lose the [Girl.Hose]." if Girl.Hose:
                         $ Girl.change_face("bemused", 1)
                         if Girl.Legs:
-                            call Anyline(Girl,"All right, fine.")
+                            Girl.voice "All right, fine."
                         elif Approval < 2 and not Girl.Panties and Girl.HoseNum() >= 10:
                             call NoPantiesOn(Girl)
                         elif not Approval and Girl.HoseNum() >= 6:
                             if Girl == RogueX:
                                     ch_r "No thanks, [Girl.Petname]."
                             else:
-                                    call Anyline(Girl,"Sorry, no, "+Girl.Petname+".")
+                                    Girl.voice "Sorry, no, [Girl.Petname]."
                             return
                         else:
                             if Girl == RogueX:
                                     ch_r "Ok, sure, [Girl.Petname]."
                             else:
-                                    call Anyline(Girl,"Fine, "+Girl.Petname+".")
+                                    Girl.voice "Fine, [Girl.Petname]."
                         $ line = Girl.Hose
                         $ Girl.Hose = 0
                         if Girl == KittyX:
@@ -1835,14 +1835,14 @@ label Bottoms_Off_Legs(Girl=0):  #rkeljsv
                 "Rip the [Girl.Hose]." if Girl.Hose == "pantyhose" or Girl.Hose == "tights":
                         $ Girl.change_face("bemused", 1)
                         if Girl.Legs:
-                            call Anyline(Girl,"All right, fine.")
+                            Girl.voice "All right, fine."
                         elif Approval < 2 and not Girl.Panties and Girl.HoseNum() >= 10:
                             call NoPantiesOn(Girl)
                         elif not Approval and Girl.HoseNum() >= 6:
                             if Girl == RogueX:
                                     ch_r "I'd rather you didn't, [Girl.Petname]."
                             else:
-                                    call Anyline(Girl,"Sorry, no, "+Girl.Petname+".")
+                                    Girl.voice "Sorry, no, [Girl.Petname]."
                             return
 
                         $ line = Girl.Hose
@@ -2089,7 +2089,7 @@ label Bottoms_Off_Refused(Girl=0):  #rkeljsv
                     elif Girl == LauraX:
                             ch_l "Cool."
                     else:
-                            call Anyline(Girl,"Fine. . .")
+                            Girl.voice "Fine. . ."
 
             "No, let's do something else.":
                     $ Girl.Brows = "confused"
@@ -2102,7 +2102,7 @@ label Bottoms_Off_Refused(Girl=0):  #rkeljsv
                     elif Girl == JubesX:
                             ch_v "Whatever. . ."
                     else:
-                            call Anyline(Girl,"Your loss.")
+                            Girl.voice "Your loss."
                     $ Girl.change_stat("lust", 50, 5)
                     $ Girl.change_stat("love", 70, -2, 1)
                     if "no_bottomless" not in Girl.recent_history:

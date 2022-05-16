@@ -4,7 +4,7 @@ label Les_Interupted(Girl=0,Girls=[]): #rkeljsv
         $ Girl = Girlcheck(Girl)
         # Called if you catch them fucking
         if "unseen" not in Girl.recent_history:
-                if Girl.Org < 3 and Girl.Action:
+                if Girl.event_counter["orgasm"] < 3 and Girl.Action:
                     menu:
                         "Did you want to stop them?"
                         "Yeah.":
@@ -246,9 +246,9 @@ label LesScene(Girl=0,Bonus = 0,Girls=[]): #rkeljsv
                 call Sex_Basic_Dialog(Girl,"tired")
                 return
 
-        if Girl.LesWatch:
+        if Girl.event_counter["been_watched_with_girl"]:
                 $ temp_modifier += 10
-        elif Girl.Les:
+        elif Girl.event_counter["been_with_girl"]:
                 $ temp_modifier += 5
         if Girl.SEXP >= 50:
                 $ temp_modifier += 25
@@ -461,7 +461,7 @@ label LesScene(Girl=0,Bonus = 0,Girls=[]): #rkeljsv
             #End "Interrupted" content.
 
         #first time
-        if not Girl.LesWatch:
+        if not Girl.event_counter["been_watched_with_girl"]:
                 $ Girl.change_face("surprised", 1,Mouth="kiss")
                 if Girl == RogueX:
                         ch_r "You want me and [Partner.name] to hook up, while you watch?"
@@ -524,7 +524,7 @@ label LesScene(Girl=0,Bonus = 0,Girls=[]): #rkeljsv
                         ch_v "Oh, that'll work."
         #end "can Rogue touch" check
 
-        if not Girl.LesWatch and Approval:
+        if not Girl.event_counter["been_watched_with_girl"] and Approval:
                 #First time dialog
                 if Girl.Forced:
                         $ Girl.change_face("sad")
@@ -643,7 +643,7 @@ label LesScene(Girl=0,Bonus = 0,Girls=[]): #rkeljsv
                                     "Didn't get enough earlier?",
                                     "I don't mind having an audience. . ."])
                             call Anyline(Girl,line)
-                    elif Girl.Les < 3:
+                    elif Girl.event_counter["been_with_girl"] < 3:
                             $ Girl.change_face("sexy", 1)
                             $ Girl.Brows = "confused"
                             if Girl == RogueX:
@@ -979,7 +979,7 @@ label LesScene(Girl=0,Bonus = 0,Girls=[]): #rkeljsv
                         ch_v "It's too public here."
                 $ Girl.Statup("Lust", 90, 5)
                 $ Girl.Statup("Obed", 50, -3)
-        elif Girl.Les:
+        elif Girl.event_counter["been_with_girl"]:
                 $ Girl.change_face("sad")
                 if Girl == RogueX:
                         if Bonus >= 100:
@@ -1086,7 +1086,7 @@ label Les_Prep(Girl=focused_Girl,Girls=[]):
                 $ Girl.change_face("sexy")
                 $ Girl.ArmPose = 2
                 "[Girl.name] move's closer to [Partner.name] and wraps her arms around her neck."
-                if not Girl.LesWatch:
+                if not Girl.event_counter["been_watched_with_girl"]:
                         #First time
                         if Girl.Forced:
                             $ Girl.Statup("Love", 90, -20)
@@ -1298,11 +1298,11 @@ label Les_After: #rkeljsv
         else:
                 call second_girl_Like(Girl,3)
 
-        $ Girl.LesWatch += 1
-        $ Partner.LesWatch += 1
-        if Girl.LesWatch == 1:
+        $ Girl.event_counter["been_watched_with_girl"] += 1
+        $ Partner.event_counter["been_watched_with_girl"] += 1
+        if Girl.event_counter["been_watched_with_girl"] == 1:
                 $ Girl.SEXP += 15
-                if Girl.Love >= 500 and Girl.Org:
+                if Girl.Love >= 500 and Girl.event_counter["orgasm"]:
                         if Girl == RogueX:
                                 ch_r "I have to say, I really enjoyed that one. . ."
                         elif Girl == KittyX:
@@ -1319,9 +1319,9 @@ label Les_After: #rkeljsv
                                 ch_s "I did enjoy being watched. . ."
                         elif Girl == JubesX:
                                 ch_v "It was cool to have an audience. . ."
-        if Partner.LesWatch == 1:
+        if Partner.event_counter["been_watched_with_girl"] == 1:
                 $ Partner.SEXP += 15
-                if Partner.Love >= 500 and Partner.Org:
+                if Partner.Love >= 500 and Partner.event_counter["orgasm"]:
                         if Partner == RogueX:
                                 ch_r "I have to say, I really enjoyed that one. . ."
                         elif Partner == KittyX:
@@ -1502,7 +1502,7 @@ label Les_Response(Speaker=0,Subject=0, Step=1, B=0, B2=0, temp_modifier=0, Resu
                         ch_v "Sorry, I'm just worn out. . ."
                 return 0
 
-        if Speaker.Les:
+        if Speaker.event_counter["been_with_girl"]:
                 $ temp_modifier += 10
         if Speaker.SEXP >= 50:
                 $ temp_modifier += 25
@@ -1736,51 +1736,51 @@ label Les_Response(Speaker=0,Subject=0, Step=1, B=0, B2=0, temp_modifier=0, Resu
                                 $ Subject.GirlLikeUp(Speaker,5)
                         if Subject == RogueX:
                                 if Speaker == KittyX:
-                                    if Subject.Les and Speaker.Les:
+                                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                             ch_r "You know that we work well together."
                                     else:
                                             ch_r "It could be a lot of fun."
                                 elif Speaker == EmmaX:
-                                    if Subject.Les and Speaker.Les:
+                                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                             ch_r "You could do that thing from last time. . ."
                                     else:
                                             ch_r "I was hoping you could give me some after class lessons. . ."
                                 else:
-                                    if Subject.Les and Speaker.Les:
+                                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                             ch_r "Oh, it's not that bad."
                                     else:
                                             ch_r "It could be a lot of fun."
                         elif Subject == KittyX:
                                 if Speaker == RogueX:
-                                    if Subject.Les and Speaker.Les:
+                                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                             ch_k "Come on [Speaker.Tag], you know we have fun."
                                     else:
                                             ch_k "Come on [Speaker.Tag], could be fun."
                                 elif Speaker in (EmmaX,StormX):
-                                    if Subject.Les and Speaker.Les:
+                                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                             ch_k "I mean, it might be nice to show [Subject.Petname] what you've taught me. . ."
                                     else:
                                             ch_k "I've seen you watching me in class. . ."
                                 else:
-                                    if Subject.Les and Speaker.Les:
+                                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                             ch_k "We have so much fun together though."
                                     else:
                                             ch_k "It could be fun!"
                         elif Subject == EmmaX:
                                 if Speaker == StormX:
                                     ch_e "I really think we have a few things we could teach [EmmaX.Petname] here. . ."
-                                elif Subject.Les and Speaker.Les:
+                                elif Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                     ch_e "What's the matter [Speaker.name], too shy around [Player.name]?"
                                 else:
                                     ch_e "What's the matter [Speaker.name], I've seen how you look at me. . ."
                         elif Subject == LauraX:
                                 if Speaker == EmmaX:
-                                    if Subject.Les and Speaker.Les:
+                                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                             ch_l "Wow, you aren't this shy when [Subject.Petname]'s not around."
                                     else:
                                             ch_l "Come on, you look really squishy."
                                 else:
-                                    if Subject.Les and Speaker.Les:
+                                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                             ch_l "What, you don't want to fuck with [Player.name] around?"
                                     else:
                                             ch_l "Come on, you look like you have it in you."
@@ -1788,28 +1788,28 @@ label Les_Response(Speaker=0,Subject=0, Step=1, B=0, B2=0, temp_modifier=0, Resu
                                 if Speaker == EmmaX:
                                     ch_j "Come on, we both know you're into this shit."
                                 else:
-                                    if Subject.Les and Speaker.Les:
+                                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                             ch_j "What, -now- you're getting shy?"
                                     else:
                                             ch_j "Come on, I bet you really get around."
                         elif Subject == StormX:
                                 if Speaker == KittyX:
-                                    if Subject.Les and Speaker.Les:
+                                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                             ch_s "Now [Speaker.Tag], this certainly wouldn't be your first lesson. . ."
                                     else:
                                             ch_s "Now [Speaker.Tag], haven't you taken -any- interest in me?"
                                 elif Speaker == EmmaX:
-                                    if Subject.Les and Speaker.Les:
+                                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                             ch_s "Now [Subject.Petname], that isn't what you've said in the past. . ."
                                     else:
                                             ch_s "Oh? You want to pass up the opportunity to teach [StormX.Petname] a few things. . ."
                                 else:
-                                    if Subject.Les and Speaker.Les:
+                                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                             ch_s "You haven't enjoyed our time together?"
                                     else:
                                             ch_s "I can promise you would enjoy yourself. . ."
                         elif Subject == JubesX:
-                                    if Subject.Les and Speaker.Les:
+                                    if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                                             ch_v "I mean, it's not like this is our -first time- or anything. . ."
                                     else:
                                             ch_v "I think I can carry my weight over here. . ."
@@ -1959,20 +1959,20 @@ label Les_Response(Speaker=0,Subject=0, Step=1, B=0, B2=0, temp_modifier=0, Resu
 
         return Result
 
-#End Girl.Les_Response >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >
+#End Girl.event_counter["been_with_girl"]_Response >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >  >
 
 label Les_FirstKiss:
         # called when there is a first kiss situation between two girls
         if "les " + Partner.Tag in Girl.History:
                 #if they've been together before
                 $ line = "experienced"
-        elif Girl.Les and Partner.Les:
+        elif Girl.event_counter["been_with_girl"] and Partner.event_counter["been_with_girl"]:
                 #if both have kissed girls before
                 $ line = "first both"
-        elif Girl.Les:
+        elif Girl.event_counter["been_with_girl"]:
                 # Girl's had experience
                 $ line = "first girl"
-        elif Partner.Les:
+        elif Partner.event_counter["been_with_girl"]:
                 #Partner's had experience
                 $ line = "first partner"
 
@@ -1994,7 +1994,7 @@ label Les_FirstKiss:
                         "[Partner.name]'s lips curl up into a smile and she draws [Girl.name] even closer."
                 "After a few seconds, it begins to grow more passionate."
         return
-#End Girl.Les_Response / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
+#End Girl.event_counter["been_with_girl"]_Response / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 
 
 # Start Girl Whammy / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /

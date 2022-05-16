@@ -575,9 +575,9 @@ label Laura_SexChat:
                                             $ LauraX.change_stat("love", 90, 5)
                                             $ LauraX.change_stat("lust", 80, 10)
                                             ch_l "I really like it too!"
-                                        elif LauraX.Sex >= 5:
+                                        elif LauraX.action_counter["sex"] >= 5:
                                             ch_l "Well I don't mind that."
-                                        elif not LauraX.Sex:
+                                        elif not LauraX.action_counter["sex"]:
                                             $ LauraX.change_face("perplexed")
                                             ch_l "Who's fucking you?"
                                         else:
@@ -594,9 +594,9 @@ label Laura_SexChat:
                                             $ LauraX.change_stat("love", 90, 5)
                                             $ LauraX.change_stat("lust", 80, 10)
                                             ch_l "I love it too!"
-                                        elif LauraX.Anal >= 10:
+                                        elif LauraX.action_counter["anal"] >= 10:
                                             ch_l "Yeah, it's. . . nice. . ."
-                                        elif not LauraX.Anal:
+                                        elif not LauraX.action_counter["anal"]:
                                             $ LauraX.change_face("perplexed")
                                             ch_l "Who's fucking you?"
                                         else:
@@ -613,9 +613,9 @@ label Laura_SexChat:
                                             $ LauraX.change_stat("love", 90, 5)
                                             $ LauraX.change_stat("lust", 80, 5)
                                             ch_l "I love your dick!"
-                                        elif LauraX.Blow >= 10:
+                                        elif LauraX.action_counter["blowjob"] >= 10:
                                             ch_l "Yeah, you're pretty tasty."
-                                        elif not LauraX.Blow:
+                                        elif not LauraX.action_counter["blowjob"]:
                                             $ LauraX.change_face("perplexed")
                                             ch_l "Who's sucking your dick?!"
                                         else:
@@ -632,9 +632,9 @@ label Laura_SexChat:
                                             $ LauraX.change_stat("love", 90, 5)
                                             $ LauraX.change_stat("lust", 80, 7)
                                             ch_l "Yeah, I enjoy that too. . ."
-                                        elif LauraX.Tit >= 10:
+                                        elif LauraX.action_counter["titjob"] >= 10:
                                             ch_l "It's certainly an interesting experience . . ."
-                                        elif not LauraX.Tit:
+                                        elif not LauraX.action_counter["titjob"]:
                                             $ LauraX.change_face("perplexed")
                                             ch_l "Who's titfucking you?"
                                         else:
@@ -672,9 +672,9 @@ label Laura_SexChat:
                                             $ LauraX.change_stat("love", 90, 5)
                                             $ LauraX.change_stat("lust", 80, 7)
                                             ch_l "You do feel pretty comfy. . ."
-                                        elif LauraX.Hand >= 10:
+                                        elif LauraX.action_counter["handjob"] >= 10:
                                             ch_l "I like it too . . ."
-                                        elif not LauraX.Hand:
+                                        elif not LauraX.action_counter["handjob"]:
                                             $ LauraX.change_face("perplexed")
                                             ch_l "Who's jerking you off?"
                                         else:
@@ -683,7 +683,7 @@ label Laura_SexChat:
                                         $ LauraX.PlayerFav = "handjob"
 
                             "Feeling you up.":
-                                        $ counter = LauraX.FondleB + LauraX.FondleT + LauraX.SuckB + LauraX.Hotdog
+                                        $ counter = LauraX.action_counter["fondle_breasts"] + LauraX.action_counter["fondle_thighs"] + LauraX.action_counter["suck_breasts"] + LauraX.action_counter["hotdog"]
                                         $ LauraX.change_face("sly")
                                         if LauraX.PlayerFav == "fondle":
                                             $ LauraX.change_stat("lust", 80, 3)
@@ -918,7 +918,7 @@ label Laura_Chitchat(O=0, Options = ["default","default","default"]):
                     $ Digits.append(LauraX)
                     return
 
-        if "hungry" not in LauraX.Traits and (LauraX.Swallow + LauraX.Chat[2]) >= 10 and LauraX.location == bg_current:  #She's swallowed a lot
+        if "hungry" not in LauraX.Traits and (LauraX.event_counter["swallowed"] + LauraX.Chat[2]) >= 10 and LauraX.location == bg_current:  #She's swallowed a lot
                     call Laura_Hungry
                     return
 
@@ -971,10 +971,10 @@ label Laura_Chitchat(O=0, Options = ["default","default","default"]):
             #If you've given Laura the lingerie
             if "lingerie" not in LauraX.Chat:
                 $ Options.append("lingerie")
-        if LauraX.Hand:
+        if LauraX.action_counter["handjob"]:
             #If Laura's given a handjob
             $ Options.append("handjob")
-        if LauraX.Swallow:
+        if LauraX.event_counter["swallowed"]:
             #If Laura's swallowed before
             $ Options.append("swallowed")
         if "cleaned" in LauraX.daily_history or "painted" in LauraX.daily_history:
@@ -983,13 +983,13 @@ label Laura_Chitchat(O=0, Options = ["default","default","default"]):
         if LauraX.Sleep:
             #If Laura's slept over
             $ Options.append("sleep")
-        if LauraX.CreamP or LauraX.CreamA:
+        if LauraX.event_counter["creampied"] or LauraX.event_counter["anal_creampied"]:
             #If Laura's been creampied
             $ Options.append("creampie")
-        if LauraX.Sex or LauraX.Anal:
+        if LauraX.action_counter["sex"] or LauraX.action_counter["anal"]:
             #If Laura's been sexed
             $ Options.append("sexed")
-        if LauraX.Anal:
+        if LauraX.action_counter["anal"]:
             #If Laura's been analed
             $ Options.append("anal")
 
@@ -1000,7 +1000,7 @@ label Laura_Chitchat(O=0, Options = ["default","default","default"]):
         if "bottomless" in LauraX.History:
             $ Options.append("bottomless")
 
-#        if not LauraX.Chat[0] and LauraX.Sex:
+#        if not LauraX.Chat[0] and LauraX.action_counter["sex"]:
 #            $ Options.append("virgin")
 
 #        if (bg_current == "bg_laura" or bg_current == "bg_player") and "relationship" not in LauraX.daily_history:
@@ -1155,7 +1155,7 @@ label Laura_Chitchat(O=0, Options = ["default","default","default"]):
 
     elif Options[0] == "fondled":
             #Laura's response to being felt up.
-            if LauraX.FondleB + LauraX.FondleP + LauraX.FondleA >= 15:
+            if LauraX.action_counter["fondle_breasts"] + LauraX.action_counter["fondle_pussy"] + LauraX.action_counter["fondle_ass"] >= 15:
                 ch_l "I need your hands on me."
             else:
                 ch_l "You could feel me up, if you wanted."

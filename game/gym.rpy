@@ -44,9 +44,9 @@ label Gym_Entry(Girls=[],GirlsNum = 0):  #rkeljsv
                                         ch_s "I should change as well. . ."
                                 else:
                                     if GirlsNum:
-                                            call Anyline(Girls[0],"I'll be right back too.")
+                                            Girls[0].voice "I'll be right back too."
                                     else:
-                                            call Anyline(Girls[0],"I'll be back soon, gotta change.")
+                                            Girls[0].voice "I'll be back soon, gotta change."
                                 $ Girls[0].Outfit = "gym"
                         else:
                                 # She asks to change outfits
@@ -70,7 +70,7 @@ label Gym_Entry(Girls=[],GirlsNum = 0):  #rkeljsv
                                             $ line = "Do you think I should change into my gym clothes?"
                                     else:
                                             $ line = "Would you like me to change into my gym clothes?"
-                                call Anyline(Girls[0],line)
+                                Girls[0].voice "[line]"
                                 menu:
                                         extend ""
                                         "Yeah, they look great.":
@@ -141,7 +141,7 @@ label Gym_Exit(Girls=[]):  #rkeljsv
                         $ Girls[0].Outfit = Girls[0].OutfitDay
                 $ Girls.remove(Girls[0])
         if Party:
-                call Anyline(Party[0],line)
+                Party[0].voice "[line]"
         if line:
             show blackscreen onlayer black with dissolve
             $ Girls = Party[:]
@@ -185,7 +185,7 @@ label Danger_Room:
     $ bg_current = "bg_dangerroom"
     $ Player.DrainWord("traveling",1,0)
     call Taboo_Level
-    call set_the_scene(Quiet=1)
+    call set_the_scene(silent=1)
     call QuickEvents
     call checkout(1)
     if Round <= 10:
@@ -195,7 +195,7 @@ label Danger_Room:
                     jump Player_Room
                 call Wait
                 call EventCalls
-                call Girls_Location
+                call Girls_location
                 call Gym_Clothes_Off #call Gym_Clothes
     call GirlsAngry
     #End Room Set-up
@@ -236,7 +236,7 @@ label Danger_Room:
                     "You hang out for a bit."
                     call Wait
                     call EventCalls
-                    call Girls_Location
+                    call Girls_location
                     call Gym_Clothes_Off #call Gym_Clothes
 
         "Leave" if not TravelMode:
@@ -304,7 +304,7 @@ label Training:
                     call Girl_TightsRipped(Options[0])
             $ Options.remove(Options[0])
     call Wait
-    call Girls_Location
+    call Girls_location
     call set_the_scene
     $ line = "The training session has ended, what would you like to do next?"
 

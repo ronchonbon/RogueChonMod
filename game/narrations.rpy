@@ -1668,7 +1668,7 @@ label Primary_SexDialog(GirlA=Primary,phrase = 0, Templust = 0, Templust2 = 0): 
     elif primary_action == "kiss":
                         $ GirlA.Addict -= 3
                         $ GirlA.Addict -= 3 if GirlA == JubesX else 0
-                        if GirlA.Kissed > 10 and GirlA.love >= 700:#Loving
+                        if GirlA.action_counter["kiss"] > 10 and GirlA.love >= 700:#Loving
                                 $ line = renpy.random.choice(["She hungrily presses her lips against yours",
                                         "She confidently presses her lips against yours",
                                         "Her lips part as you hold her close",
@@ -1681,7 +1681,7 @@ label Primary_SexDialog(GirlA=Primary,phrase = 0, Templust = 0, Templust2 = 0): 
                                 $ TempFocus += 1 if Player.Focus < 90 else 0
                                 $ Templust += 3 if GirlA.lust < 50 else 0
                                 $ Templust += 1 if GirlA.lust < 90 else 0
-                        elif GirlA.Kissed > 5 or GirlA == EmmaX:#reasonably experienced
+                        elif GirlA.action_counter["kiss"] > 5 or GirlA == EmmaX:#reasonably experienced
                                 $ line = renpy.random.choice(["She confidently presses her lips against yours",
                                         "You softly kiss her plump lips",
                                         "Her lips part as you hold her close",
@@ -2804,7 +2804,7 @@ label Threeway_Set(GirlA=Secondary,Preset = 0, Mode = 0, Action = second_girl_pr
                     #if no preset is offered
                     if Mode == "lesbian": #called from Les_Change()
                             #If it's in lesbian mode, there is already a trigger set, and the roll is good, continue
-                            if girl_offhand_action == "kiss girl" and GirlA.lust <= 20 and GirlA.Org < 1:
+                            if girl_offhand_action == "kiss girl" and GirlA.lust <= 20 and GirlA.event_counter["orgasm"] < 1:
                                     # If kissing at low lust, keep doing it
                                     return
                             elif girl_offhand_action and position_change_timer <= Round:
@@ -4408,3 +4408,15 @@ label Sex_Basic_Dialog(Girl=0,Type=0): #rkeljsv
                                 ch_v "You coulda warned me though. . ."
 
         return
+
+label pulls_off_top_narration(Girl):
+    if Girl == RogueX:
+        "[Girl.name] shrugs and pulls her top open."
+    elif Girl == KittyX:
+        "[Girl.name] laughs and pulls her top open."
+    elif Girl in [EmmaX, StormX]:
+        "[Girl.name] sighs and tugs her breasts free of her clothes."
+    elif Girl in [LauraX, JeanX, JubesX]:
+        "[Girl.name] grunts and pulls her clothes aside."
+
+    return

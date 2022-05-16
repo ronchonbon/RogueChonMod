@@ -145,17 +145,17 @@ label girl_sex_menu(Girl):
                         call Massage(Girl)
                     "Your breasts?":
                         call fondle_breasts(Girl)
-                    "Suck your breasts?" if Girl.Action and Girl.SuckB:
+                    "Suck your breasts?" if Girl.Action and Girl.action_counter["suck_breasts"]:
                         call suck_breasts(Girl)
                     "Your thighs?" if Girl.Action:
                         call fondle_thighs(Girl)
                     "Your pussy?" if Girl.Action:
                         call fondle_pussy(Girl)
-                    "Lick your pussy?" if Girl.Action and Girl.LickP:
+                    "Lick your pussy?" if Girl.Action and Girl.action_counter["eat_pussy"]:
                         call lick_pussy(Girl)
                     "Your Ass?":
                         call fondle_ass(Girl)
-                    "Eat your ass?" if Girl.Action and Girl.LickA:
+                    "Eat your ass?" if Girl.Action and Girl.action_counter["eat_ass"]:
                         call lick_ass(Girl)
                     "Never mind [[something else]":
                         jump main_sex_menu
@@ -604,7 +604,7 @@ label begging_menu(Girl, action):
                         $ Girl.change_stat("inhibition", 60, 3)
                         $ Girl.change_face("confused", 1)
 
-                        if Girl.Hand:
+                        if Girl.action_counter["handjob"]:
                             ch_r "Maybe you'd settle for a handy?"
                         else:
                             ch_r "I could maybe. . . [[she makes a jerking motion with her hand]?"
@@ -724,7 +724,7 @@ label begging_menu(Girl, action):
                     $ Girl.change_stat("inhibition", 60, 3)
                     $ Girl.change_face("confused", 1)
 
-                    if Girl.Blow:
+                    if Girl.action_counter["blowjob"]:
                         ch_r "I could just. . . blow you instead?"
                     else:
                         ch_r "I could maybe. . . you know, [[she pushes her tongue against the side of her cheek]?"
@@ -746,7 +746,7 @@ label begging_menu(Girl, action):
                     $ Girl.change_stat("inhibition", 60, 3)
                     $ Girl.change_face("confused", 1)
 
-                    if Girl.Hand:
+                    if Girl.action_counter["handjob"]:
                         ch_r "Maybe you'd settle for a handy?"
                     else:
                         ch_r "I could maybe. . . [[she makes a jerking motion with her hand]?"
@@ -867,5 +867,138 @@ label begging_menu(Girl, action):
             call forced_action(Girl, action)
         "Bend over." if action in ["sex", "anal", "hotdog"]:
             call forced_action(Girl, action)
+
+    return
+
+label try_something_else_menu(Girl, action):
+    menu:
+        extend ""
+        "How about a handy?" if action in ["footjob", "titjob", "blowjob", "sex", "anal", "hotdog"] and Girl.Action and multi_action:
+            $ action_context = "shift"
+
+            call after_action(Girl, action)
+            call handjob(Girl)
+        "How about a footjob?" if action in ["handjob", "titjob", "blowjob", "sex", "anal", "hotdog"] and Girl.Action and multi_action:
+            $ action_context = "shift"
+
+            call after_action(Girl, action)
+            call footjob(Girl)
+        "How about a titjob?" if action in ["handjob", "footjob", "blowjob", "sex", "anal", "hotdog"] and Girl.Action and multi_action:
+            $ action_context = "shift"
+
+            call after_action(Girl, action)
+            call titjob(Girl)
+        "How about a BJ?" if action in ["handjob", "footjob", "titjob", "sex", "anal", "hotdog"] and Girl.Action and multi_action:
+            if action != "anal":
+                $ action_context = "shift"
+
+                call after_action(Girl, action)
+                call blowjob(Girl)
+            else:
+                if Girl.action_counter["anal"] >= 5 and Girl.action_counter["blowjob"] >= 10 and Girl.SEXP >= 50:
+                    $ action_context = "shift"
+
+                    call after_action(Girl, action)
+                    call blowjob(Girl)
+                else:
+                    call no_ass_to_mouth_lines(Girl)
+
+                    $ action_context = "shift"
+
+                    call after_action(Girl, action)
+                    call before_handjob(Girl, "handjob")
+        "Finish up." if action in ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"] and Player.FocusX:
+            "You release your concentration. . ."
+
+            $ Player.FocusX = 0
+            $ Player.Focus += 15
+
+            jump handjob_cycle
+        "No, get back down there." if action in ["handjob", "footjob", "titjob", "blowjob"]:
+            if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
+                $ Girl.change_stat("love", 200, -5)
+                $ Girl.change_stat("obedience", 50, 3)
+                $ Girl.change_stat("obedience", 80, 2)
+
+                "She grumbles but keeps going."
+            else:
+                $ Girl.change_face("angry", 1)
+
+                call reset_position(Girl)
+
+                "She scowls at you, drops your cock and pulls back."
+
+                call this_is_boring_lines(Girl)
+
+                $ Girl.change_stat("love", 50, -3, 1)
+                $ Girl.change_stat("love", 80, -4, 1)
+                $ Girl.change_stat("obedience", 30, -1, 1)
+                $ Girl.change_stat("obedience", 50, -1, 1)
+                $ Girl.AddWord(1,"angry","angry")
+
+                jump after_action
+        "Finish up.":
+            "You let go. . ."
+
+            jump after_action
+        "Let's try something else." if multi_action:
+            $ line = 0
+            $ action_context = "shift"
+
+            jump after_action
+        "No, this is fun.":
+            if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
+                $ Girl.change_stat("love", 200, -5)
+                $ Girl.change_stat("obedience", 50, 3)
+                $ Girl.change_stat("obedience", 80, 2)
+
+                "She grumbles but lets you keep going."
+            else:
+                $ Girl.change_face("angry", 1)
+
+                call reset_position(Girl)
+
+                "She scowls at you and pulls back."
+
+                call this_is_boring_lines(Girl)
+
+                $ Girl.change_stat("love", 50, -3, 1)
+                $ Girl.change_stat("love", 80, -4, 1)
+                $ Girl.change_stat("obedience", 30, -1, 1)
+                $ Girl.change_stat("obedience", 50, -1, 1)
+                $ Girl.AddWord(1,"angry","angry")
+
+                jump after_action
+
+    return
+
+label girl_unsatisfied_menu(Girl, action):
+    if action in sex_actions:
+        call not_ready_to_stop_lines(Girl)
+
+        menu:
+            extend "Keep going?"
+            "Yes, keep going for a bit." if Player.Semen:
+                $ line = "You get back into it"
+            "No, I'm done." if Player.Semen:
+                "You pull back."
+
+                jump after_action
+            "No, I'm spent." if not Player.Semen:
+                "You pull back."
+
+                jump after_action
+    else:
+        "[Girl.name] still seems a bit unsatisfied with the experience."
+
+        "Finish her?"
+        menu:
+            extend ""
+            "Yes, keep going for a bit.":
+                $ line = "You get back into it"
+            "No, I'm done.":
+                "You pull back."
+
+                jump after_action
 
     return

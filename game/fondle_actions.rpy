@@ -3,7 +3,7 @@ label fondle_menu:
         "Keep going. . .":
             pass
         "I want to stick a finger in. . ." if primary_action == "fondle_pussy" and action_speed != 2:
-            if focused_Girl.InsertP:
+            if focused_Girl.action_counter["finger_pussy"]:
                 $ action_speed = 2
             else:
                 menu:
@@ -332,7 +332,7 @@ label fondle_menu:
 
 label fondle_set_modifier(Girl, action):
     if action == "fondle_thighs":
-        if Girl.FondleT:
+        if Girl.action_counter["fondle_thighs"]:
             $ temp_modifier += 10
 
         if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5:
@@ -349,7 +349,7 @@ label fondle_set_modifier(Girl, action):
         elif "ex" in Girl.Traits:
             $ temp_modifier -= 25
     elif action == "fondle_breasts":
-        if Girl.FondleB:
+        if Girl.action_counter["fondle_breasts"]:
             $ temp_modifier += 15
 
         if Girl.lust > 75: #She's really horny
@@ -363,7 +363,7 @@ label fondle_set_modifier(Girl, action):
         elif "ex" in Girl.Traits:
             $ temp_modifier -= 20
     elif action == "suck_breasts":
-        if Girl.SuckB: #You've done it before
+        if Girl.action_counter["suck_breasts"]: #You've done it before
             $ temp_modifier += 15
 
         if not Girl.Chest and not Girl.Over:
@@ -383,7 +383,7 @@ label fondle_set_modifier(Girl, action):
         elif "ex" in Girl.Traits:
             $ temp_modifier -= 25
     elif action == "fondle_pussy":
-        if Girl.FondleP: #You've done it before
+        if Girl.action_counter["fondle_pussy"]: #You've done it before
             $ temp_modifier += 20
 
         if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5: # she's got pants on.
@@ -403,7 +403,7 @@ label fondle_set_modifier(Girl, action):
         elif "ex" in Girl.Traits:
             $ temp_modifier -= 25
     elif action == "eat_pussy":
-        if Girl.LickP: #You've done it before
+        if Girl.action_counter["eat_pussy"]: #You've done it before
             $ temp_modifier += 15
 
         if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5: # she's got pants on.
@@ -428,7 +428,7 @@ label fondle_set_modifier(Girl, action):
         elif "ex" in Girl.Traits:
             $ temp_modifier -= 25
     elif action == "fondle_ass":
-        if Girl.FondleA: #You've done it before
+        if Girl.action_counter["fondle_ass"]: #You've done it before
             $ temp_modifier += 10
 
         if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5: # she's got pants on.
@@ -445,7 +445,7 @@ label fondle_set_modifier(Girl, action):
         elif "ex" in Girl.Traits:
             $ temp_modifier -= 25
     elif action == "finger_ass":
-        if Girl.InsertA: #You've done it before
+        if Girl.action_counter["finger_ass"]: #You've done it before
             $ temp_modifier += 25
 
         if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5: # she's got pants on.
@@ -471,7 +471,7 @@ label fondle_set_modifier(Girl, action):
         elif "ex" in Girl.Traits:
             $ temp_modifier -= 25
     elif action == "eat_ass":
-        if Girl.LickA: #You've done it before
+        if Girl.action_counter["eat_ass"]: #You've done it before
             $ temp_modifier += 20
 
         if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5: # she's got pants on.
@@ -507,130 +507,6 @@ label fondle_set_modifier(Girl, action):
         $ temp_modifier -= 10 if "no_" + action in Girl.recent_history else 0
 
     return
-
-label end_of_fondle_round(Girl, action):
-    $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus
-
-    if Player.Focus >= 100 or Girl.lust >= 100:
-        if Player.Focus >= 100:
-            call Player_Cumming
-
-            if "angry" in Girl.recent_history:
-                call reset_position(Girl)
-
-                return True
-
-            $ Girl.change_stat("lust", 200, 5)
-
-            if 100 > Girl.lust >= 70 and Girl.OCount < 2 and Girl.SEXP >= 20:
-                $ Girl.AddWord(0, "unsatisfied", "unsatisfied")
-
-            if Player.Focus > 80:
-                jump after_action
-
-            $ line = "came"
-
-        if Girl.lust >= 100:
-            call Girl_Cumming
-
-            if action_context == "shift" or "angry" in Girl.recent_history:
-                jump after_action
-
-        if line == "came": #ex Player.Focus <= 20:
-            $ line = 0
-
-            if not Player.Semen:
-                "You're emptied out, you should probably take a break."
-
-            if "unsatisfied" in Girl.recent_history:#And Rogue is unsatisfied,
-                "[Girl.name] still seems a bit unsatisfied with the experience."
-                menu:
-                    "Finish her?"
-                    "Yes, keep going for a bit.":
-                        $ line = "You get back into it"
-                    "No, I'm done.":
-                        "You pull back."
-
-                        jump after_action
-
-    if Partner and Partner.lust >= 100:
-        call Girl_Cumming(Partner)
-
-    $ Player.Focus -= 10 if Player.FocusX and Player.Focus > 50 else 0
-
-    if action == "fondle_thighs":
-        $ bonus = Girl.FondleT
-    elif action == "fondle_breasts":
-        $ bonus = Girl.FondleB
-    elif action == "suck_breasts":
-        $ bonus = Girl.SuckB
-    elif action == "fondle_pussy":
-        $ bonus = Girl.FondleP
-    elif action == "finger_pussy":
-        $ bonus = Girl.InsertP
-    elif action == "eat_pussy":
-        $ bonus = Girl.LickP
-    elif action == "fondle_ass":
-        $ bonus = Girl.FondleA
-    elif action == "finger_ass":
-        $ bonus = Girl.InsertA
-    elif action == "eat_ass":
-        $ bonus = Girl.LickA
-
-    if Girl.SEXP >= 100 or Approvalcheck(Girl, 1200, "LO"):
-        pass
-    elif counter == (5 + bonus):
-        $ Girl.Brows = "confused"
-
-        call warm_hands_lines(Girl)
-    elif counter == (15 + bonus) and Girl.SEXP >= 15 and not Approvalcheck(Girl, 1500):
-        $ Girl.Brows = "confused"
-
-        call try_something_else_lines(Girl)
-
-        menu:
-            extend ""
-            "Finish up.":
-                "You let go. . ."
-
-                jump after_action
-            "Let's try something else." if multi_action:
-                $ line = 0
-                $ action_context = "shift"
-
-                jump after_action
-            "No, this is fun.":
-                if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
-                    $ Girl.change_stat("love", 200, -5)
-                    $ Girl.change_stat("obedience", 50, 3)
-                    $ Girl.change_stat("obedience", 80, 2)
-
-                    "She grumbles but lets you keep going."
-                else:
-                    $ Girl.change_face("angry", 1)
-
-                    call reset_position(Girl)
-
-                    "She scowls at you and pulls back."
-
-                    call this_is_boring_lines(Girl)
-
-                    $ Girl.change_stat("love", 50, -3, 1)
-                    $ Girl.change_stat("love", 80, -4, 1)
-                    $ Girl.change_stat("obedience", 30, -1, 1)
-                    $ Girl.change_stat("obedience", 50, -1, 1)
-                    $ Girl.AddWord(1,"angry","angry")
-
-                    jump after_action
-
-    call Escalation(Girl)
-
-    if Round == 10:
-        call wrap_this_up_lines(Girl)
-    elif Round == 5:
-        call time_to_stop_soon_lines(Girl)
-
-    return False
 
 label fondle_thighs(Girl):
     $ primary_action = "fondle_thighs"
@@ -690,9 +566,9 @@ label fondle_thighs(Girl):
 
         return
     else:
-        call action_disapproved(Girl, "fondle_thighs", Girl.FondleT)
+        call action_disapproved(Girl, "fondle_thighs", Girl.action_counter["fondle_thighs"])
 
-    call action_rejected(Girl, "fondle_thighs", Girl.FondleT)
+    call action_rejected(Girl, "fondle_thighs", Girl.action_counter["fondle_thighs"])
 
     return
 
@@ -755,9 +631,9 @@ label fondle_breasts(Girl):
 
         return
     else:
-        call action_disapproved(Girl, "fondle_breasts", Girl.FondleB)
+        call action_disapproved(Girl, "fondle_breasts", Girl.action_counter["fondle_breasts"])
 
-    call action_rejected(Girl, "fondle_breasts", Girl.FondleB)
+    call action_rejected(Girl, "fondle_breasts", Girl.action_counter["fondle_breasts"])
 
     return
 
@@ -808,9 +684,9 @@ label suck_breasts(Girl):
 
         return
     else:
-        call action_disapproved(Girl, "suck_breasts", Girl.SuckB)
+        call action_disapproved(Girl, "suck_breasts", Girl.action_counter["suck_breasts"])
 
-    call action_rejected(Girl, "suck_breasts", Girl.SuckB)
+    call action_rejected(Girl, "suck_breasts", Girl.action_counter["suck_breasts"])
 
     return
 
@@ -881,9 +757,9 @@ label fondle_pussy(Girl):
 
         return
     else:
-        call action_disapproved(Girl, primary_action, Girl.FondleP)
+        call action_disapproved(Girl, primary_action, Girl.action_counter["fondle_pussy"])
 
-    call action_rejected(Girl, "fondle_pussy", Girl.FondleP)
+    call action_rejected(Girl, "fondle_pussy", Girl.action_counter["fondle_pussy"])
 
     return
 
@@ -991,9 +867,9 @@ label eat_pussy(Girl):
 
         return
     else:
-        call action_disapproved(Girl, primary_action, Girl.LickP)
+        call action_disapproved(Girl, primary_action, Girl.action_counter["eat_pussy"])
 
-    call action_rejected(Girl, "eat_pussy", Girl.LickP)
+    call action_rejected(Girl, "eat_pussy", Girl.action_counter["eat_pussy"])
 
 label fondle_ass(Girl):
     $ primary_action = "fondle_ass"
@@ -1061,9 +937,9 @@ label fondle_ass(Girl):
 
         return
     else:
-        call action_disapproved(Girl, primary_action, Girl.FondleA)
+        call action_disapproved(Girl, primary_action, Girl.action_counter["fondle_ass"])
 
-    call action_rejected(Girl, "fondle_ass", Girl.FondleA)
+    call action_rejected(Girl, "fondle_ass", Girl.action_counter["fondle_ass"])
 
     return
 
@@ -1117,9 +993,9 @@ label finger_ass(Girl):
         return
 
     else:
-        call action_disapproved(Girl, "finger_ass", Girl.InsertA)
+        call action_disapproved(Girl, "finger_ass", Girl.action_counter["finger_ass"])
 
-    call action_rejected(Girl, "finger_ass", Girl.InsertA)
+    call action_rejected(Girl, "finger_ass", Girl.action_counter["finger_ass"])
 
     return
 
@@ -1173,8 +1049,8 @@ label eat_ass(Girl):
         return
 
     else:                                                                               #She's not into it, but maybe. . .
-        call action_disapproved(Girl, "eat_ass", Girl.LickA)
+        call action_disapproved(Girl, "eat_ass", Girl.action_counter["eat_ass"])
 
-    call action_rejected(Girl, "eat_ass", Girl.LickA)
+    call action_rejected(Girl, "eat_ass", Girl.action_counter["eat_ass"])
 
     return

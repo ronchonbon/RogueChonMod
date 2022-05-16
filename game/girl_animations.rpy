@@ -19,15 +19,18 @@ label reset_position(Girl, trigger = primary_action, set = True):
 
     call hide_girl(Girl)
 
-    if Girl == RogueX:
-        $ x_anchor = 0.6
-    else:
-        $ x_anchor = 0.5
+    show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+            ease .5 offset (0,0) anchor (0.6, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
+    show Rogue_Sprite zorder Girl.Layer:
+            offset (0,0)
+            anchor (0.6, 0.0)
+            zoom 1
+            xzoom 1
+            yzoom 1
+            alpha 1
+            pos (Girl.sprite_location,50)
+    $ Girl.Pose = "full" if Set else 0
 
-    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
-        ease 0.5 offset (0,0) anchor (x_anchor, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
-
-    $ Girl.Pose = "full" if set else 0
     $ primary_action = trigger
 
     return
@@ -39,7 +42,7 @@ label kissing_launch(Girl, trigger = primary_action, set = True):
 
     $ Girl.Pose = "kiss" if set else Girl.Pose
 
-    show expression Girl.Tag + "_Sprite" at sprite_location(StageCenter) zorder Girl.Layer:
+    show Rogue_Sprite at sprite_location(StageCenter) zorder Girl.Layer:
         ease 0.5 offset (0, 0) zoom 2 alpha 1
 
     return
@@ -49,7 +52,7 @@ label kissing_smooch(Girl):
 
     $ Girl.change_face("kiss")
 
-    show expression Girl.Tag + "_Sprite" at sprite_location(StageCenter) zorder Girl.Layer:
+    show Rogue_Sprite at sprite_location(StageCenter) zorder Girl.Layer:
         ease 0.5 xpos StageCenter offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos Girl.sprite_location zoom 1
@@ -65,7 +68,7 @@ label breasts_launch(Girl, trigger = primary_action, set = True):
 
     $ Girl.Pose = "breasts" if set else Girl.Pose
 
-    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+    show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         ease 0.5 pos (700,-50) zoom 2 offset (0,0) alpha 1
 
     return
@@ -77,13 +80,13 @@ label pussy_launch(Girl, trigger = primary_action, set = True):
 
     $ Girl.Pose = "pussy" if set else Girl.Pose
 
-    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+    show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         ease 0.5 pos (700, -400) zoom 2 offset (0,0) alpha 1
 
     return
 
 label handjob_launch(Girl, trigger = primary_action):
-    if renpy.showing(Girl.Tag + "_HJ_Animation"):
+    if renpy.showing("Rogue_HJ_Animation"):
         $ primary_action = "handjob"
 
         return
@@ -101,33 +104,16 @@ label handjob_launch(Girl, trigger = primary_action):
     if Girl in [RogueX, KittyX, EmmaX]:
         $ x_offset = 0
         $ y_offset = 200
-    elif Girl in [LauraX, JubesX]:
-        $ x_offset = -150
-        $ y_offset = 200
-    elif Girl in [JeanX, StormX]:
-        $ x_offset = -150
-        $ y_offset = 350
 
-    if Girl in [RogueX, LauraX]:
-        if trigger == "L":
-            show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
-                alpha 1
-                ease 1 zoom 1.7 xpos 700 offset (x_offset, y_offset)
-        else:
-            show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
-                alpha 1
-                ease 1 zoom 1.7 xpos 700 offset (x_offset, y_offset)
-            with dissolve
-    elif Girl in [KittyX, EmmaX, JeanX, StormX]:
-        if trigger == "L":
-            show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
-                alpha 1
-                ease 1 zoom 1.7 offset (x_offset, y_offset)
-        else:
-            show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
-                alpha 1
-                ease 1 zoom 1.7 offset (x_offset, y_offset)
-            with dissolve
+    if trigger == "L":
+        show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+            alpha 1
+            ease 1 zoom 1.7 xpos 700 offset (x_offset, y_offset)
+    else:
+        show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+            alpha 1
+            ease 1 zoom 1.7 xpos 700 offset (x_offset, y_offset)
+        with dissolve
 
     if Taboo and trigger == "L":
         if len(Present) >= 2:
@@ -161,50 +147,50 @@ label handjob_launch(Girl, trigger = primary_action):
     pause 0.5
 
     if Girl in [RogueX]:
-        show expression Girl.Tag + "_HJ_Animation" at sprite_location(Girl.sprite_location) zorder 150 with easeinbottom
+        show expression "Rogue_HJ_Animation" at sprite_location(Girl.sprite_location) zorder 150 with easeinbottom
     elif Girl in [KittyX, EmmaX]:
-        show expression Girl.Tag + "_HJ_Animation" at sprite_location(Girl.sprite_location) zorder 150 with easeinbottom:
+        show expression "Rogue_HJ_Animation" at sprite_location(Girl.sprite_location) zorder 150 with easeinbottom:
             offset (100, 250)
     elif Girl in [LauraX, JeanX, StormX, JubesX]:
-        show expression Girl.Tag + "_HJ_Animation" at sprite_location(Girl.sprite_location) zorder 150 with easeinbottom:
+        show expression "Rogue_HJ_Animation" at sprite_location(Girl.sprite_location) zorder 150 with easeinbottom:
             offset (250, 250)
 
     return
 
 label handjob_reset(Girl): # The sequence to the Rogue animations from handjob to default
-    if not renpy.showing(Girl.Tag + "_HJ_Animation"):
+    if not renpy.showing("Rogue_HJ_Animation"):
         return
 
     $ action_speed = 0
 
-    $ renpy.hide(Girl.Tag + "_HJ_Animation")
+    hide Rogue_HJ_Animation
     with dissolve
 
     call hide_girl(Girl)
 
-    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+    show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
         zoom 1.7 xpos 700 offset (0,200)
 
-    show expression Girl.Tag + "_Sprite" zorder Girl.Layer:
+    show Rogue_Sprite zorder Girl.Layer:
         alpha 1
         ease 1 zoom 1.5 offset (0,50)
         pause .5
         ease .5 zoom 1 xpos Girl.sprite_location yoffset 0
 
-    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+    show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
         zoom 1 xpos Girl.sprite_location yoffset 0
 
     return
 
 label titjob_launch(Girl, trigger = primary_action):
-    if renpy.showing(Girl.Tag + "_TJ_Animation"):
+    if renpy.showing("Rogue_TJ_Animation"):
         return
 
     call hide_girl(Girl)
 
-    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+    show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
         ease 1 zoom 2 xpos 550 offset (0,50)
 
@@ -253,7 +239,7 @@ label titjob_launch(Girl, trigger = primary_action):
 
     show blackscreen onlayer black with dissolve
 
-    show expression Girl.Tag + "_Sprite" zorder Girl.Layer:
+    show Rogue_Sprite zorder Girl.Layer:
         alpha 0
 
     $ action_speed = 0
@@ -261,14 +247,14 @@ label titjob_launch(Girl, trigger = primary_action):
     if trigger != "cum":
         $ primary_action = "titjob"
 
-    show expression Girl.Tag + "_TJ_Animation" at sprite_location(StageRight) zorder 150
+    show Rogue_TJ_Animation at sprite_location(StageRight) zorder 150
 
     hide blackscreen onlayer black with dissolve
 
     return
 
 label titjob_reset(Girl):
-    if not renpy.showing(Girl.Tag + "_TJ_Animation"):
+    if not renpy.showing("Rogue_TJ_Animation"):
         return
 
     call hide_girl(Girl)
@@ -292,14 +278,14 @@ label titjob_reset(Girl):
     elif Girl in [KittyX, LauraX, JeanX, StormX, JubesX]:
         $ mid_x_position = 700
 
-    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+    show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         zoom initial_zoom xpos initial_x_position yoffset initial_y_offset
-    show expression Girl.Tag + "_Sprite" zorder Girl.Layer:
+    show Rogue_Sprite zorder Girl.Layer:
         alpha 1
         ease 1 zoom 1.5 xpos mid_x_position yoffset 50
         pause 0.5
         ease 0.5 zoom 1 xpos Girl.sprite_location yoffset 0
-    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+    show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
         zoom 1 xpos Girl.sprite_location yoffset 0
 
@@ -308,18 +294,18 @@ label titjob_reset(Girl):
     return
 
 label blowjob_launch(Girl, trigger = primary_action):
-    if renpy.showing(Girl.Tag + "_BJ_Animation"):
+    if renpy.showing("Rogue_BJ_Animation"):
         return
 
     call hide_girl(Girl)
 
     if trigger == "L" or trigger == "cum":
-        show expression Girl.Tag + "_Sprite" at sprite_location(StageCenter) zorder Girl.Layer:
+        show Rogue_Sprite at sprite_location(StageCenter) zorder Girl.Layer:
             alpha 1
             ease 1 zoom 2.5 offset (70,140) #(-90,140) offset (150,80)
         with dissolve
     else:
-        show expression Girl.Tag + "_Sprite" at sprite_location(StageCenter) zorder Girl.Layer:
+        show Rogue_Sprite at sprite_location(StageCenter) zorder Girl.Layer:
             alpha 1
             zoom 2.5 offset (70,140) #(-90,140)
         with dissolve
@@ -343,23 +329,23 @@ label blowjob_launch(Girl, trigger = primary_action):
     if trigger != "cum":
         $ primary_action = "blowjob"
 
-    show expression Girl.Tag + "_Sprite" zorder Girl.Layer:
+    show Rogue_Sprite zorder Girl.Layer:
         alpha 0
 
-    show expression Girl.Tag + "_BJ_Animation" zorder 150:
+    show expression "Rogue_BJ_Animation" zorder 150:
         pos (645,510)
 
     return
 
 label blowjob_reset(Girl): # The sequence to the Rogue animations from BJ to default
-    if not renpy.showing(Girl.Tag + "_BJ_Animation"):
+    if not renpy.showing("Rogue_BJ_Animation"):
         return
 
     call hide_girl(Girl)
 
     $ action_speed = 0
 
-    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+    show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         zoom 2 offset (70,140)
         alpha 1
         block:
@@ -368,7 +354,7 @@ label blowjob_reset(Girl): # The sequence to the Rogue animations from BJ to def
             pause .5
             ease .5 zoom 1 offset (0,0)
 
-    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+    show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
         zoom 1 offset (0,0)
 
@@ -418,7 +404,7 @@ label sex_launch(Girl, trigger = primary_action):
 
         return
 
-    if renpy.showing(Girl.Tag + "_SexSprite"):
+    if renpy.showing("Rogue_SexSprite"):
         return
 
     $ action_speed = 0
@@ -433,31 +419,25 @@ label sex_launch(Girl, trigger = primary_action):
             $ Girl.PantiesDown = 1
 
     if Girl in [RogueX, KittyX, JeanX, StormX]:
-        show expression Girl.Tag + "_SexSprite" zorder 150
-    elif Girl in [EmmaX]:
-        show expression Girl.Tag + "_SexSprite" zorder 150:
-            pos (575, 470)
-    elif Girl in [LauraX, JubesX]:
-        show expression Girl.Tag + "_SexSprite" zorder 150:
-            pos (450, 500)
+        show expression "Rogue_SexSprite" zorder 150
 
     with dissolve
 
     return
 
 label sex_reset(Girl):
-    if renpy.showing(Girl.Tag + "_Doggy_Animation"):
+    if renpy.showing("Rogue_Doggy_Animation"):
         call doggy_reset(Girl)
 
         return
-    if not renpy.showing(Girl.Tag + "_SexSprite"):
+    if not renpy.showing("Rogue_SexSprite"):
         return
 
     $ Girl.ArmPose = 2
 
     call hide_girl(Girl)
 
-    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+    show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
         zoom 1 offset (0,0)
         anchor (0.5, 0.0)
@@ -468,20 +448,20 @@ label sex_reset(Girl):
     return
 
 label doggy_launch(Girl, trigger = primary_action):
-    if renpy.showing(Girl.Tag + "_Doggy_Animation"):
+    if renpy.showing("Rogue_Doggy_Animation"):
         return
 
     $ action_speed = 0
 
     call hide_girl(Girl, sprite = True)
 
-    show expression Girl.Tag + "_Doggy_Animation" at sprite_location(StageCenter+50) zorder 150
+    show expression "Rogue_Doggy_Animation" at sprite_location(StageCenter+50) zorder 150
     with dissolve
 
     return
 
 label doggy_reset(Girl):
-    if renpy.showing(Girl.Tag + "_Doggy_Animation"):
+    if renpy.showing("Rogue_Doggy_Animation"):
         return
 
     $ Girl.ArmPose = 2
@@ -497,7 +477,7 @@ label doggy_reset(Girl):
 
     call hide_girl(Girl)
 
-    show expression Girl.Tag + "_Sprite" at sprite_location(Girl.sprite_location) zorder Girl.Layer:
+    show Rogue_Sprite at sprite_location(Girl.sprite_location) zorder Girl.Layer:
         alpha 1
         zoom 1
         offset (0,0)

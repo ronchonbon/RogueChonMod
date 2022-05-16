@@ -23,7 +23,7 @@ label sex_acts(action = 0):
         if not action_context:
             return
     elif action == "kiss":
-        call before_kiss(focused_Girl)
+        call before_action
 
         if not action_context:
             return
@@ -69,13 +69,13 @@ label sex_menu:
             $ counter += 1
             $ Round -= 1
 
-            jump sex_cycle
+            jump action_cycle
         "Turn her around":
             $ focused_Girl.Pose = "doggy" if focused_Girl.Pose != "doggy" else "sex"
 
             "You turn her around. . ."
 
-            jump sex_cycle
+            jump action_cycle
         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
             pass
         "Focus to last longer." if not Player.FocusX and "focus" in Player.Traits:
@@ -89,15 +89,15 @@ label sex_menu:
         "Other options":
             menu:
                 "Offhand action":
-                    if focused_Girl.actionion and multi_action:
+                    if focused_Girl.action and multi_action:
                         call Offhand_Set
 
                         if offhand_action:
-                            $ focused_Girl.actionion -= 1
+                            $ focused_Girl.action -= 1
                     else:
                         call Sex_Basic_Dialog(focused_Girl,"tired")
                 "Shift primary action":
-                    if focused_Girl.actionion and multi_action:
+                    if focused_Girl.action and multi_action:
                         menu:
                             "How about sex?" if primary_action != "sex":
                                 $ action_context = "shift"
@@ -125,7 +125,7 @@ label sex_menu:
                                 call after_action(focused_Girl, primary_action)
                                 call hotdog(focused_Girl)
                             "Never Mind":
-                                jump sex_cycle
+                                jump action_cycle
                     else:
                         call tired_lines(focused_Girl)
                 "Threesome actions (locked)" if not Partner:
@@ -146,14 +146,14 @@ label sex_menu:
                             call primary_action_Swap(focused_Girl)
                         "Undress [Partner.name]":
                             call Girl_Undress(Partner)
-                            jump sex_cycle
+                            jump action_cycle
                         "Clean up [Partner.name] (locked)" if not Partner.Spunk:
                             pass
                         "Clean up [Partner.name]" if Partner.Spunk:
                             call Girl_Cleanup(Partner,"ask")
-                            jump sex_cycle
+                            jump action_cycle
                         "Never mind":
-                            jump sex_cycle
+                            jump action_cycle
                 "Just take a look at her.":
                     $ Player.Cock = 0
 
@@ -169,7 +169,7 @@ label sex_menu:
                 "Clean up [focused_Girl.name]" if focused_Girl.Spunk:
                     call Girl_Cleanup(focused_Girl,"ask")
                 "Never mind":
-                    jump sex_cycle
+                    jump action_cycle
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
@@ -192,14 +192,14 @@ label sex_menu:
 
 label sex_set_modifier(Girl, action):
     if action == "sex":
-        if Girl.Sex >= 7: # She loves it
+        if Girl.action_counter["sex"] >= 7: # She loves it
             $ temp_modifier += 15
-        elif Girl.Sex >= 3: #You've done it before several times
+        elif Girl.action_counter["sex"] >= 3: #You've done it before several times
             $ temp_modifier += 12
-        elif Girl.Sex: #You've done it before
+        elif Girl.action_counter["sex"]: #You've done it before
             $ temp_modifier += 10
 
-        if Girl.Addict >= 75 and (Girl.CreamP + Girl.CreamA) >=3: #She's really strung out and has creampied
+        if Girl.Addict >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) >=3: #She's really strung out and has creampied
             $ temp_modifier += 20
         elif Girl.Addict >= 75:
             $ temp_modifier += 15
@@ -214,14 +214,14 @@ label sex_set_modifier(Girl, action):
         if "exhibitionist" in Girl.Traits:
             $ temp_modifier += (4*Taboo)
     elif action == "anal":
-        if Girl.Anal >= 7: # She loves it
+        if Girl.action_counter["anal"]  >= 7: # She loves it
             $ temp_modifier += 20
-        elif Girl.Anal >= 3: #You've done it before several times
+        elif Girl.action_counter["anal"]  >= 3: #You've done it before several times
             $ temp_modifier += 17
-        elif Girl.Anal: #You've done it before
+        elif Girl.action_counter["anal"] : #You've done it before
             $ temp_modifier += 15
 
-        if Girl.Addict >= 75 and (Girl.CreamP + Girl.CreamA) >=3: #She's really strung out and has creampied
+        if Girl.Addict >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) >=3: #She's really strung out and has creampied
             $ temp_modifier += 25
         elif Girl.Addict >= 75:
             $ temp_modifier += 15
@@ -243,9 +243,9 @@ label sex_set_modifier(Girl, action):
         if "exhibitionist" in Girl.Traits:
             $ temp_modifier += (5*Taboo)
     elif action == "hotdog":
-        if Girl.Hotdog >= 3: #You've done it before several times
+        if Girl.action_counter["hotdog"] >= 3: #You've done it before several times
             $ temp_modifier += 10
-        elif Girl.Hotdog: #You've done it before
+        elif Girl.action_counter["hotdog"]: #You've done it before
             $ temp_modifier += 5
 
         if Girl.lust > 85:
@@ -273,168 +273,6 @@ label sex_set_modifier(Girl, action):
         $ temp_modifier -= 10 if "no_" + action in Girl.recent_history else 0
 
     return
-
-label end_of_sex_round(Girl, action):
-    $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus
-
-    if Player.Focus >= 100 or Girl.lust >= 100:
-        if Player.Focus >= 100:
-            call Player_Cumming(Girl)
-
-            if "angry" in Girl.recent_history:
-                call sex_reset(Girl)
-
-                return True
-
-            $ Girl.change_stat("lust", 200, 5)
-
-            if 100 > Girl.lust >= 70 and Girl.OCount < 2:
-                $ Girl.AddWord(0, "unsatisfied", "unsatisfied")
-
-            if Player.Focus > 80:
-                call after_action(Girl, action)
-
-                return True
-
-            $ line = "came"
-
-        if Girl.lust >= 100:
-            call Girl_Cumming(Girl)
-
-            if action_context == "shift" or "angry" in Girl.recent_history:
-                call after_action(Girl, action)
-
-                return True
-
-        if line == "came": #ex Player.Focus <= 20:
-            $ line = 0
-
-            if not Player.Semen:
-                "She's emptied you out, you'll need to take a break."
-
-                call after_action(Girl, action)
-
-                return True
-            elif "unsatisfied" in Girl.recent_history:#And Rogue is unsatisfied,
-                call not_ready_to_stop_lines(Girl)
-
-                menu:
-                    extend "Keep going?"
-                    "Yes, keep going for a bit." if Player.Semen:
-                        $ line = "You get back into it"
-                    "No, I'm done." if Player.Semen:
-                        "You pull back."
-
-                        call after_action(Girl, action)
-
-                        return True
-                    "No, I'm spent." if not Player.Semen:
-                        "You pull back."
-
-                        call after_action(Girl, action)
-
-                        return True
-
-    if Partner and Partner.lust >= 100:
-        call Girl_Cumming(Partner)
-
-    $ Player.Focus -= 12 if Player.FocusX and Player.Focus > 50 else 0
-
-    if action == "sex":
-        $ bonus = Girl.Sex
-    elif action == "anal":
-        $ bonus = Girl.Anal
-    elif action == "hotdog":
-        $ bonus = Girl.Hotdog
-
-    if Girl.SEXP >= 100 or Approvalcheck(Girl, 1200, "LO"):
-        pass
-    elif counter == (5 + bonus):
-        $ Girl.Brows = "confused"
-
-        call getting_close_lines(Girl)
-    elif counter == (10 + bonus):
-        $ Girl.Brows = "angry"
-
-        call done_with_this_lines(Girl)
-        call can_we_do_something_else_lines(Girl)
-
-        menu:
-            extend ""
-            "How about a BJ?" if Girl.actionion and multi_action:
-                if action != "anal":
-                    $ action_context = "shift"
-
-                    call after_action(Girl, action)
-                    call blowjob(Girl)
-                else:
-                    if Girl.Anal >= 5 and Girl.Blow >= 10 and Girl.SEXP >= 50:
-                        $ action_context = "shift"
-
-                        call after_action(Girl, action)
-                        call blowjob(Girl)
-                    else:
-                        call no_ass_to_mouth_lines(Girl)
-
-                        $ action_context = "shift"
-
-                        call after_action(Girl, action)
-                        call before_handjob(Girl, "handjob")
-            "How about a Handy?" if Girl.actionion and multi_action:
-                $ action_context = "shift"
-
-                call after_action(Girl, action)
-                call handjob(Girl)
-            "Finish up.":
-                "You release your concentration. . ."
-
-                $ Player.FocusX = 0
-                $ Player.Focus += 15
-
-                call after_action(Girl, action)
-
-                return True
-            "Let's try something else." if multi_action:
-                $ line = 0
-                $ action_context = "shift"
-
-                call after_action(Girl, action)
-
-                return True
-            "No, get back down there.":
-                if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
-                    $ Girl.change_stat("love", 200, -5)
-                    $ Girl.change_stat("obedience", 50, 3)
-                    $ Girl.change_stat("obedience", 80, 2)
-
-                    "She grumbles but lets you keep going."
-                else:
-                    $ Girl.change_face("angry", 1)
-
-                    call reset_position(Girl)
-
-                    "She scowls at you and pulls back."
-
-                    call this_is_boring_lines(Girl)
-
-                    $ Girl.change_stat("love", 50, -3, 1)
-                    $ Girl.change_stat("love", 80, -4, 1)
-                    $ Girl.change_stat("obedience", 30, -1, 1)
-                    $ Girl.change_stat("obedience", 50, -1, 1)
-                    $ Girl.AddWord(1,"angry","angry")
-
-                    call after_action(Girl, action)
-
-                    return True
-
-    call Escalation(Girl)
-
-    if Round == 10:
-        call wrap_this_up_lines(Girl)
-    elif Round == 5:
-        call time_to_stop_soon_lines(Girl)
-
-    return False
 
 label sex(Girl):
     $ primary_action = "sex"
@@ -468,7 +306,7 @@ label sex(Girl):
 
         $ Girl.change_face("surprised", 1)
 
-        if (Girl.Sex and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
+        if (Girl.action_counter["sex"] and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
             "[Girl.name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
 
             $ Girl.change_face("sexy")
@@ -536,7 +374,7 @@ label sex(Girl):
                         jump before_action
         return
 
-    if not Girl.Sex and "no_sex" not in Girl.recent_history:                           #first time
+    if not Girl.action_counter["sex"] and "no_sex" not in Girl.recent_history:                           #first time
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
@@ -547,21 +385,21 @@ label sex(Girl):
 
             call first_time_forcing_lines(Girl)
 
-    if not Girl.Sex and Approval:                                                  #First time dialog
+    if not Girl.action_counter["sex"] and Approval:                                                  #First time dialog
         call first_action_approval(Girl, "sex")
     elif Approval:
-        call action_approved(Girl, "sex", Girl.Sex)
+        call action_approved(Girl, "sex", Girl.action_counter["sex"])
 
     if Approval >= 2:                                                                   #She's into it. . .
         call action_accepted(Girl, "sex")
 
         return
     else:                                                                               #She's not into it, but maybe. . .
-        call action_disapproved(Girl, "sex", Girl.Sex)
+        call action_disapproved(Girl, "sex", Girl.action_counter["sex"])
 
     $ Girl.ArmPose = 1
 
-    call action_rejected(Girl, "sex", Girl.Sex)
+    call action_rejected(Girl, "sex", Girl.action_counter["sex"])
 
     return
 
@@ -597,7 +435,7 @@ label anal(Girl):
 
         $ Girl.change_face("surprised", 1)
 
-        if (Girl.Anal and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
+        if (Girl.action_counter["anal"]  and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
             "[Girl.name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
 
             $ Girl.change_face("sexy")
@@ -665,7 +503,7 @@ label anal(Girl):
                         jump before_action
         return
 
-    if not Girl.Anal and "no_anal" not in Girl.recent_history:                                                               #first time
+    if not Girl.action_counter["anal"]  and "no_anal" not in Girl.recent_history:                                                               #first time
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
@@ -686,21 +524,21 @@ label anal(Girl):
         call recent_action_lines(Girl)
         call before_action
 
-    if not Girl.Anal and Approval:                                                 #First time dialog
+    if not Girl.action_counter["anal"]  and Approval:                                                 #First time dialog
         call first_action_approval(Girl, "anal")
     elif Approval:
-        call action_approved(Girl, "anal", Girl.Anal)
+        call action_approved(Girl, "anal", Girl.action_counter["anal"] )
 
     if Approval >= 2:                                                                   #She's into it. . .
         call action_accepted(Girl, "anal")
 
         return
     else:                                                                               #She's not into it, but maybe. . .
-        call action_disapproved(Girl, "anal", Girl.Anal)
+        call action_disapproved(Girl, "anal", Girl.action_counter["anal"] )
 
     $ Girl.ArmPose = 1
 
-    call action_rejectd(Girl, "anal", Girl.Anal)
+    call action_rejectd(Girl, "anal", Girl.action_counter["anal"] )
 
     return
 
@@ -723,7 +561,7 @@ label hotdog(Girl):
 
         $ Girl.change_face("surprised", 1)
 
-        if (Girl.Hotdog and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
+        if (Girl.action_counter["hotdog"] and Approval) or (Approval > 1):                                                                      #this is not the first time you've had sex, or she's into it
             "[Girl.name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
 
             $ Girl.change_face("sexy")
@@ -791,7 +629,7 @@ label hotdog(Girl):
                         jump before_action
         return
 
-    if not Girl.Hotdog and "no_hotdog" not in Girl.recent_history:                                                               #first time
+    if not Girl.action_counter["hotdog"] and "no_hotdog" not in Girl.recent_history:                                                               #first time
         $ Girl.change_face("surprised", 1)
         $ Girl.Mouth = "kiss"
 
@@ -802,20 +640,20 @@ label hotdog(Girl):
 
             call first_time_forcing_lines(Girl)
 
-    if not Girl.Hotdog and Approval:                                                 #First time dialog
+    if not Girl.action_counter["hotdog"] and Approval:                                                 #First time dialog
         call first_action_approval(Girl, "hotdog")
     elif Approval:                                                                       #Second time+ dialog
-        call action_approved(Girl, "hotdog", Girl.Hotdog)
+        call action_approved(Girl, "hotdog", Girl.action_counter["hotdog"])
 
     if Approval >= 2:                                                                   #She's into it. . .
         call action_accepted(Girl, "hotdog")
 
         return
     else:                                                                               #She's not into it, but maybe. . .
-        call action_rejected(Girl, "hotdog", Girl.Hotdog)
+        call action_rejected(Girl, "hotdog", Girl.action_counter["hotdog"])
 
     $ Girl.ArmPose = 1
 
-    call action_rejected(Girl, "hotdog", Girl.Hotdog)
+    call action_rejected(Girl, "hotdog", Girl.action_counter["hotdog"])
 
     return

@@ -159,7 +159,7 @@ label Campus:
                     jump player_room
                 call Wait
                 call EventCalls
-                call Girls_Location
+                call Girls_location
     #End date code
 
     menu:
@@ -171,7 +171,7 @@ label Campus:
             "You wait around a bit."
             call Wait
             call EventCalls
-            call Girls_Location
+            call Girls_location
         "Go to my Room" if TravelMode:
                     jump player_room_entry
         "Girl's Rooms" if TravelMode:
@@ -352,7 +352,7 @@ label Study_Room:
                 jump player_room
             else:
                 call Wait
-                call Girls_Location
+                call Girls_location
 
     call GirlsAngry
     call XavierFace("happy")
@@ -421,7 +421,7 @@ label Study_Room:
                             jump player_room
                     else:
                             call Wait
-                            call Girls_Location
+                            call Girls_location
                             ch_x "Not that I mind the company, but is there something I can do for you?"
 
         "Leave" if not TravelMode:

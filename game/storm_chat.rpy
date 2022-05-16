@@ -582,9 +582,9 @@ label Storm_SexChat:#rkeljs
                                             $ StormX.Statup("Love", 90, 5)
                                             $ StormX.Statup("Lust", 80, 10)
                                             ch_s "I also enjoy that. . ."
-                                        elif StormX.Sex >= 5:
+                                        elif StormX.action_counter["sex"] >= 5:
                                             ch_s "It certainly is enjoyable. . ."
-                                        elif not StormX.Sex:
+                                        elif not StormX.action_counter["sex"]:
                                             $ StormX.change_face("perplexed")
                                             ch_s "And who is fucking you?"
                                         else:
@@ -601,9 +601,9 @@ label Storm_SexChat:#rkeljs
                                             $ StormX.Statup("Love", 90, 5)
                                             $ StormX.Statup("Lust", 80, 10)
                                             ch_s "I also enjoy that. . ."
-                                        elif StormX.Anal >= 10:
+                                        elif StormX.action_counter["anal"] >= 10:
                                             ch_s "It certainly is enjoyable. . ."
-                                        elif not StormX.Anal:
+                                        elif not StormX.action_counter["anal"]:
                                             $ StormX.change_face("perplexed")
                                             ch_s "And who is fucking you?"
                                         else:
@@ -620,9 +620,9 @@ label Storm_SexChat:#rkeljs
                                             $ StormX.Statup("Love", 90, 5)
                                             $ StormX.Statup("Lust", 80, 5)
                                             ch_s "I would have to agree. . ."
-                                        elif StormX.Blow >= 10:
+                                        elif StormX.action_counter["blowjob"] >= 10:
                                             ch_s "You are quite delicious. . ."
-                                        elif not StormX.Blow:
+                                        elif not StormX.action_counter["blowjob"]:
                                             $ StormX.change_face("perplexed")
                                             ch_s "Who's sucking your dick?!"
                                         else:
@@ -639,9 +639,9 @@ label Storm_SexChat:#rkeljs
                                             $ StormX.Statup("Love", 90, 5)
                                             $ StormX.Statup("Lust", 80, 7)
                                             ch_s "I also enjoy that. . ."
-                                        elif StormX.Tit >= 10:
+                                        elif StormX.action_counter["titjob"] >= 10:
                                             ch_s "It certainly is enjoyable. . ."
-                                        elif not StormX.Tit:
+                                        elif not StormX.action_counter["titjob"]:
                                             $ StormX.change_face("perplexed")
                                             ch_s "And who is titfucking you?"
                                         else:
@@ -679,9 +679,9 @@ label Storm_SexChat:#rkeljs
                                             $ StormX.Statup("Love", 90, 5)
                                             $ StormX.Statup("Lust", 80, 7)
                                             ch_s "I also enjoy that. . ."
-                                        elif StormX.Hand >= 10:
+                                        elif StormX.action_counter["handjob"] >= 10:
                                             ch_s "I like it too . . ."
-                                        elif not StormX.Hand:
+                                        elif not StormX.action_counter["handjob"]:
                                             $ StormX.change_face("perplexed")
                                             ch_s "And who is jerking you off?"
                                         else:
@@ -690,7 +690,7 @@ label Storm_SexChat:#rkeljs
                                         $ StormX.PlayerFav = "handjob"
 
                             "Feeling you up.":
-                                        $ Cnt = StormX.FondleB + StormX.FondleT + StormX.SuckB + StormX.Hotdog
+                                        $ Cnt = StormX.action_counter["fondle_breasts"] + StormX.action_counter["fondle_thighs"] + StormX.action_counter["suck_breasts"] + StormX.action_counter["hotdog"]
                                         $ StormX.change_face("sly")
                                         if StormX.PlayerFav == "fondle":
                                             $ StormX.Statup("Lust", 80, 3)
@@ -925,7 +925,7 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
                     $ Digits.append(StormX)
                     return
 
-        if "hungry" not in StormX.Traits and (StormX.Swallow + StormX.Chat[2]) >= 10 and StormX.location == bg_current:  #She's swallowed a lot
+        if "hungry" not in StormX.Traits and (StormX.event_counter["swallowed"] + StormX.Chat[2]) >= 10 and StormX.location == bg_current:  #She's swallowed a lot
                     call Storm_Hungry
                     return
 
@@ -972,10 +972,10 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
             #If you've given Storm the lingerie
             if "lingerie" not in StormX.Chat:
                 $ Options.append("lingerie")
-        if StormX.Hand:
+        if StormX.action_counter["handjob"]:
             #If Storm's given a handjob
             $ Options.append("handjob")
-        if StormX.Swallow:
+        if StormX.event_counter["swallowed"]:
             #If Storm's swallowed before
             $ Options.append("swallowed")
         if "cleaned" in StormX.daily_history or "painted" in StormX.daily_history:
@@ -984,13 +984,13 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
         if StormX.Sleep:
             #If Storm's slept over
             $ Options.append("sleep")
-        if StormX.CreamP or StormX.CreamA:
+        if StormX.event_counter["creampied"] or StormX.event_counter["anal_creampied"]:
             #If Storm's been creampied
             $ Options.append("creampie")
-        if StormX.Sex or StormX.Anal:
+        if StormX.action_counter["sex"] or StormX.action_counter["anal"]:
             #If Storm's been sexed
             $ Options.append("sexed")
-        if StormX.Anal:
+        if StormX.action_counter["anal"]:
             #If Storm's been analed
             $ Options.append("anal")
 
@@ -1003,7 +1003,7 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
 #        if "bottomless" in StormX.History:
 #            $ Options.append("bottomless")
 
-#        if not StormX.Chat[0] and StormX.Sex:
+#        if not StormX.Chat[0] and StormX.action_counter["sex"]:
 #            $ Options.append("virgin")
 
 #        if (bg_current == "bg laura" or bg_current == "bg player") and "relationship" not in StormX.daily_history:
@@ -1152,7 +1152,7 @@ label Storm_Chitchat(O=0, Options = ["default","default","default"]): #rkeljs
 
     elif Options[0] == "fondled":
             #Storm's response to being felt up.
-            if StormX.FondleB + StormX.FondleP + StormX.FondleA >= 15:
+            if StormX.action_counter["fondle_breasts"] + StormX.action_counter["fondle_pussy"] + StormX.action_counter["fondle_ass"] >= 15:
                 ch_s "Please touch me. . . sometime. . .."
             else:
                 ch_s "You know, you could touch me. . . if you wanted."

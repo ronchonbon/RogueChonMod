@@ -869,7 +869,7 @@ label Pool_Room:
     $ bg_current = "bg_pool"
     $ Player.DrainWord("traveling",1,0)
     call Taboo_Level
-    call set_the_scene(Quiet=1,Dress=0)
+    call set_the_scene(silent=1,check_if_dressed=0)
     call QuickEvents
     call checkout(1)
     if Round <= 10:

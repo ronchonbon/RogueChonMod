@@ -279,7 +279,7 @@ label handjob_set_modifier(Girl, action):
         elif "ex" in Girl.Traits:
             $ temp_modifier -= 40
 
-        if Girl.Addict >= 75 and Girl.Swallow >= 3: #She's really strung out and has swallowed
+        if Girl.Addict >= 75 and Girl.event_counter["swallowed"] >= 3: #She's really strung out and has swallowed
             $ temp_modifier += 15
         if Girl.Addict >= 75:
             $ temp_modifier += 5
@@ -294,7 +294,7 @@ label handjob_set_modifier(Girl, action):
         elif Girl.Foot: #You've done it before
             $ temp_modifier += 3
 
-        if Girl.Addict >= 75 and Girl.Swallow >=3: #She's really strung out and has swallowed
+        if Girl.Addict >= 75 and Girl.event_counter["swallowed"] >=3: #She's really strung out and has swallowed
             $ temp_modifier += 10
         if Girl.Addict >= 75:
             $ temp_modifier += 5
@@ -331,7 +331,7 @@ label handjob_set_modifier(Girl, action):
         if Girl.lust > 75: #She's really horny
             $ temp_modifier += 10
 
-        if Girl.Addict >= 75 and Girl.Swallow >= 3: #She's really strung out and has swallowed
+        if Girl.Addict >= 75 and Girl.event_counter["swallowed"] >= 3: #She's really strung out and has swallowed
             $ temp_modifier += 15
         if Girl.Addict >= 75:
             $ temp_modifier += 5
@@ -346,7 +346,7 @@ label handjob_set_modifier(Girl, action):
         elif Girl.Blow: #You've done it before
             $ temp_modifier += 7
 
-        if Girl.Addict >= 75 and Girl.Swallow >=3: #She's really strung out and has swallowed
+        if Girl.Addict >= 75 and Girl.event_counter["swallowed"] >=3: #She's really strung out and has swallowed
             $ temp_modifier += 25
         elif Girl.Addict >= 75: #She's really strung out
             $ temp_modifier += 15
@@ -417,179 +417,6 @@ label handjob_set_modifier(Girl, action):
         $ temp_modifier -= 10 if "no_" + action in Girl.recent_history else 0
 
     return
-
-label end_of_handjob_round(Girl, action):
-    $ Player.Focus = 50 if not Player.Semen and Player.Focus >= 50 else Player.Focus #Resets Player.Focus if can't get it up
-
-    if Player.Focus >= 100 or Girl.lust >= 100:
-        if Player.Focus >= 100:
-            call Player_Cumming(focused_Girl)
-
-            if "angry" in Girl.recent_history:
-                call handjob_reset(Girl)
-
-                return True
-
-            $ Girl.change_stat("lust", 200, 5)
-
-            if 100 > Girl.lust >= 70 and Girl.OCount < 2 and Girl.SEXP >= 20:
-                $ Girl.AddWord(0, "unsatisfied", "unsatisfied")
-
-            if Player.Focus > 80:
-                jump after_action
-
-            $ line = "came"
-
-        if Girl.lust >= 100:
-            call Girl_Cumming(Girl)
-
-            if action_context == "shift" or "angry" in Girl.recent_history:
-                jump after_action
-
-        if line == "came": #ex Player.Focus <= 20:
-            $ line = 0
-
-            if not Player.Semen:
-                "You're emptied out, you should probably take a break."
-
-            if "unsatisfied" in Girl.recent_history:#And Rogue is unsatisfied,
-                "[Girl.name] still seems a bit unsatisfied with the experience."
-                menu:
-                    "Finish her?"
-                    "Yes, keep going for a bit.":
-                        $ line = "You get back into it"
-                    "No, I'm done.":
-                        "You pull back."
-
-                        jump after_action
-
-    if Partner and Partner.lust >= 100:
-        call Girl_Cumming(Partner)
-
-    if action in ["handjob", "footjob", "titjob"]:
-        $ Player.Focus -= 10 if Player.FocusX and Player.Focus > 50 else 0
-    elif action in ["blowjob", "dildo_pussy", "dildo_ass"]:
-        $ Player.Focus -= 12 if Player.FocusX and Player.Focus > 50 else 0
-
-    if action == "handjob":
-        $ bonus = Girl.Hand
-    elif action == "footjob":
-        $ bonus = Girl.Foot
-    elif action == "titjob":
-        $ bonus = Girl.Tit
-    elif action == "blowjob":
-        $ bonus = Girl.Blow
-    elif action == "dildo_pussy":
-        $ bonus = Girl.DildoP
-    elif action == "dildo_ass":
-        $ bonus = Girl.DildoA
-
-    if Girl.SEXP >= 100 or Approvalcheck(RogueX, 1200, "LO"):
-        pass
-    elif counter == (5 + bonus):
-        $ Girl.Brows = "confused"
-
-        call getting_close_lines(Girl)
-    elif action in ["dildo_pussy", "dildo_ass"] and Girl.lust >= 80:
-        pass
-    elif (action in ["handjob, footjob, titjob, blowjob"] and counter == (10 + bonus)) or (action in ["dildo_pussy", "dildo_ass"] and (counter == (15 + bonus) and Girl.SEXP <= 100 and not Approvalcheck(Girl, 1200, "LO"))):
-        $ Girl.Brows = "angry"
-
-        call getting_rugburn_lines(Girl)
-
-        menu:
-            extend ""
-            "How about a handy?" if action in ["footjob", "titjob", "blowjob"] and Girl.Action and multi_action:
-                $ action_context = "shift"
-
-                call handjob_after
-                call handjob(Girl)
-            "How about a footjob?" if action in ["handjob", "titjob", "blowjob"] and Girl.Action and multi_action:
-                $ action_context = "shift"
-
-                call handjob_after
-                call footjob(Girl)
-            "How about a titjob?" if action in ["handjob", "footjob", "blowjob"] and Girl.Action and multi_action:
-                $ action_context = "shift"
-
-                call handjob_after
-                call titjob(Girl)
-            "How about a BJ?" if action in ["handjob", "footjob", "titjob"] and Girl.Action and multi_action:
-                $ action_context = "shift"
-
-                call handjob_after
-                call blowjob(Girl)
-            "Finish up." if action in ["handjob", "footjob", "titjob", "blowjob"] and Player.FocusX:
-                "You release your concentration. . ."
-
-                $ Player.FocusX = 0
-                $ Player.Focus += 15
-
-                jump handjob_cycle
-            "Finish up." if action in ["dildo_pussy", "dildo_ass"]:
-                "You let go. . ."
-
-                jump after_action
-            "Let's try something else." if multi_action:
-                $ line = 0
-                $ action_context = "shift"
-
-                jump after_action
-            "No, get back down there." if action in ["handjob", "footjob", "titjob", "blowjob"]:
-                if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
-                    $ Girl.change_stat("love", 200, -5)
-                    $ Girl.change_stat("obedience", 50, 3)
-                    $ Girl.change_stat("obedience", 80, 2)
-
-                    "She grumbles but keeps going."
-                else:
-                    $ Girl.change_face("angry", 1)
-
-                    call reset_position(Girl)
-
-                    "She scowls at you, drops your cock and pulls back."
-
-                    call this_is_boring_lines(Girl)
-
-                    $ Girl.change_stat("love", 50, -3, 1)
-                    $ Girl.change_stat("love", 80, -4, 1)
-                    $ Girl.change_stat("obedience", 30, -1, 1)
-                    $ Girl.change_stat("obedience", 50, -1, 1)
-                    $ Girl.AddWord(1,"angry","angry")
-
-                    jump after_action
-            "No, this is fun." if action in ["dildo_pussy", "dildo_ass"]:
-                if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
-                    $ Girl.change_stat("love", 200, -5)
-                    $ Girl.change_stat("obedience", 50, 3)
-                    $ Girl.change_stat("obedience", 80, 2)
-
-                    "She grumbles but lets you keep going."
-                else:
-                    $ Girl.change_face("angry", 1)
-
-                    call reset_position(Girl)
-
-                    "She scowls at you and pulls back."
-
-                    call this_is_boring_lines(Girl)
-
-                    $ Girl.change_stat("love", 50, -3, 1)
-                    $ Girl.change_stat("love", 80, -4, 1)
-                    $ Girl.change_stat("obedience", 30, -1, 1)
-                    $ Girl.change_stat("obedience", 50, -1, 1)
-                    $ Girl.AddWord(1,"angry","angry")
-
-                    jump after_action
-
-    call Escalation(Girl)
-
-    if Round == 10:
-        call wrap_this_up_lines(Girl)
-    elif Round == 5:
-        call time_to_stop_soon_lines(Girl)
-
-    return False
 
 label handjob(Girl):
     $ primary_action = "handjob"
@@ -704,7 +531,7 @@ label titjob(Girl):
             call hand_not_enough(Girl)
 
     if not Girl.Tit and Approval:                                                 #First time dialog
-        call first_action_approval(Girl)
+        call first_action_approval(Girl, "titjob")
     elif Approval:
         call action_approved(Girl, "titjob", Girl.Tit)
 
@@ -739,7 +566,7 @@ label blowjob(Girl):
             call hand_not_enough(Girl)
 
     if not Girl.Blow and Approval:                                                 #First time dialog
-        call first_action_approval(Girl)
+        call first_action_approval(Girl, "blowjob")
     elif Approval:
         call action_approved(Girl, "blowjob", Girl.Blow)
 

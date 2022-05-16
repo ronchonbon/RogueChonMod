@@ -1308,7 +1308,7 @@ label Sleepover_Morning: #rkeljsv
         $ Party = []
 
 
-        call Girls_Location
+        call Girls_location
         return
 
 # end Event Sleepover / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
@@ -1500,7 +1500,7 @@ label Morningwood_check(Girls=[0,-3],D20=0): #rkeljsv
                                 return
             elif line == "double":
                         # it's a threesome
-                        $ primary_action4 = "blowjob"
+                        $ second_girl_primary_action = "blowjob"
                         $ Party[1].recent_history.append("blowjob")
                         $ Party[1].daily_history.append("blowjob")
                         $ Party[1].daily_history.append("morningwood")
@@ -1512,7 +1512,7 @@ label Morningwood_check(Girls=[0,-3],D20=0): #rkeljsv
             $ Party[0].daily_history.append("morningwood")
             $ Party[0].Traits.append("morningwood")
             call Sleepover_MorningWood
-            #call expression Party[0].Tag + "_SexAct" pass ("morningwood")
+            #call sex_acts("morningwood")
             call Sex_Over(0)
             #end "yes"
 
@@ -1571,7 +1571,7 @@ label Sleepover_MorningWood: #rkeljsv
                 $ Partner.recent_history.append("threesome")
 
         $ Party[0].recent_history.append("blanket")
-        call expression Party[0].Tag + "_BJ_Launch"
+        call blowjob_launch(Party[0])
 
         $ Party[0].change_face("closed",1)
         if Partner:
@@ -1579,12 +1579,12 @@ label Sleepover_MorningWood: #rkeljsv
 
         "You feel a pleasant sensation. . ."
         if primary_action == "blowjob":
-                if primary_action4:
+                if second_girl_primary_action:
                     ch_u "\"Slurp, slurp, slurp.\" \n \ \"Slurp, slurp, slurp.\""
                 else:
                     ch_u "\"Slurp, slurp, slurp.\""
         else:
-                if primary_action4:
+                if second_girl_primary_action:
                     ch_u "\"Squish, squish, squish.\" \n \ \"Slurp, slurp, slurp.\""
                 else:
                     ch_u "\"Squish, squish, squish.\""
@@ -1593,12 +1593,12 @@ label Sleepover_MorningWood: #rkeljsv
 
         "It's somewhere below your waist. . ."
         if primary_action == "blowjob":
-                if primary_action4:
+                if second_girl_primary_action:
                     ch_u "\"Slurp, slurp, slurp.\" \n \ \"Slurp, slurp, slurp.\""
                 else:
                     ch_u "\"Slurp, slurp, slurp.\""
         else:
-                if primary_action4:
+                if second_girl_primary_action:
                     ch_u "\"Squish, squish, squish.\" \n \ \"Slurp, slurp, slurp.\""
                 else:
                     ch_u "\"Squish, squish, squish.\""
@@ -1623,14 +1623,14 @@ label Sleepover_MorningWood: #rkeljsv
                 menu:
                     "Stay Quiet":
                         if Count >2:
-                            if primary_action4:
+                            if second_girl_primary_action:
                                 "You just let them do their thing and pretend to still be asleep."
                             else:
                                 "You just let her do her thing and pretend to still be asleep."
                         elif Count>1:
                             "It does feel nice. . ."
                         else:
-                            if primary_action4:
+                            if second_girl_primary_action:
                                 "You wouldn't want to disturb them. . ."
                             else:
                                 "You wouldn't want to disturb her. . ."
@@ -1638,7 +1638,7 @@ label Sleepover_MorningWood: #rkeljsv
                                 call Anyline(Party[0],"\"Slurp, slurp, slurp.\"")
                         else:
                                 call Anyline(Party[0],"\"Squish, squish, squish.\"")
-                        if primary_action4:
+                        if second_girl_primary_action:
                                 call Anyline(Party[1],"\"Slurp, slurp, slurp.\"")
                         ". . ."
                     "Um. . . [Party[0].Pet], what're you doing?":
@@ -1653,9 +1653,9 @@ label Sleepover_MorningWood: #rkeljsv
                 $ Count -= 1
         $ action_speed = 1
         $ Party[0].Blush = 1
-        if primary_action4:
+        if second_girl_primary_action:
                 "[Party[0].name] pulls back with a pop and [Party[1].name] sits back."
-                $ primary_action4 = 0
+                $ second_girl_primary_action = 0
         else:
                 "[Party[0].name] pulls back with a pop."
         if line == "question":
@@ -2120,9 +2120,9 @@ label Sleepover_MorningWood: #rkeljsv
                         $ action_speed = 1
                         $ action_context = 0
                         if Partner:
-                                $ primary_action4 = "blowjob"
+                                $ second_girl_primary_action = "blowjob"
                         call Morning_Partner
-                        call expression Party[0].Tag + "_SexAct" pass ("blowjob")
+                        call sex_acts("blowjob")
         return
 
 # end Event Morning Wood / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /

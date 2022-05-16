@@ -411,12 +411,12 @@ label Jean_Like:
                 $ JeanX.change_stat("lust", 60, 5)
                 ch_j "You give really good massages. . ."
                 $ line = "and Y"
-        if JeanX.Org >= 10:
+        if JeanX.event_counter["orgasm"] >= 10:
                 $ JeanX.change_face("sly",1)
                 $ JeanX.change_stat("lust", 70, 5)
                 ch_j "[line]ou -really- know how to finish them. . ."
                 $ line = "and Y"
-                if JeanX.Org >= 30:
+                if JeanX.event_counter["orgasm"] >= 30:
                         $ JeanX.change_stat("lust", 80, 10)
                         ch_j ". . . seriously. . ."
         if JeanX.SeenPeen:
@@ -463,7 +463,7 @@ label Jean_Like:
                             ch_j "That's just precious!"
 
                             $ JeanX.change_face("sly",1)
-                            if JeanX.Org >= 10:
+                            if JeanX.event_counter["orgasm"] >= 10:
                                     ch_j "Look, you're pretty hot and all, and you can get it. . ."
                             else:
                                     ch_j "Look, you're pretty hot and all. . ."

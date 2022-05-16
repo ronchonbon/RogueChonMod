@@ -583,9 +583,9 @@ label Jean_SexChat: #rkelj
                                             $ JeanX.change_stat("love", 90, 5)
                                             $ JeanX.change_stat("lust", 80, 10)
                                             ch_j "I really like it too!"
-                                        elif JeanX.Sex >= 5:
+                                        elif JeanX.action_counter["sex"] >= 5:
                                             ch_j "Well I don't mind that."
-                                        elif not JeanX.Sex:
+                                        elif not JeanX.action_counter["sex"]:
                                             $ JeanX.change_face("perplexed")
                                             ch_j "Oh? Who with?"
                                         else:
@@ -602,9 +602,9 @@ label Jean_SexChat: #rkelj
                                             $ JeanX.change_stat("love", 90, 5)
                                             $ JeanX.change_stat("lust", 80, 10)
                                             ch_j "I love it too!"
-                                        elif JeanX.Anal >= 10:
+                                        elif JeanX.action_counter["anal"] >= 10:
                                             ch_j "Yeah, it's. . . nice. . ."
-                                        elif not JeanX.Anal:
+                                        elif not JeanX.action_counter["anal"]:
                                             $ JeanX.change_face("perplexed")
                                             ch_j "Oh? Who with?"
                                         else:
@@ -621,9 +621,9 @@ label Jean_SexChat: #rkelj
                                             $ JeanX.change_stat("love", 90, 5)
                                             $ JeanX.change_stat("lust", 80, 5)
                                             ch_j "I can't say I hate it either. . ."
-                                        elif JeanX.Blow >= 10:
+                                        elif JeanX.action_counter["blowjob"] >= 10:
                                             ch_j "Yeah, you're surprisingly tasty."
-                                        elif not JeanX.Blow:
+                                        elif not JeanX.action_counter["blowjob"]:
                                             $ JeanX.change_face("perplexed")
                                             ch_j "Oh? Who with?"
                                         else:
@@ -640,9 +640,9 @@ label Jean_SexChat: #rkelj
                                             $ JeanX.change_stat("love", 90, 5)
                                             $ JeanX.change_stat("lust", 80, 7)
                                             ch_j "Yeah, I enjoy that too. . ."
-                                        elif JeanX.Tit >= 10:
+                                        elif JeanX.action_counter["titjob"] >= 10:
                                             ch_j "Nice, right?"
-                                        elif not JeanX.Tit:
+                                        elif not JeanX.action_counter["titjob"]:
                                             $ JeanX.change_face("perplexed")
                                             ch_j "Oh? Who with?"
                                         else:
@@ -680,9 +680,9 @@ label Jean_SexChat: #rkelj
                                             $ JeanX.change_stat("love", 90, 5)
                                             $ JeanX.change_stat("lust", 80, 7)
                                             ch_j "I do have quite the touch. . ."
-                                        elif JeanX.Hand >= 10:
+                                        elif JeanX.action_counter["handjob"] >= 10:
                                             ch_j "I like it too . . ."
-                                        elif not JeanX.Hand:
+                                        elif not JeanX.action_counter["handjob"]:
                                             $ JeanX.change_face("perplexed")
                                             ch_j "Oh? Who with?"
                                         else:
@@ -691,7 +691,7 @@ label Jean_SexChat: #rkelj
                                         $ JeanX.PlayerFav = "handjob"
 
                             "Feeling you up.":
-                                        $ counter = JeanX.FondleB + JeanX.FondleT + JeanX.SuckB + JeanX.Hotdog
+                                        $ counter = JeanX.action_counter["fondle_breasts"] + JeanX.action_counter["fondle_thighs"] + JeanX.action_counter["suck_breasts"] + JeanX.action_counter["hotdog"]
                                         $ JeanX.change_face("sly")
                                         if JeanX.PlayerFav == "fondle":
                                             $ JeanX.change_stat("lust", 80, 3)
@@ -1008,7 +1008,7 @@ label Jean_Chitchat(O=0, Options = ["default","default","default"]): #rkel
                     $ Digits.append(JeanX)
                     return
 
-        if "hungry" not in JeanX.Traits and (JeanX.Swallow + JeanX.Chat[2]) >= 10 and JeanX.location == bg_current:  #She's swallowed a lot
+        if "hungry" not in JeanX.Traits and (JeanX.event_counter["swallowed"] + JeanX.Chat[2]) >= 10 and JeanX.location == bg_current:  #She's swallowed a lot
                     call Jean_Hungry
                     return
 
@@ -1054,10 +1054,10 @@ label Jean_Chitchat(O=0, Options = ["default","default","default"]): #rkel
             #If you've given Jean the lingerie
             if "lingerie" not in JeanX.Chat:
                 $ Options.append("lingerie")
-        if JeanX.Hand:
+        if JeanX.action_counter["handjob"]:
             #If Jean's given a handjob
             $ Options.append("handjob")
-        if JeanX.Swallow:
+        if JeanX.event_counter["swallowed"]:
             #If Jean's swallowed before
             $ Options.append("swallowed")
         if "cleaned" in JeanX.daily_history or "painted" in JeanX.daily_history:
@@ -1066,13 +1066,13 @@ label Jean_Chitchat(O=0, Options = ["default","default","default"]): #rkel
         if JeanX.Sleep:
             #If Jean's slept over
             $ Options.append("sleep")
-        if JeanX.CreamP or JeanX.CreamA:
+        if JeanX.event_counter["creampied"] or JeanX.event_counter["anal_creampied"]:
             #If Jean's been creampied
             $ Options.append("creampie")
-        if JeanX.Sex or JeanX.Anal:
+        if JeanX.action_counter["sex"] or JeanX.action_counter["anal"]:
             #If Jean's been sexed
             $ Options.append("sexed")
-        if JeanX.Anal:
+        if JeanX.action_counter["anal"]:
             #If Jean's been analed
             $ Options.append("anal")
 
@@ -1217,7 +1217,7 @@ label Jean_Chitchat(O=0, Options = ["default","default","default"]): #rkel
 
     elif Options[0] == "fondled":
             #Jean's response to being felt up.
-            if JeanX.FondleB + JeanX.FondleP + JeanX.FondleA >= 15:
+            if JeanX.action_counter["fondle_breasts"] + JeanX.action_counter["fondle_pussy"] + JeanX.action_counter["fondle_ass"] >= 15:
                 ch_j "Hey, give me a nice, hard, rubdown. . ."
             else:
                 ch_j "Hey, gimme another massage. . . "

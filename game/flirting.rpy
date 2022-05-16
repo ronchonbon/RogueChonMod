@@ -291,7 +291,7 @@ label Flirt(Girl =0): #rkeljsv
                                             "You lean close for a kiss, but [Girl.name] gently elbows your ribs."
                                             ch_v "Oh, um, no thanks. . ."
                                     return
-                            if Girl.Kissed:
+                            if Girl.action_counter["kiss"]:
                                     #if this wasn't the first kiss. . .
                                     if Approvalcheck(Girl, 750, "L", TabM=1):
                                             $ Girl.change_face("sexy", 1)
@@ -495,7 +495,7 @@ label Flirt(Girl =0): #rkeljsv
                                             elif Girl == JubesX:
                                                     ch_v "Back off, creep!"
 
-                            $ Girl.Kissed += 1
+                            $ Girl.action_counter["kiss"] += 1
                             $ Girl.Addict -= 1
                             $ Girl.Addictionrate += 1
                             $ Girl.Addictionrate = 3 if Girl.Addictionrate < 3 else Girl.Addictionrate
@@ -562,7 +562,7 @@ label Flirt(Girl =0): #rkeljsv
                                                     "She shrugs away from you and winks."
                                                     call Anyline(Girl,"Not now. . .")
                                             else:
-                                                    call expression Girl.Tag + "_SexAct" pass ("kissing")
+                                                    call sex_acts("kiss")
                                                     call Trig_Reset(1)
                                             return
                                     "Just a taste [[no].":
@@ -1582,7 +1582,7 @@ label Flirt(Girl =0): #rkeljsv
                                             $ Count = 0
 
                                         "Fondle it a little":
-                                                if Girl.FondleB and Approvalcheck(Girl, 1000, TabM=2):
+                                                if Girl.action_counter["fondle_breasts"] and Approvalcheck(Girl, 1000, TabM=2):
                                                         $ Girl.change_face("sexy",1)
                                                         $ Girl.Eyes = "closed"
                                                         $ Girl.change_stat("lust", 90, 5)
@@ -1627,7 +1627,7 @@ label Flirt(Girl =0): #rkeljsv
                             elif bg_current == "HW Party":
                                     "She shrugs away from you and winks."
                                     call Anyline(Girl,"Not now. . .")
-                            elif Girl.FondleB and Approvalcheck(Girl, 1100, TabM = 3):
+                            elif Girl.action_counter["fondle_breasts"] and Approvalcheck(Girl, 1100, TabM = 3):
                                     $ Girl.change_face("sexy", 1)
                                     if Girl == RogueX:
                                             ch_r "You know, maybe we could keep this party roll'in. . ."
@@ -1653,7 +1653,7 @@ label Flirt(Girl =0): #rkeljsv
                                                 $ Girl.change_stat("love", 90, 2)
                                                 $ Girl.change_stat("obedience", 60, 3)
                                                 $ Girl.change_stat("inhibition", 60, 3)
-                                                call expression Girl.Tag + "_SexAct" pass ("breasts")
+                                                call sex_acts("breasts")
                                                 call Trig_Reset(1)
                                                 return
                                         "Nah, that was enough.":

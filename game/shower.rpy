@@ -863,6 +863,9 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
             while Girls:
                     #loops through and adds populates Occupants with locals
                     if Girls[0].location == bg_current:
+                            while Girls[0] in Nearby:
+                                    $ Nearby.remove(Girls[0])
+
                             if Girls[0] in StayCount:
                                     #If the girl Stays
                                     $ Girls[0].OutfitChange("nude")
@@ -872,12 +875,13 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                     $ Girls[0].daily_history.append("showered")
                                     call first_bottomless(Girls[0], 1)
                                     call first_topless(Girls[0], silent = 1)
+                                    
+                                    $ Girls.remove(Girls[0])
                             else:
                                     #If the girl leaves
                                     call remove_girl(Girls[0])
-                            while Girls[0] in Nearby:
-                                    $ Nearby.remove(Girls[0])
-                    $ Girls.remove(Girls[0])
+                    else:
+                        $ Girls.remove(Girls[0])
 
     call Seen_First_Peen(0,0,0,1) #You get naked
 

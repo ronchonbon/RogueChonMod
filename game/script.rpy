@@ -144,6 +144,16 @@ init -1:
     default breast_actions = ["fondle_breasts", "suck_breasts"]
     default pussy_actions = ["fondle_pussy", "finger_pussy", "eat_pussy", "dildo_pussy"]
     default ass_actions = ["fondle_ass", "finger_ass", "eat_ass", "dildo_ass"]
+
+    default all_actions = ["massage", "kiss", "fondle_thighs",
+        "masturbation",
+        "fondle_breasts", "suck_breasts",
+        "fondle_pussy", "finger_pussy", "eat_pussy",
+        "fondle_ass", "finger_ass", "eat_ass",
+        "handjob", "footjob", "titjob", "blowjob",
+        "dildo_pussy", "dildo_ass",
+        "sex", "anal", "hotdog"]
+
     default active_actions = ["kiss", "massage", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]
     default passive_actions = ["strip", "masturbation", "handjob", "footjob", "titjob", "blowjob"]
     default fondle_actions = ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]

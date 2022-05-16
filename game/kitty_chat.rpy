@@ -614,9 +614,9 @@ label Kitty_SexChat:
                                             $ KittyX.change_stat("love", 90, 5)
                                             $ KittyX.change_stat("lust", 80, 10)
                                             ch_k "I really like it too!"
-                                        elif KittyX.Sex >= 5:
+                                        elif KittyX.action_counter["sex"] >= 5:
                                             ch_k "Well I don't mind that."
-                                        elif not KittyX.Sex:
+                                        elif not KittyX.action_counter["sex"]:
                                             $ KittyX.change_face("perplexed")
                                             ch_k "Who's fucking you? Is it Ms. Frost?!"
                                         else:
@@ -633,9 +633,9 @@ label Kitty_SexChat:
                                             $ KittyX.change_stat("love", 90, 5)
                                             $ KittyX.change_stat("lust", 80, 10)
                                             ch_k "I love it too!"
-                                        elif KittyX.Anal >= 10:
+                                        elif KittyX.action_counter["anal"] >= 10:
                                             ch_k "Yeah, it's. . . nice. . ."
-                                        elif not KittyX.Anal:
+                                        elif not KittyX.action_counter["anal"]:
                                             $ KittyX.change_face("perplexed")
                                             ch_k "Who's fucking you? Is it Ms. Frost?!"
                                         else:
@@ -652,9 +652,9 @@ label Kitty_SexChat:
                                             $ KittyX.change_stat("love", 90, 5)
                                             $ KittyX.change_stat("lust", 80, 5)
                                             ch_k "I love your dick!"
-                                        elif KittyX.Blow >= 10:
+                                        elif KittyX.action_counter["blowjob"] >= 10:
                                             ch_k "Yeah, you're pretty tasty."
-                                        elif not KittyX.Blow:
+                                        elif not KittyX.action_counter["blowjob"]:
                                             $ KittyX.change_face("perplexed")
                                             ch_k "Who's sucking your dick?! Is it Ms. Frost?!"
                                         else:
@@ -671,9 +671,9 @@ label Kitty_SexChat:
                                             $ KittyX.change_stat("love", 90, 5)
                                             $ KittyX.change_stat("lust", 80, 7)
                                             ch_k "Yeah, I enjoy that too. . ."
-                                        elif KittyX.Tit >= 10:
+                                        elif KittyX.action_counter["titjob"] >= 10:
                                             ch_k "It's certainly an interesting experience . . ."
-                                        elif not KittyX.Tit:
+                                        elif not KittyX.action_counter["titjob"]:
                                             $ KittyX.change_face("perplexed")
                                             ch_k "Who's titfucking you? It's Ms. Frost, isn't it!"
                                         else:
@@ -711,9 +711,9 @@ label Kitty_SexChat:
                                             $ KittyX.change_stat("love", 90, 5)
                                             $ KittyX.change_stat("lust", 80, 7)
                                             ch_k "You do feel pretty comfy. . ."
-                                        elif KittyX.Hand >= 10:
+                                        elif KittyX.action_counter["handjob"] >= 10:
                                             ch_k "I like it too . . ."
-                                        elif not KittyX.Hand:
+                                        elif not KittyX.action_counter["handjob"]:
                                             $ KittyX.change_face("perplexed")
                                             ch_k "Who's jerking you off? Is it Ms. Frost?!"
                                         else:
@@ -722,7 +722,7 @@ label Kitty_SexChat:
                                         $ KittyX.PlayerFav = "handjob"
 
                             "Feeling you up.":
-                                        $ counter = KittyX.FondleB + KittyX.FondleT + KittyX.SuckB + KittyX.Hotdog
+                                        $ counter = KittyX.action_counter["fondle_breasts"] + KittyX.action_counter["fondle_thighs"] + KittyX.action_counter["suck_breasts"] + KittyX.action_counter["hotdog"]
                                         $ KittyX.change_face("sly")
                                         if KittyX.PlayerFav == "fondle":
                                             $ KittyX.change_stat("lust", 80, 3)
@@ -780,7 +780,7 @@ label Kitty_SexChat:
                                         if not KittyX.Favorite or KittyX.Favorite == "kiss":
                                             ch_k "I do love it when we kiss. . ."
                                         elif KittyX.Favorite == "anal":
-                                            if KittyX.Anal >= 10:
+                                            if KittyX.action_counter["anal"] >= 10:
                                                 ch_k "I like when you. . . fuck my ass."
                                             else:
                                                 ch_k "I like it. . . in the butt."
@@ -957,7 +957,7 @@ label Kitty_Chitchat(O=0, Options = ["default","default","default"]):
                     $ Digits.append(KittyX)
                     return
 
-        if "hungry" not in KittyX.Traits and (KittyX.Swallow + KittyX.Chat[2]) >= 10 and KittyX.location == bg_current:  #She's swallowed a lot
+        if "hungry" not in KittyX.Traits and (KittyX.event_counter["swallowed"] + KittyX.Chat[2]) >= 10 and KittyX.location == bg_current:  #She's swallowed a lot
                     call Kitty_Hungry
                     return
         if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or Approvalcheck(KittyX, 800, "I")):
@@ -1017,10 +1017,10 @@ label Kitty_Chitchat(O=0, Options = ["default","default","default"]):
             #If you've given Kitty the lingerie
             if "lingerie" not in KittyX.Chat:
                 $ Options.append("lingerie")
-        if KittyX.Hand:
+        if KittyX.action_counter["handjob"]:
             #If Kitty's given a handjob
             $ Options.append("handjob")
-        if KittyX.Swallow:
+        if KittyX.event_counter["swallowed"]:
             #If Kitty's swallowed before
             $ Options.append("swallowed")
         if "cleaned" in KittyX.daily_history or "painted" in KittyX.daily_history:
@@ -1029,13 +1029,13 @@ label Kitty_Chitchat(O=0, Options = ["default","default","default"]):
         if KittyX.Sleep:
             #If Kitty's slept over
             $ Options.append("sleep")
-        if KittyX.CreamP or KittyX.CreamA:
+        if KittyX.event_counter["creampied"] or KittyX.event_counter["anal_creampied"]:
             #If Kitty's been creampied
             $ Options.append("creampie")
-        if KittyX.Sex or KittyX.Anal:
+        if KittyX.action_counter["sex"] or KittyX.action_counter["anal"]:
             #If Kitty's been sexed
             $ Options.append("sexed")
-        if KittyX.Anal:
+        if KittyX.action_counter["anal"]:
             #If Kitty's been analed
             $ Options.append("anal")
 
@@ -1172,7 +1172,7 @@ label Kitty_Chitchat(O=0, Options = ["default","default","default"]):
 
     elif Options[0] == "fondled":
             #Kitty's response to being felt up.
-            if KittyX.FondleB + KittyX.FondleP + KittyX.FondleA >= 15:
+            if KittyX.action_counter["fondle_breasts"] + KittyX.action_counter["fondle_pussy"] + KittyX.action_counter["fondle_ass"] >= 15:
                 ch_k "I want your hands on me."
             else:
                 ch_k "You know how you felt me up earlier? I could kinda[KittyX.like]get used to having your hands on me."

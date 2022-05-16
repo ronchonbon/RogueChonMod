@@ -911,13 +911,22 @@ label Favorite_Actions(Girl=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp
     while Girlsptions:
             $ Girl = Girlsptions[0]
             #ass, pussy, blow, tits, hand, fondling, kiss
-            $ ATemp = Girl.Anal + Girl.DildoA + Girl.FondleA + Girl.InsertA + Girl.LickA
-            $ PTemp = Girl.Sex + Girl.DildoP + Girl.FondleP + Girl.InsertP + Girl.LickP
-            $ BTemp = Girl.Blow
-            $ TTemp = Girl.Tit
-            $ XTemp = Girl.Foot
-            $ HTemp = Girl.Hand
-            $ FTemp = Girl.FondleB + Girl.FondleT + Girl.SuckB + Girl.Hotdog
+            python:
+                ATemp = 0
+                Ptemp = 0
+                FTemp = 0
+
+                BTemp = Girl.action_counter["blowjob"]
+                TTemp = Girl.action_counter["titjob"]
+                XTemp = Girl.action_counter["footjob"]
+                HTemp = Girl.action_counter["handjob"]
+
+                for action in ass_actions:
+                    ATemp += Girl.action_counter[action]
+                for action in pussy_actions:
+                    PTemp += Girl.action_counter[action]
+                for action in ["fondle_breasts", "fondle_thighs", "suck_breasts", "hotdog"]:
+                    FTemp += Girl.action_counter[action]
 
             #This portion sets a bonus based on the player's favorite activity with her.
             if Girl.PlayerFav and Approvalcheck(Girl, 1500):
@@ -952,7 +961,7 @@ label Favorite_Actions(Girl=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp
                         $ FTemp += 5
 
             #This adds the numbers together to make a large number, then generates a random number between 1 and that total
-            $ Total = ATemp + PTemp + BTemp + TTemp + HTemp + XTemp + FTemp + Girl.Kissed
+            $ Total = ATemp + PTemp + BTemp + TTemp + HTemp + XTemp + FTemp + Girl.action_counter["kiss"]
             if Total <= 0:
                 $ D20F = 999
             else:
@@ -961,17 +970,17 @@ label Favorite_Actions(Girl=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp
             # This selects a favorite activity based on which number is picked.
             if D20F <= ATemp:
                         #if the result is someplace under the "anal" category. . .
-                        if Girl.Anal >= 5:
+                        if Girl.action_counter["anal"]  >= 5:
                             $ Temp = "anal"
-                        elif Girl.LickA >= 5:
+                        elif Girl.action_counter["eat_ass"] >= 5:
                             $ Temp = "eat_ass"
                         else:
                             $ Temp = "finger_ass"
             elif D20F <= ATemp + PTemp:
                         #if the result is someplace under the "sex" category. . .
-                        if Girl.Sex >= 5:
+                        if Girl.action_counter["sex"] >= 5:
                             $ Temp = "sex"
-                        elif Girl.LickP >= 5:
+                        elif Girl.action_counter["eat_pussy"] >= 5:
                             $ Temp = "eat_pussy"
                         else:
                             $ Temp = "fondle_pussy"
@@ -986,11 +995,11 @@ label Favorite_Actions(Girl=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp
             elif D20F <= ATemp + PTemp + BTemp + TTemp + XTemp + HTemp + FTemp:
                         #if the result failed the higher tier categories. . .
                         $ D20F = renpy.random.randint(1, 20)
-                        if D20F >= 15 and Girl.Hotdog:
+                        if D20F >= 15 and Girl.action_counter["hotdog"]:
                             $ Temp = "hotdog"
-                        elif D20F >= 10 and Girl.SuckB:
+                        elif D20F >= 10 and Girl.action_counter["suck_breasts"]:
                             $ Temp = "suck_breasts"
-                        elif D20F >= 5 and Girl.FondleB:
+                        elif D20F >= 5 and Girl.action_counter["fondle_breasts"]:
                             $ Temp = "fondle_breasts"
                         else:
                             $ Temp = "fondle_thighs"

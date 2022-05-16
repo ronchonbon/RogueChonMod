@@ -18,14 +18,14 @@ label Player_Cumming(Girl=0,temp_modifier = temp_modifier): #rkeljsv
     elif Girl.Addict > 50:
             $ temp_modifier += 5
 
-    if Girl.Swallow >= 10:
+    if Girl.event_counter["swallowed"] >= 10:
             $ temp_modifier += 15
-    elif Girl.Swallow >= 3:
+    elif Girl.event_counter["swallowed"] >= 3:
             $ temp_modifier += 5
 
-    if (Girl.CreamP + Girl.CreamA) >= 10:
+    if (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) >= 10:
             $ temp_modifier += 15
-    elif (Girl.CreamP + Girl.CreamA) >= 3:
+    elif (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) >= 3:
             $ temp_modifier += 5
 
     $ D20 = renpy.random.randint(1, 20)
@@ -113,7 +113,7 @@ label Player_Cumming(Girl=0,temp_modifier = temp_modifier): #rkeljsv
                 jump Girl_Orgasm_After
         "Pull back" if primary_action != "psy" and Girl.location == bg_current and action_context != "swap":
             if renpy.showing(Girl.Tag+"_BJ_Animation"): #if renpy.showing("Rogue_BJ_Animation"):
-                    if Girl.Addict >= 60 and Approvalcheck(Girl, 1000, "I", Bonus = ((Girl.Addict*10)- Girl.obedience)) and Girl.Swallow:
+                    if Girl.Addict >= 60 and Approvalcheck(Girl, 1000, "I", Bonus = ((Girl.Addict*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
                             jump Manic_Suck
                     call expression Girl.Tag+"_BJ_Reset"
             elif renpy.showing(Girl.Tag+"_HJ_Animation"): #if renpy.showing("Rogue_HJ_Animation"):
@@ -122,7 +122,7 @@ label Player_Cumming(Girl=0,temp_modifier = temp_modifier): #rkeljsv
                     call expression Girl.Tag+"_Doggy_Reset"
             elif renpy.showing(Girl.Tag+"_SexSprite"): #fix
                     call expression Girl.Tag+"_Sex_Reset"
-            if Approvalcheck(Girl, 500, "I", Bonus = ((Girl.Addict*10)- Girl.obedience)) and Girl.Addict > 50 and Girl.Swallow: #If addict + inhibition is > obedience + 50. . .
+            if Approvalcheck(Girl, 500, "I", Bonus = ((Girl.Addict*10)- Girl.obedience)) and Girl.Addict > 50 and Girl.event_counter["swallowed"]: #If addict + inhibition is > obedience + 50. . .
                     $ Girl.Eyes = "manic"
                     $ Girl.Mouth = "kiss"
                     $ action_speed = 0
@@ -301,7 +301,7 @@ label Girl_Warn_Her:  #rkeljsv
                 jump Girl_Swallowed
         #End Hungy take-over
 
-        if primary_action == "sex" and Girl.CreamP >= 5:
+        if primary_action == "sex" and Girl.event_counter["creampied"] >= 5:
                 # She's Creampied a few times
                 $ Girl.change_face("sexy")
                 $ Player.Cock = "in"
@@ -313,7 +313,7 @@ label Girl_Warn_Her:  #rkeljsv
                         call Girl_Cumming(Girl)
                 jump Girl_Creampied
 
-        elif primary_action == "sex" and Girl.CreamP and D20 >= 10:
+        elif primary_action == "sex" and Girl.event_counter["creampied"] and D20 >= 10:
                 # She's Creampied at least once
                 $ Girl.change_face("sexy")
                 $ Player.Cock = "in"
@@ -325,7 +325,7 @@ label Girl_Warn_Her:  #rkeljsv
                         call Girl_Cumming(Girl)
                 jump Girl_Creampied
 
-        elif primary_action == "anal" and Girl.CreamA >= 5:
+        elif primary_action == "anal" and Girl.event_counter["anal_creampied"] >= 5:
                 # She's Anal Creampied a few times
                 $ Girl.change_face("sexy")
                 $ Player.Cock = "anal"
@@ -337,7 +337,7 @@ label Girl_Warn_Her:  #rkeljsv
                         call Girl_Cumming(Girl)
                 jump Girl_Creampied
 
-        elif primary_action == "anal" and Girl.CreamA and D20 >= 10:
+        elif primary_action == "anal" and Girl.event_counter["anal_creampied"] and D20 >= 10:
                 # She's Anal Creampied at least once
                 $ Girl.change_face("sexy")
                 $ Player.Cock = "anal"
@@ -349,7 +349,7 @@ label Girl_Warn_Her:  #rkeljsv
                         call Girl_Cumming(Girl)
                 jump Girl_Creampied
 
-        elif primary_action != "anal" and Girl.Swallow >= 5:
+        elif primary_action != "anal" and Girl.event_counter["swallowed"] >= 5:
                 #If she's swallowed a lot
                 if renpy.showing(Girl.Tag+"_BJ_Animation"): #if renpy.showing("Rogue_BJ_Animation"):
                         $ Girl.change_face("sucking")
@@ -371,7 +371,7 @@ label Girl_Warn_Her:  #rkeljsv
                 call Sex_Basic_Dialog(Girl,"warned") #"That was real sweet, [Girl.Petname], thanks for the head's up."
                 jump Girl_Swallowed
 
-        elif Girl.Swallow and D20 >= 10:
+        elif Girl.event_counter["swallowed"] and D20 >= 10:
                 #She's swallowed before, but not a lot
                 if renpy.showing(Girl.Tag+"_Doggy_Animation") or renpy.showing(Girl.Tag+"_SexSprite"): #if renpy.showing("Rogue_Doggy"):
                     call expression Girl.Tag+"_HJ_Launch" pass ("cum")
@@ -486,7 +486,7 @@ label Girl_In_Mouth: #rkeljsv
                                 ch_s "I am afraid that I am rather full at the moment. . ."
                         elif Girl == JubesX:
                                 ch_v "I, um. . . I think I'm actually stuffed. . ."
-                elif Girl.Swallow >= 5 or "hungry" in Girl.Traits:
+                elif Girl.event_counter["swallowed"] >= 5 or "hungry" in Girl.Traits:
                         #if she likes to swallow
                         $ Girl.change_face("sexy")
                         $ Girl.Mouth = "smile"
@@ -497,7 +497,7 @@ label Girl_In_Mouth: #rkeljsv
                         $ action_speed = 0
                         call Sex_Basic_Dialog(Girl,"swallowgood") # "That was real sweet, [Girl.Petname]."
                         $ Girl.change_face()
-                elif Girl.Swallow:
+                elif Girl.event_counter["swallowed"]:
                         $ Girl.change_face("bemused")
                         $ Girl.Spunk.append("mouth")
                         $ Girl.Spunk.append("chin")
@@ -716,7 +716,7 @@ label Girl_In_Mouth: #rkeljsv
     if "full" in Girl.recent_history:
             pass
 
-    elif Girl.Swallow >= 5 or "hungry" in Girl.Traits:
+    elif Girl.event_counter["swallowed"] >= 5 or "hungry" in Girl.Traits:
             # If she's swallowed 5 times,
             $ Girl.change_face("sucking")
             if not renpy.showing(Girl.Tag+"_BJ_Animation"): #if not renpy.showing("Rogue_BJ_Animation"):
@@ -737,7 +737,7 @@ label Girl_In_Mouth: #rkeljsv
             $ Girl.Spunk.remove("mouth")
             jump Girl_Swallowed
 
-    elif Girl.Addict >= 80 and Girl.Swallow:
+    elif Girl.Addict >= 80 and Girl.event_counter["swallowed"]:
             #addicted
             $ Girl.Brows = "confused"
             $ Girl.Eyes = "manic"
@@ -762,7 +762,7 @@ label Girl_In_Mouth: #rkeljsv
             $ Girl.change_stat("inhibition", 200, 5)
             jump Girl_Swallowed
 
-    elif Girl.Swallow:
+    elif Girl.event_counter["swallowed"]:
             if Approvalcheck(Girl, 900):
                 $ Girl.Brows = "confused"
                 if renpy.showing(Girl.Tag+"_TJ_Animation"): #if renpy.showing("Rogue_TJ_Animation"):
@@ -978,7 +978,7 @@ label Girl_In_Mouth: #rkeljsv
     $ action_speed = 0
     $ Girl.change_face("sexy")
 
-    if Approvalcheck(Girl, 1000) and Girl.Swallow >= 3:
+    if Approvalcheck(Girl, 1000) and Girl.event_counter["swallowed"] >= 3:
             call Sex_Basic_Dialog(Girl,"swallow2") #"I'm starting to get used to that."
     elif Approvalcheck(Girl, 800):
             call Sex_Basic_Dialog(Girl,"swallowfirst") #"I'm not really a fan of that, [Girl.Petname]."
@@ -1000,7 +1000,7 @@ label Girl_Creampie_P: #rkeljsv
                 $ Girl.Spunk.append("in")
                 $ Player.Spunk = "in"
                 $ action_speed = 0
-                if Approvalcheck(Girl, 1300) or Girl.CreamP:
+                if Approvalcheck(Girl, 1300) or Girl.event_counter["creampied"]:
                         $ Girl.change_face("surprised")
                         "You come in her pussy. Her eyes widen in surprise, but she takes it in stride."
                         $ Girl.change_face("sexy")
@@ -1046,11 +1046,11 @@ label Girl_Creampie_P: #rkeljsv
                 jump Girl_Creampied
 
         #else (You ask her if it's ok):
-        if Approvalcheck(Girl, 1200) or Girl.CreamP:
+        if Approvalcheck(Girl, 1200) or Girl.event_counter["creampied"]:
                 $ Girl.change_face("sexy")
-                if Girl.CreamP >= 3:
+                if Girl.event_counter["creampied"] >= 3:
                         "She smiles and speeds up her actions, causing you to erupt inside her."
-                elif Girl.CreamP:
+                elif Girl.event_counter["creampied"]:
                         "She gets a michevious look and speeds up, you burst inside her."
                 else:
                         "As you continue to pound her, she nods her head."
@@ -1104,7 +1104,7 @@ label Girl_Creampie_A:      #rkeljsv
                 $ Girl.Spunk.append("anal")
                 $ Player.Spunk = "anal"
                 $ action_speed = 0
-                if Approvalcheck(Girl, 1200) or Girl.CreamP:
+                if Approvalcheck(Girl, 1200) or Girl.event_counter["creampied"]:
                         $ Girl.change_face("surprised", 1)
                         "You come in her ass. Her eyes widen in surprise, but she takes it in stride."
                         $ Girl.change_face("sexy")
@@ -1150,11 +1150,11 @@ label Girl_Creampie_A:      #rkeljsv
                 jump Girl_Creampied
 
         #else (You ask her if it's ok):
-        if Approvalcheck(Girl, 1200) or Girl.CreamP:
+        if Approvalcheck(Girl, 1200) or Girl.event_counter["creampied"]:
                 $ Girl.change_face("sexy")
-                if Girl.CreamP >= 3:
+                if Girl.event_counter["creampied"] >= 3:
                         "She smiles and speeds up her actions, causing you to erupt inside her."
-                elif Girl.CreamP:
+                elif Girl.event_counter["creampied"]:
                         "She gets a michevious look and speeds up, you burst inside her."
                 else:
                         "As you continue to pound her, she nods her head."
@@ -1202,7 +1202,7 @@ label Girl_Creampie_A:      #rkeljsv
 #Start Facial  / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Girl_Facial:  #rkeljsj
         if renpy.showing(Girl.Tag+"_BJ_Animation"): #if renpy.showing("Rogue_BJ_Animation"):
-                if Girl.Addict >= 60 and Approvalcheck(Girl, 1000, "I", Bonus = ((Girl.Addict*10)- Girl.obedience)) and Girl.Swallow:
+                if Girl.Addict >= 60 and Approvalcheck(Girl, 1000, "I", Bonus = ((Girl.Addict*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
                         jump Manic_Suck
                 call expression Girl.Tag+"_HJ_Launch" pass ("cum")
                 $ action_speed = 2
@@ -1302,7 +1302,7 @@ label Girl_Facial:  #rkeljsj
 #Start titjob spunk  / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Girl_TitSpunk:  #rkeljsv
         if renpy.showing(Girl.Tag+"_BJ_Animation"): #if renpy.showing("Rogue_BJ_Animation"):
-                if Girl.Addict >= 60 and Approvalcheck(Girl, 1000, "I", Bonus = ((Girl.Addict*10)- Girl.obedience)) and Girl.Swallow:
+                if Girl.Addict >= 60 and Approvalcheck(Girl, 1000, "I", Bonus = ((Girl.Addict*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
                             jump Manic_Suck
 
         #if not renpy.showing("Rogue_TJ_Animation") and not renpy.showing("Rogue_HJ_Animation") and not renpy.showing("Rogue_BJ_Animation"):
@@ -1364,7 +1364,7 @@ label Girl_Cum_Outside:  #rkeljsv
             else:
                 call expression Girl.Tag+"_Sex_Launch" pass ("hotdog") #call Rogue_Doggy_Launch("hotdog")
         $ action_speed = 0
-        if Girl.Addict >= 60 and Approvalcheck(Girl, 1000, "I", Bonus = ((Girl.Addict*10)- Girl.obedience))  and Girl.Swallow:
+        if Girl.Addict >= 60 and Approvalcheck(Girl, 1000, "I", Bonus = ((Girl.Addict*10)- Girl.obedience))  and Girl.event_counter["swallowed"]:
                 $ Girl.Eyes = "manic"
                 $ Girl.Blush = 1
                 call blowjob_launch(Girl, "cum")
@@ -1414,7 +1414,7 @@ label Girl_Cum_Outside:  #rkeljsv
                         "You pick up the pace and with a grunt you spray all over her stomach."
 
 
-        if Girl.Addict >= 60 and Approvalcheck(Girl, 800, "I", Bonus = ((Girl.Addict*10)- Girl.obedience)) and Girl.Swallow:
+        if Girl.Addict >= 60 and Approvalcheck(Girl, 800, "I", Bonus = ((Girl.Addict*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
                     #if she's manic and has swallowed
                     $ Girl.Eyes = "manic"
                     $ Girl.Blush = 1
@@ -1466,7 +1466,7 @@ label Girl_Cum_Outside:  #rkeljsv
 #            $ Girl.Pose = "sex"
 #            call expression Girl.Tag+"_Sex_Launch" pass ("hotdog") #call Rogue_Doggy_Launch("hotdog")
 #        $ action_speed = 0
-#        if Girl.Addict >= 60 and Approvalcheck(Girl, 1000, "I", Bonus = ((Girl.Addict*10)- Girl.obedience))  and Girl.Swallow:
+#        if Girl.Addict >= 60 and Approvalcheck(Girl, 1000, "I", Bonus = ((Girl.Addict*10)- Girl.obedience))  and Girl.event_counter["swallowed"]:
 #                $ Girl.Eyes = "manic"
 #                $ Girl.Blush = 1
 #                call blowjob_launch(Girl, "cum")
@@ -1504,7 +1504,7 @@ label Girl_Cum_Outside:  #rkeljsv
 #        else:
 #                "You pick up the pace and with a grunt you spray all over her stomach."
 
-#        if Girl.Addict >= 60 and Approvalcheck(Girl, 800, "I", Bonus = ((Girl.Addict*10)- Girl.obedience)) and Girl.Swallow:
+#        if Girl.Addict >= 60 and Approvalcheck(Girl, 800, "I", Bonus = ((Girl.Addict*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
 #                    #if she's manic and has swallowed
 #                    $ Girl.Eyes = "manic"
 #                    $ Girl.Blush = 1
@@ -1584,7 +1584,7 @@ label Girl_Handy_Finish: #rkeljsv
 
 #Start Swallowed  / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Girl_Swallowed:  #rkeljsv
-        $ Girl.Swallow += 1
+        $ Girl.event_counter["swallowed"] += 1
         $ Girl.change_stat("inhibition", 50, 3)
         $ Girl.Addict -= 20
         if "mouth" in Girl.Spunk:
@@ -1634,7 +1634,7 @@ label Girl_Swallowed:  #rkeljsv
         if primary_action == "anal":
                 $ Girl.change_stat("obedience", 50, 2)
                 $ Girl.change_stat("obedience", 200, 2)
-        if Girl.Swallow == 1:
+        if Girl.event_counter["swallowed"] == 1:
                 $ Girl.SEXP += 12
                 $ Girl.change_stat("inhibition", 70, 5)
         jump Girl_Orgasm_After
@@ -1642,12 +1642,12 @@ label Girl_Swallowed:  #rkeljsv
 #Start Creampied  / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / / /
 label Girl_Creampied:
         if primary_action == "sex":
-                $ Girl.CreamP += 1
+                $ Girl.event_counter["creampied"] += 1
                 $ Girl.change_stat("lust", 200, 10)
                 $ Girl.recent_history.append("creampie sex")
                 $ Girl.daily_history.append("creampie sex")
         elif primary_action == "anal":
-                $ Girl.CreamA += 1
+                $ Girl.event_counter["anal_creampied"] += 1
                 $ Girl.change_stat("lust", 200, 5)
                 $ Girl.recent_history.append("creampie anal")
                 $ Girl.daily_history.append("creampie anal")
@@ -1656,7 +1656,7 @@ label Girl_Creampied:
         $ Girl.Addictionrate += 2
         if Player.addictive:
                 $ Girl.Addictionrate += 3
-        if Girl.CreamP == 1:
+        if Girl.event_counter["creampied"] == 1:
                 $Girl.SEXP += 10
                 $ Girl.change_stat("inhibition", 70, 5)
 
@@ -1706,7 +1706,7 @@ label Girl_CleanCock(Girl=0):
                         $ Girl.change_face("sly", 0)
                 else:
                         "She wipes your cock clean."
-        elif Girl.Blow > 3 or Girl.Swallow:
+        elif Girl.Blow > 3 or Girl.event_counter["swallowed"]:
                 if Approvalcheck(Girl, 1200, TabM=1) or Girl.Addict >= 60:
                         call blowjob_launch(Girl, "cum")
                         $ action_speed = 1
@@ -1793,7 +1793,7 @@ label Girl_Cumming(Girl=0,Quick=0,Girls=[]): #rename from Girl_Cumming  #rkeljsv
     $ Girl.Thirst -= 5
 
     $ Girl.OCount += 1
-    $ Girl.Org += 1
+    $ Girl.event_counter["orgasm"] += 1
     $ Girl.lust = 30 if "hotblooded" in Girl.Traits else 0
     $ Girl.lust += (Girl.OCount * 5)
     $ Girl.lust = 60 if Girl.lust >= 60 else Girl.lust
@@ -2038,7 +2038,7 @@ label Girl_Cleanup(Girl=0,Choice = "random",Options=[],counter=0,Cleaned=0,Origi
             $ counter = 1
             $ temp_modifier = 0
 
-    if Girl.Addict > 80 and Girl.Swallow:
+    if Girl.Addict > 80 and Girl.event_counter["swallowed"]:
             #if she likes cum, she prefers to eat it.
             $ Choice = "eat"
             $ Girl.Eyes = "manic"
@@ -2373,7 +2373,7 @@ label Girl_Cleanup(Girl=0,Choice = "random",Options=[],counter=0,Cleaned=0,Origi
 
                 "You should just eat it.":
                         $ Girl.change_face("sly")
-                        if "hungry" in Girl.Traits or (Girl.Swallow >= 5 and Approvalcheck(Girl, 800)):
+                        if "hungry" in Girl.Traits or (Girl.event_counter["swallowed"] >= 5 and Approvalcheck(Girl, 800)):
                                 #lots of swallows
                                 $ Girl.change_stat("obedience", 90, 1)
                                 $ Girl.change_stat("inhibition", 50, 3)
@@ -2395,7 +2395,7 @@ label Girl_Cleanup(Girl=0,Choice = "random",Options=[],counter=0,Cleaned=0,Origi
                                 elif Girl == JubesX:
                                         $ Girl.change_face("smile")
                                         ch_v "Sweet!"
-                        elif Girl.Swallow and Approvalcheck(Girl, 800):
+                        elif Girl.event_counter["swallowed"] and Approvalcheck(Girl, 800):
                                 #few swallows
                                 $ Girl.change_stat("obedience", 50, 1)
                                 $ Girl.change_stat("obedience", 90, 1)
@@ -2589,9 +2589,9 @@ label Girl_Cleanup(Girl=0,Choice = "random",Options=[],counter=0,Cleaned=0,Origi
 
     if Choice == "random":
             $ Options = ["clean"]
-            if Girl.Swallow and Approvalcheck(Girl, 800):
+            if Girl.event_counter["swallowed"] and Approvalcheck(Girl, 800):
                     $ Options.append("eat")
-                    if Girl.Swallow >=5:
+                    if Girl.event_counter["swallowed"] >=5:
                         $ Options.append("eat")
                     if "hungry" in Girl.Traits:
                         $ Options.append("eat")
@@ -2622,7 +2622,7 @@ label Girl_Cleanup(Girl=0,Choice = "random",Options=[],counter=0,Cleaned=0,Origi
             "She leaves the jiz right where it is and gives you a wink."
             if "handjob" in Girl.Spunk:
                     $ Girl.Spunk.remove("handjob")
-                    if Girl.Swallow:
+                    if Girl.event_counter["swallowed"]:
                         "She does lick off her hand though."
                     else:
                         "She does wipe her hand off though."
@@ -2735,9 +2735,9 @@ label Self_Cleanup(Girl=0):         #rkeljsv
 
                     $ Girl.change_stat("inhibition", 80, 2)
                     $ Girl.Spunk.remove("mouth")
-                    $ Girl.Swallow += 1
+                    $ Girl.event_counter["swallowed"] += 1
                     $ Girl.Addict -= (10*counter)
-                    if Girl.Swallow == 1:
+                    if Girl.event_counter["swallowed"] == 1:
                         $ Girl.SEXP += 12
                     $ Girl.recent_history.append("swallowed")
                     $ Girl.daily_history.append("swallowed")
@@ -2796,7 +2796,7 @@ label Self_Cleanup(Girl=0):         #rkeljsv
                     ch_s "Perhaps next time take better care where you fire."
             elif Girl == JubesX:
                     ch_v "Whew, that was a lot."
-    if Choice == "eat" and Girl.Swallow >= 5:
+    if Choice == "eat" and Girl.event_counter["swallowed"] >= 5:
             if Girl == RogueX:
                     ch_r "That was delicious."
             elif Girl == KittyX:
@@ -2935,7 +2935,7 @@ label Partner_Cleanup_check(Girl=0,B=0): #rkeljsv
 
                 call Partner_Clean_Girl(Girl)
 
-                if Girl.Swallow >=5:
+                if Girl.event_counter["swallowed"] >=5:
                         $ Options.append("eat")
                 call AllReset(Partner)
                 call AllReset(focused_Girl)
@@ -3387,9 +3387,9 @@ label Partner_Clean_Girl(Girl=0): #rkeljsv
                     $ Girl.change_stat("inhibition", 80, 2)
                     $ Player.change_stat("Focus",80,3)
                     "Then [Partner.name] swallows and wipes her mouth."
-                    $ Partner.Swallow += 1
+                    $ Partner.event_counter["swallowed"] += 1
                     $ Partner.Addict -= (10*counter)
-                    if Partner.Swallow == 1:
+                    if Partner.event_counter["swallowed"] == 1:
                         $ Partner.SEXP += 12
                     $ Partner.recent_history.append("swallowed")
                     $ Partner.daily_history.append("swallowed")

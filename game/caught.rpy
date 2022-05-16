@@ -143,7 +143,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                         "You hear a sharp shuffling sound and the water gets cut off."
                         "After several seconds and some more shuffling, [Girl.name] comes to the door."
                         $ Girl.change_face("perplexed",2,Mouth="normal")
-                        call set_the_scene(Dress=0)
+                        call set_the_scene(check_if_dressed=0)
                         if Girl == RogueX:
                                 ch_r "Sorry about that [Girl.Petname], I was. . . just wrapping up my shower."
                         elif Girl == KittyX:
@@ -163,7 +163,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                 else:
                         #Laura caught showering
                         "You hear the rustling of a towel and some knocking around, but after a few seconds [Girl.name] comes to the door."
-                        call set_the_scene(Dress=0)
+                        call set_the_scene(check_if_dressed=0)
                         if Girl == RogueX:
                                 ch_r "Sorry about that [Girl.Petname], I was just wrapping up my shower."
                         elif Girl == KittyX:
@@ -186,7 +186,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                     $ Girl.DrainWord("gonnafap",0,1) #removes "gonnafap" tag from daily
                     $ Girl.change_face("sexy",Eyes="closed")
                     $ Girl.AddWord(1,"unseen","unseen",0,0)
-                    call set_the_scene(Dress=0)
+                    call set_the_scene(check_if_dressed=0)
                     $ Count = 0
                     $ primary_action = "masturbation"
                     $ girl_offhand_action = "fondle_pussy"
@@ -197,10 +197,10 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
 
             elif D20 >= 15:
                     #She's just showering and naked
-                    call set_the_scene(Dress=0)
+                    call set_the_scene(check_if_dressed=0)
                     $ Girl.change_face("surprised", 1)
                     "As you enter the showers, you see [Girl.name] washing up."
-                    call expression Girl.Tag + "_First_Bottomless" pass (1)
+                    call first_bottomless(Girl, 1)
                     call first_topless(Girl, silent = 1)
                     if not Approvalcheck(Girl, 1200) or not Girl.SeenPussy or not Girl.SeenChest:
                             $ Girl.Brows="angry"
@@ -256,7 +256,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
             else:
                     #She's done showering and in a towel
                     $ Girl.Over = "towel"
-                    call set_the_scene(Dress=0)
+                    call set_the_scene(check_if_dressed=0)
                     "As you enter the showers, you see [Girl.name] putting on a towel."
                     if not Approvalcheck(Girl, 1100) and (not Girl.SeenPussy or not Girl.SeenChest):
                             $ Girl.change_face("angry",Brows="confused")
@@ -358,7 +358,7 @@ label Girl_Caught_Shower(Girl=0): #rkeljsv
                             $ Girl.Over = "towel"
                             "She flashes you real quick."
                             $ Girl.Over = "towel"
-                            call expression Girl.Tag + "_First_Bottomless" pass (1)
+                            call first_bottomless(Girl, 1)
                             call first_topless(Girl, silent = 1) #same as "call Rogue_First_Topless(1)"
 
                             if Girl == LauraX:
@@ -1652,7 +1652,7 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
                         $ Girl.Over = 0 #Over
         #else: #fully dressed
         $ Girl.location = bg_current
-        call set_the_scene(Dress=0)
+        call set_the_scene(check_if_dressed=0)
         if D20 > 17:
                 #She's naked
                 "As you enter the room, you see [Girl.name] is naked, and seems to be getting dressed."
@@ -1694,7 +1694,7 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
                                 if not Girl.OverNum() or (Girl.OverNum()+Girl.ChestNum() <5) or (Girl.PantsNum() < 5 and Girl.HoseNum() < 10):
                                     # if either she is mostly topless or mostly bottomless)
 
-                                    call expression Girl.Tag + "_First_Bottomless" pass (1)
+                                    call first_bottomless(Girl, 1)
                                     call first_topless(Girl, silent = 1)
                                     $ Girl.Over = "towel"
                                     "She grabs a towel and covers up."
@@ -1789,7 +1789,7 @@ label Girl_Caught_Changing(Girl=0): #rkeljsv
                         $ Girl.Upskirt = 1 #Upskirt up
                         pause 1
                         call first_topless(Girl, silent = 1)
-                        call expression Girl.Tag + "_First_Bottomless" pass (1)
+                        call first_bottomless(Girl, 1)
                         $ Girl.Uptop = 0 #Uptop up
                         $ Girl.Upskirt = 0 #Upskirt up
                         "She flashes you real quick."

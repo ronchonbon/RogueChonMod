@@ -2053,6 +2053,21 @@ label after_action_five_times_lines(Girl):
     elif focused_Girl == KittyX:
         ch_k "I'm surprised how much I enjoy this."
 
+    if focused_Girl == RogueX:
+        ch_r "We're really making this a regular thing."
+    elif focused_Girl == KittyX:
+        ch_k "You're good at this. . ."
+    elif focused_Girl == EmmaX:
+        ch_e "You're surprisingly talented. . ."
+    elif focused_Girl == LauraX:
+        ch_l "You're really talented. . ."
+    elif focused_Girl == JeanX:
+        ch_j "MmMmmm, that was nice. . ."
+    elif focused_Girl == StormX:
+        ch_s "Mmmm, has anyone told you that you are quite good at this?"
+    elif focused_Girl == JubesX:
+        ch_v "Kissing you really feels great!"
+
     return
 
 label switching_action_lines(Girl):
@@ -2214,8 +2229,8 @@ label accepted_without_question_lines(Girl):
 
     return
 
-label pull_back_before_get_in_lines(Girl):
-    if action_counter:
+label pull_back_before_get_in_lines(Girl, action):
+    if Girl.action_counter[action]:
         ch_r "Well ok, [Girl.Petname], no harm done. Just give me a little warning next time."
         ch_r "Well ok, [Girl.Petname], it has been kinda fun."
     else:
@@ -2223,6 +2238,22 @@ label pull_back_before_get_in_lines(Girl):
         ch_r "Well ok, [Girl.Petname], that's a bit dirty, maybe ask a girl?"
 
     return
+
+label would_you_like_more_lines(Girl):
+    if focused_Girl == RogueX:
+        ch_r "You maybe want to try something more?"
+    elif focused_Girl == KittyX:
+        ch_k "Is that it?"
+    elif focused_Girl == EmmaX:
+        ch_e "You wouldn't be interested in something more? . ."
+    elif focused_Girl == LauraX:
+        ch_l "Huh, that's all there is to it?"
+    elif focused_Girl == JeanX:
+        ch_j "That was nice. . ."
+    elif focused_Girl == StormX:
+        ch_s "Oh. . . that was lovely."
+    elif focused_Girl == JubesX:
+        ch_v "Did you want. . . more?"
 
 label template(Girl):
     if Girl == RogueX:

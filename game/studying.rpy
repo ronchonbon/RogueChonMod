@@ -1679,7 +1679,7 @@ label Frisky_Study(Prime_Bonus=0,Second=0,line=0,Second_Bonus=0): #rkeljsv
                     $ line = "masturbate"
             elif D20 > 10 and Approvalcheck(Party[0], 1200) and Party[0].lust >= 30:
                     $ line = "strip"
-            elif Approvalcheck(Party[0], 700) and Party[0].Kissed > 1:
+            elif Approvalcheck(Party[0], 700) and Party[0].action_counter["kiss"] > 1:
                     $ line = "kissing"
             elif Approvalcheck(Party[0], 500):
                     $ line = "snuggle"
@@ -1756,7 +1756,7 @@ label Frisky_Study(Prime_Bonus=0,Second=0,line=0,Second_Bonus=0): #rkeljsv
                     call Group_Strip_Study
             elif line and len(Party) < 2:
                     #if sex stuff is happening but only one girl
-                    call expression Party[0].Tag + "_SexAct" pass (line)
+                    call sex_acts(line)
             elif line:
                     #if something sexual is happening, checks if other girl is cool
                     if line == "snuggle":
@@ -1850,7 +1850,7 @@ label Frisky_Study(Prime_Bonus=0,Second=0,line=0,Second_Bonus=0): #rkeljsv
                                             $ Party[0].change_face("normal")
                                             return
                         # end "if the other girl took off"
-                        call expression Party[0].Tag + "_SexAct" pass (line)
+                        call sex_acts(line)
                     if len(Party) >= 2:
                         $ Party[0].GLG(Party[1],900,10,1)
                         $ Party[1].GLG(Party[0],900,10,1)

@@ -568,9 +568,9 @@ label Jubes_SexChat:
                                             $ JubesX.change_stat("love", 90, 5)
                                             $ JubesX.change_stat("lust", 80, 10)
                                             ch_v "I really like it too!"
-                                        elif JubesX.Sex >= 5:
+                                        elif JubesX.action_counter["sex"] >= 5:
                                             ch_v "Well I don't mind that."
-                                        elif not JubesX.Sex:
+                                        elif not JubesX.action_counter["sex"]:
                                             $ JubesX.change_face("perplexed")
                                             ch_v "Who's fucking you?"
                                         else:
@@ -676,7 +676,7 @@ label Jubes_SexChat:
                                         $ JubesX.PlayerFav = "handjob"
 
                             "Feeling you up.":
-                                        $ counter = JubesX.FondleB + JubesX.FondleT + JubesX.SuckB + JubesX.Hotdog
+                                        $ counter = JubesX.action_counter["fondle_breasts"] + JubesX.action_counter["fondle_thighs"] + JubesX.SuckB + JubesX.Hotdog
                                         $ JubesX.change_face("sly")
                                         if JubesX.PlayerFav == "fondle":
                                             $ JubesX.change_stat("lust", 80, 3)
@@ -911,7 +911,7 @@ label Jubes_Chitchat(O=0, Options = ["default","default","default"]):
                     $ Digits.append(JubesX)
                     return
 
-        if "hungry" not in JubesX.Traits and JubesX.Swallow >= 3 and JubesX.location == bg_current:  #She's swallowed a lot
+        if "hungry" not in JubesX.Traits and JubesX.event_counter["swallowed"] >= 3 and JubesX.location == bg_current:  #She's swallowed a lot
                     call Jubes_Hungry
                     return
 
@@ -966,7 +966,7 @@ label Jubes_Chitchat(O=0, Options = ["default","default","default"]):
         if JubesX.Hand:
             #If Jubes's given a handjob
             $ Options.append("handjob")
-        if JubesX.Swallow:
+        if JubesX.event_counter["swallowed"]:
             #If Jubes's swallowed before
             $ Options.append("swallowed")
         if "cleaned" in JubesX.daily_history or "painted" in JubesX.daily_history:
@@ -975,10 +975,10 @@ label Jubes_Chitchat(O=0, Options = ["default","default","default"]):
         if JubesX.Sleep:
             #If Jubes's slept over
             $ Options.append("sleep")
-        if JubesX.CreamP or JubesX.CreamA:
+        if JubesX.event_counter["creampied"] or JubesX.event_counter["anal_creampied"]:
             #If Jubes's been creampied
             $ Options.append("creampie")
-        if JubesX.Sex or JubesX.Anal:
+        if JubesX.action_counter["sex"] or JubesX.Anal:
             #If Jubes's been sexed
             $ Options.append("sexed")
         if JubesX.Anal:
@@ -992,7 +992,7 @@ label Jubes_Chitchat(O=0, Options = ["default","default","default"]):
         if "bottomless" in JubesX.History:
             $ Options.append("bottomless")
 
-#        if not JubesX.Chat[0] and JubesX.Sex:
+#        if not JubesX.Chat[0] and JubesX.action_counter["sex"]:
 #            $ Options.append("virgin")
 
 #        if (bg_current == "bg_jubes" or bg_current == "bg_player") and "relationship" not in JubesX.daily_history:
