@@ -48,7 +48,7 @@ label Storm_Fondle_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle breasts" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 950, TabM = 3)
+    $ Approval = approval_check(StormX, 950, TabM = 3)
 
     if action_context == "auto":
         if Approval:
@@ -151,7 +151,7 @@ label Storm_Fondle_Breasts:
             "[[Grab her chest anyway]":
 
 
-                $ Approval = ApprovalCheck(StormX, 350, "OI", TabM = 3)
+                $ Approval = approval_check(StormX, 350, "OI", TabM = 3)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -215,7 +215,7 @@ label Storm_FB_Prep:
         $ action_context = 0
         if (StormX.top or StormX.bra) and not StormX.Uptop:
 
-            if ApprovalCheck(StormX, 1250, TabM = 1) or (StormX.SeenChest and ApprovalCheck(StormX, 500) and not Taboo):
+            if approval_check(StormX, 1250, TabM = 1) or (StormX.SeenChest and approval_check(StormX, 500) and not Taboo):
                 $ StormX.Uptop = 1
                 $ Line = StormX.top if StormX.top else StormX.bra
                 "With a devilish grin, [StormX.name] pulls her [Line] up over her breasts."
@@ -462,14 +462,14 @@ label Storm_FB_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (5 + StormX.action_counter["fondle_breasts"]):
             $ StormX.brows = "confused"
             ch_s "You really seem to enjoy those. . ."
         elif StormX.lust >= 85:
             pass
-        elif counter == (15 + StormX.action_counter["fondle_breasts"]) and StormX.SEXP >= 15 and not ApprovalCheck(StormX, 1500):
+        elif counter == (15 + StormX.action_counter["fondle_breasts"]) and StormX.SEXP >= 15 and not approval_check(StormX, 1500):
             $ StormX.brows = "confused"
             menu:
                 ch_s "I am sure that is fun, but could we try something different?"
@@ -481,7 +481,7 @@ label Storm_FB_Cycle:
                     $ action_context = "shift"
                     jump Storm_FB_After
                 "No, this is fun.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -581,7 +581,7 @@ label Storm_Suck_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_suck breasts" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 1050, TabM = 4)
+    $ Approval = approval_check(StormX, 1050, TabM = 4)
 
     if action_context == "auto":
         if Approval:
@@ -670,7 +670,7 @@ label Storm_Suck_Breasts:
                     ch_s "No, I do not think so. . ."
             "[[Start sucking anyway]":
 
-                $ Approval = ApprovalCheck(StormX, 450, "OI", TabM = 3)
+                $ Approval = approval_check(StormX, 450, "OI", TabM = 3)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -730,7 +730,7 @@ label Storm_SB_Prep:
         $ action_context = 0
         if (StormX.top or StormX.bra) and not StormX.Uptop:
 
-            if ApprovalCheck(StormX, 1250, TabM = 1) or (StormX.SeenChest and ApprovalCheck(StormX, 500) and not Taboo):
+            if approval_check(StormX, 1250, TabM = 1) or (StormX.SeenChest and approval_check(StormX, 500) and not Taboo):
                 $ StormX.Uptop = 1
                 $ Line = StormX.top if StormX.top else StormX.bra
                 "With a devilish grin, [StormX.name] pulls her [Line] up over her breasts."
@@ -973,14 +973,14 @@ label Storm_SB_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (5 + StormX.action_counter["suck_breasts"]):
             $ StormX.brows = "sly"
             ch_s "You really seem to enjoy those. . ."
         elif StormX.lust >= 85:
             pass
-        elif counter == (15 + StormX.action_counter["suck_breasts"]) and StormX.SEXP >= 15 and not ApprovalCheck(StormX, 1500):
+        elif counter == (15 + StormX.action_counter["suck_breasts"]) and StormX.SEXP >= 15 and not approval_check(StormX, 1500):
             $ StormX.brows = "confused"
             menu:
                 ch_s "I am sure that is fun, but could we try something different?"
@@ -992,7 +992,7 @@ label Storm_SB_Cycle:
                     $ action_context = "shift"
                     jump Storm_SB_After
                 "No, this is fun.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -1090,7 +1090,7 @@ label Storm_Fondle_Thighs:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle thighs" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 700, TabM=1)
+    $ Approval = approval_check(StormX, 700, TabM=1)
 
     if action_context == "auto":
         if Approval:
@@ -1183,7 +1183,7 @@ label Storm_Fondle_Thighs:
                     ch_s "It is not appropriate."
             "[[Start caressing her thigh anyway]":
 
-                $ Approval = ApprovalCheck(StormX, 350, "OI", TabM = 2)
+                $ Approval = approval_check(StormX, 350, "OI", TabM = 2)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -1452,12 +1452,12 @@ label Storm_FT_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (5 + StormX.action_counter["fondle_thighs"]):
             $ StormX.brows = "confused"
             ch_s "Your hands are so warm. . ."
-        elif counter == (15 + StormX.action_counter["fondle_thighs"]) and StormX.SEXP >= 15 and not ApprovalCheck(StormX, 1500):
+        elif counter == (15 + StormX.action_counter["fondle_thighs"]) and StormX.SEXP >= 15 and not approval_check(StormX, 1500):
             $ StormX.brows = "confused"
             menu:
                 ch_s "I am sure that is fun, but could we try something different?"
@@ -1469,7 +1469,7 @@ label Storm_FT_Cycle:
                     $ action_context = "shift"
                     jump Storm_FT_After
                 "No, this is fun.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -1562,7 +1562,7 @@ label Storm_Fondle_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle pussy" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 1050, TabM = 2)
+    $ Approval = approval_check(StormX, 1050, TabM = 2)
 
     if action_context == "auto":
         if Approval:
@@ -1660,7 +1660,7 @@ label Storm_Fondle_Pussy:
                     ch_s "No."
             "[[Start fondling anyway]":
 
-                $ Approval = ApprovalCheck(StormX, 450, "OI", TabM = 2)
+                $ Approval = approval_check(StormX, 450, "OI", TabM = 2)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -1718,7 +1718,7 @@ label Storm_FP_Prep:
         $ action_context = 0
         if (StormX.legs and not StormX.Upskirt) or (StormX.underwear and not StormX.underwearDown):
 
-            if ApprovalCheck(StormX, 1250, TabM = 1) or (StormX.SeenPussy and ApprovalCheck(StormX, 500) and not Taboo):
+            if approval_check(StormX, 1250, TabM = 1) or (StormX.SeenPussy and approval_check(StormX, 500) and not Taboo):
                 $ StormX.Upskirt = 1
                 $ StormX.underwearDown = 1
                 $ Line = 0
@@ -2006,14 +2006,14 @@ label Storm_FP_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (5 + StormX.action_counter["fondle_pussy"]):
             $ StormX.brows = "confused"
             ch_s "Mmmm, yes. . . deeper. . ."
         elif StormX.lust >= 80:
             pass
-        elif counter == (15 + StormX.action_counter["fondle_pussy"]) and StormX.SEXP >= 15 and not ApprovalCheck(StormX, 1500):
+        elif counter == (15 + StormX.action_counter["fondle_pussy"]) and StormX.SEXP >= 15 and not approval_check(StormX, 1500):
             $ StormX.brows = "confused"
             menu:
                 ch_s "I am sure that is fun, but could we try something different?"
@@ -2025,7 +2025,7 @@ label Storm_FP_Cycle:
                     $ action_context = "shift"
                     jump Storm_FP_After
                 "No, this is fun.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -2090,7 +2090,7 @@ label Storm_FP_After:
 label Storm_Insert_Pussy:
     call shift_focus (StormX)
     if action_context == "auto":
-        if ApprovalCheck(StormX, 1100, TabM = 2):
+        if approval_check(StormX, 1100, TabM = 2):
             $ StormX.change_face("surprised")
             $ StormX.change_stat("obedience", 90, 1)
             $ StormX.change_stat("obedience", 70, 2)
@@ -2108,7 +2108,7 @@ label Storm_Insert_Pussy:
             ch_s "Careful what you put in there, you may not get it back."
             return
 
-    if ApprovalCheck(StormX, 1100, TabM = 2):
+    if approval_check(StormX, 1100, TabM = 2):
         if StormX.Forced:
             $ StormX.change_face("sad")
             $ StormX.change_stat("love", 70, -3, 1)
@@ -2200,7 +2200,7 @@ label Storm_Lick_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick pussy" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 1250, TabM = 4)
+    $ Approval = approval_check(StormX, 1250, TabM = 4)
 
     if action_context == "auto":
         if Approval:
@@ -2303,7 +2303,7 @@ label Storm_Lick_Pussy:
                     ch_s "I would, but still no, [StormX.player_petname]."
             "[[Get in there anyway]":
 
-                $ Approval = ApprovalCheck(StormX, 750, "OI", TabM = 4)
+                $ Approval = approval_check(StormX, 750, "OI", TabM = 4)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -2361,7 +2361,7 @@ label Storm_LP_Prep:
         $ action_context = 0
         if (StormX.legs and not StormX.Upskirt) or (StormX.underwear and not StormX.underwearDown):
 
-            if ApprovalCheck(StormX, 1250, TabM = 1) or (StormX.SeenPussy and ApprovalCheck(StormX, 500) and not Taboo):
+            if approval_check(StormX, 1250, TabM = 1) or (StormX.SeenPussy and approval_check(StormX, 500) and not Taboo):
                 $ StormX.Upskirt = 1
                 $ StormX.underwearDown = 1
                 $ Line = 0
@@ -2640,14 +2640,14 @@ label Storm_LP_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (5 + StormX.action_counter["eat_pussy"]):
             $ StormX.brows = "confused"
             ch_s "Oh, that is delightful. . ."
         elif StormX.lust >= 80:
             pass
-        elif counter == (15 + StormX.action_counter["eat_pussy"]) and StormX.SEXP >= 15 and not ApprovalCheck(StormX, 1500):
+        elif counter == (15 + StormX.action_counter["eat_pussy"]) and StormX.SEXP >= 15 and not approval_check(StormX, 1500):
             $ StormX.brows = "confused"
             menu:
                 ch_s "I am sure that is fun, but could we try something different?"
@@ -2659,7 +2659,7 @@ label Storm_LP_Cycle:
                     $ action_context = "shift"
                     jump Storm_LP_After
                 "No, this is fun.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -2753,7 +2753,7 @@ label Storm_Fondle_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle ass" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 750, TabM=1)
+    $ Approval = approval_check(StormX, 750, TabM=1)
 
     if action_context == "auto":
         if Approval:
@@ -2852,7 +2852,7 @@ label Storm_Fondle_Ass:
                     ch_s "No."
             "[[Start fondling anyway]":
 
-                $ Approval = ApprovalCheck(StormX, 250, "OI", TabM = 3)
+                $ Approval = approval_check(StormX, 250, "OI", TabM = 3)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -3, 1)
@@ -3125,14 +3125,14 @@ label Storm_FA_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (5 + StormX.action_counter["fondle_ass"]):
             $ StormX.brows = "confused"
             ch_s "Mmmm. . ."
         elif StormX.lust >= 80:
             pass
-        elif counter == (15 + StormX.action_counter["fondle_ass"]) and StormX.SEXP >= 15 and not ApprovalCheck(StormX, 1500):
+        elif counter == (15 + StormX.action_counter["fondle_ass"]) and StormX.SEXP >= 15 and not approval_check(StormX, 1500):
             $ StormX.brows = "confused"
             menu:
                 ch_s "I am sure that is fun, but could we try something different?"
@@ -3144,7 +3144,7 @@ label Storm_FA_Cycle:
                     $ action_context = "shift"
                     jump Storm_FA_After
                 "No, this is fun.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -3243,7 +3243,7 @@ label Storm_Insert_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_insert ass" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 1300, TabM = 3)
+    $ Approval = approval_check(StormX, 1300, TabM = 3)
 
     if action_context == "auto":
         if Approval:
@@ -3336,7 +3336,7 @@ label Storm_Insert_Ass:
                     ch_s "I do not think that I would."
             "[[Slide a finger in anyway]":
 
-                $ Approval = ApprovalCheck(StormX, 950, "OI", TabM = 3)
+                $ Approval = approval_check(StormX, 950, "OI", TabM = 3)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("surprised", 1)
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -3363,7 +3363,7 @@ label Storm_Insert_Ass:
     elif StormX.Forced:
         $ StormX.change_face("angry", 1)
         ch_s "You go too far."
-        if ApprovalCheck(StormX, 500, "I"):
+        if approval_check(StormX, 500, "I"):
             $ StormX.change_stat("lust", 80, 10)
         else:
             $ StormX.change_stat("lust", 50, 3)
@@ -3399,7 +3399,7 @@ label Storm_IA_Prep:
         $ action_context = 0
         if (StormX.legs and not StormX.Upskirt) or (StormX.underwear and not StormX.underwearDown):
 
-            if ApprovalCheck(StormX, 1250, TabM = 1) or (StormX.SeenPussy and ApprovalCheck(StormX, 500) and not Taboo):
+            if approval_check(StormX, 1250, TabM = 1) or (StormX.SeenPussy and approval_check(StormX, 500) and not Taboo):
                 $ StormX.Upskirt = 1
                 $ StormX.underwearDown = 1
                 $ Line = 0
@@ -3675,14 +3675,14 @@ label Storm_IA_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (5 + StormX.action_counter["finger_ass"]):
             $ StormX.brows = "confused"
             ch_s "Ooh, watch it, watch it. . ."
         elif StormX.lust >= 80:
             pass
-        elif counter == (15 + StormX.action_counter["finger_ass"]) and StormX.SEXP >= 15 and not ApprovalCheck(StormX, 1500):
+        elif counter == (15 + StormX.action_counter["finger_ass"]) and StormX.SEXP >= 15 and not approval_check(StormX, 1500):
             $ StormX.brows = "confused"
             menu:
                 ch_s "I am sure that is fun, but could we try something different?"
@@ -3694,7 +3694,7 @@ label Storm_IA_Cycle:
                     $ action_context = "shift"
                     jump Storm_IA_After
                 "No, this is fun.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -3795,7 +3795,7 @@ label Storm_Lick_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick ass" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 1550, TabM = 4)
+    $ Approval = approval_check(StormX, 1550, TabM = 4)
 
     if action_context == "auto":
         if Approval:
@@ -3895,7 +3895,7 @@ label Storm_Lick_Ass:
                     ch_s "I really do not think so."
             "[[Start licking anyway]":
 
-                $ Approval = ApprovalCheck(StormX, 1100, "OI", TabM = 4)
+                $ Approval = approval_check(StormX, 1100, "OI", TabM = 4)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -3921,7 +3921,7 @@ label Storm_Lick_Ass:
     elif StormX.Forced:
         $ StormX.change_face("angry", 1)
         ch_s "You go too far."
-        if ApprovalCheck(StormX, 500, "I"):
+        if approval_check(StormX, 500, "I"):
             $ StormX.change_stat("lust", 80, 10)
         else:
             $ StormX.change_stat("lust", 50, 3)
@@ -4179,14 +4179,14 @@ label Storm_LA_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (5 + StormX.action_counter["eat_ass"]):
             $ StormX.brows = "confused"
             ch_s "You are quite enthusiastic. . ."
         elif StormX.lust >= 80:
             pass
-        elif counter == (15 + StormX.action_counter["eat_ass"]) and StormX.SEXP >= 15 and not ApprovalCheck(StormX, 1500):
+        elif counter == (15 + StormX.action_counter["eat_ass"]) and StormX.SEXP >= 15 and not approval_check(StormX, 1500):
             $ StormX.brows = "confused"
             menu:
                 ch_s "I am sure that is fun, but could we try something different?"
@@ -4198,7 +4198,7 @@ label Storm_LA_Cycle:
                     $ action_context = "shift"
                     jump Storm_LA_After
                 "No, this is fun.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)

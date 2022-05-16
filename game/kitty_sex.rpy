@@ -68,7 +68,7 @@ label Kitty_Masturbate:
     if KittyX.event_counter["forced"] and not KittyX.Forced:
         $ approval_bonus -= 5*KittyX.event_counter["forced"]
 
-    $ Approval = ApprovalCheck(KittyX, 1300, TabM = 2)
+    $ Approval = approval_check(KittyX, 1300, TabM = 2)
 
     $ KittyX.DrainWord("unseen",1,0)
 
@@ -115,7 +115,7 @@ label Kitty_Masturbate:
                         $ KittyX.change_stat("obedience", 80, 3)
                         $ KittyX.change_stat("inhibition", 80, 5)
                         jump Kitty_M_Cycle
-                    elif ApprovalCheck(KittyX, 1200):
+                    elif approval_check(KittyX, 1200):
                         $ KittyX.change_face("sly")
                         ch_k "Yeah. . . but I think I'm kinda done. . ."
                     else:
@@ -327,7 +327,7 @@ label Kitty_Masturbate:
                     jump Kitty_M_Prep
             "Just get at it already.":
 
-                $ Approval = ApprovalCheck(KittyX, 450, "OI", TabM = 2)
+                $ Approval = approval_check(KittyX, 450, "OI", TabM = 2)
                 if Approval > 1 or (Approval and KittyX.Forced):
                     $ KittyX.change_face("sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
@@ -779,7 +779,7 @@ label Kitty_Sex_P:
         $ approval_bonus -= 10 if "no_sex" in KittyX.recent_history else 0
 
 
-    $ Approval = ApprovalCheck(KittyX, 1400, TabM = 5)
+    $ Approval = approval_check(KittyX, 1400, TabM = 5)
 
     if action_context == "auto":
         call Kitty_Sex_Launch ("sex")
@@ -833,7 +833,7 @@ label Kitty_Sex_P:
                     "You press inside some more."
                     $ KittyX.change_stat("obedience", 70, 3)
                     $ KittyX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(KittyX, 700, "O", TabM=1):
+                    if not approval_check(KittyX, 700, "O", TabM=1):
                         $ KittyX.change_face("angry")
                         "[KittyX.name] shoves you away and slaps you in the face."
                         ch_k "Jerk!"
@@ -994,7 +994,7 @@ label Kitty_Sex_P:
                     $ Line = 0
                     jump Kitty_SexPrep
             "Just deal with it.":
-                $ Approval = ApprovalCheck(KittyX, 1150, "OI", TabM = 3)
+                $ Approval = approval_check(KittyX, 1150, "OI", TabM = 3)
                 if Approval > 1 or (Approval and KittyX.Forced):
                     $ KittyX.change_face("sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
@@ -1357,12 +1357,12 @@ label Kitty_Sex_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if KittyX.SEXP >= 100 or ApprovalCheck(KittyX, 1200, "LO"):
+        if KittyX.SEXP >= 100 or approval_check(KittyX, 1200, "LO"):
             pass
-        elif counter == (5 + KittyX.Sex):
+        elif counter == (5 + KittyX.action_counter["sex"]):
             $ KittyX.brows = "confused"
             ch_k "So are we[KittyX.like]getting close here?"
-        elif counter == (10 + KittyX.Sex):
+        elif counter == (10 + KittyX.action_counter["sex"]):
             $ KittyX.brows = "angry"
             ch_k "I'm . . .getting . . kinda tired. . . here. . ."
             menu:
@@ -1383,7 +1383,7 @@ label Kitty_Sex_Cycle:
                     $ action_context = "shift"
                     jump Kitty_SexAfter
                 "No, get back down there.":
-                    if ApprovalCheck(KittyX, 1200) or ApprovalCheck(KittyX, 500, "O"):
+                    if approval_check(KittyX, 1200) or approval_check(KittyX, 500, "O"):
                         $ KittyX.change_stat("love", 200, -5)
                         $ KittyX.change_stat("obedience", 50, 3)
                         $ KittyX.change_stat("obedience", 80, 2)
@@ -1513,7 +1513,7 @@ label Kitty_Sex_A:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_anal" in KittyX.recent_history else 0
 
-    $ Approval = ApprovalCheck(KittyX, 1550, TabM = 5)
+    $ Approval = approval_check(KittyX, 1550, TabM = 5)
 
     if action_context == "auto":
         call Kitty_Sex_Launch ("anal")
@@ -1570,7 +1570,7 @@ label Kitty_Sex_A:
                     "You press into her."
                     $ KittyX.change_stat("obedience", 70, 3)
                     $ KittyX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(KittyX, 700, "O", TabM=1):
+                    if not approval_check(KittyX, 700, "O", TabM=1):
                         $ KittyX.change_face("angry")
                         "[KittyX.name] shoves you away and slaps you in the face."
                         ch_k "Asshole!"
@@ -1745,7 +1745,7 @@ label Kitty_Sex_A:
                     pass
             "Just deal with it.":
 
-                $ Approval = ApprovalCheck(KittyX, 1250, "OI", TabM = 3)
+                $ Approval = approval_check(KittyX, 1250, "OI", TabM = 3)
                 if Approval > 1 or (Approval and KittyX.Forced):
                     $ KittyX.change_face("sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
@@ -2117,7 +2117,7 @@ label Kitty_Anal_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if KittyX.SEXP >= 100 or ApprovalCheck(KittyX, 1200, "LO"):
+        if KittyX.SEXP >= 100 or approval_check(KittyX, 1200, "LO"):
             pass
         elif counter == (5 + KittyX.action_counter["anal"]):
             $ KittyX.brows = "confused"
@@ -2156,7 +2156,7 @@ label Kitty_Anal_Cycle:
                     $ action_context = "shift"
                     jump Kitty_AnalAfter
                 "No, get back down there.":
-                    if ApprovalCheck(KittyX, 1200) or ApprovalCheck(KittyX, 500, "O"):
+                    if approval_check(KittyX, 1200) or approval_check(KittyX, 500, "O"):
                         $ KittyX.change_stat("love", 200, -5)
                         $ KittyX.change_stat("obedience", 50, 3)
                         $ KittyX.change_stat("obedience", 80, 2)
@@ -2275,7 +2275,7 @@ label Kitty_Sex_H:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_hotdog" in KittyX.recent_history else 0
 
-    $ Approval = ApprovalCheck(KittyX, 1000, TabM = 3)
+    $ Approval = approval_check(KittyX, 1000, TabM = 3)
 
     if action_context == "auto":
         call Kitty_Sex_Launch ("hotdog")
@@ -2311,7 +2311,7 @@ label Kitty_Sex_H:
                     "You grind against her crotch."
                     $ KittyX.change_stat("obedience", 70, 3)
                     $ KittyX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(KittyX, 500, "O", TabM=1):
+                    if not approval_check(KittyX, 500, "O", TabM=1):
                         $ KittyX.change_face("angry")
                         "[KittyX.name] shoves you away."
                         ch_k "Jerk!"
@@ -2469,7 +2469,7 @@ label Kitty_Sex_H:
                     pass
             "Just deal with it.":
 
-                $ Approval = ApprovalCheck(KittyX, 350, "OI", TabM = 3)
+                $ Approval = approval_check(KittyX, 350, "OI", TabM = 3)
                 if Approval > 1 or (Approval and KittyX.Forced):
                     $ KittyX.change_face("sad")
                     $ KittyX.change_stat("love", 70, -2, 1)
@@ -2804,7 +2804,7 @@ label Kitty_Hotdog_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if KittyX.SEXP >= 100 or ApprovalCheck(KittyX, 1200, "LO"):
+        if KittyX.SEXP >= 100 or approval_check(KittyX, 1200, "LO"):
             pass
         elif counter == (5 + KittyX.action_counter["hotdog"]):
             $ KittyX.brows = "confused"
@@ -2829,7 +2829,7 @@ label Kitty_Hotdog_Cycle:
                     $ action_context = "shift"
                     jump Kitty_HotdogAfter
                 "No, get back down there.":
-                    if ApprovalCheck(KittyX, 1200) or ApprovalCheck(KittyX, 500, "O"):
+                    if approval_check(KittyX, 1200) or approval_check(KittyX, 500, "O"):
                         $ KittyX.change_stat("love", 200, -5)
                         $ KittyX.change_stat("obedience", 50, 3)
                         $ KittyX.change_stat("obedience", 80, 2)

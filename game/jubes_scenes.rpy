@@ -497,7 +497,7 @@ label Jubes_Meet:
             ch_v ". . ."
         "You could flash me?":
             $ JubesX.change_stat("obedience", 90, 3)
-            if ApprovalCheck(JubesX, 620):
+            if approval_check(JubesX, 620):
                 $ JubesX.change_stat("love", 90, 2)
                 $ JubesX.change_stat("inhibition", 90, 1)
                 $ JubesX.change_face("sly",1)
@@ -516,7 +516,7 @@ label Jubes_Meet:
             $ JubesX.change_face("smile",1)
         "A blowjob?":
 
-            if ApprovalCheck(JubesX, 620):
+            if approval_check(JubesX, 620):
                 $ JubesX.change_stat("love", 90, 1)
                 $ JubesX.change_stat("obedience", 90, 5)
                 $ JubesX.change_stat("inhibition", 90, 1)
@@ -661,7 +661,7 @@ label Jubes_Entry_Check:
 
                     $ Girl.change_stat("love", 80, -2)
                     ch_v "Now I kind feel like you're jerking me around. . ."
-                elif ApprovalCheck(JubesX, 1300) or ApprovalCheck(JubesX, 400, "O"):
+                elif approval_check(JubesX, 1300) or approval_check(JubesX, 400, "O"):
                     ch_v "That's really not necessary, don't let me hold you back."
                     menu:
                         extend ""
@@ -696,7 +696,7 @@ label Jubes_Entry_Check:
                 $ Party.remove(JubesX)
                 $ Girl.change_stat("love", 80, -2)
                 $ JubesX.change_stat("obedience", 70, 2)
-                if ApprovalCheck(JubesX, 1300) or ApprovalCheck(JubesX, 400, "O"):
+                if approval_check(JubesX, 1300) or approval_check(JubesX, 400, "O"):
                     $ JubesX.change_stat("obedience", 90, 2)
                     $ JubesX.change_face("sad",1)
                     ch_v "I understand, later then. . ."
@@ -752,7 +752,7 @@ label Jubes_Sunshock:
                         ch_v "Then I suppose I choose. . ."
                         "She leans in for a kiss."
                         call KissPrep (Girl)
-                    elif ApprovalCheck(Girl, 650, "LI"):
+                    elif approval_check(Girl, 650, "LI"):
                         $ Girl.change_stat("lust", 80, 3)
                         $ Girl.change_stat("love", 80, 5)
                         $ Girl.change_face("sexy")
@@ -773,7 +773,7 @@ label Jubes_Sunshock:
                 "How about a kiss?":
 
 
-                    if Girl.action_counter["kiss"] or ApprovalCheck(Girl, 600, "LI") or Girl.player_petname in ("master", "sir"):
+                    if Girl.action_counter["kiss"] or approval_check(Girl, 600, "LI") or Girl.player_petname in ("master", "sir"):
                         $ Girl.Forced = 0
                         $ Girl.change_stat("lust", 80, 3)
                         $ Girl.change_stat("love", 80, 6)
@@ -853,7 +853,7 @@ label Jubes_Sunshock:
                     "Nope, sorry.":
                         $ JubesX.change_stat("love", 80, -3)
                         $ JubesX.change_stat("obedience", 70, 2)
-                        if ApprovalCheck(JubesX, 1300) or ApprovalCheck(JubesX, 400, "O"):
+                        if approval_check(JubesX, 1300) or approval_check(JubesX, 400, "O"):
                             $ JubesX.change_face("sad",1)
                             ch_v "Oh."
                         else:
@@ -864,14 +864,14 @@ label Jubes_Sunshock:
 
             if JubesX.addiction >= 70:
 
-                if ApprovalCheck(JubesX, 1300) or ApprovalCheck(JubesX, 400, "O"):
+                if approval_check(JubesX, 1300) or approval_check(JubesX, 400, "O"):
                     $ JubesX.change_face("sad",1)
                     ch_v "I'm sorry, I just can't, it would be agonizing."
                 else:
                     $ JubesX.change_face("angry",1)
                     ch_v "You have to be kidding! I'd catch fire!"
                 return 1
-            elif ApprovalCheck(JubesX, 1600) or ApprovalCheck(JubesX, 500, "O"):
+            elif approval_check(JubesX, 1600) or approval_check(JubesX, 500, "O"):
                 $ JubesX.change_stat("obedience", 90, 2)
                 $ JubesX.change_stat("inhibition", 80, 2)
                 ch_v "I guess I could manage it for a little bit. . ."
@@ -887,14 +887,14 @@ label Jubes_Sunshock:
             $ JubesX.change_face("sad",1)
             if JubesX.addiction >= 70:
 
-                if ApprovalCheck(JubesX, 1300) or ApprovalCheck(JubesX, 400, "O"):
+                if approval_check(JubesX, 1300) or approval_check(JubesX, 400, "O"):
                     $ JubesX.change_stat("obedience", 90, 2)
                     ch_v "I'm sorry, I just can't, it would be agonizing."
                 else:
                     $ JubesX.change_face("angry",1)
                     ch_v "You have to be kidding! I'd catch fire!"
                 return 1
-            elif ApprovalCheck(JubesX, 1600) or ApprovalCheck(JubesX, 500, "O"):
+            elif approval_check(JubesX, 1600) or approval_check(JubesX, 500, "O"):
                 $ JubesX.change_stat("obedience", 90, 2)
                 $ JubesX.change_stat("inhibition", 80, 2)
                 ch_v "I guess I could manage it for a little bit. . ."
@@ -1393,7 +1393,7 @@ label Jubes_BF(BO=[]):
             return
 
     if Player.Harem:
-        if not ApprovalCheck(JubesX, 1400):
+        if not approval_check(JubesX, 1400):
             if len(Player.Harem) >= 2:
                 ch_v "So you'll break up with the others?"
             else:
@@ -1411,7 +1411,7 @@ label Jubes_BF(BO=[]):
                     $ JubesX.Event[5] = 10
                 "I'd rather you join us.":
                     $ Line = 0
-                    if ApprovalCheck(JubesX, 1200):
+                    if approval_check(JubesX, 1200):
 
                         $ BO = Player.Harem[:]
                         while BO and Line != "no":
@@ -1551,10 +1551,10 @@ label Jubes_Cleanhouse:
     ch_v "I can't believe you're putting me through this."
     ch_v "Making me choose between you and putting up with this whole arrangement."
     $ Line = 0
-    if ApprovalCheck(JubesX, 1400) and ApprovalCheck(JubesX, 600,"O"):
+    if approval_check(JubesX, 1400) and approval_check(JubesX, 600,"O"):
 
         pass
-    elif ApprovalCheck(JubesX, 1200) and ApprovalCheck(JubesX, 500,"O"):
+    elif approval_check(JubesX, 1200) and approval_check(JubesX, 500,"O"):
 
         $ BO = Player.Harem[:]
         while BO and Line != "no":
@@ -1598,7 +1598,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], BO=[]):
     $ BO = all_Girls[:]
     $ BO.remove(JubesX)
     while BO:
-        if ApprovalCheck(BO[0], 1200, "LO"):
+        if approval_check(BO[0], 1200, "LO"):
             $ Shipping.append(BO[0])
         $ BO.remove(BO[0])
     $ Shipshape = len(Shipping)
@@ -1969,7 +1969,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], BO=[]):
             $ JubesX.change_stat("obedience", 90, 15)
             $ JubesX.change_stat("inhibition", 90, 5)
             $ JubesX.change_face("sad",1)
-            if ApprovalCheck(JubesX, 1000, "OI"):
+            if approval_check(JubesX, 1000, "OI"):
                 ch_v "I guess that's something."
             else:
                 ch_v ". . ."
@@ -2050,7 +2050,7 @@ label Jubes_Love_Redux:
 
         ch_p "I hope you've forgiven me, I still love you."
         $ JubesX.change_stat("love", 95, 10)
-        if ApprovalCheck(JubesX, 950, "L"):
+        if approval_check(JubesX, 950, "L"):
             $ Line = "love"
         else:
             $ JubesX.change_face("angry")
@@ -2063,7 +2063,7 @@ label Jubes_Love_Redux:
 
         ch_p "I was rude when you opened up to me before."
         $ JubesX.change_stat("love", 95, 10)
-        if ApprovalCheck(JubesX, 950, "L"):
+        if approval_check(JubesX, 950, "L"):
             ch_v "And. . ."
         else:
             $ JubesX.change_face("angry")
@@ -2088,13 +2088,13 @@ label Jubes_Love_Redux:
                 ch_v "That's awfully convenient."
                 ch_p "Yeah. I mean, yes, I love you, [JubesX.name]."
                 $ JubesX.change_stat("love", 200, 10)
-                if ApprovalCheck(JubesX, 950, "L"):
+                if approval_check(JubesX, 950, "L"):
                     $ Line = "love"
                 else:
                     $ JubesX.change_face("sadside")
                     ch_v "Well, maybe I don't, anymore. . ."
             "I've changed my mind, I do love you, so. . .":
-                if ApprovalCheck(JubesX, 950, "L"):
+                if approval_check(JubesX, 950, "L"):
                     $ Line = "love"
                     ch_v "Well that's great."
                 else:
@@ -2198,7 +2198,7 @@ label Jubes_Sub:
             $ Line = "facility"
             jump Jubes_Sub_Question
         "Get with the program.":
-            if ApprovalCheck(JubesX, 1000, "LO"):
+            if approval_check(JubesX, 1000, "LO"):
                 $ JubesX.change_face("sly", 1)
                 $ JubesX.change_stat("obedience", 200, 20)
                 $ JubesX.change_stat("inhibition", 50, 10)
@@ -2275,7 +2275,7 @@ label Jubes_Sub:
         menu:
             extend ""
             "Good. If you wanna be with me, then you follow my orders.":
-                if ApprovalCheck(JubesX, 1000, "LO"):
+                if approval_check(JubesX, 1000, "LO"):
                     $ JubesX.change_face("sly", 1)
                     $ JubesX.change_stat("obedience", 200, 15)
                     $ JubesX.change_stat("inhibition", 50, 10)
@@ -2405,10 +2405,10 @@ label Jubes_Sub_Asked:
     menu:
         extend ""
         "Well, I wanted to say I was sorry. And I was hoping maybe we could give it another shot.":
-            if "sir" in JubesX.player_petnames and ApprovalCheck(JubesX, 850, "O"):
+            if "sir" in JubesX.player_petnames and approval_check(JubesX, 850, "O"):
 
                 pass
-            elif ApprovalCheck(JubesX, 550, "O"):
+            elif approval_check(JubesX, 550, "O"):
 
                 pass
             else:
@@ -2425,12 +2425,12 @@ label Jubes_Sub_Asked:
 
             $ JubesX.change_face("bemused", 1)
             if "sir" in JubesX.player_petnames:
-                if ApprovalCheck(JubesX, 850, "O"):
+                if approval_check(JubesX, 850, "O"):
                     ch_v "Ok, fine."
                 else:
                     ch_v "Nah, I'm good."
                     $ Line = "rude"
-            elif ApprovalCheck(JubesX, 600, "O"):
+            elif approval_check(JubesX, 600, "O"):
 
                 $ JubesX.change_face("confused", 1)
                 ch_v "Kinda wishy-washy there."
@@ -2446,11 +2446,11 @@ label Jubes_Sub_Asked:
                         $ JubesX.eyes = "side"
                         ch_v "Ok then."
                     "You're damned right I am, bitch.":
-                        if "sir" in JubesX.player_petnames and ApprovalCheck(JubesX, 900, "O"):
+                        if "sir" in JubesX.player_petnames and approval_check(JubesX, 900, "O"):
                             $ JubesX.change_stat("love", 200, -5)
                             $ JubesX.change_stat("obedience", 200, 10)
                             ch_v ". . ."
-                        elif ApprovalCheck(JubesX,700, "O"):
+                        elif approval_check(JubesX,700, "O"):
                             $ JubesX.change_stat("love", 200, -5)
                             $ JubesX.change_stat("obedience", 200, 10)
                             ch_v "Hmmm. . ."
@@ -2617,7 +2617,7 @@ label Jubes_Master:
                 menu:
                     ch_v "Excuse me?"
                     "Sorry. I just don't care what you want.":
-                        if ApprovalCheck(JubesX, 1400, "LO"):
+                        if approval_check(JubesX, 1400, "LO"):
                             $ JubesX.change_stat("obedience", 200, 10)
                             ch_v ". . ."
                             $ JubesX.change_face("sly", 1)
@@ -2636,7 +2636,7 @@ label Jubes_Master:
                         $ JubesX.change_stat("love", 200, 10)
                         $ JubesX.change_stat("obedience", 200, 10)
                         $ JubesX.change_stat("inhibition", 50, 5)
-                        if ApprovalCheck(JubesX, 1400, "LO"):
+                        if approval_check(JubesX, 1400, "LO"):
                             $ JubesX.change_stat("obedience", 200, 10)
                             ch_v ". . ."
                             $ JubesX.change_face("sly", 1)

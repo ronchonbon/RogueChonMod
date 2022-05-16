@@ -965,7 +965,7 @@ init python:
 
 
 
-            if self.lust >= 50 and ApprovalCheck(self, 1200):
+            if self.lust >= 50 and approval_check(self, 1200):
                 self.emotion = "sexy"
             elif self.addiction > 75:
                 self.emotion = "manic"
@@ -1052,7 +1052,7 @@ init python:
                         self.mouth = "smirk"
                     else:
                         self.mouth = "normal"
-                if self.Tag == "Laura" and self.lust < 50 and not Extreme and not ApprovalCheck(self, 1000):
+                if self.Tag == "Laura" and self.lust < 50 and not Extreme and not approval_check(self, 1000):
                     self.eyes = "side"
 
             if Partner == self and second_girl_primary_action in ("eat_pussy", "eat_ass", "blowjob", "suck_breasts"):
@@ -1594,13 +1594,13 @@ init python:
 
 
             if self.petname in ("girl","boo","bae","baby","sweetie"):
-                if ApprovalCheck(self, 500, "L", TabM=1,Alt=[[LauraX],600]):
+                if approval_check(self, 500, "L", TabM=1,Alt=[[LauraX],600]):
                     self.change_stat("love", 80, 1)
                 else:
                     self.change_stat("love", 50, -1)
                     return 1
             elif self.petname in ("sexy","lover","beloved"):
-                if ApprovalCheck(self, 900, TabM=1,Alt=[[LauraX],1100]):
+                if approval_check(self, 900, TabM=1,Alt=[[LauraX],1100]):
                     self.change_stat("love", 80, 2)
                     self.change_stat("obedience", 80, 1)
                     self.change_stat("inhibition", 70, 1)
@@ -1611,12 +1611,12 @@ init python:
                     return 1
 
             elif self.petname == "slave":
-                if ApprovalCheck(self, 800, "O", TabM=3,Alt=[[EmmaX,StormX],900]):
+                if approval_check(self, 800, "O", TabM=3,Alt=[[EmmaX,StormX],900]):
                     self.change_stat("lust", 90, (3+counter))
                     self.change_stat("obedience", 95, (2+counter))
                     self.change_stat("inhibition", 30, 1)
                     self.change_stat("inhibition", 70, 1)
-                elif ApprovalCheck(self, 500, "O", TabM=3,Alt=[[EmmaX,StormX],600]):
+                elif approval_check(self, 500, "O", TabM=3,Alt=[[EmmaX,StormX],600]):
                     self.change_stat("lust", 90, 1)
                     self.change_stat("love", 200, -1)
                     self.change_stat("obedience", 80, 2)
@@ -1628,12 +1628,12 @@ init python:
                     self.change_stat("inhibition", 50, -1)
                     return 1
             elif self.petname == "pet":
-                if ApprovalCheck(self, 1500, TabM=2,Alt=[[LauraX],800]):
+                if approval_check(self, 1500, TabM=2,Alt=[[LauraX],800]):
                     self.change_stat("lust", 90, (3+counter))
                     self.change_stat("obedience", 95, (2+counter))
                     self.change_stat("inhibition", 30, 1)
                     self.change_stat("inhibition", 70, 1)
-                elif ApprovalCheck(self, 1200, TabM=2,Alt=[[LauraX],650]):
+                elif approval_check(self, 1200, TabM=2,Alt=[[LauraX],650]):
                     self.change_stat("lust", 60, 1)
                     self.change_stat("obedience", 80, 2)
                     self.change_stat("inhibition", 70, 1)
@@ -1644,12 +1644,12 @@ init python:
                     self.change_stat("inhibition", 50, -1)
                     return 1
             elif self.petname == "slut":
-                if ApprovalCheck(self, 500, "O", TabM=2) or ApprovalCheck(self, 500, "I", TabM=2,Alt=[[LauraX],400]):
+                if approval_check(self, 500, "O", TabM=2) or approval_check(self, 500, "I", TabM=2,Alt=[[LauraX],400]):
                     self.change_stat("lust", 90, (4+counter))
                     self.change_stat("obedience", 95, (2+counter))
                     self.change_stat("inhibition", 40, 2)
                     self.change_stat("inhibition", 80, 1)
-                elif ApprovalCheck(self, 300, "O", TabM=2) or ApprovalCheck(self, 300, "I", TabM=2,Alt=[[LauraX],200]):
+                elif approval_check(self, 300, "O", TabM=2) or approval_check(self, 300, "I", TabM=2,Alt=[[LauraX],200]):
                     self.change_stat("lust", 90, 1)
                     self.change_stat("love", 200, (-1-counter))
                     self.change_stat("obedience", 80, (2+counter))
@@ -1661,12 +1661,12 @@ init python:
                     self.change_stat("inhibition", 20, -1)
                     return 1
             elif self.petname == "whore":
-                if ApprovalCheck(self, 600, "O", TabM=2,Alt=[[EmmaX],700]) or ApprovalCheck(self, 600, "I", TabM=2,Alt=[[LauraX],400]):
+                if approval_check(self, 600, "O", TabM=2,Alt=[[EmmaX],700]) or approval_check(self, 600, "I", TabM=2,Alt=[[LauraX],400]):
                     self.change_stat("lust", 90, 4)
                     self.change_stat("obedience", 95, 2)
                     self.change_stat("inhibition", 50, 2)
                     self.change_stat("inhibition", 80, 1)
-                elif ApprovalCheck(self, 400, "O", TabM=2,Alt=[[EmmaX],500]) or ApprovalCheck(self, 400, "I", TabM=2):
+                elif approval_check(self, 400, "O", TabM=2,Alt=[[EmmaX],500]) or approval_check(self, 400, "I", TabM=2):
                     self.change_stat("lust", 90, 1)
                     self.change_stat("love", 200, (-2-counter))
                     self.change_stat("obedience", 80, 2)
@@ -1679,7 +1679,7 @@ init python:
                     self.change_stat("inhibition", 20, -1)
                     return 1
             elif self.petname == "sugartits":
-                if ApprovalCheck(self, 1500, TabM=1,Alt=[[EmmaX],1300]):
+                if approval_check(self, 1500, TabM=1,Alt=[[EmmaX],1300]):
                     self.change_stat("obedience", 80, 1)
                     self.change_stat("obedience", 50, 2)
                     self.change_stat("inhibition", 70, 1,Alt=[[EmmaX],70,2])
@@ -1691,12 +1691,12 @@ init python:
                     self.change_stat("inhibition", 20, -1)
                     return 1
             elif self.petname == "sex friend":
-                if ApprovalCheck(self, 750, "O", TabM=1) or ApprovalCheck(self, 600, "I", TabM=1):
+                if approval_check(self, 750, "O", TabM=1) or approval_check(self, 600, "I", TabM=1):
                     self.change_stat("lust", 90, 3)
                     self.change_stat("obedience", 95, 2)
                     self.change_stat("inhibition", 40, 2)
                     self.change_stat("inhibition", 80, 1)
-                elif ApprovalCheck(self, 600, "O", TabM=1) or ApprovalCheck(self, 400, "I", TabM=1):
+                elif approval_check(self, 600, "O", TabM=1) or approval_check(self, 400, "I", TabM=1):
                     self.change_stat("lust", 90, 2)
                     self.change_stat("love", 200, (-1-counter))
                     self.change_stat("obedience", 80, 1)
@@ -1709,12 +1709,12 @@ init python:
                     self.change_stat("inhibition", 20, -1)
                     return 1
             elif self.petname == "fuckbuddy":
-                if ApprovalCheck(self, 700, "O", TabM=2) or ApprovalCheck(self, 700, "I", TabM=1):
+                if approval_check(self, 700, "O", TabM=2) or approval_check(self, 700, "I", TabM=1):
                     self.change_stat("lust", 90, 3)
                     self.change_stat("obedience", 95, 2)
                     self.change_stat("inhibition", 40, 2)
                     self.change_stat("inhibition", 85, 1)
-                elif ApprovalCheck(self, 600, "O", TabM=2) or ApprovalCheck(self, 500, "I", TabM=1):
+                elif approval_check(self, 600, "O", TabM=2) or approval_check(self, 500, "I", TabM=1):
                     self.change_stat("lust", 90, 2)
                     self.change_stat("love", 200, (-1-counter))
                     self.change_stat("obedience", 80, 1)
@@ -1727,7 +1727,7 @@ init python:
                     self.change_stat("inhibition", 20, -1)
                     return 1
             elif self.petname in ("baby girl","mommy"):
-                if ApprovalCheck(self, 1200, TabM=1):
+                if approval_check(self, 1200, TabM=1):
                     self.change_stat("obedience", 80, 1)
                     self.change_stat("obedience", 50, 2)
                     self.change_stat("inhibition", 70, 1)
@@ -1740,38 +1740,38 @@ init python:
                     return 1
 
             elif self.petname == "chere":
-                if ApprovalCheck(self, 600, "L", TabM=1):
+                if approval_check(self, 600, "L", TabM=1):
                     self.change_stat("love", 80, 2)
                 else:
                     self.change_stat("love", 50, -1)
                     return 1
 
             elif self.petname == "kitten":
-                if ApprovalCheck(self, 600, "L", TabM=1):
+                if approval_check(self, 600, "L", TabM=1):
                     self.change_stat("love", 80, 2)
                 else:
                     self.change_stat("love", 50, -1)
                     return 1
 
             elif self.petname == "darling":
-                if ApprovalCheck(self, 600, "L", TabM=1):
+                if approval_check(self, 600, "L", TabM=1):
                     self.change_stat("love", 80, 2)
                 else:
                     self.change_stat("love", 50, -1)
                     return 1
 
             elif self.petname == "Wolvie":
-                if ApprovalCheck(self, 500, "I", TabM=1):
+                if approval_check(self, 500, "I", TabM=1):
                     self.change_stat("love", 80, 1)
                 else:
                     self.change_stat("love", 50, -1)
                     return 1
             elif self.petname == "X-23":
-                if ApprovalCheck(self, 800, "O"):
+                if approval_check(self, 800, "O"):
                     self.change_stat("lust", 90, 3)
                     self.change_stat("love", 90, -1)
                     self.change_stat("obedience", 95, 2)
-                elif ApprovalCheck(self, 700, "L") and not ApprovalCheck(self, 500, "O"):
+                elif approval_check(self, 700, "L") and not approval_check(self, 500, "O"):
                     self.change_stat("love", 200, -2)
                     self.change_stat("love", 50, -1, 1)
                     self.change_stat("obedience", 30, 2)
@@ -2774,91 +2774,91 @@ label Clothes_Schedule(Girl=0, counter=0):
     call shift_focus (Girl)
 
     if Girl == RogueX:
-        if ApprovalCheck(Girl, 1500, "LO"):
+        if approval_check(Girl, 1500, "LO"):
             ch_r "So, you'd like to choose what I wear for the week? Ok, shoot."
             $ counter = 3
-        elif ApprovalCheck(Girl, 1200, "LO"):
+        elif approval_check(Girl, 1200, "LO"):
             ch_r "I guess I could set aside a few schooldays for you."
             $ counter = 2
-        elif ApprovalCheck(Girl, 1000, "LO"):
+        elif approval_check(Girl, 1000, "LO"):
             ch_r "We can talk about what I wear outside of classes."
             $ counter = 1
         else:
             ch_r "You know, I don't really need fashion advice from you."
             return
     elif Girl == KittyX:
-        if ApprovalCheck(Girl, 1500, "LO"):
+        if approval_check(Girl, 1500, "LO"):
             ch_k "Let me know what you like."
             $ counter = 3
-        elif ApprovalCheck(Girl, 1200, "LO"):
+        elif approval_check(Girl, 1200, "LO"):
             ch_k "I could let you pick a few days. . ."
             $ counter = 2
-        elif ApprovalCheck(Girl, 1000, "LO"):
+        elif approval_check(Girl, 1000, "LO"):
             ch_k "We could talk about weekends, maybe. . ."
             $ counter = 1
         else:
             ch_k "I think I'll[Girl.like]figure out my own outfits."
             return
     elif Girl == EmmaX:
-        if ApprovalCheck(Girl, 1500, "LO"):
+        if approval_check(Girl, 1500, "LO"):
             ch_e "I'm open to suggestions."
             $ counter = 3
-        elif ApprovalCheck(Girl, 1200, "LO"):
+        elif approval_check(Girl, 1200, "LO"):
             ch_e "I could let you choose a few days. . ."
             $ counter = 2
-        elif ApprovalCheck(Girl, 1000, "LO"):
+        elif approval_check(Girl, 1000, "LO"):
             ch_e "Perhaps when I'm off the clock. . ."
             $ counter = 1
         else:
             ch_e "I'd prefer to handle my own wardrobe."
             return
     elif Girl == LauraX:
-        if ApprovalCheck(Girl, 1500, "LO"):
+        if approval_check(Girl, 1500, "LO"):
             ch_l "Fine, you pick, whatever."
             $ counter = 3
-        elif ApprovalCheck(Girl, 1200, "LO"):
+        elif approval_check(Girl, 1200, "LO"):
             ch_l "I don't know, you could pick a few days. . ."
             $ counter = 2
-        elif ApprovalCheck(Girl, 1000, "LO"):
+        elif approval_check(Girl, 1000, "LO"):
             ch_l "Maybe on weekends. . ."
             $ counter = 1
         else:
             ch_l "Nah, I got it covered."
             return
     elif Girl == JeanX:
-        if ApprovalCheck(Girl, 1500, "LO"):
+        if approval_check(Girl, 1500, "LO"):
             ch_j "Ok, I'm tired of having to pick outfits. . ."
             $ counter = 3
-        elif ApprovalCheck(Girl, 1200, "LO"):
+        elif approval_check(Girl, 1200, "LO"):
             ch_j "I guess you do have some taste. . ."
             $ counter = 2
-        elif ApprovalCheck(Girl, 1000, "LO"):
+        elif approval_check(Girl, 1000, "LO"):
             ch_j "I guess my weekends are free. . ."
             $ counter = 1
         else:
             ch_j "Huh? No."
             return
     elif Girl == StormX:
-        if ApprovalCheck(Girl, 1500, "LO"):
+        if approval_check(Girl, 1500, "LO"):
             ch_s "I'm willing to listen."
             $ counter = 3
-        elif ApprovalCheck(Girl, 1200, "LO"):
+        elif approval_check(Girl, 1200, "LO"):
             ch_s "I suppose you could choose a few days. . ."
             $ counter = 2
-        elif ApprovalCheck(Girl, 1000, "LO"):
+        elif approval_check(Girl, 1000, "LO"):
             ch_s "Perhaps when I'm not working. . ."
             $ counter = 1
         else:
             ch_s "I think I'd rather choose my own clothing."
             return
     elif Girl == JubesX:
-        if ApprovalCheck(Girl, 1500, "LO"):
+        if approval_check(Girl, 1500, "LO"):
             ch_v "What're you thinking?"
             $ counter = 3
-        elif ApprovalCheck(Girl, 1200, "LO"):
+        elif approval_check(Girl, 1200, "LO"):
             ch_v "You could help with a few days?"
             $ counter = 2
-        elif ApprovalCheck(Girl, 1000, "LO"):
+        elif approval_check(Girl, 1000, "LO"):
             ch_v "I don't know, weekends maybe?"
             $ counter = 1
         else:
@@ -3215,7 +3215,7 @@ label Private_Outfit(Girl=0):
         $ Girl.change_outfit(Changed=1)
     elif "no_comfy" in Girl.recent_history:
         pass
-    elif ApprovalCheck(Girl, 1200, "LI") and (2*Girl.inhibition) >= (Girl.love + Girl.obedience +100):
+    elif approval_check(Girl, 1200, "LI") and (2*Girl.inhibition) >= (Girl.love + Girl.obedience +100):
 
         call shift_focus (Girl)
         if Girl == RogueX:
@@ -3597,63 +3597,63 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
     elif not Check:
         pass
     elif Girl == RogueX:
-        if Count >= 10 and (ApprovalCheck(Girl, 1200, TabM=0) or ApprovalCheck(Girl, 500, "I", TabM=0)):
+        if Count >= 10 and (approval_check(Girl, 1200, TabM=0) or approval_check(Girl, 500, "I", TabM=0)):
             ch_r "This top is pretty sexy. . ."
         elif Count >= 10:
             ch_r "This top might be a bit daring to wear outside."
-        elif Count >= 5 and (ApprovalCheck(Girl, 2300, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
+        elif Count >= 5 and (approval_check(Girl, 2300, TabM=0) or approval_check(Girl, 800, "I", TabM=0)):
             ch_r "Not leaving much to the imagination. . ."
         elif Count >= 5:
             $ Girl.change_face("startled", 1)
             ch_r "I really think this is a bit scandalous to wear out. . ."
-        elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
+        elif (approval_check(Girl, 2700, TabM=0) or approval_check(Girl, 950, "I", TabM=0)):
             ch_r "Oooh, I'm getting turned on already. . ."
         else:
             $ Girl.change_face("bemused", 1)
             ch_r "This is just for in private, right. . ."
     elif Girl == KittyX:
-        if Count >= 10 and (ApprovalCheck(Girl, 1200, TabM=0) or ApprovalCheck(Girl, 500, "I", TabM=0)):
+        if Count >= 10 and (approval_check(Girl, 1200, TabM=0) or approval_check(Girl, 500, "I", TabM=0)):
             ch_k "Kinda hot top."
         elif Count >= 10:
             ch_k "I wouldn't[Girl.like]feel comfortable in this top."
-        elif Count >= 5 and (ApprovalCheck(Girl, 2300, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
+        elif Count >= 5 and (approval_check(Girl, 2300, TabM=0) or approval_check(Girl, 800, "I", TabM=0)):
             ch_k "This top is is[Girl.like]kinda breezy. . ."
         elif Count >= 5:
             $ Girl.change_face("startled", 1)
             ch_k "This top is[Girl.like]way too slutty."
-        elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
+        elif (approval_check(Girl, 2700, TabM=0) or approval_check(Girl, 950, "I", TabM=0)):
             ch_k "Is it hot in here? Whew. . ."
         else:
             $ Girl.change_face("bemused", 1)
             ch_k "I wouldn't wear this out, but maybe indoors."
     elif Girl == EmmaX:
         if Count >= 10:
-            if ApprovalCheck(Girl, 1200, TabM=0) or ApprovalCheck(Girl, 500, "I", TabM=0):
+            if approval_check(Girl, 1200, TabM=0) or approval_check(Girl, 500, "I", TabM=0):
                 ch_e "A bit daring. . ."
             else:
                 ch_e "I'm not sure about this top."
         elif Count >= 5:
-            if ApprovalCheck(Girl, 2300, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0):
+            if approval_check(Girl, 2300, TabM=0) or approval_check(Girl, 800, "I", TabM=0):
                 ch_e "I typically cover a {i}bit{/i} more than this."
             else:
                 $ Girl.change_face("startled", 1)
                 ch_e "This is a bit more cleavage than even I'm comforable with."
-        elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
+        elif (approval_check(Girl, 2700, TabM=0) or approval_check(Girl, 950, "I", TabM=0)):
             ch_e "Aren't my assets a bit. . . exposed here?"
         else:
             $ Girl.change_face("bemused", 1)
             ch_e "This is considerably more cleavage than even I'm comforable with."
     elif Girl == LauraX:
-        if Count >= 10 and (ApprovalCheck(Girl, 1200, TabM=0) or ApprovalCheck(Girl, 500, "I", TabM=0)):
+        if Count >= 10 and (approval_check(Girl, 1200, TabM=0) or approval_check(Girl, 500, "I", TabM=0)):
             ch_l "This top works."
         elif Count >= 10:
             ch_l "The_top's not really a good look."
-        elif Count >= 5 and (ApprovalCheck(Girl, 2300, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
+        elif Count >= 5 and (approval_check(Girl, 2300, TabM=0) or approval_check(Girl, 800, "I", TabM=0)):
             ch_l "I don't know, the_top's a little light."
         elif Count >= 5:
             $ Girl.change_face("startled", 1)
             ch_l "I can't really wear this top out."
-        elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
+        elif (approval_check(Girl, 2700, TabM=0) or approval_check(Girl, 950, "I", TabM=0)):
             ch_l ". . ."
         else:
             $ Girl.change_face("bemused", 1)
@@ -3668,7 +3668,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
 
 
-        elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
+        elif (approval_check(Girl, 2700, TabM=0) or approval_check(Girl, 950, "I", TabM=0)):
             ch_j ". . ."
         else:
             $ Girl.change_face("bemused", 1)
@@ -3682,22 +3682,22 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             else:
                 $ Girl.change_face("bemused", 1)
                 ch_s "I'm not sure Charles would approve of this top."
-        elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
+        elif (approval_check(Girl, 2700, TabM=0) or approval_check(Girl, 950, "I", TabM=0)):
             ch_s "Aren't my assets a bit. . . exposed here?"
         else:
             $ Girl.change_face("bemused", 1)
             ch_s "I'm not sure Charles would approve of this top."
     elif Girl == JubesX:
-        if Count >= 10 and (ApprovalCheck(Girl, 1200, TabM=0) or ApprovalCheck(Girl, 500, "I", TabM=0)):
+        if Count >= 10 and (approval_check(Girl, 1200, TabM=0) or approval_check(Girl, 500, "I", TabM=0)):
             ch_v "Yeah, the_top'll work. . ."
         elif Count >= 10:
             ch_v "I don't know about this top. . ."
-        elif Count >= 5 and (ApprovalCheck(Girl, 2300, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
+        elif Count >= 5 and (approval_check(Girl, 2300, TabM=0) or approval_check(Girl, 800, "I", TabM=0)):
             ch_v "I don't know, the_top's a little skimpy."
         elif Count >= 5:
             $ Girl.change_face("startled", 1)
             ch_v "I can't really wear this top out."
-        elif (ApprovalCheck(Girl, 2700, TabM=0) or ApprovalCheck(Girl, 950, "I", TabM=0)):
+        elif (approval_check(Girl, 2700, TabM=0) or approval_check(Girl, 950, "I", TabM=0)):
             ch_v "I don't know. . ."
         else:
             $ Girl.change_face("bemused", 1)
@@ -3759,16 +3759,16 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_r "The towel's an odd choice. . ."
             else:
                 ch_r "Kinda breezy across my nethers, [Girl.player_petname]. . ."
-            if not Girl.underwear and ApprovalCheck(Girl, 500, "I", TabM=0):
+            if not Girl.underwear and approval_check(Girl, 500, "I", TabM=0):
                 ch_r "I kinda like going commando."
             elif not Girl.underwear:
                 ch_r "Don't know about going commando though."
-        elif Count >= 10 and (ApprovalCheck(Girl, 2000, TabM=0) or ApprovalCheck(Girl, 700, "I", TabM=0)):
+        elif Count >= 10 and (approval_check(Girl, 2000, TabM=0) or approval_check(Girl, 700, "I", TabM=0)):
             ch_r "These don't really leave much to the imagination. . ."
         elif Count >= 10:
             $ Girl.change_face("angry", 1)
             ch_r "I'm warning you, I'm not running around in my panties. . ."
-        elif (ApprovalCheck(Girl, 2500, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
+        elif (approval_check(Girl, 2500, TabM=0) or approval_check(Girl, 800, "I", TabM=0)):
             ch_r "Hmm, Breezy. . ."
         else:
             ch_r "So long as we stay inside. . ."
@@ -3784,16 +3784,16 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_k "The towel's an odd choice. . ."
             else:
                 ch_k "This is kinda breezy."
-            if not Girl.underwear and ApprovalCheck(Girl, 500, "I", TabM=0):
+            if not Girl.underwear and approval_check(Girl, 500, "I", TabM=0):
                 ch_k "I like going without panties."
             elif not Girl.underwear:
                 ch_k "It's a little uncomfortable without panties."
-        elif Count >= 10 and (ApprovalCheck(Girl, 2000, TabM=0) or ApprovalCheck(Girl, 700, "I", TabM=0)):
+        elif Count >= 10 and (approval_check(Girl, 2000, TabM=0) or approval_check(Girl, 700, "I", TabM=0)):
             ch_k "I'm not sure about the coverage down here. . ."
         elif Count >= 10:
             $ Girl.change_face("angry", 1)
             ch_k "I'm barely covered down here. . ."
-        elif (ApprovalCheck(Girl, 2500, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
+        elif (approval_check(Girl, 2500, TabM=0) or approval_check(Girl, 800, "I", TabM=0)):
             ch_k "kinda chilly. . ."
         else:
             ch_k "if it's just[Girl.like]you and me. . ."
@@ -3810,17 +3810,17 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             else:
                 ch_e "I probably could wear something more downstairs, [Girl.player_petname]. . ."
             if not Girl.underwear:
-                if ApprovalCheck(Girl, 500, "I", TabM=0):
+                if approval_check(Girl, 500, "I", TabM=0):
                     ch_e "I do enjoy going without panties."
                 else:
                     ch_e "I don't know about going without panties in this situation."
         elif Count >= 10:
-            if ApprovalCheck(Girl, 2000, TabM=0) or ApprovalCheck(Girl, 700, "I", TabM=0):
+            if approval_check(Girl, 2000, TabM=0) or approval_check(Girl, 700, "I", TabM=0):
                 ch_e "I hope you don't expect me to wear this out. . ."
             else:
                 $ Girl.change_face("angry", 1)
                 ch_e "I don't know about wearing this outside. . ."
-        elif (ApprovalCheck(Girl, 2500, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
+        elif (approval_check(Girl, 2500, TabM=0) or approval_check(Girl, 800, "I", TabM=0)):
             ch_e "This really tests my limits."
         else:
             ch_e "I'll need to put something else on to leave the room though."
@@ -3836,16 +3836,16 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_l "The towel's an odd choice. . ."
             else:
                 ch_l "but there's a draft."
-            if not Girl.underwear and ApprovalCheck(Girl, 500, "I", TabM=0):
+            if not Girl.underwear and approval_check(Girl, 500, "I", TabM=0):
                 ch_l "Commando's cool."
             elif not Girl.underwear:
                 ch_l "I might accidentally flash some people like this though."
-        elif Count >= 10 and (ApprovalCheck(Girl, 2000, TabM=0) or ApprovalCheck(Girl, 700, "I", TabM=0)):
+        elif Count >= 10 and (approval_check(Girl, 2000, TabM=0) or approval_check(Girl, 700, "I", TabM=0)):
             ch_l "I don't think I'm fully covered. . ."
         elif Count >= 10:
             $ Girl.change_face("angry", 1)
             ch_l "I'm not covered like this. . ."
-        elif (ApprovalCheck(Girl, 2500, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
+        elif (approval_check(Girl, 2500, TabM=0) or approval_check(Girl, 800, "I", TabM=0)):
             ch_l "It's pretty minimal. . ."
         else:
             ch_l "I wouldn't show off my cooch either. . ."
@@ -3861,19 +3861,19 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_j "A towel though? . ."
             else:
                 ch_j "kinda exposed here. . ."
-            if not Girl.underwear and ApprovalCheck(Girl, 500, "I", TabM=0):
+            if not Girl.underwear and approval_check(Girl, 500, "I", TabM=0):
                 ch_j "I don't mind doing without the panties. . ."
             elif not Girl.underwear:
                 ch_j "I'd kinda need panties with this. . ."
 
 
         elif Count >= 10:
-            if (ApprovalCheck(Girl, 2000, TabM=0) or ApprovalCheck(Girl, 700, "I", TabM=0)):
+            if (approval_check(Girl, 2000, TabM=0) or approval_check(Girl, 700, "I", TabM=0)):
                 $ Girl.change_face("sly", 1)
             else:
                 $ Girl.change_face("angry", 1)
             ch_j "So you want my puss on display? . ."
-        elif (ApprovalCheck(Girl, 2500, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
+        elif (approval_check(Girl, 2500, TabM=0) or approval_check(Girl, 800, "I", TabM=0)):
             ch_j "This is basically \"nothing\". . ."
         else:
             ch_j "I'm not interested in showing off the goods. . ."
@@ -3889,14 +3889,14 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
         else:
             ch_s "A rather breezy ensemble, [Girl.player_petname]. . ."
         if not Girl.underwear:
-            if ApprovalCheck(Girl, 500, "I", TabM=0):
+            if approval_check(Girl, 500, "I", TabM=0):
                 ch_s "I do enjoy doing without panties."
             else:
                 ch_s "Certainly quite exposed without panties. . ."
         if Count >= 10 and StormX not in Rules:
             $ Girl.change_face("bemused", 1)
             ch_s "I don't know that Charles would let me roam the halls in such an exposed state."
-        elif StormX in Rules and (ApprovalCheck(Girl, 1200, TabM=0) or ApprovalCheck(Girl, 500, "I", TabM=0)):
+        elif StormX in Rules and (approval_check(Girl, 1200, TabM=0) or approval_check(Girl, 500, "I", TabM=0)):
             ch_s "This is quite the daring look you've put together."
         else:
             ch_s "I doubt Charles would let me roam the halls in such an exposed state."
@@ -3914,16 +3914,16 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_v "The towel's an odd choice. . ."
             else:
                 ch_v "but I don't know about this. . ."
-            if not Girl.underwear and ApprovalCheck(Girl, 500, "I", TabM=0):
+            if not Girl.underwear and approval_check(Girl, 500, "I", TabM=0):
                 ch_v "I guess we're not doing panties now?"
             elif not Girl.underwear:
                 ch_v "I don't think I'd want to go without panties. . ."
-        elif Count >= 10 and (ApprovalCheck(Girl, 2000, TabM=0) or ApprovalCheck(Girl, 700, "I", TabM=0)):
+        elif Count >= 10 and (approval_check(Girl, 2000, TabM=0) or approval_check(Girl, 700, "I", TabM=0)):
             ch_v "This is pretty skimpy. . ."
         elif Count >= 10:
             $ Girl.change_face("angry", 1)
             ch_v "This is pretty skimpy. . ."
-        elif (ApprovalCheck(Girl, 2500, TabM=0) or ApprovalCheck(Girl, 800, "I", TabM=0)):
+        elif (approval_check(Girl, 2500, TabM=0) or approval_check(Girl, 800, "I", TabM=0)):
             ch_v "Wow, this look is. . . a lot. . ."
         else:
             ch_v "I don't really go around showing the goods. . ."
@@ -3947,9 +3947,9 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             pass
         elif Girl == StormX and StormX in Rules:
             pass
-        elif Girl.PantiesNum() > 2 and (Girl.SeenPanties or ApprovalCheck(Girl, 900, TabM=0)):
+        elif Girl.PantiesNum() > 2 and (Girl.SeenPanties or approval_check(Girl, 900, TabM=0)):
             pass
-        elif Girl.SeenPussy or ApprovalCheck(Girl, 1200, TabM=0):
+        elif Girl.SeenPussy or approval_check(Girl, 1200, TabM=0):
             pass
         else:
             $ Agree = 0
@@ -3960,9 +3960,9 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             pass
         elif Girl.OverNum() > 2:
             pass
-        elif Girl.ChestNum() > 2 and (Girl.SeenChest or ApprovalCheck(Girl, 900, TabM=0)):
+        elif Girl.ChestNum() > 2 and (Girl.SeenChest or approval_check(Girl, 900, TabM=0)):
             pass
-        elif Girl.SeenChest or ApprovalCheck(Girl, 1200, TabM=0):
+        elif Girl.SeenChest or approval_check(Girl, 1200, TabM=0):
             pass
         else:
             $ Agree = 0
@@ -4048,7 +4048,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.change_face("smile")
                 ch_r "Yeah, I think I like this style, I'd wear this."
             elif Tempshame <= 15:
-                if ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0):
+                if approval_check(Girl, 1700, TabM=0, C = 0) or approval_check(Girl, 400, "I", TabM=0, C = 0):
                     ch_r "It's pretty skimpy, but I can make it work."
                 else:
                     $ Girl.change_face("bemused", 1)
@@ -4059,13 +4059,13 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.change_face("bemused", 1)
                 ch_r "Sure, I can swim in this. . ."
             elif Tempshame <= 25:
-                if ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0):
+                if approval_check(Girl, 2300, TabM=0, C = 0) or approval_check(Girl, 700, "I", TabM=0, C = 0):
                     ch_r "Kinky, but I can rock this."
                 else:
                     $ Girl.change_face("angry", 1)
                     ch_r "I'm definitely not going out in this."
                     $ Agree = 0
-            elif ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0):
+            elif approval_check(Girl, 2500, TabM=0, C = 0) or approval_check(Girl, 800, "I", TabM=0, C = 0):
                 $ Girl.change_face("bemused", 1)
                 ch_r "I can't believe it. . . but yeah."
             else:
@@ -4083,7 +4083,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Tempshame <= 5:
                 $ Girl.change_face("smile")
                 ch_k "Sure, it's a cute look!"
-            elif Tempshame <= 15 and (ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0)):
+            elif Tempshame <= 15 and (approval_check(Girl, 1700, TabM=0, C = 0) or approval_check(Girl, 400, "I", TabM=0, C = 0)):
                 ch_k "It's pretty hot, right?"
             elif Custom == 7:
 
@@ -4102,13 +4102,13 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
                 $ Girl.change_face("bemused", 1)
                 ch_k "This is a cute swimsuit. . ."
-            elif Tempshame <= 25 and (ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0)):
+            elif Tempshame <= 25 and (approval_check(Girl, 2300, TabM=0, C = 0) or approval_check(Girl, 700, "I", TabM=0, C = 0)):
                 ch_k "So sexy, but I can handle it."
             elif Tempshame <= 25:
                 $ Girl.change_face("angry", 1)
                 ch_k "{i}Way{/i} too sexy for outside."
                 $ Agree = 0
-            elif (ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0)):
+            elif (approval_check(Girl, 2500, TabM=0, C = 0) or approval_check(Girl, 800, "I", TabM=0, C = 0)):
                 $ Girl.change_face("bemused", 1)
                 ch_k "OMG, I can't believe I'm doing this."
             else:
@@ -4127,7 +4127,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Tempshame <= 5:
                 $ Girl.change_face("smile")
                 ch_e "Yes, it's a fine choice."
-            elif Tempshame <= 15 and (ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0)):
+            elif Tempshame <= 15 and (approval_check(Girl, 1700, TabM=0, C = 0) or approval_check(Girl, 400, "I", TabM=0, C = 0)):
                 ch_e "Rather daring, how could I resist?"
             elif Custom == 7:
 
@@ -4147,13 +4147,13 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Tempshame >= 15 and "public" not in Girl.history:
                 ch_e "I doubt I could get away with this in public, [Girl.player_petname]."
                 $ Agree = 0
-            elif Tempshame <= 25 and (ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0)):
+            elif Tempshame <= 25 and (approval_check(Girl, 2300, TabM=0, C = 0) or approval_check(Girl, 700, "I", TabM=0, C = 0)):
                 ch_e "This is particularly inappropriate. . . in the best ways."
             elif Tempshame <= 25:
                 $ Girl.change_face("angry", 1)
                 ch_e "I don't believe even I could pull off this look, [Girl.player_petname]."
                 $ Agree = 0
-            elif (ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0)):
+            elif (approval_check(Girl, 2500, TabM=0, C = 0) or approval_check(Girl, 800, "I", TabM=0, C = 0)):
                 $ Girl.change_face("bemused", 1)
                 ch_e "This look certainly pushes the boundaries."
             else:
@@ -4173,7 +4173,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Tempshame <= 5:
                 $ Girl.change_face("smile")
                 ch_l "I don't see why not."
-            elif Tempshame <= 15 and (ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0)):
+            elif Tempshame <= 15 and (approval_check(Girl, 1700, TabM=0, C = 0) or approval_check(Girl, 400, "I", TabM=0, C = 0)):
                 ch_l "It looks good, right?"
             elif Custom == 7:
 
@@ -4192,13 +4192,13 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
                 $ Girl.change_face("bemused", 1)
                 ch_l "Yeah, I can swim in this. . ."
-            elif Tempshame <= 25 and (ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0)):
+            elif Tempshame <= 25 and (approval_check(Girl, 2300, TabM=0, C = 0) or approval_check(Girl, 700, "I", TabM=0, C = 0)):
                 ch_l "I can handle this."
             elif Tempshame <= 25:
                 $ Girl.change_face("angry", 1)
                 ch_l "Nah, too slutty."
                 $ Agree = 0
-            elif (ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0)):
+            elif (approval_check(Girl, 2500, TabM=0, C = 0) or approval_check(Girl, 800, "I", TabM=0, C = 0)):
                 $ Girl.change_face("bemused", 1)
                 ch_l "Pretty daring, eh?"
             else:
@@ -4218,7 +4218,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Tempshame <= 5:
                 $ Girl.change_face("smile")
                 ch_j "Sure, whatever."
-            elif Tempshame <= 15 and (ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0)):
+            elif Tempshame <= 15 and (approval_check(Girl, 1700, TabM=0, C = 0) or approval_check(Girl, 400, "I", TabM=0, C = 0)):
                 ch_j "I almost have to. . ."
             elif Custom == 7:
 
@@ -4237,13 +4237,13 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
                 $ Girl.change_face("bemused", 1)
                 ch_j "Yeah, sure."
-            elif Tempshame <= 25 and (ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0)):
+            elif Tempshame <= 25 and (approval_check(Girl, 2300, TabM=0, C = 0) or approval_check(Girl, 700, "I", TabM=0, C = 0)):
                 ch_j "This'll turn some heads. . ."
             elif Tempshame <= 25:
                 $ Girl.change_face("angry", 1)
                 ch_j "I wouldn't want to break anyone. . ."
                 $ Agree = 0
-            elif (ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0)):
+            elif (approval_check(Girl, 2500, TabM=0, C = 0) or approval_check(Girl, 800, "I", TabM=0, C = 0)):
                 $ Girl.change_face("bemused", 1)
                 ch_j "Kinky, but sure."
             else:
@@ -4276,16 +4276,16 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
                 $ Girl.change_face("bemused", 1)
                 ch_s "I suppose I could swim well like this. . ."
-            elif Tempshame <= 20 and (ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0)):
+            elif Tempshame <= 20 and (approval_check(Girl, 1700, TabM=0, C = 0) or approval_check(Girl, 400, "I", TabM=0, C = 0)):
                 ch_s "This certainly does push the limits of good taste. . ."
-            elif Tempshame <= 25 and (ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0)):
+            elif Tempshame <= 25 and (approval_check(Girl, 2300, TabM=0, C = 0) or approval_check(Girl, 700, "I", TabM=0, C = 0)):
                 $ Girl.change_face("bemused", 1)
                 ch_s "I doubt Charles would approve, but so what?"
             elif Tempshame <= 25:
                 $ Girl.change_face("bemused", 1)
                 ch_s "I'm afraid that Charles would never approve."
                 $ Agree = 0
-            elif (ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0)):
+            elif (approval_check(Girl, 2500, TabM=0, C = 0) or approval_check(Girl, 800, "I", TabM=0, C = 0)):
                 $ Girl.change_face("bemused", 1)
                 ch_s "I doubt Charles would approve, but so what?"
             else:
@@ -4305,7 +4305,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Tempshame <= 5:
                 $ Girl.change_face("smile")
                 ch_v "I guess?"
-            elif Tempshame <= 15 and (ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0)):
+            elif Tempshame <= 15 and (approval_check(Girl, 1700, TabM=0, C = 0) or approval_check(Girl, 400, "I", TabM=0, C = 0)):
                 ch_v "It looks totally hot, right?"
             elif Custom == 7:
 
@@ -4324,13 +4324,13 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
                 $ Girl.change_face("bemused", 1)
                 ch_v "I could swim in this. . ."
-            elif Tempshame <= 25 and (ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0)):
+            elif Tempshame <= 25 and (approval_check(Girl, 2300, TabM=0, C = 0) or approval_check(Girl, 700, "I", TabM=0, C = 0)):
                 ch_v "I guess this is fine. . ."
             elif Tempshame <= 25:
                 $ Girl.change_face("angry", 1)
                 ch_v "I really couldn't wear this out."
                 $ Agree = 0
-            elif (ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0)):
+            elif (approval_check(Girl, 2500, TabM=0, C = 0) or approval_check(Girl, 800, "I", TabM=0, C = 0)):
                 $ Girl.change_face("bemused", 1)
                 ch_v "It's pretty hot, right?"
             else:
@@ -4391,19 +4391,19 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
     elif Girl.top == "towel" and Girl.location == "bg_showerroom":
 
         pass
-    elif Tempshame <= 15 and (ApprovalCheck(Girl, 1500) or ApprovalCheck(Girl, 500, "I")):
+    elif Tempshame <= 15 and (approval_check(Girl, 1500) or approval_check(Girl, 500, "I")):
 
         pass
     elif Tempshame <= 20 and (Girl.location == "bg_dangerroom" or Girl.location == "bg_pool"):
 
         pass
-    elif Tempshame <= 20 and (ApprovalCheck(Girl, 1800) or ApprovalCheck(Girl, 650, "I")):
+    elif Tempshame <= 20 and (approval_check(Girl, 1800) or approval_check(Girl, 650, "I")):
 
         pass
-    elif Tempshame <= 25 and (ApprovalCheck(Girl, 2000) or ApprovalCheck(Girl, 700, "I")):
+    elif Tempshame <= 25 and (approval_check(Girl, 2000) or approval_check(Girl, 700, "I")):
 
         pass
-    elif (ApprovalCheck(Girl, 2500) or ApprovalCheck(Girl, 800, "I")):
+    elif (approval_check(Girl, 2500) or approval_check(Girl, 800, "I")):
 
         pass
     elif Girl.location == "bg_dangerroom" and Girl.Outfit == "gym":
@@ -4561,7 +4561,7 @@ label QuickOutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, HolderO
         pass
     elif Tempshame <= 5:
         pass
-    elif Tempshame <= 15 and (ApprovalCheck(Girl, 1700, TabM=0, C = 0) or ApprovalCheck(Girl, 400, "I", TabM=0, C = 0)):
+    elif Tempshame <= 15 and (approval_check(Girl, 1700, TabM=0, C = 0) or approval_check(Girl, 400, "I", TabM=0, C = 0)):
         pass
     elif Custom == 10 and Tempshame <= 20:
 
@@ -4571,11 +4571,11 @@ label QuickOutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, HolderO
     elif Girl == StormX and StormX in Rules:
         pass
     elif Tempshame <= 25:
-        if ApprovalCheck(Girl, 2300, TabM=0, C = 0) or ApprovalCheck(Girl, 700, "I", TabM=0, C = 0):
+        if approval_check(Girl, 2300, TabM=0, C = 0) or approval_check(Girl, 700, "I", TabM=0, C = 0):
             pass
         else:
             $ Agree = 0
-    elif (ApprovalCheck(Girl, 2500, TabM=0, C = 0) or ApprovalCheck(Girl, 800, "I", TabM=0, C = 0)):
+    elif (approval_check(Girl, 2500, TabM=0, C = 0) or approval_check(Girl, 800, "I", TabM=0, C = 0)):
         pass
     else:
         $ Agree = 0
@@ -4769,7 +4769,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
             ch_v "The top stays on. . ."
         return
 
-    if Girl.SeenChest and ApprovalCheck(Girl, 500) and not Taboo:
+    if Girl.SeenChest and approval_check(Girl, 500) and not Taboo:
 
         $ approval_bonus += 20
     if "exhibitionist" in Girl.Traits:
@@ -4809,11 +4809,11 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                 ch_p "This might be easier without your [Girl.bra] on."
 
 
-    $ Approval = ApprovalCheck(Girl, 1100, TabM = 4)
+    $ Approval = approval_check(Girl, 1100, TabM = 4)
 
     if action_context == "auto" and  (Girl.top or Girl.bra or (Girl == JubesX and Girl.accessory)) and not Girl.Uptop:
         $ Line = 0
-        if ApprovalCheck(Girl, 1250, TabM = 1) or (Girl.SeenChest and ApprovalCheck(Girl, 500) and not Taboo):
+        if approval_check(Girl, 1250, TabM = 1) or (Girl.SeenChest and approval_check(Girl, 500) and not Taboo):
 
             $ Girl.change_stat("inhibition", 70, 1)
             $ Girl.Uptop = 1
@@ -4836,7 +4836,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
             if Taboo:
                 $ Girl.change_stat("inhibition", 90, (int(Taboo/20)))
             call expression Girl.Tag + "_First_Topless" pass (1)
-        elif Girl.top and Girl.bra and ApprovalCheck(Girl, 800, TabM = 1):
+        elif Girl.top and Girl.bra and approval_check(Girl, 800, TabM = 1):
 
             $ Girl.change_stat("inhibition", 40, 1)
             $ Line = Girl.top
@@ -5201,7 +5201,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                 ch_v "Sure, I guess. . ."
                 $ Girl.accessory = 0
                 "[Girl.name] shrugs off her Jacket."
-            elif ApprovalCheck(Girl, 800, TabM = 2) and Girl.bra:
+            elif approval_check(Girl, 800, TabM = 2) and Girl.bra:
                 $ Girl.change_face("sexy")
                 ch_v "Well, I guess. . ."
                 $ Girl.change_face("bemused", 1)
@@ -5222,7 +5222,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                         ch_v "Whew, thanks. . ."
                     "That doesn't bother me any.":
 
-                        if ApprovalCheck(Girl, 500, "I", TabM=3) or ApprovalCheck(Girl, 1000, "LI", TabM=3):
+                        if approval_check(Girl, 500, "I", TabM=3) or approval_check(Girl, 1000, "LI", TabM=3):
                             $ Girl.change_face("bemused", 1)
                             ch_v "Whoa, spicy. . ."
                             $ Girl.change_stat("obedience", 20, 2)
@@ -5247,7 +5247,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
 
         "How about just the [Girl.top]?" if Girl.top:
 
-            if ApprovalCheck(Girl, 800, TabM = 2) and Girl.bra:
+            if approval_check(Girl, 800, TabM = 2) and Girl.bra:
                 $ Girl.change_face("sexy")
                 if Girl == RogueX:
                     ch_r "Well, that's no big deal I guess. . ."
@@ -5317,7 +5317,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                             ch_v "Whew, thanks. . ."
                     "That doesn't bother me any.":
 
-                        if ApprovalCheck(Girl, 500, "I", TabM=3) or ApprovalCheck(Girl, 1000, "LI", TabM=3):
+                        if approval_check(Girl, 500, "I", TabM=3) or approval_check(Girl, 1000, "LI", TabM=3):
                             $ Girl.change_face("bemused", 1)
                             if Girl == RogueX:
                                 ch_r "Ooh, at least you know what you like"
@@ -5366,7 +5366,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
 
 
 
-            if Approval and ApprovalCheck(Girl, 600, "L", TabM=1):
+            if Approval and approval_check(Girl, 600, "L", TabM=1):
                 $ Girl.change_stat("obedience", 40, 2)
                 $ Girl.change_face("sexy")
                 if Girl == RogueX:
@@ -5552,7 +5552,7 @@ label ToplessorNothing(Girl=0):
     call shift_focus (Girl)
 
     $ Girl.change_face("angry")
-    if ApprovalCheck(Girl, 800, "OI", TabM = 4) and ApprovalCheck(Girl, 400, "O", TabM = 3):
+    if approval_check(Girl, 800, "OI", TabM = 4) and approval_check(Girl, 400, "O", TabM = 3):
         $ Girl.change_stat("love", 20, -2, 1)
         $ Girl.change_stat("love", 70, -5, 1)
         $ Girl.change_stat("inhibition", 60, 3)
@@ -5682,11 +5682,11 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
         return
 
 
-    if Girl.SeenPussy and ApprovalCheck(Girl, 700):
+    if Girl.SeenPussy and approval_check(Girl, 700):
         $ approval_bonus += 20
     elif not Girl.underwear:
         $ approval_bonus -= 20
-    elif Girl.SeenPanties and ApprovalCheck(Girl, 500):
+    elif Girl.SeenPanties and approval_check(Girl, 500):
         $ approval_bonus += 5
     if Intro == "dildo":
         $ approval_bonus += 20
@@ -5725,7 +5725,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
             elif Girl.underwear and not Girl.underwearDown:
                 ch_p "This might be easier without your [Girl.underwear] on."
 
-    $ Approval = ApprovalCheck(Girl, 1200, TabM = 5)
+    $ Approval = approval_check(Girl, 1200, TabM = 5)
 
     if action_context == "auto":
         $ counter = 0
@@ -6088,7 +6088,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                     elif Girl == JubesX:
                         ch_v "No."
                 else:
-                    if Approval and ApprovalCheck(Girl, 600, "L", TabM=1):
+                    if Approval and approval_check(Girl, 600, "L", TabM=1):
                         $ Girl.change_face("sexy", 1)
                         $ D20 = renpy.random.randint(1, 3)
                         $ Approval += 1 if D20 == 3 else 0
@@ -6125,7 +6125,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                 pass
             "No, lose 'em.":
 
-                if (Approval and Girl.obedience >= 250) or (ApprovalCheck(Girl, 850, "OI", TabM = 5) and ApprovalCheck(Girl, 400, "O")):
+                if (Approval and Girl.obedience >= 250) or (approval_check(Girl, 850, "OI", TabM = 5) and approval_check(Girl, 400, "O")):
                     $ Girl.change_stat("love", 20, -1, 1)
                     $ Girl.change_stat("love", 70, -5, 1)
                     $ Girl.change_stat("obedience", 50, 4)
@@ -6150,7 +6150,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                     call Bottoms_Off_Legs (Girl)
                 else:
                     $ Girl.change_stat("love", 200, -10)
-                    if ApprovalCheck(Girl, 400, "O"):
+                    if approval_check(Girl, 400, "O"):
                         if Girl == RogueX:
                             ch_r "I. . . I really can't."
                         elif Girl == KittyX:
@@ -6197,9 +6197,9 @@ label Bottoms_Off_Legs(Girl=0):
 
     if Girl.Forced:
         $ Girl.change_face("sad", 1)
-    elif ApprovalCheck(Girl, 1100, "OI", TabM = 3):
+    elif approval_check(Girl, 1100, "OI", TabM = 3):
         $ Girl.change_face("sly")
-    elif ApprovalCheck(Girl, 1400, TabM = 3):
+    elif approval_check(Girl, 1400, TabM = 3):
         $ Girl.change_face("sexy", 1)
     else:
         $ Girl.change_face("bemused", 1)
@@ -6479,7 +6479,7 @@ label Bottoms_Off_Legs(Girl=0):
                     $ Girl.Inventory.append(Girl.hose)
                 $ Girl.AddWord(1,"ripped","ripped")
                 "You tear holes in her [Line]."
-                if not ApprovalCheck(Girl, 1200, TabM=0):
+                if not approval_check(Girl, 1200, TabM=0):
                     $ Girl.change_face("angry", 1,Eyes="down")
                     if Girl == RogueX:
                         ch_r "Dammit, [Girl.player_petname], those are gettin expensive!"
@@ -6558,7 +6558,7 @@ label NoPantiesOn(Girl=0):
     menu:
         extend ""
         "Could you do it anyway?":
-            if ApprovalCheck(Girl, 1000, "LI", TabM=1):
+            if approval_check(Girl, 1000, "LI", TabM=1):
                 if Girl == RogueX:
                     ch_r "Well, if you're gonna ask so nicely. . . "
                 elif Girl == KittyX:
@@ -6591,7 +6591,7 @@ label NoPantiesOn(Girl=0):
                 call Bottoms_Off_Refused (Girl)
                 $ renpy.pop_call()
         "Don't care, lose'em.":
-            if ApprovalCheck(Girl, 800, "OI", TabM=1):
+            if approval_check(Girl, 800, "OI", TabM=1):
                 if Girl == RogueX:
                     ch_r "Fine, whatever."
                 elif Girl == KittyX:
@@ -6844,7 +6844,7 @@ label Rogue_First_Topless(Silent=0, TempLine=0):
                         $ RogueX.daily_history.append("angry")
     else:
         $ RogueX.AddWord(1,0,0,0,"topless")
-        if ApprovalCheck(RogueX, 800) and not RogueX.Forced:
+        if approval_check(RogueX, 800) and not RogueX.Forced:
             $ RogueX.change_stat("inhibition", 70, 5)
             $ RogueX.change_stat("obedience", 70, 5)
         else:
@@ -6890,7 +6890,7 @@ label Rogue_First_Bottomless(Silent=0):
                 $ RogueX.change_stat("obedience", 70, 30)
     else:
         $ RogueX.AddWord(1,0,0,0,"bottomless")
-        if ApprovalCheck(RogueX, 500):
+        if approval_check(RogueX, 500):
             $ RogueX.change_stat("inhibition", 60, 30)
         else:
             $ RogueX.change_stat("love", 90, -5)
@@ -6999,7 +6999,7 @@ label Kitty_First_Topless(Silent=0, TempLine=0):
 
 
         $ KittyX.AddWord(1,0,0,0,"topless")
-        if ApprovalCheck(KittyX, 800) and not KittyX.Forced:
+        if approval_check(KittyX, 800) and not KittyX.Forced:
             $ KittyX.change_stat("inhibition", 70, 5)
             $ KittyX.change_stat("obedience", 70, 10)
         else:
@@ -7045,7 +7045,7 @@ label Kitty_First_Bottomless(Silent=0):
             "Pretty messy down there." if KittyX.pubes:
                 $ KittyX.change_face("surprised",2)
                 ch_k "!"
-                if ApprovalCheck(KittyX, 800, "LO"):
+                if approval_check(KittyX, 800, "LO"):
                     $ KittyX.change_face("bemused",1)
                     $ KittyX.change_stat("obedience", 50, 30)
                     $ KittyX.change_stat("inhibition", 60, 25)
@@ -7066,7 +7066,7 @@ label Kitty_First_Bottomless(Silent=0):
                 $ KittyX.change_stat("obedience", 70, 35)
     else:
         $ KittyX.AddWord(1,0,0,0,"bottomless")
-        if ApprovalCheck(KittyX, 800) and not KittyX.Forced:
+        if approval_check(KittyX, 800) and not KittyX.Forced:
             $ KittyX.change_stat("inhibition", 60, 15)
             $ KittyX.change_stat("obedience", 70, 10)
         else:
@@ -7202,7 +7202,7 @@ label Emma_First_Topless(Silent=0, TempLine=0):
 
 
         $ EmmaX.AddWord(1,0,0,0,"topless")
-        if ApprovalCheck(EmmaX, 800) and not EmmaX.Forced:
+        if approval_check(EmmaX, 800) and not EmmaX.Forced:
             $ EmmaX.change_stat("inhibition", 70, 5)
             $ EmmaX.change_stat("obedience", 70, 5)
         else:
@@ -7243,12 +7243,12 @@ label Emma_First_Bottomless(Silent=0):
             "I see you keep it smooth down there." if not EmmaX.pubes:
                 $ EmmaX.change_face("confused",1)
                 ch_e "Yes?"
-                if ApprovalCheck(EmmaX, 700, "LO"):
+                if approval_check(EmmaX, 700, "LO"):
                     $ EmmaX.change_face("bemused")
                     menu:
                         ch_e "Do you prefer more fuzz?"
                         "Yes":
-                            if ApprovalCheck(EmmaX, 900, "LO"):
+                            if approval_check(EmmaX, 900, "LO"):
                                 $ EmmaX.change_stat("obedience", 50, 30)
                                 $ EmmaX.change_stat("inhibition", 60, 25)
                                 ch_e "I suppose I could let it go. . ."
@@ -7260,7 +7260,7 @@ label Emma_First_Bottomless(Silent=0):
                             $ EmmaX.change_stat("love", 80, 10)
                             ch_e "I'm glad you agree."
                         "No, leave it that way.":
-                            if ApprovalCheck(EmmaX, 900, "LO"):
+                            if approval_check(EmmaX, 900, "LO"):
                                 $ EmmaX.change_face("sly")
                                 $ EmmaX.change_stat("love", 80, 10)
                             else:
@@ -7279,7 +7279,7 @@ label Emma_First_Bottomless(Silent=0):
                 $ EmmaX.change_stat("obedience", 50, 25)
                 $ EmmaX.change_stat("inhibition", 70, -30)
                 $ EmmaX.change_face("angry",2)
-                if not EmmaX.Forced and not ApprovalCheck(EmmaX, 900, "LO"):
+                if not EmmaX.Forced and not approval_check(EmmaX, 900, "LO"):
                     $ EmmaX.recent_history.append("angry")
                     $ EmmaX.daily_history.append("angry")
                     $ EmmaX.change_stat("obedience", 70, 25)
@@ -7287,7 +7287,7 @@ label Emma_First_Bottomless(Silent=0):
     else:
 
         $ EmmaX.AddWord(1,0,0,0,"bottomless")
-        if ApprovalCheck(EmmaX, 800) and not EmmaX.Forced:
+        if approval_check(EmmaX, 800) and not EmmaX.Forced:
             $ EmmaX.change_stat("inhibition", 60, 5)
             $ EmmaX.change_stat("obedience", 70, 10)
         else:
@@ -7404,7 +7404,7 @@ label Laura_First_Topless(Silent=0, TempLine=0):
 
 
         $ LauraX.AddWord(1,0,0,0,"topless")
-        if ApprovalCheck(LauraX, 800) and not LauraX.Forced:
+        if approval_check(LauraX, 800) and not LauraX.Forced:
             $ LauraX.change_stat("inhibition", 70, 5)
             $ LauraX.change_stat("obedience", 70, 10)
         else:
@@ -7449,12 +7449,12 @@ label Laura_First_Bottomless(Silent=0):
             "I see you keep it natural down there." if LauraX.pubes:
                 $ LauraX.change_face("confused",1)
                 ch_l "Well. . . yeah."
-                if ApprovalCheck(LauraX, 700, "LO"):
+                if approval_check(LauraX, 700, "LO"):
                     $ LauraX.change_face("bemused")
                     menu:
                         ch_l "What, am I supposed to shave it?"
                         "Yes":
-                            if ApprovalCheck(LauraX, 900, "LO"):
+                            if approval_check(LauraX, 900, "LO"):
                                 $ LauraX.change_stat("obedience", 50, 30)
                                 $ LauraX.change_stat("inhibition", 60, 25)
                                 ch_l "I guess I could. . ."
@@ -7467,7 +7467,7 @@ label Laura_First_Bottomless(Silent=0):
                             $ LauraX.change_stat("love", 80, 10)
                             ch_l "Yeah, I mean, shaving would be a lot of work."
                         "No, leave it that way.":
-                            if ApprovalCheck(LauraX, 900, "LO"):
+                            if approval_check(LauraX, 900, "LO"):
                                 $ LauraX.change_face("sly")
                                 $ LauraX.change_stat("love", 80, 10)
                             else:
@@ -7486,14 +7486,14 @@ label Laura_First_Bottomless(Silent=0):
                 $ LauraX.change_stat("obedience", 50, 25)
                 $ LauraX.change_stat("inhibition", 70, -30)
                 $ LauraX.change_face("angry",2)
-                if not LauraX.Forced and not ApprovalCheck(LauraX, 900, "LO"):
+                if not LauraX.Forced and not approval_check(LauraX, 900, "LO"):
                     $ LauraX.recent_history.append("angry")
                     $ LauraX.daily_history.append("angry")
                     $ LauraX.change_stat("obedience", 70, 25)
                 ch_l "I'll make you a mess. . ."
     else:
         $ LauraX.AddWord(1,0,0,0,"bottomless")
-        if ApprovalCheck(LauraX, 800) and not LauraX.Forced:
+        if approval_check(LauraX, 800) and not LauraX.Forced:
             $ LauraX.change_stat("inhibition", 60, 5)
             $ LauraX.change_stat("obedience", 70, 10)
         else:
@@ -7628,7 +7628,7 @@ label Jean_First_Topless(Silent=0, TempLine=0):
     else:
 
 
-        if ApprovalCheck(JeanX, 800) and not JeanX.Forced:
+        if approval_check(JeanX, 800) and not JeanX.Forced:
             $ JeanX.change_stat("love", 70, 10)
             $ JeanX.change_stat("obedience", 70, 25)
             $ JeanX.change_stat("inhibition", 70, 15)
@@ -7672,12 +7672,12 @@ label Jean_First_Bottomless(Silent=0):
             "I see you got a fire crotch down there." if JeanX.pubes:
                 $ JeanX.change_face("confused",1)
                 ch_j "Well. . . yeah."
-                if ApprovalCheck(JeanX, 700, "LO"):
+                if approval_check(JeanX, 700, "LO"):
                     $ JeanX.change_face("bemused")
                     menu:
                         ch_j "Do you prefer it smooth?"
                         "Yes":
-                            if ApprovalCheck(JeanX, 900, "LO"):
+                            if approval_check(JeanX, 900, "LO"):
                                 $ JeanX.change_stat("obedience", 90, 30)
                                 $ JeanX.change_stat("inhibition", 200, 25)
                                 ch_j "Hmm, I guess. . ."
@@ -7689,7 +7689,7 @@ label Jean_First_Bottomless(Silent=0):
                             $ JeanX.change_stat("love", 80, 10)
                             ch_j "Of course it is."
                         "No, leave it that way.":
-                            if ApprovalCheck(JeanX, 900, "LO"):
+                            if approval_check(JeanX, 900, "LO"):
                                 $ JeanX.change_face("sly")
                                 $ JeanX.change_stat("love", 80, 10)
                             else:
@@ -7708,7 +7708,7 @@ label Jean_First_Bottomless(Silent=0):
                 $ JeanX.change_stat("obedience", 90, 25)
                 $ JeanX.change_stat("inhibition", 200, -30)
                 $ JeanX.change_face("angry",2)
-                if not JeanX.Forced and not ApprovalCheck(JeanX, 900, "LO"):
+                if not JeanX.Forced and not approval_check(JeanX, 900, "LO"):
                     $ JeanX.recent_history.append("angry")
                     $ JeanX.daily_history.append("angry")
                     $ JeanX.change_stat("obedience", 90, 25)
@@ -7718,14 +7718,14 @@ label Jean_First_Bottomless(Silent=0):
                 $ JeanX.change_stat("obedience", 90, 25)
                 $ JeanX.change_stat("inhibition", 200, -30)
                 $ JeanX.change_face("angry",2)
-                if not JeanX.Forced and not ApprovalCheck(JeanX, 900, "LO"):
+                if not JeanX.Forced and not approval_check(JeanX, 900, "LO"):
                     $ JeanX.recent_history.append("angry")
                     $ JeanX.daily_history.append("angry")
                     $ JeanX.change_stat("obedience", 90, 25)
                 ch_j "Oh, so it's not saggy like [EmmaX.name]'s?"
     else:
         $ JeanX.AddWord(1,0,0,0,"bottomless")
-        if ApprovalCheck(JeanX, 800) and not JeanX.Forced:
+        if approval_check(JeanX, 800) and not JeanX.Forced:
             $ JeanX.change_stat("inhibition", 60, 5)
             $ JeanX.change_stat("obedience", 90, 10)
         else:
@@ -7874,7 +7874,7 @@ label Jubes_First_Topless(Silent=0, TempLine=0):
 
 
         $ JubesX.AddWord(1,0,0,0,"topless")
-        if ApprovalCheck(JubesX, 800) and not JubesX.Forced:
+        if approval_check(JubesX, 800) and not JubesX.Forced:
             $ JubesX.change_stat("inhibition", 70, 5)
             $ JubesX.change_stat("obedience", 70, 10)
         else:
@@ -7920,12 +7920,12 @@ label Jubes_First_Bottomless(Silent=0):
             "I see you keep it natural down there." if JubesX.pubes:
                 $ JubesX.change_face("confused",2)
                 ch_v "Well. . . yeah."
-                if ApprovalCheck(JubesX, 700, "LO"):
+                if approval_check(JubesX, 700, "LO"):
                     $ JubesX.change_face("bemused",1)
                     menu:
                         ch_v "Did you. . . prefer it shaved?"
                         "Yes":
-                            if ApprovalCheck(JubesX, 900, "LO"):
+                            if approval_check(JubesX, 900, "LO"):
                                 $ JubesX.change_stat("obedience", 50, 30)
                                 $ JubesX.change_stat("inhibition", 60, 25)
                                 ch_v "I guess I could. . ."
@@ -7936,11 +7936,11 @@ label Jubes_First_Bottomless(Silent=0):
                         "Up to you, I guess.":
                             $ JubesX.change_stat("love", 80, 10)
                             ch_v "Well, yeah, right? Of course."
-                            if ApprovalCheck(JubesX, 900, "LO"):
+                            if approval_check(JubesX, 900, "LO"):
                                 $ JubesX.change_stat("inhibition", 60, 10)
                                 $ JubesX.Todo.append("pubes")
                         "No, leave it that way.":
-                            if ApprovalCheck(JubesX, 900, "LO"):
+                            if approval_check(JubesX, 900, "LO"):
                                 $ JubesX.change_face("sly")
                                 $ JubesX.change_stat("love", 80, 10)
                             else:
@@ -7959,14 +7959,14 @@ label Jubes_First_Bottomless(Silent=0):
                 $ JubesX.change_stat("obedience", 50, 25)
                 $ JubesX.change_stat("inhibition", 70, -30)
                 $ JubesX.change_face("angry",2)
-                if not JubesX.Forced and not ApprovalCheck(JubesX, 900, "LO"):
+                if not JubesX.Forced and not approval_check(JubesX, 900, "LO"):
                     $ JubesX.recent_history.append("angry")
                     $ JubesX.daily_history.append("angry")
                     $ JubesX.change_stat("obedience", 70, 25)
                 ch_v "Oh, them's fighting words. . ."
     else:
         $ JubesX.AddWord(1,0,0,0,"bottomless")
-        if ApprovalCheck(JubesX, 800) and not JubesX.Forced:
+        if approval_check(JubesX, 800) and not JubesX.Forced:
             $ JubesX.change_stat("inhibition", 60, 5)
             $ JubesX.change_stat("obedience", 70, 10)
         else:

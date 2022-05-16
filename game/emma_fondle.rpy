@@ -48,7 +48,7 @@ label Emma_Fondle_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle breasts" in EmmaX.recent_history else 0
 
-    $ Approval = ApprovalCheck(EmmaX, 950, TabM = 3)
+    $ Approval = approval_check(EmmaX, 950, TabM = 3)
 
     if action_context == "auto":
         if Approval:
@@ -153,7 +153,7 @@ label Emma_Fondle_Breasts:
             "[[Grab her chest anyway]":
 
 
-                $ Approval = ApprovalCheck(EmmaX, 350, "OI", TabM = 3)
+                $ Approval = approval_check(EmmaX, 350, "OI", TabM = 3)
                 if Approval > 1 or (Approval and EmmaX.Forced):
                     $ EmmaX.change_face("sad")
                     $ EmmaX.change_stat("love", 70, -5, 1)
@@ -220,7 +220,7 @@ label Emma_FB_Prep:
         $ action_context = 0
         if (EmmaX.top or EmmaX.bra) and not EmmaX.Uptop:
 
-            if ApprovalCheck(EmmaX, 1250, TabM = 1) or (EmmaX.SeenChest and ApprovalCheck(EmmaX, 500) and not Taboo):
+            if approval_check(EmmaX, 1250, TabM = 1) or (EmmaX.SeenChest and approval_check(EmmaX, 500) and not Taboo):
                 $ EmmaX.Uptop = 1
                 $ Line = EmmaX.top if EmmaX.top else EmmaX.bra
                 "With a devilish grin, [EmmaX.name] pulls her [Line] up over her breasts."
@@ -470,14 +470,14 @@ label Emma_FB_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if EmmaX.SEXP >= 100 or ApprovalCheck(EmmaX, 1200, "LO"):
+        if EmmaX.SEXP >= 100 or approval_check(EmmaX, 1200, "LO"):
             pass
         elif counter == (5 + EmmaX.action_counter["fondle_breasts"]):
             $ EmmaX.brows = "confused"
             ch_e "They really are magnificent, aren't they?"
         elif EmmaX.lust >= 85:
             pass
-        elif counter == (15 + EmmaX.action_counter["fondle_breasts"]) and EmmaX.SEXP >= 15 and not ApprovalCheck(EmmaX, 1500):
+        elif counter == (15 + EmmaX.action_counter["fondle_breasts"]) and EmmaX.SEXP >= 15 and not approval_check(EmmaX, 1500):
             $ EmmaX.brows = "confused"
             menu:
                 ch_e "Perhaps we could try something else, [EmmaX.player_petname]?"
@@ -489,7 +489,7 @@ label Emma_FB_Cycle:
                     $ action_context = "shift"
                     jump Emma_FB_After
                 "No, this is fun.":
-                    if ApprovalCheck(EmmaX, 1200) or ApprovalCheck(EmmaX, 500, "O"):
+                    if approval_check(EmmaX, 1200) or approval_check(EmmaX, 500, "O"):
                         $ EmmaX.change_stat("love", 200, -5)
                         $ EmmaX.change_stat("obedience", 50, 3)
                         $ EmmaX.change_stat("obedience", 80, 2)
@@ -589,7 +589,7 @@ label Emma_Suck_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_suck breasts" in EmmaX.recent_history else 0
 
-    $ Approval = ApprovalCheck(EmmaX, 1050, TabM = 4)
+    $ Approval = approval_check(EmmaX, 1050, TabM = 4)
 
     if action_context == "auto":
         if Approval:
@@ -680,7 +680,7 @@ label Emma_Suck_Breasts:
                     ch_e "This wasn't a \"tone\" issue."
             "[[Start sucking anyway]":
 
-                $ Approval = ApprovalCheck(EmmaX, 450, "OI", TabM = 3)
+                $ Approval = approval_check(EmmaX, 450, "OI", TabM = 3)
                 if Approval > 1 or (Approval and EmmaX.Forced):
                     $ EmmaX.change_face("sad")
                     $ EmmaX.change_stat("love", 70, -5, 1)
@@ -743,7 +743,7 @@ label Emma_SB_Prep:
         $ action_context = 0
         if (EmmaX.top or EmmaX.bra) and not EmmaX.Uptop:
 
-            if ApprovalCheck(EmmaX, 1250, TabM = 1) or (EmmaX.SeenChest and ApprovalCheck(EmmaX, 500) and not Taboo):
+            if approval_check(EmmaX, 1250, TabM = 1) or (EmmaX.SeenChest and approval_check(EmmaX, 500) and not Taboo):
                 $ EmmaX.Uptop = 1
                 $ Line = EmmaX.top if EmmaX.top else EmmaX.bra
                 "With a devilish grin, [EmmaX.name] pulls her [Line] up over her breasts."
@@ -988,14 +988,14 @@ label Emma_SB_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if EmmaX.SEXP >= 100 or ApprovalCheck(EmmaX, 1200, "LO"):
+        if EmmaX.SEXP >= 100 or approval_check(EmmaX, 1200, "LO"):
             pass
         elif counter == (5 + EmmaX.action_counter["suck_breasts"]):
             $ EmmaX.brows = "sly"
             ch_e "Lovely, aren't they?"
         elif EmmaX.lust >= 85:
             pass
-        elif counter == (15 + EmmaX.action_counter["suck_breasts"]) and EmmaX.SEXP >= 15 and not ApprovalCheck(EmmaX, 1500):
+        elif counter == (15 + EmmaX.action_counter["suck_breasts"]) and EmmaX.SEXP >= 15 and not approval_check(EmmaX, 1500):
             $ EmmaX.brows = "confused"
             menu:
                 ch_e "You certainly seem to be enjoying yourself, but perhaps we could add some variety?"
@@ -1007,7 +1007,7 @@ label Emma_SB_Cycle:
                     $ action_context = "shift"
                     jump Emma_SB_After
                 "No, this is fun.":
-                    if ApprovalCheck(EmmaX, 1200) or ApprovalCheck(EmmaX, 500, "O"):
+                    if approval_check(EmmaX, 1200) or approval_check(EmmaX, 500, "O"):
                         $ EmmaX.change_stat("love", 200, -5)
                         $ EmmaX.change_stat("obedience", 50, 3)
                         $ EmmaX.change_stat("obedience", 80, 2)
@@ -1105,7 +1105,7 @@ label Emma_Fondle_Thighs:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle thighs" in EmmaX.recent_history else 0
 
-    $ Approval = ApprovalCheck(EmmaX, 750, TabM=1)
+    $ Approval = approval_check(EmmaX, 750, TabM=1)
 
     if action_context == "auto":
         if Approval:
@@ -1198,7 +1198,7 @@ label Emma_Fondle_Thighs:
                     ch_e "This wasn't a \"tone\" issue."
             "[[Start caressing her thigh anyway]":
 
-                $ Approval = ApprovalCheck(EmmaX, 350, "OI", TabM = 2)
+                $ Approval = approval_check(EmmaX, 350, "OI", TabM = 2)
                 if Approval > 1 or (Approval and EmmaX.Forced):
                     $ EmmaX.change_face("sad")
                     $ EmmaX.change_stat("love", 70, -5, 1)
@@ -1473,12 +1473,12 @@ label Emma_FT_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if EmmaX.SEXP >= 100 or ApprovalCheck(EmmaX, 1200, "LO"):
+        if EmmaX.SEXP >= 100 or approval_check(EmmaX, 1200, "LO"):
             pass
         elif counter == (5 + EmmaX.action_counter["fondle_thighs"]):
             $ EmmaX.brows = "confused"
             ch_e "Luxurious, yes?"
-        elif counter == (15 + EmmaX.action_counter["fondle_thighs"]) and EmmaX.SEXP >= 15 and not ApprovalCheck(EmmaX, 1500):
+        elif counter == (15 + EmmaX.action_counter["fondle_thighs"]) and EmmaX.SEXP >= 15 and not approval_check(EmmaX, 1500):
             $ EmmaX.brows = "confused"
             menu:
                 ch_e "You certainly seem to be enjoying yourself, but perhaps we could add some variety?"
@@ -1490,7 +1490,7 @@ label Emma_FT_Cycle:
                     $ action_context = "shift"
                     jump Emma_FT_After
                 "No, this is fun.":
-                    if ApprovalCheck(EmmaX, 1200) or ApprovalCheck(EmmaX, 500, "O"):
+                    if approval_check(EmmaX, 1200) or approval_check(EmmaX, 500, "O"):
                         $ EmmaX.change_stat("love", 200, -5)
                         $ EmmaX.change_stat("obedience", 50, 3)
                         $ EmmaX.change_stat("obedience", 80, 2)
@@ -1584,7 +1584,7 @@ label Emma_Fondle_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle pussy" in EmmaX.recent_history else 0
 
-    $ Approval = ApprovalCheck(EmmaX, 1050, TabM = 2)
+    $ Approval = approval_check(EmmaX, 1050, TabM = 2)
 
     if action_context == "auto":
         if Approval:
@@ -1684,7 +1684,7 @@ label Emma_Fondle_Pussy:
                     ch_e "No."
             "[[Start fondling anyway]":
 
-                $ Approval = ApprovalCheck(EmmaX, 450, "OI", TabM = 2)
+                $ Approval = approval_check(EmmaX, 450, "OI", TabM = 2)
                 if Approval > 1 or (Approval and EmmaX.Forced):
                     $ EmmaX.change_face("sad")
                     $ EmmaX.change_stat("love", 70, -5, 1)
@@ -1745,7 +1745,7 @@ label Emma_FP_Prep:
         $ action_context = 0
         if (EmmaX.legs and not EmmaX.Upskirt) or (EmmaX.underwear and not EmmaX.underwearDown):
 
-            if ApprovalCheck(EmmaX, 1250, TabM = 1) or (EmmaX.SeenPussy and ApprovalCheck(EmmaX, 500) and not Taboo):
+            if approval_check(EmmaX, 1250, TabM = 1) or (EmmaX.SeenPussy and approval_check(EmmaX, 500) and not Taboo):
                 $ EmmaX.Upskirt = 1
                 $ EmmaX.underwearDown = 1
                 $ Line = 0
@@ -2036,14 +2036,14 @@ label Emma_FP_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if EmmaX.SEXP >= 100 or ApprovalCheck(EmmaX, 1200, "LO"):
+        if EmmaX.SEXP >= 100 or approval_check(EmmaX, 1200, "LO"):
             pass
         elif counter == (5 + EmmaX.action_counter["fondle_pussy"]):
             $ EmmaX.brows = "confused"
             ch_e "You like how that feels, huh?"
         elif EmmaX.lust >= 80:
             pass
-        elif counter == (15 + EmmaX.action_counter["fondle_pussy"]) and EmmaX.SEXP >= 15 and not ApprovalCheck(EmmaX, 1500):
+        elif counter == (15 + EmmaX.action_counter["fondle_pussy"]) and EmmaX.SEXP >= 15 and not approval_check(EmmaX, 1500):
             $ EmmaX.brows = "confused"
             menu:
                 ch_e "You certainly seem to be enjoying yourself, but perhaps we could add some variety?"
@@ -2055,7 +2055,7 @@ label Emma_FP_Cycle:
                     $ action_context = "shift"
                     jump Emma_FP_After
                 "No, this is fun.":
-                    if ApprovalCheck(EmmaX, 1200) or ApprovalCheck(EmmaX, 500, "O"):
+                    if approval_check(EmmaX, 1200) or approval_check(EmmaX, 500, "O"):
                         $ EmmaX.change_stat("love", 200, -5)
                         $ EmmaX.change_stat("obedience", 50, 3)
                         $ EmmaX.change_stat("obedience", 80, 2)
@@ -2121,7 +2121,7 @@ label Emma_FP_After:
 label Emma_Insert_Pussy:
     call shift_focus (EmmaX)
     if action_context == "auto":
-        if ApprovalCheck(EmmaX, 1100, TabM = 2):
+        if approval_check(EmmaX, 1100, TabM = 2):
             $ EmmaX.change_face("surprised")
             $ EmmaX.change_stat("obedience", 90, 1)
             $ EmmaX.change_stat("obedience", 70, 2)
@@ -2139,7 +2139,7 @@ label Emma_Insert_Pussy:
             ch_e "Careful what you put in there, you may not get it back."
             return
 
-    if ApprovalCheck(EmmaX, 1100, TabM = 2):
+    if approval_check(EmmaX, 1100, TabM = 2):
         if EmmaX.Forced:
             $ EmmaX.change_face("sad")
             $ EmmaX.change_stat("love", 70, -3, 1)
@@ -2231,7 +2231,7 @@ label Emma_Lick_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick pussy" in EmmaX.recent_history else 0
 
-    $ Approval = ApprovalCheck(EmmaX, 1250, TabM = 4)
+    $ Approval = approval_check(EmmaX, 1250, TabM = 4)
 
     if action_context == "auto":
         if Approval:
@@ -2334,7 +2334,7 @@ label Emma_Lick_Pussy:
                     ch_e "I would, but still no, [EmmaX.player_petname]."
             "[[Get in there anyway]":
 
-                $ Approval = ApprovalCheck(EmmaX, 750, "OI", TabM = 4)
+                $ Approval = approval_check(EmmaX, 750, "OI", TabM = 4)
                 if Approval > 1 or (Approval and EmmaX.Forced):
                     $ EmmaX.change_face("sad")
                     $ EmmaX.change_stat("love", 70, -5, 1)
@@ -2395,7 +2395,7 @@ label Emma_LP_Prep:
         $ action_context = 0
         if (EmmaX.legs and not EmmaX.Upskirt) or (EmmaX.underwear and not EmmaX.underwearDown):
 
-            if ApprovalCheck(EmmaX, 1250, TabM = 1) or (EmmaX.SeenPussy and ApprovalCheck(EmmaX, 500) and not Taboo):
+            if approval_check(EmmaX, 1250, TabM = 1) or (EmmaX.SeenPussy and approval_check(EmmaX, 500) and not Taboo):
                 $ EmmaX.Upskirt = 1
                 $ EmmaX.underwearDown = 1
                 $ Line = 0
@@ -2678,14 +2678,14 @@ label Emma_LP_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if EmmaX.SEXP >= 100 or ApprovalCheck(EmmaX, 1200, "LO"):
+        if EmmaX.SEXP >= 100 or approval_check(EmmaX, 1200, "LO"):
             pass
         elif counter == (5 + EmmaX.action_counter["eat_pussy"]):
             $ EmmaX.brows = "confused"
             ch_e "Isn't it just delicious?"
         elif EmmaX.lust >= 80:
             pass
-        elif counter == (15 + EmmaX.action_counter["eat_pussy"]) and EmmaX.SEXP >= 15 and not ApprovalCheck(EmmaX, 1500):
+        elif counter == (15 + EmmaX.action_counter["eat_pussy"]) and EmmaX.SEXP >= 15 and not approval_check(EmmaX, 1500):
             $ EmmaX.brows = "confused"
             menu:
                 ch_e "[EmmaX.player_petname], I know you're having fun down there, but maybe we could try something else."
@@ -2697,7 +2697,7 @@ label Emma_LP_Cycle:
                     $ action_context = "shift"
                     jump Emma_LP_After
                 "No, this is fun.":
-                    if ApprovalCheck(EmmaX, 1200) or ApprovalCheck(EmmaX, 500, "O"):
+                    if approval_check(EmmaX, 1200) or approval_check(EmmaX, 500, "O"):
                         $ EmmaX.change_stat("love", 200, -5)
                         $ EmmaX.change_stat("obedience", 50, 3)
                         $ EmmaX.change_stat("obedience", 80, 2)
@@ -2795,7 +2795,7 @@ label Emma_Fondle_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle ass" in EmmaX.recent_history else 0
 
-    $ Approval = ApprovalCheck(EmmaX, 850, TabM=1)
+    $ Approval = approval_check(EmmaX, 850, TabM=1)
 
     if action_context == "auto":
         if Approval:
@@ -2896,7 +2896,7 @@ label Emma_Fondle_Ass:
                     ch_e "No."
             "[[Start fondling anyway]":
 
-                $ Approval = ApprovalCheck(EmmaX, 250, "OI", TabM = 3)
+                $ Approval = approval_check(EmmaX, 250, "OI", TabM = 3)
                 if Approval > 1 or (Approval and EmmaX.Forced):
                     $ EmmaX.change_face("sad")
                     $ EmmaX.change_stat("love", 70, -3, 1)
@@ -3175,14 +3175,14 @@ label Emma_FA_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if EmmaX.SEXP >= 100 or ApprovalCheck(EmmaX, 1200, "LO"):
+        if EmmaX.SEXP >= 100 or approval_check(EmmaX, 1200, "LO"):
             pass
         elif counter == (5 + EmmaX.action_counter["fondle_ass"]):
             $ EmmaX.brows = "confused"
             ch_e "Mmmm I do enjoy that. . ."
         elif EmmaX.lust >= 80:
             pass
-        elif counter == (15 + EmmaX.action_counter["fondle_ass"]) and EmmaX.SEXP >= 15 and not ApprovalCheck(EmmaX, 1500):
+        elif counter == (15 + EmmaX.action_counter["fondle_ass"]) and EmmaX.SEXP >= 15 and not approval_check(EmmaX, 1500):
             $ EmmaX.brows = "confused"
             menu:
                 ch_e "[EmmaX.player_petname], this is nice, but could we do something else?"
@@ -3194,7 +3194,7 @@ label Emma_FA_Cycle:
                     $ action_context = "shift"
                     jump Emma_FA_After
                 "No, this is fun.":
-                    if ApprovalCheck(EmmaX, 1200) or ApprovalCheck(EmmaX, 500, "O"):
+                    if approval_check(EmmaX, 1200) or approval_check(EmmaX, 500, "O"):
                         $ EmmaX.change_stat("love", 200, -5)
                         $ EmmaX.change_stat("obedience", 50, 3)
                         $ EmmaX.change_stat("obedience", 80, 2)
@@ -3294,7 +3294,7 @@ label Emma_Insert_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_insert ass" in EmmaX.recent_history else 0
 
-    $ Approval = ApprovalCheck(EmmaX, 1300, TabM = 3)
+    $ Approval = approval_check(EmmaX, 1300, TabM = 3)
 
     if action_context == "auto":
         if Approval:
@@ -3389,7 +3389,7 @@ label Emma_Insert_Ass:
                     ch_e "I don't think that I would."
             "[[Slide a finger in anyway]":
 
-                $ Approval = ApprovalCheck(EmmaX, 950, "OI", TabM = 3)
+                $ Approval = approval_check(EmmaX, 950, "OI", TabM = 3)
                 if Approval > 1 or (Approval and EmmaX.Forced):
                     $ EmmaX.change_face("surprised", 1)
                     $ EmmaX.change_stat("love", 70, -5, 1)
@@ -3416,7 +3416,7 @@ label Emma_Insert_Ass:
     elif EmmaX.Forced:
         $ EmmaX.change_face("angry", 1)
         ch_e "I'm not going that far today."
-        if ApprovalCheck(EmmaX, 500, "I"):
+        if approval_check(EmmaX, 500, "I"):
             $ EmmaX.change_stat("lust", 80, 10)
         else:
             $ EmmaX.change_stat("lust", 50, 3)
@@ -3455,7 +3455,7 @@ label Emma_IA_Prep:
         $ action_context = 0
         if (EmmaX.legs and not EmmaX.Upskirt) or (EmmaX.underwear and not EmmaX.underwearDown):
 
-            if ApprovalCheck(EmmaX, 1250, TabM = 1) or (EmmaX.SeenPussy and ApprovalCheck(EmmaX, 500) and not Taboo):
+            if approval_check(EmmaX, 1250, TabM = 1) or (EmmaX.SeenPussy and approval_check(EmmaX, 500) and not Taboo):
                 $ EmmaX.Upskirt = 1
                 $ EmmaX.underwearDown = 1
                 $ Line = 0
@@ -3734,14 +3734,14 @@ label Emma_IA_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if EmmaX.SEXP >= 100 or ApprovalCheck(EmmaX, 1200, "LO"):
+        if EmmaX.SEXP >= 100 or approval_check(EmmaX, 1200, "LO"):
             pass
         elif counter == (5 + EmmaX.action_counter["finger_ass"]):
             $ EmmaX.brows = "confused"
             ch_e "Ungh, You're getting going there. . ."
         elif EmmaX.lust >= 80:
             pass
-        elif counter == (15 + EmmaX.action_counter["finger_ass"]) and EmmaX.SEXP >= 15 and not ApprovalCheck(EmmaX, 1500):
+        elif counter == (15 + EmmaX.action_counter["finger_ass"]) and EmmaX.SEXP >= 15 and not approval_check(EmmaX, 1500):
             $ EmmaX.brows = "confused"
             menu:
                 ch_e "[EmmaX.player_petname], this is getting kind sore, maybe we could try something else."
@@ -3753,7 +3753,7 @@ label Emma_IA_Cycle:
                     $ action_context = "shift"
                     jump Emma_IA_After
                 "No, this is fun.":
-                    if ApprovalCheck(EmmaX, 1200) or ApprovalCheck(EmmaX, 500, "O"):
+                    if approval_check(EmmaX, 1200) or approval_check(EmmaX, 500, "O"):
                         $ EmmaX.change_stat("love", 200, -5)
                         $ EmmaX.change_stat("obedience", 50, 3)
                         $ EmmaX.change_stat("obedience", 80, 2)
@@ -3854,7 +3854,7 @@ label Emma_Lick_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick ass" in EmmaX.recent_history else 0
 
-    $ Approval = ApprovalCheck(EmmaX, 1550, TabM = 4)
+    $ Approval = approval_check(EmmaX, 1550, TabM = 4)
 
     if action_context == "auto":
         if Approval:
@@ -3956,7 +3956,7 @@ label Emma_Lick_Ass:
                     ch_e "I really don't think so."
             "[[Start licking anyway]":
 
-                $ Approval = ApprovalCheck(EmmaX, 1100, "OI", TabM = 4)
+                $ Approval = approval_check(EmmaX, 1100, "OI", TabM = 4)
                 if Approval > 1 or (Approval and EmmaX.Forced):
                     $ EmmaX.change_face("sad")
                     $ EmmaX.change_stat("love", 70, -5, 1)
@@ -3982,7 +3982,7 @@ label Emma_Lick_Ass:
     elif EmmaX.Forced:
         $ EmmaX.change_face("angry", 1)
         ch_e "I don't think so."
-        if ApprovalCheck(EmmaX, 500, "I"):
+        if approval_check(EmmaX, 500, "I"):
             $ EmmaX.change_stat("lust", 80, 10)
         else:
             $ EmmaX.change_stat("lust", 50, 3)
@@ -4247,14 +4247,14 @@ label Emma_LA_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if EmmaX.SEXP >= 100 or ApprovalCheck(EmmaX, 1200, "LO"):
+        if EmmaX.SEXP >= 100 or approval_check(EmmaX, 1200, "LO"):
             pass
         elif counter == (5 + EmmaX.action_counter["eat_ass"]):
             $ EmmaX.brows = "confused"
             ch_e "You certainly are enthusiastic. . ."
         elif EmmaX.lust >= 80:
             pass
-        elif counter == (15 + EmmaX.action_counter["eat_ass"]) and EmmaX.SEXP >= 15 and not ApprovalCheck(EmmaX, 1500):
+        elif counter == (15 + EmmaX.action_counter["eat_ass"]) and EmmaX.SEXP >= 15 and not approval_check(EmmaX, 1500):
             $ EmmaX.brows = "confused"
             menu:
                 ch_e "[EmmaX.player_petname], this is getting weird, maybe we could try something else."
@@ -4266,7 +4266,7 @@ label Emma_LA_Cycle:
                     $ action_context = "shift"
                     jump Emma_LA_After
                 "No, this is fun.":
-                    if ApprovalCheck(EmmaX, 1200) or ApprovalCheck(EmmaX, 500, "O"):
+                    if approval_check(EmmaX, 1200) or approval_check(EmmaX, 500, "O"):
                         $ EmmaX.change_stat("love", 200, -5)
                         $ EmmaX.change_stat("obedience", 50, 3)
                         $ EmmaX.change_stat("obedience", 80, 2)

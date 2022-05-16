@@ -68,7 +68,7 @@ label Jubes_Masturbate:
     if JubesX.event_counter["forced"] and not JubesX.Forced:
         $ approval_bonus -= 5*JubesX.event_counter["forced"]
 
-    $ Approval = ApprovalCheck(JubesX, 1300, TabM = 2)
+    $ Approval = approval_check(JubesX, 1300, TabM = 2)
 
     $ JubesX.DrainWord("unseen",1,0)
 
@@ -115,7 +115,7 @@ label Jubes_Masturbate:
                         $ JubesX.change_stat("obedience", 80, 3)
                         $ JubesX.change_stat("inhibition", 80, 5)
                         jump Jubes_M_Cycle
-                    elif ApprovalCheck(JubesX, 1200):
+                    elif approval_check(JubesX, 1200):
                         $ JubesX.change_face("sly")
                         ch_v "Yeah. . . but I could take a break. . ."
                     else:
@@ -320,7 +320,7 @@ label Jubes_Masturbate:
                     jump Jubes_M_Prep
             "Just get at it already.":
 
-                $ Approval = ApprovalCheck(JubesX, 450, "OI", TabM = 2)
+                $ Approval = approval_check(JubesX, 450, "OI", TabM = 2)
                 if Approval > 1 or (Approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
@@ -776,7 +776,7 @@ label Jubes_Sex_P:
         $ approval_bonus -= 15 if "no_sex" in JubesX.recent_history else 5
 
 
-    $ Approval = ApprovalCheck(JubesX, 1400, TabM = 5)
+    $ Approval = approval_check(JubesX, 1400, TabM = 5)
 
     if action_context == "auto":
         call Jubes_Sex_Launch ("sex")
@@ -827,7 +827,7 @@ label Jubes_Sex_P:
                     "You press inside some more."
                     $ JubesX.change_stat("obedience", 70, 3)
                     $ JubesX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(JubesX, 700, "O", TabM=1):
+                    if not approval_check(JubesX, 700, "O", TabM=1):
                         $ JubesX.change_face("angry")
                         "[JubesX.name] shoves you away and backhands you in the face."
                         ch_v "Dick."
@@ -988,7 +988,7 @@ label Jubes_Sex_P:
                     $ Line = 0
                     jump Jubes_SexPrep
             "Just deal with it.":
-                $ Approval = ApprovalCheck(JubesX, 1150, "OI", TabM = 3)
+                $ Approval = approval_check(JubesX, 1150, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
@@ -1341,12 +1341,12 @@ label Jubes_Sex_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if JubesX.SEXP >= 100 or ApprovalCheck(JubesX, 1200, "LO"):
+        if JubesX.SEXP >= 100 or approval_check(JubesX, 1200, "LO"):
             pass
-        elif counter == (5 + JubesX.Sex):
+        elif counter == (5 + JubesX.action_counter["sex"]):
             $ JubesX.brows = "confused"
             ch_v "So are we getting close?"
-        elif counter == (10 + JubesX.Sex):
+        elif counter == (10 + JubesX.action_counter["sex"]):
             $ JubesX.brows = "angry"
             menu:
                 ch_v "Hey. . . could we. . . try something. . . else?"
@@ -1366,7 +1366,7 @@ label Jubes_Sex_Cycle:
                     $ action_context = "shift"
                     jump Jubes_SexAfter
                 "No, get back down there.":
-                    if ApprovalCheck(JubesX, 1200) or ApprovalCheck(JubesX, 500, "O"):
+                    if approval_check(JubesX, 1200) or approval_check(JubesX, 500, "O"):
                         $ JubesX.change_stat("love", 200, -5)
                         $ JubesX.change_stat("obedience", 50, 3)
                         $ JubesX.change_stat("obedience", 80, 2)
@@ -1496,7 +1496,7 @@ label Jubes_Sex_A:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_anal" in JubesX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JubesX, 1550, TabM = 5)
+    $ Approval = approval_check(JubesX, 1550, TabM = 5)
 
     if action_context == "auto":
         call Jubes_Sex_Launch ("anal")
@@ -1548,7 +1548,7 @@ label Jubes_Sex_A:
                     "You press into her."
                     $ JubesX.change_stat("obedience", 70, 3)
                     $ JubesX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(JubesX, 700, "O", TabM=1):
+                    if not approval_check(JubesX, 700, "O", TabM=1):
                         $ JubesX.change_face("angry")
                         "[JubesX.name] shoves you away and backhands you in the face."
                         ch_v "Yeah, not like that you won't."
@@ -1717,7 +1717,7 @@ label Jubes_Sex_A:
                     pass
             "Just deal with it.":
 
-                $ Approval = ApprovalCheck(JubesX, 1250, "OI", TabM = 3)
+                $ Approval = approval_check(JubesX, 1250, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
@@ -2081,7 +2081,7 @@ label Jubes_Anal_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if JubesX.SEXP >= 100 or ApprovalCheck(JubesX, 1200, "LO"):
+        if JubesX.SEXP >= 100 or approval_check(JubesX, 1200, "LO"):
             pass
         elif counter == (5 + JubesX.action_counter["anal"]):
             $ JubesX.brows = "confused"
@@ -2110,7 +2110,7 @@ label Jubes_Anal_Cycle:
                     $ action_context = "shift"
                     jump Jubes_AnalAfter
                 "No, get back down there.":
-                    if ApprovalCheck(JubesX, 1200) or ApprovalCheck(JubesX, 500, "O"):
+                    if approval_check(JubesX, 1200) or approval_check(JubesX, 500, "O"):
                         $ JubesX.change_stat("love", 200, -5)
                         $ JubesX.change_stat("obedience", 50, 3)
                         $ JubesX.change_stat("obedience", 80, 2)
@@ -2233,7 +2233,7 @@ label Jubes_Sex_H:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_hotdog" in JubesX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JubesX, 1000, TabM = 3)
+    $ Approval = approval_check(JubesX, 1000, TabM = 3)
 
     if action_context == "auto":
         call Jubes_Sex_Launch ("hotdog")
@@ -2269,7 +2269,7 @@ label Jubes_Sex_H:
                     "You grind against her crotch."
                     $ JubesX.change_stat("obedience", 70, 3)
                     $ JubesX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(JubesX, 500, "O", TabM=1):
+                    if not approval_check(JubesX, 500, "O", TabM=1):
                         $ JubesX.change_face("angry")
                         "[JubesX.name] shoves you away."
                         ch_v "Don't push it, [JubesX.player_petname]."
@@ -2426,7 +2426,7 @@ label Jubes_Sex_H:
                     pass
             "Just deal with it.":
 
-                $ Approval = ApprovalCheck(JubesX, 350, "OI", TabM = 3)
+                $ Approval = approval_check(JubesX, 350, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -2, 1)
@@ -2763,7 +2763,7 @@ label Jubes_Hotdog_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if JubesX.SEXP >= 100 or ApprovalCheck(JubesX, 1200, "LO"):
+        if JubesX.SEXP >= 100 or approval_check(JubesX, 1200, "LO"):
             pass
         elif counter == (5 + JubesX.action_counter["hotdog"]):
             $ JubesX.brows = "confused"
@@ -2788,7 +2788,7 @@ label Jubes_Hotdog_Cycle:
                     $ action_context = "shift"
                     jump Jubes_HotdogAfter
                 "No, get back down there.":
-                    if ApprovalCheck(JubesX, 1200) or ApprovalCheck(JubesX, 500, "O"):
+                    if approval_check(JubesX, 1200) or approval_check(JubesX, 500, "O"):
                         $ JubesX.change_stat("love", 200, -5)
                         $ JubesX.change_stat("obedience", 50, 3)
                         $ JubesX.change_stat("obedience", 80, 2)

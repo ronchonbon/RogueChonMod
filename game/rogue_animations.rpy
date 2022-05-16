@@ -874,7 +874,7 @@ label Display_Background(Entry=0):
         scene bg_campus onlayer backdrop
 
     scene
-    
+
     return
 
 image bg_entry = "images/Door.jpg"
@@ -3777,7 +3777,6 @@ label Rogue_Sex_Launch(Line=primary_action):
         $ Player.Sprite = 0
         $ Player.Cock = "out"
         $ action_speed = 0
-    $ primary_action = Line
 
     if RogueX.pose == "doggy":
         call Rogue_Doggy_Launch (Line)

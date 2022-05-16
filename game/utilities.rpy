@@ -75,7 +75,7 @@ screen StatHolder10(Value, Color, XPOS):
 
 init python:
 
-    def ApprovalCheck(Chr = 0, T = 1000, Type = "LOI", Spread = 150, TmpM = 1, TabM = 0, C = 1, Bonus = 0, Loc = 0, Check=0, Alt=[[],0]):
+    def approval_check(Chr = 0, T = 1000, Type = "LOI", Spread = 150, TmpM = 1, TabM = 0, C = 1, Bonus = 0, Loc = 0, Check=0, Alt=[[],0]):
 
 
 
@@ -346,7 +346,7 @@ label Round10(BO=[], Occupant=0):
         elif Occupant == StormX:
             ch_s "I am going to bed soon, care to join me?"
 
-    elif ApprovalCheck(Occupant, 1000, "LI") or ApprovalCheck(Occupant, 600, "OI"):
+    elif approval_check(Occupant, 1000, "LI") or approval_check(Occupant, 600, "OI"):
 
         if Occupant == RogueX:
             ch_r "It's pretty late, [Occupant.player_petname], but you can stay for a little bit."
@@ -539,7 +539,7 @@ label Wait(Outfit=1, Lights=1, BO=[]):
 
             $ BO[0].event_counter["forced"] -= 1 if BO[0].event_counter["forced"] > 0 else 0
             if BO[0].event_counter["forced"] > 0:
-                $ BO[0].event_counter["forced"] -= 1 if ApprovalCheck(BO[0], 1000, "LO") else 0
+                $ BO[0].event_counter["forced"] -= 1 if approval_check(BO[0], 1000, "LO") else 0
             $ BO[0].remaining_actions = BO[0].max_actions
 
             $ BO[0].Rep = 0 if BO[0].Rep < 0 else BO[0].Rep
@@ -825,7 +825,7 @@ label Girls_Schedule(Girls=[], Clothes=1, Location=1, LocTemp=0):
             if Girls[0].location != LocTemp and Girls[0] not in Party:
 
                 if LocTemp == bg_current:
-                    if ApprovalCheck(Girls[0], 1200) and Girls[0].location not in ("bg_classroom","bg_teacher","bg_dangerroom"):
+                    if approval_check(Girls[0], 1200) and Girls[0].location not in ("bg_classroom","bg_teacher","bg_dangerroom"):
 
                         $ Girls[0].location = LocTemp
                     else:
@@ -1030,7 +1030,7 @@ label EventCalls(EGirls=[]):
             call Storm_Peter
             return
         if bg_current == "bg_classroom" and time_index == 2 and Weekday in (1,3):
-            if "mohawk" not in StormX.history and "traveling" not in Player.recent_history and ApprovalCheck(StormX, 200, "I"):
+            if "mohawk" not in StormX.history and "traveling" not in Player.recent_history and approval_check(StormX, 200, "I"):
                 jump Storm_Hairtalk
                 return
             if Round >= 70:
@@ -1147,7 +1147,7 @@ label EventCalls(EGirls=[]):
                         call Jean_Like
                     elif JeanX.love >= 800 and JeanX.obedience >= 600 and not JeanX.Event[5]:
                         call Jean_Love
-                    elif "daddy" not in JeanX.player_petnames and ApprovalCheck(JeanX, 750, "L"):
+                    elif "daddy" not in JeanX.player_petnames and approval_check(JeanX, 750, "L"):
                         if (bg_current == EGirls[0].home or bg_current == "bg_player") and EGirls[0].location == bg_current:
                             call Jean_Daddy
                     return
@@ -1184,7 +1184,7 @@ label EventCalls(EGirls=[]):
                 else:
                     call AskedMeet (EGirls[0], "bemused")
                 return
-            elif "daddy" not in EGirls[0].player_petnames and ApprovalCheck(EGirls[0], 750, "L") and ApprovalCheck(EGirls[0], 500, "O") and ApprovalCheck(EGirls[0], 500, "I"):
+            elif "daddy" not in EGirls[0].player_petnames and approval_check(EGirls[0], 750, "L") and approval_check(EGirls[0], 500, "O") and approval_check(EGirls[0], 500, "I"):
                 if (bg_current == EGirls[0].home or bg_current == "bg_player") and EGirls[0].location == bg_current:
                     call expression EGirls[0].Tag + "_Daddy"
                 return
@@ -2321,7 +2321,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, BO=[]):
 
         if Line == "no":
             $ Primary.change_stat("obedience", 50, 5)
-            if ApprovalCheck(Primary, 1800) or ApprovalCheck(Primary, 500, "O"):
+            if approval_check(Primary, 1800) or approval_check(Primary, 500, "O"):
 
                 $ Primary.change_stat("obedience", 80, 2)
                 if Primary == RogueX:
@@ -2367,7 +2367,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, BO=[]):
                 call Remove_Girl (Primary)
             if Secondary and Secondary != JeanX:
                 $ Secondary.change_stat("obedience", 50, 5)
-                if ApprovalCheck(Secondary, 1800) or ApprovalCheck(Secondary, 500, "O"):
+                if approval_check(Secondary, 1800) or approval_check(Secondary, 500, "O"):
                     $ Secondary.change_stat("obedience", 80, 2)
                     if Secondary == RogueX:
                         ch_r "I guess that's ok. See you later then."
@@ -2442,7 +2442,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, BO=[]):
                 elif Primary == JubesX:
                     ch_v "\"Tread not into my lair\". . ."
 
-            elif time_index >= 3 and ApprovalCheck(Primary, 1000, "LI") and ApprovalCheck(Primary, 600, "OI"):
+            elif time_index >= 3 and approval_check(Primary, 1000, "LI") and approval_check(Primary, 600, "OI"):
 
                 if Primary == RogueX:
                     ch_r "Oh, hey, [RogueX.player_petname], it's pretty late, but I guess you can stick around for a bit."
@@ -2459,7 +2459,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, BO=[]):
                 elif Primary == JubesX:
                     ch_v "Kinda late, [JubesX.player_petname], s'up?"
                 $ Line = "stay"
-            elif ApprovalCheck(Primary, 1300) or ApprovalCheck(Primary, 500, "O") or Primary == JubesX:
+            elif approval_check(Primary, 1300) or approval_check(Primary, 500, "O") or Primary == JubesX:
 
                 if Primary == RogueX:
                     ch_r "Oh, hey, [RogueX.player_petname], nice to see you here."
@@ -2492,7 +2492,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, BO=[]):
                     ch_s "I'm afraid that the hour is a bit late for visits. . ."
 
 
-            elif ApprovalCheck(Primary, 600, "LI") or ApprovalCheck(Primary, 300, "OI"):
+            elif approval_check(Primary, 600, "LI") or approval_check(Primary, 300, "OI"):
 
                 if Primary == RogueX:
                     ch_r "Oh, hey, [RogueX.player_petname]. You can stick around, I guess."
@@ -2567,7 +2567,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, BO=[]):
                                 $ Primary.change_face("angry",Mouth="open")
                                 ch_v "-YES.-"
                                 $ Primary.change_face("angry")
-                        elif time_index >= 3 and ApprovalCheck(Primary, 800, "LI") and ApprovalCheck(Primary, 400, "OI"):
+                        elif time_index >= 3 and approval_check(Primary, 800, "LI") and approval_check(Primary, 400, "OI"):
                             $ Primary.change_face("sadside")
                             if Primary == RogueX:
                                 ch_r "I suppose I can make an exception this once."
@@ -2600,7 +2600,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, BO=[]):
                             elif Primary == JubesX:
                                 ch_v "Sure."
                                 $ Line = "stay"
-                        elif ApprovalCheck(Primary, 750):
+                        elif approval_check(Primary, 750):
                             if Primary == RogueX:
                                 ch_r "Oh, fine. For a little bit."
                             elif Primary == KittyX:
@@ -2641,7 +2641,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, BO=[]):
                             "[Primary.name] kicks you out of the room."
                     "I'm sticking around, thanks.":
 
-                        if "angry" in Primary.daily_history or (not ApprovalCheck(Primary, 1800) and not ApprovalCheck(Primary, 500, "O")):
+                        if "angry" in Primary.daily_history or (not approval_check(Primary, 1800) and not approval_check(Primary, 500, "O")):
                             $ Primary.change_face("angry")
                             if Primary == RogueX:
                                 ch_r "No way, buster! Out!"
@@ -2741,7 +2741,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, BO=[]):
                 $ Primary = 0
         if Primary:
 
-            if ApprovalCheck(Primary, 1000):
+            if approval_check(Primary, 1000):
                 if len(Present) < 2 and D20 >= 10:
                     $ Line = Primary.name + " takes the seat next to you"
                     $ Present.append(Primary)
@@ -2753,7 +2753,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, BO=[]):
                 $ Nearby.append(Primary)
 
         if Secondary:
-            if ApprovalCheck(Secondary, 1000):
+            if approval_check(Secondary, 1000):
                 if len(Present) < 2 and D20 >= 10:
 
                     if Primary in Present:
@@ -2871,11 +2871,11 @@ label Gym_Entry(BO=[], GirlsNum=0):
     while BO:
         if BO[0].Outfit != "gym":
 
-            if ApprovalCheck(BO[0], 1300, "LO") or "passive" in BO[0].Traits:
+            if approval_check(BO[0], 1300, "LO") or "passive" in BO[0].Traits:
                 pass
-            elif ApprovalCheck(BO[0], 800, "LO") and BO[0].Custom1[0]:
+            elif approval_check(BO[0], 800, "LO") and BO[0].Custom1[0]:
                 pass
-            elif ApprovalCheck(BO[0], 600, "LO") and BO[0].Gym[0] != 1:
+            elif approval_check(BO[0], 600, "LO") and BO[0].Gym[0] != 1:
                 pass
             else:
                 $ Line = "no"
@@ -3282,7 +3282,7 @@ label Locked_Door(Girl=0, Entry=0, Current=0):
                     return 0
                 elif Girl in (LauraX,JubesX):
                     "[Girl.name] goes quiet."
-                    if ApprovalCheck(Girl, 500,"I") and not ApprovalCheck(Girl, 500,"O"):
+                    if approval_check(Girl, 500,"I") and not approval_check(Girl, 500,"O"):
                         $ Girl.location = bg_current
                         $ Girl.change_outfit()
                         if Girl == LauraX:
@@ -3307,7 +3307,7 @@ label Locked_Door(Girl=0, Entry=0, Current=0):
                             call Remove_Girl (Girl)
                         return 0
                 elif Girl == StormX:
-                    if ApprovalCheck(Girl, 800,"LI") and not ApprovalCheck(Girl, 500,"O"):
+                    if approval_check(Girl, 800,"LI") and not approval_check(Girl, 500,"O"):
                         $ Girl.location = bg_current
                         $ Girl.change_outfit()
                         call Display_Girl (Girl, TrigReset=0)
@@ -3345,7 +3345,7 @@ label Locked_Door(Girl=0, Entry=0, Current=0):
             pass
         else:
 
-            if ApprovalCheck(Current, 1500, TabM=2, Bonus = (Girl.GirlLikeCheck(Current) - 500)):
+            if approval_check(Current, 1500, TabM=2, Bonus = (Girl.GirlLikeCheck(Current) - 500)):
 
                 $ Current.change_face("sexy", 1)
                 $ Current.change_stat("obedience", 90, 5)
@@ -3577,7 +3577,7 @@ label Shop:
                         $ Player.Cash -= 110
                     else:
                         "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in RogueX.Inventory and "stockings_and_garterbelt" not in Player.Inventory and ApprovalCheck(RogueX, 1500):
+                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in RogueX.Inventory and "stockings_and_garterbelt" not in Player.Inventory and approval_check(RogueX, 1500):
                     if Player.Cash >= 100:
                         "You purchase the stockings, these will look nice on [RogueX.name]."
                         $ Player.Inventory.append("stockings_and_garterbelt")
@@ -3685,7 +3685,7 @@ label Shop:
                         $ Player.Cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in EmmaX.Inventory and "stockings_and_garterbelt" not in Player.Inventory and ApprovalCheck(EmmaX, 1500):
+                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in EmmaX.Inventory and "stockings_and_garterbelt" not in Player.Inventory and approval_check(EmmaX, 1500):
                     if Player.Cash >= 100:
                         "You purchase the stockings, these will look nice on [EmmaX.name]."
                         $ Player.Inventory.append("stockings_and_garterbelt")
@@ -3799,7 +3799,7 @@ label Shop:
                         $ Player.Cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in JeanX.Inventory and "stockings_and_garterbelt" not in Player.Inventory and ApprovalCheck(JeanX, 800):
+                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in JeanX.Inventory and "stockings_and_garterbelt" not in Player.Inventory and approval_check(JeanX, 800):
                     if Player.Cash >= 100:
                         "You purchase the stockings, these will look nice on [JeanX.name]."
                         $ Player.Inventory.append("stockings_and_garterbelt")
@@ -3831,7 +3831,7 @@ label Shop:
                         $ Player.Cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in StormX.Inventory and "stockings_and_garterbelt" not in Player.Inventory and ApprovalCheck(StormX, 1500):
+                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in StormX.Inventory and "stockings_and_garterbelt" not in Player.Inventory and approval_check(StormX, 1500):
                     if Player.Cash >= 100:
                         "You purchase the stockings, these will look nice on [StormX.name]."
                         $ Player.Inventory.append("stockings_and_garterbelt")
@@ -4693,7 +4693,7 @@ label LesCheck(Girls=[], BO=[]):
 
     if "three" not in EmmaX.history:
 
-        if EmmaX.Thirst >= 30 and ApprovalCheck(EmmaX, 800, "I"):
+        if EmmaX.Thirst >= 30 and approval_check(EmmaX, 800, "I"):
             $ EmmaX.history.append("three")
 
     $ BO = active_Girls[:]
@@ -4705,7 +4705,7 @@ label LesCheck(Girls=[], BO=[]):
         elif BO[0] == EmmaX and "three" not in EmmaX.history:
 
             pass
-        elif ApprovalCheck(BO[0], 500, "I",Alt=[[EmmaX,JeanX],300]) and BO[0].Thirst >= 30:
+        elif approval_check(BO[0], 500, "I",Alt=[[EmmaX,JeanX],300]) and BO[0].Thirst >= 30:
             if ("mono" not in BO[0].Traits or BO[0].Break[0]) and BO[0] not in Party:
                 $ Girls.append(BO[0])
                 if BO[0].Thirst >= 60:
@@ -4825,14 +4825,14 @@ label JumperCheck(Girls=[], BO=[]):
 
     $ BO = active_Girls[:]
     while BO:
-        if "les" in BO[0].recent_history and "no_les" not in Player.recent_history and ApprovalCheck(BO[0], 1600 - BO[0].SEXP, TabM=0):
+        if "les" in BO[0].recent_history and "no_les" not in Player.recent_history and approval_check(BO[0], 1600 - BO[0].SEXP, TabM=0):
 
             call Call_For_Les (BO[0])
 
         if "locked" in Player.Traits and BO[0].location != bg_current:
 
             pass
-        elif BO[0].remaining_actions and BO[0].Thirst >= 30 and ApprovalCheck(BO[0], 500, "I") and "refused" not in BO[0].daily_history and "met" in BO[0].history:
+        elif BO[0].remaining_actions and BO[0].Thirst >= 30 and approval_check(BO[0], 500, "I") and "refused" not in BO[0].daily_history and "met" in BO[0].history:
             if "chill" not in BO[0].Traits and BO[0].Tag not in Player.daily_history and "jumped" not in BO[0].daily_history and BO[0].location != "bg_teacher":
 
                 if renpy.random.randint(0,3) > 1:
@@ -4914,7 +4914,7 @@ label Jumped(Act=0):
 
     call Taboo_Level
 
-    if Taboo and (not ApprovalCheck(Girls[0], 1500, TabM=3) or (Girls[0] == EmmaX and Taboo and "taboo" not in EmmaX.history)):
+    if Taboo and (not approval_check(Girls[0], 1500, TabM=3) or (Girls[0] == EmmaX and Taboo and "taboo" not in EmmaX.history)):
 
         $ Act = "leave"
 
@@ -4950,7 +4950,7 @@ label Jumped(Act=0):
                 "You tell her to cut it out, and head back to what you were doing."
                 $ Player.recent_history.append("nope")
                 $ Girls[0].AddWord(1,"refused","refused")
-                if not ApprovalCheck(Girls[0], 500, "O"):
+                if not approval_check(Girls[0], 500, "O"):
                     $ Girls[0].AddWord(1,"angry","angry")
                 return
 
@@ -4984,7 +4984,7 @@ label Jumped(Act=0):
                 "You tell her to cut it out, and head back to what you were doing."
                 $ Player.recent_history.append("nope")
                 $ Girls[0].AddWord(1,"refused","refused")
-                if not ApprovalCheck(Girls[0], 500, "O"):
+                if not approval_check(Girls[0], 500, "O"):
                     $ Girls[0].AddWord(1,"angry","angry")
                 return
 
@@ -5109,7 +5109,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                         $ Line = "ask"
                     ". . . [[say nothing, still no].":
                         pass
-            elif (ApprovalCheck(Girl, 600, "I") and Girl.Thirst >= 30) or Girl.Thirst >= 50:
+            elif (approval_check(Girl, 600, "I") and Girl.Thirst >= 30) or Girl.Thirst >= 50:
 
                 $ Girl.change_face("confused",1,Eyes="surprised")
                 $ Girl.change_stat("love", 80, -1)
@@ -5183,7 +5183,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
 
                             $ Girl.change_stat("love", 85, -2)
                             $ Girl.change_stat("obedience", 90, 3)
-                            if ApprovalCheck(Girl, 1500+(5*counter)-(10*Girl.Thirst), "LI"):
+                            if approval_check(Girl, 1500+(5*counter)-(10*Girl.Thirst), "LI"):
 
                                 $ Line = "beg"
                             elif not counter and Count:
@@ -5211,7 +5211,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                                     ch_v "Bummer. . ."
                                 $ counter += 25
                     if Line == "beg":
-                        if ApprovalCheck(Girl, 600+counter, "O") or ApprovalCheck(Girl, 1500+(5*counter)-(10*Girl.Thirst)):
+                        if approval_check(Girl, 600+counter, "O") or approval_check(Girl, 1500+(5*counter)-(10*Girl.Thirst)):
 
                             if counter < 50:
 
@@ -5394,7 +5394,7 @@ label Escalation(Girl=0):
 
     $ action_context = Girl
 
-    if primary_action == "fondle_breast" and ApprovalCheck(Girl,1050,TabM=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.action_counter["suck_breasts"]:
+    if primary_action == "fondle_breast" and approval_check(Girl,1050,TabM=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.action_counter["suck_breasts"]:
 
         if offhand_action == "suck_breasts":
             $ offhand_action = 0
@@ -5403,7 +5403,7 @@ label Escalation(Girl=0):
         if "suck_breasts" in Girl.recent_history:
 
             $ renpy.pop_call()
-    elif primary_action == "fondle_thighs" and ApprovalCheck(Girl,1050,TabM=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.action_counter["fondle_pussy"]:
+    elif primary_action == "fondle_thighs" and approval_check(Girl,1050,TabM=4,Alt=[[JeanX],800]) and Girl.lust >= 30 and Girl.action_counter["fondle_pussy"]:
 
         if offhand_action == "fondle_thighs":
             $ offhand_action = 0
@@ -5415,21 +5415,21 @@ label Escalation(Girl=0):
     elif not Player.semen:
 
         pass
-    elif primary_action == "handjob" and ApprovalCheck(Girl,1200,TabM=4) and Girl.lust >= 30 and Girl.action_counter["blowjob"]:
+    elif primary_action == "handjob" and approval_check(Girl,1200,TabM=4) and Girl.lust >= 30 and Girl.action_counter["blowjob"]:
 
         $ Girl.change_stat("inhibition", 80, 3)
         call expression Girl.Tag + "_BJ_Prep"
         if "blowjob" in Girl.recent_history:
 
             $ renpy.pop_call()
-    elif primary_action not in ("sex","anal") and ApprovalCheck(Girl,1400,TabM=5,Alt=[[JeanX],1200]) and Girl.lust >= 60 and Girl.action_counter["sex"] >= 3:
+    elif primary_action not in ("sex","anal") and approval_check(Girl,1400,TabM=5,Alt=[[JeanX],1200]) and Girl.lust >= 60 and Girl.action_counter["sex"] >= 3:
 
         $ Girl.change_stat("inhibition", 80, 4)
         call expression Girl.Tag + "_SexPrep"
         if "sex" in Girl.recent_history:
 
             $ renpy.pop_call()
-    elif primary_action != "anal" and ApprovalCheck(Girl,1400,TabM=5,Alt=[[JeanX],1200]) and Girl.lust >= 70 and Girl.action_counter["anal"] >= 5:
+    elif primary_action != "anal" and approval_check(Girl,1400,TabM=5,Alt=[[JeanX],1200]) and Girl.lust >= 70 and Girl.action_counter["anal"] >= 5:
 
         $ Girl.change_stat("inhibition", 80, 5)
         call expression Girl.Tag + "_AnalPrep"
@@ -5526,7 +5526,7 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
         "[Line4]"
         if second_girl_primary_action == "suck_breasts" or second_girl_primary_action == "fondle_breasts":
 
-            if ApprovalCheck(Primary,500,"I",TabM=2) and Primary.lust >= 50 and (Primary.ChestNum() > 1 or Primary.OverNum() > 1):
+            if approval_check(Primary,500,"I",TabM=2) and Primary.lust >= 50 and (Primary.ChestNum() > 1 or Primary.OverNum() > 1):
 
                 $ Primary.Uptop = 1
                 "[Primary.name] seems frustrated and pulls her top open."
@@ -5729,29 +5729,29 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
         if Girl == StormX:
 
             $ Approval = 2
-        elif Tempshame <= 15 and (ApprovalCheck(Girl, 600,Bonus=Mod) or ApprovalCheck(Girl, 350, "I")):
+        elif Tempshame <= 15 and (approval_check(Girl, 600,Bonus=Mod) or approval_check(Girl, 350, "I")):
 
-            if ApprovalCheck(Girl, 900,Bonus=Mod) or ApprovalCheck(Girl, 450, "I"):
+            if approval_check(Girl, 900,Bonus=Mod) or approval_check(Girl, 450, "I"):
                 $ Approval = 2
-        elif Tempshame <= 20 and (ApprovalCheck(Girl, 900,Bonus=Mod) or ApprovalCheck(Girl, 450, "I")):
+        elif Tempshame <= 20 and (approval_check(Girl, 900,Bonus=Mod) or approval_check(Girl, 450, "I")):
 
-            if ApprovalCheck(Girl, 1100,Bonus=Mod) or ApprovalCheck(Girl, 550, "I"):
+            if approval_check(Girl, 1100,Bonus=Mod) or approval_check(Girl, 550, "I"):
                 $ Approval = 2
-        elif Tempshame <= 25 and (ApprovalCheck(Girl, 1100,Bonus=Mod) or ApprovalCheck(Girl, 550, "I")):
+        elif Tempshame <= 25 and (approval_check(Girl, 1100,Bonus=Mod) or approval_check(Girl, 550, "I")):
 
-            if ApprovalCheck(Girl, 1400,Bonus=Mod) or ApprovalCheck(Girl, 650, "I"):
+            if approval_check(Girl, 1400,Bonus=Mod) or approval_check(Girl, 650, "I"):
                 $ Approval = 2
-        elif (ApprovalCheck(Girl, 1400,Bonus=Mod) or ApprovalCheck(Girl, 650, "I")):
+        elif (approval_check(Girl, 1400,Bonus=Mod) or approval_check(Girl, 650, "I")):
 
-            if ApprovalCheck(Girl, 1600,Bonus=Mod) or ApprovalCheck(Girl, 850, "I"):
+            if approval_check(Girl, 1600,Bonus=Mod) or approval_check(Girl, 850, "I"):
                 $ Approval = 2
         else:
             $ Approval = 0
 
-    if "exhibitionist" in Girl.Traits or ApprovalCheck(Girl,900,"I"):
+    if "exhibitionist" in Girl.Traits or approval_check(Girl,900,"I"):
 
         $ TabooM = 0
-    elif ApprovalCheck(Girl,50,"X") or ApprovalCheck(Girl,800,"I"):
+    elif approval_check(Girl,50,"X") or approval_check(Girl,800,"I"):
         $ TabooM = .5
 
     if not Approval:
@@ -5762,50 +5762,50 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
     elif not primary_action:
         pass
     elif primary_action == "eat_ass":
-        $ Approval = ApprovalCheck(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ Approval = approval_check(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
     elif primary_action == "anal":
-        $ Approval = ApprovalCheck(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ Approval = approval_check(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
     elif primary_action == "sex":
-        $ Approval = ApprovalCheck(Girl,1400,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ Approval = approval_check(Girl,1400,Bonus=Mod, TabM = (TabooM* 3 ))
     elif primary_action == "eat_pussy":
-        $ Approval = ApprovalCheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
     elif offhand_action == "jackin":
-        $ Approval = ApprovalCheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "blowjob":
-        $ Approval = ApprovalCheck(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "titjob":
-        $ Approval = ApprovalCheck(Girl,1200,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ Approval = approval_check(Girl,1200,Bonus=Mod, TabM = (TabooM* 3 ))
     elif primary_action == "hotdog":
-        $ Approval = ApprovalCheck(Girl,1000,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ Approval = approval_check(Girl,1000,Bonus=Mod, TabM = (TabooM* 3 ))
     elif primary_action == "handjob" or girl_offhand_action == "handjob":
-        $ Approval = ApprovalCheck(Girl,1100,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1100,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "foot":
-        $ Approval = ApprovalCheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "dildo_anal":
-        $ Approval = ApprovalCheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "dildo_pussy":
-        $ Approval = ApprovalCheck(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "finger_ass":
-        $ Approval = ApprovalCheck(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "fondle_pussy" or primary_action == "finger_pussy":
-        $ Approval = ApprovalCheck(Girl,1050,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1050,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "suck_breasts":
-        $ Approval = ApprovalCheck(Girl,1050,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ Approval = approval_check(Girl,1050,Bonus=Mod, TabM = (TabooM* 3 ))
     elif primary_action == "fondle_breasts":
-        $ Approval = ApprovalCheck(Girl,950,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,950,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "fondle_ass":
-        $ Approval = ApprovalCheck(Girl,850,Bonus=Mod, TabM = (TabooM* 1 ))
+        $ Approval = approval_check(Girl,850,Bonus=Mod, TabM = (TabooM* 1 ))
 
     elif primary_action == "masturbation":
-        $ Approval = ApprovalCheck(Girl,1200,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1200,Bonus=Mod, TabM = (TabooM* 2 ))
 
     elif primary_action == "kiss":
-        $ Approval = ApprovalCheck(Girl,500,Bonus=Mod, TabM = 0)
+        $ Approval = approval_check(Girl,500,Bonus=Mod, TabM = 0)
     elif primary_action == "fondle_thighs":
-        $ Approval = ApprovalCheck(Girl,750,Bonus=Mod, TabM = 0)
+        $ Approval = approval_check(Girl,750,Bonus=Mod, TabM = 0)
 
     elif primary_action == "lesbian":
-        $ Approval = ApprovalCheck(Girl,1350,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1350,Bonus=Mod, TabM = (TabooM* 2 ))
 
 
     if not Approval:
@@ -5814,33 +5814,33 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
     elif not second_girl_primary_action:
         pass
     elif second_girl_primary_action == "eat_ass":
-        $ Approval = ApprovalCheck(Girl,1750,Bonus=(Mod+200), TabM = (TabooM* 3 ))
+        $ Approval = approval_check(Girl,1750,Bonus=(Mod+200), TabM = (TabooM* 3 ))
     elif second_girl_primary_action == "eat_pussy":
-        $ Approval = ApprovalCheck(Girl,1450,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1450,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "blowjob":
-        $ Approval = ApprovalCheck(Girl,1300,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1300,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "handjob":
-        $ Approval = ApprovalCheck(Girl,1200,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1200,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "finger_ass":
-        $ Approval = ApprovalCheck(Girl,1500,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1500,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "fondle_pussy":
-        $ Approval = ApprovalCheck(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "suck_breasts":
-        $ Approval = ApprovalCheck(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 3 ))
+        $ Approval = approval_check(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 3 ))
     elif second_girl_primary_action == "fondle_breasts":
-        $ Approval = ApprovalCheck(Girl,1150,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1150,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "kiss girl":
-        $ Approval = ApprovalCheck(Girl,1050,Bonus=(Mod+200), TabM = 0)
+        $ Approval = approval_check(Girl,1050,Bonus=(Mod+200), TabM = 0)
     elif second_girl_primary_action == "kiss both":
-        $ Approval = ApprovalCheck(Girl,1050,Bonus=(Mod+200), TabM = 0)
+        $ Approval = approval_check(Girl,1050,Bonus=(Mod+200), TabM = 0)
     elif second_girl_primary_action == "fondle_ass":
-        $ Approval = ApprovalCheck(Girl,1050,Bonus=(Mod+200), TabM = (TabooM* 1 ))
+        $ Approval = approval_check(Girl,1050,Bonus=(Mod+200), TabM = (TabooM* 1 ))
     elif second_girl_primary_action == "masturbation":
-        $ Approval = ApprovalCheck(Girl,1400,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ Approval = approval_check(Girl,1400,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "watch":
-        $ Approval = ApprovalCheck(Girl,1000,Bonus=(Mod+200), TabM = 0)
+        $ Approval = approval_check(Girl,1000,Bonus=(Mod+200), TabM = 0)
     elif second_girl_primary_action == "kiss":
-        $ Approval = ApprovalCheck(Girl,600,Bonus=Mod, TabM = 0)
+        $ Approval = approval_check(Girl,600,Bonus=Mod, TabM = 0)
 
     if not Silent and not Approval and not Girl.Forced:
         $ Girl.change_face("sadside",1)
@@ -6013,7 +6013,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
             $ Girl.change_face("bemused", 1)
         elif Second == 1:
 
-            if not ApprovalCheck(Girl, 800) and not ApprovalCheck(Girl, 500, "I"):
+            if not approval_check(Girl, 800) and not approval_check(Girl, 500, "I"):
                 $ Girl.change_face("sad", 1)
                 if Girl == RogueX:
                     ch_r "If you're inta that sorta thing. . ."
@@ -6047,7 +6047,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     ch_v "Right?"
         elif Second == 2:
 
-            if not ApprovalCheck(Girl, 800) and not ApprovalCheck(Girl, 500, "I"):
+            if not approval_check(Girl, 800) and not approval_check(Girl, 500, "I"):
                 $ Girl.change_face("sad", 1)
                 if Girl == RogueX:
                     ch_r "Right, whatever. . ."
@@ -6102,9 +6102,9 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
         else:
             "You whip your cock out."
         $ Player.AddWord(1,"cockout")
-        if not Girl.Forced and not React and Taboo > 20 and (not ApprovalCheck(Girl, 1500) or Girl.SEXP < 10) and bg_current != "bg_showerroom" and Girl not in (JeanX,StormX):
+        if not Girl.Forced and not React and Taboo > 20 and (not approval_check(Girl, 1500) or Girl.SEXP < 10) and bg_current != "bg_showerroom" and Girl not in (JeanX,StormX):
 
-            if not ApprovalCheck(Girl, 800) and not ApprovalCheck(Girl, 500, "I"):
+            if not approval_check(Girl, 800) and not approval_check(Girl, 500, "I"):
 
                 if Girl == EmmaX and ("detention" in Girl.recent_history or "classcaught" in Girl.recent_history):
 
@@ -6205,7 +6205,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
         elif Girl.SeenPeen > 10:
 
             return 0
-        elif ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "L"):
+        elif approval_check(Girl, 1200) or approval_check(Girl, 500, "L"):
 
             $ Girl.change_face("sly",1)
             if Girl.SeenPeen == 1:
@@ -6437,7 +6437,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
         $ Player.recent_history.append("cockout")
         if Girl.SeenPeen > 10:
             return
-        elif ApprovalCheck(Girl, 1200) or ApprovalCheck(Girl, 500, "L"):
+        elif approval_check(Girl, 1200) or approval_check(Girl, 500, "L"):
             if Girl.SeenPeen == 1:
                 $ Girl.change_stat("love", 90, 5)
             elif Girl.SeenPeen == 2:
@@ -6601,7 +6601,7 @@ label Girls_Taboo(Girl=0, counter=1, Choice=0, D20=0):
                     ch_v "I'm good if you are. . ."
             $ Girl.change_stat("lust", 200, 4)
             $ Choice = "A"
-        elif ApprovalCheck(Girl, 650, "I", TabM=counter):
+        elif approval_check(Girl, 650, "I", TabM=counter):
 
             $ Girl.change_face("sexy", 1, Brows="sad")
             if "spotted" not in Girl.recent_history:
@@ -6623,7 +6623,7 @@ label Girls_Taboo(Girl=0, counter=1, Choice=0, D20=0):
                     ch_v "Oh, um, they're looking. . ."
             $ Girl.change_stat("lust", 200, 3)
             $ Choice = "B"
-        elif ApprovalCheck(Girl, 1000, "OI", TabM=counter):
+        elif approval_check(Girl, 1000, "OI", TabM=counter):
 
             $ Girl.change_face("surprised", 2)
             if Girl in (EmmaX,StormX):
@@ -6896,7 +6896,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, BO=[]):
         $ Silent = 1
     $ Partner = Other
     $ Line = 0
-    if ApprovalCheck(Other, 2000, TabM=2, Bonus = B) or ApprovalCheck(Other, 950, "L", TabM=2, Bonus = (B/3)):
+    if approval_check(Other, 2000, TabM=2, Bonus = B) or approval_check(Other, 950, "L", TabM=2, Bonus = (B/3)):
 
         $ Other.change_face("sexy", 1)
         if not Silent:
@@ -6906,7 +6906,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, BO=[]):
         $ Other.change_stat("lust", 90, 3)
         $ Other.AddWord(1,0,0,"poly " + Girl.Tag)
         call Threeway_Set (Other, Mode="start", GirlB=Girl)
-    elif ApprovalCheck(Other, 650, "O", TabM=2) and ApprovalCheck(Other, 450, "L", TabM=1) or ApprovalCheck(Other, 800, "O", TabM=2, Bonus = (B/3)):
+    elif approval_check(Other, 650, "O", TabM=2) and approval_check(Other, 450, "L", TabM=1) or approval_check(Other, 800, "O", TabM=2, Bonus = (B/3)):
 
         $ Other.change_face("sexy")
         if not Silent:
@@ -6916,7 +6916,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, BO=[]):
         $ Other.change_stat("lust", 90, 2)
         $ Other.AddWord(1,0,0,"poly " + Girl.Tag)
         call Threeway_Set (Other, "watch", Mode="start", GirlB=Girl)
-    elif ApprovalCheck(Other, 650, "I", TabM=2) and ApprovalCheck(Other, 450, "L", TabM=1) or ApprovalCheck(Other, 800, "I", TabM=2, Bonus = (B/3)):
+    elif approval_check(Other, 650, "I", TabM=2) and approval_check(Other, 450, "L", TabM=1) or approval_check(Other, 800, "I", TabM=2, Bonus = (B/3)):
 
         $ Other.change_face("sexy")
         if not Silent:
@@ -6927,7 +6927,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, BO=[]):
         $ Other.change_stat("lust", 90, 5)
         $ Other.AddWord(1,0,0,"poly " + Girl.Tag)
         call Threeway_Set (Other, "watch", Mode="start", GirlB=Girl)
-    elif ApprovalCheck(Other, 1500, TabM=2, Bonus = B):
+    elif approval_check(Other, 1500, TabM=2, Bonus = B):
         $ Other.change_face("perplexed", 1)
         if not Silent:
             "She looks a little confused at what's happening, but she stays put and watches."
@@ -6943,7 +6943,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, BO=[]):
             $ Other.change_stat("inhibition", 90, 1)
         $ Other.change_stat("lust", 90, 5)
         call Threeway_Set (Other, "watch", Mode="start", GirlB=Girl)
-    elif ApprovalCheck(Other, 650, "L", TabM=1) or ApprovalCheck(Other, 400, "O", TabM=2):
+    elif approval_check(Other, 650, "L", TabM=1) or approval_check(Other, 400, "O", TabM=2):
 
         $ Other.change_face("angry", 2)
         if bg_current == Other.home:
@@ -7451,17 +7451,17 @@ label Girl_TightsRipped(Girl=0, Count=0):
                 pass
             elif Girl.underwear:
                 if Girl.SeenPanties:
-                    $ Count = 3 if not ApprovalCheck(Girl, 600) else Count
+                    $ Count = 3 if not approval_check(Girl, 600) else Count
                 else:
                     $ Girl.SeenPanties = 1
-                    $ Count = 3 if not ApprovalCheck(Girl, 900) else Count
+                    $ Count = 3 if not approval_check(Girl, 900) else Count
                 $ Girl.change_stat("lust", 60, 2)
             else:
                 if Girl.SeenPussy:
-                    $ Count = 3 if not ApprovalCheck(Girl, 900) else Count
+                    $ Count = 3 if not approval_check(Girl, 900) else Count
                 else:
                     call Rogue_First_Bottomless
-                    $ Count = 3 if not ApprovalCheck(Girl, 1400) else Count
+                    $ Count = 3 if not approval_check(Girl, 1400) else Count
 
         if Count != 3:
             $ Girl.AddWord(1,"ripped","ripped")

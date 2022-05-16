@@ -67,7 +67,7 @@ label Jean_Masturbate:
     if JeanX.event_counter["forced"] and not JeanX.Forced:
         $ approval_bonus -= 5*JeanX.event_counter["forced"]
 
-    $ Approval = ApprovalCheck(JeanX, 1300, TabM = 2)
+    $ Approval = approval_check(JeanX, 1300, TabM = 2)
 
     $ JeanX.DrainWord("unseen",1,0)
 
@@ -114,7 +114,7 @@ label Jean_Masturbate:
                         $ JeanX.change_stat("obedience", 80, 3)
                         $ JeanX.change_stat("inhibition", 80, 5)
                         jump Jean_M_Cycle
-                    elif ApprovalCheck(JeanX, 1200):
+                    elif approval_check(JeanX, 1200):
                         $ JeanX.change_face("sly")
                         ch_j "Yeah. . . but I can take a break. . ."
                     else:
@@ -319,7 +319,7 @@ label Jean_Masturbate:
                     jump Jean_M_Prep
             "Just get at it already.":
 
-                $ Approval = ApprovalCheck(JeanX, 450, "OI", TabM = 2)
+                $ Approval = approval_check(JeanX, 450, "OI", TabM = 2)
                 if Approval > 1 or (Approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
@@ -773,7 +773,7 @@ label Jean_Sex_P:
         $ approval_bonus -= 15 if "no_sex" in JeanX.recent_history else 5
 
 
-    $ Approval = ApprovalCheck(JeanX, 1400, TabM = 5)
+    $ Approval = approval_check(JeanX, 1400, TabM = 5)
 
     if action_context == "auto":
         call Jean_Sex_Launch ("sex")
@@ -824,7 +824,7 @@ label Jean_Sex_P:
                     "You press inside some more."
                     $ JeanX.change_stat("obedience", 70, 3)
                     $ JeanX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(JeanX, 700, "O", TabM=1):
+                    if not approval_check(JeanX, 700, "O", TabM=1):
                         $ JeanX.change_face("angry")
                         "[JeanX.name] shoves you away and backhands you in the face."
                         ch_j "Hey, I don't need my powers to hurt you."
@@ -984,7 +984,7 @@ label Jean_Sex_P:
                     $ Line = 0
                     jump Jean_SexPrep
             "Just deal with it.":
-                $ Approval = ApprovalCheck(JeanX, 1150, "OI", TabM = 3)
+                $ Approval = approval_check(JeanX, 1150, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JeanX.Forced):
                     $ JeanX.change_face("confused",Eyes="side")
                     $ JeanX.change_stat("love", 70, -5, 1)
@@ -1345,12 +1345,12 @@ label Jean_Sex_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
-        elif counter == (5 + JeanX.Sex):
+        elif counter == (5 + JeanX.action_counter["sex"]):
             $ JeanX.brows = "confused"
             ch_j "Ok, had enough yet?"
-        elif counter == (10 + JeanX.Sex):
+        elif counter == (10 + JeanX.action_counter["sex"]):
             $ JeanX.brows = "angry"
             menu:
                 ch_j "Hey. . . you. . . about done. . . there?"
@@ -1370,7 +1370,7 @@ label Jean_Sex_Cycle:
                     $ action_context = "shift"
                     jump Jean_SexAfter
                 "No, get back down there.":
-                    if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
+                    if approval_check(JeanX, 1200) or approval_check(JeanX, 500, "O"):
                         $ JeanX.change_stat("love", 200, -5)
                         $ JeanX.change_stat("obedience", 50, 3)
                         $ JeanX.change_stat("obedience", 80, 2)
@@ -1492,7 +1492,7 @@ label Jean_Sex_A:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_anal" in JeanX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JeanX, 1550, TabM = 5)
+    $ Approval = approval_check(JeanX, 1550, TabM = 5)
 
     if action_context == "auto":
         call Jean_Sex_Launch ("anal")
@@ -1544,7 +1544,7 @@ label Jean_Sex_A:
                     "You press into her."
                     $ JeanX.change_stat("obedience", 70, 3)
                     $ JeanX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(JeanX, 700, "O", TabM=1):
+                    if not approval_check(JeanX, 700, "O", TabM=1):
                         $ JeanX.change_face("angry")
                         "[JeanX.name] shoves you away and backhands you in the face."
                         ch_j "Tsk tsk."
@@ -1712,7 +1712,7 @@ label Jean_Sex_A:
                     pass
             "Just deal with it.":
 
-                $ Approval = ApprovalCheck(JeanX, 1250, "OI", TabM = 3)
+                $ Approval = approval_check(JeanX, 1250, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JeanX.Forced):
                     $ JeanX.change_face("confused")
                     $ JeanX.change_stat("love", 70, -5, 1)
@@ -2077,7 +2077,7 @@ label Jean_Anal_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
         elif counter == (5 + JeanX.action_counter["anal"]):
             $ JeanX.brows = "confused"
@@ -2106,7 +2106,7 @@ label Jean_Anal_Cycle:
                     $ action_context = "shift"
                     jump Jean_AnalAfter
                 "No, get back down there.":
-                    if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
+                    if approval_check(JeanX, 1200) or approval_check(JeanX, 500, "O"):
                         $ JeanX.change_stat("love", 200, -5)
                         $ JeanX.change_stat("obedience", 50, 3)
                         $ JeanX.change_stat("obedience", 80, 2)
@@ -2223,7 +2223,7 @@ label Jean_Sex_H:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_hotdog" in JeanX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JeanX, 1000, TabM = 3)
+    $ Approval = approval_check(JeanX, 1000, TabM = 3)
 
     if action_context == "auto":
         call Jean_Sex_Launch ("hotdog")
@@ -2259,7 +2259,7 @@ label Jean_Sex_H:
                     "You grind against her crotch."
                     $ JeanX.change_stat("obedience", 70, 3)
                     $ JeanX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(JeanX, 500, "O", TabM=1):
+                    if not approval_check(JeanX, 500, "O", TabM=1):
                         $ JeanX.change_face("angry")
                         "[JeanX.name] shoves you away."
                         ch_j "Don't push it, [JeanX.player_petname]."
@@ -2418,7 +2418,7 @@ label Jean_Sex_H:
                     pass
             "Just deal with it.":
 
-                $ Approval = ApprovalCheck(JeanX, 350, "OI", TabM = 3)
+                $ Approval = approval_check(JeanX, 350, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JeanX.Forced):
                     $ JeanX.change_face("confused")
                     $ JeanX.change_stat("love", 70, -2, 1)
@@ -2756,7 +2756,7 @@ label Jean_Hotdog_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
         elif counter == (5 + JeanX.action_counter["hotdog"]):
             $ JeanX.brows = "confused"
@@ -2781,7 +2781,7 @@ label Jean_Hotdog_Cycle:
                     $ action_context = "shift"
                     jump Jean_HotdogAfter
                 "No, get back down there.":
-                    if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
+                    if approval_check(JeanX, 1200) or approval_check(JeanX, 500, "O"):
                         $ JeanX.change_stat("love", 200, -5)
                         $ JeanX.change_stat("obedience", 50, 3)
                         $ JeanX.change_stat("obedience", 80, 2)

@@ -13,12 +13,12 @@ label Prologue:
     if "Historia" not in Player.Traits:
         python:
             Player.name  = renpy.input("What is your name?", default="Zero", length = 10)
-            Player.name  = Player.name .strip()        
+            Player.name  = Player.name .strip()
             if not Player.name :
                 Player.name  = "Zero"
             if Player.name in ("master", "sir", "lover", "boyfriend", "sex friend", "fuck buddy"):
                 Line = "Nice try, smartass."
-                Player.name  = "Zero"    
+                Player.name  = "Zero"
         if Line:
             "[Line]"
         menu:
@@ -286,7 +286,8 @@ label tour_parting:
                 $ RogueX.change_stat("inhibition", 50, 10)
                 if "Historia" in Player.Traits:
                     return 1
-                call Makeout (RogueX)
+                $ primary_action = "kiss"
+                call action(RogueX)
                 if "angry" in RogueX.recent_history:
                     $ RogueX.change_stat("love", 200, -10)
                     $ RogueX.change_stat("obedience", 200, 30)
@@ -448,7 +449,8 @@ label Rogue_BF:
     if "Historia" in Player.Traits:
         return 1
     $ approval_bonus = 10
-    call Rogue_SexMenu
+    call shift_focus(RogueX)
+    call enter_main_sex_menu
     $ approval_bonus = 0
     return
 
@@ -604,7 +606,8 @@ label Rogue_Love:
     if "stockings_and_garterbelt" not in RogueX.Inventory:
         $ RogueX.Inventory.append("stockings_and_garterbelt")
     $ approval_bonus = 20
-    call Rogue_SexMenu
+    call shift_focus(RogueX)
+    call enter_main_sex_menu
     $ approval_bonus = 0
     return
 
@@ -768,7 +771,8 @@ label Rogue_Sub:
     if "stockings_and_garterbelt" not in RogueX.Inventory:
         $ RogueX.Inventory.append("stockings_and_garterbelt")
     $ approval_bonus = 10
-    call Rogue_SexMenu
+    call shift_focus(RogueX)
+    call enter_main_sex_menu
     $ approval_bonus = 0
     return
 
@@ -890,7 +894,8 @@ label Rogue_Master:
     if "Historia" in Player.Traits:
         return 1
     $ approval_bonus = 20
-    call Rogue_SexMenu
+    call shift_focus(RogueX)
+    call enter_main_sex_menu
     $ approval_bonus = 0
     return
 
@@ -1011,7 +1016,8 @@ label Rogue_Sexfriend:
             return 1
     $ Player.AddWord(1,"interruption")
     $ approval_bonus = 25
-    call Rogue_SexMenu
+    call shift_focus(RogueX)
+    call enter_main_sex_menu
     $ approval_bonus = 0
     return
 
@@ -1125,7 +1131,8 @@ label Rogue_Fuckbuddy:
         return 1
     $ approval_bonus = 30
     $ Player.AddWord(1,"interruption")
-    call Rogue_SexMenu
+    call shift_focus(RogueX)
+    call enter_main_sex_menu
     $ approval_bonus = 0
     return
 
@@ -1236,7 +1243,7 @@ label Rogue_Frisky_Class:
     else:
         "Professor McCoy is giving a lecture on the X-Gene. In her seat next to you, you notice [RogueX.name] shifting uncomfortably in her seat."
     "Occasionally, you catch her glancing over your way."
-    if not ApprovalCheck(RogueX, 600):
+    if not approval_check(RogueX, 600):
         jump Rogue_Frisky_Class_End
 
     "[RogueX.name] opens her notebook and begins scratching out a note. She detaches the slip of paper from the binder, carefully folding it before sliding it in front of you."
@@ -1260,11 +1267,11 @@ label Rogue_Frisky_Class:
             $ Line = "continue"
         "I do when it's about you.":
 
-            if ApprovalCheck(RogueX, 500, "I") or RogueX.SEXP >= 30:
+            if approval_check(RogueX, 500, "I") or RogueX.SEXP >= 30:
                 $ RogueX.change_face("sly")
                 "[RogueX.name] reads your note and smiles at you suggestively."
                 $ Line = "flirt"
-            elif ApprovalCheck(RogueX, 900):
+            elif approval_check(RogueX, 900):
                 $ RogueX.change_face("confused",2)
                 "[RogueX.name] reads your note and blushes furiously, looking down at her notes."
                 $ RogueX.blushing = 1
@@ -1301,13 +1308,13 @@ label Rogue_Frisky_Class:
                 $ RogueX.change_face("smile")
                 jump Rogue_Frisky_Class_End
             "We could get some \"studying\" done right now.":
-                if ApprovalCheck(RogueX, 1200):
+                if approval_check(RogueX, 1200):
                     $ RogueX.change_face("sly",1)
                     $ RogueX.change_stat("love", 80, 3)
                     $ RogueX.change_stat("inhibition", 60, 3)
                     "[RogueX.name] gets a mischevious grin on her face and leans towards you."
                     $ Line = "flirt"
-                elif ApprovalCheck(RogueX, 700):
+                elif approval_check(RogueX, 700):
                     $ RogueX.change_face("smile",1)
                     $ RogueX.change_stat("inhibition", 60, 2)
                     "[RogueX.name] blushes and smiles your way."
@@ -1360,19 +1367,19 @@ label Rogue_Frisky_Class:
 
                 "Try and slip your hand to her lap." if Line != "fondle_pussy":
                     $ Line = "fondle_pussy"
-                    if ApprovalCheck(RogueX, 1500) and RogueX.action_counter["fondle_pussy"] and RogueX.SEXP >= 40:
+                    if approval_check(RogueX, 1500) and RogueX.action_counter["fondle_pussy"] and RogueX.SEXP >= 40:
                         $ RogueX.change_face("sly")
                         $ RogueX.change_stat("love", 90, 5)
                         $ RogueX.change_stat("obedience", 70, 5)
                         $ RogueX.change_stat("inhibition", 60, 5)
                         "[RogueX.name] gets a mischievous grin and places her hand on your arm."
-                    elif ApprovalCheck(RogueX, 1800) and RogueX.action_counter["fondle_pussy"]:
+                    elif approval_check(RogueX, 1800) and RogueX.action_counter["fondle_pussy"]:
                         $ RogueX.change_face("smile")
                         $ RogueX.change_stat("love", 80, 3)
                         $ RogueX.change_stat("obedience", 70, 7)
                         $ RogueX.change_stat("inhibition", 60, 3)
                         "[RogueX.name] starts slightly as your hand travels up her thigh, but then she lets out a slight grin."
-                    elif ApprovalCheck(RogueX, 2000):
+                    elif approval_check(RogueX, 2000):
                         $ RogueX.change_face("perplexed",2)
                         $ RogueX.change_stat("obedience", 70, 10)
                         $ RogueX.change_stat("inhibition", 60, 3)
@@ -1409,19 +1416,19 @@ label Rogue_Frisky_Class:
 
                 "Start fondling her tits." if Line != "fondle_breasts":
                     $ Line = "fondle_breasts"
-                    if ApprovalCheck(RogueX, 1500) and RogueX.action_counter["fondle_breasts"]and RogueX.SEXP >= 40:
+                    if approval_check(RogueX, 1500) and RogueX.action_counter["fondle_breasts"]and RogueX.SEXP >= 40:
                         $ RogueX.change_stat("love", 80, 5)
                         $ RogueX.change_stat("obedience", 70, 5)
                         $ RogueX.change_stat("inhibition", 60, 3)
                         $ RogueX.change_face("sly")
                         "[RogueX.name] closes her eyes and caresses your arm."
-                    elif ApprovalCheck(RogueX, 1800) and RogueX.action_counter["fondle_breasts"]:
+                    elif approval_check(RogueX, 1800) and RogueX.action_counter["fondle_breasts"]:
                         $ RogueX.change_stat("love", 80, 3)
                         $ RogueX.change_stat("obedience", 70, 7)
                         $ RogueX.change_stat("inhibition", 60, 3)
                         $ RogueX.change_face("smile",1)
                         "[RogueX.name] flinches as your hand travels up her ribcage, but she grins as you reach her breast."
-                    elif ApprovalCheck(RogueX, 2000):
+                    elif approval_check(RogueX, 2000):
                         $ RogueX.change_stat("obedience", 70, 10)
                         $ RogueX.change_stat("inhibition", 60, 3)
                         $ RogueX.change_face("perplexed",2)

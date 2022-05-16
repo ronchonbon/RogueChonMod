@@ -38,7 +38,7 @@ label Jackin(Girl=0, counter=0, BO=[]):
             $ Girl.change_face("angry", 1)
             ch_e "That really isn't appropriate."
             $ Girl.change_stat("lust", 50, 7)
-            if not ApprovalCheck(EmmaX, 1200, TabM = 3):
+            if not approval_check(EmmaX, 1200, TabM = 3):
                 $ Girl.AddWord(0,"angry","angry",0,0)
                 $ renpy.pop_call()
                 return
@@ -53,7 +53,7 @@ label Jackin(Girl=0, counter=0, BO=[]):
                 "[Girl.name] blushes furiously, shocked at your behavior."
             $ Girl.change_face("angry", 1)
             $ Girl.change_stat("lust", 50, 5)
-            if not ApprovalCheck(Girl, 1200, TabM = 3):
+            if not approval_check(Girl, 1200, TabM = 3):
                 $ Girl.AddWord(0,"angry","angry",0,0)
                 $ renpy.pop_call()
                 return
@@ -68,15 +68,15 @@ label Jackin(Girl=0, counter=0, BO=[]):
                 "[Girl.name] looks down at your cock with surprise."
             $ Girl.change_face("perplexed", 1)
             $ Girl.change_stat("lust", 60, 8)
-            if not ApprovalCheck(Girl, 1200, TabM = 3) and Girl != JeanX:
+            if not approval_check(Girl, 1200, TabM = 3) and Girl != JeanX:
                 return
-        elif ApprovalCheck(Girl, 1100, TabM = 3):
+        elif approval_check(Girl, 1100, TabM = 3):
             $ Girl.change_face("surprised", 1)
             $ Girl.eyes = "down"
             "[Girl.name] looks down at your cock and smiles."
             $ Girl.change_face("sly", 1)
             $ Girl.change_stat("lust", 70, 8,Alt=[[EmmaX],60,12])
-        elif ApprovalCheck(Girl, 500, "I", TabM=2):
+        elif approval_check(Girl, 500, "I", TabM=2):
             $ Girl.change_face("surprised", 1)
             $ Girl.eyes = "down"
             "[Girl.name] glances at it, but just smiles in amusement."
@@ -93,33 +93,33 @@ label Jackin(Girl=0, counter=0, BO=[]):
         if Girl.remaining_actions and Girl.location == bg_current:
             $ BO = ["none"]
 
-            if Girl.action_counter["handjob"] >= 5 and ApprovalCheck(Girl, 1100, TabM = 3):
+            if Girl.action_counter["handjob"] >= 5 and approval_check(Girl, 1100, TabM = 3):
                 $ counter = Girl.action_counter["handjob"] - 4
                 $ counter = 10 if counter > 10 else counter
                 while counter:
                     $ BO.append("handjob")
                     $ counter -= 1
-            if Girl.action_counter["blowjob"] >= 5 and ApprovalCheck(Girl, 1300, TabM = 3):
+            if Girl.action_counter["blowjob"] >= 5 and approval_check(Girl, 1300, TabM = 3):
                 $ counter = Girl.action_counter["blowjob"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if "hungry" in Girl.Traits else 0
                 while counter:
                     $ BO.append("blowjob")
                     $ counter -= 1
-            if Girl.action_counter["titjob"] >= 5 and ApprovalCheck(Girl, 1200, TabM = 5):
+            if Girl.action_counter["titjob"] >= 5 and approval_check(Girl, 1200, TabM = 5):
                 $ counter = Girl.action_counter["titjob"] - 4
                 $ counter = 10 if counter > 10 else counter
                 while counter:
                     $ BO.append("Tit")
                     $ counter -= 1
-            if Girl.action_counter["sex"] >= 5 and ApprovalCheck(Girl, 1400, TabM = 5):
+            if Girl.action_counter["sex"] >= 5 and approval_check(Girl, 1400, TabM = 5):
                 $ counter = Girl.action_counter["sex"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if Girl.lust >= 70 else 0
                 while counter:
                     $ BO.append("sex")
                     $ counter -= 1
-            if Girl.action_counter["anal"] >= 5 and ApprovalCheck(Girl, 1550, TabM = 5):
+            if Girl.action_counter["anal"] >= 5 and approval_check(Girl, 1550, TabM = 5):
                 $ counter = Girl.action_counter["anal"] - 4
                 $ counter = 10 if counter > 10 else counter
                 $ counter += 5 if Girl.lust >= 70 and Girl.used_to_anal else 0
@@ -297,7 +297,7 @@ label Girl_Tag(Girl=0, Forced=0, Gloves=0):
                 "As she reaches out, you bat her arm away. The brief contact isn't enough for her."
                 $ Girl.change_face("angry")
                 $ Girl.change_stat("love", 80, -10)
-                if Girl.addiction >= 80 and not ApprovalCheck(Girl, 400, "O",Alt=[[RogueX],600]):
+                if Girl.addiction >= 80 and not approval_check(Girl, 400, "O",Alt=[[RogueX],600]):
 
                     $ Girl.eyes = "manic"
                     "She lashes out and leaps at you, grabbing you by the chin."
@@ -396,7 +396,7 @@ label Slap_Ass(Girl=0):
     $ Girl.event_counter["ass_slapped"] += 1
 
     $ Girl.blushing = 2 if Taboo else 1
-    if ApprovalCheck(Girl, 200, "O", TabM=1):
+    if approval_check(Girl, 200, "O", TabM=1):
         $ Girl.change_face("sexy", 1)
         $ Girl.mouth = "surprised"
         $ Girl.change_stat("lust", 51, 3, 1)
@@ -420,14 +420,14 @@ label Slap_Ass(Girl=0):
         call Girl_Cumming (Girl)
 
     if Taboo:
-        if not ApprovalCheck(Girl, 800, TabM=2):
+        if not approval_check(Girl, 800, TabM=2):
             if Girl.event_counter["ass_slapped"] <= 5:
                 $ Girl.change_stat("obedience", 80, 2)
                 $ Girl.change_stat("obedience", 50, 2)
             $ Girl.change_stat("love", 70, -2)
             $ Girl.change_stat("love", 50, -1)
             "She looks pretty mad though."
-        elif not ApprovalCheck(Girl, 1500, TabM=2):
+        elif not approval_check(Girl, 1500, TabM=2):
             if Girl.event_counter["ass_slapped"] <= 5:
                 $ Girl.change_stat("obedience", 80, 2)
             $ Girl.change_stat("love", 70, -1)
@@ -440,7 +440,7 @@ label Slap_Ass(Girl=0):
             "She gives you a naughty grin."
         $ Girl.blushing = 1
     if Girl.PantsNum() < 5 and Girl.PantiesNum() < 5:
-        if ApprovalCheck(Girl, 500, "O") and Girl.recent_history.count("slap") < 4:
+        if approval_check(Girl, 500, "O") and Girl.recent_history.count("slap") < 4:
             $ Girl.change_stat("obedience", 90, 1)
             $ Girl.change_stat("lust", 200, 3)
         else:
@@ -453,566 +453,6 @@ label Slap_Ass(Girl=0):
 
 
 
-label Makeout(Girl=0):
-    if Girl not in all_Girls:
-        return
-    $ Round -= 5 if Round > 5 else (Round-1)
-    call shift_focus (Girl)
-
-    $ Approval = ApprovalCheck(Girl, 700, TabM=1,Alt=[[RogueX,JeanX],500])
-
-    if Girl == EmmaX and not ApprovalCheck(Girl, 1000):
-
-        $ Girl.change_face("sadside")
-        ch_e "Not when we barely know each other. . ."
-        $ Girl.recent_history.append("no_kissing")
-        $ Girl.daily_history.append("no_kissing")
-        return
-    if Approval > 1 and not Girl.action_counter["kiss"] and not Girl.Forced:
-
-        $ Girl.change_face("sexy")
-        $ Girl.eyes = "side"
-        if Girl == RogueX:
-            ch_r "I've never really been able to do this, so I'm a bit excited to try. . ."
-        elif Girl == KittyX:
-            ch_k "You are kinda cute. . ."
-        elif Girl == EmmaX:
-            ch_e "Well, I suppose it couldn't hurt. . ."
-        elif Girl == LauraX:
-            ch_l "Worth a shot. . ."
-        elif Girl == JeanX:
-            ch_j "Why not?"
-        elif Girl == StormX:
-            ch_s "I would like that."
-        elif Girl == JubesX:
-            ch_v "I guess we did get off to a poor start. . ."
-    elif Approval and not Girl.action_counter["kiss"]:
-
-        $ Girl.change_face("sexy")
-        $ Girl.eyes = "side"
-        if Girl == RogueX:
-            ch_r "I guess it's worth a shot. . ."
-        elif Girl == KittyX:
-            ch_k "I'll give it a go. . ."
-        elif Girl == EmmaX:
-            ch_e "We could. . ."
-        elif Girl == LauraX:
-            ch_l "If you insist. . ."
-        elif Girl == JeanX:
-            ch_j "I mean, whatever. . ."
-        elif Girl == StormX:
-            ch_s "I suppose."
-        elif Girl == JubesX:
-            ch_v "I suppose we could. . ."
-    elif Approval and "kissing" in Girl.recent_history:
-
-        $ Girl.change_face("sexy", 1)
-        if Girl == KittyX:
-            ch_k "Prrr. . ."
-        else:
-            Girl.voice "Mmmm. . ."
-        jump KissPrep
-    elif Approval and "kissing" in Girl.daily_history:
-
-        $ Girl.change_face("sexy", 1)
-
-        $ Line = renpy.random.choice(["A","B","C"])
-        if Line == "A":
-            Girl.voice "Didn't get enough earlier?"
-        elif Girl == RogueX:
-            if Line == "B":
-                ch_r "{i}I'm{/i} used to being the one sucking people dry. . ."
-            else:
-                ch_r "Gimme some sugar, sugar."
-        elif Girl == KittyX:
-            if Line == "B":
-                ch_k "Meow."
-            else:
-                ch_k "Come'ere tasty."
-        elif Girl == EmmaX:
-            if Line == "B":
-                ch_e "Mmmm. . ."
-            else:
-                ch_e "Come and get it."
-        elif Girl == LauraX:
-            if Line == "B":
-                ch_l "Mmmmmm."
-            else:
-                ch_l "Get over here."
-        elif Girl == JeanX:
-            if Line == "B":
-                ch_j "MmMmmm. . ."
-            else:
-                ch_j "Oh, get over here."
-        elif Girl == StormX:
-            if Line == "B":
-                ch_s "Mmmm. . ."
-            else:
-                ch_s "Yes, let's."
-        elif Girl == JubesX:
-            if Line == "B":
-                ch_v "Mmmm. . ."
-            else:
-                ch_v "Sure, come to me."
-        $ Line = 0
-    elif Approval > 1 and Girl.love > Girl.obedience:
-
-        $ Girl.change_face("sexy")
-        if Girl == RogueX:
-            ch_r "Sure, why not?"
-        elif Girl == KittyX:
-            ch_k "Smooches!"
-        elif Girl == EmmaX:
-            ch_e "Mwa."
-        elif Girl == LauraX:
-            ch_l "Mmmmm. . ."
-        elif Girl == JeanX:
-            ch_j "MmMmmmm. . ."
-        elif Girl == StormX:
-            ch_s "Hrm. . ."
-        elif Girl == JubesX:
-            ch_v "Mmmm. . ."
-    elif ApprovalCheck(Girl, 500, "O") and Girl.obedience > Girl.love:
-
-        $ Girl.change_face("normal")
-        if Girl == RogueX:
-            ch_r "If you wish."
-        elif Girl == KittyX:
-            ch_k "Sure, ok."
-        elif Girl == EmmaX:
-            ch_e "Of course."
-        elif Girl == LauraX:
-            ch_l "If you want."
-        elif Girl == JeanX:
-            ch_j "Ok. . ."
-        elif Girl == StormX:
-            ch_s "Very well. . ."
-        elif Girl == JubesX:
-            ch_v "sure. . ."
-        $ Girl.change_stat("obedience", 60, 1)
-    elif ApprovalCheck(Girl, 250, "O",Alt=[[KittyX,LauraX],300]) and ApprovalCheck(Girl, 250, "L",Alt=[[KittyX,LauraX],200]):
-
-        $ Girl.change_face("bemused")
-        Girl.voice "Ok, fine."
-        $ Girl.change_stat("obedience", 50, 3)
-    elif Girl.addiction >= 50:
-
-        $ Girl.change_face("sexy")
-        $ Girl.eyes = "manic"
-        if Girl == RogueX:
-            ch_r "Hm. . . ok, let's do this."
-        elif Girl == KittyX:
-            ch_k "I kinda have to."
-        elif Girl == EmmaX:
-            ch_e ". . . yes."
-        elif Girl == LauraX:
-            ch_l "I have to."
-        elif Girl == JeanX:
-            ch_j "Um. . . yeah. . ."
-        elif Girl == StormX:
-            ch_s ". . . yes. . ."
-        elif Girl == JubesX:
-            ch_v "Oh yes. . ."
-    elif Approval:
-
-        $ Girl.change_face("bemused")
-        if Girl == RogueX:
-            ch_r "hmm, ok."
-        elif Girl == KittyX:
-            ch_k "Yeah, whatever."
-        elif Girl == EmmaX:
-            ch_e "Very well."
-        elif Girl == LauraX:
-            ch_l "Sure."
-        elif Girl == JeanX:
-            ch_j "Whatever. . ."
-        elif Girl == StormX:
-            ch_s "Fine."
-        elif Girl == JubesX:
-            ch_v "Sure, ok. . ."
-    else:
-
-        $ Girl.change_face("normal")
-        $ Girl.mouth = "sad"
-        if Girl == RogueX:
-            ch_r "Nah, I don't think I'm interested."
-        elif Girl == KittyX:
-            ch_k "Nope."
-        elif Girl == EmmaX:
-            ch_e "Hmmm, no."
-        elif Girl == LauraX:
-            ch_l "No."
-        elif Girl == JeanX:
-            ch_j "You wish. . ."
-        elif Girl == StormX:
-            ch_s "I do not think so."
-        elif Girl == JubesX:
-            ch_v "No thanks. . ."
-        $ Girl.recent_history.append("no_kissing")
-        $ Girl.daily_history.append("no_kissing")
-        return
-
-label KissPrep(Girl=focused_Girl):
-    $ Girl = GirlCheck(Girl)
-    $ Girl.change_stat("inhibition", 10, 1)
-    $ Girl.change_stat("inhibition", 20, 1)
-
-    call expression Girl.Tag + "_Kissing_Launch" pass ("kiss")
-
-    if Girl.action_counter["kiss"] >= 10 and Girl.inhibition >= 300:
-        $ Girl.change_face("sucking")
-    elif Girl.action_counter["kiss"] > 1 and Girl.addiction >= 50:
-        $ Girl.change_face("sucking")
-    else:
-        $ Girl.change_face("kiss",2)
-    if Taboo:
-        $ Girl.DrainWord("no_taboo")
-    $ Girl.DrainWord("no_kissing")
-
-    if Girl == RogueX and not Girl.action_counter["kiss"]:
-
-        "You lean in and your lips meet [Girl.name]'s."
-        $ Girl.eyes = "surprised"
-        $ Girl.change_stat("love", 90, 15)
-        $ Girl.change_stat("love", 60, 30)
-        "A slight spark passes between you and her eyes widen with surprise."
-        $ Girl.change_stat("lust", 70, 5)
-        ch_r "Wow, [Girl.player_petname], that was really something. . ."
-        $ Girl.change_face("bemused",1)
-        ch_r "Not the kind of zap I'm used to."
-        $ Girl.addiction -= 5
-        $ Girl.change_stat("obedience", 30, 20)
-        $ Girl.change_stat("inhibition", 30, 30)
-        jump Kiss_After
-
-    if action_context == Girl:
-
-        $ action_context = 0
-        "[Girl.name] presses her body against yours, and kisses you deeply."
-        menu:
-            "What do you do?"
-            "Go with it.":
-                $ Girl.change_stat("inhibition", 80, 3)
-                $ Girl.change_stat("inhibition", 50, 2)
-                "You lean in to the kiss."
-            "Praise her.":
-                $ Girl.change_face("sexy", 1)
-                $ Girl.change_stat("inhibition", 80, 3)
-                ch_p "Mmm, this is a nice surprise, [Girl.petname]."
-                $ Girl.nameCheck()
-                "You lean in to the kiss."
-                $ Girl.change_stat("love", 85, 1)
-                $ Girl.change_stat("obedience", 90, 1)
-                $ Girl.change_stat("obedience", 50, 2)
-            "Ask her to stop.":
-                "You pull back."
-                $ Girl.change_face("surprised")
-                $ Girl.change_stat("inhibition", 70, 1)
-                ch_p "Let's not do that right now, [Girl.petname]."
-                $ Girl.nameCheck()
-                $ Girl.change_stat("obedience", 90, 1)
-                $ Girl.change_stat("obedience", 50, 1)
-                $ Girl.change_stat("obedience", 30, 2)
-                $ Player.recent_history.append("nope")
-                $ Girl.AddWord(1,"refused","refused")
-                return
-
-
-    if Girl.action_counter["kiss"] >= 10 and Girl.lust >= 80:
-        $ Line = renpy.random.choice(["She's all over you, running her hands along your body.",
-                        "She's all over you, licking all over your face and neck.",
-                        "She's all over you, kissing all over your face and grinding against you."])
-    elif Girl.action_counter["kiss"] > 7:
-        $ Line = renpy.random.choice(["She's really sucking face.",
-                        "You kiss deeply and passionately.",
-                        "You kiss deeply and passionately.",
-                        "You kiss deeply and passionately."])
-    elif Girl.action_counter["kiss"] > 3:
-        $ Line = renpy.random.choice(["She's really getting into it.",
-                        "She's really getting into it, her tongue's going at it.",
-                        "She's really getting into it, there's some heavy tongue action."])
-    else:
-        $ Line = "You and "+ Girl.name +" make out for a while."
-    "[Line]"
-    $ counter = 0
-    $ primary_action = "kiss"
-    $ Line = 0
-    if action_context:
-        $ renpy.pop_call()
-        $ action_context = 0
-
-label KissCycle(Girl=0):
-    $ Girl = GirlCheck(Girl)
-    while Round > 0:
-        call shift_focus (Girl)
-        call expression Girl.Tag + "_Kissing_Launch" pass ("kiss")
-        $ Girl.lust_face()
-        $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
-        if Player.focus < 100:
-
-            menu:
-                "Keep going. . .":
-                    pass
-                "Slap her ass":
-
-                    call Slap_Ass (Girl)
-                    $ counter += 1
-                    $ Round -= 1
-                    jump KissCycle
-
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
-                    pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
-                    "You concentrate on not burning out too quickly."
-                    $ Player.focusing = 1
-                "Release your focus." if Player.focusing:
-                    "You release your concentration. . ."
-                    $ Player.focusing = 0
-
-                "Start jack'in it." if multi_action and offhand_action != "jackin":
-                    call Jackin (Girl)
-                "Stop jack'in it." if multi_action and offhand_action == "jackin":
-                    "You stop jack'in it."
-                    $ offhand_action = 0
-                "Other options":
-
-                    menu:
-                        "Offhand action":
-                            if Girl.remaining_actions and multi_action:
-                                call Offhand_Set
-                                if offhand_action:
-                                    $ Girl.remaining_actions -= 1
-                            else:
-                                call Sex_Basic_Dialog (Girl, "tired")
-                        "Shift primary action":
-
-
-                            if Girl.remaining_actions and multi_action:
-                                menu:
-                                    "Move a hand to her breasts. . ." if Girl.action_counter["kiss"] >= 1 and multi_action:
-                                        if Girl.remaining_actions and multi_action:
-                                            $ action_context = "auto"
-                                            call Kiss_After
-                                            call expression Girl.Tag + "_Fondle_Breasts"
-                                            if primary_action == "fondle_breasts":
-                                                $ offhand_action = "kiss"
-                                                call expression Girl.Tag + "_FB_Prep"
-                                            else:
-                                                $ primary_action = "kiss"
-                                        else:
-                                            "As your hands creep upwards, she grabs your wrists."
-                                            call Sex_Basic_Dialog (Girl, "tired")
-
-                                    "Move a hand to her thighs. . ." if Girl.action_counter["kiss"] >= 1 and multi_action:
-                                        if Girl.remaining_actions and multi_action:
-                                            $ action_context = "auto"
-                                            call Kiss_After
-                                            call expression Girl.Tag + "_Fondle_Thighs"
-                                            if primary_action == "fondle_thighs":
-                                                $ offhand_action = "kiss"
-                                                call expression Girl.Tag + "_FT_Prep"
-                                            else:
-                                                $ primary_action = "kiss"
-                                        else:
-                                            "As your hands creep downwards, she grabs your wrists."
-                                            call Sex_Basic_Dialog (Girl, "tired")
-                                    "Never Mind":
-
-                                        jump KissCycle
-                            else:
-                                call Sex_Basic_Dialog (Girl, "tired")
-
-                        "Threesome actions (locked)" if not Partner:
-                            pass
-                        "Threesome actions" if Partner:
-                            menu:
-                                "Ask [Girl.name] to do something else with [Partner.name]" if primary_action == "lesbian":
-                                    call Les_Change (Girl)
-
-                                "Ask [Girl.name] to do something else with [Partner.name] (locked)" if primary_action != "lesbian":
-                                    pass
-                                "Ask [Partner.name] to do something else":
-                                    call Three_Change (Girl)
-
-                                "Don't stop what you're doing. . .(locked)" if not position_timer or not second_girl_primary_action:
-                                    $ position_timer = 0
-                                "Don't stop what you're doing. . ." if position_timer and second_girl_primary_action:
-                                    $ position_timer = 0
-                                "Swap to [Partner.name]":
-
-                                    call primary_action_Swap (Girl)
-                                "Undress [Partner.name]":
-                                    call Girl_Undress (Partner)
-                                    call shift_focus (Partner)
-                                    jump KissCycle
-                                "Clean up Partner":
-                                    call Girl_Cleanup (Partner, "ask")
-
-                                    jump KissCycle
-                                "Never mind":
-                                    jump KissCycle
-                        "Undress [Girl.name]":
-                            call Girl_Undress (Girl)
-                        "Clean up [Girl.name] (locked)" if not Girl.Spunk:
-                            pass
-                        "Clean up [Girl.name]" if Girl.Spunk:
-                            call Girl_Cleanup (Girl, "ask")
-                        "Never mind":
-                            jump KissCycle
-
-                "Back to Sex Menu" if multi_action and Girl.action_counter["kiss"] >= 5:
-                    ch_p "Let's try something else."
-                    $ action_context = "shift"
-                    $ Line = 0
-                    jump Kiss_After
-                "End Scene":
-                    ch_p "Let's stop for now."
-                    $ Line = 0
-                    jump Kiss_After
-
-
-        call shift_focus (Girl)
-        call Sex_Dialog (Girl, Partner)
-
-        $ counter += 1
-        $ Round -= 1
-
-        $ Player.focus = 50 if not Player.semen and Player.focus >= 50 else Player.focus
-        if Player.focus >= 100 or Girl.lust >= 100:
-
-            if Player.focus >= 100:
-
-                call Player_Cumming (Girl)
-                if "angry" in Girl.recent_history:
-                    call expression Girl.Tag + "_Pos_Reset"
-                    return
-                $ Girl.change_stat("lust", 200, 5)
-                if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2 and Girl.SEXP >= 20:
-                    $ Girl.recent_history.append("unsatisfied")
-                    $ Girl.daily_history.append("unsatisfied")
-                if Player.focus > 80:
-                    jump Kiss_After
-                $ Line = "came"
-
-            if Girl.lust >= 100:
-
-                call Girl_Cumming (Girl)
-                if action_context == "shift" or "angry" in Girl.recent_history:
-                    jump Kiss_After
-
-
-            if Line == "came":
-                if not Player.semen:
-                    "You're pretty wiped, better stop for now."
-                $ Line = 0
-                jump Kiss_After
-
-        if Partner and Partner.lust >= 100:
-
-            call Girl_Cumming (Partner)
-
-
-        call Escalation (Girl)
-
-        if Round == 10:
-            call Sex_Basic_Dialog (Girl, 10)
-        elif Round == 5:
-            call Sex_Basic_Dialog (Girl, 5)
-
-
-    $ Girl.change_face("bemused", 0)
-    $ Line = 0
-    call Sex_Basic_Dialog (Girl, "done")
-
-label Kiss_After:
-    $ Girl = GirlCheck(Girl)
-    $ Girl.change_face("sexy")
-
-    $ Girl.action_counter["kiss"] += 1
-    $ Girl.remaining_actions -=1
-    $ Girl.addiction_rate += 2 if Girl.addiction_rate < 5 else 1
-    $ Girl.addiction_rate += 1 if "addictive" in Player.Traits else 0
-
-    call Partner_Like (Girl, 1)
-
-    if "kissing" not in Girl.recent_history:
-        if Girl.love > 300:
-            $ Girl.change_stat("love", 60, 4)
-        $ Girl.change_stat("love", 70, 1)
-        $ Girl.recent_history.append("kissing")
-        $ Girl.daily_history.append("kissing")
-
-    if Girl.action_counter["kiss"] > 10:
-        pass
-    elif Girl.action_counter["kiss"] == 10:
-        $ Girl.change_face("smile", 1)
-        if Girl == RogueX:
-            ch_r "You must really like my lips, huh?"
-        elif Girl == KittyX:
-            ch_k "I could eat you up."
-        elif Girl == EmmaX:
-            ch_e "This has been a pleasant surprise."
-        elif Girl == LauraX:
-            ch_l "I could do this every day."
-        elif Girl == JeanX:
-            ch_j "You've made some serious improvement. . ."
-            ch_j "I must be rubbing off on you. . ."
-        elif Girl == StormX:
-            ch_s "I have grown to enjoy this quite a bit."
-        elif Girl == JubesX:
-            ch_v "I love the taste of your lips. . ."
-    elif Girl.action_counter["kiss"] == 5:
-        if Girl == RogueX:
-            ch_r "We're really making this a regular thing."
-        elif Girl == KittyX:
-            ch_k "You're good at this. . ."
-        elif Girl == EmmaX:
-            ch_e "You're surprisingly talented. . ."
-        elif Girl == LauraX:
-            ch_l "You're really talented. . ."
-        elif Girl == JeanX:
-            ch_j "MmMmmm, that was nice. . ."
-        elif Girl == StormX:
-            ch_s "Mmmm, has anyone told you that you are quite good at this?"
-        elif Girl == JubesX:
-            ch_v "Kissing you really feels great!"
-    elif Girl.action_counter["kiss"] == 1:
-        if Girl == JubesX:
-            "[Girl.name] bites your lip as she pulls back, and licks some blood off her lips."
-            ch_v "Sorry about that. . ."
-            ch_v "Won't happen again."
-        $ Girl.SEXP += 1
-
-    if not action_context and Girl.action_counter["kiss"] > 5 and Girl.lust > 50 and ApprovalCheck(Girl, 950):
-        $ Girl.change_face("sexy", 1)
-        $ Girl.brows = "sad"
-        if Girl == RogueX:
-            ch_r "You maybe want to try something more?"
-        elif Girl == KittyX:
-            ch_k "Is that it?"
-        elif Girl == EmmaX:
-            ch_e "You wouldn't be interested in something more? . ."
-        elif Girl == LauraX:
-            ch_l "Huh, that's all there is to it?"
-        elif Girl == JeanX:
-            ch_j "That was nice. . ."
-        elif Girl == StormX:
-            ch_s "Oh. . . that was lovely."
-        elif Girl == JubesX:
-            ch_v "Did you want. . . more?"
-    $ approval_bonus = 0
-    if action_context:
-        call Sex_Basic_Dialog (Girl, "switch")
-    else:
-        call expression Girl.Tag + "_Pos_Reset"
-    call checkout
-    return
-
-
-
-
-
-
 label Massage(Girl=0, Current=0, Past=0, MCount=0):
     $ Girl = GirlCheck(Girl)
     call shift_focus (Girl)
@@ -1020,7 +460,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
     if "angry" in Girl.recent_history:
         return
 
-    $ Approval = ApprovalCheck(Girl, 500, TabM = 1)
+    $ Approval = approval_check(Girl, 500, TabM = 1)
 
     if Girl == JeanX and not JeanX.Taboo:
         $ Approval = 2
@@ -1469,7 +909,7 @@ label Massage_Cycle:
                 $ Line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 500
 
-            if Girl.massage_chart[MCount] == Current and ApprovalCheck(Girl, Check):
+            if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
                 $ Girl.change_stat("lust", 60, 2)
                 $ Girl.change_stat("lust", 90, 1)
@@ -1488,7 +928,7 @@ label Massage_Cycle:
                 $ Line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 500
 
-            if Girl.massage_chart[MCount] == Current and ApprovalCheck(Girl, Check):
+            if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
                 $ Girl.change_stat("lust", 60, 2)
                 $ Girl.change_stat("lust", 90, 2)
@@ -1511,7 +951,7 @@ label Massage_Cycle:
                 $ Line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 500
 
-            if Girl.massage_chart[MCount] == Current and ApprovalCheck(Girl, Check):
+            if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
                 $ Girl.change_stat("lust", 60, 2)
                 $ Girl.change_stat("lust", 90, 2)
@@ -1536,7 +976,7 @@ label Massage_Cycle:
                 $ Line = "You move your hands to grab " +Girl.name+ "'s " +Current
                 $ Check = 1050
 
-            if Girl.massage_chart[MCount] == Current and ApprovalCheck(Girl, Check):
+            if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
                 $ Girl.change_stat("lust", 60, 1)
                 $ Girl.change_stat("lust", 90, 2)
@@ -1564,7 +1004,7 @@ label Massage_Cycle:
                 $ Line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 500
 
-            if Girl.massage_chart[MCount] == Current and ApprovalCheck(Girl, Check):
+            if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
                 $ Girl.change_stat("lust", 60, 2)
                 $ Girl.change_stat("lust", 90, 1)
@@ -1587,7 +1027,7 @@ label Massage_Cycle:
                 $ Line = "You pick up " +Girl.name+ "'s " +Current+ " and begin to massage them"
                 $ Check = 500
 
-            if Girl.massage_chart[MCount] == Current and ApprovalCheck(Girl, Check):
+            if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
                 $ Girl.change_stat("lust", 70, 2)
                 if Past == Current:
@@ -1611,7 +1051,7 @@ label Massage_Cycle:
                 $ Line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 500
 
-            if Girl.massage_chart[MCount] == Current and ApprovalCheck(Girl, Check):
+            if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
                 $ Girl.change_stat("lust", 60, 2)
                 $ Girl.change_stat("lust", 90, 1)
@@ -1636,7 +1076,7 @@ label Massage_Cycle:
                 $ Line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 950
 
-            if Girl.massage_chart[MCount] == Current and ApprovalCheck(Girl, Check):
+            if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
                 $ Girl.change_stat("lust", 60, 2)
                 $ Girl.change_stat("lust", 90, 1)
@@ -1664,7 +1104,7 @@ label Massage_Cycle:
                 $ Line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 1200
 
-            if Girl.massage_chart[MCount] == Current and ApprovalCheck(Girl, Check):
+            if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
                 $ Girl.change_stat("lust", 60, 2)
                 $ Girl.change_stat("lust", 90, 2)
@@ -1692,7 +1132,7 @@ label Massage_Cycle:
                 $ Line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 600
 
-            if Girl.massage_chart[MCount] == Current and ApprovalCheck(Girl, Check):
+            if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
                 $ Girl.change_stat("lust", 60, 2)
                 $ Girl.change_stat("lust", 90, 1)
@@ -1718,7 +1158,7 @@ label Massage_Cycle:
                 $ Line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 500
 
-            if Girl.massage_chart[MCount] == Current and ApprovalCheck(Girl, Check):
+            if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
                 $ Girl.change_stat("lust", 60, 2)
                 $ Girl.change_stat("lust", 90, 1)
@@ -1741,7 +1181,7 @@ label Massage_Cycle:
                 $ Line = "You begin to rub " +Girl.name+ "'s " +Current
                 $ Check = 600
 
-            if Girl.massage_chart[MCount] == Current and ApprovalCheck(Girl, Check):
+            if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
                 $ Girl.change_stat("lust", 60, 2)
                 $ Girl.change_stat("lust", 90, 1)
@@ -1759,12 +1199,12 @@ label Massage_Cycle:
 
 
 
-        if Girl.massage_chart[MCount] == Current and ApprovalCheck(Girl, Check):
+        if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
 
             if Girl == JeanX:
                 $ Girl.change_stat("love", 60, 1)
                 $ Girl.change_stat("obedience", 30, 1)
-        elif ApprovalCheck(Girl, Check):
+        elif approval_check(Girl, Check):
 
             $ Line = Line + renpy.random.choice([". She wriggles a little in contentment.",
                                 ". She lets out a little hum.",
@@ -1786,7 +1226,7 @@ label Massage_Cycle:
                 elif Current == "pussy":
                     call expression Girl.Tag + "_FP_Prep"
                 return
-        elif ApprovalCheck(Girl, Check-200) or "massagefail" in Girl.recent_history:
+        elif approval_check(Girl, Check-200) or "massagefail" in Girl.recent_history:
 
             $ Line = Line + renpy.random.choice([". She stiffens a bit, but settles back into it.",
                                 ". She doesn't seem to enjoy it.",
@@ -1853,7 +1293,7 @@ label Massage_Cycle:
 
             if Girl.lust >= 100:
 
-                if ApprovalCheck(Girl, 1000, TabM = 1):
+                if approval_check(Girl, 1000, TabM = 1):
                     call Girl_Cumming (Girl)
                 else:
                     call Girl_Cumming (Girl, 1)
@@ -2098,7 +1538,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
         $ renpy.random.shuffle(Present)
         if Girl and Present[0] != Girl:
             $ Party.reverse()
-        elif ApprovalCheck(Present[0],Check=1) <= ApprovalCheck(Present[1],Check=1):
+        elif approval_check(Present[0],Check=1) <= approval_check(Present[1],Check=1):
 
             $ Present.reverse()
 
@@ -2120,8 +1560,8 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
         if Girl == EmmaX and "classcaught" in EmmaX.recent_history and AloneCheck(EmmaX):
 
             pass
-        elif not ApprovalCheck(Present[counter], 600, TabM = 1,Alt=[[EmmaX],(650+Taboo*10)]) or (Present[counter] == EmmaX and Taboo and "taboo" not in EmmaX.history):
-            if not ApprovalCheck(Present[counter], 400):
+        elif not approval_check(Present[counter], 600, TabM = 1,Alt=[[EmmaX],(650+Taboo*10)]) or (Present[counter] == EmmaX and Taboo and "taboo" not in EmmaX.history):
+            if not approval_check(Present[counter], 400):
                 if Present[counter] == RogueX:
                     ch_r "I'm just some sort'a gogo dancer now?"
                 elif Present[counter] == KittyX:
@@ -2144,7 +1584,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
                 elif Present[counter] == EmmaX:
                     ch_e "You must be joking. Here?"
                 elif Present[counter] == LauraX:
-                    if ApprovalCheck(LauraX, 600, TabM = 0):
+                    if approval_check(LauraX, 600, TabM = 0):
                         $ Present.append(LauraX)
                     else:
                         ch_l "I don't feel like it."
@@ -2186,7 +1626,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
                 ch_e "I should really be going."
                 call Remove_Girl (EmmaX)
 
-    if "stripping" in Present[0].daily_history and ApprovalCheck(Present[0], 500, TabM = 3):
+    if "stripping" in Present[0].daily_history and approval_check(Present[0], 500, TabM = 3):
         $ Line = renpy.random.choice(["You liked the show earlier?",
                     "Didn't get enough earlier?",
                     "You're going to wear me out."])
@@ -2393,7 +1833,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
         if Girl == JubesX and Girl.accessory and (Girl.top or Girl.bra) and (Girl.underwear or Girl.legs or Girl.HoseNum() >= 10):
 
-            if ApprovalCheck(Girl, 750, TabM = 3):
+            if approval_check(Girl, 750, TabM = 3):
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 25, 1)
                 $ Player.change_stat("focus", 60, 3)
@@ -2404,7 +1844,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 jump Strip_Ultimatum
         elif Girl == JubesX and Girl.accessory and Girl.top and (Girl.underwear or Girl.legs or Girl.HoseNum() >= 10):
 
-            if ApprovalCheck(Girl, 750, TabM = 3):
+            if approval_check(Girl, 750, TabM = 3):
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 25, 1)
                 $ Player.change_stat("focus", 60, 3)
@@ -2415,7 +1855,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 jump Strip_Ultimatum
         elif Girl.top and Girl.bra and (Girl.underwear or Girl.legs or Girl.HoseNum() >= 10):
 
-            if ApprovalCheck(Girl, 750, TabM = 3,Alt=[[StormX],(300-Nudist*3)]):
+            if approval_check(Girl, 750, TabM = 3,Alt=[[StormX],(300-Nudist*3)]):
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 25, 1)
                 $ Player.change_stat("focus", 60, 3)
@@ -2430,7 +1870,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
         elif Girl.legs and (Girl.underwear or Girl.HoseNum() >= 10):
 
-            if ApprovalCheck(Girl, 1200, TabM = 3,Alt=[[StormX],(600-Nudist*3)]) or (Girl.SeenPanties and ApprovalCheck(Girl, 900, TabM = 3) and not Girl.Taboo):
+            if approval_check(Girl, 1200, TabM = 3,Alt=[[StormX],(600-Nudist*3)]) or (Girl.SeenPanties and approval_check(Girl, 900, TabM = 3) and not Girl.Taboo):
                 $ Girl.change_stat("lust", 50, 5)
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 30, 1)
@@ -2453,14 +1893,14 @@ label Girl_Stripping(Girl=0, Nudist=0):
         elif Girl.hose:
 
             if Girl.HoseNum() >= 10:
-                if ApprovalCheck(Girl, 1200, TabM = 3):
+                if approval_check(Girl, 1200, TabM = 3):
                     $ Girl.change_stat("lust", 50, 6)
                     $ Player.change_stat("focus", 60, 6)
                 else:
                     jump Strip_Ultimatum
 
-            elif Girl.HoseNum() >= 6 and ApprovalCheck(Girl, 1200, TabM = 3):
-                if ApprovalCheck(Girl, 1200, TabM = 3,Alt=[[StormX],(600-Nudist*3)]):
+            elif Girl.HoseNum() >= 6 and approval_check(Girl, 1200, TabM = 3):
+                if approval_check(Girl, 1200, TabM = 3,Alt=[[StormX],(600-Nudist*3)]):
                     $ Girl.change_stat("lust", 50, 4)
                     $ Player.change_stat("focus", 60, 4)
                 else:
@@ -2477,7 +1917,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
         elif Girl == JubesX and Girl.accessory and (Girl.underwear or Girl.legs or Girl.HoseNum() >= 10):
 
-            if ApprovalCheck(Girl, 1250, TabM = 3) or (Girl.SeenChest and ApprovalCheck(Girl, 1000, TabM = 3) and not Girl.Taboo):
+            if approval_check(Girl, 1250, TabM = 3) or (Girl.SeenChest and approval_check(Girl, 1000, TabM = 3) and not Girl.Taboo):
                 $ Girl.change_stat("lust", 60, 5)
                 $ Girl.change_stat("obedience", 50, 2)
                 $ Girl.change_stat("inhibition", 50, 10)
@@ -2497,7 +1937,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 jump Strip_Ultimatum
         elif Girl.top and not Girl.bra and (Girl.underwear or Girl.HoseNum() >= 10):
 
-            if ApprovalCheck(Girl, 1250, TabM = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.SeenChest and ApprovalCheck(Girl, 1000, TabM = 3) and not Girl.Taboo):
+            if approval_check(Girl, 1250, TabM = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.SeenChest and approval_check(Girl, 1000, TabM = 3) and not Girl.Taboo):
                 $ Girl.change_stat("lust", 60, 5)
                 $ Girl.change_stat("obedience", 50, 2)
                 $ Girl.change_stat("inhibition", 50, 10)
@@ -2527,7 +1967,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
         elif Girl.bra and not Girl.top:
 
-            if ApprovalCheck(Girl, 1250, TabM = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.SeenChest and ApprovalCheck(Girl, 1000, TabM = 3) and not Girl.Taboo):
+            if approval_check(Girl, 1250, TabM = 3,Alt=[[StormX],(650-Nudist*3)]) or (Girl.SeenChest and approval_check(Girl, 1000, TabM = 3) and not Girl.Taboo):
                 $ Girl.change_stat("lust", 60, 5)
                 $ Girl.change_stat("obedience", 50, 2)
                 $ Girl.change_stat("inhibition", 50, 1)
@@ -2558,7 +1998,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
         elif Girl.legs:
 
-            if ApprovalCheck(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
+            if approval_check(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and approval_check(Girl, 1100, TabM = 3) and not Girl.Taboo):
                 $ Girl.change_stat("lust", 75, 10)
                 $ Line = Girl.legs
                 $ Girl.legs = 0
@@ -2588,7 +2028,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
         elif Girl == JubesX and Girl.accessory:
 
-            if ApprovalCheck(Girl, 1350, TabM = 3) or (Girl.SeenPussy and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
+            if approval_check(Girl, 1350, TabM = 3) or (Girl.SeenPussy and approval_check(Girl, 1100, TabM = 3) and not Girl.Taboo):
                 $ Line = Girl.accessory
                 $ Girl.accessory = 0
                 if not Girl.SeenPussy:
@@ -2621,7 +2061,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 jump Strip_Ultimatum
         elif Girl.top and not Girl.underwear:
 
-            if ApprovalCheck(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
+            if approval_check(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and approval_check(Girl, 1100, TabM = 3) and not Girl.Taboo):
                 $ Line = Girl.top
                 $ Girl.top = 0
                 if not Girl.SeenPussy:
@@ -2663,7 +2103,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
         elif Girl.bra:
 
-            if ApprovalCheck(Girl, 1250, TabM = 3,Alt=[[StormX],(750-Nudist*3)]) or (Girl.SeenChest and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
+            if approval_check(Girl, 1250, TabM = 3,Alt=[[StormX],(750-Nudist*3)]) or (Girl.SeenChest and approval_check(Girl, 1100, TabM = 3) and not Girl.Taboo):
                 $ Girl.change_stat("lust", 60, 5)
                 $ Line = Girl.bra
                 $ Girl.bra = 0
@@ -2692,7 +2132,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
         elif Girl.underwear:
 
-            if ApprovalCheck(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and ApprovalCheck(Girl, 1100, TabM = 3) and not Girl.Taboo):
+            if approval_check(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.SeenPussy and approval_check(Girl, 1100, TabM = 3) and not Girl.Taboo):
                 $ Girl.change_stat("lust", 75, 10)
                 $ Line = Girl.underwear
                 $ Girl.underwear = 0
@@ -2958,7 +2398,7 @@ label Strip_Ultimatum:
                 elif Girl == JubesX:
                     ch_v "Ok, sure. . ."
         "You'd better." if Girl.Forced:
-            if not ApprovalCheck(Girl, 500, "O", TabM=5) and not ApprovalCheck(Girl, 800, "L", TabM=5):
+            if not approval_check(Girl, 500, "O", TabM=5) and not approval_check(Girl, 800, "L", TabM=5):
                 $ Girl.change_face("angry")
                 if Girl == RogueX:
                     ch_r "I don't know who you think I am, but I ain't gonna just jump when you say \"toad\"."
@@ -3005,7 +2445,7 @@ label Strip_Ultimatum:
                 $ Girl.recent_history.append("stripforced")
             $ Girl.change_stat("love", 200, -40)
         "You can do better than that. Keep going." if not Girl.Forced:
-            if not ApprovalCheck(Girl, 300, "O", TabM=5) and not ApprovalCheck(Girl, 700, "L", TabM=5):
+            if not approval_check(Girl, 300, "O", TabM=5) and not approval_check(Girl, 700, "L", TabM=5):
                 $ Girl.change_face("angry")
                 if Girl == RogueX:
                     ch_r "I don't know who you think I am, but I ain't gonna just jump when you say \"toad\"."
@@ -3298,7 +2738,7 @@ label Les_Interupted(Girl=0, BO=[]):
                 $ Girl.change_stat("obedience", 50, 2)
                 $ Girl.change_stat("obedience", 70, 2)
 
-    if not ApprovalCheck(Girl, 1350):
+    if not approval_check(Girl, 1350):
 
         $ Girl.change_stat("love", 200, -5)
         $ Girl.change_face("angry")
@@ -3421,7 +2861,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
     if Girl.event_counter["forced"] and not Girl.Forced:
         $ approval_bonus -= 5*Girl.event_counter["forced"]
 
-    $ Approval = ApprovalCheck(Girl, 1350, TabM = 2, Bonus = Bonus)
+    $ Approval = approval_check(Girl, 1350, TabM = 2, Bonus = Bonus)
 
     $ Girl.DrainWord("unseen",1,0)
 
@@ -3967,7 +3407,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
             "Just get at it already.":
 
 
-                $ Approval = ApprovalCheck(Girl, 550, "OI", TabM = 2)
+                $ Approval = approval_check(Girl, 550, "OI", TabM = 2)
                 if Approval > 1 or (Approval and Girl.Forced):
                     $ Girl.change_face("sad")
                     $ Girl.change_stat("love", 70, -5, 1)
@@ -4591,7 +4031,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
             "She quickly leaves the room."
             return 0
 
-    if not Speaker.Action:
+    if not Speaker.remaining_actions:
 
         if Speaker == RogueX:
             ch_r "I'm sorry, I'm just worn out"
@@ -4644,7 +4084,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
     if Speaker == JeanX:
         $ B += 100
 
-    $ Approval = ApprovalCheck(Speaker, 1300, TabM = 2, Bonus = B)
+    $ Approval = approval_check(Speaker, 1300, TabM = 2, Bonus = B)
 
     if not Approval:
 
@@ -4802,7 +4242,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
                     elif Speaker == JubesX:
                         ch_v "I don't know, I don't think so. . ."
             "Get in there, now.":
-                if ApprovalCheck(Speaker, 550, "OI", TabM = 2):
+                if approval_check(Speaker, 550, "OI", TabM = 2):
                     $ Speaker.change_face("sadside", 1)
                     if Speaker == RogueX:
                         ch_r "Fine, whatever."

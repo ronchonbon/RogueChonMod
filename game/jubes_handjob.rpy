@@ -37,7 +37,7 @@ label Jubes_Handjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_handjob" in JubesX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JubesX, 1100, TabM = 3)
+    $ Approval = approval_check(JubesX, 1100, TabM = 3)
 
     if not JubesX.action_counter["handjob"] and "no_handjob" not in JubesX.recent_history:
         $ JubesX.change_face("confused", 2)
@@ -174,7 +174,7 @@ label Jubes_Handjob:
                     pass
             "Come on, get to work.":
 
-                $ Approval = ApprovalCheck(JubesX, 350, "OI", TabM = 3)
+                $ Approval = approval_check(JubesX, 350, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
@@ -494,7 +494,7 @@ label Jubes_HJ_Cycle:
                     $ action_context = "shift"
                     jump Jubes_HJ_After
                 "No, get back down there.":
-                    if ApprovalCheck(JubesX, 1200) or ApprovalCheck(JubesX, 500, "O"):
+                    if approval_check(JubesX, 1200) or approval_check(JubesX, 500, "O"):
                         $ JubesX.change_stat("love", 200, -5)
                         $ JubesX.change_stat("obedience", 50, 3)
                         $ JubesX.change_stat("obedience", 80, 2)
@@ -510,7 +510,7 @@ label Jubes_HJ_Cycle:
                         $ JubesX.recent_history.append("angry")
                         $ JubesX.daily_history.append("angry")
                         jump Jubes_HJ_After
-        elif counter == 10 and JubesX.SEXP <= 100 and not ApprovalCheck(JubesX, 1200, "LO"):
+        elif counter == 10 and JubesX.SEXP <= 100 and not approval_check(JubesX, 1200, "LO"):
             $ JubesX.brows = "confused"
             ch_v "This working for you?"
 
@@ -589,7 +589,7 @@ label Jubes_Titjob:
     elif JubesX.addiction >= 75:
         $ approval_bonus += 5
 
-    if JubesX.SeenChest and ApprovalCheck(JubesX, 500):
+    if JubesX.SeenChest and approval_check(JubesX, 500):
         $ approval_bonus += 10
     if not JubesX.bra and not JubesX.top:
         $ approval_bonus += 10
@@ -613,7 +613,7 @@ label Jubes_Titjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_titjob" in JubesX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JubesX, 1200, TabM = 4)
+    $ Approval = approval_check(JubesX, 1200, TabM = 4)
 
     if not JubesX.action_counter["titjob"] and "no_titjob" not in JubesX.recent_history:
         $ JubesX.change_face("surprised", 1)
@@ -752,7 +752,7 @@ label Jubes_Titjob:
                     $ Line = 0
                     jump Jubes_TJ_Prep
                 else:
-                    $ Approval = ApprovalCheck(JubesX, 1100, TabM = 3)
+                    $ Approval = approval_check(JubesX, 1100, TabM = 3)
                     if Approval >= 2 and JubesX.action_counter["blowjob"]:
                         $ JubesX.change_stat("inhibition", 80, 1)
                         $ JubesX.change_stat("inhibition", 60, 3)
@@ -790,7 +790,7 @@ label Jubes_Titjob:
 
 
                 $ JubesX.nameCheck()
-                $ Approval = ApprovalCheck(JubesX, 700, "OI", TabM = 4)
+                $ Approval = approval_check(JubesX, 700, "OI", TabM = 4)
                 if Approval > 1 or (Approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
@@ -1089,7 +1089,7 @@ label Jubes_TJ_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if JubesX.SEXP >= 100 or ApprovalCheck(JubesX, 1200, "LO"):
+        if JubesX.SEXP >= 100 or approval_check(JubesX, 1200, "LO"):
             pass
         elif counter == (5 + JubesX.action_counter["titjob"]):
             $ JubesX.brows = "confused"
@@ -1114,7 +1114,7 @@ label Jubes_TJ_Cycle:
                     $ action_context = "shift"
                     jump Jubes_TJ_After
                 "No, get back down there.":
-                    if ApprovalCheck(JubesX, 1200) or ApprovalCheck(JubesX, 500, "O"):
+                    if approval_check(JubesX, 1200) or approval_check(JubesX, 500, "O"):
                         $ JubesX.change_stat("love", 200, -5)
                         $ JubesX.change_stat("obedience", 50, 3)
                         $ JubesX.change_stat("obedience", 80, 2)
@@ -1221,7 +1221,7 @@ label Jubes_Blowjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_blowjob" in JubesX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JubesX, 1300, TabM = 4)
+    $ Approval = approval_check(JubesX, 1300, TabM = 4)
 
     if not JubesX.action_counter["blowjob"] and "no_blowjob" not in JubesX.recent_history:
         $ JubesX.change_face("surprised", 2)
@@ -1363,7 +1363,7 @@ label Jubes_Blowjob:
                     $ Line = 0
                     jump Jubes_BJ_Prep
                 else:
-                    if ApprovalCheck(JubesX, 1100, TabM = 3):
+                    if approval_check(JubesX, 1100, TabM = 3):
                         $ JubesX.change_stat("inhibition", 80, 1)
                         $ JubesX.change_stat("inhibition", 60, 3)
                         $ JubesX.change_face("confused", 1)
@@ -1389,7 +1389,7 @@ label Jubes_Blowjob:
 
 
                 $ JubesX.nameCheck()
-                $ Approval = ApprovalCheck(JubesX, 750, "OI", TabM = 3)
+                $ Approval = approval_check(JubesX, 750, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
@@ -1727,7 +1727,7 @@ label Jubes_BJ_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if JubesX.SEXP >= 100 or ApprovalCheck(JubesX, 1200, "LO"):
+        if JubesX.SEXP >= 100 or approval_check(JubesX, 1200, "LO"):
             pass
         elif counter == (10 + JubesX.action_counter["blowjob"]):
             $ JubesX.brows = "angry"
@@ -1749,7 +1749,7 @@ label Jubes_BJ_Cycle:
                     $ action_context = "shift"
                     jump Jubes_BJ_After
                 "No, get back down there.":
-                    if ApprovalCheck(JubesX, 1200) or ApprovalCheck(JubesX, 500, "O"):
+                    if approval_check(JubesX, 1200) or approval_check(JubesX, 500, "O"):
                         $ JubesX.change_stat("love", 200, -5)
                         $ JubesX.change_stat("obedience", 50, 3)
                         $ JubesX.change_stat("obedience", 80, 2)
@@ -1765,7 +1765,7 @@ label Jubes_BJ_Cycle:
                         $ JubesX.recent_history.append("angry")
                         $ JubesX.daily_history.append("angry")
                         jump Jubes_BJ_After
-        elif counter == (5 + JubesX.action_counter["blowjob"]) and JubesX.SEXP <= 100 and not ApprovalCheck(JubesX, 1200, "LO"):
+        elif counter == (5 + JubesX.action_counter["blowjob"]) and JubesX.SEXP <= 100 and not approval_check(JubesX, 1200, "LO"):
             $ JubesX.brows = "confused"
             ch_v "Are you getting close here? I'm bored."
 
@@ -1819,7 +1819,7 @@ label Jubes_BJ_After:
                 $ JubesX.change_stat("obedience", 80, 5)
                 $ JubesX.change_stat("inhibition", 90, 10)
             "[[shake head \"no\"]":
-                if ApprovalCheck(JubesX, 500, "O"):
+                if approval_check(JubesX, 500, "O"):
                     $ JubesX.change_face("sad", 2)
                     $ JubesX.change_stat("love", 200, -5)
                 else:
@@ -1885,7 +1885,7 @@ label Jubes_Dildo_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_dildo" in JubesX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JubesX, 1250, TabM = 4)
+    $ Approval = approval_check(JubesX, 1250, TabM = 4)
 
     if action_context == JubesX:
         if Approval > 2:
@@ -1968,7 +1968,7 @@ label Jubes_Dildo_Pussy:
                     "You press it inside some more."
                     $ JubesX.change_stat("obedience", 70, 3)
                     $ JubesX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(JubesX, 700, "O", TabM=1):
+                    if not approval_check(JubesX, 700, "O", TabM=1):
                         $ JubesX.change_face("angry")
                         "[JubesX.name] shoves you away and slaps you in the face."
                         ch_v "Jerk!"
@@ -2126,7 +2126,7 @@ label Jubes_Dildo_Pussy:
                     pass
             "[[press it against her]":
 
-                $ Approval = ApprovalCheck(JubesX, 950, "OI", TabM = 3)
+                $ Approval = approval_check(JubesX, 950, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
@@ -2379,14 +2379,14 @@ label Jubes_DP_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if JubesX.SEXP >= 100 or ApprovalCheck(JubesX, 1200, "LO"):
+        if JubesX.SEXP >= 100 or approval_check(JubesX, 1200, "LO"):
             pass
         elif counter == (5 + JubesX.action_counter["dildo_pussy"]):
             $ JubesX.brows = "confused"
             ch_v "What are you even doing down there?"
         elif JubesX.lust >= 80:
             pass
-        elif counter == (15 + JubesX.action_counter["dildo_pussy"]) and JubesX.SEXP >= 15 and not ApprovalCheck(JubesX, 1500):
+        elif counter == (15 + JubesX.action_counter["dildo_pussy"]) and JubesX.SEXP >= 15 and not approval_check(JubesX, 1500):
             $ JubesX.brows = "confused"
             menu:
                 ch_v "[JubesX.player_petname], this is getting uncomfortable, maybe we could try something else."
@@ -2398,7 +2398,7 @@ label Jubes_DP_Cycle:
                     $ action_context = "shift"
                     jump Jubes_DP_After
                 "No, this is fun.":
-                    if ApprovalCheck(JubesX, 1200) or ApprovalCheck(JubesX, 500, "O"):
+                    if approval_check(JubesX, 1200) or approval_check(JubesX, 500, "O"):
                         $ JubesX.change_stat("love", 200, -5)
                         $ JubesX.change_stat("obedience", 50, 3)
                         $ JubesX.change_stat("obedience", 80, 2)
@@ -2501,7 +2501,7 @@ label Jubes_Dildo_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_dildo" in JubesX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JubesX, 1450, TabM = 4)
+    $ Approval = approval_check(JubesX, 1450, TabM = 4)
 
     if action_context == JubesX:
 
@@ -2587,7 +2587,7 @@ label Jubes_Dildo_Ass:
                     "You press it inside some more."
                     $ JubesX.change_stat("obedience", 70, 3)
                     $ JubesX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(JubesX, 700, "O", TabM=1):
+                    if not approval_check(JubesX, 700, "O", TabM=1):
                         $ JubesX.change_face("angry")
                         "[JubesX.name] shoves you away and slaps you in the face."
                         ch_v "Jerk!"
@@ -2751,7 +2751,7 @@ label Jubes_Dildo_Ass:
                     pass
             "[[press it against her]":
 
-                $ Approval = ApprovalCheck(JubesX, 1050, "OI", TabM = 3)
+                $ Approval = approval_check(JubesX, 1050, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
@@ -2999,14 +2999,14 @@ label Jubes_DA_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if JubesX.SEXP >= 100 or ApprovalCheck(JubesX, 1200, "LO"):
+        if JubesX.SEXP >= 100 or approval_check(JubesX, 1200, "LO"):
             pass
         elif counter == (5 + JubesX.action_counter["dildo_ass"]):
             $ JubesX.brows = "confused"
             ch_v "What are you even doing down there?"
         elif JubesX.lust >= 80:
             pass
-        elif counter == (15 + JubesX.action_counter["dildo_ass"]) and JubesX.SEXP >= 15 and not ApprovalCheck(JubesX, 1500):
+        elif counter == (15 + JubesX.action_counter["dildo_ass"]) and JubesX.SEXP >= 15 and not approval_check(JubesX, 1500):
             $ JubesX.brows = "confused"
             menu:
                 ch_v "[JubesX.player_petname], this is getting uncomfortable, maybe we could try something else."
@@ -3018,7 +3018,7 @@ label Jubes_DA_Cycle:
                     $ action_context = "shift"
                     jump Jubes_DA_After
                 "No, this is fun.":
-                    if ApprovalCheck(JubesX, 1200) or ApprovalCheck(JubesX, 500, "O"):
+                    if approval_check(JubesX, 1200) or approval_check(JubesX, 500, "O"):
                         $ JubesX.change_stat("love", 200, -5)
                         $ JubesX.change_stat("obedience", 50, 3)
                         $ JubesX.change_stat("obedience", 80, 2)
@@ -3127,7 +3127,7 @@ label Jubes_Footjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_foot" in JubesX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JubesX, 1250, TabM = 3)
+    $ Approval = approval_check(JubesX, 1250, TabM = 3)
 
     if action_context == JubesX:
         if Approval > 2:
@@ -3304,7 +3304,7 @@ label Jubes_Footjob:
                     pass
             "Come on, get to work.":
 
-                $ Approval = ApprovalCheck(JubesX, 400, "OI", TabM = 3)
+                $ Approval = approval_check(JubesX, 400, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
@@ -3604,7 +3604,7 @@ label Jubes_FJ_Cycle:
                     $ action_context = "shift"
                     jump Jubes_FJ_After
                 "No, get back down there.":
-                    if ApprovalCheck(JubesX, 1200) or ApprovalCheck(JubesX, 500, "O"):
+                    if approval_check(JubesX, 1200) or approval_check(JubesX, 500, "O"):
                         $ JubesX.change_stat("love", 200, -5)
                         $ JubesX.change_stat("obedience", 50, 3)
                         $ JubesX.change_stat("obedience", 80, 2)
@@ -3620,7 +3620,7 @@ label Jubes_FJ_Cycle:
                         $ JubesX.recent_history.append("angry")
                         $ JubesX.daily_history.append("angry")
                         jump Jubes_FJ_After
-        elif counter == 10 and JubesX.SEXP <= 100 and not ApprovalCheck(JubesX, 1200, "LO"):
+        elif counter == 10 and JubesX.SEXP <= 100 and not approval_check(JubesX, 1200, "LO"):
             $ JubesX.brows = "confused"
             ch_v "Ok, seriously, let's try something different."
 

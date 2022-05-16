@@ -6,10 +6,10 @@ label enter_main_sex_menu:
             return
 
         if "three" not in focused_Girl.history and not AloneCheck(focused_Girl):
-            call expression focused_Girl.Tag + "_ThreeCheck
+            call expression focused_Girl.Tag + "_ThreeCheck"
 
         if Taboo > 20 and "taboo" not in focused_Girl.history:
-            call expression focused_Girl.Tag + "_Taboo_Talk
+            call expression focused_Girl.Tag + "_Taboo_Talk"
 
             if bg_current == "bg_classroom" or bg_current in PersonalRooms and AloneCheck(focused_Girl):
                 ch_p "We could just lock the door, right?"
@@ -39,7 +39,7 @@ label enter_main_sex_menu:
 
     if not Player.semen:
         "You're a little out of juice at the moment, you might want to wait a bit."
-    if Player.Focus >= 95:
+    if Player.focus >= 95:
         "You're practically buzzing, the slightest breeze could set you off."
     if not focused_Girl.remaining_actions:
         "[focused_Girl.name]'s looking a bit tired out, maybe let her rest a bit."
@@ -89,17 +89,17 @@ label enter_main_sex_menu:
 label girl_sex_menu(Girl):
     if Girl == RogueX:
         $ main_line = "So what would you like to do?"
-        $ fondle_line = "Well where exactly were you interested in touching, " + Girl.Petname + "?"
-        $ handjob_line = "What did you have in mind, " + Girl.Petname + "?"
+        $ fondle_line = "Well where exactly were you interested in touching, " + Girl.player_petname + "?"
+        $ handjob_line = "What did you have in mind, " + Girl.player_petname + "?"
         $ show_line = "What sort of show were you expecting?"
     elif Girl == KittyX:
         $ main_line = "So what would you like to do?"
-        $ fondle_line = "Um, what did you want to touch, " + Girl.Petname + "?"
+        $ fondle_line = "Um, what did you want to touch, " + Girl.player_petname + "?"
         $ handjob_line = Girl.Like + "what did you want me to do?"
         $ show_line = Girl.Like + "what did you want to see?"
     elif Girl == EmmaX:
         $ main_line = "So, what was it you hoped to do?"
-        $ fondle_line = "Well? Where did you want to touch, " + Girl.Petname + "?"
+        $ fondle_line = "Well? Where did you want to touch, " + Girl.player_petname + "?"
         $ handjob_line = "What did you want me to do?"
         $ show_line = "What did you want to see?"
     elif Girl == LauraX:
@@ -114,7 +114,7 @@ label girl_sex_menu(Girl):
         $ show_line = "What kind of show are you thinking?"
     elif Girl == StormX:
         $ main_line = "So, what was it you hoped to do?"
-        $ fondle_line = "What did you wish to touch, " + Girl.Petname + "?"
+        $ fondle_line = "What did you wish to touch, " + Girl.player_petname + "?"
         $ handjob_line = "What did you want me to do?"
         $ show_line = "What did you want to see?"
     elif Girl == JubesX:
@@ -127,7 +127,9 @@ label girl_sex_menu(Girl):
         Girl.voice "[main_line]"
         "Do you want to make out?":
             if Girl.remaining_actions:
-                call Makeout (Girl)
+                $ primary_action = "kiss"
+
+                call action(Girl)
             else:
                 call out_of_action_lines(Girl)
         "Could I touch you?":
@@ -142,17 +144,23 @@ label girl_sex_menu(Girl):
                     "Could I give you a massage?":
                         call Massage (Girl)
                     "Your thighs?" if Girl.remaining_actions:
-                        call expression Girl.Tag + "_Fondle_Thighs"
+                        $ primary_action = "fondle_thighs"
+                        call action(Girl)
                     "Your breasts?":
-                        call expression Girl.Tag + "_Fondle_Breasts"
+                        $ primary_action = "fondle_breasts"
+                        call action(Girl)
                     "Suck your breasts?" if Girl.remaining_actions and Girl.action_counter["suck_breasts"]:
-                        call expression Girl.Tag + "_Suck_Breasts"
+                        $ primary_action = "suck_breasts"
+                        call action(Girl)
                     "Your pussy?" if Girl.remaining_actions:
-                        call expression Girl.Tag + "_Fondle_Pussy"
+                        $ primary_action = "fondle_pussy"
+                        call action(Girl)
                     "Lick your pussy?" if Girl.remaining_actions and Girl.action_counter["eat_pussy"]:
-                        call expression Girl.Tag + "_Lick_Pussy"
+                        $ primary_action = "lick_pussy"
+                        call action(Girl)
                     "Your ass?":
-                        call expression Girl.Tag + "_Fondle_Ass"
+                        $ primary_action = "fondle_ass"
+                        call action(Girl)
                     "Never mind [[something else]":
                         jump main_sex_menu
             else:
@@ -162,13 +170,17 @@ label girl_sex_menu(Girl):
                 menu:
                     Girl.voice "[handjob_line]"
                     "Could you give me a handjob?":
-                        call expression Girl.Tag + "_Handjob"
-                    "Could you give me a titjob?":
-                        call expression Girl.Tag + "_Titjob"
-                    "Could you suck my cock?":
-                        call expression Girl.Tag + "_Blowjob"
+                        $ primary_action = "handjob"
+                        call action(Girl)
                     "Could use your feet?":
-                        call expression Girl.Tag + "_Footjob"
+                        $ primary_action = "footjob"
+                        call action(Girl)
+                    "Could you give me a titjob?":
+                        $ primary_action = "titjob"
+                        call action(Girl)
+                    "Could you suck my cock?":
+                        $ primary_action = "blowjob"
+                        call action(Girl)
                     "Never mind [[something else]":
                         jump main_sex_menu
             elif not Girl.remaining_actions:
@@ -190,7 +202,7 @@ label girl_sex_menu(Girl):
                     call Girl_Cleanup(Girl,"ask")
                 "Could I watch you get yourself off? [[masturbate]":
                     if Girl.remaining_actions:
-                        call expression Girl.Tag "_Masturbate"
+                        call expression Girl.Tag + "_Masturbate"
                     else:
                         call out_of_action_lines(Girl)
                 "Maybe make out with [RogueX.name]?" if Girl != RogueX and RogueX.location == bg_current:
@@ -213,23 +225,28 @@ label girl_sex_menu(Girl):
                     Girl.voice "[main_line]"
                     "Come over here, I've got something in mind. . .":
                         if Player.semen:
-                            call expression character.Tag "_Sex_H"
+                            $ primary_action = "hotdog"
+                            call action(Girl)
                         else:
                             "The spirit is apparently willing, but the flesh is spongy and bruised."
                     "Fuck your pussy.":
                         if Player.semen:
-                            call expression character.Tag "_Sex_P"
+                            $ primary_action = "sex"
+                            call action(Girl)
                         else:
                             "The spirit is apparently willing, but the flesh is spongy and bruised."
                     "Fuck your ass.":
                         if Player.semen:
-                            call expression character.Tag "_Sex_A"
+                            $ primary_action = "anal"
+                            call action(Girl)
                         else:
                             "The spirit is apparently willing, but the flesh is spongy and bruised."
                     "How about some toys? [[Pussy]":
-                        call expression character.Tag "_Dildo_Pussy"
+                        $ primary_action = "dildo_pussy"
+                        call action(Girl)
                     "How about some toys? [[Anal]":
-                        call expression character.Tag "_Dildo_Ass"
+                        $ primary_action = "dildo_ass"
+                        call action(Girl)
                     "Never mind [[something else]":
                         jump main_sex_menu
             else:
@@ -326,3 +343,1388 @@ label girl_sex_menu(Girl):
             return True
 
     return False
+
+label begging_menu(Girl, action):
+    menu:
+        extend ""
+        "Sorry, never mind." if "no_" + action in Girl.daily_history:
+            $ Girl.change_face("bemused")
+
+            call no_problem_lines(Girl)
+
+            return
+        "Maybe later?" if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "fondle_ass", "handjob", "footjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"] and "no_" + action not in Girl.daily_history:
+            $ Girl.change_face("sexy")
+
+            if action == "fondle_breasts" and Girl not in [LauraX, JubesX]:
+                "She re-adjusts her cleavage."
+
+            call maybe_later_lines(Girl)
+
+            if action in ["fondle_thighs", "fondle_breasts", "suck_breasts"]:
+                $ Girl.change_stat("love", 80, 1)
+                $ Girl.change_stat("inhibition", 30, 2)
+
+                if action in ["fondle_breasts", "suck_breasts"]:
+                    $ Girl.change_stat("love", 50, 1)
+            elif action in ["fondle_pussy"]:
+                $ Girl.change_stat("love", 80, 2)
+                $ Girl.change_stat("inhibition", 70, 2)
+            elif action in ["fondle_ass"]:
+                $ Girl.change_stat("love", 80, 2)
+                $ Girl.change_stat("inhibition", 50, 2)
+            elif action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal"]:
+                $ Girl.change_stat("love", 80, 2)
+                $ Girl.change_stat("inhibition", 70, 2)
+            elif action in ["hotdog"]:
+                $ Girl.change_stat("love", 80, 1)
+                $ Girl.change_stat("inhibition", 50, 1)
+
+            if Taboo:
+                $ Girl.AddWord(1, "tabno", "tabno")
+
+            $ Girl.recent_history.append("no_" + action)
+            $ Girl.daily_history.append("no_" + action)
+
+            jump begging_rejected
+        "Come on, please?" if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "blowjob"]:
+            if Approval:
+                $ Girl.change_face("sexy")
+
+                if action == "fondle_thighs":
+                    $ Girl.change_stat("obedience", 60, 1)
+                    $ Girl.change_stat("obedience", 30, 2)
+                    $ Girl.change_stat("inhibition", 50, 1)
+                    $ Girl.change_stat("inhibition", 30, 2)
+                elif action in ["fondle_breasts", "suck_breasts"]:
+                    if Girl != LauraX:
+                        $ Girl.change_stat("obedience", 90, 1)
+
+                    $ Girl.change_stat("obedience", 50, 2)
+                    $ Girl.change_stat("inhibition", 60, 3)
+                    $ Girl.change_stat("inhibition", 30, 2)
+                elif action in ["fondle_pussy", "blowjob"]:
+                    $ Girl.change_stat("obedience", 90, 2)
+                    $ Girl.change_stat("obedience", 50, 2)
+                    $ Girl.change_stat("inhibition", 70, 3)
+                    $ Girl.change_stat("inhibition", 40, 2)
+
+                call reward_politeness_lines(Girl)
+
+                if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy"]:
+                    jump before_fondle
+                elif action in ["blowjob"]:
+                    $ line = renpy.random.choice(["Well, sure, ahhhhhh.",
+                        "Well. . . ok.",
+                        "I guess a taste couldn't hurt.",
+                        "I guess I could. . . whip it out.",
+                        "Fine. . . [She licks her lips].",
+                        "Heh, ok, alright."])
+                    ch_r "[line]"
+
+                    $ line = 0
+
+                    jump before_handjob
+
+                jump begging_approved
+            else:
+                if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy"]:
+                    $ Girl.change_face("sexy")
+
+                    call please_not_good_enough_lines(Girl)
+                elif action in ["blowjob"]:
+                    if Approvalcheck(Girl, 1100, TabM = 3): # 110, 125, 140, Taboo -120(230)             Handy instead?
+                        $ Girl.change_stat("inhibition", 80, 1)
+                        $ Girl.change_stat("inhibition", 60, 3)
+                        $ Girl.change_face("confused", 1)
+
+                        if Girl.action_counter["handjob"]:
+                            ch_r "Maybe you'd settle for a handy?"
+                        else:
+                            ch_r "I could maybe. . . [[she makes a jerking motion with her hand]?"
+
+                        menu:
+                            ch_r "What do you say?"
+                            "Sure, that's fine.":
+                                $ Girl.change_stat("love", 80, 2)
+                                $ Girl.change_stat("inhibition", 60, 1)
+                                $ Girl.change_stat("obedience", 50, 1)
+
+                                $ primary_action = "handjob"
+
+                                jump before_handjob
+                            "Nah, if it's not a BJ, forget it.":
+                                $ Girl.change_stat("love", 200, -2)
+
+                                ch_r "Ok, whatever."
+
+                                $ Girl.change_stat("obedience", 70, 2)
+        "I'm sure I can convince you later. . ." if action in ["eat_pussy", "eat_ass"] and "no_" + action not in Girl.daily_history:
+            $ Girl.change_face("sexy")
+
+            call maybe_later_lines(Girl)
+
+            $ Girl.change_stat("love", 80, 2)
+            $ Girl.change_stat("inhibition", 70, 2)
+
+            if Taboo:
+                $ Girl.AddWord(1, "tabno", "tabno")
+
+            $ Girl.recent_history.append("no_" + action)
+            $ Girl.daily_history.append("no_" + action)
+
+            jump begging_rejected
+        "I think you'd really enjoy it. . ." if action in ["eat_pussy", "eat_ass"]:
+            if Approval:
+                $ Girl.change_face("sexy")
+                $ Girl.change_stat("obedience", 90, 2)
+                $ Girl.change_stat("obedience", 50, 2)
+
+                call think_would_enjoy_lines(Girl)
+
+                $ Girl.change_stat("inhibition", 70, 3)
+                $ Girl.change_stat("inhibition", 40, 2)
+
+                jump before_fondle
+            else:
+                $ Girl.change_face("sexy")
+
+                call unconvinced_lines(Girl)
+        "Just one good squeeze?" if action == "fondle_ass":
+            if Approval:
+                $ Girl.change_face("sexy")
+                $ Girl.change_stat("obedience", 90, 1)
+                $ Girl.change_stat("obedience", 50, 2)
+
+                call reward_politeness_lines(Girl)
+
+                $ Girl.change_stat("inhibition", 70, 1)
+                $ Girl.change_stat("inhibition", 40, 2)
+
+                jump before_fondle
+            else:
+                $ Girl.change_face("sexy")
+
+                call unconvinced_lines(Girl)
+        "I'd really appreciate it. . ." if action in ["handjob"]:
+            if Approval:
+                $ Girl.change_face("sexy")
+                $ Girl.change_stat("obedience", 90, 2)
+                $ Girl.change_stat("obedience", 50, 2)
+                $ Girl.change_stat("inhibition", 70, 3)
+                $ Girl.change_stat("inhibition", 40, 2)
+
+                $ line = renpy.random.choice(["Sure, put'im here.",
+                    "No Problem.",
+                    "Sure. Drop trou.",
+                    "Sure, I guess.",
+                    "Okay.",
+                    "Ok, lemme see it.",
+                    "I guess. . .",
+                    "I suppose, whip it out.",
+                    "Ok, [She gestures for you to come over].",
+                    "Heh, ok."])
+                ch_r "[line]"
+
+                $ line = 0
+
+                jump before_handjob
+        "I think this could be fun for both of us. . ." if action in ["titjob"]:
+            if Approval:
+                $ Girl.change_face("sexy")
+                $ Girl.change_stat("obedience", 80, 2)
+                $ Girl.change_stat("obedience", 40, 2)
+                $ Girl.change_stat("inhibition", 70, 3)
+                $ Girl.change_stat("inhibition", 40, 2)
+
+                $ line = renpy.random.choice(["Well, ok, put it here.",
+                    "Well. . . ok.",
+                    "I guess.",
+                    "I guess, whip it out.",
+                    "Fine. . . [She drools a bit into her cleavage].",
+                    "Heh, ok, alright."])
+                ch_r "[line]"
+
+                $ line = 0
+
+                jump before_handjob
+            else:
+                $ Approval = Approvalcheck(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)             Handy instead?
+
+                if Approval >= 2:
+                    $ Girl.change_stat("inhibition", 80, 1)
+                    $ Girl.change_stat("inhibition", 60, 3)
+                    $ Girl.change_face("confused", 1)
+
+                    if Girl.action_counter["blowjob"]:
+                        ch_r "I could just. . . blow you instead?"
+                    else:
+                        ch_r "I could maybe. . . you know, [[she pushes her tongue against the side of her cheek]?"
+
+                    menu:
+                        extend ""
+                        "Ok, get down there.":
+                            $ Girl.change_stat("love", 80, 2)
+                            $ Girl.change_stat("inhibition", 60, 1)
+                            $ Girl.change_stat("obedience", 50, 1)
+
+                            $ primary_action = "blowjob"
+
+                            jump before_handjob
+                        "Nah, it's all about dem titties.":
+                            $ line = "no_BJ"
+                if Approval:
+                    $ Girl.change_stat("inhibition", 80, 1)
+                    $ Girl.change_stat("inhibition", 60, 3)
+                    $ Girl.change_face("confused", 1)
+
+                    if Girl.action_counter["handjob"]:
+                        ch_r "Maybe you'd settle for a handy?"
+                    else:
+                        ch_r "I could maybe. . . [[she makes a jerking motion with her hand]?"
+
+                    menu:
+                        extend ""
+                        "Sure, that's fine.":
+                            $ Girl.change_stat("love", 80, 2)
+                            $ Girl.change_stat("inhibition", 60, 1)
+                            $ Girl.change_stat("obedience", 50, 1)
+
+                            $ primary_action = "handjob"
+
+                            jump before_handjob
+                        "Seriously, titties." if line == "no_BJ":
+                            $ line = 0
+                        "Nah, it's all about dem titties." if line != "no_BJ":
+                            pass
+
+                $ Girl.change_stat("love", 200, -2)
+
+                ch_r "Ok, whatever."
+
+                $ Girl.change_stat("obedience", 70, 2)
+        "I think you'd like it. . ." if action in ["dildo_pussy", "dildo_ass"]:
+            if Approval:
+                $ Girl.change_face("sexy")
+                $ Girl.change_stat("obedience", 90, 2)
+                $ Girl.change_stat("obedience", 50, 2)
+                $ Girl.change_stat("inhibition", 70, 3)
+                $ Girl.change_stat("inhibition", 40, 2)
+
+                $ line = renpy.random.choice(["Well, sure, stick it in.",
+                    "I suppose. . .",
+                    "You've got me there."])
+                ch_r "[line]"
+
+                $ line = 0
+
+                jump before_action
+        "I think you'd enjoy it as much as I would. . ." if action in ["sex"]:
+            if Approval:
+                $ Girl.change_face("sexy")
+                $ Girl.change_stat("obedience", 90, 2)
+                $ Girl.change_stat("obedience", 50, 2)
+                $ Girl.change_stat("inhibition", 70, 3)
+                $ Girl.change_stat("inhibition", 40, 2)
+
+                $ line = renpy.random.choice(["Well, sure, stick it in.",
+                    "I suppose. . .",
+                    "You've got me there."])
+                ch_r "[line]"
+
+                $ line = 0
+
+                jump before_action
+        "I bet it would feel really good. . ." if action in ["anal"]:
+            if Approval:
+                $ Girl.change_face("sexy")
+                $ Girl.change_stat("obedience", 90, 2)
+                $ Girl.change_stat("obedience", 50, 2)
+                $ Girl.change_stat("inhibition", 70, 3)
+                $ Girl.change_stat("inhibition", 40, 2)
+
+                $ line = renpy.random.choice(["Well, sure, stick it in.",
+                    "I suppose. . .",
+                    "You've got me there."])
+                ch_r "[line]"
+
+                $ line = 0
+
+                jump before_action
+        "You might like it. . ." if action in ["hotdog"]:
+            if Approval:
+                $ Girl.change_face("sexy")
+                $ Girl.change_stat("obedience", 60, 2)
+                $ Girl.change_stat("inhibition", 50, 2)
+
+                $ line = renpy.random.choice(["Well, sure, give it a rub.",
+                    "I suppose. . .",
+                    "You've got me there."])
+                ch_r "[line]"
+
+                $ line = 0
+
+                jump before_action
+        "[[Start caressing her thigh anyway]" if action == "fondle_thighs":
+            call forced_action(Girl, action)
+        "[[Grab her chest anyway]" if action == "fondle_breasts":
+            call forced_action(Girl, action)
+        "[[Start sucking anyway]" if action == "suck_breasts":
+            call forced_action(Girl, action)
+        "[[Start fondling anyway]" if action in ["fondle_pussy", "fondle_ass"]:
+            call forced_action(Girl, action)
+        "[[Get in there anyway]" if action == "eat_pussy":
+            call forced_action(Girl, action)
+        "[[Slide a finger in anyway]" if action == "finger_ass":
+            call forced_action(Girl, action)
+        "[[Start licking anyway]" if action in ["eat_pussy", "eat_ass"]:
+            call forced_action(Girl, action)
+        "Come on, get to work." if action in ["handjob", "footjob"]:                                               # Pressured into it
+            call forced_action(Girl, action)
+        "Come on, let me fuck those titties, [Girl.Pet]" if action in ["titjob"]:
+            $ Girl.namecheck() #checks reaction to petname
+
+            call forced_action(Girl, action)
+        "Suck it, [Girl.Pet]" if action in ["blowjob"]:                                               # Pressured into it
+            $ Girl.namecheck() #checks reaction to petname
+
+            call forced_action(Girl, action)
+        "[[Press it against her.]]" if action in ["dildo_pussy", "dildo_ass"]:
+            call forced_action(Girl, action)
+        "Bend over." if action in ["sex", "anal", "hotdog"]:
+            call forced_action(Girl, action)
+
+    return
+
+label try_something_else_menu(Girl, action):
+    menu:
+        extend ""
+        "How about a handy?" if action in ["footjob", "titjob", "blowjob", "sex", "anal", "hotdog"] and Girl.remaining_actions and multi_action:
+            $ action_context = "shift"
+
+            call after_action
+
+            $ primary_action = "handjob"
+
+            call action(Girl)
+        "How about a footjob?" if action in ["handjob", "titjob", "blowjob", "sex", "anal", "hotdog"] and Girl.remaining_actions and multi_action:
+            $ action_context = "shift"
+
+            call after_action
+
+            $ primary_action = "footjob"
+
+            call action(Girl)
+        "How about a titjob?" if action in ["handjob", "footjob", "blowjob", "sex", "anal", "hotdog"] and Girl.remaining_actions and multi_action:
+            $ action_context = "shift"
+
+            call after_action
+
+            $ primary_action = "tiitjob"
+
+            call action(Girl)
+        "How about a BJ?" if action in ["handjob", "footjob", "titjob", "sex", "anal", "hotdog"] and Girl.remaining_actions and multi_action:
+            if action != "anal":
+                $ action_context = "shift"
+
+                call after_action
+
+                $ primary_action = "blowjob"
+
+                call action(Girl)
+            else:
+                if Girl.action_counter["anal"] >= 5 and Girl.action_counter["blowjob"] >= 10 and Girl.SEXP >= 50:
+                    $ action_context = "shift"
+
+                    call after_action
+
+                    $ primary_action = "blowjob"
+
+                    call action(Girl)
+                else:
+                    call no_ass_to_mouth_lines(Girl)
+
+                    $ action_context = "shift"
+
+                    call after_action
+
+                    $ primary_action = "handjob"
+
+                    jump before_action
+        "Finish up." if action in ["handjob", "footjob", "titjob", "blowjob", "sex", "anal", "hotdog"] and Player.focusing:
+            "You release your concentration. . ."
+
+            $ Player.focusing = 0
+            $ Player.focus += 15
+
+            jump action_cycle
+        "No, get back down there." if action in ["handjob", "footjob", "titjob", "blowjob"]:
+            if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
+                $ Girl.change_stat("love", 200, -5)
+                $ Girl.change_stat("obedience", 50, 3)
+                $ Girl.change_stat("obedience", 80, 2)
+
+                "She grumbles but keeps going."
+            else:
+                $ Girl.change_face("angry", 1)
+
+                call expression Girl.Tag + "_Pos_Reset"
+
+                "She scowls at you, drops your cock and pulls back."
+
+                call this_is_boring_lines(Girl)
+
+                $ Girl.change_stat("love", 50, -3, 1)
+                $ Girl.change_stat("love", 80, -4, 1)
+                $ Girl.change_stat("obedience", 30, -1, 1)
+                $ Girl.change_stat("obedience", 50, -1, 1)
+                $ Girl.AddWord(1,"angry","angry")
+
+                jump after_action
+        "Finish up.":
+            "You let go. . ."
+
+            jump after_action
+        "Let's try something else." if multi_action:
+            $ line = 0
+            $ action_context = "shift"
+
+            jump after_action
+        "No, this is fun.":
+            if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
+                $ Girl.change_stat("love", 200, -5)
+                $ Girl.change_stat("obedience", 50, 3)
+                $ Girl.change_stat("obedience", 80, 2)
+
+                "She grumbles but lets you keep going."
+            else:
+                $ Girl.change_face("angry", 1)
+
+                call expression Girl.Tag + "_Pos_Reset"
+
+                "She scowls at you and pulls back."
+
+                call this_is_boring_lines(Girl)
+
+                $ Girl.change_stat("love", 50, -3, 1)
+                $ Girl.change_stat("love", 80, -4, 1)
+                $ Girl.change_stat("obedience", 30, -1, 1)
+                $ Girl.change_stat("obedience", 50, -1, 1)
+                $ Girl.AddWord(1,"angry","angry")
+
+                jump after_action
+
+    return
+
+label girl_unsatisfied_menu(Girl, action):
+    if action in sex_actions:
+        call not_ready_to_stop_lines(Girl)
+
+        menu:
+            extend "Keep going?"
+            "Yes, keep going for a bit." if Player.semen:
+                $ line = "You get back into it"
+            "No, I'm done." if Player.semen:
+                "You pull back."
+
+                jump after_action
+            "No, I'm spent." if not Player.semen:
+                "You pull back."
+
+                jump after_action
+    else:
+        "[Girl.name] still seems a bit unsatisfied with the experience."
+
+        "Finish her?"
+        menu:
+            extend ""
+            "Yes, keep going for a bit.":
+                $ line = "You get back into it"
+            "No, I'm done.":
+                "You pull back."
+
+                jump after_action
+
+    return
+
+label kiss_menu:
+    menu:
+        "Keep going. . .":
+            pass
+        "Slap her ass":
+            call Slap_Ass(focused_Girl)
+
+            $ counter += 1
+            $ Round -= 1
+
+            jump action_cycle
+        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+            pass
+        "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+            "You concentrate on not burning out too quickly."
+
+            $ Player.focusing = 1
+        "Release your focus." if Player.focusing:
+            "You release your concentration. . ."
+
+            $ Player.focusing = 0
+        "Start jack'in it." if multi_action and offhand_action != "jackin":
+            call Jackin(focused_Girl)
+        "Stop jack'in it." if multi_action and offhand_action == "jackin":
+            "You stop jack'in it."
+
+            $ offhand_action = 0
+        "Other options":
+            menu:
+                "Offhand action":
+                    if focused_Girl.remaining_actions and multi_action:
+                        call Offhand_Set
+
+                        if offhand_action:
+                             $ focused_Girl.remaining_actions -= 1
+                    else:
+                        call tired_lines(focused_Girl)
+                "Shift primary action":
+                    if focused_Girl.remaining_actions and multi_action:
+                        menu:
+                            "Move a hand to her breasts. . ." if focused_Girl.action_counter["kiss"] >= 1:
+                                $ action_context = "auto"
+
+                                call after_action
+
+                                $ primary_action = "fondle_breasts"
+                            "Move a hand to her thighs. . ." if focused_Girl.action_counter["kiss"] >= 1:
+                                $ action_context = "auto"
+
+                                call after_action
+
+                                $ primary_action = "fondle_thighs"
+                            "Never Mind":
+                                jump action_cycle
+
+                        call action(focused_Girl)
+                    else:
+                        call tired_lines(focused_Girl)
+                "Threesome actions (locked)" if not Partner:
+                    pass
+                "Threesome actions" if Partner:
+                    menu:
+                        "Ask [focused_Girl.name] to do something else with [Partner.name]" if primary_action == "lesbian":
+                            call Les_Change(focused_Girl)
+                        "Ask [focused_Girl.name] to do something else with [Partner.name] (locked)" if primary_action != "lesbian":
+                            pass
+                        "Ask [Partner.name] to do something else":
+                            call Three_Change(focused_Girl)
+                        "Don't stop what you're doing. . .(locked)" if not position_change_timer or not second_girl_primary_action:
+                            $ position_change_timer = 0
+                        "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
+                            $ position_change_timer = 0
+                        "Swap to [Partner.name]":
+                            call primary_action_Swap(focused_Girl)
+                        "Undress [Partner.name]":
+                            call Girl_Undress(Partner)
+                            call shift_focus(Partner)
+
+                            jump action_cycle
+                        "Clean up Partner":
+                            call Girl_Cleanup(Partner,"ask")
+
+                            jump action_cycle
+                        "Never mind":
+                            jump action_cycle
+                "Undress [focused_Girl.name]":
+                    call Girl_Undress(focused_Girl)
+                "Clean up [Girl.name] (locked)" if not focused_Girl.Spunk:
+                    pass
+                "Clean up [focused_Girl.name]" if focused_Girl.Spunk:
+                    call Girl_Cleanup(focused_Girl,"ask")
+                "Never mind":
+                    jump action_cycle
+        "Back to Sex Menu" if multi_action and focused_Girl.action_counter["kiss"] >= 5:
+            ch_p "Let's try something else."
+
+            $ action_context = "shift"
+            $ line = 0
+
+            jump after_action
+        "End Scene":
+            ch_p "Let's stop for now."
+
+            $ line = 0
+
+            jump after_action
+
+    jump action_menu_return
+
+label fondle_menu:
+    menu:
+        "Keep going. . .":
+            pass
+        "I want to stick a finger in. . ." if primary_action == "fondle_pussy" and action_speed != 2:
+            if focused_Girl.action_counter["finger_pussy"]:
+                $ action_speed = 2
+            else:
+                menu:
+                    "Ask her first":
+                        $ action_context = "shift"
+                    "Don't ask first [[just stick it in]":
+                        $ action_context = "auto"
+
+                $ primary_action = "finger_pussy"
+
+                call action(focused_Girl)
+        "Pull back a bit. . ." if primary_action == "fondle_pussy" and action_speed != 2:
+            $ action_speed = 0
+        "Slap her ass":
+            call Slap_Ass(focused_Girl)
+
+            $ counter += 1
+            $ Round -= 1
+
+            jump action_cycle
+        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+            pass
+        "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+            "You concentrate on not burning out too quickly."
+
+            $ Player.focusing = 1
+        "Release your focus." if Player.focusing:
+            "You release your concentration. . ."
+
+            $ Player.focusing = 0
+        "View":
+            call ViewShift(focused_Girl, "menu")
+            jump action_cycle
+        "Other options":
+            menu:
+                "Offhand action":
+                    if focused_Girl.remaining_actions and multi_action:
+                        call Offhand_Set
+
+                        if offhand_action:
+                            $ focused_Girl.remaining_actions -= 1
+                    else:
+                        call tired_lines(focused_Girl)
+                "Shift primary action":
+                    if focused_Girl.remaining_actions and multi_action:
+                        menu:
+                            "Can I go a little deeper?" if action == "fondle_thighs":
+                                $ action_context = "shift"
+
+                                call after_action
+
+                                $ primary_action = "fondle_pussy"
+                            "Shift your hands a bit higher without asking" if action == "fondle_thighs":
+                                $ action_context = "auto"
+
+                                call after_action
+
+                                $ primary_action = "fondle_pussy"
+                            "Ask to suck on them." if action == "fondle_breasts":
+                                $ action_context = "shift"
+
+                                call after_action
+
+                                $ primary_action = "suck_breasts"
+                            "Just suck on them without asking." if action == "fondle_breasts":
+                                $ action_context = "auto"
+
+                                call after_action
+
+                                $ primary_action = "suck_breasts"
+                            "Pull back to fondling." if action == "suck_breasts":
+                                $ action_context = "pullback"
+
+                                call after_action
+
+                                $ primary_action = "fondle_breasts"
+                            "I want to lick your pussy." if action in ["fondle_pussy", "finger_pussy"]:
+                                $ action_context = "shift"
+
+                                call after_action
+
+                                $ primary_action = "eat_pussy"
+                            "Just start licking" if action in ["fondle_pussy", "finger_pussy"]:
+                                $ action_context = "auto"
+
+                                call after_action
+
+                                $ primary_action = "eat_pussy"
+                            "Pull back to the thighs" if action in ["fondle_pussy"]:
+                                $ action_context = "pullback"
+
+                                call after_action
+
+                                $ primary_action = "fondle_thighs"
+                            "I want to stick a dildo in." if action in ["fondle_pussy", "finger_pussy", "eat_pussy"]:
+                                $ action_context = "shift"
+
+                                call after_action
+
+                                $ primary_action = "dildo_pussy"
+                            "Pull out and start rubbing again." if action in ["finger_pussy"]:
+                                $ action_context = "pullback"
+
+                                call after_action
+
+                                $ primary_action = "fondle_pussy"
+                            "I want to stick a finger in." if action in ["fondle_ass", "eat_ass"]:
+                                $ action_context = "shift"
+
+                                call after_action
+
+                                $ primary_action = "finger_ass"
+                            "Just stick a finger in without asking." if action in ["fondle_ass", "eat_ass"]:
+                                $ action_context = "auto"
+
+                                call after_action
+
+                                $ primary_action = "finger_ass"
+                            "I want to lick your asshole." if action in ["fondle_ass", "finger_ass"]:
+                                $ action_context = "shift"
+
+                                call after_action
+
+                                $ primary_action = "eat_ass"
+                            "Just start licking." if action in ["fondle_ass", "finger_ass"]:
+                                $ action_context = "auto"
+
+                                call after_action
+
+                                $ primary_action = "eat_ass"
+                            "I want to stick a dildo in." if action in ["fondle_ass", "finger_ass", "eat_ass"]:
+                                $ action_context = "shift"
+
+                                call after_action
+
+                                $ primary_action = "dildo_ass"
+                            "Pull out and start rubbing again." if action in ["fondle_ass"]:
+                                $ action_context = "pullback"
+
+                                call after_action
+
+                                $ primary_action = "fondle_ass"
+                            "Switch to fondling." if action == "eat_ass":
+                                $ action_context = "pullback"
+
+                                call after_action
+
+                                $ primary_action = "fondle_ass"
+                            "Never Mind":
+                                jump action_cycle
+
+                        call action(focused_Girl)
+                    else:
+                        call tired_lines(focused_Girl)
+                "Shift your focus" if offhand_action:
+                    $ action_context = "shift focus"
+
+                    call after_action
+                    call Offhand_Set
+                "Shift your focus (locked)" if not offhand_action:
+                    pass
+                "Threesome actions (locked)" if not Partner:
+                    pass
+                "Threesome actions" if Partner:
+                    menu:
+                        "Ask [focused_Girl.name] to do something else with [Partner.name]" if primary_action == "lesbian":
+                            call Les_Change
+                        "Ask [focused_Girl.name] to do something else with [Partner.name] (locked)" if primary_action != "lesbian":
+                            pass
+                        "Ask [Partner.name] to do something else":
+                            call Three_Change
+                        "Don't stop what you're doing. . . (locked)" if not position_change_timer or not second_girl_primary_action:
+                            $ position_change_timer = 0
+                        "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
+                            $ position_change_timer = 0
+                        "Swap to [Partner.name]":
+                            call primary_action_Swap
+                        "Undress [Partner.name]":
+                            call Girl_Undress(Partner)
+                            jump action_cycle
+                        "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                            pass
+                        "Clean up [Partner.name]" if Partner.Spunk:
+                            call Girl_Cleanup(Partner,"ask")
+                            jump action_cycle
+                        "Never mind":
+                            jump action_cycle
+                "Show her feet" if not ShowFeet and (focused_Girl.pose == "doggy" or focused_Girl.pose == "sex"):
+                    $ ShowFeet = 1
+                "Hide her feet" if ShowFeet and (focused_Girl.pose == "doggy" or focused_Girl.pose == "sex"):
+                    $ ShowFeet = 0
+                "Undress [focused_Girl.name]":
+                    call Girl_Undress
+                "Clean up [focused_Girl.name] (locked)" if not focused_Girl.Spunk:
+                    pass
+                "Clean up [focused_Girl.name]" if focused_Girl.Spunk:
+                    call Girl_Cleanup(focused_Girl,"ask")
+                "Never mind":
+                    jump action_cycle
+        "Back to Sex Menu" if multi_action:
+            ch_p "Let's try something else."
+
+            call reset_position(focused_Girl)
+
+            $ action_context = "shift"
+            $ line = 0
+
+            jump after_action
+        "End Scene" if not multi_action:
+            ch_p "Let's stop for now."
+
+            call reset_position(focused_Girl)
+
+            $ line = 0
+
+            jump after_action
+
+    jump action_menu_return
+
+label handjob_menu:
+    menu:
+        "Keep going. . ." if action_speed:
+            pass
+        "Start moving? . ." if primary_action in ["handjob", "footjob", "titjob"] and not action_speed:
+            $ action_speed = 1
+        "Speed up. . ." if primary_action in ["handjob", "footjob", "titjob"] and action_speed < 2:
+            $ action_speed = 2
+
+            "You ask her to up the pace a bit."
+        "Speed up. . . (locked)" if primary_action in ["handjob", "footjob", "titjob"] and action_speed >= 2:
+            pass
+        "Slow Down. . ." if primary_action in ["handjob", "footjob", "titjob"] and action_speed:
+            $ action_speed -= 1
+
+            "You ask her to slow it down a bit."
+        "Slow Down. . . (locked)" if primary_action in ["handjob", "footjob", "titjob"] and not action_speed:
+            pass
+        "Lick it. . ." if primary_action == "blowjob" and action_speed != 1:
+            $ action_speed = 1
+        "Lick it. . . (locked)" if primary_action == "blowjob" and action_speed == 1:
+            pass
+        "Just the head. . ." if primary_action == "blowjob" and action_speed != 2:
+            $ action_speed = 2
+        "Just the head. . . (locked)" if primary_action == "blowjob" and action_speed == 2:
+            pass
+        "Suck on it." if primary_action == "blowjob" and action_speed != 3:
+            $ action_speed = 3
+
+            if offhand_action == "jackin":
+                "She dips her head a bit lower, and you move your hand out of the way."
+        "Suck on it. (locked)" if primary_action == "blowjob" and action_speed == 3:
+            pass
+        "Take it deeper." if primary_action == "blowjob" and action_speed != 4:
+            if "pushed" not in focused_Girl.recent_history and focused_Girl.action_counter["blowjob"] < 5:
+                $ focused_Girl.change_stat("love", 80, -(20 - 2*focused_Girl.action_counter["blowjob"]))
+                $ focused_Girl.change_stat("obedience", 80, 30 - 3*focused_Girl.action_counter["blowjob"])
+                $ focused_Girl.recent_history.append("pushed")
+
+            if offhand_action == "jackin" and action_speed != 3:
+                "She takes it to the root, and you move your hand out of the way."
+
+            $ action_speed = 4
+        "Take it deeper. (locked)" if primary_action == "blowjob" and action_speed == 4:
+            pass
+        "Set your own pace. . ." if primary_action == "blowjob":
+            "[focused_Girl.name] hums contentedly."
+
+            if "setpace" not in focused_Girl.recent_history:
+                $ focused_Girl.change_stat("love", 80, 2)
+
+            $ D20 = renpy.random.randint(1, 20)
+
+            if focused_Girl.action_counter["blowjob"] < 5:
+                $ D20 -= 10
+            elif focused_Girl.action_counter["blowjob"] < 10:
+                $ D20 -= 5
+
+            if D20 > 15:
+                $ action_speed = 4
+
+                if "setpace" not in focused_Girl.recent_history:
+                    $ focused_Girl.change_stat("inhibition", 80, 3)
+            elif D20 > 10:
+                $ action_speed = 3
+            elif D20 > 5:
+                $ action_speed = 2
+            else:
+                $ action_speed = 1
+
+            $ focused_Girl.recent_history.append("setpace")
+        "Slap her ass. . ." if primary_action in ["dildo_pussy", "dildo_ass"]:
+            call Slap_Ass(focused_Girl)
+
+            $ counter += 1
+            $ Round -= 1
+
+            jump handjob_cycle
+        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+            pass
+        "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+            "You concentrate on not burning out too quickly."
+
+            $ Player.focusing = 1
+        "Release your focus." if Player.focusing:
+            "You release your concentration. . ."
+
+            $ Player.focusing = 0
+        "Turn her around." if primary_action == "footjob":
+            $ focused_Girl.pose = "doggy" if focused_Girl.pose != "doggy" else "sex"
+
+            "You turn her around. . ."
+
+            jump action_cycle
+        "View" if primary_action in ["dildo_pussy", "dildo_ass"]:
+            call ViewShift(focused_Girl, "menu")
+            jump action_cycle
+        "Other options":
+                menu:
+                    "I also want to fondle her breasts." if offhand_action != "fondle_breasts":
+                        if focused_Girl.remaining_actions and multi_action:
+                            $ offhand_action = "fondle_breasts"
+
+                            "You start to fondle her breasts."
+
+                            $ focused_Girl.remaining_actions -= 1
+                        else:
+                            call tired_lines(focused_Girl)
+                    "Offhand action" if primary_action in ["footjob", "dildo_pussy", "dildo_ass"]:
+                        if focused_Girl.remaining_actions and multi_action:
+                            call Offhand_Set
+
+                            if offhand_action:
+                                $ focused_Girl.remaining_actions -= 1
+                        else:
+                            call tired_lines(focused_Girl)
+                    "Shift primary action":
+                        if focused_Girl.remaining_actions and multi_action:
+                            menu:
+                                "How about a handy?" if primary_action in ["footjob", "titjob", "blowjob"]:
+                                    if focused_Girl.remaining_actions and multi_action:
+                                        $ action_context = "shift"
+
+                                        call after_action
+
+                                        $ primary_action = "handjob"
+                                    else:
+                                        call tired_lines(focused_Girl)
+                                "How about a footjob?" if primary_action in ["handjob", "titjob", "blowjob"]:
+                                    if focused_Girl.remaining_actions and multi_action:
+                                        $ action_context = "shift"
+
+                                        call after_action
+
+                                        $ primary_action = "footjob"
+                                    else:
+                                        call tired_lines(focused_Girl)
+                                "How about a titjob?" if primary_action in ["handjob", "footjob", "blowjob"]:
+                                    if focused_Girl.remaining_actions and multi_action:
+                                        $ action_context = "shift"
+
+                                        call after_action
+
+                                        $ primary_action = "titjob"
+                                    else:
+                                        call tired_lines(focused_Girl)
+                                "How about a blowjob?" if primary_action in ["handjob", "footjob", "titjob"]:
+                                    if focused_Girl.remaining_actions and multi_action:
+                                        $ action_context = "shift"
+
+                                        call after_action
+
+                                        $ primary_action = "blowjob"
+                                    else:
+                                        call tired_lines(focused_Girl)
+                                "I want to stick a finger in her ass." if primary_action == "dildo_pussy":
+                                    if focused_Girl.remaining_actions and multi_action:
+                                        $ action_context = "shift"
+
+                                        call after_action
+
+                                        $ primary_action = "finger_ass"
+                                    else:
+                                        call tired_lines(focused_Girl)
+                                "Just stick a finger in her ass without asking." if primary_action == "dildo_pussy":
+                                    if focused_Girl.remaining_actions and multi_action:
+                                        $ action_context = "auto"
+
+                                        call after_action
+
+                                        $ primary_action = "finger_ass"
+                                    else:
+                                        call tired_lines(focused_Girl)
+                                "I want to shift the dildo to her ass." if primary_action == "dildo_pussy":
+                                    if focused_Girl.remaining_actions and multi_action:
+                                        $ action_context = "shift"
+
+                                        call after_action
+
+                                        $ primary_action = "dildo_ass"
+                                    else:
+                                        call tired_lines(focused_Girl)
+                                "I want to stick a finger in her pussy." if primary_action == "dildo_ass":
+                                    if focused_Girl.remaining_actions and multi_action:
+                                        $ action_context = "shift"
+
+                                        call after_action
+
+                                        $ primary_action = "finger_pussy"
+                                    else:
+                                        call tired_lines(focused_Girl)
+                                "Just stick a finger in her pussy without asking." if primary_action == "dildo_ass":
+                                    if focused_Girl.remaining_actions and multi_action:
+                                        $ action_context = "auto"
+
+                                        call after_action
+
+                                        $ primary_action = "finger_pussy"
+                                    else:
+                                        call tired_lines(focused_Girl)
+                                "I want to shift the dildo to her pussy." if primary_action == "dildo_ass":
+                                    if focused_Girl.remaining_actions and multi_action:
+                                        $ action_context = "shift"
+
+                                        call after_action
+
+                                        $ primary_action = "dildo_pussy"
+                                    else:
+                                        call tired_lines(focused_Girl)
+                                "Never Mind":
+                                    jump handjob_cycle
+
+                            call action(focused_Girl)
+                        else:
+                            call tired_lines(focused_Girl)
+                    "Shift your focus." if primary_action in ["dildo_pussy", "dildo_ass"] and offhand_action:
+                        $ action_context = "shift focus"
+
+                        call after_action
+                        call Offhand_Set
+                    "Shift your focus. (locked)" if primary_action in ["dildo_pussy", "dildo_ass"] and not offhand_action:
+                        pass
+                    "Threesome actions (locked)" if not Partner:
+                        pass
+                    "Threesome actions" if Partner:
+                        menu:
+                            "Ask [focused_Girl.name] to do something else with [Partner.name]" if primary_action == "lesbian":
+                                call Les_Change(focused_Girl)
+                            "Ask [focused_Girl.name] to do something else with [Partner.name] (locked)" if primary_action != "lesbian":
+                                pass
+                            "Ask [Partner.name] to do something else":
+                                call Three_Change(focused_Girl)
+                            "Don't stop what you're doing. . .(locked)" if not position_change_timer or not second_girl_primary_action:
+                                $ position_change_timer = 0
+                            "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
+                                $ position_change_timer = 0
+                            "Swap to [Partner.name]":
+                                call primary_action_Swap(focused_Girl)
+                            "Undress [Partner.name]":
+                                call Girl_Undress(Partner)
+                                jump handjob_cycle
+                            "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                pass
+                            "Clean up [Partner.name]" if Partner.Spunk:
+                                call Girl_Cleanup(Partner,"ask")
+                                jump handjob_cycle
+                            "Never mind":
+                                jump handjob_cycle
+                    "Undress [focused_Girl.name]":
+                        call Girl_Undress(focused_Girl)
+                    "Clean up [focused_Girl.name] (locked)" if not focused_Girl.Spunk:
+                        pass
+                    "Clean up [focused_Girl.name]" if focused_Girl.Spunk:
+                        call Girl_Cleanup(RogueX,"ask")
+                    "Never mind":
+                        jump handjob_cycle
+        "Back to Sex Menu" if multi_action:
+            ch_p "Let's try something else."
+
+            call expression focused_Girl.Tag + "_HJ_Reset"
+
+            $ action_context = "shift"
+            $ line = 0
+
+            jump after_action
+        "End Scene" if not multi_action:
+            ch_p "Let's stop for now."
+
+            call expression focused_Girl.Tag + "_HJ_Reset"
+
+            $ line = 0
+
+            jump after_action
+
+    jump action_menu_return
+
+label sex_menu:
+    menu:
+        "Keep going. . ." if action_speed:
+            pass
+        "Keep going. . . (locked)" if not action_speed:
+            pass
+        "Start moving? . ." if not action_speed:
+            $ action_speed = 1
+        "Speed up. . ." if 0 < action_speed < 3:
+            $ action_speed += 1
+
+            "You ask her to up the pace a bit."
+        "Speed up. . . (locked)" if action_speed >= 3:
+            pass
+        "Slow Down. . ." if action_speed:
+            $ action_speed -= 1
+
+            "You ask her to slow it down a bit."
+        "Slow Down. . . (locked)" if not action_speed:
+            pass
+        "Slap her ass":
+            call Slap_Ass(focused_Girl)
+
+            $ counter += 1
+            $ Round -= 1
+
+            jump action_cycle
+        "Turn her around":
+            $ focused_Girl.pose = "doggy" if focused_Girl.pose != "doggy" else "sex"
+
+            "You turn her around. . ."
+
+            jump action_cycle
+        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+            pass
+        "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+            "You concentrate on not burning out too quickly."
+
+            $ Player.focusing = 1
+        "Release your focus." if Player.focusing:
+            "You release your concentration. . ."
+
+            $ Player.focusing = 0
+        "Other options":
+            menu:
+                "Offhand action":
+                    if focused_Girl.remaining_actions and multi_action:
+                        call Offhand_Set
+
+                        if offhand_action:
+                            $ focused_Girl.remaining_actions -= 1
+                    else:
+                        call Sex_Basic_Dialog(focused_Girl,"tired")
+                "Shift primary action":
+                    if focused_Girl.remaining_actions and multi_action:
+                        menu:
+                            "How about sex?" if primary_action != "sex":
+                                $ action_context = "shift"
+
+                                call after_action
+
+                                $ primary_action = "sex"
+                            "Just stick it in her pussy [[without asking]." if primary_action != "sex":
+                                $ action_context = "auto"
+
+                                call after_action
+
+                                $ primary_action = "sex"
+                            "How about anal?" if primary_action != "anal":
+                                $ action_context = "shift"
+
+                                call after_action
+
+                                $ primary_action = "anal"
+                            "Just stick it in her ass [[without asking]." if primary_action != "anal":
+                                $ action_context = "auto"
+
+                                call after_action
+
+                                $ primary_action = "anal"
+                            "Pull back to hotdog her." if primary_action != "hotdog":
+                                $ action_context = "pullback"
+
+                                call after_action
+
+                                $ primary_action = "hotdog"
+                            "Never Mind":
+                                jump action_cycle
+
+                        call action(focused_Girl)
+                    else:
+                        call tired_lines(focused_Girl)
+                "Threesome actions (locked)" if not Partner:
+                    pass
+                "Threesome actions" if Partner:
+                    menu:
+                        "Ask [focused_Girl.name] to do something else with [Partner.name]" if primary_action == "lesbian":
+                            call Les_Change(focused_Girl)
+                        "Ask [focused_Girl.name] to do something else with [Partner.name] (locked)" if primary_action != "lesbian":
+                            pass
+                        "Ask [Partner.name] to do something else":
+                            call Three_Change(focused_Girl)
+                        "Don't stop what you're doing. . .(locked)" if not position_change_timer or not second_girl_primary_action:
+                            $ position_change_timer = 0
+                        "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
+                            $ position_change_timer = 0
+                        "Swap to [Partner.name]":
+                            call primary_action_Swap(focused_Girl)
+                        "Undress [Partner.name]":
+                            call Girl_Undress(Partner)
+                            jump action_cycle
+                        "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                            pass
+                        "Clean up [Partner.name]" if Partner.Spunk:
+                            call Girl_Cleanup(Partner,"ask")
+                            jump action_cycle
+                        "Never mind":
+                            jump action_cycle
+                "Just take a look at her.":
+                    $ Player.Cock = 0
+
+                    $ action_speed = 0
+                "Show her feet" if not ShowFeet and (focused_Girl.pose == "doggy" or focused_Girl.pose == "sex"):
+                    $ ShowFeet = 1
+                "Hide her feet" if ShowFeet and (focused_Girl.pose == "doggy" or focused_Girl.pose == "sex"):
+                    $ ShowFeet = 0
+                "Undress [focused_Girl.name]":
+                    call Girl_Undress(focused_Girl)
+                "Clean up [focused_Girl.name] (locked)" if not focused_Girl.Spunk:
+                    pass
+                "Clean up [focused_Girl.name]" if focused_Girl.Spunk:
+                    call Girl_Cleanup(focused_Girl,"ask")
+                "Never mind":
+                    jump action_cycle
+        "Back to Sex Menu" if multi_action:
+            ch_p "Let's try something else."
+
+            call expression focused_Girl.Tag + "_Sex_Reset"
+
+            $ action_context = "shift"
+            $ line = 0
+
+            jump after_action
+        "End Scene" if not multi_action:
+            ch_p "Let's stop for now."
+
+            call expression focused_Girl.Tag + "_Sex_Reset"
+
+            $ line = 0
+
+            jump after_action
+
+    jump action_menu_return
+
+label what_do_you_think_youre_doing_menu(Girl, action):
+    menu:
+        extend ""
+        "Sorry, sorry! Never mind.":
+            if Approval:
+                $ Girl.change_face("sexy", 1)
+                $ Girl.change_stat("obedience", 70, 3)
+                $ Girl.change_stat("inhibition", 50, 3)
+                $ Girl.change_stat("inhibition", 70, 1)
+
+                call since_you_are_so_nice_lines(Girl)
+
+                jump before_action
+
+            "You pull back before you really get it in."
+
+            $ Girl.change_face("bemused", 1)
+
+            call pull_back_before_get_in_lines(Girl)
+        "Just playing with my favorite toys." if action in dildo_actions:
+            $ Girl.change_stat("love", 80, -10, 1)
+            $ Girl.change_stat("love", 200, -10)
+
+            "You press it inside some more."
+
+            $ Girl.change_stat("obedience", 70, 3)
+            $ Girl.change_stat("inhibition", 50, 3)
+
+            if not Approvalcheck(Girl, 700, "O", TabM=1): #checks if obedience is 700+
+                $ Girl.change_face("angry")
+
+                call were_done_here_lines(Girl)
+
+                $ Girl.change_stat("love", 50, -10, 1)
+                $ Girl.change_stat("obedience", 50, 3)
+
+                $ renpy.pop_call()
+
+                if action_context:
+                    $ renpy.pop_call()
+
+                if renpy.showing("Rogue_Doggy"):
+                    call expression Girl.Tag + "_Doggy_Reset"
+
+                $ Girl.recent_history.append("angry")
+                $ Girl.daily_history.append("angry")
+            else:
+                $ Girl.change_face("sad")
+
+                call knows_her_place_lines(Girl)
+                jump before_action
+        "Just fucking." if action in ["sex", "anal"]:
+            $ Girl.change_stat("love", 80, -10, 1)
+            $ Girl.change_stat("love", 200, -10)
+
+            if action == "sex":
+                "You press inside some more."
+            elif action == "anal":
+                "You press into her."
+
+            $ Girl.change_stat("obedience", 70, 3)
+            $ Girl.change_stat("inhibition", 50, 3)
+
+            if not Approvalcheck(Girl, 700, "O", TabM=1):   #checks if obedience is 700+
+                $ Girl.change_face("angry")
+
+                call were_done_here_lines(Girl)
+
+                $ Girl.change_stat("love", 50, -10, 1)
+                $ Girl.change_stat("obedience", 50, 3)
+
+                $ renpy.pop_call()
+
+                if action_context:
+                    $ renpy.pop_call()
+
+                call expression Girl.Tag + "_Sex_Reset"
+
+                $ Girl.recent_history.append("angry")
+                $ Girl.daily_history.append("angry")
+            else:
+                $ Girl.change_face("sad")
+
+                call knows_her_place_lines(Girl)
+                jump before_action
+        "You'll see." if action == "hotdog":
+            $ Girl.change_stat("love", 80, -10, 1)
+            $ Girl.change_stat("love", 200, -8)
+
+            "You grind against her asscrack."
+
+            $ Girl.change_stat("obedience", 70, 3)
+            $ Girl.change_stat("inhibition", 50, 3)
+
+            if not Approvalcheck(Girl, 500, "O", TabM=1): #checks if obedience is 700+
+                $ Girl.change_face("angry")
+
+                call were_done_here_lines(Girl)
+
+                $ Girl.change_stat("love", 50, -10, 1)
+                $ Girl.change_stat("obedience", 50, 3)
+
+                $ renpy.pop_call()
+
+                if action_context:
+                    $ renpy.pop_call()
+
+                call expression Girl.Tag + "_Sex_Reset"
+
+                $ Girl.recent_history.append("angry")
+                $ Girl.daily_history.append("angry")
+            else:
+                $ Girl.change_face("sad")
+
+                call knows_her_place_lines(Girl)
+
+                jump before_action

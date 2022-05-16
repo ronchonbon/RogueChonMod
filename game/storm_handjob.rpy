@@ -32,7 +32,7 @@ label Storm_Handjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_handjob" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 1100, TabM = 3)
+    $ Approval = approval_check(StormX, 1100, TabM = 3)
 
     if not StormX.action_counter["handjob"] and "no_handjob" not in StormX.recent_history:
         $ StormX.change_face("sly", 2)
@@ -164,7 +164,7 @@ label Storm_Handjob:
                     jump Storm_HJ_Prep
             "Come on, get to work.":
 
-                $ Approval = ApprovalCheck(StormX, 350, "OI", TabM = 3)
+                $ Approval = approval_check(StormX, 350, "OI", TabM = 3)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("angry")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -478,7 +478,7 @@ label Storm_HJ_Cycle:
                     $ action_context = "shift"
                     jump Storm_HJ_After
                 "No, get back down there.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -494,7 +494,7 @@ label Storm_HJ_Cycle:
                         $ StormX.recent_history.append("angry")
                         $ StormX.daily_history.append("angry")
                         jump Storm_HJ_After
-        elif counter == 10 and StormX.SEXP <= 100 and not ApprovalCheck(StormX, 1200, "LO"):
+        elif counter == 10 and StormX.SEXP <= 100 and not approval_check(StormX, 1200, "LO"):
             $ StormX.brows = "confused"
             ch_s "Are you certain you didn't have anything else in mind?"
 
@@ -570,7 +570,7 @@ label Storm_Titjob:
     elif StormX.addiction >= 75:
         $ approval_bonus += 5
 
-    if StormX.SeenChest and ApprovalCheck(StormX, 500):
+    if StormX.SeenChest and approval_check(StormX, 500):
         $ approval_bonus += 10
     if not StormX.bra and not StormX.top:
         $ approval_bonus += 10
@@ -594,7 +594,7 @@ label Storm_Titjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_titjob" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 1200, TabM = 5)
+    $ Approval = approval_check(StormX, 1200, TabM = 5)
 
     if not StormX.action_counter["titjob"] and "no_titjob" not in StormX.recent_history:
         $ StormX.change_face("surprised", 1)
@@ -728,7 +728,7 @@ label Storm_Titjob:
                     $ Line = 0
                     jump Storm_TJ_Prep
                 else:
-                    $ Approval = ApprovalCheck(StormX, 1100, TabM = 3)
+                    $ Approval = approval_check(StormX, 1100, TabM = 3)
                     if Approval >= 2:
                         $ StormX.change_stat("inhibition", 80, 1)
                         $ StormX.change_stat("inhibition", 60, 3)
@@ -769,7 +769,7 @@ label Storm_Titjob:
 
 
                 $ StormX.nameCheck()
-                $ Approval = ApprovalCheck(StormX, 700, "OI", TabM = 4)
+                $ Approval = approval_check(StormX, 700, "OI", TabM = 4)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -1061,7 +1061,7 @@ label Storm_TJ_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (5 + StormX.action_counter["titjob"]):
             $ StormX.brows = "confused"
@@ -1085,7 +1085,7 @@ label Storm_TJ_Cycle:
                     $ action_context = "shift"
                     jump Storm_TJ_After
                 "No, get back down there.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -1189,7 +1189,7 @@ label Storm_Blowjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_blowjob" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 1300, TabM = 4)
+    $ Approval = approval_check(StormX, 1300, TabM = 4)
 
     if not StormX.action_counter["blowjob"] and "no_blowjob" not in StormX.recent_history:
         $ StormX.change_face("sly")
@@ -1325,7 +1325,7 @@ label Storm_Blowjob:
                     $ Line = 0
                     jump Storm_BJ_Prep
                 else:
-                    if ApprovalCheck(StormX, 1100, TabM = 3):
+                    if approval_check(StormX, 1100, TabM = 3):
                         $ StormX.change_stat("inhibition", 80, 1)
                         $ StormX.change_stat("inhibition", 60, 3)
                         $ StormX.change_face("confused", 1)
@@ -1350,7 +1350,7 @@ label Storm_Blowjob:
 
 
                 $ StormX.nameCheck()
-                $ Approval = ApprovalCheck(StormX, 750, "OI", TabM = 3)
+                $ Approval = approval_check(StormX, 750, "OI", TabM = 3)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -1674,7 +1674,7 @@ label Storm_BJ_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (15 + StormX.action_counter["blowjob"]):
             $ StormX.brows = "angry"
@@ -1698,7 +1698,7 @@ label Storm_BJ_Cycle:
                     $ action_context = "shift"
                     jump Storm_BJ_After
                 "No, get back down there.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -1714,7 +1714,7 @@ label Storm_BJ_Cycle:
                         $ StormX.recent_history.append("angry")
                         $ StormX.daily_history.append("angry")
                         jump Storm_BJ_After
-        elif counter == (10 + StormX.action_counter["blowjob"]) and StormX.SEXP <= 100 and not ApprovalCheck(StormX, 1200, "LO"):
+        elif counter == (10 + StormX.action_counter["blowjob"]) and StormX.SEXP <= 100 and not approval_check(StormX, 1200, "LO"):
             $ StormX.brows = "confused"
             ch_s "Are you about finished? I am growing tired of this."
 
@@ -1817,7 +1817,7 @@ label Storm_Dildo_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_dildo" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 1250, TabM = 4)
+    $ Approval = approval_check(StormX, 1250, TabM = 4)
 
     if action_context == StormX:
         if Approval > 2:
@@ -1899,7 +1899,7 @@ label Storm_Dildo_Pussy:
                     "You press it inside some more."
                     $ StormX.change_stat("obedience", 70, 3)
                     $ StormX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(StormX, 700, "O", TabM=1):
+                    if not approval_check(StormX, 700, "O", TabM=1):
                         $ StormX.change_face("angry")
                         "[StormX.name] shoves you away and slaps you in the face."
                         ch_s "Ask nicely before trying anything like that!"
@@ -2056,7 +2056,7 @@ label Storm_Dildo_Pussy:
                     pass
             "[[press it against her]":
 
-                $ Approval = ApprovalCheck(StormX, 950, "OI", TabM = 3)
+                $ Approval = approval_check(StormX, 950, "OI", TabM = 3)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -2307,14 +2307,14 @@ label Storm_DP_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (5 + StormX.action_counter["dildo_pussy"]):
             $ StormX.brows = "confused"
             ch_s "What are you even doing down there?"
         elif StormX.lust >= 80:
             pass
-        elif counter == (15 + StormX.action_counter["dildo_pussy"]) and StormX.SEXP >= 15 and not ApprovalCheck(StormX, 1500):
+        elif counter == (15 + StormX.action_counter["dildo_pussy"]) and StormX.SEXP >= 15 and not approval_check(StormX, 1500):
             $ StormX.brows = "confused"
             menu:
                 ch_s "[StormX.player_petname], this is getting uncomfortable, maybe we could try something else."
@@ -2326,7 +2326,7 @@ label Storm_DP_Cycle:
                     $ action_context = "shift"
                     jump Storm_DP_After
                 "No, this is fun.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -2429,7 +2429,7 @@ label Storm_Dildo_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_dildo" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 1450, TabM = 4)
+    $ Approval = approval_check(StormX, 1450, TabM = 4)
 
     if action_context == StormX:
 
@@ -2514,7 +2514,7 @@ label Storm_Dildo_Ass:
                     "You press it inside some more."
                     $ StormX.change_stat("obedience", 70, 3)
                     $ StormX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(StormX, 700, "O", TabM=1):
+                    if not approval_check(StormX, 700, "O", TabM=1):
                         $ StormX.change_face("angry")
                         "[StormX.name] shoves you away and slaps you in the face."
                         ch_s "Ask nicely if you want to stick something in my ass!"
@@ -2663,7 +2663,7 @@ label Storm_Dildo_Ass:
                     pass
             "[[press it against her]":
 
-                $ Approval = ApprovalCheck(StormX, 1050, "OI", TabM = 3)
+                $ Approval = approval_check(StormX, 1050, "OI", TabM = 3)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -2918,14 +2918,14 @@ label Storm_DA_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (5 + StormX.action_counter["dildo_ass"]):
             $ StormX.brows = "confused"
             ch_s "What are you even doing down there?"
         elif StormX.lust >= 80:
             pass
-        elif counter == (15 + StormX.action_counter["dildo_ass"]) and StormX.SEXP >= 15 and not ApprovalCheck(StormX, 1500):
+        elif counter == (15 + StormX.action_counter["dildo_ass"]) and StormX.SEXP >= 15 and not approval_check(StormX, 1500):
             $ StormX.brows = "confused"
             menu:
                 ch_s "[StormX.player_petname], this is getting uncomfortable, maybe we could try something else."
@@ -2937,7 +2937,7 @@ label Storm_DA_Cycle:
                     $ action_context = "shift"
                     jump Storm_DA_After
                 "No, this is fun.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -3039,7 +3039,7 @@ label Storm_Footjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_foot" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 1250, TabM = 3)
+    $ Approval = approval_check(StormX, 1250, TabM = 3)
 
     if action_context == StormX:
         if Approval > 2:
@@ -3219,7 +3219,7 @@ label Storm_Footjob:
                     pass
             "Come on, get to work.":
 
-                $ Approval = ApprovalCheck(StormX, 400, "OI", TabM = 3)
+                $ Approval = approval_check(StormX, 400, "OI", TabM = 3)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -3502,7 +3502,7 @@ label Storm_FJ_Cycle:
                     $ action_context = "shift"
                     jump Storm_FJ_After
                 "No, keep going.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -3518,7 +3518,7 @@ label Storm_FJ_Cycle:
                         $ StormX.recent_history.append("angry")
                         $ StormX.daily_history.append("angry")
                         jump Storm_FJ_After
-        elif counter == 10 and StormX.SEXP <= 100 and not ApprovalCheck(StormX, 1200, "LO"):
+        elif counter == 10 and StormX.SEXP <= 100 and not approval_check(StormX, 1200, "LO"):
             $ StormX.brows = "confused"
             ch_s "Could we be done here, my feet are getting sore."
 

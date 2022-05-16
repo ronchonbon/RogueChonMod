@@ -446,7 +446,7 @@ label Take_Class:
 
 
 
-    if D20 > 15 and Present and ApprovalCheck(Present[0], 300, "I"):
+    if D20 > 15 and Present and approval_check(Present[0], 300, "I"):
 
         "[Line]"
         call Frisky_Class (Present[0])
@@ -785,17 +785,17 @@ label Rogue_TightsRipped(Count=0):
         if not RogueX.legs and RogueX.underwear != "shorts":
             if RogueX.underwear:
                 if RogueX.SeenPanties:
-                    $ Count = 3 if not ApprovalCheck(RogueX, 600) else Count
+                    $ Count = 3 if not approval_check(RogueX, 600) else Count
                 else:
                     $ RogueX.SeenPanties = 1
-                    $ Count = 3 if not ApprovalCheck(RogueX, 900) else Count
+                    $ Count = 3 if not approval_check(RogueX, 900) else Count
                 $ RogueX.change_stat("lust", 60, 2)
             else:
                 if RogueX.SeenPussy:
-                    $ Count = 3 if not ApprovalCheck(RogueX, 900) else Count
+                    $ Count = 3 if not approval_check(RogueX, 900) else Count
                 else:
                     call Rogue_First_Bottomless
-                    $ Count = 3 if not ApprovalCheck(RogueX, 1400) else Count
+                    $ Count = 3 if not approval_check(RogueX, 1400) else Count
 
         if Count == 2:
 
@@ -901,7 +901,7 @@ label Pool_Swim(Swimmers=[], BO=[]):
     $ PassLine = 0
     $ BO = all_Girls[:]
     while BO:
-        if bg_current == BO[0].location and ApprovalCheck(BO[0], 700):
+        if bg_current == BO[0].location and approval_check(BO[0], 700):
             if BO[0].bra == BO[0].Swim[5] and BO[0].underwear == BO[0].Swim[6]:
 
                 $ Swimmers.append(BO[0])
@@ -1139,101 +1139,101 @@ label Shower_Room_Entry:
             ch_r "Hey, [RogueX.player_petname]."
             if "showered" in RogueX.recent_history:
                 ch_r "I was just getting ready to head out."
-            if not ApprovalCheck(Options[0], 900):
+            if not approval_check(Options[0], 900):
                 ch_r "See ya later."
         if Options[0]  == KittyX:
             ch_k "Hey, [KittyX.player_petname]."
             if "showered" in KittyX.recent_history:
                 ch_k "I just got finished."
-            if not ApprovalCheck(Options[0], 900):
+            if not approval_check(Options[0], 900):
                 ch_k "Oh, um, I should get out of your way. . ."
         if Options[0]  == EmmaX:
             ch_e "Oh, hello, [EmmaX.player_petname]."
             if "showered" in EmmaX.recent_history:
                 ch_e "I was about finished here."
-            if not ApprovalCheck(Options[0], 900):
+            if not approval_check(Options[0], 900):
                 ch_e "I should get going."
         if Options[0]  == LauraX:
             ch_l "Oh, hey."
             if "showered" in LauraX.recent_history:
                 ch_l "I'm done here."
-            if not ApprovalCheck(Options[0], 900):
+            if not approval_check(Options[0], 900):
                 ch_l "See you later."
         if Options[0]  == JeanX:
             ch_j "Oh, hey. . . you."
             if "showered" in JeanX.recent_history:
                 ch_j "I'm wrapping up here."
-            if not ApprovalCheck(Options[0], 900):
+            if not approval_check(Options[0], 900):
                 ch_j "Later."
         if Options[0]  == StormX:
             ch_s "Oh, hello, [StormX.player_petname]."
             if "showered" in StormX.recent_history:
                 ch_s "I was finishing up here."
-            if not ApprovalCheck(Options[0], 600):
+            if not approval_check(Options[0], 600):
                 ch_s "I am heading out at the moment."
         if Options[0]  == JubesX:
             ch_v "Yo, [JubesX.player_petname]."
             if "showered" in JubesX.recent_history:
                 ch_v "I just finished up here."
-            if not ApprovalCheck(Options[0], 900):
+            if not approval_check(Options[0], 900):
                 ch_v "I should, uh, get going. . ."
         if len(Options) >= 2:
             if Options[1] == RogueX:
-                if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 900):
+                if not approval_check(Options[0], 900) and not approval_check(Options[1], 900):
 
                     ch_r "Yeah, I'll see you too."
-                elif not ApprovalCheck(Options[1], 900):
+                elif not approval_check(Options[1], 900):
 
                     ch_r "Yeah, I should get going though."
                 else:
 
                     ch_r "Yeah, hey."
             if Options[1] == KittyX:
-                if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 900):
+                if not approval_check(Options[0], 900) and not approval_check(Options[1], 900):
                     ch_k "Yeah, see ya."
-                elif not ApprovalCheck(Options[1], 900):
+                elif not approval_check(Options[1], 900):
                     ch_k "Oh, well. . . I should get going."
                 else:
                     ch_k "Yeah, hi."
             if Options[1] == EmmaX:
-                if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 900):
+                if not approval_check(Options[0], 900) and not approval_check(Options[1], 900):
                     ch_e "Yes, I should also get going."
-                elif not ApprovalCheck(Options[1], 900):
+                elif not approval_check(Options[1], 900):
                     ch_e "You two look like you have some business. . ."
                 else:
                     ch_e "Yes, hello."
             if Options[1] == LauraX:
-                if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 900):
+                if not approval_check(Options[0], 900) and not approval_check(Options[1], 900):
                     ch_l "Yeah, I'm heading out too."
-                elif not ApprovalCheck(Options[1], 900):
+                elif not approval_check(Options[1], 900):
                     ch_l "I'll get out of your way."
                 else:
                     ch_l "Hey."
             if Options[1] == JeanX:
-                if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 900):
+                if not approval_check(Options[0], 900) and not approval_check(Options[1], 900):
                     ch_j "Yeah, I'm done too."
-                elif not ApprovalCheck(Options[1], 900):
+                elif not approval_check(Options[1], 900):
                     ch_j "I'm headed out."
                 else:
                     ch_j "Hey."
             if Options[1] == StormX:
-                if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 600):
+                if not approval_check(Options[0], 900) and not approval_check(Options[1], 600):
                     ch_s "Yes, I am also leaving."
-                elif not ApprovalCheck(Options[1], 900):
+                elif not approval_check(Options[1], 900):
                     ch_s "I wouldn't want to be a bother. . ."
                 else:
                     ch_s "Yes, hello."
             if Options[1] == JubesX:
-                if not ApprovalCheck(Options[0], 900) and not ApprovalCheck(Options[1], 900):
+                if not approval_check(Options[0], 900) and not approval_check(Options[1], 900):
                     ch_v "Yeah, see ya."
-                elif not ApprovalCheck(Options[1], 900):
+                elif not approval_check(Options[1], 900):
                     ch_v "Oh, so. . . I should head out."
                 else:
                     ch_v "Yeah, hey."
 
-            if not ApprovalCheck(Options[1], 900):
+            if not approval_check(Options[1], 900):
                 call Remove_Girl (Options[1])
-        if not ApprovalCheck(Options[0], 900):
+        if not approval_check(Options[0], 900):
             call Remove_Girl (Options[0])
 
         if Options:
@@ -1451,7 +1451,7 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
         else:
 
             if Occupants[0] == RogueX:
-                if ApprovalCheck(RogueX, 1200) or (ApprovalCheck(RogueX, 600) and RogueX.SeenChest and RogueX.SeenPussy):
+                if approval_check(RogueX, 1200) or (approval_check(RogueX, 600) and RogueX.SeenChest and RogueX.SeenPussy):
 
                     ch_r "I suppose I could stick around. . ."
                     $ StayCount.append(RogueX)
@@ -1459,7 +1459,7 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
 
                     ch_r "Nah, I should probably get going."
             elif Occupants[0] == KittyX:
-                if ApprovalCheck(KittyX, 1400) or (ApprovalCheck(KittyX, 700) and KittyX.SeenChest and KittyX.SeenPussy):
+                if approval_check(KittyX, 1400) or (approval_check(KittyX, 700) and KittyX.SeenChest and KittyX.SeenPussy):
                     ch_k "Yeah, I could stick around."
                     $ StayCount.append(KittyX)
                 else:
@@ -1467,31 +1467,31 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
             elif Occupants[0] == EmmaX:
                 if not "classcaught" in EmmaX.history or "three" not in EmmaX.history:
                     ch_e "I really should be going. . ."
-                elif ApprovalCheck(EmmaX, 1400) or (ApprovalCheck(EmmaX, 700) and EmmaX.SeenChest and EmmaX.SeenPussy):
+                elif approval_check(EmmaX, 1400) or (approval_check(EmmaX, 700) and EmmaX.SeenChest and EmmaX.SeenPussy):
                     ch_e "I suppose I could stay, for a bit."
                     $ StayCount.append(EmmaX)
                 else:
                     ch_e "I'm afraid I really must be going."
             elif Occupants[0] == LauraX:
-                if ApprovalCheck(LauraX, 1400) or (ApprovalCheck(LauraX, 700) and LauraX.SeenChest and LauraX.SeenPussy):
+                if approval_check(LauraX, 1400) or (approval_check(LauraX, 700) and LauraX.SeenChest and LauraX.SeenPussy):
                     ch_l "I got nothing better to do."
                     $ StayCount.append(LauraX)
                 else:
                     ch_l "I gotta get going."
             elif Occupants[0] == JeanX:
-                if ApprovalCheck(JeanX, 1400) or (ApprovalCheck(JeanX, 700) and JeanX.SeenChest and JeanX.SeenPussy):
+                if approval_check(JeanX, 1400) or (approval_check(JeanX, 700) and JeanX.SeenChest and JeanX.SeenPussy):
                     ch_j "Sure, why not."
                     $ StayCount.append(JeanX)
                 else:
                     ch_j "Nah, lol."
             elif Occupants[0] == StormX:
-                if ApprovalCheck(StormX, 700):
+                if approval_check(StormX, 700):
                     ch_s "I could stay, I suppose."
                     $ StayCount.append(StormX)
                 else:
                     ch_s "I really do have things to do, [StormX.player_petname]."
             elif Occupants[0] == JubesX:
-                if ApprovalCheck(JubesX, 1400) or (ApprovalCheck(JubesX, 700) and JubesX.SeenChest and JubesX.SeenPussy):
+                if approval_check(JubesX, 1400) or (approval_check(JubesX, 700) and JubesX.SeenChest and JubesX.SeenPussy):
                     ch_v "I guess I could stay a minute. . ."
                     $ StayCount.append(JubesX)
                 else:
@@ -1501,7 +1501,7 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
             if len(Occupants) >= 2:
 
                 if Occupants[1] == RogueX:
-                    if ApprovalCheck(RogueX, 1200) or (ApprovalCheck(RogueX, 600) and RogueX.SeenChest and RogueX.SeenPussy):
+                    if approval_check(RogueX, 1200) or (approval_check(RogueX, 600) and RogueX.SeenChest and RogueX.SeenPussy):
                         if StayCount:
 
                             ch_r "I could stick around too. . ."
@@ -1518,7 +1518,7 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
                             ch_r "I should get going too."
 
                 elif Occupants[1] == KittyX:
-                    if ApprovalCheck(KittyX, 1400) or (ApprovalCheck(KittyX, 700) and KittyX.SeenChest and KittyX.SeenPussy):
+                    if approval_check(KittyX, 1400) or (approval_check(KittyX, 700) and KittyX.SeenChest and KittyX.SeenPussy):
                         if StayCount:
 
                             ch_k "I guess I could stay too. . ."
@@ -1537,7 +1537,7 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
                 elif Occupants[1] == EmmaX:
                     if not "classcaught" in EmmaX.history or "three" not in EmmaX.history:
                         ch_e "I really should be going. . ."
-                    elif ApprovalCheck(EmmaX, 1400) or (ApprovalCheck(EmmaX, 700) and EmmaX.SeenChest and EmmaX.SeenPussy):
+                    elif approval_check(EmmaX, 1400) or (approval_check(EmmaX, 700) and EmmaX.SeenChest and EmmaX.SeenPussy):
                         if StayCount:
 
                             ch_e "I suppose I could also stay. . ."
@@ -1554,7 +1554,7 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
                             ch_e "Yes, let's go."
 
                 elif Occupants[1] == LauraX:
-                    if ApprovalCheck(LauraX, 1400) or (ApprovalCheck(LauraX, 700) and LauraX.SeenChest and LauraX.SeenPussy):
+                    if approval_check(LauraX, 1400) or (approval_check(LauraX, 700) and LauraX.SeenChest and LauraX.SeenPussy):
                         if StayCount:
 
                             ch_l "I could stay too. . ."
@@ -1571,7 +1571,7 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
                             ch_l "Yeah, me too."
 
                 elif Occupants[1] == JeanX:
-                    if ApprovalCheck(JeanX, 1000) or (ApprovalCheck(JeanX, 600) and JeanX.SeenChest and JeanX.SeenPussy):
+                    if approval_check(JeanX, 1000) or (approval_check(JeanX, 600) and JeanX.SeenChest and JeanX.SeenPussy):
                         if StayCount:
 
                             ch_j "I guess I could stay too. . ."
@@ -1588,7 +1588,7 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
                             ch_j "Yeah."
 
                 elif Occupants[1] == StormX:
-                    if ApprovalCheck(StormX, 700):
+                    if approval_check(StormX, 700):
                         if StayCount:
 
                             ch_s "I could also stay. . ."
@@ -1605,7 +1605,7 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
                             ch_s "Yes, let's."
 
                 elif Occupants[1] == JubesX:
-                    if ApprovalCheck(JubesX, 1400) or (ApprovalCheck(JubesX, 700) and JubesX.SeenChest and JubesX.SeenPussy):
+                    if approval_check(JubesX, 1400) or (approval_check(JubesX, 700) and JubesX.SeenChest and JubesX.SeenPussy):
                         if StayCount:
 
                             ch_k "I could kinda stay too. . ."
@@ -1660,16 +1660,16 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
                         if BO[0] == EmmaX and (not "classcaught" in EmmaX.history or (StayCount and "three" not in EmmaX.history)):
 
                             pass
-                        elif BO[0] == JeanX and ApprovalCheck(BO[0], 600):
+                        elif BO[0] == JeanX and approval_check(BO[0], 600):
                             $ StayCount.append(BO[0])
                         elif BO[0] == StormX:
-                            if ApprovalCheck(BO[0], 700, "LO"):
+                            if approval_check(BO[0], 700, "LO"):
                                 $ StayCount.append(BO[0])
-                        elif ApprovalCheck(BO[0], 1200,Alt=[[KittyX],1400]) or (ApprovalCheck(BO[0], 600,Alt=[[KittyX],700]) and BO[0].SeenChest and BO[0].SeenPussy):
+                        elif approval_check(BO[0], 1200,Alt=[[KittyX],1400]) or (approval_check(BO[0], 600,Alt=[[KittyX],700]) and BO[0].SeenChest and BO[0].SeenPussy):
                             $ StayCount.append(BO[0])
-                        elif Line == "spot" and ApprovalCheck(BO[0], 1000, "LI",Alt=[[KittyX],1200]):
+                        elif Line == "spot" and approval_check(BO[0], 1000, "LI",Alt=[[KittyX],1200]):
                             $ StayCount.append(BO[0])
-                        elif Line == "watch you" and ApprovalCheck(BO[0], 600, "O",Alt=[[EmmaX],500]):
+                        elif Line == "watch you" and approval_check(BO[0], 600, "O",Alt=[[EmmaX],500]):
                             $ StayCount.append(BO[0])
 
                     $ BO.remove(BO[0])
@@ -2062,9 +2062,9 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
 
         if BO:
 
-            if ApprovalCheck(BO[0], 1200):
+            if approval_check(BO[0], 1200):
                 $ StayCount.append(BO[0])
-            if len(BO) >=2 and ApprovalCheck(BO[1], 1200) and len(StayCount) < 2:
+            if len(BO) >=2 and approval_check(BO[1], 1200) and len(StayCount) < 2:
                 $ StayCount.append(BO[1])
 
             if len(BO) >=2:
@@ -2222,12 +2222,12 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
 
 label Shower_Sex(Options=0, Line=0):
 
-    if len(StayCount) > 1 and (ApprovalCheck(StayCount[1], 1800,Check=1) > ApprovalCheck(StayCount[0], 1800,Check=1)):
+    if len(StayCount) > 1 and (approval_check(StayCount[1], 1800,Check=1) > approval_check(StayCount[0], 1800,Check=1)):
         $ renpy.random.shuffle(StayCount)
     call shift_focus (StayCount[0])
 
     $ D20 = renpy.random.randint(1,20)
-    $ D20 += 5 if ApprovalCheck(StayCount[0], 1800) else 0
+    $ D20 += 5 if approval_check(StayCount[0], 1800) else 0
 
     if "showered" in Player.recent_history:
         $ D20 = 0
@@ -2304,30 +2304,30 @@ label Shower_Sex(Options=0, Line=0):
 
         $ Options = [1]
         if len(StayCount) > 1:
-            if ApprovalCheck(StayCount[0], 1300) and StayCount[0].GirlLikeCheck(StayCount[1]) >= 800:
+            if approval_check(StayCount[0], 1300) and StayCount[0].GirlLikeCheck(StayCount[1]) >= 800:
                 $ Options.append(2)
-            if ApprovalCheck(StayCount[0], 1200) and StayCount[0].GirlLikeCheck(StayCount[1]) >= 700:
+            if approval_check(StayCount[0], 1200) and StayCount[0].GirlLikeCheck(StayCount[1]) >= 700:
                 $ Options.append(3)
 
-        if ApprovalCheck(StayCount[0], 1300):
+        if approval_check(StayCount[0], 1300):
             $ Options.append(4)
-        if ApprovalCheck(StayCount[0], 1400):
+        if approval_check(StayCount[0], 1400):
             $ Options.append(5)
 
-        if ApprovalCheck(StayCount[0], 1300):
+        if approval_check(StayCount[0], 1300):
             $ Options.append(6)
-        if ApprovalCheck(StayCount[0], 1200):
+        if approval_check(StayCount[0], 1200):
             $ Options.append(7)
 
-        if not ApprovalCheck(StayCount[0], 1400):
+        if not approval_check(StayCount[0], 1400):
 
-            if ApprovalCheck(StayCount[0], 1000):
+            if approval_check(StayCount[0], 1000):
                 $ Options.append(8)
-            if ApprovalCheck(StayCount[0], 1100):
+            if approval_check(StayCount[0], 1100):
                 $ Options.append(9)
-            if ApprovalCheck(StayCount[0], 1000):
+            if approval_check(StayCount[0], 1000):
                 $ Options.append(10)
-            if ApprovalCheck(StayCount[0], 1100):
+            if approval_check(StayCount[0], 1100):
                 $ Options.append(11)
 
         $ renpy.random.shuffle(Options)
@@ -2430,7 +2430,7 @@ label Shower_Sex(Options=0, Line=0):
 
     if Line and len(StayCount) > 1:
 
-        $ D20 += 5 if ApprovalCheck(StayCount[1], 1800) else 0
+        $ D20 += 5 if approval_check(StayCount[1], 1800) else 0
         if StayCount[1].GirlLikeCheck(StayCount[0]) <= 800 and 2 <= Options[0] <=3:
             $ D20 -= 5
         if StayCount[1].GirlLikeCheck(StayCount[0]) <= 600:
@@ -2438,7 +2438,7 @@ label Shower_Sex(Options=0, Line=0):
 
         if 2 <= Options[0] <= 3:
 
-            if ApprovalCheck(StayCount[1], 1300) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 800:
+            if approval_check(StayCount[1], 1300) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 800:
                 $ StayCount[1].change_face("sexy",1)
                 $ StayCount[0].change_stat("lust", 50, 5)
                 $ StayCount[0].change_stat("lust", 70, 5)
@@ -2449,7 +2449,7 @@ label Shower_Sex(Options=0, Line=0):
                 $ Player.change_stat("focus", 50, 7)
                 $ Player.change_stat("focus", 80, 3)
                 $ Line = 4
-            elif ApprovalCheck(StayCount[1], 1200) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 700:
+            elif approval_check(StayCount[1], 1200) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 700:
                 $ StayCount[1].change_face("sexy",2,Eyes="closed")
                 $ StayCount[1].change_stat("lust", 50, 10)
                 $ StayCount[1].change_stat("lust", 70, 10)
@@ -2465,7 +2465,7 @@ label Shower_Sex(Options=0, Line=0):
                 $ Line = 3
         else:
 
-            if (ApprovalCheck(StayCount[1], 1300) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 700) or ApprovalCheck(StayCount[1], 2000):
+            if (approval_check(StayCount[1], 1300) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 700) or approval_check(StayCount[1], 2000):
                 if Options[0] == 5:
                     $ StayCount[1].change_stat("lust", 50, 10)
                     $ StayCount[1].change_stat("lust", 70, 5)
@@ -2481,7 +2481,7 @@ label Shower_Sex(Options=0, Line=0):
                     call Close_Launch (StayCount[0], StayCount[1])
                     "[StayCount[1].name] seems really into this, and joins her on the other side."
                 $ Line = 4
-            elif ((ApprovalCheck(StayCount[1], 1200) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 600)) or ApprovalCheck(StayCount[1], 1600):
+            elif ((approval_check(StayCount[1], 1200) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 600)) or approval_check(StayCount[1], 1600):
                 $ StayCount[1].change_face("sexy",2,Eyes="down")
                 $ StayCount[1].change_stat("lust", 50, 10)
                 $ StayCount[1].change_stat("lust", 70, 5)
@@ -2675,7 +2675,7 @@ label Study_Room_Entry:
                         jump Study_Room
                     elif "no_thief" in KittyX.recent_history:
                         ch_k "I told you, no."
-                    elif ApprovalCheck(KittyX, 400, "I") or ApprovalCheck(KittyX, 1400):
+                    elif approval_check(KittyX, 400, "I") or approval_check(KittyX, 1400):
                         $ KittyX.change_stat("love", 90, 3)
                         $ KittyX.change_stat("obedience", 50, 10)
                         $ KittyX.change_stat("inhibition", 60, 10)
@@ -2694,7 +2694,7 @@ label Study_Room_Entry:
                         jump Study_Room
                     elif "no_thief" in KittyX.recent_history:
                         ch_k "I told you, no."
-                    elif ApprovalCheck(KittyX, 500, "O") or ApprovalCheck(KittyX, 1600):
+                    elif approval_check(KittyX, 500, "O") or approval_check(KittyX, 1600):
                         $ KittyX.change_stat("obedience", 50, 15)
                         $ KittyX.change_stat("inhibition", 60, 10)
                         ch_k "Heh, if you say so. . ."
@@ -2718,7 +2718,7 @@ label Study_Room_Entry:
                 "Do you think you could pick that lock?" if "Sneakthief" not in StormX.Traits:
                     if "no_thief" in StormX.recent_history:
                         ch_s "I told you, I won't do that."
-                    elif ApprovalCheck(StormX, 400, "I") or ApprovalCheck(StormX, 1400):
+                    elif approval_check(StormX, 400, "I") or approval_check(StormX, 1400):
                         $ StormX.change_stat("love", 90, 3)
                         $ StormX.change_stat("obedience", 80, 10)
                         $ StormX.change_stat("inhibition", 60, 10)
@@ -2777,43 +2777,43 @@ label Study_Room:
             call Chat
 
         "Plan Omega!" if time_index < 3 and RogueX.location == bg_current and Player.Lvl >= 5:
-            if ApprovalCheck(RogueX, 1500, TabM=1, Loc="No"):
+            if approval_check(RogueX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (RogueX)
             else:
                 ch_r "I don't want to do that. . ."
         "Plan Kappa!" if time_index < 3 and KittyX.location == bg_current and Player.Lvl >= 5:
-            if "Xavier's photo" in Player.Inventory and ApprovalCheck(KittyX, 1500, TabM=1, Loc="No"):
+            if "Xavier's photo" in Player.Inventory and approval_check(KittyX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (KittyX)
             elif "Xavier's photo" in Player.Inventory:
                 ch_k "I don't really want to do that. . ."
             else:
                 ch_k "What?"
         "Plan Psi!" if time_index < 3 and EmmaX.location == bg_current and Player.Lvl >= 5:
-            if ApprovalCheck(EmmaX, 1500, TabM=1, Loc="No"):
+            if approval_check(EmmaX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (EmmaX)
             else:
                 ch_e "I'd rather not. . ."
         "Plan Chi!" if time_index < 3 and LauraX.location == bg_current and Player.Lvl >= 5:
-            if LauraX.Lvl >= 2 and ApprovalCheck(LauraX, 1500, TabM=1, Loc="No") and ApprovalCheck(LauraX, 750, "I"):
+            if LauraX.Lvl >= 2 and approval_check(LauraX, 1500, TabM=1, Loc="No") and approval_check(LauraX, 750, "I"):
                 call Xavier_Plan (LauraX)
-            elif LauraX.Lvl < 2 or not ApprovalCheck(LauraX, 750, "I"):
+            elif LauraX.Lvl < 2 or not approval_check(LauraX, 750, "I"):
                 ch_l "I'm not ready for that."
             else:
                 ch_l "Huh?"
         "Plan Alpha!" if time_index < 3 and JeanX.location == bg_current and Player.Lvl >= 5:
-            if ApprovalCheck(JeanX, 1500, TabM=1, Loc="No"):
+            if approval_check(JeanX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (JeanX)
             else:
                 ch_j "You're on your own there."
         "Plan Rho!" if time_index < 3 and StormX.location == bg_current and Player.Lvl >= 5:
-            if "Xavier's files" in Player.Inventory and ApprovalCheck(StormX, 1500, TabM=1, Loc="No"):
+            if "Xavier's files" in Player.Inventory and approval_check(StormX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (StormX)
             elif "Xavier's files" in Player.Inventory:
                 ch_s "I do not believe that would be approrpriate."
             else:
                 ch_s "What is that?"
         "Plan Zeta!" if time_index < 3 and JubesX.location == bg_current and Player.Lvl >= 5:
-            if ApprovalCheck(JubesX, 1500, TabM=1, Loc="No"):
+            if approval_check(JubesX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (JubesX)
             else:
                 ch_v "What's a \"Zeta?\""
@@ -2894,7 +2894,7 @@ label Study_Room_Explore:
                 menu:
                     "Since [KittyX.name] is around, have her check inside?"
                     "Check in the box":
-                        if ApprovalCheck(KittyX, 700, "I") or ApprovalCheck(KittyX, 1800):
+                        if approval_check(KittyX, 700, "I") or approval_check(KittyX, 1800):
                             if "Well Studied" not in Achievements:
                                 $ KittyX.change_stat("obedience", 50, 10)
                                 $ KittyX.change_stat("inhibition", 60, 15)
@@ -2917,7 +2917,7 @@ label Study_Room_Explore:
                 menu:
                     "Since [StormX.name] is around, have her check inside?"
                     "Check in the box":
-                        if ApprovalCheck(StormX, 700, "I") or ApprovalCheck(StormX, 1800):
+                        if approval_check(StormX, 700, "I") or approval_check(StormX, 1800):
                             if "Well Studied" not in Achievements:
                                 $ StormX.change_stat("obedience", 50, 10)
                                 $ StormX.change_stat("inhibition", 60, 15)
@@ -3073,7 +3073,7 @@ label Girls_Room_Entry(Chr=0):
 
     if Chr in Party:
         if time_index >= 3 or (time_index == 2 and Round <= 10):
-            if ApprovalCheck(Chr, 1000, "LI",Alt=[[JubesX],500]) or ApprovalCheck(Chr, 600, "OI",Alt=[[JubesX],300]):
+            if approval_check(Chr, 1000, "LI",Alt=[[JubesX],500]) or approval_check(Chr, 600, "OI",Alt=[[JubesX],300]):
 
                 if Chr == RogueX:
                     ch_r "It's pretty late, [Chr.player_petname], but you can come in for a little bit."
@@ -3104,7 +3104,7 @@ label Girls_Room_Entry(Chr=0):
                     ch_s "Oh, yes, come in."
                 elif Chr == JubesX:
                     ch_v "Oh, yes, do come in. . ."
-            elif ApprovalCheck(Chr, 500, "LI") or ApprovalCheck(Chr, 300, "OI"):
+            elif approval_check(Chr, 500, "LI") or approval_check(Chr, 300, "OI"):
 
                 if Chr == RogueX:
                     ch_r "It's a little late [Chr.player_petname]. See you tomorrow."
@@ -3364,7 +3364,7 @@ label Girls_Room_Entry(Chr=0):
                 ch_s "Hello, [Chr.player_petname], it's almost bedtime."
             elif Chr == JubesX:
                 ch_v "Oh, hey, [Chr.player_petname] come on in."
-        elif time_index >= 3 and (ApprovalCheck(Chr, 1000, "LI") or ApprovalCheck(Chr, 600, "OI") or Chr == JubesX):
+        elif time_index >= 3 and (approval_check(Chr, 1000, "LI") or approval_check(Chr, 600, "OI") or Chr == JubesX):
 
             if Chr == RogueX:
                 ch_r "It's pretty late, [Chr.player_petname], but you can come in for a little bit."
@@ -3396,7 +3396,7 @@ label Girls_Room_Entry(Chr=0):
                 ch_s "Oh, yes, come in."
             elif Chr == JubesX:
                 ch_v "Oh, yes, do come in. . ."
-        elif time_index >= 3 and (ApprovalCheck(Chr, 500, "LI") or ApprovalCheck(Chr, 300, "OI")):
+        elif time_index >= 3 and (approval_check(Chr, 500, "LI") or approval_check(Chr, 300, "OI")):
             if Chr == RogueX:
                 ch_r "It's a little late [Chr.player_petname]. Maybe tomorrow."
             elif Chr == KittyX:
@@ -3415,7 +3415,7 @@ label Girls_Room_Entry(Chr=0):
             $ Chr.daily_history.append("noentry")
             $ bg_current = "bg_campus"
             jump Misplaced
-        elif ApprovalCheck(Chr, 600, "LI") or ApprovalCheck(Chr, 300, "OI"):
+        elif approval_check(Chr, 600, "LI") or approval_check(Chr, 300, "OI"):
 
             if Chr == RogueX:
                 ch_r "Sure, come on in [Chr.player_petname]."
@@ -3496,7 +3496,7 @@ label Rogue_Room:
             call Study_Session
 
         "Lock the door" if "locked" not in Player.Traits:
-            if RogueX.location == bg_current and not ApprovalCheck(RogueX, 1000):
+            if RogueX.location == bg_current and not approval_check(RogueX, 1000):
                 ch_r "Hey, could you maybe keep that open, [RogueX.player_petname]?"
             else:
                 "You lock the door"
@@ -3587,7 +3587,7 @@ label Kitty_Room:
             call Study_Session
 
         "Lock the door" if "locked" not in Player.Traits:
-            if KittyX.location == bg_current and not ApprovalCheck(KittyX, 1000):
+            if KittyX.location == bg_current and not approval_check(KittyX, 1000):
                 ch_k "Um, I'd[KittyX.like]rather you didn't lock my door, [KittyX.player_petname]?"
             else:
                 "You lock the door"
@@ -3678,7 +3678,7 @@ label Emma_Room:
             call Study_Session
 
         "Lock the door" if "locked" not in Player.Traits:
-            if EmmaX.location == bg_current and not ApprovalCheck(EmmaX, 1000):
+            if EmmaX.location == bg_current and not approval_check(EmmaX, 1000):
                 ch_e "Do you really think it's appropriate for you to lock the door to my room?"
             else:
                 "You lock the door"
@@ -3769,7 +3769,7 @@ label Laura_Room:
             call Study_Session
 
         "Lock the door" if "locked" not in Player.Traits:
-            if LauraX.location == bg_current and not ApprovalCheck(LauraX, 1200):
+            if LauraX.location == bg_current and not approval_check(LauraX, 1200):
                 ch_l "I don't want to feel caged up like that, [LauraX.player_petname]."
             else:
                 "You lock the door"
@@ -3858,7 +3858,7 @@ label Jean_Room:
             call Study_Session
 
         "Lock the door" if "locked" not in Player.Traits:
-            if JeanX.location == bg_current and not ApprovalCheck(JeanX, 1200):
+            if JeanX.location == bg_current and not approval_check(JeanX, 1200):
                 ch_j "Hey, don't lock that."
             else:
                 "You lock the door"
@@ -3948,7 +3948,7 @@ label Storm_Room:
             call Study_Session
 
         "Lock the door" if "locked" not in Player.Traits:
-            if StormX.location == bg_current and not ApprovalCheck(StormX, 1000):
+            if StormX.location == bg_current and not approval_check(StormX, 1000):
                 ch_s "I would really prefer you didn't lock the door, [StormX.player_petname]."
             else:
                 "You lock the door"
@@ -4039,7 +4039,7 @@ label Jubes_Room:
             call Study_Session
 
         "Lock the door" if "locked" not in Player.Traits:
-            if JubesX.location == bg_current and not ApprovalCheck(JubesX, 1000):
+            if JubesX.location == bg_current and not approval_check(JubesX, 1000):
                 ch_v "You really shouldn't lock -my- door, [JubesX.player_petname]."
             else:
                 "You lock the door"

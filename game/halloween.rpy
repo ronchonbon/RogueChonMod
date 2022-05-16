@@ -100,7 +100,7 @@ label Halloween_Chat_Menu:
                             ch_j "-So- not interested."
                         elif Girl == StormX:
                             ch_s "I am uninterested."
-                    elif ApprovalCheck(Girl, 800):
+                    elif approval_check(Girl, 800):
                         $ Girl.change_face("sexy")
                         if Girl == RogueX:
                             ch_r "Heh, maybe after the party, [Girl.player_petname]?"
@@ -345,7 +345,7 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
             $ RogueX.change_face("smile")
             ch_r "Sure'nuff, [RogueX.player_petname]. You know your characters."
         "Some sort of hooker?":
-            if ApprovalCheck(RogueX, 1600) or ApprovalCheck(RogueX, 700, "O"):
+            if approval_check(RogueX, 1600) or approval_check(RogueX, 700, "O"):
                 $ RogueX.change_face("perplexed",2)
                 call HWchange_stat (RogueX, "love", 90, -1)
                 ch_r "Wha. . . "
@@ -355,7 +355,7 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
                 call HWchange_stat (RogueX, "love", 90, 1)
                 call HWchange_stat (RogueX, "lust", 50, 2)
                 ch_r "I suppose if that's what you like to see. . ."
-            elif ApprovalCheck(RogueX, 1300):
+            elif approval_check(RogueX, 1300):
                 $ RogueX.change_face("angry",Eyes="side")
                 call HWchange_stat (RogueX, "love", 70, -2)
                 call HWchange_stat (RogueX, "love", 90, -2)
@@ -675,7 +675,7 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
             $ KittyX.change_face("smile")
         "A prostitute?":
             $ LauraX.change_face("sad",2)
-            if ApprovalCheck(LauraX, 1600) or ApprovalCheck(LauraX, 700, "O"):
+            if approval_check(LauraX, 1600) or approval_check(LauraX, 700, "O"):
 
                 call HWchange_stat (LauraX, "love", 80, -2)
                 call HWchange_stat (LauraX, "love", 90, -3)
@@ -1327,7 +1327,7 @@ label Halloween_Emma:
                 call HWchange_stat (EmmaX, "obedience", 50, 1)
                 call HWchange_stat (EmmaX, "obedience", 70, 1)
                 call HWchange_stat (EmmaX, "inhibition", 50, 1)
-                if ApprovalCheck(EmmaX, 1200) or ApprovalCheck(EmmaX, 400, "O"):
+                if approval_check(EmmaX, 1200) or approval_check(EmmaX, 400, "O"):
                     ch_e ". . ."
                     $ EmmaX.change_face("sexy")
                     call HWchange_stat (EmmaX, "love", 90, 1)
@@ -1342,7 +1342,7 @@ label Halloween_Emma:
                 call HWchange_stat (EmmaX, "obedience", 50, 1)
                 call HWchange_stat (EmmaX, "obedience", 70, 1)
                 call HWchange_stat (EmmaX, "inhibition", 70, 1)
-                if ApprovalCheck(EmmaX, 1300) or ApprovalCheck(EmmaX, 500, "O"):
+                if approval_check(EmmaX, 1300) or approval_check(EmmaX, 500, "O"):
                     ch_e ". . ."
                     $ EmmaX.change_face("sexy")
                     call HWchange_stat (EmmaX, "love", 90, 1)
@@ -1465,7 +1465,7 @@ label Halloween_Emma:
     menu:
         extend ""
         "No, not really.":
-            if ApprovalCheck(EmmaX, 1200) or ApprovalCheck(EmmaX, 400, "O"):
+            if approval_check(EmmaX, 1200) or approval_check(EmmaX, 400, "O"):
                 $ EmmaX.change_face("sadside")
                 call HWchange_stat (EmmaX, "love", 90, -1)
                 call HWchange_stat (EmmaX, "obedience", 70, 2)

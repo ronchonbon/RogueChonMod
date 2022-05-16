@@ -145,7 +145,7 @@ label Sex_Shop:
                     $ Player.Inventory.append("dildo")
                     $ Player.Cash -= 20
                     if First:
-                        if ApprovalCheck(Girl, 800):
+                        if approval_check(Girl, 800):
                             $ First.change_face("sly")
                             $ First.change_stat("love", 80, 1)
                             $ First.change_stat("obedience", 50, 3)
@@ -196,7 +196,7 @@ label Sex_Shop:
                     $ Player.Inventory.append("vibrator")
                     $ Player.Cash -= 25
                     if First:
-                        if ApprovalCheck(Girl, 800):
+                        if approval_check(Girl, 800):
                             $ First.change_face("sly")
                             $ First.change_stat("love", 80, 2)
                             $ First.change_stat("obedience", 50, 2)
@@ -264,7 +264,7 @@ label Sex_Shop:
                         $ Girl.blushing = 1
                         $ Girl.ArmPose = 2
                         $ Girl.held_item = "dildo"
-                        if ApprovalCheck(Girl, 800):
+                        if approval_check(Girl, 800):
                             $ Girl.change_face("bemused")
                             $ Player.Inventory.remove("dildo")
                             $ Girl.Inventory.append("dildo")
@@ -278,7 +278,7 @@ label Sex_Shop:
                             else:
                                 Girl.voice "I'm sure I can find some place to store it. . ."
                             $ Girl.change_stat("lust", 89, 10)
-                        elif ApprovalCheck(Girl, 600):
+                        elif approval_check(Girl, 600):
                             $ Girl.change_face("confused")
                             $ Player.Inventory.remove("dildo")
                             $ Girl.Inventory.append("dildo")
@@ -421,7 +421,7 @@ label Sex_Shop:
                         $ Girl.blushing = 1
                         $ Girl.ArmPose = 2
                         $ Girl.held_item = "vibrator"
-                        if ApprovalCheck(Girl, 700):
+                        if approval_check(Girl, 700):
                             $ Girl.change_face("bemused")
                             $ Player.Inventory.remove("vibrator")
                             $ Girl.Inventory.append("vibrator")
@@ -450,7 +450,7 @@ label Sex_Shop:
                             elif Girl == JubesX:
                                 ch_v "Oh, this could be nice. . ."
                             $ Girl.change_stat("lust", 89, 10)
-                        elif ApprovalCheck(Girl, 400):
+                        elif approval_check(Girl, 400):
                             $ Girl.change_face("confused")
                             $ Player.Inventory.remove("vibrator")
                             $ Girl.Inventory.append("vibrator")
@@ -605,7 +605,7 @@ label Swim_Shop:
                     ch_s "I have plenty of those. . ."
                 elif Girl == JubesX:
                     ch_v "I already got one!"
-            elif ApprovalCheck(Girl, 800) or ApprovalCheck(Girl, 600, "L") or ApprovalCheck(Girl, 300, "O"):
+            elif approval_check(Girl, 800) or approval_check(Girl, 600, "L") or approval_check(Girl, 300, "O"):
 
                 if Girl == RogueX:
                     ch_r "Oh, we're looking for a nice suit?"
@@ -676,7 +676,7 @@ label Swim_Shop:
                     "Bikini Top (locked)" if Girl.bra == "bikini_top":
                         pass
                     "Bikini Top" if Girl.bra != "bikini_top":
-                        if Girl.SeenChest or ApprovalCheck(Girl, 1100, TabM=2):
+                        if Girl.SeenChest or approval_check(Girl, 1100, TabM=2):
                             call Dressing_Strip_Bra ("bikini_top")
                         else:
                             Girl.voice "I'll need some privacy here. . ."
@@ -701,7 +701,7 @@ label Swim_Shop:
                     "Bikini Bottoms (locked)" if Girl.underwear == "bikini_bottoms":
                         pass
                     "Bikini Bottoms" if Girl.underwear != "bikini_bottoms":
-                        if Girl.SeenPussy or ApprovalCheck(Girl, 1200, TabM=2):
+                        if Girl.SeenPussy or approval_check(Girl, 1200, TabM=2):
                             call Dressing_Strip_Panties ("bikini_bottoms")
                         else:
                             Girl.voice "I'll need some privacy here. . ."
@@ -726,7 +726,7 @@ label Swim_Shop:
                         pass
                     "Blue swim_skirt" if Girl == KittyX and Girl.legs != "blue_skirt":
                         $ Girl.change_face("smile")
-                        if (Girl.underwear and ApprovalCheck(Girl, 900, TabM=2)) or ApprovalCheck(Girl, 1200, TabM=2):
+                        if (Girl.underwear and approval_check(Girl, 900, TabM=2)) or approval_check(Girl, 1200, TabM=2):
                             Girl.voice "Sure. . ."
                             $ Girl.Upskirt = 1
                             pause 0.3
@@ -1006,7 +1006,7 @@ label Lingerie_Shop:
         if Girl:
 
             $ Girl.change_face("smile",1)
-            if ApprovalCheck(Girl, 800) or ApprovalCheck(Girl, 600, "L") or ApprovalCheck(Girl, 300, "O"):
+            if approval_check(Girl, 800) or approval_check(Girl, 600, "L") or approval_check(Girl, 300, "O"):
 
                 if Girl == RogueX:
                     ch_r "Oh, this looks spicy. . ."
@@ -1079,7 +1079,7 @@ label Lingerie_Shop:
                     "Lace Bra" if Girl.bra != "lace_bra" and Girl != LauraX:
                         if "no_gift_bra" in Girl.recent_history:
                             Girl.voice "I said no. . ."
-                        elif not Girl.SeenChest and not ApprovalCheck(Girl, 900):
+                        elif not Girl.SeenChest and not approval_check(Girl, 900):
                             $ Girl.change_face("angry",2)
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I don't think that would be appropriate."
@@ -1090,7 +1090,7 @@ label Lingerie_Shop:
                             $ Girl.change_face("angry",1)
                             $ Girl.recent_history.append("no_gift_bra")
                         else:
-                            if Girl.SeenChest or ApprovalCheck(Girl, 1000, TabM=2):
+                            if Girl.SeenChest or approval_check(Girl, 1000, TabM=2):
                                 call Dressing_Strip_Bra ("lace_bra")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
@@ -1114,7 +1114,7 @@ label Lingerie_Shop:
                     "Corset" if Girl.bra != "corset" and Girl in (LauraX,JeanX):
                         if "no_gift_bra" in Girl.recent_history:
                             Girl.voice "I said no. . ."
-                        elif not Girl.SeenChest and not ApprovalCheck(Girl, 900):
+                        elif not Girl.SeenChest and not approval_check(Girl, 900):
                             $ Girl.change_face("angry",2)
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I don't think that would be appropriate."
@@ -1125,7 +1125,7 @@ label Lingerie_Shop:
                             $ Girl.change_face("angry",1)
                             $ Girl.recent_history.append("no_gift_bra")
                         else:
-                            if Girl.SeenChest or ApprovalCheck(Girl, 1000, TabM=2):
+                            if Girl.SeenChest or approval_check(Girl, 1000, TabM=2):
                                 call Dressing_Strip_Bra ("corset")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
@@ -1149,7 +1149,7 @@ label Lingerie_Shop:
                     "Lace Corset" if Girl.bra != "lace corset" and Girl == LauraX:
                         if "no_gift_bra" in Girl.recent_history:
                             Girl.voice "I said no. . ."
-                        elif not Girl.SeenChest and not ApprovalCheck(Girl, 900):
+                        elif not Girl.SeenChest and not approval_check(Girl, 900):
                             $ Girl.change_face("angry",2)
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I don't think that would be appropriate."
@@ -1160,7 +1160,7 @@ label Lingerie_Shop:
                             $ Girl.change_face("angry",1)
                             $ Girl.recent_history.append("no_gift_bra")
                         else:
-                            if Girl.SeenChest or ApprovalCheck(Girl, 1000, TabM=2):
+                            if Girl.SeenChest or approval_check(Girl, 1000, TabM=2):
                                 call Dressing_Strip_Bra ("lace corset")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
@@ -1183,7 +1183,7 @@ label Lingerie_Shop:
                     "Lace Panties" if Girl.underwear != "lace_panties":
                         if "no_gift_panties" in Girl.recent_history:
                             Girl.voice "I said no. . ."
-                        elif not Girl.SeenPussy and not ApprovalCheck(Girl, 1000):
+                        elif not Girl.SeenPussy and not approval_check(Girl, 1000):
                             $ Girl.change_face("angry",2)
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I don't think that would be appropriate."
@@ -1194,7 +1194,7 @@ label Lingerie_Shop:
                             $ Girl.change_face("angry",1)
                             $ Girl.recent_history.append("no_gift_panties")
                         else:
-                            if Girl.SeenPussy or ApprovalCheck(Girl, 1200, TabM=2):
+                            if Girl.SeenPussy or approval_check(Girl, 1200, TabM=2):
                                 call Dressing_Strip_Panties ("lace_panties")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
@@ -1217,13 +1217,13 @@ label Lingerie_Shop:
                     "Tiger-Striped Panties" if Girl.underwear != "tiger_panties" and Girl == JubesX:
                         if "no_gift_panties" in Girl.recent_history:
                             Girl.voice "I said no. . ."
-                        elif not Girl.SeenPussy and not ApprovalCheck(Girl, 1000):
+                        elif not Girl.SeenPussy and not approval_check(Girl, 1000):
                             $ Girl.change_face("angry",2)
                             Girl.voice "Um, no, not really interested. . ."
                             $ Girl.change_face("angry",1)
                             $ Girl.recent_history.append("no_gift_panties")
                         else:
-                            if Girl.SeenPussy or ApprovalCheck(Girl, 1200, TabM=2):
+                            if Girl.SeenPussy or approval_check(Girl, 1200, TabM=2):
                                 call Dressing_Strip_Panties ("tiger_panties")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
@@ -1244,7 +1244,7 @@ label Lingerie_Shop:
                     "Stockings and Garterbelt (locked)" if Girl.hose == "stockings_and_garterbelt":
                         pass
                     "Stockings and Garterbelt" if Girl.hose != "stockings_and_garterbelt":
-                        if Girl.SeenPussy or ApprovalCheck(Girl, 900, TabM=2):
+                        if Girl.SeenPussy or approval_check(Girl, 900, TabM=2):
                             $ Girl.change_face("sexy")
                             Girl.voice "Sure. . ."
                             $ Girl.Upskirt = 1
@@ -1309,7 +1309,7 @@ label Lingerie_Shop:
                     "Pantyhose (locked)" if Girl.hose == "pantyhose":
                         pass
                     "Pantyhose" if Girl.hose != "pantyhose" and Girl != LauraX:
-                        if Girl.SeenPussy or ApprovalCheck(Girl, 900, TabM=2):
+                        if Girl.SeenPussy or approval_check(Girl, 900, TabM=2):
                             $ Girl.change_face("sexy")
                             Girl.voice "Sure. . ."
                             $ Girl.Upskirt = 1
@@ -1340,7 +1340,7 @@ label Lingerie_Shop:
 
 
                     "Lose the [Girl.hose]" if Girl.hose:
-                        if Girl.HoseNum() < 10 or ApprovalCheck(Girl, 900, TabM=2):
+                        if Girl.HoseNum() < 10 or approval_check(Girl, 900, TabM=2):
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I suppose. . ."
                             else:
@@ -1358,7 +1358,7 @@ label Lingerie_Shop:
                     "Nighty" if Girl.top != "nighty" and Girl == RogueX:
                         if "no_gift_bra" in Girl.recent_history:
                             Girl.voice "I said no. . ."
-                        elif not Girl.SeenChest and not ApprovalCheck(Girl, 900):
+                        elif not Girl.SeenChest and not approval_check(Girl, 900):
                             $ Girl.change_face("angry",2)
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I don't think that would be appropriate."
@@ -1369,7 +1369,7 @@ label Lingerie_Shop:
                             $ Girl.change_face("angry",1)
                             $ Girl.recent_history.append("no_gift_bra")
                         else:
-                            if Girl.SeenChest or ApprovalCheck(Girl, 900, TabM=2):
+                            if Girl.SeenChest or approval_check(Girl, 900, TabM=2):
                                 $ Girl.change_face("sexy")
                                 Girl.voice "Sure. . ."
                                 if Girl == JubesX:

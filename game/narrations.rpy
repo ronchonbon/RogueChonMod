@@ -1905,36 +1905,35 @@ label Offhand_Set(action_context=action_context, Tempprimary_action=offhand_acti
 
 
     if primary_action:
-        $ action_context = "auto"
         menu:
             "Also kiss her." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "sex", "anal", "hotdog", "dildo_pussy", "dildo_anal"):
                 "You lean in and start kissing her."
                 $ offhand_action = "kiss"
-
+                $ action_context = "offhand"
+                call action(Chr)
             "Also fondle her breasts." if primary_action in ("kiss","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "foot", "dildo_pussy", "dildo_anal"):
                 $ offhand_action = "fondle_breasts"
-                call expression Chr.Tag + "_Fondle_Breasts"
-
+                $ action_context = "offhand"
+                call action(Chr)
             "Also suck her breasts." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "sex", "anal", "hotdog", "dildo_pussy", "dildo_anal"):
                 $ offhand_action = "suck_breasts"
-                call expression Chr.Tag + "_Suck_Breasts"
-
+                $ action_context = "offhand"
+                call action(Chr)
             "Also fondle her pussy." if primary_action in ("kiss","fondle_breasts","fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "foot", "dildo_pussy", "dildo_anal"):
                 $ offhand_action = "fondle_pussy"
-                call expression Chr.Tag + "_Fondle_Pussy"
-
+                $ action_context = "offhand"
+                call action(Chr)
             "Also fondle her ass." if primary_action in ("kiss","fondle_breasts","fondle_pussy", "fondle_thighs", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "foot", "dildo_pussy", "dildo_anal"):
                 $ offhand_action = "fondle_ass"
-                call expression Chr.Tag + "_Fondle_Ass"
-
+                $ action_context = "offhand"
+                call action(Chr)
             "Also finger her ass." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "hotdog", "foot", "dildo_pussy"):
                 $ offhand_action = "finger_ass"
-                call expression Chr.Tag + "_Insert_Ass"
-
+                $ action_context = "offhand"
+                call action(Chr)
             "Also jack it." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "dildo_pussy", "dildo_anal"):
                 call Jackin (Chr)
             "Nevermind":
-
                 pass
     else:
         "There's some kind of bug here, let Oni know."
@@ -2184,10 +2183,10 @@ label Girl_Self_Set(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Length
             return
 
 
-        if GirlA.SEXP >= 50 or ApprovalCheck(GirlA, 500, "I"):
+        if GirlA.SEXP >= 50 or approval_check(GirlA, 500, "I"):
             if GirlA.lust <= 30:
                 return
-        elif GirlA.SEXP >= 25 or ApprovalCheck(GirlA, 300, "I"):
+        elif GirlA.SEXP >= 25 or approval_check(GirlA, 300, "I"):
             if GirlA.lust <= 50:
                 return
         else:
@@ -2390,7 +2389,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, TempL
                                         ", then moves her hands from her breasts to rub her neck",
                                         ", firmly pinching her nipples and giving them a tug",
                                         ", passing repeatedly against her rigid nipples"])
-        $ TempLust += 2 if ApprovalCheck(GirlA, 500, "I") else 1
+        $ TempLust += 2 if approval_check(GirlA, 500, "I") else 1
         $ TempLust2 += 5 if GirlB.GirlLikeCheck(GirlA) >= 800 else 2
         $ TempFocus += 1
 
@@ -2408,7 +2407,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, TempL
                                         ", licking slowly up her chest",
                                         ", firmly nibbling her nipples and giving them a tug",
                                         ", nibbling repeatedly at her rigid nipples"])
-        $ TempLust += 2 if ApprovalCheck(GirlA, 500, "I") else 1
+        $ TempLust += 2 if approval_check(GirlA, 500, "I") else 1
         $ TempLust2 += 4 if GirlB.GirlLikeCheck(GirlA) >= 800 else 2
         $ TempFocus += 1
 
@@ -2468,7 +2467,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, TempL
 
         $ Line = Line + Templine
 
-        $ TempLust += 2 if ApprovalCheck(GirlA, 500, "I") else 1
+        $ TempLust += 2 if approval_check(GirlA, 500, "I") else 1
         $ TempLust2 += 5 if GirlB.GirlLikeCheck(GirlA) >= 800 else 3
         $ TempFocus += 1
 
@@ -2527,7 +2526,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, TempL
 
         $ Line = Line + Templine
 
-        $ TempLust += 3 if ApprovalCheck(GirlA, 600, "I") else 1
+        $ TempLust += 3 if approval_check(GirlA, 600, "I") else 1
         $ TempLust2 += 7 if GirlB.GirlLikeCheck(GirlA) >= 800 else 4
         $ TempFocus += 3
 
@@ -2554,7 +2553,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, TempL
                                         ", kneeding it with slow undulating motions",
                                         ", moving with slow undulating motions"])
 
-        $ TempLust += 1 if ApprovalCheck(GirlA, 500, "I") else 0
+        $ TempLust += 1 if approval_check(GirlA, 500, "I") else 0
         $ TempLust2 += 3 if GirlB.GirlLikeCheck(GirlA) >= 800 else 1
         $ TempFocus += 1
 
@@ -2607,7 +2606,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, TempL
 
         if not GirlB.used_to_anal:
             $ TempLust2 -= 3
-        $ TempLust += 2 if ApprovalCheck(GirlA, 700, "I") else 1
+        $ TempLust += 2 if approval_check(GirlA, 700, "I") else 1
         $ TempLust2 += 5 if GirlB.GirlLikeCheck(GirlA) >= 800 else 3
         $ TempFocus += 1
 
@@ -2664,7 +2663,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, TempL
 
         $ Line = Line + Templine
 
-        $ TempLust += 3 if ApprovalCheck(GirlA, 800, "I") else 1
+        $ TempLust += 3 if approval_check(GirlA, 800, "I") else 1
         $ TempLust2 += 4 if GirlB.GirlLikeCheck(GirlA) >= 800 else 2
         $ TempFocus += 3
 
@@ -2725,7 +2724,7 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, TempL
                                                 ", their tongues swirl around each other",
                                                 ", occasionally nibbling at her ears",
                                                 ", trailing kisses down her neck"])
-        $ TempLust += 1 if ApprovalCheck(GirlA, 500, "I") else 0
+        $ TempLust += 1 if approval_check(GirlA, 500, "I") else 0
         $ TempLust += 1 if GirlA.GirlLikeCheck(GirlB) >= 800 else 0
         $ TempLust2 += 2 if GirlB.GirlLikeCheck(GirlA) >= 800 else 1
         $ TempFocus += 1
@@ -2740,8 +2739,8 @@ label SexDialog_Threeway(GirlA=Secondary, Mode=0, Action=0, GirlB=Primary, TempL
                                         ", transfixed by the action"])
         $ TempLust += 1 if GirlA.GirlLikeCheck(GirlB) >= 600 else 0
         $ TempLust += 2 if GirlA.GirlLikeCheck(GirlB) >= 800 else 1
-        $ TempLust2 += 1 if ApprovalCheck(GirlB, 500, "I") else 0
-        $ TempLust2 += 1 if ApprovalCheck(GirlB, 700, "I") else 0
+        $ TempLust2 += 1 if approval_check(GirlB, 500, "I") else 0
+        $ TempLust2 += 1 if approval_check(GirlB, 700, "I") else 0
         $ TempFocus += 1
     else:
 
@@ -2867,7 +2866,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
             $ State = "threeway"
         elif Preset:
             pass
-        elif GirlA.GirlLikeCheck(GirlB) >= 600 and ApprovalCheck(GirlA, 500, "I"):
+        elif GirlA.GirlLikeCheck(GirlB) >= 600 and approval_check(GirlA, 500, "I"):
 
             pass
         else:
@@ -2880,13 +2879,13 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
                     $ GirlA.event_counter["been_with_girl"] += 1
                     $ GirlA.recent_history.append("lesbian")
             return
-    elif not ApprovalCheck(GirlA, 500, "I"):
+    elif not approval_check(GirlA, 500, "I"):
 
         pass
-    elif GirlA.GirlLikeCheck(GirlB) >= 600 and ApprovalCheck(GirlA, (1500-(10*GirlA.event_counter["been_with_girl"])-(10*(GirlA.GirlLikeCheck(GirlB)-60)))):
+    elif GirlA.GirlLikeCheck(GirlB) >= 600 and approval_check(GirlA, (1500-(10*GirlA.event_counter["been_with_girl"])-(10*(GirlA.GirlLikeCheck(GirlB)-60)))):
 
         $ State = "threeway"
-    elif ApprovalCheck(GirlA, 1000):
+    elif approval_check(GirlA, 1000):
 
         $ State = "hetero"
     elif GirlA.GirlLikeCheck(GirlB) >= 700:
@@ -2897,9 +2896,9 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
 
         $ Options.extend(("fondle_breasts","suck_breasts","fondle_pussy","fondle_ass","kiss girl"))
 
-        if ApprovalCheck(GirlA, 800, "I") or GirlA.GirlLikeCheck(GirlB) >= 800:
+        if approval_check(GirlA, 800, "I") or GirlA.GirlLikeCheck(GirlB) >= 800:
             $ Options.append("eat_pussy")
-        if ApprovalCheck(GirlA, 900, "I") and GirlA.GirlLikeCheck(GirlB) >= 900:
+        if approval_check(GirlA, 900, "I") and GirlA.GirlLikeCheck(GirlB) >= 900:
             $ Options.append("eat_ass")
 
 
@@ -2934,7 +2933,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
                 ch_s "Ok, we can do that. . ."
             elif GirlA == JubesX:
                 ch_v "Ok, I can do that. . ."
-        elif ApprovalCheck(GirlA, 750, "I") or ApprovalCheck(GirlA, 1500):
+        elif approval_check(GirlA, 750, "I") or approval_check(GirlA, 1500):
 
             $ Options[0] = Preset
             if GirlA == RogueX:
@@ -3057,7 +3056,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         if "lesbian" not in GirlB.recent_history:
             $ GirlB.event_counter["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
-        $ TempLust += 2 if ApprovalCheck(GirlA, 500, "I") else 1
+        $ TempLust += 2 if approval_check(GirlA, 500, "I") else 1
         $ TempLust2 += 4 if GirlB.GirlLikeCheck(GirlA) >= 800 else 2
         $ TempFocus += 1
     elif Options[0] == "suck_breasts":
@@ -3070,7 +3069,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         if "lesbian" not in GirlB.recent_history:
             $ GirlB.event_counter["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
-        $ TempLust += 2 if ApprovalCheck(GirlA, 500, "I") else 1
+        $ TempLust += 2 if approval_check(GirlA, 500, "I") else 1
         $ TempLust2 += 5 if GirlB.GirlLikeCheck(GirlA) >= 800 else 2
         $ TempFocus += 1
     elif Options[0] == "fondle_pussy":
@@ -3083,7 +3082,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         if "lesbian" not in GirlB.recent_history:
             $ GirlB.event_counter["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
-        $ TempLust += 2 if ApprovalCheck(GirlA, 500, "I") else 1
+        $ TempLust += 2 if approval_check(GirlA, 500, "I") else 1
         $ TempLust2 += 5 if GirlB.GirlLikeCheck(GirlA) >= 800 else 3
         $ TempFocus += 2
     elif Options[0] == "eat_pussy":
@@ -3096,7 +3095,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         if "lesbian" not in GirlB.recent_history:
             $ GirlB.event_counter["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
-        $ TempLust += 3 if ApprovalCheck(GirlA, 600, "I") else 1
+        $ TempLust += 3 if approval_check(GirlA, 600, "I") else 1
         $ TempLust2 += 8 if GirlB.GirlLikeCheck(GirlA) >= 800 else 5
         $ TempFocus += 3
     elif Options[0] == "fondle_ass":
@@ -3109,7 +3108,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         if "lesbian" not in GirlB.recent_history:
             $ GirlB.event_counter["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
-        $ TempLust += 1 if ApprovalCheck(GirlA, 400, "I") else 0
+        $ TempLust += 1 if approval_check(GirlA, 400, "I") else 0
         $ TempLust2 += 3 if GirlB.GirlLikeCheck(GirlA) >= 600 else 2
         $ TempFocus += 1
     elif Options[0] == "eat_ass":
@@ -3122,7 +3121,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         if "lesbian" not in GirlB.recent_history:
             $ GirlB.event_counter["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
-        $ TempLust += 3 if ApprovalCheck(GirlA, 800, "I") else 1
+        $ TempLust += 3 if approval_check(GirlA, 800, "I") else 1
         $ TempLust2 += 6 if GirlB.GirlLikeCheck(GirlA) >= 800 else 4
         $ TempFocus += 2
 
@@ -3159,8 +3158,8 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         $ Action = "watch"
         $ TempLust += 1 if GirlA.GirlLikeCheck(GirlB) >= 600 else 0
         $ TempLust += 2 if GirlA.GirlLikeCheck(GirlB) >= 800 else 1
-        $ TempLust2 += 1 if ApprovalCheck(GirlB, 500, "I") else 0
-        $ TempLust2 += 1 if ApprovalCheck(GirlB, 700, "I") else 0
+        $ TempLust2 += 1 if approval_check(GirlB, 500, "I") else 0
+        $ TempLust2 += 1 if approval_check(GirlB, 700, "I") else 0
         $ TempFocus += 1
 
     if Action == "kiss girl" or Action == "kiss both":
@@ -3171,7 +3170,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         if "lesbian" not in GirlB.recent_history:
             $ GirlB.event_counter["been_with_girl"] += 1
             $ GirlB.recent_history.append("lesbian")
-        $ TempLust += 1 if ApprovalCheck(GirlA, 500, "I") else 0
+        $ TempLust += 1 if approval_check(GirlA, 500, "I") else 0
         $ TempLust += 1 if GirlA.GirlLikeCheck(GirlB) >= 800 else 0
         $ TempLust2 += 2 if GirlB.GirlLikeCheck(GirlA) >= 800 else 1
         $ TempFocus += 1
@@ -3668,9 +3667,9 @@ label Dirty_Talk(Girl=Primary, D20=0, TempCheck=0, TempLine=0, Tempprimary_actio
 
     elif Girl == LauraX:
 
-        if ApprovalCheck(LauraX, 1500):
+        if approval_check(LauraX, 1500):
             $ D20 -= 5
-        elif ApprovalCheck(LauraX, 1200):
+        elif approval_check(LauraX, 1200):
             $ D20 -= 3
         if D20 >= 10:
 
@@ -3811,9 +3810,9 @@ label Dirty_Talk(Girl=Primary, D20=0, TempCheck=0, TempLine=0, Tempprimary_actio
 
     elif Girl == JeanX:
 
-        if ApprovalCheck(JeanX, 1500):
+        if approval_check(JeanX, 1500):
             $ D20 -= 5
-        elif ApprovalCheck(JeanX, 1200):
+        elif approval_check(JeanX, 1200):
             $ D20 -= 3
         if D20 >= 10:
 
@@ -4459,6 +4458,8 @@ label Sex_Basic_Dialog(Girl=0, Type=0):
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc
 
+
+
 label pulls_off_top_narration(Girl):
     if Girl == RogueX:
         "[Girl.name] shrugs and pulls her top open."
@@ -4468,5 +4469,219 @@ label pulls_off_top_narration(Girl):
         "[Girl.name] sighs and tugs her breasts free of her clothes."
     elif Girl in [LauraX, JeanX, JubesX]:
         "[Girl.name] grunts and pulls her clothes aside."
+
+    return
+
+label auto_action_narrations(Girl, action):
+    if action == "dildo_pussy":
+        "You rub the dildo across her body, and along her moist slit."
+
+        $ Girl.change_face("surprised", 1)
+    elif action == "dildo_ass":
+        "You rub the dildo across her body, and against her tight anus."
+
+        $ Girl.change_face("surprised", 1)
+    elif action == "sex":
+        $ Girl.pose = "doggy"
+
+        call expression focused_Girl.Tag + "_Sex_Launch" pass("sex")
+
+        if Girl.PantsNum() == 5:
+            "You press up against [Girl.name]'s backside, sliding her skirt up as you go."
+
+            $ Girl.Upskirt = 1
+        elif Girl.PantsNum() > 6:
+            "You press up against [Girl.name]'s backside, sliding her pants down as you do."
+
+            $ Girl.Legs = 0
+        else:
+            "You press up against [Girl.name]'s backside."
+
+        $ Girl.SeenPanties = 1
+
+        "You rub the tip of your cock against her moist slit."
+
+        $ Girl.change_face("surprised", 1)
+    elif action == "anal":
+        $ Girl.pose = "doggy"
+
+        call expression focused_Girl.Tag + "_Sex_Launch" pass("anal")
+
+        if Girl.PantsNum() == 5:
+            "You press up against [Girl.name]'s backside, sliding her skirt up as you go."
+
+            $ Girl.Upskirt = 1
+        elif Girl.PantsNum() > 6:
+            "You press up against [Girl.name]'s backside, sliding her pants down as you do."
+
+            $ Girl.Legs = 0
+        else:
+            "You press up against [Girl.name]'s backside."
+
+        $ Girl.SeenPanties = 1
+
+        "You press the tip of your cock against her tight rim."
+
+        $ Girl.change_face("surprised", 1)
+    elif action == "hotdog":
+        $ Girl.pose = "doggy"
+
+        call expression focused_Girl.Tag + "_Sex_Launch" pass("hotdog")
+
+        "You press up against [Girl.name]'s backside."
+
+        $ Girl.change_face("surprised", 1)
+
+    return
+
+label kissing_narrations(Girl):
+    if Girl.action_counter["kiss"] >= 10 and Girl.lust >= 80:
+        $ line = renpy.random.choice(["She's all over you, running her hands along your body.",
+            "She's all over you, licking all over your face and neck.",
+            "She's all over you, kissing all over your face and grinding against you."])
+    elif Girl.action_counter["kiss"] > 7:
+        $ line = renpy.random.choice(["She's really sucking face.",
+            "You kiss deeply and passionately.",
+            "You kiss deeply and passionately.",
+            "You kiss deeply and passionately."])
+    elif Girl.action_counter["kiss"] > 3:
+        $ line = renpy.random.choice(["She's really getting into it.",
+            "She's really getting into it, her tongue's going at it.",
+            "She's really getting into it, there's some heavy tongue action."])
+    else:
+        $ line = "You and "+ Girl.name +" make out for a while."
+
+    "[line]"
+
+    return
+
+
+label start_of_sex_narration(Girl, action):
+    $ check_line = renpy.random.choice(["glances around for voyeurs",
+        "glances around to see if anyone notices what she's doing"])
+
+    $ first_undressing_line = renpy.random.choice(["hesitantly pulls down your pants"])
+
+    $ undressing_line = renpy.random.choice(["pulls down your pants"])
+
+    if action == "sex":
+        $ first_action_line = renpy.random.choice(["slowly presses against your rigid member"])
+
+        $ action_line = renpy.random.choice(["climbs on top of you",
+            "pushes you back and slowly presses against your rigid member",
+            "lays back and slowly presses against your rigid member",
+            "turns around and slowly presses against your rigid member",
+            "bends over and presses her backside against you suggestively",
+            "backs her ass up against your cock"])
+
+        $ player_first_action_line = renpy.random.choice(["You guide it into place and slide it in",
+            "You press her folds aside and nudge your cock in",
+            "You take careful aim and then push your cock in"])
+
+        $ player_action_line = renpy.random.choice(["You guide your cock into place and ram it home",
+            "You guide it into place and slide it in",
+            "You press her folds aside and nudge your cock in",
+            "You take careful aim and then ram your cock in"])
+
+        $ final_line = renpy.random.choice(["leans back a bit and your cock slides in"])
+    elif action == "anal":
+        $ first_action_line = renpy.random.choice(["slowly presses against your rigid member",
+            "leans back and presses against you suggestively"])
+
+        $ action_line = renpy.random.choice(["climbs on top of you",
+            "pushes you back and slowly presses against your rigid member",
+            "lays back and slowly presses against your rigid member",
+            "turns around and slowly presses against your rigid member",
+            "bends over and presses her backside against you suggestively",
+            "leans back and presses against you suggestively",
+            "backs her ass up against your cock"])
+
+        $ player_first_action_line = renpy.random.choice(["You guide it into place and slide it in"])
+
+        $ player_action_line = renpy.random.choice(["You guide your cock into place and ram it home",
+            "You guide it into place and slide it in",
+            "You take careful aim and then ram your cock in",
+            "You press against her rim and nudge your cock in."])
+
+        $ final_line = renpy.random.choice(["leans back a bit and your cock pops in"])
+    elif action == "hotdog":
+        $ first_action_line = renpy.random.choice(["slowly presses against your rigid member",
+            "leans back and presses against you suggestively"])
+
+        $ action_line = renpy.random.choice(["pushes you back and slowly presses against your rigid member",
+            "turns around and slowly presses against your rigid member",
+            "bends over and presses her backside against you suggestively",
+            "leans back and presses against you suggestively",
+            "backs her ass up against your cock"])
+
+        $ player_first_action_line = None
+
+        $ player_action_line = None
+
+        $ final_line = None
+
+    if Taboo:
+        if Girl in [RogueX, KittyX]:
+            if (action == "sex" and not Girl.action_counter["sex"]) or (action == "anal" and not Girl.action_counter["anal"]):
+                "[Girl.name] [check_line]. . ."
+
+                if "cockout" in Player.recent_history:
+                    "[Girl.name] [first_action_line]"
+                else:
+                    "She [first_undressing_line] and [first_action_line]."
+
+                if player_first_action_line:
+                    "[player_first_action_line]."
+            else:
+                if "cockout" in Player.recent_history:
+                    "[Girl.name] [check_line], then [undressing_line] and [action_line]"
+                else:
+                    "[Girl.name] [check_line], then [action_line]."
+
+                if player_action_line:
+                    "[player_action_line]."
+        elif Girl in [EmmaX, LauraX, JeanX, StormX, JubesX]:
+            "[Girl.name] [check_line]."
+
+            if "cockout" in Player.recent_history:
+                "Then she [action_line]."
+            else:
+                "Then she [undressing_line] and [action_line]."
+
+            if final_line:
+                "She [final_line]."
+
+        if Girl != JeanX:
+            $ Girl.inhibition += int(Taboo/10)
+            $ Girl.lust += int(Taboo/5)
+        else:
+            $ JeanX.change_stat("inhibition", 90, int(Taboo/10))
+            $ JeanX.change_stat("lust", 50, int(Taboo/5))
+    else:
+        if Girl in [RogueX, KittyX]:
+            if (action == "sex" and not Girl.action_counter["sex"]) or (action == "anal" and not Girl.action_counter["anal"]):
+                if "cockout" in Player.recent_history:
+                    "[Girl.name] [first_action_line]."
+                else:
+                    "[Girl.name] [first_undressing_line] and [first_action_line]."
+
+                if player_first_action_line:
+                    "[player_first_action_line]."
+            else:
+                if "cockout" in Player.recent_history:
+                    "[Girl.name] [undressing_line] and [action_line]"
+                else:
+                    "[Girl.name] [action_line]."
+
+                if player_action_line:
+                    "[player_action_line]."
+        elif Girl in [EmmaX, LauraX, JeanX, StormX, JubesX]:
+            if "cockout" in Player.recent_history:
+                "[Girl.name] [action_line]."
+            else:
+                "[Girl.name] [undressing_line] and [action_line]."
+
+            if final_line:
+                "She [final_line]."
 
     return

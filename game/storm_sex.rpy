@@ -67,7 +67,7 @@ label Storm_Masturbate:
     if StormX.event_counter["forced"] and not StormX.Forced:
         $ approval_bonus -= 5*StormX.event_counter["forced"]
 
-    $ Approval = ApprovalCheck(StormX, 1300, TabM = 2)
+    $ Approval = approval_check(StormX, 1300, TabM = 2)
 
     $ StormX.DrainWord("unseen",1,0)
 
@@ -114,7 +114,7 @@ label Storm_Masturbate:
                         $ StormX.change_stat("obedience", 80, 3)
                         $ StormX.change_stat("inhibition", 80, 5)
                         jump Storm_M_Cycle
-                    elif ApprovalCheck(StormX, 1200):
+                    elif approval_check(StormX, 1200):
                         $ StormX.change_face("sly")
                         ch_s "True, but I was not expecting an audience."
                     else:
@@ -318,7 +318,7 @@ label Storm_Masturbate:
                     jump Storm_M_Prep
             "Just get at it already.":
 
-                $ Approval = ApprovalCheck(StormX, 450, "OI", TabM = 2)
+                $ Approval = approval_check(StormX, 450, "OI", TabM = 2)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -786,7 +786,7 @@ label Storm_Sex_P:
         $ approval_bonus -= 10 if "no_sex" in StormX.recent_history else 0
 
 
-    $ Approval = ApprovalCheck(StormX, 1400, TabM = 5)
+    $ Approval = approval_check(StormX, 1400, TabM = 5)
 
     if action_context == "auto":
         call Storm_Sex_Launch ("sex")
@@ -837,7 +837,7 @@ label Storm_Sex_P:
                     "You press inside some more."
                     $ StormX.change_stat("obedience", 70, 3)
                     $ StormX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(StormX, 700, "O", TabM=1):
+                    if not approval_check(StormX, 700, "O", TabM=1):
                         $ StormX.change_face("angry")
                         "[StormX.name] shoves you away and backhands you in the face."
                         ch_s "That is unfortunate."
@@ -998,7 +998,7 @@ label Storm_Sex_P:
                     $ Line = 0
                     jump Storm_SexPrep
             "Just deal with it.":
-                $ Approval = ApprovalCheck(StormX, 1150, "OI", TabM = 3)
+                $ Approval = approval_check(StormX, 1150, "OI", TabM = 3)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -1349,12 +1349,12 @@ label Storm_Sex_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
-        elif counter == (5 + StormX.Sex):
+        elif counter == (5 + StormX.action_counter["sex"]):
             $ StormX.brows = "confused"
             ch_s "Are you nearly finished?"
-        elif counter == (10 + StormX.Sex):
+        elif counter == (10 + StormX.action_counter["sex"]):
             $ StormX.brows = "angry"
             ch_s "I am . . .becoming . . a bit. . . worn out. . . here. . ."
             menu:
@@ -1375,7 +1375,7 @@ label Storm_Sex_Cycle:
                     $ action_context = "shift"
                     jump Storm_SexAfter
                 "No, get back down there.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -1501,7 +1501,7 @@ label Storm_Sex_A:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_anal" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 1550, TabM = 5)
+    $ Approval = approval_check(StormX, 1550, TabM = 5)
 
     if action_context == "auto":
         call Storm_Sex_Launch ("anal")
@@ -1552,7 +1552,7 @@ label Storm_Sex_A:
                     "You press into her."
                     $ StormX.change_stat("obedience", 70, 3)
                     $ StormX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(StormX, 700, "O", TabM=1):
+                    if not approval_check(StormX, 700, "O", TabM=1):
                         $ StormX.change_face("angry")
                         "[StormX.name] shoves you away and backhands you in the face."
                         ch_s "That is unfortunate."
@@ -1721,7 +1721,7 @@ label Storm_Sex_A:
                     pass
             "Just deal with it.":
 
-                $ Approval = ApprovalCheck(StormX, 1250, "OI", TabM = 3)
+                $ Approval = approval_check(StormX, 1250, "OI", TabM = 3)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
@@ -2073,7 +2073,7 @@ label Storm_Anal_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (5 + StormX.action_counter["anal"]):
             $ StormX.brows = "confused"
@@ -2103,7 +2103,7 @@ label Storm_Anal_Cycle:
                     $ action_context = "shift"
                     jump Storm_AnalAfter
                 "No, get back down there.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)
@@ -2222,7 +2222,7 @@ label Storm_Sex_H:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_hotdog" in StormX.recent_history else 0
 
-    $ Approval = ApprovalCheck(StormX, 1000, TabM = 3)
+    $ Approval = approval_check(StormX, 1000, TabM = 3)
 
     if action_context == "auto":
         call Storm_Sex_Launch ("hotdog")
@@ -2258,7 +2258,7 @@ label Storm_Sex_H:
                     "You grind against her crotch."
                     $ StormX.change_stat("obedience", 70, 3)
                     $ StormX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(StormX, 500, "O", TabM=1):
+                    if not approval_check(StormX, 500, "O", TabM=1):
                         $ StormX.change_face("angry")
                         "[StormX.name] shoves you away."
                         ch_s "Do not go beyond yourself, [StormX.player_petname]."
@@ -2415,7 +2415,7 @@ label Storm_Sex_H:
                     pass
             "Just deal with it.":
 
-                $ Approval = ApprovalCheck(StormX, 350, "OI", TabM = 3)
+                $ Approval = approval_check(StormX, 350, "OI", TabM = 3)
                 if Approval > 1 or (Approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -2, 1)
@@ -2746,7 +2746,7 @@ label Storm_Hotdog_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if StormX.SEXP >= 100 or ApprovalCheck(StormX, 1200, "LO"):
+        if StormX.SEXP >= 100 or approval_check(StormX, 1200, "LO"):
             pass
         elif counter == (5 + StormX.action_counter["hotdog"]):
             $ StormX.brows = "confused"
@@ -2771,7 +2771,7 @@ label Storm_Hotdog_Cycle:
                     $ action_context = "shift"
                     jump Storm_HotdogAfter
                 "No, get back down there.":
-                    if ApprovalCheck(StormX, 1200) or ApprovalCheck(StormX, 500, "O"):
+                    if approval_check(StormX, 1200) or approval_check(StormX, 500, "O"):
                         $ StormX.change_stat("love", 200, -5)
                         $ StormX.change_stat("obedience", 50, 3)
                         $ StormX.change_stat("obedience", 80, 2)

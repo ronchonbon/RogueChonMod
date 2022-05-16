@@ -32,7 +32,7 @@ label Laura_Handjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_handjob" in LauraX.recent_history else 0
 
-    $ Approval = ApprovalCheck(LauraX, 1100, TabM = 3)
+    $ Approval = approval_check(LauraX, 1100, TabM = 3)
 
     if not LauraX.action_counter["handjob"] and "no_handjob" not in LauraX.recent_history:
         $ LauraX.change_face("confused", 2)
@@ -169,7 +169,7 @@ label Laura_Handjob:
                     pass
             "Come on, get to work.":
 
-                $ Approval = ApprovalCheck(LauraX, 350, "OI", TabM = 3)
+                $ Approval = approval_check(LauraX, 350, "OI", TabM = 3)
                 if Approval > 1 or (Approval and LauraX.Forced):
                     $ LauraX.change_face("sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
@@ -484,7 +484,7 @@ label Laura_HJ_Cycle:
                     $ action_context = "shift"
                     jump Laura_HJ_After
                 "No, get back down there.":
-                    if ApprovalCheck(LauraX, 1200) or ApprovalCheck(LauraX, 500, "O"):
+                    if approval_check(LauraX, 1200) or approval_check(LauraX, 500, "O"):
                         $ LauraX.change_stat("love", 200, -5)
                         $ LauraX.change_stat("obedience", 50, 3)
                         $ LauraX.change_stat("obedience", 80, 2)
@@ -500,7 +500,7 @@ label Laura_HJ_Cycle:
                         $ LauraX.recent_history.append("angry")
                         $ LauraX.daily_history.append("angry")
                         jump Laura_HJ_After
-        elif counter == 10 and LauraX.SEXP <= 100 and not ApprovalCheck(LauraX, 1200, "LO"):
+        elif counter == 10 and LauraX.SEXP <= 100 and not approval_check(LauraX, 1200, "LO"):
             $ LauraX.brows = "confused"
             ch_l "This working for you?"
 
@@ -574,7 +574,7 @@ label Laura_Titjob:
     elif LauraX.addiction >= 75:
         $ approval_bonus += 5
 
-    if LauraX.SeenChest and ApprovalCheck(LauraX, 500):
+    if LauraX.SeenChest and approval_check(LauraX, 500):
         $ approval_bonus += 10
     if not LauraX.bra and not LauraX.top:
         $ approval_bonus += 10
@@ -598,7 +598,7 @@ label Laura_Titjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_titjob" in LauraX.recent_history else 0
 
-    $ Approval = ApprovalCheck(LauraX, 1200, TabM = 4)
+    $ Approval = approval_check(LauraX, 1200, TabM = 4)
 
     if not LauraX.action_counter["titjob"] and "no_titjob" not in LauraX.recent_history:
         $ LauraX.change_face("surprised", 1)
@@ -737,7 +737,7 @@ label Laura_Titjob:
                     $ Line = 0
                     jump Laura_TJ_Prep
                 else:
-                    $ Approval = ApprovalCheck(LauraX, 1100, TabM = 3)
+                    $ Approval = approval_check(LauraX, 1100, TabM = 3)
                     if Approval >= 2 and LauraX.action_counter["blowjob"]:
                         $ LauraX.change_stat("inhibition", 80, 1)
                         $ LauraX.change_stat("inhibition", 60, 3)
@@ -775,7 +775,7 @@ label Laura_Titjob:
 
 
                 $ LauraX.nameCheck()
-                $ Approval = ApprovalCheck(LauraX, 700, "OI", TabM = 4)
+                $ Approval = approval_check(LauraX, 700, "OI", TabM = 4)
                 if Approval > 1 or (Approval and LauraX.Forced):
                     $ LauraX.change_face("sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
@@ -1070,7 +1070,7 @@ label Laura_TJ_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if LauraX.SEXP >= 100 or ApprovalCheck(LauraX, 1200, "LO"):
+        if LauraX.SEXP >= 100 or approval_check(LauraX, 1200, "LO"):
             pass
         elif counter == (5 + LauraX.action_counter["titjob"]):
             $ LauraX.brows = "confused"
@@ -1095,7 +1095,7 @@ label Laura_TJ_Cycle:
                     $ action_context = "shift"
                     jump Laura_TJ_After
                 "No, get back down there.":
-                    if ApprovalCheck(LauraX, 1200) or ApprovalCheck(LauraX, 500, "O"):
+                    if approval_check(LauraX, 1200) or approval_check(LauraX, 500, "O"):
                         $ LauraX.change_stat("love", 200, -5)
                         $ LauraX.change_stat("obedience", 50, 3)
                         $ LauraX.change_stat("obedience", 80, 2)
@@ -1197,7 +1197,7 @@ label Laura_Blowjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_blowjob" in LauraX.recent_history else 0
 
-    $ Approval = ApprovalCheck(LauraX, 1300, TabM = 4)
+    $ Approval = approval_check(LauraX, 1300, TabM = 4)
 
     if not LauraX.action_counter["blowjob"] and "no_blowjob" not in LauraX.recent_history:
         $ LauraX.change_face("surprised", 2)
@@ -1339,7 +1339,7 @@ label Laura_Blowjob:
                     $ Line = 0
                     jump Laura_BJ_Prep
                 else:
-                    if ApprovalCheck(LauraX, 1100, TabM = 3):
+                    if approval_check(LauraX, 1100, TabM = 3):
                         $ LauraX.change_stat("inhibition", 80, 1)
                         $ LauraX.change_stat("inhibition", 60, 3)
                         $ LauraX.change_face("confused", 1)
@@ -1365,7 +1365,7 @@ label Laura_Blowjob:
 
 
                 $ LauraX.nameCheck()
-                $ Approval = ApprovalCheck(LauraX, 750, "OI", TabM = 3)
+                $ Approval = approval_check(LauraX, 750, "OI", TabM = 3)
                 if Approval > 1 or (Approval and LauraX.Forced):
                     $ LauraX.change_face("sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
@@ -1698,7 +1698,7 @@ label Laura_BJ_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if LauraX.SEXP >= 100 or ApprovalCheck(LauraX, 1200, "LO"):
+        if LauraX.SEXP >= 100 or approval_check(LauraX, 1200, "LO"):
             pass
         elif counter == (10 + LauraX.action_counter["blowjob"]):
             $ LauraX.brows = "angry"
@@ -1720,7 +1720,7 @@ label Laura_BJ_Cycle:
                     $ action_context = "shift"
                     jump Laura_BJ_After
                 "No, get back down there.":
-                    if ApprovalCheck(LauraX, 1200) or ApprovalCheck(LauraX, 500, "O"):
+                    if approval_check(LauraX, 1200) or approval_check(LauraX, 500, "O"):
                         $ LauraX.change_stat("love", 200, -5)
                         $ LauraX.change_stat("obedience", 50, 3)
                         $ LauraX.change_stat("obedience", 80, 2)
@@ -1736,7 +1736,7 @@ label Laura_BJ_Cycle:
                         $ LauraX.recent_history.append("angry")
                         $ LauraX.daily_history.append("angry")
                         jump Laura_BJ_After
-        elif counter == (5 + LauraX.action_counter["blowjob"]) and LauraX.SEXP <= 100 and not ApprovalCheck(LauraX, 1200, "LO"):
+        elif counter == (5 + LauraX.action_counter["blowjob"]) and LauraX.SEXP <= 100 and not approval_check(LauraX, 1200, "LO"):
             $ LauraX.brows = "confused"
             ch_l "Are you getting close here? I'm bored."
 
@@ -1790,7 +1790,7 @@ label Laura_BJ_After:
                 $ LauraX.change_stat("obedience", 80, 5)
                 $ LauraX.change_stat("inhibition", 90, 10)
             "[[shake head \"no\"]":
-                if ApprovalCheck(LauraX, 500, "O"):
+                if approval_check(LauraX, 500, "O"):
                     $ LauraX.change_face("sad", 2)
                     $ LauraX.change_stat("love", 200, -5)
                 else:
@@ -1856,7 +1856,7 @@ label Laura_Dildo_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_dildo" in LauraX.recent_history else 0
 
-    $ Approval = ApprovalCheck(LauraX, 1250, TabM = 4)
+    $ Approval = approval_check(LauraX, 1250, TabM = 4)
 
     if action_context == LauraX:
         if Approval > 2:
@@ -1939,7 +1939,7 @@ label Laura_Dildo_Pussy:
                     "You press it inside some more."
                     $ LauraX.change_stat("obedience", 70, 3)
                     $ LauraX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(LauraX, 700, "O", TabM=1):
+                    if not approval_check(LauraX, 700, "O", TabM=1):
                         $ LauraX.change_face("angry")
                         "[LauraX.name] shoves you away and slaps you in the face."
                         ch_l "Jerk!"
@@ -2097,7 +2097,7 @@ label Laura_Dildo_Pussy:
                     pass
             "[[press it against her]":
 
-                $ Approval = ApprovalCheck(LauraX, 950, "OI", TabM = 3)
+                $ Approval = approval_check(LauraX, 950, "OI", TabM = 3)
                 if Approval > 1 or (Approval and LauraX.Forced):
                     $ LauraX.change_face("sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
@@ -2350,14 +2350,14 @@ label Laura_DP_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if LauraX.SEXP >= 100 or ApprovalCheck(LauraX, 1200, "LO"):
+        if LauraX.SEXP >= 100 or approval_check(LauraX, 1200, "LO"):
             pass
         elif counter == (5 + LauraX.action_counter["dildo_pussy"]):
             $ LauraX.brows = "confused"
             ch_l "What are you even doing down there?"
         elif LauraX.lust >= 80:
             pass
-        elif counter == (15 + LauraX.action_counter["dildo_pussy"]) and LauraX.SEXP >= 15 and not ApprovalCheck(LauraX, 1500):
+        elif counter == (15 + LauraX.action_counter["dildo_pussy"]) and LauraX.SEXP >= 15 and not approval_check(LauraX, 1500):
             $ LauraX.brows = "confused"
             menu:
                 ch_l "[LauraX.player_petname], this is getting uncomfortable, maybe we could try something else."
@@ -2369,7 +2369,7 @@ label Laura_DP_Cycle:
                     $ action_context = "shift"
                     jump Laura_DP_After
                 "No, this is fun.":
-                    if ApprovalCheck(LauraX, 1200) or ApprovalCheck(LauraX, 500, "O"):
+                    if approval_check(LauraX, 1200) or approval_check(LauraX, 500, "O"):
                         $ LauraX.change_stat("love", 200, -5)
                         $ LauraX.change_stat("obedience", 50, 3)
                         $ LauraX.change_stat("obedience", 80, 2)
@@ -2472,7 +2472,7 @@ label Laura_Dildo_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_dildo" in LauraX.recent_history else 0
 
-    $ Approval = ApprovalCheck(LauraX, 1450, TabM = 4)
+    $ Approval = approval_check(LauraX, 1450, TabM = 4)
 
     if action_context == LauraX:
 
@@ -2558,7 +2558,7 @@ label Laura_Dildo_Ass:
                     "You press it inside some more."
                     $ LauraX.change_stat("obedience", 70, 3)
                     $ LauraX.change_stat("inhibition", 50, 3)
-                    if not ApprovalCheck(LauraX, 700, "O", TabM=1):
+                    if not approval_check(LauraX, 700, "O", TabM=1):
                         $ LauraX.change_face("angry")
                         "[LauraX.name] shoves you away and slaps you in the face."
                         ch_l "Jerk!"
@@ -2722,7 +2722,7 @@ label Laura_Dildo_Ass:
                     pass
             "[[press it against her]":
 
-                $ Approval = ApprovalCheck(LauraX, 1050, "OI", TabM = 3)
+                $ Approval = approval_check(LauraX, 1050, "OI", TabM = 3)
                 if Approval > 1 or (Approval and LauraX.Forced):
                     $ LauraX.change_face("sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
@@ -2970,14 +2970,14 @@ label Laura_DA_Cycle:
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
-        if LauraX.SEXP >= 100 or ApprovalCheck(LauraX, 1200, "LO"):
+        if LauraX.SEXP >= 100 or approval_check(LauraX, 1200, "LO"):
             pass
         elif counter == (5 + LauraX.action_counter["dildo_ass"]):
             $ LauraX.brows = "confused"
             ch_l "What are you even doing down there?"
         elif LauraX.lust >= 80:
             pass
-        elif counter == (15 + LauraX.action_counter["dildo_ass"]) and LauraX.SEXP >= 15 and not ApprovalCheck(LauraX, 1500):
+        elif counter == (15 + LauraX.action_counter["dildo_ass"]) and LauraX.SEXP >= 15 and not approval_check(LauraX, 1500):
             $ LauraX.brows = "confused"
             menu:
                 ch_l "[LauraX.player_petname], this is getting uncomfortable, maybe we could try something else."
@@ -2989,7 +2989,7 @@ label Laura_DA_Cycle:
                     $ action_context = "shift"
                     jump Laura_DA_After
                 "No, this is fun.":
-                    if ApprovalCheck(LauraX, 1200) or ApprovalCheck(LauraX, 500, "O"):
+                    if approval_check(LauraX, 1200) or approval_check(LauraX, 500, "O"):
                         $ LauraX.change_stat("love", 200, -5)
                         $ LauraX.change_stat("obedience", 50, 3)
                         $ LauraX.change_stat("obedience", 80, 2)
@@ -3093,7 +3093,7 @@ label Laura_Footjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_foot" in LauraX.recent_history else 0
 
-    $ Approval = ApprovalCheck(LauraX, 1250, TabM = 3)
+    $ Approval = approval_check(LauraX, 1250, TabM = 3)
 
     if action_context == LauraX:
         if Approval > 2:
@@ -3270,7 +3270,7 @@ label Laura_Footjob:
                     pass
             "Come on, get to work.":
 
-                $ Approval = ApprovalCheck(LauraX, 400, "OI", TabM = 3)
+                $ Approval = approval_check(LauraX, 400, "OI", TabM = 3)
                 if Approval > 1 or (Approval and LauraX.Forced):
                     $ LauraX.change_face("sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
@@ -3570,7 +3570,7 @@ label Laura_FJ_Cycle:
                     $ action_context = "shift"
                     jump Laura_FJ_After
                 "No, get back down there.":
-                    if ApprovalCheck(LauraX, 1200) or ApprovalCheck(LauraX, 500, "O"):
+                    if approval_check(LauraX, 1200) or approval_check(LauraX, 500, "O"):
                         $ LauraX.change_stat("love", 200, -5)
                         $ LauraX.change_stat("obedience", 50, 3)
                         $ LauraX.change_stat("obedience", 80, 2)
@@ -3586,7 +3586,7 @@ label Laura_FJ_Cycle:
                         $ LauraX.recent_history.append("angry")
                         $ LauraX.daily_history.append("angry")
                         jump Laura_FJ_After
-        elif counter == 10 and LauraX.SEXP <= 100 and not ApprovalCheck(LauraX, 1200, "LO"):
+        elif counter == 10 and LauraX.SEXP <= 100 and not approval_check(LauraX, 1200, "LO"):
             $ LauraX.brows = "confused"
             ch_l "Ok, seriously, let's try something different."
 

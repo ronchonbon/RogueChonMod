@@ -88,7 +88,7 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
                 $ LauraX.change_stat("love", 80, -5)
                 $ LauraX.change_stat("obedience", 70, 10)
                 $ LauraX.change_stat("inhibition", 70, -5)
-                if ApprovalCheck(LauraX,600,"L"):
+                if approval_check(LauraX,600,"L"):
                     $ LauraX.change_face("sadside", 1)
                 else:
                     $ LauraX.change_face("angry", 1)
@@ -128,7 +128,7 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
                 $ JeanX.change_stat("love", 80, -5)
                 $ JeanX.change_stat("obedience", 70, 10)
                 $ JeanX.change_stat("inhibition", 70, -5)
-                if ApprovalCheck(JeanX,600,"L"):
+                if approval_check(JeanX,600,"L"):
                     $ JeanX.change_face("sadside", 1)
                 else:
                     $ JeanX.change_face("angry", 1)
@@ -173,7 +173,7 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
         if counter == 3:
 
             pass
-        elif ApprovalCheck(Party[1], 1300) or ApprovalCheck(Party[1], 500,"I"):
+        elif approval_check(Party[1], 1300) or approval_check(Party[1], 500,"I"):
             if Party[1] == RogueX:
                 ch_r "I guess we'll take turns."
             elif Party[1] == KittyX:
@@ -255,7 +255,7 @@ label Strip_Study_Right:
 
     if Party[0].top:
 
-        if Party[0] == StormX or Party[0].SeenChest or (Party[0].bra and ApprovalCheck(Party[0], 300)) or ApprovalCheck(Party[0], 850):
+        if Party[0] == StormX or Party[0].SeenChest or (Party[0].bra and approval_check(Party[0], 300)) or approval_check(Party[0], 850):
             $ Party[0].change_stat("inhibition", 25, 1)
             $ Party[0].change_stat("inhibition", 50, 1)
             $ Line = Party[0].top
@@ -285,7 +285,7 @@ label Strip_Study_Right:
 
     if Party[0].legs:
 
-        if Party[0] == StormX or (Party[0].SeenPanties and Party[0].SeenPussy) or (Party[0].underwear and (ApprovalCheck(Party[0], 700) or Party[0].SeenPanties)) or ApprovalCheck(Party[0], 950):
+        if Party[0] == StormX or (Party[0].SeenPanties and Party[0].SeenPussy) or (Party[0].underwear and (approval_check(Party[0], 700) or Party[0].SeenPanties)) or approval_check(Party[0], 950):
             $ Party[0].change_stat("lust", 50, 5)
             $ Party[0].change_stat("inhibition", 30, 1)
             $ Party[0].change_stat("inhibition", 50, 1)
@@ -319,7 +319,7 @@ label Strip_Study_Right:
         return
 
     if Party[0].bra:
-        if Party[0] == StormX or ApprovalCheck(Party[0], 900) or (Party[0].SeenChest and ApprovalCheck(Party[0], 600)):
+        if Party[0] == StormX or approval_check(Party[0], 900) or (Party[0].SeenChest and approval_check(Party[0], 600)):
             $ Party[0].change_stat("lust", 60, 5)
             $ Party[0].change_stat("inhibition", 50, 2)
             $ Party[0].change_stat("inhibition", 200, 1)
@@ -351,7 +351,7 @@ label Strip_Study_Right:
         return
 
     if Party[0].underwear:
-        if Party[0] == StormX or ApprovalCheck(Party[0], 950) or (Party[0].SeenPussy and ApprovalCheck(Party[0], 600)):
+        if Party[0] == StormX or approval_check(Party[0], 950) or (Party[0].SeenPussy and approval_check(Party[0], 600)):
             $ Party[0].change_stat("lust", 70, 10)
             $ Party[0].change_stat("inhibition", 70, 2)
             $ Party[0].change_stat("inhibition", 200, 2)
@@ -1350,12 +1350,12 @@ label Emma_StripStudy_Intro:
                             "Um. . . oh, OH! Yeah, sounds good. [[Strip tutoring]":
                                 $ Line = "strip"
                             "Looks like I am. . .":
-                                if ApprovalCheck(EmmaX, 500, "O"):
+                                if approval_check(EmmaX, 500, "O"):
                                     $ EmmaX.change_stat("obedience", 80, 5)
                                     $ EmmaX.change_stat("inhibition", 50, 5)
                                     $ EmmaX.change_face("sly", 2)
                                     $ Line = "ask"
-                                elif ApprovalCheck(EmmaX, 500, "LO"):
+                                elif approval_check(EmmaX, 500, "LO"):
                                     $ EmmaX.change_face("confused", 2)
                                     $ EmmaX.change_stat("love", 70, -5)
                                     $ EmmaX.change_stat("obedience", 80, 5)
@@ -1367,11 +1367,11 @@ label Emma_StripStudy_Intro:
                                     $ EmmaX.change_face("angry", 1)
                                     ch_e "Oh, never mind then."
                             ". . .":
-                                if ApprovalCheck(EmmaX, 400, "O"):
+                                if approval_check(EmmaX, 400, "O"):
                                     $ EmmaX.change_face("confused", 2)
                                     $ EmmaX.change_stat("inhibition", 50, 5)
                                     $ Line = "ask"
-                                elif ApprovalCheck(EmmaX, 500, "LO"):
+                                elif approval_check(EmmaX, 500, "LO"):
                                     $ EmmaX.change_face("confused", 1, Brows="angry")
                                     $ EmmaX.change_stat("obedience", 50, 5)
                                     $ EmmaX.change_stat("inhibition", 50, 5)
@@ -1413,7 +1413,7 @@ label Emma_StripStudy_Intro:
                         ch_e "Yes."
                         $ Line = "strip"
                     "Yes? . .":
-                        if ApprovalCheck(EmmaX, 500, "O"):
+                        if approval_check(EmmaX, 500, "O"):
                             $ EmmaX.change_face("confused", 2)
                             if "frisky" in EmmaX.history:
                                 $ EmmaX.change_stat("love", 200, -5)
@@ -1422,7 +1422,7 @@ label Emma_StripStudy_Intro:
                                 $ EmmaX.change_stat("obedience", 80, 5)
                                 $ EmmaX.change_stat("inhibition", 50, -5)
                             $ Line = "ask"
-                        elif ApprovalCheck(EmmaX, 500, "LO"):
+                        elif approval_check(EmmaX, 500, "LO"):
                             $ EmmaX.change_face("confused", 1, Brows="angry")
                             if "frisky" in EmmaX.history:
                                 $ EmmaX.change_stat("love", 200, -5)
@@ -1432,7 +1432,7 @@ label Emma_StripStudy_Intro:
                                 $ EmmaX.change_stat("inhibition", 50, -5)
                             $ Line = "ask"
                     ". . .":
-                        if ApprovalCheck(EmmaX, 500, "O"):
+                        if approval_check(EmmaX, 500, "O"):
                             $ EmmaX.change_face("confused", 2)
                             if "frisky" in EmmaX.history:
                                 $ EmmaX.change_stat("obedience", 50, 5)
@@ -1441,7 +1441,7 @@ label Emma_StripStudy_Intro:
                                 $ EmmaX.change_stat("obedience", 50, 5)
                                 $ EmmaX.change_stat("inhibition", 50, -5)
                             $ Line = "ask"
-                        elif ApprovalCheck(EmmaX, 500, "LO"):
+                        elif approval_check(EmmaX, 500, "LO"):
                             $ EmmaX.change_face("confused", 1, Brows="angry")
                             if "frisky" in EmmaX.history:
                                 $ EmmaX.change_stat("love", 200, -5)

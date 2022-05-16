@@ -48,7 +48,7 @@ label Jean_Fondle_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle breasts" in JeanX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JeanX, 950, TabM = 3)
+    $ Approval = approval_check(JeanX, 950, TabM = 3)
 
     if action_context == "auto":
         if Approval:
@@ -151,7 +151,7 @@ label Jean_Fondle_Breasts:
             "[[Grab her chest anyway]":
 
 
-                $ Approval = ApprovalCheck(JeanX, 350, "OI", TabM = 3)
+                $ Approval = approval_check(JeanX, 350, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
@@ -215,7 +215,7 @@ label Jean_FB_Prep:
         $ action_context = 0
         if (JeanX.top or JeanX.bra) and not JeanX.Uptop:
 
-            if ApprovalCheck(JeanX, 1250, TabM = 1) or (JeanX.SeenChest and ApprovalCheck(JeanX, 500) and not JeanX.Taboo):
+            if approval_check(JeanX, 1250, TabM = 1) or (JeanX.SeenChest and approval_check(JeanX, 500) and not JeanX.Taboo):
                 $ JeanX.Uptop = 1
                 $ Line = JeanX.top if JeanX.top else JeanX.bra
                 "With a hungry grin, [JeanX.name] pulls her [Line] up over her breasts."
@@ -462,14 +462,14 @@ label Jean_FB_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
         elif counter == (5 + JeanX.action_counter["fondle_breasts"]):
             $ JeanX.brows = "confused"
             ch_j "Having fun there?"
         elif JeanX.lust >= 85:
             pass
-        elif counter == (15 + JeanX.action_counter["fondle_breasts"]) and JeanX.SEXP >= 15 and not ApprovalCheck(JeanX, 1500):
+        elif counter == (15 + JeanX.action_counter["fondle_breasts"]) and JeanX.SEXP >= 15 and not approval_check(JeanX, 1500):
             $ JeanX.brows = "confused"
             menu:
                 ch_j "Maybe it's time for something else, [JeanX.player_petname]?"
@@ -481,7 +481,7 @@ label Jean_FB_Cycle:
                     $ action_context = "shift"
                     jump Jean_FB_After
                 "No, this is fun.":
-                    if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
+                    if approval_check(JeanX, 1200) or approval_check(JeanX, 500, "O"):
                         $ JeanX.change_stat("love", 200, -5)
                         $ JeanX.change_stat("obedience", 50, 3)
                         $ JeanX.change_stat("obedience", 80, 2)
@@ -581,7 +581,7 @@ label Jean_Suck_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_suck breasts" in JeanX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JeanX, 1050, TabM = 4)
+    $ Approval = approval_check(JeanX, 1050, TabM = 4)
 
     if action_context == "auto":
         if Approval:
@@ -672,7 +672,7 @@ label Jean_Suck_Breasts:
                     ch_j "Oh, don't cry."
             "[[Start sucking anyway]":
 
-                $ Approval = ApprovalCheck(JeanX, 450, "OI", TabM = 3)
+                $ Approval = approval_check(JeanX, 450, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
@@ -732,7 +732,7 @@ label Jean_SB_Prep:
         $ action_context = 0
         if (JeanX.top or JeanX.bra) and not JeanX.Uptop:
 
-            if ApprovalCheck(JeanX, 1250, TabM = 1) or (JeanX.SeenChest and ApprovalCheck(JeanX, 500) and not JeanX.Taboo):
+            if approval_check(JeanX, 1250, TabM = 1) or (JeanX.SeenChest and approval_check(JeanX, 500) and not JeanX.Taboo):
                 $ JeanX.Uptop = 1
                 $ Line = JeanX.top if JeanX.top else JeanX.bra
                 "With a hungry grin, [JeanX.name] pulls her [Line] up over her breasts."
@@ -974,14 +974,14 @@ label Jean_SB_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
         elif counter == (5 + JeanX.action_counter["suck_breasts"]):
             $ JeanX.brows = "sly"
             ch_j "This is kinda nice. . ."
         elif JeanX.lust >= 85:
             pass
-        elif counter == (15 + JeanX.action_counter["suck_breasts"]) and JeanX.SEXP >= 15 and not ApprovalCheck(JeanX, 1500):
+        elif counter == (15 + JeanX.action_counter["suck_breasts"]) and JeanX.SEXP >= 15 and not approval_check(JeanX, 1500):
             $ JeanX.brows = "confused"
             menu:
                 ch_j "Maybe try something else?"
@@ -993,7 +993,7 @@ label Jean_SB_Cycle:
                     $ action_context = "shift"
                     jump Jean_SB_After
                 "No, this is fun.":
-                    if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
+                    if approval_check(JeanX, 1200) or approval_check(JeanX, 500, "O"):
                         $ JeanX.change_stat("love", 200, -5)
                         $ JeanX.change_stat("obedience", 50, 3)
                         $ JeanX.change_stat("obedience", 80, 2)
@@ -1093,7 +1093,7 @@ label Jean_Fondle_Thighs:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle thighs" in JeanX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JeanX, 750, TabM=1)
+    $ Approval = approval_check(JeanX, 750, TabM=1)
 
     if action_context == "auto":
         if Approval:
@@ -1186,7 +1186,7 @@ label Jean_Fondle_Thighs:
                     ch_j "Oh, don't cry."
             "[[Start caressing her thigh anyway]":
 
-                $ Approval = ApprovalCheck(JeanX, 350, "OI", TabM = 2)
+                $ Approval = approval_check(JeanX, 350, "OI", TabM = 2)
                 if Approval > 1 or (Approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
@@ -1453,12 +1453,12 @@ label Jean_FT_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
         elif counter == (5 + JeanX.action_counter["fondle_thighs"]):
             $ JeanX.brows = "confused"
             ch_j "Kinda nice, but. . ."
-        elif counter == (15 + JeanX.action_counter["fondle_thighs"]) and JeanX.SEXP >= 15 and not ApprovalCheck(JeanX, 1500):
+        elif counter == (15 + JeanX.action_counter["fondle_thighs"]) and JeanX.SEXP >= 15 and not approval_check(JeanX, 1500):
             $ JeanX.brows = "confused"
             menu:
                 ch_j "Maybe try something else?"
@@ -1470,7 +1470,7 @@ label Jean_FT_Cycle:
                     $ action_context = "shift"
                     jump Jean_FT_After
                 "No, this is fun.":
-                    if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
+                    if approval_check(JeanX, 1200) or approval_check(JeanX, 500, "O"):
                         $ JeanX.change_stat("love", 200, -5)
                         $ JeanX.change_stat("obedience", 50, 3)
                         $ JeanX.change_stat("obedience", 80, 2)
@@ -1565,7 +1565,7 @@ label Jean_Fondle_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle pussy" in JeanX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JeanX, 1050, TabM = 2)
+    $ Approval = approval_check(JeanX, 1050, TabM = 2)
 
     if action_context == "auto":
         if Approval:
@@ -1665,7 +1665,7 @@ label Jean_Fondle_Pussy:
                     ch_j "No."
             "[[Start fondling anyway]":
 
-                $ Approval = ApprovalCheck(JeanX, 450, "OI", TabM = 2)
+                $ Approval = approval_check(JeanX, 450, "OI", TabM = 2)
                 if Approval > 1 or (Approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
@@ -1723,7 +1723,7 @@ label Jean_FP_Prep:
         $ action_context = 0
         if (JeanX.legs and not JeanX.Upskirt) or (JeanX.underwear and not JeanX.underwearDown):
 
-            if ApprovalCheck(JeanX, 1250, TabM = 1) or (JeanX.SeenPussy and ApprovalCheck(JeanX, 500) and not JeanX.Taboo):
+            if approval_check(JeanX, 1250, TabM = 1) or (JeanX.SeenPussy and approval_check(JeanX, 500) and not JeanX.Taboo):
                 $ JeanX.Upskirt = 1
                 $ JeanX.underwearDown = 1
                 $ Line = 0
@@ -2010,14 +2010,14 @@ label Jean_FP_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
         elif counter == (5 + JeanX.action_counter["fondle_pussy"]):
             $ JeanX.brows = "confused"
             ch_j "Mmmm, you're enjoying that, huh?"
         elif JeanX.lust >= 80:
             pass
-        elif counter == (15 + JeanX.action_counter["fondle_pussy"]) and JeanX.SEXP >= 15 and not ApprovalCheck(JeanX, 1500):
+        elif counter == (15 + JeanX.action_counter["fondle_pussy"]) and JeanX.SEXP >= 15 and not approval_check(JeanX, 1500):
             $ JeanX.brows = "confused"
             menu:
                 ch_j "Maybe try something else?"
@@ -2029,7 +2029,7 @@ label Jean_FP_Cycle:
                     $ action_context = "shift"
                     jump Jean_FP_After
                 "No, this is fun.":
-                    if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
+                    if approval_check(JeanX, 1200) or approval_check(JeanX, 500, "O"):
                         $ JeanX.change_stat("love", 200, -5)
                         $ JeanX.change_stat("obedience", 50, 3)
                         $ JeanX.change_stat("obedience", 80, 2)
@@ -2096,7 +2096,7 @@ label Jean_FP_After:
 label Jean_Insert_Pussy:
     call shift_focus (JeanX)
     if action_context == "auto":
-        if ApprovalCheck(JeanX, 1100, TabM = 2):
+        if approval_check(JeanX, 1100, TabM = 2):
             $ JeanX.change_face("surprised")
             $ JeanX.change_stat("obedience", 90, 1)
             $ JeanX.change_stat("obedience", 70, 2)
@@ -2114,7 +2114,7 @@ label Jean_Insert_Pussy:
             ch_j "Not so fast, [JeanX.player_petname]. . ."
             return
 
-    if ApprovalCheck(JeanX, 1100, TabM = 2):
+    if approval_check(JeanX, 1100, TabM = 2):
         if JeanX.Forced:
             $ JeanX.change_face("sad")
             $ JeanX.change_stat("love", 70, -3, 1)
@@ -2206,7 +2206,7 @@ label Jean_Lick_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick pussy" in JeanX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JeanX, 1250, TabM = 4)
+    $ Approval = approval_check(JeanX, 1250, TabM = 4)
 
     if action_context == "auto":
         if Approval:
@@ -2309,7 +2309,7 @@ label Jean_Lick_Pussy:
                     ch_j "I would, but still no, [JeanX.player_petname]."
             "[[Get in there anyway]":
 
-                $ Approval = ApprovalCheck(JeanX, 750, "OI", TabM = 4)
+                $ Approval = approval_check(JeanX, 750, "OI", TabM = 4)
                 if Approval > 1 or (Approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
@@ -2368,7 +2368,7 @@ label Jean_LP_Prep:
         $ action_context = 0
         if (JeanX.legs and not JeanX.Upskirt) or (JeanX.underwear and not JeanX.underwearDown):
 
-            if ApprovalCheck(JeanX, 1250, TabM = 1) or (JeanX.SeenPussy and ApprovalCheck(JeanX, 500) and not JeanX.Taboo):
+            if approval_check(JeanX, 1250, TabM = 1) or (JeanX.SeenPussy and approval_check(JeanX, 500) and not JeanX.Taboo):
                 $ JeanX.Upskirt = 1
                 $ JeanX.underwearDown = 1
                 $ Line = 0
@@ -2645,14 +2645,14 @@ label Jean_LP_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
         elif counter == (5 + JeanX.action_counter["eat_pussy"]):
             $ JeanX.brows = "confused"
             ch_j "Isn't it just delicious?"
         elif JeanX.lust >= 80:
             pass
-        elif counter == (15 + JeanX.action_counter["eat_pussy"]) and JeanX.SEXP >= 15 and not ApprovalCheck(JeanX, 1500):
+        elif counter == (15 + JeanX.action_counter["eat_pussy"]) and JeanX.SEXP >= 15 and not approval_check(JeanX, 1500):
             $ JeanX.brows = "confused"
             menu:
                 ch_j "Maybe try something else?"
@@ -2664,7 +2664,7 @@ label Jean_LP_Cycle:
                     $ action_context = "shift"
                     jump Jean_LP_After
                 "No, this is fun.":
-                    if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
+                    if approval_check(JeanX, 1200) or approval_check(JeanX, 500, "O"):
                         $ JeanX.change_stat("love", 200, -5)
                         $ JeanX.change_stat("obedience", 50, 3)
                         $ JeanX.change_stat("obedience", 80, 2)
@@ -2761,7 +2761,7 @@ label Jean_Fondle_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle ass" in JeanX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JeanX, 850, TabM=1)
+    $ Approval = approval_check(JeanX, 850, TabM=1)
 
     if action_context == "auto":
         if Approval:
@@ -2862,7 +2862,7 @@ label Jean_Fondle_Ass:
                     ch_j "No."
             "[[Start fondling anyway]":
 
-                $ Approval = ApprovalCheck(JeanX, 250, "OI", TabM = 3)
+                $ Approval = approval_check(JeanX, 250, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -3, 1)
@@ -3133,14 +3133,14 @@ label Jean_FA_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
         elif counter == (5 + JeanX.action_counter["fondle_ass"]):
             $ JeanX.brows = "confused"
             ch_j "Mmmm. . ."
         elif JeanX.lust >= 80:
             pass
-        elif counter == (15 + JeanX.action_counter["fondle_ass"]) and JeanX.SEXP >= 15 and not ApprovalCheck(JeanX, 1500):
+        elif counter == (15 + JeanX.action_counter["fondle_ass"]) and JeanX.SEXP >= 15 and not approval_check(JeanX, 1500):
             $ JeanX.brows = "confused"
             menu:
                 ch_j "Maybe try something else?"
@@ -3152,7 +3152,7 @@ label Jean_FA_Cycle:
                     $ action_context = "shift"
                     jump Jean_FA_After
                 "No, this is fun.":
-                    if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
+                    if approval_check(JeanX, 1200) or approval_check(JeanX, 500, "O"):
                         $ JeanX.change_stat("love", 200, -5)
                         $ JeanX.change_stat("obedience", 50, 3)
                         $ JeanX.change_stat("obedience", 80, 2)
@@ -3251,7 +3251,7 @@ label Jean_Insert_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_insert ass" in JeanX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JeanX, 1300, TabM = 3)
+    $ Approval = approval_check(JeanX, 1300, TabM = 3)
 
     if action_context == "auto":
         if Approval:
@@ -3346,7 +3346,7 @@ label Jean_Insert_Ass:
                     ch_j "I don't think that I would."
             "[[Slide a finger in anyway]":
 
-                $ Approval = ApprovalCheck(JeanX, 950, "OI", TabM = 3)
+                $ Approval = approval_check(JeanX, 950, "OI", TabM = 3)
                 if Approval > 1 or (Approval and JeanX.Forced):
                     $ JeanX.change_face("surprised", 1)
                     $ JeanX.change_stat("love", 70, -5, 1)
@@ -3373,7 +3373,7 @@ label Jean_Insert_Ass:
     elif JeanX.Forced:
         $ JeanX.change_face("angry", 1)
         ch_j "I'm not going there today."
-        if ApprovalCheck(JeanX, 500, "I"):
+        if approval_check(JeanX, 500, "I"):
             $ JeanX.change_stat("lust", 80, 10)
         else:
             $ JeanX.change_stat("lust", 50, 3)
@@ -3409,7 +3409,7 @@ label Jean_IA_Prep:
         $ action_context = 0
         if (JeanX.legs and not JeanX.Upskirt) or (JeanX.underwear and not JeanX.underwearDown):
 
-            if ApprovalCheck(JeanX, 1250, TabM = 1) or (JeanX.SeenPussy and ApprovalCheck(JeanX, 500) and not JeanX.Taboo):
+            if approval_check(JeanX, 1250, TabM = 1) or (JeanX.SeenPussy and approval_check(JeanX, 500) and not JeanX.Taboo):
                 $ JeanX.Upskirt = 1
                 $ JeanX.underwearDown = 1
                 $ Line = 0
@@ -3684,14 +3684,14 @@ label Jean_IA_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
         elif counter == (5 + JeanX.action_counter["finger_ass"]):
             $ JeanX.brows = "confused"
             ch_j "Ungh, you're really getting in there. . ."
         elif JeanX.lust >= 80:
             pass
-        elif counter == (15 + JeanX.action_counter["finger_ass"]) and JeanX.SEXP >= 15 and not ApprovalCheck(JeanX, 1500):
+        elif counter == (15 + JeanX.action_counter["finger_ass"]) and JeanX.SEXP >= 15 and not approval_check(JeanX, 1500):
             $ JeanX.brows = "confused"
             menu:
                 ch_j "Maybe try something else?"
@@ -3703,7 +3703,7 @@ label Jean_IA_Cycle:
                     $ action_context = "shift"
                     jump Jean_IA_After
                 "No, this is fun.":
-                    if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
+                    if approval_check(JeanX, 1200) or approval_check(JeanX, 500, "O"):
                         $ JeanX.change_stat("love", 200, -5)
                         $ JeanX.change_stat("obedience", 50, 3)
                         $ JeanX.change_stat("obedience", 80, 2)
@@ -3804,7 +3804,7 @@ label Jean_Lick_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick ass" in JeanX.recent_history else 0
 
-    $ Approval = ApprovalCheck(JeanX, 1550, TabM = 4)
+    $ Approval = approval_check(JeanX, 1550, TabM = 4)
 
     if action_context == "auto":
         if Approval:
@@ -3906,7 +3906,7 @@ label Jean_Lick_Ass:
                     ch_j "I really don't think so."
             "[[Start licking anyway]":
 
-                $ Approval = ApprovalCheck(JeanX, 1100, "OI", TabM = 4)
+                $ Approval = approval_check(JeanX, 1100, "OI", TabM = 4)
                 if Approval > 1 or (Approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
@@ -3932,7 +3932,7 @@ label Jean_Lick_Ass:
     elif JeanX.Forced:
         $ JeanX.change_face("angry", 1)
         ch_j "I don't think so."
-        if ApprovalCheck(JeanX, 500, "I"):
+        if approval_check(JeanX, 500, "I"):
             $ JeanX.change_stat("lust", 80, 10)
         else:
             $ JeanX.change_stat("lust", 50, 3)
@@ -4189,14 +4189,14 @@ label Jean_LA_Cycle:
 
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
-        if JeanX.SEXP >= 100 or ApprovalCheck(JeanX, 1200, "LO"):
+        if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
         elif counter == (5 + JeanX.action_counter["eat_ass"]):
             $ JeanX.brows = "confused"
             ch_j "You seem to be enjoying yourself. . ."
         elif JeanX.lust >= 80:
             pass
-        elif counter == (15 + JeanX.action_counter["eat_ass"]) and JeanX.SEXP >= 15 and not ApprovalCheck(JeanX, 1500):
+        elif counter == (15 + JeanX.action_counter["eat_ass"]) and JeanX.SEXP >= 15 and not approval_check(JeanX, 1500):
             $ JeanX.brows = "confused"
             menu:
                 ch_j "[JeanX.player_petname], could we try something different?"
@@ -4208,7 +4208,7 @@ label Jean_LA_Cycle:
                     $ action_context = "shift"
                     jump Jean_LA_After
                 "No, this is fun.":
-                    if ApprovalCheck(JeanX, 1200) or ApprovalCheck(JeanX, 500, "O"):
+                    if approval_check(JeanX, 1200) or approval_check(JeanX, 500, "O"):
                         $ JeanX.change_stat("love", 200, -5)
                         $ JeanX.change_stat("obedience", 50, 3)
                         $ JeanX.change_stat("obedience", 80, 2)
