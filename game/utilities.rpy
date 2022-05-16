@@ -1597,7 +1597,7 @@ label clear_the_room(Girl = None, passive = False, silent = False, Girls_to_remo
     while other_Girls:
         if other_Girls[0].location == bg_current or other_Girls[0] in Party:
             $ Girls_to_remove.append(other_Girls[0])
-        elif other_Girls[0].location == "bg teacher" and bg_current == "bg classroom":
+        elif other_Girls[0].location == "bg_teacher" and bg_current == "bg_classroom":
             $ Girls_to_remove.append(other_Girls[0])
 
         $ other_Girls.remove(other_Girls[0])
@@ -1698,7 +1698,7 @@ label clear_the_room(Girl = None, passive = False, silent = False, Girls_to_remo
 
                 $ Girl.location = Girl.Home
 
-                call Set_The_Scene
+                call set_the_scene
                 call clear_the_room(Girl)
                 call Taboo_Level
 
@@ -1709,7 +1709,7 @@ label clear_the_room(Girl = None, passive = False, silent = False, Girls_to_remo
 
                 return
             else:
-                $ Girls_to_remove[0].location = "bg campus"
+                $ Girls_to_remove[0].location = "bg_campus"
         else:
             $ Girls_to_remove[0].location = Girls_to_remove[0].Home
 
@@ -3881,7 +3881,7 @@ label GirlWaitUp(locational=0,check=70,D20=0,Teach=0,GirlsA=[],GirlsB=[]):  #rke
         return
 
 label Jumped(Act=0): #rkeljsv
-        # called by Jumpercheck if a girl jumps you
+        # called by JumperCheck if a girl jumps you
         # Girls[0] is the girl
         # make sure that this puts people in the right rooms after they do stuff. . .
 
@@ -3897,24 +3897,24 @@ label Jumped(Act=0): #rkeljsv
         if not Girls:
                 return
 
-        if Girls[0].location != bg_current and door_locked:
+        if Girls[0].location != bg_current and "locked" in Player.Traits:
             #if the girl is not in the room with you, and your door is locked. . .
-            call locked_door(Girls[0])
+            call Locked_Door(Girls[0])
             if not Girls or Girls[0].location != bg_current:
                     #if you refused her entry. . .
                     $ Player.recent_history.append("nope")
                     return
 
         #sets their location
-        $ Girls = Girls[:]
-        while Girls:
-                $ Girls[0].location = bg_current
-                $ Girls.remove(Girls[0])
+        $ BO = Girls[:]
+        while BO:
+                $ BO[0].location = bg_current
+                $ BO.remove(BO[0])
         $ Girls[0].AddWord(1,"jumped","jumped")
 
         call Taboo_Level #makes sure Taboo level is accurate
 
-        if Taboo and (not Approvalcheck(Girls[0], 1500, TabM=3) or (Girls[0] == EmmaX and Taboo and "taboo" not in EmmaX.History)):
+        if Taboo and (not ApprovalCheck(Girls[0], 1500, TabM=3) or (Girls[0] == EmmaX and Taboo and "taboo" not in EmmaX.History)):
                 #causes you to leave if the girl is not ready for public stuff
                 $ Act = "leave"
 
@@ -3936,62 +3936,62 @@ label Jumped(Act=0): #rkeljsv
         $ Girls[0].change_face("sly",1)
         if Act == "leave":
                 #if she's not supercool with public stuff. . .
-                "Suddenly, [Girls[0].name] grabs your arm with a mischievous smile, and starts to lead you back towards your room."
+                "Suddenly, [Girls[0].Name] grabs your arm with a miscevious smile, and starts to lead you back towards your room."
                 menu:
                     "Go along with it":
-                        $ Girls[0].change_stat("inhibition", 95, 3)
+                        $ Girls[0].change_stat("Inbt", 95, 3)
                         "You follow after her."
                     "Pull away from her and head back.":
-                        $ Girls[0].change_stat("love", 90, -10)
-                        $ Girls[0].change_stat("obedience", 50, 10)
-                        $ Girls[0].change_stat("obedience", 95, 5)
-                        $ Girls[0].change_stat("inhibition", 95, -5)
+                        $ Girls[0].change_stat("Love", 90, -10)
+                        $ Girls[0].change_stat("Obed", 50, 10)
+                        $ Girls[0].change_stat("Obed", 95, 5)
+                        $ Girls[0].change_stat("Inbt", 95, -5)
                         $ Girls[0].change_face("sad",1)
                         "You tell her to cut it out, and head back to what you were doing."
                         $ Player.recent_history.append("nope")
                         $ Girls[0].AddWord(1,"refused","refused")
-                        if not Approvalcheck(Girls[0], 500, "O"):
+                        if not ApprovalCheck(Girls[0], 500, "O"):
                                 $ Girls[0].AddWord(1,"angry","angry")
                         return
 
                 if Partner:
-                        "[Partner.name] also follows along behind you."
+                        "[Partner.Name] also follows along behind you."
 
                 $ bg_current = "bg_player"
                 call clear_the_room(Girls[0],1,1)
 
                 #call Taboo_Level #makes sure Taboo level is accurate, moved lower in chain
         else:
-            if Partner in all_Girls:
+            if Partner in TotalGirls:
                     $ Girls[1].change_face("sly",1)
-                    "Suddenly, [Girls[0].name] pulls you aside and [Partner.name] follows along."
+                    "Suddenly, [Girls[0].Name] pulls you aside and [Partner.Name] follows along."
             else:
-                    "Suddenly, [Girls[0].name] pulls you aside."
+                    "Suddenly, [Girls[0].Name] pulls you aside."
             menu:
                     "See where this is going":
-                        $ Girls[0].change_stat("inhibition", 95, 2)
+                        $ Girls[0].change_stat("Inbt", 95, 2)
                     "Not here [[head to your room]":
-                        $ Girls[0].change_stat("inhibition", 95, 1)
+                        $ Girls[0].change_stat("Inbt", 95, 1)
                         "You head to your room first."
                         $ bg_current = "bg_player"
                         call clear_the_room(Girls[0],1,1)
                     "Pull away from her and head back.":
-                        $ Girls[0].change_stat("love", 90, -10)
-                        $ Girls[0].change_stat("obedience", 50, 10)
-                        $ Girls[0].change_stat("obedience", 95, 5)
-                        $ Girls[0].change_stat("inhibition", 95, -5)
+                        $ Girls[0].change_stat("Love", 90, -10)
+                        $ Girls[0].change_stat("Obed", 50, 10)
+                        $ Girls[0].change_stat("Obed", 95, 5)
+                        $ Girls[0].change_stat("Inbt", 95, -5)
                         $ Girls[0].change_face("sad",1)
                         "You tell her to cut it out, and head back to what you were doing."
                         $ Player.recent_history.append("nope")
                         $ Girls[0].AddWord(1,"refused","refused")
-                        if not Approvalcheck(Girls[0], 500, "O"):
+                        if not ApprovalCheck(Girls[0], 500, "O"):
                                 $ Girls[0].AddWord(1,"angry","angry")
                         return
 
-        $ Girls = Girls[:]
-        while Girls:
-                $ Girls[0].location = bg_current
-                $ Girls.remove(Girls[0])
+        $ BO = Girls[:]
+        while BO:
+                $ BO[0].location = bg_current
+                $ BO.remove(BO[0])
 
         call Taboo_Level #makes sure Taboo level is accurate
         call set_the_scene(check_if_dressed=0)
@@ -4020,46 +4020,25 @@ label Jumped(Act=0): #rkeljsv
 
         call Favorite_Actions(Girls[0],1) #returns a string of the action
         $ Act = _return
-        $ action_context = Girls[0]
+        $ Situation = Girls[0]
 
-        if Act in ("anal","sex","blowjob","titjob","handjob","hotdog"):
+        if Act in ("anal","sex","blow","tit","hand","hotdog"):
                 # if cock needs to be out. . .
-                "[Girls[0].name] reaches down and unzips your fly. . ."
+                "[Girls[0].Name] reaches down and unzips your fly. . ."
                 if not Player.Semen:
                     "You wish you weren't already drained. . . you stop her hands."
                     ch_p "I could actually use a break right now. . "
-                    $ Act = "fondle_breasts"
+                    $ Act = "fondle breasts"
                 else:
                     call Seen_First_Peen(Girls[0],Partner,1)
 
         if Partner:
                 call Girls_Noticed(Girls[0],1) #calls the "noticed check" for this girl.
 
-        # launches the appropriate scene based on the sex act in question.
-        if Act == "anal":
-                call expression Girls[0].Tag + "_AnalPrep" #call R_AnalPrep
-        elif Act == "sex":
-                call expression Girls[0].Tag + "_SexPrep" #call R_SexPrep
-        elif Act ==  "eat_pussy":
-                call expression Girls[0].Tag + "_LP_Prep" #call R_LPlayer.Prep
-        elif Act == "fondle_pussy":
-                call expression Girls[0].Tag + "_FP_Prep" #call R_FPlayer.Prep
-        elif Act == "blowjob":
-                call expression Girls[0].Tag + "_BJ_Prep" #call R_BJ_Prep
-        elif Act == "titjob":
-                call expression Girls[0].Tag + "_TJ_Prep" #call R_TJ_Prep
-        elif Act == "handjob":
-                call expression Girls[0].Tag + "_HJ_Prep" #call R_HJ_Prep
-        elif Act == "hotdog":
-                call expression Girls[0].Tag + "_HotdogPrep" #call R_HotdogPrep
-        elif Act == "suck breasts":
-                call expression Girls[0].Tag + "_SB_Prep" #call R_SB_Prep
-        elif Act == "fondle_breasts":
-                call expression Girls[0].Tag + "_FB_Prep" #call R_FB_Prep
-        elif Act == "finger_ass" or Act == "eat_ass":
-                call expression Girls[0].Tag + "_IA_Prep" #call R_IA_Prep
-        else: #Act == "kiss you"
-                call KissPrep(Girls[0]) #call R_KissPrep
+        $ primary_action = Act
+
+        call before_action
+
         return
 
 label Quick_Sex(Girl=focused_Girl,Act=0): #rkeljsv
@@ -5015,7 +4994,6 @@ label Sex_Over(Clothes=1,Girls=0,other_Girls=[]): #rkeljsv
         if Girls == Partner and Girls in all_Girls:
                 #swaps lead back to original
                 call shift_focus(Girls)
-        $ Girls = 0
         call AllReset("all") #resets all sex positions.
 
         if Clothes:
@@ -5028,7 +5006,6 @@ label Sex_Over(Clothes=1,Girls=0,other_Girls=[]): #rkeljsv
                                             $ Line = Line + " and " + other_Girls[0].name
                                         else:
                                             $ Line = other_Girls[0].name
-                                        $ Girls += 1
                         $ other_Girls.remove(other_Girls[0])
                 if len(Girls) > 1:
                     "[Line] throw their clothes back on."

@@ -277,6 +277,7 @@ label tour_end:
                 ch_r "Just this once."
 
                 $ RogueX.change_face("kiss")
+
                 call kissing_smooch(RogueX)
 
                 "She gives you a little peck on the cheek."
@@ -435,7 +436,13 @@ label tour_parting:
 
     return
 
-label Rogue_first_kisss:
+label Rogue_first_kiss:
+    $ RogueX.change_face("kiss",2)
+
+    call kissing_launch(RogueX)
+
+    "She leans in for a kiss."
+
     "You lean in and your lips meet [RogueX.name]'s."
 
     $ RogueX.Eyes = "surprised"
@@ -570,7 +577,7 @@ label Rogue_love:
     if "stockings and garterbelt" not in RogueX.Inventory:
             $ RogueX.Inventory.append("stockings and garterbelt")
     $ temp_modifier = 20
-    call Rogue_SexMenu
+    call enter_main_sex_menu
     $ temp_modifier = 0
     return
 
@@ -731,7 +738,7 @@ label Rogue_Sub:
     if "stockings and garterbelt" not in RogueX.Inventory:
             $ RogueX.Inventory.append("stockings and garterbelt")
     $ temp_modifier = 10
-    call Rogue_SexMenu
+    call enter_main_sex_menu
     $ temp_modifier = 0
     return
 
@@ -849,7 +856,7 @@ label Rogue_Master:
     if simulation:
             return 1
     $ temp_modifier = 20
-    call Rogue_SexMenu
+    call enter_main_sex_menu
     $ temp_modifier = 0
     return
 
@@ -966,7 +973,7 @@ label Rogue_Sexfriend:
                     return 1
     $ Player.AddWord(1,"interruption") #adds to Recent
     $ temp_modifier = 25
-    call Rogue_SexMenu
+    call enter_main_sex_menu
     $ temp_modifier = 0
     return
 
@@ -1076,7 +1083,7 @@ label Rogue_Fuckbuddy:
             return 1
     $ temp_modifier = 30
     $ Player.AddWord(1,"interruption") #adds to Recent
-    call Rogue_SexMenu
+    call enter_main_sex_menu
     $ temp_modifier = 0
     return
 

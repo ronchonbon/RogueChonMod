@@ -45,7 +45,7 @@ image xavier_blink:
     0.25
     repeat
 
-label Xavierface(face = X_emotion):
+label xavier_face(face = X_emotion):
     if face == "psychic":
         $ X_Mouth = "concentrate"
         $ X_Brows = "concentrate"

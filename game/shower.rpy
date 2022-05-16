@@ -875,7 +875,7 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                     $ Girls[0].daily_history.append("showered")
                                     call first_bottomless(Girls[0], 1)
                                     call first_topless(Girls[0], silent = 1)
-                                    
+
                                     $ Girls.remove(Girls[0])
                             else:
                                     #If the girl leaves
@@ -1005,19 +1005,15 @@ label Showering(Occupants = [], StayCount=[] , Showered = 0, line = 0, Girls=[])
                                 "They both turn right back around."
                                 call remove_girl(Girls[0])
                                 call remove_girl(Girls[1])
-                                $ Girls = []
                         elif Girls[0] not in StayCount:
                                 "[Girls[0].name] turns right back around, but [Girls[1].name] stays."
                                 call remove_girl(Girls[0])
-                                $ Girls.remove(Girls[0])
                         elif Girls[1] not in StayCount:
                                 "[Girls[1].name] turns right back around, but [Girls[0].name] stays."
                                 call remove_girl(Girls[1])
-                                $ Girls.remove(Girls[1])
                 elif Girls[0] not in StayCount:
                                 "She turns right back around."
                                 call remove_girl(Girls[0])
-                                $ Girls.remove(Girls[0])
 
                 while Girls:
                         #loops deals with "Nearby"s joining the party, removes others

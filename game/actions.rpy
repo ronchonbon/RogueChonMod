@@ -1,3 +1,48 @@
+label sex_acts(action = 0):
+    if Alonecheck(focused_Girl) and focused_Girl.Taboo == 20:
+        $ focused_Girl.Taboo = 0
+        $ Taboo = 0
+
+    call shift_focus(focused_Girl)
+
+    if action == "SkipTo":
+        $ renpy.pop_call() #causes it to skip past the Trigger Swap
+        $ renpy.pop_call()
+
+        call SkipTo(focused_Girl)
+    elif action == "switch":
+        $ renpy.pop_call()
+    elif action == "masturbation":
+        call before_show
+
+        if not action_context:
+            return
+    elif action == "lesbian":
+        call Les_Prep(focused_Girl)
+
+        if not action_context:
+            return
+    elif action == "kiss":
+        call before_action
+
+        if not action_context:
+            return
+    elif action == "fondle_breasts":
+        call fondle_breasts(focused_Girl)
+
+        if not action_context:
+            return
+    elif action in ["handjob", "blowjob"]:
+        call before_action
+
+        if not action_context:
+            return
+    elif action == "sex":
+        call before_action
+
+        if not action_context:
+            return
+
 label girl_initiated_action(Girl, action):
     if action == "kiss":
         "[focused_Girl.name] presses her body against yours, and kisses you deeply."
@@ -470,6 +515,8 @@ label action_specific_consequences(Girl, action):
     return
 
 label action_approved(Girl, action):
+    $ Girl.change_face("sexy", 1)
+
     if Girl.Forced:
         $ Girl.change_face("sad")
         $ Girl.change_stat("love", 70, -3, 1)
@@ -512,6 +559,8 @@ label action_disapproved(Girl, action):
         $ Girl.change_face("angry", 1)
     elif action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "sex"]:
         $ Girl.change_face("angry")
+    elif action in ["finger_pussy"]:
+        $ Girl.change_face("bemused", 2)
 
     if "no_" + action in Girl.recent_history:
         call just_told_you_no_lines(Girl)
@@ -536,6 +585,12 @@ label action_disapproved(Girl, action):
         $ Girl.change_face("bemused")
 
         call rather_not_lines(Girl)
+        call not_happening_lines(Girl)
+
+        if Girl in [RogueX, KittyX, EmmaX, StormX]:
+            $ Girl.Blush = 1
+        else:
+            $ Girl.Blush = 0
 
     call begging_menu(Girl, action)
 
@@ -661,6 +716,8 @@ label action_accepted(Girl, action):
     return
 
 label action_rejected(Girl, action):
+    $ Girl.ArmPose = 1
+
     if "no_" + action in Girl.daily_history:
         $ Girl.change_face("angry", 1)
 
@@ -669,8 +726,12 @@ label action_rejected(Girl, action):
         $ Girl.AddWord(1,"angry","angry")
     elif Girl.Forced:
         call went_too_far_reactions(Girl, action)
+
+        $ Girl.AddWord(1, "angry", "angry")
     elif Taboo:
         call action_rejected_taboo_reactions(Girl, action)
+
+        $ Girl.AddWord(1, "tabno", "tabno")
     elif action in anal_insertion_actions and not Girl.Loose and action in Girl.daily_history:
         call anal_insertion_not_loose_done_today_reactions(Girl)
     elif Girl.action_counter[action]:
@@ -700,6 +761,8 @@ label forced_action(Girl, action):
     else:
         call forced_rejected_reactions(Girl, action)
 
+        $ Girl.AddWord(1, "angry", "angry")
+
     return
 
 label before_action:
@@ -716,18 +779,12 @@ label before_action:
         $ focused_Girl.change_stat("inhibition", 10, 1)
         $ focused_Girl.change_stat("inhibition", 20, 1)
 
-        call kissing_launch(focused_Girl, "kiss")
-
         if focused_Girl.action_counter["kiss"] >= 10 and focused_Girl.inhibition >= 300:
             $ focused_Girl.change_face("sucking")
         elif focused_Girl.action_counter["kiss"] > 1 and focused_Girl.Addict >= 50:
             $ focused_Girl.change_face("sucking")
         else:
             $ focused_Girl.change_face("kiss",2)
-
-        if focused_Girl == RogueX and not focused_Girl.action_counter["kiss"]:
-            jump Rogue_first_kisss
-            jump after_action
 
         if focused_Girl.action_counter["kiss"] >= 10 and focused_Girl.lust >= 80:
             $ line = renpy.random.choice(["She's all over you, running her hands along your body.",
@@ -745,17 +802,6 @@ label before_action:
         else:
             $ line = "You and "+ focused_Girl.name +" make out for a while."
     elif primary_action in fondle_actions:
-        if primary_action in ["fondle_thighs", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-            if focused_Girl != EmmaX:
-                call pussy_launch(focused_Girl, trigger = primary_action)
-            else:
-                if focused_Girl.Pose in ["doggy", "sex"]:
-                    call ViewShift(focused_Girl, focused_Girl.Pose, 0, primary_action)
-                else:
-                    call ViewShift(focused_Girl, "pussy", 0, primary_action)
-        elif primary_action in breast_actions:
-            call breasts_launch(focused_Girl, trigger = primary_action)
-
         if not focused_Girl.Forced and action_context != "auto":
             $ temp_modifier = 0
 
@@ -777,7 +823,7 @@ label before_action:
         if primary_action not in dildo_actions:
             if focused_Girl.Forced:
                 $ focused_Girl.change_face("sad")
-            elif not focused_Girl.Hand:
+            elif not focused_Girl.action_counter[action]:
                 $ focused_Girl.Brows = "confused"
                 $ focused_Girl.Eyes = "sexy"
                 $ focused_Girl.Mouth = "smile"
@@ -796,17 +842,6 @@ label before_action:
             $ temp_modifier = 0
 
         call Seen_First_Peen(focused_Girl, Partner, React = action_context)
-
-        if primary_action == "handjob":
-            call handjob_launch(focused_Girl, "L")
-        elif primary_action == "footjob":
-            call sex_launch(focused_Girl, "footjob")
-        elif primary_action == "titjob":
-            call titjob_launch(focused_Girl, "L")
-        elif primary_action == "blowjob":
-            call blowjob_launch(focused_Girl, "L")
-        elif primary_action in dildo_actions:
-            call pussy_launch
     elif primary_action in sex_actions:
         call Seen_First_Peen(focused_Girl, Partner, React = action_context)
 
@@ -818,7 +853,7 @@ label before_action:
         if action_context == focused_Girl:
             $ action_context = 0
 
-            call girl_initated_action(focused_Girl, primary_action)
+            call girl_initiated_action(focused_Girl, primary_action)
 
             if _return:
                 return
@@ -836,7 +871,6 @@ label before_action:
             call first_bottomless(focused_Girl, 1)
         elif action_context != "auto":
             call AutoStrip(focused_Girl)
-
             call start_of_sex_narration(focused_Girl, primary_action)
         else:
             if primary_action in ["sex", "anal"]:
@@ -916,7 +950,11 @@ label before_action:
     $ focused_Girl.DrainWord("no_" + primary_action)
     $ focused_Girl.AddWord(0, primary_action, primary_action)
 
-    if primary_action in ["fondle_thighs", "fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
+    if primary_action == "kiss":
+        call kissing_launch(focused_Girl, "kiss")
+
+        $ Player.Focus -= 10 if Player.FocusX and Player.Focus > 50 else 0
+    elif primary_action in fondle_actions:
         if focused_Girl != EmmaX:
             call pussy_launch(focused_Girl, trigger = primary_action)
         else:
@@ -926,6 +964,18 @@ label before_action:
                 call ViewShift(focused_Girl, "pussy", 0, primary_action)
     elif primary_action in breast_actions:
         call breasts_launch(focused_Girl, trigger = primary_action)
+    elif primary_action == "handjob":
+        call handjob_launch(focused_Girl, "L")
+    elif primary_action == "footjob":
+        call sex_launch(focused_Girl, "footjob")
+    elif primary_action == "titjob":
+        call titjob_launch(focused_Girl, "L")
+    elif primary_action == "blowjob":
+        call blowjob_launch(focused_Girl, "L")
+    elif primary_action in dildo_actions:
+        call pussy_launch
+    elif primary_action in sex_actions:
+        call sex_launch(focused_Girl, primary_action)
 
 label action_cycle:
     if primary_action in mouth_actions:
@@ -935,162 +985,19 @@ label action_cycle:
     while Round > 0:
         call shift_focus(focused_Girl)
 
-        if primary_action == "kiss":
-            call kissing_launch(focused_Girl, "kiss")
-
-            $ Player.Focus -= 10 if Player.FocusX and Player.Focus > 50 else 0
-        elif primary_action in fondle_actions:
-            call ViewShift(focused_Girl, focused_Girl.Pose, 0, primary_action)
-        elif primary_action in job_actions:
-            call handjob_launch(focused_Girl)
-        elif primary_action in sex_actions:
-            call sex_launch(focused_Girl, primary_action)
-
         $ focused_Girl.lustFace()
 
         if Player.Focus < 100:
             if primary_action == "kiss":
-                menu:
-                    "Keep going. . .":
-                        pass
-                    "Slap her ass":
-                        call Slap_Ass(focused_Girl)
-
-                        $ counter += 1
-                        $ Round -= 1
-
-                        jump action_cycle
-                    "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
-                        pass
-                    "Focus to last longer." if not Player.FocusX and "focus" in Player.Traits:
-                        "You concentrate on not burning out too quickly."
-
-                        $ Player.FocusX = 1
-                    "Release your focus." if Player.FocusX:
-                        "You release your concentration. . ."
-
-                        $ Player.FocusX = 0
-                    "Start jack'in it." if multi_action and offhand_action != "jackin":
-                        call Jackin(focused_Girl)
-                    "Stop jack'in it." if multi_action and offhand_action == "jackin":
-                        "You stop jack'in it."
-
-                        $ offhand_action = 0
-                    "Other options":
-                        menu:
-                            "Offhand action":
-                                if focused_Girl.Action and multi_action:
-                                    call Offhand_Set
-
-                                    if offhand_action:
-                                         $ focused_Girl.Action -= 1
-                                else:
-                                    call tired_lines(focused_Girl)
-                            "Shift primary action":
-                                if focused_Girl.Action and multi_action:
-                                    menu:
-                                        "Move a hand to her breasts. . ." if focused_Girl.action_counter["kiss"] >= 1 and multi_action:
-                                            if focused_Girl.Action and multi_action:
-                                                $ action_context = "auto"
-
-                                                call after_action
-                                                call fondle_breasts(focused_Girl)
-
-                                                if primary_action == "fondle_breasts":
-                                                    $ offhand_action = "kiss"
-
-                                                    $ primary_action = "fondle_breasts"
-
-                                                    call before_action
-                                                else:
-                                                    $ primary_action = "kiss"
-                                            else:
-                                                "As your hands creep upwards, she grabs your wrists."
-
-                                                call tired_lines(focused_Girl)
-                                        "Move a hand to her thighs. . ." if focused_Girl.action_counter["kiss"] >= 1 and multi_action:
-                                            if focused_Girl.Action and multi_action:
-                                                $ action_context = "auto"
-
-                                                call after_action
-                                                call fondle_thighs(focused_Girl)
-
-                                                if primary_action == "fondle_thighs":
-                                                        $ offhand_action = "kiss"
-
-                                                        $ primary_action = "fondle_thighs"
-
-                                                        call before_action
-                                                else:
-                                                    $ primary_action = "kiss"
-                                            else:
-                                                "As your hands creep downwards, she grabs your wrists."
-
-                                                call tired_lines(focused_Girl)
-                                        "Never Mind":
-                                            jump action_cycle
-                                else:
-                                    call tired_lines(focused_Girl)
-                            "Threesome actions (locked)" if not Partner:
-                                pass
-                            "Threesome actions" if Partner:
-                                menu:
-                                    "Ask [focused_Girl.name] to do something else with [Partner.name]" if primary_action == "lesbian":
-                                        call Les_Change(focused_Girl)
-                                    "Ask [focused_Girl.name] to do something else with [Partner.name] (locked)" if primary_action != "lesbian":
-                                        pass
-                                    "Ask [Partner.name] to do something else":
-                                        call Three_Change(focused_Girl)
-                                    "Don't stop what you're doing. . .(locked)" if not position_change_timer or not second_girl_primary_action:
-                                        $ position_change_timer = 0
-                                    "Don't stop what you're doing. . ." if position_change_timer and second_girl_primary_action:
-                                        $ position_change_timer = 0
-                                    "Swap to [Partner.name]":
-                                        call primary_action_Swap(focused_Girl)
-                                    "Undress [Partner.name]":
-                                        call Girl_Undress(Partner)
-                                        call shift_focus(Partner)
-
-                                        jump action_cycle
-                                    "Clean up Partner":
-                                        call Girl_Cleanup(Partner,"ask")
-
-                                        jump action_cycle
-                                    "Never mind":
-                                        jump action_cycle
-                            "Undress [focused_Girl.name]":
-                                call Girl_Undress(focused_Girl)
-                            "Clean up [Girl.name] (locked)" if not focused_Girl.Spunk:
-                                pass
-                            "Clean up [focused_Girl.name]" if focused_Girl.Spunk:
-                                call Girl_Cleanup(focused_Girl,"ask")
-                            "Never mind":
-                                jump action_cycle
-                    "Back to Sex Menu" if multi_action and focused_Girl.action_counter["kiss"] >= 5:
-                        ch_p "Let's try something else."
-
-                        $ action_context = "shift"
-                        $ line = 0
-
-                        jump after_action
-                    "End Scene":
-                        ch_p "Let's stop for now."
-
-                        $ line = 0
-
-                        jump after_action
+                jump kiss_menu
             elif primary_action in fondle_actions:
                 jump fondle_menu
-
-                label fondle_menu_return:
             elif primary_action in job_actions:
                 jump handjob_menu
-
-                label handjob_menu_return:
             elif primary_action in sex_actions:
                 jump sex_menu
 
-                label sex_menu_return:
+        label action_menu_return:
 
         if primary_action in inside_panties_actions:
             if focused_Girl.Panties or focused_Girl.PantsNum() >= 6 or focused_Girl.HoseNum() >= 5: #This checks if Rogue wants to strip down.
@@ -1113,24 +1020,20 @@ label action_cycle:
 
         if primary_action in breast_actions:
             if focused_Girl.lust >= 50 and not focused_Girl.Uptop and (focused_Girl.Chest or focused_Girl.Over):
+                call pulls_off_top_narration(focused_Girl)
+
                 $ focused_Girl.Uptop = 1
 
-                call pulls_off_top_narration(focused_Girl)
-                call first_topless
+                call first_topless(focused_Girl)
 
-    $ focused_Girl.change_face("bemused", 0)
-
-    $ line = 0
-
-    call im_done_lines(focused_Girl)
+    call done_with_action_reactions(focused_Girl, action)
 
 label after_action:
-    if primary_action in ["fondle_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"] and not action_context:
-        if primary_action in sex_actions:
-            $ Player.Sprite = 0
-            $ Player.Cock = "out"
+    if primary_action in sex_actions:
+        $ Player.Sprite = 0
+        $ Player.Cock = "out"
 
-        call reset_position(focused_Girl)
+    call reset_position(focused_Girl)
 
     $ focused_Girl.change_face("sexy")
     $ focused_Girl.Action -= 1
@@ -1172,18 +1075,10 @@ label after_action:
         call after_action_five_times_lines(focused_Girl)
     elif primary_action in sex_actions and action_context not in ["auto", "pullback"]:
         if "unsatisfied" in focused_Girl.recent_history:
-            $ focused_Girl.change_face("angry")
-
-            if focused_Girl != JeanX:
-                $ focused_Girl.Eyes = "side"
-
-            call didnt_get_off_lines(focused_Girl)
+            call unsatisfied_reactions(Girl, action)
 
     if primary_action == "kiss" and not action_context and focused_Girl.action_counter["kiss"] > 5 and focused_Girl.lust > 50 and Approvalcheck(focused_Girl, 950):
-        $ focused_Girl.change_face("sexy", 1)
-        $ focused_Girl.Brows = "sad"
-
-        call would_you_like_more_lines(focused_Girl)
+        call would_you_like_more_lines(Girl, action)
 
     $ temp_modifier = 0
 
@@ -1191,19 +1086,6 @@ label after_action:
 
     if action_context:
         call switching_action_lines(focused_Girl)
-    else:
-        if primary_action == "kiss":
-            call reset_position(focused_Girl)
-        if primary_action in fondle_actions:
-            call reset_position(focused_Girl)
-        elif primary_action == "handjob":
-            call handjob_reset(focused_Girl)
-        elif primary_action == "footjob":
-            call doggy_reset(focused_Girl)
-        elif primary_action == "titjob":
-            call titjob_reset(focused_Girl)
-        elif primary_action == "blowjob":
-            call blowjob_reset(focused_Girl)
 
     return
 
@@ -1264,25 +1146,11 @@ label end_of_action_round(Girl, action):
     if Girl.SEXP >= 100 or Approvalcheck(Girl, 1200, "LO"):
         pass
     elif counter == (5 + Girl.action_counter[action]):
-        $ Girl.Brows = "confused"
-
-        call warm_hands_lines(Girl)
-        call getting_close_lines(Girl)
+        call starting_to_get_bored_reactions(Girl, action)
     elif action in ["dildo_pussy", "dildo_ass"] and Girl.lust >= 80:
         pass
     elif (action in ["handjob, footjob, titjob, blowjob", "sex", "anal", "hotdog"] and counter == (10 + Girl.action_counter[action])) or (action in ["kiss", "dildo_pussy", "dildo_ass"] and (counter == (15 + Girl.action_counter[action]) and Girl.SEXP <= 100 and not Approvalcheck(Girl, 1200, "LO"))):
-        if action == "kiss":
-            $ Girl.Brows = "confused"
-
-            call try_something_else_lines(Girl)
-        else:
-            $ Girl.Brows = "angry"
-
-            call getting_rugburn_lines(Girl)
-            call done_with_this_lines(Girl)
-            call can_we_do_something_else_lines(Girl)
-
-        call try_something_else_menu(Girl, action)
+        call definitely_bored_now_reactions(Girl, action)
 
     call Escalation(Girl)
 
@@ -1292,3 +1160,468 @@ label end_of_action_round(Girl, action):
         call time_to_stop_soon_lines(Girl)
 
     return False
+
+label action(Girl):
+    if action in dildo_actions:
+        call Rogue_Dildo_check
+
+        if not _return:
+            return
+
+    $ Round -= 5 if Round > 5 else (Round-1)
+
+    call shift_focus(Girl)
+    call action_set_temp_modifier(Girl, primary_action)
+    call action_approval_checks(Girl, primary_action)
+
+    if action_context == "auto":
+        call auto_action_narrations(Girl, action)
+
+        if Approval:
+            call auto_approved_reactions(Girl, action)
+            jump before_action
+        else:
+            call auto_rejected_reactions(Girl, action)
+
+            $ temp_modifier = 0
+            $ offhand_action = 0
+
+            return
+
+    if action_context == "pullback":
+        call pullback_reactions(Girl)
+        jump before_action
+    elif not Girl.Loose and action in anal_insertion_actions and ("finger_ass" in Girl.recent_history or "anal" in Girl.recent_history or "dildo_anal" in Girl.daily_history or "anal" in Girl.daily_history):
+        call ass_sore_reactions(Girl)
+    elif primary_action in Girl.recent_history:
+        call recent_action_reactions(Girl)
+        jump before_action
+    elif primary_action in Girl.daily_history:
+        call done_action_today_reactions(Girl)
+        jump before_action
+
+    if not Girl.action_counter[action] and "no_" + action not in Girl.recent_history:
+        call first_time_asking_reactions(Girl, action)
+
+    if not Girl.action_counter[action] and Approval:
+        call first_action_approval(Girl, action)
+    elif Approval:
+        call action_approved(Girl, action)
+
+    if Approval >= 2:
+        call action_accepted(Girl, primary_action)
+
+        label begging_approved:
+
+        return
+    else:
+        call action_disapproved(Girl, primary_action)
+
+    call action_rejected(Girl, primary_action)
+
+    label begging_rejected:
+
+    return
+
+label action_set_temp_modifier(Girl, action):
+    if action == "fondle_thighs":
+        if Girl.action_counter["fondle_thighs"]:
+            $ temp_modifier += 10
+
+        if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5:
+            $ temp_modifier -= 5
+
+        if Girl.lust > 75:
+            $ temp_modifier += 10
+
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += Taboo
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 25
+    elif action == "fondle_breasts":
+        if Girl.action_counter["fondle_breasts"]:
+            $ temp_modifier += 15
+
+        if Girl.lust > 75: #She's really horny
+            $ temp_modifier += 20
+
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (3*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 20
+    elif action == "suck_breasts":
+        if Girl.action_counter["suck_breasts"]: #You've done it before
+            $ temp_modifier += 15
+
+        if not Girl.Chest and not Girl.Over:
+            $ temp_modifier += 15
+
+        if Girl.lust > 75: #She's really horny
+            $ temp_modifier += 20
+
+        if Girl.lust > 75 and action_context == "auto": #She's really horny
+            $ temp_modifier += 10
+
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (4*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 25
+    elif action == "fondle_pussy":
+        if Girl.action_counter["fondle_pussy"]: #You've done it before
+            $ temp_modifier += 20
+
+        if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5: # she's got pants on.
+            $ temp_modifier -= 10
+
+        if Girl.lust > 75: #She's really horny
+            $ temp_modifier += 15
+
+        if Girl.lust > 75 and action_context == "auto": #She's really horny
+            $ temp_modifier += 10
+
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (2*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 25
+    elif action == "eat_pussy":
+        if Girl.action_counter["eat_pussy"]: #You've done it before
+            $ temp_modifier += 15
+
+        if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5: # she's got pants on.
+            $ temp_modifier -= 15
+
+        if Girl.lust > 95:
+            $ temp_modifier += 20
+        elif Girl.lust > 85: #She's really horny
+            $ temp_modifier += 15
+
+        if Girl.lust > 85 and action_context == "auto": #She's really horny
+            $ temp_modifier += 10
+
+        if action_context == "shift":
+            $ temp_modifier += 10
+
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (4*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 25
+    elif action == "fondle_ass":
+        if Girl.action_counter["fondle_ass"]: #You've done it before
+            $ temp_modifier += 10
+
+        if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5: # she's got pants on.
+            $ temp_modifier -= 5
+
+        if Girl.lust > 75: #She's really horny
+            $ temp_modifier += 15
+
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += Taboo
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 25
+    elif action == "finger_ass":
+        if Girl.action_counter["finger_ass"]: #You've done it before
+            $ temp_modifier += 25
+
+        if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5: # she's got pants on.
+            $ temp_modifier -= 15
+
+        if Girl.lust > 85 and Girl.Loose: #She's really horny
+            $ temp_modifier += 15
+
+        if Girl.lust > 95 and Girl.Loose:
+            $ temp_modifier += 5
+
+        if Girl.lust > 85 and action_context == "auto": #She's really horny
+            $ temp_modifier += 10
+
+        if action_context == "shift":
+            $ temp_modifier += 10
+
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (4*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 25
+    elif action == "eat_ass":
+        if Girl.action_counter["eat_ass"]: #You've done it before
+            $ temp_modifier += 20
+
+        if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 5: # she's got pants on.
+            $ temp_modifier -= 25
+
+        if Girl.lust > 95:
+            $ temp_modifier += 20
+        elif Girl.lust > 85: #She's really horny
+            $ temp_modifier += 15
+
+        if Girl.lust > 85 and action_context == "auto": #auto
+            $ temp_modifier += 10
+
+        if action_context == "shift":
+            $ temp_modifier += 10
+
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (4*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 25
+    elif action == "handjob":
+        if Girl.action_counter[action] >= 7: # She loves it
+            $ temp_modifier += 10
+        elif Girl.action_counter[action] >= 3: #You've done it before several times
+            $ temp_modifier += 7
+        elif Girl.action_counter[action]: #You've done it before
+            $ temp_modifier += 3
+
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (3*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 40
+
+        if Girl.Addict >= 75 and Girl.event_counter["swallowed"] >= 3: #She's really strung out and has swallowed
+            $ temp_modifier += 15
+        if Girl.Addict >= 75:
+            $ temp_modifier += 5
+
+        if action_context == "shift":
+            $ temp_modifier += 15
+    elif action == "footjob":
+        if Girl.action_counter[action] >= 7: # She loves it
+            $ temp_modifier += 10
+        elif Girl.action_counter[action] >= 3: #You've done it before several times
+            $ temp_modifier += 7
+        elif Girl.action_counter[action]: #You've done it before
+            $ temp_modifier += 3
+
+        if Girl.Addict >= 75 and Girl.event_counter["swallowed"] >=3: #She's really strung out and has swallowed
+            $ temp_modifier += 10
+        if Girl.Addict >= 75:
+            $ temp_modifier += 5
+
+        if action_context == "shift":
+            $ temp_modifier += 15
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (3*Taboo)
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 40
+    elif action == "titjob":
+        if Girl.action_counter[action] >= 7: # She loves it
+            $ temp_modifier += 10
+        elif Girl.action_counter[action] >= 3: #You've done it before several times
+            $ temp_modifier += 7
+        elif Girl.action_counter[action]: #You've done it before
+            $ temp_modifier += 5
+
+        if Girl.SeenChest and Approvalcheck(Girl, 500): # You've seen her tits.
+            $ temp_modifier += 10
+        if not Girl.Chest and not Girl.Over: #She's already topless
+            $ temp_modifier += 10
+
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (5*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 30
+
+        if Girl.lust > 75: #She's really horny
+            $ temp_modifier += 10
+
+        if Girl.Addict >= 75 and Girl.event_counter["swallowed"] >= 3: #She's really strung out and has swallowed
+            $ temp_modifier += 15
+        if Girl.Addict >= 75:
+            $ temp_modifier += 5
+
+        if action_context == "shift":
+            $ temp_modifier += 15
+    elif action == "blowjob":
+        if Girl.action_counter[action] >= 7: # She loves it
+            $ temp_modifier += 15
+        elif Girl.action_counter[action] >= 3: #You've done it before several times
+            $ temp_modifier += 10
+        elif Girl.action_counter[action]: #You've done it before
+            $ temp_modifier += 7
+
+        if Girl.Addict >= 75 and Girl.event_counter["swallowed"] >=3: #She's really strung out and has swallowed
+            $ temp_modifier += 25
+        elif Girl.Addict >= 75: #She's really strung out
+            $ temp_modifier += 15
+
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (4*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 40
+
+        if action_context == "shift":
+            $ temp_modifier += 15
+    elif action == "dildo_pussy":
+        if Girl.action_counter[action]: #You've done it before
+            $ temp_modifier += 15
+        if Girl.PantsNum() > 6: # she's got pants on.
+            $ temp_modifier -= 20
+
+        if Girl.lust > 95:
+            $ temp_modifier += 20
+        elif Girl.lust > 85: #She's really horny
+            $ temp_modifier += 15
+
+        if action_context == "shift":
+            $ temp_modifier += 10
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (5*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 40
+    elif action == "dildo_ass":
+        if Girl.Loose:
+            $ temp_modifier += 30
+        elif "anal" in Girl.recent_history or "dildo_anal" in Girl.recent_history:
+            $ temp_modifier -= 20
+        elif "anal" in Girl.daily_history or "dildo_anal" in Girl.daily_history:
+            $ temp_modifier -= 10
+        elif (Girl.action_counter["anal"] + Girl.action_counter["dildo_ass"] + Girl.Plug) > 0: #You've done it before
+            $ temp_modifier += 20
+
+        if Girl.PantsNum() > 6: # she's got pants on.
+            $ temp_modifier -= 20
+
+        if Girl.lust > 95:
+            $ temp_modifier += 20
+        elif Girl.lust > 85: #She's really horny
+            $ temp_modifier += 15
+
+        if action_context == "shift":
+            $ temp_modifier += 10
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (5*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 40
+    elif action == "sex":
+        if Girl.action_counter["sex"] >= 7: # She loves it
+            $ temp_modifier += 15
+        elif Girl.action_counter["sex"] >= 3: #You've done it before several times
+            $ temp_modifier += 12
+        elif Girl.action_counter["sex"]: #You've done it before
+            $ temp_modifier += 10
+
+        if Girl.Addict >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) >=3: #She's really strung out and has creampied
+            $ temp_modifier += 20
+        elif Girl.Addict >= 75:
+            $ temp_modifier += 15
+
+        if Girl.lust > 85:
+            $ temp_modifier += 10
+        elif Girl.lust > 75: #She's really horny
+            $ temp_modifier += 5
+
+        if action_context == "shift":
+            $ temp_modifier += 10
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (4*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 40
+    elif action == "anal":
+        if Girl.action_counter["anal"]  >= 7: # She loves it
+            $ temp_modifier += 20
+        elif Girl.action_counter["anal"]  >= 3: #You've done it before several times
+            $ temp_modifier += 17
+        elif Girl.action_counter["anal"] : #You've done it before
+            $ temp_modifier += 15
+
+        if Girl.Addict >= 75 and (Girl.event_counter["creampied"] + Girl.event_counter["anal_creampied"]) >=3: #She's really strung out and has creampied
+            $ temp_modifier += 25
+        elif Girl.Addict >= 75:
+            $ temp_modifier += 15
+
+        if Girl.lust > 85:
+            $ temp_modifier += 10
+        elif Girl.lust > 75: #She's really horny
+            $ temp_modifier += 5
+
+        if Girl.Loose:
+            $ temp_modifier += 10
+        elif "anal" in Girl.recent_history:
+            $ temp_modifier -= 20
+        elif "anal" in Girl.daily_history:
+            $ temp_modifier -= 10
+
+        if action_context == "shift":
+            $ temp_modifier += 10
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (5*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 40
+    elif action == "hotdog":
+        if Girl.action_counter["hotdog"] >= 3: #You've done it before several times
+            $ temp_modifier += 10
+        elif Girl.action_counter["hotdog"]: #You've done it before
+            $ temp_modifier += 5
+
+        if Girl.lust > 85:
+            $ temp_modifier += 10
+        elif Girl.lust > 75: #She's really horny
+            $ temp_modifier += 5
+        if action_context == "shift":
+            $ temp_modifier += 10
+        if "exhibitionist" in Girl.Traits:
+            $ temp_modifier += (3*Taboo)
+
+        if Girl in Player.Harem or "sex friend" in Girl.Petnames:
+            $ temp_modifier += 10
+        elif "ex" in Girl.Traits:
+            $ temp_modifier -= 40
+
+    if Girl.ForcedCount and not Girl.Forced:
+        $ temp_modifier -= 5*Girl.ForcedCount
+
+    if Taboo and "tabno" in Girl.daily_history:
+        $ temp_modifier -= 10
+
+    if "no_" + action in Girl.daily_history:
+        $ temp_modifier -= 5
+        $ temp_modifier -= 10 if "no_" + action in Girl.recent_history else 0
+
+    return

@@ -244,7 +244,7 @@ label girls_room_entry(Girl):
 
             $ bg_current = "bg_campus"
             jump Misplaced
-        elif time_index >= 3 and (Girl.Sleep or Girl.SEXP >= 30 or Girl == JubesX):
+        elif time_index >= 3 and (Girl.event_counter["sleepover"] or Girl.SEXP >= 30 or Girl == JubesX):
             if Girl == RogueX:
                 ch_r "It's pretty late, [Girl.Petname], but it's always nice to see you."
             elif Girl == KittyX:

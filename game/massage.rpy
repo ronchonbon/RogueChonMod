@@ -876,7 +876,7 @@ label Massage_After: #rkeljsv
                 $ Girl.change_stat("love", 50, 2)
                 $ Girl.change_stat("obedience", 30, 2)
 
-        $ Girl.Massage += 1
+        $ Girl.action_counter["massage"] += 1
         $ Girl.Action -= 1
         $ Girl.Addictionrate += 2 if Girl.Addictionrate < 5 else Girl.Addictionrate
         if Player.addictive:
@@ -910,7 +910,7 @@ label Massage_After: #rkeljsv
                 elif Girl == JubesX:
                         ch_v "That really did the trick. . ."
                         ch_v "Head, shoulder, knees, toes. . ."
-        elif Girl.Massage == 1:
+        elif Girl.action_counter["massage"] == 1:
                 #first time
                 if Girl == RogueX:
                         ch_r "That was very relaxing, [Girl.Petname]."
@@ -952,7 +952,7 @@ label Massage_BadEnd: #rkeljsv
         $ Girl.change_face("angry",1)
         if "massagefail" in Girl.recent_history:
                 #bad finale
-                $ Girl.Massage += 1
+                $ Girl.action_counter["massage"] += 1
                 $ Girl.Action -=1
                 $ Girl.Addictionrate += 2 if Girl.Addictionrate < 5 else Girl.Addictionrate
                 if Player.addictive:

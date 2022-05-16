@@ -203,9 +203,14 @@ label first_addicted(Girl=0): #rkeljs
                                     ch_s "A kiss? I suppose it could work."
                             elif Girl == JubesX:
                                     ch_v "Well, that's not usually how \"vampire\" works, but we could give it a shot. . ."
-                            "She leans in for a kiss."
+
                             $ primary_action = "kiss"
-                            call before_action
+                            if focused_Girl == RogueX and not RogueX.action_counter["kiss"]:
+                                call Rogue_first_kiss
+                                call after_action
+                            else:
+                                "She leans in for a kiss."
+                                call before_action
                     else:
                             $ Girl.change_face("sad",2)
                             if Girl == RogueX:
@@ -242,9 +247,14 @@ label first_addicted(Girl=0): #rkeljs
                                     ch_j "How about this. . ."
                             elif Girl == StormX:
                                     ch_s "Perhaps a kiss then. . ."
-                            "She leans in for a kiss."
+
                             $ primary_action = "kiss"
-                            call before_action
+                            if focused_Girl == RogueX and not RogueX.action_counter["kiss"]:
+                                call Rogue_first_kiss
+                                call after_action
+                            else:
+                                "She leans in for a kiss."
+                                call before_action
                     else:
                             $ Girl.change_stat("lust", 80, 3)
                             $ Girl.change_stat("love", 90, 1)
@@ -279,9 +289,14 @@ label first_addicted(Girl=0): #rkeljs
                                         $ Girl.change_stat("lust", 80, 3)
                                         $ Girl.change_stat("love", 80, 5)
                                         $ Girl.change_face("sexy")
-                                        "She leans in for a kiss."
+
                                         $ primary_action = "kiss"
-                                        call before_action
+                                        if focused_Girl == RogueX and not RogueX.action_counter["kiss"]:
+                                            call Rogue_first_kiss
+                                            call after_action
+                                        else:
+                                            "She leans in for a kiss."
+                                            call before_action
                                 "Only if we can make out a bit." if Girl not in (LauraX,JeanX):
                                         $ Girl.change_stat("love", 80, 3)
                                         $ Girl.change_stat("obedience", 40, 5)
@@ -294,8 +309,14 @@ label first_addicted(Girl=0): #rkeljs
                                                 ch_e "I don't see why not."
                                         elif Girl == StormX:
                                                 ch_s "Oh. I suppose we could. . ."
+
+
                                         $ primary_action = "kiss"
-                                        call before_action
+                                        if focused_Girl == RogueX and not RogueX.action_counter["kiss"]:
+                                            call Rogue_first_kiss
+                                            call after_action
+                                        else:
+                                            call before_action
                                 "Not good enough.":
                                         $ Girl.change_stat("love", 200, -5)
                                         $ Girl.Brows = "angry"

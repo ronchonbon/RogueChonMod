@@ -29,6 +29,7 @@ label reset_position(Girl, trigger = primary_action, set = True):
             yzoom 1
             alpha 1
             pos (Girl.sprite_location,50)
+
     $ Girl.Pose = "full" if Set else 0
 
     $ primary_action = trigger
@@ -127,12 +128,12 @@ label handjob_launch(Girl, trigger = primary_action):
 
             "[Girl.name] [line]."
 
-        if Girl == RogueX and not Girl.Hand and Girl.Arms:
+        if Girl == RogueX and not Girl.action_counter["handjob"] and Girl.Arms:
             "As you pull out your cock, [Girl.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
         else:
             "She then leans over and grabs your cock."
     elif trigger == "L":
-        if Girl == RogueX and not Girl.Hand and Girl.Arms:
+        if Girl == RogueX and not Girl.action_counter["handjob"] and Girl.Arms:
             "As you pull out your cock, [Girl.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
         else:
             "[Girl.name] bends down and grabs your cock."
@@ -216,7 +217,7 @@ label titjob_launch(Girl, trigger = primary_action):
 
     call first_topless(Girl)
 
-    if not Girl.Tit and trigger == "L": #first time
+    if not Girl.action_counter["titjob"] and trigger == "L": #first time
         if not Girl.Chest and not Girl.Over:
             "As you pull out your cock, [Girl.name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
         elif Girl.Chest and not Girl.Over:
@@ -319,7 +320,7 @@ label blowjob_launch(Girl, trigger = primary_action):
         else:
             "[Girl.name] looks around to see if anyone can see her."
     if trigger == "L":
-        if not Girl.Blow:
+        if not Girl.action_counter["blowjob"]:
             "[Girl.name] hesitantly pulls down your pants and touches her mouth to your cock."
         else:
             "[Girl.name] bends down and begins to suck on your cock."
