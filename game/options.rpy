@@ -1,4 +1,4 @@
-﻿init -1 python hide:
+init -1 python hide:
     config.developer = True
 
     config.screen_width = 1024 #1600
