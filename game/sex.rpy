@@ -29,7 +29,7 @@ label Jackin(Girl=0, counter=0, BO=[]):
         $ offhand_action = "jackin"
         if "jackin" in Girl.recent_history:
             return
-        $ Girl.AddWord(0,"jackin","jackin",0,0)
+        $ Girl.add_word(0,"jackin","jackin",0,0)
 
         if Girl == EmmaX and "classcaught" not in Girl.history:
             $ Girl.change_face("surprised", 1)
@@ -39,7 +39,7 @@ label Jackin(Girl=0, counter=0, BO=[]):
             ch_e "That really isn't appropriate."
             $ Girl.change_stat("lust", 50, 7)
             if not approval_check(EmmaX, 1200, TabM = 3):
-                $ Girl.AddWord(0,"angry","angry",0,0)
+                $ Girl.add_word(0,"angry","angry",0,0)
                 $ renpy.pop_call()
                 return
 
@@ -54,7 +54,7 @@ label Jackin(Girl=0, counter=0, BO=[]):
             $ Girl.change_face("angry", 1)
             $ Girl.change_stat("lust", 50, 5)
             if not approval_check(Girl, 1200, TabM = 3):
-                $ Girl.AddWord(0,"angry","angry",0,0)
+                $ Girl.add_word(0,"angry","angry",0,0)
                 $ renpy.pop_call()
                 return
         elif Girl.SEXP <= 15:
@@ -87,7 +87,7 @@ label Jackin(Girl=0, counter=0, BO=[]):
             $ Girl.eyes = "down"
             "[Girl.name] glances down at your cock with a scowl."
             $ Girl.eyes = "sexy"
-            $ Girl.AddWord(0,"angry","angry",0,0)
+            $ Girl.add_word(0,"angry","angry",0,0)
             return
 
         if Girl.remaining_actions and Girl.location == bg_current:
@@ -102,7 +102,7 @@ label Jackin(Girl=0, counter=0, BO=[]):
             if Girl.action_counter["blowjob"] >= 5 and approval_check(Girl, 1300, TabM = 3):
                 $ counter = Girl.action_counter["blowjob"] - 4
                 $ counter = 10 if counter > 10 else counter
-                $ counter += 5 if "hungry" in Girl.Traits else 0
+                $ counter += 5 if "hungry" in Girl.traits else 0
                 while counter:
                     $ BO.append("blowjob")
                     $ counter -= 1
@@ -261,15 +261,15 @@ label Jackin(Girl=0, counter=0, BO=[]):
             show blackscreen onlayer black
             hide blackscreen onlayer black
             if BO[0] == "handjob":
-                jump expression Girl.Tag + "_HJ_Prep"
+                jump expression Girl.tag + "_HJ_Prep"
             elif BO[0] == "blowjob":
-                jump expression Girl.Tag + "_BJ_Prep"
+                jump expression Girl.tag + "_BJ_Prep"
             elif BO[0] == "titjob":
-                jump expression Girl.Tag + "_TJ_Prep"
+                jump expression Girl.tag + "_TJ_Prep"
             elif BO[0] == "sex":
-                jump expression Girl.Tag + "_SexPrep"
+                jump expression Girl.tag + "_SexPrep"
             elif BO[0] == "anal":
-                jump expression Girl.Tag + "_AnalPrep"
+                jump expression Girl.tag + "_AnalPrep"
     return
 
 
@@ -284,7 +284,7 @@ label Girl_Tag(Girl=0, Forced=0, Gloves=0):
         $ Girl.eyes = "closed"
         $ Girl.brows = "sad"
 
-    if Forced and Player.Lvl >= 5:
+    if Forced and Player.level >= 5:
         if Gloves == "gloves":
             $ Girl.arms = 0
             "She pulls off her gloves and reaches for your face."
@@ -460,11 +460,11 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
     if "angry" in Girl.recent_history:
         return
 
-    $ Approval = approval_check(Girl, 500, TabM = 1)
+    $ approval = approval_check(Girl, 500, TabM = 1)
 
     if Girl == JeanX and not JeanX.Taboo:
-        $ Approval = 2
-    if Approval >= 2:
+        $ approval = 2
+    if approval >= 2:
         $ Girl.change_face("bemused", 1)
         if Girl.Forced:
             $ Girl.change_face("sad")
@@ -579,7 +579,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
                 $ Girl.daily_history.append("no_massage")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ Girl.change_face("sexy")
                     $ Girl.change_stat("obedience", 90, 1)
                     $ Girl.change_stat("obedience", 40, 2)
@@ -751,10 +751,10 @@ label Massage_Prep(Girl=focused_Girl, Current=0, Past=0, MCount=0):
 label Massage_Cycle:
 
 
-    $ Girl.AddWord(1,"massage","massage",0,0)
+    $ Girl.add_word(1,"massage","massage",0,0)
 
     if Girl.pose == "doggy" or Girl.pose == "sex":
-        call expression Girl.Tag + "_Sex_Launch" pass ("massage")
+        call expression Girl.tag + "_Sex_Launch" pass ("massage")
 
     $ primary_action = "massage"
 
@@ -1220,11 +1220,11 @@ label Massage_Cycle:
                 call Massage_After
                 $ Girl.remaining_actions += 1
                 if Current == "breasts":
-                    call expression Girl.Tag + "_FB_Prep"
+                    call expression Girl.tag + "_FB_Prep"
                 elif Current == "ass":
-                    call expression Girl.Tag + "_FA_Prep"
+                    call expression Girl.tag + "_FA_Prep"
                 elif Current == "pussy":
-                    call expression Girl.Tag + "_FP_Prep"
+                    call expression Girl.tag + "_FP_Prep"
                 return
         elif approval_check(Girl, Check-200) or "massagefail" in Girl.recent_history:
 
@@ -1245,13 +1245,13 @@ label Massage_Cycle:
                         $ Past = Current
                         $ Current = 0
                     "I'm enjoying this":
-                        $ Girl.AddWord(1,"massagefail")
+                        $ Girl.add_word(1,"massagefail")
                         jump Massage_BadEnd
-            $ Girl.AddWord(1,"massagefail")
+            $ Girl.add_word(1,"massagefail")
         else:
 
             "[Line]. She stiffens and sits up."
-            $ Girl.AddWord(1,"massagefail")
+            $ Girl.add_word(1,"massagefail")
             jump Massage_BadEnd
 
         $ Round -= 6
@@ -1282,8 +1282,8 @@ label Massage_Cycle:
 
                 call Player_Cumming (Girl)
                 if "angry" in Girl.recent_history:
-                    call expression Girl.Tag + "_Pos_Reset" pass (0)
-                    call expression Partner.Tag + "_Pos_Reset" pass (0)
+                    call expression Girl.tag + "_Pos_Reset" pass (0)
+                    call expression Partner.tag + "_Pos_Reset" pass (0)
                     return
                 $ Girl.change_stat("lust", 200, 5)
                 if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
@@ -1340,7 +1340,7 @@ label Massage_Cycle:
 
 
 label Massage_After:
-    call expression Girl.Tag + "_Pos_Reset" pass (0)
+    call expression Girl.tag + "_Pos_Reset" pass (0)
     if MCount >= 3:
         $ Girl.change_stat("love", 90, 1)
         $ Girl.change_stat("love", 50, 2)
@@ -1349,7 +1349,7 @@ label Massage_After:
     $ Girl.action_counter["massage"] += 1
     $ Girl.remaining_actions -= 1
     $ Girl.addiction_rate += 2 if Girl.addiction_rate < 5 else Girl.addiction_rate
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ Girl.addiction_rate += 1
 
     $ Girl.change_face("smile",1)
@@ -1425,7 +1425,7 @@ label Massage_BadEnd:
         $ Girl.action_counter["massage"] += 1
         $ Girl.remaining_actions -=1
         $ Girl.addiction_rate += 2 if Girl.addiction_rate < 5 else Girl.addiction_rate
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ Girl.addiction_rate += 1
         if Girl == RogueX:
             ch_r "Ok, enough out of you, [Girl.player_petname]."
@@ -1669,11 +1669,11 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
         if Present[counter].SeenPanties:
 
             $ approval_bonusP[counter] += 5
-        if "exhibitionist" in Present[counter].Traits:
+        if "exhibitionist" in Present[counter].traits:
             $ approval_bonusP[counter] += (4*Taboo)
         if ("sex friend" in Present[counter].player_petnames or Present[counter] in Player.Harem) and not Taboo:
             $ approval_bonusP[counter] += 15
-        elif "ex" in Present[counter].Traits:
+        elif "ex" in Present[counter].traits:
             $ approval_bonusP[counter] -= 40
         elif Present[counter].event_counter["forced"] and not Present[counter].Forced:
             $ approval_bonusP[counter] -= 5*Present[counter].event_counter["forced"]
@@ -1799,11 +1799,11 @@ label Group_Stripping:
 label Group_Strip_End:
 
     if Present:
-        $ Present[0].DrainWord("stopdancing",1,0,0)
-        $ Present[0].DrainWord("keepdancing",1,0,0)
+        $ Present[0].drain_word("stopdancing",1,0,0)
+        $ Present[0].drain_word("keepdancing",1,0,0)
     if len(Present) >= 2:
-        $ Present[1].DrainWord("stopdancing",1,0,0)
-        $ Present[1].DrainWord("keepdancing",1,0,0)
+        $ Present[1].drain_word("stopdancing",1,0,0)
+        $ Present[1].drain_word("keepdancing",1,0,0)
 
     call set_the_scene (1, 0, 0, 0)
     $ Count = 0
@@ -1913,7 +1913,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 "Her [Line] slide down off her legs, leaving them in a small pile."
             else:
                 "She rolls the [Line] down off her legs, leaving them in a small pile."
-            call expression Girl.Tag + "_First_Bottomless" pass (1)
+            call expression Girl.tag + "_First_Bottomless" pass (1)
 
         elif Girl == JubesX and Girl.accessory and (Girl.underwear or Girl.legs or Girl.HoseNum() >= 10):
 
@@ -1932,7 +1932,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     $ Girl.change_stat("inhibition", 50, 3)
                     $ Girl.change_stat("inhibition", 200, 3)
                     "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
-                    call expression Girl.Tag + "_First_Topless" pass (1)
+                    call expression Girl.tag + "_First_Topless" pass (1)
             else:
                 jump Strip_Ultimatum
         elif Girl.top and not Girl.bra and (Girl.underwear or Girl.HoseNum() >= 10):
@@ -1956,7 +1956,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                         "She glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
                     else:
                         "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
-                    call expression Girl.Tag + "_First_Topless" pass (1)
+                    call expression Girl.tag + "_First_Topless" pass (1)
                 else:
                     if Girl == KittyX:
                         "She drops her shoulders and her [Line] falls to the floor."
@@ -1986,7 +1986,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     $ Girl.change_stat("obedience", 200, 4)
                     $ Girl.change_stat("inhibition", 50, 3)
                     $ Girl.change_stat("inhibition", 200, 3)
-                    call expression Girl.Tag + "_First_Topless" pass (1)
+                    call expression Girl.tag + "_First_Topless" pass (1)
                 else:
                     $ Girl.change_face("sexy")
                     if Girl == KittyX:
@@ -2013,7 +2013,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                         "She hesitantly looks up at you, and then slowly unzips and pulls down her [Line], dropping them to the floor."
                     else:
                         "She shyly looks up at you, and then slowly unzips and pulls down her [Line], dropping them to the floor."
-                    call expression Girl.Tag + "_First_Bottomless" pass (1)
+                    call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
                     $ Girl.change_stat("obedience", 50, 1)
                     $ Girl.change_stat("obedience", 75, 1)
@@ -2037,15 +2037,15 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     $ Girl.change_stat("inhibition", 50, 4)
                     $ Girl.change_stat("inhibition", 200, 4)
                     "She hesitantly glances your way, and then with a shrug pulls her [Line] off, tossing it to the ground."
-                    call expression Girl.Tag + "_First_Bottomless" pass (1)
+                    call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
                     "She shrugs her [Line] off, tossing it to the ground."
 
-                if not Girl.bra or Girl.Uptop:
+                if not Girl.bra or Girl.top_pulled_up:
                     if not Girl.SeenChest:
                         $ Girl.change_stat("obedience", 50, 3)
                         $ Girl.change_stat("inhibition", 50, 3)
-                        call expression Girl.Tag + "_First_Topless" pass (1)
+                        call expression Girl.tag + "_First_Topless" pass (1)
                     else:
                         $ Girl.change_stat("lust", 60, 15)
                         $ Girl.change_stat("obedience", 50, 3)
@@ -2075,18 +2075,18 @@ label Girl_Stripping(Girl=0, Nudist=0):
                         "She glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
                     else:
                         "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
-                    call expression Girl.Tag + "_First_Bottomless" pass (1)
+                    call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
                     if Girl == KittyX:
                         "She drops her shoulders and her [Line] falls to the floor."
                     else:
                         "She pulls her [Line] over her head, tossing it to the ground."
 
-                if not Girl.bra or Girl.Uptop:
+                if not Girl.bra or Girl.top_pulled_up:
                     if not Girl.SeenChest:
                         $ Girl.change_stat("obedience", 50, 3)
                         $ Girl.change_stat("inhibition", 50, 3)
-                        call expression Girl.Tag + "_First_Topless" pass (1)
+                        call expression Girl.tag + "_First_Topless" pass (1)
                     else:
                         $ Girl.change_stat("lust", 60, 15)
                         $ Girl.change_stat("obedience", 50, 3)
@@ -2118,7 +2118,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                         "She glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
                     else:
                         "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
-                    call expression Girl.Tag + "_First_Topless" pass (1)
+                    call expression Girl.tag + "_First_Topless" pass (1)
                 else:
                     $ Girl.change_stat("obedience", 50, 2)
                     if Girl == KittyX:
@@ -2147,7 +2147,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                         "She looks up at you, and then slowly pulls her [Line] down, kicking them off to the side."
                     else:
                         "She shyly looks up at you, and then slowly pulls her [Line] down, kicking them off to the side."
-                    call expression Girl.Tag + "_First_Bottomless" pass (1)
+                    call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
                     $ Girl.change_stat("obedience", 50, 1)
                     $ Girl.change_stat("obedience", 75, 1)
@@ -2180,13 +2180,13 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 extend ""
                 "Ok, you can stop":
                     $ Girl.recent_history.append("stopdancing")
-                    call expression Girl.Tag + "_Pos_Reset"
+                    call expression Girl.tag + "_Pos_Reset"
                 "Keep on dancing":
                     $ Girl.recent_history.append("keepdancing")
 
 
     $ Girl.change_stat("lust", 70, 2)
-    if "exhibitionist" in Girl.Traits:
+    if "exhibitionist" in Girl.traits:
         $ Girl.change_stat("lust", 200, 2)
     $ Player.change_stat("focus", 60, 3)
     if offhand_action == "jackin":
@@ -2329,7 +2329,7 @@ label Strip_Ultimatum:
     if "keepdancing" in Girl.recent_history:
         return
 
-    call expression Girl.Tag + "_Pos_Reset"
+    call expression Girl.tag + "_Pos_Reset"
 
     $ Girl.change_face("bemused", 1)
     if "stripforced" in Girl.recent_history:
@@ -2565,8 +2565,8 @@ label Les_Interupted(Girl=0, BO=[]):
             else:
                 Girl.voice "Ok, that's probably enough of that. . ."
         jump Les_After
-    $ Girl.DrainWord("unseen",1,0)
-    $ Partner.DrainWord("unseen",1,0)
+    $ Girl.drain_word("unseen",1,0)
+    $ Partner.drain_word("unseen",1,0)
 
     $ Girl.change_face("surprised", 1)
     $ Partner.change_face("surprised",2)
@@ -2812,12 +2812,12 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
     elif Girl.inhibition >= 750:
         $ approval_bonus += 5
 
-    if "exhibitionist" in Girl.Traits:
+    if "exhibitionist" in Girl.traits:
         $ approval_bonus += (3*Taboo)
 
     if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in Girl.Traits:
+    elif "ex" in Girl.traits:
         $ approval_bonus -= 40
 
     if Partner not in all_Girls:
@@ -2840,7 +2840,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
     $ Line = Girl.GirlLikeCheck(Partner)
     if Line >= 900:
         $ Bonus += 150
-    elif Line >= 800 or "poly "+Partner.Tag in Girl.Traits:
+    elif Line >= 800 or "poly "+Partner.tag in Girl.traits:
         $ Bonus += 100
     elif Line >= 700:
         $ Bonus += 50
@@ -2848,11 +2848,11 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
         $ Bonus -= 200
     elif Line <= 500:
         $ Bonus -= 100
-    $ Partner.DrainWord("unseen",1,0)
+    $ Partner.drain_word("unseen",1,0)
     $ Line = 0
 
-    $ Girl.AddWord(1,"noticed "+Partner.Tag,"noticed "+Partner.Tag)
-    $ Partner.AddWord(1,"noticed "+Girl.Tag,"noticed "+Girl.Tag)
+    $ Girl.add_word(1,"noticed "+Partner.tag,"noticed "+Partner.tag)
+    $ Partner.add_word(1,"noticed "+Girl.tag,"noticed "+Girl.tag)
 
     if bg_current in PersonalRooms:
         $ Taboo = 0
@@ -2861,23 +2861,23 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
     if Girl.event_counter["forced"] and not Girl.Forced:
         $ approval_bonus -= 5*Girl.event_counter["forced"]
 
-    $ Approval = approval_check(Girl, 1350, TabM = 2, Bonus = Bonus)
+    $ approval = approval_check(Girl, 1350, TabM = 2, Bonus = Bonus)
 
-    $ Girl.DrainWord("unseen",1,0)
+    $ Girl.drain_word("unseen",1,0)
 
     if action_context == "interrupted":
         menu:
             extend ""
             "I guess I should probably get going then. . .":
                 $ Girl.change_stat("love", 80, 3)
-                if Approval >= 2:
+                if approval >= 2:
 
                     if Girl == RogueX:
                         ch_r "Well, I didn't say you had to leave. . ."
                     elif Girl == KittyX:
                         ch_k "Hmmmm, I don't know about that. . ."
                     elif Girl == EmmaX:
-                        ch_e "Well, if [Partner.Tag]'s game. . ."
+                        ch_e "Well, if [Partner.tag]'s game. . ."
                     elif Girl == LauraX:
                         ch_l "Hmmmm, I don't know about that. . ."
                     elif Girl == JeanX:
@@ -2894,7 +2894,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
                     call Les_Response (Partner, Girl, 1, B2=Bonus)
                     if not _return:
 
-                        if Approval:
+                        if approval:
                             if Girl == RogueX:
                                 ch_r "I mean, you can hang out. . ."
                             elif Girl == KittyX:
@@ -2931,7 +2931,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
                                 jump Campus_Map
                             else:
                                 jump Player_Room
-                    elif not Approval:
+                    elif not approval:
 
                         if Girl == RogueX:
                             ch_r "I'm sorry [Girl.player_petname], I just am not interested in putting on a show."
@@ -3042,7 +3042,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
                 ch_v "But just watching though?"
 
 
-    if Approval and (Partner == RogueX or Girl == RogueX) and "touch" not in RogueX.Traits:
+    if approval and (Partner == RogueX or Girl == RogueX) and "touch" not in RogueX.traits:
         if Girl == RogueX:
             ch_r "I don't know, isn't my touch. . . dangerous?"
             ch_p "Don't worry, I can keep it turned off."
@@ -3071,7 +3071,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
             ch_v "Oh, that'll work."
 
 
-    if not Girl.event_counter["seen_with_girl"] and Approval:
+    if not Girl.event_counter["seen_with_girl"] and approval:
 
         if Girl.Forced:
             $ Girl.change_face("sad")
@@ -3146,7 +3146,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
                 ch_v "Sure, I guess. . ."
 
 
-    elif Approval:
+    elif approval:
 
         if Girl.Forced:
             $ Girl.change_face("sad")
@@ -3166,7 +3166,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
                 ch_s "So you enjoy these little plays?"
             elif Girl == JubesX:
                 ch_v "This is the kind of thing you like?"
-        elif Approval and "lesbian" in Girl.recent_history:
+        elif approval and "lesbian" in Girl.recent_history:
             $ Girl.change_face("sexy", 1)
             if Girl == RogueX:
                 ch_r "I guess we could get a little closer. . ."
@@ -3184,7 +3184,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
                 ch_v "I guess we can do that for you. . ."
             $ focused_Girl = Girl
             jump Les_Prep
-        elif Approval and "lesbian" in Girl.daily_history:
+        elif approval and "lesbian" in Girl.daily_history:
             $ Girl.change_face("sexy", 1)
             $ Line = renpy.random.choice(["Enjoyed the show?",
                                     "Didn't get enough earlier?",
@@ -3213,12 +3213,12 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
             $ Line = renpy.random.choice(["You do like to watch.",
                                     "So you'd like us to go again?",
                                     "You want to watch some more?",
-                                    "You want me to get it on with "+Partner.Tag+"?"])
+                                    "You want me to get it on with "+Partner.tag+"?"])
             Girl.voice "[Line]"
         $ Line = 0
 
 
-    if Approval >= 2:
+    if approval >= 2:
 
         if Girl.Forced:
             $ Girl.change_face("sad")
@@ -3372,7 +3372,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
             "You look like you might be into it. . .":
 
 
-                if Approval:
+                if approval:
                     $ Girl.change_face("sexy")
                     $ Girl.change_stat("obedience", 90, 4)
                     $ Girl.change_stat("obedience", 50, 5)
@@ -3407,8 +3407,8 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
             "Just get at it already.":
 
 
-                $ Approval = approval_check(Girl, 550, "OI", TabM = 2)
-                if Approval > 1 or (Approval and Girl.Forced):
+                $ approval = approval_check(Girl, 550, "OI", TabM = 2)
+                if approval > 1 or (approval and Girl.Forced):
                     $ Girl.change_face("sad")
                     $ Girl.change_stat("love", 70, -5, 1)
                     $ Girl.change_stat("love", 200, -5)
@@ -3625,8 +3625,8 @@ label Les_Prep(Girl=focused_Girl, BO=[]):
 
     $ Line = 0
 
-    $ Girl.AddWord(1,"noticed "+Partner.Tag,"noticed "+Partner.Tag)
-    $ Partner.AddWord(1,"noticed "+Girl.Tag,"noticed "+Girl.Tag)
+    $ Girl.add_word(1,"noticed "+Partner.tag,"noticed "+Partner.tag)
+    $ Partner.add_word(1,"noticed "+Girl.tag,"noticed "+Girl.tag)
 
     if "unseen" not in Girl.recent_history:
 
@@ -3653,10 +3653,10 @@ label Les_Prep(Girl=focused_Girl, BO=[]):
         $ action_context = 0
     $ Line = 0
     if Girl.Taboo:
-        $ Girl.DrainWord("no_taboo")
-    $ Girl.DrainWord("no_lesbian")
-    $ Girl.AddWord(0,"lesbian","lesbian")
-    $ Partner.AddWord(0,"lesbian","lesbian")
+        $ Girl.drain_word("no_taboo")
+    $ Girl.drain_word("no_lesbian")
+    $ Girl.add_word(0,"lesbian","lesbian")
+    $ Partner.add_word(0,"lesbian","lesbian")
 
 label Les_Cycle(Girl=focused_Girl):
     $ Girl = GirlCheck(Girl)
@@ -3679,9 +3679,9 @@ label Les_Cycle(Girl=focused_Girl):
                 "Stop jack'in it." if offhand_action == "jackin":
                     $ offhand_action = 0
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -3748,9 +3748,9 @@ label Les_Cycle(Girl=focused_Girl):
                                 jump Les_Interupted
                             else:
                                 call Girl_Undress (Girl)
-                        "Clean up [Girl.name] (locked)" if not Girl.Spunk:
+                        "Clean up [Girl.name] (locked)" if not Girl.spunk:
                             pass
-                        "Clean up [Girl.name]" if Girl.Spunk:
+                        "Clean up [Girl.name]" if Girl.spunk:
                             if "unseen" in Girl.recent_history:
                                 ch_p "You've got a little something. . ."
                                 jump Les_Interupted
@@ -3785,8 +3785,8 @@ label Les_Cycle(Girl=focused_Girl):
                 if "unseen" not in Girl.recent_history:
                     call Player_Cumming (Girl)
                     if "angry" in Girl.recent_history:
-                        call expression Girl.Tag + "_Pos_Reset"
-                        call expression Partner.Tag + "_Pos_Reset"
+                        call expression Girl.tag + "_Pos_Reset"
+                        call expression Partner.tag + "_Pos_Reset"
                         return
                     $ Girl.change_stat("lust", 200, 5)
                     if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
@@ -3833,12 +3833,12 @@ label Les_Cycle(Girl=focused_Girl):
 
 
 label Les_After:
-    call expression Girl.Tag + "_Pos_Reset"
+    call expression Girl.tag + "_Pos_Reset"
     if not Partner:
         $ approval_bonus = 0
         call checkout
         return
-    call expression Partner.Tag + "_Pos_Reset"
+    call expression Partner.tag + "_Pos_Reset"
     $ Girl.change_face("sexy")
     if Partner == EmmaX:
         call Partner_Like (Girl, 4)
@@ -3887,8 +3887,8 @@ label Les_After:
                 ch_v "It was cool to have an audience. . ."
     if not action_context:
         call Post_Les_Dialog
-    $ Girl.AddWord(1,0,0,0,"les "+Partner.Tag)
-    $ Partner.AddWord(1,0,0,0,"les "+Girl.Tag)
+    $ Girl.add_word(1,0,0,0,"les "+Partner.tag)
+    $ Partner.add_word(1,0,0,0,"les "+Girl.tag)
     $ approval_bonus = 0
     call checkout
     return
@@ -3912,7 +3912,7 @@ label Post_Les_Dialog:
     elif Girl == JubesX:
         ch_v "That was a blast. . ."
 
-    if "les "+Partner.Tag in Girl.history:
+    if "les "+Partner.tag in Girl.history:
 
         if Partner == RogueX:
             ch_r "Mmmm yeah. . ."
@@ -4001,7 +4001,7 @@ label Post_Les_Dialog:
 
 
 
-label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Result=0, Approval=0):
+label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Result=0, approval=0):
 
 
 
@@ -4061,18 +4061,18 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
     elif Speaker.inhibition >= 750:
         $ approval_bonus += 5
 
-    if "exhibitionist" in Speaker.Traits:
+    if "exhibitionist" in Speaker.traits:
         $ approval_bonus += (3*Taboo)
 
     if Speaker in Player.Harem or "sex friend" in Speaker.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in Speaker.Traits:
+    elif "ex" in Speaker.traits:
         $ approval_bonus -= 40
 
 
     if Speaker.GirlLikeCheck(Subject) >= 900:
         $ B += 150
-    elif Speaker.GirlLikeCheck(Subject) >= 800 or "poly " + Subject.Tag in Speaker.Traits:
+    elif Speaker.GirlLikeCheck(Subject) >= 800 or "poly " + Subject.tag in Speaker.traits:
         $ B += 100
     elif Speaker.GirlLikeCheck(Subject) >= 700:
         $ B += 50
@@ -4084,30 +4084,30 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
     if Speaker == JeanX:
         $ B += 100
 
-    $ Approval = approval_check(Speaker, 1300, TabM = 2, Bonus = B)
+    $ approval = approval_check(Speaker, 1300, TabM = 2, Bonus = B)
 
-    if not Approval:
+    if not approval:
 
         pass
     elif Step == 1:
 
-        if Approval >= 2 or B >= 150:
+        if approval >= 2 or B >= 150:
             $ Speaker.change_face("sexy", 1)
             if Speaker == RogueX:
-                ch_r "You sure [Subject.Tag]? Could be a lot of fun?"
+                ch_r "You sure [Subject.tag]? Could be a lot of fun?"
             elif Speaker == KittyX:
-                ch_k "Come on [Subject.Tag], it could be kinda fun."
+                ch_k "Come on [Subject.tag], it could be kinda fun."
             elif Speaker == EmmaX:
-                ch_e "Oh come on [Subject.Tag], I could show you a few things."
+                ch_e "Oh come on [Subject.tag], I could show you a few things."
             elif Speaker == LauraX:
                 ch_l "It's really not bad, give it a shot."
             elif Speaker == JeanX:
-                ch_j "Come on. . . [Subject.Tag], it could be fun."
+                ch_j "Come on. . . [Subject.tag], it could be fun."
                 $ B2 += 50
             elif Speaker == StormX:
-                ch_s "Now [Subject.Tag], it would not be so bad, would it?"
+                ch_s "Now [Subject.tag], it would not be so bad, would it?"
             elif Speaker == JubesX:
-                ch_v "Come on, you in, [Subject.Tag]? . ."
+                ch_v "Come on, you in, [Subject.tag]? . ."
             if B2 >= 100:
                 $ Result = 1
                 $ Speaker.GirlLikeUp(Subject,(int(B/10)))
@@ -4117,7 +4117,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
 
     elif Step == 2:
 
-        if Approval >= 2:
+        if approval >= 2:
             $ Speaker.change_face("smile", 1)
             if Speaker == RogueX:
                 ch_r "'Course!"
@@ -4146,17 +4146,17 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
             if B >= 100:
                 ch_k "Yeah, I mean I guess. . ."
             if B >= 0:
-                ch_k "No offense [Subject.Tag], but. . ."
+                ch_k "No offense [Subject.tag], but. . ."
         elif Speaker == EmmaX:
             if B >= 100:
                 ch_e "Mmmmm, certainly. . ."
             if B >= 0:
-                ch_e "[Subject.Tag], dear, I don't really think so. . ."
+                ch_e "[Subject.tag], dear, I don't really think so. . ."
         elif Speaker == LauraX:
             if B >= 100:
                 ch_l "You're cute and all. . ."
             if B >= 0:
-                ch_l "I don't know, [Subject.Tag]. . ."
+                ch_l "I don't know, [Subject.tag]. . ."
         elif Speaker == JeanX:
             if B >= 100:
                 ch_j "She's not bad. . ."
@@ -4275,7 +4275,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
                         ch_s "This is not how one asks a favor."
                     elif Speaker == JubesX:
                         ch_v "No way!"
-                    $ Speaker.AddWord(1,"angry","angry")
+                    $ Speaker.add_word(1,"angry","angry")
             "[Subject.name], what do you think?":
                 $ Subject.change_face("sexy", 1)
                 $ Speaker.GirlLikeUp(Subject,(int(B/10)))
@@ -4300,9 +4300,9 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
                 elif Subject == KittyX:
                     if Speaker == RogueX:
                         if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
-                            ch_k "Come on [Speaker.Tag], you know we have fun."
+                            ch_k "Come on [Speaker.tag], you know we have fun."
                         else:
-                            ch_k "Come on [Speaker.Tag], could be fun."
+                            ch_k "Come on [Speaker.tag], could be fun."
                     elif Speaker in (EmmaX,StormX):
                         if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                             ch_k "I mean, it might be nice to show [Subject.player_petname] what you've taught me. . ."
@@ -4342,9 +4342,9 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
                 elif Subject == StormX:
                     if Speaker == KittyX:
                         if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
-                            ch_s "Now [Speaker.Tag], this certainly wouldn't be your first lesson. . ."
+                            ch_s "Now [Speaker.tag], this certainly wouldn't be your first lesson. . ."
                         else:
-                            ch_s "Now [Speaker.Tag], haven't you taken -any- interest in me?"
+                            ch_s "Now [Speaker.tag], haven't you taken -any- interest in me?"
                     elif Speaker == EmmaX:
                         if Subject.event_counter["been_with_girl"] and Speaker.event_counter["been_with_girl"]:
                             ch_s "Now [Subject.player_petname], that isn't what you've said in the past. . ."
@@ -4366,11 +4366,11 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
 
                     $ Speaker.change_face("smile", 1)
                     if Speaker == RogueX:
-                        ch_r "You know, I can't argue with that, [Subject.Tag]."
+                        ch_r "You know, I can't argue with that, [Subject.tag]."
                     elif Speaker == KittyX:
-                        ch_k "Heh, I guess so, [Subject.Tag]."
+                        ch_k "Heh, I guess so, [Subject.tag]."
                     elif Speaker == EmmaX:
-                        ch_e "If we must, [Subject.Tag]."
+                        ch_e "If we must, [Subject.tag]."
                     elif Speaker == LauraX:
                         ch_l "I guess so."
                     elif Speaker == JeanX:
@@ -4384,23 +4384,23 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
 
                     $ Speaker.change_face("angry", 1, Eyes="side")
                     if Speaker == RogueX:
-                        ch_r "Sorry [Subject.Tag], nothin personal."
+                        ch_r "Sorry [Subject.tag], nothin personal."
                     elif Speaker == KittyX:
-                        ch_k "Sorry [Subject.Tag], I don't mean anything personal."
+                        ch_k "Sorry [Subject.tag], I don't mean anything personal."
                     elif Speaker == EmmaX:
-                        ch_e "I'm sorry [Subject.Tag], it's really not you."
+                        ch_e "I'm sorry [Subject.tag], it's really not you."
                     elif Speaker == LauraX:
-                        ch_l "Sorry [Subject.Tag], it's not about you."
+                        ch_l "Sorry [Subject.tag], it's not about you."
                     elif Speaker == JeanX:
                         ch_j "Yeah, I'm really not interested."
                     elif Speaker == StormX:
-                        ch_s "I'm afraid not, [Subject.Tag]."
+                        ch_s "I'm afraid not, [Subject.tag]."
                     elif Speaker == JubesX:
-                        ch_v "No way, nothing personal, [Subject.Tag]."
+                        ch_v "No way, nothing personal, [Subject.tag]."
 
     if Step == 3:
 
-        if Approval:
+        if approval:
             $ Speaker.change_face("smile", 1)
             if Speaker == RogueX:
                 ch_r "I mean, I guess so. . ."
@@ -4510,7 +4510,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
 
 label Les_FirstKiss:
 
-    if "les " + Partner.Tag in Girl.history:
+    if "les " + Partner.tag in Girl.history:
 
         $ Line = "experienced"
     elif Girl.event_counter["been_with_girl"] and Partner.event_counter["been_with_girl"]:
@@ -4548,18 +4548,18 @@ label Les_FirstKiss:
 
 label Girl_Whammy(Other):
 
-    if "nowhammy" not in JeanX.Traits and Other.LikeJean < 800:
+    if "nowhammy" not in JeanX.traits and Other.LikeJean < 800:
 
-        $ Player.AddWord(1,0,0,0,"whammied")
-        if Other == EmmaX and EmmaX.Lvl >= JeanX.Lvl:
+        $ Player.add_word(1,0,0,0,"whammied")
+        if Other == EmmaX and EmmaX.level >= JeanX.level:
             ch_e "Oh, don't even try that nonsense with me, Ms. Grey."
             return
-        if Other == JubesX and JubesX.Lvl >= JeanX.Lvl:
+        if Other == JubesX and JubesX.level >= JeanX.level:
             ch_v "Vampire whammy beats mutant whammy!"
             return
-        if "Jeaned" not in Other.Traits:
-            $ Other.Traits.append("Jeaned")
-            $ setattr(JeanX,"LikeS"+Other.Tag,Other.LikeJean)
+        if "Jeaned" not in Other.traits:
+            $ Other.traits.append("Jeaned")
+            $ setattr(JeanX,"LikeS"+Other.tag,Other.LikeJean)
         $ Other.LikeJean += 500 if Other.LikeJean <= 900 else Other.LikeJean
         $ Other.LikeJean = 900 if Other.LikeJean >= 900 else Other.LikeJean
     return

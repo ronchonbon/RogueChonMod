@@ -1,136 +1,136 @@
 init python:
 
-
     class PlayerClass(object):
         def __init__(self):
             self.name = "Zero"
+
+            self.sprite = None
+            self.color = "green"
+
             self.semen = 2
             self.max_semen = 3
+
             self.focus = 0
-            self.focusing = 0
-            self.XP = 0
-            self.SEXP = 0
-            self.StatPoints = 0
-            self.XPgoal = 100
-            self.Lvl = 1
-            self.Rep = 600
+            self.focusing = False
+
+            self.reputation = 600
+
             self.recent_history = []
             self.daily_history = []
-            self.Traits = []
+            self.traits = []
             self.history = []
+
             self.Harem = []
-            self.Male = 1
 
-            self.Income = 12
-            self.Cash = 20
-            self.Inventory = []
+            self.XP = 0
+            self.SEXP = 0
+            self.level = 1
+            self.income = 12
+            self.cash = 20
+            self.XP_goal = 100
 
+            self.inventory = []
 
-            self.Sprite = 0
-            self.Color = "green"
-            self.Cock = "out"
-            self.Spunk = 0
-            self.Wet = 0
+            self.stat_points = 0
+
+            self.cock_position = "out"
+            self.spunk = 0
+            self.cock_wet = 0
 
             self.addictive = False
             self.nonaddictive = False
 
             self.cologne = None
 
-        def AddWord(self,Only=0,Recent=0,Daily=0,Trait=0,History=0):
-
-
-
-            if (Recent and not Only) or (Recent and Recent not in self.recent_history):
-                self.recent_history.append(Recent)
-            if (Daily and not Only) or (Daily and Daily not in self.daily_history):
-                self.daily_history.append(Daily)
-            if (Trait and not Only) or (Trait and Trait not in self.Traits):
-                self.Traits.append(Trait)
-            if (History and not Only) or (History and History not in self.history):
-                self.history.append(History)
+        def add_word(self, only = False, recent = None, daily = None, trait = None, history = None):
+            if (recent and not only) or (recent and recent not in self.recent_history):
+                self.recent_history.append(recent)
+            if (daily and not only) or (daily and daily not in self.daily_history):
+                self.daily_history.append(daily)
+            if (trait and not only) or (trait and trait not in self.traits):
+                self.traits.append(trait)
+            if (history and not only) or (history and history not in self.history):
+                self.history.append(history)
             return
 
-        def DrainWord(self, Word = "word", Recent = 1, Daily = 1, Traits=0):
-
-
-            if Recent and Word in self.recent_history:
-                while Word in self.recent_history:
+        def drain_word(self, word, recent = True, daily = True, traits = False):
+            if recent:
+                while word in self.recent_history:
                     self.recent_history.remove(Word)
-            if Daily and Word in self.daily_history:
-                while Word in self.daily_history:
+            if daily:
+                while word in self.daily_history:
                     self.daily_history.remove(Word)
-            if Traits and Word in self.Traits:
-                while Word in self.Traits:
-                    self.Traits.remove(Word)
+            if traits:
+                while word in self.traits:
+                    self.traits.remove(Word)
             return
 
-        def change_stat(self, Flavor=0, Check=100, Value=1, Greater=0, Type=0, Overflow=0, BStat=0, XPOS = 0.75):
+        def change_stat(self, flavor, Check, update, Greater = False, x_position = 0.75):
+            stat = getattr(self, flavor)
 
-            Type = getattr(self,Flavor)
             if Greater:
-
-
-                if Type >= Check:
-
-                    Type += Value
+                if stat >= Check:
+                    stat += update
                 else:
-
-                    Value = 0
+                    update = 0
             else:
-                if Type <= Check:
-                    Type += Value
+                if stat <= Check:
+                    stat += update
                 else:
-                    Value = 0
+                    update = 0
 
-            if Value:
-                Color = "#FFFFFF"
+            if update:
+                CallHolder(update, "#FFFFFF", x_position)
 
-                CallHolder(Value, Color, XPOS)
+            stat = 100 if Type > 100 else Type
 
-            Type = 100 if Type > 100 else Type
-            setattr(self,Flavor,Type)
+            setattr(self, flavor, stat)
+
             return
-
-
 
     class GirlClass(object):
-        def __init__(self,name="no_name",Love=0,Obed=0,Inbt=0,Lust=0):
+        def __init__(self, name, love = 0, ovedience = 0, inhibition = 0, lust = 0):
             self.name = name
-            self.Tag = name
+            self.tag = name
             self.names = [name]
-            self.love = Love
-            self.obedience = Obed
-            self.inhibition = Inbt
-            self.lust = Lust
+
+            self.love = love
+            self.obedience = ovedience
+            self.inhibition = inhibition
+            self.lust = lust
+
             self.Thirst = 0
             self.addiction = 0
             self.addiction_rate = 0
             self.resistance = 0
             self.Taboo = 0
             self.XP = 0
-            self.StatPoints = 0
-            self.XPgoal = 100
-            self.Lvl = 1
+            self.stat_points = 0
+            self.XP_goal = 100
+            self.level = 1
+
             self.sprite_location = stage_center
             self.sprite_layer = 50
+
             self.remaining_actions = 3
             self.max_actions = 3
             self.pose = 0
-            self.Rep = 600
+            self.reputation = 600
             self.recent_history = []
             self.daily_history = []
-            self.Traits = []
+            self.traits = []
             self.history = []
             self.Date = 0
-            self.Chat = [0,0,0,0,0,0]
-            self.Event = [0,0,0,0,0,0,0,0,0,0,0]
+            self.Chat = [0, 0, 0, 0, 0, 0]
+            self.Event = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+
             self.player_petname = "Zero"
             self.player_petnames = ["Zero"]
             self.petname = "Girl"
             self.petnames = ["Girl"]
+
             self.Cheated = 0
-            self.Break = [0,0]
+            self.Break = [0, 0]
             self.Forced = 0
             self.location = "hold"
             self.home = 0
@@ -141,20 +141,23 @@ init python:
             self.SeenChest = 0
             self.SeenPussy = 0
             self.SeenPanties = 0
-            self.Upskirt = 0
-            self.Uptop = 0
-            self.underwearDown = 0
+
+            self.upskirt = 0
+            self.top_pulled_up = 0
+            self.underwear_pulled_down = 0
             self.Wet = 0
             self.Water = 0
-            self.Spunk = []
+            self.spunk = []
             self.piercings = 0
             self.pubes = 1
             self.ArmPose = 1
+
             self.blushing = 0
             self.eyes = "normal"
             self.mouth = "normal"
             self.brows = "normal"
             self.emotion = "normal"
+
             self.held_item = 0
             self.arms = 0
             self.legs = 0
@@ -166,30 +169,30 @@ init python:
             self.hair = 1
             self.hose = 0
             self.Shame = 0
-            self.Inventory = []
+            self.inventory = []
 
 
-            self.Casual1 = [0,0,0,0,0,0,0,0,0,0,0]
-            self.Casual2 = [0,0,0,0,0,0,0,0,0,0,0]
-            self.Custom1 = [0,0,0,0,0,0,0,0,0,0,0]
-            self.Custom2 = [0,0,0,0,0,0,0,0,0,0,0]
-            self.Custom3 = [0,0,0,0,0,0,0,0,0,0,0]
-            self.TempClothes = [0,0,0,0,0,0,0,0,0,0,0]
-            self.Gym = [0,0,0,0,0,0,0,0,0,0,0]
-            self.sleepwear = [0,0,0,0,0,0,0,0,0,0,0]
-            self.Swim = [0,0,0,0,0,0,0,0,0,0,0]
+            self.Casual1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            self.Casual2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            self.Custom1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            self.Custom2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            self.Custom3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            self.TempClothes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            self.Gym = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            self.sleepwear = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            self.Swim = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             self.Gag = 0
             self.Todo = []
             self.PubeC = 0
-            self.Schedule = [["MM","MA","ME","MN"],
-                                ["TM","TA","TE","TN"],
-                                ["WM","WA","WE","WN"],
-                                ["ThM","ThA","ThE","ThN"],
-                                ["FM","FA","FE","FN"],
-                                ["SaM","SaA","SaE","SaN"],
-                                ["SuM","SuA","SuE","SuN"],
+            self.Schedule = [["MM", "MA", "ME", "MN"],
+                                ["TM", "TA", "TE", "TN"],
+                                ["WM", "WA", "WE", "WN"],
+                                ["ThM", "ThA", "ThE", "ThN"],
+                                ["FM", "FA", "FE", "FN"],
+                                ["SaM", "SaA", "SaE", "SaN"],
+                                ["SuM", "SuA", "SuE", "SuN"],
                                 ]
-            self.Clothing = [0,0,0,0,0,0,0,0,0,0]                    #schedules when she wears what: (0-6) = Mon-Sun, (7) Datewear, (8) Teachingwear, (9) Private
+            self.Clothing = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]                    #schedules when she wears what: (0-6) = Mon-Sun, (7) Datewear, (8) Teachingwear, (9) Private
 
             self.action_counter = {}
 
@@ -207,20 +210,20 @@ init python:
             self.Vib = 0
             self.Plug = 0
             self.SEXP = 0
-            self.massage_chart = [0,0,0,0,0,0,0,0,0,0]
+            self.massage_chart = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             self.player_favorite_action = 0
             self.favorite_action = 0
 
 
-            if self.Tag == "Rogue":
+            if self.tag == "Rogue":
                 self.voice = ch_r
 
-                self.Casual1 = [2,"gloves","skirt","mesh_top","spiked_collar","tank","black_panties",0,0,"tights",0]
-                self.Casual2 = [2,"gloves","pants","pink_top",0,"buttoned_tank","black_panties",0,0,0,0]
-                self.Gym = [0,"gloves",0,"hoodie",0,"sports_bra","shorts",0,0,0,10]
-                self.sleepwear = [0,0,0,0,0,"tank","green_panties",0,0,0,20]
-                self.Swim = [0,0,0,"hoodie",0,"bikini_top","bikini_bottoms",0,0,0,0]
-                self.Costume = [2,"gloves","skirt",0,0,"tube_top","black_panties","sweater","cosplay",0,0]
+                self.Casual1 = [2,"gloves", "skirt", "mesh_top", "spiked_collar", "tank", "black_panties", 0, 0, "tights", 0]
+                self.Casual2 = [2,"gloves", "pants", "pink_top", 0, "buttoned_tank", "black_panties", 0, 0, 0, 0]
+                self.Gym = [0, "gloves", 0, "hoodie", 0, "sports_bra", "shorts", 0, 0, 0,10]
+                self.sleepwear = [0, 0, 0, 0, 0, "tank", "green_panties", 0, 0, 0,20]
+                self.Swim = [0, 0, 0, "hoodie", 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+                self.Costume = [2,"gloves", "skirt", 0, 0, "tube_top", "black_panties", "sweater", "cosplay", 0, 0]
 
 
 
@@ -230,28 +233,28 @@ init python:
                 self.LikeKitty = 600
                 self.LikeEmma = 500
                 self.LikeLaura = 500
-                self.Schedule = [["bg_rogue","bg_classroom","bg_dangerroom","bg_rogue"],
-                                        ["bg_classroom","bg_dangerroom","bg_rogue","bg_rogue"],
-                                        ["bg_rogue","bg_classroom","bg_dangerroom","bg_rogue"],
-                                        ["bg_classroom","bg_dangerroom","bg_rogue","bg_rogue"],
-                                        ["bg_rogue","bg_classroom","bg_dangerroom","bg_rogue"],
-                                        ["bg_dangerroom","bg_pool","bg_rogue","bg_rogue"],
-                                        ["bg_dangerroom","bg_pool","bg_rogue","bg_rogue"],
+                self.Schedule = [["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
+                                        ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
+                                        ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
+                                        ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
+                                        ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
+                                        ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"],
+                                        ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"],
                                         ]
                 self.SexKitty = 0
                 self.SexEmma = 0
                 self.SexLaura = 0
                 self.history = ["met"]
-                self.massage_chart = ["shoulders","arms","arms","hands","hands","back","hips","back","breasts","breasts"]
-            elif self.Tag == "Kitty":
+                self.massage_chart = ["shoulders", "arms", "arms", "hands", "hands", "back", "hips", "back", "breasts", "breasts"]
+            elif self.tag == "Kitty":
                 self.voice = ch_k
 
-                self.Casual1 = [2,0,"capris","pink_top","gold_necklace","cami","green_panties",0,0,0,0]
-                self.Casual2 = [2,0,"black jeans","red_shirt","star_necklace","bra","green_panties",0,0,0,0]
-                self.Gym = [0,0,"shorts",0,0,"sports_bra","green_panties",0,0,0,10]
-                self.sleepwear = [0,0,"shorts",0,0,"cami","green_panties",0,0,0,20]
-                self.Swim = [0,0,"blue_skirt",0,0,"bikini_top","bikini_bottoms",0,0,0,0]
-                self.Costume = [2,0,"dress","jacket","flower_necklace","dress","lace_panties",0,0,0,0]
+                self.Casual1 = [2,0, "capris", "pink_top", "gold_necklace", "cami", "green_panties", 0, 0, 0, 0]
+                self.Casual2 = [2,0, "black jeans", "red_shirt", "star_necklace", "bra", "green_panties", 0, 0, 0, 0]
+                self.Gym = [0, 0, "shorts", 0, 0, "sports_bra", "green_panties", 0, 0, 0,10]
+                self.sleepwear = [0, 0, "shorts", 0, 0, "cami", "green_panties", 0, 0, 0,20]
+                self.Swim = [0, 0, "blue_skirt", 0, 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+                self.Costume = [2,0, "dress", "jacket", "flower_necklace", "dress", "lace_panties", 0, 0, 0, 0]
                 self.home = "bg_kitty"
                 self.hair = "evo"
                 self.LikeRogue = 600
@@ -259,56 +262,56 @@ init python:
                 self.LikeLaura = 500
                 self.like = ", like, "
                 self.Like = "Like, "
-                self.Schedule = [["bg_classroom","bg_dangerroom","bg_kitty","bg_kitty"],
-                                        ["bg_classroom","bg_pool","bg_kitty","bg_kitty"],
-                                        ["bg_classroom","bg_dangerroom","bg_kitty","bg_kitty"],
-                                        ["bg_classroom","bg_pool","bg_kitty","bg_kitty"],
-                                        ["bg_classroom","bg_dangerroom","bg_kitty","bg_kitty"],
-                                        ["bg_campus","bg_dangerroom","bg_kitty","bg_kitty"],
-                                        ["bg_campus","bg_dangerroom","bg_kitty","bg_kitty"],
+                self.Schedule = [["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                                        ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
+                                        ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                                        ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
+                                        ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                                        ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                                        ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"],
                                         ]
                 self.SexRogue = 0
                 self.SexEmma = 0
                 self.SexLaura = 0
-                self.massage_chart = ["shoulders","back","hips","thighs","calves","feet","feet","hips","ass","pussy"]
-            elif self.Tag == "Emma":
+                self.massage_chart = ["shoulders", "back", "hips", "thighs", "calves", "feet", "feet", "hips", "ass", "pussy"]
+            elif self.tag == "Emma":
                 self.voice = ch_e
 
-                self.Casual1 = [2,0,"pants","jacket","choker","corset","white_panties",0,0,0,0]
-                self.Casual2 = [2,"gloves","pants",0,"choker","corset","white_panties",0,0,0,5]
-                self.Gym = [0,0,0,0,0,"sports_bra","sports_panties",0,0,0,10]
-                self.sleepwear = [0,0,0,0,0,"corset","white_panties",0,0,0,25]
-                self.Swim = [0,0,0,0,0,"bikini_top","bikini_bottoms",0,0,0,0]
-                self.Costume =  [2,"gloves","dress","dress","choker",0,"lace_panties",0,"hat","stockings_and_garterbelt",0]
+                self.Casual1 = [2,0, "pants", "jacket", "choker", "corset", "white_panties", 0, 0, 0, 0]
+                self.Casual2 = [2,"gloves", "pants", 0, "choker", "corset", "white_panties", 0, 0, 0,5]
+                self.Gym = [0, 0, 0, 0, 0, "sports_bra", "sports_panties", 0, 0, 0,10]
+                self.sleepwear = [0, 0, 0, 0, 0, "corset", "white_panties", 0, 0, 0,25]
+                self.Swim = [0, 0, 0, 0, 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+                self.Costume =  [2,"gloves", "dress", "dress", "choker", 0, "lace_panties", 0, "hat", "stockings_and_garterbelt", 0]
                 self.home = "bg_emma"
                 self.hair = "wavy"
                 self.pubes = 0
                 self.LikeRogue = 500
                 self.LikeKitty = 500
                 self.LikeLaura = 500
-                self.Schedule = [["bg_teacher","bg_teacher","bg_classroom","bg_emma"],
-                                        ["bg_teacher","bg_teacher","bg_dangerroom","bg_emma"],
-                                        ["bg_teacher","bg_teacher","bg_classroom","bg_emma"],
-                                        ["bg_teacher","bg_teacher","bg_dangerroom","bg_emma"],
-                                        ["bg_teacher","bg_teacher","bg_classroom","bg_emma"],
-                                        ["bg_pool","bg_pool","bg_emma","bg_emma"],
-                                        ["bg_pool","bg_pool","bg_emma","bg_emma"],
+                self.Schedule = [["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
+                                        ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
+                                        ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
+                                        ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
+                                        ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
+                                        ["bg_pool", "bg_pool", "bg_emma", "bg_emma"],
+                                        ["bg_pool", "bg_pool", "bg_emma", "bg_emma"],
                                         ]
                 self.SexRogue = 0
                 self.SexKitty = 0
                 self.SexLaura = 0
                 self.used_to_anal = 2
-                self.massage_chart = ["shoulders","neck","neck","back","hips","ass","ass","back","breasts","breasts"]
+                self.massage_chart = ["shoulders", "neck", "neck", "back", "hips", "ass", "ass", "back", "breasts", "breasts"]
 
-            elif self.Tag == "Laura":
+            elif self.tag == "Laura":
                 self.voice = ch_l
 
-                self.Casual1 = [2,"wrists","leather_pants",0,"leash_choker","leather_bra","black_panties",0,0,0,0]
-                self.Casual2 = [2,0,"skirt","jacket","leash_choker","leather_bra","black_panties",0,0,0,0]
-                self.Gym = [2,"wrists","leather_pants",0,0,"leather_bra","black_panties",0,0,0,0]
-                self.sleepwear = [0,0,0,0,0,"leather_bra","leather_panties",0,0,0,20]
-                self.Swim = [0,0,0,0,0,"bikini_top","bikini_bottoms",0,0,0,0]
-                self.Costume = [2,"gloves","other_skirt",0,0,"white_tank","black_panties","suspenders",0,"black stockings",0]
+                self.Casual1 = [2,"wrists", "leather_pants", 0, "leash_choker", "leather_bra", "black_panties", 0, 0, 0, 0]
+                self.Casual2 = [2,0, "skirt", "jacket", "leash_choker", "leather_bra", "black_panties", 0, 0, 0, 0]
+                self.Gym = [2,"wrists", "leather_pants", 0, 0, "leather_bra", "black_panties", 0, 0, 0, 0]
+                self.sleepwear = [0, 0, 0, 0, 0, "leather_bra", "leather_panties", 0, 0, 0,20]
+                self.Swim = [0, 0, 0, 0, 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+                self.Costume = [2,"gloves", "other_skirt", 0, 0, "white_tank", "black_panties", "suspenders", 0, "black stockings", 0]
                 self.home = "bg_laura"
                 self.hair = "long"
                 self.LikeRogue = 500
@@ -316,32 +319,32 @@ init python:
                 self.LikeEmma = 500
                 self.ScentTimer = 0
                 self.Claws = 0
-                self.Schedule = [["bg_pool","bg_classroom","bg_dangerroom","bg_laura"],
-                                        ["bg_dangerroom","bg_classroom","bg_campus","bg_laura"],
-                                        ["bg_pool","bg_classroom","bg_dangerroom","bg_laura"],
-                                        ["bg_dangerroom","bg_classroom","bg_campus","bg_laura"],
-                                        ["bg_pool","bg_classroom","bg_dangerroom","bg_laura"],
-                                        ["bg_pool","bg_laura","bg_dangerroom","bg_laura"],
-                                        ["bg_pool","bg_laura","bg_dangerroom","bg_laura"],
+                self.Schedule = [["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
+                                        ["bg_dangerroom", "bg_classroom", "bg_campus", "bg_laura"],
+                                        ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
+                                        ["bg_dangerroom", "bg_classroom", "bg_campus", "bg_laura"],
+                                        ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
+                                        ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"],
+                                        ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"],
                                         ]
                 self.SexRogue = 0
                 self.SexKitty = 0
                 self.SexEmma = 0
                 self.used_to_anal = 2
-                self.massage_chart = ["shoulders","back","arms","hips","thighs","calves","ass","ass","pussy","pussy"]
+                self.massage_chart = ["shoulders", "back", "arms", "hips", "thighs", "calves", "ass", "ass", "pussy", "pussy"]
 
-            elif self.Tag == "Jean":
+            elif self.tag == "Jean":
                 self.voice = ch_j
 
                 self.StatStore = 0
                 self.IX = 500
 
-                self.Casual1 = [2,0,"pants","pink_shirt",0,"green_bra","green_panties",0,0,0,0]
-                self.Casual2 = [2,0,"skirt","green_shirt",0,"green_bra","green_panties",0,0,0,0]
-                self.Gym = [0,0,"yoga_pants",0,0,"sports_bra","green_panties",0,0,0,0]
-                self.sleepwear = [0,0,0,"pink_shirt",0,"green_bra","green_panties",0,0,0,0]
-                self.Swim = [0,0,0,0,0,"bikini_top","bikini_bottoms",0,0,0,0]
-                self.Costume =  [2,0,"shorts","yellow_shirt",0,"green_bra","green_panties","suspenders","pony",0,0]
+                self.Casual1 = [2,0, "pants", "pink_shirt", 0, "green_bra", "green_panties", 0, 0, 0, 0]
+                self.Casual2 = [2,0, "skirt", "green_shirt", 0, "green_bra", "green_panties", 0, 0, 0, 0]
+                self.Gym = [0, 0, "yoga_pants", 0, 0, "sports_bra", "green_panties", 0, 0, 0, 0]
+                self.sleepwear = [0, 0, 0, "pink_shirt", 0, "green_bra", "green_panties", 0, 0, 0, 0]
+                self.Swim = [0, 0, 0, 0, 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+                self.Costume =  [2,0, "shorts", "yellow_shirt", 0, "green_bra", "green_panties", "suspenders", "pony", 0, 0]
                 self.home = "bg_jean"
                 self.hair = "short"
 
@@ -370,26 +373,26 @@ init python:
                 self.LikeSEmma = 0
                 self.LikeSLaura = 0
 
-                self.Schedule = [["bg_classroom","bg_classroom","bg_dangerroom","bg_jean"],
-                                        ["bg_jean","bg_classroom","bg_jean","bg_jean"],
-                                        ["bg_jean","bg_classroom","bg_dangerroom","bg_jean"],
-                                        ["bg_classroom","bg_classroom","bg_jean","bg_jean"],
-                                        ["bg_jean","bg_classroom","bg_dangerroom","bg_jean"],
-                                        ["bg_dangerroom","bg_campus","bg_pool","bg_jean"],
-                                        ["bg_dangerroom","bg_campus","bg_pool","bg_jean"],
+                self.Schedule = [["bg_classroom", "bg_classroom", "bg_dangerroom", "bg_jean"],
+                                        ["bg_jean", "bg_classroom", "bg_jean", "bg_jean"],
+                                        ["bg_jean", "bg_classroom", "bg_dangerroom", "bg_jean"],
+                                        ["bg_classroom", "bg_classroom", "bg_jean", "bg_jean"],
+                                        ["bg_jean", "bg_classroom", "bg_dangerroom", "bg_jean"],
+                                        ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"],
+                                        ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"],
                                         ]
 
-                self.massage_chart = ["back","shoulders","neck","neck","back","hips","ass","ass","pussy","pussy"]
+                self.massage_chart = ["back", "shoulders", "neck", "neck", "back", "hips", "ass", "ass", "pussy", "pussy"]
 
-            elif self.Tag == "Storm":
+            elif self.tag == "Storm":
                 self.voice = ch_s
 
-                self.Casual1 = [2,0,"skirt","white_shirt",0,"black_bra","white_panties",0,0,0,0]
-                self.Casual2 = [2,0,"pants","jacket",0,"sports_bra","white_panties",0,0,0,0]
-                self.Gym = [0,0,"yoga_pants",0,0,"sports_bra","white_panties",0,0,0,10]
-                self.sleepwear = [0,0,0,"white_shirt",0,0,"white_panties",0,0,0,25]
-                self.Swim = [0,0,0,0,0,"bikini_top","bikini_bottoms",0,0,0,0]
-                self.Costume = [2,0,0,0,"ring_necklace","cos_bra","cos_panties","rings","short",0,0]
+                self.Casual1 = [2,0, "skirt", "white_shirt", 0, "black_bra", "white_panties", 0, 0, 0, 0]
+                self.Casual2 = [2,0, "pants", "jacket", 0, "sports_bra", "white_panties", 0, 0, 0, 0]
+                self.Gym = [0, 0, "yoga_pants", 0, 0, "sports_bra", "white_panties", 0, 0, 0,10]
+                self.sleepwear = [0, 0, 0, "white_shirt", 0, 0, "white_panties", 0, 0, 0,25]
+                self.Swim = [0, 0, 0, 0, 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+                self.Costume = [2,0, 0, 0, "ring_necklace", "cos_bra", "cos_panties", "rings", "short", 0, 0]
                 self.home = "bg_storm"
                 self.hair = "long"
 
@@ -417,26 +420,26 @@ init python:
                 LauraX.SexStorm = 0
                 JeanX.SexStorm = 0
 
-                self.Schedule = [["bg_storm","bg_dangerroom","bg_dangerroom","bg_storm"],
-                                        ["bg_teacher","bg_teacher","bg_classroom","bg_storm"],
-                                        ["bg_storm","bg_dangerroom","bg_dangerroom","bg_storm"],
-                                        ["bg_teacher","bg_teacher","bg_classroom","bg_storm"],
-                                        ["bg_pool","bg_campus","bg_classroom","bg_storm"],
-                                        ["bg_storm","bg_campus","bg_storm","bg_pool"],
-                                        ["bg_storm","bg_campus","bg_storm","bg_pool"],
+                self.Schedule = [["bg_storm", "bg_dangerroom", "bg_dangerroom", "bg_storm"],
+                                        ["bg_teacher", "bg_teacher", "bg_classroom", "bg_storm"],
+                                        ["bg_storm", "bg_dangerroom", "bg_dangerroom", "bg_storm"],
+                                        ["bg_teacher", "bg_teacher", "bg_classroom", "bg_storm"],
+                                        ["bg_pool", "bg_campus", "bg_classroom", "bg_storm"],
+                                        ["bg_storm", "bg_campus", "bg_storm", "bg_pool"],
+                                        ["bg_storm", "bg_campus", "bg_storm", "bg_pool"],
                                         ]
 
-                self.massage_chart = ["feet","calves","thighs","hips","ass","ass","pussy","ass","pussy","pussy"]
+                self.massage_chart = ["feet", "calves", "thighs", "hips", "ass", "ass", "pussy", "ass", "pussy", "pussy"]
 
-            elif self.Tag == "Jubes":
+            elif self.tag == "Jubes":
                 self.voice = ch_v
 
-                self.Casual1 = [2,0,"shorts","red_shirt",0,"sports_bra","blue_panties","jacket",0,0,0]
-                self.Casual2 = [2,0,"pants","black_shirt",0,"sports_bra","blue_panties","jacket",0,0,0]
-                self.Gym = [0,0,"pants",0,0,"sports_bra","blue_panties",0,0,0,10]
-                self.sleepwear = [0,0,0,0,0,"sports_bra","blue_panties",0,0,0,25]
-                self.Swim = [0,0,0,0,0,"bikini_top","bikini_bottoms",0,0,0,0]
-                self.Costume = [0,0,"pants","black_shirt",0,"sports_bra","blue_panties","jacket",0,0,0]
+                self.Casual1 = [2,0, "shorts", "red_shirt", 0, "sports_bra", "blue_panties", "jacket", 0, 0, 0]
+                self.Casual2 = [2,0, "pants", "black_shirt", 0, "sports_bra", "blue_panties", "jacket", 0, 0, 0]
+                self.Gym = [0, 0, "pants", 0, 0, "sports_bra", "blue_panties", 0, 0, 0,10]
+                self.sleepwear = [0, 0, 0, 0, 0, "sports_bra", "blue_panties", 0, 0, 0,25]
+                self.Swim = [0, 0, 0, 0, 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+                self.Costume = [0, 0, "pants", "black_shirt", 0, "sports_bra", "blue_panties", "jacket", 0, 0, 0]
                 self.home = "bg_jubes"
                 self.hair = "shades"
 
@@ -468,16 +471,16 @@ init python:
                 JeanX.SexJubes = 0
                 StormX.SexJubes = 0
 
-                self.Schedule = [["bg_jubes","bg_dangerroom","bg_dangerroom","bg_jubes"],
-                                        ["bg_classroom","bg_classroom","bg_jubes","bg_jubes"],
-                                        ["bg_jubes","bg_dangerroom","bg_dangerroom","bg_jubes"],
-                                        ["bg_dangerroom","bg_dangerroom","bg_jubes","bg_jubes"],
-                                        ["bg_pool","bg_campus","bg_campus","bg_jubes"],
-                                        ["bg_jubes","bg_campus","bg_jubes","bg_pool"],
-                                        ["bg_jubes","bg_campus","bg_jubes","bg_pool"],
+                self.Schedule = [["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
+                                        ["bg_classroom", "bg_classroom", "bg_jubes", "bg_jubes"],
+                                        ["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
+                                        ["bg_dangerroom", "bg_dangerroom", "bg_jubes", "bg_jubes"],
+                                        ["bg_pool", "bg_campus", "bg_campus", "bg_jubes"],
+                                        ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"],
+                                        ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"],
                                         ]
 
-                self.massage_chart = ["neck","shoulders","calves","feet","neck","shoulders","calves","feet","pussy","pussy"]
+                self.massage_chart = ["neck", "shoulders", "calves", "feet", "neck", "shoulders", "calves", "feet", "pussy", "pussy"]
 
             self.change_outfit(Changed=1)
 
@@ -499,40 +502,40 @@ init python:
                 self.player_petname = "young man"
                 self.player_petnames = ["young man",Player.name]
                 self.petname = EmmaX.name
-                self.petnames = ["Emma","Ms. Frost"]
+                self.petnames = ["Emma", "Ms. Frost"]
             elif self == LauraX:
                 self.player_petname = "guy"
                 self.player_petnames = ["guy",Player.name]
                 self.petname = "Laura"
-                self.petnames = ["Laura","X-23"]
-            elif self.Tag == "Jean":
+                self.petnames = ["Laura", "X-23"]
+            elif self.tag == "Jean":
                 self.player_petname = "um. . ."
                 self.player_petnames = ["um. . ."]
                 self.petname = JeanX.name
                 self.petnames = ["Jean"]
-            elif self.Tag == "Storm":
+            elif self.tag == "Storm":
                 self.player_petname = "Player.name"
                 self.player_petnames = ["Player.name"]
                 self.petname = StormX.name
-                self.petnames = ["Storm","Ororo","Ms. Munroe"]
-            elif self.Tag == "Jubes":
+                self.petnames = ["Storm", "Ororo", "Ms. Munroe"]
+            elif self.tag == "Jubes":
                 self.player_petname = "Bro"
-                self.player_petnames = ["Bro","Player.name"]
+                self.player_petnames = ["Bro", "Player.name"]
                 self.petname = JubesX.name
-                self.petnames = ["Jubes","Jubilee"]
+                self.petnames = ["Jubes", "Jubilee"]
 
             self.change_outfit(6,Changed=1)
             global all_Girls
             if self not in all_Girls:
                 all_Girls.append(self)
-            Shop_Inventory.extend(["DL","G","A"])
+            Shop_Inventory.extend(["DL", "G", "A"])
             PersonalRooms.append(self.home)
 
         def SluttyClothes(self):
 
 
             if self == RogueX:
-                if "stockings_and_garterbelt" in self.Inventory:
+                if "stockings_and_garterbelt" in self.inventory:
                     self.Casual1[9] = "stockings_and_garterbelt"
                 elif self.inhibition >= 300:
                     self.Casual1[9] = "stockings"
@@ -551,24 +554,24 @@ init python:
 
                     self.Swim[2] = 0
             elif self == LauraX:
-                if self.inhibition >= 400 and self.Casual2[5] == "leather_bra" and "corset" in self.Inventory:
+                if self.inhibition >= 400 and self.Casual2[5] == "leather_bra" and "corset" in self.inventory:
                     self.Casual2[5] = "corset"
-                if self.inhibition >= 600 and "lace_panties" in self.Inventory:
+                if self.inhibition >= 600 and "lace_panties" in self.inventory:
                     self.Casual2[6] = "lace_panties"
-                if self.inhibition >= 600 and "stockings_and_garterbelt" in self.Inventory:
+                if self.inhibition >= 600 and "stockings_and_garterbelt" in self.inventory:
                     self.Casual2[9] = "stockings_and_garterbelt"
 
             elif self == JeanX:
-                if "stockings_and_garterbelt" in self.Inventory:
+                if "stockings_and_garterbelt" in self.inventory:
                     self.Casual1[9] = "stockings_and_garterbelt"
                 elif self.love >= 300:
                     self.Casual1[9] = "stockings"
-                if self.inhibition >= 600 and "bikini_top" in self.Inventory:
+                if self.inhibition >= 600 and "bikini_top" in self.inventory:
                     self.Gym[5] = "bikini_top" if self.Gym[0] == 1 else self.Gym[5]
-                if self.inhibition >= 600 and "lace_bra" in self.Inventory:
+                if self.inhibition >= 600 and "lace_bra" in self.inventory:
                     self.Casual1[5] = "lace_bra"
                     self.Casual2[5] = "lace_bra"
-                if self.inhibition >= 600 and "lace_panties" in self.Inventory:
+                if self.inhibition >= 600 and "lace_panties" in self.inventory:
                     self.Casual1[6] = "lace_panties"
                     self.Casual2[6] = "lace_panties"
             elif self == StormX:
@@ -576,19 +579,19 @@ init python:
                     self.Casual2[5] = "tube_top"
                 if self.inhibition >= 400 and self.Casual2[5] == "white_panties":
                     self.Casual2[5] = "black_panties"
-                if self.inhibition >= 600 and "lace_panties" in self.Inventory:
+                if self.inhibition >= 600 and "lace_panties" in self.inventory:
                     self.Casual2[6] = "lace_panties"
             elif self == JubesX:
                 if self.inhibition >= 500 and self.Casual1[3] == "red_shirt":
                     self.Casual1[3] = "tube_top"
                     self.Casual1[5] = 0
-                if self.inhibition >= 600 and "lace_panties" in self.Inventory:
+                if self.inhibition >= 600 and "lace_panties" in self.inventory:
                     self.Casual2[6] = "lace_panties"
-                if self.inhibition >= 600 and "stockings_and_garterbelt" in self.Inventory:
+                if self.inhibition >= 600 and "stockings_and_garterbelt" in self.inventory:
                     self.Casual2[9] = "stockings_and_garterbelt"
             return
 
-        def AddWord(self,Only=0,Recent=0,Daily=0,Trait=0,History=0):
+        def add_word(self,Only=0,Recent=0,Daily=0,Trait=0,History=0):
 
 
 
@@ -596,13 +599,13 @@ init python:
                 self.recent_history.append(Recent)
             if (Daily and not Only) or (Daily and Daily not in self.daily_history):
                 self.daily_history.append(Daily)
-            if (Trait and not Only) or (Trait and Trait not in self.Traits):
-                self.Traits.append(Trait)
+            if (Trait and not Only) or (Trait and Trait not in self.traits):
+                self.traits.append(Trait)
             if (History and not Only) or (History and History not in self.history):
                 self.history.append(History)
             return
 
-        def DrainWord(self, Word = "word", Recent = 1, Daily = 1, Traits=0):
+        def drain_word(self, Word = "word", Recent = 1, Daily = 1, Traits=0):
 
 
             if Recent and Word in self.recent_history:
@@ -611,12 +614,12 @@ init python:
             if Daily and Word in self.daily_history:
                 while Word in self.daily_history:
                     self.daily_history.remove(Word)
-            if Traits and Word in self.Traits:
-                while Word in self.Traits:
-                    self.Traits.remove(Word)
+            if Traits and Word in self.traits:
+                while Word in self.traits:
+                    self.traits.remove(Word)
             return
 
-        def change_stat(self, Flavor=0, Check=100, Value=1, Greater=0, Type=0, Alt=[[],0,0], Overflow=0, BStat=0, XPOS = 0.75):
+        def change_stat(self, flavor=0, Check=100, Value=1, Greater=0, Type=0, Alt=[[],0, 0], Overflow=0, BStat=0, x_position = 0.75):
 
 
 
@@ -630,16 +633,16 @@ init python:
                 Check = Alt[1] if Alt[1] else Check
                 Value = Alt[2] if Alt[2] else Value
 
-            if Flavor == "love" or Flavor == "obedience" or Flavor == "inhibition":
+            if flavor == "love" or flavor == "obedience" or flavor == "inhibition":
 
                 Check = Check*10
 
-            Type = getattr(self,Flavor)
+            Type = getattr(self,flavor)
 
             Overflow = self.Chat[4]
-            XPOS = self.sprite_location
+            x_position = self.sprite_location
 
-            if self.Tag == "Jean" and Flavor == "inhibition" and self.IX > 0:
+            if self.tag == "Jean" and flavor == "inhibition" and self.IX > 0:
 
                 Type -= self.IX
 
@@ -658,20 +661,20 @@ init python:
                 else:
                     Value = 0
 
-            if self.Tag == "Jean" and Flavor == "inhibition" and self.IX > 0:
+            if self.tag == "Jean" and flavor == "inhibition" and self.IX > 0:
 
                 Type += self.IX
 
             if Value:
 
 
-                if self.Tag == "Jean" and Value > 0:
-                    if Flavor == "obedience" and self.obedience <= 800 and Check < 800:
+                if self.tag == "Jean" and Value > 0:
+                    if flavor == "obedience" and self.obedience <= 800 and Check < 800:
 
 
                         Value = int(Value/2)
                         Type -= Value
-                    elif Flavor == "inhibition" and self.IX > 0:
+                    elif flavor == "inhibition" and self.IX > 0:
                         if self.Taboo >= 40:
 
                             Value += Value
@@ -685,7 +688,7 @@ init python:
 
                             self.IX -= int(Value/2)
                         self.IX = 0 if self.IX < 0 else self.IX
-                    elif Flavor == "love" and Type >= 500 and self.obedience < 700:
+                    elif flavor == "love" and Type >= 500 and self.obedience < 700:
 
 
 
@@ -701,7 +704,7 @@ init python:
 
                         if Check > self.obedience:
 
-                            Flavor = "obedience"
+                            flavor = "obedience"
                             Value = int(Value/5)
                             Type = self.obedience + Value
                         else:
@@ -710,25 +713,25 @@ init python:
 
 
 
-                if Flavor == "love":
+                if flavor == "love":
                     Color = "#c11b17"
-                elif Flavor == "obedience":
+                elif flavor == "obedience":
                     Color = "#2554c7"
-                elif Flavor == "inhibition":
+                elif flavor == "inhibition":
                     Color = "#FFF380"
-                elif Flavor == "lust":
+                elif flavor == "lust":
                     Color = "#FAAFBE"
-                    CallHolder(Value, Color, XPOS)
-                    if Flavor == "lust" and Type >= 100 and not primary_action:
+                    CallHolder(Value, Color, x_position)
+                    if flavor == "lust" and Type >= 100 and not primary_action:
 
                         renpy.call("Girl_Cumming",self,1)
                         return
                     Type = 100 if Type > 100 else Type
-                    setattr(self,Flavor,Type)
+                    setattr(self,flavor,Type)
                     return
 
                 if Type > 1000:
-                    CallHolder((-(Type-1000-Value)), Color, XPOS)
+                    CallHolder((-(Type-1000-Value)), Color, x_position)
                     if not self.Chat[4]:
 
                         Value = 0
@@ -736,38 +739,38 @@ init python:
 
                         Value = Type - 1000
 
-                        setattr(self,Flavor,1000)
-                        if Flavor == "love":
+                        setattr(self,flavor,1000)
+                        if flavor == "love":
                             if self.Chat[4] == 1:
-                                Flavor = "obedience"
+                                flavor = "obedience"
                             elif self.Chat[4] == 2:
-                                Flavor = "inhibition"
+                                flavor = "inhibition"
                             else:
                                 Value = 0
-                        elif Flavor == "obedience":
+                        elif flavor == "obedience":
                             if self.Chat[4] == 3:
-                                Flavor = "inhibition"
+                                flavor = "inhibition"
                             elif self.Chat[4] == 4:
-                                Flavor = "love"
+                                flavor = "love"
                             else:
                                 Value = 0
-                        elif Flavor == "inhibition":
+                        elif flavor == "inhibition":
                             if self.Chat[4] == 5:
-                                Flavor = "obedience"
+                                flavor = "obedience"
                             elif self.Chat[4] == 6:
-                                Flavor = "love"
+                                flavor = "love"
                             else:
                                 Value = 0
 
-                        Type = getattr(self,Flavor)
+                        Type = getattr(self,flavor)
                         Type += Value
 
-                        if Flavor == "love":
+                        if flavor == "love":
 
                             Color = "#c11b17"
-                        elif Flavor == "obedience":
+                        elif flavor == "obedience":
                             Color = "#2554c7"
-                        elif Flavor == "inhibition":
+                        elif flavor == "inhibition":
                             Color = "#FFF380"
                         else:
                             Color = "#FFFFFF"
@@ -775,13 +778,13 @@ init python:
 
                 if Value:
 
-                    CallHolder(Value, Color, XPOS)
+                    CallHolder(Value, Color, x_position)
 
 
 
             Type = 1000 if Type > 1000 else Type
 
-            setattr(self,Flavor,Type)
+            setattr(self,flavor,Type)
             return
 
 
@@ -1013,7 +1016,7 @@ init python:
 
             if Kissing:
                 self.eyes = "closed"
-                if self.Tag == "Emma":
+                if self.tag == "Emma":
                     self.mouth = "kiss"
                 elif self.action_counter["kiss"] >= 10 and self.inhibition >= 300:
                     self.mouth = "sucking"
@@ -1032,7 +1035,7 @@ init python:
                     self.brows = "sad"
                     self.mouth = "lipbite"
                 elif self.lust >= 50:
-                    if self.Tag == "Emma" or self.Tag == "Laura":
+                    if self.tag == "Emma" or self.tag == "Laura":
                         self.eyes = "squint"
                     else:
                         self.eyes = "sexy"
@@ -1041,18 +1044,18 @@ init python:
                 elif self.lust >= 30:
                     self.eyes = "sexy"
                     self.brows = "normal"
-                    if self.Tag == "Emma" or self.Tag == "Laura":
+                    if self.tag == "Emma" or self.tag == "Laura":
                         self.mouth = "smirk"
                     else:
                         self.mouth = "kiss"
                 else:
                     self.eyes = "sexy"
                     self.brows = "normal"
-                    if self.Tag == "Emma" or self.Tag == "Laura":
+                    if self.tag == "Emma" or self.tag == "Laura":
                         self.mouth = "smirk"
                     else:
                         self.mouth = "normal"
-                if self.Tag == "Laura" and self.lust < 50 and not Extreme and not approval_check(self, 1000):
+                if self.tag == "Laura" and self.lust < 50 and not Extreme and not approval_check(self, 1000):
                     self.eyes = "side"
 
             if Partner == self and second_girl_primary_action in ("eat_pussy", "eat_ass", "blowjob", "suck_breasts"):
@@ -1092,21 +1095,21 @@ init python:
 
                 return
 
-            if self.location not in ("bg_showerroom","bg_pool") or (OutfitTemp not in ("nude","swimwear","towel")):
+            if self.location not in ("bg_showerroom", "bg_pool") or (OutfitTemp not in ("nude", "swimwear", "towel")):
 
                 self.Water = 0
-            if self.Spunk:
+            if self.spunk:
 
                 if "painted" not in self.daily_history or "cleaned" not in self.daily_history:
-                    del self.Spunk[:]
+                    del self.spunk[:]
 
 
-            if self.Upskirt or self.Uptop or self.underwearDown:
+            if self.upskirt or self.top_pulled_up or self.underwear_pulled_down:
                 Undressed = 1
 
-            self.Upskirt = 0
-            self.Uptop = 0
-            self.underwearDown = 0
+            self.upskirt = 0
+            self.top_pulled_up = 0
+            self.underwear_pulled_down = 0
 
             if OutfitTemp == 5:
 
@@ -1132,9 +1135,9 @@ init python:
             elif OutfitTemp == "casual2":
                 HolderOutfit = self.Casual2[:]
             elif OutfitTemp == "nude":
-                HolderOutfit = [0,0,0,0,0,0,0,0,0,0,50]
+                HolderOutfit = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0,50]
             elif OutfitTemp == "towel":
-                HolderOutfit = [0,0,0,"towel",0,0,0,0,0,0,35]
+                HolderOutfit = [0, 0, 0, "towel", 0, 0, 0, 0, 0, 0,35]
             elif OutfitTemp == "custom1":
                 HolderOutfit = self.Custom1[:]
             elif OutfitTemp == "custom2":
@@ -1151,7 +1154,7 @@ init python:
                 HolderOutfit = self.Costume[:]
             elif OutfitTemp == "swimwear":
                 if not self.Swim[0]:
-                    if "bikini_top" not in self.Inventory or "bikini_bottoms" not in self.Inventory:
+                    if "bikini_top" not in self.inventory or "bikini_bottoms" not in self.inventory:
                         self.Outfit = self.OutfitDay
 
                         if "swim" not in self.daily_history:
@@ -1170,7 +1173,7 @@ init python:
                             elif self == JubesX:
                                 ch_v("I haven't picked out a suit yet. . .", interact=True)
                         return 0
-                    elif self == KittyX and "blue_skirt" not in self.Inventory and self.inhibition <= 400:
+                    elif self == KittyX and "blue_skirt" not in self.inventory and self.inhibition <= 400:
                         self.Outfit = self.OutfitDay
                         if "swim" not in self.daily_history:
                             ch_k("I don't know, I do have a suit, but it's a little daring. . .", interact=True)
@@ -1257,13 +1260,13 @@ init python:
 
         def ChestNum(self,Up=1):
 
-            if Up and self.Uptop and self.bra:
+            if Up and self.top_pulled_up and self.bra:
                 return 1
             if self == RogueX:
-                if self.bra in ("tank","buttoned_tank"):
+                if self.bra in ("tank", "buttoned_tank"):
                     return 5
             if self == LauraX:
-                if self.bra in ("leather_bra","white_tank"):
+                if self.bra in ("leather_bra", "white_tank"):
                     return 5
                 elif self.bra == "wolvie_top":
                     return 3
@@ -1290,7 +1293,7 @@ init python:
 
         def OverNum(self,Up=1):
 
-            if Up and self.Uptop and self.top:
+            if Up and self.top_pulled_up and self.top:
                 return 1
             if self == RogueX:
                 if self.top == "mesh_top":
@@ -1302,7 +1305,7 @@ init python:
                 if self.top == "towel":
                     return 0
             if self == JubesX:
-                if Up and self.Uptop and self.accessory:
+                if Up and self.top_pulled_up and self.accessory:
                     return 1
                 if self.accessory == "jacket":
                     return 3
@@ -1333,14 +1336,14 @@ init python:
                 if self.accessory == "shut_jacket":
                     return 5
 
-            if Up and self.Upskirt and self.legs:
+            if Up and self.upskirt and self.legs:
                 return 1
 
             if self == RogueX and self.underwear == "shorts":
                 return 6
             if self.legs == "shorts":
                 return 6
-            if self.legs in ("skirt","blue_skirt","other_skirt","dress"):
+            if self.legs in ("skirt", "blue_skirt", "other_skirt", "dress"):
                 return 5
             if self.legs == "yoga_pants":
                 return 8
@@ -1358,7 +1361,7 @@ init python:
 
         def PantiesNum(self,Up=1):
 
-            if Up and self.underwearDown and self.underwear:
+            if Up and self.underwear_pulled_down and self.underwear:
                 return 1
             if self.underwear == "lace_panties":
                 return 2
@@ -1372,7 +1375,7 @@ init python:
 
         def HoseNum(self,Up=1):
 
-            if Up and self.hose and (self.underwearDown or self.Upskirt):
+            if Up and self.hose and (self.underwear_pulled_down or self.upskirt):
                 return 1
             if self.hose == "stockings":
                 return 1
@@ -1436,14 +1439,14 @@ init python:
 
 
             if not self.SeenChest:
-                if (not self.top and not self.bra) or self.Uptop or Check == 1 or Check == 2:
+                if (not self.top and not self.bra) or self.top_pulled_up or Check == 1 or Check == 2:
                     C += 1
             if not self.SeenPussy:
                 if Check == 1 or Check == 3:
                     C += 1
-                elif not self.legs or self.Upskirt:
+                elif not self.legs or self.upskirt:
 
-                    if self.underwearDown or (self.HoseNum() < 5 and not self.underwear):
+                    if self.underwear_pulled_down or (self.HoseNum() < 5 and not self.underwear):
 
                         C += 1
             return C
@@ -1453,28 +1456,28 @@ init python:
 
         def GirlLikeCheck(self,Chr=0):
 
-            return getattr(self,"Like"+Chr.Tag)
+            return getattr(self,"Like"+Chr.tag)
 
         def GirlLikeUp(self,Chr=0,Value=0,Like=0):
 
-            if "Jeaned" in self.Traits:
+            if "Jeaned" in self.traits:
 
-                Like = getattr(JeanX,"LikeS"+self.Tag)
+                Like = getattr(JeanX,"LikeS"+self.tag)
                 if Like + Value > 1000:
-                    setattr(JeanX,"LikeS"+self.Tag, 1000)
+                    setattr(JeanX,"LikeS"+self.tag, 1000)
                 elif Like + Value < 0:
-                    setattr(JeanX,"LikeS"+self.Tag, 0)
+                    setattr(JeanX,"LikeS"+self.tag, 0)
                 else:
-                    setattr(JeanX,"LikeS"+self.Tag, Value + Like)
+                    setattr(JeanX,"LikeS"+self.tag, Value + Like)
                 return
 
-            Like = getattr(self,"Like"+Chr.Tag)
+            Like = getattr(self,"Like"+Chr.tag)
             if Like + Value > 1000:
-                setattr(self,"Like"+Chr.Tag, 1000)
+                setattr(self,"Like"+Chr.tag, 1000)
             elif Like + Value < 0:
-                setattr(self,"Like"+Chr.Tag, 0)
+                setattr(self,"Like"+Chr.tag, 0)
             else:
-                setattr(self,"Like"+Chr.Tag, Value + Like)
+                setattr(self,"Like"+Chr.tag, Value + Like)
             return
 
         def GLG(self, ChrB = 0, Check=200, Modifier = 1, Auto = 0, Jealousy = 0, Ok = 0, Likes=0):
@@ -1497,14 +1500,14 @@ init python:
 
                 if Auto:
 
-                    setattr(self,"Like"+ChrB.Tag,Likes+Modifier)
+                    setattr(self,"Like"+ChrB.tag,Likes+Modifier)
                     self.change_stat("lust", 200, (int(Modifier/5)))
                     return
 
 
                 if self in Player.Harem:
 
-                    if ChrB not in Player.Harem and "poly " + ChrB.Tag not in self.Traits:
+                    if ChrB not in Player.Harem and "poly " + ChrB.tag not in self.traits:
 
                         Jealousy = 100
             elif Auto:
@@ -1575,7 +1578,7 @@ init python:
 
 
 
-            setattr(self,"Like"+ChrB.Tag,Likes+Modifier)
+            setattr(self,"Like"+ChrB.tag,Likes+Modifier)
 
             return Ok
 
@@ -1593,13 +1596,13 @@ init python:
                 counter = int(self.Taboo/10)
 
 
-            if self.petname in ("girl","boo","bae","baby","sweetie"):
+            if self.petname in ("girl", "boo", "bae", "baby", "sweetie"):
                 if approval_check(self, 500, "L", TabM=1,Alt=[[LauraX],600]):
                     self.change_stat("love", 80, 1)
                 else:
                     self.change_stat("love", 50, -1)
                     return 1
-            elif self.petname in ("sexy","lover","beloved"):
+            elif self.petname in ("sexy", "lover", "beloved"):
                 if approval_check(self, 900, TabM=1,Alt=[[LauraX],1100]):
                     self.change_stat("love", 80, 2)
                     self.change_stat("obedience", 80, 1)
@@ -1726,7 +1729,7 @@ init python:
                     self.change_stat("obedience", 60, 1)
                     self.change_stat("inhibition", 20, -1)
                     return 1
-            elif self.petname in ("baby girl","mommy"):
+            elif self.petname in ("baby girl", "mommy"):
                 if approval_check(self, 1200, TabM=1):
                     self.change_stat("obedience", 80, 1)
                     self.change_stat("obedience", 50, 2)
@@ -1836,24 +1839,24 @@ label EmotionEditor(Chr=0):
                         $ Chr.emotion = "sly"
             "Toggle Mouth Spunk":
 
-                if "mouth" in Chr.Spunk:
-                    $ Chr.Spunk.remove("mouth")
+                if "mouth" in Chr.spunk:
+                    $ Chr.spunk.remove("mouth")
                 else:
-                    $ Chr.Spunk.append("mouth")
+                    $ Chr.spunk.append("mouth")
             "Toggle hand Spunk":
-                if "handjob" in Chr.Spunk:
-                    $ Chr.Spunk.remove("handjob")
+                if "handjob" in Chr.spunk:
+                    $ Chr.spunk.remove("handjob")
                 else:
-                    $ Chr.Spunk.append("handjob")
+                    $ Chr.spunk.append("handjob")
             "Toggle Facial Spunk":
 
-                if "facial" in Chr.Spunk and "hair" not in Chr.Spunk:
-                    $ Chr.Spunk.append("hair")
-                elif "facial" in Chr.Spunk:
-                    $ Chr.Spunk.remove("facial")
-                    $ Chr.Spunk.remove("hair")
+                if "facial" in Chr.spunk and "hair" not in Chr.spunk:
+                    $ Chr.spunk.append("hair")
+                elif "facial" in Chr.spunk:
+                    $ Chr.spunk.remove("facial")
+                    $ Chr.spunk.remove("hair")
                 else:
-                    $ Chr.Spunk.append("facial")
+                    $ Chr.spunk.append("facial")
             "Blush":
 
                 if Chr.blushing == 2:
@@ -1874,11 +1877,11 @@ label WardrobeEditor(Chr=0):
                 while True:
                     menu:
                         "Default":
-                            call expression Chr.Tag + "_Pos_Reset" pass (0)
+                            call expression Chr.tag + "_Pos_Reset" pass (0)
                         "Face":
-                            call expression Chr.Tag + "_Kissing_Launch" pass (0)
+                            call expression Chr.tag + "_Kissing_Launch" pass (0)
                         "Body":
-                            call expression Chr.Tag + "_Pussy_Launch" pass (0)
+                            call expression Chr.tag + "_Pussy_Launch" pass (0)
                         "Face Low":
                             call Storm_Hide
                             show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location)
@@ -1886,31 +1889,31 @@ label WardrobeEditor(Chr=0):
                                 ease 0.5 offset (100,200) zoom 1.5 alpha 1
                         "BJ":
 
-                            if not renpy.showing(Chr.Tag+"_BJ_Animation"):
-                                call expression Chr.Tag + "_BJ_Launch"
+                            if not renpy.showing(Chr.tag+"_BJ_Animation"):
+                                call expression Chr.tag + "_BJ_Launch"
                             else:
-                                call expression Chr.Tag + "_BJ_Reset"
+                                call expression Chr.tag + "_BJ_Reset"
                         "HJ":
-                            if not renpy.showing(Chr.Tag+"_HJ_Animation"):
-                                call expression Chr.Tag + "_HJ_Launch"
+                            if not renpy.showing(Chr.tag+"_HJ_Animation"):
+                                call expression Chr.tag + "_HJ_Launch"
                             else:
-                                call expression Chr.Tag + "_HJ_Reset"
+                                call expression Chr.tag + "_HJ_Reset"
                         "TJ":
-                            if not renpy.showing(Chr.Tag+"_TJ_Animation"):
-                                call expression Chr.Tag + "_TJ_Launch"
+                            if not renpy.showing(Chr.tag+"_TJ_Animation"):
+                                call expression Chr.tag + "_TJ_Launch"
                             else:
-                                call expression Chr.Tag + "_TJ_Reset"
+                                call expression Chr.tag + "_TJ_Reset"
                         "Doggy" if Chr == RogueX:
                             $ Chr.pose = "doggy"
-                            if not renpy.showing(Chr.Tag+"_Doggy"):
-                                call expression Chr.Tag + "_Sex_Launch"
+                            if not renpy.showing(Chr.tag+"_Doggy"):
+                                call expression Chr.tag + "_Sex_Launch"
                             else:
-                                call expression Chr.Tag + "_Sex_Reset"
+                                call expression Chr.tag + "_Sex_Reset"
                         "Sexpose" if Chr != RogueX:
-                            if not renpy.showing(Chr.Tag+"_SexSprite"):
-                                call expression Chr.Tag + "_Sex_Launch"
+                            if not renpy.showing(Chr.tag+"_SexSprite"):
+                                call expression Chr.tag + "_Sex_Launch"
                             else:
-                                call expression Chr.Tag + "_Sex_Reset"
+                                call expression Chr.tag + "_Sex_Reset"
                         "Back":
                             jump Wardrobe_Menu
             "First casual outfit":
@@ -1988,10 +1991,10 @@ label WardrobeEditor(Chr=0):
                             else:
                                 $ Chr.piercings = "ring"
                         "Toggle up-top":
-                            if Chr.Uptop:
-                                $ Chr.Uptop = 0
+                            if Chr.top_pulled_up:
+                                $ Chr.top_pulled_up = 0
                             else:
-                                $ Chr.Uptop = 1
+                                $ Chr.top_pulled_up = 1
                         "Toggle Arms":
                             if Chr.ArmPose == 1:
                                 $ Chr.ArmPose = 2
@@ -2041,10 +2044,10 @@ label WardrobeEditor(Chr=0):
                         "Add lace corset":
                             $ Chr.bra = "lace corset"
                         "Toggle up-top":
-                            if Chr.Uptop:
-                                $ Chr.Uptop = 0
+                            if Chr.top_pulled_up:
+                                $ Chr.top_pulled_up = 0
                             else:
-                                $ Chr.Uptop = 1
+                                $ Chr.top_pulled_up = 1
                         "Toggle Piercings":
                             if Chr.piercings == "ring":
                                 $ Chr.piercings = "barbell"
@@ -2089,15 +2092,15 @@ label WardrobeEditor(Chr=0):
                         "Boots" if Chr == EmmaX:
                             $ EmmaX.accessory = "thigh boots" if EmmaX.accessory != "thigh boots" else 0
                         "Toggle upskirt":
-                            if Chr.Upskirt:
-                                $ Chr.Upskirt = 0
+                            if Chr.upskirt:
+                                $ Chr.upskirt = 0
                             else:
-                                $ Chr.Upskirt = 1
+                                $ Chr.upskirt = 1
                         "pull down-up_panties":
-                            if Chr.underwearDown:
-                                $ Chr.underwearDown = 0
+                            if Chr.underwear_pulled_down:
+                                $ Chr.underwear_pulled_down = 0
                             else:
-                                $ Chr.underwearDown = 1
+                                $ Chr.underwear_pulled_down = 1
                         "Toggle Pierce":
                             if Chr.piercings == "ring":
                                 $ Chr.piercings = "barbell"
@@ -2173,10 +2176,10 @@ label WardrobeEditor(Chr=0):
                             else:
                                 $ Chr.piercings = "ring"
                         "pull down-up_panties":
-                            if Chr.underwearDown:
-                                $ Chr.underwearDown = 0
+                            if Chr.underwear_pulled_down:
+                                $ Chr.underwear_pulled_down = 0
                             else:
-                                $ Chr.underwearDown = 1
+                                $ Chr.underwear_pulled_down = 1
                         "Toggle Wetness":
                             if not Chr.Wet:
                                 $ Chr.Wet = 1
@@ -2310,50 +2313,50 @@ label WardrobeEditor(Chr=0):
                         "Spunk Level":
                             menu:
                                 "Mouth":
-                                    if "mouth" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("mouth")
+                                    if "mouth" in Chr.spunk:
+                                        $ Chr.spunk.remove("mouth")
                                     else:
-                                        $ Chr.Spunk.append("mouth")
+                                        $ Chr.spunk.append("mouth")
                                 "Chin":
-                                    if "chin" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("chin")
+                                    if "chin" in Chr.spunk:
+                                        $ Chr.spunk.remove("chin")
                                     else:
-                                        $ Chr.Spunk.append("chin")
+                                        $ Chr.spunk.append("chin")
                                 "Facial":
-                                    if "facial" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("facial")
+                                    if "facial" in Chr.spunk:
+                                        $ Chr.spunk.remove("facial")
                                     else:
-                                        $ Chr.Spunk.append("facial")
+                                        $ Chr.spunk.append("facial")
                                 "Hair":
-                                    if "hair" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("hair")
+                                    if "hair" in Chr.spunk:
+                                        $ Chr.spunk.remove("hair")
                                     else:
-                                        $ Chr.Spunk.append("hair")
+                                        $ Chr.spunk.append("hair")
                                 "Tits":
-                                    if "tits" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("tits")
+                                    if "tits" in Chr.spunk:
+                                        $ Chr.spunk.remove("tits")
                                     else:
-                                        $ Chr.Spunk.append("tits")
+                                        $ Chr.spunk.append("tits")
                                 "Belly":
-                                    if "belly" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("belly")
+                                    if "belly" in Chr.spunk:
+                                        $ Chr.spunk.remove("belly")
                                     else:
-                                        $ Chr.Spunk.append("belly")
+                                        $ Chr.spunk.append("belly")
                                 "Back":
-                                    if "back" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("back")
+                                    if "back" in Chr.spunk:
+                                        $ Chr.spunk.remove("back")
                                     else:
-                                        $ Chr.Spunk.append("back")
+                                        $ Chr.spunk.append("back")
                                 "Pussy":
-                                    if "in" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("in")
+                                    if "in" in Chr.spunk:
+                                        $ Chr.spunk.remove("in")
                                     else:
-                                        $ Chr.Spunk.append("in")
+                                        $ Chr.spunk.append("in")
                                 "Ass":
-                                    if "anal" in Chr.Spunk:
-                                        $ Chr.Spunk.remove("anal")
+                                    if "anal" in Chr.spunk:
+                                        $ Chr.spunk.remove("anal")
                                     else:
-                                        $ Chr.Spunk.append("anal")
+                                        $ Chr.spunk.append("anal")
                                 "Return":
                                     pass
                         "Toggle Pierce":
@@ -2385,7 +2388,7 @@ label StatHacks(Chr=0, counter=0):
                     "Daily Actions":
                         "[Chr.daily_history]"
                     "Traits":
-                        "[Chr.Traits]"
+                        "[Chr.traits]"
                     "History":
                         "[Chr.history]"
             "Gwen's face" if False:
@@ -2559,94 +2562,94 @@ label Emergency_Clothing_Reset:
     menu:
         "Do you want to continue?"
         "Yes":
-            $ RogueX.Custom1 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ RogueX.Custom2 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ RogueX.Custom3 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ RogueX.Casual1 = [2,"gloves","skirt","mesh_top","spiked_collar","tank","black_panties",0,0,"tights",0]
-            $ RogueX.Casual2 = [2,"gloves","pants","pink_top","spiked_collar","buttoned_tank","black_panties",0,0,0,0]
-            $ RogueX.Gym = [0,"gloves",0,"hoodie",0,"sports_bra","shorts",0,0,0,0]
-            $ RogueX.sleepwear = [0,0,0,0,0,"tank","green_panties",0,0,0,0]
-            $ RogueX.Swim = [0,0,0,"hoodie",0,"bikini_top","bikini_bottoms",0,0,0,0]
-            $ RogueX.Costume = [2,"gloves","skirt",0,0,"tube_top","black_panties","sweater","cosplay",0,0]
-            $ RogueX.Clothing = [0,0,0,0,0,0,0,0,0,0]
+            $ RogueX.Custom1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ RogueX.Custom2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ RogueX.Custom3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ RogueX.Casual1 = [2,"gloves", "skirt", "mesh_top", "spiked_collar", "tank", "black_panties", 0, 0, "tights", 0]
+            $ RogueX.Casual2 = [2,"gloves", "pants", "pink_top", "spiked_collar", "buttoned_tank", "black_panties", 0, 0, 0, 0]
+            $ RogueX.Gym = [0, "gloves", 0, "hoodie", 0, "sports_bra", "shorts", 0, 0, 0, 0]
+            $ RogueX.sleepwear = [0, 0, 0, 0, 0, "tank", "green_panties", 0, 0, 0, 0]
+            $ RogueX.Swim = [0, 0, 0, "hoodie", 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+            $ RogueX.Costume = [2,"gloves", "skirt", 0, 0, "tube_top", "black_panties", "sweater", "cosplay", 0, 0]
+            $ RogueX.Clothing = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             $ RogueX.Outfit = "casual1"
             $ RogueX.OutfitDay = "casual1"
 
-            $ KittyX.Custom1 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ KittyX.Custom2 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ KittyX.Custom3 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ KittyX.Casual1 = [2,0,"capris","pink_top","gold_necklace","cami","green_panties",0,0,0,0]
-            $ KittyX.Casual2 = [2,0,"black jeans","red_shirt",0,"bra","green_panties",0,0,0,0]
-            $ KittyX.Gym = [0,0,"shorts",0,0,"sports_bra","green_panties",0,0,0,0]
-            $ KittyX.sleepwear = [0,0,"shorts",0,0,"cami","green_panties",0,0,0,0]
-            $ KittyX.Swim = [0,0,"blue_skirt",0,0,"bikini_top","bikini_bottoms",0,0,0,0]
-            $ KittyX.Costume = [2,0,"dress","jacket","flower_necklace","dress","lace_panties",0,0,0,0]
-            $ KittyX.Clothing = [0,0,0,0,0,0,0,0,0,0]
+            $ KittyX.Custom1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ KittyX.Custom2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ KittyX.Custom3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ KittyX.Casual1 = [2,0, "capris", "pink_top", "gold_necklace", "cami", "green_panties", 0, 0, 0, 0]
+            $ KittyX.Casual2 = [2,0, "black jeans", "red_shirt", 0, "bra", "green_panties", 0, 0, 0, 0]
+            $ KittyX.Gym = [0, 0, "shorts", 0, 0, "sports_bra", "green_panties", 0, 0, 0, 0]
+            $ KittyX.sleepwear = [0, 0, "shorts", 0, 0, "cami", "green_panties", 0, 0, 0, 0]
+            $ KittyX.Swim = [0, 0, "blue_skirt", 0, 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+            $ KittyX.Costume = [2,0, "dress", "jacket", "flower_necklace", "dress", "lace_panties", 0, 0, 0, 0]
+            $ KittyX.Clothing = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             $ KittyX.Outfit = "casual1"
             $ KittyX.OutfitDay = "casual1"
 
-            $ EmmaX.Custom1 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ EmmaX.Custom2 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ EmmaX.Custom3 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ EmmaX.Casual1 = [2,0,"pants","jacket","choker","corset","white_panties",0,0,0,0]
-            $ EmmaX.Casual2 = [2,"gloves","pants",0,"choker","corset","white_panties",0,0,0,0]
-            $ EmmaX.Gym = [0,0,0,0,0,"sports_bra","sports_panties",0,0,0,0]
-            $ EmmaX.sleepwear = [0,0,0,0,0,"corset","white_panties",0,0,0,0]
-            $ EmmaX.Swim = [0,0,0,0,0,"bikini_top","bikini_bottoms",0,0,0,0]
-            $ EmmaX.Costume =  [2,"gloves","dress","dress","choker",0,"lace_panties",0,"hat","stockings_and_garterbelt",0]
-            $ EmmaX.Clothing = [0,0,0,0,0,0,0,0,0,0]
+            $ EmmaX.Custom1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ EmmaX.Custom2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ EmmaX.Custom3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ EmmaX.Casual1 = [2,0, "pants", "jacket", "choker", "corset", "white_panties", 0, 0, 0, 0]
+            $ EmmaX.Casual2 = [2,"gloves", "pants", 0, "choker", "corset", "white_panties", 0, 0, 0, 0]
+            $ EmmaX.Gym = [0, 0, 0, 0, 0, "sports_bra", "sports_panties", 0, 0, 0, 0]
+            $ EmmaX.sleepwear = [0, 0, 0, 0, 0, "corset", "white_panties", 0, 0, 0, 0]
+            $ EmmaX.Swim = [0, 0, 0, 0, 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+            $ EmmaX.Costume =  [2,"gloves", "dress", "dress", "choker", 0, "lace_panties", 0, "hat", "stockings_and_garterbelt", 0]
+            $ EmmaX.Clothing = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             $ EmmaX.Outfit = "casual1"
             $ EmmaX.OutfitDay = "casual1"
 
-            $ LauraX.Custom1 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ LauraX.Custom2 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ LauraX.Custom3 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ LauraX.Casual1 = [2,"wrists","leather_pants",0,"leash_choker","leather_bra","black_panties",0,0,0,0]
-            $ LauraX.Casual2 = [2,0,"skirt","jacket","leash_choker","leather_bra","black_panties",0,0,0,0]
-            $ LauraX.Gym = [0,"wrists","leather_pants",0,0,"leather_bra","black_panties",0,0,0,0]
-            $ LauraX.sleepwear = [0,0,0,0,0,"leather_bra","leather_panties",0,0,0,0]
-            $ LauraX.Swim = [0,0,0,0,0,"bikini_top","bikini_bottoms",0,0,0,0]
-            $ LauraX.Costume = [2,"gloves","other_skirt",0,0,"white_tank","black_panties","suspenders",0,"black stockings",0]
-            $ LauraX.Clothing = [0,0,0,0,0,0,0,0,0,0]
+            $ LauraX.Custom1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ LauraX.Custom2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ LauraX.Custom3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ LauraX.Casual1 = [2,"wrists", "leather_pants", 0, "leash_choker", "leather_bra", "black_panties", 0, 0, 0, 0]
+            $ LauraX.Casual2 = [2,0, "skirt", "jacket", "leash_choker", "leather_bra", "black_panties", 0, 0, 0, 0]
+            $ LauraX.Gym = [0, "wrists", "leather_pants", 0, 0, "leather_bra", "black_panties", 0, 0, 0, 0]
+            $ LauraX.sleepwear = [0, 0, 0, 0, 0, "leather_bra", "leather_panties", 0, 0, 0, 0]
+            $ LauraX.Swim = [0, 0, 0, 0, 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+            $ LauraX.Costume = [2,"gloves", "other_skirt", 0, 0, "white_tank", "black_panties", "suspenders", 0, "black stockings", 0]
+            $ LauraX.Clothing = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             $ LauraX.Outfit = "casual1"
             $ LauraX.OutfitDay = "casual1"
 
-            $ JeanX.Custom1 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ JeanX.Custom2 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ JeanX.Custom3 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ JeanX.Casual1 = [2,0,"pants","pink_shirt",0,"green_bra","green_panties",0,0,0,0]
-            $ JeanX.Casual2 = [2,0,"skirt","green_shirt",0,"green_bra","green_panties",0,0,0,0]
-            $ JeanX.Gym = [0,0,"yoga_pants",0,0,"sports_bra","green_panties",0,0,0,0]
-            $ JeanX.sleepwear = [0,0,0,"pink_shirt",0,"green_bra","green_panties",0,0,0,0]
-            $ JeanX.Swim = [0,0,0,0,0,"bikini_top","bikini_bottoms",0,0,0,0]
-            $ JeanX.Costume =  [2,0,"shorts","yellow_shirt",0,"green_bra","green_panties","suspenders","pony",0,0]
-            $ JeanX.Clothing = [0,0,0,0,0,0,0,0,0,0]
+            $ JeanX.Custom1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ JeanX.Custom2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ JeanX.Custom3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ JeanX.Casual1 = [2,0, "pants", "pink_shirt", 0, "green_bra", "green_panties", 0, 0, 0, 0]
+            $ JeanX.Casual2 = [2,0, "skirt", "green_shirt", 0, "green_bra", "green_panties", 0, 0, 0, 0]
+            $ JeanX.Gym = [0, 0, "yoga_pants", 0, 0, "sports_bra", "green_panties", 0, 0, 0, 0]
+            $ JeanX.sleepwear = [0, 0, 0, "pink_shirt", 0, "green_bra", "green_panties", 0, 0, 0, 0]
+            $ JeanX.Swim = [0, 0, 0, 0, 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+            $ JeanX.Costume =  [2,0, "shorts", "yellow_shirt", 0, "green_bra", "green_panties", "suspenders", "pony", 0, 0]
+            $ JeanX.Clothing = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             $ JeanX.Outfit = "casual1"
             $ JeanX.OutfitDay = "casual1"
 
-            $ StormX.Custom1 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ StormX.Custom2 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ StormX.Custom3 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ StormX.Casual1 = [2,0,"skirt","white_shirt",0,"black_bra","white_panties",0,0,0,0]
-            $ StormX.Casual2 = [2,0,"pants","jacket",0,"tube_top","white_panties",0,0,0,0]
-            $ StormX.Gym = [0,0,"yoga_pants",0,0,"sports_bra","white_panties",0,0,0,10]
-            $ StormX.sleepwear = [0,0,0,"white_shirt",0,0,"white_panties",0,0,0,25]
-            $ StormX.Swim = [0,0,0,0,0,"bikini_top","bikini_bottoms",0,0,0,0]
-            $ StormX.Costume = [2,0,0,0,"ring_necklace","cos_bra","cos_panties","rings","short",0,0]
-            $ StormX.Clothing = [0,0,0,0,0,0,0,0,0,0]
+            $ StormX.Custom1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ StormX.Custom2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ StormX.Custom3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ StormX.Casual1 = [2,0, "skirt", "white_shirt", 0, "black_bra", "white_panties", 0, 0, 0, 0]
+            $ StormX.Casual2 = [2,0, "pants", "jacket", 0, "tube_top", "white_panties", 0, 0, 0, 0]
+            $ StormX.Gym = [0, 0, "yoga_pants", 0, 0, "sports_bra", "white_panties", 0, 0, 0,10]
+            $ StormX.sleepwear = [0, 0, 0, "white_shirt", 0, 0, "white_panties", 0, 0, 0,25]
+            $ StormX.Swim = [0, 0, 0, 0, 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+            $ StormX.Costume = [2,0, 0, 0, "ring_necklace", "cos_bra", "cos_panties", "rings", "short", 0, 0]
+            $ StormX.Clothing = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             $ StormX.Outfit = "casual1"
             $ StormX.OutfitDay = "casual1"
 
-            $ JubesX.Custom1 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ JubesX.Custom2 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ JubesX.Custom3 = [0,0,0,0,0,0,0,0,0,0,0]
-            $ JubesX.Casual1 = [2,0,"shorts","red_shirt",0,"sports_bra","blue_panties","jacket",0,0,0]
-            $ JubesX.Casual2 = [2,0,"pants","black_shirt",0,"sports_bra","blue_panties","jacket",0,0,0]
-            $ JubesX.Gym = [0,0,"pants",0,0,"sports_bra","blue_panties",0,0,0,10]
-            $ JubesX.sleepwear = [0,0,0,0,0,"sports_bra","blue_panties",0,0,0,25]
-            $ JubesX.Swim = [0,0,0,0,0,"bikini_top","bikini_bottoms",0,0,0,0]
-            $ JubesX.Costume = [0,0,"pants","black_shirt",0,"sports_bra","blue_panties","jacket",0,0,0]
-            $ JubesX.Clothing = [0,0,0,0,0,0,0,0,0,0]
+            $ JubesX.Custom1 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ JubesX.Custom2 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ JubesX.Custom3 = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+            $ JubesX.Casual1 = [2,0, "shorts", "red_shirt", 0, "sports_bra", "blue_panties", "jacket", 0, 0, 0]
+            $ JubesX.Casual2 = [2,0, "pants", "black_shirt", 0, "sports_bra", "blue_panties", "jacket", 0, 0, 0]
+            $ JubesX.Gym = [0, 0, "pants", 0, 0, "sports_bra", "blue_panties", 0, 0, 0,10]
+            $ JubesX.sleepwear = [0, 0, 0, 0, 0, "sports_bra", "blue_panties", 0, 0, 0,25]
+            $ JubesX.Swim = [0, 0, 0, 0, 0, "bikini_top", "bikini_bottoms", 0, 0, 0, 0]
+            $ JubesX.Costume = [0, 0, "pants", "black_shirt", 0, "sports_bra", "blue_panties", "jacket", 0, 0, 0]
+            $ JubesX.Clothing = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
             $ JubesX.Outfit = "casual1"
             $ JubesX.OutfitDay = "casual1"
 
@@ -2758,7 +2761,7 @@ label DrainAll(Word=0, Recent=1, Daily=1, Traits=0):
 
     $ BO = all_Girls[:]
     while BO:
-        $ BO[0].DrainWord(Word,Recent,Daily,Traits)
+        $ BO[0].drain_word(Word,Recent,Daily,Traits)
         $ BO.remove(BO[0])
     return
 
@@ -2956,12 +2959,12 @@ label Clothes_Schedule(Girl=0, counter=0):
 
                 menu:
                     ch_p "You asked me before about your gym clothes?"
-                    "Don't ask before changing into gym clothes" if "no_ask gym" not in Girl.Traits:
+                    "Don't ask before changing into gym clothes" if "no_ask gym" not in Girl.traits:
                         Girl.voice "Sure."
-                        $ Girl.Traits.append("no_ask gym")
-                    "Ask me before changing into gym clothes" if "no_ask gym" in Girl.Traits:
+                        $ Girl.traits.append("no_ask gym")
+                    "Ask me before changing into gym clothes" if "no_ask gym" in Girl.traits:
                         Girl.voice "Sure."
-                        $ Girl.Traits.remove("no_ask gym")
+                        $ Girl.traits.remove("no_ask gym")
                     "Never Mind":
                         pass
 
@@ -2974,12 +2977,12 @@ label Clothes_Schedule(Girl=0, counter=0):
                     Girl.voice "Yeah?"
                 menu:
                     extend ""
-                    "Just put them on without asking me about it." if "comfy" not in Girl.Traits:
+                    "Just put them on without asking me about it." if "comfy" not in Girl.traits:
                         Girl.voice "Sure."
-                        $ Girl.Traits.append("comfy")
-                    "Ask before changing into that." if "comfy" in Girl.Traits:
+                        $ Girl.traits.append("comfy")
+                    "Ask before changing into that." if "comfy" in Girl.traits:
                         Girl.voice "Sure."
-                        $ Girl.Traits.remove("comfy")
+                        $ Girl.traits.remove("comfy")
                     "Never Mind":
                         pass
             "Never mind [[Done]":
@@ -3210,7 +3213,7 @@ label Private_Outfit(Girl=0):
 
 
         return
-    if "comfy" in Girl.recent_history or "comfy" in Girl.Traits or Girl.Outfit == Girl.Clothing[9]:
+    if "comfy" in Girl.recent_history or "comfy" in Girl.traits or Girl.Outfit == Girl.Clothing[9]:
         call AltClothes (Girl, 9)
         $ Girl.change_outfit(Changed=1)
     elif "no_comfy" in Girl.recent_history:
@@ -3335,7 +3338,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
 
     if Custom == 3:
         $ Shame = Girl.Custom1[10]
-        if Girl.Custom1[0] == 2 or "exhibitionist" in Girl.Traits:
+        if Girl.Custom1[0] == 2 or "exhibitionist" in Girl.traits:
             $ Girl.Outfit = "custom1"
             $ Agree = 1
         else:
@@ -3345,7 +3348,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
                 $ Agree = 1
     elif Custom == 5:
         $ Shame = Girl.Custom2[10]
-        if Girl.Custom2[0] == 2 or "exhibitionist" in Girl.Traits:
+        if Girl.Custom2[0] == 2 or "exhibitionist" in Girl.traits:
             $ Girl.Outfit = "custom2"
             $ Agree = 1
         else:
@@ -3355,7 +3358,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
                 $ Agree = 1
     else:
         $ Shame = Girl.Custom3[10]
-        if Girl.Custom3[0] == 2 or "exhibitionist" in Girl.Traits:
+        if Girl.Custom3[0] == 2 or "exhibitionist" in Girl.traits:
             $ Girl.Outfit = "custom3"
             $ Agree = 1
         else:
@@ -3368,7 +3371,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
         if Agree:
 
             $ Girl.Shame = Shame
-            if "exhibitionist" in Girl.Traits:
+            if "exhibitionist" in Girl.traits:
                 ch_r "Ooo, momma likes."
             elif Shame >= 50:
                 ch_r "You realize I'm pretty much naked here, right?"
@@ -3394,7 +3397,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
         if Agree:
 
             $ Girl.Shame = Shame
-            if "exhibitionist" in Girl.Traits:
+            if "exhibitionist" in Girl.traits:
                 ch_k "Hmm, I'm getting excited. . ."
             elif Shame >= 50:
                 ch_k "This is. . . kinda slutty. . . but. . ."
@@ -3420,7 +3423,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
         if Agree:
 
             $ Girl.Shame = Shame
-            if "exhibitionist" in Girl.Traits:
+            if "exhibitionist" in Girl.traits:
                 ch_e "Hmm, I'm getting excited. . ."
             elif Shame >= 50:
                 ch_e "This is rather. . . shameless. . ."
@@ -3446,7 +3449,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
         if Agree:
 
             $ Girl.Shame = Shame
-            if "exhibitionist" in Girl.Traits:
+            if "exhibitionist" in Girl.traits:
                 ch_l "Mmmmmm. . ."
             elif Shame >= 50:
                 ch_l "This is. . . really brave. . ."
@@ -3472,7 +3475,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
         if Agree:
 
             $ Girl.Shame = Shame
-            if "exhibitionist" in Girl.Traits:
+            if "exhibitionist" in Girl.traits:
                 ch_j ". . ."
             elif Shame >= 50:
                 ch_j "Pretty daring. . ."
@@ -3499,7 +3502,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
         if Agree:
 
             $ Girl.Shame = Shame
-            if "exhibitionist" in Girl.Traits:
+            if "exhibitionist" in Girl.traits:
                 ch_s "Oooh. . ."
             elif Shame >= 25:
                 ch_s "You are going to get me into trouble. . ."
@@ -3514,7 +3517,7 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
         if Agree:
 
             $ Girl.Shame = Shame
-            if "exhibitionist" in Girl.Traits:
+            if "exhibitionist" in Girl.traits:
                 ch_s "Oooh. . ."
             elif Shame >= 25:
                 ch_s "Whew, this is flat out pornographic. . ."
@@ -3558,7 +3561,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
 
 
-    if Custom == 20 and Girl.Uptop:
+    if Custom == 20 and Girl.top_pulled_up:
         $ Count = 0
     elif Girl.OverNum() >= 5:
         $ Count += 20
@@ -4032,7 +4035,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.change_face("confused",1)
                 $ Girl.mouth = "smile"
                 ch_r "It's a little late to worry about that, right?"
-            if "exhibitionist" in Girl.Traits and Tempshame >= 20:
+            if "exhibitionist" in Girl.traits and Tempshame >= 20:
                 ch_r "Hmm. . . yeah, I'd love to. . ."
                 $ Girl.change_stat("lust", 80, 10)
             elif Custom == 7:
@@ -4077,7 +4080,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.change_face("confused",1)
                 $ Girl.mouth = "smile"
                 ch_k "Kinda late to ask, right?"
-            if "exhibitionist" in Girl.Traits and Tempshame >= 20:
+            if "exhibitionist" in Girl.traits and Tempshame >= 20:
                 ch_k "I'm getting wet just thinking about it. . ."
                 $ Girl.change_stat("lust", 80, 10)
             elif Tempshame <= 5:
@@ -4121,7 +4124,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.mouth = "smile"
                 "She glances around."
                 ch_e "Is that a trick question?"
-            if "exhibitionist" in Girl.Traits and Tempshame >= 20:
+            if "exhibitionist" in Girl.traits and Tempshame >= 20:
                 ch_e "The thought of it gets me moist. . ."
                 $ Girl.change_stat("lust", 80, 10)
             elif Tempshame <= 5:
@@ -4165,7 +4168,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.change_face("confused",1)
                 $ Girl.mouth = "smile"
                 ch_l "Well a bit late for that, I guess."
-            if "exhibitionist" in Girl.Traits and Tempshame >= 20:
+            if "exhibitionist" in Girl.traits and Tempshame >= 20:
                 $ Girl.change_stat("lust", 80, 10)
                 $ Girl.change_face("sexy", 2)
                 ch_l ". . ."
@@ -4210,7 +4213,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.change_face("confused",1)
                 $ Girl.mouth = "smile"
                 ch_j "Well, I guess so, right?"
-            if "exhibitionist" in Girl.Traits and Tempshame >= 20:
+            if "exhibitionist" in Girl.traits and Tempshame >= 20:
                 $ Girl.change_stat("lust", 80, 10)
                 $ Girl.change_face("sexy", 2)
                 ch_j ". . ."
@@ -4257,7 +4260,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.mouth = "smile"
                 "She glances around."
                 ch_s "It seems a bit late for that question. . ."
-            if "exhibitionist" in Girl.Traits and Tempshame >= 20:
+            if "exhibitionist" in Girl.traits and Tempshame >= 20:
                 ch_s "I do find the idea. . . exciting. . ."
                 $ Girl.change_stat("lust", 80, 10)
             elif Tempshame <= 10:
@@ -4297,7 +4300,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Girl.change_face("confused",1)
                 $ Girl.mouth = "smile"
                 ch_v "I guess that ship has sailed. . ."
-            if "exhibitionist" in Girl.Traits and Tempshame >= 20:
+            if "exhibitionist" in Girl.traits and Tempshame >= 20:
                 $ Girl.change_stat("lust", 80, 10)
                 $ Girl.change_face("sexy", 2)
                 ch_v ". . ."
@@ -4380,7 +4383,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
     elif bg_current == "HW Party" or (bg_current == "bg_player" and "halloween" in Player.daily_history):
 
         pass
-    elif "exhibitionist" in Girl.Traits and Tempshame <= 20:
+    elif "exhibitionist" in Girl.traits and Tempshame <= 20:
 
         pass
     elif Girl == StormX and StormX in Rules:
@@ -4440,7 +4443,7 @@ label OutfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
         else:
             $ Girl.Outfit = renpy.random.choice(["casual1", "casual2"])
 
-        $ Girl.AddWord(1,"modesty","modesty")
+        $ Girl.add_word(1,"modesty", "modesty")
         $ Girl.Water = 0
         $ Girl.change_outfit(Changed=1)
         if Girl == RogueX:
@@ -4495,11 +4498,11 @@ label QuickOutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, HolderO
     while len(HolderOutfit) < 11:
         $ HolderOutfit.append(0)
 
-    if HolderOutfit[5] in ("tank","white_tank","button_tank","sports_bra","tube_top","corset"):
+    if HolderOutfit[5] in ("tank", "white_tank", "button_tank", "sports_bra", "tube_top", "corset"):
         $ Count = 20
     elif HolderOutfit[5] == "wolvie_top":
         $ Count = 10
-    elif HolderOutfit[5] in ("lace_bra","lace corset"):
+    elif HolderOutfit[5] in ("lace_bra", "lace corset"):
         $ Count = 5
     elif HolderOutfit[5]:
 
@@ -4510,7 +4513,7 @@ label QuickOutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, HolderO
         $ Count = 0
 
 
-    if HolderOutfit[3] in ("nighty","mesh_top"):
+    if HolderOutfit[3] in ("nighty", "mesh_top"):
         $ Count += 5
     elif HolderOutfit[3] == "towel":
         if Girl == EmmaX:
@@ -4519,7 +4522,7 @@ label QuickOutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, HolderO
             pass
         else:
             $ Count += 10
-    elif HolderOutfit[3] in ("jacket","dress","pink_top") or HolderOutfit[7] == "jacket":
+    elif HolderOutfit[3] in ("jacket", "dress", "pink_top") or HolderOutfit[7] == "jacket":
         $ Count += 15
     elif HolderOutfit[3] or HolderOutfit[7] == "shut_jacket":
         $ Count += 20
@@ -4534,13 +4537,13 @@ label QuickOutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, HolderO
 
     if HolderOutfit[2] and HolderOutfit[6]:
         $ Count = 30
-    elif HolderOutfit[2] in ("blue_skirt","skirt","other_skirt"):
+    elif HolderOutfit[2] in ("blue_skirt", "skirt", "other_skirt"):
         $ Count = 20
     elif HolderOutfit[2] or HolderOutfit[7] == "shut_jacket":
         $ Count = 25
     elif HolderOutfit[6] == "shorts":
         $ Count = 25
-    elif HolderOutfit[6] in ("bikini_bottoms","sports_panties","shorts"):
+    elif HolderOutfit[6] in ("bikini_bottoms", "sports_panties", "shorts"):
         $ Count = 15
     elif HolderOutfit[6] == "lace_panties":
         $ Count = 5
@@ -4557,7 +4560,7 @@ label QuickOutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, HolderO
 
     $ Tempshame -= Count
 
-    if "exhibitionist" in Girl.Traits:
+    if "exhibitionist" in Girl.traits:
         pass
     elif Tempshame <= 5:
         pass
@@ -4618,7 +4621,7 @@ label QuickOutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, HolderO
 label AutoStrip(Girl=0):
 
     $ Girl = GirlCheck(Girl)
-    if (Girl.underwear and not Girl.underwearDown) or Girl.PantsNum() >= 6 or Girl.HoseNum() >= 6:
+    if (Girl.underwear and not Girl.underwear_pulled_down) or Girl.PantsNum() >= 6 or Girl.HoseNum() >= 6:
         if Girl == RogueX:
             ch_r "Well, I guess some things are necessary, [RogueX.player_petname]."
         elif Girl == KittyX:
@@ -4634,29 +4637,29 @@ label AutoStrip(Girl=0):
         elif Girl == JubesX:
             ch_v "Let's get these out of the way. . ."
 
-        if (Girl.underwear and not Girl.underwearDown) and (Girl.PantsNum() > 6 and not Girl.Upskirt):
+        if (Girl.underwear and not Girl.underwear_pulled_down) and (Girl.PantsNum() > 6 and not Girl.upskirt):
             "She quickly drops her pants and her [Girl.underwear]."
-        elif (Girl.underwear and not Girl.underwearDown) and (Girl.PantsNum() == 6 and not Girl.Upskirt):
+        elif (Girl.underwear and not Girl.underwear_pulled_down) and (Girl.PantsNum() == 6 and not Girl.upskirt):
             "She quickly drops her shorts and her [Girl.underwear]."
-        elif Girl.PantsNum() > 6 and not Girl.Upskirt:
+        elif Girl.PantsNum() > 6 and not Girl.upskirt:
             "She tugs her pants down, exposing her bare pussy."
-        elif Girl.PantsNum() == 6 and not Girl.Upskirt:
+        elif Girl.PantsNum() == 6 and not Girl.upskirt:
             "She tugs her shorts down, exposing her bare pussy."
-        elif Girl.HoseNum() >= 6 and (Girl.underwear and not Girl.underwearDown):
+        elif Girl.HoseNum() >= 6 and (Girl.underwear and not Girl.underwear_pulled_down):
             "She tugs her [Girl.hose] and [Girl.underwear] off."
 
         elif Girl.HoseNum() >= 6:
             "She tugs her [Girl.hose] off and drops them to the ground."
 
-        elif (Girl.underwear and not Girl.underwearDown):
+        elif (Girl.underwear and not Girl.underwear_pulled_down):
             "She tugs her [Girl.underwear] off and drops them to the ground."
 
-    $ Girl.Upskirt = 1 if Girl.legs else 0
-    $ Girl.underwearDown = 1 if Girl.underwear else 0
+    $ Girl.upskirt = 1 if Girl.legs else 0
+    $ Girl.underwear_pulled_down = 1 if Girl.underwear else 0
     $ Girl.hose = 0 if Girl.HoseNum() >= 6 else Girl.hose
 
     $ Girl.SeenPanties = 1
-    call expression Girl.Tag + "_First_Bottomless"
+    call expression Girl.tag + "_First_Bottomless"
     return
 
 label Girl_Undress(Girl=0, Region="ask", stored_count=0):
@@ -4670,7 +4673,7 @@ label Girl_Undress(Girl=0, Region="ask", stored_count=0):
     call shift_focus (Girl)
 
     if Region == "auto":
-        if Girl.Upskirt and Girl.underwearDown:
+        if Girl.upskirt and Girl.underwear_pulled_down:
             return
         if Girl.PantsNum() > 5 and approval_bonus < 20:
             $ approval_bonus = 20
@@ -4772,11 +4775,11 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
     if Girl.SeenChest and approval_check(Girl, 500) and not Taboo:
 
         $ approval_bonus += 20
-    if "exhibitionist" in Girl.Traits:
+    if "exhibitionist" in Girl.traits:
         $ approval_bonus += (4*Taboo)
     if Girl in Player.Harem or "sex friend" in Girl.player_petnames and not Taboo:
         $ approval_bonus += 10
-    elif "ex" in Girl.Traits:
+    elif "ex" in Girl.traits:
         $ approval_bonus -= 40
     if "no_topless" in Girl.recent_history:
         $ approval_bonus -= 10
@@ -4785,7 +4788,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
         $ approval_bonus += 20
 
 
-    if Intro and not Girl.Uptop:
+    if Intro and not Girl.top_pulled_up:
         if Intro == 2:
 
             if Girl == RogueX:
@@ -4809,14 +4812,14 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                 ch_p "This might be easier without your [Girl.bra] on."
 
 
-    $ Approval = approval_check(Girl, 1100, TabM = 4)
+    $ approval = approval_check(Girl, 1100, TabM = 4)
 
-    if action_context == "auto" and  (Girl.top or Girl.bra or (Girl == JubesX and Girl.accessory)) and not Girl.Uptop:
+    if action_context == "auto" and  (Girl.top or Girl.bra or (Girl == JubesX and Girl.accessory)) and not Girl.top_pulled_up:
         $ Line = 0
         if approval_check(Girl, 1250, TabM = 1) or (Girl.SeenChest and approval_check(Girl, 500) and not Taboo):
 
             $ Girl.change_stat("inhibition", 70, 1)
-            $ Girl.Uptop = 1
+            $ Girl.top_pulled_up = 1
             $ Line = Girl.top if Girl.top else Girl.bra
             "[Girl.name] sighs in frustration, and pulls her [Line] up over her breasts."
             if Girl == RogueX:
@@ -4835,7 +4838,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                 ch_v "Ok, that's more comfortable. . ."
             if Taboo:
                 $ Girl.change_stat("inhibition", 90, (int(Taboo/20)))
-            call expression Girl.Tag + "_First_Topless" pass (1)
+            call expression Girl.tag + "_First_Topless" pass (1)
         elif Girl.top and Girl.bra and approval_check(Girl, 800, TabM = 1):
 
             $ Girl.change_stat("inhibition", 40, 1)
@@ -4870,7 +4873,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
         $ Line = 0
         return
 
-    if Approval >= 2:
+    if approval >= 2:
 
         if "no_topless" in Girl.daily_history:
             if Girl == RogueX:
@@ -4949,9 +4952,9 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                         "[Girl.name] shrugs and her [Line] falls through to the ground."
                     else:
                         "[Girl.name] throws off her [Line]."
-                "Just pull it up." if (Girl.top or Girl.bra) and not Girl.Uptop:
+                "Just pull it up." if (Girl.top or Girl.bra) and not Girl.top_pulled_up:
                     $ Girl.change_face("bemused", 1)
-                    $ Girl.Uptop = 1
+                    $ Girl.top_pulled_up = 1
                     if Girl == EmmaX:
                         "[Girl.name] smiles and pulls out her tits. . ."
                     elif Girl.top and Girl.bra:
@@ -5000,7 +5003,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
 
             $ Girl.change_stat("obedience", 50, 1)
             $ Girl.change_stat("obedience", 90, 1)
-            call expression Girl.Tag + "_First_Topless"
+            call expression Girl.tag + "_First_Topless"
         $ Girl.change_stat("lust", 80, 3)
         $ Girl.recent_history.append("ask topless")
         $ Girl.daily_history.append("ask topless")
@@ -5011,12 +5014,12 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
 
     $ Girl.change_face("bemused", 1)
     if Girl == RogueX:
-        if Intro == "massage" and not Approval:
+        if Intro == "massage" and not approval:
             ch_r "I'm ok with a massage, but my top stays on."
         elif "no_topless" in Girl.recent_history:
             $ Girl.change_face("angry")
             ch_r "I just told you no, [Girl.player_petname]."
-        elif Approval and not Girl.SeenChest:
+        elif approval and not Girl.SeenChest:
             ch_r "I'd like to leave something to the imagination. . ."
         elif not Girl.SeenChest:
             ch_r "I'm not ready to show you those yet. . ."
@@ -5026,17 +5029,17 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
             ch_r "Changed your mind, [Girl.player_petname]?"
         elif Taboo:
             ch_r "It's a bit exposed here. . ."
-        elif Approval:
+        elif approval:
             ch_r "Well, you've seen them before, but. . ."
         else:
             ch_r "Not right now."
     elif Girl == KittyX:
-        if Intro == "massage" and not Approval:
+        if Intro == "massage" and not approval:
             ch_k "A massage is fine, but I'm keeping my top on, ok?"
         elif "no_topless" in Girl.recent_history:
             $ Girl.change_face("angry")
             ch_k "I[Girl.like]already told you, no way!"
-        elif Approval and not Girl.SeenChest:
+        elif approval and not Girl.SeenChest:
             ch_k "I'm[Girl.like]not really comfortable with that."
         elif not Girl.SeenChest:
             ch_k "I'd[Girl.like]really rather not, ok?"
@@ -5046,17 +5049,17 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
             ch_k "Did you[Girl.like]want something else off?"
         elif Taboo:
             ch_k "I'm[Girl.like]not that comfortable out here. . ."
-        elif Approval:
+        elif approval:
             ch_k "Maybe not?"
         else:
             ch_k "Nu-uh."
     elif Girl == EmmaX:
-        if Intro == "massage" and not Approval:
+        if Intro == "massage" and not approval:
             ch_e "I welcome a massage, but I'm staying fully dressed."
         elif "no_topless" in Girl.recent_history:
             $ Girl.change_face("angry")
             ch_e "Learn from previous mistakes, [Girl.player_petname]."
-        elif Approval and not Girl.SeenChest:
+        elif approval and not Girl.SeenChest:
             ch_e "I don't know if that would be appropriate."
         elif not Girl.SeenChest:
             ch_e "I don't think you're ready for that."
@@ -5066,17 +5069,17 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
             ch_e "You want more?"
         elif Taboo:
             ch_e "[Girl.player_petname], not around prying eyes."
-        elif Approval:
+        elif approval:
             ch_e "Are you sure you're prepared?"
         else:
             ch_e "No."
     elif Girl == LauraX:
-        if Intro == "massage" and not Approval:
+        if Intro == "massage" and not approval:
             ch_l "I could use a massage, but I'm keeping my clothes on."
         elif "no_topless" in Girl.recent_history:
             $ Girl.change_face("angry")
             ch_l "Don't push it, [Girl.player_petname]."
-        elif Approval and not Girl.SeenChest:
+        elif approval and not Girl.SeenChest:
             ch_l "I don't know, man."
         elif not Girl.SeenChest:
             ch_l "I really don't think so."
@@ -5086,12 +5089,12 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
             ch_l "Again?"
         elif Taboo:
             ch_l "[Girl.player_petname], not around here, alright?"
-        elif Approval:
+        elif approval:
             ch_l "Are you sure?"
         else:
             ch_l "No."
     elif Girl == JeanX:
-        if Intro == "massage" and not Approval:
+        if Intro == "massage" and not approval:
             ch_j "Massage, yes, but top on."
         elif "no_topless" in Girl.recent_history:
             $ JeanX.change_face("angry")
@@ -5106,17 +5109,17 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
             ch_j "So soon?"
         elif Taboo:
             ch_j "Hmm. . . not around here"
-        elif Approval:
+        elif approval:
             ch_j "Hmm. . ."
         else:
             ch_j "No way."
     elif Girl == StormX:
-        if Intro == "massage" and not Approval:
+        if Intro == "massage" and not approval:
             ch_s "I would enjoy a massage, but I'm staying fully clothed."
         elif "no_topless" in Girl.recent_history:
             $ Girl.change_face("angry")
             ch_s "I am not so pliable as that, [Girl.player_petname]."
-        elif Approval and not Girl.SeenChest:
+        elif approval and not Girl.SeenChest:
             ch_s "I don't know if that would be appropriate."
         elif "no_topless" in Girl.daily_history:
             ch_s "Do not ask again."
@@ -5124,17 +5127,17 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
             ch_s "Oh, you'd like to see them again?"
         elif Taboo and Girl not in Rules:
             ch_s "I'm afraid not in public, [Girl.player_petname]."
-        elif Approval:
+        elif approval:
             ch_s "Are you Certain?"
         else:
             ch_s "No."
     elif Girl == JubesX:
-        if Intro == "massage" and not Approval:
+        if Intro == "massage" and not approval:
             ch_v "I could use a massage, but I'm keeping my clothes on."
         elif "no_topless" in Girl.recent_history:
             $ Girl.change_face("angry")
             ch_v "Don't push it, [Girl.player_petname]."
-        elif Approval and not Girl.SeenChest:
+        elif approval and not Girl.SeenChest:
             ch_v "I don't know, man."
         elif not Girl.SeenChest:
             ch_v "I'm not cool with that."
@@ -5144,7 +5147,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
             ch_v "Again?"
         elif Taboo:
             ch_v "[Girl.player_petname], it's just public here?"
-        elif Approval:
+        elif approval:
             ch_v "I dunno, really?"
         else:
             ch_v "Nah."
@@ -5233,7 +5236,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                             $ Girl.top = 0
                             $ Girl.change_stat("inhibition", 30, 2)
                             $ Girl.change_stat("inhibition", 60, 1)
-                            call expression Girl.Tag + "_First_Topless"
+                            call expression Girl.tag + "_First_Topless"
                         else:
                             $ Girl.change_face("bemused")
                             call Top_Off_Refused (Girl)
@@ -5351,7 +5354,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                             $ Girl.top = 0
                             $ Girl.change_stat("inhibition", 30, 2)
                             $ Girl.change_stat("inhibition", 60, 1)
-                            call expression Girl.Tag + "_First_Topless"
+                            call expression Girl.tag + "_First_Topless"
                         else:
                             $ Girl.change_face("bemused")
                             call Top_Off_Refused (Girl)
@@ -5366,7 +5369,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
 
 
 
-            if Approval and approval_check(Girl, 600, "L", TabM=1):
+            if approval and approval_check(Girl, 600, "L", TabM=1):
                 $ Girl.change_stat("obedience", 40, 2)
                 $ Girl.change_face("sexy")
                 if Girl == RogueX:
@@ -5395,12 +5398,12 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                     ch_s "Oh, very well."
                 elif Girl == JubesX:
                     ch_v "Ok, fine, geeze."
-                $ Girl.Uptop = 1
+                $ Girl.top_pulled_up = 1
                 "[Girl.name] just pulls her top up over her tits."
                 $ Girl.arms = 0
                 $ Girl.change_stat("inhibition", 30, 2)
                 $ Girl.change_stat("inhibition", 60, 1)
-                call expression Girl.Tag + "_First_Topless"
+                call expression Girl.tag + "_First_Topless"
             elif "no_topless" in Girl.recent_history:
                 $ Girl.change_face("angry")
                 if Girl == RogueX:
@@ -5599,9 +5602,9 @@ label ToplessorNothing(Girl=0):
                 ch_v "Ok, fine, whatever."
         $ Girl.change_stat("obedience", 60, 4)
         $ Girl.change_stat("obedience", 90, 2)
-        $ Girl.Uptop = 1
+        $ Girl.top_pulled_up = 1
         "[Girl.name] slowly pulls her top up over her tits."
-        call expression Girl.Tag + "_First_Topless"
+        call expression Girl.tag + "_First_Topless"
     else:
         $ Girl.change_stat("love", 200, -10)
         $ Girl.change_stat("obedience", 40, -1, 1)
@@ -5690,11 +5693,11 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
         $ approval_bonus += 5
     if Intro == "dildo":
         $ approval_bonus += 20
-    if "exhibitionist" in Girl.Traits:
+    if "exhibitionist" in Girl.traits:
         $ approval_bonus += (Taboo*5)
     if (Girl in Player.Harem or "sex friend" in Girl.player_petnames) and not Taboo:
         $ approval_bonus += 10
-    elif "ex" in Girl.Traits:
+    elif "ex" in Girl.traits:
         $ approval_bonus -= 40
     if "no_bottomless" in Girl.recent_history:
         $ approval_bonus -= 20
@@ -5720,41 +5723,41 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
             elif Girl == JubesX:
                 ch_v "I guess these would get in the way. . ."
         else:
-            if Girl.legs and not Girl.Upskirt:
+            if Girl.legs and not Girl.upskirt:
                 ch_p "This might be easier without your [Girl.legs] on."
-            elif Girl.underwear and not Girl.underwearDown:
+            elif Girl.underwear and not Girl.underwear_pulled_down:
                 ch_p "This might be easier without your [Girl.underwear] on."
 
-    $ Approval = approval_check(Girl, 1200, TabM = 5)
+    $ approval = approval_check(Girl, 1200, TabM = 5)
 
     if action_context == "auto":
         $ counter = 0
 
-        if not Girl.Upskirt and not Girl.underwearDown:
+        if not Girl.upskirt and not Girl.underwear_pulled_down:
             if Girl.PantsNum() == 5:
 
-                if Approval >= 2 or (Girl.SeenPussy and not Taboo):
+                if approval >= 2 or (Girl.SeenPussy and not Taboo):
                     $ Girl.change_stat("inhibition", 60, 1)
                     if Taboo:
                         $ Girl.change_stat("inhibition", 90, (int(Taboo/20)))
-                    $ Girl.Upskirt = 1
+                    $ Girl.upskirt = 1
                     "She slides her skirt up."
                     $ counter = 1
 
             if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 6:
                 if Girl.underwear:
 
-                    if not Approval or (not Girl.SeenPanties and Taboo):
+                    if not approval or (not Girl.SeenPanties and Taboo):
                         return
-                elif Approval < 2 or (not Girl.SeenPussy and Taboo):
+                elif approval < 2 or (not Girl.SeenPussy and Taboo):
                     return
-                elif Girl.Upskirt:
+                elif Girl.upskirt:
                     return
                 $ Girl.change_stat("inhibition", 60, 1)
                 if Girl.HoseNum() >= 6:
                     $ Line = Girl.hose
                     $ Girl.hose = 0
-                $ Girl.Upskirt = 1
+                $ Girl.upskirt = 1
 
                 if Girl == KittyX:
                     if Girl.PantsNum(0) >= 6:
@@ -5774,20 +5777,20 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                         "[Girl.name] grumbles to herself, and then unzips her [Girl.legs], sliding them off her bare ass."
                     else:
                         "[Girl.name] grumbles to herself, and then pulls her [Line] down her bare ass."
-                call expression Girl.Tag + "_First_Bottomless" pass (1)
+                call expression Girl.tag + "_First_Bottomless" pass (1)
                 if Taboo:
                     $ Girl.change_stat("inhibition", 90, (int(Taboo/10)))
                 $ counter = 1
 
-        if Girl.underwear and not Girl.underwearDown:
+        if Girl.underwear and not Girl.underwear_pulled_down:
 
-            if Approval >= 2 or (Girl.SeenPussy and not Taboo):
+            if approval >= 2 or (Girl.SeenPussy and not Taboo):
                 $ Girl.change_stat("inhibition", 70, 2)
                 if Taboo:
                     $ Girl.change_stat("inhibition", 90, (int(Taboo/10)))
-                $ Girl.underwearDown = 1
+                $ Girl.underwear_pulled_down = 1
                 if Girl.PantsNum() >= 6 or Girl.HoseNum() >= 6:
-                    $ Girl.Upskirt = 1
+                    $ Girl.upskirt = 1
                 if Girl == KittyX:
                     if counter:
                         "With a second thought, [Girl.name] lets her [Girl.underwear] drop too."
@@ -5798,7 +5801,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                         "[Girl.name] tsks in irritation, and pulls down her [Girl.underwear] too."
                     else:
                         "[Girl.name] tsks in irritation, and pulls down her [Girl.underwear]."
-                call expression Girl.Tag + "_First_Bottomless" pass (1)
+                call expression Girl.tag + "_First_Bottomless" pass (1)
                 if Girl == RogueX:
                     ch_r "I wasn't getting anything out of it with those on. Give it another go."
                 elif Girl == KittyX:
@@ -5816,7 +5819,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
         return
 
 
-    if Approval >= 2:
+    if approval >= 2:
 
         $ Girl.change_face("sexy", 1)
         if Girl.Forced:
@@ -5826,27 +5829,27 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
             $ Girl.change_stat("obedience", 90, 1)
             $ Girl.change_stat("inhibition", 60, 1)
         if Girl == RogueX:
-            if Approval >= 3:
+            if approval >= 3:
                 $ Line = "Hmmm, what do you want to see? . ."
             else:
                 $ Line = "Well, ok. I'd kinda like to keep {i}some{/i} modesty though. . ."
         elif Girl == KittyX:
-            if Approval >= 3:
+            if approval >= 3:
                 $ Line = "Heh, what would you like to see? . ."
             else:
                 $ Line = "Ok, maybe, but don't push it. . ."
         elif Girl == EmmaX:
-            if Approval >= 3:
+            if approval >= 3:
                 $ Line = "Mmmm, what would you like?"
             else:
                 $ Line = "What would you have me take off?"
         elif Girl == LauraX:
-            if Approval >= 3:
+            if approval >= 3:
                 $ Line = "What did you want off?"
             else:
                 $ Line = "Hm, what did you want me to lose?"
         elif Girl == JeanX:
-            if Approval >= 3:
+            if approval >= 3:
                 $ Line = "What did you want off?"
             else:
                 $ Line = "Like. . . what? . ."
@@ -5872,7 +5875,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
             elif "no_topless" in Girl.recent_history:
                 $ Girl.change_face("angry")
                 ch_r "I doubt your odds will be better here, [Girl.player_petname]. . ."
-            elif Approval and not Girl.SeenPussy:
+            elif approval and not Girl.SeenPussy:
                 ch_r "Not everything, right?"
             elif not Girl.SeenPussy and "ask topless" in Girl.recent_history:
                 ch_r "I'm not ready to show you that either."
@@ -5880,7 +5883,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                 ch_r "Have you forgot what I said earlier, [Girl.player_petname]?"
             elif Taboo:
                 ch_r "I don't know about doing it here. . ."
-            elif Approval:
+            elif approval:
                 ch_r "I don't know if I want to take my bottoms off. . ."
             elif Girl.SeenPussy:
                 ch_r "Well, you've seen it before, but. . ."
@@ -5893,7 +5896,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
             elif "no_topless" in Girl.recent_history:
                 $ KittyX.change_face("angry")
                 ch_k "Not learning from your mistakes here, [Girl.player_petname]. . ."
-            elif Approval and not Girl.SeenPussy:
+            elif approval and not Girl.SeenPussy:
                 ch_k "I'm not sure about that. . ."
             elif not Girl.SeenPussy and "ask topless" in Girl.recent_history:
                 ch_k "That's a bit too far."
@@ -5901,7 +5904,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                 ch_k "Short memory, [Girl.player_petname]?"
             elif Taboo:
                 ch_k "This is[Girl.like]kinda public. . ."
-            elif Approval:
+            elif approval:
                 ch_k "I'm[Girl.like]not sure about this. . ."
             elif Girl.SeenPussy:
                 ch_k "Well, you've seen[Girl.like]it before . . ."
@@ -5918,7 +5921,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
             elif "no_topless" in Girl.recent_history:
                 $ EmmaX.change_face("angry")
                 ch_e "Do you really think that's likely?"
-            elif Approval and not Girl.SeenPussy:
+            elif approval and not Girl.SeenPussy:
                 ch_e "I don't know if you're ready for that."
             elif not Girl.SeenPussy and "ask topless" in Girl.recent_history:
                 ch_e "Be careful how far you push it. . ."
@@ -5926,7 +5929,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                 ch_e "Don't you learn anything, [Girl.player_petname]?"
             elif Taboo:
                 ch_e "Not with so many eyes around, [Girl.player_petname]. . ."
-            elif Approval:
+            elif approval:
                 ch_e "Probably not. . ."
             elif Girl.SeenPussy:
                 ch_e "I think you've seen enough . . ."
@@ -5945,7 +5948,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
             elif "no_topless" in Girl.recent_history:
                 $ LauraX.change_face("angry")
                 ch_l "This is really pushing it."
-            elif Approval and not Girl.SeenPussy:
+            elif approval and not Girl.SeenPussy:
                 ch_l "I don't know if you're earned that yet."
             elif not Girl.SeenPussy and "ask topless" in Girl.recent_history:
                 ch_l "Kinda pushing it, [Girl.player_petname]. . ."
@@ -5953,7 +5956,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                 ch_l "So thirsty. . ."
             elif Taboo:
                 ch_l "This is pretty exposed, [Girl.player_petname]. . ."
-            elif Approval:
+            elif approval:
                 ch_l "Probably not. . ."
             elif Girl.SeenPussy:
                 ch_l "You've probably seen enough . . ."
@@ -5972,13 +5975,13 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
             elif "no_topless" in Girl.recent_history:
                 $ JeanX.change_face("angry")
                 ch_j "Why did you think that would be different?"
-            elif Approval and not Girl.SeenPussy:
+            elif approval and not Girl.SeenPussy:
                 ch_j "Hmm. . . have your earned that. . ."
             elif "no_bottomless" in Girl.daily_history:
                 ch_j "Again with this?"
             elif Taboo:
                 ch_j "Not here, [Girl.player_petname]. . ."
-            elif Approval:
+            elif approval:
                 ch_j "Hmm. . ."
             elif Girl.SeenPussy:
                 ch_j "Hmm. . ."
@@ -5996,7 +5999,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                 ch_s "You need to stop asking about that."
             elif Taboo and Girl not in Rules:
                 ch_s "I cannot in public, [Girl.player_petname]. . ."
-            elif Approval:
+            elif approval:
                 ch_s "I am unsure. . ."
             elif Girl.PantsNum(0) > 6:
                 ch_s "I will be keeping my pants on."
@@ -6013,7 +6016,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
             elif "no_topless" in Girl.recent_history:
                 $ JubesX.change_face("angry")
                 ch_v "Don't push it, [Girl.player_petname]."
-            elif Approval and not Girl.SeenPussy:
+            elif approval and not Girl.SeenPussy:
                 ch_v "I don't know, man."
             elif not Girl.SeenPussy and "ask topless" in Girl.recent_history:
                 ch_v "Kinda pushing it, [Girl.player_petname]. . ."
@@ -6021,7 +6024,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                 ch_v "So thirsty. . ."
             elif Taboo:
                 ch_v "[Girl.player_petname], it's just public here?"
-            elif Approval:
+            elif approval:
                 ch_v "Doubtful. . ."
             elif Girl.SeenPussy:
                 ch_v "Need another look?"
@@ -6088,10 +6091,10 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                     elif Girl == JubesX:
                         ch_v "No."
                 else:
-                    if Approval and approval_check(Girl, 600, "L", TabM=1):
+                    if approval and approval_check(Girl, 600, "L", TabM=1):
                         $ Girl.change_face("sexy", 1)
                         $ D20 = renpy.random.randint(1, 3)
-                        $ Approval += 1 if D20 == 3 else 0
+                        $ approval += 1 if D20 == 3 else 0
                         if Girl == RogueX:
                             $ Line = "Well, what were you thinking then. . ."
                         elif Girl == KittyX:
@@ -6113,7 +6116,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                         call Bottoms_Off_Refused (Girl)
 
             "It doesn't have to be everything. . ." if Girl.legs or Girl.HoseNum() >= 10 or Girl.underwear == "shorts":
-                if Approval and "no_bottomless" not in Girl.daily_history:
+                if approval and "no_bottomless" not in Girl.daily_history:
                     $ Girl.change_face("bemused", 1)
                     $ Line = "Well what did you have in mind then?"
                     call Bottoms_Off_Legs (Girl)
@@ -6125,7 +6128,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                 pass
             "No, lose 'em.":
 
-                if (Approval and Girl.obedience >= 250) or (approval_check(Girl, 850, "OI", TabM = 5) and approval_check(Girl, 400, "O")):
+                if (approval and Girl.obedience >= 250) or (approval_check(Girl, 850, "OI", TabM = 5) and approval_check(Girl, 400, "O")):
                     $ Girl.change_stat("love", 20, -1, 1)
                     $ Girl.change_stat("love", 70, -5, 1)
                     $ Girl.change_stat("obedience", 50, 4)
@@ -6145,7 +6148,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                         $ Line = "What did you want? . ."
                     elif Girl == JubesX:
                         $ Line =  "Tone. . ."
-                    $ Approval = 1 if Approval < 1 else Approval
+                    $ approval = 1 if approval < 1 else approval
                     $ Girl.Forced = 1
                     call Bottoms_Off_Legs (Girl)
                 else:
@@ -6230,7 +6233,7 @@ label Bottoms_Off_Legs(Girl=0):
                     else:
                         "[Girl.name] pulls her [Line] off."
 
-                if Approval < 2 and not Girl.underwear and Girl.HoseNum() >= 10:
+                if approval < 2 and not Girl.underwear and Girl.HoseNum() >= 10:
                     call NoPantiesOn (Girl)
 
                 if Girl == JubesX and JubesX.accessory != "shut_jacket":
@@ -6239,7 +6242,7 @@ label Bottoms_Off_Legs(Girl=0):
                 elif Girl == JubesX and JubesX.accessory == "shut_jacket":
                     $ Girl.accessory = 0
                     "She pulls her [Girl.accessory] off."
-                    call expression Girl.Tag + "_First_Bottomless"
+                    call expression Girl.tag + "_First_Bottomless"
                 elif Girl.accessory:
                     $ Girl.accessory = 0
                     "She pulls her [Girl.accessory] off."
@@ -6252,7 +6255,7 @@ label Bottoms_Off_Legs(Girl=0):
                     else:
                         "She pulls her [Line] down."
 
-                if Approval < 2:
+                if approval < 2:
                     call NoPantiesOn (Girl)
 
                 if Girl.underwear:
@@ -6262,11 +6265,11 @@ label Bottoms_Off_Legs(Girl=0):
                         "She glances up at you as her [Line] fall clear of her."
                     else:
                         "She glances up at you as she removes her [Line]."
-                call expression Girl.Tag + "_First_Bottomless"
+                call expression Girl.tag + "_First_Bottomless"
 
 
             "Lose the [Girl.legs]." if Girl.legs:
-                if Girl.underwear and Approval >= 2:
+                if Girl.underwear and approval >= 2:
                     $ Girl.change_face("sexy")
                     if Girl == RogueX:
                         ch_r "I guess I could do that. . ."
@@ -6282,9 +6285,9 @@ label Bottoms_Off_Legs(Girl=0):
                         ch_s "I could do that. . ."
                     elif Girl == JubesX:
                         ch_v "Well, I could do that. . ."
-                elif Approval:
+                elif approval:
                     $ Girl.change_face("sexy", 1)
-                    if Approval < 2 and not Girl.underwear and Girl.HoseNum() < 10:
+                    if approval < 2 and not Girl.underwear and Girl.HoseNum() < 10:
                         call NoPantiesOn (Girl)
                 else:
                     $ Girl.change_face("sexy")
@@ -6301,7 +6304,7 @@ label Bottoms_Off_Legs(Girl=0):
                         "She blushes and looks at you slyly before removing her [Line]."
                     else:
                         "She glaces at you slyly before removing her [Line]."
-                    call expression Girl.Tag + "_First_Bottomless"
+                    call expression Girl.tag + "_First_Bottomless"
                 elif not Girl.SeenPanties:
                     if Girl == KittyX:
                         "She blushes and looks at you as her [Line] drops at her feet."
@@ -6315,7 +6318,7 @@ label Bottoms_Off_Legs(Girl=0):
                 $ Girl.change_face("bemused", 1)
 
             "Lose the [Girl.underwear]." if Girl.underwear:
-                if Approval < 2:
+                if approval < 2:
                     if Girl == RogueX:
                         ch_r "No thanks, [Girl.player_petname]."
                     elif Girl == KittyX:
@@ -6378,21 +6381,21 @@ label Bottoms_Off_Legs(Girl=0):
                     "She reaches under her [Girl.legs] and pulls her [Line] down."
                 else:
                     "She glances up at you as she removes her [Line]."
-                call expression Girl.Tag + "_First_Bottomless"
+                call expression Girl.tag + "_First_Bottomless"
 
-            "Just give me a clear view. . ." if (Girl.underwear and not Girl.underwearDown) or (Girl.legs and not Girl.Upskirt):
-                if Approval >= 2:
+            "Just give me a clear view. . ." if (Girl.underwear and not Girl.underwear_pulled_down) or (Girl.legs and not Girl.upskirt):
+                if approval >= 2:
                     if Girl == LauraX:
                         ch_l "Whatever."
                     else:
                         Girl.voice "Fine."
-                    $ Girl.underwearDown = 1 if Girl.underwear else 0
-                    $ Girl.Upskirt = 1 if Girl.legs else 0
+                    $ Girl.underwear_pulled_down = 1 if Girl.underwear else 0
+                    $ Girl.upskirt = 1 if Girl.legs else 0
                     if Girl.legs:
                         "She shifts her [Girl.legs] out of the way."
                     else:
                         "She shifts her [Girl.underwear] out of the way."
-                elif Approval >= 1 and Girl.legs and Girl.underwear and not Girl.underwearDown:
+                elif approval >= 1 and Girl.legs and Girl.underwear and not Girl.underwear_pulled_down:
                     if Girl == RogueX:
                         ch_r "I'll show you a little bit. . ."
                     elif Girl == KittyX:
@@ -6407,21 +6410,21 @@ label Bottoms_Off_Legs(Girl=0):
                         ch_s "I have taken off enough. . ."
                     elif Girl == JubesX:
                         ch_v "I guess. . . how 'bout this. . ."
-                    $ Girl.Upskirt = 1
+                    $ Girl.upskirt = 1
                 else:
                     Girl.voice "No."
                     $ Girl.recent_history.append("no_bottomless")
                     $ Girl.daily_history.append("no_bottomless")
                     return
-                call expression Girl.Tag + "_First_Bottomless"
+                call expression Girl.tag + "_First_Bottomless"
 
             "Lose the [Girl.hose]." if Girl.hose:
                 $ Girl.change_face("bemused", 1)
                 if Girl.legs:
                     Girl.voice "All right, fine."
-                elif Approval < 2 and not Girl.underwear and Girl.HoseNum() >= 10:
+                elif approval < 2 and not Girl.underwear and Girl.HoseNum() >= 10:
                     call NoPantiesOn (Girl)
-                elif not Approval and Girl.HoseNum() >= 6:
+                elif not approval and Girl.HoseNum() >= 6:
                     if Girl == RogueX:
                         ch_r "No thanks, [Girl.player_petname]."
                     else:
@@ -6450,7 +6453,7 @@ label Bottoms_Off_Legs(Girl=0):
                     $ Girl.change_face("sly", 2)
                     "She blushes and looks at you slyly before removing her [Line]."
                     $ Girl.blushing = 1
-                    call expression Girl.Tag + "_First_Bottomless"
+                    call expression Girl.tag + "_First_Bottomless"
                 elif not Girl.SeenPanties:
                     "[Girl.name] shyly removes her [Line]."
                     $ Girl.SeenPanties = 1
@@ -6461,9 +6464,9 @@ label Bottoms_Off_Legs(Girl=0):
                 $ Girl.change_face("bemused", 1)
                 if Girl.legs:
                     Girl.voice "All right, fine."
-                elif Approval < 2 and not Girl.underwear and Girl.HoseNum() >= 10:
+                elif approval < 2 and not Girl.underwear and Girl.HoseNum() >= 10:
                     call NoPantiesOn (Girl)
-                elif not Approval and Girl.HoseNum() >= 6:
+                elif not approval and Girl.HoseNum() >= 6:
                     if Girl == RogueX:
                         ch_r "I'd rather you didn't, [Girl.player_petname]."
                     else:
@@ -6475,9 +6478,9 @@ label Bottoms_Off_Legs(Girl=0):
                     $ Girl.hose = "ripped_tights"
                 elif Girl.hose == "pantyhose":
                     $ Girl.hose = "ripped_pantyhose"
-                if Girl.hose not in Girl.Inventory:
-                    $ Girl.Inventory.append(Girl.hose)
-                $ Girl.AddWord(1,"ripped","ripped")
+                if Girl.hose not in Girl.inventory:
+                    $ Girl.inventory.append(Girl.hose)
+                $ Girl.add_word(1,"ripped", "ripped")
                 "You tear holes in her [Line]."
                 if not approval_check(Girl, 1200, TabM=0):
                     $ Girl.change_face("angry", 1,Eyes="down")
@@ -6756,7 +6759,7 @@ label Rogue_First_Topless(Silent=0, TempLine=0):
         return
     $ RogueX.recent_history.append("topless")
     $ RogueX.daily_history.append("topless")
-    $ RogueX.DrainWord("no_topless")
+    $ RogueX.drain_word("no_topless")
     $ RogueX.SeenChest += 1
     if RogueX.SeenChest > 1:
         return
@@ -6843,7 +6846,7 @@ label Rogue_First_Topless(Silent=0, TempLine=0):
                         $ RogueX.recent_history.append("angry")
                         $ RogueX.daily_history.append("angry")
     else:
-        $ RogueX.AddWord(1,0,0,0,"topless")
+        $ RogueX.add_word(1,0, 0, 0, "topless")
         if approval_check(RogueX, 800) and not RogueX.Forced:
             $ RogueX.change_stat("inhibition", 70, 5)
             $ RogueX.change_stat("obedience", 70, 5)
@@ -6863,7 +6866,7 @@ label Rogue_First_Bottomless(Silent=0):
         return
     $ RogueX.recent_history.append("bottomless")
     $ RogueX.daily_history.append("bottomless")
-    $ RogueX.DrainWord("no_bottomless")
+    $ RogueX.drain_word("no_bottomless")
     $ RogueX.SeenPussy += 1
     if RogueX.SeenPussy > 1:
 
@@ -6889,7 +6892,7 @@ label Rogue_First_Bottomless(Silent=0):
                 ch_r ". . ."
                 $ RogueX.change_stat("obedience", 70, 30)
     else:
-        $ RogueX.AddWord(1,0,0,0,"bottomless")
+        $ RogueX.add_word(1,0, 0, 0, "bottomless")
         if approval_check(RogueX, 500):
             $ RogueX.change_stat("inhibition", 60, 30)
         else:
@@ -6908,7 +6911,7 @@ label Kitty_First_Topless(Silent=0, TempLine=0):
         return
     $ KittyX.recent_history.append("topless")
     $ KittyX.daily_history.append("topless")
-    $ KittyX.DrainWord("no_topless")
+    $ KittyX.drain_word("no_topless")
     $ KittyX.SeenChest += 1
     if KittyX.SeenChest > 1:
         return
@@ -6998,7 +7001,7 @@ label Kitty_First_Topless(Silent=0, TempLine=0):
     else:
 
 
-        $ KittyX.AddWord(1,0,0,0,"topless")
+        $ KittyX.add_word(1,0, 0, 0, "topless")
         if approval_check(KittyX, 800) and not KittyX.Forced:
             $ KittyX.change_stat("inhibition", 70, 5)
             $ KittyX.change_stat("obedience", 70, 10)
@@ -7017,7 +7020,7 @@ label Kitty_First_Bottomless(Silent=0):
         return
     $ KittyX.recent_history.append("bottomless")
     $ KittyX.daily_history.append("bottomless")
-    $ KittyX.DrainWord("no_bottomless")
+    $ KittyX.drain_word("no_bottomless")
     $ KittyX.SeenPussy += 1
     if KittyX.SeenPussy > 1:
         return
@@ -7065,7 +7068,7 @@ label Kitty_First_Bottomless(Silent=0):
                 ch_k ". . ."
                 $ KittyX.change_stat("obedience", 70, 35)
     else:
-        $ KittyX.AddWord(1,0,0,0,"bottomless")
+        $ KittyX.add_word(1,0, 0, 0, "bottomless")
         if approval_check(KittyX, 800) and not KittyX.Forced:
             $ KittyX.change_stat("inhibition", 60, 15)
             $ KittyX.change_stat("obedience", 70, 10)
@@ -7086,7 +7089,7 @@ label Emma_First_Topless(Silent=0, TempLine=0):
         return
     $ EmmaX.recent_history.append("topless")
     $ EmmaX.daily_history.append("topless")
-    $ EmmaX.DrainWord("no_topless")
+    $ EmmaX.drain_word("no_topless")
     $ EmmaX.SeenChest += 1
     if EmmaX.SeenChest > 1:
         return
@@ -7201,7 +7204,7 @@ label Emma_First_Topless(Silent=0, TempLine=0):
     else:
 
 
-        $ EmmaX.AddWord(1,0,0,0,"topless")
+        $ EmmaX.add_word(1,0, 0, 0, "topless")
         if approval_check(EmmaX, 800) and not EmmaX.Forced:
             $ EmmaX.change_stat("inhibition", 70, 5)
             $ EmmaX.change_stat("obedience", 70, 5)
@@ -7221,7 +7224,7 @@ label Emma_First_Bottomless(Silent=0):
         return
     $ EmmaX.recent_history.append("bottomless")
     $ EmmaX.daily_history.append("bottomless")
-    $ EmmaX.DrainWord("no_bottomless")
+    $ EmmaX.drain_word("no_bottomless")
     $ EmmaX.SeenPussy += 1
     if EmmaX.SeenPussy > 1:
         return
@@ -7286,7 +7289,7 @@ label Emma_First_Bottomless(Silent=0):
                 ch_e "You will regret that remark. . ."
     else:
 
-        $ EmmaX.AddWord(1,0,0,0,"bottomless")
+        $ EmmaX.add_word(1,0, 0, 0, "bottomless")
         if approval_check(EmmaX, 800) and not EmmaX.Forced:
             $ EmmaX.change_stat("inhibition", 60, 5)
             $ EmmaX.change_stat("obedience", 70, 10)
@@ -7306,7 +7309,7 @@ label Laura_First_Topless(Silent=0, TempLine=0):
         return
     $ LauraX.recent_history.append("topless")
     $ LauraX.daily_history.append("topless")
-    $ LauraX.DrainWord("no_topless")
+    $ LauraX.drain_word("no_topless")
     $ LauraX.SeenChest += 1
     if LauraX.SeenChest > 1:
         return
@@ -7324,7 +7327,7 @@ label Laura_First_Topless(Silent=0, TempLine=0):
                 $ LauraX.change_stat("inhibition", 70, 20)
                 $ LauraX.change_face("sexy",1,Eyes="down")
                 ch_l "Huh. I mean I guess so. . ."
-                $ LauraX.change_face("smile",0)
+                $ LauraX.change_face("smile", 0)
                 $ LauraX.change_stat("love", 40, 20)
             ". . . [[stunned]":
                 $ LauraX.change_stat("love", 90, 10)
@@ -7403,7 +7406,7 @@ label Laura_First_Topless(Silent=0, TempLine=0):
     else:
 
 
-        $ LauraX.AddWord(1,0,0,0,"topless")
+        $ LauraX.add_word(1,0, 0, 0, "topless")
         if approval_check(LauraX, 800) and not LauraX.Forced:
             $ LauraX.change_stat("inhibition", 70, 5)
             $ LauraX.change_stat("obedience", 70, 10)
@@ -7423,7 +7426,7 @@ label Laura_First_Bottomless(Silent=0):
         return
     $ LauraX.recent_history.append("bottomless")
     $ LauraX.daily_history.append("bottomless")
-    $ LauraX.DrainWord("no_bottomless")
+    $ LauraX.drain_word("no_bottomless")
     $ LauraX.SeenPussy += 1
     if LauraX.SeenPussy > 1:
         return
@@ -7492,7 +7495,7 @@ label Laura_First_Bottomless(Silent=0):
                     $ LauraX.change_stat("obedience", 70, 25)
                 ch_l "I'll make you a mess. . ."
     else:
-        $ LauraX.AddWord(1,0,0,0,"bottomless")
+        $ LauraX.add_word(1,0, 0, 0, "bottomless")
         if approval_check(LauraX, 800) and not LauraX.Forced:
             $ LauraX.change_stat("inhibition", 60, 5)
             $ LauraX.change_stat("obedience", 70, 10)
@@ -7514,7 +7517,7 @@ label Jean_First_Topless(Silent=0, TempLine=0):
         return
     $ JeanX.recent_history.append("topless")
     $ JeanX.daily_history.append("topless")
-    $ JeanX.DrainWord("no_topless")
+    $ JeanX.drain_word("no_topless")
     $ JeanX.SeenChest += 1
     if JeanX.SeenChest > 1:
         return
@@ -7532,7 +7535,7 @@ label Jean_First_Topless(Silent=0, TempLine=0):
                 $ JeanX.change_stat("inhibition", 200, 20)
                 $ JeanX.change_face("sexy",1,Eyes="down")
                 ch_j "Yeah, they are pretty tight. . ."
-                $ JeanX.change_face("smile",0)
+                $ JeanX.change_face("smile", 0)
                 $ JeanX.change_stat("obedience", 40, 20)
             ". . . [[stunned]":
                 $ JeanX.change_stat("love", 90, 20)
@@ -7543,7 +7546,7 @@ label Jean_First_Topless(Silent=0, TempLine=0):
                 $ JeanX.change_stat("love", 90, 10)
                 $ JeanX.change_stat("obedience", 40, 20)
                 $ JeanX.change_stat("inhibition", 200, 20)
-                $ JeanX.change_face("smile",0)
+                $ JeanX.change_face("smile", 0)
                 ch_j "Exactl-{w=0.3}{nw}"
                 $ JeanX.change_stat("love", 90, -40)
                 $ JeanX.change_stat("obedience", 60, 10)
@@ -7648,7 +7651,7 @@ label Jean_First_Bottomless(Silent=0):
         return
     $ JeanX.recent_history.append("bottomless")
     $ JeanX.daily_history.append("bottomless")
-    $ JeanX.DrainWord("no_bottomless")
+    $ JeanX.drain_word("no_bottomless")
     $ JeanX.SeenPussy += 1
     if JeanX.SeenPussy > 1:
         return
@@ -7724,7 +7727,7 @@ label Jean_First_Bottomless(Silent=0):
                     $ JeanX.change_stat("obedience", 90, 25)
                 ch_j "Oh, so it's not saggy like [EmmaX.name]'s?"
     else:
-        $ JeanX.AddWord(1,0,0,0,"bottomless")
+        $ JeanX.add_word(1,0, 0, 0, "bottomless")
         if approval_check(JeanX, 800) and not JeanX.Forced:
             $ JeanX.change_stat("inhibition", 60, 5)
             $ JeanX.change_stat("obedience", 90, 10)
@@ -7746,7 +7749,7 @@ label Storm_First_Topless(Silent=0, TempLine=0):
         return
     $ StormX.recent_history.append("topless")
     $ StormX.daily_history.append("topless")
-    $ StormX.DrainWord("no_topless")
+    $ StormX.drain_word("no_topless")
     $ StormX.SeenChest += 1
     return
 
@@ -7759,7 +7762,7 @@ label Storm_First_Bottomless(Silent=0):
         return
     $ StormX.recent_history.append("bottomless")
     $ StormX.daily_history.append("bottomless")
-    $ StormX.DrainWord("no_bottomless")
+    $ StormX.drain_word("no_bottomless")
     $ StormX.SeenPussy += 1
     return
 
@@ -7773,7 +7776,7 @@ label Jubes_First_Topless(Silent=0, TempLine=0):
         return
     $ JubesX.recent_history.append("topless")
     $ JubesX.daily_history.append("topless")
-    $ JubesX.DrainWord("no_topless")
+    $ JubesX.drain_word("no_topless")
     $ JubesX.SeenChest += 1
     if JubesX.SeenChest > 1:
         return
@@ -7873,7 +7876,7 @@ label Jubes_First_Topless(Silent=0, TempLine=0):
     else:
 
 
-        $ JubesX.AddWord(1,0,0,0,"topless")
+        $ JubesX.add_word(1,0, 0, 0, "topless")
         if approval_check(JubesX, 800) and not JubesX.Forced:
             $ JubesX.change_stat("inhibition", 70, 5)
             $ JubesX.change_stat("obedience", 70, 10)
@@ -7893,7 +7896,7 @@ label Jubes_First_Bottomless(Silent=0):
         return
     $ JubesX.recent_history.append("bottomless")
     $ JubesX.daily_history.append("bottomless")
-    $ JubesX.DrainWord("no_bottomless")
+    $ JubesX.drain_word("no_bottomless")
     $ JubesX.SeenPussy += 1
     if JubesX.SeenPussy > 1:
         return
@@ -7965,7 +7968,7 @@ label Jubes_First_Bottomless(Silent=0):
                     $ JubesX.change_stat("obedience", 70, 25)
                 ch_v "Oh, them's fighting words. . ."
     else:
-        $ JubesX.AddWord(1,0,0,0,"bottomless")
+        $ JubesX.add_word(1,0, 0, 0, "bottomless")
         if approval_check(JubesX, 800) and not JubesX.Forced:
             $ JubesX.change_stat("inhibition", 60, 5)
             $ JubesX.change_stat("obedience", 70, 10)
@@ -8012,7 +8015,7 @@ label Display_DressScreen(Girl=focused_Girl):
         ch_j "I don't think you're ready for this. . ."
     elif Girl == JubesX:
         ch_v "I don't know, this is moving a little fast. . ."
-    $ Girl.AddWord(1,0,"screen")
+    $ Girl.add_word(1,0, "screen")
     $ Girl.change_face("bemused",1)
     Girl.voice "Mind if I get behind a dressing screen?"
     menu:

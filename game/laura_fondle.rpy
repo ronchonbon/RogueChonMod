@@ -30,11 +30,11 @@ label Laura_Fondle_Breasts:
         $ approval_bonus += 15
     if LauraX.lust > 75:
         $ approval_bonus += 20
-    if "exhibitionist" in LauraX.Traits:
+    if "exhibitionist" in LauraX.traits:
         $ approval_bonus += (3*Taboo)
     if LauraX in Player.Harem or "sex friend" in LauraX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in LauraX.Traits:
+    elif "ex" in LauraX.traits:
         $ approval_bonus -= 20
     if LauraX.event_counter["forced"] and not LauraX.Forced:
         $ approval_bonus -= 5*LauraX.event_counter["forced"]
@@ -48,10 +48,10 @@ label Laura_Fondle_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle breasts" in LauraX.recent_history else 0
 
-    $ Approval = approval_check(LauraX, 950, TabM = 3)
+    $ approval = approval_check(LauraX, 950, TabM = 3)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ LauraX.change_face("sexy")
             $ LauraX.change_stat("obedience", 90, 1)
             $ LauraX.change_stat("obedience", 70, 2)
@@ -70,7 +70,7 @@ label Laura_Fondle_Breasts:
 
 
 
-    if Approval:
+    if approval:
         $ LauraX.change_face("sexy", 1)
         if LauraX.Forced:
             $ LauraX.change_face("sad")
@@ -90,7 +90,7 @@ label Laura_Fondle_Breasts:
             "Mmm. . ."])
         ch_l "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ LauraX.change_face("bemused", 1)
         if LauraX.Forced:
             $ LauraX.change_face("sad")
@@ -138,7 +138,7 @@ label Laura_Fondle_Breasts:
                 $ LauraX.daily_history.append("no_fondle breasts")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ LauraX.change_face("sexy")
                     $ LauraX.change_stat("obedience", 50, 2)
                     $ LauraX.change_stat("inhibition", 60, 3)
@@ -151,8 +151,8 @@ label Laura_Fondle_Breasts:
             "[[Grab her chest anyway]":
 
 
-                $ Approval = approval_check(LauraX, 350, "OI", TabM = 3)
-                if Approval > 1 or (Approval and LauraX.Forced):
+                $ approval = approval_check(LauraX, 350, "OI", TabM = 3)
+                if approval > 1 or (approval and LauraX.Forced):
                     $ LauraX.change_face("sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
                     $ LauraX.change_stat("love", 20, -2, 1)
@@ -161,7 +161,7 @@ label Laura_Fondle_Breasts:
                     $ LauraX.change_stat("obedience", 90, 2)
                     $ LauraX.change_stat("obedience", 50, 4)
                     $ LauraX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ LauraX.Forced = 1
                     jump Laura_FB_Prep
                 else:
@@ -213,10 +213,10 @@ label Laura_FB_Prep:
     if action_context == LauraX:
 
         $ action_context = 0
-        if (LauraX.top or LauraX.bra) and not LauraX.Uptop:
+        if (LauraX.top or LauraX.bra) and not LauraX.top_pulled_up:
 
             if approval_check(LauraX, 1250, TabM = 1) or (LauraX.SeenChest and approval_check(LauraX, 500) and not Taboo):
-                $ LauraX.Uptop = 1
+                $ LauraX.top_pulled_up = 1
                 $ Line = LauraX.top if LauraX.top else LauraX.bra
                 "With a hungry grin, [LauraX.name] pulls her [Line] up over her breasts."
                 call Laura_First_Topless (1)
@@ -252,7 +252,7 @@ label Laura_FB_Prep:
                 $ LauraX.change_stat("obedience", 50, 1)
                 $ LauraX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ LauraX.AddWord(1,"refused","refused")
+                $ LauraX.add_word(1,"refused","refused")
                 return
 
 
@@ -283,8 +283,8 @@ label Laura_FB_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ LauraX.DrainWord("no_taboo")
-    $ LauraX.DrainWord("no_fondle breasts")
+        $ LauraX.drain_word("no_taboo")
+    $ LauraX.drain_word("no_fondle breasts")
     $ LauraX.recent_history.append("fondle_breasts")
     $ LauraX.daily_history.append("fondle_breasts")
     call Laura_Breasts_Launch ("fondle_breasts")
@@ -307,9 +307,9 @@ label Laura_FB_Cycle:
                     $ Round -= 1
                     jump Laura_FB_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -386,9 +386,9 @@ label Laura_FB_Cycle:
                         "Undress [LauraX.name]":
 
                             call Girl_Undress (LauraX)
-                        "Clean up [LauraX.name] (locked)" if not LauraX.Spunk:
+                        "Clean up [LauraX.name] (locked)" if not LauraX.spunk:
                             pass
-                        "Clean up [LauraX.name]" if LauraX.Spunk:
+                        "Clean up [LauraX.name]" if LauraX.spunk:
                             call Girl_Cleanup (LauraX, "ask")
                         "Never mind":
                             jump Laura_FB_Cycle
@@ -506,8 +506,8 @@ label Laura_FB_Cycle:
         elif Round == 5:
             ch_l "Tic tock, [LauraX.player_petname]."
 
-        if LauraX.lust >= 50 and not LauraX.Uptop and (LauraX.bra or LauraX.top):
-            $ LauraX.Uptop = 1
+        if LauraX.lust >= 50 and not LauraX.top_pulled_up and (LauraX.bra or LauraX.top):
+            $ LauraX.top_pulled_up = 1
             "[LauraX.name] grunts and pulls her clothes aside."
             call Laura_First_Topless
 
@@ -525,7 +525,7 @@ label Laura_FB_After:
     $ LauraX.action_counter["fondle_breasts"]+= 1
     $ LauraX.remaining_actions -=1
     $ LauraX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ LauraX.addiction_rate += 1
 
     call Partner_Like (LauraX, 2)
@@ -562,11 +562,11 @@ label Laura_Suck_Breasts:
         $ approval_bonus += 20
     if LauraX.lust > 75 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in LauraX.Traits:
+    if "exhibitionist" in LauraX.traits:
         $ approval_bonus += (4*Taboo)
     if LauraX in Player.Harem or "sex friend" in LauraX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in LauraX.Traits:
+    elif "ex" in LauraX.traits:
         $ approval_bonus -= 25
     if LauraX.event_counter["forced"] and not LauraX.Forced:
         $ approval_bonus -= 5*LauraX.event_counter["forced"]
@@ -580,10 +580,10 @@ label Laura_Suck_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_suck breasts" in LauraX.recent_history else 0
 
-    $ Approval = approval_check(LauraX, 1050, TabM = 4)
+    $ approval = approval_check(LauraX, 1050, TabM = 4)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ LauraX.change_face("sexy")
             $ LauraX.change_stat("obedience", 90, 1)
             $ LauraX.change_stat("obedience", 70, 2)
@@ -610,7 +610,7 @@ label Laura_Suck_Breasts:
             "Mmm. . ."])
         ch_l "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ LauraX.change_face("bemused", 1)
         if LauraX.Forced:
             $ LauraX.change_face("sad")
@@ -658,7 +658,7 @@ label Laura_Suck_Breasts:
                 $ LauraX.daily_history.append("no_suck breasts")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ LauraX.change_face("sexy")
                     $ LauraX.change_stat("obedience", 90, 1)
                     $ LauraX.change_stat("obedience", 50, 2)
@@ -671,8 +671,8 @@ label Laura_Suck_Breasts:
                     ch_l "Well if you're going to be a little bitch about it. . ."
             "[[Start sucking anyway]":
 
-                $ Approval = approval_check(LauraX, 450, "OI", TabM = 3)
-                if Approval > 1 or (Approval and LauraX.Forced):
+                $ approval = approval_check(LauraX, 450, "OI", TabM = 3)
+                if approval > 1 or (approval and LauraX.Forced):
                     $ LauraX.change_face("sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
                     $ LauraX.change_stat("love", 20, -2, 1)
@@ -680,7 +680,7 @@ label Laura_Suck_Breasts:
                     $ LauraX.change_stat("obedience", 90, 2)
                     $ LauraX.change_stat("obedience", 50, 4)
                     $ LauraX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ LauraX.Forced = 1
                     jump Laura_SB_Prep
                 else:
@@ -729,10 +729,10 @@ label Laura_SB_Prep:
     if action_context == LauraX:
 
         $ action_context = 0
-        if (LauraX.top or LauraX.bra) and not LauraX.Uptop:
+        if (LauraX.top or LauraX.bra) and not LauraX.top_pulled_up:
 
             if approval_check(LauraX, 1250, TabM = 1) or (LauraX.SeenChest and approval_check(LauraX, 500) and not Taboo):
-                $ LauraX.Uptop = 1
+                $ LauraX.top_pulled_up = 1
                 $ Line = LauraX.top if LauraX.top else LauraX.bra
                 "With a hungry grin, [LauraX.name] pulls her [Line] up over her breasts."
                 call Laura_First_Topless (1)
@@ -768,7 +768,7 @@ label Laura_SB_Prep:
                 $ LauraX.change_stat("obedience", 50, 1)
                 $ LauraX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ LauraX.AddWord(1,"refused","refused")
+                $ LauraX.add_word(1,"refused","refused")
                 return
 
 
@@ -799,8 +799,8 @@ label Laura_SB_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ LauraX.DrainWord("no_taboo")
-    $ LauraX.DrainWord("no_suck breasts")
+        $ LauraX.drain_word("no_taboo")
+    $ LauraX.drain_word("no_suck breasts")
     $ LauraX.recent_history.append("suck_breasts")
     $ LauraX.daily_history.append("suck_breasts")
     call Laura_Breasts_Launch ("suck_breasts")
@@ -825,9 +825,9 @@ label Laura_SB_Cycle:
                     $ Round -= 1
                     jump Laura_SB_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -897,9 +897,9 @@ label Laura_SB_Cycle:
                         "Undress [LauraX.name]":
 
                             call Girl_Undress (LauraX)
-                        "Clean up [LauraX.name] (locked)" if not LauraX.Spunk:
+                        "Clean up [LauraX.name] (locked)" if not LauraX.spunk:
                             pass
-                        "Clean up [LauraX.name]" if LauraX.Spunk:
+                        "Clean up [LauraX.name]" if LauraX.spunk:
                             call Girl_Cleanup (LauraX, "ask")
                         "Never mind":
                             jump Laura_SB_Cycle
@@ -1017,8 +1017,8 @@ label Laura_SB_Cycle:
         elif Round == 5:
             ch_l "Tic tock, [LauraX.player_petname]."
 
-        if LauraX.lust >= 50 and not LauraX.Uptop and (LauraX.bra or LauraX.top):
-            $ LauraX.Uptop = 1
+        if LauraX.lust >= 50 and not LauraX.top_pulled_up and (LauraX.bra or LauraX.top):
+            $ LauraX.top_pulled_up = 1
             "[LauraX.name] grunts and pulls her clothes aside."
             call Laura_First_Topless
 
@@ -1036,7 +1036,7 @@ label Laura_SB_After:
     $ LauraX.action_counter["suck_breasts"] += 1
     $ LauraX.remaining_actions -=1
     $ LauraX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ LauraX.addiction_rate += 1
 
     if Partner == "Kitty":
@@ -1073,11 +1073,11 @@ label Laura_Fondle_Thighs:
         $ approval_bonus -= 5
     if LauraX.lust > 75:
         $ approval_bonus += 10
-    if "exhibitionist" in LauraX.Traits:
+    if "exhibitionist" in LauraX.traits:
         $ approval_bonus += Taboo
     if LauraX in Player.Harem or "sex friend" in LauraX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in LauraX.Traits:
+    elif "ex" in LauraX.traits:
         $ approval_bonus -= 25
     if LauraX.event_counter["forced"] and not LauraX.Forced:
         $ approval_bonus -= 5*LauraX.event_counter["forced"]
@@ -1091,10 +1091,10 @@ label Laura_Fondle_Thighs:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle thighs" in LauraX.recent_history else 0
 
-    $ Approval = approval_check(LauraX, 750, TabM=1)
+    $ approval = approval_check(LauraX, 750, TabM=1)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ LauraX.change_face("sexy")
             $ LauraX.change_stat("obedience", 50, 1)
             $ LauraX.change_stat("inhibition", 30, 2)
@@ -1125,7 +1125,7 @@ label Laura_Fondle_Thighs:
         $ LauraX.change_face("sexy", 1)
         ch_l "You didn't get enough earlier?"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ LauraX.change_face("bemused", 1)
         if LauraX.Forced:
             $ LauraX.change_face("sad")
@@ -1171,7 +1171,7 @@ label Laura_Fondle_Thighs:
                 $ LauraX.daily_history.append("no_fondle thighs")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ LauraX.change_face("sexy")
                     $ LauraX.change_stat("obedience", 60, 1)
                     $ LauraX.change_stat("obedience", 30, 2)
@@ -1184,15 +1184,15 @@ label Laura_Fondle_Thighs:
                     ch_l "Well if you're going to be a little bitch about it. . ."
             "[[Start caressing her thigh anyway]":
 
-                $ Approval = approval_check(LauraX, 350, "OI", TabM = 2)
-                if Approval > 1 or (Approval and LauraX.Forced):
+                $ approval = approval_check(LauraX, 350, "OI", TabM = 2)
+                if approval > 1 or (approval and LauraX.Forced):
                     $ LauraX.change_face("sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
                     $ LauraX.change_stat("love", 20, -2, 1)
                     ch_l "Hmmph."
                     $ LauraX.change_stat("obedience", 50, 3)
                     $ LauraX.change_stat("inhibition", 60, 2)
-                    if Approval < 2:
+                    if approval < 2:
                         $ LauraX.Forced = 1
                     jump Laura_FT_Prep
                 else:
@@ -1266,8 +1266,8 @@ label Laura_FT_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ LauraX.DrainWord("no_taboo")
-    $ LauraX.DrainWord("no_fondle thighs")
+        $ LauraX.drain_word("no_taboo")
+    $ LauraX.drain_word("no_fondle thighs")
     $ LauraX.recent_history.append("fondle_thighs")
     $ LauraX.daily_history.append("fondle_thighs")
     call Laura_Pussy_Launch ("fondle_thighs")
@@ -1290,9 +1290,9 @@ label Laura_FT_Cycle:
                     $ Round -= 1
                     jump Laura_FT_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -1376,9 +1376,9 @@ label Laura_FT_Cycle:
                         "Undress [LauraX.name]":
 
                             call Girl_Undress (LauraX)
-                        "Clean up [LauraX.name] (locked)" if not LauraX.Spunk:
+                        "Clean up [LauraX.name] (locked)" if not LauraX.spunk:
                             pass
-                        "Clean up [LauraX.name]" if LauraX.Spunk:
+                        "Clean up [LauraX.name]" if LauraX.spunk:
                             call Girl_Cleanup (LauraX, "ask")
                         "Never mind":
                             jump Laura_FT_Cycle
@@ -1508,9 +1508,9 @@ label Laura_FT_After:
 
     $ LauraX.action_counter["fondle_thighs"]+= 1
     $ LauraX.remaining_actions -=1
-    if LauraX.PantsNum() < 6 or LauraX.Upskirt:
+    if LauraX.PantsNum() < 6 or LauraX.upskirt:
         $ LauraX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ LauraX.addiction_rate += 1
 
     if Partner == "Kitty":
@@ -1546,11 +1546,11 @@ label Laura_Fondle_Pussy:
         $ approval_bonus += 15
     if LauraX.lust > 75 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in LauraX.Traits:
+    if "exhibitionist" in LauraX.traits:
         $ approval_bonus += (2*Taboo)
     if LauraX in Player.Harem or "sex friend" in LauraX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in LauraX.Traits:
+    elif "ex" in LauraX.traits:
         $ approval_bonus -= 25
     if LauraX.event_counter["forced"] and not LauraX.Forced:
         $ approval_bonus -= 5*LauraX.event_counter["forced"]
@@ -1564,10 +1564,10 @@ label Laura_Fondle_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle pussy" in LauraX.recent_history else 0
 
-    $ Approval = approval_check(LauraX, 1050, TabM = 2)
+    $ approval = approval_check(LauraX, 1050, TabM = 2)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ LauraX.change_face("sexy")
             $ LauraX.change_stat("obedience", 90, 1)
             $ LauraX.change_stat("obedience", 70, 2)
@@ -1604,7 +1604,7 @@ label Laura_Fondle_Pussy:
             "Mmm. . ."])
         ch_l "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ LauraX.change_face("bemused", 1)
         if LauraX.Forced:
             $ LauraX.change_face("sad")
@@ -1651,7 +1651,7 @@ label Laura_Fondle_Pussy:
                 $ LauraX.daily_history.append("no_fondle pussy")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ LauraX.change_face("sexy")
                     $ LauraX.change_stat("obedience", 90, 2)
                     $ LauraX.change_stat("obedience", 50, 2)
@@ -1664,8 +1664,8 @@ label Laura_Fondle_Pussy:
                     ch_l "No."
             "[[Start fondling anyway]":
 
-                $ Approval = approval_check(LauraX, 450, "OI", TabM = 2)
-                if Approval > 1 or (Approval and LauraX.Forced):
+                $ approval = approval_check(LauraX, 450, "OI", TabM = 2)
+                if approval > 1 or (approval and LauraX.Forced):
                     $ LauraX.change_face("sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
                     $ LauraX.change_stat("love", 200, -2)
@@ -1673,7 +1673,7 @@ label Laura_Fondle_Pussy:
                     $ LauraX.change_stat("obedience", 50, 4)
                     $ LauraX.change_stat("inhibition", 80, 1)
                     $ LauraX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ LauraX.Forced = 1
                     jump Laura_FP_Prep
                 else:
@@ -1720,11 +1720,11 @@ label Laura_FP_Prep:
     if action_context == LauraX:
 
         $ action_context = 0
-        if (LauraX.legs and not LauraX.Upskirt) or (LauraX.underwear and not LauraX.underwearDown):
+        if (LauraX.legs and not LauraX.upskirt) or (LauraX.underwear and not LauraX.underwear_pulled_down):
 
             if approval_check(LauraX, 1250, TabM = 1) or (LauraX.SeenPussy and approval_check(LauraX, 500) and not Taboo):
-                $ LauraX.Upskirt = 1
-                $ LauraX.underwearDown = 1
+                $ LauraX.upskirt = 1
+                $ LauraX.underwear_pulled_down = 1
                 $ Line = 0
                 if LauraX.PantsNum() == 5:
                     $ Line = LauraX.name + " hikes up her_skirt"
@@ -1776,7 +1776,7 @@ label Laura_FP_Prep:
                 $ LauraX.change_stat("obedience", 50, 1)
                 $ LauraX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ LauraX.AddWord(1,"refused","refused")
+                $ LauraX.add_word(1,"refused","refused")
                 return
 
 
@@ -1806,8 +1806,8 @@ label Laura_FP_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ LauraX.DrainWord("no_taboo")
-    $ LauraX.DrainWord("no_fondle pussy")
+        $ LauraX.drain_word("no_taboo")
+    $ LauraX.drain_word("no_fondle pussy")
     $ LauraX.recent_history.append("fondle_pussy")
     $ LauraX.daily_history.append("fondle_pussy")
     call Laura_Pussy_Launch ("fondle_pussy")
@@ -1845,9 +1845,9 @@ label Laura_FP_Cycle:
                     $ Round -= 1
                     jump Laura_FP_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -1932,9 +1932,9 @@ label Laura_FP_Cycle:
                         "Undress [LauraX.name]":
 
                             call Girl_Undress (LauraX)
-                        "Clean up [LauraX.name] (locked)" if not LauraX.Spunk:
+                        "Clean up [LauraX.name] (locked)" if not LauraX.spunk:
                             pass
-                        "Clean up [LauraX.name]" if LauraX.Spunk:
+                        "Clean up [LauraX.name]" if LauraX.spunk:
                             call Girl_Cleanup (LauraX, "ask")
                         "Never mind":
                             jump Laura_FP_Cycle
@@ -2066,9 +2066,9 @@ label Laura_FP_After:
 
     $ LauraX.action_counter["fondle_pussy"] += 1
     $ LauraX.remaining_actions -=1
-    if LauraX.PantsNum() < 6 or LauraX.Upskirt:
+    if LauraX.PantsNum() < 6 or LauraX.upskirt:
         $ LauraX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ LauraX.addiction_rate += 1
 
     call Partner_Like (LauraX, 2)
@@ -2186,11 +2186,11 @@ label Laura_Lick_Pussy:
         $ approval_bonus += 10
     if LauraX.lust > 85 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in LauraX.Traits:
+    if "exhibitionist" in LauraX.traits:
         $ approval_bonus += (4*Taboo)
     if LauraX in Player.Harem or "sex friend" in LauraX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in LauraX.Traits:
+    elif "ex" in LauraX.traits:
         $ approval_bonus -= 25
     if LauraX.event_counter["forced"] and not LauraX.Forced:
         $ approval_bonus -= 5*LauraX.event_counter["forced"]
@@ -2204,10 +2204,10 @@ label Laura_Lick_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick pussy" in LauraX.recent_history else 0
 
-    $ Approval = approval_check(LauraX, 1250, TabM = 4)
+    $ approval = approval_check(LauraX, 1250, TabM = 4)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ LauraX.change_face("surprised")
             $ LauraX.change_stat("obedience", 90, 1)
             $ LauraX.change_stat("obedience", 70, 2)
@@ -2240,7 +2240,7 @@ label Laura_Lick_Pussy:
             "Mmm. . ."])
         ch_l "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         if LauraX.Forced:
             $ LauraX.change_face("sad")
             $ LauraX.change_stat("love", 70, -3, 1)
@@ -2294,7 +2294,7 @@ label Laura_Lick_Pussy:
                 $ LauraX.daily_history.append("no_lick pussy")
                 return
             "I think you'd really enjoy it. . .":
-                if Approval:
+                if approval:
                     $ LauraX.change_face("sexy")
                     $ LauraX.change_stat("obedience", 90, 2)
                     $ LauraX.change_stat("obedience", 50, 2)
@@ -2307,8 +2307,8 @@ label Laura_Lick_Pussy:
                     ch_l "I would, but still no, [LauraX.player_petname]."
             "[[Get in there anyway]":
 
-                $ Approval = approval_check(LauraX, 750, "OI", TabM = 4)
-                if Approval > 1 or (Approval and LauraX.Forced):
+                $ approval = approval_check(LauraX, 750, "OI", TabM = 4)
+                if approval > 1 or (approval and LauraX.Forced):
                     $ LauraX.change_face("sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
                     $ LauraX.change_stat("love", 200, -2)
@@ -2316,7 +2316,7 @@ label Laura_Lick_Pussy:
                     $ LauraX.change_stat("obedience", 50, 4)
                     $ LauraX.change_stat("inhibition", 80, 1)
                     $ LauraX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ LauraX.Forced = 1
                     jump Laura_LP_Prep
                 else:
@@ -2364,11 +2364,11 @@ label Laura_LP_Prep:
     if action_context == LauraX:
 
         $ action_context = 0
-        if (LauraX.legs and not LauraX.Upskirt) or (LauraX.underwear and not LauraX.underwearDown):
+        if (LauraX.legs and not LauraX.upskirt) or (LauraX.underwear and not LauraX.underwear_pulled_down):
 
             if approval_check(LauraX, 1250, TabM = 1) or (LauraX.SeenPussy and approval_check(LauraX, 500) and not Taboo):
-                $ LauraX.Upskirt = 1
-                $ LauraX.underwearDown = 1
+                $ LauraX.upskirt = 1
+                $ LauraX.underwear_pulled_down = 1
                 $ Line = 0
                 if LauraX.PantsNum() == 5:
                     $ Line = LauraX.name + " hikes up her_skirt"
@@ -2420,13 +2420,13 @@ label Laura_LP_Prep:
                 $ LauraX.change_stat("obedience", 50, 1)
                 $ LauraX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ LauraX.AddWord(1,"refused","refused")
+                $ LauraX.add_word(1,"refused","refused")
                 return
 
 
     if not LauraX.Forced and action_context != "auto":
         $ approval_bonus = 0
-        if LauraX.PantsNum() >= 6 and not LauraX.Upskirt:
+        if LauraX.PantsNum() >= 6 and not LauraX.upskirt:
             $ approval_bonus = 15
         call Bottoms_Off (LauraX)
         if "angry" in LauraX.recent_history:
@@ -2449,15 +2449,15 @@ label Laura_LP_Prep:
         $ action_context = 0
 
     if LauraX.PantsNum() == 5:
-        $ LauraX.Upskirt = 1
+        $ LauraX.upskirt = 1
         $ LauraX.SeenPanties = 1
     call Laura_First_Bottomless (1)
 
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ LauraX.DrainWord("no_taboo")
-    $ LauraX.DrainWord("no_lick pussy")
+        $ LauraX.drain_word("no_taboo")
+    $ LauraX.drain_word("no_lick pussy")
     $ LauraX.recent_history.append("eat_pussy")
     $ LauraX.daily_history.append("eat_pussy")
     call Laura_Pussy_Launch ("eat_pussy")
@@ -2482,9 +2482,9 @@ label Laura_LP_Cycle:
                     $ Round -= 1
                     jump Laura_LP_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -2564,9 +2564,9 @@ label Laura_LP_Cycle:
                         "Undress [LauraX.name]":
 
                             call Girl_Undress (LauraX)
-                        "Clean up [LauraX.name] (locked)" if not LauraX.Spunk:
+                        "Clean up [LauraX.name] (locked)" if not LauraX.spunk:
                             pass
-                        "Clean up [LauraX.name]" if LauraX.Spunk:
+                        "Clean up [LauraX.name]" if LauraX.spunk:
                             call Girl_Cleanup (LauraX, "ask")
                         "Never mind":
                             jump Laura_LP_Cycle
@@ -2701,9 +2701,9 @@ label Laura_LP_After:
 
     $ LauraX.action_counter["eat_pussy"] += 1
     $ LauraX.remaining_actions -=1
-    if LauraX.PantsNum() < 6 or LauraX.Upskirt:
+    if LauraX.PantsNum() < 6 or LauraX.upskirt:
         $ LauraX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ LauraX.addiction_rate += 1
 
     if Partner == "Rogue":
@@ -2741,11 +2741,11 @@ label Laura_Fondle_Ass:
         $ approval_bonus -= 5
     if LauraX.lust > 75:
         $ approval_bonus += 15
-    if "exhibitionist" in LauraX.Traits:
+    if "exhibitionist" in LauraX.traits:
         $ approval_bonus += Taboo
     if LauraX in Player.Harem or "sex friend" in LauraX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in LauraX.Traits:
+    elif "ex" in LauraX.traits:
         $ approval_bonus -= 25
     if LauraX.event_counter["forced"] and not LauraX.Forced:
         $ approval_bonus -= 5*LauraX.event_counter["forced"]
@@ -2759,10 +2759,10 @@ label Laura_Fondle_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle ass" in LauraX.recent_history else 0
 
-    $ Approval = approval_check(LauraX, 850, TabM=1)
+    $ approval = approval_check(LauraX, 850, TabM=1)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ LauraX.change_face("surprised", 1)
             $ LauraX.change_stat("obedience", 70, 2)
             $ LauraX.change_stat("inhibition", 40, 2)
@@ -2798,7 +2798,7 @@ label Laura_Fondle_Ass:
             "Mmm. . ."])
         ch_l "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         if LauraX.Forced:
             $ LauraX.change_face("sad")
             $ LauraX.change_stat("love", 70, -2, 1)
@@ -2847,7 +2847,7 @@ label Laura_Fondle_Ass:
                 $ LauraX.daily_history.append("no_fondle ass")
                 return
             "Just one good squeeze?":
-                if Approval:
+                if approval:
                     $ LauraX.change_face("sexy")
                     $ LauraX.change_stat("obedience", 90, 1)
                     $ LauraX.change_stat("obedience", 50, 2)
@@ -2860,15 +2860,15 @@ label Laura_Fondle_Ass:
                     ch_l "No."
             "[[Start fondling anyway]":
 
-                $ Approval = approval_check(LauraX, 250, "OI", TabM = 3)
-                if Approval > 1 or (Approval and LauraX.Forced):
+                $ approval = approval_check(LauraX, 250, "OI", TabM = 3)
+                if approval > 1 or (approval and LauraX.Forced):
                     $ LauraX.change_face("sad")
                     $ LauraX.change_stat("love", 70, -3, 1)
                     $ LauraX.change_stat("love", 200, -1)
                     ch_l "Fine, I guess."
                     $ LauraX.change_stat("obedience", 50, 3)
                     $ LauraX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ LauraX.Forced = 1
                     jump Laura_FA_Prep
                 else:
@@ -2938,8 +2938,8 @@ label Laura_FA_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ LauraX.DrainWord("no_taboo")
-    $ LauraX.DrainWord("no_fondle ass")
+        $ LauraX.drain_word("no_taboo")
+    $ LauraX.drain_word("no_fondle ass")
     $ LauraX.recent_history.append("fondle_ass")
     $ LauraX.daily_history.append("fondle_ass")
     call Laura_Pussy_Launch ("fondle_ass")
@@ -2962,9 +2962,9 @@ label Laura_FA_Cycle:
                     $ Round -= 1
                     jump Laura_FA_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -3053,9 +3053,9 @@ label Laura_FA_Cycle:
                         "Undress [LauraX.name]":
 
                             call Girl_Undress (LauraX)
-                        "Clean up [LauraX.name] (locked)" if not LauraX.Spunk:
+                        "Clean up [LauraX.name] (locked)" if not LauraX.spunk:
                             pass
-                        "Clean up [LauraX.name]" if LauraX.Spunk:
+                        "Clean up [LauraX.name]" if LauraX.spunk:
                             call Girl_Cleanup (LauraX, "ask")
                         "Never mind":
                             jump Laura_FA_Cycle
@@ -3190,9 +3190,9 @@ label Laura_FA_After:
 
     $ LauraX.action_counter["fondle_ass"] += 1
     $ LauraX.remaining_actions -=1
-    if LauraX.PantsNum() < 6 or LauraX.Upskirt:
+    if LauraX.PantsNum() < 6 or LauraX.upskirt:
         $ LauraX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ LauraX.addiction_rate += 1
 
         call Partner_Like (LauraX, 2)
@@ -3232,11 +3232,11 @@ label Laura_Insert_Ass:
         $ approval_bonus += 10
     if LauraX.lust > 85 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in LauraX.Traits:
+    if "exhibitionist" in LauraX.traits:
         $ approval_bonus += (4*Taboo)
     if LauraX in Player.Harem or "sex friend" in LauraX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in LauraX.Traits:
+    elif "ex" in LauraX.traits:
         $ approval_bonus -= 25
     if LauraX.event_counter["forced"] and not LauraX.Forced:
         $ approval_bonus -= 5*LauraX.event_counter["forced"]
@@ -3250,10 +3250,10 @@ label Laura_Insert_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_insert ass" in LauraX.recent_history else 0
 
-    $ Approval = approval_check(LauraX, 1300, TabM = 3)
+    $ approval = approval_check(LauraX, 1300, TabM = 3)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ LauraX.change_face("surprised")
             $ LauraX.change_stat("obedience", 90, 2)
             $ LauraX.change_stat("obedience", 70, 2)
@@ -3278,7 +3278,7 @@ label Laura_Insert_Ass:
             "Mmm. . ."])
         ch_l "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         if LauraX.Forced:
             $ LauraX.change_face("sad")
             $ LauraX.change_stat("love", 70, -3, 1)
@@ -3332,7 +3332,7 @@ label Laura_Insert_Ass:
                 $ LauraX.daily_history.append("no_insert ass")
                 return
             "I think you'd really enjoy it. . .":
-                if Approval:
+                if approval:
                     $ LauraX.change_face("sexy")
                     $ LauraX.change_stat("obedience", 90, 2)
                     $ LauraX.change_stat("obedience", 50, 2)
@@ -3345,8 +3345,8 @@ label Laura_Insert_Ass:
                     ch_l "I don't think that I would."
             "[[Slide a finger in anyway]":
 
-                $ Approval = approval_check(LauraX, 950, "OI", TabM = 3)
-                if Approval > 1 or (Approval and LauraX.Forced):
+                $ approval = approval_check(LauraX, 950, "OI", TabM = 3)
+                if approval > 1 or (approval and LauraX.Forced):
                     $ LauraX.change_face("surprised", 1)
                     $ LauraX.change_stat("love", 70, -5, 1)
                     $ LauraX.change_stat("love", 200, -2)
@@ -3355,7 +3355,7 @@ label Laura_Insert_Ass:
                     $ LauraX.change_stat("obedience", 50, 4)
                     $ LauraX.change_stat("inhibition", 80, 1)
                     $ LauraX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ LauraX.Forced = 1
                     jump Laura_IA_Prep
                 else:
@@ -3406,11 +3406,11 @@ label Laura_IA_Prep:
     if action_context == LauraX:
 
         $ action_context = 0
-        if (LauraX.legs and not LauraX.Upskirt) or (LauraX.underwear and not LauraX.underwearDown):
+        if (LauraX.legs and not LauraX.upskirt) or (LauraX.underwear and not LauraX.underwear_pulled_down):
 
             if approval_check(LauraX, 1250, TabM = 1) or (LauraX.SeenPussy and approval_check(LauraX, 500) and not Taboo):
-                $ LauraX.Upskirt = 1
-                $ LauraX.underwearDown = 1
+                $ LauraX.upskirt = 1
+                $ LauraX.underwear_pulled_down = 1
                 $ Line = 0
                 if LauraX.PantsNum() == 5:
                     $ Line = LauraX.name + " hikes up her_skirt"
@@ -3462,7 +3462,7 @@ label Laura_IA_Prep:
                 $ LauraX.change_stat("obedience", 50, 1)
                 $ LauraX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ LauraX.AddWord(1,"refused","refused")
+                $ LauraX.add_word(1,"refused","refused")
                 return
 
 
@@ -3493,8 +3493,8 @@ label Laura_IA_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ LauraX.DrainWord("no_taboo")
-    $ LauraX.DrainWord("no_insert ass")
+        $ LauraX.drain_word("no_taboo")
+    $ LauraX.drain_word("no_insert ass")
     $ LauraX.recent_history.append("finger_ass")
     $ LauraX.daily_history.append("finger_ass")
     call Laura_Pussy_Launch ("finger_ass")
@@ -3517,9 +3517,9 @@ label Laura_IA_Cycle:
                     $ Round -= 1
                     jump Laura_IA_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -3604,9 +3604,9 @@ label Laura_IA_Cycle:
                         "Undress [LauraX.name]":
 
                             call Girl_Undress (LauraX)
-                        "Clean up [LauraX.name] (locked)" if not LauraX.Spunk:
+                        "Clean up [LauraX.name] (locked)" if not LauraX.spunk:
                             pass
-                        "Clean up [LauraX.name]" if LauraX.Spunk:
+                        "Clean up [LauraX.name]" if LauraX.spunk:
                             call Girl_Cleanup (LauraX, "ask")
                         "Never mind":
                             jump Laura_IA_Cycle
@@ -3741,7 +3741,7 @@ label Laura_IA_After:
     $ LauraX.action_counter["finger_ass"] += 1
     $ LauraX.remaining_actions -=1
     $ LauraX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ LauraX.addiction_rate += 1
 
     call Partner_Like (LauraX, 2)
@@ -3784,11 +3784,11 @@ label Laura_Lick_Ass:
         $ approval_bonus += 10
     if action_context == "shift":
         $ approval_bonus += 10
-    if "exhibitionist" in LauraX.Traits:
+    if "exhibitionist" in LauraX.traits:
         $ approval_bonus += (4*Taboo)
     if LauraX in Player.Harem or "sex friend" in LauraX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in LauraX.Traits:
+    elif "ex" in LauraX.traits:
         $ approval_bonus -= 25
     if LauraX.event_counter["forced"] and not LauraX.Forced:
         $ approval_bonus -= 5*LauraX.event_counter["forced"]
@@ -3802,10 +3802,10 @@ label Laura_Lick_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick ass" in LauraX.recent_history else 0
 
-    $ Approval = approval_check(LauraX, 1550, TabM = 4)
+    $ approval = approval_check(LauraX, 1550, TabM = 4)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ LauraX.change_face("surprised")
             $ LauraX.change_stat("obedience", 90, 1)
             $ LauraX.change_stat("inhibition", 80, 3)
@@ -3831,7 +3831,7 @@ label Laura_Lick_Ass:
         ch_l "You didn't get enough earlier?"
 
 
-    if Approval >= 2:
+    if approval >= 2:
         if LauraX.Forced:
             $ LauraX.change_face("sad")
             $ LauraX.change_stat("love", 70, -3, 1)
@@ -3891,7 +3891,7 @@ label Laura_Lick_Ass:
                 $ LauraX.daily_history.append("no_lick ass")
                 return
             "I think you'd really enjoy it. . .":
-                if Approval:
+                if approval:
                     $ LauraX.change_face("sexy")
                     $ LauraX.change_stat("obedience", 90, 2)
                     $ LauraX.change_stat("obedience", 50, 2)
@@ -3904,8 +3904,8 @@ label Laura_Lick_Ass:
                     ch_l "I really don't think so."
             "[[Start licking anyway]":
 
-                $ Approval = approval_check(LauraX, 1100, "OI", TabM = 4)
-                if Approval > 1 or (Approval and LauraX.Forced):
+                $ approval = approval_check(LauraX, 1100, "OI", TabM = 4)
+                if approval > 1 or (approval and LauraX.Forced):
                     $ LauraX.change_face("sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
                     $ LauraX.change_stat("love", 200, -2)
@@ -3913,7 +3913,7 @@ label Laura_Lick_Ass:
                     $ LauraX.change_stat("obedience", 50, 4)
                     $ LauraX.change_stat("inhibition", 80, 1)
                     $ LauraX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ LauraX.Forced = 1
                     jump Laura_LA_Prep
                 else:
@@ -3982,7 +3982,7 @@ label Laura_LA_Prep:
         $ renpy.pop_call()
         $ action_context = 0
 
-    $ LauraX.Upskirt = 1
+    $ LauraX.upskirt = 1
     if LauraX.PantsNum() == 5:
         $ LauraX.SeenPanties = 1
     if not LauraX.underwear:
@@ -3990,8 +3990,8 @@ label Laura_LA_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ LauraX.DrainWord("no_taboo")
-    $ LauraX.DrainWord("no_lick ass")
+        $ LauraX.drain_word("no_taboo")
+    $ LauraX.drain_word("no_lick ass")
 
     $ LauraX.recent_history.append("lick") if "lick" not in LauraX.recent_history else LauraX.recent_history
     $ LauraX.recent_history.append("ass") if "ass" not in LauraX.recent_history else LauraX.recent_history
@@ -4021,9 +4021,9 @@ label Laura_LA_Cycle:
                     $ Round -= 1
                     jump Laura_LA_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -4108,9 +4108,9 @@ label Laura_LA_Cycle:
                         "Undress [LauraX.name]":
 
                             call Girl_Undress (LauraX)
-                        "Clean up [LauraX.name] (locked)" if not LauraX.Spunk:
+                        "Clean up [LauraX.name] (locked)" if not LauraX.spunk:
                             pass
-                        "Clean up [LauraX.name]" if LauraX.Spunk:
+                        "Clean up [LauraX.name]" if LauraX.spunk:
                             call Girl_Cleanup (LauraX, "ask")
                         "Never mind":
                             jump Laura_LA_Cycle
@@ -4244,9 +4244,9 @@ label Laura_LA_After:
 
     $ LauraX.action_counter["eat_ass"] += 1
     $ LauraX.remaining_actions -=1
-    if LauraX.PantsNum() < 6 or LauraX.Upskirt:
+    if LauraX.PantsNum() < 6 or LauraX.upskirt:
         $ LauraX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ LauraX.addiction_rate += 1
 
     call Partner_Like (LauraX, 2)

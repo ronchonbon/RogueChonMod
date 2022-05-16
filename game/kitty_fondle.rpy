@@ -30,11 +30,11 @@ label Kitty_Fondle_Breasts:
         $ approval_bonus += 15
     if KittyX.lust > 75:
         $ approval_bonus += 20
-    if "exhibitionist" in KittyX.Traits:
+    if "exhibitionist" in KittyX.traits:
         $ approval_bonus += (3*Taboo)
     if KittyX in Player.Harem or "sex friend" in KittyX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in KittyX.Traits:
+    elif "ex" in KittyX.traits:
         $ approval_bonus -= 20
     if KittyX.event_counter["forced"] and not KittyX.Forced:
         $ approval_bonus -= 5*KittyX.event_counter["forced"]
@@ -46,10 +46,10 @@ label Kitty_Fondle_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle breasts" in KittyX.recent_history else 0
 
-    $ Approval = approval_check(KittyX, 950, TabM = 3)
+    $ approval = approval_check(KittyX, 950, TabM = 3)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ KittyX.change_face("sexy")
             $ KittyX.change_stat("obedience", 90, 1)
             $ KittyX.change_stat("obedience", 70, 2)
@@ -68,7 +68,7 @@ label Kitty_Fondle_Breasts:
 
 
 
-    if Approval:
+    if approval:
         $ KittyX.change_face("sexy", 1)
         if KittyX.Forced:
             $ KittyX.change_face("sad")
@@ -88,7 +88,7 @@ label Kitty_Fondle_Breasts:
             "Mmm. . ."])
         ch_k "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ KittyX.change_face("bemused", 1)
         if KittyX.Forced:
             $ KittyX.change_face("sad")
@@ -137,7 +137,7 @@ label Kitty_Fondle_Breasts:
                 $ KittyX.daily_history.append("no_fondle breasts")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ KittyX.change_face("sexy")
                     $ KittyX.change_stat("obedience", 90, 1)
                     $ KittyX.change_stat("obedience", 50, 2)
@@ -151,8 +151,8 @@ label Kitty_Fondle_Breasts:
             "[[Grab her chest anyway]":
 
 
-                $ Approval = approval_check(KittyX, 350, "OI", TabM = 3)
-                if Approval > 1 or (Approval and KittyX.Forced):
+                $ approval = approval_check(KittyX, 350, "OI", TabM = 3)
+                if approval > 1 or (approval and KittyX.Forced):
                     $ KittyX.change_face("sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
                     $ KittyX.change_stat("love", 20, -2, 1)
@@ -160,7 +160,7 @@ label Kitty_Fondle_Breasts:
                     $ KittyX.change_stat("obedience", 90, 2)
                     $ KittyX.change_stat("obedience", 50, 4)
                     $ KittyX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ KittyX.Forced = 1
                     jump Kitty_FB_Prep
                 else:
@@ -212,10 +212,10 @@ label Kitty_FB_Prep:
     if action_context == KittyX:
 
         $ action_context = 0
-        if (KittyX.top or KittyX.bra) and not KittyX.Uptop:
+        if (KittyX.top or KittyX.bra) and not KittyX.top_pulled_up:
 
             if approval_check(KittyX, 1250, TabM = 1) or (KittyX.SeenChest and approval_check(KittyX, 500) and not Taboo):
-                $ KittyX.Uptop = 1
+                $ KittyX.top_pulled_up = 1
                 $ Line = KittyX.top if KittyX.top else KittyX.bra
                 "With a cheshire grin, [KittyX.name] pulls her [Line] up over her breasts."
                 call Kitty_First_Topless (1)
@@ -251,7 +251,7 @@ label Kitty_FB_Prep:
                 $ KittyX.change_stat("obedience", 50, 1)
                 $ KittyX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ KittyX.AddWord(1,"refused","refused")
+                $ KittyX.add_word(1,"refused","refused")
                 return
 
 
@@ -282,8 +282,8 @@ label Kitty_FB_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ KittyX.DrainWord("no_taboo")
-    $ KittyX.DrainWord("no_fondle breasts")
+        $ KittyX.drain_word("no_taboo")
+    $ KittyX.drain_word("no_fondle breasts")
     $ KittyX.recent_history.append("fondle_breasts")
     $ KittyX.daily_history.append("fondle_breasts")
     call Kitty_Breasts_Launch ("fondle_breasts")
@@ -306,9 +306,9 @@ label Kitty_FB_Cycle:
                     $ Round -= 1
                     jump Kitty_FB_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -372,9 +372,9 @@ label Kitty_FB_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Kitty_FB_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Kitty_FB_Cycle
                                 "Never mind":
@@ -387,9 +387,9 @@ label Kitty_FB_Cycle:
                         "Undress [KittyX.name]":
 
                             call Girl_Undress (KittyX)
-                        "Clean up [KittyX.name] (locked)" if not KittyX.Spunk:
+                        "Clean up [KittyX.name] (locked)" if not KittyX.spunk:
                             pass
-                        "Clean up [KittyX.name]" if KittyX.Spunk:
+                        "Clean up [KittyX.name]" if KittyX.spunk:
                             call Girl_Cleanup (KittyX, "ask")
                         "Never mind":
                             jump Kitty_FB_Cycle
@@ -507,8 +507,8 @@ label Kitty_FB_Cycle:
         elif Round == 5:
             ch_k "We should wrap this up."
 
-        if KittyX.lust >= 50 and not KittyX.Uptop and (KittyX.bra or KittyX.top):
-            $ KittyX.Uptop = 1
+        if KittyX.lust >= 50 and not KittyX.top_pulled_up and (KittyX.bra or KittyX.top):
+            $ KittyX.top_pulled_up = 1
             "[KittyX.name] laughs and pulls her top open."
             call Kitty_First_Topless
 
@@ -526,7 +526,7 @@ label Kitty_FB_After:
     $ KittyX.action_counter["fondle_breasts"]+= 1
     $ KittyX.remaining_actions -=1
     $ KittyX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ KittyX.addiction_rate += 1
 
     call Partner_Like (KittyX, 2)
@@ -563,11 +563,11 @@ label Kitty_Suck_Breasts:
         $ approval_bonus += 20
     if KittyX.lust > 75 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in KittyX.Traits:
+    if "exhibitionist" in KittyX.traits:
         $ approval_bonus += (4*Taboo)
     if KittyX in Player.Harem or "sex friend" in KittyX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in KittyX.Traits:
+    elif "ex" in KittyX.traits:
         $ approval_bonus -= 25
     if KittyX.event_counter["forced"] and not KittyX.Forced:
         $ approval_bonus -= 5*KittyX.event_counter["forced"]
@@ -579,10 +579,10 @@ label Kitty_Suck_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_suck breasts" in KittyX.recent_history else 0
 
-    $ Approval = approval_check(KittyX, 1050, TabM = 4)
+    $ approval = approval_check(KittyX, 1050, TabM = 4)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ KittyX.change_face("sexy")
             $ KittyX.change_stat("obedience", 90, 1)
             $ KittyX.change_stat("obedience", 70, 2)
@@ -609,7 +609,7 @@ label Kitty_Suck_Breasts:
             "Mmm. . ."])
         ch_k "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ KittyX.change_face("bemused", 1)
         if KittyX.Forced:
             $ KittyX.change_face("sad")
@@ -657,7 +657,7 @@ label Kitty_Suck_Breasts:
                 $ KittyX.daily_history.append("no_suck breasts")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ KittyX.change_face("sexy")
                     $ KittyX.change_stat("obedience", 90, 1)
                     $ KittyX.change_stat("obedience", 50, 2)
@@ -670,8 +670,8 @@ label Kitty_Suck_Breasts:
                     ch_k "Um, still no."
             "[[Start sucking anyway]":
 
-                $ Approval = approval_check(KittyX, 450, "OI", TabM = 3)
-                if Approval > 1 or (Approval and KittyX.Forced):
+                $ approval = approval_check(KittyX, 450, "OI", TabM = 3)
+                if approval > 1 or (approval and KittyX.Forced):
                     $ KittyX.change_face("sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
                     $ KittyX.change_stat("love", 20, -2, 1)
@@ -679,7 +679,7 @@ label Kitty_Suck_Breasts:
                     $ KittyX.change_stat("obedience", 90, 2)
                     $ KittyX.change_stat("obedience", 50, 4)
                     $ KittyX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ KittyX.Forced = 1
                     jump Kitty_SB_Prep
                 else:
@@ -727,10 +727,10 @@ label Kitty_SB_Prep:
     if action_context == KittyX:
 
         $ action_context = 0
-        if (KittyX.top or KittyX.bra) and not KittyX.Uptop:
+        if (KittyX.top or KittyX.bra) and not KittyX.top_pulled_up:
 
             if approval_check(KittyX, 1250, TabM = 1) or (KittyX.SeenChest and approval_check(KittyX, 500) and not Taboo):
-                $ KittyX.Uptop = 1
+                $ KittyX.top_pulled_up = 1
                 $ Line = KittyX.top if KittyX.top else KittyX.bra
                 "With a cheshire grin, [KittyX.name] pulls her [Line] up over her breasts."
                 call Kitty_First_Topless (1)
@@ -766,7 +766,7 @@ label Kitty_SB_Prep:
                 $ KittyX.change_stat("obedience", 50, 1)
                 $ KittyX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ KittyX.AddWord(1,"refused","refused")
+                $ KittyX.add_word(1,"refused","refused")
                 return
 
     if not KittyX.Forced and action_context != "auto":
@@ -796,8 +796,8 @@ label Kitty_SB_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ KittyX.DrainWord("no_taboo")
-    $ KittyX.DrainWord("no_suck breasts")
+        $ KittyX.drain_word("no_taboo")
+    $ KittyX.drain_word("no_suck breasts")
     $ KittyX.recent_history.append("suck_breasts")
     $ KittyX.daily_history.append("suck_breasts")
     call Kitty_Breasts_Launch ("suck_breasts")
@@ -822,9 +822,9 @@ label Kitty_SB_Cycle:
                     $ Round -= 1
                     jump Kitty_SB_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -881,9 +881,9 @@ label Kitty_SB_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Kitty_SB_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Kitty_SB_Cycle
                                 "Never mind":
@@ -896,9 +896,9 @@ label Kitty_SB_Cycle:
                         "Undress [KittyX.name]":
 
                             call Girl_Undress (KittyX)
-                        "Clean up [KittyX.name] (locked)" if not KittyX.Spunk:
+                        "Clean up [KittyX.name] (locked)" if not KittyX.spunk:
                             pass
-                        "Clean up [KittyX.name]" if KittyX.Spunk:
+                        "Clean up [KittyX.name]" if KittyX.spunk:
                             call Girl_Cleanup (KittyX, "ask")
                         "Never mind":
                             jump Kitty_SB_Cycle
@@ -1016,8 +1016,8 @@ label Kitty_SB_Cycle:
         elif Round == 5:
             ch_k "We should wrap this up."
 
-        if KittyX.lust >= 50 and not KittyX.Uptop and (KittyX.bra or KittyX.top):
-            $ KittyX.Uptop = 1
+        if KittyX.lust >= 50 and not KittyX.top_pulled_up and (KittyX.bra or KittyX.top):
+            $ KittyX.top_pulled_up = 1
             "[KittyX.name] laughs and pulls her top open."
             call Kitty_First_Topless
 
@@ -1035,7 +1035,7 @@ label Kitty_SB_After:
     $ KittyX.action_counter["suck_breasts"] += 1
     $ KittyX.remaining_actions -=1
     $ KittyX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ KittyX.addiction_rate += 1
 
     call Partner_Like (KittyX, 2)
@@ -1069,11 +1069,11 @@ label Kitty_Fondle_Thighs:
         $ approval_bonus -= 5
     if KittyX.lust > 75:
         $ approval_bonus += 10
-    if "exhibitionist" in KittyX.Traits:
+    if "exhibitionist" in KittyX.traits:
         $ approval_bonus += Taboo
     if KittyX in Player.Harem or "sex friend" in KittyX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in KittyX.Traits:
+    elif "ex" in KittyX.traits:
         $ approval_bonus -= 25
     if KittyX.event_counter["forced"] and not KittyX.Forced:
         $ approval_bonus -= 5*KittyX.event_counter["forced"]
@@ -1085,10 +1085,10 @@ label Kitty_Fondle_Thighs:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle thighs" in KittyX.recent_history else 0
 
-    $ Approval = approval_check(KittyX, 750, TabM=1)
+    $ approval = approval_check(KittyX, 750, TabM=1)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ KittyX.change_face("sexy")
             $ KittyX.change_stat("obedience", 50, 1)
             $ KittyX.change_stat("inhibition", 30, 2)
@@ -1119,7 +1119,7 @@ label Kitty_Fondle_Thighs:
         $ KittyX.change_face("sexy", 1)
         ch_k "Didn't get enough earlier?"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ KittyX.change_face("bemused", 1)
         if KittyX.Forced:
             $ KittyX.change_face("sad")
@@ -1165,7 +1165,7 @@ label Kitty_Fondle_Thighs:
                 $ KittyX.daily_history.append("no_fondle thighs")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ KittyX.change_face("sexy")
                     $ KittyX.change_stat("obedience", 60, 1)
                     $ KittyX.change_stat("obedience", 30, 2)
@@ -1178,15 +1178,15 @@ label Kitty_Fondle_Thighs:
                     ch_k "Um, still no."
             "[[Start caressing her thigh anyway]":
 
-                $ Approval = approval_check(KittyX, 350, "OI", TabM = 2)
-                if Approval > 1 or (Approval and KittyX.Forced):
+                $ approval = approval_check(KittyX, 350, "OI", TabM = 2)
+                if approval > 1 or (approval and KittyX.Forced):
                     $ KittyX.change_face("sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
                     $ KittyX.change_stat("love", 20, -2, 1)
                     ch_k "Hmmph."
                     $ KittyX.change_stat("obedience", 50, 3)
                     $ KittyX.change_stat("inhibition", 60, 2)
-                    if Approval < 2:
+                    if approval < 2:
                         $ KittyX.Forced = 1
                     jump Kitty_FT_Prep
                 else:
@@ -1260,8 +1260,8 @@ label Kitty_FT_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ KittyX.DrainWord("no_taboo")
-    $ KittyX.DrainWord("no_fondle thighs")
+        $ KittyX.drain_word("no_taboo")
+    $ KittyX.drain_word("no_fondle thighs")
     $ KittyX.recent_history.append("fondle_thighs")
     $ KittyX.daily_history.append("fondle_thighs")
     call Kitty_Pussy_Launch ("fondle_thighs")
@@ -1283,9 +1283,9 @@ label Kitty_FT_Cycle:
                     $ Round -= 1
                     jump Kitty_FT_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -1356,9 +1356,9 @@ label Kitty_FT_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Kitty_FT_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Kitty_FT_Cycle
                                 "Never mind":
@@ -1371,9 +1371,9 @@ label Kitty_FT_Cycle:
                         "Undress [KittyX.name]":
 
                             call Girl_Undress (KittyX)
-                        "Clean up [KittyX.name] (locked)" if not KittyX.Spunk:
+                        "Clean up [KittyX.name] (locked)" if not KittyX.spunk:
                             pass
-                        "Clean up [KittyX.name]" if KittyX.Spunk:
+                        "Clean up [KittyX.name]" if KittyX.spunk:
                             call Girl_Cleanup (KittyX, "ask")
                         "Never mind":
                             jump Kitty_FT_Cycle
@@ -1502,9 +1502,9 @@ label Kitty_FT_After:
 
     $ KittyX.action_counter["fondle_thighs"]+= 1
     $ KittyX.remaining_actions -=1
-    if KittyX.PantsNum() < 6 or KittyX.Upskirt:
+    if KittyX.PantsNum() < 6 or KittyX.upskirt:
         $ KittyX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ KittyX.addiction_rate += 1
 
         call Partner_Like (KittyX, 1)
@@ -1537,11 +1537,11 @@ label Kitty_Fondle_Pussy:
         $ approval_bonus += 15
     if KittyX.lust > 75 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in KittyX.Traits:
+    if "exhibitionist" in KittyX.traits:
         $ approval_bonus += (2*Taboo)
     if KittyX in Player.Harem or "sex friend" in KittyX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in KittyX.Traits:
+    elif "ex" in KittyX.traits:
         $ approval_bonus -= 25
     if KittyX.event_counter["forced"] and not KittyX.Forced:
         $ approval_bonus -= 5*KittyX.event_counter["forced"]
@@ -1553,10 +1553,10 @@ label Kitty_Fondle_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle pussy" in KittyX.recent_history else 0
 
-    $ Approval = approval_check(KittyX, 1050, TabM = 2)
+    $ approval = approval_check(KittyX, 1050, TabM = 2)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ KittyX.change_face("sexy")
             $ KittyX.change_stat("obedience", 90, 1)
             $ KittyX.change_stat("obedience", 70, 2)
@@ -1593,7 +1593,7 @@ label Kitty_Fondle_Pussy:
             "Mmm. . ."])
         ch_k "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ KittyX.change_face("bemused", 1)
         if KittyX.Forced:
             $ KittyX.change_face("sad")
@@ -1640,7 +1640,7 @@ label Kitty_Fondle_Pussy:
                 $ KittyX.daily_history.append("no_fondle pussy")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ KittyX.change_face("sexy")
                     $ KittyX.change_stat("obedience", 90, 2)
                     $ KittyX.change_stat("obedience", 50, 2)
@@ -1653,8 +1653,8 @@ label Kitty_Fondle_Pussy:
                     ch_k "Nuh uh."
             "[[Start fondling anyway]":
 
-                $ Approval = approval_check(KittyX, 450, "OI", TabM = 2)
-                if Approval > 1 or (Approval and KittyX.Forced):
+                $ approval = approval_check(KittyX, 450, "OI", TabM = 2)
+                if approval > 1 or (approval and KittyX.Forced):
                     $ KittyX.change_face("sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
                     $ KittyX.change_stat("love", 200, -2)
@@ -1662,7 +1662,7 @@ label Kitty_Fondle_Pussy:
                     $ KittyX.change_stat("obedience", 50, 4)
                     $ KittyX.change_stat("inhibition", 80, 1)
                     $ KittyX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ KittyX.Forced = 1
                     jump Kitty_FP_Prep
                 else:
@@ -1709,11 +1709,11 @@ label Kitty_FP_Prep:
     if action_context == KittyX:
 
         $ action_context = 0
-        if (KittyX.legs and not KittyX.Upskirt) or (KittyX.underwear and not KittyX.underwearDown):
+        if (KittyX.legs and not KittyX.upskirt) or (KittyX.underwear and not KittyX.underwear_pulled_down):
 
             if approval_check(KittyX, 1250, TabM = 1) or (KittyX.SeenPussy and approval_check(KittyX, 500) and not Taboo):
-                $ KittyX.Upskirt = 1
-                $ KittyX.underwearDown = 1
+                $ KittyX.upskirt = 1
+                $ KittyX.underwear_pulled_down = 1
                 $ Line = 0
                 if KittyX.PantsNum() == 5:
                     $ Line = KittyX.name + " hikes up her_skirt"
@@ -1765,7 +1765,7 @@ label Kitty_FP_Prep:
                 $ KittyX.change_stat("obedience", 50, 1)
                 $ KittyX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ KittyX.AddWord(1,"refused","refused")
+                $ KittyX.add_word(1,"refused","refused")
                 return
 
 
@@ -1794,8 +1794,8 @@ label Kitty_FP_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ KittyX.DrainWord("no_taboo")
-    $ KittyX.DrainWord("no_fondle pussy")
+        $ KittyX.drain_word("no_taboo")
+    $ KittyX.drain_word("no_fondle pussy")
     $ KittyX.recent_history.append("fondle_pussy")
     $ KittyX.daily_history.append("fondle_pussy")
 
@@ -1834,9 +1834,9 @@ label Kitty_FP_Cycle:
                     $ Round -= 1
                     jump Kitty_FP_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -1908,9 +1908,9 @@ label Kitty_FP_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Kitty_FP_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Kitty_FP_Cycle
                                 "Never mind":
@@ -1923,9 +1923,9 @@ label Kitty_FP_Cycle:
                         "Undress [KittyX.name]":
 
                             call Girl_Undress (KittyX)
-                        "Clean up [KittyX.name] (locked)" if not KittyX.Spunk:
+                        "Clean up [KittyX.name] (locked)" if not KittyX.spunk:
                             pass
-                        "Clean up [KittyX.name]" if KittyX.Spunk:
+                        "Clean up [KittyX.name]" if KittyX.spunk:
                             call Girl_Cleanup (KittyX, "ask")
                         "Never mind":
                             jump Kitty_FP_Cycle
@@ -2056,9 +2056,9 @@ label Kitty_FP_After:
 
     $ KittyX.action_counter["fondle_pussy"] += 1
     $ KittyX.remaining_actions -=1
-    if KittyX.PantsNum() < 6 or KittyX.Upskirt:
+    if KittyX.PantsNum() < 6 or KittyX.upskirt:
         $ KittyX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ KittyX.addiction_rate += 1
 
     call Partner_Like (KittyX, 2)
@@ -2176,11 +2176,11 @@ label Kitty_Lick_Pussy:
         $ approval_bonus += 10
     if KittyX.lust > 85 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in KittyX.Traits:
+    if "exhibitionist" in KittyX.traits:
         $ approval_bonus += (4*Taboo)
     if KittyX in Player.Harem or "sex friend" in KittyX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in KittyX.Traits:
+    elif "ex" in KittyX.traits:
         $ approval_bonus -= 25
     if KittyX.event_counter["forced"] and not KittyX.Forced:
         $ approval_bonus -= 5*KittyX.event_counter["forced"]
@@ -2192,10 +2192,10 @@ label Kitty_Lick_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick pussy" in KittyX.recent_history else 0
 
-    $ Approval = approval_check(KittyX, 1250, TabM = 4)
+    $ approval = approval_check(KittyX, 1250, TabM = 4)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ KittyX.change_face("surprised")
             $ KittyX.change_stat("obedience", 90, 1)
             $ KittyX.change_stat("obedience", 70, 2)
@@ -2228,7 +2228,7 @@ label Kitty_Lick_Pussy:
             "Mmm. . ."])
         ch_k "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         if KittyX.Forced:
             $ KittyX.change_face("sad")
             $ KittyX.change_stat("love", 70, -3, 1)
@@ -2282,7 +2282,7 @@ label Kitty_Lick_Pussy:
                 $ KittyX.daily_history.append("no_lick pussy")
                 return
             "I think you'd really enjoy it. . .":
-                if Approval:
+                if approval:
                     $ KittyX.change_face("sexy")
                     $ KittyX.change_stat("obedience", 90, 2)
                     $ KittyX.change_stat("obedience", 50, 2)
@@ -2295,8 +2295,8 @@ label Kitty_Lick_Pussy:
                     ch_k "Um, not this time, [KittyX.player_petname], that's too. . ."
             "[[Get in there anyway]":
 
-                $ Approval = approval_check(KittyX, 750, "OI", TabM = 4)
-                if Approval > 1 or (Approval and KittyX.Forced):
+                $ approval = approval_check(KittyX, 750, "OI", TabM = 4)
+                if approval > 1 or (approval and KittyX.Forced):
                     $ KittyX.change_face("sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
                     $ KittyX.change_stat("love", 200, -2)
@@ -2304,7 +2304,7 @@ label Kitty_Lick_Pussy:
                     $ KittyX.change_stat("obedience", 50, 4)
                     $ KittyX.change_stat("inhibition", 80, 1)
                     $ KittyX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ KittyX.Forced = 1
                     jump Kitty_LP_Prep
                 else:
@@ -2351,11 +2351,11 @@ label Kitty_LP_Prep:
     if action_context == KittyX:
 
         $ action_context = 0
-        if (KittyX.legs and not KittyX.Upskirt) or (KittyX.underwear and not KittyX.underwearDown):
+        if (KittyX.legs and not KittyX.upskirt) or (KittyX.underwear and not KittyX.underwear_pulled_down):
 
             if approval_check(KittyX, 1250, TabM = 1) or (KittyX.SeenPussy and approval_check(KittyX, 500) and not Taboo):
-                $ KittyX.Upskirt = 1
-                $ KittyX.underwearDown = 1
+                $ KittyX.upskirt = 1
+                $ KittyX.underwear_pulled_down = 1
                 $ Line = 0
                 if KittyX.PantsNum() == 5:
                     $ Line = KittyX.name + " hikes up her_skirt"
@@ -2407,7 +2407,7 @@ label Kitty_LP_Prep:
                 $ KittyX.change_stat("obedience", 50, 1)
                 $ KittyX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ KittyX.AddWord(1,"refused","refused")
+                $ KittyX.add_word(1,"refused","refused")
                 return
 
 
@@ -2437,7 +2437,7 @@ label Kitty_LP_Prep:
         $ action_context = 0
 
     if KittyX.PantsNum() == 5:
-        $ KittyX.Upskirt = 1
+        $ KittyX.upskirt = 1
         $ KittyX.SeenPanties = 1
     if not KittyX.underwear:
         call Kitty_First_Bottomless (1)
@@ -2445,8 +2445,8 @@ label Kitty_LP_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ KittyX.DrainWord("no_taboo")
-    $ KittyX.DrainWord("no_lick pussy")
+        $ KittyX.drain_word("no_taboo")
+    $ KittyX.drain_word("no_lick pussy")
     $ KittyX.recent_history.append("eat_pussy")
     $ KittyX.daily_history.append("eat_pussy")
     call Kitty_Pussy_Launch ("eat_pussy")
@@ -2471,9 +2471,9 @@ label Kitty_LP_Cycle:
                     $ Round -= 1
                     jump Kitty_LP_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -2540,9 +2540,9 @@ label Kitty_LP_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Kitty_LP_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Kitty_LP_Cycle
                                 "Never mind":
@@ -2555,9 +2555,9 @@ label Kitty_LP_Cycle:
                         "Undress [KittyX.name]":
 
                             call Girl_Undress (KittyX)
-                        "Clean up [KittyX.name] (locked)" if not KittyX.Spunk:
+                        "Clean up [KittyX.name] (locked)" if not KittyX.spunk:
                             pass
-                        "Clean up [KittyX.name]" if KittyX.Spunk:
+                        "Clean up [KittyX.name]" if KittyX.spunk:
                             call Girl_Cleanup (KittyX, "ask")
                         "Never mind":
                             jump Kitty_LP_Cycle
@@ -2691,9 +2691,9 @@ label Kitty_LP_After:
 
     $ KittyX.action_counter["eat_pussy"] += 1
     $ KittyX.remaining_actions -=1
-    if KittyX.PantsNum() < 6 or KittyX.Upskirt:
+    if KittyX.PantsNum() < 6 or KittyX.upskirt:
         $ KittyX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ KittyX.addiction_rate += 1
 
     call Partner_Like (KittyX, 3, 2)
@@ -2728,11 +2728,11 @@ label Kitty_Fondle_Ass:
         $ approval_bonus -= 5
     if KittyX.lust > 75:
         $ approval_bonus += 15
-    if "exhibitionist" in KittyX.Traits:
+    if "exhibitionist" in KittyX.traits:
         $ approval_bonus += Taboo
     if KittyX in Player.Harem or "sex friend" in KittyX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in KittyX.Traits:
+    elif "ex" in KittyX.traits:
         $ approval_bonus -= 25
     if KittyX.event_counter["forced"] and not KittyX.Forced:
         $ approval_bonus -= 5*KittyX.event_counter["forced"]
@@ -2744,10 +2744,10 @@ label Kitty_Fondle_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle ass" in KittyX.recent_history else 0
 
-    $ Approval = approval_check(KittyX, 850, TabM=1)
+    $ approval = approval_check(KittyX, 850, TabM=1)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ KittyX.change_face("surprised", 1)
             $ KittyX.change_stat("obedience", 70, 2)
             $ KittyX.change_stat("inhibition", 40, 2)
@@ -2783,7 +2783,7 @@ label Kitty_Fondle_Ass:
             "Mmm. . ."])
         ch_k "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         if KittyX.Forced:
             $ KittyX.change_face("sad")
             $ KittyX.change_stat("love", 70, -2, 1)
@@ -2832,7 +2832,7 @@ label Kitty_Fondle_Ass:
                 $ KittyX.daily_history.append("no_fondle ass")
                 return
             "Just one good squeeze?":
-                if Approval:
+                if approval:
                     $ KittyX.change_face("sexy")
                     $ KittyX.change_stat("obedience", 90, 1)
                     $ KittyX.change_stat("obedience", 50, 2)
@@ -2845,15 +2845,15 @@ label Kitty_Fondle_Ass:
                     ch_k "Nuh uh."
             "[[Start fondling anyway]":
 
-                $ Approval = approval_check(KittyX, 250, "OI", TabM = 3)
-                if Approval > 1 or (Approval and KittyX.Forced):
+                $ approval = approval_check(KittyX, 250, "OI", TabM = 3)
+                if approval > 1 or (approval and KittyX.Forced):
                     $ KittyX.change_face("sad")
                     $ KittyX.change_stat("love", 70, -3, 1)
                     $ KittyX.change_stat("love", 200, -1)
                     ch_k "Fine, I suppose."
                     $ KittyX.change_stat("obedience", 50, 3)
                     $ KittyX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ KittyX.Forced = 1
                     jump Kitty_FA_Prep
                 else:
@@ -2923,8 +2923,8 @@ label Kitty_FA_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ KittyX.DrainWord("no_taboo")
-    $ KittyX.DrainWord("no_fondle ass")
+        $ KittyX.drain_word("no_taboo")
+    $ KittyX.drain_word("no_fondle ass")
     $ KittyX.recent_history.append("fondle_ass")
     $ KittyX.daily_history.append("fondle_ass")
     call Kitty_Pussy_Launch ("fondle_ass")
@@ -2947,9 +2947,9 @@ label Kitty_FA_Cycle:
                     $ Round -= 1
                     jump Kitty_FA_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -3025,9 +3025,9 @@ label Kitty_FA_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Kitty_FA_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Kitty_FA_Cycle
                                 "Never mind":
@@ -3040,9 +3040,9 @@ label Kitty_FA_Cycle:
                         "Undress [KittyX.name]":
 
                             call Girl_Undress (KittyX)
-                        "Clean up [KittyX.name] (locked)" if not KittyX.Spunk:
+                        "Clean up [KittyX.name] (locked)" if not KittyX.spunk:
                             pass
-                        "Clean up [KittyX.name]" if KittyX.Spunk:
+                        "Clean up [KittyX.name]" if KittyX.spunk:
                             call Girl_Cleanup (KittyX, "ask")
                         "Never mind":
                             jump Kitty_FA_Cycle
@@ -3177,9 +3177,9 @@ label Kitty_FA_After:
 
     $ KittyX.action_counter["fondle_ass"] += 1
     $ KittyX.remaining_actions -=1
-    if KittyX.PantsNum() < 6 or KittyX.Upskirt:
+    if KittyX.PantsNum() < 6 or KittyX.upskirt:
         $ KittyX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ KittyX.addiction_rate += 1
 
         call Partner_Like (KittyX, 2)
@@ -3219,11 +3219,11 @@ label Kitty_Insert_Ass:
         $ approval_bonus += 10
     if KittyX.lust > 85 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in KittyX.Traits:
+    if "exhibitionist" in KittyX.traits:
         $ approval_bonus += (4*Taboo)
     if KittyX in Player.Harem or "sex friend" in KittyX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in KittyX.Traits:
+    elif "ex" in KittyX.traits:
         $ approval_bonus -= 25
     if KittyX.event_counter["forced"] and not KittyX.Forced:
         $ approval_bonus -= 5*KittyX.event_counter["forced"]
@@ -3235,10 +3235,10 @@ label Kitty_Insert_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_insert ass" in KittyX.recent_history else 0
 
-    $ Approval = approval_check(KittyX, 1300, TabM = 3)
+    $ approval = approval_check(KittyX, 1300, TabM = 3)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ KittyX.change_face("surprised")
             $ KittyX.change_stat("obedience", 90, 2)
             $ KittyX.change_stat("obedience", 70, 2)
@@ -3266,7 +3266,7 @@ label Kitty_Insert_Ass:
             "Mmm. . ."])
         ch_k "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         if KittyX.Forced:
             $ KittyX.change_face("sad")
             $ KittyX.change_stat("love", 70, -3, 1)
@@ -3320,7 +3320,7 @@ label Kitty_Insert_Ass:
                 $ KittyX.daily_history.append("no_insert ass")
                 return
             "I think you'd really enjoy it. . .":
-                if Approval:
+                if approval:
                     $ KittyX.change_face("sexy")
                     $ KittyX.change_stat("obedience", 90, 2)
                     $ KittyX.change_stat("obedience", 50, 2)
@@ -3333,8 +3333,8 @@ label Kitty_Insert_Ass:
                     ch_k "I really don't think that I would."
             "[[Slide a finger in anyway]":
 
-                $ Approval = approval_check(KittyX, 950, "OI", TabM = 3)
-                if Approval > 1 or (Approval and KittyX.Forced):
+                $ approval = approval_check(KittyX, 950, "OI", TabM = 3)
+                if approval > 1 or (approval and KittyX.Forced):
                     $ KittyX.change_face("surprised", 1)
                     $ KittyX.change_stat("love", 70, -5, 1)
                     $ KittyX.change_stat("love", 200, -2)
@@ -3343,7 +3343,7 @@ label Kitty_Insert_Ass:
                     $ KittyX.change_stat("obedience", 50, 4)
                     $ KittyX.change_stat("inhibition", 80, 1)
                     $ KittyX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ KittyX.Forced = 1
                     jump Kitty_IA_Prep
                 else:
@@ -3394,11 +3394,11 @@ label Kitty_IA_Prep:
     if action_context == KittyX:
 
         $ action_context = 0
-        if (KittyX.legs and not KittyX.Upskirt) or (KittyX.underwear and not KittyX.underwearDown):
+        if (KittyX.legs and not KittyX.upskirt) or (KittyX.underwear and not KittyX.underwear_pulled_down):
 
             if approval_check(KittyX, 1250, TabM = 1) or (KittyX.SeenPussy and approval_check(KittyX, 500) and not Taboo):
-                $ KittyX.Upskirt = 1
-                $ KittyX.underwearDown = 1
+                $ KittyX.upskirt = 1
+                $ KittyX.underwear_pulled_down = 1
                 $ Line = 0
                 if KittyX.PantsNum() == 5:
                     $ Line = KittyX.name + " hikes up her_skirt"
@@ -3450,7 +3450,7 @@ label Kitty_IA_Prep:
                 $ KittyX.change_stat("obedience", 50, 1)
                 $ KittyX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ KittyX.AddWord(1,"refused","refused")
+                $ KittyX.add_word(1,"refused","refused")
                 return
 
 
@@ -3481,8 +3481,8 @@ label Kitty_IA_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ KittyX.DrainWord("no_taboo")
-    $ KittyX.DrainWord("no_insert ass")
+        $ KittyX.drain_word("no_taboo")
+    $ KittyX.drain_word("no_insert ass")
     $ KittyX.recent_history.append("finger_ass")
     $ KittyX.daily_history.append("finger_ass")
     call Kitty_Pussy_Launch ("finger_ass")
@@ -3505,9 +3505,9 @@ label Kitty_IA_Cycle:
                     $ Round -= 1
                     jump Kitty_IA_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -3579,9 +3579,9 @@ label Kitty_IA_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Kitty_IA_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Kitty_IA_Cycle
                                 "Never mind":
@@ -3594,9 +3594,9 @@ label Kitty_IA_Cycle:
                         "Undress [KittyX.name]":
 
                             call Girl_Undress (KittyX)
-                        "Clean up [KittyX.name] (locked)" if not KittyX.Spunk:
+                        "Clean up [KittyX.name] (locked)" if not KittyX.spunk:
                             pass
-                        "Clean up [KittyX.name]" if KittyX.Spunk:
+                        "Clean up [KittyX.name]" if KittyX.spunk:
                             call Girl_Cleanup (KittyX, "ask")
                         "Never mind":
                             jump Kitty_IA_Cycle
@@ -3731,7 +3731,7 @@ label Kitty_IA_After:
     $ KittyX.action_counter["finger_ass"] += 1
     $ KittyX.remaining_actions -=1
     $ KittyX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ KittyX.addiction_rate += 1
 
     call Partner_Like (KittyX, 2)
@@ -3774,11 +3774,11 @@ label Kitty_Lick_Ass:
         $ approval_bonus += 10
     if action_context == "shift":
         $ approval_bonus += 10
-    if "exhibitionist" in KittyX.Traits:
+    if "exhibitionist" in KittyX.traits:
         $ approval_bonus += (4*Taboo)
     if KittyX in Player.Harem or "sex friend" in KittyX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in KittyX.Traits:
+    elif "ex" in KittyX.traits:
         $ approval_bonus -= 25
     if KittyX.event_counter["forced"] and not KittyX.Forced:
         $ approval_bonus -= 5*KittyX.event_counter["forced"]
@@ -3790,10 +3790,10 @@ label Kitty_Lick_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick ass" in KittyX.recent_history else 0
 
-    $ Approval = approval_check(KittyX, 1550, TabM = 4)
+    $ approval = approval_check(KittyX, 1550, TabM = 4)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ KittyX.change_face("surprised")
             $ KittyX.change_stat("obedience", 90, 1)
             $ KittyX.change_stat("inhibition", 80, 3)
@@ -3819,7 +3819,7 @@ label Kitty_Lick_Ass:
         ch_k "Didn't get enough earlier?"
 
 
-    if Approval >= 2:
+    if approval >= 2:
         if KittyX.Forced:
             $ KittyX.change_face("sad")
             $ KittyX.change_stat("love", 70, -3, 1)
@@ -3879,7 +3879,7 @@ label Kitty_Lick_Ass:
                 $ KittyX.daily_history.append("no_lick ass")
                 return
             "I think you'd really enjoy it. . .":
-                if Approval:
+                if approval:
                     $ KittyX.change_face("sexy")
                     $ KittyX.change_stat("obedience", 90, 2)
                     $ KittyX.change_stat("obedience", 50, 2)
@@ -3892,8 +3892,8 @@ label Kitty_Lick_Ass:
                     ch_k "I really don't think so."
             "[[Start licking anyway]":
 
-                $ Approval = approval_check(KittyX, 1100, "OI", TabM = 4)
-                if Approval > 1 or (Approval and KittyX.Forced):
+                $ approval = approval_check(KittyX, 1100, "OI", TabM = 4)
+                if approval > 1 or (approval and KittyX.Forced):
                     $ KittyX.change_face("sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
                     $ KittyX.change_stat("love", 200, -2)
@@ -3901,7 +3901,7 @@ label Kitty_Lick_Ass:
                     $ KittyX.change_stat("obedience", 50, 4)
                     $ KittyX.change_stat("inhibition", 80, 1)
                     $ KittyX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ KittyX.Forced = 1
                     jump Kitty_LA_Prep
                 else:
@@ -3970,7 +3970,7 @@ label Kitty_LA_Prep:
         $ renpy.pop_call()
         $ action_context = 0
 
-    $ KittyX.Upskirt = 1
+    $ KittyX.upskirt = 1
     if KittyX.PantsNum() == 5:
         $ KittyX.SeenPanties = 1
     if not KittyX.underwear:
@@ -3978,8 +3978,8 @@ label Kitty_LA_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ KittyX.DrainWord("no_taboo")
-    $ KittyX.DrainWord("no_lick ass")
+        $ KittyX.drain_word("no_taboo")
+    $ KittyX.drain_word("no_lick ass")
 
     $ KittyX.recent_history.append("lick") if "lick" not in KittyX.recent_history else KittyX.recent_history
     $ KittyX.recent_history.append("ass") if "ass" not in KittyX.recent_history else KittyX.recent_history
@@ -4009,9 +4009,9 @@ label Kitty_LA_Cycle:
                     $ Round -= 1
                     jump Kitty_LA_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -4083,9 +4083,9 @@ label Kitty_LA_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Kitty_LA_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Kitty_LA_Cycle
                                 "Never mind":
@@ -4098,9 +4098,9 @@ label Kitty_LA_Cycle:
                         "Undress [KittyX.name]":
 
                             call Girl_Undress (KittyX)
-                        "Clean up [KittyX.name] (locked)" if not KittyX.Spunk:
+                        "Clean up [KittyX.name] (locked)" if not KittyX.spunk:
                             pass
-                        "Clean up [KittyX.name]" if KittyX.Spunk:
+                        "Clean up [KittyX.name]" if KittyX.spunk:
                             call Girl_Cleanup (KittyX, "ask")
                         "Never mind":
                             jump Kitty_LA_Cycle
@@ -4234,9 +4234,9 @@ label Kitty_LA_After:
 
     $ KittyX.action_counter["eat_ass"] += 1
     $ KittyX.remaining_actions -=1
-    if KittyX.PantsNum() < 6 or KittyX.Upskirt:
+    if KittyX.PantsNum() < 6 or KittyX.upskirt:
         $ KittyX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ KittyX.addiction_rate += 1
 
     call Partner_Like (KittyX, 2)

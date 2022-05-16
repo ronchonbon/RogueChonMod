@@ -1,28 +1,15 @@
-
-
 init python:
+
     def CallHolder(Value, Color, XPOS):
         global number_of_holders
+
         number_of_holders += 1 if number_of_holders < 10 else -9
-
-
-
-
-
-
-
-
-
-
-
-
 
         renpy.show_screen("StatHolder"+str(number_of_holders), Value, Color, XPOS)
 
         return
 
 transform StatAnimation(Timer, XPOS):
-
     alpha 0
     pause Timer
     xpos XPOS ypos 0.15 alpha 1
@@ -33,241 +20,51 @@ transform StatAnimation(Timer, XPOS):
         linear .3 alpha 0
 
 screen StatGraphic(Value, Color, Timer, XPOS):
-
     showif Value > 0:
         text "+[Value]" size 30 color Color at StatAnimation(Timer, XPOS)
     else:
         text "[Value]" size 30 color Color at StatAnimation(Timer, XPOS)
 
 screen StatHolder1(Value, Color, XPOS):
-
     use StatGraphic(Value, Color, 0.0, XPOS-30)
+
     timer 0.6 action Hide("StatHolder1")
 screen StatHolder2(Value, Color, XPOS):
     use StatGraphic(Value, Color, 0.1, XPOS)
+
     timer 0.7 action Hide("StatHolder2")
 screen StatHolder3(Value, Color, XPOS):
     use StatGraphic(Value, Color, 0.2, XPOS+30)
+
     timer 0.8 action Hide("StatHolder3")
 screen StatHolder4(Value, Color, XPOS):
     use StatGraphic(Value, Color, 0.3, XPOS-30)
+
     timer 0.9 action Hide("StatHolder4")
 screen StatHolder5(Value, Color, XPOS):
     use StatGraphic(Value, Color, 0.4, XPOS)
+
     timer 1.0 action Hide("StatHolder5")
 screen StatHolder6(Value, Color, XPOS):
     use StatGraphic(Value, Color, 0.5, XPOS+30)
+
     timer 1.1 action Hide("StatHolder6")
 screen StatHolder7(Value, Color, XPOS):
     use StatGraphic(Value, Color, 0.6, XPOS-30)
+
     timer 1.2 action Hide("StatHolder7")
 screen StatHolder8(Value, Color, XPOS):
     use StatGraphic(Value, Color, 0.7, XPOS)
+
     timer 1.3 action Hide("StatHolder8")
 screen StatHolder9(Value, Color, XPOS):
     use StatGraphic(Value, Color, 0.8, XPOS+30)
+
     timer 1.4 action Hide("StatHolder9")
 screen StatHolder10(Value, Color, XPOS):
     use StatGraphic(Value, Color, 0.9, XPOS-30)
+
     timer 1.5 action Hide("StatHolder10")
-
-
-
-init python:
-
-    def approval_check(Chr = 0, T = 1000, Type = "LOI", Spread = 150, TmpM = 1, TabM = 0, C = 1, Bonus = 0, Loc = 0, Check=0, Alt=[[],0]):
-
-
-
-
-
-        if Chr not in all_Girls:
-            return 0
-
-        while Alt[0]:
-
-            if Chr in Alt[0]:
-                T = Alt[1] if Alt[1] else T
-            Alt[0].remove(Alt[0][0])
-
-        L = Chr.love
-        O = Chr.obedience
-        I = Chr.inhibition
-        LocalTaboo = Chr.Taboo
-        Loc = Chr.location if not Loc else Loc
-
-        if Chr == JeanX and (O <= 800 or JeanX.Taboo):
-
-            I = (I - JeanX.IX)
-
-        if Loc == bg_current and C:
-
-            if Chr == LauraX:
-                if "mandrill" in Player.Traits:
-                    if L <= 400:
-                        L += 600
-                    else:
-                        L = 1200
-                    if "drugged" not in Chr.Traits:
-                        Chr.Traits.append("drugged")
-                elif "purple" in Player.Traits:
-                    if O <= 400:
-                        O += 600
-                    else:
-                        O = 1200
-                    if "drugged" not in Chr.Traits:
-                        Chr.Traits.append("drugged")
-                elif "corruption" in Player.Traits:
-                    if I <= 400:
-                        I += 600
-                    else:
-                        I = 1200
-                    if "drugged" not in Chr.Traits:
-                        Chr.Traits.append("drugged")
-            else:
-                if "mandrill" in Player.Traits:
-                    if L <= 500:
-                        L += 500
-                    else:
-                        L = 1000
-                elif "purple" in Player.Traits:
-                    if O <= 500:
-                        O += 500
-                    else:
-                        O = 1000
-                elif "corruption" in Player.Traits:
-                    if I <= 500:
-                        I += 500
-                    else:
-                        I = 1000
-
-        if Type == "LOI":
-            LocalTaboo = LocalTaboo*10
-            Localapproval_bonus = approval_bonus*10
-
-        elif Type == "LO":
-
-
-            I = 0
-            LocalTaboo = LocalTaboo*6
-            Localapproval_bonus = approval_bonus*6
-        elif Type == "OI":
-            L = 0
-            LocalTaboo = LocalTaboo*6
-            Localapproval_bonus = approval_bonus*6
-        elif Type == "LI":
-            O = 0
-            LocalTaboo = LocalTaboo*6
-            Localapproval_bonus = approval_bonus*6
-
-        elif Type == "L":
-            O = 0
-            I = 0
-            LocalTaboo = LocalTaboo*3
-            Localapproval_bonus = approval_bonus*3
-        elif Type == "O":
-            L = 0
-            I = 0
-            LocalTaboo = LocalTaboo*3
-            Localapproval_bonus = approval_bonus*3
-        elif Type == "I":
-            O = 0
-            L = 0
-            LocalTaboo = LocalTaboo*3
-            Localapproval_bonus = approval_bonus*3
-
-        else:
-            LocalTaboo = LocalTaboo*10
-            Localapproval_bonus = approval_bonus*10
-
-        TabM = 0 if TabM <= 0 else TabM
-
-        if Check:
-
-            Check = (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*LocalTaboo))
-            return Check
-
-        if (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*LocalTaboo)) >= (T + (2*Spread)):
-
-            return 3
-        elif (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*LocalTaboo)) >= (T + Spread):
-
-            return 2
-        elif (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*LocalTaboo)) >= T:
-
-            return 1
-        else:
-            return 0
-
-
-
-
-    def Room_Full(Here = [],BO=[]):
-
-
-        global Party
-        Here = []
-        while len(Party) > 2:
-
-
-            Party.remove(Party[2])
-
-
-
-
-        BO = all_Girls[:]
-        while BO:
-            if BO[0].location == bg_current and BO[0] not in Party:
-                Here.append(BO[0])
-            BO.remove(BO[0])
-        if len(Party) + len(Here) >= 2:
-            return 1
-        else:
-            return 0
-
-
-
-    def AloneCheck(Girl=0,BO=[]):
-
-
-        BO = all_Girls[:]
-        if Girl and Girl in all_Girls:
-            BO.remove(Girl)
-        while BO:
-            if BO[0].location == bg_current:
-                return 0
-            BO.remove(BO[0])
-        return 1
-
-
-
-    def GirlCheck(Check=0,Local=0,BO=[]):
-
-
-        global focused_Girl
-        if Check in all_Girls and (not Local or bg_current == Check.location):
-
-
-            return Check
-        elif bg_current == focused_Girl.location:
-
-            return focused_Girl
-        else:
-
-
-            BO = all_Girls[:]
-            while BO:
-                if bg_current == BO[0].location:
-
-
-                    focused_Girl = BO[0]
-                    return BO[0]
-                BO.remove(BO[0])
-        ch_u("Tell Oni, no appropriate character was found.", interact=True)
-        return focused_Girl
-
-
-
 
 
 
@@ -421,8 +218,8 @@ label checkout(Total=0, BO=[]):
 
     if Total:
         $ multi_action = 1
-        $ Player.DrainWord("cockout")
-        $ Player.DrainWord("nude")
+        $ Player.drain_word("cockout")
+        $ Player.drain_word("nude")
         $ primary_action = 0
         $ offhand_action = 0
         $ girl_offhand_action = 0
@@ -461,31 +258,31 @@ label Wait(Outfit=1, Lights=1, BO=[]):
 
         if PunishmentX:
 
-            $ Player.Cash += int(Player.Income / 2)
+            $ Player.cash += int(Player.income / 2)
             if PunishmentX == 1:
                 "Your punishment from Xavier has expired."
             $ PunishmentX -= 1
         else:
 
-            $ Player.Cash += Player.Income
+            $ Player.cash += Player.income
 
 
 
         $ Player.semen = Player.max_semen
-        $ Player.Spunk = 0
-        $ Player.Rep = 0 if Player.Rep < 0 else Player.Rep
-        $ Player.Rep += 10 if Player.Rep < 800 else 0
-        $ Player.Rep = 1000 if Player.Rep > 1000 else Player.Rep
+        $ Player.spunk = 0
+        $ Player.reputation = 0 if Player.reputation < 0 else Player.reputation
+        $ Player.reputation += 10 if Player.reputation < 800 else 0
+        $ Player.reputation = 1000 if Player.reputation > 1000 else Player.reputation
 
         $ TotalSEXP = 0
 
 
-        if "mandrill" in Player.Traits:
-            $ Player.Traits.remove("mandrill")
-        if "purple" in Player.Traits:
-            $ Player.Traits.remove("purple")
-        if "corruption" in Player.Traits:
-            $ Player.Traits.remove("corruption")
+        if "mandrill" in Player.traits:
+            $ Player.traits.remove("mandrill")
+        if "purple" in Player.traits:
+            $ Player.traits.remove("purple")
+        if "corruption" in Player.traits:
+            $ Player.traits.remove("corruption")
         call Favorite_Actions
 
 
@@ -528,10 +325,10 @@ label Wait(Outfit=1, Lights=1, BO=[]):
 
             $ BO[0].addiction += BO[0].addiction_rate
             $ BO[0].addiction -= (3*BO[0].resistance)
-            if "nonaddictive" in Player.Traits:
+            if "nonaddictive" in Player.traits:
                 $ BO[0].addiction_rate -= 2
                 $ BO[0].addiction -= 5
-            if "addictive" not in Player.Traits:
+            if "addictive" not in Player.traits:
                 $ BO[0].addiction_rate -= BO[0].resistance
                 if BO[0] != RogueX and BO[0].addiction_rate >= 3:
 
@@ -542,9 +339,9 @@ label Wait(Outfit=1, Lights=1, BO=[]):
                 $ BO[0].event_counter["forced"] -= 1 if approval_check(BO[0], 1000, "LO") else 0
             $ BO[0].remaining_actions = BO[0].max_actions
 
-            $ BO[0].Rep = 0 if BO[0].Rep < 0 else BO[0].Rep
-            $ BO[0].Rep += 10 if BO[0].Rep < 800 else 0
-            $ BO[0].Rep = 1000 if BO[0].Rep > 1000 else BO[0].Rep
+            $ BO[0].reputation = 0 if BO[0].reputation < 0 else BO[0].reputation
+            $ BO[0].reputation += 10 if BO[0].reputation < 800 else 0
+            $ BO[0].reputation = 1000 if BO[0].reputation > 1000 else BO[0].reputation
 
             $ BO[0].lust -= 5 if BO[0].lust >= 50 else 0
             $ TotalSEXP += BO[0].SEXP
@@ -571,7 +368,7 @@ label Wait(Outfit=1, Lights=1, BO=[]):
 
             $ BO[0].Break[0] -= 1 if BO[0].Break[0] > 0 else 0
 
-            $ del BO[0].Spunk[:]
+            $ del BO[0].spunk[:]
 
             if "lover" in BO[0].player_petnames and BO[0].love > 800:
                 $ BO[0].love += 10
@@ -594,14 +391,14 @@ label Wait(Outfit=1, Lights=1, BO=[]):
                     elif BO[0].obedience >= 500:
                         $ BO[0].love += 1
                         $ BO[0].StatStore -= 1
-                if BO[0].Rep <= 800 and "nowhammy" not in JeanX.Traits:
+                if BO[0].reputation <= 800 and "nowhammy" not in JeanX.traits:
 
-                    $ BO[0].Rep = 800
+                    $ BO[0].reputation = 800
 
-            if "Jeaned" in BO[0].Traits:
+            if "Jeaned" in BO[0].traits:
 
-                $ BO[0].Traits.remove("Jeaned")
-                $ BO[0].LikeJean = getattr(JeanX,"LikeS"+BO[0].Tag)
+                $ BO[0].traits.remove("Jeaned")
+                $ BO[0].LikeJean = getattr(JeanX,"LikeS"+BO[0].tag)
 
             $ BO.remove(BO[0])
 
@@ -634,10 +431,10 @@ label Wait(Outfit=1, Lights=1, BO=[]):
         $ BO[0].session_orgasms = 0
         if BO[0].lust >= 70 or BO[0].Thirst >= 30 or (renpy.random.randint(1, 40) + BO[0].lust)>= 70:
 
-            if "nofap" in BO[0].Traits:
-                $ BO[0].AddWord(1,0,"wannafap",0,0)
+            if "nofap" in BO[0].traits:
+                $ BO[0].add_word(1,0,"wannafap",0,0)
             else:
-                $ BO[0].AddWord(1,0,"gonnafap",0,0)
+                $ BO[0].add_word(1,0,"gonnafap",0,0)
 
         if "les" in BO[0].recent_history:
             $ BO[0].Thirst -= int(BO[0].Thirst/2)
@@ -675,7 +472,7 @@ label Wait(Outfit=1, Lights=1, BO=[]):
             $ Count = int((BO[0].Taboo*BO[0].Shame) / 200)
             $ BO[0].change_stat("obedience", 90, Count)
             $ BO[0].change_stat("inhibition", 90, Count)
-            $ BO[0].Rep -= Count
+            $ BO[0].reputation -= Count
 
 
         $ BO[0].love -= 5*BO[0].recent_history.count("unsatisfied")
@@ -686,10 +483,10 @@ label Wait(Outfit=1, Lights=1, BO=[]):
             $ BO[0].recent_history.append("angry")
         if time_index == 0:
             $ del BO[0].daily_history[:]
-        elif time_index == 3 and "yesdate" in BO[0].daily_history and "stoodup" not in BO[0].Traits:
+        elif time_index == 3 and "yesdate" in BO[0].daily_history and "stoodup" not in BO[0].traits:
 
-            $ Player.DrainWord("yesdate",0,1)
-            $ BO[0].Traits.append("stoodup")
+            $ Player.drain_word("yesdate",0,1)
+            $ BO[0].traits.append("stoodup")
 
         if BO[0].used_to_anal < 2:
             if (BO[0].action_counter["anal"] + BO[0].action_counter["dildo_ass"] + BO[0].Plug) >= 15:
@@ -698,12 +495,12 @@ label Wait(Outfit=1, Lights=1, BO=[]):
                 $ BO[0].used_to_anal = 1
 
         $ BO[0].XP = 3330 if BO[0].XP > 3330 else BO[0].XP
-        if BO[0].XP >= BO[0].XPgoal and BO[0].Lvl < 10:
-            $ BO[0].XPgoal = int((1.15*BO[0].XPgoal) + 100)
-            $ BO[0].Lvl += 1
-            $ BO[0].StatPoints += 1
+        if BO[0].XP >= BO[0].XP_goal and BO[0].level < 10:
+            $ BO[0].XP_goal = int((1.15*BO[0].XP_goal) + 100)
+            $ BO[0].level += 1
+            $ BO[0].stat_points += 1
             "[BO[0].name]'s leveled up! I bet she has some new tricks to learn."
-            if BO[0].Lvl == 10:
+            if BO[0].level == 10:
                 "[BO[0].name]'s reached max level!"
         if BO[0] == LauraX:
             $ BO[0].addiction_rate -= (2*BO[0].resistance) if BO[0].addiction_rate > 5 else 0
@@ -729,20 +526,20 @@ label Wait(Outfit=1, Lights=1, BO=[]):
             $ BO.remove(BO[0])
 
 
-    if Player.Lvl < 10 and Player.XP >= Player.XPgoal:
-        $ Player.XPgoal = int((1.15*Player.XPgoal) + 100)
-        $ Player.Lvl += 1
-        $ Player.StatPoints += 1
-        if Player.Lvl <5:
+    if Player.level < 10 and Player.XP >= Player.XP_goal:
+        $ Player.XP_goal = int((1.15*Player.XP_goal) + 100)
+        $ Player.level += 1
+        $ Player.stat_points += 1
+        if Player.level <5:
             $ Count = 1
-        elif Player.Lvl <9:
+        elif Player.level <9:
             $ Count = 2
         else:
             $ Count = 3
-        $ Player.Income += Count
+        $ Player.income += Count
         "You've leveled up!"
-        "Xavier has noticed your achievements and raised your stipend by $[Count] per day. It is now $[Player.Income]."
-        if Player.Lvl == 10:
+        "Xavier has noticed your achievements and raised your stipend by $[Count] per day. It is now $[Player.income]."
+        if Player.level == 10:
             "You've reached max level!"
 
 
@@ -776,7 +573,7 @@ label Girls_Schedule(Girls=[], Clothes=1, Location=1, LocTemp=0):
         if Girls[0] in Party and Clothes != 2 or not Location:
 
             pass
-        elif Clothes != 2 and "sleepover" in Girls[0].Traits and time_index == 0:
+        elif Clothes != 2 and "sleepover" in Girls[0].traits and time_index == 0:
 
             pass
         else:
@@ -940,7 +737,7 @@ label EventCalls(EGirls=[]):
     if time_index == 2 and "yesdate" in Player.daily_history:
         if bg_current == "bg_campus":
             call DateNight
-            $ Player.DrainWord("yesdate",0,1)
+            $ Player.drain_word("yesdate",0,1)
             return
         else:
             menu:
@@ -1010,7 +807,7 @@ label EventCalls(EGirls=[]):
                     jump Emma_Caught_Classroom
                     return
 
-            if "detention" in Player.Traits and not Party:
+            if "detention" in Player.traits and not Party:
                 jump Emma_Detention
 
             if Round >= 70:
@@ -1065,7 +862,7 @@ label EventCalls(EGirls=[]):
         return
 
 
-    if "locked" in Player.Traits:
+    if "locked" in Player.traits:
 
         return
 
@@ -1125,7 +922,7 @@ label EventCalls(EGirls=[]):
 
     while EGirls:
         if "relationship" not in EGirls[0].daily_history:
-            if "stoodup" in EGirls[0].Traits:
+            if "stoodup" in EGirls[0].traits:
                 call Date_Stood_Up (EGirls[0])
                 return
             if EGirls[0].Break[0] or "angry" in EGirls[0].daily_history:
@@ -1133,7 +930,7 @@ label EventCalls(EGirls=[]):
                 pass
             elif not EGirls[0].Event[0] and EGirls[0].event_counter["sleepover"] >= 5:
                 if EGirls[0].location == bg_current or EGirls[0] in Party:
-                    call expression EGirls[0].Tag + "_Key"
+                    call expression EGirls[0].tag + "_Key"
                     return
             elif EGirls[0] == JubesX:
                 pass
@@ -1151,42 +948,42 @@ label EventCalls(EGirls=[]):
                         if (bg_current == EGirls[0].home or bg_current == "bg_player") and EGirls[0].location == bg_current:
                             call Jean_Daddy
                     return
-            elif "boyfriend" not in EGirls[0].player_petnames and EGirls[0].love >= 800 and EGirls[0].Event[5] != 20 and EGirls[0].Tag + "No" not in Player.Traits:
+            elif "boyfriend" not in EGirls[0].player_petnames and EGirls[0].love >= 800 and EGirls[0].Event[5] != 20 and EGirls[0].tag + "No" not in Player.traits:
 
 
                 if EGirls[0] == LauraX and LauraX.Event[5] == 3:
 
                     call Laura_Cleanhouse
-                elif Player.Harem and EGirls[0].Tag + "Yes" not in Player.Traits:
+                elif Player.Harem and EGirls[0].tag + "Yes" not in Player.traits:
                     call Poly_Start (EGirls[0])
                 elif bg_current == EGirls[0].home or bg_current == "bg_player":
-                    call expression EGirls[0].Tag + "_BF"
+                    call expression EGirls[0].tag + "_BF"
                 else:
                     call AskedMeet (EGirls[0], "bemused")
                 return
             elif "lover" not in EGirls[0].player_petnames and EGirls[0].love >= 950 and EGirls[0].Event[6] < 15:
 
                 if bg_current == EGirls[0].home or bg_current == "bg_player":
-                    call expression EGirls[0].Tag + "_Love"
+                    call expression EGirls[0].tag + "_Love"
                 else:
                     call AskedMeet (EGirls[0], "bemused")
                 return
             elif "sir" not in EGirls[0].history and "sir" not in EGirls[0].player_petnames and EGirls[0].obedience >= 500:
                 if bg_current == EGirls[0].home or bg_current == "bg_player":
-                    call expression EGirls[0].Tag + "_Sub"
+                    call expression EGirls[0].tag + "_Sub"
                 else:
                     call AskedMeet (EGirls[0], "bemused")
                 return
             elif "master" not in EGirls[0].history and "master" not in EGirls[0].player_petnames and EGirls[0].obedience >= 850 and EGirls[0].Event[8] < 2:
 
                 if bg_current == EGirls[0].home or bg_current == "bg_player":
-                    call expression EGirls[0].Tag + "_Master"
+                    call expression EGirls[0].tag + "_Master"
                 else:
                     call AskedMeet (EGirls[0], "bemused")
                 return
             elif "daddy" not in EGirls[0].player_petnames and approval_check(EGirls[0], 750, "L") and approval_check(EGirls[0], 500, "O") and approval_check(EGirls[0], 500, "I"):
                 if (bg_current == EGirls[0].home or bg_current == "bg_player") and EGirls[0].location == bg_current:
-                    call expression EGirls[0].Tag + "_Daddy"
+                    call expression EGirls[0].tag + "_Daddy"
                 return
             elif "sex friend" not in EGirls[0].player_petnames and EGirls[0].inhibition >= 500:
                 if EGirls[0] == EmmaX:
@@ -1200,13 +997,13 @@ label EventCalls(EGirls=[]):
                         call Storm_Sexfriend
                         return
                 elif bg_current == EGirls[0].home or bg_current == "bg_player":
-                    call expression EGirls[0].Tag + "_Sexfriend"
+                    call expression EGirls[0].tag + "_Sexfriend"
                     return
                 elif EGirls[0] in Player.Harem and EGirls[0].location == bg_current:
-                    call expression EGirls[0].Tag + "_Sexfriend"
+                    call expression EGirls[0].tag + "_Sexfriend"
                     return
                 elif EGirls[0] == LauraX:
-                    call expression EGirls[0].Tag + "_Sexfriend"
+                    call expression EGirls[0].tag + "_Sexfriend"
                     return
 
 
@@ -1214,21 +1011,21 @@ label EventCalls(EGirls=[]):
             elif "fuck buddy" not in EGirls[0].player_petnames and EGirls[0].inhibition >= 800:
                 if EGirls[0] == RogueX:
                     if bg_current != EGirls[0].location:
-                        call expression EGirls[0].Tag + "_Fuckbuddy"
+                        call expression EGirls[0].tag + "_Fuckbuddy"
                         return
                 elif EGirls[0] == LauraX:
                     if bg_current == "bg_player" and EGirls[0].location != bg_current:
-                        call expression EGirls[0].Tag + "_Fuckbuddy"
+                        call expression EGirls[0].tag + "_Fuckbuddy"
                         return
                 elif EGirls[0] == StormX:
                     if bg_current == "bg_classroom" and time_index == 2 and Weekday in (1,3):
                         call Storm_Fuckbuddy
                         return
                 elif bg_current == EGirls[0].home or bg_current == "bg_player":
-                    call expression EGirls[0].Tag + "_Fuckbuddy"
+                    call expression EGirls[0].tag + "_Fuckbuddy"
                     return
                 elif EGirls[0] in Player.Harem and EGirls[0].location == bg_current:
-                    call expression EGirls[0].Tag + "_Fuckbuddy"
+                    call expression EGirls[0].tag + "_Fuckbuddy"
                     return
 
 
@@ -1260,7 +1057,7 @@ label QuickEvents(EGirls=[]):
 
 
             if Taboo and EGirls[0].lust >= 75:
-                if EGirls[0].inhibition > 800 or "exhibitionist" in EGirls[0].Traits:
+                if EGirls[0].inhibition > 800 or "exhibitionist" in EGirls[0].traits:
                     "[EGirls[0].name] gets a sly smile on her face and squirms a bit."
                 elif EGirls[0].inhibition > 500 and EGirls[0].lust < 90:
                     "[EGirls[0].name] looks a bit flushed and uncomfortable."
@@ -1270,11 +1067,11 @@ label QuickEvents(EGirls=[]):
                     call Remove_Girl (EGirls[0])
                     call set_the_scene
                     $ EGirls[0].location = EGirls[0].home if bg_current != EGirls[0].home else "bg_campus"
-                    if "nofap" in EGirls[0].Traits:
-                        $ EGirls[0].AddWord(1,0,"wannafap",0,0)
+                    if "nofap" in EGirls[0].traits:
+                        $ EGirls[0].add_word(1,0,"wannafap",0,0)
                         call CalltoFap (EGirls[0])
                     else:
-                        $ EGirls[0].AddWord(1,0,"gonnafap",0,0)
+                        $ EGirls[0].add_word(1,0,"gonnafap",0,0)
         else:
 
             if EGirls[0].location == "bg_showerroom" and "showered" in EGirls[0].daily_history:
@@ -1283,7 +1080,7 @@ label QuickEvents(EGirls=[]):
                 if EGirls[0] == JubesX and JubesX.addiction > 60:
 
                     $ JubesX.location = JubesX.home
-                $ EGirls[0].Spunk = []
+                $ EGirls[0].spunk = []
                 $ EGirls[0].change_outfit()
 
         if EGirls:
@@ -1297,8 +1094,8 @@ label AskedMeet(Girl=0, Emotion="bemused", Why=0):
     if "asked meet" not in Girl.daily_history and Girl.location != bg_current:
         $ Girl.change_face(Emotion)
         "[Girl.name] asks if you could meet her in your room later."
-        $ Girl.AddWord(1,"asked meet","asked meet",0,0)
-        $ Player.AddWord(1,0,"meet girl",0,0)
+        $ Girl.add_word(1,"asked meet","asked meet",0,0)
+        $ Player.add_word(1,0,"meet girl",0,0)
         if RTR_Toggle:
             call ReturnToRoom
     return
@@ -1491,23 +1288,23 @@ label SpecialMenu:
                 while True:
                     menu:
                         "Level-up menu"
-                        "Level Yourself" if Player.StatPoints > 0 or "addict control" in Player.Traits:
+                        "Level Yourself" if Player.stat_points > 0 or "addict control" in Player.traits:
                             call Level_Up (Player)
-                        "Level Yourself [[No points to spend] (locked)" if Player.StatPoints <= 0 and "addict control" not in Player.Traits:
+                        "Level Yourself [[No points to spend] (locked)" if Player.stat_points <= 0 and "addict control" not in Player.traits:
                             pass
-                        "Level [RogueX.name]" if RogueX.StatPoints > 0:
+                        "Level [RogueX.name]" if RogueX.stat_points > 0:
                             call Level_Up (RogueX)
-                        "Level [KittyX.name]" if KittyX.StatPoints > 0 and "met" in KittyX.history:
+                        "Level [KittyX.name]" if KittyX.stat_points > 0 and "met" in KittyX.history:
                             call Level_Up (KittyX)
-                        "Level [EmmaX.name]" if EmmaX.StatPoints > 0 and "met" in EmmaX.history:
+                        "Level [EmmaX.name]" if EmmaX.stat_points > 0 and "met" in EmmaX.history:
                             call Level_Up (EmmaX)
-                        "Level [LauraX.name]" if LauraX.StatPoints > 0 and "met" in LauraX.history:
+                        "Level [LauraX.name]" if LauraX.stat_points > 0 and "met" in LauraX.history:
                             call Level_Up (LauraX)
-                        "Level [JeanX.name]" if JeanX.StatPoints > 0 and "met" in JeanX.history:
+                        "Level [JeanX.name]" if JeanX.stat_points > 0 and "met" in JeanX.history:
                             call Level_Up (JeanX)
-                        "Level [StormX.name]" if StormX.StatPoints > 0 and "met" in StormX.history:
+                        "Level [StormX.name]" if StormX.stat_points > 0 and "met" in StormX.history:
                             call Level_Up (StormX)
-                        "Level [JubesX.name]" if JubesX.StatPoints > 0 and "met" in JubesX.history:
+                        "Level [JubesX.name]" if JubesX.stat_points > 0 and "met" in JubesX.history:
                             call Level_Up (JubesX)
                         "Back":
                             jump SpecialMenu
@@ -1553,16 +1350,16 @@ label Hanks_Lab(Line=0):
                 menu:
                     "What skin color would you like?"
                     "Green":
-                        $ Player.Color = "green"
+                        $ Player.color = "green"
                     "White":
-                        $ Player.Color = "pink"
+                        $ Player.color = "pink"
                     "Black":
-                        $ Player.Color = "brown"
+                        $ Player.color = "brown"
                     "Never mind":
                         $ Line = 1
                 if not Line:
                     "You fiddle with some of McCoy's machinery and a glowing blue liquid pours into a flask."
-                    "You down it in a single gulp, and within minutes your skin tone shifts to be more [Player.Color]ish."
+                    "You down it in a single gulp, and within minutes your skin tone shifts to be more [Player.color]ish."
             "Change my name.":
 
                 "You log in to McCoy's high end computer, this should allow you to change your name in all offical databases."
@@ -1583,60 +1380,60 @@ label Hanks_Lab(Line=0):
                 if not Player.Harem:
                     "No harem"
                 elif len(Player.Harem) == 4:
-                    "[Player.Harem[0].Tag],[Player.Harem[1].Tag],[Player.Harem[2].Tag],[Player.Harem[3].Tag]"
+                    "[Player.Harem[0].tag],[Player.Harem[1].tag],[Player.Harem[2].tag],[Player.Harem[3].tag]"
                 elif len(Player.Harem) == 3:
-                    "[Player.Harem[0].Tag],[Player.Harem[1].Tag],[Player.Harem[2].Tag]"
+                    "[Player.Harem[0].tag],[Player.Harem[1].tag],[Player.Harem[2].tag]"
                 elif len(Player.Harem) == 2:
-                    "[Player.Harem[0].Tag],[Player.Harem[1].Tag]"
+                    "[Player.Harem[0].tag],[Player.Harem[1].tag]"
                 else:
-                    "[Player.Harem[0].Tag]"
+                    "[Player.Harem[0].tag]"
             "Blue Button":
                 $ Count = len(active_Girls)
                 "[Count]"
                 if len(active_Girls) == 8:
-                    "A-[active_Girls[0].Tag],[active_Girls[1].Tag],[active_Girls[2].Tag],[active_Girls[3].Tag]"
-                    "B-[active_Girls[4].Tag],[active_Girls[5].Tag],[active_Girls[6].Tag],[active_Girls[7].Tag]"
+                    "A-[active_Girls[0].tag],[active_Girls[1].tag],[active_Girls[2].tag],[active_Girls[3].tag]"
+                    "B-[active_Girls[4].tag],[active_Girls[5].tag],[active_Girls[6].tag],[active_Girls[7].tag]"
                 elif len(active_Girls) == 7:
-                    "A-[active_Girls[0].Tag],[active_Girls[1].Tag],[active_Girls[2].Tag],[active_Girls[3].Tag]"
-                    "B-[active_Girls[4].Tag],[active_Girls[5].Tag],[active_Girls[6].Tag]"
+                    "A-[active_Girls[0].tag],[active_Girls[1].tag],[active_Girls[2].tag],[active_Girls[3].tag]"
+                    "B-[active_Girls[4].tag],[active_Girls[5].tag],[active_Girls[6].tag]"
                 elif len(active_Girls) == 6:
-                    "A-[active_Girls[0].Tag],[active_Girls[1].Tag],[active_Girls[2].Tag],[active_Girls[3].Tag]"
-                    "B-[active_Girls[4].Tag],[active_Girls[5].Tag]"
+                    "A-[active_Girls[0].tag],[active_Girls[1].tag],[active_Girls[2].tag],[active_Girls[3].tag]"
+                    "B-[active_Girls[4].tag],[active_Girls[5].tag]"
                 elif len(active_Girls) == 5:
-                    "A-[active_Girls[0].Tag],[active_Girls[1].Tag],[active_Girls[2].Tag],[active_Girls[3].Tag]"
-                    "B-[active_Girls[4].Tag]"
+                    "A-[active_Girls[0].tag],[active_Girls[1].tag],[active_Girls[2].tag],[active_Girls[3].tag]"
+                    "B-[active_Girls[4].tag]"
                 elif len(active_Girls) == 4:
-                    "[active_Girls[0].Tag],[active_Girls[1].Tag],[active_Girls[2].Tag],[active_Girls[3].Tag]"
+                    "[active_Girls[0].tag],[active_Girls[1].tag],[active_Girls[2].tag],[active_Girls[3].tag]"
                 elif len(active_Girls) == 3:
-                    "[active_Girls[0].Tag],[active_Girls[1].Tag],[active_Girls[2].Tag]"
+                    "[active_Girls[0].tag],[active_Girls[1].tag],[active_Girls[2].tag]"
                 elif len(active_Girls) == 2:
-                    "[active_Girls[0].Tag],[active_Girls[1].Tag]"
+                    "[active_Girls[0].tag],[active_Girls[1].tag]"
                 else:
-                    "[active_Girls[0].Tag]"
+                    "[active_Girls[0].tag]"
                 $ Count = 0
             "Yellow Button":
                 $ Count = len(all_Girls)
                 "[Count]"
                 if len(all_Girls) == 8:
-                    "A-[all_Girls[0].Tag],[all_Girls[1].Tag],[all_Girls[2].Tag],[all_Girls[3].Tag]"
-                    "B-[all_Girls[4].Tag],[all_Girls[5].Tag],[all_Girls[6].Tag],[all_Girls[7].Tag]"
+                    "A-[all_Girls[0].tag],[all_Girls[1].tag],[all_Girls[2].tag],[all_Girls[3].tag]"
+                    "B-[all_Girls[4].tag],[all_Girls[5].tag],[all_Girls[6].tag],[all_Girls[7].tag]"
                 elif len(all_Girls) == 7:
-                    "A-[all_Girls[0].Tag],[all_Girls[1].Tag],[all_Girls[2].Tag],[all_Girls[3].Tag]"
-                    "B-[all_Girls[4].Tag],[all_Girls[5].Tag],[all_Girls[6].Tag]"
+                    "A-[all_Girls[0].tag],[all_Girls[1].tag],[all_Girls[2].tag],[all_Girls[3].tag]"
+                    "B-[all_Girls[4].tag],[all_Girls[5].tag],[all_Girls[6].tag]"
                 elif len(all_Girls) == 6:
-                    "A-[all_Girls[0].Tag],[all_Girls[1].Tag],[all_Girls[2].Tag],[all_Girls[3].Tag]"
-                    "B-[all_Girls[4].Tag],[all_Girls[5].Tag]"
+                    "A-[all_Girls[0].tag],[all_Girls[1].tag],[all_Girls[2].tag],[all_Girls[3].tag]"
+                    "B-[all_Girls[4].tag],[all_Girls[5].tag]"
                 elif len(all_Girls) == 5:
-                    "A-[all_Girls[0].Tag],[all_Girls[1].Tag],[all_Girls[2].Tag],[all_Girls[3].Tag]"
-                    "B-[all_Girls[4].Tag]"
+                    "A-[all_Girls[0].tag],[all_Girls[1].tag],[all_Girls[2].tag],[all_Girls[3].tag]"
+                    "B-[all_Girls[4].tag]"
                 elif len(all_Girls) == 4:
-                    "[all_Girls[0].Tag],[all_Girls[1].Tag],[all_Girls[2].Tag],[all_Girls[3].Tag]"
+                    "[all_Girls[0].tag],[all_Girls[1].tag],[all_Girls[2].tag],[all_Girls[3].tag]"
                 elif len(all_Girls) == 3:
-                    "[all_Girls[0].Tag],[all_Girls[1].Tag],[all_Girls[2].Tag]"
+                    "[all_Girls[0].tag],[all_Girls[1].tag],[all_Girls[2].tag]"
                 elif len(all_Girls) == 2:
-                    "[all_Girls[0].Tag],[all_Girls[1].Tag]"
+                    "[all_Girls[0].tag],[all_Girls[1].tag]"
                 else:
-                    "[all_Girls[0].Tag]"
+                    "[all_Girls[0].tag]"
                 $ Count = 0
             "Orange Button":
                 $ Line = "This is Halloween." if "halloween" in RogueX.history else "no"
@@ -1664,92 +1461,92 @@ label Level_Up(Chr=Player):
     if Chr != Player and Chr not in all_Girls:
         return
     if Chr == Player:
-        while Player.StatPoints > 0 or "addict control" in Player.Traits:
+        while Player.stat_points > 0 or "addict control" in Player.traits:
             menu:
-                "You have [Player.StatPoints] points to spend. How would you like to spend them?"
-                "Increase sexual stamina. [[Acquired] (locked)" if "focus" in Player.Traits:
+                "You have [Player.stat_points] points to spend. How would you like to spend them?"
+                "Increase sexual stamina. [[Acquired] (locked)" if "focus" in Player.traits:
                     pass
-                "Increase sexual stamina. [[One point]" if "focus" not in Player.Traits:
+                "Increase sexual stamina. [[One point]" if "focus" not in Player.traits:
                     menu:
                         "This trait will unlock the \"Focus\" option during sex, giving you more time before you blow."
                         "Unlock Focus.":
-                            if Player.StatPoints > 0:
-                                $ Player.StatPoints -= 1
-                                $ Player.Traits.append("focus")
+                            if Player.stat_points > 0:
+                                $ Player.stat_points -= 1
+                                $ Player.traits.append("focus")
                             else:
                                 "You don't have enough points for that."
                         "Cancel.":
                             pass
 
-                "Increase your addictiveness. [[One point]" if "addict control" not in Player.Traits and "nonaddictive" not in Player.Traits and "addictive" not in Player.Traits:
+                "Increase your addictiveness. [[One point]" if "addict control" not in Player.traits and "nonaddictive" not in Player.traits and "addictive" not in Player.traits:
                     menu:
                         "This trait will increase the addictiveness of your touch, making you harder for girls to quit."
                         "Increase addictiveness.":
-                            if Player.StatPoints > 0:
-                                $ Player.StatPoints -= 1
-                                $ Player.Traits.append("addictive")
+                            if Player.stat_points > 0:
+                                $ Player.stat_points -= 1
+                                $ Player.traits.append("addictive")
                             else:
                                 "You don't have enough points for that."
                         "Cancel.":
                             pass
 
-                "Reduce your addictiveness. [[One point]" if "addict control" not in Player.Traits and "nonaddictive" not in Player.Traits and "addictive" not in Player.Traits:
+                "Reduce your addictiveness. [[One point]" if "addict control" not in Player.traits and "nonaddictive" not in Player.traits and "addictive" not in Player.traits:
                     menu:
                         "This trait will reduce the addictiveness of your touch, making it easier for girls to resist it."
                         "Reduce addictiveness.":
-                            if Player.StatPoints > 0:
-                                $ Player.StatPoints -= 1
-                                $ Player.Traits.append("nonaddictive")
+                            if Player.stat_points > 0:
+                                $ Player.stat_points -= 1
+                                $ Player.traits.append("nonaddictive")
                             else:
                                 "You don't have enough points for that."
                         "Cancel.":
                             pass
 
-                "Control your Addiction level. [[Two points]" if "addict control" not in Player.Traits and ("nonaddictive" in Player.Traits or "addictive" in Player.Traits):
+                "Control your Addiction level. [[Two points]" if "addict control" not in Player.traits and ("nonaddictive" in Player.traits or "addictive" in Player.traits):
                     menu:
                         "This trait will allow you to freely control the amount you addict girls to your touch."
                         "Gain addiction control.":
-                            if Player.StatPoints >= 2:
-                                $ Player.StatPoints -= 2
-                                $ Player.Traits.append("addict control")
+                            if Player.stat_points >= 2:
+                                $ Player.stat_points -= 2
+                                $ Player.traits.append("addict control")
                             else:
                                 "You don't have enough points for that."
                         "Cancel.":
                             pass
 
-                "Increase your addictiveness. [[Free]" if "addict control" in Player.Traits:
+                "Increase your addictiveness. [[Free]" if "addict control" in Player.traits:
                     menu:
                         "This trait will increase the addictiveness of your touch, making you harder for girls to quit."
                         "Increase addictiveness, no cost.":
-                            if "nonaddictive" in Player.Traits:
-                                $ Player.Traits.remove("nonaddictive")
+                            if "nonaddictive" in Player.traits:
+                                $ Player.traits.remove("nonaddictive")
                                 "You are now at the baseline addictiveness level."
-                            elif "addictive" not in Player.Traits:
-                                $ Player.Traits.append("addictive")
+                            elif "addictive" not in Player.traits:
+                                $ Player.traits.append("addictive")
                                 "You are now at the enhanced addictiveness level."
                             else:
                                 "You are already at the max addictiveness level."
                         "Cancel.":
                             pass
-                "Reduce your addictiveness. [[Free]" if "addict control" in Player.Traits:
+                "Reduce your addictiveness. [[Free]" if "addict control" in Player.traits:
                     menu:
                         "This trait will reduce the addictiveness of your touch, making it easier for girls to resist it."
                         "Reduce addictiveness.":
-                            if "addictive" in Player.Traits:
-                                $ Player.Traits.remove("addictive")
+                            if "addictive" in Player.traits:
+                                $ Player.traits.remove("addictive")
                                 "You are now at the baseline addictiveness level."
-                            elif "nonaddictive" not in Player.Traits:
-                                $ Player.Traits.append("nonaddictive")
+                            elif "nonaddictive" not in Player.traits:
+                                $ Player.traits.append("nonaddictive")
                                 "You are now at the reduced addictiveness level."
                             else:
                                 "You are already at the minimum addictiveness level."
 
-                            if "addictive" in Player.Traits:
-                                $ Player.Traits.remove("addictive")
-                                $ Player.Traits.append("nonaddictive")
-                                $ Player.Traits.append("addict control")
+                            if "addictive" in Player.traits:
+                                $ Player.traits.remove("addictive")
+                                $ Player.traits.append("nonaddictive")
+                                $ Player.traits.append("addict control")
                             else:
-                                $ Player.Traits.append("nonaddictive")
+                                $ Player.traits.append("nonaddictive")
                         "Cancel.":
                             pass
 
@@ -1759,8 +1556,8 @@ label Level_Up(Chr=Player):
                     menu:
                         "This trait will increase by 1 the number of times you can climax before needing a break."
                         "Increase max semen.":
-                            if Player.StatPoints > 0:
-                                $ Player.StatPoints -= 1
+                            if Player.stat_points > 0:
+                                $ Player.stat_points -= 1
                                 $ Player.max_semen += 1
                             else:
                                 "You don't have enough points for that."
@@ -1773,18 +1570,18 @@ label Level_Up(Chr=Player):
                     return
     else:
 
-        while Chr.StatPoints > 0:
+        while Chr.stat_points > 0:
             menu:
-                "[Chr.name] is Level [Chr.Lvl] and has [Chr.StatPoints] points to spend. How would you like to spend them?"
-                "Increase sexual focus. [[Acquired] (locked)" if "focus" in Chr.Traits:
+                "[Chr.name] is Level [Chr.level] and has [Chr.stat_points] points to spend. How would you like to spend them?"
+                "Increase sexual focus. [[Acquired] (locked)" if "focus" in Chr.traits:
                     pass
-                "Increase sexual focus. [[One point]" if "focus" not in Chr.Traits:
+                "Increase sexual focus. [[One point]" if "focus" not in Chr.traits:
                     menu:
                         "This trait will unlock the \"Focus\" option during sex, giving [Chr.name] more time before she orgasms."
                         "Unlock Focus.":
-                            if Chr.StatPoints:
-                                $ Chr.StatPoints -= 1
-                                $ Chr.Traits.append("focus")
+                            if Chr.stat_points:
+                                $ Chr.stat_points -= 1
+                                $ Chr.traits.append("focus")
                             else:
                                 "You don't have enough points for that."
                         "Cancel.":
@@ -1796,8 +1593,8 @@ label Level_Up(Chr=Player):
                     menu:
                         "This trait will increase [Chr.name]'s resistance to your touch's addictive properties."
                         "Increase Resistance.":
-                            if Chr.StatPoints:
-                                $ Chr.StatPoints -= 1
+                            if Chr.stat_points:
+                                $ Chr.stat_points -= 1
                                 $ Chr.resistance += 1
                             else:
                                 "You don't have enough points for that."
@@ -1812,8 +1609,8 @@ label Level_Up(Chr=Player):
                     menu:
                         "She currently has [Chr.max_actions] actions."
                         "Increase sex actions.":
-                            if Chr.StatPoints:
-                                $ Chr.StatPoints -= 1
+                            if Chr.stat_points:
+                                $ Chr.stat_points -= 1
                                 $ Chr.max_actions += 2
                                 if Chr.max_actions > 10:
                                     $ Chr.max_actions = 10
@@ -1823,16 +1620,16 @@ label Level_Up(Chr=Player):
                         "Cancel.":
                             pass
 
-                "Allow [Chr.name] to touch. [[Acquired] (locked)" if Chr == RogueX and "touch" in Chr.Traits:
+                "Allow [Chr.name] to touch. [[Acquired] (locked)" if Chr == RogueX and "touch" in Chr.traits:
                     pass
-                "Allow [Chr.name] to touch. [[One point]" if Chr == RogueX and "touch" not in Chr.Traits and Chr.Lvl >= 5:
+                "Allow [Chr.name] to touch. [[One point]" if Chr == RogueX and "touch" not in Chr.traits and Chr.level >= 5:
                     "This trait will allow [Chr.name] to touch other people, not just you, without harming them."
                     menu:
                         "She can still borrow their abilities if they have any."
                         "Unlock touch ability.":
-                            if Chr.StatPoints:
-                                $ Chr.StatPoints -= 1
-                                $ Chr.Traits.append("touch")
+                            if Chr.stat_points:
+                                $ Chr.stat_points -= 1
+                                $ Chr.traits.append("touch")
                             else:
                                 "You don't have enough points for that."
                         "Cancel.":
@@ -1880,8 +1677,8 @@ label Remove_Girl(Girl=0, HideGirl=1, Hold=0, BO=[]):
         $ BO = [Girl]
 
     while BO:
-        $ BO[0].DrainWord("leaving",1,0,0)
-        $ BO[0].DrainWord("arriving",1,0,0)
+        $ BO[0].drain_word("leaving",1,0,0)
+        $ BO[0].drain_word("arriving",1,0,0)
 
         if BO[0].location == bg_current or (bg_current == "bg_classroom" and BO[0].location == "bg_teacher"):
             if Hold and bg_current in ("bg_campus","bg_classroom","bg_dangerroom","bg_pool"):
@@ -1894,15 +1691,15 @@ label Remove_Girl(Girl=0, HideGirl=1, Hold=0, BO=[]):
                 if BO[0] == JubesX and JubesX.addiction >= 60:
                     $ BO[0].location = "bg_showerroom"
                 $ BO[0].location = "bg_campus"
-                $ Player.DrainWord("locked",0,0,1)
+                $ Player.drain_word("locked",0,0,1)
             else:
 
                 $ BO[0].location = BO[0].home
-                $ Player.DrainWord("locked",0,0,1)
+                $ Player.drain_word("locked",0,0,1)
 
 
         if HideGirl:
-            call expression BO[0].Tag + "_Hide" pass (1)
+            call expression BO[0].tag + "_Hide" pass (1)
         $ BO.remove(BO[0])
     return
 
@@ -1991,8 +1788,8 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[], BO=[]):
     while Girls:
         if Girls[0] in Party:
             $ Party.remove(Girls[0])
-        $ Girls[0].DrainWord("leaving",1,0,0)
-        $ Girls[0].DrainWord("arriving",1,0,0)
+        $ Girls[0].drain_word("leaving",1,0,0)
+        $ Girls[0].drain_word("arriving",1,0,0)
 
         if Silent:
             pass
@@ -2081,9 +1878,9 @@ label Girls_Location(GirlsNum=0, Change=0, BOptions=[]):
     while BOptions:
 
         if "leaving" in BOptions[0].recent_history:
-            if "sleepover" in BOptions[0].Traits:
-                $ BOptions[0].DrainWord("sleepover",0,0,1)
-            call expression BOptions[0].Tag + "_Leave"
+            if "sleepover" in BOptions[0].traits:
+                $ BOptions[0].drain_word("sleepover",0,0,1)
+            call expression BOptions[0].tag + "_Leave"
             if BOptions[0].location != bg_current:
                 if BOptions[0] in Present:
                     $ Present.remove(BOptions[0])
@@ -2129,7 +1926,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, BO=[]):
         if "arriving" in BO[0].recent_history and BO[0] not in Party:
             $ GirlsNum += 1
             $ Options.append(BO[0])
-        $ BO[0].DrainWord("arriving")
+        $ BO[0].drain_word("arriving")
         $ BO.remove(BO[0])
 
     if not Options:
@@ -2157,7 +1954,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, BO=[]):
         $ Secondary = 0
     $ Options = []
 
-    if "locked" in Player.Traits:
+    if "locked" in Player.traits:
         if Primary == KittyX:
             call Locked_Door (KittyX)
             if KittyX.location != bg_current:
@@ -2871,7 +2668,7 @@ label Gym_Entry(BO=[], GirlsNum=0):
     while BO:
         if BO[0].Outfit != "gym":
 
-            if approval_check(BO[0], 1300, "LO") or "passive" in BO[0].Traits:
+            if approval_check(BO[0], 1300, "LO") or "passive" in BO[0].traits:
                 pass
             elif approval_check(BO[0], 800, "LO") and BO[0].Custom1[0]:
                 pass
@@ -2880,7 +2677,7 @@ label Gym_Entry(BO=[], GirlsNum=0):
             else:
                 $ Line = "no"
 
-            if Line == "no" or "asked gym" in BO[0].daily_history or "no_ask gym" in BO[0].Traits:
+            if Line == "no" or "asked gym" in BO[0].daily_history or "no_ask gym" in BO[0].traits:
 
                 show blackscreen onlayer black
                 if BO[0] == EmmaX:
@@ -3180,7 +2977,7 @@ label Locked_Door(Girl=0, Entry=0, Current=0):
         return
     if Current not in all_Girls:
         $ Current = 0
-    $ Player.AddWord(1,"interruption")
+    $ Player.add_word(1,"interruption")
     if not primary_action:
 
         call set_the_scene
@@ -3195,7 +2992,7 @@ label Locked_Door(Girl=0, Entry=0, Current=0):
         call Display_Girl (KittyX, TrigReset=0)
         ch_k "Hi, [KittyX.player_petname]!"
         return 1
-    if "locked" not in Player.Traits:
+    if "locked" not in Player.traits:
         $ Girl.location = bg_current
         if Entry:
             call Display_Girl (Girl, TrigReset=0)
@@ -3326,7 +3123,7 @@ label Locked_Door(Girl=0, Entry=0, Current=0):
     if Current:
         if Current == EmmaX and ("three" not in EmmaX.history or "classcaught" not in EmmaX.history):
 
-            $ Girl.AddWord(1,0,0,"saw with " + Current.Tag)
+            $ Girl.add_word(1,0,0,"saw with " + Current.tag)
             if bg_current == EmmaX.home:
 
                 ch_e "I. . . This isn't what it looks like. . ."
@@ -3340,7 +3137,7 @@ label Locked_Door(Girl=0, Entry=0, Current=0):
                 "Perhaps you should ask her about it later."
             jump Misplaced
 
-        if "poly " + Current.Tag in Girl.Traits or (Current in Player.Harem and Girl in Player.Harem):
+        if "poly " + Current.tag in Girl.traits or (Current in Player.Harem and Girl in Player.Harem):
 
             pass
         else:
@@ -3355,20 +3152,20 @@ label Locked_Door(Girl=0, Entry=0, Current=0):
 
                 $ Current.change_face("angry", 1)
                 if Current == RogueX:
-                    ch_r "Hey, [Girl.Tag], we're a little busy here?"
+                    ch_r "Hey, [Girl.tag], we're a little busy here?"
                 elif Current == KittyX:
-                    ch_k "Um, [Girl.Tag]? Read the room?"
+                    ch_k "Um, [Girl.tag]? Read the room?"
                 elif Current == EmmaX:
-                    ch_e "[Girl.Tag], could you please leave?"
+                    ch_e "[Girl.tag], could you please leave?"
                 elif Current == LauraX:
-                    ch_l "Scram, [Girl.Tag]."
+                    ch_l "Scram, [Girl.tag]."
                 elif Current == JeanX:
-                    ch_j "Leave, [Girl.Tag]."
+                    ch_j "Leave, [Girl.tag]."
                 elif Current == StormX:
                     ch_s "Would you mind give us some space?"
                 elif Current == JubesX:
                     ch_v "Yeah, we were. . . busy."
-                $ Girl.AddWord(1,0,0,"saw with " + Current.Tag)
+                $ Girl.add_word(1,0,0,"saw with " + Current.tag)
                 if Girl == RogueX:
                     $ Girl.change_face("perplexed", 2)
                     ch_r "Oh, sorry about that! I'll head out."
@@ -3395,24 +3192,24 @@ label Locked_Door(Girl=0, Entry=0, Current=0):
                     call Remove_Girl (Girl)
                 return 0
         if Current == RogueX:
-            ch_r "Oh, [Girl.Tag], did you want to join in?"
+            ch_r "Oh, [Girl.tag], did you want to join in?"
         elif Current == KittyX:
-            ch_k "Um, [Girl.Tag]? Did you want something?"
+            ch_k "Um, [Girl.tag]? Did you want something?"
         elif Current == EmmaX:
-            ch_e "Oh, [Girl.Tag]. . . care to join us?"
+            ch_e "Oh, [Girl.tag]. . . care to join us?"
         elif Current == LauraX:
-            ch_l "Oh, hey, [Girl.Tag]."
+            ch_l "Oh, hey, [Girl.tag]."
         elif Current == JeanX:
             ch_j "Hey."
         elif Current == StormX:
-            ch_s "Oh, hello [Girl.Tag], did you want to join in?"
+            ch_s "Oh, hello [Girl.tag], did you want to join in?"
         elif Current == JubesX:
-            ch_v "Hey, [Girl.Tag], did you need something?"
+            ch_v "Hey, [Girl.tag], did you need something?"
 
     $ Girl.location = bg_current
     call Taboo_Level
     $ Girl.change_outfit(5)
-    $ Player.DrainWord("locked",0,0,1)
+    $ Player.drain_word("locked",0,0,1)
     call set_the_scene (1, 0, 0, 0)
 
     if Partner == Girl:
@@ -3440,7 +3237,7 @@ label Taboo_Level(Taboo_Loc=1, Teach=0, BO=[]):
     call CheckTaboo (Player, bg_current)
 
     $ BO = all_Girls[:]
-    if JeanX in BO and "nowhammy" not in JeanX.Traits:
+    if JeanX in BO and "nowhammy" not in JeanX.traits:
 
         $ JeanX.Taboo = 0
         $ BO.remove(JeanX)
@@ -3471,7 +3268,7 @@ label CheckTaboo(Girl=0, Taboo_Check=0, Girl2=[]):
 
     if Taboo_Check in PersonalRooms or Taboo_Check == "hold":
         $ Girl.Taboo = 0
-    elif "locked" in Player.Traits and Taboo_Check == bg_current:
+    elif "locked" in Player.traits and Taboo_Check == bg_current:
         $ Girl.Taboo = 0
     elif Taboo_Check in ("bg_classroom", "bg_study"):
         if time_index >= 3:
@@ -3535,214 +3332,214 @@ label action_speed_Shift(S=0):
 
 label Shop:
     menu:
-        "You are logged into the store. You have [Player.Cash] dollars."
+        "You are logged into the store. You have [Player.cash] dollars."
         "Buy dildo for $20.":
-            if Player.Inventory.count("dildo") >= 10:
+            if Player.inventory.count("dildo") >= 10:
                 "You already have way more dildos than you need. 2, 4, 6. . . yes, way too many."
-            elif Player.Cash >= 20:
+            elif Player.cash >= 20:
                 "You purchase one dildo."
-                $ Player.Inventory.append("dildo")
-                $ Player.Cash -= 20
+                $ Player.inventory.append("dildo")
+                $ Player.cash -= 20
             else:
                 "You don't have enough for that."
         "Buy \"Shocker\" vibrator for $25.":
-            if Player.Inventory.count("vibrator") >= 10:
+            if Player.inventory.count("vibrator") >= 10:
                 "If you bought one more vibrator, you would risk a geological event."
-            elif Player.Cash >= 25:
+            elif Player.cash >= 25:
                 "You purchase one vibrator."
-                $ Player.Inventory.append("vibrator")
-                $ Player.Cash -= 25
+                $ Player.inventory.append("vibrator")
+                $ Player.cash -= 25
             else:
                 "You don't have enough for that."
         "Gifts for [RogueX.name]":
             menu:
-                "Buy green lace nighty for $75." if "nighty" not in RogueX.Inventory and "Rogue nighty" not in Player.Inventory:
-                    if Player.Cash >= 75:
+                "Buy green lace nighty for $75." if "nighty" not in RogueX.inventory and "Rogue nighty" not in Player.inventory:
+                    if Player.cash >= 75:
                         "You purchase the nighty, this will look nice on [RogueX.name]."
-                        $ Player.Inventory.append("Rogue nighty")
-                        $ Player.Cash -= 75
+                        $ Player.inventory.append("Rogue nighty")
+                        $ Player.cash -= 75
                     else:
                         "You don't have enough for that."
-                "Buy black lace bra for $90." if "lace_bra" not in RogueX.Inventory and "Rogue lace_bra" not in Player.Inventory:
-                    if Player.Cash >= 90:
+                "Buy black lace bra for $90." if "lace_bra" not in RogueX.inventory and "Rogue lace_bra" not in Player.inventory:
+                    if Player.cash >= 90:
                         "You purchase the lace bra, this will look nice on [RogueX.name]."
-                        $ Player.Inventory.append("Rogue lace_bra")
-                        $ Player.Cash -= 90
+                        $ Player.inventory.append("Rogue lace_bra")
+                        $ Player.cash -= 90
                     else:
                         "You don't have enough for that."
-                "Buy black lace panties for $110." if "lace_panties" not in RogueX.Inventory and "Rogue lace_panties" not in Player.Inventory:
-                    if Player.Cash >= 110:
+                "Buy black lace panties for $110." if "lace_panties" not in RogueX.inventory and "Rogue lace_panties" not in Player.inventory:
+                    if Player.cash >= 110:
                         "You purchase the lace panties, these will look nice on [RogueX.name]."
-                        $ Player.Inventory.append("Rogue lace_panties")
-                        $ Player.Cash -= 110
+                        $ Player.inventory.append("Rogue lace_panties")
+                        $ Player.cash -= 110
                     else:
                         "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in RogueX.Inventory and "stockings_and_garterbelt" not in Player.Inventory and approval_check(RogueX, 1500):
-                    if Player.Cash >= 100:
+                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in RogueX.inventory and "stockings_and_garterbelt" not in Player.inventory and approval_check(RogueX, 1500):
+                    if Player.cash >= 100:
                         "You purchase the stockings, these will look nice on [RogueX.name]."
-                        $ Player.Inventory.append("stockings_and_garterbelt")
-                        $ Player.Cash -= 100
+                        $ Player.inventory.append("stockings_and_garterbelt")
+                        $ Player.cash -= 100
                     else:
                         "You don't have enough for that."
-                "Buy yellow bikini top for $50." if "bikini_top" not in RogueX.Inventory and "Rogue bikini_top" not in Player.Inventory:
-                    if Player.Cash >= 50:
+                "Buy yellow bikini top for $50." if "bikini_top" not in RogueX.inventory and "Rogue bikini_top" not in Player.inventory:
+                    if Player.cash >= 50:
                         "You purchase the bikini top, this will look nice on [RogueX.name]."
-                        $ Player.Inventory.append("Rogue bikini_top")
-                        $ Player.Cash -= 50
+                        $ Player.inventory.append("Rogue bikini_top")
+                        $ Player.cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy green bikini bottoms for $50." if "bikini_bottoms" not in RogueX.Inventory and "Rogue bikini_bottoms" not in Player.Inventory:
-                    if Player.Cash >= 50:
+                "Buy green bikini bottoms for $50." if "bikini_bottoms" not in RogueX.inventory and "Rogue bikini_bottoms" not in Player.inventory:
+                    if Player.cash >= 50:
                         "You purchase the bikini bottoms, these will look nice on [RogueX.name]."
-                        $ Player.Inventory.append("Rogue bikini_bottoms")
-                        $ Player.Cash -= 50
+                        $ Player.inventory.append("Rogue bikini_bottoms")
+                        $ Player.cash -= 50
                     else:
                         "You don't have enough for that."
                 "Never mind.":
                     pass
         "Gifts for [KittyX.name]" if "met" in KittyX.history:
             menu:
-                "Buy white lace bra for $90." if "lace_bra" not in KittyX.Inventory and "Kitty lace_bra" not in Player.Inventory:
-                    if Player.Cash >= 90:
+                "Buy white lace bra for $90." if "lace_bra" not in KittyX.inventory and "Kitty lace_bra" not in Player.inventory:
+                    if Player.cash >= 90:
                         "You purchase the lace bra, this will look nice on [KittyX.name]."
-                        $ Player.Inventory.append("Kitty lace_bra")
-                        $ Player.Cash -= 90
+                        $ Player.inventory.append("Kitty lace_bra")
+                        $ Player.cash -= 90
                     else:
                         "You don't have enough for that."
-                "Buy white lace panties for $110." if "lace_panties" not in KittyX.Inventory and "Kitty lace_panties" not in Player.Inventory:
-                    if Player.Cash >= 110:
+                "Buy white lace panties for $110." if "lace_panties" not in KittyX.inventory and "Kitty lace_panties" not in Player.inventory:
+                    if Player.cash >= 110:
                         "You purchase the lace panties, these will look nice on [KittyX.name]."
-                        $ Player.Inventory.append("Kitty lace_panties")
-                        $ Player.Cash -= 110
+                        $ Player.inventory.append("Kitty lace_panties")
+                        $ Player.cash -= 110
                     else:
                         "You don't have enough for that."
 
-                "Buy pantyhose for $50." if "pantyhose" not in KittyX.Inventory and "Kitty_pantyhose" not in Player.Inventory:
-                    if Player.Cash >= 50:
+                "Buy pantyhose for $50." if "pantyhose" not in KittyX.inventory and "Kitty_pantyhose" not in Player.inventory:
+                    if Player.cash >= 50:
                         "You purchase the hose, these will look nice on [KittyX.name]."
-                        $ Player.Inventory.append("Kitty_pantyhose")
-                        $ Player.Cash -= 50
+                        $ Player.inventory.append("Kitty_pantyhose")
+                        $ Player.cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in KittyX.Inventory and "stockings_and_garterbelt" not in Player.Inventory:
-                    if Player.Cash >= 100:
+                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in KittyX.inventory and "stockings_and_garterbelt" not in Player.inventory:
+                    if Player.cash >= 100:
                         "You purchase the stockings, these will look nice on [KittyX.name]."
-                        $ Player.Inventory.append("stockings_and_garterbelt")
-                        $ Player.Cash -= 100
+                        $ Player.inventory.append("stockings_and_garterbelt")
+                        $ Player.cash -= 100
                     else:
                         "You don't have enough for that."
-                "Buy knee-stockings for $50." if "knee" not in KittyX.Inventory and "knee" not in Player.Inventory:
-                    if Player.Cash >= 50:
+                "Buy knee-stockings for $50." if "knee" not in KittyX.inventory and "knee" not in Player.inventory:
+                    if Player.cash >= 50:
                         "You purchase the stockings, these will look nice on [KittyX.name]."
-                        $ Player.Inventory.append("knee")
-                        $ Player.Cash -= 50
+                        $ Player.inventory.append("knee")
+                        $ Player.cash -= 50
                     else:
                         "You don't have enough for that."
 
-                "Buy blue cat bikini top for $60." if "bikini_top" not in KittyX.Inventory and "Kitty bikini_top" not in Player.Inventory:
-                    if Player.Cash >= 60:
+                "Buy blue cat bikini top for $60." if "bikini_top" not in KittyX.inventory and "Kitty bikini_top" not in Player.inventory:
+                    if Player.cash >= 60:
                         "You purchase the bikini top, this will look nice on [KittyX.name]."
-                        $ Player.Inventory.append("Kitty bikini_top")
-                        $ Player.Cash -= 60
+                        $ Player.inventory.append("Kitty bikini_top")
+                        $ Player.cash -= 60
                     else:
                         "You don't have enough for that."
-                "Buy blue bikini bottoms for $60." if "bikini_bottoms" not in KittyX.Inventory and "Kitty bikini_bottoms" not in Player.Inventory:
-                    if Player.Cash >= 60:
+                "Buy blue bikini bottoms for $60." if "bikini_bottoms" not in KittyX.inventory and "Kitty bikini_bottoms" not in Player.inventory:
+                    if Player.cash >= 60:
                         "You purchase the bikini bottoms, these will look nice on [KittyX.name]."
-                        $ Player.Inventory.append("Kitty bikini_bottoms")
-                        $ Player.Cash -= 60
+                        $ Player.inventory.append("Kitty bikini_bottoms")
+                        $ Player.cash -= 60
                     else:
                         "You don't have enough for that."
-                "Buy blue miniskirt for $50." if "blue_skirt" not in KittyX.Inventory and "Kitty blue_skirt" not in Player.Inventory:
-                    if Player.Cash >= 50:
+                "Buy blue miniskirt for $50." if "blue_skirt" not in KittyX.inventory and "Kitty blue_skirt" not in Player.inventory:
+                    if Player.cash >= 50:
                         "You purchase the blue skirt, this will look nice on [KittyX.name]."
-                        $ Player.Inventory.append("Kitty blue_skirt")
-                        $ Player.Cash -= 50
+                        $ Player.inventory.append("Kitty blue_skirt")
+                        $ Player.cash -= 50
                     else:
                         "You don't have enough for that."
                 "Never mind.":
                     pass
         "Gifts for [EmmaX.name]" if "met" in EmmaX.history:
             menu:
-                "Buy white lace bra for $90." if "lace_bra" not in EmmaX.Inventory and "Emma lace_bra" not in Player.Inventory:
-                    if Player.Cash >= 90:
+                "Buy white lace bra for $90." if "lace_bra" not in EmmaX.inventory and "Emma lace_bra" not in Player.inventory:
+                    if Player.cash >= 90:
                         "You purchase the lace bra, this will look nice on [EmmaX.name]."
-                        $ Player.Inventory.append("Emma lace_bra")
-                        $ Player.Cash -= 90
+                        $ Player.inventory.append("Emma lace_bra")
+                        $ Player.cash -= 90
                     else:
                         "You don't have enough for that."
-                "Buy white lace panties for $110." if "lace_panties" not in EmmaX.Inventory and "Emma lace_panties" not in Player.Inventory:
-                    if Player.Cash >= 110:
+                "Buy white lace panties for $110." if "lace_panties" not in EmmaX.inventory and "Emma lace_panties" not in Player.inventory:
+                    if Player.cash >= 110:
                         "You purchase the lace panties, these will look nice on [EmmaX.name]."
-                        $ Player.Inventory.append("Emma lace_panties")
-                        $ Player.Cash -= 110
+                        $ Player.inventory.append("Emma lace_panties")
+                        $ Player.cash -= 110
                     else:
                         "You don't have enough for that."
-                "Buy pantyhose for $50." if "pantyhose" not in EmmaX.Inventory and "Emma_pantyhose" not in Player.Inventory:
-                    if Player.Cash >= 50:
+                "Buy pantyhose for $50." if "pantyhose" not in EmmaX.inventory and "Emma_pantyhose" not in Player.inventory:
+                    if Player.cash >= 50:
                         "You purchase the hose, these will look nice on [EmmaX.name]."
-                        $ Player.Inventory.append("Emma_pantyhose")
-                        $ Player.Cash -= 50
+                        $ Player.inventory.append("Emma_pantyhose")
+                        $ Player.cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in EmmaX.Inventory and "stockings_and_garterbelt" not in Player.Inventory and approval_check(EmmaX, 1500):
-                    if Player.Cash >= 100:
+                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in EmmaX.inventory and "stockings_and_garterbelt" not in Player.inventory and approval_check(EmmaX, 1500):
+                    if Player.cash >= 100:
                         "You purchase the stockings, these will look nice on [EmmaX.name]."
-                        $ Player.Inventory.append("stockings_and_garterbelt")
-                        $ Player.Cash -= 100
+                        $ Player.inventory.append("stockings_and_garterbelt")
+                        $ Player.cash -= 100
                     else:
                         "You don't have enough for that."
-                "Buy white bikini top for $60." if "bikini_top" not in EmmaX.Inventory and "Emma bikini_top" not in Player.Inventory:
-                    if Player.Cash >= 60:
+                "Buy white bikini top for $60." if "bikini_top" not in EmmaX.inventory and "Emma bikini_top" not in Player.inventory:
+                    if Player.cash >= 60:
                         "You purchase the bikini top, this will look nice on [EmmaX.name]."
-                        $ Player.Inventory.append("Emma bikini_top")
-                        $ Player.Cash -= 60
+                        $ Player.inventory.append("Emma bikini_top")
+                        $ Player.cash -= 60
                     else:
                         "You don't have enough for that."
-                "Buy white bikini bottoms for $60." if "bikini_bottoms" not in EmmaX.Inventory and "Emma bikini_bottoms" not in Player.Inventory:
-                    if Player.Cash >= 60:
+                "Buy white bikini bottoms for $60." if "bikini_bottoms" not in EmmaX.inventory and "Emma bikini_bottoms" not in Player.inventory:
+                    if Player.cash >= 60:
                         "You purchase the bikini bottoms, these will look nice on [EmmaX.name]."
-                        $ Player.Inventory.append("Emma bikini_bottoms")
-                        $ Player.Cash -= 60
+                        $ Player.inventory.append("Emma bikini_bottoms")
+                        $ Player.cash -= 60
                     else:
                         "You don't have enough for that."
                 "Never mind.":
                     pass
         "Gifts for [LauraX.name]" if "met" in LauraX.history:
             menu:
-                "Buy red corset for $70." if "corset" not in LauraX.Inventory and "Laura corset" not in Player.Inventory:
-                    if Player.Cash >= 70:
+                "Buy red corset for $70." if "corset" not in LauraX.inventory and "Laura corset" not in Player.inventory:
+                    if Player.cash >= 70:
                         "You purchase the corset, this will look nice on [LauraX.name]."
-                        $ Player.Inventory.append("Laura corset")
-                        $ Player.Cash -= 70
+                        $ Player.inventory.append("Laura corset")
+                        $ Player.cash -= 70
                     else:
                         "You don't have enough for that."
-                "Buy red lace corset for $90." if "lace corset" not in LauraX.Inventory and "Laura lace corset" not in Player.Inventory:
-                    if Player.Cash >= 90:
+                "Buy red lace corset for $90." if "lace corset" not in LauraX.inventory and "Laura lace corset" not in Player.inventory:
+                    if Player.cash >= 90:
                         "You purchase the lace corset, this will look nice on [LauraX.name]."
-                        $ Player.Inventory.append("Laura lace corset")
-                        $ Player.Cash -= 90
+                        $ Player.inventory.append("Laura lace corset")
+                        $ Player.cash -= 90
                     else:
                         "You don't have enough for that."
-                "Buy red lace panties for $110." if "lace_panties" not in LauraX.Inventory and "Laura lace_panties" not in Player.Inventory:
-                    if Player.Cash >= 110:
+                "Buy red lace panties for $110." if "lace_panties" not in LauraX.inventory and "Laura lace_panties" not in Player.inventory:
+                    if Player.cash >= 110:
                         "You purchase the lace panties, these will look nice on [LauraX.name]."
-                        $ Player.Inventory.append("Laura lace_panties")
-                        $ Player.Cash -= 110
+                        $ Player.inventory.append("Laura lace_panties")
+                        $ Player.cash -= 110
                     else:
                         "You don't have enough for that."
-                "Buy black bikini top for $50." if "bikini_top" not in LauraX.Inventory and "Laura bikini_top" not in Player.Inventory:
-                    if Player.Cash >= 50:
+                "Buy black bikini top for $50." if "bikini_top" not in LauraX.inventory and "Laura bikini_top" not in Player.inventory:
+                    if Player.cash >= 50:
                         "You purchase the bikini top, this will look nice on [LauraX.name]."
-                        $ Player.Inventory.append("Laura bikini_top")
-                        $ Player.Cash -= 50
+                        $ Player.inventory.append("Laura bikini_top")
+                        $ Player.cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy black bikini bottoms for $50." if "bikini_bottoms" not in LauraX.Inventory and "Laura bikini_bottoms" not in Player.Inventory:
-                    if Player.Cash >= 50:
+                "Buy black bikini bottoms for $50." if "bikini_bottoms" not in LauraX.inventory and "Laura bikini_bottoms" not in Player.inventory:
+                    if Player.cash >= 50:
                         "You purchase the bikini bottoms, these will look nice on [LauraX.name]."
-                        $ Player.Inventory.append("Laura bikini_bottoms")
-                        $ Player.Cash -= 50
+                        $ Player.inventory.append("Laura bikini_bottoms")
+                        $ Player.cash -= 50
                     else:
                         "You don't have enough for that."
                 "Never mind.":
@@ -3750,11 +3547,11 @@ label Shop:
 
         "Gifts for [JeanX.name]" if "met" in JeanX.history:
             menu:
-                "Buy black corset for $70." if "corset" not in JeanX.Inventory and "Jean corset" not in Player.Inventory:
-                    if Player.Cash >= 70:
+                "Buy black corset for $70." if "corset" not in JeanX.inventory and "Jean corset" not in Player.inventory:
+                    if Player.cash >= 70:
                         "You purchase the corset, this will look nice on [JeanX.name]."
-                        $ Player.Inventory.append("Jean corset")
-                        $ Player.Cash -= 70
+                        $ Player.inventory.append("Jean corset")
+                        $ Player.cash -= 70
                     else:
                         "You don't have enough for that."
 
@@ -3764,92 +3561,92 @@ label Shop:
 
 
 
-                "Buy green lace bra for $90." if "lace_bra" not in JeanX.Inventory and "Jean lace_bra" not in Player.Inventory:
-                    if Player.Cash >= 90:
+                "Buy green lace bra for $90." if "lace_bra" not in JeanX.inventory and "Jean lace_bra" not in Player.inventory:
+                    if Player.cash >= 90:
                         "You purchase the lace bra, this will look nice on [JeanX.name]."
-                        $ Player.Inventory.append("Jean lace_bra")
-                        $ Player.Cash -= 90
+                        $ Player.inventory.append("Jean lace_bra")
+                        $ Player.cash -= 90
                     else:
                         "You don't have enough for that."
-                "Buy green lace panties for $110." if "lace_panties" not in JeanX.Inventory and "Jean lace_panties" not in Player.Inventory:
-                    if Player.Cash >= 110:
+                "Buy green lace panties for $110." if "lace_panties" not in JeanX.inventory and "Jean lace_panties" not in Player.inventory:
+                    if Player.cash >= 110:
                         "You purchase the lace panties, these will look nice on [JeanX.name]."
-                        $ Player.Inventory.append("Jean lace_panties")
-                        $ Player.Cash -= 110
+                        $ Player.inventory.append("Jean lace_panties")
+                        $ Player.cash -= 110
                     else:
                         "You don't have enough for that."
-                "Buy \"X\" bikini top for $50." if "bikini_top" not in JeanX.Inventory and "Jean bikini_top" not in Player.Inventory:
-                    if Player.Cash >= 50:
+                "Buy \"X\" bikini top for $50." if "bikini_top" not in JeanX.inventory and "Jean bikini_top" not in Player.inventory:
+                    if Player.cash >= 50:
                         "You purchase the bikini top, this will look nice on [JeanX.name]."
-                        $ Player.Inventory.append("Jean bikini_top")
-                        $ Player.Cash -= 50
+                        $ Player.inventory.append("Jean bikini_top")
+                        $ Player.cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy black bikini bottoms for $50." if "bikini_bottoms" not in JeanX.Inventory and "Jean bikini_bottoms" not in Player.Inventory:
-                    if Player.Cash >= 50:
+                "Buy black bikini bottoms for $50." if "bikini_bottoms" not in JeanX.inventory and "Jean bikini_bottoms" not in Player.inventory:
+                    if Player.cash >= 50:
                         "You purchase the bikini bottoms, these will look nice on [JeanX.name]."
-                        $ Player.Inventory.append("Jean bikini_bottoms")
-                        $ Player.Cash -= 50
+                        $ Player.inventory.append("Jean bikini_bottoms")
+                        $ Player.cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy pantyhose for $50." if "pantyhose" not in JeanX.Inventory and "Jean_pantyhose" not in Player.Inventory:
-                    if Player.Cash >= 50:
+                "Buy pantyhose for $50." if "pantyhose" not in JeanX.inventory and "Jean_pantyhose" not in Player.inventory:
+                    if Player.cash >= 50:
                         "You purchase the hose, these will look nice on [JeanX.name]."
-                        $ Player.Inventory.append("Jean_pantyhose")
-                        $ Player.Cash -= 50
+                        $ Player.inventory.append("Jean_pantyhose")
+                        $ Player.cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in JeanX.Inventory and "stockings_and_garterbelt" not in Player.Inventory and approval_check(JeanX, 800):
-                    if Player.Cash >= 100:
+                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in JeanX.inventory and "stockings_and_garterbelt" not in Player.inventory and approval_check(JeanX, 800):
+                    if Player.cash >= 100:
                         "You purchase the stockings, these will look nice on [JeanX.name]."
-                        $ Player.Inventory.append("stockings_and_garterbelt")
-                        $ Player.Cash -= 100
+                        $ Player.inventory.append("stockings_and_garterbelt")
+                        $ Player.cash -= 100
                     else:
                         "You don't have enough for that."
                 "Never mind.":
                     pass
         "Gifts for [StormX.name]" if "met" in StormX.history:
             menu:
-                "Buy black lace bra for $90." if "lace_bra" not in StormX.Inventory and "Storm lace_bra" not in Player.Inventory:
-                    if Player.Cash >= 90:
+                "Buy black lace bra for $90." if "lace_bra" not in StormX.inventory and "Storm lace_bra" not in Player.inventory:
+                    if Player.cash >= 90:
                         "You purchase the lace bra, this will look nice on [StormX.name]."
-                        $ Player.Inventory.append("Storm lace_bra")
-                        $ Player.Cash -= 90
+                        $ Player.inventory.append("Storm lace_bra")
+                        $ Player.cash -= 90
                     else:
                         "You don't have enough for that."
-                "Buy black lace panties for $110." if "lace_panties" not in StormX.Inventory and "Storm lace_panties" not in Player.Inventory:
-                    if Player.Cash >= 110:
+                "Buy black lace panties for $110." if "lace_panties" not in StormX.inventory and "Storm lace_panties" not in Player.inventory:
+                    if Player.cash >= 110:
                         "You purchase the lace panties, these will look nice on [StormX.name]."
-                        $ Player.Inventory.append("Storm lace_panties")
-                        $ Player.Cash -= 110
+                        $ Player.inventory.append("Storm lace_panties")
+                        $ Player.cash -= 110
                     else:
                         "You don't have enough for that."
-                "Buy pantyhose for $50." if "pantyhose" not in StormX.Inventory and "Storm_pantyhose" not in Player.Inventory:
-                    if Player.Cash >= 50:
+                "Buy pantyhose for $50." if "pantyhose" not in StormX.inventory and "Storm_pantyhose" not in Player.inventory:
+                    if Player.cash >= 50:
                         "You purchase the hose, these will look nice on [StormX.name]."
-                        $ Player.Inventory.append("Storm_pantyhose")
-                        $ Player.Cash -= 50
+                        $ Player.inventory.append("Storm_pantyhose")
+                        $ Player.cash -= 50
                     else:
                         "You don't have enough for that."
-                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in StormX.Inventory and "stockings_and_garterbelt" not in Player.Inventory and approval_check(StormX, 1500):
-                    if Player.Cash >= 100:
+                "Buy stockings and garterbelt for $100." if "stockings_and_garterbelt" not in StormX.inventory and "stockings_and_garterbelt" not in Player.inventory and approval_check(StormX, 1500):
+                    if Player.cash >= 100:
                         "You purchase the stockings, these will look nice on [StormX.name]."
-                        $ Player.Inventory.append("stockings_and_garterbelt")
-                        $ Player.Cash -= 100
+                        $ Player.inventory.append("stockings_and_garterbelt")
+                        $ Player.cash -= 100
                     else:
                         "You don't have enough for that."
-                "Buy black bikini top for $60." if "bikini_top" not in StormX.Inventory and "Storm bikini_top" not in Player.Inventory:
-                    if Player.Cash >= 60:
+                "Buy black bikini top for $60." if "bikini_top" not in StormX.inventory and "Storm bikini_top" not in Player.inventory:
+                    if Player.cash >= 60:
                         "You purchase the bikini top, this will look nice on [StormX.name]."
-                        $ Player.Inventory.append("Storm bikini_top")
-                        $ Player.Cash -= 60
+                        $ Player.inventory.append("Storm bikini_top")
+                        $ Player.cash -= 60
                     else:
                         "You don't have enough for that."
-                "Buy black bikini bottoms for $60." if "bikini_bottoms" not in StormX.Inventory and "Storm bikini_bottoms" not in Player.Inventory:
-                    if Player.Cash >= 60:
+                "Buy black bikini bottoms for $60." if "bikini_bottoms" not in StormX.inventory and "Storm bikini_bottoms" not in Player.inventory:
+                    if Player.cash >= 60:
                         "You purchase the bikini bottoms, these will look nice on [StormX.name]."
-                        $ Player.Inventory.append("Storm bikini_bottoms")
-                        $ Player.Cash -= 60
+                        $ Player.inventory.append("Storm bikini_bottoms")
+                        $ Player.cash -= 60
                     else:
                         "You don't have enough for that."
                 "Never mind.":
@@ -3861,33 +3658,33 @@ label Shop:
                     "A sappy romantic novel about two starcrossed lovers."
                     if "DL" not in Shop_Inventory:
                         "They seem to be out of stock at the moment."
-                    elif Player.Cash >= 20:
+                    elif Player.cash >= 20:
                         "You purchase the book."
                         $ Shop_Inventory.remove("DL")
-                        $ Player.Inventory.append("Dazzler and Longshot")
-                        $ Player.Cash -= 20
+                        $ Player.inventory.append("Dazzler and Longshot")
+                        $ Player.cash -= 20
                     else:
                         "You don't have enough for that."
                 "Buy \"256 Shades of Grey\" for $20.":
                     "A gripping sexual thriller about a stern red-headed \"goblin queen\" and her subject."
                     if "G" not in Shop_Inventory:
                         "They seem to be out of stock at the moment."
-                    elif Player.Cash >= 20:
+                    elif Player.cash >= 20:
                         "You purchase the book."
                         $ Shop_Inventory.remove("G")
-                        $ Player.Inventory.append("256 Shades of Grey")
-                        $ Player.Cash -= 20
+                        $ Player.inventory.append("256 Shades of Grey")
+                        $ Player.cash -= 20
                     else:
                         "You don't have enough for that."
                 "Buy \"Avengers Tower Penthouse\" for $20.":
                     "A book filled with nude pictures of various Avengers, sexy."
                     if "A" not in Shop_Inventory:
                         "They seem to be out of stock at the moment."
-                    elif Player.Cash >= 20:
+                    elif Player.cash >= 20:
                         "You purchase the book."
                         $ Shop_Inventory.remove("A")
-                        $ Player.Inventory.append("Avengers Tower Penthouse")
-                        $ Player.Cash -= 20
+                        $ Player.inventory.append("Avengers Tower Penthouse")
+                        $ Player.cash -= 20
                     else:
                         "You don't have enough for that."
                 "Back":
@@ -3905,16 +3702,16 @@ label Shop:
                             pass
                         "Never mind.":
                             jump Shop
-                    if "Mandrill Cologne" in Player.Inventory:
+                    if "Mandrill Cologne" in Player.inventory:
                         "They seem to be out of stock, maybe check back later."
-                    elif Player.Cash >= 150:
+                    elif Player.cash >= 150:
                         "You purchase one bottle of Mandrill Cologne."
-                        $ Player.Inventory.append("Mandrill Cologne")
-                        $ Player.Inventory.append("Mandrill Cologne")
-                        $ Player.Inventory.append("Mandrill Cologne")
-                        $ Player.Inventory.append("Mandrill Cologne")
-                        $ Player.Inventory.append("Mandrill Cologne")
-                        $ Player.Cash -= 150
+                        $ Player.inventory.append("Mandrill Cologne")
+                        $ Player.inventory.append("Mandrill Cologne")
+                        $ Player.inventory.append("Mandrill Cologne")
+                        $ Player.inventory.append("Mandrill Cologne")
+                        $ Player.inventory.append("Mandrill Cologne")
+                        $ Player.cash -= 150
                     else:
                         "You don't have enough for that."
                 "Examine the Purple Rain Cologne (\"They can't resist your charms\").":
@@ -3924,17 +3721,17 @@ label Shop:
                             pass
                         "Never mind.":
                             jump Shop
-                    if "Purple Rain Cologne" in Player.Inventory:
+                    if "Purple Rain Cologne" in Player.inventory:
                         "They seem to be out of stock, maybe check back later."
-                    elif Player.Cash >= 200:
+                    elif Player.cash >= 200:
                         "You purchase one bottle of Purple Rain Cologne."
-                        $ Player.Inventory.append("Purple Rain Cologne")
-                        $ Player.Inventory.append("Purple Rain Cologne")
-                        $ Player.Inventory.append("Purple Rain Cologne")
-                        $ Player.Inventory.append("Purple Rain Cologne")
-                        $ Player.Inventory.append("Purple Rain Cologne")
-                        $ Player.Inventory.append("Purple Rain Cologne")
-                        $ Player.Cash -= 200
+                        $ Player.inventory.append("Purple Rain Cologne")
+                        $ Player.inventory.append("Purple Rain Cologne")
+                        $ Player.inventory.append("Purple Rain Cologne")
+                        $ Player.inventory.append("Purple Rain Cologne")
+                        $ Player.inventory.append("Purple Rain Cologne")
+                        $ Player.inventory.append("Purple Rain Cologne")
+                        $ Player.cash -= 200
                     else:
                         "You don't have enough for that."
                 "Examine the Corruption Cologne (\"Let the wild out\").":
@@ -3944,16 +3741,16 @@ label Shop:
                             pass
                         "Never mind.":
                             jump Shop
-                    if "Corruption Cologne" in Player.Inventory:
+                    if "Corruption Cologne" in Player.inventory:
                         "They seem to be out of stock, maybe check back later."
-                    elif Player.Cash >= 250:
+                    elif Player.cash >= 250:
                         "You purchase one bottle of Corruption Cologne."
-                        $ Player.Inventory.append("Corruption Cologne")
-                        $ Player.Inventory.append("Corruption Cologne")
-                        $ Player.Inventory.append("Corruption Cologne")
-                        $ Player.Inventory.append("Corruption Cologne")
-                        $ Player.Inventory.append("Corruption Cologne")
-                        $ Player.Cash -= 250
+                        $ Player.inventory.append("Corruption Cologne")
+                        $ Player.inventory.append("Corruption Cologne")
+                        $ Player.inventory.append("Corruption Cologne")
+                        $ Player.inventory.append("Corruption Cologne")
+                        $ Player.inventory.append("Corruption Cologne")
+                        $ Player.cash -= 250
                     else:
                         "You don't have enough for that."
                 "Back":
@@ -4070,7 +3867,7 @@ label set_the_scene(Chr=1, Entry=0, Dress=1, TrigReset=1, Quiet=0, BO=[]):
         call Get_Dressed
 
     hide DressScreen
-    if "Historia" in Player.Traits:
+    if "Historia" in Player.traits:
         show BlueScreen onlayer black
     else:
         hide BlueScreen onlayer black
@@ -4085,7 +3882,7 @@ label shift_focus(Chr=RogueX, Second=0, BO=[], Return=0):
 
     if Chr not in all_Girls:
         "Tell Oni [Chr]"
-        "Then Tell Oni [Chr.Tag]"
+        "Then Tell Oni [Chr.tag]"
     if Chr == focused_Girl == Partner:
 
         $ BO = all_Girls[:]
@@ -4163,7 +3960,7 @@ label Display_Girl(Chr=0, Dress=1, TrigReset=1, DLoc=0, YLoc=50):
 
 
 
-        call expression Chr.Tag + "_Hide" pass (1)
+        call expression Chr.tag + "_Hide" pass (1)
         $ Chr.change_outfit(Changed=1)
         return
 
@@ -4200,7 +3997,7 @@ label Display_Girl(Chr=0, Dress=1, TrigReset=1, DLoc=0, YLoc=50):
     else:
         $ DLoc = Chr.sprite_location
 
-    call expression Chr.Tag + "_Hide"
+    call expression Chr.tag + "_Hide"
 
 
     $ Chr.location = bg_current
@@ -4286,44 +4083,44 @@ label ViewShift(Girl=0, View=0, ShouldHide=1, ViewTrig=primary_action):
     if Girl not in all_Girls:
         return
     if View == "menu":
-        if not renpy.showing(Girl.Tag+"_Sprite") and not renpy.showing(Girl.Tag+"_Doggy_Animation") and not renpy.showing(Girl.Tag+"_SexSprite"):
+        if not renpy.showing(Girl.tag+"_Sprite") and not renpy.showing(Girl.tag+"_Doggy_Animation") and not renpy.showing(Girl.tag+"_SexSprite"):
 
             return
         menu:
             "Full Body":
-                call expression Girl.Tag + "_Pos_Reset" pass (ViewTrig, 1)
+                call expression Girl.tag + "_Pos_Reset" pass (ViewTrig, 1)
             "Upper half":
-                call expression Girl.Tag + "_Breasts_Launch" pass (ViewTrig)
+                call expression Girl.tag + "_Breasts_Launch" pass (ViewTrig)
             "Middle View":
-                call expression Girl.Tag + "_Middle_Launch" pass (ViewTrig)
+                call expression Girl.tag + "_Middle_Launch" pass (ViewTrig)
             "Lower half":
-                call expression Girl.Tag + "_Pussy_Launch" pass (ViewTrig)
+                call expression Girl.tag + "_Pussy_Launch" pass (ViewTrig)
             "Rear view" if Girl in (RogueX,KittyX,EmmaX,LauraX,JeanX):
                 $ Girl.pose = "doggy"
-                call expression Girl.Tag + "_Sex_Launch" pass (ViewTrig)
+                call expression Girl.tag + "_Sex_Launch" pass (ViewTrig)
             "On top of you" if Girl in (EmmaX,JeanX,StormX):
                 $ Girl.pose = "sex"
-                call expression Girl.Tag + "_Sex_Launch" pass (ViewTrig)
+                call expression Girl.tag + "_Sex_Launch" pass (ViewTrig)
             "Laying down" if Girl in (RogueX,KittyX,LauraX):
                 $ Girl.pose = "sex"
-                call expression Girl.Tag + "_Sex_Launch" pass (ViewTrig)
+                call expression Girl.tag + "_Sex_Launch" pass (ViewTrig)
             "Never mind":
                 pass
     else:
         if ShouldHide:
-            call expression Girl.Tag + "_Hide"
+            call expression Girl.tag + "_Hide"
         if View == "full":
-            call expression Girl.Tag + "_Pos_Reset" pass (ViewTrig, 1)
+            call expression Girl.tag + "_Pos_Reset" pass (ViewTrig, 1)
         elif View == "breasts":
-            call expression Girl.Tag + "_Breasts_Launch" pass (ViewTrig)
+            call expression Girl.tag + "_Breasts_Launch" pass (ViewTrig)
         elif View == "mid":
-            call expression Girl.Tag + "_Middle_Launch" pass (ViewTrig)
+            call expression Girl.tag + "_Middle_Launch" pass (ViewTrig)
         elif View == "pussy":
-            call expression Girl.Tag + "_Pussy_Launch" pass (ViewTrig)
+            call expression Girl.tag + "_Pussy_Launch" pass (ViewTrig)
         elif View == "doggy" or View == "sex":
-            call expression Girl.Tag + "_Sex_Launch" pass (ViewTrig)
+            call expression Girl.tag + "_Sex_Launch" pass (ViewTrig)
         elif View == "kiss":
-            call expression Girl.Tag + "_Kissing_Launch" pass (ViewTrig)
+            call expression Girl.tag + "_Kissing_Launch" pass (ViewTrig)
     return
 
 image Punchout:
@@ -4345,12 +4142,12 @@ label AllReset(Chr=0, BO=[]):
         $ BO = all_Girls[:]
 
     while BO:
-        call expression BO[0].Tag + "_BJ_Reset"
-        call expression BO[0].Tag + "_TJ_Reset"
-        call expression BO[0].Tag + "_HJ_Reset"
-        call expression BO[0].Tag + "_Sex_Reset"
-        call expression BO[0].Tag + "_Doggy_Reset"
-        call expression BO[0].Tag + "_Hide"
+        call expression BO[0].tag + "_BJ_Reset"
+        call expression BO[0].tag + "_TJ_Reset"
+        call expression BO[0].tag + "_HJ_Reset"
+        call expression BO[0].tag + "_Sex_Reset"
+        call expression BO[0].tag + "_Doggy_Reset"
+        call expression BO[0].tag + "_Hide"
         if BO[0] == RogueX:
             if RogueX.location == bg_current:
                 show Rogue_Sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location,50):
@@ -4699,14 +4496,14 @@ label LesCheck(Girls=[], BO=[]):
     $ BO = active_Girls[:]
     while BO:
 
-        if BO[0] == RogueX and "touch" not in RogueX.Traits:
+        if BO[0] == RogueX and "touch" not in RogueX.traits:
 
             pass
         elif BO[0] == EmmaX and "three" not in EmmaX.history:
 
             pass
         elif approval_check(BO[0], 500, "I",Alt=[[EmmaX,JeanX],300]) and BO[0].Thirst >= 30:
-            if ("mono" not in BO[0].Traits or BO[0].Break[0]) and BO[0] not in Party:
+            if ("mono" not in BO[0].traits or BO[0].Break[0]) and BO[0] not in Party:
                 $ Girls.append(BO[0])
                 if BO[0].Thirst >= 60:
                     $ Girls.append(BO[0])
@@ -4760,8 +4557,8 @@ label LesCheck(Girls=[], BO=[]):
         $ Girls[0].location = Girls[1].home
         $ Girls[1].location = Girls[1].home
 
-    $ Girls[0].AddWord(1,"les",0,0,0)
-    $ Girls[1].AddWord(1,"les",0,0,0)
+    $ Girls[0].add_word(1,"les",0,0,0)
+    $ Girls[1].add_word(1,"les",0,0,0)
 
     $ Girls[0].GLG(Girls[1],700,15,1)
     $ Girls[1].GLG(Girls[0],700,15,1)
@@ -4772,8 +4569,8 @@ label LesCheck(Girls=[], BO=[]):
     $ Girls[0].GLG(Girls[1],1000,5,1)
     $ Girls[1].GLG(Girls[0],1000,5,1)
 
-    $ Girls[0].DrainWord("arriving",1,0)
-    $ Girls[1].DrainWord("arriving",1,0)
+    $ Girls[0].drain_word("arriving",1,0)
+    $ Girls[1].drain_word("arriving",1,0)
 
     $ Girls[0].change_stat("lust", 60, 20)
     $ Girls[1].change_stat("lust", 60, 20)
@@ -4789,7 +4586,7 @@ label Haremchange_stat(Girl=0, Check=1000, Value=0, Greater=0, BOA=[], BOB=[]):
 
 
 
-    if "Historia" in Player.Traits:
+    if "Historia" in Player.traits:
         return
     if Girl == "All" or Girl == 0:
         $ BOA = Player.Harem[:]
@@ -4829,11 +4626,11 @@ label JumperCheck(Girls=[], BO=[]):
 
             call Call_For_Les (BO[0])
 
-        if "locked" in Player.Traits and BO[0].location != bg_current:
+        if "locked" in Player.traits and BO[0].location != bg_current:
 
             pass
         elif BO[0].remaining_actions and BO[0].Thirst >= 30 and approval_check(BO[0], 500, "I") and "refused" not in BO[0].daily_history and "met" in BO[0].history:
-            if "chill" not in BO[0].Traits and BO[0].Tag not in Player.daily_history and "jumped" not in BO[0].daily_history and BO[0].location != "bg_teacher":
+            if "chill" not in BO[0].traits and BO[0].tag not in Player.daily_history and "jumped" not in BO[0].daily_history and BO[0].location != "bg_teacher":
 
                 if renpy.random.randint(0,3) > 1:
                     $ Girls.append(BO[0])
@@ -4872,7 +4669,7 @@ label JumperCheck(Girls=[], BO=[]):
     elif Girls:
 
         if Girls[0].location == bg_current:
-            call expression Girls[0].Tag + "_SexMenu"
+            call expression Girls[0].tag + "_SexMenu"
 
     if bg_current == "bg_player":
 
@@ -4897,7 +4694,7 @@ label Jumped(Act=0):
     if not Girls:
         return
 
-    if Girls[0].location != bg_current and "locked" in Player.Traits:
+    if Girls[0].location != bg_current and "locked" in Player.traits:
 
         call Locked_Door (Girls[0])
         if not Girls or Girls[0].location != bg_current:
@@ -4910,7 +4707,7 @@ label Jumped(Act=0):
     while BO:
         $ BO[0].location = bg_current
         $ BO.remove(BO[0])
-    $ Girls[0].AddWord(1,"jumped","jumped")
+    $ Girls[0].add_word(1,"jumped","jumped")
 
     call Taboo_Level
 
@@ -4949,9 +4746,9 @@ label Jumped(Act=0):
                 $ Girls[0].change_face("sad",1)
                 "You tell her to cut it out, and head back to what you were doing."
                 $ Player.recent_history.append("nope")
-                $ Girls[0].AddWord(1,"refused","refused")
+                $ Girls[0].add_word(1,"refused","refused")
                 if not approval_check(Girls[0], 500, "O"):
-                    $ Girls[0].AddWord(1,"angry","angry")
+                    $ Girls[0].add_word(1,"angry","angry")
                 return
 
         if Partner:
@@ -4983,9 +4780,9 @@ label Jumped(Act=0):
                 $ Girls[0].change_face("sad",1)
                 "You tell her to cut it out, and head back to what you were doing."
                 $ Player.recent_history.append("nope")
-                $ Girls[0].AddWord(1,"refused","refused")
+                $ Girls[0].add_word(1,"refused","refused")
                 if not approval_check(Girls[0], 500, "O"):
-                    $ Girls[0].AddWord(1,"angry","angry")
+                    $ Girls[0].add_word(1,"angry","angry")
                 return
 
     $ BO = Girls[:]
@@ -4996,7 +4793,7 @@ label Jumped(Act=0):
     call Taboo_Level
     call set_the_scene (Dress=0)
 
-    $ Girls[0].AddWord(1,"jumped","jumped",0,"jumped")
+    $ Girls[0].add_word(1,"jumped","jumped",0,"jumped")
 
     if Girls[0] == RogueX:
         ch_r "You've been dodge'in me lately."
@@ -5037,29 +4834,29 @@ label Jumped(Act=0):
 
 
     if Act == "anal":
-        call expression Girls[0].Tag + "_AnalPrep"
+        call expression Girls[0].tag + "_AnalPrep"
     elif Act == "sex":
-        call expression Girls[0].Tag + "_SexPrep"
+        call expression Girls[0].tag + "_SexPrep"
     elif Act ==  "eat_pussy":
-        call expression Girls[0].Tag + "_LP_Prep"
+        call expression Girls[0].tag + "_LP_Prep"
     elif Act == "fondle_pussy":
-        call expression Girls[0].Tag + "_FP_Prep"
+        call expression Girls[0].tag + "_FP_Prep"
     elif Act == "blowjob":
-        call expression Girls[0].Tag + "_BJ_Prep"
+        call expression Girls[0].tag + "_BJ_Prep"
     elif Act == "titjob":
-        call expression Girls[0].Tag + "_TJ_Prep"
+        call expression Girls[0].tag + "_TJ_Prep"
 
 
     elif Act == "handjob":
-        call expression Girls[0].Tag + "_HJ_Prep"
+        call expression Girls[0].tag + "_HJ_Prep"
     elif Act == "hotdog":
-        call expression Girls[0].Tag + "_HotdogPrep"
+        call expression Girls[0].tag + "_HotdogPrep"
     elif Act == "suck_breasts":
-        call expression Girls[0].Tag + "_SB_Prep"
+        call expression Girls[0].tag + "_SB_Prep"
     elif Act == "fondle_breasts":
-        call expression Girls[0].Tag + "_FB_Prep"
+        call expression Girls[0].tag + "_FB_Prep"
     elif Act == "finger_ass" or Act == "eat_ass":
-        call expression Girls[0].Tag + "_IA_Prep"
+        call expression Girls[0].tag + "_IA_Prep"
     else:
         call KissPrep (Girls[0])
     return
@@ -5073,7 +4870,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
 
 
     $ Girl.change_face("sly",1)
-    $ Girl.AddWord(1,"quicksex","quicksex")
+    $ Girl.add_word(1,"quicksex","quicksex")
     menu:
         extend ""
         "Sure":
@@ -5177,7 +4974,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                                 ch_s "That can be arranged. . ."
                             elif Girl == JubesX:
                                 ch_v "Hmmm. ok. . ."
-                            call expression Girl.Tag + "_SexMenu"
+                            call expression Girl.tag + "_SexMenu"
                             return
                         "Still no.":
 
@@ -5188,10 +4985,10 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                                 $ Line = "beg"
                             elif not counter and Count:
 
-                                $ Girl.Uptop = 1
+                                $ Girl.top_pulled_up = 1
                                 pause 1
-                                call expression Girl.Tag + "_First_Topless" pass (1)
-                                $ Girl.Uptop = 0
+                                call expression Girl.tag + "_First_Topless" pass (1)
+                                $ Girl.top_pulled_up = 0
                                 $ Girl.change_face("confused",1,Mouth="smile")
                                 $ Girl.change_stat("inhibition", 70, 3)
                                 $ Girl.change_stat("inhibition", 95, 3)
@@ -5355,27 +5152,27 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
 
 
     if Act == "anal":
-        call expression Girl.Tag + "_AnalPrep"
+        call expression Girl.tag + "_AnalPrep"
     elif Act == "sex":
-        call expression Girl.Tag + "_SexPrep"
+        call expression Girl.tag + "_SexPrep"
     elif Act ==  "eat_pussy":
-        call expression Girl.Tag + "_LP_Prep"
+        call expression Girl.tag + "_LP_Prep"
     elif Act == "fondle_pussy":
-        call expression Girl.Tag + "_FP_Prep"
+        call expression Girl.tag + "_FP_Prep"
     elif Act == "blowjob":
-        call expression Girl.Tag + "_BJ_Prep"
+        call expression Girl.tag + "_BJ_Prep"
     elif Act == "titjob":
-        call expression Girl.Tag + "_TJ_Prep"
+        call expression Girl.tag + "_TJ_Prep"
     elif Act == "handjob":
-        call expression Girl.Tag + "_HJ_Prep"
+        call expression Girl.tag + "_HJ_Prep"
     elif Act == "hotdog":
-        call expression Girl.Tag + "_HotdogPrep"
+        call expression Girl.tag + "_HotdogPrep"
     elif Act == "suck_breasts":
-        call expression Girl.Tag + "_SB_Prep"
+        call expression Girl.tag + "_SB_Prep"
     elif Act == "fondle_breasts":
-        call expression Girl.Tag + "_FB_Prep"
+        call expression Girl.tag + "_FB_Prep"
     elif Act == "finger_ass" or Act == "eat_ass":
-        call expression Girl.Tag + "_IA_Prep"
+        call expression Girl.tag + "_IA_Prep"
     else:
         call KissPrep (Girl)
     return
@@ -5399,7 +5196,7 @@ label Escalation(Girl=0):
         if offhand_action == "suck_breasts":
             $ offhand_action = 0
         $ Girl.change_stat("inhibition", 80, 2)
-        call expression Girl.Tag + "_SB_Prep"
+        call expression Girl.tag + "_SB_Prep"
         if "suck_breasts" in Girl.recent_history:
 
             $ renpy.pop_call()
@@ -5408,7 +5205,7 @@ label Escalation(Girl=0):
         if offhand_action == "fondle_thighs":
             $ offhand_action = 0
         $ Girl.change_stat("inhibition", 80, 4)
-        call expression Girl.Tag + "_FP_Prep"
+        call expression Girl.tag + "_FP_Prep"
         if "fondle_pussy" in Girl.recent_history:
 
             $ renpy.pop_call()
@@ -5418,21 +5215,21 @@ label Escalation(Girl=0):
     elif primary_action == "handjob" and approval_check(Girl,1200,TabM=4) and Girl.lust >= 30 and Girl.action_counter["blowjob"]:
 
         $ Girl.change_stat("inhibition", 80, 3)
-        call expression Girl.Tag + "_BJ_Prep"
+        call expression Girl.tag + "_BJ_Prep"
         if "blowjob" in Girl.recent_history:
 
             $ renpy.pop_call()
     elif primary_action not in ("sex","anal") and approval_check(Girl,1400,TabM=5,Alt=[[JeanX],1200]) and Girl.lust >= 60 and Girl.action_counter["sex"] >= 3:
 
         $ Girl.change_stat("inhibition", 80, 4)
-        call expression Girl.Tag + "_SexPrep"
+        call expression Girl.tag + "_SexPrep"
         if "sex" in Girl.recent_history:
 
             $ renpy.pop_call()
     elif primary_action != "anal" and approval_check(Girl,1400,TabM=5,Alt=[[JeanX],1200]) and Girl.lust >= 70 and Girl.action_counter["anal"] >= 5:
 
         $ Girl.change_stat("inhibition", 80, 5)
-        call expression Girl.Tag + "_AnalPrep"
+        call expression Girl.tag + "_AnalPrep"
         if "anal" in Girl.recent_history:
 
             $ renpy.pop_call()
@@ -5528,7 +5325,7 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
 
             if approval_check(Primary,500,"I",TabM=2) and Primary.lust >= 50 and (Primary.ChestNum() > 1 or Primary.OverNum() > 1):
 
-                $ Primary.Uptop = 1
+                $ Primary.top_pulled_up = 1
                 "[Primary.name] seems frustrated and pulls her top open."
 
     call Activity_Check (Primary, Secondary, 0)
@@ -5688,12 +5485,12 @@ label primary_action_Swap(Active=0, primary_actionX1=primary_action, primary_act
             jump Jubes_SMenu
     else:
         call set_the_scene (Dress=0, TrigReset=0, Quiet=1)
-        call expression Primary.Tag + "_SexAct" pass ("SkipTo")
+        call expression Primary.tag + "_SexAct" pass ("SkipTo")
     return
 
 
 
-label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0, Approval=1, Tempshame=0, TabooM=1):
+label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0, approval=1, Tempshame=0, TabooM=1):
 
 
 
@@ -5728,33 +5525,33 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
 
         if Girl == StormX:
 
-            $ Approval = 2
+            $ approval = 2
         elif Tempshame <= 15 and (approval_check(Girl, 600,Bonus=Mod) or approval_check(Girl, 350, "I")):
 
             if approval_check(Girl, 900,Bonus=Mod) or approval_check(Girl, 450, "I"):
-                $ Approval = 2
+                $ approval = 2
         elif Tempshame <= 20 and (approval_check(Girl, 900,Bonus=Mod) or approval_check(Girl, 450, "I")):
 
             if approval_check(Girl, 1100,Bonus=Mod) or approval_check(Girl, 550, "I"):
-                $ Approval = 2
+                $ approval = 2
         elif Tempshame <= 25 and (approval_check(Girl, 1100,Bonus=Mod) or approval_check(Girl, 550, "I")):
 
             if approval_check(Girl, 1400,Bonus=Mod) or approval_check(Girl, 650, "I"):
-                $ Approval = 2
+                $ approval = 2
         elif (approval_check(Girl, 1400,Bonus=Mod) or approval_check(Girl, 650, "I")):
 
             if approval_check(Girl, 1600,Bonus=Mod) or approval_check(Girl, 850, "I"):
-                $ Approval = 2
+                $ approval = 2
         else:
-            $ Approval = 0
+            $ approval = 0
 
-    if "exhibitionist" in Girl.Traits or approval_check(Girl,900,"I"):
+    if "exhibitionist" in Girl.traits or approval_check(Girl,900,"I"):
 
         $ TabooM = 0
     elif approval_check(Girl,50,"X") or approval_check(Girl,800,"I"):
         $ TabooM = .5
 
-    if not Approval:
+    if not approval:
 
         pass
     elif primary_action == "strip" and offhand_action != "jackin":
@@ -5762,87 +5559,87 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
     elif not primary_action:
         pass
     elif primary_action == "eat_ass":
-        $ Approval = approval_check(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
     elif primary_action == "anal":
-        $ Approval = approval_check(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
     elif primary_action == "sex":
-        $ Approval = approval_check(Girl,1400,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1400,Bonus=Mod, TabM = (TabooM* 3 ))
     elif primary_action == "eat_pussy":
-        $ Approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
     elif offhand_action == "jackin":
-        $ Approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "blowjob":
-        $ Approval = approval_check(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "titjob":
-        $ Approval = approval_check(Girl,1200,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1200,Bonus=Mod, TabM = (TabooM* 3 ))
     elif primary_action == "hotdog":
-        $ Approval = approval_check(Girl,1000,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1000,Bonus=Mod, TabM = (TabooM* 3 ))
     elif primary_action == "handjob" or girl_offhand_action == "handjob":
-        $ Approval = approval_check(Girl,1100,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1100,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "foot":
-        $ Approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "dildo_anal":
-        $ Approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "dildo_pussy":
-        $ Approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "finger_ass":
-        $ Approval = approval_check(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "fondle_pussy" or primary_action == "finger_pussy":
-        $ Approval = approval_check(Girl,1050,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1050,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "suck_breasts":
-        $ Approval = approval_check(Girl,1050,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1050,Bonus=Mod, TabM = (TabooM* 3 ))
     elif primary_action == "fondle_breasts":
-        $ Approval = approval_check(Girl,950,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,950,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "fondle_ass":
-        $ Approval = approval_check(Girl,850,Bonus=Mod, TabM = (TabooM* 1 ))
+        $ approval = approval_check(Girl,850,Bonus=Mod, TabM = (TabooM* 1 ))
 
     elif primary_action == "masturbation":
-        $ Approval = approval_check(Girl,1200,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1200,Bonus=Mod, TabM = (TabooM* 2 ))
 
     elif primary_action == "kiss":
-        $ Approval = approval_check(Girl,500,Bonus=Mod, TabM = 0)
+        $ approval = approval_check(Girl,500,Bonus=Mod, TabM = 0)
     elif primary_action == "fondle_thighs":
-        $ Approval = approval_check(Girl,750,Bonus=Mod, TabM = 0)
+        $ approval = approval_check(Girl,750,Bonus=Mod, TabM = 0)
 
     elif primary_action == "lesbian":
-        $ Approval = approval_check(Girl,1350,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1350,Bonus=Mod, TabM = (TabooM* 2 ))
 
 
-    if not Approval:
+    if not approval:
 
         pass
     elif not second_girl_primary_action:
         pass
     elif second_girl_primary_action == "eat_ass":
-        $ Approval = approval_check(Girl,1750,Bonus=(Mod+200), TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1750,Bonus=(Mod+200), TabM = (TabooM* 3 ))
     elif second_girl_primary_action == "eat_pussy":
-        $ Approval = approval_check(Girl,1450,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1450,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "blowjob":
-        $ Approval = approval_check(Girl,1300,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1300,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "handjob":
-        $ Approval = approval_check(Girl,1200,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1200,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "finger_ass":
-        $ Approval = approval_check(Girl,1500,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1500,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "fondle_pussy":
-        $ Approval = approval_check(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "suck_breasts":
-        $ Approval = approval_check(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 3 ))
     elif second_girl_primary_action == "fondle_breasts":
-        $ Approval = approval_check(Girl,1150,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1150,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "kiss girl":
-        $ Approval = approval_check(Girl,1050,Bonus=(Mod+200), TabM = 0)
+        $ approval = approval_check(Girl,1050,Bonus=(Mod+200), TabM = 0)
     elif second_girl_primary_action == "kiss both":
-        $ Approval = approval_check(Girl,1050,Bonus=(Mod+200), TabM = 0)
+        $ approval = approval_check(Girl,1050,Bonus=(Mod+200), TabM = 0)
     elif second_girl_primary_action == "fondle_ass":
-        $ Approval = approval_check(Girl,1050,Bonus=(Mod+200), TabM = (TabooM* 1 ))
+        $ approval = approval_check(Girl,1050,Bonus=(Mod+200), TabM = (TabooM* 1 ))
     elif second_girl_primary_action == "masturbation":
-        $ Approval = approval_check(Girl,1400,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1400,Bonus=(Mod+200), TabM = (TabooM* 2 ))
     elif second_girl_primary_action == "watch":
-        $ Approval = approval_check(Girl,1000,Bonus=(Mod+200), TabM = 0)
+        $ approval = approval_check(Girl,1000,Bonus=(Mod+200), TabM = 0)
     elif second_girl_primary_action == "kiss":
-        $ Approval = approval_check(Girl,600,Bonus=Mod, TabM = 0)
+        $ approval = approval_check(Girl,600,Bonus=Mod, TabM = 0)
 
-    if not Silent and not Approval and not Girl.Forced:
+    if not Silent and not approval and not Girl.Forced:
         $ Girl.change_face("sadside",1)
         if Girl == RogueX:
             if Girl2:
@@ -5875,11 +5672,11 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
                 ch_v "Not around [Girl2.name], [Girl.player_petname]."
             ch_v "This is totally not cool. Sorry."
 
-    if Removal and not Approval and not Girl.Forced:
+    if Removal and not approval and not Girl.Forced:
         call Remove_Girl (Girl, 2)
         "[Girl.name] takes off."
 
-    return Approval
+    return approval
 
 
 
@@ -5908,18 +5705,18 @@ label Seen_First_Peen(Primary=0, Secondary=0, Silent=0, Undress=0, Passive=0, Gi
 
             if "naked" not in Player.recent_history and Undress:
                 "You strip nude."
-                $ Player.AddWord(1,"naked",0,0,0)
+                $ Player.add_word(1,"naked",0,0,0)
             elif "cockout" in Player.recent_history:
                 return
             else:
                 "You whip your cock out."
-            $ Player.AddWord(1,"cockout",0,0,0)
+            $ Player.add_word(1,"cockout",0,0,0)
     else:
 
 
         if Passive:
 
-            if Approval == Passive and "cockout" not in Player.recent_history:
+            if approval == Passive and "cockout" not in Player.recent_history:
 
                 call CockOut
             if "cockout" not in Player.recent_history:
@@ -5935,26 +5732,26 @@ label Seen_First_Peen(Primary=0, Secondary=0, Silent=0, Undress=0, Passive=0, Gi
 
 label CockOut:
 
-    if Approval == 3:
+    if approval == 3:
 
 
         call Girl_First_Peen (Primary, React=1)
-    elif Approval == 4:
+    elif approval == 4:
 
 
         call Girl_First_Peen (Secondary, React=1)
-    $ Approval = 0
+    $ approval = 0
     return
 
 label Get_Dressed:
 
     if "naked" in Player.recent_history:
         "You get dressed."
-        $ Player.DrainWord("naked")
-        $ Player.DrainWord("cockout")
+        $ Player.drain_word("naked")
+        $ Player.drain_word("cockout")
     elif "cockout" in Player.recent_history:
         "You put your cock away."
-        $ Player.DrainWord("cockout")
+        $ Player.drain_word("cockout")
     return
 
 
@@ -6089,7 +5886,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
         $ Silent = 1
 
     if Undress:
-        $ Player.AddWord(1,"naked")
+        $ Player.add_word(1,"naked")
     if not Silent:
         if "cockout" in Player.recent_history:
             $ Girl.change_face("down", 2)
@@ -6101,7 +5898,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
             "You strip nude."
         else:
             "You whip your cock out."
-        $ Player.AddWord(1,"cockout")
+        $ Player.add_word(1,"cockout")
         if not Girl.Forced and not React and Taboo > 20 and (not approval_check(Girl, 1500) or Girl.SEXP < 10) and bg_current != "bg_showerroom" and Girl not in (JeanX,StormX):
 
             if not approval_check(Girl, 800) and not approval_check(Girl, 500, "I"):
@@ -6450,7 +6247,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
             if Girl.SeenPeen == 1:
                 $ Girl.change_stat("obedience", 50, 5)
                 $ Girl.change_stat("inhibition", 60, 5)
-                $ Girl.AddWord(1,0,0,0,"seenpeen")
+                $ Girl.add_word(1,0,0,0,"seenpeen")
             elif Girl.SeenPeen < 5:
                 $ Girl.change_stat("inhibition", 60, 2)
             elif Girl.SeenPeen == 10:
@@ -6484,8 +6281,8 @@ label Girls_Taboo(Girl=0, counter=1, Choice=0, D20=0):
 
     if Girl not in all_Girls:
         $ Girl = focused_Girl
-    $ Player.AddWord(1,0,Girl.Tag)
-    $ Player.AddWord(1,0,"scent")
+    $ Player.add_word(1,0,Girl.tag)
+    $ Player.add_word(1,0,"scent")
 
     if "uninterrupted" in Girl.recent_history:
         return
@@ -6496,7 +6293,7 @@ label Girls_Taboo(Girl=0, counter=1, Choice=0, D20=0):
 
     $ D20 = renpy.random.randint(1, 20)
 
-    if "screen" in Girl.Traits or (Partner and "screen" in Partner.Traits):
+    if "screen" in Girl.traits or (Partner and "screen" in Partner.traits):
 
         $ D20 += 8
     if D20 < 10:
@@ -6536,7 +6333,7 @@ label Girls_Taboo(Girl=0, counter=1, Choice=0, D20=0):
             $ Choice.remove(Girl)
             $ renpy.random.shuffle(Choice)
             while Choice:
-                if Choice[0].location != bg_current and "lockedout" not in Girl.Traits:
+                if Choice[0].location != bg_current and "lockedout" not in Girl.traits:
                     $ second_girl_offhand_action = Choice[0]
                     $ Choice = [1]
                 $ Choice.remove(Choice[0])
@@ -6566,23 +6363,23 @@ label Girls_Taboo(Girl=0, counter=1, Choice=0, D20=0):
         if "spotted" not in Girl.recent_history:
             "Some of the other students notice you and [Girl.name]."
             $ Girl.change_stat("inhibition", 200, 2)
-            $ Girl.Rep -= 2
-            $ Player.Rep -= 2
+            $ Girl.reputation -= 2
+            $ Player.reputation -= 2
         elif counter < 3:
             "A few more students notice you and [Girl.name]."
             $ Girl.change_stat("inhibition", 200, 2)
-            $ Girl.Rep -= 1
-            $ Player.Rep -= 1
+            $ Girl.reputation -= 1
+            $ Player.reputation -= 1
         elif counter == 3:
             "You've got quite an audience."
             $ Girl.change_stat("inhibition", 200, 3)
-            $ Girl.Rep -= 1
-            $ Player.Rep -= 1
+            $ Girl.reputation -= 1
+            $ Player.reputation -= 1
         if Partner:
-            $ Partner.Rep -= 1
+            $ Partner.reputation -= 1
 
 
-        if "exhibitionist" in Girl.Traits:
+        if "exhibitionist" in Girl.traits:
             $ Girl.change_face("sexy", 0)
             if "spotted" not in Girl.recent_history:
                 if Girl == RogueX:
@@ -6644,7 +6441,7 @@ label Girls_Taboo(Girl=0, counter=1, Choice=0, D20=0):
                     "[Girl.name] bolts up with an embarassed look. She grabs her clothes and stalks off."
                 else:
                     "[Girl.name] bolts up with an embarassed look. She runs off while putting her clothes back on."
-                $ Girl.Rep -= 3 if Girl.Rep >= 30 else Girl.Rep
+                $ Girl.reputation -= 3 if Girl.reputation >= 30 else Girl.reputation
             else:
                 if Girl == KittyX:
                     $ Girl.change_stat("love", 90, -15)
@@ -6800,13 +6597,13 @@ label Girls_Taboo(Girl=0, counter=1, Choice=0, D20=0):
             hide blackscreen onlayer black
             $ bg_current = "bg_player"
             jump Misplaced
-    elif "exhibitionist" not in Girl.Traits:
+    elif "exhibitionist" not in Girl.traits:
         $ Girl.change_face("sly")
-        if Girl == JeanX and "nowhammy" not in JeanX.Traits:
+        if Girl == JeanX and "nowhammy" not in JeanX.traits:
 
             pass
         else:
-            $ Girl.Traits.append("exhibitionist")
+            $ Girl.traits.append("exhibitionist")
             "[Girl.name] seems to have become something of an exhibitionist."
     elif D20 > 15:
         $ Girl.change_face("sexy")
@@ -6840,7 +6637,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, BO=[]):
         return
     if "threesome" in Other.recent_history:
         return
-    if Partner == Other and "noticed " + Girl.Tag in Other.recent_history:
+    if Partner == Other and "noticed " + Girl.tag in Other.recent_history:
         return
 
     if not Silent:
@@ -6862,11 +6659,11 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, BO=[]):
 
         call Seen_First_Peen (Other, Girl)
 
-    $ Girl.recent_history.append("noticed " + Other.Tag)
-    $ Other.recent_history.append("noticed " + Girl.Tag)
+    $ Girl.recent_history.append("noticed " + Other.tag)
+    $ Other.recent_history.append("noticed " + Girl.tag)
     if Other == EmmaX and ("three" not in EmmaX.history or "classcaught" not in EmmaX.history):
 
-        $ Other.AddWord(1,0,0,"saw with " + Girl.Tag)
+        $ Other.add_word(1,0,0,"saw with " + Girl.tag)
         if bg_current == EmmaX.home:
 
             ch_e "If the two of you cannot keep your hands off each other, please do so elsewhere. . ."
@@ -6879,7 +6676,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, BO=[]):
             "Perhaps you should ask her about it later."
         return
 
-    if "poly " + Girl.Tag in Other.Traits or (Girl in Player.Harem and Other in Player.Harem):
+    if "poly " + Girl.tag in Other.traits or (Girl in Player.Harem and Other in Player.Harem):
 
         $ B = (1000-(20*Taboo))
     else:
@@ -6904,7 +6701,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, BO=[]):
         $ Other.change_stat("obedience", 90, 5)
         $ Other.change_stat("inhibition", 90, 5)
         $ Other.change_stat("lust", 90, 3)
-        $ Other.AddWord(1,0,0,"poly " + Girl.Tag)
+        $ Other.add_word(1,0,0,"poly " + Girl.tag)
         call Threeway_Set (Other, Mode="start", GirlB=Girl)
     elif approval_check(Other, 650, "O", TabM=2) and approval_check(Other, 450, "L", TabM=1) or approval_check(Other, 800, "O", TabM=2, Bonus = (B/3)):
 
@@ -6914,7 +6711,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, BO=[]):
         $ Other.change_stat("love", 90, 5)
         $ Other.change_stat("inhibition", 90, 5)
         $ Other.change_stat("lust", 90, 2)
-        $ Other.AddWord(1,0,0,"poly " + Girl.Tag)
+        $ Other.add_word(1,0,0,"poly " + Girl.tag)
         call Threeway_Set (Other, "watch", Mode="start", GirlB=Girl)
     elif approval_check(Other, 650, "I", TabM=2) and approval_check(Other, 450, "L", TabM=1) or approval_check(Other, 800, "I", TabM=2, Bonus = (B/3)):
 
@@ -6925,7 +6722,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, BO=[]):
         $ Other.change_stat("obedience", 90, 2)
         $ Other.change_stat("inhibition", 90, 2)
         $ Other.change_stat("lust", 90, 5)
-        $ Other.AddWord(1,0,0,"poly " + Girl.Tag)
+        $ Other.add_word(1,0,0,"poly " + Girl.tag)
         call Threeway_Set (Other, "watch", Mode="start", GirlB=Girl)
     elif approval_check(Other, 1500, TabM=2, Bonus = B):
         $ Other.change_face("perplexed", 1)
@@ -6962,7 +6759,7 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, BO=[]):
         $ Other.change_stat("obedience", 90, -5)
         $ Other.change_stat("lust", 89, 10)
         $ Partner = 0
-        $ Other.AddWord(1,0,0,"saw with " + Girl.Tag)
+        $ Other.add_word(1,0,0,"saw with " + Girl.tag)
         if bg_current == Other.home:
             $ Other.recent_history.append("angry")
             call GirlsAngry
@@ -7012,39 +6809,39 @@ label CloseOut(Chr=focused_Girl):
 
     $ Chr = GirlCheck(Chr)
     if primary_action == "blowjob":
-        call expression Chr.Tag + "_BJ_After"
+        call expression Chr.tag + "_BJ_After"
     elif primary_action == "handjob":
-        call expression Chr.Tag + "_HJ_After"
+        call expression Chr.tag + "_HJ_After"
     elif primary_action == "titjob":
-        call expression Chr.Tag + "_TJ_After"
+        call expression Chr.tag + "_TJ_After"
     elif primary_action == "kiss":
         call Kiss_After
     elif primary_action == "fondle_breasts":
-        call expression Chr.Tag + "_FB_After"
+        call expression Chr.tag + "_FB_After"
     elif primary_action == "suck_breasts":
-        call expression Chr.Tag + "_SB_After"
+        call expression Chr.tag + "_SB_After"
     elif primary_action == "fondle_thighs":
-        call expression Chr.Tag + "_FT_After"
+        call expression Chr.tag + "_FT_After"
     elif primary_action == "fondle_pussy":
-        call expression Chr.Tag + "_FP_After"
+        call expression Chr.tag + "_FP_After"
     elif primary_action == "eat_pussy":
-        call expression Chr.Tag + "_LP_After"
+        call expression Chr.tag + "_LP_After"
     elif primary_action == "fondle_ass":
-        call expression Chr.Tag + "_FA_After"
+        call expression Chr.tag + "_FA_After"
     elif primary_action == "finger_ass":
-        call expression Chr.Tag + "_IA_After"
+        call expression Chr.tag + "_IA_After"
     elif primary_action == "eat_ass":
-        call expression Chr.Tag + "_LA_After"
+        call expression Chr.tag + "_LA_After"
     elif primary_action == "sex":
-        call expression Chr.Tag + "_SexAfter"
+        call expression Chr.tag + "_SexAfter"
     elif primary_action == "hotdog":
-        call expression Chr.Tag + "_HotdogAfter"
+        call expression Chr.tag + "_HotdogAfter"
     elif primary_action == "anal":
-        call expression Chr.Tag + "_AnalAfter"
+        call expression Chr.tag + "_AnalAfter"
     elif primary_action == "dildo_pussy":
-        call expression Chr.Tag + "_DP_After"
+        call expression Chr.tag + "_DP_After"
     elif primary_action == "dildo_anal":
-        call expression Chr.Tag + "_DA_After"
+        call expression Chr.tag + "_DA_After"
     elif primary_action == "strip":
         call Group_Strip_End
     elif primary_action == "masturbation":
@@ -7075,7 +6872,7 @@ label Sex_Over(Clothes=1, Girls=0, BO=[]):
 
             $ BO[0].session_orgasms = 0
             call Girl_Cleanup (BO[0], "after")
-            if Player.Spunk:
+            if Player.spunk:
                 if BO[0] == RogueX:
                     ch_r "Let me take care of that for you. . ."
                 elif BO[0] == KittyX:
@@ -7093,10 +6890,10 @@ label Sex_Over(Clothes=1, Girls=0, BO=[]):
                     ch_v "Oh, I can clean that up for you, [JubesX.player_petname]. . ."
                 call Girl_CleanCock (BO[0])
 
-        if "nowhammy" not in JeanX.Traits and "saw with Jean" in BO[0].Traits:
+        if "nowhammy" not in JeanX.traits and "saw with Jean" in BO[0].traits:
 
-            $ BO[0].Traits.remove("saw with Jean")
-            $ BO[0].Traits.append("sawJeanW")
+            $ BO[0].traits.remove("saw with Jean")
+            $ BO[0].traits.append("sawJeanW")
         $ BO.remove(BO[0])
 
     if Girls == Partner and Girls in all_Girls:
@@ -7134,39 +6931,39 @@ label SkipTo(Chr=focused_Girl):
 
     $ Chr = GirlCheck(Chr)
     if primary_action == "blowjob":
-        call expression Chr.Tag + "_BJ_Cycle"
+        call expression Chr.tag + "_BJ_Cycle"
     elif primary_action == "handjob":
-        call expression Chr.Tag + "_HJ_Cycle"
+        call expression Chr.tag + "_HJ_Cycle"
     elif primary_action == "titjob":
-        call expression Chr.Tag + "_TJ_Cycle"
+        call expression Chr.tag + "_TJ_Cycle"
     elif primary_action == "kiss":
         call KissCycle (Chr)
     elif primary_action == "fondle_breasts":
-        call expression Chr.Tag + "_FB_Cycle"
+        call expression Chr.tag + "_FB_Cycle"
     elif primary_action == "suck_breasts":
-        call expression Chr.Tag + "_SB_Cycle"
+        call expression Chr.tag + "_SB_Cycle"
     elif primary_action == "fondle_thighs":
-        call expression Chr.Tag + "_FT_Cycle"
+        call expression Chr.tag + "_FT_Cycle"
     elif primary_action == "fondle_pussy":
-        call expression Chr.Tag + "_FP_Cycle"
+        call expression Chr.tag + "_FP_Cycle"
     elif primary_action == "eat_pussy":
-        call expression Chr.Tag + "_LP_Cycle"
+        call expression Chr.tag + "_LP_Cycle"
     elif primary_action == "fondle_ass":
-        call expression Chr.Tag + "_FA_Cycle"
+        call expression Chr.tag + "_FA_Cycle"
     elif primary_action == "finger_ass":
-        call expression Chr.Tag + "_IA_Cycle"
+        call expression Chr.tag + "_IA_Cycle"
     elif primary_action == "eat_ass":
-        call expression Chr.Tag + "_LA_Cycle"
+        call expression Chr.tag + "_LA_Cycle"
     elif primary_action == "sex":
-        call expression Chr.Tag + "_SexCycle"
+        call expression Chr.tag + "_SexCycle"
     elif primary_action == "hotdog":
-        call expression Chr.Tag + "_HotdogCycle"
+        call expression Chr.tag + "_HotdogCycle"
     elif primary_action == "anal":
-        call expression Chr.Tag + "_AnalCycle"
+        call expression Chr.tag + "_AnalCycle"
     elif primary_action == "dildo_pussy":
-        call expression Chr.Tag + "_DP_Cycle"
+        call expression Chr.tag + "_DP_Cycle"
     elif primary_action == "dildo_anal":
-        call expression Chr.Tag + "_DA_Cycle"
+        call expression Chr.tag + "_DA_Cycle"
     elif primary_action == "strip":
         call Group_Strip_End
     elif primary_action == "masturbation":
@@ -7289,7 +7086,7 @@ label Microtransactions_Intro:
     hide blackscreen onlayer black
     $ Round -= 5
     "You return to Xavier's office."
-    $ Player.Cash += 5
+    $ Player.cash += 5
     ch_x "See? Simple!"
     $ Player.history.append("micro")
     ch_x "If you wish to make further microtransactions, just access it from McCoy's lab."
@@ -7344,7 +7141,7 @@ label Microtransactions:
                         "a giant crate of booze"])
             "It quickly grows into [Line]."
             $ Round -= 5
-            $ Player.Cash += 1
+            $ Player.cash += 1
             show blackscreen onlayer black
             pause 0.1
             hide blackscreen onlayer black
@@ -7379,7 +7176,7 @@ label Microtransactions:
                         "a giant crate of popcorn"])
             "It quickly grows into [Line]."
             $ Round -= 10
-            $ Player.Cash += 3
+            $ Player.cash += 3
             show blackscreen onlayer black
             pause 0.1
             hide blackscreen onlayer black
@@ -7409,7 +7206,7 @@ label Girl_TightsRipped(Girl=0, Count=0):
 
         return
 
-    if "ripped_tights" in Girl.Inventory or "ripped_pantyhose" in Girl.Inventory:
+    if "ripped_tights" in Girl.inventory or "ripped_pantyhose" in Girl.inventory:
 
         if Girl == RogueX:
             ch_r "Damnation, that's another pair ruined!"
@@ -7464,7 +7261,7 @@ label Girl_TightsRipped(Girl=0, Count=0):
                     $ Count = 3 if not approval_check(Girl, 1400) else Count
 
         if Count != 3:
-            $ Girl.AddWord(1,"ripped","ripped")
+            $ Girl.add_word(1,"ripped","ripped")
 
         if Count == 2:
 
@@ -7472,7 +7269,7 @@ label Girl_TightsRipped(Girl=0, Count=0):
                 extend ""
                 "I think those look really good on you.":
                     $ Girl.change_face("smile", 1)
-                    $ Girl.Inventory.append(Girl.hose)
+                    $ Girl.inventory.append(Girl.hose)
                     if Girl == RogueX:
                         ch_r "You think so? That's sweet, maybe I'll keep them on hand."
                     elif Girl == KittyX:

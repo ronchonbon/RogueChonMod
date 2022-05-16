@@ -68,22 +68,22 @@ label Emma_Masturbate:
         $ approval_bonus += 20
     elif EmmaX.lust >= 75:
         $ approval_bonus += 5
-    if "exhibitionist" in EmmaX.Traits:
+    if "exhibitionist" in EmmaX.traits:
         $ approval_bonus += (3*Taboo)
     if EmmaX in Player.Harem or "sex friend" in EmmaX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in EmmaX.Traits:
+    elif "ex" in EmmaX.traits:
         $ approval_bonus -= 40
     if EmmaX.event_counter["forced"] and not EmmaX.Forced:
         $ approval_bonus -= 5*EmmaX.event_counter["forced"]
 
-    $ Approval = approval_check(EmmaX, 1300, TabM = 2)
+    $ approval = approval_check(EmmaX, 1300, TabM = 2)
 
-    $ EmmaX.DrainWord("unseen",1,0)
+    $ EmmaX.drain_word("unseen",1,0)
 
     if action_context == "join":
-        if Approval > 1 or (Approval and EmmaX.lust >= 50):
-            $ Player.AddWord(1,"join")
+        if approval > 1 or (approval and EmmaX.lust >= 50):
+            $ Player.add_word(1,"join")
             menu:
                 extend ""
                 "Would you like some help? I could lend some helping hands. . ." if Player.semen and EmmaX.remaining_actions:
@@ -140,7 +140,7 @@ label Emma_Masturbate:
         $ Line = 0
         $ action_context = 0
         $ renpy.pop_call()
-        if Approval:
+        if approval:
             $ EmmaX.change_face("bemused", 1)
             if bg_current == "bg_emma":
                 ch_e "Why are you even in my room?"
@@ -166,10 +166,10 @@ label Emma_Masturbate:
 
 
     if action_context == EmmaX:
-        if Approval > 2:
+        if approval > 2:
             if EmmaX.PantsNum() == 5:
                 "[EmmaX.name]'s hand snakes down her body, and hikes up her skirt."
-                $ EmmaX.Upskirt = 1
+                $ EmmaX.upskirt = 1
             elif EmmaX.PantsNum() > 6:
                 "[EmmaX.name] slides her hand down her body and into her pants."
             elif EmmaX.HoseNum() >= 5:
@@ -225,7 +225,7 @@ label Emma_Masturbate:
 
 
 
-    if not EmmaX.action_counter["masturbation"] and Approval:
+    if not EmmaX.action_counter["masturbation"] and approval:
         if EmmaX.Forced:
             $ EmmaX.change_face("sad")
             $ EmmaX.change_stat("love", 70, -3, 1)
@@ -245,17 +245,17 @@ label Emma_Masturbate:
 
 
 
-    elif Approval:
+    elif approval:
         if EmmaX.Forced:
             $ EmmaX.change_face("sad")
             $ EmmaX.change_stat("love", 70, -3, 1)
             $ EmmaX.change_stat("love", 20, -2, 1)
             ch_e "Again? Just you only want to watch?"
-        elif Approval and "masturbation" in EmmaX.recent_history:
+        elif approval and "masturbation" in EmmaX.recent_history:
             $ EmmaX.change_face("sexy", 1)
             ch_e "I still have some. . . work I could be doing. . ."
             jump Emma_M_Prep
-        elif Approval and "masturbation" in EmmaX.daily_history:
+        elif approval and "masturbation" in EmmaX.daily_history:
             $ EmmaX.change_face("sexy", 1)
             $ Line = renpy.random.choice(["I was that good?",
                     "Didn't get enough earlier?",
@@ -277,7 +277,7 @@ label Emma_Masturbate:
 
 
 
-    if Approval >= 2:
+    if approval >= 2:
         if EmmaX.Forced:
             $ EmmaX.change_face("sad")
             $ EmmaX.change_stat("obedience", 90, 1)
@@ -313,7 +313,7 @@ label Emma_Masturbate:
                 $ EmmaX.change_stat("inhibition", 70, 2)
                 return
             "You look like you could use it. . .":
-                if Approval:
+                if approval:
                     $ EmmaX.change_face("sexy")
                     $ EmmaX.change_stat("obedience", 90, 2)
                     $ EmmaX.change_stat("obedience", 50, 2)
@@ -329,8 +329,8 @@ label Emma_Masturbate:
                     jump Emma_M_Prep
             "Just get at it already.":
 
-                $ Approval = approval_check(EmmaX, 450, "OI", TabM = 2)
-                if Approval > 1 or (Approval and EmmaX.Forced):
+                $ approval = approval_check(EmmaX, 450, "OI", TabM = 2)
+                if approval > 1 or (approval and EmmaX.Forced):
                     $ EmmaX.change_face("sad")
                     $ EmmaX.change_stat("love", 70, -5, 1)
                     $ EmmaX.change_stat("love", 200, -5)
@@ -379,8 +379,8 @@ label Emma_Masturbate:
     return
 
 label Emma_M_Prep:
-    $ EmmaX.Upskirt = 1
-    $ EmmaX.underwearDown = 1
+    $ EmmaX.upskirt = 1
+    $ EmmaX.underwear_pulled_down = 1
     call Emma_First_Bottomless (1)
     call set_the_scene (Dress=0)
 
@@ -414,8 +414,8 @@ label Emma_M_Prep:
         $ action_context = 0
     $ Line = 0
     if Taboo:
-        $ EmmaX.DrainWord("no_taboo")
-    $ EmmaX.DrainWord("no_masturbation")
+        $ EmmaX.drain_word("no_taboo")
+    $ EmmaX.drain_word("no_masturbation")
     $ EmmaX.recent_history.append("masturbation")
     $ EmmaX.daily_history.append("masturbation")
 
@@ -462,9 +462,9 @@ label Emma_M_Cycle:
                         $ Round -= 1
                         jump Emma_M_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -492,9 +492,9 @@ label Emma_M_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Emma_M_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Emma_M_Cycle
                                 "Never mind":
@@ -511,9 +511,9 @@ label Emma_M_Cycle:
                                 jump Emma_M_Interupted
                             else:
                                 call Girl_Undress (EmmaX)
-                        "Clean up [EmmaX.name] (locked)" if not EmmaX.Spunk:
+                        "Clean up [EmmaX.name] (locked)" if not EmmaX.spunk:
                             pass
-                        "Clean up [EmmaX.name]" if EmmaX.Spunk:
+                        "Clean up [EmmaX.name]" if EmmaX.spunk:
                             if "unseen" in EmmaX.recent_history:
                                 ch_p "You've got a little something on you. . ."
                                 jump Emma_M_Interupted
@@ -663,7 +663,7 @@ label Emma_M_Interupted:
                         $ approval_bonus -= 10
                         $ EmmaX.change_stat("lust", 200, -5)
 
-            if "Historia" not in Player.Traits:
+            if "Historia" not in Player.traits:
                 call Seen_First_Peen (EmmaX, Partner)
                 ch_e "Hmm. . ."
         else:
@@ -686,9 +686,9 @@ label Emma_M_Interupted:
                     $ EmmaX.change_stat("obedience", 50, 2)
                     $ EmmaX.change_stat("obedience", 70, 2)
 
-        $ EmmaX.DrainWord("unseen",1,0)
+        $ EmmaX.drain_word("unseen",1,0)
         $ EmmaX.action_counter["masturbation"] += 1
-        if "classcaught" not in EmmaX.history or "Historia" in Player.Traits:
+        if "classcaught" not in EmmaX.history or "Historia" in Player.traits:
 
             return
         if Round <= 10:
@@ -778,11 +778,11 @@ label Emma_Sex_P:
 
     if action_context == "shift":
         $ approval_bonus += 10
-    if "exhibitionist" in EmmaX.Traits:
+    if "exhibitionist" in EmmaX.traits:
         $ approval_bonus += (4*Taboo)
     if EmmaX in Player.Harem or "sex friend" in EmmaX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in EmmaX.Traits:
+    elif "ex" in EmmaX.traits:
         $ approval_bonus -= 40
     if EmmaX.event_counter["forced"] and not EmmaX.Forced:
         $ approval_bonus -= 5*EmmaX.event_counter["forced"]
@@ -797,13 +797,13 @@ label Emma_Sex_P:
         $ approval_bonus -= 10 if "no_sex" in EmmaX.recent_history else 0
 
 
-    $ Approval = approval_check(EmmaX, 1400, TabM = 5)
+    $ approval = approval_check(EmmaX, 1400, TabM = 5)
 
     if action_context == "auto":
         call Emma_Sex_Launch ("sex")
         if EmmaX.PantsNum() == 5:
             "You roll back, pulling [EmmaX.name] on top of you, sliding her skirt up as you go."
-            $ EmmaX.Upskirt = 1
+            $ EmmaX.upskirt = 1
         elif EmmaX.PantsNum() >= 6:
             "You roll back, pulling [EmmaX.name] on top of you, sliding her [EmmaX.legs] down as you do."
             $ EmmaX.legs = 0
@@ -813,7 +813,7 @@ label Emma_Sex_P:
         "You rub the tip of your cock against her moist slit."
         $ EmmaX.change_face("surprised", 1)
 
-        if (EmmaX.action_counter["sex"] and Approval) or (Approval > 1):
+        if (EmmaX.action_counter["sex"] and approval) or (approval > 1):
 
             "[EmmaX.name] is briefly startled, but melts into a sly smile."
             $ EmmaX.change_face("sly")
@@ -828,7 +828,7 @@ label Emma_Sex_P:
             menu:
                 ch_e "Do you really think you can handle that?"
                 "Sorry, sorry! Never mind.":
-                    if Approval:
+                    if approval:
                         $ EmmaX.change_face("sexy", 1)
                         $ EmmaX.change_stat("obedience", 70, 3)
                         $ EmmaX.change_stat("inhibition", 50, 3)
@@ -879,7 +879,7 @@ label Emma_Sex_P:
             ch_e "Are you sure this is how you'd like to use your. . . influence?"
 
 
-    if not EmmaX.action_counter["sex"] and Approval:
+    if not EmmaX.action_counter["sex"] and approval:
 
         if EmmaX.Forced:
             $ EmmaX.change_face("sad")
@@ -902,7 +902,7 @@ label Emma_Sex_P:
             ch_e "I was hoping you'd ask. . ."
 
 
-    elif Approval:
+    elif approval:
 
         $ EmmaX.change_face("sexy", 1)
         if EmmaX.Forced:
@@ -936,7 +936,7 @@ label Emma_Sex_P:
         $ Line = 0
 
 
-    if Approval >= 2:
+    if approval >= 2:
 
         if EmmaX.Forced:
             $ EmmaX.change_face("sad")
@@ -996,7 +996,7 @@ label Emma_Sex_P:
                 $ EmmaX.daily_history.append("no_sex")
                 return
             "I think you'd enjoy it as much as I would. . .":
-                if Approval:
+                if approval:
                     $ EmmaX.change_face("sexy")
                     $ EmmaX.change_stat("obedience", 90, 2)
                     $ EmmaX.change_stat("obedience", 50, 2)
@@ -1009,8 +1009,8 @@ label Emma_Sex_P:
                     $ Line = 0
                     jump Emma_SexPrep
             "Just deal with it.":
-                $ Approval = approval_check(EmmaX, 1150, "OI", TabM = 3)
-                if Approval > 1 or (Approval and EmmaX.Forced):
+                $ approval = approval_check(EmmaX, 1150, "OI", TabM = 3)
+                if approval > 1 or (approval and EmmaX.Forced):
                     $ EmmaX.change_face("sad")
                     $ EmmaX.change_stat("love", 70, -5, 1)
                     $ EmmaX.change_stat("love", 200, -5)
@@ -1069,10 +1069,10 @@ label Emma_SexPrep:
         $ action_context = 0
         if EmmaX.PantsNum() == 5:
             "[EmmaX.name] pushes you back and climbs on top of you, sliding her skirt up as she does so."
-            $ EmmaX.Upskirt = 1
+            $ EmmaX.upskirt = 1
         elif EmmaX.PantsNum() >= 6:
             "[EmmaX.name] pushes you down and climbs on top of you, sliding her [EmmaX.legs] down as she does so."
-            $ EmmaX.Upskirt = 1
+            $ EmmaX.upskirt = 1
         else:
             "[EmmaX.name] pushes you back and climbs on top of you."
         $ EmmaX.SeenPanties = 1
@@ -1102,9 +1102,9 @@ label Emma_SexPrep:
                 $ EmmaX.change_stat("obedience", 50, 1)
                 $ EmmaX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ EmmaX.AddWord(1,"refused","refused")
+                $ EmmaX.add_word(1,"refused","refused")
                 return
-        $ EmmaX.underwearDown = 1
+        $ EmmaX.underwear_pulled_down = 1
         call Emma_First_Bottomless (1)
 
     elif action_context != "auto":
@@ -1128,12 +1128,12 @@ label Emma_SexPrep:
         "She leans back a bit and your cock slides in."
     else:
 
-        if (EmmaX.PantsNum() > 6 and not EmmaX.Upskirt) and (EmmaX.underwear and not EmmaX.underwearDown):
+        if (EmmaX.PantsNum() > 6 and not EmmaX.upskirt) and (EmmaX.underwear and not EmmaX.underwear_pulled_down):
             "You quickly pull down her pants and her [EmmaX.underwear] and press against her slit."
-        elif (EmmaX.underwear and not EmmaX.underwearDown):
+        elif (EmmaX.underwear and not EmmaX.underwear_pulled_down):
             "You quickly pull down her [EmmaX.underwear] and press against her slit."
-        $ EmmaX.Upskirt = 1
-        $ EmmaX.underwearDown = 1
+        $ EmmaX.upskirt = 1
+        $ EmmaX.underwear_pulled_down = 1
         $ EmmaX.SeenPanties = 1
         call Emma_First_Bottomless (1)
 
@@ -1154,12 +1154,12 @@ label Emma_SexPrep:
         $ action_context = 0
     $ Line = 0
     $ counter = 0
-    $ Player.Cock = "in"
+    $ Player.cock_position = "in"
     $ primary_action = "sex"
     $ action_speed = 1
     if Taboo:
-        $ EmmaX.DrainWord("no_taboo")
-    $ EmmaX.DrainWord("no_sex")
+        $ EmmaX.drain_word("no_taboo")
+    $ EmmaX.drain_word("no_sex")
     $ EmmaX.recent_history.append("sex")
     $ EmmaX.daily_history.append("sex")
 
@@ -1169,10 +1169,10 @@ label Emma_Sex_Cycle:
         call Emma_Sex_Launch ("sex")
         $ action_speed = 2 if action_speed >= 4 else action_speed
         $ EmmaX.lust_face()
-        $ Player.Cock = "in"
+        $ Player.cock_position = "in"
         $ primary_action = "sex"
-        $ EmmaX.Upskirt = 1
-        $ EmmaX.underwearDown = 1
+        $ EmmaX.upskirt = 1
+        $ EmmaX.underwear_pulled_down = 1
 
         if Player.focus < 100:
 
@@ -1207,9 +1207,9 @@ label Emma_Sex_Cycle:
                     "You turn her around. . ."
                     jump Emma_Sex_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -1266,15 +1266,15 @@ label Emma_Sex_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Emma_Sex_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Emma_Sex_Cycle
                                 "Never mind":
                                     jump Emma_Sex_Cycle
                         "Just take a look at her.":
-                            $ Player.Cock = 0
+                            $ Player.cock_position = 0
                             $ action_speed = 0
 
                         "Show her feet" if not ShowFeet and EmmaX.pose == "doggy":
@@ -1284,9 +1284,9 @@ label Emma_Sex_Cycle:
                         "Undress [EmmaX.name]":
 
                             call Girl_Undress (EmmaX)
-                        "Clean up [EmmaX.name] (locked)" if not EmmaX.Spunk:
+                        "Clean up [EmmaX.name] (locked)" if not EmmaX.spunk:
                             pass
-                        "Clean up [EmmaX.name]" if EmmaX.Spunk:
+                        "Clean up [EmmaX.name]" if EmmaX.spunk:
                             call Girl_Cleanup (EmmaX, "ask")
                         "Never mind":
                             jump Emma_Sex_Cycle
@@ -1424,8 +1424,8 @@ label Emma_Sex_Cycle:
 
 label Emma_SexAfter:
     if not action_context:
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
+        $ Player.sprite = 0
+        $ Player.cock_position = "out"
         call Emma_Sex_Reset
 
     $ EmmaX.change_face("sexy")
@@ -1433,7 +1433,7 @@ label Emma_SexAfter:
     $ EmmaX.action_counter["sex"] += 1
     $ EmmaX.remaining_actions -=1
     $ EmmaX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ EmmaX.addiction_rate += 1
     $ EmmaX.change_stat("inhibition", 30, 2)
     $ EmmaX.change_stat("inhibition", 70, 1)
@@ -1501,12 +1501,12 @@ label Emma_Sex_A:
 
     if action_context == "shift":
         $ approval_bonus += 10
-    if "exhibitionist" in EmmaX.Traits:
+    if "exhibitionist" in EmmaX.traits:
         $ approval_bonus += (5*Taboo)
 
     if EmmaX in Player.Harem or "sex friend" in EmmaX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in EmmaX.Traits:
+    elif "ex" in EmmaX.traits:
         $ approval_bonus -= 40
     if EmmaX.event_counter["forced"] and not EmmaX.Forced:
         $ approval_bonus -= 5*EmmaX.event_counter["forced"]
@@ -1517,13 +1517,13 @@ label Emma_Sex_A:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_anal" in EmmaX.recent_history else 0
 
-    $ Approval = approval_check(EmmaX, 1550, TabM = 5)
+    $ approval = approval_check(EmmaX, 1550, TabM = 5)
 
     if action_context == "auto":
         call Emma_Sex_Launch ("anal")
         if EmmaX.PantsNum() == 5:
             "You roll back, pulling [EmmaX.name] on top of you, sliding her skirt up as you go."
-            $ EmmaX.Upskirt = 1
+            $ EmmaX.upskirt = 1
         elif EmmaX.PantsNum() >= 6:
             "You roll back, pulling [EmmaX.name] on top of you, sliding her [EmmaX.legs] down as you do."
             $ EmmaX.legs = 0
@@ -1533,7 +1533,7 @@ label Emma_Sex_A:
         "You press the tip of your cock against her tight rim."
         $ EmmaX.change_face("surprised", 1)
 
-        if (EmmaX.action_counter["anal"] and Approval) or (Approval > 1):
+        if (EmmaX.action_counter["anal"] and approval) or (approval > 1):
 
             $ EmmaX.change_stat("obedience", 70, 3)
             $ EmmaX.change_stat("inhibition", 50, 3)
@@ -1547,7 +1547,7 @@ label Emma_Sex_A:
             menu:
                 ch_e "Oh? What exactly are you doing back there?"
                 "Sorry, sorry! Never mind.":
-                    if Approval:
+                    if approval:
                         $ EmmaX.change_face("sexy", 1)
                         $ EmmaX.change_stat("obedience", 70, 3)
                         $ EmmaX.change_stat("inhibition", 50, 3)
@@ -1605,7 +1605,7 @@ label Emma_Sex_A:
         jump Emma_AnalPrep
 
 
-    if not EmmaX.action_counter["anal"] and Approval:
+    if not EmmaX.action_counter["anal"] and approval:
 
         if EmmaX.Forced:
             $ EmmaX.change_face("sad")
@@ -1627,7 +1627,7 @@ label Emma_Sex_A:
             $ EmmaX.mouth = "smile"
             ch_e "I was getting tired of waiting. . ."
 
-    elif Approval:
+    elif approval:
 
         if EmmaX.Forced:
             $ EmmaX.change_face("sad")
@@ -1660,7 +1660,7 @@ label Emma_Sex_A:
             ch_e "[Line]"
         $ Line = 0
 
-    if Approval >= 2:
+    if approval >= 2:
 
         if EmmaX.Forced:
             $ EmmaX.change_face("sad")
@@ -1722,7 +1722,7 @@ label Emma_Sex_A:
                 $ EmmaX.daily_history.append("no_anal")
                 return
             "I bet it would feel really good. . .":
-                if Approval:
+                if approval:
                     $ EmmaX.change_face("sexy")
                     $ EmmaX.change_stat("obedience", 90, 2)
                     $ EmmaX.change_stat("obedience", 50, 2)
@@ -1738,8 +1738,8 @@ label Emma_Sex_A:
                     pass
             "Just deal with it.":
 
-                $ Approval = approval_check(EmmaX, 1250, "OI", TabM = 3)
-                if Approval > 1 or (Approval and EmmaX.Forced):
+                $ approval = approval_check(EmmaX, 1250, "OI", TabM = 3)
+                if approval > 1 or (approval and EmmaX.Forced):
                     $ EmmaX.change_face("sad")
                     $ EmmaX.change_stat("love", 70, -5, 1)
                     $ EmmaX.change_stat("love", 200, -5)
@@ -1778,7 +1778,7 @@ label Emma_Sex_A:
         ch_e "This place, I mean, not anal."
         if approval_check(EmmaX, 500, "I"):
             ch_e "Anal can be nice, sometimes."
-        if not Approval:
+        if not approval:
             ch_e "Maybe not with you."
         $ EmmaX.change_stat("lust", 200, 5)
         $ EmmaX.change_stat("obedience", 50, -3)
@@ -1805,10 +1805,10 @@ label Emma_AnalPrep:
         $ action_context = 0
         if EmmaX.PantsNum() == 5:
             "[EmmaX.name] pushes you back and climbs on top of you, sliding her skirt up as she does so."
-            $ EmmaX.Upskirt = 1
+            $ EmmaX.upskirt = 1
         elif EmmaX.PantsNum() >= 6:
             "[EmmaX.name] pushes you down and climbs on top of you, sliding her [EmmaX.legs] down as she does so."
-            $ EmmaX.Upskirt = 1
+            $ EmmaX.upskirt = 1
         else:
             "[EmmaX.name] pushes you back and climbs on top of you."
         $ EmmaX.SeenPanties = 1
@@ -1838,9 +1838,9 @@ label Emma_AnalPrep:
                 $ EmmaX.change_stat("obedience", 50, 1)
                 $ EmmaX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ EmmaX.AddWord(1,"refused","refused")
+                $ EmmaX.add_word(1,"refused","refused")
                 return
-        $ EmmaX.underwearDown = 1
+        $ EmmaX.underwear_pulled_down = 1
         call Emma_First_Bottomless (1)
 
     elif action_context != "auto":
@@ -1864,12 +1864,12 @@ label Emma_AnalPrep:
         "She leans back a bit and your cock pops in."
     else:
 
-        if (EmmaX.PantsNum() > 6 and not EmmaX.Upskirt) and (EmmaX.underwear and not EmmaX.underwearDown):
+        if (EmmaX.PantsNum() > 6 and not EmmaX.upskirt) and (EmmaX.underwear and not EmmaX.underwear_pulled_down):
             "You quickly pull down her pants and her [EmmaX.underwear] and press against her back door."
-        elif (EmmaX.underwear and not EmmaX.underwearDown):
+        elif (EmmaX.underwear and not EmmaX.underwear_pulled_down):
             "You quickly pull down her [EmmaX.underwear] and press against her back door."
-        $ EmmaX.Upskirt = 1
-        $ EmmaX.underwearDown = 1
+        $ EmmaX.upskirt = 1
+        $ EmmaX.underwear_pulled_down = 1
         $ EmmaX.SeenPanties = 1
         call Emma_First_Bottomless (1)
 
@@ -1896,12 +1896,12 @@ label Emma_AnalPrep:
         $ action_context = 0
     $ Line = 0
     $ counter = 0
-    $ Player.Cock = "anal"
+    $ Player.cock_position = "anal"
     $ primary_action = "anal"
     $ action_speed = 1
     if Taboo:
-        $ EmmaX.DrainWord("no_taboo")
-    $ EmmaX.DrainWord("no_anal")
+        $ EmmaX.drain_word("no_taboo")
+    $ EmmaX.drain_word("no_anal")
     $ EmmaX.recent_history.append("anal")
     $ EmmaX.daily_history.append("anal")
 
@@ -1911,7 +1911,7 @@ label Emma_Anal_Cycle:
         call Emma_Sex_Launch ("anal")
         $ action_speed = 2 if action_speed >= 4 else action_speed
         $ EmmaX.lust_face()
-        $ Player.Cock = "anal"
+        $ Player.cock_position = "anal"
         $ primary_action = "anal"
 
         if Player.focus < 100:
@@ -1947,9 +1947,9 @@ label Emma_Anal_Cycle:
                     "You turn her around. . ."
                     jump Emma_Anal_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -2006,15 +2006,15 @@ label Emma_Anal_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Emma_Anal_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Emma_Anal_Cycle
                                 "Never mind":
                                     jump Emma_Anal_Cycle
                         "Just take a look at her.":
-                            $ Player.Cock = 0
+                            $ Player.cock_position = 0
                             $ action_speed = 0
 
                         "Show her feet" if not ShowFeet and EmmaX.pose == "doggy":
@@ -2024,9 +2024,9 @@ label Emma_Anal_Cycle:
                         "Undress [EmmaX.name]":
 
                             call Girl_Undress (EmmaX)
-                        "Clean up [EmmaX.name] (locked)" if not EmmaX.Spunk:
+                        "Clean up [EmmaX.name] (locked)" if not EmmaX.spunk:
                             pass
-                        "Clean up [EmmaX.name]" if EmmaX.Spunk:
+                        "Clean up [EmmaX.name]" if EmmaX.spunk:
                             call Girl_Cleanup (EmmaX, "ask")
                         "Never mind":
                             jump Emma_Anal_Cycle
@@ -2166,8 +2166,8 @@ label Emma_Anal_Cycle:
 
 label Emma_AnalAfter:
     if not action_context:
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
+        $ Player.sprite = 0
+        $ Player.cock_position = "out"
         call Emma_Sex_Reset
 
     $ EmmaX.change_face("sexy")
@@ -2175,7 +2175,7 @@ label Emma_AnalAfter:
     $ EmmaX.action_counter["anal"] += 1
     $ EmmaX.remaining_actions -=1
     $ EmmaX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ EmmaX.addiction_rate += 1
     $ EmmaX.change_stat("inhibition", 30, 3)
     $ EmmaX.change_stat("inhibition", 70, 1)
@@ -2238,11 +2238,11 @@ label Emma_Sex_H:
         $ approval_bonus += 5
     if action_context == "shift":
         $ approval_bonus += 10
-    if "exhibitionist" in EmmaX.Traits:
+    if "exhibitionist" in EmmaX.traits:
         $ approval_bonus += (3*Taboo)
     if EmmaX in Player.Harem or "sex friend" in EmmaX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in EmmaX.Traits:
+    elif "ex" in EmmaX.traits:
         $ approval_bonus -= 40
     if EmmaX.event_counter["forced"] and not EmmaX.Forced:
         $ approval_bonus -= 5*EmmaX.event_counter["forced"]
@@ -2254,14 +2254,14 @@ label Emma_Sex_H:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_hotdog" in EmmaX.recent_history else 0
 
-    $ Approval = approval_check(EmmaX, 1000, TabM = 3)
+    $ approval = approval_check(EmmaX, 1000, TabM = 3)
 
     if action_context == "auto":
         call Emma_Sex_Launch ("hotdog")
         "You roll back, pulling [EmmaX.name] on top of you, and press your cock against her."
         $ EmmaX.change_face("surprised", 1)
 
-        if (EmmaX.action_counter["hotdog"] and Approval) or (Approval > 1):
+        if (EmmaX.action_counter["hotdog"] and approval) or (approval > 1):
             "[EmmaX.name] is briefly startled, but melts into a sly smile."
             $ EmmaX.change_face("sly")
             $ EmmaX.change_stat("obedience", 70, 3)
@@ -2274,7 +2274,7 @@ label Emma_Sex_H:
             menu:
                 ch_e "You might want to take a step back, [EmmaX.player_petname]?"
                 "Sorry, sorry! Never mind.":
-                    if Approval:
+                    if approval:
                         $ EmmaX.change_face("sexy", 1)
                         $ EmmaX.change_stat("obedience", 70, 3)
                         $ EmmaX.change_stat("inhibition", 50, 3)
@@ -2321,7 +2321,7 @@ label Emma_Sex_H:
             ch_e ". . . nothing more than that?"
 
 
-    if not EmmaX.action_counter["hotdog"] and Approval:
+    if not EmmaX.action_counter["hotdog"] and approval:
 
         if EmmaX.Forced:
             $ EmmaX.change_face("sad")
@@ -2343,7 +2343,7 @@ label Emma_Sex_H:
             $ EmmaX.mouth = "smile"
             ch_e "Well if that's what gets you off. . ."
 
-    elif Approval:
+    elif approval:
 
         if EmmaX.Forced:
             $ EmmaX.change_face("sad")
@@ -2373,7 +2373,7 @@ label Emma_Sex_H:
             ch_e "[Line]"
         $ Line = 0
 
-    if Approval >= 2:
+    if approval >= 2:
 
         if EmmaX.Forced:
             $ EmmaX.change_face("sad")
@@ -2433,7 +2433,7 @@ label Emma_Sex_H:
                 $ EmmaX.daily_history.append("no_hotdog")
                 return
             "You might like it. . .":
-                if Approval:
+                if approval:
                     $ EmmaX.change_face("sexy")
                     $ EmmaX.change_stat("obedience", 60, 2)
                     $ EmmaX.change_stat("inhibition", 50, 2)
@@ -2447,8 +2447,8 @@ label Emma_Sex_H:
                     pass
             "Just deal with it.":
 
-                $ Approval = approval_check(EmmaX, 350, "OI", TabM = 3)
-                if Approval > 1 or (Approval and EmmaX.Forced):
+                $ approval = approval_check(EmmaX, 350, "OI", TabM = 3)
+                if approval > 1 or (approval and EmmaX.Forced):
                     $ EmmaX.change_face("sad")
                     $ EmmaX.change_stat("love", 70, -2, 1)
                     $ EmmaX.change_stat("love", 200, -2)
@@ -2530,7 +2530,7 @@ label Emma_HotdogPrep:
                 $ EmmaX.change_stat("obedience", 50, 1)
                 $ EmmaX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ EmmaX.AddWord(1,"refused","refused")
+                $ EmmaX.add_word(1,"refused","refused")
                 return
 
     elif action_context != "auto":
@@ -2574,8 +2574,8 @@ label Emma_HotdogPrep:
     $ primary_action = "hotdog"
     $ action_speed = 1
     if Taboo:
-        $ EmmaX.DrainWord("no_taboo")
-    $ EmmaX.DrainWord("no_hotdog")
+        $ EmmaX.drain_word("no_taboo")
+    $ EmmaX.drain_word("no_hotdog")
     $ EmmaX.recent_history.append("hotdog")
     $ EmmaX.daily_history.append("hotdog")
 
@@ -2585,7 +2585,7 @@ label Emma_Hotdog_Cycle:
         call Emma_Sex_Launch ("hotdog")
         $ action_speed = 2 if action_speed >= 4 else action_speed
         $ EmmaX.lust_face()
-        $ Player.Cock = "out"
+        $ Player.cock_position = "out"
         $ primary_action = "hotdog"
 
         if Player.focus < 100:
@@ -2621,9 +2621,9 @@ label Emma_Hotdog_Cycle:
                     "You turn her around. . ."
                     jump Emma_Hotdog_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -2684,15 +2684,15 @@ label Emma_Hotdog_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Emma_Hotdog_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Emma_Hotdog_Cycle
                                 "Never mind":
                                     jump Emma_Hotdog_Cycle
                         "Just take a look at her.":
-                            $ Player.Cock = 0
+                            $ Player.cock_position = 0
                             $ action_speed = 0
 
                         "Show her feet" if not ShowFeet and EmmaX.pose == "doggy":
@@ -2702,9 +2702,9 @@ label Emma_Hotdog_Cycle:
                         "Undress [EmmaX.name]":
 
                             call Girl_Undress (EmmaX)
-                        "Clean up [EmmaX.name] (locked)" if not EmmaX.Spunk:
+                        "Clean up [EmmaX.name] (locked)" if not EmmaX.spunk:
                             pass
-                        "Clean up [EmmaX.name]" if EmmaX.Spunk:
+                        "Clean up [EmmaX.name]" if EmmaX.spunk:
                             call Girl_Cleanup (EmmaX, "ask")
                         "Never mind":
                             jump Emma_Hotdog_Cycle
@@ -2841,8 +2841,8 @@ label Emma_Hotdog_Cycle:
 
 label Emma_HotdogAfter:
     if not action_context:
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
+        $ Player.sprite = 0
+        $ Player.cock_position = "out"
         call Emma_Sex_Reset
 
     $ EmmaX.change_face("sexy")
@@ -2850,7 +2850,7 @@ label Emma_HotdogAfter:
     $ EmmaX.action_counter["hotdog"] += 1
     $ EmmaX.remaining_actions -=1
     $ EmmaX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ EmmaX.addiction_rate += 1
     $ EmmaX.change_stat("inhibition", 30, 1)
     $ EmmaX.change_stat("inhibition", 70, 1)

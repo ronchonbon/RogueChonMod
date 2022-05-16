@@ -6,17 +6,17 @@ label enter_main_sex_menu:
             return
 
         if "three" not in focused_Girl.history and not AloneCheck(focused_Girl):
-            call expression focused_Girl.Tag + "_ThreeCheck"
+            call expression focused_Girl.tag + "_ThreeCheck"
 
         if Taboo > 20 and "taboo" not in focused_Girl.history:
-            call expression focused_Girl.Tag + "_Taboo_Talk"
+            call expression focused_Girl.tag + "_Taboo_Talk"
 
             if bg_current == "bg_classroom" or bg_current in PersonalRooms and AloneCheck(focused_Girl):
                 ch_p "We could just lock the door, right?"
                 ch_e "We certainly could. . ."
                 "[focused_Girl.name] walks to the door and locks it behind her."
 
-                $ Player.Traits.append("locked")
+                $ Player.traits.append("locked")
 
                 call Taboo_Level
             else:
@@ -27,7 +27,7 @@ label enter_main_sex_menu:
     $ offhand_action = 0
     $ girl_offhand_action = 0
 
-    call expression focused_Girl.Tag + "_Hide" pass(1)
+    call expression focused_Girl.tag + "_Hide" pass(1)
 
     $ focused_Girl.ArmPose = 1
 
@@ -49,7 +49,7 @@ label enter_main_sex_menu:
             call sex_menu_caught_or_angry_lines(focused_Girl)
 
         $ focused_Girl.OutfitChange()
-        $ focused_Girl.DrainWord("caught",1,0)
+        $ focused_Girl.drain_word("caught",1,0)
 
         return
 
@@ -197,12 +197,12 @@ label girl_sex_menu(Girl):
                         call out_of_action_lines(Girl)
                 "Could you undress for me?":
                     call Girl_Undress(Girl)
-                "You've got a little something. . . [[clean-up]" if Girl.Spunk:
+                "You've got a little something. . . [[clean-up]" if Girl.spunk:
                     call sex_menu_cleanup_lines(Girl)
                     call Girl_Cleanup(Girl,"ask")
                 "Could I watch you get yourself off? [[masturbate]":
                     if Girl.remaining_actions:
-                        call expression Girl.Tag + "_Masturbate"
+                        call expression Girl.tag + "_Masturbate"
                     else:
                         call out_of_action_lines(Girl)
                 "Maybe make out with [RogueX.name]?" if Girl != RogueX and RogueX.location == bg_current:
@@ -255,7 +255,7 @@ label girl_sex_menu(Girl):
             call Sex_Menu_Threesome(Girl)
             jump main_sex_menu
         "Hey, [Partner.name]? [[Switch lead]" if Partner:
-            call expression Partner.Tag + "_SexAct" pass ("switch")
+            call expression Partner.tag + "_SexAct" pass ("switch")
 
             return True
         "Cheat Menu" if config.developer:
@@ -381,14 +381,14 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("inhibition", 50, 1)
 
             if Taboo:
-                $ Girl.AddWord(1, "tabno", "tabno")
+                $ Girl.add_word(1, "tabno", "tabno")
 
             $ Girl.recent_history.append("no_" + action)
             $ Girl.daily_history.append("no_" + action)
 
             jump begging_rejected
         "Come on, please?" if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "blowjob"]:
-            if Approval:
+            if approval:
                 $ Girl.change_face("sexy")
 
                 if action == "fondle_thighs":
@@ -433,7 +433,7 @@ label begging_menu(Girl, action):
 
                     call please_not_good_enough_lines(Girl)
                 elif action in ["blowjob"]:
-                    if Approvalcheck(Girl, 1100, TabM = 3): # 110, 125, 140, Taboo -120(230)             Handy instead?
+                    if approvalcheck(Girl, 1100, TabM = 3): # 110, 125, 140, Taboo -120(230)             Handy instead?
                         $ Girl.change_stat("inhibition", 80, 1)
                         $ Girl.change_stat("inhibition", 60, 3)
                         $ Girl.change_face("confused", 1)
@@ -468,14 +468,14 @@ label begging_menu(Girl, action):
             $ Girl.change_stat("inhibition", 70, 2)
 
             if Taboo:
-                $ Girl.AddWord(1, "tabno", "tabno")
+                $ Girl.add_word(1, "tabno", "tabno")
 
             $ Girl.recent_history.append("no_" + action)
             $ Girl.daily_history.append("no_" + action)
 
             jump begging_rejected
         "I think you'd really enjoy it. . ." if action in ["eat_pussy", "eat_ass"]:
-            if Approval:
+            if approval:
                 $ Girl.change_face("sexy")
                 $ Girl.change_stat("obedience", 90, 2)
                 $ Girl.change_stat("obedience", 50, 2)
@@ -491,7 +491,7 @@ label begging_menu(Girl, action):
 
                 call unconvinced_lines(Girl)
         "Just one good squeeze?" if action == "fondle_ass":
-            if Approval:
+            if approval:
                 $ Girl.change_face("sexy")
                 $ Girl.change_stat("obedience", 90, 1)
                 $ Girl.change_stat("obedience", 50, 2)
@@ -507,7 +507,7 @@ label begging_menu(Girl, action):
 
                 call unconvinced_lines(Girl)
         "I'd really appreciate it. . ." if action in ["handjob"]:
-            if Approval:
+            if approval:
                 $ Girl.change_face("sexy")
                 $ Girl.change_stat("obedience", 90, 2)
                 $ Girl.change_stat("obedience", 50, 2)
@@ -530,7 +530,7 @@ label begging_menu(Girl, action):
 
                 jump before_handjob
         "I think this could be fun for both of us. . ." if action in ["titjob"]:
-            if Approval:
+            if approval:
                 $ Girl.change_face("sexy")
                 $ Girl.change_stat("obedience", 80, 2)
                 $ Girl.change_stat("obedience", 40, 2)
@@ -549,9 +549,9 @@ label begging_menu(Girl, action):
 
                 jump before_handjob
             else:
-                $ Approval = Approvalcheck(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)             Handy instead?
+                $ approval = approvalcheck(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)             Handy instead?
 
-                if Approval >= 2:
+                if approval >= 2:
                     $ Girl.change_stat("inhibition", 80, 1)
                     $ Girl.change_stat("inhibition", 60, 3)
                     $ Girl.change_face("confused", 1)
@@ -573,7 +573,7 @@ label begging_menu(Girl, action):
                             jump before_handjob
                         "Nah, it's all about dem titties.":
                             $ line = "no_BJ"
-                if Approval:
+                if approval:
                     $ Girl.change_stat("inhibition", 80, 1)
                     $ Girl.change_stat("inhibition", 60, 3)
                     $ Girl.change_face("confused", 1)
@@ -604,7 +604,7 @@ label begging_menu(Girl, action):
 
                 $ Girl.change_stat("obedience", 70, 2)
         "I think you'd like it. . ." if action in ["dildo_pussy", "dildo_ass"]:
-            if Approval:
+            if approval:
                 $ Girl.change_face("sexy")
                 $ Girl.change_stat("obedience", 90, 2)
                 $ Girl.change_stat("obedience", 50, 2)
@@ -620,7 +620,7 @@ label begging_menu(Girl, action):
 
                 jump before_action
         "I think you'd enjoy it as much as I would. . ." if action in ["sex"]:
-            if Approval:
+            if approval:
                 $ Girl.change_face("sexy")
                 $ Girl.change_stat("obedience", 90, 2)
                 $ Girl.change_stat("obedience", 50, 2)
@@ -636,7 +636,7 @@ label begging_menu(Girl, action):
 
                 jump before_action
         "I bet it would feel really good. . ." if action in ["anal"]:
-            if Approval:
+            if approval:
                 $ Girl.change_face("sexy")
                 $ Girl.change_stat("obedience", 90, 2)
                 $ Girl.change_stat("obedience", 50, 2)
@@ -652,7 +652,7 @@ label begging_menu(Girl, action):
 
                 jump before_action
         "You might like it. . ." if action in ["hotdog"]:
-            if Approval:
+            if approval:
                 $ Girl.change_face("sexy")
                 $ Girl.change_stat("obedience", 60, 2)
                 $ Girl.change_stat("inhibition", 50, 2)
@@ -759,7 +759,7 @@ label try_something_else_menu(Girl, action):
 
             jump action_cycle
         "No, get back down there." if action in ["handjob", "footjob", "titjob", "blowjob"]:
-            if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
+            if approvalcheck(Girl, 1200) or approvalcheck(Girl, 500, "O"):
                 $ Girl.change_stat("love", 200, -5)
                 $ Girl.change_stat("obedience", 50, 3)
                 $ Girl.change_stat("obedience", 80, 2)
@@ -768,7 +768,7 @@ label try_something_else_menu(Girl, action):
             else:
                 $ Girl.change_face("angry", 1)
 
-                call expression Girl.Tag + "_Pos_Reset"
+                call expression Girl.tag + "_Pos_Reset"
 
                 "She scowls at you, drops your cock and pulls back."
 
@@ -778,7 +778,7 @@ label try_something_else_menu(Girl, action):
                 $ Girl.change_stat("love", 80, -4, 1)
                 $ Girl.change_stat("obedience", 30, -1, 1)
                 $ Girl.change_stat("obedience", 50, -1, 1)
-                $ Girl.AddWord(1,"angry","angry")
+                $ Girl.add_word(1,"angry","angry")
 
                 jump after_action
         "Finish up.":
@@ -791,7 +791,7 @@ label try_something_else_menu(Girl, action):
 
             jump after_action
         "No, this is fun.":
-            if Approvalcheck(Girl, 1200) or Approvalcheck(Girl, 500, "O"):
+            if approvalcheck(Girl, 1200) or approvalcheck(Girl, 500, "O"):
                 $ Girl.change_stat("love", 200, -5)
                 $ Girl.change_stat("obedience", 50, 3)
                 $ Girl.change_stat("obedience", 80, 2)
@@ -800,7 +800,7 @@ label try_something_else_menu(Girl, action):
             else:
                 $ Girl.change_face("angry", 1)
 
-                call expression Girl.Tag + "_Pos_Reset"
+                call expression Girl.tag + "_Pos_Reset"
 
                 "She scowls at you and pulls back."
 
@@ -810,7 +810,7 @@ label try_something_else_menu(Girl, action):
                 $ Girl.change_stat("love", 80, -4, 1)
                 $ Girl.change_stat("obedience", 30, -1, 1)
                 $ Girl.change_stat("obedience", 50, -1, 1)
-                $ Girl.AddWord(1,"angry","angry")
+                $ Girl.add_word(1,"angry","angry")
 
                 jump after_action
 
@@ -858,9 +858,9 @@ label kiss_menu:
             $ Round -= 1
 
             jump action_cycle
-        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
             pass
-        "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+        "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
             "You concentrate on not burning out too quickly."
 
             $ Player.focusing = 1
@@ -934,9 +934,9 @@ label kiss_menu:
                             jump action_cycle
                 "Undress [focused_Girl.name]":
                     call Girl_Undress(focused_Girl)
-                "Clean up [Girl.name] (locked)" if not focused_Girl.Spunk:
+                "Clean up [Girl.name] (locked)" if not focused_Girl.spunk:
                     pass
-                "Clean up [focused_Girl.name]" if focused_Girl.Spunk:
+                "Clean up [focused_Girl.name]" if focused_Girl.spunk:
                     call Girl_Cleanup(focused_Girl,"ask")
                 "Never mind":
                     jump action_cycle
@@ -982,9 +982,9 @@ label fondle_menu:
             $ Round -= 1
 
             jump action_cycle
-        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
             pass
-        "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+        "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
             "You concentrate on not burning out too quickly."
 
             $ Player.focusing = 1
@@ -1142,9 +1142,9 @@ label fondle_menu:
                         "Undress [Partner.name]":
                             call Girl_Undress(Partner)
                             jump action_cycle
-                        "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                        "Clean up [Partner.name] (locked)" if not Partner.spunk:
                             pass
-                        "Clean up [Partner.name]" if Partner.Spunk:
+                        "Clean up [Partner.name]" if Partner.spunk:
                             call Girl_Cleanup(Partner,"ask")
                             jump action_cycle
                         "Never mind":
@@ -1155,9 +1155,9 @@ label fondle_menu:
                     $ ShowFeet = 0
                 "Undress [focused_Girl.name]":
                     call Girl_Undress
-                "Clean up [focused_Girl.name] (locked)" if not focused_Girl.Spunk:
+                "Clean up [focused_Girl.name] (locked)" if not focused_Girl.spunk:
                     pass
-                "Clean up [focused_Girl.name]" if focused_Girl.Spunk:
+                "Clean up [focused_Girl.name]" if focused_Girl.spunk:
                     call Girl_Cleanup(focused_Girl,"ask")
                 "Never mind":
                     jump action_cycle
@@ -1259,9 +1259,9 @@ label handjob_menu:
             $ Round -= 1
 
             jump handjob_cycle
-        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
             pass
-        "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+        "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
             "You concentrate on not burning out too quickly."
 
             $ Player.focusing = 1
@@ -1422,25 +1422,25 @@ label handjob_menu:
                             "Undress [Partner.name]":
                                 call Girl_Undress(Partner)
                                 jump handjob_cycle
-                            "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                            "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                 pass
-                            "Clean up [Partner.name]" if Partner.Spunk:
+                            "Clean up [Partner.name]" if Partner.spunk:
                                 call Girl_Cleanup(Partner,"ask")
                                 jump handjob_cycle
                             "Never mind":
                                 jump handjob_cycle
                     "Undress [focused_Girl.name]":
                         call Girl_Undress(focused_Girl)
-                    "Clean up [focused_Girl.name] (locked)" if not focused_Girl.Spunk:
+                    "Clean up [focused_Girl.name] (locked)" if not focused_Girl.spunk:
                         pass
-                    "Clean up [focused_Girl.name]" if focused_Girl.Spunk:
+                    "Clean up [focused_Girl.name]" if focused_Girl.spunk:
                         call Girl_Cleanup(RogueX,"ask")
                     "Never mind":
                         jump handjob_cycle
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            call expression focused_Girl.Tag + "_HJ_Reset"
+            call expression focused_Girl.tag + "_HJ_Reset"
 
             $ action_context = "shift"
             $ line = 0
@@ -1449,7 +1449,7 @@ label handjob_menu:
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            call expression focused_Girl.Tag + "_HJ_Reset"
+            call expression focused_Girl.tag + "_HJ_Reset"
 
             $ line = 0
 
@@ -1490,9 +1490,9 @@ label sex_menu:
             "You turn her around. . ."
 
             jump action_cycle
-        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+        "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
             pass
-        "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+        "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
             "You concentrate on not burning out too quickly."
 
             $ Player.focusing = 1
@@ -1568,15 +1568,15 @@ label sex_menu:
                         "Undress [Partner.name]":
                             call Girl_Undress(Partner)
                             jump action_cycle
-                        "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                        "Clean up [Partner.name] (locked)" if not Partner.spunk:
                             pass
-                        "Clean up [Partner.name]" if Partner.Spunk:
+                        "Clean up [Partner.name]" if Partner.spunk:
                             call Girl_Cleanup(Partner,"ask")
                             jump action_cycle
                         "Never mind":
                             jump action_cycle
                 "Just take a look at her.":
-                    $ Player.Cock = 0
+                    $ Player.cock_position = 0
 
                     $ action_speed = 0
                 "Show her feet" if not ShowFeet and (focused_Girl.pose == "doggy" or focused_Girl.pose == "sex"):
@@ -1585,16 +1585,16 @@ label sex_menu:
                     $ ShowFeet = 0
                 "Undress [focused_Girl.name]":
                     call Girl_Undress(focused_Girl)
-                "Clean up [focused_Girl.name] (locked)" if not focused_Girl.Spunk:
+                "Clean up [focused_Girl.name] (locked)" if not focused_Girl.spunk:
                     pass
-                "Clean up [focused_Girl.name]" if focused_Girl.Spunk:
+                "Clean up [focused_Girl.name]" if focused_Girl.spunk:
                     call Girl_Cleanup(focused_Girl,"ask")
                 "Never mind":
                     jump action_cycle
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            call expression focused_Girl.Tag + "_Sex_Reset"
+            call expression focused_Girl.tag + "_Sex_Reset"
 
             $ action_context = "shift"
             $ line = 0
@@ -1603,7 +1603,7 @@ label sex_menu:
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            call expression focused_Girl.Tag + "_Sex_Reset"
+            call expression focused_Girl.tag + "_Sex_Reset"
 
             $ line = 0
 
@@ -1615,7 +1615,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
     menu:
         extend ""
         "Sorry, sorry! Never mind.":
-            if Approval:
+            if approval:
                 $ Girl.change_face("sexy", 1)
                 $ Girl.change_stat("obedience", 70, 3)
                 $ Girl.change_stat("inhibition", 50, 3)
@@ -1639,7 +1639,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
             $ Girl.change_stat("obedience", 70, 3)
             $ Girl.change_stat("inhibition", 50, 3)
 
-            if not Approvalcheck(Girl, 700, "O", TabM=1): #checks if obedience is 700+
+            if not approvalcheck(Girl, 700, "O", TabM=1): #checks if obedience is 700+
                 $ Girl.change_face("angry")
 
                 call were_done_here_lines(Girl)
@@ -1653,7 +1653,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
                     $ renpy.pop_call()
 
                 if renpy.showing("Rogue_Doggy"):
-                    call expression Girl.Tag + "_Doggy_Reset"
+                    call expression Girl.tag + "_Doggy_Reset"
 
                 $ Girl.recent_history.append("angry")
                 $ Girl.daily_history.append("angry")
@@ -1674,7 +1674,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
             $ Girl.change_stat("obedience", 70, 3)
             $ Girl.change_stat("inhibition", 50, 3)
 
-            if not Approvalcheck(Girl, 700, "O", TabM=1):   #checks if obedience is 700+
+            if not approvalcheck(Girl, 700, "O", TabM=1):   #checks if obedience is 700+
                 $ Girl.change_face("angry")
 
                 call were_done_here_lines(Girl)
@@ -1687,7 +1687,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
                 if action_context:
                     $ renpy.pop_call()
 
-                call expression Girl.Tag + "_Sex_Reset"
+                call expression Girl.tag + "_Sex_Reset"
 
                 $ Girl.recent_history.append("angry")
                 $ Girl.daily_history.append("angry")
@@ -1705,7 +1705,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
             $ Girl.change_stat("obedience", 70, 3)
             $ Girl.change_stat("inhibition", 50, 3)
 
-            if not Approvalcheck(Girl, 500, "O", TabM=1): #checks if obedience is 700+
+            if not approvalcheck(Girl, 500, "O", TabM=1): #checks if obedience is 700+
                 $ Girl.change_face("angry")
 
                 call were_done_here_lines(Girl)
@@ -1718,7 +1718,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
                 if action_context:
                     $ renpy.pop_call()
 
-                call expression Girl.Tag + "_Sex_Reset"
+                call expression Girl.tag + "_Sex_Reset"
 
                 $ Girl.recent_history.append("angry")
                 $ Girl.daily_history.append("angry")

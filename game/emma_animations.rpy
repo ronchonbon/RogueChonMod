@@ -9,20 +9,20 @@ image Emma_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "EmmaX.Uptop or EmmaX.top == 'jacket' or EmmaX.bra != 'corset'", Null(),
+            "EmmaX.top_pulled_up or EmmaX.top == 'jacket' or EmmaX.bra != 'corset'", Null(),
             "EmmaX.ArmPose == 2", "images/EmmaSprite/EmmaSprite_Cape2.png",
             "True", "images/EmmaSprite/EmmaSprite_Cape1.png",
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.legs == 'dress' and EmmaX.Upskirt", "images/EmmaSprite/EmmaSprite_Dress_Back.png",
+            "EmmaX.legs == 'dress' and EmmaX.upskirt", "images/EmmaSprite/EmmaSprite_Dress_Back.png",
             "EmmaX.legs == 'dress'", "images/EmmaSprite/EmmaSprite_Dress.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "EmmaX.top == 'nighty'", "images/EmmaSprite/EmmaSprite_Nighty_Under.png",
-            "EmmaX.top and EmmaX.Uptop and EmmaX.top == 'jacket'", "images/EmmaSprite/EmmaSprite_Jacket_Back.png",
+            "EmmaX.top and EmmaX.top_pulled_up and EmmaX.top == 'jacket'", "images/EmmaSprite/EmmaSprite_Jacket_Back.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -38,7 +38,7 @@ image Emma_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "not EmmaX.underwear or not EmmaX.underwearDown or (EmmaX.legs == 'pants' and not EmmaX.Upskirt)", Null(),
+            "not EmmaX.underwear or not EmmaX.underwear_pulled_down or (EmmaX.legs == 'pants' and not EmmaX.upskirt)", Null(),
             "EmmaX.underwear == 'sports_panties'", "images/EmmaSprite/EmmaSprite_Panties_Sports_DownBack.png",
             "EmmaX.underwear == 'bikini_bottoms'", "images/EmmaSprite/EmmaSprite_Panties_Bikini_DownBack.png",
             "True", "images/EmmaSprite/EmmaSprite_Panties_DownBack.png",
@@ -52,15 +52,15 @@ image Emma_Sprite:
         (215,540), ConditionSwitch(
 
             "not EmmaX.Wet", Null(),
-            "EmmaX.legs == 'pants' and not EmmaX.Upskirt", Null(),
-            "EmmaX.underwear and not EmmaX.underwearDown and EmmaX.Wet <= 1", Null(),
+            "EmmaX.legs == 'pants' and not EmmaX.upskirt", Null(),
+            "EmmaX.underwear and not EmmaX.underwear_pulled_down and EmmaX.Wet <= 1", Null(),
             "EmmaX.Wet == 1", ConditionSwitch(
-                    "EmmaX.underwear and EmmaX.underwearDown", AlphaMask("Wet_Drip","Emma_Drip_MaskP"),
+                    "EmmaX.underwear and EmmaX.underwear_pulled_down", AlphaMask("Wet_Drip","Emma_Drip_MaskP"),
                     "EmmaX.legs == 'pants'", AlphaMask("Wet_Drip","Emma_Drip_MaskP"),
                     "True", AlphaMask("Wet_Drip","Emma_Drip_Mask"),
                     ),
             "True", ConditionSwitch(
-                    "EmmaX.underwear and EmmaX.underwearDown", AlphaMask("Wet_Drip2","Emma_Drip_MaskP"),
+                    "EmmaX.underwear and EmmaX.underwear_pulled_down", AlphaMask("Wet_Drip2","Emma_Drip_MaskP"),
                     "EmmaX.legs == 'pants'", AlphaMask("Wet_Drip2","Emma_Drip_MaskP"),
                     "EmmaX.underwear", AlphaMask("Wet_Drip","Emma_Drip_Mask"),
                     "True", AlphaMask("Wet_Drip2","Emma_Drip_Mask"),
@@ -77,10 +77,10 @@ image Emma_Sprite:
 
         (215,540), ConditionSwitch(
 
-            "'in' not in EmmaX.Spunk and 'anal' not in EmmaX.Spunk", Null(),
-            "EmmaX.legs == 'pants' and not EmmaX.Upskirt", Null(),
+            "'in' not in EmmaX.spunk and 'anal' not in EmmaX.spunk", Null(),
+            "EmmaX.legs == 'pants' and not EmmaX.upskirt", Null(),
             "True", ConditionSwitch(
-                    "EmmaX.underwear and EmmaX.underwearDown", AlphaMask("Spunk_Drip","Emma_Drip_MaskP"),
+                    "EmmaX.underwear and EmmaX.underwear_pulled_down", AlphaMask("Spunk_Drip","Emma_Drip_MaskP"),
                     "EmmaX.legs == 'pants'", AlphaMask("Spunk_Drip","Emma_Drip_MaskP"),
                     "True", AlphaMask("Spunk_Drip","Emma_Drip_Mask"),
                     ),
@@ -93,8 +93,8 @@ image Emma_Sprite:
         (0,0), ConditionSwitch(
 
             "not EmmaX.piercings", Null(),
-            "EmmaX.underwear and not EmmaX.underwearDown", Null(),
-            "EmmaX.legs != 'skirt' and EmmaX.legs and not EmmaX.Upskirt", Null(),
+            "EmmaX.underwear and not EmmaX.underwear_pulled_down", Null(),
+            "EmmaX.legs != 'skirt' and EmmaX.legs and not EmmaX.upskirt", Null(),
             "EmmaX.piercings == 'barbell'", "images/EmmaSprite/EmmaSprite_Pierce_Pussy_Barbell.png",
             "EmmaX.piercings == 'ring'", "images/EmmaSprite/EmmaSprite_Pierce_Pussy_Ring.png",
             "True", Null(),
@@ -114,12 +114,12 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.underwearDown and EmmaX.accessory == 'thigh boots'", "images/EmmaSprite/EmmaSprite_Boots.png",
+            "EmmaX.underwear_pulled_down and EmmaX.accessory == 'thigh boots'", "images/EmmaSprite/EmmaSprite_Boots.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not EmmaX.underwear or not EmmaX.underwearDown or (EmmaX.legs == 'pants' and not EmmaX.Upskirt)", Null(),
+            "not EmmaX.underwear or not EmmaX.underwear_pulled_down or (EmmaX.legs == 'pants' and not EmmaX.upskirt)", Null(),
             "EmmaX.underwear == 'sports_panties' and EmmaX.Wet", "images/EmmaSprite/EmmaSprite_Panties_Sports_DownWet.png",
             "EmmaX.underwear == 'sports_panties'", "images/EmmaSprite/EmmaSprite_Panties_Sports_Down.png",
             "EmmaX.underwear == 'lace_panties' and EmmaX.Wet", "images/EmmaSprite/EmmaSprite_Panties_Lace_DownWet.png",
@@ -130,7 +130,7 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.underwearDown or not EmmaX.underwear", Null(),
+            "EmmaX.underwear_pulled_down or not EmmaX.underwear", Null(),
 
             "EmmaX.underwear == 'sports_panties'", "images/EmmaSprite/EmmaSprite_Panties_Sports.png",
             "EmmaX.underwear == 'lace_panties' and EmmaX.Wet", "images/EmmaSprite/EmmaSprite_Panties_Lace_Wet.png",
@@ -142,20 +142,20 @@ image Emma_Sprite:
         (0,0), ConditionSwitch(
 
             "renpy.showing('Emma_FJ_Animation')", Null(),
-            "EmmaX.hose == 'pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_Hose.png",
-            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_HoseHoled.png",
+            "EmmaX.hose == 'pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_Hose.png",
+            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_HoseHoled.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.legs and EmmaX.legs != 'skirt' and not EmmaX.Upskirt", Null(),
-            "'in' in EmmaX.Spunk or 'anal' in EmmaX.Spunk", "images/EmmaSprite/EmmaSprite_Spunk_Pussy.png",
+            "EmmaX.legs and EmmaX.legs != 'skirt' and not EmmaX.upskirt", Null(),
+            "'in' in EmmaX.spunk or 'anal' in EmmaX.spunk", "images/EmmaSprite/EmmaSprite_Spunk_Pussy.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not EmmaX.legs", Null(),
-            "EmmaX.Upskirt", ConditionSwitch(
+            "EmmaX.upskirt", ConditionSwitch(
 
                         "EmmaX.legs == 'dress'", "images/EmmaSprite/EmmaSprite_Dress_Up.png",
                         "EmmaX.legs == 'skirt'", "images/EmmaSprite/EmmaSprite_SkirtUp.png",
@@ -185,7 +185,7 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "not EmmaX.underwearDown and EmmaX.accessory == 'thigh boots'", "images/EmmaSprite/EmmaSprite_Boots.png",
+            "not EmmaX.underwear_pulled_down and EmmaX.accessory == 'thigh boots'", "images/EmmaSprite/EmmaSprite_Boots.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -194,21 +194,21 @@ image Emma_Sprite:
             "EmmaX.legs == 'dress'", Null(),
             "EmmaX.piercings == 'barbell'", ConditionSwitch(
 
-                    "EmmaX.legs and not EmmaX.Upskirt", "images/EmmaSprite/EmmaSprite_Pierce_Pussy_BarOut.png",
-                    "EmmaX.underwear and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_Pierce_Pussy_BarOut.png",
+                    "EmmaX.legs and not EmmaX.upskirt", "images/EmmaSprite/EmmaSprite_Pierce_Pussy_BarOut.png",
+                    "EmmaX.underwear and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_Pierce_Pussy_BarOut.png",
                     "True", Null(),
                     ),
             "EmmaX.piercings == 'ring'", ConditionSwitch(
 
-                    "EmmaX.legs and not EmmaX.Upskirt", "images/EmmaSprite/EmmaSprite_Pierce_Pussy_RingOut.png",
-                    "EmmaX.underwear and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_Pierce_Pussy_RingOut.png",
+                    "EmmaX.legs and not EmmaX.upskirt", "images/EmmaSprite/EmmaSprite_Pierce_Pussy_RingOut.png",
+                    "EmmaX.underwear and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_Pierce_Pussy_RingOut.png",
                     "True", Null(),
                     ),
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.bra == 'sports_bra' and not EmmaX.Uptop", "images/EmmaSprite/EmmaSprite_Bra_Sports_Under.png",
+            "EmmaX.bra == 'sports_bra' and not EmmaX.top_pulled_up", "images/EmmaSprite/EmmaSprite_Bra_Sports_Under.png",
             "EmmaX.bra == 'lace_bra'", "images/EmmaSprite/EmmaSprite_Bra_Lace_Under.png",
             "EmmaX.bra == 'corset'", "images/EmmaSprite/EmmaSprite_CorsetUnder.png",
             "EmmaX.bra == 'bikini_top'", "images/EmmaSprite/EmmaSprite_Bra_Bikini_Under.png",
@@ -216,14 +216,14 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.top == 'dress' and not EmmaX.Upskirt and not renpy.showing('Emma_FJ_Animation')", "images/EmmaSprite/EmmaSprite_Dress_Loincloth.png",
+            "EmmaX.top == 'dress' and not EmmaX.upskirt and not renpy.showing('Emma_FJ_Animation')", "images/EmmaSprite/EmmaSprite_Dress_Loincloth.png",
             "EmmaX.top == 'nighty'", "images/EmmaSprite/EmmaSprite_Nighty_Under.png",
             "EmmaX.top == 'towel'", "images/EmmaSprite/EmmaSprite_Towel_Under.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "'belly' in EmmaX.Spunk", "images/EmmaSprite/EmmaSprite_Spunk_Belly.png",
+            "'belly' in EmmaX.spunk", "images/EmmaSprite/EmmaSprite_Spunk_Belly.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -246,7 +246,7 @@ image Emma_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "not EmmaX.Uptop or EmmaX.top != 'jacket'", Null(),
+            "not EmmaX.top_pulled_up or EmmaX.top != 'jacket'", Null(),
             "EmmaX.ArmPose == 2", "images/EmmaSprite/EmmaSprite_Jacket_2Arm_Up.png",
             "True", "images/EmmaSprite/EmmaSprite_Jacket_1Arm_Up.png",
             ),
@@ -291,7 +291,7 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.Uptop and EmmaX.bra", ConditionSwitch(
+            "EmmaX.top_pulled_up and EmmaX.bra", ConditionSwitch(
 
                             "EmmaX.bra == 'sports_bra'", "images/EmmaSprite/EmmaSprite_Bra_Sports_Up.png",
                             "EmmaX.bra == 'lace_bra'", "images/EmmaSprite/EmmaSprite_Bra_Lace_Up.png",
@@ -312,7 +312,7 @@ image Emma_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "EmmaX.Uptop or EmmaX.top == 'jacket' or EmmaX.bra != 'corset'", Null(),
+            "EmmaX.top_pulled_up or EmmaX.top == 'jacket' or EmmaX.bra != 'corset'", Null(),
             "EmmaX.ArmPose == 2", "images/EmmaSprite/EmmaSprite_Cape2.png",
             "True", "images/EmmaSprite/EmmaSprite_Cape1.png",
             ),
@@ -321,7 +321,7 @@ image Emma_Sprite:
             "not EmmaX.top", Null(),
             "EmmaX.ArmPose == 2", ConditionSwitch(
 
-                    "EmmaX.Uptop", ConditionSwitch(
+                    "EmmaX.top_pulled_up", ConditionSwitch(
                                     "EmmaX.bra in ('corset','lace_bra','sports_bra','bikini_top')", ConditionSwitch(
 
                                             "EmmaX.top == 'dress'", "images/EmmaSprite/EmmaSprite_Dress_Top2U_Up.png",
@@ -352,7 +352,7 @@ image Emma_Sprite:
                     "True", Null(),
                     ),
 
-            "EmmaX.Uptop", ConditionSwitch(
+            "EmmaX.top_pulled_up", ConditionSwitch(
 
                             "EmmaX.top == 'dress'", "images/EmmaSprite/EmmaSprite_Dress_Top1_Up.png",
                             "EmmaX.top == 'jacket'", "images/EmmaSprite/EmmaSprite_Jacket_1Up_Up.png",
@@ -367,7 +367,7 @@ image Emma_Sprite:
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            "not EmmaX.piercings or EmmaX.Uptop or (not EmmaX.top and not EmmaX.bra)", Null(),
+            "not EmmaX.piercings or EmmaX.top_pulled_up or (not EmmaX.top and not EmmaX.bra)", Null(),
             "EmmaX.piercings == 'barbell'", ConditionSwitch(
 
                     "EmmaX.ArmPose == 1", "images/EmmaSprite/EmmaSprite_Pierce_Up_BarOut.png",
@@ -388,7 +388,7 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "'tits' in EmmaX.Spunk", ConditionSwitch(
+            "'tits' in EmmaX.spunk", ConditionSwitch(
 
                     "EmmaX.ArmPose == 1", "images/EmmaSprite/EmmaSprite_Spunk_TitsU.png",
                     "EmmaX.bra == 'corset'", "images/EmmaSprite/EmmaSprite_Spunk_TitsU.png",
@@ -400,15 +400,15 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.legs == 'dress' and EmmaX.Upskirt and EmmaX.ArmPose == 2", "images/EmmaSprite/EmmaSprite_Dress_Over2.png",
-            "EmmaX.legs == 'dress' and EmmaX.Upskirt", "images/EmmaSprite/EmmaSprite_Dress_Over1.png",
+            "EmmaX.legs == 'dress' and EmmaX.upskirt and EmmaX.ArmPose == 2", "images/EmmaSprite/EmmaSprite_Dress_Over2.png",
+            "EmmaX.legs == 'dress' and EmmaX.upskirt", "images/EmmaSprite/EmmaSprite_Dress_Over1.png",
             "True", Null(),
             ),
         (55,0), "EmmaSprite_Head",
         (0,0), ConditionSwitch(
 
-            "EmmaX.ArmPose != 2 or 'hand' not in EmmaX.Spunk", Null(),
-            "'mouth' in EmmaX.Spunk", "images/EmmaSprite/EmmaSprite_Spunk_HandM.png",
+            "EmmaX.ArmPose != 2 or 'hand' not in EmmaX.spunk", Null(),
+            "'mouth' in EmmaX.spunk", "images/EmmaSprite/EmmaSprite_Spunk_HandM.png",
             "True", "images/EmmaSprite/EmmaSprite_Spunk_Hand.png",
             ),
 
@@ -702,7 +702,7 @@ image EmmaSprite_Head:
 
         (0,0), ConditionSwitch(
 
-            "'mouth' not in EmmaX.Spunk", Null(),
+            "'mouth' not in EmmaX.spunk", Null(),
             "EmmaX.mouth == 'surprised'", "images/EmmaSprite/EmmaSprite_Head_Spunk_MouthOpen.png",
             "EmmaX.mouth == 'tongue'", "images/EmmaSprite/EmmaSprite_Head_Spunk_MouthTongue.png",
             "True", "images/EmmaSprite/EmmaSprite_Head_Spunk_Mouth.png",
@@ -721,7 +721,7 @@ image EmmaSprite_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "'facial' in EmmaX.Spunk", "images/EmmaSprite/EmmaSprite_Head_Spunk_Face.png",
+            "'facial' in EmmaX.spunk", "images/EmmaSprite/EmmaSprite_Head_Spunk_Face.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -736,8 +736,8 @@ image EmmaSprite_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "'hair' in EmmaX.Spunk and (EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.Water)", "images/EmmaSprite/EmmaSprite_Head_Spunk_HairWet.png",
-            "'hair' in EmmaX.Spunk", "images/EmmaSprite/EmmaSprite_Head_Spunk_HairWave.png",
+            "'hair' in EmmaX.spunk and (EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.Water)", "images/EmmaSprite/EmmaSprite_Head_Spunk_HairWet.png",
+            "'hair' in EmmaX.spunk", "images/EmmaSprite/EmmaSprite_Head_Spunk_HairWave.png",
             "True", Null(),
             ),
         (-1,0), ConditionSwitch(
@@ -814,7 +814,7 @@ image Emma_SexSprite:
         ConditionSwitch(
 
             "primary_action == 'eat_pussy' or primary_action == 'eat_ass'", "Emma_Sex_Legs_Lick",
-            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'in'", ConditionSwitch(
 
                     "action_speed == 1", "Emma_Sex_Legs_S1",
                     "action_speed == 2", "Emma_Sex_Legs_S2",
@@ -822,7 +822,7 @@ image Emma_SexSprite:
                     "action_speed >= 4", "Emma_Sex_Legs_S4",
                     "True", "Emma_Sex_Legs_S0",
                     ),
-            "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'anal'", ConditionSwitch(
 
                     "action_speed == 1", "Emma_Sex_Legs_A1",
                     "action_speed == 2", "Emma_Sex_Legs_A2",
@@ -842,7 +842,7 @@ image Emma_SexSprite:
         ConditionSwitch(
 
             "primary_action == 'eat_pussy' or primary_action == 'eat_ass'",  "Emma_Sex_Body_Lick",
-            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'in'", ConditionSwitch(
 
                     "action_speed == 1", "Emma_Sex_Body_S1",
                     "action_speed == 2", "Emma_Sex_Body_S2",
@@ -850,7 +850,7 @@ image Emma_SexSprite:
                     "action_speed >= 4", "Emma_Sex_Body_S4",
                     "True",       "Emma_Sex_Body_S0",
                     ),
-            "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'anal'", ConditionSwitch(
 
                     "action_speed == 1", "Emma_Sex_Body_A1",
                     "action_speed == 2", "Emma_Sex_Body_A2",
@@ -902,22 +902,22 @@ image Emma_Sex_Torso:
 
         ConditionSwitch(
             "renpy.showing('Emma_TJ_Animation')", Null(),
-            "EmmaX.bra and not EmmaX.Uptop", "images/EmmaSex/Emma_Sex_Tits_Up.png",
+            "EmmaX.bra and not EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Tits_Up.png",
             "True", "images/EmmaSex/Emma_Sex_Tits_Down.png",
             )
     contains:
 
         ConditionSwitch(
             "renpy.showing('Emma_TJ_Animation')", Null(),
-            "(EmmaX.top or EmmaX.bra) and not EmmaX.Uptop", Null(),
+            "(EmmaX.top or EmmaX.bra) and not EmmaX.top_pulled_up", Null(),
             "EmmaX.piercings == 'barbell'", ConditionSwitch(
 
-                    "not EmmaX.bra or EmmaX.Uptop", "images/EmmaSex/Emma_Pierce_Barbell_Tits_D.png",
+                    "not EmmaX.bra or EmmaX.top_pulled_up", "images/EmmaSex/Emma_Pierce_Barbell_Tits_D.png",
                     "True", Null(),
                     ),
             "EmmaX.piercings == 'ring'", ConditionSwitch(
 
-                    "not EmmaX.bra or EmmaX.Uptop", "images/EmmaSex/Emma_Pierce_Ring_Tits_D.png",
+                    "not EmmaX.bra or EmmaX.top_pulled_up", "images/EmmaSex/Emma_Pierce_Ring_Tits_D.png",
                     "True", Null(),
                     ),
             "True", Null(),
@@ -926,9 +926,9 @@ image Emma_Sex_Torso:
 
         ConditionSwitch(
 
-            "EmmaX.bra == 'sports_bra' and (EmmaX.Uptop or renpy.showing('Emma_TJ_Animation'))", "images/EmmaSex/Emma_Sex_Bra_Sports_Uptop.png",
-            "EmmaX.bra == 'bikini_top' and (EmmaX.Uptop or renpy.showing('Emma_TJ_Animation'))", "images/EmmaSex/Emma_Sex_Bra_Bikini_Uptop.png",
-            "EmmaX.Uptop or renpy.showing('Emma_TJ_Animation')", Null(),
+            "EmmaX.bra == 'sports_bra' and (EmmaX.top_pulled_up or renpy.showing('Emma_TJ_Animation'))", "images/EmmaSex/Emma_Sex_Bra_Sports_Uptop.png",
+            "EmmaX.bra == 'bikini_top' and (EmmaX.top_pulled_up or renpy.showing('Emma_TJ_Animation'))", "images/EmmaSex/Emma_Sex_Bra_Bikini_Uptop.png",
+            "EmmaX.top_pulled_up or renpy.showing('Emma_TJ_Animation')", Null(),
             "EmmaX.bra == 'corset'", "images/EmmaSex/Emma_Sex_Bra_Corset_Up.png",
             "EmmaX.bra == 'sports_bra'", "images/EmmaSex/Emma_Sex_Bra_Sports_Up.png",
             "EmmaX.bra == 'bikini_top'", "images/EmmaSex/Emma_Sex_Bra_Bikini_Up.png",
@@ -942,14 +942,14 @@ image Emma_Sex_Torso:
 
 
                     "renpy.showing('Emma_TJ_Animation')", "images/EmmaSex/Emma_Sex_Jacket_TJ.png",
-                    "EmmaX.Uptop", "images/EmmaSex/Emma_Sex_Jacket_Down_Uptop.png",
-                    "EmmaX.bra and not EmmaX.Uptop", "images/EmmaSex/Emma_Sex_Jacket_Up.png",
+                    "EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Jacket_Down_Uptop.png",
+                    "EmmaX.bra and not EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Jacket_Up.png",
                     "True", "images/EmmaSex/Emma_Sex_Jacket_Down.png",
                     ),
             "EmmaX.top == 'nighty'", ConditionSwitch(
 
 
-                    "EmmaX.Uptop", "images/EmmaSex/Emma_Sex_Nighty_Uptop.png",
+                    "EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Nighty_Uptop.png",
                     "EmmaX.bra and not renpy.showing('Emma_TJ_Animation')", "images/EmmaSex/Emma_Sex_Nighty_Up.png",
 
                     "True", "images/EmmaSex/Emma_Sex_Nighty_Down.png",
@@ -958,8 +958,8 @@ image Emma_Sex_Torso:
 
 
                     "renpy.showing('Emma_TJ_Animation')", "images/EmmaSex/Emma_Sex_Dress_TJ.png",
-                    "EmmaX.Uptop", "images/EmmaSex/Emma_Sex_Dress_Uptop.png",
-                    "EmmaX.bra and not EmmaX.Uptop", "images/EmmaSex/Emma_Sex_Dress_Up.png",
+                    "EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Dress_Uptop.png",
+                    "EmmaX.bra and not EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Dress_Up.png",
                     "True", "images/EmmaSex/Emma_Sex_Dress_Down.png",
                     ),
             "True", Null(),
@@ -968,15 +968,15 @@ image Emma_Sex_Torso:
 
         ConditionSwitch(
             "renpy.showing('Emma_TJ_Animation')", Null(),
-            "EmmaX.Uptop or not EmmaX.piercings", Null(),
-            "EmmaX.bra and not EmmaX.Uptop", "images/EmmaSex/Emma_Pierce_Barbell_Tits_UC.png",
-            "EmmaX.top and not EmmaX.Uptop", "images/EmmaSex/Emma_Pierce_Barbell_Tits_DC.png",
+            "EmmaX.top_pulled_up or not EmmaX.piercings", Null(),
+            "EmmaX.bra and not EmmaX.top_pulled_up", "images/EmmaSex/Emma_Pierce_Barbell_Tits_UC.png",
+            "EmmaX.top and not EmmaX.top_pulled_up", "images/EmmaSex/Emma_Pierce_Barbell_Tits_DC.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-                "'tits' not in EmmaX.Spunk", Null(),
+                "'tits' not in EmmaX.spunk", Null(),
                 "renpy.showing('Emma_TJ_Animation')", "images/EmmaSex/Emma_Spunk_Titjob_Under.png",
                 "True", "images/EmmaSex/Emma_Spunk_Tits.png",
                 )
@@ -1015,7 +1015,7 @@ image Emma_Sex_Body:
     contains:
         ConditionSwitch(
 
-            "(primary_action == 'suck breasts' or offhand_action == 'suck breasts') and EmmaX.bra and not EmmaX.Uptop", "Emma_Sex_Lick_Breasts_High",
+            "(primary_action == 'suck breasts' or offhand_action == 'suck breasts') and EmmaX.bra and not EmmaX.top_pulled_up", "Emma_Sex_Lick_Breasts_High",
             "primary_action == 'suck breasts' or offhand_action == 'suck breasts'", "Emma_Sex_Lick_Breasts",
             "True", Null()
             )
@@ -1038,7 +1038,7 @@ image Emma_SexArms:
         ConditionSwitch(
             "EmmaX.top == 'jacket' or EmmaX.top == 'dress'", Null(),
 
-            "EmmaX.bra and not EmmaX.Uptop", "images/EmmaSex/Emma_Sex_Arms_U.png",
+            "EmmaX.bra and not EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Arms_U.png",
 
 
 
@@ -1061,7 +1061,7 @@ image Emma_SexArms:
 
 
         ConditionSwitch(
-            "EmmaX.top == 'jacket' and EmmaX.Uptop", "images/EmmaSex/Emma_Sex_Arms_Jacket_Uptop.png",
+            "EmmaX.top == 'jacket' and EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Arms_Jacket_Uptop.png",
             "EmmaX.top == 'jacket'", "images/EmmaSex/Emma_Sex_Arms_Jacket.png",
             "EmmaX.top == 'dress'", "images/EmmaSex/Emma_Sex_Arms_Dress.png",
             "EmmaX.arms", "images/EmmaSex/Emma_Sex_Gloves.png",
@@ -1077,8 +1077,8 @@ image Emma_Sex_Legs_S:
 
         ConditionSwitch(
 
-            "(EmmaX.underwear and EmmaX.underwearDown) and (EmmaX.hose == 'pantyhose' or EmmaX.hose == 'ripped_pantyhose')", "images/EmmaSex/Emma_Sex_Feet.png",
-            "EmmaX.hose == 'pantyhose' and Player.Sprite and Player.Cock == 'in'","images/EmmaSex/Emma_Sex_Feet.png",
+            "(EmmaX.underwear and EmmaX.underwear_pulled_down) and (EmmaX.hose == 'pantyhose' or EmmaX.hose == 'ripped_pantyhose')", "images/EmmaSex/Emma_Sex_Feet.png",
+            "EmmaX.hose == 'pantyhose' and Player.sprite and Player.cock_position == 'in'","images/EmmaSex/Emma_Sex_Feet.png",
             "EmmaX.hose == 'garterbelt'", "images/EmmaSex/Emma_Sex_Feet.png",
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaSex/Emma_Sex_Feet_Hose_Holed.png",
             "EmmaX.hose", "images/EmmaSex/Emma_Sex_Feet_Hose.png",
@@ -1087,7 +1087,7 @@ image Emma_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "(EmmaX.legs == 'pants' or EmmaX.legs == 'yoga_pants') and EmmaX.Upskirt", "images/EmmaSex/Emma_Sex_Pants_Down.png",
+            "(EmmaX.legs == 'pants' or EmmaX.legs == 'yoga_pants') and EmmaX.upskirt", "images/EmmaSex/Emma_Sex_Pants_Down.png",
             "EmmaX.accessory == 'thigh boots'", "images/EmmaSex/Emma_Sex_Feet_Boots.png",
             "EmmaX.legs == 'pants'", "images/EmmaSex/Emma_Sex_Feet_Pants.png",
             "EmmaX.legs == 'yoga_pants'", "images/EmmaSex/Emma_Sex_Feet_YogaPants.png",
@@ -1096,8 +1096,8 @@ image Emma_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "(EmmaX.legs == 'pants' or EmmaX.legs == 'yoga_pants') and not EmmaX.Upskirt", Null(),
-            "not EmmaX.underwearDown", Null(),
+            "(EmmaX.legs == 'pants' or EmmaX.legs == 'yoga_pants') and not EmmaX.upskirt", Null(),
+            "not EmmaX.underwear_pulled_down", Null(),
             "EmmaX.underwear == 'sports_panties'", "images/EmmaSex/Emma_Sex_Panties_Sport_Down.png",
             "EmmaX.underwear == 'bikini_bottoms'", "images/EmmaSex/Emma_Sex_Panties_Bikini_Down.png",
             "EmmaX.underwear", "images/EmmaSex/Emma_Sex_Panties_Down.png",
@@ -1112,7 +1112,7 @@ image Emma_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "'anal' in EmmaX.Spunk or 'in' in EmmaX.Spunk", "images/EmmaSex/Emma_Spunk_Sex.png",
+            "'anal' in EmmaX.spunk or 'in' in EmmaX.spunk", "images/EmmaSex/Emma_Spunk_Sex.png",
             "True", Null(),
             )
     contains:
@@ -1133,9 +1133,9 @@ image Emma_Sex_Legs_S:
 
         ConditionSwitch(
             "EmmaX.piercings == 'barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S.png",
-            "(EmmaX.legs == 'pants' or EmmaX.legs == 'yoga_pants') and not EmmaX.Upskirt", Null(),
-            "EmmaX.underwear and not EmmaX.underwearDown", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C2.png",
-            "EmmaX.hose == 'pantyhose' and not EmmaX.underwearDown", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C2.png",
+            "(EmmaX.legs == 'pants' or EmmaX.legs == 'yoga_pants') and not EmmaX.upskirt", Null(),
+            "EmmaX.underwear and not EmmaX.underwear_pulled_down", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C2.png",
+            "EmmaX.hose == 'pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C2.png",
             "EmmaX.piercings == 'ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S.png",
             "True", Null(),
             )
@@ -1148,7 +1148,7 @@ image Emma_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "EmmaX.underwearDown", Null(),
+            "EmmaX.underwear_pulled_down", Null(),
             "EmmaX.underwear == 'sports_panties' and EmmaX.Wet", "images/EmmaSex/Emma_Sex_Panties_Sport_SW.png",
             "EmmaX.underwear == 'sports_panties'", "images/EmmaSex/Emma_Sex_Panties_Sport_S.png",
             "EmmaX.underwear == 'lace_panties'", "images/EmmaSex/Emma_Sex_Panties_Lace_S.png",
@@ -1160,17 +1160,17 @@ image Emma_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "(EmmaX.underwear and EmmaX.underwearDown)", Null(),
+            "(EmmaX.underwear and EmmaX.underwear_pulled_down)", Null(),
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaSex/Emma_Sex_Hose_PantyhoseHoled_S.png",
-            "Player.Sprite and Player.Cock == 'in'", Null(),
+            "Player.sprite and Player.cock_position == 'in'", Null(),
             "EmmaX.hose == 'pantyhose'", "images/EmmaSex/Emma_Sex_Hose_Pantyhose_S.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "(not EmmaX.underwear and EmmaX.hose != 'pantyhose') or EmmaX.underwearDown", Null(),
-            "EmmaX.hose == 'pantyhose' and EmmaX.underwearDown", Null(),
+            "(not EmmaX.underwear and EmmaX.hose != 'pantyhose') or EmmaX.underwear_pulled_down", Null(),
+            "EmmaX.hose == 'pantyhose' and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.piercings == 'barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S_C.png",
             "EmmaX.piercings == 'ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C.png",
             "True", Null(),
@@ -1178,10 +1178,10 @@ image Emma_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "EmmaX.legs == 'dress' and (EmmaX.Upskirt or Player.Sprite)", "images/EmmaSex/Emma_Sex_Dress_S_Up.png",
+            "EmmaX.legs == 'dress' and (EmmaX.upskirt or Player.sprite)", "images/EmmaSex/Emma_Sex_Dress_S_Up.png",
             "EmmaX.legs == 'dress'", "images/EmmaSex/Emma_Sex_Dress_S.png",
             "EmmaX.legs == 'skirt'", "images/EmmaSex/Emma_Sex_Skirt_Pussy.png",
-            "EmmaX.Upskirt", Null(),
+            "EmmaX.upskirt", Null(),
             "EmmaX.legs == 'pants' and EmmaX.Wet >= 2", "images/EmmaSex/Emma_Sex_Pants_SW.png",
             "EmmaX.legs == 'pants'", "images/EmmaSex/Emma_Sex_Pants_S.png",
             "EmmaX.legs == 'yoga_pants' and EmmaX.Wet >= 2", "images/EmmaSex/Emma_Sex_YogaPants_SW.png",
@@ -1191,17 +1191,17 @@ image Emma_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "(EmmaX.legs != 'pants' and EmmaX.legs != 'yoga_pants') or EmmaX.Upskirt", Null(),
+            "(EmmaX.legs != 'pants' and EmmaX.legs != 'yoga_pants') or EmmaX.upskirt", Null(),
             "EmmaX.piercings == 'barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S_C.png",
             "EmmaX.piercings != 'ring'", Null(),
-            "EmmaX.underwear and not EmmaX.underwearDown", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C.png",
-            "EmmaX.hose == 'pantyhose' and not EmmaX.underwearDown", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C.png",
+            "EmmaX.underwear and not EmmaX.underwear_pulled_down", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C.png",
+            "EmmaX.hose == 'pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C.png",
             "True", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S_C.png",
             )
     contains:
 
         ConditionSwitch(
-            "(EmmaX.legs == 'pants' or EmmaX.legs == 'yoga_pants') and EmmaX.Upskirt", Null(),
+            "(EmmaX.legs == 'pants' or EmmaX.legs == 'yoga_pants') and EmmaX.upskirt", Null(),
             "EmmaX.accessory == 'thigh boots'", "images/EmmaSex/Emma_Sex_Boots_Pussy.png",
             "True", Null(),
             )
@@ -1214,7 +1214,7 @@ image Emma_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "'belly' in EmmaX.Spunk", "images/EmmaSex/Emma_Spunk_Belly.png",
+            "'belly' in EmmaX.spunk", "images/EmmaSex/Emma_Spunk_Belly.png",
             "True", Null(),
             )
     zoom 1
@@ -1231,7 +1231,7 @@ image Emma_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "'anal' in EmmaX.Spunk and not action_speed", "images/EmmaSex/Emma_Spunk_Anal_Closed.png",
+            "'anal' in EmmaX.spunk and not action_speed", "images/EmmaSex/Emma_Spunk_Anal_Closed.png",
             "True", Null(),
             )
     contains:
@@ -1240,7 +1240,7 @@ image Emma_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "Player.Sprite and Player.Cock == 'anal' and action_speed", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'anal' and action_speed", ConditionSwitch(
 
                     "action_speed == 1", "Emma_Sex_Anus_A1",
                     "True", "Emma_Sex_Anus_A2",
@@ -1256,8 +1256,8 @@ image Emma_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "EmmaX.underwear and not EmmaX.underwearDown", Null(),
-            "(EmmaX.legs == 'pants' or EmmaX.legs == 'yoga_pants') and not EmmaX.Upskirt", Null(),
+            "EmmaX.underwear and not EmmaX.underwear_pulled_down", Null(),
+            "(EmmaX.legs == 'pants' or EmmaX.legs == 'yoga_pants') and not EmmaX.upskirt", Null(),
             "EmmaX.piercings == 'barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_A.png",
             "EmmaX.piercings == 'ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A.png",
             "True", Null(),
@@ -1273,7 +1273,7 @@ image Emma_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "EmmaX.underwearDown", Null(),
+            "EmmaX.underwear_pulled_down", Null(),
             "EmmaX.underwear == 'sports_panties' and EmmaX.Wet", "images/EmmaSex/Emma_Sex_Panties_Sport_AW.png",
             "EmmaX.underwear == 'sports_panties'", "images/EmmaSex/Emma_Sex_Panties_Sport_A.png",
             "EmmaX.underwear == 'lace_panties'", "images/EmmaSex/Emma_Sex_Panties_Lace_A.png",
@@ -1285,23 +1285,23 @@ image Emma_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "'in' in EmmaX.Spunk", "images/EmmaSex/Emma_Spunk_Anal_Pussy.png",
+            "'in' in EmmaX.spunk", "images/EmmaSex/Emma_Spunk_Anal_Pussy.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "(EmmaX.underwear and EmmaX.underwearDown)", Null(),
+            "(EmmaX.underwear and EmmaX.underwear_pulled_down)", Null(),
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaSex/Emma_Sex_Hose_PantyhoseHoled_A.png",
-            "Player.Sprite and Player.Cock == 'anal'", Null(),
+            "Player.sprite and Player.cock_position == 'anal'", Null(),
             "EmmaX.hose == 'pantyhose'", "images/EmmaSex/Emma_Sex_Hose_Pantyhose_A.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "(not EmmaX.underwear and EmmaX.hose != 'pantyhose') or EmmaX.underwearDown", Null(),
-            "EmmaX.hose == 'pantyhose' and EmmaX.underwearDown", Null(),
+            "(not EmmaX.underwear and EmmaX.hose != 'pantyhose') or EmmaX.underwear_pulled_down", Null(),
+            "EmmaX.hose == 'pantyhose' and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.piercings == 'barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_A_C.png",
             "EmmaX.piercings == 'ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A_C.png",
             "True", Null(),
@@ -1309,10 +1309,10 @@ image Emma_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "EmmaX.legs == 'dress' and (EmmaX.Upskirt or Player.Sprite)", "images/EmmaSex/Emma_Sex_Dress_A_Up.png",
+            "EmmaX.legs == 'dress' and (EmmaX.upskirt or Player.sprite)", "images/EmmaSex/Emma_Sex_Dress_A_Up.png",
             "EmmaX.legs == 'dress'", "images/EmmaSex/Emma_Sex_Dress_A.png",
             "EmmaX.legs == 'skirt'", "images/EmmaSex/Emma_Sex_Skirt_Anal.png",
-            "EmmaX.Upskirt", Null(),
+            "EmmaX.upskirt", Null(),
             "EmmaX.legs == 'pants' and EmmaX.Wet >= 2", "images/EmmaSex/Emma_Sex_Pants_AW.png",
             "EmmaX.legs == 'pants'", "images/EmmaSex/Emma_Sex_Pants_A.png",
             "EmmaX.legs == 'yoga_pants' and EmmaX.Wet >= 2", "images/EmmaSex/Emma_Sex_YogaPants_AW.png",
@@ -1322,11 +1322,11 @@ image Emma_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "(EmmaX.legs != 'pants' and EmmaX.legs != 'yoga_pants') or EmmaX.Upskirt", Null(),
+            "(EmmaX.legs != 'pants' and EmmaX.legs != 'yoga_pants') or EmmaX.upskirt", Null(),
             "EmmaX.piercings == 'barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_A_C.png",
             "EmmaX.piercings != 'ring'", Null(),
-            "EmmaX.underwear and not EmmaX.underwearDown", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A_C.png",
-            "EmmaX.hose == 'pantyhose' and not EmmaX.underwearDown", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A_C.png",
+            "EmmaX.underwear and not EmmaX.underwear_pulled_down", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A_C.png",
+            "EmmaX.hose == 'pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A_C.png",
             "True", "images/EmmaSex/Emma_Pierce_Ring_Pussy_A_C.png",
             )
     contains:
@@ -1344,14 +1344,14 @@ image Emma_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "'belly' in EmmaX.Spunk", "images/EmmaSex/Emma_Spunk_Belly.png",
+            "'belly' in EmmaX.spunk", "images/EmmaSex/Emma_Spunk_Belly.png",
             "True", Null(),
             )
         ypos -40
     contains:
         ConditionSwitch(
 
-            "Player.Sprite and Player.Cock", Null(),
+            "Player.sprite and Player.cock_position", Null(),
             "primary_action == 'eat_pussy'", "Emma_Sex_Lick_Pussy",
             "primary_action == 'eat_ass'", "Emma_Sex_Lick_Ass",
             "True", Null()
@@ -1365,8 +1365,8 @@ image Emma_Sex_Pussy_Mask:
     contains:
 
         ConditionSwitch(
-            "EmmaX.underwear and not EmmaX.underwearDown", Null(),
-            "EmmaX.legs and not EmmaX.Upskirt", Null(),
+            "EmmaX.underwear and not EmmaX.underwear_pulled_down", Null(),
+            "EmmaX.legs and not EmmaX.upskirt", Null(),
             "EmmaX.piercings == 'barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S.png",
             "EmmaX.piercings == 'ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S.png",
             "True", Null(),
@@ -1379,8 +1379,8 @@ image Emma_Sex_Hotdog_Mask:
 
 
         ConditionSwitch(
-            "EmmaX.underwear and not EmmaX.underwearDown", Null(),
-            "EmmaX.legs and not EmmaX.Upskirt", Null(),
+            "EmmaX.underwear and not EmmaX.underwear_pulled_down", Null(),
+            "EmmaX.legs and not EmmaX.upskirt", Null(),
             "EmmaX.piercings == 'barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S.png",
             "EmmaX.piercings == 'ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S.png",
             "True", Null(),
@@ -1388,8 +1388,8 @@ image Emma_Sex_Hotdog_Mask:
     contains:
 
         ConditionSwitch(
-            "EmmaX.underwear and not EmmaX.underwearDown", Null(),
-            "EmmaX.legs and not EmmaX.Upskirt", Null(),
+            "EmmaX.underwear and not EmmaX.underwear_pulled_down", Null(),
+            "EmmaX.legs and not EmmaX.upskirt", Null(),
             "EmmaX.piercings == 'barbell'", "images/EmmaSex/Emma_Pierce_Barbell_Pussy_S.png",
             "EmmaX.piercings == 'ring'", "images/EmmaSex/Emma_Pierce_Ring_Pussy_S.png",
             "True", Null(),
@@ -1624,7 +1624,7 @@ image Emma_Sex_Legs_H0:
     contains:
 
         ConditionSwitch(
-                "Player.Sprite", "Zero_Doggy_Insert",
+                "Player.sprite", "Zero_Doggy_Insert",
                 "True", Null(),
                 )
         alpha 1
@@ -1671,7 +1671,7 @@ image Emma_Sex_Legs_H1:
     contains:
 
         ConditionSwitch(
-                "Player.Sprite", "Zero_Doggy_Insert",
+                "Player.sprite", "Zero_Doggy_Insert",
                 "True", Null(),
                 )
         alpha 1
@@ -1718,7 +1718,7 @@ image Emma_Sex_Legs_H2:
     contains:
 
         ConditionSwitch(
-                "Player.Sprite", "Zero_Doggy_Insert",
+                "Player.sprite", "Zero_Doggy_Insert",
                 "True", Null(),
                 )
         alpha 1
@@ -2017,7 +2017,7 @@ image Emma_Sex_Anus_Mask_A1:
         contains:
 
             ConditionSwitch(
-                "'anal' in EmmaX.Spunk", "images/EmmaSex/Emma_Spunk_Anal_Open.png",
+                "'anal' in EmmaX.spunk", "images/EmmaSex/Emma_Spunk_Anal_Open.png",
                 "True", Null(),
                 )
         subpixel True
@@ -2081,7 +2081,7 @@ image Emma_Sex_Legs_A2:
         contains:
 
             ConditionSwitch(
-                    "'anal' in EmmaX.Spunk", "images/EmmaSex/Emma_Spunk_Anal_Open.png",
+                    "'anal' in EmmaX.spunk", "images/EmmaSex/Emma_Spunk_Anal_Open.png",
                     "True", Null(),
                     )
         subpixel True
@@ -2121,7 +2121,7 @@ image Emma_Sex_Legs_A3:
         contains:
 
             ConditionSwitch(
-                    "'anal' in EmmaX.Spunk", "images/EmmaSex/Emma_Spunk_Anal_Open.png",
+                    "'anal' in EmmaX.spunk", "images/EmmaSex/Emma_Spunk_Anal_Open.png",
                     "True", Null(),
                     )
         subpixel True
@@ -2157,7 +2157,7 @@ image Emma_Sex_Legs_A4:
         contains:
 
             ConditionSwitch(
-                    "'anal' in EmmaX.Spunk", "images/EmmaSex/Emma_Spunk_Anal_Open.png",
+                    "'anal' in EmmaX.spunk", "images/EmmaSex/Emma_Spunk_Anal_Open.png",
                     "True", Null(),
                     )
         subpixel True
@@ -2180,7 +2180,7 @@ image Emma_Sex_Anus_A1:
     contains:
 
         ConditionSwitch(
-                "'anal' in EmmaX.Spunk", "images/EmmaSex/Emma_Spunk_Anal_Under.png",
+                "'anal' in EmmaX.spunk", "images/EmmaSex/Emma_Spunk_Anal_Under.png",
                 "True", Null(),
                 )
     subpixel True
@@ -2222,7 +2222,7 @@ image Emma_Sex_Anus_A2:
     contains:
 
         ConditionSwitch(
-                "'anal' in EmmaX.Spunk", "images/EmmaSex/Emma_Spunk_Anal_Under.png",
+                "'anal' in EmmaX.spunk", "images/EmmaSex/Emma_Spunk_Anal_Under.png",
                 "True", Null(),
                 )
     xpos 0
@@ -2234,27 +2234,27 @@ label Emma_Sex_Launch(Line=primary_action):
 
 
 
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     $ Line = "solo" if not Line else Line
     if Line == "sex":
-        $ Player.Cock = "in"
+        $ Player.cock_position = "in"
         if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
             $ offhand_action = 0
     elif Line == "anal":
-        $ Player.Cock = "anal"
+        $ Player.cock_position = "anal"
         if offhand_action in ("finger_ass","dildo_anal","eat_ass"):
             $ offhand_action = 0
     elif Line == "hotdog":
-        $ Player.Cock = "out"
+        $ Player.cock_position = "out"
     elif Line == "foot":
         $ ShowFeet = 1
-        $ Player.Cock = "foot"
+        $ Player.cock_position = "foot"
     elif Line == "massage":
-        $ Player.Sprite = 0
-        $ Player.Cock = 0
+        $ Player.sprite = 0
+        $ Player.cock_position = 0
     else:
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
+        $ Player.sprite = 0
+        $ Player.cock_position = "out"
         $ action_speed = 0
 
     $ primary_action = Line
@@ -2302,13 +2302,13 @@ image Emma_Doggy_Animation:
         (420,750),
         (0,0), ConditionSwitch(
 
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Emma_Doggy_Boob_Fuck2",
                     "action_speed > 1", "Emma_Doggy_Boob_Fuck",
                     "action_speed ", "Emma_Doggy_Boob",
                     "True", "Emma_Doggy_Boob",
                     ),
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Emma_Doggy_Boob_Fuck2",
                     "action_speed > 1", "Emma_Doggy_Boob_Fuck",
                     "True", "Emma_Doggy_Boob",
@@ -2317,14 +2317,14 @@ image Emma_Doggy_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite", "Emma_Doggy_Body",
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "not Player.sprite", "Emma_Doggy_Body",
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Emma_Doggy_Fuck2_Top",
                     "action_speed > 1", "Emma_Doggy_Fuck_Top",
                     "action_speed ", "Emma_Doggy_Anal_Head_Top",
                     "True", "Emma_Doggy_Body",
                     ),
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Emma_Doggy_Fuck2_Top",
                     "action_speed > 1", "Emma_Doggy_Fuck_Top",
                     "True", "Emma_Doggy_Body",
@@ -2333,14 +2333,14 @@ image Emma_Doggy_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite", "Emma_Doggy_Ass",
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "not Player.sprite", "Emma_Doggy_Ass",
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Emma_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Emma_Doggy_Fuck_Ass",
                     "action_speed ", "Emma_Doggy_Anal_Head_Ass",
                     "True", "Emma_Doggy_Ass",
                     ),
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Emma_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Emma_Doggy_Fuck_Ass",
                     "True", "Emma_Doggy_Ass",
@@ -2349,12 +2349,12 @@ image Emma_Doggy_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Cock == 'foot'", ConditionSwitch(
+            "Player.cock_position == 'foot'", ConditionSwitch(
                     "action_speed > 1", "Emma_Doggy_Feet2",
                     "action_speed ", "Emma_Doggy_Feet1",
                     "True", "Emma_Doggy_Feet0",
                     ),
-            "not Player.Sprite and ShowFeet", "Emma_Doggy_Feet0",
+            "not Player.sprite and ShowFeet", "Emma_Doggy_Feet0",
             "True", Null(),
             ),
         )
@@ -2413,13 +2413,13 @@ image Emma_Doggy_Body:
 
             "EmmaX.top == 'dress'", "images/EmmaDoggy/Emma_Doggy_Over_Dress.png",
             "EmmaX.top == 'jacket'", "images/EmmaDoggy/Emma_Doggy_Over_Jacket.png",
-            "EmmaX.top == 'nighty' and EmmaX.Uptop", "images/EmmaDoggy/Emma_Doggy_Over_Nighty_Down.png",
+            "EmmaX.top == 'nighty' and EmmaX.top_pulled_up", "images/EmmaDoggy/Emma_Doggy_Over_Nighty_Down.png",
             "EmmaX.top == 'nighty'", "images/EmmaDoggy/Emma_Doggy_Over_Nighty.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "'back' in EmmaX.Spunk", "images/EmmaDoggy/Emma_Doggy_Spunk_Back.png",
+            "'back' in EmmaX.spunk", "images/EmmaDoggy/Emma_Doggy_Spunk_Back.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -2474,7 +2474,7 @@ image Emma_Doggy_Head:
 
         (0,0), ConditionSwitch(
 
-            "'mouth' not in EmmaX.Spunk", Null(),
+            "'mouth' not in EmmaX.spunk", Null(),
 
 
 
@@ -2546,8 +2546,8 @@ image Emma_Doggy_Hair_Over:
     contains:
         ConditionSwitch(
 
-                "'hair' in EmmaX.Spunk", "images/EmmaDoggy/Emma_Doggy_Head_Spunk_Hair.png",
-                "'facial' in EmmaX.Spunk", "images/EmmaDoggy/Emma_Doggy_Head_Spunk_Facial.png",
+                "'hair' in EmmaX.spunk", "images/EmmaDoggy/Emma_Doggy_Head_Spunk_Hair.png",
+                "'facial' in EmmaX.spunk", "images/EmmaDoggy/Emma_Doggy_Head_Spunk_Facial.png",
                 "True", Null(),
                 )
     contains:
@@ -2612,15 +2612,15 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'in'", ConditionSwitch(
 
 
                     "action_speed ", "images/EmmaDoggy/Emma_Doggy_Ass_Base.png",
                     "True", "images/EmmaDoggy/Emma_Doggy_Ass_Base.png",
                     ),
             "primary_action == 'eat_pussy'", "images/EmmaDoggy/Emma_Doggy_Ass_Open.png",
-            "EmmaX.legs and not EmmaX.Upskirt", "images/EmmaDoggy/Emma_Doggy_Ass_Closed.png",
-            "EmmaX.underwear and not EmmaX.underwearDown", "images/EmmaDoggy/Emma_Doggy_Ass_Closed.png",
+            "EmmaX.legs and not EmmaX.upskirt", "images/EmmaDoggy/Emma_Doggy_Ass_Closed.png",
+            "EmmaX.underwear and not EmmaX.underwear_pulled_down", "images/EmmaDoggy/Emma_Doggy_Ass_Closed.png",
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", "images/EmmaDoggy/Emma_Doggy_Ass_Base.png",
             "primary_action == 'dildo_pussy'", "images/EmmaDoggy/Emma_Doggy_Ass_Base.png",
             "True", "images/EmmaDoggy/Emma_Doggy_Ass_Closed.png",
@@ -2639,7 +2639,7 @@ image Emma_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "not EmmaX.underwearDown or (EmmaX.legs and EmmaX.legs != 'skirt' and not EmmaX.Upskirt)", Null(),
+            "not EmmaX.underwear_pulled_down or (EmmaX.legs and EmmaX.legs != 'skirt' and not EmmaX.upskirt)", Null(),
             "EmmaX.underwear == 'sports_panties'", "images/EmmaDoggy/Emma_Doggy_Panties_Sport_Down.png",
             "EmmaX.underwear == 'bikini_bottoms'", "images/EmmaDoggy/Emma_Doggy_Panties_Bikini_Down.png",
             "EmmaX.underwear == 'lace_panties'","images/EmmaDoggy/Emma_Doggy_Panties_Lace_Down.png",
@@ -2650,19 +2650,19 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "EmmaX.legs == 'pants' and EmmaX.Upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Pants_Down.png",
-            "EmmaX.legs == 'yoga_pants' and EmmaX.Upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Yoga_Down.png",
+            "EmmaX.legs == 'pants' and EmmaX.upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Pants_Down.png",
+            "EmmaX.legs == 'yoga_pants' and EmmaX.upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Yoga_Down.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.legs and EmmaX.legs != 'skirt' and EmmaX.Upskirt",Null(),
+            "EmmaX.legs and EmmaX.legs != 'skirt' and EmmaX.upskirt",Null(),
             "EmmaX.accessory == 'thigh boots'", "images/EmmaDoggy/Emma_Doggy_Boots.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Emma_Pussy_Fucking3",
                     "action_speed > 1", "Emma_Pussy_Fucking2",
                     "action_speed ", "Emma_Pussy_Heading",
@@ -2679,21 +2679,21 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "'in' in EmmaX.Spunk and Player.Cock == 'in'",Null(),
-            "'in' in EmmaX.Spunk ", "images/JeanDoggy/Jean_Doggy_SpunkPussyClosed.png",
-            "EmmaX.Wet and Player.Cock == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
+            "'in' in EmmaX.spunk and Player.cock_position == 'in'",Null(),
+            "'in' in EmmaX.spunk ", "images/JeanDoggy/Jean_Doggy_SpunkPussyClosed.png",
+            "EmmaX.Wet and Player.cock_position == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
             "EmmaX.Wet", "images/RogueDoggy/Rogue_Doggy_WetPussyClosed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not EmmaX.pubes", Null(),
-            "Player.Sprite and Player.Cock == 'in'", Null(),
+            "Player.sprite and Player.cock_position == 'in'", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo_pussy'", Null(),
-            "(EmmaX.legs and EmmaX.legs != 'skirt') and not EmmaX.Upskirt", Null(),
-            "EmmaX.underwearDown and primary_action == 'eat_pussy'", "images/EmmaDoggy/Emma_Doggy_Pubes_Open.png",
-            "EmmaX.underwear and EmmaX.underwearDown", "images/EmmaDoggy/Emma_Doggy_Pubes_Closed.png",
+            "(EmmaX.legs and EmmaX.legs != 'skirt') and not EmmaX.upskirt", Null(),
+            "EmmaX.underwear_pulled_down and primary_action == 'eat_pussy'", "images/EmmaDoggy/Emma_Doggy_Pubes_Open.png",
+            "EmmaX.underwear and EmmaX.underwear_pulled_down", "images/EmmaDoggy/Emma_Doggy_Pubes_Closed.png",
             "EmmaX.underwear", "images/EmmaDoggy/Emma_Doggy_Pubes_ClosedC.png",
             "EmmaX.hose == 'pantyhose' and primary_action == 'eat_pussy'", "images/EmmaDoggy/Emma_Doggy_Pubes_OpenC.png",
             "EmmaX.hose == 'pantyhose'", "images/EmmaDoggy/Emma_Doggy_Pubes_ClosedC.png",
@@ -2702,20 +2702,20 @@ image Emma_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite", Null(),
+            "Player.sprite", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo_pussy'", Null(),
             "EmmaX.piercings == 'barbell'", "images/EmmaDoggy/Emma_Doggy_Pierce_Barbell.png",
-            "EmmaX.piercings == 'ring' and EmmaX.underwear and not EmmaX.underwearDown", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
-            "EmmaX.piercings == 'ring' and EmmaX.hose == 'pantyhose' and not (EmmaX.underwear and EmmaX.underwearDown)", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
-            "EmmaX.piercings == 'ring' and EmmaX.legs and EmmaX.legs != 'skirt' and not EmmaX.Upskirt", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
+            "EmmaX.piercings == 'ring' and EmmaX.underwear and not EmmaX.underwear_pulled_down", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
+            "EmmaX.piercings == 'ring' and EmmaX.hose == 'pantyhose' and not (EmmaX.underwear and EmmaX.underwear_pulled_down)", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
+            "EmmaX.piercings == 'ring' and EmmaX.legs and EmmaX.legs != 'skirt' and not EmmaX.upskirt", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC2.png",
             "EmmaX.piercings == 'ring'", "images/EmmaDoggy/Emma_Doggy_Pierce_Ring.png",
             "True", Null(),
             ),
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Emma_Anal_Fucking2",
                     "action_speed > 1", "Emma_Anal_Fucking",
                     "action_speed ", "Emma_Anal_Heading",
@@ -2742,8 +2742,8 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "EmmaX.underwearDown or not EmmaX.underwear", Null(),
-            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
+            "EmmaX.underwear_pulled_down or not EmmaX.underwear", Null(),
+            "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'anal')", Null(),
 
 
             "EmmaX.underwear == 'sports_panties' and EmmaX.Wet", "images/EmmaDoggy/Emma_Doggy_Panties_Sport_Wet.png",
@@ -2755,13 +2755,13 @@ image Emma_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
+            "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'anal')", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo_pussy'", Null(),
 
             "EmmaX.hose == 'garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_Garter.png",
             "EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
-            "EmmaX.underwear and EmmaX.underwearDown", Null(),
+            "EmmaX.underwear and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose == 'pantyhose'", "images/EmmaDoggy/Emma_Doggy_Hose_Pantyhose.png",
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaDoggy/Emma_Doggy_Hose_PantyhoseHoled.png",
             "True", Null(),
@@ -2769,11 +2769,11 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite", Null(),
+            "Player.sprite", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo_pussy'", Null(),
             "not EmmaX.underwear and EmmaX.hose != 'pantyhose'", Null(),
-            "((EmmaX.underwear or EmmaX.hose == 'pantyhose') and EmmaX.underwearDown)", Null(),
+            "((EmmaX.underwear or EmmaX.hose == 'pantyhose') and EmmaX.underwear_pulled_down)", Null(),
 
             "EmmaX.piercings == 'barbell'", "images/EmmaDoggy/Emma_Doggy_Pierce_BarbellC.png",
             "EmmaX.piercings == 'ring'", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC.png",
@@ -2782,23 +2782,23 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "EmmaX.legs == 'pants'", ConditionSwitch(
-                    "EmmaX.Upskirt", Null(),
+                    "EmmaX.upskirt", Null(),
                     "EmmaX.Wet > 1", "images/EmmaDoggy/Emma_Doggy_Legs_Pants_Wet.png",
                     "True", "images/EmmaDoggy/Emma_Doggy_Legs_Pants.png",
                     ),
             "EmmaX.legs == 'yoga_pants'", ConditionSwitch(
-                    "EmmaX.Upskirt", Null(),
+                    "EmmaX.upskirt", Null(),
                     "EmmaX.Wet > 1", "images/EmmaDoggy/Emma_Doggy_Legs_Yoga_Wet.png",
                     "True", "images/EmmaDoggy/Emma_Doggy_Legs_Yoga.png",
                     ),
             "EmmaX.legs == 'dress'", ConditionSwitch(
-                    "EmmaX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/EmmaDoggy/Emma_Doggy_Legs_Dress_Up.png",
-                    "EmmaX.Upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Dress_Up.png",
+                    "EmmaX.upskirt and Player.sprite and Player.cock_position == 'anal' and action_speed" , "images/EmmaDoggy/Emma_Doggy_Legs_Dress_Up.png",
+                    "EmmaX.upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Dress_Up.png",
                     "True", "images/EmmaDoggy/Emma_Doggy_Legs_Dress.png",
                     ),
             "EmmaX.legs == 'skirt'", ConditionSwitch(
-                    "EmmaX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/EmmaDoggy/Emma_Doggy_Legs_Skirt_Up.png",
-                    "EmmaX.Upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Skirt_Up.png",
+                    "EmmaX.upskirt and Player.sprite and Player.cock_position == 'anal' and action_speed" , "images/EmmaDoggy/Emma_Doggy_Legs_Skirt_Up.png",
+                    "EmmaX.upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Skirt_Up.png",
                     "True", "images/EmmaDoggy/Emma_Doggy_Legs_Skirt.png",
                     ),
             "True", Null(),
@@ -2806,11 +2806,11 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite", Null(),
+            "Player.sprite", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo_pussy'", Null(),
             "not EmmaX.legs", Null(),
-            "EmmaX.legs and EmmaX.legs != 'skirt' and EmmaX.Upskirt", Null(),
+            "EmmaX.legs and EmmaX.legs != 'skirt' and EmmaX.upskirt", Null(),
 
             "EmmaX.piercings == 'barbell'", "images/EmmaDoggy/Emma_Doggy_Pierce_BarbellC.png",
             "EmmaX.piercings == 'ring'", "images/EmmaDoggy/Emma_Doggy_Pierce_RingC.png",
@@ -2818,14 +2818,14 @@ image Emma_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.legs and EmmaX.legs != 'skirt' and EmmaX.Upskirt",Null(),
-            "Player.Cock == 'in' or Player.Cock == 'anal'",Null(),
+            "EmmaX.legs and EmmaX.legs != 'skirt' and EmmaX.upskirt",Null(),
+            "Player.cock_position == 'in' or Player.cock_position == 'anal'",Null(),
             "EmmaX.accessory == 'thigh boots'", "images/EmmaDoggy/Emma_Doggy_Boots.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.top == 'nighty' and EmmaX.Upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Nighty_Up.png",
+            "EmmaX.top == 'nighty' and EmmaX.upskirt", "images/EmmaDoggy/Emma_Doggy_Legs_Nighty_Up.png",
             "EmmaX.top == 'nighty'", "images/EmmaDoggy/Emma_Doggy_Legs_Nighty.png",
             "True", Null(),
             ),
@@ -2837,25 +2837,25 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "'back' in EmmaX.Spunk", "images/EmmaDoggy/Emma_Doggy_Spunk_Ass.png",
+            "'back' in EmmaX.spunk", "images/EmmaDoggy/Emma_Doggy_Spunk_Ass.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock", Null(),
+            "Player.sprite and Player.cock_position", Null(),
             "primary_action == 'eat_pussy'", "Rogue_Doggy_Lick_Pussy",
             "primary_action == 'eat_ass'", "Rogue_Doggy_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite or Player.Cock != 'out'", Null(),
+            "not Player.sprite or Player.cock_position != 'out'", Null(),
 
             "True", "images/KittyDoggy/Kitty_Doggy_HotdogBack.png",
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite or Player.Cock != 'out'", Null(),
+            "not Player.sprite or Player.cock_position != 'out'", Null(),
 
 
             "action_speed ", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
@@ -2913,7 +2913,7 @@ image Emma_Doggy_Boob:
 
 
         ConditionSwitch(
-            "EmmaX.Uptop", ConditionSwitch(
+            "EmmaX.top_pulled_up", ConditionSwitch(
 
 
                     "EmmaX.bra == 'sports_bra'", "images/EmmaDoggy/Emma_Doggy_Bra_Sport_Boob_Down.png",
@@ -2938,11 +2938,11 @@ image Emma_Doggy_Boob:
 
         ConditionSwitch(
             "not EmmaX.top", Null(),
-            "EmmaX.top == 'dress' and EmmaX.Uptop", "images/EmmaDoggy/Emma_Doggy_Over_Dress_Boob_Down.png",
+            "EmmaX.top == 'dress' and EmmaX.top_pulled_up", "images/EmmaDoggy/Emma_Doggy_Over_Dress_Boob_Down.png",
             "EmmaX.top == 'dress'", "images/EmmaDoggy/Emma_Doggy_Over_Dress_Boob.png",
-            "EmmaX.top == 'jacket' and EmmaX.Uptop", Null(),
+            "EmmaX.top == 'jacket' and EmmaX.top_pulled_up", Null(),
             "EmmaX.top == 'jacket'", "images/EmmaDoggy/Emma_Doggy_Over_Jacket_Boob.png",
-            "EmmaX.top == 'nighty' and EmmaX.Uptop", "images/EmmaDoggy/Emma_Doggy_Bra_Corset_Boob_Down.png",
+            "EmmaX.top == 'nighty' and EmmaX.top_pulled_up", "images/EmmaDoggy/Emma_Doggy_Bra_Corset_Boob_Down.png",
             "EmmaX.top == 'nighty'", "images/EmmaDoggy/Emma_Doggy_Over_Nighty_Boob.png",
             "True", Null(),
             )
@@ -3055,7 +3055,7 @@ image Emma_Pussy_Static:
 
             "EmmaX.hose == 'garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_Garter.png",
             "EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
-            "EmmaX.underwear and EmmaX.underwearDown", Null(),
+            "EmmaX.underwear and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaDoggy/Emma_Doggy_Hose_PantyhoseHoled.png",
             "True", Null(),
             )
@@ -3122,7 +3122,7 @@ image Emma_Pussy_Heading:
 
             "EmmaX.hose == 'garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_Garter.png",
             "EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
-            "EmmaX.underwear and EmmaX.underwearDown", Null(),
+            "EmmaX.underwear and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaDoggy/Emma_Doggy_Hose_PantyhoseHoled.png",
             "True", Null(),
             )
@@ -3192,7 +3192,7 @@ image Emma_Pussy_Fingering:
 
             "EmmaX.hose == 'garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
             "EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
-            "EmmaX.underwear and EmmaX.underwearDown", Null(),
+            "EmmaX.underwear and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaDoggy/Emma_Doggy_Hose_PantyhoseHoled.png",
 
             "True", Null(),
@@ -3240,7 +3240,7 @@ image Emma_Pussy_Fucking2:
 
             "EmmaX.hose == 'garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_Garter.png",
             "EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
-            "EmmaX.underwear and EmmaX.underwearDown", Null(),
+            "EmmaX.underwear and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaDoggy/Emma_Doggy_Hose_PantyhoseHoled.png",
             "True", Null(),
             )
@@ -3277,7 +3277,7 @@ image Emma_Pussy_Fucking3:
 
             "EmmaX.hose == 'garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_Garter.png",
             "EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
-            "EmmaX.underwear and EmmaX.underwearDown", Null(),
+            "EmmaX.underwear and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaDoggy/Emma_Doggy_Hose_PantyhoseHoled.png",
             "True", Null(),
             )
@@ -3312,7 +3312,7 @@ image Emma_Anal:
 
             "EmmaX.hose == 'garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_Garter.png",
             "EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
-            "EmmaX.underwear and EmmaX.underwearDown", Null(),
+            "EmmaX.underwear and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaDoggy/Emma_Doggy_Hose_PantyhoseHoled.png",
             "True", Null(),
             )
@@ -3342,7 +3342,7 @@ image Emma_Anal_Fingering:
 
             "EmmaX.hose == 'garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
             "EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
-            "EmmaX.underwear and EmmaX.underwearDown", Null(),
+            "EmmaX.underwear and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaDoggy/Emma_Doggy_Hose_PantyhoseHoled.png",
 
             "True", Null(),
@@ -3373,7 +3373,7 @@ image Emma_Anal_Heading:
 
             "EmmaX.hose == 'garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_Garter.png",
             "EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
-            "EmmaX.underwear and EmmaX.underwearDown", Null(),
+            "EmmaX.underwear and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaDoggy/Emma_Doggy_Hose_PantyhoseHoled.png",
             "True", Null(),
             )
@@ -3481,7 +3481,7 @@ image Emma_Anal_Fucking:
 
             "EmmaX.hose == 'garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_Garter.png",
             "EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
-            "EmmaX.underwear and EmmaX.underwearDown", Null(),
+            "EmmaX.underwear and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaDoggy/Emma_Doggy_Hose_PantyhoseHoled.png",
             "True", Null(),
             )
@@ -3506,7 +3506,7 @@ image Emma_Doggy_Anal_FullMask:
 
             "EmmaX.hose == 'garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_Garter.png",
             "EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
-            "EmmaX.underwear and EmmaX.underwearDown", Null(),
+            "EmmaX.underwear and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaDoggy/Emma_Doggy_Hose_PantyhoseHoled.png",
             "True", Null(),
             )
@@ -3580,7 +3580,7 @@ image Emma_Anal_Fucking2:
 
             "EmmaX.hose == 'garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_Garter.png",
             "EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaDoggy/Emma_Doggy_Hose_StockingGarter.png",
-            "EmmaX.underwear and EmmaX.underwearDown", Null(),
+            "EmmaX.underwear and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose == 'ripped_pantyhose'", "images/EmmaDoggy/Emma_Doggy_Hose_PantyhoseHoled.png",
             "True", Null(),
             )
@@ -3634,7 +3634,7 @@ image Emma_Doggy_Feet0:
             repeat
     contains:
         ConditionSwitch(
-                "Player.Sprite", "Zero_Doggy_Up",
+                "Player.sprite", "Zero_Doggy_Up",
                 "True", Null(),
                 )
         zoom 1.2
@@ -3723,7 +3723,7 @@ label Emma_Doggy_Reset:
         return
 
     $ EmmaX.ArmPose = 2
-    $ EmmaX.SpriteVer = 0
+    $ EmmaX.spriteVer = 0
     hide Emma_Doggy_Animation
     call Emma_Hide
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
@@ -3753,7 +3753,7 @@ image Emma_TJ_Animation:
     contains:
         ConditionSwitch(
 
-            "Player.Sprite", ConditionSwitch(
+            "Player.sprite", ConditionSwitch(
 
                     "action_speed == 1", "Emma_TJ_Body_1",
                     "action_speed == 2", "Emma_TJ_Body_2",
@@ -3804,9 +3804,9 @@ image Emma_TJ_Tits:
 
         ConditionSwitch(
             "not EmmaX.bra", Null(),
-            "EmmaX.bra == 'sports_bra' and EmmaX.Uptop", "images/EmmaSex/Emma_Sex_Bra_Sports_TJ_Uptop.png",
+            "EmmaX.bra == 'sports_bra' and EmmaX.top_pulled_up", "images/EmmaSex/Emma_Sex_Bra_Sports_TJ_Uptop.png",
             "EmmaX.bra == 'sports_bra'", "images/EmmaSex/Emma_Sex_Bra_Sports_TJ.png",
-            "EmmaX.Uptop", Null(),
+            "EmmaX.top_pulled_up", Null(),
             "EmmaX.bra == 'bikini_top'", "images/EmmaSex/Emma_Sex_Bra_Bikini_TJ.png",
             "EmmaX.bra == 'lace_bra'", "images/EmmaSex/Emma_Sex_Bra_Lace_TJ.png",
 
@@ -3833,7 +3833,7 @@ image Emma_TJ_Tits:
     contains:
 
         ConditionSwitch(
-                "'tits' in EmmaX.Spunk", "images/EmmaSex/Emma_Spunk_Titjob_Over.png",
+                "'tits' in EmmaX.spunk", "images/EmmaSex/Emma_Spunk_Titjob_Over.png",
                 "True", Null(),
                 )
         zoom 0.9
@@ -3891,7 +3891,7 @@ image Emma_TJ_Body_0:
     contains:
 
         ConditionSwitch(
-                "Player.Sprite", "Blowcock",
+                "Player.sprite", "Blowcock",
                 "True", Null(),
                 )
         subpixel True
@@ -4265,7 +4265,7 @@ label Emma_TJ_Launch(Line=primary_action):
     if Line != "cum":
         $ primary_action = "titjob"
     show Emma_TJ_Animation zorder 150
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
     return
 
@@ -4274,7 +4274,7 @@ label Emma_TJ_Reset:
         return
 
     call Emma_Hide
-    $ Player.Sprite = 0
+    $ Player.sprite = 0
 
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         zoom 2 xpos 550 yoffset 50
@@ -4363,7 +4363,7 @@ image Emma_BJ_Animation:
             ),
         (325,490), ConditionSwitch(
 
-            "action_speed < 3 or 'mouth' not in EmmaX.Spunk", Null(),
+            "action_speed < 3 or 'mouth' not in EmmaX.spunk", Null(),
             "action_speed == 3", At("EmmaSuckingSpunk", Emma_BJ_Head_3()),
             "action_speed == 4", At("EmmaSuckingSpunk", Emma_BJ_Head_4()),
             "action_speed == 6", At("EmmaSuckingSpunk", Emma_BJ_Head_6()),
@@ -4371,7 +4371,7 @@ image Emma_BJ_Animation:
             ),
         (325,490), ConditionSwitch(
 
-            "action_speed == 2 and 'mouth' in EmmaX.Spunk", At("Emma_BJ_MaskHeadingSpunk", Emma_BJ_Head_2()),
+            "action_speed == 2 and 'mouth' in EmmaX.spunk", At("Emma_BJ_MaskHeadingSpunk", Emma_BJ_Head_2()),
 
             "True", Null(),
             ),
@@ -4464,7 +4464,7 @@ image Emma_BJ_Head:
 
         (0,0), ConditionSwitch(
 
-            "'mouth' not in EmmaX.Spunk", Null(),
+            "'mouth' not in EmmaX.spunk", Null(),
             "action_speed and renpy.showing('Emma_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/EmmaBJFace/Emma_BJ_Spunk_Tongue.png",
@@ -4497,7 +4497,7 @@ image Emma_BJ_Head:
 
         (0,0), ConditionSwitch(
 
-            "'facial' in EmmaX.Spunk", "images/EmmaBJFace/Emma_BJ_Spunk_Facial.png",
+            "'facial' in EmmaX.spunk", "images/EmmaBJFace/Emma_BJ_Spunk_Facial.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -5128,8 +5128,8 @@ image Emma_FJ_Animation:
         ConditionSwitch(
 
             "not EmmaX.Wet", Null(),
-            "EmmaX.legs == 'pants' and not EmmaX.Upskirt", Null(),
-            "EmmaX.underwear and not EmmaX.underwearDown and EmmaX.Wet <= 1", Null(),
+            "EmmaX.legs == 'pants' and not EmmaX.upskirt", Null(),
+            "EmmaX.underwear and not EmmaX.underwear_pulled_down and EmmaX.Wet <= 1", Null(),
             "EmmaX.Wet == 1", AlphaMask("Wet_Drip","Emma_Drip_Mask"),
             "True", AlphaMask("Wet_Drip2","Emma_Drip_Mask"),
             )
@@ -5137,10 +5137,10 @@ image Emma_FJ_Animation:
     contains:
         ConditionSwitch(
 
-            "'in' not in EmmaX.Spunk and 'anal' not in EmmaX.Spunk", Null(),
-            "EmmaX.legs == 'pants' and not EmmaX.Upskirt", Null(),
+            "'in' not in EmmaX.spunk and 'anal' not in EmmaX.spunk", Null(),
+            "EmmaX.legs == 'pants' and not EmmaX.upskirt", Null(),
             "True", ConditionSwitch(
-                    "EmmaX.underwear and EmmaX.underwearDown", AlphaMask("Spunk_Drip","Emma_Drip_MaskP"),
+                    "EmmaX.underwear and EmmaX.underwear_pulled_down", AlphaMask("Spunk_Drip","Emma_Drip_MaskP"),
                     "EmmaX.legs == 'pants'", AlphaMask("Spunk_Drip","Emma_Drip_MaskP"),
                     "True", AlphaMask("Spunk_Drip","Emma_Drip_Mask"),
                     ),
@@ -5157,8 +5157,8 @@ image Emma_FJ_Animation:
     contains:
 
         ConditionSwitch(
-            "EmmaX.hose == 'pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJRight_Pantyhose.png",
-            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJRight_PantyhoseHoled.png",
+            "EmmaX.hose == 'pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJRight_Pantyhose.png",
+            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJRight_PantyhoseHoled.png",
             "EmmaX.hose == 'stockings' or EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaSprite/EmmaSprite_FJRight_Stocking.png",
             "True", Null(),
             )
@@ -5187,7 +5187,7 @@ image Emma_FJ_Animation:
             "not EmmaX.legs", Null(),
             "EmmaX.legs == 'dress' and EmmaX.ArmPose == 2", "images/EmmaSprite/EmmaSprite_Dress_FJ2.png",
             "EmmaX.legs == 'dress'", "images/EmmaSprite/EmmaSprite_Dress_FJ1.png",
-            "EmmaX.Upskirt", ConditionSwitch(
+            "EmmaX.upskirt", ConditionSwitch(
 
                         "EmmaX.legs == 'skirt'", "images/EmmaSprite/EmmaSprite_SkirtUp.png",
                         "True", Null(),
@@ -5203,7 +5203,7 @@ image Emma_FJ_Animation:
     contains:
 
         ConditionSwitch(
-            "EmmaX.Upskirt and EmmaX.legs and EmmaX.legs != 'skirt'", Null(),
+            "EmmaX.upskirt and EmmaX.legs and EmmaX.legs != 'skirt'", Null(),
             "EmmaX.accessory", "images/EmmaSprite/EmmaSprite_FJRight_Boot.png",
             "True", Null(),
             )
@@ -5254,10 +5254,10 @@ image Emma_FJ_Legs_0:
 
         ConditionSwitch(
 
-            "EmmaX.legs == 'pants' and not EmmaX.Upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
-            "EmmaX.legs == 'yoga_pants' and not EmmaX.Upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
-            "EmmaX.hose == 'pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Pantyhose.png",
-            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJLeftThigh_PantyhoseHoled.png",
+            "EmmaX.legs == 'pants' and not EmmaX.upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
+            "EmmaX.legs == 'yoga_pants' and not EmmaX.upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
+            "EmmaX.hose == 'pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Pantyhose.png",
+            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJLeftThigh_PantyhoseHoled.png",
             "EmmaX.hose == 'stockings' or EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Stocking.png",
             "True", "images/EmmaSprite/EmmaSprite_FJLeftThigh.png",
             )
@@ -5292,8 +5292,8 @@ image Emma_FJ_Legs_0:
 
         ConditionSwitch(
 
-            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJFoot_StockingHoled.png",
-            "(EmmaX.hose == 'ripped_pantyhose' or EmmaX.hose == 'pantyhose') and EmmaX.underwearDown", Null(),
+            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJFoot_StockingHoled.png",
+            "(EmmaX.hose == 'ripped_pantyhose' or EmmaX.hose == 'pantyhose') and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose and EmmaX.hose != 'garterbelt'", "images/EmmaSprite/EmmaSprite_FJFoot_Stocking.png",
             "True", "images/EmmaSprite/EmmaSprite_FJFoot.png",
             )
@@ -5329,10 +5329,10 @@ image Emma_FJ_Legs_1:
 
         ConditionSwitch(
 
-            "EmmaX.legs == 'pants' and not EmmaX.Upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
-            "EmmaX.legs == 'yoga_pants' and not EmmaX.Upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
-            "EmmaX.hose == 'pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Pantyhose.png",
-            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJLeftThigh_PantyhoseHoled.png",
+            "EmmaX.legs == 'pants' and not EmmaX.upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
+            "EmmaX.legs == 'yoga_pants' and not EmmaX.upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
+            "EmmaX.hose == 'pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Pantyhose.png",
+            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJLeftThigh_PantyhoseHoled.png",
             "EmmaX.hose == 'stockings' or EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Stocking.png",
             "True", "images/EmmaSprite/EmmaSprite_FJLeftThigh.png",
             )
@@ -5372,8 +5372,8 @@ image Emma_FJ_Legs_1:
 
         ConditionSwitch(
 
-            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJFoot_StockingHoled.png",
-            "(EmmaX.hose == 'ripped_pantyhose' or EmmaX.hose == 'pantyhose') and EmmaX.underwearDown", Null(),
+            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJFoot_StockingHoled.png",
+            "(EmmaX.hose == 'ripped_pantyhose' or EmmaX.hose == 'pantyhose') and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose and EmmaX.hose != 'garterbelt'", "images/EmmaSprite/EmmaSprite_FJFoot_Stocking.png",
             "True", "images/EmmaSprite/EmmaSprite_FJFoot.png",
             )
@@ -5415,10 +5415,10 @@ image Emma_FJ_Legs_2:
 
         ConditionSwitch(
 
-            "EmmaX.legs == 'pants' and not EmmaX.Upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
-            "EmmaX.legs == 'yoga_pants' and not EmmaX.Upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
-            "EmmaX.hose == 'pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Pantyhose.png",
-            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJLeftThigh_PantyhoseHoled.png",
+            "EmmaX.legs == 'pants' and not EmmaX.upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
+            "EmmaX.legs == 'yoga_pants' and not EmmaX.upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
+            "EmmaX.hose == 'pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Pantyhose.png",
+            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJLeftThigh_PantyhoseHoled.png",
             "EmmaX.hose == 'stockings' or EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Stocking.png",
             "True", "images/EmmaSprite/EmmaSprite_FJLeftThigh.png",
             )
@@ -5451,8 +5451,8 @@ image Emma_FJ_Legs_2:
 
         ConditionSwitch(
 
-            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJFoot_StockingHoled.png",
-            "(EmmaX.hose == 'ripped_pantyhose' or EmmaX.hose == 'pantyhose') and EmmaX.underwearDown", Null(),
+            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJFoot_StockingHoled.png",
+            "(EmmaX.hose == 'ripped_pantyhose' or EmmaX.hose == 'pantyhose') and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose and EmmaX.hose != 'garterbelt'", "images/EmmaSprite/EmmaSprite_FJFoot_Stocking.png",
             "True", "images/EmmaSprite/EmmaSprite_FJFoot.png",
             )
@@ -5486,10 +5486,10 @@ image Emma_FJ_Legs_4:
 
         ConditionSwitch(
 
-            "EmmaX.legs == 'pants' and not EmmaX.Upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
-            "EmmaX.legs == 'yoga_pants' and not EmmaX.Upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
-            "EmmaX.hose == 'pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Pantyhose.png",
-            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJLeftThigh_PantyhoseHoled.png",
+            "EmmaX.legs == 'pants' and not EmmaX.upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
+            "EmmaX.legs == 'yoga_pants' and not EmmaX.upskirt", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Yoga.png",
+            "EmmaX.hose == 'pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Pantyhose.png",
+            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJLeftThigh_PantyhoseHoled.png",
             "EmmaX.hose == 'stockings' or EmmaX.hose == 'stockings_and_garterbelt'", "images/EmmaSprite/EmmaSprite_FJLeftThigh_Stocking.png",
             "True", "images/EmmaSprite/EmmaSprite_FJLeftThigh.png",
             )
@@ -5522,8 +5522,8 @@ image Emma_FJ_Legs_4:
 
         ConditionSwitch(
 
-            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJFoot_StockingHoled.png",
-            "(EmmaX.hose == 'ripped_pantyhose' or EmmaX.hose == 'pantyhose') and EmmaX.underwearDown", Null(),
+            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJFoot_StockingHoled.png",
+            "(EmmaX.hose == 'ripped_pantyhose' or EmmaX.hose == 'pantyhose') and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose and EmmaX.hose != 'garterbelt'", "images/EmmaSprite/EmmaSprite_FJFoot_Stocking.png",
             "True", "images/EmmaSprite/EmmaSprite_FJFoot.png",
             )
@@ -5560,7 +5560,7 @@ image Zero_Emma_FootCock:
 
     contains:
         ConditionSwitch(
-                "Player.Sprite", "Blowcock",
+                "Player.sprite", "Blowcock",
                 "True", Null(),
                 )
     pos (200,1000)
@@ -5573,8 +5573,8 @@ image Emma_FJ_Calf:
     contains:
         ConditionSwitch(
 
-            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwearDown", "images/EmmaSprite/EmmaSprite_FJLeftCalf_StockingHoled.png",
-            "(EmmaX.hose == 'ripped_pantyhose' or EmmaX.hose == 'pantyhose') and EmmaX.underwearDown", Null(),
+            "EmmaX.hose == 'ripped_pantyhose' and not EmmaX.underwear_pulled_down", "images/EmmaSprite/EmmaSprite_FJLeftCalf_StockingHoled.png",
+            "(EmmaX.hose == 'ripped_pantyhose' or EmmaX.hose == 'pantyhose') and EmmaX.underwear_pulled_down", Null(),
             "EmmaX.hose and EmmaX.hose != 'garterbelt'", "images/EmmaSprite/EmmaSprite_FJLeftCalf_Stocking.png",
             "True", "images/EmmaSprite/EmmaSprite_FJLeftCalf.png",
             )
@@ -5582,7 +5582,7 @@ image Emma_FJ_Calf:
 
         ConditionSwitch(
 
-            "not EmmaX.legs or EmmaX.Upskirt", Null(),
+            "not EmmaX.legs or EmmaX.upskirt", Null(),
             "EmmaX.legs == 'pants'", "images/EmmaSprite/EmmaSprite_FJLeftCalf_Pants.png",
             "EmmaX.legs == 'yoga_pants'", "images/EmmaSprite/EmmaSprite_FJLeftCalf_Yoga.png",
             "True", Null(),
@@ -5593,7 +5593,7 @@ image Emma_FJ_Calf:
 
 label Emma_FJ_Launch(Line=primary_action):
     $ primary_action = "foot"
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     $ ShowFeet = 1
     if EmmaX.pose == "doggy":
         call Emma_Sex_Launch ("foot")
@@ -5636,7 +5636,7 @@ label Emma_FJ_Reset:
     if not renpy.showing("Emma_FJ_Animation"):
         return
     call Emma_Hide
-    $ Player.Sprite = 0
+    $ Player.sprite = 0
 
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         zoom .8 xpos 580 yoffset 150

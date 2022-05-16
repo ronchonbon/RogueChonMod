@@ -121,7 +121,7 @@ label Emma_Relationship:
     while True:
         menu:
             ch_e "What did you want to talk about?"
-            "Do you want to be my girlfriend?" if EmmaX not in Player.Harem and "ex" not in EmmaX.Traits:
+            "Do you want to be my girlfriend?" if EmmaX not in Player.Harem and "ex" not in EmmaX.traits:
                 $ EmmaX.daily_history.append("relationship")
                 if "asked boyfriend" in EmmaX.daily_history and "angry" in EmmaX.daily_history:
                     $ EmmaX.change_face("angry", 1)
@@ -142,7 +142,7 @@ label Emma_Relationship:
 
                 $ EmmaX.daily_history.append("asked boyfriend")
 
-                if Player.Harem and "EmmaYes" not in Player.Traits:
+                if Player.Harem and "EmmaYes" not in Player.traits:
                     if len(Player.Harem) >= 2:
                         ch_e "I doubt they would understand, [EmmaX.player_petname]."
                     else:
@@ -166,8 +166,8 @@ label Emma_Relationship:
                     ch_e "I suppose I've become accustomed to you. . ."
                     if "boyfriend" not in EmmaX.player_petnames:
                         $ EmmaX.player_petnames.append("boyfriend")
-                    if "EmmaYes" in Player.Traits:
-                        $ Player.Traits.remove("EmmaYes")
+                    if "EmmaYes" in Player.traits:
+                        $ Player.traits.remove("EmmaYes")
                     $ Player.Harem.append(EmmaX)
                     call Harem_Initiation
                     "[EmmaX.name] draws you in and kisses you deeply."
@@ -183,7 +183,7 @@ label Emma_Relationship:
                     $ EmmaX.change_face("perplexed", 1)
                     ch_e "I really couldn't get serious about a student, [EmmaX.player_petname]."
 
-            "Do you want to get back together?" if "ex" in EmmaX.Traits:
+            "Do you want to get back together?" if "ex" in EmmaX.traits:
                 $ EmmaX.daily_history.append("relationship")
                 if "asked boyfriend" in EmmaX.daily_history and "angry" in EmmaX.daily_history:
                     $ EmmaX.change_face("angry", 1)
@@ -196,7 +196,7 @@ label Emma_Relationship:
 
                 $ EmmaX.daily_history.append("asked boyfriend")
 
-                if Player.Harem and "EmmaYes" not in Player.Traits:
+                if Player.Harem and "EmmaYes" not in Player.traits:
                     if len(Player.Harem) >= 2:
                         ch_e "I doubt they would understand, [EmmaX.player_petname]."
                     else:
@@ -212,9 +212,9 @@ label Emma_Relationship:
                     ch_e "Try as I might, I can't stay mad at you."
                     if "boyfriend" not in EmmaX.player_petnames:
                         $ EmmaX.player_petnames.append("boyfriend")
-                    $ EmmaX.Traits.remove("ex")
-                    if "EmmaYes" in Player.Traits:
-                        $ Player.Traits.remove("EmmaYes")
+                    $ EmmaX.traits.remove("ex")
+                    if "EmmaYes" in Player.traits:
+                        $ Player.traits.remove("EmmaYes")
                     $ Player.Harem.append(EmmaX)
                     call Harem_Initiation
                     "[EmmaX.name] leans in and kisses you deeply."
@@ -226,9 +226,9 @@ label Emma_Relationship:
                     ch_e "Hrm, very well."
                     if "boyfriend" not in EmmaX.player_petnames:
                         $ EmmaX.player_petnames.append("boyfriend")
-                    $ EmmaX.Traits.remove("ex")
-                    if "EmmaYes" in Player.Traits:
-                        $ Player.Traits.remove("EmmaYes")
+                    $ EmmaX.traits.remove("ex")
+                    if "EmmaYes" in Player.traits:
+                        $ Player.traits.remove("EmmaYes")
                     $ Player.Harem.append(EmmaX)
                     call Harem_Initiation
                     $ EmmaX.change_face("kiss", 1)
@@ -258,7 +258,7 @@ label Emma_Relationship:
             "About that talk we had before. . .":
 
                 menu:
-                    "When you said you loved me. . ." if "lover" not in EmmaX.Traits and EmmaX.Event[6] >= 20:
+                    "When you said you loved me. . ." if "lover" not in EmmaX.traits and EmmaX.Event[6] >= 20:
                         call Emma_Love_Redux
                     "You said you wanted me to be more in control?" if "sir" not in EmmaX.player_petnames and "sir" in EmmaX.history:
                         if "asked sub" in EmmaX.daily_history:
@@ -290,7 +290,7 @@ label Emma_OtherWoman(counter=0):
         ch_e "But you're with [Player.Harem[0].name] right now."
     menu:
         extend ""
-        "She said I can be with you too." if "EmmaYes" in Player.Traits:
+        "She said I can be with you too." if "EmmaYes" in Player.traits:
             if approval_check(EmmaX, 1800, Bonus = counter):
                 $ EmmaX.change_face("smile", 1)
                 if EmmaX.love >= EmmaX.obedience:
@@ -305,7 +305,7 @@ label Emma_OtherWoman(counter=0):
                 $ renpy.pop_call()
 
 
-        "I could ask if she'd be ok with me dating you both." if "EmmaYes" not in Player.Traits:
+        "I could ask if she'd be ok with me dating you both." if "EmmaYes" not in Player.traits:
             if approval_check(EmmaX, 1800, Bonus = counter):
                 $ EmmaX.change_face("smile", 1)
                 if EmmaX.love >= EmmaX.obedience:
@@ -336,7 +336,7 @@ label Emma_OtherWoman(counter=0):
                     ch_e "If you insist."
                 else:
                     ch_e "I don't see why not."
-                $ EmmaX.Traits.append("downlow")
+                $ EmmaX.traits.append("downlow")
         "I can break it off with her.":
 
             $ EmmaX.change_face("sad")
@@ -356,7 +356,7 @@ label Emma_About(Check=0):
         return
     ch_e "What do I think about her? Well. . ."
     if Check == RogueX:
-        if "poly Rogue" in EmmaX.Traits:
+        if "poly Rogue" in EmmaX.traits:
             ch_e "As you're aware, we've shared a great deal. . ."
         elif EmmaX.LikeRogue >= 900:
             ch_e "I do find her rather mesmerizing. . ."
@@ -375,7 +375,7 @@ label Emma_About(Check=0):
         else:
             ch_e "That swamp rat? What about her?"
     elif Check == KittyX:
-        if "poly Kitty" in EmmaX.Traits:
+        if "poly Kitty" in EmmaX.traits:
             ch_e "As you're aware, we do get along quite well. . ."
         elif EmmaX.LikeKitty >= 900:
             ch_e "She is rather. . . flexible. . ."
@@ -394,7 +394,7 @@ label Emma_About(Check=0):
         else:
             ch_e "That little bitch?"
     elif Check == LauraX:
-        if "poly Laura" in EmmaX.Traits:
+        if "poly Laura" in EmmaX.traits:
             ch_e "She is quite. . . energetic. . ."
         elif EmmaX.LikeLaura >= 900:
             ch_e "She's very durable. . ."
@@ -413,7 +413,7 @@ label Emma_About(Check=0):
         else:
             ch_e "I'd put her down myself if I didn't have responsibilites."
     elif Check == JeanX:
-        if "poly Jean" in EmmaX.Traits:
+        if "poly Jean" in EmmaX.traits:
             ch_e "As you're aware, we've shared a great deal. . ."
         elif EmmaX.LikeJean >= 900:
             ch_e "I do find her rather mesmerizing. . ."
@@ -432,7 +432,7 @@ label Emma_About(Check=0):
         else:
             ch_e "That bitch? What about her?"
     elif Check == StormX:
-        if "poly Storm" in EmmaX.Traits:
+        if "poly Storm" in EmmaX.traits:
             ch_e "She is marvelously experienced. . ."
         elif EmmaX.LikeStorm >= 900:
             ch_e "She complements me well. . ."
@@ -451,7 +451,7 @@ label Emma_About(Check=0):
         else:
             ch_e "I wish I could convince Charles to fire her."
     elif Check == JubesX:
-        if "poly Jubes" in EmmaX.Traits:
+        if "poly Jubes" in EmmaX.traits:
             ch_e "As you're aware, we do get along quite well. . ."
         elif EmmaX.LikeJubes >= 900:
             ch_e "She is rather. . . flexible. . ."
@@ -475,7 +475,7 @@ label Emma_About(Check=0):
 label Emma_Monogamy:
 
     menu:
-        "Could you not hook up with other girls?" if "mono" not in EmmaX.Traits:
+        "Could you not hook up with other girls?" if "mono" not in EmmaX.traits:
             if EmmaX.Thirst >= 50 and not approval_check(EmmaX, 1800, "LO", TabM=0):
 
                 $ EmmaX.change_face("sly",1)
@@ -502,9 +502,9 @@ label Emma_Monogamy:
                 return
             if "mono" not in EmmaX.daily_history:
                 $ EmmaX.change_stat("obedience", 90, 3)
-            $ EmmaX.AddWord(1,0,"mono")
-            $ EmmaX.Traits.append("mono")
-        "Don't hook up with other girls." if "mono" not in EmmaX.Traits:
+            $ EmmaX.add_word(1,0,"mono")
+            $ EmmaX.traits.append("mono")
+        "Don't hook up with other girls." if "mono" not in EmmaX.traits:
             if approval_check(EmmaX, 900, "O", TabM=0):
 
                 $ EmmaX.change_face("sly",1,Eyes="side")
@@ -532,9 +532,9 @@ label Emma_Monogamy:
                 return
             if "mono" not in EmmaX.daily_history:
                 $ EmmaX.change_stat("obedience", 90, 3)
-            $ EmmaX.AddWord(1,0,"mono")
-            $ EmmaX.Traits.append("mono")
-        "It's ok if you hook up with other girls." if "mono" in EmmaX.Traits:
+            $ EmmaX.add_word(1,0,"mono")
+            $ EmmaX.traits.append("mono")
+        "It's ok if you hook up with other girls." if "mono" in EmmaX.traits:
             if approval_check(EmmaX, 700, "O", TabM=0):
                 $ EmmaX.change_face("sly",1,Eyes="side")
                 ch_e "Of course."
@@ -548,9 +548,9 @@ label Emma_Monogamy:
                 ch_e "I wasn't aware that I needed your permission."
             if "mono" not in EmmaX.daily_history:
                 $ EmmaX.change_stat("obedience", 90, 3)
-            if "mono" in EmmaX.Traits:
-                $ EmmaX.Traits.remove("mono")
-            $ EmmaX.AddWord(1,0,"mono")
+            if "mono" in EmmaX.traits:
+                $ EmmaX.traits.remove("mono")
+            $ EmmaX.add_word(1,0,"mono")
         "Never mind.":
             pass
     return
@@ -564,7 +564,7 @@ label Emma_Jumped:
     ch_e "I believe I recall something like that."
     menu:
         ch_e "What of it?"
-        "Could you maybe just ask instead?" if "chill" not in EmmaX.Traits:
+        "Could you maybe just ask instead?" if "chill" not in EmmaX.traits:
             if EmmaX.Thirst >= 60 and not approval_check(EmmaX, 1600, "LO", TabM=0):
 
                 $ EmmaX.change_face("sly",1)
@@ -592,9 +592,9 @@ label Emma_Jumped:
                 return
             if "chill" not in EmmaX.daily_history:
                 $ EmmaX.change_stat("obedience", 90, 3)
-            $ EmmaX.AddWord(1,0,"chill")
-            $ EmmaX.Traits.append("chill")
-        "Don't bother me like that." if "chill" not in EmmaX.Traits:
+            $ EmmaX.add_word(1,0,"chill")
+            $ EmmaX.traits.append("chill")
+        "Don't bother me like that." if "chill" not in EmmaX.traits:
             if approval_check(EmmaX, 900, "O", TabM=0):
 
                 $ EmmaX.change_face("sly",1,Eyes="side")
@@ -624,8 +624,8 @@ label Emma_Jumped:
                 return
             if "chill" not in EmmaX.daily_history:
                 $ EmmaX.change_stat("obedience", 90, 3)
-            $ EmmaX.AddWord(1,0,"chill")
-            $ EmmaX.Traits.append("chill")
+            $ EmmaX.add_word(1,0,"chill")
+            $ EmmaX.traits.append("chill")
         "Knock yourself out.":
             if approval_check(EmmaX, 800, "L", TabM=0):
                 $ EmmaX.change_face("sly",1)
@@ -640,9 +640,9 @@ label Emma_Jumped:
                 ch_e "We'll see. . ."
             if "chill" not in EmmaX.daily_history:
                 $ EmmaX.change_stat("obedience", 90, 3)
-            if "chill" in EmmaX.Traits:
-                $ EmmaX.Traits.remove("chill")
-            $ EmmaX.AddWord(1,0,"chill")
+            if "chill" in EmmaX.traits:
+                $ EmmaX.traits.remove("chill")
+            $ EmmaX.add_word(1,0,"chill")
         "Um, never mind.":
             pass
     return
@@ -657,7 +657,7 @@ label Emma_Hungry:
         ch_e "You know, that serum of yours has a rather. . . familiar taste to it."
     else:
         ch_e "I do enjoy your taste. . ."
-    $ EmmaX.Traits.append("hungry")
+    $ EmmaX.traits.append("hungry")
 return
 
 
@@ -874,7 +874,7 @@ label Emma_SexChat:
 
 
 
-            "Don't talk as much during sex." if "vocal" in EmmaX.Traits:
+            "Don't talk as much during sex." if "vocal" in EmmaX.traits:
                 if "setvocal" in EmmaX.daily_history:
                     $ EmmaX.change_face("perplexed")
                     ch_e "You've made yourself clear on the matter."
@@ -883,12 +883,12 @@ label Emma_SexChat:
                         $ EmmaX.change_face("bemused")
                         $ EmmaX.change_stat("obedience", 90, 1)
                         ch_e "Oh, very well. . ."
-                        $ EmmaX.Traits.remove("vocal")
+                        $ EmmaX.traits.remove("vocal")
                     elif approval_check(EmmaX, 700, "O"):
                         $ EmmaX.change_face("sadside")
                         $ EmmaX.change_stat("obedience", 90, 1)
                         ch_e "I suppose I could, [EmmaX.player_petname]."
-                        $ EmmaX.Traits.remove("vocal")
+                        $ EmmaX.traits.remove("vocal")
                     elif approval_check(EmmaX, 600):
                         $ EmmaX.change_face("sly")
                         $ EmmaX.change_stat("love", 90, -3)
@@ -903,7 +903,7 @@ label Emma_SexChat:
                         ch_e "I'll say what I wish, and you'll enjoy it."
 
                     $ EmmaX.daily_history.append("setvocal")
-            "Talk dirty to me during sex." if "vocal" not in EmmaX.Traits:
+            "Talk dirty to me during sex." if "vocal" not in EmmaX.traits:
                 if "setvocal" in EmmaX.daily_history:
                     $ EmmaX.change_face("perplexed")
                     ch_e "We've discussed this already."
@@ -912,17 +912,17 @@ label Emma_SexChat:
                         $ EmmaX.change_face("sly")
                         $ EmmaX.change_stat("obedience", 90, 2)
                         ch_e "Mmmm, I believe I can do that. . ."
-                        $ EmmaX.Traits.append("vocal")
+                        $ EmmaX.traits.append("vocal")
                     elif approval_check(EmmaX, 700, "O"):
                         $ EmmaX.change_face("sadside")
                         $ EmmaX.change_stat("obedience", 90, 2)
                         ch_e "If that's what you wish, [EmmaX.player_petname]."
-                        $ EmmaX.Traits.append("vocal")
+                        $ EmmaX.traits.append("vocal")
                     elif approval_check(EmmaX, 600):
                         $ EmmaX.change_face("sly")
                         $ EmmaX.change_stat("obedience", 90, 3)
                         ch_e "I suppose I could, [EmmaX.player_petname]."
-                        $ EmmaX.Traits.append("vocal")
+                        $ EmmaX.traits.append("vocal")
                     else:
                         $ EmmaX.change_face("angry")
                         $ EmmaX.change_stat("inhibition", 90, 5)
@@ -931,7 +931,7 @@ label Emma_SexChat:
                     $ EmmaX.daily_history.append("setvocal")
 
 
-            "Don't do your own thing as much during sex." if "passive" not in EmmaX.Traits:
+            "Don't do your own thing as much during sex." if "passive" not in EmmaX.traits:
                 if "initiative" in EmmaX.daily_history:
                     $ EmmaX.change_face("perplexed")
                     ch_e "I believe we've discussed this."
@@ -940,12 +940,12 @@ label Emma_SexChat:
                         $ EmmaX.change_face("bemused")
                         $ EmmaX.change_stat("obedience", 90, 1)
                         ch_e "Oh, so you want to take charge? . ."
-                        $ EmmaX.Traits.append("passive")
+                        $ EmmaX.traits.append("passive")
                     elif approval_check(EmmaX, 700, "O"):
                         $ EmmaX.change_face("sadside")
                         $ EmmaX.change_stat("obedience", 90, 1)
                         ch_e "I'll await your instruction, [EmmaX.player_petname]."
-                        $ EmmaX.Traits.append("passive")
+                        $ EmmaX.traits.append("passive")
                     elif approval_check(EmmaX, 600):
                         $ EmmaX.change_face("sly")
                         $ EmmaX.change_stat("love", 90, -3)
@@ -960,7 +960,7 @@ label Emma_SexChat:
                         ch_e "You wish."
 
                     $ EmmaX.daily_history.append("initiative")
-            "Take more initiative during sex." if "passive" in EmmaX.Traits:
+            "Take more initiative during sex." if "passive" in EmmaX.traits:
                 if "initiative" in EmmaX.daily_history:
                     $ EmmaX.change_face("perplexed")
                     ch_e "I believe we've discussed this."
@@ -969,17 +969,17 @@ label Emma_SexChat:
                         $ EmmaX.change_face("bemused")
                         $ EmmaX.change_stat("obedience", 90, 1)
                         ch_e "Oh, you know that I will. . ."
-                        $ EmmaX.Traits.remove("passive")
+                        $ EmmaX.traits.remove("passive")
                     elif approval_check(EmmaX, 700, "O"):
                         $ EmmaX.change_face("sadside")
                         $ EmmaX.change_stat("obedience", 90, 1)
                         ch_e "I can do that, [EmmaX.player_petname]."
-                        $ EmmaX.Traits.remove("passive")
+                        $ EmmaX.traits.remove("passive")
                     elif approval_check(EmmaX, 600):
                         $ EmmaX.change_face("sly")
                         $ EmmaX.change_stat("obedience", 90, 3)
                         ch_e "I suppose I might, [EmmaX.player_petname]."
-                        $ EmmaX.Traits.remove("passive")
+                        $ EmmaX.traits.remove("passive")
                     else:
                         $ EmmaX.change_face("angry")
                         $ EmmaX.change_stat("inhibition", 90, 5)
@@ -991,20 +991,20 @@ label Emma_SexChat:
             "About getting Jumped" if "jumped" in EmmaX.history:
                 call Emma_Jumped
 
-            "About that \"mind screen\"" if "screen" in EmmaX.Traits or "noscreen" in EmmaX.Traits:
+            "About that \"mind screen\"" if "screen" in EmmaX.traits or "noscreen" in EmmaX.traits:
                 ch_e "You mean how I can make Charles ignore us sometimes?"
                 menu:
                     extend ""
-                    "Yeah, do that." if "noscreen" in EmmaX.Traits:
+                    "Yeah, do that." if "noscreen" in EmmaX.traits:
                         ch_e "Lovely. . ."
-                        $ EmmaX.Traits.append("screen")
-                    "Don't do that anymore, I want him to know." if "screen" in EmmaX.Traits:
+                        $ EmmaX.traits.append("screen")
+                    "Don't do that anymore, I want him to know." if "screen" in EmmaX.traits:
                         ch_e "Oh, you are a naughty one."
                         if approval_check(EmmaX, 900, "OI"):
                             $ EmmaX.change_face("sad")
                             ch_e "Very well, we won't do that."
                             $ EmmaX.change_face("bemused")
-                            $ EmmaX.Traits.append("noscreen")
+                            $ EmmaX.traits.append("noscreen")
                         else:
                             ch_e "However, I still don't appreciate his interference."
                             ch_e "I'll use the screen anyway."
@@ -1049,7 +1049,7 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
                 $ Digits.append(EmmaX)
                 return
 
-        if "hungry" not in EmmaX.Traits and (EmmaX.event_counter["swallowed"] + EmmaX.Chat[2]) >= 10 and EmmaX.location == bg_current:
+        if "hungry" not in EmmaX.traits and (EmmaX.event_counter["swallowed"] + EmmaX.Chat[2]) >= 10 and EmmaX.location == bg_current:
             call Emma_Hungry
             return
         if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or approval_check(EmmaX, 800, "I")):
@@ -1064,21 +1064,21 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
 
 
 
-        if "classcaught" in EmmaX.Traits:
+        if "classcaught" in EmmaX.traits:
             if "caught" in EmmaX.daily_history and "caught chat" not in EmmaX.daily_history:
                 $ Options.append("caught")
-            if "screen" not in EmmaX.Traits and "noscreen" not in EmmaX.Traits and "screen" in JeanX.Traits:
+            if "screen" not in EmmaX.traits and "noscreen" not in EmmaX.traits and "screen" in JeanX.traits:
                 $ Options.append("screen")
             if EmmaX.Event[0] and "key" not in EmmaX.Chat:
                 $ Options.append("key")
             if "lover" in EmmaX.player_petnames and approval_check(EmmaX, 900, "L"):
                 $ Options.append("luv")
 
-            if "mandrill" in Player.Traits and "cologne chat" not in EmmaX.daily_history:
+            if "mandrill" in Player.traits and "cologne chat" not in EmmaX.daily_history:
                 $ Options.append("mandrill")
-            if "purple" in Player.Traits and "cologne chat" not in EmmaX.daily_history:
+            if "purple" in Player.traits and "cologne chat" not in EmmaX.daily_history:
                 $ Options.append("purple")
-            if "corruption" in Player.Traits and "cologne chat" not in EmmaX.daily_history:
+            if "corruption" in Player.traits and "cologne chat" not in EmmaX.daily_history:
                 $ Options.append("corruption")
 
             if EmmaX.Date >= 1 and bg_current != "bg_restaurant":
@@ -1099,11 +1099,11 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
             if "fondle_breasts" in EmmaX.daily_history or "fondle_pussy" in EmmaX.daily_history or "fondle_ass" in EmmaX.daily_history:
 
                 $ Options.append("fondled")
-            if "Dazzler and Longshot" in EmmaX.Inventory and "256 Shades of Grey" in EmmaX.Inventory and "Avengers Tower Penthouse" in EmmaX.Inventory:
+            if "Dazzler and Longshot" in EmmaX.inventory and "256 Shades of Grey" in EmmaX.inventory and "Avengers Tower Penthouse" in EmmaX.inventory:
 
                 if "book" not in EmmaX.Chat:
                     $ Options.append("booked")
-            if "lace_bra" in EmmaX.Inventory or "lace_panties" in EmmaX.Inventory:
+            if "lace_bra" in EmmaX.inventory or "lace_panties" in EmmaX.inventory:
 
                 if "lingerie" not in EmmaX.Chat:
                     $ Options.append("lingerie")
@@ -1210,18 +1210,18 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
         menu:
             "Sure, that sounds good.":
                 ch_e "Lovely. . ."
-                $ EmmaX.Traits.append("screen")
+                $ EmmaX.traits.append("screen")
             "Nah, I want him to know.":
                 ch_e "Oh, you are a naughty one."
                 if approval_check(EmmaX, 900, "OI"):
                     $ EmmaX.change_face("sad")
                     ch_e "Very well, we won't do that."
                     $ EmmaX.change_face("bemused")
-                    $ EmmaX.Traits.append("noscreen")
+                    $ EmmaX.traits.append("noscreen")
                 else:
                     ch_e "Even so, I don't appreciate his interference."
                     ch_e "I'll use the screen anyway."
-                    $ EmmaX.Traits.append("screen")
+                    $ EmmaX.traits.append("screen")
     elif Options[0] == "key":
         if EmmaX.SEXP <= 15:
             ch_e "Now just because I gave you my room key, doesn't mean you shouldn't knock. . ."
@@ -1817,7 +1817,7 @@ label Emma_Rename:
             $ EmmaX.change_face()
         "Nevermind.":
             pass
-    $ EmmaX.AddWord(1,0,"namechange")
+    $ EmmaX.add_word(1,0,"namechange")
     return
 
 
@@ -2124,7 +2124,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
 
     $ EmmaX.recent_history.append("summoned")
     $ Line = 0
-    if "locked" in Player.Traits:
+    if "locked" in Player.traits:
         call Locked_Door (EmmaX)
         return
     $ EmmaX.location = bg_current
@@ -2138,7 +2138,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
 
 label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     if "leaving" in EmmaX.recent_history:
-        $ EmmaX.DrainWord("leaving")
+        $ EmmaX.drain_word("leaving")
     else:
         return
 
@@ -2147,13 +2147,13 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         ch_e "Sorry, I have some business to attend to."
         return
 
-    if EmmaX in Party or "lockedtravels" in EmmaX.Traits:
+    if EmmaX in Party or "lockedtravels" in EmmaX.traits:
 
 
         $ EmmaX.location = bg_current
         return
 
-    elif "freetravels" in EmmaX.Traits or not approval_check(EmmaX, 700):
+    elif "freetravels" in EmmaX.traits or not approval_check(EmmaX, 700):
 
         $ EmmaX.change_outfit()
         if GirlsNum:
@@ -2186,9 +2186,9 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
 
     $ EmmaX.change_outfit()
 
-    if "follow" not in EmmaX.Traits:
+    if "follow" not in EmmaX.traits:
 
-        $ EmmaX.Traits.append("follow")
+        $ EmmaX.traits.append("follow")
 
     $ D20 = renpy.random.randint(1, 20)
     $ Line = 0
@@ -2375,7 +2375,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
 
 label Emma_Clothes(Public=0, Bonus=0):
     if EmmaX.Taboo:
-        if "exhibitionist" in EmmaX.Traits:
+        if "exhibitionist" in EmmaX.traits:
             ch_e "Mmmmm. . ."
         elif approval_check(EmmaX, 900, TabM=4) or approval_check(EmmaX, 400, "I", TabM=3):
             ch_e "This isn't really the appropriate place for it, however. . ."
@@ -2397,11 +2397,11 @@ label Emma_Clothes(Public=0, Bonus=0):
     call shift_focus (Girl)
 
     $ Public = 0
-    if "exhibitionist" in EmmaX.Traits:
+    if "exhibitionist" in EmmaX.traits:
         $ Public += 1
-    if EmmaX.Rep <= 200:
+    if EmmaX.reputation <= 200:
         $ Public += 2
-    elif EmmaX.Rep <= 400:
+    elif EmmaX.reputation <= 400:
         $ Public += 1
     if "public" in EmmaX.history:
         $ Public += 2
@@ -2467,7 +2467,7 @@ label Emma_Wardrobe_Menu:
                 call Switch_Chat
                 if Girl != EmmaX:
                     ch_p "I wanted to talk about your clothes."
-                    call expression Girl.Tag +"_Clothes"
+                    call expression Girl.tag +"_Clothes"
                 $ Girl = EmmaX
                 call shift_focus (Girl)
             "Never mind, you look good like that.":
@@ -2664,7 +2664,7 @@ label Emma_Wardrobe_Menu:
                 $ EmmaX.change_face("sexy")
                 menu:
                     "You know, you should wear this one out. [[set current outfit]":
-                        if "exhibitionist" in EmmaX.Traits:
+                        if "exhibitionist" in EmmaX.traits:
                             $ EmmaX.change_face("sexy",2,Eyes="down")
                             ch_e "Mmmmm. . ."
                             $ EmmaX.Outfit = "nude"
@@ -2684,7 +2684,7 @@ label Emma_Wardrobe_Menu:
                             ch_e "Impossible."
                     "Let's try something else though.":
 
-                        if "exhibitionist" in EmmaX.Traits:
+                        if "exhibitionist" in EmmaX.traits:
                             ch_e "Too much for you to handle?"
                         elif approval_check(EmmaX, 800, "I") or approval_check(EmmaX, 2800, TabM=0):
                             $ EmmaX.change_face("bemused", 1)
@@ -2804,7 +2804,7 @@ label Emma_Wardrobe_Menu:
             "Then you could slip something on under it. . .":
                 if (EmmaX.SeenChest and approval_check(EmmaX, 1000, TabM=(4-Public))) or approval_check(EmmaX, 1200, TabM=(5-Public)):
                     ch_e "-not that I'm overly concerned about it. . ."
-                elif approval_check(EmmaX, 900, TabM=(3-Public)) and "lace_bra" in EmmaX.Inventory:
+                elif approval_check(EmmaX, 900, TabM=(3-Public)) and "lace_bra" in EmmaX.inventory:
                     ch_e "I suppose I could."
                     $ EmmaX.bra  = "lace_bra"
                     "She pulls out her lace bra and slips it on under her [EmmaX.top]."
@@ -2936,7 +2936,7 @@ label Emma_Wardrobe_Menu:
                     $ EmmaX.blushing = 0
                 elif approval_check(EmmaX, 700, TabM=5):
                     ch_e "I suppose that I could. . ."
-                    if "lace_panties" in EmmaX.Inventory:
+                    if "lace_panties" in EmmaX.inventory:
                         $ EmmaX.underwear  = "lace_panties"
                     else:
                         $ EmmaX.underwear = "green_panties"
@@ -3031,7 +3031,7 @@ label Emma_Wardrobe_Menu:
                         else:
                             $ EmmaX.bra = "corset"
 
-                "I like that lace bra." if "lace_bra" in EmmaX.Inventory and EmmaX.bra != "lace_bra":
+                "I like that lace bra." if "lace_bra" in EmmaX.inventory and EmmaX.bra != "lace_bra":
                     if EmmaX.SeenChest or approval_check(EmmaX, 1300, TabM=(3-Public)):
                         ch_e "Fine."
                         $ EmmaX.bra = "lace_bra"
@@ -3053,7 +3053,7 @@ label Emma_Wardrobe_Menu:
                         else:
                             $ EmmaX.bra = "sports_bra"
 
-                "I like that bikini top." if EmmaX.bra != "bikini_top" and "bikini_top" in EmmaX.Inventory:
+                "I like that bikini top." if EmmaX.bra != "bikini_top" and "bikini_top" in EmmaX.inventory:
                     if bg_current == "bg_pool":
                         ch_e "Fine."
                         $ EmmaX.bra = "bikini_top"
@@ -3076,15 +3076,15 @@ label Emma_Wardrobe_Menu:
             menu:
                 "You could lose the hose." if EmmaX.hose:
                     $ EmmaX.hose = 0
-                "The thigh-high hose would look good with that." if EmmaX.hose != "stockings" and "stockings_and_garterbelt" in EmmaX.Inventory:
+                "The thigh-high hose would look good with that." if EmmaX.hose != "stockings" and "stockings_and_garterbelt" in EmmaX.inventory:
                     $ EmmaX.hose = "stockings"
-                "The pantyhose would look good with that." if EmmaX.hose != "pantyhose" and "pantyhose" in EmmaX.Inventory:
+                "The pantyhose would look good with that." if EmmaX.hose != "pantyhose" and "pantyhose" in EmmaX.inventory:
                     $ EmmaX.hose = "pantyhose"
-                "The ripped pantyhose would look good with that." if EmmaX.hose != "ripped_pantyhose" and "ripped_pantyhose" in EmmaX.Inventory:
+                "The ripped pantyhose would look good with that." if EmmaX.hose != "ripped_pantyhose" and "ripped_pantyhose" in EmmaX.inventory:
                     $ EmmaX.hose = "ripped_pantyhose"
-                "The stockings and garterbelt would look good with that." if EmmaX.hose != "stockings_and_garterbelt" and "stockings_and_garterbelt" in EmmaX.Inventory:
+                "The stockings and garterbelt would look good with that." if EmmaX.hose != "stockings_and_garterbelt" and "stockings_and_garterbelt" in EmmaX.inventory:
                     $ EmmaX.hose = "stockings_and_garterbelt"
-                "Maybe just the garterbelt?" if EmmaX.hose != "garterbelt" and "stockings_and_garterbelt" in EmmaX.Inventory:
+                "Maybe just the garterbelt?" if EmmaX.hose != "garterbelt" and "stockings_and_garterbelt" in EmmaX.inventory:
                     $ EmmaX.hose = "garterbelt"
                 "Never mind":
                     pass
@@ -3170,7 +3170,7 @@ label Emma_Wardrobe_Menu:
                         else:
                             $ EmmaX.underwear = "sports_panties"
 
-                "Why don't you wear the lace panties instead?" if "lace_panties" in EmmaX.Inventory and EmmaX.underwear and EmmaX.underwear != "lace_panties":
+                "Why don't you wear the lace panties instead?" if "lace_panties" in EmmaX.inventory and EmmaX.underwear and EmmaX.underwear != "lace_panties":
                     if approval_check(EmmaX, 1300, TabM=(4-Public)):
                         ch_e "Fine."
                         $ EmmaX.underwear = "lace_panties"
@@ -3181,7 +3181,7 @@ label Emma_Wardrobe_Menu:
                         else:
                             $ EmmaX.underwear = "lace_panties"
 
-                "I like those bikini bottoms." if EmmaX.underwear != "bikini_bottoms" and "bikini_bottoms" in EmmaX.Inventory:
+                "I like those bikini bottoms." if EmmaX.underwear != "bikini_bottoms" and "bikini_bottoms" in EmmaX.inventory:
                     if bg_current == "bg_pool":
                         ch_e "Fine."
                         $ EmmaX.underwear = "bikini_bottoms"
@@ -3220,7 +3220,7 @@ label Emma_Wardrobe_Menu:
                         "How about the sporty ones?":
                             ch_e "Fine."
                             $ EmmaX.underwear = "sports_panties"
-                        "How about the lace ones?" if "lace_panties" in EmmaX.Inventory:
+                        "How about the lace ones?" if "lace_panties" in EmmaX.inventory:
                             ch_e "Fine."
                             $ EmmaX.underwear  = "lace_panties"
                 "Never mind":
@@ -3275,12 +3275,12 @@ label Emma_Wardrobe_Menu:
                 ch_e "Rome wasn't built in a day. . ."
             else:
                 $ EmmaX.change_face("bemused", 1)
-                $ Approval = approval_check(EmmaX, 1150, TabM=0)
-                if approval_check(EmmaX, 850, "L", TabM=0) or (Approval and EmmaX.love > 2*EmmaX.obedience):
+                $ approval = approval_check(EmmaX, 1150, TabM=0)
+                if approval_check(EmmaX, 850, "L", TabM=0) or (approval and EmmaX.love > 2*EmmaX.obedience):
                     ch_e "If you like that sort of thing. . ."
-                elif approval_check(EmmaX, 500, "I", TabM=0) or (Approval and EmmaX.inhibition > EmmaX.obedience):
+                elif approval_check(EmmaX, 500, "I", TabM=0) or (approval and EmmaX.inhibition > EmmaX.obedience):
                     ch_e "I could go a bit more. . . wild."
-                elif approval_check(EmmaX, 400, "O", TabM=0) or Approval:
+                elif approval_check(EmmaX, 400, "O", TabM=0) or approval:
                     ch_e "If you insist. . ."
                 else:
                     $ EmmaX.change_face("surprised")
@@ -3296,13 +3296,13 @@ label Emma_Wardrobe_Menu:
             if "shave" in EmmaX.Todo:
                 ch_e "Yes, yes, it's on my schedule."
             else:
-                $ Approval = approval_check(EmmaX, 1150, TabM=0)
+                $ approval = approval_check(EmmaX, 1150, TabM=0)
 
-                if approval_check(EmmaX, 850, "L", TabM=0) or (Approval and EmmaX.love > 2*EmmaX.obedience):
+                if approval_check(EmmaX, 850, "L", TabM=0) or (approval and EmmaX.love > 2*EmmaX.obedience):
                     ch_e "I know you love it."
-                elif approval_check(EmmaX, 500, "I", TabM=0) or (Approval and EmmaX.inhibition > EmmaX.obedience):
+                elif approval_check(EmmaX, 500, "I", TabM=0) or (approval and EmmaX.inhibition > EmmaX.obedience):
                     ch_e "I like it kept tidy."
-                elif approval_check(EmmaX, 400, "O", TabM=0) or Approval:
+                elif approval_check(EmmaX, 400, "O", TabM=0) or approval:
                     ch_e "If you insist."
                 else:
                     $ EmmaX.change_face("surprised")
@@ -3319,12 +3319,12 @@ label Emma_Wardrobe_Menu:
                 ch_e "Yes, yes, it's on my schedule."
             else:
                 $ EmmaX.change_face("bemused", 1)
-                $ Approval = approval_check(EmmaX, 1350, TabM=0)
-                if approval_check(EmmaX, 900, "L", TabM=0) or (Approval and EmmaX.love > 2* EmmaX.obedience):
+                $ approval = approval_check(EmmaX, 1350, TabM=0)
+                if approval_check(EmmaX, 900, "L", TabM=0) or (approval and EmmaX.love > 2* EmmaX.obedience):
                     ch_e "A little handhold, I assume?"
-                elif approval_check(EmmaX, 600, "I", TabM=0) or (Approval and EmmaX.inhibition > EmmaX.obedience):
+                elif approval_check(EmmaX, 600, "I", TabM=0) or (approval and EmmaX.inhibition > EmmaX.obedience):
                     ch_e "I do like a nice ring. . ."
-                elif approval_check(EmmaX, 500, "O", TabM=0) or Approval:
+                elif approval_check(EmmaX, 500, "O", TabM=0) or approval:
                     ch_e "I didn't know you were into that sort of thing."
                 else:
                     $ EmmaX.change_face("surprised")
@@ -3339,12 +3339,12 @@ label Emma_Wardrobe_Menu:
                 ch_e "Yes, yes, it's on my schedule."
             else:
                 $ EmmaX.change_face("bemused", 1)
-                $ Approval = approval_check(EmmaX, 1350, TabM=0)
-                if approval_check(EmmaX, 900, "L", TabM=0) or (Approval and EmmaX.love > 2*EmmaX.obedience):
+                $ approval = approval_check(EmmaX, 1350, TabM=0)
+                if approval_check(EmmaX, 900, "L", TabM=0) or (approval and EmmaX.love > 2*EmmaX.obedience):
                     ch_e "A little handhold, I assume?"
-                elif approval_check(EmmaX, 600, "I", TabM=0) or (Approval and EmmaX.inhibition > EmmaX.obedience):
+                elif approval_check(EmmaX, 600, "I", TabM=0) or (approval and EmmaX.inhibition > EmmaX.obedience):
                     ch_e "They might look nice on these. . ."
-                elif approval_check(EmmaX, 500, "O", TabM=0) or Approval:
+                elif approval_check(EmmaX, 500, "O", TabM=0) or approval:
                     ch_e "I didn't know you were into that sort of thing."
                 else:
                     $ EmmaX.change_face("surprised")
@@ -3357,12 +3357,12 @@ label Emma_Wardrobe_Menu:
         "Remove piercings" if EmmaX.piercings:
             ch_p "You know, you'd look better without those piercings."
             $ EmmaX.change_face("bemused", 1)
-            $ Approval = approval_check(EmmaX, 1350, TabM=0)
-            if approval_check(EmmaX, 950, "L", TabM=0) or (Approval and EmmaX.love > EmmaX.obedience):
+            $ approval = approval_check(EmmaX, 1350, TabM=0)
+            if approval_check(EmmaX, 950, "L", TabM=0) or (approval and EmmaX.love > EmmaX.obedience):
                 ch_e "If they aren't working for you. . ."
-            elif approval_check(EmmaX, 700, "I", TabM=0) or (Approval and EmmaX.inhibition > EmmaX.obedience):
+            elif approval_check(EmmaX, 700, "I", TabM=0) or (approval and EmmaX.inhibition > EmmaX.obedience):
                 ch_e "They were being a nuisance."
-            elif approval_check(EmmaX, 600, "O", TabM=0) or Approval:
+            elif approval_check(EmmaX, 600, "O", TabM=0) or approval:
                 ch_e "I'll remove them then."
             else:
                 $ EmmaX.change_face("surprised")

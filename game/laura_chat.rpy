@@ -5,7 +5,7 @@ label Laura_Relationship:
     while True:
         menu:
             ch_l "What did you want to talk about?"
-            "Do you want to be my girlfriend?" if LauraX not in Player.Harem and "ex" not in LauraX.Traits:
+            "Do you want to be my girlfriend?" if LauraX not in Player.Harem and "ex" not in LauraX.traits:
                 $ LauraX.daily_history.append("relationship")
                 if "asked boyfriend" in LauraX.daily_history and "angry" in LauraX.daily_history:
                     $ LauraX.change_face("angry", 1)
@@ -26,7 +26,7 @@ label Laura_Relationship:
 
                 $ LauraX.daily_history.append("asked boyfriend")
 
-                if Player.Harem and "LauraYes" not in Player.Traits:
+                if Player.Harem and "LauraYes" not in Player.traits:
                     if len(Player.Harem) >= 2:
                         ch_l "You'd need to clear it with the others first, [LauraX.player_petname]."
                     else:
@@ -50,8 +50,8 @@ label Laura_Relationship:
                     ch_l "Sure!"
                     if "boyfriend" not in LauraX.player_petnames:
                         $ LauraX.player_petnames.append("boyfriend")
-                    if "LauraYes" in Player.Traits:
-                        $ Player.Traits.remove("LauraYes")
+                    if "LauraYes" in Player.traits:
+                        $ Player.traits.remove("LauraYes")
                     $ Player.Harem.append(LauraX)
                     call Harem_Initiation
                     "[LauraX.name] tackles you and kisses you deeply."
@@ -67,7 +67,7 @@ label Laura_Relationship:
                     $ LauraX.change_face("perplexed", 1)
                     ch_l "Whoa, slow down, [LauraX.player_petname]."
 
-            "Do you want to get back together?" if "ex" in LauraX.Traits:
+            "Do you want to get back together?" if "ex" in LauraX.traits:
                 $ LauraX.daily_history.append("relationship")
                 if "asked boyfriend" in LauraX.daily_history and "angry" in LauraX.daily_history:
                     $ LauraX.change_face("angry", 1)
@@ -80,7 +80,7 @@ label Laura_Relationship:
 
                 $ LauraX.daily_history.append("asked boyfriend")
 
-                if Player.Harem and "LauraYes" not in Player.Traits:
+                if Player.Harem and "LauraYes" not in Player.traits:
                     if len(Player.Harem) >= 2:
                         ch_l "You'd need to clear it with the others first, [LauraX.player_petname]."
                     else:
@@ -97,9 +97,9 @@ label Laura_Relationship:
                     ch_l "Ok, you've earned another shot!"
                     if "boyfriend" not in LauraX.player_petnames:
                         $ LauraX.player_petnames.append("boyfriend")
-                    $ LauraX.Traits.remove("ex")
-                    if "LauraYes" in Player.Traits:
-                        $ Player.Traits.remove("LauraYes")
+                    $ LauraX.traits.remove("ex")
+                    if "LauraYes" in Player.traits:
+                        $ Player.traits.remove("LauraYes")
                     $ Player.Harem.append(LauraX)
                     call Harem_Initiation
                     "[LauraX.name] pulls you in and kisses you deeply."
@@ -111,9 +111,9 @@ label Laura_Relationship:
                     ch_l "Um, ok, I guess."
                     if "boyfriend" not in LauraX.player_petnames:
                         $ LauraX.player_petnames.append("boyfriend")
-                    $ LauraX.Traits.remove("ex")
-                    if "LauraYes" in Player.Traits:
-                        $ Player.Traits.remove("LauraYes")
+                    $ LauraX.traits.remove("ex")
+                    if "LauraYes" in Player.traits:
+                        $ Player.traits.remove("LauraYes")
                     $ Player.Harem.append(LauraX)
                     call Harem_Initiation
                     $ LauraX.change_face("kiss", 1)
@@ -146,10 +146,10 @@ label Laura_Relationship:
             "About that talk we had before. . .":
 
                 menu:
-                    "When you said you loved me. . ." if "lover" not in LauraX.Traits and LauraX.Event[6] >= 20 and LauraX.Event[6] != 23:
+                    "When you said you loved me. . ." if "lover" not in LauraX.traits and LauraX.Event[6] >= 20 and LauraX.Event[6] != 23:
                         call Laura_Love_Redux
 
-                    "When you were telling me all that stuff about yourself. . ." if "lover" not in LauraX.Traits and LauraX.Event[6] == 23:
+                    "When you were telling me all that stuff about yourself. . ." if "lover" not in LauraX.traits and LauraX.Event[6] == 23:
                         call Laura_Love_Redux
 
                     "You said you wanted me to be more in control?" if "sir" not in LauraX.player_petnames and "sir" in LauraX.history:
@@ -187,7 +187,7 @@ label Laura_OtherWoman(counter=0):
         ch_l "But you're with [Player.Harem[0].name], aren't you?"
     menu:
         extend ""
-        "She said I can be with you too." if "LauraYes" in Player.Traits:
+        "She said I can be with you too." if "LauraYes" in Player.traits:
             if approval_check(LauraX, 1800, Bonus = counter):
                 $ LauraX.change_face("smile", 1)
                 if LauraX.love >= LauraX.obedience:
@@ -202,7 +202,7 @@ label Laura_OtherWoman(counter=0):
                 $ renpy.pop_call()
 
 
-        "I could ask if she'd be ok with me dating you both." if "LauraYes" not in Player.Traits:
+        "I could ask if she'd be ok with me dating you both." if "LauraYes" not in Player.traits:
             if approval_check(LauraX, 1800, Bonus = counter):
                 $ LauraX.change_face("smile", 1)
                 if LauraX.love >= LauraX.obedience:
@@ -233,7 +233,7 @@ label Laura_OtherWoman(counter=0):
                     ch_l "If that's what you want."
                 else:
                     ch_l "Fine."
-                $ LauraX.Traits.append("downlow")
+                $ LauraX.traits.append("downlow")
         "I can break it off with her.":
 
             $ LauraX.change_face("sad")
@@ -254,7 +254,7 @@ label Laura_About(Check=0):
         return
     ch_l "What do I think about her? Well. . ."
     if Check == RogueX:
-        if "poly Rogue" in LauraX.Traits:
+        if "poly Rogue" in LauraX.traits:
             ch_l "Yeah, we hook up, so. . ."
         elif LauraX.LikeRogue >= 900:
             ch_l "She's got a great ass. . ."
@@ -273,7 +273,7 @@ label Laura_About(Check=0):
         else:
             ch_l "Bitch."
     elif Check == KittyX:
-        if "poly Kitty" in LauraX.Traits:
+        if "poly Kitty" in LauraX.traits:
             ch_l "Yeah, we hook up, so. . ."
         elif LauraX.LikeKitty >= 900:
             ch_l "I do like her little tits. . ."
@@ -292,7 +292,7 @@ label Laura_About(Check=0):
         else:
             ch_l "Bitch."
     elif Check == EmmaX:
-        if "poly Emma" in LauraX.Traits:
+        if "poly Emma" in LauraX.traits:
             ch_l "Yeah, we hook up, so. . ."
         elif LauraX.LikeEmma >= 900:
             ch_l "Really great rack on her. . ."
@@ -311,7 +311,7 @@ label Laura_About(Check=0):
         else:
             ch_l "Grrrrr."
     elif Check == JeanX:
-        if "poly Jean" in LauraX.Traits:
+        if "poly Jean" in LauraX.traits:
             ch_l "Yeah, we hook up, so. . ."
         elif LauraX.LikeJean >= 900:
             ch_l "She's got a great ass. . ."
@@ -330,7 +330,7 @@ label Laura_About(Check=0):
         else:
             ch_l "Bitch."
     elif Check == StormX:
-        if "poly Storm" in LauraX.Traits:
+        if "poly Storm" in LauraX.traits:
             ch_l "Yeah, we hook up, so. . ."
         elif LauraX.LikeStorm >= 900:
             ch_l "Really great ass on her. . ."
@@ -349,7 +349,7 @@ label Laura_About(Check=0):
         else:
             ch_l "Grrrrr."
     elif Check == JubesX:
-        if "poly Jubes" in LauraX.Traits:
+        if "poly Jubes" in LauraX.traits:
             ch_l "Yeah, we hook up, so. . ."
         elif LauraX.LikeJubes >= 900:
             ch_l "I do love her smooth skin. . ."
@@ -373,7 +373,7 @@ label Laura_About(Check=0):
 label Laura_Monogamy:
 
     menu:
-        "Could you not hook up with other girls?" if "mono" not in LauraX.Traits:
+        "Could you not hook up with other girls?" if "mono" not in LauraX.traits:
             if LauraX.Thirst >= 60 and not approval_check(LauraX, 1700, "LO", TabM=0):
 
                 $ LauraX.change_face("sly",1)
@@ -399,9 +399,9 @@ label Laura_Monogamy:
                 return
             if "mono" not in LauraX.daily_history:
                 $ LauraX.change_stat("obedience", 90, 3)
-            $ LauraX.AddWord(1,0,"mono")
-            $ LauraX.Traits.append("mono")
-        "Don't hook up with other girls." if "mono" not in LauraX.Traits:
+            $ LauraX.add_word(1,0,"mono")
+            $ LauraX.traits.append("mono")
+        "Don't hook up with other girls." if "mono" not in LauraX.traits:
             if approval_check(LauraX, 900, "O", TabM=0):
 
                 $ LauraX.change_face("sly",1,Eyes="side")
@@ -428,9 +428,9 @@ label Laura_Monogamy:
                 return
             if "mono" not in LauraX.daily_history:
                 $ LauraX.change_stat("obedience", 90, 3)
-            $ LauraX.AddWord(1,0,"mono")
-            $ LauraX.Traits.append("mono")
-        "It's ok if you hook up with other girls." if "mono" in LauraX.Traits:
+            $ LauraX.add_word(1,0,"mono")
+            $ LauraX.traits.append("mono")
+        "It's ok if you hook up with other girls." if "mono" in LauraX.traits:
             if approval_check(LauraX, 700, "O", TabM=0):
                 $ LauraX.change_face("sly",1,Eyes="side")
                 ch_l "Affirmative."
@@ -444,9 +444,9 @@ label Laura_Monogamy:
                 ch_l "Well call out the ladies, I've just been given permission!"
             if "mono" not in LauraX.daily_history:
                 $ LauraX.change_stat("obedience", 90, 3)
-            if "mono" in LauraX.Traits:
-                $ LauraX.Traits.remove("mono")
-            $ LauraX.AddWord(1,0,"mono")
+            if "mono" in LauraX.traits:
+                $ LauraX.traits.remove("mono")
+            $ LauraX.add_word(1,0,"mono")
         "Never mind.":
             pass
     return
@@ -459,7 +459,7 @@ label Laura_Jumped:
     $ LauraX.change_face("sly",1,Brows="confused")
     menu:
         ch_l "Yeah?"
-        "Could you maybe just ask instead?" if "chill" not in LauraX.Traits:
+        "Could you maybe just ask instead?" if "chill" not in LauraX.traits:
             if LauraX.Thirst >= 60 and not approval_check(LauraX, 1500, "LO", TabM=0):
 
                 $ LauraX.change_face("sly",1)
@@ -486,9 +486,9 @@ label Laura_Jumped:
                 return
             if "chill" not in LauraX.daily_history:
                 $ LauraX.change_stat("obedience", 90, 3)
-            $ LauraX.AddWord(1,0,"chill")
-            $ LauraX.Traits.append("chill")
-        "Don't bother me like that." if "chill" not in LauraX.Traits:
+            $ LauraX.add_word(1,0,"chill")
+            $ LauraX.traits.append("chill")
+        "Don't bother me like that." if "chill" not in LauraX.traits:
             if approval_check(LauraX, 800, "O", TabM=0):
 
                 $ LauraX.change_face("sly",1,Eyes="side")
@@ -516,8 +516,8 @@ label Laura_Jumped:
                 return
             if "chill" not in LauraX.daily_history:
                 $ LauraX.change_stat("obedience", 90, 3)
-            $ LauraX.AddWord(1,0,"chill")
-            $ LauraX.Traits.append("chill")
+            $ LauraX.add_word(1,0,"chill")
+            $ LauraX.traits.append("chill")
         "Knock yourself out.":
             if approval_check(LauraX, 800, "L", TabM=0):
                 $ LauraX.change_face("sly",1)
@@ -532,9 +532,9 @@ label Laura_Jumped:
                 ch_l "If I'm horny, sure."
             if "chill" not in LauraX.daily_history:
                 $ LauraX.change_stat("obedience", 90, 3)
-            if "chill" in LauraX.Traits:
-                $ LauraX.Traits.remove("chill")
-            $ LauraX.AddWord(1,0,"chill")
+            if "chill" in LauraX.traits:
+                $ LauraX.traits.remove("chill")
+            $ LauraX.add_word(1,0,"chill")
         "Um, never mind.":
             pass
     return
@@ -549,7 +549,7 @@ label Laura_Hungry:
         ch_l "I really enjoy that serum you whipped up."
     else:
         ch_l "[[licks her lips] I'm a little thirsty. . ."
-    $ LauraX.Traits.append("hungry")
+    $ LauraX.traits.append("hungry")
 return
 
 
@@ -773,7 +773,7 @@ label Laura_SexChat:
 
 
 
-            "Don't talk as much during sex." if "vocal" in LauraX.Traits:
+            "Don't talk as much during sex." if "vocal" in LauraX.traits:
                 if "setvocal" in LauraX.daily_history:
                     $ LauraX.change_face("perplexed")
                     ch_l "Make up your mind."
@@ -782,12 +782,12 @@ label Laura_SexChat:
                         $ LauraX.change_face("bemused")
                         $ LauraX.change_stat("obedience", 90, 1)
                         ch_l "Stay quiet, got it."
-                        $ LauraX.Traits.remove("vocal")
+                        $ LauraX.traits.remove("vocal")
                     elif approval_check(LauraX, 700, "O"):
                         $ LauraX.change_face("sadside")
                         $ LauraX.change_stat("obedience", 90, 1)
                         ch_l ". . ."
-                        $ LauraX.Traits.remove("vocal")
+                        $ LauraX.traits.remove("vocal")
                     elif approval_check(LauraX, 600):
                         $ LauraX.change_face("sly")
                         $ LauraX.change_stat("love", 90, -3)
@@ -802,7 +802,7 @@ label Laura_SexChat:
                         ch_l "I don't take orders from you, [LauraX.player_petname]."
 
                     $ LauraX.daily_history.append("setvocal")
-            "Talk dirty to me during sex." if "vocal" not in LauraX.Traits:
+            "Talk dirty to me during sex." if "vocal" not in LauraX.traits:
                 if "setvocal" in LauraX.daily_history:
                     $ LauraX.change_face("perplexed")
                     ch_l "I heard you the first time."
@@ -811,17 +811,17 @@ label Laura_SexChat:
                         $ LauraX.change_face("sly")
                         $ LauraX.change_stat("obedience", 90, 2)
                         ch_l "Louder? Ok. . ."
-                        $ LauraX.Traits.append("vocal")
+                        $ LauraX.traits.append("vocal")
                     elif approval_check(LauraX, 700, "O"):
                         $ LauraX.change_face("sadside")
                         $ LauraX.change_stat("obedience", 90, 2)
                         ch_l "If you want, [LauraX.player_petname]."
-                        $ LauraX.Traits.append("vocal")
+                        $ LauraX.traits.append("vocal")
                     elif approval_check(LauraX, 600):
                         $ LauraX.change_face("sly")
                         $ LauraX.change_stat("obedience", 90, 3)
                         ch_l "I guess?"
-                        $ LauraX.Traits.append("vocal")
+                        $ LauraX.traits.append("vocal")
                     else:
                         $ LauraX.change_face("angry")
                         $ LauraX.change_stat("inhibition", 90, 5)
@@ -830,7 +830,7 @@ label Laura_SexChat:
                     $ LauraX.daily_history.append("setvocal")
 
 
-            "Don't do your own thing as much during sex." if "passive" not in LauraX.Traits:
+            "Don't do your own thing as much during sex." if "passive" not in LauraX.traits:
                 if "initiative" in LauraX.daily_history:
                     $ LauraX.change_face("perplexed")
                     ch_l "I heard you the first time."
@@ -839,12 +839,12 @@ label Laura_SexChat:
                         $ LauraX.change_face("bemused")
                         $ LauraX.change_stat("obedience", 90, 1)
                         ch_l "Passive, eh?"
-                        $ LauraX.Traits.append("passive")
+                        $ LauraX.traits.append("passive")
                     elif approval_check(LauraX, 700, "O"):
                         $ LauraX.change_face("sadside")
                         $ LauraX.change_stat("obedience", 90, 1)
                         ch_l "I'll try to hold back."
-                        $ LauraX.Traits.append("passive")
+                        $ LauraX.traits.append("passive")
                     elif approval_check(LauraX, 600):
                         $ LauraX.change_face("sly")
                         $ LauraX.change_stat("love", 90, -3)
@@ -859,7 +859,7 @@ label Laura_SexChat:
                         ch_l "We'll see."
 
                     $ LauraX.daily_history.append("initiative")
-            "Take more initiative during sex." if "passive" in LauraX.Traits:
+            "Take more initiative during sex." if "passive" in LauraX.traits:
                 if "initiative" in LauraX.daily_history:
                     $ LauraX.change_face("perplexed")
                     ch_l "I heard you the first time."
@@ -868,17 +868,17 @@ label Laura_SexChat:
                         $ LauraX.change_face("bemused")
                         $ LauraX.change_stat("obedience", 90, 1)
                         ch_l "More active, got it."
-                        $ LauraX.Traits.remove("passive")
+                        $ LauraX.traits.remove("passive")
                     elif approval_check(LauraX, 700, "O"):
                         $ LauraX.change_face("sadside")
                         $ LauraX.change_stat("obedience", 90, 1)
                         ch_l "If you insist."
-                        $ LauraX.Traits.remove("passive")
+                        $ LauraX.traits.remove("passive")
                     elif approval_check(LauraX, 600):
                         $ LauraX.change_face("sly")
                         $ LauraX.change_stat("obedience", 90, 3)
                         ch_l "We'll see."
-                        $ LauraX.Traits.remove("passive")
+                        $ LauraX.traits.remove("passive")
                     else:
                         $ LauraX.change_face("angry")
                         $ LauraX.change_stat("inhibition", 90, 5)
@@ -918,7 +918,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
                 $ Digits.append(LauraX)
                 return
 
-        if "hungry" not in LauraX.Traits and (LauraX.event_counter["swallowed"] + LauraX.Chat[2]) >= 10 and LauraX.location == bg_current:
+        if "hungry" not in LauraX.traits and (LauraX.event_counter["swallowed"] + LauraX.Chat[2]) >= 10 and LauraX.location == bg_current:
             call Laura_Hungry
             return
 
@@ -939,11 +939,11 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
         if LauraX.Event[0] and "key" not in LauraX.Chat:
             $ Options.append("key")
 
-        if "mandrill" in Player.Traits and "cologne chat" not in LauraX.daily_history:
+        if "mandrill" in Player.traits and "cologne chat" not in LauraX.daily_history:
             $ Options.append("mandrill")
-        if "purple" in Player.Traits and "cologne chat" not in LauraX.daily_history:
+        if "purple" in Player.traits and "cologne chat" not in LauraX.daily_history:
             $ Options.append("purple")
-        if "corruption" in Player.Traits and "cologne chat" not in LauraX.daily_history:
+        if "corruption" in Player.traits and "cologne chat" not in LauraX.daily_history:
             $ Options.append("corruption")
 
         if "Laura" not in LauraX.names:
@@ -967,11 +967,11 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
         if "fondle_breasts" in LauraX.daily_history or "fondle_pussy" in LauraX.daily_history or "fondle_ass" in LauraX.daily_history:
 
             $ Options.append("fondled")
-        if "Dazzler and Longshot" in LauraX.Inventory and "256 Shades of Grey" in LauraX.Inventory and "Avengers Tower Penthouse" in LauraX.Inventory:
+        if "Dazzler and Longshot" in LauraX.inventory and "256 Shades of Grey" in LauraX.inventory and "Avengers Tower Penthouse" in LauraX.inventory:
 
             if "book" not in LauraX.Chat:
                 $ Options.append("booked")
-        if "lace_bra" in LauraX.Inventory or "lace_panties" in LauraX.Inventory:
+        if "lace_bra" in LauraX.inventory or "lace_panties" in LauraX.inventory:
 
             if "lingerie" not in LauraX.Chat:
                 $ Options.append("lingerie")
@@ -1645,7 +1645,7 @@ label Laura_Rename:
             $ LauraX.change_face()
         "Nevermind.":
             pass
-    $ LauraX.AddWord(1,0,"namechange")
+    $ LauraX.add_word(1,0,"namechange")
     return
 
 
@@ -1959,7 +1959,7 @@ label Laura_Summon(approval_bonus=approval_bonus):
 
     $ LauraX.recent_history.append("summoned")
     $ Line = 0
-    if "locked" in Player.Traits:
+    if "locked" in Player.traits:
         call Locked_Door (LauraX)
         return
     $ LauraX.location = bg_current
@@ -1973,7 +1973,7 @@ label Laura_Summon(approval_bonus=approval_bonus):
 
 label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     if "leaving" in LauraX.recent_history:
-        $ LauraX.DrainWord("leaving")
+        $ LauraX.drain_word("leaving")
     else:
         return
 
@@ -1982,13 +1982,13 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         ch_l "I'm taking off for a bit, later."
         return
 
-    if LauraX in Party or "lockedtravels" in LauraX.Traits:
+    if LauraX in Party or "lockedtravels" in LauraX.traits:
 
 
         $ LauraX.location = bg_current
         return
 
-    elif "freetravels" in LauraX.Traits or not approval_check(LauraX, 700):
+    elif "freetravels" in LauraX.traits or not approval_check(LauraX, 700):
 
         $ LauraX.change_outfit()
         if GirlsNum:
@@ -2022,9 +2022,9 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
 
     $ LauraX.change_outfit()
 
-    if "follow" not in LauraX.Traits:
+    if "follow" not in LauraX.traits:
 
-        $ LauraX.Traits.append("follow")
+        $ LauraX.traits.append("follow")
 
     $ D20 = renpy.random.randint(1, 20)
     $ Line = 0
@@ -2212,7 +2212,7 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
 
 label Laura_Clothes:
     if LauraX.Taboo:
-        if "exhibitionist" in LauraX.Traits:
+        if "exhibitionist" in LauraX.traits:
             ch_l "Yes? . ."
         elif approval_check(LauraX, 900, TabM=4) or approval_check(LauraX, 400, "I", TabM=3):
             ch_l "I don't think I'm supposed to undress around here. . ."
@@ -2293,7 +2293,7 @@ label Laura_Wardrobe_Menu:
                 call Switch_Chat
                 if Girl != LauraX:
                     ch_p "I wanted to talk about your clothes."
-                    call expression Girl.Tag +"_Clothes"
+                    call expression Girl.tag +"_Clothes"
                 $ Girl = LauraX
                 call shift_focus (Girl)
             "Never mind, you look good like that.":
@@ -2488,7 +2488,7 @@ label Laura_Wardrobe_Menu:
                 $ LauraX.change_face("sexy")
                 menu:
                     "You know, you should wear this one out. [[set current outfit]":
-                        if "exhibitionist" in LauraX.Traits:
+                        if "exhibitionist" in LauraX.traits:
                             ch_l "mmmm. . ."
                             $ LauraX.Outfit = "nude"
                             $ LauraX.change_stat("lust", 50, 10)
@@ -2504,7 +2504,7 @@ label Laura_Wardrobe_Menu:
                             ch_l "I probably shouldn't. Sorry."
                     "Let's try something else though.":
 
-                        if "exhibitionist" in LauraX.Traits:
+                        if "exhibitionist" in LauraX.traits:
                             ch_l "Are you sure?"
                         elif approval_check(LauraX, 800, "I") or approval_check(LauraX, 2800, TabM=0):
                             $ LauraX.change_face("bemused", 1)
@@ -2599,11 +2599,11 @@ label Laura_Wardrobe_Menu:
                     $ LauraX.blushing = 1
                     ch_l "-I didn't say that I minded. . ."
                     $ LauraX.blushing = 0
-                elif approval_check(LauraX, 900, TabM=2) and "lace corset" in LauraX.Inventory:
+                elif approval_check(LauraX, 900, TabM=2) and "lace corset" in LauraX.inventory:
                     ch_l "I guess I could find something."
                     $ LauraX.bra  = "lace corset"
                     "She pulls out her lace corset and slips it under her [LauraX.top]."
-                elif approval_check(LauraX, 700, TabM=2) and "corset" in LauraX.Inventory:
+                elif approval_check(LauraX, 700, TabM=2) and "corset" in LauraX.inventory:
                     ch_l "I guess I could find something."
                     $ LauraX.bra  = "corset"
                     "She pulls out her corset and slips it under her [LauraX.top]."
@@ -2685,7 +2685,7 @@ label Laura_Wardrobe_Menu:
             ch_l "Yeah, ok."
             $ LauraX.legs = "leather_pants"
 
-        "Add mesh pants." if LauraX.legs != "mesh_pants" and "mesh_pants" in LauraX.Inventory:
+        "Add mesh pants." if LauraX.legs != "mesh_pants" and "mesh_pants" in LauraX.inventory:
             ch_p "You look great in those mesh pants."
             if approval_check(LauraX, 1000, TabM=4):
                 ch_l "Yeah, ok."
@@ -2728,7 +2728,7 @@ label Laura_Wardrobe_Menu:
                     $ LauraX.blushing = 0
                 elif approval_check(LauraX, 700, TabM=4):
                     ch_l "Yeah, I guess."
-                    if "lace_panties" in LauraX.Inventory:
+                    if "lace_panties" in LauraX.inventory:
                         ch_l "I like how you think."
                         $ LauraX.underwear  = "lace_panties"
                     else:
@@ -2822,7 +2822,7 @@ label Laura_Wardrobe_Menu:
                     ch_l "Ok."
                     $ LauraX.bra = "white_tank"
 
-                "Add red corset." if LauraX.bra != "corset" and "corset" in LauraX.Inventory:
+                "Add red corset." if LauraX.bra != "corset" and "corset" in LauraX.inventory:
                     ch_p "I like that red corset."
                     if LauraX.SeenChest or approval_check(LauraX, 1000, TabM=1):
                         ch_l "K."
@@ -2834,7 +2834,7 @@ label Laura_Wardrobe_Menu:
                         else:
                             $ LauraX.bra = "corset"
 
-                "Add lace corset" if LauraX.bra != "lace corset" and "lace corset" in LauraX.Inventory:
+                "Add lace corset" if LauraX.bra != "lace corset" and "lace corset" in LauraX.inventory:
                     ch_p "I like that lace corset."
                     if LauraX.SeenChest or approval_check(LauraX, 1300, TabM=2):
                         ch_l "K."
@@ -2846,7 +2846,7 @@ label Laura_Wardrobe_Menu:
                         else:
                             $ LauraX.bra = "lace corset"
 
-                "Add wolverine tanktop" if LauraX.bra != "wolvie_top" and "wolvie_top" in LauraX.Inventory:
+                "Add wolverine tanktop" if LauraX.bra != "wolvie_top" and "wolvie_top" in LauraX.inventory:
                     ch_p "I like that wolverine tanktop."
                     if LauraX.SeenChest or approval_check(LauraX, 1000, TabM=2):
                         ch_l "K."
@@ -2858,7 +2858,7 @@ label Laura_Wardrobe_Menu:
                         else:
                             $ LauraX.bra = "wolvie_top"
 
-                "Add bikini_top" if LauraX.bra != "bikini_top" and "bikini_top" in LauraX.Inventory:
+                "Add bikini_top" if LauraX.bra != "bikini_top" and "bikini_top" in LauraX.inventory:
                     ch_p "I like that bikini top."
                     if bg_current == "bg_pool":
                         ch_l "K."
@@ -2885,9 +2885,9 @@ label Laura_Wardrobe_Menu:
                     $ LauraX.hose = "stockings"
                 "The black stockings would look good with that." if LauraX.hose != "black stockings" and "halloween" in LauraX.history:
                     $ LauraX.hose = "black stockings"
-                "The stockings and garterbelt would look good with that." if LauraX.hose != "stockings_and_garterbelt" and "stockings_and_garterbelt" in LauraX.Inventory:
+                "The stockings and garterbelt would look good with that." if LauraX.hose != "stockings_and_garterbelt" and "stockings_and_garterbelt" in LauraX.inventory:
                     $ LauraX.hose = "stockings_and_garterbelt"
-                "Just the garterbelt would look good with that." if LauraX.hose != "garterbelt" and "stockings_and_garterbelt" in LauraX.Inventory:
+                "Just the garterbelt would look good with that." if LauraX.hose != "garterbelt" and "stockings_and_garterbelt" in LauraX.inventory:
                     $ LauraX.hose = "garterbelt"
                 "Never mind":
                     pass
@@ -2960,7 +2960,7 @@ label Laura_Wardrobe_Menu:
                         else:
                             $ LauraX.underwear = "black_panties"
 
-                "Why don't you wear the wolverine panties instead?" if "wolvie_panties" in LauraX.Inventory and LauraX.underwear and LauraX.underwear != "wolvie_panties":
+                "Why don't you wear the wolverine panties instead?" if "wolvie_panties" in LauraX.inventory and LauraX.underwear and LauraX.underwear != "wolvie_panties":
                     if approval_check(LauraX, 1000, TabM=3):
                         ch_l "I guess."
                         $ LauraX.underwear = "wolvie_panties"
@@ -2971,7 +2971,7 @@ label Laura_Wardrobe_Menu:
                         else:
                             $ LauraX.underwear = "wolvie_panties"
 
-                "Why don't you wear the lace panties instead?" if "lace_panties" in LauraX.Inventory and LauraX.underwear and LauraX.underwear != "lace_panties":
+                "Why don't you wear the lace panties instead?" if "lace_panties" in LauraX.inventory and LauraX.underwear and LauraX.underwear != "lace_panties":
                     if approval_check(LauraX, 1300, TabM=3):
                         ch_l "I guess."
                         $ LauraX.underwear = "lace_panties"
@@ -2982,7 +2982,7 @@ label Laura_Wardrobe_Menu:
                         else:
                             $ LauraX.underwear = "lace_panties"
 
-                "I like those bikini bottoms." if "bikini_bottoms" in LauraX.Inventory and LauraX.underwear != "bikini_bottoms":
+                "I like those bikini bottoms." if "bikini_bottoms" in LauraX.inventory and LauraX.underwear != "bikini_bottoms":
                     if bg_current == "bg_pool":
                         ch_l "K."
                         $ LauraX.underwear = "bikini_bottoms"
@@ -3020,10 +3020,10 @@ label Laura_Wardrobe_Menu:
                         "How about the black ones?":
                             ch_l "Sure, ok."
                             $ LauraX.underwear = "black_panties"
-                        "How about the wolvie ones?" if "wolvie_panties" in LauraX.Inventory:
+                        "How about the wolvie ones?" if "wolvie_panties" in LauraX.inventory:
                             ch_l "Sure."
                             $ LauraX.underwear  = "wolvie_panties"
-                        "How about the lace ones?" if "lace_panties" in LauraX.Inventory:
+                        "How about the lace ones?" if "lace_panties" in LauraX.inventory:
                             ch_l "Alright."
                             $ LauraX.underwear  = "lace_panties"
                 "Never mind":
@@ -3096,12 +3096,12 @@ label Laura_Wardrobe_Menu:
                 ch_l "Yeah, I know, I'll get to it."
             else:
                 $ LauraX.change_face("bemused", 1)
-                $ Approval = approval_check(LauraX, 1150, TabM=0)
-                if approval_check(LauraX, 900, "L", TabM=0) or (Approval and LauraX.love > 2* LauraX.obedience):
+                $ approval = approval_check(LauraX, 1150, TabM=0)
+                if approval_check(LauraX, 900, "L", TabM=0) or (approval and LauraX.love > 2* LauraX.obedience):
                     ch_l "You think I'd look good with them?"
-                elif approval_check(LauraX, 600, "I", TabM=0) or (Approval and LauraX.inhibition > LauraX.obedience):
+                elif approval_check(LauraX, 600, "I", TabM=0) or (approval and LauraX.inhibition > LauraX.obedience):
                     ch_l "I've been thinking about that for a while."
-                elif approval_check(LauraX, 500, "O", TabM=0) or Approval:
+                elif approval_check(LauraX, 500, "O", TabM=0) or approval:
                     ch_l "Yes, [LauraX.player_petname]."
                 else:
                     $ LauraX.change_face("surprised")
@@ -3116,12 +3116,12 @@ label Laura_Wardrobe_Menu:
                 ch_l "Yeah, I know, I'll get to it."
             else:
                 $ LauraX.change_face("bemused", 1)
-                $ Approval = approval_check(LauraX, 1150, TabM=0)
-                if approval_check(LauraX, 900, "L", TabM=0) or (Approval and LauraX.love > 2*LauraX.obedience):
+                $ approval = approval_check(LauraX, 1150, TabM=0)
+                if approval_check(LauraX, 900, "L", TabM=0) or (approval and LauraX.love > 2*LauraX.obedience):
                     ch_l "You think I'd look good with them?"
-                elif approval_check(LauraX, 600, "I", TabM=0) or (Approval and LauraX.inhibition > LauraX.obedience):
+                elif approval_check(LauraX, 600, "I", TabM=0) or (approval and LauraX.inhibition > LauraX.obedience):
                     ch_l "I've been thinking about that for a while."
-                elif approval_check(LauraX, 500, "O", TabM=0) or Approval:
+                elif approval_check(LauraX, 500, "O", TabM=0) or approval:
                     ch_l "Yes, [LauraX.player_petname]."
                 else:
                     $ LauraX.change_face("surprised")
@@ -3133,12 +3133,12 @@ label Laura_Wardrobe_Menu:
         "Remove piercings" if LauraX.piercings:
             ch_p "You know, you'd look better without those piercings."
             $ LauraX.change_face("bemused", 1)
-            $ Approval = approval_check(LauraX, 1350, TabM=0)
-            if approval_check(LauraX, 950, "L", TabM=0) or (Approval and LauraX.love > LauraX.obedience):
+            $ approval = approval_check(LauraX, 1350, TabM=0)
+            if approval_check(LauraX, 950, "L", TabM=0) or (approval and LauraX.love > LauraX.obedience):
                 ch_l "Make up your mind . ."
-            elif approval_check(LauraX, 700, "I", TabM=0) or (Approval and LauraX.inhibition > LauraX.obedience):
+            elif approval_check(LauraX, 700, "I", TabM=0) or (approval and LauraX.inhibition > LauraX.obedience):
                 ch_l "In, out, snickt."
-            elif approval_check(LauraX, 600, "O", TabM=0) or Approval:
+            elif approval_check(LauraX, 600, "O", TabM=0) or approval:
                 ch_l "Fine."
             else:
                 $ LauraX.change_face("surprised")

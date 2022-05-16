@@ -746,7 +746,7 @@ label Sleepover_Morning:
     $ DayofWeek = Week[Weekday]
     hide NightMask onlayer nightmask
     $ Player.semen = Player.max_semen
-    $ Player.Spunk = 0
+    $ Player.spunk = 0
     $ Round = 50
 
     $ BO = Party[:]
@@ -1298,12 +1298,12 @@ label Sleepover_Morning:
             $ BO[0].location = bg_current
             if "leaving" in BO[0].recent_history:
                 $ BO[0].recent_history.remove("leaving")
-        if "morningwood" in BO[0].Traits:
+        if "morningwood" in BO[0].traits:
 
             $ BO[0].recent_history.append("blowjob")
             $ BO[0].daily_history.append("blowjob")
             $ BO[0].daily_history.append("morningwood")
-            $ BO[0].Traits.remove("morningwood")
+            $ BO[0].traits.remove("morningwood")
         $ BO.remove(BO[0])
 
 
@@ -1373,7 +1373,7 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
         $ Girls[0] -= 2
 
 
-    if "chill" in Party[0].Traits:
+    if "chill" in Party[0].traits:
 
         $ Girls[0] = 0
     else:
@@ -1386,7 +1386,7 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
         elif Party[0].action_counter["blowjob"] or approval_check(Party[0], 900):
             $ Girls[0] += 1
 
-        if "hungry" in Party[0].Traits and D20 >= 2:
+        if "hungry" in Party[0].traits and D20 >= 2:
 
             $ Girls[0] += 2
         if Party[0].Thirst >= 60:
@@ -1430,7 +1430,7 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
         elif Party[1].action_counter["blowjob"] or approval_check(Party[1], 900):
             $ Girls[1] += 1
 
-        if "hungry" in Party[1].Traits and D20 >= 2:
+        if "hungry" in Party[1].traits and D20 >= 2:
 
             $ Girls[1] += 2
         if Party[1].Thirst >= 60:
@@ -1467,7 +1467,7 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
             $ Line = "no"
 
 
-        if Line == "other" and Party[0].GirlLikeCheck(Party[1]) >= 500 and "chill" not in Party[1].Traits:
+        if Line == "other" and Party[0].GirlLikeCheck(Party[1]) >= 500 and "chill" not in Party[1].traits:
 
             $ Party.reverse()
             $ Girls[0] = "yes"
@@ -1522,13 +1522,13 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
             $ Party[1].recent_history.append("blowjob")
             $ Party[1].daily_history.append("blowjob")
             $ Party[1].daily_history.append("morningwood")
-            $ Party[1].Traits.append("morningwood")
+            $ Party[1].traits.append("morningwood")
 
         $ primary_action = "blowjob"
         $ Party[0].recent_history.append("blowjob")
         $ Party[0].daily_history.append("blowjob")
         $ Party[0].daily_history.append("morningwood")
-        $ Party[0].Traits.append("morningwood")
+        $ Party[0].traits.append("morningwood")
         call Sleepover_MorningWood
 
         call Sex_Over (0)
@@ -1547,7 +1547,7 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
 
 label Sleepover_MorningWood:
 
-    $ Player.AddWord(1,"interruption")
+    $ Player.add_word(1,"interruption")
     call shift_focus (Party[0])
     $ Player.focus = 30
     if primary_action == "blowjob":
@@ -1589,7 +1589,7 @@ label Sleepover_MorningWood:
         $ Partner.recent_history.append("threesome")
 
     $ Party[0].recent_history.append("blanket")
-    call expression Party[0].Tag + "_BJ_Launch"
+    call expression Party[0].tag + "_BJ_Launch"
 
     $ Party[0].change_face("closed",1)
     if Partner:
@@ -2064,7 +2064,7 @@ label Sleepover_MorningWood:
         if Partner:
             $ Partner.change_face("sexy")
         $ Party[0].recent_history.remove("blanket")
-        call expression Party[0].Tag + "_BJ_Reset"
+        call expression Party[0].tag + "_BJ_Reset"
 
         if len(Party) >= 2:
             if Party[1] == RogueX:
@@ -2143,7 +2143,7 @@ label Sleepover_MorningWood:
         if Partner:
             $ second_girl_primary_action = "blowjob"
         call Morning_Partner
-        call expression Party[0].Tag + "_SexAct" pass ("blowjob")
+        call expression Party[0].tag + "_SexAct" pass ("blowjob")
     return
 
 
@@ -2755,7 +2755,7 @@ label Poly_Start(Newbie=0, Round2=0, Asked=0):
                 ch_s "I can't be a part of it then."
             elif Party[0] == JubesX:
                 ch_v "Well, I'm out then."
-            $ Party[0].Traits.append("ex")
+            $ Party[0].traits.append("ex")
             $ Party[0].Break[0] = 5 + Party[0].Break[1] + Party[0].Cheated
             $ Player.Harem.remove(Party[0])
             call Remove_Girl (Party[0])
@@ -2763,13 +2763,13 @@ label Poly_Start(Newbie=0, Round2=0, Asked=0):
 
     $ Party = []
     if Line == "yy":
-        if Newbie.Tag + "No" in Player.Traits:
-            $ Player.Traits.remove(Newbie.Tag + "No")
-        $ Player.DrainWord(Newbie.Tag + "No",0,0,1)
-        $ Player.Traits.append(Newbie.Tag + "Yes")
+        if Newbie.tag + "No" in Player.traits:
+            $ Player.traits.remove(Newbie.tag + "No")
+        $ Player.drain_word(Newbie.tag + "No",0,0,1)
+        $ Player.traits.append(Newbie.tag + "Yes")
         "You should give [Newbie.name] a call."
     else:
-        $ Player.Traits.append(Newbie.Tag + "No")
+        $ Player.traits.append(Newbie.tag + "No")
     return
 
 
@@ -3423,7 +3423,7 @@ label Harem_Start(Newbie=0, Round2=0):
                         ch_s "Then I suppose I cannot be a part of this."
                     elif Party[0] == JubesX:
                         ch_v "Well, I'm out then."
-                    $ Party[Count].Traits.append("ex")
+                    $ Party[Count].traits.append("ex")
                     $ Party[Count].Break[0] = 5 + Party[Count].Break[1] + Party[Count].Cheated
 
                     $ Player.Harem.remove(Party[Count])
@@ -3433,17 +3433,17 @@ label Harem_Start(Newbie=0, Round2=0):
 
 
     if Line == "yy":
-        if Newbie.Tag + "No" in Player.Traits:
-            $ Player.Traits.remove(Newbie.Tag + "No")
-        $ Player.DrainWord(Newbie.Tag + "No",0,0,1)
-        $ Player.Traits.append(Newbie.Tag + "Yes")
+        if Newbie.tag + "No" in Player.traits:
+            $ Player.traits.remove(Newbie.tag + "No")
+        $ Player.drain_word(Newbie.tag + "No",0,0,1)
+        $ Player.traits.append(Newbie.tag + "Yes")
         $ Count = len(Player.Harem)
         while Count:
             $ Count -= 1
-            $ Player.Harem[Count].DrainWord("saw with "+Newbie.Tag,0,0,1)
+            $ Player.Harem[Count].drain_word("saw with "+Newbie.tag,0,0,1)
         "You should give [Newbie.name] a call."
     else:
-        $ Player.Traits.append(Newbie.Tag + "No")
+        $ Player.traits.append(Newbie.tag + "No")
 
     $ Party = []
     $ Count = 0
@@ -3456,10 +3456,10 @@ label Harem_Initiation(BO=[], BO2=[]):
     while BO:
         $ BO2 = Player.Harem[:]
         while BO2:
-            if BO[0] != BO2[0] and "poly " + BO2[0].Tag not in BO[0].Traits:
-                $ BO[0].Traits.append("poly " + BO2[0].Tag)
-            if BO[0] != BO2[0] and "saw with " + BO2[0].Tag in BO[0].Traits:
-                $ BO[0].DrainWord("saw with " + BO2[0].Tag,0,0,1)
+            if BO[0] != BO2[0] and "poly " + BO2[0].tag not in BO[0].traits:
+                $ BO[0].traits.append("poly " + BO2[0].tag)
+            if BO[0] != BO2[0] and "saw with " + BO2[0].tag in BO[0].traits:
+                $ BO[0].drain_word("saw with " + BO2[0].tag,0,0,1)
             $ BO2.remove(BO2[0])
         $ BO.remove(BO[0])
     return
@@ -3715,7 +3715,7 @@ label Frisky_Study(Prime_Bonus=0, Second=0, Line=0, Second_Bonus=0):
         call Group_Strip_Study
     elif Line and len(Party) < 2:
 
-        call expression Party[0].Tag + "_SexAct" pass (Line)
+        call expression Party[0].tag + "_SexAct" pass (Line)
     elif Line:
 
         if Line == "snuggle":
@@ -3809,7 +3809,7 @@ label Frisky_Study(Prime_Bonus=0, Second=0, Line=0, Second_Bonus=0):
                         $ Party[0].change_face("normal")
                         return
 
-            call expression Party[0].Tag + "_SexAct" pass (Line)
+            call expression Party[0].tag + "_SexAct" pass (Line)
         if len(Party) >= 2:
             $ Party[0].GLG(Party[1],900,10,1)
             $ Party[1].GLG(Party[0],900,10,1)
@@ -3818,9 +3818,9 @@ label Frisky_Study(Prime_Bonus=0, Second=0, Line=0, Second_Bonus=0):
 
         return
     if Party:
-        $ Party[0].AddWord(1,0,0,0,"frisky")
+        $ Party[0].add_word(1,0,0,0,"frisky")
     if len(Party) >= 2:
-        $ Party[1].AddWord(1,0,0,0,"frisky")
+        $ Party[1].add_word(1,0,0,0,"frisky")
 
     "Well that was certainly a productive use of your study time. . ."
     return
@@ -4105,19 +4105,19 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
             ch_x "I've had enough of you, begone."
 
 
-        "Just this. . . Plan Omega, [RogueX.name]." if Girl == RogueX and Player.Lvl >= 5:
+        "Just this. . . Plan Omega, [RogueX.name]." if Girl == RogueX and Player.level >= 5:
             $ Line = "Omega"
-        "Just this. . . Plan Kappa, [KittyX.name]!" if Girl == KittyX and Player.Lvl >= 5:
+        "Just this. . . Plan Kappa, [KittyX.name]!" if Girl == KittyX and Player.level >= 5:
             $ Line = "Kappa"
-        "Just this. . . Plan Psi, [EmmaX.name]!" if Girl == EmmaX and Player.Lvl >= 5:
+        "Just this. . . Plan Psi, [EmmaX.name]!" if Girl == EmmaX and Player.level >= 5:
             $ Line = "Psi"
-        "Just this. . . Plan Chi, [LauraX.name]!" if Girl == LauraX and Player.Lvl >= 5:
+        "Just this. . . Plan Chi, [LauraX.name]!" if Girl == LauraX and Player.level >= 5:
             $ Line = "Chi"
-        "Just this. . . Plan Alpha, [JeanX.name]!" if Girl == JeanX and Player.Lvl >= 5:
+        "Just this. . . Plan Alpha, [JeanX.name]!" if Girl == JeanX and Player.level >= 5:
             $ Line = "Alpha"
-        "Just this. . . Plan Rho, [StormX.name]!" if Girl == StormX and Player.Lvl >= 5:
+        "Just this. . . Plan Rho, [StormX.name]!" if Girl == StormX and Player.level >= 5:
             $ Line = "Rho"
-        "Just this. . . Plan Zeta, [JubesX.name]!" if Girl == JubesX and Player.Lvl >= 5:
+        "Just this. . . Plan Zeta, [JubesX.name]!" if Girl == JubesX and Player.level >= 5:
             $ Line = "Zeta"
         "You can suck it, old man.":
 
@@ -4221,12 +4221,12 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
                 $ Girl.change_face("bemused")
 
         elif Line == "Kappa":
-            if "Xavier's photo" in Player.Inventory and approval_check(KittyX, 1500, TabM=1, Loc="No"):
+            if "Xavier's photo" in Player.inventory and approval_check(KittyX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (KittyX)
                 return
             elif approval_check(KittyX, 1000, TabM=1, Loc="No"):
                 $ Girl.change_face("perplexed",Brows = "sad")
-                if "Xavier's photo" in Player.Inventory:
+                if "Xavier's photo" in Player.inventory:
                     ch_k "You know. . . I really don't think that's a good idea. . ."
                 elif "kappa" in Player.history:
                     ch_k "Maybe if we came back later we could find something. . ."
@@ -4272,7 +4272,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
                 $ Girl.change_face("bemused")
 
         elif Line == "Chi":
-            if LauraX.Lvl >= 2 and approval_check(LauraX, 1500, TabM=1, Loc="No") and approval_check(LauraX, 750, "I"):
+            if LauraX.level >= 2 and approval_check(LauraX, 1500, TabM=1, Loc="No") and approval_check(LauraX, 750, "I"):
                 call Xavier_Plan (LauraX)
                 return
             elif approval_check(LauraX, 1000, TabM=1, Loc="No"):
@@ -4319,12 +4319,12 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
                 $ Girl.change_face("bemused")
 
         elif Line == "Rho":
-            if "Xavier's files" in Player.Inventory and approval_check(StormX, 1500, TabM=1, Loc="No"):
+            if "Xavier's files" in Player.inventory and approval_check(StormX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (StormX)
                 return
             elif approval_check(StormX, 1000, TabM=1, Loc="No"):
                 $ Girl.change_face("perplexed",Brows = "sad")
-                if "Xavier's files" in Player.Inventory:
+                if "Xavier's files" in Player.inventory:
                     ch_s "I really doubt that we should attempt that. . ."
                 elif "rho" in Player.history:
                     ch_s "Perhaps if we had some leverage on the situation. . ."
@@ -4416,9 +4416,9 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
     $ Girl.event_counter["caught"] += 1
     if Partner in all_Girls:
         $ Partner.event_counter["caught"] += 1
-    $ Girl.AddWord(0,"caught","caught")
+    $ Girl.add_word(0,"caught","caught")
 
-    if Girl == KittyX and KittyX not in Rules and "Xavier's photo" not in Player.Inventory:
+    if Girl == KittyX and KittyX not in Rules and "Xavier's photo" not in Player.inventory:
         "It would probably be a good idea to find some way to get Xavier to leave you alone."
         if KittyX.event_counter["caught"] > 1:
             "Maybe I should try searching the office when he's not around."
@@ -4426,7 +4426,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
             "I bet [KittyX.name] could help me get in."
         if KittyX.event_counter["caught"] > 3:
             "I bet there's something in that lefthand drawer. . ."
-    elif Girl == JeanX and "nowhammy" not in JeanX.Traits and JeanX.event_counter["caught"] > 1:
+    elif Girl == JeanX and "nowhammy" not in JeanX.traits and JeanX.event_counter["caught"] > 1:
         ch_x "Oh, and Jean, dear, I'd like a word?"
         $ Girl.change_face("bemused")
         ch_j "What is it?"
@@ -4456,7 +4456,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
         call XavierFace ("psychic")
         ch_x "[Player.name]. . . this may take a while. . ."
         ch_x "You may as well leave. . ."
-        $ JeanX.Traits.append("nowhammy")
+        $ JeanX.traits.append("nowhammy")
         $ Girl.change_face("normal")
 
     if EmmaX.location == bg_current and EmmaX not in Rules:
@@ -4474,7 +4474,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
             $ StormX.change_stat("love", 90, -5)
             $ Girl.change_face("angry",Eyes="closed")
             ch_s "Again? . ."
-        if StormX not in Rules and "Xavier's files" not in Player.Inventory:
+        if StormX not in Rules and "Xavier's files" not in Player.inventory:
             "It would probably be a good idea to find some way to get Xavier to leave you alone."
             if StormX.event_counter["caught"] > 1:
                 "Maybe I should try searching the office when he's not around."
@@ -4510,19 +4510,19 @@ label Xavier_Plan(GirlX=0):
     "Xavier realizes with a shock that with your powers, his telepathy is useless."
 
     if Partner:
-        if Partner == RogueX and "Omega" not in Player.Traits:
+        if Partner == RogueX and "Omega" not in Player.traits:
             $ Line = "first"
-        elif Partner == KittyX and "Kappa" not in Player.Traits:
+        elif Partner == KittyX and "Kappa" not in Player.traits:
             $ Line = "first"
-        elif Partner == EmmaX and "Psi" not in Player.Traits:
+        elif Partner == EmmaX and "Psi" not in Player.traits:
             $ Line = "first"
-        elif Partner == LauraX and "Chi" not in Player.Traits:
+        elif Partner == LauraX and "Chi" not in Player.traits:
             $ Line = "first"
-        elif Partner == JeanX and "Alpha" not in Player.Traits:
+        elif Partner == JeanX and "Alpha" not in Player.traits:
             $ Line = "first"
-        elif Partner == StormX and "Rho" not in Player.Traits:
+        elif Partner == StormX and "Rho" not in Player.traits:
             $ Line = "first"
-        elif Partner == JubesX and "Zeta" not in Player.Traits:
+        elif Partner == JubesX and "Zeta" not in Player.traits:
             $ Line = "first"
 
         if Line == "first":
@@ -4550,7 +4550,7 @@ label Xavier_Plan(GirlX=0):
         "[RogueX.name] moves in and also grabs his head, duplicating his powers as he watches helplessly."
         "Now that she posesses his full power, while his are negated, he has no defenses."
         call XavierFace ("hypno")
-        if "Omega" in Player.Traits:
+        if "Omega" in Player.traits:
             ch_x "Oh, not again."
             ch_x "What is it you want this time?"
             $ RogueX.change_stat("obedience", 80, 3)
@@ -4565,7 +4565,7 @@ label Xavier_Plan(GirlX=0):
         show Kitty_Sprite at sprite_location(stage_left+100,150) with ease
         $ KittyX.sprite_location = stage_center
         "[KittyX.name] moves in sits on his lap, pinning his arms to the chair."
-        if "Kappa" in Player.Traits:
+        if "Kappa" in Player.traits:
             ch_x "Oh, not again."
             ch_x "What is it you want this time?"
             $ KittyX.change_stat("obedience", 80, 3)
@@ -4592,7 +4592,7 @@ label Xavier_Plan(GirlX=0):
             show Jean_Sprite zorder 24 at sprite_location(stage_left+100,85) with ease
         "[GirlX.name] moves behind Xavier and activates her own telepathy."
         call XavierFace ("angry")
-        if (GirlX == EmmaX and "Psi" in Player.Traits) or (GirlX == JeanX and "Alpha" in Player.Traits):
+        if (GirlX == EmmaX and "Psi" in Player.traits) or (GirlX == JeanX and "Alpha" in Player.traits):
             ch_x "Oh, not again. . ."
             $ GirlX.change_stat("obedience", 80, 3)
             $ GirlX.change_stat("inhibition", 80, 1)
@@ -4604,7 +4604,7 @@ label Xavier_Plan(GirlX=0):
         GirlX.voice "Well, [GirlX.player_petname], what should we ask for?"
     elif GirlX == LauraX:
         $ LauraX.ArmPose = 2
-        if "Chi" in Player.Traits:
+        if "Chi" in Player.traits:
             ch_x "Oh, not again."
             $ LauraX.Claws = 1
             ch_x "What is it you want this time?"
@@ -4632,7 +4632,7 @@ label Xavier_Plan(GirlX=0):
         show Storm_Sprite at sprite_location(stage_left+100,150) with ease
         $ StormX.sprite_location = stage_center
         "[StormX.name] moves in sits on his lap, pinning his arms to the chair."
-        if "Rho" in Player.Traits:
+        if "Rho" in Player.traits:
             ch_x "Oh, not this again."
             ch_x "What is it you want this time?"
             $ StormX.change_stat("obedience", 80, 3)
@@ -4657,7 +4657,7 @@ label Xavier_Plan(GirlX=0):
         $ JubesX.sprite_location = stage_center
         "[JubesX.name] moves in and sits on his lap, pinning his arms to the chair."
         "She turns to look at him."
-        if "Zeta" in Player.Traits:
+        if "Zeta" in Player.traits:
             ch_x "Oh, not again."
             ch_x "What is it you want this time?"
             $ JubesX.change_stat("obedience", 80, 3)
@@ -4686,10 +4686,10 @@ label Xavier_Plan(GirlX=0):
                 ch_x "If you. . . want me to, I suppose. . ."
                 $ Rules.remove(GirlX)
 
-            "You know, [JeanX.name] should be able to \"whammy\" people again." if JeanX in all_Girls and "nowhammy" in JeanX.Traits:
+            "You know, [JeanX.name] should be able to \"whammy\" people again." if JeanX in all_Girls and "nowhammy" in JeanX.traits:
                 ch_x "I could remove her mind-wiping ban. . ."
-                $ JeanX.Traits.remove("nowhammy")
-                $ JeanX.Traits.append("whammy")
+                $ JeanX.traits.remove("nowhammy")
+                $ JeanX.traits.append("whammy")
                 if JeanX.location == bg_current:
                     $ JeanX.change_stat("obedience", 50, 5)
                     $ JeanX.change_stat("love", 50, 5)
@@ -4697,10 +4697,10 @@ label Xavier_Plan(GirlX=0):
                     $ JeanX.change_stat("love", 90, 5)
                     $ GirlX.change_face("sly",1)
                     ch_j "Nice. . ."
-            "You know, I did like it when [JeanX.name] couldn't use her \"whammy.\"" if JeanX in all_Girls and "whammy" in JeanX.Traits:
+            "You know, I did like it when [JeanX.name] couldn't use her \"whammy.\"" if JeanX in all_Girls and "whammy" in JeanX.traits:
                 ch_x "I could reinstate her mind-wiping ban. . ."
-                $ JeanX.Traits.append("nowhammy")
-                $ JeanX.Traits.remove("whammy")
+                $ JeanX.traits.append("nowhammy")
+                $ JeanX.traits.remove("whammy")
                 if JeanX.location == bg_current:
                     $ JeanX.change_stat("obedience", 50, 5)
                     $ JeanX.change_stat("obedience", 80, 5)
@@ -4710,32 +4710,32 @@ label Xavier_Plan(GirlX=0):
                     ch_j "Hey!"
                     $ GirlX.change_face("angry",1)
 
-            "Raise my stipend." if Player.Income < 30:
-                if GirlX == RogueX and "Omega" not in Player.Traits:
+            "Raise my stipend." if Player.income < 30:
+                if GirlX == RogueX and "Omega" not in Player.traits:
                     ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.Income += 2
-                elif GirlX == KittyX and "Kappa" not in Player.Traits:
+                    $ Player.income += 2
+                elif GirlX == KittyX and "Kappa" not in Player.traits:
                     ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.Income += 2
-                elif GirlX == EmmaX and "Psi" not in Player.Traits:
+                    $ Player.income += 2
+                elif GirlX == EmmaX and "Psi" not in Player.traits:
                     ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.Income += 2
-                elif GirlX == LauraX and "Chi" not in Player.Traits:
+                    $ Player.income += 2
+                elif GirlX == LauraX and "Chi" not in Player.traits:
                     ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.Income += 2
-                elif GirlX == JeanX and "Alpha" not in Player.Traits:
+                    $ Player.income += 2
+                elif GirlX == JeanX and "Alpha" not in Player.traits:
                     ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.Income += 2
-                elif GirlX == StormX and "Rho" not in Player.Traits:
+                    $ Player.income += 2
+                elif GirlX == StormX and "Rho" not in Player.traits:
                     ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.Income += 2
-                elif GirlX == JubesX and "Zeta" not in Player.Traits:
+                    $ Player.income += 2
+                elif GirlX == JubesX and "Zeta" not in Player.traits:
                     ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.Income += 2
+                    $ Player.income += 2
                 else:
                     ch_x "I'm afraid I can't manage any more than I have. . ."
                     $ Count += 1
-            "Raise my stipend. [[Used](locked)" if Player.Income >= 30:
+            "Raise my stipend. [[Used](locked)" if Player.income >= 30:
                 pass
             "There's this girl that's been bothering me. . .":
 
@@ -4850,7 +4850,7 @@ label Xavier_Plan(GirlX=0):
 
                                     $ Line.change_stat("love", 90, -5)
                                     $ Line.change_face("angry")
-                                    $ Line.AddWord(1,"angry","angry")
+                                    $ Line.add_word(1,"angry","angry")
                                     if Line == RogueX:
                                         ch_r "Oh, I think you'll be getting it."
                                     elif Line == KittyX:
@@ -4877,7 +4877,7 @@ label Xavier_Plan(GirlX=0):
                                     $ Line.change_face("angry")
                                     $ Line.change_stat("love", 90, -5)
                                     $ Line.change_stat("inhibition", 60, 5)
-                                    $ Line.AddWord(1,"angry","angry")
+                                    $ Line.add_word(1,"angry","angry")
                                 if Line == RogueX:
                                     ch_r "Loud and clear."
                                 elif Line == KittyX:
@@ -4955,42 +4955,42 @@ label Xavier_Plan(GirlX=0):
 
     ch_x "Very well, that should conclude our business. Please leave."
     if GirlX == RogueX:
-        if "Omega" not in Player.Traits:
+        if "Omega" not in Player.traits:
             $ GirlX.change_stat("lust", 90, 10)
             $ GirlX.change_stat("love", 70, 30)
             $ GirlX.change_stat("love", 200, 20)
-            $ Player.Traits.append("Omega")
+            $ Player.traits.append("Omega")
         ch_p "Ok, that's enough. Make Xavier forget that any of this happened, and then let's get out of here."
         $ GirlX.arms = "gloves"
         $ GirlX.ArmPose = 1
     elif GirlX == KittyX:
-        if "Kappa" not in Player.Traits:
+        if "Kappa" not in Player.traits:
             $ GirlX.change_stat("lust", 90, 10)
             $ GirlX.change_stat("inhibition", 80, 10)
             $ GirlX.change_stat("love", 70, 10)
             $ GirlX.change_stat("love", 200, 20)
-            $ Player.Traits.append("Kappa")
+            $ Player.traits.append("Kappa")
         $ GirlX.ArmPose = 0
     elif GirlX == EmmaX:
         ch_p "Ok, that's enough. Make Xavier forget that any of this happened, and then let's get out of here."
-        if "Psi" not in Player.Traits:
+        if "Psi" not in Player.traits:
             $ GirlX.change_stat("lust", 90, 10)
             $ GirlX.change_stat("inhibition", 80, 10)
             $ GirlX.change_stat("love", 70, 10)
             $ GirlX.change_stat("love", 200, 20)
-            $ Player.Traits.append("Psi")
+            $ Player.traits.append("Psi")
     elif GirlX == LauraX:
-        if "Chi" not in Player.Traits:
+        if "Chi" not in Player.traits:
             $ GirlX.change_stat("lust", 90, 10)
             $ GirlX.change_stat("inhibition", 80, 10)
             $ GirlX.change_stat("love", 70, 10)
             $ GirlX.change_stat("love", 200, 20)
-            $ Player.Traits.append("Chi")
+            $ Player.traits.append("Chi")
         $ GirlX.ArmPose = 1
         $ GirlX.Claws = 0
     elif GirlX == JeanX:
         ch_p "Ok, that's enough. Make Xavier forget that any of this happened, and then let's get out of here."
-        if "Alpha" not in Player.Traits:
+        if "Alpha" not in Player.traits:
             $ GirlX.change_stat("lust", 70, 20)
             $ GirlX.change_stat("lust", 90, 10)
             $ GirlX.change_stat("inhibition", 80, 10)
@@ -4998,21 +4998,21 @@ label Xavier_Plan(GirlX=0):
             $ GirlX.change_stat("obedience", 200, 20)
             $ GirlX.change_stat("love", 70, 10)
             $ GirlX.change_stat("love", 200, 20)
-            $ Player.Traits.append("Alpha")
+            $ Player.traits.append("Alpha")
     elif GirlX == StormX:
-        if "Rho" not in Player.Traits:
+        if "Rho" not in Player.traits:
             $ GirlX.change_stat("lust", 90, 10)
             $ GirlX.change_stat("inhibition", 80, 10)
             $ GirlX.change_stat("love", 70, 10)
             $ GirlX.change_stat("love", 200, 20)
-            $ Player.Traits.append("Rho")
+            $ Player.traits.append("Rho")
     elif GirlX == JubesX:
-        if "Zeta" not in Player.Traits:
+        if "Zeta" not in Player.traits:
             $ GirlX.change_stat("lust", 90, 10)
             $ GirlX.change_stat("inhibition", 80, 10)
             $ GirlX.change_stat("love", 70, 10)
             $ GirlX.change_stat("love", 200, 20)
-            $ Player.Traits.append("Zeta")
+            $ Player.traits.append("Zeta")
         $ GirlX.ArmPose = 0
 
     $ Player.daily_history.append("Xavier")
@@ -5104,24 +5104,24 @@ label Girl_Caught_Changing(Girl=0):
                 if not Girl.OverNum() or (Girl.OverNum()+Girl.ChestNum() <5) or (Girl.PantsNum() < 5 and Girl.HoseNum() < 10):
 
 
-                    call expression Girl.Tag + "_First_Bottomless" pass (1)
-                    call expression Girl.Tag + "_First_Topless" pass (1)
+                    call expression Girl.tag + "_First_Bottomless" pass (1)
+                    call expression Girl.tag + "_First_Topless" pass (1)
                     $ Girl.top = "towel"
                     "She grabs a towel and covers up."
             else:
 
                 $ Girl.change_face("surprised", 1,Brows = "confused")
-                if "exhibitionist" in Girl.Traits:
+                if "exhibitionist" in Girl.traits:
                     $ Girl.change_stat("lust", 200, (2*D20))
                 else:
                     $ Girl.change_stat("lust", 200, D20)
                 if D20 > 17:
-                    call expression Girl.Tag + "_First_Bottomless"
-                    call expression Girl.Tag + "_First_Topless" pass (1)
+                    call expression Girl.tag + "_First_Bottomless"
+                    call expression Girl.tag + "_First_Topless" pass (1)
                 elif D20 > 15:
-                    call expression Girl.Tag + "_First_Bottomless"
+                    call expression Girl.tag + "_First_Bottomless"
                 elif D20 > 14:
-                    call expression Girl.Tag + "_First_Topless"
+                    call expression Girl.tag + "_First_Topless"
             $ Girl.change_stat("inhibition", 70, 20)
 
 
@@ -5195,13 +5195,13 @@ label Girl_Caught_Changing(Girl=0):
             elif Girl == JubesX:
                 ch_v "You just have to ask. . ."
 
-            $ Girl.Uptop = 1
-            $ Girl.Upskirt = 1
+            $ Girl.top_pulled_up = 1
+            $ Girl.upskirt = 1
             pause 1
-            call expression Girl.Tag + "_First_Topless" pass (1)
-            call expression Girl.Tag + "_First_Bottomless" pass (1)
-            $ Girl.Uptop = 0
-            $ Girl.Upskirt = 0
+            call expression Girl.tag + "_First_Topless" pass (1)
+            call expression Girl.tag + "_First_Bottomless" pass (1)
+            $ Girl.top_pulled_up = 0
+            $ Girl.upskirt = 0
             "She flashes you real quick."
         else:
 
@@ -5342,7 +5342,7 @@ label Girl_Caught_Mastubating(Girl=0):
 
     if Girl not in all_Girls:
         return
-    $ Girl.DrainWord("gonnafap")
+    $ Girl.drain_word("gonnafap")
     call Remove_Girl ("All")
     $ Girl.location = bg_current
     "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
@@ -5400,8 +5400,8 @@ label Girl_Caught_Mastubating(Girl=0):
     elif Line == "enter":
         call shift_focus (Girl)
         show blackscreen onlayer black
-        $ Girl.Upskirt = 1
-        $ Girl.underwearDown = 1
+        $ Girl.upskirt = 1
+        $ Girl.underwear_pulled_down = 1
         $ Girl.location = bg_current
 
         call set_the_scene
@@ -5413,7 +5413,7 @@ label Girl_Caught_Mastubating(Girl=0):
         hide blackscreen onlayer black
         $ Girl.daily_history.append("unseen")
         $ Girl.recent_history.append("unseen")
-        call expression Girl.Tag + "_SexAct" pass ("masturbate")
+        call expression Girl.tag + "_SexAct" pass ("masturbate")
         if "angry" in Girl.recent_history:
             return
 
@@ -5653,13 +5653,13 @@ label Call_For_Les(Girl=0, Girl2=0, BO=[]):
     $ Girl2.Taboo = 0
     $ Line = 0
 
-    $ Girl.DrainWord("les",1,0)
-    $ Girl2.DrainWord("les",1,0)
+    $ Girl.drain_word("les",1,0)
+    $ Girl2.drain_word("les",1,0)
 
-    $ Girl.AddWord(0,"lesbian","lesbian")
-    $ Girl2.AddWord(0,"lesbian","lesbian")
-    $ Girl.AddWord(1,0,0,0,"les "+Girl2.Tag)
-    $ Girl2.AddWord(1,0,0,0,"les "+Girl.Tag)
+    $ Girl.add_word(0,"lesbian","lesbian")
+    $ Girl2.add_word(0,"lesbian","lesbian")
+    $ Girl.add_word(1,0,0,0,"les "+Girl2.tag)
+    $ Girl2.add_word(1,0,0,0,"les "+Girl.tag)
 
     call set_the_scene (0, 1, 0, 0)
     "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
@@ -5729,7 +5729,7 @@ label Call_For_Les(Girl=0, Girl2=0, BO=[]):
     $ girl_offhand_action = "fondle_pussy"
     $ second_girl_primary_action = "fondle_pussy"
     $ Partner = Girl2
-    call expression Girl.Tag + "_SexAct" pass ("lesbian")
+    call expression Girl.tag + "_SexAct" pass ("lesbian")
     jump Misplaced
     return
 
@@ -5766,13 +5766,13 @@ label Girls_Caught_Lesing(Girl=0, Girl2=0, BO=[]):
     if not Girl or not Girl2:
         return 1
 
-    $ Girl.DrainWord("les",1,0)
-    $ Girl2.DrainWord("les",1,0)
+    $ Girl.drain_word("les",1,0)
+    $ Girl2.drain_word("les",1,0)
 
-    $ Girl.AddWord(0,"lesbian","lesbian")
-    $ Girl2.AddWord(0,"lesbian","lesbian")
-    $ Girl.AddWord(1,0,0,0,"les "+Girl2.Tag)
-    $ Girl2.AddWord(1,0,0,0,"les "+Girl.Tag)
+    $ Girl.add_word(0,"lesbian","lesbian")
+    $ Girl2.add_word(0,"lesbian","lesbian")
+    $ Girl.add_word(1,0,0,0,"les "+Girl2.tag)
+    $ Girl2.add_word(1,0,0,0,"les "+Girl.tag)
 
     "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
     $ Line = 0
@@ -5823,11 +5823,11 @@ label Girls_Caught_Lesing(Girl=0, Girl2=0, BO=[]):
                 $ primary_action = "lesbian"
                 $ girl_offhand_action = "fondle_pussy"
                 $ second_girl_primary_action = "fondle_pussy"
-                $ Girl.AddWord(1,"unseen","unseen")
-                $ Girl2.AddWord(1,"unseen","unseen")
+                $ Girl.add_word(1,"unseen","unseen")
+                $ Girl2.add_word(1,"unseen","unseen")
                 $ Partner = Girl2
                 $ Line = 0
-                call expression Girl.Tag + "_SexAct" pass ("lesbian")
+                call expression Girl.tag + "_SexAct" pass ("lesbian")
             "Leave quietly":
                 "You leave the girls to their business and slip out."
                 $ Girl.Thirst -= 30
@@ -5849,7 +5849,7 @@ label Girl_Caught_Shower(Girl=0):
     call shift_focus (Girl)
 
     $ Options = []
-    $ Girl.AddWord(1,"showered","showered",0,0)
+    $ Girl.add_word(1,"showered","showered",0,0)
     call Remove_Girl ("All")
 
     $ Girl.change_outfit("nude")
@@ -5872,7 +5872,7 @@ label Girl_Caught_Shower(Girl=0):
         "Come back later":
             call Remove_Girl (Girl)
             $ Girl.change_outfit(6)
-            $ Girl.DrainWord("gonnafap",0,1)
+            $ Girl.drain_word("gonnafap",0,1)
             $ Girl.lust = 25
             $ Girl.Thirst -= int(Girl.Thirst/2) if Girl.Thirst >= 50 else int(Girl.Thirst/4)
             $ bg_current = "bg_campus"
@@ -5927,15 +5927,15 @@ label Girl_Caught_Shower(Girl=0):
 
         if "gonnafap" in Girl.daily_history:
 
-            $ Girl.DrainWord("gonnafap",0,1)
+            $ Girl.drain_word("gonnafap",0,1)
             $ Girl.change_face("sexy",Eyes="closed")
-            $ Girl.AddWord(1,"unseen","unseen",0,0)
+            $ Girl.add_word(1,"unseen","unseen",0,0)
             call set_the_scene (Dress=0)
             $ Count = 0
             $ primary_action = "masturbation"
             $ girl_offhand_action = "fondle_pussy"
             "You see [Girl.name] under the shower, feeling herself up."
-            call expression Girl.Tag + "_SexAct" pass ("masturbate")
+            call expression Girl.tag + "_SexAct" pass ("masturbate")
             $ bg_current = "bg_showerroom"
             jump Misplaced
 
@@ -5944,8 +5944,8 @@ label Girl_Caught_Shower(Girl=0):
             call set_the_scene (Dress=0)
             $ Girl.change_face("surprised", 1)
             "As you enter the showers, you see [Girl.name] washing up."
-            call expression Girl.Tag + "_First_Bottomless" pass (1)
-            call expression Girl.Tag + "_First_Topless" pass (1)
+            call expression Girl.tag + "_First_Bottomless" pass (1)
+            call expression Girl.tag + "_First_Topless" pass (1)
             if not approval_check(Girl, 1200) or not Girl.SeenPussy or not Girl.SeenChest:
                 $ Girl.brows="angry"
                 $ Girl.top = "towel"
@@ -5953,7 +5953,7 @@ label Girl_Caught_Shower(Girl=0):
                 $ Girl.change_face("angry", 1)
                 $ Girl.change_stat("love", 80, -5)
             else:
-                if "exhibitionist" in Girl.Traits:
+                if "exhibitionist" in Girl.traits:
                     $ Girl.change_stat("lust", 90, (2*D20))
                 else:
                     $ Girl.change_stat("lust", 80, D20)
@@ -6107,8 +6107,8 @@ label Girl_Caught_Shower(Girl=0):
                 $ Girl.top = "towel"
                 "She flashes you real quick."
                 $ Girl.top = "towel"
-                call expression Girl.Tag + "_First_Bottomless" pass (1)
-                call expression Girl.Tag + "_First_Topless" pass (1)
+                call expression Girl.tag + "_First_Bottomless" pass (1)
+                call expression Girl.tag + "_First_Topless" pass (1)
 
                 if Girl == LauraX:
                     ch_l "Heh!"
@@ -6224,12 +6224,12 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
     if "no_tan" in Girl.recent_history:
         $ Girl.change_face("angry")
         Girl.voice "I just told you \"no.\""
-        $ Girl.AddWord(1,"angry","angry")
+        $ Girl.add_word(1,"angry","angry")
         return
     elif "no_tan" in Girl.daily_history:
         $ Girl.change_face("angry")
         Girl.voice "Not today."
-        $ Girl.AddWord(1,"angry","angry")
+        $ Girl.add_word(1,"angry","angry")
         return
 
     if Girl == EmmaX:
@@ -6264,7 +6264,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             ch_s "I cannot get much more naked. . ."
         elif Girl == JubesX:
             ch_v "I'm already pretty naked here. . ."
-        $ Girl.AddWord(1,"tan","tan")
+        $ Girl.add_word(1,"tan","tan")
         return
 
     $ Line = 0
@@ -6336,7 +6336,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             $ Mod -= 100
 
 
-        if "exhibitionist" in Girl.Traits:
+        if "exhibitionist" in Girl.traits:
 
             $ Line = "sure"
         elif approval_check(Girl, 700+Mod, "I"):
@@ -6447,7 +6447,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         elif Girl == JubesX:
                             ch_v "Nope."
 
-                        $ Girl.AddWord(1,"no_tan","no_tan")
+                        $ Girl.add_word(1,"no_tan","no_tan")
                         return
                 "Hot.":
                     if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
@@ -6520,14 +6520,14 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             if Line == "sure":
 
                 $ Girl.top = 0
-                call expression Girl.Tag + "_First_Topless"
+                call expression Girl.tag + "_First_Topless"
                 if Type == "no_panties":
                     $ Girl.legs = 0
                     $ Girl.hose = 0
-                    call expression Girl.Tag + "_First_Bottomless"
-                $ Girl.AddWord(1,"tan","tan")
+                    call expression Girl.tag + "_First_Bottomless"
+                $ Girl.add_word(1,"tan","tan")
             else:
-                $ Girl.AddWord(1,"no_tan","no_tan")
+                $ Girl.add_word(1,"no_tan","no_tan")
 
             $ Line = 0
 
@@ -6562,16 +6562,16 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 $ Girl.top = 0
             if Type == "bra" or Type == "both":
                 $ Girl.bra = 0
-            call expression Girl.Tag + "_First_Topless"
+            call expression Girl.tag + "_First_Topless"
 
             if Type == "legs" or Type == "both":
                 $ Girl.legs = 0
                 $ Girl.hose = 0
             if Type == "panties" or Type == "both":
                 $ Girl.underwear = 0
-            call expression Girl.Tag + "_First_Bottomless"
+            call expression Girl.tag + "_First_Bottomless"
 
-            $ Girl.AddWord(1,"tan","tan")
+            $ Girl.add_word(1,"tan","tan")
 
         elif Line == "sorry" and (Type == "over" or Type == "legs" or Type == "jacket"):
 
@@ -6603,7 +6603,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             if Type == "legs":
                 $ Girl.legs = 0
                 $ Girl.hose = 0
-            $ Girl.AddWord(1,"tan","tan")
+            $ Girl.add_word(1,"tan","tan")
 
         elif Line == "sorry":
 
@@ -6627,7 +6627,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 ch_s "I am sorry to disappoint you."
             elif Girl == JubesX:
                 ch_v "Sorry. . ."
-            $ Girl.AddWord(1,"no_tan","no_tan")
+            $ Girl.add_word(1,"no_tan","no_tan")
 
         elif Line == "no":
 
@@ -6650,7 +6650,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             elif Girl == JubesX:
                 ch_v "Sure. . ."
 
-            $ Girl.AddWord(1,"no_tan","no_tan")
+            $ Girl.add_word(1,"no_tan","no_tan")
             return
         if not Girl.bra and not Girl.top and not Girl.underwear and not Girl.legs and Girl.HoseNum() < 10:
             $ Girl.change_outfit("nude")
@@ -6700,12 +6700,12 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
     elif "no_dip" in Girl.recent_history:
         $ Girl.change_face("angry")
         Girl.voice "I just told you \"no.\""
-        $ Girl.AddWord(1,"angry","angry")
+        $ Girl.add_word(1,"angry","angry")
         return
     elif "no_dip" in Girl.daily_history:
         $ Girl.change_face("angry")
         Girl.voice "Not today."
-        $ Girl.AddWord(1,"angry","angry")
+        $ Girl.add_word(1,"angry","angry")
         return
     elif "dip" in Girl.recent_history:
         $ Girl.change_face("confused")
@@ -6745,13 +6745,13 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
         elif Girl == JubesX:
             ch_v "Sure!"
 
-        $ Girl.AddWord(1,"dip","dip")
+        $ Girl.add_word(1,"dip","dip")
     else:
 
         if Girl.SeenPussy and Girl.SeenChest:
             $ Mod += 100
 
-        if "exhibitionist" in Girl.Traits:
+        if "exhibitionist" in Girl.traits:
 
             $ Line = "sure"
         elif approval_check(Girl, 700-Mod, "I"):
@@ -6793,14 +6793,14 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
 
             $ Girl.top = 0
             $ Girl.bra = 0
-            call expression Girl.Tag + "_First_Topless"
+            call expression Girl.tag + "_First_Topless"
 
             $ Girl.legs = 0
             $ Girl.hose = 0
             $ Girl.underwear = 0
-            call expression Girl.Tag + "_First_Bottomless"
+            call expression Girl.tag + "_First_Bottomless"
             $ Girl.change_outfit("nude")
-            $ Girl.AddWord(1,"dip","dip")
+            $ Girl.add_word(1,"dip","dip")
 
         elif Line == "sorry":
 
@@ -6853,7 +6853,7 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
                         "She goes and changes into her suit. . ."
                         $ Girl.change_outfit("swimwear")
                         hide blackscreen onlayer black
-                        $ Girl.AddWord(1,"no_dip","no_dip")
+                        $ Girl.add_word(1,"no_dip","no_dip")
                         $ Count = 1
                     else:
                         if not Girl.change_outfit("swimwear"):
@@ -6872,7 +6872,7 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
                                 else:
                                     $ Girl.change_face("sly",1)
                                     Girl.voice "That's not going to work either."
-                                    $ Girl.AddWord(1,"no_dip","no_dip")
+                                    $ Girl.add_word(1,"no_dip","no_dip")
                                     return
                                 $ Girl.change_face("smile",1)
                                 if Girl == RogueX:
@@ -6891,7 +6891,7 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
                                     ch_v "I guess so. . ."
                             "Ok then, never mind.":
                                 Girl.voice "Thanks."
-                                $ Girl.AddWord(1,"no_dip","no_dip")
+                                $ Girl.add_word(1,"no_dip","no_dip")
                                 return
                         $ Girl.top = 0
                         "She starts to strip down."
@@ -6918,7 +6918,7 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
                         ch_s "Thank you, [Girl.player_petname]."
                     elif Girl == JubesX:
                         ch_v "Ok."
-                    $ Girl.AddWord(1,"no_dip","no_dip")
+                    $ Girl.add_word(1,"no_dip","no_dip")
                     return
 
         elif Line == "no":
@@ -6944,7 +6944,7 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
             elif Girl == JubesX:
                 ch_v "Sorry. . ."
 
-            $ Girl.AddWord(1,"no_dip","no_dip")
+            $ Girl.add_word(1,"no_dip","no_dip")
             return
 
     call ShowPool ([Girl])
@@ -6977,7 +6977,7 @@ label Pool_Topless(Girl=focused_Girl, BO=[]):
 
         $ D20 = renpy.random.randint(1, 14)
         return
-    $ Girl.Uptop = 1
+    $ Girl.top_pulled_up = 1
     "[Girl.name] dives into the pool"
     menu:
         "It appears she's had a wardrobe malfunction."
@@ -7010,7 +7010,7 @@ label Pool_Topless(Girl=focused_Girl, BO=[]):
         $ Girl.change_stat("inhibition", 90, 2)
         $ Girl.change_stat("lust", 50, 5)
         "She smiles and tosses her top over her head."
-        call expression Girl.Tag + "_First_Topless"
+        call expression Girl.tag + "_First_Topless"
     elif approval_check(Girl, 500-Count,"I") or approval_check(Girl, 1200-Count):
         $ Girl.change_face("sly",1)
         $ Girl.change_stat("obedience", 60, 2)
@@ -7018,7 +7018,7 @@ label Pool_Topless(Girl=focused_Girl, BO=[]):
         $ Girl.change_stat("inhibition", 80, 2)
         $ Girl.change_stat("lust", 50, 3)
         "She smiles, and leaves the top how it is."
-        call expression Girl.Tag + "_First_Topless"
+        call expression Girl.tag + "_First_Topless"
     else:
         if approval_check(Girl, 800-Count) or (Girl == StormX):
 
@@ -7031,8 +7031,8 @@ label Pool_Topless(Girl=focused_Girl, BO=[]):
             $ Girl.change_stat("love", 70, -2)
             $ Girl.change_stat("inhibition", 50, 1)
             $ Girl.change_face("angry",2)
-        call expression Girl.Tag + "_First_Topless" pass (1)
-        $ Girl.Uptop = 0
+        call expression Girl.tag + "_First_Topless" pass (1)
+        $ Girl.top_pulled_up = 0
         "She tugs her top back into place."
         if Count <= 0:
             $ Girl.change_stat("love", 70, -5)
@@ -7051,7 +7051,7 @@ label Breakup(Girl=0, Other=0, Anger=0, BO=[]):
 
 
 
-    $ Girl.AddWord(1,"breakup talk","breakup talk",0,0)
+    $ Girl.add_word(1,"breakup talk","breakup talk",0,0)
 
     if Girl.Break[1] > 3:
         $ Girl.change_face("angry")
@@ -7283,7 +7283,7 @@ label Breakup(Girl=0, Other=0, Anger=0, BO=[]):
             Girl.voice "Date us both at once? What does she think about that?"
         menu Breakup_Threeway_Offer:
             extend ""
-            "She said it would be ok with her." if "poly "+ Girl.Tag in Other.Traits or Girl.Tag+"Yes" in Player.Traits:
+            "She said it would be ok with her." if "poly "+ Girl.tag in Other.traits or Girl.tag+"Yes" in Player.traits:
 
                 if approval_check(Girl, 1800, Bonus = counter):
                     $ Girl.change_face("smile", 1)
@@ -7321,7 +7321,7 @@ label Breakup(Girl=0, Other=0, Anger=0, BO=[]):
 
                         Girl.voice "If she's in, I am."
 
-                    $ Girl.AddWord(1,0,0,"poly "+Other.Tag,0)
+                    $ Girl.add_word(1,0,0,"poly "+Other.tag,0)
                 else:
                     $ Anger += 2
                     $ Girl.change_stat("love", 50, -10, 1)
@@ -7338,7 +7338,7 @@ label Breakup(Girl=0, Other=0, Anger=0, BO=[]):
             "I have no idea.":
 
 
-                $ Line = "ask " + Other.Tag
+                $ Line = "ask " + Other.tag
             "She's not into it.":
 
                 if Girl.GirlLikeCheck(Other) >= 700:
@@ -7349,14 +7349,14 @@ label Breakup(Girl=0, Other=0, Anger=0, BO=[]):
             "Well, even if she doesn't agree. . .":
 
 
-                $ Line = "ask " + Other.Tag
+                $ Line = "ask " + Other.tag
                 if Girl.GirlLikeCheck(Other) >= 700:
                     $ Girl.change_face("angry")
                     $ Girl.change_stat("love", 200, -5)
                 elif Girl.GirlLikeCheck(Other) <= 400:
                     $ Girl.change_stat("love", 90, 5)
 
-        if Line == "ask " + Other.Tag and Girl.GirlLikeCheck(Other) >= 700:
+        if Line == "ask " + Other.tag and Girl.GirlLikeCheck(Other) >= 700:
 
             Girl.voice "You want me to ask her for you?"
             menu:
@@ -7367,8 +7367,8 @@ label Breakup(Girl=0, Other=0, Anger=0, BO=[]):
                     $ Girl.change_stat("inhibition", 80, 5)
                     $ Girl.change_face("sexy")
                     Girl.voice "I guess I could."
-                    $ Girl.AddWord(1,0,0,"ask "+Other.Tag,0)
-                    $ Girl.AddWord(1,0,0,"poly "+Other.Tag,0)
+                    $ Girl.add_word(1,0,0,"ask "+Other.tag,0)
+                    $ Girl.add_word(1,0,0,"poly "+Other.tag,0)
                 "No, let's just keep it under cover.":
                     $ Girl.change_stat("love", 50, -5, 1)
                     $ Girl.change_stat("love", 80, -5, 1)
@@ -7378,10 +7378,10 @@ label Breakup(Girl=0, Other=0, Anger=0, BO=[]):
 
         if Line == "breakup":
             pass
-        elif Line != "bargaining" and "poly "+ Other.Tag not in Girl.Traits:
+        elif Line != "bargaining" and "poly "+ Other.tag not in Girl.traits:
 
 
-            if "ask "+ Other.Tag not in Girl.Traits and not approval_check(Girl, 1800, Bonus = -(int((Girl.GirlLikeCheck(Other) - 600)/2))):
+            if "ask "+ Other.tag not in Girl.traits and not approval_check(Girl, 1800, Bonus = -(int((Girl.GirlLikeCheck(Other) - 600)/2))):
 
 
                 $ Girl.change_stat("love", 50, -5, 1)
@@ -7442,13 +7442,13 @@ label Breakup(Girl=0, Other=0, Anger=0, BO=[]):
                 else:
 
                     Girl.voice "If she's in, I am."
-                $ Girl.AddWord(1,0,0,"poly "+Other.Tag,0)
-                if "ask "+ Other.Tag in Girl.Traits:
+                $ Girl.add_word(1,0,0,"poly "+Other.tag,0)
+                if "ask "+ Other.tag in Girl.traits:
 
                     Girl.voice "I'll talk to [Other.name] about it."
                 else:
                     $ Girl.change_face("sad")
-                    $ Girl.AddWord(1,0,0,"downlow",0)
+                    $ Girl.add_word(1,0,0,"downlow",0)
                     if Girl == RogueX:
                         ch_r "I guess we can keep this on the downlow, for now at least."
                     elif Girl == KittyX:
@@ -7519,11 +7519,11 @@ label Breakup(Girl=0, Other=0, Anger=0, BO=[]):
                 $ Girl.change_stat("obedience", 80, 5)
                 $ Line = "breakup"
             "Well, you could do something for me. . .[[sex menu]":
-                $ Girl.AddWord(1,"bargainsex",0,0,0)
+                $ Girl.add_word(1,"bargainsex",0,0,0)
                 $ Girl.change_stat("obedience", 80, 3)
                 $ approval_bonus = 50
                 $ multi_action = 0
-                call expression Girl.Tag + "_SMenu"
+                call expression Girl.tag + "_SMenu"
                 $ multi_action = 1
                 menu:
                     "Ok, I guess we can give it another shot.":
@@ -7543,7 +7543,7 @@ label Breakup(Girl=0, Other=0, Anger=0, BO=[]):
 
             "Maybe if we brought someone else into this relationship?" if not Other and "bargainthreeway" not in Girl.recent_history:
 
-                $ Girl.AddWord(1,"bargainthreeway",0,0,0)
+                $ Girl.add_word(1,"bargainthreeway",0,0,0)
                 Girl.voice "Who?"
                 menu:
                     extend ""
@@ -7641,7 +7641,7 @@ label Breakup(Girl=0, Other=0, Anger=0, BO=[]):
                     ch_s "I will miss you."
                 elif Girl == JubesX:
                     ch_v "I'll miss you. . ."
-                $ Girl.AddWord(1,0,0,"ex",0)
+                $ Girl.add_word(1,0,0,"ex",0)
             elif Girl.obedience >= Girl.inhibition:
 
                 $ Girl.change_stat("obedience", 200, -10)
@@ -7659,7 +7659,7 @@ label Breakup(Girl=0, Other=0, Anger=0, BO=[]):
                     ch_s "I am sorry it has come to this."
                 elif Girl == JubesX:
                     ch_v "I needed this. . ."
-                $ Girl.AddWord(1,0,0,"ex",0)
+                $ Girl.add_word(1,0,0,"ex",0)
             else:
 
                 if Girl == RogueX:
@@ -7759,7 +7759,7 @@ label CheatCheck(BO=[], BO2=[]):
     $ BO = all_Girls[:]
     $ renpy.random.shuffle(BO)
     while BO:
-        if "locked" in Player.Traits and BO[0].location != bg_current:
+        if "locked" in Player.traits and BO[0].location != bg_current:
 
             pass
         else:
@@ -7770,13 +7770,13 @@ label CheatCheck(BO=[], BO2=[]):
                     return
                 elif BO[0] in Player.Harem:
 
-                    if "saw with " + BO2[0].Tag in BO[0].Traits:
+                    if "saw with " + BO2[0].tag in BO[0].traits:
 
                         if BO[0] in Player.Harem and BO2[0] in Player.Harem:
 
-                            $ BO[0].DrainWord("saw with "+BO2[0].Tag,0,0,1)
-                        elif BO[0] in Player.Harem and BO2[0].Tag + "Yes" in Player.Traits:
-                            $ BO[0].DrainWord("saw with "+BO2[0].Tag,0,0,1)
+                            $ BO[0].drain_word("saw with "+BO2[0].tag,0,0,1)
+                        elif BO[0] in Player.Harem and BO2[0].tag + "Yes" in Player.traits:
+                            $ BO[0].drain_word("saw with "+BO2[0].tag,0,0,1)
                         elif bg_current == "bg_player" or bg_current == BO[0].home:
                             call Cheated (BO[0], BO2[0])
                             $ renpy.pop_call()
@@ -7799,11 +7799,11 @@ label ShareCheck(BO=[], BO2=[]):
             $ BO2 = all_Girls[:]
             $ BO2.remove(StormX)
             while BO2:
-                if "ask " + BO2[0].Tag in BO[0].Traits:
+                if "ask " + BO2[0].tag in BO[0].traits:
 
                     if BO[0] in Player.Harem and BO2[0] in Player.Harem:
 
-                        $ BO[0].DrainWord("ask "+BO2[0].Tag,0,0,1)
+                        $ BO[0].drain_word("ask "+BO2[0].tag,0,0,1)
                     else:
                         call Share (BO[0], BO2[0])
                         $ renpy.pop_call()
@@ -7833,17 +7833,17 @@ label AddictCheck(BO=[]):
             elif "asked meet" in JubesX.daily_history and JubesX.addiction >= 60:
                 "[JubesX.name] texts you. . ."
                 JubesX.voice "I know I asked to meet you in your room earlier, but I really need a fix."
-                $ Player.AddWord(1,"asked fix",0,0,0)
-                $ JubesX.AddWord(1,"asked meet","asked meet",0,0)
+                $ Player.add_word(1,"asked fix",0,0,0)
+                $ JubesX.add_word(1,"asked meet","asked meet",0,0)
                 call ReturnToRoom
                 return
             else:
                 "[JubesX.name] texts and asks if you could get her a fix later."
-                $ JubesX.AddWord(1,"asked meet","asked meet",0,0)
+                $ JubesX.add_word(1,"asked meet","asked meet",0,0)
                 call ReturnToRoom
                 return
     while BO:
-        if "locked" in Player.Traits and BO[0].location != bg_current:
+        if "locked" in Player.traits and BO[0].location != bg_current:
 
             pass
         elif "asked fix" in Player.daily_history and "asked meet" not in BO[0].daily_history:
@@ -7864,13 +7864,13 @@ label AddictCheck(BO=[]):
                     elif "asked meet" in BO[0].daily_history and BO[0].addiction >= 80:
                         "[BO[0].name] texts you. . ."
                         BO[0].voice "I know I asked to meet you in your room earlier, but I'm serious, this is important."
-                        $ Player.AddWord(1,"asked fix",0,0,0)
-                        $ BO[0].AddWord(1,"asked meet","asked meet",0,0)
+                        $ Player.add_word(1,"asked fix",0,0,0)
+                        $ BO[0].add_word(1,"asked meet","asked meet",0,0)
                         call ReturnToRoom
                         return
                     else:
                         "[BO[0].name] texts and asks if you could meet her in your room later."
-                        $ BO[0].AddWord(1,"asked meet","asked meet",0,0)
+                        $ BO[0].add_word(1,"asked meet","asked meet",0,0)
                         call ReturnToRoom
                         return
 
@@ -7896,7 +7896,7 @@ label Share(Girl=0, Other=0):
 
 
 
-    $ Girl.DrainWord("ask "+Other.Tag,0,0,1)
+    $ Girl.drain_word("ask "+Other.tag,0,0,1)
 
     if Girl.Break[0]:
 
@@ -7924,7 +7924,7 @@ label Share(Girl=0, Other=0):
 
         if Other == JeanX or Other.GirlLikeCheck(Girl) >= 800 or approval_check(Other, 1800) or (approval_check(Other, 1500) and Other.GirlLikeCheck(Girl) >= 500):
 
-            $ Other.AddWord(1,0,0,"poly "+Girl.Tag,0)
+            $ Other.add_word(1,0,0,"poly "+Girl.tag,0)
 
 
             $ Other.change_stat("obedience", 80, 10)
@@ -7932,7 +7932,7 @@ label Share(Girl=0, Other=0):
 
             $ BO = Player.Harem[:]
             while BO:
-                $ BO[0].DrainWord("saw with "+Other.Tag,0,0,1)
+                $ BO[0].drain_word("saw with "+Other.tag,0,0,1)
                 $ BO.remove(BO[0])
             if Girl.Event[5]:
 
@@ -7940,15 +7940,15 @@ label Share(Girl=0, Other=0):
 
             elif bg_current in PersonalRooms:
 
-                if Other.Tag+"Yes" not in Player.Traits:
-                    $ Player.Traits.append(Other.Tag+"Yes")
-                call expression Other.Tag + "_BF"
+                if Other.tag+"Yes" not in Player.traits:
+                    $ Player.traits.append(Other.tag+"Yes")
+                call expression Other.tag + "_BF"
                 $ renpy.pop_call()
                 $ renpy.pop_call()
             else:
 
-                if Other.Tag+"Yes" not in Player.Traits:
-                    $ Player.Traits.append(Other.Tag+"Yes")
+                if Other.tag+"Yes" not in Player.traits:
+                    $ Player.traits.append(Other.tag+"Yes")
                 call AskedMeet (Other, "bemused")
         else:
 
@@ -7972,7 +7972,7 @@ label Share(Girl=0, Other=0):
 label Cheated(Girl=0, Other=0, Resolution=0, B=0):
 
 
-    $ Girl.AddWord(1,0,"relationship",0,0)
+    $ Girl.add_word(1,0,"relationship",0,0)
     call shift_focus (Girl)
 
     $ Girl.change_face("angry")
@@ -7980,7 +7980,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
         "Suddenly, [Girl.name] shows up and says she needs to talk to you."
     $ Girl.location = bg_current
 
-    $ Girl.DrainWord("asked meet",0,1)
+    $ Girl.drain_word("asked meet",0,1)
     if "meet girl" in Player.daily_history:
         $ Player.daily_history.remove("meet girl")
 
@@ -8486,26 +8486,26 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
             elif Girl == JubesX:
                 ch_v "I don't like these games!"
 
-        $ Girl.AddWord(1,0,0,"ex",0)
+        $ Girl.add_word(1,0,0,"ex",0)
         if Girl in Player.Harem:
             $ Player.Harem.remove(Girl)
-        $ Girl.AddWord(1,0,"angry",0,0)
+        $ Girl.add_word(1,0,"angry",0,0)
 
 
 
     $ BO = all_Girls[:]
     while BO:
 
-        $ Girl.DrainWord("saw with "+BO[0].Tag,0,0,1)
+        $ Girl.drain_word("saw with "+BO[0].tag,0,0,1)
         $ BO.remove(BO[0])
 
     if Line == "poly":
-        $ Girl.AddWord(1,0,0,"poly "+Other.Tag,0)
-        $ Girl.AddWord(1,0,0,"ask "+Other.Tag,0)
+        $ Girl.add_word(1,0,0,"poly "+Other.tag,0)
+        $ Girl.add_word(1,0,0,"ask "+Other.tag,0)
     else:
         $ Girl.GLG(Other,1000,-50,1)
 
-    if "ex" in Girl.Traits:
+    if "ex" in Girl.traits:
         $ Girl.Break[0] = 5 + Girl.Break[1] + Girl.Cheated
     $ Girl.Cheated += 1
 
@@ -8548,7 +8548,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
                     ch_s "You are incorrigible, [StormX.player_petname]."
                 else:
                     Girl.voice "Sure, whatever."
-                call expression Girl.Tag + "_SMenu"
+                call expression Girl.tag + "_SMenu"
             else:
                 $ Girl.change_face("sad")
                 $ Girl.change_stat("love", 90, -10)
@@ -8596,9 +8596,9 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
                     ch_s "You are incorrigible, [StormX.player_petname]."
                 else:
                     Girl.voice "Sure, whatever."
-                $ Girl.DrainWord("angry",0,1)
-                call expression Girl.Tag + "_SMenu"
-                $ Girl.AddWord(1,0,"angry",0,0)
+                $ Girl.drain_word("angry",0,1)
+                call expression Girl.tag + "_SMenu"
+                $ Girl.add_word(1,0,"angry",0,0)
             else:
                 $ Girl.change_face("angry")
                 $ Girl.change_stat("love", 90, -20)
@@ -8678,7 +8678,7 @@ label NoFap(Girl=0, TabStore=Taboo, counter=0):
 
     if "askedfap" in Girl.daily_history:
 
-        if "nofap" in Girl.Traits:
+        if "nofap" in Girl.traits:
             Girl.voice "I understand already."
         else:
             Girl.voice "Stop bothering me with this."
@@ -8814,7 +8814,7 @@ label NoFap(Girl=0, TabStore=Taboo, counter=0):
 
     menu:
         extend ""
-        "I'd rather you not do that." if "nofap" not in Girl.Traits:
+        "I'd rather you not do that." if "nofap" not in Girl.traits:
             if "askedfap" not in Girl.daily_history:
                 $ Girl.change_stat("obedience", 200, 2)
                 $ Girl.change_stat("inhibition", 90, 1)
@@ -8923,10 +8923,10 @@ label NoFap(Girl=0, TabStore=Taboo, counter=0):
                     ch_v "No."
                 $ counter = 1
             if not counter:
-                $ Girl.AddWord(1,0,0,"nofap")
+                $ Girl.add_word(1,0,0,"nofap")
 
 
-        "Don't do that without permission." if "nofap" not in Girl.Traits:
+        "Don't do that without permission." if "nofap" not in Girl.traits:
             if "askedfap" not in Girl.daily_history:
                 $ Girl.change_stat("obedience", 200, 3)
             if approval_check(Girl, 600, "O"):
@@ -9045,10 +9045,10 @@ label NoFap(Girl=0, TabStore=Taboo, counter=0):
                 $ Girl.change_face("bemused",1)
                 $ counter = 1
             if not counter:
-                $ Girl.AddWord(1,0,0,"nofap")
+                $ Girl.add_word(1,0,0,"nofap")
 
 
-        "You can do that if you need to." if "nofap" in Girl.Traits:
+        "You can do that if you need to." if "nofap" in Girl.traits:
             if "askedfap" not in Girl.daily_history:
                 $ Girl.change_stat("love", 90, 1)
                 $ Girl.change_stat("obedience", 90, 1)
@@ -9112,8 +9112,8 @@ label NoFap(Girl=0, TabStore=Taboo, counter=0):
                 elif Girl == JubesX:
                     ch_v "Oh. . . oh! Nice!"
                 $ Girl.change_face("smile",1)
-            $ Girl.DrainWord("nofap",0,0,1)
-            $ Girl.AddWord(1,0,0,0,"okfap")
+            $ Girl.drain_word("nofap",0,0,1)
+            $ Girl.add_word(1,0,0,0,"okfap")
         "Nevermind":
 
 
@@ -9176,7 +9176,7 @@ label NoFap(Girl=0, TabStore=Taboo, counter=0):
                     Girl.voice "Ok."
 
 
-    $ Girl.AddWord(1,0,"askedfap",0,"askedfap")
+    $ Girl.add_word(1,0,"askedfap",0,"askedfap")
     $ Taboo = TabStore
     return
 
@@ -9189,10 +9189,10 @@ label CalltoFap(Girl=0, Fap=0):
 
 
 
-    if "nofap" not in Girl.Traits:
+    if "nofap" not in Girl.traits:
 
-        $ Girl.DrainWord("wannafap",0,1)
-        $ Girl.AddWord(1,0,"gonnafap",0,0)
+        $ Girl.drain_word("wannafap",0,1)
+        $ Girl.add_word(1,0,"gonnafap",0,0)
         return
 
     if Girl.location == bg_current:
@@ -9205,7 +9205,7 @@ label CalltoFap(Girl=0, Fap=0):
 
         if "wannafap" in EGirls[0].daily_history and "nofap" not in EGirls[0].daily_history:
 
-            $ EGirls[0].AddWord(1,0,"gonnafap",0,0)
+            $ EGirls[0].add_word(1,0,"gonnafap",0,0)
         $ EGirls.remove(EGirls[0])
 
 
@@ -9477,7 +9477,7 @@ label CalltoFap(Girl=0, Fap=0):
                     ch_v "I'd uh, prefer you didn't. . ."
                 $ Girl.Thirst += 15
 
-    $ Girl.DrainWord("wannafap",0,1)
+    $ Girl.drain_word("wannafap",0,1)
     hide Cellphone
 
     if Fap == 3:
@@ -9502,7 +9502,7 @@ label CalltoFap(Girl=0, Fap=0):
         $ renpy.pop_call()
     elif Fap:
 
-        $ Girl.AddWord(1,0,"gonnafap",0,0)
+        $ Girl.add_word(1,0,"gonnafap",0,0)
 
     $ Options = ["empty"]
     return
@@ -9525,13 +9525,13 @@ label PhoneSex(Girl=0):
 
         call MindFuck
 
-    $ Player.AddWord(1,"phonesex","phonesex",0,"phonesex")
+    $ Player.add_word(1,"phonesex","phonesex",0,"phonesex")
 
 
     call shift_focus (Girl)
     show PhoneSex zorder 150
 
-    $ Girl.AddWord(1,"phonesex","phonesex",0,"phonesex")
+    $ Girl.add_word(1,"phonesex","phonesex",0,"phonesex")
     $ primary_action = 1
     if Girl == RogueX:
         ch_r "Ok, I think that should get the video running, right?"
@@ -9640,9 +9640,9 @@ label PsychicFlash(Face="sly", TempLoc=0):
     if Face:
         $ Girl.change_face(Face)
     $ Girl.ArmPose = 2
-    $ Girl.Uptop = 1
-    $ Girl.Upskirt = 1
-    $ Girl.underwearDown = 1
+    $ Girl.top_pulled_up = 1
+    $ Girl.upskirt = 1
+    $ Girl.underwear_pulled_down = 1
     ". . . {w=0.3}{nw}"
     if Girl == EmmaX:
         hide Emma_Sprite with fade
@@ -9678,7 +9678,7 @@ label MindFuck(TempLoc=0):
             call set_the_scene (1, 0, 0, 0, 1)
             Girl.voice "There. . ."
 
-            $ Player.AddWord(1,"MindFuck","MindFuck",0,"MindFuck")
+            $ Player.add_word(1,"MindFuck","MindFuck",0,"MindFuck")
             call shift_focus(Girl)
             jump enter_main_sex_menu
 
@@ -9691,7 +9691,7 @@ label MindFuck(TempLoc=0):
                 ch_j "Be thinking about me. . ."
 
             $ Girl.change_outfit(6,Changed=1)
-            $ Girl.Spunk = []
+            $ Girl.spunk = []
             if Girl == EmmaX:
                 hide Emma_Sprite with fade
             elif Girl == JeanX:
@@ -9705,7 +9705,7 @@ label MindFuck(TempLoc=0):
             elif Girl == JeanX:
                 ch_j "You know, like if you let your guards down a little. . ."
                 ch_j "I could work my way in there and we could have some fun. . ."
-            $ Player.AddWord(1,"mfuck?")
+            $ Player.add_word(1,"mfuck?")
             jump MindFuck_Menu
         "Nah, over the phone is fine.":
             if Girl == EmmaX:
@@ -9732,7 +9732,7 @@ label Frisky_Class(Girl=0, Teacher=0, LineB=0, BO=[]):
 
     while BO:
 
-        if renpy.showing(BO[0].Tag+"_Sprite"):
+        if renpy.showing(BO[0].tag+"_Sprite"):
             if BO[0] == RogueX:
                 show Rogue_Sprite at sprite_location(RogueX.sprite_location,50):
                     ease .5 ypos 250
@@ -10087,7 +10087,7 @@ label Frisky_Class(Girl=0, Teacher=0, LineB=0, BO=[]):
                         $ Girl.change_stat("lust", 94, 5)
                         if "cockout" not in Player.recent_history:
                             "[Girl.name]'s hand slowly unzips your pants and pulls your cock free."
-                            $ Player.AddWord(1,"cockout")
+                            $ Player.add_word(1,"cockout")
                             call Seen_First_Peen (Girl, Partner)
                             $ Girl.change_stat("lust", 94, 5)
                         $ offhand_action = "handjob"
@@ -10140,7 +10140,7 @@ label Frisky_Class(Girl=0, Teacher=0, LineB=0, BO=[]):
                             $ Girl.change_stat("lust", 94, 5)
                             if "cockout" not in Player.recent_history:
                                 "[Girl.name]'s hand slowly unzips your pants and pulls your cock free."
-                                $ Player.AddWord(1,"cockout")
+                                $ Player.add_word(1,"cockout")
                                 call Seen_First_Peen (Girl, Partner)
                                 $ Girl.change_stat("lust", 94, 5)
                             $ offhand_action = "handjob"
@@ -10258,7 +10258,7 @@ label Frisky_Class(Girl=0, Teacher=0, LineB=0, BO=[]):
                             "[LineB]"
                             $ D20 += 15
 
-                    elif "saw with "+ Girl.Tag in Present[1].Traits:
+                    elif "saw with "+ Girl.tag in Present[1].traits:
                         Present[1].voice "Well!"
                         $ Present[1].GirlLikeUp(Girl,-4)
                         $ Girl.GirlLikeUp(Present[1],-2)
@@ -10269,20 +10269,20 @@ label Frisky_Class(Girl=0, Teacher=0, LineB=0, BO=[]):
                         "[Present[1].name] seems to notice what you and [Girl.name] are doing."
                         $ Present[1].change_face("sly",1)
                         "She seems to be kinda into it. . ."
-                        if approval_check(Present[1], 800, "I") or "exhibitionist" in Present[1].Traits:
+                        if approval_check(Present[1], 800, "I") or "exhibitionist" in Present[1].traits:
                             $ Girl.change_stat("inhibition", 90, 3)
                             $ Present[1].GirlLikeUp(Girl,3)
                             $ Girl.GirlLikeUp(Present[1],5)
                             $ Present[1].change_stat("lust", 89, 7)
                             "You notice that [Present[1].name]'s begun feeling herself up as well."
-                            $ Present[1].AddWord(1,"frisky","frisky",0,0)
+                            $ Present[1].add_word(1,"frisky","frisky",0,0)
                             $ Partner = Present[1]
                     else:
 
 
                         $ Present[1].eyes = "leftside"
                         "[Present[1].name] seems to notice what you and [Girl.name] are doing."
-                        $ Present[1].AddWord(1,0,0,"saw with " + Girl.Tag)
+                        $ Present[1].add_word(1,0,0,"saw with " + Girl.tag)
                         $ Present[1].change_face("angry",1)
                         if Present[1] == RogueX:
                             ch_r "How dare you! Hussy."
@@ -10349,7 +10349,7 @@ label Frisky_Class(Girl=0, Teacher=0, LineB=0, BO=[]):
 
 
 
-        if "exhibitionist" not in Girl.Traits and not approval_check(Girl, 700,"I"):
+        if "exhibitionist" not in Girl.traits and not approval_check(Girl, 700,"I"):
 
             $ Line = "too far"
         if Line not in ("rejected", "handholding", "tease"):
@@ -10370,30 +10370,30 @@ label Frisky_Class(Girl=0, Teacher=0, LineB=0, BO=[]):
                         jump Frisky_Class_End
                     "She gets a sly smile on her face and continues her lecture."
                     $ Girl.change_face("sly",1)
-                    if approval_check(Teacher, 800, "I") or "exhibitionist" in Teacher.Traits:
+                    if approval_check(Teacher, 800, "I") or "exhibitionist" in Teacher.traits:
                         $ Teacher.change_stat("inhibition", 90, 3)
                         $ Teacher.GirlLikeUp(Girl,3)
                         $ Girl.GirlLikeUp(Teacher,5)
                         $ Teacher.change_stat("lust", 89, 7)
                         "You notice that [Teacher.name]'s hand has snaked down beneath the podium and begun to move."
-                        $ Teacher.AddWord(1,"frisky","frisky",0,0)
-                        $ Player.AddWord(1,"go on","go on",0,0)
+                        $ Teacher.add_word(1,"frisky","frisky",0,0)
+                        $ Player.add_word(1,"go on","go on",0,0)
                     "[Girl.name] looks around and shrugs. . ."
                     jump Frisky_Class_Loop
                 else:
                     $ Teacher.change_face("angry",1)
                     $ Girl.mouth = "sad"
                     if Teacher == EmmaX:
-                        ch_e "[EmmaX.player_petname], [Girl.Tag], if you could perhaps pay more attention to the lecture, and less to each other's bodies?"
+                        ch_e "[EmmaX.player_petname], [Girl.tag], if you could perhaps pay more attention to the lecture, and less to each other's bodies?"
                         ch_e "Perhaps it would be best if you visited the headmaster's office and cool off?"
                     elif Teacher == StormX:
-                        ch_s "[StormX.player_petname], [Girl.Tag], I can appreciate your enthusaism, but perhaps not on my time?"
+                        ch_s "[StormX.player_petname], [Girl.tag], I can appreciate your enthusaism, but perhaps not on my time?"
                         ch_s "I think perhaps you should visit Charles and cool off?"
             else:
                 "Dr. McCoy stops his lecture in mid-sentence when he notices that the whole class is looking at you and [Girl.name]."
                 ch_b "Oh, my stars and garters!"
                 ch_b "[Player.name]!?! {b}WHAT ARE YOU DOING? BOTH OF YOU, TO THE PROFESSOR'S OFFICE, IMMEDIATELY!{/b}"
-            $ Girl.AddWord(1,0,0,0,"friskyclass")
+            $ Girl.add_word(1,0,0,0,"friskyclass")
             $ Line = 0
             $ Girl.change_stat("love", 80, -10)
             $ Girl.change_stat("obedience", 70, -5)
@@ -10413,7 +10413,7 @@ label Frisky_Class_End:
     $ primary_action = 0
     $ Partner = 0
     if Teacher:
-        $ Teacher.DrainWord("frisky",1,0)
+        $ Teacher.drain_word("frisky",1,0)
     if not Line:
 
         $ Girl.change_face("confused")
@@ -10429,7 +10429,7 @@ label Frisky_Class_End:
             "[Girl.name] startles briefly."
             $ Girl.change_face("sad",2)
             "[Girl.name] she looks over at you a bit upset that you ended things so abruptly."
-        $ Girl.AddWord(1,0,0,0,"friskyclass")
+        $ Girl.add_word(1,0,0,0,"friskyclass")
         $ Girl.change_face("sly",1)
         "[Girl.name] takes in a deep breath and exhales it in a sigh, leaning in to whisper."
         if Girl == RogueX:

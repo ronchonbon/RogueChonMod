@@ -53,8 +53,8 @@ image Jean_Sprite:
         (0,0), ConditionSwitch(
 
             "not JeanX.piercings", Null(),
-            "JeanX.underwear and not JeanX.underwearDown", Null(),
-            "JeanX.legs != 'skirt' and JeanX.legs and not JeanX.Upskirt", Null(),
+            "JeanX.underwear and not JeanX.underwear_pulled_down", Null(),
+            "JeanX.legs != 'skirt' and JeanX.legs and not JeanX.upskirt", Null(),
             "JeanX.piercings == 'barbell'", "images/JeanSprite/Jean_Sprite_Barbell_Pussy.png",
             "JeanX.piercings == 'ring'", "images/JeanSprite/Jean_Sprite_Ring_Pussy.png",
             "True", Null(),
@@ -75,9 +75,9 @@ image Jean_Sprite:
         (0,0), ConditionSwitch(
 
             "not JeanX.underwear", Null(),
-            "JeanX.underwearDown", ConditionSwitch(
+            "JeanX.underwear_pulled_down", ConditionSwitch(
 
-                    "not JeanX.legs or JeanX.Upskirt or JeanX.legs == 'skirt'", ConditionSwitch(
+                    "not JeanX.legs or JeanX.upskirt or JeanX.legs == 'skirt'", ConditionSwitch(
 
                             "JeanX.underwear == 'green_panties' and JeanX.Wet", "images/JeanSprite/Jean_Sprite_Panties_Green_Down.png",
                             "JeanX.underwear == 'green_panties'", "images/JeanSprite/Jean_Sprite_Panties_Green_Down.png",
@@ -108,14 +108,14 @@ image Jean_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "JeanX.hose == 'pantyhose' and (not JeanX.underwearDown or not JeanX.underwear)", "images/JeanSprite/Jean_Sprite_Hose_Pantyhose.png",
-            "JeanX.hose == 'ripped_pantyhose' and (not JeanX.underwearDown or not JeanX.underwear)", "images/JeanSprite/Jean_Sprite_Hose_Pantyhose_Holed.png",
+            "JeanX.hose == 'pantyhose' and (not JeanX.underwear_pulled_down or not JeanX.underwear)", "images/JeanSprite/Jean_Sprite_Hose_Pantyhose.png",
+            "JeanX.hose == 'ripped_pantyhose' and (not JeanX.underwear_pulled_down or not JeanX.underwear)", "images/JeanSprite/Jean_Sprite_Hose_Pantyhose_Holed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not JeanX.legs", Null(),
-            "JeanX.Upskirt", ConditionSwitch(
+            "JeanX.upskirt", ConditionSwitch(
 
                         "JeanX.legs == 'shorts'", "images/JeanSprite/Jean_Sprite_Legs_Shorts_Down.png",
                         "JeanX.legs == 'pants'", "images/JeanSprite/Jean_Sprite_Legs_Pants_Down.png",
@@ -148,27 +148,27 @@ image Jean_Sprite:
             "JeanX.legs == 'skirt' or JeanX.legs == 'pants'", Null(),
             "JeanX.piercings == 'barbell'", ConditionSwitch(
 
-                    "JeanX.legs and not JeanX.Upskirt", "images/JeanSprite/Jean_Sprite_Barbell_PussyC.png",
-                    "JeanX.underwear and not JeanX.underwearDown", "images/JeanSprite/Jean_Sprite_Barbell_PussyC.png",
+                    "JeanX.legs and not JeanX.upskirt", "images/JeanSprite/Jean_Sprite_Barbell_PussyC.png",
+                    "JeanX.underwear and not JeanX.underwear_pulled_down", "images/JeanSprite/Jean_Sprite_Barbell_PussyC.png",
                     "True", Null(),
                     ),
             "JeanX.piercings == 'ring'", ConditionSwitch(
 
-                    "JeanX.legs and not JeanX.Upskirt", "images/JeanSprite/Jean_Sprite_Ring_PussyC.png",
-                    "JeanX.underwear and not JeanX.underwearDown", "images/JeanSprite/Jean_Sprite_Ring_PussyC.png",
+                    "JeanX.legs and not JeanX.upskirt", "images/JeanSprite/Jean_Sprite_Ring_PussyC.png",
+                    "JeanX.underwear and not JeanX.underwear_pulled_down", "images/JeanSprite/Jean_Sprite_Ring_PussyC.png",
                     "True", Null(),
                     ),
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "JeanX.legs and not JeanX.Upskirt", Null(),
-            "'in' in JeanX.Spunk or 'anal' in JeanX.Spunk", "images/JeanSprite/Jean_Sprite_Spunk_Pussy.png",
+            "JeanX.legs and not JeanX.upskirt", Null(),
+            "'in' in JeanX.spunk or 'anal' in JeanX.spunk", "images/JeanSprite/Jean_Sprite_Spunk_Pussy.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not JeanX.piercings or ((JeanX.top or JeanX.bra) and not JeanX.Uptop)", Null(),
+            "not JeanX.piercings or ((JeanX.top or JeanX.bra) and not JeanX.top_pulled_up)", Null(),
             "JeanX.piercings == 'barbell'", "images/JeanSprite/Jean_Sprite_Barbell_Tits.png",
             "JeanX.piercings == 'ring'", "images/JeanSprite/Jean_Sprite_Ring_Tits.png",
             "True", Null(),
@@ -194,7 +194,7 @@ image Jean_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "JeanX.Uptop", ConditionSwitch(
+            "JeanX.top_pulled_up", ConditionSwitch(
 
                     "JeanX.bra == 'green_bra' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Chest_GreenBra2_Up.png",
                     "JeanX.bra == 'green_bra'", "images/JeanSprite/Jean_Sprite_Chest_GreenBra1_Up.png",
@@ -224,7 +224,7 @@ image Jean_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "JeanX.Uptop", ConditionSwitch(
+            "JeanX.top_pulled_up", ConditionSwitch(
 
                     "JeanX.top == 'yellow_shirt' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Over_Tank2_Up.png",
                     "JeanX.top == 'yellow_shirt'", "images/JeanSprite/Jean_Sprite_Over_Tank1_Up.png",
@@ -247,7 +247,7 @@ image Jean_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "not JeanX.piercings or (not JeanX.top and not JeanX.bra and not JeanX.Uptop)", Null(),
+            "not JeanX.piercings or (not JeanX.top and not JeanX.bra and not JeanX.top_pulled_up)", Null(),
             "JeanX.piercings == 'barbell'",  "images/JeanSprite/Jean_Sprite_Barbell_TitsC.png",
             "JeanX.piercings == 'ring'", "images/JeanSprite/Jean_Sprite_Ring_TitsC.png",
             "True", Null(),
@@ -255,12 +255,12 @@ image Jean_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "'belly' in JeanX.Spunk", "images/JeanSprite/Jean_Sprite_Spunk_Belly.png",
+            "'belly' in JeanX.spunk", "images/JeanSprite/Jean_Sprite_Spunk_Belly.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "'tits' in JeanX.Spunk", "images/JeanSprite/Jean_Sprite_Spunk_Tits.png",
+            "'tits' in JeanX.spunk", "images/JeanSprite/Jean_Sprite_Spunk_Tits.png",
             "True", Null(),
             ),
 
@@ -307,12 +307,12 @@ image Jean_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "not JeanX.legs or JeanX.Upskirt", Null(),
-            "JeanX.ArmPose != 1 and JeanX.accessory == 'suspenders' and JeanX.Uptop", "images/JeanSprite/Jean_Sprite_Acc_Suspenders2_Up.png",
+            "not JeanX.legs or JeanX.upskirt", Null(),
+            "JeanX.ArmPose != 1 and JeanX.accessory == 'suspenders' and JeanX.top_pulled_up", "images/JeanSprite/Jean_Sprite_Acc_Suspenders2_Up.png",
             "JeanX.ArmPose != 1 and JeanX.accessory == 'suspenders'", "images/JeanSprite/Jean_Sprite_Acc_Suspenders2.png",
             "JeanX.ArmPose != 1 and JeanX.accessory == 'suspenders2'", "images/JeanSprite/Jean_Sprite_Acc_Suspenders2_Up.png",
 
-            "JeanX.accessory == 'suspenders' and JeanX.Uptop", "images/JeanSprite/Jean_Sprite_Acc_Suspenders1_Up.png",
+            "JeanX.accessory == 'suspenders' and JeanX.top_pulled_up", "images/JeanSprite/Jean_Sprite_Acc_Suspenders1_Up.png",
             "JeanX.accessory == 'suspenders'", "images/JeanSprite/Jean_Sprite_Acc_Suspenders1.png",
             "JeanX.accessory == 'suspenders2'", "images/JeanSprite/Jean_Sprite_Acc_Suspenders1_Up.png",
             "True", Null(),
@@ -517,7 +517,7 @@ image Jean_Sprite_Head:
                 "True", "images/JeanSprite/Jean_Sprite_Head.png",
                 ),
         (0,0), ConditionSwitch(
-            "'chin' not in JeanX.Spunk", Null(),
+            "'chin' not in JeanX.spunk", Null(),
             "renpy.showing('Jean_BJ_Animation') and action_speed >= 2", Null(),
             "True", "images/JeanSprite/Jean_Sprite_Spunk_Chin.png",
             ),
@@ -536,7 +536,7 @@ image Jean_Sprite_Head:
 
 
         (0,0), ConditionSwitch(
-            "'mouth' in JeanX.Spunk", ConditionSwitch(
+            "'mouth' in JeanX.spunk", ConditionSwitch(
                     "JeanX.mouth == 'normal'", "images/JeanSprite/Jean_Sprite_Mouth_Normal_Spunk.png",
                     "JeanX.mouth == 'lipbite'", "images/JeanSprite/Jean_Sprite_Mouth_Lipbite_Spunk.png",
                     "JeanX.mouth == 'sucking'", "images/JeanSprite/Jean_Sprite_Mouth_Tongue_Spunk.png",
@@ -614,8 +614,8 @@ image Jean_Sprite_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "'hair' in JeanX.Spunk", "images/JeanSprite/Jean_Sprite_Spunk_Facial2.png",
-            "'facial' in JeanX.Spunk", "images/JeanSprite/Jean_Sprite_Spunk_Facial1.png",
+            "'hair' in JeanX.spunk", "images/JeanSprite/Jean_Sprite_Spunk_Facial2.png",
+            "'facial' in JeanX.spunk", "images/JeanSprite/Jean_Sprite_Spunk_Facial1.png",
             "True", Null(),
             ),
         )
@@ -690,14 +690,14 @@ image Jean_Doggy_Animation:
         (420,750),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite", "Jean_Doggy_Body",
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "not Player.sprite", "Jean_Doggy_Body",
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Jean_Doggy_Fuck2_Top",
                     "action_speed > 1", "Jean_Doggy_Fuck_Top",
                     "action_speed ", "Jean_Doggy_Anal_Head_Top",
                     "True", "Jean_Doggy_Body",
                     ),
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Jean_Doggy_Fuck2_Top",
                     "action_speed > 1", "Jean_Doggy_Fuck_Top",
                     "True", "Jean_Doggy_Body",
@@ -706,14 +706,14 @@ image Jean_Doggy_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite", "Jean_Doggy_Ass",
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "not Player.sprite", "Jean_Doggy_Ass",
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Jean_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Jean_Doggy_Fuck_Ass",
                     "action_speed ", "Jean_Doggy_Anal_Head_Ass",
                     "True", "Jean_Doggy_Ass",
                     ),
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Jean_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Jean_Doggy_Fuck_Ass",
                     "True", "Jean_Doggy_Ass",
@@ -722,12 +722,12 @@ image Jean_Doggy_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Cock == 'foot'", ConditionSwitch(
+            "Player.cock_position == 'foot'", ConditionSwitch(
                     "action_speed > 1", "Jean_Doggy_Feet2",
                     "action_speed ", "Jean_Doggy_Feet1",
                     "True", "Jean_Doggy_Feet0",
                     ),
-            "not Player.Sprite and ShowFeet", "Jean_Doggy_Feet0",
+            "not Player.sprite and ShowFeet", "Jean_Doggy_Feet0",
             "True", Null(),
             ),
         )
@@ -742,7 +742,7 @@ image Jean_Doggy_Body:
         (165,0),"Jean_Doggy_Hair_Under",
         (0,0), ConditionSwitch(
 
-            "JeanX.bra == 'corset' and JeanX.Uptop", "images/JeanDoggy/Jean_Doggy_Chest_Corset_Back.png",
+            "JeanX.bra == 'corset' and JeanX.top_pulled_up", "images/JeanDoggy/Jean_Doggy_Chest_Corset_Back.png",
             "True", Null(),
             ),
         (165,0), "Jean_Doggy_Head",
@@ -751,7 +751,7 @@ image Jean_Doggy_Body:
         (0,0), ConditionSwitch(
 
             "not JeanX.bra", Null(),
-            "JeanX.Uptop", ConditionSwitch(
+            "JeanX.top_pulled_up", ConditionSwitch(
                     "JeanX.bra == 'lace_bra' and JeanX.top", "images/JeanDoggy/Jean_Doggy_Chest_GreenBra_Up2.png",
                     "JeanX.bra == 'lace_bra'", "images/JeanDoggy/Jean_Doggy_Chest_GreenBra_Up.png",
                     "JeanX.bra == 'corset'", "images/JeanDoggy/Jean_Doggy_Chest_Corset_Up.png",
@@ -774,24 +774,24 @@ image Jean_Doggy_Body:
         (0,0), ConditionSwitch(
 
             "not JeanX.top", Null(),
-            "JeanX.top == 'yellow_shirt' and JeanX.Uptop", "images/JeanDoggy/Jean_Doggy_Over_Tank_Up.png",
+            "JeanX.top == 'yellow_shirt' and JeanX.top_pulled_up", "images/JeanDoggy/Jean_Doggy_Over_Tank_Up.png",
             "JeanX.top == 'yellow_shirt'", "images/JeanDoggy/Jean_Doggy_Over_Tank.png",
-            "JeanX.top == 'green_shirt' and JeanX.Uptop", "images/JeanDoggy/Jean_Doggy_Over_GreenShirt_Up.png",
+            "JeanX.top == 'green_shirt' and JeanX.top_pulled_up", "images/JeanDoggy/Jean_Doggy_Over_GreenShirt_Up.png",
             "JeanX.top == 'green_shirt'", "images/JeanDoggy/Jean_Doggy_Over_GreenShirt.png",
-            "JeanX.top == 'pink_shirt' and JeanX.Uptop", "images/JeanDoggy/Jean_Doggy_Over_PinkShirt_Up.png",
+            "JeanX.top == 'pink_shirt' and JeanX.top_pulled_up", "images/JeanDoggy/Jean_Doggy_Over_PinkShirt_Up.png",
             "JeanX.top == 'pink_shirt'", "images/JeanDoggy/Jean_Doggy_Over_PinkShirt.png",
-            "JeanX.top == 'towel' and not JeanX.Uptop", "images/JeanDoggy/Jean_Doggy_Over_TowelTop.png",
+            "JeanX.top == 'towel' and not JeanX.top_pulled_up", "images/JeanDoggy/Jean_Doggy_Over_TowelTop.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not JeanX.legs or JeanX.Upskirt", Null(),
+            "not JeanX.legs or JeanX.upskirt", Null(),
             "JeanX.accessory == 'suspenders' or JeanX.accessory == 'suspenders2'", "images/JeanDoggy/Jean_Doggy_Suspenders.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "'back' in JeanX.Spunk", "images/JeanDoggy/Jean_Doggy_Spunk_Back.png",
+            "'back' in JeanX.spunk", "images/JeanDoggy/Jean_Doggy_Spunk_Back.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -837,12 +837,12 @@ image Jean_Doggy_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "'chin' in JeanX.Spunk", "images/JeanDoggy/Jean_Doggy_Spunk_Chin.png",
+            "'chin' in JeanX.spunk", "images/JeanDoggy/Jean_Doggy_Spunk_Chin.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "'mouth' not in JeanX.Spunk", Null(),
+            "'mouth' not in JeanX.spunk", Null(),
 
 
             "JeanX.mouth == 'lipbite'", "images/JeanDoggy/Jean_Doggy_Spunk_Smile.png",
@@ -913,13 +913,13 @@ image Jean_Doggy_Hair_Over:
     contains:
         ConditionSwitch(
 
-                "'facial' in JeanX.Spunk", "images/JeanDoggy/Jean_Doggy_Spunk_Facial.png",
+                "'facial' in JeanX.spunk", "images/JeanDoggy/Jean_Doggy_Spunk_Facial.png",
                 "True", Null(),
                 )
     contains:
         ConditionSwitch(
 
-                "'hair' in JeanX.Spunk", "images/JeanDoggy/Jean_Doggy_Spunk_Facial2.png",
+                "'hair' in JeanX.spunk", "images/JeanDoggy/Jean_Doggy_Spunk_Facial2.png",
                 "True", Null(),
                 )
     zoom .9
@@ -958,7 +958,7 @@ image Jean_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "JeanX.legs == 'skirt'","images/JeanDoggy/Jean_Doggy_Legs_Skirt_Back.png",
-            "not JeanX.Upskirt", Null(),
+            "not JeanX.upskirt", Null(),
             "JeanX.legs == 'shorts'", "images/JeanDoggy/Jean_Doggy_Legs_Shorts_Back.png",
             "JeanX.legs == 'pants'", "images/JeanDoggy/Jean_Doggy_Legs_Pants_Back.png",
             "JeanX.legs == 'yoga_pants'", "images/JeanDoggy/Jean_Doggy_Legs_Yoga_Back.png",
@@ -966,7 +966,7 @@ image Jean_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "not JeanX.underwearDown or (JeanX.legs == 'pants' and not JeanX.Upskirt)", Null(),
+            "not JeanX.underwear_pulled_down or (JeanX.legs == 'pants' and not JeanX.upskirt)", Null(),
             "JeanX.underwear == 'green_panties'", "images/JeanDoggy/Jean_Doggy_Panties_Green_Back.png",
             "JeanX.underwear == 'bikini_bottoms'", Null(),
             "JeanX.underwear", "images/JeanDoggy/Jean_Doggy_Panties_Green_Back.png",
@@ -985,7 +985,7 @@ image Jean_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "not JeanX.underwearDown or (JeanX.legs == 'pants' and not JeanX.Upskirt)", Null(),
+            "not JeanX.underwear_pulled_down or (JeanX.legs == 'pants' and not JeanX.upskirt)", Null(),
             "JeanX.underwear == 'green_panties'", "images/JeanDoggy/Jean_Doggy_Panties_Green_Down.png",
             "JeanX.underwear == 'bikini_bottoms'", Null(),
             "JeanX.underwear", "images/JeanDoggy/Jean_Doggy_Panties_Green_Down.png",
@@ -995,15 +995,15 @@ image Jean_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Jean_Pussy_Fucking3",
                     "action_speed > 1", "Jean_Pussy_Fucking2",
                     "action_speed ", "Jean_Pussy_Heading",
                     "True", "Jean_Pussy_Static",
                     ),
             "primary_action == 'eat_pussy'", "images/JeanDoggy/Jean_Doggy_Pussy_Open.png",
-            "JeanX.legs and not JeanX.Upskirt", "images/JeanDoggy/Jean_Doggy_Pussy_Closed.png",
-            "JeanX.underwear and not JeanX.underwearDown", "images/JeanDoggy/Jean_Doggy_Pussy_Closed.png",
+            "JeanX.legs and not JeanX.upskirt", "images/JeanDoggy/Jean_Doggy_Pussy_Closed.png",
+            "JeanX.underwear and not JeanX.underwear_pulled_down", "images/JeanDoggy/Jean_Doggy_Pussy_Closed.png",
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", "Jean_Pussy_Fingering",
             "primary_action == 'dildo_pussy'", "Jean_Pussy_Fucking2",
             "True", "images/JeanDoggy/Jean_Doggy_Pussy_Closed.png",
@@ -1012,21 +1012,21 @@ image Jean_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "'in' in JeanX.Spunk and Player.Cock == 'in'",Null(),
-            "'in' in JeanX.Spunk ", "images/JeanDoggy/Jean_Doggy_SpunkPussyClosed.png",
-            "JeanX.Wet and Player.Cock == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
+            "'in' in JeanX.spunk and Player.cock_position == 'in'",Null(),
+            "'in' in JeanX.spunk ", "images/JeanDoggy/Jean_Doggy_SpunkPussyClosed.png",
+            "JeanX.Wet and Player.cock_position == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
             "JeanX.Wet", "images/RogueDoggy/Rogue_Doggy_WetPussyClosed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not JeanX.pubes", Null(),
-            "Player.Sprite and Player.Cock == 'in'", Null(),
+            "Player.sprite and Player.cock_position == 'in'", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo_pussy'", Null(),
-            "JeanX.legs == 'pants' and not JeanX.Upskirt", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
-            "JeanX.underwearDown and primary_action == 'eat_pussy'", "images/JeanDoggy/Jean_Doggy_Pubes_Open.png",
-            "JeanX.underwearDown", "images/JeanDoggy/Jean_Doggy_Pubes.png",
+            "JeanX.legs == 'pants' and not JeanX.upskirt", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
+            "JeanX.underwear_pulled_down and primary_action == 'eat_pussy'", "images/JeanDoggy/Jean_Doggy_Pubes_Open.png",
+            "JeanX.underwear_pulled_down", "images/JeanDoggy/Jean_Doggy_Pubes.png",
             "JeanX.underwear", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
             "JeanX.hose and JeanX.hose != 'stockings'", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
             "primary_action == 'eat_pussy'", "images/JeanDoggy/Jean_Doggy_Pubes_Open.png",
@@ -1034,7 +1034,7 @@ image Jean_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite", Null(),
+            "Player.sprite", Null(),
             "JeanX.piercings == 'ring'", "images/JeanDoggy/Jean_Doggy_PussyRing.png",
             "JeanX.piercings == 'barbell'", "images/JeanDoggy/Jean_Doggy_PussyBarbell.png",
             "True", Null(),
@@ -1043,7 +1043,7 @@ image Jean_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Jean_Anal_Fucking2",
                     "action_speed > 1", "Jean_Anal_Fucking",
                     "action_speed ", "Jean_Anal_Heading",
@@ -1051,8 +1051,8 @@ image Jean_Doggy_Ass:
                     ),
 
 
-            "JeanX.legs and not JeanX.Upskirt", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
-            "JeanX.underwear and not JeanX.underwearDown", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
+            "JeanX.legs and not JeanX.upskirt", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
+            "JeanX.underwear and not JeanX.underwear_pulled_down", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
             "primary_action == 'finger_ass' or offhand_action == 'finger_ass'", "Jean_Anal_Fingering",
             "primary_action == 'dildo_anal'", "Jean_Anal_Fucking",
             "JeanX.used_to_anal", "images/JeanDoggy/Jean_Doggy_Asshole_Loose.png",
@@ -1062,15 +1062,15 @@ image Jean_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "'anal' not in JeanX.Spunk or Player.Sprite", Null(),
-            "Player.Cock == 'anal'", "images/JeanDoggy/Jean_Doggy_SpunkAnalOpen.png",
+            "'anal' not in JeanX.spunk or Player.sprite", Null(),
+            "Player.cock_position == 'anal'", "images/JeanDoggy/Jean_Doggy_SpunkAnalOpen.png",
             "JeanX.used_to_anal", "images/JeanDoggy/Jean_Doggy_SpunkAnalLoose.png",
             "True", "images/JeanDoggy/Jean_Doggy_SpunkAnalLoose.png",
             ),
         (0,0), ConditionSwitch(
 
-            "JeanX.underwearDown or not JeanX.underwear", Null(),
-            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
+            "JeanX.underwear_pulled_down or not JeanX.underwear", Null(),
+            "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'anal')", Null(),
 
 
             "JeanX.underwear == 'green_panties' and JeanX.Wet", "images/JeanDoggy/Jean_Doggy_Panties_Green_Wet.png",
@@ -1082,13 +1082,13 @@ image Jean_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
+            "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'anal')", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo_pussy'", Null(),
 
             "JeanX.hose == 'garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_Garter.png",
             "JeanX.hose == 'stockings_and_garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_StockingandGarter.png",
-            "JeanX.underwear and JeanX.underwearDown", Null(),
+            "JeanX.underwear and JeanX.underwear_pulled_down", Null(),
 
 
             "JeanX.hose == 'pantyhose'", "images/JeanDoggy/Jean_Doggy_Hose_Full.png",
@@ -1099,54 +1099,54 @@ image Jean_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "JeanX.legs == 'pants'", ConditionSwitch(
-                    "JeanX.Upskirt", "images/JeanDoggy/Jean_Doggy_Legs_Pants_Down.png",
+                    "JeanX.upskirt", "images/JeanDoggy/Jean_Doggy_Legs_Pants_Down.png",
                     "JeanX.Wet > 1", "images/JeanDoggy/Jean_Doggy_Legs_Pants_Wet.png",
                     "True", "images/JeanDoggy/Jean_Doggy_Legs_Pants.png",
                     ),
             "JeanX.legs == 'yoga_pants'", ConditionSwitch(
-                    "JeanX.Upskirt", "images/JeanDoggy/Jean_Doggy_Legs_Yoga_Down.png",
+                    "JeanX.upskirt", "images/JeanDoggy/Jean_Doggy_Legs_Yoga_Down.png",
                     "JeanX.Wet > 1", "images/JeanDoggy/Jean_Doggy_Legs_Yoga_Wet.png",
                     "True", "images/JeanDoggy/Jean_Doggy_Legs_Yoga.png",
                     ),
             "JeanX.legs == 'shorts'", ConditionSwitch(
-                    "JeanX.Upskirt", "images/JeanDoggy/Jean_Doggy_Legs_Shorts_Down.png",
+                    "JeanX.upskirt", "images/JeanDoggy/Jean_Doggy_Legs_Shorts_Down.png",
                     "JeanX.Wet > 1", "images/JeanDoggy/Jean_Doggy_Legs_Shorts_Wet.png",
                     "True", "images/JeanDoggy/Jean_Doggy_Legs_Shorts.png",
                     ),
             "JeanX.legs == 'skirt'", ConditionSwitch(
-                    "JeanX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/JeanDoggy/Jean_Doggy_Legs_Skirt_Up.png",
-                    "JeanX.Upskirt", "images/JeanDoggy/Jean_Doggy_Legs_Skirt_Up.png",
+                    "JeanX.upskirt and Player.sprite and Player.cock_position == 'anal' and action_speed" , "images/JeanDoggy/Jean_Doggy_Legs_Skirt_Up.png",
+                    "JeanX.upskirt", "images/JeanDoggy/Jean_Doggy_Legs_Skirt_Up.png",
                     "True", "images/JeanDoggy/Jean_Doggy_Legs_Skirt.png",
                     ),
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "JeanX.top == 'towel' and JeanX.Upskirt", "images/JeanDoggy/Jean_Doggy_Over_TowelAss_Up.png",
+            "JeanX.top == 'towel' and JeanX.upskirt", "images/JeanDoggy/Jean_Doggy_Over_TowelAss_Up.png",
             "JeanX.top == 'towel'", "images/JeanDoggy/Jean_Doggy_Over_TowelAss.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "'back' in JeanX.Spunk", "images/JeanDoggy/Jean_Doggy_SpunkAss.png",
+            "'back' in JeanX.spunk", "images/JeanDoggy/Jean_Doggy_SpunkAss.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock", Null(),
+            "Player.sprite and Player.cock_position", Null(),
             "primary_action == 'eat_pussy'", "Rogue_Doggy_Lick_Pussy",
             "primary_action == 'eat_ass'", "Rogue_Doggy_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite or Player.Cock != 'out'", Null(),
-            "JeanX.legs == 'skirt' and JeanX.Upskirt", "images/JeanDoggy/Jean_Doggy_Hotdog_Upskirt_Back.png",
+            "not Player.sprite or Player.cock_position != 'out'", Null(),
+            "JeanX.legs == 'skirt' and JeanX.upskirt", "images/JeanDoggy/Jean_Doggy_Hotdog_Upskirt_Back.png",
             "True", "images/JeanDoggy/Jean_Doggy_HotdogBack.png",
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite or Player.Cock != 'out'", Null(),
+            "not Player.sprite or Player.cock_position != 'out'", Null(),
 
 
             "action_speed ", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
@@ -1415,7 +1415,7 @@ image Jean_Pussy_Static:
 
             "JeanX.hose == 'garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_Garter.png",
             "JeanX.hose == 'stockings_and_garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_StockingandGarter.png",
-            "JeanX.underwear and JeanX.underwearDown", Null(),
+            "JeanX.underwear and JeanX.underwear_pulled_down", Null(),
             "JeanX.hose == 'ripped_pantyhose'", "images/JeanDoggy/Jean_Doggy_Hose_Full_Holed.png",
 
             "True", Null(),
@@ -1485,7 +1485,7 @@ image Jean_Pussy_Heading:
 
             "JeanX.hose == 'garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_Garter.png",
             "JeanX.hose == 'stockings_and_garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_StockingandGarter.png",
-            "JeanX.underwear and JeanX.underwearDown", Null(),
+            "JeanX.underwear and JeanX.underwear_pulled_down", Null(),
             "JeanX.hose == 'ripped_pantyhose'", "images/JeanDoggy/Jean_Doggy_Hose_Full_Holed.png",
 
             "True", Null(),
@@ -1555,7 +1555,7 @@ image Jean_Pussy_Fingering:
 
             "JeanX.hose == 'garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_Garter.png",
             "JeanX.hose == 'stockings_and_garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_StockingandGarter.png",
-            "JeanX.underwear and JeanX.underwearDown", Null(),
+            "JeanX.underwear and JeanX.underwear_pulled_down", Null(),
             "JeanX.hose == 'ripped_pantyhose'", "images/JeanDoggy/Jean_Doggy_Hose_Full_Holed.png",
 
             "True", Null(),
@@ -1583,7 +1583,7 @@ image Jean_Pussy_Fucking2:
 
             "JeanX.hose == 'garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_Garter.png",
             "JeanX.hose == 'stockings_and_garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_StockingandGarter.png",
-            "JeanX.underwear and JeanX.underwearDown", Null(),
+            "JeanX.underwear and JeanX.underwear_pulled_down", Null(),
             "JeanX.hose == 'ripped_pantyhose'", "images/JeanDoggy/Jean_Doggy_Hose_Full_Holed.png",
 
             "True", Null(),
@@ -1610,7 +1610,7 @@ image Jean_Pussy_Fucking3:
 
             "JeanX.hose == 'garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_Garter.png",
             "JeanX.hose == 'stockings_and_garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_StockingandGarter.png",
-            "JeanX.underwear and JeanX.underwearDown", Null(),
+            "JeanX.underwear and JeanX.underwear_pulled_down", Null(),
             "JeanX.hose == 'ripped_pantyhose'", "images/JeanDoggy/Jean_Doggy_Hose_Full_Holed.png",
 
             "True", Null(),
@@ -1636,7 +1636,7 @@ image Jean_Anal:
 
             "JeanX.hose == 'garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_Garter.png",
             "JeanX.hose == 'stockings_and_garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_StockingandGarter.png",
-            "JeanX.underwear and JeanX.underwearDown", Null(),
+            "JeanX.underwear and JeanX.underwear_pulled_down", Null(),
             "JeanX.hose == 'ripped_pantyhose'", "images/JeanDoggy/Jean_Doggy_Hose_Full_Holed.png",
 
             "True", Null(),
@@ -1670,7 +1670,7 @@ image Jean_Anal_Fingering:
 
             "JeanX.hose == 'garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_Garter.png",
             "JeanX.hose == 'stockings_and_garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_StockingandGarter.png",
-            "JeanX.underwear and JeanX.underwearDown", Null(),
+            "JeanX.underwear and JeanX.underwear_pulled_down", Null(),
             "JeanX.hose == 'ripped_pantyhose'", "images/JeanDoggy/Jean_Doggy_Hose_Full_Holed.png",
 
             "True", Null(),
@@ -1701,7 +1701,7 @@ image Jean_Anal_Heading:
 
             "JeanX.hose == 'garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_Garter.png",
             "JeanX.hose == 'stockings_and_garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_StockingandGarter.png",
-            "JeanX.underwear and JeanX.underwearDown", Null(),
+            "JeanX.underwear and JeanX.underwear_pulled_down", Null(),
             "JeanX.hose == 'ripped_pantyhose'", "images/JeanDoggy/Jean_Doggy_Hose_Full_Holed.png",
 
             "True", Null(),
@@ -1803,7 +1803,7 @@ image Jean_Anal_Fucking:
 
             "JeanX.hose == 'garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_Garter.png",
             "JeanX.hose == 'stockings_and_garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_StockingandGarter.png",
-            "JeanX.underwear and JeanX.underwearDown", Null(),
+            "JeanX.underwear and JeanX.underwear_pulled_down", Null(),
             "JeanX.hose == 'ripped_pantyhose'", "images/JeanDoggy/Jean_Doggy_Hose_Full_Holed.png",
 
             "True", Null(),
@@ -1829,7 +1829,7 @@ image Jean_Doggy_Anal_FullMask:
 
             "JeanX.hose == 'garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_Garter.png",
             "JeanX.hose == 'stockings_and_garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_StockingandGarter.png",
-            "JeanX.underwear and JeanX.underwearDown", Null(),
+            "JeanX.underwear and JeanX.underwear_pulled_down", Null(),
             "JeanX.hose == 'ripped_pantyhose'", "images/JeanDoggy/Jean_Doggy_Hose_Full_Holed.png",
 
             "True", Null(),
@@ -1894,7 +1894,7 @@ image Jean_Anal_Fucking2:
 
             "JeanX.hose == 'garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_Garter.png",
             "JeanX.hose == 'stockings_and_garterbelt'", "images/JeanDoggy/Jean_Doggy_Hose_StockingandGarter.png",
-            "JeanX.underwear and JeanX.underwearDown", Null(),
+            "JeanX.underwear and JeanX.underwear_pulled_down", Null(),
             "JeanX.hose == 'ripped_pantyhose'", "images/JeanDoggy/Jean_Doggy_Hose_Full_Holed.png",
 
             "True", Null(),
@@ -1949,7 +1949,7 @@ image Jean_Doggy_Feet0:
             repeat
     contains:
         ConditionSwitch(
-                "Player.Sprite", "Zero_Doggy_Up",
+                "Player.sprite", "Zero_Doggy_Up",
                 "True", Null(),
                 )
         zoom 1.2
@@ -2038,7 +2038,7 @@ label Jean_Doggy_Reset:
         return
 
     $ JeanX.ArmPose = 2
-    $ JeanX.SpriteVer = 0
+    $ JeanX.spriteVer = 0
     hide Jean_Doggy_Animation
     call Jean_Hide
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
@@ -2063,23 +2063,23 @@ image Jean_SexSprite:
         (0,0), ConditionSwitch(
 
                 "primary_action == 'eat_pussy'", "Jean_Sex_Lick",
-                "not Player.Sprite", "Jean_Sex_Static",
-                "Player.Cock == 'in'", ConditionSwitch(
+                "not Player.sprite", "Jean_Sex_Static",
+                "Player.cock_position == 'in'", ConditionSwitch(
 
                         "action_speed >= 3", "Jean_Sex_Fucking_Speed3",
                         "action_speed >= 2", "Jean_Sex_Fucking_Speed2",
                         "action_speed ", "Jean_Sex_Fucking_Speed1",
                         "True", "Jean_Sex_Fucking_Speed0",
                         ),
-                "Player.Cock == 'anal'", ConditionSwitch(
+                "Player.cock_position == 'anal'", ConditionSwitch(
 
                         "action_speed >= 3", "Jean_Sex_Anal_Speed3",
                         "action_speed >= 2", "Jean_Sex_Anal_Speed2",
                         "action_speed ", "Jean_Sex_Anal_Speed1",
                         "True", "Jean_Sex_Anal_Speed0",
                         ),
-                "Player.Sprite and Player.Cock == 'out' and action_speed >= 2","Jean_Sex_Hotdog_Speed2",
-                "Player.Sprite and Player.Cock == 'out' and action_speed >= 1","Jean_Sex_Hotdog_Speed1",
+                "Player.sprite and Player.cock_position == 'out' and action_speed >= 2","Jean_Sex_Hotdog_Speed2",
+                "Player.sprite and Player.cock_position == 'out' and action_speed >= 1","Jean_Sex_Hotdog_Speed1",
 
 
 
@@ -2121,7 +2121,7 @@ image Jean_Sex_Torso:
         ConditionSwitch(
             "JeanX.bra == 'corset'", "images/JeanSex/Jean_Sex_Over_Back.png",
             "JeanX.top == 'pink_shirt'", "images/JeanSex/Jean_Sex_Over_Back.png",
-            "JeanX.Uptop", Null(),
+            "JeanX.top_pulled_up", Null(),
             "JeanX.bra == 'bikini_top' and not JeanX.top", Null(),
             "not JeanX.bra and not JeanX.top", Null(),
             "True", "images/JeanSex/Jean_Sex_Over_Back.png",
@@ -2148,7 +2148,7 @@ image Jean_Sex_Torso:
 
 
         ConditionSwitch(
-            "JeanX.Uptop", ConditionSwitch(
+            "JeanX.top_pulled_up", ConditionSwitch(
 
                     "JeanX.bra == 'sports_bra'", "images/JeanSex/Jean_Sex_Bra_Sports_Up.png",
                     "JeanX.bra == 'bikini_top'", "images/JeanSex/Jean_Sex_Bra_Bikini_Up.png",
@@ -2167,7 +2167,7 @@ image Jean_Sex_Torso:
     contains:
 
         ConditionSwitch(
-            "JeanX.Uptop", ConditionSwitch(
+            "JeanX.top_pulled_up", ConditionSwitch(
 
                     "JeanX.top == 'green_shirt'", "images/JeanSex/Jean_Sex_Over_Green_Up.png",
                     "JeanX.top == 'pink_shirt'", "images/JeanSex/Jean_Sex_Over_Pink_Up.png",
@@ -2185,7 +2185,7 @@ image Jean_Sex_Torso:
 
             "JeanX.piercings == 'barbell'", ConditionSwitch(
 
-                    "JeanX.Uptop or (not JeanX.bra and not JeanX.top)", "images/JeanSex/Jean_Sex_Pierce_Tits_Barbell.png",
+                    "JeanX.top_pulled_up or (not JeanX.bra and not JeanX.top)", "images/JeanSex/Jean_Sex_Pierce_Tits_Barbell.png",
                     "JeanX.top == 'green_shirt'", "images/JeanSex/Jean_Sex_Pierce_Tits_Barbell_Green.png",
                     "JeanX.top == 'pink_shirt'", "images/JeanSex/Jean_Sex_Pierce_Tits_Barbell_Pink.png",
                     "JeanX.top == 'yellow_shirt'", "images/JeanSex/Jean_Sex_Pierce_Tits_Barbell_Yellow.png",
@@ -2197,7 +2197,7 @@ image Jean_Sex_Torso:
                     ),
             "JeanX.piercings == 'ring'", ConditionSwitch(
 
-                    "JeanX.Uptop or (not JeanX.bra and not JeanX.top)", "images/JeanSex/Jean_Sex_Pierce_Tits_Ring_Loose.png",
+                    "JeanX.top_pulled_up or (not JeanX.bra and not JeanX.top)", "images/JeanSex/Jean_Sex_Pierce_Tits_Ring_Loose.png",
                     "JeanX.top == 'green_shirt'", "images/JeanSex/Jean_Sex_Pierce_Tits_Ring_Green.png",
                     "JeanX.top == 'pink_shirt'", "images/JeanSex/Jean_Sex_Pierce_Tits_Ring_Pink.png",
                     "JeanX.top == 'yellow_shirt'", "images/JeanSex/Jean_Sex_Pierce_Tits_Ring_Yellow.png",
@@ -2212,7 +2212,7 @@ image Jean_Sex_Torso:
     contains:
 
         ConditionSwitch(
-                "'tits' not in JeanX.Spunk", Null(),
+                "'tits' not in JeanX.spunk", Null(),
                 "True", "images/JeanSex/Jean_Sex_Spunk_Tits.png",
                 )
     contains:
@@ -2334,7 +2334,7 @@ image Jean_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "'anal' in JeanX.Spunk or 'in' in JeanX.Spunk", "images/JeanSex/Jean_Sex_Spunk_Pussy_S.png",
+            "'anal' in JeanX.spunk or 'in' in JeanX.spunk", "images/JeanSex/Jean_Sex_Spunk_Pussy_S.png",
             "True", Null(),
             )
     contains:
@@ -2365,9 +2365,9 @@ image Jean_Sex_Legs_S:
 
         ConditionSwitch(
 
-            "JeanX.legs and not JeanX.Upskirt and JeanX.piercings == 'ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex_Clothed.png",
-            "JeanX.underwear and not JeanX.underwearDown and JeanX.piercings == 'ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex_Clothed.png",
-            "JeanX.hose == 'pantyhose' and not JeanX.underwearDown and JeanX.piercings == 'ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex_Clothed.png",
+            "JeanX.legs and not JeanX.upskirt and JeanX.piercings == 'ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex_Clothed.png",
+            "JeanX.underwear and not JeanX.underwear_pulled_down and JeanX.piercings == 'ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex_Clothed.png",
+            "JeanX.hose == 'pantyhose' and not JeanX.underwear_pulled_down and JeanX.piercings == 'ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex_Clothed.png",
 
             "JeanX.piercings == 'barbell'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Sex.png",
             "JeanX.piercings == 'ring'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Sex.png",
@@ -2382,14 +2382,14 @@ image Jean_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "JeanX.top == 'green_shirt' and not JeanX.Uptop", "images/JeanSex/Jean_Sex_Over_Green_Under_S.png",
+            "JeanX.top == 'green_shirt' and not JeanX.top_pulled_up", "images/JeanSex/Jean_Sex_Over_Green_Under_S.png",
             "JeanX.top == 'pink_shirt'", "images/JeanSex/Jean_Sex_Over_Pink_Under_S.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "JeanX.underwearDown", Null(),
+            "JeanX.underwear_pulled_down", Null(),
             "JeanX.underwear == 'lace_panties'", "images/JeanSex/Jean_Sex_Panties_Sex_Lace.png",
             "JeanX.underwear == 'bikini_bottoms'", "images/JeanSex/Jean_Sex_Panties_Sex_Bikini.png",
             "JeanX.underwear and JeanX.Wet", "images/JeanSex/Jean_Sex_Panties_Sex_Green_W.png",
@@ -2399,7 +2399,7 @@ image Jean_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "JeanX.underwearDown", Null(),
+            "JeanX.underwear_pulled_down", Null(),
 
 
             "JeanX.hose == 'pantyhose'", "images/JeanSex/Jean_Sex_Hose_Pantyhose_S.png",
@@ -2417,9 +2417,9 @@ image Jean_Sex_Legs_S:
 
 
         ConditionSwitch(
-            "JeanX.legs == 'skirt' and JeanX.Upskirt", "images/JeanSex/Jean_Sex_Legs_Sex_Skirt_Up.png",
+            "JeanX.legs == 'skirt' and JeanX.upskirt", "images/JeanSex/Jean_Sex_Legs_Sex_Skirt_Up.png",
             "JeanX.legs == 'skirt'", "images/JeanSex/Jean_Sex_Legs_Sex_Skirt.png",
-            "JeanX.Upskirt", Null(),
+            "JeanX.upskirt", Null(),
             "JeanX.legs == 'pants' and JeanX.Wet >=2", "images/JeanSex/Jean_Sex_Legs_Sex_Pants_W.png",
             "JeanX.legs == 'pants'", "images/JeanSex/Jean_Sex_Legs_Sex_Pants.png",
             "JeanX.legs == 'shorts' and JeanX.Wet >=2", "images/JeanSex/Jean_Sex_Legs_Sex_Shorts_W.png",
@@ -2431,7 +2431,7 @@ image Jean_Sex_Legs_S:
     contains:
 
         ConditionSwitch(
-            "'belly' in JeanX.Spunk", "images/JeanSex/Jean_Sex_Spunk_Belly_S.png",
+            "'belly' in JeanX.spunk", "images/JeanSex/Jean_Sex_Spunk_Belly_S.png",
             "True", Null(),
             )
     zoom 1
@@ -2454,7 +2454,7 @@ image Jean_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "'anal' in JeanX.Spunk and not action_speed", "images/JeanSex/Jean_Sex_Spunk_Pussy_S.png",
+            "'anal' in JeanX.spunk and not action_speed", "images/JeanSex/Jean_Sex_Spunk_Pussy_S.png",
             "True", Null(),
             )
     contains:
@@ -2488,13 +2488,13 @@ image Jean_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "'in' in JeanX.Spunk", "images/JeanSex/Jean_Sex_Spunk_Pussy_A.png",
+            "'in' in JeanX.spunk", "images/JeanSex/Jean_Sex_Spunk_Pussy_A.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "JeanX.underwearDown", Null(),
+            "JeanX.underwear_pulled_down", Null(),
             "JeanX.underwear == 'lace_panties'", "images/JeanSex/Jean_Sex_Panties_Anal_Lace.png",
             "JeanX.underwear == 'bikini_bottoms'", "images/JeanSex/Jean_Sex_Panties_Anal_Bikini.png",
             "JeanX.underwear and JeanX.Wet", "images/JeanSex/Jean_Sex_Panties_Anal_Green_W.png",
@@ -2506,8 +2506,8 @@ image Jean_Sex_Legs_A:
         ConditionSwitch(
             "JeanX.piercings == 'barbell'", ConditionSwitch(
 
-                    "JeanX.Upskirt or (not JeanX.legs and not JeanX.underwear)", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Anal.png",
-                    "JeanX.underwearDown and not JeanX.legs", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Anal.png",
+                    "JeanX.upskirt or (not JeanX.legs and not JeanX.underwear)", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Anal.png",
+                    "JeanX.underwear_pulled_down and not JeanX.legs", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Anal.png",
                     "JeanX.underwear == 'lace_panties'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Lace.png",
                     "JeanX.underwear == 'bikini_bottoms'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Bikini.png",
                     "JeanX.underwear", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Green.png",
@@ -2515,8 +2515,8 @@ image Jean_Sex_Legs_A:
                     ),
             "JeanX.piercings == 'ring'", ConditionSwitch(
 
-                    "JeanX.Upskirt or (not JeanX.legs and not JeanX.underwear)", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Anal.png",
-                    "JeanX.underwearDown and not JeanX.legs", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Anal.png",
+                    "JeanX.upskirt or (not JeanX.legs and not JeanX.underwear)", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Anal.png",
+                    "JeanX.underwear_pulled_down and not JeanX.legs", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Anal.png",
                     "JeanX.underwear == 'lace_panties'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Lace.png",
                     "JeanX.underwear == 'bikini_bottoms'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Bikini.png",
                     "JeanX.underwear", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Green.png",
@@ -2527,7 +2527,7 @@ image Jean_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "(JeanX.underwear and JeanX.underwearDown)", Null(),
+            "(JeanX.underwear and JeanX.underwear_pulled_down)", Null(),
 
 
             "JeanX.hose == 'pantyhose'", "images/JeanSex/Jean_Sex_Hose_Pantyhose_A.png",
@@ -2536,10 +2536,10 @@ image Jean_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "JeanX.legs == 'skirt' and JeanX.Upskirt", "images/JeanSex/Jean_Sex_Legs_Anal_Skirt_Up.png",
+            "JeanX.legs == 'skirt' and JeanX.upskirt", "images/JeanSex/Jean_Sex_Legs_Anal_Skirt_Up.png",
             "JeanX.legs == 'skirt' and primary_action == 'hotdog'", "images/JeanSex/Jean_Sex_Legs_Anal_Skirt_Up.png",
             "JeanX.legs == 'skirt'", "images/JeanSex/Jean_Sex_Legs_Anal_Skirt.png",
-            "JeanX.Upskirt", Null(),
+            "JeanX.upskirt", Null(),
             "JeanX.legs == 'pants' and JeanX.Wet >=2", "images/JeanSex/Jean_Sex_Legs_Anal_Pants_W.png",
             "JeanX.legs == 'pants'", "images/JeanSex/Jean_Sex_Legs_Anal_Pants.png",
             "JeanX.legs == 'shorts' and JeanX.Wet >=2", "images/JeanSex/Jean_Sex_Legs_Anal_Shorts_W.png",
@@ -2551,12 +2551,12 @@ image Jean_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "JeanX.hose == 'pantyhose' and not JeanX.underwearDown", Null(),
-            "JeanX.legs and not JeanX.Upskirt and JeanX.Wet >=2", Null(),
+            "JeanX.hose == 'pantyhose' and not JeanX.underwear_pulled_down", Null(),
+            "JeanX.legs and not JeanX.upskirt and JeanX.Wet >=2", Null(),
             "JeanX.piercings == 'barbell'", ConditionSwitch(
 
-                    "JeanX.Upskirt or (not JeanX.legs and not JeanX.underwear)", Null(),
-                    "JeanX.legs == 'skirt' and not JeanX.Upskirt", Null(),
+                    "JeanX.upskirt or (not JeanX.legs and not JeanX.underwear)", Null(),
+                    "JeanX.legs == 'skirt' and not JeanX.upskirt", Null(),
                     "JeanX.legs == 'pants'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Pants.png",
                     "JeanX.legs == 'shorts'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Shorts.png",
                     "JeanX.legs == 'yoga_pants'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Barbell_Yoga.png",
@@ -2564,8 +2564,8 @@ image Jean_Sex_Legs_A:
                     ),
             "JeanX.piercings == 'ring'", ConditionSwitch(
 
-                    "JeanX.Upskirt or (not JeanX.legs and not JeanX.underwear)", Null(),
-                    "JeanX.legs == 'skirt' and not JeanX.Upskirt", Null(),
+                    "JeanX.upskirt or (not JeanX.legs and not JeanX.underwear)", Null(),
+                    "JeanX.legs == 'skirt' and not JeanX.upskirt", Null(),
                     "JeanX.legs == 'pants'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Pants.png",
                     "JeanX.legs == 'shorts'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Shorts.png",
                     "JeanX.legs == 'yoga_pants'", "images/JeanSex/Jean_Sex_Pierce_Pussy_Ring_Yoga.png",
@@ -2576,13 +2576,13 @@ image Jean_Sex_Legs_A:
     contains:
 
         ConditionSwitch(
-            "'belly' in JeanX.Spunk", "images/JeanSex/Jean_Sex_Spunk_Belly_A.png",
+            "'belly' in JeanX.spunk", "images/JeanSex/Jean_Sex_Spunk_Belly_A.png",
             "True", Null(),
             )
     contains:
         ConditionSwitch(
 
-            "Player.Sprite and Player.Cock", Null(),
+            "Player.sprite and Player.cock_position", Null(),
             "primary_action == 'eat_pussy'", "Jean_Sex_Lick_Pussy",
             "primary_action == 'eat_ass'", "Jean_Sex_Lick_Ass",
             "True", Null()
@@ -2635,7 +2635,7 @@ image Jean_Sex_Zero_Cock:
         subpixel True
 
         ConditionSwitch(
-                "Player.Sprite", "Zero_Blowcock" ,
+                "Player.sprite", "Zero_Blowcock" ,
                 "True", Null(),
                 )
         subpixel True
@@ -3208,30 +3208,30 @@ label Jean_Sex_Launch(Line=primary_action):
 
 
 
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     $ Line = "solo" if not Line else Line
     if Line == "sex":
-        $ Player.Cock = "in"
+        $ Player.cock_position = "in"
         if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
             $ offhand_action = 0
     elif Line == "anal":
-        $ Player.Cock = "anal"
+        $ Player.cock_position = "anal"
         if offhand_action in ("finger_ass","dildo_anal","eat_ass"):
             $ offhand_action = 0
     elif Line == "hotdog":
         if JeanX.PantsNum() == 5:
-            $ JeanX.Upskirt = 1
-        $ Player.Cock = "out"
+            $ JeanX.upskirt = 1
+        $ Player.cock_position = "out"
     elif Line == "foot":
         $ ShowFeet = 1
-        $ Player.Cock = "foot"
+        $ Player.cock_position = "foot"
         $ JeanX.pose = "doggy"
     elif Line == "massage":
-        $ Player.Sprite = 0
-        $ Player.Cock = 0
+        $ Player.sprite = 0
+        $ Player.cock_position = 0
     else:
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
+        $ Player.sprite = 0
+        $ Player.cock_position = "out"
         $ action_speed = 0
     $ primary_action = Line
 
@@ -3335,7 +3335,7 @@ image Jean_BJ_Animation:
             ),
         (325,490), ConditionSwitch(
 
-            "action_speed < 3 or 'mouth' not in JeanX.Spunk", Null(),
+            "action_speed < 3 or 'mouth' not in JeanX.spunk", Null(),
             "action_speed == 3", At("JeanSuckingSpunk", Jean_BJ_Head_3()),
             "action_speed == 4", At("JeanSuckingSpunk", Jean_BJ_Head_4()),
             "action_speed == 6", At("JeanSuckingSpunk", Jean_BJ_Head_6()),
@@ -3454,7 +3454,7 @@ image Jean_BJ_Head:
 
         (0,0), ConditionSwitch(
 
-            "'mouth' not in JeanX.Spunk", Null(),
+            "'mouth' not in JeanX.spunk", Null(),
             "action_speed and renpy.showing('Jean_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/JeanBJFace/Jean_BJ_Spunk_Tongue.png",
@@ -3504,8 +3504,8 @@ image Jean_BJ_Head:
 
         (0,0), ConditionSwitch(
 
-            "'hair' in JeanX.Spunk", "images/JeanBJFace/Jean_BJ_Spunk_Facial2.png",
-            "'facial' in JeanX.Spunk", "images/JeanBJFace/Jean_BJ_Spunk_Facial1.png",
+            "'hair' in JeanX.spunk", "images/JeanBJFace/Jean_BJ_Spunk_Facial2.png",
+            "'facial' in JeanX.spunk", "images/JeanBJFace/Jean_BJ_Spunk_Facial1.png",
             "True", Null(),
             ),
         )
@@ -4241,7 +4241,7 @@ image Jean_TJ_Animation:
     contains:
         ConditionSwitch(
 
-                    "not Player.Sprite","Jean_TJ_0",
+                    "not Player.sprite","Jean_TJ_0",
                     "action_speed == 1", "Jean_TJ_1",
                     "action_speed == 4", "Jean_TJ_4",
                     "action_speed == 5", "Jean_TJ_5",
@@ -4348,7 +4348,7 @@ image Jean_TJ_TitR:
     contains:
 
         ConditionSwitch(
-                        "'tits' not in JeanX.Spunk",Null(),
+                        "'tits' not in JeanX.spunk",Null(),
                         "True",       "images/JeanBJFace/Jean_TJ_Spunk_TitsUnder.png",
                         )
     transform_anchor True
@@ -4410,35 +4410,35 @@ image Jean_TJ_Tits:
                     )
     contains:
         ConditionSwitch(
-                        "'tits' not in JeanX.Spunk",Null(),
+                        "'tits' not in JeanX.spunk",Null(),
                         "True",       "images/JeanBJFace/Jean_TJ_Spunk_Tits.png",
                         )
     contains:
 
         ConditionSwitch(
-                        "JeanX.bra == 'green_bra' and JeanX.Uptop and JeanX.top == 'green_shirt'","images/JeanBJFace/Jean_TJ_Chest_Bra_UpS.png",
-                        "JeanX.bra == 'green_bra' and JeanX.Uptop","images/JeanBJFace/Jean_TJ_Chest_Bra_Up.png",
-                        "JeanX.bra == 'lace_bra' and JeanX.Uptop and JeanX.top == 'green_shirt'","images/JeanBJFace/Jean_TJ_Chest_Bra_UpS.png",
-                        "JeanX.bra == 'lace_bra' and JeanX.Uptop","images/JeanBJFace/Jean_TJ_Chest_Bra_Up.png",
-                        "JeanX.bra == 'sports_bra' and JeanX.Uptop","images/JeanBJFace/Jean_TJ_Chest_SportsBra_Up.png",
-                        "JeanX.bra == 'bikini_top' and JeanX.Uptop","images/JeanBJFace/Jean_TJ_Chest_Bikini_Up.png",
+                        "JeanX.bra == 'green_bra' and JeanX.top_pulled_up and JeanX.top == 'green_shirt'","images/JeanBJFace/Jean_TJ_Chest_Bra_UpS.png",
+                        "JeanX.bra == 'green_bra' and JeanX.top_pulled_up","images/JeanBJFace/Jean_TJ_Chest_Bra_Up.png",
+                        "JeanX.bra == 'lace_bra' and JeanX.top_pulled_up and JeanX.top == 'green_shirt'","images/JeanBJFace/Jean_TJ_Chest_Bra_UpS.png",
+                        "JeanX.bra == 'lace_bra' and JeanX.top_pulled_up","images/JeanBJFace/Jean_TJ_Chest_Bra_Up.png",
+                        "JeanX.bra == 'sports_bra' and JeanX.top_pulled_up","images/JeanBJFace/Jean_TJ_Chest_SportsBra_Up.png",
+                        "JeanX.bra == 'bikini_top' and JeanX.top_pulled_up","images/JeanBJFace/Jean_TJ_Chest_Bikini_Up.png",
                         "JeanX.bra == 'green_bra' and JeanX.top == 'green_shirt'","images/JeanBJFace/Jean_TJ_Chest_Bra_Strapless.png",
                         "JeanX.bra == 'green_bra'","images/JeanBJFace/Jean_TJ_Chest_Bra_Top.png",
                         "JeanX.bra == 'lace_bra' and JeanX.top == 'green_shirt'","images/JeanBJFace/Jean_TJ_Chest_LaceBra_Strapless.png",
                         "JeanX.bra == 'lace_bra'","images/JeanBJFace/Jean_TJ_Chest_LaceBra_Top.png",
                         "JeanX.bra == 'sports_bra'","images/JeanBJFace/Jean_TJ_Chest_SportsBra_Top.png",
                         "JeanX.bra == 'bikini_top'","images/JeanBJFace/Jean_TJ_Chest_Bikini_Top.png",
-                        "JeanX.bra == 'corset' and not JeanX.Uptop and not renpy.showing('Jean_TJ_Animation')", "images/JeanBJFace/Jean_TJ_Chest_Corset.png",
+                        "JeanX.bra == 'corset' and not JeanX.top_pulled_up and not renpy.showing('Jean_TJ_Animation')", "images/JeanBJFace/Jean_TJ_Chest_Corset.png",
                         "True", Null(),
                         )
     contains:
 
         ConditionSwitch(
 
-                        "JeanX.top == 'yellow_shirt' and JeanX.Uptop","images/JeanBJFace/Jean_TJ_Over_Tank_Up.png",
+                        "JeanX.top == 'yellow_shirt' and JeanX.top_pulled_up","images/JeanBJFace/Jean_TJ_Over_Tank_Up.png",
                         "JeanX.top == 'yellow_shirt'","images/JeanBJFace/Jean_TJ_Over_Tank_Top.png",
-                        "JeanX.top == 'green_shirt' and JeanX.Uptop","images/JeanBJFace/Jean_TJ_Over_GreenShirt_Up.png",
-                        "JeanX.top == 'pink_shirt' and JeanX.Uptop","images/JeanBJFace/Jean_TJ_Over_PinkShirt_Up.png",
+                        "JeanX.top == 'green_shirt' and JeanX.top_pulled_up","images/JeanBJFace/Jean_TJ_Over_GreenShirt_Up.png",
+                        "JeanX.top == 'pink_shirt' and JeanX.top_pulled_up","images/JeanBJFace/Jean_TJ_Over_PinkShirt_Up.png",
                         "JeanX.top == 'green_shirt'","images/JeanBJFace/Jean_TJ_Over_GreenShirt_Top.png",
                         "JeanX.top == 'pink_shirt'","images/JeanBJFace/Jean_TJ_Over_PinkShirt_Top.png",
                         "JeanX.top == 'towel' and not renpy.showing('Jean_TJ_Animation')", "images/JeanBJFace/Jean_TJ_Over_Towel.png",
@@ -4447,7 +4447,7 @@ image Jean_TJ_Tits:
     contains:
 
         ConditionSwitch(
-                        "JeanX.Uptop", Null(),
+                        "JeanX.top_pulled_up", Null(),
                         "(not JeanX.top or JeanX.top == 'towel') and (not JeanX.bra or JeanX.bra == 'corset')", Null(),
                         "JeanX.piercings == 'ring'","images/JeanBJFace/Jean_TJ_Pierce_RingC.png",
                         "JeanX.piercings == 'barbell'","images/JeanBJFace/Jean_TJ_Pierce_BarbellC.png",
@@ -5174,14 +5174,14 @@ label Jean_TJ_Launch(Line=primary_action):
             alpha 0
 
     if JeanX.top == "towel" or JeanX.bra == "corset":
-        $ JeanX.Uptop = 1
+        $ JeanX.top_pulled_up = 1
 
     $ action_speed = 0
     if Line != "cum":
         $ primary_action = "titjob"
     show Jean_TJ_Animation zorder 150:
         pos (1000,1050)
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
     return
 
@@ -5191,7 +5191,7 @@ label Jean_TJ_Reset:
         return
 
     call Jean_Hide
-    $ Player.Sprite = 0
+    $ Player.sprite = 0
 
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         zoom 2.3 xpos 750 yoffset -100

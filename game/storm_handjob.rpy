@@ -16,11 +16,11 @@ label Storm_Handjob:
 
     if action_context == "shift":
         $ approval_bonus += 15
-    if "exhibitionist" in StormX.Traits:
+    if "exhibitionist" in StormX.traits:
         $ approval_bonus += (3*Taboo)
     if StormX in Player.Harem or "sex friend" in StormX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in StormX.Traits:
+    elif "ex" in StormX.traits:
         $ approval_bonus -= 40
     if StormX.event_counter["forced"] and not StormX.Forced:
         $ approval_bonus -= 5*StormX.event_counter["forced"]
@@ -32,13 +32,13 @@ label Storm_Handjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_handjob" in StormX.recent_history else 0
 
-    $ Approval = approval_check(StormX, 1100, TabM = 3)
+    $ approval = approval_check(StormX, 1100, TabM = 3)
 
     if not StormX.action_counter["handjob"] and "no_handjob" not in StormX.recent_history:
         $ StormX.change_face("sly", 2)
         ch_s "You would like me to jerk you off?"
 
-    if not StormX.action_counter["handjob"] and Approval:
+    if not StormX.action_counter["handjob"] and approval:
         if StormX.Forced:
             $ StormX.change_face("sad",1)
             $ StormX.change_stat("love", 70, -3, 1)
@@ -58,7 +58,7 @@ label Storm_Handjob:
             $ StormX.change_face("lipbite",1,Eyes="side")
             ch_s "I suppose. . ."
 
-    elif Approval:
+    elif approval:
         if StormX.Forced:
             $ StormX.change_face("sad")
             $ StormX.change_stat("love", 70, -3, 1)
@@ -91,7 +91,7 @@ label Storm_Handjob:
             ch_s "[Line]"
         $ Line = 0
 
-    if Approval >= 2:
+    if approval >= 2:
         if StormX.Forced:
             $ StormX.change_face("sad")
             $ StormX.change_stat("obedience", 90, 1)
@@ -147,7 +147,7 @@ label Storm_Handjob:
                 $ StormX.daily_history.append("no_handjob")
                 return
             "I'd really appreciate it. . .":
-                if Approval:
+                if approval:
                     $ StormX.change_face("sexy")
                     $ StormX.change_stat("obedience", 90, 2)
                     $ StormX.change_stat("obedience", 50, 2)
@@ -164,8 +164,8 @@ label Storm_Handjob:
                     jump Storm_HJ_Prep
             "Come on, get to work.":
 
-                $ Approval = approval_check(StormX, 350, "OI", TabM = 3)
-                if Approval > 1 or (Approval and StormX.Forced):
+                $ approval = approval_check(StormX, 350, "OI", TabM = 3)
+                if approval > 1 or (approval and StormX.Forced):
                     $ StormX.change_face("angry")
                     $ StormX.change_stat("love", 70, -5, 1)
                     $ StormX.change_stat("love", 200, -2)
@@ -265,7 +265,7 @@ label Storm_HJ_Prep:
                 $ StormX.change_stat("obedience", 50, 1)
                 $ StormX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ StormX.AddWord(1,"refused","refused")
+                $ StormX.add_word(1,"refused","refused")
                 return
 
     if not StormX.action_counter["handjob"]:
@@ -284,8 +284,8 @@ label Storm_HJ_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ StormX.DrainWord("no_taboo")
-    $ StormX.DrainWord("no_handjob")
+        $ StormX.drain_word("no_taboo")
+    $ StormX.drain_word("no_handjob")
     $ StormX.recent_history.append("handjob")
     $ StormX.daily_history.append("handjob")
 
@@ -315,9 +315,9 @@ label Storm_HJ_Cycle:
                     "You ask her to slow it down a bit."
                 "Slow Down. . . (locked)" if not action_speed:
                     pass
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -372,18 +372,18 @@ label Storm_HJ_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Storm_HJ_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Storm_HJ_Cycle
                                 "Never mind":
                                     jump Storm_HJ_Cycle
                         "Undress [StormX.name]":
                             call Girl_Undress (StormX)
-                        "Clean up [StormX.name] (locked)" if not StormX.Spunk:
+                        "Clean up [StormX.name] (locked)" if not StormX.spunk:
                             pass
-                        "Clean up [StormX.name]" if StormX.Spunk:
+                        "Clean up [StormX.name]" if StormX.spunk:
                             call Girl_Cleanup (StormX, "ask")
                         "Never mind":
                             jump Storm_HJ_Cycle
@@ -517,7 +517,7 @@ label Storm_HJ_After:
     $ StormX.action_counter["handjob"] += 1
     $ StormX.remaining_actions -=1
     $ StormX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ StormX.addiction_rate += 1
     $ StormX.change_stat("lust", 90, 5)
 
@@ -578,11 +578,11 @@ label Storm_Titjob:
         $ approval_bonus += 10
     if action_context == "shift":
         $ approval_bonus += 15
-    if "exhibitionist" in StormX.Traits:
+    if "exhibitionist" in StormX.traits:
         $ approval_bonus += (5*Taboo)
     if StormX in Player.Harem or "sex friend" in StormX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in StormX.Traits:
+    elif "ex" in StormX.traits:
         $ approval_bonus -= 30
     if StormX.event_counter["forced"] and not StormX.Forced:
         $ approval_bonus -= 5*StormX.event_counter["forced"]
@@ -594,14 +594,14 @@ label Storm_Titjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_titjob" in StormX.recent_history else 0
 
-    $ Approval = approval_check(StormX, 1200, TabM = 5)
+    $ approval = approval_check(StormX, 1200, TabM = 5)
 
     if not StormX.action_counter["titjob"] and "no_titjob" not in StormX.recent_history:
         $ StormX.change_face("surprised", 1)
         $ StormX.mouth = "kiss"
         ch_s "My breasts are really appealing to you, [StormX.player_petname]?"
 
-    if not StormX.action_counter["titjob"] and Approval:
+    if not StormX.action_counter["titjob"] and approval:
 
         if StormX.Forced:
             $ StormX.change_face("sad")
@@ -623,7 +623,7 @@ label Storm_Titjob:
             $ StormX.mouth = "smile"
             ch_s "Hmm, I was expecting you to ask. . ."
 
-    elif Approval:
+    elif approval:
 
         if StormX.Forced:
             $ StormX.change_face("sad")
@@ -656,7 +656,7 @@ label Storm_Titjob:
             ch_s "[Line]"
         $ Line = 0
 
-    if Approval >= 2:
+    if approval >= 2:
         if StormX.Forced:
             $ StormX.change_face("sad")
             $ StormX.change_stat("obedience", 90, 1)
@@ -712,7 +712,7 @@ label Storm_Titjob:
                 $ StormX.daily_history.append("no_titjob")
                 return
             "I think this could be fun for both of us. . .":
-                if Approval:
+                if approval:
                     $ StormX.change_face("sexy")
                     $ StormX.change_stat("obedience", 80, 2)
                     $ StormX.change_stat("obedience", 40, 2)
@@ -728,8 +728,8 @@ label Storm_Titjob:
                     $ Line = 0
                     jump Storm_TJ_Prep
                 else:
-                    $ Approval = approval_check(StormX, 1100, TabM = 3)
-                    if Approval >= 2:
+                    $ approval = approval_check(StormX, 1100, TabM = 3)
+                    if approval >= 2:
                         $ StormX.change_stat("inhibition", 80, 1)
                         $ StormX.change_stat("inhibition", 60, 3)
                         $ StormX.change_face("confused", 1)
@@ -746,7 +746,7 @@ label Storm_Titjob:
                                 jump Storm_BJ_Prep
                             "Nah, it's all about dem titties.":
                                 $ Line = "no_BJ"
-                    if Approval:
+                    if approval:
                         $ StormX.change_stat("inhibition", 80, 1)
                         $ StormX.change_stat("inhibition", 60, 3)
                         $ StormX.change_face("confused", 1)
@@ -769,8 +769,8 @@ label Storm_Titjob:
 
 
                 $ StormX.nameCheck()
-                $ Approval = approval_check(StormX, 700, "OI", TabM = 4)
-                if Approval > 1 or (Approval and StormX.Forced):
+                $ approval = approval_check(StormX, 700, "OI", TabM = 4)
+                if approval > 1 or (approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
                     $ StormX.change_stat("love", 200, -2)
@@ -863,7 +863,7 @@ label Storm_TJ_Prep:
                 $ StormX.change_stat("obedience", 90, 1)
                 $ StormX.change_stat("obedience", 50, 3)
                 $ Player.recent_history.append("nope")
-                $ StormX.AddWord(1,"refused","refused")
+                $ StormX.add_word(1,"refused","refused")
                 return
     if not StormX.action_counter["titjob"]:
         if StormX.Forced:
@@ -881,8 +881,8 @@ label Storm_TJ_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ StormX.DrainWord("no_taboo")
-    $ StormX.DrainWord("no_titjob")
+        $ StormX.drain_word("no_taboo")
+    $ StormX.drain_word("no_titjob")
     $ StormX.recent_history.append("titjob")
     $ StormX.daily_history.append("titjob")
 
@@ -921,9 +921,9 @@ label Storm_TJ_Cycle:
                 "Lick it (locked)" if action_speed == 3:
                     pass
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -977,18 +977,18 @@ label Storm_TJ_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Storm_TJ_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Storm_TJ_Cycle
                                 "Never mind":
                                     jump Storm_TJ_Cycle
                         "Undress [StormX.name]":
                             call Girl_Undress (StormX)
-                        "Clean up [StormX.name] (locked)" if not StormX.Spunk:
+                        "Clean up [StormX.name] (locked)" if not StormX.spunk:
                             pass
-                        "Clean up [StormX.name]" if StormX.Spunk:
+                        "Clean up [StormX.name]" if StormX.spunk:
                             call Girl_Cleanup (StormX, "ask")
                         "Never mind":
                             jump Storm_TJ_Cycle
@@ -1121,7 +1121,7 @@ label Storm_TJ_After:
     $ StormX.action_counter["titjob"] += 1
     $ StormX.remaining_actions -=1
     $ StormX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ StormX.addiction_rate += 1
 
     if Partner == "Kitty":
@@ -1173,11 +1173,11 @@ label Storm_Blowjob:
 
     if action_context == "shift":
         $ approval_bonus += 15
-    if "exhibitionist" in StormX.Traits:
+    if "exhibitionist" in StormX.traits:
         $ approval_bonus += (4*Taboo)
     if StormX in Player.Harem or "sex friend" in StormX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in StormX.Traits:
+    elif "ex" in StormX.traits:
         $ approval_bonus -= 40
     if StormX.event_counter["forced"] and not StormX.Forced:
         $ approval_bonus -= 5*StormX.event_counter["forced"]
@@ -1189,13 +1189,13 @@ label Storm_Blowjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_blowjob" in StormX.recent_history else 0
 
-    $ Approval = approval_check(StormX, 1300, TabM = 4)
+    $ approval = approval_check(StormX, 1300, TabM = 4)
 
     if not StormX.action_counter["blowjob"] and "no_blowjob" not in StormX.recent_history:
         $ StormX.change_face("sly")
         ch_s "You would like me to suck on your penis?"
 
-    if not StormX.action_counter["blowjob"] and Approval:
+    if not StormX.action_counter["blowjob"] and approval:
         if StormX.Forced:
             $ StormX.change_face("sad")
             $ StormX.change_stat("love", 70, -3, 1)
@@ -1215,7 +1215,7 @@ label Storm_Blowjob:
             $ StormX.change_face("sad")
             $ StormX.mouth = "smile"
             ch_s "I suppose. . ."
-    elif Approval:
+    elif approval:
         if StormX.Forced:
             $ StormX.change_face("sad")
             $ StormX.change_stat("love", 70, -3, 1)
@@ -1250,7 +1250,7 @@ label Storm_Blowjob:
             ch_s "[Line]"
         $ Line = 0
 
-    if Approval >= 2:
+    if approval >= 2:
         if StormX.Forced:
             $ StormX.change_face("sad")
             $ StormX.change_stat("obedience", 90, 1)
@@ -1309,7 +1309,7 @@ label Storm_Blowjob:
                 $ StormX.daily_history.append("no_blowjob")
                 return
             "Come on, please?":
-                if Approval:
+                if approval:
                     $ StormX.change_face("sexy")
                     $ StormX.change_stat("obedience", 90, 2)
                     $ StormX.change_stat("obedience", 50, 2)
@@ -1350,8 +1350,8 @@ label Storm_Blowjob:
 
 
                 $ StormX.nameCheck()
-                $ Approval = approval_check(StormX, 750, "OI", TabM = 3)
-                if Approval > 1 or (Approval and StormX.Forced):
+                $ approval = approval_check(StormX, 750, "OI", TabM = 3)
+                if approval > 1 or (approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
                     $ StormX.change_stat("love", 200, -2)
@@ -1445,7 +1445,7 @@ label Storm_BJ_Prep:
                 $ StormX.change_stat("obedience", 90, 1)
                 $ StormX.change_stat("obedience", 50, 3)
                 $ Player.recent_history.append("nope")
-                $ StormX.AddWord(1,"refused","refused")
+                $ StormX.add_word(1,"refused","refused")
                 return
     if not StormX.action_counter["blowjob"]:
         if StormX.Forced:
@@ -1463,8 +1463,8 @@ label Storm_BJ_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ StormX.DrainWord("no_taboo")
-    $ StormX.DrainWord("no_blowjob")
+        $ StormX.drain_word("no_taboo")
+    $ StormX.drain_word("no_blowjob")
     $ StormX.recent_history.append("blowjob")
     $ StormX.daily_history.append("blowjob")
 
@@ -1531,9 +1531,9 @@ label Storm_BJ_Cycle:
                         $ action_speed = 1
                     $ StormX.recent_history.append("setpace")
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -1587,18 +1587,18 @@ label Storm_BJ_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Storm_BJ_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Storm_BJ_Cycle
                                 "Never mind":
                                     jump Storm_BJ_Cycle
                         "Undress [StormX.name]":
                             call Girl_Undress (StormX)
-                        "Clean up [StormX.name] (locked)" if not StormX.Spunk:
+                        "Clean up [StormX.name] (locked)" if not StormX.spunk:
                             pass
-                        "Clean up [StormX.name]" if StormX.Spunk:
+                        "Clean up [StormX.name]" if StormX.spunk:
                             call Girl_Cleanup (StormX, "ask")
                         "Never mind":
                             jump Storm_BJ_Cycle
@@ -1624,8 +1624,8 @@ label Storm_BJ_Cycle:
         $ counter += 1
         $ Round -= 1
         if action_speed:
-            $ Player.Wet = 1
-            $ Player.Spunk = 0 if Player.Spunk else Player.Spunk
+            $ Player.cock_wet = 1
+            $ Player.spunk = 0 if Player.spunk else Player.spunk
 
         $ Player.focus = 50 if not Player.semen and Player.focus >= 50 else Player.focus
         if Player.focus >= 100 or StormX.lust >= 100:
@@ -1737,7 +1737,7 @@ label Storm_BJ_After:
     $ StormX.action_counter["blowjob"] += 1
     $ StormX.remaining_actions -=1
     $ StormX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ StormX.addiction_rate += 1
 
     call Partner_Like (StormX, 2)
@@ -1773,9 +1773,9 @@ label Storm_BJ_After:
 
 
 label Storm_Dildo_Check:
-    if "dildo" in Player.Inventory:
+    if "dildo" in Player.inventory:
         "You pull out a large rubber dildo. Lucky you remembered to keep it handy."
-    elif "dildo" in StormX.Inventory:
+    elif "dildo" in StormX.inventory:
         "You ask [StormX.name] to get out her favorite Dildo."
     else:
         "You don't have one of those on you."
@@ -1801,11 +1801,11 @@ label Storm_Dildo_Pussy:
 
     if action_context == "shift":
         $ approval_bonus += 10
-    if "exhibitionist" in StormX.Traits:
+    if "exhibitionist" in StormX.traits:
         $ approval_bonus += (5*Taboo)
     if StormX in Player.Harem or "sex friend" in StormX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in StormX.Traits:
+    elif "ex" in StormX.traits:
         $ approval_bonus -= 40
     if StormX.event_counter["forced"] and not StormX.Forced:
         $ approval_bonus -= 5*StormX.event_counter["forced"]
@@ -1817,13 +1817,13 @@ label Storm_Dildo_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_dildo" in StormX.recent_history else 0
 
-    $ Approval = approval_check(StormX, 1250, TabM = 4)
+    $ approval = approval_check(StormX, 1250, TabM = 4)
 
     if action_context == StormX:
-        if Approval > 2:
+        if approval > 2:
             if StormX.PantsNum() == 5:
                 "[StormX.name] grabs her dildo, hiking up her skirt as she does."
-                $ StormX.Upskirt = 1
+                $ StormX.upskirt = 1
             elif StormX.PantsNum() > 6:
                 "[StormX.name] grabs her dildo, pulling down her pants as she does."
                 $ StormX.legs = 0
@@ -1867,7 +1867,7 @@ label Storm_Dildo_Pussy:
         "You rub the dildo across her body, and along her moist slit."
         $ StormX.change_face("surprised", 1)
 
-        if (StormX.action_counter["dildo_pussy"] and Approval) or (Approval > 1):
+        if (StormX.action_counter["dildo_pussy"] and approval) or (approval > 1):
             "[StormX.name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
             $ StormX.change_face("sexy")
             $ StormX.change_stat("obedience", 70, 3)
@@ -1880,7 +1880,7 @@ label Storm_Dildo_Pussy:
             menu:
                 ch_s "Excuse yourself, what are you planning to do with that?!"
                 "Sorry, sorry! Never mind.":
-                    if Approval:
+                    if approval:
                         $ StormX.change_face("sexy", 1)
                         $ StormX.change_stat("obedience", 70, 3)
                         $ StormX.change_stat("inhibition", 50, 3)
@@ -1928,7 +1928,7 @@ label Storm_Dildo_Pussy:
             $ StormX.change_face("sad")
             ch_s "I suppose there are worst things you could ask for."
 
-    if not StormX.action_counter["dildo_pussy"] and Approval:
+    if not StormX.action_counter["dildo_pussy"] and approval:
 
         if StormX.Forced:
             $ StormX.change_face("sad")
@@ -1947,7 +1947,7 @@ label Storm_Dildo_Pussy:
             $ StormX.mouth = "smile"
             ch_s "I guess it could be fun with a partner. . ."
 
-    elif Approval:
+    elif approval:
 
         if StormX.Forced:
             $ StormX.change_face("sad")
@@ -1981,7 +1981,7 @@ label Storm_Dildo_Pussy:
             ch_s "[Line]"
             $ Line = 0
 
-    if Approval >= 2:
+    if approval >= 2:
 
         if StormX.Forced:
             $ StormX.change_face("sad")
@@ -2040,7 +2040,7 @@ label Storm_Dildo_Pussy:
                 $ StormX.daily_history.append("no_dildo")
                 return
             "I think you'd like it. . .":
-                if Approval:
+                if approval:
                     $ StormX.change_face("sexy")
                     $ StormX.change_stat("obedience", 90, 2)
                     $ StormX.change_stat("obedience", 50, 2)
@@ -2056,8 +2056,8 @@ label Storm_Dildo_Pussy:
                     pass
             "[[press it against her]":
 
-                $ Approval = approval_check(StormX, 950, "OI", TabM = 3)
-                if Approval > 1 or (Approval and StormX.Forced):
+                $ approval = approval_check(StormX, 950, "OI", TabM = 3)
+                if approval > 1 or (approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
                     $ StormX.change_stat("love", 200, -5)
@@ -2137,8 +2137,8 @@ label Storm_DP_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ StormX.DrainWord("no_taboo")
-    $ StormX.DrainWord("no_dildo")
+        $ StormX.drain_word("no_taboo")
+    $ StormX.drain_word("no_dildo")
     $ StormX.recent_history.append("dildo_pussy")
     $ StormX.daily_history.append("dildo_pussy")
 
@@ -2158,9 +2158,9 @@ label Storm_DP_Cycle:
                     call Slap_Ass (StormX)
                     jump Storm_DP_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -2224,18 +2224,18 @@ label Storm_DP_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Storm_DP_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Storm_DP_Cycle
                                 "Never mind":
                                     jump Storm_DP_Cycle
                         "Undress [StormX.name]":
                             call Girl_Undress (StormX)
-                        "Clean up [StormX.name] (locked)" if not StormX.Spunk:
+                        "Clean up [StormX.name] (locked)" if not StormX.spunk:
                             pass
-                        "Clean up [StormX.name]" if StormX.Spunk:
+                        "Clean up [StormX.name]" if StormX.spunk:
                             call Girl_Cleanup (StormX, "ask")
                         "Never mind":
                             jump Storm_DP_Cycle
@@ -2413,11 +2413,11 @@ label Storm_Dildo_Ass:
 
     if action_context == "shift":
         $ approval_bonus += 10
-    if "exhibitionist" in StormX.Traits:
+    if "exhibitionist" in StormX.traits:
         $ approval_bonus += (5*Taboo)
     if StormX in Player.Harem or "sex friend" in StormX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in StormX.Traits:
+    elif "ex" in StormX.traits:
         $ approval_bonus -= 40
     if StormX.event_counter["forced"] and not StormX.Forced:
         $ approval_bonus -= 5*StormX.event_counter["forced"]
@@ -2429,14 +2429,14 @@ label Storm_Dildo_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_dildo" in StormX.recent_history else 0
 
-    $ Approval = approval_check(StormX, 1450, TabM = 4)
+    $ approval = approval_check(StormX, 1450, TabM = 4)
 
     if action_context == StormX:
 
-        if Approval > 2:
+        if approval > 2:
             if StormX.PantsNum() == 5:
                 "[StormX.name] grabs her dildo, hiking up her skirt as she does."
-                $ StormX.Upskirt = 1
+                $ StormX.upskirt = 1
             elif StormX.PantsNum() > 6:
                 "[StormX.name] grabs her dildo, pulling down her pants as she does."
                 $ StormX.legs = 0
@@ -2480,7 +2480,7 @@ label Storm_Dildo_Ass:
         "You rub the dildo across her body, and against her tight anus."
         $ StormX.change_face("surprised", 1)
 
-        if (StormX.action_counter["dildo_ass"] and Approval) or (Approval > 1):
+        if (StormX.action_counter["dildo_ass"] and approval) or (approval > 1):
 
             "[StormX.name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
             $ StormX.change_face("sexy")
@@ -2495,7 +2495,7 @@ label Storm_Dildo_Ass:
             menu:
                 ch_s "Excuse yourself, what are you planning to do with that?!"
                 "Sorry, sorry! Never mind.":
-                    if Approval:
+                    if approval:
                         $ StormX.change_face("sexy", 1)
                         $ StormX.change_stat("obedience", 70, 3)
                         $ StormX.change_stat("inhibition", 50, 3)
@@ -2543,7 +2543,7 @@ label Storm_Dildo_Ass:
             $ StormX.change_face("sad")
             ch_s "They always go for the butt. . ."
 
-    if not StormX.action_counter["dildo_ass"] and Approval:
+    if not StormX.action_counter["dildo_ass"] and approval:
 
         if StormX.Forced:
             $ StormX.change_face("sad")
@@ -2562,7 +2562,7 @@ label Storm_Dildo_Ass:
             $ StormX.mouth = "smile"
             ch_s "I suppose I could enjoy that. . ."
 
-    elif Approval:
+    elif approval:
 
         if StormX.Forced:
             $ StormX.change_face("sad")
@@ -2588,7 +2588,7 @@ label Storm_Dildo_Ass:
             ch_s "[Line]"
             $ Line = 0
 
-    if Approval >= 2:
+    if approval >= 2:
 
         if StormX.Forced:
             $ StormX.change_face("sad")
@@ -2647,7 +2647,7 @@ label Storm_Dildo_Ass:
                 $ StormX.daily_history.append("no_dildo")
                 return
             "I think you'd like it. . .":
-                if Approval:
+                if approval:
                     $ StormX.change_face("sexy")
                     $ StormX.change_stat("obedience", 90, 2)
                     $ StormX.change_stat("obedience", 50, 2)
@@ -2663,8 +2663,8 @@ label Storm_Dildo_Ass:
                     pass
             "[[press it against her]":
 
-                $ Approval = approval_check(StormX, 1050, "OI", TabM = 3)
-                if Approval > 1 or (Approval and StormX.Forced):
+                $ approval = approval_check(StormX, 1050, "OI", TabM = 3)
+                if approval > 1 or (approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
                     $ StormX.change_stat("love", 200, -5)
@@ -2744,8 +2744,8 @@ label Storm_DA_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ StormX.DrainWord("no_taboo")
-    $ StormX.DrainWord("no_dildo")
+        $ StormX.drain_word("no_taboo")
+    $ StormX.drain_word("no_dildo")
     $ StormX.recent_history.append("dildo_anal")
     $ StormX.daily_history.append("dildo_anal")
 
@@ -2765,9 +2765,9 @@ label Storm_DA_Cycle:
                     call Slap_Ass (StormX)
                     jump Storm_DA_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -2831,18 +2831,18 @@ label Storm_DA_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Storm_DA_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Storm_DA_Cycle
                                 "Never mind":
                                     jump Storm_DA_Cycle
                         "Undress [StormX.name]":
                             call Girl_Undress (StormX)
-                        "Clean up [StormX.name] (locked)" if not StormX.Spunk:
+                        "Clean up [StormX.name] (locked)" if not StormX.spunk:
                             pass
-                        "Clean up [StormX.name]" if StormX.Spunk:
+                        "Clean up [StormX.name]" if StormX.spunk:
                             call Girl_Cleanup (StormX, "ask")
                         "Never mind":
                             jump Storm_DA_Cycle
@@ -2996,9 +2996,9 @@ label Storm_DA_After:
 
 
 label Storm_Vibrator_Check:
-    if "vibrator" in Player.Inventory:
+    if "vibrator" in Player.inventory:
         "You pull out the \"shocker\" vibrator, handy."
-    elif "vibrator" in StormX.Inventory:
+    elif "vibrator" in StormX.inventory:
         "You ask [StormX.name] to get out her vibrator."
     else:
         "You don't have one of those on you."
@@ -3023,11 +3023,11 @@ label Storm_Footjob:
 
     if action_context == "shift":
         $ approval_bonus += 15
-    if "exhibitionist" in StormX.Traits:
+    if "exhibitionist" in StormX.traits:
         $ approval_bonus += (3*Taboo)
     if StormX in Player.Harem or "sex friend" in StormX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in StormX.Traits:
+    elif "ex" in StormX.traits:
         $ approval_bonus -= 40
     if StormX.event_counter["forced"] and not StormX.Forced:
         $ approval_bonus -= 5*StormX.event_counter["forced"]
@@ -3039,10 +3039,10 @@ label Storm_Footjob:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_foot" in StormX.recent_history else 0
 
-    $ Approval = approval_check(StormX, 1250, TabM = 3)
+    $ approval = approval_check(StormX, 1250, TabM = 3)
 
     if action_context == StormX:
-        if Approval > 2:
+        if approval > 2:
             if offhand_action == "jackin":
                 "[StormX.name] lays back and starts rubbing her feet along your cock."
             else:
@@ -3086,7 +3086,7 @@ label Storm_Footjob:
         ch_s "Oh, you would like me to use my feet, [StormX.player_petname]?"
         $ StormX.blushing = 1
 
-    if not StormX.action_counter["footjob"] and Approval:
+    if not StormX.action_counter["footjob"] and approval:
         if StormX.Forced:
             $ StormX.change_face("sad",1)
             $ StormX.change_stat("love", 70, -3, 1)
@@ -3106,7 +3106,7 @@ label Storm_Footjob:
             $ StormX.change_face("lipbite",1)
             ch_s "Very well. . ."
 
-    elif Approval:
+    elif approval:
         if StormX.Forced:
             $ StormX.change_face("sad")
             $ StormX.change_stat("love", 70, -3, 1)
@@ -3140,7 +3140,7 @@ label Storm_Footjob:
             ch_s "[Line]"
         $ Line = 0
 
-    if Approval >= 2:
+    if approval >= 2:
         if StormX.Forced:
             $ StormX.change_face("sad")
             $ StormX.change_stat("obedience", 90, 1)
@@ -3200,7 +3200,7 @@ label Storm_Footjob:
                 $ StormX.daily_history.append("no_foot")
                 return
             "I'd really appreciate it. . .":
-                if Approval:
+                if approval:
                     $ StormX.change_face("sexy")
                     $ StormX.change_stat("obedience", 90, 2)
                     $ StormX.change_stat("obedience", 50, 2)
@@ -3219,8 +3219,8 @@ label Storm_Footjob:
                     pass
             "Come on, get to work.":
 
-                $ Approval = approval_check(StormX, 400, "OI", TabM = 3)
-                if Approval > 1 or (Approval and StormX.Forced):
+                $ approval = approval_check(StormX, 400, "OI", TabM = 3)
+                if approval > 1 or (approval and StormX.Forced):
                     $ StormX.change_face("sad")
                     $ StormX.change_stat("love", 70, -5, 1)
                     $ StormX.change_stat("love", 200, -2)
@@ -3302,8 +3302,8 @@ label Storm_FJ_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ StormX.DrainWord("no_taboo")
-    $ StormX.DrainWord("no_foot")
+        $ StormX.drain_word("no_taboo")
+    $ StormX.drain_word("no_foot")
     $ StormX.recent_history.append("foot")
     $ StormX.daily_history.append("foot")
 
@@ -3333,9 +3333,9 @@ label Storm_FJ_Cycle:
                     "You ask her to slow it down a bit."
                 "Slow Down. . . (locked)" if not action_speed:
                     pass
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -3393,18 +3393,18 @@ label Storm_FJ_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Storm_FJ_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Storm_FJ_Cycle
                                 "Never mind":
                                     jump Storm_FJ_Cycle
                         "Undress [StormX.name]":
                             call Girl_Undress (StormX)
-                        "Clean up [StormX.name] (locked)" if not StormX.Spunk:
+                        "Clean up [StormX.name] (locked)" if not StormX.spunk:
                             pass
-                        "Clean up [StormX.name]" if StormX.Spunk:
+                        "Clean up [StormX.name]" if StormX.spunk:
                             call Girl_Cleanup (StormX, "ask")
                         "Never mind":
                             jump Storm_FJ_Cycle
@@ -3541,7 +3541,7 @@ label Storm_FJ_After:
     $ StormX.action_counter["footjob"] += 1
     $ StormX.remaining_actions -=1
     $ StormX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ StormX.addiction_rate += 1
     $ StormX.change_stat("lust", 90, 5)
 

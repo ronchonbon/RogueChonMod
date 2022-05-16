@@ -166,7 +166,7 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
 
     $ BO = Party[:]
     while BO:
-        $ BO[0].AddWord(1,0,"stripstudy",0,"stripstudy")
+        $ BO[0].add_word(1,0,"stripstudy",0,"stripstudy")
         $ BO.remove(BO[0])
 
     if len(Party) >= 2:
@@ -213,7 +213,7 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
 
     while between_event_count:
 
-        call expression Party[0].Tag + "_Quiz_Question"
+        call expression Party[0].tag + "_Quiz_Question"
 
         $ between_event_count += 1
 
@@ -227,7 +227,7 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
                 menu:
                     "Well, [Party[1].name], you and I could still have some fun. . .":
                         $ approval_bonus = 50
-                        call expression Party[0].Tag + "_SexMenu"
+                        call expression Party[0].tag + "_SexMenu"
                     "Bummer":
                         pass
 
@@ -262,7 +262,7 @@ label Strip_Study_Right:
             $ Party[0].top = 0
             "She pulls her [Line] off and throws it aside."
             if not Party[0].bra:
-                call expression Party[0].Tag + "_First_Topless"
+                call expression Party[0].tag + "_First_Topless"
         else:
             if Party[0] == RogueX:
                 ch_r "You know, I don't really think I'm ready for this, sorry [Party[0].player_petname]. I shouldn't have led you on."
@@ -301,7 +301,7 @@ label Strip_Study_Right:
 
                 $ Party[0].blushing = 1
                 "You notice that she apparently isn't wearing any panties, and she flushes a bit."
-                call expression Party[0].Tag + "_First_Bottomless"
+                call expression Party[0].tag + "_First_Bottomless"
         else:
             if Party[0] == RogueX:
                 ch_r "You know, I don't really think I'm ready for this, sorry [Party[0].player_petname]. I shouldn't have led you on."
@@ -329,7 +329,7 @@ label Strip_Study_Right:
             if not Party[0].SeenChest:
                 $ Party[0].change_stat("inhibition", 200, 3)
                 $ Party[0].change_stat("inhibition", 50, 1)
-                call expression Party[0].Tag + "_First_Topless"
+                call expression Party[0].tag + "_First_Topless"
             $ Player.change_stat("focus", 80, 15)
         else:
             if Party[0] == RogueX:
@@ -361,7 +361,7 @@ label Strip_Study_Right:
             if not Party[0].SeenPussy:
                 $ Party[0].change_stat("inhibition", 50, 4)
                 $ Party[0].change_stat("inhibition", 200, 4)
-                call expression Party[0].Tag + "_First_Bottomless"
+                call expression Party[0].tag + "_First_Bottomless"
             $ Player.change_stat("focus", 75, 20)
         else:
             if Party[0] == RogueX:
@@ -432,7 +432,7 @@ label Strip_Study_Right:
                 return
     $ between_event_count = 0
     $ approval_bonus = 50
-    call expression Party[0].Tag + "_SexMenu"
+    call expression Party[0].tag + "_SexMenu"
     if Party[0] == RogueX:
         ch_r "Well I sure enjoyed that."
     elif Party[0] == KittyX:

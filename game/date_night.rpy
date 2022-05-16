@@ -36,11 +36,11 @@ label Date_Ask(Girl=0):
         elif Girl == JubesX:
             ch_v "Yeah, I mean I already said \"no\". . ."
         return
-    if "stoodup" in Girl.Traits:
+    if "stoodup" in Girl.traits:
         call Date_Stood_Up (Girl)
 
         return
-    $ Girl.AddWord(1,"askeddate","askeddate")
+    $ Girl.add_word(1,"askeddate","askeddate")
 
     if Girl == EmmaX:
         if "classcaught" not in EmmaX.history:
@@ -52,7 +52,7 @@ label Date_Ask(Girl=0):
             call Emma_Taboo_Talk
             if "taboo" not in EmmaX.history:
                 return
-    if Girl.Break[0] and "ex" in Girl.Traits:
+    if Girl.Break[0] and "ex" in Girl.traits:
         $ Girl.change_face("angry")
         if Girl == RogueX:
             ch_r "Seriously? You're asking me that after what you just did?"
@@ -70,7 +70,7 @@ label Date_Ask(Girl=0):
         elif Girl == JubesX:
             ch_v "I'm kinda still pissed at you right now?"
         return
-    if "ex" in Girl.Traits:
+    if "ex" in Girl.traits:
         if approval_check(Girl, 1200):
             $ Girl.change_face("bemused",Brows = "sad" )
             if Girl == RogueX:
@@ -466,7 +466,6 @@ label Date_Ask(Girl=0):
     $ Player.daily_history.append("yesdate")
     return
 
-
 label Date_Stood_Up(Girl=0):
 
     if Girl.location != bg_current:
@@ -782,7 +781,7 @@ label Date_Stood_Up(Girl=0):
                 $ Girl.daily_history.append("angry")
 
 
-    $ Girl.Traits.remove("stoodup")
+    $ Girl.traits.remove("stoodup")
     if "stoodup" not in Girl.history:
         $ Girl.history.append("stoodup")
 
@@ -792,8 +791,6 @@ label Date_Stood_Up(Girl=0):
 
 
     return
-
-
 
 label Readytogo(Girl=0, R=0, BO=[]):
 
@@ -878,7 +875,7 @@ label Readytogo(Girl=0, R=0, BO=[]):
 
                 $ R.recent_history.append("summoned")
                 $ Line = 0
-                if "locked" in Player.Traits:
+                if "locked" in Player.traits:
                     call Locked_Door (R)
                     return
                 $ R.location = bg_current
@@ -886,18 +883,6 @@ label Readytogo(Girl=0, R=0, BO=[]):
                 $ R.change_outfit()
                 call set_the_scene
     return
-
-
-
-
-
-
-
-
-
-
-
-
 
 label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], BO=[]):
 
@@ -936,7 +921,7 @@ label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], BO=[]):
         $ BO.remove(BO[0])
 
     $ bg_current = "date"
-    $ Player.AddWord(1,"date")
+    $ Player.add_word(1,"date")
     call shift_focus (Party[0])
     call set_the_scene
 
@@ -1037,7 +1022,7 @@ label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], BO=[]):
         if len(Party) >= 2:
             "The girls storm off."
         else:
-            "[Party[0].Tag] storms off."
+            "[Party[0].tag] storms off."
         call Remove_Girl ("All")
         $ bg_current = "bg_campus"
         $ Player.Drainword("date")
@@ -1188,12 +1173,6 @@ label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], BO=[]):
 
         $ bg_current = "bg_campus"
         jump Misplaced
-
-
-
-
-
-
 
 label Date_Crossed(Girls=[], Check=0, Count=0, counter=0):
 
@@ -1521,8 +1500,6 @@ label Date_Crossed(Girls=[], Check=0, Count=0, counter=0):
 
     return
 
-
-
 label Date_Prep(Girl=0):
 
     if Girl not in all_Girls:
@@ -1557,10 +1534,6 @@ label Date_Prep(Girl=0):
     $ Girl.change_face("smile")
     return
 
-
-
-
-
 label Date_Dinner:
     $ bg_current = "bg_restaurant"
     $ Player.recent_history.append("dinner")
@@ -1576,7 +1549,7 @@ label Date_Dinner:
 
     $ BO = Party[:]
     while BO:
-        call expression BO[0].Tag + "_Dinner"
+        call expression BO[0].tag + "_Dinner"
         $ BO.remove(BO[0])
     call Player_Dinner
 
@@ -1600,10 +1573,10 @@ label Date_Dinner:
         menu:
             "Chat with [Party[0].name]":
                 ch_p "Anything going on, [Party[0].name]?"
-                call expression Party[0].Tag + "_Chitchat"
+                call expression Party[0].tag + "_Chitchat"
             "Chat with [Party[1].name]" if len(Party) > 1:
                 ch_p "Anything going on, [Party[1].name]?"
-                call expression Party[1].Tag + "_Chitchat"
+                call expression Party[1].tag + "_Chitchat"
             "Compliment [Party[0].name]":
                 call Compliment (Party[0])
             "Compliment [Party[1].name]" if len(Party) > 1:
@@ -1628,13 +1601,6 @@ label Date_Dinner:
     "You seem to have some time left, where would you like to go next?"
     jump Date_Location
 
-
-
-
-
-
-
-
 label Player_Dinner:
 
     menu:
@@ -1652,8 +1618,6 @@ label Player_Dinner:
             $ Play_Cost = 5
             $ Line = "fresh garden salad"
     return
-
-
 
 label Rogue_Dinner(GirlCost=0):
 
@@ -1706,8 +1670,6 @@ label Rogue_Dinner(GirlCost=0):
     call Date_Bonus (RogueX, GirlCost)
     return
 
-
-
 label Kitty_Dinner(GirlCost=0):
 
     menu:
@@ -1758,8 +1720,6 @@ label Kitty_Dinner(GirlCost=0):
         $ Date_Cost[1] = GirlCost
     call Date_Bonus (KittyX, GirlCost)
     return
-
-
 
 label Emma_Dinner(GirlCost=0):
 
@@ -1813,8 +1773,6 @@ label Emma_Dinner(GirlCost=0):
         $ Date_Cost[1] = GirlCost
     call Date_Bonus (EmmaX, GirlCost)
     return
-
-
 
 label Laura_Dinner(GirlCost=0):
 
@@ -1870,14 +1828,12 @@ label Laura_Dinner(GirlCost=0):
     call Date_Bonus (LauraX, GirlCost)
     return
 
-
-
 label Jean_Dinner(GirlCost=0):
 
     if not approval_check(JeanX, 500, "O"):
         ch_j "I'll have the surf and turf."
-        $ PassLine = renpy.random.choice(["-but I want to substitute the steak for veal.", 
-                    "-but I want two lobsters.", 
+        $ PassLine = renpy.random.choice(["-but I want to substitute the steak for veal.",
+                    "-but I want two lobsters.",
                     "-rare.",
                     "-well done.",
                     "-but I want crab legs instead of lobster.",
@@ -1959,8 +1915,6 @@ label Jean_Dinner(GirlCost=0):
     call Date_Bonus (JeanX, GirlCost)
     return
 
-
-
 label Storm_Dinner(GirlCost=0):
 
     menu:
@@ -2009,8 +1963,6 @@ label Storm_Dinner(GirlCost=0):
         $ Date_Cost[1] = GirlCost
     call Date_Bonus (StormX, GirlCost)
     return
-
-
 
 label Jubes_Dinner(GirlCost=0):
 
@@ -2068,8 +2020,6 @@ label Jubes_Dinner(GirlCost=0):
     call Date_Bonus (JubesX, (int(GirlCost/2)))
     return
 
-
-
 label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
 
 
@@ -2099,7 +2049,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
             $ Previous = Party[0]
 
     if Girl == Previous:
-        "Tell Oni that on a date, a girl and previous were the same, [Girl.Tag], DS"
+        "Tell Oni that on a date, a girl and previous were the same, [Girl.tag], DS"
 
     $ OptionsDS =["nothing"]
 
@@ -2477,11 +2427,6 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
     $ Girl.blushing = 0
     return
 
-
-
-
-
-
 label Date_Movies:
 
     $ bg_current = "bg_movies"
@@ -2785,30 +2730,30 @@ label Date_Movies:
         "You take your seats in the theater."
 
     if "romcom" in Player.recent_history:
-        $ Line = renpy.random.choice(["You watch the movie, which is about an adorkable girl who can't choose between two hunky guys. She picks the other one.", 
-                    "You watch the movie, which is about a girl who is mercilessly stalked by some weird guy, until she eventually decides she loves him. They live hapily ever after.", 
-                    "In this movie, the lead goes to all her friend's weddings, but can't get it together herself. She dies alone. Just kidding, she gets married at the end.", 
+        $ Line = renpy.random.choice(["You watch the movie, which is about an adorkable girl who can't choose between two hunky guys. She picks the other one.",
+                    "You watch the movie, which is about a girl who is mercilessly stalked by some weird guy, until she eventually decides she loves him. They live hapily ever after.",
+                    "In this movie, the lead goes to all her friend's weddings, but can't get it together herself. She dies alone. Just kidding, she gets married at the end.",
                     "You watch the movie, in which a bunch of college girls go on a wild adventure and have lots of random sex.",
                     "This movie is about a girl who's convinced to live in a sex dungeon, and really seems to enjoy it.",
                     "This movie is about a girl who works for a fashion house and is bullied by her boss, until they become friends."])
     elif "action" in Player.recent_history:
-        $ Line = renpy.random.choice(["You watch the movie, which is about an ex marine fighting aliens.", 
-                    "You watch the movie, which is about a girl who is mercilessly stalked by some weird guy, until she eventually decides she loves him. They live hapily ever after. There are also a lot of explosions.", 
-                    "In this movie, giant robots are fighting animal mash-ups, with the fate of the world in the balance.", 
+        $ Line = renpy.random.choice(["You watch the movie, which is about an ex marine fighting aliens.",
+                    "You watch the movie, which is about a girl who is mercilessly stalked by some weird guy, until she eventually decides she loves him. They live hapily ever after. There are also a lot of explosions.",
+                    "In this movie, giant robots are fighting animal mash-ups, with the fate of the world in the balance.",
                     "You watch the movie, in which a team of non-mutant superhumans are apparently fighting some sort of silvery robots in Eastern Europe.",
                     "This movie is about a superhuman powerhouse that nearly wrecks a town, and yet is not arrested for it by the humans. Must be the hammer.",
                     "This movie is about 90 minutes of constant explosions and lensflares."])
     elif "horror" in Player.recent_history:
-        $ Line = renpy.random.choice(["You watch the movie, which is about an adorkable girl who can't choose between two hunky guys. She picks the other one. The guys are a fishman and a skeleton.", 
-                    "You watch the movie, which is about a girl who is mercilessly stalked by some weird guy, until she eventually gives in and marries him. Her life is an endless hell.", 
-                    "In this movie, a group of teens are trapped in a wilderness cabin. They have a lot of random sex as some shadowy monster kills them one by one.", 
-                    "In this movie, a group of teens are trapped in an abandoned motel. They have a lot of random sex as some shadowy monster kills them one by one.", 
+        $ Line = renpy.random.choice(["You watch the movie, which is about an adorkable girl who can't choose between two hunky guys. She picks the other one. The guys are a fishman and a skeleton.",
+                    "You watch the movie, which is about a girl who is mercilessly stalked by some weird guy, until she eventually gives in and marries him. Her life is an endless hell.",
+                    "In this movie, a group of teens are trapped in a wilderness cabin. They have a lot of random sex as some shadowy monster kills them one by one.",
+                    "In this movie, a group of teens are trapped in an abandoned motel. They have a lot of random sex as some shadowy monster kills them one by one.",
                     "This movie is about a girl who's convinced to live in a sex dungeon, and she's eventually murdered.",
                     "In this movie, a group of teens are trapped in a spaceship. They have a lot of random sex as some shadowy monster kills them one by one."])
     elif "drama" in Player.recent_history:
-        $ Line = renpy.random.choice(["You watch the movie, which is about a mature woman who can't choose between two eligible widowers. She picks the other one.", 
-                    "You watch the movie, which is a documentary about a girl who is mercilessly stalked by some weird guy, until she eventually decides to get a restraining order.", 
-                    "In this movie, which is a biopic about a great historical leader.", 
+        $ Line = renpy.random.choice(["You watch the movie, which is about a mature woman who can't choose between two eligible widowers. She picks the other one.",
+                    "You watch the movie, which is a documentary about a girl who is mercilessly stalked by some weird guy, until she eventually decides to get a restraining order.",
+                    "In this movie, which is a biopic about a great historical leader.",
                     "You watch the movie, in which a disabled person struggles with his various disabilities, and eventually overcomes them, and/or dies.",
                     "This movie is about a lot of yelling and crying as some very serious issues are explored by an ensemble cast."])
 
@@ -2828,12 +2773,6 @@ label Date_Movies:
 
     "You seem to have some time left, where would you like to go next?"
     jump Date_Location
-
-
-
-
-
-
 
 label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
 
@@ -2869,7 +2808,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
             $ Previous = Party[0]
 
     if Girl == Previous:
-        "Tell Oni that on a date, a girl and previous were the same, [Girl.Tag], MS"
+        "Tell Oni that on a date, a girl and previous were the same, [Girl.tag], MS"
 
     $ OptionsDS = ["nothing"]
 
@@ -2968,7 +2907,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
                         "You cum into the popcorn bucket, which she then finishes off."
                     $ Girl.addiction -= 20
                     $ Girl.event_counter["swallowed"] += 1
-                    $ Girl.Spunk.append("mouth")
+                    $ Girl.spunk.append("mouth")
                     $ Girl.recent_history.append("swallowed")
                     $ Girl.daily_history.append("swallowed")
                 else:
@@ -3031,7 +2970,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
                         "You cum into the popcorn bucket, which she and [Previous.name] then finish off together."
                     else:
                         "You cum into the popcorn bucket, which she then finishes off."
-                    $ Girl.Spunk.append("mouth")
+                    $ Girl.spunk.append("mouth")
                     $ Girl.addiction -= 20
                     $ Girl.event_counter["swallowed"] += 1
                     $ Girl.recent_history.append("swallowed")
@@ -3077,7 +3016,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
                 $ Previous.GLG(Girl,1000,2,1)
             else:
                 "She sucks on it contentedly for several minutes before you finally cum."
-            $ Girl.Spunk.append("mouth")
+            $ Girl.spunk.append("mouth")
             if Girl.event_counter["swallowed"]:
                 "[Girl.name] wipes her mouth as she shifts back into her seat and washes it down with some soda."
                 $ Girl.change_face("sexy")
@@ -3168,7 +3107,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
                     "The girls finish off the remaining popcorn with a grin."
                 else:
                     "She finishes off the remaining popcorn with a grin."
-                $ Girl.Spunk.append("mouth")
+                $ Girl.spunk.append("mouth")
                 if Girl == RogueX:
                     ch_r "Best topping they got here, [Girl.player_petname]."
                 elif Girl == KittyX:
@@ -3291,7 +3230,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
             else:
                 "Looking down, you notice she's hiked up her skirt enough that you can see her bare pussy, lit by the movie screen."
             $ Girl.change_stat("inhibition", 60, 2)
-            call expression Girl.Tag + "_First_Bottomless" pass (1)
+            call expression Girl.tag + "_First_Bottomless" pass (1)
             if Girl == RogueX:
                 ch_r "Just a little downpayment on later, [Girl.player_petname]."
             elif Girl == KittyX:
@@ -3309,8 +3248,6 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
 
     $ Girl.change_outfit(Changed=0)
     return
-
-
 
 label Date_Sex_Break(Girl=0, Previous=0, Repeat=0):
 
@@ -3332,11 +3269,11 @@ label Date_Sex_Break(Girl=0, Previous=0, Repeat=0):
         return 0
 
     if Girl == Previous:
-        "Tell Oni that on a date, a girl and previous were the same, [Girl.Tag], DSB"
+        "Tell Oni that on a date, a girl and previous were the same, [Girl.tag], DSB"
 
     if Girl.GirlLikeCheck(Previous) >= 700 and Previous.GirlLikeCheck(Girl) >= 700:
 
-        $ Previous.recent_history.append("noticed " + Girl.Tag)
+        $ Previous.recent_history.append("noticed " + Girl.tag)
         return 1
     elif Previous == JeanX and not approval_check(Previous, 500, "L"):
 
@@ -3347,7 +3284,7 @@ label Date_Sex_Break(Girl=0, Previous=0, Repeat=0):
             "[Previous.name] rolls her eyes, but continues to watch the movie."
         else:
             "[Previous.name] rolls her eyes, but doesn't get involved."
-        $ Previous.recent_history.append("noticed " + Girl.Tag)
+        $ Previous.recent_history.append("noticed " + Girl.tag)
         $ Girl.GLG(Previous,600,5,2)
         $ Previous.GLG(Girl,500,3)
         $ Previous.GLG(Girl,900,3)
@@ -3356,7 +3293,7 @@ label Date_Sex_Break(Girl=0, Previous=0, Repeat=0):
 
         $ Previous.change_face("sly")
         "[Previous.name] winks at you, but doesn't move to get involved."
-        $ Previous.recent_history.append("noticed " + Girl.Tag)
+        $ Previous.recent_history.append("noticed " + Girl.tag)
         $ Girl.GLG(Previous,600,5,1)
         $ Girl.GLG(Previous,900,3,1)
         $ Previous.GLG(Girl,900,2,1)
@@ -3374,7 +3311,7 @@ label Date_Sex_Break(Girl=0, Previous=0, Repeat=0):
         $ Previous.change_stat("love", 80, -5)
         $ Previous.change_stat("obedience", 80, 5)
         $ Previous.GLG(Girl,800,-3,1)
-        $ Previous.AddWord(1,"annoyed")
+        $ Previous.add_word(1,"annoyed")
         return 3
     elif "annoyed" in Previous.recent_history:
 
@@ -3399,7 +3336,7 @@ label Date_Sex_Break(Girl=0, Previous=0, Repeat=0):
         call Girl_Date_Over (Previous)
 
         return 3
-    $ Previous.AddWord(1,"annoyed")
+    $ Previous.add_word(1,"annoyed")
     if Previous == RogueX:
         ch_r "I know what she's up to, cut it out."
     elif Previous == KittyX:
@@ -3443,9 +3380,6 @@ label Date_Sex_Break(Girl=0, Previous=0, Repeat=0):
             return 3
     return 0
 
-
-
-
 label Date_Paying(Activity="dinner", Total_Cost=0):
 
     if Activity == "dinner":
@@ -3461,7 +3395,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
 
     menu:
         "Who's paying?"
-        "I've got it." if Player.Cash >= Total_Cost:
+        "I've got it." if Player.cash >= Total_Cost:
             $ Line = "you"
 
         "[RogueX.name], you pay." if RogueX in Party:
@@ -3479,10 +3413,10 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
         "[JubesX.name], you pay." if JubesX in Party:
             $ Line = JubesX
 
-        "Let's split it." if Player.Cash >= Play_Cost:
+        "Let's split it." if Player.cash >= Play_Cost:
             $ Line = "split"
 
-        "I really can't afford it. . ." if Player.Cash < Total_Cost:
+        "I really can't afford it. . ." if Player.cash < Total_Cost:
             $ Line = "deadbeat"
 
     if Line == "you":
@@ -3569,7 +3503,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
                 $ JubesX.change_stat("obedience", 50, 1)
             call Date_Bonus (JubesX, Total_Cost)
 
-        $ Player.Cash -= Total_Cost
+        $ Player.cash -= Total_Cost
 
     elif Line == RogueX:
 
@@ -3604,7 +3538,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
                 ch_r "Oh, bullshit, I am NOT payin for her."
             else:
                 ch_r "No way, you're coverin your own bills, [RogueX.player_petname]."
-            if Player.Cash >= Play_Cost:
+            if Player.cash >= Play_Cost:
                 $ Line = "split"
             else:
                 $ Line = "deadbeat"
@@ -3643,7 +3577,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
                 ch_k "You have GOT to be kidding! I'm not paying for her too!"
             else:
                 ch_k "As if! You're paying for yourself, [KittyX.player_petname]."
-            if Player.Cash >= Play_Cost:
+            if Player.cash >= Play_Cost:
                 $ Line = "split"
             else:
                 $ Line = "deadbeat"
@@ -3682,7 +3616,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
                 ch_e "I'm certainly not paying {i}her{/i} tab."
             else:
                 ch_e "Student or not, I'm not paying your bills, [EmmaX.player_petname]."
-            if Player.Cash >= Play_Cost:
+            if Player.cash >= Play_Cost:
                 $ Line = "split"
             else:
                 $ Line = "deadbeat"
@@ -3722,7 +3656,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
                 ch_l "I'm not covering her though."
             else:
                 ch_l "Too bad, I'm not covering you."
-            if Player.Cash >= Play_Cost:
+            if Player.cash >= Play_Cost:
                 $ Line = "split"
             else:
                 $ Line = "deadbeat"
@@ -3794,7 +3728,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
                 ch_s "I will not pay you her meal as well."
             else:
                 ch_s "You may be a student, but I am not covering your costs, [StormX.player_petname]."
-            if Player.Cash >= Play_Cost:
+            if Player.cash >= Play_Cost:
                 $ Line = "split"
             else:
                 $ Line = "deadbeat"
@@ -3835,7 +3769,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
                 ch_v "What? No way, I barely ate anything anyway!"
             else:
                 ch_v "What? No way am I paying, you invited me!"
-            if Player.Cash >= Play_Cost:
+            if Player.cash >= Play_Cost:
                 $ Line = "split"
             else:
                 $ Line = "deadbeat"
@@ -3895,7 +3829,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
                     $ JubesX.change_face("angry",Eyes="side")
                     ch_v "Kinda cheap, but. . ."
             $ Date_Bonus[Count] -= 10 if Date_Cost[Count] >= 15 else 0
-        $ Player.Cash -= Play_Cost
+        $ Player.cash -= Play_Cost
 
     if Line == "deadbeat":
 
@@ -3981,7 +3915,6 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
     $ Date_Cost[1] = 0
     return
 
-
 label Date_Bonus(Girl=0, Amount=0):
 
 
@@ -3990,8 +3923,6 @@ label Date_Bonus(Girl=0, Amount=0):
     elif Girl in Party:
         $ Date_Bonus[1] += Amount
     return
-
-
 
 label Date_End:
 
@@ -4081,8 +4012,6 @@ label Player_Date_End:
         "You bring [Party[0].name] to your own door."
         call Girl_Date_End (Party[0])
     jump Player_Room
-
-
 
 label Girl_Date_End(Girl=0):
 
@@ -4395,7 +4324,7 @@ label Girl_Date_End(Girl=0):
     $ Player.daily_history.append("post date")
 
 
-    call expression Girl.Tag + "_SexMenu"
+    call expression Girl.tag + "_SexMenu"
 
     if "angry" in Girl.recent_history:
         if bg_current == "bg_player":
@@ -4414,9 +4343,6 @@ label Girl_Date_End(Girl=0):
 
     call Sleepover (Girl)
     jump Misplaced
-
-
-
 
 label Date_Ditched(Girls=0):
 
@@ -4531,7 +4457,6 @@ label Date_Ditched(Girls=0):
         $ Party.remove(Party[0])
     return
 
-
 label Girl_Date_Over(Girl=0, Angry=1):
 
     if Angry:
@@ -4575,4 +4500,3 @@ label Girl_Date_Over(Girl=0, Angry=1):
         jump Date_End
     call shift_focus (Party[0])
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

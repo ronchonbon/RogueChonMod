@@ -122,7 +122,7 @@ init -1:
     default Events = []
     default PunishmentX = 0
     default approval_bonus = 0
-    default Approval = 0
+    default approval = 0
     default Count = 0
     default between_event_count = 0
     default stored_count = 0

@@ -4,7 +4,7 @@ label JeanMeet:
     call shift_focus (JeanX)
 
     $ JeanX.name = "???"
-    $ JeanX.AddWord(1,"showered","showered",0,0)
+    $ JeanX.add_word(1,"showered","showered",0,0)
     call Remove_Girl ("All")
     call Jeanname (1)
 
@@ -130,9 +130,9 @@ label JeanMeet:
         ch_j "I bet you were hoping that you'd catch me naked or something, uh?"
         ch_j "Wanted to see these titties?"
         $ JeanX.ArmPose = 2
-        $ JeanX.Uptop = 1
+        $ JeanX.top_pulled_up = 1
         pause 1      
-        $ JeanX.Uptop = 0
+        $ JeanX.top_pulled_up = 0
         $ JeanX.change_face("sly",0,Eyes="side")
         $ JeanX.ArmPose = 1
         ch_j "Can't blame you, everyone does, the pervs."
@@ -699,13 +699,13 @@ label Jean_Love:
                 $ Line = "she's"
             menu:
                 extend ""
-                "No, actually [Line] fine with it." if "JeanYes" in Player.Traits:
+                "No, actually [Line] fine with it." if "JeanYes" in Player.traits:
                     $ JeanX.change_stat("love", 200, 5)
                     $ JeanX.change_stat("obedience", 80, 10)
                     $ JeanX.change_stat("inhibition", 80, 5)
                     $ JeanX.change_face("surprised",1)
                     ch_j "Oh, good."
-                "Actually. . . I guess we'll need to work on that one." if "JeanYes" not in Player.Traits:
+                "Actually. . . I guess we'll need to work on that one." if "JeanYes" not in Player.traits:
                     $ JeanX.change_stat("inhibition", 200, 5)
                     $ JeanX.change_stat("lust", 80, 3)
                     $ JeanX.change_face("confused",1)

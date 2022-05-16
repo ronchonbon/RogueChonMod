@@ -4,7 +4,7 @@ label Rogue_Relationship:
     while True:
         menu:
             ch_r "What did you want to ask me about?"
-            "Do you want to be my girlfriend?" if RogueX not in Player.Harem and "ex" not in RogueX.Traits:
+            "Do you want to be my girlfriend?" if RogueX not in Player.Harem and "ex" not in RogueX.traits:
                 $ RogueX.daily_history.append("relationship")
                 if "asked boyfriend" in RogueX.daily_history and "angry" in RogueX.daily_history:
                     $ RogueX.change_face("angry", 1)
@@ -25,7 +25,7 @@ label Rogue_Relationship:
 
                 $ RogueX.daily_history.append("asked boyfriend")
 
-                if Player.Harem and "RogueYes" not in Player.Traits:
+                if Player.Harem and "RogueYes" not in Player.traits:
                     if len(Player.Harem) >= 2:
                         ch_r "That wouldn't be fair to the others, [RogueX.player_petname]."
                     else:
@@ -49,8 +49,8 @@ label Rogue_Relationship:
                     ch_r "I'd love to!"
                     if "boyfriend" not in RogueX.player_petnames:
                         $ RogueX.player_petnames.append("boyfriend")
-                    if "RogueYes" in Player.Traits:
-                        $ Player.Traits.remove("RogueYes")
+                    if "RogueYes" in Player.traits:
+                        $ Player.traits.remove("RogueYes")
                     $ Player.Harem.append(RogueX)
                     call Harem_Initiation
                     "[RogueX.name] leaps in and kisses you deeply."
@@ -66,7 +66,7 @@ label Rogue_Relationship:
                     $ RogueX.change_face("perplexed", 1)
                     ch_r "I don't really feel that way about you right now, [RogueX.player_petname]."
 
-            "Do you want to get back together?" if "ex" in RogueX.Traits:
+            "Do you want to get back together?" if "ex" in RogueX.traits:
                 $ RogueX.daily_history.append("relationship")
                 if "asked boyfriend" in RogueX.daily_history and "angry" in RogueX.daily_history:
                     $ RogueX.change_face("angry", 1)
@@ -79,7 +79,7 @@ label Rogue_Relationship:
 
                 $ RogueX.daily_history.append("asked boyfriend")
 
-                if Player.Harem and "RogueYes" not in Player.Traits:
+                if Player.Harem and "RogueYes" not in Player.traits:
                     if len(Player.Harem) >= 2:
                         ch_r "That wouldn't be fair to the others, [RogueX.player_petname]."
                     else:
@@ -96,9 +96,9 @@ label Rogue_Relationship:
                     ch_r "If you're in, I'm in!"
                     if "boyfriend" not in RogueX.player_petnames:
                         $ RogueX.player_petnames.append("boyfriend")
-                    $ RogueX.Traits.remove("ex")
-                    if "RogueYes" in Player.Traits:
-                        $ Player.Traits.remove("RogueYes")
+                    $ RogueX.traits.remove("ex")
+                    if "RogueYes" in Player.traits:
+                        $ Player.traits.remove("RogueYes")
                     $ Player.Harem.append(RogueX)
                     call Harem_Initiation
                     "[RogueX.name] leaps in and kisses you deeply."
@@ -111,9 +111,9 @@ label Rogue_Relationship:
                     ch_r "We can give this another try."
                     if "boyfriend" not in RogueX.player_petnames:
                         $ RogueX.player_petnames.append("boyfriend")
-                    $ RogueX.Traits.remove("ex")
-                    if "RogueYes" in Player.Traits:
-                        $ Player.Traits.remove("RogueYes")
+                    $ RogueX.traits.remove("ex")
+                    if "RogueYes" in Player.traits:
+                        $ Player.traits.remove("RogueYes")
                     $ Player.Harem.append(RogueX)
                     call Harem_Initiation
                     "[RogueX.name] gives you a quick kiss."
@@ -186,7 +186,7 @@ label Rogue_OtherWoman(counter=0):
         ch_r "But you're with [Player.Harem[0].name]!"
     menu:
         extend ""
-        "She said I can be with you too." if "RogueYes" in Player.Traits:
+        "She said I can be with you too." if "RogueYes" in Player.traits:
             if approval_check(RogueX, 1800, Bonus = counter):
                 $ RogueX.change_face("smile", 1)
                 if RogueX.love >= RogueX.obedience:
@@ -201,7 +201,7 @@ label Rogue_OtherWoman(counter=0):
                 $ renpy.pop_call()
 
 
-        "I could ask if she'd be ok with me dating you both." if "RogueYes" not in Player.Traits:
+        "I could ask if she'd be ok with me dating you both." if "RogueYes" not in Player.traits:
             if approval_check(RogueX, 1800, Bonus = counter):
                 $ RogueX.change_face("smile", 1)
                 if RogueX.love >= RogueX.obedience:
@@ -232,7 +232,7 @@ label Rogue_OtherWoman(counter=0):
                     ch_r "If you insist."
                 else:
                     ch_r "Don't see why not."
-                $ RogueX.AddWord(1,0,0,"downlow")
+                $ RogueX.add_word(1,0,0,"downlow")
         "I can break it off with her.":
 
             $ RogueX.change_face("sad")
@@ -253,7 +253,7 @@ label Rogue_About(Check=0):
         return
     ch_r "What do I think about her? Well. . ."
     if Check == KittyX:
-        if "poly Kitty" in RogueX.Traits:
+        if "poly Kitty" in RogueX.traits:
             ch_r "I think you know the answer to that one. . ."
         elif RogueX.LikeKitty >= 900:
             ch_r "I think she's really . . . hot?"
@@ -272,7 +272,7 @@ label Rogue_About(Check=0):
         else:
             ch_r "That ho-bag skank?"
     elif Check == EmmaX:
-        if "poly Emma" in RogueX.Traits:
+        if "poly Emma" in RogueX.traits:
             ch_r "Well, I sure don't kick her out of bed. . ."
         elif RogueX.LikeEmma >= 900:
             ch_r "I'm kinda hot for teacher."
@@ -291,7 +291,7 @@ label Rogue_About(Check=0):
         else:
             ch_r "Ugh, that WITCH!"
     elif Check == LauraX:
-        if "poly Laura" in RogueX.Traits:
+        if "poly Laura" in RogueX.traits:
             ch_r "We hook up from time to time. . ."
         elif RogueX.LikeLaura >= 900:
             ch_r "She's got an animal magnetism to her. . ."
@@ -310,7 +310,7 @@ label Rogue_About(Check=0):
         else:
             ch_r "That ho-bag skank?"
     elif Check == JeanX:
-        if "poly Jean" in RogueX.Traits:
+        if "poly Jean" in RogueX.traits:
             ch_r "We hook up from time to time. . ."
         elif RogueX.LikeJean >= 900:
             ch_r "She's got a real charm to her. . ."
@@ -329,7 +329,7 @@ label Rogue_About(Check=0):
         else:
             ch_r "That ho-bag witch?!"
     elif Check == StormX:
-        if "poly Storm" in RogueX.Traits:
+        if "poly Storm" in RogueX.traits:
             ch_r "Well, she's sure nice to cuddle up to. . ."
         elif RogueX.LikeStorm >= 900:
             ch_r "I'm kinda into her."
@@ -348,7 +348,7 @@ label Rogue_About(Check=0):
         else:
             ch_r "Ugh, that WITCH!"
     elif Check == JubesX:
-        if "poly Jubes" in RogueX.Traits:
+        if "poly Jubes" in RogueX.traits:
             ch_r "I think you know the answer to that one. . ."
         elif RogueX.LikeJubes >= 900:
             ch_r "I think she's really . . . hot?"
@@ -372,7 +372,7 @@ label Rogue_About(Check=0):
 label Rogue_Monogamy:
 
     menu:
-        "Could you not hook up with other girls?" if "mono" not in RogueX.Traits:
+        "Could you not hook up with other girls?" if "mono" not in RogueX.traits:
             if RogueX.Thirst >= 60 and not approval_check(RogueX, 1700, "LO", TabM=0):
 
                 $ RogueX.change_face("sly",1)
@@ -398,8 +398,8 @@ label Rogue_Monogamy:
                 return
             if "mono" not in RogueX.daily_history:
                 $ RogueX.change_stat("obedience", 90, 3)
-            $ RogueX.AddWord(1,0,"mono","mono")
-        "Don't hook up with other girls." if "mono" not in RogueX.Traits:
+            $ RogueX.add_word(1,0,"mono","mono")
+        "Don't hook up with other girls." if "mono" not in RogueX.traits:
             if approval_check(RogueX, 900, "O", TabM=0):
 
                 $ RogueX.change_face("sly",1,Eyes="side")
@@ -427,8 +427,8 @@ label Rogue_Monogamy:
                 return
             if "mono" not in RogueX.daily_history:
                 $ RogueX.change_stat("obedience", 90, 3)
-            $ RogueX.AddWord(1,0,"mono","mono")
-        "It's ok if you hook up with other girls." if "mono" in RogueX.Traits:
+            $ RogueX.add_word(1,0,"mono","mono")
+        "It's ok if you hook up with other girls." if "mono" in RogueX.traits:
             if approval_check(RogueX, 700, "O", TabM=0):
                 $ RogueX.change_face("sly",1,Eyes="side")
                 ch_r "As you wish."
@@ -442,9 +442,9 @@ label Rogue_Monogamy:
                 ch_r "Oh? Well, glad I got your permission there."
             if "mono" not in RogueX.daily_history:
                 $ RogueX.change_stat("obedience", 90, 3)
-            if "mono" in RogueX.Traits:
-                $ RogueX.Traits.remove("mono")
-            $ RogueX.AddWord(1,0,"mono")
+            if "mono" in RogueX.traits:
+                $ RogueX.traits.remove("mono")
+            $ RogueX.add_word(1,0,"mono")
         "Never mind.":
             pass
     return
@@ -458,7 +458,7 @@ label Rogue_Jumped:
     $ RogueX.change_face("sly",1,Brows="confused")
     menu:
         ch_r "Yeah?"
-        "Could you maybe just ask instead?" if "chill" not in RogueX.Traits:
+        "Could you maybe just ask instead?" if "chill" not in RogueX.traits:
             if RogueX.Thirst >= 60 and not approval_check(RogueX, 1500, "LO", TabM=0):
 
                 $ RogueX.change_face("sly",1)
@@ -484,8 +484,8 @@ label Rogue_Jumped:
                 return
             if "chill" not in RogueX.daily_history:
                 $ RogueX.change_stat("obedience", 90, 3)
-            $ RogueX.AddWord(1,0,"chill","chill")
-        "Don't bother me like that." if "chill" not in RogueX.Traits:
+            $ RogueX.add_word(1,0,"chill","chill")
+        "Don't bother me like that." if "chill" not in RogueX.traits:
             if approval_check(RogueX, 900, "O", TabM=0):
 
                 $ RogueX.change_face("sly",1,Eyes="side")
@@ -513,7 +513,7 @@ label Rogue_Jumped:
                 return
             if "chill" not in RogueX.daily_history:
                 $ RogueX.change_stat("obedience", 90, 3)
-            $ RogueX.AddWord(1,0,"chill","chill")
+            $ RogueX.add_word(1,0,"chill","chill")
         "Knock yourself out.":
             if approval_check(RogueX, 800, "L", TabM=0):
                 $ RogueX.change_face("sly",1)
@@ -528,9 +528,9 @@ label Rogue_Jumped:
                 ch_r "Maybe. If I've got nothing better to do."
             if "chill" not in RogueX.daily_history:
                 $ RogueX.change_stat("obedience", 90, 3)
-            if "chill" in RogueX.Traits:
-                $ RogueX.Traits.remove("chill")
-            $ RogueX.AddWord(1,0,"chill")
+            if "chill" in RogueX.traits:
+                $ RogueX.traits.remove("chill")
+            $ RogueX.add_word(1,0,"chill")
         "Um, never mind.":
             pass
     return
@@ -576,7 +576,7 @@ label Rogue_Hungry:
         ch_r "You know, I've really come to enjoy the taste of your, serum. It's like my favorite drink!"
     else:
         ch_r "You know, I've really come to enjoy the taste of your. . . cum. I think I'd like some more of that."
-    $ RogueX.Traits.append("hungry")
+    $ RogueX.traits.append("hungry")
 return
 
 
@@ -801,7 +801,7 @@ label Rogue_SexChat:
 
 
 
-            "Don't talk as much during sex." if "vocal" in RogueX.Traits:
+            "Don't talk as much during sex." if "vocal" in RogueX.traits:
                 if "setvocal" in RogueX.daily_history:
                     $ RogueX.change_face("perplexed")
                     ch_r "We've been over this already."
@@ -810,12 +810,12 @@ label Rogue_SexChat:
                         $ RogueX.change_face("bemused")
                         $ RogueX.change_stat("obedience", 90, 1)
                         ch_r "Heh, ok, if that's what you want. . ."
-                        $ RogueX.Traits.remove("vocal")
+                        $ RogueX.traits.remove("vocal")
                     elif approval_check(RogueX, 700, "O"):
                         $ RogueX.change_face("sadside")
                         $ RogueX.change_stat("obedience", 90, 1)
                         ch_r "If that's what you want, [RogueX.player_petname]."
-                        $ RogueX.Traits.remove("vocal")
+                        $ RogueX.traits.remove("vocal")
                     elif approval_check(RogueX, 600):
                         $ RogueX.change_face("sly")
                         $ RogueX.change_stat("love", 90, -3)
@@ -830,7 +830,7 @@ label Rogue_SexChat:
                         ch_r "Fuck you, I'll talk as much as I want."
 
                     $ RogueX.daily_history.append("setvocal")
-            "Talk dirty to me during sex." if "vocal" not in RogueX.Traits:
+            "Talk dirty to me during sex." if "vocal" not in RogueX.traits:
                 if "setvocal" in RogueX.daily_history:
                     $ RogueX.change_face("perplexed")
                     ch_r "We've been over this already."
@@ -839,17 +839,17 @@ label Rogue_SexChat:
                         $ RogueX.change_face("sly")
                         $ RogueX.change_stat("obedience", 90, 2)
                         ch_r "Heh, ok, if that's what you want. . ."
-                        $ RogueX.Traits.append("vocal")
+                        $ RogueX.traits.append("vocal")
                     elif approval_check(RogueX, 700, "O"):
                         $ RogueX.change_face("sadside")
                         $ RogueX.change_stat("obedience", 90, 2)
                         ch_r "If that's what you want, [RogueX.player_petname]."
-                        $ RogueX.Traits.append("vocal")
+                        $ RogueX.traits.append("vocal")
                     elif approval_check(RogueX, 600):
                         $ RogueX.change_face("sly")
                         $ RogueX.change_stat("obedience", 90, 3)
                         ch_r "I can give it a shot, [RogueX.player_petname]."
-                        $ RogueX.Traits.append("vocal")
+                        $ RogueX.traits.append("vocal")
                     else:
                         $ RogueX.change_face("angry")
                         $ RogueX.change_stat("inhibition", 90, 5)
@@ -858,7 +858,7 @@ label Rogue_SexChat:
                     $ RogueX.daily_history.append("setvocal")
 
 
-            "Don't do your own thing as much during sex." if "passive" not in RogueX.Traits:
+            "Don't do your own thing as much during sex." if "passive" not in RogueX.traits:
                 if "initiative" in RogueX.daily_history:
                     $ RogueX.change_face("perplexed")
                     ch_r "We've been over this already."
@@ -867,12 +867,12 @@ label Rogue_SexChat:
                         $ RogueX.change_face("bemused")
                         $ RogueX.change_stat("obedience", 90, 1)
                         ch_r "Heh, ok, lead the way. . ."
-                        $ RogueX.Traits.append("passive")
+                        $ RogueX.traits.append("passive")
                     elif approval_check(RogueX, 700, "O"):
                         $ RogueX.change_face("sadside")
                         $ RogueX.change_stat("obedience", 90, 1)
                         ch_r "I'll restrain myself then, [RogueX.player_petname]."
-                        $ RogueX.Traits.append("passive")
+                        $ RogueX.traits.append("passive")
                     elif approval_check(RogueX, 600):
                         $ RogueX.change_face("sly")
                         $ RogueX.change_stat("love", 90, -3)
@@ -887,7 +887,7 @@ label Rogue_SexChat:
                         ch_r "I'll do what I want, prick."
 
                     $ RogueX.daily_history.append("initiative")
-            "Take more initiative during sex." if "passive" in RogueX.Traits:
+            "Take more initiative during sex." if "passive" in RogueX.traits:
                 if "initiative" in RogueX.daily_history:
                     $ RogueX.change_face("perplexed")
                     ch_r "We've been over this already."
@@ -896,17 +896,17 @@ label Rogue_SexChat:
                         $ RogueX.change_face("bemused")
                         $ RogueX.change_stat("obedience", 90, 1)
                         ch_r "Heh, I think I can handle that. . ."
-                        $ RogueX.Traits.remove("passive")
+                        $ RogueX.traits.remove("passive")
                     elif approval_check(RogueX, 700, "O"):
                         $ RogueX.change_face("sadside")
                         $ RogueX.change_stat("obedience", 90, 1)
                         ch_r "I can do that, [RogueX.player_petname]."
-                        $ RogueX.Traits.remove("passive")
+                        $ RogueX.traits.remove("passive")
                     elif approval_check(RogueX, 600):
                         $ RogueX.change_face("sly")
                         $ RogueX.change_stat("obedience", 90, 3)
                         ch_r "I can certainly try, [RogueX.player_petname]."
-                        $ RogueX.Traits.remove("passive")
+                        $ RogueX.traits.remove("passive")
                     else:
                         $ RogueX.change_face("angry")
                         $ RogueX.change_stat("inhibition", 90, 5)
@@ -945,7 +945,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
                 ch_r "You know, you should probably have my number, here you go."
                 $ Digits.append(RogueX)
                 return
-        if "hungry" not in RogueX.Traits and (RogueX.event_counter["swallowed"] + RogueX.Chat[2]) >= 10 and RogueX.location == bg_current:
+        if "hungry" not in RogueX.traits and (RogueX.event_counter["swallowed"] + RogueX.Chat[2]) >= 10 and RogueX.location == bg_current:
             call Rogue_Hungry
             return
         if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or approval_check(RogueX, 800, "I")):
@@ -962,7 +962,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
             $ Options.append("close")
         if RogueX.action_counter["blowjob"] >= 2:
             $ Options.append("blowjob")
-        if "steal" in RogueX.Traits:
+        if "steal" in RogueX.traits:
             $ Options.append("steal")
         if PunishmentX and "caught chat" not in RogueX.daily_history:
             $ Options.append("caught")
@@ -971,11 +971,11 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         if "lover" in RogueX.player_petnames and approval_check(RogueX, 900, "L"):
             $ Options.append("luv")
 
-        if "mandrill" in Player.Traits and "cologne chat" not in RogueX.daily_history:
+        if "mandrill" in Player.traits and "cologne chat" not in RogueX.daily_history:
             $ Options.append("mandrill")
-        if "purple" in Player.Traits and "cologne chat" not in RogueX.daily_history:
+        if "purple" in Player.traits and "cologne chat" not in RogueX.daily_history:
             $ Options.append("purple")
-        if "corruption" in Player.Traits and "cologne chat" not in RogueX.daily_history:
+        if "corruption" in Player.traits and "cologne chat" not in RogueX.daily_history:
             $ Options.append("corruption")
 
         if not RogueX.Chat[0] and RogueX.action_counter["sex"]:
@@ -1068,23 +1068,23 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         $ RogueX.pose = "doggy"
         call Rogue_Sex_Launch ("massage")
         if RogueX.legs == "skirt":
-            $ RogueX.Upskirt = 1
+            $ RogueX.upskirt = 1
             if RogueX.underwear and RogueX.SeenPanties and approval_check(RogueX, 800, TabM = 3):
                 pass
             elif RogueX.underwear and approval_check(RogueX, 800, TabM = 3):
                 $ RogueX.SeenPanties = 1
             elif RogueX.underwear:
-                $ RogueX.Upskirt = 0
+                $ RogueX.upskirt = 0
             elif RogueX.SeenPussy and approval_check(RogueX, 1000, TabM = 4):
                 pass
             elif approval_check(RogueX, 1400, TabM = 3):
                 call Rogue_First_Bottomless (1)
             else:
-                $ RogueX.Upskirt = 0
+                $ RogueX.upskirt = 0
             pause 0.5  
-            $ RogueX.Upskirt = 0
+            $ RogueX.upskirt = 0
         ch_r "Y'know what I'm sayin', [RogueX.player_petname]?"
-        $ RogueX.Upskirt = 0
+        $ RogueX.upskirt = 0
         call Rogue_Doggy_Reset
 
     elif Options[0] == "seenpeen":
@@ -1778,7 +1778,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
 
     $ RogueX.recent_history.append("summoned")
     $ Line = 0
-    if "locked" in Player.Traits:
+    if "locked" in Player.traits:
         call Locked_Door (RogueX)
         return
     call Taboo_Level (0)
@@ -1792,7 +1792,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
 
 label Rogue_Leave(approval_bonus=approval_bonus):
     if "leaving" in RogueX.recent_history:
-        $ RogueX.DrainWord("leaving")
+        $ RogueX.drain_word("leaving")
     else:
         return
 
@@ -1804,13 +1804,13 @@ label Rogue_Leave(approval_bonus=approval_bonus):
         ch_r "I'm heading out for a while, see you later."
         return
 
-    if RogueX in Party or "lockedtravels" in RogueX.Traits:
+    if RogueX in Party or "lockedtravels" in RogueX.traits:
 
 
         $ RogueX.location = bg_current
         return
 
-    elif "freetravels" in RogueX.Traits or not approval_check(RogueX, 700):
+    elif "freetravels" in RogueX.traits or not approval_check(RogueX, 700):
 
         $ RogueX.change_outfit()
         if not approval_check(RogueX, 600, "LO"):
@@ -1840,9 +1840,9 @@ label Rogue_Leave(approval_bonus=approval_bonus):
 
     $ RogueX.change_outfit()
 
-    if "follow" not in RogueX.Traits:
+    if "follow" not in RogueX.traits:
 
-        $ RogueX.Traits.append("follow")
+        $ RogueX.traits.append("follow")
 
     $ D20 = renpy.random.randint(1, 20)
     $ Line = 0
@@ -2131,7 +2131,7 @@ label Rogue_Leave(approval_bonus=approval_bonus):
 
 label Rogue_Clothes:
     if RogueX.Taboo:
-        if "exhibitionist" in RogueX.Traits:
+        if "exhibitionist" in RogueX.traits:
             ch_r "Oooh, naughty. . ."
         elif approval_check(RogueX, 900, TabM=4) or approval_check(RogueX, 400, "I", TabM=3):
             ch_r "Well, I mean, it's pretty public here, but I guess I could. . ."
@@ -2211,7 +2211,7 @@ label Rogue_Wardrobe_Menu:
                 call Switch_Chat
                 if Girl != RogueX:
                     ch_p "I wanted to talk about your clothes."
-                    call expression Girl.Tag +"_Clothes"
+                    call expression Girl.tag +"_Clothes"
                 $ Girl = RogueX
                 call shift_focus (Girl)
             "Never mind, you look good like that. [[return]":
@@ -2407,7 +2407,7 @@ label Rogue_Wardrobe_Menu:
                 $ RogueX.change_face("sexy")
                 menu:
                     "You know, you should wear this one out. [[set current outfit]":
-                        if "exhibitionist" in RogueX.Traits:
+                        if "exhibitionist" in RogueX.traits:
                             ch_r "You sure know how to rev my engines. . ."
                             $ RogueX.Outfit = "nude"
                             $ RogueX.Shame = 50
@@ -2420,7 +2420,7 @@ label Rogue_Wardrobe_Menu:
                             $ RogueX.eyes = "surprised"
                             ch_r "I'm afraid not, [RogueX.player_petname], this is just for between you and me."
                     "Let's try something else though.":
-                        if "exhibitionist" in RogueX.Traits:
+                        if "exhibitionist" in RogueX.traits:
                             ch_r "Hmm, too bad you didn't want me to wear this out. . ."
                         elif approval_check(RogueX, 750, "I") or approval_check(RogueX, 2500, TabM=0):
                             $ RogueX.change_face("bemused", 1)
@@ -2523,7 +2523,7 @@ label Rogue_Wardrobe_Menu:
                     return
             $ RogueX.top = "towel"
 
-        "How about that green nighty I got you?" if RogueX.top != "nighty" and "nighty" in RogueX.Inventory:
+        "How about that green nighty I got you?" if RogueX.top != "nighty" and "nighty" in RogueX.inventory:
             if RogueX.legs:
                 ch_r "I can't really wear that with my [RogueX.legs] on."
             elif not approval_check(RogueX, 1100, TabM=3):
@@ -2533,11 +2533,11 @@ label Rogue_Wardrobe_Menu:
                     return
             else:
                 ch_r "Sure. . ."
-            if "lace_bra" in RogueX.Inventory:
+            if "lace_bra" in RogueX.inventory:
                 $ RogueX.bra = "lace_bra"
             else:
                 $ RogueX.bra = "bra"
-            if "lace_panties" in RogueX.Inventory:
+            if "lace_panties" in RogueX.inventory:
                 $ RogueX.underwear = "lace_panties"
             else:
                 $ RogueX.underwear = "black_panties"
@@ -2575,7 +2575,7 @@ label Rogue_Wardrobe_Menu:
                     $ RogueX.blushing = 2
                     ch_r "'course, I don't exactly need something under it either. . ."
                     $ RogueX.blushing = 1
-                elif approval_check(RogueX, 900, TabM=2) and "lace_bra" in RogueX.Inventory:
+                elif approval_check(RogueX, 900, TabM=2) and "lace_bra" in RogueX.inventory:
                     ch_r "I suppose this would work. . ."
                     $ RogueX.bra  = "lace_bra"
                     "She pulls out her lace bra and slips it on under her [RogueX.top]."
@@ -2658,7 +2658,7 @@ label Rogue_Wardrobe_Menu:
 
         "How about that skirt?" if RogueX.legs != "skirt":
             $ RogueX.legs = "skirt"
-            $ RogueX.Upskirt = 0
+            $ RogueX.upskirt = 0
 
         "Your ass looks tight in those jeans." if RogueX.legs != "pants":
             $ RogueX.legs = "pants"
@@ -2666,7 +2666,7 @@ label Rogue_Wardrobe_Menu:
 
         "The tights would look good with that." if RogueX.hose != 'tights' and RogueX.legs != "pants":
             $ RogueX.hose = "tights"
-        "Your ripped tights would look good with that." if RogueX.hose != 'ripped_tights' and "ripped_tights" in RogueX.Inventory and RogueX.legs != "pants":
+        "Your ripped tights would look good with that." if RogueX.hose != 'ripped_tights' and "ripped_tights" in RogueX.inventory and RogueX.legs != "pants":
             $ RogueX.hose = "ripped_tights"
         "You could lose the tights." if RogueX.hose == 'ripped_tights' or RogueX.hose == 'tights':
             $ RogueX.hose = 0
@@ -2736,7 +2736,7 @@ label Rogue_Wardrobe_Menu:
                     $ RogueX.blushing = 0
                 elif approval_check(RogueX, 700, TabM=4):
                     ch_r "I like how you think."
-                    if "lace_panties" in RogueX.Inventory:
+                    if "lace_panties" in RogueX.inventory:
                         $ RogueX.underwear  = "lace_panties"
                     else:
                         $ RogueX.underwear = "black_panties"
@@ -2849,7 +2849,7 @@ label Rogue_Wardrobe_Menu:
                             return
                     $ RogueX.bra = "tube_top"
 
-                "I like that lace bra." if "lace_bra" in RogueX.Inventory and RogueX.bra != "lace_bra":
+                "I like that lace bra." if "lace_bra" in RogueX.inventory and RogueX.bra != "lace_bra":
                     if (RogueX.SeenChest and approval_check(RogueX, 800)) or approval_check(RogueX, 1100, TabM=2):
                         ch_r "Sure."
                     else:
@@ -2859,7 +2859,7 @@ label Rogue_Wardrobe_Menu:
                             return
                     $ RogueX.bra = "lace_bra"
 
-                "I like that bikini top." if RogueX.bra != "bikini_top" and "bikini_top" in RogueX.Inventory:
+                "I like that bikini top." if RogueX.bra != "bikini_top" and "bikini_top" in RogueX.inventory:
                     if bg_current == "bg_pool":
                         ch_r "Sure."
                     else:
@@ -2885,11 +2885,11 @@ label Rogue_Wardrobe_Menu:
                     $ RogueX.hose = "stockings"
                 "The pantyhose would look good with that." if RogueX.hose != "pantyhose" and RogueX.legs != "pants":
                     $ RogueX.hose = "pantyhose"
-                "The stockings would look good with that." if RogueX.hose != "stockings_and_garterbelt" and "stockings_and_garterbelt" in RogueX.Inventory and RogueX.legs != "pants":
+                "The stockings would look good with that." if RogueX.hose != "stockings_and_garterbelt" and "stockings_and_garterbelt" in RogueX.inventory and RogueX.legs != "pants":
                     $ RogueX.hose = "stockings_and_garterbelt"
-                "Maybe just the garterbelt?" if RogueX.hose != "garterbelt" and "stockings_and_garterbelt" in RogueX.Inventory and RogueX.legs != "pants":
+                "Maybe just the garterbelt?" if RogueX.hose != "garterbelt" and "stockings_and_garterbelt" in RogueX.inventory and RogueX.legs != "pants":
                     $ RogueX.hose = "garterbelt"
-                "Your ripped pantyhose would look good with that." if RogueX.hose != "ripped_pantyhose" and "ripped_pantyhose" in RogueX.Inventory and RogueX.legs != "pants":
+                "Your ripped pantyhose would look good with that." if RogueX.hose != "ripped_pantyhose" and "ripped_pantyhose" in RogueX.inventory and RogueX.legs != "pants":
                     $ RogueX.hose = "ripped_pantyhose"
                 "Never mind":
                     pass
@@ -2976,7 +2976,7 @@ label Rogue_Wardrobe_Menu:
                         else:
                             $ RogueX.underwear = "black_panties"
 
-                "Why don't you wear the lace panties instead?" if "lace_panties" in RogueX.Inventory and RogueX.underwear and RogueX.underwear != "lace_panties":
+                "Why don't you wear the lace panties instead?" if "lace_panties" in RogueX.inventory and RogueX.underwear and RogueX.underwear != "lace_panties":
                     if approval_check(RogueX, 1200, TabM=3):
                         ch_r "Sure."
                         $ RogueX.underwear = "lace_panties"
@@ -2989,7 +2989,7 @@ label Rogue_Wardrobe_Menu:
                         else:
                             $ RogueX.underwear = "lace_panties"
 
-                "I like those bikini bottoms." if RogueX.underwear != "bikini_bottoms" and "bikini_bottoms" in RogueX.Inventory:
+                "I like those bikini bottoms." if RogueX.underwear != "bikini_bottoms" and "bikini_bottoms" in RogueX.inventory:
                     if bg_current == "bg_pool":
                         ch_r "Sure."
                         $ RogueX.underwear = "bikini_bottoms"
@@ -3027,7 +3027,7 @@ label Rogue_Wardrobe_Menu:
                         "How about the black ones?":
                             ch_r "Alright."
                             $ RogueX.underwear  = "black_panties"
-                        "How about the lace ones?" if "lace_panties" in RogueX.Inventory:
+                        "How about the lace ones?" if "lace_panties" in RogueX.inventory:
                             ch_r "Alright."
                             $ RogueX.underwear  = "lace_panties"
                 "Never mind":
@@ -3085,13 +3085,13 @@ label Rogue_Wardrobe_Menu:
                 ch_r "Yeah, I know, [RogueX.player_petname]. It doesn't grow out overnight!"
             else:
                 $ RogueX.change_face("bemused", 1)
-                $ Approval = approval_check(RogueX, 1150, TabM=0)
+                $ approval = approval_check(RogueX, 1150, TabM=0)
 
-                if approval_check(RogueX, 850, "L", TabM=0) or (Approval and RogueX.love > RogueX.obedience):
+                if approval_check(RogueX, 850, "L", TabM=0) or (approval and RogueX.love > RogueX.obedience):
                     ch_r "Well. . . if that's how you like it. . ."
-                elif approval_check(RogueX, 500, "O", TabM=0) or (Approval and RogueX.obedience > RogueX.inhibition):
+                elif approval_check(RogueX, 500, "O", TabM=0) or (approval and RogueX.obedience > RogueX.inhibition):
                     ch_r "If that's what you want."
-                elif approval_check(RogueX, 500, "I", TabM=0) or Approval:
+                elif approval_check(RogueX, 500, "I", TabM=0) or approval:
                     ch_r "Heh, I like a man knows what he wants, [RogueX.player_petname]."
                 else:
                     $ RogueX.change_face("surprised")
@@ -3107,12 +3107,12 @@ label Rogue_Wardrobe_Menu:
             if "shave" in RogueX.Todo:
                 ch_r "I know, I'll get on that. Not right this second, obviously."
             else:
-                $ Approval = approval_check(RogueX, 1150, TabM=0)
-                if approval_check(RogueX, 850, "L", TabM=0) or (Approval and RogueX.love > RogueX.obedience):
+                $ approval = approval_check(RogueX, 1150, TabM=0)
+                if approval_check(RogueX, 850, "L", TabM=0) or (approval and RogueX.love > RogueX.obedience):
                     ch_r "I can keep it tidy if you like. . ."
-                elif approval_check(RogueX, 500, "O", TabM=0) or (Approval and RogueX.obedience > RogueX.inhibition):
+                elif approval_check(RogueX, 500, "O", TabM=0) or (approval and RogueX.obedience > RogueX.inhibition):
                     ch_r "I'll take care of it."
-                elif approval_check(RogueX, 500, "I", TabM=0) or Approval:
+                elif approval_check(RogueX, 500, "I", TabM=0) or approval:
                     ch_r "You better earn it, [RogueX.player_petname]."
                 else:
                     $ RogueX.change_face("surprised")
@@ -3129,12 +3129,12 @@ label Rogue_Wardrobe_Menu:
                 ch_r "Yeah, I know, I'll get to it."
             else:
                 $ RogueX.change_face("bemused", 1)
-                $ Approval = approval_check(RogueX, 1350, TabM=0)
-                if approval_check(RogueX, 950, "L", TabM=0) or (Approval and RogueX.love > RogueX.obedience):
+                $ approval = approval_check(RogueX, 1350, TabM=0)
+                if approval_check(RogueX, 950, "L", TabM=0) or (approval and RogueX.love > RogueX.obedience):
                     ch_r "You really like those? Well, I suppose. . ."
-                elif approval_check(RogueX, 600, "O", TabM=0) or (Approval and RogueX.obedience > RogueX.inhibition):
+                elif approval_check(RogueX, 600, "O", TabM=0) or (approval and RogueX.obedience > RogueX.inhibition):
                     ch_r "I'll go get that taken care of."
-                elif approval_check(RogueX, 600, "I", TabM=0) or Approval:
+                elif approval_check(RogueX, 600, "I", TabM=0) or approval:
                     ch_r "I've always kind of liked the look of those. . ."
                 else:
                     $ RogueX.change_face("surprised")
@@ -3149,12 +3149,12 @@ label Rogue_Wardrobe_Menu:
                 ch_r "Yeah, I know, I'll get to it."
             else:
                 $ RogueX.change_face("bemused", 1)
-                $ Approval = approval_check(RogueX, 1350, TabM=0)
-                if approval_check(RogueX, 900, "L", TabM=0) or (Approval and RogueX.love > RogueX.obedience):
+                $ approval = approval_check(RogueX, 1350, TabM=0)
+                if approval_check(RogueX, 900, "L", TabM=0) or (approval and RogueX.love > RogueX.obedience):
                     ch_r "You really like those? Well, I suppose. . ."
-                elif approval_check(RogueX, 600, "O", TabM=0) or (Approval and RogueX.obedience > RogueX.inhibition):
+                elif approval_check(RogueX, 600, "O", TabM=0) or (approval and RogueX.obedience > RogueX.inhibition):
                     ch_r "I'll go get that taken care of."
-                elif approval_check(RogueX, 600, "I", TabM=0) or Approval:
+                elif approval_check(RogueX, 600, "I", TabM=0) or approval:
                     ch_r "I've always kind of liked the look of those. . ."
                 else:
                     $ RogueX.change_face("surprised")
@@ -3167,12 +3167,12 @@ label Rogue_Wardrobe_Menu:
         "Remove piercings." if RogueX.piercings:
             ch_p "You know, you'd look better without those piercings."
             $ RogueX.change_face("bemused", 1)
-            $ Approval = approval_check(RogueX, 1350, TabM=0)
-            if approval_check(RogueX, 950, "L", TabM=0) or (Approval and RogueX.love > RogueX.obedience):
+            $ approval = approval_check(RogueX, 1350, TabM=0)
+            if approval_check(RogueX, 950, "L", TabM=0) or (approval and RogueX.love > RogueX.obedience):
                 ch_r "You really think so? I guess I could lose them. . ."
-            elif approval_check(RogueX, 600, "O", TabM=0) or (Approval and RogueX.obedience > RogueX.inhibition):
+            elif approval_check(RogueX, 600, "O", TabM=0) or (approval and RogueX.obedience > RogueX.inhibition):
                 ch_r "I'll take them out then."
-            elif approval_check(RogueX, 600, "I", TabM=0) or Approval:
+            elif approval_check(RogueX, 600, "I", TabM=0) or approval:
                 ch_r "I guess I prefered not having them in. . ."
             else:
                 $ RogueX.change_face("surprised")

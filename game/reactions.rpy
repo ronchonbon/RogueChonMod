@@ -64,7 +64,7 @@ label went_too_far_reactions(Girl, action):
         elif action in ["fondle_breasts", "suck_breasts", "fondle_ass"]:
             $ Girl.change_stat("lust", 60, 5)
         elif action in ["finger_ass", "eat_ass"]:
-            if Approvalcheck(Girl, 500, "I"):
+            if approvalcheck(Girl, 500, "I"):
                 $ Girl.change_stat("lust", 80, 10)
             else:
                 $ Girl.change_stat("lust", 50, 3)
@@ -671,9 +671,9 @@ label girl_initiated_action(Girl, action):
             $ covered_phrase = "head and shoves your face into her chest"
             $ topless_phrase = covered_phrase
 
-        if (Girl.Over or Girl.Chest) and not Girl.Uptop:
-            if Approvalcheck(Girl, 1250, TabM = 1) or (Girl.SeenChest and Approvalcheck(Girl, 500) and not Taboo):
-                $ Girl.Uptop = 1
+        if (Girl.Over or Girl.Chest) and not Girl.top_pulled_up:
+            if approvalcheck(Girl, 1250, TabM = 1) or (Girl.SeenChest and approvalcheck(Girl, 500) and not Taboo):
+                $ Girl.top_pulled_up = 1
 
                 $ line = Girl.Over if Girl.Over else Girl.Chest
 
@@ -705,10 +705,10 @@ label girl_initiated_action(Girl, action):
                 "grabs your arm and rubs your hand against her asshole"])
 
 
-        if (Girl.Legs and not Girl.Upskirt) or (Girl.Panties and not Girl.underwearDown):
-            if Approvalcheck(Girl, 1250, TabM = 1) or (Girl.SeenPussy and Approvalcheck(Girl, 500) and not Taboo):
-                $ Girl.Upskirt = 1
-                $ Girl.underwearDown = 1
+        if (Girl.Legs and not Girl.upskirt) or (Girl.Panties and not Girl.underwear_pulled_down):
+            if approvalcheck(Girl, 1250, TabM = 1) or (Girl.SeenPussy and approvalcheck(Girl, 500) and not Taboo):
+                $ Girl.upskirt = 1
+                $ Girl.underwear_pulled_down = 1
 
                 $ line = 0
 
@@ -751,7 +751,7 @@ label girl_initiated_action(Girl, action):
         if Girl.wearing_skirt:
             "[Girl.name] grabs her dildo, hiking up her skirt as she does."
 
-            $ Girl.Upskirt = 1
+            $ Girl.upskirt = 1
         elif Girl.PantsNum() > 6:
             "[Girl.name] grabs her dildo, pulling down her pants as she does."
 
@@ -778,7 +778,7 @@ label girl_initiated_action(Girl, action):
                     "[Girl.name] lays back, sliding her skirt up as she does so."])
                 "[line]"
 
-                $ Girl.Upskirt = 1
+                $ Girl.upskirt = 1
             elif Girl.PantsNum() > 6:
                 $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock, sliding her [Girl.Legs] down as she does so.",
                     "[Girl.name] rolls back and pulls you against her, sliding her [Girl.Legs] off as she does so.",
@@ -787,12 +787,12 @@ label girl_initiated_action(Girl, action):
                     "[Girl.name] lays back, sliding her [Girl.Legs] down as she does so."])
                 "[line]"
 
-                $ Girl.Upskirt = 1
+                $ Girl.upskirt = 1
             elif Girl.PantsNum() == 6:
                 $ line = renpy.random.choice(["[Girl.name] rolls onto her back and pulls you against her, sliding her shorts off as she does so."])
                 "[line]"
 
-                $ Girl.Upskirt = 1
+                $ Girl.upskirt = 1
             else:
                 $ line = renpy.random.choice(["[Girl.name] turns and backs up against your cock.",
                     "[Girl.name] rolls back and pulls you toward her.",
@@ -994,7 +994,7 @@ label girl_initiated_action(Girl, action):
 
                 $ Player.recent_history.append("nope")
 
-                $ Girl.AddWord(1,"refused","refused")
+                $ Girl.add_word(1,"refused","refused")
 
                 return True
 
@@ -1077,17 +1077,17 @@ label action_specific_consequences(Girl, action):
         else:
             call Partner_Like(Girl, 2)
     elif action == "handjob":
-        $ achievement = Girl.Tag + " Handi-Queen"
+        $ achievement = Girl.tag + " Handi-Queen"
 
         call Partner_Like(Girl, 2)
     elif action == "footjob":
-        $ achievement = Girl.Tag + "pedi"
+        $ achievement = Girl.tag + "pedi"
 
         call Partner_Like(Girl, 1)
     elif action == "titjob":
         call Partner_Like(Girl, 3)
     elif action == "blowjob":
-        $ achievement = Girl.Tag + " Jobber"
+        $ achievement = Girl.tag + " Jobber"
 
         if Girl == RogueX and Partner == EmmaX:
             call Partner_Like(Girl, 3)
@@ -1096,14 +1096,14 @@ label action_specific_consequences(Girl, action):
     elif action in dildo_actions:
         call Partner_Like(Girl, 2)
     elif action == "sex":
-        $ achievement = Girl.Tag + " Sex Addict"
+        $ achievement = Girl.tag + " Sex Addict"
 
         call Partner_Like(Girl, 3, 2)
 
         $ Girl.change_stat("inhibition", 30, 2)
         $ Girl.change_stat("inhibition", 70, 1)
     elif action == "anal":
-        $ achievement = Girl.Tag + " Anal Addict"
+        $ achievement = Girl.tag + " Anal Addict"
 
         if Partner == "Kitty":
             if Girl == RogueX:
@@ -1119,7 +1119,7 @@ label action_specific_consequences(Girl, action):
         $ Girl.change_stat("inhibition", 30, 3)
         $ Girl.change_stat("inhibition", 70, 1)
     elif action == "hotdog":
-        $ achievement = Girl.Tag + " Full Buns"
+        $ achievement = Girl.tag + " Full Buns"
 
         if Girl == RogueX:
             call Partner_Like(Girl, 1)
@@ -1340,15 +1340,15 @@ label action_rejected(Girl, action):
 
         call learn_to_take_no_lines(Girl)
 
-        $ Girl.AddWord(1,"angry","angry")
+        $ Girl.add_word(1,"angry","angry")
     elif Girl.Forced:
         call went_too_far_reactions(Girl, action)
 
-        $ Girl.AddWord(1, "angry", "angry")
+        $ Girl.add_word(1, "angry", "angry")
     elif Taboo:
         call action_rejected_taboo_reactions(Girl, action)
 
-        $ Girl.AddWord(1, "tabno", "tabno")
+        $ Girl.add_word(1, "tabno", "tabno")
     elif action in anal_insertion_actions and not Girl.Loose and action in Girl.daily_history:
         call anal_insertion_not_loose_done_today_reactions(Girl)
     elif Girl.action_counter[action]:
@@ -1368,16 +1368,16 @@ label action_rejected(Girl, action):
 label forced_action(Girl, action):
     call forced_approval_checks(Girl, action)
 
-    if Approval > 1 or (Approval and Girl.Forced):
+    if approval > 1 or (approval and Girl.Forced):
         call forced_but_not_unwelcome_reactions(Girl, action)
 
-        if Approval < 2:
+        if approval < 2:
             $ Girl.Forced = 1
 
         jump before_action
     else:
         call forced_rejected_reactions(Girl, action)
 
-        $ Girl.AddWord(1, "angry", "angry")
+        $ Girl.add_word(1, "angry", "angry")
 
     return

@@ -58,22 +58,22 @@ label Rogue_Masturbate:
         $ approval_bonus += 20
     elif RogueX.lust >= 75:
         $ approval_bonus += 5
-    if "exhibitionist" in RogueX.Traits:
+    if "exhibitionist" in RogueX.traits:
         $ approval_bonus += (3*Taboo)
     if RogueX in Player.Harem or "sex friend" in RogueX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in RogueX.Traits:
+    elif "ex" in RogueX.traits:
         $ approval_bonus -= 40
     if RogueX.event_counter["forced"] and not RogueX.Forced:
         $ approval_bonus -= 5*RogueX.event_counter["forced"]
 
-    $ Approval = approval_check(RogueX, 1200, TabM = 2)
+    $ approval = approval_check(RogueX, 1200, TabM = 2)
 
-    $ RogueX.DrainWord("unseen",1,0)
+    $ RogueX.drain_word("unseen",1,0)
 
     if action_context == "join":
-        if Approval > 1 or (Approval and RogueX.lust >= 50):
-            $ Player.AddWord(1,"join")
+        if approval > 1 or (approval and RogueX.lust >= 50):
+            $ Player.add_word(1,"join")
             menu:
                 extend ""
                 "Would you like some help? I could lend some helping hands. . ." if Player.semen and RogueX.remaining_actions:
@@ -130,7 +130,7 @@ label Rogue_Masturbate:
         $ Line = 0
         $ action_context = 0
         $ renpy.pop_call()
-        if Approval:
+        if approval:
             $ RogueX.change_face("bemused", 2)
             if bg_current == "bg_rogue":
                 ch_r "So what did you come over for anyway, [RogueX.player_petname]?"
@@ -156,10 +156,10 @@ label Rogue_Masturbate:
 
 
     if action_context == RogueX:
-        if Approval > 2:
+        if approval > 2:
             if RogueX.PantsNum() == 5:
                 "[RogueX.name]'s hand snakes down her body, and hikes up her skirt."
-                $ RogueX.Upskirt = 1
+                $ RogueX.upskirt = 1
             elif RogueX.PantsNum() > 6:
                 "[RogueX.name] slides her hand down her body and into her jeans."
             elif RogueX.HoseNum() >= 5:
@@ -215,7 +215,7 @@ label Rogue_Masturbate:
 
 
 
-    if not RogueX.action_counter["masturbation"] and Approval:
+    if not RogueX.action_counter["masturbation"] and approval:
         if RogueX.Forced:
             $ RogueX.change_face("sad")
             $ RogueX.change_stat("love", 70, -3, 1)
@@ -235,17 +235,17 @@ label Rogue_Masturbate:
 
 
 
-    elif Approval:
+    elif approval:
         if RogueX.Forced:
             $ RogueX.change_face("sad")
             $ RogueX.change_stat("love", 70, -3, 1)
             $ RogueX.change_stat("love", 20, -2, 1)
             ch_r "You want to watch me again?"
-        elif Approval and "masturbation" in RogueX.recent_history:
+        elif approval and "masturbation" in RogueX.recent_history:
             $ RogueX.change_face("sexy", 1)
             ch_r "I guess I have a bit more in me. . ."
             jump Rogue_M_Prep
-        elif Approval and "masturbation" in RogueX.daily_history:
+        elif approval and "masturbation" in RogueX.daily_history:
             $ RogueX.change_face("sexy", 1)
             $ Line = renpy.random.choice(["You enjoyed the show?",
                     "Didn't get enough earlier?",
@@ -267,7 +267,7 @@ label Rogue_Masturbate:
 
 
 
-    if Approval >= 2:
+    if approval >= 2:
         if RogueX.Forced:
             $ RogueX.change_face("sad")
             $ RogueX.change_stat("obedience", 90, 1)
@@ -304,7 +304,7 @@ label Rogue_Masturbate:
                 $ RogueX.change_stat("inhibition", 70, 2)
                 return
             "You look like you could use it. . .":
-                if Approval:
+                if approval:
                     $ RogueX.change_face("sexy")
                     $ RogueX.change_stat("obedience", 90, 2)
                     $ RogueX.change_stat("obedience", 50, 2)
@@ -321,8 +321,8 @@ label Rogue_Masturbate:
                     jump Rogue_M_Prep
             "Just get at it already.":
 
-                $ Approval = approval_check(RogueX, 450, "OI", TabM = 2)
-                if Approval > 1 or (Approval and RogueX.Forced):
+                $ approval = approval_check(RogueX, 450, "OI", TabM = 2)
+                if approval > 1 or (approval and RogueX.Forced):
                     $ RogueX.change_face("sad")
                     $ RogueX.change_stat("love", 70, -5, 1)
                     $ RogueX.change_stat("love", 200, -5)
@@ -371,8 +371,8 @@ label Rogue_Masturbate:
     return
 
 label Rogue_M_Prep:
-    $ RogueX.Upskirt = 1
-    $ RogueX.underwearDown = 1
+    $ RogueX.upskirt = 1
+    $ RogueX.underwear_pulled_down = 1
     call Rogue_First_Bottomless (1)
     call set_the_scene (Dress=0)
 
@@ -406,8 +406,8 @@ label Rogue_M_Prep:
         $ action_context = 0
     $ Line = 0
     if Taboo:
-        $ RogueX.DrainWord("no_taboo")
-    $ RogueX.DrainWord("no_masturbation")
+        $ RogueX.drain_word("no_taboo")
+    $ RogueX.drain_word("no_masturbation")
     $ RogueX.recent_history.append("masturbation")
     $ RogueX.daily_history.append("masturbation")
 
@@ -455,9 +455,9 @@ label Rogue_M_Cycle:
                         $ Round -= 1
                         jump Rogue_M_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -485,9 +485,9 @@ label Rogue_M_Cycle:
                                 "Undress [Partner.name]":
                                     call Girl_Undress (Partner)
                                     jump Rogue_M_Cycle
-                                "Clean up [Partner.name] (locked)" if not Partner.Spunk:
+                                "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                     pass
-                                "Clean up [Partner.name]" if Partner.Spunk:
+                                "Clean up [Partner.name]" if Partner.spunk:
                                     call Girl_Cleanup (Partner, "ask")
                                     jump Rogue_M_Cycle
                                 "Never mind":
@@ -504,9 +504,9 @@ label Rogue_M_Cycle:
                                 jump Rogue_M_Interupted
                             else:
                                 call Girl_Undress (RogueX)
-                        "Clean up [RogueX.name] (locked)" if not RogueX.Spunk:
+                        "Clean up [RogueX.name] (locked)" if not RogueX.spunk:
                             pass
-                        "Clean up [RogueX.name]" if RogueX.Spunk:
+                        "Clean up [RogueX.name]" if RogueX.spunk:
                             if "unseen" in RogueX.recent_history:
                                 ch_p "You've got a little something on you. . ."
                                 jump Rogue_M_Interupted
@@ -670,7 +670,7 @@ label Rogue_M_Interupted:
                     $ RogueX.change_stat("obedience", 50, 2)
                     $ RogueX.change_stat("obedience", 70, 2)
 
-        $ RogueX.DrainWord("unseen",1,0)
+        $ RogueX.drain_word("unseen",1,0)
         $ RogueX.action_counter["masturbation"] += 1
         if Round <= 10:
             ch_r "It's getting too late to do much about it right now though."

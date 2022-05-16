@@ -33,10 +33,10 @@ label Rogue_FB_Prep:
     if action_context == RogueX:
 
         $ action_context = 0
-        if (RogueX.top or RogueX.bra) and not RogueX.Uptop:
+        if (RogueX.top or RogueX.bra) and not RogueX.top_pulled_up:
 
             if approval_check(RogueX, 1250, TabM = 1) or (RogueX.SeenChest and approval_check(RogueX, 500) and not Taboo):
-                $ RogueX.Uptop = 1
+                $ RogueX.top_pulled_up = 1
                 $ Line = RogueX.top if RogueX.top else RogueX.bra
                 "With a miscevious grin, [RogueX.name] pulls her [Line] up over her breasts."
                 call Rogue_First_Topless (1)
@@ -72,7 +72,7 @@ label Rogue_FB_Prep:
                 $ RogueX.change_stat("obedience", 50, 1)
                 $ RogueX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ RogueX.AddWord(1,"refused","refused")
+                $ RogueX.add_word(1,"refused","refused")
                 return
 
 
@@ -103,10 +103,10 @@ label Rogue_SB_Prep:
     if action_context == RogueX:
 
         $ action_context = 0
-        if (RogueX.top or RogueX.bra) and not RogueX.Uptop:
+        if (RogueX.top or RogueX.bra) and not RogueX.top_pulled_up:
 
             if approval_check(RogueX, 1250, TabM = 1) or (RogueX.SeenChest and approval_check(RogueX, 500) and not Taboo):
-                $ RogueX.Uptop = 1
+                $ RogueX.top_pulled_up = 1
                 $ Line = RogueX.top if RogueX.top else RogueX.bra
                 "With a miscevious grin, [RogueX.name] pulls her [Line] up over her breasts."
                 call Rogue_First_Topless (1)
@@ -142,7 +142,7 @@ label Rogue_SB_Prep:
                 $ RogueX.change_stat("obedience", 50, 1)
                 $ RogueX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ RogueX.AddWord(1,"refused","refused")
+                $ RogueX.add_word(1,"refused","refused")
                 return
 
 
@@ -199,11 +199,11 @@ label Rogue_FP_Prep:
     if action_context == RogueX:
 
         $ action_context = 0
-        if (RogueX.legs and not RogueX.Upskirt) or (RogueX.underwear and not RogueX.underwearDown):
+        if (RogueX.legs and not RogueX.upskirt) or (RogueX.underwear and not RogueX.underwear_pulled_down):
 
             if approval_check(RogueX, 1250, TabM = 1) or (RogueX.SeenPussy and approval_check(RogueX, 500) and not Taboo):
-                $ RogueX.Upskirt = 1
-                $ RogueX.underwearDown = 1
+                $ RogueX.upskirt = 1
+                $ RogueX.underwear_pulled_down = 1
                 $ Line = 0
                 if RogueX.PantsNum() == 5:
                     $ Line = RogueX.name+" hikes up her_skirt"
@@ -255,7 +255,7 @@ label Rogue_FP_Prep:
                 $ RogueX.change_stat("obedience", 50, 1)
                 $ RogueX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ RogueX.AddWord(1,"refused","refused")
+                $ RogueX.add_word(1,"refused","refused")
                 return
 
 
@@ -358,11 +358,11 @@ label Rogue_LP_Prep:
     if action_context == RogueX:
 
         $ action_context = 0
-        if (RogueX.legs and not RogueX.Upskirt) or (RogueX.underwear and not RogueX.underwearDown):
+        if (RogueX.legs and not RogueX.upskirt) or (RogueX.underwear and not RogueX.underwear_pulled_down):
 
             if approval_check(RogueX, 1250, TabM = 1) or (RogueX.SeenPussy and approval_check(RogueX, 500) and not Taboo):
-                $ RogueX.Upskirt = 1
-                $ RogueX.underwearDown = 1
+                $ RogueX.upskirt = 1
+                $ RogueX.underwear_pulled_down = 1
                 $ Line = 0
                 if RogueX.PantsNum() == 5:
                     $ Line = RogueX.name+" hikes up her_skirt"
@@ -414,7 +414,7 @@ label Rogue_LP_Prep:
                 $ RogueX.change_stat("obedience", 50, 1)
                 $ RogueX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ RogueX.AddWord(1,"refused","refused")
+                $ RogueX.add_word(1,"refused","refused")
                 return
 
 
@@ -466,11 +466,11 @@ label Rogue_IA_Prep:
     if action_context == RogueX:
 
         $ action_context = 0
-        if (RogueX.legs and not RogueX.Upskirt) or (RogueX.underwear and not RogueX.underwearDown):
+        if (RogueX.legs and not RogueX.upskirt) or (RogueX.underwear and not RogueX.underwear_pulled_down):
 
             if approval_check(RogueX, 1250, TabM = 1) or (RogueX.SeenPussy and approval_check(RogueX, 500) and not Taboo):
-                $ RogueX.Upskirt = 1
-                $ RogueX.underwearDown = 1
+                $ RogueX.upskirt = 1
+                $ RogueX.underwear_pulled_down = 1
                 $ Line = 0
                 if RogueX.PantsNum() == 5:
                     $ Line = RogueX.name+" hikes up her_skirt"
@@ -522,7 +522,7 @@ label Rogue_IA_Prep:
                 $ RogueX.change_stat("obedience", 50, 1)
                 $ RogueX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ RogueX.AddWord(1,"refused","refused")
+                $ RogueX.add_word(1,"refused","refused")
                 return
 
 

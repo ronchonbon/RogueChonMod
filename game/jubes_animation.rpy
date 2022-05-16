@@ -19,16 +19,16 @@ image Jubes_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "not JubesX.legs or not JubesX.Upskirt", Null(),
+            "not JubesX.legs or not JubesX.upskirt", Null(),
             "JubesX.legs == 'pants'", "images/JubesSprite/Jubes_Sprite_Legs_Pants_Back.png",
             "JubesX.legs == 'shorts'", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_Back.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not JubesX.underwear or not JubesX.underwearDown", Null(),
+            "not JubesX.underwear or not JubesX.underwear_pulled_down", Null(),
 
-            "JubesX.legs and not JubesX.Upskirt and JubesX.legs != 'skirt'", Null(),
+            "JubesX.legs and not JubesX.upskirt and JubesX.legs != 'skirt'", Null(),
 
             "JubesX.underwear == 'lace_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Lace_Back.png",
             "JubesX.underwear == 'tiger_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_Back.png",
@@ -57,8 +57,8 @@ image Jubes_Sprite:
 
 
             "not JubesX.accessory", Null(),
-            "(JubesX.Uptop or JubesX.accessory == 'open jacket') and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1_Back.png",
-            "(JubesX.Uptop or JubesX.accessory == 'open jacket')", "images/JubesSprite/Jubes_Sprite_Jacket_Open2_Back.png",
+            "(JubesX.top_pulled_up or JubesX.accessory == 'open jacket') and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1_Back.png",
+            "(JubesX.top_pulled_up or JubesX.accessory == 'open jacket')", "images/JubesSprite/Jubes_Sprite_Jacket_Open2_Back.png",
 
 
             "True", "images/JubesSprite/Jubes_Sprite_Jacket_Closed_Back.png",
@@ -133,7 +133,7 @@ image Jubes_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "JubesX.Uptop", ConditionSwitch(
+            "JubesX.top_pulled_up", ConditionSwitch(
 
                     "JubesX.bra == 'lace_bra'", "images/JubesSprite/Jubes_Sprite_Chest_Lace_Up.png",
                     "JubesX.bra == 'sports_bra'", "images/JubesSprite/Jubes_Sprite_Chest_Sports_Up.png",
@@ -171,9 +171,9 @@ image Jubes_Sprite:
         (0,0), ConditionSwitch(
 
             "not JubesX.underwear", Null(),
-            "JubesX.underwearDown", ConditionSwitch(
+            "JubesX.underwear_pulled_down", ConditionSwitch(
 
-                    "not JubesX.legs or JubesX.Upskirt or JubesX.legs == 'skirt'", ConditionSwitch(
+                    "not JubesX.legs or JubesX.upskirt or JubesX.legs == 'skirt'", ConditionSwitch(
 
                             "JubesX.underwear == 'lace_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Lace_Down.png",
                             "JubesX.underwear == 'bikini_bottoms' and JubesX.Wet", "images/JubesSprite/Jubes_Sprite_Panties_Bikini_DownW.png",
@@ -202,14 +202,14 @@ image Jubes_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.hose == 'pantyhose' and (not JubesX.underwearDown or not JubesX.underwear)", "images/JubesSprite/Jubes_Sprite_Hose_Pantyhose.png",
-            "JubesX.hose == 'ripped_pantyhose' and (not JubesX.underwearDown or not JubesX.underwear)", "images/JubesSprite/Jubes_Sprite_Hose_Pantyhose_Holed.png",
+            "JubesX.hose == 'pantyhose' and (not JubesX.underwear_pulled_down or not JubesX.underwear)", "images/JubesSprite/Jubes_Sprite_Hose_Pantyhose.png",
+            "JubesX.hose == 'ripped_pantyhose' and (not JubesX.underwear_pulled_down or not JubesX.underwear)", "images/JubesSprite/Jubes_Sprite_Hose_Pantyhose_Holed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not JubesX.legs", Null(),
-            "JubesX.Upskirt", ConditionSwitch(
+            "JubesX.upskirt", ConditionSwitch(
 
                         "JubesX.legs == 'pants'", "images/JubesSprite/Jubes_Sprite_Legs_Pants_Down.png",
                         "JubesX.legs == 'shorts' and JubesX.Wet > 1", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_DownW.png",
@@ -257,7 +257,7 @@ image Jubes_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "JubesX.Uptop", ConditionSwitch(
+            "JubesX.top_pulled_up", ConditionSwitch(
 
                     "JubesX.top == 'tube_top'", "images/JubesSprite/Jubes_Sprite_Over_Tube_Up.png",
                     "JubesX.top == 'red_shirt'", "images/JubesSprite/Jubes_Sprite_Over_Red_Up.png",
@@ -279,7 +279,7 @@ image Jubes_Sprite:
             "not JubesX.accessory", Null(),
             "JubesX.accessory == 'open jacket' and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1.png",
             "JubesX.accessory == 'open jacket'", "images/JubesSprite/Jubes_Sprite_Jacket_Open2.png",
-            "JubesX.Uptop", ConditionSwitch(
+            "JubesX.top_pulled_up", ConditionSwitch(
 
                     "(JubesX.accessory == 'jacket' or JubesX.accessory == 'shut jacket') and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1.png",
                     "JubesX.accessory == 'jacket' or JubesX.accessory == 'shut jacket'", "images/JubesSprite/Jubes_Sprite_Jacket_Open2.png",
@@ -290,8 +290,8 @@ image Jubes_Sprite:
             "JubesX.accessory == 'jacket' and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Closed1.png",
             "JubesX.accessory == 'jacket'", "images/JubesSprite/Jubes_Sprite_Jacket_Closed2.png",
 
-            "JubesX.Upskirt and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Shut1_Up.png",
-            "JubesX.Upskirt", "images/JubesSprite/Jubes_Sprite_Jacket_Shut2_Up.png",
+            "JubesX.upskirt and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Shut1_Up.png",
+            "JubesX.upskirt", "images/JubesSprite/Jubes_Sprite_Jacket_Shut2_Up.png",
             "JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Shut1.png",
             "True", "images/JubesSprite/Jubes_Sprite_Jacket_Shut2.png",
             ),
@@ -313,12 +313,12 @@ image Jubes_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "'belly' in JubesX.Spunk", "images/JubesSprite/Jubes_Sprite_Spunk_Belly.png",
+            "'belly' in JubesX.spunk", "images/JubesSprite/Jubes_Sprite_Spunk_Belly.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "'tits' in JubesX.Spunk", "images/JubesSprite/Jubes_Sprite_Spunk_Tits.png",
+            "'tits' in JubesX.spunk", "images/JubesSprite/Jubes_Sprite_Spunk_Tits.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -519,7 +519,7 @@ image Jubes_Sprite_Head:
                 "True", "images/JubesSprite/Jubes_Sprite_Head.png",
                 ),
         (0,0), ConditionSwitch(
-            "'chin' not in JubesX.Spunk", Null(),
+            "'chin' not in JubesX.spunk", Null(),
             "True", "images/JubesSprite/Jubes_Sprite_Spunk_Chin.png",
             ),
         (0,0), ConditionSwitch(
@@ -537,7 +537,7 @@ image Jubes_Sprite_Head:
 
 
         (0,0), ConditionSwitch(
-            "'mouth' not in JubesX.Spunk", Null(),
+            "'mouth' not in JubesX.spunk", Null(),
             "JubesX.mouth == 'sucking'", "images/JubesSprite/Jubes_Sprite_Spunk_Open.png",
             "JubesX.mouth == 'kiss'", "images/JubesSprite/Jubes_Sprite_Spunk_Kiss.png",
             "JubesX.mouth == 'sad'", "images/JubesSprite/Jubes_Sprite_Spunk_Kiss.png",
@@ -580,8 +580,8 @@ image Jubes_Sprite_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "'hair' in JubesX.Spunk", "images/JubesSprite/Jubes_Sprite_Spunk_Shades.png",
-            "'facial' in JubesX.Spunk", "images/JubesSprite/Jubes_Sprite_Spunk_Facial.png",
+            "'hair' in JubesX.spunk", "images/JubesSprite/Jubes_Sprite_Spunk_Shades.png",
+            "'facial' in JubesX.spunk", "images/JubesSprite/Jubes_Sprite_Spunk_Facial.png",
             "True", Null(),
             ),
         )
@@ -660,19 +660,19 @@ image Jubes_Doggy_Animation:
         (420,750),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite", "Jubes_Doggy_Body",
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "not Player.sprite", "Jubes_Doggy_Body",
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Jubes_Doggy_Fuck2_Top",
                     "action_speed > 1", "Jubes_Doggy_Fuck_Top",
                     "action_speed ", "Jubes_Doggy_Anal_Head_Top",
                     "True", "Jubes_Doggy_Body",
                     ),
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Jubes_Doggy_Fuck2_Top",
                     "action_speed > 1", "Jubes_Doggy_Fuck_Top",
                     "True", "Jubes_Doggy_Body",
                     ),
-            "Player.Cock == 'foot'", ConditionSwitch(
+            "Player.cock_position == 'foot'", ConditionSwitch(
                     "action_speed > 1", "Jubes_Doggy_Foot2_Top",
                     "action_speed ", "Jubes_Doggy_Foot1_Top",
                     "True", "Jubes_Doggy_Foot0_Top",
@@ -681,19 +681,19 @@ image Jubes_Doggy_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite", "Jubes_Doggy_Ass",
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "not Player.sprite", "Jubes_Doggy_Ass",
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Jubes_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Jubes_Doggy_Fuck_Ass",
                     "action_speed ", "Jubes_Doggy_Anal_Head_Ass",
                     "True", "Jubes_Doggy_Ass",
                     ),
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Jubes_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Jubes_Doggy_Fuck_Ass",
                     "True", "Jubes_Doggy_Ass",
                     ),
-            "Player.Cock == 'foot'", ConditionSwitch(
+            "Player.cock_position == 'foot'", ConditionSwitch(
                     "action_speed > 1", "Jubes_Doggy_Foot2_Ass",
                     "action_speed ", "Jubes_Doggy_Foot1_Ass",
                     "True", "Jubes_Doggy_Foot0_Ass",
@@ -702,12 +702,12 @@ image Jubes_Doggy_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Cock == 'foot'", ConditionSwitch(
+            "Player.cock_position == 'foot'", ConditionSwitch(
                     "action_speed > 1", "Jubes_Doggy_Feet2",
                     "action_speed ", "Jubes_Doggy_Feet1",
                     "True", "Jubes_Doggy_Feet0",
                     ),
-            "not Player.Sprite and ShowFeet", "Jubes_Doggy_Shins",
+            "not Player.sprite and ShowFeet", "Jubes_Doggy_Shins",
             "True", Null(),
             ),
         )
@@ -764,12 +764,12 @@ image Jubes_Doggy_Body:
 
             "not JubesX.top", Null(),
             "JubesX.top == 'jacket'", "images/JubesDoggy/Jubes_Doggy_Over_Jacket.png",
-            "JubesX.top == 'towel' and not JubesX.Uptop", "images/JubesDoggy/Jubes_Doggy_Over_TowelTop.png",
+            "JubesX.top == 'towel' and not JubesX.top_pulled_up", "images/JubesDoggy/Jubes_Doggy_Over_TowelTop.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "'back' in JubesX.Spunk", "images/JubesDoggy/Jubes_Doggy_Spunk_Back.png",
+            "'back' in JubesX.spunk", "images/JubesDoggy/Jubes_Doggy_Spunk_Back.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -853,7 +853,7 @@ image Jubes_Doggy_Head:
 
         (0,0), ConditionSwitch(
 
-            "'facial' in JubesX.Spunk", "images/JubesDoggy/Jubes_Doggy_Spunk_Facial.png",
+            "'facial' in JubesX.spunk", "images/JubesDoggy/Jubes_Doggy_Spunk_Facial.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -863,7 +863,7 @@ image Jubes_Doggy_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "'hair' in JubesX.Spunk", "images/JubesDoggy/Jubes_Doggy_Spunk_Hair.png",
+            "'hair' in JubesX.spunk", "images/JubesDoggy/Jubes_Doggy_Spunk_Hair.png",
             "True", Null(),
             ),
         )
@@ -940,7 +940,7 @@ image Jubes_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "not JubesX.underwearDown or (JubesX.legs == 'pants' and not JubesX.Upskirt)", Null(),
+            "not JubesX.underwear_pulled_down or (JubesX.legs == 'pants' and not JubesX.upskirt)", Null(),
             "JubesX.underwear == 'wolvie_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie_Back.png",
             "JubesX.underwear == 'lace_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Lace_Back.png",
             "JubesX.underwear", "images/JubesDoggy/Jubes_Doggy_Panties_Back.png",
@@ -956,15 +956,15 @@ image Jubes_Doggy_Ass:
 
             "JubesX.hose == 'black stockings'", "images/JubesDoggy/Jubes_Doggy_Stocking.png",
             "JubesX.hose == 'stockings'", "images/JubesDoggy/Jubes_Doggy_Hose.png",
-            "Player.Sprite and Player.Cock == 'in'", Null(),
-            "Player.Sprite and Player.Cock == 'anal'", Null(),
+            "Player.sprite and Player.cock_position == 'in'", Null(),
+            "Player.sprite and Player.cock_position == 'anal'", Null(),
             "JubesX.hose == 'stockings_and_garterbelt'", "images/JubesDoggy/Jubes_Doggy_StockingsGarter.png",
             "JubesX.hose == 'garterbelt'", "images/JubesDoggy/Jubes_Doggy_Garters.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not JubesX.underwearDown or (JubesX.legs == 'pants' and not JubesX.Upskirt)", Null(),
+            "not JubesX.underwear_pulled_down or (JubesX.legs == 'pants' and not JubesX.upskirt)", Null(),
             "JubesX.underwear == 'wolvie_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie_Down.png",
             "JubesX.underwear == 'bikini_bottoms'", "images/JubesDoggy/Jubes_Doggy_Panties_Bikini_Down.png",
             "JubesX.underwear", "images/JubesDoggy/Jubes_Doggy_Panties_Black_Down.png",
@@ -974,15 +974,15 @@ image Jubes_Doggy_Ass:
 
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", "Jubes_Pussy_Fingering",
             "primary_action == 'dildo_pussy'", "Jubes_Pussy_Fucking2",
-            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'in'", ConditionSwitch(
                     "action_speed > 2", "Jubes_Pussy_Fucking3",
                     "action_speed > 1", "Jubes_Pussy_Fucking2",
                     "action_speed ", "Jubes_Pussy_Heading",
                     "True", "Jubes_Pussy_Static",
                     ),
             "primary_action == 'eat_pussy'", "images/JubesDoggy/Jubes_Doggy_Pussy_Open.png",
-            "JubesX.legs and not JubesX.Upskirt", "images/JubesDoggy/Jubes_Doggy_Pussy_Closed.png",
-            "JubesX.underwear and not JubesX.underwearDown", "images/JubesDoggy/Jubes_Doggy_Pussy_Closed.png",
+            "JubesX.legs and not JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Pussy_Closed.png",
+            "JubesX.underwear and not JubesX.underwear_pulled_down", "images/JubesDoggy/Jubes_Doggy_Pussy_Closed.png",
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", "Jubes_Pussy_Fingering",
             "primary_action == 'dildo_pussy'", "Jubes_Pussy_Fucking2",
             "True", "images/JubesDoggy/Jubes_Doggy_Pussy_Closed.png",
@@ -991,21 +991,21 @@ image Jubes_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "'in' in JubesX.Spunk and Player.Cock == 'in'",Null(),
-            "'in' in JubesX.Spunk ", "images/JubesDoggy/Jubes_Doggy_SpunkPussyClosed.png",
-            "JubesX.Wet and Player.Cock == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
+            "'in' in JubesX.spunk and Player.cock_position == 'in'",Null(),
+            "'in' in JubesX.spunk ", "images/JubesDoggy/Jubes_Doggy_SpunkPussyClosed.png",
+            "JubesX.Wet and Player.cock_position == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
             "JubesX.Wet", "images/RogueDoggy/Rogue_Doggy_WetPussyClosed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not JubesX.pubes", Null(),
-            "Player.Sprite and Player.Cock == 'in'", Null(),
+            "Player.sprite and Player.cock_position == 'in'", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo_pussy'", Null(),
-            "JubesX.legs == 'pants' and not JubesX.Upskirt", "images/JubesDoggy/Jubes_Doggy_Pubes_Panties.png",
-            "JubesX.underwearDown and primary_action == 'eat_pussy'", "images/JubesDoggy/Jubes_Doggy_Pubes_Open.png",
-            "JubesX.underwearDown", "images/JubesDoggy/Jubes_Doggy_Pubes.png",
+            "JubesX.legs == 'pants' and not JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Pubes_Panties.png",
+            "JubesX.underwear_pulled_down and primary_action == 'eat_pussy'", "images/JubesDoggy/Jubes_Doggy_Pubes_Open.png",
+            "JubesX.underwear_pulled_down", "images/JubesDoggy/Jubes_Doggy_Pubes.png",
             "JubesX.underwear", "images/JubesDoggy/Jubes_Doggy_Pubes_Panties.png",
             "JubesX.hose and JubesX.hose != 'stockings'", "images/JubesDoggy/Jubes_Doggy_Pubes_Panties.png",
             "primary_action == 'eat_pussy'", "images/JubesDoggy/Jubes_Doggy_Pubes_Open.png",
@@ -1013,14 +1013,14 @@ image Jubes_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite", Null(),
+            "Player.sprite", Null(),
             "JubesX.piercings == 'ring'", "images/JubesDoggy/Jubes_Doggy_Pierce_Ring.png",
             "JubesX.piercings == 'barbell'", "images/JubesDoggy/Jubes_Doggy_Pierce_Barbell.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
+            "Player.sprite and Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Jubes_Anal_Fucking2",
                     "action_speed > 1", "Jubes_Anal_Fucking",
                     "action_speed ", "Jubes_Anal_Heading",
@@ -1028,8 +1028,8 @@ image Jubes_Doggy_Ass:
                     ),
 
 
-            "JubesX.legs and not JubesX.Upskirt", "images/JubesDoggy/Jubes_Doggy_Asshole_Loose.png",
-            "JubesX.underwear and not JubesX.underwearDown", "images/JubesDoggy/Jubes_Doggy_Asshole_Loose.png",
+            "JubesX.legs and not JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Asshole_Loose.png",
+            "JubesX.underwear and not JubesX.underwear_pulled_down", "images/JubesDoggy/Jubes_Doggy_Asshole_Loose.png",
             "primary_action == 'finger_ass' or offhand_action == 'finger_ass'", "Jubes_Anal_Fingering",
             "primary_action == 'dildo_anal'", "Jubes_Anal_Fucking",
             "JubesX.used_to_anal", "images/JubesDoggy/Jubes_Doggy_Asshole_Loose.png",
@@ -1039,15 +1039,15 @@ image Jubes_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "'anal' not in JubesX.Spunk or Player.Sprite", Null(),
-            "Player.Cock == 'anal'", "images/JubesDoggy/Jubes_Doggy_SpunkAnalOpen.png",
+            "'anal' not in JubesX.spunk or Player.sprite", Null(),
+            "Player.cock_position == 'anal'", "images/JubesDoggy/Jubes_Doggy_SpunkAnalOpen.png",
             "JubesX.used_to_anal", "images/JubesDoggy/Jubes_Doggy_SpunkAnalLoose.png",
             "True", "images/JubesDoggy/Jubes_Doggy_SpunkAnalLoose.png",
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.underwearDown or not JubesX.underwear", Null(),
-            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
+            "JubesX.underwear_pulled_down or not JubesX.underwear", Null(),
+            "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'anal')", Null(),
 
 
             "JubesX.underwear == 'wolvie_panties' and JubesX.Wet", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie_Wet.png",
@@ -1074,7 +1074,7 @@ image Jubes_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "JubesX.legs == 'leather_pants'", ConditionSwitch(
-                    "JubesX.Upskirt or JubesX.underwearDown", Null(),
+                    "JubesX.upskirt or JubesX.underwear_pulled_down", Null(),
 
                     "True", "images/JubesDoggy/Jubes_Doggy_Legs_Pants.png",
                     ),
@@ -1084,54 +1084,54 @@ image Jubes_Doggy_Ass:
 
 
             "JubesX.legs == 'other_skirt'", ConditionSwitch(
-                    "JubesX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/JubesDoggy/Jubes_Doggy_Legs_SkirtCos_Up.png",
-                    "JubesX.Upskirt", "images/JubesDoggy/Jubes_Doggy_Legs_SkirtCos_Up.png",
+                    "JubesX.upskirt and Player.sprite and Player.cock_position == 'anal' and action_speed" , "images/JubesDoggy/Jubes_Doggy_Legs_SkirtCos_Up.png",
+                    "JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Legs_SkirtCos_Up.png",
                     "True", "images/JubesDoggy/Jubes_Doggy_Legs_SkirtCos.png",
                     ),
             "JubesX.legs == 'skirt'", ConditionSwitch(
-                    "JubesX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/JubesDoggy/Jubes_Doggy_Legs_Skirt_Up.png",
-                    "JubesX.Upskirt", "images/JubesDoggy/Jubes_Doggy_Legs_Skirt_Up.png",
+                    "JubesX.upskirt and Player.sprite and Player.cock_position == 'anal' and action_speed" , "images/JubesDoggy/Jubes_Doggy_Legs_Skirt_Up.png",
+                    "JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Legs_Skirt_Up.png",
                     "True", "images/JubesDoggy/Jubes_Doggy_Legs_Skirt.png",
                     ),
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.top == 'towel' and JubesX.Upskirt", "images/JubesDoggy/Jubes_Doggy_Over_TowelAss_Up.png",
+            "JubesX.top == 'towel' and JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Over_TowelAss_Up.png",
             "JubesX.top == 'towel'", "images/JubesDoggy/Jubes_Doggy_Over_TowelAss.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite", Null(),
-            "JubesX.underwearDown or (not JubesX.underwear and JubesX.legs != 'leather_pants')", Null(),
+            "Player.sprite", Null(),
+            "JubesX.underwear_pulled_down or (not JubesX.underwear and JubesX.legs != 'leather_pants')", Null(),
             "JubesX.piercings == 'ring'", "images/JubesDoggy/Jubes_Doggy_Pierce_RingC.png",
             "JubesX.piercings == 'barbell'", "images/JubesDoggy/Jubes_Doggy_Pierce_BarbellC.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "'back' in JubesX.Spunk", "images/JubesDoggy/Jubes_Doggy_Spunk_Ass.png",
+            "'back' in JubesX.spunk", "images/JubesDoggy/Jubes_Doggy_Spunk_Ass.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock", Null(),
+            "Player.sprite and Player.cock_position", Null(),
             "primary_action == 'eat_pussy'", "Rogue_Doggy_Lick_Pussy",
             "primary_action == 'eat_ass'", "Rogue_Doggy_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite or Player.Cock != 'out'", Null(),
-            "JubesX.legs == 'skirt' and JubesX.Upskirt", "images/JubesDoggy/Jubes_Doggy_Hotdog_Upskirt_Back.png",
+            "not Player.sprite or Player.cock_position != 'out'", Null(),
+            "JubesX.legs == 'skirt' and JubesX.upskirt", "images/JubesDoggy/Jubes_Doggy_Hotdog_Upskirt_Back.png",
             "True", "images/JubesDoggy/Jubes_Doggy_HotdogBack.png",
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite or Player.Cock != 'out'", Null(),
-            "JubesX.legs == 'skirt' and JubesX.Upskirt and action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "JubesX.legs == 'skirt' and JubesX.Upskirt", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
+            "not Player.sprite or Player.cock_position != 'out'", Null(),
+            "JubesX.legs == 'skirt' and JubesX.upskirt and action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
+            "JubesX.legs == 'skirt' and JubesX.upskirt", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
             "action_speed ", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             "True", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             ),
@@ -1921,7 +1921,7 @@ image Jubes_Doggy_Feet0:
             repeat
     contains:
         ConditionSwitch(
-                "Player.Sprite", "Zero_Doggy_Up",
+                "Player.sprite", "Zero_Doggy_Up",
                 "True", Null(),
                 )
         zoom 1.2
@@ -2093,7 +2093,7 @@ label Jubes_Doggy_Reset:
         return
 
     $ JubesX.ArmPose = 2
-    $ JubesX.SpriteVer = 0
+    $ JubesX.spriteVer = 0
     hide Jubes_Doggy_Animation
     call Jubes_Hide
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
@@ -2118,7 +2118,7 @@ image Jubes_SexSprite:
     contains:
         ConditionSwitch(
 
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
 
                     "action_speed == 1", "Jubes_Sex_Body_S1",
                     "action_speed == 2", "Jubes_Sex_Body_S2",
@@ -2126,7 +2126,7 @@ image Jubes_SexSprite:
                     "action_speed >= 4", "Jubes_Sex_Body_S4",
                     "True",       "Jubes_Sex_Body_S0",
                     ),
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "Player.cock_position == 'anal'", ConditionSwitch(
 
                     "action_speed == 1", "Jubes_Sex_Body_A1",
                     "action_speed == 2", "Jubes_Sex_Body_A2",
@@ -2134,9 +2134,9 @@ image Jubes_SexSprite:
                     "action_speed >= 4", "Jubes_Sex_Body_A4",
                     "True",       "Jubes_Sex_Body_A0",
                     ),
-            "Player.Cock == 'foot'", ConditionSwitch(
+            "Player.cock_position == 'foot'", ConditionSwitch(
 
-                    "not Player.Sprite","Jubes_Sex_Body_F0",
+                    "not Player.sprite","Jubes_Sex_Body_F0",
                     "action_speed == 1", "Jubes_Sex_Body_F1",
                     "action_speed >= 4", "Jubes_Sex_Body_F0",
                     "action_speed >= 2", "Jubes_Sex_Body_F2",
@@ -2145,7 +2145,7 @@ image Jubes_SexSprite:
 
             "True", ConditionSwitch(
 
-                    "not Player.Sprite","Jubes_Sex_Body_H0",
+                    "not Player.sprite","Jubes_Sex_Body_H0",
                     "action_speed == 1", "Jubes_Sex_Body_H1",
                     "action_speed == 4", "Jubes_Sex_Body_H0",
                     "action_speed >= 2", "Jubes_Sex_Body_H2",
@@ -2155,7 +2155,7 @@ image Jubes_SexSprite:
     contains:
         ConditionSwitch(
 
-            "Player.Cock == 'in'", ConditionSwitch(
+            "Player.cock_position == 'in'", ConditionSwitch(
 
                     "action_speed == 1", "Jubes_Sex_Legs_S1",
                     "action_speed == 2", "Jubes_Sex_Legs_S2",
@@ -2163,7 +2163,7 @@ image Jubes_SexSprite:
                     "action_speed >= 4", "Jubes_Sex_Legs_S4",
                     "True", "Jubes_Sex_Legs_S0",
                     ),
-            "Player.Cock == 'anal'", ConditionSwitch(
+            "Player.cock_position == 'anal'", ConditionSwitch(
 
                     "action_speed == 1", "Jubes_Sex_Legs_A1",
                     "action_speed == 2", "Jubes_Sex_Legs_A2",
@@ -2171,9 +2171,9 @@ image Jubes_SexSprite:
                     "action_speed >= 4", "Jubes_Sex_Legs_A4",
                     "True", "Jubes_Sex_Legs_A0",
                     ),
-            "Player.Cock == 'foot'", ConditionSwitch(
+            "Player.cock_position == 'foot'", ConditionSwitch(
 
-                    "not Player.Sprite","Jubes_Sex_Legs_F0",
+                    "not Player.sprite","Jubes_Sex_Legs_F0",
                     "action_speed == 1", "Jubes_Sex_Legs_F1",
                     "action_speed >= 4", "Jubes_Sex_Legs_F0",
                     "action_speed >= 2", "Jubes_Sex_Legs_F2",
@@ -2181,7 +2181,7 @@ image Jubes_SexSprite:
                     ),
             "True", ConditionSwitch(
 
-                    "not Player.Sprite","Jubes_Sex_Legs_H0",
+                    "not Player.sprite","Jubes_Sex_Legs_H0",
                     "action_speed == 1", "Jubes_Sex_Legs_H1",
                     "action_speed == 4", "Jubes_Sex_Legs_H0",
                     "action_speed >= 2", "Jubes_Sex_Legs_H2",
@@ -2222,7 +2222,7 @@ image Jubes_Sex_Body:
 
 
         ConditionSwitch(
-                    "Player.Cock == 'foot'", Null(),
+                    "Player.cock_position == 'foot'", Null(),
                     "JubesX.arms == 'gloves'", "images/JubesSex/Jubes_Sex_Hand_Gloved.png",
                     "True", "images/JubesSex/Jubes_Sex_Hand.png"
                     )
@@ -2230,7 +2230,7 @@ image Jubes_Sex_Body:
 
         ConditionSwitch(
             "not JubesX.top", Null(),
-            "JubesX.Uptop", ConditionSwitch(
+            "JubesX.top_pulled_up", ConditionSwitch(
 
                     "JubesX.top == 'jacket'", "images/JubesSex/Jubes_Sex_Jacket_Back_Up.png",
                     "True", Null(),
@@ -2268,7 +2268,7 @@ image Jubes_Sex_Body:
 
         ConditionSwitch(
             "not JubesX.bra", Null(),
-            "JubesX.Uptop",ConditionSwitch(
+            "JubesX.top_pulled_up",ConditionSwitch(
 
                     "not JubesX.bra", Null(),
                     "JubesX.bra == 'white tank'", "images/JubesSex/Jubes_Sex_WhiteTank_Up.png",
@@ -2295,7 +2295,7 @@ image Jubes_Sex_Body:
     contains:
 
         ConditionSwitch(
-            "not JubesX.piercings or JubesX.Uptop", Null(),
+            "not JubesX.piercings or JubesX.top_pulled_up", Null(),
             "JubesX.piercings == 'barbell'", "images/JubesSex/Jubes_Sex_Barbell_Tits_C.png",
             "JubesX.piercings == 'ring'", "images/JubesSex/Jubes_Sex_Ring_Tits_C.png",
             "True", Null(),
@@ -2304,7 +2304,7 @@ image Jubes_Sex_Body:
 
         ConditionSwitch(
             "not JubesX.legs", Null(),
-            "JubesX.accessory == 'suspenders' and not JubesX.bra and not JubesX.Uptop", "images/JubesSex/Jubes_Sex_Suspenders.png",
+            "JubesX.accessory == 'suspenders' and not JubesX.bra and not JubesX.top_pulled_up", "images/JubesSex/Jubes_Sex_Suspenders.png",
             "JubesX.accessory == 'suspenders2'", "images/JubesSex/Jubes_Sex_Suspenders.png",
             "JubesX.accessory == 'suspenders'", "images/JubesSex/Jubes_Sex_Suspenders_Up.png",
             "True", Null(),
@@ -2313,7 +2313,7 @@ image Jubes_Sex_Body:
 
         ConditionSwitch(
             "not JubesX.top", Null(),
-            "JubesX.Uptop", ConditionSwitch(
+            "JubesX.top_pulled_up", ConditionSwitch(
 
                     "JubesX.top == 'jacket'", "images/JubesSex/Jubes_Sex_Jacket_Up.png",
 
@@ -2329,13 +2329,13 @@ image Jubes_Sex_Body:
     contains:
 
         ConditionSwitch(
-            "'belly' in JubesX.Spunk", "images/JubesSex/Jubes_Sex_Spunk_Belly.png",
+            "'belly' in JubesX.spunk", "images/JubesSex/Jubes_Sex_Spunk_Belly.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-                "'tits' not in JubesX.Spunk", Null(),
+                "'tits' not in JubesX.spunk", Null(),
                 "True", "images/JubesSex/Jubes_Sex_Spunk_Tits.png",
                 )
     contains:
@@ -2385,29 +2385,29 @@ image Jubes_Sex_Legs:
 
 
         ConditionSwitch(
-            "Player.Cock == 'foot'", "images/JubesSex/Jubes_Sex_Legs_Foot.png",
+            "Player.cock_position == 'foot'", "images/JubesSex/Jubes_Sex_Legs_Foot.png",
             "True", "images/JubesSex/Jubes_Sex_Legs_High.png",
             )
     contains:
 
         ConditionSwitch(
-            "Player.Cock == 'anal' and action_speed > 1", "images/JubesSex/Jubes_Sex_Anus_L.png",
-            "Player.Cock == 'anal' and action_speed > 0", "images/JubesSex/Jubes_Sex_Anus_M.png",
-            "'anal' in JubesX.Spunk", "images/JubesSex/Jubes_Sex_Anus_M.png",
+            "Player.cock_position == 'anal' and action_speed > 1", "images/JubesSex/Jubes_Sex_Anus_L.png",
+            "Player.cock_position == 'anal' and action_speed > 0", "images/JubesSex/Jubes_Sex_Anus_M.png",
+            "'anal' in JubesX.spunk", "images/JubesSex/Jubes_Sex_Anus_M.png",
             "True", "images/JubesSex/Jubes_Sex_Anus_S.png",
             )
     contains:
 
         ConditionSwitch(
-            "'anal' not in JubesX.Spunk", Null(),
-            "Player.Cock == 'anal' and action_speed > 1", "images/JubesSex/Jubes_Sex_Spunk_Anal_U.png",
+            "'anal' not in JubesX.spunk", Null(),
+            "Player.cock_position == 'anal' and action_speed > 1", "images/JubesSex/Jubes_Sex_Spunk_Anal_U.png",
             "True", "images/JubesSex/Jubes_Sex_Spunk_Anal.png",
             )
     contains:
 
         ConditionSwitch(
-            "Player.Cock == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Pussy_Open.png",
-            "Player.Cock == 'in' and action_speed > 0", "images/JubesSex/Jubes_Sex_Pussy_Mid.png",
+            "Player.cock_position == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Pussy_Open.png",
+            "Player.cock_position == 'in' and action_speed > 0", "images/JubesSex/Jubes_Sex_Pussy_Mid.png",
             "primary_action == 'eat_pussy'", "images/JubesSex/Jubes_Sex_Pussy_Mid.png",
             "True", "images/JubesSex/Jubes_Sex_Pussy_Closed.png",
             )
@@ -2420,32 +2420,32 @@ image Jubes_Sex_Legs:
     contains:
 
         ConditionSwitch(
-            "'in' not in JubesX.Spunk", Null(),
-            "Player.Cock == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Spunk_Pussy_Open.png",
+            "'in' not in JubesX.spunk", Null(),
+            "Player.cock_position == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Spunk_Pussy_Open.png",
             "True", "images/JubesSex/Jubes_Sex_Spunk_Pussy.png",
             )
     contains:
 
         ConditionSwitch(
             "not JubesX.pubes", Null(),
-            "Player.Cock == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Pubes_Open.png",
-            "Player.Cock == 'in' and action_speed > 0", "images/JubesSex/Jubes_Sex_Pubes_Mid.png",
+            "Player.cock_position == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Pubes_Open.png",
+            "Player.cock_position == 'in' and action_speed > 0", "images/JubesSex/Jubes_Sex_Pubes_Mid.png",
             "primary_action == 'eat_pussy'", "images/JubesSex/Jubes_Sex_Pubes_Mid.png",
             "True", "images/JubesSex/Jubes_Sex_Pubes_Closed.png",
             )
     contains:
 
         ConditionSwitch(
-            "JubesX.piercings == 'barbell' and Player.Cock == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Barbell_Pussy_O.png",
+            "JubesX.piercings == 'barbell' and Player.cock_position == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Barbell_Pussy_O.png",
             "JubesX.piercings == 'barbell'", "images/JubesSex/Jubes_Sex_Barbell_Pussy.png",
-            "JubesX.piercings == 'ring' and Player.Cock == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Ring_Pussy_O.png",
+            "JubesX.piercings == 'ring' and Player.cock_position == 'in' and action_speed > 1", "images/JubesSex/Jubes_Sex_Ring_Pussy_O.png",
             "JubesX.piercings == 'ring'", "images/JubesSex/Jubes_Sex_Ring_Pussy.png",
             "True", Null(),
             )
     contains:
 
         ConditionSwitch(
-            "JubesX.underwearDown", Null(),
+            "JubesX.underwear_pulled_down", Null(),
 
             "JubesX.underwear == 'bikini_bottoms'", "images/JubesSex/Jubes_Sex_Panties_Bikini.png",
             "JubesX.underwear == 'wolvie_panties'", "images/JubesSex/Jubes_Sex_Panties_Wolvie.png",
@@ -2456,8 +2456,8 @@ image Jubes_Sex_Legs:
     contains:
 
         ConditionSwitch(
-            "Player.Cock == 'foot' and (JubesX.hose == 'stockings_and_garterbelt' or JubesX.hose == 'stockings')", "images/JubesSex/Jubes_Sex_Stockings_Base_Foot.png",
-            "Player.Cock == 'foot' and JubesX.hose == 'black stockings'", "images/JubesSex/Jubes_Sex_BlackStockings_Base_Foot.png",
+            "Player.cock_position == 'foot' and (JubesX.hose == 'stockings_and_garterbelt' or JubesX.hose == 'stockings')", "images/JubesSex/Jubes_Sex_Stockings_Base_Foot.png",
+            "Player.cock_position == 'foot' and JubesX.hose == 'black stockings'", "images/JubesSex/Jubes_Sex_BlackStockings_Base_Foot.png",
             "JubesX.hose == 'black stockings'", "images/JubesSex/Jubes_Sex_BlackStockings_Base_Up.png",
             "JubesX.hose == 'stockings_and_garterbelt' or JubesX.hose == 'stockings'", "images/JubesSex/Jubes_Sex_Stockings_Base_Up.png",
             "True", Null(),
@@ -2466,15 +2466,15 @@ image Jubes_Sex_Legs:
 
         ConditionSwitch(
             "JubesX.legs == 'skirt' or JubesX.legs == 'other_skirt'", "images/JubesSex/Jubes_Sex_Skirt.png",
-            "JubesX.Upskirt", Null(),
-            "JubesX.legs == 'leather_pants' and Player.Cock == 'foot'", "images/JubesSex/Jubes_Sex_Pants_Base_Foot.png",
+            "JubesX.upskirt", Null(),
+            "JubesX.legs == 'leather_pants' and Player.cock_position == 'foot'", "images/JubesSex/Jubes_Sex_Pants_Base_Foot.png",
             "JubesX.legs == 'leather_pants'", "images/JubesSex/Jubes_Sex_Pants_Base_Up.png",
             "True", Null(),
             )
     contains:
         ConditionSwitch(
 
-            "Player.Sprite and Player.Cock", Null(),
+            "Player.sprite and Player.cock_position", Null(),
             "primary_action == 'eat_pussy'", "Jubes_Sex_Lick_Pussy",
             "primary_action == 'eat_ass'", "Jubes_Sex_Lick_Ass",
             "True", Null()
@@ -2497,7 +2497,7 @@ image Jubes_Sex_Legs:
 
 
         ConditionSwitch(
-            "Player.Cock == 'foot'", "Jubes_Footjob_Foot",
+            "Player.cock_position == 'foot'", "Jubes_Footjob_Foot",
             "True", "Jubes_Sex_Foot",
             )
     transform_anchor True
@@ -2533,7 +2533,7 @@ image Jubes_Sex_Foot:
     contains:
 
         ConditionSwitch(
-            "JubesX.Upskirt", Null(),
+            "JubesX.upskirt", Null(),
             "JubesX.legs == 'leather_pants'", "images/JubesSex/Jubes_Sex_Pants_Up.png",
             "True", Null(),
             )
@@ -2738,7 +2738,7 @@ image Jubes_Sex_Legs_S2:
     contains:
 
         ConditionSwitch(
-                "'in' not in JubesX.Spunk", Null(),
+                "'in' not in JubesX.spunk", Null(),
                 "True", "images/JubesSex/Jubes_Sex_Spunk_Anal_O.png",
                 )
         subpixel True
@@ -2817,7 +2817,7 @@ image Jubes_Sex_Legs_S3:
 
 
         ConditionSwitch(
-                "'in' not in JubesX.Spunk", Null(),
+                "'in' not in JubesX.spunk", Null(),
                 "True", "images/JubesSex/Jubes_Sex_Spunk_Anal_O.png",
                 )
         subpixel True
@@ -2889,7 +2889,7 @@ image Jubes_Sex_Legs_S4:
     contains:
 
         ConditionSwitch(
-                "'in' not in JubesX.Spunk", Null(),
+                "'in' not in JubesX.spunk", Null(),
                 "True", "images/JubesSex/Jubes_Sex_Spunk_Anal_O.png",
                 )
         subpixel True
@@ -3085,7 +3085,7 @@ image Jubes_Sex_Legs_A2:
     contains:
 
         ConditionSwitch(
-                "'anal' not in JubesX.Spunk", Null(),
+                "'anal' not in JubesX.spunk", Null(),
                 "True", "images/JubesSex/Jubes_Sex_Spunk_Anal_O.png",
                 )
         subpixel True
@@ -3156,7 +3156,7 @@ image Jubes_Sex_Legs_A3:
     contains:
 
         ConditionSwitch(
-                "'anal' not in JubesX.Spunk", Null(),
+                "'anal' not in JubesX.spunk", Null(),
                 "True", "images/JubesSex/Jubes_Sex_Spunk_Anal_O.png",
                 )
         subpixel True
@@ -3228,7 +3228,7 @@ image Jubes_Sex_Legs_A4:
     contains:
 
         ConditionSwitch(
-                "'anal' not in JubesX.Spunk", Null(),
+                "'anal' not in JubesX.spunk", Null(),
                 "True", "images/JubesSex/Jubes_Sex_Spunk_Anal_O.png",
                 )
         subpixel True
@@ -3308,7 +3308,7 @@ image Jubes_Sex_Zero_Anim_H0:
     contains:
         subpixel True
         ConditionSwitch(
-            "Player.Sprite", "Zero_Doggy_Insert",
+            "Player.sprite", "Zero_Doggy_Insert",
             "True", Null(),
             )
 
@@ -3473,7 +3473,7 @@ image Jubes_Footjob_Foot:
     contains:
 
         ConditionSwitch(
-            "JubesX.Upskirt", Null(),
+            "JubesX.upskirt", Null(),
             "JubesX.legs == 'leather_pants'", "images/JubesSex/Jubes_Sex_Pants_Foot.png",
             "True", Null(),
             )
@@ -3820,30 +3820,30 @@ image Jubes_Mega_Mask:
 label Jubes_Sex_Launch(Line=primary_action):
     return
     $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     $ Line = "solo" if not Line else Line
     if Line == "sex":
-        $ Player.Cock = "in"
+        $ Player.cock_position = "in"
         if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
             $ offhand_action = 0
     elif Line == "anal":
-        $ Player.Cock = "anal"
+        $ Player.cock_position = "anal"
         if offhand_action in ("finger_ass","dildo_anal","eat_ass"):
             $ offhand_action = 0
     elif Line == "solo":
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
+        $ Player.sprite = 0
+        $ Player.cock_position = "out"
     elif Line == "hotdog":
-        $ Player.Cock = "out"
+        $ Player.cock_position = "out"
     elif Line == "foot":
         $ ShowFeet = 1
-        $ Player.Cock = "foot"
+        $ Player.cock_position = "foot"
     elif Line == "massage":
-        $ Player.Sprite = 0
-        $ Player.Cock = 0
+        $ Player.sprite = 0
+        $ Player.cock_position = 0
     else:
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
+        $ Player.sprite = 0
+        $ Player.cock_position = "out"
         $ action_speed = 0
     $ primary_action = Line
 
@@ -3857,9 +3857,9 @@ label Jubes_Sex_Launch(Line=primary_action):
 
     if primary_action == "in" or primary_action == "anal":
         if JubesX.legs or JubesX.HoseNum() >= 5:
-            $ JubesX.Upskirt = 1
+            $ JubesX.upskirt = 1
         if JubesX.underwear:
-            $ JubesX.underwearDown = 1
+            $ JubesX.underwear_pulled_down = 1
 
     show Jubes_SexSprite zorder 150:
         pos (450,500)
@@ -3950,7 +3950,7 @@ image Jubes_Sprite_BJ_Head:
                 "True", "images/JubesSprite/Jubes_Sprite_Head.png",
                 ),
         (0,0), ConditionSwitch(
-            "'chin' not in JubesX.Spunk", Null(),
+            "'chin' not in JubesX.spunk", Null(),
             "action_speed >= 2", Null(),
             "True", "images/JubesSprite/Jubes_Sprite_Spunk_Chin.png",
             ),
@@ -3971,7 +3971,7 @@ image Jubes_Sprite_BJ_Head:
             "True", "images/JubesSprite/Jubes_Sprite_Mouth_Normal.png",
             ),
         (0,0), ConditionSwitch(
-            "'mouth' not in JubesX.Spunk", Null(),
+            "'mouth' not in JubesX.spunk", Null(),
             "action_speed >= 2", "images/JubesSprite/Jubes_Sprite_Spunk_MouthSuck.png",
             "action_speed == 1", "images/JubesSprite/Jubes_Sprite_Spunk_MouthTongue.png",
             "JubesX.mouth == 'normal'", "images/JubesSprite/Jubes_Sprite_Spunk_MouthNeutral.png",
@@ -3987,7 +3987,7 @@ image Jubes_Sprite_BJ_Head:
             "True", "images/JubesSprite/Jubes_Sprite_Spunk_MouthNeutral.png",
             ),
         (0,0), ConditionSwitch(
-            "action_speed >= 2 and 'mouth' in JubesX.Spunk", "images/JubesSprite/Jubes_Sprite_SpunkSuckingO.png",
+            "action_speed >= 2 and 'mouth' in JubesX.spunk", "images/JubesSprite/Jubes_Sprite_SpunkSuckingO.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -4041,8 +4041,8 @@ image Jubes_Sprite_BJ_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "'hair' in JubesX.Spunk", "images/JubesSprite/Jubes_Sprite_Spunk_Facial2.png",
-            "'facial' in JubesX.Spunk", "images/JubesSprite/Jubes_Sprite_Spunk_Facial1.png",
+            "'hair' in JubesX.spunk", "images/JubesSprite/Jubes_Sprite_Spunk_Facial2.png",
+            "'facial' in JubesX.spunk", "images/JubesSprite/Jubes_Sprite_Spunk_Facial1.png",
             "True", Null(),
             ),
         )
@@ -5253,7 +5253,7 @@ image Jubes_TJ_Animation:
     contains:
         ConditionSwitch(
 
-                    "not Player.Sprite","Jubes_TJ_0",
+                    "not Player.sprite","Jubes_TJ_0",
                     "action_speed == 1", "Jubes_TJ_1",
                     "action_speed == 4", "Jubes_TJ_4",
                     "action_speed == 5", "Jubes_TJ_5",
@@ -5324,7 +5324,7 @@ image Jubes_TJ_Body:
                         )
     contains:
         ConditionSwitch(
-                        "'tits' not in JubesX.Spunk",Null(),
+                        "'tits' not in JubesX.spunk",Null(),
                         "True",       "images/JubesSex/Jubes_Titjob_Spunk_Chest.png",
                         )
     transform_anchor True
@@ -5430,7 +5430,7 @@ image Jubes_TJ_0:
             "images/JubesSex/Jubes_Titjob_RightTit.png"
         contains:
             ConditionSwitch(
-                            "'tits' not in JubesX.Spunk",Null(),
+                            "'tits' not in JubesX.spunk",Null(),
                             "True",       "images/JubesSex/Jubes_Titjob_Spunk_Right.png",
                             )
         subpixel True
@@ -5500,7 +5500,7 @@ image Jubes_TJ_0:
             "images/JubesSex/Jubes_Titjob_LeftTit.png"
         contains:
             ConditionSwitch(
-                            "'tits' not in JubesX.Spunk",Null(),
+                            "'tits' not in JubesX.spunk",Null(),
                             "True",       "images/JubesSex/Jubes_Titjob_Spunk_Left.png",
                             )
         subpixel True
@@ -5624,7 +5624,7 @@ image Jubes_TJ_1:
             "images/JubesSex/Jubes_Titjob_RightTit.png"
         contains:
             ConditionSwitch(
-                            "'tits' not in JubesX.Spunk",Null(),
+                            "'tits' not in JubesX.spunk",Null(),
                             "True",       "images/JubesSex/Jubes_Titjob_Spunk_Right.png",
                             )
         subpixel True
@@ -5701,7 +5701,7 @@ image Jubes_TJ_1:
             "images/JubesSex/Jubes_Titjob_LeftTit.png"
         contains:
             ConditionSwitch(
-                            "'tits' not in JubesX.Spunk",Null(),
+                            "'tits' not in JubesX.spunk",Null(),
                             "True",       "images/JubesSex/Jubes_Titjob_Spunk_Left.png",
                             )
         subpixel True
@@ -5813,7 +5813,7 @@ image Jubes_TJ_2:
             "images/JubesSex/Jubes_Titjob_RightTit.png"
         contains:
             ConditionSwitch(
-                            "'tits' not in JubesX.Spunk",Null(),
+                            "'tits' not in JubesX.spunk",Null(),
                             "True",       "images/JubesSex/Jubes_Titjob_Spunk_Right.png",
                             )
         subpixel True
@@ -5883,7 +5883,7 @@ image Jubes_TJ_2:
             "images/JubesSex/Jubes_Titjob_LeftTit.png"
         contains:
             ConditionSwitch(
-                            "'tits' not in JubesX.Spunk",Null(),
+                            "'tits' not in JubesX.spunk",Null(),
                             "True",       "images/JubesSex/Jubes_Titjob_Spunk_Left.png",
                             )
         subpixel True
@@ -5994,7 +5994,7 @@ image Jubes_TJ_4:
             "images/JubesSex/Jubes_Titjob_RightTit.png"
         contains:
             ConditionSwitch(
-                            "'tits' not in JubesX.Spunk",Null(),
+                            "'tits' not in JubesX.spunk",Null(),
                             "True",       "images/JubesSex/Jubes_Titjob_Spunk_Right.png",
                             )
         subpixel True
@@ -6064,7 +6064,7 @@ image Jubes_TJ_4:
             "images/JubesSex/Jubes_Titjob_LeftTit.png"
         contains:
             ConditionSwitch(
-                            "'tits' not in JubesX.Spunk",Null(),
+                            "'tits' not in JubesX.spunk",Null(),
                             "True",       "images/JubesSex/Jubes_Titjob_Spunk_Left.png",
                             )
         subpixel True
@@ -6192,7 +6192,7 @@ image Jubes_TJ_5:
             "images/JubesSex/Jubes_Titjob_RightTit.png"
         contains:
             ConditionSwitch(
-                            "'tits' not in JubesX.Spunk",Null(),
+                            "'tits' not in JubesX.spunk",Null(),
                             "True",       "images/JubesSex/Jubes_Titjob_Spunk_Right.png",
                             )
         subpixel True
@@ -6258,7 +6258,7 @@ image Jubes_TJ_5:
             "images/JubesSex/Jubes_Titjob_LeftTit.png"
         contains:
             ConditionSwitch(
-                            "'tits' not in JubesX.Spunk",Null(),
+                            "'tits' not in JubesX.spunk",Null(),
                             "True",       "images/JubesSex/Jubes_Titjob_Spunk_Left.png",
                             )
         subpixel True
@@ -6353,7 +6353,7 @@ label Jubes_TJ_Launch(Line=primary_action):
         $ primary_action = "titjob"
     show Jubes_TJ_Animation zorder 150:
         pos (700,520)
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
     return
 
@@ -6363,7 +6363,7 @@ label Jubes_TJ_Reset:
         return
 
     call Jubes_Hide
-    $ Player.Sprite = 0
+    $ Player.sprite = 0
 
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         zoom 2.3 xpos 750 yoffset -100

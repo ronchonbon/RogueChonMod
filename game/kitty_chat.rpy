@@ -6,7 +6,7 @@ label Kitty_Relationship:
     while True:
         menu:
             ch_k "What did you want to talk about?"
-            "Do you want to be my girlfriend?" if KittyX not in Player.Harem and "ex" not in KittyX.Traits:
+            "Do you want to be my girlfriend?" if KittyX not in Player.Harem and "ex" not in KittyX.traits:
                 $ KittyX.daily_history.append("relationship")
                 if "asked boyfriend" in KittyX.daily_history and "angry" in KittyX.daily_history:
                     $ KittyX.change_face("angry", 1)
@@ -27,7 +27,7 @@ label Kitty_Relationship:
 
                 $ KittyX.daily_history.append("asked boyfriend")
 
-                if Player.Harem and "KittyYes" not in Player.Traits:
+                if Player.Harem and "KittyYes" not in Player.traits:
                     if len(Player.Harem) >= 2:
                         ch_k "I don't think they'd be ok with that, [KittyX.player_petname]."
                     else:
@@ -51,8 +51,8 @@ label Kitty_Relationship:
                     ch_k "YES!"
                     if "boyfriend" not in KittyX.player_petnames:
                         $ KittyX.player_petnames.append("boyfriend")
-                    if "KittyYes" in Player.Traits:
-                        $ Player.Traits.remove("KittyYes")
+                    if "KittyYes" in Player.traits:
+                        $ Player.traits.remove("KittyYes")
                     $ Player.Harem.append(KittyX)
                     call Harem_Initiation
                     "[KittyX.name] leaps in and kisses you deeply."
@@ -68,7 +68,7 @@ label Kitty_Relationship:
                     $ KittyX.change_face("perplexed", 1)
                     ch_k "I don't really feel that way about you right now, [KittyX.player_petname]."
 
-            "Do you want to get back together?" if "ex" in KittyX.Traits:
+            "Do you want to get back together?" if "ex" in KittyX.traits:
                 $ KittyX.daily_history.append("relationship")
                 if "asked boyfriend" in KittyX.daily_history and "angry" in KittyX.daily_history:
                     $ KittyX.change_face("angry", 1)
@@ -81,7 +81,7 @@ label Kitty_Relationship:
 
                 $ KittyX.daily_history.append("asked boyfriend")
 
-                if Player.Harem and "KittyYes" not in Player.Traits:
+                if Player.Harem and "KittyYes" not in Player.traits:
                     if len(Player.Harem) >= 2:
                         ch_k "I don't think they'd be ok with that, [KittyX.player_petname]."
                     else:
@@ -98,9 +98,9 @@ label Kitty_Relationship:
                     ch_k "Well, I guess, sure!"
                     if "boyfriend" not in KittyX.player_petnames:
                         $ KittyX.player_petnames.append("boyfriend")
-                    $ KittyX.Traits.remove("ex")
-                    if "KittyYes" in Player.Traits:
-                        $ Player.Traits.remove("KittyYes")
+                    $ KittyX.traits.remove("ex")
+                    if "KittyYes" in Player.traits:
+                        $ Player.traits.remove("KittyYes")
                     $ Player.Harem.append(KittyX)
                     call Harem_Initiation
                     "[KittyX.name] leaps in and kisses you deeply."
@@ -112,9 +112,9 @@ label Kitty_Relationship:
                     ch_k "Um, ok, I guess."
                     if "boyfriend" not in KittyX.player_petnames:
                         $ KittyX.player_petnames.append("boyfriend")
-                    $ KittyX.Traits.remove("ex")
-                    if "KittyYes" in Player.Traits:
-                        $ Player.Traits.remove("KittyYes")
+                    $ KittyX.traits.remove("ex")
+                    if "KittyYes" in Player.traits:
+                        $ Player.traits.remove("KittyYes")
                     $ Player.Harem.append(KittyX)
                     call Harem_Initiation
                     $ KittyX.change_face("kiss", 1)
@@ -147,7 +147,7 @@ label Kitty_Relationship:
 
 
                 menu:
-                    "When you said you loved me. . ." if "lover" not in KittyX.Traits and KittyX.Event[6] >= 20:
+                    "When you said you loved me. . ." if "lover" not in KittyX.traits and KittyX.Event[6] >= 20:
                         call Kitty_Love_Redux
 
                     "You said you wanted me to be more in control?" if "sir" not in KittyX.player_petnames and "sir" in KittyX.history:
@@ -187,7 +187,7 @@ label Kitty_OtherWoman(counter=0):
         ch_k "But you're with [Player.Harem[0].name]!"
     menu:
         extend ""
-        "She said I can be with you too." if "KittyYes" in Player.Traits:
+        "She said I can be with you too." if "KittyYes" in Player.traits:
             if approval_check(KittyX, 1800, Bonus = counter):
                 $ KittyX.change_face("smile", 1)
                 if KittyX.love >= KittyX.obedience:
@@ -202,7 +202,7 @@ label Kitty_OtherWoman(counter=0):
                 $ renpy.pop_call()
 
 
-        "I could ask if she'd be ok with me dating you both." if "KittyYes" not in Player.Traits:
+        "I could ask if she'd be ok with me dating you both." if "KittyYes" not in Player.traits:
             if approval_check(KittyX, 1800, Bonus = counter):
                 $ KittyX.change_face("smile", 1)
                 if KittyX.love >= KittyX.obedience:
@@ -233,7 +233,7 @@ label Kitty_OtherWoman(counter=0):
                     ch_k "If that's how you want it to be."
                 else:
                     ch_k "I suppose that's true."
-                $ KittyX.Traits.append("downlow")
+                $ KittyX.traits.append("downlow")
         "I can break it off with her.":
 
             $ KittyX.change_face("sad")
@@ -303,7 +303,7 @@ label Kitty_About(Check=0):
         return
     ch_k "What do I think about her? Well. . ."
     if Check == RogueX:
-        if "poly Rogue" in KittyX.Traits:
+        if "poly Rogue" in KittyX.traits:
             ch_k "You know we're[KittyX.like]close. . ."
         elif KittyX.LikeRogue >= 900:
             ch_k "She's[KittyX.like]really sexy. . ."
@@ -322,7 +322,7 @@ label Kitty_About(Check=0):
         else:
             ch_k "That slut?"
     elif Check == EmmaX:
-        if "poly Emma" in KittyX.Traits:
+        if "poly Emma" in KittyX.traits:
             ch_k "You know we bang, right?"
         elif KittyX.LikeEmma >= 900:
             ch_k "She's got[KittyX.like]really amazing tits. . ."
@@ -341,7 +341,7 @@ label Kitty_About(Check=0):
         else:
             ch_k "That whore?"
     elif Check == LauraX:
-        if "poly Laura" in KittyX.Traits:
+        if "poly Laura" in KittyX.traits:
             ch_k "You know we[KittyX.like]make out sometimes. . ."
         elif KittyX.LikeLaura >= 900:
             ch_k "She's[KittyX.like]such an animal. . ."
@@ -360,7 +360,7 @@ label Kitty_About(Check=0):
         else:
             ch_k "Bitch in heat."
     elif Check == JeanX:
-        if "poly Jean" in KittyX.Traits:
+        if "poly Jean" in KittyX.traits:
             ch_k "You know we're[KittyX.like]close. . ."
         elif KittyX.LikeJean >= 900:
             ch_k "She's[KittyX.like]really sexy. . ."
@@ -379,7 +379,7 @@ label Kitty_About(Check=0):
         else:
             ch_k "That bitch?"
     elif Check == StormX:
-        if "poly Storm" in KittyX.Traits:
+        if "poly Storm" in KittyX.traits:
             ch_k "We. . . do kinda have sex?"
         elif KittyX.LikeStorm >= 900:
             ch_k "She's got[KittyX.like]totally thicc. . ."
@@ -398,7 +398,7 @@ label Kitty_About(Check=0):
         else:
             ch_k "That whore?"
     elif Check == JubesX:
-        if "poly Jubes" in KittyX.Traits:
+        if "poly Jubes" in KittyX.traits:
             ch_k "You know we[KittyX.like]make out sometimes. . ."
         elif KittyX.LikeJubes >= 900:
             ch_k "She's[KittyX.like]such a beast. . ."
@@ -422,7 +422,7 @@ label Kitty_About(Check=0):
 label Kitty_Monogamy:
 
     menu:
-        "Could you not hook up with other girls?" if "mono" not in KittyX.Traits:
+        "Could you not hook up with other girls?" if "mono" not in KittyX.traits:
             if KittyX.Thirst >= 60 and not approval_check(KittyX, 1700, "LO", TabM=0):
 
                 $ KittyX.change_face("sly",1)
@@ -448,9 +448,9 @@ label Kitty_Monogamy:
                 return
             if "mono" not in KittyX.daily_history:
                 $ KittyX.change_stat("obedience", 90, 3)
-            $ KittyX.AddWord(1,0,"mono")
-            $ KittyX.Traits.append("mono")
-        "Don't hook up with other girls." if "mono" not in KittyX.Traits:
+            $ KittyX.add_word(1,0,"mono")
+            $ KittyX.traits.append("mono")
+        "Don't hook up with other girls." if "mono" not in KittyX.traits:
             if approval_check(KittyX, 800, "O", TabM=0):
 
                 $ KittyX.change_face("sly",1,Eyes="side")
@@ -478,9 +478,9 @@ label Kitty_Monogamy:
                 return
             if "mono" not in KittyX.daily_history:
                 $ KittyX.change_stat("obedience", 90, 3)
-            $ KittyX.AddWord(1,0,"mono")
-            $ KittyX.Traits.append("mono")
-        "It's ok if you hook up with other girls." if "mono" in KittyX.Traits:
+            $ KittyX.add_word(1,0,"mono")
+            $ KittyX.traits.append("mono")
+        "It's ok if you hook up with other girls." if "mono" in KittyX.traits:
             if approval_check(KittyX, 650, "O", TabM=0):
                 $ KittyX.change_face("sly",1,Eyes="side")
                 ch_k "Right, gotcha."
@@ -495,9 +495,9 @@ label Kitty_Monogamy:
                 ch_k "You're not the boss of my pussy!"
             if "mono" not in KittyX.daily_history:
                 $ KittyX.change_stat("obedience", 90, 3)
-            if "mono" in KittyX.Traits:
-                $ KittyX.Traits.remove("mono")
-            $ KittyX.AddWord(1,0,"mono")
+            if "mono" in KittyX.traits:
+                $ KittyX.traits.remove("mono")
+            $ KittyX.add_word(1,0,"mono")
         "Never mind.":
             pass
     return
@@ -510,7 +510,7 @@ label Kitty_Jumped:
     $ KittyX.change_face("sly",1,Brows="confused")
     menu:
         ch_k "Um. . . I guess?"
-        "Could you maybe just ask instead?" if "chill" not in KittyX.Traits:
+        "Could you maybe just ask instead?" if "chill" not in KittyX.traits:
             if KittyX.Thirst >= 60 and not approval_check(KittyX, 1500, "LO", TabM=0):
 
                 $ KittyX.change_face("surprised",2)
@@ -538,9 +538,9 @@ label Kitty_Jumped:
                 return
             if "chill" not in KittyX.daily_history:
                 $ KittyX.change_stat("obedience", 90, 3)
-            $ KittyX.AddWord(1,0,"chill")
-            $ KittyX.Traits.append("chill")
-        "Don't bother me like that." if "chill" not in KittyX.Traits:
+            $ KittyX.add_word(1,0,"chill")
+            $ KittyX.traits.append("chill")
+        "Don't bother me like that." if "chill" not in KittyX.traits:
             if approval_check(KittyX, 900, "O", TabM=0):
 
                 $ KittyX.change_face("sly",1,Eyes="side")
@@ -568,8 +568,8 @@ label Kitty_Jumped:
                 return
             if "chill" not in KittyX.daily_history:
                 $ KittyX.change_stat("obedience", 90, 3)
-            $ KittyX.AddWord(1,0,"chill")
-            $ KittyX.Traits.append("chill")
+            $ KittyX.add_word(1,0,"chill")
+            $ KittyX.traits.append("chill")
         "Knock yourself out.":
             if approval_check(KittyX, 800, "L", TabM=0):
                 $ KittyX.change_face("sly",1)
@@ -586,9 +586,9 @@ label Kitty_Jumped:
                 ch_k "I guess."
             if "chill" not in KittyX.daily_history:
                 $ KittyX.change_stat("obedience", 90, 3)
-            if "chill" in KittyX.Traits:
-                $ KittyX.Traits.remove("chill")
-            $ KittyX.AddWord(1,0,"chill")
+            if "chill" in KittyX.traits:
+                $ KittyX.traits.remove("chill")
+            $ KittyX.add_word(1,0,"chill")
         "Um, never mind.":
             pass
     return
@@ -603,7 +603,7 @@ label Kitty_Hungry:
         ch_k "You know, that serum of yours really has a kick to it. You should market that stuff!"
     else:
         ch_k "You know, a kitty does like her milk. . ."
-    $ KittyX.Traits.append("hungry")
+    $ KittyX.traits.append("hungry")
 return
 
 
@@ -830,7 +830,7 @@ label Kitty_SexChat:
 
 
 
-            "Don't talk as much during sex." if "vocal" in KittyX.Traits:
+            "Don't talk as much during sex." if "vocal" in KittyX.traits:
                 if "setvocal" in KittyX.daily_history:
                     $ KittyX.change_face("perplexed")
                     ch_k "We've been over this."
@@ -839,12 +839,12 @@ label Kitty_SexChat:
                         $ KittyX.change_face("bemused")
                         $ KittyX.change_stat("obedience", 90, 1)
                         ch_k "Well, I guess I can be quieter. . ."
-                        $ KittyX.Traits.remove("vocal")
+                        $ KittyX.traits.remove("vocal")
                     elif approval_check(KittyX, 700, "O"):
                         $ KittyX.change_face("sadside")
                         $ KittyX.change_stat("obedience", 90, 1)
                         ch_k "Um, ok, [KittyX.player_petname]."
-                        $ KittyX.Traits.remove("vocal")
+                        $ KittyX.traits.remove("vocal")
                     elif approval_check(KittyX, 600):
                         $ KittyX.change_face("sly")
                         $ KittyX.change_stat("love", 90, -3)
@@ -859,7 +859,7 @@ label Kitty_SexChat:
                         ch_k "Oh, am I too {i}chatty{/i} when I'm getting you off?"
 
                     $ KittyX.daily_history.append("setvocal")
-            "Talk dirty to me during sex." if "vocal" not in KittyX.Traits:
+            "Talk dirty to me during sex." if "vocal" not in KittyX.traits:
                 if "setvocal" in KittyX.daily_history:
                     $ KittyX.change_face("perplexed")
                     ch_k "We've been over this."
@@ -868,17 +868,17 @@ label Kitty_SexChat:
                         $ KittyX.change_face("sly")
                         $ KittyX.change_stat("obedience", 90, 2)
                         ch_k "Hmm, ok. . ."
-                        $ KittyX.Traits.append("vocal")
+                        $ KittyX.traits.append("vocal")
                     elif approval_check(KittyX, 700, "O"):
                         $ KittyX.change_face("sadside")
                         $ KittyX.change_stat("obedience", 90, 2)
                         ch_k "I guess I could try, [KittyX.player_petname]."
-                        $ KittyX.Traits.append("vocal")
+                        $ KittyX.traits.append("vocal")
                     elif approval_check(KittyX, 600):
                         $ KittyX.change_face("sly")
                         $ KittyX.change_stat("obedience", 90, 3)
                         ch_k "I guess I could, [KittyX.player_petname]."
-                        $ KittyX.Traits.append("vocal")
+                        $ KittyX.traits.append("vocal")
                     else:
                         $ KittyX.change_face("angry")
                         $ KittyX.change_stat("inhibition", 90, 5)
@@ -887,7 +887,7 @@ label Kitty_SexChat:
                     $ KittyX.daily_history.append("setvocal")
 
 
-            "Don't do your own thing as much during sex." if "passive" not in KittyX.Traits:
+            "Don't do your own thing as much during sex." if "passive" not in KittyX.traits:
                 if "initiative" in KittyX.daily_history:
                     $ KittyX.change_face("perplexed")
                     ch_k "We've been over this."
@@ -896,12 +896,12 @@ label Kitty_SexChat:
                         $ KittyX.change_face("bemused")
                         $ KittyX.change_stat("obedience", 90, 1)
                         ch_k "Heh, if you insist. . ."
-                        $ KittyX.Traits.append("passive")
+                        $ KittyX.traits.append("passive")
                     elif approval_check(KittyX, 700, "O"):
                         $ KittyX.change_face("sadside")
                         $ KittyX.change_stat("obedience", 90, 1)
                         ch_k "I'll try to hold back, [KittyX.player_petname]."
-                        $ KittyX.Traits.append("passive")
+                        $ KittyX.traits.append("passive")
                     elif approval_check(KittyX, 600):
                         $ KittyX.change_face("sly")
                         $ KittyX.change_stat("love", 90, -3)
@@ -916,7 +916,7 @@ label Kitty_SexChat:
                         ch_k "If I feel like it."
 
                     $ KittyX.daily_history.append("initiative")
-            "Take more initiative during sex." if "passive" in KittyX.Traits:
+            "Take more initiative during sex." if "passive" in KittyX.traits:
                 if "initiative" in KittyX.daily_history:
                     $ KittyX.change_face("perplexed")
                     ch_k "We've been over this."
@@ -925,17 +925,17 @@ label Kitty_SexChat:
                         $ KittyX.change_face("bemused")
                         $ KittyX.change_stat("obedience", 90, 1)
                         ch_k "Heh, I'll see what I can do. . ."
-                        $ KittyX.Traits.remove("passive")
+                        $ KittyX.traits.remove("passive")
                     elif approval_check(KittyX, 700, "O"):
                         $ KittyX.change_face("sadside")
                         $ KittyX.change_stat("obedience", 90, 1)
                         ch_k "I can do that, [KittyX.player_petname]."
-                        $ KittyX.Traits.remove("passive")
+                        $ KittyX.traits.remove("passive")
                     elif approval_check(KittyX, 600):
                         $ KittyX.change_face("sly")
                         $ KittyX.change_stat("obedience", 90, 3)
                         ch_k "I can try, [KittyX.player_petname]."
-                        $ KittyX.Traits.remove("passive")
+                        $ KittyX.traits.remove("passive")
                     else:
                         $ KittyX.change_face("angry")
                         $ KittyX.change_stat("inhibition", 90, 5)
@@ -975,7 +975,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
                 $ Digits.append(KittyX)
                 return
 
-        if "hungry" not in KittyX.Traits and (KittyX.event_counter["swallowed"] + KittyX.Chat[2]) >= 10 and KittyX.location == bg_current:
+        if "hungry" not in KittyX.traits and (KittyX.event_counter["swallowed"] + KittyX.Chat[2]) >= 10 and KittyX.location == bg_current:
             call Kitty_Hungry
             return
         if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or approval_check(KittyX, 800, "I")):
@@ -997,15 +997,15 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
         if "Kate" in KittyX.names and "Katherine" not in KittyX.names:
 
             $ Options.append("Katherine")
-        if KittyX.Lvl >= 3 and "Shadowcat" not in KittyX.names:
+        if KittyX.level >= 3 and "Shadowcat" not in KittyX.names:
 
             $ Options.append("Shadowcat")
 
-        if "mandrill" in Player.Traits and "cologne chat" not in KittyX.daily_history:
+        if "mandrill" in Player.traits and "cologne chat" not in KittyX.daily_history:
             $ Options.append("mandrill")
-        if "purple" in Player.Traits and "cologne chat" not in KittyX.daily_history:
+        if "purple" in Player.traits and "cologne chat" not in KittyX.daily_history:
             $ Options.append("purple")
-        if "corruption" in Player.Traits and "cologne chat" not in KittyX.daily_history:
+        if "corruption" in Player.traits and "cologne chat" not in KittyX.daily_history:
             $ Options.append("corruption")
 
         if "seenpeen" in KittyX.history:
@@ -1035,11 +1035,11 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
         if "fondle_breasts" in KittyX.daily_history or "fondle_pussy" in KittyX.daily_history or "fondle_ass" in KittyX.daily_history:
 
             $ Options.append("fondled")
-        if "Dazzler and Longshot" in KittyX.Inventory and "256 Shades of Grey" in KittyX.Inventory and "Avengers Tower Penthouse" in KittyX.Inventory:
+        if "Dazzler and Longshot" in KittyX.inventory and "256 Shades of Grey" in KittyX.inventory and "Avengers Tower Penthouse" in KittyX.inventory:
 
             if "book" not in KittyX.Chat:
                 $ Options.append("booked")
-        if "lace_bra" in KittyX.Inventory or "lace_panties" in KittyX.Inventory:
+        if "lace_bra" in KittyX.inventory or "lace_panties" in KittyX.inventory:
 
             if "lingerie" not in KittyX.Chat:
                 $ Options.append("lingerie")
@@ -1731,7 +1731,7 @@ label Kitty_Rename:
             $ KittyX.change_face()
         "Nevermind.":
             pass
-    $ KittyX.AddWord(1,0,"namechange")
+    $ KittyX.add_word(1,0,"namechange")
     return
 
 
@@ -2036,7 +2036,7 @@ label Kitty_Summon(approval_bonus=approval_bonus):
 
     $ KittyX.recent_history.append("summoned")
     $ Line = 0
-    if "locked" in Player.Traits:
+    if "locked" in Player.traits:
         call Locked_Door (KittyX)
         return
     call Taboo_Level (0)
@@ -2051,7 +2051,7 @@ label Kitty_Summon(approval_bonus=approval_bonus):
 
 label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     if "leaving" in KittyX.recent_history:
-        $ KittyX.DrainWord("leaving")
+        $ KittyX.drain_word("leaving")
     else:
         return
 
@@ -2060,13 +2060,13 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         ch_k "I'm[KittyX.like]going off the grid, see you later."
         return
 
-    if KittyX in Party or "lockedtravels" in KittyX.Traits:
+    if KittyX in Party or "lockedtravels" in KittyX.traits:
 
 
         $ KittyX.location = bg_current
         return
 
-    elif "freetravels" in KittyX.Traits or not approval_check(KittyX, 700):
+    elif "freetravels" in KittyX.traits or not approval_check(KittyX, 700):
 
         $ KittyX.change_outfit()
         if GirlsNum:
@@ -2100,9 +2100,9 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
 
     $ KittyX.change_outfit(Changed=0)
 
-    if "follow" not in KittyX.Traits:
+    if "follow" not in KittyX.traits:
 
-        $ KittyX.Traits.append("follow")
+        $ KittyX.traits.append("follow")
 
     $ D20 = renpy.random.randint(1, 20)
     $ Line = 0
@@ -2280,7 +2280,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
 
 label Kitty_Clothes:
     if KittyX.Taboo:
-        if "exhibitionist" in KittyX.Traits:
+        if "exhibitionist" in KittyX.traits:
             ch_k "Mmmmm. . ."
         elif approval_check(KittyX, 900, TabM=4) or approval_check(KittyX, 400, "I", TabM=3):
             ch_k "This is[KittyX.like]pretty. . . exposed. . ."
@@ -2360,7 +2360,7 @@ label Kitty_Wardrobe_Menu:
                 call Switch_Chat
                 if Girl != KittyX:
                     ch_p "I wanted to talk about your clothes."
-                    call expression Girl.Tag +"_Clothes"
+                    call expression Girl.tag +"_Clothes"
                 $ Girl = KittyX
                 call shift_focus (Girl)
             "Never mind, you look good like that.":
@@ -2556,7 +2556,7 @@ label Kitty_Wardrobe_Menu:
                 $ KittyX.change_face("sexy")
                 menu:
                     "You know, you should wear this one out. [[set current outfit]":
-                        if "exhibitionist" in KittyX.Traits:
+                        if "exhibitionist" in KittyX.traits:
                             ch_k "I'm[KittyX.like]getting a little wet just thinking about it."
                             $ KittyX.Outfit = "nude"
                             $ KittyX.change_stat("lust", 50, 10)
@@ -2572,7 +2572,7 @@ label Kitty_Wardrobe_Menu:
                             ch_k "No way! That'd be[KittyX.like]totally embarrassing!"
                     "Let's try something else though.":
 
-                        if "exhibitionist" in KittyX.Traits:
+                        if "exhibitionist" in KittyX.traits:
                             ch_k "Aw, do I have to?"
                         elif approval_check(KittyX, 800, "I") or approval_check(KittyX, 2800, TabM=0):
                             $ KittyX.change_face("bemused", 1)
@@ -2684,7 +2684,7 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.blushing = 2
                     ch_k "-not that that's a problem. . ."
                     $ KittyX.blushing = 1
-                elif approval_check(KittyX, 900, TabM=2) and "lace_bra" in KittyX.Inventory:
+                elif approval_check(KittyX, 900, TabM=2) and "lace_bra" in KittyX.inventory:
                     ch_k "I could find {i}something{/i} to wear."
                     $ KittyX.bra  = "lace_bra"
                     "She pulls out her lace bra and passes it through her [KittyX.top]."
@@ -2784,7 +2784,7 @@ label Kitty_Wardrobe_Menu:
             ch_k "K, no problem."
             $ KittyX.legs = "shorts"
 
-        "How about the blue skirt?" if KittyX.legs != "blue_skirt" and "blue_skirt" in KittyX.Inventory:
+        "How about the blue skirt?" if KittyX.legs != "blue_skirt" and "blue_skirt" in KittyX.inventory:
             if KittyX.underwear or approval_check(KittyX,500,"I",TabM=2):
                 ch_k "Yeah, ok."
                 $ KittyX.legs = "blue_skirt"
@@ -2819,7 +2819,7 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.blushing = 2
                     ch_k "I didn't say that bothered me. . ."
                     $ KittyX.blushing = 1
-                elif approval_check(KittyX, 800, TabM=4) and "lace_panties" in KittyX.Inventory:
+                elif approval_check(KittyX, 800, TabM=4) and "lace_panties" in KittyX.inventory:
                     ch_k "I like how you think."
                     $ KittyX.underwear  = "lace_panties"
                     "She pulls out her lace panties and pulls them up through her [KittyX.legs]."
@@ -2907,7 +2907,7 @@ label Kitty_Wardrobe_Menu:
                         else:
                             $ KittyX.bra = "bra"
 
-                "I like that lace bra." if "lace_bra" in KittyX.Inventory and KittyX.bra != "lace_bra":
+                "I like that lace bra." if "lace_bra" in KittyX.inventory and KittyX.bra != "lace_bra":
                     if KittyX.SeenChest or approval_check(KittyX, 1300, TabM=2):
                         ch_k "K."
                         $ KittyX.bra = "lace_bra"
@@ -2929,7 +2929,7 @@ label Kitty_Wardrobe_Menu:
                         else:
                             $ KittyX.bra = "sports_bra"
 
-                "I like that bikini top." if KittyX.bra != "bikini_top" and "bikini_top" in KittyX.Inventory:
+                "I like that bikini top." if KittyX.bra != "bikini_top" and "bikini_top" in KittyX.inventory:
                     if bg_current == "bg_pool":
                         ch_k "K."
                         $ KittyX.bra = "bikini_top"
@@ -2970,15 +2970,15 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.hose = 0
                 "The thigh-high hose would look good with that." if KittyX.hose != "stockings":
                     $ KittyX.hose = "stockings"
-                "The knee-high hose would look good with that." if KittyX.hose != "knee stockings" and "knee" in KittyX.Inventory:
+                "The knee-high hose would look good with that." if KittyX.hose != "knee stockings" and "knee" in KittyX.inventory:
                     $ KittyX.hose = "knee stockings"
-                "The pantyhose would look good with that." if KittyX.hose != "pantyhose" and "pantyhose" in KittyX.Inventory:
+                "The pantyhose would look good with that." if KittyX.hose != "pantyhose" and "pantyhose" in KittyX.inventory:
                     $ KittyX.hose = "pantyhose"
-                "The stockings would look good with that." if KittyX.hose != "stockings_and_garterbelt" and "stockings_and_garterbelt" in KittyX.Inventory:
+                "The stockings would look good with that." if KittyX.hose != "stockings_and_garterbelt" and "stockings_and_garterbelt" in KittyX.inventory:
                     $ KittyX.hose = "stockings_and_garterbelt"
-                "Maybe just the garterbelt?" if KittyX.hose != "garterbelt" and "stockings_and_garterbelt" in KittyX.Inventory:
+                "Maybe just the garterbelt?" if KittyX.hose != "garterbelt" and "stockings_and_garterbelt" in KittyX.inventory:
                     $ KittyX.hose = "garterbelt"
-                "Your ripped pantyhose would look good with that." if KittyX.hose != "ripped_pantyhose" and "ripped_pantyhose" in KittyX.Inventory:
+                "Your ripped pantyhose would look good with that." if KittyX.hose != "ripped_pantyhose" and "ripped_pantyhose" in KittyX.inventory:
                     $ KittyX.hose = "ripped_pantyhose"
                 "Never mind":
                     pass
@@ -3040,7 +3040,7 @@ label Kitty_Wardrobe_Menu:
                         else:
                             $ KittyX.underwear = "green_panties"
 
-                "Why don't you wear the lace panties instead?" if "lace_panties" in KittyX.Inventory and KittyX.underwear and KittyX.underwear != "lace_panties":
+                "Why don't you wear the lace panties instead?" if "lace_panties" in KittyX.inventory and KittyX.underwear and KittyX.underwear != "lace_panties":
                     if approval_check(KittyX, 1300, TabM=3):
                         ch_k "I guess."
                         $ KittyX.underwear = "lace_panties"
@@ -3051,7 +3051,7 @@ label Kitty_Wardrobe_Menu:
                         else:
                             $ KittyX.underwear = "lace_panties"
 
-                "I like those bikini bottoms." if KittyX.underwear != "bikini_bottoms" and "bikini_bottoms" in KittyX.Inventory:
+                "I like those bikini bottoms." if KittyX.underwear != "bikini_bottoms" and "bikini_bottoms" in KittyX.inventory:
                     if bg_current == "bg_pool":
                         ch_k "K."
                         $ KittyX.underwear = "bikini_bottoms"
@@ -3087,7 +3087,7 @@ label Kitty_Wardrobe_Menu:
                         "How about the green ones?":
                             ch_k "Sure, ok."
                             $ KittyX.underwear = "green_panties"
-                        "How about the lace ones?" if "lace_panties" in KittyX.Inventory:
+                        "How about the lace ones?" if "lace_panties" in KittyX.inventory:
                             ch_k "Alright."
                             $ KittyX.underwear  = "lace_panties"
                 "Never mind":
@@ -3134,12 +3134,12 @@ label Kitty_Wardrobe_Menu:
                 ch_k "[[snort] You've got to give it some time!"
             else:
                 $ KittyX.change_face("bemused", 1)
-                $ Approval = approval_check(KittyX, 1150, TabM=0)
-                if approval_check(KittyX, 850, "L", TabM=0) or (Approval and KittyX.love > 2*KittyX.obedience):
+                $ approval = approval_check(KittyX, 1150, TabM=0)
+                if approval_check(KittyX, 850, "L", TabM=0) or (approval and KittyX.love > 2*KittyX.obedience):
                     ch_k "I guess I could. . ."
-                elif approval_check(KittyX, 500, "I", TabM=0) or (Approval and KittyX.inhibition > KittyX.obedience):
+                elif approval_check(KittyX, 500, "I", TabM=0) or (approval and KittyX.inhibition > KittyX.obedience):
                     ch_k "You want a furry kitty to pet?"
-                elif approval_check(KittyX, 400, "O", TabM=0) or Approval:
+                elif approval_check(KittyX, 400, "O", TabM=0) or approval:
                     ch_k "If you want me to. . ."
                 else:
                     $ KittyX.change_face("surprised")
@@ -3155,13 +3155,13 @@ label Kitty_Wardrobe_Menu:
             if "shave" in KittyX.Todo:
                 ch_k "I know, I know. I'll take care of it later."
             else:
-                $ Approval = approval_check(KittyX, 1150, TabM=0)
+                $ approval = approval_check(KittyX, 1150, TabM=0)
 
-                if approval_check(KittyX, 850, "L", TabM=0) or (Approval and KittyX.love > 2*KittyX.obedience):
+                if approval_check(KittyX, 850, "L", TabM=0) or (approval and KittyX.love > 2*KittyX.obedience):
                     ch_k "I guess I could tidy up a bit. . ."
-                elif approval_check(KittyX, 500, "I", TabM=0) or (Approval and KittyX.inhibition > KittyX.obedience):
+                elif approval_check(KittyX, 500, "I", TabM=0) or (approval and KittyX.inhibition > KittyX.obedience):
                     ch_k "I'll keep it smooth."
-                elif approval_check(KittyX, 400, "O", TabM=0) or Approval:
+                elif approval_check(KittyX, 400, "O", TabM=0) or approval:
                     ch_k "I'll get it done."
                 else:
                     $ KittyX.change_face("surprised")
@@ -3179,12 +3179,12 @@ label Kitty_Wardrobe_Menu:
                 ch_k "I know, I know. I'll take care of it later."
             else:
                 $ KittyX.change_face("bemused", 1)
-                $ Approval = approval_check(KittyX, 1350, TabM=0)
-                if approval_check(KittyX, 900, "L", TabM=0) or (Approval and KittyX.love > 2* KittyX.obedience):
+                $ approval = approval_check(KittyX, 1350, TabM=0)
+                if approval_check(KittyX, 900, "L", TabM=0) or (approval and KittyX.love > 2* KittyX.obedience):
                     ch_k "If you think they'd look good on me. . ."
-                elif approval_check(KittyX, 600, "I", TabM=0) or (Approval and KittyX.inhibition > KittyX.obedience):
+                elif approval_check(KittyX, 600, "I", TabM=0) or (approval and KittyX.inhibition > KittyX.obedience):
                     ch_k "I think they'd look great too!"
-                elif approval_check(KittyX, 500, "O", TabM=0) or Approval:
+                elif approval_check(KittyX, 500, "O", TabM=0) or approval:
                     ch_k "K, I'll take care of it."
                 else:
                     $ KittyX.change_face("surprised")
@@ -3199,12 +3199,12 @@ label Kitty_Wardrobe_Menu:
                 ch_k "I know, I know. I'll take care of it later."
             else:
                 $ KittyX.change_face("bemused", 1)
-                $ Approval = approval_check(KittyX, 1350, TabM=0)
-                if approval_check(KittyX, 900, "L", TabM=0) or (Approval and KittyX.love > 2*KittyX.obedience):
+                $ approval = approval_check(KittyX, 1350, TabM=0)
+                if approval_check(KittyX, 900, "L", TabM=0) or (approval and KittyX.love > 2*KittyX.obedience):
                     ch_k "If you think they'd look good on me. . ."
-                elif approval_check(KittyX, 600, "I", TabM=0) or (Approval and KittyX.inhibition > KittyX.obedience):
+                elif approval_check(KittyX, 600, "I", TabM=0) or (approval and KittyX.inhibition > KittyX.obedience):
                     ch_k "I think they'd look great too!"
-                elif approval_check(KittyX, 500, "O", TabM=0) or Approval:
+                elif approval_check(KittyX, 500, "O", TabM=0) or approval:
                     ch_k "K, I'll take care of it."
                 else:
                     $ KittyX.change_face("surprised")
@@ -3217,12 +3217,12 @@ label Kitty_Wardrobe_Menu:
         "Remove Piercings" if KittyX.piercings:
             ch_p "You know, you'd look better without those piercings."
             $ KittyX.change_face("bemused", 1)
-            $ Approval = approval_check(KittyX, 1350, TabM=0)
-            if approval_check(KittyX, 950, "L", TabM=0) or (Approval and KittyX.love > KittyX.obedience):
+            $ approval = approval_check(KittyX, 1350, TabM=0)
+            if approval_check(KittyX, 950, "L", TabM=0) or (approval and KittyX.love > KittyX.obedience):
                 ch_k "I guess if they're getting in the way . ."
-            elif approval_check(KittyX, 700, "I", TabM=0) or (Approval and KittyX.inhibition > KittyX.obedience):
+            elif approval_check(KittyX, 700, "I", TabM=0) or (approval and KittyX.inhibition > KittyX.obedience):
                 ch_k "They were getting a little annoying."
-            elif approval_check(KittyX, 600, "O", TabM=0) or Approval:
+            elif approval_check(KittyX, 600, "O", TabM=0) or approval:
                 ch_k "I'll take them out then."
             else:
                 $ KittyX.change_face("surprised")

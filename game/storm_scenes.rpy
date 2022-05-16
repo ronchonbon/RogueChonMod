@@ -29,7 +29,7 @@
 label StormMeetPrelude:
     "You hear a creaking noise from above you. You notice this happening more and more often lately."
     "Maybe next time you're in class, you can ask [EmmaX.name] about it."
-    $ Player.AddWord(1,0,0,0,"noise")
+    $ Player.add_word(1,0,0,0,"noise")
     return
 
 label StormMeetAsk:
@@ -79,7 +79,7 @@ label StormMeetAsk:
         "Ok.":
             ch_e "Right. . ."
     ch_e "Ok, now sit down, the lesson is about to begin."
-    $ Player.AddWord(1,0,0,0,"attic")
+    $ Player.add_word(1,0,0,0,"attic")
     $ StormX.Break[0] = 104
     $ Player.history.remove("noise")
     $ EmmaX.location = "bg_teacher"
@@ -105,7 +105,7 @@ label StormMeetWater:
         Party[0].voice "Have fun though."
         call Remove_Girl (Party[0])
     "You head for the door marked \"Attic. . .\""
-    $ Player.AddWord(1,"water",0,0,0)
+    $ Player.add_word(1,"water",0,0,0)
     jump StormMeet
 
 
@@ -118,7 +118,7 @@ label StormMeet:
             "Oh, look at the time, maybe this is something that should wait for earlier in the day. . ."
         "You return to your room."
         $ bg_current = "bg_player"
-        $ Player.AddWord(1,0,"noattic",0,0)
+        $ Player.add_word(1,0,"noattic",0,0)
         jump Misplaced
 
     $ Player.history.remove("attic")
@@ -302,7 +302,7 @@ label StormMeet:
                         ch_s "I suppose that I should be a better neighbor."
                         $ StormX.change_face("smile")
                         ch_s "Please accept my apology."
-                        $ StormX.AddWord(1,"noise",0,0,0)
+                        $ StormX.add_word(1,"noise",0,0,0)
                         menu:
                             extend ""
                             "None needed.":
@@ -316,7 +316,7 @@ label StormMeet:
                             "Ok.":
                                 pass
                     "So about the leak." if "water" in Player.recent_history:
-                        $ Player.DrainWord("water")
+                        $ Player.drain_word("water")
                         "You point to some puddles under some of her plants."
                         $ StormX.change_face("surprised",2,Eyes="leftside")
                         $ StormX.change_stat("obedience", 80, 5)
@@ -337,7 +337,7 @@ label StormMeet:
                         $ StormX.change_face("smile",Eyes="leftside")
                         ch_s "I do my best to bring a bit of nature into this place."
                         $ StormX.change_face("smile")
-                        $ StormX.AddWord(1,"plants",0,0,0)
+                        $ StormX.add_word(1,"plants",0,0,0)
 
                     "[EmmaX.name] said that you were a ghost." if "ghost" not in StormX.recent_history:
                         $ StormX.change_face("angry",Eyes="leftside")
@@ -345,7 +345,7 @@ label StormMeet:
                         $ StormX.change_face("smile")
                         ch_s "Obviously I am as alive as you are."
                         ch_s "I've just recently returned from sabbatical, and was preparing to rejoin the teaching staff."
-                        $ StormX.AddWord(1,"ghost",0,0,0)
+                        $ StormX.add_word(1,"ghost",0,0,0)
                     "Never mind.":
                         pass
 
@@ -367,13 +367,13 @@ label StormMeet:
                 ch_s "I can summon the rain, call lightning, even glide on the winds."
                 $ StormX.change_face("smile")
                 ch_s "I very much enjoy the freedom my powers bring me, the connection to nature."
-                $ StormX.AddWord(1,"powers",0,0,0)
+                $ StormX.add_word(1,"powers",0,0,0)
             "That's a lovely accent." if "accent" not in StormX.recent_history:
                 $ StormX.change_face("smile")
                 $ StormX.change_stat("love", 70, 5)
                 ch_s "Thank you."
                 ch_s "I am originally from the States, but spent much of my youth in Kenya."
-                $ StormX.AddWord(1,"accent",0,0,0)
+                $ StormX.add_word(1,"accent",0,0,0)
             "I suppose I should be going. . .":
                 ch_s "Oh, I suppose so. . ."
                 $ Count = 0
@@ -429,8 +429,8 @@ label StormMeet:
         ch_s "Oh, [StormX.player_petname]. . ."
         ch_s ". . .aren't you forgetting something?"
         ch_p "Oh, yeah. . ."
-        $ Player.DrainWord("naked")
-        $ Player.DrainWord("cockout")
+        $ Player.drain_word("naked")
+        $ Player.drain_word("cockout")
         "You put your clothes back on. and head back to your room."
     else:
         "You head back to your room."
@@ -460,7 +460,7 @@ label Storm_Nudity:
         menu:
             extend ""
             "So you don't mind me looking?" if "looking" not in StormX.recent_history:
-                $ StormX.AddWord(1,"looking",0,0,0)
+                $ StormX.add_word(1,"looking",0,0,0)
                 $ StormX.change_face("surprised")
                 $ StormX.change_stat("love", 70, 3)
                 $ StormX.change_stat("obedience", 80, 2)
@@ -474,7 +474,7 @@ label Storm_Nudity:
                 $ StormX.change_face("normal")
                 ch_s "Was there something else about my body?"
             "Well you're very beautiful." if "hot" not in StormX.recent_history:
-                $ StormX.AddWord(1,"hot",0,0,0)
+                $ StormX.add_word(1,"hot",0,0,0)
                 $ StormX.change_face("smile")
                 $ StormX.change_stat("love", 70, 10)
                 $ StormX.change_stat("obedience", 80, 2)
@@ -482,7 +482,7 @@ label Storm_Nudity:
                 ch_s "Thank you. . ."
                 ch_s "Was there something else about my body?"
             "Well you're really hot." if "hot" not in StormX.recent_history:
-                $ StormX.AddWord(1,"hot",0,0,0)
+                $ StormX.add_word(1,"hot",0,0,0)
                 $ StormX.change_face("sly",Brows="confused")
                 $ StormX.change_stat("love", 70, 5)
                 $ StormX.change_stat("obedience", 80, 10)
@@ -492,7 +492,7 @@ label Storm_Nudity:
                 $ StormX.change_face("sly")
                 ch_s "Was there something else about my body?"
             "You have a fantastic rack." if "tits" not in StormX.recent_history:
-                $ StormX.AddWord(1,"tits",0,0,0)
+                $ StormX.add_word(1,"tits",0,0,0)
                 $ StormX.change_face("surprised",2)
                 ch_s ". . ."
                 $ StormX.change_face("sly",1,Brows="angry",Eyes="down")
@@ -553,7 +553,7 @@ label Storm_Nudity:
                 call Storm_Touching
 
             "You've certainly got a jungle going on down there." if "pubes" not in StormX.recent_history:
-                $ StormX.AddWord(1,"pubes",0,0,0)
+                $ StormX.add_word(1,"pubes",0,0,0)
                 $ StormX.change_face("angry",2,Eyes="surprised")
                 $ StormX.change_stat("love", 70, -10)
                 $ StormX.change_stat("obedience", 80, 5)
@@ -638,7 +638,7 @@ label Storm_Touching:
             $ StormX.change_stat("love", 70, 2)
             $ StormX.change_stat("obedience", 80, -2)
             ch_s "Glad to know that we have an understanding."
-    $ StormX.AddWord(1,"touching",0,0,0)
+    $ StormX.add_word(1,"touching",0,0,0)
 
     ch_s "Now, was there something else about my body?"
     return
@@ -680,13 +680,13 @@ label Storm_Peter:
 label Storm_Teacher_Caught(Girl=0):
 
 
-    if "noticed " + Girl.Tag in StormX.recent_history:
+    if "noticed " + Girl.tag in StormX.recent_history:
         return
     if approval_check(StormX, 500, "I") and approval_check(StormX, 1500) and StormX.GirlLikeCheck(Girl) >= 500:
         "[StormX.name] notices the two of you, but just nods in approval and continues on."
         $ StormX.GLG(Girl,800,3,1)
         $ Girl.GLG(StormX,800,3,1)
-        $ StormX.recent_history.append("noticed " + Girl.Tag)
+        $ StormX.recent_history.append("noticed " + Girl.tag)
         return
 
     ch_s "[Player.name]? [Girl.name]? Could you please stop what you are doing there?"
@@ -703,11 +703,11 @@ label Storm_Teacher_Caught(Girl=0):
         call Partner_Like (StormX, -2, -3, 500, Girl)
         call Remove_Girl (Girl)
 
-    $ Girl.Rep -= 1
+    $ Girl.reputation -= 1
     call Partner_Like (Girl, 3, 2, 800, StormX)
     $ StormX.GLG(Girl,800,3,1)
 
-    $ Player.Rep -= 1
+    $ Player.reputation -= 1
     ch_s "Thank you."
 
     jump Misplaced
@@ -768,8 +768,8 @@ label Storm_Hairtalk:
             $ StormX.change_stat("inhibition", 80, 2)
             ch_s "Well, perhaps we could think of something?"
     ch_s "I was thinking that perhaps I could reward your performance. . somehow."
-    $ StormX.AddWord(1,"uninterrupted",0,0,0)
-    $ Player.AddWord(1,"interruption")
+    $ StormX.add_word(1,"uninterrupted",0,0,0)
+    $ Player.add_word(1,"interruption")
     menu:
         extend ""
         "That's fine, don't worry about it.":
@@ -791,11 +791,11 @@ label Storm_Hairtalk:
                 $ StormX.change_stat("inhibition", 60, 1)
                 ch_s "I. . . suppose that I might accomodate that. . ."
                 $ StormX.change_stat("inhibition", 80, 2)
-                $ StormX.Uptop = 1
-                $ StormX.Upskirt = 1
+                $ StormX.top_pulled_up = 1
+                $ StormX.upskirt = 1
                 pause 1      
-                $ StormX.Uptop = 0
-                $ StormX.Upskirt = 0
+                $ StormX.top_pulled_up = 0
+                $ StormX.upskirt = 0
                 ch_s ". . ."
             else:
                 $ StormX.change_stat("love", 70, -2)
@@ -855,7 +855,7 @@ label Storm_Hairtalk:
                 $ StormX.change_stat("obedience", 50, -1)
                 ch_s "That would be highly inappropriate!"
 
-    $ StormX.DrainWord("uninterrupted")
+    $ StormX.drain_word("uninterrupted")
     ch_s "Ok, I think that will be enough for now."
     "As you turn to leave, you notice a photo on the desk"
     show Storm_Photo zorder 150 with easeinbottom
@@ -936,7 +936,7 @@ label Storm_Detention:
 
         $ StormX.change_face("surprised")
         ch_s "Oh, [StormX.player_petname], you really shouldn't skip your detention like that. . ."
-    $ Player.Traits.remove("detention")
+    $ Player.traits.remove("detention")
     $ StormX.recent_history.append("detention")
     $ StormX.daily_history.append("detention")
     $ StormX.change_face("sly")
@@ -958,7 +958,7 @@ label Storm_Detention:
     "[StormX.name] walks to the door and locks it behind her."
     $ Taboo = 0
     $ StormX.Taboo = 0
-    $ Player.Traits.append("locked")
+    $ Player.traits.append("locked")
     menu:
         extend ""
         "I guess I should focus on my studies.":
@@ -1029,7 +1029,7 @@ label Storm_Detention:
     ch_s "You wouldn't want to make this a habit. . ."
     $ approval_bonus = 0
     $ StormX.change_outfit()
-    $ Player.DrainWord("locked",0,0,1)
+    $ Player.drain_word("locked",0,0,1)
     return
 
 
@@ -1065,7 +1065,7 @@ label Storm_BF:
             "[StormX.name] approaches you and asks if the two of you can talk."
         else:
             "[StormX.name] turns towards you and asks if the two of you can talk."
-    $ StormX.DrainWord("asked meet")
+    $ StormX.drain_word("asked meet")
 
     call set_the_scene (0)
     call Display_Girl (StormX)
@@ -1210,12 +1210,12 @@ label Storm_BF_Story:
                         ch_s ". . . I suppose that I could accept this. . . arrangement."
         menu:
             extend ""
-            "I would love that!" if "StormYes" in Player.Traits:
+            "I would love that!" if "StormYes" in Player.traits:
                 $ StormX.change_stat("love", 90, 20)
                 $ StormX.change_stat("inhibition", 70, 5)
                 ch_s "Excellent!"
                 jump Storm_BF_End
-            "I would love that. . . but. . ." if "StormYes" not in Player.Traits:
+            "I would love that. . . but. . ." if "StormYes" not in Player.traits:
                 $ StormX.change_face("confused")
                 $ StormX.change_stat("love", 90, 5)
                 $ StormX.change_stat("obedience", 60, 5)
@@ -1272,10 +1272,10 @@ label Storm_BF_Story:
 label Storm_BF_End:
     $ StormX.player_petnames.append("boyfriend")
 
-    if "Historia" not in Player.Traits:
+    if "Historia" not in Player.traits:
         $ Player.Harem.append(StormX)
-        if "StormYes" in Player.Traits:
-            $ Player.Traits.remove("StormYes")
+        if "StormYes" in Player.traits:
+            $ Player.traits.remove("StormYes")
     return
 
 
@@ -1285,7 +1285,7 @@ label Storm_BF_End:
 
 label Storm_Love:
 
-    $ StormX.DrainWord("asked meet")
+    $ StormX.drain_word("asked meet")
     if StormX.location == bg_current or StormX in Party:
         "[StormX.name] glances over at you with an apprising look on her face."
     else:
@@ -1463,7 +1463,7 @@ label Storm_Love:
             "Yeah, I understand." if "iknow" not in StormX.recent_history:
                 $ StormX.change_stat("love", 200, 2)
                 $ StormX.change_stat("obedience", 80, 2)
-                $ StormX.AddWord(1,"iknow",0,0,0)
+                $ StormX.add_word(1,"iknow",0,0,0)
                 $ StormX.change_face("smile",1,Brows = "confused")
                 $ Line += 1
                 ch_s "Oh?"
@@ -1505,7 +1505,7 @@ label Storm_Love:
                         $ StormX.change_face("angry",1)
                         ch_s ". . ."
                         ch_s "No."
-                $ StormX.AddWord(1,"strong",0,0,0)
+                $ StormX.add_word(1,"strong",0,0,0)
                 $ Line +=1
             "Nope.":
                 $ StormX.change_stat("love", 200, -5)
@@ -1690,7 +1690,7 @@ label Storm_Love_Badend:
 
 label Storm_Sub:
     call shift_focus (StormX)
-    $ StormX.DrainWord("asked meet")
+    $ StormX.drain_word("asked meet")
 
     $ StormX.location = bg_current
     call set_the_scene
@@ -1766,7 +1766,7 @@ label Storm_Sub:
                 if "repeat" not in StormX.recent_history:
                     $ StormX.change_stat("obedience", 90, 5)
                     $ StormX.change_stat("lust", 60, 5)
-                    $ StormX.AddWord(1,"repeat",0,0,0)
+                    $ StormX.add_word(1,"repeat",0,0,0)
                     $ StormX.change_face("bemused",2,Eyes="side")
                 else:
                     $ StormX.change_face("bemused")
@@ -1977,7 +1977,7 @@ label Storm_Sub_Asked:
 
 
 label Storm_Master:
-    $ StormX.DrainWord("asked meet")
+    $ StormX.drain_word("asked meet")
     call shift_focus (StormX)
     $ StormX.location = bg_current
     call set_the_scene
@@ -2051,7 +2051,7 @@ label Storm_Master:
             $ StormX.change_stat("inhibition", 70, 3)
             $ StormX.change_stat("inhibition", 90, 2)
             ch_s "I do not know. . ."
-            $ StormX.AddWord(1,"aboutyou",0,0,0)
+            $ StormX.add_word(1,"aboutyou",0,0,0)
         "Nope.":
             $ StormX.change_face("confused", 1)
             $ StormX.change_stat("obedience", 200, -5)
@@ -2209,7 +2209,7 @@ label Storm_Master:
             $ StormX.change_stat("lust", 90, 2)
             ch_s ". . . if it were you. . ."
             $ StormX.change_face("sly", 1)
-            $ StormX.AddWord(1,"context",0,0,0)
+            $ StormX.add_word(1,"context",0,0,0)
             $ Line = 1
 
     $ StormX.change_face("sly", 1)
@@ -2225,7 +2225,7 @@ label Storm_Master:
 label Storm_Sexfriend:
     "You get a text from [StormX.name]."
     "Drop by the pool tonight. . ."
-    $ Player.AddWord(1,0,0,0,"poolnight")
+    $ Player.add_word(1,0,0,0,"poolnight")
     $ StormX.daily_history.append("relationship")
     $ StormX.Event[9] = 1
     return
@@ -2312,7 +2312,7 @@ label Storm_Fuckbuddy:
     $ bg_current = "bg_classroom"
     call clear_the_room (StormX, 1, 1)
     call set_the_scene (Dress=0)
-    $ Player.Traits.append("locked")
+    $ Player.traits.append("locked")
     $ Nearby = []
     call Taboo_Level
     $ StormX.change_face("sly", 1,Eyes="side")

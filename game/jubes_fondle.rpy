@@ -30,11 +30,11 @@ label Jubes_Fondle_Breasts:
         $ approval_bonus += 15
     if JubesX.lust > 75:
         $ approval_bonus += 20
-    if "exhibitionist" in JubesX.Traits:
+    if "exhibitionist" in JubesX.traits:
         $ approval_bonus += (3*Taboo)
     if JubesX in Player.Harem or "sex friend" in JubesX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JubesX.Traits:
+    elif "ex" in JubesX.traits:
         $ approval_bonus -= 20
     if JubesX.event_counter["forced"] and not JubesX.Forced:
         $ approval_bonus -= 5*JubesX.event_counter["forced"]
@@ -48,10 +48,10 @@ label Jubes_Fondle_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle breasts" in JubesX.recent_history else 0
 
-    $ Approval = approval_check(JubesX, 950, TabM = 3)
+    $ approval = approval_check(JubesX, 950, TabM = 3)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JubesX.change_face("sexy")
             $ JubesX.change_stat("obedience", 90, 1)
             $ JubesX.change_stat("obedience", 70, 2)
@@ -70,7 +70,7 @@ label Jubes_Fondle_Breasts:
 
 
 
-    if Approval:
+    if approval:
         $ JubesX.change_face("sexy", 1)
         if JubesX.Forced:
             $ JubesX.change_face("sad")
@@ -90,7 +90,7 @@ label Jubes_Fondle_Breasts:
             "Mmm. . ."])
         ch_v "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ JubesX.change_face("bemused", 1)
         if JubesX.Forced:
             $ JubesX.change_face("sad")
@@ -138,7 +138,7 @@ label Jubes_Fondle_Breasts:
                 $ JubesX.daily_history.append("no_fondle breasts")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ JubesX.change_face("sexy")
                     $ JubesX.change_stat("obedience", 50, 2)
                     $ JubesX.change_stat("inhibition", 60, 3)
@@ -151,8 +151,8 @@ label Jubes_Fondle_Breasts:
             "[[Grab her chest anyway]":
 
 
-                $ Approval = approval_check(JubesX, 350, "OI", TabM = 3)
-                if Approval > 1 or (Approval and JubesX.Forced):
+                $ approval = approval_check(JubesX, 350, "OI", TabM = 3)
+                if approval > 1 or (approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
                     $ JubesX.change_stat("love", 20, -2, 1)
@@ -161,7 +161,7 @@ label Jubes_Fondle_Breasts:
                     $ JubesX.change_stat("obedience", 90, 2)
                     $ JubesX.change_stat("obedience", 50, 4)
                     $ JubesX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JubesX.Forced = 1
                     jump Jubes_FB_Prep
                 else:
@@ -213,10 +213,10 @@ label Jubes_FB_Prep:
     if action_context == JubesX:
 
         $ action_context = 0
-        if (JubesX.top or JubesX.bra) and not JubesX.Uptop:
+        if (JubesX.top or JubesX.bra) and not JubesX.top_pulled_up:
 
             if approval_check(JubesX, 1250, TabM = 1) or (JubesX.SeenChest and approval_check(JubesX, 500) and not Taboo):
-                $ JubesX.Uptop = 1
+                $ JubesX.top_pulled_up = 1
                 $ Line = JubesX.top if JubesX.top else JubesX.bra
                 "With a hungry grin, [JubesX.name] pulls her [Line] up over her breasts."
                 call Jubes_First_Topless (1)
@@ -252,7 +252,7 @@ label Jubes_FB_Prep:
                 $ JubesX.change_stat("obedience", 50, 1)
                 $ JubesX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ JubesX.AddWord(1,"refused","refused")
+                $ JubesX.add_word(1,"refused","refused")
                 return
 
 
@@ -283,8 +283,8 @@ label Jubes_FB_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ JubesX.DrainWord("no_taboo")
-    $ JubesX.DrainWord("no_fondle breasts")
+        $ JubesX.drain_word("no_taboo")
+    $ JubesX.drain_word("no_fondle breasts")
     $ JubesX.recent_history.append("fondle_breasts")
     $ JubesX.daily_history.append("fondle_breasts")
     call Jubes_Breasts_Launch ("fondle_breasts")
@@ -307,9 +307,9 @@ label Jubes_FB_Cycle:
                     $ Round -= 1
                     jump Jubes_FB_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -386,9 +386,9 @@ label Jubes_FB_Cycle:
                         "Undress [JubesX.name]":
 
                             call Girl_Undress (JubesX)
-                        "Clean up [JubesX.name] (locked)" if not JubesX.Spunk:
+                        "Clean up [JubesX.name] (locked)" if not JubesX.spunk:
                             pass
-                        "Clean up [JubesX.name]" if JubesX.Spunk:
+                        "Clean up [JubesX.name]" if JubesX.spunk:
                             call Girl_Cleanup (JubesX, "ask")
                         "Never mind":
                             jump Jubes_FB_Cycle
@@ -506,8 +506,8 @@ label Jubes_FB_Cycle:
         elif Round == 5:
             call Sex_Basic_Dialog (JubesX, 5)
 
-        if JubesX.lust >= 50 and not JubesX.Uptop and (JubesX.bra or JubesX.top):
-            $ JubesX.Uptop = 1
+        if JubesX.lust >= 50 and not JubesX.top_pulled_up and (JubesX.bra or JubesX.top):
+            $ JubesX.top_pulled_up = 1
             "[JubesX.name] grunts and pulls her clothes aside."
             call Jubes_First_Topless
 
@@ -525,7 +525,7 @@ label Jubes_FB_After:
     $ JubesX.action_counter["fondle_breasts"]+= 1
     $ JubesX.remaining_actions -=1
     $ JubesX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ JubesX.addiction_rate += 1
 
     call Partner_Like (JubesX, 2)
@@ -562,11 +562,11 @@ label Jubes_Suck_Breasts:
         $ approval_bonus += 20
     if JubesX.lust > 75 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in JubesX.Traits:
+    if "exhibitionist" in JubesX.traits:
         $ approval_bonus += (4*Taboo)
     if JubesX in Player.Harem or "sex friend" in JubesX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JubesX.Traits:
+    elif "ex" in JubesX.traits:
         $ approval_bonus -= 25
     if JubesX.event_counter["forced"] and not JubesX.Forced:
         $ approval_bonus -= 5*JubesX.event_counter["forced"]
@@ -580,10 +580,10 @@ label Jubes_Suck_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_suck breasts" in JubesX.recent_history else 0
 
-    $ Approval = approval_check(JubesX, 1050, TabM = 4)
+    $ approval = approval_check(JubesX, 1050, TabM = 4)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JubesX.change_face("sexy")
             $ JubesX.change_stat("obedience", 90, 1)
             $ JubesX.change_stat("obedience", 70, 2)
@@ -610,7 +610,7 @@ label Jubes_Suck_Breasts:
             "Mmm. . ."])
         ch_v "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ JubesX.change_face("bemused", 1)
         if JubesX.Forced:
             $ JubesX.change_face("sad")
@@ -658,7 +658,7 @@ label Jubes_Suck_Breasts:
                 $ JubesX.daily_history.append("no_suck breasts")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ JubesX.change_face("sexy")
                     $ JubesX.change_stat("obedience", 90, 1)
                     $ JubesX.change_stat("obedience", 50, 2)
@@ -671,8 +671,8 @@ label Jubes_Suck_Breasts:
                     ch_v "Geeze, don't whine about it. . ."
             "[[Start sucking anyway]":
 
-                $ Approval = approval_check(JubesX, 450, "OI", TabM = 3)
-                if Approval > 1 or (Approval and JubesX.Forced):
+                $ approval = approval_check(JubesX, 450, "OI", TabM = 3)
+                if approval > 1 or (approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
                     $ JubesX.change_stat("love", 20, -2, 1)
@@ -680,7 +680,7 @@ label Jubes_Suck_Breasts:
                     $ JubesX.change_stat("obedience", 90, 2)
                     $ JubesX.change_stat("obedience", 50, 4)
                     $ JubesX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JubesX.Forced = 1
                     jump Jubes_SB_Prep
                 else:
@@ -729,10 +729,10 @@ label Jubes_SB_Prep:
     if action_context == JubesX:
 
         $ action_context = 0
-        if (JubesX.top or JubesX.bra) and not JubesX.Uptop:
+        if (JubesX.top or JubesX.bra) and not JubesX.top_pulled_up:
 
             if approval_check(JubesX, 1250, TabM = 1) or (JubesX.SeenChest and approval_check(JubesX, 500) and not Taboo):
-                $ JubesX.Uptop = 1
+                $ JubesX.top_pulled_up = 1
                 $ Line = JubesX.top if JubesX.top else JubesX.bra
                 "With a hungry grin, [JubesX.name] pulls her [Line] up over her breasts."
                 call Jubes_First_Topless (1)
@@ -768,7 +768,7 @@ label Jubes_SB_Prep:
                 $ JubesX.change_stat("obedience", 50, 1)
                 $ JubesX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ JubesX.AddWord(1,"refused","refused")
+                $ JubesX.add_word(1,"refused","refused")
                 return
 
 
@@ -799,8 +799,8 @@ label Jubes_SB_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ JubesX.DrainWord("no_taboo")
-    $ JubesX.DrainWord("no_suck breasts")
+        $ JubesX.drain_word("no_taboo")
+    $ JubesX.drain_word("no_suck breasts")
     $ JubesX.recent_history.append("suck_breasts")
     $ JubesX.daily_history.append("suck_breasts")
     call Jubes_Breasts_Launch ("suck_breasts")
@@ -825,9 +825,9 @@ label Jubes_SB_Cycle:
                     $ Round -= 1
                     jump Jubes_SB_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -897,9 +897,9 @@ label Jubes_SB_Cycle:
                         "Undress [JubesX.name]":
 
                             call Girl_Undress (JubesX)
-                        "Clean up [JubesX.name] (locked)" if not JubesX.Spunk:
+                        "Clean up [JubesX.name] (locked)" if not JubesX.spunk:
                             pass
-                        "Clean up [JubesX.name]" if JubesX.Spunk:
+                        "Clean up [JubesX.name]" if JubesX.spunk:
                             call Girl_Cleanup (JubesX, "ask")
                         "Never mind":
                             jump Jubes_SB_Cycle
@@ -1017,8 +1017,8 @@ label Jubes_SB_Cycle:
         elif Round == 5:
             call Sex_Basic_Dialog (JubesX, 5)
 
-        if JubesX.lust >= 50 and not JubesX.Uptop and (JubesX.bra or JubesX.top):
-            $ JubesX.Uptop = 1
+        if JubesX.lust >= 50 and not JubesX.top_pulled_up and (JubesX.bra or JubesX.top):
+            $ JubesX.top_pulled_up = 1
             "[JubesX.name] grunts and pulls her clothes aside."
             call Jubes_First_Topless
 
@@ -1036,7 +1036,7 @@ label Jubes_SB_After:
     $ JubesX.action_counter["suck_breasts"] += 1
     $ JubesX.remaining_actions -=1
     $ JubesX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ JubesX.addiction_rate += 1
 
     if Partner == "Kitty":
@@ -1073,11 +1073,11 @@ label Jubes_Fondle_Thighs:
         $ approval_bonus -= 5
     if JubesX.lust > 75:
         $ approval_bonus += 10
-    if "exhibitionist" in JubesX.Traits:
+    if "exhibitionist" in JubesX.traits:
         $ approval_bonus += Taboo
     if JubesX in Player.Harem or "sex friend" in JubesX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JubesX.Traits:
+    elif "ex" in JubesX.traits:
         $ approval_bonus -= 25
     if JubesX.event_counter["forced"] and not JubesX.Forced:
         $ approval_bonus -= 5*JubesX.event_counter["forced"]
@@ -1091,10 +1091,10 @@ label Jubes_Fondle_Thighs:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle thighs" in JubesX.recent_history else 0
 
-    $ Approval = approval_check(JubesX, 750, TabM=1)
+    $ approval = approval_check(JubesX, 750, TabM=1)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JubesX.change_face("sexy")
             $ JubesX.change_stat("obedience", 50, 1)
             $ JubesX.change_stat("inhibition", 30, 2)
@@ -1125,7 +1125,7 @@ label Jubes_Fondle_Thighs:
         $ JubesX.change_face("sexy", 1)
         ch_v "You didn't get enough earlier?"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ JubesX.change_face("bemused", 1)
         if JubesX.Forced:
             $ JubesX.change_face("sad")
@@ -1171,7 +1171,7 @@ label Jubes_Fondle_Thighs:
                 $ JubesX.daily_history.append("no_fondle thighs")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ JubesX.change_face("sexy")
                     $ JubesX.change_stat("obedience", 60, 1)
                     $ JubesX.change_stat("obedience", 30, 2)
@@ -1184,15 +1184,15 @@ label Jubes_Fondle_Thighs:
                     ch_v "Geeze, don't whine about it. . ."
             "[[Start caressing her thigh anyway]":
 
-                $ Approval = approval_check(JubesX, 350, "OI", TabM = 2)
-                if Approval > 1 or (Approval and JubesX.Forced):
+                $ approval = approval_check(JubesX, 350, "OI", TabM = 2)
+                if approval > 1 or (approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
                     $ JubesX.change_stat("love", 20, -2, 1)
                     ch_v "Hmmph."
                     $ JubesX.change_stat("obedience", 50, 3)
                     $ JubesX.change_stat("inhibition", 60, 2)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JubesX.Forced = 1
                     jump Jubes_FT_Prep
                 else:
@@ -1266,8 +1266,8 @@ label Jubes_FT_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ JubesX.DrainWord("no_taboo")
-    $ JubesX.DrainWord("no_fondle thighs")
+        $ JubesX.drain_word("no_taboo")
+    $ JubesX.drain_word("no_fondle thighs")
     $ JubesX.recent_history.append("fondle_thighs")
     $ JubesX.daily_history.append("fondle_thighs")
     call Jubes_Pussy_Launch ("fondle_thighs")
@@ -1290,9 +1290,9 @@ label Jubes_FT_Cycle:
                     $ Round -= 1
                     jump Jubes_FT_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -1376,9 +1376,9 @@ label Jubes_FT_Cycle:
                         "Undress [JubesX.name]":
 
                             call Girl_Undress (JubesX)
-                        "Clean up [JubesX.name] (locked)" if not JubesX.Spunk:
+                        "Clean up [JubesX.name] (locked)" if not JubesX.spunk:
                             pass
-                        "Clean up [JubesX.name]" if JubesX.Spunk:
+                        "Clean up [JubesX.name]" if JubesX.spunk:
                             call Girl_Cleanup (JubesX, "ask")
                         "Never mind":
                             jump Jubes_FT_Cycle
@@ -1508,9 +1508,9 @@ label Jubes_FT_After:
 
     $ JubesX.action_counter["fondle_thighs"]+= 1
     $ JubesX.remaining_actions -=1
-    if JubesX.PantsNum() < 6 or JubesX.Upskirt:
+    if JubesX.PantsNum() < 6 or JubesX.upskirt:
         $ JubesX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ JubesX.addiction_rate += 1
 
     if JubesX.action_counter["fondle_thighs"]== 1:
@@ -1541,11 +1541,11 @@ label Jubes_Fondle_Pussy:
         $ approval_bonus += 15
     if JubesX.lust > 75 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in JubesX.Traits:
+    if "exhibitionist" in JubesX.traits:
         $ approval_bonus += (2*Taboo)
     if JubesX in Player.Harem or "sex friend" in JubesX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JubesX.Traits:
+    elif "ex" in JubesX.traits:
         $ approval_bonus -= 25
     if JubesX.event_counter["forced"] and not JubesX.Forced:
         $ approval_bonus -= 5*JubesX.event_counter["forced"]
@@ -1559,10 +1559,10 @@ label Jubes_Fondle_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle pussy" in JubesX.recent_history else 0
 
-    $ Approval = approval_check(JubesX, 1050, TabM = 2)
+    $ approval = approval_check(JubesX, 1050, TabM = 2)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JubesX.change_face("sexy")
             $ JubesX.change_stat("obedience", 90, 1)
             $ JubesX.change_stat("obedience", 70, 2)
@@ -1599,7 +1599,7 @@ label Jubes_Fondle_Pussy:
             "Mmm. . ."])
         ch_v "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ JubesX.change_face("bemused", 1)
         if JubesX.Forced:
             $ JubesX.change_face("sad")
@@ -1646,7 +1646,7 @@ label Jubes_Fondle_Pussy:
                 $ JubesX.daily_history.append("no_fondle pussy")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ JubesX.change_face("sexy")
                     $ JubesX.change_stat("obedience", 90, 2)
                     $ JubesX.change_stat("obedience", 50, 2)
@@ -1659,8 +1659,8 @@ label Jubes_Fondle_Pussy:
                     ch_v "No."
             "[[Start fondling anyway]":
 
-                $ Approval = approval_check(JubesX, 450, "OI", TabM = 2)
-                if Approval > 1 or (Approval and JubesX.Forced):
+                $ approval = approval_check(JubesX, 450, "OI", TabM = 2)
+                if approval > 1 or (approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
                     $ JubesX.change_stat("love", 200, -2)
@@ -1668,7 +1668,7 @@ label Jubes_Fondle_Pussy:
                     $ JubesX.change_stat("obedience", 50, 4)
                     $ JubesX.change_stat("inhibition", 80, 1)
                     $ JubesX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JubesX.Forced = 1
                     jump Jubes_FP_Prep
                 else:
@@ -1715,11 +1715,11 @@ label Jubes_FP_Prep:
     if action_context == JubesX:
 
         $ action_context = 0
-        if (JubesX.legs and not JubesX.Upskirt) or (JubesX.underwear and not JubesX.underwearDown):
+        if (JubesX.legs and not JubesX.upskirt) or (JubesX.underwear and not JubesX.underwear_pulled_down):
 
             if approval_check(JubesX, 1250, TabM = 1) or (JubesX.SeenPussy and approval_check(JubesX, 500) and not Taboo):
-                $ JubesX.Upskirt = 1
-                $ JubesX.underwearDown = 1
+                $ JubesX.upskirt = 1
+                $ JubesX.underwear_pulled_down = 1
                 $ Line = 0
                 if JubesX.PantsNum() == 5:
                     $ Line = JubesX.name + " hikes up her_skirt"
@@ -1771,7 +1771,7 @@ label Jubes_FP_Prep:
                 $ JubesX.change_stat("obedience", 50, 1)
                 $ JubesX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ JubesX.AddWord(1,"refused","refused")
+                $ JubesX.add_word(1,"refused","refused")
                 return
 
 
@@ -1801,8 +1801,8 @@ label Jubes_FP_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ JubesX.DrainWord("no_taboo")
-    $ JubesX.DrainWord("no_fondle pussy")
+        $ JubesX.drain_word("no_taboo")
+    $ JubesX.drain_word("no_fondle pussy")
     $ JubesX.recent_history.append("fondle_pussy")
     $ JubesX.daily_history.append("fondle_pussy")
     call Jubes_Pussy_Launch ("fondle_pussy")
@@ -1840,9 +1840,9 @@ label Jubes_FP_Cycle:
                     $ Round -= 1
                     jump Jubes_FP_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -1927,9 +1927,9 @@ label Jubes_FP_Cycle:
                         "Undress [JubesX.name]":
 
                             call Girl_Undress (JubesX)
-                        "Clean up [JubesX.name] (locked)" if not JubesX.Spunk:
+                        "Clean up [JubesX.name] (locked)" if not JubesX.spunk:
                             pass
-                        "Clean up [JubesX.name]" if JubesX.Spunk:
+                        "Clean up [JubesX.name]" if JubesX.spunk:
                             call Girl_Cleanup (JubesX, "ask")
                         "Never mind":
                             jump Jubes_FP_Cycle
@@ -2061,9 +2061,9 @@ label Jubes_FP_After:
 
     $ JubesX.action_counter["fondle_pussy"] += 1
     $ JubesX.remaining_actions -=1
-    if JubesX.PantsNum() < 6 or JubesX.Upskirt:
+    if JubesX.PantsNum() < 6 or JubesX.upskirt:
         $ JubesX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ JubesX.addiction_rate += 1
 
     call Partner_Like (JubesX, 2)
@@ -2181,11 +2181,11 @@ label Jubes_Lick_Pussy:
         $ approval_bonus += 10
     if JubesX.lust > 85 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in JubesX.Traits:
+    if "exhibitionist" in JubesX.traits:
         $ approval_bonus += (4*Taboo)
     if JubesX in Player.Harem or "sex friend" in JubesX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JubesX.Traits:
+    elif "ex" in JubesX.traits:
         $ approval_bonus -= 25
     if JubesX.event_counter["forced"] and not JubesX.Forced:
         $ approval_bonus -= 5*JubesX.event_counter["forced"]
@@ -2199,10 +2199,10 @@ label Jubes_Lick_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick pussy" in JubesX.recent_history else 0
 
-    $ Approval = approval_check(JubesX, 1250, TabM = 4)
+    $ approval = approval_check(JubesX, 1250, TabM = 4)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JubesX.change_face("surprised")
             $ JubesX.change_stat("obedience", 90, 1)
             $ JubesX.change_stat("obedience", 70, 2)
@@ -2235,7 +2235,7 @@ label Jubes_Lick_Pussy:
             "Mmm. . ."])
         ch_v "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         if JubesX.Forced:
             $ JubesX.change_face("sad")
             $ JubesX.change_stat("love", 70, -3, 1)
@@ -2289,7 +2289,7 @@ label Jubes_Lick_Pussy:
                 $ JubesX.daily_history.append("no_lick pussy")
                 return
             "I think you'd really enjoy it. . .":
-                if Approval:
+                if approval:
                     $ JubesX.change_face("sexy")
                     $ JubesX.change_stat("obedience", 90, 2)
                     $ JubesX.change_stat("obedience", 50, 2)
@@ -2302,8 +2302,8 @@ label Jubes_Lick_Pussy:
                     ch_v "I would, but still no, [JubesX.player_petname]."
             "[[Get in there anyway]":
 
-                $ Approval = approval_check(JubesX, 750, "OI", TabM = 4)
-                if Approval > 1 or (Approval and JubesX.Forced):
+                $ approval = approval_check(JubesX, 750, "OI", TabM = 4)
+                if approval > 1 or (approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
                     $ JubesX.change_stat("love", 200, -2)
@@ -2311,7 +2311,7 @@ label Jubes_Lick_Pussy:
                     $ JubesX.change_stat("obedience", 50, 4)
                     $ JubesX.change_stat("inhibition", 80, 1)
                     $ JubesX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JubesX.Forced = 1
                     jump Jubes_LP_Prep
                 else:
@@ -2359,11 +2359,11 @@ label Jubes_LP_Prep:
     if action_context == JubesX:
 
         $ action_context = 0
-        if (JubesX.legs and not JubesX.Upskirt) or (JubesX.underwear and not JubesX.underwearDown):
+        if (JubesX.legs and not JubesX.upskirt) or (JubesX.underwear and not JubesX.underwear_pulled_down):
 
             if approval_check(JubesX, 1250, TabM = 1) or (JubesX.SeenPussy and approval_check(JubesX, 500) and not Taboo):
-                $ JubesX.Upskirt = 1
-                $ JubesX.underwearDown = 1
+                $ JubesX.upskirt = 1
+                $ JubesX.underwear_pulled_down = 1
                 $ Line = 0
                 if JubesX.PantsNum() == 5:
                     $ Line = JubesX.name + " hikes up her_skirt"
@@ -2415,13 +2415,13 @@ label Jubes_LP_Prep:
                 $ JubesX.change_stat("obedience", 50, 1)
                 $ JubesX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ JubesX.AddWord(1,"refused","refused")
+                $ JubesX.add_word(1,"refused","refused")
                 return
 
 
     if not JubesX.Forced and action_context != "auto":
         $ approval_bonus = 0
-        if JubesX.PantsNum() >= 6 and not JubesX.Upskirt:
+        if JubesX.PantsNum() >= 6 and not JubesX.upskirt:
             $ approval_bonus = 15
         call Bottoms_Off (JubesX)
         if "angry" in JubesX.recent_history:
@@ -2444,15 +2444,15 @@ label Jubes_LP_Prep:
         $ action_context = 0
 
     if JubesX.PantsNum() == 5:
-        $ JubesX.Upskirt = 1
+        $ JubesX.upskirt = 1
         $ JubesX.SeenPanties = 1
     call Jubes_First_Bottomless (1)
 
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ JubesX.DrainWord("no_taboo")
-    $ JubesX.DrainWord("no_lick pussy")
+        $ JubesX.drain_word("no_taboo")
+    $ JubesX.drain_word("no_lick pussy")
     $ JubesX.recent_history.append("eat_pussy")
     $ JubesX.daily_history.append("eat_pussy")
     call Jubes_Pussy_Launch ("eat_pussy")
@@ -2477,9 +2477,9 @@ label Jubes_LP_Cycle:
                     $ Round -= 1
                     jump Jubes_LP_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -2559,9 +2559,9 @@ label Jubes_LP_Cycle:
                         "Undress [JubesX.name]":
 
                             call Girl_Undress (JubesX)
-                        "Clean up [JubesX.name] (locked)" if not JubesX.Spunk:
+                        "Clean up [JubesX.name] (locked)" if not JubesX.spunk:
                             pass
-                        "Clean up [JubesX.name]" if JubesX.Spunk:
+                        "Clean up [JubesX.name]" if JubesX.spunk:
                             call Girl_Cleanup (JubesX, "ask")
                         "Never mind":
                             jump Jubes_LP_Cycle
@@ -2696,9 +2696,9 @@ label Jubes_LP_After:
 
     $ JubesX.action_counter["eat_pussy"] += 1
     $ JubesX.remaining_actions -=1
-    if JubesX.PantsNum() < 6 or JubesX.Upskirt:
+    if JubesX.PantsNum() < 6 or JubesX.upskirt:
         $ JubesX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ JubesX.addiction_rate += 1
 
     if Partner == "Rogue":
@@ -2736,11 +2736,11 @@ label Jubes_Fondle_Ass:
         $ approval_bonus -= 5
     if JubesX.lust > 75:
         $ approval_bonus += 15
-    if "exhibitionist" in JubesX.Traits:
+    if "exhibitionist" in JubesX.traits:
         $ approval_bonus += Taboo
     if JubesX in Player.Harem or "sex friend" in JubesX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JubesX.Traits:
+    elif "ex" in JubesX.traits:
         $ approval_bonus -= 25
     if JubesX.event_counter["forced"] and not JubesX.Forced:
         $ approval_bonus -= 5*JubesX.event_counter["forced"]
@@ -2754,10 +2754,10 @@ label Jubes_Fondle_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle ass" in JubesX.recent_history else 0
 
-    $ Approval = approval_check(JubesX, 850, TabM=1)
+    $ approval = approval_check(JubesX, 850, TabM=1)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JubesX.change_face("surprised", 1)
             $ JubesX.change_stat("obedience", 70, 2)
             $ JubesX.change_stat("inhibition", 40, 2)
@@ -2793,7 +2793,7 @@ label Jubes_Fondle_Ass:
             "Mmm. . ."])
         ch_v "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         if JubesX.Forced:
             $ JubesX.change_face("sad")
             $ JubesX.change_stat("love", 70, -2, 1)
@@ -2842,7 +2842,7 @@ label Jubes_Fondle_Ass:
                 $ JubesX.daily_history.append("no_fondle ass")
                 return
             "Just one good squeeze?":
-                if Approval:
+                if approval:
                     $ JubesX.change_face("sexy")
                     $ JubesX.change_stat("obedience", 90, 1)
                     $ JubesX.change_stat("obedience", 50, 2)
@@ -2855,15 +2855,15 @@ label Jubes_Fondle_Ass:
                     ch_v "No."
             "[[Start fondling anyway]":
 
-                $ Approval = approval_check(JubesX, 250, "OI", TabM = 3)
-                if Approval > 1 or (Approval and JubesX.Forced):
+                $ approval = approval_check(JubesX, 250, "OI", TabM = 3)
+                if approval > 1 or (approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -3, 1)
                     $ JubesX.change_stat("love", 200, -1)
                     ch_v "Fine, I guess."
                     $ JubesX.change_stat("obedience", 50, 3)
                     $ JubesX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JubesX.Forced = 1
                     jump Jubes_FA_Prep
                 else:
@@ -2933,8 +2933,8 @@ label Jubes_FA_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ JubesX.DrainWord("no_taboo")
-    $ JubesX.DrainWord("no_fondle ass")
+        $ JubesX.drain_word("no_taboo")
+    $ JubesX.drain_word("no_fondle ass")
     $ JubesX.recent_history.append("fondle_ass")
     $ JubesX.daily_history.append("fondle_ass")
     call Jubes_Pussy_Launch ("fondle_ass")
@@ -2957,9 +2957,9 @@ label Jubes_FA_Cycle:
                     $ Round -= 1
                     jump Jubes_FA_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -3048,9 +3048,9 @@ label Jubes_FA_Cycle:
                         "Undress [JubesX.name]":
 
                             call Girl_Undress (JubesX)
-                        "Clean up [JubesX.name] (locked)" if not JubesX.Spunk:
+                        "Clean up [JubesX.name] (locked)" if not JubesX.spunk:
                             pass
-                        "Clean up [JubesX.name]" if JubesX.Spunk:
+                        "Clean up [JubesX.name]" if JubesX.spunk:
                             call Girl_Cleanup (JubesX, "ask")
                         "Never mind":
                             jump Jubes_FA_Cycle
@@ -3185,9 +3185,9 @@ label Jubes_FA_After:
 
     $ JubesX.action_counter["fondle_ass"] += 1
     $ JubesX.remaining_actions -=1
-    if JubesX.PantsNum() < 6 or JubesX.Upskirt:
+    if JubesX.PantsNum() < 6 or JubesX.upskirt:
         $ JubesX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ JubesX.addiction_rate += 1
 
         call Partner_Like (JubesX, 2)
@@ -3227,11 +3227,11 @@ label Jubes_Insert_Ass:
         $ approval_bonus += 10
     if JubesX.lust > 85 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in JubesX.Traits:
+    if "exhibitionist" in JubesX.traits:
         $ approval_bonus += (4*Taboo)
     if JubesX in Player.Harem or "sex friend" in JubesX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JubesX.Traits:
+    elif "ex" in JubesX.traits:
         $ approval_bonus -= 25
     if JubesX.event_counter["forced"] and not JubesX.Forced:
         $ approval_bonus -= 5*JubesX.event_counter["forced"]
@@ -3245,10 +3245,10 @@ label Jubes_Insert_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_insert ass" in JubesX.recent_history else 0
 
-    $ Approval = approval_check(JubesX, 1300, TabM = 3)
+    $ approval = approval_check(JubesX, 1300, TabM = 3)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JubesX.change_face("surprised")
             $ JubesX.change_stat("obedience", 90, 2)
             $ JubesX.change_stat("obedience", 70, 2)
@@ -3276,7 +3276,7 @@ label Jubes_Insert_Ass:
             "Mmm. . ."])
         ch_v "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         if JubesX.Forced:
             $ JubesX.change_face("sad")
             $ JubesX.change_stat("love", 70, -3, 1)
@@ -3330,7 +3330,7 @@ label Jubes_Insert_Ass:
                 $ JubesX.daily_history.append("no_insert ass")
                 return
             "I think you'd really enjoy it. . .":
-                if Approval:
+                if approval:
                     $ JubesX.change_face("sexy")
                     $ JubesX.change_stat("obedience", 90, 2)
                     $ JubesX.change_stat("obedience", 50, 2)
@@ -3343,8 +3343,8 @@ label Jubes_Insert_Ass:
                     ch_v "I really doubt that. . ."
             "[[Slide a finger in anyway]":
 
-                $ Approval = approval_check(JubesX, 950, "OI", TabM = 3)
-                if Approval > 1 or (Approval and JubesX.Forced):
+                $ approval = approval_check(JubesX, 950, "OI", TabM = 3)
+                if approval > 1 or (approval and JubesX.Forced):
                     $ JubesX.change_face("surprised", 1)
                     $ JubesX.change_stat("love", 70, -5, 1)
                     $ JubesX.change_stat("love", 200, -2)
@@ -3353,7 +3353,7 @@ label Jubes_Insert_Ass:
                     $ JubesX.change_stat("obedience", 50, 4)
                     $ JubesX.change_stat("inhibition", 80, 1)
                     $ JubesX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JubesX.Forced = 1
                     jump Jubes_IA_Prep
                 else:
@@ -3404,11 +3404,11 @@ label Jubes_IA_Prep:
     if action_context == JubesX:
 
         $ action_context = 0
-        if (JubesX.legs and not JubesX.Upskirt) or (JubesX.underwear and not JubesX.underwearDown):
+        if (JubesX.legs and not JubesX.upskirt) or (JubesX.underwear and not JubesX.underwear_pulled_down):
 
             if approval_check(JubesX, 1250, TabM = 1) or (JubesX.SeenPussy and approval_check(JubesX, 500) and not Taboo):
-                $ JubesX.Upskirt = 1
-                $ JubesX.underwearDown = 1
+                $ JubesX.upskirt = 1
+                $ JubesX.underwear_pulled_down = 1
                 $ Line = 0
                 if JubesX.PantsNum() == 5:
                     $ Line = JubesX.name + " hikes up her_skirt"
@@ -3460,7 +3460,7 @@ label Jubes_IA_Prep:
                 $ JubesX.change_stat("obedience", 50, 1)
                 $ JubesX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ JubesX.AddWord(1,"refused","refused")
+                $ JubesX.add_word(1,"refused","refused")
                 return
 
 
@@ -3491,8 +3491,8 @@ label Jubes_IA_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ JubesX.DrainWord("no_taboo")
-    $ JubesX.DrainWord("no_insert ass")
+        $ JubesX.drain_word("no_taboo")
+    $ JubesX.drain_word("no_insert ass")
     $ JubesX.recent_history.append("finger_ass")
     $ JubesX.daily_history.append("finger_ass")
     call Jubes_Pussy_Launch ("finger_ass")
@@ -3515,9 +3515,9 @@ label Jubes_IA_Cycle:
                     $ Round -= 1
                     jump Jubes_IA_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -3602,9 +3602,9 @@ label Jubes_IA_Cycle:
                         "Undress [JubesX.name]":
 
                             call Girl_Undress (JubesX)
-                        "Clean up [JubesX.name] (locked)" if not JubesX.Spunk:
+                        "Clean up [JubesX.name] (locked)" if not JubesX.spunk:
                             pass
-                        "Clean up [JubesX.name]" if JubesX.Spunk:
+                        "Clean up [JubesX.name]" if JubesX.spunk:
                             call Girl_Cleanup (JubesX, "ask")
                         "Never mind":
                             jump Jubes_IA_Cycle
@@ -3739,7 +3739,7 @@ label Jubes_IA_After:
     $ JubesX.action_counter["finger_ass"] += 1
     $ JubesX.remaining_actions -=1
     $ JubesX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ JubesX.addiction_rate += 1
 
     call Partner_Like (JubesX, 2)
@@ -3782,11 +3782,11 @@ label Jubes_Lick_Ass:
         $ approval_bonus += 10
     if action_context == "shift":
         $ approval_bonus += 10
-    if "exhibitionist" in JubesX.Traits:
+    if "exhibitionist" in JubesX.traits:
         $ approval_bonus += (4*Taboo)
     if JubesX in Player.Harem or "sex friend" in JubesX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JubesX.Traits:
+    elif "ex" in JubesX.traits:
         $ approval_bonus -= 25
     if JubesX.event_counter["forced"] and not JubesX.Forced:
         $ approval_bonus -= 5*JubesX.event_counter["forced"]
@@ -3800,10 +3800,10 @@ label Jubes_Lick_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick ass" in JubesX.recent_history else 0
 
-    $ Approval = approval_check(JubesX, 1550, TabM = 4)
+    $ approval = approval_check(JubesX, 1550, TabM = 4)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JubesX.change_face("surprised")
             $ JubesX.change_stat("obedience", 90, 1)
             $ JubesX.change_stat("inhibition", 80, 3)
@@ -3829,7 +3829,7 @@ label Jubes_Lick_Ass:
         ch_v "You didn't get enough earlier?"
 
 
-    if Approval >= 2:
+    if approval >= 2:
         if JubesX.Forced:
             $ JubesX.change_face("sad")
             $ JubesX.change_stat("love", 70, -3, 1)
@@ -3889,7 +3889,7 @@ label Jubes_Lick_Ass:
                 $ JubesX.daily_history.append("no_lick ass")
                 return
             "I think you'd really enjoy it. . .":
-                if Approval:
+                if approval:
                     $ JubesX.change_face("sexy")
                     $ JubesX.change_stat("obedience", 90, 2)
                     $ JubesX.change_stat("obedience", 50, 2)
@@ -3902,8 +3902,8 @@ label Jubes_Lick_Ass:
                     ch_v "Doubt."
             "[[Start licking anyway]":
 
-                $ Approval = approval_check(JubesX, 1100, "OI", TabM = 4)
-                if Approval > 1 or (Approval and JubesX.Forced):
+                $ approval = approval_check(JubesX, 1100, "OI", TabM = 4)
+                if approval > 1 or (approval and JubesX.Forced):
                     $ JubesX.change_face("sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
                     $ JubesX.change_stat("love", 200, -2)
@@ -3911,7 +3911,7 @@ label Jubes_Lick_Ass:
                     $ JubesX.change_stat("obedience", 50, 4)
                     $ JubesX.change_stat("inhibition", 80, 1)
                     $ JubesX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JubesX.Forced = 1
                     jump Jubes_LA_Prep
                 else:
@@ -3980,7 +3980,7 @@ label Jubes_LA_Prep:
         $ renpy.pop_call()
         $ action_context = 0
 
-    $ JubesX.Upskirt = 1
+    $ JubesX.upskirt = 1
     if JubesX.PantsNum() == 5:
         $ JubesX.SeenPanties = 1
     if not JubesX.underwear:
@@ -3988,8 +3988,8 @@ label Jubes_LA_Prep:
     $ Line = 0
     $ counter = 0
     if Taboo:
-        $ JubesX.DrainWord("no_taboo")
-    $ JubesX.DrainWord("no_lick ass")
+        $ JubesX.drain_word("no_taboo")
+    $ JubesX.drain_word("no_lick ass")
 
     $ JubesX.recent_history.append("lick") if "lick" not in JubesX.recent_history else JubesX.recent_history
     $ JubesX.recent_history.append("ass") if "ass" not in JubesX.recent_history else JubesX.recent_history
@@ -4019,9 +4019,9 @@ label Jubes_LA_Cycle:
                     $ Round -= 1
                     jump Jubes_LA_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -4106,9 +4106,9 @@ label Jubes_LA_Cycle:
                         "Undress [JubesX.name]":
 
                             call Girl_Undress (JubesX)
-                        "Clean up [JubesX.name] (locked)" if not JubesX.Spunk:
+                        "Clean up [JubesX.name] (locked)" if not JubesX.spunk:
                             pass
-                        "Clean up [JubesX.name]" if JubesX.Spunk:
+                        "Clean up [JubesX.name]" if JubesX.spunk:
                             call Girl_Cleanup (JubesX, "ask")
                         "Never mind":
                             jump Jubes_LA_Cycle
@@ -4242,9 +4242,9 @@ label Jubes_LA_After:
 
     $ JubesX.action_counter["eat_ass"] += 1
     $ JubesX.remaining_actions -=1
-    if JubesX.PantsNum() < 6 or JubesX.Upskirt:
+    if JubesX.PantsNum() < 6 or JubesX.upskirt:
         $ JubesX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ JubesX.addiction_rate += 1
 
     call Partner_Like (JubesX, 2)

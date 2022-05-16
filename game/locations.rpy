@@ -70,11 +70,11 @@ label Worldmap:
 label Misplaced:
     if primary_action and primary_action in all_Girls:
 
-        call expression primary_action.Tag + "_SexMenu"
+        call expression primary_action.tag + "_SexMenu"
 
 
     scene onlayer black
-    $ Player.DrainWord("locked",0,0,1)
+    $ Player.drain_word("locked",0,0,1)
     $ StackDepth = renpy.call_stack_depth()
     while StackDepth > 0:
         $ StackDepth -= 1
@@ -117,7 +117,7 @@ label Misplaced:
 
 label Player_Room_Entry:
 
-    $ Player.DrainWord("locked",0,0,1)
+    $ Player.drain_word("locked",0,0,1)
     $ bg_current = "bg_player"
     call Gym_Clothes_Off
     $ Player.recent_history.append("traveling")
@@ -129,7 +129,7 @@ label Player_Room_Entry:
 
 label Player_Room:
     $ bg_current = "bg_player"
-    $ Player.DrainWord("traveling",1,0)
+    $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
@@ -149,14 +149,14 @@ label Player_Room:
 
             call Study_Session
 
-        "Lock the door" if "locked" not in Player.Traits:
+        "Lock the door" if "locked" not in Player.traits:
             "You lock the door"
-            $ Player.Traits.append("locked")
+            $ Player.traits.append("locked")
             call Taboo_Level
 
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if "locked" in Player.traits:
             "You unlock the door"
-            $ Player.Traits.remove("locked")
+            $ Player.traits.remove("locked")
             call Taboo_Level
 
 
@@ -219,7 +219,7 @@ label Campus_Map:
     $ second_girl_primary_action = 0
     $ second_girl_offhand_action = 0
     $ bg_current = "bg_campus"
-    $ Player.DrainWord("locked",0,0,1)
+    $ Player.drain_word("locked",0,0,1)
     call set_the_scene
     if not TravelMode:
         call Worldmap
@@ -227,7 +227,7 @@ label Campus_Map:
 
 label Campus_Entry:
     call Jubes_Entry_Check
-    $ Player.DrainWord("locked",0,0,1)
+    $ Player.drain_word("locked",0,0,1)
     $ bg_current = "bg_campus"
     $ Nearby = []
     call Gym_Clothes_Off
@@ -238,7 +238,7 @@ label Campus_Entry:
 
 label Campus:
     $ bg_current = "bg_campus"
-    $ Player.DrainWord("traveling",1,0)
+    $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
@@ -327,7 +327,7 @@ label Campus:
 
 label Class_Room_Entry:
     call Jubes_Entry_Check
-    $ Player.DrainWord("locked",0,0,1)
+    $ Player.drain_word("locked",0,0,1)
     $ Present = []
     $ bg_current = "bg_classroom"
     $ Nearby = []
@@ -345,8 +345,8 @@ label Class_Room:
         $ Present = []
         if time_index < 2 and Weekday < 5:
             call Class_Room_Seating
-        $ Player.DrainWord("goto",1,0)
-        $ Player.DrainWord("traveling",1,0)
+        $ Player.drain_word("goto",1,0)
+        $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
@@ -394,17 +394,17 @@ label Class_Room:
             call Chat
             $ Line = "You are in class right now. What would you like to do?"
 
-        "Lock the door" if "locked" not in Player.Traits:
+        "Lock the door" if "locked" not in Player.traits:
             if Weekday >=5 or time_index >= 2:
                 "You lock the door"
-                $ Player.Traits.append("locked")
+                $ Player.traits.append("locked")
                 call Taboo_Level
             else:
                 "You can't really do that during class."
 
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if "locked" in Player.traits:
             "You unlock the door"
-            $ Player.Traits.remove("locked")
+            $ Player.traits.remove("locked")
             call Taboo_Level
 
         "Wait" if time_index < 3:
@@ -618,7 +618,7 @@ label Class_Room_Seating(Girls=[], GirlB=0, GirlLike=0, Line=0, D20=0, BO=[]):
 
 label Danger_Room_Entry:
     call Jubes_Entry_Check
-    $ Player.DrainWord("locked",0,0,1)
+    $ Player.drain_word("locked",0,0,1)
     $ bg_current = "bg_dangerroom"
     $ Nearby = []
     call Taboo_Level
@@ -630,7 +630,7 @@ label Danger_Room_Entry:
 
 label Danger_Room:
     $ bg_current = "bg_dangerroom"
-    $ Player.DrainWord("traveling",1,0)
+    $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
@@ -666,17 +666,17 @@ label Danger_Room:
             ch_danger "Unfortunately, this function is temporarily disabled."
 
 
-        "Lock the door" if "locked" not in Player.Traits:
+        "Lock the door" if "locked" not in Player.traits:
             if time_index >= 3:
                 "You lock the door"
-                $ Player.Traits.append("locked")
+                $ Player.traits.append("locked")
                 call Taboo_Level
             else:
                 "You can't really do that during free hours."
 
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if "locked" in Player.traits:
             "You unlock the door"
-            $ Player.Traits.remove("locked")
+            $ Player.traits.remove("locked")
             call Taboo_Level
 
         "Wait. (locked)" if time_index >= 3:
@@ -766,7 +766,7 @@ label Rogue_TightsRipped(Count=0):
         $ Count = 1
         $ RogueX.hose = "ripped_tights"
         $ RogueX.change_face("angry")
-        if "ripped_tights" in RogueX.Inventory:
+        if "ripped_tights" in RogueX.inventory:
             ch_r "Damnation, that's another pair ruined!"
         else:
             $ Count = 2
@@ -775,7 +775,7 @@ label Rogue_TightsRipped(Count=0):
         $ Count = 1
         $ RogueX.hose = "ripped_pantyhose"
         $ RogueX.change_face("angry")
-        if "ripped_pantyhose" in RogueX.Inventory:
+        if "ripped_pantyhose" in RogueX.inventory:
             ch_r "Tsk, another pair ruined!"
         else:
             $ Count = 2
@@ -803,7 +803,7 @@ label Rogue_TightsRipped(Count=0):
                 extend ""
                 "I think those look really good on you.":
                     $ RogueX.change_face("smile", 1)
-                    $ RogueX.Inventory.append(RogueX.hose)
+                    $ RogueX.inventory.append(RogueX.hose)
                     ch_r "You think so? That's sweet, maybe I'll keep them on hand."
                 "Yeah, too bad.":
                     $ RogueX.change_face("bemused")
@@ -827,7 +827,7 @@ label Rogue_TightsRipped(Count=0):
 
 label Pool_Entry:
     call Jubes_Entry_Check
-    $ Player.DrainWord("locked",0,0,1)
+    $ Player.drain_word("locked",0,0,1)
     $ bg_current = "bg_pool"
     $ Nearby = []
     call Taboo_Level
@@ -840,7 +840,7 @@ label Pool_Entry:
 
 label Pool_Room:
     $ bg_current = "bg_pool"
-    $ Player.DrainWord("traveling",1,0)
+    $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Quiet=1, Dress=0)
     call QuickEvents
@@ -997,9 +997,9 @@ label ShowPool(BO=[], PoolLoc=0):
 
     while BO:
         if BO[0].location == bg_current:
-            $ BO[0].AddWord(0,"swim","swim",0,0)
+            $ BO[0].add_word(0,"swim","swim",0,0)
             $ BO[0].Water = 1
-            $ BO[0].Spunk = []
+            $ BO[0].spunk = []
             $ PoolLoc = 500 if len(BO) > 1 else 650
             if BO[0] == RogueX:
                 show Rogue_Sprite zorder 50 at Pool_Bob(PoolLoc)
@@ -1052,7 +1052,7 @@ transform Pool_Bob(PoolLoc=500):
 label Shower_Room_Entry:
     call Jubes_Entry_Check
     $ bg_current = "bg_showerroom"
-    $ Player.DrainWord("locked",0,0,1)
+    $ Player.drain_word("locked",0,0,1)
     $ Nearby = []
     $ Present = []
     call Taboo_Level
@@ -1096,7 +1096,7 @@ label Shower_Room_Entry:
             call Girl_Caught_Shower (Options[0])
             jump Shower_Room
         elif D20 > 13:
-            $ Options[0].AddWord(1,"showered","showered",0,0)
+            $ Options[0].add_word(1,"showered","showered",0,0)
             call Girl_Caught_Changing (Options[0])
             jump Shower_Room
 
@@ -1116,7 +1116,7 @@ label Shower_Room_Entry:
 
         if Line[0].location == bg_current and Line[0] not in Party:
             if D20 >= 10:
-                $ Line[0].AddWord(1,"showered","showered",0,0)
+                $ Line[0].add_word(1,"showered","showered",0,0)
             $ Line[0].change_outfit("towel")
         $ Line.remove(Line[0])
     $ Line = 0
@@ -1260,7 +1260,7 @@ label Shower_Room_Entry:
 
 label Shower_Room:
     $ bg_current = "bg_showerroom"
-    $ Player.DrainWord("traveling",1,0)
+    $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Dress=0)
     call QuickEvents
@@ -1379,7 +1379,7 @@ label No_Towels:
     while BO:
 
         if BO[0].location == "bg_showerroom":
-            $ BO[0].AddWord(1,"showered","showered")
+            $ BO[0].add_word(1,"showered","showered")
         if "met" in BO[0].history and BO[0] not in Party:
             $ BO[0].location = BO[0].Schedule[Weekday][time_index]
         $ BO[0].change_outfit(BO[0].OutfitDay)
@@ -1934,11 +1934,11 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
 
                     $ BO[0].change_outfit("nude")
                     $ BO[0].Water = 1
-                    $ BO[0].Spunk = []
+                    $ BO[0].spunk = []
                     $ BO[0].recent_history.append("showered")
                     $ BO[0].daily_history.append("showered")
-                    call expression BO[0].Tag + "_First_Bottomless" pass (1)
-                    call expression BO[0].Tag + "_First_Topless" pass (1)
+                    call expression BO[0].tag + "_First_Bottomless" pass (1)
+                    call expression BO[0].tag + "_First_Topless" pass (1)
                 else:
 
                     call Remove_Girl (BO[0])
@@ -2091,11 +2091,11 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
 
                 $ BO[0].change_outfit("nude")
                 $ BO[0].Water = 1
-                $ BO[0].Spunk = []
+                $ BO[0].spunk = []
                 $ BO[0].recent_history.append("showered")
                 $ BO[0].daily_history.append("showered")
-                call expression BO[0].Tag + "_First_Bottomless" pass (1)
-                call expression BO[0].Tag + "_First_Topless" pass (1)
+                call expression BO[0].tag + "_First_Bottomless" pass (1)
+                call expression BO[0].tag + "_First_Topless" pass (1)
                 if BO[0] == RogueX:
                     ch_r "I wouldn't mind stick'in around though."
                 elif BO[0] == KittyX:
@@ -2280,7 +2280,7 @@ label Shower_Sex(Options=0, Line=0):
                 pass
             "Stop her." if len(StayCount) < 2:
                 $ Line = 0
-                call expression StayCount[0].Tag + "_Pos_Reset"
+                call expression StayCount[0].tag + "_Pos_Reset"
                 "You take a step back, pulling away from her."
                 $ StayCount[0].change_stat("love", 80, -1)
                 $ StayCount[0].change_stat("obedience", 80, 5)
@@ -2289,8 +2289,8 @@ label Shower_Sex(Options=0, Line=0):
                 "She seems a bit disappointed."
             "Stop them." if len(StayCount) > 1:
                 $ Line = 0
-                call expression StayCount[1].Tag + "_Pos_Reset"
-                call expression StayCount[0].Tag + "_Pos_Reset"
+                call expression StayCount[1].tag + "_Pos_Reset"
+                call expression StayCount[0].tag + "_Pos_Reset"
                 "You take a step back, pulling away from them."
                 $ StayCount[0].change_stat("love", 80, -1)
                 $ StayCount[0].change_stat("obedience", 80, 5)
@@ -2498,7 +2498,7 @@ label Shower_Sex(Options=0, Line=0):
                 pass
             "Stop her." if len(StayCount) < 2:
                 $ Line = 0
-                call expression StayCount[0].Tag + "_Pos_Reset"
+                call expression StayCount[0].tag + "_Pos_Reset"
                 "You take a step back, pulling away from her."
                 $ StayCount[0].change_stat("love", 80, -2)
                 $ StayCount[0].change_stat("obedience", 80, 5)
@@ -2507,8 +2507,8 @@ label Shower_Sex(Options=0, Line=0):
                 "She seems a bit disappointed."
             "Stop them." if len(StayCount) > 1:
                 $ Line = 0
-                call expression StayCount[1].Tag + "_Pos_Reset"
-                call expression StayCount[0].Tag + "_Pos_Reset"
+                call expression StayCount[1].tag + "_Pos_Reset"
+                call expression StayCount[0].tag + "_Pos_Reset"
                 "You take a step back, pulling away from them."
                 $ StayCount[0].change_face("sad")
                 $ StayCount[0].change_stat("love", 80, -2)
@@ -2548,16 +2548,16 @@ label Shower_Sex(Options=0, Line=0):
                 call Girl_Cumming (StayCount[0], 1)
             if len(StayCount) > 1:
                 "The girls take a step back."
-                call expression StayCount[1].Tag + "_Pos_Reset"
+                call expression StayCount[1].tag + "_Pos_Reset"
             else:
                 "[StayCount[0].name] takes a step back."
-            call expression StayCount[0].Tag + "_Pos_Reset"
+            call expression StayCount[0].tag + "_Pos_Reset"
 
         elif 4 <= Options[0] <= 5 and D20 >= 10:
 
             $ Player.focus = 15
             if Options[0] == 5:
-                $ StayCount[0].Spunk.append("tits")
+                $ StayCount[0].spunk.append("tits")
 
             if Line == 4:
                 $ StayCount[0].change_stat("inhibition", 90, 7)
@@ -2570,13 +2570,13 @@ label Shower_Sex(Options=0, Line=0):
                 "After a few minutes of this, she manages to get you off."
             "A little more work is needed to clean up the mess."
             if Options[0] == 5:
-                $ StayCount[0].Spunk = []
+                $ StayCount[0].spunk = []
             if len(StayCount) > 1:
                 "The girls take a step back."
-                call expression StayCount[1].Tag + "_Pos_Reset"
+                call expression StayCount[1].tag + "_Pos_Reset"
             else:
                 "[StayCount[0].name] takes a step back."
-            call expression StayCount[0].Tag + "_Pos_Reset"
+            call expression StayCount[0].tag + "_Pos_Reset"
 
         elif 6 <= Options[0] <= 7 and D20 >= 15:
 
@@ -2593,15 +2593,15 @@ label Shower_Sex(Options=0, Line=0):
             if len(StayCount) > 1:
                 $ StayCount[1].GLG(StayCount[0],900,3,1)
                 "The girls take a step back."
-                call expression StayCount[1].Tag + "_Pos_Reset"
+                call expression StayCount[1].tag + "_Pos_Reset"
             else:
                 "[StayCount[0].name] takes a step back."
-            call expression StayCount[0].Tag + "_Pos_Reset"
+            call expression StayCount[0].tag + "_Pos_Reset"
         else:
 
             if len(StayCount) > 1:
-                call expression StayCount[1].Tag + "_Pos_Reset"
-            call expression StayCount[0].Tag + "_Pos_Reset"
+                call expression StayCount[1].tag + "_Pos_Reset"
+            call expression StayCount[0].tag + "_Pos_Reset"
             $ Player.change_stat("focus", 50, 15)
             $ Player.change_stat("focus", 80, 5)
             if D20 >= 15:
@@ -2627,7 +2627,7 @@ label Shower_Sex(Options=0, Line=0):
 
 label Study_Room_Entry:
     call Jubes_Entry_Check
-    $ Player.DrainWord("locked",0,0,1)
+    $ Player.drain_word("locked",0,0,1)
     $ Nearby = []
     $ bg_current = "bg_study"
     call Gym_Clothes_Off
@@ -2670,7 +2670,7 @@ label Study_Room_Entry:
             menu:
                 extend ""
                 "Could you phase through the door and open it for me?":
-                    if "Sneakthief" in KittyX.Traits:
+                    if "Sneakthief" in KittyX.traits:
                         ch_k "No problem. . ."
                         jump Study_Room
                     elif "no_thief" in KittyX.recent_history:
@@ -2680,7 +2680,7 @@ label Study_Room_Entry:
                         $ KittyX.change_stat("obedience", 50, 10)
                         $ KittyX.change_stat("inhibition", 60, 10)
                         ch_k "Heh, you have a wicked mind. . ."
-                        $ KittyX.Traits.append("Sneakthief")
+                        $ KittyX.traits.append("Sneakthief")
                         jump Study_Room
                     else:
                         $ KittyX.change_stat("love", 90, -3)
@@ -2689,7 +2689,7 @@ label Study_Room_Entry:
                         ch_k "Um, I don't really feel comfortable doing that. . ."
                         $ KittyX.recent_history.append("no_thief")
                 "Open the door.":
-                    if "Sneakthief" in KittyX.Traits:
+                    if "Sneakthief" in KittyX.traits:
                         ch_k "No problem. . ."
                         jump Study_Room
                     elif "no_thief" in KittyX.recent_history:
@@ -2698,7 +2698,7 @@ label Study_Room_Entry:
                         $ KittyX.change_stat("obedience", 50, 15)
                         $ KittyX.change_stat("inhibition", 60, 10)
                         ch_k "Heh, if you say so. . ."
-                        $ KittyX.Traits.append("Sneakthief")
+                        $ KittyX.traits.append("Sneakthief")
                         jump Study_Room
                     else:
                         $ KittyX.change_stat("love", 90, -5)
@@ -2715,7 +2715,7 @@ label Study_Room_Entry:
         while True:
             menu:
                 extend ""
-                "Do you think you could pick that lock?" if "Sneakthief" not in StormX.Traits:
+                "Do you think you could pick that lock?" if "Sneakthief" not in StormX.traits:
                     if "no_thief" in StormX.recent_history:
                         ch_s "I told you, I won't do that."
                     elif approval_check(StormX, 400, "I") or approval_check(StormX, 1400):
@@ -2727,7 +2727,7 @@ label Study_Room_Entry:
                         "She pulls some picks from behind her ear."
                         ch_s "Ok, we've got a click on 1. . . 2 is binding. . ."
                         ch_s "Click on 3. . . 4. . . click on 5, back to 2. . . and we're in."
-                        $ StormX.Traits.append("Sneakthief")
+                        $ StormX.traits.append("Sneakthief")
                         $ StormX.change_face("normal")
                         jump Study_Room
                     else:
@@ -2736,7 +2736,7 @@ label Study_Room_Entry:
                         $ StormX.change_stat("inhibition", 60, 2)
                         ch_s "I don't think that's really appropriate behavior. . ."
                         $ StormX.recent_history.append("no_thief")
-                "Could you pick the lock again?" if "Sneakthief" in StormX.Traits:
+                "Could you pick the lock again?" if "Sneakthief" in StormX.traits:
                     ch_s "No problem. . ."
                     jump Study_Room
                 "Never mind. [[Leave]":
@@ -2750,7 +2750,7 @@ label Study_Room_Entry:
 
 label Study_Room:
     $ bg_current = "bg_study"
-    $ Player.DrainWord("traveling",1,0)
+    $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
@@ -2776,43 +2776,43 @@ label Study_Room:
         "Chat" if time_index >= 3:
             call Chat
 
-        "Plan Omega!" if time_index < 3 and RogueX.location == bg_current and Player.Lvl >= 5:
+        "Plan Omega!" if time_index < 3 and RogueX.location == bg_current and Player.level >= 5:
             if approval_check(RogueX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (RogueX)
             else:
                 ch_r "I don't want to do that. . ."
-        "Plan Kappa!" if time_index < 3 and KittyX.location == bg_current and Player.Lvl >= 5:
-            if "Xavier's photo" in Player.Inventory and approval_check(KittyX, 1500, TabM=1, Loc="No"):
+        "Plan Kappa!" if time_index < 3 and KittyX.location == bg_current and Player.level >= 5:
+            if "Xavier's photo" in Player.inventory and approval_check(KittyX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (KittyX)
-            elif "Xavier's photo" in Player.Inventory:
+            elif "Xavier's photo" in Player.inventory:
                 ch_k "I don't really want to do that. . ."
             else:
                 ch_k "What?"
-        "Plan Psi!" if time_index < 3 and EmmaX.location == bg_current and Player.Lvl >= 5:
+        "Plan Psi!" if time_index < 3 and EmmaX.location == bg_current and Player.level >= 5:
             if approval_check(EmmaX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (EmmaX)
             else:
                 ch_e "I'd rather not. . ."
-        "Plan Chi!" if time_index < 3 and LauraX.location == bg_current and Player.Lvl >= 5:
-            if LauraX.Lvl >= 2 and approval_check(LauraX, 1500, TabM=1, Loc="No") and approval_check(LauraX, 750, "I"):
+        "Plan Chi!" if time_index < 3 and LauraX.location == bg_current and Player.level >= 5:
+            if LauraX.level >= 2 and approval_check(LauraX, 1500, TabM=1, Loc="No") and approval_check(LauraX, 750, "I"):
                 call Xavier_Plan (LauraX)
-            elif LauraX.Lvl < 2 or not approval_check(LauraX, 750, "I"):
+            elif LauraX.level < 2 or not approval_check(LauraX, 750, "I"):
                 ch_l "I'm not ready for that."
             else:
                 ch_l "Huh?"
-        "Plan Alpha!" if time_index < 3 and JeanX.location == bg_current and Player.Lvl >= 5:
+        "Plan Alpha!" if time_index < 3 and JeanX.location == bg_current and Player.level >= 5:
             if approval_check(JeanX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (JeanX)
             else:
                 ch_j "You're on your own there."
-        "Plan Rho!" if time_index < 3 and StormX.location == bg_current and Player.Lvl >= 5:
-            if "Xavier's files" in Player.Inventory and approval_check(StormX, 1500, TabM=1, Loc="No"):
+        "Plan Rho!" if time_index < 3 and StormX.location == bg_current and Player.level >= 5:
+            if "Xavier's files" in Player.inventory and approval_check(StormX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (StormX)
-            elif "Xavier's files" in Player.Inventory:
+            elif "Xavier's files" in Player.inventory:
                 ch_s "I do not believe that would be approrpriate."
             else:
                 ch_s "What is that?"
-        "Plan Zeta!" if time_index < 3 and JubesX.location == bg_current and Player.Lvl >= 5:
+        "Plan Zeta!" if time_index < 3 and JubesX.location == bg_current and Player.level >= 5:
             if approval_check(JubesX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan (JubesX)
             else:
@@ -2901,7 +2901,7 @@ label Study_Room_Explore:
                                 ch_k "Sounds like a plan."
                                 "[KittyX.name] swipes her hand through the box, and pulls out a stack of bills."
                                 "Looks like Xavier was hiding a rainy day fund in here."
-                                $ Player.Cash += 500
+                                $ Player.cash += 500
                                 "[[$500 acquired.]"
                                 $ Achievements.append("Well Studied")
                             else:
@@ -2924,7 +2924,7 @@ label Study_Room_Explore:
                                 ch_s "I suppose I could. . ."
                                 "[StormX.name] picks the lock on the box, and pulls out a stack of bills."
                                 "Looks like Charles had some money set aside. . ."
-                                $ Player.Cash += 500
+                                $ Player.cash += 500
                                 "[[$500 acquired.]"
                                 $ Achievements.append("Well Studied")
                             else:
@@ -2945,7 +2945,7 @@ label Study_Room_Explore:
             "You search through the books for a few minutes, but don't find anything."
             "It would probably take a more thorough search."
     elif Line == "left":
-        if "Xavier's photo" not in Player.Inventory:
+        if "Xavier's photo" not in Player.inventory:
             if D20 >= 10:
                 "Buried under a pile of documents, you find a printed out photo."
                 "It appears to be a selfie of Mystique making out with Xavier."
@@ -2954,7 +2954,7 @@ label Study_Room_Explore:
                     ch_s "You should probably put that back, it looks personal."
                 else:
                     "[[Xavier's photo acquired.]"
-                    $ Player.Inventory.append("Xavier's photo")
+                    $ Player.inventory.append("Xavier's photo")
                     if "kappa" in Player.history:
                         $ Player.history.remove("kappa")
             else:
@@ -2988,7 +2988,7 @@ label Study_Room_Explore:
             "There doesn't seem to be anything interesting in here."
     elif Line == "right":
         "There doesn't seem to be anything more of interest in here, maybe later?"
-        if "Xavier's files" not in Player.Inventory:
+        if "Xavier's files" not in Player.inventory:
             if D20 >= 10:
                 "You search through some documents, but don't find anything."
                 if StormX.location == bg_current:
@@ -3004,7 +3004,7 @@ label Study_Room_Explore:
                     ch_s "Well, I don't think Charles should be holding information like this. . ."
                     $ StormX.change_face("normal",1)
                     "[[Xavier's files acquired.]"
-                    $ Player.Inventory.append("Xavier's files")
+                    $ Player.inventory.append("Xavier's files")
                     if "rho" in Player.history:
                         $ Player.history.remove("rho")
             else:
@@ -3059,7 +3059,7 @@ label Girls_Room_Entry(Chr=0):
 
     if Chr not in all_Girls:
         return
-    $ Player.DrainWord("locked",0,0,1)
+    $ Player.drain_word("locked",0,0,1)
     call shift_focus (Chr)
     $ bg_current = Chr.home
     $ Nearby = []
@@ -3143,14 +3143,14 @@ label Girls_Room_Entry(Chr=0):
             elif Chr == JubesX:
                 ch_v "Have a seat or whatever. . ."
         call EventCalls
-        jump expression Chr.Tag + "_Room"
+        jump expression Chr.tag + "_Room"
 
 
 
     if Round >= 10 and Chr.location == bg_current and "les" in Chr.recent_history:
         call Girls_Caught_Lesing (Chr)
         if not _return:
-            jump expression Chr.Tag + "_Room"
+            jump expression Chr.tag + "_Room"
 
     if bg_current == KittyX.home and "dress2" in LauraX.history and not Party:
 
@@ -3203,7 +3203,7 @@ label Girls_Room_Entry(Chr=0):
                 elif D20 >=15 and (time_index >= 3 or time_index == 0):
 
                     call Girl_Caught_Changing (Chr)
-                    jump expression Chr.Tag + "_Room"
+                    jump expression Chr.tag + "_Room"
         else:
 
 
@@ -3217,7 +3217,7 @@ label Girls_Room_Entry(Chr=0):
                         "Go in and wait for her?"
                         "Yes":
                             $ Line = 0
-                            jump expression Chr.Tag + "_Room"
+                            jump expression Chr.tag + "_Room"
                         "No":
                             pass
                 "You head back."
@@ -3306,7 +3306,7 @@ label Girls_Room_Entry(Chr=0):
                     "Go in and wait for her?"
                     "Yes":
                         $ Line = 0
-                        jump expression Chr.Tag + "_Room"
+                        jump expression Chr.tag + "_Room"
                     "No":
                         pass
             "You head back."
@@ -3470,7 +3470,7 @@ label Girls_Room_Entry(Chr=0):
 
 label Rogue_Room:
     $ bg_current = "bg_rogue"
-    $ Player.DrainWord("traveling",1,0)
+    $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
@@ -3495,17 +3495,17 @@ label Rogue_Room:
 
             call Study_Session
 
-        "Lock the door" if "locked" not in Player.Traits:
+        "Lock the door" if "locked" not in Player.traits:
             if RogueX.location == bg_current and not approval_check(RogueX, 1000):
                 ch_r "Hey, could you maybe keep that open, [RogueX.player_petname]?"
             else:
                 "You lock the door"
-                $ Player.Traits.append("locked")
+                $ Player.traits.append("locked")
                 call Taboo_Level
 
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if "locked" in Player.traits:
             "You unlock the door"
-            $ Player.Traits.remove("locked")
+            $ Player.traits.remove("locked")
             call Taboo_Level
 
         "Sleep." if time_index >= 3:
@@ -3561,7 +3561,7 @@ label Rogue_Room:
 
 label Kitty_Room:
     $ bg_current = "bg_kitty"
-    $ Player.DrainWord("traveling",1,0)
+    $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
@@ -3586,17 +3586,17 @@ label Kitty_Room:
 
             call Study_Session
 
-        "Lock the door" if "locked" not in Player.Traits:
+        "Lock the door" if "locked" not in Player.traits:
             if KittyX.location == bg_current and not approval_check(KittyX, 1000):
                 ch_k "Um, I'd[KittyX.like]rather you didn't lock my door, [KittyX.player_petname]?"
             else:
                 "You lock the door"
-                $ Player.Traits.append("locked")
+                $ Player.traits.append("locked")
                 call Taboo_Level
 
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if "locked" in Player.traits:
             "You unlock the door"
-            $ Player.Traits.remove("locked")
+            $ Player.traits.remove("locked")
             call Taboo_Level
 
         "Sleep." if time_index >= 3:
@@ -3652,7 +3652,7 @@ label Kitty_Room:
 
 label Emma_Room:
     $ bg_current = "bg_emma"
-    $ Player.DrainWord("traveling",1,0)
+    $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
@@ -3677,17 +3677,17 @@ label Emma_Room:
 
             call Study_Session
 
-        "Lock the door" if "locked" not in Player.Traits:
+        "Lock the door" if "locked" not in Player.traits:
             if EmmaX.location == bg_current and not approval_check(EmmaX, 1000):
                 ch_e "Do you really think it's appropriate for you to lock the door to my room?"
             else:
                 "You lock the door"
-                $ Player.Traits.append("locked")
+                $ Player.traits.append("locked")
                 call Taboo_Level
 
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if "locked" in Player.traits:
             "You unlock the door"
-            $ Player.Traits.remove("locked")
+            $ Player.traits.remove("locked")
             call Taboo_Level
 
         "Sleep." if time_index >= 3 and EmmaX.location == bg_current:
@@ -3743,7 +3743,7 @@ label Emma_Room:
 
 label Laura_Room:
     $ bg_current = "bg_laura"
-    $ Player.DrainWord("traveling",1,0)
+    $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
@@ -3768,17 +3768,17 @@ label Laura_Room:
 
             call Study_Session
 
-        "Lock the door" if "locked" not in Player.Traits:
+        "Lock the door" if "locked" not in Player.traits:
             if LauraX.location == bg_current and not approval_check(LauraX, 1200):
                 ch_l "I don't want to feel caged up like that, [LauraX.player_petname]."
             else:
                 "You lock the door"
-                $ Player.Traits.append("locked")
+                $ Player.traits.append("locked")
                 call Taboo_Level
 
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if "locked" in Player.traits:
             "You unlock the door"
-            $ Player.Traits.remove("locked")
+            $ Player.traits.remove("locked")
             call Taboo_Level
 
         "Sleep." if time_index >= 3:
@@ -3832,7 +3832,7 @@ label Laura_Room:
 
 label Jean_Room:
     $ bg_current = "bg_jean"
-    $ Player.DrainWord("traveling",1,0)
+    $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
@@ -3857,17 +3857,17 @@ label Jean_Room:
 
             call Study_Session
 
-        "Lock the door" if "locked" not in Player.Traits:
+        "Lock the door" if "locked" not in Player.traits:
             if JeanX.location == bg_current and not approval_check(JeanX, 1200):
                 ch_j "Hey, don't lock that."
             else:
                 "You lock the door"
-                $ Player.Traits.append("locked")
+                $ Player.traits.append("locked")
                 call Taboo_Level
 
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if "locked" in Player.traits:
             "You unlock the door"
-            $ Player.Traits.remove("locked")
+            $ Player.traits.remove("locked")
             call Taboo_Level
 
         "Sleep." if time_index >= 3:
@@ -3922,7 +3922,7 @@ label Jean_Room:
 
 label Storm_Room:
     $ bg_current = "bg_storm"
-    $ Player.DrainWord("traveling",1,0)
+    $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
@@ -3947,17 +3947,17 @@ label Storm_Room:
 
             call Study_Session
 
-        "Lock the door" if "locked" not in Player.Traits:
+        "Lock the door" if "locked" not in Player.traits:
             if StormX.location == bg_current and not approval_check(StormX, 1000):
                 ch_s "I would really prefer you didn't lock the door, [StormX.player_petname]."
             else:
                 "You lock the door"
-                $ Player.Traits.append("locked")
+                $ Player.traits.append("locked")
                 call Taboo_Level
 
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if "locked" in Player.traits:
             "You unlock the door"
-            $ Player.Traits.remove("locked")
+            $ Player.traits.remove("locked")
             call Taboo_Level
 
         "Sleep." if time_index >= 3 and StormX.location == bg_current:
@@ -4013,7 +4013,7 @@ label Storm_Room:
 
 label Jubes_Room:
     $ bg_current = "bg_jubes"
-    $ Player.DrainWord("traveling",1,0)
+    $ Player.drain_word("traveling",1,0)
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
@@ -4038,17 +4038,17 @@ label Jubes_Room:
 
             call Study_Session
 
-        "Lock the door" if "locked" not in Player.Traits:
+        "Lock the door" if "locked" not in Player.traits:
             if JubesX.location == bg_current and not approval_check(JubesX, 1000):
                 ch_v "You really shouldn't lock -my- door, [JubesX.player_petname]."
             else:
                 "You lock the door"
-                $ Player.Traits.append("locked")
+                $ Player.traits.append("locked")
                 call Taboo_Level
 
-        "Unlock the door" if "locked" in Player.Traits:
+        "Unlock the door" if "locked" in Player.traits:
             "You unlock the door"
-            $ Player.Traits.remove("locked")
+            $ Player.traits.remove("locked")
             call Taboo_Level
 
         "Sleep." if time_index >= 3:

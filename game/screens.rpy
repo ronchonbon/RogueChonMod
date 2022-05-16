@@ -749,7 +749,7 @@ screen Status_Screen:
             background None
             pos (-100,30)
 
-            add AlphaMask("images/BarBackdrop_"+Partner.Tag+".png", "Alt_Screen_Mask")
+            add AlphaMask("images/BarBackdrop_"+Partner.tag+".png", "Alt_Screen_Mask")
             frame:
                 style_group "stat_bar"
                 pos (100,25)
@@ -774,7 +774,7 @@ screen Status_Screen:
 
 
     if focused_Girl in all_Girls:
-        add "images/BarBackdrop_"+focused_Girl.Tag+".png"
+        add "images/BarBackdrop_"+focused_Girl.tag+".png"
         frame:
             style_group "stat_bar"
             xminimum 130
@@ -810,9 +810,9 @@ screen Status_Screen:
                 bar range 100 value (focused_Girl.addiction_rate*10) xmaximum 100 left_bar "images/barfull.png" right_bar "images/barempty.png" left_gutter 3 right_gutter 5 thumb None thumb_offset 0
         showif not primary_action:
 
-            imagebutton auto "images/Button_"+focused_Girl.Tag+"_%s.png" action ShowTransient("Focus_Map") xpos 690 ypos 5 focus_mask True
+            imagebutton auto "images/Button_"+focused_Girl.tag+"_%s.png" action ShowTransient("Focus_Map") xpos 690 ypos 5 focus_mask True
         showif config.developer:
-            imagebutton auto "images/Button_"+focused_Girl.Tag+"_%s.png" action ui.callsinnewcontext("StatHacks",focused_Girl) xpos 730 ypos 5 focus
+            imagebutton auto "images/Button_"+focused_Girl.tag+"_%s.png" action ui.callsinnewcontext("StatHacks",focused_Girl) xpos 730 ypos 5 focus
 
 
 
@@ -835,11 +835,11 @@ screen Status_Screen:
         background None
         has vbox
         hbox:
-            text "Money: $[Player.Cash]" size 12
+            text "Money: $[Player.cash]" size 12
         hbox:
-            text "Level: [Player.Lvl]" size 12
+            text "Level: [Player.level]" size 12
         hbox:
-            text "[focused_Girl.Tag] Level: [focused_Girl.Lvl]" size 12
+            text "[focused_Girl.tag] Level: [focused_Girl.level]" size 12
 
         window:
             pos (90,-40)
@@ -959,121 +959,121 @@ screen Inventory_screen:
 
 
         text "Inventory:" size 20
-        showif "dildo" in Player.Inventory:
-            $ Inventory_Count = Player.Inventory.count("dildo")
+        showif "dildo" in Player.inventory:
+            $ Inventory_Count = Player.inventory.count("dildo")
             text "Dildos: [Inventory_Count]" size 15
-        showif "vibrator" in Player.Inventory:
-            $ Inventory_Count = Player.Inventory.count("vibrator")
+        showif "vibrator" in Player.inventory:
+            $ Inventory_Count = Player.inventory.count("vibrator")
             text "Vibrators: [Inventory_Count]" size 15
-        showif "Dazzler and Longshot" in Player.Inventory:
-            $ Inventory_Count = Player.Inventory.count("Dazzler and Longshot")
+        showif "Dazzler and Longshot" in Player.inventory:
+            $ Inventory_Count = Player.inventory.count("Dazzler and Longshot")
             text "Dazzler and Longshot: [Inventory_Count]" size 15
-        showif "256 Shades of Grey" in Player.Inventory:
-            $ Inventory_Count = Player.Inventory.count("256 Shades of Grey")
+        showif "256 Shades of Grey" in Player.inventory:
+            $ Inventory_Count = Player.inventory.count("256 Shades of Grey")
             text "256 Shades of Grey: [Inventory_Count]" size 15
-        showif "Avengers Tower Penthouse" in Player.Inventory:
-            $ Inventory_Count = Player.Inventory.count("Avengers Tower Penthouse")
+        showif "Avengers Tower Penthouse" in Player.inventory:
+            $ Inventory_Count = Player.inventory.count("Avengers Tower Penthouse")
             text "Avengers Tower Penthouse: [Inventory_Count]" size 15
-        showif "Xavier's photo" in Player.Inventory:
+        showif "Xavier's photo" in Player.inventory:
             text "Xavier's Photo" size 15
-        showif "Xavier's files" in Player.Inventory:
+        showif "Xavier's files" in Player.inventory:
             text "Xavier's Files" size 15
 
-        showif "Rogue nighty" in Player.Inventory:
+        showif "Rogue nighty" in Player.inventory:
             text "Rogue's Green Nighty" size 15
-        showif "Rogue lace_bra" in Player.Inventory:
+        showif "Rogue lace_bra" in Player.inventory:
             text "Rogue's Lace Bra" size 15
-        showif "Rogue lace_panties" in Player.Inventory:
+        showif "Rogue lace_panties" in Player.inventory:
             text "Rogue's Lace Panties" size 15
-        showif "Rogue bikini_top" in Player.Inventory:
+        showif "Rogue bikini_top" in Player.inventory:
             text "Rogue's Bikini Top" size 15
-        showif "Rogue bikini_bottoms" in Player.Inventory:
+        showif "Rogue bikini_bottoms" in Player.inventory:
             text "Rogue's Bikini Bottoms" size 15
 
-        showif "Kitty lace_bra" in Player.Inventory:
+        showif "Kitty lace_bra" in Player.inventory:
             text "Kitty's Lace Bra" size 15
-        showif "Kitty lace_panties" in Player.Inventory:
+        showif "Kitty lace_panties" in Player.inventory:
             text "Kitty's Lace Panties" size 15
-        showif "Kitty knee stockings" in Player.Inventory:
+        showif "Kitty knee stockings" in Player.inventory:
             text "Kitty's knee stockings" size 15
-        showif "Kitty_pantyhose" in Player.Inventory:
+        showif "Kitty_pantyhose" in Player.inventory:
             text "Kitty's Pantyhose" size 15
-        showif "Kitty bikini_top" in Player.Inventory:
+        showif "Kitty bikini_top" in Player.inventory:
             text "Kitty's Bikini Top" size 15
-        showif "Kitty bikini_bottoms" in Player.Inventory:
+        showif "Kitty bikini_bottoms" in Player.inventory:
             text "Kitty's Bikini Bottoms" size 15
-        showif "Kitty blue_skirt" in Player.Inventory:
+        showif "Kitty blue_skirt" in Player.inventory:
             text "Kitty's Blue Skirt" size 15
 
-        showif "Emma lace_bra" in Player.Inventory:
+        showif "Emma lace_bra" in Player.inventory:
             text "Emma's Lace Bra" size 15
-        showif "Emma lace_panties" in Player.Inventory:
+        showif "Emma lace_panties" in Player.inventory:
             text "Emma's Lace Panties" size 15
-        showif "Emma_pantyhose" in Player.Inventory:
+        showif "Emma_pantyhose" in Player.inventory:
             text "Emma's Pantyhose" size 15
-        showif "Emma bikini_top" in Player.Inventory:
+        showif "Emma bikini_top" in Player.inventory:
             text "Emma's Bikini Top" size 15
-        showif "Emma bikini_bottoms" in Player.Inventory:
+        showif "Emma bikini_bottoms" in Player.inventory:
             text "Emma's Bikini Bottoms" size 15
 
-        showif "Laura corset" in Player.Inventory:
+        showif "Laura corset" in Player.inventory:
             text "Laura's Red Corset" size 15
-        showif "Laura lace corset" in Player.Inventory:
+        showif "Laura lace corset" in Player.inventory:
             text "Laura's Lace Corset" size 15
-        showif "Laura lace_panties" in Player.Inventory:
+        showif "Laura lace_panties" in Player.inventory:
             text "Laura's Lace Panties" size 15
-        showif "Laura bikini_top" in Player.Inventory:
+        showif "Laura bikini_top" in Player.inventory:
             text "Laura's Bikini Top" size 15
-        showif "Laura bikini_bottoms" in Player.Inventory:
+        showif "Laura bikini_bottoms" in Player.inventory:
             text "Laura's Bikini Bottoms" size 15
 
-        showif "Jean corset" in Player.Inventory:
+        showif "Jean corset" in Player.inventory:
             text "Jean's Black Corset" size 15
-        showif "Jean lace corset" in Player.Inventory:
+        showif "Jean lace corset" in Player.inventory:
             text "Jean's Lace Corset" size 15
-        showif "Jean lace_bra" in Player.Inventory:
+        showif "Jean lace_bra" in Player.inventory:
             text "Jean's Lace Bra" size 15
-        showif "Jean lace_panties" in Player.Inventory:
+        showif "Jean lace_panties" in Player.inventory:
             text "Jean's Lace Panties" size 15
-        showif "Jean bikini_top" in Player.Inventory:
+        showif "Jean bikini_top" in Player.inventory:
             text "Jean's Bikini Top" size 15
-        showif "Jean bikini_bottoms" in Player.Inventory:
+        showif "Jean bikini_bottoms" in Player.inventory:
             text "Jean's Bikini Bottoms" size 15
 
-        showif "Storm lace_bra" in Player.Inventory:
+        showif "Storm lace_bra" in Player.inventory:
             text "Storm's Lace Bra" size 15
-        showif "Storm lace_panties" in Player.Inventory:
+        showif "Storm lace_panties" in Player.inventory:
             text "Storm's Lace Panties" size 15
-        showif "Storm_pantyhose" in Player.Inventory:
+        showif "Storm_pantyhose" in Player.inventory:
             text "Storm's Pantyhose" size 15
-        showif "Storm bikini_top" in Player.Inventory:
+        showif "Storm bikini_top" in Player.inventory:
             text "Storm's Bikini Top" size 15
-        showif "Storm bikini_bottoms" in Player.Inventory:
+        showif "Storm bikini_bottoms" in Player.inventory:
             text "Storm's Bikini Bottoms" size 15
-        showif "stockings_and_garterbelt" in Player.Inventory:
+        showif "stockings_and_garterbelt" in Player.inventory:
             text "stockings_and_garterbelt" size 15
 
-        showif "Jubes lace_bra" in Player.Inventory:
+        showif "Jubes lace_bra" in Player.inventory:
             text "Jubilees's Lace Bra" size 15
-        showif "Jubes lace_panties" in Player.Inventory:
+        showif "Jubes lace_panties" in Player.inventory:
             text "Jubilees's Lace Panties" size 15
-        showif "Jubes bikini_top" in Player.Inventory:
+        showif "Jubes bikini_top" in Player.inventory:
             text "Jubilees's Bikini Top" size 15
-        showif "Jubes bikini_bottoms" in Player.Inventory:
+        showif "Jubes bikini_bottoms" in Player.inventory:
             text "Jubilees's Bikini Bottoms" size 15
-        showif "socks" in Player.Inventory:
+        showif "socks" in Player.inventory:
             text "Jubilees's Tall Socks" size 15
 
 
 
-        showif "Mandrill Cologne" in Player.Inventory:
-            $ Inventory_Count = Player.Inventory.count("Mandrill Cologne")
+        showif "Mandrill Cologne" in Player.inventory:
+            $ Inventory_Count = Player.inventory.count("Mandrill Cologne")
             textbutton "Mandrill Cologne: [Inventory_Count] doses" action ui.callsinnewcontext("MandrillScreen") text_size 15
-        showif "Purple Rain Cologne" in Player.Inventory:
-            $ Inventory_Count = Player.Inventory.count("Purple Rain Cologne")
+        showif "Purple Rain Cologne" in Player.inventory:
+            $ Inventory_Count = Player.inventory.count("Purple Rain Cologne")
             textbutton "Purple Rain Cologne: [Inventory_Count] doses" action ui.callsinnewcontext("PurpleRainScreen") text_size 15
-        showif "Corruption Cologne" in Player.Inventory:
-            $ Inventory_Count = Player.Inventory.count("Corruption Cologne")
+        showif "Corruption Cologne" in Player.inventory:
+            $ Inventory_Count = Player.inventory.count("Corruption Cologne")
             textbutton "Corruption Cologne: [Inventory_Count] doses" action ui.callsinnewcontext("CorruptionScreen") text_size 15
         showif "Xavier" in Keys:
             text "Xavier's Key" size 15
@@ -1103,62 +1103,62 @@ screen Inventory_screen:
 
 
 label MandrillScreen:
-    if "mandrill" in Player.Traits:
+    if "mandrill" in Player.traits:
         "You already have this on."
         return
-    if "purple" in Player.Traits or "corruption" in Player.Traits:
+    if "purple" in Player.traits or "corruption" in Player.traits:
         "You'll confuse the scent you already have on."
         return
 
-    $ Inventory_Count = Player.Inventory.count("Mandrill Cologne")
+    $ Inventory_Count = Player.inventory.count("Mandrill Cologne")
     "This cologne is guaranteed to make women love you more [[+Love]. You have [Inventory_Count] doses left."
     "Product warning, any love gained while under the effects may be lost when this wears off, if the limits are reached."
     menu:
         "Use it now?"
         "Yes":
-            $ Player.Traits.append("mandrill")
-            $ Player.Inventory.remove("Mandrill Cologne")
+            $ Player.traits.append("mandrill")
+            $ Player.inventory.remove("Mandrill Cologne")
         "No":
             pass
 
     return
 
 label PurpleRainScreen:
-    if "purple" in Player.Traits:
+    if "purple" in Player.traits:
         "You already have this on."
         return
-    if "mandrill" in Player.Traits or "corruption" in Player.Traits:
+    if "mandrill" in Player.traits or "corruption" in Player.traits:
         "You'll confuse the scent you already have on."
         return
 
-    $ Inventory_Count = Player.Inventory.count("Purple Rain Cologne")
+    $ Inventory_Count = Player.inventory.count("Purple Rain Cologne")
     "This cologne is guaranteed to make women more suggestible to your orders until tomorrow [[+Obedience]. You have [Inventory_Count] doses left."
     "Product warning, any obedience gained whie under the effects may be lost when this wears off, if the limits are reached."
     menu:
         "Use it now?"
         "Yes":
-            $ Player.Traits.append("purple")
-            $ Player.Inventory.remove("Purple Rain Cologne")
+            $ Player.traits.append("purple")
+            $ Player.inventory.remove("Purple Rain Cologne")
         "No":
             pass
     return
 
 label CorruptionScreen:
-    if "corruption" in Player.Traits:
+    if "corruption" in Player.traits:
         "You already have this on."
         return
-    if "purple" in Player.Traits or "mandrill" in Player.Traits:
+    if "purple" in Player.traits or "mandrill" in Player.traits:
         "You'll confuse the scent you already have on."
         return
 
-    $ Inventory_Count = Player.Inventory.count("Corruption Cologne")
+    $ Inventory_Count = Player.inventory.count("Corruption Cologne")
     "This cologne is guaranteed to make women let loose their wild side [[-Inhibition]. You have [Inventory_Count] doses left."
     "Product warning, any Inhibition lost whie under the effects may be regained when this wears off, if the limits are reached."
     menu:
         "Use it now?"
         "Yes":
-            $ Player.Traits.append("corruption")
-            $ Player.Inventory.remove("Corruption Cologne")
+            $ Player.traits.append("corruption")
+            $ Player.inventory.remove("Corruption Cologne")
         "No":
             pass
     return

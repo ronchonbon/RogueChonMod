@@ -30,11 +30,11 @@ label Jean_Fondle_Breasts:
         $ approval_bonus += 15
     if JeanX.lust > 75:
         $ approval_bonus += 20
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in JeanX.traits:
         $ approval_bonus += (3*JeanX.Taboo)
     if JeanX in Player.Harem or "sex friend" in JeanX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in JeanX.traits:
         $ approval_bonus -= 20
     if JeanX.event_counter["forced"] and not JeanX.Forced:
         $ approval_bonus -= 5*JeanX.event_counter["forced"]
@@ -48,10 +48,10 @@ label Jean_Fondle_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle breasts" in JeanX.recent_history else 0
 
-    $ Approval = approval_check(JeanX, 950, TabM = 3)
+    $ approval = approval_check(JeanX, 950, TabM = 3)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JeanX.change_face("sexy")
             $ JeanX.change_stat("obedience", 90, 1)
             $ JeanX.change_stat("obedience", 70, 2)
@@ -70,7 +70,7 @@ label Jean_Fondle_Breasts:
 
 
 
-    if Approval:
+    if approval:
         $ JeanX.change_face("sexy", 1)
         if JeanX.Forced:
             $ JeanX.change_face("sad")
@@ -90,7 +90,7 @@ label Jean_Fondle_Breasts:
             "Mmm. . ."])
         ch_j "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ JeanX.change_face("bemused", 1)
         if JeanX.Forced:
             $ JeanX.change_face("sad")
@@ -138,7 +138,7 @@ label Jean_Fondle_Breasts:
                 $ JeanX.daily_history.append("no_fondle breasts")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ JeanX.change_face("sexy")
                     $ JeanX.change_stat("obedience", 50, 2)
                     $ JeanX.change_stat("inhibition", 60, 3)
@@ -151,8 +151,8 @@ label Jean_Fondle_Breasts:
             "[[Grab her chest anyway]":
 
 
-                $ Approval = approval_check(JeanX, 350, "OI", TabM = 3)
-                if Approval > 1 or (Approval and JeanX.Forced):
+                $ approval = approval_check(JeanX, 350, "OI", TabM = 3)
+                if approval > 1 or (approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
                     $ JeanX.change_stat("love", 20, -2, 1)
@@ -161,7 +161,7 @@ label Jean_Fondle_Breasts:
                     $ JeanX.change_stat("obedience", 90, 2)
                     $ JeanX.change_stat("obedience", 50, 4)
                     $ JeanX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JeanX.Forced = 1
                     jump Jean_FB_Prep
                 else:
@@ -213,10 +213,10 @@ label Jean_FB_Prep:
     if action_context == JeanX:
 
         $ action_context = 0
-        if (JeanX.top or JeanX.bra) and not JeanX.Uptop:
+        if (JeanX.top or JeanX.bra) and not JeanX.top_pulled_up:
 
             if approval_check(JeanX, 1250, TabM = 1) or (JeanX.SeenChest and approval_check(JeanX, 500) and not JeanX.Taboo):
-                $ JeanX.Uptop = 1
+                $ JeanX.top_pulled_up = 1
                 $ Line = JeanX.top if JeanX.top else JeanX.bra
                 "With a hungry grin, [JeanX.name] pulls her [Line] up over her breasts."
                 call Jean_First_Topless (1)
@@ -253,7 +253,7 @@ label Jean_FB_Prep:
                 $ JeanX.change_stat("obedience", 50, 1)
                 $ JeanX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ JeanX.AddWord(1,"refused","refused")
+                $ JeanX.add_word(1,"refused","refused")
                 return
 
 
@@ -284,8 +284,8 @@ label Jean_FB_Prep:
     $ Line = 0
     $ counter = 0
     if JeanX.Taboo:
-        $ JeanX.DrainWord("no_taboo")
-    $ JeanX.DrainWord("no_fondle breasts")
+        $ JeanX.drain_word("no_taboo")
+    $ JeanX.drain_word("no_fondle breasts")
     $ JeanX.recent_history.append("fondle_breasts")
     $ JeanX.daily_history.append("fondle_breasts")
     call Jean_Breasts_Launch ("fondle_breasts")
@@ -308,9 +308,9 @@ label Jean_FB_Cycle:
                     $ Round -= 1
                     jump Jean_FB_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -387,9 +387,9 @@ label Jean_FB_Cycle:
                         "Undress [JeanX.name]":
 
                             call Girl_Undress (JeanX)
-                        "Clean up [JeanX.name] (locked)" if not JeanX.Spunk:
+                        "Clean up [JeanX.name] (locked)" if not JeanX.spunk:
                             pass
-                        "Clean up [JeanX.name]" if JeanX.Spunk:
+                        "Clean up [JeanX.name]" if JeanX.spunk:
                             call Girl_Cleanup (JeanX, "ask")
                         "Never mind":
                             jump Jean_FB_Cycle
@@ -507,8 +507,8 @@ label Jean_FB_Cycle:
         elif Round == 5:
             call Sex_Basic_Dialog (JeanX, 5)
 
-        if JeanX.lust >= 50 and not JeanX.Uptop and (JeanX.bra or JeanX.top):
-            $ JeanX.Uptop = 1
+        if JeanX.lust >= 50 and not JeanX.top_pulled_up and (JeanX.bra or JeanX.top):
+            $ JeanX.top_pulled_up = 1
             "[JeanX.name] grunts and pulls her clothes aside."
             call Jean_First_Topless
 
@@ -526,7 +526,7 @@ label Jean_FB_After:
     $ JeanX.action_counter["fondle_breasts"]+= 1
     $ JeanX.remaining_actions -=1
     $ JeanX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ JeanX.addiction_rate += 1
 
     call Partner_Like (JeanX, 2)
@@ -563,11 +563,11 @@ label Jean_Suck_Breasts:
         $ approval_bonus += 20
     if JeanX.lust > 75 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in JeanX.traits:
         $ approval_bonus += (4*JeanX.Taboo)
     if JeanX in Player.Harem or "sex friend" in JeanX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in JeanX.traits:
         $ approval_bonus -= 25
     if JeanX.event_counter["forced"] and not JeanX.Forced:
         $ approval_bonus -= 5*JeanX.event_counter["forced"]
@@ -581,10 +581,10 @@ label Jean_Suck_Breasts:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_suck breasts" in JeanX.recent_history else 0
 
-    $ Approval = approval_check(JeanX, 1050, TabM = 4)
+    $ approval = approval_check(JeanX, 1050, TabM = 4)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JeanX.change_face("sexy")
             $ JeanX.change_stat("obedience", 90, 1)
             $ JeanX.change_stat("obedience", 70, 2)
@@ -611,7 +611,7 @@ label Jean_Suck_Breasts:
             "Mmm. . ."])
         ch_j "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ JeanX.change_face("bemused", 1)
         if JeanX.Forced:
             $ JeanX.change_face("sad")
@@ -659,7 +659,7 @@ label Jean_Suck_Breasts:
                 $ JeanX.daily_history.append("no_suck breasts")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ JeanX.change_face("sexy")
                     $ JeanX.change_stat("obedience", 90, 1)
                     $ JeanX.change_stat("obedience", 50, 2)
@@ -672,8 +672,8 @@ label Jean_Suck_Breasts:
                     ch_j "Oh, don't cry."
             "[[Start sucking anyway]":
 
-                $ Approval = approval_check(JeanX, 450, "OI", TabM = 3)
-                if Approval > 1 or (Approval and JeanX.Forced):
+                $ approval = approval_check(JeanX, 450, "OI", TabM = 3)
+                if approval > 1 or (approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
                     $ JeanX.change_stat("love", 20, -2, 1)
@@ -681,7 +681,7 @@ label Jean_Suck_Breasts:
                     $ JeanX.change_stat("obedience", 90, 2)
                     $ JeanX.change_stat("obedience", 50, 4)
                     $ JeanX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JeanX.Forced = 1
                     jump Jean_SB_Prep
                 else:
@@ -730,10 +730,10 @@ label Jean_SB_Prep:
     if action_context == JeanX:
 
         $ action_context = 0
-        if (JeanX.top or JeanX.bra) and not JeanX.Uptop:
+        if (JeanX.top or JeanX.bra) and not JeanX.top_pulled_up:
 
             if approval_check(JeanX, 1250, TabM = 1) or (JeanX.SeenChest and approval_check(JeanX, 500) and not JeanX.Taboo):
-                $ JeanX.Uptop = 1
+                $ JeanX.top_pulled_up = 1
                 $ Line = JeanX.top if JeanX.top else JeanX.bra
                 "With a hungry grin, [JeanX.name] pulls her [Line] up over her breasts."
                 call Jean_First_Topless (1)
@@ -770,7 +770,7 @@ label Jean_SB_Prep:
                 $ JeanX.change_stat("obedience", 50, 1)
                 $ JeanX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ JeanX.AddWord(1,"refused","refused")
+                $ JeanX.add_word(1,"refused","refused")
                 return
 
 
@@ -801,8 +801,8 @@ label Jean_SB_Prep:
     $ Line = 0
     $ counter = 0
     if JeanX.Taboo:
-        $ JeanX.DrainWord("no_taboo")
-    $ JeanX.DrainWord("no_suck breasts")
+        $ JeanX.drain_word("no_taboo")
+    $ JeanX.drain_word("no_suck breasts")
     $ JeanX.recent_history.append("suck_breasts")
     $ JeanX.daily_history.append("suck_breasts")
     call Jean_Breasts_Launch ("suck_breasts")
@@ -827,9 +827,9 @@ label Jean_SB_Cycle:
                     $ Round -= 1
                     jump Jean_SB_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -899,9 +899,9 @@ label Jean_SB_Cycle:
                         "Undress [JeanX.name]":
 
                             call Girl_Undress (JeanX)
-                        "Clean up [JeanX.name] (locked)" if not JeanX.Spunk:
+                        "Clean up [JeanX.name] (locked)" if not JeanX.spunk:
                             pass
-                        "Clean up [JeanX.name]" if JeanX.Spunk:
+                        "Clean up [JeanX.name]" if JeanX.spunk:
                             call Girl_Cleanup (JeanX, "ask")
                         "Never mind":
                             jump Jean_SB_Cycle
@@ -1019,8 +1019,8 @@ label Jean_SB_Cycle:
         elif Round == 5:
             call Sex_Basic_Dialog (JeanX, 5)
 
-        if JeanX.lust >= 50 and not JeanX.Uptop and (JeanX.bra or JeanX.top):
-            $ JeanX.Uptop = 1
+        if JeanX.lust >= 50 and not JeanX.top_pulled_up and (JeanX.bra or JeanX.top):
+            $ JeanX.top_pulled_up = 1
             "[JeanX.name] grunts and pulls her clothes aside."
             call Jean_First_Topless
 
@@ -1038,7 +1038,7 @@ label Jean_SB_After:
     $ JeanX.action_counter["suck_breasts"] += 1
     $ JeanX.remaining_actions -=1
     $ JeanX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ JeanX.addiction_rate += 1
 
     if Partner == "Kitty":
@@ -1075,11 +1075,11 @@ label Jean_Fondle_Thighs:
         $ approval_bonus -= 5
     if JeanX.lust > 75:
         $ approval_bonus += 10
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in JeanX.traits:
         $ approval_bonus += Taboo
     if JeanX in Player.Harem or "sex friend" in JeanX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in JeanX.traits:
         $ approval_bonus -= 25
     if JeanX.event_counter["forced"] and not JeanX.Forced:
         $ approval_bonus -= 5*JeanX.event_counter["forced"]
@@ -1093,10 +1093,10 @@ label Jean_Fondle_Thighs:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle thighs" in JeanX.recent_history else 0
 
-    $ Approval = approval_check(JeanX, 750, TabM=1)
+    $ approval = approval_check(JeanX, 750, TabM=1)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JeanX.change_face("sexy")
             $ JeanX.change_stat("obedience", 50, 1)
             $ JeanX.change_stat("inhibition", 30, 2)
@@ -1127,7 +1127,7 @@ label Jean_Fondle_Thighs:
         $ JeanX.change_face("sexy", 1)
         ch_j "You didn't get enough earlier?"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ JeanX.change_face("bemused", 1)
         if JeanX.Forced:
             $ JeanX.change_face("sad")
@@ -1173,7 +1173,7 @@ label Jean_Fondle_Thighs:
                 $ JeanX.daily_history.append("no_fondle thighs")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ JeanX.change_face("sexy")
                     $ JeanX.change_stat("obedience", 60, 1)
                     $ JeanX.change_stat("obedience", 30, 2)
@@ -1186,15 +1186,15 @@ label Jean_Fondle_Thighs:
                     ch_j "Oh, don't cry."
             "[[Start caressing her thigh anyway]":
 
-                $ Approval = approval_check(JeanX, 350, "OI", TabM = 2)
-                if Approval > 1 or (Approval and JeanX.Forced):
+                $ approval = approval_check(JeanX, 350, "OI", TabM = 2)
+                if approval > 1 or (approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
                     $ JeanX.change_stat("love", 20, -2, 1)
                     ch_j ". . .whatever. . ."
                     $ JeanX.change_stat("obedience", 50, 3)
                     $ JeanX.change_stat("inhibition", 60, 2)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JeanX.Forced = 1
                     jump Jean_FT_Prep
                 else:
@@ -1268,8 +1268,8 @@ label Jean_FT_Prep:
     $ Line = 0
     $ counter = 0
     if JeanX.Taboo:
-        $ JeanX.DrainWord("no_taboo")
-    $ JeanX.DrainWord("no_fondle thighs")
+        $ JeanX.drain_word("no_taboo")
+    $ JeanX.drain_word("no_fondle thighs")
     $ JeanX.recent_history.append("fondle_thighs")
     $ JeanX.daily_history.append("fondle_thighs")
     call Jean_Pussy_Launch ("fondle_thighs")
@@ -1292,9 +1292,9 @@ label Jean_FT_Cycle:
                     $ Round -= 1
                     jump Jean_FT_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -1378,9 +1378,9 @@ label Jean_FT_Cycle:
                         "Undress [JeanX.name]":
 
                             call Girl_Undress (JeanX)
-                        "Clean up [JeanX.name] (locked)" if not JeanX.Spunk:
+                        "Clean up [JeanX.name] (locked)" if not JeanX.spunk:
                             pass
-                        "Clean up [JeanX.name]" if JeanX.Spunk:
+                        "Clean up [JeanX.name]" if JeanX.spunk:
                             call Girl_Cleanup (JeanX, "ask")
                         "Never mind":
                             jump Jean_FT_Cycle
@@ -1509,9 +1509,9 @@ label Jean_FT_After:
 
     $ JeanX.action_counter["fondle_thighs"]+= 1
     $ JeanX.remaining_actions -=1
-    if JeanX.PantsNum() < 6 or JeanX.Upskirt:
+    if JeanX.PantsNum() < 6 or JeanX.upskirt:
         $ JeanX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ JeanX.addiction_rate += 1
 
     if Partner == "Kitty":
@@ -1547,11 +1547,11 @@ label Jean_Fondle_Pussy:
         $ approval_bonus += 15
     if JeanX.lust > 75 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in JeanX.traits:
         $ approval_bonus += (2*JeanX.Taboo)
     if JeanX in Player.Harem or "sex friend" in JeanX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in JeanX.traits:
         $ approval_bonus -= 25
     if JeanX.event_counter["forced"] and not JeanX.Forced:
         $ approval_bonus -= 5*JeanX.event_counter["forced"]
@@ -1565,10 +1565,10 @@ label Jean_Fondle_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle pussy" in JeanX.recent_history else 0
 
-    $ Approval = approval_check(JeanX, 1050, TabM = 2)
+    $ approval = approval_check(JeanX, 1050, TabM = 2)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JeanX.change_face("sexy")
             $ JeanX.change_stat("obedience", 90, 1)
             $ JeanX.change_stat("obedience", 70, 2)
@@ -1605,7 +1605,7 @@ label Jean_Fondle_Pussy:
             "Mmm. . ."])
         ch_j "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         $ JeanX.change_face("bemused", 1)
         if JeanX.Forced:
             $ JeanX.change_face("sad")
@@ -1652,7 +1652,7 @@ label Jean_Fondle_Pussy:
                 $ JeanX.daily_history.append("no_fondle pussy")
                 return
             "Come on, Please?":
-                if Approval:
+                if approval:
                     $ JeanX.change_face("sexy")
                     $ JeanX.change_stat("obedience", 90, 2)
                     $ JeanX.change_stat("obedience", 50, 2)
@@ -1665,8 +1665,8 @@ label Jean_Fondle_Pussy:
                     ch_j "No."
             "[[Start fondling anyway]":
 
-                $ Approval = approval_check(JeanX, 450, "OI", TabM = 2)
-                if Approval > 1 or (Approval and JeanX.Forced):
+                $ approval = approval_check(JeanX, 450, "OI", TabM = 2)
+                if approval > 1 or (approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
                     $ JeanX.change_stat("love", 200, -2)
@@ -1674,7 +1674,7 @@ label Jean_Fondle_Pussy:
                     $ JeanX.change_stat("obedience", 50, 4)
                     $ JeanX.change_stat("inhibition", 80, 1)
                     $ JeanX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JeanX.Forced = 1
                     jump Jean_FP_Prep
                 else:
@@ -1721,11 +1721,11 @@ label Jean_FP_Prep:
     if action_context == JeanX:
 
         $ action_context = 0
-        if (JeanX.legs and not JeanX.Upskirt) or (JeanX.underwear and not JeanX.underwearDown):
+        if (JeanX.legs and not JeanX.upskirt) or (JeanX.underwear and not JeanX.underwear_pulled_down):
 
             if approval_check(JeanX, 1250, TabM = 1) or (JeanX.SeenPussy and approval_check(JeanX, 500) and not JeanX.Taboo):
-                $ JeanX.Upskirt = 1
-                $ JeanX.underwearDown = 1
+                $ JeanX.upskirt = 1
+                $ JeanX.underwear_pulled_down = 1
                 $ Line = 0
                 if JeanX.PantsNum() == 5:
                     $ Line = JeanX.name + " hikes up her_skirt"
@@ -1778,7 +1778,7 @@ label Jean_FP_Prep:
                 $ JeanX.change_stat("obedience", 50, 1)
                 $ JeanX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ JeanX.AddWord(1,"refused","refused")
+                $ JeanX.add_word(1,"refused","refused")
                 return
 
 
@@ -1808,8 +1808,8 @@ label Jean_FP_Prep:
     $ Line = 0
     $ counter = 0
     if JeanX.Taboo:
-        $ JeanX.DrainWord("no_taboo")
-    $ JeanX.DrainWord("no_fondle pussy")
+        $ JeanX.drain_word("no_taboo")
+    $ JeanX.drain_word("no_fondle pussy")
     $ JeanX.recent_history.append("fondle_pussy")
     $ JeanX.daily_history.append("fondle_pussy")
     call Jean_Pussy_Launch ("fondle_pussy")
@@ -1848,9 +1848,9 @@ label Jean_FP_Cycle:
                     $ Round -= 1
                     jump Jean_FP_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -1935,9 +1935,9 @@ label Jean_FP_Cycle:
                         "Undress [JeanX.name]":
 
                             call Girl_Undress (JeanX)
-                        "Clean up [JeanX.name] (locked)" if not JeanX.Spunk:
+                        "Clean up [JeanX.name] (locked)" if not JeanX.spunk:
                             pass
-                        "Clean up [JeanX.name]" if JeanX.Spunk:
+                        "Clean up [JeanX.name]" if JeanX.spunk:
                             call Girl_Cleanup (JeanX, "ask")
                         "Never mind":
                             jump Jean_FP_Cycle
@@ -2068,9 +2068,9 @@ label Jean_FP_After:
 
     $ JeanX.action_counter["fondle_pussy"] += 1
     $ JeanX.remaining_actions -=1
-    if JeanX.PantsNum() < 6 or JeanX.Upskirt:
+    if JeanX.PantsNum() < 6 or JeanX.upskirt:
         $ JeanX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ JeanX.addiction_rate += 1
 
     call Partner_Like (JeanX, 2)
@@ -2188,11 +2188,11 @@ label Jean_Lick_Pussy:
         $ approval_bonus += 10
     if JeanX.lust > 85 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in JeanX.traits:
         $ approval_bonus += (4*JeanX.Taboo)
     if JeanX in Player.Harem or "sex friend" in JeanX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in JeanX.traits:
         $ approval_bonus -= 25
     if JeanX.event_counter["forced"] and not JeanX.Forced:
         $ approval_bonus -= 5*JeanX.event_counter["forced"]
@@ -2206,10 +2206,10 @@ label Jean_Lick_Pussy:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick pussy" in JeanX.recent_history else 0
 
-    $ Approval = approval_check(JeanX, 1250, TabM = 4)
+    $ approval = approval_check(JeanX, 1250, TabM = 4)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JeanX.change_face("surprised")
             $ JeanX.change_stat("obedience", 90, 1)
             $ JeanX.change_stat("obedience", 70, 2)
@@ -2242,7 +2242,7 @@ label Jean_Lick_Pussy:
             "Mmm. . ."])
         ch_j "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         if JeanX.Forced:
             $ JeanX.change_face("sad")
             $ JeanX.change_stat("love", 70, -3, 1)
@@ -2296,7 +2296,7 @@ label Jean_Lick_Pussy:
                 $ JeanX.daily_history.append("no_lick pussy")
                 return
             "I think you'd really enjoy it. . .":
-                if Approval:
+                if approval:
                     $ JeanX.change_face("sexy")
                     $ JeanX.change_stat("obedience", 90, 2)
                     $ JeanX.change_stat("obedience", 50, 2)
@@ -2309,8 +2309,8 @@ label Jean_Lick_Pussy:
                     ch_j "I would, but still no, [JeanX.player_petname]."
             "[[Get in there anyway]":
 
-                $ Approval = approval_check(JeanX, 750, "OI", TabM = 4)
-                if Approval > 1 or (Approval and JeanX.Forced):
+                $ approval = approval_check(JeanX, 750, "OI", TabM = 4)
+                if approval > 1 or (approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
                     $ JeanX.change_stat("love", 200, -2)
@@ -2318,7 +2318,7 @@ label Jean_Lick_Pussy:
                     $ JeanX.change_stat("obedience", 50, 4)
                     $ JeanX.change_stat("inhibition", 80, 1)
                     $ JeanX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JeanX.Forced = 1
                     jump Jean_LP_Prep
                 else:
@@ -2366,11 +2366,11 @@ label Jean_LP_Prep:
     if action_context == JeanX:
 
         $ action_context = 0
-        if (JeanX.legs and not JeanX.Upskirt) or (JeanX.underwear and not JeanX.underwearDown):
+        if (JeanX.legs and not JeanX.upskirt) or (JeanX.underwear and not JeanX.underwear_pulled_down):
 
             if approval_check(JeanX, 1250, TabM = 1) or (JeanX.SeenPussy and approval_check(JeanX, 500) and not JeanX.Taboo):
-                $ JeanX.Upskirt = 1
-                $ JeanX.underwearDown = 1
+                $ JeanX.upskirt = 1
+                $ JeanX.underwear_pulled_down = 1
                 $ Line = 0
                 if JeanX.PantsNum() == 5:
                     $ Line = JeanX.name + " hikes up her_skirt"
@@ -2423,13 +2423,13 @@ label Jean_LP_Prep:
                 $ JeanX.change_stat("obedience", 50, 1)
                 $ JeanX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ JeanX.AddWord(1,"refused","refused")
+                $ JeanX.add_word(1,"refused","refused")
                 return
 
 
     if not JeanX.Forced and action_context != "auto":
         $ approval_bonus = 0
-        if JeanX.PantsNum() >= 6 and not JeanX.Upskirt:
+        if JeanX.PantsNum() >= 6 and not JeanX.upskirt:
             $ approval_bonus = 15
         call Bottoms_Off (JeanX)
         if "angry" in JeanX.recent_history:
@@ -2452,15 +2452,15 @@ label Jean_LP_Prep:
         $ action_context = 0
 
     if JeanX.PantsNum() == 5:
-        $ JeanX.Upskirt = 1
+        $ JeanX.upskirt = 1
         $ JeanX.SeenPanties = 1
     call Jean_First_Bottomless (1)
 
     $ Line = 0
     $ counter = 0
     if JeanX.Taboo:
-        $ JeanX.DrainWord("no_taboo")
-    $ JeanX.DrainWord("no_lick pussy")
+        $ JeanX.drain_word("no_taboo")
+    $ JeanX.drain_word("no_lick pussy")
     $ JeanX.recent_history.append("eat_pussy")
     $ JeanX.daily_history.append("eat_pussy")
     call Jean_Pussy_Launch ("eat_pussy")
@@ -2485,9 +2485,9 @@ label Jean_LP_Cycle:
                     $ Round -= 1
                     jump Jean_LP_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -2567,9 +2567,9 @@ label Jean_LP_Cycle:
                         "Undress [JeanX.name]":
 
                             call Girl_Undress (JeanX)
-                        "Clean up [JeanX.name] (locked)" if not JeanX.Spunk:
+                        "Clean up [JeanX.name] (locked)" if not JeanX.spunk:
                             pass
-                        "Clean up [JeanX.name]" if JeanX.Spunk:
+                        "Clean up [JeanX.name]" if JeanX.spunk:
                             call Girl_Cleanup (JeanX, "ask")
                         "Never mind":
                             jump Jean_LP_Cycle
@@ -2703,9 +2703,9 @@ label Jean_LP_After:
 
     $ JeanX.action_counter["eat_pussy"] += 1
     $ JeanX.remaining_actions -=1
-    if JeanX.PantsNum() < 6 or JeanX.Upskirt:
+    if JeanX.PantsNum() < 6 or JeanX.upskirt:
         $ JeanX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ JeanX.addiction_rate += 1
 
     if Partner == "Rogue":
@@ -2743,11 +2743,11 @@ label Jean_Fondle_Ass:
         $ approval_bonus -= 5
     if JeanX.lust > 75:
         $ approval_bonus += 15
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in JeanX.traits:
         $ approval_bonus += Taboo
     if JeanX in Player.Harem or "sex friend" in JeanX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in JeanX.traits:
         $ approval_bonus -= 25
     if JeanX.event_counter["forced"] and not JeanX.Forced:
         $ approval_bonus -= 5*JeanX.event_counter["forced"]
@@ -2761,10 +2761,10 @@ label Jean_Fondle_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_fondle ass" in JeanX.recent_history else 0
 
-    $ Approval = approval_check(JeanX, 850, TabM=1)
+    $ approval = approval_check(JeanX, 850, TabM=1)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JeanX.change_face("surprised", 1)
             $ JeanX.change_stat("obedience", 70, 2)
             $ JeanX.change_stat("inhibition", 40, 2)
@@ -2800,7 +2800,7 @@ label Jean_Fondle_Ass:
             "Mmm. . ."])
         ch_j "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         if JeanX.Forced:
             $ JeanX.change_face("sad")
             $ JeanX.change_stat("love", 70, -2, 1)
@@ -2849,7 +2849,7 @@ label Jean_Fondle_Ass:
                 $ JeanX.daily_history.append("no_fondle ass")
                 return
             "Just one good squeeze?":
-                if Approval:
+                if approval:
                     $ JeanX.change_face("sexy")
                     $ JeanX.change_stat("obedience", 90, 1)
                     $ JeanX.change_stat("obedience", 50, 2)
@@ -2862,15 +2862,15 @@ label Jean_Fondle_Ass:
                     ch_j "No."
             "[[Start fondling anyway]":
 
-                $ Approval = approval_check(JeanX, 250, "OI", TabM = 3)
-                if Approval > 1 or (Approval and JeanX.Forced):
+                $ approval = approval_check(JeanX, 250, "OI", TabM = 3)
+                if approval > 1 or (approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -3, 1)
                     $ JeanX.change_stat("love", 200, -1)
                     ch_j ". . .whatever. . ."
                     $ JeanX.change_stat("obedience", 50, 3)
                     $ JeanX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JeanX.Forced = 1
                     jump Jean_FA_Prep
                 else:
@@ -2940,8 +2940,8 @@ label Jean_FA_Prep:
     $ Line = 0
     $ counter = 0
     if JeanX.Taboo:
-        $ JeanX.DrainWord("no_taboo")
-    $ JeanX.DrainWord("no_fondle ass")
+        $ JeanX.drain_word("no_taboo")
+    $ JeanX.drain_word("no_fondle ass")
     $ JeanX.recent_history.append("fondle_ass")
     $ JeanX.daily_history.append("fondle_ass")
     call Jean_Pussy_Launch ("fondle_ass")
@@ -2964,9 +2964,9 @@ label Jean_FA_Cycle:
                     $ Round -= 1
                     jump Jean_FA_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -3055,9 +3055,9 @@ label Jean_FA_Cycle:
                         "Undress [JeanX.name]":
 
                             call Girl_Undress (JeanX)
-                        "Clean up [JeanX.name] (locked)" if not JeanX.Spunk:
+                        "Clean up [JeanX.name] (locked)" if not JeanX.spunk:
                             pass
-                        "Clean up [JeanX.name]" if JeanX.Spunk:
+                        "Clean up [JeanX.name]" if JeanX.spunk:
                             call Girl_Cleanup (JeanX, "ask")
                         "Never mind":
                             jump Jean_FA_Cycle
@@ -3191,9 +3191,9 @@ label Jean_FA_After:
 
     $ JeanX.action_counter["fondle_ass"] += 1
     $ JeanX.remaining_actions -=1
-    if JeanX.PantsNum() < 6 or JeanX.Upskirt:
+    if JeanX.PantsNum() < 6 or JeanX.upskirt:
         $ JeanX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ JeanX.addiction_rate += 1
 
         call Partner_Like (JeanX, 2)
@@ -3233,11 +3233,11 @@ label Jean_Insert_Ass:
         $ approval_bonus += 10
     if JeanX.lust > 85 and action_context == "auto":
         $ approval_bonus += 10
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in JeanX.traits:
         $ approval_bonus += (4*JeanX.Taboo)
     if JeanX in Player.Harem or "sex friend" in JeanX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in JeanX.traits:
         $ approval_bonus -= 25
     if JeanX.event_counter["forced"] and not JeanX.Forced:
         $ approval_bonus -= 5*JeanX.event_counter["forced"]
@@ -3251,10 +3251,10 @@ label Jean_Insert_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_insert ass" in JeanX.recent_history else 0
 
-    $ Approval = approval_check(JeanX, 1300, TabM = 3)
+    $ approval = approval_check(JeanX, 1300, TabM = 3)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JeanX.change_face("surprised")
             $ JeanX.change_stat("obedience", 90, 2)
             $ JeanX.change_stat("obedience", 70, 2)
@@ -3279,7 +3279,7 @@ label Jean_Insert_Ass:
             "Mmm. . ."])
         ch_j "[Line]"
 
-    if Approval >= 2:
+    if approval >= 2:
         if JeanX.Forced:
             $ JeanX.change_face("sad")
             $ JeanX.change_stat("love", 70, -3, 1)
@@ -3333,7 +3333,7 @@ label Jean_Insert_Ass:
                 $ JeanX.daily_history.append("no_insert ass")
                 return
             "I think you'd really enjoy it. . .":
-                if Approval:
+                if approval:
                     $ JeanX.change_face("sexy")
                     $ JeanX.change_stat("obedience", 90, 2)
                     $ JeanX.change_stat("obedience", 50, 2)
@@ -3346,8 +3346,8 @@ label Jean_Insert_Ass:
                     ch_j "I don't think that I would."
             "[[Slide a finger in anyway]":
 
-                $ Approval = approval_check(JeanX, 950, "OI", TabM = 3)
-                if Approval > 1 or (Approval and JeanX.Forced):
+                $ approval = approval_check(JeanX, 950, "OI", TabM = 3)
+                if approval > 1 or (approval and JeanX.Forced):
                     $ JeanX.change_face("surprised", 1)
                     $ JeanX.change_stat("love", 70, -5, 1)
                     $ JeanX.change_stat("love", 200, -2)
@@ -3356,7 +3356,7 @@ label Jean_Insert_Ass:
                     $ JeanX.change_stat("obedience", 50, 4)
                     $ JeanX.change_stat("inhibition", 80, 1)
                     $ JeanX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JeanX.Forced = 1
                     jump Jean_IA_Prep
                 else:
@@ -3407,11 +3407,11 @@ label Jean_IA_Prep:
     if action_context == JeanX:
 
         $ action_context = 0
-        if (JeanX.legs and not JeanX.Upskirt) or (JeanX.underwear and not JeanX.underwearDown):
+        if (JeanX.legs and not JeanX.upskirt) or (JeanX.underwear and not JeanX.underwear_pulled_down):
 
             if approval_check(JeanX, 1250, TabM = 1) or (JeanX.SeenPussy and approval_check(JeanX, 500) and not JeanX.Taboo):
-                $ JeanX.Upskirt = 1
-                $ JeanX.underwearDown = 1
+                $ JeanX.upskirt = 1
+                $ JeanX.underwear_pulled_down = 1
                 $ Line = 0
                 if JeanX.PantsNum() == 5:
                     $ Line = JeanX.name + " hikes up her_skirt"
@@ -3464,7 +3464,7 @@ label Jean_IA_Prep:
                 $ JeanX.change_stat("obedience", 50, 1)
                 $ JeanX.change_stat("obedience", 30, 2)
                 $ Player.recent_history.append("nope")
-                $ JeanX.AddWord(1,"refused","refused")
+                $ JeanX.add_word(1,"refused","refused")
                 return
 
 
@@ -3495,8 +3495,8 @@ label Jean_IA_Prep:
     $ Line = 0
     $ counter = 0
     if JeanX.Taboo:
-        $ JeanX.DrainWord("no_taboo")
-    $ JeanX.DrainWord("no_insert ass")
+        $ JeanX.drain_word("no_taboo")
+    $ JeanX.drain_word("no_insert ass")
     $ JeanX.recent_history.append("finger_ass")
     $ JeanX.daily_history.append("finger_ass")
     call Jean_Pussy_Launch ("finger_ass")
@@ -3519,9 +3519,9 @@ label Jean_IA_Cycle:
                     $ Round -= 1
                     jump Jean_IA_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -3606,9 +3606,9 @@ label Jean_IA_Cycle:
                         "Undress [JeanX.name]":
 
                             call Girl_Undress (JeanX)
-                        "Clean up [JeanX.name] (locked)" if not JeanX.Spunk:
+                        "Clean up [JeanX.name] (locked)" if not JeanX.spunk:
                             pass
-                        "Clean up [JeanX.name]" if JeanX.Spunk:
+                        "Clean up [JeanX.name]" if JeanX.spunk:
                             call Girl_Cleanup (JeanX, "ask")
                         "Never mind":
                             jump Jean_IA_Cycle
@@ -3743,7 +3743,7 @@ label Jean_IA_After:
     $ JeanX.action_counter["finger_ass"] += 1
     $ JeanX.remaining_actions -=1
     $ JeanX.addiction_rate += 1
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ JeanX.addiction_rate += 1
 
     call Partner_Like (JeanX, 2)
@@ -3786,11 +3786,11 @@ label Jean_Lick_Ass:
         $ approval_bonus += 10
     if action_context == "shift":
         $ approval_bonus += 10
-    if "exhibitionist" in JeanX.Traits:
+    if "exhibitionist" in JeanX.traits:
         $ approval_bonus += (4*JeanX.Taboo)
     if JeanX in Player.Harem or "sex friend" in JeanX.player_petnames:
         $ approval_bonus += 10
-    elif "ex" in JeanX.Traits:
+    elif "ex" in JeanX.traits:
         $ approval_bonus -= 25
     if JeanX.event_counter["forced"] and not JeanX.Forced:
         $ approval_bonus -= 5*JeanX.event_counter["forced"]
@@ -3804,10 +3804,10 @@ label Jean_Lick_Ass:
         $ approval_bonus -= 5
         $ approval_bonus -= 10 if "no_lick ass" in JeanX.recent_history else 0
 
-    $ Approval = approval_check(JeanX, 1550, TabM = 4)
+    $ approval = approval_check(JeanX, 1550, TabM = 4)
 
     if action_context == "auto":
-        if Approval:
+        if approval:
             $ JeanX.change_face("surprised")
             $ JeanX.change_stat("obedience", 90, 1)
             $ JeanX.change_stat("inhibition", 80, 3)
@@ -3833,7 +3833,7 @@ label Jean_Lick_Ass:
         ch_j "You didn't get enough earlier?"
 
 
-    if Approval >= 2:
+    if approval >= 2:
         if JeanX.Forced:
             $ JeanX.change_face("sad")
             $ JeanX.change_stat("love", 70, -3, 1)
@@ -3893,7 +3893,7 @@ label Jean_Lick_Ass:
                 $ JeanX.daily_history.append("no_lick ass")
                 return
             "I think you'd really enjoy it. . .":
-                if Approval:
+                if approval:
                     $ JeanX.change_face("sexy")
                     $ JeanX.change_stat("obedience", 90, 2)
                     $ JeanX.change_stat("obedience", 50, 2)
@@ -3906,8 +3906,8 @@ label Jean_Lick_Ass:
                     ch_j "I really don't think so."
             "[[Start licking anyway]":
 
-                $ Approval = approval_check(JeanX, 1100, "OI", TabM = 4)
-                if Approval > 1 or (Approval and JeanX.Forced):
+                $ approval = approval_check(JeanX, 1100, "OI", TabM = 4)
+                if approval > 1 or (approval and JeanX.Forced):
                     $ JeanX.change_face("sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
                     $ JeanX.change_stat("love", 200, -2)
@@ -3915,7 +3915,7 @@ label Jean_Lick_Ass:
                     $ JeanX.change_stat("obedience", 50, 4)
                     $ JeanX.change_stat("inhibition", 80, 1)
                     $ JeanX.change_stat("inhibition", 60, 3)
-                    if Approval < 2:
+                    if approval < 2:
                         $ JeanX.Forced = 1
                     jump Jean_LA_Prep
                 else:
@@ -3984,7 +3984,7 @@ label Jean_LA_Prep:
         $ renpy.pop_call()
         $ action_context = 0
 
-    $ JeanX.Upskirt = 1
+    $ JeanX.upskirt = 1
     if JeanX.PantsNum() == 5:
         $ JeanX.SeenPanties = 1
     if not JeanX.underwear:
@@ -3992,8 +3992,8 @@ label Jean_LA_Prep:
     $ Line = 0
     $ counter = 0
     if JeanX.Taboo:
-        $ JeanX.DrainWord("no_taboo")
-    $ JeanX.DrainWord("no_lick ass")
+        $ JeanX.drain_word("no_taboo")
+    $ JeanX.drain_word("no_lick ass")
 
     $ JeanX.recent_history.append("lick") if "lick" not in JeanX.recent_history else JeanX.recent_history
     $ JeanX.recent_history.append("ass") if "ass" not in JeanX.recent_history else JeanX.recent_history
@@ -4024,9 +4024,9 @@ label Jean_LA_Cycle:
                     $ Round -= 1
                     jump Jean_LA_Cycle
 
-                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.Traits:
+                "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
-                "Focus to last longer." if not Player.focusing and "focus" in Player.Traits:
+                "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
                     "You concentrate on not burning out too quickly."
                     $ Player.focusing = 1
                 "Release your focus." if Player.focusing:
@@ -4111,9 +4111,9 @@ label Jean_LA_Cycle:
                         "Undress [JeanX.name]":
 
                             call Girl_Undress (JeanX)
-                        "Clean up [JeanX.name] (locked)" if not JeanX.Spunk:
+                        "Clean up [JeanX.name] (locked)" if not JeanX.spunk:
                             pass
-                        "Clean up [JeanX.name]" if JeanX.Spunk:
+                        "Clean up [JeanX.name]" if JeanX.spunk:
                             call Girl_Cleanup (JeanX, "ask")
                         "Never mind":
                             jump Jean_LA_Cycle
@@ -4247,9 +4247,9 @@ label Jean_LA_After:
 
     $ JeanX.action_counter["eat_ass"] += 1
     $ JeanX.remaining_actions -=1
-    if JeanX.PantsNum() < 6 or JeanX.Upskirt:
+    if JeanX.PantsNum() < 6 or JeanX.upskirt:
         $ JeanX.addiction_rate += 1
-        if "addictive" in Player.Traits:
+        if "addictive" in Player.traits:
             $ JeanX.addiction_rate += 1
 
     call Partner_Like (JeanX, 2)

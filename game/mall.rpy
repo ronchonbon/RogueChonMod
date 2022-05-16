@@ -1,7 +1,7 @@
 
 label Mall_Entry(First=0, Second=0, Girl=0, Cart=[]):
     call Jubes_Entry_Check
-    $ Player.DrainWord("locked",0,0,1)
+    $ Player.drain_word("locked",0,0,1)
     $ bg_current = "bg_mall"
     $ Nearby = []
     call Gym_Clothes_Off
@@ -138,12 +138,12 @@ label Sex_Shop:
         menu:
             "What did you want to purchase?"
             "Buy dildo for $20.":
-                if Player.Inventory.count("dildo") >= 10:
+                if Player.inventory.count("dildo") >= 10:
                     "You already have way more dildos than you need. 2, 4, 6. . . yes, way too many."
-                elif Player.Cash >= 20:
+                elif Player.cash >= 20:
                     "You purchase one dildo."
-                    $ Player.Inventory.append("dildo")
-                    $ Player.Cash -= 20
+                    $ Player.inventory.append("dildo")
+                    $ Player.cash -= 20
                     if First:
                         if approval_check(Girl, 800):
                             $ First.change_face("sly")
@@ -189,12 +189,12 @@ label Sex_Shop:
                     "You don't have enough for that."
             "Buy \"Shocker\" vibrator for $25.":
 
-                if Player.Inventory.count("vibrator") >= 10:
+                if Player.inventory.count("vibrator") >= 10:
                     "If you bought one more vibrator, you would risk a geological event."
-                elif Player.Cash >= 25:
+                elif Player.cash >= 25:
                     "You purchase one vibrator."
-                    $ Player.Inventory.append("vibrator")
-                    $ Player.Cash -= 25
+                    $ Player.inventory.append("vibrator")
+                    $ Player.cash -= 25
                     if First:
                         if approval_check(Girl, 800):
                             $ First.change_face("sly")
@@ -257,17 +257,17 @@ label Sex_Shop:
 
         if Girl:
             menu:
-                "Gift a Dildo" if "dildo" in Player.Inventory:
+                "Gift a Dildo" if "dildo" in Player.inventory:
 
-                    if "dildo" not in Girl.Inventory:
+                    if "dildo" not in Girl.inventory:
                         "You give [Girl.name] the dildo."
                         $ Girl.blushing = 1
                         $ Girl.ArmPose = 2
                         $ Girl.held_item = "dildo"
                         if approval_check(Girl, 800):
                             $ Girl.change_face("bemused")
-                            $ Player.Inventory.remove("dildo")
-                            $ Girl.Inventory.append("dildo")
+                            $ Player.inventory.remove("dildo")
+                            $ Girl.inventory.append("dildo")
                             $ Girl.change_stat("love", 200, 30)
                             $ Girl.change_stat("obedience", 200, 30)
                             $ Girl.change_stat("inhibition", 200, 30)
@@ -280,8 +280,8 @@ label Sex_Shop:
                             $ Girl.change_stat("lust", 89, 10)
                         elif approval_check(Girl, 600):
                             $ Girl.change_face("confused")
-                            $ Player.Inventory.remove("dildo")
-                            $ Girl.Inventory.append("dildo")
+                            $ Player.inventory.remove("dildo")
+                            $ Girl.inventory.append("dildo")
                             if Girl != EmmaX:
                                 $ Girl.change_stat("love", 200, 10)
                                 $ Girl.change_stat("obedience", 200, 10)
@@ -375,9 +375,9 @@ label Sex_Shop:
                             $ Girl.change_stat("lust", 89, 5)
                             "She hands it back to you."
                             $ Girl.daily_history.append("offered gift")
-                    elif Girl.Inventory.count("dildo") == 1:
-                        $ Player.Inventory.remove("dildo")
-                        $ Girl.Inventory.append("dildo")
+                    elif Girl.inventory.count("dildo") == 1:
+                        $ Player.inventory.remove("dildo")
+                        $ Girl.inventory.append("dildo")
                         if Girl == RogueX:
                             ch_r "Well, I suppose I could always use another. . ."
                         elif Girl == KittyX:
@@ -411,20 +411,20 @@ label Sex_Shop:
                     $ Girl.ArmPose = 2
                     $ Girl = 0
 
-                "Gift a Dildo (locked)" if "dildo" not in Player.Inventory:
+                "Gift a Dildo (locked)" if "dildo" not in Player.inventory:
                     pass
 
-                "Gift a Vibrator" if "vibrator" in Player.Inventory:
+                "Gift a Vibrator" if "vibrator" in Player.inventory:
 
-                    if "vibrator" not in Girl.Inventory:
+                    if "vibrator" not in Girl.inventory:
                         "You give [Girl.name] the Shocker Vibrator."
                         $ Girl.blushing = 1
                         $ Girl.ArmPose = 2
                         $ Girl.held_item = "vibrator"
                         if approval_check(Girl, 700):
                             $ Girl.change_face("bemused")
-                            $ Player.Inventory.remove("vibrator")
-                            $ Girl.Inventory.append("vibrator")
+                            $ Player.inventory.remove("vibrator")
+                            $ Girl.inventory.append("vibrator")
                             $ Girl.change_stat("love", 200, 30)
                             $ Girl.change_stat("obedience", 200, 30)
                             $ Girl.change_stat("inhibition", 200, 30)
@@ -452,8 +452,8 @@ label Sex_Shop:
                             $ Girl.change_stat("lust", 89, 10)
                         elif approval_check(Girl, 400):
                             $ Girl.change_face("confused")
-                            $ Player.Inventory.remove("vibrator")
-                            $ Girl.Inventory.append("vibrator")
+                            $ Player.inventory.remove("vibrator")
+                            $ Girl.inventory.append("vibrator")
                             $ Girl.change_stat("love", 200, 10)
                             $ Girl.change_stat("obedience", 200, 10)
                             $ Girl.change_stat("inhibition", 200, 10)
@@ -534,7 +534,7 @@ label Sex_Shop:
                     $ Girl.ArmPose = 2
                     $ Girl = 0
 
-                "Gift a Vibrator (locked)" if "vibrator" not in Player.Inventory:
+                "Gift a Vibrator (locked)" if "vibrator" not in Player.inventory:
                     pass
                 "Never Mind":
 
@@ -667,7 +667,7 @@ label Swim_Shop:
                 call Display_Girl (Girl, 0, 0)
 
                 hide blackscreen onlayer black
-            $ Player.Traits.append("locked")
+            $ Player.traits.append("locked")
             call Taboo_Level
 
             while Girl:
@@ -689,7 +689,7 @@ label Swim_Shop:
                             hide blackscreen onlayer black
                         if "bikini_top" in Cart:
                             pass
-                        elif "bikini_top" in Girl.Inventory:
+                        elif "bikini_top" in Girl.inventory:
                             Girl.voice "I do already have one of these though."
                         else:
                             $ Cart.append("bikini_top")
@@ -713,7 +713,7 @@ label Swim_Shop:
                             hide blackscreen onlayer black
                         if "bikini_bottoms" in Cart:
                             pass
-                        elif "bikini_bottoms" in Girl.Inventory:
+                        elif "bikini_bottoms" in Girl.inventory:
                             Girl.voice "I do already have one of these though."
                         else:
                             $ Cart.append("bikini_bottoms")
@@ -728,13 +728,13 @@ label Swim_Shop:
                         $ Girl.change_face("smile")
                         if (Girl.underwear and approval_check(Girl, 900, TabM=2)) or approval_check(Girl, 1200, TabM=2):
                             Girl.voice "Sure. . ."
-                            $ Girl.Upskirt = 1
+                            $ Girl.upskirt = 1
                             pause 0.3
                             $ Girl.legs = 0
-                            call expression Girl.Tag + "_First_Bottomless"
+                            call expression Girl.tag + "_First_Bottomless"
                             pause 0.3
                             $ Girl.legs = "blue_skirt"
-                            $ Girl.Upskirt = 0
+                            $ Girl.upskirt = 0
                         else:
                             Girl.voice "I'll need some privacy here. . ."
                             show blackscreen onlayer black
@@ -743,7 +743,7 @@ label Swim_Shop:
                             hide blackscreen onlayer black
                         if "blue_skirt" in Cart:
                             pass
-                        elif "blue_skirt" in Girl.Inventory:
+                        elif "blue_skirt" in Girl.inventory:
                             Girl.voice "I do already have one of these though."
                         else:
                             $ Cart.append("blue_skirt")
@@ -784,7 +784,7 @@ label Swim_Shop:
 
                         $ Girl.change_outfit(Changed=0)
                         $ Round -= 20 if Round > 30 else (Round-10)
-                        $ Player.DrainWord("locked",0,0,1)
+                        $ Player.drain_word("locked",0,0,1)
                         $ bg_current = "bg_shop"
                         $ BO = Party[:]
                         while BO:
@@ -795,7 +795,7 @@ label Swim_Shop:
                         call set_the_scene
                         if not Cart:
                             "That was fun, but since there wasn't anything she was interested in, she put it all back."
-                        if Player.Cash < 50:
+                        if Player.cash < 50:
                             "You don't have enough cash on you, so you have to put everything back."
                             $ Girl.change_face("sad")
                             if "shopblock" not in Girl.daily_history:
@@ -803,7 +803,7 @@ label Swim_Shop:
                                 $ Girl.change_stat("love", 90, -2)
                                 $ Girl.change_stat("obedience", 50, 3)
                                 $ Girl.change_stat("obedience", 80, 3)
-                                $ Girl.AddWord(1,"shopblock","shopblock")
+                                $ Girl.add_word(1,"shopblock","shopblock")
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "How disappointing."
                             elif Girl in (JeanX,LauraX):
@@ -817,27 +817,27 @@ label Swim_Shop:
                                 "So what did you want to buy?"
                                 "The_top" if "bikini_top" in Cart:
                                     "You agree to buy [Girl.name] the bikini top."
-                                    if Girl.Tag + " bikini_top" in Player.Inventory:
+                                    if Girl.tag + " bikini_top" in Player.inventory:
                                         "Wait, you already have one of those."
                                         "You pull out the one in your bag."
-                                        $ Player.Inventory.remove(Girl.Tag + " bikini_top")
+                                        $ Player.inventory.remove(Girl.tag + " bikini_top")
                                     elif Girl in (KittyX,EmmaX,StormX):
-                                        if Player.Cash < 60:
+                                        if Player.cash < 60:
                                             "You look at the tag, and actually, it's $60, you can't afford it."
                                             $ Cart.remove("bikini_top")
                                         else:
-                                            $ Player.Cash -= 60
-                                    elif Player.Cash < 50:
+                                            $ Player.cash -= 60
+                                    elif Player.cash < 50:
                                         "You look at the tag, and actually, it's $50, you can't afford it."
                                         $ Cart.remove("bikini_top")
                                     else:
-                                        $ Player.Cash -= 50
+                                        $ Player.cash -= 50
                                     if "bikini_top" in Cart:
 
                                         $ Cart.remove("bikini_top")
                                         $ Girl.change_face("bemused",1)
-                                        $ Girl.Inventory.append("bikini_top")
-                                        $ Player.AddWord(1,"purchased")
+                                        $ Girl.inventory.append("bikini_top")
+                                        $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 20)
                                         $ Girl.change_stat("obedience", 200, 10)
                                         $ Girl.change_stat("inhibition", 200, 5)
@@ -859,27 +859,27 @@ label Swim_Shop:
 
                                 "The_bottoms" if "bikini_bottoms" in Cart:
                                     "You agree to buy [Girl.name] the bikini bottoms."
-                                    if Girl.Tag + " bikini_bottoms" in Player.Inventory:
+                                    if Girl.tag + " bikini_bottoms" in Player.inventory:
                                         "Wait, you already have those."
                                         "You pull out the pair in your bag."
-                                        $ Player.Inventory.remove(Girl.Tag + " bikini_bottoms")
+                                        $ Player.inventory.remove(Girl.tag + " bikini_bottoms")
                                     elif Girl in (KittyX,EmmaX,StormX):
-                                        if Player.Cash < 60:
+                                        if Player.cash < 60:
                                             "You look at the tag, and actually, it's $60, you can't afford it."
                                             $ Cart.remove("bikini_bottoms")
                                         else:
-                                            $ Player.Cash -= 60
-                                    elif Player.Cash < 50:
+                                            $ Player.cash -= 60
+                                    elif Player.cash < 50:
                                         "You look at the tag, and actually, it's $50, you can't afford it."
                                         $ Cart.remove("bikini_bottoms")
                                     else:
-                                        $ Player.Cash -= 50
+                                        $ Player.cash -= 50
                                     if "bikini_bottoms" in Cart:
 
                                         $ Cart.remove("bikini_bottoms")
                                         $ Girl.change_face("bemused",1)
-                                        $ Girl.Inventory.append("bikini_bottoms")
-                                        $ Player.AddWord(1,"purchased")
+                                        $ Girl.inventory.append("bikini_bottoms")
+                                        $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 20)
                                         $ Girl.change_stat("obedience", 200, 10)
                                         $ Girl.change_stat("inhibition", 200, 5)
@@ -901,21 +901,21 @@ label Swim_Shop:
 
                                 "The_skirt" if "blue_skirt" in Cart:
                                     "You agree to buy [Girl.name] the blue skirt."
-                                    if Girl.Tag + " blue_skirt" in Player.Inventory:
+                                    if Girl.tag + " blue_skirt" in Player.inventory:
                                         "Wait, you already have one of those."
                                         "You pull out the one in your bag."
-                                        $ Player.Inventory.remove(Girl.Tag + " blue_skirt")
-                                    if Player.Cash < 50:
+                                        $ Player.inventory.remove(Girl.tag + " blue_skirt")
+                                    if Player.cash < 50:
                                         "You look at the tag, and actually, it's $50, you can't afford it."
                                         $ Cart.remove("blue_skirt")
                                     else:
-                                        $ Player.Cash -= 50
+                                        $ Player.cash -= 50
                                     if "blue_skirt" in Cart:
 
                                         $ Cart.remove("blue_skirt")
                                         $ Girl.change_face("bemused",1)
-                                        $ Girl.Inventory.append("blue_skirt")
-                                        $ Player.AddWord(1,"purchased")
+                                        $ Girl.inventory.append("blue_skirt")
+                                        $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 20)
                                         $ Girl.change_stat("obedience", 200, 10)
                                         $ Girl.change_stat("inhibition", 200, 5)
@@ -929,7 +929,7 @@ label Swim_Shop:
                                         $ Girl.change_stat("love", 90, -2)
                                         $ Girl.change_stat("obedience", 50, 3)
                                         $ Girl.change_stat("obedience", 80, 3)
-                                        $ Girl.AddWord(1,"shopblock","shopblock")
+                                        $ Girl.add_word(1,"shopblock","shopblock")
                                     "You put all the stuff back."
                                     if Girl in (EmmaX,StormX):
                                         Girl.voice "How disappointing."
@@ -949,10 +949,10 @@ label Swim_Shop:
 
 
 
-                        $ Player.DrainWord("purchased")
-                        if Girl == KittyX and ("blue_skirt" in Girl.Inventory or Girl.inhibition >= 400) and "bikini_top" in Girl.Inventory and "bikini_bottoms" in Girl.Inventory:
+                        $ Player.drain_word("purchased")
+                        if Girl == KittyX and ("blue_skirt" in Girl.inventory or Girl.inhibition >= 400) and "bikini_top" in Girl.inventory and "bikini_bottoms" in Girl.inventory:
                             $ Girl.Swim[0] = 1
-                        elif "bikini_top" in Girl.Inventory and "bikini_bottoms" in Girl.Inventory:
+                        elif "bikini_top" in Girl.inventory and "bikini_bottoms" in Girl.inventory:
                             $ Girl.Swim[0] = 1
                         $ Girl = 0
 
@@ -1068,7 +1068,7 @@ label Lingerie_Shop:
                 call Display_Girl (Girl, 0, 0)
 
                 hide blackscreen onlayer black
-            $ Player.Traits.append("locked")
+            $ Player.traits.append("locked")
             call Taboo_Level
 
             while Girl:
@@ -1103,7 +1103,7 @@ label Lingerie_Shop:
                                 hide blackscreen onlayer black
                             if "lace_bra" in Cart:
                                 pass
-                            elif "lace_bra" in Girl.Inventory:
+                            elif "lace_bra" in Girl.inventory:
                                 Girl.voice "I do already have one of these though."
                             else:
                                 $ Cart.append("lace_bra")
@@ -1138,7 +1138,7 @@ label Lingerie_Shop:
                                 hide blackscreen onlayer black
                             if "corset" in Cart:
                                 pass
-                            elif "corset" in Girl.Inventory:
+                            elif "corset" in Girl.inventory:
                                 Girl.voice "I do already have one of these though."
                             else:
                                 $ Cart.append("corset")
@@ -1173,7 +1173,7 @@ label Lingerie_Shop:
                                 hide blackscreen onlayer black
                             if "lace corset" in Cart:
                                 pass
-                            elif "lace corset" in Girl.Inventory:
+                            elif "lace corset" in Girl.inventory:
                                 Girl.voice "I do already have one of these though."
                             else:
                                 $ Cart.append("lace corset")
@@ -1206,7 +1206,7 @@ label Lingerie_Shop:
                                 hide blackscreen onlayer black
                             if "lace_panties" in Cart:
                                 pass
-                            elif "lace_panties" in Girl.Inventory:
+                            elif "lace_panties" in Girl.inventory:
                                 Girl.voice "I do already have these though."
                             else:
                                 $ Cart.append("lace_panties")
@@ -1235,7 +1235,7 @@ label Lingerie_Shop:
                                 hide blackscreen onlayer black
                             if "tiger_panties" in Cart:
                                 pass
-                            elif "tiger_panties" in Girl.Inventory:
+                            elif "tiger_panties" in Girl.inventory:
                                 Girl.voice "I do already have these though."
                             else:
                                 $ Cart.append("tiger_panties")
@@ -1247,16 +1247,16 @@ label Lingerie_Shop:
                         if Girl.SeenPussy or approval_check(Girl, 900, TabM=2):
                             $ Girl.change_face("sexy")
                             Girl.voice "Sure. . ."
-                            $ Girl.Upskirt = 1
+                            $ Girl.upskirt = 1
                             pause 0.3
                             $ Girl.legs = 0
                             pause 0.3
                             $ Girl.hose = 0
-                            call expression Girl.Tag + "_First_Bottomless"
+                            call expression Girl.tag + "_First_Bottomless"
                             pause 0.3
                             $ Girl.hose = "stockings_and_garterbelt"
-                            $ Girl.underwearDown = 0
-                            $ Girl.Upskirt = 0
+                            $ Girl.underwear_pulled_down = 0
+                            $ Girl.upskirt = 0
                             if Second and "stockings_and_garterbelt" not in Cart:
                                 $ Girl.GirlLikeUp(Second,1)
                                 $ Second.GirlLikeUp(Girl,2)
@@ -1268,7 +1268,7 @@ label Lingerie_Shop:
                             hide blackscreen onlayer black
                         if "stockings_and_garterbelt" in Cart:
                             pass
-                        elif "stockings_and_garterbelt" in Girl.Inventory:
+                        elif "stockings_and_garterbelt" in Girl.inventory:
                             Girl.voice "I do already have these though."
                         else:
                             $ Cart.append("stockings_and_garterbelt")
@@ -1284,7 +1284,7 @@ label Lingerie_Shop:
                         $ Girl.hose = "knee stockings"
                         if "knee stockings" in Cart:
                             pass
-                        elif "knee stockings" in Girl.Inventory:
+                        elif "knee stockings" in Girl.inventory:
                             Girl.voice "I do already have these though."
                         else:
                             $ Cart.append("knee stockings")
@@ -1300,7 +1300,7 @@ label Lingerie_Shop:
                         $ Girl.hose = "socks"
                         if "socks" in Cart:
                             pass
-                        elif "socks" in Girl.Inventory:
+                        elif "socks" in Girl.inventory:
                             Girl.voice "I do already have these though."
                         else:
                             $ Cart.append("socks")
@@ -1312,16 +1312,16 @@ label Lingerie_Shop:
                         if Girl.SeenPussy or approval_check(Girl, 900, TabM=2):
                             $ Girl.change_face("sexy")
                             Girl.voice "Sure. . ."
-                            $ Girl.Upskirt = 1
+                            $ Girl.upskirt = 1
                             pause 0.3
                             $ Girl.legs = 0
                             pause 0.3
                             $ Girl.hose = 0
-                            call expression Girl.Tag + "_First_Bottomless"
+                            call expression Girl.tag + "_First_Bottomless"
                             pause 0.3
                             $ Girl.hose = "pantyhose"
-                            $ Girl.underwearDown = 0
-                            $ Girl.Upskirt = 0
+                            $ Girl.underwear_pulled_down = 0
+                            $ Girl.upskirt = 0
                             if Second and "pantyhose" not in Cart:
                                 $ Girl.GirlLikeUp(Second,1)
                                 $ Second.GirlLikeUp(Girl,2)
@@ -1333,7 +1333,7 @@ label Lingerie_Shop:
                             hide blackscreen onlayer black
                         if "pantyhose" in Cart:
                             pass
-                        elif "pantyhose" in Girl.Inventory:
+                        elif "pantyhose" in Girl.inventory:
                             Girl.voice "I do already have these though."
                         else:
                             $ Cart.append("pantyhose")
@@ -1346,7 +1346,7 @@ label Lingerie_Shop:
                             else:
                                 Girl.voice "Ok. . ."
                             $ Girl.hose = 0
-                            call expression Girl.Tag + "_First_Bottomless"
+                            call expression Girl.tag + "_First_Bottomless"
                         else:
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I do not think so. . ."
@@ -1376,12 +1376,12 @@ label Lingerie_Shop:
                                     $ Girl.accessory = 0
                                     pause 0.3                                                    
                                 $ Girl.top = 0
-                                call expression Girl.Tag + "_First_Topless"
-                                call expression Girl.Tag + "_First_Bottomless" pass (1)
+                                call expression Girl.tag + "_First_Topless"
+                                call expression Girl.tag + "_First_Bottomless" pass (1)
                                 pause 0.3
                                 $ Girl.top = "nighty"
                                 pause 0.3
-                                $ Girl.Uptop = 0
+                                $ Girl.top_pulled_up = 0
                                 if Second and "nighty" not in Cart:
                                     $ Girl.GirlLikeUp(Second,1)
                                     $ Second.GirlLikeUp(Girl,3)
@@ -1395,7 +1395,7 @@ label Lingerie_Shop:
                                 hide blackscreen onlayer black
                             if "nighty" in Cart:
                                 pass
-                            elif "nighty" in Girl.Inventory:
+                            elif "nighty" in Girl.inventory:
                                 Girl.voice "I do already have one of these though."
                             else:
                                 $ Cart.append("nighty")
@@ -1435,7 +1435,7 @@ label Lingerie_Shop:
                                 $ Second.GirlLikeUp(Girl,3)
 
                         $ Round -= 20 if Round > 30 else (Round-10)
-                        $ Player.DrainWord("locked",0,0,1)
+                        $ Player.drain_word("locked",0,0,1)
                         $ bg_current = "bg_shop"
                         $ BO = Party[:]
                         while BO:
@@ -1448,7 +1448,7 @@ label Lingerie_Shop:
                         $ Girl.change_outfit(Changed=0)
                         if not Cart:
                             "That was fun, but since there wasn't anything she was interested in, she put it all back."
-                        if Player.Cash < 50:
+                        if Player.cash < 50:
                             "You don't have enough cash on you, so you have to put everything back."
                             $ Girl.change_face("sad")
                             if "shopblock" not in Girl.daily_history:
@@ -1456,7 +1456,7 @@ label Lingerie_Shop:
                                 $ Girl.change_stat("love", 90, -2)
                                 $ Girl.change_stat("obedience", 50, 3)
                                 $ Girl.change_stat("obedience", 80, 3)
-                                $ Girl.AddWord(1,"shopblock","shopblock")
+                                $ Girl.add_word(1,"shopblock","shopblock")
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "How disappointing."
                             elif Girl in (JeanX,LauraX):
@@ -1470,21 +1470,21 @@ label Lingerie_Shop:
                                 "So what did you want to buy?"
                                 "The lace_bra" if "lace_bra" in Cart:
                                     "You agree to buy [Girl.name] the lace bra."
-                                    if Girl.Tag + " lace_bra" in Player.Inventory:
+                                    if Girl.tag + " lace_bra" in Player.inventory:
                                         "Wait, you already have one of those."
                                         "You pull out the one in your bag."
-                                        $ Player.Inventory.remove(Girl.Tag + " lace_bra")
-                                    elif Player.Cash < 90:
+                                        $ Player.inventory.remove(Girl.tag + " lace_bra")
+                                    elif Player.cash < 90:
                                         "You look at the tag, and actually, it's $90, you can't afford it."
                                         $ Cart.remove("lace_bra")
                                     else:
-                                        $ Player.Cash -= 90
+                                        $ Player.cash -= 90
                                     if "lace_bra" in Cart:
 
                                         $ Cart.remove("lace_bra")
                                         $ Girl.change_face("bemused",1)
-                                        $ Girl.Inventory.append("lace_bra")
-                                        $ Player.AddWord(1,"purchased")
+                                        $ Girl.inventory.append("lace_bra")
+                                        $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 25)
                                         $ Girl.change_stat("obedience", 200, 20)
                                         $ Girl.change_stat("inhibition", 200, 20)
@@ -1504,21 +1504,21 @@ label Lingerie_Shop:
 
                                 "The corset" if "corset" in Cart:
                                     "You agree to buy [Girl.name] the corset."
-                                    if Girl.Tag + " corset" in Player.Inventory:
+                                    if Girl.tag + " corset" in Player.inventory:
                                         "Wait, you already have one of those."
                                         "You pull out the one in your bag."
-                                        $ Player.Inventory.remove(Girl.Tag + " corset")
-                                    elif Player.Cash < 70:
+                                        $ Player.inventory.remove(Girl.tag + " corset")
+                                    elif Player.cash < 70:
                                         "You look at the tag, and actually, it's $70, you can't afford it."
-                                        $ Player.Inventory.remove(Girl.Tag + " corset")
+                                        $ Player.inventory.remove(Girl.tag + " corset")
                                     else:
-                                        $ Player.Cash -= 70
+                                        $ Player.cash -= 70
                                     if "corset" in Cart:
 
                                         $ Cart.remove("corset")
                                         $ Girl.change_face("bemused",1)
-                                        $ Girl.Inventory.append("corset")
-                                        $ Player.AddWord(1,"purchased")
+                                        $ Girl.inventory.append("corset")
+                                        $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 15)
                                         $ Girl.change_stat("obedience", 200, 20)
                                         $ Girl.change_stat("inhibition", 200, 10)
@@ -1530,21 +1530,21 @@ label Lingerie_Shop:
 
                                 "The lace corset" if "lace corset" in Cart:
                                     "You agree to buy [Girl.name] the lace corset."
-                                    if Girl.Tag + " lace corset" in Player.Inventory:
+                                    if Girl.tag + " lace corset" in Player.inventory:
                                         "Wait, you already have one of those."
                                         "You pull out the one in your bag."
-                                        $ Player.Inventory.remove(Girl.Tag + " lace corset")
-                                    elif Player.Cash < 90:
+                                        $ Player.inventory.remove(Girl.tag + " lace corset")
+                                    elif Player.cash < 90:
                                         "You look at the tag, and actually, it's $90, you can't afford it."
                                         $ Cart.remove("lace corset")
                                     else:
-                                        $ Player.Cash -= 90
+                                        $ Player.cash -= 90
                                     if "lace corset" in Cart:
 
                                         $ Cart.remove("lace corset")
                                         $ Girl.change_face("bemused",1)
-                                        $ Girl.Inventory.append("lace corset")
-                                        $ Player.AddWord(1,"purchased")
+                                        $ Girl.inventory.append("lace corset")
+                                        $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 25)
                                         $ Girl.change_stat("obedience", 200, 30)
                                         $ Girl.change_stat("inhibition", 200, 20)
@@ -1553,21 +1553,21 @@ label Lingerie_Shop:
 
                                 "The lace_panties" if "lace_panties" in Cart:
                                     "You agree to buy [Girl.name] the lace panties."
-                                    if Girl.Tag + " lace_panties" in Player.Inventory:
+                                    if Girl.tag + " lace_panties" in Player.inventory:
                                         "Wait, you already have one of those."
                                         "You pull out the ones in your bag."
-                                        $ Player.Inventory.remove(Girl.Tag + " lace_panties")
-                                    elif Player.Cash < 110:
+                                        $ Player.inventory.remove(Girl.tag + " lace_panties")
+                                    elif Player.cash < 110:
                                         "You look at the tag, and actually, they're $110, you can't afford them."
                                         $ Cart.remove("lace_panties")
                                     else:
-                                        $ Player.Cash -= 110
+                                        $ Player.cash -= 110
                                     if "lace_panties" in Cart:
 
                                         $ Cart.remove("lace_panties")
                                         $ Girl.change_face("bemused",1)
-                                        $ Girl.Inventory.append("lace_panties")
-                                        $ Player.AddWord(1,"purchased")
+                                        $ Girl.inventory.append("lace_panties")
+                                        $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 25)
                                         $ Girl.change_stat("obedience", 200, 20)
                                         $ Girl.change_stat("inhibition", 200, 20)
@@ -1591,21 +1591,21 @@ label Lingerie_Shop:
 
                                 "The tiger-striped_panties" if "tiger_panties" in Cart:
                                     "You agree to buy [Girl.name] the tiger panties."
-                                    if Girl.Tag + " tiger_panties" in Player.Inventory:
+                                    if Girl.tag + " tiger_panties" in Player.inventory:
                                         "Wait, you already have one of those."
                                         "You pull out the ones in your bag."
-                                        $ Player.Inventory.remove(Girl.Tag + " tiger_panties")
-                                    elif Player.Cash < 100:
+                                        $ Player.inventory.remove(Girl.tag + " tiger_panties")
+                                    elif Player.cash < 100:
                                         "You look at the tag, and actually, they're $100, you can't afford them."
                                         $ Cart.remove("tiger_panties")
                                     else:
-                                        $ Player.Cash -= 100
+                                        $ Player.cash -= 100
                                     if "tiger_panties" in Cart:
 
                                         $ Cart.remove("tiger_panties")
                                         $ Girl.change_face("bemused",1)
-                                        $ Girl.Inventory.append("tiger_panties")
-                                        $ Player.AddWord(1,"purchased")
+                                        $ Girl.inventory.append("tiger_panties")
+                                        $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 25)
                                         $ Girl.change_stat("obedience", 200, 20)
                                         $ Girl.change_stat("inhibition", 200, 20)
@@ -1615,21 +1615,21 @@ label Lingerie_Shop:
 
                                 "The stockings and garterbelt" if "stockings_and_garterbelt" in Cart:
                                     "You agree to buy [Girl.name] the stockings and garterbelt."
-                                    if Girl.Tag + " stockings and garterbelt" in Player.Inventory:
+                                    if Girl.tag + " stockings and garterbelt" in Player.inventory:
                                         "Wait, you already have those."
                                         "You pull out the ones in your bag."
-                                        $ Player.Inventory.remove(Girl.Tag + " stockings and garterbelt")
-                                    elif Player.Cash < 100:
+                                        $ Player.inventory.remove(Girl.tag + " stockings and garterbelt")
+                                    elif Player.cash < 100:
                                         "You look at the tag, and actually, they're $100, you can't afford them."
                                         $ Cart.remove("stockings_and_garterbelt")
                                     else:
-                                        $ Player.Cash -= 100
+                                        $ Player.cash -= 100
                                     if "stockings_and_garterbelt" in Cart:
 
                                         $ Cart.remove("stockings_and_garterbelt")
                                         $ Girl.change_face("bemused",1)
-                                        $ Girl.Inventory.append("stockings_and_garterbelt")
-                                        $ Player.AddWord(1,"purchased")
+                                        $ Girl.inventory.append("stockings_and_garterbelt")
+                                        $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 5)
                                         $ Girl.change_stat("obedience", 200, 5)
                                         $ Girl.change_stat("inhibition", 200, 5)
@@ -1643,21 +1643,21 @@ label Lingerie_Shop:
 
                                 "The knee stockings" if "knee stockings" in Cart:
                                     "You agree to buy [Girl.name] the knee stockings."
-                                    if Girl.Tag + " knee stockings" in Player.Inventory:
+                                    if Girl.tag + " knee stockings" in Player.inventory:
                                         "Wait, you already have some of those."
                                         "You pull out the ones in your bag."
-                                        $ Player.Inventory.remove(Girl.Tag + " knee stockings")
-                                    elif Player.Cash < 50:
+                                        $ Player.inventory.remove(Girl.tag + " knee stockings")
+                                    elif Player.cash < 50:
                                         "You look at the tag, and actually, they're $50, you can't afford them."
                                         $ Cart.remove("knee stockings")
                                     else:
-                                        $ Player.Cash -= 50
+                                        $ Player.cash -= 50
                                     if "knee stockings" in Cart:
 
                                         $ Cart.remove("knee stockings")
                                         $ Girl.change_face("bemused",1)
-                                        $ Girl.Inventory.append("knee stockings")
-                                        $ Player.AddWord(1,"purchased")
+                                        $ Girl.inventory.append("knee stockings")
+                                        $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 5)
                                         $ Girl.change_stat("obedience", 200, 5)
                                         $ Girl.change_stat("inhibition", 200, 5)
@@ -1666,21 +1666,21 @@ label Lingerie_Shop:
 
                                 "The high socks" if "socks" in Cart:
                                     "You agree to buy [Girl.name] the socks."
-                                    if Girl.Tag + " socks" in Player.Inventory:
+                                    if Girl.tag + " socks" in Player.inventory:
                                         "Wait, you already have one of those."
                                         "You pull out the ones in your bag."
-                                        $ Player.Inventory.remove(Girl.Tag + " socks")
-                                    elif Player.Cash < 50:
+                                        $ Player.inventory.remove(Girl.tag + " socks")
+                                    elif Player.cash < 50:
                                         "You look at the tag, and actually, they're $50, you can't afford them."
                                         $ Cart.remove("socks")
                                     else:
-                                        $ Player.Cash -= 50
+                                        $ Player.cash -= 50
                                     if "socks" in Cart:
 
                                         $ Cart.remove("socks")
                                         $ Girl.change_face("bemused",1)
-                                        $ Girl.Inventory.append("socks")
-                                        $ Player.AddWord(1,"purchased")
+                                        $ Girl.inventory.append("socks")
+                                        $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 5)
                                         $ Girl.change_stat("obedience", 200, 5)
                                         $ Girl.change_stat("inhibition", 200, 5)
@@ -1689,21 +1689,21 @@ label Lingerie_Shop:
 
                                 "The_pantyhose" if "pantyhose" in Cart:
                                     "You agree to buy [Girl.name] the pantyhose."
-                                    if Girl.Tag + "_pantyhose" in Player.Inventory:
+                                    if Girl.tag + "_pantyhose" in Player.inventory:
                                         "Wait, you already have one of those."
                                         "You pull out the ones in your bag."
-                                        $ Player.Inventory.remove(Girl.Tag + "_pantyhose")
-                                    elif Player.Cash < 50:
+                                        $ Player.inventory.remove(Girl.tag + "_pantyhose")
+                                    elif Player.cash < 50:
                                         "You look at the tag, and actually, they're $50, you can't afford them."
                                         $ Cart.remove("pantyhose")
                                     else:
-                                        $ Player.Cash -= 50
+                                        $ Player.cash -= 50
                                     if "pantyhose" in Cart:
 
                                         $ Cart.remove("pantyhose")
                                         $ Girl.change_face("bemused",1)
-                                        $ Girl.Inventory.append("pantyhose")
-                                        $ Player.AddWord(1,"purchased")
+                                        $ Girl.inventory.append("pantyhose")
+                                        $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 5)
                                         $ Girl.change_stat("obedience", 200, 5)
                                         $ Girl.change_stat("inhibition", 200, 5)
@@ -1712,21 +1712,21 @@ label Lingerie_Shop:
 
                                 "The nighty" if "nighty" in Cart:
                                     "You agree to buy [Girl.name] the nighty."
-                                    if Girl.Tag + " nighty" in Player.Inventory:
+                                    if Girl.tag + " nighty" in Player.inventory:
                                         "Wait, you already have one of those."
                                         "You pull out the one in your bag."
-                                        $ Player.Inventory.remove(Girl.Tag + " nighty")
-                                    elif Player.Cash < 75:
+                                        $ Player.inventory.remove(Girl.tag + " nighty")
+                                    elif Player.cash < 75:
                                         "You look at the tag, and actually, it's $75, you can't afford it."
                                         $ Cart.remove("nighty")
                                     else:
-                                        $ Player.Cash -= 75
+                                        $ Player.cash -= 75
                                     if "nighty" in Cart:
 
                                         $ Cart.remove("nighty")
                                         $ Girl.change_face("bemused",1)
-                                        $ Girl.Inventory.append("nighty")
-                                        $ Player.AddWord(1,"purchased")
+                                        $ Girl.inventory.append("nighty")
+                                        $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 40)
                                         $ Girl.change_stat("obedience", 200, 20)
                                         $ Girl.change_stat("inhibition", 200, 30)
@@ -1741,7 +1741,7 @@ label Lingerie_Shop:
                                         $ Girl.change_stat("love", 90, -2)
                                         $ Girl.change_stat("obedience", 50, 3)
                                         $ Girl.change_stat("obedience", 80, 3)
-                                        $ Girl.AddWord(1,"shopblock","shopblock")
+                                        $ Girl.add_word(1,"shopblock","shopblock")
                                     "You put all the stuff back."
                                     if Girl in (EmmaX,StormX):
                                         Girl.voice "How disappointing."
@@ -1761,7 +1761,7 @@ label Lingerie_Shop:
 
 
 
-                        $ Player.DrainWord("purchased")
+                        $ Player.drain_word("purchased")
                         $ Girl = 0
 
 
@@ -1777,7 +1777,7 @@ label Dressing_Strip_Bra(Item=0):
     $ Girl.change_face("sexy")
     Girl.voice "Sure. . ."
     if Girl.top or Girl.bra:
-        $ Girl.Uptop = 1
+        $ Girl.top_pulled_up = 1
         pause 0.3
     if Girl == JubesX and Girl.accessory:
         $ Girl.accessory = 0
@@ -1787,11 +1787,11 @@ label Dressing_Strip_Bra(Item=0):
         pause 0.3
     if Girl.bra:
         $ Girl.bra = 0
-    call expression Girl.Tag + "_First_Topless"
+    call expression Girl.tag + "_First_Topless"
     pause 0.3
     $ Girl.bra = Item
     pause 0.3
-    $ Girl.Uptop = 0
+    $ Girl.top_pulled_up = 0
     if Second and Item not in Cart:
         $ Girl.GirlLikeUp(Second,2)
         $ Second.GirlLikeUp(Girl,5)
@@ -1806,7 +1806,7 @@ label Dressing_Strip_Panties(Item=0):
     $ Girl.change_face("sexy")
     Girl.voice "Sure. . ."
     if Girl.legs:
-        $ Girl.Upskirt = 1
+        $ Girl.upskirt = 1
         pause 0.3
         $ Girl.legs = 0
         pause 0.3
@@ -1814,14 +1814,14 @@ label Dressing_Strip_Panties(Item=0):
         $ Girl.hose = 0
         pause 0.3
     if Girl.underwear:
-        $ Girl.underwearDown = 1
+        $ Girl.underwear_pulled_down = 1
         pause 0.2
         $ Girl.underwear = 0
-    call expression Girl.Tag + "_First_Bottomless"
+    call expression Girl.tag + "_First_Bottomless"
     pause 0.3
     $ Girl.underwear = Item
-    $ Girl.underwearDown = 0
-    $ Girl.Upskirt = 0
+    $ Girl.underwear_pulled_down = 0
+    $ Girl.upskirt = 0
     if Second and Item not in Cart:
         $ Girl.GirlLikeUp(Second,3)
         $ Second.GirlLikeUp(Girl,5)

@@ -142,7 +142,7 @@ label Halloween_Chat_Menu:
 
             menu:
                 "I just wanted to talk. . .":
-                    call expression Girl.Tag + "_Chitchat"
+                    call expression Girl.tag + "_Chitchat"
                     return
                 "Relationship status":
                     ch_p "Could we talk about us?"
@@ -168,19 +168,19 @@ label Halloween_Chat_Menu:
 
                     menu:
                         "How do you feel about [RogueX.name]?" if Girl != RogueX:
-                            call expression Girl.Tag + "_About" pass (RogueX)
+                            call expression Girl.tag + "_About" pass (RogueX)
                         "How do you feel about [KittyX.name]?" if Girl != KittyX and "met" in KittyX.history:
-                            call expression Girl.Tag + "_About" pass (KittyX)
+                            call expression Girl.tag + "_About" pass (KittyX)
                         "How do you feel about [EmmaX.name]?" if Girl != EmmaX and "met" in EmmaX.history:
-                            call expression Girl.Tag + "_About" pass (EmmaX)
+                            call expression Girl.tag + "_About" pass (EmmaX)
                         "How do you feel about [LauraX.name]?" if Girl != LauraX and "met" in LauraX.history:
-                            call expression Girl.Tag + "_About" pass (LauraX)
+                            call expression Girl.tag + "_About" pass (LauraX)
                         "How do you feel about [JeanX.name]?" if Girl != JeanX and "met" in JeanX.history:
-                            call expression Girl.Tag + "_About" pass (JeanX)
+                            call expression Girl.tag + "_About" pass (JeanX)
                         "How do you feel about [StormX.name]?" if Girl != StormX and "met" in StormX.history:
-                            call expression Girl.Tag + "_About" pass (StormX)
+                            call expression Girl.tag + "_About" pass (StormX)
                         "About hooking up with other girls. . .":
-                            call expression Girl.Tag + "_Monogamy"
+                            call expression Girl.tag + "_Monogamy"
                         "Never mind.":
                             pass
                 "Back":
@@ -278,7 +278,7 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
 
     $ Present.append(RogueX)
     $ RogueX.location = "HW Party"
-    $ RogueX.AddWord(1,0,RogueX.hair,0,"halloween")
+    $ RogueX.add_word(1,0,RogueX.hair,0,"halloween")
     $ RogueX.OutfitDay = "costume"
     $ RogueX.Outfit = RogueX.OutfitDay
     $ RogueX.change_outfit(Changed=1)
@@ -439,7 +439,7 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
 
     $ Present.append(KittyX)
     $ KittyX.location = "HW Party"
-    $ KittyX.AddWord(1,0,KittyX.hair,0,"halloween")
+    $ KittyX.add_word(1,0,KittyX.hair,0,"halloween")
     $ KittyX.OutfitDay = "costume"
     $ KittyX.Outfit = KittyX.OutfitDay
     $ KittyX.change_outfit(Changed=1)
@@ -608,7 +608,7 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
 
     $ Present.append(LauraX)
     $ LauraX.location = "HW Party"
-    $ LauraX.AddWord(1,0,LauraX.hair,0,"halloween")
+    $ LauraX.add_word(1,0,LauraX.hair,0,"halloween")
     $ LauraX.OutfitDay = "costume"
     $ LauraX.Outfit = LauraX.OutfitDay
     $ LauraX.change_outfit(Changed=1)
@@ -697,17 +697,17 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
                     ch_l "You know better than that. . ."
                     call HWchange_stat (LauraX, "obedience", 80, 3)
                     call HWchange_stat (LauraX, "obedience", 200, 1)
-                    $ LauraX.AddWord(1,0,0,0,"partyfoul")
+                    $ LauraX.add_word(1,0,0,0,"partyfoul")
                 else:
 
                     call HWchange_stat (LauraX, "love", 80, -2)
                     call HWchange_stat (LauraX, "love", 90, -3)
                     ch_l ". . ."
                     ch_l "If you knew. . ."
-                    $ LauraX.AddWord(1,0,0,0,"partyfoul")
+                    $ LauraX.add_word(1,0,0,0,"partyfoul")
                 $ LauraX.change_face("angry")
 
-                $ LauraX.AddWord(1,"angry","angry",0,0)
+                $ LauraX.add_word(1,"angry","angry",0,0)
 
 
                 ch_l "I don't have time for this."
@@ -830,7 +830,7 @@ label Halloween_Jean:
 
     $ Present.append(JeanX)
     $ JeanX.location = "HW Party"
-    $ JeanX.AddWord(1,0,JeanX.hair,0,"halloween")
+    $ JeanX.add_word(1,0,JeanX.hair,0,"halloween")
     $ JeanX.OutfitDay = "costume"
     $ JeanX.Outfit = JeanX.OutfitDay
     $ JeanX.change_outfit(Changed=1)
@@ -888,14 +888,14 @@ label Halloween_Jean:
             $ JeanX.change_face("confused")
             ch_j "I thought you had \"power cancelling\" powers."
             ch_j "It's fire now?"
-            $ JeanX.AddWord(1,"fire",0)
+            $ JeanX.add_word(1,"fire",0)
         "A fireman." if Costume == 3:
             call HWchange_stat (JeanX, "love", 90, 1)
             call HWchange_stat (JeanX, "obedience", 50, 1)
             call HWchange_stat (JeanX, "inhibition", 50, 1)
             ch_j "Oh, ok. Hello \"Fire Man.\""
             $ JeanX.player_petname = "Fire Man"
-            $ JeanX.AddWord(1,"fire",0)
+            $ JeanX.add_word(1,"fire",0)
         "Skip the intros." if "halloween" in Player.history:
             menu:
                 "Are you sure you want to skip the remaining inros and go straight to the party?"
@@ -1041,7 +1041,7 @@ label Halloween_Jean:
             $ JeanX.change_face("smile",Eyes="surprised")
             call HWchange_stat (JeanX, "inhibition", 70, 2)
             "You hear mumbles of \"yes, Jessie\". . ."
-            $ JeanX.AddWord(1,"jessie",0)
+            $ JeanX.add_word(1,"jessie",0)
     $ JeanX.change_face("smile")
     show Jean_Sprite:
         ease 1 pos (300,50)
@@ -1084,7 +1084,7 @@ label Halloween_Jean:
     $ Present.append(StormX)
     $ StormX.change_face("smile")
     $ StormX.location = "HW Party"
-    $ StormX.AddWord(1,0,StormX.hair,0,"halloween")
+    $ StormX.add_word(1,0,StormX.hair,0,"halloween")
     $ StormX.OutfitDay = "costume"
     $ StormX.Outfit = StormX.OutfitDay
     $ StormX.change_outfit(Changed=1)
@@ -1251,7 +1251,7 @@ label Halloween_Emma:
     $ Present.append(EmmaX)
     $ EmmaX.location = "HW Party"
     $ EmmaX.change_face("smile")
-    $ EmmaX.AddWord(1,0,EmmaX.hair,0,"halloween")
+    $ EmmaX.add_word(1,0,EmmaX.hair,0,"halloween")
     $ EmmaX.OutfitDay = "costume"
     $ EmmaX.Outfit = EmmaX.OutfitDay
     $ EmmaX.change_outfit(Changed=1)
@@ -1292,10 +1292,10 @@ label Halloween_Emma:
                     ch_e "I'm sure you did. . ."
                 "I meant the giant vampire lady!":
                     $ EmmaX.change_face("confused",2,Eyes="surprised")
-                    $ EmmaX.AddWord(1,"vampire",0)
+                    $ EmmaX.add_word(1,"vampire",0)
         "Let me guess, that giant vampire lady?":
             $ EmmaX.change_face("confused",2)
-            $ EmmaX.AddWord(1,"vampire","vampire")
+            $ EmmaX.add_word(1,"vampire","vampire")
         "Skip the intros." if "halloween" in Player.history:
             menu:
                 "Are you sure you want to skip the remaining inros and go straight to the party?"
@@ -1321,7 +1321,7 @@ label Halloween_Emma:
                 ch_e "Costume?"
                 $ EmmaX.change_face("confused")
                 ch_e "What costume?"
-                $ EmmaX.DrainWord("vampire",1,0,0)
+                $ EmmaX.drain_word("vampire",1,0,0)
             "Well, I just meant. . . in certain areas.":
                 $ EmmaX.change_face("angry")
                 call HWchange_stat (EmmaX, "obedience", 50, 1)
@@ -1384,7 +1384,7 @@ label Halloween_Emma:
                 ch_e "Costume?"
                 $ EmmaX.change_face("confused")
                 ch_e "What costume?"
-                $ EmmaX.DrainWord("vampire",1,0,0)
+                $ EmmaX.drain_word("vampire",1,0,0)
     $ EmmaX.change_face("normal",Eyes="down")
     ch_e "I'd heard this would be a \"fancy dress\" party, so I just dressed for the occasion."
     $ EmmaX.change_face("angry",Eyes="side")
@@ -1542,7 +1542,7 @@ label Halloween_Skip:
         $ Options[0].OutfitDay = "costume"
         $ Options[0].Outfit = EmmaX.OutfitDay
         $ Options[0].change_outfit(Changed=1)
-        $ Options[0].AddWord(1,0,0,0,"halloween")
+        $ Options[0].add_word(1,0,0,0,"halloween")
 
         $ Options.remove(Options[0])
 
@@ -1595,7 +1595,7 @@ label Halloween_Events:
                             
                             ]
         $ renpy.random.shuffle(HWEvents)
-        $ Player.AddWord(1,"halloween","halloween",0,"halloween")
+        $ Player.add_word(1,"halloween","halloween",0,"halloween")
         "Introductions out of the way, you take a look around the party in progress."
     "[HWEvents[0]]"
     $ Round -= 5

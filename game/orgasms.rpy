@@ -106,22 +106,22 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
 
         "Just fire away" if offhand_action == "jackin":
             if "cockout" not in Player.recent_history:
-                $ Player.Spunk = "in"
+                $ Player.spunk = "in"
                 "You cum in your pants."
             else:
                 "You spray jizz across the room."
             jump Girl_Orgasm_After
         "Pull back" if primary_action != "psy" and Girl.location == bg_current and action_context != "swap":
-            if renpy.showing(Girl.Tag+"_BJ_Animation"):
+            if renpy.showing(Girl.tag+"_BJ_Animation"):
                 if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
                     jump Manic_Suck
-                call expression Girl.Tag+"_BJ_Reset"
-            elif renpy.showing(Girl.Tag+"_HJ_Animation"):
-                call expression Girl.Tag+"_HJ_Reset"
-            elif renpy.showing(Girl.Tag+"_Doggy_Animation"):
-                call expression Girl.Tag+"_Doggy_Reset"
-            elif renpy.showing(Girl.Tag+"_SexSprite"):
-                call expression Girl.Tag+"_Sex_Reset"
+                call expression Girl.tag+"_BJ_Reset"
+            elif renpy.showing(Girl.tag+"_HJ_Animation"):
+                call expression Girl.tag+"_HJ_Reset"
+            elif renpy.showing(Girl.tag+"_Doggy_Animation"):
+                call expression Girl.tag+"_Doggy_Reset"
+            elif renpy.showing(Girl.tag+"_SexSprite"):
+                call expression Girl.tag+"_Sex_Reset"
             if approval_check(Girl, 500, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.addiction > 50 and Girl.event_counter["swallowed"]:
                 $ Girl.eyes = "manic"
                 $ Girl.mouth = "kiss"
@@ -145,14 +145,14 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                 menu:
                     extend ""
                     "Ok, if you'll swallow it.":
-                        if not renpy.showing(Girl.Tag+"_BJ_Animation"):
-                            call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+                        if not renpy.showing(Girl.tag+"_BJ_Animation"):
+                            call expression Girl.tag+"_BJ_Launch" pass ("cum")
                         $ Girl.change_face("sucking")
                         $ action_speed = 2
                         "She nods and puts the tip into her mouth. As you release she gulps it down hungrily."
                         $ Girl.change_face("sexy")
                         $ Girl.mouth = "sucking"
-                        $ Girl.Spunk.append("mouth")
+                        $ Girl.spunk.append("mouth")
                         ". . ."
                         $ action_speed = 0
                         $ Girl.change_face("sad")
@@ -182,8 +182,8 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                             $ Girl.change_stat("obedience", 70, -2)
                             $ Girl.change_stat("inhibition", 30, 2)
                             $ Girl.change_stat("inhibition", 70, 3)
-                            if not renpy.showing(Girl.Tag+"_BJ_Animation"):
-                                call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+                            if not renpy.showing(Girl.tag+"_BJ_Animation"):
+                                call expression Girl.tag+"_BJ_Launch" pass ("cum")
                                 $ action_speed = 4
                             "She dives down on you and you can't resist filling her throat."
                             $ action_speed = 0
@@ -254,7 +254,7 @@ label Manic_Suck:
     $ action_speed = 0
     "You pull out of her mouth with a pop, and her eyes widen in surprise."
     $ Girl.mouth = "sucking"
-    $ Girl.Spunk.append("mouth")
+    $ Girl.spunk.append("mouth")
     $ action_speed = 4
     "She leaps at your cock and sucks it deep, draining your fluids hungrily."
     $ action_speed = 0
@@ -280,17 +280,17 @@ label Girl_Warn_Her:
     $ Girl.change_stat("love", 90, 3,Alt=[[JeanX],900,5])
     if Girl.obedience >= 500:
         $ Girl.change_stat("obedience", 80, 5)
-    if ("hungry" in Girl.Traits and D20 >= 5):
-        if renpy.showing(Girl.Tag+"_Doggy_Animation") or renpy.showing(Girl.Tag+"_SexSprite"):
-            call expression Girl.Tag+"_HJ_Launch" pass ("cum")
+    if ("hungry" in Girl.traits and D20 >= 5):
+        if renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
+            call expression Girl.tag+"_HJ_Launch" pass ("cum")
             "She grins and pulls out with a pop, and begins to stroke you off."
         $ action_speed = 2
         $ Girl.change_face("sucking")
         ". . ."
         $ action_speed = 0
-        $ Girl.Spunk.append("mouth")
-        $ Girl.Spunk.append("chin")
-        if not renpy.showing(Girl.Tag+"_BJ_Animation"):
+        $ Girl.spunk.append("mouth")
+        $ Girl.spunk.append("chin")
+        if not renpy.showing(Girl.tag+"_BJ_Animation"):
             "She smiles and then puts your tip in her mouth. When you finish filling her mouth, she quickly gulps it down and wipes her lips."
         else:
             "She makes a little humming sound, but keeps sucking. When you finish filling her mouth, she quickly gulps it down and wipes her lips."
@@ -304,9 +304,9 @@ label Girl_Warn_Her:
     if primary_action == "sex" and Girl.event_counter["creampied"] >= 5:
 
         $ Girl.change_face("sexy")
-        $ Player.Cock = "in"
-        $ Girl.Spunk.append("in")
-        $ Player.Spunk = "in"
+        $ Player.cock_position = "in"
+        $ Girl.spunk.append("in")
+        $ Player.spunk = "in"
         $ action_speed = 0
         "She smiles and speeds up her actions, causing you to erupt inside her."
         if Girl.lust >= 85:
@@ -316,9 +316,9 @@ label Girl_Warn_Her:
     elif primary_action == "sex" and Girl.event_counter["creampied"] and D20 >= 10:
 
         $ Girl.change_face("sexy")
-        $ Player.Cock = "in"
-        $ Girl.Spunk.append("in")
-        $ Player.Spunk = "in"
+        $ Player.cock_position = "in"
+        $ Girl.spunk.append("in")
+        $ Player.spunk = "in"
         $ action_speed = 0
         "She gets a michevious look and speeds up, you burst inside her."
         if Girl.lust >= 85:
@@ -328,9 +328,9 @@ label Girl_Warn_Her:
     elif primary_action == "anal" and Girl.event_counter["anal_creampied"] >= 5:
 
         $ Girl.change_face("sexy")
-        $ Player.Cock = "anal"
-        $ Girl.Spunk.append("anal")
-        $ Player.Spunk = "anal"
+        $ Player.cock_position = "anal"
+        $ Girl.spunk.append("anal")
+        $ Player.spunk = "anal"
         $ action_speed = 0
         "She smiles and speeds up her actions, causing you to erupt inside her."
         if Girl.lust >= 85:
@@ -340,9 +340,9 @@ label Girl_Warn_Her:
     elif primary_action == "anal" and Girl.event_counter["anal_creampied"] and D20 >= 10:
 
         $ Girl.change_face("sexy")
-        $ Player.Cock = "anal"
-        $ Girl.Spunk.append("anal")
-        $ Player.Spunk = "anal"
+        $ Player.cock_position = "anal"
+        $ Girl.spunk.append("anal")
+        $ Player.spunk = "anal"
         $ action_speed = 0
         "She gets a michevious look and speeds up, you burst inside her."
         if Girl.lust >= 85:
@@ -351,18 +351,18 @@ label Girl_Warn_Her:
 
     elif primary_action != "anal" and Girl.event_counter["swallowed"] >= 5:
 
-        if renpy.showing(Girl.Tag+"_BJ_Animation"):
+        if renpy.showing(Girl.tag+"_BJ_Animation"):
             $ Girl.change_face("sucking")
-            $ Girl.Spunk.append("mouth")
+            $ Girl.spunk.append("mouth")
             "She makes a little humming sound, but keeps sucking."
         else:
-            if renpy.showing(Girl.Tag+"_Doggy_Animation") or renpy.showing(Girl.Tag+"_SexSprite"):
-                call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+            if renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
+                call expression Girl.tag+"_BJ_Launch" pass ("cum")
                 $ action_speed = 2
             $ Girl.change_face("sucking")
-            $ Girl.Spunk.append("mouth")
+            $ Girl.spunk.append("mouth")
             "She smiles and then puts your tip in her mouth."
-        $ Girl.Spunk.append("chin")
+        $ Girl.spunk.append("chin")
         "When you finish filling her mouth, she quickly gulps it down and wipes her lips."
         $ action_speed = 0
         $ Girl.change_face("sexy")
@@ -373,20 +373,20 @@ label Girl_Warn_Her:
 
     elif Girl.event_counter["swallowed"] and D20 >= 10:
 
-        if renpy.showing(Girl.Tag+"_Doggy_Animation") or renpy.showing(Girl.Tag+"_SexSprite"):
-            call expression Girl.Tag+"_HJ_Launch" pass ("cum")
+        if renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
+            call expression Girl.tag+"_HJ_Launch" pass ("cum")
             "She grins and pulls out with a pop, and begins to stroke you off."
         $ action_speed = 2
-        if renpy.showing(Girl.Tag+"_BJ_Animation"):
+        if renpy.showing(Girl.tag+"_BJ_Animation"):
 
             $ Girl.change_face("sucking")
-            $ Girl.Spunk.append("mouth")
+            $ Girl.spunk.append("mouth")
             "She makes a little humming sound, but keeps sucking."
             "When you finish filling her mouth, she gags a little, but manages to swallow it."
             $ action_speed = 0
             $ Girl.change_face("sexy")
             $ Girl.mouth = "smile"
-            $ Girl.Spunk.append("chin")
+            $ Girl.spunk.append("chin")
             if Girl.addiction > 50:
                 $ Girl.eyes = "manic"
                 "She gulps it down hungrily and licks her lips."
@@ -402,35 +402,35 @@ label Girl_Warn_Her:
 
     elif approval_check(Girl, 1000):
 
-        if Girl.SEXP > 20 and (renpy.showing(Girl.Tag+"_Doggy_Animation") or renpy.showing(Girl.Tag+"_SexSprite")):
+        if Girl.SEXP > 20 and (renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite")):
             "She gently pushes you back off of her."
             jump Girl_Cum_Outside
         elif Girl.SEXP > 20:
             jump Girl_Facial
 
-        if renpy.showing(Girl.Tag+"_HJ_Animation") and Girl.action_counter["handjob"]:
+        if renpy.showing(Girl.tag+"_HJ_Animation") and Girl.action_counter["handjob"]:
             jump Girl_Handy_Finish
-        elif renpy.showing(Girl.Tag+"_BJ_Animation") and Girl.action_counter["blowjob"]:
+        elif renpy.showing(Girl.tag+"_BJ_Animation") and Girl.action_counter["blowjob"]:
             jump Girl_Handy_Finish
-        elif renpy.showing(Girl.Tag+"_TJ_Animation") and Girl.action_counter["titjob"]:
+        elif renpy.showing(Girl.tag+"_TJ_Animation") and Girl.action_counter["titjob"]:
             jump Girl_Facial
-        elif (renpy.showing(Girl.Tag+"_Doggy_Animation") or renpy.showing(Girl.Tag+"_SexSprite")) and Girl.action_counter["sex"] and primary_action == "sex":
+        elif (renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite")) and Girl.action_counter["sex"] and primary_action == "sex":
             "She gently pushes you back off of her."
             jump Girl_Cum_Outside
-        elif (renpy.showing(Girl.Tag+"_Doggy_Animation") or renpy.showing(Girl.Tag+"_SexSprite")) and Girl.action_counter["anal"] and primary_action == "anal":
+        elif (renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite")) and Girl.action_counter["anal"] and primary_action == "anal":
             "She gently pushes you back off of her."
             jump Girl_Cum_Outside
 
 
 
-    if renpy.showing(Girl.Tag+"_BJ_Animation"):
+    if renpy.showing(Girl.tag+"_BJ_Animation"):
         jump Girl_In_Mouth
     elif primary_action == "sex" or primary_action == "anal":
-        call expression Girl.Tag+"_Doggy_Reset"
-        call expression Girl.Tag+"_Sex_Reset"
+        call expression Girl.tag+"_Doggy_Reset"
+        call expression Girl.tag+"_Sex_Reset"
         "She pulls off of you and grabs your cock in her hand."
         jump Girl_Handy_Finish
-    elif renpy.showing(Girl.Tag+"_Doggy_Animation") or renpy.showing(Girl.Tag+"_SexSprite"):
+    elif renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
         "She smiles and starts rubbing against you a bit faster."
         jump Girl_Cum_Outside
     jump Girl_Facial
@@ -442,16 +442,16 @@ label Girl_Warn_Her:
 label Girl_In_Mouth:
     if primary_action == "anal":
         $ approval_bonus -= 15
-    if "hungry" not in Girl.Traits and Girl.addiction <= 50 and "full" in Girl.recent_history:
+    if "hungry" not in Girl.traits and Girl.addiction <= 50 and "full" in Girl.recent_history:
         $ approval_bonus -= 15
 
 
 
-    $ Player.Cock = "out"
+    $ Player.cock_position = "out"
     if action_context == "auto" or action_context == "warn":
         $ action_context = 0
-        if not renpy.showing(Girl.Tag+"_BJ_Animation"):
-            call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+        if not renpy.showing(Girl.tag+"_BJ_Animation"):
+            call expression Girl.tag+"_BJ_Launch" pass ("cum")
         $ action_speed = 2
         if action_context == "warn":
             "She doesn't seem sure what to do about that, as you cum in her mouth."
@@ -459,15 +459,15 @@ label Girl_In_Mouth:
             "You grab her head and cum in her mouth"
         $ Girl.eyes = "closed"
         call Punch
-        $ Player.Spunk = 1
+        $ Player.spunk = 1
         if "full" in Girl.recent_history:
 
             $ Girl.change_face("bemused")
-            $ Girl.Spunk.append("mouth")
+            $ Girl.spunk.append("mouth")
             $ action_speed = 0
-            $ Girl.Spunk.append("chin")
+            $ Girl.spunk.append("chin")
             "She gags a little, but manages to swallow it."
-            $ Girl.Spunk.remove("mouth")
+            $ Girl.spunk.remove("mouth")
             if Girl == RogueX:
                 ch_r "Um, I. . . I think I've had enough for now, could we maybe. . ."
                 ch_r ". . . put that stuff someplace else?"
@@ -486,38 +486,38 @@ label Girl_In_Mouth:
                 ch_s "I am afraid that I am rather full at the moment. . ."
             elif Girl == JubesX:
                 ch_v "I, um. . . I think I'm actually stuffed. . ."
-        elif Girl.event_counter["swallowed"] >= 5 or "hungry" in Girl.Traits:
+        elif Girl.event_counter["swallowed"] >= 5 or "hungry" in Girl.traits:
 
             $ Girl.change_face("sexy")
             $ Girl.mouth = "smile"
-            $ Girl.Spunk.append("mouth")
-            $ Girl.Spunk.append("chin")
+            $ Girl.spunk.append("mouth")
+            $ Girl.spunk.append("chin")
             "She quickly gulps it down and wipes her mouth."
-            $ Girl.Spunk.remove("mouth")
+            $ Girl.spunk.remove("mouth")
             $ action_speed = 0
             call Sex_Basic_Dialog (Girl, "swallowgood")
             $ Girl.change_face()
         elif Girl.event_counter["swallowed"]:
             $ Girl.change_face("bemused")
-            $ Girl.Spunk.append("mouth")
-            $ Girl.Spunk.append("chin")
+            $ Girl.spunk.append("mouth")
+            $ Girl.spunk.append("chin")
             $ action_speed = 0
             "She gags a little, but manages to swallow it."
-            $ Girl.Spunk.remove("mouth")
+            $ Girl.spunk.remove("mouth")
             call Sex_Basic_Dialog (Girl, "swallow2")
             if action_context != "warn":
                 call Sex_Basic_Dialog (Girl, "notwarned")
             $ Girl.change_face()
         elif Girl.addiction >= 50 and Girl.inhibition < 400 and Girl.action_counter["blowjob"] < 10 and Girl != JubesX:
             $ Girl.change_face("bemused", 1)
-            $ Girl.Spunk.append("mouth")
+            $ Girl.spunk.append("mouth")
             Girl.voice ". . ."
-            $ Girl.Spunk.remove("mouth")
-            $ Girl.Spunk.append("chin")
-            $ Girl.Spunk.append("handjob")
+            $ Girl.spunk.remove("mouth")
+            $ Girl.spunk.append("chin")
+            $ Girl.spunk.append("handjob")
             $ action_speed = 0
             "She gags and spits it into her palm. Then she licks her lips, looks down at her dripping hand, blushes, and quickly wipes it off."
-            $ Girl.Spunk.remove("handjob")
+            $ Girl.spunk.remove("handjob")
             if Girl == RogueX:
                 ch_r "I. . . don't really like the taste of that."
             elif Girl == KittyX:
@@ -532,21 +532,21 @@ label Girl_In_Mouth:
                 ch_s "An uncommon flavor. . ."
 
             $ Girl.addiction_rate += 1
-            if "addictive" in Player.Traits:
+            if "addictive" in Player.traits:
                 $ Girl.addiction_rate += 1
             $ Girl.change_face()
             jump Girl_Orgasm_After
         elif (Girl.addiction >= 50 and action_context != "warn") or Girl == JubesX:
             $ Girl.change_face("sexy")
             $ Girl.mouth = "tongue"
-            $ Girl.Spunk.append("mouth")
+            $ Girl.spunk.append("mouth")
             Girl.voice ". . ."
-            $ Girl.Spunk.remove("mouth")
-            $ Girl.Spunk.append("chin")
-            $ Girl.Spunk.append("handjob")
+            $ Girl.spunk.remove("mouth")
+            $ Girl.spunk.append("chin")
+            $ Girl.spunk.append("handjob")
             $ action_speed = 0
             "She gags and spits it into her palm. Then she licks her lips, looks down, and drinks up what's in her palm."
-            $ Girl.Spunk.remove("handjob")
+            $ Girl.spunk.remove("handjob")
             if Girl == RogueX:
                 ch_r "I would be mad, but you taste so sweet, [Girl.player_petname]."
             elif Girl == KittyX:
@@ -573,14 +573,14 @@ label Girl_In_Mouth:
 
             if approval_check(Girl, 800, "LI") and approval_check(Girl, 400, "OI"):
                 $ Girl.change_face("angry")
-                $ Girl.Spunk.append("mouth")
+                $ Girl.spunk.append("mouth")
             else:
                 $ Girl.change_face("bemused")
                 $ Girl.mouth = "tongue"
-                $ Girl.Spunk.append("mouth")
-            $ Girl.Spunk.append("chin")
+                $ Girl.spunk.append("mouth")
+            $ Girl.spunk.append("chin")
             Girl.voice ". . ."
-            $ Girl.Spunk.append("handjob")
+            $ Girl.spunk.append("handjob")
             $ action_speed = 0
             "She gags and spits it into her palm."
             if action_context != "warn":
@@ -603,7 +603,7 @@ label Girl_In_Mouth:
                 "Sorry about that.":
                     $ Girl.change_stat("love", 80, 1)
                     $ Girl.addiction_rate += 1
-                    if "addictive" in Player.Traits:
+                    if "addictive" in Player.traits:
                         $ Girl.addiction_rate += 1
                     $ Girl.change_face("smile", 1)
                     if action_context != "warn":
@@ -629,10 +629,10 @@ label Girl_In_Mouth:
 
                     if approval_check(Girl, 1200):
                         "She tentatively licks her hand, and then gulps it down."
-                        $ Girl.Spunk.remove("handjob")
+                        $ Girl.spunk.remove("handjob")
                         $ Girl.change_face("sexy", 1)
-                        $ Girl.Spunk.append("mouth")
-                        $ Girl.Spunk.append("chin")
+                        $ Girl.spunk.append("mouth")
+                        $ Girl.spunk.append("chin")
                         if Girl == RogueX:
                             ch_r "Hmm, that really wasn't half bad, [Girl.player_petname]."
                         elif Girl == KittyX:
@@ -646,16 +646,16 @@ label Girl_In_Mouth:
                         elif Girl == StormX:
                             ch_s "That is. . . uncommon. . ."
                         $ Girl.change_stat("obedience", 50, 10,Alt=[[JeanX],900,10])
-                        $ Girl.Spunk.remove("mouth")
+                        $ Girl.spunk.remove("mouth")
                     elif approval_check(Girl, 1200, "OI", Bonus = (Girl.addiction*10)):
                         $ Girl.change_face("bemused", 1)
                         $ Girl.brows = "normal"
                         $ Girl.mouth = "sad"
-                        $ Girl.Spunk.remove("handjob")
-                        $ Girl.Spunk.append("mouth")
-                        $ Girl.Spunk.append("chin")
+                        $ Girl.spunk.remove("handjob")
+                        $ Girl.spunk.append("mouth")
+                        $ Girl.spunk.append("chin")
                         "She scowls a bit, but licks her hand clean as she does so, and swallows it down."
-                        $ Girl.Spunk.remove("mouth")
+                        $ Girl.spunk.remove("mouth")
                         if Girl == RogueX:
                             ch_r "I'm not really a fan of that, [Girl.player_petname]."
                         elif Girl == KittyX:
@@ -670,7 +670,7 @@ label Girl_In_Mouth:
                             ch_s "That was. . . fine. . ."
                         $ Girl.change_stat("obedience", 50, 10,Alt=[[JeanX],900,10])
                     else:
-                        $ Girl.Spunk.remove("handjob")
+                        $ Girl.spunk.remove("handjob")
                         "She scowls at you and wipes her hand off. Then she licks her lips."
                         jump Girl_Orgasm_After
                 "Swallow it, now.":
@@ -680,11 +680,11 @@ label Girl_In_Mouth:
                     $ Girl.change_stat("love", 80, -1, 1)
                     if approval_check(Girl, 1200, "OI") or Girl.addiction >= 50:
                         $ Girl.change_face("sad", 1)
-                        $ Girl.Spunk.append("mouth")
-                        $ Girl.Spunk.append("chin")
-                        $ Girl.Spunk.remove("handjob")
+                        $ Girl.spunk.append("mouth")
+                        $ Girl.spunk.append("chin")
+                        $ Girl.spunk.remove("handjob")
                         "She scowls a bit, but licks her hand clean as she does so, and swallows it down."
-                        $ Girl.Spunk.remove("mouth")
+                        $ Girl.spunk.remove("mouth")
                         if Girl == RogueX:
                             ch_r "I'm not really a fan of that, [Girl.player_petname]."
                         elif Girl == KittyX:
@@ -699,7 +699,7 @@ label Girl_In_Mouth:
                             ch_s "That is. . . fine. . ."
                         $ Girl.change_stat("obedience", 50, 10,Alt=[[JeanX],900,10])
                     else:
-                        $ Girl.Spunk.remove("handjob")
+                        $ Girl.spunk.remove("handjob")
                         "She scowls at you and wipes her hand off. Then she licks her lips."
                         jump Girl_Orgasm_After
 
@@ -708,49 +708,49 @@ label Girl_In_Mouth:
 
     $ action_context = 0
     "You ask if you can cum in her mouth."
-    if renpy.showing(Girl.Tag+"_PJ_Animation"):
-        call expression Girl.Tag + "_Kissing_Launch" pass (primary_action, 0)
-    elif renpy.showing(Girl.Tag+"_Doggy_Animation") or renpy.showing(Girl.Tag+"_SexSprite"):
-        call expression Girl.Tag+"_HJ_Launch" pass ("cum")
+    if renpy.showing(Girl.tag+"_PJ_Animation"):
+        call expression Girl.tag + "_Kissing_Launch" pass (primary_action, 0)
+    elif renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
+        call expression Girl.tag+"_HJ_Launch" pass ("cum")
 
     if "full" in Girl.recent_history:
         pass
 
-    elif Girl.event_counter["swallowed"] >= 5 or "hungry" in Girl.Traits:
+    elif Girl.event_counter["swallowed"] >= 5 or "hungry" in Girl.traits:
 
         $ Girl.change_face("sucking")
-        if not renpy.showing(Girl.Tag+"_BJ_Animation"):
-            call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+        if not renpy.showing(Girl.tag+"_BJ_Animation"):
+            call expression Girl.tag+"_BJ_Launch" pass ("cum")
             $ action_speed = 2
             "She nods and bends down to put the tip between her lips."
         else:
             $ action_speed = 2
             "She nods and hums a \"yes\" sound."
-        $ Player.Spunk = 1
-        $ Girl.Spunk.append("mouth")
-        $ Girl.Spunk.append("chin")
+        $ Player.spunk = 1
+        $ Girl.spunk.append("mouth")
+        $ Girl.spunk.append("chin")
         Girl.voice ". . ."
         "After you cum, she quickly gulps it down and wipes her mouth."
         $ Girl.change_face("sexy")
         $ action_speed = 0
         call Sex_Basic_Dialog (Girl, "swallowgood")
-        $ Girl.Spunk.remove("mouth")
+        $ Girl.spunk.remove("mouth")
         jump Girl_Swallowed
 
     elif Girl.addiction >= 80 and Girl.event_counter["swallowed"]:
 
         $ Girl.brows = "confused"
         $ Girl.eyes = "manic"
-        if not renpy.showing(Girl.Tag+"_BJ_Animation"):
-            call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+        if not renpy.showing(Girl.tag+"_BJ_Animation"):
+            call expression Girl.tag+"_BJ_Launch" pass ("cum")
             $ action_speed = 2
             "She looks a bit quizzical, but gently puts the tip to her lips, just as you blow."
         else:
             $ action_speed = 2
             "She nods and hums a \"yes\" sound."
         $ Girl.mouth = "sucking"
-        $ Player.Spunk = 1
-        $ Girl.Spunk.append("mouth")
+        $ Player.spunk = 1
+        $ Girl.spunk.append("mouth")
         Girl.voice ". . ."
         $ action_speed = 0
         "She gags a little, but quickly swallows it."
@@ -758,19 +758,19 @@ label Girl_In_Mouth:
         $ Girl.mouth = "smile"
         call Sex_Basic_Dialog (Girl, "swallow2")
         call Sex_Basic_Dialog (Girl, "notwarned")
-        $ Girl.Spunk.remove("mouth")
+        $ Girl.spunk.remove("mouth")
         $ Girl.change_stat("inhibition", 200, 5)
         jump Girl_Swallowed
 
     elif Girl.event_counter["swallowed"]:
         if approval_check(Girl, 900):
             $ Girl.brows = "confused"
-            if renpy.showing(Girl.Tag+"_TJ_Animation"):
+            if renpy.showing(Girl.tag+"_TJ_Animation"):
                 $ Girl.change_face("kiss")
                 $ action_speed = 5
                 "She looks a bit confused, but gently puts the tip to her lips."
-            elif not renpy.showing(Girl.Tag+"_BJ_Animation"):
-                call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+            elif not renpy.showing(Girl.tag+"_BJ_Animation"):
+                call expression Girl.tag+"_BJ_Launch" pass ("cum")
                 $ action_speed = 2
                 "She looks a bit quizzical, but gently puts the tip to her lips, just as you blow."
             else:
@@ -780,18 +780,18 @@ label Girl_In_Mouth:
                 else:
                     "She tilts her head and hums a \"huh?\" sound."
             $ Girl.mouth = "sucking"
-            $ Girl.Spunk.append("chin")
-            $ Girl.Spunk.append("mouth")
+            $ Girl.spunk.append("chin")
+            $ Girl.spunk.append("mouth")
             $ Girl.brows = "normal"
             $ Girl.eyes = "sexy"
-            $ Player.Spunk = 1
-            $ Girl.Spunk.append("mouth")
+            $ Player.spunk = 1
+            $ Girl.spunk.append("mouth")
             Girl.voice ". . ."
             "She gags a little, but quickly swallows it."
             $ action_speed = 0
             $ Girl.change_face("sexy")
             call Sex_Basic_Dialog (Girl, "swallow2")
-            $ Girl.Spunk.remove("mouth")
+            $ Girl.spunk.remove("mouth")
             jump Girl_Swallowed
 
 
@@ -844,7 +844,7 @@ label Girl_In_Mouth:
         "Sorry about that.":
             $ Girl.change_stat("love", 80, 3)
             $ Girl.addiction_rate += 1
-            if "addictive" in Player.Traits:
+            if "addictive" in Player.traits:
                 $ Girl.addiction_rate += 1
             $ Girl.change_face("smile", 1)
             if Girl == RogueX:
@@ -904,7 +904,7 @@ label Girl_In_Mouth:
                     ch_v "I, um. . . Maybe? . ."
             else:
                 $ Girl.addiction_rate += 1
-                if "addictive" in Player.Traits:
+                if "addictive" in Player.traits:
                     $ Girl.addiction_rate += 1
                 $ Girl.blushing = 1
                 if Girl == RogueX:
@@ -932,8 +932,8 @@ label Girl_In_Mouth:
 
                 $ Girl.change_face("angry", 1)
                 "She scowls at you, drops you cock and pulls back."
-                call expression Girl.Tag+"_HJ_Launch" pass ("cum")
-                call expression Girl.Tag+"_HJ_Reset"
+                call expression Girl.tag+"_HJ_Launch" pass ("cum")
+                call expression Girl.tag+"_HJ_Reset"
                 $ Girl.change_stat("love", 50, -3, 1)
                 $ Girl.change_stat("love", 80, -4, 1)
                 if Girl == RogueX:
@@ -959,8 +959,8 @@ label Girl_In_Mouth:
             $ Girl.change_stat("obedience", 50, 10,Alt=[[JeanX],900,10])
             $ Girl.change_stat("obedience", 70, 5)
 
-    if not renpy.showing(Girl.Tag+"_BJ_Animation"):
-        call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+    if not renpy.showing(Girl.tag+"_BJ_Animation"):
+        call expression Girl.tag+"_BJ_Launch" pass ("cum")
     $ action_speed = 2
     if approval_check(Girl, 1200):
         "She gently puts the tip to her lips, just as you blow."
@@ -970,9 +970,9 @@ label Girl_In_Mouth:
         $ Girl.change_stat("love", 50, -3, 1)
         $ Girl.change_stat("love", 80, -4, 1)
     $ Girl.mouth = "sucking"
-    $ Player.Spunk = 1
-    $ Girl.Spunk.append("chin")
-    $ Girl.Spunk.append("mouth")
+    $ Player.spunk = 1
+    $ Girl.spunk.append("chin")
+    $ Girl.spunk.append("mouth")
     Girl.voice ". . ."
     "She gags a little, but quickly swallows it."
     $ action_speed = 0
@@ -996,9 +996,9 @@ label Girl_In_Mouth:
 
 label Girl_Creampie_P:
     if primary_action == "sex" and action_context == "auto":
-        $ Player.Cock = "in"
-        $ Girl.Spunk.append("in")
-        $ Player.Spunk = "in"
+        $ Player.cock_position = "in"
+        $ Girl.spunk.append("in")
+        $ Player.spunk = "in"
         $ action_speed = 0
         if approval_check(Girl, 1300) or Girl.event_counter["creampied"]:
             $ Girl.change_face("surprised")
@@ -1012,7 +1012,7 @@ label Girl_Creampie_P:
                 call Girl_Cumming (Girl)
             else:
                 "You come in her pussy. Her eyes widen in surprise and she pulls out."
-            $ Player.Cock = "out"
+            $ Player.cock_position = "out"
             $ Girl.change_face("angry")
             if Girl == RogueX:
                 ch_r "Hey, a little warning next time, huh?"
@@ -1054,9 +1054,9 @@ label Girl_Creampie_P:
             "She gets a michevious look and speeds up, you burst inside her."
         else:
             "As you continue to pound her, she nods her head."
-        $ Player.Cock = "in"
-        $ Girl.Spunk.append("in")
-        $ Player.Spunk = "in"
+        $ Player.cock_position = "in"
+        $ Girl.spunk.append("in")
+        $ Player.spunk = "in"
         $ action_speed = 0
         if Girl.lust >= 85:
             call Girl_Cumming (Girl)
@@ -1100,9 +1100,9 @@ label Girl_Creampie_P:
 label Girl_Creampie_A:
 
     if primary_action == "anal" and action_context == "auto":
-        $ Player.Cock = "anal"
-        $ Girl.Spunk.append("anal")
-        $ Player.Spunk = "anal"
+        $ Player.cock_position = "anal"
+        $ Girl.spunk.append("anal")
+        $ Player.spunk = "anal"
         $ action_speed = 0
         if approval_check(Girl, 1200) or Girl.event_counter["creampied"]:
             $ Girl.change_face("surprised", 1)
@@ -1116,7 +1116,7 @@ label Girl_Creampie_A:
                 call Girl_Cumming (Girl)
             else:
                 "You come in her ass. Her eyes widen in surprise and she pulls out."
-            $ Player.Cock = "out"
+            $ Player.cock_position = "out"
             $ Girl.change_face("angry")
             if Girl == RogueX:
                 ch_r "Hey, warn a girl, huh?"
@@ -1158,9 +1158,9 @@ label Girl_Creampie_A:
             "She gets a michevious look and speeds up, you burst inside her."
         else:
             "As you continue to pound her, she nods her head."
-        $ Player.Cock = "anal"
-        $ Girl.Spunk.append("anal")
-        $ Player.Spunk = "anal"
+        $ Player.cock_position = "anal"
+        $ Girl.spunk.append("anal")
+        $ Player.spunk = "anal"
         $ action_speed = 0
         if Girl.lust >= 85:
             call Girl_Cumming (Girl)
@@ -1201,64 +1201,64 @@ label Girl_Creampie_A:
 
 
 label Girl_Facial:
-    if renpy.showing(Girl.Tag+"_BJ_Animation"):
+    if renpy.showing(Girl.tag+"_BJ_Animation"):
         if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
             jump Manic_Suck
-        call expression Girl.Tag+"_HJ_Launch" pass ("cum")
+        call expression Girl.tag+"_HJ_Launch" pass ("cum")
         $ action_speed = 2
-        if "hair" in Girl.Spunk:
+        if "hair" in Girl.spunk:
             pass
-        elif "facial" in Girl.Spunk:
-            $ Girl.Spunk.append("hair")
+        elif "facial" in Girl.spunk:
+            $ Girl.spunk.append("hair")
         else:
-            $ Girl.Spunk.append("facial")
+            $ Girl.spunk.append("facial")
         "You pull out of her mouth with a pop, and she strokes you off. You spray all over her face."
         $ action_speed = 0
 
-    elif renpy.showing(Girl.Tag+"_TJ_Animation"):
-        if "hair" in Girl.Spunk:
+    elif renpy.showing(Girl.tag+"_TJ_Animation"):
+        if "hair" in Girl.spunk:
             pass
-        elif "facial" in Girl.Spunk:
-            $ Girl.Spunk.append("hair")
+        elif "facial" in Girl.spunk:
+            $ Girl.spunk.append("hair")
         else:
-            $ Girl.Spunk.append("facial")
+            $ Girl.spunk.append("facial")
         if not Girl.action_counter["titjob"]:
             "She glances up but continues to rub her breasts up and down on your cock. When you come, you spray all over her face."
         else:
             "As you're about to finish, you aim squarely at her face, and spray all over it."
         $ action_speed = 0
 
-    elif renpy.showing(Girl.Tag+"_HJ_Animation"):
-        if "hair" in Girl.Spunk:
+    elif renpy.showing(Girl.tag+"_HJ_Animation"):
+        if "hair" in Girl.spunk:
             pass
-        elif "facial" in Girl.Spunk:
-            $ Girl.Spunk.append("hair")
+        elif "facial" in Girl.spunk:
+            $ Girl.spunk.append("hair")
         else:
-            $ Girl.Spunk.append("facial")
+            $ Girl.spunk.append("facial")
         if not Girl.action_counter["handjob"]:
             "She looks a bit confused but continues to stroke while staring at it like a live snake. When you finish, you spray all over her face."
         else:
             "As you're about to finish, you aim squarely at her face, and spray all over it."
         $ action_speed = 0
-    elif renpy.showing(Girl.Tag+"_PJ_Animation"):
-        call expression Girl.Tag + "_Breasts_Launch" pass (primary_action, 0)
-        if "hair" in Girl.Spunk:
+    elif renpy.showing(Girl.tag+"_PJ_Animation"):
+        call expression Girl.tag + "_Breasts_Launch" pass (primary_action, 0)
+        if "hair" in Girl.spunk:
             pass
-        elif "facial" in Girl.Spunk:
-            $ Girl.Spunk.append("hair")
+        elif "facial" in Girl.spunk:
+            $ Girl.spunk.append("hair")
         else:
-            $ Girl.Spunk.append("facial")
+            $ Girl.spunk.append("facial")
         "As you're about to finish, you aim squarely at her face, and spray all over it."
         $ action_speed = 0
     else:
-        call expression Girl.Tag+"_HJ_Launch" pass ("cum")
+        call expression Girl.tag+"_HJ_Launch" pass ("cum")
         $ action_speed = 2
-        if "hair" in Girl.Spunk:
+        if "hair" in Girl.spunk:
             pass
-        elif "facial" in Girl.Spunk:
-            $ Girl.Spunk.append("hair")
+        elif "facial" in Girl.spunk:
+            $ Girl.spunk.append("hair")
         else:
-            $ Girl.Spunk.append("facial")
+            $ Girl.spunk.append("facial")
         "As you're about to finish, you pull out, aim squarely at her face, and spray all over it."
         $ action_speed = 0
     if Girl == RogueX:
@@ -1296,21 +1296,21 @@ label Girl_Facial:
             ch_v "Ugh, I've been slimed. . ."
         else:
             ch_v "Ugh, I've been slimed. . . warn me next time, uh?"
-    $ Player.Cock = "out"
+    $ Player.cock_position = "out"
     jump Girl_Orgasm_After
 
 
 label Girl_TitSpunk:
-    if renpy.showing(Girl.Tag+"_BJ_Animation"):
+    if renpy.showing(Girl.tag+"_BJ_Animation"):
         if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience)) and Girl.event_counter["swallowed"]:
             jump Manic_Suck
 
 
-    if renpy.showing(Girl.Tag+"_PJ_Animation"):
-        call expression Girl.Tag + "_Breasts_Launch" pass (primary_action, 0)
-    elif not renpy.showing(Girl.Tag+"_TJ_Animation") and not renpy.showing(Girl.Tag+"_HJ_Animation") and not renpy.showing(Girl.Tag+"_BJ_Animation"):
-        call expression Girl.Tag+"_HJ_Launch" pass ("cum")
-    $ Girl.Spunk.append("tits")
+    if renpy.showing(Girl.tag+"_PJ_Animation"):
+        call expression Girl.tag + "_Breasts_Launch" pass (primary_action, 0)
+    elif not renpy.showing(Girl.tag+"_TJ_Animation") and not renpy.showing(Girl.tag+"_HJ_Animation") and not renpy.showing(Girl.tag+"_BJ_Animation"):
+        call expression Girl.tag+"_HJ_Launch" pass ("cum")
+    $ Girl.spunk.append("tits")
     $ action_speed = 0
     "As you're about to finish, you speed up and spray all over her chest."
     if Girl == RogueX:
@@ -1353,30 +1353,30 @@ label Girl_TitSpunk:
 
 label Girl_Cum_Outside:
     if primary_action != "foot":
-        if renpy.showing(Girl.Tag+"_PJ_Animation"):
-            call expression Girl.Tag + "_Middle_Launch" pass (primary_action, 0)
+        if renpy.showing(Girl.tag+"_PJ_Animation"):
+            call expression Girl.tag + "_Middle_Launch" pass (primary_action, 0)
 
         elif Girl.pose != "doggy" and (Girl == JeanX or Girl == StormX):
-            call expression Girl.Tag + "_Middle_Launch" pass (primary_action, 0)
+            call expression Girl.tag + "_Middle_Launch" pass (primary_action, 0)
         else:
 
 
 
-            call expression Girl.Tag+"_Sex_Launch" pass ("hotdog")
+            call expression Girl.tag+"_Sex_Launch" pass ("hotdog")
     $ action_speed = 0
     if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience))  and Girl.event_counter["swallowed"]:
         $ Girl.eyes = "manic"
         $ Girl.blushing = 1
-        call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+        call expression Girl.tag+"_BJ_Launch" pass ("cum")
         if primary_action == "sex":
             "You pull out of her pussy with a pop, and her eyes widen in surprise. She leaps at your cock and sucks it deep, draining your fluids hungrily."
         elif primary_action == "anal":
             "You pull out of her ass with a pop, and her eyes widen in surprise. She leaps at your cock and sucks it deep, draining your fluids hungrily."
         $ Girl.mouth = "lipbite"
-        $ Girl.Spunk.append("mouth")
+        $ Girl.spunk.append("mouth")
         "When she finishes, she licks her lips."
         $ Girl.change_face("bemused")
-        $ Girl.Spunk.remove("mouth")
+        $ Girl.spunk.remove("mouth")
         if Girl == RogueX:
             ch_r "Well, [Girl.player_petname], I just couldn't let that go to waste."
         elif Girl == KittyX:
@@ -1395,9 +1395,9 @@ label Girl_Cum_Outside:
         $ Girl.change_stat("inhibition", 200, 10)
         jump Girl_Swallowed
     if primary_action != "foot":
-        $ Player.Cock = "out"
+        $ Player.cock_position = "out"
     if Girl.pose == "doggy":
-        $ Girl.Spunk.append("back")
+        $ Girl.spunk.append("back")
         if primary_action == "sex":
             "You pull out of her pussy with a pop and spray all over her backside."
         elif primary_action == "anal":
@@ -1405,7 +1405,7 @@ label Girl_Cum_Outside:
         else:
             "You pick up the pace and with a grunt you spray all over her backside."
     else:
-        $ Girl.Spunk.append("belly")
+        $ Girl.spunk.append("belly")
         if primary_action == "sex":
             "You pull out of her pussy with a pop and spray all over her stomach."
         elif primary_action == "anal":
@@ -1420,7 +1420,7 @@ label Girl_Cum_Outside:
         $ Girl.blushing = 1
         "[Girl.name]'s eyes widen with desire, and she quickly wipes a bit off with her hand, then licks her fingers clean."
         $ Girl.change_face("manic", 1)
-        $ Girl.Spunk.append("mouth")
+        $ Girl.spunk.append("mouth")
         $ Girl.mouth = "smile"
         if Girl == RogueX:
             ch_r "Well, [Girl.player_petname], I just couldn't let that go to waste."
@@ -1436,7 +1436,7 @@ label Girl_Cum_Outside:
             ch_s "That would have been wasteful. . ."
         elif Girl == JubesX:
             ch_v "Wouldn't want to let all that go to waste. . ."
-        $ Girl.Spunk.remove("mouth")
+        $ Girl.spunk.remove("mouth")
         $ Girl.change_stat("inhibition", 50, 3)
         jump Girl_Swallowed
 
@@ -1545,38 +1545,38 @@ label Girl_Cum_Outside:
 
 
 label Girl_Handy_Finish:
-    if renpy.showing(Girl.Tag+"_Doggy_Animation") or renpy.showing(Girl.Tag+"_SexSprite"):
-        call expression Girl.Tag+"_Doggy_Reset"
-        call expression Girl.Tag+"_Sex_Reset"
+    if renpy.showing(Girl.tag+"_Doggy_Animation") or renpy.showing(Girl.tag+"_SexSprite"):
+        call expression Girl.tag+"_Doggy_Reset"
+        call expression Girl.tag+"_Sex_Reset"
         if primary_action == "hotdog":
             "She bends down and begins to stroke you off."
         else:
             "She grins and pulls out with a pop, and begins to stroke you off."
         $ action_speed = 2
-    elif renpy.showing(Girl.Tag+"_BJ_Animation"):
-        call expression Girl.Tag+"_HJ_Launch" pass ("cum")
+    elif renpy.showing(Girl.tag+"_BJ_Animation"):
+        call expression Girl.tag+"_HJ_Launch" pass ("cum")
         $ action_speed = 2
         "She slides her lips off your cock, and begins to stroke you off."
-    elif renpy.showing(Girl.Tag+"_PJ_Animation"):
-        call expression Girl.Tag + "_Breasts_Launch" pass (primary_action, 0)
+    elif renpy.showing(Girl.tag+"_PJ_Animation"):
+        call expression Girl.tag + "_Breasts_Launch" pass (primary_action, 0)
     else:
-        call expression Girl.Tag+"_HJ_Launch" pass ("cum")
+        call expression Girl.tag+"_HJ_Launch" pass ("cum")
         $ action_speed = 2
-    $ Girl.Spunk.append("handjob")
+    $ Girl.spunk.append("handjob")
     "She grins and speeds up her efforts, placing her left hand over your tip. You burst all over her hands."
     $ action_speed = 0
 
-    if Girl.addiction > 80 or "hungry" in Girl.Traits:
+    if Girl.addiction > 80 or "hungry" in Girl.traits:
         $ Girl.eyes = "manic"
-        $ Girl.Spunk.remove("handjob")
-        $ Girl.Spunk.append("mouth")
+        $ Girl.spunk.remove("handjob")
+        $ Girl.spunk.append("mouth")
         $ Girl.mouth = "smile"
         "She licks her hands off with a satisfied grin."
-        $ Girl.Spunk.remove("mouth")
+        $ Girl.spunk.remove("mouth")
         Girl.voice "Hmmm. . ."
     else:
         $ Girl.change_face("bemused")
-        $ Girl.Spunk.remove("handjob")
+        $ Girl.spunk.remove("handjob")
         "She wipes her hands off, but takes a quick sniff when she's done and smiles."
         call Sex_Basic_Dialog (Girl, "warned")
         jump Girl_Orgasm_After
@@ -1587,8 +1587,8 @@ label Girl_Swallowed:
     $ Girl.event_counter["swallowed"] += 1
     $ Girl.change_stat("inhibition", 50, 3)
     $ Girl.addiction -= 20
-    if "mouth" in Girl.Spunk:
-        $ Girl.Spunk.remove("mouth")
+    if "mouth" in Girl.spunk:
+        $ Girl.spunk.remove("mouth")
     if "full" not in Girl.recent_history and Girl.recent_history.count("swallowed") >= 5:
         $ Girl.recent_history.append("full")
         $ Girl.change_face("surprised", 1)
@@ -1629,7 +1629,7 @@ label Girl_Swallowed:
     $ Girl.recent_history.append("swallowed")
     $ Girl.daily_history.append("swallowed")
     $ Girl.addiction_rate += 2
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ Girl.addiction_rate += 2
     if primary_action == "anal":
         $ Girl.change_stat("obedience", 50, 2)
@@ -1654,7 +1654,7 @@ label Girl_Creampied:
     $ Girl.change_stat("inhibition", 50, 3)
     $ Girl.addiction -= 30
     $ Girl.addiction_rate += 2
-    if "addictive" in Player.Traits:
+    if "addictive" in Player.traits:
         $ Girl.addiction_rate += 3
     if Girl.event_counter["creampied"] == 1:
         $ Girl.SEXP += 10
@@ -1664,7 +1664,7 @@ label Girl_Creampied:
 
 label Girl_Orgasm_After:
     $ Line = "What next?"
-    if not renpy.showing(Girl.Tag+"_HJ_Animation"):
+    if not renpy.showing(Girl.tag+"_HJ_Animation"):
         $ Girl.ArmPose = 1
     $ Player.semen -= 1
     $ Player.focus = 0
@@ -1687,7 +1687,7 @@ label Girl_Orgasm_After:
             call AllReset (Girl)
         "No":
             pass
-    if Girl.Spunk:
+    if Girl.spunk:
         call Girl_Cleanup (Girl)
     $ action_context = 0
     return
@@ -1695,9 +1695,9 @@ label Girl_Orgasm_After:
 label Girl_CleanCock(Girl=0):
     $ Girl = GirlCheck(Girl)
     $ Line = "What next?"
-    if not renpy.showing(Girl.Tag+"_HJ_Animation"):
+    if not renpy.showing(Girl.tag+"_HJ_Animation"):
         $ Girl.ArmPose = 1
-    $ Player.Cock = "out"
+    $ Player.cock_position = "out"
     $ action_speed = 0
     if primary_action == "anal" and not approval_check(Girl, 1600, TabM=1) and not Girl.addiction >= 80:
         if Girl == JeanX:
@@ -1708,7 +1708,7 @@ label Girl_CleanCock(Girl=0):
             "She wipes your cock clean."
     elif Girl.action_counter["blowjob"] > 3 or Girl.event_counter["swallowed"]:
         if approval_check(Girl, 1200, TabM=1) or Girl.addiction >= 60:
-            call expression Girl.Tag+"_BJ_Launch" pass ("cum")
+            call expression Girl.tag+"_BJ_Launch" pass ("cum")
             $ action_speed = 1
             $ Girl.change_face("sucking", 1)
             if approval_check(Girl, 1500, TabM=1):
@@ -1728,22 +1728,22 @@ label Girl_CleanCock(Girl=0):
                 "She licks you cock clean."
             $ Girl.change_face("sexy")
         else:
-            if not renpy.showing(Girl.Tag+"_HJ_Animation"):
-                call expression Girl.Tag+"_HJ_Launch" pass ("cum")
+            if not renpy.showing(Girl.tag+"_HJ_Animation"):
+                call expression Girl.tag+"_HJ_Launch" pass ("cum")
             if Partner and approval_check(Partner, 1000, TabM=1):
                 "Both girls reach down and wipe your cock clean."
             else:
                 "She wipes your cock clean."
     else:
-        if renpy.showing(Girl.Tag+"_PJ_Animation"):
+        if renpy.showing(Girl.tag+"_PJ_Animation"):
             pass
-        elif not renpy.showing(Girl.Tag+"_HJ_Animation"):
-            call expression Girl.Tag+"_HJ_Launch" pass ("cum")
+        elif not renpy.showing(Girl.tag+"_HJ_Animation"):
+            call expression Girl.tag+"_HJ_Launch" pass ("cum")
         if Partner and approval_check(Partner, 1000, TabM=1):
             "Both girls reach down and wipe your cock clean."
         else:
             "She wipes your cock clean."
-    $ Player.Spunk = 0
+    $ Player.spunk = 0
     $ Girl.change_face("sexy")
     if primary_action in ("fondle_breast","suck breast"):
         call ViewShift (Girl, "breasts")
@@ -1761,8 +1761,8 @@ label Girl_Cumming(Girl=0, Quick=0, BO=[]):
     if Girl not in all_Girls:
         return
 
-    $ Girl.DrainWord("gonnafap",1,1,0)
-    $ Girl.DrainWord("wannafap",1,1,0)
+    $ Girl.drain_word("gonnafap",1,1,0)
+    $ Girl.drain_word("wannafap",1,1,0)
 
     if Girl.location == "bg_teacher" and bg_current == "bg_classroom":
         pass
@@ -1794,7 +1794,7 @@ label Girl_Cumming(Girl=0, Quick=0, BO=[]):
 
     $ Girl.session_orgasms += 1
     $ Girl.event_counter["orgasmed"]+= 1
-    $ Girl.lust = 30 if "hotblooded" in Girl.Traits else 0
+    $ Girl.lust = 30 if "hotblooded" in Girl.traits else 0
     $ Girl.lust += (Girl.session_orgasms*5)
     $ Girl.lust = 60 if Girl.lust >= 60 else Girl.lust
     $ Girl.change_stat("inhibition", 50, 1)
@@ -1865,7 +1865,7 @@ label Girl_Cumming(Girl=0, Quick=0, BO=[]):
                 ch_s "I think that brings us even, [Girl.player_petname]."
             elif Girl == JubesX:
                 ch_v "So you -do- know how to make a girl feel good."
-        $ Girl.DrainWord("unsatisfied")
+        $ Girl.drain_word("unsatisfied")
     $ Line = 0
 
     if primary_action != "masturbation":
@@ -1882,7 +1882,7 @@ label Girl_Cumming(Girl=0, Quick=0, BO=[]):
         $ BO = all_Girls[:]
         $ BO.remove(Girl)
         while BO:
-            if BO[0].location == bg_current and "noticed "+Girl.Tag in BO[0].recent_history:
+            if BO[0].location == bg_current and "noticed "+Girl.tag in BO[0].recent_history:
                 $ BO[0].lust += 15 if BO[0].GirlLikeCheck(Girl) >= 500 else 10
                 $ BO[0].lust += 5 if BO[0].event_counter["been_with_girl"] >= 5 else 0
             if BO[0].lust >= 100:
@@ -2032,7 +2032,7 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
         return
     if Choice == "after":
 
-        if not Girl.Spunk:
+        if not Girl.spunk:
             $ Girl.Wet = 0
             return
         $ counter = 1
@@ -2120,7 +2120,7 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                             ch_v "I, uh. . . wouldn't want to leave it a mess. . ."
 
 
-                elif approval_check(Girl, 900, "I") or "exhibitionist" in Girl.Traits:
+                elif approval_check(Girl, 900, "I") or "exhibitionist" in Girl.traits:
                     $ Girl.change_stat("obedience", 70, 2)
                     $ Girl.change_stat("obedience", 90, 1)
                     $ Girl.change_stat("lust", 90, 5)
@@ -2373,7 +2373,7 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
 
 
                 $ Girl.change_face("sly")
-                if "hungry" in Girl.Traits or (Girl.event_counter["swallowed"] >= 5 and approval_check(Girl, 800)):
+                if "hungry" in Girl.traits or (Girl.event_counter["swallowed"] >= 5 and approval_check(Girl, 800)):
 
                     $ Girl.change_stat("obedience", 90, 1)
                     $ Girl.change_stat("inhibition", 50, 3)
@@ -2593,7 +2593,7 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
             $ Options.append("eat")
             if Girl.event_counter["swallowed"] >=5:
                 $ Options.append("eat")
-            if "hungry" in Girl.Traits:
+            if "hungry" in Girl.traits:
                 $ Options.append("eat")
         if approval_check(Girl, 300, "I"):
 
@@ -2603,7 +2603,7 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
                 $ Options.append("leave")
             if not counter or approval_check(Girl, 800, "I"):
                 $ Options.append("leave")
-            if "exhibitionist" in Girl.Traits:
+            if "exhibitionist" in Girl.traits:
                 $ Options.append("leave")
 
         $ renpy.random.shuffle(Options)
@@ -2613,21 +2613,21 @@ label Girl_Cleanup(Girl=0, Choice="random", Options=[], counter=0, Cleaned=0, Or
     if Girl == JubesX:
         $ Options = ["eat"]
 
-    if Girl.Spunk and Choice != "leave":
+    if Girl.spunk and Choice != "leave":
         call Self_Cleanup (Girl)
 
     if Choice == "leave":
         $ Girl.change_stat("inhibition", 80, 2)
         $ Girl.change_stat("inhibition", 200, 1)
         "She leaves the jiz right where it is and gives you a wink."
-        if "handjob" in Girl.Spunk:
-            $ Girl.Spunk.remove("handjob")
+        if "handjob" in Girl.spunk:
+            $ Girl.spunk.remove("handjob")
             if Girl.event_counter["swallowed"]:
                 "She does lick off her hand though."
             else:
                 "She does wipe her hand off though."
-        if "mouth" in Girl.Spunk:
-            $ Girl.Spunk.remove("mouth")
+        if "mouth" in Girl.spunk:
+            $ Girl.spunk.remove("mouth")
         if counter:
 
             $ Girl.recent_history.append("painted")
@@ -2648,85 +2648,85 @@ label Self_Cleanup(Girl=0):
     if Girl == JeanX and not approval_check(Girl, 600, "LO"):
 
         $ Girl.Wet = 0
-        $ del Girl.Spunk[:]
+        $ del Girl.spunk[:]
         $ Girl.change_face("sly", 1,Eyes="psychic")
         "[JeanX.name] concentrates and the juices swirl off of her, raining to the floor."
         $ Girl.change_face("sly", 0)
         return
-    if "mouth" in Girl.Spunk and Choice != "eat":
-        $ Girl.Spunk.remove("mouth")
+    if "mouth" in Girl.spunk and Choice != "eat":
+        $ Girl.spunk.remove("mouth")
         "[Girl.name] spits out the spunk in her mouth and it dribbles down her chin,"
         $ counter += 1
-        if "chin" not in Girl.Spunk:
-            $ Girl.Spunk.append("chin")
-    if Girl.Spunk:
-        $ Girl.Spunk.append("handjob")
-    if "chin" in Girl.Spunk:
-        $ Girl.Spunk.remove("chin")
+        if "chin" not in Girl.spunk:
+            $ Girl.spunk.append("chin")
+    if Girl.spunk:
+        $ Girl.spunk.append("handjob")
+    if "chin" in Girl.spunk:
+        $ Girl.spunk.remove("chin")
         if counter:
             "then she wipes the spunk off her chin,"
         else:
             "[Girl.name] wipes the spunk off her chin,"
         $ counter += 1
-    if "hair" in Girl.Spunk:
-        $ Girl.Spunk.remove("hair")
+    if "hair" in Girl.spunk:
+        $ Girl.spunk.remove("hair")
         if counter:
             "then she wipes the spunk out of her hair,"
         else:
             "[Girl.name] wipes the spunk out of her hair,"
         $ counter += 1
-    if "facial" in Girl.Spunk:
-        $ Girl.Spunk.remove("facial")
+    if "facial" in Girl.spunk:
+        $ Girl.spunk.remove("facial")
         if counter:
             "then she wipes the spunk off of her face,"
         else:
             "[Girl.name] wipes the spunk off of her face,"
         $ counter += 1
-    if "tits" in Girl.Spunk:
-        $ Girl.Spunk.remove("tits")
+    if "tits" in Girl.spunk:
+        $ Girl.spunk.remove("tits")
         $ Player.change_stat("focus",80,2)
         if counter:
             "then she wipes the spunk off of her chest,"
         else:
             "[Girl.name] wipes the spunk off of her chest,"
         $ counter += 1
-    if "belly" in Girl.Spunk:
-        $ Girl.Spunk.remove("belly")
+    if "belly" in Girl.spunk:
+        $ Girl.spunk.remove("belly")
         if counter:
             "then she wipes the spunk off of her belly,"
         else:
             "[Girl.name] wipes the spunk off her belly,"
         $ counter += 1
-    if "back" in Girl.Spunk:
-        $ Girl.Spunk.remove("back")
+    if "back" in Girl.spunk:
+        $ Girl.spunk.remove("back")
         if counter:
             "then she wipes the spunk off of her lower back,"
         else:
             "[Girl.name] wipes the spunk off her lower back,"
         $ counter += 1
-    if "in" in Girl.Spunk:
-        $ Girl.Spunk.remove("in")
+    if "in" in Girl.spunk:
+        $ Girl.spunk.remove("in")
         $ Player.change_stat("focus",80,3)
         if counter:
             "then she wipes the spunk inside her pussy,"
         else:
             "[Girl.name] wipes the spunk inside her pussy,"
         $ counter += 1
-    if "anal" in Girl.Spunk and (approval_check(Girl, 800, "I") or Choice != "eat"):
-        while "anal" in Girl.Spunk:
-            $ Girl.Spunk.remove("anal")
+    if "anal" in Girl.spunk and (approval_check(Girl, 800, "I") or Choice != "eat"):
+        while "anal" in Girl.spunk:
+            $ Girl.spunk.remove("anal")
         $ Player.change_stat("focus",80,2)
         if counter:
             "then she wipes the spunk dripping out of her ass,"
         else:
             "[Girl.name] wipes the spunk dripping our of her ass,"
         $ counter += 1
-    if "handjob" in Girl.Spunk:
-        $ Girl.Spunk.remove("handjob")
+    if "handjob" in Girl.spunk:
+        $ Girl.spunk.remove("handjob")
         if Choice == "eat":
-            $ Girl.Spunk.append("mouth")
+            $ Girl.spunk.append("mouth")
             $ Player.change_stat("focus",80,3)
-            if counter and "anal" in Girl.Spunk:
+            if counter and "anal" in Girl.spunk:
                 "then licks her hands off with a satisfied grin,"
             if counter:
                 "and finally she licks her hands off with a satisfied grin."
@@ -2734,7 +2734,7 @@ label Self_Cleanup(Girl=0):
                 "[Girl.name] licks her hands off with a satisfied grin."
 
             $ Girl.change_stat("inhibition", 80, 2)
-            $ Girl.Spunk.remove("mouth")
+            $ Girl.spunk.remove("mouth")
             $ Girl.event_counter["swallowed"] += 1
             $ Girl.addiction -= (10*counter)
             if Girl.event_counter["swallowed"] == 1:
@@ -2749,15 +2749,15 @@ label Self_Cleanup(Girl=0):
                 "[Girl.name] wipes her hands off with a nearby tissue."
         $ counter += 1
 
-    if "anal" in Girl.Spunk:
-        $ Girl.Spunk.remove("anal")
+    if "anal" in Girl.spunk:
+        $ Girl.spunk.remove("anal")
         if counter:
             "Afterward, she wipes the spunk dripping our of her ass."
         else:
             "[Girl.name] wipes the spunk dripping out of her ass."
 
     $ Girl.Wet = 0
-    $ del Girl.Spunk[:]
+    $ del Girl.spunk[:]
     if counter >= 5:
         $ Girl.eyes = "surprised"
         if Girl == RogueX:
@@ -2820,7 +2820,7 @@ label Partner_Cleanup_Check(Girl=0, B=0):
     if Partner == JubesX:
         $ B = 100
     elif Choice == "partner lick":
-        if (Partner in Player.Harem and Girl in Player.Harem) or "poly " + Partner.Tag in Girl.Traits:
+        if (Partner in Player.Harem and Girl in Player.Harem) or "poly " + Partner.tag in Girl.traits:
             $ B = 0
         else:
             $ B = -100
@@ -2833,7 +2833,7 @@ label Partner_Cleanup_Check(Girl=0, B=0):
         ch_j "Hm? Clean [Girl.name] off?"
         ch_j "I guess she is a mess. . ."
         $ Girl.Wet = 0
-        $ del Girl.Spunk[:]
+        $ del Girl.spunk[:]
         $ Partner.change_face("sly", 1,Eyes="psychic")
         "[JeanX.name] concentrates and the juices swirl off of [Girl.name], raining to the floor."
         if Girl == JubesX:
@@ -3192,18 +3192,18 @@ label Partner_Clean_Girl(Girl=0):
     if Choice == "partner lick":
         $ Partner.change_face("tongue")
     else:
-        $ Partner.Spunk.append("handjob")
+        $ Partner.spunk.append("handjob")
     $ counter = 0
-    if "chin" in Girl.Spunk or "mouth" in Girl.Spunk:
-        while "chin" in Girl.Spunk:
-            $ Girl.Spunk.remove("chin")
+    if "chin" in Girl.spunk or "mouth" in Girl.spunk:
+        while "chin" in Girl.spunk:
+            $ Girl.spunk.remove("chin")
         $ Girl.GLG(Partner,900,2,1)
         $ Partner.GLG(Girl,900,2,1)
         if Choice == "partner lick":
-            if "mouth" not in Partner.Spunk:
-                $ Partner.Spunk.append("mouth")
-            if "chin" not in Partner.Spunk:
-                $ Partner.Spunk.append("chin")
+            if "mouth" not in Partner.spunk:
+                $ Partner.spunk.append("mouth")
+            if "chin" not in Partner.spunk:
+                $ Partner.spunk.append("chin")
             $ Partner.change_stat("lust", 80, 3)
             $ Girl.change_stat("lust", 80, 4)
             $ Player.change_stat("focus",80,3)
@@ -3212,24 +3212,24 @@ label Partner_Clean_Girl(Girl=0):
             $ Girl.change_stat("lust", 80, 2)
             "[Partner.name] wipes her thumb across [Girl.name]'s chin,"
         $ counter += 1
-    if "mouth" in Girl.Spunk and counter:
-        $ Girl.Spunk.remove("mouth")
+    if "mouth" in Girl.spunk and counter:
+        $ Girl.spunk.remove("mouth")
         "you can see a line of jiz stretching between their mouths."
         $ counter += 1
-    if "hair" in Girl.Spunk:
-        $ Girl.Spunk.remove("hair")
+    if "hair" in Girl.spunk:
+        $ Girl.spunk.remove("hair")
         if counter:
             "then she wipes the spunk out of [Girl.name]'s hair,"
         else:
             "[Partner.name] wipes the spunk out of [Girl.name]'s hair,"
         $ counter += 1
-    if "facial" in Girl.Spunk:
-        $ Girl.Spunk.remove("facial")
+    if "facial" in Girl.spunk:
+        $ Girl.spunk.remove("facial")
         if Choice == "partner lick":
-            if "mouth" not in Partner.Spunk:
-                $ Partner.Spunk.append("mouth")
-            if "chin" not in Partner.Spunk:
-                $ Partner.Spunk.append("chin")
+            if "mouth" not in Partner.spunk:
+                $ Partner.spunk.append("mouth")
+            if "chin" not in Partner.spunk:
+                $ Partner.spunk.append("chin")
             $ Partner.change_stat("lust", 80, 2)
             $ Girl.change_stat("lust", 80, 4)
             $ Player.change_stat("focus",80,3)
@@ -3244,14 +3244,14 @@ label Partner_Clean_Girl(Girl=0):
             else:
                 "[Partner.name] wipes the spunk off of [Girl.name]'s face,"
         $ counter += 1
-    if "tits" in Girl.Spunk:
-        $ Girl.Spunk.remove("tits")
+    if "tits" in Girl.spunk:
+        $ Girl.spunk.remove("tits")
         $ Girl.GLG(Partner,900,2,1)
         if Choice == "partner lick":
-            if "mouth" not in Partner.Spunk:
-                $ Partner.Spunk.append("mouth")
-            if "chin" not in Partner.Spunk:
-                $ Partner.Spunk.append("chin")
+            if "mouth" not in Partner.spunk:
+                $ Partner.spunk.append("mouth")
+            if "chin" not in Partner.spunk:
+                $ Partner.spunk.append("chin")
             $ Partner.change_stat("lust", 80, 2)
             $ Girl.change_stat("lust", 200, 4)
             $ Player.change_stat("focus",80,4)
@@ -3268,13 +3268,13 @@ label Partner_Clean_Girl(Girl=0):
             else:
                 "[Partner.name] wipes the spunk off of [Girl.name]'s chest,"
         $ counter += 1
-    if "belly" in Girl.Spunk:
-        $ Girl.Spunk.remove("belly")
+    if "belly" in Girl.spunk:
+        $ Girl.spunk.remove("belly")
         if Choice == "partner lick":
-            if "mouth" not in Partner.Spunk:
-                $ Partner.Spunk.append("mouth")
-            if "chin" not in Partner.Spunk:
-                $ Partner.Spunk.append("chin")
+            if "mouth" not in Partner.spunk:
+                $ Partner.spunk.append("mouth")
+            if "chin" not in Partner.spunk:
+                $ Partner.spunk.append("chin")
             $ Partner.change_stat("lust", 80, 2)
             $ Girl.change_stat("lust", 80, 3)
             $ Player.change_stat("focus",80,1)
@@ -3290,13 +3290,13 @@ label Partner_Clean_Girl(Girl=0):
             else:
                 "[Partner.name] wipes the spunk off [Girl.name]'s belly,"
         $ counter += 1
-    if "back" in Girl.Spunk:
-        $ Girl.Spunk.remove("back")
+    if "back" in Girl.spunk:
+        $ Girl.spunk.remove("back")
         if Choice == "partner lick":
-            if "mouth" not in Partner.Spunk:
-                $ Partner.Spunk.append("mouth")
-            if "chin" not in Partner.Spunk:
-                $ Partner.Spunk.append("chin")
+            if "mouth" not in Partner.spunk:
+                $ Partner.spunk.append("mouth")
+            if "chin" not in Partner.spunk:
+                $ Partner.spunk.append("chin")
             $ Girl.change_stat("lust", 80, 2)
             if counter:
                 "then she licks her way up [Girl.name]'s lower back,"
@@ -3309,14 +3309,14 @@ label Partner_Clean_Girl(Girl=0):
             else:
                 "[Partner.name] wipes the spunk off [Girl.name]'s lower back,"
         $ counter += 1
-    if "in" in Girl.Spunk:
-        $ Girl.Spunk.remove("in")
+    if "in" in Girl.spunk:
+        $ Girl.spunk.remove("in")
         $ Girl.GLG(Partner,900,5,1)
         if Choice == "partner lick":
-            if "mouth" not in Partner.Spunk:
-                $ Partner.Spunk.append("mouth")
-            if "chin" not in Partner.Spunk:
-                $ Partner.Spunk.append("chin")
+            if "mouth" not in Partner.spunk:
+                $ Partner.spunk.append("mouth")
+            if "chin" not in Partner.spunk:
+                $ Partner.spunk.append("chin")
             $ Partner.change_stat("lust", 80, 4)
             $ Girl.change_stat("lust", 200, 6)
             $ Player.change_stat("focus",80,6)
@@ -3333,14 +3333,14 @@ label Partner_Clean_Girl(Girl=0):
             else:
                 "[Partner.name] strokes along [Girl.name]'s pussy, wiping the spunk clean,"
         $ counter += 1
-    if "anal" in Girl.Spunk:
-        $ Girl.Spunk.remove("anal")
+    if "anal" in Girl.spunk:
+        $ Girl.spunk.remove("anal")
         $ Girl.GLG(Partner,900,5,1)
         if Choice == "partner lick" and approval_check(Partner, 800, "I"):
-            if "mouth" not in Partner.Spunk:
-                $ Partner.Spunk.append("mouth")
-            if "chin" not in Partner.Spunk:
-                $ Partner.Spunk.append("chin")
+            if "mouth" not in Partner.spunk:
+                $ Partner.spunk.append("mouth")
+            if "chin" not in Partner.spunk:
+                $ Partner.spunk.append("chin")
             $ Partner.change_stat("lust", 80, 2)
             $ Girl.change_stat("lust", 200, 6)
             $ Player.change_stat("focus",80,5)
@@ -3359,13 +3359,13 @@ label Partner_Clean_Girl(Girl=0):
         $ counter += 1
 
     $ Partner.change_face("sly")
-    if "handjob" in Girl.Spunk:
-        $ Girl.Spunk.remove("handjob")
+    if "handjob" in Girl.spunk:
+        $ Girl.spunk.remove("handjob")
         if Choice == "partner lick":
-            if "mouth" not in Partner.Spunk:
-                $ Partner.Spunk.append("mouth")
-            if "chin" not in Partner.Spunk:
-                $ Partner.Spunk.append("chin")
+            if "mouth" not in Partner.spunk:
+                $ Partner.spunk.append("mouth")
+            if "chin" not in Partner.spunk:
+                $ Partner.spunk.append("chin")
             $ Girl.change_stat("lust", 80, 3)
             $ Player.change_stat("focus",80,3)
             if counter:
@@ -3380,10 +3380,10 @@ label Partner_Clean_Girl(Girl=0):
 
         if Choice == "partner lick" or approval_check(Partner, 1000):
 
-            while "mouth" in Partner.Spunk:
-                $ Partner.Spunk.remove("mouth")
-            while "chin" in Partner.Spunk:
-                $ Partner.Spunk.remove("chin")
+            while "mouth" in Partner.spunk:
+                $ Partner.spunk.remove("mouth")
+            while "chin" in Partner.spunk:
+                $ Partner.spunk.remove("chin")
             $ Girl.change_stat("inhibition", 80, 2)
             $ Player.change_stat("focus",80,3)
             "Then [Partner.name] swallows and wipes her mouth."
@@ -3400,7 +3400,7 @@ label Partner_Clean_Girl(Girl=0):
             else:
                 "[Partner.name] wipes her own hands off with a nearby tissue."
         $ counter += 1
-    $ Girl.Spunk = []
-    $ Partner.Spunk = []
+    $ Girl.spunk = []
+    $ Partner.spunk = []
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc
