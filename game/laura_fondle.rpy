@@ -542,7 +542,7 @@ label Laura_FB_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1056,7 +1056,7 @@ label Laura_SB_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1530,7 +1530,7 @@ label Laura_FT_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2085,7 +2085,7 @@ label Laura_FP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2723,7 +2723,7 @@ label Laura_LP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3209,7 +3209,7 @@ label Laura_FA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3758,7 +3758,7 @@ label Laura_IA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -4263,6 +4263,6 @@ label Laura_LA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

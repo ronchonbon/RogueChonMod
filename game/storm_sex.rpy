@@ -42,245 +42,6 @@ label Storm_SexAct(Act=0):
         if not action_context:
             return
 
-label Storm_SexMenu:
-    call shift_focus (StormX)
-    $ primary_action = 0
-    $ offhand_action = 0
-    $ girl_offhand_action = 0
-    $ action_context = 0
-    call Storm_Hide
-    $ StormX.ArmPose = 1
-    if "detention" in StormX.recent_history:
-        $ approval_bonus = 20 if approval_bonus <= 20 else approval_bonus
-    call set_the_scene (1, 0, 0, 0, 1)
-
-    if not Player.semen:
-        "You're a little out of juice at the moment, you might want to wait a bit."
-    if Player.focus >= 95:
-        "You're practically buzzing, the slightest breeze could set you off."
-    if not StormX.remaining_actions:
-        "[StormX.name]'s looking a bit tired out, maybe let her rest a bit."
-
-    if "caught" in StormX.recent_history or "angry" in StormX.recent_history:
-        if StormX.location == bg_current:
-            ch_s "I do not want to deal with you right now."
-        $ StormX.change_outfit()
-        $ StormX.DrainWord("caught",1,0)
-        return
-
-    if Round < 5:
-        ch_s "I think we could both do with a short break."
-        return
-    menu Storm_SMenu:
-        ch_s "So, what was it you hoped to do?"
-        "Do you want to make out?":
-            if StormX.remaining_actions:
-                call Makeout (StormX)
-            else:
-                ch_s "I am sorry, [StormX.player_petname], I need to take a break."
-        "Could I touch you?":
-
-            if StormX.remaining_actions:
-                $ StormX.change_face("sly")
-                menu:
-                    ch_s "What did you wish to touch, [StormX.player_petname]?"
-                    "Could I give you a massage?":
-                        call Massage (StormX)
-                    "Your breasts?":
-                        call Storm_Fondle_Breasts
-                    "Suck your breasts?" if StormX.remaining_actions and StormX.action_counter["suck_breasts"]:
-                        call Storm_Suck_Breasts
-                    "Your thighs?" if StormX.remaining_actions:
-                        call Storm_Fondle_Thighs
-                    "Your pussy?" if StormX.remaining_actions:
-                        call Storm_Fondle_Pussy
-                    "Lick your pussy?" if StormX.remaining_actions and StormX.action_counter["eat_pussy"]:
-                        call Storm_Lick_Pussy
-                    "Your Ass?":
-                        call Storm_Fondle_Ass
-                    "Never mind [[something else]":
-                        jump Storm_SMenu
-            else:
-                ch_s "I'm sorry, [StormX.player_petname], but I need a break."
-        "Could you take care of something for me? [[Your dick, you mean your dick]":
-
-            if Player.semen and StormX.remaining_actions:
-                menu:
-                    ch_s "What did you want me to do?"
-                    "Could you give me a handjob?":
-                        call Storm_Handjob
-                    "Could you give me a titjob?":
-                        call Storm_Titjob
-                    "Could you suck my cock?":
-                        call Storm_Blowjob
-                    "Could use your feet?":
-                        call Storm_Footjob
-                    "Never mind [[something else]":
-                        jump Storm_SMenu
-            elif not StormX.remaining_actions:
-                ch_s "I am sorry, [StormX.player_petname], I need to take a break."
-            else:
-                "You really don't have it in you, maybe take a break."
-        "Could you put on a show for me?":
-
-            menu:
-                ch_s "What did you want to see?"
-                "Dance for me?":
-                    if StormX.remaining_actions:
-                        call Group_Strip (StormX)
-                    else:
-                        ch_s "I am sorry, [StormX.player_petname], I need to take a break."
-                "Could you undress for me?":
-
-                    call Girl_Undress (StormX)
-
-                "You've got a little something. . . [[clean-up]" if StormX.Spunk:
-                    ch_s "Oh, what do you mean?"
-                    call Girl_Cleanup (StormX, "ask")
-                "Could I watch you get yourself off? [[masturbate]":
-
-                    if StormX.remaining_actions:
-                        call Storm_Masturbate
-                    else:
-                        ch_s "I am sorry, [StormX.player_petname], I need to take a break."
-
-                "Maybe make out with [RogueX.name]?" if RogueX.location == bg_current:
-                    call LesScene (StormX)
-                "Maybe make out with [KittyX.name]?" if KittyX.location == bg_current:
-                    call LesScene (StormX)
-                "Maybe make out with [EmmaX.name]?" if EmmaX.location == bg_current:
-                    call LesScene (StormX)
-                "Maybe make out with [LauraX.name]?" if LauraX.location == bg_current:
-                    call LesScene (StormX)
-                "Maybe make out with [JeanX.name]?" if JeanX.location == bg_current:
-                    call LesScene (StormX)
-                "Maybe make out with [JubesX.name]?" if JubesX.location == bg_current:
-                    call LesScene (StormX)
-                "Never mind [[something else]":
-
-                    jump Storm_SMenu
-        "Could we maybe?. . . [[fuck]":
-
-
-
-
-            if StormX.remaining_actions:
-                menu:
-                    "What did you want to do?"
-                    "Come over here, I've got something in mind. . .":
-                        if Player.semen:
-                            call Storm_Sex_H
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your pussy.":
-                        if Player.semen:
-                            call Storm_Sex_P
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your ass.":
-                        if Player.semen:
-                            call Storm_Sex_A
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "How about some toys? [[Pussy]":
-                        call Storm_Dildo_Pussy
-                    "How about some toys? [[Anal]":
-                        call Storm_Dildo_Ass
-                    "Never mind [[something else]":
-                        jump Storm_SMenu
-            else:
-                ch_s "I am sorry, [StormX.player_petname], I need to take a break."
-        "Hey, do you want in on this? [[Threesome]":
-
-            call Sex_Menu_Threesome (StormX)
-            jump Storm_SMenu
-
-        "Hey, [Partner.name]? [[Switch lead]" if Partner:
-            call expression Partner.Tag + "_SexAct" pass ("switch")
-            return
-
-        "Cheat Menu" if config.developer:
-            call Cheat_Menu (StormX)
-        "Never mind. [[exit]":
-            if StormX.lust >= 50 or StormX.addiction >= 50:
-                $ StormX.change_face("sad")
-                if StormX.remaining_actions and StormX.SEXP >= 15 and Round > 20:
-                    if "round2" not in StormX.recent_history:
-                        ch_s "Are you certain, [StormX.player_petname]? Are you perhaps forgetting something?"
-                        $ StormX.change_stat("inhibition", 30, 2)
-                        $ StormX.change_stat("inhibition", 50, 1)
-                    elif StormX.addiction >= 50:
-                        ch_s "I need your touch."
-                    else:
-                        ch_s "That was not enough to satisfy me."
-                    menu:
-                        extend ""
-                        "Yeah, I'm done for now." if Player.semen and "round2" not in StormX.recent_history:
-                            if "unsatisfied" in StormX.recent_history and not StormX.session_orgasms:
-                                $ StormX.change_face("angry")
-                                $ StormX.eyes = "side"
-                                $ StormX.change_stat("love", 70, -2)
-                                $ StormX.change_stat("love", 90, -4)
-                                $ StormX.change_stat("obedience", 30, 2)
-                                $ StormX.change_stat("obedience", 70, 1)
-                                ch_s "Perhaps I need to teach you to be more generous."
-                            else:
-                                $ StormX.change_face("bemused", 1)
-                                $ StormX.change_stat("obedience", 50, 2)
-                                ch_s "Perhaps I need to teach you to be more generous."
-                        "I gave it a shot." if "round2" in StormX.recent_history:
-                            if "unsatisfied" in StormX.recent_history and not StormX.session_orgasms:
-                                $ StormX.change_face("angry")
-                                $ StormX.eyes = "side"
-                                ch_s "So that was the best you could achieve. . ."
-                            else:
-                                $ StormX.change_face("bemused", 1)
-                                ch_s "So that was the best you could achieve. . ."
-                        "Hey, I did my part." if StormX.session_orgasms > 2:
-                            $ StormX.change_face("sly", 1)
-                            ch_s "I had hoped for better. . ."
-                        "I'm tapped out for the moment, let's try again later." if not Player.semen:
-                            $ StormX.change_face("normal")
-                            ch_s "Well, I cannot push you to breaking. . ."
-                        "Ok, we can try something else." if multi_action and "round2" not in StormX.recent_history:
-                            $ StormX.change_face("smile")
-                            $ StormX.change_stat("love", 70, 2)
-                            $ StormX.change_stat("love", 90, 1)
-                            ch_s "Thank you."
-                            $ StormX.recent_history.append("round2")
-                            $ StormX.daily_history.append("round2")
-                            jump Storm_SexMenu
-                        "Again? Ok, fine." if multi_action and "round2" in StormX.recent_history:
-                            $ StormX.change_face("sly")
-                            ch_s "Always. . ."
-                            jump Storm_SexMenu
-                else:
-
-                    $ StormX.change_face("bemused", 1)
-                    ch_s "I could use some rest as well, [StormX.player_petname]."
-                    $ StormX.change_stat("inhibition", 30, 2)
-                    $ StormX.change_stat("inhibition", 50, 1)
-                $ StormX.change_face()
-            else:
-                ch_s "That is fine."
-            call Sex_Over
-            return
-    if StormX.location != bg_current:
-        call set_the_scene
-        call Trig_Reset
-        return
-    if not multi_action:
-        call set_the_scene
-        ch_s "I think that you have had enough for the moment."
-        $ StormX.session_orgasms = 0
-        call Trig_Reset
-        return
-    call GirlsAngry
-    jump Storm_SexMenu
-
-
-
-
 
 label Storm_Masturbate:
     $ Round -= 5 if Round > 5 else (Round-1)
@@ -365,7 +126,7 @@ label Storm_Masturbate:
         $ StormX.change_outfit()
         $ StormX.remaining_actions -= 1
         $ Player.change_stat("focus", 50, 30)
-        call Checkout (1)
+        call checkout (1)
         $ Line = 0
         $ action_context = 0
         $ renpy.pop_call()
@@ -486,7 +247,7 @@ label Storm_Masturbate:
             jump Storm_M_Prep
         elif Approval and "masturbation" in StormX.daily_history:
             $ StormX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["I put on quite the show?",       
+            $ Line = renpy.random.choice(["I put on quite the show?",
                     "You did not get enough earlier?",
                     "I did enjoy the audience participation. . ."])
             ch_s "[Line]"
@@ -497,8 +258,8 @@ label Storm_Masturbate:
         else:
             $ StormX.change_face("sexy", 1)
             $ StormX.ArmPose = 2
-            $ Line = renpy.random.choice(["You really do like to watch.",                 
-                    "Once more?",                 
+            $ Line = renpy.random.choice(["You really do like to watch.",
+                    "Once more?",
                     "You enjoy watching me do that?",
                     "You want me to take care of myself?"])
             ch_s "[Line]"
@@ -516,9 +277,9 @@ label Storm_Masturbate:
             $ StormX.change_face("sexy", 1)
             $ StormX.change_stat("love", 90, 1)
             $ StormX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Fine.",                 
+            $ Line = renpy.random.choice(["Fine.",
                     "It could not hurt having you around. . .",
-                    "Very well.", 
+                    "Very well.",
                     "Sure, why not?",
                     "[[chuckles]. . . Fine."])
             ch_s "[Line]"
@@ -548,8 +309,8 @@ label Storm_Masturbate:
                     $ StormX.change_stat("obedience", 50, 2)
                     $ StormX.change_stat("inhibition", 70, 3)
                     $ StormX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["You really do like to watch.",                 
-                            "Once more?",                 
+                    $ Line = renpy.random.choice(["You really do like to watch.",
+                            "Once more?",
                             "You enjoy watching me do that?",
                             "You want me to take care of myself?"])
                     ch_s "[Line]"
@@ -931,7 +692,7 @@ label Storm_M_Interupted:
 
     $ StormX.remaining_actions -= 1
     $ StormX.action_counter["masturbation"] += 1
-    call Checkout
+    call checkout
     if action_context == "shift":
         $ action_context = 0
         return
@@ -1144,9 +905,9 @@ label Storm_Sex_P:
             ch_s "Again? [StormX.player_petname], you are a lion!"
             jump Storm_SexPrep
         elif "sex" in StormX.daily_history:
-            $ Line = renpy.random.choice(["Back again?",                 
-                    "You would like another round?",                 
-                    "I suppose that I can be irresistible. . .", 
+            $ Line = renpy.random.choice(["Back again?",
+                    "You would like another round?",
+                    "I suppose that I can be irresistible. . .",
                     "Did you not get enough earlier?",
                     "You are wearing me out, " + StormX.player_petname + "."])
             ch_s "[Line]"
@@ -1155,9 +916,9 @@ label Storm_Sex_P:
             $ StormX.mouth = "kiss"
             ch_s "Oh? Another round?"
         else:
-            $ Line = renpy.random.choice(["Oh, did you want some of this?",                 
-                    "You wouldd like another round?",         
-                    "I suppose that I can be irresistible. . .", 
+            $ Line = renpy.random.choice(["Oh, did you want some of this?",
+                    "You wouldd like another round?",
+                    "I suppose that I can be irresistible. . .",
                     "I could get used to this. . .",
                     "Did you want me to ride you?"])
             ch_s "[Line]"
@@ -1177,8 +938,8 @@ label Storm_Sex_P:
             $ StormX.change_face("sexy", 1)
             $ StormX.change_stat("love", 90, 1)
             $ StormX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well. . . fine, I accept.",                 
-                    "Of course!", 
+            $ Line = renpy.random.choice(["Well. . . fine, I accept.",
+                    "Of course!",
                     "We could, I suppose.",
                     "Hmmm, yes.",
                     "How could I refuse?"])
@@ -1230,8 +991,8 @@ label Storm_Sex_P:
                     $ StormX.change_stat("obedience", 50, 2)
                     $ StormX.change_stat("inhibition", 70, 3)
                     $ StormX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["I cannot argue with that. . .",     
-                                "I suppose you have a point. . .", 
+                    $ Line = renpy.random.choice(["I cannot argue with that. . .",
+                                "I suppose you have a point. . .",
                                 "You do raise a worthy point. . ."])
                     ch_s "[Line]"
                     $ Line = 0
@@ -1565,8 +1326,8 @@ label Storm_Sex_Cycle:
                     jump Storm_SexAfter
                 elif "unsatisfied" in StormX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -1692,7 +1453,7 @@ label Storm_SexAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1866,18 +1627,18 @@ label Storm_Sex_A:
             jump Storm_AnalPrep
         elif "anal" in StormX.daily_history:
             $ StormX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                    "So you would like another round?",                 
-                    "I am still rather sore from earlier.", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                    "So you would like another round?",
+                    "I am still rather sore from earlier.",
                     "You did not get enough earlier?",
                     "You are tiring me, " + StormX.player_petname + "."])
             ch_s "[Line]"
         else:
             $ StormX.change_face("sexy", 1)
             $ StormX.ArmPose = 2
-            $ Line = renpy.random.choice(["Oooh, you wanted some of this?",                 
-                    "So you would like another round?",                 
-                    "I knew you would enjoy it. . .", 
+            $ Line = renpy.random.choice(["Oooh, you wanted some of this?",
+                    "So you would like another round?",
+                    "I knew you would enjoy it. . .",
                     "You want me to ride you?"])
             ch_s "[Line]"
         $ Line = 0
@@ -1896,8 +1657,8 @@ label Storm_Sex_A:
             $ StormX.change_face("sexy", 1)
             $ StormX.change_stat("love", 90, 1)
             $ StormX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well. . . I suppose.",                 
-                    "Of course!", 
+            $ Line = renpy.random.choice(["Well. . . I suppose.",
+                    "Of course!",
                     "We could, I suppose.",
                     "Hmm, yes. Fine.",
                     "Heh. Ok, ok."])
@@ -1950,8 +1711,8 @@ label Storm_Sex_A:
                     $ StormX.change_stat("obedience", 50, 2)
                     $ StormX.change_stat("inhibition", 70, 3)
                     $ StormX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["I cannot exactly argue with that. . .",     
-                                "I suppose. . .", 
+                    $ Line = renpy.random.choice(["I cannot exactly argue with that. . .",
+                                "I suppose. . .",
                                 "You do raise a good point. . ."])
                     ch_s "[Line]"
                     $ Line = 0
@@ -2289,8 +2050,8 @@ label Storm_Anal_Cycle:
                     jump Storm_AnalAfter
                 elif "unsatisfied" in StormX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -2421,7 +2182,7 @@ label Storm_AnalAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2565,17 +2326,17 @@ label Storm_Sex_H:
             jump Storm_HotdogPrep
         elif "hotdog" in StormX.daily_history:
             $ StormX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                    "So you would like another round?",                 
-                    "You really are into this. . .", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                    "So you would like another round?",
+                    "You really are into this. . .",
                     "Are you sure that is all you would want?"])
             ch_s "[Line]"
         else:
             $ StormX.change_face("sexy", 1)
             $ StormX.ArmPose = 2
-            $ Line = renpy.random.choice(["Oooh, you want some of this?",                 
-                    "So you would like another round?",                       
-                    "You really are into this. . .", 
+            $ Line = renpy.random.choice(["Oooh, you want some of this?",
+                    "So you would like another round?",
+                    "You really are into this. . .",
                     "You want another rub?"])
             ch_s "[Line]"
         $ Line = 0
@@ -2593,9 +2354,9 @@ label Storm_Sex_H:
             $ StormX.change_face("sexy", 1)
             $ StormX.change_stat("love", 80, 1)
             $ StormX.change_stat("inhibition", 50, 2)
-            $ Line = renpy.random.choice(["ery well then, let me give it a rub.",                 
-                    "Very well.",                 
-                    "Of course!", 
+            $ Line = renpy.random.choice(["ery well then, let me give it a rub.",
+                    "Very well.",
+                    "Of course!",
                     "I suppose that we could do that.",
                     "Allow me. . .",
                     "Heh, ok, ok."])
@@ -2644,8 +2405,8 @@ label Storm_Sex_H:
                     $ StormX.change_face("sexy")
                     $ StormX.change_stat("obedience", 60, 2)
                     $ StormX.change_stat("inhibition", 50, 2)
-                    $ Line = renpy.random.choice(["I cannot exactly argue with that. . .",     
-                                "I suppose so. . .", 
+                    $ Line = renpy.random.choice(["I cannot exactly argue with that. . .",
+                                "I suppose so. . .",
                                 "You do raise a good point. . ."])
                     ch_s "[Line]"
                     $ Line = 0
@@ -2962,8 +2723,8 @@ label Storm_Hotdog_Cycle:
                     jump Storm_HotdogAfter
                 elif "unsatisfied" in StormX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -3078,6 +2839,6 @@ label Storm_HotdogAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

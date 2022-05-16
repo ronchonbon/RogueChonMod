@@ -543,7 +543,7 @@ label Jean_FB_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1058,7 +1058,7 @@ label Jean_SB_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1531,7 +1531,7 @@ label Jean_FT_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2087,7 +2087,7 @@ label Jean_FP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2725,7 +2725,7 @@ label Jean_LP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3210,7 +3210,7 @@ label Jean_FA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3760,7 +3760,7 @@ label Jean_IA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -4266,6 +4266,6 @@ label Jean_LA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

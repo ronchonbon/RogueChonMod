@@ -42,252 +42,6 @@ label Jean_SexAct(Act=0):
         if not action_context:
             return
 
-label Jean_SexMenu:
-    call shift_focus (JeanX)
-    $ primary_action = 0
-    $ offhand_action = 0
-    $ girl_offhand_action = 0
-    $ action_context = 0
-    call Jean_Hide
-    $ JeanX.ArmPose = 1
-    call set_the_scene (1, 0, 0, 0, 1)
-    if not Player.semen:
-        "You're a little out of juice at the moment, you might want to wait a bit."
-    if Player.focus >= 95:
-        "You're practically buzzing, the slightest breeze could set you off."
-    if not JeanX.remaining_actions:
-        "[JeanX.name]'s looking a bit tired out, maybe let her rest a bit."
-
-    if "caught" in JeanX.recent_history or "angry" in JeanX.recent_history:
-        if JeanX.location == bg_current:
-            ch_j "You really don't want to try me right now."
-        $ JeanX.change_outfit()
-        $ JeanX.DrainWord("caught",1,0)
-        return
-
-    if Round < 5:
-        ch_j "You're looking a bit worn out, maybe take a break."
-        return
-    menu Jean_SMenu:
-        ch_j "What did you want to do?"
-        "Do you want to make out?":
-            if JeanX.remaining_actions:
-                call Makeout (JeanX)
-            else:
-                ch_j "Gimme a minute, k?"
-        "Could I touch you?":
-
-            if JeanX.remaining_actions:
-                $ JeanX.mouth = "smile"
-                menu:
-                    ch_j "Yeah? Like where?"
-                    "Could I give you a massage?":
-                        call Massage (JeanX)
-                    "Your breasts?":
-                        call Jean_Fondle_Breasts
-                    "Suck your breasts?" if JeanX.remaining_actions and JeanX.action_counter["suck_breasts"]:
-                        call Jean_Suck_Breasts
-                    "Your thighs?" if JeanX.remaining_actions:
-                        call Jean_Fondle_Thighs
-                    "Your pussy?" if JeanX.remaining_actions:
-                        call Jean_Fondle_Pussy
-                    "Lick your pussy?" if JeanX.remaining_actions and JeanX.action_counter["eat_pussy"]:
-                        call Jean_Lick_Pussy
-                    "Your Ass?":
-                        call Jean_Fondle_Ass
-                    "Never mind [[something else]":
-                        jump Jean_SMenu
-            else:
-                ch_j "Gimme a minute, k?"
-        "Could you take care of something for me? [[Your dick, you mean your dick]":
-
-            if Player.semen and JeanX.remaining_actions:
-                menu:
-                    ch_j "Oh? Like what?"
-                    "Could you give me a handjob?":
-                        call Jean_Handjob
-                    "Could you give me a psychic handjob?" if "psysex" in JeanX.history:
-                        if ApprovalCheck(JeanX, 1000):
-
-                            call Jean_PJ_Prep
-                        else:
-                            ch_j "I'd rather not."
-                    "Could you give me a titjob?":
-                        call Jean_Titjob
-                    "Could you suck my cock?":
-                        call Jean_Blowjob
-                    "Could use your feet?":
-                        call Jean_Footjob
-                    "Never mind [[something else]":
-                        jump Jean_SMenu
-            elif not JeanX.remaining_actions:
-                ch_j "Gimme a minute, k?"
-            else:
-                "You really don't have it in you, maybe take a break."
-        "Could you put on a show for me?":
-
-            menu:
-                ch_j "What kind of show are you thinking?"
-                "Dance for me?":
-                    if JeanX.remaining_actions:
-                        call Group_Strip (JeanX)
-                    else:
-                        ch_j "Gimme a minute, k?"
-                "Could you undress for me?":
-
-                    call Girl_Undress (JeanX)
-
-                "You've got a little something. . . [[clean-up]" if JeanX.Spunk:
-                    ch_j "What?"
-                    call Girl_Cleanup (JeanX, "ask")
-                "Could I watch you get yourself off? [[masturbate]":
-
-                    if JeanX.remaining_actions:
-                        call Jean_Masturbate
-                    else:
-                        ch_j "Gimme a minute, k?"
-
-                "Maybe make out with [RogueX.name]?" if RogueX.location == bg_current:
-                    call LesScene (JeanX)
-                "Maybe make out with [KittyX.name]?" if KittyX.location == bg_current:
-                    call LesScene (JeanX)
-                "Maybe make out with [EmmaX.name]?" if EmmaX.location == bg_current:
-                    call LesScene (JeanX)
-                "Maybe make out with [LauraX.name]?" if LauraX.location == bg_current:
-                    call LesScene (JeanX)
-                "Maybe make out with [StormX.name]?" if StormX.location == bg_current:
-                    call LesScene (JeanX)
-                "Maybe make out with [JubesX.name]?" if JubesX.location == bg_current:
-                    call LesScene (JeanX)
-                "Never mind [[something else]":
-
-
-                    jump Jean_SMenu
-        "Could we maybe?. . . [[fuck]":
-
-
-            if JeanX.remaining_actions:
-                menu:
-                    "What did you want to do?"
-                    "Lean back, I've got something in mind. . .":
-                        if Player.semen:
-                            call Jean_Sex_H
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your pussy.":
-                        if Player.semen:
-                            call Jean_Sex_P
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your ass.":
-                        if Player.semen:
-                            call Jean_Sex_A
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "How about some toys? [[Pussy]":
-                        call Jean_Dildo_Pussy
-                    "How about some toys? [[Anal]":
-                        call Jean_Dildo_Ass
-                    "Never mind [[something else]":
-                        jump Jean_SMenu
-            else:
-                ch_j "Gimme a minute, k?"
-
-        "Hey, do you want in on this? [[Threesome]" if not Partner:
-            call Sex_Menu_Threesome (JeanX)
-            jump Jean_SMenu
-
-        "Hey, [Partner.name]? [[Switch lead]" if Partner:
-            call expression Partner.Tag + "_SexAct" pass ("switch")
-            return
-
-        "Cheat Menu" if config.developer:
-            call Cheat_Menu (JeanX)
-        "Never mind. [[exit]":
-            if JeanX.lust >= 50 or JeanX.addiction >= 50:
-                $ JeanX.change_face("sad")
-                if JeanX.remaining_actions and JeanX.SEXP >= 15 and Round > 20:
-                    if "round2" not in JeanX.recent_history:
-                        ch_j "Are you sure, [JeanX.player_petname]?"
-                        ch_j "I could go another round. . . or two. . ."
-                        $ JeanX.change_stat("inhibition", 30, 2)
-                        $ JeanX.change_stat("inhibition", 50, 1)
-                    elif JeanX.addiction >= 50:
-                        ch_j "I need some more skin contact."
-                        ch_j "You gonna leave me hanging?"
-                    else:
-                        ch_j "Hey, you'd better get me off here."
-                        ch_j "You gonna leave me hanging?"
-                    menu:
-                        extend ""
-                        "Yeah, I'm done for now." if Player.semen and "round2" not in JeanX.recent_history:
-                            if "unsatisfied" in JeanX.recent_history and not JeanX.session_orgasms:
-                                $ JeanX.change_face("angry")
-                                $ JeanX.eyes = "side"
-                                $ JeanX.change_stat("love", 70, -2)
-                                $ JeanX.change_stat("love", 90, -4)
-                                $ JeanX.change_stat("obedience", 30, 2)
-                                $ JeanX.change_stat("obedience", 70, 1)
-                                ch_j "The die has been cast."
-                            else:
-                                $ JeanX.change_face("bemused", 1)
-                                $ JeanX.change_stat("obedience", 50, 2)
-                                ch_j "Booo. . ."
-                        "I gave it a shot." if "round2" in JeanX.recent_history:
-                            if "unsatisfied" in JeanX.recent_history and not JeanX.session_orgasms:
-                                $ JeanX.change_face("angry")
-                                $ JeanX.eyes = "side"
-                                ch_j "If that's what you want to call it. . ."
-                            else:
-                                $ JeanX.change_face("bemused", 1)
-                                ch_j "Booo. . ."
-                        "Hey, I did my part." if JeanX.session_orgasms > 2:
-                            $ JeanX.change_face("sly", 1)
-                            ch_j "Stingy. . ."
-                        "I'm tapped out for the moment, let's try again later." if not Player.semen:
-                            $ JeanX.change_face("angry")
-                            ch_j "Your hands don't seem to be broken."
-                        "Ok, we can try something else." if multi_action and "round2" not in JeanX.recent_history:
-                            $ JeanX.change_face("smile")
-                            $ JeanX.change_stat("love", 70, 2)
-                            $ JeanX.change_stat("love", 90, 1)
-                            ch_j "Good. . ."
-                            $ JeanX.recent_history.append("round2")
-                            $ JeanX.daily_history.append("round2")
-                            jump Jean_SexMenu
-                        "Again? Ok, fine." if multi_action and "round2" in JeanX.recent_history:
-                            $ JeanX.change_face("sly")
-                            ch_j "Always. . ."
-                            jump Jean_SexMenu
-                else:
-
-                    $ JeanX.change_face("bemused", 1)
-                    ch_j "Ok, sounds good. . ."
-                    $ JeanX.change_stat("inhibition", 30, 2)
-                    $ JeanX.change_stat("inhibition", 50, 1)
-                $ JeanX.change_face()
-            else:
-                ch_j "Ok, fine."
-
-            call Sex_Over
-            return
-    if JeanX.location != bg_current:
-        call set_the_scene
-        call Trig_Reset
-        return
-    if not multi_action:
-        call set_the_scene
-        ch_j "That's it. . . for now at least."
-        $ JeanX.session_orgasms = 0
-        call Trig_Reset
-        return
-    call GirlsAngry
-    jump Jean_SexMenu
-
-
-
-
-
 
 label Jean_Masturbate:
     $ Round -= 5 if Round > 5 else (Round-1)
@@ -372,7 +126,7 @@ label Jean_Masturbate:
         $ JeanX.change_outfit()
         $ JeanX.remaining_actions -= 1
         $ Player.change_stat("focus", 50, 30)
-        call Checkout (1)
+        call checkout (1)
         $ Line = 0
         $ action_context = 0
         $ renpy.pop_call()
@@ -493,7 +247,7 @@ label Jean_Masturbate:
             jump Jean_M_Prep
         elif Approval and "masturbation" in JeanX.daily_history:
             $ JeanX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Did you enjoy that?",       
+            $ Line = renpy.random.choice(["Did you enjoy that?",
                     "Didn't get enough earlier?",
                     "I do like having an audience. . ."])
             ch_j "[Line]"
@@ -504,8 +258,8 @@ label Jean_Masturbate:
         else:
             $ JeanX.change_face("sexy", 1)
             $ JeanX.ArmPose = 2
-            $ Line = renpy.random.choice(["You do like to watch.",                 
-                    "Again?",                 
+            $ Line = renpy.random.choice(["You do like to watch.",
+                    "Again?",
                     "You like to watch me.",
                     "You'd like me to masturbate again?"])
             ch_j "[Line]"
@@ -523,9 +277,9 @@ label Jean_Masturbate:
             $ JeanX.change_face("sexy", 1)
             $ JeanX.change_stat("love", 90, 1)
             $ JeanX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Sure. Ok.",                 
+            $ Line = renpy.random.choice(["Sure. Ok.",
                     "Couldn't hurt. . .",
-                    "All right.", 
+                    "All right.",
                     "Sure.",
                     "Sure, why not. . ."])
             ch_j "[Line]"
@@ -555,9 +309,9 @@ label Jean_Masturbate:
                     $ JeanX.change_stat("obedience", 50, 2)
                     $ JeanX.change_stat("inhibition", 70, 3)
                     $ JeanX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Sure. Ok.",                 
+                    $ Line = renpy.random.choice(["Sure. Ok.",
                                 "Couldn't hurt. . .",
-                                "All right.", 
+                                "All right.",
                                 "Sure.",
                                 "Sure, why not. . ."])
                     ch_j "[Line]"
@@ -925,7 +679,7 @@ label Jean_M_Interupted:
 
     $ JeanX.remaining_actions -= 1
     $ JeanX.action_counter["masturbation"] += 1
-    call Checkout
+    call checkout
     if action_context == "shift":
         $ action_context = 0
         return
@@ -1137,9 +891,9 @@ label Jean_Sex_P:
             ch_j "Again? Your funeral."
             jump Jean_SexPrep
         elif "sex" in JeanX.daily_history:
-            $ Line = renpy.random.choice(["Back again?",                 
-                    "You'd like another round?",                 
-                    "I must be better than I thought.", 
+            $ Line = renpy.random.choice(["Back again?",
+                    "You'd like another round?",
+                    "I must be better than I thought.",
                     "Didn't get enough earlier?",
                     "Your funeral, " + JeanX.player_petname + "."])
             ch_j "[Line]"
@@ -1148,9 +902,9 @@ label Jean_Sex_P:
             $ JeanX.mouth = "kiss"
             ch_j "Oh? Another round?"
         else:
-            $ Line = renpy.random.choice(["Oh, you want some of this?",                 
-                    "You'd like another round?",                 
-                    "I must be better than I thought.", 
+            $ Line = renpy.random.choice(["Oh, you want some of this?",
+                    "You'd like another round?",
+                    "I must be better than I thought.",
                     "I hope you don't plan on wearing me out.",
                     "You want to fuck me?"])
             ch_j "[Line]"
@@ -1170,8 +924,8 @@ label Jean_Sex_P:
             $ JeanX.change_face("sexy", 1)
             $ JeanX.change_stat("love", 90, 1)
             $ JeanX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well. . . fine, let's do it.",                 
-                    "Sure.", 
+            $ Line = renpy.random.choice(["Well. . . fine, let's do it.",
+                    "Sure.",
                     "We could, I guess.",
                     "Hmmm, sure.",
                     "Sounds fun."])
@@ -1223,8 +977,8 @@ label Jean_Sex_P:
                     $ JeanX.change_stat("obedience", 50, 2)
                     $ JeanX.change_stat("inhibition", 70, 3)
                     $ JeanX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Yeah, probably. . .",     
-                                "I guess. . .", 
+                    $ Line = renpy.random.choice(["Yeah, probably. . .",
+                                "I guess. . .",
                                 "Good point. . ."])
                     ch_j "[Line]"
                     $ Line = 0
@@ -1568,8 +1322,8 @@ label Jean_Sex_Cycle:
                     jump Jean_SexAfter
                 elif "unsatisfied" in JeanX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -1690,7 +1444,7 @@ label Jean_SexAfter:
             ch_j "I think you need to get back down there."
 
     $ approval_bonus = 0
-    call Checkout
+    call checkout
     return
 
 
@@ -1864,18 +1618,18 @@ label Jean_Sex_A:
             jump Jean_AnalPrep
         elif "anal" in JeanX.daily_history:
             $ JeanX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                    "So you'd like another round?",                 
-                    "Again? Sure.", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                    "So you'd like another round?",
+                    "Again? Sure.",
                     "Didn't get enough earlier?",
                     "Your funeral, " + JeanX.player_petname + "."])
             ch_j "[Line]"
         else:
             $ JeanX.change_face("sexy", 1)
             $ JeanX.ArmPose = 2
-            $ Line = renpy.random.choice(["Oooh, you want some of this?",                 
-                    "So you'd like another round?",                 
-                    "I knew you enjoyed it. . .", 
+            $ Line = renpy.random.choice(["Oooh, you want some of this?",
+                    "So you'd like another round?",
+                    "I knew you enjoyed it. . .",
                     "I hope you don't plan on wearing me out.",
                     "You want to plow me?"])
             ch_j "[Line]"
@@ -1895,8 +1649,8 @@ label Jean_Sex_A:
             $ JeanX.change_face("sexy", 1)
             $ JeanX.change_stat("love", 90, 1)
             $ JeanX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well. . . ok.",                 
-                    "Sure.", 
+            $ Line = renpy.random.choice(["Well. . . ok.",
+                    "Sure.",
                     "You could, I guess.",
                     "Um, yeah.",
                     "Heh, ok, ok."])
@@ -1948,8 +1702,8 @@ label Jean_Sex_A:
                     $ JeanX.change_stat("obedience", 50, 2)
                     $ JeanX.change_stat("inhibition", 70, 3)
                     $ JeanX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Yeah, sure. . .",     
-                                "I guess. . .", 
+                    $ Line = renpy.random.choice(["Yeah, sure. . .",
+                                "I guess. . .",
                                 "Good point. . ."])
                     ch_j "[Line]"
                     $ Line = 0
@@ -2300,8 +2054,8 @@ label Jean_Anal_Cycle:
                     jump Jean_AnalAfter
                 elif "unsatisfied" in JeanX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -2429,7 +2183,7 @@ label Jean_AnalAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2575,17 +2329,17 @@ label Jean_Sex_H:
             jump Jean_HotdogPrep
         elif "hotdog" in JeanX.daily_history:
             $ JeanX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                    "So you'd like another round?",                 
-                    "You're really into this. . .", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                    "So you'd like another round?",
+                    "You're really into this. . .",
                     "Are you sure that's all you want?"])
             ch_j "[Line]"
         else:
             $ JeanX.change_face("sexy", 1)
             $ JeanX.ArmPose = 2
-            $ Line = renpy.random.choice(["Oooh, you want some of this?",                 
-                    "So you'd like another round?",                       
-                    "You're really into this. . .", 
+            $ Line = renpy.random.choice(["Oooh, you want some of this?",
+                    "So you'd like another round?",
+                    "You're really into this. . .",
                     "You want another rub?"])
             ch_j "[Line]"
         $ Line = 0
@@ -2603,9 +2357,9 @@ label Jean_Sex_H:
             $ JeanX.change_face("sexy", 1)
             $ JeanX.change_stat("love", 80, 1)
             $ JeanX.change_stat("inhibition", 50, 2)
-            $ Line = renpy.random.choice(["Well, sure, let me give it a rub.",                 
-                    "Very well.",                 
-                    "Nice!", 
+            $ Line = renpy.random.choice(["Well, sure, let me give it a rub.",
+                    "Very well.",
+                    "Nice!",
                     "I guess we could do that.",
                     "Ok, let me. . .",
                     "Heh, ok, ok."])
@@ -2654,8 +2408,8 @@ label Jean_Sex_H:
                     $ JeanX.change_face("sexy")
                     $ JeanX.change_stat("obedience", 60, 2)
                     $ JeanX.change_stat("inhibition", 50, 2)
-                    $ Line = renpy.random.choice(["Yeah, probably. . .",     
-                                "I guess. . .", 
+                    $ Line = renpy.random.choice(["Yeah, probably. . .",
+                                "I guess. . .",
                                 "Good point. . ."])
                     ch_j "[Line]"
                     $ Line = 0
@@ -2979,8 +2733,8 @@ label Jean_Hotdog_Cycle:
                     jump Jean_HotdogAfter
                 elif "unsatisfied" in JeanX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -3095,6 +2849,6 @@ label Jean_HotdogAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

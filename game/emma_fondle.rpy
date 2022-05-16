@@ -551,7 +551,7 @@ label Emma_FB_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1070,7 +1070,7 @@ label Emma_SB_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1550,7 +1550,7 @@ label Emma_FT_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2112,7 +2112,7 @@ label Emma_FP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2759,7 +2759,7 @@ label Emma_LP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3253,7 +3253,7 @@ label Emma_FA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3810,7 +3810,7 @@ label Emma_IA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -4324,6 +4324,6 @@ label Emma_LA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

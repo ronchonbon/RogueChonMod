@@ -690,7 +690,7 @@ label Storm_Teacher_Caught(Girl=0):
         return
 
     ch_s "[Player.name]? [Girl.name]? Could you please stop what you are doing there?"
-    call Checkout (1)
+    call checkout (1)
 
     $ Girl.change_face("bemused", 2, Eyes="side")
     call AllReset (Girl)

@@ -42,241 +42,6 @@ label Laura_SexAct(Act=0):
         if not action_context:
             return
 
-label Laura_SexMenu:
-    call shift_focus (LauraX)
-    $ primary_action = 0
-    $ offhand_action = 0
-    $ girl_offhand_action = 0
-    $ action_context = 0
-    call Laura_Hide
-    $ LauraX.ArmPose = 1
-    call set_the_scene (1, 0, 0, 0, 1)
-    if not Player.semen:
-        "You're a little out of juice at the moment, you might want to wait a bit."
-    if Player.focus >= 95:
-        "You're practically buzzing, the slightest breeze could set you off."
-    if not LauraX.remaining_actions:
-        "[LauraX.name]'s looking a bit tired out, maybe let her rest a bit."
-
-    if "caught" in LauraX.recent_history or "angry" in LauraX.recent_history:
-        if LauraX.location == bg_current:
-            ch_l "You really don't want to try me right now."
-        $ LauraX.change_outfit()
-        $ LauraX.DrainWord("caught",1,0)
-        return
-
-    if Round < 5:
-        ch_l "You're looking a bit worn out, maybe take a break."
-        return
-    menu Laura_SMenu:
-        ch_l "What did you want to do?"
-        "Do you want to make out?":
-            if LauraX.remaining_actions:
-                call Makeout (LauraX)
-            else:
-                ch_l "Maybe in a minute, I need a break."
-        "Could I touch you?":
-
-            if LauraX.remaining_actions:
-                $ LauraX.mouth = "smile"
-                menu:
-                    ch_l "Yeah? Like where?"
-                    "Could I give you a massage?":
-                        call Massage (LauraX)
-                    "Your breasts?":
-                        call Laura_Fondle_Breasts
-                    "Suck your breasts?" if LauraX.remaining_actions and LauraX.action_counter["suck_breasts"]:
-                        call Laura_Suck_Breasts
-                    "Your thighs?" if LauraX.remaining_actions:
-                        call Laura_Fondle_Thighs
-                    "Your pussy?" if LauraX.remaining_actions:
-                        call Laura_Fondle_Pussy
-                    "Lick your pussy?" if LauraX.remaining_actions and LauraX.action_counter["eat_pussy"]:
-                        call Laura_Lick_Pussy
-                    "Your Ass?":
-                        call Laura_Fondle_Ass
-                    "Never mind [[something else]":
-                        jump Laura_SMenu
-            else:
-                ch_l "Maybe in a minute, I need a break."
-        "Could you take care of something for me? [[Your dick, you mean your dick]":
-
-            if Player.semen and LauraX.remaining_actions:
-                menu:
-                    ch_l "Oh? Like what?"
-                    "Could you give me a handjob?":
-                        call Laura_Handjob
-                    "Could you give me a titjob?":
-                        call Laura_Titjob
-                    "Could you suck my cock?":
-                        call Laura_Blowjob
-                    "Could use your feet?":
-                        call Laura_Footjob
-                    "Never mind [[something else]":
-                        jump Laura_SMenu
-            elif not LauraX.remaining_actions:
-                ch_l "Maybe in a minute, I need a break."
-            else:
-                "You really don't have it in you, maybe take a break."
-        "Could you put on a show for me?":
-
-            menu:
-                ch_l "What kind of show are you thinking?"
-                "Dance for me?":
-                    if LauraX.remaining_actions:
-                        call Group_Strip (LauraX)
-                    else:
-                        ch_l "Maybe in a minute, I need a break."
-                "Could you undress for me?":
-
-                    call Girl_Undress (LauraX)
-
-                "You've got a little something. . . [[clean-up]" if LauraX.Spunk:
-                    ch_l "What?"
-                    call Girl_Cleanup (LauraX, "ask")
-                "Could I watch you get yourself off? [[masturbate]":
-
-                    if LauraX.remaining_actions:
-                        call Laura_Masturbate
-                    else:
-                        ch_l "Maybe in a minute, I need a break."
-
-                "Maybe make out with [RogueX.name]?" if RogueX.location == bg_current:
-                    call LesScene (LauraX)
-                "Maybe make out with [KittyX.name]?" if KittyX.location == bg_current:
-                    call LesScene (LauraX)
-                "Maybe make out with [EmmaX.name]?" if EmmaX.location == bg_current:
-                    call LesScene (LauraX)
-                "Maybe make out with [JeanX.name]?" if JeanX.location == bg_current:
-                    call LesScene (LauraX)
-                "Maybe make out with [StormX.name]?" if StormX.location == bg_current:
-                    call LesScene (LauraX)
-                "Maybe make out with [JubesX.name]?" if JubesX.location == bg_current:
-                    call LesScene (LauraX)
-                "Never mind [[something else]":
-
-                    jump Laura_SMenu
-        "Could we maybe?. . . [[fuck]":
-
-
-            if LauraX.remaining_actions:
-                menu:
-                    "What did you want to do?"
-                    "Lean back, I've got something in mind. . .":
-                        if Player.semen:
-                            call Laura_Sex_H
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your pussy.":
-                        if Player.semen:
-                            call Laura_Sex_P
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your ass.":
-                        if Player.semen:
-                            call Laura_Sex_A
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "How about some toys? [[Pussy]":
-                        call Laura_Dildo_Pussy
-                    "How about some toys? [[Anal]":
-                        call Laura_Dildo_Ass
-                    "Never mind [[something else]":
-                        jump Laura_SMenu
-            else:
-                ch_l "Maybe in a minute, I need a break."
-
-        "Hey, do you want in on this? [[Threesome]" if not Partner:
-            call Sex_Menu_Threesome (LauraX)
-            jump Laura_SMenu
-
-        "Hey, [Partner.name]? [[Switch lead]" if Partner:
-            call expression Partner.Tag + "_SexAct" pass ("switch")
-            return
-
-        "Cheat Menu" if config.developer:
-            call Cheat_Menu (LauraX)
-        "Never mind. [[exit]":
-            if LauraX.lust >= 50 or LauraX.addiction >= 50:
-                $ LauraX.change_face("sad")
-                if LauraX.remaining_actions and LauraX.SEXP >= 15 and Round > 20:
-                    if "round2" not in LauraX.recent_history:
-                        ch_l "Are you sure, [LauraX.player_petname]?"
-                        ch_l "I could go another round. . . or two. . ."
-                        $ LauraX.change_stat("inhibition", 30, 2)
-                        $ LauraX.change_stat("inhibition", 50, 1)
-                    elif LauraX.addiction >= 50:
-                        ch_l "I need more contact."
-                    else:
-                        ch_l "Aren't you forgetting something?"
-                    menu:
-                        extend ""
-                        "Yeah, I'm done for now." if Player.semen and "round2" not in LauraX.recent_history:
-                            if "unsatisfied" in LauraX.recent_history and not LauraX.session_orgasms:
-                                $ LauraX.change_face("angry")
-                                $ LauraX.eyes = "side"
-                                $ LauraX.change_stat("love", 70, -2)
-                                $ LauraX.change_stat("love", 90, -4)
-                                $ LauraX.change_stat("obedience", 30, 2)
-                                $ LauraX.change_stat("obedience", 70, 1)
-                                ch_l "You'll regret that one."
-                            else:
-                                $ LauraX.change_face("bemused", 1)
-                                $ LauraX.change_stat("obedience", 50, 2)
-                                ch_l "Selfish. . ."
-                        "I gave it a shot." if "round2" in LauraX.recent_history:
-                            if "unsatisfied" in LauraX.recent_history and not LauraX.session_orgasms:
-                                $ LauraX.change_face("angry")
-                                $ LauraX.eyes = "side"
-                                ch_l "Not a very good one."
-                            else:
-                                $ LauraX.change_face("bemused", 1)
-                                ch_l "Selfish. . ."
-                        "Hey, I did my part." if LauraX.session_orgasms > 2:
-                            $ LauraX.change_face("sly", 1)
-                            ch_l "Well. . . yeah, but. . ."
-                        "I'm tapped out for the moment, let's try again later." if not Player.semen:
-                            $ LauraX.change_face("normal")
-                            ch_l "Well, you could always try something else. . ."
-                        "Ok, we can try something else." if multi_action and "round2" not in LauraX.recent_history:
-                            $ LauraX.change_face("smile")
-                            $ LauraX.change_stat("love", 70, 2)
-                            $ LauraX.change_stat("love", 90, 1)
-                            ch_l "Good. . ."
-                            $ LauraX.recent_history.append("round2")
-                            $ LauraX.daily_history.append("round2")
-                            jump Laura_SexMenu
-                        "Again? Ok, fine." if multi_action and "round2" in LauraX.recent_history:
-                            $ LauraX.change_face("sly")
-                            ch_l "Always. . ."
-                            jump Laura_SexMenu
-                else:
-
-                    $ LauraX.change_face("bemused", 1)
-                    ch_l "Yeah, you look like you've had enough. We can take a break. . ."
-                    ch_l ". . .for now."
-                    $ LauraX.change_stat("inhibition", 30, 2)
-                    $ LauraX.change_stat("inhibition", 50, 1)
-                $ LauraX.change_face()
-            else:
-                ch_l "Ok, fine."
-
-            call Sex_Over
-            return
-    if LauraX.location != bg_current:
-        call set_the_scene
-        call Trig_Reset
-        return
-    if not multi_action:
-        call set_the_scene
-        ch_l "That's all. . . for now at least."
-        $ LauraX.session_orgasms = 0
-        call Trig_Reset
-        return
-    call GirlsAngry
-    jump Laura_SexMenu
-
-
 
 
 
@@ -364,7 +129,7 @@ label Laura_Masturbate:
         $ LauraX.change_outfit()
         $ LauraX.remaining_actions -= 1
         $ Player.change_stat("focus", 50, 30)
-        call Checkout (1)
+        call checkout (1)
         $ Line = 0
         $ action_context = 0
         $ renpy.pop_call()
@@ -485,7 +250,7 @@ label Laura_Masturbate:
             jump Laura_M_Prep
         elif Approval and "masturbation" in LauraX.daily_history:
             $ LauraX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Did you enjoy that?",       
+            $ Line = renpy.random.choice(["Did you enjoy that?",
                     "Didn't get enough earlier?",
                     "I liked having an audience. . ."])
             ch_l "[Line]"
@@ -496,8 +261,8 @@ label Laura_Masturbate:
         else:
             $ LauraX.change_face("sexy", 1)
             $ LauraX.ArmPose = 2
-            $ Line = renpy.random.choice(["You like to watch.",                 
-                    "Again?",                 
+            $ Line = renpy.random.choice(["You like to watch.",
+                    "Again?",
                     "You really like to watch me.",
                     "You want me to masturbate again?"])
             ch_l "[Line]"
@@ -515,9 +280,9 @@ label Laura_Masturbate:
             $ LauraX.change_face("sexy", 1)
             $ LauraX.change_stat("love", 90, 1)
             $ LauraX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Huh. Ok.",                 
+            $ Line = renpy.random.choice(["Huh. Ok.",
                     "Couldn't hurt. . .",
-                    "Alright.", 
+                    "Alright.",
                     "Sure.",
                     "Heh, ok."])
             ch_l "[Line]"
@@ -547,9 +312,9 @@ label Laura_Masturbate:
                     $ LauraX.change_stat("obedience", 50, 2)
                     $ LauraX.change_stat("inhibition", 70, 3)
                     $ LauraX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Huh. Ok.",                 
+                    $ Line = renpy.random.choice(["Huh. Ok.",
                                 "Couldn't hurt. . .",
-                                "Allright.", 
+                                "Allright.",
                                 "Sure.",
                                 "Heh, ok."])
                     ch_l "[Line]"
@@ -923,7 +688,7 @@ label Laura_M_Interupted:
 
     $ LauraX.remaining_actions -= 1
     $ LauraX.action_counter["masturbation"] += 1
-    call Checkout
+    call checkout
     if action_context == "shift":
         $ action_context = 0
         return
@@ -1135,9 +900,9 @@ label Laura_Sex_P:
             ch_l "Again? Your funeral."
             jump Laura_SexPrep
         elif "sex" in LauraX.daily_history:
-            $ Line = renpy.random.choice(["Back again?",                 
-                    "You'd like another round?",                 
-                    "I must be better than I thought.", 
+            $ Line = renpy.random.choice(["Back again?",
+                    "You'd like another round?",
+                    "I must be better than I thought.",
                     "Didn't get enough earlier?",
                     "Your funeral, " + LauraX.player_petname + "."])
             ch_l "[Line]"
@@ -1146,9 +911,9 @@ label Laura_Sex_P:
             $ LauraX.mouth = "kiss"
             ch_l "Oh? Another round?"
         else:
-            $ Line = renpy.random.choice(["Oh, you want some of this?",                 
-                    "You'd like another round?",                 
-                    "I must be better than I thought.", 
+            $ Line = renpy.random.choice(["Oh, you want some of this?",
+                    "You'd like another round?",
+                    "I must be better than I thought.",
                     "I hope you don't plan on wearing me out.",
                     "You want to plow me?"])
             ch_l "[Line]"
@@ -1168,8 +933,8 @@ label Laura_Sex_P:
             $ LauraX.change_face("sexy", 1)
             $ LauraX.change_stat("love", 90, 1)
             $ LauraX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well. . . fine, let's do it.",                 
-                    "Sure.", 
+            $ Line = renpy.random.choice(["Well. . . fine, let's do it.",
+                    "Sure.",
                     "We could, I guess.",
                     "Hmmm, sure.",
                     "Sounds fun."])
@@ -1221,8 +986,8 @@ label Laura_Sex_P:
                     $ LauraX.change_stat("obedience", 50, 2)
                     $ LauraX.change_stat("inhibition", 70, 3)
                     $ LauraX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Yeah, probably. . .",     
-                                "I guess. . .", 
+                    $ Line = renpy.random.choice(["Yeah, probably. . .",
+                                "I guess. . .",
                                 "Good point. . ."])
                     ch_l "[Line]"
                     $ Line = 0
@@ -1558,8 +1323,8 @@ label Laura_Sex_Cycle:
                     jump Laura_SexAfter
                 elif "unsatisfied" in LauraX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -1683,7 +1448,7 @@ label Laura_SexAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1857,18 +1622,18 @@ label Laura_Sex_A:
             jump Laura_AnalPrep
         elif "anal" in LauraX.daily_history:
             $ LauraX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                    "So you'd like another round?",                 
-                    "Again? Sure.", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                    "So you'd like another round?",
+                    "Again? Sure.",
                     "Didn't get enough earlier?",
                     "Your funeral, " + LauraX.player_petname + "."])
             ch_l "[Line]"
         else:
             $ LauraX.change_face("sexy", 1)
             $ LauraX.ArmPose = 2
-            $ Line = renpy.random.choice(["Oooh, you want some of this?",                 
-                    "So you'd like another round?",                 
-                    "I knew you enjoyed it. . .", 
+            $ Line = renpy.random.choice(["Oooh, you want some of this?",
+                    "So you'd like another round?",
+                    "I knew you enjoyed it. . .",
                     "I hope you don't plan on wearing me out.",
                     "You want to plow me?"])
             ch_l "[Line]"
@@ -1888,8 +1653,8 @@ label Laura_Sex_A:
             $ LauraX.change_face("sexy", 1)
             $ LauraX.change_stat("love", 90, 1)
             $ LauraX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well. . . ok.",                 
-                    "Sure.", 
+            $ Line = renpy.random.choice(["Well. . . ok.",
+                    "Sure.",
                     "You could, I guess.",
                     "Um, yeah.",
                     "Heh, ok, ok."])
@@ -1942,8 +1707,8 @@ label Laura_Sex_A:
                     $ LauraX.change_stat("obedience", 50, 2)
                     $ LauraX.change_stat("inhibition", 70, 3)
                     $ LauraX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Yeah, probably. . .",     
-                                "I guess. . .", 
+                    $ Line = renpy.random.choice(["Yeah, probably. . .",
+                                "I guess. . .",
                                 "Good point. . ."])
                     ch_l "[Line]"
                     $ Line = 0
@@ -2293,8 +2058,8 @@ label Laura_Anal_Cycle:
                     jump Laura_AnalAfter
                 elif "unsatisfied" in LauraX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -2423,7 +2188,7 @@ label Laura_AnalAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2567,17 +2332,17 @@ label Laura_Sex_H:
             jump Laura_HotdogPrep
         elif "hotdog" in LauraX.daily_history:
             $ LauraX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                    "So you'd like another round?",                 
-                    "You're really into this. . .", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                    "So you'd like another round?",
+                    "You're really into this. . .",
                     "Are you sure that's all you want?"])
             ch_l "[Line]"
         else:
             $ LauraX.change_face("sexy", 1)
             $ LauraX.ArmPose = 2
-            $ Line = renpy.random.choice(["Oooh, you want some of this?",                 
-                    "So you'd like another round?",                       
-                    "You're really into this. . .", 
+            $ Line = renpy.random.choice(["Oooh, you want some of this?",
+                    "So you'd like another round?",
+                    "You're really into this. . .",
                     "You want another rub?"])
             ch_l "[Line]"
         $ Line = 0
@@ -2595,9 +2360,9 @@ label Laura_Sex_H:
             $ LauraX.change_face("sexy", 1)
             $ LauraX.change_stat("love", 80, 1)
             $ LauraX.change_stat("inhibition", 50, 2)
-            $ Line = renpy.random.choice(["Well, sure, let me give it a rub.",                 
-                    "Very well.",                 
-                    "Nice!", 
+            $ Line = renpy.random.choice(["Well, sure, let me give it a rub.",
+                    "Very well.",
+                    "Nice!",
                     "I guess we could do that.",
                     "Ok, let me. . .",
                     "Heh, ok, ok."])
@@ -2646,8 +2411,8 @@ label Laura_Sex_H:
                     $ LauraX.change_face("sexy")
                     $ LauraX.change_stat("obedience", 60, 2)
                     $ LauraX.change_stat("inhibition", 50, 2)
-                    $ Line = renpy.random.choice(["Yeah, probably. . .",     
-                                "I guess. . .", 
+                    $ Line = renpy.random.choice(["Yeah, probably. . .",
+                                "I guess. . .",
                                 "Good point. . ."])
                     ch_l "[Line]"
                     $ Line = 0
@@ -2970,8 +2735,8 @@ label Laura_Hotdog_Cycle:
                     jump Laura_HotdogAfter
                 elif "unsatisfied" in LauraX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -3086,6 +2851,6 @@ label Laura_HotdogAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

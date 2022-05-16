@@ -4458,3 +4458,15 @@ label Sex_Basic_Dialog(Girl=0, Type=0):
 
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc
+
+label pulls_off_top_narration(Girl):
+    if Girl == RogueX:
+        "[Girl.name] shrugs and pulls her top open."
+    elif Girl == KittyX:
+        "[Girl.name] laughs and pulls her top open."
+    elif Girl in [EmmaX, StormX]:
+        "[Girl.name] sighs and tugs her breasts free of her clothes."
+    elif Girl in [LauraX, JeanX, JubesX]:
+        "[Girl.name] grunts and pulls her clothes aside."
+
+    return

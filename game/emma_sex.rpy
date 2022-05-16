@@ -53,262 +53,6 @@ label Emma_SexAct(Act=0):
         if not action_context:
             return
 
-label Emma_SexMenu:
-    if "classcaught" not in EmmaX.history:
-        ch_e "I can't imagine being a part of something so. . . tawdry."
-        return
-    if "three" not in EmmaX.history and not AloneCheck(EmmaX):
-
-        call Emma_ThreeCheck
-    if Taboo > 20 and "taboo" not in EmmaX.history:
-
-        call Emma_Taboo_Talk
-        if bg_current == "bg_classroom" or bg_current in PersonalRooms and AloneCheck(EmmaX):
-            ch_p "We could just lock the door, right?"
-            ch_e "We certainly could. . ."
-            "[EmmaX.name] walks to the door and locks it behind her."
-            $ Player.Traits.append("locked")
-            call Taboo_Level
-        else:
-
-            return
-    call shift_focus (EmmaX)
-    $ primary_action = 0
-    $ offhand_action = 0
-    $ girl_offhand_action = 0
-    $ action_context = 0
-    call Emma_Hide
-    $ EmmaX.ArmPose = 1
-    if "detention" in EmmaX.recent_history:
-        $ approval_bonus = 20 if approval_bonus <= 20 else approval_bonus
-    call set_the_scene (1, 0, 0, 0, 1)
-
-    if not Player.semen:
-        "You're a little out of juice at the moment, you might want to wait a bit."
-    if Player.focus >= 95:
-        "You're practically buzzing, the slightest breeze could set you off."
-    if not EmmaX.remaining_actions:
-        "[EmmaX.name]'s looking a bit tired out, maybe let her rest a bit."
-
-    if "caught" in EmmaX.recent_history or "angry" in EmmaX.recent_history:
-        if EmmaX.location == bg_current:
-            ch_e "I'd rather not deal with you at the moment."
-        $ EmmaX.change_outfit()
-        $ EmmaX.DrainWord("caught",1,0)
-        return
-
-    if Round < 5:
-        ch_e "I think we could both do with a short break."
-        return
-    menu Emma_SMenu:
-        ch_e "So, what was it you hoped to do?"
-        "Do you want to make out?":
-            if EmmaX.remaining_actions:
-                call Makeout (EmmaX)
-            else:
-                ch_e "I'm sorry, [EmmaX.player_petname], but I need a break."
-        "Could I touch you?":
-
-            if EmmaX.remaining_actions:
-                $ EmmaX.change_face("sly")
-                menu:
-                    ch_e "Um, what did you want to touch, [EmmaX.player_petname]?"
-                    "Could I give you a massage?":
-                        call Massage (EmmaX)
-                    "Your breasts?":
-                        call Emma_Fondle_Breasts
-                    "Suck your breasts?" if EmmaX.remaining_actions and EmmaX.action_counter["suck_breasts"]:
-                        call Emma_Suck_Breasts
-                    "Your thighs?" if EmmaX.remaining_actions:
-                        call Emma_Fondle_Thighs
-                    "Your pussy?" if EmmaX.remaining_actions:
-                        call Emma_Fondle_Pussy
-                    "Lick your pussy?" if EmmaX.remaining_actions and EmmaX.action_counter["eat_pussy"]:
-                        call Emma_Lick_Pussy
-                    "Your Ass?":
-                        call Emma_Fondle_Ass
-                    "Never mind [[something else]":
-                        jump Emma_SMenu
-            else:
-                ch_e "I'm sorry, [EmmaX.player_petname], but I need a break."
-        "Could you take care of something for me? [[Your dick, you mean your dick]":
-
-            if Player.semen and EmmaX.remaining_actions:
-                menu:
-                    ch_e "What did you want me to do?"
-                    "Could you give me a handjob?":
-                        call Emma_Handjob
-                    "Could you give me a titjob?":
-                        call Emma_Titjob
-                    "Could you suck my cock?":
-                        call Emma_Blowjob
-                    "Could use your feet?":
-                        call Emma_Footjob
-                    "Never mind [[something else]":
-                        jump Emma_SMenu
-            elif not EmmaX.remaining_actions:
-                "I'm sorry, [EmmaX.player_petname], but I need a break."
-            else:
-                "You really don't have it in you, maybe take a break."
-        "Could you put on a show for me?":
-
-            menu:
-                ch_e "What did you want to see?"
-                "Dance for me?":
-                    if EmmaX.remaining_actions:
-                        call Group_Strip (EmmaX)
-                    else:
-                        "I'm sorry, [EmmaX.player_petname], but I need a break."
-                "Could you undress for me?":
-
-                    call Girl_Undress (EmmaX)
-
-                "You've got a little something. . . [[clean-up]" if EmmaX.Spunk:
-                    ch_e "Huh?"
-                    call Girl_Cleanup (EmmaX, "ask")
-                "Could I watch you get yourself off? [[masturbate]":
-
-                    if EmmaX.remaining_actions:
-                        call Emma_Masturbate
-                    else:
-                        "I'm sorry, [EmmaX.player_petname], but I need a break."
-
-                "Maybe make out with [RogueX.name]?" if RogueX.location == bg_current:
-                    call LesScene (EmmaX)
-                "Maybe make out with [KittyX.name]?" if KittyX.location == bg_current:
-                    call LesScene (EmmaX)
-                "Maybe make out with [LauraX.name]?" if LauraX.location == bg_current:
-                    call LesScene (EmmaX)
-                "Maybe make out with [JeanX.name]?" if JeanX.location == bg_current:
-                    call LesScene (EmmaX)
-                "Maybe make out with [StormX.name]?" if StormX.location == bg_current:
-                    call LesScene (EmmaX)
-                "Maybe make out with [JubesX.name]?" if JubesX.location == bg_current:
-                    call LesScene (EmmaX)
-                "Never mind [[something else]":
-
-                    jump Emma_SMenu
-        "Could we maybe?. . . [[fuck]":
-
-
-            if EmmaX.remaining_actions:
-                menu:
-                    "What did you want to do?"
-                    "Come over here, I've got something in mind. . .":
-                        if Player.semen:
-                            call Emma_Sex_H
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your pussy.":
-                        if Player.semen:
-                            call Emma_Sex_P
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your ass.":
-                        if Player.semen:
-                            call Emma_Sex_A
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "How about some toys? [[Pussy]":
-                        call Emma_Dildo_Pussy
-                    "How about some toys? [[Anal]":
-                        call Emma_Dildo_Ass
-                    "Never mind [[something else]":
-                        jump Emma_SMenu
-            else:
-                "I'm sorry, [EmmaX.player_petname], but I need a break."
-        "Hey, do you want in on this? [[Threesome]":
-
-            call Sex_Menu_Threesome (EmmaX)
-            jump Emma_SMenu
-
-        "Hey, [Partner.name]? [[Switch lead]" if Partner:
-            call expression Partner.Tag + "_SexAct" pass ("switch")
-            return
-
-        "Cheat Menu" if config.developer:
-            call Cheat_Menu (EmmaX)
-        "Never mind. [[exit]":
-            if EmmaX.lust >= 50 or EmmaX.addiction >= 50:
-                $ EmmaX.change_face("sad")
-                if EmmaX.remaining_actions and EmmaX.SEXP >= 15 and Round > 20:
-                    if "round2" not in EmmaX.recent_history:
-                        ch_e "Are you certain, [EmmaX.player_petname]? Are you perhaps forgetting something?"
-                        $ EmmaX.change_stat("inhibition", 30, 2)
-                        $ EmmaX.change_stat("inhibition", 50, 1)
-                    elif EmmaX.addiction >= 50:
-                        ch_e "I need more contact."
-                    else:
-                        ch_e "I'm afraid that still wasn't enough."
-                    menu:
-                        extend ""
-                        "Yeah, I'm done for now." if Player.semen and "round2" not in EmmaX.recent_history:
-                            if "unsatisfied" in EmmaX.recent_history and not EmmaX.session_orgasms:
-                                $ EmmaX.change_face("angry")
-                                $ EmmaX.eyes = "side"
-                                $ EmmaX.change_stat("love", 70, -2)
-                                $ EmmaX.change_stat("love", 90, -4)
-                                $ EmmaX.change_stat("obedience", 30, 2)
-                                $ EmmaX.change_stat("obedience", 70, 1)
-                                ch_e "Well! This might count against you next time."
-                            else:
-                                $ EmmaX.change_face("bemused", 1)
-                                $ EmmaX.change_stat("obedience", 50, 2)
-                                ch_e "I suppose I'll have to blame myself as an educator."
-                        "I gave it a shot." if "round2" in EmmaX.recent_history:
-                            if "unsatisfied" in EmmaX.recent_history and not EmmaX.session_orgasms:
-                                $ EmmaX.change_face("angry")
-                                $ EmmaX.eyes = "side"
-                                ch_e "Yes, disappointingly so. . ."
-                            else:
-                                $ EmmaX.change_face("bemused", 1)
-                                ch_e "I suppose you did. . .shame you couldn't do better. . ."
-                        "Hey, I did my part." if EmmaX.session_orgasms > 2:
-                            $ EmmaX.change_face("sly", 1)
-                            ch_e "Take it as a compliment that I expected more."
-                        "I'm tapped out for the moment, let's try again later." if not Player.semen:
-                            $ EmmaX.change_face("normal")
-                            ch_e "I suppose that can't be helped. . ."
-                        "Ok, we can try something else." if multi_action and "round2" not in EmmaX.recent_history:
-                            $ EmmaX.change_face("smile")
-                            $ EmmaX.change_stat("love", 70, 2)
-                            $ EmmaX.change_stat("love", 90, 1)
-                            ch_e "Excellent. . ."
-                            $ EmmaX.recent_history.append("round2")
-                            $ EmmaX.daily_history.append("round2")
-                            jump Emma_SexMenu
-                        "Again? Ok, fine." if multi_action and "round2" in EmmaX.recent_history:
-                            $ EmmaX.change_face("sly")
-                            ch_e "Always. . ."
-                            jump Emma_SexMenu
-                else:
-
-                    $ EmmaX.change_face("bemused", 1)
-                    ch_e "I suppose I'm tired as well, [EmmaX.player_petname]. We can take a breather. . ."
-                    $ EmmaX.change_stat("inhibition", 30, 2)
-                    $ EmmaX.change_stat("inhibition", 50, 1)
-                $ EmmaX.change_face()
-            else:
-                ch_e "Fine."
-            call Sex_Over
-            return
-    if EmmaX.location != bg_current:
-        call set_the_scene
-        call Trig_Reset
-        return
-    if not multi_action:
-        call set_the_scene
-        ch_e "That's all you get. . . for now."
-        $ EmmaX.session_orgasms = 0
-        call Trig_Reset
-        return
-    call GirlsAngry
-    jump Emma_SexMenu
-
-
-
-
-
 label Emma_Masturbate:
     $ Round -= 5 if Round > 5 else (Round-1)
     call shift_focus (EmmaX)
@@ -392,7 +136,7 @@ label Emma_Masturbate:
         $ EmmaX.change_outfit()
         $ EmmaX.remaining_actions -= 1
         $ Player.change_stat("focus", 50, 30)
-        call Checkout (1)
+        call checkout (1)
         $ Line = 0
         $ action_context = 0
         $ renpy.pop_call()
@@ -513,7 +257,7 @@ label Emma_Masturbate:
             jump Emma_M_Prep
         elif Approval and "masturbation" in EmmaX.daily_history:
             $ EmmaX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["I was that good?",       
+            $ Line = renpy.random.choice(["I was that good?",
                     "Didn't get enough earlier?",
                     "I did enjoy the audience participation. . ."])
             ch_e "[Line]"
@@ -524,8 +268,8 @@ label Emma_Masturbate:
         else:
             $ EmmaX.change_face("sexy", 1)
             $ EmmaX.ArmPose = 2
-            $ Line = renpy.random.choice(["You really do like to watch.",                 
-                    "Once more?",                 
+            $ Line = renpy.random.choice(["You really do like to watch.",
+                    "Once more?",
                     "You enjoy watching me.",
                     "You want me to take care of myself?"])
             ch_e "[Line]"
@@ -543,9 +287,9 @@ label Emma_Masturbate:
             $ EmmaX.change_face("sexy", 1)
             $ EmmaX.change_stat("love", 90, 1)
             $ EmmaX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Ok.",                 
+            $ Line = renpy.random.choice(["Ok.",
                     "It couldn't hurt having you around. . .",
-                    "Very well.", 
+                    "Very well.",
                     "Sure, why not?",
                     "[[chuckles]. . . ok."])
             ch_e "[Line]"
@@ -575,9 +319,9 @@ label Emma_Masturbate:
                     $ EmmaX.change_stat("obedience", 50, 2)
                     $ EmmaX.change_stat("inhibition", 70, 3)
                     $ EmmaX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Ok.",                 
+                    $ Line = renpy.random.choice(["Ok.",
                             "It couldn't hurt having you around. . .",
-                            "Very well.", 
+                            "Very well.",
                             "Sure, why not?",
                             "[[chuckles]. . . ok."])
                     ch_e "[Line]"
@@ -959,7 +703,7 @@ label Emma_M_Interupted:
 
     $ EmmaX.remaining_actions -= 1
     $ EmmaX.action_counter["masturbation"] += 1
-    call Checkout
+    call checkout
     if action_context == "shift":
         $ action_context = 0
         return
@@ -1172,9 +916,9 @@ label Emma_Sex_P:
             ch_e "Again? [EmmaX.player_petname], you're insatiable!"
             jump Emma_SexPrep
         elif "sex" in EmmaX.daily_history:
-            $ Line = renpy.random.choice(["Back again?",                 
-                    "You'd like another round?",                 
-                    "I suppose I am irresistible. . .", 
+            $ Line = renpy.random.choice(["Back again?",
+                    "You'd like another round?",
+                    "I suppose I am irresistible. . .",
                     "Didn't get enough earlier?",
                     "You're wearing me out, " + EmmaX.player_petname + "."])
             ch_e "[Line]"
@@ -1183,9 +927,9 @@ label Emma_Sex_P:
             $ EmmaX.mouth = "kiss"
             ch_e "Oh? Another round?"
         else:
-            $ Line = renpy.random.choice(["Oh, you want some of this?",                 
-                    "You'd like another round?",                 
-                    "I suppose I am irresistible. . .", 
+            $ Line = renpy.random.choice(["Oh, you want some of this?",
+                    "You'd like another round?",
+                    "I suppose I am irresistible. . .",
                     "Do you intend to make me melt?",
                     "You want me to ride you?"])
             ch_e "[Line]"
@@ -1205,8 +949,8 @@ label Emma_Sex_P:
             $ EmmaX.change_face("sexy", 1)
             $ EmmaX.change_stat("love", 90, 1)
             $ EmmaX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well. . . fine, I accept.",                 
-                    "Sure!", 
+            $ Line = renpy.random.choice(["Well. . . fine, I accept.",
+                    "Sure!",
                     "We could, I suppose.",
                     "Hmmm, yes.",
                     "How could I refuse?"])
@@ -1258,8 +1002,8 @@ label Emma_Sex_P:
                     $ EmmaX.change_stat("obedience", 50, 2)
                     $ EmmaX.change_stat("inhibition", 70, 3)
                     $ EmmaX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["I can't exactly argue with that. . .",     
-                                "I suppose. . .", 
+                    $ Line = renpy.random.choice(["I can't exactly argue with that. . .",
+                                "I suppose. . .",
                                 "You raise a good point. . ."])
                     ch_e "[Line]"
                     $ Line = 0
@@ -1598,8 +1342,8 @@ label Emma_Sex_Cycle:
                     jump Emma_SexAfter
                 elif "unsatisfied" in EmmaX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -1725,7 +1469,7 @@ label Emma_SexAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1899,18 +1643,18 @@ label Emma_Sex_A:
             jump Emma_AnalPrep
         elif "anal" in EmmaX.daily_history:
             $ EmmaX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                    "So you'd like another round?",                 
-                    "I'm still a little sore from earlier.", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                    "So you'd like another round?",
+                    "I'm still a little sore from earlier.",
                     "Didn't get enough earlier?",
                     "You're wearing me out, " + EmmaX.player_petname + "."])
             ch_e "[Line]"
         else:
             $ EmmaX.change_face("sexy", 1)
             $ EmmaX.ArmPose = 2
-            $ Line = renpy.random.choice(["Oooh, you want some of this?",                 
-                    "So you'd like another round?",                 
-                    "I knew you enjoyed it. . .", 
+            $ Line = renpy.random.choice(["Oooh, you want some of this?",
+                    "So you'd like another round?",
+                    "I knew you enjoyed it. . .",
                     "Do you intend to make me melt?",
                     "You want me to ride you?"])
             ch_e "[Line]"
@@ -1930,8 +1674,8 @@ label Emma_Sex_A:
             $ EmmaX.change_face("sexy", 1)
             $ EmmaX.change_stat("love", 90, 1)
             $ EmmaX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well. . . ok.",                 
-                    "Sure!", 
+            $ Line = renpy.random.choice(["Well. . . ok.",
+                    "Sure!",
                     "You could, I guess.",
                     "Um, yeah.",
                     "Heh, ok, ok."])
@@ -1984,8 +1728,8 @@ label Emma_Sex_A:
                     $ EmmaX.change_stat("obedience", 50, 2)
                     $ EmmaX.change_stat("inhibition", 70, 3)
                     $ EmmaX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["I can't exactly argue with that. . .",     
-                                "I suppose. . .", 
+                    $ Line = renpy.random.choice(["I can't exactly argue with that. . .",
+                                "I suppose. . .",
                                 "You raise a good point. . ."])
                     ch_e "[Line]"
                     $ Line = 0
@@ -2338,8 +2082,8 @@ label Emma_Anal_Cycle:
                     jump Emma_AnalAfter
                 elif "unsatisfied" in EmmaX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -2470,7 +2214,7 @@ label Emma_AnalAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2614,17 +2358,17 @@ label Emma_Sex_H:
             jump Emma_HotdogPrep
         elif "hotdog" in EmmaX.daily_history:
             $ EmmaX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                    "So you'd like another round?",                 
-                    "You're really into this. . .", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                    "So you'd like another round?",
+                    "You're really into this. . .",
                     "Are you sure that's all you want?"])
             ch_e "[Line]"
         else:
             $ EmmaX.change_face("sexy", 1)
             $ EmmaX.ArmPose = 2
-            $ Line = renpy.random.choice(["Oooh, you want some of this?",                 
-                    "So you'd like another round?",                       
-                    "You're really into this. . .", 
+            $ Line = renpy.random.choice(["Oooh, you want some of this?",
+                    "So you'd like another round?",
+                    "You're really into this. . .",
                     "You want another rub?"])
             ch_e "[Line]"
         $ Line = 0
@@ -2642,9 +2386,9 @@ label Emma_Sex_H:
             $ EmmaX.change_face("sexy", 1)
             $ EmmaX.change_stat("love", 80, 1)
             $ EmmaX.change_stat("inhibition", 50, 2)
-            $ Line = renpy.random.choice(["Well, sure, let me give it a rub.",                 
-                    "Very well.",                 
-                    "Nice!", 
+            $ Line = renpy.random.choice(["Well, sure, let me give it a rub.",
+                    "Very well.",
+                    "Nice!",
                     "I suppose we could do that.",
                     "Allow me. . .",
                     "Heh, ok, ok."])
@@ -2693,8 +2437,8 @@ label Emma_Sex_H:
                     $ EmmaX.change_face("sexy")
                     $ EmmaX.change_stat("obedience", 60, 2)
                     $ EmmaX.change_stat("inhibition", 50, 2)
-                    $ Line = renpy.random.choice(["I can't exactly argue with that. . .",     
-                                "I suppose. . .", 
+                    $ Line = renpy.random.choice(["I can't exactly argue with that. . .",
+                                "I suppose. . .",
                                 "You raise a good point. . ."])
                     ch_e "[Line]"
                     $ Line = 0
@@ -3016,8 +2760,8 @@ label Emma_Hotdog_Cycle:
                     jump Emma_HotdogAfter
                 elif "unsatisfied" in EmmaX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -3132,6 +2876,6 @@ label Emma_HotdogAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

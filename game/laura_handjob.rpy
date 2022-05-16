@@ -552,7 +552,7 @@ label Laura_HJ_After:
         ch_l "Ok, so what did you have in mind?"
     else:
         call Laura_HJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -1155,7 +1155,7 @@ label Laura_TJ_After:
         ch_l "Mmm, so what else did you have in mind?"
     else:
         call Laura_TJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -1803,7 +1803,7 @@ label Laura_BJ_After:
     $ approval_bonus = 0
     if action_context != "shift":
         call Laura_BJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -2422,7 +2422,7 @@ label Laura_DP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3044,7 +3044,7 @@ label Laura_DA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3638,6 +3638,6 @@ label Laura_FJ_After:
         ch_l "Ok, so what did you have in mind?"
     else:
         call Laura_Sex_Reset
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

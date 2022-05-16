@@ -381,7 +381,7 @@ label Round10(BO=[], Occupant=0):
 
 
 
-label Checkout(Total=0, BO=[]):
+label checkout(Total=0, BO=[]):
 
 
     $ BO = all_Girls[:]
@@ -441,7 +441,7 @@ label Wait(Outfit=1, Lights=1, BO=[]):
 
     show blackscreen onlayer black
 
-    call Checkout (1)
+    call checkout (1)
     $ Player.XP = 3330 if Player.XP > 3330 else Player.XP
 
     if time_index < 3:
@@ -750,7 +750,7 @@ label Wait(Outfit=1, Lights=1, BO=[]):
     call LesCheck
 
 
-    call Checkout
+    call checkout
     if time_index < 3:
         hide NightMask onlayer nightmask
     if Lights:
@@ -7122,7 +7122,7 @@ label Sex_Over(Clothes=1, Girls=0, BO=[]):
         elif Girls:
             "[Line] throws her clothes back on."
     call Get_Dressed
-    call Checkout (1)
+    call checkout (1)
     return
 
 

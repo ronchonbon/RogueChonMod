@@ -2133,8 +2133,8 @@ label Sleepover_MorningWood:
             jump Return_Player
 
         elif Line == "sex":
-
-            call expression Party[0].Tag + "_SexMenu"
+            shift_focus(Party[0])
+            jump enter_main_sex_menu
     else:
 
         $ Line = 0
@@ -3830,7 +3830,7 @@ label Frisky_Study(Prime_Bonus=0, Second=0, Line=0, Second_Bonus=0):
 
 label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
     call shift_focus (Girl)
-    call Checkout
+    call checkout
     Girl.voice "!!!"
     $ Line = primary_action
     call Trig_Reset
@@ -9575,7 +9575,7 @@ label PhoneSex(Girl=0):
 
     call Get_Dressed
     $ Girl.change_outfit(5)
-    call Checkout (1)
+    call checkout (1)
     $ Player.recent_history.remove("phonesex")
     return
 
@@ -9679,7 +9679,8 @@ label MindFuck(TempLoc=0):
             Girl.voice "There. . ."
 
             $ Player.AddWord(1,"MindFuck","MindFuck",0,"MindFuck")
-            call expression Girl.Tag + "_SexMenu"
+            shift_focus(Girl)
+            jump enter_main_sex_menu
 
             $ Girl.location = TempLoc
             if Girl == EmmaX:

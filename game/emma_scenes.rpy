@@ -273,7 +273,7 @@ label Emma_Teacher_Caught(Girl=0):
         return
 
     ch_e "[Player.name]? [Girl.name]? Could you stop what you're doing immediately?"
-    call Checkout (1)
+    call checkout (1)
 
     $ Girl.change_face("bemused", 2, Eyes="side")
     call AllReset (Girl)

@@ -543,7 +543,7 @@ label Storm_FB_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1055,7 +1055,7 @@ label Storm_SB_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1528,7 +1528,7 @@ label Storm_FT_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2081,7 +2081,7 @@ label Storm_FP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2717,7 +2717,7 @@ label Storm_LP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3202,7 +3202,7 @@ label Storm_FA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3751,7 +3751,7 @@ label Storm_IA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -4256,6 +4256,6 @@ label Storm_LA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

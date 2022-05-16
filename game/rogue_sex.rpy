@@ -42,244 +42,6 @@ label Rogue_SexAct(Act=0):
         if not action_context:
             return
 
-label Rogue_SexMenu:
-    call shift_focus (RogueX)
-    $ primary_action = 0
-    $ offhand_action = 0
-    $ girl_offhand_action = 0
-    $ action_context = 0
-    call Rogue_Hide
-    $ RogueX.ArmPose = 1
-    call set_the_scene (1, 0, 0, 0, 1)
-
-    if not Player.semen:
-        "You're a little out of juice at the moment, you might want to wait a bit."
-    if Player.focus >= 95:
-        "You're practically buzzing, the slightest breeze could set you off."
-    if not RogueX.remaining_actions:
-        "[RogueX.name]'s looking a bit tired out, maybe let her rest a bit."
-
-    if "caught" in RogueX.recent_history or "angry" in RogueX.recent_history:
-        if RogueX.location == bg_current:
-            ch_r "I don't want to deal with you right now."
-        $ RogueX.change_outfit(Changed=0)
-        $ RogueX.DrainWord("caught",1,0)
-        return
-
-    if Round < 5:
-        ch_r "We've been at it for a while now, let's take a breather."
-        return
-
-    menu Rogue_SMenu:
-        ch_r "So what would you like to do?"
-        "Do you want to make out?":
-            if RogueX.remaining_actions:
-                call Makeout (RogueX)
-            else:
-                ch_r "Sorry, [RogueX.player_petname], but I'm a bit worn out."
-        "Could I touch you?":
-
-            if RogueX.remaining_actions:
-                $ RogueX.mouth = "smile"
-                menu:
-                    ch_r "Well where exactly were you interested in touching, [RogueX.player_petname]?"
-                    "Could I give you a massage?":
-                        call Massage (RogueX)
-                    "Your breasts?":
-                        call Rogue_Fondle_Breasts
-                    "Suck your breasts?" if RogueX.remaining_actions and RogueX.action_counter["suck_breasts"]:
-                        call Rogue_Suck_Breasts
-                    "Your thighs?" if RogueX.remaining_actions:
-                        call Rogue_Fondle_Thighs
-                    "Your pussy?" if RogueX.remaining_actions:
-                        call Rogue_Fondle_Pussy
-                    "Lick your pussy?" if RogueX.remaining_actions and RogueX.action_counter["eat_pussy"]:
-                        call Rogue_Lick_Pussy
-                    "Your Ass?":
-                        call Rogue_Fondle_Ass
-                    "Never mind [[something else]":
-                        jump Rogue_SMenu
-            else:
-                ch_r "That sounds lovely, [RogueX.player_petname], but I'm a bit worn out."
-        "Could you take care of something for me? [[Your dick, you mean your dick]":
-
-            if Player.semen and RogueX.remaining_actions:
-                menu:
-                    ch_r "What did you have in mind, [RogueX.player_petname]?"
-                    "Could you give me a handjob?":
-                        call Rogue_Handjob
-                    "Could you give me a titjob?":
-                        call Rogue_Titjob
-                    "Could you suck my cock?":
-                        call Rogue_Blowjob
-                    "Could use your feet?":
-                        call Rogue_Footjob
-                    "Never mind [[something else]":
-                        jump Rogue_SMenu
-            elif not RogueX.remaining_actions:
-                ch_r "Sorry [RogueX.player_petname], I'm a bit worn out."
-            else:
-                "You really don't have it in you, maybe take a break."
-        "Could you put on a show for me?":
-
-            menu:
-                ch_r "What sort of show were you expecting?"
-                "Dance for me?":
-                    if RogueX.remaining_actions:
-                        call Group_Strip (RogueX)
-                    else:
-                        ch_r "Sorry [RogueX.player_petname], I'm a bit worn out."
-                "Could you undress for me?":
-
-                    call Girl_Undress (RogueX)
-
-                "You've got a little something. . . [[clean-up]" if RogueX.Spunk:
-                    ch_r "Oh?"
-                    call Girl_Cleanup (RogueX, "ask")
-                "Could I watch you get yourself off? [[masturbate]":
-
-                    if RogueX.remaining_actions:
-                        call Rogue_Masturbate
-                    else:
-                        ch_r "Sorry [RogueX.player_petname], I'm a bit worn out."
-
-                "Maybe make out with [KittyX.name]?" if KittyX.location == bg_current:
-                    call LesScene (RogueX)
-                "Maybe make out with [EmmaX.name]?" if EmmaX.location == bg_current:
-                    call LesScene (RogueX)
-                "Maybe make out with [LauraX.name]?" if LauraX.location == bg_current:
-                    call LesScene (RogueX)
-                "Maybe make out with [JeanX.name]?" if JeanX.location == bg_current:
-                    call LesScene (RogueX)
-                "Maybe make out with [StormX.name]?" if StormX.location == bg_current:
-                    call LesScene (RogueX)
-                "Maybe make out with [JubesX.name]?" if JubesX.location == bg_current:
-                    call LesScene (RogueX)
-                "Never mind [[something else]":
-
-
-
-                    jump Rogue_SMenu
-        "Could we maybe?. . . [[fuck]":
-
-            if RogueX.remaining_actions:
-                menu:
-                    "What did you want to do?"
-                    "Turn around, I've got something in mind. . .":
-                        if Player.semen:
-                            call Rogue_Sex_H
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your pussy.":
-                        if Player.semen:
-                            call Rogue_Sex_P
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your ass.":
-                        if Player.semen:
-                            call Rogue_Sex_A
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "How about some toys? [[Pussy]":
-                        call Rogue_Dildo_Pussy
-                    "How about some toys? [[Anal]":
-                        call Rogue_Dildo_Ass
-                    "Never mind [[something else]":
-                        jump Rogue_SMenu
-            else:
-                ch_r "Sorry [RogueX.player_petname], I'm a bit worn out."
-
-        "Hey, do you want in on this? [[Threesome]" if not Partner:
-            call Sex_Menu_Threesome (RogueX)
-            jump Rogue_SMenu
-
-        "Hey, [Partner.name]? [[Switch lead]" if Partner:
-            call expression Partner.Tag + "_SexAct" pass ("switch")
-            return
-
-        "Cheat Menu" if config.developer:
-            call Cheat_Menu (RogueX)
-        "Never mind. [[End]":
-
-            if RogueX.lust >= 50 or RogueX.addiction >= 50:
-                $ RogueX.change_face("sad")
-                if RogueX.remaining_actions and RogueX.SEXP >= 15 and Round > 20:
-                    if "round2" not in RogueX.recent_history:
-                        ch_r "Are you sure, [RogueX.player_petname]? I could really use some company."
-                        $ RogueX.change_stat("inhibition", 30, 2)
-                        $ RogueX.change_stat("inhibition", 50, 1)
-                    elif RogueX.addiction >= 50:
-                        ch_r "I still need a little. . . contact."
-                    else:
-                        ch_r "Don't leave my hang'in, [RogueX.player_petname]."
-                    menu:
-                        extend ""
-                        "Yeah, I'm done for now." if Player.semen and "round2" not in RogueX.recent_history:
-                            if "unsatisfied" in RogueX.recent_history and not RogueX.session_orgasms:
-                                $ RogueX.change_face("angry")
-                                $ RogueX.eyes = "side"
-                                $ RogueX.change_stat("love", 70, -2)
-                                $ RogueX.change_stat("love", 90, -4)
-                                $ RogueX.change_stat("obedience", 30, 2)
-                                $ RogueX.change_stat("obedience", 70, 1)
-                                ch_r "Way to leave a girl in the lurch. . ."
-                            else:
-                                $ RogueX.change_face("bemused", 1)
-                                $ RogueX.change_stat("obedience", 50, 2)
-                                ch_r "Well, you did at least do your part. . ."
-                        "I gave it a shot." if "round2" in RogueX.recent_history:
-                            if "unsatisfied" in RogueX.recent_history and not RogueX.session_orgasms:
-                                $ RogueX.change_face("angry")
-                                $ RogueX.eyes = "side"
-                                ch_r "Way to leave a girl in the lurch. . ."
-                            else:
-                                $ RogueX.change_face("bemused", 1)
-                                ch_r "Well, fair enough. . ."
-                        "Hey, I did my part." if RogueX.session_orgasms > 2:
-                            $ RogueX.change_face("sly", 1)
-                            ch_r "I guess you did at that. . ."
-                        "I'm tapped out for the moment, let's try again later." if not Player.semen:
-                            $ RogueX.change_face("normal")
-                            ch_r "Huh, can't be helped, I s'pose."
-                        "Ok, we can try something else." if multi_action and "round2" not in RogueX.recent_history:
-                            $ RogueX.change_face("smile")
-                            $ RogueX.change_stat("love", 70, 2)
-                            $ RogueX.change_stat("love", 90, 1)
-                            ch_r "Mmmm. . ."
-                            $ RogueX.recent_history.append("round2")
-                            $ RogueX.daily_history.append("round2")
-                            jump Rogue_SexMenu
-                        "Again? Ok, fine." if multi_action and "round2" in RogueX.recent_history:
-                            $ RogueX.change_face("sly")
-                            ch_r "Yeah, again. . ."
-                            jump Rogue_SexMenu
-                else:
-
-                    $ RogueX.change_face("bemused", 1)
-                    ch_r "I guess I'm a bit tuckered out too, [RogueX.player_petname]. I guess we can take a breather."
-                    $ RogueX.change_stat("inhibition", 30, 2)
-                    $ RogueX.change_stat("inhibition", 50, 1)
-            else:
-                ch_r "Huh? Ok."
-            $ RogueX.change_face()
-            call Sex_Over
-            return
-    if RogueX.location != bg_current:
-        call set_the_scene
-        call Trig_Reset
-        return
-    if not multi_action:
-        $ RogueX.session_orgasms = 0
-        call Trig_Reset
-        call set_the_scene
-        ch_r "That's it. . . for now."
-        return
-    call GirlsAngry
-    jump Rogue_SexMenu
-
-
-
-
 
 label Rogue_Masturbate:
     $ Round -= 5 if Round > 5 else (Round-1)
@@ -364,7 +126,7 @@ label Rogue_Masturbate:
         $ RogueX.change_outfit(Changed=0)
         $ RogueX.remaining_actions -= 1
         $ Player.change_stat("focus", 50, 30)
-        call Checkout (1)
+        call checkout (1)
         $ Line = 0
         $ action_context = 0
         $ renpy.pop_call()
@@ -485,7 +247,7 @@ label Rogue_Masturbate:
             jump Rogue_M_Prep
         elif Approval and "masturbation" in RogueX.daily_history:
             $ RogueX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["You enjoyed the show?",       
+            $ Line = renpy.random.choice(["You enjoyed the show?",
                     "Didn't get enough earlier?",
                     "It is nice to have an audience. . ."])
             ch_r "[Line]"
@@ -496,8 +258,8 @@ label Rogue_Masturbate:
         else:
             $ RogueX.change_face("sexy", 1)
             $ RogueX.ArmPose = 2
-            $ Line = renpy.random.choice(["You sure do like to watch.",                 
-                    "So you'd like me to go again?",                 
+            $ Line = renpy.random.choice(["You sure do like to watch.",
+                    "So you'd like me to go again?",
                     "You want to watch some more?",
                     "You want me ta diddle myself?"])
             ch_r "[Line]"
@@ -515,10 +277,10 @@ label Rogue_Masturbate:
             $ RogueX.change_face("sexy", 1)
             $ RogueX.change_stat("love", 90, 1)
             $ RogueX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well. . . ok.",                 
+            $ Line = renpy.random.choice(["Well. . . ok.",
                     "I suppose it would help to have something nice to look at. . .",
                     "I've kind of needed this anyways. . .",
-                    "Sure!", 
+                    "Sure!",
                     "I guess I could. . . give it a go.",
                     "Heh, ok, ok."])
             ch_r "[Line]"
@@ -548,10 +310,10 @@ label Rogue_Masturbate:
                     $ RogueX.change_stat("obedience", 50, 2)
                     $ RogueX.change_stat("inhibition", 70, 3)
                     $ RogueX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Well. . . ok.",                 
+                    $ Line = renpy.random.choice(["Well. . . ok.",
                             "I suppose it would help to have something nice to look at. . .",
                             "I've kind of needed this anyways. . .",
-                            "Sure!", 
+                            "Sure!",
                             "I guess I could. . . give it a go.",
                             "Heh, ok, ok."])
                     ch_r "[Line]"
@@ -927,7 +689,7 @@ label Rogue_M_Interupted:
         call Partner_Like (RogueX, 4)
     else:
         call Partner_Like (RogueX, 3)
-    call Checkout
+    call checkout
     if action_context == "shift":
         $ action_context = 0
         return
@@ -1127,9 +889,9 @@ label Rogue_Sex_P:
             ch_r "You want to go again? Ok."
             jump Rogue_SexPrep
         elif "sex" in RogueX.daily_history:
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                "So you'd like another go?",                 
-                "You can't stay away from this. . .", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                "So you'd like another go?",
+                "You can't stay away from this. . .",
                 "Didn't get enough earlier?",
                 "You're going to wear me out."])
             ch_r "[Line]"
@@ -1138,9 +900,9 @@ label Rogue_Sex_P:
             $ RogueX.mouth = "kiss"
             ch_r "So you'd like another go?"
         else:
-            $ Line = renpy.random.choice(["You want some of this action?",                 
-                "So you'd like another go?",                 
-                "You can't stay away from this. . .", 
+            $ Line = renpy.random.choice(["You want some of this action?",
+                "So you'd like another go?",
+                "You can't stay away from this. . .",
                 "You want me to ride your pole?",
                 "You wanna dip your wick?"])
             ch_r "[Line]"
@@ -1158,9 +920,9 @@ label Rogue_Sex_P:
             $ RogueX.change_face("sexy", 1)
             $ RogueX.change_stat("love", 90, 1)
             $ RogueX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well, sure, stick it in.",                 
-                "Well. . . ok.",                 
-                "Sure!", 
+            $ Line = renpy.random.choice(["Well, sure, stick it in.",
+                "Well. . . ok.",
+                "Sure!",
                 "I guess I could. . . stick it in.",
                 "Hells yeah.",
                 "Heh, ok, ok."])
@@ -1211,8 +973,8 @@ label Rogue_Sex_P:
                     $ RogueX.change_stat("obedience", 50, 2)
                     $ RogueX.change_stat("inhibition", 70, 3)
                     $ RogueX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Well, sure, stick it in.",     
-                        "I suppose. . .", 
+                    $ Line = renpy.random.choice(["Well, sure, stick it in.",
+                        "I suppose. . .",
                         "You've got me there."])
                     ch_r "[Line]"
                     $ Line = 0
@@ -1549,8 +1311,8 @@ label Rogue_Sex_Cycle:
                     jump Rogue_SexAfter
                 elif "unsatisfied" in RogueX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -1674,7 +1436,7 @@ label Rogue_SexAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1851,9 +1613,9 @@ label Rogue_Sex_A:
             jump Rogue_AnalPrep
         elif "anal" in RogueX.daily_history:
             $ RogueX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                "So you'd like another go?",                 
-                "I'm still a little sore from earlier.", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                "So you'd like another go?",
+                "I'm still a little sore from earlier.",
                 "Didn't get enough earlier?",
                 "You're going to wear me out."])
             ch_r "[Line]"
@@ -1865,9 +1627,9 @@ label Rogue_Sex_A:
         else:
             $ RogueX.change_face("sexy", 1)
             $ RogueX.ArmPose = 2
-            $ Line = renpy.random.choice(["You want some of this action?",                 
-                "So you'd like another go?",                 
-                "You can't stay away from this booty.", 
+            $ Line = renpy.random.choice(["You want some of this action?",
+                "So you'd like another go?",
+                "You can't stay away from this booty.",
                 "You want me to ride your pole?",
                 "You wanna dip your wick?"])
             ch_r "[Line]"
@@ -1885,9 +1647,9 @@ label Rogue_Sex_A:
             $ RogueX.change_face("sexy", 1)
             $ RogueX.change_stat("love", 90, 1)
             $ RogueX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well, sure, stick it in.",                 
-                "Well. . . ok.",                 
-                "Sure!", 
+            $ Line = renpy.random.choice(["Well, sure, stick it in.",
+                "Well. . . ok.",
+                "Sure!",
                 "I guess I could. . . stick it in.",
                 "Hells yeah.",
                 "Heh, ok, ok."])
@@ -1941,8 +1703,8 @@ label Rogue_Sex_A:
                     $ RogueX.change_stat("obedience", 50, 2)
                     $ RogueX.change_stat("inhibition", 70, 3)
                     $ RogueX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Well, sure, stick it in.",     
-                        "I suppose. . .", 
+                    $ Line = renpy.random.choice(["Well, sure, stick it in.",
+                        "I suppose. . .",
                         "You've got me there."])
                     ch_r "[Line]"
                     $ Line = 0
@@ -2294,8 +2056,8 @@ label Rogue_Anal_Cycle:
                     jump Rogue_AnalAfter
                 elif "unsatisfied" in RogueX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -2431,7 +2193,7 @@ label Rogue_AnalAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2576,9 +2338,9 @@ label Rogue_Sex_H:
             jump Rogue_HotdogPrep
         elif "hotdog" in RogueX.daily_history:
             $ RogueX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                "So you'd like another go?",                 
-                "You can't stay away from this booty. . .", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                "So you'd like another go?",
+                "You can't stay away from this booty. . .",
                 "Are you sure that's all you want?"])
             ch_r "[Line]"
         elif RogueX.action_counter["hotdog"] < 3:
@@ -2589,9 +2351,9 @@ label Rogue_Sex_H:
         else:
             $ RogueX.change_face("sexy", 1)
             $ RogueX.ArmPose = 2
-            $ Line = renpy.random.choice(["You want some of this action?",                 
-                "So you'd like another go?",                 
-                "You can't stay away from this booty.", 
+            $ Line = renpy.random.choice(["You want some of this action?",
+                "So you'd like another go?",
+                "You can't stay away from this booty.",
                 "You want me to slick your pole?"])
             ch_r "[Line]"
         $ Line = 0
@@ -2608,9 +2370,9 @@ label Rogue_Sex_H:
             $ RogueX.change_face("sexy", 1)
             $ RogueX.change_stat("love", 80, 1)
             $ RogueX.change_stat("inhibition", 50, 2)
-            $ Line = renpy.random.choice(["Well, sure, give it a rub.",                 
-                "Well. . . ok.",                 
-                "Sure!", 
+            $ Line = renpy.random.choice(["Well, sure, give it a rub.",
+                "Well. . . ok.",
+                "Sure!",
                 "I guess we could do that.",
                 "Hells yeah.",
                 "Heh, ok, ok."])
@@ -2658,8 +2420,8 @@ label Rogue_Sex_H:
                     $ RogueX.change_face("sexy")
                     $ RogueX.change_stat("obedience", 60, 2)
                     $ RogueX.change_stat("inhibition", 50, 2)
-                    $ Line = renpy.random.choice(["Well, sure, give it a rub.",     
-                        "I suppose. . .", 
+                    $ Line = renpy.random.choice(["Well, sure, give it a rub.",
+                        "I suppose. . .",
                         "You've got me there."])
                     ch_r "[Line]"
                     $ Line = 0
@@ -2976,8 +2738,8 @@ label Rogue_Hotdog_Cycle:
                     jump Rogue_HotdogAfter
                 elif "unsatisfied" in RogueX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -3100,7 +2862,7 @@ label Rogue_HotdogAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 

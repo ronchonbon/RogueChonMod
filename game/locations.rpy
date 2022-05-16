@@ -133,7 +133,7 @@ label Player_Room:
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     if Round <= 10:
         call Round10
         call Girls_Location
@@ -242,7 +242,7 @@ label Campus:
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     call GirlsAngry
     if time_index == 2 and "yesdate" in Player.daily_history:
 
@@ -350,7 +350,7 @@ label Class_Room:
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     if Round <= 10:
         if time_index >= 3:
             "You're getting tired, you head back to your room."
@@ -634,7 +634,7 @@ label Danger_Room:
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     if Round <= 10:
         "Looks like shifts are changing. . ."
         if time_index >=3:
@@ -844,7 +844,7 @@ label Pool_Room:
     call Taboo_Level
     call set_the_scene (Quiet=1, Dress=0)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     if Round <= 10:
         if time_index >= 3:
             "You're getting tired, you head back to your room."
@@ -1264,7 +1264,7 @@ label Shower_Room:
     call Taboo_Level
     call set_the_scene (Dress=0)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     if Round <= 10:
         if time_index == 3:
             "You're getting tired, you head back to your room."
@@ -2754,7 +2754,7 @@ label Study_Room:
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     if Round <= 10:
         if time_index >= 3:
             "It's late, you head back to your room."
@@ -3474,7 +3474,7 @@ label Rogue_Room:
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     if Round <= 10:
         call Round10
         call Girls_Location
@@ -3565,7 +3565,7 @@ label Kitty_Room:
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     if Round <= 10:
         call Round10
         call Girls_Location
@@ -3656,7 +3656,7 @@ label Emma_Room:
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     if Round <= 10:
         call Round10
         call Girls_Location
@@ -3747,7 +3747,7 @@ label Laura_Room:
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     if Round <= 10:
         call Round10
         call Girls_Location
@@ -3836,7 +3836,7 @@ label Jean_Room:
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     if Round <= 10:
         call Round10
         call Girls_Location
@@ -3926,7 +3926,7 @@ label Storm_Room:
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     if Round <= 10:
         call Round10
         call Girls_Location
@@ -4017,7 +4017,7 @@ label Jubes_Room:
     call Taboo_Level
     call set_the_scene (Quiet=1)
     call QuickEvents
-    call Checkout (1)
+    call checkout (1)
     if Round <= 10:
         call Round10
         call Girls_Location

@@ -2439,7 +2439,7 @@ label StatHacks(Chr=0, counter=0):
                 call WardrobeEditor (Chr)
             "Return":
 
-                call Checkout
+                call checkout
                 return
 
 

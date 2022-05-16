@@ -42,242 +42,6 @@ label Jubes_SexAct(Act=0):
         if not action_context:
             return
 
-label Jubes_SexMenu:
-    call shift_focus (JubesX)
-    $ primary_action = 0
-    $ offhand_action = 0
-    $ girl_offhand_action = 0
-    $ action_context = 0
-    call Jubes_Hide
-    $ JubesX.ArmPose = 1
-    call set_the_scene (1, 0, 0, 0, 1)
-    if not Player.semen:
-        "You're a little out of juice at the moment, you might want to wait a bit."
-    if Player.focus >= 95:
-        "You're practically buzzing, the slightest breeze could set you off."
-    if not JubesX.remaining_actions:
-        "[JubesX.name]'s looking a bit tired out, maybe let her rest a bit."
-
-    if "caught" in JubesX.recent_history or "angry" in JubesX.recent_history:
-        if JubesX.location == bg_current:
-            ch_v "I'm definitely not in the mood for you right now."
-        $ JubesX.change_outfit()
-        $ JubesX.DrainWord("caught",1,0)
-        return
-
-    if Round < 5:
-        ch_v "Hey, I could use a break, how 'bout you?"
-        return
-    menu Jubes_SMenu:
-        ch_v "So what did you wanna do?"
-        "Do you want to make out?":
-            if JubesX.remaining_actions:
-                call Makeout (JubesX)
-            else:
-                ch_v "I could use a short break first."
-        "Could I touch you?":
-
-            if JubesX.remaining_actions:
-                $ JubesX.mouth = "smile"
-                menu:
-                    ch_v "Where were you thinking?"
-                    "Could I give you a massage?":
-                        call Massage (JubesX)
-                    "Your breasts?":
-                        call Jubes_Fondle_Breasts
-                    "Suck your breasts?" if JubesX.remaining_actions and JubesX.action_counter["suck_breasts"]:
-                        call Jubes_Suck_Breasts
-                    "Your thighs?" if JubesX.remaining_actions:
-                        call Jubes_Fondle_Thighs
-                    "Your pussy?" if JubesX.remaining_actions:
-                        call Jubes_Fondle_Pussy
-                    "Lick your pussy?" if JubesX.remaining_actions and JubesX.action_counter["eat_pussy"]:
-                        call Jubes_Lick_Pussy
-                    "Your Ass?":
-                        call Jubes_Fondle_Ass
-                    "Never mind [[something else]":
-                        jump Jubes_SMenu
-            else:
-                ch_v "I could use a short break first."
-        "Could you take care of something for me? [[Your dick, you mean your dick]":
-
-            if Player.semen and JubesX.remaining_actions:
-                menu:
-                    ch_v "What were you thinking?"
-                    "Could you give me a handjob?":
-                        call Jubes_Handjob
-                    "Could you give me a titjob?":
-                        call Jubes_Titjob
-                    "Could you suck my cock?":
-                        call Jubes_Blowjob
-                    "Could use your feet?":
-                        call Jubes_Footjob
-                    "Never mind [[something else]":
-                        jump Jubes_SMenu
-            elif not JubesX.remaining_actions:
-                ch_v "I could use a short break first."
-            else:
-                "You really don't have it in you, maybe take a break."
-        "Could you put on a show for me?":
-
-            menu:
-                ch_v "What kind of show?"
-                "Dance for me?":
-                    if JubesX.remaining_actions:
-                        call Group_Strip (JubesX)
-                    else:
-                        ch_v "I could use a short break first."
-                "Could you undress for me?":
-
-                    call Girl_Undress (JubesX)
-
-                "You've got a little something. . . [[clean-up]" if JubesX.Spunk:
-                    ch_v "What?"
-                    call Girl_Cleanup (JubesX, "ask")
-                "Could I watch you get yourself off? [[masturbate]":
-
-                    if JubesX.remaining_actions:
-                        call Jubes_Masturbate
-                    else:
-                        ch_v "I could use a short break first."
-
-                "Maybe make out with [RogueX.name]?" if RogueX.location == bg_current:
-                    call LesScene (JubesX)
-                "Maybe make out with [KittyX.name]?" if KittyX.location == bg_current:
-                    call LesScene (JubesX)
-                "Maybe make out with [EmmaX.name]?" if EmmaX.location == bg_current:
-                    call LesScene (JubesX)
-                "Maybe make out with [LauraX.name]?" if LauraX.location == bg_current:
-                    call LesScene (JubesX)
-                "Maybe make out with [JeanX.name]?" if JeanX.location == bg_current:
-                    call LesScene (JubesX)
-                "Maybe make out with [StormX.name]?" if StormX.location == bg_current:
-                    call LesScene (JubesX)
-                "Never mind [[something else]":
-
-                    jump Jubes_SMenu
-        "Could we maybe?. . . [[fuck]":
-
-
-            if JubesX.remaining_actions:
-                menu:
-                    "What did you want to do?"
-                    "Lean back, I've got something in mind. . .":
-                        if Player.semen:
-                            call Jubes_Sex_H
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your pussy.":
-                        if Player.semen:
-                            call Jubes_Sex_P
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your ass.":
-                        if Player.semen:
-                            call Jubes_Sex_A
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "How about some toys? [[Pussy]":
-                        call Jubes_Dildo_Pussy
-                    "How about some toys? [[Anal]":
-                        call Jubes_Dildo_Ass
-                    "Never mind [[something else]":
-                        jump Jubes_SMenu
-            else:
-                ch_v "I could use a short break first."
-
-        "Hey, do you want in on this? [[Threesome]" if not Partner:
-            call Sex_Menu_Threesome (JubesX)
-            jump Jubes_SMenu
-
-        "Hey, [Partner.name]? [[Switch lead]" if Partner:
-            call expression Partner.Tag + "_SexAct" pass ("switch")
-            return
-
-        "Cheat Menu" if config.developer:
-            call Cheat_Menu (JubesX)
-        "Never mind. [[exit]":
-            if JubesX.lust >= 50 or JubesX.addiction >= 50:
-                $ JubesX.change_face("sad")
-                if JubesX.remaining_actions and JubesX.SEXP >= 15 and Round > 20:
-                    if "round2" not in JubesX.recent_history:
-                        ch_v "Are you sure, [JubesX.player_petname]?"
-                        ch_v "I could keep going. . ."
-                        $ JubesX.change_stat("inhibition", 30, 2)
-                        $ JubesX.change_stat("inhibition", 50, 1)
-                    elif JubesX.addiction >= 50:
-                        ch_v "I'm a little drained, I need more contact."
-                    else:
-                        ch_v "Hey! Don't leave me hanging here."
-                    menu:
-                        extend ""
-                        "Yeah, I'm done for now." if Player.semen and "round2" not in JubesX.recent_history:
-                            if "unsatisfied" in JubesX.recent_history and not JubesX.session_orgasms:
-                                $ JubesX.change_face("angry")
-                                $ JubesX.eyes = "side"
-                                $ JubesX.change_stat("love", 70, -2)
-                                $ JubesX.change_stat("love", 90, -4)
-                                $ JubesX.change_stat("obedience", 30, 2)
-                                $ JubesX.change_stat("obedience", 70, 1)
-                                ch_v "Well, that sucks."
-                            else:
-                                $ JubesX.change_face("bemused", 1)
-                                $ JubesX.change_stat("obedience", 50, 2)
-                                ch_v "So selfish. . ."
-                        "I gave it a shot." if "round2" in JubesX.recent_history:
-                            if "unsatisfied" in JubesX.recent_history and not JubesX.session_orgasms:
-                                $ JubesX.change_face("angry")
-                                $ JubesX.eyes = "side"
-                                ch_v "Well try again."
-                            else:
-                                $ JubesX.change_face("bemused", 1)
-                                ch_v "So selfish. . ."
-                        "Hey, I did my part." if JubesX.session_orgasms > 2:
-                            $ JubesX.change_face("sly", 1)
-                            ch_v "Yeah, but. . . keep doing that. . ."
-                        "I'm tapped out for the moment, let's try again later." if not Player.semen:
-                            $ JubesX.change_face("normal")
-                            ch_v "Well, you could always try something else. . ."
-                        "Ok, we can try something else." if multi_action and "round2" not in JubesX.recent_history:
-                            $ JubesX.change_face("smile")
-                            $ JubesX.change_stat("love", 70, 2)
-                            $ JubesX.change_stat("love", 90, 1)
-                            ch_v "Cool. . ."
-                            $ JubesX.recent_history.append("round2")
-                            $ JubesX.daily_history.append("round2")
-                            jump Jubes_SexMenu
-                        "Again? Ok, fine." if multi_action and "round2" in JubesX.recent_history:
-                            $ JubesX.change_face("sly")
-                            ch_v "Yup. . ."
-                            jump Jubes_SexMenu
-                else:
-
-                    $ JubesX.change_face("bemused", 1)
-                    ch_v "Sure, I guess we can take a little break. . ."
-                    $ JubesX.change_stat("inhibition", 30, 2)
-                    $ JubesX.change_stat("inhibition", 50, 1)
-                $ JubesX.change_face()
-            else:
-                ch_v "Sure, fine."
-
-            call Sex_Over
-            return
-    if JubesX.location != bg_current:
-        call set_the_scene
-        call Trig_Reset
-        return
-    if not multi_action:
-        call set_the_scene
-        ch_v "Ok, that should be plenty for now."
-        $ JubesX.session_orgasms = 0
-        call Trig_Reset
-        return
-    call GirlsAngry
-    jump Jubes_SexMenu
-
-
-
-
 
 
 label Jubes_Masturbate:
@@ -363,7 +127,7 @@ label Jubes_Masturbate:
         $ JubesX.change_outfit()
         $ JubesX.remaining_actions -= 1
         $ Player.change_stat("focus", 50, 30)
-        call Checkout (1)
+        call checkout (1)
         $ Line = 0
         $ action_context = 0
         $ renpy.pop_call()
@@ -484,7 +248,7 @@ label Jubes_Masturbate:
             jump Jubes_M_Prep
         elif Approval and "masturbation" in JubesX.daily_history:
             $ JubesX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Did you enjoy that?",       
+            $ Line = renpy.random.choice(["Did you enjoy that?",
                     "Didn't get enough earlier?",
                     "I enjoyed having an audience. . ."])
             ch_v "[Line]"
@@ -495,8 +259,8 @@ label Jubes_Masturbate:
         else:
             $ JubesX.change_face("sexy", 1)
             $ JubesX.ArmPose = 2
-            $ Line = renpy.random.choice(["You do enjoy watching.",                 
-                    "Again?",                 
+            $ Line = renpy.random.choice(["You do enjoy watching.",
+                    "Again?",
                     "You really enjoy watching me.",
                     "You want me to shlick again?"])
             ch_v "[Line]"
@@ -514,9 +278,9 @@ label Jubes_Masturbate:
             $ JubesX.change_face("sexy", 1)
             $ JubesX.change_stat("love", 90, 1)
             $ JubesX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Huh. Ok.",                 
+            $ Line = renpy.random.choice(["Huh. Ok.",
                     "Couldn't hurt. . .",
-                    "Allright.", 
+                    "Allright.",
                     "Sure.",
                     "Heh, ok."])
             ch_v "[Line]"
@@ -546,9 +310,9 @@ label Jubes_Masturbate:
                     $ JubesX.change_stat("obedience", 50, 2)
                     $ JubesX.change_stat("inhibition", 70, 3)
                     $ JubesX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Huh. Ok.",                 
+                    $ Line = renpy.random.choice(["Huh. Ok.",
                                 "Couldn't hurt. . .",
-                                "Alright.", 
+                                "Alright.",
                                 "Sure.",
                                 "Heh, ok."])
                     ch_v "[Line]"
@@ -914,7 +678,7 @@ label Jubes_M_Interupted:
 
     $ JubesX.remaining_actions -= 1
     $ JubesX.action_counter["masturbation"] += 1
-    call Checkout
+    call checkout
     if action_context == "shift":
         $ action_context = 0
         return
@@ -1131,9 +895,9 @@ label Jubes_Sex_P:
             ch_v "Again? Your funeral."
             jump Jubes_SexPrep
         elif "sex" in JubesX.daily_history:
-            $ Line = renpy.random.choice(["Back again?",                 
-                    "You'd like another round?",                 
-                    "I must be better than I thought.", 
+            $ Line = renpy.random.choice(["Back again?",
+                    "You'd like another round?",
+                    "I must be better than I thought.",
                     "Didn't get enough earlier?",
                     "Your funeral, " + JubesX.player_petname + "."])
             ch_v "[Line]"
@@ -1142,9 +906,9 @@ label Jubes_Sex_P:
             $ JubesX.mouth = "kiss"
             ch_v "Oh? Another round?"
         else:
-            $ Line = renpy.random.choice(["Oh, you want some of this?",                 
-                    "You'd like another round?",                 
-                    "I must be better than I thought.", 
+            $ Line = renpy.random.choice(["Oh, you want some of this?",
+                    "You'd like another round?",
+                    "I must be better than I thought.",
                     "I hope you don't plan on wearing me out.",
                     "You want to plow me?"])
             ch_v "[Line]"
@@ -1164,8 +928,8 @@ label Jubes_Sex_P:
             $ JubesX.change_face("sexy", 1)
             $ JubesX.change_stat("love", 90, 1)
             $ JubesX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well. . . fine, let's do it.",                 
-                    "Sure.", 
+            $ Line = renpy.random.choice(["Well. . . fine, let's do it.",
+                    "Sure.",
                     "We could, I guess.",
                     "Hmmm, sure.",
                     "Sounds fun."])
@@ -1217,8 +981,8 @@ label Jubes_Sex_P:
                     $ JubesX.change_stat("obedience", 50, 2)
                     $ JubesX.change_stat("inhibition", 70, 3)
                     $ JubesX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Yeah, probably. . .",     
-                                "I guess. . .", 
+                    $ Line = renpy.random.choice(["Yeah, probably. . .",
+                                "I guess. . .",
                                 "Good point. . ."])
                     ch_v "[Line]"
                     $ Line = 0
@@ -1554,8 +1318,8 @@ label Jubes_Sex_Cycle:
                     jump Jubes_SexAfter
                 elif "unsatisfied" in JubesX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -1679,7 +1443,7 @@ label Jubes_SexAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1858,18 +1622,18 @@ label Jubes_Sex_A:
             jump Jubes_AnalPrep
         elif "anal" in JubesX.daily_history:
             $ JubesX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                    "So you'd like another round?",                 
-                    "Again? Sure.", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                    "So you'd like another round?",
+                    "Again? Sure.",
                     "Didn't get enough earlier?",
                     "Your funeral, " + JubesX.player_petname + "."])
             ch_v "[Line]"
         else:
             $ JubesX.change_face("sexy", 1)
             $ JubesX.ArmPose = 2
-            $ Line = renpy.random.choice(["Oooh, you want some of this?",                 
-                    "So you'd like another round?",                 
-                    "I knew you enjoyed it. . .", 
+            $ Line = renpy.random.choice(["Oooh, you want some of this?",
+                    "So you'd like another round?",
+                    "I knew you enjoyed it. . .",
                     "I hope you don't plan on wearing me out.",
                     "You want to plow me?"])
             ch_v "[Line]"
@@ -1889,8 +1653,8 @@ label Jubes_Sex_A:
             $ JubesX.change_face("sexy", 1)
             $ JubesX.change_stat("love", 90, 1)
             $ JubesX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well. . . ok.",                 
-                    "Sure.", 
+            $ Line = renpy.random.choice(["Well. . . ok.",
+                    "Sure.",
                     "You could, I guess.",
                     "Um, yeah.",
                     "Heh, ok, ok."])
@@ -1943,8 +1707,8 @@ label Jubes_Sex_A:
                     $ JubesX.change_stat("obedience", 50, 2)
                     $ JubesX.change_stat("inhibition", 70, 3)
                     $ JubesX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Yeah, probably. . .",     
-                                "I guess. . .", 
+                    $ Line = renpy.random.choice(["Yeah, probably. . .",
+                                "I guess. . .",
                                 "Good point. . ."])
                     ch_v "[Line]"
                     $ Line = 0
@@ -2294,8 +2058,8 @@ label Jubes_Anal_Cycle:
                     jump Jubes_AnalAfter
                 elif "unsatisfied" in JubesX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -2424,7 +2188,7 @@ label Jubes_AnalAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2573,17 +2337,17 @@ label Jubes_Sex_H:
             jump Jubes_HotdogPrep
         elif "hotdog" in JubesX.daily_history:
             $ JubesX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                    "So you'd like another round?",                 
-                    "You're really into this. . .", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                    "So you'd like another round?",
+                    "You're really into this. . .",
                     "Are you sure that's all you want?"])
             ch_v "[Line]"
         else:
             $ JubesX.change_face("sexy", 1)
             $ JubesX.ArmPose = 2
-            $ Line = renpy.random.choice(["Oooh, you want some of this?",                 
-                    "So you'd like another round?",                       
-                    "You're really into this. . .", 
+            $ Line = renpy.random.choice(["Oooh, you want some of this?",
+                    "So you'd like another round?",
+                    "You're really into this. . .",
                     "You want another rub?"])
             ch_v "[Line]"
         $ Line = 0
@@ -2601,9 +2365,9 @@ label Jubes_Sex_H:
             $ JubesX.change_face("sexy", 1)
             $ JubesX.change_stat("love", 80, 1)
             $ JubesX.change_stat("inhibition", 50, 2)
-            $ Line = renpy.random.choice(["Well, sure, let me give it a rub.",                 
-                    "Very well.",                 
-                    "Nice!", 
+            $ Line = renpy.random.choice(["Well, sure, let me give it a rub.",
+                    "Very well.",
+                    "Nice!",
                     "I guess we could do that.",
                     "Ok, let me. . .",
                     "Heh, ok, ok."])
@@ -2652,8 +2416,8 @@ label Jubes_Sex_H:
                     $ JubesX.change_face("sexy")
                     $ JubesX.change_stat("obedience", 60, 2)
                     $ JubesX.change_stat("inhibition", 50, 2)
-                    $ Line = renpy.random.choice(["Yeah, probably. . .",     
-                                "I guess. . .", 
+                    $ Line = renpy.random.choice(["Yeah, probably. . .",
+                                "I guess. . .",
                                 "Good point. . ."])
                     ch_v "[Line]"
                     $ Line = 0
@@ -2976,8 +2740,8 @@ label Jubes_Hotdog_Cycle:
                     jump Jubes_HotdogAfter
                 elif "unsatisfied" in JubesX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -3092,6 +2856,6 @@ label Jubes_HotdogAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

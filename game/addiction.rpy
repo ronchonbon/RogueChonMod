@@ -1403,7 +1403,7 @@ label Addicted_Bad_End:
     $ multi_action = 1
     $ Girl.addiction_rate += 2
     call Sex_Over
-    call Checkout
+    call checkout
     $ Girl.ArmPose = 1
     if Girl not in Party:
         if bg_current == Girl.home:

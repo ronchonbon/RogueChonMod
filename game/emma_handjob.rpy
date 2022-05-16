@@ -554,7 +554,7 @@ label Emma_HJ_After:
         ch_e "Very well, what did you want to do?"
     else:
         call Emma_HJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -1164,7 +1164,7 @@ label Emma_TJ_After:
         ch_e "Mmm, so what else did you have in mind?"
     else:
         call Emma_TJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -1803,7 +1803,7 @@ label Emma_BJ_After:
     $ approval_bonus = 0
     if action_context != "shift":
         call Emma_BJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -2418,7 +2418,7 @@ label Emma_DP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3029,7 +3029,7 @@ label Emma_DA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3635,6 +3635,6 @@ label Emma_FJ_After:
         ch_e "Ok then, what were you thinking?"
     else:
         call Emma_Sex_Reset
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

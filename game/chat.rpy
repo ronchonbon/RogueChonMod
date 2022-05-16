@@ -268,7 +268,8 @@ label Chat_Menu:
                             ch_s "Oh?"
                         elif Girl == JubesX:
                             ch_v "Yeah?"
-                        call expression Girl.Tag + "_SexMenu"
+                        shift_focus(Girl)
+                        jump enter_main_sex_menu
                         return
                     elif ApprovalCheck(Girl, 400, "OI"):
                         if Girl == RogueX:
@@ -285,7 +286,8 @@ label Chat_Menu:
                             ch_s "Fine."
                         elif Girl == JubesX:
                             ch_v "What would you like, [Girl.player_petname]?"
-                        call expression Girl.Tag + "_SexMenu"
+                        shift_focus(Girl)
+                        jump enter_main_sex_menu
                         return
                     else:
                         if Girl == RogueX:
@@ -1150,7 +1152,7 @@ label Flirt(Girl=0):
             "Kiss her lips":
 
                 if ApprovalCheck(Girl, 1000, TabM=2,Alt=[[RogueX],800]) or ApprovalCheck(Girl, 600, "L", TabM=2):
-                    $ Line = renpy.random.choice(["You lean over, put your hand against her cheek, and plant a kiss on her lips.",      
+                    $ Line = renpy.random.choice(["You lean over, put your hand against her cheek, and plant a kiss on her lips.",
                                                                     "You lean down, tilt her head back, and plant a kiss on her lips.",
                                                                     "You turn "+Girl.name+" around and plant a deep kiss on her."])
                     "[Line]"
@@ -1797,7 +1799,7 @@ label Flirt(Girl=0):
             "Flip her skirt up" if Girl.PantsNum() == 5 and not Girl.Upskirt:
                 $ Girl.change_face("surprised", 1)
                 $ Girl.Upskirt = 1
-                pause 0.5            
+                pause 0.5
                 $ Girl.Upskirt = 0
                 "You sneak up on [Girl.name] from behind and flip her skirt up quickly!"
                 $ Girl.Upskirt = 0
@@ -2780,15 +2782,15 @@ label Compliment(Girl=0, Line0=0, Line1=0, Line2=0, Options=[], CountList=[], Li
 
 
 
-    $ Options = ["You really nailed that Danger Room exercise", 
-                "Great job in class the other day",             
-                "You're looking extra beautiful today",         
-                "Hey there, gorgeous",                          
-                "I'm sorry, I got lost in your eyes",           
-                "You're looking really toned lately",           
-                "You have some really nice tits",               
-                "Your ass looks really great",                  
-                "Oh, what's that fragrance? It suits you",      
+    $ Options = ["You really nailed that Danger Room exercise",
+                "Great job in class the other day",
+                "You're looking extra beautiful today",
+                "Hey there, gorgeous",
+                "I'm sorry, I got lost in your eyes",
+                "You're looking really toned lately",
+                "You have some really nice tits",
+                "Your ass looks really great",
+                "Oh, what's that fragrance? It suits you",
                 "I'm so into you"]
 
     $ CountList = [0,1,2,3,4,5,6,7,8,9]

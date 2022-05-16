@@ -556,7 +556,7 @@ label Jean_HJ_After:
         ch_j "Ok, so what did you have in mind?"
     else:
         call Jean_HJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -1154,7 +1154,7 @@ label Jean_TJ_After:
         ch_j "Mmm, so what else did you have in mind?"
     else:
         call Jean_TJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -1796,7 +1796,7 @@ label Jean_BJ_After:
     $ approval_bonus = 0
     if action_context != "shift":
         call Jean_BJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -2419,7 +2419,7 @@ label Jean_DP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3046,7 +3046,7 @@ label Jean_DA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3635,7 +3635,7 @@ label Jean_FJ_After:
         ch_j "Ok, so what did you have in mind?"
     else:
         call Jean_Sex_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -4017,6 +4017,6 @@ label Jean_PJ_After:
     if action_context == "shift":
         ch_j "Ok, so what did you have in mind?"
     call Jean_PJ_Reset
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

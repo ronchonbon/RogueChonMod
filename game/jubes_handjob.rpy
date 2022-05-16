@@ -562,7 +562,7 @@ label Jubes_HJ_After:
         ch_v "Ok, so what did you have in mind?"
     else:
         call Jubes_HJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -1174,7 +1174,7 @@ label Jubes_TJ_After:
         ch_v "Mmm, so what else did you have in mind?"
     else:
         call Jubes_TJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -1832,7 +1832,7 @@ label Jubes_BJ_After:
     $ approval_bonus = 0
     if action_context != "shift":
         call Jubes_BJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -2451,7 +2451,7 @@ label Jubes_DP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3073,7 +3073,7 @@ label Jubes_DA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3672,6 +3672,6 @@ label Jubes_FJ_After:
         ch_v "Ok, so what did you have in mind?"
     else:
         call Jubes_Sex_Reset
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

@@ -535,7 +535,7 @@ label Rogue_FB_After:
                 ch_r "Did you get your jollies?"
 
     $ approval_bonus = 0
-    call Checkout
+    call checkout
     return
 
 
@@ -1039,7 +1039,7 @@ label Rogue_SB_After:
                 ch_r "Did you like the taste?"
 
     $ approval_bonus = 0
-    call Checkout
+    call checkout
     return
 
 
@@ -1503,7 +1503,7 @@ label Rogue_FT_After:
                 ch_r "Was that enough for you?"
 
     $ approval_bonus = 0
-    call Checkout
+    call checkout
     return
 
 
@@ -2052,7 +2052,7 @@ label Rogue_FP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2677,7 +2677,7 @@ label Rogue_LP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3155,7 +3155,7 @@ label Rogue_FA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3697,7 +3697,7 @@ label Rogue_IA_After:
                 ch_r "Did you like that?"
 
     $ approval_bonus = 0
-    call Checkout
+    call checkout
     return
 
 
@@ -4194,6 +4194,6 @@ label Rogue_LA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

@@ -42,240 +42,6 @@ label Kitty_SexAct(Act=0):
         if not action_context:
             return
 
-label Kitty_SexMenu:
-    call shift_focus (KittyX)
-    $ primary_action = 0
-    $ offhand_action = 0
-    $ girl_offhand_action = 0
-    $ action_context = 0
-    call Kitty_Hide
-    $ KittyX.ArmPose = 1
-    call set_the_scene (1, 0, 0, 0, 1)
-    if not Player.semen:
-        "You're a little out of juice at the moment, you might want to wait a bit."
-    if Player.focus >= 95:
-        "You're practically buzzing, the slightest breeze could set you off."
-    if not KittyX.remaining_actions:
-        "[KittyX.name]'s looking a bit tired out, maybe let her rest a bit."
-
-    if "caught" in KittyX.recent_history or "angry" in KittyX.recent_history:
-        if KittyX.location == bg_current:
-            ch_k "I don't want to deal with you right now."
-        $ KittyX.change_outfit()
-        $ KittyX.DrainWord("caught",1,0)
-        return
-
-    if Round < 5:
-        ch_k "We've been at it for a while now, let's take a breather."
-        return
-    menu Kitty_SMenu:
-        ch_k "So what would you like to do?"
-        "Do you want to make out?":
-            if KittyX.remaining_actions:
-                call Makeout (KittyX)
-            else:
-                ch_k "Sorry, [KittyX.player_petname], but I'm a bit worn out."
-        "Could I touch you?":
-
-            if KittyX.remaining_actions:
-                $ KittyX.mouth = "smile"
-                menu:
-                    ch_k "Um, what did you want to touch, [KittyX.player_petname]?"
-                    "Could I give you a massage?":
-                        call Massage (KittyX)
-                    "Your breasts?":
-                        call Kitty_Fondle_Breasts
-                    "Suck your breasts?" if KittyX.remaining_actions and KittyX.action_counter["suck_breasts"]:
-                        call Kitty_Suck_Breasts
-                    "Your thighs?" if KittyX.remaining_actions:
-                        call Kitty_Fondle_Thighs
-                    "Your pussy?" if KittyX.remaining_actions:
-                        call Kitty_Fondle_Pussy
-                    "Lick your pussy?" if KittyX.remaining_actions and KittyX.action_counter["eat_pussy"]:
-                        call Kitty_Lick_Pussy
-                    "Your Ass?":
-                        call Kitty_Fondle_Ass
-                    "Never mind [[something else]":
-                        jump Kitty_SMenu
-            else:
-                ch_k "Sorry, [KittyX.player_petname], but I'm a bit worn out."
-        "Could you take care of something for me? [[Your dick, you mean your dick]":
-
-            if Player.semen and KittyX.remaining_actions:
-                menu:
-                    ch_k "[KittyX.Like]what did you want me to do?"
-                    "Could you give me a handjob?":
-                        call Kitty_Handjob
-                    "Could you give me a titjob?":
-                        call Kitty_Titjob
-                    "Could you suck my cock?":
-                        call Kitty_Blowjob
-                    "Could use your feet?":
-                        call Kitty_Footjob
-                    "Never mind [[something else]":
-                        jump Kitty_SMenu
-            elif not KittyX.remaining_actions:
-                ch_k "Sorry [KittyX.player_petname], I'm a bit worn out."
-            else:
-                "You really don't have it in you, maybe take a break."
-        "Could you put on a show for me?":
-
-            menu:
-                ch_k "[KittyX.Like]what did you want to see?"
-                "Dance for me?":
-                    if KittyX.remaining_actions:
-                        call Group_Strip (KittyX)
-                    else:
-                        ch_k "Sorry [KittyX.player_petname], I'm a bit worn out."
-                "Could you undress for me?":
-
-                    call Girl_Undress (KittyX)
-
-                "You've got a little something. . . [[clean-up]" if KittyX.Spunk:
-                    ch_k "Huh?"
-                    call Girl_Cleanup (KittyX, "ask")
-                "Could I watch you get yourself off? [[masturbate]":
-
-                    if KittyX.remaining_actions:
-                        call Kitty_Masturbate
-                    else:
-                        ch_k "Sorry [KittyX.player_petname], I'm a bit worn out."
-
-                "Maybe make out with [RogueX.name]?" if RogueX.location == bg_current:
-                    call LesScene (KittyX)
-                "Maybe make out with [EmmaX.name]?" if EmmaX.location == bg_current:
-                    call LesScene (KittyX)
-                "Maybe make out with [LauraX.name]?" if LauraX.location == bg_current:
-                    call LesScene (KittyX)
-                "Maybe make out with [JeanX.name]?" if JeanX.location == bg_current:
-                    call LesScene (KittyX)
-                "Maybe make out with [StormX.name]?" if StormX.location == bg_current:
-                    call LesScene (KittyX)
-                "Maybe make out with [JubesX.name]?" if JubesX.location == bg_current:
-                    call LesScene (KittyX)
-                "Never mind [[something else]":
-
-
-                    jump Kitty_SMenu
-        "Could we maybe?. . . [[fuck]":
-
-
-            if KittyX.remaining_actions:
-                menu:
-                    "What did you want to do?"
-                    "Lean back, I've got something in mind. . .":
-                        if Player.semen:
-                            call Kitty_Sex_H
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your pussy.":
-                        if Player.semen:
-                            call Kitty_Sex_P
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "Fuck your ass.":
-                        if Player.semen:
-                            call Kitty_Sex_A
-                        else:
-                            "The spirit is apparently willing, but the flesh is spongy and bruised."
-                    "How about some toys? [[Pussy]":
-                        call Kitty_Dildo_Pussy
-                    "How about some toys? [[Anal]":
-                        call Kitty_Dildo_Ass
-                    "Never mind [[something else]":
-                        jump Kitty_SMenu
-            else:
-                ch_k "Sorry [KittyX.player_petname], I'm a bit worn out."
-
-        "Hey, do you want in on this? [[Threesome]" if not Partner:
-            call Sex_Menu_Threesome (KittyX)
-            jump Kitty_SMenu
-        "Hey, [Partner.name]? [[Switch lead]" if Partner:
-            call expression Partner.Tag + "_SexAct" pass ("switch")
-            return
-
-        "Cheat Menu" if config.developer:
-            call Cheat_Menu (KittyX)
-        "Never mind. [[exit]":
-            if KittyX.lust >= 50 or KittyX.addiction >= 50:
-                $ KittyX.change_face("sad")
-                if KittyX.remaining_actions and KittyX.SEXP >= 15 and Round > 20:
-                    if "round2" not in KittyX.recent_history:
-                        ch_k "Are you sure, [KittyX.player_petname]? I wasn't exactly. . . finished."
-                        $ KittyX.change_stat("inhibition", 30, 2)
-                        $ KittyX.change_stat("inhibition", 50, 1)
-                    elif KittyX.addiction >= 50:
-                        ch_k "I need more touching."
-                    else:
-                        ch_k "I still need some more attention."
-                    menu:
-                        extend ""
-                        "Yeah, I'm done for now." if Player.semen and "round2" not in KittyX.recent_history:
-                            if "unsatisfied" in KittyX.recent_history and not KittyX.session_orgasms:
-                                $ KittyX.change_face("angry")
-                                $ KittyX.eyes = "side"
-                                $ KittyX.change_stat("love", 70, -2)
-                                $ KittyX.change_stat("love", 90, -4)
-                                $ KittyX.change_stat("obedience", 30, 2)
-                                $ KittyX.change_stat("obedience", 70, 1)
-                                ch_k "Rude!"
-                            else:
-                                $ KittyX.change_face("bemused", 1)
-                                $ KittyX.change_stat("obedience", 50, 2)
-                                ch_k "I guess I'll take what I can get. . ."
-                        "I gave it a shot." if "round2" in KittyX.recent_history:
-                            if "unsatisfied" in KittyX.recent_history and not KittyX.session_orgasms:
-                                $ KittyX.change_face("angry")
-                                $ KittyX.eyes = "side"
-                                ch_k "Rude!"
-                            else:
-                                $ KittyX.change_face("bemused", 1)
-                                ch_k "I guess I'll take what I can get. . ."
-                        "Hey, I did my part." if KittyX.session_orgasms > 2:
-                            $ KittyX.change_face("sly", 1)
-                            ch_k "Well. . . yeah, but. . ."
-                        "I'm tapped out for the moment, let's try again later." if not Player.semen:
-                            $ KittyX.change_face("normal")
-                            ch_k "Yeah, but [KittyX.like]. . ."
-                        "Ok, we can try something else." if multi_action and "round2" not in KittyX.recent_history:
-                            $ KittyX.change_face("smile")
-                            $ KittyX.change_stat("love", 70, 2)
-                            $ KittyX.change_stat("love", 90, 1)
-                            ch_k "Hehe. . ."
-                            $ KittyX.recent_history.append("round2")
-                            $ KittyX.daily_history.append("round2")
-                            jump Kitty_SexMenu
-                        "Again? Ok, fine." if multi_action and "round2" in KittyX.recent_history:
-                            $ KittyX.change_face("sly")
-                            ch_k "You know it. . ."
-                            jump Kitty_SexMenu
-                else:
-
-                    $ KittyX.change_face("bemused", 1)
-                    ch_k "I guess I'm kinda tired too, [KittyX.player_petname]. We can take a break. . ."
-                    ch_k ". . .for now."
-                    $ KittyX.change_stat("inhibition", 30, 2)
-                    $ KittyX.change_stat("inhibition", 50, 1)
-                $ KittyX.change_face()
-            else:
-                ch_k "Ok, fine."
-
-            call Sex_Over
-            return
-    if KittyX.location != bg_current:
-        call set_the_scene
-        call Trig_Reset
-        return
-    if not multi_action:
-        call set_the_scene
-        ch_k "That's it. . . for now."
-        $ KittyX.session_orgasms = 0
-        call Trig_Reset
-        return
-    call GirlsAngry
-    jump Kitty_SexMenu
-
-
 
 
 label Kitty_Masturbate:
@@ -361,7 +127,7 @@ label Kitty_Masturbate:
         $ KittyX.change_outfit()
         $ KittyX.remaining_actions -= 1
         $ Player.change_stat("focus", 50, 30)
-        call Checkout (1)
+        call checkout (1)
         $ Line = 0
         $ action_context = 0
         $ renpy.pop_call()
@@ -484,7 +250,7 @@ label Kitty_Masturbate:
             jump Kitty_M_Prep
         elif Approval and "masturbation" in KittyX.daily_history:
             $ KittyX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Was it that good?",       
+            $ Line = renpy.random.choice(["Was it that good?",
                     "Didn't get enough earlier?",
                     "I kinda liked the audience. . ."])
             ch_k "[Line]"
@@ -495,8 +261,8 @@ label Kitty_Masturbate:
         else:
             $ KittyX.change_face("sexy", 1)
             $ KittyX.ArmPose = 2
-            $ Line = renpy.random.choice(["You really like to watch.",                 
-                    "Again?",                 
+            $ Line = renpy.random.choice(["You really like to watch.",
+                    "Again?",
                     "You like to watch me.",
                     "You want me to get myself off?"])
             ch_k "[Line]"
@@ -514,10 +280,10 @@ label Kitty_Masturbate:
             $ KittyX.change_face("sexy", 1)
             $ KittyX.change_stat("love", 90, 1)
             $ KittyX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Huh. Ok.",                 
+            $ Line = renpy.random.choice(["Huh. Ok.",
                     "Couldn't hurt having you around. . .",
                     "Two birds with one stone. . .",
-                    "K.", 
+                    "K.",
                     "Sure, why not?",
                     "Lol, ok."])
             ch_k "[Line]"
@@ -550,10 +316,10 @@ label Kitty_Masturbate:
                     $ KittyX.change_stat("obedience", 50, 2)
                     $ KittyX.change_stat("inhibition", 70, 3)
                     $ KittyX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["Huh. Ok.",                 
+                    $ Line = renpy.random.choice(["Huh. Ok.",
                                 "Couldn't hurt having you around. . .",
                                 "Two birds with one stone. . .",
-                                "K.", 
+                                "K.",
                                 "Sure, why not?",
                                 "Lol, ok."])
                     ch_k "[Line]"
@@ -924,7 +690,7 @@ label Kitty_M_Interupted:
 
     $ KittyX.remaining_actions -= 1
     $ KittyX.action_counter["masturbation"] += 1
-    call Checkout
+    call checkout
     if action_context == "shift":
         $ action_context = 0
         return
@@ -1135,9 +901,9 @@ label Kitty_Sex_P:
             ch_k "Another round? {i}Fine.{/i}"
             jump Kitty_SexPrep
         elif "sex" in KittyX.daily_history:
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                    "So you'd like another round?",                 
-                    "You can't stay away from this. . .", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                    "So you'd like another round?",
+                    "You can't stay away from this. . .",
                     "Didn't get enough earlier?",
                     "You're wearing me out here!"])
             ch_k "[Line]"
@@ -1146,9 +912,9 @@ label Kitty_Sex_P:
             $ KittyX.mouth = "kiss"
             ch_k "So you'd like another round?"
         else:
-            $ Line = renpy.random.choice(["Oooh, you want some of this?",                 
-                    "So you'd like another round?",                 
-                    "You can't stay away from this. . .", 
+            $ Line = renpy.random.choice(["Oooh, you want some of this?",
+                    "So you'd like another round?",
+                    "You can't stay away from this. . .",
                     "You gonna make me purr?",
                     "You wanna slide into me?"])
             ch_k "[Line]"
@@ -1168,8 +934,8 @@ label Kitty_Sex_P:
             $ KittyX.change_face("sexy", 1)
             $ KittyX.change_stat("love", 90, 1)
             $ KittyX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well. . . ok.",                 
-                    "Sure!", 
+            $ Line = renpy.random.choice(["Well. . . ok.",
+                    "Sure!",
                     "You could, I guess.",
                     "Um, yeah.",
                     "Heh, ok, ok."])
@@ -1221,8 +987,8 @@ label Kitty_Sex_P:
                     $ KittyX.change_stat("obedience", 50, 2)
                     $ KittyX.change_stat("inhibition", 70, 3)
                     $ KittyX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["That's. . . true. . .",     
-                                "I suppose. . .", 
+                    $ Line = renpy.random.choice(["That's. . . true. . .",
+                                "I suppose. . .",
                                 "That's. . . that's a good point. . ."])
                     ch_k "[Line]"
                     $ Line = 0
@@ -1568,8 +1334,8 @@ label Kitty_Sex_Cycle:
                     jump Kitty_SexAfter
                 elif "unsatisfied" in KittyX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -1694,7 +1460,7 @@ label Kitty_SexAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -1883,18 +1649,18 @@ label Kitty_Sex_A:
             jump Kitty_AnalPrep
         elif "anal" in KittyX.daily_history:
             $ KittyX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                    "So you'd like another round?",                 
-                    "I'm still a little sore from earlier.", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                    "So you'd like another round?",
+                    "I'm still a little sore from earlier.",
                     "Didn't get enough earlier?",
                     "You're wearing me out here!"])
             ch_k "[Line]"
         else:
             $ KittyX.change_face("sexy", 1)
             $ KittyX.ArmPose = 2
-            $ Line = renpy.random.choice(["Oooh, you want some of this?",                 
-                    "So you'd like another round?",                 
-                    "I do have booty for days. . .", 
+            $ Line = renpy.random.choice(["Oooh, you want some of this?",
+                    "So you'd like another round?",
+                    "I do have booty for days. . .",
                     "You gonna make me purr?",
                     "You wanna slide into me?"])
             ch_k "[Line]"
@@ -1913,8 +1679,8 @@ label Kitty_Sex_A:
             $ KittyX.change_face("sexy", 1)
             $ KittyX.change_stat("love", 90, 1)
             $ KittyX.change_stat("inhibition", 50, 3)
-            $ Line = renpy.random.choice(["Well. . . ok.",                 
-                    "Sure!", 
+            $ Line = renpy.random.choice(["Well. . . ok.",
+                    "Sure!",
                     "You could, I guess.",
                     "Um, yeah.",
                     "Heh, ok, ok."])
@@ -1969,8 +1735,8 @@ label Kitty_Sex_A:
                     $ KittyX.change_stat("obedience", 50, 2)
                     $ KittyX.change_stat("inhibition", 70, 3)
                     $ KittyX.change_stat("inhibition", 40, 2)
-                    $ Line = renpy.random.choice(["That's. . . true. . .",     
-                            "I suppose. . .", 
+                    $ Line = renpy.random.choice(["That's. . . true. . .",
+                            "I suppose. . .",
                             "That's. . . that's a good point. . ."])
                     ch_k "[Line]"
                     $ Line = 0
@@ -2328,8 +2094,8 @@ label Kitty_Anal_Cycle:
                     jump Kitty_AnalAfter
                 elif "unsatisfied" in KittyX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -2469,7 +2235,7 @@ label Kitty_AnalAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -2614,17 +2380,17 @@ label Kitty_Sex_H:
             jump Kitty_HotdogPrep
         elif "hotdog" in KittyX.daily_history:
             $ KittyX.change_face("sexy", 1)
-            $ Line = renpy.random.choice(["Back again so soon?",                 
-                    "So you'd like another round?",                 
-                    "You're really digging this. . .", 
+            $ Line = renpy.random.choice(["Back again so soon?",
+                    "So you'd like another round?",
+                    "You're really digging this. . .",
                     "Are you sure that's all you want?"])
             ch_k "[Line]"
         else:
             $ KittyX.change_face("sexy", 1)
             $ KittyX.ArmPose = 2
-            $ Line = renpy.random.choice(["Oooh, you want some of this?",                 
-                    "So you'd like another round?",                       
-                    "You're really digging this. . .", 
+            $ Line = renpy.random.choice(["Oooh, you want some of this?",
+                    "So you'd like another round?",
+                    "You're really digging this. . .",
                     "You want another rub?"])
             ch_k "[Line]"
         $ Line = 0
@@ -2642,9 +2408,9 @@ label Kitty_Sex_H:
             $ KittyX.change_face("sexy", 1)
             $ KittyX.change_stat("love", 80, 1)
             $ KittyX.change_stat("inhibition", 50, 2)
-            $ Line = renpy.random.choice(["Well, sure, give it a rub.",                 
-                    "Well. . . ok.",                 
-                    "Sure!", 
+            $ Line = renpy.random.choice(["Well, sure, give it a rub.",
+                    "Well. . . ok.",
+                    "Sure!",
                     "I guess we could do that.",
                     "Um, yeah.",
                     "Heh, ok, ok."])
@@ -2693,8 +2459,8 @@ label Kitty_Sex_H:
                     $ KittyX.change_face("sexy")
                     $ KittyX.change_stat("obedience", 60, 2)
                     $ KittyX.change_stat("inhibition", 50, 2)
-                    $ Line = renpy.random.choice(["Well, sure, ok.",     
-                            "I suppose. . .", 
+                    $ Line = renpy.random.choice(["Well, sure, ok.",
+                            "I suppose. . .",
                             "That's. . . that's a good point. . ."])
                     ch_k "[Line]"
                     $ Line = 0
@@ -3015,8 +2781,8 @@ label Kitty_Hotdog_Cycle:
                     jump Kitty_HotdogAfter
                 elif "unsatisfied" in KittyX.recent_history:
 
-                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.", 
-                                    "She is breathing heavily as your cock rubs inside her.", 
+                    $ Line = renpy.random.choice(["She continues to shake a little with pleasure.",
+                                    "She is breathing heavily as your cock rubs inside her.",
                                     "She slowly turns back towards you and smiles.",
                                     "She doesn't seem ready to stop."])
                     "[Line] Keep going?"
@@ -3133,6 +2899,6 @@ label Kitty_HotdogAfter:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

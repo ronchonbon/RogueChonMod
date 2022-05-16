@@ -562,7 +562,7 @@ label Kitty_HJ_After:
         ch_k "Ok, so what were you thinking?"
     else:
         call Kitty_HJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -1168,7 +1168,7 @@ label Kitty_TJ_After:
         ch_k "Mmm, so what else did you have in mind?"
     else:
         call Kitty_TJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -1818,7 +1818,7 @@ label Kitty_BJ_After:
     $ approval_bonus = 0
     if action_context != "shift":
         call Kitty_BJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -2438,7 +2438,7 @@ label Kitty_DP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3061,7 +3061,7 @@ label Kitty_DA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3658,6 +3658,6 @@ label Kitty_FJ_After:
         ch_k "Ok, so what were you thinking?"
     else:
         call Kitty_Sex_Reset
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

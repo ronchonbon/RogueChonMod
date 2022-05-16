@@ -254,7 +254,7 @@ label Jackin(Girl=0, counter=0, BO=[]):
             elif primary_action == "masturbation":
                 $ Girl.remaining_actions -= 1
                 $ Girl.action_counter["masturbation"] += 1
-                call Checkout
+                call checkout
             elif primary_action:
                 call CloseOut (Girl)
 
@@ -1005,7 +1005,7 @@ label Kiss_After:
         call Sex_Basic_Dialog (Girl, "switch")
     else:
         call expression Girl.Tag + "_Pos_Reset"
-    call Checkout
+    call checkout
     return
 
 
@@ -1974,7 +1974,7 @@ label Massage_After:
             ch_v "Hey, good job with that one."
     $ Girl.change_stat("love", 90, int(MCount/2))
     $ approval_bonus = 0
-    call Checkout
+    call checkout
     return
 
 label Massage_BadEnd:
@@ -2002,7 +2002,7 @@ label Massage_BadEnd:
         elif Girl == JubesX:
             ch_v "Ok, cut that out, [Girl.player_petname]."
         $ approval_bonus = 0
-        call Checkout
+        call checkout
     elif Current == "breasts":
         if Girl == RogueX:
             ch_r "I think you should probably watch your hands there, [Girl.player_petname]."
@@ -3150,7 +3150,7 @@ label Les_Interupted(Girl=0, BO=[]):
     elif Girl == JubesX:
         ch_v "Oh? hey [Girl.player_petname]. What'd you see?"
     $ Girl.remaining_actions -= 1 if Girl.remaining_actions > 0 else 0
-    call Checkout (1)
+    call checkout (1)
     $ Line = 0
 
 
@@ -4396,7 +4396,7 @@ label Les_After:
     call expression Girl.Tag + "_Pos_Reset"
     if not Partner:
         $ approval_bonus = 0
-        call Checkout
+        call checkout
         return
     call expression Partner.Tag + "_Pos_Reset"
     $ Girl.change_face("sexy")
@@ -4450,7 +4450,7 @@ label Les_After:
     $ Girl.AddWord(1,0,0,0,"les "+Partner.Tag)
     $ Partner.AddWord(1,0,0,0,"les "+Girl.Tag)
     $ approval_bonus = 0
-    call Checkout
+    call checkout
     return
 
 

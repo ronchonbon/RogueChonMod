@@ -561,7 +561,7 @@ label Rogue_HJ_After:
         ch_r "Mmm, so what else did you have in mind?"
     else:
         call Rogue_HJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -1170,7 +1170,7 @@ label Rogue_TJ_After:
         ch_r "Mmm, so what else did you have in mind?"
     else:
         call Rogue_TJ_Reset
-    call Checkout
+    call checkout
     return
 
 
@@ -1807,7 +1807,7 @@ label Rogue_BJ_After:
     $ approval_bonus = 0
     if action_context != "shift":
         call Rogue_BJ_Reset
-    call Checkout
+    call checkout
     return
 
 return
@@ -2428,7 +2428,7 @@ label Rogue_DP_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3063,7 +3063,7 @@ label Rogue_DA_After:
     $ approval_bonus = 0
 
 
-    call Checkout
+    call checkout
     return
 
 
@@ -3662,6 +3662,6 @@ label Rogue_FJ_After:
         ch_r "Mmm, so what else did you have in mind?"
     else:
         call Rogue_Doggy_Reset
-    call Checkout
+    call checkout
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc
