@@ -211,23 +211,6 @@ label start:
     $ StormX.change_outfit(6,Changed=1)
     $ JubesX.change_outfit(6,Changed=1)
 
-    $ bg_current = "bg_study"
-    $ time_index = 2
-    $ current_time = "evening"
-
-    scene background onlayer backdrop
-    scene
-
-    #show Rogue_body
-    #show Rogue_head
-    $ action_speed = 3
-
-    show Rogue_blowjob_animation
-
-    ""
-
-    ""
-
     $ focused_Girl = RogueX
     show screen Status_Screen
     show screen Inventorybutton

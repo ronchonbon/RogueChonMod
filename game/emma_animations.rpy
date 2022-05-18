@@ -562,8 +562,8 @@ image Emma_Sprite:
     anchor (0.6, 0.0)
     zoom .75
 
-image TempHairBack:
-    "images/EmmaSprite/EmmaSprite_Head_HairBackWet.png"
+image Temphairback:
+    "images/EmmaSprite/EmmaSprite_Head_hairbackWet.png"
     anchor (0.6, 0.0)
     zoom .5
 
@@ -869,9 +869,9 @@ image Emma_SexSprite:
     zoom 0.8
     anchor (.5,.5)
 
-image Emma_Sex_HairBack:
+image Emma_Sex_hairback:
 
-    "Emma_BJ_HairBack"
+    "Emma_BJ_hairback"
     zoom 0.48
     anchor (0.5, 0.5)
     pos (505,260)
@@ -983,12 +983,12 @@ image Emma_Sex_Torso:
     zoom 1
 
 image Emma_Sex_Lick_Breasts_High:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (400,590)
 
 image Emma_Sex_Lick_Breasts:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (390,620)
 
@@ -1000,7 +1000,7 @@ image Emma_Sex_Fondle_Breasts:
 image Emma_Sex_Body:
 
     contains:
-        "Emma_Sex_HairBack"
+        "Emma_Sex_hairback"
     contains:
 
         "Emma_Sex_Torso"
@@ -1426,12 +1426,12 @@ image Emma_Sex_Legs_Lick:
 
 
 image Emma_Sex_Lick_Pussy:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (505,680)
 
 image Emma_Sex_Lick_Ass:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (500,740)
 
@@ -1624,7 +1624,7 @@ image Emma_Sex_Legs_H0:
     contains:
 
         ConditionSwitch(
-                "Player.sprite", "Zero_Doggy_Insert",
+                "Player.sprite", "Zero_cock_doggy_in",
                 "True", Null(),
                 )
         alpha 1
@@ -1671,7 +1671,7 @@ image Emma_Sex_Legs_H1:
     contains:
 
         ConditionSwitch(
-                "Player.sprite", "Zero_Doggy_Insert",
+                "Player.sprite", "Zero_cock_doggy_in",
                 "True", Null(),
                 )
         alpha 1
@@ -1718,7 +1718,7 @@ image Emma_Sex_Legs_H2:
     contains:
 
         ConditionSwitch(
-                "Player.sprite", "Zero_Doggy_Insert",
+                "Player.sprite", "Zero_cock_doggy_in",
                 "True", Null(),
                 )
         alpha 1
@@ -2246,9 +2246,9 @@ label Emma_Sex_Launch(Line=primary_action):
             $ offhand_action = 0
     elif Line == "hotdog":
         $ Player.cock_position = "out"
-    elif Line == "foot":
+    elif Line == "footjob":
         $ ShowFeet = 1
-        $ Player.cock_position = "foot"
+        $ Player.cock_position = "footjob"
     elif Line == "massage":
         $ Player.sprite = 0
         $ Player.cock_position = 0
@@ -2843,8 +2843,8 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "Rogue_Doggy_Lick_Pussy",
-            "primary_action == 'eat_ass'", "Rogue_Doggy_Lick_Ass",
+            "primary_action == 'eat_pussy'", "Rogue_doggy_licking_pussy",
+            "primary_action == 'eat_ass'", "Rogue_doggy_licking_ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -2858,8 +2858,8 @@ image Emma_Doggy_Ass:
             "not Player.sprite or Player.cock_position != 'out'", Null(),
 
 
-            "action_speed ", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
-            "True", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "action_speed ", AlphaMask("Zero_hotdog_moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "True", AlphaMask("Zero_hotdog_static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             ),
 
 
@@ -2991,14 +2991,14 @@ image Zero_Emma_Hotdog_Static:
 
 
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         pos (175, 370)
 
 image Zero_Emma_Hotdog_Moving:
 
 
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         pos (175, 370)
         block:
             ease 1 ypos 330
@@ -3067,7 +3067,7 @@ image Zero_Emma_Doggy_Static:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (173,550)
         block:
             ease 1 ypos 540
@@ -3134,7 +3134,7 @@ image Zero_Emma_Doggy_Heading:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (171,545)
         block:
 
@@ -3255,7 +3255,7 @@ image Emma_Pussy_Fucking2:
 image Zero_Emma_Doggy_Fucking2:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (169,500)
         block:
             ease .5 ypos 440
@@ -3288,7 +3288,7 @@ image Emma_Pussy_Fucking3:
 image Zero_Emma_Doggy_Fucking3:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (169,500)
         block:
             ease .2 ypos 440
@@ -3318,7 +3318,7 @@ image Emma_Anal:
             )
     contains:
 
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,500)
 
 image Emma_Anal_Fingering:
@@ -3387,7 +3387,7 @@ image Emma_Anal_Heading:
 image Zero_Emma_Doggy_Anal_Heading:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,500)
         block:
             ease .5 ypos 450
@@ -3450,7 +3450,7 @@ image Emma_Doggy_Anal_Head_Ass:
 image Zero_Emma_Doggy_Anal1:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,460)
         block:
             ease .5 ypos 395
@@ -3543,7 +3543,7 @@ image Emma_Doggy_Fuck_Ass:
 image Zero_Emma_Doggy_Anal2:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,460)
         block:
             ease .2 ypos 395
@@ -3634,7 +3634,7 @@ image Emma_Doggy_Feet0:
             repeat
     contains:
         ConditionSwitch(
-                "Player.sprite", "Zero_Doggy_Up",
+                "Player.sprite", "Zero_cock_doggy_out",
                 "True", Null(),
                 )
         zoom 1.2
@@ -3661,7 +3661,7 @@ image Emma_Doggy_Feet1:
             ease 1 ypos -20
             repeat
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         zoom 1.2
         pos (158,520)
         block:
@@ -3689,7 +3689,7 @@ image Emma_Doggy_Feet2:
             ease .3 ypos -20
             repeat
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         zoom 1.2
         pos (158,520)
         block:
@@ -3858,7 +3858,7 @@ image Emma_TJ_Body_0:
 
     contains:
 
-        "Emma_BJ_HairBack"
+        "Emma_BJ_hairback"
         zoom 0.41
         anchor (0.5, 0.5)
         pos (505,260)
@@ -3932,7 +3932,7 @@ image Emma_TJ_Body_1:
 
     contains:
 
-        "Emma_BJ_HairBack"
+        "Emma_BJ_hairback"
         zoom 0.41
         anchor (0.5, 0.5)
         pos (505,250)
@@ -4007,7 +4007,7 @@ image Emma_TJ_Body_2:
 
     contains:
 
-        "Emma_BJ_HairBack"
+        "Emma_BJ_hairback"
         zoom 0.41
         anchor (0.5, 0.5)
         pos (505,250)
@@ -4072,7 +4072,7 @@ image Emma_TJ_Body_3:
 
     contains:
 
-        "Emma_BJ_HairBack"
+        "Emma_BJ_hairback"
         zoom 0.41
         anchor (0.5, 0.5)
         pos (500,290)
@@ -4143,7 +4143,7 @@ image Emma_TJ_Body_5:
 
     contains:
 
-        "Emma_BJ_HairBack"
+        "Emma_BJ_hairback"
         zoom 0.41
         anchor (0.5, 0.5)
         pos (500,290)
@@ -4306,13 +4306,13 @@ image Emma_BJ_Animation:
         (858,928),
         (-270,-160), ConditionSwitch(
 
-            "action_speed == 0", At("Emma_BJ_HairBack", Emma_BJ_Head_0()),
-            "action_speed == 1", At("Emma_BJ_HairBack", Emma_BJ_Head_1()),
-            "action_speed == 2", At("Emma_BJ_HairBack", Emma_BJ_Head_2()),
-            "action_speed == 3", At("Emma_BJ_HairBack", Emma_BJ_Head_3()),
-            "action_speed == 4", At("Emma_BJ_HairBack", Emma_BJ_Head_4()),
-            "action_speed == 5", At("Emma_BJ_HairBack", Emma_BJ_Head_5()),
-            "action_speed == 6", At("Emma_BJ_HairBack", Emma_BJ_Head_6()),
+            "action_speed == 0", At("Emma_BJ_hairback", Emma_BJ_Head_0()),
+            "action_speed == 1", At("Emma_BJ_hairback", Emma_BJ_Head_1()),
+            "action_speed == 2", At("Emma_BJ_hairback", Emma_BJ_Head_2()),
+            "action_speed == 3", At("Emma_BJ_hairback", Emma_BJ_Head_3()),
+            "action_speed == 4", At("Emma_BJ_hairback", Emma_BJ_Head_4()),
+            "action_speed == 5", At("Emma_BJ_hairback", Emma_BJ_Head_5()),
+            "action_speed == 6", At("Emma_BJ_hairback", Emma_BJ_Head_6()),
             "True", Null(),
             ),
         (-20,270), ConditionSwitch(
@@ -4379,7 +4379,7 @@ image Emma_BJ_Animation:
     zoom .55
     anchor (.5,.5)
 
-image Emma_BJ_HairBack:
+image Emma_BJ_hairback:
 
     ConditionSwitch(
             "EmmaX.Water or EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet'", Null(),
@@ -5592,11 +5592,11 @@ image Emma_FJ_Calf:
 
 
 label Emma_FJ_Launch(Line=primary_action):
-    $ primary_action = "foot"
+    $ primary_action = "footjob"
     $ Player.sprite = 1
     $ ShowFeet = 1
     if EmmaX.pose == "doggy":
-        call Emma_Sex_Launch ("foot")
+        call Emma_Sex_Launch ("footjob")
         return
 
     if renpy.showing("Emma_FJ_Animation"):

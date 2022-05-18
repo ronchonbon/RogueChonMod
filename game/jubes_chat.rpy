@@ -639,10 +639,10 @@ label Jubes_SexChat:
                         "Footjobs.":
 
                             $ JubesX.change_face("_sly")
-                            if JubesX.player_favorite_action == "foot":
+                            if JubesX.player_favorite_action == "footjob":
                                 $ JubesX.change_stat("lust", 80, 5)
                                 ch_v "Yeah, you've said that. . ."
-                            elif JubesX.favorite_action == "foot":
+                            elif JubesX.favorite_action == "footjob":
                                 $ JubesX.change_stat("love", 90, 5)
                                 $ JubesX.change_stat("lust", 80, 7)
                                 ch_v "I do like using my feet. . ."
@@ -654,7 +654,7 @@ label Jubes_SexChat:
                             else:
                                 $ JubesX.change_face("_bemused")
                                 ch_v "Yeah, it's nice. . ."
-                            $ JubesX.player_favorite_action = "foot"
+                            $ JubesX.player_favorite_action = "footjob"
                         "Handjobs.":
 
                             $ JubesX.change_face("_sly")
@@ -749,7 +749,7 @@ label Jubes_SexChat:
                         ch_v "I -love- how your cock tastes."
                     elif JubesX.favorite_action == "titjob":
                         ch_v "When I use my tits."
-                    elif JubesX.favorite_action == "foot":
+                    elif JubesX.favorite_action == "footjob":
                         ch_v "Footjobs are pretty fun."
                     elif JubesX.favorite_action == "handjob":
                         ch_v "I like jerking you off."

@@ -121,8 +121,8 @@ init python:
             self.traits = []
             self.history = []
             self.Date = 0
-            self.Chat = [0, "", "", "", "", 0]
-            self.Event = [0, "", "", "", "", "", "", "", "", "", 0]
+            self.Chat = [0, 0, 0, 0, 0, 0]
+            self.Event = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
             self.player_petname = "Zero"
             self.player_petnames = ["Zero"]
@@ -605,13 +605,13 @@ init python:
 
             if Recent and word in self.recent_history:
                 while word in self.recent_history:
-                    self.recent_history.remove(Word)
+                    self.recent_history.remove(word)
             if Daily and word in self.daily_history:
                 while word in self.daily_history:
-                    self.daily_history.remove(Word)
+                    self.daily_history.remove(word)
             if Traits and word in self.traits:
                 while word in self.traits:
-                    self.traits.remove(Word)
+                    self.traits.remove(word)
             return
 
         def change_stat(self, flavor=0, Check=100, Value=1, Greater=0, Type=0, Alt=[[],0, 0], Overflow=0, BStat=0, x_position = 0.75):
@@ -2737,26 +2737,26 @@ label GirlsAngry(Girls=0, BO=[]):
 
 
 
-label Lastnamer(Wordcount=0, Splitname=0, Lastname=0):
+label Lastnamer(wordcount=0, Splitname=0, Lastname=0):
 
-    $ Wordcount = Player.name.count(" ")
+    $ wordcount = Player.name.count(" ")
 
 
     $ Splitname = Player.name.split()
 
 
-    $ Lastname = "Mr. " + Splitname[Wordcount]
+    $ Lastname = "Mr. " + Splitname[wordcount]
     return Lastname
 
 
 
 
-label DrainAll(Word=0, Recent=1, Daily=1, Traits=0):
+label DrainAll(word=0, Recent=1, Daily=1, Traits=0):
 
 
     $ BO = all_Girls[:]
     while BO:
-        $ BO[0].drain_word(Word,Recent,Daily,Traits)
+        $ BO[0].drain_word(word,Recent,Daily,Traits)
         $ BO.remove(BO[0])
     return
 

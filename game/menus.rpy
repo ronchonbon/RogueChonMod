@@ -1149,9 +1149,9 @@ label fondle_menu:
                             jump action_cycle
                         "Never mind":
                             jump action_cycle
-                "Show her feet" if not ShowFeet and (focused_Girl.pose == "doggy" or focused_Girl.pose == "sex"):
+                "Show her feet" if not ShowFeet and focused_Girl.pose in ["doggy", "sex"]:
                     $ ShowFeet = 1
-                "Hide her feet" if ShowFeet and (focused_Girl.pose == "doggy" or focused_Girl.pose == "sex"):
+                "Hide her feet" if ShowFeet and focused_Girl.pose in ["doggy", "sex"]:
                     $ ShowFeet = 0
                 "Undress [focused_Girl.name]":
                     call Girl_Undress
@@ -1258,7 +1258,7 @@ label handjob_menu:
             $ counter += 1
             $ Round -= 1
 
-            jump handjob_cycle
+            jump action_cycle
         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
             pass
         "Focus to last longer." if not Player.focusing and "focus" in Player.traits:
@@ -1391,7 +1391,7 @@ label handjob_menu:
                                     else:
                                         call tired_lines(focused_Girl)
                                 "Never Mind":
-                                    jump handjob_cycle
+                                    jump action_cycle
 
                             call action(focused_Girl)
                         else:
@@ -1421,14 +1421,14 @@ label handjob_menu:
                                 call primary_action_Swap(focused_Girl)
                             "Undress [Partner.name]":
                                 call Girl_Undress(Partner)
-                                jump handjob_cycle
+                                jump action_cycle
                             "Clean up [Partner.name] (locked)" if not Partner.spunk:
                                 pass
                             "Clean up [Partner.name]" if Partner.spunk:
                                 call Girl_Cleanup(Partner,"ask")
-                                jump handjob_cycle
+                                jump action_cycle
                             "Never mind":
-                                jump handjob_cycle
+                                jump action_cycle
                     "Undress [focused_Girl.name]":
                         call Girl_Undress(focused_Girl)
                     "Clean up [focused_Girl.name] (locked)" if not focused_Girl.spunk:
@@ -1436,7 +1436,7 @@ label handjob_menu:
                     "Clean up [focused_Girl.name]" if focused_Girl.spunk:
                         call Girl_Cleanup(RogueX,"ask")
                     "Never mind":
-                        jump handjob_cycle
+                        jump action_cycle
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
@@ -1579,9 +1579,9 @@ label sex_menu:
                     $ Player.cock_position = 0
 
                     $ action_speed = 0
-                "Show her feet" if not ShowFeet and (focused_Girl.pose == "doggy" or focused_Girl.pose == "sex"):
+                "Show her feet" if not ShowFeet and focused_Girl.pose in ["doggy", "sex"]:
                     $ ShowFeet = 1
-                "Hide her feet" if ShowFeet and (focused_Girl.pose == "doggy" or focused_Girl.pose == "sex"):
+                "Hide her feet" if ShowFeet and focused_Girl.pose in ["doggy", "sex"]:
                     $ ShowFeet = 0
                 "Undress [focused_Girl.name]":
                     call Girl_Undress(focused_Girl)

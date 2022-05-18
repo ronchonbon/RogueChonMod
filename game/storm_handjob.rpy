@@ -3073,7 +3073,7 @@ label Storm_Footjob:
                     $ StormX.change_stat("obedience", 30, 2)
                     return
             if primary_action:
-                $ girl_offhand_action = "foot"
+                $ girl_offhand_action = "footjob"
                 return
             jump Storm_FJ_Prep
         else:
@@ -3114,11 +3114,11 @@ label Storm_Footjob:
             ch_s "That is all you want?"
         elif not Taboo and "no_taboo" in StormX.daily_history:
             ch_s "I suppose this is secluded enough. . ."
-        elif "foot" in StormX.recent_history:
+        elif "footjob" in StormX.recent_history:
             $ StormX.change_face("_sexy", 1)
             ch_s "I suppose so. . ."
             jump Storm_FJ_Prep
-        elif "foot" in StormX.daily_history:
+        elif "footjob" in StormX.daily_history:
             $ StormX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Another?",   
                 "You did not get enough earlier?",
@@ -3270,7 +3270,7 @@ label Storm_Footjob:
 
 
 label Storm_FJ_Prep:
-    if offhand_action == "foot":
+    if offhand_action == "footjob":
         return
 
     if Taboo:
@@ -3304,13 +3304,13 @@ label Storm_FJ_Prep:
     if Taboo:
         $ StormX.drain_word("no_taboo")
     $ StormX.drain_word("no_foot")
-    $ StormX.recent_history.append("foot")
-    $ StormX.daily_history.append("foot")
+    $ StormX.recent_history.append("footjob")
+    $ StormX.daily_history.append("footjob")
 
 label Storm_FJ_Cycle:
     while Round > 0:
         call shift_focus (StormX)
-        call Storm_Sex_Launch ("foot")
+        call Storm_Sex_Launch ("footjob")
         $ StormX.lust_face()
 
         if Player.focus < 100:

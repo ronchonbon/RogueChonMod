@@ -654,10 +654,10 @@ label Jean_SexChat:
                         "Footjobs.":
 
                             $ JeanX.change_face("_sly")
-                            if JeanX.player_favorite_action == "foot":
+                            if JeanX.player_favorite_action == "footjob":
                                 $ JeanX.change_stat("lust", 80, 5)
                                 ch_j "Yeah, you've said that. . ."
-                            elif JeanX.favorite_action == "foot":
+                            elif JeanX.favorite_action == "footjob":
                                 $ JeanX.change_stat("love", 90, 5)
                                 $ JeanX.change_stat("lust", 80, 7)
                                 ch_j "I do like using my feet. . ."
@@ -669,7 +669,7 @@ label Jean_SexChat:
                             else:
                                 $ JeanX.change_face("_bemused")
                                 ch_j "Yeah, it's nice. . ."
-                            $ JeanX.player_favorite_action = "foot"
+                            $ JeanX.player_favorite_action = "footjob"
                         "Handjobs.":
 
                             $ JeanX.change_face("_sly")
@@ -764,7 +764,7 @@ label Jean_SexChat:
                         ch_j "I do like how your cock tastes. . ."
                     elif JeanX.favorite_action == "titjob":
                         ch_j "When I use my tits."
-                    elif JeanX.favorite_action == "foot":
+                    elif JeanX.favorite_action == "footjob":
                         ch_j "Footjobs are pretty fun."
                     elif JeanX.favorite_action == "handjob":
                         ch_j "I like to jerk you off."

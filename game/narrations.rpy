@@ -1529,7 +1529,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
     elif primary_action == "lesbian":
         call SexDialog_Threeway (GirlA, "lesbian", GirlB=Partner)
 
-    elif primary_action == "foot":
+    elif primary_action == "footjob":
         $ Line = GirlA.name + " continues stroke your cock with her feet. "
 
         if not action_speed:
@@ -1911,7 +1911,7 @@ label Offhand_Set(action_context=action_context, Tempprimary_action=offhand_acti
                 $ offhand_action = "kiss"
                 $ action_context = "offhand"
                 call action(Chr)
-            "Also fondle her breasts." if primary_action in ("kiss","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "foot", "dildo_pussy", "dildo_anal"):
+            "Also fondle her breasts." if primary_action in ("kiss","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
                 $ offhand_action = "fondle_breasts"
                 $ action_context = "offhand"
                 call action(Chr)
@@ -1919,15 +1919,15 @@ label Offhand_Set(action_context=action_context, Tempprimary_action=offhand_acti
                 $ offhand_action = "suck_breasts"
                 $ action_context = "offhand"
                 call action(Chr)
-            "Also fondle her pussy." if primary_action in ("kiss","fondle_breasts","fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "foot", "dildo_pussy", "dildo_anal"):
+            "Also fondle her pussy." if primary_action in ("kiss","fondle_breasts","fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
                 $ offhand_action = "fondle_pussy"
                 $ action_context = "offhand"
                 call action(Chr)
-            "Also fondle her ass." if primary_action in ("kiss","fondle_breasts","fondle_pussy", "fondle_thighs", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "foot", "dildo_pussy", "dildo_anal"):
+            "Also fondle her ass." if primary_action in ("kiss","fondle_breasts","fondle_pussy", "fondle_thighs", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
                 $ offhand_action = "fondle_ass"
                 $ action_context = "offhand"
                 call action(Chr)
-            "Also finger her ass." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "hotdog", "foot", "dildo_pussy"):
+            "Also finger her ass." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "hotdog", "footjob", "dildo_pussy"):
                 $ offhand_action = "finger_ass"
                 $ action_context = "offhand"
                 call action(Chr)

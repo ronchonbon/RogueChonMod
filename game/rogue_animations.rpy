@@ -2,424 +2,7 @@
 
 
 
-image Rogue_Doggy_Animation:
-    LiveComposite(
 
-        (420,750),
-        (0,0), ConditionSwitch(
-
-            "not Player.Sprite", "Rogue_Doggy_Body",
-            "Player.Cock == 'anal'", ConditionSwitch(
-                    "action_speed > 2", "Rogue_Doggy_Fuck2_Top",
-                    "action_speed > 1", "Rogue_Doggy_Fuck_Top",
-                    "action_speed ", "Rogue_Doggy_Anal_Head_Top",
-                    "True", "Rogue_Doggy_Body",
-                    ),
-            "Player.Cock == 'in'", ConditionSwitch(
-                    "action_speed > 2", "Rogue_Doggy_Fuck2_Top",
-                    "action_speed > 1", "Rogue_Doggy_Fuck_Top",
-                    "True", "Rogue_Doggy_Body",
-                    ),
-            "True", "Rogue_Doggy_Body",
-            ),
-        (0,0), ConditionSwitch(
-
-            "not Player.Sprite", "Rogue_Doggy_Ass",
-            "Player.Cock == 'anal'", ConditionSwitch(
-                    "action_speed > 2", "Rogue_Doggy_Fuck2_Ass",
-                    "action_speed > 1", "Rogue_Doggy_Fuck_Ass",
-                    "action_speed ", "Rogue_Doggy_Anal_Head_Ass",
-                    "True", "Rogue_Doggy_Ass",
-                    ),
-            "Player.Cock == 'in'", ConditionSwitch(
-                    "action_speed > 2", "Rogue_Doggy_Fuck2_Ass",
-                    "action_speed > 1", "Rogue_Doggy_Fuck_Ass",
-                    "True", "Rogue_Doggy_Ass",
-                    ),
-            "True", "Rogue_Doggy_Ass",
-            ),
-        (0,0), ConditionSwitch(
-
-            "Player.Cock == 'foot'", ConditionSwitch(
-                    "action_speed > 1", "Rogue_Doggy_Feet2",
-                    "action_speed ", "Rogue_Doggy_Feet1",
-                    "True", "Rogue_Doggy_Feet0",
-                    ),
-            "not Player.Sprite and ShowFeet", "Rogue_Doggy_Feet0",
-            "True", Null(),
-            ),
-        )
-    align (0.6,0.0)
-
-
-image Rogue_Doggy_Body = LiveComposite(
-        (420,750),
-        (0,0), ConditionSwitch(
-
-            "RogueX.Water", Null(),
-            "RogueX.hair == 'evo'", "images/RogueDoggy/Rogue_Doggy_HairB.png",
-            "True", Null(),
-            ),
-        (0,0), "images/RogueDoggy/Rogue_Doggy_Body.png",
-        (0,0), ConditionSwitch(
-
-            "RogueX.neck == 'spiked_collar'", "images/RogueDoggy/Rogue_Doggy_Collar.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "'mouth' in RogueX.spunk", ConditionSwitch(
-                    "RogueX.mouth == 'lipbite'", "images/RogueDoggy/Rogue_Doggy_Mouth_LipbiteW.png",
-                    "RogueX.mouth == 'surprised'", "images/RogueDoggy/Rogue_Doggy_Mouth_SurprisedW.png",
-                    "RogueX.mouth == 'sucking'", "images/RogueDoggy/Rogue_Doggy_Mouth_BlowW.png",
-                    "RogueX.mouth == 'sad'", "images/RogueDoggy/Rogue_Doggy_Mouth_SadW.png",
-                    "RogueX.mouth == 'smile'", "images/RogueDoggy/Rogue_Doggy_Mouth_SmileW.png",
-                    "RogueX.mouth == 'tongue'", "images/RogueDoggy/Rogue_Doggy_Mouth_TongueW.png",
-                    "True", "images/RogueDoggy/Rogue_Doggy_Mouth_NormalW.png",
-                    ),
-            "RogueX.mouth == 'normal'", "images/RogueDoggy/Rogue_Doggy_Mouth_Normal.png",
-            "RogueX.mouth == 'lipbite'", "images/RogueDoggy/Rogue_Doggy_Mouth_Lipbite.png",
-            "RogueX.mouth == 'sucking'", "images/RogueDoggy/Rogue_Doggy_Mouth_Blow.png",
-            "RogueX.mouth == 'kiss'", "images/RogueDoggy/Rogue_Doggy_Mouth_Surprised.png",
-            "RogueX.mouth == 'sad'", "images/RogueDoggy/Rogue_Doggy_Mouth_Sad.png",
-            "RogueX.mouth == 'smile'", "images/RogueDoggy/Rogue_Doggy_Mouth_Smile.png",
-            "RogueX.mouth == 'grimace'", "images/RogueDoggy/Rogue_Doggy_Mouth_Smile.png",
-            "RogueX.mouth == 'surprised'", "images/RogueDoggy/Rogue_Doggy_Mouth_Surprised.png",
-            "RogueX.mouth == 'tongue'", "images/RogueDoggy/Rogue_Doggy_Mouth_Tongue.png",
-            "True", "images/RogueDoggy/Rogue_Doggy_Mouth_Smile.png",
-            ),
-        (0,0), ConditionSwitch(
-
-            "RogueX.blushing", "images/RogueDoggy/Rogue_Doggy_Blush.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "RogueX.brows == 'normal'", "images/RogueDoggy/Rogue_Doggy_Brows_Normal.png",
-            "RogueX.brows == 'angry'", "images/RogueDoggy/Rogue_Doggy_Brows_Angry.png",
-            "RogueX.brows == 'sad'", "images/RogueDoggy/Rogue_Doggy_Brows_Sad.png",
-            "RogueX.brows == 'surprised'", "images/RogueDoggy/Rogue_Doggy_Brows_Surprised.png",
-            "RogueX.brows == 'confused'", "images/RogueDoggy/Rogue_Doggy_Brows_Normal.png",
-            "True", "images/RogueDoggy/Rogue_Doggy_Brows_Normal.png",
-            ),
-        (0,0), "Rogue Doggy Blink",
-        (0,0), ConditionSwitch(
-
-            "not RogueX.bra", Null(),
-            "RogueX.bra == 'tube_top'", "images/RogueDoggy/Rogue_Doggy_Chest_Tube.png",
-            "RogueX.bra == 'tank'", "images/RogueDoggy/Rogue_Doggy_Chest_Tank.png",
-            "RogueX.bra == 'buttoned tank'", "images/RogueDoggy/Rogue_Doggy_Chest_ButtonTank.png",
-            "RogueX.bra == 'sports_bra'", "images/RogueDoggy/Rogue_Doggy_Chest_SportsBra.png",
-            "RogueX.bra == 'bikini_top'", "images/RogueDoggy/Rogue_Doggy_Chest_Bikini.png",
-            "RogueX.bra", "images/RogueDoggy/Rogue_Doggy_Chest_Bra.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "RogueX.Water", "images/RogueDoggy/Rogue_Doggy_WetTop.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "not RogueX.top", Null(),
-            "RogueX.top == 'mesh_top'", "images/RogueDoggy/Rogue_Doggy_Over_Mesh.png",
-            "RogueX.top == 'pink_top'", "images/RogueDoggy/Rogue_Doggy_Over_Pink.png",
-            "RogueX.top == 'hoodie'", "images/RogueDoggy/Rogue_Doggy_Over_Hoodie.png",
-            "RogueX.top == 'nighty'", "images/RogueDoggy/Rogue_Doggy_Over_NightyTop.png",
-            "RogueX.top == 'towel'", "images/RogueDoggy/Rogue_Doggy_Over_TowelTop.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "RogueX.Water", "images/RogueDoggy/Rogue_Doggy_HairWet.png",
-            "RogueX.hair == 'cosplay'", "images/RogueDoggy/Rogue_Doggy_Hair_Cos.png",
-            "RogueX.hair == 'evo'", "images/RogueDoggy/Rogue_Doggy_HairF.png",
-            "True", "images/RogueDoggy/Rogue_Doggy_HairF.png",
-            ),
-        (0,0), ConditionSwitch(
-
-            "RogueX.top == 'hoodie'", "images/RogueDoggy/Rogue_Doggy_Over_Hood.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "not RogueX.spunk", Null(),
-            "'hair' in RogueX.spunk", "images/RogueDoggy/Rogue_Doggy_Spunk_Hair.png",
-            "'facial' in RogueX.spunk", "images/RogueDoggy/Rogue_Doggy_Spunk_Facial.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "primary_action == 'fondle_breasts' or offhand_action == 'fondle_breasts'", "Rogue_Doggy_GropeBreast",
-            "True", Null()
-            ),
-        )
-
-image Rogue_Doggy_Ass = LiveComposite(
-        (420,750),
-        (0,0), ConditionSwitch(
-
-            "not RogueX.underwear_pulled_down or (RogueX.legs == 'pants' and not RogueX.Upskirt)", Null(),
-            "RogueX.underwear == 'shorts'", "images/RogueDoggy/Rogue_Doggy_Shorts_Back.png",
-            "RogueX.underwear == 'green_panties'", "images/RogueDoggy/Rogue_Doggy_Undies_Back.png",
-            "RogueX.underwear == 'bikini_bottoms'", "images/RogueDoggy/Rogue_Doggy_Panties_Bikini_Back.png",
-            "RogueX.underwear", "images/RogueDoggy/Rogue_Doggy_Panties_Back.png",
-            "True", Null(),
-            ),
-        (0,0), "images/RogueDoggy/Rogue_Doggy_Ass.png",
-        (0,0), ConditionSwitch(
-
-            "RogueX.Water", "images/RogueDoggy/Rogue_Doggy_WetAss.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "RogueX.hose == 'stockings'", "images/RogueDoggy/Rogue_Doggy_Hose.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "not RogueX.underwear_pulled_down or (RogueX.legs == 'pants' and not RogueX.Upskirt)", Null(),
-            "RogueX.underwear == 'shorts' and RogueX.grool > 1", "images/RogueDoggy/Rogue_Doggy_Shorts_Down_Wet.png",
-            "RogueX.underwear == 'shorts'", "images/RogueDoggy/Rogue_Doggy_Shorts_Down.png",
-            "RogueX.underwear == 'green_panties' and RogueX.grool > 1", "images/RogueDoggy/Rogue_Doggy_Undies_Down_Wet.png",
-            "RogueX.underwear == 'green_panties'", "images/RogueDoggy/Rogue_Doggy_Undies_Down.png",
-            "RogueX.underwear == 'bikini_bottoms'", "images/RogueDoggy/Rogue_Doggy_Panties_Bikini_Down.png",
-            "RogueX.underwear", "images/RogueDoggy/Rogue_Doggy_Panties_Down.png",
-            "True", Null(),
-            ),
-
-        (0,0), ConditionSwitch(
-
-            "Player.Sprite and Player.Cock == 'in'", ConditionSwitch(
-                    "action_speed > 2", "Rogue_Pussy_Fucking3",
-                    "action_speed > 1", "Rogue_Pussy_Fucking2",
-                    "action_speed ", "Rogue_Pussy_Heading",
-                    "True", "Rogue_Pussy_Static",
-                    ),
-            "primary_action == 'eat_pussy'", "images/RogueDoggy/Rogue_Doggy_Pussy_Open.png",
-            "RogueX.legs and not RogueX.Upskirt", "images/RogueDoggy/Rogue_Doggy_Pussy_Closed.png",
-            "RogueX.underwear and not RogueX.underwear_pulled_down", "images/RogueDoggy/Rogue_Doggy_Pussy_Closed.png",
-            "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", "Rogue_Pussy_Fingering",
-            "primary_action == 'dildo_pussy'", "Rogue_Pussy_Fucking2",
-            "True", "images/RogueDoggy/Rogue_Doggy_Pussy_Closed.png",
-            ),
-
-
-
-
-
-
-
-
-
-        (0,0), ConditionSwitch(
-
-            "not RogueX.pubes", Null(),
-            "Player.Sprite and Player.Cock == 'in'", Null(),
-            "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
-            "primary_action == 'dildo_pussy'", Null(),
-            "RogueX.legs == 'pants' and not RogueX.Upskirt", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
-            "RogueX.underwear_pulled_down", "images/RogueDoggy/Rogue_Doggy_Pubes.png",
-            "RogueX.underwear", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
-            "RogueX.hose and RogueX.hose != 'stockings'", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
-            "True", "images/RogueDoggy/Rogue_Doggy_Pubes.png",
-            ),
-        (0,0), ConditionSwitch(
-
-            "Player.Sprite", Null(),
-            "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
-            "primary_action == 'dildo_pussy'", Null(),
-            "RogueX.piercings == 'ring'", "images/RogueDoggy/Rogue_Doggy_PussyRing.png",
-            "RogueX.piercings == 'barbell'", "images/RogueDoggy/Rogue_Doggy_PussyBarbell.png",
-            "True", Null(),
-            ),
-
-
-        (0,0), ConditionSwitch(
-
-            "Player.Sprite and Player.Cock == 'anal'", ConditionSwitch(
-                    "action_speed > 2", "Rogue_Anal_Fucking2",
-                    "action_speed > 1", "Rogue_Anal_Fucking",
-                    "action_speed ", "Rogue_Anal_Heading",
-                    "True", "Rogue_Anal",
-                    ),
-
-
-            "RogueX.legs and not RogueX.Upskirt", "images/RogueDoggy/Rogue_Doggy_Asshole_Loose.png",
-            "RogueX.underwear and not RogueX.underwear_pulled_down", "images/RogueDoggy/Rogue_Doggy_Asshole_Loose.png",
-            "primary_action == 'finger_ass' or offhand_action == 'finger_ass'", "Rogue_Anal_Fingering",
-            "primary_action == 'dildo_anal'", "Rogue_Anal_Fucking",
-            "RogueX.used_to_anal", "images/RogueDoggy/Rogue_Doggy_Asshole_Loose.png",
-            "True", "images/RogueDoggy/Rogue_Doggy_Asshole_Tight.png",
-            ),
-
-
-        (0,0), ConditionSwitch(
-
-            "'anal' not in RogueX.spunk or Player.Sprite", Null(),
-            "Player.Cock == 'anal'", "images/RogueDoggy/Rogue_Doggy_SpunkAnalOpen.png",
-            "RogueX.used_to_anal", "images/RogueDoggy/Rogue_Doggy_SpunkAnalLoose.png",
-            "True", "images/RogueDoggy/Rogue_Doggy_SpunkAnalLoose.png",
-            ),
-        (0,0), ConditionSwitch(
-
-            "RogueX.underwear_pulled_down or not RogueX.underwear", Null(),
-
-
-            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
-            "RogueX.underwear == 'shorts' and RogueX.grool", "images/RogueDoggy/Rogue_Doggy_Shorts_Wet.png",
-            "RogueX.underwear == 'shorts'", "images/RogueDoggy/Rogue_Doggy_Shorts.png",
-            "RogueX.underwear == 'green_panties' and RogueX.grool", "images/RogueDoggy/Rogue_Doggy_Undies_Wet.png",
-            "RogueX.underwear == 'green_panties'", "images/RogueDoggy/Rogue_Doggy_Undies.png",
-            "RogueX.underwear == 'lace_panties'", "images/RogueDoggy/Rogue_Doggy_PantiesLace.png",
-            "RogueX.underwear == 'bikini_bottoms'", "images/RogueDoggy/Rogue_Doggy_Panties_Bikini.png",
-            "True", "images/RogueDoggy/Rogue_Doggy_Panties.png",
-            ),
-        (0,0), ConditionSwitch(
-
-            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
-            "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
-            "primary_action == 'dildo_pussy'", Null(),
-
-            "RogueX.hose == 'garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
-            "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings.png",
-            "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == 'tights' and RogueX.grool", "images/RogueDoggy/Rogue_Doggy_Tights_Wet.png",
-            "RogueX.hose == 'tights'", "images/RogueDoggy/Rogue_Doggy_Tights.png",
-            "RogueX.hose == 'pantyhose'", "images/RogueDoggy/Rogue_Doggy_FullHose.png",
-            "RogueX.hose == 'ripped_pantyhose'", "images/RogueDoggy/Rogue_Doggy_FullHose_Holed.png",
-            "RogueX.hose == 'ripped_tights'", "images/RogueDoggy/Rogue_Doggy_Tights_Holed.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "RogueX.legs == 'pants'", ConditionSwitch(
-                    "RogueX.Upskirt", "images/RogueDoggy/Rogue_Doggy_Legs_Pants_Down.png",
-                    "RogueX.grool > 1", "images/RogueDoggy/Rogue_Doggy_Legs_Pants_Wet.png",
-                    "True", "images/RogueDoggy/Rogue_Doggy_Legs_Pants.png",
-                    ),
-            "RogueX.legs == 'skirt'", ConditionSwitch(
-                    "RogueX.Upskirt and Player.Sprite and Player.Cock == 'anal' and action_speed" , "images/RogueDoggy/Rogue_Doggy_Legs_Skirt_UpAnal.png",
-                    "RogueX.Upskirt", "images/RogueDoggy/Rogue_Doggy_Legs_Skirt_Up.png",
-                    "True", "images/RogueDoggy/Rogue_Doggy_Legs_Skirt.png",
-                    ),
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "RogueX.top == 'nighty' and RogueX.Upskirt", "images/RogueDoggy/Rogue_Doggy_Over_NightyAss_Up.png",
-            "RogueX.top == 'nighty'", "images/RogueDoggy/Rogue_Doggy_Over_NightyAss.png",
-            "RogueX.top == 'towel' and RogueX.Upskirt", "images/RogueDoggy/Rogue_Doggy_Over_TowelAss_Up.png",
-            "RogueX.top == 'towel'", "images/RogueDoggy/Rogue_Doggy_Over_TowelAss.png",
-            "True", Null(),
-            ),
-
-        (0,0), ConditionSwitch(
-
-            "RogueX.accessory == 'sweater' and (RogueX.Upskirt or (Player.Sprite and Player.Cock == 'out'))", "images/RogueDoggy/Rogue_Doggy_Acc_Sweater_Up.png",
-            "RogueX.accessory == 'sweater'", "images/RogueDoggy/Rogue_Doggy_Acc_Sweater.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "'back' in RogueX.spunk", "images/RogueDoggy/Rogue_Doggy_SpunkAss.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "Player.Sprite and Player.Cock", Null(),
-            "primary_action == 'eat_pussy'", "Rogue_Doggy_Lick_Pussy",
-            "primary_action == 'eat_ass'", "Rogue_Doggy_Lick_Ass",
-            "True", Null()
-            ),
-        (0,0), ConditionSwitch(
-
-            "not Player.Sprite or Player.Cock != 'out'", Null(),
-            "RogueX.legs == 'skirt' and RogueX.Upskirt", "images/RogueDoggy/Rogue_Doggy_HotdogUpskirtBack.png",
-            "True", "images/RogueDoggy/Rogue_Doggy_HotdogBack.png",
-            ),
-        (0,0), ConditionSwitch(
-
-            "not Player.Sprite or Player.Cock != 'out'", Null(),
-            "RogueX.legs == 'skirt' and RogueX.Upskirt and action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "RogueX.legs == 'skirt' and RogueX.Upskirt", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "action_speed ", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
-            "True", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
-            ),
-
-
-
-
-
-
-        )
-
-image Rogue Doggy Blink:
-    ConditionSwitch(
-    "RogueX.eyes == 'sexy'", "images/RogueDoggy/Rogue_Doggy_Eyes_Sexy.png",
-    "RogueX.eyes == 'side'", "images/RogueDoggy/Rogue_Doggy_Eyes_Side.png",
-    "RogueX.eyes == 'normal'", "images/RogueDoggy/Rogue_Doggy_Eyes_Normal.png",
-    "RogueX.eyes == 'closed'", "images/RogueDoggy/Rogue_Doggy_Eyes_Closed.png",
-    "RogueX.eyes == 'manic'", "images/RogueDoggy/Rogue_Doggy_Eyes_Surprised.png",
-    "RogueX.eyes == 'down'", "images/RogueDoggy/Rogue_Doggy_Eyes_Sexy.png",
-    "RogueX.eyes == 'stunned'", "images/RogueDoggy/Rogue_Doggy_Eyes_Stunned.png",
-    "RogueX.eyes == 'surprised'", "images/RogueDoggy/Rogue_Doggy_Eyes_Surprised.png",
-    "RogueX.eyes == 'squint'", "images/RogueDoggy/Rogue_Doggy_Eyes_Sexy.png",
-    "True", "images/RogueDoggy/Rogue_Doggy_Eyes_Normal.png",
-    ),
-
-
-
-
-
-
-    3
-
-    "images/RogueDoggy/Rogue_Doggy_Eyes_Closed.png"
-    .25
-    repeat
-
-
-image Rogue_Doggy_Feet:
-    contains:
-        AlphaMask("Rogue_Doggy_Shins", "images/RogueDoggy/Rogue_Doggy_Toes.png")
-
-image Rogue_Doggy_Shins:
-
-    contains:
-        "images/RogueDoggy/Rogue_Doggy_Shins.png"
-    contains:
-
-        ConditionSwitch(
-            "RogueX.legs == 'pants'", "images/RogueDoggy/Rogue_Doggy_Feet_Pants.png",
-            "True", Null(),
-            )
-    contains:
-        "images/RogueDoggy/Rogue_Doggy_Feet.png"
-    contains:
-
-        ConditionSwitch(
-            "not RogueX.hose", Null(),
-            "RogueX.hose == 'stockings'", "images/RogueDoggy/Rogue_Doggy_Feet_Hose.png",
-            "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueDoggy/Rogue_Doggy_Feet_Hose.png",
-            "RogueX.hose == 'tights'", "images/RogueDoggy/Rogue_Doggy_Feet_Tights.png",
-            "RogueX.hose == 'pantyhose'", "images/RogueDoggy/Rogue_Doggy_Feet_Hose.png",
-            "RogueX.hose == 'ripped_pantyhose'", "images/RogueDoggy/Rogue_Doggy_Feet_Hose_Holed.png",
-            "RogueX.hose == 'ripped_tights'", "images/RogueDoggy/Rogue_Doggy_Feet_Tights_Holed.png",
-            "True", Null(),
-            )
-
-
-image Rogue_Doggy_Lick_Pussy:
-    "Lick_Anim"
-    zoom 0.5
-    offset (195,540)
-
-image Rogue_Doggy_Lick_Ass:
-    "Lick_Anim"
-    zoom 0.5
-    offset (195,500)
 
 image Rogue_Doggy_GropeBreast:
     contains:
@@ -437,115 +20,8 @@ image Rogue_Doggy_GropeBreast:
             repeat
 
 
-image Zero_Doggy_Up:
-
-    contains:
-        ConditionSwitch(
-            "Player.color == 'pink'", "images/RogueDoggy/Rogue_Doggy_Cock_U_P.png",
-            "Player.color == 'brown'", "images/RogueDoggy/Rogue_Doggy_Cock_U_B.png",
-            "True", "images/RogueDoggy/Rogue_Doggy_Cock_U_G.png",
-            ),
-    contains:
-        ConditionSwitch(
-            "Player.cock_wet", "images/RogueDoggy/Rogue_Doggy_Cock_U_W.png",
-            "True", Null(),
-            ),
-
-image Zero_Hotdog_Static:
 
 
-    contains:
-        "Zero_Doggy_Up"
-        pos (175, 370)
-
-image Zero_Hotdog_Moving:
-
-
-    contains:
-        "Zero_Doggy_Up"
-        pos (175, 370)
-        block:
-            ease 1 ypos 330
-            ease 1 ypos 420
-            repeat
-
-
-
-image Zero_Doggy_Insert:
-
-    contains:
-        ConditionSwitch(
-            "Player.color == 'pink'", "images/RogueDoggy/Rogue_Doggy_Cock_In_P.png",
-            "Player.color == 'brown'", "images/RogueDoggy/Rogue_Doggy_Cock_In_B.png",
-            "True", "images/RogueDoggy/Rogue_Doggy_Cock_In_G.png",
-            ),
-    contains:
-        ConditionSwitch(
-            "Player.cock_wet", "images/RogueDoggy/Rogue_Doggy_Cock_In_Wet.png",
-            "True", Null(),
-            ),
-    contains:
-        ConditionSwitch(
-            "Player.spunk", "images/RogueDoggy/Rogue_Doggy_Cock_In_Spunk.png",
-            "True", Null(),
-            ),
-
-
-
-
-
-
-
-
-
-
-
-
-image Zero_Doggy_Static:
-
-    contains:
-        subpixel True
-        "Zero_Doggy_Insert"
-        pos (169,545)
-        block:
-            ease 1 ypos 540
-            pause 1
-            ease 3 ypos 545
-            repeat
-
-image Zero_Doggy_Heading:
-
-    contains:
-        subpixel True
-        "Zero_Doggy_Insert"
-        pos (171,545)
-        block:
-            ease 1 xpos 168 ypos 500
-            pause 1
-            ease 3 xpos 171 ypos 545
-            repeat
-
-image Zero_Doggy_Fucking2:
-
-    contains:
-        "Zero_Doggy_Insert"
-        pos (169,500)
-        block:
-            ease .5 ypos 440
-            pause .25
-            ease 1.75 ypos 500
-            repeat
-
-image Zero_Doggy_Fucking3:
-
-    contains:
-        "Zero_Doggy_Insert"
-        pos (169,500)
-        block:
-            ease .2 ypos 440
-            pause .1
-            ease .6 ypos 500
-            repeat
 
 image Rogue_Pussy_Mask:
 
@@ -643,7 +119,7 @@ image Rogue_Pussy_Static:
             ),
     contains:
 
-        AlphaMask("Zero_Doggy_Static", "Rogue_Pussy_Mask_Static")
+        AlphaMask("Zero_doggy_static", "Rogue_Pussy_Mask_Static")
     contains:
 
 
@@ -713,7 +189,7 @@ image Rogue_Pussy_Heading:
             ),
     contains:
 
-        AlphaMask("Zero_Doggy_Heading", "Rogue_Pussy_Mask")
+        AlphaMask("Zero_doggy_heading", "Rogue_Pussy_Mask")
     contains:
 
 
@@ -829,7 +305,7 @@ image Rogue_Pussy_Fucking2:
 
         ConditionSwitch(
             "primary_action == 'dildo_pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
-            "True",AlphaMask("Zero_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
+            "True",AlphaMask("Zero_doggy_fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
             ),
 
 
@@ -853,7 +329,7 @@ image Rogue_Pussy_Fucking3:
             ),
     contains:
 
-        AlphaMask("Zero_Doggy_Fucking3", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("Zero_doggy_fucking3", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
 
 image Rogue_Doggy_Fucking_Dildo:
 
@@ -874,7 +350,7 @@ image Rogue_Anal:
 
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Asshole_Loose.png"
+        "images/RogueDoggy/Rogue_doggy_asshole_Loose.png"
         anchor (0.50,0.69)
         pos (208,500)
         zoom 1.25
@@ -890,7 +366,7 @@ image Rogue_Anal:
             )
     contains:
 
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,500)
 
 
@@ -982,32 +458,12 @@ image Rogue_Anal_Heading:
             )
     contains:
 
-        AlphaMask("Zero_Doggy_Anal_Heading", "Zero_Doggy_Anal_HeadingJunk")
+        AlphaMask("Zero_doggy_anal_heading", "Zero_doggy_anal_headingJunk")
     contains:
 
-        AlphaMask("Zero_Doggy_Anal_Heading", "Rogue_Doggy_Anal_Heading_Mask")
+        AlphaMask("Zero_doggy_anal_heading", "Rogue_Doggy_Anal_Heading_Mask")
 
-image Zero_Doggy_Anal_Heading:
 
-    contains:
-        "Zero_Doggy_Insert"
-        pos (172,500)
-        block:
-            ease .5 ypos 450
-            pause .25
-            ease 1.75 ypos 500
-            repeat
-
-image Zero_Doggy_Anal_HeadingJunk:
-
-    contains:
-        Solid("#159457", xysize=(150,150))
-        pos (152,600)
-        block:
-            ease .5 ypos 550
-            pause .25
-            ease 1.75 ypos 600
-            repeat
 
 image Rogue_Doggy_Anal_Heading_Mask:
 
@@ -1026,7 +482,7 @@ image Rogue_Doggy_Anal_Head_Top:
 
     contains:
         subpixel True
-        "Rogue_Doggy_Body"
+        "Rogue_doggy_body"
         ypos 0
         block:
             pause .4
@@ -1039,7 +495,7 @@ image Rogue_Doggy_Anal_Head_Ass:
 
     contains:
         subpixel True
-        "Rogue_Doggy_Ass"
+        "Rogue_doggy_ass"
         ypos 0
         block:
             pause .4
@@ -1050,16 +506,7 @@ image Rogue_Doggy_Anal_Head_Ass:
             repeat
 
 
-image Zero_Doggy_Anal1:
 
-    contains:
-        "Zero_Doggy_Insert"
-        pos (172,460)
-        block:
-            ease .5 ypos 395
-            pause .25
-            ease 1.75 ypos 460
-            repeat
 
 
 
@@ -1115,7 +562,7 @@ image Rogue_Anal_Fucking:
         ConditionSwitch(
 
             "primary_action == 'dildo_anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
-            "True", AlphaMask("Zero_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
+            "True", AlphaMask("Zero_doggy_anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
             ),
 
 image Rogue_Doggy_Anal_Dildo:
@@ -1152,7 +599,7 @@ image Rogue_Doggy_Fuck_Top:
 
     contains:
         subpixel True
-        "Rogue_Doggy_Body"
+        "Rogue_doggy_body"
         ypos 15
         pause .4
         block:
@@ -1165,7 +612,7 @@ image Rogue_Doggy_Fuck_Ass:
 
     contains:
         subpixel True
-        "Rogue_Doggy_Ass"
+        "Rogue_doggy_ass"
         ypos 0
         block:
             pause .4
@@ -1177,16 +624,7 @@ image Rogue_Doggy_Fuck_Ass:
 
 
 
-image Zero_Doggy_Anal2:
 
-    contains:
-        "Zero_Doggy_Insert"
-        pos (172,460)
-        block:
-            ease .2 ypos 395
-            pause .1
-            ease .6 ypos 465
-            repeat
 
 image Rogue_Anal_Fucking2:
 
@@ -1214,13 +652,13 @@ image Rogue_Anal_Fucking2:
             )
     contains:
 
-        AlphaMask("Zero_Doggy_Anal2", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png")
+        AlphaMask("Zero_doggy_anal2", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png")
 
 image Rogue_Doggy_Fuck2_Top:
 
     contains:
         subpixel True
-        "Rogue_Doggy_Body"
+        "Rogue_doggy_body"
         ypos 20
         block:
             pause .15
@@ -1234,7 +672,7 @@ image Rogue_Doggy_Fuck2_Ass:
 
     contains:
         subpixel True
-        "Rogue_Doggy_Ass"
+        "Rogue_doggy_ass"
         ypos 5
         block:
             pause .15
@@ -1248,10 +686,10 @@ image Rogue_Doggy_Fuck2_Ass:
 
 
 
-image Rogue_Doggy_Feet0:
+image Rogue_doggy_feet0:
 
     contains:
-        "Rogue_Doggy_Shins"
+        "Rogue_doggy_shins"
         pos (0, 0)
         block:
             subpixel True
@@ -1262,13 +700,13 @@ image Rogue_Doggy_Feet0:
             repeat
     contains:
         ConditionSwitch(
-                "Player.Sprite", "Zero_Doggy_Up",
+                "Player.sprite", "Zero_cock_doggy_out",
                 "True", Null(),
                 )
         zoom 1.2
         pos (145,480)
     contains:
-        "Rogue_Doggy_Feet"
+        "Rogue_doggy_feet"
         pos (0, 0)
         block:
             subpixel True
@@ -1278,10 +716,10 @@ image Rogue_Doggy_Feet0:
             ease 2 ypos 0
             repeat
 
-image Rogue_Doggy_Feet1:
+image Rogue_doggy_feet1:
 
     contains:
-        "Rogue_Doggy_Shins"
+        "Rogue_doggy_shins"
         pos (0, 0)
         block:
             pause .3
@@ -1289,7 +727,7 @@ image Rogue_Doggy_Feet1:
             ease 1 ypos 0
             repeat
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         zoom 1.2
         pos (145,480)
         block:
@@ -1298,7 +736,7 @@ image Rogue_Doggy_Feet1:
             ease .9 ypos 480
             repeat
     contains:
-        "Rogue_Doggy_Feet"
+        "Rogue_doggy_feet"
         pos (0, 0)
         block:
             pause .3
@@ -1306,10 +744,10 @@ image Rogue_Doggy_Feet1:
             ease 1 ypos 0
             repeat
 
-image Rogue_Doggy_Feet2:
+image Rogue_doggy_feet2:
 
     contains:
-        "Rogue_Doggy_Shins"
+        "Rogue_doggy_shins"
         pos (0, 0)
         block:
             pause .05
@@ -1317,7 +755,7 @@ image Rogue_Doggy_Feet2:
             ease .3 ypos 0
             repeat
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         zoom 1.2
         pos (145,480)
         block:
@@ -1326,7 +764,7 @@ image Rogue_Doggy_Feet2:
             ease .28 ypos 480
             repeat
     contains:
-        "Rogue_Doggy_Feet"
+        "Rogue_doggy_feet"
         pos (0, 0)
         block:
             pause .05
@@ -1386,21 +824,21 @@ image NotSlap_Ass:
 
 
 label Rogue_Doggy_Launch(Line=primary_action):
-    if renpy.showing("Rogue_Doggy_Animation"):
+    if renpy.showing("Rogue_doggy_animation"):
         return
     $ action_speed = 0
     call Rogue_Hide (1)
-    show Rogue_Doggy_Animation zorder 150 at sprite_location(stage_center+50)
+    show Rogue_doggy_animation zorder 150 at sprite_location(stage_center+50)
     with dissolve
     return
 
 label Rogue_Doggy_Reset:
-    if not renpy.showing("Rogue_Doggy_Animation"):
+    if not renpy.showing("Rogue_doggy_animation"):
         return
 
     $ RogueX.ArmPose = 2
-    $ RogueX.SpriteVer = 0
-    hide Rogue_Doggy_Animation
+    $ RogueX.spriteVer = 0
+    hide Rogue_doggy_animation
     call Rogue_Hide
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         alpha 1
@@ -1425,53 +863,53 @@ image Rogue_SexSprite:
         (1120,840),
         (0,0), ConditionSwitch(
 
-                "not Player.Sprite", "Rogue_Sex_Body_Static",
-                "Player.Cock == 'anal'", ConditionSwitch(
+                "not Player.sprite", "Rogue_sex_body_Static",
+                "Player.cock == 'anal'", ConditionSwitch(
 
-                        "action_speed >= 3", "Rogue_Sex_Body_Anim3",
-                        "action_speed >= 2", "Rogue_Sex_Body_Anim2",
-                        "action_speed ", "Rogue_Sex_Body_Anim1",
-                        "True", "Rogue_Sex_Body_Static",
+                        "action_speed >= 3", "Rogue_sex_body_Anim3",
+                        "action_speed >= 2", "Rogue_sex_body_Anim2",
+                        "action_speed ", "Rogue_sex_body_Anim1",
+                        "True", "Rogue_sex_body_Static",
                         ),
-                "Player.Cock == 'in'", ConditionSwitch(
+                "Player.cock == 'in'", ConditionSwitch(
 
-                        "action_speed >= 3", "Rogue_Sex_Body_Anim3",
-                        "action_speed >= 2", "Rogue_Sex_Body_Anim2",
-                        "action_speed ", "Rogue_Sex_Body_Anim1",
-                        "True", "Rogue_Sex_Body_Static",
+                        "action_speed >= 3", "Rogue_sex_body_Anim3",
+                        "action_speed >= 2", "Rogue_sex_body_Anim2",
+                        "action_speed ", "Rogue_sex_body_Anim1",
+                        "True", "Rogue_sex_body_Static",
                         ),
-                "Player.Cock == 'foot'", ConditionSwitch(
+                "Player.cock == 'footjob'", ConditionSwitch(
 
-                        "action_speed >= 2", "Rogue_Sex_Body_FootAnim2",
-                        "action_speed ", "Rogue_Sex_Body_FootAnim1",
-                        "True", "Rogue_Sex_Body_FootAnimStatic",
+                        "action_speed >= 2", "Rogue_sex_body_FootAnim2",
+                        "action_speed ", "Rogue_sex_body_FootAnim1",
+                        "True", "Rogue_sex_body_FootAnimStatic",
                         ),
-                "Player.Cock == 'out' and action_speed >= 2","Rogue_Hotdog_Body_Anim2",
-                "True", "Rogue_Sex_Body_Static",
+                "Player.cock == 'out' and action_speed >= 2","Rogue_Hotdog_Body_Anim2",
+                "True", "Rogue_sex_body_Static",
                 ),
         (0,0), ConditionSwitch(
-                "not Player.Sprite", "Rogue_Sex_Legs_Static",
-                "Player.Cock == 'anal'", ConditionSwitch(
+                "not Player.sprite", "Rogue_Sex_Legs_Static",
+                "Player.cock == 'anal'", ConditionSwitch(
 
                         "action_speed >= 3", "Rogue_Sex_Legs_Anim3",
                         "action_speed >= 2", "Rogue_Sex_Legs_Anim2",
                         "action_speed ", "Rogue_Sex_Legs_Anim1",
                         "True", "Rogue_Sex_Legs_Static",
                         ),
-                "Player.Cock == 'in'", ConditionSwitch(
+                "Player.cock == 'in'", ConditionSwitch(
 
                         "action_speed >= 3", "Rogue_Sex_Legs_Anim3",
                         "action_speed >= 2", "Rogue_Sex_Legs_Anim2",
                         "action_speed ", "Rogue_Sex_Legs_Anim1",
                         "True", "Rogue_Sex_Legs_Static",
                         ),
-                "Player.Cock == 'foot'", ConditionSwitch(
+                "Player.cock == 'footjob'", ConditionSwitch(
 
                         "action_speed >= 2", "Rogue_Sex_Legs_FootAnim2",
                         "action_speed ", "Rogue_Sex_Legs_FootAnim1",
                         "True", "Rogue_Sex_Legs_FootAnimStatic",
                         ),
-                "Player.Cock == 'out' and action_speed >= 2","Rogue_Hotdog_Legs_Anim2",
+                "Player.cock == 'out' and action_speed >= 2","Rogue_Hotdog_Legs_Anim2",
                 "True", "Rogue_Sex_Legs_Static",
                 ),
         )
@@ -1479,9 +917,9 @@ image Rogue_SexSprite:
     pos (650,200)
     zoom 0.85
 
-image Rogue_Sex_Body_Static:
+image Rogue_sex_body_Static:
     contains:
-        "Rogue_Sex_Body"
+        "Rogue_sex_body"
     pos (650,230)
 
 image Rogue_Sex_Legs_Static:
@@ -1490,120 +928,8 @@ image Rogue_Sex_Legs_Static:
     pos (650,230)
 
 
-image Rogue_Sex_Body:
-    LiveComposite(
-
-        (1120,840),
-
-
-
-
-
-        (320,-135), "Rogue_hairback_Sex",
-        (0,0), ConditionSwitch(
-
-            "RogueX.piercings == 'barbell'", "images/RogueSex/Rogue_Sex_Body_Barbell.png",
-            "RogueX.piercings == 'ring'", "images/RogueSex/Rogue_Sex_Body_Ring.png",
-            "True", "images/RogueSex/Rogue_Sex_Body.png",
-            ),
-
-        (0,0), ConditionSwitch(
-
-            "not RogueX.bra", Null(),
-            "RogueX.top_pulled_up", ConditionSwitch(
-
-                    "RogueX.bra == 'tank'", "images/RogueSex/Rogue_Sex_Chest_Tank_Up.png",
-                    "RogueX.bra == 'tube_top'", "images/RogueSex/Rogue_Sex_Chest_Tube_Up.png",
-                    "RogueX.bra == 'buttoned tank'", "images/RogueSex/Rogue_Sex_Chest_ButtonTank_Up.png",
-                    "RogueX.bra == 'sports_bra'", "images/RogueSex/Rogue_Sex_Chest_SportsBra_Up.png",
-                    "RogueX.bra == 'bra'", "images/RogueSex/Rogue_Sex_Chest_Bra_Up.png",
-                    "RogueX.bra == 'bikini_top'", "images/RogueSex/Rogue_Sex_Chest_Bikini_Up.png",
-                    "RogueX.bra == 'lace_bra'", "images/RogueSex/Rogue_Sex_Chest_Bra_Up.png",
-                    "True", Null(),
-                    ),
-            "True", ConditionSwitch(
-
-                    "RogueX.bra == 'tank'", "images/RogueSex/Rogue_Sex_Chest_Tank.png",
-                    "RogueX.bra == 'tube_top'", "images/RogueSex/Rogue_Sex_Chest_Tube.png",
-                    "RogueX.bra == 'buttoned tank'", "images/RogueSex/Rogue_Sex_Chest_ButtonTank.png",
-                    "RogueX.bra == 'sports_bra'", "images/RogueSex/Rogue_Sex_Chest_SportsBra.png",
-                    "RogueX.bra == 'bra'", "images/RogueSex/Rogue_Sex_Chest_Bra.png",
-                    "RogueX.bra == 'bikini_top'", "images/RogueSex/Rogue_Sex_Chest_Bikini.png",
-                    "RogueX.bra == 'lace_bra'", "images/RogueSex/Rogue_Sex_Chest_LaceBra.png",
-                    "True", Null(),
-                    ),
-            ),
-        (0,0),ConditionSwitch(
-
-            "RogueX.Water", "images/RogueSex/Rogue_Sex_Wet_Body.png",
-            "True", Null(),
-            ),
-
-        (0,0), ConditionSwitch(
-
-            "not RogueX.top", Null(),
-            "RogueX.top_pulled_up", ConditionSwitch(
-
-                    "RogueX.top == 'pink_top'", "images/RogueSex/Rogue_Sex_Over_Pink_Up.png",
-                    "RogueX.top == 'mesh_top'", "images/RogueSex/Rogue_Sex_Over_Mesh_Up.png",
-
-                    "True", Null(),
-                    ),
-            "True", ConditionSwitch(
-
-                    "RogueX.top == 'pink_top'", "images/RogueSex/Rogue_Sex_Over_Pink.png",
-                    "RogueX.top == 'mesh_top'", "images/RogueSex/Rogue_Sex_Over_Mesh.png",
-
-                    "True", Null(),
-                    ),
-            ),
-        (0,0), ConditionSwitch(
-
-            "RogueX.top_pulled_up or (not RogueX.top and not RogueX.bra)", Null(),
-            "RogueX.piercings == 'barbell'", "images/RogueSex/Rogue_Sex_Pierce_BarbellC.png",
-            "RogueX.piercings == 'ring'", "images/RogueSex/Rogue_Sex_Pierce_RingC.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "RogueX.neck == 'spiked_collar'", "images/RogueSex/Rogue_Sex_Neck_Stud.png",
-            "True", Null(),
-            ),
-
-
-
-
-
-
-
-
-        (0,0),ConditionSwitch(
-
-            "'belly' in RogueX.spunk", "images/KittySex/Kitty_Sex_Spunk_Body.png",
-            "True", Null(),
-            ),
-        (0,80),ConditionSwitch(
-
-            "'tits' in RogueX.spunk", "images/KittySex/Kitty_Sex_Spunk_Tits.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "primary_action == 'suck breasts' or offhand_action == 'suck breasts'", "Rogue_Sex_Lick_Breasts",
-            "True", Null()
-            ),
-        (0,0), ConditionSwitch(
-
-            "primary_action == 'fondle_breasts' or offhand_action == 'fondle_breasts'", "Rogue_Sex_Fondle_Breasts",
-            "True", Null()
-            ),
-        (320,-135), "Rogue_head_Sex",
-        )
-    zoom 0.9
-    offset (50,50)
-
 image Rogue_Sex_Lick_Breasts:
-    "Lick_Anim"
+    "licking"
     zoom 0.6
     offset (450,270)
 
@@ -1648,7 +974,7 @@ image Rogue_Sex_Legs:
         (0,0), ConditionSwitch(
 
             "not RogueX.underwear or RogueX.underwear_pulled_down", Null(),
-            "Player.Sprite and (Player.Cock == 'sex' or Player.Cock == 'anal')", Null(),
+            "Player.sprite and (Player.cock == 'sex' or Player.cock == 'anal')", Null(),
             "RogueX.underwear == 'lace_panties'", "images/RogueSex/Rogue_Sex_Panties_Lace.png",
             "RogueX.underwear == 'green_panties' and RogueX.grool", "images/RogueSex/Rogue_Sex_Panties_Green_Wet.png",
             "RogueX.underwear == 'green_panties' or RogueX.underwear == 'bikini_bottoms'", "images/RogueSex/Rogue_Sex_Panties_Green.png",
@@ -1667,7 +993,7 @@ image Rogue_Sex_Legs:
             "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueSex/Rogue_Sex_Hose_Legs_StockingGarter.png",
             "RogueX.hose == 'garterbelt'", "images/RogueSex/Rogue_Sex_Hose_Legs_Garter.png",
             "RogueX.underwear_pulled_down", Null(),
-            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
+            "Player.sprite and (Player.cock == 'in' or Player.cock == 'anal')", Null(),
             "RogueX.hose == 'pantyhose'", "images/RogueSex/Rogue_Sex_Hose_Legs_Full.png",
             "RogueX.hose == 'tights' and RogueX.grool", "images/RogueSex/Rogue_Sex_Hose_Legs_Tights_Wet.png",
             "RogueX.hose == 'tights'", "images/RogueSex/Rogue_Sex_Hose_Legs_Tights.png",
@@ -1676,7 +1002,7 @@ image Rogue_Sex_Legs:
         (0,0), ConditionSwitch(
 
             "RogueX.legs == 'skirt'", "images/RogueSex/Rogue_Sex_Legs_Skirt.png",
-            "RogueX.Upskirt", Null(),
+            "RogueX.upskirt", Null(),
             "RogueX.legs == 'pants' and RogueX.grool > 1", "images/RogueSex/Rogue_Sex_Legs_Pants_Wet.png",
             "RogueX.legs == 'pants'","images/RogueSex/Rogue_Sex_Legs_Pants.png",
             "True", Null(),
@@ -1698,7 +1024,7 @@ image Rogue_Sex_Legs:
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite or Player.Cock != 'out'", Null(),
+            "not Player.sprite or Player.cock != 'out'", Null(),
             "action_speed >= 2", "Rogue_Hotdog_Zero_Anim2",
             "action_speed ", "Rogue_Hotdog_Zero_Anim1",
             "True", "Rogue_Hotdog_Zero_Anim0",
@@ -1706,14 +1032,14 @@ image Rogue_Sex_Legs:
 
         (0,0), ConditionSwitch(
 
-            "Player.Sprite and Player.Cock", Null(),
+            "Player.sprite and Player.cock", Null(),
             "primary_action == 'eat_pussy'", "Rogue_Sex_Lick_Pussy",
             "primary_action == 'eat_ass'", "Rogue_Sex_Lick_Ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
 
-            "not Player.Sprite or Player.Cock != 'foot'", Null(),
+            "not Player.sprite or Player.cock != 'footjob'", Null(),
             "action_speed >= 2", "Rogue_Footcock_Zero_Anim2",
             "action_speed ", "Rogue_Footcock_Zero_Anim1",
             "True", "Rogue_Footcock_Static",
@@ -1733,7 +1059,7 @@ image Rogue_Sex_Legs:
 
         (0,0), ConditionSwitch(
 
-            "not action_speed or Player.Cock == 'foot' or ShowFeet", "Rogue_Sex_Feet",
+            "not action_speed or Player.cock == 'footjob' or ShowFeet", "Rogue_Sex_Feet",
 
             "True", AlphaMask("Rogue_Sex_Feet","images/RogueSex/Rogue_Sex_FeetMask2.png")
             ),
@@ -1757,7 +1083,7 @@ image Rogue_Sex_Feet = LiveComposite(
             "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueSex/Rogue_Sex_Hose_Feet_Stocking.png",
             "RogueX.hose == 'stockings'", "images/RogueSex/Rogue_Sex_Hose_Feet_Stocking.png",
             "RogueX.underwear_pulled_down", Null(),
-            "Player.Sprite and (Player.Cock == 'in' or Player.Cock == 'anal')", Null(),
+            "Player.sprite and (Player.cock == 'in' or Player.cock == 'anal')", Null(),
             "RogueX.hose == 'tights'", "images/RogueSex/Rogue_Sex_Hose_Feet_Tights.png",
             "RogueX.hose == 'garterbelt'", Null(),
             "True", "images/RogueSex/Rogue_Sex_Hose_Feet_Stocking.png",
@@ -1776,7 +1102,7 @@ image Rogue_Sex_Feet = LiveComposite(
 
         (0,0), ConditionSwitch(
 
-            "RogueX.legs == 'pants' and RogueX.Upskirt", "images/RogueSex/Rogue_Sex_Legs_Pants_Down.png",
+            "RogueX.legs == 'pants' and RogueX.upskirt", "images/RogueSex/Rogue_Sex_Legs_Pants_Down.png",
             "RogueX.legs == 'pants'", "images/RogueSex/Rogue_Sex_Legs_Pants_Feet.png",
             "True", Null(),
             ),
@@ -1785,12 +1111,12 @@ image Rogue_Sex_Feet = LiveComposite(
 
 
 image Rogue_Sex_Lick_Pussy:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (530,510)
 
 image Rogue_Sex_Lick_Ass:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (535,590)
 
@@ -1890,9 +1216,9 @@ image Rogue_Sex_Pussy:
     contains:
 
         ConditionSwitch(
-                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/RogueSex/Rogue_Sex_Pussy_Fucking.png",
-                "Player.Sprite and Player.Cock == 'in' and action_speed", "images/RogueSex/Rogue_Sex_Pussy_Open.png",
-                "Player.Sprite and Player.Cock == 'in'", "images/RogueSex/Rogue_Sex_Pussy_Closed.png",
+                "Player.sprite and Player.cock == 'in' and action_speed >= 2", "images/RogueSex/Rogue_Sex_Pussy_Fucking.png",
+                "Player.sprite and Player.cock == 'in' and action_speed", "images/RogueSex/Rogue_Sex_Pussy_Open.png",
+                "Player.sprite and Player.cock == 'in'", "images/RogueSex/Rogue_Sex_Pussy_Closed.png",
                 "primary_action == 'dildo_pussy'", "images/RogueSex/Rogue_Sex_Pussy_Fucking.png",
                 "primary_action == 'eat_pussy' or primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", "images/RogueSex/Rogue_Sex_Pussy_Open.png",
                 "True", "images/RogueSex/Rogue_Sex_Pussy_Closed.png",
@@ -1901,30 +1227,30 @@ image Rogue_Sex_Pussy:
 
         ConditionSwitch(
                 "not RogueX.grool", Null(),
-                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/KittySex/Kitty_Sex_WetPussy_F.png",
+                "Player.sprite and Player.cock == 'in' and action_speed >= 2", "images/KittySex/Kitty_Sex_WetPussy_F.png",
                 "True", "images/KittySex/Kitty_Sex_WetPussy_C.png",
                 )
     contains:
 
         ConditionSwitch(
                 "RogueX.piercings != 'ring'", Null(),
-                "not Player.Sprite or Player.Cock != 'in' or action_speed <= 1", "images/RogueSex/Rogue_Sex_Pussy_Ring.png",
+                "not Player.sprite or Player.cock != 'in' or action_speed <= 1", "images/RogueSex/Rogue_Sex_Pussy_Ring.png",
                 "True", "images/RogueSex/Rogue_Sex_Pussy_RingF.png",
                 )
     contains:
 
         ConditionSwitch(
                 "RogueX.piercings != 'barbell'", Null(),
-                "not Player.Sprite or Player.Cock != 'in' or action_speed <= 1", "images/RogueSex/Rogue_Sex_Pussy_Barbell.png",
+                "not Player.sprite or Player.cock != 'in' or action_speed <= 1", "images/RogueSex/Rogue_Sex_Pussy_Barbell.png",
                 "True", "images/RogueSex/Rogue_Sex_Pussy_BarbellF.png",
                 )
     contains:
 
         ConditionSwitch(
                 "not RogueX.pubes", Null(),
-                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", "images/RogueSex/Rogue_Sex_Pubes_Fucking.png",
-                "Player.Sprite and Player.Cock == 'in' and action_speed", "images/RogueSex/Rogue_Sex_Pubes_Open.png",
-                "Player.Sprite and Player.Cock == 'in'", "images/RogueSex/Rogue_Sex_Pubes_Closed.png",
+                "Player.sprite and Player.cock == 'in' and action_speed >= 2", "images/RogueSex/Rogue_Sex_Pubes_Fucking.png",
+                "Player.sprite and Player.cock == 'in' and action_speed", "images/RogueSex/Rogue_Sex_Pubes_Open.png",
+                "Player.sprite and Player.cock == 'in'", "images/RogueSex/Rogue_Sex_Pubes_Closed.png",
                 "primary_action == 'eat_pussy' or primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", "images/RogueSex/Rogue_Sex_Pubes_Open.png",
                 "primary_action == 'dildo_pussy'", "images/RogueSex/Rogue_Sex_Pubes_Fucking.png",
                 "True", "images/RogueSex/Rogue_Sex_Pubes_Closed.png",
@@ -1938,10 +1264,10 @@ image Rogue_Sex_Pussy:
     contains:
 
         ConditionSwitch(
-                "Player.Sprite and Player.Cock == 'in' and action_speed >= 3", AlphaMask("Rogue_Sex_Zero_Anim3", "Rogue_Pussy_Fucking_Mask"),
-                "Player.Sprite and Player.Cock == 'in' and action_speed >= 2", AlphaMask("Rogue_Sex_Zero_Anim2", "Rogue_Pussy_Fucking_Mask"),
-                "Player.Sprite and Player.Cock == 'in' and action_speed", AlphaMask("Rogue_Sex_Zero_Anim1", "Rogue_Pussy_Open_Mask"),
-                "Player.Sprite and Player.Cock == 'in'", AlphaMask("Rogue_Sex_Zero_Anim0", "Rogue_Pussy_Open_Mask"),
+                "Player.sprite and Player.cock == 'in' and action_speed >= 3", AlphaMask("Rogue_Sex_Zero_Anim3", "Rogue_Pussy_Fucking_Mask"),
+                "Player.sprite and Player.cock == 'in' and action_speed >= 2", AlphaMask("Rogue_Sex_Zero_Anim2", "Rogue_Pussy_Fucking_Mask"),
+                "Player.sprite and Player.cock == 'in' and action_speed", AlphaMask("Rogue_Sex_Zero_Anim1", "Rogue_Pussy_Open_Mask"),
+                "Player.sprite and Player.cock == 'in'", AlphaMask("Rogue_Sex_Zero_Anim0", "Rogue_Pussy_Open_Mask"),
                 "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'", AlphaMask("Rogue_Sex_FingerP_Anim1", "Rogue_Pussy_Open_Mask"),
                 "primary_action == 'dildo_pussy'", AlphaMask("Rogue_Sex_Dildo_Anim2", "Rogue_Pussy_Fucking_Mask"),
                 "True", Null(),
@@ -1949,7 +1275,7 @@ image Rogue_Sex_Pussy:
     contains:
 
         ConditionSwitch(
-                "'in' not in RogueX.spunk or not Player.Sprite or Player.Cock != 'in' or not action_speed", Null(),
+                "'in' not in RogueX.spunk or not Player.sprite or Player.cock != 'in' or not action_speed", Null(),
                 "action_speed <= 1", "Rogue_Sex_Pussy_Spunk_Heading",
                 "True", "images/KittySex/Kitty_Sex_Spunk_Puss_Over.png",
                 )
@@ -1989,7 +1315,7 @@ image Rogue_Sex_Zero_Anim0:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (503,530)
         zoom 1.3
 
@@ -1997,7 +1323,7 @@ image Rogue_Sex_Zero_Anim1:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (503,525)
         zoom 1.3
         block:
@@ -2010,7 +1336,7 @@ image Rogue_Sex_Zero_Anim2:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (504,490)
         zoom 1.3
         block:
@@ -2023,7 +1349,7 @@ image Rogue_Sex_Zero_Anim3:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (504,490)
         zoom 1.3
         block:
@@ -2080,11 +1406,11 @@ image Rogue_Sex_Legs_Anim3:
 
 
 
-image Rogue_Sex_Body_Anim1:
+image Rogue_sex_body_Anim1:
 
     contains:
         subpixel True
-        "Rogue_Sex_Body"
+        "Rogue_sex_body"
         pos (0,0)
         block:
 
@@ -2094,11 +1420,11 @@ image Rogue_Sex_Body_Anim1:
             ease 2.5 pos (0,0)
             repeat
 
-image Rogue_Sex_Body_Anim2:
+image Rogue_sex_body_Anim2:
 
     contains:
         subpixel True
-        "Rogue_Sex_Body"
+        "Rogue_sex_body"
         pos (0,0)
         block:
 
@@ -2109,11 +1435,11 @@ image Rogue_Sex_Body_Anim2:
             ease 2.75 pos (0,10)
             repeat
 
-image Rogue_Sex_Body_Anim3:
+image Rogue_sex_body_Anim3:
 
     contains:
         subpixel True
-        "Rogue_Sex_Body"
+        "Rogue_sex_body"
         pos (0,0)
         block:
 
@@ -2135,10 +1461,10 @@ image Rogue_Sex_Anus:
     contains:
 
         ConditionSwitch(
-            "Player.Sprite and Player.Cock == 'anal' and action_speed >= 3", "images/KittySex/Kitty_Sex_Hole_Open.png",
-            "Player.Sprite and Player.Cock == 'anal' and action_speed >= 2", "images/KittySex/Kitty_Sex_Hole_Open.png",
-            "Player.Sprite and Player.Cock == 'anal' and action_speed", "Rogue_Sex_Anal_Heading",
-            "Player.Sprite and Player.Cock == 'anal'", "Rogue_Sex_Anal_Tip",
+            "Player.sprite and Player.cock == 'anal' and action_speed >= 3", "images/KittySex/Kitty_Sex_Hole_Open.png",
+            "Player.sprite and Player.cock == 'anal' and action_speed >= 2", "images/KittySex/Kitty_Sex_Hole_Open.png",
+            "Player.sprite and Player.cock == 'anal' and action_speed", "Rogue_Sex_Anal_Heading",
+            "Player.sprite and Player.cock == 'anal'", "Rogue_Sex_Anal_Tip",
             "primary_action == 'finger_ass' or offhand_action == 'finger_ass'", "Rogue_Sex_Anal_Tip",
             "primary_action == 'dildo_anal'", "images/KittySex/Kitty_Sex_Hole_Open.png",
             "RogueX.used_to_anal", "images/RogueSex/Rogue_Sex_Hole_Loose.png",
@@ -2148,8 +1474,8 @@ image Rogue_Sex_Anus:
 
         ConditionSwitch(
                 "'anal' not in RogueX.spunk", Null(),
-                "Player.Sprite and Player.Cock != 'anal' and action_speed >= 1", "images/KittySex/Kitty_Sex_Spunk_Anal_Under.png",
-                "Player.Sprite and Player.Cock != 'anal' and action_speed == 1", "Rogue_Anal_Spunk_Heading_Under",
+                "Player.sprite and Player.cock != 'anal' and action_speed >= 1", "images/KittySex/Kitty_Sex_Spunk_Anal_Under.png",
+                "Player.sprite and Player.cock != 'anal' and action_speed == 1", "Rogue_Anal_Spunk_Heading_Under",
                 "True", "images/KittySex/Kitty_Sex_Spunk_Anal_Closed.png",
                 )
     contains:
@@ -2157,7 +1483,7 @@ image Rogue_Sex_Anus:
         ConditionSwitch(
             "primary_action == 'finger_ass' or offhand_action == 'finger_ass'", AlphaMask("Rogue_Sex_FingerA_Anim1", "Rogue_Anal_Fucking_Mask"),
             "primary_action == 'dildo_anal'", AlphaMask("Rogue_Anal_Dildo_Anim2", "Rogue_Anal_Fucking_Mask"),
-            "not Player.Sprite or Player.Cock != 'anal'", Null(),
+            "not Player.sprite or Player.cock != 'anal'", Null(),
             "action_speed >= 3",  AlphaMask("Rogue_Anal_Zero_Anim3", "Rogue_Anal_Fucking_Mask"),
             "action_speed >= 2", AlphaMask("Rogue_Anal_Zero_Anim2", "Rogue_Anal_Fucking_Mask"),
             "action_speed ", AlphaMask("Rogue_Anal_Zero_Anim1", "Rogue_Anal_Fucking_Mask"),
@@ -2166,7 +1492,7 @@ image Rogue_Sex_Anus:
     contains:
 
         ConditionSwitch(
-                "'anal' not in RogueX.spunk or not Player.Sprite or Player.Cock != 'anal' or not action_speed", Null(),
+                "'anal' not in RogueX.spunk or not Player.sprite or Player.cock != 'anal' or not action_speed", Null(),
                 "action_speed == 1", "Rogue_Anal_Spunk_Heading_Over",
                 "True", "images/KittySex/Kitty_Sex_Spunk_Anal_Over.png",
                 )
@@ -2298,7 +1624,7 @@ image Rogue_Anal_Zero_Anim0:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (505,600)
         zoom 1.3
 
@@ -2306,7 +1632,7 @@ image Rogue_Anal_Zero_Anim1:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (505,600)
         zoom 1.3
         block:
@@ -2319,7 +1645,7 @@ image Rogue_Anal_Zero_Anim2:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (505,570)
         zoom 1.3
         block:
@@ -2332,7 +1658,7 @@ image Rogue_Anal_Zero_Anim3:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (505,570)
         zoom 1.3
         block:
@@ -2347,7 +1673,7 @@ image Rogue_Hotdog_Zero_Anim0:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (503,570)
         zoom 1.3
 
@@ -2355,7 +1681,7 @@ image Rogue_Hotdog_Zero_Anim1:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (503,500)
         zoom 1.3
         block:
@@ -2368,7 +1694,7 @@ image Rogue_Hotdog_Zero_Anim2:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (503,510)
         zoom 1.3
         block:
@@ -2381,7 +1707,7 @@ image Rogue_Hotdog_Body_Anim2:
 
     contains:
         subpixel True
-        "Rogue_Sex_Body"
+        "Rogue_sex_body"
         pos (0,0)
         block:
 
@@ -2458,7 +1784,7 @@ image Rogue_Footcock_Zero_Anim2:
             repeat
     offset (0,-100)
 
-transform Rogue_Footcock_Zero_Anim1A:
+transform Rogue_Footcock_Zero_Anim1A():
     subpixel True
     offset (0,0)
     block:
@@ -2470,7 +1796,7 @@ transform Rogue_Footcock_Zero_Anim1A:
         ease 1.50 yoffset -30
         repeat
 
-transform Rogue_Footcock_Zero_Anim2A:
+transform Rogue_Footcock_Zero_Anim2A():
     subpixel True
     offset (0,0)
     block:
@@ -2487,7 +1813,7 @@ transform Rogue_Footcock_Zero_Anim2A:
         ease 1.00 yoffset -30
         repeat
 
-transform Rogue_Footcock_StaticA:
+transform Rogue_Footcock_StaticA():
     subpixel True
     offset (0,-5)
     block:
@@ -2539,7 +1865,7 @@ image Rogue_Sex_Legs_FootAnimStatic:
         pos (0,0)
     offset (0,100)
 
-transform Rogue_Sex_Legs_FootAnim1A:
+transform Rogue_Sex_Legs_FootAnim1A():
 
     subpixel True
     offset (0,0)
@@ -2552,7 +1878,7 @@ transform Rogue_Sex_Legs_FootAnim1A:
         ease 1.50 yoffset 25
         repeat
 
-transform Rogue_Sex_Legs_FootAnim2A:
+transform Rogue_Sex_Legs_FootAnim2A():
 
     subpixel True
     offset (0,0)
@@ -2570,7 +1896,7 @@ transform Rogue_Sex_Legs_FootAnim2A:
         ease 1.0 yoffset 25
         repeat
 
-transform Rogue_Sex_Legs_FootAnimStaticA:
+transform Rogue_Sex_Legs_FootAnimStaticA():
 
     subpixel True
     offset (0,0)
@@ -2586,11 +1912,11 @@ transform Rogue_Sex_Legs_FootAnimStaticA:
 
 
 
-image Rogue_Sex_Body_FootAnim1:
+image Rogue_sex_body_FootAnim1:
 
     contains:
         subpixel True
-        "Rogue_Sex_Body"
+        "Rogue_sex_body"
         pos (0,0)
         block:
 
@@ -2603,11 +1929,11 @@ image Rogue_Sex_Body_FootAnim1:
 
     offset (0,100)
 
-image Rogue_Sex_Body_FootAnim2:
+image Rogue_sex_body_FootAnim2:
 
     contains:
         subpixel True
-        "Rogue_Sex_Body"
+        "Rogue_sex_body"
         pos (0,0)
         block:
 
@@ -2619,15 +1945,15 @@ image Rogue_Sex_Body_FootAnim2:
             repeat
     offset (0,100)
 
-image Rogue_Sex_Body_FootAnimStatic:
+image Rogue_sex_body_FootAnimStatic:
 
     contains:
         subpixel True
-        "Rogue_Sex_Body"
+        "Rogue_sex_body"
         pos (0,0)
     offset (0,100)
 
-transform Rogue_Sex_Body_FootAnim1A:
+transform Rogue_sex_body_FootAnim1A():
 
     subpixel True
     offset (0,0)
@@ -2640,7 +1966,7 @@ transform Rogue_Sex_Body_FootAnim1A:
         ease 1.50 yoffset 15
         repeat
 
-transform Rogue_Sex_Body_FootAnim2A:
+transform Rogue_sex_body_FootAnim2A():
 
     subpixel True
     offset (0,0)
@@ -2658,7 +1984,7 @@ transform Rogue_Sex_Body_FootAnim2A:
         ease 1.0 yoffset 15
         repeat
 
-transform Rogue_Sex_Body_FootAnimStaticA:
+transform Rogue_sex_body_FootAnimStaticA():
 
     subpixel True
     offset (0,0)
@@ -2678,26 +2004,26 @@ label Rogue_Sex_Launch(Line=primary_action):
     $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
 
     $ Line = "solo" if not Line else Line
-    $ Player.Sprite = 1
+    $ Player.sprite = 1
     if Line == "sex":
-        $ Player.Cock = "in"
+        $ Player.cock = "in"
         if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
             $ offhand_action = 0
     elif Line == "anal":
-        $ Player.Cock = "anal"
+        $ Player.cock = "anal"
         if offhand_action in ("finger_ass","dildo_anal","eat_ass"):
             $ offhand_action = 0
     elif Line == "hotdog":
-        $ Player.Cock = "out"
-    elif Line == "foot":
+        $ Player.cock = "out"
+    elif Line == "footjob":
         $ ShowFeet = 1
-        $ Player.Cock = "foot"
+        $ Player.cock = "footjob"
     elif Line == "massage":
-        $ Player.Sprite = 0
-        $ Player.Cock = 0
+        $ Player.sprite = 0
+        $ Player.cock = 0
     else:
-        $ Player.Sprite = 0
-        $ Player.Cock = "out"
+        $ Player.sprite = 0
+        $ Player.cock = "out"
         $ action_speed = 0
 
     if RogueX.pose == "doggy":
@@ -2715,7 +2041,7 @@ label Rogue_Sex_Launch(Line=primary_action):
     return
 
 label Rogue_Sex_Reset:
-    if renpy.showing("Rogue_Doggy_Animation"):
+    if renpy.showing("Rogue_doggy_animation"):
         call Rogue_Doggy_Reset
         return
     if not renpy.showing("Rogue_SexSprite"):
@@ -2735,74 +2061,14 @@ label Rogue_Sex_Reset:
 
 
 
-image Rogue_BJ_Head:
-    "Rogue_head"
-
-
-image Rogue_BJ_HairBack:
-    "Rogue_hairback"
-
-image Rogue_BJ_Backdrop:
-    "Rogue_body"
-
-
-
-image Rogue_BJ_MouthHeading:
-
-    contains:
-        ConditionSwitch(
-
-            "'mouth' in RogueX.spunk", "images/RogueBJFace/Rogue_bj_mouth_suckingS.png",
-            "True", "images/RogueBJFace/Rogue_bj_mouth_sucking.png",
-            )
-
-        anchor (0.40,0.65)
-
-image Rogue_BJ_MaskHeading:
-
-    contains:
-        "images/RogueBJFace/Rogue_bj_facemask.png"
-        anchor (0.4,0.65)
-
-image Rogue_BJ_MaskHeadingComposite:
-
-    LiveComposite(
-        (787,913),
-        (316,590), ConditionSwitch(
-            "action_speed == 2", At("Rogue_BJ_MaskHeading", Rogue_BJ_MouthAnim()),
-            "True", Null(),
-            ),
-        )
-
-transform Rogue_BJ_MouthAnim:
-
-    subpixel True
-    zoom 0.90
-    block:
-        pause .10
-        easeout .55 zoom 0.9
-        linear .10 zoom 0.87
-        easein .30 zoom 0.9
-        pause .15
-        easeout .40 zoom 0.87
-        linear .10 zoom 0.9
-        easein .45 zoom 0.70
-        pause .35
-        repeat
 
 
 
 
-transform Rogue_BJ_Static:
 
-    subpixel True
-    ease 1.5 offset (0,0)
-    repeat
 
-transform Rogue_BJ_StaticBody:
 
-    subpixel True
-    ease 1.5 offset (0,0)
+
 
 
 
@@ -2875,25 +2141,6 @@ label Rogue_BJ_Reset:
 
 
 
-
-transform Zero_BJ_Static:
-    anchor (.5,.5)
-
-    rotate -10
-
-
-transform Zero_BJ_Sucking:
-    anchor (.5,.5)
-    rotate 0
-
-transform Zero_BJ_Licking:
-    subpixel True
-    block:
-        ease 2 rotate -5
-        pause .5
-        ease 2.5 rotate 0
-        repeat
-
 image Zero_Zero_cock_blowjob:
     LiveComposite(
         (175,946),
@@ -2922,7 +2169,7 @@ image Zero_Zero_cock_blowjob:
 
 image Rogue_TJ_Under:
     contains:
-        "Rogue_BJ_HairBack"
+        "Rogue_blowjob_hairback"
         pos (150, -560)
         zoom .95
     contains:
@@ -2933,7 +2180,7 @@ image Rogue_TJ_Under:
             "True", Null(),
             ),
     contains:
-        "Rogue_BJ_Head"
+        "Rogue_blowjob_head"
         pos (150, -560)
         zoom .95
     pos (-60, 200)
@@ -2953,7 +2200,7 @@ image Rogue_TJ_Over:
     pos (-60, 200)
 
 
-transform Rogue_TJ_Under_1:
+transform Rogue_TJ_Under_1():
     ypos 200
     subpixel True
     block:
@@ -2962,7 +2209,7 @@ transform Rogue_TJ_Under_1:
         easein 1.3 ypos 120
         repeat
 
-transform Rogue_TJ_Over_1:
+transform Rogue_TJ_Over_1():
     ypos 200
     subpixel True
     block:
@@ -2971,7 +2218,7 @@ transform Rogue_TJ_Over_1:
         easein 1.2 ypos 120
         repeat
 
-transform Rogue_TJ_Under_2:
+transform Rogue_TJ_Under_2():
     ypos 200
     subpixel True
     block:
@@ -2980,7 +2227,7 @@ transform Rogue_TJ_Under_2:
         ease .1 ypos 125
         repeat
 
-transform Rogue_TJ_Over_2:
+transform Rogue_TJ_Over_2():
     ypos 200
     subpixel True
     block:
@@ -2990,13 +2237,13 @@ transform Rogue_TJ_Over_2:
         repeat
 
 
-transform Zero_TJ_Cock:
+transform Zero_TJ_Cock():
 
     anchor (.5,.5)
     pos (440,1020)
     rotate 0
 
-transform Zero_TJ_Cock_1:
+transform Zero_TJ_Cock_1():
     pos (440,1020)
     subpixel True
     block:
@@ -3005,7 +2252,7 @@ transform Zero_TJ_Cock_1:
         easein 1.3 ypos 1020
         repeat
 
-transform Zero_TJ_Cock_2:
+transform Zero_TJ_Cock_2():
     pos (440,1020)
     subpixel True
     block:
@@ -3149,7 +2396,7 @@ image Rogue_Hand_Over:
     anchor (0.5,0.5)
     pos (0,0)
 
-transform Handcock_1:
+transform Handcock_1():
     subpixel True
     rotate_pad False
     ease .5 ypos 450 rotate -2
@@ -3158,7 +2405,7 @@ transform Handcock_1:
     pause 0.1
     repeat
 
-transform Handcock_2:
+transform Handcock_2():
     subpixel True
     rotate_pad False
     ease .2 ypos 430 rotate -3
@@ -3166,7 +2413,7 @@ transform Handcock_2:
     pause 0.1
     repeat
 
-transform Rogue_Hand_1:
+transform Rogue_Hand_1():
     subpixel True
     ease .5 ypos 150 rotate 5
     pause 0.25
@@ -3174,7 +2421,7 @@ transform Rogue_Hand_1:
     pause 0.1
     repeat
 
-transform Rogue_Hand_2:
+transform Rogue_Hand_2():
     subpixel True
     ease 0.2 ypos 0 rotate 3
     pause 0.1
@@ -3275,7 +2522,7 @@ label Rogue_HJ_Reset:
 
 
 
-transform Vibrate:
+transform Vibrate():
     subpixel True
     block:
         linear .5 xoffset 2
@@ -4122,7 +3369,7 @@ label Rogue_Pos_Reset(T=0, Set=0):
 label Rogue_Hide(Sprite=0):
     call Rogue_Sex_Reset
     hide Rogue_SexSprite
-    hide Rogue_Doggy_Animation
+    hide Rogue_doggy_animation
     hide Rogue_HJ_Animation
     hide Rogue_blowjob_animation
     hide Rogue_TJ_Animation
@@ -4242,7 +3489,7 @@ label XavierFace(Face=Xavier_emotion):
         $ Xavier_brows = "_happy"
         $ Xavier_eyes = "_happy"
         $ Xavier_psychic = 0
-    if Face == "_angry":
+    if Face == "angry":
         $ Xavier_mouth = "concentrate"
         $ Xavier_brows = "concentrate"
         $ Xavier_eyes = "_happy"
@@ -4329,10 +3576,10 @@ label GwenFace(emotion="normal", B=G_Blush, M=0, Mouth=0, Eyes=0, Brows=0):
         $ G_Mouth = "normal"
         $ G_Brows = "normal"
         $ G_Eyes = "normal"
-    elif emotion == "_angry":
+    elif emotion == "angry":
         $ G_Mouth = "kiss"
-        $ G_Brows = "_angry"
-        $ G_Eyes = "_angry"
+        $ G_Brows = "angry"
+        $ G_Eyes = "angry"
     elif emotion == "closed":
         $ G_Mouth = "normal"
         $ G_Brows = "_sad"
@@ -4376,8 +3623,8 @@ label Gwen_FaceEditor:
             "Brows=[G_Brows], Eyes=[G_Eyes], Mouth=[G_Mouth]"
             "Toggle Brows":
                 if G_Brows == "normal":
-                    $ G_Brows = "_angry"
-                elif G_Brows == "_angry":
+                    $ G_Brows = "angry"
+                elif G_Brows == "angry":
                     $ G_Brows = "_confused"
                 elif G_Brows == "_confused":
                     $ G_Brows = "_sad"
@@ -4761,28 +4008,5 @@ image Silhouettes:
         AlphaMask("SilhouetteBase","Storm_Sprite")
 
 
-image Lick_Anim:
-    anchor (0.5, 0.5)
-    parallel:
-        "images/Lick1.png"
-        .8
-        "images/Lick6.png"
-        .2
-        "images/Lick2.png"
-        .2
-        "images/Lick3.png"
-        .2
-        "images/Lick4.png"
-        .8
-        "images/Lick3.png"
-        .1
-        "images/Lick2.png"
-        .1
-        repeat
-    parallel:
-        pause .6
-        easein .7 yoffset -15
-        pause .3
-        easein .8 yoffset 0
-        repeat
+
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

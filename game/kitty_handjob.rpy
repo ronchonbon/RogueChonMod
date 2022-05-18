@@ -3141,7 +3141,7 @@ label Kitty_Footjob:
                     $ KittyX.change_stat("obedience", 30, 2)
                     return
             if primary_action:
-                $ girl_offhand_action = "foot"
+                $ girl_offhand_action = "footjob"
                 return
             jump Kitty_FJ_Prep
         else:
@@ -3182,11 +3182,11 @@ label Kitty_Footjob:
             ch_k "That's all?"
         elif not Taboo and "no_taboo" in KittyX.daily_history:
             ch_k "Um, I guess this is secluded enough. . ."
-        elif "foot" in KittyX.recent_history:
+        elif "footjob" in KittyX.recent_history:
             $ KittyX.change_face("_sexy", 1)
             ch_k "I'm getting foot cramps. . ."
             jump Kitty_FJ_Prep
-        elif "foot" in KittyX.daily_history:
+        elif "footjob" in KittyX.daily_history:
             $ KittyX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Another one?",   
                 "You're going to give me calluses.", 
@@ -3339,7 +3339,7 @@ label Kitty_Footjob:
 
 
 label Kitty_FJ_Prep:
-    if offhand_action == "foot":
+    if offhand_action == "footjob":
         return
 
     if Taboo:
@@ -3374,13 +3374,13 @@ label Kitty_FJ_Prep:
     if Taboo:
         $ KittyX.drain_word("no_taboo")
     $ KittyX.drain_word("no_foot")
-    $ KittyX.recent_history.append("foot")
-    $ KittyX.daily_history.append("foot")
+    $ KittyX.recent_history.append("footjob")
+    $ KittyX.daily_history.append("footjob")
 
 label Kitty_FJ_Cycle:
     while Round > 0:
         call shift_focus (KittyX)
-        call Kitty_Sex_Launch ("foot")
+        call Kitty_Sex_Launch ("footjob")
         $ KittyX.lust_face()
 
         if Player.focus < 100:

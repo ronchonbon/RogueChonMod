@@ -2069,7 +2069,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
     if Girl.action_counter["fondle_pussy"] and approval_check(Girl, 1000) and GirlBonus >=10:
         $ OptionsDS.append("pussy")
     if approval_check(Girl, 1000) and GirlBonus >=10:
-        $ OptionsDS.append("foot")
+        $ OptionsDS.append("footjob")
 
     $ renpy.random.shuffle(OptionsDS)
 
@@ -2387,7 +2387,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
             $ Girl.recent_history.append("fondle_pussy")
             $ Girl.recent_history.append("dinnersex")
             $ Girl.daily_history.append("fondle_pussy")
-    elif OptionsDS[0] == "foot":
+    elif OptionsDS[0] == "footjob":
         "Halfway through the meal, [Girl.name] gets a sly look on her face, then shifts a bit lower in her seat."
         "You suddenly feel her foot in your lap, gently caressing your cock."
         call Date_Sex_Break (Girl, Previous)

@@ -5573,7 +5573,7 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
         $ approval = approval_check(Girl,1000,Bonus=Mod, TabM = (TabooM* 3 ))
     elif primary_action == "handjob" or girl_offhand_action == "handjob":
         $ approval = approval_check(Girl,1100,Bonus=Mod, TabM = (TabooM* 2 ))
-    elif primary_action == "foot":
+    elif primary_action == "footjob":
         $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
     elif primary_action == "dildo_anal":
         $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))

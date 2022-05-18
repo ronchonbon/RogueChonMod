@@ -3,7 +3,7 @@
 image Storm_Sprite:
     LiveComposite(
         (450,950),
-        (53,-45), "Storm_Sprite_HairBack",
+        (53,-45), "Storm_Sprite_hairback",
         (0,0), ConditionSwitch(
 
             "StormX.legs == 'skirt'", "images/StormSprite/Storm_Sprite_Legs_SkirtB.png",
@@ -527,7 +527,7 @@ image Storm_Sprite:
     yoffset 15
     zoom .75
 
-image Storm_Sprite_HairBack:
+image Storm_Sprite_hairback:
     contains:
         ConditionSwitch(
 
@@ -895,7 +895,7 @@ image Storm_Sex_Body:
     LiveComposite(
 
         (1120,840),
-        (245,-225), "Storm_HairBack_Sex",
+        (245,-225), "Storm_hairback_Sex",
         (0,0), "images/StormSex/Storm_Sex_Body.png",
 
 
@@ -1002,9 +1002,9 @@ image Storm_Head_Sex:
     anchor (0.5,0.5)
     rotate -7
 
-image Storm_HairBack_Sex:
+image Storm_hairback_Sex:
 
-    "Storm_Sprite_HairBack"
+    "Storm_Sprite_hairback"
     zoom 1.25
     anchor (0.5,0.5)
     rotate -7
@@ -1128,7 +1128,7 @@ image Storm_Sex_Tits:
 
 
 image Storm_Sex_Lick_Breasts:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (400,350)
 
@@ -1473,12 +1473,12 @@ image Storm_Sex_Pussy:
 
 
 image Storm_Sex_Lick_Pussy:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (535,500)
 
 image Storm_Sex_Lick_Ass:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (535,550)
 
@@ -2637,9 +2637,9 @@ label Storm_Sex_Launch(Line=primary_action):
         if StormX.PantsNum() == 5:
             $ StormX.upskirt = 1
         $ Player.cock_position = "out"
-    elif Line == "foot":
+    elif Line == "footjob":
         $ ShowFeet = 1
-        $ Player.cock_position = "foot"
+        $ Player.cock_position = "footjob"
     elif Line == "massage":
         $ Player.sprite = 0
         $ Player.cock_position = 0
@@ -2872,7 +2872,7 @@ image Storm_BJ_Animation:
     zoom .55
     anchor (.5,.5)
 
-image Storm_BJ_HairBack:
+image Storm_BJ_hairback:
 
     ConditionSwitch(
             "(StormX.hair == 'long' and StormX.Water) or StormX.hair == 'wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Under.png",
@@ -3344,7 +3344,7 @@ image Storm_BJ_Anim0:
 
     contains:
 
-        "Storm_BJ_HairBack"
+        "Storm_BJ_hairback"
         subpixel True
         offset (350,210)
     contains:
@@ -3369,7 +3369,7 @@ image Storm_BJ_Anim1:
 
     contains:
 
-        "Storm_BJ_HairBack"
+        "Storm_BJ_hairback"
         subpixel True
 
         offset (350,175)
@@ -3417,7 +3417,7 @@ image Storm_BJ_Anim2:
 
     contains:
 
-        "Storm_BJ_HairBack"
+        "Storm_BJ_hairback"
         subpixel True
 
         offset (350,190)
@@ -3482,7 +3482,7 @@ image Storm_BJ_Anim3:
 
     contains:
 
-        "Storm_BJ_HairBack"
+        "Storm_BJ_hairback"
         subpixel True
         offset (350,260)
         block:
@@ -3544,7 +3544,7 @@ image Storm_BJ_Anim4:
 
     contains:
 
-        "Storm_BJ_HairBack"
+        "Storm_BJ_hairback"
         subpixel True
 
         offset (350,360)
@@ -3624,7 +3624,7 @@ image Storm_BJ_Anim5:
 
     contains:
 
-        "Storm_BJ_HairBack"
+        "Storm_BJ_hairback"
         subpixel True
         offset (350,200)
         block:
@@ -3680,7 +3680,7 @@ image Storm_BJ_Anim6:
 
     contains:
 
-        "Storm_BJ_HairBack"
+        "Storm_BJ_hairback"
         subpixel True
         offset (350,440)
         block:
@@ -3844,9 +3844,9 @@ image Storm_TJ_Animation:
 
 
 
-image Storm_TJ_HairBack:
+image Storm_TJ_hairback:
 
-    "Storm_BJ_HairBack"
+    "Storm_BJ_hairback"
     transform_anchor True
     zoom .7
     anchor (0.5, 0.5)
@@ -4137,7 +4137,7 @@ image Storm_TJ_0:
             repeat
     contains:
 
-        "Storm_TJ_HairBack"
+        "Storm_TJ_hairback"
         subpixel True
         pos (0,0)
         transform_anchor True
@@ -4294,7 +4294,7 @@ image Storm_TJ_1:
     contains:
 
 
-        "Storm_TJ_HairBack"
+        "Storm_TJ_hairback"
         subpixel True
         pos (0,60)
         transform_anchor True
@@ -4459,7 +4459,7 @@ image Storm_TJ_2:
             repeat
     contains:
 
-        "Storm_TJ_HairBack"
+        "Storm_TJ_hairback"
         subpixel True
         pos (0,80)
         transform_anchor True
@@ -4601,7 +4601,7 @@ image Storm_TJ_3:
             repeat
     contains:
 
-        "Storm_TJ_HairBack"
+        "Storm_TJ_hairback"
         subpixel True
         pos (0,140)
         transform_anchor True
@@ -4746,7 +4746,7 @@ image Storm_TJ_4:
             repeat
     contains:
 
-        "Storm_TJ_HairBack"
+        "Storm_TJ_hairback"
         subpixel True
         pos (0,0)
         transform_anchor True
@@ -4885,7 +4885,7 @@ image Storm_TJ_5:
             repeat
     contains:
 
-        "Storm_TJ_HairBack"
+        "Storm_TJ_hairback"
         subpixel True
         pos (0,130)
         transform_anchor True

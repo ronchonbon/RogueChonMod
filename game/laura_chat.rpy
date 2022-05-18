@@ -646,10 +646,10 @@ label Laura_SexChat:
                         "Footjobs.":
 
                             $ LauraX.change_face("_sly")
-                            if LauraX.player_favorite_action == "foot":
+                            if LauraX.player_favorite_action == "footjob":
                                 $ LauraX.change_stat("lust", 80, 5)
                                 ch_l "Yeah, you've said that. . ."
-                            elif LauraX.favorite_action == "foot":
+                            elif LauraX.favorite_action == "footjob":
                                 $ LauraX.change_stat("love", 90, 5)
                                 $ LauraX.change_stat("lust", 80, 7)
                                 ch_l "I do like using my feet. . ."
@@ -661,7 +661,7 @@ label Laura_SexChat:
                             else:
                                 $ LauraX.change_face("_bemused")
                                 ch_l "Yeah, it's nice. . ."
-                            $ LauraX.player_favorite_action = "foot"
+                            $ LauraX.player_favorite_action = "footjob"
                         "Handjobs.":
 
                             $ LauraX.change_face("_sly")
@@ -756,7 +756,7 @@ label Laura_SexChat:
                         ch_l "I like how your cock tastes."
                     elif LauraX.favorite_action == "titjob":
                         ch_l "When I use my tits."
-                    elif LauraX.favorite_action == "foot":
+                    elif LauraX.favorite_action == "footjob":
                         ch_l "Footjobs are pretty fun."
                     elif LauraX.favorite_action == "handjob":
                         ch_l "I like jerking you off."

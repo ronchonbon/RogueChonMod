@@ -3124,7 +3124,7 @@ label Laura_Footjob:
                     $ LauraX.change_stat("obedience", 30, 2)
                     return
             if primary_action:
-                $ girl_offhand_action = "foot"
+                $ girl_offhand_action = "footjob"
                 return
             jump Laura_FJ_Prep
         else:
@@ -3165,7 +3165,7 @@ label Laura_Footjob:
             ch_l "That's it?"
         elif not Taboo and "no_taboo" in LauraX.daily_history:
             ch_l "Um, I guess this is secure enough. . ."
-        elif "foot" in LauraX.daily_history:
+        elif "footjob" in LauraX.daily_history:
             $ LauraX.change_face("_sexy", 1)
             ch_l "More of that, huh. . ."
             jump Laura_FJ_Prep
@@ -3321,7 +3321,7 @@ label Laura_Footjob:
 
 
 label Laura_FJ_Prep:
-    if offhand_action == "foot":
+    if offhand_action == "footjob":
         return
 
     if Taboo:
@@ -3356,13 +3356,13 @@ label Laura_FJ_Prep:
     if Taboo:
         $ LauraX.drain_word("no_taboo")
     $ LauraX.drain_word("no_foot")
-    $ LauraX.recent_history.append("foot")
-    $ LauraX.daily_history.append("foot")
+    $ LauraX.recent_history.append("footjob")
+    $ LauraX.daily_history.append("footjob")
 
 label Laura_FJ_Cycle:
     while Round > 0:
         call shift_focus (LauraX)
-        call Laura_Sex_Launch ("foot")
+        call Laura_Sex_Launch ("footjob")
         $ LauraX.lust_face()
 
         if Player.focus < 100:

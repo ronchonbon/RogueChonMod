@@ -3112,7 +3112,7 @@ label Emma_Footjob:
                     $ EmmaX.change_stat("obedience", 30, 2)
                     return
             if primary_action:
-                $ girl_offhand_action = "foot"
+                $ girl_offhand_action = "footjob"
                 return
             jump Emma_FJ_Prep
         else:
@@ -3153,11 +3153,11 @@ label Emma_Footjob:
             ch_e "That's it?"
         elif not Taboo and "no_taboo" in EmmaX.daily_history:
             ch_e "Um, I suppose this is secluded enough. . ."
-        elif "foot" in EmmaX.recent_history:
+        elif "footjob" in EmmaX.recent_history:
             $ EmmaX.change_face("_sexy", 1)
             ch_e "You know, heels are nightmare on the arches. . ."
             jump Emma_FJ_Prep
-        elif "foot" in EmmaX.daily_history:
+        elif "footjob" in EmmaX.daily_history:
             $ EmmaX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Another?",   
                 "I'd rather not get calluses.", 
@@ -3310,7 +3310,7 @@ label Emma_Footjob:
 
 
 label Emma_FJ_Prep:
-    if offhand_action == "foot":
+    if offhand_action == "footjob":
         return
 
     if Taboo:
@@ -3344,13 +3344,13 @@ label Emma_FJ_Prep:
     if Taboo:
         $ EmmaX.drain_word("no_taboo")
     $ EmmaX.drain_word("no_foot")
-    $ EmmaX.recent_history.append("foot")
-    $ EmmaX.daily_history.append("foot")
+    $ EmmaX.recent_history.append("footjob")
+    $ EmmaX.daily_history.append("footjob")
     ch_e "Did you want me facing you, or from behind?"
     menu:
         extend ""
         "Facing me":
-            $ EmmaX.pose = "foot"
+            $ EmmaX.pose = "footjob"
         "From behind.":
             $ EmmaX.pose = "doggy"
 
@@ -3382,7 +3382,7 @@ label Emma_FJ_Cycle:
                     pass
                 "Turn her Around":
 
-                    $ EmmaX.pose = "doggy" if EmmaX.pose != "doggy" else "foot"
+                    $ EmmaX.pose = "doggy" if EmmaX.pose != "doggy" else "footjob"
                     "You turn her around. . ."
                     jump Emma_FJ_Cycle
 

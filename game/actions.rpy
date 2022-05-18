@@ -40,7 +40,7 @@ label action(Girl):
             return
 
     if action_context == "pullback":
-        call pullback_reactions(Girl)
+        call pullback_reactions(Girl, primary_action)
         jump before_action
     elif primary_action in anal_insertion_actions and not Girl.used_to_anal and ("finger_ass" in Girl.daily_history or "dildo_anal" in Girl.daily_history or "anal" in Girl.daily_history):
         call ass_sore_reactions(Girl)
@@ -475,7 +475,7 @@ label before_action:
     elif primary_action in breast_actions:
         call expression focused_Girl.tag + "_Breasts_Launch" pass(primary_action)
     elif primary_action == "footjob":
-        call expression focused_Girl.tag + "_Sex_Launch" pass(footjob)
+        call expression focused_Girl.tag + "_Sex_Launch" pass(primary_action)
 
 label action_cycle:
     if primary_action in mouth_actions:
@@ -1055,7 +1055,7 @@ label end_of_action_round(Girl, action):
 
             $ Girl.change_stat("lust", 200, 5)
 
-            if 100 > Girl.lust >= 70 and Girl.OCount < 2 and Girl.SEXP >= 20:
+            if 100 > Girl.lust >= 70 and Girl.event_counter["orgasmed"] < 2 and Girl.SEXP >= 20:
                 $ Girl.add_word(0, "unsatisfied", "unsatisfied")
 
             if Player.focus > 80:

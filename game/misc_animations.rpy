@@ -1,18 +1,20 @@
 layeredimage Xavier_sprite:
     always:
-        "images/NPC/Xavier_body.png" anchor (0.5, 0) offset (0, 150) zoom 1.1
+        "images/NPC/Xavier_body.png"
 
     always:
-        "images/NPC/Xavier_brows[Xavier_brows].png" anchor (0.5, 0) offset (0, 150) zoom 1.1
+        "images/NPC/Xavier_brows[Xavier_brows].png"
 
     always:
-        "images/NPC/Xavier_mouth[Xavier_mouth].png" anchor (0.5, 0) offset (0, 150) zoom 1.1
+        "images/NPC/Xavier_mouth[Xavier_mouth].png"
 
     always:
-        "Xavier_blinking" anchor (0.5, 0) offset (0, 150) zoom 1.1
+        "Xavier_blinking"
 
     if Xavier_psychic:
-        "images/NPC/Xavier_psychic.png" anchor (0.5, 0) offset (0, 150) zoom 1.1
+        "images/NPC/Xavier_psychic.png"
+
+    size (429, 521) anchor (0.5, 0) offset (0, 150) zoom 1.1
 
 layeredimage Xavier_eyes:
     always:
@@ -68,6 +70,7 @@ layeredimage background:
     if not entering and bg_current == "bg_classroom" and time_index < 2 and Weekday < 5:
         "images/background/bg_classroom_pupils.png"
 
+    size (1024, 768)
 
 image grool_dripping:
     contains:
@@ -196,3 +199,28 @@ transform spunk_drip(x_position, y_position, start):
     easeout 2.5 ypos y_position + start
     easeout 0.9 ypos y_position + 350
     alpha 0
+
+image licking:
+    anchor (0.5, 0.5)
+    parallel:
+        "images/Lick1.png"
+        0.8
+        "images/Lick6.png"
+        0.2
+        "images/Lick2.png"
+        0.2
+        "images/Lick3.png"
+        0.2
+        "images/Lick4.png"
+        0.8
+        "images/Lick3.png"
+        0.1
+        "images/Lick2.png"
+        0.1
+        repeat
+    parallel:
+        pause 0.6
+        easein 0.7 yoffset -15
+        pause 0.3
+        easein 0.8 yoffset 0
+        repeat

@@ -749,10 +749,10 @@ label Emma_SexChat:
                         "Footjobs.":
 
                             $ EmmaX.change_face("_sly")
-                            if EmmaX.player_favorite_action == "foot":
+                            if EmmaX.player_favorite_action == "footjob":
                                 $ EmmaX.change_stat("lust", 80, 5)
                                 ch_e "Yes, so you've said. . ."
-                            elif EmmaX.favorite_action == "foot":
+                            elif EmmaX.favorite_action == "footjob":
                                 $ EmmaX.change_stat("love", 90, 5)
                                 $ EmmaX.change_stat("lust", 80, 7)
                                 ch_e "It certainly is a diversion. . ."
@@ -764,7 +764,7 @@ label Emma_SexChat:
                             else:
                                 $ EmmaX.change_face("_bemused")
                                 ch_e "It certainly is a diversion. . ."
-                            $ EmmaX.player_favorite_action = "foot"
+                            $ EmmaX.player_favorite_action = "footjob"
                         "Handjobs.":
 
                             $ EmmaX.change_face("_sly")
@@ -857,7 +857,7 @@ label Emma_SexChat:
                         ch_e "I quite enjoy sucking you, is that a problem?"
                     elif EmmaX.favorite_action == "titjob":
                         ch_e "I enjoy using my tits."
-                    elif EmmaX.favorite_action == "foot":
+                    elif EmmaX.favorite_action == "footjob":
                         ch_e "I do enjoy using my feet."
                     elif EmmaX.favorite_action == "handjob":
                         ch_e "I enjoy stroking you off."

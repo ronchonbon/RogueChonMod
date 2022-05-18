@@ -700,10 +700,10 @@ label Kitty_SexChat:
                         "Footjobs.":
 
                             $ KittyX.change_face("_sly")
-                            if KittyX.player_favorite_action == "foot":
+                            if KittyX.player_favorite_action == "footjob":
                                 $ KittyX.change_stat("lust", 80, 5)
                                 ch_k "Yeah, you've said that. . ."
-                            elif KittyX.favorite_action == "foot":
+                            elif KittyX.favorite_action == "footjob":
                                 $ KittyX.change_stat("love", 90, 5)
                                 $ KittyX.change_stat("lust", 80, 7)
                                 ch_k "You do feel pretty nice. . ."
@@ -715,7 +715,7 @@ label Kitty_SexChat:
                             else:
                                 $ KittyX.change_face("_bemused")
                                 ch_k "Yeah, it's nice. . ."
-                            $ KittyX.player_favorite_action = "foot"
+                            $ KittyX.player_favorite_action = "footjob"
                         "Handjobs.":
 
                             $ KittyX.change_face("_sly")
@@ -813,7 +813,7 @@ label Kitty_SexChat:
                         ch_k "I kinda like to suck your cock."
                     elif KittyX.favorite_action == "titjob":
                         ch_k "I don't mind using my tits."
-                    elif KittyX.favorite_action == "foot":
+                    elif KittyX.favorite_action == "footjob":
                         ch_k "I kinda like giving footjobs."
                     elif KittyX.favorite_action == "handjob":
                         ch_k "I like jerking you off."

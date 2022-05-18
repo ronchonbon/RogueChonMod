@@ -5130,7 +5130,7 @@ label Favorite_Actions(Chr=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp=
                 $ BTemp += 20
             elif Chr.player_favorite_action == "titjob":
                 $ TTemp += 20
-            elif Chr.player_favorite_action == "foot":
+            elif Chr.player_favorite_action == "footjob":
                 $ XTemp += 20
             elif Chr.player_favorite_action == "handjob":
                 $ HTemp += 20
@@ -5145,7 +5145,7 @@ label Favorite_Actions(Chr=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp=
                 $ BTemp += 5
             elif Chr.player_favorite_action == "titjob":
                 $ TTemp += 5
-            elif Chr.player_favorite_action == "foot":
+            elif Chr.player_favorite_action == "footjob":
                 $ XTemp += 5
             elif Chr.player_favorite_action == "handjob":
                 $ HTemp += 5
@@ -5181,7 +5181,7 @@ label Favorite_Actions(Chr=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp=
         elif D20F <= ATemp + PTemp + BTemp + TTemp:
             $ Temp = "titjob"
         elif D20F <= ATemp + PTemp + BTemp + TTemp + XTemp + HTemp:
-            $ Temp = "foot"
+            $ Temp = "footjob"
         elif D20F <= ATemp + PTemp + BTemp + TTemp + XTemp + HTemp:
             $ Temp = "handjob"
         elif D20F <= ATemp + PTemp + BTemp + TTemp + XTemp + HTemp + FTemp:

@@ -671,10 +671,10 @@ label Rogue_SexChat:
                         "Footjobs.":
 
                             $ RogueX.change_face("_sly")
-                            if RogueX.player_favorite_action == "foot":
+                            if RogueX.player_favorite_action == "footjob":
                                 $ RogueX.change_stat("lust", 80, 5)
                                 ch_r "Yeah, you've said that before. . ."
-                            elif RogueX.favorite_action == "foot":
+                            elif RogueX.favorite_action == "footjob":
                                 $ RogueX.change_stat("love", 90, 5)
                                 $ RogueX.change_stat("lust", 80, 7)
                                 ch_r "I do enjoy that sensation. . ."
@@ -686,7 +686,7 @@ label Rogue_SexChat:
                             else:
                                 $ RogueX.change_face("_bemused")
                                 ch_r "I do like the sensation. . ."
-                            $ RogueX.player_favorite_action = "foot"
+                            $ RogueX.player_favorite_action = "footjob"
                         "Handjobs.":
 
                             $ RogueX.change_face("_sly")
@@ -786,7 +786,7 @@ label Rogue_SexChat:
                         ch_r "I like to work your cock with my tits."
                     elif RogueX.favorite_action == "handjob":
                         ch_r "I like the feel of your cock in my hand."
-                    elif RogueX.favorite_action == "foot":
+                    elif RogueX.favorite_action == "footjob":
                         ch_r "I kinda like to use my feet."
                     elif RogueX.favorite_action == "hotdog":
                         ch_r "I like it when you grind against me."

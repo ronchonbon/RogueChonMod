@@ -3,7 +3,7 @@
 image Laura_Sprite:
     LiveComposite(
         (402,965),
-        (0,0), "Laura_Sprite_HairBack",
+        (0,0), "Laura_Sprite_hairback",
         (0,0), ConditionSwitch(
 
             "not LauraX.underwear or not LauraX.underwear_pulled_down or (LauraX.legs and LauraX.legs != 'skirt' and not LauraX.upskirt)", Null(),
@@ -461,7 +461,7 @@ image Laura_Sprite:
     yoffset 15
     zoom .75
 
-image Laura_Sprite_HairBack:
+image Laura_Sprite_hairback:
     ConditionSwitch(
 
             "not LauraX.hair", Null(),
@@ -1132,8 +1132,8 @@ image Laura_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "Rogue_Doggy_Lick_Pussy",
-            "primary_action == 'eat_ass'", "Rogue_Doggy_Lick_Ass",
+            "primary_action == 'eat_pussy'", "Rogue_doggy_licking_pussy",
+            "primary_action == 'eat_ass'", "Rogue_doggy_licking_ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -1145,10 +1145,10 @@ image Laura_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "not Player.sprite or Player.cock_position != 'out'", Null(),
-            "LauraX.legs == 'skirt' and LauraX.upskirt and action_speed", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "LauraX.legs == 'skirt' and LauraX.upskirt", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
-            "action_speed ", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
-            "True", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "LauraX.legs == 'skirt' and LauraX.upskirt and action_speed", AlphaMask("Zero_hotdog_moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
+            "LauraX.legs == 'skirt' and LauraX.upskirt", AlphaMask("Zero_hotdog_static", "images/RogueDoggy/Rogue_Doggy_HotdogMask_Upskirt.png"),
+            "action_speed ", AlphaMask("Zero_hotdog_moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "True", AlphaMask("Zero_hotdog_static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             ),
 
 
@@ -1232,14 +1232,14 @@ image Zero_Laura_Hotdog_Static:
 
 
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         pos (175, 370)
 
 image Zero_Laura_Hotdog_Moving:
 
 
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         pos (175, 370)
         block:
             ease 1 ypos 330
@@ -1271,7 +1271,7 @@ image Zero_Laura_Doggy_Static:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (169,545)
         block:
             ease 1 ypos 540
@@ -1283,7 +1283,7 @@ image Zero_Laura_Doggy_Heading:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (171,545)
         block:
             ease 1 xpos 168 ypos 500
@@ -1294,7 +1294,7 @@ image Zero_Laura_Doggy_Heading:
 image Zero_Laura_Doggy_Fucking2:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (169,500)
         block:
             ease .5 ypos 440
@@ -1305,7 +1305,7 @@ image Zero_Laura_Doggy_Fucking2:
 image Zero_Laura_Doggy_Fucking3:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (169,500)
         block:
             ease .2 ypos 440
@@ -1630,7 +1630,7 @@ image Laura_Anal:
             )
     contains:
 
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,500)
 
 
@@ -1703,7 +1703,7 @@ image Laura_Anal_Heading:
 image Zero_Laura_Doggy_Anal_Heading:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,500)
         block:
             ease .5 ypos 450
@@ -1766,7 +1766,7 @@ image Laura_Doggy_Anal_Head_Ass:
 image Zero_Laura_Doggy_Anal1:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,460)
         block:
             ease .5 ypos 395
@@ -1854,7 +1854,7 @@ image Laura_Doggy_Fuck_Ass:
 image Zero_Laura_Doggy_Anal2:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,460)
         block:
             ease .2 ypos 395
@@ -1936,7 +1936,7 @@ image Laura_Doggy_Feet0:
             repeat
     contains:
         ConditionSwitch(
-                "Player.sprite", "Zero_Doggy_Up",
+                "Player.sprite", "Zero_cock_doggy_out",
                 "True", Null(),
                 )
         zoom 1.2
@@ -1963,7 +1963,7 @@ image Laura_Doggy_Feet1:
             ease 1 ypos 0
             repeat
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         zoom 1.2
         pos (160,480)
         block:
@@ -1991,7 +1991,7 @@ image Laura_Doggy_Feet2:
             ease .3 ypos 0
             repeat
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         zoom 1.2
         pos (160,480)
         block:
@@ -2207,9 +2207,9 @@ image Laura_SexSprite:
     anchor (.5,.5)
 
 
-image Laura_Sex_HairBack:
+image Laura_Sex_hairback:
 
-    "Laura_Sprite_HairBack"
+    "Laura_Sprite_hairback"
     transform_anchor True
     zoom 1.8
     anchor (0.5, 0.5)
@@ -2230,7 +2230,7 @@ image Laura_Sex_Head:
 image Laura_Sex_Body:
 
     contains:
-        "Laura_Sex_HairBack"
+        "Laura_Sex_hairback"
     contains:
 
 
@@ -2373,7 +2373,7 @@ image Laura_Sex_Body:
 
 
 image Laura_Sex_Lick_Breasts:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (565,290)
 
@@ -2522,12 +2522,12 @@ image Laura_Sex_Legs:
 
 
 image Laura_Sex_Lick_Pussy:
-    "Lick_Anim"
+    "licking"
     zoom 0.8
     offset (720,610)
 
 image Laura_Sex_Lick_Ass:
-    "Lick_Anim"
+    "licking"
     zoom 0.8
     offset (730,700)
 
@@ -2637,7 +2637,7 @@ image Laura_Sex_Zero_Anim_S0:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         zoom 1.7
         alpha 0.8
         pos (125,170)
@@ -2697,7 +2697,7 @@ image Laura_Sex_Zero_Anim_S1:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         zoom 1.7
         pos (125,115)
         block:
@@ -2769,7 +2769,7 @@ image Laura_Sex_Zero_Anim_S2:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         zoom 1.7
         pos (125,75)
         block:
@@ -2848,7 +2848,7 @@ image Laura_Sex_Zero_Anim_S3:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         zoom 1.7
         pos (125,75)
         block:
@@ -2920,7 +2920,7 @@ image Laura_Sex_Zero_Anim_S4:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         zoom 1.7
         pos (125,-60)
         block:
@@ -2983,7 +2983,7 @@ image Laura_Sex_Zero_Anim_A0:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         zoom 1.7
         pos (125,115)
         block:
@@ -3044,7 +3044,7 @@ image Laura_Sex_Zero_Anim_A1:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         zoom 1.7
         pos (125,115)
         block:
@@ -3116,7 +3116,7 @@ image Laura_Sex_Zero_Anim_A2:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         zoom 1.7
         pos (125,75)
         block:
@@ -3187,7 +3187,7 @@ image Laura_Sex_Zero_Anim_A3:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         zoom 1.7
         pos (125,75)
         block:
@@ -3259,7 +3259,7 @@ image Laura_Sex_Zero_Anim_A4:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         zoom 1.7
         pos (125,-60)
         block:
@@ -3322,7 +3322,7 @@ image Laura_Sex_Zero_Anim_H0:
     contains:
         subpixel True
         ConditionSwitch(
-            "Player.sprite", "Zero_Doggy_Insert",
+            "Player.sprite", "Zero_cock_doggy_in",
             "True", Null(),
             )
 
@@ -3386,7 +3386,7 @@ image Laura_Sex_Zero_Anim_H1:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         zoom 1.7
         alpha 0.8
         pos (125,250)
@@ -3446,7 +3446,7 @@ image Laura_Sex_Zero_Anim_H2:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         zoom 1.7
         alpha 0.8
         pos (125,230)
@@ -3755,7 +3755,7 @@ image Laura_Sex_Zero_AnimX:
     contains:
         subpixel True
 
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
 
         zoom 1.6
         alpha 0.5
@@ -3848,9 +3848,9 @@ label Laura_Sex_Launch(Line=primary_action):
         $ Player.cock_position = "out"
     elif Line == "hotdog":
         $ Player.cock_position = "out"
-    elif Line == "foot":
+    elif Line == "footjob":
         $ ShowFeet = 1
-        $ Player.cock_position = "foot"
+        $ Player.cock_position = "footjob"
     elif Line == "massage":
         $ Player.sprite = 0
         $ Player.cock_position = 0
@@ -3941,7 +3941,7 @@ image Laura_BJ_Animation:
 
 
 
-image Laura_Sprite_BJ_HairBack:
+image Laura_Sprite_BJ_hairback:
 
 
     ConditionSwitch(
@@ -4093,7 +4093,7 @@ image Laura_BJ_Body_0:
 
     contains:
 
-        "Laura_Sprite_BJ_HairBack"
+        "Laura_Sprite_BJ_hairback"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (490,400)
@@ -4166,7 +4166,7 @@ image Laura_BJ_Body_1:
 
     contains:
 
-        "Laura_Sprite_BJ_HairBack"
+        "Laura_Sprite_BJ_hairback"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (535,340)
@@ -4279,7 +4279,7 @@ image Laura_BJ_Body_2:
 
     contains:
 
-        "Laura_Sprite_BJ_HairBack"
+        "Laura_Sprite_BJ_hairback"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (530,355)
@@ -4433,7 +4433,7 @@ image Laura_BJ_Body_3:
 
     contains:
 
-        "Laura_Sprite_BJ_HairBack"
+        "Laura_Sprite_BJ_hairback"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (523,380)
@@ -4586,7 +4586,7 @@ image Laura_BJ_Body_4:
 
     contains:
 
-        "Laura_Sprite_BJ_HairBack"
+        "Laura_Sprite_BJ_hairback"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (523,380)
@@ -4726,7 +4726,7 @@ image Laura_BJ_Body_5:
 
     contains:
 
-        "Laura_Sprite_BJ_HairBack"
+        "Laura_Sprite_BJ_hairback"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (520,375)
@@ -4882,7 +4882,7 @@ image Laura_BJ_Body_6:
 
     contains:
 
-        "Laura_Sprite_BJ_HairBack"
+        "Laura_Sprite_BJ_hairback"
         zoom 0.81
         anchor (0.5, 0.5)
         pos (481,500)
@@ -5278,9 +5278,9 @@ image Laura_TJ_Animation:
 
 
 
-image Laura_TJ_HairBack:
+image Laura_TJ_hairback:
 
-    "Laura_Sprite_HairBack"
+    "Laura_Sprite_hairback"
     transform_anchor True
     zoom 2.5
     anchor (0.5, 0.5)
@@ -5395,7 +5395,7 @@ image Laura_TJ_0:
 
     contains:
 
-        "Laura_TJ_HairBack"
+        "Laura_TJ_hairback"
         subpixel True
         pos (0,0)
         transform_anchor True
@@ -5589,7 +5589,7 @@ image Laura_TJ_1:
 
     contains:
 
-        "Laura_TJ_HairBack"
+        "Laura_TJ_hairback"
         subpixel True
         pos (0,150)
         transform_anchor True
@@ -5783,7 +5783,7 @@ image Laura_TJ_2:
 
     contains:
 
-        "Laura_TJ_HairBack"
+        "Laura_TJ_hairback"
         subpixel True
         pos (0,80)
         transform_anchor True
@@ -5959,7 +5959,7 @@ image Laura_TJ_4:
 
     contains:
 
-        "Laura_TJ_HairBack"
+        "Laura_TJ_hairback"
         subpixel True
         pos (0,0)
         transform_anchor True
@@ -6145,7 +6145,7 @@ image Laura_TJ_5:
 
     contains:
 
-        "Laura_TJ_HairBack"
+        "Laura_TJ_hairback"
         subpixel True
         pos (-30,155)
         transform_anchor True

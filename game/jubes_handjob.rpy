@@ -3158,7 +3158,7 @@ label Jubes_Footjob:
                     $ JubesX.change_stat("obedience", 30, 2)
                     return
             if primary_action:
-                $ girl_offhand_action = "foot"
+                $ girl_offhand_action = "footjob"
                 return
             jump Jubes_FJ_Prep
         else:
@@ -3199,7 +3199,7 @@ label Jubes_Footjob:
             ch_v "That's it?"
         elif not Taboo and "no_taboo" in JubesX.daily_history:
             ch_v "Um, I guess this is secure enough. . ."
-        elif "foot" in JubesX.daily_history:
+        elif "footjob" in JubesX.daily_history:
             $ JubesX.change_face("_sexy", 1)
             ch_v "More of that, huh. . ."
             jump Jubes_FJ_Prep
@@ -3355,7 +3355,7 @@ label Jubes_Footjob:
 
 
 label Jubes_FJ_Prep:
-    if offhand_action == "foot":
+    if offhand_action == "footjob":
         return
 
     if Taboo:
@@ -3390,13 +3390,13 @@ label Jubes_FJ_Prep:
     if Taboo:
         $ JubesX.drain_word("no_taboo")
     $ JubesX.drain_word("no_foot")
-    $ JubesX.recent_history.append("foot")
-    $ JubesX.daily_history.append("foot")
+    $ JubesX.recent_history.append("footjob")
+    $ JubesX.daily_history.append("footjob")
 
 label Jubes_FJ_Cycle:
     while Round > 0:
         call shift_focus (JubesX)
-        call Jubes_Sex_Launch ("foot")
+        call Jubes_Sex_Launch ("footjob")
         $ JubesX.lust_face()
 
         if Player.focus < 100:

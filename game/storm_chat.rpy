@@ -653,10 +653,10 @@ label Storm_SexChat:
                         "Footjobs.":
 
                             $ StormX.change_face("_sly")
-                            if StormX.player_favorite_action == "foot":
+                            if StormX.player_favorite_action == "footjob":
                                 $ StormX.change_stat("lust", 80, 5)
                                 ch_s "Yes, so you've said."
-                            elif StormX.favorite_action == "foot":
+                            elif StormX.favorite_action == "footjob":
                                 $ StormX.change_stat("love", 90, 5)
                                 $ StormX.change_stat("lust", 80, 7)
                                 ch_s "I also enjoy that. . ."
@@ -668,7 +668,7 @@ label Storm_SexChat:
                             else:
                                 $ StormX.change_face("_bemused")
                                 ch_s "Yes. . . um. . . it is fine. . ."
-                            $ StormX.player_favorite_action = "foot"
+                            $ StormX.player_favorite_action = "footjob"
                         "Handjobs.":
 
                             $ StormX.change_face("_sly")
@@ -763,7 +763,7 @@ label Storm_SexChat:
                         ch_s "I enjoy the taste of your cock."
                     elif StormX.favorite_action == "titjob":
                         ch_s "When I use my breasts."
-                    elif StormX.favorite_action == "foot":
+                    elif StormX.favorite_action == "footjob":
                         ch_s "Footjobs are quite fun."
                     elif StormX.favorite_action == "handjob":
                         ch_s "I enjoy jerking you off."

@@ -3126,7 +3126,7 @@ label Jean_Footjob:
                     $ JeanX.change_stat("obedience", 30, 2)
                     return
             if primary_action:
-                $ girl_offhand_action = "foot"
+                $ girl_offhand_action = "footjob"
                 return
             jump Jean_FJ_Prep
         else:
@@ -3167,7 +3167,7 @@ label Jean_Footjob:
             ch_j "That's it?"
         elif not JeanX.Taboo and "no_taboo" in JeanX.daily_history:
             ch_j "Um, I guess we're alone enough like this. . ."
-        elif "foot" in JeanX.daily_history:
+        elif "footjob" in JeanX.daily_history:
             $ JeanX.change_face("_sexy", 1)
             ch_j "More of that, huh. . ."
             jump Jean_FJ_Prep
@@ -3323,7 +3323,7 @@ label Jean_Footjob:
 
 
 label Jean_FJ_Prep:
-    if offhand_action == "foot":
+    if offhand_action == "footjob":
         return
 
     if JeanX.Taboo:
@@ -3358,13 +3358,13 @@ label Jean_FJ_Prep:
     if JeanX.Taboo:
         $ JeanX.drain_word("no_taboo")
     $ JeanX.drain_word("no_foot")
-    $ JeanX.recent_history.append("foot")
-    $ JeanX.daily_history.append("foot")
+    $ JeanX.recent_history.append("footjob")
+    $ JeanX.daily_history.append("footjob")
 
 label Jean_FJ_Cycle:
     while Round > 0:
         call shift_focus (JeanX)
-        call Jean_Sex_Launch ("foot")
+        call Jean_Sex_Launch ("footjob")
         $ JeanX.lust_face()
 
         if Player.focus < 100:

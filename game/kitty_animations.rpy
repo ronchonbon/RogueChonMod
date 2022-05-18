@@ -5,7 +5,7 @@ image Kitty_Sprite:
         (480,960),
         (124,0), ConditionSwitch(
             "renpy.showing('Kitty_BJ_Animation')", Null(),
-            "True", "Kitty_HairBack",
+            "True", "Kitty_hairback",
             ),
         (0,0), ConditionSwitch(
 
@@ -546,7 +546,7 @@ image Kitty_Head:
 
     zoom .5
 
-image Kitty_HairBack:
+image Kitty_hairback:
     LiveComposite(
         (416,610),
         (0,0), ConditionSwitch(
@@ -699,7 +699,7 @@ image Kitty_Sex_Legs_Static:
 image Kitty_Sex_Body = LiveComposite(
 
         (1120,840),
-        (260,-350), "Kitty_HairBack_Sex",
+        (260,-350), "Kitty_hairback_Sex",
 
         (0,0), ConditionSwitch(
 
@@ -813,7 +813,7 @@ image Kitty_Sex_Body = LiveComposite(
         )
 
 image Kitty_Sex_Lick_Breasts:
-    "Lick_Anim"
+    "licking"
     zoom 0.6
     offset (450,210)
 
@@ -829,9 +829,9 @@ image Kitty_Head_Sex:
     anchor (0.5,0.5)
     rotate -10
 
-image Kitty_HairBack_Sex:
+image Kitty_hairback_Sex:
 
-    "Kitty_HairBack"
+    "Kitty_hairback"
     zoom 1.5
     anchor (0.5,0.5)
     rotate -10
@@ -983,12 +983,12 @@ image Kitty_Sex_Feet = LiveComposite(
         )
 
 image Kitty_Sex_Lick_Pussy:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (530,510)
 
 image Kitty_Sex_Lick_Ass:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (535,590)
 
@@ -1185,7 +1185,7 @@ image Kitty_Sex_Zero_Anim0:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (498,530)
         zoom 1.4
 
@@ -1193,7 +1193,7 @@ image Kitty_Sex_Zero_Anim1:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (498,525)
         zoom 1.4
         block:
@@ -1206,7 +1206,7 @@ image Kitty_Sex_Zero_Anim2:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (500,490)
         zoom 1.4
         block:
@@ -1219,7 +1219,7 @@ image Kitty_Sex_Zero_Anim3:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (500,490)
         zoom 1.4
         block:
@@ -1465,7 +1465,7 @@ image Kitty_Anal_Zero_Anim0:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (500,600)
         zoom 1.4
 
@@ -1473,7 +1473,7 @@ image Kitty_Anal_Zero_Anim1:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (500,600)
         zoom 1.4
         block:
@@ -1486,7 +1486,7 @@ image Kitty_Anal_Zero_Anim2:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (500,570)
         zoom 1.4
         block:
@@ -1499,7 +1499,7 @@ image Kitty_Anal_Zero_Anim3:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (500,570)
         zoom 1.4
         block:
@@ -1514,7 +1514,7 @@ image Kitty_Hotdog_Zero_Anim0:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (498,570)
         zoom 1.4
 
@@ -1522,7 +1522,7 @@ image Kitty_Hotdog_Zero_Anim1:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (498,500)
         zoom 1.4
         block:
@@ -1535,7 +1535,7 @@ image Kitty_Hotdog_Zero_Anim2:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (500,510)
         zoom 1.4
         block:
@@ -1857,9 +1857,9 @@ label Kitty_Sex_Launch(Line=primary_action):
             $ offhand_action = 0
     elif Line == "hotdog":
         $ Player.cock_position = "out"
-    elif Line == "foot":
+    elif Line == "footjob":
         $ ShowFeet = 1
-        $ Player.cock_position = "foot"
+        $ Player.cock_position = "footjob"
     elif Line == "massage":
         $ Player.sprite = 0
         $ Player.cock_position = 0
@@ -2395,8 +2395,8 @@ image Kitty_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "Rogue_Doggy_Lick_Pussy",
-            "primary_action == 'eat_ass'", "Rogue_Doggy_Lick_Ass",
+            "primary_action == 'eat_pussy'", "Rogue_doggy_licking_pussy",
+            "primary_action == 'eat_ass'", "Rogue_doggy_licking_ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -2410,8 +2410,8 @@ image Kitty_Doggy_Ass:
             "not Player.sprite or Player.cock_position != 'out'", Null(),
 
 
-            "action_speed ", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
-            "True", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "action_speed ", AlphaMask("Zero_hotdog_moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "True", AlphaMask("Zero_hotdog_static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             ),
 
 
@@ -2506,14 +2506,14 @@ image Zero_Kitty_Hotdog_Static:
 
 
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         pos (175, 370)
 
 image Zero_Kitty_Hotdog_Moving:
 
 
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         pos (175, 370)
         block:
             ease 1 ypos 330
@@ -2545,7 +2545,7 @@ image Zero_Kitty_Doggy_Static:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (169,545)
         block:
             ease 1 ypos 540
@@ -2557,7 +2557,7 @@ image Zero_Kitty_Doggy_Heading:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (171,545)
         block:
             ease 1 xpos 168 ypos 500
@@ -2568,7 +2568,7 @@ image Zero_Kitty_Doggy_Heading:
 image Zero_Kitty_Doggy_Fucking2:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (169,500)
         block:
             ease .5 ypos 440
@@ -2579,7 +2579,7 @@ image Zero_Kitty_Doggy_Fucking2:
 image Zero_Kitty_Doggy_Fucking3:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (169,500)
         block:
             ease .2 ypos 440
@@ -2901,7 +2901,7 @@ image Kitty_Anal:
             )
     contains:
 
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,500)
 
 image Kitty_Anal_Fingering:
@@ -2970,7 +2970,7 @@ image Kitty_Anal_Heading:
 image Zero_Kitty_Doggy_Anal_Heading:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,500)
         block:
             ease .5 ypos 450
@@ -3033,7 +3033,7 @@ image Kitty_Doggy_Anal_Head_Ass:
 image Zero_Kitty_Doggy_Anal1:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,460)
         block:
             ease .5 ypos 395
@@ -3126,7 +3126,7 @@ image Kitty_Doggy_Fuck_Ass:
 image Zero_Kitty_Doggy_Anal2:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,460)
         block:
             ease .2 ypos 395
@@ -3217,7 +3217,7 @@ image Kitty_Doggy_Feet0:
             repeat
     contains:
         ConditionSwitch(
-                "Player.sprite", "Zero_Doggy_Up",
+                "Player.sprite", "Zero_cock_doggy_out",
                 "True", Null(),
                 )
         zoom 1.2
@@ -3244,7 +3244,7 @@ image Kitty_Doggy_Feet1:
             ease 1 ypos -20
             repeat
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         zoom 1.2
         pos (158,520)
         block:
@@ -3272,7 +3272,7 @@ image Kitty_Doggy_Feet2:
             ease .3 ypos -20
             repeat
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         zoom 1.2
         pos (158,520)
         block:
@@ -3397,11 +3397,11 @@ image Kitty_BJ_Animation:
     zoom .55
     anchor (.5,.5)
 
-image Kitty_BJ_HairBack:
+image Kitty_BJ_hairback:
 
     ConditionSwitch(
-            "KittyX.Water and KittyX.hair == 'evo'", "images/KittyBJFace/Kitty_BJ_HairBackWet.png",
-            "KittyX.hair == 'long'", "images/KittyBJFace/Kitty_BJ_HairBackWet.png",
+            "KittyX.Water and KittyX.hair == 'evo'", "images/KittyBJFace/Kitty_BJ_hairbackWet.png",
+            "KittyX.hair == 'long'", "images/KittyBJFace/Kitty_BJ_hairbackWet.png",
             "True", Null(),
             ),
     zoom 1.4
@@ -3480,7 +3480,7 @@ image Kitty_BJ_Head:
         (858,928),
         (0,0), ConditionSwitch(
 
-            "KittyX.Water or KittyX.hair == 'wet'", "images/KittyBJFace/Kitty_BJ_HairBackWet.png",
+            "KittyX.Water or KittyX.hair == 'wet'", "images/KittyBJFace/Kitty_BJ_hairbackWet.png",
             "True", Null(),
             ),
 
@@ -4102,7 +4102,7 @@ image Kitty_TJ_Body_0:
 
     contains:
 
-        "Kitty_BJ_HairBack"
+        "Kitty_BJ_hairback"
         zoom 0.41
         anchor (0.5, 0.5)
         pos (505,260)
@@ -4185,7 +4185,7 @@ image Kitty_TJ_Body_1:
 
     contains:
 
-        "Kitty_BJ_HairBack"
+        "Kitty_BJ_hairback"
         zoom 0.41
         anchor (0.5, 0.5)
         pos (505,260)
@@ -4277,7 +4277,7 @@ image Kitty_TJ_Body_2:
 
     contains:
 
-        "Kitty_BJ_HairBack"
+        "Kitty_BJ_hairback"
         zoom 0.41
         anchor (0.5, 0.5)
         pos (505,260)
@@ -4370,7 +4370,7 @@ image Kitty_TJ_Body_3:
 
     contains:
 
-        "Kitty_BJ_HairBack"
+        "Kitty_BJ_hairback"
         zoom 0.41
         anchor (0.5, 0.5)
         pos (500,260)
@@ -4524,7 +4524,7 @@ image Kitty_TJ_Body_5:
 
     contains:
 
-        "Kitty_BJ_HairBack"
+        "Kitty_BJ_hairback"
         zoom 0.41
         anchor (0.5, 0.5)
         pos (500,260)

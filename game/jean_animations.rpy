@@ -3,7 +3,7 @@
 image Jean_Sprite:
     LiveComposite(
         (516,954),
-        (160,0), "Jean_Sprite_HairBack",
+        (160,0), "Jean_Sprite_hairback",
         (0,0), ConditionSwitch(
 
             "JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Body2.png",
@@ -463,7 +463,7 @@ image Jean_Sprite:
     yoffset 15
     zoom .75
 
-image Jean_Sprite_HairBack:
+image Jean_Sprite_hairback:
     ConditionSwitch(
 
             "not JeanX.hair", Null(),
@@ -1134,8 +1134,8 @@ image Jean_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "Rogue_Doggy_Lick_Pussy",
-            "primary_action == 'eat_ass'", "Rogue_Doggy_Lick_Ass",
+            "primary_action == 'eat_pussy'", "Rogue_doggy_licking_pussy",
+            "primary_action == 'eat_ass'", "Rogue_doggy_licking_ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -1149,8 +1149,8 @@ image Jean_Doggy_Ass:
             "not Player.sprite or Player.cock_position != 'out'", Null(),
 
 
-            "action_speed ", AlphaMask("Zero_Hotdog_Moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
-            "True", AlphaMask("Zero_Hotdog_Static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "action_speed ", AlphaMask("Zero_hotdog_moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "True", AlphaMask("Zero_hotdog_static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
             ),
 
 
@@ -1245,14 +1245,14 @@ image Zero_Jean_Hotdog_Static:
 
 
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         pos (175, 370)
 
 image Zero_Jean_Hotdog_Moving:
 
 
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         pos (175, 370)
         block:
             ease 1 ypos 330
@@ -1284,7 +1284,7 @@ image Zero_Jean_Doggy_Static:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (169,545)
         block:
             ease 1 ypos 540
@@ -1296,7 +1296,7 @@ image Zero_Jean_Doggy_Heading:
 
     contains:
         subpixel True
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (171,545)
         block:
             ease 1 xpos 168 ypos 500
@@ -1307,7 +1307,7 @@ image Zero_Jean_Doggy_Heading:
 image Zero_Jean_Doggy_Fucking2:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (169,500)
         block:
             ease .5 ypos 440
@@ -1318,7 +1318,7 @@ image Zero_Jean_Doggy_Fucking2:
 image Zero_Jean_Doggy_Fucking3:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (169,500)
         block:
             ease .2 ypos 440
@@ -1643,7 +1643,7 @@ image Jean_Anal:
             )
     contains:
 
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,500)
 
 
@@ -1716,7 +1716,7 @@ image Jean_Anal_Heading:
 image Zero_Jean_Doggy_Anal_Heading:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,500)
         block:
             ease .5 ypos 450
@@ -1779,7 +1779,7 @@ image Jean_Doggy_Anal_Head_Ass:
 image Zero_Jean_Doggy_Anal1:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,460)
         block:
             ease .5 ypos 395
@@ -1867,7 +1867,7 @@ image Jean_Doggy_Fuck_Ass:
 image Zero_Jean_Doggy_Anal2:
 
     contains:
-        "Zero_Doggy_Insert"
+        "Zero_cock_doggy_in"
         pos (172,460)
         block:
             ease .2 ypos 395
@@ -1949,7 +1949,7 @@ image Jean_Doggy_Feet0:
             repeat
     contains:
         ConditionSwitch(
-                "Player.sprite", "Zero_Doggy_Up",
+                "Player.sprite", "Zero_cock_doggy_out",
                 "True", Null(),
                 )
         zoom 1.2
@@ -1976,7 +1976,7 @@ image Jean_Doggy_Feet1:
             ease 1 ypos 0
             repeat
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         zoom 1.2
         pos (160,480)
         block:
@@ -2004,7 +2004,7 @@ image Jean_Doggy_Feet2:
             ease .3 ypos 0
             repeat
     contains:
-        "Zero_Doggy_Up"
+        "Zero_cock_doggy_out"
         zoom 1.2
         pos (160,480)
         block:
@@ -2094,9 +2094,9 @@ image Jean_SexSprite:
     pos (750,230)
     zoom 0.8
 
-image Jean_Sex_HairBack:
+image Jean_Sex_hairback:
 
-    "Jean_BJ_HairBack"
+    "Jean_BJ_hairback"
     zoom 0.5
     anchor (0.5, 0.5)
     rotate 20
@@ -2231,7 +2231,7 @@ image Jean_Sex_Torso:
     zoom 1
 
 image Jean_Sex_Lick_Breasts:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (390,600)
 
@@ -2243,7 +2243,7 @@ image Jean_Sex_Fondle_Breasts:
 image Jean_Sex_Body:
 
     contains:
-        "Jean_Sex_HairBack"
+        "Jean_Sex_hairback"
     contains:
 
 
@@ -2619,12 +2619,12 @@ image Jean_Sex_Legs_Lick:
 
 
 image Jean_Sex_Lick_Pussy:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (500,680)
 
 image Jean_Sex_Lick_Ass:
-    "Lick_Anim"
+    "licking"
     zoom 0.7
     offset (500,740)
 
@@ -3222,9 +3222,9 @@ label Jean_Sex_Launch(Line=primary_action):
         if JeanX.PantsNum() == 5:
             $ JeanX.upskirt = 1
         $ Player.cock_position = "out"
-    elif Line == "foot":
+    elif Line == "footjob":
         $ ShowFeet = 1
-        $ Player.cock_position = "foot"
+        $ Player.cock_position = "footjob"
         $ JeanX.pose = "doggy"
     elif Line == "massage":
         $ Player.sprite = 0
@@ -3278,13 +3278,13 @@ image Jean_BJ_Animation:
         (858,928),
         (-270,-160), ConditionSwitch(
 
-            "action_speed == 0", At("Jean_BJ_HairBack", Jean_BJ_Head_0()),
-            "action_speed == 1", At("Jean_BJ_HairBack", Jean_BJ_Head_1()),
-            "action_speed == 2", At("Jean_BJ_HairBack", Jean_BJ_Head_2()),
-            "action_speed == 3", At("Jean_BJ_HairBack", Jean_BJ_Head_3()),
-            "action_speed == 4", At("Jean_BJ_HairBack", Jean_BJ_Head_4()),
-            "action_speed == 5", At("Jean_BJ_HairBack", Jean_BJ_Head_5()),
-            "action_speed == 6", At("Jean_BJ_HairBack", Jean_BJ_Head_6()),
+            "action_speed == 0", At("Jean_BJ_hairback", Jean_BJ_Head_0()),
+            "action_speed == 1", At("Jean_BJ_hairback", Jean_BJ_Head_1()),
+            "action_speed == 2", At("Jean_BJ_hairback", Jean_BJ_Head_2()),
+            "action_speed == 3", At("Jean_BJ_hairback", Jean_BJ_Head_3()),
+            "action_speed == 4", At("Jean_BJ_hairback", Jean_BJ_Head_4()),
+            "action_speed == 5", At("Jean_BJ_hairback", Jean_BJ_Head_5()),
+            "action_speed == 6", At("Jean_BJ_hairback", Jean_BJ_Head_6()),
             "True", Null(),
             ),
         (-20,270), ConditionSwitch(
@@ -3352,7 +3352,7 @@ image Jean_BJ_Animation:
     zoom .55
     anchor (.5,.5)
 
-image Jean_BJ_HairBack:
+image Jean_BJ_hairback:
 
     ConditionSwitch(
             "JeanX.Water or JeanX.hair == 'wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Under.png",
@@ -4255,9 +4255,9 @@ image Jean_TJ_Animation:
 
 
 
-image Jean_TJ_HairBack:
+image Jean_TJ_hairback:
 
-    "Jean_BJ_HairBack"
+    "Jean_BJ_hairback"
     transform_anchor True
     zoom .7
     anchor (0.5, 0.5)
@@ -4479,7 +4479,7 @@ image Jean_TJ_0:
             repeat
     contains:
 
-        "Jean_TJ_HairBack"
+        "Jean_TJ_hairback"
         subpixel True
         pos (0,0)
         transform_anchor True
@@ -4612,7 +4612,7 @@ image Jean_TJ_1:
             repeat
     contains:
 
-        "Jean_TJ_HairBack"
+        "Jean_TJ_hairback"
         subpixel True
         pos (0,150)
         transform_anchor True
@@ -4767,7 +4767,7 @@ image Jean_TJ_2:
             repeat
     contains:
 
-        "Jean_TJ_HairBack"
+        "Jean_TJ_hairback"
         subpixel True
         pos (0,80)
         transform_anchor True
@@ -4903,7 +4903,7 @@ image Jean_TJ_4:
             repeat
     contains:
 
-        "Jean_TJ_HairBack"
+        "Jean_TJ_hairback"
         subpixel True
         pos (0,0)
         transform_anchor True
@@ -5028,7 +5028,7 @@ image Jean_TJ_5:
             repeat
     contains:
 
-        "Jean_TJ_HairBack"
+        "Jean_TJ_hairback"
         subpixel True
         pos (0,130)
         transform_anchor True

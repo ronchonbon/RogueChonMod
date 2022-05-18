@@ -1352,7 +1352,7 @@ label Girl_TitSpunk:
 
 
 label Girl_Cum_Outside:
-    if primary_action != "foot":
+    if primary_action != "footjob":
         if renpy.showing(Girl.tag+"_PJ_Animation"):
             call expression Girl.tag + "_Middle_Launch" pass (primary_action, 0)
 
@@ -1394,7 +1394,7 @@ label Girl_Cum_Outside:
         $ Girl.change_stat("obedience", 80, -5)
         $ Girl.change_stat("inhibition", 200, 10)
         jump Girl_Swallowed
-    if primary_action != "foot":
+    if primary_action != "footjob":
         $ Player.cock_position = "out"
     if Girl.pose == "doggy":
         $ Girl.spunk.append("back")
