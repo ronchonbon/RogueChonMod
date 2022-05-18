@@ -1132,8 +1132,8 @@ image Laura_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "Rogue_doggy_licking_pussy",
-            "primary_action == 'eat_ass'", "Rogue_doggy_licking_ass",
+            "primary_action == 'eat_pussy'", "licking_pussy",
+            "primary_action == 'eat_ass'", "licking_ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(

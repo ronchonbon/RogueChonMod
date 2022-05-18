@@ -634,8 +634,8 @@ label Rogue_Love:
         ch_r "Now, lover. . . was there anything else you felt like doing to celebrate?"
     if "Historia" in Player.traits:
         return 1
-    if "stockings_and_garterbelt" not in RogueX.inventory:
-        $ RogueX.inventory.append("stockings_and_garterbelt")
+    if "_stockings_and_garterbelt" not in RogueX.inventory:
+        $ RogueX.inventory.append("_stockings_and_garterbelt")
     $ approval_bonus = 20
     call shift_focus(RogueX)
     call enter_main_sex_menu
@@ -799,8 +799,8 @@ label Rogue_Sub:
     ch_r "Now, sir. . . was there anything else you wished me to do to celebrate?"
     if "Historia" in Player.traits:
         return 1
-    if "stockings_and_garterbelt" not in RogueX.inventory:
-        $ RogueX.inventory.append("stockings_and_garterbelt")
+    if "_stockings_and_garterbelt" not in RogueX.inventory:
+        $ RogueX.inventory.append("_stockings_and_garterbelt")
     $ approval_bonus = 10
     call shift_focus(RogueX)
     call enter_main_sex_menu
@@ -973,8 +973,8 @@ label Rogue_Sexfriend:
         if RogueX.location != bg_current and RogueX not in Party:
             return
         $ RogueX.drain_word("asked meet")
-        if "stockings_and_garterbelt" not in RogueX.inventory:
-            $ RogueX.inventory.append("stockings_and_garterbelt")
+        if "_stockings_and_garterbelt" not in RogueX.inventory:
+            $ RogueX.inventory.append("_stockings_and_garterbelt")
         $ RogueX.player_petnames.append("sex friend")
         $ RogueX.change_stat("inhibition", 200, 50)
         "[RogueX.name] suddenly gives your butt a little squeeze."
@@ -984,8 +984,8 @@ label Rogue_Sexfriend:
     if RogueX.location != bg_current and RogueX not in Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
-    if "stockings_and_garterbelt" not in RogueX.inventory:
-        $ RogueX.inventory.append("stockings_and_garterbelt")
+    if "_stockings_and_garterbelt" not in RogueX.inventory:
+        $ RogueX.inventory.append("_stockings_and_garterbelt")
     $ RogueX.player_petnames.append("sex friend")
     $ RogueX.location = bg_current
     call set_the_scene (0)

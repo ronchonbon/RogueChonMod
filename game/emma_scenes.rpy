@@ -625,7 +625,7 @@ label Emma_Detention:
                         $ EmmaX.change_stat("obedience", 60, 5)
                         $ EmmaX.change_stat("inhibition", 70, 5)
                         ch_e "Why do I put up with you?"
-                        call Emma_SexMenu
+                        call enter_main_sex_menu(EmmaX)
                     "No, you're right, I take my education too lightly.":
                         $ EmmaX.change_stat("love", 80, 1)
                         $ EmmaX.change_stat("inhibition", 70, -2)
@@ -659,7 +659,7 @@ label Emma_Detention:
                 $ EmmaX.change_stat("obedience", 60, 5)
                 $ EmmaX.change_stat("inhibition", 70, 5)
                 ch_e "I just bet you can. . ."
-                call Emma_SexMenu
+                call enter_main_sex_menu(EmmaX)
             else:
 
                 $ EmmaX.change_face("_sad", Mouth="_smirk")
@@ -1200,7 +1200,7 @@ label Emma_BF:
         return 1
     $ approval_bonus = 10
     $ Player.add_word(1,"interruption")
-    call Emma_SexMenu
+    call enter_main_sex_menu(EmmaX)
     $ approval_bonus = 0
     return
 
@@ -1510,7 +1510,7 @@ label Emma_Love_End:
             $ EmmaX.change_stat("obedience", 70, 25)
             ch_e "Something like. . ."
             $ approval_bonus = 20
-            call Emma_SexMenu
+            call enter_main_sex_menu(EmmaX)
     return
 
 label Emma_Love_Redux:

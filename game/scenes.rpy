@@ -6286,7 +6286,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                     $ Mod = 200
 
                 "lose the top?" if Girl.bra and not Girl.top:
-                    $ Type = "bra"
+                    $ Type = "_bra"
 
                 "maybe just lose the jacket?" if Girl.accessory and Girl == JubesX:
                     if Girl.accessory == "shut_jacket" and not Girl.legs and not Girl.hose and not Girl.underwear:
@@ -6294,7 +6294,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                     elif Girl.accessory == "shut_jacket" and not Girl.top and not Girl.bra:
                         $ Type = "no_bra"
                     else:
-                        $ Type = "jacket"
+                        $ Type = "_jacket"
 
                 "maybe just lose the [Girl.top]?" if Girl.top:
                     if Girl.top == "_towel" and not Girl.legs and not Girl.hose and not Girl.underwear:
@@ -6555,12 +6555,12 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             elif Girl == JubesX:
                 ch_v "Sure. . ."
 
-            if Type == "jacket" or Type == "both":
+            if Type == "_jacket" or Type == "both":
                 if Girl == JubesX:
                     $ Girl.accessory = ""
             if Type == "over" or Type == "both":
                 $ Girl.top = ""
-            if Type == "bra" or Type == "both":
+            if Type == "_bra" or Type == "both":
                 $ Girl.bra = ""
             call expression Girl.tag + "_First_Topless"
 
@@ -6573,7 +6573,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             $ Girl.add_word(1,"tan","tan")
 
-        elif Line == "sorry" and (Type == "over" or Type == "legs" or Type == "jacket"):
+        elif Line == "sorry" and (Type == "over" or Type == "legs" or Type == "_jacket"):
 
             if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
                 $ Girl.change_stat("obedience", 50, 1)
@@ -6596,7 +6596,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             elif Girl == JubesX:
                 ch_v "Sure. . ."
 
-            if Type == "jacket":
+            if Type == "_jacket":
                 $ Girl.accessory = ""
             if Type == "over":
                 $ Girl.top = ""
@@ -7826,7 +7826,7 @@ label AddictCheck(BO=[]):
 
                 call addiction_event (JubesX)
             else:
-                call Addiction_Fix (JubesX)
+                call addiction_fix (JubesX)
         else:
             if "asked meet" in JubesX.daily_history:
                 pass
@@ -7857,7 +7857,7 @@ label AddictCheck(BO=[]):
             if (BO[0].addiction >= 60 or (BO[0].addiction >= 40 and BO[0] == JubesX)) and BO[0].resistance:
 
                 if bg_current == BO[0].home or bg_current == "bg_player":
-                    call Addiction_Fix (BO[0])
+                    call addiction_fix (BO[0])
                 else:
                     if "asked meet" in BO[0].recent_history:
                         pass

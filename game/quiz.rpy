@@ -1328,7 +1328,7 @@ label Emma_StripStudy_Intro:
         ch_e "but but I suppose we're already past that. . ."
         $ EmmaX.eyes = "_squint"
         ch_e "Do you have any ideas?"
-        call Emma_SexMenu
+        call enter_main_sex_menu(EmmaX)
     else:
         "[EmmaX.name] moves a bit closer to you. . ."
         ch_e "I was curious, [EmmaX.player_petname]. . ."

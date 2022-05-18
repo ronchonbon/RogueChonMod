@@ -533,9 +533,9 @@ layeredimage Rogue_doggy_ass:
         "images/RogueDoggy/Rogue_Doggy_SpunkAss.png"
 
     if primary_action == "eat_pussy":
-        "Rogue_doggy_licking_pussy"
+        "licking_pussy"
     elif primary_action == "eat_ass":
-        "Rogue_doggy_licking_ass"
+        "licking_ass"
 
     if not Player.sprite or Player.cock != "out":
         Null()

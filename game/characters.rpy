@@ -244,12 +244,12 @@ init python:
             elif self.tag == "Kitty":
                 self.voice = ch_k
 
-                self.Casual1 = [2,0, "capris", "_pink_top", "gold_necklace", "cami", "_green_panties", "", "", "", 0]
-                self.Casual2 = [2,0, "black jeans", "red_shirt", "star_necklace", "bra", "_green_panties", "", "", "", 0]
+                self.Casual1 = [2,0, "_capris", "_pink_top", "gold_necklace", "_cami", "_green_panties", "", "", "", 0]
+                self.Casual2 = [2,0, "_black_jeans", "_red_shirt", "star_necklace", "_bra", "_green_panties", "", "", "", 0]
                 self.Gym = [0, "", "_shorts", "", "", "_sports_bra", "_green_panties", "", "", "",10]
-                self.sleepwear = [0, "", "_shorts", "", "", "cami", "_green_panties", "", "", "",20]
-                self.Swim = [0, "", "blue_skirt", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.Costume = [2,0, "dress", "jacket", "flower_necklace", "dress", "lace_panties", "", "", "", 0]
+                self.sleepwear = [0, "", "_shorts", "", "", "_cami", "_green_panties", "", "", "",20]
+                self.Swim = [0, "", "_blue_skirt", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+                self.Costume = [2,0, "_dress", "_jacket", "_flower_necklace", "_dress", "_lace_panties", "", "", "", 0]
                 self.home = "bg_kitty"
                 self.hair = "_evo"
                 self.LikeRogue = 600
@@ -272,14 +272,14 @@ init python:
             elif self.tag == "Emma":
                 self.voice = ch_e
 
-                self.Casual1 = [2,0, "_pants", "jacket", "choker", "corset", "white_panties", "", "", "", 0]
-                self.Casual2 = [2,"_gloves", "_pants", "", "choker", "corset", "white_panties", "", "", "",5]
+                self.Casual1 = [2,0, "_pants", "_jacket", "_choker", "_corset", "_white_panties", "", "", "", 0]
+                self.Casual2 = [2,"_gloves", "_pants", "", "_choker", "_corset", "_white_panties", "", "", "",5]
                 self.Gym = [0, "", "", "", "", "_sports_bra", "sports_panties", "", "", "",10]
-                self.sleepwear = [0, "", "", "", "", "corset", "white_panties", "", "", "",25]
+                self.sleepwear = [0, "", "", "", "", "_corset", "_white_panties", "", "", "",25]
                 self.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.Costume =  [2,"_gloves", "dress", "dress", "choker", "", "lace_panties", "", "hat", "stockings_and_garterbelt", 0]
+                self.Costume =  [2,"_gloves", "_dress", "_dress", "_choker", "", "_lace_panties", "", "_hat", "_stockings_and_garterbelt", 0]
                 self.home = "bg_emma"
-                self.hair = "wavy"
+                self.hair = "_wavy"
                 self.pubes = "_bare"
                 self.LikeRogue = 500
                 self.LikeKitty = 500
@@ -302,7 +302,7 @@ init python:
                 self.voice = ch_l
 
                 self.Casual1 = [2,"wrists", "leather_pants", "", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
-                self.Casual2 = [2,0, "_skirt", "jacket", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
+                self.Casual2 = [2,0, "_skirt", "_jacket", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
                 self.Gym = [2,"wrists", "leather_pants", "", "", "leather_bra", "_black_panties", "", "", "", 0]
                 self.sleepwear = [0, "", "", "", "", "leather_bra", "leather_panties", "", "", "",20]
                 self.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
@@ -382,10 +382,10 @@ init python:
             elif self.tag == "Storm":
                 self.voice = ch_s
 
-                self.Casual1 = [2,0, "_skirt", "white_shirt", "", "black_bra", "white_panties", "", "", "", 0]
-                self.Casual2 = [2,0, "_pants", "jacket", "", "_sports_bra", "white_panties", "", "", "", 0]
-                self.Gym = [0, "", "yoga_pants", "", "", "_sports_bra", "white_panties", "", "", "",10]
-                self.sleepwear = [0, "", "", "white_shirt", "", "", "white_panties", "", "", "",25]
+                self.Casual1 = [2,0, "_skirt", "white_shirt", "", "black_bra", "_white_panties", "", "", "", 0]
+                self.Casual2 = [2,0, "_pants", "_jacket", "", "_sports_bra", "_white_panties", "", "", "", 0]
+                self.Gym = [0, "", "yoga_pants", "", "", "_sports_bra", "_white_panties", "", "", "",10]
+                self.sleepwear = [0, "", "", "white_shirt", "", "", "_white_panties", "", "", "",25]
                 self.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
                 self.Costume = [2,0, "", "", "ring_necklace", "cos_bra", "cos_panties", "rings", "short", "", 0]
                 self.home = "bg_storm"
@@ -429,12 +429,12 @@ init python:
             elif self.tag == "Jubes":
                 self.voice = ch_v
 
-                self.Casual1 = [2,0, "_shorts", "red_shirt", "", "_sports_bra", "blue_panties", "jacket", "", "", 0]
-                self.Casual2 = [2,0, "_pants", "black_shirt", "", "_sports_bra", "blue_panties", "jacket", "", "", 0]
+                self.Casual1 = [2,0, "_shorts", "_red_shirt", "", "_sports_bra", "blue_panties", "_jacket", "", "", 0]
+                self.Casual2 = [2,0, "_pants", "black_shirt", "", "_sports_bra", "blue_panties", "_jacket", "", "", 0]
                 self.Gym = [0, "", "_pants", "", "", "_sports_bra", "blue_panties", "", "", "",10]
                 self.sleepwear = [0, "", "", "", "", "_sports_bra", "blue_panties", "", "", "",25]
                 self.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.Costume = [0, "", "_pants", "black_shirt", "", "_sports_bra", "blue_panties", "jacket", "", "", 0]
+                self.Costume = [0, "", "_pants", "black_shirt", "", "_sports_bra", "blue_panties", "_jacket", "", "", 0]
                 self.home = "bg_jubes"
                 self.hair = "shades"
 
@@ -530,8 +530,8 @@ init python:
 
 
             if self == RogueX:
-                if "stockings_and_garterbelt" in self.inventory:
-                    self.Casual1[9] = "stockings_and_garterbelt"
+                if "_stockings_and_garterbelt" in self.inventory:
+                    self.Casual1[9] = "_stockings_and_garterbelt"
                 elif self.inhibition >= 300:
                     self.Casual1[9] = "_stockings"
                 else:
@@ -545,20 +545,20 @@ init python:
 
                     self.Swim[3] == 0
             elif self == KittyX:
-                if self.Swim[2] == "blue_skirt" and self.Swim[6] and self.inhibition > 500:
+                if self.Swim[2] == "_blue_skirt" and self.Swim[6] and self.inhibition > 500:
 
                     self.Swim[2] = 0
             elif self == LauraX:
-                if self.inhibition >= 400 and self.Casual2[5] == "leather_bra" and "corset" in self.inventory:
-                    self.Casual2[5] = "corset"
-                if self.inhibition >= 600 and "lace_panties" in self.inventory:
-                    self.Casual2[6] = "lace_panties"
-                if self.inhibition >= 600 and "stockings_and_garterbelt" in self.inventory:
-                    self.Casual2[9] = "stockings_and_garterbelt"
+                if self.inhibition >= 400 and self.Casual2[5] == "leather_bra" and "_corset" in self.inventory:
+                    self.Casual2[5] = "_corset"
+                if self.inhibition >= 600 and "_lace_panties" in self.inventory:
+                    self.Casual2[6] = "_lace_panties"
+                if self.inhibition >= 600 and "_stockings_and_garterbelt" in self.inventory:
+                    self.Casual2[9] = "_stockings_and_garterbelt"
 
             elif self == JeanX:
-                if "stockings_and_garterbelt" in self.inventory:
-                    self.Casual1[9] = "stockings_and_garterbelt"
+                if "_stockings_and_garterbelt" in self.inventory:
+                    self.Casual1[9] = "_stockings_and_garterbelt"
                 elif self.love >= 300:
                     self.Casual1[9] = "_stockings"
                 if self.inhibition >= 600 and "_bikini_top" in self.inventory:
@@ -566,24 +566,24 @@ init python:
                 if self.inhibition >= 600 and "lace_bra" in self.inventory:
                     self.Casual1[5] = "lace_bra"
                     self.Casual2[5] = "lace_bra"
-                if self.inhibition >= 600 and "lace_panties" in self.inventory:
-                    self.Casual1[6] = "lace_panties"
-                    self.Casual2[6] = "lace_panties"
+                if self.inhibition >= 600 and "_lace_panties" in self.inventory:
+                    self.Casual1[6] = "_lace_panties"
+                    self.Casual2[6] = "_lace_panties"
             elif self == StormX:
                 if self.inhibition >= 400 and self.Casual2[5] == "_sports_bra":
                     self.Casual2[5] = "_tube_top"
-                if self.inhibition >= 400 and self.Casual2[5] == "white_panties":
+                if self.inhibition >= 400 and self.Casual2[5] == "_white_panties":
                     self.Casual2[5] = "_black_panties"
-                if self.inhibition >= 600 and "lace_panties" in self.inventory:
-                    self.Casual2[6] = "lace_panties"
+                if self.inhibition >= 600 and "_lace_panties" in self.inventory:
+                    self.Casual2[6] = "_lace_panties"
             elif self == JubesX:
-                if self.inhibition >= 500 and self.Casual1[3] == "red_shirt":
+                if self.inhibition >= 500 and self.Casual1[3] == "_red_shirt":
                     self.Casual1[3] = "_tube_top"
                     self.Casual1[5] = 0
-                if self.inhibition >= 600 and "lace_panties" in self.inventory:
-                    self.Casual2[6] = "lace_panties"
-                if self.inhibition >= 600 and "stockings_and_garterbelt" in self.inventory:
-                    self.Casual2[9] = "stockings_and_garterbelt"
+                if self.inhibition >= 600 and "_lace_panties" in self.inventory:
+                    self.Casual2[6] = "_lace_panties"
+                if self.inhibition >= 600 and "_stockings_and_garterbelt" in self.inventory:
+                    self.Casual2[9] = "_stockings_and_garterbelt"
             return
 
         def add_word(self,Only=0,Recent=0,Daily=0,Trait=0,History=0):
@@ -1168,7 +1168,7 @@ init python:
                             elif self == JubesX:
                                 ch_v("I haven't picked out a suit yet. . .", interact=True)
                         return 0
-                    elif self == KittyX and "blue_skirt" not in self.inventory and self.inhibition <= 400:
+                    elif self == KittyX and "_blue_skirt" not in self.inventory and self.inhibition <= 400:
                         self.Outfit = self.OutfitDay
                         if "swim" not in self.daily_history:
                             ch_k("I don't know, I do have a suit, but it's a little daring. . .", interact=True)
@@ -1194,7 +1194,7 @@ init python:
 
 
 
-            if self == EmmaX and (HolderOutfit[8] != "hat" and HolderOutfit[8] != "hat wet"):
+            if self == EmmaX and (HolderOutfit[8] != "_hat" and HolderOutfit[8] != "hat wet"):
 
                 self.hair = "wet" if HolderOutfit[8] == "hat wet" else "wave"
 
@@ -1277,7 +1277,7 @@ init python:
                 return 2
             if self.bra == "lace corset":
                 return 2
-            if self.bra == "corset":
+            if self.bra == "_corset":
                 return 5
             if self.bra:
                 return 3
@@ -1302,7 +1302,7 @@ init python:
             if self == JubesX:
                 if Up and self.top_pulled_up and self.accessory:
                     return 1
-                if self.accessory == "jacket":
+                if self.accessory == "_jacket":
                     return 3
                 if self.accessory == "open_jacket":
                     return 1
@@ -1310,9 +1310,9 @@ init python:
                     return 5
             if self.top == "_towel":
                 return 3
-            if self.top == "dress":
+            if self.top == "_dress":
                 return 4
-            if self.top == "jacket":
+            if self.top == "_jacket":
                 return 4
             if self.top == "nighty":
                 return 3
@@ -1338,13 +1338,13 @@ init python:
                 return 6
             if self.legs == "_shorts":
                 return 6
-            if self.legs in ("_skirt", "blue_skirt", "other_skirt", "dress"):
+            if self.legs in ("_skirt", "_blue_skirt", "other_skirt", "_dress"):
                 return 5
             if self.legs == "yoga_pants":
                 return 8
             if self.top == "_towel" and self not in (EmmaX,StormX):
                 return 5
-            if self == EmmaX and self.top == "dress":
+            if self == EmmaX and self.top == "_dress":
                 return 4
             if self.legs == "mesh_pants":
                 return 2
@@ -1358,7 +1358,7 @@ init python:
 
             if Up and self.underwear_pulled_down and self.underwear:
                 return 1
-            if self.underwear == "lace_panties":
+            if self.underwear == "_lace_panties":
                 return 2
             if self.underwear == "sports_panties" or self.underwear == "_shorts":
                 return 8
@@ -1939,7 +1939,7 @@ label WardrobeEditor(Chr=0):
                         "Add pink_top" if Chr == KittyX:
                             $ Chr.top = "_pink_top"
                         "Add red_top" if Chr == KittyX or Chr == JubesX:
-                            $ Chr.top = "red_shirt"
+                            $ Chr.top = "_red_shirt"
                         "Add black_top" if Chr == JubesX:
                             $ Chr.top = "black_shirt"
                         "Add tube_top" if Chr == JubesX:
@@ -1952,26 +1952,26 @@ label WardrobeEditor(Chr=0):
                             $ Chr.top = "yellow_shirt"
                         "Add_jacket":
                             if Chr == JubesX:
-                                $ Chr.accessory = "jacket"
+                                $ Chr.accessory = "_jacket"
                             else:
-                                $ Chr.accessory = "jacket"
+                                $ Chr.accessory = "_jacket"
                         "Open/shut_jacket" if Chr == JubesX:
-                            if Chr.accessory == "jacket":
+                            if Chr.accessory == "_jacket":
                                 $ Chr.accessory = "shut_jacket"
                             else:
-                                $ Chr.accessory = "jacket"
+                                $ Chr.accessory = "_jacket"
                         "wide open_jacket" if Chr == JubesX:
-                            if Chr.accessory == "jacket":
+                            if Chr.accessory == "_jacket":
                                 $ Chr.accessory = "open_jacket"
                             else:
-                                $ Chr.accessory = "jacket"
-                        "Remove_jacket" if Chr.accessory == "jacket":
+                                $ Chr.accessory = "_jacket"
+                        "Remove_jacket" if Chr.accessory == "_jacket":
                             $ Chr.accessory = ""
 
                         "Add white_shirt" if Chr == StormX:
                             $ Chr.top = "white_shirt"
                         "Dress" if Chr == EmmaX:
-                            $ Chr.top = "dress"
+                            $ Chr.top = "_dress"
                         "Add nighty":
                             $ Chr.top = "nighty"
                             $ Chr.arms = ""
@@ -2016,9 +2016,9 @@ label WardrobeEditor(Chr=0):
                         "Add lace_bra":
                             $ Chr.bra = "lace_bra"
                         "Add cami" if Chr == KittyX:
-                            $ Chr.bra = "cami"
+                            $ Chr.bra = "_cami"
                         "Add dress" if Chr == KittyX:
-                            $ Chr.bra = "dress"
+                            $ Chr.bra = "_dress"
                         "Add wolvie_top" if Chr == LauraX:
                             $ Chr.bra = "wolvie_top"
                         "Add green_bra" if Chr == JeanX:
@@ -2029,13 +2029,13 @@ label WardrobeEditor(Chr=0):
                             if Chr == StormX:
                                 $ Chr.bra = "black_bra"
                             else:
-                                $ Chr.bra = "bra"
+                                $ Chr.bra = "_bra"
                         "Add cosplay_bra" if Chr == StormX:
                             $ Chr.bra = "cos_bra"
                         "Add bikini":
                             $ Chr.bra = "_bikini_top"
                         "Add corset":
-                            $ Chr.bra = "corset"
+                            $ Chr.bra = "_corset"
                         "Add lace corset":
                             $ Chr.bra = "lace corset"
                         "Toggle up-top":
@@ -2069,13 +2069,13 @@ label WardrobeEditor(Chr=0):
                         "Add cosplay Skirt" if Chr == LauraX:
                             $ Chr.legs = "other_skirt"
                         "Add blue Skirt" if Chr == KittyX:
-                            $ Chr.legs = "blue_skirt"
+                            $ Chr.legs = "_blue_skirt"
                         "Add_pants" if Chr != KittyX:
                             $ Chr.legs = "_pants"
                         "Add black jeans" if Chr == KittyX:
-                            $ Chr.legs = "black jeans"
+                            $ Chr.legs = "_black_jeans"
                         "Add capri_pants" if Chr == KittyX:
-                            $ Chr.legs = "capris"
+                            $ Chr.legs = "_capris"
                         "Add_shorts" if Chr == KittyX or Chr == JeanX or Chr == JubesX:
                             $ Chr.legs = "_shorts"
                         "Add leather_pants" if Chr == LauraX:
@@ -2083,7 +2083,7 @@ label WardrobeEditor(Chr=0):
                         "Add yoga_pants":
                             $ Chr.legs = "yoga_pants"
                         "Dress" if Chr == EmmaX or Chr == KittyX:
-                            $ Chr.legs = "dress"
+                            $ Chr.legs = "_dress"
                         "Boots" if Chr == EmmaX:
                             $ EmmaX.accessory = "thigh boots" if EmmaX.accessory != "thigh boots" else 0
                         "Toggle upskirt":
@@ -2124,7 +2124,7 @@ label WardrobeEditor(Chr=0):
                                 "Add garter":
                                     $ Chr.hose = "garterbelt"
                                 "Add stockings and garter":
-                                    $ Chr.hose = "stockings_and_garterbelt"
+                                    $ Chr.hose = "_stockings_and_garterbelt"
                                 "Add_pantyhose":
                                     $ Chr.hose = "pantyhose"
                                 "Add_tights":
@@ -2148,7 +2148,7 @@ label WardrobeEditor(Chr=0):
                         "Add black_panties":
                             $ Chr.underwear = "_black_panties"
                         "Add white_panties" if Chr == StormX or Chr == EmmaX:
-                            $ Chr.underwear = "white_panties"
+                            $ Chr.underwear = "_white_panties"
                         "Add cosplay_panties" if Chr == StormX:
                             $ Chr.underwear = "cos_panties"
                         "Add bikini":
@@ -2158,7 +2158,7 @@ label WardrobeEditor(Chr=0):
                         "Add green_panties":
                             $ Chr.underwear = "_green_panties"
                         "Add lace_panties":
-                            $ Chr.underwear = "lace_panties"
+                            $ Chr.underwear = "_lace_panties"
                         "Add wolvie_panties" if Chr == LauraX:
                             $ Chr.underwear = "wolvie_panties"
                         "Add sports_panties" if Chr == EmmaX:
@@ -2234,14 +2234,14 @@ label WardrobeEditor(Chr=0):
                             else:
                                 $ Chr.hair = "pony"
                         "Toggle Hat" if Chr == EmmaX:
-                            if Chr.hair == "wavy":
-                                $ Chr.hair = "hat"
+                            if Chr.hair == "_wavy":
+                                $ Chr.hair = "_hat"
                             elif Chr.hair == "wet":
                                 $ Chr.hair = "hat wet"
                             elif Chr.hair == "hat wet":
                                 $ Chr.hair = "wet"
                             else:
-                                $ Chr.hair = "wavy"
+                                $ Chr.hair = "_wavy"
                         "Cosplay Hair" if Chr == RogueX:
                             if Chr.hair == "_cosplay":
                                 $ Chr.hair = "_evo"
@@ -2573,12 +2573,12 @@ label Emergency_Clothing_Reset:
             $ KittyX.Custom1 = [0, "", "", "", "", "", "", "", "", "", 0]
             $ KittyX.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
             $ KittyX.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ KittyX.Casual1 = [2,0, "capris", "_pink_top", "gold_necklace", "cami", "_green_panties", "", "", "", 0]
-            $ KittyX.Casual2 = [2,0, "black jeans", "red_shirt", "", "bra", "_green_panties", "", "", "", 0]
+            $ KittyX.Casual1 = [2,0, "_capris", "_pink_top", "gold_necklace", "_cami", "_green_panties", "", "", "", 0]
+            $ KittyX.Casual2 = [2,0, "_black_jeans", "_red_shirt", "", "_bra", "_green_panties", "", "", "", 0]
             $ KittyX.Gym = [0, "", "_shorts", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
-            $ KittyX.sleepwear = [0, "", "_shorts", "", "", "cami", "_green_panties", "", "", "", 0]
-            $ KittyX.Swim = [0, "", "blue_skirt", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ KittyX.Costume = [2,0, "dress", "jacket", "flower_necklace", "dress", "lace_panties", "", "", "", 0]
+            $ KittyX.sleepwear = [0, "", "_shorts", "", "", "_cami", "_green_panties", "", "", "", 0]
+            $ KittyX.Swim = [0, "", "_blue_skirt", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+            $ KittyX.Costume = [2,0, "_dress", "_jacket", "_flower_necklace", "_dress", "_lace_panties", "", "", "", 0]
             $ KittyX.Clothing = [0, "", "", "", "", "", "", "", "", 0]
             $ KittyX.Outfit = "casual1"
             $ KittyX.OutfitDay = "casual1"
@@ -2586,12 +2586,12 @@ label Emergency_Clothing_Reset:
             $ EmmaX.Custom1 = [0, "", "", "", "", "", "", "", "", "", 0]
             $ EmmaX.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
             $ EmmaX.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ EmmaX.Casual1 = [2,0, "_pants", "jacket", "choker", "corset", "white_panties", "", "", "", 0]
-            $ EmmaX.Casual2 = [2,"_gloves", "_pants", "", "choker", "corset", "white_panties", "", "", "", 0]
+            $ EmmaX.Casual1 = [2,0, "_pants", "_jacket", "_choker", "_corset", "_white_panties", "", "", "", 0]
+            $ EmmaX.Casual2 = [2,"_gloves", "_pants", "", "_choker", "_corset", "_white_panties", "", "", "", 0]
             $ EmmaX.Gym = [0, "", "", "", "", "_sports_bra", "sports_panties", "", "", "", 0]
-            $ EmmaX.sleepwear = [0, "", "", "", "", "corset", "white_panties", "", "", "", 0]
+            $ EmmaX.sleepwear = [0, "", "", "", "", "_corset", "_white_panties", "", "", "", 0]
             $ EmmaX.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ EmmaX.Costume =  [2,"_gloves", "dress", "dress", "choker", "", "lace_panties", "", "hat", "stockings_and_garterbelt", 0]
+            $ EmmaX.Costume =  [2,"_gloves", "_dress", "_dress", "_choker", "", "_lace_panties", "", "_hat", "_stockings_and_garterbelt", 0]
             $ EmmaX.Clothing = [0, "", "", "", "", "", "", "", "", 0]
             $ EmmaX.Outfit = "casual1"
             $ EmmaX.OutfitDay = "casual1"
@@ -2600,7 +2600,7 @@ label Emergency_Clothing_Reset:
             $ LauraX.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
             $ LauraX.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
             $ LauraX.Casual1 = [2,"wrists", "leather_pants", "", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
-            $ LauraX.Casual2 = [2,0, "_skirt", "jacket", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
+            $ LauraX.Casual2 = [2,0, "_skirt", "_jacket", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
             $ LauraX.Gym = [0, "wrists", "leather_pants", "", "", "leather_bra", "_black_panties", "", "", "", 0]
             $ LauraX.sleepwear = [0, "", "", "", "", "leather_bra", "leather_panties", "", "", "", 0]
             $ LauraX.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
@@ -2625,10 +2625,10 @@ label Emergency_Clothing_Reset:
             $ StormX.Custom1 = [0, "", "", "", "", "", "", "", "", "", 0]
             $ StormX.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
             $ StormX.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ StormX.Casual1 = [2,0, "_skirt", "white_shirt", "", "black_bra", "white_panties", "", "", "", 0]
-            $ StormX.Casual2 = [2,0, "_pants", "jacket", "", "_tube_top", "white_panties", "", "", "", 0]
-            $ StormX.Gym = [0, "", "yoga_pants", "", "", "_sports_bra", "white_panties", "", "", "",10]
-            $ StormX.sleepwear = [0, "", "", "white_shirt", "", "", "white_panties", "", "", "",25]
+            $ StormX.Casual1 = [2,0, "_skirt", "white_shirt", "", "black_bra", "_white_panties", "", "", "", 0]
+            $ StormX.Casual2 = [2,0, "_pants", "_jacket", "", "_tube_top", "_white_panties", "", "", "", 0]
+            $ StormX.Gym = [0, "", "yoga_pants", "", "", "_sports_bra", "_white_panties", "", "", "",10]
+            $ StormX.sleepwear = [0, "", "", "white_shirt", "", "", "_white_panties", "", "", "",25]
             $ StormX.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
             $ StormX.Costume = [2,0, "", "", "ring_necklace", "cos_bra", "cos_panties", "rings", "short", "", 0]
             $ StormX.Clothing = [0, "", "", "", "", "", "", "", "", 0]
@@ -2638,12 +2638,12 @@ label Emergency_Clothing_Reset:
             $ JubesX.Custom1 = [0, "", "", "", "", "", "", "", "", "", 0]
             $ JubesX.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
             $ JubesX.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JubesX.Casual1 = [2,0, "_shorts", "red_shirt", "", "_sports_bra", "blue_panties", "jacket", "", "", 0]
-            $ JubesX.Casual2 = [2,0, "_pants", "black_shirt", "", "_sports_bra", "blue_panties", "jacket", "", "", 0]
+            $ JubesX.Casual1 = [2,0, "_shorts", "_red_shirt", "", "_sports_bra", "blue_panties", "_jacket", "", "", 0]
+            $ JubesX.Casual2 = [2,0, "_pants", "black_shirt", "", "_sports_bra", "blue_panties", "_jacket", "", "", 0]
             $ JubesX.Gym = [0, "", "_pants", "", "", "_sports_bra", "blue_panties", "", "", "",10]
             $ JubesX.sleepwear = [0, "", "", "", "", "_sports_bra", "blue_panties", "", "", "",25]
             $ JubesX.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ JubesX.Costume = [0, "", "_pants", "black_shirt", "", "_sports_bra", "blue_panties", "jacket", "", "", 0]
+            $ JubesX.Costume = [0, "", "_pants", "black_shirt", "", "_sports_bra", "blue_panties", "_jacket", "", "", 0]
             $ JubesX.Clothing = [0, "", "", "", "", "", "", "", "", 0]
             $ JubesX.Outfit = "casual1"
             $ JubesX.OutfitDay = "casual1"
@@ -4493,7 +4493,7 @@ label QuickOutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, HolderO
     while len(HolderOutfit) < 11:
         $ HolderOutfit.append(0)
 
-    if HolderOutfit[5] in ("_tank", "white_tank", "button_tank", "_sports_bra", "_tube_top", "corset"):
+    if HolderOutfit[5] in ("_tank", "white_tank", "button_tank", "_sports_bra", "_tube_top", "_corset"):
         $ Count = 20
     elif HolderOutfit[5] == "wolvie_top":
         $ Count = 10
@@ -4517,7 +4517,7 @@ label QuickOutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, HolderO
             pass
         else:
             $ Count += 10
-    elif HolderOutfit[3] in ("jacket", "dress", "_pink_top") or HolderOutfit[7] == "jacket":
+    elif HolderOutfit[3] in ("_jacket", "_dress", "_pink_top") or HolderOutfit[7] == "_jacket":
         $ Count += 15
     elif HolderOutfit[3] or HolderOutfit[7] == "shut_jacket":
         $ Count += 20
@@ -4532,7 +4532,7 @@ label QuickOutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, HolderO
 
     if HolderOutfit[2] and HolderOutfit[6]:
         $ Count = 30
-    elif HolderOutfit[2] in ("blue_skirt", "_skirt", "other_skirt"):
+    elif HolderOutfit[2] in ("_blue_skirt", "_skirt", "other_skirt"):
         $ Count = 20
     elif HolderOutfit[2] or HolderOutfit[7] == "shut_jacket":
         $ Count = 25
@@ -4540,7 +4540,7 @@ label QuickOutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, HolderO
         $ Count = 25
     elif HolderOutfit[6] in ("_bikini_bottoms", "sports_panties", "_shorts"):
         $ Count = 15
-    elif HolderOutfit[6] == "lace_panties":
+    elif HolderOutfit[6] == "_lace_panties":
         $ Count = 5
     elif HolderOutfit[6]:
         $ Count = 10
@@ -4986,7 +4986,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                     $ Girl.accessory = ""
                     "[Girl.name] pulls her hoops off."
 
-                "Why don't you lose the hat?" if Girl.hair == "hat" or Girl.hair == "hat wet":
+                "Why don't you lose the hat?" if Girl.hair == "_hat" or Girl.hair == "hat wet":
                     $ Girl.hair == "wet" if Girl.hair == "hat wet" else "wave"
                     "[Girl.name] tosses her hat aside."
                 "That's enough. [[exit]":

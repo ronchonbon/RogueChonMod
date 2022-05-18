@@ -1039,7 +1039,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
 
             if "book" not in KittyX.Chat:
                 $ Options.append("booked")
-        if "lace_bra" in KittyX.inventory or "lace_panties" in KittyX.inventory:
+        if "lace_bra" in KittyX.inventory or "_lace_panties" in KittyX.inventory:
 
             if "lingerie" not in KittyX.Chat:
                 $ Options.append("lingerie")
@@ -2633,11 +2633,11 @@ label Kitty_Wardrobe_Menu:
                     return
             $ KittyX.top = "_pink_top"
 
-        "How about that red t-shirt you have?" if KittyX.top != "red_shirt":
-            $ KittyX.top = "red_shirt"
+        "How about that red t-shirt you have?" if KittyX.top != "_red_shirt":
+            $ KittyX.top = "_red_shirt"
             ch_k "This one?"
 
-        "Try on that red jacket." if KittyX.top != "jacket" and "halloween" in KittyX.history:
+        "Try on that red jacket." if KittyX.top != "_jacket" and "halloween" in KittyX.history:
             $ KittyX.change_face("_bemused")
             if KittyX.bra or KittyX.SeenChest:
                 ch_k "K."
@@ -2649,7 +2649,7 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.change_face("_bemused", 1)
                     ch_k "This top is a little skimpy for what I have on under it."
                     return
-            $ KittyX.top = "jacket"
+            $ KittyX.top = "_jacket"
 
         "Maybe just throw on a towel?" if KittyX.top != "_towel":
             $ KittyX.change_face("_bemused", 1)
@@ -2690,11 +2690,11 @@ label Kitty_Wardrobe_Menu:
                     "She pulls out her lace bra and passes it through her [KittyX.top]."
                 elif approval_check(KittyX, 800, TabM=2):
                     ch_k "Yeah, I guess."
-                    $ KittyX.bra = "bra"
+                    $ KittyX.bra = "_bra"
                     "She pulls out her bra and passes it through her [KittyX.top]."
                 elif approval_check(KittyX, 700, TabM=2):
                     ch_k "Yeah, I guess."
-                    $ KittyX.bra = "cami"
+                    $ KittyX.bra = "_cami"
                     "She pulls out her camisole and passes it through her [KittyX.top]."
                 elif approval_check(KittyX, 600, TabM=2):
                     ch_k "Yeah, I guess."
@@ -2768,13 +2768,13 @@ label Kitty_Wardrobe_Menu:
             else:
                 call Kitty_First_Bottomless
 
-        "You look great in those capris." if KittyX.legs != "capris":
+        "You look great in those capris." if KittyX.legs != "_capris":
             ch_k "Yeah, ok."
-            $ KittyX.legs = "capris"
+            $ KittyX.legs = "_capris"
 
-        "You look great in those black jeans." if KittyX.legs != "black jeans":
+        "You look great in those black jeans." if KittyX.legs != "_black_jeans":
             ch_k "K, no problem."
-            $ KittyX.legs = "black jeans"
+            $ KittyX.legs = "_black_jeans"
 
         "You look great in yoga pants." if KittyX.legs != "yoga_pants":
             ch_k "Yeah, ok."
@@ -2784,21 +2784,21 @@ label Kitty_Wardrobe_Menu:
             ch_k "K, no problem."
             $ KittyX.legs = "_shorts"
 
-        "How about the blue skirt?" if KittyX.legs != "blue_skirt" and "blue_skirt" in KittyX.inventory:
+        "How about the blue skirt?" if KittyX.legs != "_blue_skirt" and "_blue_skirt" in KittyX.inventory:
             if KittyX.underwear or approval_check(KittyX,500,"I",TabM=2):
                 ch_k "Yeah, ok."
-                $ KittyX.legs = "blue_skirt"
+                $ KittyX.legs = "_blue_skirt"
             else:
                 ch_k "That's a little revealing. . ."
 
-        "Try on that pink dress you have." if KittyX.legs != "dress" and "halloween" in KittyX.history:
+        "Try on that pink dress you have." if KittyX.legs != "_dress" and "halloween" in KittyX.history:
             menu:
                 ch_k "The whole thing, or just the skirt?"
                 "The whole dress.":
-                    $ KittyX.bra = "dress"
+                    $ KittyX.bra = "_dress"
                 "Just the skirt.":
                     pass
-            $ KittyX.legs = "dress"
+            $ KittyX.legs = "_dress"
         "Never mind":
 
             pass
@@ -2819,9 +2819,9 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.blushing = "_blush2"
                     ch_k "I didn't say that bothered me. . ."
                     $ KittyX.blushing = "_blush1"
-                elif approval_check(KittyX, 800, TabM=4) and "lace_panties" in KittyX.inventory:
+                elif approval_check(KittyX, 800, TabM=4) and "_lace_panties" in KittyX.inventory:
                     ch_k "I like how you think."
-                    $ KittyX.underwear  = "lace_panties"
+                    $ KittyX.underwear  = "_lace_panties"
                     "She pulls out her lace panties and pulls them up through her [KittyX.legs]."
                 elif approval_check(KittyX, 700, TabM=4):
                     ch_k "Yeah, I guess."
@@ -2871,7 +2871,7 @@ label Kitty_Wardrobe_Menu:
                             ch_k "If it's just you. . ."
                     elif KittyX.top == "_pink_top" and approval_check(KittyX, 600, TabM=2):
                         ch_k "This look is a bit revealing. . ."
-                    elif KittyX.top == "red_shirt" and approval_check(KittyX, 500, TabM=2):
+                    elif KittyX.top == "_red_shirt" and approval_check(KittyX, 500, TabM=2):
                         ch_k "I guess I could. . ."
                     elif not KittyX.top:
                         call Display_DressScreen (KittyX)
@@ -2892,20 +2892,20 @@ label Kitty_Wardrobe_Menu:
                         if not renpy.showing('DressScreen'):
                             call Kitty_First_Topless
 
-                "Try on that yellow camisole." if KittyX.bra != "cami":
+                "Try on that yellow camisole." if KittyX.bra != "_cami":
                     ch_k "Ok."
-                    $ KittyX.bra = "cami"
+                    $ KittyX.bra = "_cami"
 
-                "I like that strapless bra." if KittyX.bra != "bra":
+                "I like that strapless bra." if KittyX.bra != "_bra":
                     if KittyX.SeenChest or approval_check(KittyX, 1200, TabM=2):
                         ch_k "K."
-                        $ KittyX.bra = "bra"
+                        $ KittyX.bra = "_bra"
                     else:
                         call Display_DressScreen (KittyX)
                         if not _return:
                             ch_k "I'm not really comfortable with that. . ."
                         else:
-                            $ KittyX.bra = "bra"
+                            $ KittyX.bra = "_bra"
 
                 "I like that lace bra." if "lace_bra" in KittyX.inventory and KittyX.bra != "lace_bra":
                     if KittyX.SeenChest or approval_check(KittyX, 1300, TabM=2):
@@ -2944,7 +2944,7 @@ label Kitty_Wardrobe_Menu:
                             else:
                                 $ KittyX.bra = "_bikini_top"
 
-                "Try on that pink dress you have." if KittyX.bra != "dress" and "halloween" in KittyX.history:
+                "Try on that pink dress you have." if KittyX.bra != "_dress" and "halloween" in KittyX.history:
                     if KittyX.SeenChest or approval_check(KittyX, 1000, TabM=2):
                         ch_k "K."
                     else:
@@ -2955,10 +2955,10 @@ label Kitty_Wardrobe_Menu:
                     menu:
                         ch_k "The whole thing, or just the top?"
                         "The whole dress.":
-                            $ KittyX.legs = "dress"
+                            $ KittyX.legs = "_dress"
                         "Just the top.":
                             pass
-                    $ KittyX.bra = "dress"
+                    $ KittyX.bra = "_dress"
                 "Never mind":
 
                     pass
@@ -2974,9 +2974,9 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.hose = "knee stockings"
                 "The pantyhose would look good with that." if KittyX.hose != "pantyhose" and "pantyhose" in KittyX.inventory:
                     $ KittyX.hose = "pantyhose"
-                "The stockings would look good with that." if KittyX.hose != "stockings_and_garterbelt" and "stockings_and_garterbelt" in KittyX.inventory:
-                    $ KittyX.hose = "stockings_and_garterbelt"
-                "Maybe just the garterbelt?" if KittyX.hose != "garterbelt" and "stockings_and_garterbelt" in KittyX.inventory:
+                "The stockings would look good with that." if KittyX.hose != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in KittyX.inventory:
+                    $ KittyX.hose = "_stockings_and_garterbelt"
+                "Maybe just the garterbelt?" if KittyX.hose != "garterbelt" and "_stockings_and_garterbelt" in KittyX.inventory:
                     $ KittyX.hose = "garterbelt"
                 "Your ripped pantyhose would look good with that." if KittyX.hose != "ripped_pantyhose" and "ripped_pantyhose" in KittyX.inventory:
                     $ KittyX.hose = "ripped_pantyhose"
@@ -3040,16 +3040,16 @@ label Kitty_Wardrobe_Menu:
                         else:
                             $ KittyX.underwear = "_green_panties"
 
-                "Why don't you wear the lace panties instead?" if "lace_panties" in KittyX.inventory and KittyX.underwear and KittyX.underwear != "lace_panties":
+                "Why don't you wear the lace panties instead?" if "_lace_panties" in KittyX.inventory and KittyX.underwear and KittyX.underwear != "_lace_panties":
                     if approval_check(KittyX, 1300, TabM=3):
                         ch_k "I guess."
-                        $ KittyX.underwear = "lace_panties"
+                        $ KittyX.underwear = "_lace_panties"
                     else:
                         call Display_DressScreen (KittyX)
                         if not _return:
                             ch_k "That's[KittyX.like]none of your business."
                         else:
-                            $ KittyX.underwear = "lace_panties"
+                            $ KittyX.underwear = "_lace_panties"
 
                 "I like those bikini bottoms." if KittyX.underwear != "_bikini_bottoms" and "_bikini_bottoms" in KittyX.inventory:
                     if bg_current == "bg_pool":
@@ -3087,9 +3087,9 @@ label Kitty_Wardrobe_Menu:
                         "How about the green ones?":
                             ch_k "Sure, ok."
                             $ KittyX.underwear = "_green_panties"
-                        "How about the lace ones?" if "lace_panties" in KittyX.inventory:
+                        "How about the lace ones?" if "_lace_panties" in KittyX.inventory:
                             ch_k "Alright."
-                            $ KittyX.underwear  = "lace_panties"
+                            $ KittyX.underwear  = "_lace_panties"
                 "Never mind":
                     pass
             jump Kitty_Clothes_Under
@@ -3242,7 +3242,7 @@ label Kitty_Wardrobe_Menu:
         "Add flower_necklace" if KittyX.neck != "flower necklac" and "halloween" in KittyX.history:
             ch_p "Why don't you try on that flower necklace?"
             ch_k "Ok. . ."
-            $ KittyX.neck = "flower_necklace"
+            $ KittyX.neck = "_flower_necklace"
 
         "Maybe go without a necklace." if KittyX.neck:
             ch_k "Ok. . ."

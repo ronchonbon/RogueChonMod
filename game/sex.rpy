@@ -1017,7 +1017,7 @@ label Massage_Cycle:
                 $ Check = 600
                 $ Line = "You continue to massage " +Girl.name+ "'s " +Current
 
-            if Girl.top not in ("_mesh_top","_pink_top","jacket"):
+            if Girl.top not in ("_mesh_top","_pink_top","_jacket"):
                 $ Girl.addiction -= 3
         elif Current == "hands":
             if Past == "arms":

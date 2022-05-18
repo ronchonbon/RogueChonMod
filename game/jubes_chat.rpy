@@ -963,7 +963,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
 
             if "book" not in JubesX.Chat:
                 $ Options.append("booked")
-        if "lace_bra" in JubesX.inventory or "lace_panties" in JubesX.inventory:
+        if "lace_bra" in JubesX.inventory or "_lace_panties" in JubesX.inventory:
 
             if "lingerie" not in JubesX.Chat:
                 $ Options.append("lingerie")
@@ -2583,7 +2583,7 @@ label Jubes_Wardrobe_Menu:
         "Try on that yellow jacket." if not JubesX.accessory:
             $ JubesX.change_face("_bemused")
             ch_v "Sure."
-            $ JubesX.accessory = "jacket"
+            $ JubesX.accessory = "_jacket"
 
         "Maybe open the jacket more?" if JubesX.accessory and JubesX.accessory != "open_jacket":
             $ JubesX.change_face("_bemused")
@@ -2610,7 +2610,7 @@ label Jubes_Wardrobe_Menu:
             if not renpy.showing('DressScreen'):
                 call Jubes_First_Topless
 
-        "Maybe just leave the jacket loose?" if JubesX.accessory and JubesX.accessory != "jacket":
+        "Maybe just leave the jacket loose?" if JubesX.accessory and JubesX.accessory != "_jacket":
             $ JubesX.change_face("_bemused")
             if JubesX.top or (approval_check(JubesX, 800, TabM=3) and (JubesX.bra or JubesX.SeenChest)):
 
@@ -2631,7 +2631,7 @@ label Jubes_Wardrobe_Menu:
                     if not JubesX.bra:
                         ch_v "I don't have anything under this. . ."
                     return
-            $ JubesX.accessory = "jacket"
+            $ JubesX.accessory = "_jacket"
             if not renpy.showing('DressScreen'):
                 call Jubes_First_Topless
 
@@ -2640,7 +2640,7 @@ label Jubes_Wardrobe_Menu:
             ch_v "Sure."
             $ JubesX.accessory = "shut_jacket"
 
-        "Try on that red shirt." if JubesX.top != "red_shirt":
+        "Try on that red shirt." if JubesX.top != "_red_shirt":
             $ JubesX.change_face("_bemused")
             if not JubesX.top:
 
@@ -2653,7 +2653,7 @@ label Jubes_Wardrobe_Menu:
                     $ JubesX.change_face("_bemused", 1)
                     ch_v "I don't really want to take this [JubesX.top] off at the moment."
                     return
-            $ JubesX.top = "red_shirt"
+            $ JubesX.top = "_red_shirt"
 
         "Try on that leather shirt." if JubesX.top != "black_shirt":
             $ JubesX.change_face("_bemused")
@@ -2830,8 +2830,8 @@ label Jubes_Wardrobe_Menu:
                     $ JubesX.blushing = ""
                 elif approval_check(JubesX, 700, TabM=4):
                     ch_v "I could, I guess. . ."
-                    if "lace_panties" in JubesX.inventory:
-                        $ JubesX.underwear  = "lace_panties"
+                    if "_lace_panties" in JubesX.inventory:
+                        $ JubesX.underwear  = "_lace_panties"
                     else:
                         $ JubesX.underwear = "blue_panties"
                     if approval_check(JubesX, 1200, TabM=4):
@@ -2889,7 +2889,7 @@ label Jubes_Wardrobe_Menu:
                             ch_v "I don't know, here. . ."
                         else:
                             ch_v "Maaaybe. . ."
-                    elif JubesX.accessory == "jacket" and approval_check(JubesX, 600, TabM=2):
+                    elif JubesX.accessory == "_jacket" and approval_check(JubesX, 600, TabM=2):
                         ch_v "This jacket is a bit revealing. . ."
                     elif JubesX.top and approval_check(JubesX, 500, TabM=2):
                         ch_v "I guess I could. . ."
@@ -2962,9 +2962,9 @@ label Jubes_Wardrobe_Menu:
                     $ JubesX.hose = "ripped_pantyhose"
                 "The tall socks would look good with that." if JubesX.hose != "socks" and "socks" in JubesX.inventory:
                     $ JubesX.hose = "socks"
-                "The stockings and garterbelt would look good with that." if JubesX.hose != "stockings_and_garterbelt" and "stockings_and_garterbelt" in JubesX.inventory:
-                    $ JubesX.hose = "stockings_and_garterbelt"
-                "Just the garterbelt would look good with that." if JubesX.hose != "garterbelt" and "stockings_and_garterbelt" in JubesX.inventory:
+                "The stockings and garterbelt would look good with that." if JubesX.hose != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in JubesX.inventory:
+                    $ JubesX.hose = "_stockings_and_garterbelt"
+                "Just the garterbelt would look good with that." if JubesX.hose != "garterbelt" and "_stockings_and_garterbelt" in JubesX.inventory:
                     $ JubesX.hose = "garterbelt"
                 "Never mind":
                     pass
@@ -3037,16 +3037,16 @@ label Jubes_Wardrobe_Menu:
                         else:
                             $ JubesX.underwear = "blue_panties"
 
-                "Why don't you wear the lace panties instead?" if "lace_panties" in JubesX.inventory and JubesX.underwear and JubesX.underwear != "lace_panties":
+                "Why don't you wear the lace panties instead?" if "_lace_panties" in JubesX.inventory and JubesX.underwear and JubesX.underwear != "_lace_panties":
                     if approval_check(JubesX, 1300, TabM=3):
                         ch_v "I guess."
-                        $ JubesX.underwear = "lace_panties"
+                        $ JubesX.underwear = "_lace_panties"
                     else:
                         call Display_DressScreen (JubesX)
                         if not _return:
                             ch_v "That's none of your busines."
                         else:
-                            $ JubesX.underwear = "lace_panties"
+                            $ JubesX.underwear = "_lace_panties"
 
                 "Why don't you wear the tiger panties instead?" if "tiger_panties" in JubesX.inventory and JubesX.underwear and JubesX.underwear != "tiger_panties":
                     if approval_check(JubesX, 1300, TabM=3):
@@ -3097,9 +3097,9 @@ label Jubes_Wardrobe_Menu:
                         "How about the blue ones?":
                             ch_v "Sure, ok."
                             $ JubesX.underwear = "blue_panties"
-                        "How about the lace ones?" if "lace_panties" in JubesX.inventory:
+                        "How about the lace ones?" if "_lace_panties" in JubesX.inventory:
                             ch_v "Alright."
-                            $ JubesX.underwear  = "lace_panties"
+                            $ JubesX.underwear  = "_lace_panties"
                         "How about the tiger ones?" if "tiger_panties" in JubesX.inventory:
                             ch_v "Alright."
                             $ JubesX.underwear  = "tiger_panties"

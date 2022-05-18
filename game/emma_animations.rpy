@@ -560,12 +560,12 @@ image Emma_Sprite:
             ),
         )
     anchor (0.6, 0.0)
-    zoom .75
+    zoom 0.75
 
 image Temphairback:
     "images/EmmaSprite/EmmaSprite_Head_hairbackWet.png"
     anchor (0.6, 0.0)
-    zoom .5
+    zoom 0.5
 
 image EmmaSprite_Head:
     LiveComposite(
@@ -753,7 +753,7 @@ image EmmaSprite_Head:
             ),
         )
     anchor (0.6, 0.0)
-    zoom .5
+    zoom 0.5
 
 image Emma Blink:
     ConditionSwitch(
@@ -775,7 +775,7 @@ image Emma Blink:
     choice:
         3
     "images/EmmaSprite/EmmaSprite_Head_Eyes_Closed.png"
-    .25
+    0.25
     repeat
 
 image Emma_Squint:
@@ -787,7 +787,7 @@ image Emma_Squint:
     choice:
         3
     "images/EmmaSprite/EmmaSprite_Head_Eyes_Squint.png"
-    .25
+    0.25
     repeat
 
 image Emma_Drip_Mask:
@@ -1465,8 +1465,8 @@ image Emma_Sex_Body_H2:
         subpixel True
         pos (0,-10)
         block:
-            ease .6 pos (0,10)
-            ease .4 pos (0,-10)
+            ease 0.6 pos (0,10)
+            ease 0.4 pos (0,-10)
             repeat
 
 image Emma_Sex_Body_H4:
@@ -1478,7 +1478,7 @@ image Emma_Sex_Body_H4:
         block:
             ease 1.5 pos (0,-70)
             ease 2 pos (0,-80)
-            pause .5
+            pause 0.5
             repeat
 
 image Emma_Sex_Body_S0:
@@ -1499,7 +1499,7 @@ image Emma_Sex_Body_S1:
         subpixel True
         pos (0,-20)
         block:
-            ease .75 pos (0,0)
+            ease 0.75 pos (0,0)
             ease 1.5 pos (0,-20)
             pause 0.75
             repeat
@@ -1571,11 +1571,11 @@ image Emma_Sex_Body_A2:
         subpixel True
         pos (0,-10)
         block:
-            ease .30 pos (0,10)
-            ease .50 pos (0,50)
-            pause .3
-            ease .80 pos (0,-10)
-            pause .1
+            ease 0.30 pos (0,10)
+            ease 0.50 pos (0,50)
+            pause 0.3
+            ease 0.80 pos (0,-10)
+            pause 0.1
             repeat
 
 image Emma_Sex_Body_A3:
@@ -1585,8 +1585,8 @@ image Emma_Sex_Body_A3:
         subpixel True
         pos (0,-10)
         block:
-            ease .40 pos (0,50)
-            ease .60 pos (0,-10)
+            ease 0.40 pos (0,50)
+            ease 0.60 pos (0,-10)
             repeat
 
 image Emma_Sex_Body_A4:
@@ -1610,10 +1610,10 @@ image Emma_Sex_Legs_H0:
         subpixel True
         anchor (.515,.5)
         pos (528,340)
-        zoom .95
+        zoom 0.95
         parallel:
-            ease 2 zoom .98
-            ease 2 zoom .95
+            ease 2 zoom 0.98
+            ease 2 zoom 0.95
 
             repeat
         parallel:
@@ -1636,10 +1636,10 @@ image Emma_Sex_Legs_H0:
         subpixel True
         anchor (.515,.5)
         pos (528,340)
-        zoom .95
+        zoom 0.95
         parallel:
-            ease 2 zoom .98
-            ease 2 zoom .95
+            ease 2 zoom 0.98
+            ease 2 zoom 0.95
 
             repeat
         parallel:
@@ -1657,16 +1657,16 @@ image Emma_Sex_Legs_H1:
         subpixel True
         anchor (.515,.5)
         pos (528,300)
-        zoom .9
+        zoom 0.9
         parallel:
             ease 1.5 zoom 1
-            ease 1.5 zoom .9
-            pause .3
+            ease 1.5 zoom 0.9
+            pause 0.3
             repeat
         parallel:
             ease 1.5 ypos 390
             ease 1.5 ypos 300
-            pause .3
+            pause 0.3
             repeat
     contains:
 
@@ -1683,16 +1683,16 @@ image Emma_Sex_Legs_H1:
         subpixel True
         anchor (.515,.5)
         pos (528,300)
-        zoom .9
+        zoom 0.9
         parallel:
             ease 1.5 zoom 1
-            ease 1.5 zoom .9
-            pause .3
+            ease 1.5 zoom 0.9
+            pause 0.3
             repeat
         parallel:
             ease 1.5 ypos 390
             ease 1.5 ypos 300
-            pause .3
+            pause 0.3
             repeat
 
 
@@ -1704,15 +1704,15 @@ image Emma_Sex_Legs_H2:
         subpixel True
         anchor (.515,.5)
         pos (528,340)
-        zoom .95
+        zoom 0.95
         parallel:
-            ease .6 zoom 1
-            ease .4 zoom .95
+            ease 0.6 zoom 1
+            ease 0.4 zoom 0.95
 
             repeat
         parallel:
-            ease .6 ypos 390
-            ease .4 ypos 340
+            ease 0.6 ypos 390
+            ease 0.4 ypos 340
 
             repeat
     contains:
@@ -1730,15 +1730,15 @@ image Emma_Sex_Legs_H2:
         subpixel True
         anchor (.515,.5)
         pos (528,340)
-        zoom .95
+        zoom 0.95
         parallel:
-            ease .6 zoom 1
-            ease .4 zoom .95
+            ease 0.6 zoom 1
+            ease 0.4 zoom 0.95
 
             repeat
         parallel:
-            ease .6 ypos 390
-            ease .4 ypos 340
+            ease 0.6 ypos 390
+            ease 0.4 ypos 340
 
             repeat
 
@@ -2025,7 +2025,7 @@ image Emma_Sex_Anus_Mask_A1:
         xpos 250
         parallel:
 
-            pause .2
+            pause 0.2
             ease 2.2 xzoom 0.9
             ease 0.6 xzoom 0.85
 
@@ -2035,10 +2035,10 @@ image Emma_Sex_Anus_Mask_A1:
 
             ease 0.6 xzoom 0.9
             ease 2.2 xzoom 0.5
-            pause .2
+            pause 0.2
             repeat
         parallel:
-            pause .2
+            pause 0.2
             ease 2.2 xpos 50
             ease 0.6 xpos 75
 
@@ -2048,7 +2048,7 @@ image Emma_Sex_Anus_Mask_A1:
 
             ease 0.6 xpos 50
             ease 2.2 xpos 250
-            pause .2
+            pause 0.2
             repeat
 
 
@@ -2188,7 +2188,7 @@ image Emma_Sex_Anus_A1:
     xpos 250
     parallel:
 
-        pause .2
+        pause 0.2
         ease 2.2 xzoom 0.9
         ease 0.6 xzoom 0.85
 
@@ -2198,10 +2198,10 @@ image Emma_Sex_Anus_A1:
 
         ease 0.6 xzoom 0.9
         ease 2.2 xzoom 0.5
-        pause .2
+        pause 0.2
         repeat
     parallel:
-        pause .2
+        pause 0.2
         ease 2.2 xpos 50
         ease 0.6 xpos 75
 
@@ -2211,7 +2211,7 @@ image Emma_Sex_Anus_A1:
 
         ease 0.6 xpos 50
         ease 2.2 xpos 250
-        pause .2
+        pause 0.2
         repeat
 
 
@@ -2602,7 +2602,7 @@ image Emma Doggy Blink:
     3
 
     "images/EmmaDoggy/Emma_Doggy_Eyes_Closed.png"
-    .25
+    0.25
     repeat
 
 image Emma_Doggy_Ass:
@@ -2843,8 +2843,8 @@ image Emma_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "Rogue_doggy_licking_pussy",
-            "primary_action == 'eat_ass'", "Rogue_doggy_licking_ass",
+            "primary_action == 'eat_pussy'", "licking_pussy",
+            "primary_action == 'eat_ass'", "licking_ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -2896,7 +2896,7 @@ image Emma_Doggy_GropeBreast:
         subpixel True
         "images/UI_HandUnder.png"
         xzoom -.55
-        yzoom .55
+        yzoom 0.55
         offset (110,420)
         anchor (0.5,0.5)
         alpha 0.3
@@ -2955,13 +2955,13 @@ image Emma_Doggy_Boob_Fuck:
         subpixel True
         "Emma_Doggy_Boob"
         ypos 0
-        pause .4
+        pause 0.4
         block:
-            pause .05
-            ease .25 ypos -20
-            pause .2
-            ease .3 ypos -5
-            ease .2 ypos -10
+            pause 0.05
+            ease 0.25 ypos -20
+            pause 0.2
+            ease 0.3 ypos -5
+            ease 0.2 ypos -10
             easein 1.5 ypos 0
             repeat
 
@@ -2977,10 +2977,10 @@ image Emma_Doggy_Boob_Fuck2:
         "Emma_Doggy_Boob"
         ypos 0
         block:
-            pause .15
-            ease .1 ypos -30
-            pause .1
-            ease .55 ypos 5
+            pause 0.15
+            ease 0.1 ypos -30
+            pause 0.1
+            ease 0.55 ypos 5
 
             repeat
 
@@ -3014,18 +3014,18 @@ image Emma_Pussy_Static:
         "images/EmmaDoggy/Emma_Doggy_Pussy_FBase.png"
         anchor (0.52,0.69)
         pos (220,518)
-        xzoom .8
+        xzoom 0.8
     contains:
 
         "images/EmmaDoggy/Emma_Doggy_Pussy_Heading.png"
         subpixel True
         anchor (0.52,0.69)
         pos (220,518)
-        xzoom .9
+        xzoom 0.9
         block:
             ease 1 xzoom 1.1
             pause 1
-            ease 3 xzoom .9
+            ease 3 xzoom 0.9
             repeat
     contains:
 
@@ -3033,17 +3033,17 @@ image Emma_Pussy_Static:
         subpixel True
         anchor (0.52,0.69)
         pos (218,540)
-        xzoom .1
-        yzoom .8
+        xzoom 0.1
+        yzoom 0.8
         parallel:
-            ease 1 xzoom .6
+            ease 1 xzoom 0.6
             pause 1
-            ease 3 xzoom .1
+            ease 3 xzoom 0.1
             repeat
         parallel:
-            ease 1 yzoom .6
+            ease 1 yzoom 0.6
             pause 1
-            ease 3 yzoom .8
+            ease 3 yzoom 0.8
             repeat
         parallel:
             ease 1 ypos 533
@@ -3087,7 +3087,7 @@ image Emma_Pussy_Mask_Static:
         pos (220,525)
         xzoom 1
         parallel:
-            ease .9 ypos 526
+            ease 0.9 ypos 526
             pause 2.1
             ease 2 ypos 525
             repeat
@@ -3111,11 +3111,11 @@ image Emma_Pussy_Heading:
         subpixel True
         anchor (0.52,0.69)
         pos (220,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease .9 xzoom 1
+            ease 0.9 xzoom 1
             pause 1.6
-            ease 2.5 xzoom .6
+            ease 2.5 xzoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -3153,11 +3153,11 @@ image Emma_Pussy_Mask:
         "images/EmmaDoggy/Emma_Doggy_Pussy_MaskHeading.png"
         anchor (0.52,0.69)
         pos (220,518)
-        xzoom .8
+        xzoom 0.8
         parallel:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .8
+            ease 3 xzoom 0.8
             repeat
         parallel:
             ease 1 ypos 520
@@ -3181,11 +3181,11 @@ image Emma_Pussy_Fingering:
         subpixel True
         anchor (0.52,0.69)
         pos (220,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease .9 xzoom .85
+            ease 0.9 xzoom 0.85
             pause 1.6
-            ease 2.5 xzoom .6
+            ease 2.5 xzoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -3213,11 +3213,11 @@ image Emma_Pussy_Mask_Finger:
         "images/EmmaDoggy/Emma_Doggy_Pussy_MaskHeading.png"
         anchor (0.52,0.69)
         pos (220,518)
-        xzoom .8
+        xzoom 0.8
         parallel:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .8
+            ease 3 xzoom 0.8
             repeat
         parallel:
             ease 1 ypos 518
@@ -3258,8 +3258,8 @@ image Zero_Emma_Doggy_Fucking2:
         "Zero_cock_doggy_in"
         pos (169,500)
         block:
-            ease .5 ypos 440
-            pause .25
+            ease 0.5 ypos 440
+            pause 0.25
             ease 1.75 ypos 500
             repeat
 
@@ -3291,9 +3291,9 @@ image Zero_Emma_Doggy_Fucking3:
         "Zero_cock_doggy_in"
         pos (169,500)
         block:
-            ease .2 ypos 440
-            pause .1
-            ease .6 ypos 500
+            ease 0.2 ypos 440
+            pause 0.1
+            ease 0.6 ypos 500
             repeat
 
 
@@ -3331,11 +3331,11 @@ image Emma_Anal_Fingering:
         "images/EmmaDoggy/Emma_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .6
+        zoom 0.6
         block:
-            ease .5 zoom .75
-            pause .5
-            ease 1.5 zoom .6
+            ease 0.5 zoom 0.75
+            pause 0.5
+            ease 1.5 zoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -3362,11 +3362,11 @@ image Emma_Anal_Heading:
         "images/EmmaDoggy/Emma_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            ease .5 zoom 1
-            pause .5
-            ease 1.5 zoom .5
+            ease 0.5 zoom 1
+            pause 0.5
+            ease 1.5 zoom 0.5
             repeat
     contains:
         ConditionSwitch(
@@ -3390,8 +3390,8 @@ image Zero_Emma_Doggy_Anal_Heading:
         "Zero_cock_doggy_in"
         pos (172,500)
         block:
-            ease .5 ypos 450
-            pause .25
+            ease 0.5 ypos 450
+            pause 0.25
             ease 1.75 ypos 500
             repeat
 
@@ -3401,8 +3401,8 @@ image Zero_Emma_Doggy_Anal_HeadingJunk:
         Solid("#159457", xysize=(150,150))
         pos (152,600)
         block:
-            ease .5 ypos 550
-            pause .25
+            ease 0.5 ypos 550
+            pause 0.25
             ease 1.75 ypos 600
             repeat
 
@@ -3412,11 +3412,11 @@ image Emma_Doggy_Anal_Heading_Mask:
         "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            ease .5 zoom 1
-            pause .5
-            ease 1.5 zoom .5
+            ease 0.5 zoom 1
+            pause 0.5
+            ease 1.5 zoom 0.5
             repeat
 
 image Emma_Doggy_Anal_Head_Top:
@@ -3426,10 +3426,10 @@ image Emma_Doggy_Anal_Head_Top:
         "Emma_Doggy_Body"
         ypos 0
         block:
-            pause .4
-            ease .3 ypos -5
+            pause 0.4
+            ease 0.3 ypos -5
             easeout 1 ypos 0
-            pause .8
+            pause 0.8
             repeat
 
 image Emma_Doggy_Anal_Head_Ass:
@@ -3439,11 +3439,11 @@ image Emma_Doggy_Anal_Head_Ass:
         "Emma_Doggy_Ass"
         ypos 0
         block:
-            pause .4
-            ease .2 ypos -10
-            easeout .1 ypos -7
-            easein .9 ypos 0
-            pause .9
+            pause 0.4
+            ease 0.2 ypos -10
+            easeout 0.1 ypos -7
+            easein 0.9 ypos 0
+            pause 0.9
             repeat
 
 
@@ -3453,8 +3453,8 @@ image Zero_Emma_Doggy_Anal1:
         "Zero_cock_doggy_in"
         pos (172,460)
         block:
-            ease .5 ypos 395
-            pause .25
+            ease 0.5 ypos 395
+            pause 0.25
             ease 1.75 ypos 460
             repeat
 
@@ -3468,13 +3468,13 @@ image Emma_Anal_Fucking:
         "images/EmmaDoggy/Emma_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            pause .25
-            ease .25 zoom 1
-            pause .75
-            ease 1 zoom .95
-            pause .25
+            pause 0.25
+            ease 0.25 zoom 1
+            pause 0.75
+            ease 1 zoom 0.95
+            pause 0.25
             repeat
     contains:
         ConditionSwitch(
@@ -3517,10 +3517,10 @@ image Emma_Doggy_Fuck_Top:
         subpixel True
         "Emma_Doggy_Body"
         ypos 0
-        pause .4
+        pause 0.4
         block:
-            ease .2 ypos -10
-            pause .3
+            ease 0.2 ypos -10
+            pause 0.3
             ease 2 ypos 0
             repeat
 
@@ -3531,10 +3531,10 @@ image Emma_Doggy_Fuck_Ass:
         "Emma_Doggy_Ass"
         ypos 0
         block:
-            pause .4
-            ease .2 ypos -15
-            ease .1 ypos -5
-            pause .2
+            pause 0.4
+            ease 0.2 ypos -15
+            ease 0.1 ypos -5
+            pause 0.2
             ease 1.6 ypos 0
             repeat
 
@@ -3546,9 +3546,9 @@ image Zero_Emma_Doggy_Anal2:
         "Zero_cock_doggy_in"
         pos (172,460)
         block:
-            ease .2 ypos 395
-            pause .1
-            ease .6 ypos 465
+            ease 0.2 ypos 395
+            pause 0.1
+            ease 0.6 ypos 465
             repeat
 
 image Emma_Anal_Fucking2:
@@ -3561,13 +3561,13 @@ image Emma_Anal_Fucking2:
         "images/EmmaDoggy/Emma_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            pause .1
-            ease .1 zoom 1
-            pause .3
-            ease .3 zoom .95
-            pause .1
+            pause 0.1
+            ease 0.1 zoom 1
+            pause 0.3
+            ease 0.3 zoom 0.95
+            pause 0.1
             repeat
     contains:
 
@@ -3595,11 +3595,11 @@ image Emma_Doggy_Fuck2_Top:
         "Emma_Doggy_Body"
         ypos 0
         block:
-            pause .15
-            ease .1 ypos -20
-            pause .1
-            easein .5 ypos 0
-            pause .05
+            pause 0.15
+            ease 0.1 ypos -20
+            pause 0.1
+            easein 0.5 ypos 0
+            pause 0.05
             repeat
 
 image Emma_Doggy_Fuck2_Ass:
@@ -3609,12 +3609,12 @@ image Emma_Doggy_Fuck2_Ass:
         "Emma_Doggy_Ass"
         ypos 5
         block:
-            pause .15
-            ease .1 ypos -25
-            ease .1 ypos -15
-            pause .1
-            ease .4 ypos 5
-            pause .05
+            pause 0.15
+            ease 0.1 ypos -25
+            ease 0.1 ypos -15
+            pause 0.1
+            ease 0.4 ypos 5
+            pause 0.05
             repeat
 
 
@@ -3627,9 +3627,9 @@ image Emma_Doggy_Feet0:
         pos (0, -20)
         block:
             subpixel True
-            pause .5
+            pause 0.5
             ease 2 ypos 0
-            pause .5
+            pause 0.5
             ease 2 ypos -20
             repeat
     contains:
@@ -3644,9 +3644,9 @@ image Emma_Doggy_Feet0:
         pos (0, -20)
         block:
             subpixel True
-            pause .5
+            pause 0.5
             ease 2 ypos 0
-            pause .5
+            pause 0.5
             ease 2 ypos -20
             repeat
 
@@ -3656,7 +3656,7 @@ image Emma_Doggy_Feet1:
         "Emma_Doggy_Shins"
         pos (0, -20)
         block:
-            pause .3
+            pause 0.3
             ease 1.7 ypos 100
             ease 1 ypos -20
             repeat
@@ -3665,15 +3665,15 @@ image Emma_Doggy_Feet1:
         zoom 1.2
         pos (158,520)
         block:
-            pause .4
+            pause 0.4
             ease 1.7 ypos 540
-            ease .9 ypos 520
+            ease 0.9 ypos 520
             repeat
     contains:
         "Emma_Doggy_Feet"
         pos (0, -20)
         block:
-            pause .3
+            pause 0.3
             ease 1.7 ypos 100
             ease 1 ypos -20
             repeat
@@ -3684,26 +3684,26 @@ image Emma_Doggy_Feet2:
         "Emma_Doggy_Shins"
         pos (0, -20)
         block:
-            pause .05
-            ease .6 ypos 110
-            ease .3 ypos -20
+            pause 0.05
+            ease 0.6 ypos 110
+            ease 0.3 ypos -20
             repeat
     contains:
         "Zero_cock_doggy_out"
         zoom 1.2
         pos (158,520)
         block:
-            pause .07
-            ease .6 ypos 540
-            ease .28 ypos 520
+            pause 0.07
+            ease 0.6 ypos 540
+            ease 0.28 ypos 520
             repeat
     contains:
         "Emma_Doggy_Feet"
         pos (0, -20)
         block:
-            pause .05
-            ease .6 ypos 110
-            ease .3 ypos -20
+            pause 0.05
+            ease 0.6 ypos 110
+            ease 0.3 ypos -20
             repeat
 
 
@@ -4014,8 +4014,8 @@ image Emma_TJ_Body_2:
         subpixel True
         block:
             pause 0.1
-            ease .6 ypos 250
-            ease .3 ypos 270
+            ease 0.6 ypos 250
+            ease 0.3 ypos 270
             repeat
     contains:
 
@@ -4023,10 +4023,10 @@ image Emma_TJ_Body_2:
         pos (0,0)
         subpixel True
         block:
-            pause .1
-            ease .5 ypos -20
-            ease .3 ypos 15
-            pause .1
+            pause 0.1
+            ease 0.5 ypos -20
+            ease 0.3 ypos 15
+            pause 0.1
             repeat
     contains:
 
@@ -4037,9 +4037,9 @@ image Emma_TJ_Body_2:
         anchor (0.5,0.5)
         zoom 0.4
         block:
-            pause .05
-            ease .65 ypos 140
-            ease .3 ypos 150
+            pause 0.05
+            ease 0.65 ypos 140
+            ease 0.3 ypos 150
             repeat
     contains:
 
@@ -4050,7 +4050,7 @@ image Emma_TJ_Body_2:
         subpixel True
         block:
             pause 0.1
-            ease .6 ypos 250
+            ease 0.6 ypos 250
             ease 0.3 ypos 270
             repeat
     contains:
@@ -4062,9 +4062,9 @@ image Emma_TJ_Body_2:
         size (1000,1000)
         anchor (500,500)
         parallel:
-            ease .6 ypos 220
-            ease .3 ypos 300
-            pause .1
+            ease 0.6 ypos 220
+            ease 0.3 ypos 300
+            pause 0.1
             repeat
 
 
@@ -4079,9 +4079,9 @@ image Emma_TJ_Body_3:
         subpixel True
         block:
             ease 1.5 ypos 260
-            pause .7
-            ease .3 ypos 290
-            pause .5
+            pause 0.7
+            ease 0.3 ypos 290
+            pause 0.5
             repeat
     contains:
 
@@ -4090,9 +4090,9 @@ image Emma_TJ_Body_3:
         subpixel True
         block:
             ease 1.6 ypos -20
-            pause .7
-            ease .2 ypos 0
-            pause .5
+            pause 0.7
+            ease 0.2 ypos 0
+            pause 0.5
             repeat
     contains:
 
@@ -4103,9 +4103,9 @@ image Emma_TJ_Body_3:
         subpixel True
         block:
             ease 1.5 ypos 260
-            pause .7
-            ease .3 ypos 290
-            pause .5
+            pause 0.7
+            ease 0.3 ypos 290
+            pause 0.5
             repeat
     contains:
 
@@ -4115,11 +4115,11 @@ image Emma_TJ_Body_3:
         anchor (0.5,0.5)
         zoom 0.4
         block:
-            pause .2
+            pause 0.2
             ease 1.6 ypos 120
-            pause .4
-            ease .3 ypos 130
-            pause .5
+            pause 0.4
+            ease 0.3 ypos 130
+            pause 0.5
             repeat
     contains:
 
@@ -4131,9 +4131,9 @@ image Emma_TJ_Body_3:
         anchor (500,500)
         parallel:
             ease 1.8 ypos 240
-            pause .3
-            ease .4 ypos 290
-            pause .5
+            pause 0.3
+            ease 0.4 ypos 290
+            pause 0.5
             repeat
 
 
@@ -4150,9 +4150,9 @@ image Emma_TJ_Body_5:
         subpixel True
         block:
             ease 1.5 ypos 288
-            pause .7
-            ease .3 ypos 290
-            pause .5
+            pause 0.7
+            ease 0.3 ypos 290
+            pause 0.5
             repeat
     contains:
 
@@ -4161,9 +4161,9 @@ image Emma_TJ_Body_5:
         subpixel True
         block:
             ease 1.3 ypos -5
-            pause .7
-            ease .5 ypos 0
-            pause .5
+            pause 0.7
+            ease 0.5 ypos 0
+            pause 0.5
             repeat
     contains:
 
@@ -4174,9 +4174,9 @@ image Emma_TJ_Body_5:
         subpixel True
         block:
             ease 1.5 ypos 288
-            pause .7
-            ease .3 ypos 290
-            pause .5
+            pause 0.7
+            ease 0.3 ypos 290
+            pause 0.5
             repeat
     contains:
 
@@ -4186,11 +4186,11 @@ image Emma_TJ_Body_5:
         anchor (0.5,0.5)
         zoom 0.4
         block:
-            pause .2
+            pause 0.2
             ease 1.6 ypos 128
-            pause .4
-            ease .3 ypos 130
-            pause .5
+            pause 0.4
+            ease 0.3 ypos 130
+            pause 0.5
             repeat
     contains:
 
@@ -4202,9 +4202,9 @@ image Emma_TJ_Body_5:
         anchor (500,500)
         parallel:
             ease 1.3 ypos 270
-            pause .3
-            ease .9 ypos 290
-            pause .5
+            pause 0.3
+            ease 0.9 ypos 290
+            pause 0.5
             repeat
 
 
@@ -4281,8 +4281,8 @@ label Emma_TJ_Reset:
     show Emma_Sprite zorder EmmaX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 xpos 500 yoffset 50
-        pause .5
-        ease .5 zoom 1 xpos EmmaX.sprite_location yoffset 0
+        pause 0.5
+        ease 0.5 zoom 1 xpos EmmaX.sprite_location yoffset 0
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos EmmaX.sprite_location
@@ -4306,42 +4306,42 @@ image Emma_BJ_Animation:
         (858,928),
         (-270,-160), ConditionSwitch(
 
-            "action_speed == 0", At("Emma_BJ_hairback", Emma_BJ_Head_0()),
-            "action_speed == 1", At("Emma_BJ_hairback", Emma_BJ_Head_1()),
-            "action_speed == 2", At("Emma_BJ_hairback", Emma_BJ_Head_2()),
-            "action_speed == 3", At("Emma_BJ_hairback", Emma_BJ_Head_3()),
-            "action_speed == 4", At("Emma_BJ_hairback", Emma_BJ_Head_4()),
+            "action_speed == 0", At("Emma_BJ_hairback", blowjob_starting()),
+            "action_speed == 1", At("Emma_BJ_hairback", blowjob_licking()),
+            "action_speed == 2", At("Emma_BJ_hairback", blowjob_heading()),
+            "action_speed == 3", At("Emma_BJ_hairback", blowjob_sucking()),
+            "action_speed == 4", At("Emma_BJ_hairback", blowjob_deepthroat()),
             "action_speed == 5", At("Emma_BJ_hairback", Emma_BJ_Head_5()),
             "action_speed == 6", At("Emma_BJ_hairback", Emma_BJ_Head_6()),
             "True", Null(),
             ),
         (-20,270), ConditionSwitch(
 
-            "action_speed == 0", At("Emma_BJ_Backdrop", Emma_BJ_Body_0()),
-            "action_speed == 1", At("Emma_BJ_Backdrop", Emma_BJ_Body_1()),
+            "action_speed == 0", At("Emma_BJ_Backdrop", blowjob_starting()),
+            "action_speed == 1", At("Emma_BJ_Backdrop", blowjob_licking_body()),
             "action_speed == 2", At("Emma_BJ_Backdrop", Emma_BJ_Body_2()),
-            "action_speed == 3", At("Emma_BJ_Backdrop", Emma_BJ_Body_3()),
-            "action_speed == 4", At("Emma_BJ_Backdrop", Emma_BJ_Body_4()),
+            "action_speed == 3", At("Emma_BJ_Backdrop", blowjob_sucking_body()),
+            "action_speed == 4", At("Emma_BJ_Backdrop", blowjob_deepthroat_body()),
             "action_speed == 5", At("Emma_BJ_Backdrop", Emma_BJ_Body_5()),
             "action_speed == 6", At("Emma_BJ_Backdrop", Emma_BJ_Body_6()),
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
 
-            "action_speed == 0", At("Emma_BJ_Head", Emma_BJ_Head_0()),
-            "action_speed == 1", At("Emma_BJ_Head", Emma_BJ_Head_1()),
-            "action_speed == 2", At("Emma_BJ_Head", Emma_BJ_Head_2()),
-            "action_speed == 3", At("Emma_BJ_Head", Emma_BJ_Head_3()),
-            "action_speed == 4", At("Emma_BJ_Head", Emma_BJ_Head_4()),
+            "action_speed == 0", At("Emma_BJ_Head", blowjob_starting()),
+            "action_speed == 1", At("Emma_BJ_Head", blowjob_licking()),
+            "action_speed == 2", At("Emma_BJ_Head", blowjob_heading()),
+            "action_speed == 3", At("Emma_BJ_Head", blowjob_sucking()),
+            "action_speed == 4", At("Emma_BJ_Head", blowjob_deepthroat()),
             "action_speed == 5", At("Emma_BJ_Head", Emma_BJ_Head_5()),
             "action_speed == 6", At("Emma_BJ_Head", Emma_BJ_Head_6()),
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "action_speed == 0", At("Zero_cock_blowjob", Emma_BJ_Cock_0()),
-            "action_speed == 1", At("Zero_cock_blowjob", Emma_BJ_Cock_1()),
-            "action_speed >= 2", At("Zero_cock_blowjob", Emma_BJ_Cock_2()),
+            "action_speed == 0", At("Zero_cock_blowjob", blowjob_starting_cock()),
+            "action_speed == 1", At("Zero_cock_blowjob", blowjob_licking_cock()),
+            "action_speed >= 2", At("Zero_cock_blowjob", blowjob_straight_cock()),
 
 
 
@@ -4350,33 +4350,33 @@ image Emma_BJ_Animation:
         (-270,-160), ConditionSwitch(
 
             "action_speed < 3", Null(),
-            "action_speed == 3", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MouthSuckingMask"), Emma_BJ_Head_3()),
-            "action_speed == 4", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MouthSuckingMask"), Emma_BJ_Head_4()),
+            "action_speed == 3", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MouthSuckingMask"), blowjob_sucking()),
+            "action_speed == 4", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MouthSuckingMask"), blowjob_deepthroat()),
             "action_speed == 6", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MouthSuckingMask"), Emma_BJ_Head_6()),
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
 
-            "action_speed == 2", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MaskHeadingComposite"), Emma_BJ_Head_2()),
+            "action_speed == 2", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MaskHeadingComposite"), blowjob_heading()),
             "action_speed == 5", At(AlphaMask("Emma_BJ_Head", "Emma_BJ_MaskHeadingComposite"), Emma_BJ_Head_5()),
             "True", Null(),
             ),
         (325,490), ConditionSwitch(
 
             "action_speed < 3 or 'mouth' not in EmmaX.spunk", Null(),
-            "action_speed == 3", At("EmmaSuckingSpunk", Emma_BJ_Head_3()),
-            "action_speed == 4", At("EmmaSuckingSpunk", Emma_BJ_Head_4()),
+            "action_speed == 3", At("EmmaSuckingSpunk", blowjob_sucking()),
+            "action_speed == 4", At("EmmaSuckingSpunk", blowjob_deepthroat()),
             "action_speed == 6", At("EmmaSuckingSpunk", Emma_BJ_Head_6()),
             "True", Null(),
             ),
         (325,490), ConditionSwitch(
 
-            "action_speed == 2 and 'mouth' in EmmaX.spunk", At("Emma_BJ_MaskHeadingSpunk", Emma_BJ_Head_2()),
+            "action_speed == 2 and 'mouth' in EmmaX.spunk", At("Emma_BJ_MaskHeadingSpunk", blowjob_heading()),
 
             "True", Null(),
             ),
         )
-    zoom .55
+    zoom 0.55
     anchor (.5,.5)
 
 image Emma_BJ_hairback:
@@ -4546,7 +4546,7 @@ image Emma BJ Blink:
     choice:
         3
     "images/EmmaBJFace/Emma_BJ_Eyes_Closed.png"
-    .25
+    0.25
     repeat
 
 image Emma_BJ_Hat:
@@ -4603,17 +4603,17 @@ image Emma_BJ_MaskHeadingSpunk:
         anchor (0.5, 0.65)
         zoom 0.58
         block:
-            pause .20
-            easeout .15 zoom 0.66
-            linear .15 zoom 0.60
-            easein .25 zoom 0.68
-            pause .25
+            pause 0.20
+            easeout 0.15 zoom 0.66
+            linear 0.15 zoom 0.60
+            easein 0.25 zoom 0.68
+            pause 0.25
 
-            pause .40
-            easeout .40 zoom 0.60
-            linear .10 zoom 0.66
-            easein .30 zoom 0.58
-            pause .30
+            pause 0.40
+            easeout 0.40 zoom 0.60
+            linear 0.10 zoom 0.66
+            easein 0.30 zoom 0.58
+            pause 0.30
 
             repeat
 
@@ -4633,17 +4633,17 @@ transform Emma_BJ_MouthAnim():
     subpixel True
     zoom 0.58
     block:
-        pause .20
-        easeout .15 zoom 0.66
-        linear .15 zoom 0.60
-        easein .25 zoom 0.68
-        pause .25
+        pause 0.20
+        easeout 0.15 zoom 0.66
+        linear 0.15 zoom 0.60
+        easein 0.25 zoom 0.68
+        pause 0.25
 
-        pause .40
-        easeout .40 zoom 0.60
-        linear .10 zoom 0.66
-        easein .30 zoom 0.58
-        pause .30
+        pause 0.40
+        easeout 0.40 zoom 0.60
+        linear 0.10 zoom 0.66
+        easein 0.30 zoom 0.58
+        pause 0.30
 
         repeat
 
@@ -4654,21 +4654,6 @@ transform Emma_BJ_MouthAnim():
 
 
 
-
-
-
-
-
-
-
-transform Emma_BJ_Head_2():
-
-    subpixel True
-    offset (0,-40)
-    block:
-        ease 1 yoffset 40
-        ease 1.5 offset (0,-40)
-        repeat
 
 
 
@@ -4680,68 +4665,14 @@ transform Emma_BJ_MouthAnimC():
     subpixel True
     zoom 0.7
     block:
-        pause .20
-        ease .50 zoom 0.65
-        pause .60
-        ease .30 zoom 0.7
-        pause .10
-        ease .30 zoom 0.65
-        pause .20
-        ease .30 zoom 0.7
-        repeat
-
-
-
-transform Emma_BJ_Cock_0():
-
-    anchor (.5,.5)
-    rotate -10
-transform Emma_BJ_Cock_1():
-
-    subpixel True
-    anchor (.5,.5)
-    ease 0.5 rotate 0
-    block:
-        ease 2 rotate -5
-        pause .5
-        ease 2.5 rotate 0
-        repeat
-transform Emma_BJ_Cock_2():
-
-    anchor (.5,.5)
-    rotate 0
-    alpha 1
-
-
-
-
-transform Emma_BJ_Head_0():
-
-    subpixel True
-    ease 1.5 offset (0,0)
-transform Emma_BJ_Body_0():
-
-    subpixel True
-    ease 1.5 offset (0,0)
-
-
-transform Emma_BJ_Head_1():
-
-    subpixel True
-    ease 0.5 offset (0,-35)
-    block:
-        ease 2.5 offset (25,100)
-        ease 2 offset (0,-35)
-        pause .5
-        repeat
-transform Emma_BJ_Body_1():
-
-    subpixel True
-    ease 0.5 offset (0,-35)
-    block:
-        ease 2.5 offset (30,90)
-        ease 2 offset (0,-35)
-        pause .5
+        pause 0.20
+        ease 0.50 zoom 0.65
+        pause 0.60
+        ease 0.30 zoom 0.7
+        pause 0.10
+        ease 0.30 zoom 0.65
+        pause 0.20
+        ease 0.30 zoom 0.7
         repeat
 
 
@@ -4765,41 +4696,7 @@ transform Emma_BJ_Body_2():
         ease 1.5 offset (0,-40)
         repeat
 
-transform Emma_BJ_Head_3():
 
-    subpixel True
-    ease 0.5 offset (0,50)
-    block:
-        ease 1 yoffset 120
-        ease 1.5 offset (0,50)
-        repeat
-transform Emma_BJ_Body_3():
-
-    subpixel True
-    ease 0.5 offset (0,50)
-    block:
-        ease 1 yoffset 100
-        ease 1.5 offset (0,50)
-        repeat
-
-transform Emma_BJ_Head_4():
-
-    ease .5 offset (0,100)
-    block:
-        subpixel True
-        ease 1 yoffset 300
-        pause .5
-        ease 2 yoffset 100
-        repeat
-transform Emma_BJ_Body_4():
-
-    ease .5 offset (0,100)
-    block:
-        subpixel True
-        ease 1.2 yoffset 250
-        pause .5
-        ease 1.8 yoffset 100
-        repeat
 
 transform Emma_BJ_Head_5():
 
@@ -4820,20 +4717,20 @@ transform Emma_BJ_Body_5():
 
 transform Emma_BJ_Head_6():
 
-    ease .5 offset (0,230)
+    ease 0.5 offset (0,230)
     block:
         subpixel True
         ease 1 yoffset 250
-        pause .5
+        pause 0.5
         ease 2 yoffset 230
         repeat
 transform Emma_BJ_Body_6():
 
-    ease .5 offset (0,190)
+    ease 0.5 offset (0,190)
     block:
         subpixel True
         ease 1.2 yoffset 200
-        pause .5
+        pause 0.5
         ease 1.8 yoffset 190
         repeat
 
@@ -4908,8 +4805,8 @@ label Emma_BJ_Reset:
     show Emma_Sprite zorder EmmaX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 offset (-50,50)
-        pause .5
-        ease .5 zoom 1 offset (0,0)
+        pause 0.5
+        ease 0.5 zoom 1 offset (0,0)
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -4939,7 +4836,7 @@ transform Emma_Hand_1():
     pos (-20,-100)
     rotate 5
     block:
-        ease .5 pos (0,150) rotate -5
+        ease 0.5 pos (0,150) rotate -5
         pause 0.25
         ease 1.0 pos (-20,-100) rotate 5
         pause 0.1
@@ -4962,7 +4859,7 @@ transform Handcock_3():
     ypos 400
     rotate 0
     block:
-        ease .5 ypos 450 rotate -2
+        ease 0.5 ypos 450 rotate -2
         pause 0.25
         ease 1.0 ypos 400 rotate 0
         pause 0.1
@@ -4974,8 +4871,8 @@ transform Handcock_4():
     ypos 400
     rotate 0
     block:
-        ease .2 ypos 430 rotate -3
-        ease .5 ypos 400 rotate 0
+        ease 0.2 ypos 430 rotate -3
+        ease 0.5 ypos 400 rotate 0
         pause 0.1
         repeat
 
@@ -4985,7 +4882,7 @@ transform Handcock_1E():
     ypos 400
     rotate 0
     block:
-        ease .5 ypos 450 rotate -2
+        ease 0.5 ypos 450 rotate -2
         pause 0.25
         ease 1.0 ypos 400 rotate 0
         pause 0.1
@@ -4997,8 +4894,8 @@ transform Handcock_2E():
     ypos 400
     rotate 0
     block:
-        ease .2 ypos 430 rotate -3
-        ease .5 ypos 400 rotate 0
+        ease 0.2 ypos 430 rotate -3
+        ease 0.5 ypos 400 rotate 0
         pause 0.1
         repeat
 
@@ -5062,7 +4959,7 @@ label Emma_HJ_Launch(Line=primary_action):
         $ primary_action = "handjob"
     else:
         $ action_speed = 1
-    pause .5
+    pause 0.5
     $ EmmaX.ArmPose = 1
     show Emma_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
 
@@ -5082,8 +4979,8 @@ label Emma_HJ_Reset:
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         ease 1 zoom 1.5 offset (-150,50)
-        pause .5
-        ease .5 zoom 1 offset (0,0)
+        pause 0.5
+        ease 0.5 zoom 1 offset (0,0)
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -5172,7 +5069,7 @@ image Emma_FJ_Animation:
             "EmmaX.grool == 1", "images/EmmaSprite/EmmaSprite_Wet.png",
             "True", "images/EmmaSprite/EmmaSprite_Wet.png",
             )
-        zoom .75
+        zoom 0.75
     contains:
 
         ConditionSwitch(
@@ -5238,7 +5135,7 @@ image Emma_FJ_Animation:
         zoom 0.4
         pos (-17,-45)
     anchor (0.6, 0.0)
-    zoom .85
+    zoom 0.85
     subpixel True
     block:
         ease 1 yoffset -2
@@ -5303,9 +5200,9 @@ image Emma_FJ_Legs_0:
         rotate 25
         parallel:
             easeout 2 rotate -5
-            easein .5 rotate -10
+            easein 0.5 rotate -10
             easeout 2 rotate 20
-            easein .5 rotate 25
+            easein 0.5 rotate 25
             repeat
     contains:
 
@@ -5313,10 +5210,10 @@ image Emma_FJ_Legs_0:
         transform_anchor True
         rotate 0
         block:
-            pause .5
+            pause 0.5
             easeout 1.5 rotate -5
-            easein .5 rotate -7
-            pause .5
+            easein 0.5 rotate -7
+            pause 0.5
             easeout 1 rotate -3
             easein 1 rotate 0
             repeat
@@ -5346,10 +5243,10 @@ image Emma_FJ_Legs_1:
             ease 1 ypos 615
             repeat
         parallel:
-            easein .5 rotate 12
+            easein 0.5 rotate 12
             pause 1
             ease 1.5 rotate 18
-            pause .5
+            pause 0.5
             easeout 1 rotate 14
             repeat
     contains:
@@ -5366,7 +5263,7 @@ image Emma_FJ_Legs_1:
             ease 1 rotate 8
             ease 1 rotate 18
             ease 2 rotate 20
-            ease .5 rotate 18
+            ease 0.5 rotate 18
             repeat
     contains:
 
@@ -5395,7 +5292,7 @@ image Emma_FJ_Legs_1:
             easein 1 rotate 0
             easeout 1 rotate 25
             easein 2 rotate 35
-            easeout .5 rotate 25
+            easeout 0.5 rotate 25
             repeat
     contains:
 
@@ -5427,11 +5324,11 @@ image Emma_FJ_Legs_2:
         pos (290,610)
         rotate 10
         parallel:
-            ease .5 ypos 630
+            ease 0.5 ypos 630
             ease 1 ypos 610
             repeat
         parallel:
-            ease .5 rotate 0
+            ease 0.5 rotate 0
             ease 1 rotate 10
             repeat
     contains:
@@ -5440,11 +5337,11 @@ image Emma_FJ_Legs_2:
         pos (380,450)
         rotate 15
         parallel:
-            ease .5 pos (320,500)
+            ease 0.5 pos (320,500)
             ease 1 pos (380,460)
             repeat
         parallel:
-            ease .5 rotate -5
+            ease 0.5 rotate -5
             ease 1 rotate 15
             repeat
     contains:
@@ -5461,11 +5358,11 @@ image Emma_FJ_Legs_2:
         pos (240,670)
         rotate 30
         parallel:
-            ease .5 pos (240,870)
+            ease 0.5 pos (240,870)
             ease 1 pos (240,670)
             repeat
         parallel:
-            ease .5 rotate 20
+            ease 0.5 rotate 20
             ease 1 rotate 30
             repeat
     contains:
@@ -5473,7 +5370,7 @@ image Emma_FJ_Legs_2:
         "Zero_Emma_FootCock"
         transform_anchor True
         block:
-            ease .5 rotate -8
+            ease 0.5 rotate -8
             ease 1 rotate 0
             repeat
     anchor (0.6, 0.0)
@@ -5500,7 +5397,7 @@ image Emma_FJ_Legs_4:
         parallel:
             ease 1 rotate 0
             ease 1.3 rotate 23
-            pause .5
+            pause 0.5
             repeat
     contains:
         "Emma_FJ_Calf"
@@ -5511,12 +5408,12 @@ image Emma_FJ_Legs_4:
         parallel:
             ease 1 pos (320,480)
             ease 1.3 pos (380,450)
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 1 rotate 5
             ease 1.3 rotate 15
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -5534,12 +5431,12 @@ image Emma_FJ_Legs_4:
         parallel:
             ease 1 pos (200,750)
             ease 1.3 pos (220,670)
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 1 rotate 30
             ease 1.3 rotate 40
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -5547,10 +5444,10 @@ image Emma_FJ_Legs_4:
         "Zero_Emma_FootCock"
         transform_anchor True
         block:
-            pause .1
-            ease .9 rotate -8
+            pause 0.1
+            ease 0.9 rotate -8
             ease 1.3 rotate 0
-            pause .5
+            pause 0.5
             repeat
     anchor (0.6, 0.0)
 
@@ -5564,7 +5461,7 @@ image Zero_Emma_FootCock:
                 "True", Null(),
                 )
     pos (200,1000)
-    zoom .9
+    zoom 0.9
     anchor (-.4,0.7)
 
 
@@ -5606,13 +5503,13 @@ label Emma_FJ_Launch(Line=primary_action):
         xpos 1580
         yoffset 170
         alpha 1
-        ease .5 xpos 590
+        ease 0.5 xpos 590
     show Emma_FJ_Animation zorder 150:
         alpha 0
         pos (950,200)
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
         alpha 1
-        ease 1 zoom .8 xpos 580 yoffset 150
+        ease 1 zoom 0.8 xpos 580 yoffset 150
     pause 1
 
     show Emma_FJ_Chair zorder 10:
@@ -5622,7 +5519,7 @@ label Emma_FJ_Launch(Line=primary_action):
         alpha 0
     $ action_speed = 0
     show Emma_FJ_Animation zorder 150:
-        ease .5 alpha 1
+        ease 0.5 alpha 1
     pause 0.5
     show Emma_FJ_Animation zorder 150:
         alpha 1
@@ -5639,11 +5536,11 @@ label Emma_FJ_Reset:
     $ Player.sprite = 0
 
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
-        zoom .8 xpos 580 yoffset 150
+        zoom 0.8 xpos 580 yoffset 150
     show Emma_Sprite zorder EmmaX.sprite_layer:
         alpha 1
-        ease .5 zoom 1 xpos EmmaX.sprite_location yoffset 0 alpha 1
-    pause .5
+        ease 0.5 zoom 1 xpos EmmaX.sprite_location yoffset 0 alpha 1
+    pause 0.5
 
     hide Emma_FJ_Chair zorder 10
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
@@ -5719,9 +5616,9 @@ image Emma_Behind_Podium:
         pos (640,180)
         block:
             subpixel True
-            ease .5 ypos 183
-            ease .5 ypos 180
-            pause .5
+            ease 0.5 ypos 183
+            ease 0.5 ypos 180
+            pause 0.5
             repeat
 
 
@@ -5777,7 +5674,7 @@ label Emma_Pos_Reset(T=0, Set=0):
         return
     call Emma_Hide
     show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location):
-        ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
+        ease 0.5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
     show Emma_Sprite zorder EmmaX.sprite_layer:
         offset (0,0)
         anchor (0.5, 0.0)
@@ -5845,8 +5742,8 @@ image LickRightBreast_Emma:
         alpha 0.5
         rotate 30
         block:
-            ease .5 rotate -40 pos (85,345)
-            pause .5
+            ease 0.5 rotate -40 pos (85,345)
+            pause 0.5
             ease 1.5 rotate 30 pos (105,375)
             repeat
 
@@ -5861,8 +5758,8 @@ image LickLeftBreast_Emma:
         alpha 0.5
         rotate 30
         block:
-            ease .5 rotate -40 pos (190,350)
-            pause .5
+            ease 0.5 rotate -40 pos (190,350)
+            pause 0.5
             ease 1.5 rotate 30 pos (205,370)
             repeat
 
@@ -5870,13 +5767,13 @@ image GropeThigh_Emma:
     contains:
         subpixel True
         "UI_Hand"
-        zoom .65
+        zoom 0.65
         pos (180,670)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 100
         block:
-            pause .5
+            pause 0.5
             ease 1 rotate 110 pos (150,750)
             ease 1 rotate 100 pos (180,670)
             repeat
@@ -5885,18 +5782,18 @@ image GropePussy_Emma:
     contains:
         subpixel True
         "UI_Hand"
-        zoom .65
+        zoom 0.65
         pos (200,600)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 170
         block:
             choice:
-                ease .5 rotate 190 pos (200,585)
-                ease .75 rotate 170 pos (200,600)
+                ease 0.5 rotate 190 pos (200,585)
+                ease 0.75 rotate 170 pos (200,600)
             choice:
-                ease .5 rotate 190 pos (200,585)
-                pause .25
+                ease 0.5 rotate 190 pos (200,585)
+                pause 0.25
                 ease 1 rotate 170 pos (200,600)
             repeat
 
@@ -5912,21 +5809,21 @@ image FingerPussy_Emma:
         block:
             choice:
                 ease 1 rotate 40 pos (220,640)
-                pause .5
+                pause 0.5
                 ease 1 rotate 50 pos (210,665)
             choice:
-                ease .5 rotate 40 pos (220,640)
-                pause .5
+                ease 0.5 rotate 40 pos (220,640)
+                pause 0.5
                 ease 1.75 rotate 50 pos (210,665)
             choice:
                 ease 2 rotate 40 pos (220,640)
-                pause .5
+                pause 0.5
                 ease 1 rotate 50 pos (210,665)
             choice:
-                ease .25 rotate 40 pos (220,640)
-                ease .25 rotate 50 pos (210,665)
-                ease .25 rotate 40 pos (220,640)
-                ease .25 rotate 50 pos (210,665)
+                ease 0.25 rotate 40 pos (220,640)
+                ease 0.25 rotate 50 pos (210,665)
+                ease 0.25 rotate 40 pos (220,640)
+                ease 0.25 rotate 50 pos (210,665)
             repeat
 
 image Lickpussy_Emma:
@@ -5940,8 +5837,8 @@ image Lickpussy_Emma:
         alpha 0.5
         rotate 10
         block:
-            easeout .5 rotate -50 pos (210,605)
-            linear .5 rotate -60 pos (200,615)
+            easeout 0.5 rotate -50 pos (210,605)
+            linear 0.5 rotate -60 pos (200,615)
             easein 1 rotate 10 pos (230,625)
             repeat
 
@@ -5956,9 +5853,9 @@ image VibratorRightBreast_Emma:
         rotate 55
         block:
             ease 1 rotate 35 ypos 370
-            pause .25
+            pause 0.25
             ease 1 rotate 55 ypos 380
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorLeftBreast_Emma:
@@ -5972,9 +5869,9 @@ image VibratorLeftBreast_Emma:
         rotate 55
         block:
             ease 1 rotate 35 ypos 390
-            pause .25
+            pause 0.25
             ease 1 rotate 55 ypos 400
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorPussy_Emma:
@@ -5988,9 +5885,9 @@ image VibratorPussy_Emma:
         rotate 70
         block:
             ease 1 rotate 35 xpos 230 ypos 655
-            pause .25
+            pause 0.25
             ease 1 rotate 70 xpos 240 ypos 665
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorAnal_Emma:
@@ -6004,9 +5901,9 @@ image VibratorAnal_Emma:
         rotate 10
         block:
             ease 1 rotate 0 xpos 260 ypos 655
-            pause .25
+            pause 0.25
             ease 1 rotate 10 xpos 270 ypos 665
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorPussyInsert_Emma:
@@ -6042,7 +5939,7 @@ image GirlGropeLeftBreast_Emma:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom .6
+        zoom 0.6
         pos (240,370)
         anchor (0.5,0.5)
         alpha 0.5
@@ -6071,22 +5968,22 @@ image GirlGropeThigh_Emma:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom .6
+        zoom 0.6
         pos (210,730)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 100
         parallel:
-            pause .5
+            pause 0.5
             ease 1 ypos 780
             ease 1 ypos 730
             repeat
         parallel:
-            pause .5
-            ease .5 xpos 213
-            ease .5 xpos 210
-            ease .5 xpos 213
-            ease .5 xpos 210
+            pause 0.5
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
             repeat
 
 image GirlGropePussy_EmmaSelf:
@@ -6108,60 +6005,60 @@ image GirlGropePussy_Emma:
         rotate 200
         block:
             choice:
-                ease .75 rotate 210 pos (205,590)
-                ease .5 rotate 195
-                ease .75 rotate 210
-                ease .5 rotate 195
+                ease 0.75 rotate 210 pos (205,590)
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
             choice:
-                ease .5 rotate 210 pos (205,590)
+                ease 0.5 rotate 210 pos (205,590)
                 ease 1 rotate 195
-                pause .25
-                ease .5 rotate 210
+                pause 0.25
+                ease 0.5 rotate 210
                 ease 1 rotate 195
-                pause .25
+                pause 0.25
             choice:
-                ease .5 rotate 205 pos (205,590)
-                ease .75 rotate 200 pos (205,595)
-                ease .5 rotate 205 pos (205,590)
-                ease .75 rotate 200 pos (205,595)
+                ease 0.5 rotate 205 pos (205,590)
+                ease 0.75 rotate 200 pos (205,595)
+                ease 0.5 rotate 205 pos (205,590)
+                ease 0.75 rotate 200 pos (205,595)
             choice:
-                ease .3 rotate 205 pos (205,590)
-                ease .3 rotate 200 pos (205,600)
-                ease .3 rotate 205 pos (205,590)
-                ease .3 rotate 200 pos (205,600)
+                ease 0.3 rotate 205 pos (205,590)
+                ease 0.3 rotate 200 pos (205,600)
+                ease 0.3 rotate 205 pos (205,590)
+                ease 0.3 rotate 200 pos (205,600)
             repeat
 
 image GirlFingerPussy_Emma:
     contains:
         subpixel True
         "UI_GirlFinger"
-        zoom .6
+        zoom 0.6
         pos (220,640)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 200
         block:
             choice:
-                ease .75 rotate 210 pos (220,645)
-                ease .5 rotate 195
-                ease .75 rotate 210
-                ease .5 rotate 195
+                ease 0.75 rotate 210 pos (220,645)
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
             choice:
-                ease .5 rotate 210 pos (220,645)
+                ease 0.5 rotate 210 pos (220,645)
                 ease 1 rotate 195
-                pause .25
-                ease .5 rotate 210
+                pause 0.25
+                ease 0.5 rotate 210
                 ease 1 rotate 195
-                pause .25
+                pause 0.25
             choice:
-                ease .5 rotate 205 pos (220,655)
-                ease .75 rotate 200 pos (220,660)
-                ease .5 rotate 205 pos (220,655)
-                ease .75 rotate 200 pos (220,660)
+                ease 0.5 rotate 205 pos (220,655)
+                ease 0.75 rotate 200 pos (220,660)
+                ease 0.5 rotate 205 pos (220,655)
+                ease 0.75 rotate 200 pos (220,660)
             choice:
-                ease .3 rotate 205 pos (220,655)
-                ease .3 rotate 200 pos (220,665)
-                ease .3 rotate 205 pos (220,655)
-                ease .3 rotate 200 pos (220,665)
+                ease 0.3 rotate 205 pos (220,655)
+                ease 0.3 rotate 200 pos (220,665)
+                ease 0.3 rotate 205 pos (220,655)
+                ease 0.3 rotate 200 pos (220,665)
             repeat
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

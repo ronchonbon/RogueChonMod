@@ -1103,7 +1103,7 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
 
                 if "book" not in EmmaX.Chat:
                     $ Options.append("booked")
-            if "lace_bra" in EmmaX.inventory or "lace_panties" in EmmaX.inventory:
+            if "lace_bra" in EmmaX.inventory or "_lace_panties" in EmmaX.inventory:
 
                 if "lingerie" not in EmmaX.Chat:
                     $ Options.append("lingerie")
@@ -2730,7 +2730,7 @@ label Emma_Wardrobe_Menu:
             if not EmmaX.bra and not renpy.showing('DressScreen'):
                 call Emma_First_Topless
 
-        "Try on that white jacket you have." if EmmaX.top != "jacket":
+        "Try on that white jacket you have." if EmmaX.top != "_jacket":
             $ EmmaX.change_face("_bemused")
             if EmmaX.bra or EmmaX.SeenChest or approval_check(EmmaX, 500, TabM=(3-Public)):
                 ch_e "Yeah, ok."
@@ -2740,9 +2740,9 @@ label Emma_Wardrobe_Menu:
                     $ EmmaX.change_face("_bemused", 1)
                     ch_e "I'm not sure this is appropriate without something more substantial underneath."
                     return
-            $ EmmaX.top = "jacket"
+            $ EmmaX.top = "_jacket"
 
-        "Try on that white dress you have." if EmmaX.top != "dress" and "halloween" in EmmaX.history:
+        "Try on that white dress you have." if EmmaX.top != "_dress" and "halloween" in EmmaX.history:
             $ EmmaX.change_face("_bemused")
             if EmmaX.bra or EmmaX.SeenChest or approval_check(EmmaX, 500, TabM=(3-Public)):
                 ch_e "Yeah, ok."
@@ -2755,10 +2755,10 @@ label Emma_Wardrobe_Menu:
             menu:
                 ch_e "The whole thing, or just the top?"
                 "The whole dress.":
-                    $ EmmaX.legs = "dress"
+                    $ EmmaX.legs = "_dress"
                 "Just the top.":
                     pass
-            $ EmmaX.top = "dress"
+            $ EmmaX.top = "_dress"
 
         "Try on that lace nighty." if EmmaX.top != "nighty":
             $ EmmaX.change_face("_bemused")
@@ -2814,7 +2814,7 @@ label Emma_Wardrobe_Menu:
 
                 elif approval_check(EmmaX, 700, TabM=(3-Public)):
                     ch_e "I suppose I could."
-                    $ EmmaX.bra = "corset"
+                    $ EmmaX.bra = "_corset"
                     "She pulls out her corset and slips it on under her [EmmaX.top]."
                 elif approval_check(EmmaX, 600, TabM=(3-Public)):
                     ch_e "I suppose I could."
@@ -2895,15 +2895,15 @@ label Emma_Wardrobe_Menu:
             ch_e "I agree."
             $ EmmaX.legs = "_skirt"
 
-        "Try on that white dress you have." if EmmaX.legs != "dress" and "halloween" in EmmaX.history:
+        "Try on that white dress you have." if EmmaX.legs != "_dress" and "halloween" in EmmaX.history:
             $ EmmaX.change_face("_bemused")
             menu:
                 ch_e "The whole thing, or just the skirt?"
                 "The whole dress.":
-                    $ EmmaX.top = "dress"
+                    $ EmmaX.top = "_dress"
                 "Just the skirt.":
                     pass
-            $ EmmaX.legs = "dress"
+            $ EmmaX.legs = "_dress"
 
         "You look great in boots." if EmmaX.accessory != "thigh boots":
             ch_e "They do look nice on me."
@@ -2936,8 +2936,8 @@ label Emma_Wardrobe_Menu:
                     $ EmmaX.blushing = ""
                 elif approval_check(EmmaX, 700, TabM=5):
                     ch_e "I suppose that I could. . ."
-                    if "lace_panties" in EmmaX.inventory:
-                        $ EmmaX.underwear  = "lace_panties"
+                    if "_lace_panties" in EmmaX.inventory:
+                        $ EmmaX.underwear  = "_lace_panties"
                     else:
                         $ EmmaX.underwear = "_green_panties"
                     if approval_check(EmmaX, 1200, TabM=4):
@@ -2998,7 +2998,7 @@ label Emma_Wardrobe_Menu:
                             ch_e "I'd rather not out here. . ."
                         else:
                             ch_e "I suppose for you. . ."
-                    elif EmmaX.top == "jacket" and approval_check(EmmaX, 700, TabM=(3-Public)):
+                    elif EmmaX.top == "_jacket" and approval_check(EmmaX, 700, TabM=(3-Public)):
                         ch_e "This is a bit daring without anything under it. . ."
                     elif not EmmaX.top:
                         call Display_DressScreen (EmmaX)
@@ -3019,17 +3019,17 @@ label Emma_Wardrobe_Menu:
                         if not renpy.showing('DressScreen'):
                             call Emma_First_Topless
 
-                "I like that corset you have." if EmmaX.bra != "corset":
+                "I like that corset you have." if EmmaX.bra != "_corset":
                     if EmmaX.SeenChest or approval_check(EmmaX, 1000, TabM=(3-Public)):
                         ch_e "So do I."
-                        $ EmmaX.bra = "corset"
+                        $ EmmaX.bra = "_corset"
                         $ EmmaX.TitsUp = 1
                     else:
                         call Display_DressScreen (EmmaX)
                         if not _return:
                             ch_e "I don't think that would be appropriate. . ."
                         else:
-                            $ EmmaX.bra = "corset"
+                            $ EmmaX.bra = "_corset"
 
                 "I like that lace bra." if "lace_bra" in EmmaX.inventory and EmmaX.bra != "lace_bra":
                     if EmmaX.SeenChest or approval_check(EmmaX, 1300, TabM=(3-Public)):
@@ -3076,15 +3076,15 @@ label Emma_Wardrobe_Menu:
             menu:
                 "You could lose the hose." if EmmaX.hose:
                     $ EmmaX.hose = ""
-                "The thigh-high hose would look good with that." if EmmaX.hose != "_stockings" and "stockings_and_garterbelt" in EmmaX.inventory:
+                "The thigh-high hose would look good with that." if EmmaX.hose != "_stockings" and "_stockings_and_garterbelt" in EmmaX.inventory:
                     $ EmmaX.hose = "_stockings"
                 "The pantyhose would look good with that." if EmmaX.hose != "pantyhose" and "pantyhose" in EmmaX.inventory:
                     $ EmmaX.hose = "pantyhose"
                 "The ripped pantyhose would look good with that." if EmmaX.hose != "ripped_pantyhose" and "ripped_pantyhose" in EmmaX.inventory:
                     $ EmmaX.hose = "ripped_pantyhose"
-                "The stockings and garterbelt would look good with that." if EmmaX.hose != "stockings_and_garterbelt" and "stockings_and_garterbelt" in EmmaX.inventory:
-                    $ EmmaX.hose = "stockings_and_garterbelt"
-                "Maybe just the garterbelt?" if EmmaX.hose != "garterbelt" and "stockings_and_garterbelt" in EmmaX.inventory:
+                "The stockings and garterbelt would look good with that." if EmmaX.hose != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in EmmaX.inventory:
+                    $ EmmaX.hose = "_stockings_and_garterbelt"
+                "Maybe just the garterbelt?" if EmmaX.hose != "garterbelt" and "_stockings_and_garterbelt" in EmmaX.inventory:
                     $ EmmaX.hose = "garterbelt"
                 "Never mind":
                     pass
@@ -3148,16 +3148,16 @@ label Emma_Wardrobe_Menu:
                         $ EmmaX.blushing = ""
                     $ Line = 0
 
-                "Why don't you wear the white panties instead?" if EmmaX.underwear and EmmaX.underwear != "white_panties":
+                "Why don't you wear the white panties instead?" if EmmaX.underwear and EmmaX.underwear != "_white_panties":
                     if approval_check(EmmaX, 1100, TabM=(4-Public)):
                         ch_e "Ok."
-                        $ EmmaX.underwear = "white_panties"
+                        $ EmmaX.underwear = "_white_panties"
                     else:
                         call Display_DressScreen (EmmaX)
                         if not _return:
                             ch_e "I really don't see how that's any of your concern."
                         else:
-                            $ EmmaX.underwear = "white_panties"
+                            $ EmmaX.underwear = "_white_panties"
 
                 "Why don't you wear the sporty panties instead?" if EmmaX.underwear and EmmaX.underwear != "sports_panties":
                     if approval_check(EmmaX, 1200, TabM=(4-Public)):
@@ -3170,16 +3170,16 @@ label Emma_Wardrobe_Menu:
                         else:
                             $ EmmaX.underwear = "sports_panties"
 
-                "Why don't you wear the lace panties instead?" if "lace_panties" in EmmaX.inventory and EmmaX.underwear and EmmaX.underwear != "lace_panties":
+                "Why don't you wear the lace panties instead?" if "_lace_panties" in EmmaX.inventory and EmmaX.underwear and EmmaX.underwear != "_lace_panties":
                     if approval_check(EmmaX, 1300, TabM=(4-Public)):
                         ch_e "Fine."
-                        $ EmmaX.underwear = "lace_panties"
+                        $ EmmaX.underwear = "_lace_panties"
                     else:
                         call Display_DressScreen (EmmaX)
                         if not _return:
                             ch_e "I really don't see how that's any of your concern."
                         else:
-                            $ EmmaX.underwear = "lace_panties"
+                            $ EmmaX.underwear = "_lace_panties"
 
                 "I like those bikini bottoms." if EmmaX.underwear != "_bikini_bottoms" and "_bikini_bottoms" in EmmaX.inventory:
                     if bg_current == "bg_pool":
@@ -3216,13 +3216,13 @@ label Emma_Wardrobe_Menu:
                         ch_e "If you insist. . ."
                         "How about the white ones?":
                             ch_e "Fine."
-                            $ EmmaX.underwear = "white_panties"
+                            $ EmmaX.underwear = "_white_panties"
                         "How about the sporty ones?":
                             ch_e "Fine."
                             $ EmmaX.underwear = "sports_panties"
-                        "How about the lace ones?" if "lace_panties" in EmmaX.inventory:
+                        "How about the lace ones?" if "_lace_panties" in EmmaX.inventory:
                             ch_e "Fine."
-                            $ EmmaX.underwear  = "lace_panties"
+                            $ EmmaX.underwear  = "_lace_panties"
                 "Never mind":
                     pass
             return
@@ -3235,10 +3235,10 @@ label Emma_Wardrobe_Menu:
 
     menu Emma_Clothes_Misc:
 
-        "You look good with your hair flowing." if EmmaX.hair != "wave" and EmmaX.hair != "hat":
+        "You look good with your hair flowing." if EmmaX.hair != "wave" and EmmaX.hair != "_hat":
             if approval_check(EmmaX, 600):
                 if EmmaX.hair == "hat wet":
-                    $ EmmaX.hair = "hat"
+                    $ EmmaX.hair = "_hat"
                 else:
                     $ EmmaX.hair = "wave"
                 ch_e "Like this?"
@@ -3247,7 +3247,7 @@ label Emma_Wardrobe_Menu:
 
         "Maybe keep your hair straight." if EmmaX.hair != "wet"and EmmaX.hair != "hat wet":
             if approval_check(EmmaX, 600):
-                if EmmaX.hair == "hat":
+                if EmmaX.hair == "_hat":
                     $ EmmaX.hair = "hat wet"
                 else:
                     $ EmmaX.hair = "wet"
@@ -3255,13 +3255,13 @@ label Emma_Wardrobe_Menu:
             else:
                 ch_e "I tend to prefer it a bit more loose."
 
-        "Add hat" if EmmaX.hair != "hat" and EmmaX.hair != "hat wet" and "halloween" in EmmaX.history:
+        "Add hat" if EmmaX.hair != "_hat" and EmmaX.hair != "hat wet" and "halloween" in EmmaX.history:
             ch_p "That hat you wore to the party was nice."
             if EmmaX.hair == "wet":
                 $ EmmaX.hair = "hat wet"
             else:
-                $ EmmaX.hair = "hat"
-        "Remove hat" if EmmaX.hair == "hat" or EmmaX.hair == "hat wet":
+                $ EmmaX.hair = "_hat"
+        "Remove hat" if EmmaX.hair == "_hat" or EmmaX.hair == "hat wet":
             ch_p "You could probably lose the hat."
             if EmmaX.hair == "hat wet":
                 $ EmmaX.hair = "wet"
@@ -3371,10 +3371,10 @@ label Emma_Wardrobe_Menu:
                 return
             $ EmmaX.piercings = ""
 
-        "Add_choker" if EmmaX.neck != "choker":
+        "Add_choker" if EmmaX.neck != "_choker":
             ch_e "Why don't you try on that white choker."
             ch_e "Ok. . ."
-            $ EmmaX.neck = "choker"
+            $ EmmaX.neck = "_choker"
         "Remove_choker" if EmmaX.neck:
             ch_e "WMaybe go without a collar."
             ch_e "Ok. . ."

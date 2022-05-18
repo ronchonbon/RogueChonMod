@@ -525,7 +525,7 @@ image Storm_Sprite:
         )
     anchor (0.6, 0.0)
     yoffset 15
-    zoom .75
+    zoom 0.75
 
 image Storm_Sprite_hairback:
     contains:
@@ -552,7 +552,7 @@ image Storm_Sprite_hairback:
                 ),
 
     anchor (0.5, 0.5)
-    zoom .47
+    zoom 0.47
 
 
 
@@ -713,7 +713,7 @@ image Storm_Sprite_Head:
             ),
         )
     anchor (0.5, 0.5)
-    zoom .47
+    zoom 0.47
 
 
 image Storm Blink:
@@ -738,7 +738,7 @@ image Storm Blink:
     choice:
         3
     "images/StormSprite/Storm_Sprite_Eyes_Closed.png"
-    .25
+    0.25
     repeat
 
 image Storm_Squint:
@@ -750,7 +750,7 @@ image Storm_Squint:
     choice:
         3
     "images/StormSprite/Storm_Sprite_Eyes_Sexy.png"
-    .25
+    0.25
     repeat
 
 
@@ -1541,7 +1541,7 @@ image Storm_Sex_Static:
         block:
             pause 0.6
             ease 1.8 ypos -125
-            ease .5 ypos -130
+            ease 0.5 ypos -130
             pause 0.3
             ease 1.8 ypos -140
             repeat
@@ -1570,8 +1570,8 @@ image Storm_Sex_Static:
         rotate 10
         block:
             pause 1
-            ease .4 rotate 9
-            ease .2 rotate 10
+            ease 0.4 rotate 9
+            ease 0.2 rotate 10
             repeat
     contains:
 
@@ -1620,7 +1620,7 @@ image Storm_Sex_Fucking_Speed0:
             pause 0.2
             ease 2 ypos -120
 
-            ease .9 ypos -130
+            ease 0.9 ypos -130
             pause 0.1
             ease 1.8 ypos -180
             repeat
@@ -1649,7 +1649,7 @@ image Storm_Sex_Fucking_Zero_Anim0:
         block:
             pause 0.2
             easeout 1 ypos 20
-            easein .8 ypos 10
+            easein 0.8 ypos 10
             pause 1.4
             easeout 0.6 ypos 10
             easein 1 ypos 40
@@ -1711,7 +1711,7 @@ image Storm_Sex_Fucking_Zero_Anim1:
             pause 0.2
 
             ease 2 ypos -10
-            pause .8
+            pause 0.8
             ease 2 ypos 40
             repeat
 
@@ -1737,14 +1737,14 @@ image Storm_Sex_Heading_Pussy:
         anchor (0.5,0)
         transform_anchor True
         xoffset 560
-        xzoom .7
+        xzoom 0.7
         block:
             pause 0.2
             ease 1.2 xzoom 1
-            ease .4 xzoom .9
+            ease 0.4 xzoom 0.9
             pause 1.2
-            ease .2 xzoom 1
-            ease 1.8 xzoom .7
+            ease 0.2 xzoom 1
+            ease 1.8 xzoom 0.7
             repeat
 
 image Storm_Pussy_Spunk_Heading:
@@ -1758,14 +1758,14 @@ image Storm_Pussy_Spunk_Heading:
         transform_anchor True
         xoffset 560
         yoffset 5
-        xzoom .7
+        xzoom 0.7
         block:
             pause 0.2
             ease 1.2 xzoom 1
-            ease .4 xzoom .9
+            ease 0.4 xzoom 0.9
             pause 1.2
-            ease .2 xzoom 1
-            ease 1.8 xzoom .7
+            ease 0.2 xzoom 1
+            ease 1.8 xzoom 0.7
             repeat
 
 
@@ -1829,7 +1829,7 @@ image Storm_Sex_Fucking_Zero_Anim2:
             pause 0.2
             ease 0.95 ypos -145
             ease 0.25 ypos -140
-            pause .8
+            pause 0.8
             ease 2 ypos -10
             repeat
 
@@ -1845,9 +1845,9 @@ image Storm_Sex_Fucking_Speed3:
         "Storm_Sex_Body"
         pos (0,-100)
         block:
-            ease .5 ypos 0
-            pause .4
-            ease .9 ypos -100
+            ease 0.5 ypos 0
+            pause 0.4
+            ease 0.9 ypos -100
             repeat
     contains:
 
@@ -1943,9 +1943,9 @@ image Storm_Sex_Anal_Spunk_Heading_Over:
     xzoom 0.8
     block:
 
-        ease .75 xzoom 1.0
+        ease 0.75 xzoom 1.0
         pause 1.75
-        ease .25 xzoom 1.0
+        ease 0.25 xzoom 1.0
         ease 2.25 xzoom 0.8
         repeat
 image Storm_Sex_Anal_Spunk_Heading_Under:
@@ -1955,10 +1955,10 @@ image Storm_Sex_Anal_Spunk_Heading_Under:
     xzoom 0.6
     block:
 
-        ease .75 xzoom 1.0
-        ease .25 xzoom 0.95
+        ease 0.75 xzoom 1.0
+        ease 0.25 xzoom 0.95
         pause 1.50
-        ease .25 xzoom 1.0
+        ease 0.25 xzoom 1.0
         ease 2.25 xzoom 0.6
         repeat
 
@@ -1996,10 +1996,10 @@ image Storm_Sex_Anal_Speed0:
         pos (0,-235)
         parallel:
             pause 0.1
-            ease .9 xpos 10
-            ease .3 xpos 7
-            ease .9 xpos -20
-            ease .3 xpos -14
+            ease 0.9 xpos 10
+            ease 0.3 xpos 7
+            ease 0.9 xpos -20
+            ease 0.3 xpos -14
             repeat
     contains:
 
@@ -2052,7 +2052,7 @@ image Storm_Sex_Anal_Zero_Anim0:
         parallel:
             pause 0.2
             ease 2 ypos 90
-            pause .8
+            pause 0.8
             ease 2 ypos 95
             repeat
 
@@ -2126,7 +2126,7 @@ image Storm_Sex_Anal_Zero_Anim1:
             pause 0.2
 
             ease 2 ypos 40
-            pause .8
+            pause 0.8
             ease 2 ypos 90
             repeat
 
@@ -2192,7 +2192,7 @@ image Storm_Sex_Anal_Zero_Anim2:
             pause 0.2
             ease 0.95 ypos -145
             ease 0.25 ypos -140
-            pause .8
+            pause 0.8
             ease 2 ypos -10
             repeat
 
@@ -2209,9 +2209,9 @@ image Storm_Sex_Anal_Speed3:
         "Storm_Sex_Body"
         pos (0,-100)
         block:
-            ease .5 ypos 0
-            pause .4
-            ease .9 ypos -100
+            ease 0.5 ypos 0
+            pause 0.4
+            ease 0.9 ypos -100
             repeat
     contains:
 
@@ -2286,7 +2286,7 @@ image Storm_Sex_Hotdog_Speed1:
         block:
             pause 0.2
             ease 2 ypos -75
-            ease .7 ypos -85
+            ease 0.7 ypos -85
             pause 0.1
             ease 2 ypos -160
             repeat
@@ -2312,7 +2312,7 @@ image Storm_Sex_Hotdog_Speed1:
             pause 1
             ease 1 ypos -145
             ease 0.2 ypos -140
-            pause .6
+            pause 0.6
             repeat
     contains:
 
@@ -2357,8 +2357,8 @@ image Storm_Sex_Hotdog_Speed2:
         pos (0,-160)
         block:
             pause 0.1
-            ease .9 ypos -70
-            ease .5 ypos -80
+            ease 0.9 ypos -70
+            ease 0.5 ypos -80
             ease 1 ypos -160
             repeat
     contains:
@@ -2702,7 +2702,7 @@ transform Storm_Hand_1():
     pos (-20,-100)
     rotate 5
     block:
-        ease .5 pos (0,150) rotate -5
+        ease 0.5 pos (0,150) rotate -5
         pause 0.25
         ease 1.0 pos (-20,-100) rotate 5
         pause 0.1
@@ -2748,7 +2748,7 @@ transform Handcock_1J():
     ypos 400
     rotate 0
     block:
-        ease .5 ypos 450 rotate -2
+        ease 0.5 ypos 450 rotate -2
         pause 0.25
         ease 1.0 ypos 400 rotate 0
         pause 0.1
@@ -2760,8 +2760,8 @@ transform Handcock_2J():
     ypos 400
     rotate 0
     block:
-        ease .2 ypos 430 rotate -3
-        ease .5 ypos 400 rotate 0
+        ease 0.2 ypos 430 rotate -3
+        ease 0.5 ypos 400 rotate 0
         pause 0.1
         repeat
 
@@ -2816,13 +2816,13 @@ label Storm_HJ_Launch(Line=primary_action):
         $ primary_action = "handjob"
     else:
         $ action_speed = 1
-    pause .5
+    pause 0.5
     show Storm_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
 
         offset (250,250)
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_right):
         alpha 1
-        ease .5 zoom 1.7 offset (-150,200)
+        ease 0.5 zoom 1.7 offset (-150,200)
     return
 
 label Storm_HJ_Reset:
@@ -2838,9 +2838,9 @@ label Storm_HJ_Reset:
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
         ease 1 zoom 1.5 offset (-150,50)
-        pause .5
-        ease .5 zoom 1 offset (0,0)
-        pause .5
+        pause 0.5
+        ease 0.5 zoom 1 offset (0,0)
+        pause 0.5
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -2869,7 +2869,7 @@ image Storm_BJ_Animation:
             "True", Null(),
             ),
         )
-    zoom .55
+    zoom 0.55
     anchor (.5,.5)
 
 image Storm_BJ_hairback:
@@ -3071,7 +3071,7 @@ image Storm BJ Blink:
     choice:
         3
     "images/StormBJFace/Storm_BJ_Eyes_Closed.png"
-    .25
+    0.25
     repeat
 
 image Storm_BJ_MouthHeading:
@@ -3099,17 +3099,17 @@ image Storm_BJ_MouthHeading:
     subpixel True
     zoom 0.58
     block:
-        pause .20
-        easeout .15 zoom 0.6
-        linear .15 zoom 0.60
-        easein .25 zoom 0.65
-        pause .25
+        pause 0.20
+        easeout 0.15 zoom 0.6
+        linear 0.15 zoom 0.60
+        easein 0.25 zoom 0.65
+        pause 0.25
 
-        pause .40
-        easeout .40 zoom 0.58
-        linear .10 zoom 0.66
-        easein .30 zoom 0.45
-        pause .30
+        pause 0.40
+        easeout 0.40 zoom 0.58
+        linear 0.10 zoom 0.66
+        easein 0.30 zoom 0.45
+        pause 0.30
 
         repeat
 
@@ -3122,14 +3122,14 @@ image Storm_BJ_MouthCumHigh:
     subpixel True
     zoom 0.65
     block:
-        pause .20
-        ease .50 zoom 0.58
-        pause .60
-        ease .30 zoom 0.62
-        pause .10
-        ease .30 zoom 0.58
-        pause .20
-        ease .30 zoom 0.62
+        pause 0.20
+        ease 0.50 zoom 0.58
+        pause 0.60
+        ease 0.30 zoom 0.62
+        pause 0.10
+        ease 0.30 zoom 0.58
+        pause 0.20
+        ease 0.30 zoom 0.62
         repeat
 
 image Storm_BJ_MouthSuckingMask:
@@ -3181,17 +3181,17 @@ image Storm_BJ_MouthHeadingComposite:
     subpixel True
     zoom 0.58
     block:
-        pause .20
-        easeout .15 zoom 0.6
-        linear .15 zoom 0.60
-        easein .25 zoom 0.65
-        pause .25
+        pause 0.20
+        easeout 0.15 zoom 0.6
+        linear 0.15 zoom 0.60
+        easein 0.25 zoom 0.65
+        pause 0.25
 
-        pause .40
-        easeout .40 zoom 0.58
-        linear .10 zoom 0.66
-        easein .30 zoom 0.45
-        pause .30
+        pause 0.40
+        easeout 0.40 zoom 0.58
+        linear 0.10 zoom 0.66
+        easein 0.30 zoom 0.45
+        pause 0.30
 
         repeat
 
@@ -3208,17 +3208,17 @@ image StormHeadingSpunk:
     subpixel True
     zoom 0.58
     block:
-        pause .20
-        easeout .15 zoom 0.6
-        linear .15 zoom 0.60
-        easein .25 zoom 0.65
-        pause .25
+        pause 0.20
+        easeout 0.15 zoom 0.6
+        linear 0.15 zoom 0.60
+        easein 0.25 zoom 0.65
+        pause 0.25
 
-        pause .40
-        easeout .40 zoom 0.58
-        linear .10 zoom 0.66
-        easein .30 zoom 0.45
-        pause .30
+        pause 0.40
+        easeout 0.40 zoom 0.58
+        linear 0.10 zoom 0.66
+        easein 0.30 zoom 0.45
+        pause 0.30
 
         repeat
 
@@ -3233,14 +3233,14 @@ image Storm_BJ_MouthCumHighComposite:
     offset (30,-30)
     zoom 0.65
     block:
-        pause .20
-        ease .50 zoom 0.58
-        pause .60
-        ease .30 zoom 0.62
-        pause .10
-        ease .30 zoom 0.58
-        pause .20
-        ease .30 zoom 0.62
+        pause 0.20
+        ease 0.50 zoom 0.58
+        pause 0.60
+        ease 0.30 zoom 0.62
+        pause 0.10
+        ease 0.30 zoom 0.58
+        pause 0.20
+        ease 0.30 zoom 0.62
         repeat
 
 image StormCumHighSpunk:
@@ -3253,14 +3253,14 @@ image StormCumHighSpunk:
     subpixel True
     zoom 0.65
     block:
-        pause .20
-        ease .50 zoom 0.58
-        pause .60
-        ease .30 zoom 0.62
-        pause .10
-        ease .30 zoom 0.58
-        pause .20
-        ease .30 zoom 0.62
+        pause 0.20
+        ease 0.50 zoom 0.58
+        pause 0.60
+        ease 0.30 zoom 0.62
+        pause 0.10
+        ease 0.30 zoom 0.58
+        pause 0.20
+        ease 0.30 zoom 0.62
         repeat
 
 image StormSuckingSpunk:
@@ -3376,7 +3376,7 @@ image Storm_BJ_Anim1:
         block:
             ease 2.5 offset (375,310)
             ease 2 offset (350,175)
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -3386,7 +3386,7 @@ image Storm_BJ_Anim1:
         block:
             ease 2.5 offset (30,90)
             ease 2 offset (0,-35)
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -3396,7 +3396,7 @@ image Storm_BJ_Anim1:
         block:
             ease 2.5 offset (375,310)
             ease 2 offset (350,175)
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -3407,7 +3407,7 @@ image Storm_BJ_Anim1:
         rotate 0
         block:
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             ease 2.5 rotate 0
             repeat
 
@@ -3551,7 +3551,7 @@ image Storm_BJ_Anim4:
         block:
             subpixel True
             ease 1 yoffset 560
-            pause .5
+            pause 0.5
             ease 2 yoffset 360
             repeat
     contains:
@@ -3562,7 +3562,7 @@ image Storm_BJ_Anim4:
         block:
             subpixel True
             ease 1.2 yoffset 250
-            pause .5
+            pause 0.5
             ease 1.8 yoffset 100
             repeat
     contains:
@@ -3573,7 +3573,7 @@ image Storm_BJ_Anim4:
         block:
             subpixel True
             ease 1 yoffset 560
-            pause .5
+            pause 0.5
             ease 2 yoffset 360
             repeat
     contains:
@@ -3592,7 +3592,7 @@ image Storm_BJ_Anim4:
         block:
             subpixel True
             ease 1 yoffset -90
-            pause .5
+            pause 0.5
             ease 2 yoffset -290
             repeat
     contains:
@@ -3614,7 +3614,7 @@ image Storm_BJ_Anim4:
         block:
             subpixel True
             ease 1 yoffset 560
-            pause .5
+            pause 0.5
             ease 2 yoffset 360
             repeat
 
@@ -3686,7 +3686,7 @@ image Storm_BJ_Anim6:
         block:
             subpixel True
             ease 1 yoffset 460
-            pause .5
+            pause 0.5
             ease 2 yoffset 440
             repeat
     contains:
@@ -3697,7 +3697,7 @@ image Storm_BJ_Anim6:
         block:
             subpixel True
             ease 1.2 yoffset 200
-            pause .5
+            pause 0.5
             ease 1.8 yoffset 190
             repeat
     contains:
@@ -3709,7 +3709,7 @@ image Storm_BJ_Anim6:
         block:
             subpixel True
             ease 1 yoffset 460
-            pause .5
+            pause 0.5
             ease 2 yoffset 440
             repeat
     contains:
@@ -3728,7 +3728,7 @@ image Storm_BJ_Anim6:
         block:
             subpixel True
             ease 1 yoffset -190
-            pause .5
+            pause 0.5
             ease 2 yoffset -210
             repeat
     contains:
@@ -3743,7 +3743,7 @@ image Storm_BJ_Anim6:
         block:
             subpixel True
             ease 1 yoffset 460
-            pause .5
+            pause 0.5
             ease 2 yoffset 440
             repeat
 
@@ -3809,8 +3809,8 @@ label Storm_BJ_Reset:
     show Storm_Sprite zorder StormX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 offset (-50,50)
-        pause .2
-        ease .3 zoom 1 offset (0,0)
+        pause 0.2
+        ease 0.3 zoom 1 offset (0,0)
     pause 1.5
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
@@ -3837,7 +3837,7 @@ image Storm_TJ_Animation:
                     "action_speed >= 2", "Storm_TJ_2",
                     "True",       "Storm_TJ_0",
                     )
-    zoom .8
+    zoom 0.8
     transform_anchor True
     anchor (.5,.5)
 
@@ -3848,7 +3848,7 @@ image Storm_TJ_hairback:
 
     "Storm_BJ_hairback"
     transform_anchor True
-    zoom .7
+    zoom 0.7
     anchor (0.5, 0.5)
     offset (30,-450)
     rotate 0
@@ -3857,7 +3857,7 @@ image Storm_TJ_Head:
 
     "Storm_BJ_Head"
     transform_anchor True
-    zoom .7
+    zoom 0.7
     anchor (0.5, 0.5)
     offset (30,-450)
     rotate 0
@@ -3887,7 +3887,7 @@ image Storm_TJ_HairTop:
 
 
     transform_anchor True
-    zoom .98
+    zoom 0.98
     anchor (0.5, 0.5)
     offset (30,-450)
     rotate 0
@@ -3896,7 +3896,7 @@ image Storm_TJ_ZeroCock:
 
     "Zero_Zero_cock_blowjob"
     transform_anchor True
-    zoom .6
+    zoom 0.6
     anchor (0.5, 0.5)
     offset (30,50)
     rotate 0
@@ -4131,9 +4131,9 @@ image Storm_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -4144,14 +4144,14 @@ image Storm_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -4162,9 +4162,9 @@ image Storm_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -4175,14 +4175,14 @@ image Storm_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -4193,9 +4193,9 @@ image Storm_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos -0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -4206,9 +4206,9 @@ image Storm_TJ_0:
         rotate -5
         parallel:
             ease 2 rotate -3
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             repeat
     contains:
         contains:
@@ -4216,19 +4216,19 @@ image Storm_TJ_0:
         subpixel True
         pos (-70,-210)
         transform_anchor True
-        xzoom .75
-        yzoom .85
+        xzoom 0.75
+        yzoom 0.85
         parallel:
-            ease 2 yzoom .5
-            pause .1
-            ease 2 yzoom .85
-            pause .1
+            ease 2 yzoom 0.5
+            pause 0.1
+            ease 2 yzoom 0.85
+            pause 0.1
             repeat
         parallel:
             ease 2 pos (-60,-230)
-            pause .1
+            pause 0.1
             ease 2 pos (-70,-210)
-            pause .1
+            pause 0.1
             repeat
     contains:
         contains:
@@ -4238,9 +4238,9 @@ image Storm_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -4251,14 +4251,14 @@ image Storm_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
 
@@ -4285,11 +4285,11 @@ image Storm_TJ_1:
         pos (0,50)
         transform_anchor True
         block:
-            pause .1
+            pause 0.1
             ease 1.9 ypos -60
-            pause .4
+            pause 0.4
             ease 1.8 ypos 60
-            ease .5 ypos 50
+            ease 0.5 ypos 50
             repeat
     contains:
 
@@ -4301,15 +4301,15 @@ image Storm_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos -40
-            pause .2
+            pause 0.2
             ease 2 ypos 60
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate 0
-            pause .2
+            pause 0.2
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -4319,9 +4319,9 @@ image Storm_TJ_1:
         transform_anchor True
         parallel:
             ease 2 ypos -40
-            pause .2
+            pause 0.2
             ease 2 ypos 60
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -4332,15 +4332,15 @@ image Storm_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos -40
-            pause .2
+            pause 0.2
             ease 2 ypos 60
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate 0
-            pause .2
+            pause 0.2
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -4349,11 +4349,11 @@ image Storm_TJ_1:
         pos (0,60)
         transform_anchor True
         block:
-            pause .1
+            pause 0.1
             ease 1.9 ypos -60
-            pause .4
+            pause 0.4
             ease 1.8 ypos 60
-            ease .5 ypos 50
+            ease 0.5 ypos 50
             repeat
     contains:
 
@@ -4364,9 +4364,9 @@ image Storm_TJ_1:
         rotate -6
         parallel:
             ease 2 ypos 0
-            pause .4
+            pause 0.4
             ease 1.8 ypos 25
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -4380,29 +4380,29 @@ image Storm_TJ_1:
         subpixel True
         pos (-100,-150)
         transform_anchor True
-        xzoom .9
+        xzoom 0.9
         yzoom 1.3
         parallel:
-            pause .1
-            ease 1.6 yzoom .3
-            pause .9
+            pause 0.1
+            ease 1.6 yzoom 0.3
+            pause 0.9
             ease 1.6 yzoom 1.5
-            ease .5 yzoom 1.3
+            ease 0.5 yzoom 1.3
             repeat
         parallel:
-            pause .1
-            ease 1.9 xzoom .6
-            pause .4
-            ease 1.8 xzoom .9
-            pause .5
+            pause 0.1
+            ease 1.9 xzoom 0.6
+            pause 0.4
+            ease 1.8 xzoom 0.9
+            pause 0.5
 
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 1.9 pos (-50,-260)
-            pause .4
+            pause 0.4
             ease 1.8 pos (-100,-140)
-            ease .5 pos (-100,-150)
+            ease 0.5 pos (-100,-150)
             repeat
     contains:
         contains:
@@ -4411,11 +4411,11 @@ image Storm_TJ_1:
         pos (0,50)
         transform_anchor True
         block:
-            pause .1
+            pause 0.1
             ease 1.9 ypos -60
-            pause .4
+            pause 0.4
             ease 1.8 ypos 60
-            ease .5 ypos 50
+            ease 0.5 ypos 50
             repeat
     contains:
 
@@ -4426,15 +4426,15 @@ image Storm_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos -40
-            pause .2
+            pause 0.2
             ease 2 ypos 60
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate 0
-            pause .2
+            pause 0.2
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
 
 
@@ -4452,10 +4452,10 @@ image Storm_TJ_2:
         pos (0,80)
         transform_anchor True
         block:
-            ease .3 ypos 40
-            ease .7 ypos -40
-            pause .2
-            ease .4 ypos 80
+            ease 0.3 ypos 40
+            ease 0.7 ypos -40
+            pause 0.2
+            ease 0.4 ypos 80
             repeat
     contains:
 
@@ -4466,13 +4466,13 @@ image Storm_TJ_2:
         rotate -5
         parallel:
             ease 1 ypos -20
-            pause .1
-            ease .5 ypos 80
+            pause 0.1
+            ease 0.5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause .1
-            ease .5 rotate -5
+            pause 0.1
+            ease 0.5 rotate -5
             repeat
     contains:
 
@@ -4482,8 +4482,8 @@ image Storm_TJ_2:
         transform_anchor True
         parallel:
             ease 1 ypos -20
-            pause .1
-            ease .5 ypos 80
+            pause 0.1
+            ease 0.5 ypos 80
             repeat
     contains:
 
@@ -4494,13 +4494,13 @@ image Storm_TJ_2:
         rotate -5
         parallel:
             ease 1 ypos -20
-            pause .1
-            ease .5 ypos 80
+            pause 0.1
+            ease 0.5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause .1
-            ease .5 rotate -5
+            pause 0.1
+            ease 0.5 rotate -5
             repeat
     contains:
 
@@ -4509,10 +4509,10 @@ image Storm_TJ_2:
         pos (0,80)
         transform_anchor True
         block:
-            ease .3 ypos 40
-            ease .7 ypos -40
-            pause .2
-            ease .4 ypos 80
+            ease 0.3 ypos 40
+            ease 0.7 ypos -40
+            pause 0.2
+            ease 0.4 ypos 80
             repeat
     contains:
 
@@ -4523,13 +4523,13 @@ image Storm_TJ_2:
         rotate -4
         parallel:
             ease 1 ypos 0
-            pause .2
-            ease .4 ypos 30
+            pause 0.2
+            ease 0.4 ypos 30
             repeat
         parallel:
             ease 1 rotate -2
-            pause .1
-            ease .5 rotate -4
+            pause 0.1
+            ease 0.5 rotate -4
             repeat
     contains:
         contains:
@@ -4540,16 +4540,16 @@ image Storm_TJ_2:
         yzoom 1.7
         xzoom 1
         parallel:
-            ease .3 yzoom 1.3
-            ease .7 yzoom .3
-            pause .2
-            ease .4 yzoom 1.7
+            ease 0.3 yzoom 1.3
+            ease 0.7 yzoom 0.3
+            pause 0.2
+            ease 0.4 yzoom 1.7
             repeat
         parallel:
-            ease .3 pos (-100,-160)
-            ease .7 pos (-80,-240)
-            pause .2
-            ease .4 pos (-100,-120)
+            ease 0.3 pos (-100,-160)
+            ease 0.7 pos (-80,-240)
+            pause 0.2
+            ease 0.4 pos (-100,-120)
             repeat
     contains:
         contains:
@@ -4558,10 +4558,10 @@ image Storm_TJ_2:
         pos (0,80)
         transform_anchor True
         block:
-            ease .3 ypos 40
-            ease .7 ypos -40
-            pause .2
-            ease .4 ypos 80
+            ease 0.3 ypos 40
+            ease 0.7 ypos -40
+            pause 0.2
+            ease 0.4 ypos 80
             repeat
     contains:
 
@@ -4573,13 +4573,13 @@ image Storm_TJ_2:
         rotate -5
         parallel:
             ease 1 ypos -20
-            pause .1
-            ease .5 ypos 80
+            pause 0.1
+            ease 0.5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause .1
-            ease .5 rotate -5
+            pause 0.1
+            ease 0.5 rotate -5
             repeat
 
 
@@ -4594,10 +4594,10 @@ image Storm_TJ_3:
         pos (0,110)
         transform_anchor True
         block:
-            ease .3 ypos 100
-            ease .7 ypos 60
-            pause .2
-            ease .4 ypos 110
+            ease 0.3 ypos 100
+            ease 0.7 ypos 60
+            pause 0.2
+            ease 0.4 ypos 110
             repeat
     contains:
 
@@ -4608,13 +4608,13 @@ image Storm_TJ_3:
         rotate -5
         parallel:
             ease 1 ypos 70
-            pause .1
-            ease .5 ypos 140
+            pause 0.1
+            ease 0.5 ypos 140
             repeat
         parallel:
             ease 1 rotate 0
-            pause .1
-            ease .5 rotate -5
+            pause 0.1
+            ease 0.5 rotate -5
             repeat
     contains:
 
@@ -4624,8 +4624,8 @@ image Storm_TJ_3:
         transform_anchor True
         parallel:
             ease 1 ypos 100
-            pause .1
-            ease .5 ypos 130
+            pause 0.1
+            ease 0.5 ypos 130
             repeat
     contains:
 
@@ -4636,13 +4636,13 @@ image Storm_TJ_3:
         rotate -5
         parallel:
             ease 1 ypos 70
-            pause .1
-            ease .5 ypos 140
+            pause 0.1
+            ease 0.5 ypos 140
             repeat
         parallel:
             ease 1 rotate 0
-            pause .1
-            ease .5 rotate -5
+            pause 0.1
+            ease 0.5 rotate -5
             repeat
     contains:
 
@@ -4651,10 +4651,10 @@ image Storm_TJ_3:
         pos (0,110)
         transform_anchor True
         block:
-            ease .3 ypos 100
-            ease .7 ypos 60
-            pause .2
-            ease .4 ypos 110
+            ease 0.3 ypos 100
+            ease 0.7 ypos 60
+            pause 0.2
+            ease 0.4 ypos 110
             repeat
     contains:
 
@@ -4665,13 +4665,13 @@ image Storm_TJ_3:
         rotate -4
         parallel:
             ease 1 ypos 0
-            pause .2
-            ease .4 ypos 30
+            pause 0.2
+            ease 0.4 ypos 30
             repeat
         parallel:
             ease 1 rotate -2
-            pause .1
-            ease .5 rotate -4
+            pause 0.1
+            ease 0.5 rotate -4
             repeat
     contains:
         contains:
@@ -4682,16 +4682,16 @@ image Storm_TJ_3:
         yzoom 2
         xzoom 1
         parallel:
-            ease .3 yzoom 1.95
-            ease .7 yzoom 1.7
-            pause .2
-            ease .4 yzoom 2
+            ease 0.3 yzoom 1.95
+            ease 0.7 yzoom 1.7
+            pause 0.2
+            ease 0.4 yzoom 2
             repeat
         parallel:
-            ease .3 pos (-100,-115)
-            ease .7 pos (-90,-155)
-            pause .2
-            ease .4 pos (-100,-105)
+            ease 0.3 pos (-100,-115)
+            ease 0.7 pos (-90,-155)
+            pause 0.2
+            ease 0.4 pos (-100,-105)
             repeat
     contains:
 
@@ -4701,10 +4701,10 @@ image Storm_TJ_3:
         pos (0,110)
         transform_anchor True
         block:
-            ease .3 ypos 100
-            ease .7 ypos 60
-            pause .2
-            ease .4 ypos 110
+            ease 0.3 ypos 100
+            ease 0.7 ypos 60
+            pause 0.2
+            ease 0.4 ypos 110
             repeat
     contains:
 
@@ -4716,13 +4716,13 @@ image Storm_TJ_3:
         rotate -5
         parallel:
             ease 1 ypos 70
-            pause .1
-            ease .5 ypos 140
+            pause 0.1
+            ease 0.5 ypos 140
             repeat
         parallel:
             ease 1 rotate 0
-            pause .1
-            ease .5 rotate -5
+            pause 0.1
+            ease 0.5 rotate -5
             repeat
 
 
@@ -4739,9 +4739,9 @@ image Storm_TJ_4:
         pos (0,5)
         transform_anchor True
         parallel:
-            pause .2
+            pause 0.2
             ease 1.9 ypos -30
-            pause .2
+            pause 0.2
             ease 1.9 ypos 5
             repeat
     contains:
@@ -4753,14 +4753,14 @@ image Storm_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -4771,9 +4771,9 @@ image Storm_TJ_4:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -4784,14 +4784,14 @@ image Storm_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -4801,9 +4801,9 @@ image Storm_TJ_4:
         pos (0,5)
         transform_anchor True
         parallel:
-            pause .2
+            pause 0.2
             ease 1.9 ypos -30
-            pause .2
+            pause 0.2
             ease 1.9 ypos 5
             repeat
     contains:
@@ -4815,9 +4815,9 @@ image Storm_TJ_4:
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             ease 2 ypos 20
-            pause .1
+            pause 0.1
             repeat
     contains:
         contains:
@@ -4825,12 +4825,12 @@ image Storm_TJ_4:
         subpixel True
         pos (-70,-210)
         transform_anchor True
-        xzoom .75
-        yzoom .5
+        xzoom 0.75
+        yzoom 0.5
         parallel:
-            pause .2
+            pause 0.2
             ease 1.9 pos (-65,-230)
-            pause .2
+            pause 0.2
             ease 1.9 pos (-75,-210)
             repeat
     contains:
@@ -4840,9 +4840,9 @@ image Storm_TJ_4:
         pos (0,5)
         transform_anchor True
         parallel:
-            pause .2
+            pause 0.2
             ease 1.9 ypos -30
-            pause .2
+            pause 0.2
             ease 1.9 ypos 5
             repeat
     contains:
@@ -4854,14 +4854,14 @@ image Storm_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
 
@@ -4877,11 +4877,11 @@ image Storm_TJ_5:
         pos (0,90)
         transform_anchor True
         parallel:
-            pause .1
+            pause 0.1
             ease 2 ypos 100
-            pause .2
+            pause 0.2
             ease 2 ypos 110
-            pause .4
+            pause 0.4
             repeat
     contains:
 
@@ -4892,13 +4892,13 @@ image Storm_TJ_5:
         rotate -5
         parallel:
             ease 2 ypos 125
-            pause .2
+            pause 0.2
             ease 2 ypos 130
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -4908,9 +4908,9 @@ image Storm_TJ_5:
         transform_anchor True
         parallel:
             ease 2 ypos 130
-            pause .2
+            pause 0.2
             ease 2 ypos 140
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -4921,13 +4921,13 @@ image Storm_TJ_5:
         rotate -5
         parallel:
             ease 2 ypos 125
-            pause .2
+            pause 0.2
             ease 2 ypos 130
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -4936,11 +4936,11 @@ image Storm_TJ_5:
         pos (0,90)
         transform_anchor True
         parallel:
-            pause .1
+            pause 0.1
             ease 2 ypos 100
-            pause .2
+            pause 0.2
             ease 2 ypos 110
-            pause .4
+            pause 0.4
             repeat
     contains:
 
@@ -4958,18 +4958,18 @@ image Storm_TJ_5:
         xzoom 1
         yzoom 2
         parallel:
-            pause .1
+            pause 0.1
             ease 2 yzoom 1.8
-            pause .2
+            pause 0.2
             ease 2 yzoom 2
-            pause .4
+            pause 0.4
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 pos (-100,-115)
-            pause .2
+            pause 0.2
             ease 2 pos (-100,-105)
-            pause .4
+            pause 0.4
             repeat
     contains:
         contains:
@@ -4978,11 +4978,11 @@ image Storm_TJ_5:
         pos (0,90)
         transform_anchor True
         parallel:
-            pause .1
+            pause 0.1
             ease 2 ypos 100
-            pause .2
+            pause 0.2
             ease 2 ypos 110
-            pause .4
+            pause 0.4
             repeat
     contains:
 
@@ -4993,13 +4993,13 @@ image Storm_TJ_5:
         rotate -5
         parallel:
             ease 2 ypos 125
-            pause .2
+            pause 0.2
             ease 2 ypos 130
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
 
 
@@ -5070,8 +5070,8 @@ label Storm_TJ_Reset:
     show Storm_Sprite zorder StormX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 xpos 700 yoffset 50
-        pause .5
-        ease .5 zoom 1 xpos StormX.sprite_location yoffset 0
+        pause 0.5
+        ease 0.5 zoom 1 xpos StormX.sprite_location yoffset 0
     "[StormX.name] pulls back"
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         alpha 1
@@ -5136,7 +5136,7 @@ label Storm_Pos_Reset(T=0, Set=0):
         return
     call Storm_Hide
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
-        ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
+        ease 0.5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
     show Storm_Sprite zorder StormX.sprite_layer:
         offset (0,0)
         anchor (0.5, 0.0)
@@ -5184,9 +5184,9 @@ image Storm_Behind_Podium:
         pos (640,180)
         block:
             subpixel True
-            ease .5 ypos 183
-            ease .5 ypos 180
-            pause .5
+            ease 0.5 ypos 183
+            ease 0.5 ypos 180
+            pause 0.5
             repeat
 
 
@@ -5230,8 +5230,8 @@ image LickRightBreast_Storm:
         alpha 0.5
         rotate 30
         block:
-            ease .5 rotate -40 pos (55,310)
-            pause .5
+            ease 0.5 rotate -40 pos (55,310)
+            pause 0.5
             ease 1.5 rotate 30 pos (80,335)
             repeat
 
@@ -5247,8 +5247,8 @@ image LickLeftBreast_Storm:
         alpha 0.5
         rotate 30
         block:
-            ease .5 rotate -40 pos (185,330)
-            pause .5
+            ease 0.5 rotate -40 pos (185,330)
+            pause 0.5
             ease 1.5 rotate 30 pos (205,350)
             repeat
 
@@ -5256,13 +5256,13 @@ image GropeThigh_Storm:
     contains:
         subpixel True
         "UI_Hand"
-        zoom .65
+        zoom 0.65
         pos (145,630)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 100
         block:
-            pause .5
+            pause 0.5
             ease 1 rotate 110 pos (145,700)
             ease 1 rotate 100 pos (145,630)
             repeat
@@ -5271,18 +5271,18 @@ image GropePussy_Storm:
     contains:
         subpixel True
         "UI_Hand"
-        zoom .65
+        zoom 0.65
         pos (145,560)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 170
         block:
             choice:
-                ease .5 rotate 190 pos (145,545)
-                ease .75 rotate 170 pos (145,560)
+                ease 0.5 rotate 190 pos (145,545)
+                ease 0.75 rotate 170 pos (145,560)
             choice:
-                ease .5 rotate 190 pos (145,545)
-                pause .25
+                ease 0.5 rotate 190 pos (145,545)
+                pause 0.25
                 ease 1 rotate 170 pos (145,560)
             repeat
 
@@ -5298,21 +5298,21 @@ image FingerPussy_Storm:
         block:
             choice:
                 ease 1 rotate 40 pos (175,615)
-                pause .5
+                pause 0.5
                 ease 1 rotate 50 pos (165,640)
             choice:
-                ease .5 rotate 40 pos (175,615)
-                pause .5
+                ease 0.5 rotate 40 pos (175,615)
+                pause 0.5
                 ease 1.75 rotate 50 pos (165,640)
             choice:
                 ease 2 rotate 40 pos (175,615)
-                pause .5
+                pause 0.5
                 ease 1 rotate 50 pos (165,640)
             choice:
-                ease .25 rotate 40 pos (175,615)
-                ease .25 rotate 50 pos (165,640)
-                ease .25 rotate 40 pos (175,615)
-                ease .25 rotate 50 pos (165,640)
+                ease 0.25 rotate 40 pos (175,615)
+                ease 0.25 rotate 50 pos (165,640)
+                ease 0.25 rotate 40 pos (175,615)
+                ease 0.25 rotate 50 pos (165,640)
             repeat
 
 image Lickpussy_Storm:
@@ -5326,8 +5326,8 @@ image Lickpussy_Storm:
         alpha 0.5
         rotate 10
         block:
-            easeout .5 rotate -50 pos (165,575)
-            linear .5 rotate -60 pos (155,585)
+            easeout 0.5 rotate -50 pos (165,575)
+            linear 0.5 rotate -60 pos (155,585)
             easein 1 rotate 10 pos (175,595)
             repeat
 
@@ -5341,10 +5341,10 @@ image VibratorRightBreast_Storm:
         alpha 0.5
         rotate 55
         block:
-            ease .9 rotate 35 ypos 310
-            pause .25
-            ease .7 rotate 55 ypos 320
-            pause .25
+            ease 0.9 rotate 35 ypos 310
+            pause 0.25
+            ease 0.7 rotate 55 ypos 320
+            pause 0.25
             repeat
 
 image VibratorLeftBreast_Storm:
@@ -5358,9 +5358,9 @@ image VibratorLeftBreast_Storm:
         rotate 55
         block:
             ease 1.1 rotate 35 ypos 340
-            pause .25
-            ease .9 rotate 55 ypos 350
-            pause .25
+            pause 0.25
+            ease 0.9 rotate 55 ypos 350
+            pause 0.25
             repeat
 
 image VibratorPussy_Storm:
@@ -5374,9 +5374,9 @@ image VibratorPussy_Storm:
         rotate 70
         block:
             ease 1 rotate 35 xpos 160
-            pause .25
+            pause 0.25
             ease 1 rotate 70 xpos 170
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorAnal_Storm:
@@ -5390,9 +5390,9 @@ image VibratorAnal_Storm:
         rotate 10
         block:
             ease 1 rotate 0 xpos 190
-            pause .25
+            pause 0.25
             ease 1 rotate 10 xpos 200
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorPussyInsert_Storm:
@@ -5428,7 +5428,7 @@ image GirlGropeLeftBreast_Storm:
     contains:
         subpixel True
         "images/UI_GirlHandS.png"
-        zoom .6
+        zoom 0.6
         pos (220,340)
         anchor (0.5,0.5)
         alpha 0.5
@@ -5457,22 +5457,22 @@ image GirlGropeThigh_Storm:
     contains:
         subpixel True
         "images/UI_GirlHandS.png"
-        zoom .6
+        zoom 0.6
         anchor (0.5,0.5)
         pos (0,0)
         alpha 0.5
         rotate 100
         parallel:
-            pause .5
+            pause 0.5
             ease 1 ypos 780
             ease 1 ypos 730
             repeat
         parallel:
-            pause .5
-            ease .5 xpos 213
-            ease .5 xpos 210
-            ease .5 xpos 213
-            ease .5 xpos 210
+            pause 0.5
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
             repeat
 
 
@@ -5504,7 +5504,7 @@ transform GirlGropeRightBreast_Storm():
 
 transform GirlGropeLeftBreast_Storm():
     subpixel True
-    zoom .6
+    zoom 0.6
     offset (120,240)
     anchor (0.5,0.5)
     alpha 0.5
@@ -5523,27 +5523,27 @@ transform GirlGropePussy_Storm1():
     rotate 200
     block:
         choice:
-            ease .75 rotate 210 yoffset 465
-            ease .5 rotate 195
-            ease .75 rotate 210
-            ease .5 rotate 195
+            ease 0.75 rotate 210 yoffset 465
+            ease 0.5 rotate 195
+            ease 0.75 rotate 210
+            ease 0.5 rotate 195
         choice:
-            ease .5 rotate 210 yoffset 465
+            ease 0.5 rotate 210 yoffset 465
             ease 1 rotate 195
-            pause .25
-            ease .5 rotate 210
+            pause 0.25
+            ease 0.5 rotate 210
             ease 1 rotate 195
-            pause .25
+            pause 0.25
         choice:
-            ease .5 rotate 205 yoffset 465
-            ease .75 rotate 200 yoffset 470
-            ease .5 rotate 205 yoffset 465
-            ease .75 rotate 200 yoffset 470
+            ease 0.5 rotate 205 yoffset 465
+            ease 0.75 rotate 200 yoffset 470
+            ease 0.5 rotate 205 yoffset 465
+            ease 0.75 rotate 200 yoffset 470
         choice:
-            ease .3 rotate 205 yoffset 465
-            ease .3 rotate 200 yoffset 475
-            ease .3 rotate 205 yoffset 465
-            ease .3 rotate 200 yoffset 475
+            ease 0.3 rotate 205 yoffset 465
+            ease 0.3 rotate 200 yoffset 475
+            ease 0.3 rotate 205 yoffset 465
+            ease 0.3 rotate 200 yoffset 475
         repeat
 
 image GirlGropePussy_Storm:
@@ -5557,60 +5557,60 @@ image GirlGropePussy_Storm:
         rotate 200
         block:
             choice:
-                ease .75 rotate 210 pos (150,545)
-                ease .5 rotate 195
-                ease .75 rotate 210
-                ease .5 rotate 195
+                ease 0.75 rotate 210 pos (150,545)
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
             choice:
-                ease .5 rotate 210 pos (150,545)
+                ease 0.5 rotate 210 pos (150,545)
                 ease 1 rotate 195
-                pause .25
-                ease .5 rotate 210
+                pause 0.25
+                ease 0.5 rotate 210
                 ease 1 rotate 195
-                pause .25
+                pause 0.25
             choice:
-                ease .5 rotate 205 pos (150,545)
-                ease .75 rotate 200 pos (150,550)
-                ease .5 rotate 205 pos (150,545)
-                ease .75 rotate 200 pos (150,550)
+                ease 0.5 rotate 205 pos (150,545)
+                ease 0.75 rotate 200 pos (150,550)
+                ease 0.5 rotate 205 pos (150,545)
+                ease 0.75 rotate 200 pos (150,550)
             choice:
-                ease .3 rotate 205 pos (150,545)
-                ease .3 rotate 200 pos (150,555)
-                ease .3 rotate 205 pos (150,545)
-                ease .3 rotate 200 pos (150,555)
+                ease 0.3 rotate 205 pos (150,545)
+                ease 0.3 rotate 200 pos (150,555)
+                ease 0.3 rotate 205 pos (150,545)
+                ease 0.3 rotate 200 pos (150,555)
             repeat
 
 image GirlFingerPussy_Storm:
     contains:
         subpixel True
         "images/UI_GirlFingerS.png"
-        zoom .6
+        zoom 0.6
         pos (250,550)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 200
         block:
             choice:
-                ease .75 rotate 210 pos (250,555)
-                ease .5 rotate 195
-                ease .75 rotate 210
-                ease .5 rotate 195
+                ease 0.75 rotate 210 pos (250,555)
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
             choice:
-                ease .5 rotate 210 pos (250,555)
+                ease 0.5 rotate 210 pos (250,555)
                 ease 1 rotate 195
-                pause .25
-                ease .5 rotate 210
+                pause 0.25
+                ease 0.5 rotate 210
                 ease 1 rotate 195
-                pause .25
+                pause 0.25
             choice:
-                ease .5 rotate 205 ypos 565
-                ease .75 rotate 200 ypos 570
-                ease .5 rotate 205 ypos 565
-                ease .75 rotate 200 ypos 570
+                ease 0.5 rotate 205 ypos 565
+                ease 0.75 rotate 200 ypos 570
+                ease 0.5 rotate 205 ypos 565
+                ease 0.75 rotate 200 ypos 570
             choice:
-                ease .3 rotate 205 ypos 565
-                ease .3 rotate 200 ypos 575
-                ease .3 rotate 205 ypos 565
-                ease .3 rotate 200 ypos 575
+                ease 0.3 rotate 205 ypos 565
+                ease 0.3 rotate 200 ypos 575
+                ease 0.3 rotate 205 ypos 565
+                ease 0.3 rotate 200 ypos 575
             repeat
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

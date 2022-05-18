@@ -1054,7 +1054,7 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
 
             if "book" not in JeanX.Chat:
                 $ Options.append("booked")
-        if "lace_bra" in JeanX.inventory or "lace_panties" in JeanX.inventory:
+        if "lace_bra" in JeanX.inventory or "_lace_panties" in JeanX.inventory:
 
             if "lingerie" not in JeanX.Chat:
                 $ Options.append("lingerie")
@@ -2753,8 +2753,8 @@ label Jean_Wardrobe_Menu:
                     $ JeanX.blushing = ""
                 elif approval_check(JeanX, 700, TabM=4):
                     ch_j "Yeah, I guess."
-                    if "lace_panties" in JeanX.inventory:
-                        $ JeanX.underwear  = "lace_panties"
+                    if "_lace_panties" in JeanX.inventory:
+                        $ JeanX.underwear  = "_lace_panties"
                     else:
                         $ JeanX.underwear = "_green_panties"
                     if approval_check(JeanX, 1200, TabM=4):
@@ -2853,16 +2853,16 @@ label Jean_Wardrobe_Menu:
                         else:
                             $ JeanX.bra = "lace_bra"
 
-                "I like that black corset." if JeanX.bra != "corset" and "corset" in JeanX.inventory:
+                "I like that black corset." if JeanX.bra != "_corset" and "_corset" in JeanX.inventory:
                     if JeanX.SeenChest or approval_check(JeanX, 1000, TabM=1):
                         ch_j "Sure."
-                        $ JeanX.bra = "corset"
+                        $ JeanX.bra = "_corset"
                     else:
                         call Display_DressScreen (JeanX)
                         if not _return:
                             ch_j "It's a little revealing. . ."
                         else:
-                            $ JeanX.bra = "corset"
+                            $ JeanX.bra = "_corset"
 
                 "I like that lace corset." if JeanX.bra != "lace corset" and "lace corset" in JeanX.inventory:
                     if JeanX.SeenChest or approval_check(JeanX, 1300, TabM=2):
@@ -2903,9 +2903,9 @@ label Jean_Wardrobe_Menu:
                     $ JeanX.hose = "pantyhose"
                 "The ripped pantyhose would look good with that." if JeanX.hose != "ripped_pantyhose" and "ripped_pantyhose" in JeanX.inventory:
                     $ JeanX.hose = "ripped_pantyhose"
-                "The stockings and garterbelt would look good with that." if JeanX.hose != "stockings_and_garterbelt" and "stockings_and_garterbelt" in JeanX.inventory:
-                    $ JeanX.hose = "stockings_and_garterbelt"
-                "Just the garterbelt would look good with that." if JeanX.hose != "garterbelt" and "stockings_and_garterbelt" in JeanX.inventory:
+                "The stockings and garterbelt would look good with that." if JeanX.hose != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:
+                    $ JeanX.hose = "_stockings_and_garterbelt"
+                "Just the garterbelt would look good with that." if JeanX.hose != "garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:
                     $ JeanX.hose = "garterbelt"
                 "Never mind":
                     pass
@@ -2978,16 +2978,16 @@ label Jean_Wardrobe_Menu:
                         else:
                             $ JeanX.underwear = "_green_panties"
 
-                "Why don't you wear the lace panties instead?" if "lace_panties" in JeanX.inventory and JeanX.underwear and JeanX.underwear != "lace_panties":
+                "Why don't you wear the lace panties instead?" if "_lace_panties" in JeanX.inventory and JeanX.underwear and JeanX.underwear != "_lace_panties":
                     if approval_check(JeanX, 1300, TabM=3):
                         ch_j "I guess."
-                        $ JeanX.underwear = "lace_panties"
+                        $ JeanX.underwear = "_lace_panties"
                     else:
                         call Display_DressScreen (JeanX)
                         if not _return:
                             ch_j "That's none of your busines."
                         else:
-                            $ JeanX.underwear = "lace_panties"
+                            $ JeanX.underwear = "_lace_panties"
 
                 "I like those bikini bottoms." if "_bikini_bottoms" in JeanX.inventory and JeanX.underwear != "_bikini_bottoms":
                     if bg_current == "bg_pool":
@@ -3027,9 +3027,9 @@ label Jean_Wardrobe_Menu:
                         "How about the green ones?":
                             ch_j "Sure, ok."
                             $ JeanX.underwear = "_green_panties"
-                        "How about the lace ones?" if "lace_panties" in JeanX.inventory:
+                        "How about the lace ones?" if "_lace_panties" in JeanX.inventory:
                             ch_j "Fine."
-                            $ JeanX.underwear  = "lace_panties"
+                            $ JeanX.underwear  = "_lace_panties"
                 "Never mind":
                     pass
             return

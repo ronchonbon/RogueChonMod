@@ -1050,8 +1050,8 @@ screen Inventory_screen:
             text "Storm's Bikini Top" size 15
         showif "Storm bikini_bottoms" in Player.inventory:
             text "Storm's Bikini Bottoms" size 15
-        showif "stockings_and_garterbelt" in Player.inventory:
-            text "stockings_and_garterbelt" size 15
+        showif "_stockings_and_garterbelt" in Player.inventory:
+            text "_stockings_and_garterbelt" size 15
 
         showif "Jubes lace_bra" in Player.inventory:
             text "Jubilees's Lace Bra" size 15

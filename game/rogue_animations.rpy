@@ -9,7 +9,7 @@ image Rogue_Doggy_GropeBreast:
         subpixel True
         "images/UI_HandUnder.png"
         xzoom -.55
-        yzoom .55
+        yzoom 0.55
         offset (150,340)
         anchor (0.5,0.5)
         alpha 0.3
@@ -31,11 +31,11 @@ image Rogue_Pussy_Mask:
         "images/RogueDoggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 image Rogue_Pussy_Mask_Static:
@@ -46,11 +46,11 @@ image Rogue_Pussy_Mask_Static:
         "images/RogueDoggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .65
+            ease 1 xzoom 0.65
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 
@@ -101,11 +101,11 @@ image Rogue_Pussy_Static:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .65
+            ease 1 xzoom 0.65
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -133,11 +133,11 @@ image Rogue_Pussy_Hole_Mask_Static:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .65
+            ease 1 xzoom 0.65
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 image Rogue_PussyHole_Static:
@@ -148,7 +148,7 @@ image Rogue_PussyHole_Static:
         anchor (0.52,0.69)
         pos (217,515)
         zoom 1
-        alpha .9
+        alpha 0.9
         block:
             ease 1 ypos 512
             pause 1
@@ -171,11 +171,11 @@ image Rogue_Pussy_Heading:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -204,11 +204,11 @@ image Rogue_Pussy_Hole_Mask:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 image Rogue_Pussy_Heading_Flap:
@@ -219,7 +219,7 @@ image Rogue_Pussy_Heading_Flap:
         anchor (0.52,0.69)
         pos (217,515)
         zoom 1
-        alpha .9
+        alpha 0.9
         block:
             ease 1 ypos 505
             pause 1
@@ -242,11 +242,11 @@ image Rogue_Pussy_Fingering:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .9
+            ease 1 xzoom 0.9
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -337,8 +337,8 @@ image Rogue_Doggy_Fucking_Dildo:
         "images/DildoIn.png"
         pos (169,500)
         block:
-            ease .5 ypos 440
-            pause .25
+            ease 0.5 ypos 440
+            pause 0.25
             ease 1.75 ypos 500
             repeat
 
@@ -381,11 +381,11 @@ image Rogue_Anal_Fingering:
         "images/RogueDoggy/Rogue_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .6
+        zoom 0.6
         block:
-            ease .5 zoom .75
-            pause .5
-            ease 1.5 zoom .6
+            ease 0.5 zoom 0.75
+            pause 0.5
+            ease 1.5 zoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -410,8 +410,8 @@ image Zero_Doggy_Anal_Finger:
         "images/UI_Fingering.png",
         pos (172,480)
         block:
-            ease .5 ypos 460
-            pause .25
+            ease 0.5 ypos 460
+            pause 0.25
             ease 1.75 ypos 480
             repeat
 
@@ -422,11 +422,11 @@ image Rogue_Doggy_Anal_Fingering_Mask:
 
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .6
+        zoom 0.6
         block:
-            ease .5 zoom .75
-            pause .5
-            ease 1.5 zoom .6
+            ease 0.5 zoom 0.75
+            pause 0.5
+            ease 1.5 zoom 0.6
             repeat
 
 
@@ -440,11 +440,11 @@ image Rogue_Anal_Heading:
         "images/RogueDoggy/Rogue_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            ease .5 zoom 1
-            pause .5
-            ease 1.5 zoom .5
+            ease 0.5 zoom 1
+            pause 0.5
+            ease 1.5 zoom 0.5
             repeat
     contains:
         ConditionSwitch(
@@ -471,11 +471,11 @@ image Rogue_Doggy_Anal_Heading_Mask:
         "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            ease .5 zoom 1
-            pause .5
-            ease 1.5 zoom .5
+            ease 0.5 zoom 1
+            pause 0.5
+            ease 1.5 zoom 0.5
             repeat
 
 image Rogue_Doggy_Anal_Head_Top:
@@ -485,10 +485,10 @@ image Rogue_Doggy_Anal_Head_Top:
         "Rogue_doggy_body"
         ypos 0
         block:
-            pause .4
-            ease .3 ypos -5
+            pause 0.4
+            ease 0.3 ypos -5
             easeout 1 ypos 0
-            pause .8
+            pause 0.8
             repeat
 
 image Rogue_Doggy_Anal_Head_Ass:
@@ -498,11 +498,11 @@ image Rogue_Doggy_Anal_Head_Ass:
         "Rogue_doggy_ass"
         ypos 0
         block:
-            pause .4
-            ease .2 ypos -10
-            easeout .1 ypos -7
-            easein .9 ypos 0
-            pause .9
+            pause 0.4
+            ease 0.2 ypos -10
+            easeout 0.1 ypos -7
+            easein 0.9 ypos 0
+            pause 0.9
             repeat
 
 
@@ -571,8 +571,8 @@ image Rogue_Doggy_Anal_Dildo:
         "images/DildoIn.png"
         pos (172,460)
         block:
-            ease .5 ypos 395
-            pause .25
+            ease 0.5 ypos 395
+            pause 0.25
             ease 1.75 ypos 460
             repeat
 
@@ -601,10 +601,10 @@ image Rogue_Doggy_Fuck_Top:
         subpixel True
         "Rogue_doggy_body"
         ypos 15
-        pause .4
+        pause 0.4
         block:
-            ease .2 ypos 5
-            pause .3
+            ease 0.2 ypos 5
+            pause 0.3
             ease 2 ypos 15
             repeat
 
@@ -615,10 +615,10 @@ image Rogue_Doggy_Fuck_Ass:
         "Rogue_doggy_ass"
         ypos 0
         block:
-            pause .4
-            ease .2 ypos -15
-            ease .1 ypos -5
-            pause .2
+            pause 0.4
+            ease 0.2 ypos -15
+            ease 0.1 ypos -5
+            pause 0.2
             ease 1.6 ypos 0
             repeat
 
@@ -661,11 +661,11 @@ image Rogue_Doggy_Fuck2_Top:
         "Rogue_doggy_body"
         ypos 20
         block:
-            pause .15
-            ease .1 ypos 0
-            pause .1
-            easein .5 ypos 20
-            pause .05
+            pause 0.15
+            ease 0.1 ypos 0
+            pause 0.1
+            easein 0.5 ypos 20
+            pause 0.05
             repeat
 
 image Rogue_Doggy_Fuck2_Ass:
@@ -675,12 +675,12 @@ image Rogue_Doggy_Fuck2_Ass:
         "Rogue_doggy_ass"
         ypos 5
         block:
-            pause .15
-            ease .1 ypos -25
-            ease .1 ypos -15
-            pause .1
-            ease .4 ypos 5
-            pause .05
+            pause 0.15
+            ease 0.1 ypos -25
+            ease 0.1 ypos -15
+            pause 0.1
+            ease 0.4 ypos 5
+            pause 0.05
             repeat
 
 
@@ -693,9 +693,9 @@ image Rogue_doggy_feet0:
         pos (0, 0)
         block:
             subpixel True
-            pause .5
+            pause 0.5
             ease 2 ypos 20
-            pause .5
+            pause 0.5
             ease 2 ypos 0
             repeat
     contains:
@@ -710,9 +710,9 @@ image Rogue_doggy_feet0:
         pos (0, 0)
         block:
             subpixel True
-            pause .5
+            pause 0.5
             ease 2 ypos 20
-            pause .5
+            pause 0.5
             ease 2 ypos 0
             repeat
 
@@ -722,7 +722,7 @@ image Rogue_doggy_feet1:
         "Rogue_doggy_shins"
         pos (0, 0)
         block:
-            pause .3
+            pause 0.3
             ease 1.7 ypos 100
             ease 1 ypos 0
             repeat
@@ -731,15 +731,15 @@ image Rogue_doggy_feet1:
         zoom 1.2
         pos (145,480)
         block:
-            pause .4
+            pause 0.4
             ease 1.7 ypos 500
-            ease .9 ypos 480
+            ease 0.9 ypos 480
             repeat
     contains:
         "Rogue_doggy_feet"
         pos (0, 0)
         block:
-            pause .3
+            pause 0.3
             ease 1.7 ypos 100
             ease 1 ypos 0
             repeat
@@ -750,26 +750,26 @@ image Rogue_doggy_feet2:
         "Rogue_doggy_shins"
         pos (0, 0)
         block:
-            pause .05
-            ease .6 ypos 110
-            ease .3 ypos 0
+            pause 0.05
+            ease 0.6 ypos 110
+            ease 0.3 ypos 0
             repeat
     contains:
         "Zero_cock_doggy_out"
         zoom 1.2
         pos (145,480)
         block:
-            pause .07
-            ease .6 ypos 500
-            ease .28 ypos 480
+            pause 0.07
+            ease 0.6 ypos 500
+            ease 0.28 ypos 480
             repeat
     contains:
         "Rogue_doggy_feet"
         pos (0, 0)
         block:
-            pause .05
-            ease .6 ypos 110
-            ease .3 ypos 0
+            pause 0.05
+            ease 0.6 ypos 110
+            ease 0.3 ypos 0
             repeat
 
 
@@ -792,12 +792,12 @@ image Slap_Ass:
         rotate 40
         block:
             parallel:
-                ease .5 xpos 300 rotate 80
-                ease .1 xpos 310 rotate 80
-                pause .5
+                ease 0.5 xpos 300 rotate 80
+                ease 0.1 xpos 310 rotate 80
+                pause 0.5
             parallel:
-                ease .2 ypos 520
-                pause .9
+                ease 0.2 ypos 520
+                pause 0.9
 
 image NotSlap_Ass:
     contains:
@@ -812,12 +812,12 @@ image NotSlap_Ass:
             pos (600,380)
             rotate 40
             parallel:
-                ease .5 xpos 300 rotate 80
-                ease .1 xpos 310 rotate 80
-                pause .5
+                ease 0.5 xpos 300 rotate 80
+                ease 0.1 xpos 310 rotate 80
+                pause 0.5
             parallel:
-                ease .2 ypos 520
-                pause .9
+                ease 0.2 ypos 520
+                pause 0.9
             repeat
 
 
@@ -1124,7 +1124,7 @@ image GropeBack:
     contains:
         subpixel True
         "images/UI_HandUnder.png"
-        zoom .7
+        zoom 0.7
         pos (300,420)
         anchor (0.5,0.5)
         alpha 0.5
@@ -1292,9 +1292,9 @@ image Rogue_Sex_FingerP_Anim1:
         pos (507,520)
         zoom 1.2
         block:
-            ease .2 ypos 480
-            pause .2
-            ease .6 ypos 520
+            ease 0.2 ypos 480
+            pause 0.2
+            ease 0.6 ypos 520
             repeat
 
 image Rogue_Sex_Dildo_Anim2:
@@ -1353,8 +1353,8 @@ image Rogue_Sex_Zero_Anim3:
         pos (504,490)
         zoom 1.3
         block:
-            ease .25 ypos 380
-            pause .25
+            ease 0.25 ypos 380
+            pause 0.25
             ease 1.5 ypos 490
             repeat
 
@@ -1368,7 +1368,7 @@ image Rogue_Sex_Legs_Anim1:
         pos (0,0)
         block:
 
-            pause .25
+            pause 0.25
             easein 1 pos (0,-5)
             pause 1
             ease 2.75 pos (0,0)
@@ -1382,9 +1382,9 @@ image Rogue_Sex_Legs_Anim2:
         pos (0,0)
         block:
 
-            pause .5
-            easein .5 pos (0,-15)
-            ease .25 pos (0,-10)
+            pause 0.5
+            easein 0.5 pos (0,-15)
+            ease 0.25 pos (0,-10)
             pause 1
             ease 2.75 pos (0,0)
             repeat
@@ -1397,10 +1397,10 @@ image Rogue_Sex_Legs_Anim3:
         pos (0,0)
         block:
 
-            pause .15
-            easein .15 pos (0,-20)
-            ease .10 pos (0,-15)
-            pause .20
+            pause 0.15
+            easein 0.15 pos (0,-20)
+            ease 0.10 pos (0,-15)
+            pause 0.20
             ease 1.4 pos (0,0)
             repeat
 
@@ -1414,8 +1414,8 @@ image Rogue_sex_body_Anim1:
         pos (0,0)
         block:
 
-            pause .5
-            easein .75 pos (0,-5)
+            pause 0.5
+            easein 0.75 pos (0,-5)
             pause 1.25
             ease 2.5 pos (0,0)
             repeat
@@ -1428,9 +1428,9 @@ image Rogue_sex_body_Anim2:
         pos (0,0)
         block:
 
-            pause .6
-            easein .4 pos (0,-10)
-            ease .25 pos (0,-5)
+            pause 0.6
+            easein 0.4 pos (0,-10)
+            ease 0.25 pos (0,-5)
             pause 1
             ease 2.75 pos (0,10)
             repeat
@@ -1443,10 +1443,10 @@ image Rogue_sex_body_Anim3:
         pos (0,0)
         block:
 
-            pause .17
-            easein .13 pos (0,-20)
-            ease .10 pos (0,-15)
-            pause .20
+            pause 0.17
+            easein 0.13 pos (0,-20)
+            ease 0.10 pos (0,-15)
+            pause 0.20
             ease 1.4 pos (0,10)
             repeat
 
@@ -1505,8 +1505,8 @@ image Rogue_Sex_FingerA_Anim1:
         pos (507,600)
         zoom 1.2
         block:
-            ease .4 ypos 550
-            pause .4
+            ease 0.4 ypos 550
+            pause 0.4
             ease 1.2 ypos 600
             repeat
 
@@ -1578,10 +1578,10 @@ image Rogue_Sex_Anal_Heading:
     xzoom 0.6
     block:
 
-        ease .75 xzoom 1.0
-        ease .25 xzoom 0.9
+        ease 0.75 xzoom 1.0
+        ease 0.25 xzoom 0.9
         pause 1.50
-        ease .25 xzoom 1.0
+        ease 0.25 xzoom 1.0
         ease 2.25 xzoom 0.6
         repeat
 
@@ -1592,9 +1592,9 @@ image Rogue_Anal_Spunk_Heading_Over:
     xzoom 0.8
     block:
 
-        ease .75 xzoom 1.0
+        ease 0.75 xzoom 1.0
         pause 1.75
-        ease .25 xzoom 1.0
+        ease 0.25 xzoom 1.0
         ease 2.25 xzoom 0.8
         repeat
 image Rogue_Anal_Spunk_Heading_Under:
@@ -1604,10 +1604,10 @@ image Rogue_Anal_Spunk_Heading_Under:
     xzoom 0.6
     block:
 
-        ease .75 xzoom 1.0
-        ease .25 xzoom 0.95
+        ease 0.75 xzoom 1.0
+        ease 0.25 xzoom 0.95
         pause 1.50
-        ease .25 xzoom 1.0
+        ease 0.25 xzoom 1.0
         ease 2.25 xzoom 0.6
         repeat
 
@@ -1662,8 +1662,8 @@ image Rogue_Anal_Zero_Anim3:
         pos (505,570)
         zoom 1.3
         block:
-            ease .25 ypos 450
-            pause .25
+            ease 0.25 ypos 450
+            pause 0.25
             ease 1.5 ypos 570
             repeat
 
@@ -1686,7 +1686,7 @@ image Rogue_Hotdog_Zero_Anim1:
         zoom 1.3
         block:
             ease 1 ypos 560
-            pause .5
+            pause 0.5
             ease 1.5 ypos 500
             repeat
 
@@ -1698,8 +1698,8 @@ image Rogue_Hotdog_Zero_Anim2:
         pos (503,510)
         zoom 1.3
         block:
-            ease .5 ypos 400
-            pause .5
+            ease 0.5 ypos 400
+            pause 0.5
             ease 1 ypos 510
             repeat
 
@@ -1711,9 +1711,9 @@ image Rogue_Hotdog_Body_Anim2:
         pos (0,0)
         block:
 
-            pause .30
-            ease .50 pos (0,-10)
-            pause .20
+            pause 0.30
+            ease 0.50 pos (0,-10)
+            pause 0.20
             ease 1 pos (0,0)
             repeat
 
@@ -1725,9 +1725,9 @@ image Rogue_Hotdog_Legs_Anim2:
         pos (0,0)
         block:
 
-            pause .20
-            ease .50 pos (0,-10)
-            pause .20
+            pause 0.20
+            ease 0.50 pos (0,-10)
+            pause 0.20
             ease 1.1 pos (0,0)
             repeat
 
@@ -1761,9 +1761,9 @@ image Rogue_Footcock_Zero_Anim1:
         pos (392,295)
         block:
 
-            pause .5
-            easein .75 ypos 360
-            ease .25 ypos 355
+            pause 0.5
+            easein 0.75 ypos 360
+            ease 0.25 ypos 355
             pause 1
             ease 2.50 ypos 270
             repeat
@@ -1776,10 +1776,10 @@ image Rogue_Footcock_Zero_Anim2:
         pos (392,295)
         block:
 
-            pause .2
-            easein .4 ypos 360
-            ease .2 ypos 355
-            pause .2
+            pause 0.2
+            easein 0.4 ypos 360
+            ease 0.2 ypos 355
+            pause 0.2
             ease 1.00 ypos 270
             repeat
     offset (0,-100)
@@ -1789,9 +1789,9 @@ transform Rogue_Footcock_Zero_Anim1A():
     offset (0,0)
     block:
 
-        pause .5
-        easein .75 yoffset 60
-        ease .25 yoffset 55
+        pause 0.5
+        easein 0.75 yoffset 60
+        ease 0.25 yoffset 55
         pause 1
         ease 1.50 yoffset -30
         repeat
@@ -1801,15 +1801,15 @@ transform Rogue_Footcock_Zero_Anim2A():
     offset (0,0)
     block:
 
-        pause .2
-        easein .4 yoffset 60
-        ease .2 yoffset 55
-        pause .2
+        pause 0.2
+        easein 0.4 yoffset 60
+        ease 0.2 yoffset 55
+        pause 0.2
         ease 1.00 yoffset -30
-        pause .2
-        easein .4 yoffset 60
-        ease .2 yoffset 55
-        pause .2
+        pause 0.2
+        easein 0.4 yoffset 60
+        ease 0.2 yoffset 55
+        pause 0.2
         ease 1.00 yoffset -30
         repeat
 
@@ -1818,7 +1818,7 @@ transform Rogue_Footcock_StaticA():
     offset (0,-5)
     block:
 
-        pause .5
+        pause 0.5
         ease 1 yoffset 0
         pause 1
         ease 1.50 yoffset -5
@@ -1832,9 +1832,9 @@ image Rogue_Sex_Legs_FootAnim1:
         pos (0,0)
         block:
 
-            pause .5
-            easein .75 pos (0,-65)
-            ease .25 pos (0,-60)
+            pause 0.5
+            easein 0.75 pos (0,-65)
+            ease 0.25 pos (0,-60)
             pause 1
             ease 2.50 pos (0,25)
             repeat
@@ -1849,10 +1849,10 @@ image Rogue_Sex_Legs_FootAnim2:
         pos (0,0)
         block:
 
-            pause .2
-            easein .4 pos (0,-65)
-            ease .2 pos (0,-60)
-            pause .2
+            pause 0.2
+            easein 0.4 pos (0,-65)
+            ease 0.2 pos (0,-60)
+            pause 0.2
             ease 1.0 pos (0,25)
             repeat
     offset (0,100)
@@ -1871,9 +1871,9 @@ transform Rogue_Sex_Legs_FootAnim1A():
     offset (0,0)
     block:
 
-        pause .5
-        easein .75 yoffset -65
-        ease .25 yoffset -60
+        pause 0.5
+        easein 0.75 yoffset -65
+        ease 0.25 yoffset -60
         pause 1
         ease 1.50 yoffset 25
         repeat
@@ -1884,15 +1884,15 @@ transform Rogue_Sex_Legs_FootAnim2A():
     offset (0,0)
     block:
 
-        pause .2
-        easein .4 yoffset -65
-        ease .2 yoffset -60
-        pause .2
+        pause 0.2
+        easein 0.4 yoffset -65
+        ease 0.2 yoffset -60
+        pause 0.2
         ease 1.0 yoffset 25
-        pause .2
-        easein .4 yoffset -65
-        ease .2 yoffset -60
-        pause .2
+        pause 0.2
+        easein 0.4 yoffset -65
+        ease 0.2 yoffset -60
+        pause 0.2
         ease 1.0 yoffset 25
         repeat
 
@@ -1902,7 +1902,7 @@ transform Rogue_Sex_Legs_FootAnimStaticA():
     offset (0,0)
     block:
 
-        pause .5
+        pause 0.5
         ease 1 yoffset -5
         pause 1
         ease 1.50 yoffset 0
@@ -1920,9 +1920,9 @@ image Rogue_sex_body_FootAnim1:
         pos (0,0)
         block:
 
-            pause .5
-            easein .75 pos (0,-25)
-            ease .25 pos (0,-15)
+            pause 0.5
+            easein 0.75 pos (0,-25)
+            ease 0.25 pos (0,-15)
             pause 1
             ease 2.50 pos (0,15)
             repeat
@@ -1937,10 +1937,10 @@ image Rogue_sex_body_FootAnim2:
         pos (0,0)
         block:
 
-            pause .2
-            easein .4 pos (0,-25)
-            ease .2 pos (0,-15)
-            pause .2
+            pause 0.2
+            easein 0.4 pos (0,-25)
+            ease 0.2 pos (0,-15)
+            pause 0.2
             ease 1.0 pos (0,15)
             repeat
     offset (0,100)
@@ -1959,9 +1959,9 @@ transform Rogue_sex_body_FootAnim1A():
     offset (0,0)
     block:
 
-        pause .5
-        easein .75 yoffset -25
-        ease .25 yoffset -15
+        pause 0.5
+        easein 0.75 yoffset -25
+        ease 0.25 yoffset -15
         pause 1
         ease 1.50 yoffset 15
         repeat
@@ -1972,15 +1972,15 @@ transform Rogue_sex_body_FootAnim2A():
     offset (0,0)
     block:
 
-        pause .2
-        easein .4 yoffset -25
-        ease .2 yoffset -15
-        pause .2
+        pause 0.2
+        easein 0.4 yoffset -25
+        ease 0.2 yoffset -15
+        pause 0.2
         ease 1.0 yoffset 15
-        pause .2
-        easein .4 yoffset -25
-        ease .2 yoffset -15
-        pause .2
+        pause 0.2
+        easein 0.4 yoffset -25
+        ease 0.2 yoffset -15
+        pause 0.2
         ease 1.0 yoffset 15
         repeat
 
@@ -1990,7 +1990,7 @@ transform Rogue_sex_body_FootAnimStaticA():
     offset (0,0)
     block:
 
-        pause .5
+        pause 0.5
         ease 1 yoffset -5
         pause 1
         ease 1.50 yoffset 0
@@ -2127,10 +2127,10 @@ label Rogue_BJ_Reset:
         zoom 2 offset (70,140)
         alpha 1
         block:
-            pause .5
+            pause 0.5
             ease 1 zoom 1.5 offset (-50,50)
-            pause .5
-            ease .5 zoom 1 offset (0,0)
+            pause 0.5
+            ease 0.5 zoom 1 offset (0,0)
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -2171,7 +2171,7 @@ image Rogue_TJ_Under:
     contains:
         "Rogue_blowjob_hairback"
         pos (150, -560)
-        zoom .95
+        zoom 0.95
     contains:
         "images/RogueBJFace/Rogue_tj_base.png"
     contains:
@@ -2182,7 +2182,7 @@ image Rogue_TJ_Under:
     contains:
         "Rogue_blowjob_head"
         pos (150, -560)
-        zoom .95
+        zoom 0.95
     pos (-60, 200)
 
 image Rogue_TJ_Over:
@@ -2205,7 +2205,7 @@ transform Rogue_TJ_Under_1():
     subpixel True
     block:
         ease 1 ypos 300
-        easeout .2 ypos 300
+        easeout 0.2 ypos 300
         easein 1.3 ypos 120
         repeat
 
@@ -2214,7 +2214,7 @@ transform Rogue_TJ_Over_1():
     subpixel True
     block:
         ease 1.20 ypos 300
-        easeout .1 ypos 300
+        easeout 0.1 ypos 300
         easein 1.2 ypos 120
         repeat
 
@@ -2222,18 +2222,18 @@ transform Rogue_TJ_Under_2():
     ypos 200
     subpixel True
     block:
-        ease .25 ypos 200
-        ease .4 ypos 120
-        ease .1 ypos 125
+        ease 0.25 ypos 200
+        ease 0.4 ypos 120
+        ease 0.1 ypos 125
         repeat
 
 transform Rogue_TJ_Over_2():
     ypos 200
     subpixel True
     block:
-        ease .3 ypos 200
-        ease .35 ypos 120
-        ease .1 ypos 125
+        ease 0.3 ypos 200
+        ease 0.35 ypos 120
+        ease 0.1 ypos 125
         repeat
 
 
@@ -2248,7 +2248,7 @@ transform Zero_TJ_Cock_1():
     subpixel True
     block:
         ease 1 ypos 1050
-        easeout .2 ypos 1060
+        easeout 0.2 ypos 1060
         easein 1.3 ypos 1020
         repeat
 
@@ -2256,8 +2256,8 @@ transform Zero_TJ_Cock_2():
     pos (440,1020)
     subpixel True
     block:
-        ease .35 ypos 1030
-        ease .4 ypos 1020
+        ease 0.35 ypos 1030
+        ease 0.4 ypos 1020
 
         repeat
 
@@ -2290,7 +2290,7 @@ image Rogue_TJ_Animation:
             ),
     anchor (0.6, 0.0)
     offset (-75, 250)
-    zoom .55
+    zoom 0.55
 
 label Rogue_TJ_Launch(Line=primary_action):
 
@@ -2362,8 +2362,8 @@ label Rogue_TJ_Reset:
     show Rogue_sprite zorder RogueX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 xpos 500 offset (0,50)
-        pause .5
-        ease .5 zoom 1 xpos RogueX.sprite_location yoffset 0
+        pause 0.5
+        ease 0.5 zoom 1 xpos RogueX.sprite_location yoffset 0
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         alpha 1
         zoom 1 xpos RogueX.sprite_location yoffset 0
@@ -2399,7 +2399,7 @@ image Rogue_Hand_Over:
 transform Handcock_1():
     subpixel True
     rotate_pad False
-    ease .5 ypos 450 rotate -2
+    ease 0.5 ypos 450 rotate -2
     pause 0.25
     ease 1.0 ypos 400 rotate 0
     pause 0.1
@@ -2408,14 +2408,14 @@ transform Handcock_1():
 transform Handcock_2():
     subpixel True
     rotate_pad False
-    ease .2 ypos 430 rotate -3
-    ease .5 ypos 400 rotate 0
+    ease 0.2 ypos 430 rotate -3
+    ease 0.5 ypos 400 rotate 0
     pause 0.1
     repeat
 
 transform Rogue_Hand_1():
     subpixel True
-    ease .5 ypos 150 rotate 5
+    ease 0.5 ypos 150 rotate 5
     pause 0.25
     ease 1.0 ypos -100 rotate -5
     pause 0.1
@@ -2512,8 +2512,8 @@ label Rogue_HJ_Reset:
     show Rogue_sprite zorder RogueX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 offset (0,50)
-        pause .5
-        ease .5 zoom 1 xpos RogueX.sprite_location yoffset 0
+        pause 0.5
+        ease 0.5 zoom 1 xpos RogueX.sprite_location yoffset 0
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         alpha 1
         zoom 1 xpos RogueX.sprite_location yoffset 0
@@ -2525,8 +2525,8 @@ label Rogue_HJ_Reset:
 transform Vibrate():
     subpixel True
     block:
-        linear .5 xoffset 2
-        linear .5 xoffset -2
+        linear 0.5 xoffset 2
+        linear 0.5 xoffset -2
         repeat
 
 
@@ -2542,7 +2542,7 @@ image GropeLeftBreast:
     contains:
         subpixel True
         "UI_Hand"
-        zoom .7
+        zoom 0.7
         pos (300,420)
         anchor (0.5,0.5)
         alpha 0.5
@@ -2579,8 +2579,8 @@ image LickRightBreast:
         alpha 0.5
         rotate 30
         block:
-            ease .5 rotate -45 pos (150,370)
-            pause .5
+            ease 0.5 rotate -45 pos (150,370)
+            pause 0.5
             ease 1.5 rotate 30 pos (160,400)
             repeat
 
@@ -2595,8 +2595,8 @@ image LickLeftBreast:
         alpha 0.5
         rotate 30
         block:
-            ease .5 rotate -45 pos (260,380)
-            pause .5
+            ease 0.5 rotate -45 pos (260,380)
+            pause 0.5
             ease 1.5 rotate 30 pos (280,410)
             repeat
 
@@ -2604,40 +2604,40 @@ image GropeThigh:
     contains:
         subpixel True
         "UI_Hand"
-        zoom .7
+        zoom 0.7
         pos (210,730)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 100
         parallel:
-            pause .5
+            pause 0.5
             ease 1 ypos 780
             ease 1 ypos 730
             repeat
         parallel:
-            pause .5
-            ease .5 xpos 213
-            ease .5 xpos 210
-            ease .5 xpos 213
-            ease .5 xpos 210
+            pause 0.5
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
             repeat
 
 image GropePussy:
     contains:
         subpixel True
         "UI_Hand"
-        zoom .7
+        zoom 0.7
         pos (220,635)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 170
         block:
             choice:
-                ease .5 rotate 190 pos (220,620)
-                ease .75 rotate 170 pos (220,635)
+                ease 0.5 rotate 190 pos (220,620)
+                ease 0.75 rotate 170 pos (220,635)
             choice:
-                ease .5 rotate 190 pos (220,620)
-                pause .25
+                ease 0.5 rotate 190 pos (220,620)
+                pause 0.25
                 ease 1 rotate 170 pos (220,635)
             repeat
 
@@ -2653,21 +2653,21 @@ image FingerPussy:
         block:
             choice:
                 ease 1 rotate 40 pos (240,685)
-                pause .5
+                pause 0.5
                 ease 1 rotate 50 pos (230,720)
             choice:
-                ease .5 rotate 40 pos (240,685)
-                pause .5
+                ease 0.5 rotate 40 pos (240,685)
+                pause 0.5
                 ease 1.75 rotate 50 pos (230,720)
             choice:
                 ease 2 rotate 40 pos (240,685)
-                pause .5
+                pause 0.5
                 ease 1 rotate 50 pos (230,720)
             choice:
-                ease .25 rotate 40 pos (240,685)
-                ease .25 rotate 50 pos (230,720)
-                ease .25 rotate 40 pos (240,685)
-                ease .25 rotate 50 pos (230,720)
+                ease 0.25 rotate 40 pos (240,685)
+                ease 0.25 rotate 50 pos (230,720)
+                ease 0.25 rotate 40 pos (240,685)
+                ease 0.25 rotate 50 pos (230,720)
             repeat
 
 image Lickpussy:
@@ -2681,8 +2681,8 @@ image Lickpussy:
         alpha 0.5
         rotate 10
         block:
-            easeout .5 rotate -50 pos (230,650)
-            linear .5 rotate -60 pos (220,660)
+            easeout 0.5 rotate -50 pos (230,650)
+            linear 0.5 rotate -60 pos (220,660)
             easein 1 rotate 10 pos (250,670)
             repeat
 
@@ -2697,9 +2697,9 @@ image VibratorRightBreast:
         rotate 55
         block:
             ease 1 rotate 35 ypos 370
-            pause .25
+            pause 0.25
             ease 1 rotate 55 ypos 380
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorLeftBreast:
@@ -2713,9 +2713,9 @@ image VibratorLeftBreast:
         rotate 55
         block:
             ease 1 rotate 35 ypos 390
-            pause .25
+            pause 0.25
             ease 1 rotate 55 ypos 400
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorPussy:
@@ -2729,9 +2729,9 @@ image VibratorPussy:
         rotate 70
         block:
             ease 1 rotate 35 xpos 230 ypos 655
-            pause .25
+            pause 0.25
             ease 1 rotate 70 xpos 240 ypos 665
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorAnal:
@@ -2745,9 +2745,9 @@ image VibratorAnal:
         rotate 10
         block:
             ease 1 rotate 0 xpos 260 ypos 655
-            pause .25
+            pause 0.25
             ease 1 rotate 10 xpos 270 ypos 665
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorPussyInsert:
@@ -2781,9 +2781,9 @@ image TestUIAnimation:
         rotate 10
         block:
             ease 1 rotate 0 xpos 260 ypos 655
-            pause .25
+            pause 0.25
             ease 1 rotate 10 xpos 270 ypos 665
-            pause .25
+            pause 0.25
             repeat
 
 
@@ -2791,7 +2791,7 @@ image GirlGropeLeftBreast:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom .6
+        zoom 0.6
         pos (300,400)
         anchor (0.5,0.5)
         alpha 0.5
@@ -2820,90 +2820,90 @@ image GirlGropeThigh:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom .6
+        zoom 0.6
         pos (210,730)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 100
         parallel:
-            pause .5
+            pause 0.5
             ease 1 ypos 780
             ease 1 ypos 730
             repeat
         parallel:
-            pause .5
-            ease .5 xpos 213
-            ease .5 xpos 210
-            ease .5 xpos 213
-            ease .5 xpos 210
+            pause 0.5
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
             repeat
 
 image GirlGropePussy:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom .6
+        zoom 0.6
         pos (230,615)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 200
         block:
             choice:
-                ease .75 rotate 210 pos (225,620)
-                ease .5 rotate 195
-                ease .75 rotate 210
-                ease .5 rotate 195
+                ease 0.75 rotate 210 pos (225,620)
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
             choice:
-                ease .5 rotate 210 pos (225,620)
+                ease 0.5 rotate 210 pos (225,620)
                 ease 1 rotate 195
-                pause .25
-                ease .5 rotate 210
+                pause 0.25
+                ease 0.5 rotate 210
                 ease 1 rotate 195
-                pause .25
+                pause 0.25
             choice:
-                ease .5 rotate 205 pos (225,620)
-                ease .75 rotate 200 pos (225,625)
-                ease .5 rotate 205 pos (225,620)
-                ease .75 rotate 200 pos (225,625)
+                ease 0.5 rotate 205 pos (225,620)
+                ease 0.75 rotate 200 pos (225,625)
+                ease 0.5 rotate 205 pos (225,620)
+                ease 0.75 rotate 200 pos (225,625)
             choice:
-                ease .3 rotate 205 pos (225,620)
-                ease .3 rotate 200 pos (225,630)
-                ease .3 rotate 205 pos (225,620)
-                ease .3 rotate 200 pos (225,630)
+                ease 0.3 rotate 205 pos (225,620)
+                ease 0.3 rotate 200 pos (225,630)
+                ease 0.3 rotate 205 pos (225,620)
+                ease 0.3 rotate 200 pos (225,630)
             repeat
 
 image GirlFingerPussy:
     contains:
         subpixel True
         "UI_GirlFinger"
-        zoom .6
+        zoom 0.6
         pos (230,630)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 200
         block:
             choice:
-                ease .75 rotate 210 pos (230,635)
-                ease .5 rotate 195
-                ease .75 rotate 210
-                ease .5 rotate 195
+                ease 0.75 rotate 210 pos (230,635)
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
             choice:
-                ease .5 rotate 210 pos (230,635)
+                ease 0.5 rotate 210 pos (230,635)
                 ease 1 rotate 195
-                pause .25
-                ease .5 rotate 210
+                pause 0.25
+                ease 0.5 rotate 210
                 ease 1 rotate 195
-                pause .25
+                pause 0.25
             choice:
-                ease .5 rotate 205 pos (230,635)
-                ease .75 rotate 200 pos (230,640)
-                ease .5 rotate 205 pos (230,635)
-                ease .75 rotate 200 pos (230,640)
+                ease 0.5 rotate 205 pos (230,635)
+                ease 0.75 rotate 200 pos (230,640)
+                ease 0.5 rotate 205 pos (230,635)
+                ease 0.75 rotate 200 pos (230,640)
             choice:
-                ease .3 rotate 205 pos (230,635)
-                ease .3 rotate 200 pos (230,645)
-                ease .3 rotate 205 pos (230,635)
-                ease .3 rotate 200 pos (230,645)
+                ease 0.3 rotate 205 pos (230,635)
+                ease 0.3 rotate 200 pos (230,645)
+                ease 0.3 rotate 205 pos (230,635)
+                ease 0.3 rotate 200 pos (230,645)
             repeat
 
 
@@ -2920,35 +2920,35 @@ image Spunk_Drip:
             choice:
                 pause 1
             choice:
-                pause .5
+                pause 0.5
             choice:
                 pos (0,0)
                 alpha 1
                 easeout 2.5 ypos 70
-                easeout .9 ypos 350
+                easeout 0.9 ypos 350
                 alpha 0
                 pause 1
             choice:
                 pos (9,0)
-                pause .2
+                pause 0.2
                 alpha 1
                 easeout 2.5 ypos 75
-                easeout .9 ypos 350
+                easeout 0.9 ypos 350
                 alpha 0
-                pause .4
+                pause 0.4
             choice:
                 pos (6,0)
-                pause .4
+                pause 0.4
                 alpha 1
                 easeout 2.5 ypos 65
-                easeout .9 ypos 350
+                easeout 0.9 ypos 350
                 alpha 0
             choice:
                 pos (12,0)
-                pause .8
+                pause 0.8
                 alpha 1
                 easeout 2.5 ypos 60
-                easeout .9 ypos 350
+                easeout 0.9 ypos 350
                 alpha 0
             repeat
 
@@ -2962,7 +2962,7 @@ image Spunk_Drip2:
             pos (0,0)
             alpha 1
             easeout 2.5 ypos 70
-            easeout .9 ypos 350
+            easeout 0.9 ypos 350
             alpha 0
             pause 1
             repeat
@@ -2972,12 +2972,12 @@ image Spunk_Drip2:
         zoom 0.3
         parallel:
             pos (9,0)
-            pause .2
+            pause 0.2
             alpha 1
             easeout 2.5 ypos 75
-            easeout .9 ypos 350
+            easeout 0.9 ypos 350
             alpha 0
-            pause .4
+            pause 0.4
             repeat
     contains:
         "images/SpermdropB.png"
@@ -2985,10 +2985,10 @@ image Spunk_Drip2:
         zoom 0.3
         parallel:
             pos (6,0)
-            pause .4
+            pause 0.4
             alpha 1
             easeout 2.5 ypos 65
-            easeout .9 ypos 350
+            easeout 0.9 ypos 350
             alpha 0
             repeat
     contains:
@@ -2997,10 +2997,10 @@ image Spunk_Drip2:
         zoom 0.3
         parallel:
             pos (12,0)
-            pause .8
+            pause 0.8
             alpha 1
             easeout 2.5 ypos 60
-            easeout .9 ypos 350
+            easeout 0.9 ypos 350
             alpha 0
             repeat
 
@@ -3015,35 +3015,35 @@ image Spunk_Dripp:
             choice:
                 pause 1
             choice:
-                pause .5
+                pause 0.5
             choice:
                 pos (0,0)
                 alpha 1
                 easeout 2.5 ypos 70
-                easeout .9 ypos 350
+                easeout 0.9 ypos 350
                 alpha 0
                 pause 1
             choice:
                 pos (9,0)
-                pause .2
+                pause 0.2
                 alpha 1
                 easeout 2.5 ypos 75
-                easeout .9 ypos 350
+                easeout 0.9 ypos 350
                 alpha 0
-                pause .4
+                pause 0.4
             choice:
                 pos (6,0)
-                pause .4
+                pause 0.4
                 alpha 1
                 easeout 2.5 ypos 65
-                easeout .9 ypos 350
+                easeout 0.9 ypos 350
                 alpha 0
             choice:
                 pos (12,0)
-                pause .8
+                pause 0.8
                 alpha 1
                 easeout 2.5 ypos 60
-                easeout .9 ypos 350
+                easeout 0.9 ypos 350
                 alpha 0
             repeat
 
@@ -3057,35 +3057,35 @@ image Wet_Drip:
             choice:
                 pause 1
             choice:
-                pause .5
+                pause 0.5
             choice:
                 pos (14,0)
-                alpha .8
-                easeout .9 ypos 70
-                easeout .9 ypos 350
+                alpha 0.8
+                easeout 0.9 ypos 70
+                easeout 0.9 ypos 350
                 alpha 0
                 pause 1
             choice:
                 pos (9,0)
-                pause .2
-                alpha .8
-                easeout .9 ypos 75
-                easeout .9 ypos 350
+                pause 0.2
+                alpha 0.8
+                easeout 0.9 ypos 75
+                easeout 0.9 ypos 350
                 alpha 0
-                pause .4
+                pause 0.4
             choice:
                 pos (6,0)
-                pause .4
-                alpha .8
-                easeout .9 ypos 65
-                easeout .9 ypos 350
+                pause 0.4
+                alpha 0.8
+                easeout 0.9 ypos 65
+                easeout 0.9 ypos 350
                 alpha 0
             choice:
                 pos (12,0)
-                pause .8
-                alpha .8
-                easeout .9 ypos 60
-                easeout .9 ypos 350
+                pause 0.8
+                alpha 0.8
+                easeout 0.9 ypos 60
+                easeout 0.9 ypos 350
                 alpha 0
             repeat
 
@@ -3097,9 +3097,9 @@ image Wet_Drip2:
         zoom 0.2
         parallel:
             pos (14,0)
-            alpha .8
-            easeout .9 ypos 70
-            easeout .9 ypos 350
+            alpha 0.8
+            easeout 0.9 ypos 70
+            easeout 0.9 ypos 350
             alpha 0
             pause 1.5
             repeat
@@ -3109,12 +3109,12 @@ image Wet_Drip2:
         zoom 0.2
         parallel:
             pos (9,0)
-            pause .3
-            alpha .8
-            easeout .9 ypos 75
-            easeout .9 ypos 350
+            pause 0.3
+            alpha 0.8
+            easeout 0.9 ypos 75
+            easeout 0.9 ypos 350
             alpha 0
-            pause .6
+            pause 0.6
             repeat
     contains:
         "images/Wetdrop.png"
@@ -3122,10 +3122,10 @@ image Wet_Drip2:
         zoom 0.2
         parallel:
             pos (6,0)
-            pause .6
-            alpha .8
-            easeout .9 ypos 65
-            easeout .9 ypos 350
+            pause 0.6
+            alpha 0.8
+            easeout 0.9 ypos 65
+            easeout 0.9 ypos 350
             alpha 0
             repeat
     contains:
@@ -3134,12 +3134,12 @@ image Wet_Drip2:
         zoom 0.2
         parallel:
             pos (12,0)
-            pause .8
-            alpha .8
-            easeout .9 ypos 60
-            easeout .9 ypos 350
+            pause 0.8
+            alpha 0.8
+            easeout 0.9 ypos 60
+            easeout 0.9 ypos 350
             alpha 0
-            pause .2
+            pause 0.2
             repeat
 
 
@@ -3191,8 +3191,8 @@ image Chibi_Jackin:
         anchor (0.5,0.5)
         rotate 20
         block:
-            ease .3 rotate -10 pos (0,50)
-            ease .7 rotate 20 pos (-10,-80)
+            ease 0.3 rotate -10 pos (0,50)
+            ease 0.7 rotate 20 pos (-10,-80)
             repeat
     pos (75,675)
     zoom 0.5
@@ -3216,8 +3216,8 @@ image Chibi_Handy:
         anchor (0.5,0.5)
         rotate -10
         block:
-            ease .3 rotate 0 pos (10,10)
-            ease .7 rotate -10 pos (0,-130)
+            ease 0.3 rotate 0 pos (10,10)
+            ease 0.7 rotate -10 pos (0,-130)
             repeat
     pos (75,675)
     zoom 0.5
@@ -3263,10 +3263,10 @@ image Chibi_SuckingB:
     zoom 0.5
     xzoom 0.71
     block:
-        easeout .25 rotate 0 pos (2,48) xzoom 1
-        easein .25 rotate 0 pos (6,92) xzoom 1
-        easeout .5 rotate 0 pos (2,48) xzoom 1
-        easein .5 rotate 0 pos (5,0) xzoom 0.71
+        easeout 0.25 rotate 0 pos (2,48) xzoom 1
+        easein 0.25 rotate 0 pos (6,92) xzoom 1
+        easeout 0.5 rotate 0 pos (2,48) xzoom 1
+        easein 0.5 rotate 0 pos (5,0) xzoom 0.71
         repeat
 
 image Chibi_Sucking_Cock:
@@ -3280,10 +3280,10 @@ image Chibi_Sucking_Cock:
 
         rotate 0
         block:
-            easeout .25 rotate 0 pos (110,80) xzoom 1
-            easein .25 rotate 0 pos (100,-10) xzoom 1
-            easeout .5 rotate 0 pos (110,80) xzoom 1
-            easein .5 rotate 0 pos (100,175) xzoom 1.5
+            easeout 0.25 rotate 0 pos (110,80) xzoom 1
+            easein 0.25 rotate 0 pos (100,-10) xzoom 1
+            easeout 0.5 rotate 0 pos (110,80) xzoom 1
+            easein 0.5 rotate 0 pos (100,175) xzoom 1.5
             repeat
 
 
@@ -3353,7 +3353,7 @@ label Rogue_Pos_Reset(T=0, Set=0):
         return
     call Rogue_Hide
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
-        ease .5 offset (0,0) anchor (0.6, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
+        ease 0.5 offset (0,0) anchor (0.6, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
     show Rogue_sprite zorder RogueX.sprite_layer:
         offset (0,0)
         anchor (0.6, 0.0)
@@ -3508,7 +3508,7 @@ image Gwen_Sprite:
         )
     anchor (0.6, 0.0)
     yoffset 15
-    zoom .75
+    zoom 0.75
 
 
 
@@ -3543,7 +3543,7 @@ image Gwen_Sprite_Head:
         (0,0), "Gwen Blink",
         )
     anchor (0.6, 0.0)
-    zoom .5
+    zoom 0.5
 
 image Gwen Blink:
     ConditionSwitch(
@@ -3559,7 +3559,7 @@ image Gwen Blink:
     choice:
         3
     "images/NPC/Gwen_Sprite_Eyes_Closed.png"
-    .20
+    0.20
     repeat
 
 default G_Mouth = "normal"
@@ -3707,7 +3707,7 @@ label Display_Gwen(GwLoc=350, YLoc=50):
         zoom 1
         offset (0,0)
         anchor (0.5, 0.0)
-        easeout .5 pos (GwLoc,YLoc)
+        easeout 0.5 pos (GwLoc,YLoc)
     show Gwen_Sprite:
         alpha 1
         zoom 1
@@ -3986,13 +3986,13 @@ image ClockRed:
 
 image BlueScreen:
 
-    alpha .1
+    alpha 0.1
     contains:
         Solid("#00B3D6", xysize=(1024, 768))
 
 image SilhouetteBase:
 
-    alpha .95
+    alpha 0.95
     contains:
         Solid("#14142d", xysize=(1024, 768))
 

@@ -469,7 +469,7 @@ image Kitty_Sprite:
             ),
         )
     anchor (0.6, 0.0)
-    zoom .75
+    zoom 0.75
     pos (500,100)
 
 
@@ -544,7 +544,7 @@ image Kitty_Head:
             ),
         )
 
-    zoom .5
+    zoom 0.5
 
 image Kitty_hairback:
     LiveComposite(
@@ -556,7 +556,7 @@ image Kitty_hairback:
             ),
         )
 
-    zoom .5
+    zoom 0.5
 
 image Kitty Blink:
     ConditionSwitch(
@@ -580,7 +580,7 @@ image Kitty Blink:
         3
 
     "images/KittySprite/Kitty_Sprite_Eyes_Closed.png"
-    .25
+    0.25
     repeat
 
 image Kitty_Squint:
@@ -592,7 +592,7 @@ image Kitty_Squint:
     choice:
         3
     "images/KittySprite/Kitty_Sprite_Eyes_Squint.png"
-    .25
+    0.25
     repeat
 
 
@@ -996,7 +996,7 @@ image GropeBack:
     contains:
         subpixel True
         "images/UI_HandUnder.png"
-        zoom .7
+        zoom 0.7
         pos (300,420)
         anchor (0.5,0.5)
         alpha 0.5
@@ -1223,8 +1223,8 @@ image Kitty_Sex_Zero_Anim3:
         pos (500,490)
         zoom 1.4
         block:
-            ease .25 pos (500,380)
-            pause .25
+            ease 0.25 pos (500,380)
+            pause 0.25
             ease 1.5 pos (500,490)
             repeat
 
@@ -1238,7 +1238,7 @@ image Kitty_Sex_Legs_Anim1:
         pos (0,0)
         block:
 
-            pause .25
+            pause 0.25
             easein 1 pos (0,-5)
             pause 1
             ease 2.75 pos (0,0)
@@ -1252,9 +1252,9 @@ image Kitty_Sex_Legs_Anim2:
         pos (0,0)
         block:
 
-            pause .5
-            easein .5 pos (0,-15)
-            ease .25 pos (0,-10)
+            pause 0.5
+            easein 0.5 pos (0,-15)
+            ease 0.25 pos (0,-10)
             pause 1
             ease 2.75 pos (0,0)
             repeat
@@ -1267,10 +1267,10 @@ image Kitty_Sex_Legs_Anim3:
         pos (0,0)
         block:
 
-            pause .15
-            easein .15 pos (0,-20)
-            ease .10 pos (0,-15)
-            pause .20
+            pause 0.15
+            easein 0.15 pos (0,-20)
+            ease 0.10 pos (0,-15)
+            pause 0.20
             ease 1.4 pos (0,0)
             repeat
 
@@ -1284,8 +1284,8 @@ image Kitty_Sex_Body_Anim1:
         pos (0,0)
         block:
 
-            pause .5
-            easein .75 pos (0,-5)
+            pause 0.5
+            easein 0.75 pos (0,-5)
             pause 1.25
             ease 2.5 pos (0,0)
             repeat
@@ -1298,9 +1298,9 @@ image Kitty_Sex_Body_Anim2:
         pos (0,0)
         block:
 
-            pause .6
-            easein .4 pos (0,-10)
-            ease .25 pos (0,-5)
+            pause 0.6
+            easein 0.4 pos (0,-10)
+            ease 0.25 pos (0,-5)
             pause 1
             ease 2.75 pos (0,10)
             repeat
@@ -1313,10 +1313,10 @@ image Kitty_Sex_Body_Anim3:
         pos (0,0)
         block:
 
-            pause .17
-            easein .13 pos (0,-20)
-            ease .10 pos (0,-15)
-            pause .20
+            pause 0.17
+            easein 0.13 pos (0,-20)
+            ease 0.10 pos (0,-15)
+            pause 0.20
             ease 1.4 pos (0,10)
             repeat
 
@@ -1419,10 +1419,10 @@ image Kitty_Sex_Anal_Heading:
     xzoom 0.6
     block:
 
-        ease .75 xzoom 1.0
-        ease .25 xzoom 0.9
+        ease 0.75 xzoom 1.0
+        ease 0.25 xzoom 0.9
         pause 1.50
-        ease .25 xzoom 1.0
+        ease 0.25 xzoom 1.0
         ease 2.25 xzoom 0.6
         repeat
 
@@ -1433,9 +1433,9 @@ image Kitty_Sex_Anal_Spunk_Heading_Over:
     xzoom 0.8
     block:
 
-        ease .75 xzoom 1.0
+        ease 0.75 xzoom 1.0
         pause 1.75
-        ease .25 xzoom 1.0
+        ease 0.25 xzoom 1.0
         ease 2.25 xzoom 0.8
         repeat
 image Kitty_Sex_Anal_Spunk_Heading_Under:
@@ -1445,10 +1445,10 @@ image Kitty_Sex_Anal_Spunk_Heading_Under:
     xzoom 0.6
     block:
 
-        ease .75 xzoom 1.0
-        ease .25 xzoom 0.95
+        ease 0.75 xzoom 1.0
+        ease 0.25 xzoom 0.95
         pause 1.50
-        ease .25 xzoom 1.0
+        ease 0.25 xzoom 1.0
         ease 2.25 xzoom 0.6
         repeat
 
@@ -1503,8 +1503,8 @@ image Kitty_Anal_Zero_Anim3:
         pos (500,570)
         zoom 1.4
         block:
-            ease .25 pos (500,450)
-            pause .25
+            ease 0.25 pos (500,450)
+            pause 0.25
             ease 1.5 pos (500,570)
             repeat
 
@@ -1527,7 +1527,7 @@ image Kitty_Hotdog_Zero_Anim1:
         zoom 1.4
         block:
             ease 1 pos (498,560)
-            pause .5
+            pause 0.5
             ease 1.5 pos (498,500)
             repeat
 
@@ -1539,8 +1539,8 @@ image Kitty_Hotdog_Zero_Anim2:
         pos (500,510)
         zoom 1.4
         block:
-            ease .5 pos (500,400)
-            pause .5
+            ease 0.5 pos (500,400)
+            pause 0.5
             ease 1 pos (500,510)
             repeat
 
@@ -1552,9 +1552,9 @@ image Kitty_Hotdog_Body_Anim2:
         pos (0,0)
         block:
 
-            pause .30
-            ease .50 pos (0,-10)
-            pause .20
+            pause 0.30
+            ease 0.50 pos (0,-10)
+            pause 0.20
             ease 1 pos (0,0)
             repeat
 
@@ -1566,9 +1566,9 @@ image Kitty_Hotdog_Legs_Anim2:
         pos (0,0)
         block:
 
-            pause .20
-            ease .50 pos (0,-10)
-            pause .20
+            pause 0.20
+            ease 0.50 pos (0,-10)
+            pause 0.20
             ease 1.1 pos (0,0)
             repeat
 
@@ -1601,9 +1601,9 @@ image Kitty_Footcock_Zero_Anim1:
         pos (392,295)
         block:
 
-            pause .5
-            easein .75 ypos 360
-            ease .25 ypos 355
+            pause 0.5
+            easein 0.75 ypos 360
+            ease 0.25 ypos 355
             pause 1
             ease 2.50 ypos 270
             repeat
@@ -1616,10 +1616,10 @@ image Kitty_Footcock_Zero_Anim2:
         pos (392,295)
         block:
 
-            pause .2
-            easein .4 ypos 360
-            ease .2 ypos 355
-            pause .2
+            pause 0.2
+            easein 0.4 ypos 360
+            ease 0.2 ypos 355
+            pause 0.2
             ease 1.00 ypos 270
             repeat
     pos (750,230)
@@ -1629,9 +1629,9 @@ transform Kitty_Footcock_Zero_Anim1A():
     offset (0,0)
     block:
 
-        pause .5
-        easein .75 yoffset 60
-        ease .25 yoffset 55
+        pause 0.5
+        easein 0.75 yoffset 60
+        ease 0.25 yoffset 55
         pause 1
         ease 1.50 yoffset -30
         repeat
@@ -1641,15 +1641,15 @@ transform Kitty_Footcock_Zero_Anim2A():
     offset (0,0)
     block:
 
-        pause .2
-        easein .4 yoffset 60
-        ease .2 yoffset 55
-        pause .2
+        pause 0.2
+        easein 0.4 yoffset 60
+        ease 0.2 yoffset 55
+        pause 0.2
         ease 1.00 yoffset -30
-        pause .2
-        easein .4 yoffset 60
-        ease .2 yoffset 55
-        pause .2
+        pause 0.2
+        easein 0.4 yoffset 60
+        ease 0.2 yoffset 55
+        pause 0.2
         ease 1.00 yoffset -30
         repeat
 
@@ -1658,7 +1658,7 @@ transform Kitty_Footcock_StaticA():
     offset (0,-5)
     block:
 
-        pause .5
+        pause 0.5
         ease 1 yoffset 0
         pause 1
         ease 1.50 yoffset -5
@@ -1672,9 +1672,9 @@ image Kitty_Sex_Legs_FootAnim1:
         pos (0,0)
         block:
 
-            pause .5
-            easein .75 pos (0,-65)
-            ease .25 pos (0,-60)
+            pause 0.5
+            easein 0.75 pos (0,-65)
+            ease 0.25 pos (0,-60)
             pause 1
             ease 2.50 pos (0,25)
             repeat
@@ -1688,10 +1688,10 @@ image Kitty_Sex_Legs_FootAnim2:
         pos (0,0)
         block:
 
-            pause .2
-            easein .4 pos (0,-65)
-            ease .2 pos (0,-60)
-            pause .2
+            pause 0.2
+            easein 0.4 pos (0,-65)
+            ease 0.2 pos (0,-60)
+            pause 0.2
             ease 1.0 pos (0,25)
             repeat
     pos (750,230)
@@ -1710,9 +1710,9 @@ transform Kitty_Sex_Legs_FootAnim1A():
     offset (0,0)
     block:
 
-        pause .5
-        easein .75 yoffset -65
-        ease .25 yoffset -60
+        pause 0.5
+        easein 0.75 yoffset -65
+        ease 0.25 yoffset -60
         pause 1
         ease 1.50 yoffset 25
         repeat
@@ -1723,15 +1723,15 @@ transform Kitty_Sex_Legs_FootAnim2A():
     offset (0,0)
     block:
 
-        pause .2
-        easein .4 yoffset -65
-        ease .2 yoffset -60
-        pause .2
+        pause 0.2
+        easein 0.4 yoffset -65
+        ease 0.2 yoffset -60
+        pause 0.2
         ease 1.0 yoffset 25
-        pause .2
-        easein .4 yoffset -65
-        ease .2 yoffset -60
-        pause .2
+        pause 0.2
+        easein 0.4 yoffset -65
+        ease 0.2 yoffset -60
+        pause 0.2
         ease 1.0 yoffset 25
         repeat
 
@@ -1741,7 +1741,7 @@ transform Kitty_Sex_Legs_FootAnimStaticA():
     offset (0,0)
     block:
 
-        pause .5
+        pause 0.5
         ease 1 yoffset -5
         pause 1
         ease 1.50 yoffset 0
@@ -1759,9 +1759,9 @@ image Kitty_Sex_Body_FootAnim1:
         pos (0,0)
         block:
 
-            pause .5
-            easein .75 pos (0,-25)
-            ease .25 pos (0,-15)
+            pause 0.5
+            easein 0.75 pos (0,-25)
+            ease 0.25 pos (0,-15)
             pause 1
             ease 2.50 pos (0,15)
             repeat
@@ -1775,10 +1775,10 @@ image Kitty_Sex_Body_FootAnim2:
         pos (0,0)
         block:
 
-            pause .2
-            easein .4 pos (0,-25)
-            ease .2 pos (0,-15)
-            pause .2
+            pause 0.2
+            easein 0.4 pos (0,-25)
+            ease 0.2 pos (0,-15)
+            pause 0.2
             ease 1.0 pos (0,15)
             repeat
     pos (750,230)
@@ -1797,9 +1797,9 @@ transform Kitty_Sex_Body_FootAnim1A():
     offset (0,0)
     block:
 
-        pause .5
-        easein .75 yoffset -25
-        ease .25 yoffset -15
+        pause 0.5
+        easein 0.75 yoffset -25
+        ease 0.25 yoffset -15
         pause 1
         ease 1.50 yoffset 15
         repeat
@@ -1810,15 +1810,15 @@ transform Kitty_Sex_Body_FootAnim2A():
     offset (0,0)
     block:
 
-        pause .2
-        easein .4 yoffset -25
-        ease .2 yoffset -15
-        pause .2
+        pause 0.2
+        easein 0.4 yoffset -25
+        ease 0.2 yoffset -15
+        pause 0.2
         ease 1.0 yoffset 15
-        pause .2
-        easein .4 yoffset -25
-        ease .2 yoffset -15
-        pause .2
+        pause 0.2
+        easein 0.4 yoffset -25
+        ease 0.2 yoffset -15
+        pause 0.2
         ease 1.0 yoffset 15
         repeat
 
@@ -1828,7 +1828,7 @@ transform Kitty_Sex_Body_FootAnimStaticA():
     offset (0,0)
     block:
 
-        pause .5
+        pause 0.5
         ease 1 yoffset -5
         pause 1
         ease 1.50 yoffset 0
@@ -2162,7 +2162,7 @@ image Kitty Doggy Blink:
     3
 
     "images/KittyDoggy/Kitty_Doggy_Eyes_Closed.png"
-    .25
+    0.25
     repeat
 
 image Kitty_Doggy_Ass:
@@ -2395,8 +2395,8 @@ image Kitty_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "Rogue_doggy_licking_pussy",
-            "primary_action == 'eat_ass'", "Rogue_doggy_licking_ass",
+            "primary_action == 'eat_pussy'", "licking_pussy",
+            "primary_action == 'eat_ass'", "licking_ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -2476,7 +2476,7 @@ image Kitty_Doggy_GropeBreast:
         subpixel True
         "images/UI_HandUnder.png"
         xzoom -.55
-        yzoom .55
+        yzoom 0.55
         offset (110,420)
         anchor (0.5,0.5)
         alpha 0.3
@@ -2571,8 +2571,8 @@ image Zero_Kitty_Doggy_Fucking2:
         "Zero_cock_doggy_in"
         pos (169,500)
         block:
-            ease .5 ypos 440
-            pause .25
+            ease 0.5 ypos 440
+            pause 0.25
             ease 1.75 ypos 500
             repeat
 
@@ -2582,9 +2582,9 @@ image Zero_Kitty_Doggy_Fucking3:
         "Zero_cock_doggy_in"
         pos (169,500)
         block:
-            ease .2 ypos 440
-            pause .1
-            ease .6 ypos 500
+            ease 0.2 ypos 440
+            pause 0.1
+            ease 0.6 ypos 500
             repeat
 
 image Kitty_Pussy_Mask:
@@ -2595,11 +2595,11 @@ image Kitty_Pussy_Mask:
         "images/RogueDoggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 image Kitty_Pussy_Mask_Static:
@@ -2610,11 +2610,11 @@ image Kitty_Pussy_Mask_Static:
         "images/RogueDoggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .65
+            ease 1 xzoom 0.65
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 
@@ -2665,11 +2665,11 @@ image Kitty_Pussy_Static:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .65
+            ease 1 xzoom 0.65
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -2696,11 +2696,11 @@ image Kitty_Pussy_Hole_Mask_Static:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .65
+            ease 1 xzoom 0.65
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 image Kitty_PussyHole_Static:
@@ -2711,7 +2711,7 @@ image Kitty_PussyHole_Static:
         anchor (0.52,0.69)
         pos (217,515)
         zoom 1
-        alpha .9
+        alpha 0.9
         block:
             ease 1 ypos 512
             pause 1
@@ -2734,11 +2734,11 @@ image Kitty_Pussy_Heading:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -2766,11 +2766,11 @@ image Kitty_Pussy_Hole_Mask:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 image Kitty_Pussy_Heading_Flap:
@@ -2781,7 +2781,7 @@ image Kitty_Pussy_Heading_Flap:
         anchor (0.52,0.69)
         pos (217,515)
         zoom 1
-        alpha .9
+        alpha 0.9
         block:
             ease 1 ypos 505
             pause 1
@@ -2804,11 +2804,11 @@ image Kitty_Pussy_Fingering:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .9
+            ease 1 xzoom 0.9
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -2914,11 +2914,11 @@ image Kitty_Anal_Fingering:
         "images/KittyDoggy/Kitty_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .6
+        zoom 0.6
         block:
-            ease .5 zoom .75
-            pause .5
-            ease 1.5 zoom .6
+            ease 0.5 zoom 0.75
+            pause 0.5
+            ease 1.5 zoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -2945,11 +2945,11 @@ image Kitty_Anal_Heading:
         "images/KittyDoggy/Kitty_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            ease .5 zoom 1
-            pause .5
-            ease 1.5 zoom .5
+            ease 0.5 zoom 1
+            pause 0.5
+            ease 1.5 zoom 0.5
             repeat
     contains:
         ConditionSwitch(
@@ -2973,8 +2973,8 @@ image Zero_Kitty_Doggy_Anal_Heading:
         "Zero_cock_doggy_in"
         pos (172,500)
         block:
-            ease .5 ypos 450
-            pause .25
+            ease 0.5 ypos 450
+            pause 0.25
             ease 1.75 ypos 500
             repeat
 
@@ -2984,8 +2984,8 @@ image Zero_Kitty_Doggy_Anal_HeadingJunk:
         Solid("#159457", xysize=(150,150))
         pos (152,600)
         block:
-            ease .5 ypos 550
-            pause .25
+            ease 0.5 ypos 550
+            pause 0.25
             ease 1.75 ypos 600
             repeat
 
@@ -2995,11 +2995,11 @@ image Kitty_Doggy_Anal_Heading_Mask:
         "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            ease .5 zoom 1
-            pause .5
-            ease 1.5 zoom .5
+            ease 0.5 zoom 1
+            pause 0.5
+            ease 1.5 zoom 0.5
             repeat
 
 image Kitty_Doggy_Anal_Head_Top:
@@ -3009,10 +3009,10 @@ image Kitty_Doggy_Anal_Head_Top:
         "Kitty_Doggy_Body"
         ypos 0
         block:
-            pause .4
-            ease .3 ypos -5
+            pause 0.4
+            ease 0.3 ypos -5
             easeout 1 ypos 0
-            pause .8
+            pause 0.8
             repeat
 
 image Kitty_Doggy_Anal_Head_Ass:
@@ -3022,11 +3022,11 @@ image Kitty_Doggy_Anal_Head_Ass:
         "Kitty_Doggy_Ass"
         ypos 0
         block:
-            pause .4
-            ease .2 ypos -10
-            easeout .1 ypos -7
-            easein .9 ypos 0
-            pause .9
+            pause 0.4
+            ease 0.2 ypos -10
+            easeout 0.1 ypos -7
+            easein 0.9 ypos 0
+            pause 0.9
             repeat
 
 
@@ -3036,8 +3036,8 @@ image Zero_Kitty_Doggy_Anal1:
         "Zero_cock_doggy_in"
         pos (172,460)
         block:
-            ease .5 ypos 395
-            pause .25
+            ease 0.5 ypos 395
+            pause 0.25
             ease 1.75 ypos 460
             repeat
 
@@ -3051,13 +3051,13 @@ image Kitty_Anal_Fucking:
         "images/KittyDoggy/Kitty_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            pause .25
-            ease .25 zoom 1
-            pause .75
-            ease 1 zoom .95
-            pause .25
+            pause 0.25
+            ease 0.25 zoom 1
+            pause 0.75
+            ease 1 zoom 0.95
+            pause 0.25
             repeat
     contains:
         ConditionSwitch(
@@ -3100,10 +3100,10 @@ image Kitty_Doggy_Fuck_Top:
         subpixel True
         "Kitty_Doggy_Body"
         ypos 0
-        pause .4
+        pause 0.4
         block:
-            ease .2 ypos -10
-            pause .3
+            ease 0.2 ypos -10
+            pause 0.3
             ease 2 ypos 0
             repeat
 
@@ -3114,10 +3114,10 @@ image Kitty_Doggy_Fuck_Ass:
         "Kitty_Doggy_Ass"
         ypos 0
         block:
-            pause .4
-            ease .2 ypos -15
-            ease .1 ypos -5
-            pause .2
+            pause 0.4
+            ease 0.2 ypos -15
+            ease 0.1 ypos -5
+            pause 0.2
             ease 1.6 ypos 0
             repeat
 
@@ -3129,9 +3129,9 @@ image Zero_Kitty_Doggy_Anal2:
         "Zero_cock_doggy_in"
         pos (172,460)
         block:
-            ease .2 ypos 395
-            pause .1
-            ease .6 ypos 465
+            ease 0.2 ypos 395
+            pause 0.1
+            ease 0.6 ypos 465
             repeat
 
 image Kitty_Anal_Fucking2:
@@ -3144,13 +3144,13 @@ image Kitty_Anal_Fucking2:
         "images/KittyDoggy/Kitty_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            pause .1
-            ease .1 zoom 1
-            pause .3
-            ease .3 zoom .95
-            pause .1
+            pause 0.1
+            ease 0.1 zoom 1
+            pause 0.3
+            ease 0.3 zoom 0.95
+            pause 0.1
             repeat
     contains:
 
@@ -3178,11 +3178,11 @@ image Kitty_Doggy_Fuck2_Top:
         "Kitty_Doggy_Body"
         ypos 0
         block:
-            pause .15
-            ease .1 ypos -20
-            pause .1
-            easein .5 ypos 0
-            pause .05
+            pause 0.15
+            ease 0.1 ypos -20
+            pause 0.1
+            easein 0.5 ypos 0
+            pause 0.05
             repeat
 
 image Kitty_Doggy_Fuck2_Ass:
@@ -3192,12 +3192,12 @@ image Kitty_Doggy_Fuck2_Ass:
         "Kitty_Doggy_Ass"
         ypos 5
         block:
-            pause .15
-            ease .1 ypos -25
-            ease .1 ypos -15
-            pause .1
-            ease .4 ypos 5
-            pause .05
+            pause 0.15
+            ease 0.1 ypos -25
+            ease 0.1 ypos -15
+            pause 0.1
+            ease 0.4 ypos 5
+            pause 0.05
             repeat
 
 
@@ -3210,9 +3210,9 @@ image Kitty_Doggy_Feet0:
         pos (0, -20)
         block:
             subpixel True
-            pause .5
+            pause 0.5
             ease 2 ypos 0
-            pause .5
+            pause 0.5
             ease 2 ypos -20
             repeat
     contains:
@@ -3227,9 +3227,9 @@ image Kitty_Doggy_Feet0:
         pos (0, -20)
         block:
             subpixel True
-            pause .5
+            pause 0.5
             ease 2 ypos 0
-            pause .5
+            pause 0.5
             ease 2 ypos -20
             repeat
 
@@ -3239,7 +3239,7 @@ image Kitty_Doggy_Feet1:
         "Kitty_Doggy_Shins"
         pos (0, -20)
         block:
-            pause .3
+            pause 0.3
             ease 1.7 ypos 100
             ease 1 ypos -20
             repeat
@@ -3248,15 +3248,15 @@ image Kitty_Doggy_Feet1:
         zoom 1.2
         pos (158,520)
         block:
-            pause .4
+            pause 0.4
             ease 1.7 ypos 540
-            ease .9 ypos 520
+            ease 0.9 ypos 520
             repeat
     contains:
         "Kitty_Doggy_Feet"
         pos (0, -20)
         block:
-            pause .3
+            pause 0.3
             ease 1.7 ypos 100
             ease 1 ypos -20
             repeat
@@ -3267,26 +3267,26 @@ image Kitty_Doggy_Feet2:
         "Kitty_Doggy_Shins"
         pos (0, -20)
         block:
-            pause .05
-            ease .6 ypos 110
-            ease .3 ypos -20
+            pause 0.05
+            ease 0.6 ypos 110
+            ease 0.3 ypos -20
             repeat
     contains:
         "Zero_cock_doggy_out"
         zoom 1.2
         pos (158,520)
         block:
-            pause .07
-            ease .6 ypos 540
-            ease .28 ypos 520
+            pause 0.07
+            ease 0.6 ypos 540
+            ease 0.28 ypos 520
             repeat
     contains:
         "Kitty_Doggy_Feet"
         pos (0, -20)
         block:
-            pause .05
-            ease .6 ypos 110
-            ease .3 ypos -20
+            pause 0.05
+            ease 0.6 ypos 110
+            ease 0.3 ypos -20
             repeat
 
 
@@ -3335,31 +3335,31 @@ image Kitty_BJ_Animation:
         (858,928),
         (0,0), ConditionSwitch(
 
-            "action_speed == 0", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_0()),
-            "action_speed == 1", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_1()),
+            "action_speed == 0", At("Kitty_BJ_Backdrop", blowjob_starting()),
+            "action_speed == 1", At("Kitty_BJ_Backdrop", blowjob_licking_body()),
             "action_speed == 2", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_2()),
-            "action_speed == 3", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_3()),
-            "action_speed == 4", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_4()),
+            "action_speed == 3", At("Kitty_BJ_Backdrop", blowjob_sucking_body()),
+            "action_speed == 4", At("Kitty_BJ_Backdrop", blowjob_deepthroat_body()),
             "action_speed == 5", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_5()),
             "action_speed == 6", At("Kitty_BJ_Backdrop", Kitty_BJ_Body_6()),
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
 
-            "action_speed == 0", At("Kitty_BJ_Head", Kitty_BJ_Head_0()),
-            "action_speed == 1", At("Kitty_BJ_Head", Kitty_BJ_Head_1()),
-            "action_speed == 2", At("Kitty_BJ_Head", Kitty_BJ_Head_2()),
-            "action_speed == 3", At("Kitty_BJ_Head", Kitty_BJ_Head_3()),
-            "action_speed == 4", At("Kitty_BJ_Head", Kitty_BJ_Head_4()),
+            "action_speed == 0", At("Kitty_BJ_Head", blowjob_starting()),
+            "action_speed == 1", At("Kitty_BJ_Head", blowjob_licking()),
+            "action_speed == 2", At("Kitty_BJ_Head", blowjob_heading()),
+            "action_speed == 3", At("Kitty_BJ_Head", blowjob_sucking()),
+            "action_speed == 4", At("Kitty_BJ_Head", blowjob_deepthroat()),
             "action_speed == 5", At("Kitty_BJ_Head", Kitty_BJ_Head_5()),
             "action_speed == 6", At("Kitty_BJ_Head", Kitty_BJ_Head_6()),
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "action_speed == 0", At("Zero_cock_blowjob", Kitty_BJ_Cock_0()),
-            "action_speed == 1", At("Zero_cock_blowjob", Kitty_BJ_Cock_1()),
-            "action_speed >= 2", At("Zero_cock_blowjob", Kitty_BJ_Cock_2()),
+            "action_speed == 0", At("Zero_cock_blowjob", blowjob_starting_cock()),
+            "action_speed == 1", At("Zero_cock_blowjob", blowjob_licking_cock()),
+            "action_speed >= 2", At("Zero_cock_blowjob", blowjob_straight_cock()),
 
 
 
@@ -3368,33 +3368,33 @@ image Kitty_BJ_Animation:
         (-270,-160), ConditionSwitch(
 
             "action_speed < 3", Null(),
-            "action_speed == 3", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MouthSuckingMask"), Kitty_BJ_Head_3()),
-            "action_speed == 4", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MouthSuckingMask"), Kitty_BJ_Head_4()),
+            "action_speed == 3", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MouthSuckingMask"), blowjob_sucking()),
+            "action_speed == 4", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MouthSuckingMask"), blowjob_deepthroat()),
             "action_speed == 6", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MouthSuckingMask"), Kitty_BJ_Head_6()),
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
 
-            "action_speed == 2", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MaskHeadingComposite"), Kitty_BJ_Head_2()),
+            "action_speed == 2", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MaskHeadingComposite"), blowjob_heading()),
             "action_speed == 5", At(AlphaMask("Kitty_BJ_Head", "Kitty_BJ_MaskHeadingComposite"), Kitty_BJ_Head_5()),
             "True", Null(),
             ),
         (325,490), ConditionSwitch(
 
             "action_speed < 3 or 'mouth' not in KittyX.spunk", Null(),
-            "action_speed == 3", At("KittySuckingSpunk", Kitty_BJ_Head_3()),
-            "action_speed == 4", At("KittySuckingSpunk", Kitty_BJ_Head_4()),
+            "action_speed == 3", At("KittySuckingSpunk", blowjob_sucking()),
+            "action_speed == 4", At("KittySuckingSpunk", blowjob_deepthroat()),
             "action_speed == 6", At("KittySuckingSpunk", Kitty_BJ_Head_6()),
             "True", Null(),
             ),
         (325,490), ConditionSwitch(
 
-            "action_speed == 2 and 'mouth' in KittyX.spunk", At("Kitty_BJ_MaskHeadingSpunk", Kitty_BJ_Head_2()),
+            "action_speed == 2 and 'mouth' in KittyX.spunk", At("Kitty_BJ_MaskHeadingSpunk", blowjob_heading()),
             "action_speed == 5 and 'mouth' in KittyX.spunk", At("Kitty_BJ_MaskHeadingSpunk", Kitty_BJ_Head_5()),
             "True", Null(),
             ),
         )
-    zoom .55
+    zoom 0.55
     anchor (.5,.5)
 
 image Kitty_BJ_hairback:
@@ -3633,7 +3633,7 @@ image Kitty BJ Blink:
     choice:
         3
     "images/KittyBJFace/Kitty_BJ_Eyes_Closed.png"
-    .25
+    0.25
     repeat
 
 image Kitty_BJ_MouthHeading:
@@ -3690,16 +3690,16 @@ transform Kitty_BJ_MouthAnim():
     subpixel True
     zoom 0.7
     block:
-        pause .40
-        easeout .40 zoom 0.69
-        linear .10 zoom 0.7
-        easein .45 zoom 0.65
-        pause .15
+        pause 0.40
+        easeout 0.40 zoom 0.69
+        linear 0.10 zoom 0.7
+        easein 0.45 zoom 0.65
+        pause 0.15
 
-        easeout .25 zoom 0.7
-        linear .10 zoom 0.69
-        easein .30 zoom 0.7
-        pause .35
+        easeout 0.25 zoom 0.7
+        linear 0.10 zoom 0.69
+        easein 0.30 zoom 0.7
+        pause 0.35
 
         repeat
 transform Kitty_BJ_MouthAnimC():
@@ -3707,14 +3707,14 @@ transform Kitty_BJ_MouthAnimC():
     subpixel True
     zoom 0.7
     block:
-        pause .20
-        ease .50 zoom 0.65
-        pause .60
-        ease .30 zoom 0.7
-        pause .10
-        ease .30 zoom 0.65
-        pause .20
-        ease .30 zoom 0.7
+        pause 0.20
+        ease 0.50 zoom 0.65
+        pause 0.60
+        ease 0.30 zoom 0.7
+        pause 0.10
+        ease 0.30 zoom 0.65
+        pause 0.20
+        ease 0.30 zoom 0.7
         repeat
 
 image Blanket:
@@ -3733,66 +3733,8 @@ image Blanket = LiveComposite(
     )
 
 
-transform Kitty_BJ_Cock_0():
-
-    anchor (.5,.5)
-    rotate -10
-transform Kitty_BJ_Cock_1():
-
-    subpixel True
-    anchor (.5,.5)
-    ease 0.5 rotate 0
-    block:
-        ease 2 rotate -5
-        pause .5
-        ease 2.5 rotate 0
-        repeat
-transform Kitty_BJ_Cock_2():
-
-    anchor (.5,.5)
-    rotate 0
 
 
-
-
-
-transform Kitty_BJ_Head_0():
-
-    subpixel True
-    ease 1.5 offset (0,0)
-transform Kitty_BJ_Body_0():
-
-    subpixel True
-    ease 1.5 offset (0,0)
-
-
-transform Kitty_BJ_Head_1():
-
-    subpixel True
-    ease 0.5 offset (0,-35)
-    block:
-        ease 2.5 offset (25,100)
-        ease 2 offset (0,-35)
-        pause .5
-        repeat
-transform Kitty_BJ_Body_1():
-
-    subpixel True
-    ease 0.5 offset (0,-35)
-    block:
-        ease 2.5 offset (30,90)
-        ease 2 offset (0,-35)
-        pause .5
-        repeat
-
-transform Kitty_BJ_Head_2():
-
-    subpixel True
-    offset (0,-40)
-    block:
-        ease 1 yoffset 35
-        ease 1.5 offset (0,-40)
-        repeat
 transform Kitty_BJ_Body_2():
 
     subpixel True
@@ -3802,41 +3744,7 @@ transform Kitty_BJ_Body_2():
         ease 1.5 offset (0,-40)
         repeat
 
-transform Kitty_BJ_Head_3():
 
-    subpixel True
-    ease 0.5 offset (0,50)
-    block:
-        ease 1 yoffset 120
-        ease 1.5 offset (0,50)
-        repeat
-transform Kitty_BJ_Body_3():
-
-    subpixel True
-    ease 0.5 offset (0,50)
-    block:
-        ease 1 yoffset 100
-        ease 1.5 offset (0,50)
-        repeat
-
-transform Kitty_BJ_Head_4():
-
-    ease .5 offset (0,100)
-    block:
-        subpixel True
-        ease 1 yoffset 300
-        pause .5
-        ease 2 yoffset 100
-        repeat
-transform Kitty_BJ_Body_4():
-
-    ease .5 offset (0,100)
-    block:
-        subpixel True
-        ease 1.2 yoffset 250
-        pause .5
-        ease 1.8 yoffset 100
-        repeat
 
 transform Kitty_BJ_Head_5():
 
@@ -3857,20 +3765,20 @@ transform Kitty_BJ_Body_5():
 
 transform Kitty_BJ_Head_6():
 
-    ease .5 offset (0,230)
+    ease 0.5 offset (0,230)
     block:
         subpixel True
         ease 1 yoffset 250
-        pause .5
+        pause 0.5
         ease 2 yoffset 230
         repeat
 transform Kitty_BJ_Body_6():
 
-    ease .5 offset (0,190)
+    ease 0.5 offset (0,190)
     block:
         subpixel True
         ease 1.2 yoffset 200
-        pause .5
+        pause 0.5
         ease 1.8 yoffset 190
         repeat
 
@@ -3934,8 +3842,8 @@ label Kitty_BJ_Reset:
     show Kitty_Sprite zorder KittyX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 offset (-50,50)
-        pause .5
-        ease .5 zoom 1 offset (0,0)
+        pause 0.5
+        ease 0.5 zoom 1 offset (0,0)
     show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -4092,7 +4000,7 @@ image Kitty_Mega_Mask:
 
     contains:
         Solid("#159457", xysize=(1750,1750))
-        alpha .5
+        alpha 0.5
 
 
 
@@ -4178,7 +4086,7 @@ image Kitty_TJ_Mask_1:
         block:
             ease 2.9 ypos -40
             ease 1 ypos 60
-            pause .1
+            pause 0.1
             repeat
 
 image Kitty_TJ_Body_1:
@@ -4204,7 +4112,7 @@ image Kitty_TJ_Body_1:
         block:
             ease 2.8 ypos 280
             ease 1 ypos 330
-            pause .2
+            pause 0.2
             repeat
     contains:
 
@@ -4216,7 +4124,7 @@ image Kitty_TJ_Body_1:
         block:
             ease 2.85 ypos 280
             ease 1 ypos 330
-            pause .15
+            pause 0.15
             repeat
     contains:
 
@@ -4228,7 +4136,7 @@ image Kitty_TJ_Body_1:
         block:
             ease 2.9 ypos 210
             ease 1 ypos 260
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -4240,7 +4148,7 @@ image Kitty_TJ_Body_1:
         block:
             ease 2.9 ypos 280
             ease 1 ypos 330
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -4254,8 +4162,8 @@ image Kitty_TJ_Body_1:
         zoom 0.4
         block:
             ease 2.8 ypos 490
-            ease .8 ypos 500
-            pause .4
+            ease 0.8 ypos 500
+            pause 0.4
             repeat
 
 
@@ -4268,9 +4176,9 @@ image Kitty_TJ_Mask_2:
         zoom 1.4
         subpixel True
         block:
-            ease .71 ypos -15
-            ease .27 ypos 60
-            pause .02
+            ease 0.71 ypos -15
+            ease 0.27 ypos 60
+            pause 0.02
             repeat
 
 image Kitty_TJ_Body_2:
@@ -4283,9 +4191,9 @@ image Kitty_TJ_Body_2:
         pos (505,260)
         subpixel True
         block:
-            ease .7 ypos 215
-            ease .25 ypos 260
-            pause .05
+            ease 0.7 ypos 215
+            ease 0.25 ypos 260
+            pause 0.05
             repeat
     contains:
 
@@ -4295,9 +4203,9 @@ image Kitty_TJ_Body_2:
         zoom 0.55
         subpixel True
         block:
-            ease .65 ypos 285
-            ease .25 ypos 330
-            pause .1
+            ease 0.65 ypos 285
+            ease 0.25 ypos 330
+            pause 0.1
             repeat
     contains:
 
@@ -4307,9 +4215,9 @@ image Kitty_TJ_Body_2:
         zoom 0.55
         subpixel True
         block:
-            ease .68 ypos 285
-            ease .25 ypos 330
-            pause .07
+            ease 0.68 ypos 285
+            ease 0.25 ypos 330
+            pause 0.07
             repeat
     contains:
 
@@ -4319,9 +4227,9 @@ image Kitty_TJ_Body_2:
         zoom 0.55
         subpixel True
         block:
-            ease .71 ypos 290
-            ease .27 ypos 330
-            pause .02
+            ease 0.71 ypos 290
+            ease 0.27 ypos 330
+            pause 0.02
             repeat
     contains:
 
@@ -4331,9 +4239,9 @@ image Kitty_TJ_Body_2:
         pos (505,260)
         subpixel True
         block:
-            ease .68 ypos 215
-            ease .25 ypos 260
-            pause .07
+            ease 0.68 ypos 215
+            ease 0.25 ypos 260
+            pause 0.07
             repeat
     contains:
 
@@ -4346,9 +4254,9 @@ image Kitty_TJ_Body_2:
         anchor (0.5,0.5)
         zoom 0.4
         block:
-            ease .72 ypos 490
-            ease .27 ypos 500
-            pause .01
+            ease 0.72 ypos 490
+            ease 0.27 ypos 500
+            pause 0.01
             repeat
 
 
@@ -4362,8 +4270,8 @@ image Kitty_TJ_Mask_3:
         subpixel True
         block:
             ease 2.2 ypos 90
-            ease .6 ypos 140
-            pause .2
+            ease 0.6 ypos 140
+            pause 0.2
             repeat
 
 image Kitty_TJ_Body_3:
@@ -4380,27 +4288,27 @@ image Kitty_TJ_Body_3:
             block:
 
                 ease 2 pos (500,290)
-                ease .6 pos (500,315)
-                pause .4
+                ease 0.6 pos (500,315)
+                pause 0.4
                 repeat 2
             block:
 
                 ease 2.2 pos (500,290)
-                ease .8 pos (520,320)
+                ease 0.8 pos (520,320)
                 ease 2.2 pos (510,290)
-                ease .8 pos (520,320)
+                ease 0.8 pos (520,320)
             block:
 
                 ease 2 pos (500,290)
-                ease .6 pos (500,315)
-                pause .4
+                ease 0.6 pos (500,315)
+                pause 0.4
                 repeat 2
             block:
 
                 ease 2.2 pos (500,290)
-                ease .8 pos (475,320)
+                ease 0.8 pos (475,320)
                 ease 2.2 pos (490,290)
-                ease .8 pos (475,320)
+                ease 0.8 pos (475,320)
             repeat
     contains:
 
@@ -4411,8 +4319,8 @@ image Kitty_TJ_Body_3:
         subpixel True
         block:
             ease 2.2 ypos 340
-            ease .6 ypos 360
-            pause .2
+            ease 0.6 ypos 360
+            pause 0.2
             repeat
     contains:
 
@@ -4423,8 +4331,8 @@ image Kitty_TJ_Body_3:
         subpixel True
         block:
             ease 2.2 ypos 340
-            ease .6 ypos 360
-            pause .2
+            ease 0.6 ypos 360
+            pause 0.2
             repeat
     contains:
 
@@ -4435,8 +4343,8 @@ image Kitty_TJ_Body_3:
         subpixel True
         block:
             ease 2.2 ypos 340
-            ease .6 ypos 360
-            pause .2
+            ease 0.6 ypos 360
+            pause 0.2
             repeat
     contains:
 
@@ -4450,27 +4358,27 @@ image Kitty_TJ_Body_3:
             block:
 
                 ease 2 pos (500,290)
-                ease .6 pos (500,315)
-                pause .4
+                ease 0.6 pos (500,315)
+                pause 0.4
                 repeat 2
             block:
 
                 ease 2.2 pos (500,290)
-                ease .8 pos (520,320)
+                ease 0.8 pos (520,320)
                 ease 2.2 pos (510,290)
-                ease .8 pos (520,320)
+                ease 0.8 pos (520,320)
             block:
 
                 ease 2 pos (500,290)
-                ease .6 pos (500,315)
-                pause .4
+                ease 0.6 pos (500,315)
+                pause 0.4
                 repeat 2
             block:
 
                 ease 2.2 pos (500,290)
-                ease .8 pos (475,320)
+                ease 0.8 pos (475,320)
                 ease 2.2 pos (490,290)
-                ease .8 pos (475,320)
+                ease 0.8 pos (475,320)
             repeat
         parallel:
             block:
@@ -4480,9 +4388,9 @@ image Kitty_TJ_Body_3:
             block:
 
                 ease 2.2 rotate 0
-                ease .8 rotate 10
+                ease 0.8 rotate 10
                 ease 2.2 rotate 0
-                ease .8 rotate 5
+                ease 0.8 rotate 5
             block:
 
                 ease 2.2 rotate 0
@@ -4490,9 +4398,9 @@ image Kitty_TJ_Body_3:
             block:
 
                 ease 2.2 rotate 0
-                ease .8 rotate -10
+                ease 0.8 rotate -10
                 ease 2.2 rotate 0
-                ease .8 rotate -5
+                ease 0.8 rotate -5
             repeat
     contains:
 
@@ -4517,7 +4425,7 @@ image Kitty_TJ_Mask_5:
         block:
             ease 2.2 ypos 120
             ease 1.6 ypos 140
-            pause .2
+            pause 0.2
             repeat
 
 image Kitty_TJ_Body_5:
@@ -4534,7 +4442,7 @@ image Kitty_TJ_Body_5:
 
             ease 2 pos (500,304)
             ease 1.6 pos (500,307)
-            pause .4
+            pause 0.4
             repeat
     contains:
 
@@ -4546,7 +4454,7 @@ image Kitty_TJ_Body_5:
         block:
             ease 2.2 ypos 350
             ease 1.6 ypos 360
-            pause .2
+            pause 0.2
             repeat
     contains:
 
@@ -4558,7 +4466,7 @@ image Kitty_TJ_Body_5:
         block:
             ease 2.2 ypos 350
             ease 1.6 ypos 360
-            pause .2
+            pause 0.2
             repeat
     contains:
 
@@ -4572,7 +4480,7 @@ image Kitty_TJ_Body_5:
 
             ease 2 pos (500,304)
             ease 1.6 pos (500,307)
-            pause .4
+            pause 0.4
             repeat
     contains:
 
@@ -4584,7 +4492,7 @@ image Kitty_TJ_Body_5:
         block:
             ease 2.2 ypos 350
             ease 1.6 ypos 360
-            pause .2
+            pause 0.2
             repeat
     contains:
 
@@ -4693,8 +4601,8 @@ label Kitty_TJ_Reset:
     show Kitty_Sprite zorder KittyX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 xpos 700 yoffset 50
-        pause .5
-        ease .5 zoom 1 xpos KittyX.sprite_location yoffset 0
+        pause 0.5
+        ease 0.5 zoom 1 xpos KittyX.sprite_location yoffset 0
     show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
         alpha 1
         zoom 1 offset (0,0) xpos KittyX.sprite_location
@@ -4752,7 +4660,7 @@ image Kitty_Hand_Over:
 
 transform Kitty_Hand_1():
     subpixel True
-    ease .5 ypos 150 rotate 5
+    ease 0.5 ypos 150 rotate 5
     pause 0.25
     ease 1.0 ypos -100 rotate -5
     pause 0.1
@@ -4823,7 +4731,7 @@ label Kitty_HJ_Launch(Line=primary_action):
         $ primary_action = "handjob"
     else:
         $ action_speed = 1
-    pause .5
+    pause 0.5
     show Kitty_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
 
         offset (100,250)
@@ -4841,8 +4749,8 @@ label Kitty_HJ_Reset:
     show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
         alpha 1
         ease 1 zoom 1.5 offset (-150,50)
-        pause .5
-        ease .5 zoom 1 offset (0,0)
+        pause 0.5
+        ease 0.5 zoom 1 offset (0,0)
     show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -4897,7 +4805,7 @@ label Kitty_Pos_Reset(T=0, Set=0):
         return
     call Kitty_Hide
     show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
-        ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
+        ease 0.5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
     show Kitty_Sprite zorder KittyX.sprite_layer:
         offset (0,0)
         anchor (0.5, 0.0)
@@ -4981,8 +4889,8 @@ image LickRightBreast_Kitty:
         alpha 0.5
         rotate 30
         block:
-            ease .5 rotate -40 pos (95,370)
-            pause .5
+            ease 0.5 rotate -40 pos (95,370)
+            pause 0.5
             ease 1.5 rotate 30 pos (115,400)
             repeat
 
@@ -4997,8 +4905,8 @@ image LickLeftBreast_Kitty:
         alpha 0.5
         rotate 30
         block:
-            ease .5 rotate -40 pos (190,380)
-            pause .5
+            ease 0.5 rotate -40 pos (190,380)
+            pause 0.5
             ease 1.5 rotate 30 pos (200,410)
             repeat
 
@@ -5006,18 +4914,18 @@ image GropeThigh_Kitty:
     contains:
         subpixel True
         "UI_Hand"
-        zoom .65
+        zoom 0.65
         pos (200,720)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 100
         parallel:
-            pause .5
+            pause 0.5
             ease 1 ypos 780
             ease 1 ypos 720
             repeat
         parallel:
-            pause .5
+            pause 0.5
             ease 1 rotate 110 xpos 180
             ease 1 rotate 100 xpos 200
             repeat
@@ -5026,18 +4934,18 @@ image GropePussy_Kitty:
     contains:
         subpixel True
         "UI_Hand"
-        zoom .65
+        zoom 0.65
         pos (210,640)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 170
         block:
             choice:
-                ease .5 rotate 190 pos (210,625)
-                ease .75 rotate 170 pos (210,640)
+                ease 0.5 rotate 190 pos (210,625)
+                ease 0.75 rotate 170 pos (210,640)
             choice:
-                ease .5 rotate 190 pos (210,625)
-                pause .25
+                ease 0.5 rotate 190 pos (210,625)
+                pause 0.25
                 ease 1 rotate 170 pos (210,640)
             repeat
 
@@ -5053,21 +4961,21 @@ image FingerPussy_Kitty:
         block:
             choice:
                 ease 1 rotate 40 pos (230,695)
-                pause .5
+                pause 0.5
                 ease 1 rotate 50 pos (220,730)
             choice:
-                ease .5 rotate 40 pos (230,695)
-                pause .5
+                ease 0.5 rotate 40 pos (230,695)
+                pause 0.5
                 ease 1.75 rotate 50 pos (220,730)
             choice:
                 ease 2 rotate 40 pos (230,695)
-                pause .5
+                pause 0.5
                 ease 1 rotate 50 pos (220,730)
             choice:
-                ease .25 rotate 40 pos (230,695)
-                ease .25 rotate 50 pos (220,730)
-                ease .25 rotate 40 pos (230,695)
-                ease .25 rotate 50 pos (220,730)
+                ease 0.25 rotate 40 pos (230,695)
+                ease 0.25 rotate 50 pos (220,730)
+                ease 0.25 rotate 40 pos (230,695)
+                ease 0.25 rotate 50 pos (220,730)
             repeat
 
 image Lickpussy_Kitty:
@@ -5081,8 +4989,8 @@ image Lickpussy_Kitty:
         alpha 0.5
         rotate 10
         block:
-            easeout .5 rotate -50 pos (220,660)
-            linear .5 rotate -60 pos (210,670)
+            easeout 0.5 rotate -50 pos (220,660)
+            linear 0.5 rotate -60 pos (210,670)
             easein 1 rotate 10 pos (240,680)
             repeat
 
@@ -5097,9 +5005,9 @@ image VibratorRightBreast_Kitty:
         rotate 55
         block:
             ease 1 rotate 35 ypos 370
-            pause .25
+            pause 0.25
             ease 1 rotate 55 ypos 380
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorLeftBreast_Kitty:
@@ -5113,9 +5021,9 @@ image VibratorLeftBreast_Kitty:
         rotate 55
         block:
             ease 1 rotate 35 ypos 390
-            pause .25
+            pause 0.25
             ease 1 rotate 55 ypos 400
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorPussy_Kitty:
@@ -5129,9 +5037,9 @@ image VibratorPussy_Kitty:
         rotate 70
         block:
             ease 1 rotate 35 xpos 230 ypos 655
-            pause .25
+            pause 0.25
             ease 1 rotate 70 xpos 240 ypos 665
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorAnal_Kitty:
@@ -5145,9 +5053,9 @@ image VibratorAnal_Kitty:
         rotate 10
         block:
             ease 1 rotate 0 xpos 260 ypos 655
-            pause .25
+            pause 0.25
             ease 1 rotate 10 xpos 270 ypos 665
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorPussyInsert_Kitty:
@@ -5177,7 +5085,7 @@ image GirlGropeLeftBreast_Kitty:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom .6
+        zoom 0.6
         pos (240,400)
         anchor (0.5,0.5)
         alpha 0.5
@@ -5206,91 +5114,91 @@ image GirlGropeThigh_Kitty:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom .6
+        zoom 0.6
         pos (210,730)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 100
         parallel:
-            pause .5
+            pause 0.5
             ease 1 ypos 780
             ease 1 ypos 730
             repeat
         parallel:
-            pause .5
-            ease .5 xpos 213
-            ease .5 xpos 210
-            ease .5 xpos 213
-            ease .5 xpos 210
+            pause 0.5
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
             repeat
 
 image GirlGropePussy_Kitty:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom .6
+        zoom 0.6
         pos (210,625)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 200
         block:
             choice:
-                ease .75 rotate 210 pos (215,640)
-                ease .5 rotate 195
-                ease .75 rotate 210
-                ease .5 rotate 195
+                ease 0.75 rotate 210 pos (215,640)
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
             choice:
-                ease .5 rotate 210 pos (215,640)
+                ease 0.5 rotate 210 pos (215,640)
                 ease 1 rotate 195
-                pause .25
-                ease .5 rotate 210
+                pause 0.25
+                ease 0.5 rotate 210
                 ease 1 rotate 195
-                pause .25
+                pause 0.25
             choice:
 
 
-                ease .5 rotate 205 pos (215,640)
-                ease .75 rotate 200 pos (215,645)
-                ease .5 rotate 205 pos (215,640)
-                ease .75 rotate 200 pos (215,645)
+                ease 0.5 rotate 205 pos (215,640)
+                ease 0.75 rotate 200 pos (215,645)
+                ease 0.5 rotate 205 pos (215,640)
+                ease 0.75 rotate 200 pos (215,645)
             choice:
-                ease .3 rotate 205 pos (215,640)
-                ease .3 rotate 200 pos (215,650)
-                ease .3 rotate 205 pos (215,640)
-                ease .3 rotate 200 pos (215,650)
+                ease 0.3 rotate 205 pos (215,640)
+                ease 0.3 rotate 200 pos (215,650)
+                ease 0.3 rotate 205 pos (215,640)
+                ease 0.3 rotate 200 pos (215,650)
             repeat
 
 image GirlFingerPussy_Kitty:
     contains:
         subpixel True
         "UI_GirlFinger"
-        zoom .6
+        zoom 0.6
         pos (220,640)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 200
         block:
             choice:
-                ease .75 rotate 210 pos (220,645)
-                ease .5 rotate 195
-                ease .75 rotate 210
-                ease .5 rotate 195
+                ease 0.75 rotate 210 pos (220,645)
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
             choice:
-                ease .5 rotate 210 pos (220,645)
+                ease 0.5 rotate 210 pos (220,645)
                 ease 1 rotate 195
-                pause .25
-                ease .5 rotate 210
+                pause 0.25
+                ease 0.5 rotate 210
                 ease 1 rotate 195
-                pause .25
+                pause 0.25
             choice:
-                ease .5 rotate 205 pos (220,655)
-                ease .75 rotate 200 pos (220,660)
-                ease .5 rotate 205 pos (220,655)
-                ease .75 rotate 200 pos (220,660)
+                ease 0.5 rotate 205 pos (220,655)
+                ease 0.75 rotate 200 pos (220,660)
+                ease 0.5 rotate 205 pos (220,655)
+                ease 0.75 rotate 200 pos (220,660)
             choice:
-                ease .3 rotate 205 pos (220,655)
-                ease .3 rotate 200 pos (220,665)
-                ease .3 rotate 205 pos (220,655)
-                ease .3 rotate 200 pos (220,665)
+                ease 0.3 rotate 205 pos (220,655)
+                ease 0.3 rotate 200 pos (220,665)
+                ease 0.3 rotate 205 pos (220,655)
+                ease 0.3 rotate 200 pos (220,665)
             repeat
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

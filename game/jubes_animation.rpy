@@ -485,7 +485,7 @@ image Jubes_Sprite:
         )
     anchor (0.6, 0.0)
     yoffset 0
-    zoom .85
+    zoom 0.85
 
 
 image Jubes_Sprite_hairback:
@@ -501,7 +501,7 @@ image Jubes_Sprite_hairback:
                 ),
 
     anchor (0.5, 0.5)
-    zoom .37
+    zoom 0.37
 
 
 image Jubes_Sprite_Head:
@@ -586,7 +586,7 @@ image Jubes_Sprite_Head:
             ),
         )
     anchor (0.5, 0.5)
-    zoom .37
+    zoom 0.37
 
 
 image Jubes Blink:
@@ -610,7 +610,7 @@ image Jubes Blink:
     choice:
         3
     "images/JubesSprite/Jubes_Sprite_Eyes_Closed.png"
-    .25
+    0.25
     repeat
 
 image Jubes_Squint:
@@ -622,7 +622,7 @@ image Jubes_Squint:
     choice:
         3
     "images/JubesSprite/Jubes_Sprite_Eyes_Squint.png"
-    .25
+    0.25
     repeat
 
 
@@ -923,7 +923,7 @@ image Jubes Doggy Blink:
     3
 
     "images/JubesDoggy/Jubes_Doggy_Eyes_Closed.png"
-    .25
+    0.25
     repeat
 
 image Jubes_Doggy_Ass:
@@ -1117,8 +1117,8 @@ image Jubes_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "Rogue_doggy_licking_pussy",
-            "primary_action == 'eat_ass'", "Rogue_doggy_licking_ass",
+            "primary_action == 'eat_pussy'", "licking_pussy",
+            "primary_action == 'eat_ass'", "licking_ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -1187,7 +1187,7 @@ image Jubes_Doggy_GropeBreast:
         subpixel True
         "images/UI_HandUnder.png"
         xzoom -.55
-        yzoom .55
+        yzoom 0.55
         offset (270,410)
         anchor (0.5,0.5)
         alpha 0.3
@@ -1282,8 +1282,8 @@ image Zero_Jubes_Doggy_Fucking2:
         "Zero_cock_doggy_in"
         pos (169,500)
         block:
-            ease .5 ypos 440
-            pause .25
+            ease 0.5 ypos 440
+            pause 0.25
             ease 1.75 ypos 500
             repeat
 
@@ -1293,9 +1293,9 @@ image Zero_Jubes_Doggy_Fucking3:
         "Zero_cock_doggy_in"
         pos (169,500)
         block:
-            ease .2 ypos 440
-            pause .1
-            ease .6 ypos 500
+            ease 0.2 ypos 440
+            pause 0.1
+            ease 0.6 ypos 500
             repeat
 
 image Jubes_Pussy_Mask:
@@ -1306,11 +1306,11 @@ image Jubes_Pussy_Mask:
         "images/RogueDoggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 image Jubes_Pussy_Mask_Static:
@@ -1321,11 +1321,11 @@ image Jubes_Pussy_Mask_Static:
         "images/RogueDoggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .65
+            ease 1 xzoom 0.65
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 
@@ -1376,11 +1376,11 @@ image Jubes_Pussy_Static:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .65
+            ease 1 xzoom 0.65
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -1408,11 +1408,11 @@ image Jubes_Pussy_Hole_Mask_Static:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .65
+            ease 1 xzoom 0.65
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 image Jubes_PussyHole_Static:
@@ -1423,7 +1423,7 @@ image Jubes_PussyHole_Static:
         anchor (0.52,0.69)
         pos (217,515)
         zoom 1
-        alpha .9
+        alpha 0.9
         block:
             ease 1 ypos 512
             pause 1
@@ -1446,11 +1446,11 @@ image Jubes_Pussy_Heading:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -1479,11 +1479,11 @@ image Jubes_Pussy_Hole_Mask:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 image Jubes_Pussy_Heading_Flap:
@@ -1494,7 +1494,7 @@ image Jubes_Pussy_Heading_Flap:
         anchor (0.52,0.69)
         pos (217,515)
         zoom 1
-        alpha .9
+        alpha 0.9
         block:
             ease 1 ypos 505
             pause 1
@@ -1516,11 +1516,11 @@ image Jubes_Pussy_Fingering:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .9
+            ease 1 xzoom 0.9
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
     contains:
 
@@ -1631,11 +1631,11 @@ image Jubes_Anal_Fingering:
         "images/JubesDoggy/Jubes_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .6
+        zoom 0.6
         block:
-            ease .5 zoom .75
-            pause .5
-            ease 1.5 zoom .6
+            ease 0.5 zoom 0.75
+            pause 0.5
+            ease 1.5 zoom 0.6
             repeat
     contains:
 
@@ -1662,11 +1662,11 @@ image Jubes_Anal_Heading:
         "images/JubesDoggy/Jubes_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            ease .5 zoom 1
-            pause .5
-            ease 1.5 zoom .5
+            ease 0.5 zoom 1
+            pause 0.5
+            ease 1.5 zoom 0.5
             repeat
     contains:
         ConditionSwitch(
@@ -1691,8 +1691,8 @@ image Zero_Jubes_Doggy_Anal_Heading:
         "Zero_cock_doggy_in"
         pos (172,500)
         block:
-            ease .5 ypos 450
-            pause .25
+            ease 0.5 ypos 450
+            pause 0.25
             ease 1.75 ypos 500
             repeat
 
@@ -1702,8 +1702,8 @@ image Zero_Jubes_Doggy_Anal_HeadingJunk:
         Solid("#159457", xysize=(150,150))
         pos (152,600)
         block:
-            ease .5 ypos 550
-            pause .25
+            ease 0.5 ypos 550
+            pause 0.25
             ease 1.75 ypos 600
             repeat
 
@@ -1713,11 +1713,11 @@ image Jubes_Doggy_Anal_Heading_Mask:
         "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            ease .5 zoom 1
-            pause .5
-            ease 1.5 zoom .5
+            ease 0.5 zoom 1
+            pause 0.5
+            ease 1.5 zoom 0.5
             repeat
 
 image Jubes_Doggy_Anal_Head_Top:
@@ -1727,10 +1727,10 @@ image Jubes_Doggy_Anal_Head_Top:
         "Jubes_Doggy_Body"
         ypos 0
         block:
-            pause .4
-            ease .3 ypos -5
+            pause 0.4
+            ease 0.3 ypos -5
             easeout 1 ypos 0
-            pause .8
+            pause 0.8
             repeat
 
 image Jubes_Doggy_Anal_Head_Ass:
@@ -1740,11 +1740,11 @@ image Jubes_Doggy_Anal_Head_Ass:
         "Jubes_Doggy_Ass"
         ypos 0
         block:
-            pause .4
-            ease .2 ypos -10
-            easeout .1 ypos -7
-            easein .9 ypos 0
-            pause .9
+            pause 0.4
+            ease 0.2 ypos -10
+            easeout 0.1 ypos -7
+            easein 0.9 ypos 0
+            pause 0.9
             repeat
 
 
@@ -1754,8 +1754,8 @@ image Zero_Jubes_Doggy_Anal1:
         "Zero_cock_doggy_in"
         pos (172,460)
         block:
-            ease .5 ypos 395
-            pause .25
+            ease 0.5 ypos 395
+            pause 0.25
             ease 1.75 ypos 460
             repeat
 
@@ -1813,10 +1813,10 @@ image Jubes_Doggy_Fuck_Top:
         subpixel True
         "Jubes_Doggy_Body"
         ypos 15
-        pause .4
+        pause 0.4
         block:
-            ease .2 ypos 5
-            pause .3
+            ease 0.2 ypos 5
+            pause 0.3
             ease 2 ypos 15
             repeat
 
@@ -1827,10 +1827,10 @@ image Jubes_Doggy_Fuck_Ass:
         "Jubes_Doggy_Ass"
         ypos 0
         block:
-            pause .4
-            ease .2 ypos -15
-            ease .1 ypos -5
-            pause .2
+            pause 0.4
+            ease 0.2 ypos -15
+            ease 0.1 ypos -5
+            pause 0.2
             ease 1.6 ypos 0
             repeat
 
@@ -1842,9 +1842,9 @@ image Zero_Jubes_Doggy_Anal2:
         "Zero_cock_doggy_in"
         pos (172,460)
         block:
-            ease .2 ypos 395
-            pause .1
-            ease .6 ypos 465
+            ease 0.2 ypos 395
+            pause 0.1
+            ease 0.6 ypos 465
             repeat
 
 image Jubes_Anal_Fucking2:
@@ -1882,11 +1882,11 @@ image Jubes_Doggy_Fuck2_Top:
         "Jubes_Doggy_Body"
         ypos 20
         block:
-            pause .15
-            ease .1 ypos 0
-            pause .1
-            easein .5 ypos 20
-            pause .05
+            pause 0.15
+            ease 0.1 ypos 0
+            pause 0.1
+            easein 0.5 ypos 20
+            pause 0.05
             repeat
 
 image Jubes_Doggy_Fuck2_Ass:
@@ -1896,12 +1896,12 @@ image Jubes_Doggy_Fuck2_Ass:
         "Jubes_Doggy_Ass"
         ypos 5
         block:
-            pause .15
-            ease .1 ypos -25
-            ease .1 ypos -15
-            pause .1
-            ease .4 ypos 5
-            pause .05
+            pause 0.15
+            ease 0.1 ypos -25
+            ease 0.1 ypos -15
+            pause 0.1
+            ease 0.4 ypos 5
+            pause 0.05
             repeat
 
 
@@ -1914,9 +1914,9 @@ image Jubes_Doggy_Feet0:
         pos (0, 0)
         block:
             subpixel True
-            pause .5
+            pause 0.5
             ease 2 ypos 20
-            pause .5
+            pause 0.5
             ease 2 ypos 0
             repeat
     contains:
@@ -1931,9 +1931,9 @@ image Jubes_Doggy_Feet0:
         pos (0, 0)
         block:
             subpixel True
-            pause .5
+            pause 0.5
             ease 2 ypos 20
-            pause .5
+            pause 0.5
             ease 2 ypos 0
             repeat
 
@@ -1943,7 +1943,7 @@ image Jubes_Doggy_Feet1:
         "Jubes_Doggy_Shins"
         pos (0, 0)
         block:
-            pause .3
+            pause 0.3
             ease 1.7 ypos 100
             ease 1 ypos 0
             repeat
@@ -1952,15 +1952,15 @@ image Jubes_Doggy_Feet1:
         zoom 1.2
         pos (160,480)
         block:
-            pause .4
+            pause 0.4
             ease 1.7 ypos 500
-            ease .9 ypos 480
+            ease 0.9 ypos 480
             repeat
     contains:
         "Jubes_Doggy_Feet"
         pos (0, 0)
         block:
-            pause .3
+            pause 0.3
             ease 1.7 ypos 100
             ease 1 ypos 0
             repeat
@@ -1971,26 +1971,26 @@ image Jubes_Doggy_Feet2:
         "Jubes_Doggy_Shins"
         pos (0, 0)
         block:
-            pause .05
-            ease .6 ypos 110
-            ease .3 ypos 0
+            pause 0.05
+            ease 0.6 ypos 110
+            ease 0.3 ypos 0
             repeat
     contains:
         "Zero_cock_doggy_out"
         zoom 1.2
         pos (160,480)
         block:
-            pause .07
-            ease .6 ypos 500
-            ease .28 ypos 480
+            pause 0.07
+            ease 0.6 ypos 500
+            ease 0.28 ypos 480
             repeat
     contains:
         "Jubes_Doggy_Feet"
         pos (0, 0)
         block:
-            pause .05
-            ease .6 ypos 110
-            ease .3 ypos 0
+            pause 0.05
+            ease 0.6 ypos 110
+            ease 0.3 ypos 0
             repeat
 
 
@@ -2018,7 +2018,7 @@ image Jubes_Doggy_Foot0_Ass:
         block:
             pause 1
             ease 2 ypos 20
-            pause .5
+            pause 0.5
             ease 1.5 ypos 0
             repeat
 
@@ -2029,7 +2029,7 @@ image Jubes_Doggy_Foot1_Top:
         "Jubes_Doggy_Body"
         ypos 70
         block:
-            pause .3
+            pause 0.3
             ease 1.7 ypos 100
             ease 1 ypos 70
             repeat
@@ -2041,9 +2041,9 @@ image Jubes_Doggy_Foot1_Ass:
         "Jubes_Doggy_Ass"
         ypos 0
         block:
-            pause .3
+            pause 0.3
             ease 2 ypos 80
-            ease .7 ypos 0
+            ease 0.7 ypos 0
             repeat
 
 image Jubes_Doggy_Foot2_Top:
@@ -2059,9 +2059,9 @@ image Jubes_Doggy_Foot2_Top:
 
 
 
-            pause .05
-            ease .6 ypos 90
-            ease .3 ypos 70
+            pause 0.05
+            ease 0.6 ypos 90
+            ease 0.3 ypos 70
             repeat
 
 image Jubes_Doggy_Foot2_Ass:
@@ -2071,9 +2071,9 @@ image Jubes_Doggy_Foot2_Ass:
         "Jubes_Doggy_Ass"
         ypos 70
         block:
-            pause .15
-            ease .6 ypos 90
-            ease .2 ypos 70
+            pause 0.15
+            ease 0.6 ypos 90
+            ease 0.2 ypos 70
             repeat
 
 
@@ -2188,7 +2188,7 @@ image Jubes_SexSprite:
                     "True", "Jubes_Sex_Legs_H0",
                     ),
             )
-    zoom .6
+    zoom 0.6
     transform_anchor True
     anchor (.5,.5)
 
@@ -2353,7 +2353,7 @@ image Jubes_Sex_Body:
     contains:
         "Jubes_Sex_Head"
     transform_anchor True
-    zoom .9
+    zoom 0.9
     offset (55,55)
 
 
@@ -2591,7 +2591,7 @@ image Jubes_Sex_Body_S0:
             pause 0.15
             ease 0.6 ypos -5
             pause 0.65
-            ease .6 ypos 0
+            ease 0.6 ypos 0
             repeat
 
 image Jubes_Sex_Legs_S0:
@@ -2629,7 +2629,7 @@ image Jubes_Sex_Zero_Anim_S0:
         pos (125,170)
         block:
             ease 2 ypos 115
-            easeout .5 ypos 120
+            easeout 0.5 ypos 120
             easein 1.5 ypos 170
             repeat
 
@@ -2651,7 +2651,7 @@ image Jubes_Sex_Body_S1:
             pause 0.15
             ease 0.6 ypos -5
             pause 0.65
-            ease .6 ypos 0
+            ease 0.6 ypos 0
             repeat
 
 image Jubes_Sex_Legs_S1:
@@ -2687,8 +2687,8 @@ image Jubes_Sex_Zero_Anim_S1:
         zoom 1.7
         pos (125,115)
         block:
-            ease .5 ypos 90
-            easeout .5 ypos 100
+            ease 0.5 ypos 90
+            easeout 0.5 ypos 100
             easein 1 ypos 115
             repeat
 
@@ -2759,9 +2759,9 @@ image Jubes_Sex_Zero_Anim_S2:
         zoom 1.7
         pos (125,75)
         block:
-            ease .5 ypos -50
+            ease 0.5 ypos -50
             easeout 1.5 ypos 60
-            easein .5 ypos 75
+            easein 0.5 ypos 75
             repeat
 
     size (401,606)
@@ -2782,7 +2782,7 @@ image Jubes_Sex_Body_S3:
             pause 0.1
             ease 0.2 ypos -50
             pause 0.2
-            ease .7 ypos 10
+            ease 0.7 ypos 10
             repeat
 
 image Jubes_Sex_Legs_S3:
@@ -2796,7 +2796,7 @@ image Jubes_Sex_Legs_S3:
             pause 0.05
             ease 0.2 ypos -45
             easeout 0.45 ypos -40
-            easein .5 ypos 0
+            easein 0.5 ypos 0
             repeat
     contains:
         AlphaMask("Jubes_Sex_Zero_Anim_S3", "Jubes_SexMask")
@@ -2806,7 +2806,7 @@ image Jubes_Sex_Legs_S3:
             pause 0.05
             ease 0.2 ypos 433
             easeout 0.45 ypos 438
-            easein .5 ypos 478
+            easein 0.5 ypos 478
             repeat
     contains:
 
@@ -2826,7 +2826,7 @@ image Jubes_Sex_Legs_S3:
             pause 0.05
             ease 0.2 ypos -150
             easeout 0.45 ypos -145
-            easein .5 ypos -105
+            easein 0.5 ypos -105
             repeat
 
 
@@ -2838,9 +2838,9 @@ image Jubes_Sex_Zero_Anim_S3:
         zoom 1.7
         pos (125,75)
         block:
-            ease .2 ypos -70
-            easeout .5 ypos 0
-            easein .5 ypos 75
+            ease 0.2 ypos -70
+            easeout 0.5 ypos 0
+            easein 0.5 ypos 75
             repeat
 
     size (401,606)
@@ -2910,8 +2910,8 @@ image Jubes_Sex_Zero_Anim_S4:
         zoom 1.7
         pos (125,-60)
         block:
-            ease .2 ypos -70
-            easeout .5 ypos -68
+            ease 0.2 ypos -70
+            easeout 0.5 ypos -68
             easein 1.5 ypos -60
             repeat
 
@@ -2935,7 +2935,7 @@ image Jubes_Sex_Body_A0:
             pause 1.15
             ease 0.6 ypos -5
             pause 0.65
-            ease .6 ypos 0
+            ease 0.6 ypos 0
             repeat
 
 image Jubes_Sex_Legs_A0:
@@ -2974,7 +2974,7 @@ image Jubes_Sex_Zero_Anim_A0:
         pos (125,115)
         block:
             ease 1.5 ypos 110
-            pause .5
+            pause 0.5
             ease 1.0 ypos 115
             repeat
     size (401,606)
@@ -2996,7 +2996,7 @@ image Jubes_Sex_Body_A1:
             pause 1.15
             ease 0.6 ypos -5
             pause 0.65
-            ease .6 ypos 0
+            ease 0.6 ypos 0
             repeat
 
 image Jubes_Sex_Legs_A1:
@@ -3035,8 +3035,8 @@ image Jubes_Sex_Zero_Anim_A1:
         pos (125,115)
         block:
             easeout 1.2 ypos 100
-            easein .3 ypos 90
-            easeout .5 ypos 100
+            easein 0.3 ypos 90
+            easeout 0.5 ypos 100
             easein 1 ypos 115
             repeat
     size (401,606)
@@ -3106,9 +3106,9 @@ image Jubes_Sex_Zero_Anim_A2:
         zoom 1.7
         pos (125,75)
         block:
-            ease .5 ypos -50
+            ease 0.5 ypos -50
             easeout 1.5 ypos 60
-            easein .5 ypos 75
+            easein 0.5 ypos 75
             repeat
     size (401,606)
     anchor (0.1,0.5)
@@ -3127,7 +3127,7 @@ image Jubes_Sex_Body_A3:
             pause 0.1
             ease 0.2 ypos -50
             pause 0.2
-            ease .7 ypos 00
+            ease 0.7 ypos 00
             repeat
 
 image Jubes_Sex_Legs_A3:
@@ -3141,7 +3141,7 @@ image Jubes_Sex_Legs_A3:
             pause 0.05
             ease 0.2 ypos -55
             easeout 0.45 ypos -40
-            easein .5 ypos 0
+            easein 0.5 ypos 0
             repeat
     contains:
         AlphaMask("Jubes_Sex_Zero_Anim_A3", "Jubes_AnalMask")
@@ -3151,7 +3151,7 @@ image Jubes_Sex_Legs_A3:
             pause 0.05
             ease 0.2 ypos 525
             easeout 0.45 ypos 540
-            easein .5 ypos 580
+            easein 0.5 ypos 580
             repeat
     contains:
 
@@ -3165,7 +3165,7 @@ image Jubes_Sex_Legs_A3:
             pause 0.05
             ease 0.2 ypos -55
             easeout 0.45 ypos -40
-            easein .5 ypos 0
+            easein 0.5 ypos 0
             repeat
 
 
@@ -3177,9 +3177,9 @@ image Jubes_Sex_Zero_Anim_A3:
         zoom 1.7
         pos (125,75)
         block:
-            ease .2 ypos -70
-            easeout .7 ypos 0
-            easein .3 ypos 75
+            ease 0.2 ypos -70
+            easeout 0.7 ypos 0
+            easein 0.3 ypos 75
             repeat
 
     size (401,606)
@@ -3249,8 +3249,8 @@ image Jubes_Sex_Zero_Anim_A4:
         zoom 1.7
         pos (125,-60)
         block:
-            ease .2 ypos -70
-            easeout .5 ypos -68
+            ease 0.2 ypos -70
+            easeout 0.5 ypos -68
             easein 1.5 ypos -60
             repeat
 
@@ -3272,7 +3272,7 @@ image Jubes_Sex_Body_H0:
             pause 1.15
             ease 0.6 ypos -5
             pause 0.65
-            ease .6 ypos 0
+            ease 0.6 ypos 0
             repeat
 
 image Jubes_Sex_Legs_H0:
@@ -3318,7 +3318,7 @@ image Jubes_Sex_Zero_Anim_H0:
         alpha 0.8
         block:
             ease 1.5 ypos 110
-            pause .5
+            pause 0.5
             ease 1.0 ypos 115
             repeat
     size (401,606)
@@ -3339,7 +3339,7 @@ image Jubes_Sex_Body_H1:
             pause 1.15
             ease 0.6 ypos -5
             pause 0.65
-            ease .6 ypos 0
+            ease 0.6 ypos 0
             repeat
 
 image Jubes_Sex_Legs_H1:
@@ -3378,7 +3378,7 @@ image Jubes_Sex_Zero_Anim_H1:
         pos (125,250)
         block:
             ease 1.5 ypos 90
-            pause .5
+            pause 0.5
             ease 1.0 ypos 250
             repeat
     size (401,606)
@@ -3396,10 +3396,10 @@ image Jubes_Sex_Body_H2:
         subpixel True
         pos (0,0)
         block:
-            pause .3
-            ease .5 ypos -5
             pause 0.3
-            ease .4 ypos 0
+            ease 0.5 ypos -5
+            pause 0.3
+            ease 0.4 ypos 0
             repeat
 
 image Jubes_Sex_Legs_H2:
@@ -3411,7 +3411,7 @@ image Jubes_Sex_Legs_H2:
         pos (0,0)
         block:
             pause 0.1
-            ease .25 ypos -20
+            ease 0.25 ypos -20
             easeout 0.15 ypos -18
             easein 0.25 ypos 0
             repeat
@@ -3422,7 +3422,7 @@ image Jubes_Sex_Legs_H2:
         pos (558,580)
         block:
             pause 0.1
-            ease .25 ypos 560
+            ease 0.25 ypos 560
             easeout 0.15 ypos 562
             easein 0.25 ypos 580
             repeat
@@ -3437,7 +3437,7 @@ image Jubes_Sex_Zero_Anim_H2:
         alpha 0.8
         pos (125,230)
         block:
-            ease .25 ypos 150
+            ease 0.25 ypos 150
             easeout 0.25 ypos 170
             easein 0.25 ypos 230
             repeat
@@ -3483,7 +3483,7 @@ image Jubes_Footjob_Foot:
 image Jubes_Sex_Zero_Anim_F:
 
     "Zero_Zero_cock_blowjob"
-    zoom .7
+    zoom 0.7
     anchor (0.5, 0.9)
     offset (270,650)
     rotate 0
@@ -3500,7 +3500,7 @@ image Jubes_Sex_Body_F0:
             pause 1.15
             ease 0.6 ypos -5
             pause 0.65
-            ease .6 ypos 0
+            ease 0.6 ypos 0
             repeat
     yoffset -100
 
@@ -3536,7 +3536,7 @@ image Jubes_Sex_Legs_F0:
         parallel:
             ease 2 rotate 5
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
         "Jubes_Sex_Zero_Anim_F"
@@ -3554,10 +3554,10 @@ image Jubes_Sex_Legs_F0:
         parallel:
             easeout 1 rotate -5
             easein 1 rotate -10
-            pause .2
-            easeout .8 rotate -5
+            pause 0.2
+            easeout 0.8 rotate -5
             easein 1 rotate 0
-            pause .5
+            pause 0.5
             repeat
 
     yoffset -100
@@ -3579,7 +3579,7 @@ image Jubes_Sex_Body_F1:
             pause 1.15
             ease 0.6 ypos -5
             pause 0.65
-            ease .6 ypos 0
+            ease 0.6 ypos 0
             repeat
     yoffset -100
 
@@ -3613,10 +3613,10 @@ image Jubes_Sex_Legs_F1:
         parallel:
             easeout 1 rotate -20
             easein 1 rotate -28
-            pause .2
-            easeout .8 rotate -20
+            pause 0.2
+            easeout 0.8 rotate -20
             easein 1 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -3636,7 +3636,7 @@ image Jubes_Sex_Legs_F1:
         parallel:
             ease 2 rotate 20
             ease 2 rotate 0
-            pause .5
+            pause 0.5
             repeat
 
     yoffset -100
@@ -3654,8 +3654,8 @@ image Jubes_Sex_Body_F2:
         subpixel True
         pos (0,0)
         block:
-            ease .7 ypos -10
-            ease .7 ypos 0
+            ease 0.7 ypos -10
+            ease 0.7 ypos 0
             repeat
     rotate 15
     yoffset -250
@@ -3672,7 +3672,7 @@ image Jubes_Sex_Legs_F2:
         block:
             ease 0.5 ypos -2
             ease 1 ypos -10
-            pause .1
+            pause 0.1
             repeat
     contains:
         "Jubes_Sex_Zero_Anim_F"
@@ -3681,12 +3681,12 @@ image Jubes_Sex_Legs_F2:
         pos (808,380)
         rotate -55
         parallel:
-            easeout .25 rotate -58
-            easein .25 rotate -60
-            pause .1
-            easeout .4 rotate -58
-            easein .5 rotate -55
-            pause .1
+            easeout 0.25 rotate -58
+            easein 0.25 rotate -60
+            pause 0.1
+            easeout 0.4 rotate -58
+            easein 0.5 rotate -55
+            pause 0.1
             repeat
     contains:
 
@@ -3704,9 +3704,9 @@ image Jubes_Sex_Legs_F2:
             easein 0.45 ypos 0
             repeat
         parallel:
-            ease .5 rotate 20
+            ease 0.5 rotate 20
             ease 1 rotate 0
-            pause .1
+            pause 0.1
             repeat
 
     yoffset -400
@@ -3800,7 +3800,7 @@ image Jubes_Mega_Mask:
 
 
 
-        alpha .5
+        alpha 0.5
 
 
 
@@ -4135,14 +4135,14 @@ image Jubes_BJ_Body_0:
         parallel:
             pause 0.1
 
-            ease .15 rotate -5
+            ease 0.15 rotate -5
             pause 0.4
             ease 1.95 rotate 10
             repeat
         parallel:
             pause 0.1
 
-            ease .15 pos (405,255)
+            ease 0.15 pos (405,255)
             pause 0.4
             ease 1.95 pos (420,292)
             repeat
@@ -4167,10 +4167,10 @@ image Jubes_BJ_Body_1:
         parallel:
             pause 0.1
             easeout 1.2 xpos 470
-            easein .2 xpos 460
+            easein 0.2 xpos 460
             pause 0.3
-            easeout .75 xpos 500
-            easein .65 xpos 535
+            easeout 0.75 xpos 500
+            easein 0.65 xpos 535
             repeat
         parallel:
             pause 0.1
@@ -4194,11 +4194,11 @@ image Jubes_BJ_Body_1:
             repeat
         parallel:
             pause 0.15
-            easeout .9 xpos 740
-            easein .35 xpos 740
+            easeout 0.9 xpos 740
+            easein 0.35 xpos 740
             pause 0.5
-            easeout .65 xpos 710
-            easein .65 xpos 673
+            easeout 0.65 xpos 710
+            easein 0.65 xpos 673
             repeat
         parallel:
             pause 0.15
@@ -4223,10 +4223,10 @@ image Jubes_BJ_Body_1:
         parallel:
             pause 0.1
             easeout 1.2 xpos 470
-            easein .2 xpos 460
+            easein 0.2 xpos 460
             pause 0.3
-            easeout .75 xpos 500
-            easein .65 xpos 535
+            easeout 0.75 xpos 500
+            easein 0.65 xpos 535
             repeat
         parallel:
             pause 0.1
@@ -4249,14 +4249,14 @@ image Jubes_BJ_Body_1:
         parallel:
             pause 0.1
             easeout 1.2 rotate 1
-            easein .3 rotate -1
+            easein 0.3 rotate -1
             pause 0.4
             ease 1.2 rotate 10
             repeat
         parallel:
             pause 0.1
             easeout 1.2 pos (407,262)
-            easein .3 pos (405,255)
+            easein 0.3 pos (405,255)
             pause 0.4
             ease 1.2 pos (412,292)
             repeat
@@ -4274,14 +4274,14 @@ image Jubes_BJ_Body_2:
         parallel:
             pause 0.1
             easeout 1.2 rotate -40
-            ease .6 rotate -32
+            ease 0.6 rotate -32
             pause 0.1
             ease 1.2 rotate -30
             repeat
         parallel:
             pause 0.1
             easeout 1.2 xpos 510
-            ease .7 xpos 520
+            ease 0.7 xpos 520
             pause 0.1
             ease 1.1 xpos 530
             repeat
@@ -4328,14 +4328,14 @@ image Jubes_BJ_Body_2:
         parallel:
             pause 0.1
             easeout 1.2 rotate -40
-            ease .6 rotate -32
+            ease 0.6 rotate -32
             pause 0.1
             ease 1.2 rotate -30
             repeat
         parallel:
             pause 0.1
             easeout 1.2 xpos 510
-            ease .7 xpos 520
+            ease 0.7 xpos 520
             pause 0.1
             ease 1.1 xpos 530
             repeat
@@ -4359,17 +4359,17 @@ image Jubes_BJ_Body_2:
         rotate 10
         parallel:
             pause 1.3
-            ease .4 rotate 8
-            pause .2
+            ease 0.4 rotate 8
+            pause 0.2
             ease 1 rotate 10
-            pause .3
+            pause 0.3
             repeat
         parallel:
             pause 1.3
-            ease .4 pos (410,285)
-            pause .2
+            ease 0.4 pos (410,285)
+            pause 0.2
             ease 1 pos (412,292)
-            pause .3
+            pause 0.3
             repeat
     contains:
 
@@ -4382,14 +4382,14 @@ image Jubes_BJ_Body_2:
         parallel:
             pause 0.1
             easeout 1.2 rotate -40
-            ease .6 rotate -32
+            ease 0.6 rotate -32
             pause 0.1
             ease 1.2 rotate -30
             repeat
         parallel:
             pause 0.1
             easeout 1.2 xpos 510
-            ease .7 xpos 520
+            ease 0.7 xpos 520
             pause 0.1
             ease 1.1 xpos 530
             repeat
@@ -4427,21 +4427,21 @@ image Jubes_BJ_Body_3:
         rotate -30
         parallel:
 
-            ease .7 rotate -50
+            ease 0.7 rotate -50
 
             ease 1 rotate -30
             repeat
         parallel:
 
-            easeout .3 xpos 500
-            easein .4 xpos 481
+            easeout 0.3 xpos 500
+            easein 0.4 xpos 481
 
-            easeout .55 xpos 500
-            easein .45 xpos 523
+            easeout 0.55 xpos 500
+            easein 0.45 xpos 523
             repeat
         parallel:
 
-            ease .7 ypos 450
+            ease 0.7 ypos 450
 
             ease 1 ypos 380
             repeat
@@ -4455,21 +4455,21 @@ image Jubes_BJ_Body_3:
         subpixel True
         parallel:
 
-            ease .7 rotate -40
+            ease 0.7 rotate -40
 
             ease 1.0 rotate -20
             repeat
         parallel:
 
-            easeout .3 xpos 710
-            easein .4 xpos 760
+            easeout 0.3 xpos 710
+            easein 0.4 xpos 760
 
-            easeout .55 xpos 710
-            easein .45 xpos 673
+            easeout 0.55 xpos 710
+            easein 0.45 xpos 673
             repeat
         parallel:
 
-            ease .7 ypos 780
+            ease 0.7 ypos 780
 
             ease 1.0 ypos 780
             repeat
@@ -4483,21 +4483,21 @@ image Jubes_BJ_Body_3:
         rotate -30
         parallel:
 
-            ease .7 rotate -50
+            ease 0.7 rotate -50
 
             ease 1 rotate -30
             repeat
         parallel:
 
-            easeout .3 xpos 500
-            easein .4 xpos 481
+            easeout 0.3 xpos 500
+            easein 0.4 xpos 481
 
-            easeout .55 xpos 500
-            easein .45 xpos 523
+            easeout 0.55 xpos 500
+            easein 0.45 xpos 523
             repeat
         parallel:
 
-            ease .7 ypos 450
+            ease 0.7 ypos 450
 
             ease 1 ypos 380
             repeat
@@ -4515,13 +4515,13 @@ image Jubes_BJ_Body_3:
         rotate 10
         parallel:
 
-            ease .7 rotate 0
+            ease 0.7 rotate 0
 
             ease 1 rotate 10
             repeat
         parallel:
 
-            ease .7 pos (407,262)
+            ease 0.7 pos (407,262)
 
             ease 1 pos (412,292)
             repeat
@@ -4535,21 +4535,21 @@ image Jubes_BJ_Body_3:
         rotate -30
         parallel:
 
-            ease .7 rotate -50
+            ease 0.7 rotate -50
 
             ease 1 rotate -30
             repeat
         parallel:
 
-            easeout .3 xpos 500
-            easein .4 xpos 481
+            easeout 0.3 xpos 500
+            easein 0.4 xpos 481
 
-            easeout .55 xpos 500
-            easein .45 xpos 523
+            easeout 0.55 xpos 500
+            easein 0.45 xpos 523
             repeat
         parallel:
 
-            ease .7 ypos 450
+            ease 0.7 ypos 450
 
             ease 1 ypos 380
             repeat
@@ -4586,11 +4586,11 @@ image Jubes_BJ_Body_4:
             repeat
         parallel:
             pause 0.1
-            easeout .7 xpos 500
-            easein .9 xpos 481
+            easeout 0.7 xpos 500
+            easein 0.9 xpos 481
             pause 0.1
-            easeout .75 xpos 500
-            easein .65 xpos 523
+            easeout 0.75 xpos 500
+            easein 0.65 xpos 523
             repeat
         parallel:
             pause 0.1
@@ -4614,11 +4614,11 @@ image Jubes_BJ_Body_4:
             repeat
         parallel:
             pause 0.15
-            easeout .65 xpos 710
-            easein .9 xpos 760
+            easeout 0.65 xpos 710
+            easein 0.9 xpos 760
             pause 0.15
-            easeout .70 xpos 710
-            easein .65 xpos 673
+            easeout 0.70 xpos 710
+            easein 0.65 xpos 673
             repeat
         parallel:
             pause 0.15
@@ -4642,11 +4642,11 @@ image Jubes_BJ_Body_4:
             repeat
         parallel:
             pause 0.1
-            easeout .7 xpos 500
-            easein .9 xpos 481
+            easeout 0.7 xpos 500
+            easein 0.9 xpos 481
             pause 0.1
-            easeout .75 xpos 500
-            easein .65 xpos 523
+            easeout 0.75 xpos 500
+            easein 0.65 xpos 523
             repeat
         parallel:
             pause 0.1
@@ -4694,11 +4694,11 @@ image Jubes_BJ_Body_4:
             repeat
         parallel:
             pause 0.1
-            easeout .7 xpos 500
-            easein .9 xpos 481
+            easeout 0.7 xpos 500
+            easein 0.9 xpos 481
             pause 0.1
-            easeout .75 xpos 500
-            easein .65 xpos 523
+            easeout 0.75 xpos 500
+            easein 0.65 xpos 523
             repeat
         parallel:
             pause 0.1
@@ -4720,24 +4720,24 @@ image Jubes_BJ_Body_5:
         rotate -50
         parallel:
             pause 1
-            ease .3 rotate -30
-            easeout .3 rotate -32
-            easein .5 rotate -35
-            pause .5
+            ease 0.3 rotate -30
+            easeout 0.3 rotate -32
+            easein 0.5 rotate -35
+            pause 0.5
             repeat
         parallel:
             pause 1
-            easein .3 xpos 530
-            easeout .3 xpos 525
-            easein .5 xpos 520
-            pause .5
+            easein 0.3 xpos 530
+            easeout 0.3 xpos 525
+            easein 0.5 xpos 520
+            pause 0.5
             repeat
         parallel:
             pause 1
-            ease .3 ypos 355
-            easeout .3 ypos 365
-            easein .5 ypos 375
-            pause .5
+            ease 0.3 ypos 355
+            easeout 0.3 ypos 365
+            easein 0.5 ypos 375
+            pause 0.5
             repeat
     contains:
 
@@ -4749,24 +4749,24 @@ image Jubes_BJ_Body_5:
         pos (730,760)
         parallel:
             pause 1
-            ease .3 rotate -26
-            easeout .3 rotate -28
-            easein .5 rotate -30
-            pause .5
+            ease 0.3 rotate -26
+            easeout 0.3 rotate -28
+            easein 0.5 rotate -30
+            pause 0.5
             repeat
         parallel:
             pause 1
-            easein .3 xpos 710
-            easeout .3 xpos 720
-            easein .5 xpos 730
-            pause .5
+            easein 0.3 xpos 710
+            easeout 0.3 xpos 720
+            easein 0.5 xpos 730
+            pause 0.5
             repeat
         parallel:
             pause 1
-            ease .3 ypos 750
-            easeout .3 ypos 755
-            easein .5 ypos 760
-            pause .5
+            ease 0.3 ypos 750
+            easeout 0.3 ypos 755
+            easein 0.5 ypos 760
+            pause 0.5
             repeat
     contains:
 
@@ -4778,24 +4778,24 @@ image Jubes_BJ_Body_5:
         rotate -35
         parallel:
             pause 1
-            ease .3 rotate -30
-            easeout .3 rotate -32
-            easein .5 rotate -35
-            pause .5
+            ease 0.3 rotate -30
+            easeout 0.3 rotate -32
+            easein 0.5 rotate -35
+            pause 0.5
             repeat
         parallel:
             pause 1
-            easein .3 xpos 530
-            easeout .3 xpos 525
-            easein .5 xpos 520
-            pause .5
+            easein 0.3 xpos 530
+            easeout 0.3 xpos 525
+            easein 0.5 xpos 520
+            pause 0.5
             repeat
         parallel:
             pause 1
-            ease .3 ypos 355
-            easeout .3 ypos 365
-            easein .5 ypos 375
-            pause .5
+            ease 0.3 ypos 355
+            easeout 0.3 ypos 365
+            easein 0.5 ypos 375
+            pause 0.5
             repeat
     contains:
 
@@ -4811,14 +4811,14 @@ image Jubes_BJ_Body_5:
         rotate 12
         parallel:
             pause 1
-            ease .3 rotate 10
-            ease .3 rotate 12
+            ease 0.3 rotate 10
+            ease 0.3 rotate 12
             pause 1
             repeat
         parallel:
             pause 1
-            ease .3 pos (412,285)
-            ease .3 pos (410,292)
+            ease 0.3 pos (412,285)
+            ease 0.3 pos (410,292)
             pause 1
             repeat
     contains:
@@ -4831,24 +4831,24 @@ image Jubes_BJ_Body_5:
         rotate -35
         parallel:
             pause 1
-            ease .3 rotate -30
-            easeout .3 rotate -32
-            easein .5 rotate -35
-            pause .5
+            ease 0.3 rotate -30
+            easeout 0.3 rotate -32
+            easein 0.5 rotate -35
+            pause 0.5
             repeat
         parallel:
             pause 1
-            easein .3 xpos 530
-            easeout .3 xpos 525
-            easein .5 xpos 520
-            pause .5
+            easein 0.3 xpos 530
+            easeout 0.3 xpos 525
+            easein 0.5 xpos 520
+            pause 0.5
             repeat
         parallel:
             pause 1
-            ease .3 ypos 355
-            easeout .3 ypos 365
-            easein .5 ypos 375
-            pause .5
+            ease 0.3 ypos 355
+            easeout 0.3 ypos 365
+            easein 0.5 ypos 375
+            pause 0.5
             repeat
 
 
@@ -4876,24 +4876,24 @@ image Jubes_BJ_Body_6:
         rotate -50
         parallel:
             pause 1
-            ease .3 rotate -45
-            easeout .3 rotate -48
-            easein .5 rotate -50
-            pause .5
+            ease 0.3 rotate -45
+            easeout 0.3 rotate -48
+            easein 0.5 rotate -50
+            pause 0.5
             repeat
         parallel:
             pause 1
-            easein .3 xpos 490
-            easeout .3 xpos 485
-            easein .5 xpos 481
-            pause .5
+            easein 0.3 xpos 490
+            easeout 0.3 xpos 485
+            easein 0.5 xpos 481
+            pause 0.5
             repeat
         parallel:
             pause 1
-            ease .3 ypos 490
-            easeout .3 ypos 496
-            easein .5 ypos 500
-            pause .5
+            ease 0.3 ypos 490
+            easeout 0.3 ypos 496
+            easein 0.5 ypos 500
+            pause 0.5
             repeat
     contains:
 
@@ -4905,24 +4905,24 @@ image Jubes_BJ_Body_6:
         pos (760,830)
         parallel:
             pause 1
-            ease .3 rotate -38
-            easeout .3 rotate -39
-            easein .5 rotate -40
-            pause .5
+            ease 0.3 rotate -38
+            easeout 0.3 rotate -39
+            easein 0.5 rotate -40
+            pause 0.5
             repeat
         parallel:
             pause 1
-            easein .3 xpos 750
-            easeout .3 xpos 756
-            easein .5 xpos 760
-            pause .5
+            easein 0.3 xpos 750
+            easeout 0.3 xpos 756
+            easein 0.5 xpos 760
+            pause 0.5
             repeat
         parallel:
             pause 1
-            ease .3 ypos 835
-            easeout .3 ypos 830
-            easein .5 ypos 830
-            pause .5
+            ease 0.3 ypos 835
+            easeout 0.3 ypos 830
+            easein 0.5 ypos 830
+            pause 0.5
             repeat
     contains:
 
@@ -4934,24 +4934,24 @@ image Jubes_BJ_Body_6:
         rotate -50
         parallel:
             pause 1
-            ease .3 rotate -45
-            easeout .3 rotate -48
-            easein .5 rotate -50
-            pause .5
+            ease 0.3 rotate -45
+            easeout 0.3 rotate -48
+            easein 0.5 rotate -50
+            pause 0.5
             repeat
         parallel:
             pause 1
-            easein .3 xpos 490
-            easeout .3 xpos 485
-            easein .5 xpos 481
-            pause .5
+            easein 0.3 xpos 490
+            easeout 0.3 xpos 485
+            easein 0.5 xpos 481
+            pause 0.5
             repeat
         parallel:
             pause 1
-            ease .3 ypos 490
-            easeout .3 ypos 496
-            easein .5 ypos 500
-            pause .5
+            ease 0.3 ypos 490
+            easeout 0.3 ypos 496
+            easein 0.5 ypos 500
+            pause 0.5
             repeat
     contains:
 
@@ -4967,14 +4967,14 @@ image Jubes_BJ_Body_6:
         rotate 0
         parallel:
             pause 1
-            ease .3 rotate 2
-            ease .3 rotate 0
+            ease 0.3 rotate 2
+            ease 0.3 rotate 0
             pause 1
             repeat
         parallel:
             pause 1
-            ease .3 pos (409,268)
-            ease .3 pos (407,262)
+            ease 0.3 pos (409,268)
+            ease 0.3 pos (407,262)
             pause 1
             repeat
     contains:
@@ -4987,24 +4987,24 @@ image Jubes_BJ_Body_6:
         rotate -50
         parallel:
             pause 1
-            ease .3 rotate -45
-            easeout .3 rotate -48
-            easein .5 rotate -50
-            pause .5
+            ease 0.3 rotate -45
+            easeout 0.3 rotate -48
+            easein 0.5 rotate -50
+            pause 0.5
             repeat
         parallel:
             pause 1
-            easein .3 xpos 490
-            easeout .3 xpos 485
-            easein .5 xpos 481
-            pause .5
+            easein 0.3 xpos 490
+            easeout 0.3 xpos 485
+            easein 0.5 xpos 481
+            pause 0.5
             repeat
         parallel:
             pause 1
-            ease .3 ypos 490
-            easeout .3 ypos 496
-            easein .5 ypos 500
-            pause .5
+            ease 0.3 ypos 490
+            easeout 0.3 ypos 496
+            easein 0.5 ypos 500
+            pause 0.5
             repeat
 
 
@@ -5068,8 +5068,8 @@ label Jubes_BJ_Reset:
     show Jubes_Sprite zorder JubesX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 offset (-50,50)
-        pause .5
-        ease .5 zoom 1 offset (0,0)
+        pause 0.5
+        ease 0.5 zoom 1 offset (0,0)
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -5098,7 +5098,7 @@ transform Jubes_Hand_1():
     pos (-20,-100)
     rotate 5
     block:
-        ease .5 pos (0,150) rotate -5
+        ease 0.5 pos (0,150) rotate -5
         pause 0.25
         ease 1.0 pos (-20,-100) rotate 5
         pause 0.1
@@ -5121,7 +5121,7 @@ transform Handcock_3():
     ypos 400
     rotate 0
     block:
-        ease .5 ypos 450 rotate -2
+        ease 0.5 ypos 450 rotate -2
         pause 0.25
         ease 1.0 ypos 400 rotate 0
         pause 0.1
@@ -5133,8 +5133,8 @@ transform Handcock_4():
     ypos 400
     rotate 0
     block:
-        ease .2 ypos 430 rotate -3
-        ease .5 ypos 400 rotate 0
+        ease 0.2 ypos 430 rotate -3
+        ease 0.5 ypos 400 rotate 0
         pause 0.1
         repeat
 
@@ -5144,7 +5144,7 @@ transform Handcock_1L():
     ypos 400
     rotate 0
     block:
-        ease .5 ypos 450 rotate -2
+        ease 0.5 ypos 450 rotate -2
         pause 0.25
         ease 1.0 ypos 400 rotate 0
         pause 0.1
@@ -5156,8 +5156,8 @@ transform Handcock_2L():
     ypos 400
     rotate 0
     block:
-        ease .2 ypos 430 rotate -3
-        ease .5 ypos 400 rotate 0
+        ease 0.2 ypos 430 rotate -3
+        ease 0.5 ypos 400 rotate 0
         pause 0.1
         repeat
 
@@ -5212,7 +5212,7 @@ label Jubes_HJ_Launch(Line=primary_action):
         $ primary_action = "handjob"
     else:
         $ action_speed = 1
-    pause .5
+    pause 0.5
     $ JubesX.ArmPose = 1
     show Jubes_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
 
@@ -5232,8 +5232,8 @@ label Jubes_HJ_Reset:
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         ease 1 zoom 1.5 offset (-150,50)
-        pause .5
-        ease .5 zoom 1 offset (0,0)
+        pause 0.5
+        ease 0.5 zoom 1 offset (0,0)
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -5260,7 +5260,7 @@ image Jubes_TJ_Animation:
                     "action_speed >= 2", "Jubes_TJ_2",
                     "True",       "Jubes_TJ_0",
                     )
-    zoom .7
+    zoom 0.7
     transform_anchor True
     anchor (.5,.5)
 
@@ -5308,7 +5308,7 @@ image Jubes_TJ_ZeroCock:
 
     "Zero_Zero_cock_blowjob"
     transform_anchor True
-    zoom .7
+    zoom 0.7
     anchor (0.5, 0.5)
     offset (220,670)
     rotate 0
@@ -5391,14 +5391,14 @@ image Jubes_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -5409,9 +5409,9 @@ image Jubes_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -5421,9 +5421,9 @@ image Jubes_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -5
-            pause .1
+            pause 0.1
             ease 2 ypos -15
-            pause .1
+            pause 0.1
             repeat
     contains:
         contains:
@@ -5437,9 +5437,9 @@ image Jubes_TJ_0:
         pos (0,-15)
         transform_anchor True
         parallel:
-            pause .1
+            pause 0.1
             ease 2 ypos -5
-            pause .1
+            pause 0.1
             ease 2 ypos -15
             repeat
     contains:
@@ -5458,9 +5458,9 @@ image Jubes_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -5
-            pause .1
+            pause 0.1
             ease 2 ypos -15
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -5471,14 +5471,14 @@ image Jubes_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -5490,9 +5490,9 @@ image Jubes_TJ_0:
         rotate -2
         parallel:
             ease 2 rotate -2
-            pause .1
+            pause 0.1
             ease 2 rotate 3
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -5507,9 +5507,9 @@ image Jubes_TJ_0:
         pos (0,0)
         transform_anchor True
         parallel:
-            pause .1
+            pause 0.1
             ease 2 ypos -40
-            pause .1
+            pause 0.1
             ease 2 ypos 0
             repeat
     contains:
@@ -5528,9 +5528,9 @@ image Jubes_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -40
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -5541,14 +5541,14 @@ image Jubes_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -5560,14 +5560,14 @@ image Jubes_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
 
@@ -5585,15 +5585,15 @@ image Jubes_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause .2
+            pause 0.2
             ease 2 ypos 150
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate 0
-            pause .2
+            pause 0.2
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -5603,9 +5603,9 @@ image Jubes_TJ_1:
         transform_anchor True
         parallel:
             ease 2 ypos 0
-            pause .2
+            pause 0.2
             ease 2 ypos 150
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -5615,9 +5615,9 @@ image Jubes_TJ_1:
         transform_anchor True
         block:
             ease 2 ypos -20
-            pause .4
+            pause 0.4
             ease 1.8 ypos 150
-            pause .5
+            pause 0.5
             repeat
     contains:
         contains:
@@ -5631,11 +5631,11 @@ image Jubes_TJ_1:
         pos (0,150)
         transform_anchor True
         block:
-            pause .1
+            pause 0.1
             ease 1.9 ypos -20
-            pause .4
+            pause 0.4
             ease 1.8 ypos 150
-            ease .5 ypos 140
+            ease 0.5 ypos 140
             repeat
     contains:
 
@@ -5653,9 +5653,9 @@ image Jubes_TJ_1:
         transform_anchor True
         block:
             ease 2 ypos -20
-            pause .4
+            pause 0.4
             ease 1.8 ypos 150
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -5666,15 +5666,15 @@ image Jubes_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause .2
+            pause 0.2
             ease 2 ypos 150
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate 0
-            pause .2
+            pause 0.2
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -5685,15 +5685,15 @@ image Jubes_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause .4
+            pause 0.4
             ease 1.8 ypos 25
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate 0
-            pause .2
+            pause 0.2
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -5708,11 +5708,11 @@ image Jubes_TJ_1:
         pos (0,150)
         transform_anchor True
         block:
-            pause .1
+            pause 0.1
             ease 1.9 ypos -20
-            pause .4
+            pause 0.4
             ease 1.8 ypos 150
-            ease .5 ypos 140
+            ease 0.5 ypos 140
             repeat
     contains:
 
@@ -5722,9 +5722,9 @@ image Jubes_TJ_1:
         transform_anchor True
         block:
             ease 2 ypos -20
-            pause .4
+            pause 0.4
             ease 1.8 ypos 150
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -5735,15 +5735,15 @@ image Jubes_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos -20
-            pause .4
+            pause 0.4
             ease 1.8 ypos 160
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate 0
-            pause .2
+            pause 0.2
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -5754,15 +5754,15 @@ image Jubes_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause .2
+            pause 0.2
             ease 2 ypos 150
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate 0
-            pause .2
+            pause 0.2
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
 
 
@@ -5778,13 +5778,13 @@ image Jubes_TJ_2:
         transform_anchor True
         parallel:
             ease 1 ypos -20
-            pause .1
-            ease .5 ypos 80
+            pause 0.1
+            ease 0.5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause .1
-            ease .5 rotate -5
+            pause 0.1
+            ease 0.5 rotate -5
             repeat
     contains:
 
@@ -5794,8 +5794,8 @@ image Jubes_TJ_2:
         transform_anchor True
         parallel:
             ease 1 ypos -20
-            pause .1
-            ease .5 ypos 80
+            pause 0.1
+            ease 0.5 ypos 80
             repeat
     contains:
 
@@ -5805,8 +5805,8 @@ image Jubes_TJ_2:
         transform_anchor True
         block:
             ease 1 ypos -40
-            pause .2
-            ease .4 ypos 80
+            pause 0.2
+            ease 0.4 ypos 80
             repeat
     contains:
         contains:
@@ -5820,10 +5820,10 @@ image Jubes_TJ_2:
         pos (0,80)
         transform_anchor True
         block:
-            ease .3 ypos 40
-            ease .7 ypos -40
-            pause .2
-            ease .4 ypos 80
+            ease 0.3 ypos 40
+            ease 0.7 ypos -40
+            pause 0.2
+            ease 0.4 ypos 80
             repeat
     contains:
 
@@ -5841,8 +5841,8 @@ image Jubes_TJ_2:
         transform_anchor True
         block:
             ease 1 ypos -40
-            pause .2
-            ease .4 ypos 80
+            pause 0.2
+            ease 0.4 ypos 80
             repeat
     contains:
 
@@ -5852,13 +5852,13 @@ image Jubes_TJ_2:
         transform_anchor True
         parallel:
             ease 1 ypos -20
-            pause .1
-            ease .5 ypos 80
+            pause 0.1
+            ease 0.5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause .1
-            ease .5 rotate -5
+            pause 0.1
+            ease 0.5 rotate -5
             repeat
     contains:
 
@@ -5869,13 +5869,13 @@ image Jubes_TJ_2:
         rotate -2
         parallel:
             ease 1 ypos 0
-            pause .2
-            ease .4 ypos 30
+            pause 0.2
+            ease 0.4 ypos 30
             repeat
         parallel:
             ease 1 rotate 0
-            pause .1
-            ease .5 rotate -2
+            pause 0.1
+            ease 0.5 rotate -2
             repeat
     contains:
 
@@ -5890,10 +5890,10 @@ image Jubes_TJ_2:
         pos (0,80)
         transform_anchor True
         block:
-            ease .3 ypos 40
-            ease .7 ypos -40
-            pause .2
-            ease .4 ypos 80
+            ease 0.3 ypos 40
+            ease 0.7 ypos -40
+            pause 0.2
+            ease 0.4 ypos 80
             repeat
     contains:
 
@@ -5903,8 +5903,8 @@ image Jubes_TJ_2:
         transform_anchor True
         block:
             ease 1 ypos -40
-            pause .2
-            ease .4 ypos 80
+            pause 0.2
+            ease 0.4 ypos 80
             repeat
     contains:
 
@@ -5915,13 +5915,13 @@ image Jubes_TJ_2:
         rotate -5
         parallel:
             ease 1 ypos -40
-            pause .2
-            ease .4 ypos 90
+            pause 0.2
+            ease 0.4 ypos 90
             repeat
         parallel:
             ease 1 rotate 0
-            pause .2
-            ease .4 rotate -5
+            pause 0.2
+            ease 0.4 rotate -5
             repeat
     contains:
 
@@ -5932,13 +5932,13 @@ image Jubes_TJ_2:
         rotate -5
         parallel:
             ease 1 ypos -20
-            pause .1
-            ease .5 ypos 80
+            pause 0.1
+            ease 0.5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause .1
-            ease .5 rotate -5
+            pause 0.1
+            ease 0.5 rotate -5
             repeat
 
 
@@ -5955,14 +5955,14 @@ image Jubes_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -5973,9 +5973,9 @@ image Jubes_TJ_4:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -5985,9 +5985,9 @@ image Jubes_TJ_4:
         transform_anchor True
         parallel:
             ease 2 ypos -30
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
         contains:
@@ -6001,9 +6001,9 @@ image Jubes_TJ_4:
         pos (0,5)
         transform_anchor True
         parallel:
-            pause .2
+            pause 0.2
             ease 1.9 ypos -30
-            pause .2
+            pause 0.2
             ease 1.9 ypos 5
             repeat
     contains:
@@ -6022,9 +6022,9 @@ image Jubes_TJ_4:
         transform_anchor True
         parallel:
             ease 2 ypos -30
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -6035,14 +6035,14 @@ image Jubes_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -6054,9 +6054,9 @@ image Jubes_TJ_4:
         rotate 2
         parallel:
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             ease 2 ypos 20
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -6071,9 +6071,9 @@ image Jubes_TJ_4:
         pos (0,5)
         transform_anchor True
         parallel:
-            pause .2
+            pause 0.2
             ease 1.9 ypos -30
-            pause .2
+            pause 0.2
             ease 1.9 ypos 5
             repeat
     contains:
@@ -6084,9 +6084,9 @@ image Jubes_TJ_4:
         transform_anchor True
         parallel:
             ease 2 ypos -30
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -6097,14 +6097,14 @@ image Jubes_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -15
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -6116,14 +6116,14 @@ image Jubes_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
 
@@ -6141,9 +6141,9 @@ image Jubes_TJ_5:
         rotate -20
         parallel:
             ease 2 ypos 140
-            pause .1
+            pause 0.1
             ease 2 ypos 155
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -6168,9 +6168,9 @@ image Jubes_TJ_5:
         rotate -20
         parallel:
             ease 2 ypos 50
-            pause .1
+            pause 0.1
             ease 2 ypos 70
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -6182,9 +6182,9 @@ image Jubes_TJ_5:
         rotate -10
         parallel:
             ease 2 ypos -200
-            pause .1
+            pause 0.1
             ease 2 ypos -180
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -6200,9 +6200,9 @@ image Jubes_TJ_5:
         transform_anchor True
         rotate -10
         parallel:
-            ease .4 ypos -170
+            ease 0.4 ypos -170
             ease 1.7 ypos -190
-            pause .1
+            pause 0.1
             ease 2 ypos -160
             repeat
     contains:
@@ -6222,9 +6222,9 @@ image Jubes_TJ_5:
         rotate -10
         parallel:
             ease 2 ypos -200
-            pause .1
+            pause 0.1
             ease 2 ypos -180
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -6235,9 +6235,9 @@ image Jubes_TJ_5:
         rotate -20
         parallel:
             ease 2 ypos 140
-            pause .1
+            pause 0.1
             ease 2 ypos 155
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -6248,9 +6248,9 @@ image Jubes_TJ_5:
         rotate 2
         parallel:
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             ease 2 ypos 20
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -6266,9 +6266,9 @@ image Jubes_TJ_5:
         transform_anchor True
         rotate -10
         parallel:
-            ease .4 ypos -170
+            ease 0.4 ypos -170
             ease 1.7 ypos -190
-            pause .1
+            pause 0.1
             ease 2 ypos -160
             repeat
     contains:
@@ -6280,9 +6280,9 @@ image Jubes_TJ_5:
         rotate -10
         parallel:
             ease 2 ypos -200
-            pause .1
+            pause 0.1
             ease 2 ypos -180
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -6293,9 +6293,9 @@ image Jubes_TJ_5:
         rotate -10
         parallel:
             ease 2 ypos 95
-            pause .1
+            pause 0.1
             ease 2 ypos 115
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -6306,9 +6306,9 @@ image Jubes_TJ_5:
         rotate -20
         parallel:
             ease 2 ypos 140
-            pause .1
+            pause 0.1
             ease 2 ypos 155
-            pause .1
+            pause 0.1
             repeat
 
 
@@ -6370,8 +6370,8 @@ label Jubes_TJ_Reset:
     show Jubes_Sprite zorder JubesX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 xpos 700 yoffset 50
-        pause .5
-        ease .5 zoom 1 xpos JubesX.sprite_location yoffset 0
+        pause 0.5
+        ease 0.5 zoom 1 xpos JubesX.sprite_location yoffset 0
     "[JubesX.name] pulls back"
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
@@ -6441,7 +6441,7 @@ label Jubes_Pos_Reset(T=0, Set=0):
         return
     call Jubes_Hide
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
-        ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
+        ease 0.5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
     show Jubes_Sprite zorder JubesX.sprite_layer:
         offset (0,0)
         anchor (0.5, 0.0)
@@ -6511,8 +6511,8 @@ image LickRightBreast_Jubes:
         alpha 0.5
         rotate 30
         block:
-            ease .5 rotate -40 pos (270,330)
-            pause .5
+            ease 0.5 rotate -40 pos (270,330)
+            pause 0.5
             ease 1.5 rotate 30 pos (290,350)
             repeat
 
@@ -6527,8 +6527,8 @@ image LickLeftBreast_Jubes:
         alpha 0.5
         rotate 30
         block:
-            ease .5 rotate -40 pos (170,320)
-            pause .5
+            ease 0.5 rotate -40 pos (170,320)
+            pause 0.5
             ease 1.5 rotate 30 pos (175,340)
             repeat
 
@@ -6536,13 +6536,13 @@ image GropeThigh_Jubes:
     contains:
         subpixel True
         "UI_Hand"
-        zoom .65
+        zoom 0.65
         pos (235,640)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 100
         block:
-            pause .5
+            pause 0.5
             ease 1 rotate 110 pos (195,740)
             ease 1 rotate 100 pos (235,640)
             repeat
@@ -6551,18 +6551,18 @@ image GropePussy_Jubes:
     contains:
         subpixel True
         "UI_Hand"
-        zoom .65
+        zoom 0.65
         pos (260,580)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 170
         block:
             choice:
-                ease .5 rotate 190 ypos 565
-                ease .75 rotate 170 ypos 580
+                ease 0.5 rotate 190 ypos 565
+                ease 0.75 rotate 170 ypos 580
             choice:
-                ease .5 rotate 190 ypos 565
-                pause .25
+                ease 0.5 rotate 190 ypos 565
+                pause 0.25
                 ease 1 rotate 170 ypos 580
             repeat
 
@@ -6578,21 +6578,21 @@ image FingerPussy_Jubes:
         block:
             choice:
                 ease 1 rotate 40 pos (285,625)
-                pause .5
+                pause 0.5
                 ease 1 rotate 50 pos (275,650)
             choice:
-                ease .5 rotate 40 pos (285,625)
-                pause .5
+                ease 0.5 rotate 40 pos (285,625)
+                pause 0.5
                 ease 1.75 rotate 50 pos (275,650)
             choice:
                 ease 2 rotate 40 pos (285,625)
-                pause .5
+                pause 0.5
                 ease 1 rotate 50 pos (275,650)
             choice:
-                ease .25 rotate 40 pos (285,625)
-                ease .25 rotate 50 pos (275,650)
-                ease .25 rotate 40 pos (285,625)
-                ease .25 rotate 50 pos (275,650)
+                ease 0.25 rotate 40 pos (285,625)
+                ease 0.25 rotate 50 pos (275,650)
+                ease 0.25 rotate 40 pos (285,625)
+                ease 0.25 rotate 50 pos (275,650)
             repeat
 
 image Lickpussy_Jubes:
@@ -6606,8 +6606,8 @@ image Lickpussy_Jubes:
         alpha 0.5
         rotate 10
         block:
-            easeout .5 rotate -50 pos (275,590)
-            linear .5 rotate -60 pos (265,600)
+            easeout 0.5 rotate -50 pos (275,590)
+            linear 0.5 rotate -60 pos (265,600)
             easein 1 rotate 10 pos (285,610)
             repeat
 
@@ -6621,9 +6621,9 @@ image VibratorRightBreast_Jubes:
         alpha 0.5
         rotate 55
         block:
-            pause .25
+            pause 0.25
             ease 1 rotate 35 ypos 320
-            pause .25
+            pause 0.25
             ease 1 rotate 55 ypos 330
             repeat
 
@@ -6638,9 +6638,9 @@ image VibratorLeftBreast_Jubes:
         rotate 55
         block:
             ease 1 rotate 35 ypos 330
-            pause .25
+            pause 0.25
             ease 1 rotate 55 ypos 340
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorPussy_Jubes:
@@ -6654,9 +6654,9 @@ image VibratorPussy_Jubes:
         rotate 70
         block:
             ease 1 rotate 35 pos (275,590)
-            pause .25
+            pause 0.25
             ease 1 rotate 70 pos (285,600)
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorAnal_Jubes:
@@ -6676,9 +6676,9 @@ image VibratorAnal_Jubes:
 
 
             ease 1 rotate 0 pos (295,580)
-            pause .25
+            pause 0.25
             ease 1 rotate 10 pos (305,590)
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorPussyInsert_Jubes:
@@ -6714,7 +6714,7 @@ image GirlGropeLeftBreast_Jubes:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom .6
+        zoom 0.6
         pos (290,340)
         anchor (0.5,0.5)
         alpha 0.5
@@ -6743,22 +6743,22 @@ image GirlGropeThigh_Jubes:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom .6
+        zoom 0.6
         pos (210,730)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 100
         parallel:
-            pause .5
+            pause 0.5
             ease 1 ypos 780
             ease 1 ypos 730
             repeat
         parallel:
-            pause .5
-            ease .5 xpos 213
-            ease .5 xpos 210
-            ease .5 xpos 213
-            ease .5 xpos 210
+            pause 0.5
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
+            ease 0.5 xpos 213
+            ease 0.5 xpos 210
             repeat
 
 image GirlGropePussy_JubesSelf:
@@ -6780,61 +6780,61 @@ image GirlGropePussy_Jubes:
         rotate 200
         block:
             choice:
-                ease .75 rotate 210 ypos 570
-                ease .5 rotate 195
-                ease .75 rotate 210
-                ease .5 rotate 195
+                ease 0.75 rotate 210 ypos 570
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
             choice:
-                ease .5 rotate 210 ypos 570
+                ease 0.5 rotate 210 ypos 570
                 ease 1 rotate 195
-                pause .25
-                ease .5 rotate 210
+                pause 0.25
+                ease 0.5 rotate 210
                 ease 1 rotate 195
-                pause .25
+                pause 0.25
             choice:
-                ease .5 rotate 205 ypos 570
-                ease .75 rotate 200 ypos 575
-                ease .5 rotate 205 ypos 570
-                ease .75 rotate 200 ypos 575
+                ease 0.5 rotate 205 ypos 570
+                ease 0.75 rotate 200 ypos 575
+                ease 0.5 rotate 205 ypos 570
+                ease 0.75 rotate 200 ypos 575
             choice:
-                ease .3 rotate 205 ypos 570
-                ease .3 rotate 200 ypos 580
-                ease .3 rotate 205 ypos 570
-                ease .3 rotate 200 ypos 580
+                ease 0.3 rotate 205 ypos 570
+                ease 0.3 rotate 200 ypos 580
+                ease 0.3 rotate 205 ypos 570
+                ease 0.3 rotate 200 ypos 580
             repeat
 
 image GirlFingerPussy_Jubes:
     contains:
         subpixel True
         "UI_GirlFinger"
-        zoom .6
+        zoom 0.6
         pos (265,570)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 200
         block:
             choice:
-                ease .75 rotate 210 ypos 575
-                ease .5 rotate 195
-                ease .75 rotate 210
-                ease .5 rotate 195
+                ease 0.75 rotate 210 ypos 575
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
             choice:
-                ease .5 rotate 210 ypos 575
+                ease 0.5 rotate 210 ypos 575
                 ease 1 rotate 195
-                pause .25
-                ease .5 rotate 210
+                pause 0.25
+                ease 0.5 rotate 210
                 ease 1 rotate 195
-                pause .25
+                pause 0.25
             choice:
-                ease .5 rotate 205 ypos 575
-                ease .75 rotate 200 ypos 580
-                ease .5 rotate 205 ypos 575
-                ease .75 rotate 200 ypos 580
+                ease 0.5 rotate 205 ypos 575
+                ease 0.75 rotate 200 ypos 580
+                ease 0.5 rotate 205 ypos 575
+                ease 0.75 rotate 200 ypos 580
             choice:
-                ease .3 rotate 205 ypos 575
-                ease .3 rotate 200 ypos 585
-                ease .3 rotate 205 ypos 575
-                ease .3 rotate 200 ypos 585
+                ease 0.3 rotate 205 ypos 575
+                ease 0.3 rotate 200 ypos 585
+                ease 0.3 rotate 205 ypos 575
+                ease 0.3 rotate 200 ypos 585
             repeat
 
 
@@ -6868,7 +6868,7 @@ image Fireworks:
         transform_anchor True
 
         offset (0,0)
-        pause .2
+        pause 0.2
         choice:
             "Star1"
         choice:
@@ -6884,8 +6884,8 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease .5 offset (50,-100)
-                    ease .5 offset (100,150)
+                    ease 0.5 offset (50,-100)
+                    ease 0.5 offset (100,150)
                 parallel:
 
                     zoom 0.3
@@ -6893,17 +6893,17 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease .5 offset (-25,-120)
-                    ease .5 offset (-50,130)
+                    ease 0.5 offset (-25,-120)
+                    ease 0.5 offset (-50,130)
                 parallel:
 
                     zoom 0.2
-                    ease 1 zoom .9
+                    ease 1 zoom 0.9
             choice:
                 parallel:
 
-                    ease .5 offset (25,-130)
-                    ease .5 offset (50,140)
+                    ease 0.5 offset (25,-130)
+                    ease 0.5 offset (50,140)
                 parallel:
 
                     zoom 0.3
@@ -6911,17 +6911,17 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease .5 offset (10,-150)
-                    ease .5 offset (20,140)
+                    ease 0.5 offset (10,-150)
+                    ease 0.5 offset (20,140)
                 parallel:
 
                     zoom 0.3
-                    ease 1 zoom .9
+                    ease 1 zoom 0.9
             choice:
                 parallel:
 
-                    ease .5 offset (100,-100)
-                    ease .5 offset (150,150)
+                    ease 0.5 offset (100,-100)
+                    ease 0.5 offset (150,150)
                 parallel:
 
                     zoom 0.3
@@ -6932,7 +6932,7 @@ image Fireworks:
         anchor (0.5,0.5)
 
         transform_anchor True
-        pause .1
+        pause 0.1
         choice:
             "Star1"
         choice:
@@ -6948,8 +6948,8 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease .5 offset (50,-100)
-                    ease .5 offset (100,150)
+                    ease 0.5 offset (50,-100)
+                    ease 0.5 offset (100,150)
                 parallel:
 
                     zoom 0.3
@@ -6957,17 +6957,17 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease .5 offset (-25,-120)
-                    ease .5 offset (-50,130)
+                    ease 0.5 offset (-25,-120)
+                    ease 0.5 offset (-50,130)
                 parallel:
 
                     zoom 0.2
-                    ease 1 zoom .9
+                    ease 1 zoom 0.9
             choice:
                 parallel:
 
-                    ease .5 offset (25,-130)
-                    ease .5 offset (50,140)
+                    ease 0.5 offset (25,-130)
+                    ease 0.5 offset (50,140)
                 parallel:
 
                     zoom 0.3
@@ -6975,17 +6975,17 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease .5 offset (10,-150)
-                    ease .5 offset (20,140)
+                    ease 0.5 offset (10,-150)
+                    ease 0.5 offset (20,140)
                 parallel:
 
                     zoom 0.3
-                    ease 1 zoom .9
+                    ease 1 zoom 0.9
             choice:
                 parallel:
 
-                    ease .5 offset (100,-100)
-                    ease .5 offset (150,150)
+                    ease 0.5 offset (100,-100)
+                    ease 0.5 offset (150,150)
                 parallel:
 
                     zoom 0.3
@@ -7011,8 +7011,8 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease .5 offset (50,-100)
-                    ease .5 offset (100,150)
+                    ease 0.5 offset (50,-100)
+                    ease 0.5 offset (100,150)
                 parallel:
 
                     zoom 0.3
@@ -7020,17 +7020,17 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease .5 offset (-25,-120)
-                    ease .5 offset (-50,130)
+                    ease 0.5 offset (-25,-120)
+                    ease 0.5 offset (-50,130)
                 parallel:
 
                     zoom 0.2
-                    ease 1 zoom .9
+                    ease 1 zoom 0.9
             choice:
                 parallel:
 
-                    ease .5 offset (25,-130)
-                    ease .5 offset (50,140)
+                    ease 0.5 offset (25,-130)
+                    ease 0.5 offset (50,140)
                 parallel:
 
                     zoom 0.3
@@ -7038,17 +7038,17 @@ image Fireworks:
             choice:
                 parallel:
 
-                    ease .5 offset (10,-150)
-                    ease .5 offset (20,140)
+                    ease 0.5 offset (10,-150)
+                    ease 0.5 offset (20,140)
                 parallel:
 
                     zoom 0.3
-                    ease 1 zoom .9
+                    ease 1 zoom 0.9
             choice:
                 parallel:
 
-                    ease .5 offset (100,-100)
-                    ease .5 offset (150,150)
+                    ease 0.5 offset (100,-100)
+                    ease 0.5 offset (150,150)
                 parallel:
 
                     zoom 0.3

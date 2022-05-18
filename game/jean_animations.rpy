@@ -461,7 +461,7 @@ image Jean_Sprite:
         )
     anchor (0.6, 0.0)
     yoffset 15
-    zoom .75
+    zoom 0.75
 
 image Jean_Sprite_hairback:
     ConditionSwitch(
@@ -475,7 +475,7 @@ image Jean_Sprite_hairback:
             ),
 
     anchor (0.6, 0.0)
-    zoom .32
+    zoom 0.32
 
 image Jean_Sprite_HairMid:
     ConditionSwitch(
@@ -487,7 +487,7 @@ image Jean_Sprite_HairMid:
             "True","images/JeanSprite/Jean_Sprite_Hair_Short_Mid.png",
             ),
     anchor (0.6, 0.0)
-    zoom .5
+    zoom 0.5
 
 image Jean_Sprite_HairTop:
     ConditionSwitch(
@@ -500,7 +500,7 @@ image Jean_Sprite_HairTop:
             ),
 
     anchor (0.6, 0.0)
-    zoom .5
+    zoom 0.5
 
 image Jean_Sprite_Head:
     LiveComposite(
@@ -621,7 +621,7 @@ image Jean_Sprite_Head:
         )
     anchor (0.6, 0.0)
 
-    zoom .32
+    zoom 0.32
 
 image Jean Blink:
     ConditionSwitch(
@@ -645,7 +645,7 @@ image Jean Blink:
     choice:
         3
     "images/JeanSprite/Jean_Sprite_Eyes_Closed.png"
-    .25
+    0.25
     repeat
 
 image Jean_Squint:
@@ -657,7 +657,7 @@ image Jean_Squint:
     choice:
         3
     "images/JeanSprite/Jean_Sprite_Eyes_Sexy.png"
-    .25
+    0.25
     repeat
 
 
@@ -900,7 +900,7 @@ image Jean_Doggy_Hair_Under:
                 "JeanX.hair == 'pony'", Null(),
                 "True", "images/JeanDoggy/Jean_Doggy_Hair_Short_Under.png",
                 )
-    zoom .9
+    zoom 0.9
 
 image Jean_Doggy_Hair_Over:
 
@@ -922,7 +922,7 @@ image Jean_Doggy_Hair_Over:
                 "'hair' in JeanX.spunk", "images/JeanDoggy/Jean_Doggy_Spunk_Facial2.png",
                 "True", Null(),
                 )
-    zoom .9
+    zoom 0.9
 
 
 image Jean Doggy Blink:
@@ -948,7 +948,7 @@ image Jean Doggy Blink:
     3
 
     "images/JeanDoggy/Jean_Doggy_Eyes_Closed.png"
-    .25
+    0.25
     repeat
 
 image Jean_Doggy_Ass:
@@ -1134,8 +1134,8 @@ image Jean_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "Rogue_doggy_licking_pussy",
-            "primary_action == 'eat_ass'", "Rogue_doggy_licking_ass",
+            "primary_action == 'eat_pussy'", "licking_pussy",
+            "primary_action == 'eat_ass'", "licking_ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -1215,7 +1215,7 @@ image Jean_Doggy_GropeBreast:
         subpixel True
         "images/UI_HandUnder.png"
         xzoom -.55
-        yzoom .55
+        yzoom 0.55
         offset (280,380)
         anchor (0.5,0.5)
         alpha 0.3
@@ -1310,8 +1310,8 @@ image Zero_Jean_Doggy_Fucking2:
         "Zero_cock_doggy_in"
         pos (169,500)
         block:
-            ease .5 ypos 440
-            pause .25
+            ease 0.5 ypos 440
+            pause 0.25
             ease 1.75 ypos 500
             repeat
 
@@ -1321,9 +1321,9 @@ image Zero_Jean_Doggy_Fucking3:
         "Zero_cock_doggy_in"
         pos (169,500)
         block:
-            ease .2 ypos 440
-            pause .1
-            ease .6 ypos 500
+            ease 0.2 ypos 440
+            pause 0.1
+            ease 0.6 ypos 500
             repeat
 
 image Jean_Pussy_Mask:
@@ -1334,11 +1334,11 @@ image Jean_Pussy_Mask:
         "images/RogueDoggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 image Jean_Pussy_Mask_Static:
@@ -1349,11 +1349,11 @@ image Jean_Pussy_Mask_Static:
         "images/RogueDoggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .65
+            ease 1 xzoom 0.65
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 
@@ -1404,11 +1404,11 @@ image Jean_Pussy_Static:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .65
+            ease 1 xzoom 0.65
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -1436,11 +1436,11 @@ image Jean_Pussy_Hole_Mask_Static:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .65
+            ease 1 xzoom 0.65
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 image Jean_PussyHole_Static:
@@ -1451,7 +1451,7 @@ image Jean_PussyHole_Static:
         anchor (0.52,0.69)
         pos (217,515)
         zoom 1
-        alpha .9
+        alpha 0.9
         block:
             ease 1 ypos 512
             pause 1
@@ -1474,11 +1474,11 @@ image Jean_Pussy_Heading:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -1507,11 +1507,11 @@ image Jean_Pussy_Hole_Mask:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
             ease 1 xzoom 1
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
 
 image Jean_Pussy_Heading_Flap:
@@ -1522,7 +1522,7 @@ image Jean_Pussy_Heading_Flap:
         anchor (0.52,0.69)
         pos (217,515)
         zoom 1
-        alpha .9
+        alpha 0.9
         block:
             ease 1 ypos 505
             pause 1
@@ -1544,11 +1544,11 @@ image Jean_Pussy_Fingering:
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
-        xzoom .6
+        xzoom 0.6
         block:
-            ease 1 xzoom .9
+            ease 1 xzoom 0.9
             pause 1
-            ease 3 xzoom .6
+            ease 3 xzoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -1659,11 +1659,11 @@ image Jean_Anal_Fingering:
         "images/JeanDoggy/Jean_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .6
+        zoom 0.6
         block:
-            ease .5 zoom .75
-            pause .5
-            ease 1.5 zoom .6
+            ease 0.5 zoom 0.75
+            pause 0.5
+            ease 1.5 zoom 0.6
             repeat
     contains:
         ConditionSwitch(
@@ -1690,11 +1690,11 @@ image Jean_Anal_Heading:
         "images/JeanDoggy/Jean_Doggy_Anal_FullHole.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            ease .5 zoom 1
-            pause .5
-            ease 1.5 zoom .5
+            ease 0.5 zoom 1
+            pause 0.5
+            ease 1.5 zoom 0.5
             repeat
     contains:
         ConditionSwitch(
@@ -1719,8 +1719,8 @@ image Zero_Jean_Doggy_Anal_Heading:
         "Zero_cock_doggy_in"
         pos (172,500)
         block:
-            ease .5 ypos 450
-            pause .25
+            ease 0.5 ypos 450
+            pause 0.25
             ease 1.75 ypos 500
             repeat
 
@@ -1730,8 +1730,8 @@ image Zero_Jean_Doggy_Anal_HeadingJunk:
         Solid("#159457", xysize=(150,150))
         pos (152,600)
         block:
-            ease .5 ypos 550
-            pause .25
+            ease 0.5 ypos 550
+            pause 0.25
             ease 1.75 ypos 600
             repeat
 
@@ -1741,11 +1741,11 @@ image Jean_Doggy_Anal_Heading_Mask:
         "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"
         anchor (0.52,0.69)
         pos (218,518)
-        zoom .5
+        zoom 0.5
         block:
-            ease .5 zoom 1
-            pause .5
-            ease 1.5 zoom .5
+            ease 0.5 zoom 1
+            pause 0.5
+            ease 1.5 zoom 0.5
             repeat
 
 image Jean_Doggy_Anal_Head_Top:
@@ -1755,10 +1755,10 @@ image Jean_Doggy_Anal_Head_Top:
         "Jean_Doggy_Body"
         ypos 0
         block:
-            pause .4
-            ease .3 ypos -5
+            pause 0.4
+            ease 0.3 ypos -5
             easeout 1 ypos 0
-            pause .8
+            pause 0.8
             repeat
 
 image Jean_Doggy_Anal_Head_Ass:
@@ -1768,11 +1768,11 @@ image Jean_Doggy_Anal_Head_Ass:
         "Jean_Doggy_Ass"
         ypos 0
         block:
-            pause .4
-            ease .2 ypos -10
-            easeout .1 ypos -7
-            easein .9 ypos 0
-            pause .9
+            pause 0.4
+            ease 0.2 ypos -10
+            easeout 0.1 ypos -7
+            easein 0.9 ypos 0
+            pause 0.9
             repeat
 
 
@@ -1782,8 +1782,8 @@ image Zero_Jean_Doggy_Anal1:
         "Zero_cock_doggy_in"
         pos (172,460)
         block:
-            ease .5 ypos 395
-            pause .25
+            ease 0.5 ypos 395
+            pause 0.25
             ease 1.75 ypos 460
             repeat
 
@@ -1841,10 +1841,10 @@ image Jean_Doggy_Fuck_Top:
         subpixel True
         "Jean_Doggy_Body"
         ypos 15
-        pause .4
+        pause 0.4
         block:
-            ease .2 ypos 5
-            pause .3
+            ease 0.2 ypos 5
+            pause 0.3
             ease 2 ypos 15
             repeat
 
@@ -1855,10 +1855,10 @@ image Jean_Doggy_Fuck_Ass:
         "Jean_Doggy_Ass"
         ypos 0
         block:
-            pause .4
-            ease .2 ypos -15
-            ease .1 ypos -5
-            pause .2
+            pause 0.4
+            ease 0.2 ypos -15
+            ease 0.1 ypos -5
+            pause 0.2
             ease 1.6 ypos 0
             repeat
 
@@ -1870,9 +1870,9 @@ image Zero_Jean_Doggy_Anal2:
         "Zero_cock_doggy_in"
         pos (172,460)
         block:
-            ease .2 ypos 395
-            pause .1
-            ease .6 ypos 465
+            ease 0.2 ypos 395
+            pause 0.1
+            ease 0.6 ypos 465
             repeat
 
 image Jean_Anal_Fucking2:
@@ -1910,11 +1910,11 @@ image Jean_Doggy_Fuck2_Top:
         "Jean_Doggy_Body"
         ypos 20
         block:
-            pause .15
-            ease .1 ypos 0
-            pause .1
-            easein .5 ypos 20
-            pause .05
+            pause 0.15
+            ease 0.1 ypos 0
+            pause 0.1
+            easein 0.5 ypos 20
+            pause 0.05
             repeat
 
 image Jean_Doggy_Fuck2_Ass:
@@ -1924,12 +1924,12 @@ image Jean_Doggy_Fuck2_Ass:
         "Jean_Doggy_Ass"
         ypos 5
         block:
-            pause .15
-            ease .1 ypos -25
-            ease .1 ypos -15
-            pause .1
-            ease .4 ypos 5
-            pause .05
+            pause 0.15
+            ease 0.1 ypos -25
+            ease 0.1 ypos -15
+            pause 0.1
+            ease 0.4 ypos 5
+            pause 0.05
             repeat
 
 
@@ -1942,9 +1942,9 @@ image Jean_Doggy_Feet0:
         pos (0, 0)
         block:
             subpixel True
-            pause .5
+            pause 0.5
             ease 2 ypos 20
-            pause .5
+            pause 0.5
             ease 2 ypos 0
             repeat
     contains:
@@ -1959,9 +1959,9 @@ image Jean_Doggy_Feet0:
         pos (0, 0)
         block:
             subpixel True
-            pause .5
+            pause 0.5
             ease 2 ypos 20
-            pause .5
+            pause 0.5
             ease 2 ypos 0
             repeat
 
@@ -1971,7 +1971,7 @@ image Jean_Doggy_Feet1:
         "Jean_Doggy_Shins"
         pos (0, 0)
         block:
-            pause .3
+            pause 0.3
             ease 1.7 ypos 100
             ease 1 ypos 0
             repeat
@@ -1980,15 +1980,15 @@ image Jean_Doggy_Feet1:
         zoom 1.2
         pos (160,480)
         block:
-            pause .4
+            pause 0.4
             ease 1.7 ypos 500
-            ease .9 ypos 480
+            ease 0.9 ypos 480
             repeat
     contains:
         "Jean_Doggy_Feet"
         pos (0, 0)
         block:
-            pause .3
+            pause 0.3
             ease 1.7 ypos 100
             ease 1 ypos 0
             repeat
@@ -1999,26 +1999,26 @@ image Jean_Doggy_Feet2:
         "Jean_Doggy_Shins"
         pos (0, 0)
         block:
-            pause .05
-            ease .6 ypos 110
-            ease .3 ypos 0
+            pause 0.05
+            ease 0.6 ypos 110
+            ease 0.3 ypos 0
             repeat
     contains:
         "Zero_cock_doggy_out"
         zoom 1.2
         pos (160,480)
         block:
-            pause .07
-            ease .6 ypos 500
-            ease .28 ypos 480
+            pause 0.07
+            ease 0.6 ypos 500
+            ease 0.28 ypos 480
             repeat
     contains:
         "Jean_Doggy_Feet"
         pos (0, 0)
         block:
-            pause .05
-            ease .6 ypos 110
-            ease .3 ypos 0
+            pause 0.05
+            ease 0.6 ypos 110
+            ease 0.3 ypos 0
             repeat
 
 
@@ -2770,7 +2770,7 @@ image Jean_Sex_Fucking_Speed1:
             pause 1.1
             ease 1.1 ypos -10
             pause 0.1
-            ease .5 ypos 0
+            ease 0.5 ypos 0
             repeat
     contains:
 
@@ -2902,9 +2902,9 @@ image Jean_Sex_Anal_Spunk_Heading_Over:
     xzoom 0.8
     block:
 
-        ease .75 xzoom 1.0
+        ease 0.75 xzoom 1.0
         pause 1.75
-        ease .25 xzoom 1.0
+        ease 0.25 xzoom 1.0
         ease 2.25 xzoom 0.8
         repeat
 image Jean_Sex_Anal_Spunk_Heading_Under:
@@ -2914,10 +2914,10 @@ image Jean_Sex_Anal_Spunk_Heading_Under:
     xzoom 0.6
     block:
 
-        ease .75 xzoom 1.0
-        ease .25 xzoom 0.95
+        ease 0.75 xzoom 1.0
+        ease 0.25 xzoom 0.95
         pause 1.50
-        ease .25 xzoom 1.0
+        ease 0.25 xzoom 1.0
         ease 2.25 xzoom 0.6
         repeat
 
@@ -2978,7 +2978,7 @@ image Jean_Sex_Anal_Speed1:
             pause 1.1
             ease 1.1 ypos -10
             pause 0.1
-            ease .5 ypos 0
+            ease 0.5 ypos 0
             repeat
     contains:
 
@@ -3278,33 +3278,33 @@ image Jean_BJ_Animation:
         (858,928),
         (-270,-160), ConditionSwitch(
 
-            "action_speed == 0", At("Jean_BJ_hairback", Jean_BJ_Head_0()),
-            "action_speed == 1", At("Jean_BJ_hairback", Jean_BJ_Head_1()),
-            "action_speed == 2", At("Jean_BJ_hairback", Jean_BJ_Head_2()),
-            "action_speed == 3", At("Jean_BJ_hairback", Jean_BJ_Head_3()),
-            "action_speed == 4", At("Jean_BJ_hairback", Jean_BJ_Head_4()),
+            "action_speed == 0", At("Jean_BJ_hairback", blowjob_starting()),
+            "action_speed == 1", At("Jean_BJ_hairback", blowjob_licking()),
+            "action_speed == 2", At("Jean_BJ_hairback", blowjob_heading()),
+            "action_speed == 3", At("Jean_BJ_hairback", blowjob_sucking()),
+            "action_speed == 4", At("Jean_BJ_hairback", blowjob_deepthroat()),
             "action_speed == 5", At("Jean_BJ_hairback", Jean_BJ_Head_5()),
             "action_speed == 6", At("Jean_BJ_hairback", Jean_BJ_Head_6()),
             "True", Null(),
             ),
         (-20,270), ConditionSwitch(
 
-            "action_speed == 0", At("Jean_BJ_Backdrop", Jean_BJ_Body_0()),
-            "action_speed == 1", At("Jean_BJ_Backdrop", Jean_BJ_Body_1()),
+            "action_speed == 0", At("Jean_BJ_Backdrop", blowjob_starting()),
+            "action_speed == 1", At("Jean_BJ_Backdrop", blowjob_licking_body()),
             "action_speed == 2", At("Jean_BJ_Backdrop", Jean_BJ_Body_2()),
-            "action_speed == 3", At("Jean_BJ_Backdrop", Jean_BJ_Body_3()),
-            "action_speed == 4", At("Jean_BJ_Backdrop", Jean_BJ_Body_4()),
+            "action_speed == 3", At("Jean_BJ_Backdrop", blowjob_sucking_body()),
+            "action_speed == 4", At("Jean_BJ_Backdrop", blowjob_deepthroat_body()),
             "action_speed == 5", At("Jean_BJ_Backdrop", Jean_BJ_Body_5()),
             "action_speed == 6", At("Jean_BJ_Backdrop", Jean_BJ_Body_6()),
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
 
-            "action_speed == 0", At("Jean_BJ_Head", Jean_BJ_Head_0()),
-            "action_speed == 1", At("Jean_BJ_Head", Jean_BJ_Head_1()),
-            "action_speed == 2", At("Jean_BJ_Head", Jean_BJ_Head_2()),
-            "action_speed == 3", At("Jean_BJ_Head", Jean_BJ_Head_3()),
-            "action_speed == 4", At("Jean_BJ_Head", Jean_BJ_Head_4()),
+            "action_speed == 0", At("Jean_BJ_Head", blowjob_starting()),
+            "action_speed == 1", At("Jean_BJ_Head", blowjob_licking()),
+            "action_speed == 2", At("Jean_BJ_Head", blowjob_heading()),
+            "action_speed == 3", At("Jean_BJ_Head", blowjob_sucking()),
+            "action_speed == 4", At("Jean_BJ_Head", blowjob_deepthroat()),
             "action_speed == 5", At("Jean_BJ_Head", Jean_BJ_Head_5()),
             "action_speed == 6", At("Jean_BJ_Head", Jean_BJ_Head_6()),
             "True", Null(),
@@ -3312,8 +3312,8 @@ image Jean_BJ_Animation:
         (0,0), ConditionSwitch(
 
             "action_speed == 0", At("Zero_cock_blowjob", Jean_BJ_Cock_0()),
-            "action_speed == 1", At("Zero_cock_blowjob", Jean_BJ_Cock_1()),
-            "action_speed >= 2", At("Zero_cock_blowjob", Jean_BJ_Cock_2()),
+            "action_speed == 1", At("Zero_cock_blowjob", blowjob_licking_cock()),
+            "action_speed >= 2", At("Zero_cock_blowjob", blowjob_straight_cock()),
 
 
 
@@ -3322,22 +3322,22 @@ image Jean_BJ_Animation:
         (-270,-160), ConditionSwitch(
 
             "action_speed < 3", Null(),
-            "action_speed == 3", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MouthSuckingMask"), Jean_BJ_Head_3()),
-            "action_speed == 4", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MouthSuckingMask"), Jean_BJ_Head_4()),
+            "action_speed == 3", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MouthSuckingMask"), blowjob_sucking()),
+            "action_speed == 4", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MouthSuckingMask"), blowjob_deepthroat()),
             "action_speed == 6", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MouthSuckingMask"), Jean_BJ_Head_6()),
             "True", Null(),
             ),
         (-270,-160), ConditionSwitch(
 
-            "action_speed == 2", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MaskHeadingComposite"), Jean_BJ_Head_2()),
+            "action_speed == 2", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MaskHeadingComposite"), blowjob_heading()),
             "action_speed == 5", At(AlphaMask("Jean_BJ_Head", "Jean_BJ_MaskHeadingComposite"), Jean_BJ_Head_5()),
             "True", Null(),
             ),
         (325,490), ConditionSwitch(
 
             "action_speed < 3 or 'mouth' not in JeanX.spunk", Null(),
-            "action_speed == 3", At("JeanSuckingSpunk", Jean_BJ_Head_3()),
-            "action_speed == 4", At("JeanSuckingSpunk", Jean_BJ_Head_4()),
+            "action_speed == 3", At("JeanSuckingSpunk", blowjob_sucking()),
+            "action_speed == 4", At("JeanSuckingSpunk", blowjob_deepthroat()),
             "action_speed == 6", At("JeanSuckingSpunk", Jean_BJ_Head_6()),
             "True", Null(),
             ),
@@ -3349,7 +3349,7 @@ image Jean_BJ_Animation:
 
 
         )
-    zoom .55
+    zoom 0.55
     anchor (.5,.5)
 
 image Jean_BJ_hairback:
@@ -3534,7 +3534,7 @@ image Jean BJ Blink:
     choice:
         3
     "images/JeanBJFace/Jean_BJ_Eyes_Closed.png"
-    .25
+    0.25
     repeat
 
 image Jean_BJ_MouthHeading:
@@ -3589,17 +3589,17 @@ image Jean_BJ_MaskHeadingSpunk:
         anchor (0.5, 0.65)
         zoom 0.58
         block:
-            pause .20
-            easeout .15 zoom 0.66
-            linear .15 zoom 0.60
-            easein .25 zoom 0.68
-            pause .25
+            pause 0.20
+            easeout 0.15 zoom 0.66
+            linear 0.15 zoom 0.60
+            easein 0.25 zoom 0.68
+            pause 0.25
 
-            pause .40
-            easeout .40 zoom 0.60
-            linear .10 zoom 0.66
-            easein .30 zoom 0.58
-            pause .30
+            pause 0.40
+            easeout 0.40 zoom 0.60
+            linear 0.10 zoom 0.66
+            easein 0.30 zoom 0.58
+            pause 0.30
 
             repeat
 
@@ -3689,17 +3689,17 @@ transform Jean_BJ_MouthAnim():
     subpixel True
     zoom 0.58
     block:
-        pause .20
-        easeout .15 zoom 0.66
-        linear .15 zoom 0.60
-        easein .25 zoom 0.68
-        pause .25
+        pause 0.20
+        easeout 0.15 zoom 0.66
+        linear 0.15 zoom 0.60
+        easein 0.25 zoom 0.68
+        pause 0.25
 
-        pause .40
-        easeout .40 zoom 0.60
-        linear .10 zoom 0.66
-        easein .30 zoom 0.58
-        pause .30
+        pause 0.40
+        easeout 0.40 zoom 0.60
+        linear 0.10 zoom 0.66
+        easein 0.30 zoom 0.58
+        pause 0.30
 
         repeat
 
@@ -3712,19 +3712,6 @@ transform Jean_BJ_MouthAnim():
 
 
 
-
-
-
-
-
-transform Jean_BJ_Head_2():
-
-    subpixel True
-    offset (0,-40)
-    block:
-        ease 1 yoffset 40
-        ease 1.5 offset (0,-40)
-        repeat
 
 
 
@@ -3736,68 +3723,14 @@ transform Jean_BJ_MouthAnimC():
     subpixel True
     zoom 0.7
     block:
-        pause .20
-        ease .50 zoom 0.65
-        pause .60
-        ease .30 zoom 0.7
-        pause .10
-        ease .30 zoom 0.65
-        pause .20
-        ease .30 zoom 0.7
-        repeat
-
-
-
-transform Jean_BJ_Cock_0():
-
-    anchor (.5,.5)
-    rotate -10
-transform Jean_BJ_Cock_1():
-
-    subpixel True
-    anchor (.5,.5)
-    ease 0.5 rotate 0
-    block:
-        ease 2 rotate -5
-        pause .5
-        ease 2.5 rotate 0
-        repeat
-transform Jean_BJ_Cock_2():
-
-    anchor (.5,.5)
-    rotate 0
-    alpha 1
-
-
-
-
-transform Jean_BJ_Head_0():
-
-    subpixel True
-    ease 1.5 offset (0,0)
-transform Jean_BJ_Body_0():
-
-    subpixel True
-    ease 1.5 offset (0,0)
-
-
-transform Jean_BJ_Head_1():
-
-    subpixel True
-    ease 0.5 offset (0,-35)
-    block:
-        ease 2.5 offset (25,100)
-        ease 2 offset (0,-35)
-        pause .5
-        repeat
-transform Jean_BJ_Body_1():
-
-    subpixel True
-    ease 0.5 offset (0,-35)
-    block:
-        ease 2.5 offset (30,90)
-        ease 2 offset (0,-35)
-        pause .5
+        pause 0.20
+        ease 0.50 zoom 0.65
+        pause 0.60
+        ease 0.30 zoom 0.7
+        pause 0.10
+        ease 0.30 zoom 0.65
+        pause 0.20
+        ease 0.30 zoom 0.7
         repeat
 
 
@@ -3821,41 +3754,7 @@ transform Jean_BJ_Body_2():
         ease 1.5 offset (0,-40)
         repeat
 
-transform Jean_BJ_Head_3():
 
-    subpixel True
-    ease 0.5 offset (0,50)
-    block:
-        ease 1 yoffset 120
-        ease 1.5 offset (0,50)
-        repeat
-transform Jean_BJ_Body_3():
-
-    subpixel True
-    ease 0.5 offset (0,50)
-    block:
-        ease 1 yoffset 100
-        ease 1.5 offset (0,50)
-        repeat
-
-transform Jean_BJ_Head_4():
-
-    ease .5 offset (0,100)
-    block:
-        subpixel True
-        ease 1 yoffset 300
-        pause .5
-        ease 2 yoffset 100
-        repeat
-transform Jean_BJ_Body_4():
-
-    ease .5 offset (0,100)
-    block:
-        subpixel True
-        ease 1.2 yoffset 250
-        pause .5
-        ease 1.8 yoffset 100
-        repeat
 
 transform Jean_BJ_Head_5():
 
@@ -3876,20 +3775,20 @@ transform Jean_BJ_Body_5():
 
 transform Jean_BJ_Head_6():
 
-    ease .5 offset (0,230)
+    ease 0.5 offset (0,230)
     block:
         subpixel True
         ease 1 yoffset 250
-        pause .5
+        pause 0.5
         ease 2 yoffset 230
         repeat
 transform Jean_BJ_Body_6():
 
-    ease .5 offset (0,190)
+    ease 0.5 offset (0,190)
     block:
         subpixel True
         ease 1.2 yoffset 200
-        pause .5
+        pause 0.5
         ease 1.8 yoffset 190
         repeat
 
@@ -3967,8 +3866,8 @@ label Jean_BJ_Reset:
     show Jean_Sprite zorder JeanX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 offset (-50,50)
-        pause .2
-        ease .3 zoom 1 offset (0,0)
+        pause 0.2
+        ease 0.3 zoom 1 offset (0,0)
     pause 1.5
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         alpha 1
@@ -4004,7 +3903,7 @@ transform Jean_Hand_1():
     pos (-20,-100)
     rotate 5
     block:
-        ease .5 pos (0,150) rotate -5
+        ease 0.5 pos (0,150) rotate -5
         pause 0.25
         ease 1.0 pos (-20,-100) rotate 5
         pause 0.1
@@ -4050,7 +3949,7 @@ transform Handcock_1J():
     ypos 400
     rotate 0
     block:
-        ease .5 ypos 450 rotate -2
+        ease 0.5 ypos 450 rotate -2
         pause 0.25
         ease 1.0 ypos 400 rotate 0
         pause 0.1
@@ -4062,8 +3961,8 @@ transform Handcock_2J():
     ypos 400
     rotate 0
     block:
-        ease .2 ypos 430 rotate -3
-        ease .5 ypos 400 rotate 0
+        ease 0.2 ypos 430 rotate -3
+        ease 0.5 ypos 400 rotate 0
         pause 0.1
         repeat
 
@@ -4118,13 +4017,13 @@ label Jean_HJ_Launch(Line=primary_action):
         $ primary_action = "handjob"
     else:
         $ action_speed = 1
-    pause .5
+    pause 0.5
     show Jean_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
 
         offset (250,250)
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(stage_right):
         alpha 1
-        ease .5 zoom 1.7 offset (-150,200)
+        ease 0.5 zoom 1.7 offset (-150,200)
     return
 
 label Jean_HJ_Reset:
@@ -4140,9 +4039,9 @@ label Jean_HJ_Reset:
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         alpha 1
         ease 1 zoom 1.5 offset (-150,50)
-        pause .5
-        ease .5 zoom 1 offset (0,0)
-        pause .5
+        pause 0.5
+        ease 0.5 zoom 1 offset (0,0)
+        pause 0.5
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         alpha 1
         zoom 1 offset (0,0)
@@ -4248,7 +4147,7 @@ image Jean_TJ_Animation:
                     "action_speed >= 2", "Jean_TJ_2",
                     "True",       "Jean_TJ_0",
                     )
-    zoom .8
+    zoom 0.8
     transform_anchor True
     anchor (.5,.5)
 
@@ -4259,7 +4158,7 @@ image Jean_TJ_hairback:
 
     "Jean_BJ_hairback"
     transform_anchor True
-    zoom .7
+    zoom 0.7
     anchor (0.5, 0.5)
     offset (30,-450)
     rotate 0
@@ -4268,7 +4167,7 @@ image Jean_TJ_Head:
 
     "Jean_BJ_Head"
     transform_anchor True
-    zoom .7
+    zoom 0.7
     anchor (0.5, 0.5)
     offset (30,-450)
     rotate 0
@@ -4285,7 +4184,7 @@ image Jean_TJ_HairTop:
 
 
     transform_anchor True
-    zoom .98
+    zoom 0.98
     anchor (0.5, 0.5)
     offset (30,-450)
     rotate 0
@@ -4298,7 +4197,7 @@ image Jean_TJ_ZeroCock:
 
     "Zero_Zero_cock_blowjob"
     transform_anchor True
-    zoom .6
+    zoom 0.6
     anchor (0.5, 0.5)
     offset (70,50)
     rotate 0
@@ -4473,9 +4372,9 @@ image Jean_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -4486,14 +4385,14 @@ image Jean_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -4504,9 +4403,9 @@ image Jean_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -4517,14 +4416,14 @@ image Jean_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -4535,9 +4434,9 @@ image Jean_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos -0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -4548,9 +4447,9 @@ image Jean_TJ_0:
         rotate -5
         parallel:
             ease 2 rotate -3
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             repeat
     contains:
         contains:
@@ -4558,7 +4457,7 @@ image Jean_TJ_0:
         subpixel True
         pos (0,20)
         transform_anchor True
-        yzoom .75
+        yzoom 0.75
     contains:
         contains:
             "Jean_TJ_Tits"
@@ -4567,9 +4466,9 @@ image Jean_TJ_0:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -4580,14 +4479,14 @@ image Jean_TJ_0:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
 
@@ -4604,11 +4503,11 @@ image Jean_TJ_1:
         pos (0,140)
         transform_anchor True
         block:
-            pause .1
+            pause 0.1
             ease 1.9 ypos -20
-            pause .4
+            pause 0.4
             ease 1.8 ypos 150
-            ease .5 ypos 140
+            ease 0.5 ypos 140
             repeat
     contains:
 
@@ -4619,15 +4518,15 @@ image Jean_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause .2
+            pause 0.2
             ease 2 ypos 150
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate 0
-            pause .2
+            pause 0.2
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -4637,9 +4536,9 @@ image Jean_TJ_1:
         transform_anchor True
         parallel:
             ease 2 ypos 0
-            pause .2
+            pause 0.2
             ease 2 ypos 150
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -4650,15 +4549,15 @@ image Jean_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause .2
+            pause 0.2
             ease 2 ypos 150
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate 0
-            pause .2
+            pause 0.2
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -4667,11 +4566,11 @@ image Jean_TJ_1:
         pos (0,140)
         transform_anchor True
         block:
-            pause .1
+            pause 0.1
             ease 1.9 ypos -20
-            pause .4
+            pause 0.4
             ease 1.8 ypos 150
-            ease .5 ypos 140
+            ease 0.5 ypos 140
             repeat
     contains:
 
@@ -4682,9 +4581,9 @@ image Jean_TJ_1:
         rotate -6
         parallel:
             ease 2 ypos 0
-            pause .4
+            pause 0.4
             ease 1.8 ypos 25
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -4700,17 +4599,17 @@ image Jean_TJ_1:
         transform_anchor True
         yzoom 1
         parallel:
-            pause .1
+            pause 0.1
             ease 1.9 ypos -70
-            pause .4
+            pause 0.4
             ease 2.3 ypos 145
             repeat
         parallel:
-            pause .1
-            ease 1.9 yzoom .5
-            pause .4
+            pause 0.1
+            ease 1.9 yzoom 0.5
+            pause 0.4
             ease 1.8 yzoom 1
-            pause .5
+            pause 0.5
             repeat
     contains:
         contains:
@@ -4719,11 +4618,11 @@ image Jean_TJ_1:
         pos (0,140)
         transform_anchor True
         block:
-            pause .1
+            pause 0.1
             ease 1.9 ypos -20
-            pause .4
+            pause 0.4
             ease 1.8 ypos 150
-            ease .5 ypos 140
+            ease 0.5 ypos 140
             repeat
     contains:
 
@@ -4734,15 +4633,15 @@ image Jean_TJ_1:
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause .2
+            pause 0.2
             ease 2 ypos 150
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate 0
-            pause .2
+            pause 0.2
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
 
 
@@ -4760,10 +4659,10 @@ image Jean_TJ_2:
         pos (0,80)
         transform_anchor True
         block:
-            ease .3 ypos 40
-            ease .7 ypos -40
-            pause .2
-            ease .4 ypos 80
+            ease 0.3 ypos 40
+            ease 0.7 ypos -40
+            pause 0.2
+            ease 0.4 ypos 80
             repeat
     contains:
 
@@ -4774,13 +4673,13 @@ image Jean_TJ_2:
         rotate -5
         parallel:
             ease 1 ypos -20
-            pause .1
-            ease .5 ypos 80
+            pause 0.1
+            ease 0.5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause .1
-            ease .5 rotate -5
+            pause 0.1
+            ease 0.5 rotate -5
             repeat
     contains:
 
@@ -4790,8 +4689,8 @@ image Jean_TJ_2:
         transform_anchor True
         parallel:
             ease 1 ypos -20
-            pause .1
-            ease .5 ypos 80
+            pause 0.1
+            ease 0.5 ypos 80
             repeat
     contains:
 
@@ -4802,13 +4701,13 @@ image Jean_TJ_2:
         rotate -5
         parallel:
             ease 1 ypos -20
-            pause .1
-            ease .5 ypos 80
+            pause 0.1
+            ease 0.5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause .1
-            ease .5 rotate -5
+            pause 0.1
+            ease 0.5 rotate -5
             repeat
     contains:
 
@@ -4817,10 +4716,10 @@ image Jean_TJ_2:
         pos (0,80)
         transform_anchor True
         block:
-            ease .3 ypos 40
-            ease .7 ypos -40
-            pause .2
-            ease .4 ypos 80
+            ease 0.3 ypos 40
+            ease 0.7 ypos -40
+            pause 0.2
+            ease 0.4 ypos 80
             repeat
     contains:
 
@@ -4831,13 +4730,13 @@ image Jean_TJ_2:
         rotate -4
         parallel:
             ease 1 ypos 0
-            pause .2
-            ease .4 ypos 30
+            pause 0.2
+            ease 0.4 ypos 30
             repeat
         parallel:
             ease 1 rotate -2
-            pause .1
-            ease .5 rotate -4
+            pause 0.1
+            ease 0.5 rotate -4
             repeat
     contains:
         contains:
@@ -4845,12 +4744,12 @@ image Jean_TJ_2:
         subpixel True
         pos (0,50)
         transform_anchor True
-        yzoom .75
+        yzoom 0.75
         parallel:
-            pause .2
-            ease .8 ypos 0
-            pause .3
-            ease .3 ypos 50
+            pause 0.2
+            ease 0.8 ypos 0
+            pause 0.3
+            ease 0.3 ypos 50
             repeat
     contains:
         contains:
@@ -4859,10 +4758,10 @@ image Jean_TJ_2:
         pos (0,80)
         transform_anchor True
         block:
-            ease .3 ypos 40
-            ease .7 ypos -40
-            pause .2
-            ease .4 ypos 80
+            ease 0.3 ypos 40
+            ease 0.7 ypos -40
+            pause 0.2
+            ease 0.4 ypos 80
             repeat
     contains:
 
@@ -4873,13 +4772,13 @@ image Jean_TJ_2:
         rotate -5
         parallel:
             ease 1 ypos -20
-            pause .1
-            ease .5 ypos 80
+            pause 0.1
+            ease 0.5 ypos 80
             repeat
         parallel:
             ease 1 rotate 0
-            pause .1
-            ease .5 rotate -5
+            pause 0.1
+            ease 0.5 rotate -5
             repeat
 
 
@@ -4896,9 +4795,9 @@ image Jean_TJ_4:
         pos (0,5)
         transform_anchor True
         parallel:
-            pause .2
+            pause 0.2
             ease 1.9 ypos -30
-            pause .2
+            pause 0.2
             ease 1.9 ypos 5
             repeat
     contains:
@@ -4910,14 +4809,14 @@ image Jean_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -4928,9 +4827,9 @@ image Jean_TJ_4:
         transform_anchor True
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
     contains:
 
@@ -4941,14 +4840,14 @@ image Jean_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
     contains:
@@ -4958,9 +4857,9 @@ image Jean_TJ_4:
         pos (0,5)
         transform_anchor True
         parallel:
-            pause .2
+            pause 0.2
             ease 1.9 ypos -30
-            pause .2
+            pause 0.2
             ease 1.9 ypos 5
             repeat
     contains:
@@ -4972,9 +4871,9 @@ image Jean_TJ_4:
         rotate -5
         parallel:
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             ease 2 ypos 20
-            pause .1
+            pause 0.1
             repeat
     contains:
         contains:
@@ -4983,9 +4882,9 @@ image Jean_TJ_4:
         pos (0,5)
         transform_anchor True
         parallel:
-            pause .2
+            pause 0.2
             ease 1.9 ypos -30
-            pause .2
+            pause 0.2
             ease 1.9 ypos 5
             repeat
     contains:
@@ -4997,14 +4896,14 @@ image Jean_TJ_4:
         rotate 0
         parallel:
             ease 2 ypos -20
-            pause .1
+            pause 0.1
             ease 2 ypos 0
-            pause .1
+            pause 0.1
             repeat
         parallel:
-            pause .1
+            pause 0.1
             ease 2 rotate -5
-            pause .1
+            pause 0.1
             ease 2 rotate 0
             repeat
 
@@ -5020,11 +4919,11 @@ image Jean_TJ_5:
         pos (0,90)
         transform_anchor True
         parallel:
-            pause .1
+            pause 0.1
             ease 2 ypos 80
-            pause .2
+            pause 0.2
             ease 2 ypos 90
-            pause .4
+            pause 0.4
             repeat
     contains:
 
@@ -5035,13 +4934,13 @@ image Jean_TJ_5:
         rotate -5
         parallel:
             ease 2 ypos 125
-            pause .2
+            pause 0.2
             ease 2 ypos 130
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -5051,9 +4950,9 @@ image Jean_TJ_5:
         transform_anchor True
         parallel:
             ease 2 ypos 130
-            pause .2
+            pause 0.2
             ease 2 ypos 140
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -5064,13 +4963,13 @@ image Jean_TJ_5:
         rotate -5
         parallel:
             ease 2 ypos 125
-            pause .2
+            pause 0.2
             ease 2 ypos 130
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
     contains:
 
@@ -5079,11 +4978,11 @@ image Jean_TJ_5:
         pos (0,90)
         transform_anchor True
         parallel:
-            pause .1
+            pause 0.1
             ease 2 ypos 80
-            pause .2
+            pause 0.2
             ease 2 ypos 90
-            pause .4
+            pause 0.4
             repeat
     contains:
 
@@ -5106,11 +5005,11 @@ image Jean_TJ_5:
         pos (0,90)
         transform_anchor True
         parallel:
-            pause .1
+            pause 0.1
             ease 2 ypos 80
-            pause .2
+            pause 0.2
             ease 2 ypos 90
-            pause .4
+            pause 0.4
             repeat
     contains:
 
@@ -5121,13 +5020,13 @@ image Jean_TJ_5:
         rotate -5
         parallel:
             ease 2 ypos 125
-            pause .2
+            pause 0.2
             ease 2 ypos 130
-            pause .5
+            pause 0.5
             repeat
         parallel:
             ease 2 rotate -5
-            pause .5
+            pause 0.5
             repeat
 
 
@@ -5173,7 +5072,7 @@ label Jean_TJ_Launch(Line=primary_action):
         show Jean_Sprite zorder JeanX.sprite_layer:
             alpha 0
 
-    if JeanX.top == "_towel" or JeanX.bra == "corset":
+    if JeanX.top == "_towel" or JeanX.bra == "_corset":
         $ JeanX.top_pulled_up = 1
 
     $ action_speed = 0
@@ -5198,8 +5097,8 @@ label Jean_TJ_Reset:
     show Jean_Sprite zorder JeanX.sprite_layer:
         alpha 1
         ease 1 zoom 1.5 xpos 700 yoffset 50
-        pause .5
-        ease .5 zoom 1 xpos JeanX.sprite_location yoffset 0
+        pause 0.5
+        ease 0.5 zoom 1 xpos JeanX.sprite_location yoffset 0
     "[JeanX.name] pulls back"
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
         alpha 1
@@ -5269,7 +5168,7 @@ label Jean_Pos_Reset(T=0, Set=0):
         return
     call Jean_Hide
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
-        ease .5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
+        ease 0.5 offset (0,0) anchor (0.5, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
     show Jean_Sprite zorder JeanX.sprite_layer:
         offset (0,0)
         anchor (0.5, 0.0)
@@ -5336,8 +5235,8 @@ image LickRightBreast_Jean:
         alpha 0.5
         rotate 30
         block:
-            ease .5 rotate -40 pos (150,300)
-            pause .5
+            ease 0.5 rotate -40 pos (150,300)
+            pause 0.5
             ease 1.5 rotate 30 pos (175,325)
             repeat
 
@@ -5353,8 +5252,8 @@ image LickLeftBreast_Jean:
         alpha 0.5
         rotate 30
         block:
-            ease .5 rotate -40 pos (255,310)
-            pause .5
+            ease 0.5 rotate -40 pos (255,310)
+            pause 0.5
             ease 1.5 rotate 30 pos (275,330)
             repeat
 
@@ -5362,13 +5261,13 @@ image GropeThigh_Jean:
     contains:
         subpixel True
         "UI_Hand"
-        zoom .65
+        zoom 0.65
         pos (245,630)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 100
         block:
-            pause .5
+            pause 0.5
             ease 1 rotate 110 pos (255,700)
             ease 1 rotate 100 pos (245,630)
             repeat
@@ -5377,18 +5276,18 @@ image GropePussy_Jean:
     contains:
         subpixel True
         "UI_Hand"
-        zoom .65
+        zoom 0.65
         pos (245,560)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 170
         block:
             choice:
-                ease .5 rotate 190 pos (245,545)
-                ease .75 rotate 170 pos (245,560)
+                ease 0.5 rotate 190 pos (245,545)
+                ease 0.75 rotate 170 pos (245,560)
             choice:
-                ease .5 rotate 190 pos (245,545)
-                pause .25
+                ease 0.5 rotate 190 pos (245,545)
+                pause 0.25
                 ease 1 rotate 170 pos (245,560)
             repeat
 
@@ -5404,21 +5303,21 @@ image FingerPussy_Jean:
         block:
             choice:
                 ease 1 rotate 40 pos (275,615)
-                pause .5
+                pause 0.5
                 ease 1 rotate 50 pos (265,640)
             choice:
-                ease .5 rotate 40 pos (275,615)
-                pause .5
+                ease 0.5 rotate 40 pos (275,615)
+                pause 0.5
                 ease 1.75 rotate 50 pos (265,640)
             choice:
                 ease 2 rotate 40 pos (275,615)
-                pause .5
+                pause 0.5
                 ease 1 rotate 50 pos (265,640)
             choice:
-                ease .25 rotate 40 pos (275,615)
-                ease .25 rotate 50 pos (265,640)
-                ease .25 rotate 40 pos (275,615)
-                ease .25 rotate 50 pos (265,640)
+                ease 0.25 rotate 40 pos (275,615)
+                ease 0.25 rotate 50 pos (265,640)
+                ease 0.25 rotate 40 pos (275,615)
+                ease 0.25 rotate 50 pos (265,640)
             repeat
 
 image Lickpussy_Jean:
@@ -5432,8 +5331,8 @@ image Lickpussy_Jean:
         alpha 0.5
         rotate 10
         block:
-            easeout .5 rotate -50 pos (265,575)
-            linear .5 rotate -60 pos (255,585)
+            easeout 0.5 rotate -50 pos (265,575)
+            linear 0.5 rotate -60 pos (255,585)
             easein 1 rotate 10 pos (275,595)
             repeat
 
@@ -5447,10 +5346,10 @@ image VibratorRightBreast_Jean:
         alpha 0.5
         rotate 55
         block:
-            ease .9 rotate 35 ypos 300
-            pause .25
-            ease .7 rotate 55 ypos 310
-            pause .25
+            ease 0.9 rotate 35 ypos 300
+            pause 0.25
+            ease 0.7 rotate 55 ypos 310
+            pause 0.25
             repeat
 
 image VibratorLeftBreast_Jean:
@@ -5464,9 +5363,9 @@ image VibratorLeftBreast_Jean:
         rotate 55
         block:
             ease 1.1 rotate 35 ypos 300
-            pause .25
-            ease .9 rotate 55 ypos 310
-            pause .25
+            pause 0.25
+            ease 0.9 rotate 55 ypos 310
+            pause 0.25
             repeat
 
 image VibratorPussy_Jean:
@@ -5480,9 +5379,9 @@ image VibratorPussy_Jean:
         rotate 70
         block:
             ease 1 rotate 35 xpos 250
-            pause .25
+            pause 0.25
             ease 1 rotate 70 xpos 265
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorAnal_Jean:
@@ -5496,9 +5395,9 @@ image VibratorAnal_Jean:
         rotate 10
         block:
             ease 1 rotate 0 xpos 290
-            pause .25
+            pause 0.25
             ease 1 rotate 10 xpos 300
-            pause .25
+            pause 0.25
             repeat
 
 image VibratorPussyInsert_Jean:
@@ -5534,7 +5433,7 @@ image GirlGropeLeftBreast_Jean:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom .6
+        zoom 0.6
         pos (290,340)
         anchor (0.5,0.5)
         alpha 0.5
@@ -5563,7 +5462,7 @@ image GirlGropeThigh_Jean:
     contains:
         subpixel True
         "UI_GirlHand"
-        zoom .6
+        zoom 0.6
         anchor (0.5,0.5)
         pos (0,0)
         alpha 0.5
@@ -5600,60 +5499,60 @@ image GirlGropePussy_Jean:
         rotate 200
         block:
             choice:
-                ease .75 rotate 210 pos (240,535)
-                ease .5 rotate 195
-                ease .75 rotate 210
-                ease .5 rotate 195
+                ease 0.75 rotate 210 pos (240,535)
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
             choice:
-                ease .5 rotate 210 pos (240,535)
+                ease 0.5 rotate 210 pos (240,535)
                 ease 1 rotate 195
-                pause .25
-                ease .5 rotate 210
+                pause 0.25
+                ease 0.5 rotate 210
                 ease 1 rotate 195
-                pause .25
+                pause 0.25
             choice:
-                ease .5 rotate 205 pos (240,535)
-                ease .75 rotate 200 pos (240,540)
-                ease .5 rotate 205 pos (240,535)
-                ease .75 rotate 200 pos (240,540)
+                ease 0.5 rotate 205 pos (240,535)
+                ease 0.75 rotate 200 pos (240,540)
+                ease 0.5 rotate 205 pos (240,535)
+                ease 0.75 rotate 200 pos (240,540)
             choice:
-                ease .3 rotate 205 pos (240,535)
-                ease .3 rotate 200 pos (240,545)
-                ease .3 rotate 205 pos (240,535)
-                ease .3 rotate 200 pos (240,545)
+                ease 0.3 rotate 205 pos (240,535)
+                ease 0.3 rotate 200 pos (240,545)
+                ease 0.3 rotate 205 pos (240,535)
+                ease 0.3 rotate 200 pos (240,545)
             repeat
 
 image GirlFingerPussy_Jean:
     contains:
         subpixel True
         "UI_GirlFinger"
-        zoom .6
+        zoom 0.6
         pos (250,550)
         anchor (0.5,0.5)
         alpha 0.5
         rotate 200
         block:
             choice:
-                ease .75 rotate 210 pos (250,555)
-                ease .5 rotate 195
-                ease .75 rotate 210
-                ease .5 rotate 195
+                ease 0.75 rotate 210 pos (250,555)
+                ease 0.5 rotate 195
+                ease 0.75 rotate 210
+                ease 0.5 rotate 195
             choice:
-                ease .5 rotate 210 pos (250,555)
+                ease 0.5 rotate 210 pos (250,555)
                 ease 1 rotate 195
-                pause .25
-                ease .5 rotate 210
+                pause 0.25
+                ease 0.5 rotate 210
                 ease 1 rotate 195
-                pause .25
+                pause 0.25
             choice:
-                ease .5 rotate 205 ypos 565
-                ease .75 rotate 200 ypos 570
-                ease .5 rotate 205 ypos 565
-                ease .75 rotate 200 ypos 570
+                ease 0.5 rotate 205 ypos 565
+                ease 0.75 rotate 200 ypos 570
+                ease 0.5 rotate 205 ypos 565
+                ease 0.75 rotate 200 ypos 570
             choice:
-                ease .3 rotate 205 ypos 565
-                ease .3 rotate 200 ypos 575
-                ease .3 rotate 205 ypos 565
-                ease .3 rotate 200 ypos 575
+                ease 0.3 rotate 205 ypos 565
+                ease 0.3 rotate 200 ypos 575
+                ease 0.3 rotate 205 ypos 565
+                ease 0.3 rotate 200 ypos 575
             repeat
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

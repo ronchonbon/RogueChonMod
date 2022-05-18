@@ -722,9 +722,9 @@ label Swim_Shop:
 
 
 
-                    "Blue swim skirt (locked)" if Girl == KittyX and Girl.legs == "blue_skirt":
+                    "Blue swim skirt (locked)" if Girl == KittyX and Girl.legs == "_blue_skirt":
                         pass
-                    "Blue swim_skirt" if Girl == KittyX and Girl.legs != "blue_skirt":
+                    "Blue swim_skirt" if Girl == KittyX and Girl.legs != "_blue_skirt":
                         $ Girl.change_face("_smile")
                         if (Girl.underwear and approval_check(Girl, 900, TabM=2)) or approval_check(Girl, 1200, TabM=2):
                             Girl.voice "Sure. . ."
@@ -733,20 +733,20 @@ label Swim_Shop:
                             $ Girl.legs = ""
                             call expression Girl.tag + "_First_Bottomless"
                             pause 0.3
-                            $ Girl.legs = "blue_skirt"
+                            $ Girl.legs = "_blue_skirt"
                             $ Girl.upskirt = 0
                         else:
                             Girl.voice "I'll need some privacy here. . ."
                             show blackscreen onlayer black
-                            $ Girl.legs = "blue_skirt"
+                            $ Girl.legs = "_blue_skirt"
                             "You back out of the room for a moment. . ."
                             hide blackscreen onlayer black
-                        if "blue_skirt" in Cart:
+                        if "_blue_skirt" in Cart:
                             pass
-                        elif "blue_skirt" in Girl.inventory:
+                        elif "_blue_skirt" in Girl.inventory:
                             Girl.voice "I do already have one of these though."
                         else:
-                            $ Cart.append("blue_skirt")
+                            $ Cart.append("_blue_skirt")
                     "Leave Dressing Area.":
 
                         if Cart and Second:
@@ -899,7 +899,7 @@ label Swim_Shop:
                                             ch_v "Maybe a little small. . ."
 
 
-                                "The_skirt" if "blue_skirt" in Cart:
+                                "The_skirt" if "_blue_skirt" in Cart:
                                     "You agree to buy [Girl.name] the blue skirt."
                                     if Girl.tag + " blue_skirt" in Player.inventory:
                                         "Wait, you already have one of those."
@@ -907,14 +907,14 @@ label Swim_Shop:
                                         $ Player.inventory.remove(Girl.tag + " blue_skirt")
                                     if Player.cash < 50:
                                         "You look at the tag, and actually, it's $50, you can't afford it."
-                                        $ Cart.remove("blue_skirt")
+                                        $ Cart.remove("_blue_skirt")
                                     else:
                                         $ Player.cash -= 50
-                                    if "blue_skirt" in Cart:
+                                    if "_blue_skirt" in Cart:
 
-                                        $ Cart.remove("blue_skirt")
+                                        $ Cart.remove("_blue_skirt")
                                         $ Girl.change_face("_bemused",1)
-                                        $ Girl.inventory.append("blue_skirt")
+                                        $ Girl.inventory.append("_blue_skirt")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 20)
                                         $ Girl.change_stat("obedience", 200, 10)
@@ -950,7 +950,7 @@ label Swim_Shop:
 
 
                         $ Player.drain_word("purchased")
-                        if Girl == KittyX and ("blue_skirt" in Girl.inventory or Girl.inhibition >= 400) and "_bikini_top" in Girl.inventory and "_bikini_bottoms" in Girl.inventory:
+                        if Girl == KittyX and ("_blue_skirt" in Girl.inventory or Girl.inhibition >= 400) and "_bikini_top" in Girl.inventory and "_bikini_bottoms" in Girl.inventory:
                             $ Girl.Swim[0] = 1
                         elif "_bikini_top" in Girl.inventory and "_bikini_bottoms" in Girl.inventory:
                             $ Girl.Swim[0] = 1
@@ -1109,9 +1109,9 @@ label Lingerie_Shop:
                                 $ Cart.append("lace_bra")
 
 
-                    "Corset (locked)" if Girl.bra == "corset":
+                    "Corset (locked)" if Girl.bra == "_corset":
                         pass
-                    "Corset" if Girl.bra != "corset" and Girl in (LauraX,JeanX):
+                    "Corset" if Girl.bra != "_corset" and Girl in (LauraX,JeanX):
                         if "no_gift_bra" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.SeenChest and not approval_check(Girl, 900):
@@ -1126,22 +1126,22 @@ label Lingerie_Shop:
                             $ Girl.recent_history.append("no_gift_bra")
                         else:
                             if Girl.SeenChest or approval_check(Girl, 1000, TabM=2):
-                                call Dressing_Strip_Bra ("corset")
+                                call Dressing_Strip_Bra ("_corset")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show blackscreen onlayer black
                                 if Girl == JubesX:
                                     $ Girl.accessory = ""
                                 $ Girl.top = ""
-                                $ Girl.bra = "corset"
+                                $ Girl.bra = "_corset"
                                 "You back out of the room for a moment. . ."
                                 hide blackscreen onlayer black
-                            if "corset" in Cart:
+                            if "_corset" in Cart:
                                 pass
-                            elif "corset" in Girl.inventory:
+                            elif "_corset" in Girl.inventory:
                                 Girl.voice "I do already have one of these though."
                             else:
-                                $ Cart.append("corset")
+                                $ Cart.append("_corset")
 
 
                     "Lace Corset (locked)" if Girl.bra == "lace corset":
@@ -1178,9 +1178,9 @@ label Lingerie_Shop:
                             else:
                                 $ Cart.append("lace corset")
 
-                    "Lace Panties (locked)" if Girl.underwear == "lace_panties":
+                    "Lace Panties (locked)" if Girl.underwear == "_lace_panties":
                         pass
-                    "Lace Panties" if Girl.underwear != "lace_panties":
+                    "Lace Panties" if Girl.underwear != "_lace_panties":
                         if "no_gift_panties" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.SeenPussy and not approval_check(Girl, 1000):
@@ -1195,21 +1195,21 @@ label Lingerie_Shop:
                             $ Girl.recent_history.append("no_gift_panties")
                         else:
                             if Girl.SeenPussy or approval_check(Girl, 1200, TabM=2):
-                                call Dressing_Strip_Panties ("lace_panties")
+                                call Dressing_Strip_Panties ("_lace_panties")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show blackscreen onlayer black
                                 $ Girl.legs = ""
                                 $ Girl.hose = ""
-                                $ Girl.underwear = "lace_panties"
+                                $ Girl.underwear = "_lace_panties"
                                 "You back out of the room for a moment. . ."
                                 hide blackscreen onlayer black
-                            if "lace_panties" in Cart:
+                            if "_lace_panties" in Cart:
                                 pass
-                            elif "lace_panties" in Girl.inventory:
+                            elif "_lace_panties" in Girl.inventory:
                                 Girl.voice "I do already have these though."
                             else:
-                                $ Cart.append("lace_panties")
+                                $ Cart.append("_lace_panties")
 
 
                     "Tiger-Striped Panties (locked)" if Girl.underwear == "tiger_panties":
@@ -1241,9 +1241,9 @@ label Lingerie_Shop:
                                 $ Cart.append("tiger_panties")
 
 
-                    "Stockings and Garterbelt (locked)" if Girl.hose == "stockings_and_garterbelt":
+                    "Stockings and Garterbelt (locked)" if Girl.hose == "_stockings_and_garterbelt":
                         pass
-                    "Stockings and Garterbelt" if Girl.hose != "stockings_and_garterbelt":
+                    "Stockings and Garterbelt" if Girl.hose != "_stockings_and_garterbelt":
                         if Girl.SeenPussy or approval_check(Girl, 900, TabM=2):
                             $ Girl.change_face("_sexy")
                             Girl.voice "Sure. . ."
@@ -1254,24 +1254,24 @@ label Lingerie_Shop:
                             $ Girl.hose = ""
                             call expression Girl.tag + "_First_Bottomless"
                             pause 0.3
-                            $ Girl.hose = "stockings_and_garterbelt"
+                            $ Girl.hose = "_stockings_and_garterbelt"
                             $ Girl.underwear_pulled_down = 0
                             $ Girl.upskirt = 0
-                            if Second and "stockings_and_garterbelt" not in Cart:
+                            if Second and "_stockings_and_garterbelt" not in Cart:
                                 $ Girl.GirlLikeUp(Second,1)
                                 $ Second.GirlLikeUp(Girl,2)
                         else:
                             Girl.voice "I'll need some privacy here. . ."
                             show blackscreen onlayer black
-                            $ Girl.hose = "stockings_and_garterbelt"
+                            $ Girl.hose = "_stockings_and_garterbelt"
                             "You back out of the room for a moment. . ."
                             hide blackscreen onlayer black
-                        if "stockings_and_garterbelt" in Cart:
+                        if "_stockings_and_garterbelt" in Cart:
                             pass
-                        elif "stockings_and_garterbelt" in Girl.inventory:
+                        elif "_stockings_and_garterbelt" in Girl.inventory:
                             Girl.voice "I do already have these though."
                         else:
-                            $ Cart.append("stockings_and_garterbelt")
+                            $ Cart.append("_stockings_and_garterbelt")
 
 
                     "Knee Stockings (locked)" if Girl.hose == "knee stockings":
@@ -1502,7 +1502,7 @@ label Lingerie_Shop:
                                             ch_v "It's not my usual style. . ."
 
 
-                                "The corset" if "corset" in Cart:
+                                "The corset" if "_corset" in Cart:
                                     "You agree to buy [Girl.name] the corset."
                                     if Girl.tag + " corset" in Player.inventory:
                                         "Wait, you already have one of those."
@@ -1513,11 +1513,11 @@ label Lingerie_Shop:
                                         $ Player.inventory.remove(Girl.tag + " corset")
                                     else:
                                         $ Player.cash -= 70
-                                    if "corset" in Cart:
+                                    if "_corset" in Cart:
 
-                                        $ Cart.remove("corset")
+                                        $ Cart.remove("_corset")
                                         $ Girl.change_face("_bemused",1)
-                                        $ Girl.inventory.append("corset")
+                                        $ Girl.inventory.append("_corset")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 15)
                                         $ Girl.change_stat("obedience", 200, 20)
@@ -1551,7 +1551,7 @@ label Lingerie_Shop:
                                         ch_l "You think this'd look good on me?"
 
 
-                                "The lace_panties" if "lace_panties" in Cart:
+                                "The lace_panties" if "_lace_panties" in Cart:
                                     "You agree to buy [Girl.name] the lace panties."
                                     if Girl.tag + " lace_panties" in Player.inventory:
                                         "Wait, you already have one of those."
@@ -1559,14 +1559,14 @@ label Lingerie_Shop:
                                         $ Player.inventory.remove(Girl.tag + " lace_panties")
                                     elif Player.cash < 110:
                                         "You look at the tag, and actually, they're $110, you can't afford them."
-                                        $ Cart.remove("lace_panties")
+                                        $ Cart.remove("_lace_panties")
                                     else:
                                         $ Player.cash -= 110
-                                    if "lace_panties" in Cart:
+                                    if "_lace_panties" in Cart:
 
-                                        $ Cart.remove("lace_panties")
+                                        $ Cart.remove("_lace_panties")
                                         $ Girl.change_face("_bemused",1)
-                                        $ Girl.inventory.append("lace_panties")
+                                        $ Girl.inventory.append("_lace_panties")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 25)
                                         $ Girl.change_stat("obedience", 200, 20)
@@ -1613,7 +1613,7 @@ label Lingerie_Shop:
 
 
 
-                                "The stockings and garterbelt" if "stockings_and_garterbelt" in Cart:
+                                "The stockings and garterbelt" if "_stockings_and_garterbelt" in Cart:
                                     "You agree to buy [Girl.name] the stockings and garterbelt."
                                     if Girl.tag + " stockings and garterbelt" in Player.inventory:
                                         "Wait, you already have those."
@@ -1621,14 +1621,14 @@ label Lingerie_Shop:
                                         $ Player.inventory.remove(Girl.tag + " stockings and garterbelt")
                                     elif Player.cash < 100:
                                         "You look at the tag, and actually, they're $100, you can't afford them."
-                                        $ Cart.remove("stockings_and_garterbelt")
+                                        $ Cart.remove("_stockings_and_garterbelt")
                                     else:
                                         $ Player.cash -= 100
-                                    if "stockings_and_garterbelt" in Cart:
+                                    if "_stockings_and_garterbelt" in Cart:
 
-                                        $ Cart.remove("stockings_and_garterbelt")
+                                        $ Cart.remove("_stockings_and_garterbelt")
                                         $ Girl.change_face("_bemused",1)
-                                        $ Girl.inventory.append("stockings_and_garterbelt")
+                                        $ Girl.inventory.append("_stockings_and_garterbelt")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 5)
                                         $ Girl.change_stat("obedience", 200, 5)

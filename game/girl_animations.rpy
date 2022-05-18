@@ -41,16 +41,29 @@ transform Rogue_blowjob_mouth_animation:
         pause 0.35
         repeat
 
-transform Rogue_licking:
+transform blowjob_starting:
+    subpixel True
+    ease 1.5 offset (0,0)
+
+transform blowjob_licking:
     subpixel True
     ease 0.5 offset (0,-35)
     block:
         ease 2.5 offset (25,100)
         ease 2 offset (0,-35)
-        pause .5
+        pause 0.5
         repeat
 
-transform Rogue_heading:
+transform blowjob_licking_body:
+    subpixel True
+    ease 0.5 offset (0,-35)
+    block:
+        ease 2.5 offset (30,90)
+        ease 2 offset (0,-35)
+        pause 0.5
+        repeat
+
+transform blowjob_heading:
     subpixel True
     offset (0, -40)
     block:
@@ -58,7 +71,7 @@ transform Rogue_heading:
         ease 1.5 offset (0, -40)
         repeat
 
-transform Rogue_sucking:
+transform blowjob_sucking:
     subpixel True
     ease 0.5 offset (0,50)
     block:
@@ -66,13 +79,30 @@ transform Rogue_sucking:
         ease 1.5 offset (0,50)
         repeat
 
-transform Rogue_deepthroat:
-    ease .5 offset (0,100)
+transform blowjob_sucking_body:
+    subpixel True
+    ease 0.5 offset (0,50)
+    block:
+        ease 1 yoffset 100
+        ease 1.5 offset (0,50)
+        repeat
+
+transform blowjob_deepthroat:
+    ease 0.5 offset (0,100)
     block:
         subpixel True
         ease 1 yoffset 300
-        pause .5
+        pause 0.5
         ease 2 yoffset 100
+        repeat
+
+transform blowjob_deepthroat_body:
+    ease 0.5 offset (0,100)
+    block:
+        subpixel True
+        ease 1.2 yoffset 250
+        pause 0.5
+        ease 1.8 yoffset 100
         repeat
 
 image Rogue_blowjob_head:
@@ -102,95 +132,75 @@ image Rogue_blowjob_mask_heading:
 
 image Rogue_blowjob_body_animation0:
     "Rogue_blowjob_body"
-    subpixel True
-    ease 1.5 offset (0,0)
+    blowjob_starting
 
 image Rogue_blowjob_head_animation0:
     "Rogue_blowjob_head"
-    subpixel True
-    ease 1.5 offset (0,0)
+    blowjob_starting
 
 image Rogue_blowjob_hairback_animation0:
     "Rogue_blowjob_hairback"
-    subpixel True
-    ease 1.5 offset (0,0)
+    blowjob_starting
 
 image Rogue_blowjob_body_animation1:
     "Rogue_blowjob_body"
-    subpixel True
-    ease 0.5 offset (0,-35)
-    block:
-        ease 2.5 offset (30,90)
-        ease 2 offset (0,-35)
-        pause .5
-        repeat
+    blowjob_licking_body
 
 image Rogue_blowjob_head_animation1:
     "Rogue_blowjob_head"
-    Rogue_licking
+    blowjob_licking
 
 image Rogue_blowjob_hairback_animation1:
     "Rogue_blowjob_hairback"
-    Rogue_licking
+    blowjob_licking
 
 image Rogue_blowjob_body_animation2:
     "Rogue_blowjob_body"
-    Rogue_heading
+    blowjob_heading
 
 image Rogue_blowjob_head_animation2:
     "Rogue_blowjob_head"
-    Rogue_heading
+    blowjob_heading
 
 image Rogue_blowjob_hairback_animation2:
     "Rogue_blowjob_hairback"
-    Rogue_heading
+    blowjob_heading
 
 image Rogue_blowjob_facemask_animation2:
     AlphaMask("Rogue_blowjob_head", "Rogue_blowjob_mask_heading")
-    Rogue_heading
+    blowjob_heading
 
 image Rogue_blowjob_body_animation3:
     "Rogue_blowjob_body"
-    subpixel True
-    ease 0.5 offset (0,50)
-    block:
-        ease 1 yoffset 100
-        ease 1.5 offset (0,50)
-        repeat
+    blowjob_sucking_body
 
 image Rogue_blowjob_head_animation3:
     "Rogue_blowjob_head"
-    Rogue_sucking
+    blowjob_sucking
 
 image Rogue_blowjob_hairback_animation3:
     "Rogue_blowjob_hairback"
-    Rogue_sucking
+    blowjob_sucking
 
 image Rogue_blowjob_facemask_animation3:
     AlphaMask("Rogue_blowjob_head", "images/Rogue/Rogue_facemask_blowjob.png")
-    Rogue_sucking
+    blowjob_sucking
 
 image Rogue_blowjob_body_animation4:
     "Rogue_blowjob_body"
-    ease .5 offset (0,100)
-    block:
-        subpixel True
-        ease 1.2 yoffset 250
-        pause .5
-        ease 1.8 yoffset 100
-        repeat
+    blowjob_deepthroat_body
 
 image Rogue_blowjob_head_animation4:
     "Rogue_blowjob_head"
-    Rogue_deepthroat
+    blowjob_deepthroat
 
 image Rogue_blowjob_hairback_animation4:
     "Rogue_blowjob_hairback"
-    Rogue_deepthroat
+    blowjob_deepthroat
 
 image Rogue_blowjob_facemask_animation4:
     AlphaMask("Rogue_blowjob_head", "images/Rogue/Rogue_facemask_blowjob.png")
-    Rogue_deepthroat
+    blowjob_deepthroat
 
 image Rogue_mouth_blowjob_sucking:
     "images/Rogue/Rogue_mouth_blowjob_sucking.png"
@@ -267,12 +277,12 @@ image Rogue_doggy_animation:
 
     align (0.6,0.0)
 
-image Rogue_doggy_licking_pussy:
+image licking_pussy:
     "licking"
     zoom 0.5
-    offset (195,540)
+    offset (195, 540)
 
-image Rogue_doggy_licking_ass:
+image licking_ass:
     "licking"
     zoom 0.5
-    offset (195,500)
+    offset (195, 500)
