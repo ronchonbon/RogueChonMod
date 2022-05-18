@@ -12,12 +12,12 @@ label action(Girl):
     call action_approval_checks(Girl, primary_action)
 
     if primary_action == "kiss" and Girl == EmmaX and not approval_check(Girl, 1000):
-        $ Girl.change_face("sadside")
+        $ Girl.change_face("_sadside")
 
         ch_e "Not when we barely know each other. . ."
 
-        $ Girl.recent_history.append("no_kissing")
-        $ Girl.daily_history.append("no_kissing")
+        $ Girl.recent_history.append("no_kiss")
+        $ Girl.daily_history.append("no_kiss")
 
         return
 
@@ -72,8 +72,8 @@ label action(Girl):
         label begging_rejected:
     elif primary_action == "kiss":
         if approval > 1 and not Girl.action_counter["kiss"] and not Girl.Forced:
-            $ Girl.change_face("sexy")
-            $ Girl.eyes = "side"
+            $ Girl.change_face("_sexy")
+            $ Girl.eyes = "_side"
 
             if Girl == RogueX:
                 ch_r "I've never really been able to do this, so I'm a bit excited to try. . ."
@@ -89,9 +89,11 @@ label action(Girl):
                 ch_s "I would like that."
             elif Girl == JubesX:
                 ch_v "I guess we did get off to a poor start. . ."
+
+            jump before_action
         elif approval and not Girl.action_counter["kiss"]:
-            $ Girl.change_face("sexy")
-            $ Girl.eyes = "side"
+            $ Girl.change_face("_sexy")
+            $ Girl.eyes = "_side"
 
             if Girl == RogueX:
                 ch_r "I guess it's worth a shot. . ."
@@ -107,8 +109,10 @@ label action(Girl):
                 ch_s "I suppose."
             elif Girl == JubesX:
                 ch_v "I suppose we could. . ."
-        elif approval and "kissing" in Girl.recent_history:
-            $ Girl.change_face("sexy", 1)
+
+            jump before_action
+        elif approval and "kiss" in Girl.recent_history:
+            $ Girl.change_face("_sexy", 1)
 
             if Girl == KittyX:
                 ch_k "Prrr. . ."
@@ -116,8 +120,8 @@ label action(Girl):
                 Girl.voice "Mmmm. . ."
 
             jump before_action
-        elif approval and "kissing" in Girl.daily_history:
-            $ Girl.change_face("sexy", 1)
+        elif approval and "kiss" in Girl.daily_history:
+            $ Girl.change_face("_sexy", 1)
 
             $ Line = renpy.random.choice(["A","B","C"])
 
@@ -160,8 +164,10 @@ label action(Girl):
                     ch_v "Sure, come to me."
 
             $ Line = 0
+
+            jump before_action
         elif approval > 1 and Girl.love > Girl.obedience:
-            $ Girl.change_face("sexy")
+            $ Girl.change_face("_sexy")
 
             if Girl == RogueX:
                 ch_r "Sure, why not?"
@@ -177,8 +183,10 @@ label action(Girl):
                 ch_s "Hrm. . ."
             elif Girl == JubesX:
                 ch_v "Mmmm. . ."
+
+            jump before_action
         elif approval_check(Girl, 500, "O") and Girl.obedience > Girl.love:
-            $ Girl.change_face("normal")
+            $ Girl.change_face("_normal")
 
             if Girl == RogueX:
                 ch_r "If you wish."
@@ -196,15 +204,19 @@ label action(Girl):
                 ch_v "sure. . ."
 
             $ Girl.change_stat("obedience", 60, 1)
+
+            jump before_action
         elif approval_check(Girl, 250, "O",Alt=[[KittyX,LauraX],300]) and approval_check(Girl, 250, "L",Alt=[[KittyX,LauraX],200]):
-            $ Girl.change_face("bemused")
+            $ Girl.change_face("_bemused")
 
             Girl.voice "Ok, fine."
 
             $ Girl.change_stat("obedience", 50, 3)
+
+            jump before_action
         elif Girl.addiction >= 50:
-            $ Girl.change_face("sexy")
-            $ Girl.eyes = "manic"
+            $ Girl.change_face("_sexy")
+            $ Girl.eyes = "_manic"
 
             if Girl == RogueX:
                 ch_r "Hm. . . ok, let's do this."
@@ -220,8 +232,10 @@ label action(Girl):
                 ch_s ". . . yes. . ."
             elif Girl == JubesX:
                 ch_v "Oh yes. . ."
+
+            jump before_action
         elif approval:
-            $ Girl.change_face("bemused")
+            $ Girl.change_face("_bemused")
 
             if Girl == RogueX:
                 ch_r "hmm, ok."
@@ -237,9 +251,11 @@ label action(Girl):
                 ch_s "Fine."
             elif Girl == JubesX:
                 ch_v "Sure, ok. . ."
+
+            jump before_action
         else:
-            $ Girl.change_face("normal")
-            $ Girl.mouth = "sad"
+            $ Girl.change_face("_normal")
+            $ Girl.mouth = "_sad"
 
             if Girl == RogueX:
                 ch_r "Nah, I don't think I'm interested."
@@ -256,8 +272,8 @@ label action(Girl):
             elif Girl == JubesX:
                 ch_v "No thanks. . ."
 
-            $ Girl.recent_history.append("no_kissing")
-            $ Girl.daily_history.append("no_kissing")
+            $ Girl.recent_history.append("no_kiss")
+            $ Girl.daily_history.append("no_kiss")
 
     return
 
@@ -266,7 +282,7 @@ label before_action:
         $ focused_Girl.inhibition += int(Taboo/10)
         $ focused_Girl.lust += int(Taboo/5)
 
-    $ focused_Girl.change_face("sexy")
+    $ focused_Girl.change_face("_sexy")
 
     if primary_action == "kiss":
         $ focused_Girl.change_stat("inhibition", 10, 1)
@@ -275,11 +291,11 @@ label before_action:
         call expression focused_Girl.tag + "_Kissing_Launch" pass("kiss")
 
         if focused_Girl.action_counter["kiss"] >= 10 and focused_Girl.inhibition >= 300:
-            $ focused_Girl.change_face("sucking")
+            $ focused_Girl.change_face("_sucking")
         elif focused_Girl.action_counter["kiss"] > 1 and focused_Girl.addiction >= 50:
-            $ focused_Girl.change_face("sucking")
+            $ focused_Girl.change_face("_sucking")
         else:
-            $ focused_Girl.change_face("kiss",2)
+            $ focused_Girl.change_face("_kiss",2)
 
         if focused_Girl == RogueX and not Girl.action_counter["kiss"]:
             jump Rogue_first_kiss
@@ -297,18 +313,18 @@ label before_action:
             elif primary_action in breast_actions:
                 call Top_Off
 
-            if "angry" in focused_Girl.recent_history:
+            if "_angry" in focused_Girl.recent_history:
                 return
 
         $ approval_bonus = 0
     elif primary_action in job_actions:
         if primary_action not in dildo_actions:
             if focused_Girl.Forced:
-                $ focused_Girl.change_face("sad")
-            elif not focused_Girl.action_counter[action]:
-                $ focused_Girl.Brows = "confused"
-                $ focused_Girl.Eyes = "sexy"
-                $ focused_Girl.Mouth = "smile"
+                $ focused_Girl.change_face("_sad")
+            elif not focused_Girl.action_counter[primary_action]:
+                $ focused_Girl.Brows = "_confused"
+                $ focused_Girl.Eyes = "_sexy"
+                $ focused_Girl.Mouth = "_smile"
         else:
             if not focused_Girl.Forced and action_context != "auto":
                 if primary_action == "dildo_pussy":
@@ -318,7 +334,7 @@ label before_action:
 
                 call Bottoms_Off(focused_Girl)
 
-                if "angry" in focused_Girl.recent_history:
+                if "_angry" in focused_Girl.recent_history:
                     return
 
             $ approval_bonus = 0
@@ -538,7 +554,7 @@ label after_action:
     elif primary_action in dildo_actions:
         call expression focused_Girl.tag + "_Pos_Reset"
 
-    $ focused_Girl.change_face("sexy")
+    $ focused_Girl.change_face("_sexy")
     $ focused_Girl.remaining_actions -= 1
 
     call action_specific_consequences(focused_Girl, primary_action)
@@ -568,11 +584,11 @@ label after_action:
 
     if achievement is not None and achievement in Achievements:
         pass
-    elif primary_action == "titjob" and Girl.action_counter[action] > 5:
+    elif primary_action == "titjob" and Girl.action_counter[primary_action] > 5:
         pass
-    elif primary_action == "kiss" and Girl.action_counter[action] > 10:
+    elif primary_action == "kiss" and Girl.action_counter[primary_action] > 10:
         pass
-    elif primary_action not in dildo_actions and Girl.action_counter[action] >= 10:
+    elif primary_action not in dildo_actions and Girl.action_counter[primary_action] >= 10:
         if primary_action not in ["anal"]:
             $ focused_Girl.SEXP += 5
         else:
@@ -582,16 +598,16 @@ label after_action:
             $ Achievements.append(achievement)
 
         if primary_action not in ["anal"] and not action_context:
-            $ focused_Girl.change_face("smile", 1)
+            $ focused_Girl.change_face("_smile", 1)
         elif primary_action in ["anal"] and not action_context:
-            $ focused_Girl.change_face("bemused", 1)
+            $ focused_Girl.change_face("_bemused", 1)
 
         call achievement_lines(focused_Girl)
     elif primary_action == "blowjob" and action_context == "shift":
         pass
-    elif Girl.action_counter[action] == 1:
+    elif Girl.action_counter[primary_action] == 1:
         call first_action_response(focused_Girl, primary_action)
-    elif (primary_action in cock_actions or primary_action == "kiss") and Girl.action_counter[action] == 5:
+    elif (primary_action in cock_actions or primary_action == "kiss") and Girl.action_counter[primary_action] == 5:
         call after_action_five_times_lines(focused_Girl)
     elif primary_action in sex_actions and not action_context:
         if "unsatisfied" in focused_Girl.recent_history:
@@ -785,11 +801,11 @@ label set_approval_bonus(Girl, action):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 25
     elif primary_action == "handjob":
-        if Girl.action_counter[action] >= 7: # She loves it
+        if Girl.action_counter[primary_action] >= 7: # She loves it
             $ approval_bonus += 10
-        elif Girl.action_counter[action] >= 3: #You've done it before several times
+        elif Girl.action_counter[primary_action] >= 3: #You've done it before several times
             $ approval_bonus += 7
-        elif Girl.action_counter[action]: #You've done it before
+        elif Girl.action_counter[primary_action]: #You've done it before
             $ approval_bonus += 3
 
         if "exhibitionist" in Girl.traits:
@@ -808,11 +824,11 @@ label set_approval_bonus(Girl, action):
         if action_context == "shift":
             $ approval_bonus += 15
     elif primary_action == "footjob":
-        if Girl.action_counter[action] >= 7: # She loves it
+        if Girl.action_counter[primary_action] >= 7: # She loves it
             $ approval_bonus += 10
-        elif Girl.action_counter[action] >= 3: #You've done it before several times
+        elif Girl.action_counter[primary_action] >= 3: #You've done it before several times
             $ approval_bonus += 7
-        elif Girl.action_counter[action]: #You've done it before
+        elif Girl.action_counter[primary_action]: #You've done it before
             $ approval_bonus += 3
 
         if Girl.addiction >= 75 and Girl.event_counter["swallowed"] >=3: #She's really strung out and has swallowed
@@ -829,11 +845,11 @@ label set_approval_bonus(Girl, action):
         elif "ex" in Girl.traits:
             $ approval_bonus -= 40
     elif primary_action == "titjob":
-        if Girl.action_counter[action] >= 7: # She loves it
+        if Girl.action_counter[primary_action] >= 7: # She loves it
             $ approval_bonus += 10
-        elif Girl.action_counter[action] >= 3: #You've done it before several times
+        elif Girl.action_counter[primary_action] >= 3: #You've done it before several times
             $ approval_bonus += 7
-        elif Girl.action_counter[action]: #You've done it before
+        elif Girl.action_counter[primary_action]: #You've done it before
             $ approval_bonus += 5
 
         if Girl.SeenChest and approval_check(Girl, 500): # You've seen her tits.
@@ -860,11 +876,11 @@ label set_approval_bonus(Girl, action):
         if action_context == "shift":
             $ approval_bonus += 15
     elif primary_action == "blowjob":
-        if Girl.action_counter[action] >= 7: # She loves it
+        if Girl.action_counter[primary_action] >= 7: # She loves it
             $ approval_bonus += 15
-        elif Girl.action_counter[action] >= 3: #You've done it before several times
+        elif Girl.action_counter[primary_action] >= 3: #You've done it before several times
             $ approval_bonus += 10
-        elif Girl.action_counter[action]: #You've done it before
+        elif Girl.action_counter[primary_action]: #You've done it before
             $ approval_bonus += 7
 
         if Girl.addiction >= 75 and Girl.event_counter["swallowed"] >=3: #She's really strung out and has swallowed
@@ -883,7 +899,7 @@ label set_approval_bonus(Girl, action):
         if action_context == "shift":
             $ approval_bonus += 15
     elif primary_action == "dildo_pussy":
-        if Girl.action_counter[action]: #You've done it before
+        if Girl.action_counter[primary_action]: #You've done it before
             $ approval_bonus += 15
         if Girl.PantsNum() > 6: # she's got pants on.
             $ approval_bonus -= 20
@@ -1029,7 +1045,7 @@ label end_of_action_round(Girl, action):
         if Player.focus >= 100:
             call Player_Cumming(Girl)
 
-            if "angry" in Girl.recent_history:
+            if "_angry" in Girl.recent_history:
                 if primary_action in sex_actions:
                     call expression Girl.tag + "_Sex_Reset"
                 else:
@@ -1050,7 +1066,7 @@ label end_of_action_round(Girl, action):
         if Girl.lust >= 100:
             call Girl_Cumming(Girl)
 
-            if action_context == "shift" or "angry" in Girl.recent_history:
+            if action_context == "shift" or "_angry" in Girl.recent_history:
                 jump after_action
 
         if line == "came": #ex Player.focus <= 20:
@@ -1078,7 +1094,7 @@ label end_of_action_round(Girl, action):
 
     if Girl.SEXP >= 100 or approval_check(Girl, 1200, "LO"):
         pass
-    elif counter == (5 + Girl.action_counter[action]):
+    elif counter == (5 + Girl.action_counter[primary_action]):
         call starting_to_get_bored_reactions(Girl, action)
     elif primary_action in ["fondle_pussy", "finger_ass", "dildo_pussy", "dildo_ass"] and Girl.lust >= 80:
         pass
@@ -1086,9 +1102,9 @@ label end_of_action_round(Girl, action):
         pass
     elif primary_action in fondle_actions and counter == (15 + Girl.action_counter[primary_action]) and Girl.SEXP >= 15 and not approval_check(Girl, 1500):
         call definitely_bored_now_reactions(Girl, primary_action)
-    elif primary_action in ["handjob, footjob, titjob, blowjob", "sex", "anal", "hotdog"] and counter == (10 + Girl.action_counter[action]) and Girl.SEXP <= 100 and not approval_check(Girl, 1200, "LO"):
+    elif primary_action in ["handjob, footjob, titjob, blowjob", "sex", "anal", "hotdog"] and counter == (10 + Girl.action_counter[primary_action]) and Girl.SEXP <= 100 and not approval_check(Girl, 1200, "LO"):
         call definitely_bored_now_reactions(Girl, primary_action)
-    elif primary_action in ["kiss", "dildo_pussy", "dildo_ass"] and counter == (15 + Girl.action_counter[action]) and Girl.SEXP >= 15 and not approval_check(Girl, 1200, "LO"):
+    elif primary_action in ["kiss", "dildo_pussy", "dildo_ass"] and counter == (15 + Girl.action_counter[primary_action]) and Girl.SEXP >= 15 and not approval_check(Girl, 1200, "LO"):
         call definitely_bored_now_reactions(Girl, primary_action)
     elif primary_action in ["footjob"] and counter == 20:
         call definitely_bored_now_reactions(Girl, primary_action)

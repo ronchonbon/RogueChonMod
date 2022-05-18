@@ -880,7 +880,7 @@ screen Status_Screen:
         hbox:
             text "Day: [Day] [DayofWeek]" size 12
         hbox:
-            text "Time: [Current_Time]" size 12
+            text "Time: [current_time]" size 12
     frame:
 
         xpos 920
@@ -959,11 +959,11 @@ screen Inventory_screen:
 
 
         text "Inventory:" size 20
-        showif "dildo" in Player.inventory:
-            $ Inventory_Count = Player.inventory.count("dildo")
+        showif "_dildo" in Player.inventory:
+            $ Inventory_Count = Player.inventory.count("_dildo")
             text "Dildos: [Inventory_Count]" size 15
-        showif "vibrator" in Player.inventory:
-            $ Inventory_Count = Player.inventory.count("vibrator")
+        showif "_vibrator" in Player.inventory:
+            $ Inventory_Count = Player.inventory.count("_vibrator")
             text "Vibrators: [Inventory_Count]" size 15
         showif "Dazzler and Longshot" in Player.inventory:
             $ Inventory_Count = Player.inventory.count("Dazzler and Longshot")

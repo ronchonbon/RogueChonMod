@@ -1,6 +1,6 @@
 
 label Rogue_Fondle:
-    $ RogueX.mouth = "smile"
+    $ RogueX.mouth = "_smile"
     if not RogueX.remaining_actions:
         ch_r "I'm a bit worn out right now, [RogueX.player_petname], maybe later."
         return
@@ -53,7 +53,7 @@ label Rogue_FB_Prep:
                 $ RogueX.change_stat("inhibition", 50, 2)
                 "You start to fondle it."
             "Praise her.":
-                $ RogueX.change_face("sexy", 1)
+                $ RogueX.change_face("_sexy", 1)
                 $ RogueX.change_stat("inhibition", 80, 3)
                 ch_p "I like the initiative, [RogueX.petname]."
                 $ RogueX.nameCheck()
@@ -63,7 +63,7 @@ label Rogue_FB_Prep:
                 $ RogueX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
                 "You pull your hand back."
-                $ RogueX.change_face("surprised")
+                $ RogueX.change_face("_surprised")
                 $ RogueX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that right now, [RogueX.petname]."
                 $ RogueX.nameCheck()
@@ -79,7 +79,7 @@ label Rogue_FB_Prep:
     if not RogueX.Forced and action_context != "auto":
         $ approval_bonus = 0
         call Top_Off (RogueX)
-        if "angry" in RogueX.recent_history:
+        if "_angry" in RogueX.recent_history:
             return
 
     $ approval_bonus = 0
@@ -123,7 +123,7 @@ label Rogue_SB_Prep:
                 $ RogueX.change_stat("inhibition", 50, 2)
                 "You start to run your tongue along her nipple."
             "Praise her.":
-                $ RogueX.change_face("sexy", 1)
+                $ RogueX.change_face("_sexy", 1)
                 $ RogueX.change_stat("inhibition", 80, 3)
                 ch_p "Mmm, I like this, [RogueX.petname]."
                 $ RogueX.nameCheck()
@@ -133,7 +133,7 @@ label Rogue_SB_Prep:
                 $ RogueX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
                 "You pull your head back."
-                $ RogueX.change_face("surprised")
+                $ RogueX.change_face("_surprised")
                 $ RogueX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that right now, [RogueX.petname]."
                 $ RogueX.nameCheck()
@@ -149,7 +149,7 @@ label Rogue_SB_Prep:
     if not RogueX.Forced and action_context != "auto":
         $ approval_bonus = 0
         call Top_Off (RogueX)
-        if "angry" in RogueX.recent_history:
+        if "_angry" in RogueX.recent_history:
             return
 
     $ approval_bonus = 0
@@ -173,7 +173,7 @@ label Rogue_FT_Prep:
     if not RogueX.Forced and action_context != "auto":
         $ approval_bonus = 0
         call Bottoms_Off (RogueX)
-        if "angry" in RogueX.recent_history:
+        if "_angry" in RogueX.recent_history:
             return
 
     $ approval_bonus = 0
@@ -236,7 +236,7 @@ label Rogue_FP_Prep:
                 $ RogueX.change_stat("inhibition", 50, 2)
                 "You start to run your fingers along her pussy."
             "Praise her.":
-                $ RogueX.change_face("sexy", 1)
+                $ RogueX.change_face("_sexy", 1)
                 $ RogueX.change_stat("inhibition", 80, 3)
                 ch_p "I like the initiative, [RogueX.petname]."
                 $ RogueX.nameCheck()
@@ -246,7 +246,7 @@ label Rogue_FP_Prep:
                 $ RogueX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
                 "You pull your hand back."
-                $ RogueX.change_face("surprised")
+                $ RogueX.change_face("_surprised")
                 $ RogueX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that right now, [RogueX.petname]."
                 $ RogueX.nameCheck()
@@ -262,7 +262,7 @@ label Rogue_FP_Prep:
     if not RogueX.Forced and action_context != "auto":
         $ approval_bonus = 0
         call Bottoms_Off (RogueX)
-        if "angry" in RogueX.recent_history:
+        if "_angry" in RogueX.recent_history:
             return
     $ approval_bonus = 0
     if not RogueX.action_counter["fondle_pussy"]:
@@ -283,7 +283,7 @@ label Rogue_Insert_Pussy:
     call shift_focus (RogueX)
     if action_context == "auto":
         if approval_check(RogueX, 1100, TabM = 2):
-            $ RogueX.change_face("surprised")
+            $ RogueX.change_face("_surprised")
             $ RogueX.change_stat("obedience", 90, 1)
             $ RogueX.change_stat("obedience", 70, 2)
             $ RogueX.change_stat("inhibition", 70, 3)
@@ -291,7 +291,7 @@ label Rogue_Insert_Pussy:
             "As you slide a finger in, [RogueX.name] seems a bit surprised, but seems into it."
             jump Rogue_IP_Prep
         else:
-            $ RogueX.change_face("surprised")
+            $ RogueX.change_face("_surprised")
             $ RogueX.change_stat("love", 80, -2)
             $ RogueX.change_stat("obedience", 50, -3)
             ch_r "Keep it outside, [RogueX.player_petname]."
@@ -299,14 +299,14 @@ label Rogue_Insert_Pussy:
 
     if approval_check(RogueX, 1100, TabM = 2):
         if RogueX.Forced:
-            $ RogueX.change_face("sad")
+            $ RogueX.change_face("_sad")
             $ RogueX.change_stat("love", 70, -3, 1)
             $ RogueX.change_stat("love", 20, -2, 1)
             $ RogueX.change_stat("obedience", 90, 1)
             $ RogueX.change_stat("inhibition", 60, 1)
             ch_r "Sure, get in there."
         else:
-            $ RogueX.change_face("sexy", 1)
+            $ RogueX.change_face("_sexy", 1)
             $ RogueX.change_stat("love", 90, 1)
             $ RogueX.change_stat("inhibition", 50, 3)
             ch_r "God yes."
@@ -316,9 +316,9 @@ label Rogue_Insert_Pussy:
         jump Rogue_IP_Prep
     else:
 
-        $ RogueX.change_face("bemused", 2)
+        $ RogueX.change_face("_bemused", 2)
         ch_r "Um, no thanks, [RogueX.player_petname]."
-        $ RogueX.blushing = 1
+        $ RogueX.blushing = "_blush1"
     return
 
 
@@ -337,7 +337,7 @@ label Rogue_IP_Prep:
 
     if not RogueX.Forced and action_context != "auto":
         call Girl_Undress (RogueX, "bottom")
-        if "angry" in RogueX.recent_history:
+        if "_angry" in RogueX.recent_history:
             return
 
     if Taboo:
@@ -395,7 +395,7 @@ label Rogue_LP_Prep:
                 $ RogueX.change_stat("inhibition", 50, 2)
                 "You start licking."
             "Praise her.":
-                $ RogueX.change_face("sexy", 1)
+                $ RogueX.change_face("_sexy", 1)
                 $ RogueX.change_stat("inhibition", 80, 3)
                 ch_p "Mmm, I like this idea, [RogueX.petname]."
                 $ RogueX.nameCheck()
@@ -405,7 +405,7 @@ label Rogue_LP_Prep:
                 $ RogueX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
                 "You pull your head away."
-                $ RogueX.change_face("surprised")
+                $ RogueX.change_face("_surprised")
                 $ RogueX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that right now, [RogueX.petname]."
                 $ RogueX.nameCheck()
@@ -423,7 +423,7 @@ label Rogue_LP_Prep:
         if RogueX.PantsNum() >= 6:
             $ approval_bonus = 15
         call Bottoms_Off (RogueX)
-        if "angry" in RogueX.recent_history:
+        if "_angry" in RogueX.recent_history:
             return
 
     $ approval_bonus = 0
@@ -503,7 +503,7 @@ label Rogue_IA_Prep:
                 $ RogueX.change_stat("inhibition", 50, 2)
                 "You press your finger into it."
             "Praise her.":
-                $ RogueX.change_face("sexy", 1)
+                $ RogueX.change_face("_sexy", 1)
                 $ RogueX.change_stat("inhibition", 80, 3)
                 ch_p "Dirty girl, [RogueX.petname]."
                 $ RogueX.nameCheck()
@@ -513,7 +513,7 @@ label Rogue_IA_Prep:
                 $ RogueX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
                 "You pull your hand back."
-                $ RogueX.change_face("surprised")
+                $ RogueX.change_face("_surprised")
                 $ RogueX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that right now, [RogueX.petname]."
                 $ RogueX.nameCheck()
@@ -529,7 +529,7 @@ label Rogue_IA_Prep:
     if not RogueX.Forced and action_context != "auto":
         $ approval_bonus = 0
         call Bottoms_Off (RogueX)
-        if "angry" in RogueX.recent_history:
+        if "_angry" in RogueX.recent_history:
             return
 
     $ approval_bonus = 0
@@ -554,7 +554,7 @@ label Rogue_LA_Prep:
         if RogueX.PantsNum() >= 6:
             $ approval_bonus = 15
         call Bottoms_Off (RogueX)
-        if "angry" in RogueX.recent_history:
+        if "_angry" in RogueX.recent_history:
             return
     $ approval_bonus = 0
     call Rogue_Pussy_Launch ("eat_ass")

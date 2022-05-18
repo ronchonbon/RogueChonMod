@@ -35,41 +35,41 @@ label Laura_Handjob:
     $ approval = approval_check(LauraX, 1100, TabM = 3)
 
     if not LauraX.action_counter["handjob"] and "no_handjob" not in LauraX.recent_history:
-        $ LauraX.change_face("confused", 2)
+        $ LauraX.change_face("_confused", 2)
         ch_l "Handjob, huh. . ."
-        $ LauraX.blushing = 1
+        $ LauraX.blushing = "_blush1"
 
     if not LauraX.action_counter["handjob"] and approval:
         if LauraX.Forced:
-            $ LauraX.change_face("sad",1)
+            $ LauraX.change_face("_sad",1)
             $ LauraX.change_stat("love", 70, -3, 1)
             $ LauraX.change_stat("love", 20, -2, 1)
         elif LauraX.love >= (LauraX.obedience + LauraX.inhibition):
-            $ LauraX.change_face("sexy",1)
-            $ LauraX.brows = "sad"
-            $ LauraX.mouth = "smile"
+            $ LauraX.change_face("_sexy",1)
+            $ LauraX.brows = "_sad"
+            $ LauraX.mouth = "_smile"
             ch_l "You'd like that. . ."
         elif LauraX.obedience >= LauraX.inhibition:
-            $ LauraX.change_face("normal",1)
+            $ LauraX.change_face("_normal",1)
             ch_l "If you want, [LauraX.player_petname]. . ."
         else:
-            $ LauraX.change_face("lipbite",1)
+            $ LauraX.change_face("_lipbite",1)
             ch_l "Hmm. . ."
 
     elif approval:
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("love", 70, -3, 1)
             $ LauraX.change_stat("love", 20, -2, 1)
             ch_l "Nothing more than that?"
         elif not Taboo and "no_taboo" in LauraX.daily_history:
             ch_l "Well,this is a bit more secure. . ."
         elif "handjob" in LauraX.recent_history:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             ch_l "Hmm, another handy then. . ."
             jump Laura_HJ_Prep
         elif "handjob" in LauraX.daily_history:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Another one?",   
                 "I'm glad I don't grow calluses.", 
                 "Didn't get enough earlier?",
@@ -77,12 +77,12 @@ label Laura_Handjob:
                 "I guess you want more."])
             ch_l "[Line]"
         elif LauraX.action_counter["handjob"] < 3:
-            $ LauraX.change_face("sexy", 1)
-            $ LauraX.brows = "confused"
-            $ LauraX.mouth = "kiss"
+            $ LauraX.change_face("_sexy", 1)
+            $ LauraX.brows = "_confused"
+            $ LauraX.mouth = "_kiss"
             ch_l "You seem to like this one. . ."
         else:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ LauraX.ArmPose = 2
             $ Line = renpy.random.choice(["You want some more?",                 
                 "So you'd like another handy?",                 
@@ -93,14 +93,14 @@ label Laura_Handjob:
 
     if approval >= 2:
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("obedience", 90, 1)
             $ LauraX.change_stat("inhibition", 60, 1)
             ch_l "Ok, fine."
         elif "no_handjob" in LauraX.daily_history:
             ch_l "If it'll get you off my back. . ."
         else:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ LauraX.change_stat("love", 90, 1)
             $ LauraX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Sure, I guess.",                 
@@ -117,7 +117,7 @@ label Laura_Handjob:
         jump Laura_HJ_Prep
     else:
 
-        $ LauraX.change_face("angry")
+        $ LauraX.change_face("_angry")
         if "no_handjob" in LauraX.recent_history:
             ch_l "I just told you no, [LauraX.player_petname]."
         elif Taboo and "no_taboo" in LauraX.daily_history and "no_handjob" in LauraX.daily_history:
@@ -127,19 +127,19 @@ label Laura_Handjob:
         elif Taboo and "no_taboo" in LauraX.daily_history:
             ch_l "I said not in public."
         elif not LauraX.action_counter["handjob"]:
-            $ LauraX.change_face("bemused")
+            $ LauraX.change_face("_bemused")
             ch_l "Seriously, [LauraX.player_petname]. . ."
         else:
-            $ LauraX.change_face("bemused")
+            $ LauraX.change_face("_bemused")
             ch_l "Nah."
         menu:
             extend ""
             "Sorry, never mind." if "no_handjob" in LauraX.daily_history:
-                $ LauraX.change_face("bemused")
+                $ LauraX.change_face("_bemused")
                 ch_l "It's fine."
                 return
             "Maybe later?" if "no_handjob" not in LauraX.daily_history:
-                $ LauraX.change_face("bemused")
+                $ LauraX.change_face("_bemused")
                 ch_l "Maybe."
                 $ LauraX.change_stat("love", 80, 2)
                 $ LauraX.change_stat("inhibition", 70, 2)
@@ -151,7 +151,7 @@ label Laura_Handjob:
                 return
             "I'd really appreciate it. . .":
                 if approval:
-                    $ LauraX.change_face("sexy")
+                    $ LauraX.change_face("_sexy")
                     $ LauraX.change_stat("obedience", 90, 2)
                     $ LauraX.change_stat("obedience", 50, 2)
                     $ LauraX.change_stat("inhibition", 70, 3)
@@ -171,7 +171,7 @@ label Laura_Handjob:
 
                 $ approval = approval_check(LauraX, 350, "OI", TabM = 3)
                 if approval > 1 or (approval and LauraX.Forced):
-                    $ LauraX.change_face("sad")
+                    $ LauraX.change_face("_sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
                     $ LauraX.change_stat("love", 200, -2)
                     ch_l "Ok, fine."
@@ -182,36 +182,36 @@ label Laura_Handjob:
                     jump Laura_HJ_Prep
                 else:
                     $ LauraX.change_stat("love", 200, -15)
-                    $ LauraX.recent_history.append("angry")
-                    $ LauraX.daily_history.append("angry")
+                    $ LauraX.recent_history.append("_angry")
+                    $ LauraX.daily_history.append("_angry")
 
 
     $ LauraX.ArmPose = 1
     if "no_handjob" in LauraX.daily_history:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         ch_l "Don't ask again."
-        $ LauraX.recent_history.append("angry")
-        $ LauraX.daily_history.append("angry")
+        $ LauraX.recent_history.append("_angry")
+        $ LauraX.daily_history.append("_angry")
     elif LauraX.Forced:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         ch_l "No."
         $ LauraX.change_stat("lust", 200, 5)
         if LauraX.love > 300:
             $ LauraX.change_stat("love", 70, -2)
         $ LauraX.change_stat("obedience", 50, -2)
-        $ LauraX.recent_history.append("angry")
-        $ LauraX.daily_history.append("angry")
+        $ LauraX.recent_history.append("_angry")
+        $ LauraX.daily_history.append("_angry")
     elif Taboo:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         $ LauraX.daily_history.append("no_taboo")
         ch_l "This area's too exposed."
         $ LauraX.change_stat("lust", 200, 5)
         $ LauraX.change_stat("obedience", 50, -3)
     elif LauraX.action_counter["handjob"]:
-        $ LauraX.change_face("sad")
+        $ LauraX.change_face("_sad")
         ch_l "I'm not into it today. . ."
     else:
-        $ LauraX.change_face("normal", 1)
+        $ LauraX.change_face("_normal", 1)
         ch_l "I don't know where that's been lately."
     $ LauraX.recent_history.append("no_handjob")
     $ LauraX.daily_history.append("no_handjob")
@@ -227,13 +227,13 @@ label Laura_HJ_Prep:
         $ LauraX.inhibition += int(Taboo/10)
         $ LauraX.lust += int(Taboo/5)
 
-    $ LauraX.change_face("sexy")
+    $ LauraX.change_face("_sexy")
     if LauraX.Forced:
-        $ LauraX.change_face("sad")
+        $ LauraX.change_face("_sad")
     elif not LauraX.action_counter["handjob"]:
-        $ LauraX.brows = "confused"
-        $ LauraX.eyes = "sexy"
-        $ LauraX.mouth = "smile"
+        $ LauraX.brows = "_confused"
+        $ LauraX.eyes = "_sexy"
+        $ LauraX.mouth = "_smile"
 
     call Seen_First_Peen (LauraX, Partner, React=action_context)
     call Laura_HJ_Launch ("L")
@@ -252,7 +252,7 @@ label Laura_HJ_Prep:
                 $ LauraX.change_stat("inhibition", 30, 2)
                 "[LauraX.name] continues her actions."
             "Praise her.":
-                $ LauraX.change_face("sexy", 1)
+                $ LauraX.change_face("_sexy", 1)
                 $ LauraX.change_stat("inhibition", 70, 3)
                 ch_p "Oooh, that's good, [LauraX.petname]."
                 $ LauraX.nameCheck()
@@ -261,7 +261,7 @@ label Laura_HJ_Prep:
                 $ LauraX.change_stat("obedience", 90, 1)
                 $ LauraX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
-                $ LauraX.change_face("surprised")
+                $ LauraX.change_face("_surprised")
                 $ LauraX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that for now, [LauraX.petname]."
                 $ LauraX.nameCheck()
@@ -424,7 +424,7 @@ label Laura_HJ_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (LauraX)
-                if "angry" in LauraX.recent_history:
+                if "_angry" in LauraX.recent_history:
                     call Laura_HJ_Reset
                     return
                 $ LauraX.change_stat("lust", 200, 5)
@@ -439,7 +439,7 @@ label Laura_HJ_Cycle:
             if LauraX.lust >= 100:
 
                 call Girl_Cumming (LauraX)
-                if action_context == "shift" or "angry" in LauraX.recent_history:
+                if action_context == "shift" or "_angry" in LauraX.recent_history:
                     jump Laura_HJ_After
 
             if Line == "came":
@@ -466,7 +466,7 @@ label Laura_HJ_Cycle:
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
         if counter == 20:
-            $ LauraX.brows = "angry"
+            $ LauraX.brows = "_angry"
             menu:
                 ch_l "Hmm, this is boring, can we take a break?"
                 "How about a BJ?" if LauraX.remaining_actions and multi_action:
@@ -490,18 +490,18 @@ label Laura_HJ_Cycle:
                         $ LauraX.change_stat("obedience", 80, 2)
                         "She grumbles but gets back to work."
                     else:
-                        $ LauraX.change_face("angry", 1)
+                        $ LauraX.change_face("_angry", 1)
                         "She scowls at you, drops you cock and pulls back."
                         ch_l "I have better things to do with my time."
                         $ LauraX.change_stat("love", 50, -3, 1)
                         $ LauraX.change_stat("love", 80, -4, 1)
                         $ LauraX.change_stat("obedience", 30, -1, 1)
                         $ LauraX.change_stat("obedience", 50, -1, 1)
-                        $ LauraX.recent_history.append("angry")
-                        $ LauraX.daily_history.append("angry")
+                        $ LauraX.recent_history.append("_angry")
+                        $ LauraX.daily_history.append("_angry")
                         jump Laura_HJ_After
         elif counter == 10 and LauraX.SEXP <= 100 and not approval_check(LauraX, 1200, "LO"):
-            $ LauraX.brows = "confused"
+            $ LauraX.brows = "_confused"
             ch_l "This working for you?"
 
 
@@ -513,12 +513,12 @@ label Laura_HJ_Cycle:
             ch_l "Tic tock, [LauraX.player_petname]."
 
 
-    $ LauraX.change_face("bemused", 0)
+    $ LauraX.change_face("_bemused", 0)
     $ Line = 0
     ch_l "Ok, [LauraX.player_petname], breaktime."
 
 label Laura_HJ_After:
-    $ LauraX.change_face("sexy")
+    $ LauraX.change_face("_sexy")
 
     $ LauraX.action_counter["handjob"] += 1
     $ LauraX.remaining_actions -=1
@@ -532,17 +532,17 @@ label Laura_HJ_After:
     if "Laura Handi-Queen" in Achievements:
         pass
     elif LauraX.action_counter["handjob"] >= 10:
-        $ LauraX.change_face("smile", 1)
+        $ LauraX.change_face("_smile", 1)
         ch_l "Looks like you filled out the punch card, [LauraX.player_petname]."
         $ Achievements.append("Laura Handi-Queen")
         $ LauraX.SEXP += 5
     elif LauraX.action_counter["handjob"] == 1:
         $ LauraX.SEXP += 10
         if LauraX.love >= 500:
-            $ LauraX.mouth = "smile"
+            $ LauraX.mouth = "_smile"
             ch_l "That was kind of. . . pleasant. . ."
         elif Player.focus <= 20:
-            $ LauraX.mouth = "sad"
+            $ LauraX.mouth = "_sad"
             ch_l "Did that do it for you?"
     elif LauraX.action_counter["handjob"] == 5:
         ch_l "I think I've got this down, maybe I should get a punch card."
@@ -601,56 +601,56 @@ label Laura_Titjob:
     $ approval = approval_check(LauraX, 1200, TabM = 4)
 
     if not LauraX.action_counter["titjob"] and "no_titjob" not in LauraX.recent_history:
-        $ LauraX.change_face("surprised", 1)
-        $ LauraX.mouth = "kiss"
+        $ LauraX.change_face("_surprised", 1)
+        $ LauraX.mouth = "_kiss"
         ch_l "You want a titjob, huh?"
 
     if not LauraX.action_counter["titjob"] and approval:
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("love", 70, -3, 1)
             $ LauraX.change_stat("love", 20, -2, 1)
         elif LauraX.love >= (LauraX.obedience + LauraX.inhibition):
-            $ LauraX.change_face("sexy")
-            $ LauraX.brows = "sad"
-            $ LauraX.mouth = "smile"
+            $ LauraX.change_face("_sexy")
+            $ LauraX.brows = "_sad"
+            $ LauraX.mouth = "_smile"
             ch_l "Well, maybe you deserve it."
         elif LauraX.obedience >= LauraX.inhibition:
-            $ LauraX.change_face("normal")
+            $ LauraX.change_face("_normal")
             ch_l "If you'd like that. . ."
         elif LauraX.addiction >= 50:
-            $ LauraX.change_face("manic", 1)
+            $ LauraX.change_face("_manic", 1)
             ch_l "Hmmmm. . . ."
         else:
-            $ LauraX.change_face("sad")
-            $ LauraX.mouth = "smile"
+            $ LauraX.change_face("_sad")
+            $ LauraX.mouth = "_smile"
             ch_l "Sounds fun. . ."
     elif approval:
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("love", 70, -3, 1)
             $ LauraX.change_stat("love", 20, -2, 1)
             ch_l "You're kinda pushing it."
         elif not Taboo and "no_taboo" in LauraX.daily_history:
             ch_l "Ok, I guess this is secluded enough. . ."
         elif "titjob" in LauraX.recent_history:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             ch_l "Huh, again?"
             jump Laura_TJ_Prep
         elif "titjob" in LauraX.daily_history:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Back for more?",   
                 "You're really working these puppies.", 
                 "Didn't get enough earlier?",  
                 "You're really working these puppies."])
             ch_l "[Line]"
         elif LauraX.action_counter["titjob"] < 3:
-            $ LauraX.change_face("sexy", 1)
-            $ LauraX.brows = "confused"
-            $ LauraX.mouth = "kiss"
+            $ LauraX.change_face("_sexy", 1)
+            $ LauraX.brows = "_confused"
+            $ LauraX.mouth = "_kiss"
             ch_l "Another titjob??"
         else:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ LauraX.ArmPose = 2
             $ Line = renpy.random.choice(["You want some of this action [rubs her chest]?",                 
                 "So you'd like another titjob?",                  
@@ -663,14 +663,14 @@ label Laura_Titjob:
 
     if approval >= 2:
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("obedience", 90, 1)
             $ LauraX.change_stat("inhibition", 60, 1)
             ch_l "Well, could be worse. . ."
         elif "no_titjob" in LauraX.daily_history:
             ch_l "Hmm, I guess. . ."
         else:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ LauraX.change_stat("love", 90, 1)
             $ LauraX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Well, sure, put it here.",                 
@@ -687,7 +687,7 @@ label Laura_Titjob:
         jump Laura_TJ_Prep
     else:
 
-        $ LauraX.change_face("angry")
+        $ LauraX.change_face("_angry")
         if "no_titjob" in LauraX.recent_history:
             ch_l "I {i}just{/i} told you \"no,\" [LauraX.player_petname]."
         elif Taboo and "no_taboo" in LauraX.daily_history and "no_titjob" in LauraX.daily_history:
@@ -697,20 +697,20 @@ label Laura_Titjob:
         elif Taboo and "no_taboo" in LauraX.daily_history:
             ch_l "This is just way too exposed!"
         elif not LauraX.action_counter["titjob"]:
-            $ LauraX.change_face("bemused")
+            $ LauraX.change_face("_bemused")
             ch_l "I'm not really into that, [LauraX.player_petname]. . ."
         else:
-            $ LauraX.change_face("bemused")
+            $ LauraX.change_face("_bemused")
             ch_l "Not right now [LauraX.player_petname]. . ."
 
         menu:
             extend ""
             "Sorry, never mind." if "no_titjob" in LauraX.daily_history:
-                $ LauraX.change_face("bemused")
+                $ LauraX.change_face("_bemused")
                 ch_l "Yeah, ok, [LauraX.player_petname]."
                 return
             "Maybe later?" if "no_titjob" not in LauraX.daily_history:
-                $ LauraX.change_face("sexy")
+                $ LauraX.change_face("_sexy")
                 ch_l "Maybe."
                 $ LauraX.change_stat("love", 80, 2)
                 $ LauraX.change_stat("inhibition", 70, 2)
@@ -722,7 +722,7 @@ label Laura_Titjob:
                 return
             "I think this could be fun for both of us. . .":
                 if approval:
-                    $ LauraX.change_face("sexy")
+                    $ LauraX.change_face("_sexy")
                     $ LauraX.change_stat("obedience", 80, 2)
                     $ LauraX.change_stat("obedience", 40, 2)
                     $ LauraX.change_stat("inhibition", 70, 3)
@@ -741,7 +741,7 @@ label Laura_Titjob:
                     if approval >= 2 and LauraX.action_counter["blowjob"]:
                         $ LauraX.change_stat("inhibition", 80, 1)
                         $ LauraX.change_stat("inhibition", 60, 3)
-                        $ LauraX.change_face("confused", 1)
+                        $ LauraX.change_face("_confused", 1)
                         ch_l "I could maybe blow you?"
                         menu:
                             ch_l "How about that [[blowjob]?"
@@ -755,7 +755,7 @@ label Laura_Titjob:
                     if approval and LauraX.action_counter["handjob"]:
                         $ LauraX.change_stat("inhibition", 80, 1)
                         $ LauraX.change_stat("inhibition", 60, 3)
-                        $ LauraX.change_face("confused", 1)
+                        $ LauraX.change_face("_confused", 1)
                         ch_l "I could give you a handy?"
                         menu:
                             ch_l "What do you say?"
@@ -777,7 +777,7 @@ label Laura_Titjob:
                 $ LauraX.nameCheck()
                 $ approval = approval_check(LauraX, 700, "OI", TabM = 4)
                 if approval > 1 or (approval and LauraX.Forced):
-                    $ LauraX.change_face("sad")
+                    $ LauraX.change_face("_sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
                     $ LauraX.change_stat("love", 200, -2)
                     ch_l "Ok, fine, whip it out."
@@ -788,35 +788,35 @@ label Laura_Titjob:
                     jump Laura_TJ_Prep
                 else:
                     $ LauraX.change_stat("love", 200, -15)
-                    $ LauraX.recent_history.append("angry")
-                    $ LauraX.daily_history.append("angry")
+                    $ LauraX.recent_history.append("_angry")
+                    $ LauraX.daily_history.append("_angry")
 
 
     if "no_titjob" in LauraX.daily_history:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         ch_l "Look, I already told you no."
-        $ LauraX.recent_history.append("angry")
-        $ LauraX.daily_history.append("angry")
+        $ LauraX.recent_history.append("_angry")
+        $ LauraX.daily_history.append("_angry")
     elif LauraX.Forced:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         ch_l "No, try something else."
         $ LauraX.change_stat("lust", 200, 5)
         if LauraX.love > 300:
             $ LauraX.change_stat("love", 70, -2)
         $ LauraX.change_stat("obedience", 50, -2)
-        $ LauraX.recent_history.append("angry")
-        $ LauraX.daily_history.append("angry")
+        $ LauraX.recent_history.append("_angry")
+        $ LauraX.daily_history.append("_angry")
     elif Taboo:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         $ LauraX.daily_history.append("no_taboo")
         ch_l "You really expect me to do that here? This isn't exactly \"covert.\""
         $ LauraX.change_stat("lust", 200, 5)
         $ LauraX.change_stat("obedience", 50, -3)
     elif LauraX.action_counter["titjob"]:
-        $ LauraX.change_face("sad")
+        $ LauraX.change_face("_sad")
         ch_l "You'll know when it's time for that."
     else:
-        $ LauraX.change_face("normal", 1)
+        $ LauraX.change_face("_normal", 1)
         ch_l "Nah."
     $ LauraX.recent_history.append("no_titjob")
     $ LauraX.daily_history.append("no_titjob")
@@ -830,13 +830,13 @@ label Laura_TJ_Prep:
         $ LauraX.lust += int(Taboo/5)
 
 
-    $ LauraX.change_face("sexy")
+    $ LauraX.change_face("_sexy")
     if LauraX.Forced:
-        $ LauraX.change_face("sad")
+        $ LauraX.change_face("_sad")
     elif not LauraX.action_counter["titjob"]:
-        $ LauraX.brows = "confused"
-        $ LauraX.eyes = "sexy"
-        $ LauraX.mouth = "smile"
+        $ LauraX.brows = "_confused"
+        $ LauraX.eyes = "_sexy"
+        $ LauraX.mouth = "_smile"
 
     call Seen_First_Peen (LauraX, Partner, React=action_context)
     call Laura_TJ_Launch ("L")
@@ -852,7 +852,7 @@ label Laura_TJ_Prep:
                 $ LauraX.change_stat("inhibition", 40, 2)
                 "[LauraX.name] starts to slide them up and down."
             "Praise her.":
-                $ LauraX.change_face("sexy", 1)
+                $ LauraX.change_face("_sexy", 1)
                 $ LauraX.change_stat("inhibition", 80, 3)
                 ch_p "Oh, that sounds like a good idea, [LauraX.petname]."
                 $ LauraX.nameCheck()
@@ -861,7 +861,7 @@ label Laura_TJ_Prep:
                 $ LauraX.change_stat("obedience", 90, 1)
                 $ LauraX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
-                $ LauraX.change_face("confused")
+                $ LauraX.change_face("_confused")
                 $ LauraX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that for now, [LauraX.petname]."
                 $ LauraX.nameCheck()
@@ -1027,7 +1027,7 @@ label Laura_TJ_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (LauraX)
-                if "angry" in LauraX.recent_history:
+                if "_angry" in LauraX.recent_history:
                     call Laura_TJ_Reset
                     return
                 $ LauraX.change_stat("lust", 200, 5)
@@ -1042,7 +1042,7 @@ label Laura_TJ_Cycle:
             if LauraX.lust >= 100:
 
                 call Girl_Cumming (LauraX)
-                if action_context == "shift" or "angry" in LauraX.recent_history:
+                if action_context == "shift" or "_angry" in LauraX.recent_history:
                     jump Laura_TJ_After
 
             if Line == "came":
@@ -1073,10 +1073,10 @@ label Laura_TJ_Cycle:
         if LauraX.SEXP >= 100 or approval_check(LauraX, 1200, "LO"):
             pass
         elif counter == (5 + LauraX.action_counter["titjob"]):
-            $ LauraX.brows = "confused"
+            $ LauraX.brows = "_confused"
             ch_l "Are you getting close here? I'm getting bored."
         if counter == (10 + LauraX.action_counter["titjob"]):
-            $ LauraX.brows = "angry"
+            $ LauraX.brows = "_angry"
             menu:
                 ch_l "Seriously, can we do something else?"
                 "How about a BJ?" if LauraX.remaining_actions and multi_action:
@@ -1101,15 +1101,15 @@ label Laura_TJ_Cycle:
                         $ LauraX.change_stat("obedience", 80, 2)
                         "She grumbles but gets back to work."
                     else:
-                        $ LauraX.change_face("angry", 1)
+                        $ LauraX.change_face("_angry", 1)
                         "She scowls at you, drops you cock and pulls back."
                         ch_l "Well fuck you then."
                         $ LauraX.change_stat("love", 50, -3, 1)
                         $ LauraX.change_stat("love", 80, -4, 1)
                         $ LauraX.change_stat("obedience", 30, -1, 1)
                         $ LauraX.change_stat("obedience", 50, -1, 1)
-                        $ LauraX.recent_history.append("angry")
-                        $ LauraX.daily_history.append("angry")
+                        $ LauraX.recent_history.append("_angry")
+                        $ LauraX.daily_history.append("_angry")
                         jump Laura_TJ_After
 
 
@@ -1121,12 +1121,12 @@ label Laura_TJ_Cycle:
             ch_l "Tic tock, [LauraX.player_petname]."
 
 
-    $ LauraX.change_face("bemused", 0)
+    $ LauraX.change_face("_bemused", 0)
     $ Line = 0
     ch_l "Ok, [LauraX.player_petname], breaktime."
 
 label Laura_TJ_After:
-    $ LauraX.change_face("sexy")
+    $ LauraX.change_face("_sexy")
 
     $ LauraX.action_counter["titjob"] += 1
     $ LauraX.remaining_actions -=1
@@ -1141,10 +1141,10 @@ label Laura_TJ_After:
     elif LauraX.action_counter["titjob"] == 1:
         $ LauraX.SEXP += 12
         if LauraX.love >= 500:
-            $ LauraX.mouth = "smile"
+            $ LauraX.mouth = "_smile"
             ch_l "That was fun."
         elif Player.focus <= 20:
-            $ LauraX.mouth = "sad"
+            $ LauraX.mouth = "_sad"
             ch_l "Well I hope you got something out of that."
     elif LauraX.action_counter["titjob"] == 5:
         ch_l "You seem to enjoy that."
@@ -1200,48 +1200,48 @@ label Laura_Blowjob:
     $ approval = approval_check(LauraX, 1300, TabM = 4)
 
     if not LauraX.action_counter["blowjob"] and "no_blowjob" not in LauraX.recent_history:
-        $ LauraX.change_face("surprised", 2)
-        $ LauraX.mouth = "kiss"
+        $ LauraX.change_face("_surprised", 2)
+        $ LauraX.mouth = "_kiss"
         ch_l "You want me to suck your cock?"
         if LauraX.action_counter["handjob"]:
-            $ LauraX.mouth = "smile"
+            $ LauraX.mouth = "_smile"
             ch_l "Handjobs not enough now?"
-        $ LauraX.blushing = 1
+        $ LauraX.blushing = "_blush1"
 
     if not LauraX.action_counter["blowjob"] and approval:
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("love", 70, -3, 1)
             $ LauraX.change_stat("love", 20, -2, 1)
         elif LauraX.love >= (LauraX.obedience + LauraX.inhibition):
-            $ LauraX.change_face("sexy")
-            $ LauraX.brows = "sad"
-            $ LauraX.mouth = "smile"
+            $ LauraX.change_face("_sexy")
+            $ LauraX.brows = "_sad"
+            $ LauraX.mouth = "_smile"
             ch_l "I have wondered how you taste."
         elif LauraX.obedience >= LauraX.inhibition:
-            $ LauraX.change_face("normal")
+            $ LauraX.change_face("_normal")
             ch_l "If that's what you want. . ."
         elif LauraX.addiction >= 50:
-            $ LauraX.change_face("manic", 1)
+            $ LauraX.change_face("_manic", 1)
             ch_l "[[wipes away a little drool]"
         else:
-            $ LauraX.change_face("sad")
-            $ LauraX.mouth = "smile"
+            $ LauraX.change_face("_sad")
+            $ LauraX.mouth = "_smile"
             ch_l "Huh. . ."
     elif approval:
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("love", 70, -3, 1)
             $ LauraX.change_stat("love", 20, -2, 1)
             ch_l "Again?"
         elif not Taboo and "no_taboo" in LauraX.daily_history:
             ch_l "Hmm, this is private enough. . ."
         elif "blowjob" in LauraX.recent_history:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             ch_l "Mmm, again? [[yawns]"
             jump Laura_BJ_Prep
         elif "blowjob" in LauraX.daily_history:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Back again so soon?",   
                 "Wear'in me out here.",  
                 "I must be too good at this.", 
@@ -1249,12 +1249,12 @@ label Laura_Blowjob:
                 "Didn't get enough earlier?"])
             ch_l "[Line]"
         elif LauraX.action_counter["blowjob"] < 3:
-            $ LauraX.change_face("sexy", 1)
-            $ LauraX.brows = "confused"
-            $ LauraX.mouth = "kiss"
+            $ LauraX.change_face("_sexy", 1)
+            $ LauraX.brows = "_confused"
+            $ LauraX.mouth = "_kiss"
             ch_l "You'd like another blowjob?"
         else:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ LauraX.ArmPose = 2
             $ Line = renpy.random.choice(["You want me to [mimes blowing]?",                 
                 "So you want another blowjob?",                 
@@ -1266,14 +1266,14 @@ label Laura_Blowjob:
 
     if approval >= 2:
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("obedience", 90, 1)
             $ LauraX.change_stat("inhibition", 60, 1)
             ch_l "Whatever."
         elif "no_blowjob" in LauraX.daily_history:
             ch_l "Fine. . ."
         else:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ LauraX.change_stat("love", 90, 1)
             $ LauraX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Sure. Ahhhhhh.",                 
@@ -1290,7 +1290,7 @@ label Laura_Blowjob:
         jump Laura_BJ_Prep
     else:
 
-        $ LauraX.change_face("angry")
+        $ LauraX.change_face("_angry")
         if "no_blowjob" in LauraX.recent_history:
             ch_l "Just told you I wouldn't, [LauraX.player_petname]."
         elif Taboo and "no_taboo" in LauraX.daily_history and "no_blowjob" in LauraX.daily_history:
@@ -1300,19 +1300,19 @@ label Laura_Blowjob:
         elif Taboo and "no_taboo" in LauraX.daily_history:
             ch_l "Like I told you, too public!"
         elif not LauraX.action_counter["blowjob"]:
-            $ LauraX.change_face("bemused")
+            $ LauraX.change_face("_bemused")
             ch_l "I don't know if your taste will match your scent, [LauraX.player_petname]. . ."
         else:
-            $ LauraX.change_face("bemused")
+            $ LauraX.change_face("_bemused")
             ch_l "I don't know, [LauraX.player_petname]!"
         menu:
             extend ""
             "Sorry, never mind." if "no_blowjob" in LauraX.daily_history:
-                $ LauraX.change_face("bemused")
+                $ LauraX.change_face("_bemused")
                 ch_l "Cool."
                 return
             "Maybe later?" if "no_blowjob" not in LauraX.daily_history:
-                $ LauraX.change_face("sexy")
+                $ LauraX.change_face("_sexy")
                 ch_l "Yeah, maybe, [LauraX.player_petname]."
                 $ LauraX.change_stat("love", 80, 2)
                 $ LauraX.change_stat("inhibition", 70, 2)
@@ -1324,7 +1324,7 @@ label Laura_Blowjob:
                 return
             "Come on, please?":
                 if approval:
-                    $ LauraX.change_face("sexy")
+                    $ LauraX.change_face("_sexy")
                     $ LauraX.change_stat("obedience", 90, 2)
                     $ LauraX.change_stat("obedience", 50, 2)
                     $ LauraX.change_stat("inhibition", 70, 3)
@@ -1342,7 +1342,7 @@ label Laura_Blowjob:
                     if approval_check(LauraX, 1100, TabM = 3):
                         $ LauraX.change_stat("inhibition", 80, 1)
                         $ LauraX.change_stat("inhibition", 60, 3)
-                        $ LauraX.change_face("confused", 1)
+                        $ LauraX.change_face("_confused", 1)
                         $ LauraX.ArmPose = 2
                         if LauraX.action_counter["handjob"]:
                             ch_l "Couldn't I just use my hand again?"
@@ -1367,7 +1367,7 @@ label Laura_Blowjob:
                 $ LauraX.nameCheck()
                 $ approval = approval_check(LauraX, 750, "OI", TabM = 3)
                 if approval > 1 or (approval and LauraX.Forced):
-                    $ LauraX.change_face("sad")
+                    $ LauraX.change_face("_sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
                     $ LauraX.change_stat("love", 200, -2)
                     ch_l "Whatever. . ."
@@ -1378,43 +1378,43 @@ label Laura_Blowjob:
                     jump Laura_BJ_Prep
                 else:
                     $ LauraX.change_stat("love", 200, -15)
-                    $ LauraX.recent_history.append("angry")
-                    $ LauraX.daily_history.append("angry")
+                    $ LauraX.recent_history.append("_angry")
+                    $ LauraX.daily_history.append("_angry")
 
 
     if "no_blowjob" in LauraX.daily_history:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         $ LauraX.ArmPose = 2
         $ LauraX.Claws = 1
         ch_l "Suck this then."
         $ LauraX.ArmPose = 1
         $ LauraX.Claws = 0
-        $ LauraX.recent_history.append("angry")
-        $ LauraX.daily_history.append("angry")
+        $ LauraX.recent_history.append("_angry")
+        $ LauraX.daily_history.append("_angry")
     elif LauraX.Forced:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         ch_l "That's just pushing it."
         $ LauraX.change_stat("lust", 200, 5)
         if LauraX.love > 300:
             $ LauraX.change_stat("love", 70, -2)
         $ LauraX.change_stat("obedience", 50, -2)
-        $ LauraX.recent_history.append("angry")
-        $ LauraX.daily_history.append("angry")
+        $ LauraX.recent_history.append("_angry")
+        $ LauraX.daily_history.append("_angry")
         $ LauraX.recent_history.append("no_blowjob")
         $ LauraX.daily_history.append("no_blowjob")
         return
     elif Taboo:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         $ LauraX.daily_history.append("no_taboo")
         ch_l "This area's too exposed."
         $ LauraX.change_stat("lust", 200, 5)
         $ LauraX.change_stat("obedience", 50, -3)
         return
     elif LauraX.action_counter["blowjob"]:
-        $ LauraX.change_face("sad")
+        $ LauraX.change_face("_sad")
         ch_l "Nah, not this time."
     else:
-        $ LauraX.change_face("normal", 1)
+        $ LauraX.change_face("_normal", 1)
         ch_l "Nope."
     $ LauraX.recent_history.append("no_blowjob")
     $ LauraX.daily_history.append("no_blowjob")
@@ -1429,13 +1429,13 @@ label Laura_BJ_Prep:
         $ LauraX.inhibition += int(Taboo/10)
         $ LauraX.lust += int(Taboo/5)
 
-    $ LauraX.change_face("sexy")
+    $ LauraX.change_face("_sexy")
     if LauraX.Forced:
-        $ LauraX.change_face("sad")
+        $ LauraX.change_face("_sad")
     elif not LauraX.action_counter["blowjob"]:
-        $ LauraX.brows = "confused"
-        $ LauraX.eyes = "sexy"
-        $ LauraX.mouth = "smile"
+        $ LauraX.brows = "_confused"
+        $ LauraX.eyes = "_sexy"
+        $ LauraX.mouth = "_smile"
 
     call Seen_First_Peen (LauraX, Partner, React=action_context)
     call Laura_BJ_Launch ("L")
@@ -1450,7 +1450,7 @@ label Laura_BJ_Prep:
                 $ LauraX.change_stat("inhibition", 40, 2)
                 "[LauraX.name] continues licking at it."
             "Praise her.":
-                $ LauraX.change_face("sexy", 1)
+                $ LauraX.change_face("_sexy", 1)
                 $ LauraX.change_stat("inhibition", 80, 3)
                 ch_p "Hmmm, keep doing that, [LauraX.petname]."
                 $ LauraX.nameCheck()
@@ -1459,7 +1459,7 @@ label Laura_BJ_Prep:
                 $ LauraX.change_stat("obedience", 90, 1)
                 $ LauraX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
-                $ LauraX.change_face("surprised")
+                $ LauraX.change_face("_surprised")
                 $ LauraX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that for now, [LauraX.petname]."
                 $ LauraX.nameCheck()
@@ -1658,7 +1658,7 @@ label Laura_BJ_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (LauraX)
-                if "angry" in LauraX.recent_history:
+                if "_angry" in LauraX.recent_history:
                     call Laura_BJ_Reset
                     return
                 $ LauraX.change_stat("lust", 200, 5)
@@ -1673,7 +1673,7 @@ label Laura_BJ_Cycle:
             if LauraX.lust >= 100:
 
                 call Girl_Cumming (LauraX)
-                if action_context == "shift" or "angry" in LauraX.recent_history:
+                if action_context == "shift" or "_angry" in LauraX.recent_history:
                     jump Laura_BJ_After
 
             if Line == "came":
@@ -1701,7 +1701,7 @@ label Laura_BJ_Cycle:
         if LauraX.SEXP >= 100 or approval_check(LauraX, 1200, "LO"):
             pass
         elif counter == (10 + LauraX.action_counter["blowjob"]):
-            $ LauraX.brows = "angry"
+            $ LauraX.brows = "_angry"
             menu:
                 ch_l "I'm getting kinda bored. Can we do something else?"
                 "How about a Handy?" if LauraX.remaining_actions and multi_action:
@@ -1726,18 +1726,18 @@ label Laura_BJ_Cycle:
                         $ LauraX.change_stat("obedience", 80, 2)
                         "She grumbles but gets back to work."
                     else:
-                        $ LauraX.change_face("angry", 1)
+                        $ LauraX.change_face("_angry", 1)
                         "She scowls at you, drops you cock and pulls back."
                         ch_l "Well fuck you then."
                         $ LauraX.change_stat("love", 50, -3, 1)
                         $ LauraX.change_stat("love", 80, -4, 1)
                         $ LauraX.change_stat("obedience", 30, -1, 1)
                         $ LauraX.change_stat("obedience", 50, -1, 1)
-                        $ LauraX.recent_history.append("angry")
-                        $ LauraX.daily_history.append("angry")
+                        $ LauraX.recent_history.append("_angry")
+                        $ LauraX.daily_history.append("_angry")
                         jump Laura_BJ_After
         elif counter == (5 + LauraX.action_counter["blowjob"]) and LauraX.SEXP <= 100 and not approval_check(LauraX, 1200, "LO"):
-            $ LauraX.brows = "confused"
+            $ LauraX.brows = "_confused"
             ch_l "Are you getting close here? I'm bored."
 
 
@@ -1749,12 +1749,12 @@ label Laura_BJ_Cycle:
             ch_l "Tic tock, [LauraX.player_petname]."
 
 
-    $ LauraX.change_face("bemused", 0)
+    $ LauraX.change_face("_bemused", 0)
     $ Line = 0
     ch_l "Ok, I'm taking a quick break. . ."
 
 label Laura_BJ_After:
-    $ LauraX.change_face("sexy")
+    $ LauraX.change_face("_sexy")
 
     $ LauraX.action_counter["blowjob"] += 1
     $ LauraX.remaining_actions -=1
@@ -1767,7 +1767,7 @@ label Laura_BJ_After:
     if "Laura Jobber" in Achievements:
         pass
     elif LauraX.action_counter["blowjob"] >= 10:
-        $ LauraX.change_face("smile", 1)
+        $ LauraX.change_face("_smile", 1)
         ch_l "Your flavor is intoxicating."
         $ Achievements.append("Laura Jobber")
         $ LauraX.SEXP += 5
@@ -1776,29 +1776,29 @@ label Laura_BJ_After:
     elif LauraX.action_counter["blowjob"] == 1:
         $ LauraX.SEXP += 15
         if LauraX.love >= 500:
-            $ LauraX.mouth = "smile"
+            $ LauraX.mouth = "_smile"
             ch_l "Hey, whaddaya know, that wasn't bad."
         elif Player.focus <= 20:
-            $ LauraX.mouth = "sad"
+            $ LauraX.mouth = "_sad"
             ch_l "I hope you enjoyed that."
     elif LauraX.action_counter["blowjob"] == 5:
         ch_l "I'm really getting the hang of this. . . right?"
         menu:
             "[[nod]":
-                $ LauraX.change_face("smile", 1)
+                $ LauraX.change_face("_smile", 1)
                 $ LauraX.change_stat("love", 90, 15)
                 $ LauraX.change_stat("obedience", 80, 5)
                 $ LauraX.change_stat("inhibition", 90, 10)
             "[[shake head \"no\"]":
                 if approval_check(LauraX, 500, "O"):
-                    $ LauraX.change_face("sad", 2)
+                    $ LauraX.change_face("_sad", 2)
                     $ LauraX.change_stat("love", 200, -5)
                 else:
-                    $ LauraX.change_face("angry", 2)
+                    $ LauraX.change_face("_angry", 2)
                     $ LauraX.change_stat("love", 200, -25)
                 $ LauraX.change_stat("obedience", 80, 10)
                 ch_l ". . ."
-                $ LauraX.change_face("sad", 1)
+                $ LauraX.change_face("_sad", 1)
 
     $ approval_bonus = 0
     if action_context != "shift":
@@ -1812,9 +1812,9 @@ label Laura_BJ_After:
 
 
 label Laura_Dildo_Check:
-    if "dildo" in Player.inventory:
+    if "_dildo" in Player.inventory:
         "You pull out a large rubber dildo. Lucky you remembered to keep it handy."
-    elif "dildo" in LauraX.inventory:
+    elif "_dildo" in LauraX.inventory:
         "You ask [LauraX.name] to get out her favorite Dildo."
     else:
         "You don't have one of those on you."
@@ -1865,7 +1865,7 @@ label Laura_Dildo_Pussy:
                 $ LauraX.upskirt = 1
             elif LauraX.PantsNum() >= 6:
                 "[LauraX.name] grabs her dildo, pulling down her pants as she does."
-                $ LauraX.legs = 0
+                $ LauraX.legs = ""
             else:
                 "[LauraX.name] grabs her dildo, rubbing is suggestively against her crotch."
             $ LauraX.SeenPanties = 1
@@ -1878,7 +1878,7 @@ label Laura_Dildo_Pussy:
                     $ LauraX.change_stat("inhibition", 50, 2)
                     "[LauraX.name] slides it in."
                 "Go for it.":
-                    $ LauraX.change_face("sexy", 1)
+                    $ LauraX.change_face("_sexy", 1)
                     $ LauraX.change_stat("inhibition", 80, 3)
                     ch_p "Oh yeah, [LauraX.petname], let's do this."
                     $ LauraX.nameCheck()
@@ -1887,7 +1887,7 @@ label Laura_Dildo_Pussy:
                     $ LauraX.change_stat("obedience", 90, 1)
                     $ LauraX.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ LauraX.change_face("surprised")
+                    $ LauraX.change_face("_surprised")
                     $ LauraX.change_stat("inhibition", 70, 1)
                     ch_p "Let's not do that right now, [LauraX.petname]."
                     $ LauraX.nameCheck()
@@ -1905,30 +1905,30 @@ label Laura_Dildo_Pussy:
 
     if action_context == "auto":
         "You rub the dildo across her body, and along her moist slit."
-        $ LauraX.change_face("surprised", 1)
+        $ LauraX.change_face("_surprised", 1)
 
         if (LauraX.action_counter["dildo_pussy"] and approval) or (approval > 1):
             "[LauraX.name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
-            $ LauraX.change_face("sexy")
+            $ LauraX.change_face("_sexy")
             $ LauraX.change_stat("obedience", 70, 3)
             $ LauraX.change_stat("inhibition", 50, 3)
             $ LauraX.change_stat("inhibition", 70, 1)
             ch_l "Ooo, [LauraX.player_petname], toys!"
             jump Laura_DP_Prep
         else:
-            $ LauraX.brows = "angry"
+            $ LauraX.brows = "_angry"
             menu:
                 ch_l "Hey, what are you planning to do with that?!"
                 "Sorry, sorry! Never mind.":
                     if approval:
-                        $ LauraX.change_face("sexy", 1)
+                        $ LauraX.change_face("_sexy", 1)
                         $ LauraX.change_stat("obedience", 70, 3)
                         $ LauraX.change_stat("inhibition", 50, 3)
                         $ LauraX.change_stat("inhibition", 70, 1)
                         ch_l "Well, now that you mention it. . ."
                         jump Laura_DP_Prep
                     "You pull back before you really get it in."
-                    $ LauraX.change_face("bemused", 1)
+                    $ LauraX.change_face("_bemused", 1)
                     if LauraX.action_counter["dildo_pussy"]:
                         ch_l "Well ok, [LauraX.player_petname], maybe warn me next time?"
                     else:
@@ -1940,7 +1940,7 @@ label Laura_Dildo_Pussy:
                     $ LauraX.change_stat("obedience", 70, 3)
                     $ LauraX.change_stat("inhibition", 50, 3)
                     if not approval_check(LauraX, 700, "O", TabM=1):
-                        $ LauraX.change_face("angry")
+                        $ LauraX.change_face("_angry")
                         "[LauraX.name] shoves you away and slaps you in the face."
                         ch_l "Jerk!"
                         ch_l "Ask nice if you want to stick something in my pussy!"
@@ -1951,10 +1951,10 @@ label Laura_Dildo_Pussy:
                             $ renpy.pop_call()
                         if renpy.showing("Laura_SexSprite"):
                             call Laura_Sex_Reset
-                        $ LauraX.recent_history.append("angry")
-                        $ LauraX.daily_history.append("angry")
+                        $ LauraX.recent_history.append("_angry")
+                        $ LauraX.daily_history.append("_angry")
                     else:
-                        $ LauraX.change_face("sad")
+                        $ LauraX.change_face("_sad")
                         "[LauraX.name] doesn't seem to be into this, you're lucky she's so obedient."
                         jump Laura_DP_Prep
         return
@@ -1962,58 +1962,58 @@ label Laura_Dildo_Pussy:
 
     if not LauraX.action_counter["dildo_pussy"]:
 
-        $ LauraX.change_face("surprised", 1)
-        $ LauraX.mouth = "kiss"
+        $ LauraX.change_face("_surprised", 1)
+        $ LauraX.mouth = "_kiss"
         ch_l "Hmmm, so you'd like to try out some toys?"
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             ch_l "I suppose there are worst things you could ask for."
 
     if not LauraX.action_counter["dildo_pussy"] and approval:
 
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("love", 70, -3, 1)
             $ LauraX.change_stat("love", 20, -2, 1)
         elif LauraX.love >= (LauraX.obedience + LauraX.inhibition):
-            $ LauraX.change_face("sexy")
-            $ LauraX.brows = "sad"
-            $ LauraX.mouth = "smile"
+            $ LauraX.change_face("_sexy")
+            $ LauraX.brows = "_sad"
+            $ LauraX.mouth = "_smile"
             ch_l "I've had a reasonable amount of experience with these, you know. . ."
         elif LauraX.obedience >= LauraX.inhibition:
-            $ LauraX.change_face("normal")
+            $ LauraX.change_face("_normal")
             ch_l "If that's what you want, [LauraX.player_petname]. . ."
         else:
-            $ LauraX.change_face("sad")
-            $ LauraX.mouth = "smile"
+            $ LauraX.change_face("_sad")
+            $ LauraX.mouth = "_smile"
             ch_l "I guess it could be fun with a partner. . ."
 
     elif approval:
 
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("love", 70, -3, 1)
             $ LauraX.change_stat("love", 20, -2, 1)
             ch_l "The toys again?"
         elif not Taboo and "no_taboo" in LauraX.daily_history:
             ch_l "Well, at least you got us some privacy this time. . ."
         elif "dildo_pussy" in LauraX.recent_history:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             ch_l "Mmm, again? Ok, let's get to it."
             jump Laura_DP_Prep
         elif "dildo_pussy" in LauraX.daily_history:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Breaking out the toys again?",       
                     "Didn't get enough earlier?",
                     "You're going to wear me out."])
             ch_l "[Line]"
         elif LauraX.action_counter["dildo_pussy"] < 3:
-            $ LauraX.change_face("sexy", 1)
-            $ LauraX.brows = "confused"
-            $ LauraX.mouth = "kiss"
+            $ LauraX.change_face("_sexy", 1)
+            $ LauraX.brows = "_confused"
+            $ LauraX.mouth = "_kiss"
             ch_l "You want to stick it in my pussy again?"
         else:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ LauraX.ArmPose = 2
             $ Line = renpy.random.choice(["You want some of this action?",                 
                     "So you'd like another go?",                 
@@ -2025,12 +2025,12 @@ label Laura_Dildo_Pussy:
     if approval >= 2:
 
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("obedience", 90, 1)
             $ LauraX.change_stat("inhibition", 60, 1)
             ch_l "Ok, fine."
         else:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ LauraX.change_stat("love", 90, 1)
             $ LauraX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Well, sure, stick it in.",                 
@@ -2048,7 +2048,7 @@ label Laura_Dildo_Pussy:
     else:
 
 
-        $ LauraX.change_face("angry")
+        $ LauraX.change_face("_angry")
         if "no_dildo" in LauraX.recent_history:
             ch_l "What part of \"no,\" did you not get, [LauraX.player_petname]?"
         elif Taboo and "no_taboo" in LauraX.daily_history and "no_dildo" in LauraX.daily_history:
@@ -2058,19 +2058,19 @@ label Laura_Dildo_Pussy:
         elif Taboo and "no_taboo" in LauraX.daily_history:
             ch_l "Stop swinging that thing around in public!"
         elif not LauraX.action_counter["dildo_pussy"]:
-            $ LauraX.change_face("bemused")
+            $ LauraX.change_face("_bemused")
             ch_l "I'm just not into toys, [LauraX.player_petname]. . ."
         else:
-            $ LauraX.change_face("bemused")
+            $ LauraX.change_face("_bemused")
             ch_l "I don't think we need any toys, [LauraX.player_petname]."
         menu:
             extend ""
             "Sorry, never mind." if "no_dildo" in LauraX.daily_history:
-                $ LauraX.change_face("bemused")
+                $ LauraX.change_face("_bemused")
                 ch_l "Yeah, ok, [LauraX.player_petname]."
                 return
             "Maybe later?" if "no_dildo" not in LauraX.daily_history:
-                $ LauraX.change_face("sexy")
+                $ LauraX.change_face("_sexy")
                 ch_l "Maybe I'll practice on my own time, [LauraX.player_petname]."
                 $ LauraX.change_stat("love", 80, 2)
                 $ LauraX.change_stat("inhibition", 70, 2)
@@ -2082,7 +2082,7 @@ label Laura_Dildo_Pussy:
                 return
             "I think you'd like it. . .":
                 if approval:
-                    $ LauraX.change_face("sexy")
+                    $ LauraX.change_face("_sexy")
                     $ LauraX.change_stat("obedience", 90, 2)
                     $ LauraX.change_stat("obedience", 50, 2)
                     $ LauraX.change_stat("inhibition", 70, 3)
@@ -2099,7 +2099,7 @@ label Laura_Dildo_Pussy:
 
                 $ approval = approval_check(LauraX, 950, "OI", TabM = 3)
                 if approval > 1 or (approval and LauraX.Forced):
-                    $ LauraX.change_face("sad")
+                    $ LauraX.change_face("_sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
                     $ LauraX.change_stat("love", 200, -5)
                     ch_l "Ok, fine. If we're going to do this, stick it in already."
@@ -2110,36 +2110,36 @@ label Laura_Dildo_Pussy:
                     jump Laura_DP_Prep
                 else:
                     $ LauraX.change_stat("love", 200, -20)
-                    $ LauraX.recent_history.append("angry")
-                    $ LauraX.daily_history.append("angry")
+                    $ LauraX.recent_history.append("_angry")
+                    $ LauraX.daily_history.append("_angry")
 
 
     $ LauraX.ArmPose = 1
     if "no_dildo" in LauraX.daily_history:
         ch_l "Learn to take \"no\" for an answer, [LauraX.player_petname]."
-        $ LauraX.recent_history.append("angry")
-        $ LauraX.daily_history.append("angry")
+        $ LauraX.recent_history.append("_angry")
+        $ LauraX.daily_history.append("_angry")
     elif LauraX.Forced:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         ch_l "I'm not going to let you use that on me."
         $ LauraX.change_stat("lust", 200, 5)
         if LauraX.love > 300:
             $ LauraX.change_stat("love", 70, -2)
         $ LauraX.change_stat("obedience", 50, -2)
-        $ LauraX.recent_history.append("angry")
-        $ LauraX.daily_history.append("angry")
+        $ LauraX.recent_history.append("_angry")
+        $ LauraX.daily_history.append("_angry")
     elif Taboo:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         $ LauraX.recent_history.append("no_taboo")
         $ LauraX.daily_history.append("no_taboo")
         ch_l "Not here!"
         $ LauraX.change_stat("lust", 200, 5)
         $ LauraX.change_stat("obedience", 50, -3)
     elif LauraX.action_counter["dildo_pussy"]:
-        $ LauraX.change_face("sad")
+        $ LauraX.change_face("_sad")
         ch_l "Sorry, you can keep your toys to yourself."
     else:
-        $ LauraX.change_face("normal", 1)
+        $ LauraX.change_face("_normal", 1)
         ch_l "No way."
     $ LauraX.recent_history.append("no_dildo")
     $ LauraX.daily_history.append("no_dildo")
@@ -2153,7 +2153,7 @@ label Laura_DP_Prep:
     if not LauraX.Forced and action_context != "auto":
         $ approval_bonus = 15 if LauraX.PantsNum() >= 6 else 0
         call Bottoms_Off (LauraX)
-        if "angry" in LauraX.recent_history:
+        if "_angry" in LauraX.recent_history:
             return
 
     $ approval_bonus = 0
@@ -2309,7 +2309,7 @@ label Laura_DP_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (LauraX)
-                if "angry" in LauraX.recent_history:
+                if "_angry" in LauraX.recent_history:
                     call Laura_Pos_Reset
                     return
                 $ LauraX.change_stat("lust", 200, 5)
@@ -2324,7 +2324,7 @@ label Laura_DP_Cycle:
             if LauraX.lust >= 100:
 
                 call Girl_Cumming (LauraX)
-                if action_context == "shift" or "angry" in LauraX.recent_history:
+                if action_context == "shift" or "_angry" in LauraX.recent_history:
                     jump Laura_DP_After
 
             if Line == "came":
@@ -2353,12 +2353,12 @@ label Laura_DP_Cycle:
         if LauraX.SEXP >= 100 or approval_check(LauraX, 1200, "LO"):
             pass
         elif counter == (5 + LauraX.action_counter["dildo_pussy"]):
-            $ LauraX.brows = "confused"
+            $ LauraX.brows = "_confused"
             ch_l "What are you even doing down there?"
         elif LauraX.lust >= 80:
             pass
         elif counter == (15 + LauraX.action_counter["dildo_pussy"]) and LauraX.SEXP >= 15 and not approval_check(LauraX, 1500):
-            $ LauraX.brows = "confused"
+            $ LauraX.brows = "_confused"
             menu:
                 ch_l "[LauraX.player_petname], this is getting uncomfortable, maybe we could try something else."
                 "Finish up.":
@@ -2375,7 +2375,7 @@ label Laura_DP_Cycle:
                         $ LauraX.change_stat("obedience", 80, 2)
                         "She grumbles but lets you keep going."
                     else:
-                        $ LauraX.change_face("angry", 1)
+                        $ LauraX.change_face("_angry", 1)
                         call Laura_Pos_Reset
                         "She scowls at you and pulls back."
                         ch_l "Well if that's your attitude, I don't need your \"help\"."
@@ -2383,8 +2383,8 @@ label Laura_DP_Cycle:
                         $ LauraX.change_stat("love", 80, -4, 1)
                         $ LauraX.change_stat("obedience", 30, -1, 1)
                         $ LauraX.change_stat("obedience", 50, -1, 1)
-                        $ LauraX.recent_history.append("angry")
-                        $ LauraX.daily_history.append("angry")
+                        $ LauraX.recent_history.append("_angry")
+                        $ LauraX.daily_history.append("_angry")
                         jump Laura_DP_After
 
 
@@ -2394,7 +2394,7 @@ label Laura_DP_Cycle:
             ch_l "Tic tock, [LauraX.player_petname]."
 
 
-    $ LauraX.change_face("bemused", 0)
+    $ LauraX.change_face("_bemused", 0)
     $ Line = 0
     ch_l "Ok, [LauraX.player_petname], breaktime."
 
@@ -2403,7 +2403,7 @@ label Laura_DP_After:
     if not action_context:
         call Laura_Pos_Reset
 
-    $ LauraX.change_face("sexy")
+    $ LauraX.change_face("_sexy")
 
     $ LauraX.action_counter["dildo_pussy"] += 1
     $ LauraX.remaining_actions -=1
@@ -2416,7 +2416,7 @@ label Laura_DP_After:
             if LauraX.love >= 500 and "unsatisfied" not in LauraX.recent_history:
                 ch_l "Thanks for the extra hand. . ."
             elif LauraX.obedience <= 500 and Player.focus <= 20:
-                $ LauraX.change_face("perplexed", 1)
+                $ LauraX.change_face("_perplexed", 1)
                 ch_l "Did you like that?"
 
     $ approval_bonus = 0
@@ -2482,7 +2482,7 @@ label Laura_Dildo_Ass:
                 $ LauraX.upskirt = 1
             elif LauraX.PantsNum() >= 6:
                 "[LauraX.name] grabs her dildo, pulling down her pants as she does."
-                $ LauraX.legs = 0
+                $ LauraX.legs = ""
             else:
                 "[LauraX.name] grabs her dildo, rubbing is suggestively against her ass."
             $ LauraX.SeenPanties = 1
@@ -2495,7 +2495,7 @@ label Laura_Dildo_Ass:
                     $ LauraX.change_stat("inhibition", 50, 2)
                     "[LauraX.name] slides it in."
                 "Go for it.":
-                    $ LauraX.change_face("sexy", 1)
+                    $ LauraX.change_face("_sexy", 1)
                     $ LauraX.change_stat("inhibition", 80, 3)
                     ch_p "Oh yeah, [LauraX.petname], let's do this."
                     $ LauraX.nameCheck()
@@ -2504,7 +2504,7 @@ label Laura_Dildo_Ass:
                     $ LauraX.change_stat("obedience", 90, 1)
                     $ LauraX.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ LauraX.change_face("surprised")
+                    $ LauraX.change_face("_surprised")
                     $ LauraX.change_stat("inhibition", 70, 1)
                     ch_p "Let's not do that right now, [LauraX.petname]."
                     $ LauraX.nameCheck()
@@ -2522,12 +2522,12 @@ label Laura_Dildo_Ass:
 
     if action_context == "auto":
         "You rub the dildo across her body, and against her tight anus."
-        $ LauraX.change_face("surprised", 1)
+        $ LauraX.change_face("_surprised", 1)
 
         if (LauraX.action_counter["dildo_ass"] and approval) or (approval > 1):
 
             "[LauraX.name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
-            $ LauraX.change_face("sexy")
+            $ LauraX.change_face("_sexy")
             $ LauraX.change_stat("obedience", 70, 3)
             $ LauraX.change_stat("inhibition", 50, 3)
             $ LauraX.change_stat("inhibition", 70, 1)
@@ -2535,19 +2535,19 @@ label Laura_Dildo_Ass:
             jump Laura_DA_Prep
         else:
 
-            $ LauraX.brows = "angry"
+            $ LauraX.brows = "_angry"
             menu:
                 ch_l "Hey, what are you planning to do with that?!"
                 "Sorry, sorry! Never mind.":
                     if approval:
-                        $ LauraX.change_face("sexy", 1)
+                        $ LauraX.change_face("_sexy", 1)
                         $ LauraX.change_stat("obedience", 70, 3)
                         $ LauraX.change_stat("inhibition", 50, 3)
                         $ LauraX.change_stat("inhibition", 70, 1)
                         ch_l "Well, now that you mention it. . ."
                         jump Laura_DA_Prep
                     "You pull back before you really get it in."
-                    $ LauraX.change_face("bemused", 1)
+                    $ LauraX.change_face("_bemused", 1)
                     if LauraX.action_counter["dildo_ass"]:
                         ch_l "Well ok, [LauraX.player_petname], maybe warn me next time?"
                     else:
@@ -2559,7 +2559,7 @@ label Laura_Dildo_Ass:
                     $ LauraX.change_stat("obedience", 70, 3)
                     $ LauraX.change_stat("inhibition", 50, 3)
                     if not approval_check(LauraX, 700, "O", TabM=1):
-                        $ LauraX.change_face("angry")
+                        $ LauraX.change_face("_angry")
                         "[LauraX.name] shoves you away and slaps you in the face."
                         ch_l "Jerk!"
                         ch_l "Ask nice if you want to stick something in my ass!"
@@ -2570,10 +2570,10 @@ label Laura_Dildo_Ass:
                             $ renpy.pop_call()
                         if renpy.showing("Laura_SexSprite"):
                             call Laura_Sex_Reset
-                        $ LauraX.recent_history.append("angry")
-                        $ LauraX.daily_history.append("angry")
+                        $ LauraX.recent_history.append("_angry")
+                        $ LauraX.daily_history.append("_angry")
                     else:
-                        $ LauraX.change_face("sad")
+                        $ LauraX.change_face("_sad")
                         "[LauraX.name] doesn't seem to be into this, you're lucky she's so obedient."
                         jump Laura_DA_Prep
         return
@@ -2581,40 +2581,40 @@ label Laura_Dildo_Ass:
 
     if not LauraX.action_counter["dildo_ass"]:
 
-        $ LauraX.change_face("surprised", 1)
-        $ LauraX.mouth = "kiss"
+        $ LauraX.change_face("_surprised", 1)
+        $ LauraX.mouth = "_kiss"
         ch_l "You want to try and fit that. . .?"
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             ch_l "Always about the butt, huh?"
 
     if not LauraX.used_to_anal and ("dildo_anal" in LauraX.recent_history or "anal" in LauraX.recent_history or "dildo_anal" in LauraX.daily_history or "anal" in LauraX.daily_history):
-        $ LauraX.change_face("bemused", 1)
+        $ LauraX.change_face("_bemused", 1)
         ch_l "I'm still sore from earlier. . ."
 
     if not LauraX.action_counter["dildo_ass"] and approval:
 
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("love", 70, -3, 1)
             $ LauraX.change_stat("love", 20, -2, 1)
         elif LauraX.love >= (LauraX.obedience + LauraX.inhibition):
-            $ LauraX.change_face("sexy")
-            $ LauraX.brows = "sad"
-            $ LauraX.mouth = "smile"
+            $ LauraX.change_face("_sexy")
+            $ LauraX.brows = "_sad"
+            $ LauraX.mouth = "_smile"
             ch_l "I haven't actually used one of these, back there before. . ."
         elif LauraX.obedience >= LauraX.inhibition:
-            $ LauraX.change_face("normal")
+            $ LauraX.change_face("_normal")
             ch_l "If that's what you want, [LauraX.player_petname]. . ."
         else:
-            $ LauraX.change_face("sad")
-            $ LauraX.mouth = "smile"
+            $ LauraX.change_face("_sad")
+            $ LauraX.mouth = "_smile"
             ch_l "I guess it could be fun two-player. . ."
 
     elif approval:
 
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("love", 70, -3, 1)
             $ LauraX.change_stat("love", 20, -2, 1)
             ch_l "The toys again?"
@@ -2623,19 +2623,19 @@ label Laura_Dildo_Ass:
         elif "dildo_anal" in LauraX.daily_history and not LauraX.used_to_anal:
             pass
         elif "dildo_anal" in LauraX.daily_history:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Breaking out the toys again?",       
                     "Didn't get enough earlier?",
                     "I'm still a bit sore from earlier.",
                     "You're going to wear me out."])
             ch_l "[Line]"
         elif LauraX.action_counter["dildo_ass"] < 3:
-            $ LauraX.change_face("sexy", 1)
-            $ LauraX.brows = "confused"
-            $ LauraX.mouth = "kiss"
+            $ LauraX.change_face("_sexy", 1)
+            $ LauraX.brows = "_confused"
+            $ LauraX.mouth = "_kiss"
             ch_l "You want to stick it in my ass again?"
         else:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ LauraX.ArmPose = 2
             $ Line = renpy.random.choice(["You want some of this action?",                 
                     "So you'd like another go?",                 
@@ -2647,12 +2647,12 @@ label Laura_Dildo_Ass:
     if approval >= 2:
 
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("obedience", 90, 1)
             $ LauraX.change_stat("inhibition", 60, 1)
             ch_l "Ok, fine."
         else:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ LauraX.change_stat("love", 90, 1)
             $ LauraX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Well, sure, stick it in.",                 
@@ -2670,7 +2670,7 @@ label Laura_Dildo_Ass:
     else:
 
 
-        $ LauraX.change_face("angry")
+        $ LauraX.change_face("_angry")
         if "no_dildo" in LauraX.recent_history:
             ch_l "What part of \"no,\" did you not get, [LauraX.player_petname]?"
         elif Taboo and "no_taboo" in LauraX.daily_history and "no_dildo" in LauraX.daily_history:
@@ -2680,22 +2680,22 @@ label Laura_Dildo_Ass:
         elif Taboo and "no_taboo" in LauraX.daily_history:
             ch_l "I already told you that I wouldn't do that out here!"
         elif not LauraX.action_counter["dildo_ass"]:
-            $ LauraX.change_face("bemused")
+            $ LauraX.change_face("_bemused")
             ch_l "I'm just not into toys, [LauraX.player_petname]. . ."
         elif not LauraX.used_to_anal and "dildo_anal" not in LauraX.daily_history:
-            $ LauraX.change_face("perplexed")
+            $ LauraX.change_face("_perplexed")
             ch_l "You could have been a bit more gentle last time, [LauraX.player_petname]. . ."
         else:
-            $ LauraX.change_face("bemused")
+            $ LauraX.change_face("_bemused")
             ch_l "I don't think we need any toys, [LauraX.player_petname]."
         menu:
             extend ""
             "Sorry, never mind." if "no_dildo" in LauraX.daily_history:
-                $ LauraX.change_face("bemused")
+                $ LauraX.change_face("_bemused")
                 ch_l "Yeah, ok, [LauraX.player_petname]."
                 return
             "Maybe later?" if "no_dildo" not in LauraX.daily_history:
-                $ LauraX.change_face("sexy")
+                $ LauraX.change_face("_sexy")
                 ch_l "Maybe I'll practice on my own time, [LauraX.player_petname]."
                 $ LauraX.change_stat("love", 80, 2)
                 $ LauraX.change_stat("inhibition", 70, 2)
@@ -2707,7 +2707,7 @@ label Laura_Dildo_Ass:
                 return
             "I think you'd like it. . .":
                 if approval:
-                    $ LauraX.change_face("sexy")
+                    $ LauraX.change_face("_sexy")
                     $ LauraX.change_stat("obedience", 90, 2)
                     $ LauraX.change_stat("obedience", 50, 2)
                     $ LauraX.change_stat("inhibition", 70, 3)
@@ -2724,7 +2724,7 @@ label Laura_Dildo_Ass:
 
                 $ approval = approval_check(LauraX, 1050, "OI", TabM = 3)
                 if approval > 1 or (approval and LauraX.Forced):
-                    $ LauraX.change_face("sad")
+                    $ LauraX.change_face("_sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
                     $ LauraX.change_stat("love", 200, -5)
                     ch_l "Ok, fine. If we're going to do this, stick it in already."
@@ -2735,39 +2735,39 @@ label Laura_Dildo_Ass:
                     jump Laura_DA_Prep
                 else:
                     $ LauraX.change_stat("love", 200, -20)
-                    $ LauraX.recent_history.append("angry")
-                    $ LauraX.daily_history.append("angry")
+                    $ LauraX.recent_history.append("_angry")
+                    $ LauraX.daily_history.append("_angry")
 
 
     $ LauraX.ArmPose = 1
     if "no_dildo" in LauraX.daily_history:
         ch_l "Learn to take \"no\" for an answer, [LauraX.player_petname]."
-        $ LauraX.recent_history.append("angry")
-        $ LauraX.daily_history.append("angry")
+        $ LauraX.recent_history.append("_angry")
+        $ LauraX.daily_history.append("_angry")
     elif LauraX.Forced:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         ch_l "I'm not going to let you use that on me."
         $ LauraX.change_stat("lust", 200, 5)
         if LauraX.love > 300:
             $ LauraX.change_stat("love", 70, -2)
         $ LauraX.change_stat("obedience", 50, -2)
-        $ LauraX.recent_history.append("angry")
-        $ LauraX.daily_history.append("angry")
+        $ LauraX.recent_history.append("_angry")
+        $ LauraX.daily_history.append("_angry")
     elif Taboo:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         $ LauraX.recent_history.append("no_taboo")
         $ LauraX.daily_history.append("no_taboo")
         ch_l "Not here!"
         $ LauraX.change_stat("lust", 200, 5)
         $ LauraX.change_stat("obedience", 50, -3)
     elif not LauraX.used_to_anal and "dildo_anal" in LauraX.daily_history:
-        $ LauraX.change_face("bemused")
+        $ LauraX.change_face("_bemused")
         ch_l "Sorry, I just need a little break back there, [LauraX.player_petname]."
     elif LauraX.action_counter["dildo_ass"]:
-        $ LauraX.change_face("sad")
+        $ LauraX.change_face("_sad")
         ch_l "Sorry, you can keep your toys out of there."
     else:
-        $ LauraX.change_face("normal", 1)
+        $ LauraX.change_face("_normal", 1)
         ch_l "No way."
     $ LauraX.recent_history.append("no_dildo")
     $ LauraX.daily_history.append("no_dildo")
@@ -2781,7 +2781,7 @@ label Laura_DA_Prep:
     if not LauraX.Forced and action_context != "auto":
         $ approval_bonus = 20 if LauraX.PantsNum() >= 6 else 0
         call Bottoms_Off (LauraX)
-        if "angry" in LauraX.recent_history:
+        if "_angry" in LauraX.recent_history:
             return
 
     $ approval_bonus = 0
@@ -2929,7 +2929,7 @@ label Laura_DA_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (LauraX)
-                if "angry" in LauraX.recent_history:
+                if "_angry" in LauraX.recent_history:
                     call Laura_Pos_Reset
                     return
                 $ LauraX.change_stat("lust", 200, 5)
@@ -2944,7 +2944,7 @@ label Laura_DA_Cycle:
             if LauraX.lust >= 100:
 
                 call Girl_Cumming (LauraX)
-                if action_context == "shift" or "angry" in LauraX.recent_history:
+                if action_context == "shift" or "_angry" in LauraX.recent_history:
                     jump Laura_DA_After
 
             if Line == "came":
@@ -2973,12 +2973,12 @@ label Laura_DA_Cycle:
         if LauraX.SEXP >= 100 or approval_check(LauraX, 1200, "LO"):
             pass
         elif counter == (5 + LauraX.action_counter["dildo_ass"]):
-            $ LauraX.brows = "confused"
+            $ LauraX.brows = "_confused"
             ch_l "What are you even doing down there?"
         elif LauraX.lust >= 80:
             pass
         elif counter == (15 + LauraX.action_counter["dildo_ass"]) and LauraX.SEXP >= 15 and not approval_check(LauraX, 1500):
-            $ LauraX.brows = "confused"
+            $ LauraX.brows = "_confused"
             menu:
                 ch_l "[LauraX.player_petname], this is getting uncomfortable, maybe we could try something else."
                 "Finish up.":
@@ -2995,7 +2995,7 @@ label Laura_DA_Cycle:
                         $ LauraX.change_stat("obedience", 80, 2)
                         "She grumbles but lets you keep going."
                     else:
-                        $ LauraX.change_face("angry", 1)
+                        $ LauraX.change_face("_angry", 1)
                         call Laura_Pos_Reset
                         "She scowls at you and pulls back."
                         ch_l "Well if that's your attitude, I don't need your \"help\"."
@@ -3003,8 +3003,8 @@ label Laura_DA_Cycle:
                         $ LauraX.change_stat("love", 80, -4, 1)
                         $ LauraX.change_stat("obedience", 30, -1, 1)
                         $ LauraX.change_stat("obedience", 50, -1, 1)
-                        $ LauraX.recent_history.append("angry")
-                        $ LauraX.daily_history.append("angry")
+                        $ LauraX.recent_history.append("_angry")
+                        $ LauraX.daily_history.append("_angry")
                         jump Laura_DA_After
 
 
@@ -3014,7 +3014,7 @@ label Laura_DA_Cycle:
             ch_l "Tic tock, [LauraX.player_petname]."
 
 
-    $ LauraX.change_face("bemused", 0)
+    $ LauraX.change_face("_bemused", 0)
     $ Line = 0
     ch_l "Ok, [LauraX.player_petname], breaktime."
 
@@ -3022,7 +3022,7 @@ label Laura_DA_After:
     if not action_context:
         call Laura_Pos_Reset
 
-    $ LauraX.change_face("sexy")
+    $ LauraX.change_face("_sexy")
 
     $ LauraX.action_counter["dildo_ass"] += 1
     $ LauraX.remaining_actions -=1
@@ -3038,7 +3038,7 @@ label Laura_DA_After:
                 else:
                     ch_l "Ouch. . ."
             elif LauraX.obedience <= 500 and Player.focus <= 20:
-                $ LauraX.change_face("perplexed", 1)
+                $ LauraX.change_face("_perplexed", 1)
                 ch_l "Did you like that?"
 
     $ approval_bonus = 0
@@ -3050,9 +3050,9 @@ label Laura_DA_After:
 
 
 label Laura_Vibrator_Check:
-    if "vibrator" in Player.inventory:
+    if "_vibrator" in Player.inventory:
         "You pull out the \"shocker\" vibrator, handy."
-    elif "vibrator" in LauraX.inventory:
+    elif "_vibrator" in LauraX.inventory:
         "You ask [LauraX.name] to get out her vibrator."
     else:
         "You don't have one of those on you."
@@ -3105,7 +3105,7 @@ label Laura_Footjob:
                     $ LauraX.change_stat("inhibition", 30, 2)
                     "[LauraX.name] continues her actions."
                 "Praise her.":
-                    $ LauraX.change_face("sexy", 1)
+                    $ LauraX.change_face("_sexy", 1)
                     $ LauraX.change_stat("inhibition", 70, 3)
                     ch_p "Oooh, that's good, [LauraX.petname]."
                     $ LauraX.nameCheck()
@@ -3114,7 +3114,7 @@ label Laura_Footjob:
                     $ LauraX.change_stat("obedience", 90, 1)
                     $ LauraX.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ LauraX.change_face("surprised")
+                    $ LauraX.change_face("_surprised")
                     $ LauraX.change_stat("inhibition", 70, 1)
                     ch_p "Let's not do that for now, [LauraX.petname]."
                     $ LauraX.nameCheck()
@@ -3133,40 +3133,40 @@ label Laura_Footjob:
             return
 
     if not LauraX.action_counter["footjob"] and "no_foot" not in LauraX.recent_history:
-        $ LauraX.change_face("confused", 2)
+        $ LauraX.change_face("_confused", 2)
         ch_l "Standard footjob?"
-        $ LauraX.blushing = 1
+        $ LauraX.blushing = "_blush1"
 
     if not LauraX.action_counter["footjob"] and approval:
         if LauraX.Forced:
-            $ LauraX.change_face("sad",1)
+            $ LauraX.change_face("_sad",1)
             $ LauraX.change_stat("love", 70, -3, 1)
             $ LauraX.change_stat("love", 20, -2, 1)
         elif LauraX.love >= (LauraX.obedience + LauraX.inhibition):
-            $ LauraX.change_face("sexy",1)
-            $ LauraX.brows = "sad"
-            $ LauraX.mouth = "smile"
+            $ LauraX.change_face("_sexy",1)
+            $ LauraX.brows = "_sad"
+            $ LauraX.mouth = "_smile"
             ch_l "I guess it couldn't hurt. . ."
         elif LauraX.obedience >= LauraX.inhibition:
-            $ LauraX.change_face("normal",1)
+            $ LauraX.change_face("_normal",1)
             ch_l "If you want, [LauraX.player_petname]. . ."
         elif LauraX.addiction >= 50:
-            $ LauraX.change_face("manic", 1)
+            $ LauraX.change_face("_manic", 1)
             ch_l "Okay. . ."
         else:
-            $ LauraX.change_face("lipbite",1)
+            $ LauraX.change_face("_lipbite",1)
             ch_l "Sure. . ."
 
     elif approval:
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("love", 70, -3, 1)
             $ LauraX.change_stat("love", 20, -2, 1)
             ch_l "That's it?"
         elif not Taboo and "no_taboo" in LauraX.daily_history:
             ch_l "Um, I guess this is secure enough. . ."
         elif "foot" in LauraX.daily_history:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             ch_l "More of that, huh. . ."
             jump Laura_FJ_Prep
 
@@ -3177,12 +3177,12 @@ label Laura_Footjob:
 
 
         elif LauraX.action_counter["footjob"] < 3:
-            $ LauraX.change_face("sexy", 1)
-            $ LauraX.brows = "confused"
-            $ LauraX.mouth = "kiss"
+            $ LauraX.change_face("_sexy", 1)
+            $ LauraX.brows = "_confused"
+            $ LauraX.mouth = "_kiss"
             ch_l "Hmm, magic toes. . ."
         else:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ LauraX.ArmPose = 2
             $ Line = renpy.random.choice(["You want me to use my feet?",                 
                 "So you'd like another footjob?",                 
@@ -3193,14 +3193,14 @@ label Laura_Footjob:
 
     if approval >= 2:
         if LauraX.Forced:
-            $ LauraX.change_face("sad")
+            $ LauraX.change_face("_sad")
             $ LauraX.change_stat("obedience", 90, 1)
             $ LauraX.change_stat("inhibition", 60, 1)
             ch_l "Ok, sure."
         elif "no_foot" in LauraX.daily_history:
             ch_l "Fine."
         else:
-            $ LauraX.change_face("sexy", 1)
+            $ LauraX.change_face("_sexy", 1)
             $ LauraX.change_stat("love", 90, 1)
             $ LauraX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Sure, I guess.",                 
@@ -3217,7 +3217,7 @@ label Laura_Footjob:
         jump Laura_FJ_Prep
     else:
 
-        $ LauraX.change_face("angry")
+        $ LauraX.change_face("_angry")
         if "no_foot" in LauraX.recent_history:
             ch_l "You should listen better, [LauraX.player_petname]."
         elif Taboo and "no_taboo" in LauraX.daily_history and "no_foot" in LauraX.daily_history:
@@ -3227,19 +3227,19 @@ label Laura_Footjob:
         elif Taboo and "no_taboo" in LauraX.daily_history:
             ch_l "I said not in public!"
         elif not LauraX.action_counter["footjob"]:
-            $ LauraX.change_face("bemused")
+            $ LauraX.change_face("_bemused")
             ch_l "Eh, [LauraX.player_petname]. . ."
         else:
-            $ LauraX.change_face("bemused")
+            $ LauraX.change_face("_bemused")
             ch_l "Not now, ok?"
         menu:
             extend ""
             "Sorry, never mind." if "no_foot" in LauraX.daily_history:
-                $ LauraX.change_face("bemused")
+                $ LauraX.change_face("_bemused")
                 ch_l "Sure, no problem."
                 return
             "Maybe later?" if "no_foot" not in LauraX.daily_history:
-                $ LauraX.change_face("sexy")
+                $ LauraX.change_face("_sexy")
                 ch_l ". . ."
                 ch_l "Maybe."
                 $ LauraX.change_stat("love", 80, 2)
@@ -3252,7 +3252,7 @@ label Laura_Footjob:
                 return
             "I'd really appreciate it. . .":
                 if approval:
-                    $ LauraX.change_face("sexy")
+                    $ LauraX.change_face("_sexy")
                     $ LauraX.change_stat("obedience", 90, 2)
                     $ LauraX.change_stat("obedience", 50, 2)
                     $ LauraX.change_stat("inhibition", 70, 3)
@@ -3272,7 +3272,7 @@ label Laura_Footjob:
 
                 $ approval = approval_check(LauraX, 400, "OI", TabM = 3)
                 if approval > 1 or (approval and LauraX.Forced):
-                    $ LauraX.change_face("sad")
+                    $ LauraX.change_face("_sad")
                     $ LauraX.change_stat("love", 70, -5, 1)
                     $ LauraX.change_stat("love", 200, -2)
                     ch_l "Fine."
@@ -3283,36 +3283,36 @@ label Laura_Footjob:
                     jump Laura_FJ_Prep
                 else:
                     $ LauraX.change_stat("love", 200, -15)
-                    $ LauraX.recent_history.append("angry")
-                    $ LauraX.daily_history.append("angry")
+                    $ LauraX.recent_history.append("_angry")
+                    $ LauraX.daily_history.append("_angry")
 
 
     $ LauraX.ArmPose = 1
     if "no_foot" in LauraX.daily_history:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         ch_l "I'm not telling you again."
-        $ LauraX.recent_history.append("angry")
-        $ LauraX.daily_history.append("angry")
+        $ LauraX.recent_history.append("_angry")
+        $ LauraX.daily_history.append("_angry")
     elif LauraX.Forced:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         ch_l "You understand that I have claws down there too. . ."
         $ LauraX.change_stat("lust", 200, 5)
         if LauraX.love > 300:
             $ LauraX.change_stat("love", 70, -2)
         $ LauraX.change_stat("obedience", 50, -2)
-        $ LauraX.recent_history.append("angry")
-        $ LauraX.daily_history.append("angry")
+        $ LauraX.recent_history.append("_angry")
+        $ LauraX.daily_history.append("_angry")
     elif Taboo:
-        $ LauraX.change_face("angry", 1)
+        $ LauraX.change_face("_angry", 1)
         $ LauraX.daily_history.append("no_taboo")
         ch_l "This is too exposed."
         $ LauraX.change_stat("lust", 200, 5)
         $ LauraX.change_stat("obedience", 50, -3)
     elif LauraX.action_counter["footjob"]:
-        $ LauraX.change_face("sad")
+        $ LauraX.change_face("_sad")
         ch_l "Not right now."
     else:
-        $ LauraX.change_face("normal", 1)
+        $ LauraX.change_face("_normal", 1)
         ch_l "I'd rather not."
     $ LauraX.recent_history.append("no_foot")
     $ LauraX.daily_history.append("no_foot")
@@ -3328,13 +3328,13 @@ label Laura_FJ_Prep:
         $ LauraX.inhibition += int(Taboo/10)
         $ LauraX.lust += int(Taboo/5)
 
-    $ LauraX.change_face("sexy")
+    $ LauraX.change_face("_sexy")
     if LauraX.Forced:
-        $ LauraX.change_face("sad")
+        $ LauraX.change_face("_sad")
     elif not LauraX.action_counter["footjob"]:
-        $ LauraX.brows = "confused"
-        $ LauraX.eyes = "sexy"
-        $ LauraX.mouth = "smile"
+        $ LauraX.brows = "_confused"
+        $ LauraX.eyes = "_sexy"
+        $ LauraX.mouth = "_smile"
 
     call Seen_First_Peen (LauraX, Partner)
 
@@ -3504,7 +3504,7 @@ label Laura_FJ_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (LauraX)
-                if "angry" in LauraX.recent_history:
+                if "_angry" in LauraX.recent_history:
                     call Laura_Sex_Reset
                     return
                 $ LauraX.change_stat("lust", 200, 5)
@@ -3519,7 +3519,7 @@ label Laura_FJ_Cycle:
             if LauraX.lust >= 100:
 
                 call Girl_Cumming (LauraX)
-                if action_context == "shift" or "angry" in LauraX.recent_history:
+                if action_context == "shift" or "_angry" in LauraX.recent_history:
                     jump Laura_FJ_After
 
             if Line == "came":
@@ -3546,7 +3546,7 @@ label Laura_FJ_Cycle:
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
         if counter == 20:
-            $ LauraX.brows = "angry"
+            $ LauraX.brows = "_angry"
             menu:
                 ch_l "Hmm, this is getting a bit boring."
                 "How about a BJ?" if LauraX.remaining_actions and multi_action:
@@ -3576,18 +3576,18 @@ label Laura_FJ_Cycle:
                         $ LauraX.change_stat("obedience", 80, 2)
                         "She grumbles but gets back to work."
                     else:
-                        $ LauraX.change_face("angry", 1)
+                        $ LauraX.change_face("_angry", 1)
                         "She scowls at you and pulls back."
                         ch_l "Not interested."
                         $ LauraX.change_stat("love", 50, -3, 1)
                         $ LauraX.change_stat("love", 80, -4, 1)
                         $ LauraX.change_stat("obedience", 30, -1, 1)
                         $ LauraX.change_stat("obedience", 50, -1, 1)
-                        $ LauraX.recent_history.append("angry")
-                        $ LauraX.daily_history.append("angry")
+                        $ LauraX.recent_history.append("_angry")
+                        $ LauraX.daily_history.append("_angry")
                         jump Laura_FJ_After
         elif counter == 10 and LauraX.SEXP <= 100 and not approval_check(LauraX, 1200, "LO"):
-            $ LauraX.brows = "confused"
+            $ LauraX.brows = "_confused"
             ch_l "Ok, seriously, let's try something different."
 
 
@@ -3599,12 +3599,12 @@ label Laura_FJ_Cycle:
             ch_l "Tic tock, [LauraX.player_petname]."
 
 
-    $ LauraX.change_face("bemused", 0)
+    $ LauraX.change_face("_bemused", 0)
     $ Line = 0
     ch_l "Ok, [LauraX.player_petname], breaktime."
 
 label Laura_FJ_After:
-    $ LauraX.change_face("sexy")
+    $ LauraX.change_face("_sexy")
 
     $ LauraX.action_counter["footjob"] += 1
     $ LauraX.remaining_actions -=1
@@ -3618,17 +3618,17 @@ label Laura_FJ_After:
     if "Laurapedi" in Achievements:
         pass
     elif LauraX.action_counter["footjob"] >= 10:
-        $ LauraX.change_face("smile", 1)
+        $ LauraX.change_face("_smile", 1)
         ch_l "I think I'm finally back into practice on this."
         $ Achievements.append("Laurapedi")
         $ LauraX.SEXP += 5
     elif LauraX.action_counter["footjob"] == 1:
         $ LauraX.SEXP += 10
         if LauraX.love >= 500:
-            $ LauraX.mouth = "smile"
+            $ LauraX.mouth = "_smile"
             ch_l "Did you like that? . ."
         elif Player.focus <= 20:
-            $ LauraX.mouth = "sad"
+            $ LauraX.mouth = "_sad"
             ch_l "Did that do it for you?"
     elif LauraX.action_counter["footjob"] == 5:
         ch_l "I'm getting used to this. . ."

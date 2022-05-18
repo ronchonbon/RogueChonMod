@@ -211,19 +211,19 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
         if not action_speed:
 
             if "hungry" in GirlA.traits:
-                $ GirlA.change_face("sly")
+                $ GirlA.change_face("_sly")
                 $ Line = GirlA.name + " stares at your cock. She licks her lips in anticipation"
                 $ TempLust += 3 if GirlA.lust < 40 else 1
             elif GirlA.action_counter["blowjob"] > 2:
-                $ GirlA.change_face("sly")
+                $ GirlA.change_face("_sly")
                 $ Line = GirlA.name + " stares at your cock. She seems pretty excited about it"
                 $ TempLust += 2 if GirlA.lust < 60 else 0
             elif GirlA == EmmaX:
-                $ GirlA.change_face("sly")
+                $ GirlA.change_face("_sly")
                 $ Line = GirlA.name + " stares at your cock. She seems pretty intrigued by it"
                 $ TempLust += 2 if GirlA.lust < 60 else 0
             else:
-                $ GirlA.change_face("perplexed")
+                $ GirlA.change_face("_perplexed")
                 $ Line = GirlA.name + " stares at your cock with trepidation"
                 $ TempLust += 2 if GirlA.lust < 40 else 0
 
@@ -852,7 +852,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
                     $ TempFocus += 2
                     $ TempLust += 2
 
-            elif (GirlA.PantsNum() == 6 or (GirlA == RogueX and GirlA.underwear == "shorts")) and not GirlA.underwear_pulled_down:
+            elif (GirlA.PantsNum() == 6 or (GirlA == RogueX and GirlA.underwear == "_shorts")) and not GirlA.underwear_pulled_down:
 
                 $ Line = renpy.random.choice(["You slide a hand down her shorts, and slide your fingers into her pussy underneath",
                                                 "You push her shorts up, and slide a finger between her lips",
@@ -892,7 +892,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
                                                     "You slide a hand up her inner thigh, she moans a little as you reach the point where they meet"])
 
             elif GirlA.PantsNum() == 5:
-                if GirlA.underwear == "shorts" and not GirlA.underwear_pulled_down:
+                if GirlA.underwear == "_shorts" and not GirlA.underwear_pulled_down:
 
                     $ Line = renpy.random.choice(["You reach under skirt and ran your hands over the thin shorts covering her",
                                                     "You slide a hand up the leg of her shorts, and brush your hands across her pussy underneath",
@@ -933,7 +933,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
                         $ TempLust += 1
 
 
-            elif (GirlA.PantsNum() == 6 or (GirlA == RogueX and GirlA.underwear == "shorts")) and not GirlA.underwear_pulled_down:
+            elif (GirlA.PantsNum() == 6 or (GirlA == RogueX and GirlA.underwear == "_shorts")) and not GirlA.underwear_pulled_down:
 
                 $ Line = renpy.random.choice(["You reach out and brush your hands across her pussy through the_shorts",
                                                 "You slide a hand down her shorts, and brush your hands across her pussy underneath",
@@ -1005,7 +1005,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
             $ TempLust += 3 if GirlA.lust > 60 else 2
         else:
             if GirlA.PantsNum() == 5:
-                if GirlA.underwear == "shorts" and not GirlA.underwear_pulled_down:
+                if GirlA.underwear == "_shorts" and not GirlA.underwear_pulled_down:
 
                     $ Line = renpy.random.choice(["You push her skirt up and lick at her pussy through her_shorts",
                                                         "You bend down and lick the edges of her lips through the_shorts",
@@ -1061,7 +1061,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
                         $ TempLust += 1
 
 
-            elif (GirlA.PantsNum() == 6 or (GirlA == RogueX and GirlA.underwear == "shorts")) and not GirlA.underwear_pulled_down:
+            elif (GirlA.PantsNum() == 6 or (GirlA == RogueX and GirlA.underwear == "_shorts")) and not GirlA.underwear_pulled_down:
 
                 $ Line = renpy.random.choice(["You bend down and lick the edges of her lips through her_shorts",
                                                     "You spread the lips back beneath her shorts, and she gasps as you slide your tongue across them",
@@ -1141,7 +1141,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
 
         elif GirlA.PantsNum() == 5:
 
-            if GirlA.underwear == "shorts" and not GirlA.underwear_pulled_down:
+            if GirlA.underwear == "_shorts" and not GirlA.underwear_pulled_down:
 
                 $ Line = renpy.random.choice(["You reach under skirt and brush across her_shorts",
                                                 "You lift her skirt a bit and grind against her_shorts",
@@ -1181,7 +1181,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
                     $ TempLust += 1
 
 
-        elif (GirlA.PantsNum() == 6 or (GirlA == RogueX and GirlA.underwear == "shorts")) and not GirlA.underwear_pulled_down:
+        elif (GirlA.PantsNum() == 6 or (GirlA == RogueX and GirlA.underwear == "_shorts")) and not GirlA.underwear_pulled_down:
 
             $ Line = renpy.random.choice(["You reach out and brush your hands across her lightly covered cheeks",
                                             "You grab her shorts and pull them taut, elliciting a small gasp",
@@ -1242,7 +1242,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
                                                     "You pull her pants out a bit and she gasps as you slide a finger up her hole",
                                                     "You gasps as you rub her asshole with your fingers"])
         elif GirlA.PantsNum() == 5:
-            if GirlA.underwear == "shorts" and not GirlA.underwear_pulled_down:
+            if GirlA.underwear == "_shorts" and not GirlA.underwear_pulled_down:
 
                 $ Line = renpy.random.choice(["You push her skirt and shorts up, and slide a finger into her anus",
                                                     "You slide a finger into her tight anus",
@@ -1260,7 +1260,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
                                                     "You lift her skirt a bit and she gasps as you slide a finger into her anus",
                                                     "You rub her pussy with your thumb as you dive into her anus with your middle finger"])
 
-        elif (GirlA.PantsNum() == 6 or (GirlA == RogueX and GirlA.underwear == "shorts")) and not GirlA.underwear_pulled_down:
+        elif (GirlA.PantsNum() == 6 or (GirlA == RogueX and GirlA.underwear == "_shorts")) and not GirlA.underwear_pulled_down:
 
             $ Line = renpy.random.choice(["You slide a hand down her shorts, and slide a finger into her anus",
                                                 "You push her shorts up, and slide a finger between her lips",
@@ -1303,7 +1303,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
             $ TempLust += 1 if GirlA.lust < 60 else 0
         else:
             if GirlA.PantsNum() == 5:
-                if GirlA.underwear == "shorts" and not GirlA.underwear_pulled_down:
+                if GirlA.underwear == "_shorts" and not GirlA.underwear_pulled_down:
 
                     $ Line = renpy.random.choice(["You push her skirt up and lick at her asshole through her_shorts",
                                                         "You bend down and stroke the edges of her shorts with your tongue",
@@ -1350,7 +1350,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
                         $ TempLust += 1
 
 
-            elif (GirlA.PantsNum() == 6 or (GirlA == RogueX and GirlA.underwear == "shorts")) and not GirlA.underwear_pulled_down:
+            elif (GirlA.PantsNum() == 6 or (GirlA == RogueX and GirlA.underwear == "_shorts")) and not GirlA.underwear_pulled_down:
 
                 $ Line = renpy.random.choice(["You bend down and stroke the edges of her shorts with your tongue",
                                                     "You spread the cheeks back beneath her shorts, and she gasps as you slide your tongue into it",
@@ -2039,7 +2039,7 @@ label Girl_Self_Lines(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Temp
                                 "She hungrily slams the dildo into her tight hole, and pistons it in and out",
                                 "She shoves the dildo firmly in and out of her grasping asshole",
                                 "She quickly slides the phallus up and down the crease of her ass"])
-            elif Action == "vibrator pussy":
+            elif Action == "vibrator_pussy":
                 $ Line = Line + renpy.random.choice(["She traces the buzzing ball slowly down her body, barely grazing her mound",
                                 "Her vibrator slides lightly across her pubic region, subtly avoiding her lips",
                                 "She slides the buzzing egg into her dripping pussy and tugs it in and out",
@@ -2086,7 +2086,7 @@ label Girl_Self_Lines(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Temp
                                 "Her dildo is dragged up and down her inner thighs, slowly building towards their center",
                                 "She slowly spreads her cheeks and caresses the rim beneath",
                                 "She drags the dildo slowly along her sides, carefully caressing them"])
-            elif Action == "vibrator pussy":
+            elif Action == "vibrator_pussy":
                 $ Line = Line + renpy.random.choice(["She traces the buzzing ball slowly down her body, barely grazing her mound",
                                 "Her vibrator slides lightly across her pubic region, subtly avoiding her lips",
                                 "Her whirring toy is dragged up and down her inner thighs, slowly building towards their center",
@@ -2125,7 +2125,7 @@ label Girl_Self_Lines(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Temp
                                 "Her dildo is dragged up and down her inner thighs, slowly building towards their center",
                                 "She slowly spreads her cheeks and caresses the rim beneath",
                                 "She drags the dildo slowly along her sides, carefully caressing them"])
-            elif Action == "vibrator pussy":
+            elif Action == "vibrator_pussy":
                 $ Line = Line + renpy.random.choice(["She traces the buzzing ball slowly down her body, barely grazing her mound",
                                 "Her vibrator slides lightly across her pubic region, subtly avoiding her lips",
                                 "Her whirring toy is dragged up and down her inner thighs, slowly building towards their center",
@@ -2195,12 +2195,12 @@ label Girl_Self_Set(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Length
     if Mode == "T3" and primary_action == "masturbation":
 
         $ Options = ["fondle_pussy", "fondle_breasts", "fondle_ass"]
-        if "dildo" in GirlA.inventory:
+        if "_dildo" in GirlA.inventory:
             $ Options.append("dildo_pussy")
             if GirlA.used_to_anal:
                 $ Options.append("dildo_anal")
-        if "vibrator" in GirlA.inventory:
-            $ Options.append("vibrator pussy")
+        if "_vibrator" in GirlA.inventory:
+            $ Options.append("vibrator_pussy")
     else:
 
         if GirlA.action_counter["handjob"] >= 5 and Mode != "T5" and primary_action in ("fondle_pussy", "fondle_breasts", "fondle_thighs", "kiss", "fondle_ass", "suck_breasts"):
@@ -2209,18 +2209,18 @@ label Girl_Self_Set(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Length
 
         if primary_action not in ("sex", "fondle_pussy", "eat_pussy", "dildo_pussy"):
 
-            if "dildo" in GirlA.inventory:
+            if "_dildo" in GirlA.inventory:
                 $ Options.append("dildo_pussy")
             $ Options.append("fondle_pussy")
 
         if primary_action not in ("anal", "fondle_ass", "finger_ass", "eat_ass", "dildo_anal") and GirlA.used_to_anal:
 
-            if "dildo" in GirlA.inventory:
+            if "_dildo" in GirlA.inventory:
                 $ Options.append("dildo_anal")
             $ Options.append("fondle_ass")
 
-        if "vibrator" in GirlA.inventory:
-            $ Options.append("vibrator pussy")
+        if "_vibrator" in GirlA.inventory:
+            $ Options.append("vibrator_pussy")
 
         if primary_action not in ("fondle_breasts", "suck_breasts"):
 
@@ -2264,7 +2264,7 @@ label Girl_Self_Set(GirlA=Primary, Mode="T3", Action=girl_offhand_action, Length
             $ Line = GirlA.name + "'s hand slides behind her body, reaching toward her ass. "
         elif Action == "dildo_anal":
             $ Line = GirlA.name + " pulls out her dildo and reaches it behind her. "
-        elif Action == "vibrator pussy":
+        elif Action == "vibrator_pussy":
             $ Line = GirlA.name + " pulls out her vibrator and strokes it across her body. "
         else:
             $ Line = GirlA.name + "'s hands slide up her body and begin to kneed her breasts. "
@@ -2989,7 +2989,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         $ Line = Line + " before she slides her hand down and firmly grabs your dick"
         $ Action = "handjob"
         if GirlA == RogueX:
-            show Rogue_Sprite zorder GirlA.sprite_layer:
+            show Rogue_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == KittyX:
             show Kitty_Sprite zorder GirlA.sprite_layer:
@@ -3018,7 +3018,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
         call Seen_First_Peen (GirlA, GirlB, React=1)
         $ Line = Line + " before she slides down and begins to slowly lick your cock"
         if GirlA == RogueX:
-            show Rogue_Sprite zorder GirlA.sprite_layer:
+            show Rogue_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == KittyX:
             show Kitty_Sprite zorder GirlA.sprite_layer:
@@ -4432,23 +4432,23 @@ label Sex_Basic_Dialog(Girl=0, Type=0):
         elif Type == "partner":
             ch_v "Aw, that's a bummer. Anyway. . ."
         elif Type == "swallowgood":
-            $ Girl.eyes = "closed"
+            $ Girl.eyes = "_closed"
             ch_v "Mmmmmmmm. . ."
             ch_v ". . ."
-            $ Girl.eyes = "squint"
+            $ Girl.eyes = "_squint"
             ch_v "Ok. . ."
         elif Type == "swallowfirst":
-            $ Girl.eyes = "closed"
+            $ Girl.eyes = "_closed"
             ch_v "Mmmmmmmm. . ."
-            $ Girl.eyes = "surprised"
+            $ Girl.eyes = "_surprised"
             ch_v "Wow! . . that's. . . incredible. . ."
-            $ Girl.eyes = "squint"
+            $ Girl.eyes = "_squint"
             ch_v "Ok. . ."
         elif Type == "swallow2":
-            $ Girl.eyes = "closed"
+            $ Girl.eyes = "_closed"
             ch_v "Mmmmmmmm. . ."
             ch_v ". . ."
-            $ Girl.eyes = "squint"
+            $ Girl.eyes = "_squint"
             ch_v "Ok. . ."
         elif Type == "warned":
             ch_v "Thanks for the heads up. . ."
@@ -4476,11 +4476,11 @@ label auto_action_narrations(Girl, action):
     if action == "dildo_pussy":
         "You rub the dildo across her body, and along her moist slit."
 
-        $ Girl.change_face("surprised", 1)
+        $ Girl.change_face("_surprised", 1)
     elif action == "dildo_ass":
         "You rub the dildo across her body, and against her tight anus."
 
-        $ Girl.change_face("surprised", 1)
+        $ Girl.change_face("_surprised", 1)
     elif action == "sex":
         $ Girl.pose = "doggy"
 
@@ -4501,7 +4501,7 @@ label auto_action_narrations(Girl, action):
 
         "You rub the tip of your cock against her moist slit."
 
-        $ Girl.change_face("surprised", 1)
+        $ Girl.change_face("_surprised", 1)
     elif action == "anal":
         $ Girl.pose = "doggy"
 
@@ -4522,7 +4522,7 @@ label auto_action_narrations(Girl, action):
 
         "You press the tip of your cock against her tight rim."
 
-        $ Girl.change_face("surprised", 1)
+        $ Girl.change_face("_surprised", 1)
     elif action == "hotdog":
         $ Girl.pose = "doggy"
 
@@ -4530,7 +4530,7 @@ label auto_action_narrations(Girl, action):
 
         "You press up against [Girl.name]'s backside."
 
-        $ Girl.change_face("surprised", 1)
+        $ Girl.change_face("_surprised", 1)
 
     return
 

@@ -54,10 +54,10 @@ image Storm_Sprite:
 
         (165,560), ConditionSwitch(
 
-            "not StormX.Wet", Null(),
+            "not StormX.grool", Null(),
             "StormX.legs and StormX.legs != 'skirt' and not StormX.upskirt", Null(),
-            "StormX.underwear and not StormX.underwear_pulled_down and StormX.Wet <= 1", Null(),
-            "StormX.Wet == 1", ConditionSwitch(
+            "StormX.underwear and not StormX.underwear_pulled_down and StormX.grool <= 1", Null(),
+            "StormX.grool == 1", ConditionSwitch(
                     "StormX.underwear and StormX.underwear_pulled_down", AlphaMask("Wet_Drip","Storm_Drip_MaskP"),
                     "StormX.legs and StormX.legs != 'skirt'", AlphaMask("Wet_Drip","Storm_Drip_MaskP"),
                     "True", AlphaMask("Wet_Drip","Storm_Drip_Mask"),
@@ -73,7 +73,7 @@ image Storm_Sprite:
 
             "'in' not in StormX.spunk and 'anal' not in StormX.spunk", Null(),
             "StormX.legs and StormX.legs != 'skirt' and not StormX.upskirt", Null(),
-            "StormX.underwear and not StormX.underwear_pulled_down and StormX.Wet <= 1", Null(),
+            "StormX.underwear and not StormX.underwear_pulled_down and StormX.grool <= 1", Null(),
             "True", ConditionSwitch(
                     "StormX.underwear and StormX.underwear_pulled_down", AlphaMask("Spunk_Drip2","Storm_Drip_MaskP"),
 
@@ -196,7 +196,7 @@ image Storm_Sprite:
                     ),
             "True", ConditionSwitch(
 
-                    "StormX.Wet", ConditionSwitch(
+                    "StormX.grool", ConditionSwitch(
 
                         "StormX.underwear == 'cos_panties'", "images/StormSprite/Storm_Sprite_Panties_Cos.png",
                         "StormX.underwear == 'white_panties'", "images/StormSprite/Storm_Sprite_Panties_WhiteW.png",
@@ -234,7 +234,7 @@ image Storm_Sprite:
                         ),
             "True", ConditionSwitch(
 
-                    "StormX.Wet", ConditionSwitch(
+                    "StormX.grool", ConditionSwitch(
 
                         "StormX.legs == 'pants'", "images/StormSprite/Storm_Sprite_Legs_PantsW.png",
                         "StormX.legs == 'yoga_pants'", "images/StormSprite/Storm_Sprite_Legs_YogaPantsW.png",
@@ -1216,25 +1216,25 @@ image Storm_Sex_Legs:
                     ),
             "ShowFeet",ConditionSwitch(
 
-                    "StormX.underwear == 'cos_panties' and StormX.Wet", "images/StormSex/Storm_Sex_Panties_Cos_FJ_Wet.png",
+                    "StormX.underwear == 'cos_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_Cos_FJ_Wet.png",
                     "StormX.underwear == 'cos_panties'", "images/StormSex/Storm_Sex_Panties_Cos_FJ.png",
-                    "StormX.underwear == 'white_panties' and StormX.Wet", "images/StormSex/Storm_Sex_Panties_White_FJ_Wet.png",
+                    "StormX.underwear == 'white_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_White_FJ_Wet.png",
                     "StormX.underwear == 'white_panties'", "images/StormSex/Storm_Sex_Panties_White_FJ.png",
                     "StormX.underwear == 'lace_panties'", "images/StormSex/Storm_Sex_Panties_Lace_FJ.png",
                     "StormX.underwear == 'bikini_bottoms' and (StormX.bra != 'bikini_top' or StormX.top_pulled_up)", "images/StormSex/Storm_Sex_Panties_Bikini_FJ_Top.png",
                     "StormX.underwear == 'bikini_bottoms'", "images/StormSex/Storm_Sex_Panties_Bikini_FJ.png",
-                    "StormX.underwear and StormX.Wet", "images/StormSex/Storm_Sex_Panties_Black_FJ_Wet.png",
+                    "StormX.underwear and StormX.grool", "images/StormSex/Storm_Sex_Panties_Black_FJ_Wet.png",
                     "StormX.underwear", "images/StormSex/Storm_Sex_Panties_Black_FJ.png",
                     "True", Null(),
                     ),
-            "StormX.underwear == 'cos_panties' and StormX.Wet", "images/StormSex/Storm_Sex_Panties_Cos_Wet.png",
+            "StormX.underwear == 'cos_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_Cos_Wet.png",
             "StormX.underwear == 'cos_panties'", "images/StormSex/Storm_Sex_Panties_Cos.png",
-            "StormX.underwear == 'white_panties' and StormX.Wet", "images/StormSex/Storm_Sex_Panties_White_Wet.png",
+            "StormX.underwear == 'white_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_White_Wet.png",
             "StormX.underwear == 'white_panties'", "images/StormSex/Storm_Sex_Panties_White.png",
             "StormX.underwear == 'lace_panties'", "images/StormSex/Storm_Sex_Panties_Lace.png",
             "StormX.underwear == 'bikini_bottoms' and (StormX.bra != 'bikini_top' or StormX.top_pulled_up)", "images/StormSex/Storm_Sex_Panties_Bikini_Top.png",
             "StormX.underwear == 'bikini_bottoms'", "images/StormSex/Storm_Sex_Panties_Bikini.png",
-            "StormX.underwear and StormX.Wet", "images/StormSex/Storm_Sex_Panties_Black_Wet.png",
+            "StormX.underwear and StormX.grool", "images/StormSex/Storm_Sex_Panties_Black_Wet.png",
             "StormX.underwear", "images/StormSex/Storm_Sex_Panties_Black.png",
             "True", Null(),
             ),
@@ -1279,16 +1279,16 @@ image Storm_Sex_Legs:
                     ),
             "ShowFeet",ConditionSwitch(
 
-                    "StormX.legs == 'pants' and StormX.Wet > 1", "images/StormSex/Storm_Sex_Legs_Pants_FJ_Wet.png",
+                    "StormX.legs == 'pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_Pants_FJ_Wet.png",
                     "StormX.legs == 'pants'", "images/StormSex/Storm_Sex_Legs_Pants_FJ.png",
-                    "StormX.legs == 'yoga_pants' and StormX.Wet > 1", "images/StormSex/Storm_Sex_Legs_YogaPants_FJ_Wet.png",
+                    "StormX.legs == 'yoga_pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_YogaPants_FJ_Wet.png",
                     "StormX.legs == 'yoga_pants'", "images/StormSex/Storm_Sex_Legs_YogaPants_FJ.png",
                     "True", Null(),
                     ),
             "StormX.legs == 'skirt'", "images/StormSex/Storm_Sex_Legs_Skirt.png",
-            "StormX.legs == 'pants' and StormX.Wet > 1", "images/StormSex/Storm_Sex_Legs_Pants_Wet.png",
+            "StormX.legs == 'pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_Pants_Wet.png",
             "StormX.legs == 'pants'", "images/StormSex/Storm_Sex_Legs_Pants.png",
-            "StormX.legs == 'yoga_pants' and StormX.Wet > 1", "images/StormSex/Storm_Sex_Legs_YogaPants_Wet.png",
+            "StormX.legs == 'yoga_pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_YogaPants_Wet.png",
             "StormX.legs == 'yoga_pants'", "images/StormSex/Storm_Sex_Legs_YogaPants.png",
             "True", Null(),
             ),
@@ -1502,7 +1502,7 @@ image Storm_Sex_Zero_Cock:
         subpixel True
 
         ConditionSwitch(
-                "Player.sprite", "Zero_Blowcock" ,
+                "Player.sprite", "Zero_Zero_cock_blowjob" ,
                 "True", Null(),
                 )
         subpixel True
@@ -1559,7 +1559,7 @@ image Storm_Sex_Static:
 
         subpixel True
         ConditionSwitch(
-                "Player.sprite", "Zero_Blowcock" ,
+                "Player.sprite", "Zero_Zero_cock_blowjob" ,
                 "True", Null(),
                 )
         subpixel True
@@ -2030,7 +2030,7 @@ image Storm_Sex_Anal_Zero_Anim0:
         subpixel True
         ConditionSwitch(
                 "not Player.sprite", Null(),
-                "True", "Zero_Blowcock" ,
+                "True", "Zero_Zero_cock_blowjob" ,
                 )
         subpixel True
         anchor (0.5,1.0)
@@ -3359,7 +3359,7 @@ image Storm_BJ_Anim0:
         offset (350,210)
     contains:
 
-        "Blowcock"
+        "Zero_cock_blowjob"
         anchor (.5,.5)
         rotate -10
         offset (650,370)
@@ -3400,7 +3400,7 @@ image Storm_BJ_Anim1:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_cock_blowjob"
         subpixel True
         anchor (.5,.5)
         offset (650,370)
@@ -3445,7 +3445,7 @@ image Storm_BJ_Anim2:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_cock_blowjob"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3510,7 +3510,7 @@ image Storm_BJ_Anim3:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_cock_blowjob"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3578,7 +3578,7 @@ image Storm_BJ_Anim4:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_cock_blowjob"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3652,7 +3652,7 @@ image Storm_BJ_Anim5:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_cock_blowjob"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3714,7 +3714,7 @@ image Storm_BJ_Anim6:
             repeat
     contains:
 
-        "Blowcock"
+        "Zero_cock_blowjob"
         subpixel True
         anchor (.5,.5)
         rotate 0
@@ -3894,7 +3894,7 @@ image Storm_TJ_HairTop:
 
 image Storm_TJ_ZeroCock:
 
-    "Zero_Blowcock"
+    "Zero_Zero_cock_blowjob"
     transform_anchor True
     zoom .6
     anchor (0.5, 0.5)
@@ -5095,14 +5095,14 @@ label Storm_Kissing_Launch(T=primary_action, Set=1):
     return
 
 label Storm_Kissing_Smooch:
-    $ StormX.change_face("kiss")
+    $ StormX.change_face("_kiss")
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos StormX.sprite_location zoom 1
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
         zoom 1
-    $ StormX.change_face("sexy")
+    $ StormX.change_face("_sexy")
     return
 
 label Storm_Breasts_Launch(T=primary_action, Set=1):

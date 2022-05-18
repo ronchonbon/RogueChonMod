@@ -3,8 +3,11 @@
 label Prologue:
     $ bg_current = "bg_study"
     $ time_index = 2
-    $ Current_Time = "Evening"
-    call Display_Background
+    $ current_time = "evening"
+
+    scene background onlayer backdrop
+    scene
+
     if "Historia" in Player.traits:
         show BlueScreen onlayer black
     "You recently discovered that you were a mutant when a Sentinel attacked your home.\nYou were rescued by a squad of X-Men and given this address."
@@ -29,7 +32,7 @@ label Prologue:
                 $ Player.color = "pink"
             "Black":
                 $ Player.color = "brown"
-    show Professor at sprite_location(stage_left)
+    show Xavier_sprite at sprite_location(stage_left)
     with dissolve
     ch_x "Welcome to the Xavier Institute for Higher Learning. This is a home for all mutants to learn and grow."
     ch_x "My name is Charles Xavier, and I have dedicated my life to helping other mutants such as yourself."
@@ -41,29 +44,28 @@ label Prologue:
     ch_x "Nonsense, my boy. You have an incredibly useful ability. . ."
     ch_x "the power to negate other powers, even including my own."
     $ RogueX.location = bg_current
-    $ RogueX.change_face("surprised")
+    $ RogueX.change_face("_surprised")
     $ RogueX.sprite_location = stage_far_right
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location)
-    with easeinright
+    show Rogue_sprite at sprite_location(RogueX.sprite_location) with easeinright
     ch_r "What's that Prof? This new kid can negate mutant powers?"
-    $ RogueX.mouth = "normal"
+    $ RogueX.mouth = "_normal"
     $ RogueX.sprite_location = stage_right
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location) with ease
+    show Rogue_sprite at sprite_location(RogueX.sprite_location) with ease
     ch_r "Maybe even my own?"
     ch_x "That is correct, [RogueX.name], though currently, his powers are weak and uncontrolled."
     ch_x "One day, however, he may even be able to help you turn your powers off permanently."
     ch_r "! . . ."
-    $ RogueX.change_face("smile")
+    $ RogueX.change_face("_smile")
     ch_x "Since you're here, why don't you show our new guest around the mansion?"
 
     ch_x "This young lady is named [RogueX.name], one of our veteran students."
     ch_x "And [RogueX.name], this young man goes by the name \"[Player.name]\"."
 
-    hide Professor
+    hide Xavier_sprite
     with easeoutright
 
     $ RogueX.sprite_location = stage_center
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location)
+    show Rogue_sprite at sprite_location(RogueX.sprite_location)
     with ease
     $ active_Girls.append(RogueX) if RogueX not in active_Girls else active_Girls
 
@@ -71,36 +73,36 @@ label Prologue:
         ch_r "A pleasure ta meet ya, [RogueX.player_petname]. Let me give ya the lay of the place."
         "It's nice to meet you too.":
             $ RogueX.change_stat("love", 200, 20)
-            $ RogueX.change_face("smile", 1)
+            $ RogueX.change_face("_smile", 1)
             ch_r "Oh, a gentleman. I think we'll really get along."
-            $ RogueX.blushing = 0
+            $ RogueX.blushing = ""
             ch_r "Ok, so let me show ya around. . ."
         "The \"lay\" of the place, eh?":
             $ RogueX.change_stat("love", 200, 10)
-            $ RogueX.brows = "normal"
-            $ RogueX.eyes = "surprised"
-            $ RogueX.mouth = "smile"
-            $ RogueX.blushing = 1
+            $ RogueX.brows = "_normal"
+            $ RogueX.eyes = "_surprised"
+            $ RogueX.mouth = "_smile"
+            $ RogueX.blushing = "_blush1"
             ch_r "Wha- what? N, no, that's not what I meant! I'm just giving you the campus tour!"
-            $ RogueX.change_face("bemused")
+            $ RogueX.change_face("_bemused")
             $ RogueX.change_stat("inhibition", 200, 20)
             $ RogueX.change_stat("obedience", 200, 20)
             ch_r "Hmm. . ."
             $ RogueX.change_stat("lust", 90, 3)
-            $ RogueX.change_face("normal")
-            $ RogueX.eyes = "surprised"
+            $ RogueX.change_face("_normal")
+            $ RogueX.eyes = "_surprised"
             ch_r "Anyways, let's get this back on track. . ."
-            $ RogueX.change_face("smile", 0)
+            $ RogueX.change_face("_smile", 0)
         "Whatever.":
             $ RogueX.change_stat("obedience", 200, 20)
-            $ RogueX.change_face("sad")
-            $ RogueX.brows = "normal"
+            $ RogueX.change_face("_sad")
+            $ RogueX.brows = "_normal"
             ch_r "Tsk, well ok, let's get started."
         "Screw off.":
             $ RogueX.change_stat("love", 200, -30)
             $ RogueX.change_stat("obedience", 200, 30)
-            $ RogueX.change_face("angry")
-            show Rogue_Sprite at sprite_location(RogueX.sprite_location)
+            $ RogueX.change_face("_angry")
+            show Rogue_sprite at sprite_location(RogueX.sprite_location)
             with vpunch
             ch_r "Well I never!"
             ch_r "Hmph, I have to give the tour anyways, so get mov'in. . ."
@@ -113,7 +115,7 @@ label tour_start:
     $ bg_current = "bg_campus"
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location)
+    show Rogue_sprite at sprite_location(RogueX.sprite_location)
     ch_r "This is the campus square. It links up to all the major locations on campus and you'll probably pass through here a lot."
 
 
@@ -121,18 +123,18 @@ label tour_start:
     $ bg_current = "bg_player"
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location)
+    show Rogue_sprite at sprite_location(RogueX.sprite_location)
     ch_r "This will be your room, we each get private rooms now that the campus has been expanded."
     menu:
         ch_r "Pretty nice, right?"
         "It is with you in it.":
-            $ RogueX.blushing = 1
+            $ RogueX.blushing = "_blush1"
             $ RogueX.change_stat("love", 200, 20)
             $ RogueX.change_stat("lust", 90, 5)
         "It'll do.":
             $ RogueX.change_stat("obedience", 200, 10)
     ch_p "And where do you live?"
-    $ RogueX.blushing = 0
+    $ RogueX.blushing = ""
     ch_r "Oh, right down the hall, all the doors are labeled."
     if RogueX.love <= 500:
         ch_r "I wouldn't recommend bothering me though."
@@ -142,9 +144,9 @@ label tour_start:
 
     $ bg_current = "bg_classroom"
     $ RogueX.location = bg_current
-    call clear_the_room ("All", 0, 1)
     call set_the_scene (0)
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location)
+    call clear_the_room ("All", 0, 1)
+    show Rogue_sprite at sprite_location(RogueX.sprite_location)
     ch_r "And this is one of our state-of-the-art classrooms."
     ch_r "They're multi-purpose so they can teach almost anything in them."
     ch_r "This used to just be an after school training facility, but over the past few years it's grown into a full service university."
@@ -154,7 +156,7 @@ label tour_start:
     $ bg_current = "bg_dangerroom"
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location)
+    show Rogue_sprite at sprite_location(RogueX.sprite_location)
     ch_r "And this is the Danger Room. It's been upgraded to a fully holographic experience, allowing realistic battlefield simulations."
     $ Count = 0
     while Count < 3:
@@ -165,9 +167,9 @@ label tour_start:
                 ch_r "This place helps us train to use our powers. Coming here can help you to get a grasp on yours as well."
                 $ Count = 3 if Count == 2 else 1
             "So can this place make some more. . . erotic simulations?" if Count != 2:
-                $ RogueX.eyes = "side"
-                $ RogueX.mouth = "lipbite"
-                $ RogueX.blushing = 1
+                $ RogueX.eyes = "_side"
+                $ RogueX.mouth = "_lipbite"
+                $ RogueX.blushing = "_blush1"
                 $ RogueX.change_stat("inhibition", 200, 30)
                 $ RogueX.change_stat("lust", 200, 5)
                 ch_r "Well. . . I suppose it could. . . if one were into such things."
@@ -182,26 +184,26 @@ label tour_end:
     $ bg_current = "bg_campus"
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    show Rogue_Sprite at sprite_location(RogueX.sprite_location)
+    show Rogue_sprite at sprite_location(RogueX.sprite_location)
     ch_r "Well, that's the nickel tour, now you know where everything is. . ."
-    $ RogueX.mouth = "normal"
-    $ RogueX.eyes = "normal"
-    $ RogueX.brows = "confused"
+    $ RogueX.mouth = "_normal"
+    $ RogueX.eyes = "_normal"
+    $ RogueX.brows = "_confused"
     menu:
         ch_r "I was curious about your ability. Is it true that other mutant powers don't work on you?"
         "Sure.":
             ch_p "That's what they tell me, but to be honest, I don't know much about it."
         "What's it to you?":
             ch_p "What do you care?"
-            $ RogueX.eyes = "sexy"
+            $ RogueX.eyes = "_sexy"
             ch_r ". . ."
             $ RogueX.change_stat("love", 200, -30)
     ch_r "Well, you see, my power is the ability to absorb the mutant powers and memories of those I touch."
     $ Head = 0
     ch_r "Only, I still can't really control it. I can't touch people without hurting them, and I might even put them into a coma if I'm not careful."
     ch_r "So I was hoping that maybe with your power. . ."
-    $ RogueX.change_face("sexy")
-    $ RogueX.brows = "sad"
+    $ RogueX.change_face("_sexy")
+    $ RogueX.brows = "_sad"
     menu:
         ch_r "So I was hoping that maybe with your power. . . I could touch you?"
         "Like, a Kiss?":
@@ -209,68 +211,68 @@ label tour_end:
                 $ RogueX.change_stat("love", 200, 20)
                 $ RogueX.change_stat("obedience", 200, 30)
                 $ RogueX.change_stat("inhibition", 20, 20)
-                $ RogueX.change_face("surprised", 1)
+                $ RogueX.change_face("_surprised", 1)
                 ch_r "Well, aren't you fresh."
-                $ RogueX.change_face("sexy")
-                $ RogueX.mouth = "smile"
+                $ RogueX.change_face("_sexy")
+                $ RogueX.mouth = "_smile"
                 ch_r "Just this once."
-                $ RogueX.change_face("kiss")
+                $ RogueX.change_face("_kiss")
                 call Rogue_Kissing_Smooch
                 "She gives you a little peck on the cheek."
-                $ RogueX.change_face("smile")
+                $ RogueX.change_face("_smile")
             else:
                 $ RogueX.change_stat("love", 200, 30)
-                $ RogueX.change_face("bemused")
+                $ RogueX.change_face("_bemused")
                 ch_r "Heh, You'll have to earn that [RogueX.player_petname]."
-                $ RogueX.arms = 0
+                $ RogueX.arms = ""
                 $ RogueX.ArmPose = 2
-                $ RogueX.change_face("sexy")
-                $ RogueX.brows = "sad"
+                $ RogueX.change_face("_sexy")
+                $ RogueX.brows = "_sad"
                 "She pulls off her glove and touches your face."
         "Ok, be my guest.":
             $ RogueX.change_stat("love", 200, 30)
-            $ RogueX.change_face("smile")
-            $ RogueX.arms = 0
+            $ RogueX.change_face("_smile")
+            $ RogueX.arms = ""
             $ RogueX.ArmPose = 2
-            $ RogueX.change_face("sexy")
-            $ RogueX.brows = "sad"
+            $ RogueX.change_face("_sexy")
+            $ RogueX.brows = "_sad"
             "She pulls off her glove and touches your face."
         "No, that's weird.":
             $ RogueX.change_stat("love", 200, -30)
             $ RogueX.change_stat("inhibition", 200, 30)
-            $ RogueX.change_face("sad")
-            $ RogueX.brows = "normal"
+            $ RogueX.change_face("_sad")
+            $ RogueX.brows = "_normal"
             ch_r "Well I'm just too damned curious, sorry."
-            $ RogueX.arms = 0
+            $ RogueX.arms = ""
             $ RogueX.ArmPose = 2
             "She pulls off her glove and touches your face."
 
-    $ RogueX.change_face("surprised")
+    $ RogueX.change_face("_surprised")
     ch_r "Wow."
     ch_r "This is amazing! With anyone else I would have drained their powers and they'd be out by now."
-    $ RogueX.change_face("sexy")
+    $ RogueX.change_face("_sexy")
     menu:
         ch_r "Do you know how long it's been since I've felt human contact without hurting them?"
         "Glad I could help.":
             $ RogueX.change_stat("love", 200, 10)
         "I'm guessing it's been quite a while.":
             $ RogueX.change_stat("lust", 200, 5)
-            $ RogueX.change_face("bemused", 1)
+            $ RogueX.change_face("_bemused", 1)
             ch_r ". . ."
-    $ RogueX.change_face("smile")
+    $ RogueX.change_face("_smile")
     ch_r "What a rush. I guess that's it then, I'm heading back to my room, you can head to yours."
-    $ RogueX.blushing = 0
+    $ RogueX.blushing = ""
     if RogueX.love >= 500:
         ch_r "Maybe I'll see you around though. Here's my number, you can give me a call."
         if "Historia" not in Player.traits:
             $ Digits.append(RogueX)
-    $ RogueX.arms = "gloves"
+    $ RogueX.arms = "_gloves"
     $ RogueX.ArmPose = 1
     $ RogueX.addiction_rate = 5
 
 label tour_parting:
-    $ RogueX.emotion = "normal"
-    $ RogueX.blushing = 0
+    $ RogueX.emotion = "_normal"
+    $ RogueX.blushing = ""
     if not RogueX.action_counter["kiss"]:
         $ Line = "Want to make out a little?"
     else:
@@ -281,43 +283,43 @@ label tour_parting:
             "You head back to your room."
         "[Line]":
             if RogueX.love >= 560:
-                $ RogueX.change_face("bemused", 1)
+                $ RogueX.change_face("_bemused", 1)
                 $ RogueX.change_stat("inhibition", 10, 20)
                 $ RogueX.change_stat("inhibition", 50, 10)
                 if "Historia" in Player.traits:
                     return 1
                 $ primary_action = "kiss"
                 call action(RogueX)
-                if "angry" in RogueX.recent_history:
+                if "_angry" in RogueX.recent_history:
                     $ RogueX.change_stat("love", 200, -10)
                     $ RogueX.change_stat("obedience", 200, 30)
                     ch_r "What the hell, [Player.name]?!"
                     ch_r "Way to take advantage of a girl's feelings there!"
-                    hide Rogue_Sprite with easeoutright
+                    hide Rogue_sprite with easeoutright
                     "[RogueX.name] tears off and you head back to your room."
                 else:
-                    $ RogueX.change_face("bemused", 1)
+                    $ RogueX.change_face("_bemused", 1)
                     ch_r "That was real nice, [RogueX.player_petname]. I'll definitely be seeing you later."
-                    hide Rogue_Sprite with easeoutright
+                    hide Rogue_sprite with easeoutright
                     "You head back to your room."
-                    $ RogueX.emotion = "normal"
+                    $ RogueX.emotion = "_normal"
             else:
                 if (RogueX.love >= 530 or RogueX.obedience > 50) and not RogueX.action_counter["kiss"]:
                     $ RogueX.addiction_rate += 1
                     $ RogueX.change_stat("lust", 200, 5)
                     $ RogueX.change_stat("love", 200, 10)
                     $ RogueX.action_counter["kiss"] += 1
-                    $ RogueX.change_face("bemused", 1)
+                    $ RogueX.change_face("_bemused", 1)
                     ch_r "Well, maybe one kiss."
-                    $ RogueX.change_face("kiss")
+                    $ RogueX.change_face("_kiss")
                     "She gives you a quick kiss. No tongue."
                     jump tour_parting
                 else:
-                    $ RogueX.change_face("bemused")
+                    $ RogueX.change_face("_bemused")
                     ch_r "Nah, I think you've had enough for today, [RogueX.player_petname]."
                     "You head back to your room."
-                    hide Rogue_Sprite
-                    $ RogueX.emotion = "normal"
+                    hide Rogue_sprite
+                    $ RogueX.emotion = "_normal"
 
     $ RogueX.location = "bg_rogue"
     if "Historia" in Player.traits:
@@ -333,6 +335,35 @@ return
 
 
 
+label Rogue_first_kiss:
+    $ RogueX.change_face("_kiss",2)
+
+    call Rogue_Kissing_Launch
+
+    "She leans in for a kiss."
+
+    "You lean in and your lips meet [RogueX.name]'s."
+
+    $ RogueX.Eyes = "_surprised"
+    $ RogueX.change_stat("love", 90, 15)
+    $ RogueX.change_stat("love", 60, 30)
+
+    "A slight spark passes between you and her eyes widen with surprise."
+
+    $ RogueX.change_stat("lust", 70, 5)
+
+    ch_r "Wow, [RogueX.player_petname], that was really something. . ."
+
+    $ RogueX.change_face("_bemused",1)
+
+    ch_r "Not the kind of zap I'm used to."
+
+    $ RogueX.addiction -= 5
+    $ RogueX.change_stat("obedience", 30, 20)
+    $ RogueX.change_stat("inhibition", 30, 30)
+
+    return
+
 
 
 
@@ -342,7 +373,7 @@ return
 label Rogue_Key:
     call shift_focus (RogueX)
     call set_the_scene
-    $ RogueX.change_face("bemused")
+    $ RogueX.change_face("_bemused")
     $ RogueX.ArmPose = 2
     ch_r "Hey, you've been sleeping over a lot, I figured you might want a key?"
     ch_p "Thanks."
@@ -367,10 +398,10 @@ label Rogue_BF:
     call clear_the_room (RogueX)
     call Taboo_Level
     $ RogueX.daily_history.append("relationship")
-    $ RogueX.change_face("bemused", 1)
+    $ RogueX.change_face("_bemused", 1)
     ch_r "So, [RogueX.player_petname], we've been hanging out for a while now."
     ch_r ". . ."
-    $ RogueX.eyes = "sexy"
+    $ RogueX.eyes = "_sexy"
     menu:
         ch_r "Right?"
         "Yeah, it's been great.":
@@ -406,21 +437,21 @@ label Rogue_BF:
         "I'd love to!":
             $ RogueX.change_stat("love", 200, 30)
             "Rogue leaps in and kisses you deeply."
-            $ RogueX.change_face("kiss")
+            $ RogueX.change_face("_kiss")
             $ RogueX.action_counter["kiss"] += 1
         "Um, ok.":
-            $ RogueX.brows = "confused"
+            $ RogueX.brows = "_confused"
             "[RogueX.name] is a bit put off by your casual acceptence of reality, but takes it as a positive sign and hugs you."
 
         "I'm with someone now." if Player.Harem:
-            $ RogueX.change_face("sad",1)
+            $ RogueX.change_face("_sad",1)
             ch_r "I know, I know, I just thought maybe you could go out with me too?"
             menu:
                 extend ""
                 "Sure":
                     $ RogueX.change_stat("love", 200, 30)
                     "Rogue leaps in and kisses you deeply."
-                    $ RogueX.change_face("kiss")
+                    $ RogueX.change_face("_kiss")
                     $ RogueX.action_counter["kiss"] += 1
                 "She wouldn't understand." if len(Player.Harem) == 1:
                     $ Line = "no."
@@ -444,7 +475,7 @@ label Rogue_BF:
         $ Player.Harem.append(RogueX)
         if "RogueYes" in Player.traits:
             $ Player.traits.remove("RogueYes")
-    $ RogueX.change_face("sexy")
+    $ RogueX.change_face("_sexy")
     ch_r "Now, . . . boyfriend. . . how would you like to celebrate?"
     if "Historia" in Player.traits:
         return 1
@@ -455,14 +486,14 @@ label Rogue_BF:
     return
 
 label Rogue_BF_Jerk:
-    $ RogueX.change_face("angry", 1)
+    $ RogueX.change_face("_angry", 1)
     ch_r "Well fine!"
     $ Count = (20* RogueX.Event[5])
     $ RogueX.change_stat("obedience", 50, 40)
     if RogueX.Event[5] != 20:
         $ RogueX.change_stat("obedience", 200, (20* RogueX.Event[5]))
     if 20 > RogueX.Event[5] >= 3:
-        $ RogueX.change_face("sad")
+        $ RogueX.change_face("_sad")
         ch_r "Hrmph. I don't care what you want, we're dating. Deal with it."
         ch_r "Now I need some alone time though."
         if "Historia" in Player.traits:
@@ -514,13 +545,13 @@ label Rogue_Love:
     call clear_the_room (RogueX)
     call Taboo_Level
     $ RogueX.daily_history.append("relationship")
-    $ RogueX.change_face("bemused", 1)
+    $ RogueX.change_face("_bemused", 1)
     if RogueX in Player.Harem:
         ch_r "We've been dating for a while now, and I'm really feeling close to you."
     else:
         ch_r "We've been hanging out for a while now, and I'm really feeling close to you."
     ch_r ". . ."
-    $ RogueX.eyes = "sexy"
+    $ RogueX.eyes = "_sexy"
     menu:
         ch_r "Right?"
         "I love you, [RogueX.name].":
@@ -537,14 +568,14 @@ label Rogue_Love:
         ch_r "Right, so I was thinking. . ."
         ch_r "I love you."
     elif RogueX.Event[6] == 10:
-        $ RogueX.change_face("confused")
+        $ RogueX.change_face("_confused")
         ch_r "So. . . wait, what?"
-        $ RogueX.change_face("smile",2)
-        $ RogueX.brows = "surprised"
+        $ RogueX.change_face("_smile",2)
+        $ RogueX.brows = "_surprised"
         ch_r "I love you too!"
-        $ RogueX.change_face("kiss")
+        $ RogueX.change_face("_kiss")
         "Rogue leaps into your arms and gives you a kiss."
-        $ RogueX.change_face("sexy",1)
+        $ RogueX.change_face("_sexy",1)
         $ RogueX.action_counter["kiss"] += 1
     else:
         ch_r "Even though we've had our rough patches from time to time. . ."
@@ -557,11 +588,11 @@ label Rogue_Love:
                 $ RogueX.change_stat("love", 200, 50)
                 "[RogueX.name] collapses into your arms."
             "That's great!":
-                $ RogueX.brows = "confused"
+                $ RogueX.brows = "_confused"
                 "[RogueX.name] seems a bit perplexed, but takes it as a positive sign and hugs you."
             "I know.":
-                $ RogueX.change_face("smile")
-                $ RogueX.brows = "confused"
+                $ RogueX.change_face("_smile")
+                $ RogueX.brows = "_confused"
                 "[RogueX.name] punches you in the arm and then gives you a huge hug."
             "So?":
                 jump Rogue_Love_Jerk
@@ -569,11 +600,11 @@ label Rogue_Love:
                 $ RogueX.change_stat("love", 200, -50)
                 $ RogueX.change_stat("obedience", 200, 50)
                 jump Rogue_Love_Jerk
-    $ RogueX.change_face("bemused",1,Eyes="side")
+    $ RogueX.change_face("_bemused",1,Eyes="_side")
     $ RogueX.player_petnames.append("lover")
     call Rogue_AnnaMarie
     ch_r "Anyway, I am glad I've been able to share this with you."
-    $ RogueX.change_face("sly")
+    $ RogueX.change_face("_sly")
     ch_r "I'm hoping to share a lot more with you if I can. . ."
     if not RogueX.action_counter["sex"]:
         $ RogueX.change_stat("obedience", 70, 10)
@@ -588,14 +619,14 @@ label Rogue_Love:
                 call Rogue_SexAct ("sex")
                 return
             "I have something else in mind. . .[[choose another activity]":
-                $ RogueX.brows = "confused"
+                $ RogueX.brows = "_confused"
                 $ RogueX.change_stat("obedience", 70, 20)
                 ch_r "Well now you've got me curious. . ."
                 pass
             "Ew. [[do nothing]":
                 $ RogueX.change_stat("love", 200, -10)
                 $ RogueX.change_stat("obedience", 70, 40)
-                $ RogueX.change_face("perplexed",1)
+                $ RogueX.change_face("_perplexed",1)
                 ch_r "Um, ok?"
                 ch_r "{size=-5}What the fuck was that?{/size}"
                 return
@@ -614,13 +645,13 @@ label Rogue_Love:
 label Rogue_Love_Jerk:
     if "Historia" not in Player.traits:
         $ renpy.pop_call()
-    $ RogueX.change_face("angry", 1)
+    $ RogueX.change_face("_angry", 1)
     ch_r "Well fine!"
     $ Count = (20* RogueX.Event[6])
     $ RogueX.change_stat("obedience", 50, 40)
     $ RogueX.change_stat("obedience", 200, Count)
     if RogueX.Event[6] == 3:
-        $ RogueX.change_face("sad")
+        $ RogueX.change_face("_sad")
         ch_r "I. . . I don't care, I love you too much anyways."
         ch_r "I need some time to myself though."
         if "Historia" in Player.traits:
@@ -646,7 +677,7 @@ label Rogue_Love_Jerk:
 label Rogue_AnnaMarie:
     ch_r "I should probably tell you, I wasn't exactly born with the name \"Rogue.\""
     ch_r ". . ."
-    $ RogueX.change_face("bemused",1)
+    $ RogueX.change_face("_bemused",1)
     ch_r "Grow'in up, I went by \"Anna-Marie.\""
     $ RogueX.names.append("Anna-Marie")
     $ RogueX.names.append("Anna")
@@ -657,35 +688,35 @@ label Rogue_AnnaMarie:
             $ RogueX.change_stat("love", 200, 10)
             $ RogueX.change_stat("obedience", 50, 5)
             $ RogueX.change_stat("inhibition", 70, 5)
-            $ RogueX.change_face("smile",2)
+            $ RogueX.change_face("_smile",2)
             ch_r "Oh, thank you so much for say'in. . ."
         "Huh, ok.":
             $ RogueX.change_stat("obedience", 80, 5)
-            $ RogueX.change_face("confused",1)
+            $ RogueX.change_face("_confused",1)
             ch_r "Um. . . yeah."
         "Don't like it.":
             $ RogueX.change_stat("love", 200, -5)
             $ RogueX.change_stat("obedience", 200, 10)
             $ RogueX.change_stat("inhibition", 200, -5)
-            $ RogueX.change_face("angry",1)
+            $ RogueX.change_face("_angry",1)
             ch_r "Oh. . . Ok. . ."
     menu:
         extend ""
         "I think \"Rogue\" suits you though.":
             $ RogueX.name = "Rogue"
-            $ RogueX.change_face("smile")
+            $ RogueX.change_face("_smile")
             ch_r "Yeah, I'm used to it by this point."
         "I liked the sound of \"Anna-Marie.\"":
             $ RogueX.name = "Anna-Marie"
-            $ RogueX.change_face("smile")
+            $ RogueX.change_face("_smile")
             ch_r "It might be fun to go back like that again. . ."
         "\"Marie\" would be a cute name for you.":
             $ RogueX.name = "Marie"
-            $ RogueX.change_face("smile")
+            $ RogueX.change_face("_smile")
             ch_r "You think? I suppose. . ."
         "\"Anna\" sounds nice.":
             $ RogueX.name = "Anna"
-            $ RogueX.change_face("smile")
+            $ RogueX.change_face("_smile")
             ch_r "I suppose it does. . ."
     return
 
@@ -705,7 +736,7 @@ label Rogue_Sub:
     call clear_the_room (RogueX)
     call Taboo_Level
     $ RogueX.daily_history.append("relationship")
-    $ RogueX.change_face("bemused", 1)
+    $ RogueX.change_face("_bemused", 1)
     ch_r ". . ."
     if RogueX in Player.Harem:
         ch_r "We've been dating for a bit now."
@@ -722,7 +753,7 @@ label Rogue_Sub:
     elif RogueX.love >= 500:
         ch_r "We don't exactly get along, but. . . we work, right?"
     else:
-        $ RogueX.brows = "angry"
+        $ RogueX.brows = "_angry"
         ch_r "I really don't like you much, but something about you just. . ."
         ch_r "works for me."
     menu:
@@ -736,7 +767,7 @@ label Rogue_Sub:
             $ RogueX.change_stat("obedience", 200, 30)
     if not RogueX.Event[7]:
         ch_r "Right, so I was thinking. . ."
-        $ RogueX.eyes = "sexy"
+        $ RogueX.eyes = "_sexy"
         ch_r "I'd like you to provide some . . .structure to my life."
     else:
         ch_r "I'd like you to reconsider the offer I made. . ."
@@ -749,7 +780,7 @@ label Rogue_Sub:
             $ RogueX.player_petnames.append("sir")
             "[RogueX.name] nods obediently."
         "What do you mean by that?":
-            $ RogueX.change_face("bemused")
+            $ RogueX.change_face("_bemused")
             ch_r "When you. . . encourage me to try new things, it really turns me on."
             ch_r "I'd like you to continue to. . . encourage me."
             menu:
@@ -764,7 +795,7 @@ label Rogue_Sub:
             $ RogueX.player_petnames.append("sir")
         "Nah, you can handle things yourself.":
             jump Rogue_Sub_Jerk
-    $ RogueX.change_face("sexy")
+    $ RogueX.change_face("_sexy")
     ch_r "Now, sir. . . was there anything else you wished me to do to celebrate?"
     if "Historia" in Player.traits:
         return 1
@@ -777,7 +808,7 @@ label Rogue_Sub:
     return
 
 label Rogue_Sub_Jerk:
-    $ RogueX.change_face("sad", 1)
+    $ RogueX.change_face("_sad", 1)
     ch_r "Hrmph!"
     $ Count = (20* RogueX.Event[7])
     $ RogueX.change_stat("inhibition", 50, 30)
@@ -785,7 +816,7 @@ label Rogue_Sub_Jerk:
     if "Historia" not in Player.traits:
         $ renpy.pop_call()
     if RogueX.Event[7] == 2:
-        $ RogueX.change_face("sad")
+        $ RogueX.change_face("_sad")
         ch_r "I need some time to myself though."
         if "Historia" in Player.traits:
             return
@@ -824,7 +855,7 @@ label Rogue_Master:
     call clear_the_room (RogueX)
     call Taboo_Level
     $ RogueX.daily_history.append("relationship")
-    $ RogueX.change_face("bemused", 1)
+    $ RogueX.change_face("_bemused", 1)
     ch_r ". . ."
 
     if RogueX in Player.Harem:
@@ -840,7 +871,7 @@ label Rogue_Master:
     elif RogueX.love >= 500:
         ch_r "I can't be without you."
     else:
-        $ RogueX.brows = "angry"
+        $ RogueX.brows = "_angry"
         ch_r "I can't stand being with you, but can't stand being without you either."
     menu:
         ch_r "Have I been pleasing you, [RogueX.player_petname]?"
@@ -867,9 +898,9 @@ label Rogue_Master:
             $ RogueX.player_petnames.append("master")
             "[RogueX.name] bows obediently."
         "What do you mean by that?":
-            $ RogueX.brows = "confused"
+            $ RogueX.brows = "_confused"
             ch_r "Well, when you tell me what to do. . ."
-            $ RogueX.change_face("bemused", 1)
+            $ RogueX.change_face("_bemused", 1)
             ch_r "I get really horny."
             ch_r "I just really need for you to tell me what to do."
             menu:
@@ -878,7 +909,7 @@ label Rogue_Master:
                     "[RogueX.name] seems a bit put out, but takes it as a positive sign and nods."
                     $ RogueX.player_petnames.append("master")
                 "You should do your own thing, you don't need me telling you what to do.":
-                    $ RogueX.brows = "confused"
+                    $ RogueX.brows = "_confused"
                     ch_r "Ok, if that's what you want. . ."
                     $ RogueX.change_stat("inhibition", 50, 100)
                     $ RogueX.change_stat("inhibition", 90, 50)
@@ -889,7 +920,7 @@ label Rogue_Master:
                     jump Rogue_Obed_Jerk
         "Nah, take care of yourself.":
             jump Rogue_Obed_Jerk
-    $ RogueX.change_face("sexy")
+    $ RogueX.change_face("_sexy")
     ch_r "Now, master. . . was there anything else you wished me to do to celebrate?"
     if "Historia" in Player.traits:
         return 1
@@ -900,7 +931,7 @@ label Rogue_Master:
     return
 
 label Rogue_Obed_Jerk:
-    $ RogueX.change_face("sad", 1)
+    $ RogueX.change_face("_sad", 1)
     ch_r "Well fine!"
     $ Count = (20* RogueX.Event[8])
     $ RogueX.change_stat("inhibition", 50, 30)
@@ -908,7 +939,7 @@ label Rogue_Obed_Jerk:
     if "Historia" not in Player.traits:
         $ renpy.pop_call()
     if RogueX.Event[8] == 2:
-        $ RogueX.change_face("sad")
+        $ RogueX.change_face("_sad")
         ch_r "I don't care what you say, this is something I need. MASTER."
         ch_r "I need some time to myself though."
         if "Historia" in Player.traits:
@@ -961,7 +992,7 @@ label Rogue_Sexfriend:
     call Display_Girl (RogueX)
     call clear_the_room (RogueX)
     call Taboo_Level
-    $ RogueX.change_face("smile", 1)
+    $ RogueX.change_face("_smile", 1)
     ch_r ". . ."
     ch_r "We've been having fun, right?"
     if RogueX.SEXP >= 40:
@@ -1000,7 +1031,7 @@ label Rogue_Sexfriend:
                 $ RogueX.player_petnames.append("sex friend")
                 "[RogueX.name] nods obediently."
             "What do you mean by that?":
-                $ RogueX.brows = "confused"
+                $ RogueX.brows = "_confused"
                 ch_r "You know, casual sex, no real strings, for now at least."
                 menu:
                     ch_r "Well?"
@@ -1010,7 +1041,7 @@ label Rogue_Sexfriend:
                         jump Rogue_Sexfriend_Jerk
             "Nah, you're on your own.":
                 jump Rogue_Sexfriend_Jerk
-        $ RogueX.change_face("sexy")
+        $ RogueX.change_face("_sexy")
         ch_r "Now, sex friend. . . how would you like to celebrate?"
         if "Historia" in Player.traits:
             return 1
@@ -1022,7 +1053,7 @@ label Rogue_Sexfriend:
     return
 
 label Rogue_Sexfriend_Jerk:
-    $ RogueX.change_face("sad", 1)
+    $ RogueX.change_face("_sad", 1)
     $ RogueX.daily_history.append("relationship")
     ch_r "Your loss."
     $ RogueX.change_stat("obedience", 50, 30)
@@ -1076,7 +1107,7 @@ label Rogue_Fuckbuddy:
     call Display_Girl (RogueX)
     call clear_the_room (RogueX)
     call Taboo_Level
-    $ RogueX.change_face("bemused", 1)
+    $ RogueX.change_face("_bemused", 1)
     ch_r ". . ."
     ch_r "I've been having a lot of fun with this \"sex friend\" thing."
     if "exhibitionist" in RogueX.traits:
@@ -1114,7 +1145,7 @@ label Rogue_Fuckbuddy:
                 "Rogue, throws her top off, grabs you and shoves your head into her cleavage."
                 call Rogue_Pos_Reset
             "What do you mean by that?":
-                $ RogueX.brows = "confused"
+                $ RogueX.brows = "_confused"
                 menu:
                     ch_r "I mean, you know, we'd fuck. And be buddies. Both of those."
                     "Oh, ok, sure.":
@@ -1125,7 +1156,7 @@ label Rogue_Fuckbuddy:
                         jump Rogue_Fuckbuddy_Jerk
             "No thanks.":
                 jump Rogue_Fuckbuddy_Jerk
-        $ RogueX.change_face("sexy")
+        $ RogueX.change_face("_sexy")
         ch_r "Now, -heh-, fuck buddy. . . let's make this official!"
     if "Historia" in Player.traits:
         return 1
@@ -1138,7 +1169,7 @@ label Rogue_Fuckbuddy:
 
 label Rogue_Fuckbuddy_Jerk:
     $ RogueX.change_stat("obedience", 50, 30)
-    $ RogueX.change_face("bemused", 1)
+    $ RogueX.change_face("_bemused", 1)
     if RogueX.Event[10] > 1:
         $ RogueX.ArmPose = 2
         $ RogueX.top = 0
@@ -1190,20 +1221,20 @@ label Rogue_Daddy:
     menu:
         extend ""
         "Ok, go right ahead?":
-            $ RogueX.change_face("smile")
+            $ RogueX.change_face("_smile")
             $ RogueX.change_stat("love", 90, 20)
             $ RogueX.change_stat("obedience", 60, 10)
             $ RogueX.change_stat("inhibition", 80, 30)
             ch_r "Squee!"
             $ RogueX.player_petname = "daddy"
         "What do you mean by that?":
-            $ RogueX.change_face("bemused")
+            $ RogueX.change_face("_bemused")
             ch_r "I just sort of get turned on by it, you know, being your baby girl. . ."
             ch_r "I'd like to call you that."
             menu:
                 extend ""
                 "Sounds interesting, fine by me.":
-                    $ RogueX.change_face("smile")
+                    $ RogueX.change_face("_smile")
                     $ RogueX.change_stat("love", 90, 15)
                     $ RogueX.change_stat("obedience", 60, 20)
                     $ RogueX.change_stat("inhibition", 80, 25)
@@ -1213,20 +1244,20 @@ label Rogue_Daddy:
                     $ RogueX.change_stat("love", 90, 5)
                     $ RogueX.change_stat("obedience", 80, 40)
                     $ RogueX.change_stat("inhibition", 80, 20)
-                    $ RogueX.change_face("sad")
+                    $ RogueX.change_face("_sad")
                     ch_r " . . . "
                     ch_r "Well, ok."
                 "No, that creeps me out.":
                     $ RogueX.change_stat("love", 90, -10)
                     $ RogueX.change_stat("obedience", 80, 45)
                     $ RogueX.change_stat("inhibition", 70, 5)
-                    $ RogueX.change_face("angry")
+                    $ RogueX.change_face("_angry")
                     ch_r "Hrmph."
         "No, that creeps me out.":
             $ RogueX.change_stat("love", 90, -5)
             $ RogueX.change_stat("obedience", 80, 40)
             $ RogueX.change_stat("inhibition", 70, 10)
-            $ RogueX.change_face("angry")
+            $ RogueX.change_face("_angry")
             ch_r "Hrmph."
     $ RogueX.player_petnames.append("daddy")
     return
@@ -1257,30 +1288,30 @@ label Rogue_Frisky_Class:
 
             $ RogueX.change_stat("love", 80, -3)
             $ RogueX.change_stat("inhibition", 60, -3)
-            $ RogueX.change_face("confused")
+            $ RogueX.change_face("_confused")
         "It's my favorite subject.":
 
             $ RogueX.change_stat("love", 80, 5)
-            $ RogueX.change_face("smile")
+            $ RogueX.change_face("_smile")
             "[RogueX.name] reads your note and starts to smile. She quickly dashes off another note, sliding it in front of you again."
             "You unfold the note, trying not to let the teacher see you. {i}\"Then maybe we could study together tonight?\"{/i}."
             $ Line = "continue"
         "I do when it's about you.":
 
             if approval_check(RogueX, 500, "I") or RogueX.SEXP >= 30:
-                $ RogueX.change_face("sly")
+                $ RogueX.change_face("_sly")
                 "[RogueX.name] reads your note and smiles at you suggestively."
                 $ Line = "flirt"
             elif approval_check(RogueX, 900):
-                $ RogueX.change_face("confused",2)
+                $ RogueX.change_face("_confused",2)
                 "[RogueX.name] reads your note and blushes furiously, looking down at her notes."
-                $ RogueX.blushing = 1
+                $ RogueX.blushing = "_blush1"
                 $ Line = "flirt"
             else:
-                $ RogueX.change_face("perplexed",2)
+                $ RogueX.change_face("_perplexed",2)
                 "[RogueX.name] reads your note and blushes furiously. She quickly dashes off another note, sliding it in front of you again."
                 "You unfold the note, trying not to let the teacher see you. {i}\"I meant the class! Maybe we could study tonight?\"{/i}."
-                $ RogueX.blushing = 1
+                $ RogueX.blushing = "_blush1"
                 $ Line = "continue"
 
 
@@ -1293,34 +1324,34 @@ label Rogue_Frisky_Class:
                 $ RogueX.change_stat("love", 80, -3)
                 $ RogueX.change_stat("obedience", 70, 5)
                 $ RogueX.change_stat("inhibition", 60, -3)
-                $ RogueX.change_face("confused")
+                $ RogueX.change_face("_confused")
                 $ Line = 0
             "Naah. I've got better things to do.":
                 $ RogueX.change_stat("love", 200, -15)
                 $ RogueX.change_stat("obedience", 70, 5)
                 $ RogueX.change_stat("inhibition", 60, -3)
                 $ Line = 0
-                $ RogueX.change_face("angry")
-                $ RogueX.daily_history.append("angry")
+                $ RogueX.change_face("_angry")
+                $ RogueX.daily_history.append("_angry")
             "Count on it.":
                 "She smiles when she reads your reply, and throws you a wink."
                 $ RogueX.daily_history.append("studydate")
-                $ RogueX.change_face("smile")
+                $ RogueX.change_face("_smile")
                 jump Rogue_Frisky_Class_End
             "We could get some \"studying\" done right now.":
                 if approval_check(RogueX, 1200):
-                    $ RogueX.change_face("sly",1)
+                    $ RogueX.change_face("_sly",1)
                     $ RogueX.change_stat("love", 80, 3)
                     $ RogueX.change_stat("inhibition", 60, 3)
                     "[RogueX.name] gets a mischevious grin on her face and leans towards you."
                     $ Line = "flirt"
                 elif approval_check(RogueX, 700):
-                    $ RogueX.change_face("smile",1)
+                    $ RogueX.change_face("_smile",1)
                     $ RogueX.change_stat("inhibition", 60, 2)
                     "[RogueX.name] blushes and smiles your way."
                     $ Line = "flirt"
                 else:
-                    $ RogueX.change_face("confused",1)
+                    $ RogueX.change_face("_confused",1)
                     "[RogueX.name] looks a bit surprised, then scowls at you."
                     jump Rogue_Frisky_Class_End
 
@@ -1329,7 +1360,7 @@ label Rogue_Frisky_Class:
     if Line == "flirt":
         $ Player.add_word(1,"interruption")
         $ D20 = renpy.random.randint(1, 20)
-        $ RogueX.change_face("sly")
+        $ RogueX.change_face("_sly")
         "You notice one of [RogueX.name]'s shoes slip from her foot beneath the desk. She tosses you a sly grin."
         if RogueX.hose:
             "You feel the smooth texture of her stockinged foot begin to slowly slide back and forth along the length of your calf."
@@ -1354,51 +1385,51 @@ label Rogue_Frisky_Class:
                     jump Rogue_Frisky_Class_End
 
                 "Look into her eyes and smile slightly." if Line == "flirt":
-                    $ RogueX.change_face("smile")
+                    $ RogueX.change_face("_smile")
                     $ RogueX.change_stat("love", 200, 5)
                     "[RogueX.name] smiles back."
                     "She looks back towards the front of the class, but her hand drifts across the top of the desk until she's holding yours."
                     $ Line = "handholding"
                 "Grasp her hand gently, stroking the top of it." if Line == "handholding":
                     $ RogueX.change_stat("love", 200, 5)
-                    $ RogueX.change_face("smile")
+                    $ RogueX.change_face("_smile")
                     "[RogueX.name] sighs contentedly and holds your hand for the remainder of class."
                     jump Rogue_Frisky_Class_End
 
                 "Try and slip your hand to her lap." if Line != "fondle_pussy":
                     $ Line = "fondle_pussy"
                     if approval_check(RogueX, 1500) and RogueX.action_counter["fondle_pussy"] and RogueX.SEXP >= 40:
-                        $ RogueX.change_face("sly")
+                        $ RogueX.change_face("_sly")
                         $ RogueX.change_stat("love", 90, 5)
                         $ RogueX.change_stat("obedience", 70, 5)
                         $ RogueX.change_stat("inhibition", 60, 5)
                         "[RogueX.name] gets a mischievous grin and places her hand on your arm."
                     elif approval_check(RogueX, 1800) and RogueX.action_counter["fondle_pussy"]:
-                        $ RogueX.change_face("smile")
+                        $ RogueX.change_face("_smile")
                         $ RogueX.change_stat("love", 80, 3)
                         $ RogueX.change_stat("obedience", 70, 7)
                         $ RogueX.change_stat("inhibition", 60, 3)
                         "[RogueX.name] starts slightly as your hand travels up her thigh, but then she lets out a slight grin."
                     elif approval_check(RogueX, 2000):
-                        $ RogueX.change_face("perplexed",2)
+                        $ RogueX.change_face("_perplexed",2)
                         $ RogueX.change_stat("obedience", 70, 10)
                         $ RogueX.change_stat("inhibition", 60, 3)
                         "[RogueX.name] glances at you in alarm, but then slowly calms down."
-                        $ RogueX.change_face("smile",1)
+                        $ RogueX.change_face("_smile",1)
                         $ D20 += 2
                     else:
                         $ Line = "too far"
 
                     if Line == "fondle_pussy":
-                        $ RogueX.change_face("sly")
-                        if RogueX.legs == "skirt":
+                        $ RogueX.change_face("_sly")
+                        if RogueX.legs == "_skirt":
                             "[RogueX.name]'s sly smile turns sultry as she feels your fingers sneak under the hem of her skirt, slowly tracing the soft contours of her mound."
-                        elif RogueX.legs == "pants":
+                        elif RogueX.legs == "_pants":
                             "[RogueX.name]'s sly smile turns sultry as she feels your fingers sneak down her pants, slowly tracing the soft contours of her mound."
                         else:
                             "[RogueX.name]'s sly smile turns sultry as she feels your fingers sneak between her legs, slowly tracing the soft contours of her mound."
 
-                        if RogueX.underwear == "shorts":
+                        if RogueX.underwear == "_shorts":
                             "You think her shorts are becoming damp as you stroke the thin material. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
                         elif RogueX.underwear:
                             "You think her panties are becoming damp as you stroke the thin material. Her cheeks are flushed and her breathing's starting to become shallower and quicker."
@@ -1420,26 +1451,26 @@ label Rogue_Frisky_Class:
                         $ RogueX.change_stat("love", 80, 5)
                         $ RogueX.change_stat("obedience", 70, 5)
                         $ RogueX.change_stat("inhibition", 60, 3)
-                        $ RogueX.change_face("sly")
+                        $ RogueX.change_face("_sly")
                         "[RogueX.name] closes her eyes and caresses your arm."
                     elif approval_check(RogueX, 1800) and RogueX.action_counter["fondle_breasts"]:
                         $ RogueX.change_stat("love", 80, 3)
                         $ RogueX.change_stat("obedience", 70, 7)
                         $ RogueX.change_stat("inhibition", 60, 3)
-                        $ RogueX.change_face("smile",1)
+                        $ RogueX.change_face("_smile",1)
                         "[RogueX.name] flinches as your hand travels up her ribcage, but she grins as you reach her breast."
                     elif approval_check(RogueX, 2000):
                         $ RogueX.change_stat("obedience", 70, 10)
                         $ RogueX.change_stat("inhibition", 60, 3)
-                        $ RogueX.change_face("perplexed",2)
+                        $ RogueX.change_face("_perplexed",2)
                         "[RogueX.name] glances at you in alarm, but then slowly calms down."
-                        $ RogueX.change_face("smile",2)
+                        $ RogueX.change_face("_smile",2)
                         $ D20 += 5
                     else:
                         $ Line = "too far"
 
                     if Line == "fondle_breasts":
-                        $ RogueX.change_face("sly")
+                        $ RogueX.change_face("_sly")
                         "[RogueX.name]'s sly eyes spakle as your hand cups her breast, giving it a casual caress."
                         "her nipples begin to firm up and she lets out a small moan of pleasure."
                         $ D20 += 7
@@ -1450,12 +1481,12 @@ label Rogue_Frisky_Class:
                     $ D20 += 7
 
             if Line == "too far":
-                $ RogueX.change_face("surprised",2)
+                $ RogueX.change_face("_surprised",2)
                 $ RogueX.change_stat("love", 80, -5)
                 $ RogueX.change_stat("obedience", 70, 7)
                 $ RogueX.change_stat("inhibition", 50, -3)
                 "[RogueX.name] sits up straight in her seat and makes a little yelping noise."
-                $ RogueX.change_face("angry",1)
+                $ RogueX.change_face("_angry",1)
                 "Between that and the icy glare she shoots you, it's enough to draw the attention of your fellow students in your direction."
                 $ D20 += 10
 
@@ -1464,7 +1495,7 @@ label Rogue_Frisky_Class:
             $ RogueX.change_stat("love", 80, -10)
             $ RogueX.change_stat("obedience", 70, -5)
             $ RogueX.change_stat("inhibition", 50, -10)
-            $ RogueX.change_face("surprised")
+            $ RogueX.change_face("_surprised")
             if EmmaX.location == "bg_teacher":
                 "[EmmaX.name] stops her lecture in mid-sentence when she notices that the whole class is looking at you and [RogueX.name]."
                 ch_e "[EmmaX.player_petname], [RogueX.name], if you could perhaps pay more attention to the lecture, and less to each other's bodies?"
@@ -1489,18 +1520,18 @@ label Rogue_Frisky_Class:
 
 label Rogue_Frisky_Class_End:
     if not Line:
-        $ RogueX.change_face("confused")
+        $ RogueX.change_face("_confused")
         "She unfolds the note and quickly reads it over."
-        $ RogueX.change_face("sad")
+        $ RogueX.change_face("_sad")
         "As she does, you immediately see disappointment come over her features."
         "She scratches out a reply and slides it back in front of you."
         "When you open it up, it reads: {i}Never mind.{/i}"
     elif Line == "tease":
-        $ RogueX.change_face("sly",1)
+        $ RogueX.change_face("_sly",1)
         "[RogueX.name] takes in a deep breath and exhales it in a sigh, leaning in to whisper."
         ch_r "Tonight's \"study session\" just got a whole lot more interesting."
     elif Line == "rejected":
-        $ RogueX.change_face("sadside")
+        $ RogueX.change_face("_sadside")
         "[RogueX.name] looks surprised and hurt. For the rest of the class, she says nothing."
         "It seems like she has a hard time looking you in the eye."
 

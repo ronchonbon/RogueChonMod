@@ -21,7 +21,7 @@ label Rogue_SexAct(Act=0):
         call Les_Prep (RogueX)
         if not action_context:
             return
-    elif Act == "kissing":
+    elif Act == "kiss":
         call KissPrep (RogueX)
         if not action_context:
             return
@@ -79,7 +79,7 @@ label Rogue_Masturbate:
                 "Would you like some help? I could lend some helping hands. . ." if Player.semen and RogueX.remaining_actions:
                     $ RogueX.change_stat("love", 90, 1)
                     $ RogueX.change_stat("obedience", 50, 2)
-                    $ RogueX.change_face("sexy")
+                    $ RogueX.change_face("_sexy")
                     ch_r "Well, [RogueX.player_petname], I suppose I could use some help with these. . ."
                     $ RogueX.change_stat("obedience", 70, 2)
                     $ RogueX.change_stat("inhibition", 70, 1)
@@ -89,7 +89,7 @@ label Rogue_Masturbate:
                 "Would you like some help? I could. . . up to you, I guess." if Player.semen and RogueX.remaining_actions:
                     $ RogueX.change_stat("love", 70, 2)
                     $ RogueX.change_stat("love", 90, 1)
-                    $ RogueX.change_face("sexy")
+                    $ RogueX.change_face("_sexy")
                     ch_r "Well, [RogueX.player_petname], I suppose you could help me with these. . ."
                     $ RogueX.change_stat("obedience", 70, 2)
                     $ RogueX.change_stat("inhibition", 70, 1)
@@ -101,7 +101,7 @@ label Rogue_Masturbate:
                     $ RogueX.action_counter["masturbation"] += 1
                     jump Rogue_M_Cycle
                 "Why don't we take care of each other?" if Player.semen and RogueX.remaining_actions:
-                    $ RogueX.change_face("sexy")
+                    $ RogueX.change_face("_sexy")
                     ch_r "Well what did you have in mind?"
                     $ renpy.pop_call()
                     return
@@ -109,16 +109,16 @@ label Rogue_Masturbate:
                     if RogueX.lust >= 50:
                         $ RogueX.change_stat("love", 70, 2)
                         $ RogueX.change_stat("love", 90, 1)
-                        $ RogueX.change_face("sexy")
+                        $ RogueX.change_face("_sexy")
                         ch_r "Well, [RogueX.player_petname], I suppose I do at that . ."
                         $ RogueX.change_stat("obedience", 80, 3)
                         $ RogueX.change_stat("inhibition", 80, 5)
                         jump Rogue_M_Cycle
                     elif approval_check(RogueX, 1000):
-                        $ RogueX.change_face("sly")
+                        $ RogueX.change_face("_sly")
                         ch_r "Well I did, but I think I've got it taken care of for now. . ."
                     else:
-                        $ RogueX.change_face("angry")
+                        $ RogueX.change_face("_angry")
                         ch_r "Well I did, but now you've blown the mood."
 
 
@@ -131,17 +131,17 @@ label Rogue_Masturbate:
         $ action_context = 0
         $ renpy.pop_call()
         if approval:
-            $ RogueX.change_face("bemused", 2)
+            $ RogueX.change_face("_bemused", 2)
             if bg_current == "bg_rogue":
                 ch_r "So what did you come over for anyway, [RogueX.player_petname]?"
             else:
                 ch_r "So . . . fancy bumping into you here, [RogueX.player_petname]. . ."
-            $ RogueX.blushing = 1
+            $ RogueX.blushing = "_blush1"
         else:
             $ RogueX.change_stat("love", 200, -5)
-            $ RogueX.change_face("angry")
-            $ RogueX.recent_history.append("angry")
-            $ RogueX.daily_history.append("angry")
+            $ RogueX.change_face("_angry")
+            $ RogueX.recent_history.append("_angry")
+            $ RogueX.daily_history.append("_angry")
             if bg_current == "bg_rogue":
                 ch_r "Well if you don't mind, I'd kind of appreciate you getting out of here. Maybe knock next time?"
                 "[RogueX.name] kicks you out of her room."
@@ -187,7 +187,7 @@ label Rogue_Masturbate:
                     $ RogueX.change_stat("obedience", 90, 1)
                     $ RogueX.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ RogueX.change_face("surprised")
+                    $ RogueX.change_face("_surprised")
                     $ RogueX.change_stat("inhibition", 70, 1)
                     ch_p "Let's not do that right now, [RogueX.petname]."
                     $ RogueX.nameCheck()
@@ -206,57 +206,57 @@ label Rogue_Masturbate:
 
 
     if not RogueX.action_counter["masturbation"]:
-        $ RogueX.change_face("surprised", 1)
-        $ RogueX.mouth = "kiss"
+        $ RogueX.change_face("_surprised", 1)
+        $ RogueX.mouth = "_kiss"
         ch_r "You want me to get myself off, while you watch?"
         if RogueX.Forced:
-            $ RogueX.change_face("sad")
+            $ RogueX.change_face("_sad")
             ch_r "So you just want to watch then?"
 
 
 
     if not RogueX.action_counter["masturbation"] and approval:
         if RogueX.Forced:
-            $ RogueX.change_face("sad")
+            $ RogueX.change_face("_sad")
             $ RogueX.change_stat("love", 70, -3, 1)
             $ RogueX.change_stat("love", 20, -2, 1)
         elif RogueX.love >= (RogueX.obedience + RogueX.inhibition):
-            $ RogueX.change_face("sexy")
-            $ RogueX.brows = "sad"
-            $ RogueX.mouth = "smile"
+            $ RogueX.change_face("_sexy")
+            $ RogueX.brows = "_sad"
+            $ RogueX.mouth = "_smile"
             ch_r "Since my love life's been a bit. . . limited, I've gotten pretty good at this."
         elif RogueX.obedience >= RogueX.inhibition:
-            $ RogueX.change_face("normal")
+            $ RogueX.change_face("_normal")
             ch_r "If that's what you want, [RogueX.player_petname]. . ."
         else:
-            $ RogueX.change_face("sad")
-            $ RogueX.mouth = "smile"
+            $ RogueX.change_face("_sad")
+            $ RogueX.mouth = "_smile"
             ch_r "I guess it could be fun with you watching. . ."
 
 
 
     elif approval:
         if RogueX.Forced:
-            $ RogueX.change_face("sad")
+            $ RogueX.change_face("_sad")
             $ RogueX.change_stat("love", 70, -3, 1)
             $ RogueX.change_stat("love", 20, -2, 1)
             ch_r "You want to watch me again?"
         elif approval and "masturbation" in RogueX.recent_history:
-            $ RogueX.change_face("sexy", 1)
+            $ RogueX.change_face("_sexy", 1)
             ch_r "I guess I have a bit more in me. . ."
             jump Rogue_M_Prep
         elif approval and "masturbation" in RogueX.daily_history:
-            $ RogueX.change_face("sexy", 1)
+            $ RogueX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["You enjoyed the show?",
                     "Didn't get enough earlier?",
                     "It is nice to have an audience. . ."])
             ch_r "[Line]"
         elif RogueX.action_counter["masturbation"] < 3:
-            $ RogueX.change_face("sexy", 1)
-            $ RogueX.brows = "confused"
+            $ RogueX.change_face("_sexy", 1)
+            $ RogueX.brows = "_confused"
             ch_r "You like to watch, huh?"
         else:
-            $ RogueX.change_face("sexy", 1)
+            $ RogueX.change_face("_sexy", 1)
             $ RogueX.ArmPose = 2
             $ Line = renpy.random.choice(["You sure do like to watch.",
                     "So you'd like me to go again?",
@@ -269,12 +269,12 @@ label Rogue_Masturbate:
 
     if approval >= 2:
         if RogueX.Forced:
-            $ RogueX.change_face("sad")
+            $ RogueX.change_face("_sad")
             $ RogueX.change_stat("obedience", 90, 1)
             $ RogueX.change_stat("inhibition", 60, 1)
             ch_r "I suppose, let me get comfortable. . ."
         else:
-            $ RogueX.change_face("sexy", 1)
+            $ RogueX.change_face("_sexy", 1)
             $ RogueX.change_stat("love", 90, 1)
             $ RogueX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Well. . . ok.",
@@ -295,7 +295,7 @@ label Rogue_Masturbate:
         menu:
             ch_r "That's. . . a little intimate, [RogueX.player_petname]."
             "Maybe later?":
-                $ RogueX.change_face("sexy", 1)
+                $ RogueX.change_face("_sexy", 1)
                 if RogueX.lust > 50:
                     ch_r "Well, definitely later. . . but I'll have to think about inviting you."
                 else:
@@ -305,7 +305,7 @@ label Rogue_Masturbate:
                 return
             "You look like you could use it. . .":
                 if approval:
-                    $ RogueX.change_face("sexy")
+                    $ RogueX.change_face("_sexy")
                     $ RogueX.change_stat("obedience", 90, 2)
                     $ RogueX.change_stat("obedience", 50, 2)
                     $ RogueX.change_stat("inhibition", 70, 3)
@@ -323,7 +323,7 @@ label Rogue_Masturbate:
 
                 $ approval = approval_check(RogueX, 450, "OI", TabM = 2)
                 if approval > 1 or (approval and RogueX.Forced):
-                    $ RogueX.change_face("sad")
+                    $ RogueX.change_face("_sad")
                     $ RogueX.change_stat("love", 70, -5, 1)
                     $ RogueX.change_stat("love", 200, -5)
                     ch_r "Ok, fine. I'll give it a try."
@@ -334,36 +334,36 @@ label Rogue_Masturbate:
                     jump Rogue_M_Prep
                 else:
                     $ RogueX.change_stat("love", 200, -20)
-                    $ RogueX.recent_history.append("angry")
-                    $ RogueX.daily_history.append("angry")
+                    $ RogueX.recent_history.append("_angry")
+                    $ RogueX.daily_history.append("_angry")
 
 
 
     $ RogueX.ArmPose = 1
     if RogueX.Forced:
-        $ RogueX.change_face("angry", 1)
+        $ RogueX.change_face("_angry", 1)
         ch_r "I'm not doing something so. . . intimate with you watching."
         $ RogueX.change_stat("lust", 90, 5)
         if RogueX.love > 300:
             $ RogueX.change_stat("love", 70, -2)
         $ RogueX.change_stat("obedience", 50, -2)
-        $ RogueX.recent_history.append("angry")
-        $ RogueX.daily_history.append("angry")
+        $ RogueX.recent_history.append("_angry")
+        $ RogueX.daily_history.append("_angry")
         $ RogueX.recent_history.append("no_masturbation")
         $ RogueX.daily_history.append("no_masturbation")
         return
     elif Taboo:
-        $ RogueX.change_face("angry", 1)
+        $ RogueX.change_face("_angry", 1)
         $ RogueX.daily_history.append("no_taboo")
         ch_r "I can't do that here!"
         $ RogueX.change_stat("lust", 90, 5)
         $ RogueX.change_stat("obedience", 50, -3)
         return
     elif RogueX.action_counter["masturbation"]:
-        $ RogueX.change_face("sad")
+        $ RogueX.change_face("_sad")
         ch_r "Nope, not anymore, you'll have to go back to Internet porn."
     else:
-        $ RogueX.change_face("normal", 1)
+        $ RogueX.change_face("_normal", 1)
         ch_r "Heh, no, I'm not doing that."
     $ RogueX.recent_history.append("no_masturbation")
     $ RogueX.daily_history.append("no_masturbation")
@@ -378,12 +378,12 @@ label Rogue_M_Prep:
 
 
     if "unseen" in RogueX.recent_history:
-        $ RogueX.change_face("sexy")
-        $ RogueX.eyes = "closed"
+        $ RogueX.change_face("_sexy")
+        $ RogueX.eyes = "_closed"
         $ RogueX.ArmPose = 2
         "You see [RogueX.name] leaning back, masturbating. You don't think she's noticed you yet."
     else:
-        $ RogueX.change_face("sexy")
+        $ RogueX.change_face("_sexy")
         $ RogueX.ArmPose = 2
         "[RogueX.name] lays back and starts to toy with herself."
         if not RogueX.action_counter["masturbation"]:
@@ -422,7 +422,7 @@ label Rogue_M_Cycle:
         call shift_focus (RogueX)
         $ RogueX.lust_face
         if "unseen" in RogueX.recent_history:
-            $ RogueX.eyes = "closed"
+            $ RogueX.eyes = "_closed"
 
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
@@ -544,7 +544,7 @@ label Rogue_M_Cycle:
                 if "unseen" not in RogueX.recent_history:
 
                     call Player_Cumming (RogueX)
-                    if "angry" in RogueX.recent_history:
+                    if "_angry" in RogueX.recent_history:
                         call Rogue_Pos_Reset
                         return
                     $ RogueX.change_stat("lust", 200, 5)
@@ -603,7 +603,7 @@ label Rogue_M_Cycle:
                 $ RogueX.lust += 25
 
 
-    $ RogueX.change_face("bemused", 0)
+    $ RogueX.change_face("_bemused", 0)
     $ Line = 0
     if "unseen" not in RogueX.recent_history:
         ch_r "Ok, [RogueX.player_petname], that's enough of that for now."
@@ -612,19 +612,19 @@ label Rogue_M_Interupted:
 
 
     if "unseen" in RogueX.recent_history:
-        $ RogueX.change_face("surprised", 1)
+        $ RogueX.change_face("_surprised", 1)
         "[RogueX.name] stops what she's doing with a start, eyes wide."
         call Rogue_First_Bottomless (1)
-        $ RogueX.change_face("surprised", 1)
+        $ RogueX.change_face("_surprised", 1)
 
 
         if offhand_action == "jackin":
             ch_r "H- how long you been stand'in there, [RogueX.player_petname]?"
-            $ RogueX.eyes = "down"
+            $ RogueX.eyes = "_down"
             menu:
                 ch_r "And why is your cock out like that?!"
                 "Long enough, it was an excellent show.":
-                    $ RogueX.change_face("sexy")
+                    $ RogueX.change_face("_sexy")
                     $ RogueX.change_stat("obedience", 50, 3)
                     $ RogueX.change_stat("obedience", 70, 2)
                     ch_r "Well, I imagine it was. . ."
@@ -634,7 +634,7 @@ label Rogue_M_Interupted:
                         ch_r "And the view from this angle ain't so bad either. . ."
                 "I. . . just got here?":
 
-                    $ RogueX.change_face("angry")
+                    $ RogueX.change_face("_angry")
                     $ RogueX.change_stat("love", 70, 2)
                     $ RogueX.change_stat("love", 90, 1)
                     $ RogueX.change_stat("obedience", 50, 2)
@@ -644,7 +644,7 @@ label Rogue_M_Interupted:
                     if RogueX.love >= 800 or RogueX.obedience >= 500 or RogueX.inhibition >= 500:
                         $ approval_bonus += 10
                         $ RogueX.change_stat("lust", 90, 5)
-                        $ RogueX.change_face("bemused", 1)
+                        $ RogueX.change_face("_bemused", 1)
                         ch_r "Still, can't blame a fella for take'in inspirations."
                     else:
                         $ approval_bonus -= 10
@@ -658,12 +658,12 @@ label Rogue_M_Interupted:
             menu:
                 extend ""
                 "Long enough.":
-                    $ RogueX.change_face("sexy", 1)
+                    $ RogueX.change_face("_sexy", 1)
                     $ RogueX.change_stat("obedience", 50, 3)
                     $ RogueX.change_stat("obedience", 70, 2)
                     ch_r "Well I hope you got a good show out of it. . ."
                 "I just got here.":
-                    $ RogueX.change_face("bemused", 1)
+                    $ RogueX.change_face("_bemused", 1)
                     $ RogueX.change_stat("love", 70, 2)
                     $ RogueX.change_stat("love", 90, 1)
                     ch_r "A likely story . . ."
@@ -701,7 +701,7 @@ label Rogue_M_Interupted:
     if Round <= 10:
         ch_r "I need to take a little break here, [RogueX.player_petname]."
         return
-    $ RogueX.change_face("sexy", 1)
+    $ RogueX.change_face("_sexy", 1)
     if RogueX.lust < 20:
         ch_r "That really worked for me, [RogueX.player_petname]. How about you?"
     else:
@@ -712,7 +712,7 @@ label Rogue_M_Interupted:
             $ action_context = "shift"
             return
         "You could just keep going. . ." if Player.semen:
-            $ RogueX.change_face("sly")
+            $ RogueX.change_face("_sly")
             if RogueX.remaining_actions and Round >= 10:
                 ch_r "Well, alright. . ."
                 jump Rogue_M_Cycle
@@ -721,12 +721,12 @@ label Rogue_M_Interupted:
         "I'm good here. [[Stop]":
             if RogueX.love < 800 and RogueX.inhibition < 500 and RogueX.obedience < 500:
                 $ RogueX.change_outfit(Changed=0)
-            $ RogueX.change_face("normal")
-            $ RogueX.brows = "confused"
+            $ RogueX.change_face("_normal")
+            $ RogueX.brows = "_confused"
             ch_r "Well. . . ok then. . ."
-            $ RogueX.brows = "normal"
+            $ RogueX.brows = "_normal"
         "You should probably stop for now." if RogueX.lust > 30:
-            $ RogueX.change_face("angry")
+            $ RogueX.change_face("_angry")
             ch_r "Well if you say so."
     return
 

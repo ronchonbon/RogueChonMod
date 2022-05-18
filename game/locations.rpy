@@ -1,8 +1,6 @@
 
 
 label Worldmap:
-    scene bg_campus onlayer backdrop
-    scene
     $ Taboo = 0
     menu:
         "Where would you like to go?"
@@ -762,10 +760,10 @@ label Training:
     jump Danger_Room
 
 label Rogue_TightsRipped(Count=0):
-    if RogueX.hose == "tights":
+    if RogueX.hose == "_tights":
         $ Count = 1
         $ RogueX.hose = "ripped_tights"
-        $ RogueX.change_face("angry")
+        $ RogueX.change_face("_angry")
         if "ripped_tights" in RogueX.inventory:
             ch_r "Damnation, that's another pair ruined!"
         else:
@@ -774,7 +772,7 @@ label Rogue_TightsRipped(Count=0):
     elif RogueX.hose == "pantyhose":
         $ Count = 1
         $ RogueX.hose = "ripped_pantyhose"
-        $ RogueX.change_face("angry")
+        $ RogueX.change_face("_angry")
         if "ripped_pantyhose" in RogueX.inventory:
             ch_r "Tsk, another pair ruined!"
         else:
@@ -782,7 +780,7 @@ label Rogue_TightsRipped(Count=0):
             ch_r "I hate getting a run in these things."
     if Count:
 
-        if not RogueX.legs and RogueX.underwear != "shorts":
+        if not RogueX.legs and RogueX.underwear != "_shorts":
             if RogueX.underwear:
                 if RogueX.SeenPanties:
                     $ Count = 3 if not approval_check(RogueX, 600) else Count
@@ -802,11 +800,11 @@ label Rogue_TightsRipped(Count=0):
             menu:
                 extend ""
                 "I think those look really good on you.":
-                    $ RogueX.change_face("smile", 1)
+                    $ RogueX.change_face("_smile", 1)
                     $ RogueX.inventory.append(RogueX.hose)
                     ch_r "You think so? That's sweet, maybe I'll keep them on hand."
                 "Yeah, too bad.":
-                    $ RogueX.change_face("bemused")
+                    $ RogueX.change_face("_bemused")
                     ch_r ". . ."
                 "Ha! Those don't leave much to the imagination!":
                     ch_r "Thanks for that. . ."
@@ -814,7 +812,7 @@ label Rogue_TightsRipped(Count=0):
         elif Count == 3:
             $ RogueX.change_face("startled", 2)
             ch_r "I, um, I should get out of here."
-            $ RogueX.blushing = 1
+            $ RogueX.blushing = "_blush1"
             call Remove_Girl (RogueX)
             $ RogueX.change_outfit()
 
@@ -1002,7 +1000,7 @@ label ShowPool(BO=[], PoolLoc=0):
             $ BO[0].spunk = []
             $ PoolLoc = 500 if len(BO) > 1 else 650
             if BO[0] == RogueX:
-                show Rogue_Sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Rogue_sprite zorder 50 at Pool_Bob(PoolLoc)
             elif BO[0] == KittyX:
                 show Kitty_Sprite zorder 50 at Pool_Bob(PoolLoc)
             elif BO[0] == EmmaX:
@@ -1117,7 +1115,7 @@ label Shower_Room_Entry:
         if Line[0].location == bg_current and Line[0] not in Party:
             if D20 >= 10:
                 $ Line[0].add_word(1,"showered","showered",0,0)
-            $ Line[0].change_outfit("towel")
+            $ Line[0].change_outfit("_towel")
         $ Line.remove(Line[0])
     $ Line = 0
 
@@ -1983,27 +1981,27 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
 
         if RogueX in BO:
             if RogueX.SeenPeen == 1:
-                $ RogueX.change_face("surprised",2,Eyes="down")
+                $ RogueX.change_face("_surprised",2,Eyes="_down")
                 ch_r "Oh!"
-                $ RogueX.change_face("bemused",1,Eyes="side")
+                $ RogueX.change_face("_bemused",1,Eyes="_side")
                 ch_r "I am so sorry, I should {i}not{/i} have just barged in like that."
             else:
-                $ RogueX.change_face("bemused",1,Eyes="side")
+                $ RogueX.change_face("_bemused",1,Eyes="_side")
                 ch_r "I simply {i}must{/i} be more careful. . ."
         if KittyX in BO:
-            $ KittyX.change_face("bemused",2,Eyes="side")
+            $ KittyX.change_face("_bemused",2,Eyes="_side")
             if KittyX.SeenPeen == 1:
                 ch_k "Sorry! Sorry! I need to stop just casually phasing into places!"
             else:
                 ch_k "I have {i}got{/i} to knock more. . ."
         if EmmaX in BO:
             if EmmaX.SeenPeen == 1:
-                $ EmmaX.change_face("surprised")
+                $ EmmaX.change_face("_surprised")
                 ch_e "Oh! Dreadfully sorry."
-                $ EmmaX.change_face("sexy",Eyes="down")
+                $ EmmaX.change_face("_sexy",Eyes="_down")
                 ch_e "I hope we can meet again under. . . different circumstances."
             else:
-                $ EmmaX.change_face("sexy",Eyes="down")
+                $ EmmaX.change_face("_sexy",Eyes="_down")
                 ch_e "I really should pay closer attention. . ."
             if "classcaught" not in EmmaX.history or ((StayCount or len(Nearby) >= 2) and "three" not in EmmaX.history):
 
@@ -2013,39 +2011,39 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
                 $ EmmaX.change_outfit()
         if LauraX in BO:
             if LauraX.SeenPeen == 1:
-                $ LauraX.change_face("surprised",Eyes="down")
+                $ LauraX.change_face("_surprised",Eyes="_down")
                 ch_l "Hey. That's interesting. . ."
             else:
-                $ LauraX.change_face("normal",Eyes="down")
+                $ LauraX.change_face("_normal",Eyes="_down")
                 ch_l ". . ."
-                $ LauraX.change_face("normal")
+                $ LauraX.change_face("_normal")
                 ch_l "I'm supposed to knock, aren't I."
         if JeanX in BO:
             if JeanX.SeenPeen == 1:
-                $ JeanX.change_face("surprised",Eyes="down")
+                $ JeanX.change_face("_surprised",Eyes="_down")
                 ch_j "Well what do we have here? . ."
             else:
-                $ JeanX.change_face("normal",Eyes="down")
+                $ JeanX.change_face("_normal",Eyes="_down")
                 ch_j ". . ."
-                $ JeanX.change_face("normal")
+                $ JeanX.change_face("_normal")
                 ch_j "Oh, nice to catch you. . . like this. . ."
         if StormX in BO:
             if StormX.SeenPeen == 1:
-                $ StormX.change_face("surprised")
+                $ StormX.change_face("_surprised")
                 ch_s "Oh! Hello there."
-                $ StormX.change_face("sexy",Eyes="down")
+                $ StormX.change_face("_sexy",Eyes="_down")
                 ch_s "And hello to you as well. . ."
             else:
-                $ StormX.change_face("sexy",Eyes="down")
+                $ StormX.change_face("_sexy",Eyes="_down")
                 ch_s "I'm sorry to intrude. . ."
-            $ StormX.change_face("sexy")
+            $ StormX.change_face("_sexy")
         if JubesX in BO:
-            $ JubesX.change_face("bemused",2,Eyes="side")
+            $ JubesX.change_face("_bemused",2,Eyes="_side")
             if JubesX.SeenPeen == 1:
                 ch_v "Oh, sorry! I wasn't paying attention."
-                $ JubesX.eyes = "down"
+                $ JubesX.eyes = "_down"
                 pause 1
-                $ JubesX.eyes = "side"
+                $ JubesX.eyes = "_side"
                 ch_v "um. . . hey. . ."
             else:
                 ch_v "Oh, sorry! I wasn't paying attention."
@@ -2191,19 +2189,19 @@ label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
 
     call Get_Dressed
     if RogueX.location == bg_current:
-        $ RogueX.change_outfit("towel")
+        $ RogueX.change_outfit("_towel")
     if KittyX.location == bg_current:
-        $ KittyX.change_outfit("towel")
+        $ KittyX.change_outfit("_towel")
     if EmmaX.location == bg_current:
-        $ EmmaX.change_outfit("towel")
+        $ EmmaX.change_outfit("_towel")
     if LauraX.location == bg_current:
-        $ LauraX.change_outfit("towel")
+        $ LauraX.change_outfit("_towel")
     if JeanX.location == bg_current:
-        $ JeanX.change_outfit("towel")
+        $ JeanX.change_outfit("_towel")
 
 
     if JubesX.location == bg_current:
-        $ JubesX.change_outfit("towel")
+        $ JubesX.change_outfit("_towel")
 
     $ Options = []
 
@@ -2232,7 +2230,7 @@ label Shower_Sex(Options=0, Line=0):
     if "showered" in Player.recent_history:
         $ D20 = 0
 
-    $ StayCount[0].change_face("sly")
+    $ StayCount[0].change_face("_sly")
 
     if len(StayCount) > 1 and D20 >= 10:
         "As you do so, both girls press their bodies body up against yours."
@@ -2285,7 +2283,7 @@ label Shower_Sex(Options=0, Line=0):
                 $ StayCount[0].change_stat("love", 80, -1)
                 $ StayCount[0].change_stat("obedience", 80, 5)
                 $ StayCount[0].change_stat("inhibition", 80, -1)
-                $ StayCount[0].change_face("sad")
+                $ StayCount[0].change_face("_sad")
                 "She seems a bit disappointed."
             "Stop them." if len(StayCount) > 1:
                 $ Line = 0
@@ -2297,8 +2295,8 @@ label Shower_Sex(Options=0, Line=0):
                 $ StayCount[0].change_stat("inhibition", 80, -1)
                 $ StayCount[1].change_stat("obedience", 80, 5)
                 $ StayCount[1].change_stat("inhibition", 80, -1)
-                $ StayCount[0].change_face("sad")
-                $ StayCount[1].change_face("sad")
+                $ StayCount[0].change_face("_sad")
+                $ StayCount[1].change_face("_sad")
                 "They seem a bit disappointed."
     if Line:
 
@@ -2439,7 +2437,7 @@ label Shower_Sex(Options=0, Line=0):
         if 2 <= Options[0] <= 3:
 
             if approval_check(StayCount[1], 1300) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 800:
-                $ StayCount[1].change_face("sexy",1)
+                $ StayCount[1].change_face("_sexy",1)
                 $ StayCount[0].change_stat("lust", 50, 5)
                 $ StayCount[0].change_stat("lust", 70, 5)
                 $ StayCount[1].change_stat("lust", 50, 12)
@@ -2450,7 +2448,7 @@ label Shower_Sex(Options=0, Line=0):
                 $ Player.change_stat("focus", 80, 3)
                 $ Line = 4
             elif approval_check(StayCount[1], 1200) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 700:
-                $ StayCount[1].change_face("sexy",2,Eyes="closed")
+                $ StayCount[1].change_face("_sexy",2,Eyes="_closed")
                 $ StayCount[1].change_stat("lust", 50, 10)
                 $ StayCount[1].change_stat("lust", 70, 10)
                 $ Player.change_stat("focus", 50, 5)
@@ -2459,7 +2457,7 @@ label Shower_Sex(Options=0, Line=0):
                 "[StayCount[1].name] seems really into this, and leans into it."
             else:
                 $ StayCount[1].change_stat("lust", 50, 10)
-                $ StayCount[1].change_face("sadside",Brows="confused")
+                $ StayCount[1].change_face("_sadside",Brows="_confused")
                 "[StayCount[1].name] doesn't really seem to appreciate this."
                 "She pulls away."
                 $ Line = 3
@@ -2482,12 +2480,12 @@ label Shower_Sex(Options=0, Line=0):
                     "[StayCount[1].name] seems really into this, and joins her on the other side."
                 $ Line = 4
             elif ((approval_check(StayCount[1], 1200) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 600)) or approval_check(StayCount[1], 1600):
-                $ StayCount[1].change_face("sexy",2,Eyes="down")
+                $ StayCount[1].change_face("_sexy",2,Eyes="_down")
                 $ StayCount[1].change_stat("lust", 50, 10)
                 $ StayCount[1].change_stat("lust", 70, 5)
                 "[StayCount[1].name] seems really into this, and watches her do it."
             else:
-                $ StayCount[1].change_face("sadside",Brows="confused")
+                $ StayCount[1].change_face("_sadside",Brows="_confused")
                 $ StayCount[1].change_stat("lust", 50, 5)
                 "[StayCount[1].name] doesn't really seem to appreciate this."
                 $ Line = 3
@@ -2503,27 +2501,27 @@ label Shower_Sex(Options=0, Line=0):
                 $ StayCount[0].change_stat("love", 80, -2)
                 $ StayCount[0].change_stat("obedience", 80, 5)
                 $ StayCount[0].change_stat("inhibition", 80, -2)
-                $ StayCount[0].change_face("sad")
+                $ StayCount[0].change_face("_sad")
                 "She seems a bit disappointed."
             "Stop them." if len(StayCount) > 1:
                 $ Line = 0
                 call expression StayCount[1].tag + "_Pos_Reset"
                 call expression StayCount[0].tag + "_Pos_Reset"
                 "You take a step back, pulling away from them."
-                $ StayCount[0].change_face("sad")
+                $ StayCount[0].change_face("_sad")
                 $ StayCount[0].change_stat("love", 80, -2)
                 $ StayCount[0].change_stat("obedience", 80, 5)
                 $ StayCount[0].change_stat("inhibition", 80, -2)
                 if Line == 3:
                     $ StayCount[1].change_stat("love", 80, 4)
                     $ StayCount[1].change_stat("obedience", 80, 5)
-                    $ StayCount[1].change_face("bemused")
+                    $ StayCount[1].change_face("_bemused")
                     "[StayCount[0].name] seems a bit disappointed, but [StayCount[1].name] seems pleased."
                 else:
                     $ StayCount[1].change_stat("love", 80, -1)
                     $ StayCount[1].change_stat("obedience", 80, 5)
                     $ StayCount[1].change_stat("inhibition", 80, -1)
-                    $ StayCount[1].change_face("sad")
+                    $ StayCount[1].change_face("_sad")
                     "They seem a bit disappointed."
 
     if Line:
@@ -2722,13 +2720,13 @@ label Study_Room_Entry:
                         $ StormX.change_stat("love", 90, 3)
                         $ StormX.change_stat("obedience", 80, 10)
                         $ StormX.change_stat("inhibition", 60, 10)
-                        $ StormX.change_face("sly")
+                        $ StormX.change_face("_sly")
                         ch_s "Oh, this should be interesting. . ."
                         "She pulls some picks from behind her ear."
                         ch_s "Ok, we've got a click on 1. . . 2 is binding. . ."
                         ch_s "Click on 3. . . 4. . . click on 5, back to 2. . . and we're in."
                         $ StormX.traits.append("Sneakthief")
-                        $ StormX.change_face("normal")
+                        $ StormX.change_face("_normal")
                         jump Study_Room
                     else:
                         $ StormX.change_stat("love", 90, -3)
@@ -2764,7 +2762,7 @@ label Study_Room:
             call Girls_Location
 
     call GirlsAngry
-    call XavierFace ("happy")
+    call XavierFace ("_happy")
 
 
     if time_index >= 3:
@@ -2996,13 +2994,13 @@ label Study_Room_Explore:
                     "She reaches under some of the documents and finds a small notch."
                     "With a soft \"click\"a panel flips open in the drawer, revealing some file folders."
                     "Inside are some fairly. . . detailed reports on the girls at the school."
-                    $ StormX.change_face("surprised",2)
+                    $ StormX.change_face("_surprised",2)
                     "These include body measurements, sexual histories. . . masturbation habits?"
                     $ StormX.change_stat("obedience", 70, 5)
                     $ StormX.change_stat("inhibition", 70, 5)
-                    $ StormX.change_face("angry")
+                    $ StormX.change_face("_angry")
                     ch_s "Well, I don't think Charles should be holding information like this. . ."
-                    $ StormX.change_face("normal",1)
+                    $ StormX.change_face("_normal",1)
                     "[[Xavier's files acquired.]"
                     $ Player.inventory.append("Xavier's files")
                     if "rho" in Player.history:
@@ -3176,8 +3174,8 @@ label Girls_Room_Entry(Chr=0):
             if Chr.location == bg_current:
 
                 if Round <= 10:
-                    if "noentry" in Chr.recent_history or "angry" in Chr.recent_history:
-                        $ Chr.change_face("angry")
+                    if "noentry" in Chr.recent_history or "_angry" in Chr.recent_history:
+                        $ Chr.change_face("_angry")
                         if Chr == RogueX:
                             ch_r "Buzz off already."
                         elif Chr == KittyX:
@@ -3236,7 +3234,7 @@ label Girls_Room_Entry(Chr=0):
 
                 "You hear some soft moans, followed by some shuffling around as items tumble to the ground."
                 "After several seconds and some more shuffling of clothing, [Chr.name] comes to the door."
-                $ Chr.change_face("perplexed",2)
+                $ Chr.change_face("_perplexed",2)
                 call set_the_scene
                 if Chr == RogueX:
                     ch_r "Sorry about that [Chr.player_petname], I was. . . working out."
@@ -3252,7 +3250,7 @@ label Girls_Room_Entry(Chr=0):
                     ch_s "Ah, [Chr.player_petname], I was. . . preocupied."
                 elif Chr == JubesX:
                     ch_v "Oh, um, [Chr.player_petname]. I was just. . . taking care of something."
-                $ Chr.change_face("perplexed",1)
+                $ Chr.change_face("_perplexed",1)
                 $ approval_bonus += 10
             elif D20 >=15 and (time_index >= 3 or time_index == 0):
 
@@ -3272,8 +3270,8 @@ label Girls_Room_Entry(Chr=0):
                     ch_s "Oh, hello, [Chr.player_petname]. I was just getting changed."
                 elif Chr == JubesX:
                     ch_v "Oh, hey, [Chr.player_petname], I was getting dressed."
-            elif "angry" in Chr.recent_history:
-                $ Chr.change_face("angry")
+            elif "_angry" in Chr.recent_history:
+                $ Chr.change_face("_angry")
                 if Chr == RogueX:
                     ch_r "I don't want to deal with you right now."
                 elif Chr == KittyX:
@@ -3329,8 +3327,8 @@ label Girls_Room_Entry(Chr=0):
                 ch_v "Don't mess with me at night, [Chr.player_petname]. Out!"
             $ bg_current = "bg_campus"
             jump Misplaced
-        elif "noentry" in Chr.recent_history or "angry" in Chr.recent_history:
-            $ Chr.change_face("angry")
+        elif "noentry" in Chr.recent_history or "_angry" in Chr.recent_history:
+            $ Chr.change_face("_angry")
             if Chr == RogueX:
                 ch_r "Buzz off already."
             elif Chr == KittyX:
@@ -3381,7 +3379,7 @@ label Girls_Room_Entry(Chr=0):
             elif Chr == JubesX:
                 ch_v "Oh, hey, [Chr.player_petname] come on in."
         elif Chr.addiction >= 50:
-            $ Chr.change_face("manic")
+            $ Chr.change_face("_manic")
             if Chr == RogueX:
                 ch_r "Um, yeah, you'd better come in. . ."
             elif Chr == KittyX:
@@ -3454,7 +3452,7 @@ label Girls_Room_Entry(Chr=0):
 
 
     call EventCalls
-    if Chr.location == Chr.home and "angry" in Chr.recent_history:
+    if Chr.location == Chr.home and "_angry" in Chr.recent_history:
 
         $ Line = 0
         $ primary_action = 0
@@ -3544,8 +3542,8 @@ label Rogue_Room:
         "Leave [[Go to Campus Square]" if TravelMode:
             jump Campus_Entry
 
-    if "angry" in RogueX.recent_history:
-        $ RogueX.change_face("angry")
+    if "_angry" in RogueX.recent_history:
+        $ RogueX.change_face("_angry")
         ch_r "I really think you should leave."
         "[RogueX.name] pushes you back into the hall and slams the door. You head back to your room."
         $ Line = 0
@@ -3635,8 +3633,8 @@ label Kitty_Room:
         "Leave [[Go to Campus Square]" if TravelMode:
             jump Campus_Entry
 
-    if "angry" in KittyX.recent_history:
-        $ KittyX.change_face("angry")
+    if "_angry" in KittyX.recent_history:
+        $ KittyX.change_face("_angry")
         ch_k "Go. Now."
         "[KittyX.name] pushes you back into the hall and slams the door. You head back to your room."
         $ Line = 0
@@ -3726,8 +3724,8 @@ label Emma_Room:
         "Leave [[Go to Campus Square]" if TravelMode:
             jump Campus_Entry
 
-    if "angry" in EmmaX.recent_history:
-        $ EmmaX.change_face("angry")
+    if "_angry" in EmmaX.recent_history:
+        $ EmmaX.change_face("_angry")
         ch_e "I think you should leave now."
         "[EmmaX.name] pushes you back into the hall and slams the door. You head back to your room."
         $ Line = 0
@@ -3817,8 +3815,8 @@ label Laura_Room:
         "Leave [[Go to Campus Square]" if TravelMode:
             jump Campus_Entry
 
-    if "angry" in LauraX.recent_history:
-        $ LauraX.change_face("angry")
+    if "_angry" in LauraX.recent_history:
+        $ LauraX.change_face("_angry")
         $ Line = 0
         $ primary_action = 0
         ch_l "Get out before we both regret it."
@@ -3906,8 +3904,8 @@ label Jean_Room:
         "Leave [[Go to Campus Square]" if TravelMode:
             jump Campus_Entry
 
-    if "angry" in JeanX.recent_history:
-        $ JeanX.change_face("angry")
+    if "_angry" in JeanX.recent_history:
+        $ JeanX.change_face("_angry")
         $ Line = 0
         $ primary_action = 0
         ch_j "Out!"
@@ -3996,8 +3994,8 @@ label Storm_Room:
         "Leave [[Go to Campus Square]" if TravelMode:
             jump Campus_Entry
 
-    if "angry" in StormX.recent_history:
-        $ StormX.change_face("angry")
+    if "_angry" in StormX.recent_history:
+        $ StormX.change_face("_angry")
         ch_s "Out. Now."
         "[StormX.name] pushes you to the top of the stairs and slams the door. You head back to your room."
         $ Line = 0
@@ -4087,8 +4085,8 @@ label Jubes_Room:
         "Leave [[Go to Campus Square]" if TravelMode:
             jump Campus_Entry
 
-    if "angry" in JubesX.recent_history:
-        $ JubesX.change_face("angry")
+    if "_angry" in JubesX.recent_history:
+        $ JubesX.change_face("_angry")
         ch_v "Out!"
         "[JubesX.name] pushes you back into the hall and slams the door. You head back to your room."
         $ Line = 0

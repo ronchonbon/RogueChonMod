@@ -86,7 +86,7 @@ image Kitty_Sprite:
             "not KittyX.underwear_pulled_down or (KittyX.legs and KittyX.legs != 'blue_skirt' and not KittyX.upskirt)", ConditionSwitch(
 
 
-                    "KittyX.Wet", ConditionSwitch(
+                    "KittyX.grool", ConditionSwitch(
 
                             "KittyX.underwear == 'green_panties'", "images/KittySprite/Kitty_Sprite_Panties_Green_Wet.png",
                             "KittyX.underwear == 'lace_panties'", "images/KittySprite/Kitty_Sprite_Panties_Lace_Wet.png",
@@ -101,7 +101,7 @@ image Kitty_Sprite:
                             "True", Null(),
                             ),
                     ),
-            "KittyX.Wet", ConditionSwitch(
+            "KittyX.grool", ConditionSwitch(
 
 
                     "KittyX.underwear == 'green_panties'", "images/KittySprite/Kitty_Sprite_Panties_Green_Down_Wet.png",
@@ -129,10 +129,10 @@ image Kitty_Sprite:
             ),
         (225,560), ConditionSwitch(
 
-            "not KittyX.Wet", Null(),
+            "not KittyX.grool", Null(),
             "KittyX.legs and not KittyX.upskirt", Null(),
-            "KittyX.underwear and not KittyX.underwear_pulled_down and KittyX.Wet <= 1", Null(),
-            "KittyX.Wet == 1", ConditionSwitch(
+            "KittyX.underwear and not KittyX.underwear_pulled_down and KittyX.grool <= 1", Null(),
+            "KittyX.grool == 1", ConditionSwitch(
                     "KittyX.underwear and KittyX.underwear_pulled_down", AlphaMask("Wet_Drip","Kitty_Drip_MaskP"),
                     "KittyX.legs", AlphaMask("Wet_Drip","Kitty_Drip_MaskP"),
                     "True", AlphaMask("Wet_Drip","Kitty_Drip_Mask"),
@@ -146,15 +146,15 @@ image Kitty_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "KittyX.legs or not KittyX.Wet", Null(),
-            "KittyX.underwear and not KittyX.underwear_pulled_down and KittyX.Wet < 2", Null(),
+            "KittyX.legs or not KittyX.grool", Null(),
+            "KittyX.underwear and not KittyX.underwear_pulled_down and KittyX.grool < 2", Null(),
             "KittyX.underwear and not KittyX.underwear_pulled_down", "images/KittySprite/Kitty_Sprite_Wet1.png",
-            "KittyX.Wet == 2", "images/KittySprite/Kitty_Sprite_Wet2.png",
+            "KittyX.grool == 2", "images/KittySprite/Kitty_Sprite_Wet2.png",
             "True", "images/KittySprite/Kitty_Sprite_Wet1.png",
             ),
         (225,560), ConditionSwitch(
 
-            "'in' not in KittyX.Spunk and 'anal' not in KittyX.Spunk", Null(),
+            "'in' not in KittyX.spunk and 'anal' not in KittyX.spunk", Null(),
             "KittyX.legs and not KittyX.upskirt", Null(),
             "True", ConditionSwitch(
                     "KittyX.underwear and KittyX.underwear_pulled_down", AlphaMask("Spunk_Drip2","Kitty_Drip_MaskP"),
@@ -171,9 +171,9 @@ image Kitty_Sprite:
             "not KittyX.legs or KittyX.upskirt", Null(),
             "KittyX.legs == 'capris'", "images/KittySprite/Kitty_Sprite_Pants_Blue.png",
             "KittyX.legs == 'black jeans'", "images/KittySprite/Kitty_Sprite_Pants_Black.png",
-            "KittyX.Wet and KittyX.legs == 'yoga_pants'", "images/KittySprite/Kitty_Sprite_Pants_Yoga_Wet.png",
+            "KittyX.grool and KittyX.legs == 'yoga_pants'", "images/KittySprite/Kitty_Sprite_Pants_Yoga_Wet.png",
             "KittyX.legs == 'yoga_pants'", "images/KittySprite/Kitty_Sprite_Pants_Yoga.png",
-            "KittyX.Wet and KittyX.legs == 'shorts'", "images/KittySprite/Kitty_Sprite_Shorts_Wet.png",
+            "KittyX.grool and KittyX.legs == 'shorts'", "images/KittySprite/Kitty_Sprite_Shorts_Wet.png",
             "KittyX.legs == 'shorts'", "images/KittySprite/Kitty_Sprite_Shorts.png",
             "True", Null(),
             ),
@@ -341,24 +341,24 @@ image Kitty_Sprite:
 
             "KittyX.legs and not KittyX.upskirt", Null(),
             "KittyX.underwear and not KittyX.underwear_pulled_down", Null(),
-            "'anal' in KittyX.Spunk", "images/KittySprite/Kitty_Sprite_Spunk_Anal.png",
+            "'anal' in KittyX.spunk", "images/KittySprite/Kitty_Sprite_Spunk_Anal.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "KittyX.legs and not KittyX.upskirt", Null(),
             "KittyX.underwear and not KittyX.underwear_pulled_down", Null(),
-            "'in' in KittyX.Spunk", "images/KittySprite/Kitty_Sprite_Spunk_Pussy.png",
+            "'in' in KittyX.spunk", "images/KittySprite/Kitty_Sprite_Spunk_Pussy.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "'belly' in KittyX.Spunk", "images/KittySprite/Kitty_Sprite_Spunk_Belly.png",
+            "'belly' in KittyX.spunk", "images/KittySprite/Kitty_Sprite_Spunk_Belly.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "'tits' in KittyX.Spunk", "images/KittySprite/Kitty_Sprite_Spunk_Tits.png",
+            "'tits' in KittyX.spunk", "images/KittySprite/Kitty_Sprite_Spunk_Tits.png",
             "True", Null(),
             ),
 
@@ -482,11 +482,11 @@ image Kitty_Head:
 
 
         (0,0), ConditionSwitch(
-            "KittyX.Water and KittyX.blushing == 1", "images/KittySprite/Kitty_Sprite_Head_Wet_Blush1.png",
-            "KittyX.Water and KittyX.blushing == 2", "images/KittySprite/Kitty_Sprite_Head_Wet_Blush2.png",
+            "KittyX.Water and KittyX.blushing == '_blush1'", "images/KittySprite/Kitty_Sprite_Head_Wet_Blush1.png",
+            "KittyX.Water and KittyX.blushing == '_blush2'", "images/KittySprite/Kitty_Sprite_Head_Wet_Blush2.png",
             "KittyX.Water", "images/KittySprite/Kitty_Sprite_Head_Wet_Base.png",
-            "KittyX.blushing == 1", "images/KittySprite/Kitty_Sprite_Head_Evo_Blush1.png",
-            "KittyX.blushing == 2", "images/KittySprite/Kitty_Sprite_Head_Evo_Blush2.png",
+            "KittyX.blushing == '_blush1'", "images/KittySprite/Kitty_Sprite_Head_Evo_Blush1.png",
+            "KittyX.blushing == '_blush2'", "images/KittySprite/Kitty_Sprite_Head_Evo_Blush2.png",
             "True", "images/KittySprite/Kitty_Sprite_Head_Evo_Base.png",
             ),
         (0,0), ConditionSwitch(
@@ -509,7 +509,7 @@ image Kitty_Head:
             "True", "images/KittySprite/Kitty_Sprite_Mouth_Normal.png",
             ),
         (0,0), ConditionSwitch(
-            "'mouth' not in KittyX.Spunk", Null(),
+            "'mouth' not in KittyX.spunk", Null(),
             "KittyX.mouth == 'normal'", "images/KittySprite/Kitty_Sprite_Spunk_Normal.png",
             "KittyX.mouth == 'lipbite'", "images/KittySprite/Kitty_Sprite_Spunk_Normal.png",
             "KittyX.mouth == 'kiss'", "images/KittySprite/Kitty_Sprite_Spunk_Kiss.png",
@@ -521,7 +521,7 @@ image Kitty_Head:
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            "'facial' in KittyX.Spunk", "images/KittySprite/Kitty_Sprite_Spunk_Facial.png",
+            "'facial' in KittyX.spunk", "images/KittySprite/Kitty_Sprite_Spunk_Facial.png",
             "True", Null(),
             ),
         (0,0), "Kitty Blink",
@@ -537,8 +537,8 @@ image Kitty_Head:
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
-            "KittyX.hair == 'evo' and 'hair' in KittyX.Spunk", "images/KittySprite/Kitty_Sprite_Spunk_Evohair.png",
-            "KittyX.hair == 'long' and 'hair' in KittyX.Spunk", "images/KittySprite/Kitty_Sprite_Spunk_Evohair.png",
+            "KittyX.hair == 'evo' and 'hair' in KittyX.spunk", "images/KittySprite/Kitty_Sprite_Spunk_Evohair.png",
+            "KittyX.hair == 'long' and 'hair' in KittyX.spunk", "images/KittySprite/Kitty_Sprite_Spunk_Evohair.png",
 
             "True", Null(),
             ),
@@ -792,12 +792,12 @@ image Kitty_Sex_Body = LiveComposite(
             ),
         (0,0),ConditionSwitch(
 
-            "'belly' in KittyX.Spunk", "images/KittySex/Kitty_Sex_Spunk_Body.png",
+            "'belly' in KittyX.spunk", "images/KittySex/Kitty_Sex_Spunk_Body.png",
             "True", Null(),
             ),
         (0,0),ConditionSwitch(
 
-            "'tits' in KittyX.Spunk", "images/KittySex/Kitty_Sex_Spunk_Tits.png",
+            "'tits' in KittyX.spunk", "images/KittySex/Kitty_Sex_Spunk_Tits.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -859,11 +859,11 @@ image Kitty_Sex_Legs:
 
         (0,0), ConditionSwitch(
             "KittyX.underwear_pulled_down", Null(),
-            "KittyX.underwear == 'green_panties' and KittyX.Wet", "images/KittySex/Kitty_Sex_Panties_Green_Wet.png",
+            "KittyX.underwear == 'green_panties' and KittyX.grool", "images/KittySex/Kitty_Sex_Panties_Green_Wet.png",
             "KittyX.underwear == 'green_panties'", "images/KittySex/Kitty_Sex_Panties_Green.png",
-            "KittyX.underwear == 'lace_panties' and KittyX.Wet", "images/KittySex/Kitty_Sex_Panties_Lace_Wet.png",
+            "KittyX.underwear == 'lace_panties' and KittyX.grool", "images/KittySex/Kitty_Sex_Panties_Lace_Wet.png",
             "KittyX.underwear == 'lace_panties'", "images/KittySex/Kitty_Sex_Panties_Lace.png",
-            "KittyX.underwear == 'bikini_bottoms' and KittyX.Wet", "images/KittySex/Kitty_Sex_Panties_Bikini_Wet.png",
+            "KittyX.underwear == 'bikini_bottoms' and KittyX.grool", "images/KittySex/Kitty_Sex_Panties_Bikini_Wet.png",
             "KittyX.underwear == 'bikini_bottoms'", "images/KittySex/Kitty_Sex_Panties_Bikini.png",
             "True", Null(),
             ),
@@ -884,13 +884,13 @@ image Kitty_Sex_Legs:
             "KittyX.legs == 'dress'", "images/KittySex/Kitty_Sex_Legs_Dress.png",
             "KittyX.legs == 'blue_skirt'", "images/KittySex/Kitty_Sex_Skirt.png",
             "KittyX.upskirt", Null(),
-            "KittyX.legs == 'capris' and KittyX.Wet > 1", "images/KittySex/Kitty_Sex_Pants_Blue_Wet.png",
+            "KittyX.legs == 'capris' and KittyX.grool > 1", "images/KittySex/Kitty_Sex_Pants_Blue_Wet.png",
             "KittyX.legs == 'capris'", "images/KittySex/Kitty_Sex_Pants_Blue.png",
-            "KittyX.legs == 'black jeans' and KittyX.Wet > 1", "images/KittySex/Kitty_Sex_Pants_Black_Wet.png",
+            "KittyX.legs == 'black jeans' and KittyX.grool > 1", "images/KittySex/Kitty_Sex_Pants_Black_Wet.png",
             "KittyX.legs == 'black jeans'", "images/KittySex/Kitty_Sex_Pants_Black.png",
-            "KittyX.legs == 'shorts' and KittyX.Wet > 1", "images/KittySex/Kitty_Sex_Shorts_Wet.png",
+            "KittyX.legs == 'shorts' and KittyX.grool > 1", "images/KittySex/Kitty_Sex_Shorts_Wet.png",
             "KittyX.legs == 'shorts'", "images/KittySex/Kitty_Sex_Shorts.png",
-            "KittyX.legs == 'yoga_pants' and KittyX.Wet > 1", "images/KittySex/Kitty_Sex_Pants_Yoga_Wet.png",
+            "KittyX.legs == 'yoga_pants' and KittyX.grool > 1", "images/KittySex/Kitty_Sex_Pants_Yoga_Wet.png",
             "KittyX.legs == 'yoga_pants'", "images/KittySex/Kitty_Sex_Pants_Yoga.png",
             "True", Null(),
             ),
@@ -899,7 +899,7 @@ image Kitty_Sex_Legs:
             "True", Null(),
             ),
         (0,0),ConditionSwitch(
-            "'belly' in KittyX.Spunk", "images/KittySex/Kitty_Sex_Spunk_Pelvis.png",
+            "'belly' in KittyX.spunk", "images/KittySex/Kitty_Sex_Spunk_Pelvis.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -1117,7 +1117,7 @@ image Kitty_Sex_Pussy:
     contains:
 
         ConditionSwitch(
-                "not KittyX.Wet", Null(),
+                "not KittyX.grool", Null(),
                 "Player.sprite and Player.cock_position == 'in' and action_speed >= 2", "images/KittySex/Kitty_Sex_WetPussy_F.png",
                 "True", "images/KittySex/Kitty_Sex_WetPussy_C.png",
                 )
@@ -1148,7 +1148,7 @@ image Kitty_Sex_Pussy:
     contains:
 
         ConditionSwitch(
-                "'in' in KittyX.Spunk", "images/KittySex/Kitty_Sex_Spunk_Puss_Under.png",
+                "'in' in KittyX.spunk", "images/KittySex/Kitty_Sex_Spunk_Puss_Under.png",
                 "True", Null(),
                 )
     contains:
@@ -1171,7 +1171,7 @@ image Kitty_Sex_Pussy:
     contains:
 
         ConditionSwitch(
-                "'in' not in KittyX.Spunk or not Player.sprite or Player.cock_position != 'in' or not action_speed", Null(),
+                "'in' not in KittyX.spunk or not Player.sprite or Player.cock_position != 'in' or not action_speed", Null(),
                 "action_speed <= 1", "Kitty_Pussy_Spunk_Heading",
                 "True", "images/KittySex/Kitty_Sex_Spunk_Puss_Over.png",
                 )
@@ -1341,7 +1341,7 @@ image Kitty_Sex_Anus:
     contains:
 
         ConditionSwitch(
-                "'anal' not in KittyX.Spunk", Null(),
+                "'anal' not in KittyX.spunk", Null(),
                 "Player.sprite and Player.cock_position != 'anal' and action_speed >= 1", "images/KittySex/Kitty_Sex_Spunk_Anal_Under.png",
                 "Player.sprite and Player.cock_position != 'anal' and action_speed == 1", "Kitty_Sex_Anal_Spunk_Heading_Under",
                 "True", "images/KittySex/Kitty_Sex_Spunk_Anal_Closed.png",
@@ -1358,7 +1358,7 @@ image Kitty_Sex_Anus:
     contains:
 
         ConditionSwitch(
-                "'anal' not in KittyX.Spunk or not Player.sprite or Player.cock_position != 'anal' or not action_speed", Null(),
+                "'anal' not in KittyX.spunk or not Player.sprite or Player.cock_position != 'anal' or not action_speed", Null(),
                 "action_speed == 1", "Kitty_Sex_Anal_Spunk_Heading_Over",
                 "True", "images/KittySex/Kitty_Sex_Spunk_Anal_Over.png",
                 )
@@ -1579,7 +1579,7 @@ image Kitty_Hotdog_Legs_Anim2:
 image Kitty_Footcock:
     contains:
         subpixel True
-        "Blowcock"
+        "Zero_cock_blowjob"
         alpha 0.8
         zoom 0.7
         anchor (0.5,0.5)
@@ -2008,7 +2008,7 @@ image Kitty_Doggy_Body:
             ),
         (0,0), ConditionSwitch(
 
-            "'back' in KittyX.Spunk", "images/KittyDoggy/Kitty_Doggy_Spunk_Back.png",
+            "'back' in KittyX.spunk", "images/KittyDoggy/Kitty_Doggy_Spunk_Back.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -2057,7 +2057,7 @@ image Kitty_Doggy_Head:
 
         (0,0), ConditionSwitch(
 
-            "'mouth' not in KittyX.Spunk", Null(),
+            "'mouth' not in KittyX.spunk", Null(),
 
 
             "KittyX.mouth == 'lipbite'", "images/KittyDoggy/Kitty_Doggy_Spunk_Smile.png",
@@ -2086,7 +2086,7 @@ image Kitty_Doggy_Head:
 
         (0,0), ConditionSwitch(
 
-            "'facial' in KittyX.Spunk", "images/KittyDoggy/Kitty_Doggy_Spunk_Facial.png",
+            "'facial' in KittyX.spunk", "images/KittyDoggy/Kitty_Doggy_Spunk_Facial.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -2102,7 +2102,7 @@ image Kitty_Doggy_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "'hair' in KittyX.Spunk", "images/KittyDoggy/Kitty_Doggy_Spunk_Hair.png",
+            "'hair' in KittyX.spunk", "images/KittyDoggy/Kitty_Doggy_Spunk_Hair.png",
             "True", Null(),
             ),
         )
@@ -2173,7 +2173,7 @@ image Kitty_Doggy_Ass:
 
             "not KittyX.upskirt", Null(),
             "KittyX.legs == 'dress'", "images/KittyDoggy/Kitty_Doggy_Legs_Dress_Back.png",
-            "KittyX.legs == 'shorts' and KittyX.Wet", "images/KittyDoggy/Kitty_Doggy_Legs_Shorts_BackW.png",
+            "KittyX.legs == 'shorts' and KittyX.grool", "images/KittyDoggy/Kitty_Doggy_Legs_Shorts_BackW.png",
             "KittyX.legs == 'shorts'", "images/KittyDoggy/Kitty_Doggy_Legs_Shorts_Back.png",
             "KittyX.legs == 'yoga_pants'", "images/KittyDoggy/Kitty_Doggy_Legs_Yoga_Back.png",
             "True", Null(),
@@ -2181,9 +2181,9 @@ image Kitty_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "not KittyX.underwear_pulled_down or (KittyX.legs and KittyX.legs != 'blue_skirt' and not KittyX.upskirt)", Null(),
-            "KittyX.underwear == 'green_panties' and KittyX.Wet", "images/KittyDoggy/Kitty_Doggy_Panties_Green_BackW.png",
+            "KittyX.underwear == 'green_panties' and KittyX.grool", "images/KittyDoggy/Kitty_Doggy_Panties_Green_BackW.png",
             "KittyX.underwear == 'green_panties'", "images/KittyDoggy/Kitty_Doggy_Panties_Green_Back.png",
-            "KittyX.underwear == 'bikini_bottoms' and KittyX.Wet","images/KittyDoggy/Kitty_Doggy_Panties_Bikini_BackW.png",
+            "KittyX.underwear == 'bikini_bottoms' and KittyX.grool","images/KittyDoggy/Kitty_Doggy_Panties_Bikini_BackW.png",
             "KittyX.underwear == 'bikini_bottoms'","images/KittyDoggy/Kitty_Doggy_Panties_Bikini_Back.png",
             "KittyX.underwear == 'lace_panties'","images/KittyDoggy/Kitty_Doggy_Panties_Lace_Back.png",
             "True", Null(),
@@ -2207,9 +2207,9 @@ image Kitty_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "not KittyX.underwear_pulled_down or (KittyX.legs and KittyX.legs != 'blue_skirt' and not KittyX.upskirt)", Null(),
-            "KittyX.underwear == 'green_panties' and KittyX.Wet", "images/KittyDoggy/Kitty_Doggy_Panties_Green_DownW.png",
+            "KittyX.underwear == 'green_panties' and KittyX.grool", "images/KittyDoggy/Kitty_Doggy_Panties_Green_DownW.png",
             "KittyX.underwear == 'green_panties'", "images/KittyDoggy/Kitty_Doggy_Panties_Green_Down.png",
-            "KittyX.underwear == 'bikini_bottoms' and KittyX.Wet", "images/KittyDoggy/Kitty_Doggy_Panties_Bikini_DownW.png",
+            "KittyX.underwear == 'bikini_bottoms' and KittyX.grool", "images/KittyDoggy/Kitty_Doggy_Panties_Bikini_DownW.png",
             "KittyX.underwear == 'bikini_bottoms'", "images/KittyDoggy/Kitty_Doggy_Panties_Bikini_Down.png",
             "KittyX.underwear == 'lace_panties'","images/KittyDoggy/Kitty_Doggy_Panties_Lace_Down.png",
             "True", Null(),
@@ -2243,10 +2243,10 @@ image Kitty_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "'in' in KittyX.Spunk and Player.cock_position == 'in'",Null(),
-            "'in' in KittyX.Spunk ", "images/JeanDoggy/Jean_Doggy_SpunkPussyClosed.png",
-            "KittyX.Wet and Player.cock_position == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
-            "KittyX.Wet", "images/RogueDoggy/Rogue_Doggy_WetPussyClosed.png",
+            "'in' in KittyX.spunk and Player.cock_position == 'in'",Null(),
+            "'in' in KittyX.spunk ", "images/JeanDoggy/Jean_Doggy_SpunkPussyClosed.png",
+            "KittyX.grool and Player.cock_position == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
+            "KittyX.grool", "images/RogueDoggy/Rogue_Doggy_WetPussyClosed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -2310,10 +2310,10 @@ image Kitty_Doggy_Ass:
             "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'anal')", Null(),
 
 
-            "KittyX.underwear == 'green_panties' and KittyX.Wet", "images/KittyDoggy/Kitty_Doggy_Panties_GreenW.png",
+            "KittyX.underwear == 'green_panties' and KittyX.grool", "images/KittyDoggy/Kitty_Doggy_Panties_GreenW.png",
             "KittyX.underwear == 'green_panties'", "images/KittyDoggy/Kitty_Doggy_Panties_Green.png",
             "KittyX.underwear == 'lace_panties'", "images/KittyDoggy/Kitty_Doggy_Panties_Lace.png",
-            "KittyX.underwear == 'bikini_bottoms' and KittyX.Wet", "images/KittyDoggy/Kitty_Doggy_Panties_BikiniW.png",
+            "KittyX.underwear == 'bikini_bottoms' and KittyX.grool", "images/KittyDoggy/Kitty_Doggy_Panties_BikiniW.png",
             "KittyX.underwear == 'bikini_bottoms'", "images/KittyDoggy/Kitty_Doggy_Panties_Bikini.png",
             "True", "images/KittyDoggy/Kitty_Doggy_Panties_Green.png",
             ),
@@ -2347,22 +2347,22 @@ image Kitty_Doggy_Ass:
             "KittyX.upskirt", Null(),
             "KittyX.legs == 'capris'", ConditionSwitch(
 
-                    "KittyX.Wet > 1", "images/KittyDoggy/Kitty_Doggy_Legs_BlueW.png",
+                    "KittyX.grool > 1", "images/KittyDoggy/Kitty_Doggy_Legs_BlueW.png",
                     "True", "images/KittyDoggy/Kitty_Doggy_Legs_Blue.png",
                     ),
             "KittyX.legs == 'black jeans'", ConditionSwitch(
 
-                    "KittyX.Wet > 1", "images/KittyDoggy/Kitty_Doggy_Legs_BlackW.png",
+                    "KittyX.grool > 1", "images/KittyDoggy/Kitty_Doggy_Legs_BlackW.png",
                     "True", "images/KittyDoggy/Kitty_Doggy_Legs_Black.png",
                     ),
             "KittyX.legs == 'yoga_pants'", ConditionSwitch(
 
-                    "KittyX.Wet > 1", "images/KittyDoggy/Kitty_Doggy_Legs_YogaW.png",
+                    "KittyX.grool > 1", "images/KittyDoggy/Kitty_Doggy_Legs_YogaW.png",
                     "True", "images/KittyDoggy/Kitty_Doggy_Legs_Yoga.png",
                     ),
             "KittyX.legs == 'shorts'", ConditionSwitch(
 
-                    "KittyX.Wet > 1", "images/KittyDoggy/Kitty_Doggy_Legs_ShortsW.png",
+                    "KittyX.grool > 1", "images/KittyDoggy/Kitty_Doggy_Legs_ShortsW.png",
                     "True", "images/KittyDoggy/Kitty_Doggy_Legs_Shorts.png",
                     ),
 
@@ -2389,7 +2389,7 @@ image Kitty_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "'back' in KittyX.Spunk", "images/KittyDoggy/Kitty_Doggy_Spunk_Ass.png",
+            "'back' in KittyX.spunk", "images/KittyDoggy/Kitty_Doggy_Spunk_Ass.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -3357,9 +3357,9 @@ image Kitty_BJ_Animation:
             ),
         (0,0), ConditionSwitch(
 
-            "action_speed == 0", At("Blowcock", Kitty_BJ_Cock_0()),
-            "action_speed == 1", At("Blowcock", Kitty_BJ_Cock_1()),
-            "action_speed >= 2", At("Blowcock", Kitty_BJ_Cock_2()),
+            "action_speed == 0", At("Zero_cock_blowjob", Kitty_BJ_Cock_0()),
+            "action_speed == 1", At("Zero_cock_blowjob", Kitty_BJ_Cock_1()),
+            "action_speed >= 2", At("Zero_cock_blowjob", Kitty_BJ_Cock_2()),
 
 
 
@@ -3381,7 +3381,7 @@ image Kitty_BJ_Animation:
             ),
         (325,490), ConditionSwitch(
 
-            "action_speed < 3 or 'mouth' not in KittyX.Spunk", Null(),
+            "action_speed < 3 or 'mouth' not in KittyX.spunk", Null(),
             "action_speed == 3", At("KittySuckingSpunk", Kitty_BJ_Head_3()),
             "action_speed == 4", At("KittySuckingSpunk", Kitty_BJ_Head_4()),
             "action_speed == 6", At("KittySuckingSpunk", Kitty_BJ_Head_6()),
@@ -3389,8 +3389,8 @@ image Kitty_BJ_Animation:
             ),
         (325,490), ConditionSwitch(
 
-            "action_speed == 2 and 'mouth' in KittyX.Spunk", At("Kitty_BJ_MaskHeadingSpunk", Kitty_BJ_Head_2()),
-            "action_speed == 5 and 'mouth' in KittyX.Spunk", At("Kitty_BJ_MaskHeadingSpunk", Kitty_BJ_Head_5()),
+            "action_speed == 2 and 'mouth' in KittyX.spunk", At("Kitty_BJ_MaskHeadingSpunk", Kitty_BJ_Head_2()),
+            "action_speed == 5 and 'mouth' in KittyX.spunk", At("Kitty_BJ_MaskHeadingSpunk", Kitty_BJ_Head_5()),
             "True", Null(),
             ),
         )
@@ -3468,7 +3468,7 @@ image Kitty_BJ_Backdrop:
             ),
         (0,0), ConditionSwitch(
 
-            "'tits' not in KittyX.Spunk", Null(),
+            "'tits' not in KittyX.spunk", Null(),
             "True", "images/KittyBJFace/Kitty_BJ_Spunk_Body.png",
             ),
         )
@@ -3554,7 +3554,7 @@ image Kitty_BJ_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "'mouth' not in KittyX.Spunk", Null(),
+            "'mouth' not in KittyX.spunk", Null(),
             "action_speed and renpy.showing('Kitty_BJ_Animation')", ConditionSwitch(
 
                     "action_speed == 1", "images/KittyBJFace/Kitty_BJ_Spunk_Tongue.png",
@@ -3587,7 +3587,7 @@ image Kitty_BJ_Head:
 
         (0,0), ConditionSwitch(
 
-            "'facial' in KittyX.Spunk", "images/KittyBJFace/Kitty_BJ_Spunk_Facial.png",
+            "'facial' in KittyX.spunk", "images/KittyBJFace/Kitty_BJ_Spunk_Facial.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -3605,7 +3605,7 @@ image Kitty_BJ_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "'hair' in KittyX.Spunk", "images/KittyBJFace/Kitty_BJ_Spunk_Hair.png",
+            "'hair' in KittyX.spunk", "images/KittyBJFace/Kitty_BJ_Spunk_Hair.png",
             "True", Null(),
             ),
         )
@@ -3650,7 +3650,7 @@ image Kitty_BJ_MouthSuckingMask:
         zoom 1.4
     contains:
         ConditionSwitch(
-            "'mouth' not in KittyX.Spunk", Null(),
+            "'mouth' not in KittyX.spunk", Null(),
             "action_speed != 2 and action_speed != 5", Null(),
             "True", "images/KittyBJFace/Kitty_BJ_Spunk_SuckingU.png",
             )
@@ -4158,7 +4158,7 @@ image Kitty_TJ_Body_0:
     contains:
 
         ConditionSwitch(
-                    "Player.sprite", "Blowcock",
+                    "Player.sprite", "Zero_cock_blowjob",
                     "True", Null(),
                     )
         subpixel True
@@ -4245,7 +4245,7 @@ image Kitty_TJ_Body_1:
     contains:
 
         ConditionSwitch(
-                    "Player.sprite", AlphaMask("Blowcock", "Kitty_TJ_Mask_1"),
+                    "Player.sprite", AlphaMask("Zero_cock_blowjob", "Kitty_TJ_Mask_1"),
                     "True", Null(),
                     )
         subpixel True
@@ -4338,7 +4338,7 @@ image Kitty_TJ_Body_2:
     contains:
 
         ConditionSwitch(
-                    "Player.sprite", AlphaMask("Blowcock", "Kitty_TJ_Mask_2"),
+                    "Player.sprite", AlphaMask("Zero_cock_blowjob", "Kitty_TJ_Mask_2"),
                     "True", Null(),
                     )
         subpixel True
@@ -4497,7 +4497,7 @@ image Kitty_TJ_Body_3:
     contains:
 
         ConditionSwitch(
-                    "Player.sprite", AlphaMask("Blowcock", "Kitty_TJ_Mask_3"),
+                    "Player.sprite", AlphaMask("Zero_cock_blowjob", "Kitty_TJ_Mask_3"),
                     "True", Null(),
                     )
         subpixel True
@@ -4602,7 +4602,7 @@ image Kitty_TJ_Body_5:
 
         ConditionSwitch(
 
-                    "Player.sprite", AlphaMask("Blowcock", "Kitty_TJ_Mask_5"),
+                    "Player.sprite", AlphaMask("Zero_cock_blowjob", "Kitty_TJ_Mask_5"),
 
                     "True", Null(),
                     )
@@ -4660,8 +4660,8 @@ label Kitty_TJ_Launch(Line=primary_action):
         "She throws off her [KittyX.top], baring her breasts underneath."
     elif KittyX.bra:
         "She tugs off her [KittyX.bra] and throws it aside."
-    $ KittyX.top = 0
-    $ KittyX.bra = 0
+    $ KittyX.top = ""
+    $ KittyX.bra = ""
     $ KittyX.ArmPose = 0
     call Kitty_First_Topless
     if Line == "L":
@@ -4859,12 +4859,12 @@ label Kitty_Kissing_Launch(T=primary_action, Set=1):
     return
 
 label Kitty_Kissing_Smooch:
-    $ KittyX.change_face("kiss")
+    $ KittyX.change_face("_kiss")
     show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos KittyX.sprite_location zoom 1
-    $ KittyX.change_face("sexy")
+    $ KittyX.change_face("_sexy")
     return
 
 label Kitty_Breasts_Launch(T=primary_action, Set=1):

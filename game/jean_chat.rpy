@@ -7,16 +7,16 @@ label Jean_Relationship:
             ch_j "What did you want to talk about?"
             "Do you want to be my girlfriend?" if JeanX not in Player.Harem and "ex" not in JeanX.traits:
                 $ JeanX.daily_history.append("relationship")
-                if "asked boyfriend" in JeanX.daily_history and "angry" in JeanX.daily_history:
-                    $ JeanX.change_face("angry", 1)
+                if "asked boyfriend" in JeanX.daily_history and "_angry" in JeanX.daily_history:
+                    $ JeanX.change_face("_angry", 1)
                     ch_j "Again with this? No!"
                     return
                 elif "asked boyfriend" in JeanX.daily_history:
-                    $ JeanX.change_face("angry", 1)
+                    $ JeanX.change_face("_angry", 1)
                     ch_j "Still no."
                     return
                 elif JeanX.Break[0]:
-                    $ JeanX.change_face("angry", 1)
+                    $ JeanX.change_face("_angry", 1)
                     ch_j "You have to be kidding."
                     if Player.Harem:
                         $ JeanX.daily_history.append("asked boyfriend")
@@ -34,18 +34,18 @@ label Jean_Relationship:
                     return
 
                 if JeanX.Event[5]:
-                    $ JeanX.change_face("bemused", 1)
+                    $ JeanX.change_face("_bemused", 1)
                     ch_j "Hey, you were the one that said \"no\". . ."
                 else:
-                    $ JeanX.change_face("surprised", 2)
+                    $ JeanX.change_face("_surprised", 2)
                     ch_j "What? Why?"
-                    $ JeanX.change_face("smile", 1)
+                    $ JeanX.change_face("_smile", 1)
 
                 call Jean_OtherWoman
 
                 if JeanX.love >= 800:
-                    $ JeanX.change_face("surprised", 1)
-                    $ JeanX.mouth = "smile"
+                    $ JeanX.change_face("_surprised", 1)
+                    $ JeanX.mouth = "_smile"
                     $ JeanX.change_stat("love", 200, 40)
                     ch_j "Huh. Ok."
                     if "boyfriend" not in JeanX.player_petnames:
@@ -55,27 +55,27 @@ label Jean_Relationship:
                     $ Player.Harem.append(JeanX)
                     call Harem_Initiation
                     "[JeanX.name] floats in and kisses you deeply."
-                    $ JeanX.change_face("kiss", 1)
+                    $ JeanX.change_face("_kiss", 1)
                     $ JeanX.action_counter["kiss"] += 1
                 elif JeanX.obedience >= 500:
-                    $ JeanX.change_face("perplexed")
+                    $ JeanX.change_face("_perplexed")
                     ch_j "\"Dating\". . . I mean. . ."
                     ch_j "That's not really what this is. . ."
                 elif JeanX.inhibition >= 500:
-                    $ JeanX.change_face("smile")
+                    $ JeanX.change_face("_smile")
                     ch_j "-No-."
                 else:
-                    $ JeanX.change_face("perplexed", 1)
+                    $ JeanX.change_face("_perplexed", 1)
                     ch_j "Relax there, [JeanX.player_petname]."
 
             "Do you want to get back together?" if "ex" in JeanX.traits:
                 $ JeanX.daily_history.append("relationship")
-                if "asked boyfriend" in JeanX.daily_history and "angry" in JeanX.daily_history:
-                    $ JeanX.change_face("angry", 1)
+                if "asked boyfriend" in JeanX.daily_history and "_angry" in JeanX.daily_history:
+                    $ JeanX.change_face("_angry", 1)
                     ch_j "Again with this? No!"
                     return
                 elif "asked boyfriend" in JeanX.daily_history:
-                    $ JeanX.change_face("angry", 1)
+                    $ JeanX.change_face("_angry", 1)
                     ch_j "Still no."
                     return
 
@@ -92,8 +92,8 @@ label Jean_Relationship:
                 call Jean_OtherWoman
 
                 if JeanX.love >= 800:
-                    $ JeanX.change_face("surprised", 1)
-                    $ JeanX.mouth = "smile"
+                    $ JeanX.change_face("_surprised", 1)
+                    $ JeanX.mouth = "_smile"
                     $ JeanX.change_stat("love", 90, 5)
                     ch_j "Oh, fine, whatever."
                     if "boyfriend" not in JeanX.player_petnames:
@@ -104,10 +104,10 @@ label Jean_Relationship:
                     $ Player.Harem.append(JeanX)
                     call Harem_Initiation
                     "[JeanX.name] floats in and kisses you."
-                    $ JeanX.change_face("kiss", 1)
+                    $ JeanX.change_face("_kiss", 1)
                     $ JeanX.action_counter["kiss"] += 1
                 elif JeanX.love >= 600 and approval_check(JeanX, 1500):
-                    $ JeanX.change_face("smile", 1)
+                    $ JeanX.change_face("_smile", 1)
                     $ JeanX.change_stat("love", 90, 5)
                     ch_j "Sure, whatever."
                     if "boyfriend" not in JeanX.player_petnames:
@@ -117,18 +117,18 @@ label Jean_Relationship:
                         $ Player.traits.remove("JeanYes")
                     $ Player.Harem.append(JeanX)
                     call Harem_Initiation
-                    $ JeanX.change_face("kiss", 1)
+                    $ JeanX.change_face("_kiss", 1)
                     "[JeanX.name] gives you a quick kiss."
-                    $ JeanX.change_face("sly", 1)
+                    $ JeanX.change_face("_sly", 1)
                     $ JeanX.action_counter["kiss"] += 1
                 elif JeanX.obedience >= 500:
-                    $ JeanX.change_face("sad")
+                    $ JeanX.change_face("_sad")
                     ch_j "That's not really where we're at."
                 elif JeanX.inhibition >= 500:
-                    $ JeanX.change_face("perplexed")
+                    $ JeanX.change_face("_perplexed")
                     ch_j "That's no fun."
                 else:
-                    $ JeanX.change_face("perplexed", 1)
+                    $ JeanX.change_face("_perplexed", 1)
                     ch_j "Um, no."
 
 
@@ -181,7 +181,7 @@ label Jean_OtherWoman(counter=0):
         return
     $ counter = int((JeanX.GirlLikeCheck(Player.Harem[0]) - 500)/2)
 
-    $ JeanX.change_face("perplexed")
+    $ JeanX.change_face("_perplexed")
     if len(Player.Harem) >= 2:
         ch_j "Aren't you hanging out with. . . [Player.Harem[0].name] right now?"
         ch_j "And that's not all, if I'm reading the room right."
@@ -191,7 +191,7 @@ label Jean_OtherWoman(counter=0):
         extend ""
         "She said I can be with you too." if "JeanYes" in Player.traits:
             if approval_check(JeanX, 1800, Bonus = counter):
-                $ JeanX.change_face("smile", 1)
+                $ JeanX.change_face("_smile", 1)
                 if JeanX.love >= JeanX.obedience:
                     ch_j "Oh, well ok then."
                 elif JeanX.obedience >= JeanX.inhibition:
@@ -199,14 +199,14 @@ label Jean_OtherWoman(counter=0):
                 else:
                     ch_j "Oh, cool."
             else:
-                $ JeanX.change_face("smile", 1)
+                $ JeanX.change_face("_smile", 1)
                 ch_j "Lol, cuck."
 
 
 
         "I could ask if she'd be ok with me dating you both." if "JeanYes" not in Player.traits:
             if approval_check(JeanX, 1800, Bonus = counter):
-                $ JeanX.change_face("smile", 1)
+                $ JeanX.change_face("_smile", 1)
                 if JeanX.love >= JeanX.obedience:
                     ch_j "Probably a good idea."
                 elif JeanX.obedience >= JeanX.inhibition:
@@ -215,7 +215,7 @@ label Jean_OtherWoman(counter=0):
                     ch_j "bawk, bawkbawk baawk."
                 ch_j "Fine, ask her and let me know in the morning."
             else:
-                $ JeanX.change_face("smile", 1)
+                $ JeanX.change_face("_smile", 1)
                 ch_j "Lol, I bet she would. . ."
             $ renpy.pop_call()
         "What she doesn't know won't hurt her.":
@@ -228,7 +228,7 @@ label Jean_OtherWoman(counter=0):
 
 
 
-            $ JeanX.change_face("smile", 1)
+            $ JeanX.change_face("_smile", 1)
             if JeanX.love >= JeanX.obedience:
                 ch_j "True. . ."
             elif JeanX.obedience >= JeanX.inhibition:
@@ -238,12 +238,12 @@ label Jean_OtherWoman(counter=0):
             $ JeanX.traits.append("downlow")
         "I can break it off with her.":
 
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             ch_j "Yeah, get on that."
             $ renpy.pop_call()
         "You're right, I was dumb to ask.":
 
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             ch_j "Definitely."
             $ renpy.pop_call()
 
@@ -378,25 +378,25 @@ label Jean_Monogamy:
         "Could you not hook up with other girls?" if "mono" not in JeanX.traits:
             if JeanX.Thirst >= 60 and not approval_check(JeanX, 1700, "LO", TabM=0):
 
-                $ JeanX.change_face("sly",1)
+                $ JeanX.change_face("_sly",1)
                 if "mono" not in JeanX.daily_history:
                     $ JeanX.change_stat("obedience", 90, -2)
                 ch_j "Sorry, I've got plans later."
                 return
             elif approval_check(JeanX, 1200, "LO", TabM=0) and JeanX.love >= JeanX.obedience:
 
-                $ JeanX.change_face("sly",1)
+                $ JeanX.change_face("_sly",1)
                 if "mono" not in JeanX.daily_history:
                     $ JeanX.change_stat("love", 90, 1)
                 ch_j "Oh, jealous?"
                 ch_j "Ok, fine, but you owe me. . ."
             elif approval_check(JeanX, 700, "O", TabM=0):
 
-                $ JeanX.change_face("sly",1,Eyes="side")
+                $ JeanX.change_face("_sly",1,Eyes="_side")
                 ch_j "Well. . . ok, fine."
             else:
 
-                $ JeanX.change_face("sly",1)
+                $ JeanX.change_face("_sly",1)
                 ch_j "Ha!"
                 return
             if "mono" not in JeanX.daily_history:
@@ -406,27 +406,27 @@ label Jean_Monogamy:
         "Don't hook up with other girls." if "mono" not in JeanX.traits:
             if approval_check(JeanX, 900, "O", TabM=0):
 
-                $ JeanX.change_face("sly",1,Eyes="side")
+                $ JeanX.change_face("_sly",1,Eyes="_side")
                 ch_j "Well. . . ok, fine."
             elif JeanX.Thirst >= 60 and not approval_check(JeanX, 1700, "LO", TabM=0):
 
-                $ JeanX.change_face("sly",1)
+                $ JeanX.change_face("_sly",1)
                 if "mono" not in JeanX.daily_history:
                     $ JeanX.change_stat("obedience", 90, -2)
                 ch_j "Sorry, I've got plans later."
                 return
             elif approval_check(JeanX, 600, "O", TabM=0):
 
-                $ JeanX.change_face("sly",1,Eyes="side")
+                $ JeanX.change_face("_sly",1,Eyes="_side")
                 ch_j "Well. . . ok, fine."
             elif approval_check(JeanX, 1400, "LO", TabM=0):
 
-                $ JeanX.change_face("sly",1)
+                $ JeanX.change_face("_sly",1)
                 ch_j "Oh, jealous?"
                 ch_j "Ok, fine, but you owe me. . ."
             else:
 
-                $ JeanX.change_face("sly",1,Brows="confused")
+                $ JeanX.change_face("_sly",1,Brows="_confused")
                 ch_j "Ha!"
                 return
             if "mono" not in JeanX.daily_history:
@@ -435,13 +435,13 @@ label Jean_Monogamy:
             $ JeanX.traits.append("mono")
         "It's ok if you hook up with other girls." if "mono" in JeanX.traits:
             if approval_check(JeanX, 700, "O", TabM=0):
-                $ JeanX.change_face("sly",1,Eyes="side")
+                $ JeanX.change_face("_sly",1,Eyes="_side")
                 ch_j ". . . good."
             elif approval_check(JeanX, 800, "L", TabM=0):
-                $ JeanX.change_face("sly",1)
+                $ JeanX.change_face("_sly",1)
                 ch_j "Ok. . ."
             else:
-                $ JeanX.change_face("sly",1,Brows="confused")
+                $ JeanX.change_face("_sly",1,Brows="_confused")
                 if "mono" not in JeanX.daily_history:
                     $ JeanX.change_stat("love", 90, -2)
                 ch_j "Good to know. . ."
@@ -459,14 +459,14 @@ label Jean_Monogamy:
 label Jean_Jumped:
 
     ch_p "Hey, Remember that time you threw yourself at me?"
-    $ JeanX.change_face("sly",1,Brows="confused")
+    $ JeanX.change_face("_sly",1,Brows="_confused")
     ch_j "I'm not sure I'd put it like that, but. . . yeah?"
     menu:
         ch_j ". . . yeah?"
         "Could you maybe just ask instead?" if "chill" not in JeanX.traits:
             if JeanX.Thirst >= 60 and not approval_check(JeanX, 1500, "LO", TabM=0):
 
-                $ JeanX.change_face("sly",1)
+                $ JeanX.change_face("_sly",1)
                 if "chill" not in JeanX.daily_history:
                     $ JeanX.change_stat("obedience", 90, -2)
                 ch_j "Why waste the time?"
@@ -474,19 +474,19 @@ label Jean_Jumped:
                 return
             elif approval_check(JeanX, 1000, "LO", TabM=0) and JeanX.love >= JeanX.obedience:
 
-                $ JeanX.change_face("surprised",1)
+                $ JeanX.change_face("_surprised",1)
                 if "chill" not in JeanX.daily_history:
                     $ JeanX.change_stat("love", 90, 1)
                 ch_j "I was really horny though. . ."
-                $ JeanX.change_face("sly",1,Eyes="side")
+                $ JeanX.change_face("_sly",1,Eyes="_side")
                 ch_j "I'll give it some thought. . ."
             elif approval_check(JeanX, 500, "O", TabM=0):
 
-                $ JeanX.change_face("sly",1,Eyes="side")
+                $ JeanX.change_face("_sly",1,Eyes="_side")
                 ch_j "Maybe. . ."
             else:
 
-                $ JeanX.change_face("sly",1)
+                $ JeanX.change_face("_sly",1)
                 ch_j "Why waste the time?"
                 ch_j "It's not like you'd say \"no.\""
                 return
@@ -497,11 +497,11 @@ label Jean_Jumped:
         "Don't bother me like that." if "chill" not in JeanX.traits:
             if approval_check(JeanX, 800, "O", TabM=0):
 
-                $ JeanX.change_face("sly",1,Eyes="side")
+                $ JeanX.change_face("_sly",1,Eyes="_side")
                 ch_j ". . . fine. . ."
             elif JeanX.Thirst >= 60 and not approval_check(JeanX, 500, "O", TabM=0):
 
-                $ JeanX.change_face("sly",1)
+                $ JeanX.change_face("_sly",1)
                 if "chill" not in JeanX.daily_history:
                     $ JeanX.change_stat("obedience", 90, -2)
                 ch_j "Why waste the time?"
@@ -509,16 +509,16 @@ label Jean_Jumped:
                 return
             elif approval_check(JeanX, 400, "O", TabM=0):
 
-                $ JeanX.change_face("sly",1,Eyes="side")
+                $ JeanX.change_face("_sly",1,Eyes="_side")
                 ch_j "Well. . . ok. . ."
             elif approval_check(JeanX, 500, "LO", TabM=0) and not approval_check(JeanX, 500, "I", TabM=0):
 
-                $ JeanX.change_face("sly",1)
+                $ JeanX.change_face("_sly",1)
                 ch_j "Rude."
                 ch_j "I guess I cna try though. . ."
             else:
 
-                $ JeanX.change_face("sly",1)
+                $ JeanX.change_face("_sly",1)
                 ch_j "Why waste the time?"
                 ch_j "It's not like you'd say \"no.\""
                 return
@@ -528,13 +528,13 @@ label Jean_Jumped:
             $ JeanX.traits.append("chill")
         "Knock yourself out.":
             if approval_check(JeanX, 800, "L", TabM=0):
-                $ JeanX.change_face("sly",1)
+                $ JeanX.change_face("_sly",1)
                 ch_j "Heh, you know how I think. . ."
             elif approval_check(JeanX, 700, "O", TabM=0):
-                $ JeanX.change_face("sly",1,Eyes="side")
+                $ JeanX.change_face("_sly",1,Eyes="_side")
                 ch_j "Good to know."
             else:
-                $ JeanX.change_face("sly",1,Brows="confused")
+                $ JeanX.change_face("_sly",1,Brows="_confused")
                 if "chill" not in JeanX.daily_history:
                     $ JeanX.change_stat("love", 90, -2)
                 ch_j "We'll see. . ."
@@ -575,7 +575,7 @@ label Jean_SexChat:
                 else:
                     menu:
                         "Sex.":
-                            $ JeanX.change_face("sly")
+                            $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "sex":
                                 $ JeanX.change_stat("lust", 80, 5)
                                 ch_j "Yeah, I know that. . ."
@@ -586,15 +586,15 @@ label Jean_SexChat:
                             elif JeanX.action_counter["sex"] >= 5:
                                 ch_j "Well I don't mind that."
                             elif not JeanX.action_counter["sex"]:
-                                $ JeanX.change_face("perplexed")
+                                $ JeanX.change_face("_perplexed")
                                 ch_j "Oh? Who with?"
                             else:
-                                $ JeanX.change_face("bemused")
+                                $ JeanX.change_face("_bemused")
                                 ch_j "Heh, um, yeah, it's nice. . ."
                             $ JeanX.player_favorite_action = "sex"
                         "Anal.":
 
-                            $ JeanX.change_face("sly")
+                            $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "anal":
                                 $ JeanX.change_stat("lust", 80, 5)
                                 ch_j "So you've said. . ."
@@ -605,15 +605,15 @@ label Jean_SexChat:
                             elif JeanX.action_counter["anal"] >= 10:
                                 ch_j "Yeah, it's. . . nice. . ."
                             elif not JeanX.action_counter["anal"]:
-                                $ JeanX.change_face("perplexed")
+                                $ JeanX.change_face("_perplexed")
                                 ch_j "Oh? Who with?"
                             else:
-                                $ JeanX.change_face("bemused",Eyes="side")
+                                $ JeanX.change_face("_bemused",Eyes="_side")
                                 ch_j "Heh, heh, yeah, um, it's ok. . ."
                             $ JeanX.player_favorite_action = "anal"
                         "Blowjobs.":
 
-                            $ JeanX.change_face("sly")
+                            $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "blowjob":
                                 $ JeanX.change_stat("lust", 80, 3)
                                 ch_j "Yeah, I know."
@@ -624,15 +624,15 @@ label Jean_SexChat:
                             elif JeanX.action_counter["blowjob"] >= 10:
                                 ch_j "Yeah, you're surprisingly tasty."
                             elif not JeanX.action_counter["blowjob"]:
-                                $ JeanX.change_face("perplexed")
+                                $ JeanX.change_face("_perplexed")
                                 ch_j "Oh? Who with?"
                             else:
-                                $ JeanX.change_face("bemused")
+                                $ JeanX.change_face("_bemused")
                                 ch_j "You're lucky you taste so good."
                             $ JeanX.player_favorite_action = "blowjob"
                         "Titjobs.":
 
-                            $ JeanX.change_face("sly")
+                            $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "titjob":
                                 $ JeanX.change_stat("lust", 80, 5)
                                 ch_j "Yeah, you've said that before. . ."
@@ -643,17 +643,17 @@ label Jean_SexChat:
                             elif JeanX.action_counter["titjob"] >= 10:
                                 ch_j "Nice, right?"
                             elif not JeanX.action_counter["titjob"]:
-                                $ JeanX.change_face("perplexed")
+                                $ JeanX.change_face("_perplexed")
                                 ch_j "Oh? Who with?"
                             else:
-                                $ JeanX.change_face("bemused")
+                                $ JeanX.change_face("_bemused")
                                 ch_j "They are pretty nice. . ."
                                 $ JeanX.change_stat("love", 80, 5)
                                 $ JeanX.change_stat("inhibition", 50, 10)
                             $ JeanX.player_favorite_action = "titjob"
                         "Footjobs.":
 
-                            $ JeanX.change_face("sly")
+                            $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "foot":
                                 $ JeanX.change_stat("lust", 80, 5)
                                 ch_j "Yeah, you've said that. . ."
@@ -664,15 +664,15 @@ label Jean_SexChat:
                             elif JeanX.action_counter["footjob"] >= 10:
                                 ch_j "I like it too . . ."
                             elif not JeanX.action_counter["footjob"]:
-                                $ JeanX.change_face("perplexed")
+                                $ JeanX.change_face("_perplexed")
                                 ch_j "Oh? Who with?"
                             else:
-                                $ JeanX.change_face("bemused")
+                                $ JeanX.change_face("_bemused")
                                 ch_j "Yeah, it's nice. . ."
                             $ JeanX.player_favorite_action = "foot"
                         "Handjobs.":
 
-                            $ JeanX.change_face("sly")
+                            $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "handjob":
                                 $ JeanX.change_stat("lust", 80, 5)
                                 ch_j "Yeah, you've said that. . ."
@@ -683,16 +683,16 @@ label Jean_SexChat:
                             elif JeanX.action_counter["handjob"] >= 10:
                                 ch_j "I like it too . . ."
                             elif not JeanX.action_counter["handjob"]:
-                                $ JeanX.change_face("perplexed")
+                                $ JeanX.change_face("_perplexed")
                                 ch_j "Oh? Who with?"
                             else:
-                                $ JeanX.change_face("bemused")
+                                $ JeanX.change_face("_bemused")
                                 ch_j "Yeah, it's nice. . ."
                             $ JeanX.player_favorite_action = "handjob"
                         "Feeling you up.":
 
                             $ counter = JeanX.action_counter["fondle_breasts"]+ JeanX.action_counter["fondle_thighs"]+ JeanX.action_counter["suck_breasts"] + JeanX.action_counter["hotdog"]
-                            $ JeanX.change_face("sly")
+                            $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "fondle":
                                 $ JeanX.change_stat("lust", 80, 3)
                                 ch_j "Yeah, I think we're clear on that. . ."
@@ -703,16 +703,16 @@ label Jean_SexChat:
                             elif counter >= 10:
                                 ch_j "Yeah, it's really nice . . ."
                             elif not counter:
-                                $ JeanX.change_face("perplexed")
+                                $ JeanX.change_face("_perplexed")
                                 ch_j "Oh? Who with?"
                             else:
-                                $ JeanX.change_face("bemused")
+                                $ JeanX.change_face("_bemused")
                                 ch_j "I do like how that feels. . ."
                             $ JeanX.player_favorite_action = "fondle"
                             $ counter = 0
                         "Kissing you.":
 
-                            $ JeanX.change_face("sly")
+                            $ JeanX.change_face("_sly")
                             if JeanX.player_favorite_action == "kiss":
                                 $ JeanX.change_stat("love", 90, 3)
                                 ch_j "Dork. . ."
@@ -723,10 +723,10 @@ label Jean_SexChat:
                             elif JeanX.action_counter["kiss"] >= 10:
                                 ch_j "Yeah, it's fun . . ."
                             elif not JeanX.action_counter["kiss"]:
-                                $ JeanX.change_face("perplexed")
+                                $ JeanX.change_face("_perplexed")
                                 ch_j "Oh? Who with?"
                             else:
-                                $ JeanX.change_face("bemused")
+                                $ JeanX.change_face("_bemused")
                                 ch_j "I do too. . ."
                             $ JeanX.player_favorite_action = "kiss"
 
@@ -734,15 +734,15 @@ label Jean_SexChat:
             "What's your favorite thing to do?":
 
                 if not approval_check(JeanX, 800):
-                    $ JeanX.change_face("perplexed")
+                    $ JeanX.change_face("_perplexed")
                     ch_j ". . ."
                 else:
                     if JeanX.SEXP >= 50:
-                        $ JeanX.change_face("perplexed")
+                        $ JeanX.change_face("_perplexed")
                         ch_j "You should know that by now. . ."
                     else:
-                        $ JeanX.change_face("bemused")
-                        $ JeanX.eyes = "side"
+                        $ JeanX.change_face("_bemused")
+                        $ JeanX.eyes = "_side"
                         ch_j "Hmm. . ."
 
 
@@ -783,27 +783,27 @@ label Jean_SexChat:
 
             "Don't talk as much during sex." if "vocal" in JeanX.traits:
                 if "setvocal" in JeanX.daily_history:
-                    $ JeanX.change_face("perplexed")
+                    $ JeanX.change_face("_perplexed")
                     ch_j "Don't jerk me around, [Girl.player_petname]."
                 else:
                     if approval_check(JeanX, 1000) and JeanX.obedience <= JeanX.love:
-                        $ JeanX.change_face("bemused")
+                        $ JeanX.change_face("_bemused")
                         $ JeanX.change_stat("obedience", 90, 1)
                         ch_j ". . . fine."
                         $ JeanX.traits.remove("vocal")
                     elif approval_check(JeanX, 700, "O"):
-                        $ JeanX.change_face("sadside")
+                        $ JeanX.change_face("_sadside")
                         $ JeanX.change_stat("obedience", 90, 1)
                         ch_j ". . ."
                         $ JeanX.traits.remove("vocal")
                     elif approval_check(JeanX, 600):
-                        $ JeanX.change_face("sly")
+                        $ JeanX.change_face("_sly")
                         $ JeanX.change_stat("love", 90, -3)
                         $ JeanX.change_stat("obedience", 50, -1)
                         $ JeanX.change_stat("inhibition", 90, 5)
                         ch_j "Oh, I'll talk and you'll listen, [JeanX.player_petname]."
                     else:
-                        $ JeanX.change_face("angry")
+                        $ JeanX.change_face("_angry")
                         $ JeanX.change_stat("love", 90, -5)
                         $ JeanX.change_stat("obedience", 60, -3)
                         $ JeanX.change_stat("inhibition", 90, 10)
@@ -812,26 +812,26 @@ label Jean_SexChat:
                     $ JeanX.daily_history.append("setvocal")
             "Talk dirty to me during sex." if "vocal" not in JeanX.traits:
                 if "setvocal" in JeanX.daily_history:
-                    $ JeanX.change_face("perplexed")
+                    $ JeanX.change_face("_perplexed")
                     ch_j "Don't jerk me around, [Girl.player_petname]."
                 else:
                     if approval_check(JeanX, 1000) and JeanX.obedience <= JeanX.love:
-                        $ JeanX.change_face("sly")
+                        $ JeanX.change_face("_sly")
                         $ JeanX.change_stat("obedience", 90, 2)
                         ch_j "I think that can be arranged. . ."
                         $ JeanX.traits.append("vocal")
                     elif approval_check(JeanX, 700, "O"):
-                        $ JeanX.change_face("sadside")
+                        $ JeanX.change_face("_sadside")
                         $ JeanX.change_stat("obedience", 90, 2)
                         ch_j "I'll see what I can do, [JeanX.player_petname]."
                         $ JeanX.traits.append("vocal")
                     elif approval_check(JeanX, 600):
-                        $ JeanX.change_face("sly")
+                        $ JeanX.change_face("_sly")
                         $ JeanX.change_stat("obedience", 90, 3)
                         ch_j "Sure, whatever."
                         $ JeanX.traits.append("vocal")
                     else:
-                        $ JeanX.change_face("angry")
+                        $ JeanX.change_face("_angry")
                         $ JeanX.change_stat("inhibition", 90, 5)
                         ch_j ". . ."
 
@@ -840,27 +840,27 @@ label Jean_SexChat:
 
             "Don't do your own thing as much during sex." if "passive" not in JeanX.traits:
                 if "initiative" in JeanX.daily_history:
-                    $ JeanX.change_face("perplexed")
+                    $ JeanX.change_face("_perplexed")
                     ch_j "Don't jerk me around, [Girl.player_petname]."
                 else:
                     if approval_check(JeanX, 1200) and JeanX.obedience <= JeanX.love:
-                        $ JeanX.change_face("bemused")
+                        $ JeanX.change_face("_bemused")
                         $ JeanX.change_stat("obedience", 90, 1)
                         ch_j "Like me \"passive?\" I'll see what I can do. . ."
                         $ JeanX.traits.append("passive")
                     elif approval_check(JeanX, 700, "O"):
-                        $ JeanX.change_face("sadside")
+                        $ JeanX.change_face("_sadside")
                         $ JeanX.change_stat("obedience", 90, 1)
                         ch_j ". . . yeah, ok. . ."
                         $ JeanX.traits.append("passive")
                     elif approval_check(JeanX, 600):
-                        $ JeanX.change_face("sly")
+                        $ JeanX.change_face("_sly")
                         $ JeanX.change_stat("love", 90, -3)
                         $ JeanX.change_stat("obedience", 50, -1)
                         $ JeanX.change_stat("inhibition", 90, 5)
                         ch_j "Hm, -NO.-"
                     else:
-                        $ JeanX.change_face("angry")
+                        $ JeanX.change_face("_angry")
                         $ JeanX.change_stat("love", 90, -5)
                         $ JeanX.change_stat("obedience", 60, -3)
                         $ JeanX.change_stat("inhibition", 90, 10)
@@ -869,26 +869,26 @@ label Jean_SexChat:
                     $ JeanX.daily_history.append("initiative")
             "Take more initiative during sex." if "passive" in JeanX.traits:
                 if "initiative" in JeanX.daily_history:
-                    $ JeanX.change_face("perplexed")
+                    $ JeanX.change_face("_perplexed")
                     ch_j "Don't jerk me around, [Girl.player_petname]."
                 else:
                     if approval_check(JeanX, 1000) and JeanX.obedience <= JeanX.love:
-                        $ JeanX.change_face("bemused")
+                        $ JeanX.change_face("_bemused")
                         $ JeanX.change_stat("obedience", 90, 1)
                         ch_j "Damned right I will."
                         $ JeanX.traits.remove("passive")
                     elif approval_check(JeanX, 700, "O"):
-                        $ JeanX.change_face("sadside")
+                        $ JeanX.change_face("_sadside")
                         $ JeanX.change_stat("obedience", 90, 1)
                         ch_j ". . . fine. . ."
                         $ JeanX.traits.remove("passive")
                     elif approval_check(JeanX, 600):
-                        $ JeanX.change_face("sly")
+                        $ JeanX.change_face("_sly")
                         $ JeanX.change_stat("obedience", 90, 3)
                         ch_j "Sure."
                         $ JeanX.traits.remove("passive")
                     else:
-                        $ JeanX.change_face("angry")
+                        $ JeanX.change_face("_angry")
                         $ JeanX.change_stat("inhibition", 90, 5)
                         ch_j "Ugh, don't bother me with that, figure it out yourself."
 
@@ -907,9 +907,9 @@ label Jean_SexChat:
                     "Don't do that anymore, I want him to know." if "screen" in JeanX.traits:
                         ch_j "So naughty. . ."
                         if approval_check(JeanX, 900, "OI"):
-                            $ JeanX.change_face("sad")
+                            $ JeanX.change_face("_sad")
                             ch_j "Fine, I can leave it down."
-                            $ JeanX.change_face("bemused")
+                            $ JeanX.change_face("_bemused")
                             $ JeanX.traits.append("noscreen")
                         else:
                             ch_j "Still, I don't like him bothering us."
@@ -935,7 +935,7 @@ label Jean_SexChat:
                         ch_j "Oh, well. . ."
                         if "Alpha" not in Player.traits:
 
-                            $ JeanX.change_face("sad")
+                            $ JeanX.change_face("_sad")
                             ch_j "I'd love to, but Chuck'd have my ovaries over it. . ."
                         elif approval_check(JeanX, 800, "I"):
                             if "whammytalk" not in JeanX.daily_history:
@@ -944,13 +944,13 @@ label Jean_SexChat:
                                 $ JeanX.change_stat("inhibition", 90, 10)
                             if not approval_check(JeanX, 800, "LO"):
 
-                                $ JeanX.change_face("sad")
+                                $ JeanX.change_face("_sad")
                                 ch_j "Actually, I like it that way."
                             else:
 
-                                $ JeanX.change_face("sad")
+                                $ JeanX.change_face("_sad")
                                 ch_j "Ok, fine. . ."
-                                $ JeanX.change_face("bemused")
+                                $ JeanX.change_face("_bemused")
                                 ch_j "I did kind of enjoy the thrill though. . ."
                         else:
 
@@ -967,11 +967,11 @@ label Jean_SexChat:
                             $ JeanX.change_stat("inhibition", 90, 10)
                         ch_j "Oh, well. . ."
                         if approval_check(JeanX, 1500):
-                            $ JeanX.change_face("sad")
+                            $ JeanX.change_face("_sad")
                             ch_j "Ok, I guess I can. . ."
                             $ JeanX.traits.append("nowhammy")
                         else:
-                            $ JeanX.change_face("bemused")
+                            $ JeanX.change_face("_bemused")
                             ch_j "Well too bad for you. . ."
                         $ JeanX.daily_history.append("whammytalk")
                     "Never mind.":
@@ -1014,7 +1014,7 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
 
         if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or approval_check(JeanX, 800, "I")):
             if JeanX.location == bg_current and JeanX.Thirst >= 30 and "refused" not in JeanX.daily_history and "quicksex" not in JeanX.daily_history:
-                $ JeanX.change_face("sly",1)
+                $ JeanX.change_face("_sly",1)
                 ch_j "I could use some stress relief, you busy?"
                 call Quick_Sex (JeanX)
                 return
@@ -1094,35 +1094,35 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
 
     if Options[0] == "mandrill":
         $ JeanX.daily_history.append("cologne chat")
-        $ JeanX.change_face("confused")
+        $ JeanX.change_face("_confused")
         ch_j "(sniff, sniff). . . have you been fucking Hank? . ."
-        $ JeanX.change_face("sexy", 2)
+        $ JeanX.change_face("_sexy", 2)
         ch_j ". . . still, you do smell kinda good. . ."
     elif Options[0] == "purple":
         $ JeanX.daily_history.append("cologne chat")
-        $ JeanX.change_face("sly",1)
+        $ JeanX.change_face("_sly",1)
         ch_j "(sniff, sniff). . . what is that? . ."
-        $ JeanX.change_face("normal",0)
+        $ JeanX.change_face("_normal",0)
         ch_j ". . . what was it you wanted?"
     elif Options[0] == "corruption":
         $ JeanX.daily_history.append("cologne chat")
-        $ JeanX.change_face("confused")
+        $ JeanX.change_face("_confused")
         ch_j "(sniff, sniff). . . that's a strong scent. . ."
-        $ JeanX.change_face("angry")
+        $ JeanX.change_face("_angry")
         ch_j ". . . a dangerous scent. . ."
-        $ JeanX.change_face("sly")
+        $ JeanX.change_face("_sly")
 
     elif Options[0] == "caught":
-        $ JeanX.change_face("angry")
+        $ JeanX.change_face("_angry")
         if "caught chat" in JeanX.Chat:
             ch_j "That asshole Chuck."
             ch_j "I'm tired of him sticking his nose in where it doesn't belong."
         else:
             ch_j "That asshole Chuck."
             ch_j "I'm tired of him sticking his nose in where it doesn't belong."
-            $ JeanX.change_face("surprised")
+            $ JeanX.change_face("_surprised")
             ch_j "Oh!"
-            $ JeanX.change_face("sly")
+            $ JeanX.change_face("_sly")
             ch_j "I've got an idea."
             ch_j "I could use my own powers to jam out his a little bit, make it more likely that he'll ignore us."
             menu:
@@ -1132,9 +1132,9 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
                 "Nah, I want him to know.":
                     ch_j "Heh, you're naughty."
                     if approval_check(JeanX, 900, "OI"):
-                        $ JeanX.change_face("sad")
+                        $ JeanX.change_face("_sad")
                         ch_j "Ok, fine, we won't do that."
-                        $ JeanX.change_face("bemused")
+                        $ JeanX.change_face("_bemused")
                         $ JeanX.traits.append("noscreen")
                     else:
                         ch_j "Still, I don't like him sticking his nose in."
@@ -1162,19 +1162,19 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
 
     elif Options[0] == "kissed":
 
-        $ JeanX.change_face("normal",1)
+        $ JeanX.change_face("_normal",1)
         ch_j "I have to say, you are a good kisser, [JeanX.player_petname]."
         menu:
             extend ""
             "Hey. . .I'm the best there is at what I do.":
-                $ JeanX.change_face("smile",1)
+                $ JeanX.change_face("_smile",1)
                 ch_j "I've heard that one before. . ."
             "No. You think?":
                 ch_j "I wouldn't say it otherwise."
 
     elif Options[0] == "dangerroom":
 
-        $ JeanX.change_face("sly",1)
+        $ JeanX.change_face("_sly",1)
         ch_j "Hey,[JeanX.player_petname]. I saw you in the Danger Room, earlier."
         ch_j "You're going surprisingly well for someone with your. . . limitations."
 
@@ -1191,32 +1191,32 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
                     $ JeanX.change_stat("love", 50, 5)
                     $ JeanX.change_stat("love", 90, 2)
                     if approval_check(JeanX, 1200):
-                        $ JeanX.change_face("sly",1)
+                        $ JeanX.change_face("_sly",1)
                         ch_j "Well, it's not like I minded."
-                    $ JeanX.change_face("smile")
+                    $ JeanX.change_face("_smile")
                     ch_j "I guess we can all make mistakes. . ."
                 "Just with you.":
                     $ JeanX.change_stat("obedience", 40, 5)
                     if approval_check(JeanX, 1000) or approval_check(JeanX, 700, "L"):
                         $ JeanX.change_stat("love", 90, 3)
-                        $ JeanX.change_face("sly",1)
+                        $ JeanX.change_face("_sly",1)
                         ch_j "Oh, a charmer. . ."
                     else:
                         $ JeanX.change_stat("love", 70, -5)
-                        $ JeanX.change_face("angry")
+                        $ JeanX.change_face("_angry")
                         ch_j "I'll bet. . ."
                 "Totally on purpose. I regret nothing.":
                     if approval_check(JeanX, 800):
                         $ JeanX.change_stat("obedience", 60, 5)
                         $ JeanX.change_stat("inhibition", 50, 5)
-                        $ JeanX.change_face("perplexed",2)
+                        $ JeanX.change_face("_perplexed",2)
                         ch_j "fair"
-                        $ JeanX.blushing = 1
+                        $ JeanX.blushing = "_blush1"
                     else:
                         $ JeanX.change_stat("love", 50, -10)
                         $ JeanX.change_stat("love", 80, -10)
                         $ JeanX.change_stat("obedience", 50, 10)
-                        $ JeanX.change_face("angry")
+                        $ JeanX.change_face("_angry")
                         ch_j "Perv."
 
     elif Options[0] == "fondled":
@@ -1233,34 +1233,34 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
         menu:
             extend ""
             "Yeah? Did you like them?":
-                $ JeanX.change_face("sly",2)
+                $ JeanX.change_face("_sly",2)
                 ch_j "They were pretty hot."
             "Good. You looked like you could use to learn a thing or two from them.":
                 $ JeanX.change_stat("obedience", 70, 5)
                 $ JeanX.change_stat("inhibition", 50, 5)
-                $ JeanX.change_face("angry")
+                $ JeanX.change_face("_angry")
                 ch_j "Yeah right."
-        $ JeanX.blushing = 1
+        $ JeanX.blushing = "_blush1"
         $ JeanX.Chat.append("book")
 
     elif Options[0] == "lingerie":
 
-        $ JeanX.change_face("sly",2)
+        $ JeanX.change_face("_sly",2)
         ch_j "I really enjoy those silky underthings you got me. . ."
-        $ JeanX.blushing = 1
+        $ JeanX.blushing = "_blush1"
         $ JeanX.Chat.append("lingerie")
 
     elif Options[0] == "handy":
 
-        $ JeanX.change_face("sly",1)
+        $ JeanX.change_face("_sly",1)
         ch_j "I was thinking about your cock in my hand. . ."
         ch_j "I think we should do that again some time. . ."
-        $ JeanX.blushing = 0
+        $ JeanX.blushing = ""
 
     elif Options[0] == "blowjob":
         if "blowjob" not in JeanX.Chat:
 
-            $ JeanX.change_face("sly",2)
+            $ JeanX.change_face("_sly",2)
             ch_j "Hey, so did you enjoy that blowjob?"
             menu:
                 extend ""
@@ -1268,28 +1268,28 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
                     $ JeanX.change_stat("love", 90, 5)
                     $ JeanX.change_stat("obedience", 60, 15)
                     $ JeanX.change_stat("inhibition", 60, 10)
-                    $ JeanX.change_face("normal",1)
+                    $ JeanX.change_face("_normal",1)
                     ch_j "You know it."
-                    $ JeanX.change_face("sexy",1)
+                    $ JeanX.change_face("_sexy",1)
                     ch_j "I wouldn't mind having another taste. . ."
                 "Honestly? It was good. . .but you could use a little practice, I think.":
                     if approval_check(JeanX, 300, "I") or not approval_check(JeanX, 800):
                         $ JeanX.change_stat("love", 90, -5)
                         $ JeanX.change_stat("obedience", 60, 10)
                         $ JeanX.change_stat("inhibition", 50, 10)
-                        $ JeanX.change_face("perplexed",1)
+                        $ JeanX.change_face("_perplexed",1)
                         ch_j "Really? I'd never gotten any complaints before. . ."
                     else:
                         $ JeanX.change_stat("obedience", 70, 15)
                         $ JeanX.change_stat("inhibition", 50, 5)
-                        $ JeanX.change_face("sexy",1)
+                        $ JeanX.change_face("_sexy",1)
                         ch_j "You just don't know quality when you feel it."
                 "I guess. If you're into weird sounds and too much teeth. Spoiler, I'm not.":
                     $ JeanX.change_stat("love", 90, -10)
                     $ JeanX.change_stat("obedience", 60, -5)
-                    $ JeanX.change_face("angry",2)
+                    $ JeanX.change_face("_angry",2)
                     ch_j "You just don't know quality."
-            $ JeanX.blushing = 1
+            $ JeanX.blushing = "_blush1"
             $ JeanX.Chat.append("blowjob")
         else:
             $ Line = renpy.random.choice(["I gotta tell you, your dick tastes great.", 
@@ -1306,7 +1306,7 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
             ch_j "Hey. . . the other day. . ."
             ch_j "Your jiz tasted really good."
             ch_j "Like -really- good."
-            $ JeanX.change_face("sly",1)
+            $ JeanX.change_face("_sly",1)
             ch_j "Weird."
             $ JeanX.Chat.append("swallow")
 
@@ -1314,9 +1314,9 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
 
         ch_j "Ok, so. . ."
         ch_j "You know how you came on my face?"
-        $ JeanX.change_face("sexy",2)
+        $ JeanX.change_face("_sexy",2)
         ch_j "That just felt -so- good for some reason. . ."
-        $ JeanX.blushing = 1
+        $ JeanX.blushing = "_blush1"
 
     elif Options[0] == "sleepover":
 
@@ -1331,22 +1331,22 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
     elif Options[0] == "sexed":
 
         ch_j "So. . . you should know. . ."
-        $ JeanX.change_face("sexy",2)
+        $ JeanX.change_face("_sexy",2)
         ch_j ". . .lately when I've been schlicking. . ."
         ch_j "I've been thinking about you inside of me."
-        $ JeanX.blushing = 1
+        $ JeanX.blushing = "_blush1"
 
     elif Options[0] == "anal":
 
-        $ JeanX.change_face("sly")
+        $ JeanX.change_face("_sly")
         ch_j "I'm not much of a fan of anal."
-        $ JeanX.change_face("sexy",1)
+        $ JeanX.change_face("_sexy",1)
         ch_j "Still, with you it's pretty fun."
 
     elif Options[0] == "seenpeen":
-        $ JeanX.change_face("sly",1, Eyes="down")
+        $ JeanX.change_face("_sly",1, Eyes="_down")
         ch_j "Oh, I forgot to mention, congrats on that package you're swinging. . ."
-        $ JeanX.change_face("bemused",1)
+        $ JeanX.change_face("_bemused",1)
         $ JeanX.change_stat("love", 50, 5)
         $ JeanX.change_stat("love", 60, 10)
         $ JeanX.history.remove("seenpeen")
@@ -1386,80 +1386,80 @@ label Jean_Chitchat(O=0, Options=["default","default","default"]):
 
         $ D20 = renpy.random.randint(1, 20)
         if D20 == 1:
-            $ JeanX.change_face("normal")
+            $ JeanX.change_face("_normal")
             ch_j "Hey, pass me your physics notes."
-            $ JeanX.change_face("angry",Eyes="down")
+            $ JeanX.change_face("_angry",Eyes="_down")
             ch_j ". . ."
-            $ JeanX.change_face("angry")
+            $ JeanX.change_face("_angry")
             ch_j "These notes are trash. Do better."
         elif D20 == 2:
-            $ JeanX.change_face("angry")
+            $ JeanX.change_face("_angry")
             ch_j "Where'd Lance go? I haven't seen him around in a while."
         elif D20 == 3:
-            $ JeanX.change_face("normal",Eyes="side")
+            $ JeanX.change_face("_normal",Eyes="_side")
             ch_j ". . ."
-            $ JeanX.change_face("surprised")
+            $ JeanX.change_face("_surprised")
             ch_j "Oh, what were you talking about?"
-            $ JeanX.change_face("normal")
+            $ JeanX.change_face("_normal")
         elif D20 == 4:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             ch_j "I don't know why I still attend these classes. I already know everything I need to know."
         elif D20 == 5:
-            $ JeanX.change_face("smile")
+            $ JeanX.change_face("_smile")
             ch_j "Nothing like a quick nap to recharge the batteries."
         elif D20 == 6:
-            $ JeanX.change_face("perplexed")
+            $ JeanX.change_face("_perplexed")
             ch_j "Oh, I just noticed your outfit. . . interesting choice."
         elif D20 == 7:
-            $ JeanX.change_face("smile")
+            $ JeanX.change_face("_smile")
             ch_j "Did you see me wreck the Danger Room earlier?"
             ch_j "I mean to do that!"
         elif D20 == 8:
-            $ JeanX.change_face("angry")
+            $ JeanX.change_face("_angry")
             ch_j "Quiet."
-            $ JeanX.change_face("angry",Eyes="side")
+            $ JeanX.change_face("_angry",Eyes="_side")
             ch_j "It's thinking time."
-            $ JeanX.change_face("smile")
+            $ JeanX.change_face("_smile")
             ch_j "Ok, done."
         elif D20 == 9:
-            $ JeanX.change_face("confused")
+            $ JeanX.change_face("_confused")
             ch_j "I was just picking up some stray thoughts from Professor McCoy."
             ch_j "They were. . . unhealthy."
         elif D20 == 10:
-            $ JeanX.change_face("smile")
+            $ JeanX.change_face("_smile")
             ch_j "I hear some of the girls are going out for ice cream, treat me."
         elif D20 == 11:
-            $ JeanX.change_face("smile")
+            $ JeanX.change_face("_smile")
             ch_j "I might catch a swim later. Make sure to bring a towel."
         elif D20 == 12:
-            $ JeanX.change_face("smile")
+            $ JeanX.change_face("_smile")
             ch_j "I kind of like talking to you. . ."
             ch_j "You're. . ."
             ch_j "Simple."
         elif D20 == 13:
-            $ JeanX.change_face("smile")
+            $ JeanX.change_face("_smile")
             ch_j "If I've told you once, I've told you a thousand times. . ."
             ch_j "Well. . . you know!"
         elif D20 == 14:
-            $ JeanX.change_face("smile")
+            $ JeanX.change_face("_smile")
             ch_j "Missions are a serious pain, but at least I can get some action."
         elif D20 == 15:
-            $ JeanX.change_face("perplexed")
+            $ JeanX.change_face("_perplexed")
             ch_j "Have you seen a weird girl wandering around. . . "
             ch_j "She thinks in. . . pink. . ."
         elif D20 == 16:
-            $ JeanX.change_face("perplexed")
+            $ JeanX.change_face("_perplexed")
             ch_j "I haven't been home in a while. I almost forget where it is."
         elif D20 == 17:
-            $ JeanX.change_face("perplexed")
+            $ JeanX.change_face("_perplexed")
             ch_j "So, Emma's a bitch, right?"
             ch_j "It's not just me?"
         elif D20 == 18:
-            $ JeanX.change_face("smile")
+            $ JeanX.change_face("_smile")
             ch_j "You know, sometimes I think I need a hobby."
             ch_j "And then I just get someone else to do it."
         else:
-            $ JeanX.change_face("smile")
+            $ JeanX.change_face("_smile")
             ch_j "You're fun to hang with."
 
     $ Line = 0
@@ -1539,37 +1539,37 @@ label Jean_Pet:
 
                         $ JeanX.petname = "girl"
                         if "boyfriend" in JeanX.player_petnames or approval_check(JeanX, 600, "L"):
-                            $ JeanX.change_face("sexy", 1)
+                            $ JeanX.change_face("_sexy", 1)
                             ch_j "Yeah, ok, [JeanX.player_petname]."
                         else:
-                            $ JeanX.change_face("angry")
+                            $ JeanX.change_face("_angry")
                             ch_j "I'm NOT your girl, [JeanX.player_petname]."
                     "I think I'll call you \"boo\".":
 
                         $ JeanX.petname = "boo"
                         if "boyfriend" in JeanX.player_petnames or approval_check(JeanX, 700, "L"):
-                            $ JeanX.change_face("sexy", 1)
+                            $ JeanX.change_face("_sexy", 1)
                             ch_j "I guess I am your boo, [JeanX.player_petname]."
                         else:
-                            $ JeanX.change_face("angry")
+                            $ JeanX.change_face("_angry")
                             ch_j "I'm NOT your boo, [JeanX.player_petname]."
                     "I think I'll call you \"bae\".":
 
                         $ JeanX.petname = "bae"
                         if "boyfriend" in JeanX.player_petnames or approval_check(JeanX, 600, "L"):
-                            $ JeanX.change_face("sexy", 1)
+                            $ JeanX.change_face("_sexy", 1)
                             ch_j "I guess I am your bae, [JeanX.player_petname]."
                         else:
-                            $ JeanX.change_face("angry")
+                            $ JeanX.change_face("_angry")
                             ch_j "I'm NOT your bae, [JeanX.player_petname]."
                     "I think I'll call you \"baby\".":
 
                         $ JeanX.petname = "baby"
                         if "boyfriend" in JeanX.player_petnames or approval_check(JeanX, 500, "L"):
-                            $ JeanX.change_face("sexy", 1)
+                            $ JeanX.change_face("_sexy", 1)
                             ch_j "Cute, [JeanX.player_petname]."
                         else:
-                            $ JeanX.change_face("angry")
+                            $ JeanX.change_face("_angry")
                             ch_j "I am not a baby."
                     "I think I'll call you \"sweetie\".":
 
@@ -1578,25 +1578,25 @@ label Jean_Pet:
                         if "boyfriend" in JeanX.player_petnames or approval_check(JeanX, 600, "L"):
                             ch_j "Sounds good, [JeanX.player_petname]."
                         else:
-                            $ JeanX.change_face("angry", 1)
+                            $ JeanX.change_face("_angry", 1)
                             ch_j "Too sweet, [JeanX.player_petname]."
                     "I think I'll call you \"sexy\".":
 
-                        $ JeanX.petname = "sexy"
+                        $ JeanX.petname = "_sexy"
                         if "lover" in JeanX.player_petnames or approval_check(JeanX, 800):
-                            $ JeanX.change_face("sexy", 1)
+                            $ JeanX.change_face("_sexy", 1)
                             ch_j "You know it, [JeanX.player_petname]."
                         else:
-                            $ JeanX.change_face("angry", 1)
+                            $ JeanX.change_face("_angry", 1)
                             ch_j "True, but a little rude, [JeanX.player_petname]."
                     "I think I'll call you \"lover\".":
 
                         $ JeanX.petname = "lover"
                         if "lover" in JeanX.player_petnames or approval_check(JeanX, 1200):
-                            $ JeanX.change_face("sexy", 1)
+                            $ JeanX.change_face("_sexy", 1)
                             ch_j "Heh, ok."
                         else:
-                            $ JeanX.change_face("angry", 1)
+                            $ JeanX.change_face("_angry", 1)
                             ch_j "I don't think so, [JeanX.player_petname]."
                     "Back":
 
@@ -1607,75 +1607,75 @@ label Jean_Pet:
                     "I think I'll call you \"slave\".":
                         $ JeanX.petname = "slave"
                         if "master" in JeanX.player_petnames or approval_check(JeanX, 800, "O"):
-                            $ JeanX.change_face("bemused", 1)
+                            $ JeanX.change_face("_bemused", 1)
                             ch_j ". . . ok, [JeanX.player_petname]."
                         else:
-                            $ JeanX.change_face("angry", 1)
+                            $ JeanX.change_face("_angry", 1)
                             ch_j "I am not your slave, [JeanX.player_petname]."
                     "I think I'll call you \"pet\".":
 
                         $ JeanX.petname = "pet"
                         if "master" in JeanX.player_petnames or approval_check(JeanX, 650, "O"):
-                            $ JeanX.change_face("bemused", 1)
+                            $ JeanX.change_face("_bemused", 1)
                             ch_j ". . . fine, [JeanX.player_petname]."
                         else:
-                            $ JeanX.change_face("angry", 1)
+                            $ JeanX.change_face("_angry", 1)
                             ch_j "I'm not your -pet,- [JeanX.player_petname]."
                     "I think I'll call you \"slut\".":
 
                         $ JeanX.petname = "slut"
                         if "sex friend" in JeanX.player_petnames or approval_check(JeanX, 900, "OI"):
-                            $ JeanX.change_face("sexy")
+                            $ JeanX.change_face("_sexy")
                             ch_j "Well. . . yeah."
                         else:
-                            $ JeanX.change_face("angry", 1)
-                            $ JeanX.mouth = "surprised"
+                            $ JeanX.change_face("_angry", 1)
+                            $ JeanX.mouth = "_surprised"
                             ch_j "How attached are you to having a vocabulary?"
                     "I think I'll call you \"whore\".":
 
                         $ JeanX.petname = "whore"
                         if "fuckbuddy" in JeanX.player_petnames or approval_check(JeanX, 1000, "OI"):
-                            $ JeanX.change_face("sly")
+                            $ JeanX.change_face("_sly")
                             ch_j ". . ."
                         else:
-                            $ JeanX.change_face("angry", 1)
+                            $ JeanX.change_face("_angry", 1)
                             ch_j "You'd better not. . ."
                     "I think I'll call you \"sugartits\".":
 
                         $ JeanX.petname = "sugartits"
                         if "sex friend" in JeanX.player_petnames or approval_check(JeanX, 1400):
-                            $ JeanX.change_face("sly", 1)
+                            $ JeanX.change_face("_sly", 1)
                             ch_j ". . . ok."
                         else:
-                            $ JeanX.change_face("angry", 1)
+                            $ JeanX.change_face("_angry", 1)
                             ch_j "Not cool."
                     "I think I'll call you \"sex friend\".":
 
                         $ JeanX.petname = "sex friend"
                         if "sex friend" in JeanX.player_petnames or approval_check(JeanX, 600, "I"):
-                            $ JeanX.change_face("sly")
+                            $ JeanX.change_face("_sly")
                             ch_j "Yeah. . ."
                         else:
-                            $ JeanX.change_face("angry", 1)
+                            $ JeanX.change_face("_angry", 1)
                             ch_j "Keep it down, [JeanX.player_petname]."
                     "I think I'll call you \"fuckbuddy\".":
 
                         $ JeanX.petname = "fuckbuddy"
                         if "fuckbuddy" in JeanX.player_petnames or approval_check(JeanX, 700, "I"):
-                            $ JeanX.change_face("sly")
+                            $ JeanX.change_face("_sly")
                             ch_j "Yup."
                         else:
-                            $ JeanX.change_face("angry", 1)
-                            $ JeanX.mouth = "surprised"
+                            $ JeanX.change_face("_angry", 1)
+                            $ JeanX.mouth = "_surprised"
                             ch_j "Don't even joke, [JeanX.player_petname]."
                     "I think I'll call you \"baby girl\".":
 
                         $ JeanX.petname = "baby girl"
                         if "daddy" in JeanX.player_petnames or approval_check(JeanX, 1200):
-                            $ JeanX.change_face("smile", 1)
+                            $ JeanX.change_face("_smile", 1)
                             ch_j "I guess?"
                         else:
-                            $ JeanX.change_face("angry", 1)
+                            $ JeanX.change_face("_angry", 1)
                             ch_j "Weirdo."
                     "Back":
 
@@ -1691,7 +1691,7 @@ label Jean_Pet:
 
 label Jean_Rename:
 
-    $ JeanX.mouth = "smile"
+    $ JeanX.mouth = "_smile"
     ch_j "Yeah?"
     menu:
         extend ""
@@ -1761,11 +1761,11 @@ label Jean_Personality(counter=0):
 label Jean_Summon(approval_bonus=approval_bonus):
     $ JeanX.change_outfit()
     if "no_summon" in JeanX.recent_history:
-        if "angry" in JeanX.recent_history:
+        if "_angry" in JeanX.recent_history:
             ch_j "Go away!"
         elif JeanX.recent_history.count("no_summon") > 1:
             ch_j "Give me some space!"
-            $ JeanX.recent_history.append("angry")
+            $ JeanX.recent_history.append("_angry")
         else:
 
 
@@ -2499,7 +2499,7 @@ label Jean_Wardrobe_Menu:
         "Your birthday suit looks really great. . .":
 
 
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             $ Line = 0
             if not JeanX.bra and not JeanX.underwear and not JeanX.top and not JeanX.legs and not JeanX.hose:
                 ch_j "Duh."
@@ -2514,11 +2514,11 @@ label Jean_Wardrobe_Menu:
             elif approval_check(JeanX, 2000, TabM=0):
                 ch_j "Maybe, but not here. . ."
             elif approval_check(JeanX, 1000, TabM=0):
-                $ JeanX.change_face("confused", 1,Mouth="smirk")
+                $ JeanX.change_face("_confused", 1,Mouth="_smirk")
                 ch_j "Yeah, but I'm not sharing."
-                $ JeanX.change_face("bemused", 0)
+                $ JeanX.change_face("_bemused", 0)
             else:
-                $ JeanX.change_face("angry", 1)
+                $ JeanX.change_face("_angry", 1)
                 ch_j "Of course it is."
                 ch_j "Oh, you wanted to see it?"
 
@@ -2528,7 +2528,7 @@ label Jean_Wardrobe_Menu:
                 "She throws her clothes off at her feet."
                 call Jean_First_Topless
                 call Jean_First_Bottomless (1)
-                $ JeanX.change_face("sexy")
+                $ JeanX.change_face("_sexy")
                 menu:
                     "You know, you should wear this one out. [[set current outfit]":
                         if "exhibitionist" in JeanX.traits:
@@ -2542,19 +2542,19 @@ label Jean_Wardrobe_Menu:
                             $ JeanX.Outfit = "nude"
                             $ JeanX.Shame = 50
                         else:
-                            $ JeanX.change_face("sexy", 1)
-                            $ JeanX.eyes = "surprised"
+                            $ JeanX.change_face("_sexy", 1)
+                            $ JeanX.eyes = "_surprised"
                             ch_j "Yeah, um, I'm not into that right now. . ."
                     "Let's try something else though.":
 
                         if "exhibitionist" in JeanX.traits:
                             ch_j "Oh, ok. . ."
                         elif "nowhammy" not in JeanX.traits or approval_check(JeanX, 800, "I") or approval_check(JeanX, 2800, TabM=0):
-                            $ JeanX.change_face("bemused", 1)
+                            $ JeanX.change_face("_bemused", 1)
                             ch_j "I thought you might want me to go out like this. . ."
                             ch_j ". . ."
                         else:
-                            $ JeanX.change_face("confused", 1)
+                            $ JeanX.change_face("_confused", 1)
                             ch_j "Yeah, I'm not into that right now. . ."
             $ Line = 0
         "Never mind":
@@ -2569,7 +2569,7 @@ label Jean_Wardrobe_Menu:
     menu Jean_Clothes_Over:
 
         "Why don't you go with no [JeanX.top]?" if JeanX.top:
-            $ JeanX.change_face("bemused", 1)
+            $ JeanX.change_face("_bemused", 1)
             if approval_check(JeanX, 800, TabM=3) and (JeanX.bra or JeanX.SeenChest):
                 ch_j "Ok."
             elif approval_check(JeanX, 600, TabM=0):
@@ -2589,39 +2589,39 @@ label Jean_Wardrobe_Menu:
                         ch_j "I'm not wearing a bra right now."
                     return
             $ Line = JeanX.top
-            $ JeanX.top = 0
+            $ JeanX.top = ""
             "She throws her [Line] at her feet."
             if not JeanX.bra and not renpy.showing('DressScreen'):
                 call Jean_First_Topless
 
         "Try on that pink shirt." if JeanX.top != "pink_shirt":
-            $ JeanX.change_face("bemused")
+            $ JeanX.change_face("_bemused")
             ch_j "Sure."
             $ JeanX.top = "pink_shirt"
 
         "Try on that green shirt." if JeanX.top != "green_shirt":
-            $ JeanX.change_face("bemused")
+            $ JeanX.change_face("_bemused")
             ch_j "Sure."
             $ JeanX.top = "green_shirt"
 
         "Try on that yellow tanktop." if JeanX.top != "yellow_shirt" and "halloween" in JeanX.history:
-            $ JeanX.change_face("bemused")
+            $ JeanX.change_face("_bemused")
             ch_j "Sure."
             $ JeanX.top = "yellow_shirt"
 
-        "Maybe just throw on a towel?" if JeanX.top != "towel":
-            $ JeanX.change_face("bemused", 1)
+        "Maybe just throw on a towel?" if JeanX.top != "_towel":
+            $ JeanX.change_face("_bemused", 1)
             if JeanX.bra or JeanX.SeenChest:
                 ch_j "Um, ok. . ."
             elif approval_check(JeanX, 1000, TabM=0):
-                $ JeanX.change_face("perplexed", 1)
+                $ JeanX.change_face("_perplexed", 1)
                 ch_j "Huh, ok . ."
             else:
                 call Display_DressScreen (JeanX)
                 if not _return:
                     ch_j "That wouldn't look right."
                     return
-            $ JeanX.top = "towel"
+            $ JeanX.top = "_towel"
         "Never mind":
 
             pass
@@ -2635,9 +2635,9 @@ label Jean_Wardrobe_Menu:
             ch_j "I'm not wearing a bra right now."
             "Then you could slip something on under it. . .":
                 if approval_check(JeanX, 1200, TabM=4) or (JeanX.SeenChest and approval_check(JeanX, 1000, TabM=3)):
-                    $ JeanX.blushing = 1
+                    $ JeanX.blushing = "_blush1"
                     ch_j "Well, it's not like I needed one. . ."
-                    $ JeanX.blushing = 0
+                    $ JeanX.blushing = ""
                 elif approval_check(JeanX, 900, TabM=2) and "lace_bra" in JeanX.inventory:
                     ch_j "I guess I could find something."
                     $ JeanX.bra  = "lace_bra"
@@ -2660,8 +2660,8 @@ label Jean_Wardrobe_Menu:
                 elif approval_check(JeanX, 1300, TabM=2):
                     ch_j "Okay, fine."
                 else:
-                    $ JeanX.change_face("surprised")
-                    $ JeanX.brows = "angry"
+                    $ JeanX.change_face("_surprised")
+                    $ JeanX.brows = "_angry"
                     if JeanX.Taboo > 20:
                         ch_j ". . . not right now. . ."
                     else:
@@ -2678,7 +2678,7 @@ label Jean_Wardrobe_Menu:
     menu Jean_Clothes_Legs:
 
         "Maybe go without the [JeanX.legs]." if JeanX.legs:
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             if JeanX.SeenPanties and JeanX.underwear and approval_check(JeanX, 500, TabM=5):
                 ch_j "Ok, sure."
             elif JeanX.SeenPussy and approval_check(JeanX, 900, TabM=4):
@@ -2702,11 +2702,11 @@ label Jean_Wardrobe_Menu:
                         ch_j "I'm not wearing any panties at the moment."
                     return
 
-            if JeanX.legs == "pants" or JeanX.legs == "yoga_pants":
-                $ JeanX.legs = 0
+            if JeanX.legs == "_pants" or JeanX.legs == "yoga_pants":
+                $ JeanX.legs = ""
                 "She tugs her pants off and drops them to the ground."
             else:
-                $ JeanX.legs = 0
+                $ JeanX.legs = ""
                 "She tugs her skirt off and drops it to the ground."
             if renpy.showing('DressScreen'):
                 pass
@@ -2715,9 +2715,9 @@ label Jean_Wardrobe_Menu:
             else:
                 call Jean_First_Bottomless
 
-        "You look great in those khaki pants." if JeanX.legs != "pants":
+        "You look great in those khaki pants." if JeanX.legs != "_pants":
             ch_j "Yeah, I know."
-            $ JeanX.legs = "pants"
+            $ JeanX.legs = "_pants"
 
         "You look great in those yoga pants." if JeanX.legs != "yoga_pants":
             if approval_check(JeanX, 800, TabM=4):
@@ -2728,13 +2728,13 @@ label Jean_Wardrobe_Menu:
                 if not _return:
                     ch_j "Those are kind of. . . tight."
 
-        "What about wearing your green skirt?" if JeanX.legs != "skirt":
+        "What about wearing your green skirt?" if JeanX.legs != "_skirt":
             ch_j "Sure, why not."
-            $ JeanX.legs = "skirt"
+            $ JeanX.legs = "_skirt"
 
-        "You look great in those shorts." if JeanX.legs != "shorts" and "halloween" in JeanX.history:
+        "You look great in those shorts." if JeanX.legs != "_shorts" and "halloween" in JeanX.history:
             ch_j "Yeah, I know."
-            $ JeanX.legs = "shorts"
+            $ JeanX.legs = "_shorts"
         "Never mind":
 
             pass
@@ -2748,26 +2748,26 @@ label Jean_Wardrobe_Menu:
             ch_j "I'm not wearing any panties at the moment."
             "Then you could slip on a pair of panties. . .":
                 if approval_check(JeanX, 1500, TabM=4) or (JeanX.SeenPussy and approval_check(JeanX, 1100, TabM=4)):
-                    $ JeanX.blushing = 1
+                    $ JeanX.blushing = "_blush1"
                     ch_j "No, this is fine. . ."
-                    $ JeanX.blushing = 0
+                    $ JeanX.blushing = ""
                 elif approval_check(JeanX, 700, TabM=4):
                     ch_j "Yeah, I guess."
                     if "lace_panties" in JeanX.inventory:
                         $ JeanX.underwear  = "lace_panties"
                     else:
-                        $ JeanX.underwear = "green_panties"
+                        $ JeanX.underwear = "_green_panties"
                     if approval_check(JeanX, 1200, TabM=4):
                         $ Line = JeanX.legs
-                        $ JeanX.legs = 0
+                        $ JeanX.legs = ""
                         "She pulls off her [Line] and slips on the [JeanX.underwear]."
-                    elif JeanX.legs == "skirt":
+                    elif JeanX.legs == "_skirt":
                         "She pulls out her [JeanX.underwear] and pulls them up under her skirt."
-                        $ JeanX.legs = 0
+                        $ JeanX.legs = ""
                         "Then she drops the skirt to the floor."
                     else:
                         $ Line = JeanX.legs
-                        $ JeanX.legs = 0
+                        $ JeanX.legs = ""
                         "She steps away a moment and then comes back wearing only the [JeanX.underwear]."
                     return
                 else:
@@ -2784,8 +2784,8 @@ label Jean_Wardrobe_Menu:
                 elif approval_check(JeanX, 1300, TabM=3):
                     ch_j "Fine."
                 else:
-                    $ JeanX.change_face("surprised")
-                    $ JeanX.brows = "angry"
+                    $ JeanX.change_face("_surprised")
+                    $ JeanX.brows = "_angry"
                     if JeanX.Taboo > 20:
                         ch_j ". . . not right now. . ."
                     else:
@@ -2804,7 +2804,7 @@ label Jean_Wardrobe_Menu:
         "Tops":
             menu:
                 "How about you lose the [JeanX.bra]?" if JeanX.bra:
-                    $ JeanX.change_face("bemused", 1)
+                    $ JeanX.change_face("_bemused", 1)
                     if JeanX.SeenChest and approval_check(JeanX, 900, TabM=2.7):
                         ch_j "Ok."
                     elif approval_check(JeanX, 1100, TabM=2):
@@ -2825,7 +2825,7 @@ label Jean_Wardrobe_Menu:
                             ch_j "Nah."
                             return
                     $ Line = JeanX.bra
-                    $ JeanX.bra = 0
+                    $ JeanX.bra = ""
                     if JeanX.top:
                         "She reaches under her [JeanX.top] grabs her [Line], and pulls it off, dropping it to the ground."
                     else:
@@ -2838,9 +2838,9 @@ label Jean_Wardrobe_Menu:
                     ch_j "Ok."
                     $ JeanX.bra = "green_bra"
 
-                "How about that sports bra." if JeanX.bra != "sports_bra":
+                "How about that sports bra." if JeanX.bra != "_sports_bra":
                     ch_j "Ok."
-                    $ JeanX.bra = "sports_bra"
+                    $ JeanX.bra = "_sports_bra"
 
                 "I like that lace bra." if JeanX.bra != "lace_bra" and "lace_bra" in JeanX.inventory:
                     if JeanX.SeenChest or approval_check(JeanX, 1300, TabM=2):
@@ -2875,20 +2875,20 @@ label Jean_Wardrobe_Menu:
                         else:
                             $ JeanX.bra = "lace corset"
 
-                "I like that bikini top." if JeanX.bra != "bikini_top" and "bikini_top" in JeanX.inventory:
+                "I like that bikini top." if JeanX.bra != "_bikini_top" and "_bikini_top" in JeanX.inventory:
                     if bg_current == "bg_pool":
                         ch_j "Sure."
-                        $ JeanX.bra = "bikini_top"
+                        $ JeanX.bra = "_bikini_top"
                     else:
                         if JeanX.SeenChest or approval_check(JeanX, 1000, TabM=2):
                             ch_j "Sure."
-                            $ JeanX.bra = "bikini_top"
+                            $ JeanX.bra = "_bikini_top"
                         else:
                             call Display_DressScreen (JeanX)
                             if not _return:
                                 ch_j "This isn't really a \"bikini\" sort of place. . ."
                             else:
-                                $ JeanX.bra = "bikini_top"
+                                $ JeanX.bra = "_bikini_top"
                 "Never mind":
                     pass
             return
@@ -2896,9 +2896,9 @@ label Jean_Wardrobe_Menu:
 
             menu:
                 "You could lose the hose." if JeanX.hose:
-                    $ JeanX.hose = 0
-                "The thigh-high hose would look good with that." if JeanX.hose != "stockings":
-                    $ JeanX.hose = "stockings"
+                    $ JeanX.hose = ""
+                "The thigh-high hose would look good with that." if JeanX.hose != "_stockings":
+                    $ JeanX.hose = "_stockings"
                 "The full length hose would look good with that." if JeanX.hose != "pantyhose" and "pantyhose" in JeanX.inventory:
                     $ JeanX.hose = "pantyhose"
                 "The ripped pantyhose would look good with that." if JeanX.hose != "ripped_pantyhose" and "ripped_pantyhose" in JeanX.inventory:
@@ -2915,7 +2915,7 @@ label Jean_Wardrobe_Menu:
 
             menu:
                 "You could lose those panties. . ." if JeanX.underwear:
-                    $ JeanX.change_face("bemused", 1)
+                    $ JeanX.change_face("_bemused", 1)
                     if approval_check(JeanX, 900) and (JeanX.legs or (JeanX.SeenPussy and not JeanX.Taboo)):
 
                         if approval_check(JeanX, 850, "L"):
@@ -2938,45 +2938,45 @@ label Jean_Wardrobe_Menu:
                         else:
                             call Display_DressScreen (JeanX)
                             if not _return:
-                                $ JeanX.change_face("surprised")
-                                $ JeanX.brows = "angry"
+                                $ JeanX.change_face("_surprised")
+                                $ JeanX.brows = "_angry"
                                 if JeanX.Taboo > 20:
                                     ch_j ". . . not right now. . ."
                                 else:
                                     ch_j "Ha! Not for you, [JeanX.player_petname]."
                                 return
                     $ Line = JeanX.underwear
-                    $ JeanX.underwear = 0
+                    $ JeanX.underwear = ""
                     if not JeanX.legs:
                         "She pulls off her [Line], then drops them to the ground."
                         if not renpy.showing('DressScreen'):
                             call Jean_First_Bottomless
                     elif approval_check(JeanX, 1200, TabM=4):
                         $ primary_action = JeanX.legs
-                        $ JeanX.legs = 0
+                        $ JeanX.legs = ""
                         pause 0.5
                         $ JeanX.legs = primary_action
                         "She pulls off her [JeanX.legs] and [Line], then pulls the [JeanX.legs] back on."
                         $ primary_action = 1
                         call Jean_First_Bottomless (1)
-                    elif JeanX.legs == "skirt":
+                    elif JeanX.legs == "_skirt":
                         "She reaches under her skirt and pulls her [Line] off."
                     else:
-                        $ JeanX.blushing = 1
+                        $ JeanX.blushing = "_blush1"
                         "She steps away a moment and then comes back."
-                        $ JeanX.blushing = 0
+                        $ JeanX.blushing = ""
                     $ Line = 0
 
-                "Why don't you wear the green panties instead?" if JeanX.underwear and JeanX.underwear != "green_panties":
+                "Why don't you wear the green panties instead?" if JeanX.underwear and JeanX.underwear != "_green_panties":
                     if approval_check(JeanX, 1100, TabM=3):
                         ch_j "Sure."
-                        $ JeanX.underwear = "green_panties"
+                        $ JeanX.underwear = "_green_panties"
                     else:
                         call Display_DressScreen (JeanX)
                         if not _return:
                             ch_j "That's none of your busines."
                         else:
-                            $ JeanX.underwear = "green_panties"
+                            $ JeanX.underwear = "_green_panties"
 
                 "Why don't you wear the lace panties instead?" if "lace_panties" in JeanX.inventory and JeanX.underwear and JeanX.underwear != "lace_panties":
                     if approval_check(JeanX, 1300, TabM=3):
@@ -2989,36 +2989,36 @@ label Jean_Wardrobe_Menu:
                         else:
                             $ JeanX.underwear = "lace_panties"
 
-                "I like those bikini bottoms." if "bikini_bottoms" in JeanX.inventory and JeanX.underwear != "bikini_bottoms":
+                "I like those bikini bottoms." if "_bikini_bottoms" in JeanX.inventory and JeanX.underwear != "_bikini_bottoms":
                     if bg_current == "bg_pool":
                         ch_j "Sure."
-                        $ JeanX.underwear = "bikini_bottoms"
+                        $ JeanX.underwear = "_bikini_bottoms"
                     else:
                         if approval_check(JeanX, 1000, TabM=2):
                             ch_j "Sure."
-                            $ JeanX.underwear = "bikini_bottoms"
+                            $ JeanX.underwear = "_bikini_bottoms"
                         else:
                             call Display_DressScreen (JeanX)
                             if not _return:
                                 ch_j "This is not really a \"bikini\" sort of place. . ."
                             else:
-                                $ JeanX.underwear = "bikini_bottoms"
+                                $ JeanX.underwear = "_bikini_bottoms"
 
                 "You know, you could wear some panties with that. . ." if not JeanX.underwear:
-                    $ JeanX.change_face("bemused", 1)
+                    $ JeanX.change_face("_bemused", 1)
                     if JeanX.legs and (JeanX.love+JeanX.obedience) <= (2*JeanX.inhibition):
-                        $ JeanX.mouth = "smile"
+                        $ JeanX.mouth = "_smile"
                         ch_j "I -could,- but I'd rather not. . ."
                         menu:
                             "Fine by me":
                                 return
                             "I insist, put some on.":
                                 if (JeanX.love+JeanX.obedience) <= (1.5*JeanX.inhibition):
-                                    $ JeanX.change_face("angry", Eyes="side")
+                                    $ JeanX.change_face("_angry", Eyes="_side")
                                     ch_j "Well too bad."
                                     return
                                 else:
-                                    $ JeanX.change_face("sadside")
+                                    $ JeanX.change_face("_sadside")
                                     ch_j "Oh, fine."
                     else:
                         ch_j "I guess. . ."
@@ -3026,7 +3026,7 @@ label Jean_Wardrobe_Menu:
                         extend ""
                         "How about the green ones?":
                             ch_j "Sure, ok."
-                            $ JeanX.underwear = "green_panties"
+                            $ JeanX.underwear = "_green_panties"
                         "How about the lace ones?" if "lace_panties" in JeanX.inventory:
                             ch_j "Fine."
                             $ JeanX.underwear  = "lace_panties"
@@ -3078,30 +3078,30 @@ label Jean_Wardrobe_Menu:
         "Grow pubes." if not JeanX.pubes:
             ch_p "You know, I like some nice hair down there. Maybe grow it out."
             if "pubes" in JeanX.Todo:
-                $ JeanX.change_face("bemused", 1)
+                $ JeanX.change_face("_bemused", 1)
                 ch_j "Give it some time. . ."
             else:
-                $ JeanX.change_face("bemused", 1)
+                $ JeanX.change_face("_bemused", 1)
                 if approval_check(JeanX, 1000, TabM=0):
                     ch_j "Ok, sure. . ."
                 else:
-                    $ JeanX.change_face("surprised")
-                    $ JeanX.brows = "angry"
+                    $ JeanX.change_face("_surprised")
+                    $ JeanX.brows = "_angry"
                     ch_j "None of your business."
                     return
                 $ JeanX.Todo.append("pubes")
                 $ JeanX.PubeC = 6
-        "Shave pubes" if JeanX.pubes == 1:
+        "Shave pubes" if JeanX.pubes == "_hairy":
             ch_p "I like it waxed clean down there."
-            $ JeanX.change_face("bemused", 1)
+            $ JeanX.change_face("_bemused", 1)
             if "shave" in JeanX.Todo:
                 ch_j "Yeah, I know, I'll get to it."
             else:
                 if approval_check(JeanX, 1100, TabM=0):
                     ch_j "Really? I guess I could give it a shave. . ."
                 else:
-                    $ JeanX.change_face("surprised")
-                    $ JeanX.brows = "angry"
+                    $ JeanX.change_face("_surprised")
+                    $ JeanX.brows = "_angry"
                     ch_j "None of your business."
                     return
                 $ JeanX.Todo.append("shave")
@@ -3109,12 +3109,12 @@ label Jean_Wardrobe_Menu:
         "Piercings. [[See what she looks like without them first] (locked)" if not JeanX.SeenPussy and not JeanX.SeenChest:
             pass
 
-        "Add ring piercings" if JeanX.piercings != "ring" and (JeanX.SeenPussy or JeanX.SeenChest):
+        "Add ring piercings" if JeanX.piercings != "_ring" and (JeanX.SeenPussy or JeanX.SeenChest):
             ch_p "You know, you'd look really nice with some ring body piercings"
-            if "ring" in JeanX.Todo:
+            if "_ring" in JeanX.Todo:
                 ch_j "Yeah, I know, I'll get to it."
             else:
-                $ JeanX.change_face("bemused", 1)
+                $ JeanX.change_face("_bemused", 1)
                 $ approval = approval_check(JeanX, 1150, TabM=0)
                 if approval_check(JeanX, 900, "L", TabM=0) or (approval and JeanX.love > 2* JeanX.obedience):
                     ch_j "You think they'd look good on me?"
@@ -3123,18 +3123,18 @@ label Jean_Wardrobe_Menu:
                 elif approval_check(JeanX, 500, "O", TabM=0) or approval:
                     ch_j "Sure, [JeanX.player_petname]."
                 else:
-                    $ JeanX.change_face("surprised")
-                    $ JeanX.brows = "angry"
+                    $ JeanX.change_face("_surprised")
+                    $ JeanX.brows = "_angry"
                     ch_j "Not interested, [JeanX.player_petname]."
                     return
-                $ JeanX.Todo.append("ring")
+                $ JeanX.Todo.append("_ring")
 
-        "Add barbell piercings" if JeanX.piercings != "barbell" and (JeanX.SeenPussy or JeanX.SeenChest):
+        "Add barbell piercings" if JeanX.piercings != "_barbell" and (JeanX.SeenPussy or JeanX.SeenChest):
             ch_p "You know, you'd look really nice with some barbell body piercings"
-            if "barbell" in JeanX.Todo:
+            if "_barbell" in JeanX.Todo:
                 ch_j "Yeah, I know, I'll get to it."
             else:
-                $ JeanX.change_face("bemused", 1)
+                $ JeanX.change_face("_bemused", 1)
                 $ approval = approval_check(JeanX, 1150, TabM=0)
                 if approval_check(JeanX, 900, "L", TabM=0) or (approval and JeanX.love > 2*JeanX.obedience):
                     ch_j "You think they'd look good on me?"
@@ -3143,15 +3143,15 @@ label Jean_Wardrobe_Menu:
                 elif approval_check(JeanX, 500, "O", TabM=0) or approval:
                     ch_j "Sure, [JeanX.player_petname]."
                 else:
-                    $ JeanX.change_face("surprised")
-                    $ JeanX.brows = "angry"
+                    $ JeanX.change_face("_surprised")
+                    $ JeanX.brows = "_angry"
                     ch_j "Not interested, [JeanX.player_petname]."
                     return
-                $ JeanX.Todo.append("barbell")
+                $ JeanX.Todo.append("_barbell")
 
         "Remove Piercings" if JeanX.piercings:
             ch_p "You know, you'd look better without those piercings."
-            $ JeanX.change_face("bemused", 1)
+            $ JeanX.change_face("_bemused", 1)
             $ approval = approval_check(JeanX, 1350, TabM=0)
             if approval_check(JeanX, 950, "L", TabM=0) or (approval and JeanX.love > JeanX.obedience):
                 ch_j "Make up your mind . ."
@@ -3160,16 +3160,16 @@ label Jean_Wardrobe_Menu:
             elif approval_check(JeanX, 600, "O", TabM=0) or approval:
                 ch_j "Fine."
             else:
-                $ JeanX.change_face("surprised")
-                $ JeanX.brows = "angry"
+                $ JeanX.change_face("_surprised")
+                $ JeanX.brows = "_angry"
                 ch_j "I don't know, I kinda like them now. . ."
                 return
-            $ JeanX.piercings = 0
+            $ JeanX.piercings = ""
 
         "Add Suspenders" if JeanX.accessory != "suspenders" and JeanX.accessory != "suspenders2" and "halloween" in JeanX.history:
             $ JeanX.accessory = "suspenders"
         "Remove Suspenders" if JeanX.accessory == "suspenders" or JeanX.accessory == "suspenders2":
-            $ JeanX.accessory = 0
+            $ JeanX.accessory = ""
 
         "Shift Suspenders" if JeanX.accessory == "suspenders" or JeanX.accessory == "suspenders2":
             $ JeanX.accessory = "suspenders" if JeanX.accessory == "suspenders2" else "suspenders2"

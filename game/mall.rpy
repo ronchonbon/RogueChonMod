@@ -138,15 +138,15 @@ label Sex_Shop:
         menu:
             "What did you want to purchase?"
             "Buy dildo for $20.":
-                if Player.inventory.count("dildo") >= 10:
+                if Player.inventory.count("_dildo") >= 10:
                     "You already have way more dildos than you need. 2, 4, 6. . . yes, way too many."
                 elif Player.cash >= 20:
                     "You purchase one dildo."
-                    $ Player.inventory.append("dildo")
+                    $ Player.inventory.append("_dildo")
                     $ Player.cash -= 20
                     if First:
                         if approval_check(Girl, 800):
-                            $ First.change_face("sly")
+                            $ First.change_face("_sly")
                             $ First.change_stat("love", 80, 1)
                             $ First.change_stat("obedience", 50, 3)
                             $ First.change_stat("inhibition", 50, 3)
@@ -165,7 +165,7 @@ label Sex_Shop:
                             elif First == JubesX:
                                 ch_v "What're you gonna do with that. . ."
                         else:
-                            $ First.change_face("confused",2)
+                            $ First.change_face("_confused",2)
                             $ First.change_stat("love", 60, -2)
                             $ First.change_stat("obedience", 70, 4)
                             $ First.change_stat("inhibition", 50, 2)
@@ -183,21 +183,21 @@ label Sex_Shop:
                                 ch_s "Interesting choice. . ."
                             elif First == JubesX:
                                 ch_v "What're you gonna do with that. . ."
-                            $ First.change_face("confused",1)
+                            $ First.change_face("_confused",1)
                         $ First.change_stat("lust", 60, 5)
                 else:
                     "You don't have enough for that."
             "Buy \"Shocker\" vibrator for $25.":
 
-                if Player.inventory.count("vibrator") >= 10:
+                if Player.inventory.count("_vibrator") >= 10:
                     "If you bought one more vibrator, you would risk a geological event."
                 elif Player.cash >= 25:
                     "You purchase one vibrator."
-                    $ Player.inventory.append("vibrator")
+                    $ Player.inventory.append("_vibrator")
                     $ Player.cash -= 25
                     if First:
                         if approval_check(Girl, 800):
-                            $ First.change_face("sly")
+                            $ First.change_face("_sly")
                             $ First.change_stat("love", 80, 2)
                             $ First.change_stat("obedience", 50, 2)
                             $ First.change_stat("inhibition", 50, 3)
@@ -217,7 +217,7 @@ label Sex_Shop:
                                 ch_v "What're you gonna do with that. . ."
                             $ First.change_stat("lust", 60, 5)
                         else:
-                            $ First.change_face("confused",2)
+                            $ First.change_face("_confused",2)
                             $ First.change_stat("obedience", 70, 2)
                             $ First.change_stat("inhibition", 50, 2)
                             if First == RogueX:
@@ -234,7 +234,7 @@ label Sex_Shop:
                                 ch_s "Interesting choice. . ."
                             elif First == JubesX:
                                 ch_v "What're you gonna do with that. . ."
-                            $ First.change_face("confused",1)
+                            $ First.change_face("_confused",1)
                 else:
                     "You don't have enough for that."
             "Give a gift to [First.name]." if First:
@@ -257,17 +257,17 @@ label Sex_Shop:
 
         if Girl:
             menu:
-                "Gift a Dildo" if "dildo" in Player.inventory:
+                "Gift a Dildo" if "_dildo" in Player.inventory:
 
-                    if "dildo" not in Girl.inventory:
+                    if "_dildo" not in Girl.inventory:
                         "You give [Girl.name] the dildo."
-                        $ Girl.blushing = 1
+                        $ Girl.blushing = "_blush1"
                         $ Girl.ArmPose = 2
-                        $ Girl.held_item = "dildo"
+                        $ Girl.held_item = "_dildo"
                         if approval_check(Girl, 800):
-                            $ Girl.change_face("bemused")
-                            $ Player.inventory.remove("dildo")
-                            $ Girl.inventory.append("dildo")
+                            $ Girl.change_face("_bemused")
+                            $ Player.inventory.remove("_dildo")
+                            $ Girl.inventory.append("_dildo")
                             $ Girl.change_stat("love", 200, 30)
                             $ Girl.change_stat("obedience", 200, 30)
                             $ Girl.change_stat("inhibition", 200, 30)
@@ -279,9 +279,9 @@ label Sex_Shop:
                                 Girl.voice "I'm sure I can find some place to store it. . ."
                             $ Girl.change_stat("lust", 89, 10)
                         elif approval_check(Girl, 600):
-                            $ Girl.change_face("confused")
-                            $ Player.inventory.remove("dildo")
-                            $ Girl.inventory.append("dildo")
+                            $ Girl.change_face("_confused")
+                            $ Player.inventory.remove("_dildo")
+                            $ Girl.inventory.append("_dildo")
                             if Girl != EmmaX:
                                 $ Girl.change_stat("love", 200, 10)
                                 $ Girl.change_stat("obedience", 200, 10)
@@ -289,55 +289,55 @@ label Sex_Shop:
                             if Girl == RogueX:
                                 ch_r "Huh, well I guess I can find a place for it. . ."
                                 $ Girl.change_stat("lust", 89, 10)
-                                $ Girl.change_face("surprised")
+                                $ Girl.change_face("_surprised")
                                 ch_r "I- I mean. . . I'll just put it away."
                             elif Girl == KittyX:
                                 ch_k "I don't know what. . ."
                                 $ Girl.change_stat("lust", 89, 5)
                                 $ Girl.change_stat("lust", 89, 10)
-                                $ Girl.change_face("surprised")
+                                $ Girl.change_face("_surprised")
                                 ch_k "Oh!"
                                 ch_k "Oh. . . I'll just[Girl.like]put it away."
                             elif Girl == EmmaX:
                                 ch_e "This is not an appropriate gift from a student. . ."
                                 $ Girl.change_stat("lust", 89, 5)
                                 $ Girl.change_stat("lust", 89, 10)
-                                $ Girl.change_face("sadside",1)
+                                $ Girl.change_face("_sadside",1)
                                 ch_e "Hm. . ."
                                 $ Girl.change_stat("love", 200, 10)
                                 $ Girl.change_stat("obedience", 200, 10)
                                 $ Girl.change_stat("inhibition", 200, 10)
-                                $ Girl.change_face("sly")
+                                $ Girl.change_face("_sly")
                                 ch_e "I suppose I can find {i}some{/i} use for it. . ."
                             elif Girl == LauraX:
                                 ch_l "Huh, you're a weird gift giver."
                                 $ Girl.change_stat("lust", 89, 5)
                                 $ Girl.change_stat("lust", 89, 10)
-                                $ Girl.change_face("smile")
+                                $ Girl.change_face("_smile")
                                 ch_l "It's very thoughtful though."
                             elif Girl == JeanX:
                                 $ Girl.change_stat("lust", 89, 5)
                                 $ Girl.change_stat("lust", 89, 10)
                                 ch_j "Well we know where your mind it at."
-                                $ Girl.change_face("smile")
+                                $ Girl.change_face("_smile")
                                 ch_j "I guess I should be flattered. . ."
                             elif Girl == StormX:
                                 if StormX not in Rules:
-                                    $ Girl.change_face("sadside",1)
+                                    $ Girl.change_face("_sadside",1)
                                     ch_s "I don't know that I should accept this from a student. . ."
                                 $ Girl.change_stat("lust", 89, 5)
                                 $ Girl.change_stat("lust", 89, 10)
                                 ch_s "Hm. . ."
-                                $ Girl.change_face("sly")
+                                $ Girl.change_face("_sly")
                                 ch_s "Thank you for the thought. . ."
                             elif Girl == JubesX:
                                 ch_v "I guess I have some use for it. . ."
                                 $ Girl.change_stat("lust", 89, 10)
-                                $ Girl.change_face("surprised")
+                                $ Girl.change_face("_surprised")
                                 ch_v "I- I mean. . . decorative."
-                            $ Girl.change_face("bemused")
+                            $ Girl.change_face("_bemused")
                         elif "offered gift" in Girl.daily_history:
-                            $ Girl.change_face("angry")
+                            $ Girl.change_face("_angry")
                             "She hands it back to you."
                             if Girl == RogueX:
                                 ch_r "Look, maybe you should just rethink your gift-giving choices?"
@@ -354,7 +354,7 @@ label Sex_Shop:
                             elif Girl == JubesX:
                                 ch_v "This really isn't something I need. . ."
                         else:
-                            $ Girl.change_face("angry")
+                            $ Girl.change_face("_angry")
                             $ Girl.change_stat("love", 50, -20)
                             $ Girl.change_stat("obedience", 20, 10)
                             $ Girl.change_stat("inhibition", 20, 20)
@@ -375,9 +375,9 @@ label Sex_Shop:
                             $ Girl.change_stat("lust", 89, 5)
                             "She hands it back to you."
                             $ Girl.daily_history.append("offered gift")
-                    elif Girl.inventory.count("dildo") == 1:
-                        $ Player.inventory.remove("dildo")
-                        $ Girl.inventory.append("dildo")
+                    elif Girl.inventory.count("_dildo") == 1:
+                        $ Player.inventory.remove("_dildo")
+                        $ Girl.inventory.append("_dildo")
                         if Girl == RogueX:
                             ch_r "Well, I suppose I could always use another. . ."
                         elif Girl == KittyX:
@@ -411,20 +411,20 @@ label Sex_Shop:
                     $ Girl.ArmPose = 2
                     $ Girl = 0
 
-                "Gift a Dildo (locked)" if "dildo" not in Player.inventory:
+                "Gift a Dildo (locked)" if "_dildo" not in Player.inventory:
                     pass
 
-                "Gift a Vibrator" if "vibrator" in Player.inventory:
+                "Gift a Vibrator" if "_vibrator" in Player.inventory:
 
-                    if "vibrator" not in Girl.inventory:
+                    if "_vibrator" not in Girl.inventory:
                         "You give [Girl.name] the Shocker Vibrator."
-                        $ Girl.blushing = 1
+                        $ Girl.blushing = "_blush1"
                         $ Girl.ArmPose = 2
-                        $ Girl.held_item = "vibrator"
+                        $ Girl.held_item = "_vibrator"
                         if approval_check(Girl, 700):
-                            $ Girl.change_face("bemused")
-                            $ Player.inventory.remove("vibrator")
-                            $ Girl.inventory.append("vibrator")
+                            $ Girl.change_face("_bemused")
+                            $ Player.inventory.remove("_vibrator")
+                            $ Girl.inventory.append("_vibrator")
                             $ Girl.change_stat("love", 200, 30)
                             $ Girl.change_stat("obedience", 200, 30)
                             $ Girl.change_stat("inhibition", 200, 30)
@@ -436,12 +436,12 @@ label Sex_Shop:
                             elif Girl == EmmaX:
                                 ch_e "How very thoughtful of you. . ."
                                 $ Girl.change_stat("lust", 89, 10)
-                                $ Girl.change_face("sly")
+                                $ Girl.change_face("_sly")
                                 ch_e "I'm sure I can put this to good use. . ."
                             elif Girl == LauraX:
                                 ch_l "This is. . . [[bzzzt]- "
                                 $ Girl.change_stat("lust", 89, 10)
-                                $ Girl.change_face("sly")
+                                $ Girl.change_face("_sly")
                                 ch_l "-some kind of sex thing, huh. . ."
                             elif Girl == JeanX:
                                 ch_j "Oh, nifty."
@@ -451,30 +451,30 @@ label Sex_Shop:
                                 ch_v "Oh, this could be nice. . ."
                             $ Girl.change_stat("lust", 89, 10)
                         elif approval_check(Girl, 400):
-                            $ Girl.change_face("confused")
-                            $ Player.inventory.remove("vibrator")
-                            $ Girl.inventory.append("vibrator")
+                            $ Girl.change_face("_confused")
+                            $ Player.inventory.remove("_vibrator")
+                            $ Girl.inventory.append("_vibrator")
                             $ Girl.change_stat("love", 200, 10)
                             $ Girl.change_stat("obedience", 200, 10)
                             $ Girl.change_stat("inhibition", 200, 10)
                             if Girl == RogueX:
                                 ch_r "I guess I can use this to work the kinks out. . ."
                                 $ Girl.change_stat("lust", 89, 10)
-                                $ Girl.change_face("surprised")
+                                $ Girl.change_face("_surprised")
                                 ch_r "Muscle knots, I mean!"
                             elif Girl == KittyX:
                                 ch_k "I've heard these are very relaxing. . ."
                                 $ Girl.change_stat("lust", 89, 10)
-                                $ Girl.change_face("surprised")
+                                $ Girl.change_face("_surprised")
                                 ch_k "-for my back!"
                             elif Girl == EmmaX:
                                 ch_e "How very thoughtful of you. . ."
                                 $ Girl.change_stat("lust", 89, 10)
-                                $ Girl.change_face("sly")
+                                $ Girl.change_face("_sly")
                                 ch_e "A back massager, I assume. . ."
                             elif Girl == LauraX:
                                 ch_l "This is. . . [[bzzzt]- "
-                                $ Girl.change_face("sly")
+                                $ Girl.change_face("_sly")
                                 $ Girl.change_stat("lust", 89, 10)
                                 ch_l "-oooh. . ."
                             elif Girl == JeanX:
@@ -483,9 +483,9 @@ label Sex_Shop:
                                 ch_s "Oh, something for exercise purposes. . ."
                             elif Girl == JubesX:
                                 ch_v "Thanks, my, uh, back's been killing me. . ."
-                            $ Girl.change_face("bemused", 1)
+                            $ Girl.change_face("_bemused", 1)
                         elif "offered gift" in Girl.daily_history:
-                            $ Girl.change_face("angry")
+                            $ Girl.change_face("_angry")
                             "She hands it back to you."
                             if Girl == RogueX:
                                 ch_r "Look, maybe you should just rethink your gift-giving choices?"
@@ -502,7 +502,7 @@ label Sex_Shop:
                             elif Girl == JubesX:
                                 ch_v "I don't need this. . ."
                         else:
-                            $ Girl.change_face("angry")
+                            $ Girl.change_face("_angry")
                             $ Girl.change_stat("love", 50, -20)
                             $ Girl.change_stat("obedience", 20, 10)
                             $ Girl.change_stat("inhibition", 20, 20)
@@ -534,7 +534,7 @@ label Sex_Shop:
                     $ Girl.ArmPose = 2
                     $ Girl = 0
 
-                "Gift a Vibrator (locked)" if "vibrator" not in Player.inventory:
+                "Gift a Vibrator (locked)" if "_vibrator" not in Player.inventory:
                     pass
                 "Never Mind":
 
@@ -588,7 +588,7 @@ label Swim_Shop:
 
         if Girl:
 
-            $ Girl.change_face("smile",1)
+            $ Girl.change_face("_smile",1)
             if Girl.Swim[0]:
 
                 if Girl == RogueX:
@@ -661,7 +661,7 @@ label Swim_Shop:
 
                 show blackscreen onlayer black
                 call AllHide
-                call Display_Background
+
                 $ Girl.sprite_location = stage_center
                 $ Girl.sprite_layer = 100
                 call Display_Girl (Girl, 0, 0)
@@ -673,51 +673,51 @@ label Swim_Shop:
             while Girl:
                 menu:
                     "What did you want to try on here?"
-                    "Bikini Top (locked)" if Girl.bra == "bikini_top":
+                    "Bikini Top (locked)" if Girl.bra == "_bikini_top":
                         pass
-                    "Bikini Top" if Girl.bra != "bikini_top":
+                    "Bikini Top" if Girl.bra != "_bikini_top":
                         if Girl.SeenChest or approval_check(Girl, 1100, TabM=2):
-                            call Dressing_Strip_Bra ("bikini_top")
+                            call Dressing_Strip_Bra ("_bikini_top")
                         else:
                             Girl.voice "I'll need some privacy here. . ."
                             show blackscreen onlayer black
                             if Girl == JubesX:
-                                $ Girl.accessory = 0
-                            $ Girl.top = 0
-                            $ Girl.bra = "bikini_top"
+                                $ Girl.accessory = ""
+                            $ Girl.top = ""
+                            $ Girl.bra = "_bikini_top"
                             "You back out of the room for a moment. . ."
                             hide blackscreen onlayer black
-                        if "bikini_top" in Cart:
+                        if "_bikini_top" in Cart:
                             pass
-                        elif "bikini_top" in Girl.inventory:
+                        elif "_bikini_top" in Girl.inventory:
                             Girl.voice "I do already have one of these though."
                         else:
-                            $ Cart.append("bikini_top")
-                            if Girl == StormX and Girl.bra == "bikini_top" and Girl.underwear == "bikini_bottoms":
+                            $ Cart.append("_bikini_top")
+                            if Girl == StormX and Girl.bra == "_bikini_top" and Girl.underwear == "_bikini_bottoms":
                                 ch_s "Oh! I understand the purpose of the flap now!"
 
 
 
-                    "Bikini Bottoms (locked)" if Girl.underwear == "bikini_bottoms":
+                    "Bikini Bottoms (locked)" if Girl.underwear == "_bikini_bottoms":
                         pass
-                    "Bikini Bottoms" if Girl.underwear != "bikini_bottoms":
+                    "Bikini Bottoms" if Girl.underwear != "_bikini_bottoms":
                         if Girl.SeenPussy or approval_check(Girl, 1200, TabM=2):
-                            call Dressing_Strip_Panties ("bikini_bottoms")
+                            call Dressing_Strip_Panties ("_bikini_bottoms")
                         else:
                             Girl.voice "I'll need some privacy here. . ."
                             show blackscreen onlayer black
-                            $ Girl.legs = 0
-                            $ Girl.hose = 0
-                            $ Girl.underwear = "bikini_bottoms"
+                            $ Girl.legs = ""
+                            $ Girl.hose = ""
+                            $ Girl.underwear = "_bikini_bottoms"
                             "You back out of the room for a moment. . ."
                             hide blackscreen onlayer black
-                        if "bikini_bottoms" in Cart:
+                        if "_bikini_bottoms" in Cart:
                             pass
-                        elif "bikini_bottoms" in Girl.inventory:
+                        elif "_bikini_bottoms" in Girl.inventory:
                             Girl.voice "I do already have one of these though."
                         else:
-                            $ Cart.append("bikini_bottoms")
-                            if Girl == StormX and Girl.bra == "bikini_top" and Girl.underwear == "bikini_bottoms":
+                            $ Cart.append("_bikini_bottoms")
+                            if Girl == StormX and Girl.bra == "_bikini_top" and Girl.underwear == "_bikini_bottoms":
                                 ch_s "Oh! I understand the purpose of the flap now!"
 
 
@@ -725,12 +725,12 @@ label Swim_Shop:
                     "Blue swim skirt (locked)" if Girl == KittyX and Girl.legs == "blue_skirt":
                         pass
                     "Blue swim_skirt" if Girl == KittyX and Girl.legs != "blue_skirt":
-                        $ Girl.change_face("smile")
+                        $ Girl.change_face("_smile")
                         if (Girl.underwear and approval_check(Girl, 900, TabM=2)) or approval_check(Girl, 1200, TabM=2):
                             Girl.voice "Sure. . ."
                             $ Girl.upskirt = 1
                             pause 0.3
-                            $ Girl.legs = 0
+                            $ Girl.legs = ""
                             call expression Girl.tag + "_First_Bottomless"
                             pause 0.3
                             $ Girl.legs = "blue_skirt"
@@ -751,7 +751,7 @@ label Swim_Shop:
 
                         if Cart and Second:
                             if Second.location == bg_current and Second not in (LauraX,JeanX) and Second.GirlLikeCheck(Girl) >= 500:
-                                $ Second.change_face("smile")
+                                $ Second.change_face("_smile")
                                 if Second == RogueX:
                                     ch_r "Look'in good there. . ."
                                 elif Second == KittyX:
@@ -763,7 +763,7 @@ label Swim_Shop:
                                 elif Second == JubesX:
                                     ch_v "So cute!"
 
-                                $ Girl.change_face("smile")
+                                $ Girl.change_face("_smile")
                                 if Girl == RogueX:
                                     ch_r "Aw, thanks. . ."
                                 elif Girl == KittyX:
@@ -797,7 +797,7 @@ label Swim_Shop:
                             "That was fun, but since there wasn't anything she was interested in, she put it all back."
                         if Player.cash < 50:
                             "You don't have enough cash on you, so you have to put everything back."
-                            $ Girl.change_face("sad")
+                            $ Girl.change_face("_sad")
                             if "shopblock" not in Girl.daily_history:
                                 $ Girl.change_stat("love", 50, -2)
                                 $ Girl.change_stat("love", 90, -2)
@@ -815,7 +815,7 @@ label Swim_Shop:
                         while Cart:
                             menu:
                                 "So what did you want to buy?"
-                                "The_top" if "bikini_top" in Cart:
+                                "The_top" if "_bikini_top" in Cart:
                                     "You agree to buy [Girl.name] the bikini top."
                                     if Girl.tag + " bikini_top" in Player.inventory:
                                         "Wait, you already have one of those."
@@ -824,19 +824,19 @@ label Swim_Shop:
                                     elif Girl in (KittyX,EmmaX,StormX):
                                         if Player.cash < 60:
                                             "You look at the tag, and actually, it's $60, you can't afford it."
-                                            $ Cart.remove("bikini_top")
+                                            $ Cart.remove("_bikini_top")
                                         else:
                                             $ Player.cash -= 60
                                     elif Player.cash < 50:
                                         "You look at the tag, and actually, it's $50, you can't afford it."
-                                        $ Cart.remove("bikini_top")
+                                        $ Cart.remove("_bikini_top")
                                     else:
                                         $ Player.cash -= 50
-                                    if "bikini_top" in Cart:
+                                    if "_bikini_top" in Cart:
 
-                                        $ Cart.remove("bikini_top")
-                                        $ Girl.change_face("bemused",1)
-                                        $ Girl.inventory.append("bikini_top")
+                                        $ Cart.remove("_bikini_top")
+                                        $ Girl.change_face("_bemused",1)
+                                        $ Girl.inventory.append("_bikini_top")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 20)
                                         $ Girl.change_stat("obedience", 200, 10)
@@ -857,7 +857,7 @@ label Swim_Shop:
                                             ch_v "Ooo, so Cal. . ."
 
 
-                                "The_bottoms" if "bikini_bottoms" in Cart:
+                                "The_bottoms" if "_bikini_bottoms" in Cart:
                                     "You agree to buy [Girl.name] the bikini bottoms."
                                     if Girl.tag + " bikini_bottoms" in Player.inventory:
                                         "Wait, you already have those."
@@ -866,19 +866,19 @@ label Swim_Shop:
                                     elif Girl in (KittyX,EmmaX,StormX):
                                         if Player.cash < 60:
                                             "You look at the tag, and actually, it's $60, you can't afford it."
-                                            $ Cart.remove("bikini_bottoms")
+                                            $ Cart.remove("_bikini_bottoms")
                                         else:
                                             $ Player.cash -= 60
                                     elif Player.cash < 50:
                                         "You look at the tag, and actually, it's $50, you can't afford it."
-                                        $ Cart.remove("bikini_bottoms")
+                                        $ Cart.remove("_bikini_bottoms")
                                     else:
                                         $ Player.cash -= 50
-                                    if "bikini_bottoms" in Cart:
+                                    if "_bikini_bottoms" in Cart:
 
-                                        $ Cart.remove("bikini_bottoms")
-                                        $ Girl.change_face("bemused",1)
-                                        $ Girl.inventory.append("bikini_bottoms")
+                                        $ Cart.remove("_bikini_bottoms")
+                                        $ Girl.change_face("_bemused",1)
+                                        $ Girl.inventory.append("_bikini_bottoms")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 20)
                                         $ Girl.change_stat("obedience", 200, 10)
@@ -913,7 +913,7 @@ label Swim_Shop:
                                     if "blue_skirt" in Cart:
 
                                         $ Cart.remove("blue_skirt")
-                                        $ Girl.change_face("bemused",1)
+                                        $ Girl.change_face("_bemused",1)
                                         $ Girl.inventory.append("blue_skirt")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 20)
@@ -923,7 +923,7 @@ label Swim_Shop:
 
 
                                 "Nothing" if "purchased" not in Player.recent_history:
-                                    $ Girl.change_face("sad")
+                                    $ Girl.change_face("_sad")
                                     if "shopblock" not in Girl.daily_history:
                                         $ Girl.change_stat("love", 50, -2)
                                         $ Girl.change_stat("love", 90, -2)
@@ -939,7 +939,7 @@ label Swim_Shop:
                                         Girl.voice "Aw. . ."
                                     $ Cart = []
                                 "Nothing else" if "purchased" in Player.recent_history:
-                                    $ Girl.change_face("sad")
+                                    $ Girl.change_face("_sad")
                                     if "shopblock" not in Girl.daily_history:
                                         $ Girl.change_stat("love", 50, -1)
                                         $ Girl.change_stat("obedience", 50, 3)
@@ -950,9 +950,9 @@ label Swim_Shop:
 
 
                         $ Player.drain_word("purchased")
-                        if Girl == KittyX and ("blue_skirt" in Girl.inventory or Girl.inhibition >= 400) and "bikini_top" in Girl.inventory and "bikini_bottoms" in Girl.inventory:
+                        if Girl == KittyX and ("blue_skirt" in Girl.inventory or Girl.inhibition >= 400) and "_bikini_top" in Girl.inventory and "_bikini_bottoms" in Girl.inventory:
                             $ Girl.Swim[0] = 1
-                        elif "bikini_top" in Girl.inventory and "bikini_bottoms" in Girl.inventory:
+                        elif "_bikini_top" in Girl.inventory and "_bikini_bottoms" in Girl.inventory:
                             $ Girl.Swim[0] = 1
                         $ Girl = 0
 
@@ -1005,7 +1005,7 @@ label Lingerie_Shop:
 
         if Girl:
 
-            $ Girl.change_face("smile",1)
+            $ Girl.change_face("_smile",1)
             if approval_check(Girl, 800) or approval_check(Girl, 600, "L") or approval_check(Girl, 300, "O"):
 
                 if Girl == RogueX:
@@ -1062,7 +1062,7 @@ label Lingerie_Shop:
 
                 show blackscreen onlayer black
                 call AllHide
-                call Display_Background
+                
                 $ Girl.sprite_location = stage_center
                 $ Girl.sprite_layer = 100
                 call Display_Girl (Girl, 0, 0)
@@ -1080,14 +1080,14 @@ label Lingerie_Shop:
                         if "no_gift_bra" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.SeenChest and not approval_check(Girl, 900):
-                            $ Girl.change_face("angry",2)
+                            $ Girl.change_face("_angry",2)
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I don't think that would be appropriate."
                             elif Girl in (JeanX,LauraX):
                                 Girl.voice "No thanks. . ."
                             else:
                                 Girl.voice "Um, no, definitely not. . ."
-                            $ Girl.change_face("angry",1)
+                            $ Girl.change_face("_angry",1)
                             $ Girl.recent_history.append("no_gift_bra")
                         else:
                             if Girl.SeenChest or approval_check(Girl, 1000, TabM=2):
@@ -1096,8 +1096,8 @@ label Lingerie_Shop:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show blackscreen onlayer black
                                 if Girl == JubesX:
-                                    $ Girl.accessory = 0
-                                $ Girl.top = 0
+                                    $ Girl.accessory = ""
+                                $ Girl.top = ""
                                 $ Girl.bra = "lace_bra"
                                 "You back out of the room for a moment. . ."
                                 hide blackscreen onlayer black
@@ -1115,14 +1115,14 @@ label Lingerie_Shop:
                         if "no_gift_bra" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.SeenChest and not approval_check(Girl, 900):
-                            $ Girl.change_face("angry",2)
+                            $ Girl.change_face("_angry",2)
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I don't think that would be appropriate."
                             elif Girl in (JeanX,LauraX):
                                 Girl.voice "No thanks. . ."
                             else:
                                 Girl.voice "Um, no, definitely not. . ."
-                            $ Girl.change_face("angry",1)
+                            $ Girl.change_face("_angry",1)
                             $ Girl.recent_history.append("no_gift_bra")
                         else:
                             if Girl.SeenChest or approval_check(Girl, 1000, TabM=2):
@@ -1131,8 +1131,8 @@ label Lingerie_Shop:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show blackscreen onlayer black
                                 if Girl == JubesX:
-                                    $ Girl.accessory = 0
-                                $ Girl.top = 0
+                                    $ Girl.accessory = ""
+                                $ Girl.top = ""
                                 $ Girl.bra = "corset"
                                 "You back out of the room for a moment. . ."
                                 hide blackscreen onlayer black
@@ -1150,14 +1150,14 @@ label Lingerie_Shop:
                         if "no_gift_bra" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.SeenChest and not approval_check(Girl, 900):
-                            $ Girl.change_face("angry",2)
+                            $ Girl.change_face("_angry",2)
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I don't think that would be appropriate."
                             elif Girl in (JeanX,LauraX):
                                 Girl.voice "No thanks. . ."
                             else:
                                 Girl.voice "Um, no, definitely not. . ."
-                            $ Girl.change_face("angry",1)
+                            $ Girl.change_face("_angry",1)
                             $ Girl.recent_history.append("no_gift_bra")
                         else:
                             if Girl.SeenChest or approval_check(Girl, 1000, TabM=2):
@@ -1166,8 +1166,8 @@ label Lingerie_Shop:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show blackscreen onlayer black
                                 if Girl == JubesX:
-                                    $ Girl.accessory = 0
-                                $ Girl.top = 0
+                                    $ Girl.accessory = ""
+                                $ Girl.top = ""
                                 $ Girl.bra = "lace corset"
                                 "You back out of the room for a moment. . ."
                                 hide blackscreen onlayer black
@@ -1184,14 +1184,14 @@ label Lingerie_Shop:
                         if "no_gift_panties" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.SeenPussy and not approval_check(Girl, 1000):
-                            $ Girl.change_face("angry",2)
+                            $ Girl.change_face("_angry",2)
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I don't think that would be appropriate."
                             elif Girl in (JeanX,LauraX):
                                 Girl.voice "No thanks. . ."
                             else:
                                 Girl.voice "Um, no, definitely not. . ."
-                            $ Girl.change_face("angry",1)
+                            $ Girl.change_face("_angry",1)
                             $ Girl.recent_history.append("no_gift_panties")
                         else:
                             if Girl.SeenPussy or approval_check(Girl, 1200, TabM=2):
@@ -1199,8 +1199,8 @@ label Lingerie_Shop:
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show blackscreen onlayer black
-                                $ Girl.legs = 0
-                                $ Girl.hose = 0
+                                $ Girl.legs = ""
+                                $ Girl.hose = ""
                                 $ Girl.underwear = "lace_panties"
                                 "You back out of the room for a moment. . ."
                                 hide blackscreen onlayer black
@@ -1218,9 +1218,9 @@ label Lingerie_Shop:
                         if "no_gift_panties" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.SeenPussy and not approval_check(Girl, 1000):
-                            $ Girl.change_face("angry",2)
+                            $ Girl.change_face("_angry",2)
                             Girl.voice "Um, no, not really interested. . ."
-                            $ Girl.change_face("angry",1)
+                            $ Girl.change_face("_angry",1)
                             $ Girl.recent_history.append("no_gift_panties")
                         else:
                             if Girl.SeenPussy or approval_check(Girl, 1200, TabM=2):
@@ -1228,8 +1228,8 @@ label Lingerie_Shop:
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show blackscreen onlayer black
-                                $ Girl.legs = 0
-                                $ Girl.hose = 0
+                                $ Girl.legs = ""
+                                $ Girl.hose = ""
                                 $ Girl.underwear = "tiger_panties"
                                 "You back out of the room for a moment. . ."
                                 hide blackscreen onlayer black
@@ -1245,13 +1245,13 @@ label Lingerie_Shop:
                         pass
                     "Stockings and Garterbelt" if Girl.hose != "stockings_and_garterbelt":
                         if Girl.SeenPussy or approval_check(Girl, 900, TabM=2):
-                            $ Girl.change_face("sexy")
+                            $ Girl.change_face("_sexy")
                             Girl.voice "Sure. . ."
                             $ Girl.upskirt = 1
                             pause 0.3
-                            $ Girl.legs = 0
+                            $ Girl.legs = ""
                             pause 0.3
-                            $ Girl.hose = 0
+                            $ Girl.hose = ""
                             call expression Girl.tag + "_First_Bottomless"
                             pause 0.3
                             $ Girl.hose = "stockings_and_garterbelt"
@@ -1277,9 +1277,9 @@ label Lingerie_Shop:
                     "Knee Stockings (locked)" if Girl.hose == "knee stockings":
                         pass
                     "Knee Stockings" if Girl.hose != "knee stockings" and Girl == KittyX:
-                        $ Girl.change_face("sexy")
+                        $ Girl.change_face("_sexy")
                         Girl.voice "Sure. . ."
-                        $ Girl.hose = 0
+                        $ Girl.hose = ""
                         pause 0.3
                         $ Girl.hose = "knee stockings"
                         if "knee stockings" in Cart:
@@ -1293,9 +1293,9 @@ label Lingerie_Shop:
                     "High Socks (locked)" if Girl.hose == "socks":
                         pass
                     "High Socks" if Girl.hose != "socks" and Girl == JubesX:
-                        $ Girl.change_face("sexy")
+                        $ Girl.change_face("_sexy")
                         Girl.voice "Sure. . ."
-                        $ Girl.hose = 0
+                        $ Girl.hose = ""
                         pause 0.3
                         $ Girl.hose = "socks"
                         if "socks" in Cart:
@@ -1310,13 +1310,13 @@ label Lingerie_Shop:
                         pass
                     "Pantyhose" if Girl.hose != "pantyhose" and Girl != LauraX:
                         if Girl.SeenPussy or approval_check(Girl, 900, TabM=2):
-                            $ Girl.change_face("sexy")
+                            $ Girl.change_face("_sexy")
                             Girl.voice "Sure. . ."
                             $ Girl.upskirt = 1
                             pause 0.3
-                            $ Girl.legs = 0
+                            $ Girl.legs = ""
                             pause 0.3
-                            $ Girl.hose = 0
+                            $ Girl.hose = ""
                             call expression Girl.tag + "_First_Bottomless"
                             pause 0.3
                             $ Girl.hose = "pantyhose"
@@ -1345,7 +1345,7 @@ label Lingerie_Shop:
                                 Girl.voice "I suppose. . ."
                             else:
                                 Girl.voice "Ok. . ."
-                            $ Girl.hose = 0
+                            $ Girl.hose = ""
                             call expression Girl.tag + "_First_Bottomless"
                         else:
                             if Girl in (EmmaX,StormX):
@@ -1359,23 +1359,23 @@ label Lingerie_Shop:
                         if "no_gift_bra" in Girl.recent_history:
                             Girl.voice "I said no. . ."
                         elif not Girl.SeenChest and not approval_check(Girl, 900):
-                            $ Girl.change_face("angry",2)
+                            $ Girl.change_face("_angry",2)
                             if Girl in (EmmaX,StormX):
                                 Girl.voice "I don't think that would be appropriate."
                             elif Girl in (JeanX,LauraX):
                                 Girl.voice "No thanks. . ."
                             else:
                                 Girl.voice "Um, no, definitely not. . ."
-                            $ Girl.change_face("angry",1)
+                            $ Girl.change_face("_angry",1)
                             $ Girl.recent_history.append("no_gift_bra")
                         else:
                             if Girl.SeenChest or approval_check(Girl, 900, TabM=2):
-                                $ Girl.change_face("sexy")
+                                $ Girl.change_face("_sexy")
                                 Girl.voice "Sure. . ."
                                 if Girl == JubesX:
-                                    $ Girl.accessory = 0
-                                    pause 0.3                                                    
-                                $ Girl.top = 0
+                                    $ Girl.accessory = ""
+                                    pause 0.3
+                                $ Girl.top = ""
                                 call expression Girl.tag + "_First_Topless"
                                 call expression Girl.tag + "_First_Bottomless" pass (1)
                                 pause 0.3
@@ -1389,7 +1389,7 @@ label Lingerie_Shop:
                                 Girl.voice "I'll need some privacy here. . ."
                                 show blackscreen onlayer black
                                 if Girl == JubesX:
-                                    $ Girl.accessory = 0
+                                    $ Girl.accessory = ""
                                 $ Girl.top = "nighty"
                                 "You back out of the room for a moment. . ."
                                 hide blackscreen onlayer black
@@ -1404,7 +1404,7 @@ label Lingerie_Shop:
 
                         if Cart and Second:
                             if Second.location == bg_current and Second not in (LauraX,JeanX) and Second.GirlLikeCheck(Girl) >= 500:
-                                $ Second.change_face("sexy")
+                                $ Second.change_face("_sexy")
                                 if Second == RogueX:
                                     ch_r "Look'in good there. . ."
                                 elif Second == KittyX:
@@ -1416,7 +1416,7 @@ label Lingerie_Shop:
                                 elif Second == JubesX:
                                     ch_v "So cute!"
 
-                                $ Girl.change_face("sexy")
+                                $ Girl.change_face("_sexy")
                                 if Girl == RogueX:
                                     ch_r "Aw, thanks. . ."
                                 elif Girl == KittyX:
@@ -1450,7 +1450,7 @@ label Lingerie_Shop:
                             "That was fun, but since there wasn't anything she was interested in, she put it all back."
                         if Player.cash < 50:
                             "You don't have enough cash on you, so you have to put everything back."
-                            $ Girl.change_face("sad")
+                            $ Girl.change_face("_sad")
                             if "shopblock" not in Girl.daily_history:
                                 $ Girl.change_stat("love", 50, -2)
                                 $ Girl.change_stat("love", 90, -2)
@@ -1482,7 +1482,7 @@ label Lingerie_Shop:
                                     if "lace_bra" in Cart:
 
                                         $ Cart.remove("lace_bra")
-                                        $ Girl.change_face("bemused",1)
+                                        $ Girl.change_face("_bemused",1)
                                         $ Girl.inventory.append("lace_bra")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 25)
@@ -1516,7 +1516,7 @@ label Lingerie_Shop:
                                     if "corset" in Cart:
 
                                         $ Cart.remove("corset")
-                                        $ Girl.change_face("bemused",1)
+                                        $ Girl.change_face("_bemused",1)
                                         $ Girl.inventory.append("corset")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 15)
@@ -1542,7 +1542,7 @@ label Lingerie_Shop:
                                     if "lace corset" in Cart:
 
                                         $ Cart.remove("lace corset")
-                                        $ Girl.change_face("bemused",1)
+                                        $ Girl.change_face("_bemused",1)
                                         $ Girl.inventory.append("lace corset")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 25)
@@ -1565,7 +1565,7 @@ label Lingerie_Shop:
                                     if "lace_panties" in Cart:
 
                                         $ Cart.remove("lace_panties")
-                                        $ Girl.change_face("bemused",1)
+                                        $ Girl.change_face("_bemused",1)
                                         $ Girl.inventory.append("lace_panties")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 25)
@@ -1577,7 +1577,7 @@ label Lingerie_Shop:
                                             ch_k "These don't leave much to the imagination. . ."
                                         elif Girl == EmmaX:
                                             ch_e "This is an. . . unsual gift."
-                                            $ EmmaX.change_face("sly",1)
+                                            $ EmmaX.change_face("_sly",1)
                                             ch_e "But I'll hold on to them. . ."
                                         elif Girl == LauraX:
                                             ch_l "These are pretty hot. . ."
@@ -1603,7 +1603,7 @@ label Lingerie_Shop:
                                     if "tiger_panties" in Cart:
 
                                         $ Cart.remove("tiger_panties")
-                                        $ Girl.change_face("bemused",1)
+                                        $ Girl.change_face("_bemused",1)
                                         $ Girl.inventory.append("tiger_panties")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 25)
@@ -1627,7 +1627,7 @@ label Lingerie_Shop:
                                     if "stockings_and_garterbelt" in Cart:
 
                                         $ Cart.remove("stockings_and_garterbelt")
-                                        $ Girl.change_face("bemused",1)
+                                        $ Girl.change_face("_bemused",1)
                                         $ Girl.inventory.append("stockings_and_garterbelt")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 5)
@@ -1655,7 +1655,7 @@ label Lingerie_Shop:
                                     if "knee stockings" in Cart:
 
                                         $ Cart.remove("knee stockings")
-                                        $ Girl.change_face("bemused",1)
+                                        $ Girl.change_face("_bemused",1)
                                         $ Girl.inventory.append("knee stockings")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 5)
@@ -1678,7 +1678,7 @@ label Lingerie_Shop:
                                     if "socks" in Cart:
 
                                         $ Cart.remove("socks")
-                                        $ Girl.change_face("bemused",1)
+                                        $ Girl.change_face("_bemused",1)
                                         $ Girl.inventory.append("socks")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 5)
@@ -1701,7 +1701,7 @@ label Lingerie_Shop:
                                     if "pantyhose" in Cart:
 
                                         $ Cart.remove("pantyhose")
-                                        $ Girl.change_face("bemused",1)
+                                        $ Girl.change_face("_bemused",1)
                                         $ Girl.inventory.append("pantyhose")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 5)
@@ -1724,7 +1724,7 @@ label Lingerie_Shop:
                                     if "nighty" in Cart:
 
                                         $ Cart.remove("nighty")
-                                        $ Girl.change_face("bemused",1)
+                                        $ Girl.change_face("_bemused",1)
                                         $ Girl.inventory.append("nighty")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 40)
@@ -1735,7 +1735,7 @@ label Lingerie_Shop:
 
 
                                 "Nothing" if "purchased" not in Player.recent_history:
-                                    $ Girl.change_face("sad")
+                                    $ Girl.change_face("_sad")
                                     if "shopblock" not in Girl.daily_history:
                                         $ Girl.change_stat("love", 50, -2)
                                         $ Girl.change_stat("love", 90, -2)
@@ -1751,7 +1751,7 @@ label Lingerie_Shop:
                                         Girl.voice "Aw. . ."
                                     $ Cart = []
                                 "Nothing else" if "purchased" in Player.recent_history:
-                                    $ Girl.change_face("sad")
+                                    $ Girl.change_face("_sad")
                                     if "shopblock" not in Girl.daily_history:
                                         $ Girl.change_stat("love", 50, -1)
                                         $ Girl.change_stat("obedience", 50, 3)
@@ -1774,19 +1774,19 @@ label Dressing_Strip_Bra(Item=0):
 
     if not Item:
         return
-    $ Girl.change_face("sexy")
+    $ Girl.change_face("_sexy")
     Girl.voice "Sure. . ."
     if Girl.top or Girl.bra:
         $ Girl.top_pulled_up = 1
         pause 0.3
     if Girl == JubesX and Girl.accessory:
-        $ Girl.accessory = 0
-        pause 0.3 
+        $ Girl.accessory = ""
+        pause 0.3
     if Girl.top:
-        $ Girl.top = 0
+        $ Girl.top = ""
         pause 0.3
     if Girl.bra:
-        $ Girl.bra = 0
+        $ Girl.bra = ""
     call expression Girl.tag + "_First_Topless"
     pause 0.3
     $ Girl.bra = Item
@@ -1803,20 +1803,20 @@ label Dressing_Strip_Panties(Item=0):
 
     if not Item:
         return
-    $ Girl.change_face("sexy")
+    $ Girl.change_face("_sexy")
     Girl.voice "Sure. . ."
     if Girl.legs:
         $ Girl.upskirt = 1
         pause 0.3
-        $ Girl.legs = 0
+        $ Girl.legs = ""
         pause 0.3
     if Girl.hose:
-        $ Girl.hose = 0
+        $ Girl.hose = ""
         pause 0.3
     if Girl.underwear:
         $ Girl.underwear_pulled_down = 1
         pause 0.2
-        $ Girl.underwear = 0
+        $ Girl.underwear = ""
     call expression Girl.tag + "_First_Bottomless"
     pause 0.3
     $ Girl.underwear = Item

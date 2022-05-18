@@ -21,7 +21,7 @@ label Jubes_SexAct(Act=0):
         call Les_Prep (JubesX)
         if not action_context:
             return
-    elif Act == "kissing":
+    elif Act == "kiss":
         call KissPrep (JubesX)
         if not action_context:
             return
@@ -80,7 +80,7 @@ label Jubes_Masturbate:
                 "Would you like some help? I could lend some helping hands. . ." if Player.semen and JubesX.remaining_actions:
                     $ JubesX.change_stat("love", 90, 1)
                     $ JubesX.change_stat("obedience", 50, 2)
-                    $ JubesX.change_face("sexy")
+                    $ JubesX.change_face("_sexy")
                     ch_v "Well, ok, gimme a hand with these?"
                     $ JubesX.change_stat("obedience", 70, 2)
                     $ JubesX.change_stat("inhibition", 70, 1)
@@ -90,7 +90,7 @@ label Jubes_Masturbate:
                 "Would you like some help? I could. . . up to you, I guess." if Player.semen and JubesX.remaining_actions:
                     $ JubesX.change_stat("love", 70, 2)
                     $ JubesX.change_stat("love", 90, 1)
-                    $ JubesX.change_face("sexy")
+                    $ JubesX.change_face("_sexy")
                     ch_v "Cool. . ."
                     $ JubesX.change_stat("obedience", 70, 2)
                     $ JubesX.change_stat("inhibition", 70, 1)
@@ -102,7 +102,7 @@ label Jubes_Masturbate:
                     $ JubesX.action_counter["masturbation"] += 1
                     jump Jubes_M_Cycle
                 "Why don't we take care of each other?" if Player.semen and JubesX.remaining_actions:
-                    $ JubesX.change_face("sexy")
+                    $ JubesX.change_face("_sexy")
                     ch_v "Like what?"
                     $ renpy.pop_call()
                     return
@@ -110,16 +110,16 @@ label Jubes_Masturbate:
                     if JubesX.lust >= 50:
                         $ JubesX.change_stat("love", 70, 2)
                         $ JubesX.change_stat("love", 90, 1)
-                        $ JubesX.change_face("sexy")
+                        $ JubesX.change_face("_sexy")
                         ch_v "Sure, just gimme a sec. . ."
                         $ JubesX.change_stat("obedience", 80, 3)
                         $ JubesX.change_stat("inhibition", 80, 5)
                         jump Jubes_M_Cycle
                     elif approval_check(JubesX, 1200):
-                        $ JubesX.change_face("sly")
+                        $ JubesX.change_face("_sly")
                         ch_v "Yeah. . . but I could take a break. . ."
                     else:
-                        $ JubesX.change_face("angry")
+                        $ JubesX.change_face("_angry")
                         ch_v "Well I -did.-"
 
 
@@ -132,17 +132,17 @@ label Jubes_Masturbate:
         $ action_context = 0
         $ renpy.pop_call()
         if approval:
-            $ JubesX.change_face("bemused", 2)
+            $ JubesX.change_face("_bemused", 2)
             if bg_current == "bg_jubes":
                 ch_v "So, what're you doing here?"
             else:
                 ch_v "I didn't think anyone would be dropping by. . ."
-            $ JubesX.blushing = 1
+            $ JubesX.blushing = "_blush1"
         else:
             $ JubesX.change_stat("love", 200, -5)
-            $ JubesX.change_face("angry")
-            $ JubesX.recent_history.append("angry")
-            $ JubesX.daily_history.append("angry")
+            $ JubesX.change_face("_angry")
+            $ JubesX.recent_history.append("_angry")
+            $ JubesX.daily_history.append("_angry")
             if bg_current == "bg_jubes":
                 ch_v "I was taking care of something, bye."
                 "[JubesX.name] kicks you out of her room."
@@ -188,7 +188,7 @@ label Jubes_Masturbate:
                     $ JubesX.change_stat("obedience", 90, 1)
                     $ JubesX.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ JubesX.change_face("surprised")
+                    $ JubesX.change_face("_surprised")
                     $ JubesX.change_stat("inhibition", 70, 1)
                     ch_p "Let's not do that right now, [JubesX.petname]."
                     $ JubesX.nameCheck()
@@ -207,57 +207,57 @@ label Jubes_Masturbate:
 
 
     if not JubesX.action_counter["masturbation"]:
-        $ JubesX.change_face("surprised", 1)
-        $ JubesX.mouth = "kiss"
+        $ JubesX.change_face("_surprised", 1)
+        $ JubesX.mouth = "_kiss"
         ch_v "So you like watching me masturbate?"
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             ch_v "Nothing more than watching? . ."
 
 
 
     if not JubesX.action_counter["masturbation"] and approval:
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             $ JubesX.change_stat("love", 70, -3, 1)
             $ JubesX.change_stat("love", 20, -2, 1)
         elif JubesX.love >= JubesX.obedience and JubesX.love >= JubesX.inhibition:
-            $ JubesX.change_face("sexy")
-            $ JubesX.brows = "sad"
-            $ JubesX.mouth = "smile"
+            $ JubesX.change_face("_sexy")
+            $ JubesX.brows = "_sad"
+            $ JubesX.mouth = "_smile"
             ch_v "I don't know, are you sure?"
         elif JubesX.obedience >= JubesX.inhibition:
-            $ JubesX.change_face("normal")
+            $ JubesX.change_face("_normal")
             ch_v "If that's what you're into. . ."
         else:
-            $ JubesX.change_face("sad")
-            $ JubesX.mouth = "smile"
+            $ JubesX.change_face("_sad")
+            $ JubesX.mouth = "_smile"
             ch_v "I could work off some stress. . ."
 
 
 
     elif approval:
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             $ JubesX.change_stat("love", 70, -3, 1)
             $ JubesX.change_stat("love", 20, -2, 1)
             ch_v "Hmm, again?"
         elif approval and "masturbation" in JubesX.recent_history:
-            $ JubesX.change_face("sexy", 1)
+            $ JubesX.change_face("_sexy", 1)
             ch_v "I have built up some more stress. . ."
             jump Jubes_M_Prep
         elif approval and "masturbation" in JubesX.daily_history:
-            $ JubesX.change_face("sexy", 1)
+            $ JubesX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Did you enjoy that?",
                     "Didn't get enough earlier?",
                     "I enjoyed having an audience. . ."])
             ch_v "[Line]"
         elif JubesX.action_counter["masturbation"] < 3:
-            $ JubesX.change_face("sexy", 1)
-            $ JubesX.brows = "confused"
+            $ JubesX.change_face("_sexy", 1)
+            $ JubesX.brows = "_confused"
             ch_v "Was last time fun?"
         else:
-            $ JubesX.change_face("sexy", 1)
+            $ JubesX.change_face("_sexy", 1)
             $ JubesX.ArmPose = 2
             $ Line = renpy.random.choice(["You do enjoy watching.",
                     "Again?",
@@ -270,12 +270,12 @@ label Jubes_Masturbate:
 
     if approval >= 2:
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             $ JubesX.change_stat("obedience", 90, 1)
             $ JubesX.change_stat("inhibition", 60, 1)
             ch_v "Whatevs. . ."
         else:
-            $ JubesX.change_face("sexy", 1)
+            $ JubesX.change_face("_sexy", 1)
             $ JubesX.change_stat("love", 90, 1)
             $ JubesX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Huh. Ok.",
@@ -295,7 +295,7 @@ label Jubes_Masturbate:
         menu:
             ch_v "I don't know, I'm not really into it right now."
             "Maybe later?":
-                $ JubesX.change_face("sexy", 1)
+                $ JubesX.change_face("_sexy", 1)
                 if JubesX.lust > 70:
                     ch_v "Maybe, just not with so many eyes on me. . ."
                 else:
@@ -305,7 +305,7 @@ label Jubes_Masturbate:
                 return
             "You look like you could use it. . .":
                 if approval:
-                    $ JubesX.change_face("sexy")
+                    $ JubesX.change_face("_sexy")
                     $ JubesX.change_stat("obedience", 90, 2)
                     $ JubesX.change_stat("obedience", 50, 2)
                     $ JubesX.change_stat("inhibition", 70, 3)
@@ -322,7 +322,7 @@ label Jubes_Masturbate:
 
                 $ approval = approval_check(JubesX, 450, "OI", TabM = 2)
                 if approval > 1 or (approval and JubesX.Forced):
-                    $ JubesX.change_face("sad")
+                    $ JubesX.change_face("_sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
                     $ JubesX.change_stat("love", 200, -5)
                     ch_v "Whatever."
@@ -333,36 +333,36 @@ label Jubes_Masturbate:
                     jump Jubes_M_Prep
                 else:
                     $ JubesX.change_stat("love", 200, -20)
-                    $ JubesX.recent_history.append("angry")
-                    $ JubesX.daily_history.append("angry")
+                    $ JubesX.recent_history.append("_angry")
+                    $ JubesX.daily_history.append("_angry")
 
 
 
     $ JubesX.ArmPose = 1
     if JubesX.Forced:
-        $ JubesX.change_face("angry", 1)
+        $ JubesX.change_face("_angry", 1)
         ch_v "This isn't something I'm into."
         $ JubesX.change_stat("lust", 90, 5)
         if JubesX.love > 300:
             $ JubesX.change_stat("love", 70, -2)
         $ JubesX.change_stat("obedience", 50, -2)
-        $ JubesX.recent_history.append("angry")
-        $ JubesX.daily_history.append("angry")
+        $ JubesX.recent_history.append("_angry")
+        $ JubesX.daily_history.append("_angry")
         $ JubesX.recent_history.append("no_masturbation")
         $ JubesX.daily_history.append("no_masturbation")
         return
     elif Taboo:
-        $ JubesX.change_face("angry", 1)
+        $ JubesX.change_face("_angry", 1)
         $ JubesX.daily_history.append("no_taboo")
         ch_v "I don't want to do this in public!"
         $ JubesX.change_stat("lust", 90, 5)
         $ JubesX.change_stat("obedience", 50, -3)
         return
     elif JubesX.action_counter["masturbation"]:
-        $ JubesX.change_face("sad")
+        $ JubesX.change_face("_sad")
         ch_v "I'm not into it right now."
     else:
-        $ JubesX.change_face("normal", 1)
+        $ JubesX.change_face("_normal", 1)
         ch_v "Um. . . no."
     $ JubesX.recent_history.append("no_masturbation")
     $ JubesX.daily_history.append("no_masturbation")
@@ -377,12 +377,12 @@ label Jubes_M_Prep:
 
 
     if "unseen" in JubesX.recent_history:
-        $ JubesX.change_face("sexy")
-        $ JubesX.eyes = "closed"
+        $ JubesX.change_face("_sexy")
+        $ JubesX.eyes = "_closed"
         $ JubesX.ArmPose = 2
         "You see [JubesX.name] leaning back, masturbating. You don't think she's noticed you yet."
     else:
-        $ JubesX.change_face("sexy")
+        $ JubesX.change_face("_sexy")
         $ JubesX.ArmPose = 2
         "[JubesX.name] lays back and starts to toy with herself."
         if not JubesX.action_counter["masturbation"]:
@@ -537,7 +537,7 @@ label Jubes_M_Cycle:
                 if "unseen" not in JubesX.recent_history:
 
                     call Player_Cumming (JubesX)
-                    if "angry" in JubesX.recent_history:
+                    if "_angry" in JubesX.recent_history:
                         call Jubes_Pos_Reset
                         return
                     $ JubesX.change_stat("lust", 200, 5)
@@ -596,7 +596,7 @@ label Jubes_M_Cycle:
                 $ JubesX.lust += 25
 
 
-    $ JubesX.change_face("bemused", 0)
+    $ JubesX.change_face("_bemused", 0)
     $ Line = 0
     call Sex_Basic_Dialog (JubesX, "done")
 
@@ -604,20 +604,20 @@ label Jubes_M_Interupted:
 
 
     if "unseen" in JubesX.recent_history:
-        $ JubesX.change_face("surprised", 2)
+        $ JubesX.change_face("_surprised", 2)
         "[JubesX.name] stops what she's doing with a start, eyes wide."
         call Jubes_First_Bottomless (1)
-        $ JubesX.change_face("surprised", 2)
+        $ JubesX.change_face("_surprised", 2)
 
 
         if offhand_action == "jackin":
             ch_v "Oh!"
             ch_v "How long were you standing there?"
-            $ JubesX.eyes = "down"
+            $ JubesX.eyes = "_down"
             menu:
                 ch_v "And um. . . you have your penis out. . . "
                 "A while, it was an excellent show.":
-                    $ JubesX.change_face("sexy",1)
+                    $ JubesX.change_face("_sexy",1)
                     $ JubesX.change_stat("obedience", 50, 3)
                     $ JubesX.change_stat("obedience", 70, 2)
                     ch_v "Oh. . . um. . .thanks?"
@@ -627,7 +627,7 @@ label Jubes_M_Interupted:
                         ch_v "I, um. . . you're not so bad yourself. . ."
                 "I. . . just got here?":
 
-                    $ JubesX.change_face("angry",1)
+                    $ JubesX.change_face("_angry",1)
                     $ JubesX.change_stat("love", 70, 2)
                     $ JubesX.change_stat("love", 90, 1)
                     $ JubesX.change_stat("obedience", 50, 2)
@@ -637,7 +637,7 @@ label Jubes_M_Interupted:
                     if JubesX.love >= 800 or JubesX.obedience >= 500 or JubesX.inhibition >= 500:
                         $ approval_bonus += 10
                         $ JubesX.change_stat("lust", 90, 5)
-                        $ JubesX.change_face("bemused", 1)
+                        $ JubesX.change_face("_bemused", 1)
                         ch_v "I guess I made an impression?"
                     else:
                         $ approval_bonus -= 10
@@ -652,12 +652,12 @@ label Jubes_M_Interupted:
             menu:
                 extend ""
                 "A while.":
-                    $ JubesX.change_face("sexy", 1)
+                    $ JubesX.change_face("_sexy", 1)
                     $ JubesX.change_stat("obedience", 50, 3)
                     $ JubesX.change_stat("obedience", 70, 2)
                     ch_v "I guess it must have been interesting. . ."
                 "I just got here.":
-                    $ JubesX.change_face("bemused", 1)
+                    $ JubesX.change_face("_bemused", 1)
                     $ JubesX.change_stat("love", 70, 2)
                     $ JubesX.change_stat("love", 90, 1)
                     ch_v "Suuuure. . ."
@@ -695,7 +695,7 @@ label Jubes_M_Interupted:
     if Round <= 10:
         ch_v "I need a break anyway. . ."
         return
-    $ JubesX.change_face("sexy", 1)
+    $ JubesX.change_face("_sexy", 1)
     if JubesX.lust < 20:
         ch_v "Well. . . I certainly enjoyed that. . ."
     else:
@@ -706,7 +706,7 @@ label Jubes_M_Interupted:
             $ action_context = "shift"
             return
         "You could just keep going. . ." if Player.semen:
-            $ JubesX.change_face("sly")
+            $ JubesX.change_face("_sly")
             if JubesX.remaining_actions and Round >= 10:
                 ch_v "Ok. . ."
                 jump Jubes_M_Cycle
@@ -715,12 +715,12 @@ label Jubes_M_Interupted:
         "I'm good here. [[Stop]":
             if JubesX.love < 800 and JubesX.inhibition < 500 and JubesX.obedience < 500:
                 $ JubesX.change_outfit()
-            $ JubesX.change_face("normal")
-            $ JubesX.brows = "confused"
+            $ JubesX.change_face("_normal")
+            $ JubesX.brows = "_confused"
             ch_v "Ok, cool. . ."
-            $ JubesX.brows = "normal"
+            $ JubesX.brows = "_normal"
         "You should probably stop for now." if JubesX.lust > 30:
-            $ JubesX.change_face("angry")
+            $ JubesX.change_face("_angry")
             ch_v "Hrmm."
     return
 
@@ -790,12 +790,12 @@ label Jubes_Sex_P:
             "You push [JubesX.name] onto her back."
         $ JubesX.SeenPanties = 1
         "You rub the tip of your cock against her moist slit."
-        $ JubesX.change_face("surprised", 1)
+        $ JubesX.change_face("_surprised", 1)
 
         if (JubesX.action_counter["sex"] and approval) or (approval > 1):
 
             "[JubesX.name] glances down and then breaks into a smile."
-            $ JubesX.change_face("sly")
+            $ JubesX.change_face("_sly")
             $ JubesX.change_stat("obedience", 70, 3)
             $ JubesX.change_stat("inhibition", 50, 3)
             $ JubesX.change_stat("inhibition", 70, 1)
@@ -803,12 +803,12 @@ label Jubes_Sex_P:
             jump Jubes_SexPrep
         else:
 
-            $ JubesX.brows = "angry"
+            $ JubesX.brows = "_angry"
             menu:
                 ch_v "Oh, taking it all the way, are we?"
                 "Sorry, sorry! Never mind.":
                     if approval:
-                        $ JubesX.change_face("sexy", 1)
+                        $ JubesX.change_face("_sexy", 1)
                         $ JubesX.change_stat("obedience", 70, 3)
                         $ JubesX.change_stat("inhibition", 50, 3)
                         $ JubesX.change_stat("inhibition", 70, 1)
@@ -816,7 +816,7 @@ label Jubes_Sex_P:
                         jump Jubes_SexPrep
                     else:
                         "You pull back before you really get it in."
-                        $ JubesX.change_face("bemused", 1)
+                        $ JubesX.change_face("_bemused", 1)
                         if JubesX.action_counter["sex"]:
                             ch_v "Maybe ask first, [JubesX.player_petname]?"
                         else:
@@ -828,7 +828,7 @@ label Jubes_Sex_P:
                     $ JubesX.change_stat("obedience", 70, 3)
                     $ JubesX.change_stat("inhibition", 50, 3)
                     if not approval_check(JubesX, 700, "O", TabM=1):
-                        $ JubesX.change_face("angry")
+                        $ JubesX.change_face("_angry")
                         "[JubesX.name] shoves you away and backhands you in the face."
                         ch_v "Dick."
                         ch_v "Don't push me."
@@ -838,10 +838,10 @@ label Jubes_Sex_P:
                         if action_context:
                             $ renpy.pop_call()
                         call Jubes_Sex_Reset
-                        $ JubesX.recent_history.append("angry")
-                        $ JubesX.daily_history.append("angry")
+                        $ JubesX.recent_history.append("_angry")
+                        $ JubesX.daily_history.append("_angry")
                     else:
-                        $ JubesX.change_face("sad")
+                        $ JubesX.change_face("_sad")
                         "[JubesX.name] doesn't seem to be into this, you're lucky she's so obedient."
                         jump Jubes_SexPrep
         return
@@ -850,42 +850,42 @@ label Jubes_Sex_P:
 
     if not JubesX.action_counter["sex"] and "no_sex" not in JubesX.recent_history:
 
-        $ JubesX.change_face("surprised", 1)
-        $ JubesX.mouth = "kiss"
+        $ JubesX.change_face("_surprised", 1)
+        $ JubesX.mouth = "_kiss"
         ch_v "Huh, you wanna fuck me? . . "
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             ch_v "Pretty bold of you. . ."
 
 
     if not JubesX.action_counter["sex"] and approval:
 
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             $ JubesX.change_stat("love", 70, -30, 1)
             $ JubesX.change_stat("love", 20, -20, 1)
         elif JubesX.love >= (JubesX.obedience + JubesX.inhibition):
-            $ JubesX.change_face("sexy")
-            $ JubesX.brows = "sad"
-            $ JubesX.mouth = "smile"
+            $ JubesX.change_face("_sexy")
+            $ JubesX.brows = "_sad"
+            $ JubesX.mouth = "_smile"
             ch_v "Well, you look so cute when you ask. . ."
         elif JubesX.obedience >= JubesX.inhibition:
-            $ JubesX.change_face("normal")
+            $ JubesX.change_face("_normal")
             ch_v "Yes, [JubesX.player_petname]. . ."
         elif JubesX.addiction >= 50:
-            $ JubesX.change_face("manic", 1)
+            $ JubesX.change_face("_manic", 1)
             ch_v "Sounds fun. . ."
         else:
-            $ JubesX.change_face("sad")
-            $ JubesX.mouth = "smile"
+            $ JubesX.change_face("_sad")
+            $ JubesX.mouth = "_smile"
             ch_v "I was hoping you'd ask. . ."
 
 
     elif approval:
 
-        $ JubesX.change_face("sexy", 1)
+        $ JubesX.change_face("_sexy", 1)
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             $ JubesX.change_stat("love", 70, -3, 1)
             $ JubesX.change_stat("love", 20, -2, 1)
             ch_v "I hope I don't wear you out."
@@ -902,8 +902,8 @@ label Jubes_Sex_P:
                     "Your funeral, " + JubesX.player_petname + "."])
             ch_v "[Line]"
         elif JubesX.action_counter["sex"] < 3:
-            $ JubesX.brows = "confused"
-            $ JubesX.mouth = "kiss"
+            $ JubesX.brows = "_confused"
+            $ JubesX.mouth = "_kiss"
             ch_v "Oh? Another round?"
         else:
             $ Line = renpy.random.choice(["Oh, you want some of this?",
@@ -918,14 +918,14 @@ label Jubes_Sex_P:
     if approval >= 2:
 
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             $ JubesX.change_stat("obedience", 90, 1)
             $ JubesX.change_stat("inhibition", 60, 1)
             ch_v "Ok, fine. Just make it good."
         elif "no_sex" in JubesX.daily_history:
             ch_v "Ok, whatever. . ."
         else:
-            $ JubesX.change_face("sexy", 1)
+            $ JubesX.change_face("_sexy", 1)
             $ JubesX.change_stat("love", 90, 1)
             $ JubesX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Well. . . fine, let's do it.",
@@ -942,7 +942,7 @@ label Jubes_Sex_P:
     else:
 
 
-        $ JubesX.change_face("angry")
+        $ JubesX.change_face("_angry")
         if "no_sex" in JubesX.recent_history:
             ch_v "Sorry, [JubesX.player_petname] \"no.\""
         elif Taboo and "no_taboo" in JubesX.daily_history and "no_sex" in JubesX.daily_history:
@@ -952,19 +952,19 @@ label Jubes_Sex_P:
         elif Taboo and "no_taboo" in JubesX.daily_history:
             ch_v "I already told you this is too public!"
         elif not JubesX.action_counter["sex"]:
-            $ JubesX.change_face("bemused")
+            $ JubesX.change_face("_bemused")
             ch_v "Oh, you have no idea what you're in for. . ."
         else:
-            $ JubesX.change_face("bemused")
+            $ JubesX.change_face("_bemused")
             ch_v "Maybe later? . ."
         menu:
             extend ""
             "Sorry, never mind." if "no_sex" in JubesX.daily_history:
-                $ JubesX.change_face("bemused")
+                $ JubesX.change_face("_bemused")
                 ch_v "Well, you are persistant."
                 return
             "Maybe later?" if "no_sex" not in JubesX.daily_history:
-                $ JubesX.change_face("sexy")
+                $ JubesX.change_face("_sexy")
                 ch_v "Probably. . ."
                 $ JubesX.change_stat("love", 80, 2)
                 $ JubesX.change_stat("inhibition", 70, 2)
@@ -976,7 +976,7 @@ label Jubes_Sex_P:
                 return
             "I think you'd enjoy it as much as I would. . .":
                 if approval:
-                    $ JubesX.change_face("sexy")
+                    $ JubesX.change_face("_sexy")
                     $ JubesX.change_stat("obedience", 90, 2)
                     $ JubesX.change_stat("obedience", 50, 2)
                     $ JubesX.change_stat("inhibition", 70, 3)
@@ -990,7 +990,7 @@ label Jubes_Sex_P:
             "Just deal with it.":
                 $ approval = approval_check(JubesX, 1150, "OI", TabM = 3)
                 if approval > 1 or (approval and JubesX.Forced):
-                    $ JubesX.change_face("sad")
+                    $ JubesX.change_face("_sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
                     $ JubesX.change_stat("love", 200, -5)
                     ch_v "Fine, if it'll shut you up."
@@ -1001,8 +1001,8 @@ label Jubes_Sex_P:
                     jump Jubes_SexPrep
                 else:
                     $ JubesX.change_stat("love", 200, -20)
-                    $ JubesX.recent_history.append("angry")
-                    $ JubesX.daily_history.append("angry")
+                    $ JubesX.recent_history.append("_angry")
+                    $ JubesX.daily_history.append("_angry")
 
 
 
@@ -1010,29 +1010,29 @@ label Jubes_Sex_P:
     $ JubesX.ArmPose = 1
     if "no_sex" in JubesX.daily_history:
         ch_v "Don't push me."
-        $ JubesX.recent_history.append("angry")
-        $ JubesX.daily_history.append("angry")
+        $ JubesX.recent_history.append("_angry")
+        $ JubesX.daily_history.append("_angry")
     elif JubesX.Forced:
-        $ JubesX.change_face("angry", 1)
+        $ JubesX.change_face("_angry", 1)
         ch_v "I'm over taking orders."
         $ JubesX.change_stat("lust", 200, 5)
         if JubesX.love > 300:
             $ JubesX.change_stat("love", 70, -2)
         $ JubesX.change_stat("obedience", 50, -2)
-        $ JubesX.recent_history.append("angry")
-        $ JubesX.daily_history.append("angry")
+        $ JubesX.recent_history.append("_angry")
+        $ JubesX.daily_history.append("_angry")
     elif Taboo:
-        $ JubesX.change_face("angry", 1)
+        $ JubesX.change_face("_angry", 1)
         $ JubesX.recent_history.append("no_taboo")
         $ JubesX.daily_history.append("no_taboo")
         ch_v "This place is way too exposed."
         $ JubesX.change_stat("lust", 200, 5)
         $ JubesX.change_stat("obedience", 50, -3)
     elif JubesX.action_counter["sex"]:
-        $ JubesX.change_face("sad")
+        $ JubesX.change_face("_sad")
         ch_v "Just jack it or something."
     else:
-        $ JubesX.change_face("normal", 1)
+        $ JubesX.change_face("_normal", 1)
         ch_v "Yeah, no."
     $ JubesX.recent_history.append("no_sex")
     $ JubesX.daily_history.append("no_sex")
@@ -1063,7 +1063,7 @@ label Jubes_SexPrep:
                 $ JubesX.change_stat("inhibition", 50, 2)
                 "[JubesX.name] slides it in."
             "Praise her.":
-                $ JubesX.change_face("sexy", 1)
+                $ JubesX.change_face("_sexy", 1)
                 $ JubesX.change_stat("inhibition", 80, 3)
                 ch_p "Oh yeah, [JubesX.petname], let's do this."
                 $ JubesX.nameCheck()
@@ -1072,7 +1072,7 @@ label Jubes_SexPrep:
                 $ JubesX.change_stat("obedience", 90, 1)
                 $ JubesX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
-                $ JubesX.change_face("surprised")
+                $ JubesX.change_face("_surprised")
                 $ JubesX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that right now, [JubesX.petname]."
                 $ JubesX.nameCheck()
@@ -1292,7 +1292,7 @@ label Jubes_Sex_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (JubesX)
-                if "angry" in JubesX.recent_history:
+                if "_angry" in JubesX.recent_history:
                     call Jubes_Sex_Reset
                     return
                 $ JubesX.change_stat("lust", 200, 5)
@@ -1307,7 +1307,7 @@ label Jubes_Sex_Cycle:
             if JubesX.lust >= 100:
 
                 call Girl_Cumming (JubesX)
-                if action_context == "shift" or "angry" in JubesX.recent_history:
+                if action_context == "shift" or "_angry" in JubesX.recent_history:
                     jump Jubes_SexAfter
 
             if Line == "came":
@@ -1344,10 +1344,10 @@ label Jubes_Sex_Cycle:
         if JubesX.SEXP >= 100 or approval_check(JubesX, 1200, "LO"):
             pass
         elif counter == (5 + JubesX.action_counter["sex"]):
-            $ JubesX.brows = "confused"
+            $ JubesX.brows = "_confused"
             ch_v "So are we getting close?"
         elif counter == (10 + JubesX.action_counter["sex"]):
-            $ JubesX.brows = "angry"
+            $ JubesX.brows = "_angry"
             menu:
                 ch_v "Hey. . . could we. . . try something. . . else?"
                 "How about a BJ?" if JubesX.remaining_actions and multi_action:
@@ -1372,7 +1372,7 @@ label Jubes_Sex_Cycle:
                         $ JubesX.change_stat("obedience", 80, 2)
                         "She grumbles but keeps moving."
                     else:
-                        $ JubesX.change_face("angry", 1)
+                        $ JubesX.change_face("_angry", 1)
                         call Jubes_Sex_Reset
                         "She scowls at you and pulls out."
                         ch_v "Not with that attitude."
@@ -1380,8 +1380,8 @@ label Jubes_Sex_Cycle:
                         $ JubesX.change_stat("love", 80, -4, 1)
                         $ JubesX.change_stat("obedience", 30, -1, 1)
                         $ JubesX.change_stat("obedience", 50, -1, 1)
-                        $ JubesX.recent_history.append("angry")
-                        $ JubesX.daily_history.append("angry")
+                        $ JubesX.recent_history.append("_angry")
+                        $ JubesX.daily_history.append("_angry")
                         jump Jubes_SexAfter
 
 
@@ -1393,7 +1393,7 @@ label Jubes_Sex_Cycle:
             call Sex_Basic_Dialog (JubesX, 5)
 
 
-    $ JubesX.change_face("bemused", 0)
+    $ JubesX.change_face("_bemused", 0)
     $ Line = 0
     call Sex_Basic_Dialog (JubesX, "done")
 
@@ -1403,7 +1403,7 @@ label Jubes_SexAfter:
         $ Player.cock_position = "out"
         call Jubes_Sex_Reset
 
-    $ JubesX.change_face("sexy")
+    $ JubesX.change_face("_sexy")
 
     $ JubesX.action_counter["sex"] += 1
     $ JubesX.remaining_actions -=1
@@ -1422,7 +1422,7 @@ label Jubes_SexAfter:
         $ JubesX.SEXP += 5
         $ Achievements.append("Jubes Sex Addict")
         if not action_context:
-            $ JubesX.change_face("smile", 1)
+            $ JubesX.change_face("_smile", 1)
             ch_v "We're making this a regular thing, huh. . ."
     elif JubesX.action_counter["sex"] == 1:
         $ JubesX.SEXP += 20
@@ -1430,14 +1430,14 @@ label Jubes_SexAfter:
             if JubesX.love >= 500 and "unsatisfied" not in JubesX.recent_history:
                 ch_v "I can tell, I was the best you've had."
             elif JubesX.obedience <= 500 and Player.focus <= 20:
-                $ JubesX.mouth = "sad"
+                $ JubesX.mouth = "_sad"
                 ch_v "Satisfied?"
     elif JubesX.action_counter["sex"] == 5:
         ch_v "You know, this was a good idea."
     elif not action_context:
         if "unsatisfied" in JubesX.recent_history:
-            $ JubesX.change_face("angry")
-            $ JubesX.eyes = "side"
+            $ JubesX.change_face("_angry")
+            $ JubesX.eyes = "_side"
             ch_v "Forgetting someone? . ."
 
     $ approval_bonus = 0
@@ -1505,12 +1505,12 @@ label Jubes_Sex_A:
             $ JubesX.upskirt = 1
         elif JubesX.PantsNum() >= 6:
             "You push [JubesX.name] onto her back, sliding her pants down as you do."
-            $ JubesX.legs = 0
+            $ JubesX.legs = ""
         else:
             "You push [JubesX.name] onto her back."
         $ JubesX.SeenPanties = 1
         "You press the tip of your cock against her tight rim."
-        $ JubesX.change_face("surprised", 1)
+        $ JubesX.change_face("_surprised", 1)
         call Jubes_First_Bottomless (1)
 
         if (JubesX.action_counter["anal"] and approval) or (approval > 1):
@@ -1523,12 +1523,12 @@ label Jubes_Sex_A:
             jump Jubes_AnalPrep
         else:
 
-            $ JubesX.brows = "angry"
+            $ JubesX.brows = "_angry"
             menu:
                 ch_v "Oh? A backdoor intruder?"
                 "Sorry, sorry! Never mind.":
                     if approval:
-                        $ JubesX.change_face("sexy", 1)
+                        $ JubesX.change_face("_sexy", 1)
                         $ JubesX.change_stat("obedience", 70, 3)
                         $ JubesX.change_stat("inhibition", 50, 3)
                         $ JubesX.change_stat("inhibition", 70, 1)
@@ -1536,7 +1536,7 @@ label Jubes_Sex_A:
                         ch_v "Get in there."
                         jump Jubes_AnalPrep
                     "You pull back before you really get it in."
-                    $ JubesX.change_face("bemused", 1)
+                    $ JubesX.change_face("_bemused", 1)
 
                     if JubesX.action_counter["anal"]:
                         ch_v "You coulda warned me. . ."
@@ -1549,7 +1549,7 @@ label Jubes_Sex_A:
                     $ JubesX.change_stat("obedience", 70, 3)
                     $ JubesX.change_stat("inhibition", 50, 3)
                     if not approval_check(JubesX, 700, "O", TabM=1):
-                        $ JubesX.change_face("angry")
+                        $ JubesX.change_face("_angry")
                         "[JubesX.name] shoves you away and backhands you in the face."
                         ch_v "Yeah, not like that you won't."
                         $ JubesX.change_stat("love", 50, -10, 1)
@@ -1558,10 +1558,10 @@ label Jubes_Sex_A:
                         if action_context:
                             $ renpy.pop_call()
                         call Jubes_Sex_Reset
-                        $ JubesX.recent_history.append("angry")
-                        $ JubesX.daily_history.append("angry")
+                        $ JubesX.recent_history.append("_angry")
+                        $ JubesX.daily_history.append("_angry")
                     else:
-                        $ JubesX.change_face("sad")
+                        $ JubesX.change_face("_sad")
                         "[JubesX.name] doesn't seem to be into this, you're lucky she's so obedient."
                         jump Jubes_AnalPrep
         return
@@ -1570,16 +1570,16 @@ label Jubes_Sex_A:
 
     if not JubesX.action_counter["anal"] and "no_anal" not in JubesX.recent_history:
 
-        $ JubesX.change_face("surprised", 1)
-        $ JubesX.mouth = "kiss"
+        $ JubesX.change_face("_surprised", 1)
+        $ JubesX.mouth = "_kiss"
         ch_v "Huh, anal?"
 
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             ch_v "Anal? That's what you're pushing for?"
 
     if "anal" in JubesX.recent_history:
-        $ JubesX.change_face("sexy", 1)
+        $ JubesX.change_face("_sexy", 1)
         ch_v "Sure, get in there."
         jump Jubes_AnalPrep
 
@@ -1587,29 +1587,29 @@ label Jubes_Sex_A:
     if not JubesX.action_counter["anal"] and approval:
 
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             $ JubesX.change_stat("love", 70, -3, 1)
             $ JubesX.change_stat("love", 20, -2, 1)
         elif JubesX.love >= (JubesX.obedience + JubesX.inhibition):
-            $ JubesX.change_face("sexy")
-            $ JubesX.brows = "sad"
-            $ JubesX.mouth = "smile"
+            $ JubesX.change_face("_sexy")
+            $ JubesX.brows = "_sad"
+            $ JubesX.mouth = "_smile"
             ch_v "I was hoping you'd ask. . ."
         elif JubesX.obedience >= JubesX.inhibition:
-            $ JubesX.change_face("normal")
+            $ JubesX.change_face("_normal")
             ch_v "I expected that. . ."
         elif JubesX.addiction >= 50:
-            $ JubesX.change_face("manic", 1)
+            $ JubesX.change_face("_manic", 1)
             ch_v "Hmm, sounds fun. . ."
         else:
-            $ JubesX.change_face("sad")
-            $ JubesX.mouth = "smile"
+            $ JubesX.change_face("_sad")
+            $ JubesX.mouth = "_smile"
             ch_v "I was tired of waiting. . ."
 
     elif approval:
 
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             $ JubesX.change_stat("love", 70, -3, 1)
             $ JubesX.change_stat("love", 20, -2, 1)
             ch_v "You don't hold back. . ."
@@ -1621,7 +1621,7 @@ label Jubes_Sex_A:
             ch_v "I am warmed up. . ."
             jump Jubes_AnalPrep
         elif "anal" in JubesX.daily_history:
-            $ JubesX.change_face("sexy", 1)
+            $ JubesX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Back again so soon?",
                     "So you'd like another round?",
                     "Again? Sure.",
@@ -1629,7 +1629,7 @@ label Jubes_Sex_A:
                     "Your funeral, " + JubesX.player_petname + "."])
             ch_v "[Line]"
         else:
-            $ JubesX.change_face("sexy", 1)
+            $ JubesX.change_face("_sexy", 1)
             $ JubesX.ArmPose = 2
             $ Line = renpy.random.choice(["Oooh, you want some of this?",
                     "So you'd like another round?",
@@ -1642,7 +1642,7 @@ label Jubes_Sex_A:
     if approval >= 2:
 
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             $ JubesX.change_stat("obedience", 90, 1)
             $ JubesX.change_stat("inhibition", 60, 1)
             ch_v "Whatever."
@@ -1650,7 +1650,7 @@ label Jubes_Sex_A:
             ch_v "Well, if you're going to keep asking. . ."
             ch_v "Might be fun. . ."
         else:
-            $ JubesX.change_face("sexy", 1)
+            $ JubesX.change_face("_sexy", 1)
             $ JubesX.change_stat("love", 90, 1)
             $ JubesX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Well. . . ok.",
@@ -1667,7 +1667,7 @@ label Jubes_Sex_A:
     else:
 
 
-        $ JubesX.change_face("angry")
+        $ JubesX.change_face("_angry")
         if "no_anal" in JubesX.recent_history:
             ch_v "Sorry, [JubesX.player_petname] \"no.\""
         elif Taboo and "no_taboo" in JubesX.daily_history and "no_anal" in JubesX.daily_history:
@@ -1677,19 +1677,19 @@ label Jubes_Sex_A:
         elif Taboo and "no_taboo" in JubesX.daily_history:
             ch_v "I already told you this is too public!"
         elif not JubesX.action_counter["anal"]:
-            $ JubesX.change_face("bemused")
+            $ JubesX.change_face("_bemused")
             ch_v "I don't know that you're ready for that yet."
         else:
-            $ JubesX.change_face("bemused")
+            $ JubesX.change_face("_bemused")
             ch_v "Maybe eventually. . ."
         menu:
             extend ""
             "Sorry, never mind." if "no_anal" in JubesX.daily_history:
-                $ JubesX.change_face("bemused")
+                $ JubesX.change_face("_bemused")
                 ch_v "Hey, I can't blame you."
                 return
             "Maybe later?" if "no_anal" not in JubesX.daily_history:
-                $ JubesX.change_face("sexy")
+                $ JubesX.change_face("_sexy")
                 ch_v "Oh, probably. . ."
                 ch_v ". . . often."
                 $ JubesX.change_stat("love", 80, 2)
@@ -1702,7 +1702,7 @@ label Jubes_Sex_A:
                 return
             "I bet it would feel really good. . .":
                 if approval:
-                    $ JubesX.change_face("sexy")
+                    $ JubesX.change_face("_sexy")
                     $ JubesX.change_stat("obedience", 90, 2)
                     $ JubesX.change_stat("obedience", 50, 2)
                     $ JubesX.change_stat("inhibition", 70, 3)
@@ -1719,7 +1719,7 @@ label Jubes_Sex_A:
 
                 $ approval = approval_check(JubesX, 1250, "OI", TabM = 3)
                 if approval > 1 or (approval and JubesX.Forced):
-                    $ JubesX.change_face("sad")
+                    $ JubesX.change_face("_sad")
                     $ JubesX.change_stat("love", 70, -5, 1)
                     $ JubesX.change_stat("love", 200, -5)
                     ch_v "Oh fine, get it over with."
@@ -1730,40 +1730,40 @@ label Jubes_Sex_A:
                     jump Jubes_AnalPrep
                 else:
                     $ JubesX.change_stat("love", 200, -20)
-                    $ JubesX.recent_history.append("angry")
-                    $ JubesX.daily_history.append("angry")
+                    $ JubesX.recent_history.append("_angry")
+                    $ JubesX.daily_history.append("_angry")
 
 
     $ JubesX.ArmPose = 1
     if "no_anal" in JubesX.daily_history:
         ch_v "Don't push it."
-        $ JubesX.recent_history.append("angry")
-        $ JubesX.daily_history.append("angry")
+        $ JubesX.recent_history.append("_angry")
+        $ JubesX.daily_history.append("_angry")
     elif JubesX.Forced:
-        $ JubesX.change_face("angry", 1)
+        $ JubesX.change_face("_angry", 1)
         ch_v "You're going too far."
         $ JubesX.change_stat("lust", 200, 5)
         if JubesX.love > 300:
             $ JubesX.change_stat("love", 70, -2)
         $ JubesX.change_stat("obedience", 50, -2)
-        $ JubesX.recent_history.append("angry")
-        $ JubesX.daily_history.append("angry")
+        $ JubesX.recent_history.append("_angry")
+        $ JubesX.daily_history.append("_angry")
     elif Taboo:
 
-        $ JubesX.change_face("angry", 1)
+        $ JubesX.change_face("_angry", 1)
         $ JubesX.recent_history.append("no_taboo")
         $ JubesX.daily_history.append("no_taboo")
         ch_v "This place is way too exposed."
         $ JubesX.change_stat("lust", 200, 5)
         $ JubesX.change_stat("obedience", 50, -3)
     elif "anal" in JubesX.daily_history:
-        $ JubesX.change_face("bemused")
+        $ JubesX.change_face("_bemused")
         ch_v "Not right now."
     elif JubesX.action_counter["anal"]:
-        $ JubesX.change_face("sad")
+        $ JubesX.change_face("_sad")
         ch_v "You'll have to earn it."
     else:
-        $ JubesX.change_face("normal", 1)
+        $ JubesX.change_face("_normal", 1)
         ch_v "You haven't earned it yet."
     $ JubesX.recent_history.append("no_anal")
     $ JubesX.daily_history.append("no_anal")
@@ -1794,7 +1794,7 @@ label Jubes_AnalPrep:
                 $ JubesX.change_stat("inhibition", 50, 2)
                 "[JubesX.name] slides it in."
             "Praise her.":
-                $ JubesX.change_face("sexy", 1)
+                $ JubesX.change_face("_sexy", 1)
                 $ JubesX.change_stat("inhibition", 80, 3)
                 ch_p "Oh yeah, [JubesX.petname], let's do this."
                 $ JubesX.nameCheck()
@@ -1803,7 +1803,7 @@ label Jubes_AnalPrep:
                 $ JubesX.change_stat("obedience", 90, 1)
                 $ JubesX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
-                $ JubesX.change_face("surprised")
+                $ JubesX.change_face("_surprised")
                 $ JubesX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that right now, [JubesX.petname]."
                 $ JubesX.nameCheck()
@@ -2032,7 +2032,7 @@ label Jubes_Anal_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (JubesX)
-                if "angry" in JubesX.recent_history:
+                if "_angry" in JubesX.recent_history:
                     call Jubes_Sex_Reset
                     return
                 $ JubesX.change_stat("lust", 200, 5)
@@ -2047,7 +2047,7 @@ label Jubes_Anal_Cycle:
             if JubesX.lust >= 100:
 
                 call Girl_Cumming (JubesX)
-                if action_context == "shift" or "angry" in JubesX.recent_history:
+                if action_context == "shift" or "_angry" in JubesX.recent_history:
                     jump Jubes_AnalAfter
 
             if Line == "came":
@@ -2084,10 +2084,10 @@ label Jubes_Anal_Cycle:
         if JubesX.SEXP >= 100 or approval_check(JubesX, 1200, "LO"):
             pass
         elif counter == (5 + JubesX.action_counter["anal"]):
-            $ JubesX.brows = "confused"
+            $ JubesX.brows = "_confused"
             ch_v "We getting close here?"
         elif counter == (10 + JubesX.action_counter["anal"]):
-            $ JubesX.brows = "angry"
+            $ JubesX.brows = "_angry"
             menu:
                 ch_v "Can we. . . do something. . . else?"
                 "How about a BJ?" if JubesX.remaining_actions and multi_action:
@@ -2116,7 +2116,7 @@ label Jubes_Anal_Cycle:
                         $ JubesX.change_stat("obedience", 80, 2)
                         "She grumbles but keeps moving."
                     else:
-                        $ JubesX.change_face("angry", 1)
+                        $ JubesX.change_face("_angry", 1)
                         call Jubes_Sex_Reset
                         "She scowls at you and pulls out."
                         ch_v "Not with that attitude."
@@ -2124,8 +2124,8 @@ label Jubes_Anal_Cycle:
                         $ JubesX.change_stat("love", 80, -4, 1)
                         $ JubesX.change_stat("obedience", 30, -1, 1)
                         $ JubesX.change_stat("obedience", 50, -1, 1)
-                        $ JubesX.recent_history.append("angry")
-                        $ JubesX.daily_history.append("angry")
+                        $ JubesX.recent_history.append("_angry")
+                        $ JubesX.daily_history.append("_angry")
                         jump Jubes_AnalAfter
 
 
@@ -2135,7 +2135,7 @@ label Jubes_Anal_Cycle:
             call Sex_Basic_Dialog (JubesX, 5)
 
 
-    $ JubesX.change_face("bemused", 0)
+    $ JubesX.change_face("_bemused", 0)
     $ Line = 0
     call Sex_Basic_Dialog (JubesX, "done")
 
@@ -2145,7 +2145,7 @@ label Jubes_AnalAfter:
         $ Player.cock_position = "out"
         call Jubes_Sex_Reset
 
-    $ JubesX.change_face("sexy")
+    $ JubesX.change_face("_sexy")
 
     $ JubesX.action_counter["anal"] += 1
     $ JubesX.remaining_actions -=1
@@ -2167,7 +2167,7 @@ label Jubes_AnalAfter:
         $ JubesX.SEXP += 7
         $ Achievements.append("Jubes Anal Addict")
         if not action_context:
-            $ JubesX.change_face("bemused", 1)
+            $ JubesX.change_face("_bemused", 1)
             ch_v "I think you've got a knack for that."
     elif JubesX.action_counter["anal"] == 1:
         $ JubesX.SEXP += 25
@@ -2175,14 +2175,14 @@ label Jubes_AnalAfter:
             if JubesX.love >= 500 and "unsatisfied" not in JubesX.recent_history:
                 ch_v "You seem to know your way around back there."
             elif JubesX.obedience <= 500 and Player.focus <= 20:
-                $ JubesX.mouth = "sad"
+                $ JubesX.mouth = "_sad"
                 ch_v "That was pleasant."
     elif JubesX.action_counter["anal"] == 5:
         ch_v "I'm glad you're into this."
     elif not action_context:
         if "unsatisfied" in JubesX.recent_history:
-            $ JubesX.change_face("angry")
-            $ JubesX.eyes = "side"
+            $ JubesX.change_face("_angry")
+            $ JubesX.eyes = "_side"
             ch_v "Forgetting someone? . ."
 
     $ approval_bonus = 0
@@ -2238,30 +2238,30 @@ label Jubes_Sex_H:
     if action_context == "auto":
         call Jubes_Sex_Launch ("hotdog")
         "You push [JubesX.name] down, and press your cock against her."
-        $ JubesX.change_face("surprised", 1)
+        $ JubesX.change_face("_surprised", 1)
 
         if (JubesX.action_counter["hotdog"] and approval) or (approval > 1):
             "[JubesX.name] glances down and then breaks into a smile."
-            $ JubesX.change_face("sly")
+            $ JubesX.change_face("_sly")
             $ JubesX.change_stat("obedience", 70, 3)
             $ JubesX.change_stat("inhibition", 50, 3)
             $ JubesX.change_stat("inhibition", 70, 1)
             ch_v "Oh, what did you have in mind with that? . ."
             jump Jubes_HotdogPrep
         else:
-            $ JubesX.brows = "angry"
+            $ JubesX.brows = "_angry"
             menu:
                 ch_v "You might want to take a step back, [JubesX.player_petname]?"
                 "Sorry, sorry! Never mind.":
                     if approval:
-                        $ JubesX.change_face("sexy", 1)
+                        $ JubesX.change_face("_sexy", 1)
                         $ JubesX.change_stat("obedience", 70, 3)
                         $ JubesX.change_stat("inhibition", 50, 3)
                         $ JubesX.change_stat("inhibition", 70, 1)
                         ch_v "Or not. . ."
                         jump Jubes_HotdogPrep
                     "You pull back from her."
-                    $ JubesX.change_face("bemused", 1)
+                    $ JubesX.change_face("_bemused", 1)
                     ch_v "Maybe ask first?"
                 "You'll see.":
                     $ JubesX.change_stat("love", 80, -10, 1)
@@ -2270,7 +2270,7 @@ label Jubes_Sex_H:
                     $ JubesX.change_stat("obedience", 70, 3)
                     $ JubesX.change_stat("inhibition", 50, 3)
                     if not approval_check(JubesX, 500, "O", TabM=1):
-                        $ JubesX.change_face("angry")
+                        $ JubesX.change_face("_angry")
                         "[JubesX.name] shoves you away."
                         ch_v "Don't push it, [JubesX.player_petname]."
                         $ JubesX.change_stat("love", 50, -10, 1)
@@ -2279,10 +2279,10 @@ label Jubes_Sex_H:
                         if action_context:
                             $ renpy.pop_call()
                         call Jubes_Sex_Reset
-                        $ JubesX.recent_history.append("angry")
-                        $ JubesX.daily_history.append("angry")
+                        $ JubesX.recent_history.append("_angry")
+                        $ JubesX.daily_history.append("_angry")
                     else:
-                        $ JubesX.change_face("sad")
+                        $ JubesX.change_face("_sad")
                         "[JubesX.name] doesn't seem to be into this, but she knows her place."
                         jump Jubes_HotdogPrep
         return
@@ -2291,59 +2291,59 @@ label Jubes_Sex_H:
 
     if not JubesX.action_counter["hotdog"] and "no_hotdog" not in JubesX.recent_history:
 
-        $ JubesX.change_face("surprised", 1)
-        $ JubesX.mouth = "kiss"
+        $ JubesX.change_face("_surprised", 1)
+        $ JubesX.mouth = "_kiss"
         ch_v "What, just grinding?"
 
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             ch_v ". . . nothing more?"
 
 
     if not JubesX.action_counter["hotdog"] and approval:
 
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             $ JubesX.change_stat("love", 70, -3, 1)
             $ JubesX.change_stat("love", 20, -2, 1)
         elif JubesX.love >= (JubesX.obedience + JubesX.inhibition):
-            $ JubesX.change_face("sexy")
-            $ JubesX.brows = "sad"
-            $ JubesX.mouth = "smile"
+            $ JubesX.change_face("_sexy")
+            $ JubesX.brows = "_sad"
+            $ JubesX.mouth = "_smile"
             ch_v "If that's what you're into. . ."
         elif JubesX.obedience >= JubesX.inhibition:
-            $ JubesX.change_face("normal")
+            $ JubesX.change_face("_normal")
             ch_v "If that's what works for you. . ."
         elif JubesX.addiction >= 50:
-            $ JubesX.change_face("manic", 1)
+            $ JubesX.change_face("_manic", 1)
             ch_v "Hrmm. . ."
         else:
-            $ JubesX.change_face("sad")
-            $ JubesX.mouth = "smile"
+            $ JubesX.change_face("_sad")
+            $ JubesX.mouth = "_smile"
             ch_v "Well if that's what gets you off. . ."
 
     elif approval:
 
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             $ JubesX.change_stat("love", 70, -3, 1)
             $ JubesX.change_stat("love", 20, -2, 1)
             ch_v "That's pushing it. . ."
         elif not Taboo and "no_taboo" in JubesX.daily_history:
             ch_v "I guess this is a better location . ."
         elif "hotdog" in JubesX.recent_history:
-            $ JubesX.change_face("sexy", 1)
+            $ JubesX.change_face("_sexy", 1)
             ch_v "Again? Fine, whatever."
             jump Jubes_HotdogPrep
         elif "hotdog" in JubesX.daily_history:
-            $ JubesX.change_face("sexy", 1)
+            $ JubesX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Back again so soon?",
                     "So you'd like another round?",
                     "You're really into this. . .",
                     "Are you sure that's all you want?"])
             ch_v "[Line]"
         else:
-            $ JubesX.change_face("sexy", 1)
+            $ JubesX.change_face("_sexy", 1)
             $ JubesX.ArmPose = 2
             $ Line = renpy.random.choice(["Oooh, you want some of this?",
                     "So you'd like another round?",
@@ -2355,14 +2355,14 @@ label Jubes_Sex_H:
     if approval >= 2:
 
         if JubesX.Forced:
-            $ JubesX.change_face("sad")
+            $ JubesX.change_face("_sad")
             $ JubesX.change_stat("obedience", 80, 1)
             $ JubesX.change_stat("inhibition", 60, 1)
             ch_v "Ok, fine."
         elif "no_hotdog" in JubesX.daily_history:
             ch_v "It was rather entertaining. . ."
         else:
-            $ JubesX.change_face("sexy", 1)
+            $ JubesX.change_face("_sexy", 1)
             $ JubesX.change_stat("love", 80, 1)
             $ JubesX.change_stat("inhibition", 50, 2)
             $ Line = renpy.random.choice(["Well, sure, let me give it a rub.",
@@ -2379,7 +2379,7 @@ label Jubes_Sex_H:
     else:
 
 
-        $ JubesX.change_face("angry")
+        $ JubesX.change_face("_angry")
         if "no_hotdog" in JubesX.recent_history:
             ch_v "Sorry, [JubesX.player_petname] \"no.\""
         elif Taboo and "no_taboo" in JubesX.daily_history and "no_hotdog" in JubesX.daily_history:
@@ -2389,19 +2389,19 @@ label Jubes_Sex_H:
         elif Taboo and "no_taboo" in JubesX.daily_history:
             ch_v "I told you. . . this place is too exposed."
         elif not JubesX.action_counter["hotdog"]:
-            $ JubesX.change_face("bemused")
+            $ JubesX.change_face("_bemused")
             ch_v "Hmm, that could be amusing, [JubesX.player_petname]. . ."
         else:
-            $ JubesX.change_face("bemused")
+            $ JubesX.change_face("_bemused")
             ch_v "I don't think that would be appropriate. . ."
         menu:
             extend ""
             "Sorry, never mind." if "no_hotdog" in JubesX.daily_history:
-                $ JubesX.change_face("bemused")
+                $ JubesX.change_face("_bemused")
                 ch_v "So long as you don't push it."
                 return
             "Maybe later?" if "no_hotdog" not in JubesX.daily_history:
-                $ JubesX.change_face("sexy")
+                $ JubesX.change_face("_sexy")
                 ch_v "I gues eventually. . ."
                 $ JubesX.change_stat("love", 80, 1)
                 $ JubesX.change_stat("inhibition", 50, 1)
@@ -2413,7 +2413,7 @@ label Jubes_Sex_H:
                 return
             "You might like it. . .":
                 if approval:
-                    $ JubesX.change_face("sexy")
+                    $ JubesX.change_face("_sexy")
                     $ JubesX.change_stat("obedience", 60, 2)
                     $ JubesX.change_stat("inhibition", 50, 2)
                     $ Line = renpy.random.choice(["Yeah, probably. . .",
@@ -2428,7 +2428,7 @@ label Jubes_Sex_H:
 
                 $ approval = approval_check(JubesX, 350, "OI", TabM = 3)
                 if approval > 1 or (approval and JubesX.Forced):
-                    $ JubesX.change_face("sad")
+                    $ JubesX.change_face("_sad")
                     $ JubesX.change_stat("love", 70, -2, 1)
                     $ JubesX.change_stat("love", 200, -2)
                     ch_v "Alright, fine."
@@ -2438,37 +2438,37 @@ label Jubes_Sex_H:
                     jump Jubes_HotdogPrep
                 else:
                     $ JubesX.change_stat("love", 200, -10)
-                    $ JubesX.recent_history.append("angry")
-                    $ JubesX.daily_history.append("angry")
+                    $ JubesX.recent_history.append("_angry")
+                    $ JubesX.daily_history.append("_angry")
 
 
     $ JubesX.ArmPose = 1
 
     if "no_hotdog" in JubesX.daily_history:
         ch_v "What did I tell you?"
-        $ JubesX.recent_history.append("angry")
-        $ JubesX.daily_history.append("angry")
+        $ JubesX.recent_history.append("_angry")
+        $ JubesX.daily_history.append("_angry")
     if JubesX.Forced:
-        $ JubesX.change_face("angry", 1)
+        $ JubesX.change_face("_angry", 1)
         ch_v "There's no point trying."
         $ JubesX.change_stat("lust", 200, 5)
         if JubesX.love > 300:
             $ JubesX.change_stat("love", 70, -1)
         $ JubesX.change_stat("obedience", 50, -1)
-        $ JubesX.recent_history.append("angry")
-        $ JubesX.daily_history.append("angry")
+        $ JubesX.recent_history.append("_angry")
+        $ JubesX.daily_history.append("_angry")
     elif Taboo:
-        $ JubesX.change_face("angry", 1)
+        $ JubesX.change_face("_angry", 1)
         $ JubesX.recent_history.append("no_taboo")
         $ JubesX.daily_history.append("no_taboo")
         ch_v "This area is a bit too exposed for that sort of thing. . ."
         $ JubesX.change_stat("lust", 200, 5)
         $ JubesX.change_stat("obedience", 50, -3)
     elif JubesX.action_counter["hotdog"]:
-        $ JubesX.change_face("sad")
+        $ JubesX.change_face("_sad")
         ch_v "Not anymore."
     else:
-        $ JubesX.change_face("normal", 1)
+        $ JubesX.change_face("_normal", 1)
         ch_v "No thanks."
     $ JubesX.recent_history.append("no_hotdog")
     $ JubesX.daily_history.append("no_hotdog")
@@ -2490,7 +2490,7 @@ label Jubes_HotdogPrep:
                 $ JubesX.change_stat("inhibition", 50, 2)
                 "[JubesX.name] continues to grind."
             "Praise her.":
-                $ JubesX.change_face("sexy", 1)
+                $ JubesX.change_face("_sexy", 1)
                 $ JubesX.change_stat("inhibition", 80, 3)
                 ch_p "Oh yeah, [JubesX.petname], let's do this."
                 $ JubesX.nameCheck()
@@ -2499,7 +2499,7 @@ label Jubes_HotdogPrep:
                 $ JubesX.change_stat("obedience", 90, 1)
                 $ JubesX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
-                $ JubesX.change_face("surprised")
+                $ JubesX.change_face("_surprised")
                 $ JubesX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that right now, [JubesX.petname]."
                 $ JubesX.nameCheck()
@@ -2714,7 +2714,7 @@ label Jubes_Hotdog_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (JubesX)
-                if "angry" in JubesX.recent_history:
+                if "_angry" in JubesX.recent_history:
                     call Jubes_Sex_Reset
                     return
                 $ JubesX.change_stat("lust", 200, 5)
@@ -2729,7 +2729,7 @@ label Jubes_Hotdog_Cycle:
             if JubesX.lust >= 100:
 
                 call Girl_Cumming (JubesX)
-                if action_context == "shift" or "angry" in JubesX.recent_history:
+                if action_context == "shift" or "_angry" in JubesX.recent_history:
                     jump Jubes_HotdogAfter
 
             if Line == "came":
@@ -2766,10 +2766,10 @@ label Jubes_Hotdog_Cycle:
         if JubesX.SEXP >= 100 or approval_check(JubesX, 1200, "LO"):
             pass
         elif counter == (5 + JubesX.action_counter["hotdog"]):
-            $ JubesX.brows = "confused"
+            $ JubesX.brows = "_confused"
             ch_v "Are we getting close here?"
         elif counter == (10 + JubesX.action_counter["hotdog"]):
-            $ JubesX.brows = "angry"
+            $ JubesX.brows = "_angry"
             menu:
                 ch_v "I'm kinda bored by this."
                 "How about a BJ?" if JubesX.remaining_actions and multi_action:
@@ -2794,7 +2794,7 @@ label Jubes_Hotdog_Cycle:
                         $ JubesX.change_stat("obedience", 80, 2)
                         "She grumbles but keeps moving."
                     else:
-                        $ JubesX.change_face("angry", 1)
+                        $ JubesX.change_face("_angry", 1)
                         call Jubes_Sex_Reset
                         "She scowls at you and pulls away."
                         ch_v "Not with that attitude."
@@ -2802,8 +2802,8 @@ label Jubes_Hotdog_Cycle:
                         $ JubesX.change_stat("love", 80, -4, 1)
                         $ JubesX.change_stat("obedience", 30, -1, 1)
                         $ JubesX.change_stat("obedience", 50, -1, 1)
-                        $ JubesX.recent_history.append("angry")
-                        $ JubesX.daily_history.append("angry")
+                        $ JubesX.recent_history.append("_angry")
+                        $ JubesX.daily_history.append("_angry")
                         jump Jubes_HotdogAfter
 
 
@@ -2815,7 +2815,7 @@ label Jubes_Hotdog_Cycle:
             call Sex_Basic_Dialog (JubesX, 5)
 
 
-    $ JubesX.change_face("bemused", 0)
+    $ JubesX.change_face("_bemused", 0)
     $ Line = 0
     call Sex_Basic_Dialog (JubesX, "done")
 
@@ -2825,7 +2825,7 @@ label Jubes_HotdogAfter:
         $ Player.cock_position = "out"
         call Jubes_Sex_Reset
 
-    $ JubesX.change_face("sexy")
+    $ JubesX.change_face("_sexy")
 
     $ JubesX.action_counter["hotdog"] += 1
     $ JubesX.remaining_actions -=1
@@ -2845,12 +2845,12 @@ label Jubes_HotdogAfter:
             if JubesX.love >= 500 and "unsatisfied" not in JubesX.recent_history:
                 ch_v "That was. . . nice."
             elif JubesX.obedience <= 500 and Player.focus <= 20:
-                $ JubesX.mouth = "sad"
+                $ JubesX.mouth = "_sad"
                 ch_v "Enough for you?"
     elif not action_context:
         if "unsatisfied" in JubesX.recent_history:
-            $ JubesX.change_face("angry")
-            $ JubesX.eyes = "side"
+            $ JubesX.change_face("_angry")
+            $ JubesX.eyes = "_side"
             ch_v "That didn't do much for me. . ."
 
     $ approval_bonus = 0

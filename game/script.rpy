@@ -83,9 +83,9 @@ init -1:
     default Day = 1
     default Cheat = 0
     default Round = 100
-    default Time_Options = ["Morning", "Midday", "Evening", "Night"]
+    default time_options = ["morning", "midday", "evening", "night"]
     default time_index = 2
-    default Current_Time = Time_Options[(time_index)]
+    default current_time = time_options[(time_index)]
     default Week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     default Weekday = 6
     default DayofWeek = Week[Weekday]
@@ -144,16 +144,17 @@ init -1:
     default stage_far_right = 900
     default number_of_holders = 1
 
-    default X_Brows = "happy"
-    default X_Mouth = "happy"
-    default X_Eyes = "happy"
-    default X_Psychic = 0
-    default X_emotion = "happy"
-    default Xsprite_location = stage_center
+    default Xavier_brows = "_happy"
+    default Xavier_eyes = "_happy"
+    default Xavier_mouth = "_happy"
+    default Xavier_psychic = 0
+    default Xavier_emotion = "_happy"
+    default Xavier_sprite_location = stage_center
     default Gwenname = "????"
     default Load_Options = []
 
     default door_locked = False
+    default entering = False
 
     default simulation = False
 
@@ -202,8 +203,6 @@ label start:
     $ StormX.Introduction()
     $ JubesX.Introduction()
 
-
-
     $ RogueX.change_outfit(6,Changed=1)
     $ KittyX.change_outfit(6,Changed=1)
     $ EmmaX.change_outfit(6,Changed=1)
@@ -212,6 +211,22 @@ label start:
     $ StormX.change_outfit(6,Changed=1)
     $ JubesX.change_outfit(6,Changed=1)
 
+    $ bg_current = "bg_study"
+    $ time_index = 2
+    $ current_time = "evening"
+
+    scene background onlayer backdrop
+    scene
+
+    #show Rogue_body
+    #show Rogue_head
+    $ action_speed = 3
+
+    show Rogue_blowjob_animation
+
+    ""
+
+    ""
 
     $ focused_Girl = RogueX
     show screen Status_Screen

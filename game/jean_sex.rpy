@@ -21,7 +21,7 @@ label Jean_SexAct(Act=0):
         call Les_Prep (JeanX)
         if not action_context:
             return
-    elif Act == "kissing":
+    elif Act == "kiss":
         call KissPrep (JeanX)
         if not action_context:
             return
@@ -79,7 +79,7 @@ label Jean_Masturbate:
                 "Would you like some help? I could lend some helping hands. . ." if Player.semen and JeanX.remaining_actions:
                     $ JeanX.change_stat("love", 90, 1)
                     $ JeanX.change_stat("obedience", 50, 2)
-                    $ JeanX.change_face("sexy")
+                    $ JeanX.change_face("_sexy")
                     ch_j "Hmm, ok, give these a squeeze. . ."
                     $ JeanX.change_stat("obedience", 70, 2)
                     $ JeanX.change_stat("inhibition", 70, 1)
@@ -89,7 +89,7 @@ label Jean_Masturbate:
                 "Would you like some help? I could. . . up to you, I guess." if Player.semen and JeanX.remaining_actions:
                     $ JeanX.change_stat("love", 70, 2)
                     $ JeanX.change_stat("love", 90, 1)
-                    $ JeanX.change_face("sexy")
+                    $ JeanX.change_face("_sexy")
                     ch_j "Ok, sure. . ."
                     $ JeanX.change_stat("obedience", 70, 2)
                     $ JeanX.change_stat("inhibition", 70, 1)
@@ -101,7 +101,7 @@ label Jean_Masturbate:
                     $ JeanX.action_counter["masturbation"] += 1
                     jump Jean_M_Cycle
                 "Why don't we take care of each other?" if Player.semen and JeanX.remaining_actions:
-                    $ JeanX.change_face("sexy")
+                    $ JeanX.change_face("_sexy")
                     ch_j "Like what?"
                     $ renpy.pop_call()
                     return
@@ -109,16 +109,16 @@ label Jean_Masturbate:
                     if JeanX.lust >= 50:
                         $ JeanX.change_stat("love", 70, 2)
                         $ JeanX.change_stat("love", 90, 1)
-                        $ JeanX.change_face("sexy")
+                        $ JeanX.change_face("_sexy")
                         ch_j "I'm getting there. . ."
                         $ JeanX.change_stat("obedience", 80, 3)
                         $ JeanX.change_stat("inhibition", 80, 5)
                         jump Jean_M_Cycle
                     elif approval_check(JeanX, 1200):
-                        $ JeanX.change_face("sly")
+                        $ JeanX.change_face("_sly")
                         ch_j "Yeah. . . but I can take a break. . ."
                     else:
-                        $ JeanX.change_face("angry")
+                        $ JeanX.change_face("_angry")
                         ch_j "-well I -was.-"
 
 
@@ -131,17 +131,17 @@ label Jean_Masturbate:
         $ action_context = 0
         $ renpy.pop_call()
         if approval:
-            $ JeanX.change_face("bemused", 2)
+            $ JeanX.change_face("_bemused", 2)
             if bg_current == JeanX.home:
                 ch_j "Why are you in my room?"
             else:
                 ch_j "I didn't call for anyone. . ."
-            $ JeanX.blushing = 1
+            $ JeanX.blushing = "_blush1"
         else:
             $ JeanX.change_stat("love", 200, -5)
-            $ JeanX.change_face("angry")
-            $ JeanX.recent_history.append("angry")
-            $ JeanX.daily_history.append("angry")
+            $ JeanX.change_face("_angry")
+            $ JeanX.recent_history.append("_angry")
+            $ JeanX.daily_history.append("_angry")
             if bg_current == JeanX.home:
                 ch_j "I was busy, so get out."
                 "[JeanX.name] kicks you out of her room."
@@ -187,7 +187,7 @@ label Jean_Masturbate:
                     $ JeanX.change_stat("obedience", 90, 1)
                     $ JeanX.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ JeanX.change_face("surprised")
+                    $ JeanX.change_face("_surprised")
                     $ JeanX.change_stat("inhibition", 70, 1)
                     ch_p "Let's not do that right now, [JeanX.petname]."
                     $ JeanX.nameCheck()
@@ -206,57 +206,57 @@ label Jean_Masturbate:
 
 
     if not JeanX.action_counter["masturbation"]:
-        $ JeanX.change_face("surprised", 1)
-        $ JeanX.mouth = "kiss"
+        $ JeanX.change_face("_surprised", 1)
+        $ JeanX.mouth = "_kiss"
         ch_j "Oh, so you want to watch while I get off?"
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             ch_j "But -just- watch, right? . ."
 
 
 
     if not JeanX.action_counter["masturbation"] and approval:
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             $ JeanX.change_stat("love", 70, -3, 1)
             $ JeanX.change_stat("love", 20, -2, 1)
         elif JeanX.love >= JeanX.obedience and JeanX.love >= (JeanX.inhibition - JeanX.IX):
-            $ JeanX.change_face("sexy")
-            $ JeanX.brows = "sad"
-            $ JeanX.mouth = "smile"
+            $ JeanX.change_face("_sexy")
+            $ JeanX.brows = "_sad"
+            $ JeanX.mouth = "_smile"
             ch_j "Well. . ."
         elif JeanX.obedience >= (JeanX.inhibition - JeanX.IX):
-            $ JeanX.change_face("normal")
+            $ JeanX.change_face("_normal")
             ch_j "If that's what you're into. . ."
         else:
-            $ JeanX.change_face("sad")
-            $ JeanX.mouth = "smile"
+            $ JeanX.change_face("_sad")
+            $ JeanX.mouth = "_smile"
             ch_j "I do have some time. . ."
 
 
 
     elif approval:
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             $ JeanX.change_stat("love", 70, -3, 1)
             $ JeanX.change_stat("love", 20, -2, 1)
             ch_j "Hmm, again?"
         elif approval and "masturbation" in JeanX.recent_history:
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             ch_j "Mmmm . . ."
             jump Jean_M_Prep
         elif approval and "masturbation" in JeanX.daily_history:
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Did you enjoy that?",
                     "Didn't get enough earlier?",
                     "I do like having an audience. . ."])
             ch_j "[Line]"
         elif JeanX.action_counter["masturbation"] < 3:
-            $ JeanX.change_face("sexy", 1)
-            $ JeanX.brows = "confused"
+            $ JeanX.change_face("_sexy", 1)
+            $ JeanX.brows = "_confused"
             ch_j "You enjoyed that, huh."
         else:
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             $ JeanX.ArmPose = 2
             $ Line = renpy.random.choice(["You do like to watch.",
                     "Again?",
@@ -269,12 +269,12 @@ label Jean_Masturbate:
 
     if approval >= 2:
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             $ JeanX.change_stat("obedience", 90, 1)
             $ JeanX.change_stat("inhibition", 60, 1)
             ch_j "Oh. . . fine. . ."
         else:
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             $ JeanX.change_stat("love", 90, 1)
             $ JeanX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Sure. Ok.",
@@ -294,7 +294,7 @@ label Jean_Masturbate:
         menu:
             ch_j "I don't know, it's kind of a bad time. . ."
             "Maybe later?":
-                $ JeanX.change_face("sexy", 1)
+                $ JeanX.change_face("_sexy", 1)
                 if JeanX.lust > 70:
                     ch_j "Well -I- will, but after you leave."
                 else:
@@ -304,7 +304,7 @@ label Jean_Masturbate:
                 return
             "You look like you could use it. . .":
                 if approval:
-                    $ JeanX.change_face("sexy")
+                    $ JeanX.change_face("_sexy")
                     $ JeanX.change_stat("obedience", 90, 2)
                     $ JeanX.change_stat("obedience", 50, 2)
                     $ JeanX.change_stat("inhibition", 70, 3)
@@ -321,7 +321,7 @@ label Jean_Masturbate:
 
                 $ approval = approval_check(JeanX, 450, "OI", TabM = 2)
                 if approval > 1 or (approval and JeanX.Forced):
-                    $ JeanX.change_face("sad")
+                    $ JeanX.change_face("_sad")
                     $ JeanX.change_stat("love", 70, -5, 1)
                     $ JeanX.change_stat("love", 200, -5)
                     ch_j "Oh. . . fine. . ."
@@ -332,36 +332,36 @@ label Jean_Masturbate:
                     jump Jean_M_Prep
                 else:
                     $ JeanX.change_stat("love", 200, -20)
-                    $ JeanX.recent_history.append("angry")
-                    $ JeanX.daily_history.append("angry")
+                    $ JeanX.recent_history.append("_angry")
+                    $ JeanX.daily_history.append("_angry")
 
 
 
     $ JeanX.ArmPose = 1
     if JeanX.Forced:
-        $ JeanX.change_face("angry", 1)
+        $ JeanX.change_face("_angry", 1)
         ch_j "Nope, too kinky."
         $ JeanX.change_stat("lust", 90, 5)
         if JeanX.love > 300:
             $ JeanX.change_stat("love", 70, -2)
         $ JeanX.change_stat("obedience", 50, -2)
-        $ JeanX.recent_history.append("angry")
-        $ JeanX.daily_history.append("angry")
+        $ JeanX.recent_history.append("_angry")
+        $ JeanX.daily_history.append("_angry")
         $ JeanX.recent_history.append("no_masturbation")
         $ JeanX.daily_history.append("no_masturbation")
         return
     elif JeanX.Taboo:
-        $ JeanX.change_face("angry", 1)
+        $ JeanX.change_face("_angry", 1)
         $ JeanX.daily_history.append("no_taboo")
         ch_j "I. . . couldn't do that in public. . ."
         $ JeanX.change_stat("lust", 90, 5)
         $ JeanX.change_stat("obedience", 50, -3)
         return
     elif JeanX.action_counter["masturbation"]:
-        $ JeanX.change_face("sad")
+        $ JeanX.change_face("_sad")
         ch_j "Eh, I think I'm ok for now. . ."
     else:
-        $ JeanX.change_face("normal", 1)
+        $ JeanX.change_face("_normal", 1)
         ch_j "Um, no."
     $ JeanX.recent_history.append("no_masturbation")
     $ JeanX.daily_history.append("no_masturbation")
@@ -376,12 +376,12 @@ label Jean_M_Prep:
 
 
     if "unseen" in JeanX.recent_history:
-        $ JeanX.change_face("sexy")
-        $ JeanX.eyes = "closed"
+        $ JeanX.change_face("_sexy")
+        $ JeanX.eyes = "_closed"
         $ JeanX.ArmPose = 2
         "You see [JeanX.name] leaning back, masturbating. You don't think she's noticed you yet."
     else:
-        $ JeanX.change_face("sexy")
+        $ JeanX.change_face("_sexy")
         $ JeanX.ArmPose = 2
         "[JeanX.name] lays back and starts to toy with herself."
         if not JeanX.action_counter["masturbation"]:
@@ -537,7 +537,7 @@ label Jean_M_Cycle:
                 if "unseen" not in JeanX.recent_history:
 
                     call Player_Cumming (JeanX)
-                    if "angry" in JeanX.recent_history:
+                    if "_angry" in JeanX.recent_history:
                         call Jean_Pos_Reset
                         return
                     $ JeanX.change_stat("lust", 200, 5)
@@ -596,7 +596,7 @@ label Jean_M_Cycle:
                 $ JeanX.lust += 25
 
 
-    $ JeanX.change_face("bemused", 0)
+    $ JeanX.change_face("_bemused", 0)
     $ Line = 0
     if "unseen" not in JeanX.recent_history:
         ch_j "Ok, that's it, break time."
@@ -605,20 +605,20 @@ label Jean_M_Interupted:
 
 
     if "unseen" in JeanX.recent_history:
-        $ JeanX.change_face("surprised", 2)
+        $ JeanX.change_face("_surprised", 2)
         "[JeanX.name] stops what she's doing with a start, eyes wide."
         call Jean_First_Bottomless (1)
-        $ JeanX.change_face("surprised", 2)
+        $ JeanX.change_face("_surprised", 2)
 
 
         if offhand_action == "jackin":
             ch_j "Oh, hey. . .[JeanX.player_petname]."
             ch_j "When did you get here?"
-            $ JeanX.eyes = "down"
+            $ JeanX.eyes = "_down"
             menu:
                 ch_j "I see you've been making yourself at home. . . "
                 "A while back, it was an excellent show.":
-                    $ JeanX.change_face("sexy",1)
+                    $ JeanX.change_face("_sexy",1)
                     $ JeanX.change_stat("obedience", 50, 3)
                     $ JeanX.change_stat("obedience", 70, 2)
                     ch_j "True. . ."
@@ -628,7 +628,7 @@ label Jean_M_Interupted:
                         ch_j "And you can put on quite a show yourself. . ."
                 "I. . . just got here?":
 
-                    $ JeanX.change_face("angry",1)
+                    $ JeanX.change_face("_angry",1)
                     $ JeanX.change_stat("love", 70, 2)
                     $ JeanX.change_stat("love", 90, 1)
                     $ JeanX.change_stat("obedience", 50, 2)
@@ -638,7 +638,7 @@ label Jean_M_Interupted:
                     if JeanX.love >= 800 or JeanX.obedience >= 500 or (JeanX.inhibition - JeanX.IX) >= 500:
                         $ approval_bonus += 10
                         $ JeanX.change_stat("lust", 90, 5)
-                        $ JeanX.change_face("bemused", 1)
+                        $ JeanX.change_face("_bemused", 1)
                         ch_j "I guess I can't blame you. . ."
                     else:
                         $ approval_bonus -= 10
@@ -653,12 +653,12 @@ label Jean_M_Interupted:
             menu:
                 extend ""
                 "A while back.":
-                    $ JeanX.change_face("sexy", 1)
+                    $ JeanX.change_face("_sexy", 1)
                     $ JeanX.change_stat("obedience", 50, 3)
                     $ JeanX.change_stat("obedience", 70, 2)
                     ch_j "Nice of you to let me know. . ."
                 "I just got here.":
-                    $ JeanX.change_face("bemused", 1)
+                    $ JeanX.change_face("_bemused", 1)
                     $ JeanX.change_stat("love", 70, 2)
                     $ JeanX.change_stat("love", 90, 1)
                     ch_j "Uh-huh. . ."
@@ -696,7 +696,7 @@ label Jean_M_Interupted:
     if Round <= 10:
         ch_j "I need a minute here. . ."
         return
-    $ JeanX.change_face("sexy", 1)
+    $ JeanX.change_face("_sexy", 1)
     if JeanX.lust < 20:
         ch_j "I got off, how about you?"
     else:
@@ -707,7 +707,7 @@ label Jean_M_Interupted:
             $ action_context = "shift"
             return
         "You could just keep going. . ." if Player.semen:
-            $ JeanX.change_face("sly")
+            $ JeanX.change_face("_sly")
             if JeanX.remaining_actions and Round >= 10:
                 ch_j "Ok. . ."
                 jump Jean_M_Cycle
@@ -716,12 +716,12 @@ label Jean_M_Interupted:
         "I'm good here. [[Stop]":
             if JeanX.love < 800 and JeanX.inhibition < 500 and JeanX.obedience < 500:
                 $ JeanX.change_outfit()
-            $ JeanX.change_face("normal")
-            $ JeanX.brows = "confused"
+            $ JeanX.change_face("_normal")
+            $ JeanX.brows = "_confused"
             ch_j "Ok."
-            $ JeanX.brows = "normal"
+            $ JeanX.brows = "_normal"
         "You should probably stop for now." if JeanX.lust > 30:
-            $ JeanX.change_face("angry")
+            $ JeanX.change_face("_angry")
             ch_j "Hrmm."
     return
 
@@ -787,12 +787,12 @@ label Jean_Sex_P:
             "You flip [JeanX.name] around."
         $ JeanX.SeenPanties = 1
         "You rub the tip of your cock against her moist slit."
-        $ JeanX.change_face("surprised", 1)
+        $ JeanX.change_face("_surprised", 1)
 
         if (JeanX.action_counter["sex"] and approval) or (approval > 1):
 
             "[JeanX.name] glances back and then breaks into a smile."
-            $ JeanX.change_face("sly")
+            $ JeanX.change_face("_sly")
             $ JeanX.change_stat("obedience", 70, 3)
             $ JeanX.change_stat("inhibition", 50, 3)
             $ JeanX.change_stat("inhibition", 70, 1)
@@ -800,12 +800,12 @@ label Jean_Sex_P:
             jump Jean_SexPrep
         else:
 
-            $ JeanX.brows = "angry"
+            $ JeanX.brows = "_angry"
             menu:
                 ch_j "Just sticking it in?"
                 "Sorry, sorry! Never mind.":
                     if approval:
-                        $ JeanX.change_face("sexy", 1)
+                        $ JeanX.change_face("_sexy", 1)
                         $ JeanX.change_stat("obedience", 70, 3)
                         $ JeanX.change_stat("inhibition", 50, 3)
                         $ JeanX.change_stat("inhibition", 70, 1)
@@ -813,7 +813,7 @@ label Jean_Sex_P:
                         jump Jean_SexPrep
                     else:
                         "You pull back before you really get it in."
-                        $ JeanX.change_face("bemused", 1)
+                        $ JeanX.change_face("_bemused", 1)
 
                         ch_j "You should ask first, [JeanX.player_petname]."
                 "Just fucking.":
@@ -825,7 +825,7 @@ label Jean_Sex_P:
                     $ JeanX.change_stat("obedience", 70, 3)
                     $ JeanX.change_stat("inhibition", 50, 3)
                     if not approval_check(JeanX, 700, "O", TabM=1):
-                        $ JeanX.change_face("angry")
+                        $ JeanX.change_face("_angry")
                         "[JeanX.name] shoves you away and backhands you in the face."
                         ch_j "Hey, I don't need my powers to hurt you."
                         $ JeanX.change_stat("love", 50, -10, 1)
@@ -834,10 +834,10 @@ label Jean_Sex_P:
                         if action_context:
                             $ renpy.pop_call()
                         call Jean_Sex_Reset
-                        $ JeanX.recent_history.append("angry")
-                        $ JeanX.daily_history.append("angry")
+                        $ JeanX.recent_history.append("_angry")
+                        $ JeanX.daily_history.append("_angry")
                     else:
-                        $ JeanX.change_face("sad")
+                        $ JeanX.change_face("_sad")
                         "[JeanX.name] doesn't seem to be into this, you're lucky she's willing to give it a try."
                         jump Jean_SexPrep
         return
@@ -846,42 +846,42 @@ label Jean_Sex_P:
 
     if not JeanX.action_counter["sex"] and "no_sex" not in JeanX.recent_history:
 
-        $ JeanX.change_face("surprised", 1)
-        $ JeanX.mouth = "kiss"
+        $ JeanX.change_face("_surprised", 1)
+        $ JeanX.mouth = "_kiss"
         ch_j "Oh, you wanna fuck . . "
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             ch_j "Pretty bold of you. . ."
 
 
     if not JeanX.action_counter["sex"] and approval:
 
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             $ JeanX.change_stat("love", 70, -30, 1)
             $ JeanX.change_stat("love", 20, -20, 1)
         elif JeanX.love >= (JeanX.obedience + JeanX.inhibition - JeanX.IX):
-            $ JeanX.change_face("sexy")
-            $ JeanX.brows = "sad"
-            $ JeanX.mouth = "smile"
+            $ JeanX.change_face("_sexy")
+            $ JeanX.brows = "_sad"
+            $ JeanX.mouth = "_smile"
             ch_j "I was wondering when this would come up. . ."
         elif JeanX.obedience >= (JeanX.inhibition - JeanX.IX):
-            $ JeanX.change_face("normal")
+            $ JeanX.change_face("_normal")
             ch_j "Ok, [JeanX.player_petname]. . ."
         elif JeanX.addiction >= 50:
-            $ JeanX.change_face("manic", 1)
+            $ JeanX.change_face("_manic", 1)
             ch_j "That does sound fun. . ."
         else:
-            $ JeanX.change_face("sad")
-            $ JeanX.mouth = "smile"
+            $ JeanX.change_face("_sad")
+            $ JeanX.mouth = "_smile"
             ch_j "I was wondering when this would come up. . ."
 
 
     elif approval:
 
-        $ JeanX.change_face("sexy", 1)
+        $ JeanX.change_face("_sexy", 1)
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             $ JeanX.change_stat("love", 70, -3, 1)
             $ JeanX.change_stat("love", 20, -2, 1)
             ch_j "You'll pay for this eventually. . ."
@@ -898,8 +898,8 @@ label Jean_Sex_P:
                     "Your funeral, " + JeanX.player_petname + "."])
             ch_j "[Line]"
         elif JeanX.action_counter["sex"] < 3:
-            $ JeanX.brows = "confused"
-            $ JeanX.mouth = "kiss"
+            $ JeanX.brows = "_confused"
+            $ JeanX.mouth = "_kiss"
             ch_j "Oh? Another round?"
         else:
             $ Line = renpy.random.choice(["Oh, you want some of this?",
@@ -914,14 +914,14 @@ label Jean_Sex_P:
     if approval >= 2:
 
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             $ JeanX.change_stat("obedience", 90, 1)
             $ JeanX.change_stat("inhibition", 60, 1)
             ch_j "Ok, fine. Just make it good."
         elif "no_sex" in JeanX.daily_history:
             ch_j "Ok, whatever. . ."
         else:
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             $ JeanX.change_stat("love", 90, 1)
             $ JeanX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Well. . . fine, let's do it.",
@@ -938,7 +938,7 @@ label Jean_Sex_P:
     else:
 
 
-        $ JeanX.change_face("angry")
+        $ JeanX.change_face("_angry")
         if "no_sex" in JeanX.recent_history:
             ch_j "I don't repeat myself."
         elif JeanX.Taboo and "no_taboo" in JeanX.daily_history and "no_sex" in JeanX.daily_history:
@@ -948,19 +948,19 @@ label Jean_Sex_P:
         elif JeanX.Taboo and "no_taboo" in JeanX.daily_history:
             ch_j "I told you, I'm not comfortable with that. . ."
         elif not JeanX.action_counter["sex"]:
-            $ JeanX.change_face("bemused")
+            $ JeanX.change_face("_bemused")
             ch_j "Oh, this would be interesting. . ."
         else:
-            $ JeanX.change_face("bemused")
+            $ JeanX.change_face("_bemused")
             ch_j "I'm not in the mood right now . ."
         menu:
             extend ""
             "Sorry, never mind." if "no_sex" in JeanX.daily_history:
-                $ JeanX.change_face("bemused")
+                $ JeanX.change_face("_bemused")
                 ch_j "Keep trying. . ."
                 return
             "Maybe later?" if "no_sex" not in JeanX.daily_history:
-                $ JeanX.change_face("sexy")
+                $ JeanX.change_face("_sexy")
                 ch_j "Sure, whatever. . ."
                 $ JeanX.change_stat("love", 80, 2)
                 $ JeanX.change_stat("inhibition", 70, 2)
@@ -972,7 +972,7 @@ label Jean_Sex_P:
                 return
             "I think you'd enjoy it as much as I would. . .":
                 if approval:
-                    $ JeanX.change_face("sexy")
+                    $ JeanX.change_face("_sexy")
                     $ JeanX.change_stat("obedience", 90, 2)
                     $ JeanX.change_stat("obedience", 50, 2)
                     $ JeanX.change_stat("inhibition", 70, 3)
@@ -986,7 +986,7 @@ label Jean_Sex_P:
             "Just deal with it.":
                 $ approval = approval_check(JeanX, 1150, "OI", TabM = 3)
                 if approval > 1 or (approval and JeanX.Forced):
-                    $ JeanX.change_face("confused",Eyes="side")
+                    $ JeanX.change_face("_confused",Eyes="_side")
                     $ JeanX.change_stat("love", 70, -5, 1)
                     $ JeanX.change_stat("love", 200, -5)
                     ch_j ". . ."
@@ -998,8 +998,8 @@ label Jean_Sex_P:
                     jump Jean_SexPrep
                 else:
                     $ JeanX.change_stat("love", 200, -20)
-                    $ JeanX.recent_history.append("angry")
-                    $ JeanX.daily_history.append("angry")
+                    $ JeanX.recent_history.append("_angry")
+                    $ JeanX.daily_history.append("_angry")
 
 
 
@@ -1007,30 +1007,30 @@ label Jean_Sex_P:
     $ JeanX.ArmPose = 1
     if "no_sex" in JeanX.daily_history:
         ch_j "Don't push your luck, [JeanX.player_petname]."
-        $ JeanX.recent_history.append("angry")
-        $ JeanX.daily_history.append("angry")
+        $ JeanX.recent_history.append("_angry")
+        $ JeanX.daily_history.append("_angry")
     elif JeanX.Forced:
-        $ JeanX.change_face("angry", 1)
+        $ JeanX.change_face("_angry", 1)
         ch_j "I'm the queen here!"
         $ JeanX.change_stat("lust", 200, 5)
         if JeanX.love > 300:
             $ JeanX.change_stat("love", 70, -2)
         $ JeanX.change_stat("obedience", 50, -2)
         ch_j "I do not take orders."
-        $ JeanX.recent_history.append("angry")
-        $ JeanX.daily_history.append("angry")
+        $ JeanX.recent_history.append("_angry")
+        $ JeanX.daily_history.append("_angry")
     elif JeanX.Taboo:
-        $ JeanX.change_face("angry", 1)
+        $ JeanX.change_face("_angry", 1)
         $ JeanX.recent_history.append("no_taboo")
         $ JeanX.daily_history.append("no_taboo")
         ch_j "I'm just not comfortable with that right now. . ."
         $ JeanX.change_stat("lust", 200, 5)
         $ JeanX.change_stat("obedience", 50, -3)
     elif JeanX.action_counter["sex"]:
-        $ JeanX.change_face("sad")
+        $ JeanX.change_face("_sad")
         ch_j "Maybe just fuck one of the others."
     else:
-        $ JeanX.change_face("normal", 1)
+        $ JeanX.change_face("_normal", 1)
         ch_j "Not interested."
     $ JeanX.recent_history.append("no_sex")
     $ JeanX.daily_history.append("no_sex")
@@ -1061,7 +1061,7 @@ label Jean_SexPrep:
                 $ JeanX.change_stat("inhibition", 50, 2)
                 "[JeanX.name] slides it in."
             "Praise her.":
-                $ JeanX.change_face("sexy", 1)
+                $ JeanX.change_face("_sexy", 1)
                 $ JeanX.change_stat("inhibition", 80, 3)
                 ch_p "Oh yeah, [JeanX.petname], let's do this."
                 $ JeanX.nameCheck()
@@ -1070,7 +1070,7 @@ label Jean_SexPrep:
                 $ JeanX.change_stat("obedience", 90, 1)
                 $ JeanX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
-                $ JeanX.change_face("surprised")
+                $ JeanX.change_face("_surprised")
                 $ JeanX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that right now, [JeanX.petname]."
                 $ JeanX.nameCheck()
@@ -1296,7 +1296,7 @@ label Jean_Sex_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (JeanX)
-                if "angry" in JeanX.recent_history:
+                if "_angry" in JeanX.recent_history:
                     call Jean_Sex_Reset
                     return
                 $ JeanX.change_stat("lust", 200, 5)
@@ -1311,7 +1311,7 @@ label Jean_Sex_Cycle:
             if JeanX.lust >= 100:
 
                 call Girl_Cumming (JeanX)
-                if action_context == "shift" or "angry" in JeanX.recent_history:
+                if action_context == "shift" or "_angry" in JeanX.recent_history:
                     jump Jean_SexAfter
 
             if Line == "came":
@@ -1348,10 +1348,10 @@ label Jean_Sex_Cycle:
         if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
         elif counter == (5 + JeanX.action_counter["sex"]):
-            $ JeanX.brows = "confused"
+            $ JeanX.brows = "_confused"
             ch_j "Ok, had enough yet?"
         elif counter == (10 + JeanX.action_counter["sex"]):
-            $ JeanX.brows = "angry"
+            $ JeanX.brows = "_angry"
             menu:
                 ch_j "Hey. . . you. . . about done. . . there?"
                 "How about a BJ?" if JeanX.remaining_actions and multi_action:
@@ -1376,7 +1376,7 @@ label Jean_Sex_Cycle:
                         $ JeanX.change_stat("obedience", 80, 2)
                         "She grumbles but keeps moving."
                     else:
-                        $ JeanX.change_face("angry", 1)
+                        $ JeanX.change_face("_angry", 1)
                         call Jean_Sex_Reset
                         "She scowls at you and pulls out."
                         ch_j "Don't overestimate yourself."
@@ -1384,8 +1384,8 @@ label Jean_Sex_Cycle:
                         $ JeanX.change_stat("love", 80, -4, 1)
                         $ JeanX.change_stat("obedience", 30, -1, 1)
                         $ JeanX.change_stat("obedience", 50, -1, 1)
-                        $ JeanX.recent_history.append("angry")
-                        $ JeanX.daily_history.append("angry")
+                        $ JeanX.recent_history.append("_angry")
+                        $ JeanX.daily_history.append("_angry")
                         jump Jean_SexAfter
 
 
@@ -1397,7 +1397,7 @@ label Jean_Sex_Cycle:
             call Sex_Basic_Dialog (JeanX, 5)
 
 
-    $ JeanX.change_face("bemused", 0)
+    $ JeanX.change_face("_bemused", 0)
     $ Line = 0
     call Sex_Basic_Dialog (JeanX, "done")
 
@@ -1407,7 +1407,7 @@ label Jean_SexAfter:
         $ Player.cock_position = "out"
         call Jean_Sex_Reset
 
-    $ JeanX.change_face("sexy")
+    $ JeanX.change_face("_sexy")
 
     $ JeanX.action_counter["sex"] += 1
     $ JeanX.remaining_actions -=1
@@ -1426,7 +1426,7 @@ label Jean_SexAfter:
         $ JeanX.SEXP += 5
         $ Achievements.append("Jean Sex Addict")
         if not action_context:
-            $ JeanX.change_face("smile", 1)
+            $ JeanX.change_face("_smile", 1)
             ch_j "Hey, I just noticed we've been doing this a lot. . ."
     elif JeanX.action_counter["sex"] == 1:
         $ JeanX.SEXP += 20
@@ -1440,7 +1440,7 @@ label Jean_SexAfter:
         ch_j "You're pretty good at this. . ."
     elif not action_context:
         if "unsatisfied" in JeanX.recent_history:
-            $ JeanX.change_face("angry")
+            $ JeanX.change_face("_angry")
             ch_j "I think you need to get back down there."
 
     $ approval_bonus = 0
@@ -1501,12 +1501,12 @@ label Jean_Sex_A:
             $ JeanX.upskirt = 1
         elif JeanX.PantsNum() >= 6:
             "You flip [JeanX.name] around, sliding her pants down as you do."
-            $ JeanX.legs = 0
+            $ JeanX.legs = ""
         else:
             "You flip [JeanX.name] around."
         $ JeanX.SeenPanties = 1
         "You press the tip of your cock against her tight rim."
-        $ JeanX.change_face("surprised", 1)
+        $ JeanX.change_face("_surprised", 1)
         call Jean_First_Bottomless (1)
 
         if (JeanX.action_counter["anal"] and approval) or (approval > 1):
@@ -1519,12 +1519,12 @@ label Jean_Sex_A:
             jump Jean_AnalPrep
         else:
 
-            $ JeanX.brows = "angry"
+            $ JeanX.brows = "_angry"
             menu:
                 ch_j "Sticking in the back?"
                 "Sorry, sorry! Never mind.":
                     if approval:
-                        $ JeanX.change_face("sexy", 1)
+                        $ JeanX.change_face("_sexy", 1)
                         $ JeanX.change_stat("obedience", 70, 3)
                         $ JeanX.change_stat("inhibition", 50, 3)
                         $ JeanX.change_stat("inhibition", 70, 1)
@@ -1532,7 +1532,7 @@ label Jean_Sex_A:
                         ch_j "Get in there."
                         jump Jean_AnalPrep
                     "You pull back before you really get it in."
-                    $ JeanX.change_face("bemused", 1)
+                    $ JeanX.change_face("_bemused", 1)
 
 
 
@@ -1545,7 +1545,7 @@ label Jean_Sex_A:
                     $ JeanX.change_stat("obedience", 70, 3)
                     $ JeanX.change_stat("inhibition", 50, 3)
                     if not approval_check(JeanX, 700, "O", TabM=1):
-                        $ JeanX.change_face("angry")
+                        $ JeanX.change_face("_angry")
                         "[JeanX.name] shoves you away and backhands you in the face."
                         ch_j "Tsk tsk."
                         $ JeanX.change_stat("love", 50, -10, 1)
@@ -1554,10 +1554,10 @@ label Jean_Sex_A:
                         if action_context:
                             $ renpy.pop_call()
                         call Jean_Sex_Reset
-                        $ JeanX.recent_history.append("angry")
-                        $ JeanX.daily_history.append("angry")
+                        $ JeanX.recent_history.append("_angry")
+                        $ JeanX.daily_history.append("_angry")
                     else:
-                        $ JeanX.change_face("sad")
+                        $ JeanX.change_face("_sad")
                         "[JeanX.name] doesn't seem to be into this, you're lucky she's willing to give it a try."
                         jump Jean_AnalPrep
         return
@@ -1566,16 +1566,16 @@ label Jean_Sex_A:
 
     if not JeanX.action_counter["anal"] and "no_anal" not in JeanX.recent_history:
 
-        $ JeanX.change_face("surprised", 1)
-        $ JeanX.mouth = "kiss"
+        $ JeanX.change_face("_surprised", 1)
+        $ JeanX.mouth = "_kiss"
         ch_j "Oh, you're into anal?"
 
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             ch_j "That's the card you're going to play?"
 
     if "anal" in JeanX.recent_history:
-        $ JeanX.change_face("sexy", 1)
+        $ JeanX.change_face("_sexy", 1)
         ch_j "Ok, sure."
         jump Jean_AnalPrep
 
@@ -1583,29 +1583,29 @@ label Jean_Sex_A:
     if not JeanX.action_counter["anal"] and approval:
 
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             $ JeanX.change_stat("love", 70, -3, 1)
             $ JeanX.change_stat("love", 20, -2, 1)
         elif JeanX.love >= (JeanX.obedience + JeanX.inhibition - JeanX.IX):
-            $ JeanX.change_face("sexy")
-            $ JeanX.brows = "sad"
-            $ JeanX.mouth = "smile"
+            $ JeanX.change_face("_sexy")
+            $ JeanX.brows = "_sad"
+            $ JeanX.mouth = "_smile"
             ch_j "I was expecting this. . ."
         elif JeanX.obedience >= (JeanX.inhibition - JeanX.IX):
-            $ JeanX.change_face("normal")
+            $ JeanX.change_face("_normal")
             ch_j "I expected that. . ."
         elif JeanX.addiction >= 50:
-            $ JeanX.change_face("manic", 1)
+            $ JeanX.change_face("_manic", 1)
             ch_j "Hmm, sounds fun. . ."
         else:
-            $ JeanX.change_face("sad")
-            $ JeanX.mouth = "smile"
+            $ JeanX.change_face("_sad")
+            $ JeanX.mouth = "_smile"
             ch_j "I was tired of waiting. . ."
 
     elif approval:
 
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             $ JeanX.change_stat("love", 70, -3, 1)
             $ JeanX.change_stat("love", 20, -2, 1)
             ch_j "Well you're optimistic. . ."
@@ -1617,7 +1617,7 @@ label Jean_Sex_A:
             ch_j "I am warmed up. . ."
             jump Jean_AnalPrep
         elif "anal" in JeanX.daily_history:
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Back again so soon?",
                     "So you'd like another round?",
                     "Again? Sure.",
@@ -1625,7 +1625,7 @@ label Jean_Sex_A:
                     "Your funeral, " + JeanX.player_petname + "."])
             ch_j "[Line]"
         else:
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             $ JeanX.ArmPose = 2
             $ Line = renpy.random.choice(["Oooh, you want some of this?",
                     "So you'd like another round?",
@@ -1638,7 +1638,7 @@ label Jean_Sex_A:
     if approval >= 2:
 
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             $ JeanX.change_stat("obedience", 90, 1)
             $ JeanX.change_stat("inhibition", 60, 1)
             ch_j "Whatever."
@@ -1646,7 +1646,7 @@ label Jean_Sex_A:
             ch_j "Well, if you're going to keep asking. . ."
             ch_j "Might be fun. . ."
         else:
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             $ JeanX.change_stat("love", 90, 1)
             $ JeanX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Well. . . ok.",
@@ -1663,7 +1663,7 @@ label Jean_Sex_A:
     else:
 
 
-        $ JeanX.change_face("angry")
+        $ JeanX.change_face("_angry")
         if "no_anal" in JeanX.recent_history:
             ch_j "I don't repeat myself."
         elif JeanX.Taboo and "no_taboo" in JeanX.daily_history and "no_anal" in JeanX.daily_history:
@@ -1673,19 +1673,19 @@ label Jean_Sex_A:
         elif JeanX.Taboo and "no_taboo" in JeanX.daily_history:
             ch_j "I told you, I'm not comfortable with that. . ."
         elif not JeanX.action_counter["anal"]:
-            $ JeanX.change_face("bemused")
+            $ JeanX.change_face("_bemused")
             ch_j "I don't know that you're ready for that yet."
         else:
-            $ JeanX.change_face("bemused")
+            $ JeanX.change_face("_bemused")
             ch_j "Maybe eventually. . ."
         menu:
             extend ""
             "Sorry, never mind." if "no_anal" in JeanX.daily_history:
-                $ JeanX.change_face("bemused")
+                $ JeanX.change_face("_bemused")
                 ch_j "I get it."
                 return
             "Maybe later?" if "no_anal" not in JeanX.daily_history:
-                $ JeanX.change_face("sexy")
+                $ JeanX.change_face("_sexy")
                 ch_j "Oh, probably. . ."
                 $ JeanX.change_stat("love", 80, 2)
                 $ JeanX.change_stat("inhibition", 70, 2)
@@ -1697,7 +1697,7 @@ label Jean_Sex_A:
                 return
             "I bet it would feel really good. . .":
                 if approval:
-                    $ JeanX.change_face("sexy")
+                    $ JeanX.change_face("_sexy")
                     $ JeanX.change_stat("obedience", 90, 2)
                     $ JeanX.change_stat("obedience", 50, 2)
                     $ JeanX.change_stat("inhibition", 70, 3)
@@ -1714,10 +1714,10 @@ label Jean_Sex_A:
 
                 $ approval = approval_check(JeanX, 1250, "OI", TabM = 3)
                 if approval > 1 or (approval and JeanX.Forced):
-                    $ JeanX.change_face("confused")
+                    $ JeanX.change_face("_confused")
                     $ JeanX.change_stat("love", 70, -5, 1)
                     $ JeanX.change_stat("love", 200, -5)
-                    $ JeanX.change_face("angry",Eyes="side")
+                    $ JeanX.change_face("_angry",Eyes="_side")
                     ch_j "Oh fine, get it over with."
                     $ JeanX.change_stat("obedience", 80, 4)
                     $ JeanX.change_stat("inhibition", 80, 1)
@@ -1726,40 +1726,40 @@ label Jean_Sex_A:
                     jump Jean_AnalPrep
                 else:
                     $ JeanX.change_stat("love", 200, -20)
-                    $ JeanX.recent_history.append("angry")
-                    $ JeanX.daily_history.append("angry")
+                    $ JeanX.recent_history.append("_angry")
+                    $ JeanX.daily_history.append("_angry")
 
 
     $ JeanX.ArmPose = 1
     if "no_anal" in JeanX.daily_history:
         ch_j "Know when to stop."
-        $ JeanX.recent_history.append("angry")
-        $ JeanX.daily_history.append("angry")
+        $ JeanX.recent_history.append("_angry")
+        $ JeanX.daily_history.append("_angry")
     elif JeanX.Forced:
-        $ JeanX.change_face("angry", 1)
+        $ JeanX.change_face("_angry", 1)
         ch_j "You're overestimating your power here."
         $ JeanX.change_stat("lust", 200, 5)
         if JeanX.love > 300:
             $ JeanX.change_stat("love", 70, -2)
         $ JeanX.change_stat("obedience", 50, -2)
-        $ JeanX.recent_history.append("angry")
-        $ JeanX.daily_history.append("angry")
+        $ JeanX.recent_history.append("_angry")
+        $ JeanX.daily_history.append("_angry")
     elif JeanX.Taboo:
 
-        $ JeanX.change_face("angry", 1)
+        $ JeanX.change_face("_angry", 1)
         $ JeanX.recent_history.append("no_taboo")
         $ JeanX.daily_history.append("no_taboo")
         ch_j "I'm just not comfortable with that right now. . ."
         $ JeanX.change_stat("lust", 200, 5)
         $ JeanX.change_stat("obedience", 50, -3)
     elif "anal" in JeanX.daily_history:
-        $ JeanX.change_face("bemused")
+        $ JeanX.change_face("_bemused")
         ch_j "Not right now."
     elif JeanX.action_counter["anal"]:
-        $ JeanX.change_face("sad")
+        $ JeanX.change_face("_sad")
         ch_j "You'll have to earn that one. . ."
     else:
-        $ JeanX.change_face("normal", 1)
+        $ JeanX.change_face("_normal", 1)
         ch_j "You haven't earned it yet."
     $ JeanX.recent_history.append("no_anal")
     $ JeanX.daily_history.append("no_anal")
@@ -1790,7 +1790,7 @@ label Jean_AnalPrep:
                 $ JeanX.change_stat("inhibition", 50, 2)
                 "[JeanX.name] slides it in."
             "Praise her.":
-                $ JeanX.change_face("sexy", 1)
+                $ JeanX.change_face("_sexy", 1)
                 $ JeanX.change_stat("inhibition", 80, 3)
                 ch_p "Oh yeah, [JeanX.petname], let's do this."
                 $ JeanX.nameCheck()
@@ -1799,7 +1799,7 @@ label Jean_AnalPrep:
                 $ JeanX.change_stat("obedience", 90, 1)
                 $ JeanX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
-                $ JeanX.change_face("surprised")
+                $ JeanX.change_face("_surprised")
                 $ JeanX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that right now, [JeanX.petname]."
                 $ JeanX.nameCheck()
@@ -2028,7 +2028,7 @@ label Jean_Anal_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (JeanX)
-                if "angry" in JeanX.recent_history:
+                if "_angry" in JeanX.recent_history:
                     call Jean_Sex_Reset
                     return
                 $ JeanX.change_stat("lust", 200, 5)
@@ -2043,7 +2043,7 @@ label Jean_Anal_Cycle:
             if JeanX.lust >= 100:
 
                 call Girl_Cumming (JeanX)
-                if action_context == "shift" or "angry" in JeanX.recent_history:
+                if action_context == "shift" or "_angry" in JeanX.recent_history:
                     jump Jean_AnalAfter
 
             if Line == "came":
@@ -2080,10 +2080,10 @@ label Jean_Anal_Cycle:
         if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
         elif counter == (5 + JeanX.action_counter["anal"]):
-            $ JeanX.brows = "confused"
+            $ JeanX.brows = "_confused"
             ch_j "Ok, that good enough?"
         elif counter == (10 + JeanX.action_counter["anal"]):
-            $ JeanX.brows = "angry"
+            $ JeanX.brows = "_angry"
             menu:
                 ch_j "Can we. . . do something. . . else?"
                 "How about a BJ?" if JeanX.remaining_actions and multi_action:
@@ -2112,7 +2112,7 @@ label Jean_Anal_Cycle:
                         $ JeanX.change_stat("obedience", 80, 2)
                         "She grumbles but keeps moving."
                     else:
-                        $ JeanX.change_face("angry", 1)
+                        $ JeanX.change_face("_angry", 1)
                         call Jean_Sex_Reset
                         "She scowls at you and pulls out."
                         ch_j "Don't overestimate yourself."
@@ -2120,8 +2120,8 @@ label Jean_Anal_Cycle:
                         $ JeanX.change_stat("love", 80, -4, 1)
                         $ JeanX.change_stat("obedience", 30, -1, 1)
                         $ JeanX.change_stat("obedience", 50, -1, 1)
-                        $ JeanX.recent_history.append("angry")
-                        $ JeanX.daily_history.append("angry")
+                        $ JeanX.recent_history.append("_angry")
+                        $ JeanX.daily_history.append("_angry")
                         jump Jean_AnalAfter
 
 
@@ -2131,7 +2131,7 @@ label Jean_Anal_Cycle:
             call Sex_Basic_Dialog (JeanX, 5)
 
 
-    $ JeanX.change_face("bemused", 0)
+    $ JeanX.change_face("_bemused", 0)
     $ Line = 0
     call Sex_Basic_Dialog (JeanX, "done")
 
@@ -2141,7 +2141,7 @@ label Jean_AnalAfter:
         $ Player.cock_position = "out"
         call Jean_Sex_Reset
 
-    $ JeanX.change_face("sexy")
+    $ JeanX.change_face("_sexy")
 
     $ JeanX.action_counter["anal"] += 1
     $ JeanX.remaining_actions -=1
@@ -2163,7 +2163,7 @@ label Jean_AnalAfter:
         $ JeanX.SEXP += 7
         $ Achievements.append("Jean Anal Addict")
         if not action_context:
-            $ JeanX.change_face("bemused", 1)
+            $ JeanX.change_face("_bemused", 1)
             ch_j "This has been fun exercise."
     elif JeanX.action_counter["anal"] == 1:
         $ JeanX.SEXP += 25
@@ -2171,13 +2171,13 @@ label Jean_AnalAfter:
             if JeanX.love >= 500 and "unsatisfied" not in JeanX.recent_history:
                 ch_j "Hmmm, that was nice. . ."
             elif JeanX.obedience <= 500 and Player.focus <= 20:
-                $ JeanX.mouth = "sad"
+                $ JeanX.mouth = "_sad"
                 ch_j "that was great. . ."
     elif JeanX.action_counter["anal"] == 5:
         ch_j "I'm glad we have similar interests. . ."
     elif not action_context:
         if "unsatisfied" in JeanX.recent_history:
-            $ JeanX.change_face("angry")
+            $ JeanX.change_face("_angry")
             ch_j "I think you need to get back down there."
 
     $ approval_bonus = 0
@@ -2228,30 +2228,30 @@ label Jean_Sex_H:
     if action_context == "auto":
         call Jean_Sex_Launch ("hotdog")
         "You push [JeanX.name] down, and press your cock against her."
-        $ JeanX.change_face("surprised", 1)
+        $ JeanX.change_face("_surprised", 1)
 
         if (JeanX.action_counter["hotdog"] and approval) or (approval > 1):
             "[JeanX.name] glances back and then breaks into a smile."
-            $ JeanX.change_face("sly")
+            $ JeanX.change_face("_sly")
             $ JeanX.change_stat("obedience", 70, 3)
             $ JeanX.change_stat("inhibition", 50, 3)
             $ JeanX.change_stat("inhibition", 70, 1)
             ch_j "Oh, what did you have in mind with that? . ."
             jump Jean_HotdogPrep
         else:
-            $ JeanX.brows = "angry"
+            $ JeanX.brows = "_angry"
             menu:
                 ch_j "Little close there, [JeanX.player_petname]?"
                 "Sorry, sorry! Never mind.":
                     if approval:
-                        $ JeanX.change_face("sexy", 1)
+                        $ JeanX.change_face("_sexy", 1)
                         $ JeanX.change_stat("obedience", 70, 3)
                         $ JeanX.change_stat("inhibition", 50, 3)
                         $ JeanX.change_stat("inhibition", 70, 1)
                         ch_j "I didn't say I minded. . ."
                         jump Jean_HotdogPrep
                     "You pull back from her."
-                    $ JeanX.change_face("bemused", 1)
+                    $ JeanX.change_face("_bemused", 1)
                     ch_j "Just ask first."
                 "You'll see.":
                     $ JeanX.change_stat("love", 80, -10, 1)
@@ -2260,7 +2260,7 @@ label Jean_Sex_H:
                     $ JeanX.change_stat("obedience", 70, 3)
                     $ JeanX.change_stat("inhibition", 50, 3)
                     if not approval_check(JeanX, 500, "O", TabM=1):
-                        $ JeanX.change_face("angry")
+                        $ JeanX.change_face("_angry")
                         "[JeanX.name] shoves you away."
                         ch_j "Don't push it, [JeanX.player_petname]."
                         $ JeanX.change_stat("love", 50, -10, 1)
@@ -2269,10 +2269,10 @@ label Jean_Sex_H:
                         if action_context:
                             $ renpy.pop_call()
                         call Jean_Sex_Reset
-                        $ JeanX.recent_history.append("angry")
-                        $ JeanX.daily_history.append("angry")
+                        $ JeanX.recent_history.append("_angry")
+                        $ JeanX.daily_history.append("_angry")
                     else:
-                        $ JeanX.change_face("sad")
+                        $ JeanX.change_face("_sad")
                         "[JeanX.name] doesn't seem to be into this, but she knows her place."
                         jump Jean_HotdogPrep
         return
@@ -2281,12 +2281,12 @@ label Jean_Sex_H:
 
     if not JeanX.action_counter["hotdog"] and "no_hotdog" not in JeanX.recent_history:
 
-        $ JeanX.change_face("surprised", 1)
-        $ JeanX.mouth = "kiss"
+        $ JeanX.change_face("_surprised", 1)
+        $ JeanX.mouth = "_kiss"
         ch_j "What, just grinding?"
 
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             ch_j ". . . nothing more?"
             if approval:
                 ch_j "Which of us has a pussy here?"
@@ -2295,47 +2295,47 @@ label Jean_Sex_H:
     if not JeanX.action_counter["hotdog"] and approval:
 
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             $ JeanX.change_stat("love", 70, -3, 1)
             $ JeanX.change_stat("love", 20, -2, 1)
         elif JeanX.love >= (JeanX.obedience + JeanX.inhibition - JeanX.IX):
-            $ JeanX.change_face("sexy")
-            $ JeanX.brows = "sad"
-            $ JeanX.mouth = "smile"
+            $ JeanX.change_face("_sexy")
+            $ JeanX.brows = "_sad"
+            $ JeanX.mouth = "_smile"
             ch_j "Ok, we can start with that. . ."
         elif JeanX.obedience >= (JeanX.inhibition - JeanX.IX):
-            $ JeanX.change_face("normal")
+            $ JeanX.change_face("_normal")
             ch_j "Ok, we can start with that. . ."
         elif JeanX.addiction >= 50:
-            $ JeanX.change_face("manic", 1)
+            $ JeanX.change_face("_manic", 1)
             ch_j "Hrmm. . ."
         else:
-            $ JeanX.change_face("sad")
-            $ JeanX.mouth = "smile"
+            $ JeanX.change_face("_sad")
+            $ JeanX.mouth = "_smile"
             ch_j "Ok, we can start with that. . ."
 
     elif approval:
 
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             $ JeanX.change_stat("love", 70, -3, 1)
             $ JeanX.change_stat("love", 20, -2, 1)
             ch_j "Odd. . ."
         elif not JeanX.Taboo and "no_taboo" in JeanX.daily_history:
             ch_j "I guess this is a better location . ."
         elif "hotdog" in JeanX.recent_history:
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             ch_j "Again? Fine, whatever."
             jump Jean_HotdogPrep
         elif "hotdog" in JeanX.daily_history:
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Back again so soon?",
                     "So you'd like another round?",
                     "You're really into this. . .",
                     "Are you sure that's all you want?"])
             ch_j "[Line]"
         else:
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             $ JeanX.ArmPose = 2
             $ Line = renpy.random.choice(["Oooh, you want some of this?",
                     "So you'd like another round?",
@@ -2347,14 +2347,14 @@ label Jean_Sex_H:
     if approval >= 2:
 
         if JeanX.Forced:
-            $ JeanX.change_face("sad")
+            $ JeanX.change_face("_sad")
             $ JeanX.change_stat("obedience", 80, 1)
             $ JeanX.change_stat("inhibition", 60, 1)
             ch_j "Ok, fine."
         elif "no_hotdog" in JeanX.daily_history:
             ch_j "It was fun enough. . ."
         else:
-            $ JeanX.change_face("sexy", 1)
+            $ JeanX.change_face("_sexy", 1)
             $ JeanX.change_stat("love", 80, 1)
             $ JeanX.change_stat("inhibition", 50, 2)
             $ Line = renpy.random.choice(["Well, sure, let me give it a rub.",
@@ -2371,7 +2371,7 @@ label Jean_Sex_H:
     else:
 
 
-        $ JeanX.change_face("angry")
+        $ JeanX.change_face("_angry")
         if "no_hotdog" in JeanX.recent_history:
             ch_j "I don't repeat myself."
         elif JeanX.Taboo and "no_taboo" in JeanX.daily_history and "no_hotdog" in JeanX.daily_history:
@@ -2381,19 +2381,19 @@ label Jean_Sex_H:
         elif JeanX.Taboo and "no_taboo" in JeanX.daily_history:
             ch_j "I'm not comfortable with that. . ."
         elif not JeanX.action_counter["hotdog"]:
-            $ JeanX.change_face("bemused")
+            $ JeanX.change_face("_bemused")
             ch_j "Hmm, that could be amusing, [JeanX.player_petname]. . ."
         else:
-            $ JeanX.change_face("bemused")
+            $ JeanX.change_face("_bemused")
             ch_j "I don't think that would be appropriate. . ."
         menu:
             extend ""
             "Sorry, never mind." if "no_hotdog" in JeanX.daily_history:
-                $ JeanX.change_face("bemused")
+                $ JeanX.change_face("_bemused")
                 ch_j "So long as you don't push it."
                 return
             "Maybe later?" if "no_hotdog" not in JeanX.daily_history:
-                $ JeanX.change_face("sexy")
+                $ JeanX.change_face("_sexy")
                 ch_j "I guess eventually. . ."
                 $ JeanX.change_stat("love", 80, 1)
                 $ JeanX.change_stat("inhibition", 50, 1)
@@ -2405,7 +2405,7 @@ label Jean_Sex_H:
                 return
             "You might like it. . .":
                 if approval:
-                    $ JeanX.change_face("sexy")
+                    $ JeanX.change_face("_sexy")
                     $ JeanX.change_stat("obedience", 60, 2)
                     $ JeanX.change_stat("inhibition", 50, 2)
                     $ Line = renpy.random.choice(["Yeah, probably. . .",
@@ -2420,7 +2420,7 @@ label Jean_Sex_H:
 
                 $ approval = approval_check(JeanX, 350, "OI", TabM = 3)
                 if approval > 1 or (approval and JeanX.Forced):
-                    $ JeanX.change_face("confused")
+                    $ JeanX.change_face("_confused")
                     $ JeanX.change_stat("love", 70, -2, 1)
                     $ JeanX.change_stat("love", 200, -2)
                     ch_j ". . ."
@@ -2431,37 +2431,37 @@ label Jean_Sex_H:
                     jump Jean_HotdogPrep
                 else:
                     $ JeanX.change_stat("love", 200, -10)
-                    $ JeanX.recent_history.append("angry")
-                    $ JeanX.daily_history.append("angry")
+                    $ JeanX.recent_history.append("_angry")
+                    $ JeanX.daily_history.append("_angry")
 
 
     $ JeanX.ArmPose = 1
 
     if "no_hotdog" in JeanX.daily_history:
         ch_j "What did I tell you?"
-        $ JeanX.recent_history.append("angry")
-        $ JeanX.daily_history.append("angry")
+        $ JeanX.recent_history.append("_angry")
+        $ JeanX.daily_history.append("_angry")
     if JeanX.Forced:
-        $ JeanX.change_face("angry", 1)
+        $ JeanX.change_face("_angry", 1)
         ch_j "There's no point trying."
         $ JeanX.change_stat("lust", 200, 5)
         if JeanX.love > 300:
             $ JeanX.change_stat("love", 70, -1)
         $ JeanX.change_stat("obedience", 50, -1)
-        $ JeanX.recent_history.append("angry")
-        $ JeanX.daily_history.append("angry")
+        $ JeanX.recent_history.append("_angry")
+        $ JeanX.daily_history.append("_angry")
     elif JeanX.Taboo:
-        $ JeanX.change_face("angry", 1)
+        $ JeanX.change_face("_angry", 1)
         $ JeanX.recent_history.append("no_taboo")
         $ JeanX.daily_history.append("no_taboo")
         ch_j "This area is a bit too exposed for that sort of thing. . ."
         $ JeanX.change_stat("lust", 200, 5)
         $ JeanX.change_stat("obedience", 50, -3)
     elif JeanX.action_counter["hotdog"]:
-        $ JeanX.change_face("sad")
+        $ JeanX.change_face("_sad")
         ch_j "Not anymore."
     else:
-        $ JeanX.change_face("normal", 1)
+        $ JeanX.change_face("_normal", 1)
         ch_j "No thanks."
     $ JeanX.recent_history.append("no_hotdog")
     $ JeanX.daily_history.append("no_hotdog")
@@ -2483,7 +2483,7 @@ label Jean_HotdogPrep:
                 $ JeanX.change_stat("inhibition", 50, 2)
                 "[JeanX.name] continues to grind."
             "Praise her.":
-                $ JeanX.change_face("sexy", 1)
+                $ JeanX.change_face("_sexy", 1)
                 $ JeanX.change_stat("inhibition", 80, 3)
                 ch_p "Oh yeah, [JeanX.petname], let's do this."
                 $ JeanX.nameCheck()
@@ -2492,7 +2492,7 @@ label Jean_HotdogPrep:
                 $ JeanX.change_stat("obedience", 90, 1)
                 $ JeanX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
-                $ JeanX.change_face("surprised")
+                $ JeanX.change_face("_surprised")
                 $ JeanX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that right now, [JeanX.petname]."
                 $ JeanX.nameCheck()
@@ -2707,7 +2707,7 @@ label Jean_Hotdog_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (JeanX)
-                if "angry" in JeanX.recent_history:
+                if "_angry" in JeanX.recent_history:
                     call Jean_Sex_Reset
                     return
                 $ JeanX.change_stat("lust", 200, 5)
@@ -2722,7 +2722,7 @@ label Jean_Hotdog_Cycle:
             if JeanX.lust >= 100:
 
                 call Girl_Cumming (JeanX)
-                if action_context == "shift" or "angry" in JeanX.recent_history:
+                if action_context == "shift" or "_angry" in JeanX.recent_history:
                     jump Jean_HotdogAfter
 
             if Line == "came":
@@ -2759,10 +2759,10 @@ label Jean_Hotdog_Cycle:
         if JeanX.SEXP >= 100 or approval_check(JeanX, 1200, "LO"):
             pass
         elif counter == (5 + JeanX.action_counter["hotdog"]):
-            $ JeanX.brows = "confused"
+            $ JeanX.brows = "_confused"
             ch_j "'bout done there?"
         elif counter == (10 + JeanX.action_counter["hotdog"]):
-            $ JeanX.brows = "angry"
+            $ JeanX.brows = "_angry"
             menu:
                 ch_j "Well this is not fun."
                 "How about a BJ?" if JeanX.remaining_actions and multi_action:
@@ -2787,7 +2787,7 @@ label Jean_Hotdog_Cycle:
                         $ JeanX.change_stat("obedience", 80, 2)
                         "She grumbles but keeps moving."
                     else:
-                        $ JeanX.change_face("angry", 1)
+                        $ JeanX.change_face("_angry", 1)
                         call Jean_Sex_Reset
                         "She scowls at you and pulls away."
                         ch_j "Don't overestimate yourself."
@@ -2795,8 +2795,8 @@ label Jean_Hotdog_Cycle:
                         $ JeanX.change_stat("love", 80, -4, 1)
                         $ JeanX.change_stat("obedience", 30, -1, 1)
                         $ JeanX.change_stat("obedience", 50, -1, 1)
-                        $ JeanX.recent_history.append("angry")
-                        $ JeanX.daily_history.append("angry")
+                        $ JeanX.recent_history.append("_angry")
+                        $ JeanX.daily_history.append("_angry")
                         jump Jean_HotdogAfter
 
 
@@ -2808,7 +2808,7 @@ label Jean_Hotdog_Cycle:
             call Sex_Basic_Dialog (JeanX, 5)
 
 
-    $ JeanX.change_face("bemused", 0)
+    $ JeanX.change_face("_bemused", 0)
     $ Line = 0
     call Sex_Basic_Dialog (JeanX, "done")
 
@@ -2819,7 +2819,7 @@ label Jean_HotdogAfter:
         $ Player.cock_position = "out"
         call Jean_Sex_Reset
 
-    $ JeanX.change_face("sexy")
+    $ JeanX.change_face("_sexy")
 
     $ JeanX.action_counter["hotdog"] += 1
     $ JeanX.remaining_actions -=1
@@ -2839,11 +2839,11 @@ label Jean_HotdogAfter:
             if JeanX.love >= 500 and "unsatisfied" not in JeanX.recent_history:
                 ch_j "Ok, that was. . . fine."
             elif JeanX.obedience <= 500 and Player.focus <= 20:
-                $ JeanX.mouth = "sad"
+                $ JeanX.mouth = "_sad"
                 ch_j "I guess that could have gone worse. . ."
     elif not action_context:
         if "unsatisfied" in JeanX.recent_history:
-            $ JeanX.change_face("angry")
+            $ JeanX.change_face("_angry")
             ch_j "I think you need to get back down there."
 
     $ approval_bonus = 0

@@ -35,44 +35,44 @@ label Kitty_Handjob:
     $ approval = approval_check(KittyX, 1100, TabM = 3)
 
     if not KittyX.action_counter["handjob"] and "no_handjob" not in KittyX.recent_history:
-        $ KittyX.change_face("confused", 2)
+        $ KittyX.change_face("_confused", 2)
         ch_k "So you want a handy then?"
-        $ KittyX.blushing = 1
+        $ KittyX.blushing = "_blush1"
 
     if not KittyX.action_counter["handjob"] and approval:
         if KittyX.Forced:
-            $ KittyX.change_face("sad",1)
+            $ KittyX.change_face("_sad",1)
             $ KittyX.change_stat("love", 70, -3, 1)
             $ KittyX.change_stat("love", 20, -2, 1)
         elif KittyX.love >= (KittyX.obedience + KittyX.inhibition):
-            $ KittyX.change_face("sexy",1)
-            $ KittyX.brows = "sad"
-            $ KittyX.mouth = "smile"
+            $ KittyX.change_face("_sexy",1)
+            $ KittyX.brows = "_sad"
+            $ KittyX.mouth = "_smile"
             ch_k "I guess it could be interesting. . ."
         elif KittyX.obedience >= KittyX.inhibition:
-            $ KittyX.change_face("normal",1)
+            $ KittyX.change_face("_normal",1)
             ch_k "If you want, [KittyX.player_petname]. . ."
         elif KittyX.addiction >= 50:
-            $ KittyX.change_face("manic", 1)
+            $ KittyX.change_face("_manic", 1)
             ch_k "I kind of {i}need{/i} to. . ."
         else:
-            $ KittyX.change_face("lipbite",1)
+            $ KittyX.change_face("_lipbite",1)
             ch_k "I guess. . ."
 
     elif approval:
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("love", 70, -3, 1)
             $ KittyX.change_stat("love", 20, -2, 1)
             ch_k "That's it, right?"
         elif not Taboo and "no_taboo" in KittyX.daily_history:
             ch_k "Well, I guess if it's here. . ."
         elif "handjob" in KittyX.recent_history:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             ch_k "You're giving me carpal tunnel. . ."
             jump Kitty_HJ_Prep
         elif "handjob" in KittyX.daily_history:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Another one?",   
                 "You're going to give me calluses.", 
                 "Didn't get enough earlier?",
@@ -80,12 +80,12 @@ label Kitty_Handjob:
                 "My hand's kinda sore from earlier."])
             ch_k "[Line]"
         elif KittyX.action_counter["handjob"] < 3:
-            $ KittyX.change_face("sexy", 1)
-            $ KittyX.brows = "confused"
-            $ KittyX.mouth = "kiss"
+            $ KittyX.change_face("_sexy", 1)
+            $ KittyX.brows = "_confused"
+            $ KittyX.mouth = "_kiss"
             ch_k "Hmm, magic fingers. . ."
         else:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ KittyX.ArmPose = 2
             $ Line = renpy.random.choice(["You want some of this?",                 
                 "So you'd like another handy?",                 
@@ -96,14 +96,14 @@ label Kitty_Handjob:
 
     if approval >= 2:
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("obedience", 90, 1)
             $ KittyX.change_stat("inhibition", 60, 1)
             ch_k "Ok, fine."
         elif "no_handjob" in KittyX.daily_history:
             ch_k "OK, geeze!"
         else:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ KittyX.change_stat("love", 90, 1)
             $ KittyX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Sure, I guess.",                 
@@ -120,7 +120,7 @@ label Kitty_Handjob:
         jump Kitty_HJ_Prep
     else:
 
-        $ KittyX.change_face("angry")
+        $ KittyX.change_face("_angry")
         if "no_handjob" in KittyX.recent_history:
             ch_k "You don't[KittyX.like]listen do you, [KittyX.player_petname]."
         elif Taboo and "no_taboo" in KittyX.daily_history and "no_handjob" in KittyX.daily_history:
@@ -130,19 +130,19 @@ label Kitty_Handjob:
         elif Taboo and "no_taboo" in KittyX.daily_history:
             ch_k "I said not in public!"
         elif not KittyX.action_counter["handjob"]:
-            $ KittyX.change_face("bemused")
+            $ KittyX.change_face("_bemused")
             ch_k "I don't know, [KittyX.player_petname]. . ."
         else:
-            $ KittyX.change_face("bemused")
+            $ KittyX.change_face("_bemused")
             ch_k "Not now, ok?"
         menu:
             extend ""
             "Sorry, never mind." if "no_handjob" in KittyX.daily_history:
-                $ KittyX.change_face("bemused")
+                $ KittyX.change_face("_bemused")
                 ch_k "Yeah."
                 return
             "Maybe later?" if "no_handjob" not in KittyX.daily_history:
-                $ KittyX.change_face("sexy")
+                $ KittyX.change_face("_sexy")
                 ch_k ". . ."
                 ch_k "Maybe."
                 $ KittyX.change_stat("love", 80, 2)
@@ -155,7 +155,7 @@ label Kitty_Handjob:
                 return
             "I'd really appreciate it. . .":
                 if approval:
-                    $ KittyX.change_face("sexy")
+                    $ KittyX.change_face("_sexy")
                     $ KittyX.change_stat("obedience", 90, 2)
                     $ KittyX.change_stat("obedience", 50, 2)
                     $ KittyX.change_stat("inhibition", 70, 3)
@@ -175,7 +175,7 @@ label Kitty_Handjob:
 
                 $ approval = approval_check(KittyX, 350, "OI", TabM = 3)
                 if approval > 1 or (approval and KittyX.Forced):
-                    $ KittyX.change_face("sad")
+                    $ KittyX.change_face("_sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
                     $ KittyX.change_stat("love", 200, -2)
                     ch_k "Ok, fine."
@@ -186,40 +186,40 @@ label Kitty_Handjob:
                     jump Kitty_HJ_Prep
                 else:
                     $ KittyX.change_stat("love", 200, -15)
-                    $ KittyX.recent_history.append("angry")
-                    $ KittyX.daily_history.append("angry")
+                    $ KittyX.recent_history.append("_angry")
+                    $ KittyX.daily_history.append("_angry")
 
 
     $ KittyX.ArmPose = 1
     if "no_handjob" in KittyX.daily_history:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         ch_k "I'm not telling you again."
-        $ KittyX.recent_history.append("angry")
-        $ KittyX.daily_history.append("angry")
+        $ KittyX.recent_history.append("_angry")
+        $ KittyX.daily_history.append("_angry")
     elif KittyX.Forced:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         ch_k "Not even if you had a ten foot pole."
-        $ KittyX.change_face("surprised", 2)
+        $ KittyX.change_face("_surprised", 2)
         ch_k "I mean. . ."
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         ch_k "You know what I mean!"
         $ KittyX.change_stat("lust", 200, 5)
         if KittyX.love > 300:
             $ KittyX.change_stat("love", 70, -2)
         $ KittyX.change_stat("obedience", 50, -2)
-        $ KittyX.recent_history.append("angry")
-        $ KittyX.daily_history.append("angry")
+        $ KittyX.recent_history.append("_angry")
+        $ KittyX.daily_history.append("_angry")
     elif Taboo:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         $ KittyX.daily_history.append("no_taboo")
         ch_k "Not here, not anywhere near here."
         $ KittyX.change_stat("lust", 200, 5)
         $ KittyX.change_stat("obedience", 50, -3)
     elif KittyX.action_counter["handjob"]:
-        $ KittyX.change_face("sad")
+        $ KittyX.change_face("_sad")
         ch_k "I'm not feeling it today. . ."
     else:
-        $ KittyX.change_face("normal", 1)
+        $ KittyX.change_face("_normal", 1)
         ch_k "I don't wanna touch that."
     $ KittyX.recent_history.append("no_handjob")
     $ KittyX.daily_history.append("no_handjob")
@@ -235,13 +235,13 @@ label Kitty_HJ_Prep:
         $ KittyX.inhibition += int(Taboo/10)
         $ KittyX.lust += int(Taboo/5)
 
-    $ KittyX.change_face("sexy")
+    $ KittyX.change_face("_sexy")
     if KittyX.Forced:
-        $ KittyX.change_face("sad")
+        $ KittyX.change_face("_sad")
     elif not KittyX.action_counter["handjob"]:
-        $ KittyX.brows = "confused"
-        $ KittyX.eyes = "sexy"
-        $ KittyX.mouth = "smile"
+        $ KittyX.brows = "_confused"
+        $ KittyX.eyes = "_sexy"
+        $ KittyX.mouth = "_smile"
 
     call Seen_First_Peen (KittyX, Partner, React=action_context)
     call Kitty_HJ_Launch ("L")
@@ -260,7 +260,7 @@ label Kitty_HJ_Prep:
                 $ KittyX.change_stat("inhibition", 30, 2)
                 "[KittyX.name] continues her actions."
             "Praise her.":
-                $ KittyX.change_face("sexy", 1)
+                $ KittyX.change_face("_sexy", 1)
                 $ KittyX.change_stat("inhibition", 70, 3)
                 ch_p "Oooh, that's good, [KittyX.petname]."
                 $ KittyX.nameCheck()
@@ -269,7 +269,7 @@ label Kitty_HJ_Prep:
                 $ KittyX.change_stat("obedience", 90, 1)
                 $ KittyX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
-                $ KittyX.change_face("surprised")
+                $ KittyX.change_face("_surprised")
                 $ KittyX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that for now, [KittyX.petname]."
                 $ KittyX.nameCheck()
@@ -434,7 +434,7 @@ label Kitty_HJ_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (KittyX)
-                if "angry" in KittyX.recent_history:
+                if "_angry" in KittyX.recent_history:
                     call Kitty_HJ_Reset
                     return
                 $ KittyX.change_stat("lust", 200, 5)
@@ -449,7 +449,7 @@ label Kitty_HJ_Cycle:
             if KittyX.lust >= 100:
 
                 call Girl_Cumming (KittyX)
-                if action_context == "shift" or "angry" in KittyX.recent_history:
+                if action_context == "shift" or "_angry" in KittyX.recent_history:
                     jump Kitty_HJ_After
 
             if Line == "came":
@@ -476,7 +476,7 @@ label Kitty_HJ_Cycle:
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
         if counter == 20:
-            $ KittyX.brows = "angry"
+            $ KittyX.brows = "_angry"
             menu:
                 ch_k "Ouch, hand cramp, can we[KittyX.like]take a break?"
                 "How about a BJ?" if KittyX.remaining_actions and multi_action:
@@ -500,18 +500,18 @@ label Kitty_HJ_Cycle:
                         $ KittyX.change_stat("obedience", 80, 2)
                         "She grumbles but gets back to work."
                     else:
-                        $ KittyX.change_face("angry", 1)
+                        $ KittyX.change_face("_angry", 1)
                         "She scowls at you, drops you cock and pulls back."
                         ch_k "Hey, I've got better things to do if you're[KittyX.like]going to be a dick about it."
                         $ KittyX.change_stat("love", 50, -3, 1)
                         $ KittyX.change_stat("love", 80, -4, 1)
                         $ KittyX.change_stat("obedience", 30, -1, 1)
                         $ KittyX.change_stat("obedience", 50, -1, 1)
-                        $ KittyX.recent_history.append("angry")
-                        $ KittyX.daily_history.append("angry")
+                        $ KittyX.recent_history.append("_angry")
+                        $ KittyX.daily_history.append("_angry")
                         jump Kitty_HJ_After
         elif counter == 10 and KittyX.SEXP <= 100 and not approval_check(KittyX, 1200, "LO"):
-            $ KittyX.brows = "confused"
+            $ KittyX.brows = "_confused"
             ch_k "Can we[KittyX.Like]be done with this now? I'm getting sore."
 
 
@@ -523,12 +523,12 @@ label Kitty_HJ_Cycle:
             ch_k "For real[KittyX.like]time's up."
 
 
-    $ KittyX.change_face("bemused", 0)
+    $ KittyX.change_face("_bemused", 0)
     $ Line = 0
     ch_k "Ok, we need to take a break."
 
 label Kitty_HJ_After:
-    $ KittyX.change_face("sexy")
+    $ KittyX.change_face("_sexy")
 
     $ KittyX.action_counter["handjob"] += 1
     $ KittyX.remaining_actions -=1
@@ -542,17 +542,17 @@ label Kitty_HJ_After:
     if "Kitty Handi-Queen" in Achievements:
         pass
     elif KittyX.action_counter["handjob"] >= 10:
-        $ KittyX.change_face("smile", 1)
+        $ KittyX.change_face("_smile", 1)
         ch_k "I've kinda become[KittyX.like]a \"Handi-Queen\" or something."
         $ Achievements.append("Kitty Handi-Queen")
         $ KittyX.SEXP += 5
     elif KittyX.action_counter["handjob"] == 1:
         $ KittyX.SEXP += 10
         if KittyX.love >= 500:
-            $ KittyX.mouth = "smile"
+            $ KittyX.mouth = "_smile"
             ch_k "It was so warm to the touch. . ."
         elif Player.focus <= 20:
-            $ KittyX.mouth = "sad"
+            $ KittyX.mouth = "_sad"
             ch_k "Did that work out for you?"
     elif KittyX.action_counter["handjob"] == 5:
         ch_k "Let me know any time you need me to give you a hand."
@@ -611,56 +611,56 @@ label Kitty_Titjob:
     $ approval = approval_check(KittyX, 1200, TabM = 5)
 
     if not KittyX.action_counter["titjob"] and "no_titjob" not in KittyX.recent_history:
-        $ KittyX.change_face("surprised", 1)
-        $ KittyX.mouth = "kiss"
+        $ KittyX.change_face("_surprised", 1)
+        $ KittyX.mouth = "_kiss"
         ch_k "You want to rub your cock against my. . . breasts?"
 
     if not KittyX.action_counter["titjob"] and approval:
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("love", 70, -3, 1)
             $ KittyX.change_stat("love", 20, -2, 1)
         elif KittyX.love >= (KittyX.obedience + KittyX.inhibition):
-            $ KittyX.change_face("sexy")
-            $ KittyX.brows = "sad"
-            $ KittyX.mouth = "smile"
+            $ KittyX.change_face("_sexy")
+            $ KittyX.brows = "_sad"
+            $ KittyX.mouth = "_smile"
             ch_k "It's nice that you even thought about it."
         elif KittyX.obedience >= KittyX.inhibition:
-            $ KittyX.change_face("normal")
+            $ KittyX.change_face("_normal")
             ch_k "I mean. . ."
         elif KittyX.addiction >= 50:
-            $ KittyX.change_face("manic", 1)
+            $ KittyX.change_face("_manic", 1)
             ch_k "Hmmmm. . . ."
         else:
-            $ KittyX.change_face("sad")
-            $ KittyX.mouth = "smile"
+            $ KittyX.change_face("_sad")
+            $ KittyX.mouth = "_smile"
             ch_k "Hadn't really considered that."
     elif approval:
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("love", 70, -3, 1)
             $ KittyX.change_stat("love", 20, -2, 1)
             ch_k "This isn't going to become a habit, will it?"
         elif not Taboo and "no_taboo" in KittyX.daily_history:
             ch_k "Ok, I guess this is private enough. . ."
         elif "titjob" in KittyX.recent_history:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             ch_k "Mmm, again?"
             jump Kitty_TJ_Prep
         elif "titjob" in KittyX.daily_history:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Back again so soon?",   
                 "You're going to make me sore.", 
                 "Didn't get enough earlier?",
                 "My tits are still kinda sore from earlier."])
             ch_k "[Line]"
         elif KittyX.action_counter["titjob"] < 3:
-            $ KittyX.change_face("sexy", 1)
-            $ KittyX.brows = "confused"
-            $ KittyX.mouth = "kiss"
+            $ KittyX.change_face("_sexy", 1)
+            $ KittyX.brows = "_confused"
+            $ KittyX.mouth = "_kiss"
             ch_k "So you'd like another titjob?"
         else:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ KittyX.ArmPose = 2
             $ Line = renpy.random.choice(["You want some of this action [rubs her chest]?",                 
                 "So you'd like another titjob?",                  
@@ -673,14 +673,14 @@ label Kitty_Titjob:
 
     if approval >= 2:
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("obedience", 90, 1)
             $ KittyX.change_stat("inhibition", 60, 1)
             ch_k "Well, could be worse. . ."
         elif "no_titjob" in KittyX.daily_history:
             ch_k "Hmm, I guess. . ."
         else:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ KittyX.change_stat("love", 90, 1)
             $ KittyX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Well, sure, put it here.",                 
@@ -697,7 +697,7 @@ label Kitty_Titjob:
         jump Kitty_TJ_Prep
     else:
 
-        $ KittyX.change_face("angry")
+        $ KittyX.change_face("_angry")
         if "no_titjob" in KittyX.recent_history:
             ch_k "I {i}just{/i} told you \"no,\" [KittyX.player_petname]."
         elif Taboo and "no_taboo" in KittyX.daily_history and "no_titjob" in KittyX.daily_history:
@@ -707,19 +707,19 @@ label Kitty_Titjob:
         elif Taboo and "no_taboo" in KittyX.daily_history:
             ch_k "This is just way too exposed!"
         elif not KittyX.action_counter["titjob"]:
-            $ KittyX.change_face("bemused")
+            $ KittyX.change_face("_bemused")
             ch_k "I'm not really up for that, [KittyX.player_petname]. . ."
         else:
-            $ KittyX.change_face("bemused")
+            $ KittyX.change_face("_bemused")
             ch_k "Not, right now [KittyX.player_petname]. . ."
         menu:
             extend ""
             "Sorry, never mind." if "no_titjob" in KittyX.daily_history:
-                $ KittyX.change_face("bemused")
+                $ KittyX.change_face("_bemused")
                 ch_k "Yeah, ok, [KittyX.player_petname]."
                 return
             "Maybe later?" if "no_titjob" not in KittyX.daily_history:
-                $ KittyX.change_face("sexy")
+                $ KittyX.change_face("_sexy")
                 ch_k "Maybe."
                 $ KittyX.change_stat("love", 80, 2)
                 $ KittyX.change_stat("inhibition", 70, 2)
@@ -731,7 +731,7 @@ label Kitty_Titjob:
                 return
             "I think this could be fun for both of us. . .":
                 if approval:
-                    $ KittyX.change_face("sexy")
+                    $ KittyX.change_face("_sexy")
                     $ KittyX.change_stat("obedience", 80, 2)
                     $ KittyX.change_stat("obedience", 40, 2)
                     $ KittyX.change_stat("inhibition", 70, 3)
@@ -750,7 +750,7 @@ label Kitty_Titjob:
                     if approval >= 2 and KittyX.action_counter["blowjob"]:
                         $ KittyX.change_stat("inhibition", 80, 1)
                         $ KittyX.change_stat("inhibition", 60, 3)
-                        $ KittyX.change_face("confused", 1)
+                        $ KittyX.change_face("_confused", 1)
                         ch_k "Could I[KittyX.like]. . . blow you instead?"
                         menu:
                             ch_k "What do you say [[blowjob]?"
@@ -764,7 +764,7 @@ label Kitty_Titjob:
                     if approval and KittyX.action_counter["handjob"]:
                         $ KittyX.change_stat("inhibition", 80, 1)
                         $ KittyX.change_stat("inhibition", 60, 3)
-                        $ KittyX.change_face("confused", 1)
+                        $ KittyX.change_face("_confused", 1)
                         ch_k "Maybe you'd[KittyX.like]settle for a handy?"
                         menu:
                             ch_k "What do you say?"
@@ -786,7 +786,7 @@ label Kitty_Titjob:
                 $ KittyX.nameCheck()
                 $ approval = approval_check(KittyX, 700, "OI", TabM = 4)
                 if approval > 1 or (approval and KittyX.Forced):
-                    $ KittyX.change_face("sad")
+                    $ KittyX.change_face("_sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
                     $ KittyX.change_stat("love", 200, -2)
                     ch_k "Ok, fine, whip it out."
@@ -797,35 +797,35 @@ label Kitty_Titjob:
                     jump Kitty_TJ_Prep
                 else:
                     $ KittyX.change_stat("love", 200, -15)
-                    $ KittyX.recent_history.append("angry")
-                    $ KittyX.daily_history.append("angry")
+                    $ KittyX.recent_history.append("_angry")
+                    $ KittyX.daily_history.append("_angry")
 
 
     if "no_titjob" in KittyX.daily_history:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         ch_k "Look, I already told you no thanks, [KittyX.player_petname]."
-        $ KittyX.recent_history.append("angry")
-        $ KittyX.daily_history.append("angry")
+        $ KittyX.recent_history.append("_angry")
+        $ KittyX.daily_history.append("_angry")
     elif KittyX.Forced:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         ch_k "No, that's just weird."
         $ KittyX.change_stat("lust", 200, 5)
         if KittyX.love > 300:
             $ KittyX.change_stat("love", 70, -2)
         $ KittyX.change_stat("obedience", 50, -2)
-        $ KittyX.recent_history.append("angry")
-        $ KittyX.daily_history.append("angry")
+        $ KittyX.recent_history.append("_angry")
+        $ KittyX.daily_history.append("_angry")
     elif Taboo:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         $ KittyX.daily_history.append("no_taboo")
         ch_k "You really expect me to do that here? You realize how. . . exposed that would be?"
         $ KittyX.change_stat("lust", 200, 5)
         $ KittyX.change_stat("obedience", 50, -3)
     elif KittyX.action_counter["titjob"]:
-        $ KittyX.change_face("sad")
+        $ KittyX.change_face("_sad")
         ch_k "I think I'll let you know when I want you touching these again."
     else:
-        $ KittyX.change_face("normal", 1)
+        $ KittyX.change_face("_normal", 1)
         ch_k "How about let's not, [KittyX.player_petname]."
     $ KittyX.recent_history.append("no_titjob")
     $ KittyX.daily_history.append("no_titjob")
@@ -839,13 +839,13 @@ label Kitty_TJ_Prep:
         $ KittyX.lust += int(Taboo/5)
 
 
-    $ KittyX.change_face("sexy")
+    $ KittyX.change_face("_sexy")
     if KittyX.Forced:
-        $ KittyX.change_face("sad")
+        $ KittyX.change_face("_sad")
     elif not KittyX.action_counter["titjob"]:
-        $ KittyX.brows = "confused"
-        $ KittyX.eyes = "sexy"
-        $ KittyX.mouth = "smile"
+        $ KittyX.brows = "_confused"
+        $ KittyX.eyes = "_sexy"
+        $ KittyX.mouth = "_smile"
 
     call Seen_First_Peen (KittyX, Partner, React=action_context)
     call Kitty_TJ_Launch ("L")
@@ -862,7 +862,7 @@ label Kitty_TJ_Prep:
                 $ KittyX.change_stat("inhibition", 40, 2)
                 "[KittyX.name] starts to slide up and down."
             "Praise her.":
-                $ KittyX.change_face("sexy", 1)
+                $ KittyX.change_face("_sexy", 1)
                 $ KittyX.change_stat("inhibition", 80, 3)
                 ch_p "Oh, that sounds like a good idea, [KittyX.petname]."
                 $ KittyX.nameCheck()
@@ -871,7 +871,7 @@ label Kitty_TJ_Prep:
                 $ KittyX.change_stat("obedience", 90, 1)
                 $ KittyX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
-                $ KittyX.change_face("confused")
+                $ KittyX.change_face("_confused")
                 $ KittyX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that for now, [KittyX.petname]."
                 $ KittyX.nameCheck()
@@ -1042,7 +1042,7 @@ label Kitty_TJ_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (KittyX)
-                if "angry" in KittyX.recent_history:
+                if "_angry" in KittyX.recent_history:
                     call Kitty_TJ_Reset
                     return
                 $ KittyX.change_stat("lust", 200, 5)
@@ -1057,7 +1057,7 @@ label Kitty_TJ_Cycle:
             if KittyX.lust >= 100:
 
                 call Girl_Cumming (KittyX)
-                if action_context == "shift" or "angry" in KittyX.recent_history:
+                if action_context == "shift" or "_angry" in KittyX.recent_history:
                     jump Kitty_TJ_After
 
             if Line == "came":
@@ -1086,10 +1086,10 @@ label Kitty_TJ_Cycle:
         if KittyX.SEXP >= 100 or approval_check(KittyX, 1200, "LO"):
             pass
         elif counter == (5 + KittyX.action_counter["titjob"]):
-            $ KittyX.brows = "confused"
+            $ KittyX.brows = "_confused"
             ch_k "Are you getting close here? I'm getting as little sore."
         if counter == (10 + KittyX.action_counter["titjob"]):
-            $ KittyX.brows = "angry"
+            $ KittyX.brows = "_angry"
             menu:
                 ch_k "I'm getting rug-burn here [KittyX.player_petname]. Can we do something else?"
                 "How about a BJ?" if KittyX.remaining_actions and multi_action:
@@ -1114,15 +1114,15 @@ label Kitty_TJ_Cycle:
                         $ KittyX.change_stat("obedience", 80, 2)
                         "She grumbles but gets back to work."
                     else:
-                        $ KittyX.change_face("angry", 1)
+                        $ KittyX.change_face("_angry", 1)
                         "She scowls at you, drops you cock and pulls back."
                         ch_k "Well fuck you then."
                         $ KittyX.change_stat("love", 50, -3, 1)
                         $ KittyX.change_stat("love", 80, -4, 1)
                         $ KittyX.change_stat("obedience", 30, -1, 1)
                         $ KittyX.change_stat("obedience", 50, -1, 1)
-                        $ KittyX.recent_history.append("angry")
-                        $ KittyX.daily_history.append("angry")
+                        $ KittyX.recent_history.append("_angry")
+                        $ KittyX.daily_history.append("_angry")
                         jump Kitty_TJ_After
 
 
@@ -1134,12 +1134,12 @@ label Kitty_TJ_Cycle:
             ch_k "For real[KittyX.like]time's up."
 
 
-    $ KittyX.change_face("bemused", 0)
+    $ KittyX.change_face("_bemused", 0)
     $ Line = 0
     ch_k "Ok, we need to take a break."
 
 label Kitty_TJ_After:
-    $ KittyX.change_face("sexy")
+    $ KittyX.change_face("_sexy")
 
     $ KittyX.action_counter["titjob"] += 1
     $ KittyX.remaining_actions -=1
@@ -1154,10 +1154,10 @@ label Kitty_TJ_After:
     elif KittyX.action_counter["titjob"] == 1:
         $ KittyX.SEXP += 12
         if KittyX.love >= 500:
-            $ KittyX.mouth = "smile"
+            $ KittyX.mouth = "_smile"
             ch_k "That was kinda fun."
         elif Player.focus <= 20:
-            $ KittyX.mouth = "sad"
+            $ KittyX.mouth = "_sad"
             ch_k "Well I hope you got something out of that."
     elif KittyX.action_counter["titjob"] == 5:
         ch_k "Huh, I guess these are good for something."
@@ -1211,48 +1211,48 @@ label Kitty_Blowjob:
     $ approval = approval_check(KittyX, 1300, TabM = 4)
 
     if not KittyX.action_counter["blowjob"] and "no_blowjob" not in KittyX.recent_history:
-        $ KittyX.change_face("surprised", 2)
-        $ KittyX.mouth = "kiss"
+        $ KittyX.change_face("_surprised", 2)
+        $ KittyX.mouth = "_kiss"
         ch_k "You want me to suck your dick?"
         if KittyX.action_counter["handjob"]:
-            $ KittyX.mouth = "smile"
+            $ KittyX.mouth = "_smile"
             ch_k "Not satisfied with handies?"
-        $ KittyX.blushing = 1
+        $ KittyX.blushing = "_blush1"
 
     if not KittyX.action_counter["blowjob"] and approval:
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("love", 70, -3, 1)
             $ KittyX.change_stat("love", 20, -2, 1)
         elif KittyX.love >= (KittyX.obedience + KittyX.inhibition):
-            $ KittyX.change_face("sexy")
-            $ KittyX.brows = "sad"
-            $ KittyX.mouth = "smile"
+            $ KittyX.change_face("_sexy")
+            $ KittyX.brows = "_sad"
+            $ KittyX.mouth = "_smile"
             ch_k "I have wondered what you. . . taste like."
         elif KittyX.obedience >= KittyX.inhibition:
-            $ KittyX.change_face("normal")
+            $ KittyX.change_face("_normal")
             ch_k "If you want me to. . ."
         elif KittyX.addiction >= 50:
-            $ KittyX.change_face("manic", 1)
+            $ KittyX.change_face("_manic", 1)
             ch_k "My mouth is watering. . ."
         else:
-            $ KittyX.change_face("sad")
-            $ KittyX.mouth = "smile"
+            $ KittyX.change_face("_sad")
+            $ KittyX.mouth = "_smile"
             ch_k "[KittyX.Like]sure. . ."
     elif approval:
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("love", 70, -3, 1)
             $ KittyX.change_stat("love", 20, -2, 1)
             ch_k "You want me to do that again?"
         elif not Taboo and "no_taboo" in KittyX.daily_history:
             ch_k "Ok, I guess this is private enough. . ."
         elif "blowjob" in KittyX.recent_history:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             ch_k "Mmm, again? [[stretches her jaw]"
             jump Kitty_BJ_Prep
         elif "blowjob" in KittyX.daily_history:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Back again so soon?",   
                 "You're going to give me lockhee- . . . jaw.", 
                 "Let me get some saliva going.",
@@ -1261,12 +1261,12 @@ label Kitty_Blowjob:
                 "My jaw's still a bit sore from earlier."])
             ch_k "[Line]"
         elif KittyX.action_counter["blowjob"] < 3:
-            $ KittyX.change_face("sexy", 1)
-            $ KittyX.brows = "confused"
-            $ KittyX.mouth = "kiss"
+            $ KittyX.change_face("_sexy", 1)
+            $ KittyX.brows = "_confused"
+            $ KittyX.mouth = "_kiss"
             ch_k "So you'd like another blowjob?"
         else:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ KittyX.ArmPose = 2
             $ Line = renpy.random.choice(["You want me to [mimes blowing]?",                 
                 "So you wanna 'nother blowjob?",                 
@@ -1278,14 +1278,14 @@ label Kitty_Blowjob:
 
     if approval >= 2:
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("obedience", 90, 1)
             $ KittyX.change_stat("inhibition", 60, 1)
             ch_k "Whatever."
         elif "no_blowjob" in KittyX.daily_history:
             ch_k "Ok, fine, I suppose it isn't {i}sooo{/i} bad. . ."
         else:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ KittyX.change_stat("love", 90, 1)
             $ KittyX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Well, sure, ahhhhhh.",                 
@@ -1302,7 +1302,7 @@ label Kitty_Blowjob:
         jump Kitty_BJ_Prep
     else:
 
-        $ KittyX.change_face("angry")
+        $ KittyX.change_face("_angry")
         if "no_blowjob" in KittyX.recent_history:
             ch_k "What did I[KittyX.like]{i}just{/i} tell you [KittyX.player_petname]."
         elif Taboo and "no_taboo" in KittyX.daily_history and "no_blowjob" in KittyX.daily_history:
@@ -1312,19 +1312,19 @@ label Kitty_Blowjob:
         elif Taboo and "no_taboo" in KittyX.daily_history:
             ch_k "I told you this is too public!"
         elif not KittyX.action_counter["blowjob"]:
-            $ KittyX.change_face("bemused")
+            $ KittyX.change_face("_bemused")
             ch_k "I don't know about the taste, [KittyX.player_petname]. . ."
         else:
-            $ KittyX.change_face("bemused")
+            $ KittyX.change_face("_bemused")
             ch_k "Later, [KittyX.player_petname]!"
         menu:
             extend ""
             "Sorry, never mind." if "no_blowjob" in KittyX.daily_history:
-                $ KittyX.change_face("bemused")
+                $ KittyX.change_face("_bemused")
                 ch_k "Aw, it's ok, [KittyX.player_petname]."
                 return
             "Maybe later?" if "no_blowjob" not in KittyX.daily_history:
-                $ KittyX.change_face("sexy")
+                $ KittyX.change_face("_sexy")
                 ch_k "You[KittyX.like]never know, [KittyX.player_petname]."
                 $ KittyX.change_stat("love", 80, 2)
                 $ KittyX.change_stat("inhibition", 70, 2)
@@ -1336,7 +1336,7 @@ label Kitty_Blowjob:
                 return
             "Come on, please?":
                 if approval:
-                    $ KittyX.change_face("sexy")
+                    $ KittyX.change_face("_sexy")
                     $ KittyX.change_stat("obedience", 90, 2)
                     $ KittyX.change_stat("obedience", 50, 2)
                     $ KittyX.change_stat("inhibition", 70, 3)
@@ -1354,7 +1354,7 @@ label Kitty_Blowjob:
                     if approval_check(KittyX, 1100, TabM = 3):
                         $ KittyX.change_stat("inhibition", 80, 1)
                         $ KittyX.change_stat("inhibition", 60, 3)
-                        $ KittyX.change_face("confused", 1)
+                        $ KittyX.change_face("_confused", 1)
                         $ KittyX.ArmPose = 1
                         if KittyX.action_counter["handjob"]:
                             ch_k "Maybe I could just use my hand?"
@@ -1378,7 +1378,7 @@ label Kitty_Blowjob:
                 $ KittyX.nameCheck()
                 $ approval = approval_check(KittyX, 750, "OI", TabM = 3)
                 if approval > 1 or (approval and KittyX.Forced):
-                    $ KittyX.change_face("sad")
+                    $ KittyX.change_face("_sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
                     $ KittyX.change_stat("love", 200, -2)
                     ch_k "Ok, fine. . ."
@@ -1389,39 +1389,39 @@ label Kitty_Blowjob:
                     jump Kitty_BJ_Prep
                 else:
                     $ KittyX.change_stat("love", 200, -15)
-                    $ KittyX.recent_history.append("angry")
-                    $ KittyX.daily_history.append("angry")
+                    $ KittyX.recent_history.append("_angry")
+                    $ KittyX.daily_history.append("_angry")
 
 
     if "no_blowjob" in KittyX.daily_history:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         ch_k "You can eat a dick, 'cos I'm not."
-        $ KittyX.recent_history.append("angry")
-        $ KittyX.daily_history.append("angry")
+        $ KittyX.recent_history.append("_angry")
+        $ KittyX.daily_history.append("_angry")
     elif KittyX.Forced:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         ch_k "I just can't do that!"
         $ KittyX.change_stat("lust", 200, 5)
         if KittyX.love > 300:
             $ KittyX.change_stat("love", 70, -2)
         $ KittyX.change_stat("obedience", 50, -2)
-        $ KittyX.recent_history.append("angry")
-        $ KittyX.daily_history.append("angry")
+        $ KittyX.recent_history.append("_angry")
+        $ KittyX.daily_history.append("_angry")
         $ KittyX.recent_history.append("no_blowjob")
         $ KittyX.daily_history.append("no_blowjob")
         return
     elif Taboo:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         $ KittyX.daily_history.append("no_taboo")
         ch_k "This is way too exposed!"
         $ KittyX.change_stat("lust", 200, 5)
         $ KittyX.change_stat("obedience", 50, -3)
         return
     elif KittyX.action_counter["blowjob"]:
-        $ KittyX.change_face("sad")
+        $ KittyX.change_face("_sad")
         ch_k "No, not this time."
     else:
-        $ KittyX.change_face("normal", 1)
+        $ KittyX.change_face("_normal", 1)
         ch_k "Nope."
     $ KittyX.recent_history.append("no_blowjob")
     $ KittyX.daily_history.append("no_blowjob")
@@ -1436,13 +1436,13 @@ label Kitty_BJ_Prep:
         $ KittyX.inhibition += int(Taboo/10)
         $ KittyX.lust += int(Taboo/5)
 
-    $ KittyX.change_face("sexy")
+    $ KittyX.change_face("_sexy")
     if KittyX.Forced:
-        $ KittyX.change_face("sad")
+        $ KittyX.change_face("_sad")
     elif not KittyX.action_counter["blowjob"]:
-        $ KittyX.brows = "confused"
-        $ KittyX.eyes = "sexy"
-        $ KittyX.mouth = "smile"
+        $ KittyX.brows = "_confused"
+        $ KittyX.eyes = "_sexy"
+        $ KittyX.mouth = "_smile"
 
     call Seen_First_Peen (KittyX, Partner, React=action_context)
     call Kitty_BJ_Launch ("L")
@@ -1458,7 +1458,7 @@ label Kitty_BJ_Prep:
                 $ KittyX.change_stat("inhibition", 40, 2)
                 "[KittyX.name] continues licking at it."
             "Praise her.":
-                $ KittyX.change_face("sexy", 1)
+                $ KittyX.change_face("_sexy", 1)
                 $ KittyX.change_stat("inhibition", 80, 3)
                 ch_p "Hmmm, keep doing that, [KittyX.petname]."
                 $ KittyX.nameCheck()
@@ -1467,7 +1467,7 @@ label Kitty_BJ_Prep:
                 $ KittyX.change_stat("obedience", 90, 1)
                 $ KittyX.change_stat("obedience", 50, 2)
             "Ask her to stop.":
-                $ KittyX.change_face("surprised")
+                $ KittyX.change_face("_surprised")
                 $ KittyX.change_stat("inhibition", 70, 1)
                 ch_p "Let's not do that for now, [KittyX.petname]."
                 $ KittyX.nameCheck()
@@ -1673,7 +1673,7 @@ label Kitty_BJ_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (KittyX)
-                if "angry" in KittyX.recent_history:
+                if "_angry" in KittyX.recent_history:
                     call Kitty_BJ_Reset
                     return
                 $ KittyX.change_stat("lust", 200, 5)
@@ -1688,7 +1688,7 @@ label Kitty_BJ_Cycle:
             if KittyX.lust >= 100:
 
                 call Girl_Cumming (KittyX)
-                if action_context == "shift" or "angry" in KittyX.recent_history:
+                if action_context == "shift" or "_angry" in KittyX.recent_history:
                     jump Kitty_BJ_After
 
             if Line == "came":
@@ -1716,7 +1716,7 @@ label Kitty_BJ_Cycle:
         if KittyX.SEXP >= 100 or approval_check(KittyX, 1200, "LO"):
             pass
         elif counter == (10 + KittyX.action_counter["blowjob"]):
-            $ KittyX.brows = "angry"
+            $ KittyX.brows = "_angry"
             menu:
                 ch_k "I'm[KittyX.like]totally worn out here. Can we do something else?"
                 "How about a Handy?" if KittyX.remaining_actions and multi_action:
@@ -1741,18 +1741,18 @@ label Kitty_BJ_Cycle:
                         $ KittyX.change_stat("obedience", 80, 2)
                         "She grumbles but gets back to work."
                     else:
-                        $ KittyX.change_face("angry", 1)
+                        $ KittyX.change_face("_angry", 1)
                         "She scowls at you, drops you cock and pulls back."
                         ch_k "Well fuck you then."
                         $ KittyX.change_stat("love", 50, -3, 1)
                         $ KittyX.change_stat("love", 80, -4, 1)
                         $ KittyX.change_stat("obedience", 30, -1, 1)
                         $ KittyX.change_stat("obedience", 50, -1, 1)
-                        $ KittyX.recent_history.append("angry")
-                        $ KittyX.daily_history.append("angry")
+                        $ KittyX.recent_history.append("_angry")
+                        $ KittyX.daily_history.append("_angry")
                         jump Kitty_BJ_After
         elif counter == (5 + KittyX.action_counter["blowjob"]) and KittyX.SEXP <= 100 and not approval_check(KittyX, 1200, "LO"):
-            $ KittyX.brows = "confused"
+            $ KittyX.brows = "_confused"
             ch_k "Are you getting close here? I'm cramping up."
 
 
@@ -1764,12 +1764,12 @@ label Kitty_BJ_Cycle:
             ch_k "For real[KittyX.like]time's up."
 
 
-    $ KittyX.change_face("bemused", 0)
+    $ KittyX.change_face("_bemused", 0)
     $ Line = 0
     ch_k "Ok, I gotta rest my jaw for a minute. . ."
 
 label Kitty_BJ_After:
-    $ KittyX.change_face("sexy")
+    $ KittyX.change_face("_sexy")
 
     $ KittyX.action_counter["blowjob"] += 1
     $ KittyX.remaining_actions -=1
@@ -1782,7 +1782,7 @@ label Kitty_BJ_After:
     if "Kitty Jobber" in Achievements:
         pass
     elif KittyX.action_counter["blowjob"] >= 10:
-        $ KittyX.change_face("smile", 1)
+        $ KittyX.change_face("_smile", 1)
         ch_k "I can't[KittyX.like]get your taste out of my mind."
         $ Achievements.append("Kitty Jobber")
         $ KittyX.SEXP += 5
@@ -1791,29 +1791,29 @@ label Kitty_BJ_After:
     elif KittyX.action_counter["blowjob"] == 1:
         $ KittyX.SEXP += 15
         if KittyX.love >= 500:
-            $ KittyX.mouth = "smile"
+            $ KittyX.mouth = "_smile"
             ch_k "Huh, that wasn't bad."
         elif Player.focus <= 20:
-            $ KittyX.mouth = "sad"
+            $ KittyX.mouth = "_sad"
             ch_k "I hope you enjoyed that."
     elif KittyX.action_counter["blowjob"] == 5:
         ch_k "I'm getting better at this. . . right?"
         menu:
             "[[nod]":
-                $ KittyX.change_face("smile", 1)
+                $ KittyX.change_face("_smile", 1)
                 $ KittyX.change_stat("love", 90, 15)
                 $ KittyX.change_stat("obedience", 80, 5)
                 $ KittyX.change_stat("inhibition", 90, 10)
             "[[shake head \"no\"]":
                 if approval_check(KittyX, 500, "O"):
-                    $ KittyX.change_face("sad", 2)
+                    $ KittyX.change_face("_sad", 2)
                     $ KittyX.change_stat("love", 200, -5)
                 else:
-                    $ KittyX.change_face("angry", 2)
+                    $ KittyX.change_face("_angry", 2)
                     $ KittyX.change_stat("love", 200, -25)
                 $ KittyX.change_stat("obedience", 80, 10)
                 ch_k ". . ."
-                $ KittyX.change_face("sad", 1)
+                $ KittyX.change_face("_sad", 1)
 
     $ approval_bonus = 0
     if action_context != "shift":
@@ -1827,9 +1827,9 @@ label Kitty_BJ_After:
 
 
 label Kitty_Dildo_Check:
-    if "dildo" in Player.inventory:
+    if "_dildo" in Player.inventory:
         "You pull out a large rubber dildo. Lucky you remembered to keep it handy."
-    elif "dildo" in KittyX.inventory:
+    elif "_dildo" in KittyX.inventory:
         "You ask [KittyX.name] to get out her favorite Dildo."
     else:
         "You don't have one of those on you."
@@ -1880,7 +1880,7 @@ label Kitty_Dildo_Pussy:
                 $ KittyX.upskirt = 1
             elif KittyX.PantsNum() > 6:
                 "[KittyX.name] grabs her dildo, pulling down her pants as she does."
-                $ KittyX.legs = 0
+                $ KittyX.legs = ""
             else:
                 "[KittyX.name] grabs her dildo, rubbing is suggestively against her crotch."
             $ KittyX.SeenPanties = 1
@@ -1892,7 +1892,7 @@ label Kitty_Dildo_Pussy:
                     $ KittyX.change_stat("inhibition", 50, 2)
                     "[KittyX.name] slides it in."
                 "Go for it.":
-                    $ KittyX.change_face("sexy", 1)
+                    $ KittyX.change_face("_sexy", 1)
                     $ KittyX.change_stat("inhibition", 80, 3)
                     ch_p "Oh yeah, [KittyX.petname], let's do this."
                     $ KittyX.nameCheck()
@@ -1901,7 +1901,7 @@ label Kitty_Dildo_Pussy:
                     $ KittyX.change_stat("obedience", 90, 1)
                     $ KittyX.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ KittyX.change_face("surprised")
+                    $ KittyX.change_face("_surprised")
                     $ KittyX.change_stat("inhibition", 70, 1)
                     ch_p "Let's not do that right now, [KittyX.petname]."
                     $ KittyX.nameCheck()
@@ -1919,30 +1919,30 @@ label Kitty_Dildo_Pussy:
 
     if action_context == "auto":
         "You rub the dildo across her body, and along her moist slit."
-        $ KittyX.change_face("surprised", 1)
+        $ KittyX.change_face("_surprised", 1)
 
         if (KittyX.action_counter["dildo_pussy"] and approval) or (approval > 1):
             "[KittyX.name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
-            $ KittyX.change_face("sexy")
+            $ KittyX.change_face("_sexy")
             $ KittyX.change_stat("obedience", 70, 3)
             $ KittyX.change_stat("inhibition", 50, 3)
             $ KittyX.change_stat("inhibition", 70, 1)
             ch_k "Ooo, [KittyX.player_petname], toys!"
             jump Kitty_DP_Prep
         else:
-            $ KittyX.brows = "angry"
+            $ KittyX.brows = "_angry"
             menu:
                 ch_k "Hey, what are you planning to do with that?!"
                 "Sorry, sorry! Never mind.":
                     if approval:
-                        $ KittyX.change_face("sexy", 1)
+                        $ KittyX.change_face("_sexy", 1)
                         $ KittyX.change_stat("obedience", 70, 3)
                         $ KittyX.change_stat("inhibition", 50, 3)
                         $ KittyX.change_stat("inhibition", 70, 1)
                         ch_k "Well, now that you mention it. . ."
                         jump Kitty_DP_Prep
                     "You pull back before you really get it in."
-                    $ KittyX.change_face("bemused", 1)
+                    $ KittyX.change_face("_bemused", 1)
                     if KittyX.action_counter["dildo_pussy"]:
                         ch_k "Well ok, [KittyX.player_petname], maybe warn me next time?"
                     else:
@@ -1954,7 +1954,7 @@ label Kitty_Dildo_Pussy:
                     $ KittyX.change_stat("obedience", 70, 3)
                     $ KittyX.change_stat("inhibition", 50, 3)
                     if not approval_check(KittyX, 700, "O", TabM=1):
-                        $ KittyX.change_face("angry")
+                        $ KittyX.change_face("_angry")
                         "[KittyX.name] shoves you away and slaps you in the face."
                         ch_k "Jerk!"
                         ch_k "Ask nice if you want to stick something in my pussy!"
@@ -1965,10 +1965,10 @@ label Kitty_Dildo_Pussy:
                             $ renpy.pop_call()
                         if renpy.showing("Kitty_SexSprite"):
                             call Kitty_Sex_Reset
-                        $ KittyX.recent_history.append("angry")
-                        $ KittyX.daily_history.append("angry")
+                        $ KittyX.recent_history.append("_angry")
+                        $ KittyX.daily_history.append("_angry")
                     else:
-                        $ KittyX.change_face("sad")
+                        $ KittyX.change_face("_sad")
                         "[KittyX.name] doesn't seem to be into this, you're lucky she's so obedient."
                         jump Kitty_DP_Prep
         return
@@ -1976,58 +1976,58 @@ label Kitty_Dildo_Pussy:
 
     if not KittyX.action_counter["dildo_pussy"]:
 
-        $ KittyX.change_face("surprised", 1)
-        $ KittyX.mouth = "kiss"
+        $ KittyX.change_face("_surprised", 1)
+        $ KittyX.mouth = "_kiss"
         ch_k "Hmmm, so you'd like to try out some toys?"
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             ch_k "I suppose there are worst things you could ask for."
 
     if not KittyX.action_counter["dildo_pussy"] and approval:
 
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("love", 70, -3, 1)
             $ KittyX.change_stat("love", 20, -2, 1)
         elif KittyX.love >= (KittyX.obedience + KittyX.inhibition):
-            $ KittyX.change_face("sexy")
-            $ KittyX.brows = "sad"
-            $ KittyX.mouth = "smile"
+            $ KittyX.change_face("_sexy")
+            $ KittyX.brows = "_sad"
+            $ KittyX.mouth = "_smile"
             ch_k "I've had a reasonable amount of experience with these, you know. . ."
         elif KittyX.obedience >= KittyX.inhibition:
-            $ KittyX.change_face("normal")
+            $ KittyX.change_face("_normal")
             ch_k "If that's what you want, [KittyX.player_petname]. . ."
         else:
-            $ KittyX.change_face("sad")
-            $ KittyX.mouth = "smile"
+            $ KittyX.change_face("_sad")
+            $ KittyX.mouth = "_smile"
             ch_k "I guess it could be fun with a partner. . ."
 
     elif approval:
 
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("love", 70, -3, 1)
             $ KittyX.change_stat("love", 20, -2, 1)
             ch_k "The toys again?"
         elif not Taboo and "no_taboo" in KittyX.daily_history:
             ch_k "Well, at least you got us some privacy this time. . ."
         elif "dildo_pussy" in KittyX.recent_history:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             ch_k "Mmm, again? Ok, let's get to it."
             jump Kitty_DP_Prep
         elif "dildo_pussy" in KittyX.daily_history:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Breaking out the toys again?",       
                     "Didn't get enough earlier?",
                     "You're going to wear me out."])
             ch_k "[Line]"
         elif KittyX.action_counter["dildo_pussy"] < 3:
-            $ KittyX.change_face("sexy", 1)
-            $ KittyX.brows = "confused"
-            $ KittyX.mouth = "kiss"
+            $ KittyX.change_face("_sexy", 1)
+            $ KittyX.brows = "_confused"
+            $ KittyX.mouth = "_kiss"
             ch_k "You want to stick it in my pussy again?"
         else:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ KittyX.ArmPose = 2
             $ Line = renpy.random.choice(["You want some of this action?",                 
                     "So you'd like another go?",                 
@@ -2039,12 +2039,12 @@ label Kitty_Dildo_Pussy:
     if approval >= 2:
 
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("obedience", 90, 1)
             $ KittyX.change_stat("inhibition", 60, 1)
             ch_k "Ok, fine."
         else:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ KittyX.change_stat("love", 90, 1)
             $ KittyX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Well, sure, stick it in.",                 
@@ -2062,7 +2062,7 @@ label Kitty_Dildo_Pussy:
     else:
 
 
-        $ KittyX.change_face("angry")
+        $ KittyX.change_face("_angry")
         if "no_dildo" in KittyX.recent_history:
             ch_k "What part of \"no,\" did you not get, [KittyX.player_petname]?"
         elif Taboo and "no_taboo" in KittyX.daily_history and "no_dildo" in KittyX.daily_history:
@@ -2072,19 +2072,19 @@ label Kitty_Dildo_Pussy:
         elif Taboo and "no_taboo" in KittyX.daily_history:
             ch_k "Stop swinging that thing around in public!"
         elif not KittyX.action_counter["dildo_pussy"]:
-            $ KittyX.change_face("bemused")
+            $ KittyX.change_face("_bemused")
             ch_k "I'm just not into toys, [KittyX.player_petname]. . ."
         else:
-            $ KittyX.change_face("bemused")
+            $ KittyX.change_face("_bemused")
             ch_k "I don't think we need any toys, [KittyX.player_petname]."
         menu:
             extend ""
             "Sorry, never mind." if "no_dildo" in KittyX.daily_history:
-                $ KittyX.change_face("bemused")
+                $ KittyX.change_face("_bemused")
                 ch_k "Yeah, ok, [KittyX.player_petname]."
                 return
             "Maybe later?" if "no_dildo" not in KittyX.daily_history:
-                $ KittyX.change_face("sexy")
+                $ KittyX.change_face("_sexy")
                 ch_k "Maybe I'll practice on my own time, [KittyX.player_petname]."
                 $ KittyX.change_stat("love", 80, 2)
                 $ KittyX.change_stat("inhibition", 70, 2)
@@ -2096,7 +2096,7 @@ label Kitty_Dildo_Pussy:
                 return
             "I think you'd like it. . .":
                 if approval:
-                    $ KittyX.change_face("sexy")
+                    $ KittyX.change_face("_sexy")
                     $ KittyX.change_stat("obedience", 90, 2)
                     $ KittyX.change_stat("obedience", 50, 2)
                     $ KittyX.change_stat("inhibition", 70, 3)
@@ -2113,7 +2113,7 @@ label Kitty_Dildo_Pussy:
 
                 $ approval = approval_check(KittyX, 950, "OI", TabM = 3)
                 if approval > 1 or (approval and KittyX.Forced):
-                    $ KittyX.change_face("sad")
+                    $ KittyX.change_face("_sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
                     $ KittyX.change_stat("love", 200, -5)
                     ch_k "Ok, fine. If we're going to do this, stick it in already."
@@ -2124,36 +2124,36 @@ label Kitty_Dildo_Pussy:
                     jump Kitty_DP_Prep
                 else:
                     $ KittyX.change_stat("love", 200, -20)
-                    $ KittyX.recent_history.append("angry")
-                    $ KittyX.daily_history.append("angry")
+                    $ KittyX.recent_history.append("_angry")
+                    $ KittyX.daily_history.append("_angry")
 
 
     $ KittyX.ArmPose = 1
     if "no_dildo" in KittyX.daily_history:
         ch_k "Learn to take \"no\" for an answer, [KittyX.player_petname]."
-        $ KittyX.recent_history.append("angry")
-        $ KittyX.daily_history.append("angry")
+        $ KittyX.recent_history.append("_angry")
+        $ KittyX.daily_history.append("_angry")
     elif KittyX.Forced:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         ch_k "I'm not going to let you use that on me."
         $ KittyX.change_stat("lust", 200, 5)
         if KittyX.love > 300:
             $ KittyX.change_stat("love", 70, -2)
         $ KittyX.change_stat("obedience", 50, -2)
-        $ KittyX.recent_history.append("angry")
-        $ KittyX.daily_history.append("angry")
+        $ KittyX.recent_history.append("_angry")
+        $ KittyX.daily_history.append("_angry")
     elif Taboo:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         $ KittyX.recent_history.append("no_taboo")
         $ KittyX.daily_history.append("no_taboo")
         ch_k "Not here!"
         $ KittyX.change_stat("lust", 200, 5)
         $ KittyX.change_stat("obedience", 50, -3)
     elif KittyX.action_counter["dildo_pussy"]:
-        $ KittyX.change_face("sad")
+        $ KittyX.change_face("_sad")
         ch_k "Sorry, you can keep your toys to yourself."
     else:
-        $ KittyX.change_face("normal", 1)
+        $ KittyX.change_face("_normal", 1)
         ch_k "No way."
     $ KittyX.recent_history.append("no_dildo")
     $ KittyX.daily_history.append("no_dildo")
@@ -2167,7 +2167,7 @@ label Kitty_DP_Prep:
     if not KittyX.Forced and action_context != "auto":
         $ approval_bonus = 15 if KittyX.PantsNum() > 6 else 0
         call Bottoms_Off (KittyX)
-        if "angry" in KittyX.recent_history:
+        if "_angry" in KittyX.recent_history:
             return
 
     $ approval_bonus = 0
@@ -2325,7 +2325,7 @@ label Kitty_DP_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (KittyX)
-                if "angry" in KittyX.recent_history:
+                if "_angry" in KittyX.recent_history:
                     call Kitty_Pos_Reset
                     return
                 $ KittyX.change_stat("lust", 200, 5)
@@ -2340,7 +2340,7 @@ label Kitty_DP_Cycle:
             if KittyX.lust >= 100:
 
                 call Girl_Cumming (KittyX)
-                if action_context == "shift" or "angry" in KittyX.recent_history:
+                if action_context == "shift" or "_angry" in KittyX.recent_history:
                     jump Kitty_DP_After
 
             if Line == "came":
@@ -2369,12 +2369,12 @@ label Kitty_DP_Cycle:
         if KittyX.SEXP >= 100 or approval_check(KittyX, 1200, "LO"):
             pass
         elif counter == (5 + KittyX.action_counter["dildo_pussy"]):
-            $ KittyX.brows = "confused"
+            $ KittyX.brows = "_confused"
             ch_k "What are you even doing down there?"
         elif KittyX.lust >= 80:
             pass
         elif counter == (15 + KittyX.action_counter["dildo_pussy"]) and KittyX.SEXP >= 15 and not approval_check(KittyX, 1500):
-            $ KittyX.brows = "confused"
+            $ KittyX.brows = "_confused"
             menu:
                 ch_k "[KittyX.player_petname], this is getting uncomfortable, maybe we could try something else."
                 "Finish up.":
@@ -2391,7 +2391,7 @@ label Kitty_DP_Cycle:
                         $ KittyX.change_stat("obedience", 80, 2)
                         "She grumbles but lets you keep going."
                     else:
-                        $ KittyX.change_face("angry", 1)
+                        $ KittyX.change_face("_angry", 1)
                         call Kitty_Pos_Reset
                         "She scowls at you and pulls back."
                         ch_k "Well if that's your attitude, I don't need your \"help\"."
@@ -2399,8 +2399,8 @@ label Kitty_DP_Cycle:
                         $ KittyX.change_stat("love", 80, -4, 1)
                         $ KittyX.change_stat("obedience", 30, -1, 1)
                         $ KittyX.change_stat("obedience", 50, -1, 1)
-                        $ KittyX.recent_history.append("angry")
-                        $ KittyX.daily_history.append("angry")
+                        $ KittyX.recent_history.append("_angry")
+                        $ KittyX.daily_history.append("_angry")
                         jump Kitty_DP_After
 
 
@@ -2410,7 +2410,7 @@ label Kitty_DP_Cycle:
             ch_k "For real[KittyX.like]time's up."
 
 
-    $ KittyX.change_face("bemused", 0)
+    $ KittyX.change_face("_bemused", 0)
     $ Line = 0
     ch_k "Ok, we need to take a break."
 
@@ -2419,7 +2419,7 @@ label Kitty_DP_After:
     if not action_context:
         call Kitty_Pos_Reset
 
-    $ KittyX.change_face("sexy")
+    $ KittyX.change_face("_sexy")
 
     $ KittyX.action_counter["dildo_pussy"] += 1
     $ KittyX.remaining_actions -=1
@@ -2432,7 +2432,7 @@ label Kitty_DP_After:
             if KittyX.love >= 500 and "unsatisfied" not in KittyX.recent_history:
                 ch_k "Thanks for the extra hand. . ."
             elif KittyX.obedience <= 500 and Player.focus <= 20:
-                $ KittyX.change_face("perplexed", 1)
+                $ KittyX.change_face("_perplexed", 1)
                 ch_k "Did you like that?"
 
     $ approval_bonus = 0
@@ -2498,7 +2498,7 @@ label Kitty_Dildo_Ass:
                 $ KittyX.upskirt = 1
             elif KittyX.PantsNum() > 6:
                 "[KittyX.name] grabs her dildo, pulling down her pants as she does."
-                $ KittyX.legs = 0
+                $ KittyX.legs = ""
             else:
                 "[KittyX.name] grabs her dildo, rubbing is suggestively against her ass."
             $ KittyX.SeenPanties = 1
@@ -2510,7 +2510,7 @@ label Kitty_Dildo_Ass:
                     $ KittyX.change_stat("inhibition", 50, 2)
                     "[KittyX.name] slides it in."
                 "Go for it.":
-                    $ KittyX.change_face("sexy", 1)
+                    $ KittyX.change_face("_sexy", 1)
                     $ KittyX.change_stat("inhibition", 80, 3)
                     ch_p "Oh yeah, [KittyX.petname], let's do this."
                     $ KittyX.nameCheck()
@@ -2519,7 +2519,7 @@ label Kitty_Dildo_Ass:
                     $ KittyX.change_stat("obedience", 90, 1)
                     $ KittyX.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ KittyX.change_face("surprised")
+                    $ KittyX.change_face("_surprised")
                     $ KittyX.change_stat("inhibition", 70, 1)
                     ch_p "Let's not do that right now, [KittyX.petname]."
                     $ KittyX.nameCheck()
@@ -2537,12 +2537,12 @@ label Kitty_Dildo_Ass:
 
     if action_context == "auto":
         "You rub the dildo across her body, and against her tight anus."
-        $ KittyX.change_face("surprised", 1)
+        $ KittyX.change_face("_surprised", 1)
 
         if (KittyX.action_counter["dildo_ass"] and approval) or (approval > 1):
 
             "[KittyX.name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
-            $ KittyX.change_face("sexy")
+            $ KittyX.change_face("_sexy")
             $ KittyX.change_stat("obedience", 70, 3)
             $ KittyX.change_stat("inhibition", 50, 3)
             $ KittyX.change_stat("inhibition", 70, 1)
@@ -2550,19 +2550,19 @@ label Kitty_Dildo_Ass:
             jump Kitty_DA_Prep
         else:
 
-            $ KittyX.brows = "angry"
+            $ KittyX.brows = "_angry"
             menu:
                 ch_k "Hey, what are you planning to do with that?!"
                 "Sorry, sorry! Never mind.":
                     if approval:
-                        $ KittyX.change_face("sexy", 1)
+                        $ KittyX.change_face("_sexy", 1)
                         $ KittyX.change_stat("obedience", 70, 3)
                         $ KittyX.change_stat("inhibition", 50, 3)
                         $ KittyX.change_stat("inhibition", 70, 1)
                         ch_k "Well, now that you mention it. . ."
                         jump Kitty_DA_Prep
                     "You pull back before you really get it in."
-                    $ KittyX.change_face("bemused", 1)
+                    $ KittyX.change_face("_bemused", 1)
                     if KittyX.action_counter["dildo_ass"]:
                         ch_k "Well ok, [KittyX.player_petname], maybe warn me next time?"
                     else:
@@ -2574,7 +2574,7 @@ label Kitty_Dildo_Ass:
                     $ KittyX.change_stat("obedience", 70, 3)
                     $ KittyX.change_stat("inhibition", 50, 3)
                     if not approval_check(KittyX, 700, "O", TabM=1):
-                        $ KittyX.change_face("angry")
+                        $ KittyX.change_face("_angry")
                         "[KittyX.name] shoves you away and slaps you in the face."
                         ch_k "Jerk!"
                         ch_k "Ask nice if you want to stick something in my ass!"
@@ -2585,10 +2585,10 @@ label Kitty_Dildo_Ass:
                             $ renpy.pop_call()
                         if renpy.showing("Kitty_SexSprite"):
                             call Kitty_Sex_Reset
-                        $ KittyX.recent_history.append("angry")
-                        $ KittyX.daily_history.append("angry")
+                        $ KittyX.recent_history.append("_angry")
+                        $ KittyX.daily_history.append("_angry")
                     else:
-                        $ KittyX.change_face("sad")
+                        $ KittyX.change_face("_sad")
                         "[KittyX.name] doesn't seem to be into this, you're lucky she's so obedient."
                         jump Kitty_DA_Prep
         return
@@ -2596,40 +2596,40 @@ label Kitty_Dildo_Ass:
 
     if not KittyX.action_counter["dildo_ass"]:
 
-        $ KittyX.change_face("surprised", 1)
-        $ KittyX.mouth = "kiss"
+        $ KittyX.change_face("_surprised", 1)
+        $ KittyX.mouth = "_kiss"
         ch_k "You want to try and fit that. . .?"
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             ch_k "Always about the butt, huh?"
 
     if not KittyX.used_to_anal and ("dildo_anal" in KittyX.recent_history or "anal" in KittyX.recent_history or "dildo_anal" in KittyX.daily_history or "anal" in KittyX.daily_history):
-        $ KittyX.change_face("bemused", 1)
+        $ KittyX.change_face("_bemused", 1)
         ch_k "I'm still[KittyX.like]sore from earlier. . ."
 
     if not KittyX.action_counter["dildo_ass"] and approval:
 
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("love", 70, -3, 1)
             $ KittyX.change_stat("love", 20, -2, 1)
         elif KittyX.love >= (KittyX.obedience + KittyX.inhibition):
-            $ KittyX.change_face("sexy")
-            $ KittyX.brows = "sad"
-            $ KittyX.mouth = "smile"
+            $ KittyX.change_face("_sexy")
+            $ KittyX.brows = "_sad"
+            $ KittyX.mouth = "_smile"
             ch_k "I[KittyX.like]haven't actually used one of these, back there before. . ."
         elif KittyX.obedience >= KittyX.inhibition:
-            $ KittyX.change_face("normal")
+            $ KittyX.change_face("_normal")
             ch_k "If that's what you want, [KittyX.player_petname]. . ."
         else:
-            $ KittyX.change_face("sad")
-            $ KittyX.mouth = "smile"
+            $ KittyX.change_face("_sad")
+            $ KittyX.mouth = "_smile"
             ch_k "I guess it could be fun two-player. . ."
 
     elif approval:
 
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("love", 70, -3, 1)
             $ KittyX.change_stat("love", 20, -2, 1)
             ch_k "The toys again?"
@@ -2638,19 +2638,19 @@ label Kitty_Dildo_Ass:
         elif "dildo_anal" in KittyX.daily_history and not KittyX.used_to_anal:
             pass
         elif "dildo_anal" in KittyX.daily_history:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Breaking out the toys again?",       
                     "Didn't get enough earlier?",
                     "I'm still a bit sore from earlier.",
                     "You're going to wear me out."])
             ch_k "[Line]"
         elif KittyX.action_counter["dildo_ass"] < 3:
-            $ KittyX.change_face("sexy", 1)
-            $ KittyX.brows = "confused"
-            $ KittyX.mouth = "kiss"
+            $ KittyX.change_face("_sexy", 1)
+            $ KittyX.brows = "_confused"
+            $ KittyX.mouth = "_kiss"
             ch_k "You want to stick it in my ass again?"
         else:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ KittyX.ArmPose = 2
             $ Line = renpy.random.choice(["You want some of this action?",                 
                     "So you'd like another go?",                 
@@ -2662,12 +2662,12 @@ label Kitty_Dildo_Ass:
     if approval >= 2:
 
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("obedience", 90, 1)
             $ KittyX.change_stat("inhibition", 60, 1)
             ch_k "Ok, fine."
         else:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ KittyX.change_stat("love", 90, 1)
             $ KittyX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Well, sure, stick it in.",                 
@@ -2685,7 +2685,7 @@ label Kitty_Dildo_Ass:
     else:
 
 
-        $ KittyX.change_face("angry")
+        $ KittyX.change_face("_angry")
         if "no_dildo" in KittyX.recent_history:
             ch_k "What part of \"no,\" did you not get, [KittyX.player_petname]?"
         elif Taboo and "no_taboo" in KittyX.daily_history and "no_dildo" in KittyX.daily_history:
@@ -2695,22 +2695,22 @@ label Kitty_Dildo_Ass:
         elif Taboo and "no_taboo" in KittyX.daily_history:
             ch_k "I already told you that I wouldn't do that out here!"
         elif not KittyX.action_counter["dildo_ass"]:
-            $ KittyX.change_face("bemused")
+            $ KittyX.change_face("_bemused")
             ch_k "I'm just not into toys, [KittyX.player_petname]. . ."
         elif not KittyX.used_to_anal and "dildo_anal" not in KittyX.daily_history:
-            $ KittyX.change_face("perplexed")
+            $ KittyX.change_face("_perplexed")
             ch_k "You could have been a bit more gentle last time, [KittyX.player_petname]. . ."
         else:
-            $ KittyX.change_face("bemused")
+            $ KittyX.change_face("_bemused")
             ch_k "I don't think we need any toys, [KittyX.player_petname]."
         menu:
             extend ""
             "Sorry, never mind." if "no_dildo" in KittyX.daily_history:
-                $ KittyX.change_face("bemused")
+                $ KittyX.change_face("_bemused")
                 ch_k "Yeah, ok, [KittyX.player_petname]."
                 return
             "Maybe later?" if "no_dildo" not in KittyX.daily_history:
-                $ KittyX.change_face("sexy")
+                $ KittyX.change_face("_sexy")
                 ch_k "Maybe I'll practice on my own time, [KittyX.player_petname]."
                 $ KittyX.change_stat("love", 80, 2)
                 $ KittyX.change_stat("inhibition", 70, 2)
@@ -2722,7 +2722,7 @@ label Kitty_Dildo_Ass:
                 return
             "I think you'd like it. . .":
                 if approval:
-                    $ KittyX.change_face("sexy")
+                    $ KittyX.change_face("_sexy")
                     $ KittyX.change_stat("obedience", 90, 2)
                     $ KittyX.change_stat("obedience", 50, 2)
                     $ KittyX.change_stat("inhibition", 70, 3)
@@ -2739,7 +2739,7 @@ label Kitty_Dildo_Ass:
 
                 $ approval = approval_check(KittyX, 1050, "OI", TabM = 3)
                 if approval > 1 or (approval and KittyX.Forced):
-                    $ KittyX.change_face("sad")
+                    $ KittyX.change_face("_sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
                     $ KittyX.change_stat("love", 200, -5)
                     ch_k "Ok, fine. If we're going to do this, stick it in already."
@@ -2750,39 +2750,39 @@ label Kitty_Dildo_Ass:
                     jump Kitty_DA_Prep
                 else:
                     $ KittyX.change_stat("love", 200, -20)
-                    $ KittyX.recent_history.append("angry")
-                    $ KittyX.daily_history.append("angry")
+                    $ KittyX.recent_history.append("_angry")
+                    $ KittyX.daily_history.append("_angry")
 
 
     $ KittyX.ArmPose = 1
     if "no_dildo" in KittyX.daily_history:
         ch_k "Learn to take \"no\" for an answer, [KittyX.player_petname]."
-        $ KittyX.recent_history.append("angry")
-        $ KittyX.daily_history.append("angry")
+        $ KittyX.recent_history.append("_angry")
+        $ KittyX.daily_history.append("_angry")
     elif KittyX.Forced:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         ch_k "I'm not going to let you use that on me."
         $ KittyX.change_stat("lust", 200, 5)
         if KittyX.love > 300:
             $ KittyX.change_stat("love", 70, -2)
         $ KittyX.change_stat("obedience", 50, -2)
-        $ KittyX.recent_history.append("angry")
-        $ KittyX.daily_history.append("angry")
+        $ KittyX.recent_history.append("_angry")
+        $ KittyX.daily_history.append("_angry")
     elif Taboo:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         $ KittyX.recent_history.append("no_taboo")
         $ KittyX.daily_history.append("no_taboo")
         ch_k "Not here!"
         $ KittyX.change_stat("lust", 200, 5)
         $ KittyX.change_stat("obedience", 50, -3)
     elif not KittyX.used_to_anal and "dildo_anal" in KittyX.daily_history:
-        $ KittyX.change_face("bemused")
+        $ KittyX.change_face("_bemused")
         ch_k "Sorry, I just need a little break back there, [KittyX.player_petname]."
     elif KittyX.action_counter["dildo_ass"]:
-        $ KittyX.change_face("sad")
+        $ KittyX.change_face("_sad")
         ch_k "Sorry, you can keep your toys out of there."
     else:
-        $ KittyX.change_face("normal", 1)
+        $ KittyX.change_face("_normal", 1)
         ch_k "No way."
     $ KittyX.recent_history.append("no_dildo")
     $ KittyX.daily_history.append("no_dildo")
@@ -2796,7 +2796,7 @@ label Kitty_DA_Prep:
     if not KittyX.Forced and action_context != "auto":
         $ approval_bonus = 20 if KittyX.PantsNum() > 6 else 0
         call Bottoms_Off (KittyX)
-        if "angry" in KittyX.recent_history:
+        if "_angry" in KittyX.recent_history:
             return
 
     $ approval_bonus = 0
@@ -2946,7 +2946,7 @@ label Kitty_DA_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (KittyX)
-                if "angry" in KittyX.recent_history:
+                if "_angry" in KittyX.recent_history:
                     call Kitty_Pos_Reset
                     return
                 $ KittyX.change_stat("lust", 200, 5)
@@ -2961,7 +2961,7 @@ label Kitty_DA_Cycle:
             if KittyX.lust >= 100:
 
                 call Girl_Cumming (KittyX)
-                if action_context == "shift" or "angry" in KittyX.recent_history:
+                if action_context == "shift" or "_angry" in KittyX.recent_history:
                     jump Kitty_DA_After
 
             if Line == "came":
@@ -2990,12 +2990,12 @@ label Kitty_DA_Cycle:
         if KittyX.SEXP >= 100 or approval_check(KittyX, 1200, "LO"):
             pass
         elif counter == (5 + KittyX.action_counter["dildo_ass"]):
-            $ KittyX.brows = "confused"
+            $ KittyX.brows = "_confused"
             ch_k "What are you even doing down there?"
         elif KittyX.lust >= 80:
             pass
         elif counter == (15 + KittyX.action_counter["dildo_ass"]) and KittyX.SEXP >= 15 and not approval_check(KittyX, 1500):
-            $ KittyX.brows = "confused"
+            $ KittyX.brows = "_confused"
             menu:
                 ch_k "[KittyX.player_petname], this is getting uncomfortable, maybe we could try something else."
                 "Finish up.":
@@ -3012,7 +3012,7 @@ label Kitty_DA_Cycle:
                         $ KittyX.change_stat("obedience", 80, 2)
                         "She grumbles but lets you keep going."
                     else:
-                        $ KittyX.change_face("angry", 1)
+                        $ KittyX.change_face("_angry", 1)
                         call Kitty_Pos_Reset
                         "She scowls at you and pulls back."
                         ch_k "Well if that's your attitude, I don't need your \"help\"."
@@ -3020,8 +3020,8 @@ label Kitty_DA_Cycle:
                         $ KittyX.change_stat("love", 80, -4, 1)
                         $ KittyX.change_stat("obedience", 30, -1, 1)
                         $ KittyX.change_stat("obedience", 50, -1, 1)
-                        $ KittyX.recent_history.append("angry")
-                        $ KittyX.daily_history.append("angry")
+                        $ KittyX.recent_history.append("_angry")
+                        $ KittyX.daily_history.append("_angry")
                         jump Kitty_DA_After
 
 
@@ -3031,7 +3031,7 @@ label Kitty_DA_Cycle:
             ch_k "For real[KittyX.like]time's up."
 
 
-    $ KittyX.change_face("bemused", 0)
+    $ KittyX.change_face("_bemused", 0)
     $ Line = 0
     ch_k "Ok, we need to take a break."
 
@@ -3039,7 +3039,7 @@ label Kitty_DA_After:
     if not action_context:
         call Kitty_Pos_Reset
 
-    $ KittyX.change_face("sexy")
+    $ KittyX.change_face("_sexy")
 
     $ KittyX.action_counter["dildo_ass"] += 1
     $ KittyX.remaining_actions -=1
@@ -3055,7 +3055,7 @@ label Kitty_DA_After:
                 else:
                     ch_k "Ouch. . ."
             elif KittyX.obedience <= 500 and Player.focus <= 20:
-                $ KittyX.change_face("perplexed", 1)
+                $ KittyX.change_face("_perplexed", 1)
                 ch_k "Did you like that?"
 
     $ approval_bonus = 0
@@ -3067,9 +3067,9 @@ label Kitty_DA_After:
 
 
 label Kitty_Vibrator_Check:
-    if "vibrator" in Player.inventory:
+    if "_vibrator" in Player.inventory:
         "You pull out the \"shocker\" vibrator, handy."
-    elif "vibrator" in KittyX.inventory:
+    elif "_vibrator" in KittyX.inventory:
         "You ask [KittyX.name] to get out her vibrator."
     else:
         "You don't have one of those on you."
@@ -3122,7 +3122,7 @@ label Kitty_Footjob:
                     $ KittyX.change_stat("inhibition", 30, 2)
                     "[KittyX.name] continues her actions."
                 "Praise her.":
-                    $ KittyX.change_face("sexy", 1)
+                    $ KittyX.change_face("_sexy", 1)
                     $ KittyX.change_stat("inhibition", 70, 3)
                     ch_p "Oooh, that's good, [KittyX.petname]."
                     $ KittyX.nameCheck()
@@ -3131,7 +3131,7 @@ label Kitty_Footjob:
                     $ KittyX.change_stat("obedience", 90, 1)
                     $ KittyX.change_stat("obedience", 50, 2)
                 "Ask her to stop.":
-                    $ KittyX.change_face("surprised")
+                    $ KittyX.change_face("_surprised")
                     $ KittyX.change_stat("inhibition", 70, 1)
                     ch_p "Let's not do that for now, [KittyX.petname]."
                     $ KittyX.nameCheck()
@@ -3150,44 +3150,44 @@ label Kitty_Footjob:
             return
 
     if not KittyX.action_counter["footjob"] and "no_foot" not in KittyX.recent_history:
-        $ KittyX.change_face("confused", 2)
+        $ KittyX.change_face("_confused", 2)
         ch_k "Huh, so you'd like me to touch your cock with my feet?"
-        $ KittyX.blushing = 1
+        $ KittyX.blushing = "_blush1"
 
     if not KittyX.action_counter["footjob"] and approval:
         if KittyX.Forced:
-            $ KittyX.change_face("sad",1)
+            $ KittyX.change_face("_sad",1)
             $ KittyX.change_stat("love", 70, -3, 1)
             $ KittyX.change_stat("love", 20, -2, 1)
         elif KittyX.love >= (KittyX.obedience + KittyX.inhibition):
-            $ KittyX.change_face("sexy",1)
-            $ KittyX.brows = "sad"
-            $ KittyX.mouth = "smile"
+            $ KittyX.change_face("_sexy",1)
+            $ KittyX.brows = "_sad"
+            $ KittyX.mouth = "_smile"
             ch_k "I guess it couldn't hurt. . ."
         elif KittyX.obedience >= KittyX.inhibition:
-            $ KittyX.change_face("normal",1)
+            $ KittyX.change_face("_normal",1)
             ch_k "If you want, [KittyX.player_petname]. . ."
         elif KittyX.addiction >= 50:
-            $ KittyX.change_face("manic", 1)
+            $ KittyX.change_face("_manic", 1)
             ch_k "Okay. . ."
         else:
-            $ KittyX.change_face("lipbite",1)
+            $ KittyX.change_face("_lipbite",1)
             ch_k "Sure. . ."
 
     elif approval:
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("love", 70, -3, 1)
             $ KittyX.change_stat("love", 20, -2, 1)
             ch_k "That's all?"
         elif not Taboo and "no_taboo" in KittyX.daily_history:
             ch_k "Um, I guess this is secluded enough. . ."
         elif "foot" in KittyX.recent_history:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             ch_k "I'm getting foot cramps. . ."
             jump Kitty_FJ_Prep
         elif "foot" in KittyX.daily_history:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ Line = renpy.random.choice(["Another one?",   
                 "You're going to give me calluses.", 
                 "Didn't get enough earlier?",
@@ -3195,12 +3195,12 @@ label Kitty_Footjob:
                 "My feet are kinda sore from earlier."])
             ch_k "[Line]"
         elif KittyX.action_counter["footjob"] < 3:
-            $ KittyX.change_face("sexy", 1)
-            $ KittyX.brows = "confused"
-            $ KittyX.mouth = "kiss"
+            $ KittyX.change_face("_sexy", 1)
+            $ KittyX.brows = "_confused"
+            $ KittyX.mouth = "_kiss"
             ch_k "Hmm, magic toes. . ."
         else:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ KittyX.ArmPose = 2
             $ Line = renpy.random.choice(["You want me to use my feet?",                 
                 "So you'd like another foot sesh?",                 
@@ -3211,14 +3211,14 @@ label Kitty_Footjob:
 
     if approval >= 2:
         if KittyX.Forced:
-            $ KittyX.change_face("sad")
+            $ KittyX.change_face("_sad")
             $ KittyX.change_stat("obedience", 90, 1)
             $ KittyX.change_stat("inhibition", 60, 1)
             ch_k "Ok, fine."
         elif "no_foot" in KittyX.daily_history:
             ch_k "OK, geeze!"
         else:
-            $ KittyX.change_face("sexy", 1)
+            $ KittyX.change_face("_sexy", 1)
             $ KittyX.change_stat("love", 90, 1)
             $ KittyX.change_stat("inhibition", 50, 3)
             $ Line = renpy.random.choice(["Sure, I guess.",                 
@@ -3235,7 +3235,7 @@ label Kitty_Footjob:
         jump Kitty_FJ_Prep
     else:
 
-        $ KittyX.change_face("angry")
+        $ KittyX.change_face("_angry")
         if "no_foot" in KittyX.recent_history:
             ch_k "You don't[KittyX.like]listen do you, [KittyX.player_petname]."
         elif Taboo and "no_taboo" in KittyX.daily_history and "no_foot" in KittyX.daily_history:
@@ -3245,19 +3245,19 @@ label Kitty_Footjob:
         elif Taboo and "no_taboo" in KittyX.daily_history:
             ch_k "I said not in public!"
         elif not KittyX.action_counter["footjob"]:
-            $ KittyX.change_face("bemused")
+            $ KittyX.change_face("_bemused")
             ch_k "I don't know, [KittyX.player_petname]. . ."
         else:
-            $ KittyX.change_face("bemused")
+            $ KittyX.change_face("_bemused")
             ch_k "Not now, ok?"
         menu:
             extend ""
             "Sorry, never mind." if "no_foot" in KittyX.daily_history:
-                $ KittyX.change_face("bemused")
+                $ KittyX.change_face("_bemused")
                 ch_k "Yeah."
                 return
             "Maybe later?" if "no_foot" not in KittyX.daily_history:
-                $ KittyX.change_face("sexy")
+                $ KittyX.change_face("_sexy")
                 ch_k ". . ."
                 ch_k "Maybe."
                 $ KittyX.change_stat("love", 80, 2)
@@ -3270,7 +3270,7 @@ label Kitty_Footjob:
                 return
             "I'd really appreciate it. . .":
                 if approval:
-                    $ KittyX.change_face("sexy")
+                    $ KittyX.change_face("_sexy")
                     $ KittyX.change_stat("obedience", 90, 2)
                     $ KittyX.change_stat("obedience", 50, 2)
                     $ KittyX.change_stat("inhibition", 70, 3)
@@ -3290,7 +3290,7 @@ label Kitty_Footjob:
 
                 $ approval = approval_check(KittyX, 400, "OI", TabM = 3)
                 if approval > 1 or (approval and KittyX.Forced):
-                    $ KittyX.change_face("sad")
+                    $ KittyX.change_face("_sad")
                     $ KittyX.change_stat("love", 70, -5, 1)
                     $ KittyX.change_stat("love", 200, -2)
                     ch_k "Ok, fine."
@@ -3301,36 +3301,36 @@ label Kitty_Footjob:
                     jump Kitty_FJ_Prep
                 else:
                     $ KittyX.change_stat("love", 200, -15)
-                    $ KittyX.recent_history.append("angry")
-                    $ KittyX.daily_history.append("angry")
+                    $ KittyX.recent_history.append("_angry")
+                    $ KittyX.daily_history.append("_angry")
 
 
     $ KittyX.ArmPose = 1
     if "no_foot" in KittyX.daily_history:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         ch_k "I'm not telling you again."
-        $ KittyX.recent_history.append("angry")
-        $ KittyX.daily_history.append("angry")
+        $ KittyX.recent_history.append("_angry")
+        $ KittyX.daily_history.append("_angry")
     elif KittyX.Forced:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         ch_k "I don't even want to step on it."
         $ KittyX.change_stat("lust", 200, 5)
         if KittyX.love > 300:
             $ KittyX.change_stat("love", 70, -2)
         $ KittyX.change_stat("obedience", 50, -2)
-        $ KittyX.recent_history.append("angry")
-        $ KittyX.daily_history.append("angry")
+        $ KittyX.recent_history.append("_angry")
+        $ KittyX.daily_history.append("_angry")
     elif Taboo:
-        $ KittyX.change_face("angry", 1)
+        $ KittyX.change_face("_angry", 1)
         $ KittyX.daily_history.append("no_taboo")
         ch_k "Not here, not anywhere near here."
         $ KittyX.change_stat("lust", 200, 5)
         $ KittyX.change_stat("obedience", 50, -3)
     elif KittyX.action_counter["footjob"]:
-        $ KittyX.change_face("sad")
+        $ KittyX.change_face("_sad")
         ch_k "I'm not feeling it today. . ."
     else:
-        $ KittyX.change_face("normal", 1)
+        $ KittyX.change_face("_normal", 1)
         ch_k "I don't know about using my feet for. . . that."
     $ KittyX.recent_history.append("no_foot")
     $ KittyX.daily_history.append("no_foot")
@@ -3346,13 +3346,13 @@ label Kitty_FJ_Prep:
         $ KittyX.inhibition += int(Taboo/10)
         $ KittyX.lust += int(Taboo/5)
 
-    $ KittyX.change_face("sexy")
+    $ KittyX.change_face("_sexy")
     if KittyX.Forced:
-        $ KittyX.change_face("sad")
+        $ KittyX.change_face("_sad")
     elif not KittyX.action_counter["footjob"]:
-        $ KittyX.brows = "confused"
-        $ KittyX.eyes = "sexy"
-        $ KittyX.mouth = "smile"
+        $ KittyX.brows = "_confused"
+        $ KittyX.eyes = "_sexy"
+        $ KittyX.mouth = "_smile"
 
     call Seen_First_Peen (KittyX, Partner, React=action_context)
 
@@ -3524,7 +3524,7 @@ label Kitty_FJ_Cycle:
             if Player.focus >= 100:
 
                 call Player_Cumming (KittyX)
-                if "angry" in KittyX.recent_history:
+                if "_angry" in KittyX.recent_history:
                     call Kitty_Sex_Reset
                     return
                 $ KittyX.change_stat("lust", 200, 5)
@@ -3539,7 +3539,7 @@ label Kitty_FJ_Cycle:
             if KittyX.lust >= 100:
 
                 call Girl_Cumming (KittyX)
-                if action_context == "shift" or "angry" in KittyX.recent_history:
+                if action_context == "shift" or "_angry" in KittyX.recent_history:
                     jump Kitty_FJ_After
 
             if Line == "came":
@@ -3566,7 +3566,7 @@ label Kitty_FJ_Cycle:
         $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
 
         if counter == 20:
-            $ KittyX.brows = "angry"
+            $ KittyX.brows = "_angry"
             menu:
                 ch_k "Ouch, foot cramp, can we[KittyX.like]take a break?"
                 "How about a BJ?" if KittyX.remaining_actions and multi_action:
@@ -3596,18 +3596,18 @@ label Kitty_FJ_Cycle:
                         $ KittyX.change_stat("obedience", 80, 2)
                         "She grumbles but gets back to work."
                     else:
-                        $ KittyX.change_face("angry", 1)
+                        $ KittyX.change_face("_angry", 1)
                         "She scowls at you, drops you cock and pulls back."
                         ch_k "Hey, I've got better things to do if you're[KittyX.like]going to be a dick about it."
                         $ KittyX.change_stat("love", 50, -3, 1)
                         $ KittyX.change_stat("love", 80, -4, 1)
                         $ KittyX.change_stat("obedience", 30, -1, 1)
                         $ KittyX.change_stat("obedience", 50, -1, 1)
-                        $ KittyX.recent_history.append("angry")
-                        $ KittyX.daily_history.append("angry")
+                        $ KittyX.recent_history.append("_angry")
+                        $ KittyX.daily_history.append("_angry")
                         jump Kitty_FJ_After
         elif counter == 10 and KittyX.SEXP <= 100 and not approval_check(KittyX, 1200, "LO"):
-            $ KittyX.brows = "confused"
+            $ KittyX.brows = "_confused"
             ch_k "Can we[KittyX.Like]be done with this now? I'm getting sore."
 
 
@@ -3619,12 +3619,12 @@ label Kitty_FJ_Cycle:
             ch_k "For real[KittyX.like]time's up."
 
 
-    $ KittyX.change_face("bemused", 0)
+    $ KittyX.change_face("_bemused", 0)
     $ Line = 0
     ch_k "Ok, we need to take a break."
 
 label Kitty_FJ_After:
-    $ KittyX.change_face("sexy")
+    $ KittyX.change_face("_sexy")
 
     $ KittyX.action_counter["footjob"] += 1
     $ KittyX.remaining_actions -=1
@@ -3638,17 +3638,17 @@ label Kitty_FJ_After:
     if "Kittypedi" in Achievements:
         pass
     elif KittyX.action_counter["footjob"] >= 10:
-        $ KittyX.change_face("smile", 1)
+        $ KittyX.change_face("_smile", 1)
         ch_k "I guess I've gotten pretty smooth at the \"Kittypedi.\""
         $ Achievements.append("Kittypedi")
         $ KittyX.SEXP += 5
     elif KittyX.action_counter["footjob"] == 1:
         $ KittyX.SEXP += 10
         if KittyX.love >= 500:
-            $ KittyX.mouth = "smile"
+            $ KittyX.mouth = "_smile"
             ch_k "I could feel you down there. . ."
         elif Player.focus <= 20:
-            $ KittyX.mouth = "sad"
+            $ KittyX.mouth = "_sad"
             ch_k "Did that work out for you?"
     elif KittyX.action_counter["footjob"] == 5:
         ch_k "Let me know any time you need me to \"foot you up.\""

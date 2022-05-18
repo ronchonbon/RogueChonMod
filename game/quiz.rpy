@@ -15,11 +15,11 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
     if Party[0] == RogueX:
         if not RogueX.top and not RogueX.legs and RogueX.PantiesNum <= 5:
 
-            $ RogueX.change_face("sly")
+            $ RogueX.change_face("_sly")
             ch_r "Well, I did consider suggesting we do some \"strip studying,\". . ."
-            $ RogueX.eyes = "down"
+            $ RogueX.eyes = "_down"
             ch_r "but it looks like I got ahead of myself. . ."
-            $ RogueX.eyes = "squint"
+            $ RogueX.eyes = "_squint"
             ch_r "Did you have anything else in mind?"
             call Rogue_SexMenu
             return
@@ -30,34 +30,34 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
         "[KittyX.name] takes the book from your hand, and sets it aside."
         if not KittyX.top and not KittyX.legs:
 
-            $ KittyX.change_face("sly")
+            $ KittyX.change_face("_sly")
             ch_k "I was[KittyX.like]thinking about maybe \"strip studying,\". . ."
-            $ KittyX.eyes = "down"
+            $ KittyX.eyes = "_down"
             ch_k "but it would be a pretty short game. . ."
-            $ KittyX.eyes = "squint"
+            $ KittyX.eyes = "_squint"
             ch_k "Was there something you'd rather do?"
             call Kitty_SexMenu
             return
         "She then asks if maybe you want to do some \"strip studying?\""
-        $ KittyX.change_face("perplexed", 2)
+        $ KittyX.change_face("_perplexed", 2)
         ch_k "Ok, so[KittyX.like]if you get a question right. . . I'll take off a piece of clothing. . ."
         ch_k "But you only get three tries."
-        $ KittyX.change_face("sly", 1)
+        $ KittyX.change_face("_sly", 1)
     elif Party[0] == EmmaX:
         call Emma_StripStudy_Intro
         if not _return:
 
             return
         ch_e "I take the education process very seriously."
-        $ EmmaX.change_face("bemused", Eyes="side")
+        $ EmmaX.change_face("_bemused", Eyes="_side")
         ch_e "So you get a question right. . . "
         ch_e ". . ."
-        $ EmmaX.change_face("sly")
+        $ EmmaX.change_face("_sly")
         ch_e "I'll take off a piece of clothing. . ."
         ch_e "But you only get three tries."
     elif Party[0] == LauraX:
 
-        $ LauraX.change_face("sly", 1)
+        $ LauraX.change_face("_sly", 1)
         "[LauraX.name] takes the book from your hand, and sets it aside."
         ch_l "I'm kinda bored, did you just wanna feel me up or something?"
         menu:
@@ -83,22 +83,22 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
 
                     jump Laura_SexMenu
             "I really think we should be studying.":
-                $ LauraX.change_face("perplexed", 1)
+                $ LauraX.change_face("_perplexed", 1)
                 ch_l "?"
                 $ LauraX.change_stat("love", 80, -5)
                 $ LauraX.change_stat("obedience", 70, 10)
                 $ LauraX.change_stat("inhibition", 70, -5)
                 if approval_check(LauraX,600,"L"):
-                    $ LauraX.change_face("sadside", 1)
+                    $ LauraX.change_face("_sadside", 1)
                 else:
-                    $ LauraX.change_face("angry", 1)
+                    $ LauraX.change_face("_angry", 1)
                 ch_l "Huh. Ok. Be that way."
         return
     elif Party[0] == JeanX:
 
         "[JeanX.name] takes the book from your hand, and sets it aside."
         ch_j "This is -boring!-"
-        $ JeanX.change_face("sly", 1)
+        $ JeanX.change_face("_sly", 1)
         ch_j "How about we just fool around a bit?"
         menu:
             "Sure?":
@@ -123,45 +123,45 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
 
                     jump Jean_SexMenu
             "I really think we should be studying.":
-                $ JeanX.change_face("perplexed", 1)
+                $ JeanX.change_face("_perplexed", 1)
                 ch_j "Seriously?"
                 $ JeanX.change_stat("love", 80, -5)
                 $ JeanX.change_stat("obedience", 70, 10)
                 $ JeanX.change_stat("inhibition", 70, -5)
                 if approval_check(JeanX,600,"L"):
-                    $ JeanX.change_face("sadside", 1)
+                    $ JeanX.change_face("_sadside", 1)
                 else:
-                    $ JeanX.change_face("angry", 1)
+                    $ JeanX.change_face("_angry", 1)
                 ch_j "Huh. Ok. Fine."
                 "It was not fine. . ."
         return
     elif Party[0] == StormX:
         ch_s "I suppose that you may need some encouragment. . ."
-        $ StormX.change_face("bemused", Eyes="side")
+        $ StormX.change_face("_bemused", Eyes="_side")
         ch_s "If you do get a question right. . . "
         ch_s ". . ."
-        $ StormX.change_face("sly")
+        $ StormX.change_face("_sly")
         ch_s "I could remove an article of clothing. . ."
         ch_s "You get three mistakes, make them count."
     elif Party[0] == JubesX:
         "[JubesX.name] takes the book from your hand, and sets it aside."
         if not JubesX.top and not JubesX.legs:
 
-            $ JubesX.change_face("sly")
+            $ JubesX.change_face("_sly")
             ch_v "I was thinking of maybe doing some \"strip studying,\". . ."
-            $ JubesX.eyes = "down"
+            $ JubesX.eyes = "_down"
             ch_v "but where would be the fun in that? . ."
-            $ JubesX.eyes = "squint"
+            $ JubesX.eyes = "_squint"
             ch_v "Was there anything else you'd wanna do instead?"
             call Jubes_SexMenu
             return
         "Hey, would you maybe be interested in \"strip studying?\""
-        $ JubesX.change_face("perplexed", 2)
+        $ JubesX.change_face("_perplexed", 2)
         ch_v "I mean, you can figure out the rules, right?"
         ch_v "I ask a question, you answer. . ."
         ch_v "-but you only get three strikes and you're out."
         ch_v "Get a question -right,- and maybe I get more naked. . ."
-        $ JubesX.change_face("sly", 1)
+        $ JubesX.change_face("_sly", 1)
 
 
     $ BO = Party[:]
@@ -248,7 +248,7 @@ label Strip_Study_Right:
     if Party[0].hose:
 
         $ Line = Party[0].hose
-        $ Party[0].hose = 0
+        $ Party[0].hose = ""
         "She slowly removes her [Line]. . ."
         $ Party[0].change_stat("lust", 50, 3)
         return
@@ -259,7 +259,7 @@ label Strip_Study_Right:
             $ Party[0].change_stat("inhibition", 25, 1)
             $ Party[0].change_stat("inhibition", 50, 1)
             $ Line = Party[0].top
-            $ Party[0].top = 0
+            $ Party[0].top = ""
             "She pulls her [Line] off and throws it aside."
             if not Party[0].bra:
                 call expression Party[0].tag + "_First_Topless"
@@ -271,9 +271,9 @@ label Strip_Study_Right:
             elif Party[0] == EmmaX:
                 ch_e "Sorry, I don't mean to be a tease, but I doubt you can handle this yet."
             elif Party[0] == LauraX:
-                $ LauraX.change_face("sly", 2)
+                $ LauraX.change_face("_sly", 2)
                 ch_l "Heh, got you going, right?."
-                $ LauraX.change_face("bemused", 1)
+                $ LauraX.change_face("_bemused", 1)
             elif Party[0] == JeanX:
                 ch_j "Kidding."
 
@@ -290,7 +290,7 @@ label Strip_Study_Right:
             $ Party[0].change_stat("inhibition", 30, 1)
             $ Party[0].change_stat("inhibition", 50, 1)
             $ Line = Party[0].legs
-            $ Party[0].legs = 0
+            $ Party[0].legs = ""
             "She unfastens her [Line] and slides them down her legs."
             if Party[0].underwear:
                 if not Party[0].SeenPanties:
@@ -299,7 +299,7 @@ label Strip_Study_Right:
                     $ Party[0].SeenPanties = 1
             else:
 
-                $ Party[0].blushing = 1
+                $ Party[0].blushing = "_blush1"
                 "You notice that she apparently isn't wearing any panties, and she flushes a bit."
                 call expression Party[0].tag + "_First_Bottomless"
         else:
@@ -324,7 +324,7 @@ label Strip_Study_Right:
             $ Party[0].change_stat("inhibition", 50, 2)
             $ Party[0].change_stat("inhibition", 200, 1)
             $ Line = Party[0].bra
-            $ Party[0].bra = 0
+            $ Party[0].bra = ""
             "She pulls her [Line] over her head and tosses it aside."
             if not Party[0].SeenChest:
                 $ Party[0].change_stat("inhibition", 200, 3)
@@ -337,9 +337,9 @@ label Strip_Study_Right:
             elif Party[0] == KittyX:
                 ch_k "So. . . I know this is a bit late to mention it, but I'd like to keep my top on?"
             elif Party[0] == EmmaX:
-                $ EmmaX.change_face("perplexed", 1)
+                $ EmmaX.change_face("_perplexed", 1)
                 ch_e "Hmm. . . better than I thought."
-                $ EmmaX.change_face("sly", 1)
+                $ EmmaX.change_face("_sly", 1)
                 ch_e "But I doubt you're ready for this yet."
             elif Party[0] == LauraX:
                 ch_l "Yeah, that's enough for now."
@@ -356,7 +356,7 @@ label Strip_Study_Right:
             $ Party[0].change_stat("inhibition", 70, 2)
             $ Party[0].change_stat("inhibition", 200, 2)
             $ Line = Party[0].underwear
-            $ Party[0].underwear = 0
+            $ Party[0].underwear = ""
             "She slides her [Line] off, leaving her pussy bare."
             if not Party[0].SeenPussy:
                 $ Party[0].change_stat("inhibition", 50, 4)
@@ -369,14 +369,14 @@ label Strip_Study_Right:
             elif Party[0] == KittyX:
                 ch_k "Wow, I. . . I'm not really ready for this sort of thing, I'm sorry!"
             elif Party[0] == EmmaX:
-                $ EmmaX.change_face("perplexed", 1)
+                $ EmmaX.change_face("_perplexed", 1)
                 ch_e "Hmm. . . better than I thought."
-                $ EmmaX.change_face("sly", 1)
+                $ EmmaX.change_face("_sly", 1)
                 ch_e "But I doubt you're ready for this yet."
             elif Party[0] == LauraX:
-                $ LauraX.change_face("perplexed", 2)
+                $ LauraX.change_face("_perplexed", 2)
                 ch_l "I think you've had enough."
-                $ LauraX.change_face("perplexed", 1)
+                $ LauraX.change_face("_perplexed", 1)
             elif Party[0] == JeanX:
                 ch_j "Kidding."
             elif Party[0] == JubesX:
@@ -385,41 +385,41 @@ label Strip_Study_Right:
         return
 
     if Party[0] == RogueX:
-        $ KittyX.change_face("sly", 1)
+        $ KittyX.change_face("_sly", 1)
         ch_r "Well, that's another right answer, but I don't have a stitch left to take off. . ."
     elif Party[0] == KittyX:
         ch_k "So. . . you got that one right. . ."
-        $ KittyX.eyes = "down"
+        $ KittyX.eyes = "_down"
         ch_k ". . . but I'm not[KittyX.like]wearing anything else. . ."
-        $ KittyX.change_face("sly", 1)
+        $ KittyX.change_face("_sly", 1)
     elif Party[0] == EmmaX:
-        $ EmmaX.change_face("sly", 1)
+        $ EmmaX.change_face("_sly", 1)
         ch_e "Hmm. . . another correct answer. . ."
-        $ EmmaX.eyes = "down"
+        $ EmmaX.eyes = "_down"
         ch_e ". . . but I don't have anything else to remove. . ."
-        $ EmmaX.change_face("sly", 1)
+        $ EmmaX.change_face("_sly", 1)
     elif Party[0] == LauraX:
-        $ LauraX.change_face("sly", 1)
+        $ LauraX.change_face("_sly", 1)
         ch_l "So. . . you got that one right. . ."
-        $ LauraX.eyes = "down"
+        $ LauraX.eyes = "_down"
         ch_l ". . . but it looks like I'm out of clothes. . ."
-        $ LauraX.change_face("sly", 1)
+        $ LauraX.change_face("_sly", 1)
     elif Party[0] == JeanX:
-        $ JeanX.change_face("sly", 1, Eyes="down")
+        $ JeanX.change_face("_sly", 1, Eyes="_down")
         ch_j "Well, looks like you got all of them."
-        $ JeanX.change_face("sly", 1)
+        $ JeanX.change_face("_sly", 1)
         ch_j "What're you planning to do to me now? . . "
     elif Party[0] == StormX:
-        $ StormX.change_face("sly", 1)
+        $ StormX.change_face("_sly", 1)
         ch_s "Hmm. . . you answer correctly. . ."
-        $ StormX.eyes = "down"
+        $ StormX.eyes = "_down"
         ch_s ". . . but as you can see, I am already naked. . ."
-        $ StormX.change_face("sly", 1)
+        $ StormX.change_face("_sly", 1)
     elif Party[0] == JubesX:
         ch_v "Well, what have we here. . ."
-        $ JubesX.change_face("sly", 1, Eyes="down")
+        $ JubesX.change_face("_sly", 1, Eyes="_down")
         ch_v "I seem to have run out of \"tokens.\" . ."
-        $ JubesX.change_face("sly", 1)
+        $ JubesX.change_face("_sly", 1)
         ch_v "And ideas what we could do next?"
 
 
@@ -454,7 +454,7 @@ label Strip_Study_Right:
 
 
 label Strip_Study_Wrong:
-    $ Party[0].change_face("sly", 1)
+    $ Party[0].change_face("_sly", 1)
     if Count == 1:
         if Party[0] == RogueX:
             ch_r "Bzzt, too bad, [RogueX.player_petname]."
@@ -803,15 +803,15 @@ label Emma_Quiz_Question:
             "B. Shaved into an \"X\"":
                 return 0
             "C. I don't know":
-                $ EmmaX.change_face("sadside", 1)
+                $ EmmaX.change_face("_sadside", 1)
                 if not EmmaX.SeenPussy:
                     ch_e "Boo, I thought you might at least take a guess. . ."
                 else:
                     ch_e "Clearly you weren't paying enough attention."
-                $ EmmaX.change_face("normal")
+                $ EmmaX.change_face("_normal")
                 return 0
             "D. Waxed clean":
-                $ EmmaX.change_face("sly", 1)
+                $ EmmaX.change_face("_sly", 1)
                 ch_e "Someone was paying attention. . ."
                 return 1
     if QuizOrder[between_event_count] == 9:
@@ -856,9 +856,9 @@ label Laura_Quiz_Question:
             "D. Red":
                 return 0
     if QuizOrder[between_event_count] == 2:
-        $ LauraX.change_face("perplexed",1,Eyes="side")
+        $ LauraX.change_face("_perplexed",1,Eyes="_side")
         ch_l "Um. . ."
-        $ LauraX.change_face("sly")
+        $ LauraX.change_face("_sly")
         menu:
             ch_l "Say my name."
             "A. [LauraX.petname]":
@@ -886,18 +886,18 @@ label Laura_Quiz_Question:
         menu:
             ch_l "What number am I thinking of?"
             "A. 23?":
-                $ LauraX.change_face("surprised")
+                $ LauraX.change_face("_surprised")
                 ch_l "How did you guess?"
-                $ LauraX.change_face("sly")
+                $ LauraX.change_face("_sly")
                 return 1
             "B. 2?":
-                $ LauraX.change_face("sly")
+                $ LauraX.change_face("_sly")
                 ch_l "Mmmm, you and me?"
                 return 1
             "C. 8?":
-                $ LauraX.change_face("perplexed")
+                $ LauraX.change_face("_perplexed")
                 ch_l ". . . What? Why?"
-                $ LauraX.change_face("bemused")
+                $ LauraX.change_face("_bemused")
                 return 0
             "D. Green?":
                 ch_l ". . ."
@@ -995,9 +995,9 @@ label Jean_Quiz_Question:
             "D. Red":
                 return 0
     if QuizOrder[between_event_count] == 2:
-        $ JeanX.change_face("perplexed",1,Eyes="side")
+        $ JeanX.change_face("_perplexed",1,Eyes="_side")
         ch_j "Um. . ."
-        $ JeanX.change_face("sly")
+        $ JeanX.change_face("_sly")
         menu:
             ch_j "Say my name."
             "A. [JeanX.petname]":
@@ -1025,18 +1025,18 @@ label Jean_Quiz_Question:
         menu:
             ch_j "What number am I thinking of?"
             "A. 3?":
-                $ JeanX.change_face("surprised")
+                $ JeanX.change_face("_surprised")
                 ch_j "No?"
-                $ JeanX.change_face("sly")
+                $ JeanX.change_face("_sly")
                 return 0
             "B. 2?":
-                $ JeanX.change_face("sly")
+                $ JeanX.change_face("_sly")
                 ch_j "Mmmm, you and me?"
                 return 1
             "C. 8?":
-                $ JeanX.change_face("perplexed")
+                $ JeanX.change_face("_perplexed")
                 ch_j ". . . What? Why?"
-                $ JeanX.change_face("bemused")
+                $ JeanX.change_face("_bemused")
                 return 0
             "D. Green?":
                 ch_j ". . ."
@@ -1145,7 +1145,7 @@ label Storm_Quiz_Question:
         menu:
             ch_s "What do you think about my body?"
             "A. Kind of flat?":
-                $ StormX.change_face("confused")
+                $ StormX.change_face("_confused")
                 return 0
             "B. Thicc?":
                 $ Party[0].change_stat("love", 80, 2)
@@ -1292,9 +1292,9 @@ label Jubes_Quiz_Question:
         menu:
             ch_v "What sport did I do growing up?"
             "A. Baseball":
-                $ JubesX.change_face("surprised")
+                $ JubesX.change_face("_surprised")
                 ch_v "Ok, maybe I sent some bad cues on this one?"
-                $ JubesX.change_face("sly")
+                $ JubesX.change_face("_sly")
                 return 0
             "B. Figure Skating":
                 return 0
@@ -1322,11 +1322,11 @@ label Emma_StripStudy_Intro:
     call shift_focus (Party[0])
     if not EmmaX.top and not EmmaX.legs:
 
-        $ EmmaX.change_face("sly")
+        $ EmmaX.change_face("_sly")
         ch_e "I was considering some way of. . . motivating you. . ."
-        $ EmmaX.eyes = "down"
+        $ EmmaX.eyes = "_down"
         ch_e "but but I suppose we're already past that. . ."
-        $ EmmaX.eyes = "squint"
+        $ EmmaX.eyes = "_squint"
         ch_e "Do you have any ideas?"
         call Emma_SexMenu
     else:
@@ -1338,11 +1338,11 @@ label Emma_StripStudy_Intro:
                 extend ""
                 "What sort of motivation?":
                     if "frisky" not in EmmaX.history:
-                        $ EmmaX.change_face("sly")
+                        $ EmmaX.change_face("_sly")
                         $ Line = "ask"
                     else:
                         $ EmmaX.change_stat("obedience", 80, 3)
-                        $ EmmaX.change_face("confused",1)
+                        $ EmmaX.change_face("_confused",1)
                         "She strokes at the edges of her clothes."
                         ch_e "You aren't going to make me say it, are you. . ."
                         menu:
@@ -1353,10 +1353,10 @@ label Emma_StripStudy_Intro:
                                 if approval_check(EmmaX, 500, "O"):
                                     $ EmmaX.change_stat("obedience", 80, 5)
                                     $ EmmaX.change_stat("inhibition", 50, 5)
-                                    $ EmmaX.change_face("sly", 2)
+                                    $ EmmaX.change_face("_sly", 2)
                                     $ Line = "ask"
                                 elif approval_check(EmmaX, 500, "LO"):
-                                    $ EmmaX.change_face("confused", 2)
+                                    $ EmmaX.change_face("_confused", 2)
                                     $ EmmaX.change_stat("love", 70, -5)
                                     $ EmmaX.change_stat("obedience", 80, 5)
                                     ch_e "Very well. . ."
@@ -1364,33 +1364,33 @@ label Emma_StripStudy_Intro:
                                 else:
                                     $ EmmaX.change_stat("love", 200, -5)
                                     $ EmmaX.change_stat("inhibition", 50, -5)
-                                    $ EmmaX.change_face("angry", 1)
+                                    $ EmmaX.change_face("_angry", 1)
                                     ch_e "Oh, never mind then."
                             ". . .":
                                 if approval_check(EmmaX, 400, "O"):
-                                    $ EmmaX.change_face("confused", 2)
+                                    $ EmmaX.change_face("_confused", 2)
                                     $ EmmaX.change_stat("inhibition", 50, 5)
                                     $ Line = "ask"
                                 elif approval_check(EmmaX, 500, "LO"):
-                                    $ EmmaX.change_face("confused", 1, Brows="angry")
+                                    $ EmmaX.change_face("_confused", 1, Brows="_angry")
                                     $ EmmaX.change_stat("obedience", 50, 5)
                                     $ EmmaX.change_stat("inhibition", 50, 5)
                                     $ Line = "ask"
                                 else:
                                     $ EmmaX.change_stat("love", 200, -5)
                                     $ EmmaX.change_stat("inhibition", 50, -5)
-                                    $ EmmaX.change_face("angry", 1)
+                                    $ EmmaX.change_face("_angry", 1)
                                     ch_e "Oh, never mind then."
 
                 "I think it might." if "frisky" in EmmaX.history:
-                    $ EmmaX.change_face("sly")
+                    $ EmmaX.change_face("_sly")
                     $ EmmaX.change_stat("love", 80, 5)
                     $ EmmaX.change_stat("obedience", 80, 3)
                     $ EmmaX.change_stat("inhibition", 50, 5)
                     ch_e "I was hoping you would. . ."
                     $ Line = "strip"
                 "No, I've got this.":
-                    $ EmmaX.change_face("confused", Eyes="side")
+                    $ EmmaX.change_face("_confused", Eyes="_side")
                     if "frisky" in EmmaX.history:
                         $ EmmaX.change_stat("love", 200, -10)
                         $ EmmaX.change_stat("obedience", 80, 5)
@@ -1399,12 +1399,12 @@ label Emma_StripStudy_Intro:
                         $ EmmaX.change_stat("love", 200, -5)
                         $ EmmaX.change_stat("inhibition", 50, -5)
                     ch_e "Oh. . . Very well then."
-                    $ EmmaX.change_face("confused")
+                    $ EmmaX.change_face("_confused")
             if Line == "ask":
                 ch_e "Well, perhaps I could quiz you about mutant psychology. . ."
-                $ EmmaX.eyes = "side"
+                $ EmmaX.eyes = "_side"
                 ch_e "and, perhaps, if you were to get a question right. . ."
-                $ EmmaX.eyes = "squint"
+                $ EmmaX.eyes = "_squint"
                 ch_e "I could. . ."
                 menu:
                     extend ""
@@ -1414,7 +1414,7 @@ label Emma_StripStudy_Intro:
                         $ Line = "strip"
                     "Yes? . .":
                         if approval_check(EmmaX, 500, "O"):
-                            $ EmmaX.change_face("confused", 2)
+                            $ EmmaX.change_face("_confused", 2)
                             if "frisky" in EmmaX.history:
                                 $ EmmaX.change_stat("love", 200, -5)
                                 $ EmmaX.change_stat("obedience", 80, 10)
@@ -1423,7 +1423,7 @@ label Emma_StripStudy_Intro:
                                 $ EmmaX.change_stat("inhibition", 50, -5)
                             $ Line = "ask"
                         elif approval_check(EmmaX, 500, "LO"):
-                            $ EmmaX.change_face("confused", 1, Brows="angry")
+                            $ EmmaX.change_face("_confused", 1, Brows="_angry")
                             if "frisky" in EmmaX.history:
                                 $ EmmaX.change_stat("love", 200, -5)
                                 $ EmmaX.change_stat("obedience", 80, 5)
@@ -1433,7 +1433,7 @@ label Emma_StripStudy_Intro:
                             $ Line = "ask"
                     ". . .":
                         if approval_check(EmmaX, 500, "O"):
-                            $ EmmaX.change_face("confused", 2)
+                            $ EmmaX.change_face("_confused", 2)
                             if "frisky" in EmmaX.history:
                                 $ EmmaX.change_stat("obedience", 50, 5)
                                 $ EmmaX.change_stat("inhibition", 50, -5)
@@ -1442,7 +1442,7 @@ label Emma_StripStudy_Intro:
                                 $ EmmaX.change_stat("inhibition", 50, -5)
                             $ Line = "ask"
                         elif approval_check(EmmaX, 500, "LO"):
-                            $ EmmaX.change_face("confused", 1, Brows="angry")
+                            $ EmmaX.change_face("_confused", 1, Brows="_angry")
                             if "frisky" in EmmaX.history:
                                 $ EmmaX.change_stat("love", 200, -5)
                                 $ EmmaX.change_stat("obedience", 50, 5)
@@ -1452,19 +1452,19 @@ label Emma_StripStudy_Intro:
                                 $ EmmaX.change_stat("inhibition", 50, -5)
                             $ Line = "ask"
                 if Line == "ask":
-                    $ EmmaX.change_face("bemused", Eyes="side")
+                    $ EmmaX.change_face("_bemused", Eyes="_side")
                     ch_e "Take off some clothes. . ."
                     $ Line = "strip"
-                $ EmmaX.change_face("sly", Brows="confused")
+                $ EmmaX.change_face("_sly", Brows="_confused")
                 menu:
                     ch_e "Would that interest you?"
                     "Definitely!":
-                        $ EmmaX.change_face("sly",Mouth="smile")
+                        $ EmmaX.change_face("_sly",Mouth="_smile")
                         $ EmmaX.change_stat("love", 50, 5)
                         $ EmmaX.change_stat("love", 80, 5)
                         $ EmmaX.change_stat("inhibition", 50, 5)
                     "Yeah.":
-                        $ EmmaX.change_face("sly")
+                        $ EmmaX.change_face("_sly")
                         $ EmmaX.change_stat("love", 80, 3)
                         $ EmmaX.change_stat("obedience", 50, 3)
                         $ EmmaX.change_stat("inhibition", 50, 3)
@@ -1477,12 +1477,12 @@ label Emma_StripStudy_Intro:
                             $ EmmaX.change_stat("love", 200, -5)
                             $ EmmaX.change_stat("obedience", 80, 5)
                             $ EmmaX.change_stat("inhibition", 50, -5)
-                        $ EmmaX.change_face("angry")
+                        $ EmmaX.change_face("_angry")
                         ch_e "Hrm."
                         $ Line = "no"
 
         if Line == "strip":
-            $ EmmaX.change_face("sly", 0)
+            $ EmmaX.change_face("_sly", 0)
             if len(Party) >= 2:
                 ch_e "And you, [Party[1].name]? Care to participate?"
                 call Date_Sex_Break (EmmaX, Party[1])

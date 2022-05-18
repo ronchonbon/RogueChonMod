@@ -176,20 +176,20 @@ image Jubes_Sprite:
                     "not JubesX.legs or JubesX.upskirt or JubesX.legs == 'skirt'", ConditionSwitch(
 
                             "JubesX.underwear == 'lace_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Lace_Down.png",
-                            "JubesX.underwear == 'bikini_bottoms' and JubesX.Wet", "images/JubesSprite/Jubes_Sprite_Panties_Bikini_DownW.png",
+                            "JubesX.underwear == 'bikini_bottoms' and JubesX.grool", "images/JubesSprite/Jubes_Sprite_Panties_Bikini_DownW.png",
                             "JubesX.underwear == 'bikini_bottoms'", "images/JubesSprite/Jubes_Sprite_Panties_Bikini_Down.png",
-                            "JubesX.underwear == 'tiger_panties' and JubesX.Wet", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_DownW.png",
+                            "JubesX.underwear == 'tiger_panties' and JubesX.grool", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_DownW.png",
                             "JubesX.underwear == 'tiger_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_Down.png",
-                            "JubesX.Wet", "images/JubesSprite/Jubes_Sprite_Panties_Blue_DownW.png",
+                            "JubesX.grool", "images/JubesSprite/Jubes_Sprite_Panties_Blue_DownW.png",
                             "True", "images/JubesSprite/Jubes_Sprite_Panties_Blue_Down.png",
                             ),
                     "True", Null(),
                     ),
-            "JubesX.Wet", ConditionSwitch(
+            "JubesX.grool", ConditionSwitch(
 
                 "JubesX.underwear == 'lace_panties'", "images/JubesSprite/Jubes_Sprite_Panties_Lace.png",
                 "JubesX.underwear == 'bikini_bottoms'", "images/JubesSprite/Jubes_Sprite_Panties_Bikini_Wet.png",
-                "JubesX.underwear == 'tiger_panties' and JubesX.Wet", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_Wet.png",
+                "JubesX.underwear == 'tiger_panties' and JubesX.grool", "images/JubesSprite/Jubes_Sprite_Panties_Tiger_Wet.png",
                 "True", "images/JubesSprite/Jubes_Sprite_Panties_Blue_Wet.png",
                 ),
             "True", ConditionSwitch(
@@ -212,11 +212,11 @@ image Jubes_Sprite:
             "JubesX.upskirt", ConditionSwitch(
 
                         "JubesX.legs == 'pants'", "images/JubesSprite/Jubes_Sprite_Legs_Pants_Down.png",
-                        "JubesX.legs == 'shorts' and JubesX.Wet > 1", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_DownW.png",
+                        "JubesX.legs == 'shorts' and JubesX.grool > 1", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_DownW.png",
                         "JubesX.legs == 'shorts'", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_Down.png",
                         "True", Null(),
                         ),
-            "JubesX.Wet > 1", ConditionSwitch(
+            "JubesX.grool > 1", ConditionSwitch(
 
                 "JubesX.legs == 'pants'", "images/JubesSprite/Jubes_Sprite_Legs_Pants.png",
                 "JubesX.legs == 'shorts'", "images/JubesSprite/Jubes_Sprite_Legs_Shorts_Wet.png",
@@ -993,8 +993,8 @@ image Jubes_Doggy_Ass:
 
             "'in' in JubesX.spunk and Player.cock_position == 'in'",Null(),
             "'in' in JubesX.spunk ", "images/JubesDoggy/Jubes_Doggy_SpunkPussyClosed.png",
-            "JubesX.Wet and Player.cock_position == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
-            "JubesX.Wet", "images/RogueDoggy/Rogue_Doggy_WetPussyClosed.png",
+            "JubesX.grool and Player.cock_position == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
+            "JubesX.grool", "images/RogueDoggy/Rogue_Doggy_WetPussyClosed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -1050,11 +1050,11 @@ image Jubes_Doggy_Ass:
             "Player.sprite and (Player.cock_position == 'in' or Player.cock_position == 'anal')", Null(),
 
 
-            "JubesX.underwear == 'wolvie_panties' and JubesX.Wet", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie_Wet.png",
+            "JubesX.underwear == 'wolvie_panties' and JubesX.grool", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie_Wet.png",
             "JubesX.underwear == 'wolvie_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Wolvie.png",
             "JubesX.underwear == 'lace_panties'", "images/JubesDoggy/Jubes_Doggy_Panties_Lace.png",
             "JubesX.underwear == 'bikini_bottoms'", "images/JubesDoggy/Jubes_Doggy_Panties_Bikini.png",
-            "JubesX.Wet", "images/JubesDoggy/Jubes_Doggy_Panties_Black_Wet.png",
+            "JubesX.grool", "images/JubesDoggy/Jubes_Doggy_Panties_Black_Wet.png",
             "True", "images/JubesDoggy/Jubes_Doggy_Panties_Black.png",
             ),
 
@@ -2414,7 +2414,7 @@ image Jubes_Sex_Legs:
     contains:
 
         ConditionSwitch(
-            "not JubesX.Wet", Null(),
+            "not JubesX.grool", Null(),
             "True", "images/JubesSex/Jubes_Sex_Wet.png",
             )
     contains:
@@ -3482,7 +3482,7 @@ image Jubes_Footjob_Foot:
 
 image Jubes_Sex_Zero_Anim_F:
 
-    "Zero_Blowcock"
+    "Zero_Zero_cock_blowjob"
     zoom .7
     anchor (0.5, 0.9)
     offset (270,650)
@@ -3945,7 +3945,7 @@ image Jubes_Sprite_BJ_Head:
         (806,806),
         (0,0), ConditionSwitch(
 
-                "JubesX.blushing == 2", "images/JubesSprite/Jubes_Sprite_Head_Blush2.png",
+                "JubesX.blushing == 'blush2'", "images/JubesSprite/Jubes_Sprite_Head_Blush2.png",
                 "JubesX.blushing", "images/JubesSprite/Jubes_Sprite_Head_Blush.png",
                 "True", "images/JubesSprite/Jubes_Sprite_Head.png",
                 ),
@@ -4126,7 +4126,7 @@ image Jubes_BJ_Body_0:
 
 
 
-        AlphaMask("Blowcock", "Jubes_BlowCock_Mask")
+        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4240,7 +4240,7 @@ image Jubes_BJ_Body_1:
 
 
 
-        AlphaMask("Blowcock", "Jubes_BlowCock_Mask")
+        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4351,7 +4351,7 @@ image Jubes_BJ_Body_2:
 
 
 
-        AlphaMask("Blowcock", "Jubes_BlowCock_Mask")
+        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4507,7 +4507,7 @@ image Jubes_BJ_Body_3:
 
 
 
-        AlphaMask("Blowcock", "Jubes_BlowCock_Mask_3")
+        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask_3")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4660,7 +4660,7 @@ image Jubes_BJ_Body_4:
 
 
 
-        AlphaMask("Blowcock", "Jubes_BlowCock_Mask_4")
+        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask_4")
         subpixel True
         pos (412,292)
         zoom 0.4
@@ -4803,7 +4803,7 @@ image Jubes_BJ_Body_5:
 
 
 
-        AlphaMask("Blowcock", "Jubes_BlowCock_Mask")
+        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask")
         subpixel True
         pos (410,292)
         zoom 0.4
@@ -4959,7 +4959,7 @@ image Jubes_BJ_Body_6:
 
 
 
-        AlphaMask("Blowcock", "Jubes_BlowCock_Mask_6")
+        AlphaMask("Zero_cock_blowjob", "Jubes_BlowCock_Mask_6")
         subpixel True
         pos (407,262)
         zoom 0.4
@@ -5306,7 +5306,7 @@ image Jubes_TJ_HairTop:
 
 image Jubes_TJ_ZeroCock:
 
-    "Zero_Blowcock"
+    "Zero_Zero_cock_blowjob"
     transform_anchor True
     zoom .7
     anchor (0.5, 0.5)
@@ -6339,8 +6339,8 @@ label Jubes_TJ_Launch(Line=primary_action):
         "She throws off her [JubesX.top], baring her breasts underneath."
     elif JubesX.bra:
         "She tugs off her [JubesX.bra] and throws it aside."
-    $ JubesX.top = 0
-    $ JubesX.bra = 0
+    $ JubesX.top = ""
+    $ JubesX.bra = ""
     $ JubesX.ArmPose = 0
 
     call Jubes_First_Topless
@@ -6400,14 +6400,14 @@ label Jubes_Kissing_Launch(T=primary_action, Set=1):
     return
 
 label Jubes_Kissing_Smooch:
-    $ JubesX.change_face("kiss")
+    $ JubesX.change_face("_kiss")
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_center):
         ease 0.5 xpos stage_center offset (0,0) zoom 2 alpha 1
         pause 1
         ease 0.5 xpos JubesX.sprite_location zoom 1
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         zoom 1
-    $ JubesX.change_face("sexy")
+    $ JubesX.change_face("_sexy")
     return
 
 label Jubes_Breasts_Launch(T=primary_action, Set=1):
