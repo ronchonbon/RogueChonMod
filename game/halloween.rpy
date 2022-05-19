@@ -4,7 +4,7 @@ label Halloween_Chat(Girl=0):
     show blackscreen onlayer black
     if Girl == RogueX and renpy.showing("Rogue_sprite"):
         pass
-    elif Girl == KittyX and renpy.showing("Kitty_Sprite"):
+    elif Girl == KittyX and renpy.showing("Kitty_sprite"):
         pass
     elif Girl == EmmaX and renpy.showing("Emma_Sprite"):
         pass
@@ -445,7 +445,7 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
     $ KittyX.change_outfit(Changed=1)
 
     call shift_focus (KittyX)
-    show Kitty_Sprite at sprite_location(1200,50):
+    show Kitty_sprite at sprite_location(1200,50):
         offset (0,0)
         anchor (0.5, 0.0)
         pos (1200,50)
@@ -601,7 +601,7 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
 
 
     "[LauraX.name] looks up from the punch bowl and sees the two of you."
-    show Kitty_Sprite:
+    show Kitty_sprite:
         ease 0.8 pos (1200,50)
     pause 0.8
 
@@ -619,7 +619,7 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
         anchor (0.5, 0.0)
         pos (1200,50)
         ease 0.8 pos (stage_center,50)
-    show Kitty_Sprite:
+    show Kitty_sprite:
         ease 0.8 pos (stage_far_right,50)
     pause 0.8
     "She wanders over"
@@ -722,7 +722,7 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
                 call HWchange_stat (KittyX, "love", 90, 2)
                 ch_k "Well that was rude!"
                 ch_k "I think I'm[KittyX.like]going to check out the scene over there for a second."
-                show Kitty_Sprite:
+                show Kitty_sprite:
                     ease 0.8 pos (1200,50)
                 pause 0.8
                 "[KittyX.name] heads off to the side."
@@ -799,7 +799,7 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
     ch_l "We were?"
     ch_k "Yes. Come on."
     ch_k "Later, [KittyX.player_petname]!"
-    show Kitty_Sprite:
+    show Kitty_sprite:
         ease 0.8 pos (1200,50)
     show Laura_Sprite:
         ease 0.8 pos (1200,50)
@@ -1018,7 +1018,7 @@ label Halloween_Jean:
             call HWchange_stat (JeanX, "inhibition", 50, 2)
             ch_j "I can even make a side-pony work."
         "Why didn't you go as \"Jessie?\"":
-            $ JeanX.change_face("_normal",Mouth="kiss")
+            $ JeanX.change_face("_normal",Mouth = "_kiss")
             call HWchange_stat (JeanX, "obedience", 50, 1)
             ch_j ". . ."
             ch_j "Who's \"Jessie?!\""
@@ -1206,7 +1206,7 @@ label Halloween_Jean:
             ch_s "Yes, it certainly is low maintenance."
             ch_s "I may keep it after."
         "Very sexy.":
-            $ StormX.change_face("_smile",Mouth="kiss")
+            $ StormX.change_face("_smile",Mouth = "_kiss")
             call HWchange_stat (StormX, "love", 80, 1)
             call HWchange_stat (StormX, "obedience", 50, 1)
             call HWchange_stat (StormX, "inhibition", 50, 1)

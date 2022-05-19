@@ -150,7 +150,7 @@ label Kitty_Masturbate:
                 jump Campus_Map
             else:
                 ch_k "So. . . I'm getting out of here? Maybe knock sometime?"
-                hide Kitty_Sprite with easeoutbottom
+                hide Kitty_sprite with easeoutbottom
                 call Remove_Girl (KittyX)
         return
 

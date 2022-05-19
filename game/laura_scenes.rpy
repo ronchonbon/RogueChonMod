@@ -2063,12 +2063,12 @@ label Gwentro:
     ch_g "Ok, that's a wall. . . apparently."
     call GwenFace ("_surprised")
     ch_g "Oh, hey you tw-"
-    call GwenFace ("_surprised", 1, Mouth="kiss")
+    call GwenFace ("_surprised", 1, Mouth = "_kiss")
     ch_g "Um. . ."
     call GwenFace ("shocked", 1)
     ch_g "Sorry! My bad, I was just. . ."
     $ LauraX.change_face("_confused",2,Eyes="_side")
-    call GwenFace ("_surprised", 1, Mouth="kiss")
+    call GwenFace ("_surprised", 1, Mouth = "_kiss")
     extend "\n looking for an exit. . ."
     call GwenFace ("_smile", 1)
     extend "\n but you two. . . seem to be working on something. . ."
@@ -2151,11 +2151,11 @@ label Gwentro:
     ch_l "How do you know my name!"
     ch_g "I've read all about you! Or do you prefer \"X-23?\""
     ch_g "Or \"Wolverine?\""
-    call GwenFace ("_surprised", Mouth="kiss")
+    call GwenFace ("_surprised", Mouth = "_kiss")
     ch_g "God, it's not \"Talon,\" is it?"
     call GwenFace ("_smile")
     ch_l "[LauraX.name] - is - fine."
-    call GwenFace ("_smile", Mouth="kiss")
+    call GwenFace ("_smile", Mouth = "_kiss")
     ch_g "Cool, so. . ."
     menu:
         "What are you doing here?":

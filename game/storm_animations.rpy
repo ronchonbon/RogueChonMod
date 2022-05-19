@@ -1502,7 +1502,7 @@ image Storm_Sex_Zero_Cock:
         subpixel True
 
         ConditionSwitch(
-                "Player.sprite", "Zero_Zero_cock_blowjob" ,
+                "Player.sprite", "Zero_cock_titjob" ,
                 "True", Null(),
                 )
         subpixel True
@@ -1559,7 +1559,7 @@ image Storm_Sex_Static:
 
         subpixel True
         ConditionSwitch(
-                "Player.sprite", "Zero_Zero_cock_blowjob" ,
+                "Player.sprite", "Zero_cock_titjob" ,
                 "True", Null(),
                 )
         subpixel True
@@ -2030,7 +2030,7 @@ image Storm_Sex_Anal_Zero_Anim0:
         subpixel True
         ConditionSwitch(
                 "not Player.sprite", Null(),
-                "True", "Zero_Zero_cock_blowjob" ,
+                "True", "Zero_cock_titjob" ,
                 )
         subpixel True
         anchor (0.5,1.0)
@@ -2685,13 +2685,13 @@ label Storm_Sex_Reset:
 
 
 
-image Storm_Hand_Under:
+image Storm_handjob_under:
     "images/StormSprite/handstorm2.png"
     anchor (0.5,0.5)
     pos (-10,0)
     offset (0,130)
 
-image Storm_Hand_Over:
+image Storm_handjob_over:
     "images/StormSprite/handstorm1.png"
     anchor (0.5,0.5)
     pos (-10,0)
@@ -2769,26 +2769,26 @@ image Storm_HJ_Animation:
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Storm_Hand_Under"),
-            "action_speed == 1", At("Storm_Hand_Under", Storm_Hand_1()),
-            "action_speed >= 2", At("Storm_Hand_Under", Storm_Hand_2()),
+            "not action_speed", Transform("Storm_handjob_under"),
+            "action_speed == 1", At("Storm_handjob_under", Storm_Hand_1()),
+            "action_speed >= 2", At("Storm_handjob_under", Storm_Hand_2()),
             "action_speed ", Null(),
             ),
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Zero_Handcock"),
-            "action_speed == 1", At("Zero_Handcock", Handcock_1J()),
-            "action_speed >= 2", At("Zero_Handcock", Handcock_2J()),
+            "not action_speed", Transform("Zero_cock_handjob"),
+            "action_speed == 1", At("Zero_cock_handjob", Handcock_1J()),
+            "action_speed >= 2", At("Zero_cock_handjob", Handcock_2J()),
             "action_speed ", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Storm_Hand_Over"),
-            "action_speed == 1", At("Storm_Hand_Over", Storm_Hand_1()),
-            "action_speed >= 2", At("Storm_Hand_Over", Storm_Hand_2()),
+            "not action_speed", Transform("Storm_handjob_over"),
+            "action_speed == 1", At("Storm_handjob_over", Storm_Hand_1()),
+            "action_speed >= 2", At("Storm_handjob_over", Storm_Hand_2()),
             "action_speed ", Null(),
             ),
     anchor (0.51, -1.3)
@@ -3894,7 +3894,7 @@ image Storm_TJ_HairTop:
 
 image Storm_TJ_ZeroCock:
 
-    "Zero_Zero_cock_blowjob"
+    "Zero_cock_titjob"
     transform_anchor True
     zoom 0.6
     anchor (0.5, 0.5)
@@ -3934,8 +3934,8 @@ image Storm_TJ_Body:
     contains:
 
         ConditionSwitch(
-                        "StormX.top == 'white_shirt'","images/StormBJFace/Storm_TJ_Over_WhiteShirt_Body.png",
-                        "StormX.top == 'jacket'","images/StormBJFace/Storm_TJ_Over_Jacket_Body.png",
+                        "StormX.top == 'white_shirt'","images/StormBJFace/Storm_titjob_over_WhiteShirt_Body.png",
+                        "StormX.top == 'jacket'","images/StormBJFace/Storm_titjob_over_Jacket_Body.png",
                         "True", Null(),
                         )
     contains:
@@ -4042,7 +4042,7 @@ image Storm_TJ_Tits:
     contains:
 
         ConditionSwitch(
-                        "StormX.top == 'jacket'","images/StormBJFace/Storm_TJ_Over_Jacket_Top.png",
+                        "StormX.top == 'jacket'","images/StormBJFace/Storm_titjob_over_Jacket_Top.png",
 
                         "True", Null(),
                         )
@@ -4068,8 +4068,8 @@ image Storm_TJ_Tits:
     contains:
 
         ConditionSwitch(
-                        "StormX.top == 'white_shirt' and StormX.top_pulled_up","images/StormBJFace/Storm_TJ_Over_WhiteShirt_TopU.png",
-                        "StormX.top == 'white_shirt'","images/StormBJFace/Storm_TJ_Over_WhiteShirt_TopD.png",
+                        "StormX.top == 'white_shirt' and StormX.top_pulled_up","images/StormBJFace/Storm_titjob_over_WhiteShirt_TopU.png",
+                        "StormX.top == 'white_shirt'","images/StormBJFace/Storm_titjob_over_WhiteShirt_TopD.png",
 
                         "True", Null(),
                         )

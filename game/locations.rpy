@@ -1002,7 +1002,7 @@ label ShowPool(BO=[], PoolLoc=0):
             if BO[0] == RogueX:
                 show Rogue_sprite zorder 50 at Pool_Bob(PoolLoc)
             elif BO[0] == KittyX:
-                show Kitty_Sprite zorder 50 at Pool_Bob(PoolLoc)
+                show Kitty_sprite zorder 50 at Pool_Bob(PoolLoc)
             elif BO[0] == EmmaX:
                 show Emma_Sprite zorder 50 at Pool_Bob(PoolLoc)
             elif BO[0] == LauraX:
@@ -2762,7 +2762,7 @@ label Study_Room:
             call Girls_Location
 
     call GirlsAngry
-    call XavierFace ("_happy")
+    call change_Xavier_face ("_happy")
 
 
     if time_index >= 3:

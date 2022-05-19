@@ -3277,10 +3277,10 @@ label Storm_Wardrobe_Menu:
                 return
             $ StormX.piercings = ""
 
-        "Add gold_necklace" if StormX.neck != "gold_necklace":
+        "Add gold_necklace" if StormX.neck != "_gold_necklace":
             ch_p "Why don't you try on that gold necklace?"
             ch_s "Ok. . ."
-            $ StormX.neck = "gold_necklace"
+            $ StormX.neck = "_gold_necklace"
         "Add ring_necklace" if StormX.neck != "rings" and "halloween" in StormX.history:
             ch_p "Why don't you try on that ring necklace?"
             ch_s "Ok. . ."

@@ -1841,7 +1841,7 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[], BO=[]):
         if Girls[0] == RogueX:
             hide Rogue_sprite with easeoutright
         elif Girls[0] == KittyX:
-            hide Kitty_Sprite with easeoutbottom
+            hide Kitty_sprite with easeoutbottom
         elif Girls[0] == EmmaX:
             hide Emma_Sprite with easeoutright
         elif Girls[0] == LauraX:
@@ -4015,7 +4015,7 @@ label Display_Girl(Chr=0, Dress=1, TrigReset=1, DLoc=0, YLoc=50):
             offset (0,0)
             anchor (0.5, 0.0)
     elif Chr == KittyX:
-        show Kitty_Sprite zorder Chr.sprite_layer at sprite_location(DLoc,YLoc):
+        show Kitty_sprite zorder Chr.sprite_layer at sprite_location(DLoc,YLoc):
             alpha 1
             zoom 1
             offset (0,0)
@@ -4155,12 +4155,12 @@ label AllReset(Chr=0, BO=[]):
                 hide Rogue_sprite
         elif BO[0] == KittyX:
             if KittyX.location == bg_current:
-                show Kitty_Sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location,50):
+                show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location,50):
                     ease .5 zoom 1 xzoom 1 yzoom 1 offset (0,0) anchor (0.5, 0.0)
-                show Kitty_Sprite:
+                show Kitty_sprite:
                     zoom 1 xzoom 1 yzoom 1 offset (0,0) anchor (0.5, 0.0) pos (KittyX.sprite_location,50)
             else:
-                hide Kitty_Sprite
+                hide Kitty_sprite
         elif BO[0] == EmmaX:
             if EmmaX.location == bg_current:
                 show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(EmmaX.sprite_location,50):
@@ -4211,7 +4211,7 @@ label AllHide(Cull=0):
         hide Rogue_sprite
         call Rogue_Hide
     if Cull or KittyX.location != bg_current:
-        hide Kitty_Sprite
+        hide Kitty_sprite
         call Kitty_Hide
     if Cull or EmmaX.location != bg_current:
         hide Emma_Sprite
@@ -7013,7 +7013,7 @@ label Microtransactions_Intro:
     pause 0.1
     $ Round -= 5
     $ bg_current = "bg_study"
-    call XavierFace ("_happy")
+    call change_Xavier_face ("_happy")
     call set_the_scene
     hide blackscreen onlayer black
     ch_x "[Player.name], I'm glad you came to see me."
@@ -7025,16 +7025,16 @@ label Microtransactions_Intro:
     menu:
         extend ""
         "What, like -I- give -you- cash?":
-            call XavierFace ("shocked")
+            call change_Xavier_face ("shocked")
             ch_x "What? How would that make sense? You give me cash so I give you cash?"
         "What a rip-off!":
-            call XavierFace ("shocked")
+            call change_Xavier_face ("shocked")
             ch_x "I haven't even explained the system yet!"
         "Shill!":
-            call XavierFace ("shocked")
+            call change_Xavier_face ("shocked")
             ch_x "what are you even talking about?"
     ch_x "I don't understand what the problem is, it's just a form of surprise mechanic!"
-    call XavierFace ("_happy")
+    call change_Xavier_face ("_happy")
     ch_x "You open a small box and receive an item!"
     ch_x "It really is a remarkable system!"
     ch_x "It involves using a certain invention developed by a friend of mine."
@@ -7055,9 +7055,9 @@ label Microtransactions_Intro:
         "Yes, I get it.":
             pass
         "Huh?":
-            call XavierFace ("shocked")
+            call change_Xavier_face ("shocked")
             ch_x ". . . I don't think I could dumb it down further."
-    call XavierFace ("_happy")
+    call change_Xavier_face ("_happy")
     ch_x "Here, a nice starter package, just bring this to Henry in the lab."
     menu:
         extend ""

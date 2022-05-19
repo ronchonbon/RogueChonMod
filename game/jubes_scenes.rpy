@@ -330,7 +330,7 @@ label Jubes_Meet:
                     $ JubesX.change_stat("love", 90, 2)
                     $ JubesX.change_stat("obedience", 90, 3)
                     $ JubesX.change_stat("inhibition", 90, -2)
-                    $ JubesX.change_face("_angry",1,Eyes="_squint",Mouth="kiss")
+                    $ JubesX.change_face("_angry",1,Eyes="_squint",Mouth = "_kiss")
                     ch_v "You are -remarkably- chill about this."
                     $ JubesX.change_face("_smile",1,Eyes="_surprised", Brows = "_sad")
                     ch_v "Maybe I took too much? . ."

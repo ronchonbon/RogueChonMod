@@ -1117,8 +1117,8 @@ image Jubes_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "licking_pussy",
-            "primary_action == 'eat_ass'", "licking_ass",
+            "primary_action == 'eat_pussy'", "doggy_licking_pussy",
+            "primary_action == 'eat_ass'", "doggy_licking_ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -3482,7 +3482,7 @@ image Jubes_Footjob_Foot:
 
 image Jubes_Sex_Zero_Anim_F:
 
-    "Zero_Zero_cock_blowjob"
+    "Zero_cock_titjob"
     zoom 0.7
     anchor (0.5, 0.9)
     offset (270,650)
@@ -5082,13 +5082,13 @@ label Jubes_BJ_Reset:
 
 
 
-image Jubes_Hand_Under:
+image Jubes_handjob_under:
     "images/JubesSprite/handjubes2.png"
     anchor (0.5,0.5)
     pos (-10,0)
 
 
-image Jubes_Hand_Over:
+image Jubes_handjob_over:
     "images/JubesSprite/handjubes1.png"
     anchor (0.5,0.5)
     pos (-10,0)
@@ -5165,26 +5165,26 @@ image Jubes_HJ_Animation:
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Jubes_Hand_Under"),
-            "action_speed == 1", At("Jubes_Hand_Under", Jubes_Hand_1()),
-            "action_speed >= 2", At("Jubes_Hand_Under", Jubes_Hand_2()),
+            "not action_speed", Transform("Jubes_handjob_under"),
+            "action_speed == 1", At("Jubes_handjob_under", Jubes_Hand_1()),
+            "action_speed >= 2", At("Jubes_handjob_under", Jubes_Hand_2()),
             "action_speed ", Null(),
             ),
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Zero_Handcock"),
-            "action_speed == 1", At("Zero_Handcock", Handcock_1L()),
-            "action_speed >= 2", At("Zero_Handcock", Handcock_2L()),
+            "not action_speed", Transform("Zero_cock_handjob"),
+            "action_speed == 1", At("Zero_cock_handjob", Handcock_1L()),
+            "action_speed >= 2", At("Zero_cock_handjob", Handcock_2L()),
             "action_speed ", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Jubes_Hand_Over"),
-            "action_speed == 1", At("Jubes_Hand_Over", Jubes_Hand_1()),
-            "action_speed >= 2", At("Jubes_Hand_Over", Jubes_Hand_2()),
+            "not action_speed", Transform("Jubes_handjob_over"),
+            "action_speed == 1", At("Jubes_handjob_over", Jubes_Hand_1()),
+            "action_speed >= 2", At("Jubes_handjob_over", Jubes_Hand_2()),
             "action_speed ", Null(),
             ),
     anchor (0.51, -1.3)
@@ -5306,7 +5306,7 @@ image Jubes_TJ_HairTop:
 
 image Jubes_TJ_ZeroCock:
 
-    "Zero_Zero_cock_blowjob"
+    "Zero_cock_titjob"
     transform_anchor True
     zoom 0.7
     anchor (0.5, 0.5)

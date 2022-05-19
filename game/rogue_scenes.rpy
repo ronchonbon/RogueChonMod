@@ -112,6 +112,7 @@ label Prologue:
 
 
 label tour_start:
+    call clear_the_room ("All", 0, 1)
     $ bg_current = "bg_campus"
     $ RogueX.location = bg_current
     call set_the_scene (0)
@@ -120,6 +121,7 @@ label tour_start:
 
 
 
+    call clear_the_room ("All", 0, 1)
     $ bg_current = "bg_player"
     $ RogueX.location = bg_current
     call set_the_scene (0)
@@ -142,6 +144,7 @@ label tour_start:
         ch_r "You can stop by sometime, but not after curfew."
 
 
+    call clear_the_room ("All", 0, 1)
     $ bg_current = "bg_classroom"
     $ RogueX.location = bg_current
     call set_the_scene (0)
@@ -153,6 +156,7 @@ label tour_start:
 
 
 
+    call clear_the_room ("All", 0, 1)
     $ bg_current = "bg_dangerroom"
     $ RogueX.location = bg_current
     call set_the_scene (0)
@@ -181,6 +185,7 @@ label tour_start:
     ch_r "Moving on then. . ."
 
 label tour_end:
+    call clear_the_room ("All", 0, 1)
     $ bg_current = "bg_campus"
     $ RogueX.location = bg_current
     call set_the_scene (0)

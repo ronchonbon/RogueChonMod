@@ -32,6 +32,34 @@ image Xavier_blinking:
     0.25
     repeat
 
+label change_Xavier_face(face = Xavier_emotion):
+    if face == "psychic":
+        $ Xavier_mouth = "concentrate"
+        $ Xavier_brows = "concentrate"
+        $ Xavier_eyes = "concentrate"
+        $ Xavier_psychic = 1
+    if face == "hypno":
+        $ Xavier_mouth = "neutral"
+        $ Xavier_brows = "neutral"
+        $ Xavier_eyes = "hypno"
+    if face == "shocked":
+        $ Xavier_mouth = "neutral"
+        $ Xavier_brows = "shocked"
+        $ Xavier_eyes = "shocked"
+        $ Xavier_psychic = 0
+    if face == "_happy":
+        $ Xavier_mouth = "_happy"
+        $ Xavier_brows = "_happy"
+        $ Xavier_eyes = "_happy"
+        $ Xavier_psychic = 0
+    if face == "angry":
+        $ Xavier_mouth = "concentrate"
+        $ Xavier_brows = "concentrate"
+        $ Xavier_eyes = "_happy"
+        $ Xavier_psychic = 0
+        
+    return
+
 layeredimage background:
     always:
         "images/background/sky_[current_time].png"

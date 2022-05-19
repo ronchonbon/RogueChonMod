@@ -1765,7 +1765,7 @@ label Emma_Pet:
 
                         $ EmmaX.petname = "mommy"
                         if "mommy" in EmmaX.petnames or approval_check(EmmaX, 1500):
-                            $ EmmaX.change_face("_sly", 1, Mouth="kiss")
+                            $ EmmaX.change_face("_sly", 1, Mouth = "_kiss")
                             ch_e "Oooh, [EmmaX.player_petname]."
                         else:
                             $ EmmaX.change_face("_angry")

@@ -2091,7 +2091,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 ch_k "I'm outta here, later!"
         else:
             ch_k "I'm headed out, see you later."
-        hide Kitty_Sprite
+        hide Kitty_sprite
         return
 
 
@@ -2208,7 +2208,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
     $ KittyX.recent_history.append("followed")
     if not Line:
 
-        hide Kitty_Sprite
+        hide Kitty_sprite
         call Gym_Clothes_Off ([KittyX])
         return
 
@@ -2220,7 +2220,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             ch_k "Sorry [KittyX.player_petname], but I[KittyX.like]need the practice?"
         else:
             ch_k "I'm[KittyX.like]sorry, [KittyX.player_petname], I've got things to do."
-        hide Kitty_Sprite
+        hide Kitty_sprite
         call Gym_Clothes_Off ([KittyX])
         return
 
@@ -2233,7 +2233,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         call DrainAll ("arriving")
         $ KittyX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
-        hide Kitty_Sprite
+        hide Kitty_sprite
         call Gym_Clothes_Off ([KittyX])
         if KittyX.location == "bg_classroom":
             ch_k "Cool, study buddy!"
@@ -3231,10 +3231,10 @@ label Kitty_Wardrobe_Menu:
                 return
             $ KittyX.piercings = ""
 
-        "Add gold_necklace" if KittyX.neck != "gold_necklace":
+        "Add gold_necklace" if KittyX.neck != "_gold_necklace":
             ch_p "Why don't you try on that gold necklace?"
             ch_k "Ok. . ."
-            $ KittyX.neck = "gold_necklace"
+            $ KittyX.neck = "_gold_necklace"
         "Add star_necklace" if KittyX.neck != "star_necklace":
             ch_p "Why don't you try on that star necklace?"
             ch_k "Ok. . ."

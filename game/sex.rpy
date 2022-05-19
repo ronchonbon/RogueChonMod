@@ -1647,7 +1647,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
         if Present[counter] == RogueX:
             show Rogue_sprite at Girl_Dance1(RogueX)
         elif Present[counter] == KittyX:
-            show Kitty_Sprite at Girl_Dance1(KittyX)
+            show Kitty_sprite at Girl_Dance1(KittyX)
         elif Present[counter] == EmmaX:
             show Emma_Sprite at Girl_Dance1(EmmaX)
         elif Present[counter] == LauraX:
@@ -2223,7 +2223,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
         if Girl == RogueX:
             show Rogue_sprite at Girl_Dance1(Girl)
         elif Girl == KittyX:
-            show Kitty_Sprite at Girl_Dance1(Girl)
+            show Kitty_sprite at Girl_Dance1(Girl)
         elif Girl == EmmaX:
             show Emma_Sprite at Girl_Dance1(Girl)
         elif Girl == LauraX:
@@ -2494,7 +2494,7 @@ label Strip_Ultimatum:
     if Girl == RogueX:
         show Rogue_sprite at Girl_Dance1(Girl)
     elif Girl == KittyX:
-        show Kitty_Sprite at Girl_Dance1(Girl)
+        show Kitty_sprite at Girl_Dance1(Girl)
     elif Girl == EmmaX:
         show Emma_Sprite at Girl_Dance1(Girl)
     elif Girl == LauraX:
@@ -3009,7 +3009,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
 
 
     if not Girl.event_counter["seen_with_girl"]:
-        $ Girl.change_face("_surprised", 1,Mouth="kiss")
+        $ Girl.change_face("_surprised", 1,Mouth = "_kiss")
         if Girl == RogueX:
             ch_r "You want me and [Partner.name] to hook up, while you watch?"
         elif Girl == KittyX:

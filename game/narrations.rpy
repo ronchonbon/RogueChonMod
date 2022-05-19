@@ -2992,7 +2992,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
             show Rogue_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == KittyX:
-            show Kitty_Sprite zorder GirlA.sprite_layer:
+            show Kitty_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == EmmaX:
             show Emma_Sprite zorder GirlA.sprite_layer:
@@ -3021,7 +3021,7 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
             show Rogue_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == KittyX:
-            show Kitty_Sprite zorder GirlA.sprite_layer:
+            show Kitty_sprite zorder GirlA.sprite_layer:
                 ease 1 ypos 200
         elif GirlA == EmmaX:
             show Emma_Sprite zorder GirlA.sprite_layer:

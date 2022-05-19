@@ -1134,8 +1134,8 @@ image Jean_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "licking_pussy",
-            "primary_action == 'eat_ass'", "licking_ass",
+            "primary_action == 'eat_pussy'", "doggy_licking_pussy",
+            "primary_action == 'eat_ass'", "doggy_licking_ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -2635,7 +2635,7 @@ image Jean_Sex_Zero_Cock:
         subpixel True
 
         ConditionSwitch(
-                "Player.sprite", "Zero_Zero_cock_blowjob" ,
+                "Player.sprite", "Zero_cock_titjob" ,
                 "True", Null(),
                 )
         subpixel True
@@ -3886,13 +3886,13 @@ label Jean_BJ_Reset:
 
 
 
-image Jean_Hand_Under:
+image Jean_handjob_under:
     "images/JeanSprite/handjean2.png"
     anchor (0.5,0.5)
     pos (-10,0)
     offset (0,130)
 
-image Jean_Hand_Over:
+image Jean_handjob_over:
     "images/JeanSprite/handjean1.png"
     anchor (0.5,0.5)
     pos (-10,0)
@@ -3970,26 +3970,26 @@ image Jean_HJ_Animation:
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Jean_Hand_Under"),
-            "action_speed == 1", At("Jean_Hand_Under", Jean_Hand_1()),
-            "action_speed >= 2", At("Jean_Hand_Under", Jean_Hand_2()),
+            "not action_speed", Transform("Jean_handjob_under"),
+            "action_speed == 1", At("Jean_handjob_under", Jean_Hand_1()),
+            "action_speed >= 2", At("Jean_handjob_under", Jean_Hand_2()),
             "action_speed ", Null(),
             ),
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Zero_Handcock"),
-            "action_speed == 1", At("Zero_Handcock", Handcock_1J()),
-            "action_speed >= 2", At("Zero_Handcock", Handcock_2J()),
+            "not action_speed", Transform("Zero_cock_handjob"),
+            "action_speed == 1", At("Zero_cock_handjob", Handcock_1J()),
+            "action_speed >= 2", At("Zero_cock_handjob", Handcock_2J()),
             "action_speed ", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Jean_Hand_Over"),
-            "action_speed == 1", At("Jean_Hand_Over", Jean_Hand_1()),
-            "action_speed >= 2", At("Jean_Hand_Over", Jean_Hand_2()),
+            "not action_speed", Transform("Jean_handjob_over"),
+            "action_speed == 1", At("Jean_handjob_over", Jean_Hand_1()),
+            "action_speed >= 2", At("Jean_handjob_over", Jean_Hand_2()),
             "action_speed ", Null(),
             ),
     anchor (0.51, -1.3)
@@ -4085,9 +4085,9 @@ image Jean_PJ_Animation:
         ConditionSwitch(
 
 
-            "not action_speed", Transform("Zero_Handcock"),
-            "action_speed == 1", At("Zero_Handcock", Handcock_1J()),
-            "action_speed >= 2", At("Zero_Handcock", Handcock_2J()),
+            "not action_speed", Transform("Zero_cock_handjob"),
+            "action_speed == 1", At("Zero_cock_handjob", Handcock_1J()),
+            "action_speed >= 2", At("Zero_cock_handjob", Handcock_2J()),
             "action_speed ", Null(),
             ),
         offset (0,0)
@@ -4195,7 +4195,7 @@ image JeanScreen:
 
 image Jean_TJ_ZeroCock:
 
-    "Zero_Zero_cock_blowjob"
+    "Zero_cock_titjob"
     transform_anchor True
     zoom 0.6
     anchor (0.5, 0.5)
@@ -4218,9 +4218,9 @@ image Jean_TJ_Body:
 
         ConditionSwitch(
 
-                        "JeanX.top == 'yellow_shirt'","images/JeanBJFace/Jean_TJ_Over_Tank_Base.png",
-                        "JeanX.top == 'green_shirt'","images/JeanBJFace/Jean_TJ_Over_GreenShirt_Base.png",
-                        "JeanX.top == 'pink_shirt'","images/JeanBJFace/Jean_TJ_Over_PinkShirt_Base.png",
+                        "JeanX.top == 'yellow_shirt'","images/JeanBJFace/Jean_titjob_over_Tank_Base.png",
+                        "JeanX.top == 'green_shirt'","images/JeanBJFace/Jean_titjob_over_GreenShirt_Base.png",
+                        "JeanX.top == 'pink_shirt'","images/JeanBJFace/Jean_titjob_over_PinkShirt_Base.png",
                         "True", Null(),
                         )
 
@@ -4334,13 +4334,13 @@ image Jean_TJ_Tits:
 
         ConditionSwitch(
 
-                        "JeanX.top == 'yellow_shirt' and JeanX.top_pulled_up","images/JeanBJFace/Jean_TJ_Over_Tank_Up.png",
-                        "JeanX.top == 'yellow_shirt'","images/JeanBJFace/Jean_TJ_Over_Tank_Top.png",
-                        "JeanX.top == 'green_shirt' and JeanX.top_pulled_up","images/JeanBJFace/Jean_TJ_Over_GreenShirt_Up.png",
-                        "JeanX.top == 'pink_shirt' and JeanX.top_pulled_up","images/JeanBJFace/Jean_TJ_Over_PinkShirt_Up.png",
-                        "JeanX.top == 'green_shirt'","images/JeanBJFace/Jean_TJ_Over_GreenShirt_Top.png",
-                        "JeanX.top == 'pink_shirt'","images/JeanBJFace/Jean_TJ_Over_PinkShirt_Top.png",
-                        "JeanX.top == 'towel' and not renpy.showing('Jean_TJ_Animation')", "images/JeanBJFace/Jean_TJ_Over_Towel.png",
+                        "JeanX.top == 'yellow_shirt' and JeanX.top_pulled_up","images/JeanBJFace/Jean_titjob_over_Tank_Up.png",
+                        "JeanX.top == 'yellow_shirt'","images/JeanBJFace/Jean_titjob_over_Tank_Top.png",
+                        "JeanX.top == 'green_shirt' and JeanX.top_pulled_up","images/JeanBJFace/Jean_titjob_over_GreenShirt_Up.png",
+                        "JeanX.top == 'pink_shirt' and JeanX.top_pulled_up","images/JeanBJFace/Jean_titjob_over_PinkShirt_Up.png",
+                        "JeanX.top == 'green_shirt'","images/JeanBJFace/Jean_titjob_over_GreenShirt_Top.png",
+                        "JeanX.top == 'pink_shirt'","images/JeanBJFace/Jean_titjob_over_PinkShirt_Top.png",
+                        "JeanX.top == 'towel' and not renpy.showing('Jean_TJ_Animation')", "images/JeanBJFace/Jean_titjob_over_Towel.png",
                         "True", Null(),
                         )
     contains:

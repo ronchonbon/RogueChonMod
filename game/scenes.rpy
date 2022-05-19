@@ -1569,7 +1569,7 @@ label Sleepover_MorningWood:
             show Rogue_sprite:
                 pos (900,250)
         elif Partner == KittyX:
-            show Kitty_Sprite:
+            show Kitty_sprite:
                 pos (900,250)
         elif Partner == EmmaX:
             show Emma_Sprite:
@@ -2073,9 +2073,9 @@ label Sleepover_MorningWood:
                 show Rogue_sprite:
                     pos (700,50)
             elif Party[1] == KittyX:
-                show Kitty_Sprite:
+                show Kitty_sprite:
                     ease 1 pos (700,50)
-                show Kitty_Sprite:
+                show Kitty_sprite:
                     pos (700,50)
             elif Party[1] == EmmaX:
                 show Emma_Sprite:
@@ -2164,9 +2164,9 @@ label Morning_Partner:
         show Emma_Sprite:
             pos (700,50)
     elif Partner == KittyX:
-        show Kitty_Sprite:
+        show Kitty_sprite:
             ease 1 pos (700,50)
-        show Kitty_Sprite:
+        show Kitty_sprite:
             pos (700,50)
     elif Partner == LauraX:
         show Laura_Sprite:
@@ -3848,7 +3848,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
     if Girl == RogueX:
         show Rogue_sprite at sprite_location(stage_right) with ease
     elif Girl == KittyX:
-        show Kitty_Sprite at sprite_location(stage_right) with ease
+        show Kitty_sprite at sprite_location(stage_right) with ease
     elif Girl == EmmaX:
         show Emma_Sprite at sprite_location(stage_right) with ease
     elif Girl == LauraX:
@@ -3866,7 +3866,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
     if Partner == RogueX:
         show Rogue_sprite at sprite_location(stage_far_right) with ease
     elif Partner == KittyX:
-        show Kitty_Sprite at sprite_location(stage_far_right) with ease
+        show Kitty_sprite at sprite_location(stage_far_right) with ease
     elif Partner == EmmaX:
         show Emma_Sprite at sprite_location(stage_far_right) with ease
     elif Partner == LauraX:
@@ -3878,7 +3878,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
     elif Partner == JubesX:
         show Jubes_Sprite at sprite_location(stage_far_right) with ease
 
-    call XavierFace ("shocked")
+    call change_Xavier_face ("shocked")
     $ Girl.change_face("_sad")
     if (Girl == EmmaX or Partner == EmmaX) and (Girl == StormX or Partner == StormX):
         ch_x "I'm very disappointed in the both of you!."
@@ -3948,13 +3948,13 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
             ch_x "This is especially true in the school's public spaces!"
             ch_x "What sort of message does that send?"
             ch_x "How appropriate would it be if I were to just wander the halls with Miss Grey on my lap?"
-            call XavierFace ("hypno")
+            call change_Xavier_face ("hypno")
             ch_x "Just. . . running my hands along her firm little body without a care in the world. . ."
-            call XavierFace ("_happy")
+            call change_Xavier_face ("_happy")
             if JeanX.location == bg_current:
                 "You glance over at [JeanX.name], she shrugs."
             ch_x ". . ."
-            call XavierFace ("shocked")
+            call change_Xavier_face ("shocked")
             ch_x "Yes, well, as I was saying! . ."
         else:
             ch_x "Emma, I don't believe this is the first time we've had this talk."
@@ -3968,11 +3968,11 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
             ch_x "I'm well aware of your Bohemian tendencies in private, but you must comport yourself while in public."
             ch_x "What sort of message does that send?"
             ch_x "Do you think it would be appropriate for me to engage in such escapades?"
-            call XavierFace ("hypno")
+            call change_Xavier_face ("hypno")
             ch_x "Just. . . rolling down the halls with my balls flowing freely in the wind. . ."
-            call XavierFace ("_happy")
+            call change_Xavier_face ("_happy")
             ch_x ". . ."
-            call XavierFace ("shocked")
+            call change_Xavier_face ("shocked")
             ch_x "Do not distract me! . ."
         else:
             if EmmaX.location == bg_current and EmmaX not in Rules:
@@ -4012,7 +4012,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
                 $ JubesX.change_stat("inhibition", 50, -5)
             $ Girl.change_stat("obedience", 50, -5)
 
-            call XavierFace ("_happy")
+            call change_Xavier_face ("_happy")
             if Girl.event_counter["caught"]:
                 ch_x "But you know you've done this before. . . at least [Girl.event_counter['caught']] times. . ."
             elif Girl == EmmaX and TotalCaught:
@@ -4067,7 +4067,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
                 $ JubesX.change_stat("obedience", 80, 5)
                 $ JubesX.change_stat("love", 90, 10)
 
-            call XavierFace ("_angry")
+            call change_Xavier_face ("_angry")
             $ Count += 10
             ch_x "If that's your attitude, harsher methods might be necessary."
             if PunishmentX:
@@ -4153,7 +4153,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
                 $ JubesX.change_stat("obedience", 50, 25)
                 $ JubesX.change_stat("obedience", 90, 30)
 
-            call XavierFace ("_angry")
+            call change_Xavier_face ("_angry")
             $ Count += 20
             ch_x "If that's your attitude, harsher methods might be necessary."
             if PunishmentX:
@@ -4372,7 +4372,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
 
 
 
-        call XavierFace ("_angry")
+        call change_Xavier_face ("_angry")
         $ Count += 10
         ch_x "I have no idea what that was about, but it sounds like you haven't learned."
         if PunishmentX:
@@ -4434,7 +4434,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
         ch_x "cover up for some of your. . . transgressions."
         $ Girl.change_face("_bemused",Eyes="up")
         ch_j "Oh, you mean how I mindwipe the \"NPCs\" that get too nosy?"
-        call XavierFace ("_angry")
+        call change_Xavier_face ("_angry")
         ch_x "If by \"NPCs\" you mean your fellow students. . ."
         ch_x ". . . and by \"get too nosy,\" you mean \"notice you having sex in public\". . ."
         ch_x ". . . then yes, that is exactly what I mean."
@@ -4444,16 +4444,16 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
         ch_x "It is a total abuse of your abilities and of those students' autonomy!"
         $ Girl.change_face("_angry",1)
         ch_j "Who cares."
-        call XavierFace ("shocked")
+        call change_Xavier_face ("shocked")
         ch_x "!!!"
         ch_x "I do!"
-        call XavierFace ("_angry")
+        call change_Xavier_face ("_angry")
         ch_x "That is it, young lady. Until further notice, you're forbidden from. . . whammying your fellow students!"
         $ Girl.change_face("_angry",1,Mouth="_surprised")
         ch_j "Bullshit!"
         $ Girl.change_face("_angry",0,Eyes="psychic")
         ch_x "Ugh. . ."
-        call XavierFace ("psychic")
+        call change_Xavier_face ("psychic")
         ch_x "[Player.name]. . . this may take a while. . ."
         ch_x "You may as well leave. . ."
         $ JeanX.traits.append("nowhammy")
@@ -4504,9 +4504,9 @@ label Xavier_Plan(GirlX=0):
     $ GirlX.change_face("_sly")
     "As you say this, a sly grin crosses [GirlX.name]'s face."
     "You quickly approach Xavier and place your hands on his head."
-    call XavierFace ("psychic")
+    call change_Xavier_face ("psychic")
     ch_x ". . ."
-    call XavierFace ("shocked")
+    call change_Xavier_face ("shocked")
     "Xavier realizes with a shock that with your powers, his telepathy is useless."
 
     if Partner:
@@ -4542,14 +4542,14 @@ label Xavier_Plan(GirlX=0):
             "[Partner.name] understands what's going on here."
 
 
-    call XavierFace ("_angry")
+    call change_Xavier_face ("_angry")
     if GirlX == RogueX:
         $ RogueX.arms = ""
         $ RogueX.ArmPose = 2
         show Rogue_sprite zorder 24 at sprite_location(stage_left+100,85) with ease
         "[RogueX.name] moves in and also grabs his head, duplicating his powers as he watches helplessly."
         "Now that she posesses his full power, while his are negated, he has no defenses."
-        call XavierFace ("hypno")
+        call change_Xavier_face ("hypno")
         if "Omega" in Player.traits:
             ch_x "Oh, not again."
             ch_x "What is it you want this time?"
@@ -4562,7 +4562,7 @@ label Xavier_Plan(GirlX=0):
         ch_r "I think we'll only get three tries at this. . ."
     elif GirlX == KittyX:
         $ KittyX.ArmPose = 2
-        show Kitty_Sprite at sprite_location(stage_left+100,150) with ease
+        show Kitty_sprite at sprite_location(stage_left+100,150) with ease
         $ KittyX.sprite_location = stage_center
         "[KittyX.name] moves in sits on his lap, pinning his arms to the chair."
         if "Kappa" in Player.traits:
@@ -4591,7 +4591,7 @@ label Xavier_Plan(GirlX=0):
         elif GirlX == JeanX:
             show Jean_Sprite zorder 24 at sprite_location(stage_left+100,85) with ease
         "[GirlX.name] moves behind Xavier and activates her own telepathy."
-        call XavierFace ("_angry")
+        call change_Xavier_face ("_angry")
         if (GirlX == EmmaX and "Psi" in Player.traits) or (GirlX == JeanX and "Alpha" in Player.traits):
             ch_x "Oh, not again. . ."
             $ GirlX.change_stat("obedience", 80, 3)
@@ -5035,7 +5035,7 @@ label Girl_Caught_Changing(Girl=0):
     call shift_focus (Girl)
     $ D20 = renpy.random.randint(1, 20)
 
-    $ Girl.change_face("_surprised", 1,Mouth="kiss")
+    $ Girl.change_face("_surprised", 1,Mouth = "_kiss")
     call Remove_Girl ("All")
 
     if D20 > 17:
@@ -9737,7 +9737,7 @@ label Frisky_Class(Girl=0, Teacher=0, LineB=0, BO=[]):
                 show Rogue_sprite at sprite_location(RogueX.sprite_location,50):
                     ease .5 ypos 250
             elif BO[0] == KittyX:
-                show Kitty_Sprite at sprite_location(KittyX.sprite_location,50):
+                show Kitty_sprite at sprite_location(KittyX.sprite_location,50):
                     ease .5 ypos 250
             elif BO[0] == LauraX:
                 show Laura_Sprite at sprite_location(LauraX.sprite_location,50):

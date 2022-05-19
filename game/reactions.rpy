@@ -540,7 +540,7 @@ label done_action_today_reactions(Girl):
 label first_time_asking_reactions(Girl, action):
     if primary_action != "footjob":
         $ Girl.change_face("_surprised", 1)
-        $ Girl.Mouth = "kiss"
+        $ Girl.Mouth = "_kiss"
 
         call first_time_asking_lines(Girl)
     else:
@@ -1158,7 +1158,7 @@ label action_approved(Girl, action):
     elif Girl.action_counter[action] < 3:
         $ Girl.change_face("_sexy", 1)
         $ Girl.Brows = "_confused"
-        $ Girl.Mouth = "kiss"
+        $ Girl.Mouth = "_kiss"
 
         call before_action_less_than_three_times_lines(Girl)
     else:

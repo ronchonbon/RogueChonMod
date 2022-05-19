@@ -2009,7 +2009,7 @@ label Girl_Cumming(Girl=0, Quick=0, BO=[]):
         if Girl == RogueX:
             show Rogue_sprite at Girl_Dance1(RogueX)
         elif Girl == KittyX:
-            show Kitty_Sprite at Girl_Dance1(KittyX)
+            show Kitty_sprite at Girl_Dance1(KittyX)
         elif Girl == EmmaX:
             show Emma_Sprite at Girl_Dance1(EmmaX)
         elif Girl == LauraX:

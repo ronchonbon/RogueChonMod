@@ -1132,8 +1132,8 @@ image Laura_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "Player.sprite and Player.cock_position", Null(),
-            "primary_action == 'eat_pussy'", "licking_pussy",
-            "primary_action == 'eat_ass'", "licking_ass",
+            "primary_action == 'eat_pussy'", "doggy_licking_pussy",
+            "primary_action == 'eat_ass'", "doggy_licking_ass",
             "True", Null()
             ),
         (0,0), ConditionSwitch(
@@ -3496,7 +3496,7 @@ image Laura_Footjob_Foot:
 
 image Laura_Sex_Zero_Anim_F:
 
-    "Zero_Zero_cock_blowjob"
+    "Zero_cock_titjob"
     zoom .7
     anchor (0.5, 0.9)
     offset (270,650)
@@ -5094,13 +5094,13 @@ label Laura_BJ_Reset:
 
 
 
-image Laura_Hand_Under:
+image Laura_handjob_under:
     "images/LauraSprite/handlaura2.png"
     anchor (0.5,0.5)
     pos (-10,0)
 
 
-image Laura_Hand_Over:
+image Laura_handjob_over:
     "images/LauraSprite/handlaura1.png"
     anchor (0.5,0.5)
     pos (-10,0)
@@ -5177,26 +5177,26 @@ image Laura_HJ_Animation:
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Laura_Hand_Under"),
-            "action_speed == 1", At("Laura_Hand_Under", Laura_Hand_1()),
-            "action_speed >= 2", At("Laura_Hand_Under", Laura_Hand_2()),
+            "not action_speed", Transform("Laura_handjob_under"),
+            "action_speed == 1", At("Laura_handjob_under", Laura_Hand_1()),
+            "action_speed >= 2", At("Laura_handjob_under", Laura_Hand_2()),
             "action_speed ", Null(),
             ),
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Zero_Handcock"),
-            "action_speed == 1", At("Zero_Handcock", Handcock_1L()),
-            "action_speed >= 2", At("Zero_Handcock", Handcock_2L()),
+            "not action_speed", Transform("Zero_cock_handjob"),
+            "action_speed == 1", At("Zero_cock_handjob", Handcock_1L()),
+            "action_speed >= 2", At("Zero_cock_handjob", Handcock_2L()),
             "action_speed ", Null(),
             ),
         offset (0,0)
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Laura_Hand_Over"),
-            "action_speed == 1", At("Laura_Hand_Over", Laura_Hand_1()),
-            "action_speed >= 2", At("Laura_Hand_Over", Laura_Hand_2()),
+            "not action_speed", Transform("Laura_handjob_over"),
+            "action_speed == 1", At("Laura_handjob_over", Laura_Hand_1()),
+            "action_speed >= 2", At("Laura_handjob_over", Laura_Hand_2()),
             "action_speed ", Null(),
             ),
     anchor (0.51, -1.3)
@@ -5317,7 +5317,7 @@ image Laura_TJ_HairTop:
 
 image Laura_TJ_ZeroCock:
 
-    "Zero_Zero_cock_blowjob"
+    "Zero_cock_titjob"
     transform_anchor True
     zoom .7
     anchor (0.5, 0.5)

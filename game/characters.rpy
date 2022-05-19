@@ -244,7 +244,7 @@ init python:
             elif self.tag == "Kitty":
                 self.voice = ch_k
 
-                self.Casual1 = [2,0, "_capris", "_pink_top", "gold_necklace", "_cami", "_green_panties", "", "", "", 0]
+                self.Casual1 = [2,0, "_capris", "_pink_top", "_gold_necklace", "_cami", "_green_panties", "", "", "", 0]
                 self.Casual2 = [2,0, "_black_jeans", "_red_shirt", "star_necklace", "_bra", "_green_panties", "", "", "", 0]
                 self.Gym = [0, "", "_shorts", "", "", "_sports_bra", "_green_panties", "", "", "",10]
                 self.sleepwear = [0, "", "_shorts", "", "", "_cami", "_green_panties", "", "", "",20]
@@ -1812,7 +1812,7 @@ label EmotionEditor(Chr=0):
                     "Sucking":
                         $ Chr.emotion = "_sucking"
                     "kiss":
-                        $ Chr.emotion = "kiss"
+                        $ Chr.emotion = "_kiss"
                     "Tongue":
                         $ Chr.emotion = "_tongue"
                     "_confused":
@@ -2573,7 +2573,7 @@ label Emergency_Clothing_Reset:
             $ KittyX.Custom1 = [0, "", "", "", "", "", "", "", "", "", 0]
             $ KittyX.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
             $ KittyX.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ KittyX.Casual1 = [2,0, "_capris", "_pink_top", "gold_necklace", "_cami", "_green_panties", "", "", "", 0]
+            $ KittyX.Casual1 = [2,0, "_capris", "_pink_top", "_gold_necklace", "_cami", "_green_panties", "", "", "", 0]
             $ KittyX.Casual2 = [2,0, "_black_jeans", "_red_shirt", "", "_bra", "_green_panties", "", "", "", 0]
             $ KittyX.Gym = [0, "", "_shorts", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
             $ KittyX.sleepwear = [0, "", "_shorts", "", "", "_cami", "_green_panties", "", "", "", 0]
@@ -2721,7 +2721,7 @@ label GirlsAngry(Girls=0, BO=[]):
             if BO[0] == RogueX:
                 hide Rogue_sprite with easeoutleft
             elif BO[0] == KittyX:
-                hide Kitty_Sprite with easeoutleft
+                hide Kitty_sprite with easeoutleft
             elif BO[0] == EmmaX:
                 hide Emma_Sprite with easeoutleft
             elif BO[0] == LauraX:
