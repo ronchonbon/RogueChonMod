@@ -1628,11 +1628,11 @@ label Halloween_Ending(Girl=0):
 
     $ bg_current = "bg_player"
     call Wait
-    call Girls_Location
+    call girls_location
     if Girl:
         $ Girl.location = "bg_player"
 
-        call set_the_scene (Quiet=1)
+        call set_the_scene (silent=1)
         $ Girl.change_face("_smile",1)
         if Girl == RogueX:
             ch_r "Well that was an awful fun shindig."

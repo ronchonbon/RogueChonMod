@@ -346,7 +346,7 @@ label Kitty_BF_Jerk:
         call Remove_Girl (KittyX)
         call set_the_scene
         $ renpy.pop_call()
-        jump Player_Room
+        jump player_room
     if KittyX.Event[5] > 1:
         ch_k "It was such a mistake asking you again. You’re[KittyX.like]still such a jerk!"
     if KittyX.Event[5] != 20:
@@ -359,7 +359,7 @@ label Kitty_BF_Jerk:
     $ bg_current = "bg_player"
     call Remove_Girl (KittyX)
     $ renpy.pop_call()
-    jump Player_Room
+    jump player_room
 
 
 

@@ -211,8 +211,6 @@ label start:
     $ StormX.change_outfit(6,Changed=1)
     $ JubesX.change_outfit(6,Changed=1)
 
-    show Kitty_sprite
-
     ""
 
     $ focused_Girl = RogueX

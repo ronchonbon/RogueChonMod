@@ -2100,7 +2100,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
             jump Emma_Room
         elif EmmaX.location == "bg_player":
             ch_e "I'll be waiting for you."
-            jump Player_Room
+            jump player_room
         elif EmmaX.location == "bg_showerroom":
             ch_e "Don't keep me waiting. . ."
             jump Shower_Room
@@ -2342,7 +2342,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump Emma_Room
         elif EmmaX.location == "bg_player":
             ch_e "I'll be waiting."
-            jump Player_Room
+            jump player_room
         elif EmmaX.location == "bg_showerroom":
             ch_e "I'll get started."
             jump Shower_Room_Entry

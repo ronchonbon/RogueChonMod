@@ -17,7 +17,7 @@ label addiction_event(Girl):
         if Girl.location == bg_current or Girl in Party:
             "Out of the blue, [Girl.name] says she wants to talk to you in your room and drags you over there."
         else:
-            "[Girl.name] shows up, hurridly says she wants to talk to you in your room and drags you over there."
+            "[Girl.name] shows up and hurriedly says she wants to talk to you in your room and drags you over there."
     else:
         if Girl.location == bg_current or Girl in Party:
             "[Girl.name] turns to you with a bit of a dazed look."

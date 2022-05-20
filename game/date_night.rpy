@@ -4011,7 +4011,7 @@ label Player_Date_End:
     elif Party and Party[0]:
         "You bring [Party[0].name] to your own door."
         call Girl_Date_End (Party[0])
-    jump Player_Room
+    jump player_room
 
 label Girl_Date_End(Girl=0):
 
@@ -4339,7 +4339,7 @@ label Girl_Date_End(Girl=0):
             $ bg_current = "bg_player"
         call Remove_Girl ("All")
         $ Player.daily_history.append("post date")
-        jump Player_Room
+        jump player_room
 
     call Sleepover (Girl)
     jump Misplaced

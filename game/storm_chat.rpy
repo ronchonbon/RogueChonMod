@@ -1931,7 +1931,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
             jump Storm_Room
         elif StormX.location == "bg_player":
             ch_s "I will be waiting."
-            jump Player_Room
+            jump player_room
         elif StormX.location == "bg_showerroom":
             ch_s "I will leave you some hot water."
             jump Shower_Room
@@ -2177,7 +2177,7 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump Storm_Room
         elif StormX.location == "bg_player":
             ch_s "I will be waiting."
-            jump Player_Room
+            jump player_room
         elif StormX.location == "bg_showerroom":
             ch_s "I will leave you some hot water."
             jump Shower_Room
@@ -2190,7 +2190,7 @@ label Storm_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         else:
             ch_s "I will just meet you in your room."
             $ StormX.location = "bg_player"
-            jump Player_Room
+            jump player_room
 
 
 

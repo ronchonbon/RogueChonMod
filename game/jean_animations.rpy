@@ -3211,7 +3211,7 @@ label Jean_Sex_Launch(Line=primary_action):
     $ Player.sprite = 1
     $ Line = "solo" if not Line else Line
     if Line == "sex":
-        $ Player.cock_position = "in"
+        $ Player.cock_position = "sex"
         if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
             $ offhand_action = 0
     elif Line == "anal":

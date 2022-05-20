@@ -1985,7 +1985,7 @@ label Jean_Summon(approval_bonus=approval_bonus):
             jump Jean_Room
         elif JeanX.location == "bg_player":
             ch_j "Don't keep me waiting."
-            jump Player_Room
+            jump player_room
         elif JeanX.location == "bg_showerroom":
             ch_j "I'll see you then."
             jump Shower_Room
@@ -2222,7 +2222,7 @@ label Jean_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump Jean_Room
         elif JeanX.location == "bg_player":
             ch_j "Good."
-            jump Player_Room
+            jump player_room
         elif JeanX.location == "bg_showerroom":
             ch_j "Ok, nice."
             jump Shower_Room_Entry
@@ -2235,7 +2235,7 @@ label Jean_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         else:
             ch_j "I'll just meet you in your room."
             $ JeanX.location = "bg_player"
-            jump Player_Room
+            jump player_room
 
 
 

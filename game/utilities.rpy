@@ -115,7 +115,7 @@ label Round10(BO=[], Occupant=0):
 
     call Wait
 
-    call Girls_Location
+    call girls_location
 
     if time_index < 3 or Occupant.location != bg_current:
 
@@ -1105,7 +1105,7 @@ label ReturnToRoom:
         "Yes":
             $ renpy.pop_call()
             $ renpy.pop_call()
-            jump Player_Room_Entry
+            jump player_room_Entry
         "No":
             pass
     return
@@ -1249,7 +1249,7 @@ label SpecialMenu:
                     "Yes":
                         $ renpy.pop_call()
                         call Failsafe
-                        jump Player_Room
+                        jump player_room
                     "Never mind.":
                         pass
             "Halloween Party [[Evening Only] (locked)" if time_index != 2:
@@ -1862,7 +1862,7 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[], BO=[]):
 
 
 
-label Girls_Location(GirlsNum=0, Change=0, BOptions=[]):
+label girls_location(GirlsNum=0, Change=0, BOptions=[]):
 
 
 
@@ -2965,7 +2965,7 @@ label Dismissed:
 
 
 
-label Locked_Door(Girl=0, Entry=0, Current=0):
+label Locked_Door(Girl=0, entering=0, Current=0):
 
 
 
@@ -2990,7 +2990,7 @@ label Locked_Door(Girl=0, Entry=0, Current=0):
         return 1
     if "locked" not in Player.traits:
         $ Girl.location = bg_current
-        if Entry:
+        if entering:
             call Display_Girl (Girl, TrigReset=0)
             if bg_current == "bg_campus" or bg_current == "bg_pool":
                 "Suddently, [Girl.name] rounds a corner."
@@ -3781,17 +3781,17 @@ return
 
 
 
-label set_the_scene(Chr=1, Entry=0, Dress=1, TrigReset=1, Quiet=0, BO=[]):
+label set_the_scene(Chr=1, entering=0, Dress=1, TrigReset=1, silent=0, BO=[]):
 
 
 
 
 
 
-    if not Quiet:
+    if not silent:
         show blackscreen onlayer black
 
-    if Entry:
+    if entering:
         $ Chr = 0
         call AllHide
         $ entering = True
@@ -4670,7 +4670,7 @@ label JumperCheck(Girls=[], BO=[]):
 
     if bg_current == "bg_player":
 
-        jump Player_Room
+        jump player_room
     return
 
 
@@ -5481,7 +5481,7 @@ label primary_action_Swap(Active=0, primary_actionX1=primary_action, primary_act
             $ renpy.pop_call()
             jump Jubes_SMenu
     else:
-        call set_the_scene (Dress=0, TrigReset=0, Quiet=1)
+        call set_the_scene (Dress=0, TrigReset=0, silent=1)
         call expression Primary.tag + "_SexAct" pass ("SkipTo")
     return
 
@@ -6979,7 +6979,7 @@ label Clear_Stack:
     while StackDepth > 0:
         $ StackDepth -= 1
         $ renpy.pop_call()
-    jump Player_Room
+    jump player_room
 
 
 

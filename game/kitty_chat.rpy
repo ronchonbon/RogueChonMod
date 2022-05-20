@@ -2012,7 +2012,7 @@ label Kitty_Summon(approval_bonus=approval_bonus):
             jump Kitty_Room
         elif KittyX.location == "bg_player":
             ch_k "I'll be here for you."
-            jump Player_Room
+            jump player_room
         elif KittyX.location == "bg_showerroom":
             ch_k "I guess I'll be lathering up."
             jump Shower_Room
@@ -2246,7 +2246,7 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump Kitty_Room
         elif KittyX.location == "bg_player":
             ch_k "I'll be waiting."
-            jump Player_Room
+            jump player_room
         elif KittyX.location == "bg_showerroom":
             ch_k "I guess I'll see you there."
             jump Shower_Room_Entry

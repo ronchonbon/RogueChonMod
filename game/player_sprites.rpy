@@ -27,14 +27,14 @@ layeredimage Zero_cock_doggy_out:
         "images/Player/Zero_cock_doggy_[Player.color].png"
 
     if Player.cock_wet:
-        "images/RogueDoggy/Rogue_Doggy_Cock_U_W.png"
+        "images/Player/Zero_doggy_cock_wet.png"
 
 layeredimage Zero_cock_doggy_in:
     always:
         "images/Player/Zero_cock_doggy_[Player.color]_in.png"
 
     if Player.cock_wet:
-        "images/RogueDoggy/Rogue_Doggy_Cock_In_Wet.png"
+        "images/Player/Zero_doggy_cock_in_wet.png"
 
     if Player.spunk:
-        "images/RogueDoggy/Rogue_Doggy_Cock_In_Spunk.png"
+        "images/Player/Zero_doggy_cock_in_spunk.png"

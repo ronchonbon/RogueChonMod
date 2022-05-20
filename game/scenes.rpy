@@ -1,3469 +1,3 @@
-label Sleepover(Line=0, BO=[]):
-
-
-
-
-    $ Party = []
-
-    $ BO = all_Girls[:]
-    while BO:
-        if BO[0].location == bg_current:
-            $ Party.append(BO[0])
-        $ BO.remove(BO[0])
-
-
-    if bg_current == "bg_player" and "met" in StormX.history and "met" not in JubesX.history:
-
-        call clear_the_room ("All", 1, 0)
-        "It's getting late, so you go to sleep."
-        call Jubes_Meet
-        call Wait
-        return
-
-    if not Party and bg_current == "bg_player":
-
-        call clear_the_room ("All", 1)
-
-        "It's getting late, so you go to sleep."
-        if "met" in StormX.history and "met" not in JubesX.history:
-            call Jubes_Meet
-        call Wait
-        return
-
-    while len(Party) > 2:
-
-        $ Party.remove(Party[2])
-
-    if Day <= 4:
-
-        $ Party = []
-    elif Party and Party[0]:
-        call shift_focus (Party[0])
-
-    if bg_current != "bg_player":
-
-        $ BO = all_Girls[:]
-        while BO:
-            if BO[0].home == bg_current:
-                if BO[0] not in Party:
-
-                    "[BO[0].name] probably wouldn't appreciate you staying over, you head back to your own room."
-                    call Remove_Girl ("All")
-                    jump Return_Player
-                if BO[0] != Party[0]:
-                    $ Party.reverse()
-                $ BO = [1]
-            $ BO.remove(BO[0])
-
-
-    if bg_current == "bg_player":
-        if len(Party) == 2:
-            $ renpy.random.shuffle(Party)
-            if approval_check(Party[0],Check=1) <= approval_check(Party[1],Check=1):
-
-                $ Party.reverse()
-        if not Party:
-            pass
-        elif Party[0].event_counter["sleepover"] >= 3 and approval_check(Party[0], 800):
-            pass
-        elif Party[0] == RogueX:
-            ch_r "It's getting late and I'm getting a bit tired."
-        elif Party[0] == KittyX:
-            ch_k "It's late, I'm thinking of heading out. . ."
-        elif Party[0] == EmmaX:
-            ch_e "It's late, I should be going. . ."
-        elif Party[0] == LauraX:
-            ch_l "I need some sleep. . ."
-        elif Party[0] == JeanX:
-            ch_j "I'm turning in. . ."
-        elif Party[0] == StormX:
-            ch_s "It is getting late, I should be going. . ."
-        elif Party[0] == JubesX:
-            ch_v "Well, it's pretty late, you should be getting some sleep. . ."
-    elif Party and bg_current == Party[0].home:
-        if Party[0] == RogueX:
-            ch_r "It's getting late and I'm turning in."
-        elif Party[0] == KittyX:
-            ch_k "I'm getting kinda tired. . ."
-        elif Party[0] == EmmaX:
-            ch_e "It's getting late, [EmmaX.player_petname]. . ."
-        elif Party[0] == LauraX:
-            ch_l "I'm tired. . ."
-        elif Party[0] == JeanX:
-            ch_j "I'm turning in. . ."
-        elif Party[0] == StormX:
-            ch_s "It is getting late, I would like to get ready for bed. . ."
-        elif Party[0] == JubesX:
-            ch_v "Well, it's pretty late, you should be getting some sleep. . ."
-    else:
-        "Something went wrong."
-        "Tell Oni \"[Party] - [bg_current]\""
-
-
-    if Day <= 4:
-
-        jump Return_Player
-
-    if EmmaX in Party:
-        if "classcaught" not in EmmaX.history:
-            if bg_current == EmmaX.home:
-                ch_e "You should probably get going, we wouldn't want any rumors to spread."
-                jump Return_Player
-            else:
-                ch_e "I should probably get going, we wouldn't want any rumors to spread."
-                call Remove_Girl (EmmaX)
-        elif len(Party) >= 2 and "three" not in EmmaX.history:
-
-            if (bg_current == EmmaX.home or bg_current == "bg_player") and approval_check(EmmaX, 1100, "LI"):
-                if Party[0] != EmmaX:
-                    $ Party.reverse()
-                ch_e "[Party[1].name] dear, I need a moment with [Player.name], but you can leave."
-                $ Party[1].change_face("_confused",1)
-                Party[1].voice "Oh, ok. . ."
-                call Remove_Girl (Party[1])
-                ch_e "Sorry about that, but I had to discuss something with you in private."
-            else:
-
-                ch_e "Yes, I really should be leaving, don't let me bother you two."
-                call Remove_Girl (EmmaX)
-            if "sleeptime" not in EmmaX.history:
-                $ EmmaX.history.append("sleeptime")
-        if not Party or (EmmaX not in Party and bg_current == EmmaX.home):
-
-            jump Return_Player
-
-    $ Party[0].change_face("_sexy",1)
-
-    $ Line = 0
-    if Party[0].event_counter["sleepover"] >= 3 and approval_check(Party[0], 800):
-
-        if Party[0].home == bg_current:
-            Party[0].voice "Are you staying over tonight?"
-        else:
-            Party[0].voice "I'm staying over, right?"
-        $ Line = 1
-
-    elif Party[0].event_counter["sleepover"] < 3 and approval_check(Party[0], 1100, "LI"):
-
-        $ Party[0].change_face("_bemused",1)
-        if Party[0] == RogueX:
-            if bg_current == Party[0].home:
-                ch_r "I was thinking. . . maybe you wanted to stay the night?"
-            else:
-                ch_r "I was thinking. . . maybe I could stay the night?"
-        elif Party[0] == KittyX:
-            if bg_current == Party[0].home:
-                ch_k "So[KittyX.like]did you want to stay over?"
-            else:
-                ch_k "So[KittyX.like]could I stay over?"
-        elif Party[0] == EmmaX:
-            if bg_current == Party[0].home:
-                ch_e "I was wondering, have you considered staying over?"
-            else:
-                ch_e "I was wondering, could I stay over?"
-        elif Party[0] == LauraX:
-            if bg_current == Party[0].home:
-                ch_l "So, are you staying over?"
-            else:
-                ch_l "So, can I stay here tonight?"
-        elif Party[0] == JeanX:
-            if bg_current == Party[0].home:
-                ch_j "Were you planning to stay over?"
-            else:
-                ch_j "I'm crashing here, ok?"
-        elif Party[0] == StormX:
-            if bg_current == Party[0].home:
-                ch_s "Did you want to stay the night?"
-            else:
-                ch_s "Would you mind if I sleep here tonight?"
-        elif Party[0] == JubesX:
-            if bg_current == Party[0].home:
-                ch_v "Would you maybe wanna sleep here?"
-            else:
-                ch_v "Would you maybe want me to sleep here?"
-        $ Line = 1
-
-
-    if Line:
-
-        menu:
-            extend ""
-            "Sure.":
-                if Party[0].event_counter["sleepover"] <= 5:
-                    $ Party[0].change_stat("love", 70, 10)
-                    $ Party[0].change_stat("obedience", 80, 10)
-                    $ Party[0].change_stat("obedience", 50, 20)
-                    $ Party[0].change_stat("inhibition", 25, 20)
-                $ Party[0].change_stat("love", 70, 5)
-                $ Party[0].change_face("_smile")
-            "No, sorry.":
-
-
-                $ Party[0].change_stat("obedience", 50, 2)
-                $ Party[0].change_stat("obedience", 30, 5)
-                $ Party[0].change_stat("inhibition", 40, 3)
-                $ Party[0].change_face("_sad")
-                $ Line = 0
-                if Party[0] == RogueX:
-                    ch_r "Ok, see you tomorrow then. 'Night."
-                elif Party[0] == KittyX:
-                    ch_k "Alright. . . see you tomorrow. . ."
-                elif Party[0] == EmmaX:
-                    ch_e "Well, if you insist. See you tomorrow then."
-                elif Party[0] == LauraX:
-                    ch_l "Ok."
-                elif Party[0] == JeanX:
-                    ch_j "Huh. Ok, whatever."
-                elif Party[0] == StormX:
-                    ch_s "Very well, I will see you tomorrow then."
-                elif Party[0] == JubesX:
-                    ch_v "Ok, cool, cool. . . later then. . ."
-    else:
-
-        if Party[0] == RogueX:
-            if bg_current == Party[0].home:
-                ch_r "You should get going."
-            else:
-                ch_r "I'm heading out, see you tomorrow."
-        elif Party[0] == KittyX:
-            if bg_current == Party[0].home:
-                ch_k "You should[KittyX.like]head out."
-            else:
-                ch_k "See ya tomorrow, [KittyX.player_petname]."
-        elif Party[0] == EmmaX:
-            if bg_current == Party[0].home:
-                ch_e "Could you please clear the room?"
-            else:
-                ch_e "I should leave."
-        elif Party[0] == LauraX:
-            if bg_current == Party[0].home:
-                ch_l "Clear out."
-            else:
-                ch_l "So, later."
-        elif Party[0] == JeanX:
-            if bg_current == Party[0].home:
-                ch_j "So get going."
-
-
-        elif Party[0] == StormX:
-            if bg_current == Party[0].home:
-                ch_s "Could you please leave me?"
-            else:
-                ch_s "I will see you tomorrow."
-        elif Party[0] == JubesX:
-            if bg_current == Party[0].home:
-                ch_v "I've got some stuff to take care of, so I should get going."
-            else:
-                ch_v "I've got some stuff to take care of, so I guess you should get going."
-
-        menu:
-            extend ""
-            "Ok, I'll head out. Good night." if Party[0].home == bg_current:
-
-                $ Line = "leave"
-            "Ok, see you later then. Good night." if Party[0].home != bg_current:
-
-                $ Line = "leave"
-
-            "Are you sure I can't stay the night? . ." if not Party[0].event_counter["sleepover"] and Party[0].home == bg_current:
-                $ Line = "please"
-            "Are you sure you can't stay? . ." if not Party[0].event_counter["sleepover"] and Party[0].home != bg_current:
-                $ Line = "please"
-
-            "That's not what you said the other night . ." if Party[0].event_counter["sleepover"]:
-
-                if approval_check(Party[0],900)or approval_check(Party[0],700,"L") or approval_check(Party[0],500,"O"):
-                    $ Party[0].change_face("_bemused",1)
-                    $ Line = 1
-                    if Party[0] == RogueX:
-                        ch_r "Well. . . that didn't turn out so bad, I suppose. . ."
-                    elif Party[0] == KittyX:
-                        ch_k "and that went pretty well. . ."
-                    elif Party[0] == EmmaX:
-                        ch_e "It was a nice evening."
-                    elif Party[0] == LauraX:
-                        ch_l "Yeah, it was."
-                    elif Party[0] == JeanX:
-                        ch_j "I guess?"
-                    elif Party[0] == StormX:
-                        ch_s "That was pleasant. . ."
-                    elif Party[0] == JubesX:
-                        ch_v "Yeah, yeah. . ."
-                else:
-                    $ Party[0].change_face("_smile",Brows="_confused")
-
-                    if Party[0] == RogueX:
-                        ch_r "I'm afraid not this time, [RogueX.player_petname]. I'll see you later."
-                    elif Party[0] == KittyX:
-                        ch_k "Um, no, 'fraid not. I'll see ya tomorrow."
-                    elif Party[0] == EmmaX:
-                        ch_e "Well, not tonight, [EmmaX.player_petname]."
-                    elif Party[0] == LauraX:
-                        ch_l "Yeah, but not this time."
-                    elif Party[0] == JeanX:
-                        ch_j "So what?"
-                    elif Party[0] == StormX:
-                        ch_s "Yes, but not tonight, unfortunately. . ."
-                    elif Party[0] == JubesX:
-                        ch_v "Yeah, I know, but I've got stuff to do tonight. . ."
-                    if bg_current != "bg_player":
-
-                        ch_p "Ok, I'll be going then."
-
-
-    if Line == "leave":
-
-        $ Party[0].change_stat("love", 90, 3)
-        $ Party[0].change_stat("inhibition", 25, 2)
-        $ Party[0].change_face("_smile")
-        $ Line = 0
-        if Party[0] == RogueX:
-            ch_r "Yeah, good night, [RogueX.player_petname]. . ."
-        elif Party[0] == KittyX:
-            ch_k "Yeah, 'night, [KittyX.player_petname]. . ."
-        elif Party[0] == EmmaX:
-            ch_e "Yes, good night, [EmmaX.player_petname]."
-        elif Party[0] == LauraX:
-            ch_l "Ok, good night then."
-        elif Party[0] == JeanX:
-            ch_j "Ok, 'night."
-        elif Party[0] == StormX:
-            ch_s "Yes, good night."
-        elif Party[0] == JubesX:
-            ch_v "Yup. . . later then. . ."
-
-    if Line == "please":
-
-        if approval_check(Party[0],1000) or approval_check(Party[0],700,"L") or approval_check(Party[0],500,"O"):
-            $ Party[0].change_face("_bemused")
-            $ Line = 1
-            if Party[0] == RogueX:
-                ch_r "Well. . . I suppose it would be alright."
-            elif Party[0] == KittyX:
-                ch_k "Well, Maaaybeee. . ."
-            elif Party[0] == EmmaX:
-                ch_e "I suppose we could make an exception. . ."
-            elif Party[0] == LauraX:
-                ch_l "Suit yourself."
-            elif Party[0] == JeanX:
-                ch_j "-Fine,- geeze."
-            elif Party[0] == StormX:
-                ch_s "Oh, I suppose we could make do. . ."
-            elif Party[0] == JubesX:
-                ch_v "Well. . . fine. . ."
-        else:
-            $ Party[0].change_face("_smile",Brows="_confused")
-            $ Line = 0
-            if Party[0] == RogueX:
-                ch_r "I'm afraid not, [RogueX.player_petname]. Head home, I'll see you later."
-            elif Party[0] == KittyX:
-                ch_k "Ehhhh. . . no, not tonight, [KittyX.player_petname]. Sorry."
-            elif Party[0] == EmmaX:
-                ch_e "I'm afraid not."
-            elif Party[0] == LauraX:
-                ch_l "Don't push it."
-            elif Party[0] == JeanX:
-                ch_j "Yeah, no."
-            elif Party[0] == StormX:
-                ch_s "No, we cannot."
-            elif Party[0] == JubesX:
-                ch_v "Nope."
-
-    if not Line:
-
-        if Party[0].home == bg_current:
-
-            call clear_the_room (Party[0], 1)
-            jump Return_Player
-        else:
-
-            call Remove_Girl (Party[0])
-            call Sleepover
-            return
-
-
-    if len(Party) >= 2:
-
-        if Party[0].GirlLikeCheck(Party[1]) >= 700 and approval_check(Party[0], 1200):
-
-            if Party[0] == RogueX:
-                ch_r "And you, [Party[1].name]?"
-            elif Party[0] == KittyX:
-                ch_k "How about you, [Party[1].name]?"
-            elif Party[0] == EmmaX:
-                ch_e "And what about you, [Party[1].name]?"
-            elif Party[0] == LauraX:
-                ch_l "And you, [Party[1].name]?"
-            elif Party[0] == JeanX:
-                ch_j ". . ."
-                ch_j ". . . . . ."
-                ch_j "And you, [Party[1].name]?"
-            elif Party[0] == StormX:
-                ch_s "And are you staying as well, [Party[1].name]?"
-            elif Party[0] == JubesX:
-                ch_v "What about you, [Party[1].name]?"
-        else:
-            if Party[0] == RogueX:
-                ch_r "Are you leaving, [Party[1].name]?"
-            elif Party[0] == KittyX:
-                ch_k "You heading out, [Party[1].name]?"
-            elif Party[0] == EmmaX:
-                ch_e "I assume you're leaving, [Party[1].name]?"
-            elif Party[0] == LauraX:
-                ch_l "See you later, [Party[1].name]."
-            elif Party[0] == JeanX:
-                ch_j ". . ."
-                ch_j ". . . . . ."
-                ch_j "And you, [Party[1].name]?"
-            elif Party[0] == StormX:
-                ch_s "And I assume you will be leaving, [Party[1].name]?"
-            elif Party[0] == JubesX:
-                ch_v "You've gotta go though, -right- [Party[1].name]?"
-
-        if Party[1].GirlLikeCheck(Party[0]) >= 500 and approval_check(Party[1], 1200):
-
-            $ Party[1].change_face("_smile")
-            if Party[1] == RogueX:
-                ch_r "I'd like to stay too."
-            elif Party[1] == KittyX:
-                ch_k "Can I stay too?"
-            elif Party[1] == EmmaX:
-                ch_e "I'd rather join the fun."
-            elif Party[1] == LauraX:
-                ch_l "Me too, right?"
-            elif Party[1] == JeanX:
-                ch_j "Sounds fun, I'm in."
-            elif Party[1] == StormX:
-                ch_s "I would prefer to stay."
-            elif Party[1] == JubesX:
-                ch_v "I can stay too, right?"
-            $ Line = 1
-        else:
-            $ Party[0].change_face("_smile",1)
-            if Party[1] == RogueX:
-                ch_r "I guess I should be going."
-            elif Party[1] == KittyX:
-                ch_k "I should go, right?"
-            elif Party[1] == EmmaX:
-                ch_e "I suppose three is a crowd."
-            elif Party[1] == LauraX:
-                ch_l "I should leave."
-            elif Party[1] == JeanX:
-                ch_j "Sounds \"fun.\""
-                ch_j "Later guys."
-            elif Party[1] == StormX:
-                ch_s "Ah, I should be going then."
-            elif Party[1] == JubesX:
-                ch_v "Um, yeah, I've got stuff to do, so. . ."
-            $ Line = 0
-        menu:
-            extend ""
-            "You should stay, [Party[1].name].":
-
-                if Party[1].GirlLikeCheck(Party[0]) >= 500 and approval_check(Party[1], 1200):
-
-                    if Party[1] == RogueX:
-                        ch_r "Oh, I'd love to."
-                    elif Party[1] == KittyX:
-                        ch_k "Roomies!"
-                    elif Party[1] == EmmaX:
-                        ch_e "I'd love to."
-                    elif Party[1] == LauraX:
-                        ch_l "Great."
-                    elif Party[1] == JeanX:
-                        ch_j "Oh, so glad I have permission. . ."
-                    elif Party[1] == StormX:
-                        ch_s "Thank you, I would love to."
-                    elif Party[1] == JubesX:
-                        ch_v "Oh! Thanks!"
-                    $ Line = 1
-                    $ Party[0].GLG(Party[1],800,3,1)
-                else:
-                    $ Party[1].change_face("_sadside",1,Mouth="_smile")
-                    if Party[1] == RogueX:
-                        ch_r "I don't want to be a bother."
-                    elif Party[1] == KittyX:
-                        ch_k "No way."
-                    elif Party[1] == EmmaX:
-                        ch_e "I couldn't."
-                    elif Party[1] == LauraX:
-                        ch_l "Nah."
-                    elif Party[1] == JeanX:
-                        $ Party[1].change_face("_angry",1,Mouth="_smile")
-                        ch_j "Oh, so glad I have permission. . ."
-                    elif Party[1] == StormX:
-                        ch_s "I would not want to intrude."
-                    elif Party[1] == JubesX:
-                        ch_v ". . . nah, really. . . stuff to do."
-                    $ Line = 0
-                    $ Party[0].GLG(Party[1],700,-5,1)
-
-
-                if Line:
-                    if Party[0].GirlLikeCheck(Party[1]) >= 700 and approval_check(Party[0], 1200):
-
-                        if Party[0] == RogueX:
-                            ch_r "Great!"
-                        elif Party[0] == KittyX:
-                            ch_k "Roomies!"
-                        elif Party[0] == EmmaX:
-                            ch_e "Lovely."
-                        elif Party[0] == LauraX:
-                            ch_l "Ok."
-                        elif Party[0] == JeanX:
-                            ch_j "Nice, threesome."
-                        elif Party[0] == StormX:
-                            ch_s "Excellent, glad to have you."
-                        elif Party[0] == JubesX:
-                            ch_v "Oh, cool!"
-                        $ Party[1].GLG(Party[0],800,5,1)
-                    elif Party[0].GirlLikeCheck(Party[1]) >= 400 and approval_check(Party[0], 1400):
-
-                        $ Party[0].change_face("_sadside",1,Mouth="_smile")
-                        if Party[0] == RogueX:
-                            ch_r "Sure, I guess."
-                        elif Party[0] == KittyX:
-                            ch_k "Um, Ok."
-                        elif Party[0] == EmmaX:
-                            ch_e "I suppose we could find room for one more."
-                        elif Party[0] == LauraX:
-                            ch_l "Whatever."
-                        elif Party[0] == JeanX:
-                            ch_j "Yeah, ok."
-                        elif Party[0] == StormX:
-                            ch_s "Very well, make yourself at home. . ."
-                        elif Party[0] == JubesX:
-                            ch_v "Oh, cool! Promise I won't bite."
-                    else:
-                        $ Party[0].change_face("_angry",1)
-                        if Party[0] == RogueX:
-                            ch_r "I'm not cool with that."
-                        elif Party[0] == KittyX:
-                            ch_k "No way."
-                        elif Party[0] == EmmaX:
-                            ch_e "I don't think so."
-                        elif Party[0] == LauraX:
-                            ch_l "Um, no."
-                        elif Party[0] == JeanX:
-                            ch_j "Definitely not."
-                        elif Party[0] == StormX:
-                            ch_s "No, I'm afraid not, [Party[1].name]."
-                        elif Party[0] == JubesX:
-                            ch_v "Oh. . . cool. Promise I won't bite."
-                            ch_v "much. . ."
-                        $ Party[0].GLG(Party[1],700,-5,1)
-                        $ Party[1].GLG(Party[0],700,-5,1)
-                        $ Line = 0
-            "You should get going, [Party[1].name].":
-
-                if Party[1] == RogueX:
-                    ch_r "Oh, ok."
-                elif Party[1] == KittyX:
-                    ch_k "Yeah."
-                elif Party[1] == EmmaX:
-                    ch_e "I assumed."
-                elif Party[1] == LauraX:
-                    ch_l "Yeah."
-                elif Party[1] == JeanX:
-                    ch_j "What? You're not kicking me out, I'm kicking me out!"
-                elif Party[1] == StormX:
-                    ch_s "Ah, I understand."
-                elif Party[1] == JubesX:
-                    ch_v "Oh, ok, yeah. . ."
-                $ Line = 0
-
-    if Line == 0:
-
-        if len(Party) >= 2:
-            if Party[0] == RogueX:
-                ch_r "Later, [Party[1].name]."
-            elif Party[0] == KittyX:
-                ch_k "Night, [Party[1].name]."
-            elif Party[0] == EmmaX:
-                ch_e "Goodnight, [Party[1].name]."
-            elif Party[0] == LauraX:
-                ch_l "Night."
-            elif Party[0] == JeanX:
-                ch_j "Later, [Party[1].name]."
-            elif Party[0] == StormX:
-                ch_s "Good night, [Party[1].name]."
-            elif Party[0] == JubesX:
-                ch_v "Night, [Party[1].name]."
-
-            if Party[1] == RogueX:
-                ch_r "Later guys."
-            elif Party[1] == KittyX:
-                ch_k "Night."
-            elif Party[1] == EmmaX:
-                ch_e "Goodnight."
-            elif Party[1] == LauraX:
-                ch_l "Night."
-            elif Party[1] == JeanX:
-                ch_j "Right, later."
-            elif Party[1] == StormX:
-                ch_s "Good night."
-            elif Party[1] == JubesX:
-                ch_v "Night!"
-        if Party:
-            call clear_the_room (Party[0], 1, 1)
-
-    if not Party:
-
-        if bg_current != "bg_player":
-            jump Return_Player
-        call clear_the_room ("All", 1)
-
-        "It's getting late, so you go to sleep."
-        call Wait
-        return
-
-    if bg_current != "bg_player" and bg_current != Party[0].home:
-
-        "You probably shouldn't sleep here, you head back to your own room."
-        call Remove_Girl ("All")
-        $ renpy.pop_call()
-        jump Player_Room
-
-    jump Sleepover_Morning
-
-
-label Return_Player:
-
-    $ del Party[:]
-    $ BO = all_Girls[:]
-    $ renpy.random.shuffle(BO)
-    while BO:
-        if bg_current != BO[0].home and BO[0].location == bg_current:
-            "[BO[0].name] heads out."
-            $ BO[0].location = BO[0].home
-        $ BO.remove(BO[0])
-    if bg_current != "bg_player":
-        "You head back to your room."
-    $ bg_current = "bg_player"
-    jump Misplaced
-
-
-
-
-label Sleepover_Morning:
-
-    $ BO = all_Girls[:]
-    while BO:
-        if BO[0].location == bg_current and BO[0] not in Party:
-            call Remove_Girl (BO[0])
-        $ BO.remove(BO[0])
-
-    call shift_focus (Party[0])
-
-    if Party[0] == StormX and not StormX.sleepwear[0] and StormX.Taboo < 20:
-
-        $ Party[0].change_outfit("nude")
-    else:
-        $ Party[0].change_outfit("sleep")
-    $ Party[0].OutfitDay == Party[0].Outfit
-    if len(Party) >= 2:
-
-        if Party[1] == StormX and not StormX.sleepwear[0] and StormX.Taboo < 20:
-
-            $ Party[1].change_outfit("nude")
-        else:
-            $ Party[1].change_outfit("sleep")
-        $ Party[1].OutfitDay == Party[1].Outfit
-        "The girls change into their sleepwear."
-    else:
-        "[Party[0].name] changes into her sleepwear."
-
-    if Party[0] == RogueX:
-        ch_r "Hmm, that's a bit more comfortable."
-    elif Party[0] == KittyX:
-        ch_k "Ah, that's better."
-    elif Party[0] == EmmaX:
-        ch_e "Mmmm, that's better."
-    elif Party[0] == LauraX:
-        ch_l ". . ."
-    elif Party[0] == JeanX:
-        ch_j "Sexy, right?"
-    elif Party[0] == StormX:
-        ch_s "Ah, much better."
-    elif Party[0] == JubesX:
-        ch_v "Ah, that's better."
-
-
-
-
-    if len(Party) >= 2:
-        if Party[1] == RogueX:
-            ch_r "Let's turn in."
-        elif Party[1] == KittyX:
-            ch_k "Night, [KittyX.player_petname]"
-        elif Party[1] == EmmaX:
-            ch_e "Lights out."
-        elif Party[1] == LauraX:
-            ch_l "Night."
-        elif Party[1] == JeanX:
-            ch_j "Night."
-        elif Party[1] == StormX:
-            ch_s "Good night."
-        elif Party[1] == JubesX:
-            ch_v "Night."
-    else:
-
-
-        if Party[0] == RogueX:
-            ch_r "Let's turn in."
-        elif Party[0] == KittyX:
-            ch_k "Night, [KittyX.player_petname]"
-        elif Party[0] == EmmaX:
-            ch_e "Goodnight."
-        elif Party[0] == LauraX:
-            ch_l "Night."
-        elif Party[0] == JeanX:
-            ch_j "Night."
-        elif Party[0] == StormX:
-            ch_s "Good night."
-        elif Party[0] == JubesX:
-            ch_v "Night."
-
-    show blackscreen onlayer black
-    pause 1
-
-
-
-
-
-
-    $ time_index = 0
-    $ current_time = time_options[(time_index)]
-    $ Day += 1
-
-    if Weekday < 6:
-        $ Weekday += 1
-    else:
-        $ Weekday = 0
-
-
-
-    $ DayofWeek = Week[Weekday]
-    hide NightMask onlayer nightmask
-    $ Player.semen = Player.max_semen
-    $ Player.spunk = 0
-    $ Round = 50
-
-    $ BO = Party[:]
-    while BO:
-        $ BO[0].remaining_actions = BO[0].max_actions
-        $ BO.remove(BO[0])
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    call Morningwood_Check
-
-    $ Party[0].change_face("_smile")
-    if len(Party) >= 2:
-        $ Party[1].change_face("_smile")
-    hide NightMask onlayer nightmask
-    hide blackscreen onlayer black
-
-    if "morningwood" in Player.daily_history:
-
-        if Party[0] == RogueX:
-            ch_r "So, that aside, Sleep well?"
-        elif Party[0] == KittyX:
-            ch_k "So anyway. . . G'morning . . ."
-        elif Party[0] == EmmaX:
-            ch_e "Now that we've got that out of our system. . ."
-            ch_e "Morning, [EmmaX.player_petname]."
-        elif Party[0] == LauraX:
-            ch_l "Anyway, 'Morning."
-        elif Party[0] == JeanX:
-            ch_j "So. . . 'Morning."
-        elif Party[0] == StormX:
-            ch_s "Anyway, good morning, [StormX.player_petname]."
-        elif Party[0] == JubesX:
-            ch_v "Anyways, 'morning, [Party[0].player_petname]."
-    else:
-        if Party[0] == RogueX:
-            ch_r "'Morning [RogueX.player_petname]. Sleep well?"
-        elif Party[0] == KittyX:
-            ch_k "G'morning . . ."
-        elif Party[0] == EmmaX:
-            ch_e "Hrmph. . ."
-            ch_e "Oh. You're here."
-        elif Party[0] == LauraX:
-            ch_l "'Morning."
-        elif Party[0] == JeanX:
-            ch_j "-Yawn-"
-        elif Party[0] == StormX:
-            ch_s "Good morning, [StormX.player_petname]."
-        elif Party[0] == JubesX:
-            ch_v "Hey. . . 'morning, [Party[0].player_petname]."
-
-    menu:
-        extend ""
-        "It's always nice sleeping with you." if Party[0].event_counter["sleepover"]:
-            if Party[0].event_counter["sleepover"] < 5:
-                $ Party[0].change_stat("love", 90, 8)
-                $ Party[0].change_stat("obedience", 50, 10)
-                $ Party[0].change_stat("inhibition", 70, 8)
-            $ Party[0].blushing = "_blush1"
-
-            if Party[0] == RogueX:
-                ch_r "Aw, that's right sweet of ya, [RogueX.player_petname]."
-                ch_r "We'll have to keep this regular."
-            elif Party[0] == KittyX:
-                ch_k "And that's always nice to hear."
-                ch_k "We'll have to keep this up."
-            elif Party[0] == EmmaX:
-                ch_e "Well. . ."
-                ch_e "We'll have to make a habit of it then."
-            elif Party[0] == LauraX:
-                ch_l "Yeah. . ."
-                ch_l "Warm. . ."
-            elif Party[0] == JeanX:
-                ch_j "Of course it is."
-                ch_j "I'm a princess."
-            elif Party[0] == StormX:
-                ch_s "I enjoy it as well, [StormX.player_petname]."
-                ch_s "You keep the bed quite warm. . ."
-            elif Party[0] == JubesX:
-                ch_v "Yeah. . . it's nice having company. . ."
-                ch_v "You keep it so cozy. . ."
-
-        "I loved sleeping next to you." if not Party[0].event_counter["sleepover"]:
-            $ Party[0].change_stat("love", 90, 15)
-            $ Party[0].change_stat("love", 70, 10)
-            $ Party[0].change_stat("obedience", 50, 12)
-            $ Party[0].change_stat("inhibition", 70, 12)
-            $ Line = "nice"
-        "It was fun.":
-
-            if not Party[0].event_counter["sleepover"]:
-                $ Party[0].change_stat("love", 90, 10)
-                $ Party[0].change_stat("love", 70, 8)
-                $ Party[0].change_stat("obedience", 50, 15)
-                $ Party[0].change_stat("inhibition", 70, 15)
-            elif Party[0].event_counter["sleepover"] < 5:
-                $ Party[0].change_stat("love", 70, 8)
-                $ Party[0].change_stat("obedience", 80, 10)
-                $ Party[0].change_stat("inhibition", 35, 8)
-            $ Party[0].change_stat("obedience", 50, 8)
-            if approval_check(Party[0], 800, "L"):
-                $ Party[0].change_face("_bemused")
-            else:
-                $ Party[0].change_face("_confused")
-
-            $ Line = "fun"
-            if Party[0] == RogueX:
-                ch_r "Ok, well glad I wasn't {i}too{/i} much bother."
-            elif Party[0] == KittyX:
-                ch_k "Yeah, I mean I guess it was. . ."
-            elif Party[0] == EmmaX:
-                ch_e "\"Fun\" is certainly how I would describe it."
-            elif Party[0] == LauraX:
-                ch_l "Yeah, I guess?"
-            elif Party[0] == JeanX:
-                ch_j "Um, \"fun?\" . . Yeah."
-            elif Party[0] == StormX:
-                ch_s ". . . Yes. . ."
-                ch_s ". . . fun."
-            elif Party[0] == JubesX:
-                ch_v "Yeah. . . it's nice having company. . ."
-                $ Line = "nice"
-        "You were constantly tossing around.":
-
-            $ Party[0].blushing = "_blush1"
-            if approval_check(Party[0], 800, "L") or approval_check(Party[0], 1200):
-                $ Party[0].change_face("_bemused")
-                Party[0].voice "Hmm?"
-            else:
-                $ Party[0].change_face("_angry")
-                Party[0].voice "!!!"
-            if Party[0].event_counter["sleepover"] < 5:
-                if Party[0] == RogueX:
-                    ch_r "It's not like I've had much experience sleeping next to someone. . ."
-                elif Party[0] == KittyX:
-                    ch_k "I don't make a habit out of it. . ."
-                elif Party[0] == EmmaX:
-                    ch_e "I haven't had a lot of practice lately."
-                elif Party[0] == LauraX:
-                    ch_l "Deal with it."
-                elif Party[0] == JeanX:
-                    ch_j "It's called \"grace.\""
-                elif Party[0] == StormX:
-                    ch_s "Yes. . . well. . ."
-                    ch_s "I do have a lot of energy. . ."
-                elif Party[0] == JubesX:
-                    ch_v "I'm just not used to sleeping nights. . ."
-                $ Party[0].change_stat("love", 60, -8)
-                $ Party[0].change_stat("obedience", 50, 22)
-                $ Party[0].change_stat("inhibition", 50, 22)
-            else:
-                if Party[0] == RogueX:
-                    ch_r "Well you should probably be used to that by now."
-                elif Party[0] == KittyX:
-                    ch_k "Yeah, well. . . you should be used to that!"
-                elif Party[0] == EmmaX:
-                    ch_e "I don't plan on changing any time soon."
-                elif Party[0] == LauraX:
-                    ch_l "Yeah, it'll be like that."
-                elif Party[0] == JeanX:
-                    ch_j "Deal with it."
-                elif Party[0] == StormX:
-                    ch_s "I suppose that I do."
-                elif Party[0] == JubesX:
-                    ch_v "You don't need to harp on it. . ."
-            $ Line = "toss"
-        "You need to learn to stick to your side.":
-
-            if Party[0].event_counter["sleepover"] < 5:
-                $ Party[0].change_stat("love", 80, -8)
-                $ Party[0].change_stat("obedience", 50, 40)
-            if approval_check(Party[0], 500, "O"):
-                $ Party[0].change_stat("love", 80, -2)
-                $ Party[0].change_stat("obedience", 90, 5)
-                $ Party[0].change_face("_normal")
-                if Party[0] == RogueX:
-                    ch_r "Yes, [RogueX.player_petname], I'll try my best."
-                elif Party[0] == KittyX:
-                    ch_k "Fine, whatever."
-                elif Party[0] == EmmaX:
-                    ch_e "I do try."
-                elif Party[0] == LauraX:
-                    ch_l "Ok."
-                elif Party[0] == JeanX:
-                    ch_j "It's all my side."
-                elif Party[0] == StormX:
-                    ch_s "I. . . can try. . ."
-                elif Party[0] == JubesX:
-                    ch_v "I thought you wanted the attention. . ."
-                if Party[0].event_counter["sleepover"] < 5:
-                    $ Party[0].change_stat("obedience", 80, 8)
-            else:
-                $ Party[0].change_face("_angry")
-                $ Party[0].change_stat("obedience", 90, 5)
-                if Party[0] == RogueX:
-                    ch_r "Hmmph, you'll be sleeping alone, keep talk'in like that."
-                elif Party[0] == KittyX:
-                    ch_k "That's not how you get me to come back."
-                elif Party[0] == EmmaX:
-                    ch_e "I'll sleep how I please."
-                elif Party[0] == LauraX:
-                    ch_l "Good luck with that."
-                elif Party[0] == JeanX:
-                    ch_j "It's all my side."
-                elif Party[0] == StormX:
-                    ch_s "That seems unlikely."
-                elif Party[0] == JubesX:
-                    ch_v "I could just stay out of the bed entirely. . ."
-                if Party[0].event_counter["sleepover"] < 5:
-                    $ Party[0].change_stat("inhibition", 35, 20)
-            $ Line = "toss"
-
-    if not Party[0].event_counter["sleepover"] and Line == "nice":
-        if Party[0] == RogueX:
-            $ Party[0].blushing = "_blush1"
-            ch_r "Aw, that's right sweet of ya, [RogueX.player_petname]."
-            ch_r "Makes me want to do it again sometime."
-        elif Party[0] == KittyX:
-            $ Party[0].blushing = "_blush2"
-            ch_k "Yeah, I. . [KittyX.like]I had fun too."
-            $ Party[0].blushing = "_blush1"
-            ch_k "I wouldn't[KittyX.like]mind doing it again."
-            $ Party[0].blushing = "_blush2"
-            ch_k "You know, some other time. . . "
-            $ Party[0].blushing = "_blush1"
-        elif Party[0] == EmmaX:
-            $ Party[0].change_face("_smile",1)
-            ch_e "You're a hopeless romantic, [EmmaX.player_petname]."
-            $ Party[0].change_face("_smile",2,Eyes="_side")
-            ch_e "I suppose I can be a bit hopeless too. . ."
-        elif Party[0] == LauraX:
-            $ Party[0].change_face("_confused",1)
-            ch_l "Oh. . ."
-            $ Party[0].change_face("_surprised",2,Brows="_confused")
-            ch_l "Yeah, so did I, now that you mention it. . ."
-            $ Party[0].change_face("_confused",1)
-            ch_l "Huh."
-        elif Party[0] == JeanX:
-            $ Party[0].change_face("_confused",1)
-            ch_j "Huh? . ."
-            ch_j "Oh, yeah. . . it was great. . ."
-            $ Party[0].change_face("_smile",1)
-        elif Party[0] == StormX:
-            $ Party[0].change_face("_smile",1)
-            ch_s "Well, yes, it was nice to sleep next to you as well, [StormX.player_petname]."
-            $ Party[0].change_face("_smile",2,Eyes="leftside")
-            ch_s "I think we should make a habit of this. . ."
-            $ Party[0].change_face("_smile",1)
-        elif Party[0] == JubesX:
-            $ Party[0].change_face("_smile",1)
-            ch_v "Yeah, I enjoyed it too. . ."
-            $ Party[0].change_face("_sad",1)
-            ch_v "I haven't really been sleeping much since. . ."
-            $ Party[0].change_face("_sadside",1)
-            ch_v ". . . the change."
-            $ Party[0].change_face("_smile",1)
-            ch_v "It's nice having someone to stay with me. . ."
-
-    $ Party[0].blushing = ""
-
-    if len(Party) >= 2:
-
-        if "morningwood" in Player.daily_history:
-            if Party[1] == RogueX:
-                ch_r "And what about me?"
-            elif Party[1] == KittyX:
-                ch_k "Me too?"
-            elif Party[1] == EmmaX:
-                ch_e "And me?"
-            elif Party[1] == LauraX:
-                ch_l "Ung, 'morning."
-            elif Party[1] == JeanX:
-                ch_j "Yeah, yeah, 'morning."
-            elif Party[1] == StormX:
-                ch_s "Ah, yes, good morning."
-            elif Party[1] == JubesX:
-                ch_v "Yeah. . . 'morning."
-        else:
-            "[Party[1].name] rolls over in bed."
-            if Party[1] == RogueX:
-                ch_r "Mmm, yeah, 'Morning [RogueX.player_petname]."
-            elif Party[1] == KittyX:
-                ch_k "Yeah, G'morning . . ."
-            elif Party[1] == EmmaX:
-                ch_e "Hrmph. . ."
-                ch_e "Oh. Not so loud, you two."
-            elif Party[1] == JeanX:
-                ch_j "Yeah, yeah, 'morning."
-            elif Party[1] == StormX:
-                ch_s "Ah, yes, good morning."
-            elif Party[1] == JubesX:
-                ch_v "Oh, um, yeah. . . 'morning."
-
-        menu:
-            extend ""
-            "I always love sleeping with you too, [Party[1].name]." if Party[1].event_counter["sleepover"]:
-                if Party[1].event_counter["sleepover"] < 5:
-                    $ Party[1].change_stat("love", 90, 8)
-                    $ Party[1].change_stat("obedience", 50, 10)
-                    $ Party[1].change_stat("inhibition", 70, 8)
-                $ Party[1].blushing = "_blush1"
-
-                if Party[1] == RogueX:
-                    ch_r "That's sweet of ya to say, [RogueX.player_petname]."
-                elif Party[1] == KittyX:
-                    ch_k "So cute!"
-                elif Party[1] == EmmaX:
-                    ch_e "Mmmm. . . yes, lovely."
-                elif Party[1] == LauraX:
-                    ch_l "Sure. . ."
-                elif Party[1] == JeanX:
-                    ch_j "Ouch, you're giving me a toothache."
-                elif Party[1] == StormX:
-                    ch_s "And I enjoy it as well, [StormX.player_petname]."
-                elif Party[1] == JubesX:
-                    ch_v "Yeah. . . it's nice having company. . ."
-
-            "And it was great sleeping with you as well, [Party[1].name]." if not Party[1].event_counter["sleepover"]:
-                $ Party[1].change_stat("love", 90, 15)
-                $ Party[1].change_stat("love", 70, 10)
-                $ Party[1].change_stat("obedience", 50, 12)
-                $ Party[1].change_stat("inhibition", 70, 12)
-                $ Line = "nice"
-            "I had fun sleeping with you too, [Party[1].name].":
-
-                if not Party[1].event_counter["sleepover"]:
-                    $ Party[1].change_stat("love", 90, 10)
-                    $ Party[1].change_stat("love", 70, 8)
-                    $ Party[1].change_stat("obedience", 50, 15)
-                    $ Party[1].change_stat("inhibition", 70, 15)
-                elif Party[1].event_counter["sleepover"] < 5:
-                    $ Party[1].change_stat("love", 70, 8)
-                    $ Party[1].change_stat("obedience", 80, 10)
-                    $ Party[1].change_stat("inhibition", 35, 8)
-                $ Party[1].change_stat("obedience", 50, 8)
-                if approval_check(Party[1], 800, "L"):
-                    $ Party[1].change_face("_bemused")
-                else:
-                    $ Party[1].change_face("_confused")
-
-                $ Line = "fun"
-                if Party[1] == RogueX:
-                    ch_r "Yeah, uh, fun."
-                elif Party[1] == KittyX:
-                    ch_k "Yeah, I mean I guess it was. . ."
-                elif Party[1] == EmmaX:
-                    ch_e "\"Fun\" is certainly how I would describe it."
-                elif Party[1] == LauraX:
-                    ch_l "Yeah, I guess?"
-                elif Party[1] == JeanX:
-                    ch_j "Yeah you did."
-                elif Party[1] == StormX:
-                    ch_s ". . . Yes. . ."
-                    ch_s ". . . fun."
-                elif Party[1] == JubesX:
-                    ch_v "Yeah. . . it's nice having company. . ."
-                    $ Line = "nice"
-
-            "You were constantly tossing around, [Party[1].name]." if Line == "toss":
-                $ Line = "toss"
-            "You were tossing around constantly too, [Party[1].name]." if Line != "toss":
-                $ Line = "toss"
-
-            "You need to learn to stick to your side, [Party[1].name]." if Line == "toss":
-                $ Line = "turn"
-            "And you need to learn to stick to your side too, [Party[1].name]." if Line != "toss":
-                $ Line = "turn"
-
-        if not Party[1].event_counter["sleepover"] and Line == "nice":
-            if Party[1] == RogueX:
-                $ Party[1].blushing = "_blush1"
-                ch_r "Aw, that's right sweet of ya, [RogueX.player_petname]."
-                ch_r "I think I'd want to do that again."
-                ch_r "And, uh, you too, [Party[0].name]."
-            elif Party[1] == KittyX:
-                $ Party[1].blushing = "_blush2"
-                ch_k "Yeah, I. . [KittyX.like]I had fun too."
-                $ Party[1].blushing = "_blush1"
-                ch_k "I wouldn't[KittyX.like]mind doing it again."
-                $ Party[1].blushing = "_blush2"
-                ch_k "You know, some other time. . . "
-                $ Party[1].blushing = "_blush1"
-                ch_k "And[KittyX.like]you too, [Party[0].name]."
-            elif Party[1] == EmmaX:
-                $ Party[1].change_face("_smile",1)
-                ch_e "You're a hopeless romantic, [EmmaX.player_petname]."
-                $ Party[1].change_face("_smile",2,Eyes="_side")
-                ch_e "I suppose I can be a bit hopeless too. . ."
-                ch_e "You know what I'm talking about, [Party[0].name]."
-            elif Party[1] == LauraX:
-                $ LauraX.change_face("_confused",1)
-                ch_l "Oh. . ."
-                $ Party[1].change_face("_surprised",2,Brows="_confused")
-                ch_l "Yeah, so did I, now that you mention it. . ."
-                $ Party[1].change_face("_confused",1)
-                ch_l "Huh."
-                ch_l "Weird, right, [Party[0].name]?"
-            elif Party[1] == JeanX:
-                $ Party[1].change_face("_confused",1)
-                ch_j "Huh? . ."
-                ch_j "Oh, yeah. . . it was great. . ."
-                $ Party[0].change_face("_smile",1)
-            elif Party[1] == StormX:
-                $ Party[1].change_face("_smile",1)
-                ch_s "Well, yes, it was nice to sleep next to you as well, [StormX.player_petname]."
-                $ Party[1].change_face("_smile",2,Eyes="leftside")
-                ch_s "I think we should make a habit of this. . ."
-                $ Party[1].change_face("_smile",1)
-            elif Party[1] == JubesX:
-                $ Party[1].change_face("_smile",1)
-                ch_v "Yeah, I enjoyed it too. . ."
-                $ Party[1].change_face("_sad",1)
-                ch_v "I haven't really been sleeping much since. . ."
-                $ Party[1].change_face("_sadside",1)
-                ch_v ". . . the change."
-                $ Party[1].change_face("_smile",1)
-                ch_v "It's nice having someone to stay with me. . ."
-
-
-        elif Line == "toss":
-            $ Party[1].blushing = "_blush1"
-            if approval_check(Party[1], 800, "L") or approval_check(Party[1], 1200):
-                $ Party[1].change_face("_bemused")
-                Party[1].voice "Hmm?"
-            else:
-                $ Party[1].change_face("_angry")
-                Party[1].voice "!!!"
-            if Party[1].event_counter["sleepover"] < 5:
-                if Party[1] == RogueX:
-                    ch_r "It's not like I've had much experience sleeping next to someone. . ."
-                elif Party[1] == KittyX:
-                    ch_k "I don't make a habit out of it. . ."
-                elif Party[1] == EmmaX:
-                    ch_e "I haven't had a lot of practice lately."
-                elif Party[1] == LauraX:
-                    ch_l "Deal with it."
-                elif Party[1] == JeanX:
-                    ch_j "It's called \"grace.\""
-                elif Party[1] == StormX:
-                    ch_s "Yes. . . well. . ."
-                    ch_s "I do have a lot of energy. . ."
-                elif Party[1] == JubesX:
-                    ch_v "I'm just not used to sleeping nights. . ."
-                $ Party[1].change_stat("love", 60, -8)
-                $ Party[1].change_stat("obedience", 50, 22)
-                $ Party[1].change_stat("inhibition", 50, 22)
-            else:
-                if Party[1] == RogueX:
-                    ch_r "Well you should probably be used to that by now."
-                elif Party[1] == KittyX:
-                    ch_k "Yeah, well. . . you should be used to that!"
-                elif Party[1] == EmmaX:
-                    ch_e "I don't plan on changing any time soon."
-                elif Party[1] == LauraX:
-                    ch_l "Yeah, it'll be like that."
-                elif Party[1] == JeanX:
-                    ch_j "Deal with it."
-                elif Party[1] == StormX:
-                    ch_s "I suppose that I do."
-                elif Party[1] == JubesX:
-                    ch_v "I could just stay out of the bed entirely. . ."
-        elif Line == "turn":
-            if Party[1].event_counter["sleepover"] < 5:
-                $ Party[1].change_stat("love", 80, -8)
-                $ Party[1].change_stat("obedience", 50, 40)
-            if approval_check(Party[1], 500, "O"):
-                $ Party[1].change_stat("love", 80, -2)
-                $ Party[1].change_stat("obedience", 90, 5)
-                $ Party[1].change_face("_normal")
-                if Party[1] == RogueX:
-                    ch_r "Yes, [RogueX.player_petname], I'll try my best."
-                elif Party[1] == KittyX:
-                    ch_k "Fine, whatever."
-                elif Party[1] == EmmaX:
-                    ch_e "I do try."
-                elif Party[1] == LauraX:
-                    ch_l "Ok."
-                elif Party[1] == JeanX:
-                    ch_j "It's all my side."
-                elif Party[1] == StormX:
-                    ch_s "I. . . can try. . ."
-                elif Party[1] == JubesX:
-                    ch_v "I could just stay out of the bed entirely. . ."
-                if Party[1].event_counter["sleepover"] < 5:
-                    $ Party[1].change_stat("obedience", 80, 8)
-            else:
-                $ Party[1].change_face("_angry")
-                $ Party[1].change_stat("obedience", 90, 5)
-                if Party[1] == RogueX:
-                    ch_r "Hmmph, you'll be sleeping alone, keep talk'in like that."
-                elif Party[1] == KittyX:
-                    ch_k "That's not how you get me to come back."
-                elif Party[1] == EmmaX:
-                    ch_e "I'll sleep how I please."
-                elif Party[1] == LauraX:
-                    ch_l "Good luck with that."
-                elif Party[1] == JeanX:
-                    ch_j "It's all my side."
-                elif Party[1] == StormX:
-                    ch_s "That seems unlikely."
-                elif Party[1] == JubesX:
-                    ch_v "I could just stay out of the bed entirely. . ."
-                if Party[1].event_counter["sleepover"] < 5:
-                    $ Party[1].change_stat("inhibition", 35, 20)
-
-        $ Party[1].blushing = ""
-
-
-
-    if len(Party) >= 2:
-        $ Party[1].event_counter["sleepover"] += 1
-
-
-    $ Party[0].event_counter["sleepover"] += 1
-
-
-
-
-    $ time_index = 3
-    $ current_time = time_options[(time_index)]
-    $ Day -= 1
-
-    if Weekday == 0:
-        $ Weekday = 6
-    else:
-        $ Weekday -= 1
-
-    $ DayofWeek = Week[Weekday]
-
-    call Wait
-
-    $ BO = all_Girls[:]
-    while BO:
-        if "leaving" in BO[0].recent_history or BO[0].location == bg_current:
-
-
-            $ Party.append(BO[0])
-            $ BO[0].location = bg_current
-            if "leaving" in BO[0].recent_history:
-                $ BO[0].recent_history.remove("leaving")
-        if "morningwood" in BO[0].traits:
-
-            $ BO[0].recent_history.append("blowjob")
-            $ BO[0].daily_history.append("blowjob")
-            $ BO[0].daily_history.append("morningwood")
-            $ BO[0].traits.remove("morningwood")
-        $ BO.remove(BO[0])
-
-
-
-    if Party:
-        $ Party[0].change_face("_normal")
-        $ Party[0].change_outfit(6,Changed = 1)
-
-        if len(Party) >= 2:
-            $ Party[1].change_face("_normal")
-            $ Party[1].change_outfit(6,Changed = 1)
-            "The girls get changed for the day."
-        else:
-            "[Party[0].name] gets changed for the day."
-    $ Party = []
-
-
-
-
-
-
-
-    call Girls_Location
-    return
-
-
-
-
-
-
-
-
-
-label Morningwood_Check(Girls=[0,-3], D20=0):
-
-
-
-    $ D20 = renpy.random.randint(0,3)
-    $ Line = 0
-
-    if len(Party) >= 2:
-
-        if Party[0].GirlLikeCheck(Party[1]) >= 900:
-
-            $ Girls[0] = 2
-        elif Party[0].GirlLikeCheck(Party[1]) >= 750:
-
-            $ Girls[0] = 0
-        elif Party[0].GirlLikeCheck(Party[1]) <= 400:
-
-            $ Girls[0] = 2
-        else:
-            $ Girls[0] = 0
-
-        if Party[1].GirlLikeCheck(Party[0]) >= 900:
-
-            $ Girls[1] = 2
-        elif Party[1].GirlLikeCheck(Party[0]) >= 750:
-
-            $ Girls[1] = 0
-        elif Party[1].GirlLikeCheck(Party[0]) <= 400:
-
-            $ Girls[1] = -5
-        else:
-            $ Girls[1] = -3
-    else:
-        $ Girls[0] -= 2
-
-
-    if "chill" in Party[0].traits:
-
-        $ Girls[0] = 0
-    else:
-        if Party[0].action_counter["blowjob"] >= 5 or approval_check(Party[0], 900, "I"):
-            $ Girls[0] += 3
-        elif Party[0].action_counter["blowjob"] and approval_check(Party[0], 900):
-            $ Girls[0] += 2
-        elif approval_check(Party[0], 1400):
-            $ Girls[0] += 2
-        elif Party[0].action_counter["blowjob"] or approval_check(Party[0], 900):
-            $ Girls[0] += 1
-
-        if "hungry" in Party[0].traits and D20 >= 2:
-
-            $ Girls[0] += 2
-        if Party[0].Thirst >= 60:
-
-            $ Girls[0] += 2
-        elif Party[0].Thirst >= 30:
-
-            $ Girls[0] += 1
-        if Party[0].lust >= 50:
-
-            $ Girls[0] += 1
-        if Party[0].SEXP <= 15:
-
-            $ Girls[0] -= 1
-
-
-        if Girls[1] >= 0:
-
-            $ Girls[0] += 1
-
-
-    if JubesX in Party:
-
-        if len(Party) >= 2:
-            $ Line = "no"
-        else:
-            return
-    elif Girls[0] >= D20:
-        $ Line = "yes"
-
-
-
-
-    if len(Party) >= 2:
-        if Party[1].action_counter["blowjob"] >= 5 or approval_check(Party[1], 900, "I"):
-            $ Girls[1] += 3
-        elif Party[1].action_counter["blowjob"] and approval_check(Party[1], 900):
-            $ Girls[1] += 2
-        elif approval_check(Party[1], 1400):
-            $ Girls[1] += 2
-        elif Party[1].action_counter["blowjob"] or approval_check(Party[1], 900):
-            $ Girls[1] += 1
-
-        if "hungry" in Party[1].traits and D20 >= 2:
-
-            $ Girls[1] += 2
-        if Party[1].Thirst >= 60:
-
-            $ Girls[1] += 2
-        elif Party[1].Thirst >= 30:
-
-            $ Girls[1] += 1
-        if Party[1].lust >= 50:
-
-            $ Girls[1] += 1
-        if Party[1].SEXP <= 15:
-
-            $ Girls[1] -= 1
-
-
-        if Girls[0] >= 0:
-
-            $ Girls[1] += 1
-
-
-        if Party[1] == JubesX:
-
-            if Girls[1] >= (D20 + 1):
-                $ Line = "other"
-            elif Girls[1] <= -1:
-                $ Line = "no"
-        elif Girls[1] >= (D20 + 1):
-            if Line == "yes":
-                $ Line = "double"
-            else:
-                $ Line = "other"
-        elif Girls[1] <= -1:
-            $ Line = "no"
-
-
-        if Line == "other" and Party[0].GirlLikeCheck(Party[1]) >= 500 and "chill" not in Party[1].traits:
-
-            $ Party.reverse()
-            $ Girls[0] = "yes"
-            $ Girls[1] = 0
-
-
-
-    if Line:
-
-        if Line == "no":
-
-            "You hear a little commotion as you start to wake up."
-            if Party[1] == RogueX:
-                ch_r "You get'cher head out of there, [Party[0].name]!"
-            elif Party[1] == KittyX:
-                "You hear a thump and feel a small woosh as something heavy drops under the bed."
-                Party[0].voice "Ow!"
-                ch_k "Serves you right, [Party[0].name]."
-            elif Party[1] == EmmaX:
-                ch_e "Step away from [Player.name], [Party[0].name]."
-            elif Party[1] == LauraX:
-                ch_l "Back it up, [Party[0].name]."
-            elif Party[1] == JeanX:
-                ch_j "Back it off, [Party[0].name]."
-            elif Party[1] == StormX:
-                ch_s "[Party[0].name], some of us are trying to sleep. . ."
-            elif Party[1] == JubesX:
-                ch_v "He's trying to sleep over there, cut it out. . ."
-
-            if Party[0] == RogueX:
-                ch_r "I didn't mean no harm, [Party[1].name]."
-            elif Party[0] == KittyX:
-                "You hear a thump and feel a small woosh as something drops under the bed."
-                Party[0].voice "Ow!"
-                ch_k "Spoilsport."
-            elif Party[0] == EmmaX:
-                ch_e "Don't be a bore, dear."
-            elif Party[0] == LauraX:
-                ch_l "Fine, whatever."
-            elif Party[0] == JeanX:
-                ch_j "You back it off. . ."
-                "-Zap-"
-            elif Party[0] == StormX:
-                ch_s "I didn't intend to wake you. . ."
-            elif Party[0] == JubesX:
-                ch_v "Oh, fine. . ."
-            if Party[0] != JeanX:
-                return
-        elif Line == "double":
-
-            $ second_girl_primary_action = "blowjob"
-            $ Party[1].recent_history.append("blowjob")
-            $ Party[1].daily_history.append("blowjob")
-            $ Party[1].daily_history.append("morningwood")
-            $ Party[1].traits.append("morningwood")
-
-        $ primary_action = "blowjob"
-        $ Party[0].recent_history.append("blowjob")
-        $ Party[0].daily_history.append("blowjob")
-        $ Party[0].daily_history.append("morningwood")
-        $ Party[0].traits.append("morningwood")
-        call Sleepover_MorningWood
-
-        call Sex_Over (0)
-    else:
-
-
-
-        pass
-
-    return
-
-
-
-
-
-
-label Sleepover_MorningWood:
-
-    $ Player.add_word(1,"interruption")
-    call shift_focus (Party[0])
-    $ Player.focus = 30
-    if primary_action == "blowjob":
-        ch_u "\"Slurp, slurp, slurp.\""
-    else:
-        ch_u "\"Squish, squish, squish.\""
-
-    $ Player.change_stat("focus", 80, 5)
-    $ Party[0].change_stat("lust", 80, 5)
-    $ Player.daily_history.append("morningwood")
-
-    $ Partner = Party[1] if len(Party) >= 2 else 0
-
-
-    $ Player.recent_history.append("cockout")
-
-    if Partner:
-        if Partner == RogueX:
-            show Rogue_sprite:
-                pos (900,250)
-        elif Partner == KittyX:
-            show Kitty_sprite:
-                pos (900,250)
-        elif Partner == EmmaX:
-            show Emma_Sprite:
-                pos (900,250)
-        elif Partner == LauraX:
-            show Laura_Sprite:
-                pos (900,250)
-        elif Partner == JeanX:
-            show Jean_Sprite:
-                pos (900,250)
-        elif Partner == StormX:
-            show Storm_Sprite:
-                pos (900,250)
-        elif Partner == JubesX:
-            show Jubes_Sprite:
-                pos (900,250)
-        $ Partner.recent_history.append("threesome")
-
-    $ Party[0].recent_history.append("blanket")
-    call expression Party[0].tag + "_BJ_Launch"
-
-    $ Party[0].change_face("_closed",1)
-    if Partner:
-        $ Partner.change_face("_closed",1,Mouth="_tongue")
-
-    "You feel a pleasant sensation. . ."
-    if primary_action == "blowjob":
-        if second_girl_primary_action:
-            ch_u "\"Slurp, slurp, slurp.\" \n \ \"Slurp, slurp, slurp.\""
-        else:
-            ch_u "\"Slurp, slurp, slurp.\""
-    else:
-        if second_girl_primary_action:
-            ch_u "\"Squish, squish, squish.\" \n \ \"Slurp, slurp, slurp.\""
-        else:
-            ch_u "\"Squish, squish, squish.\""
-    $ Player.change_stat("focus", 80, 5)
-    $ Party[0].change_stat("lust", 80, 5)
-
-    "It's somewhere below your waist. . ."
-    if primary_action == "blowjob":
-        if second_girl_primary_action:
-            ch_u "\"Slurp, slurp, slurp.\" \n \ \"Slurp, slurp, slurp.\""
-        else:
-            ch_u "\"Slurp, slurp, slurp.\""
-    else:
-        if second_girl_primary_action:
-            ch_u "\"Squish, squish, squish.\" \n \ \"Slurp, slurp, slurp.\""
-        else:
-            ch_u "\"Squish, squish, squish.\""
-    $ Player.change_stat("focus", 80, 10)
-    $ Party[0].change_stat("lust", 80, 5)
-
-    "You open your eyes. . ."
-
-    hide NightMask onlayer nightmask
-    hide blackscreen onlayer black
-
-    $ action_speed = 3
-    $ Count = 3
-    $ Line = 0
-    call Seen_First_Peen (Party[0], Partner, 1, 1, 1)
-    while Count > 0:
-
-        $ Player.change_stat("focus", 80, 10)
-        $ Party[0].change_stat("lust", 80, 5)
-        if Partner:
-            $ Partner.change_stat("lust", 80, 5)
-        menu:
-            "Stay Quiet":
-                if Count >2:
-                    if second_girl_primary_action:
-                        "You just let them do their thing and pretend to still be asleep."
-                    else:
-                        "You just let her do her thing and pretend to still be asleep."
-                elif Count>1:
-                    "It does feel nice. . ."
-                else:
-                    if second_girl_primary_action:
-                        "You wouldn't want to disturb them. . ."
-                    else:
-                        "You wouldn't want to disturb her. . ."
-                if primary_action == "blowjob":
-                    Party[0].voice "\"Slurp, slurp, slurp.\""
-                else:
-                    Party[0].voice "\"Squish, squish, squish.\""
-                if second_girl_primary_action:
-                    Party[1].voice "\"Slurp, slurp, slurp.\""
-                ". . ."
-            "Um. . . [Party[0].petname], what're you doing?":
-                $ Line = "question"
-                $ Count = 1
-            "That feels great, keep going. . .":
-                $ Line = "praise"
-                $ Count = 1
-            "Hey, quit that!":
-                $ Line = "no"
-                $ Count = 1
-        $ Count -= 1
-    $ action_speed = 1
-    $ Party[0].blushing = "_blush1"
-    if second_girl_primary_action:
-        "[Party[0].name] pulls back with a pop and [Party[1].name] sits back."
-        $ second_girl_primary_action = 0
-    else:
-        "[Party[0].name] pulls back with a pop."
-    if Line == "question":
-        $ Party[0].change_face("_smile",1)
-        if Party[0] == RogueX:
-            ch_r "Well I ain't whistlin Dixie, [RogueX.player_petname]."
-        elif Party[0] == KittyX:
-            ch_k "I wasn't[KittyX.like]being subtle about it, [KittyX.player_petname]."
-        elif Party[0] == EmmaX:
-            ch_e "Surely your education hasn't been that poor, [EmmaX.player_petname]."
-        elif Party[0] == LauraX:
-            ch_l "Guess."
-        elif Party[0] == JeanX:
-            $ Party[0].change_face("_confused",1)
-            $ action_speed = 2
-            ch_j ". . ."
-            ch_j "I 'ave orr dick, in ey 'outh. . ."
-            ch_j "Are u 'rain 'amaged?"
-            $ action_speed = 1
-            if Partner:
-                $ Party[0].eyes = "leftside"
-                ch_j "Is he brain damaged?"
-            $ Party[0].change_face("_sly",1)
-        elif Party[0] == StormX:
-            ch_s "I didn't intend to wake you. . ."
-        elif Party[0] == JubesX:
-            ch_v "Sorry, I. . . hadn't had breakfast. . ."
-    elif Line == "praise":
-        $ Party[0].change_face("_smile",1)
-        $ Party[0].change_stat("love", 90, 5)
-        $ Party[0].change_stat("obedience", 50, 2)
-        $ Party[0].change_stat("inhibition", 60, 2)
-        if Party[0] == RogueX:
-            ch_r "Mmm, you know it, [RogueX.player_petname]."
-        elif Party[0] == KittyX:
-            ch_k "Mmm, hehe."
-        elif Party[0] == EmmaX:
-            ch_e "Practice, [EmmaX.player_petname]."
-        elif Party[0] == LauraX:
-            ch_l "Yeah, I guess?"
-        elif Party[0] == JeanX:
-            ch_j "Heh."
-        elif Party[0] == StormX:
-            ch_s "Certainly. . ."
-        elif Party[0] == JubesX:
-            ch_v "I do enjoy it. . ."
-    elif Line == "no":
-        $ Party[0].change_stat("love", 90, -3)
-        $ Party[0].change_stat("obedience", 50, 2)
-        $ Party[0].change_stat("inhibition", 60, -2)
-        $ action_speed = 0
-        $ Party[0].change_face("_angry",1,Brows="_confused")
-        if Party[0] == RogueX:
-            ch_r "Well that's a fine \"how d'ya do,\" when a girl goes to all this trouble!"
-        elif Party[0] == KittyX:
-            ch_k "{i}That's{/i} the thanks I get?!"
-        elif Party[0] == EmmaX:
-            ch_e "A little \"gratitude\" wouldn't be uncalled for. . ."
-        elif Party[0] == LauraX:
-            ch_l "Huh?"
-        elif Party[0] == JeanX:
-            ch_j "Seriously? No \"thank you?\""
-        elif Party[0] == StormX:
-            ch_s "Oh, I'm sorry if I was presumptuous. . ."
-        elif Party[0] == JubesX:
-            ch_v "Sorry, sorry! I was a little hungry. . ."
-    else:
-        if Party[0] == RogueX:
-            ch_r "Heh, I can tell you're awake, [RogueX.player_petname]. . ."
-            ch_r "You've been. . . more responsive."
-        elif Party[0] == KittyX:
-            ch_k "You can stop faking it, [KittyX.player_petname]. . ."
-            ch_k "This guy's telling me you're awake now."
-        elif Party[0] == EmmaX:
-            ch_e "I don't know who you think you're fooling."
-            ch_e "You've been awake for a while, [EmmaX.player_petname]. . ."
-        elif Party[0] == LauraX:
-            ch_l "You can stop playing dead, [LauraX.player_petname]. . ."
-            ch_l "Oldest trick in the book."
-        elif Party[0] == JeanX:
-            ch_j "You can stop pretending to be asleep. . ."
-            ch_j "I can't read your mind, but I can read your dick. . ."
-        elif Party[0] == StormX:
-            ch_s "I didn't intend to wake you, but it seems I have."
-        elif Party[0] == JubesX:
-            ch_v "Oh, g'morning sleepyhead. . ."
-
-
-    if Partner:
-
-        if Line == "question":
-            $ Party[1].change_face("_smile",1)
-        elif Line == "praise":
-            $ Party[1].change_stat("love", 90, 3)
-            $ Party[1].change_stat("obedience", 50, 2)
-            $ Party[1].change_stat("inhibition", 60, -2)
-            $ Party[1].change_face("_smile",1)
-        elif Line == "no":
-            $ Party[1].change_stat("love", 90, -3)
-            $ Party[1].change_stat("obedience", 50, 2)
-            $ Party[1].change_stat("inhibition", 60, -2)
-            $ Party[1].change_face("_angry",1,Brows="_confused")
-
-        if Partner == RogueX:
-            if "blowjob" in RogueX.recent_history:
-                ch_r "I don't know 'bout that, [RogueX.player_petname]."
-            else:
-                "[RogueX.name] rolls over in bed."
-                ch_r "Don't stop on my account, [RogueX.player_petname]."
-        elif Partner == KittyX:
-            if "blowjob" in KittyX.recent_history:
-                ch_k "Huh. . ."
-            else:
-                "[KittyX.name] rolls over in bed."
-                ch_k "Looked like you were having some fun there . . ."
-        elif Partner == EmmaX:
-            if "blowjob" in EmmaX.recent_history:
-                ch_e "Well. . ."
-            else:
-                "[EmmaX.name] rolls over in bed."
-                ch_e "Oh, don't let me stop you two."
-        elif Partner == LauraX:
-            if "blowjob" in LauraX.recent_history:
-                ch_l "Hmm. . ."
-            else:
-                "[LauraX.name] rolls over in bed and stares at you both."
-        elif Partner == JeanX:
-            if "blowjob" in JeanX.recent_history:
-                ch_j "Hmm. . ."
-            else:
-                "[JeanX.name] rolls over in bed and puts a pillow over her head."
-        elif Partner == StormX:
-            if "blowjob" in StormX.recent_history:
-                ch_s "Hm?"
-            else:
-                "[StormX.name] rolls over in bed."
-                ch_s "Ah."
-                ch_s "Go on then. . ."
-        elif Partner == JubesX:
-            if "blowjob" in JubesX.recent_history:
-                ch_v "Mmmm. . ."
-            else:
-                "[JubesX.name] rolls over in bed."
-                ch_v "I just thought it looked like fun. . ."
-
-
-    menu:
-        "So, um, you want to get back to it?":
-            if Line != "no":
-
-                $ Party[0].change_face("_smile",1)
-                if Party[0] == RogueX:
-                    ch_r "My pleasure."
-                elif Party[0] == KittyX:
-                    ch_k "Hehe, mmmm. . ."
-                elif Party[0] == EmmaX:
-                    ch_e "If you insist. . ."
-                elif Party[0] == LauraX:
-                    ch_l "That's the plan. . ."
-                elif Party[0] == JeanX:
-                    ch_j "Sure."
-                elif Party[0] == StormX:
-                    ch_s "I would love to. . ."
-                elif Party[0] == JubesX:
-                    ch_v "Sure would."
-            elif Line == "no" and approval_check(Party[0], 1750):
-
-                $ Party[0].change_stat("obedience", 80, 3)
-                $ Party[0].change_stat("inhibition", 60, 2)
-                $ Party[0].change_face("_bemused")
-                if Party[0] == RogueX:
-                    ch_r "You're lucky I'm so into you. . ."
-                elif Party[0] == KittyX:
-                    ch_k "Wha? Well. . . I guess. . ."
-                elif Party[0] == EmmaX:
-                    ch_e "Do try not to be a prat this time. . ."
-                elif Party[0] == LauraX:
-                    ch_l "Fine. . ."
-                elif Party[0] == JeanX:
-                    $ Party[0].change_stat("obedience", 90, 3)
-                    ch_j "Whatever."
-                elif Party[0] == StormX:
-                    ch_s ". . ."
-                    ch_s "I suppose I should finish what I start."
-                elif Party[0] == JubesX:
-                    ch_v "Do you need to ask?"
-                $ Line = "maybe"
-            else:
-
-                $ Party[0].change_face("_angry",1)
-                if Party[0] == RogueX:
-                    ch_r "Well not when you're rude to me."
-                    ch_r "You can polish yourself off."
-                elif Party[0] == KittyX:
-                    ch_k "You can't walk that one back!"
-                    ch_k "You can take care of that yourself."
-                elif Party[0] == EmmaX:
-                    ch_e "Not with your attitude."
-                    ch_e "I think you can manage to finish this yourself."
-                elif Party[0] == LauraX:
-                    ch_l "No."
-                elif Party[0] == JeanX:
-                    ch_j "Ha! No."
-                elif Party[0] == StormX:
-                    ch_s "Well now I am not so motivated. . ."
-                elif Party[0] == JubesX:
-                    ch_v "No, I think I got enough. . ."
-        "Were you more interested in something else?":
-            if Line != "no":
-
-                $ Party[0].change_face("_sexy",1)
-                if Party[0] == RogueX:
-                    ch_r "Ooh, what did you have in mind?"
-                elif Party[0] == KittyX:
-                    ch_k "Maaaybee. . . like what?"
-                elif Party[0] == EmmaX:
-                    ch_e "Perhaps. . . What did you have in mind?"
-                elif Party[0] == LauraX:
-                    ch_l "Yeah, I guess?"
-                elif Party[0] == JeanX:
-                    ch_j "You read my mind. . ."
-                elif Party[0] == StormX:
-                    ch_s "I would love to. . ."
-                elif Party[0] == JubesX:
-                    ch_v "Sure, I guess. . ."
-                $ Line = "sex"
-            elif Line == "no" and approval_check(Party[0], 1650):
-
-                $ Party[0].change_stat("obedience", 80, 3)
-                $ Party[0].change_stat("inhibition", 60, 3)
-                $ Party[0].change_face("_bemused",1)
-                if Party[0] == RogueX:
-                    ch_r "Well, you're a jerk, but you're a cute jerk."
-                    ch_r "What were you thinking?"
-                elif Party[0] == KittyX:
-                    ch_k "Oh, so you had something {i}else{/i} in mind. . ."
-                    ch_k "Like what?"
-                elif Party[0] == EmmaX:
-                    ch_e "Hmm, second chance [EmmaX.player_petname], what were you considering?"
-                elif Party[0] == LauraX:
-                    ch_l "Yeah, I guess?"
-                elif Party[0] == JeanX:
-                    ch_j "Oh? Trying to make it up to me?"
-                elif Party[0] == StormX:
-                    ch_s "Well, I suppose if you were interested. . ."
-                elif Party[0] == JubesX:
-                    ch_v "I guess?"
-                $ Line = "sex"
-            else:
-
-                $ Party[0].change_face("_angry",1)
-                if Party[0] == RogueX:
-                    ch_r "Well not when you're rude to me."
-                    ch_r "You can polish yourself off."
-                elif Party[0] == KittyX:
-                    ch_k "You can't walk that one back!"
-                    ch_k "You can take care of that yourself."
-                elif Party[0] == EmmaX:
-                    ch_e "Not with your attitude."
-                    ch_e "I think you can manage to finish this yourself."
-                elif Party[0] == LauraX:
-                    ch_l "No."
-                elif Party[0] == JeanX:
-                    ch_j "Well I -was,- but then you had to be a dickbag about it."
-                elif Party[0] == StormX:
-                    ch_s "I am no longer in the mood."
-                elif Party[0] == JubesX:
-                    ch_v "Lol, no. . ."
-        "Sorry, sorry, please continue." if Line == "no":
-            if approval_check(Party[0], 1450):
-
-                $ Party[0].change_stat("love", 90, 3)
-                $ Party[0].change_stat("obedience", 80, 2)
-                $ Party[0].change_stat("inhibition", 60, 4)
-                $ Party[0].change_face("_bemused",1)
-                if Party[0] == RogueX:
-                    ch_r "Well, since you asked so nice. . ."
-                elif Party[0] == KittyX:
-                    ch_k "I guess I can forgive you. . ."
-                elif Party[0] == EmmaX:
-                    ch_e "Ok, I'll give you another chance here."
-                elif Party[0] == LauraX:
-                    ch_l "Yeah, I guess?"
-                elif Party[0] == JeanX:
-                    ch_j ". . . fine."
-                elif Party[0] == StormX:
-                    ch_s "Fine."
-                elif Party[0] == JubesX:
-                    ch_v "Yeah, sure."
-                $ Line = "maybe"
-            else:
-
-                $ Party[0].change_stat("love", 90, 2)
-                $ Party[0].change_face("_angry",1)
-                if Party[0] == RogueX:
-                    ch_r "Well not when you're rude to me."
-                    ch_r "You can polish yourself off."
-                elif Party[0] == KittyX:
-                    ch_k "You can't walk that one back!"
-                    ch_k "You can take care of that yourself."
-                elif Party[0] == EmmaX:
-                    ch_e "Not with your attitude."
-                    ch_e "I think you can manage to finish this yourself."
-                elif Party[0] == LauraX:
-                    ch_l "No."
-                elif Party[0] == JeanX:
-                    ch_j "Nice try."
-                elif Party[0] == StormX:
-                    ch_s "I am no longer in the mood."
-                elif Party[0] == JubesX:
-                    ch_v "Nah, I got enough. . ."
-        "Sorry, but we could do something else." if Line == "no":
-            if approval_check(Party[0], 1350):
-
-                $ Party[0].change_stat("love", 90, 3)
-                $ Party[0].change_face("_sexy",1)
-                if Party[0] == RogueX:
-                    ch_r "Well, since you asked so nice. . ."
-                    ch_r "What did you have in mind?"
-                elif Party[0] == KittyX:
-                    ch_k "I guess, maybe. . ."
-                    ch_k "Like what?"
-                elif Party[0] == EmmaX:
-                    ch_e "Mmm, I'll consider it. . ."
-                elif Party[0] == LauraX:
-                    ch_l "Yeah, I guess?"
-                elif Party[0] == JeanX:
-                    ch_j ". . . fine."
-                elif Party[0] == StormX:
-                    ch_s "I. . . suppose so."
-                elif Party[0] == JubesX:
-                    ch_v "Sure, I guess. . ."
-                $ Line = "sex"
-            else:
-
-                $ Party[0].change_stat("love", 90, 2)
-                $ Party[0].change_face("_angry",1)
-                if Party[0] == RogueX:
-                    ch_r "Well not when you're rude to me."
-                    ch_r "You can polish yourself off."
-                elif Party[0] == KittyX:
-                    ch_k "You can't walk that one back!"
-                    ch_k "You can take care of that yourself."
-                elif Party[0] == EmmaX:
-                    ch_e "Not with your attitude."
-                    ch_e "I think you can manage to finish this yourself."
-                elif Party[0] == LauraX:
-                    ch_l "No."
-                elif Party[0] == JeanX:
-                    ch_j "Nope, too late."
-                elif Party[0] == StormX:
-                    ch_s "No, I am no longer in the mood."
-                elif Party[0] == JubesX:
-                    ch_v "Nah. . ."
-        "Not when I'm just waking up.":
-            $ Party[0].change_face("_angry",1)
-            if Party[0] == RogueX:
-                ch_r "Fine, whatever!"
-                $ RogueX.eyes = "_side"
-                ch_r "[[mumbles] Girl tries to do a favor. . ."
-            elif Party[0] == KittyX:
-                ch_k "Aw. . ."
-                $ KittyX.eyes = "_side"
-                ch_k "Last time I do you a favor. . ."
-            elif Party[0] == EmmaX:
-                ch_e "Hmph. . ."
-                $ EmmaX.eyes = "_side"
-                ch_e "It's not as though that was for my benefit. . ."
-            elif Party[0] == LauraX:
-                ch_l "Tsk. . ."
-                $ LauraX.eyes = "_side"
-                ch_l "\"No free blowjobs,\" got it. . ."
-            elif Party[0] == JeanX:
-                $ Party[0].change_stat("love", 90, -5)
-                $ Party[0].change_stat("obedience", 90, 2)
-                ch_j "Seriously? . ."
-                $ JeanX.eyes = "_side"
-                ch_j "\"Rules, rules, rules\" around here. . ."
-            elif Party[0] == StormX:
-                ch_s "I can understand."
-            elif Party[0] == JubesX:
-                ch_v "Ok, ok. . ."
-            $ Line = "no"
-
-
-
-    if Line == "no" or Line == "sex":
-        if Partner:
-            $ Partner.change_face("_sexy")
-        $ Party[0].recent_history.remove("blanket")
-        call expression Party[0].tag + "_BJ_Reset"
-
-        if len(Party) >= 2:
-            if Party[1] == RogueX:
-                show Rogue_sprite:
-                    ease 1 pos (700,50)
-                show Rogue_sprite:
-                    pos (700,50)
-            elif Party[1] == KittyX:
-                show Kitty_sprite:
-                    ease 1 pos (700,50)
-                show Kitty_sprite:
-                    pos (700,50)
-            elif Party[1] == EmmaX:
-                show Emma_Sprite:
-                    ease 1 pos (700,50)
-                show Emma_Sprite:
-                    pos (700,50)
-            elif Party[1] == LauraX:
-                show Laura_Sprite:
-                    ease 1 pos (700,50)
-                show Laura_Sprite:
-                    pos (700,50)
-            elif Party[1] == JeanX:
-                show Jean_Sprite:
-                    ease 1 pos (700,50)
-                show Jean_Sprite:
-                    pos (700,50)
-            elif Party[1] == StormX:
-                show Storm_Sprite:
-                    ease 1 pos (700,50)
-                show Storm_Sprite:
-                    pos (700,50)
-            elif Party[1] == JubesX:
-                show Jubes_Sprite:
-                    ease 1 pos (700,50)
-                show Jubes_Sprite:
-                    pos (700,50)
-
-        if Line == "no":
-            if bg_current == "bg_player":
-                if Partner:
-                    Partner.voice "I'm out of here."
-                Party[0].voice "Yeah, me too."
-            else:
-                Party[0].voice "Oh, get out of here already."
-
-
-
-
-            $ Party = []
-            $ Partner = 0
-
-
-            $ time_index = 3
-            $ current_time = time_options[(time_index)]
-            $ Day -= 1
-
-            if Weekday == 0:
-                $ Weekday = 6
-            else:
-                $ Weekday -= 1
-
-            $ DayofWeek = Week[Weekday]
-            call Wait
-
-            jump Return_Player
-
-        elif Line == "sex":
-            call shift_focus(Party[0])
-            jump enter_main_sex_menu
-    else:
-
-        $ Line = 0
-        $ action_speed = 1
-        $ action_context = 0
-        if Partner:
-            $ second_girl_primary_action = "blowjob"
-        call Morning_Partner
-        call expression Party[0].tag + "_SexAct" pass ("blowjob")
-    return
-
-
-
-label Morning_Partner:
-
-    if not Partner:
-        return
-    $ Partner.change_face("_sexy")
-    if Partner == RogueX:
-        show Rogue_sprite:
-            ease 1 pos (700,50)
-        show Rogue_sprite:
-            pos (700,50)
-    elif Partner == EmmaX:
-        show Emma_Sprite:
-            ease 1 pos (700,50)
-        show Emma_Sprite:
-            pos (700,50)
-    elif Partner == KittyX:
-        show Kitty_sprite:
-            ease 1 pos (700,50)
-        show Kitty_sprite:
-            pos (700,50)
-    elif Partner == LauraX:
-        show Laura_Sprite:
-            ease 1 pos (700,50)
-        show Laura_Sprite:
-            pos (700,50)
-    elif Partner == JeanX:
-        show Jean_Sprite:
-            ease 1 pos (700,50)
-        show Jean_Sprite:
-            pos (700,50)
-    elif Partner == StormX:
-        show Storm_Sprite:
-            ease 1 pos (700,50)
-        show Storm_Sprite:
-            pos (700,50)
-    elif Partner == JubesX:
-        show Jubes_Sprite:
-            ease 1 pos (700,50)
-        show Jubes_Sprite:
-            pos (700,50)
-    return
-
-
-
-
-
-
-
-
-
-
-label Poly_Start(Newbie=0, Round2=0, Asked=0):
-
-
-
-
-    $ Line = 0
-
-    if Newbie in Player.Harem:
-        return
-
-    if not Player.Harem:
-        return
-
-    if Asked in all_Girls:
-        if Asked in Player.Harem and Player.Harem[0] != Asked:
-
-            $ Player.Harem.remove(Asked)
-            if Player.Harem:
-                $ Player.Harem.insert(0,Asked)
-            else:
-                $ Player.Harem.append(Asked)
-
-    if "polystart" in Player.daily_history:
-        if Round2 and Asked:
-            "You pull [Player.Harem[0].name] aside for a moment."
-            ch_p "Hey, have you changed your mind about [Newbie.name] lately?"
-            if Player.Harem[0] == RogueX:
-                ch_r "Getting a little greedy, aren't you."
-            elif Player.Harem[0] == KittyX:
-                ch_k "Wow, um, chill for a bit."
-            elif Player.Harem[0] == EmmaX:
-                ch_e "Take a breather, [Player.Harem[0].player_petname]."
-            elif Player.Harem[0] == LauraX:
-                ch_l "Cool your jets."
-            elif Player.Harem[0] == JeanX:
-                ch_j "Not really, no."
-            elif Player.Harem[0] == StormX:
-                ch_s "I am weighing my options, give me time."
-            elif Player.Harem[0] == JubesX:
-                ch_v "Look. . . I have feelings. . ."
-            Asked.voice "Ask me some time later."
-        return
-
-    $ Player.daily_history.append("polystart")
-
-    if len(Player.Harem) >= 2:
-        call Harem_Start (Newbie, Round2)
-        return
-
-
-    $ Party = [Player.Harem[0]]
-    call shift_focus (Player.Harem[0])
-    call set_the_scene
-    call clear_the_room (Player.Harem[0])
-
-
-    if Round2:
-        "You pull [Party[0].name] aside for a moment."
-        ch_p "Hey, have you changed your mind about [Newbie.name] lately?"
-    else:
-        $ Party[0].change_face("_bemused")
-        "[Party[0].name] pulls you aside and wants to talk about something."
-
-
-        if Party[0] == RogueX:
-            ch_r "I've seen you were getting pretty cozy with [Newbie.name]."
-        elif Party[0] == KittyX:
-            ch_k "You look kinda close with [Newbie.name] lately."
-        elif Party[0] == EmmaX:
-            ch_e "I've noticed that [Newbie.name] and yourself have been spending time together."
-        elif Party[0] == LauraX:
-            ch_l "You've been all over [Newbie.name] lately."
-        elif Party[0] == JeanX:
-            ch_j "I saw you with [Newbie.name] earlier."
-        elif Party[0] == StormX:
-            ch_s "I saw you spending time with [Newbie.name] earlier."
-        elif Party[0] == JubesX:
-            ch_v "I saw you hanging with [Newbie.name] earlier."
-
-
-
-    if Party[0].GirlLikeCheck(Newbie) >= 800:
-        $ Party[0].change_face("_sly")
-    elif Party[0].GirlLikeCheck(Newbie) >= 600:
-        pass
-    else:
-
-        $ Party[0].change_face("_angry",Mouth="_normal")
-
-
-    if Party[0] == RogueX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
-
-            ch_r "She is pretty sexy, I guess."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
-
-            ch_r "I like her just fine, I was just wondering where it was headed."
-        else:
-
-            ch_r "I'm not really a fan'a hers."
-    elif Party[0] == KittyX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
-
-            ch_k "She's kinda hot, I get that. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
-
-            ch_k "She's ok, sure, but I'm not sure. . ."
-        else:
-
-            ch_k "I don't really like her much."
-    elif Party[0] == EmmaX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
-
-            ch_e "I think she's quite the catch."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
-
-            ch_e "I do like her, but have some concerns."
-        else:
-
-            ch_e "I don't really approve."
-    elif Party[0] == LauraX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
-
-            ch_l "She's pretty hot, I get it."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
-
-            ch_l "She's ok, I guess."
-        else:
-
-            ch_l "I don't like her."
-    elif Party[0] == JeanX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
-
-            ch_j "I get it, she's hot enough."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
-
-            ch_j "She's. . . fine."
-        else:
-
-            ch_j "You probably shouldn't be seen around her."
-    elif Party[0] == StormX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
-
-            ch_s "She is very beautiful, certainly."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
-
-            ch_s "She is a good girl, certainly. . ."
-        else:
-
-            ch_s "I do not think I like her much."
-    elif Party[0] == JubesX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
-
-            ch_v "Ok, she's totally hot, but. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
-
-            ch_v "She's. . . fine, but. . ."
-        else:
-
-            ch_v "I'm not there for it."
-
-
-
-
-    if Party[0] == RogueX:
-        ch_r "I don't know how I feel about sharing you with some other girl."
-        ch_r "So did you plan to get serious with her?"
-    elif Party[0] == KittyX:
-        ch_k "I don't know about sharing my boyfriend with somebody else."
-        ch_k "So are you[KittyX.like]trying to date her?"
-    elif Party[0] == EmmaX:
-        ch_e "I can be a bit. . . possessive with my partners."
-        ch_e "Is this getting serious with her?"
-    elif Party[0] == LauraX:
-        ch_l "I don't play well with others."
-        ch_l "Are you two getting serious?"
-    elif Party[0] == JeanX:
-        ch_j "I'm not really interested in sharing with her."
-        ch_j "So are you two getting serious?"
-    elif Party[0] == StormX:
-        ch_s "I am unsure how I feel about this."
-        ch_s "What are your intentions with her?"
-    elif Party[0] == JubesX:
-        ch_v "I don't know. . ."
-        ch_v "Are you really into her?"
-
-
-    menu:
-        extend ""
-        "Yeah, I'd like to date her too.":
-            $ Line = "y"
-        "Maybe, what do you think?":
-            $ Line = "m"
-        "No, not really.":
-            $ Line = "n"
-
-    if Line == "y":
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
-
-            $ Line = "yy"
-            $ Party[0].change_stat("love", 90, 5)
-            $ Party[0].change_stat("obedience", 50, 5)
-            $ Party[0].change_stat("inhibition", 90, 10)
-        elif approval_check(Party[0], 1800):
-
-            $ Line = "ym"
-            $ Party[0].change_stat("obedience", 50, 5)
-        elif approval_check(Party[0], 1500) and Party[0].GirlLikeCheck(Newbie) >= 500:
-
-            $ Line = "ym"
-        else:
-
-            $ Line = "yn"
-            $ Party[0].change_stat("love", 90, -10)
-
-    if Line == "m":
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
-
-            $ Line = "my"
-            $ Party[0].change_stat("inhibition", 90, 5)
-        elif approval_check(Party[0], 1800):
-
-            $ Line = "mm"
-        elif approval_check(Party[0], 1500) and Party[0].GirlLikeCheck(Newbie) >= 600:
-
-            $ Line = "mm"
-        else:
-
-            $ Line = "mn"
-
-    if Line == "n":
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
-
-            $ Line = "ny"
-            $ Party[0].change_stat("inhibition", 90, 10)
-        elif approval_check(Party[0], 1700):
-
-            $ Line = "nm"
-            $ Party[0].change_stat("inhibition", 90, 5)
-        elif approval_check(Party[0], 1300) and Party[0].GirlLikeCheck(Newbie) >= 500:
-
-            $ Line = "nm"
-            $ Party[0].change_stat("love", 90, 5)
-        else:
-
-            $ Line = "nn"
-            $ Party[0].change_stat("love", 90, 10)
-
-
-
-
-
-    if Line == "yn" or Line == "mn" or Line == "nn":
-        $ Party[0].change_face("_angry")
-    elif Line == "yy" or Line == "ny" or Line == "my":
-        $ Party[0].change_face("_sexy")
-    else:
-        $ Party[0].change_face("_bemused")
-
-
-    if Party[0] == RogueX:
-        if Line == "yy":
-
-            ch_r "Great, sounds fun."
-        elif Line == "my":
-
-            ch_r "Oh, don't let me stop you."
-        elif Line == "ny":
-
-            ch_r "Oh. Well maybe you should!"
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_r "Yeah, I guess I can live with that."
-        elif Line == "nm":
-
-            ch_r "Hmm, not that I would have minded."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_r "I don't think I'm really cool with that."
-        elif Line == "nn":
-
-            ch_r "Good to hear."
-
-    elif Party[0] == KittyX:
-        if Line == "yy":
-
-            ch_k "Cool, sounds fun."
-        elif Line == "my":
-
-            ch_k "Oh, seriously, it's fine with me!"
-        elif Line == "ny":
-
-            ch_k "You might want to, she's hot!"
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_k "Yeah, I can[KittyX.like]live with that."
-        elif Line == "nm":
-
-            ch_k "Ok, I would have been ok with it though."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_k "That's not really cool with me."
-        elif Line == "nn":
-
-            ch_k "Good, that wouldn't have been cool."
-
-    elif Party[0] == EmmaX:
-        if Line == "yy":
-
-            ch_e "Lovely. . ."
-        elif Line == "my":
-
-            ch_e "Oh, please do, she's lovely."
-        elif Line == "ny":
-
-            ch_e "Pity, I rather like her."
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_e "I suppose I can make do then."
-        elif Line == "nm":
-
-            ch_e "You could do a lot worse."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_e "I don't think that will be acceptable."
-        elif Line == "nn":
-
-            ch_e "Probably for the best."
-
-    elif Party[0] == LauraX:
-        if Line == "yy":
-
-            ch_l "Nice."
-        elif Line == "my":
-
-            ch_l "Come on, she's pretty great."
-        elif Line == "ny":
-
-            ch_l "You sure? She's hot."
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_l "Fine, I can work with that."
-        elif Line == "nm":
-
-            ch_l "Ok. I'm cool with it if you do though."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_l "Nope."
-        elif Line == "nn":
-
-            ch_l "Good."
-
-    elif Party[0] == JeanX:
-        if Line == "yy":
-
-            ch_j "Well, ok, sure."
-        elif Line == "my":
-
-            ch_j "Well. . . she could be fun. . ."
-        elif Line == "ny":
-
-            ch_j "Really? I mean, she could be fun."
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_j "Well, ok, fine. . ."
-        elif Line == "nm":
-
-            ch_j "Ok. I could think about it though."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_j "Well, cut it out."
-        elif Line == "nn":
-
-            ch_j "Yeah."
-
-    elif Party[0] == StormX:
-        if Line == "yy":
-
-            ch_s "Oh, that will be nice. . ."
-        elif Line == "my":
-
-            ch_s "Oh, you definitely should!"
-        elif Line == "ny":
-
-            ch_s "That is too bad. You would go well together."
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_s "Well, that should be fine."
-        elif Line == "nm":
-
-            ch_s "You might want to reconsider. . ."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_s "I do not think I could deal with her."
-        elif Line == "nn":
-
-            ch_s "Yes, I would agree with that."
-
-    elif Party[0] == JubesX:
-        if Line == "yy":
-
-            ch_v "Ok, cool."
-        elif Line == "my":
-
-            ch_v "Yeah, sure, I'm down with it."
-        elif Line == "ny":
-
-            ch_v "Ok, but you might be missing out!"
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_v "Ok, yeah, I can deal."
-        elif Line == "nm":
-
-            ch_v "Ok, your call, I guess."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_v "Well. . . I might have some feelings."
-        elif Line == "nn":
-
-            ch_v "Glad we're on the same page here."
-
-
-
-    if Line != "yy" and Line != "nn":
-
-        menu:
-            extend ""
-            "Ok, then I guess I will ask her to join us." if Line in ("my","ny","ym","mm","nm"):
-
-                $ Line = "yy"
-                $ Party[0].change_face("_smile")
-                $ Party[0].change_stat("love", 90, 10)
-                $ Party[0].change_stat("obedience", 50, 10)
-                if Party[0] == RogueX:
-                    ch_r "Great, sounds fun."
-                elif Party[0] == KittyX:
-                    ch_k "Cool, sounds fun."
-                elif Party[0] == EmmaX:
-                    ch_e "Lovely. . ."
-                elif Party[0] == LauraX:
-                    ch_l "Nice."
-                elif Party[0] == JeanX:
-                    ch_j "Ok then."
-                elif Party[0] == StormX:
-                    ch_s "That sounds fantastic."
-                elif Party[0] == JubesX:
-                    ch_v "Sweet!"
-
-            "Well then, I guess I'll stop." if Line in ("mn","yn","ym","mm","nm"):
-
-                $ Line = "nn"
-                $ Party[0].change_face("_smile")
-                $ Party[0].change_stat("love", 90, 10)
-                if Party[0] == RogueX:
-                    ch_r "Good to hear."
-                elif Party[0] == KittyX:
-                    ch_k "Good, that wouldn't have been cool."
-                elif Party[0] == EmmaX:
-                    ch_e "Probably for the best."
-                elif Party[0] == LauraX:
-                    ch_l "Good."
-                elif Party[0] == JeanX:
-                    ch_j "Ok then."
-                elif Party[0] == StormX:
-                    ch_s "That would be a good idea."
-                elif Party[0] == JubesX:
-                    ch_v "Ok, good."
-
-            "I'm asking her in anyway." if Line in ("mn","yn"):
-
-                pass
-
-            "Well, I'm going to pass anyway." if Line in ("nm","ny","mm"):
-
-                $ Line = "nn"
-                $ Party[0].change_face("_sad")
-                $ Party[0].change_stat("obedience", 70, 5)
-                if Party[0] == RogueX:
-                    ch_r "Oh, ok."
-                elif Party[0] == KittyX:
-                    ch_k "That's fine."
-                elif Party[0] == EmmaX:
-                    ch_e "If you insist."
-                elif Party[0] == LauraX:
-                    ch_l "Ok."
-                elif Party[0] == JeanX:
-                    ch_j "Fine. . ."
-                elif Party[0] == StormX:
-                    ch_s "That is fair."
-                elif Party[0] == JubesX:
-                    ch_v "Yeah, that's fine."
-
-
-
-    if Line == "mn" or Line == "yn":
-
-
-        if approval_check(Party[0], 1600) and Party[0].GirlLikeCheck(Newbie) >= 500:
-            $ Party[0].change_face("_sadside")
-            $ Party[0].change_stat("love", 90, -5)
-            $ Party[0].change_stat("obedience", 50, 15)
-            if Party[0] == RogueX:
-                ch_r "Fine, she's in."
-            elif Party[0] == KittyX:
-                ch_k "Geeze, ok."
-            elif Party[0] == EmmaX:
-                ch_e "I suppose we'll make room."
-            elif Party[0] == LauraX:
-                ch_l "Whatever."
-            elif Party[0] == JeanX:
-                ch_j "Well. . . ok, fine."
-                ch_j "But this counts as your Christmas present."
-            elif Party[0] == StormX:
-                ch_s ". . ."
-                ch_s "I can accept that."
-            elif Party[0] == JubesX:
-                ch_v "Whatever. Fine."
-            $ Line = "yy"
-        else:
-            $ Party[0].change_face("_angry",Eyes="_side")
-            $ Party[0].change_stat("love", 90, -25)
-            $ Party[0].change_stat("inhibition", 90, 10)
-            if Party[0] == RogueX:
-                ch_r "I just don't like you that much, [RogueX.player_petname]."
-                ch_r "I'm out."
-            elif Party[0] == KittyX:
-                ch_k "You aren't that cute, [KittyX.player_petname]."
-                ch_k "I'm done."
-            elif Party[0] == EmmaX:
-                ch_e "Don't overestimate yourself, [EmmaX.player_petname]."
-                ch_e "We're done."
-            elif Party[0] == LauraX:
-                ch_l "Too far, [LauraX.player_petname]."
-                ch_l "I'm out of here."
-            elif Party[0] == JeanX:
-                ch_j "I'm more than enough for you."
-                ch_j "I'm out."
-            elif Party[0] == StormX:
-                ch_s ". . ."
-                ch_s "I can't be a part of it then."
-            elif Party[0] == JubesX:
-                ch_v "Well, I'm out then."
-            $ Party[0].traits.append("ex")
-            $ Party[0].Break[0] = 5 + Party[0].Break[1] + Party[0].Cheated
-            $ Player.Harem.remove(Party[0])
-            call Remove_Girl (Party[0])
-
-
-    $ Party = []
-    if Line == "yy":
-        if Newbie.tag + "No" in Player.traits:
-            $ Player.traits.remove(Newbie.tag + "No")
-        $ Player.drain_word(Newbie.tag + "No",0,0,1)
-        $ Player.traits.append(Newbie.tag + "Yes")
-        "You should give [Newbie.name] a call."
-    else:
-        $ Player.traits.append(Newbie.tag + "No")
-    return
-
-
-
-
-
-
-label Harem_Start(Newbie=0, Round2=0):
-
-
-
-
-    $ Line = 0
-
-    if len(Player.Harem) < 2:
-
-        return
-
-    $ Party = [Player.Harem[0],Player.Harem[1]]
-
-    call Present_Check
-    $ Party = [Player.Harem[0],Player.Harem[1]]
-    call shift_focus (Player.Harem[0])
-    call set_the_scene
-
-    $ Party[0].change_face("_bemused")
-    $ Party[1].change_face("_bemused")
-    if Round2:
-        "You call [Party[0].name] and [Party[1].name] over."
-        ch_p "I was wondering if you'd changed your mind about [Newbie.name]."
-    else:
-        "[Party[0].name] pulls you aside and wants to talk about something."
-
-
-        if Party[0] == RogueX:
-            ch_r "Hey, so me and [Party[1].name] have been talk'in."
-        elif Party[0] == KittyX:
-            ch_k "So[KittyX.like]me and [Party[1].name] had a little chat."
-        elif Party[0] == EmmaX:
-            ch_e "[Party[1].name] and I have been discussing a few things."
-        elif Party[0] == LauraX:
-            ch_l "I had a little chat with [Party[1].name]. . ."
-        elif Party[0] == JeanX:
-            ch_j "Hey, I was talking to. . . this one here. . ."
-        elif Party[0] == StormX:
-            ch_s "[Party[1].name] and I were having lunch earlier, and something came up."
-        elif Party[0] == JubesX:
-            ch_v "So [Party[1].name] and I were talking earlier, and something came up. . ."
-
-
-
-        if Party[1] == RogueX:
-            ch_r "We hear that you were getting pretty cozy with [Newbie.name]."
-        elif Party[1] == KittyX:
-            ch_k "We hear that you're kinda close with [Newbie.name] lately."
-        elif Party[1] == EmmaX:
-            ch_e "We've hear that [Newbie.name] and yourself have been spending time together."
-        elif Party[1] == LauraX:
-            ch_l "You've been all over [Newbie.name] lately."
-        elif Party[1] == JeanX:
-            ch_j "We noticed you were around [Newbie.name] a lot lately."
-        elif Party[1] == StormX:
-            ch_s "We have both noticed you spending time with [Newbie.name] lately."
-        elif Party[0] == JubesX:
-            ch_v "We totally saw you hanging with [Newbie.name] earlier."
-
-
-
-
-    if Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
-        pass
-    elif Party[0].GirlLikeCheck(Newbie) >= 700:
-
-        $ Party[1].change_face("_angry",Mouth="_normal")
-    elif Party[1].GirlLikeCheck(Newbie) >= 700:
-
-        $ Party[0].change_face("_angry",Mouth="_normal")
-    else:
-
-        $ Party[0].change_face("_angry",Mouth="_normal")
-        $ Party[1].change_face("_angry",Mouth="_normal")
-
-    if Party[0] == RogueX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
-
-            ch_r "Now we like her just fine, and we can't say we don't like the idea much."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
-
-            ch_r "Now we like her just fine, but we don't know about share'in."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
-
-            ch_r "Now I like her just fine, but [Party[1].name] ain't so sure."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
-
-            ch_r "Now [Party[1].name] seems to like her, but I'm not so sure."
-        else:
-
-            ch_r "Neither'a us is really cool with that."
-    elif Party[0] == KittyX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
-
-            ch_k "She's kinda hot, we get that. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
-
-            ch_k "She's ok, sure, but we're not sure. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
-
-            ch_k "I like her, but I don't know about [Party[1].name]."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
-
-            ch_k "[Party[1].name] likes her, but I don't know."
-        else:
-
-            ch_k "We don't really like her much."
-    elif Party[0] == EmmaX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
-
-            ch_e "I think we agree that she's a nice catch."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
-
-            ch_e "We do like her, but we have some concerns."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
-
-            ch_e "[Party[1].name] doesn't really approve."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
-
-            ch_e "[Party[1].name] seems to think she's acceptable."
-        else:
-
-            ch_e "We don't really approve."
-    elif Party[0] == LauraX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
-
-            ch_l "She's pretty hot, we get it."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
-
-            ch_l "She's ok, I guess."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
-
-            ch_l "She's fine, but [Party[1].name] doesn't like her."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
-
-            ch_l "[Party[1].name] likes her. I don't."
-        else:
-
-            ch_l "We don't like her."
-    elif Party[0] == JeanX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
-
-            ch_j "I get it, she's hot enough."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
-
-            ch_j "She's. . . fine."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
-
-            ch_j "I think she's fine, but [Party[1].name] doesn't like her."
-            ch_j "For whatever that's worth. . ."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
-
-            ch_j "[Party[1].name] likes her. I don't."
-            ch_j "So I think you know the right answer to this one. . ."
-        else:
-
-            ch_j "You probably shouldn't be seen around her."
-    elif Party[0] == StormX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
-
-            ch_s "We agree that she is very beautiful. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
-
-            ch_s "She is a good girl, but we do have some concerns. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
-
-            ch_s "I like her, but [Party[1].name] does not approve."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
-
-            ch_s "[Party[1].name] appears to like her, I am unsure."
-        else:
-
-            ch_s "We do not like her very much."
-
-    elif Party[0] == JubesX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
-
-            ch_v "Ok, she's totally hot, but. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
-
-            ch_v "She's. . . fine, but. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
-
-            ch_v "She's. . . fine, but, [Party[1].name]. . ."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
-
-            ch_v "[Party[1].name] likes her, but I don't know."
-        else:
-
-            ch_v "We're not there for it."
-
-
-
-
-    if Party[1] == RogueX:
-        ch_r "So did you plan to get serious with her?"
-    elif Party[1] == KittyX:
-        ch_k "So are you[KittyX.like]trying to date her?"
-    elif Party[1] == EmmaX:
-        ch_e "Is this getting serious with her?"
-    elif Party[1] == LauraX:
-        ch_l "Are you two getting serious?"
-    elif Party[1] == JeanX:
-        ch_j "So are you two getting serious?"
-    elif Party[1] == StormX:
-        ch_s "So where would this relationship be leading?"
-    elif Party[1] == JubesX:
-        ch_v "I don't know. . ."
-        ch_v "Are you really into her?"
-
-
-    menu:
-        extend ""
-        "Yeah, I'd like to date her too.":
-            $ Line = "y"
-        "Maybe, what do you think?":
-            $ Line = "m"
-        "No, not really.":
-            $ Line = "n"
-
-    if Line == "y":
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
-
-            $ Line = "yy"
-            $ Party[0].change_stat("love", 90, 5)
-            $ Party[0].change_stat("obedience", 50, 5)
-            $ Party[0].change_stat("inhibition", 90, 10)
-            $ Party[1].change_stat("love", 90, 5)
-            $ Party[1].change_stat("obedience", 50, 5)
-            $ Party[1].change_stat("inhibition", 90, 10)
-        elif approval_check(Party[0], 1800) and approval_check(Party[1], 1800):
-
-            $ Line = "ym"
-            $ Party[0].change_stat("obedience", 50, 10)
-            $ Party[1].change_stat("obedience", 50, 10)
-        elif approval_check(Party[0], 1500) and approval_check(Party[1], 1500):
-            if Party[0].GirlLikeCheck(Newbie) >= 500 and Party[1].GirlLikeCheck(Newbie) >= 500:
-
-                $ Line = "ym"
-                $ Party[0].change_stat("obedience", 80, 15)
-                $ Party[1].change_stat("obedience", 80, 15)
-            else:
-
-                $ Line = "yn"
-                $ Party[0].change_stat("love", 90, -5)
-                $ Party[0].change_stat("obedience", 50, -5)
-                $ Party[1].change_stat("love", 90, -5)
-                $ Party[1].change_stat("obedience", 50, -5)
-        else:
-
-            $ Line = "yn"
-            $ Party[0].change_stat("love", 90, -10)
-            $ Party[0].change_stat("obedience", 50, -5)
-            $ Party[1].change_stat("love", 90, -10)
-            $ Party[1].change_stat("obedience", 50, -5)
-
-    if Line == "m":
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
-
-            $ Line = "my"
-            $ Party[0].change_stat("inhibition", 90, 5)
-            $ Party[1].change_stat("inhibition", 90, 5)
-        elif approval_check(Party[0], 1800) and approval_check(Party[1], 1800):
-
-            $ Line = "mm"
-        elif approval_check(Party[0], 1500) and approval_check(Party[1], 1500):
-            if Party[0].GirlLikeCheck(Newbie) >= 600 or Party[1].GirlLikeCheck(Newbie) >= 600:
-
-                $ Line = "mm"
-            else:
-
-                $ Line = "mn"
-        else:
-
-            $ Line = "mn"
-
-    if Line == "n":
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
-
-            $ Line = "ny"
-            $ Party[0].change_stat("inhibition", 90, 10)
-            $ Party[1].change_stat("inhibition", 90, 10)
-        elif approval_check(Party[0], 1700) and approval_check(Party[1], 1700):
-
-            $ Line = "nm"
-            $ Party[0].change_stat("inhibition", 90, 5)
-        elif approval_check(Party[0], 1300) and approval_check(Party[1], 1300):
-            if Party[0].GirlLikeCheck(Newbie) >= 500 and Party[1].GirlLikeCheck(Newbie) >= 500:
-
-                $ Line = "nm"
-            else:
-
-                $ Line = "nn"
-                $ Party[0].change_stat("love", 90, 5)
-                $ Party[0].change_stat("inhibition", 90, 5)
-                $ Party[1].change_stat("love", 90, 5)
-                $ Party[1].change_stat("inhibition", 90, 5)
-        else:
-
-            $ Line = "nn"
-            $ Party[0].change_stat("love", 90, 5)
-            $ Party[0].change_stat("inhibition", 90, 5)
-            $ Party[1].change_stat("love", 90, 5)
-            $ Party[1].change_stat("inhibition", 90, 5)
-
-
-
-
-
-    if Line == "yn" or Line == "mn" or Line == "nn":
-        $ Party[0].change_face("_angry")
-        $ Party[1].change_face("_angry")
-    elif Line == "yy" or Line == "ny" or Line == "my":
-        $ Party[0].change_face("_sexy")
-        $ Party[1].change_face("_sexy")
-    else:
-        $ Party[0].change_face("_bemused")
-        $ Party[1].change_face("_bemused")
-
-
-    if Party[0] == RogueX:
-        if Line == "yy":
-
-            ch_r "Great, sounds fun."
-        elif Line == "my":
-
-            ch_r "Oh, don't let me stop you."
-        elif Line == "ny":
-
-            ch_r "Oh. Well maybe you should!"
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_r "Yeah, I guess we can live with that."
-        elif Line == "nm":
-
-            ch_r "Hmm, not that we would have minded."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_r "I don't think we're really cool with that."
-        elif Line == "nn":
-
-            ch_r "Good to hear."
-
-    elif Party[0] == KittyX:
-        if Line == "yy":
-
-            ch_k "Cool, sounds fun."
-        elif Line == "my":
-
-            ch_k "Oh, seriously, it's fine with us!"
-        elif Line == "ny":
-
-            ch_k "You might want to, she's hot!"
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_k "Yeah, we can[KittyX.like]live with that."
-        elif Line == "nm":
-
-            ch_k "Ok, we would have been ok with it though."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_k "That's not really cool with us."
-        elif Line == "nn":
-
-            ch_k "Good, that wouldn't have been cool."
-
-    elif Party[0] == EmmaX:
-        if Line == "yy":
-
-            ch_e "Lovely. . ."
-        elif Line == "my":
-
-            ch_e "Oh, please do, she's lovely."
-        elif Line == "ny":
-
-            ch_e "Pity, I rather like her."
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_e "I suppose we can make do then."
-        elif Line == "nm":
-
-            ch_e "You could do a lot worse."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_e "I don't think that will be acceptable."
-        elif Line == "nn":
-
-            ch_e "Probably for the best."
-
-    elif Party[0] == LauraX:
-        if Line == "yy":
-
-            ch_l "Nice."
-        elif Line == "my":
-
-            ch_l "Come on, she's pretty great."
-        elif Line == "ny":
-
-            ch_l "You sure? She's hot."
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_l "Fine, we can work with that."
-        elif Line == "nm":
-
-            ch_l "Ok. We're cool with it if you do though."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_l "Nope."
-        elif Line == "nn":
-
-            ch_l "Good."
-
-    elif Party[0] == JeanX:
-        if Line == "yy":
-
-            ch_j "Well, ok, sure."
-        elif Line == "my":
-
-            ch_j "Well. . . she could be fun. . ."
-        elif Line == "ny":
-
-            ch_j "Really? I mean, she could be fun."
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_j "Well, ok, fine. . ."
-        elif Line == "nm":
-
-            ch_j "Ok. I could think about it though."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_j "Well, cut it out."
-        elif Line == "nn":
-
-            ch_j "Yeah."
-
-    elif Party[0] == StormX:
-        if Line == "yy":
-
-            ch_s "Oh, that will be nice. . ."
-        elif Line == "my":
-
-            ch_s "Oh, you definitely should!"
-        elif Line == "ny":
-
-            ch_s "That is too bad. You would go well together."
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_s "Well, that should be fine."
-        elif Line == "nm":
-
-            ch_s "You might want to reconsider. . ."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_s "I do not think we could deal with her."
-        elif Line == "nn":
-
-            ch_s "Yes, we could agree with that."
-
-    elif Party[0] == JubesX:
-        if Line == "yy":
-
-            ch_v "Ok, cool."
-        elif Line == "my":
-
-            ch_v "Yeah, sure, I guess we're down with that down with it."
-        elif Line == "ny":
-
-            ch_v "Ok, but you might be missing out!"
-
-        elif Line == "ym" or Line == "mm":
-
-            ch_v "Ok, yeah, we can deal."
-        elif Line == "nm":
-
-            ch_v "Ok, your call, I guess."
-
-        elif Line == "yn" or Line == "mn":
-
-            ch_v "Well. . . we might have some feelings."
-        elif Line == "nn":
-
-            ch_v "Glad we're on the same page here."
-
-
-
-    if Line != "yy" and Line != "nn":
-
-        menu:
-            extend ""
-            "Ok, then I guess I will ask her to join us." if Line in ("my","ny","ym","mm","nm"):
-
-                $ Line = "yy"
-                $ Party[0].change_face("_smile")
-                $ Party[1].change_face("_smile")
-                $ Party[0].change_stat("obedience", 80, 5)
-                $ Party[0].change_stat("inhibition", 90, 10)
-                $ Party[1].change_stat("obedience", 80, 5)
-                $ Party[1].change_stat("inhibition", 90, 10)
-                if Party[0] == RogueX:
-                    ch_r "Great, sounds fun."
-                elif Party[0] == KittyX:
-                    ch_k "Cool, sounds fun."
-                elif Party[0] == EmmaX:
-                    ch_e "Lovely. . ."
-                elif Party[0] == LauraX:
-                    ch_l "Nice."
-                elif Party[0] == JeanX:
-                    ch_j "Good."
-                elif Party[0] == StormX:
-                    ch_s "Good."
-                elif Party[0] == JubesX:
-                    ch_v "Sweet!"
-            "Well then, I guess I'll stop." if Line in ("mn","yn"):
-
-                $ Line = "nn"
-                $ Party[0].change_face("_normal")
-                $ Party[1].change_face("_normal")
-                $ Party[0].change_stat("love", 90, 5)
-                $ Party[0].change_stat("inhibition", 90, 5)
-                $ Party[1].change_stat("love", 90, 5)
-                $ Party[1].change_stat("inhibition", 90, 5)
-                if Party[0] == RogueX:
-                    ch_r "Good to hear."
-                elif Party[0] == KittyX:
-                    ch_k "Good, that wouldn't have been cool."
-                elif Party[0] == EmmaX:
-                    ch_e "Probably for the best."
-                elif Party[0] == LauraX:
-                    ch_l "Good."
-                elif Party[0] == JeanX:
-                    ch_j "Good."
-                elif Party[0] == StormX:
-                    ch_s "Good."
-                elif Party[0] == JubesX:
-                    ch_v "Ok, good."
-            "I'm asking her in anyway." if Line in ("mn","yn"):
-
-                pass
-
-            "Well, I'm going to pass anyway." if Line in ("ym","my","nm","ny","mm"):
-
-                $ Line = "nn"
-                $ Party[0].change_face("_sad")
-                $ Party[1].change_face("_sad")
-                $ Party[0].change_stat("obedience", 50, 5)
-                $ Party[1].change_stat("obedience", 50, 5)
-                if Party[0] == RogueX:
-                    ch_r "Oh, ok."
-                elif Party[0] == KittyX:
-                    ch_k "That's fine."
-                elif Party[0] == EmmaX:
-                    ch_e "If you insist."
-                elif Party[0] == LauraX:
-                    ch_l "Ok."
-                elif Party[0] == JeanX:
-                    ch_j "Ok, I guess. . ."
-                elif Party[0] == StormX:
-                    ch_s "That is unfortunate. . ."
-                elif Party[0] == JubesX:
-                    ch_v "Yeah, that's fine."
-
-
-        if Line == "yy" or Line == "nn":
-            pass
-        elif len(Player.Harem) >= 3:
-            $ Party[0].change_face("_smile",Eyes="_side")
-            $ Party[1].change_face("_smile",Eyes="_side")
-            $ Party[0].change_stat("obedience", 90, 5)
-            $ Party[0].change_stat("inhibition", 90, 5)
-            if Party[0] == RogueX:
-                ch_r "Oh, what's one more."
-            elif Party[0] == KittyX:
-                ch_k "We're building a real \"pride\" here."
-            elif Party[0] == EmmaX:
-                ch_e "I suppose one more can't hurt."
-            elif Party[0] == LauraX:
-                ch_l "Whatever."
-            elif Party[0] == JeanX:
-                ch_j "Oh, fine. . ."
-                ch_j "But you're not hogging her to yourself."
-            elif Party[0] == StormX:
-                ch_s "What harm would one more bring?"
-            elif Party[0] == JubesX:
-                ch_v "Ok, I'll make some room."
-            $ Line = "yy"
-        elif Line == "mn" or Line == "yn":
-
-            $ Count = 0
-            while Count < 2:
-                if approval_check(Party[Count], 1600) and Party[Count].GirlLikeCheck(Newbie) >= 500:
-
-                    $ Party[Count].change_face("_sadside")
-                    $ Party[Count].change_stat("love", 90, -5)
-                    $ Party[Count].change_stat("obedience", 90, 10)
-                    if Party[Count] == RogueX:
-                        ch_r "Fine, she's in."
-                    elif Party[Count] == KittyX:
-                        ch_k "Geeze, ok."
-                    elif Party[Count] == EmmaX:
-                        ch_e "I suppose we'll make room."
-                    elif Party[Count] == LauraX:
-                        ch_l "Whatever."
-                    elif Party[Count] == JeanX:
-                        ch_j "Oh, fine. . ."
-                        ch_j "But you're not hogging her to yourself."
-                    elif Party[Count] == StormX:
-                        ch_s "If you insist, I will find room for her. . ."
-                    elif Party[0] == JubesX:
-                        ch_v "I guess we can share."
-                    $ Line = "yy"
-                else:
-
-                    $ Party[Count].change_face("_angry",Eyes="_side")
-                    $ Party[Count].change_stat("love", 90, -25)
-                    $ Party[Count].change_stat("inhibition", 90, 10)
-                    if Party[Count] == RogueX:
-                        ch_r "I just don't like you that much, [RogueX.player_petname]."
-                        ch_r "I'm out."
-                    elif Party[Count] == KittyX:
-                        ch_k "You aren't that cute, [KittyX.player_petname]."
-                        ch_k "I'm done."
-                    elif Party[Count] == EmmaX:
-                        ch_e "Don't overestimate yourself, [EmmaX.player_petname]."
-                        ch_e "We're done."
-                    elif Party[Count] == LauraX:
-                        ch_l "Too far, [LauraX.player_petname]."
-                        ch_l "I'm out of here."
-                    elif Party[Count] == JeanX:
-                        ch_j "No way, too much. . ."
-                        ch_j "I'm out of here."
-                    elif Party[Count] == StormX:
-                        ch_s "Then I suppose I cannot be a part of this."
-                    elif Party[0] == JubesX:
-                        ch_v "Well, I'm out then."
-                    $ Party[Count].traits.append("ex")
-                    $ Party[Count].Break[0] = 5 + Party[Count].Break[1] + Party[Count].Cheated
-
-                    $ Player.Harem.remove(Party[Count])
-                    call Remove_Girl (Party[Count])
-                $ Count += 1
-
-
-
-    if Line == "yy":
-        if Newbie.tag + "No" in Player.traits:
-            $ Player.traits.remove(Newbie.tag + "No")
-        $ Player.drain_word(Newbie.tag + "No",0,0,1)
-        $ Player.traits.append(Newbie.tag + "Yes")
-        $ Count = len(Player.Harem)
-        while Count:
-            $ Count -= 1
-            $ Player.Harem[Count].drain_word("saw with "+Newbie.tag,0,0,1)
-        "You should give [Newbie.name] a call."
-    else:
-        $ Player.traits.append(Newbie.tag + "No")
-
-    $ Party = []
-    $ Count = 0
-    return
-
-label Harem_Initiation(BO=[], BO2=[]):
-
-
-    $ BO = Player.Harem[:]
-    while BO:
-        $ BO2 = Player.Harem[:]
-        while BO2:
-            if BO[0] != BO2[0] and "poly " + BO2[0].tag not in BO[0].traits:
-                $ BO[0].traits.append("poly " + BO2[0].tag)
-            if BO[0] != BO2[0] and "saw with " + BO2[0].tag in BO[0].traits:
-                $ BO[0].drain_word("saw with " + BO2[0].tag,0,0,1)
-            $ BO2.remove(BO2[0])
-        $ BO.remove(BO[0])
-    return
-
 
 
 
@@ -3604,7 +138,7 @@ label Study_Session(BO=[]):
         $ Round = 10
         return
     call Wait
-    call Girls_Location
+    call girls_location
     return
 
 
@@ -3828,2352 +362,9 @@ label Frisky_Study(Prime_Bonus=0, Second=0, Line=0, Second_Bonus=0):
 
 
 
-label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
-    call shift_focus (Girl)
-    call checkout
-    Girl.voice "!!!"
-    $ Line = primary_action
-    call Trig_Reset
-    $ Girl.change_outfit()
-    $ BO = all_Girls[:]
-    while BO:
-        if BO[0].location == bg_current:
-            $ BO[0].location = "bg_study"
-        $ TotalCaught += BO[0].event_counter["caught"]
-        $ BO.remove(BO[0])
-    $ bg_current = "bg_study"
-    call set_the_scene (0)
-    show Xavier_sprite at sprite_location(stage_left)
 
-    if Girl == RogueX:
-        show Rogue_sprite at sprite_location(stage_right) with ease
-    elif Girl == KittyX:
-        show Kitty_sprite at sprite_location(stage_right) with ease
-    elif Girl == EmmaX:
-        show Emma_Sprite at sprite_location(stage_right) with ease
-    elif Girl == LauraX:
-        show Laura_Sprite at sprite_location(stage_right) with ease
-    elif Girl == JeanX:
-        show Jean_Sprite at sprite_location(stage_right) with ease
-    elif Girl == StormX:
-        show Storm_Sprite at sprite_location(stage_right) with ease
-    elif Girl == JubesX:
-        show Jubes_Sprite at sprite_location(stage_right) with ease
-    call OutfitShame (Girl, 20)
 
-    $ Count = Girl.event_counter["caught"]
 
-    if Partner == RogueX:
-        show Rogue_sprite at sprite_location(stage_far_right) with ease
-    elif Partner == KittyX:
-        show Kitty_sprite at sprite_location(stage_far_right) with ease
-    elif Partner == EmmaX:
-        show Emma_Sprite at sprite_location(stage_far_right) with ease
-    elif Partner == LauraX:
-        show Laura_Sprite at sprite_location(stage_far_right) with ease
-    elif Partner == JeanX:
-        show Jean_Sprite at sprite_location(stage_far_right) with ease
-    elif Partner == StormX:
-        show Storm_Sprite at sprite_location(stage_far_right) with ease
-    elif Partner == JubesX:
-        show Jubes_Sprite at sprite_location(stage_far_right) with ease
-
-    call change_Xavier_face ("shocked")
-    $ Girl.change_face("_sad")
-    if (Girl == EmmaX or Partner == EmmaX) and (Girl == StormX or Partner == StormX):
-        ch_x "I'm very disappointed in the both of you!."
-        ch_x "You should BOTH know better than this!"
-    elif Girl == StormX or Partner == StormX:
-        ch_x "I'm very disappointed in your behavior, particularly yours, Ororo."
-    elif Girl == EmmaX or Partner == EmmaX:
-        ch_x "I'm very disappointed in your behavior, particularly yours, Emma."
-    else:
-        ch_x "I'm very disappointed in your behavior, the both of you."
-
-    if Line == "fondle_thighs" or Line == "fondle_breasts" or Line == "fondle_pussy" or Line == "hotdog" or Line == "handjob":
-        ch_x "The two of you, feeling each other up like animals!"
-    elif Line == "dildo_pussy" or Line == "dildo_anal":
-        ch_x "Using those. . . devices on each other, unsanitary!"
-    elif Line == "eat_pussy":
-        ch_x "Engaging in. . . cunnilingus. . . dripping everywhere. . ."
-    elif Line == "blowjob":
-        ch_x "Right there in public with his {i}penis{/i} in your mouth. . ."
-    else:
-        ch_x "Having sexual relations in such a public location, it shows very poor character of you!"
-
-    if Girl.Shame >= 40:
-        ch_x "[Girl.name], my dear, you're practically naked! At least throw a towel on!"
-        "He throws [Girl.name] the towel."
-        show blackscreen onlayer black
-        $ BO = all_Girls[:]
-        while BO:
-            if BO[0].location == bg_current and (not BO[0].top and not BO[0].bra):
-                $ BO[0].top = "_towel"
-            $ BO.remove(BO[0])
-        hide blackscreen onlayer black
-        if (Girl == StormX or Partner == StormX) and StormX.top == "_towel":
-            ch_x ". . ."
-            ch_x "Ororo, for Christ's sake. . ."
-            ch_x "Put on some actual clothes!"
-            show blackscreen onlayer black
-            $ StormX.top = "white_shirt"
-            $ StormX.legs = "_skirt"
-            hide blackscreen onlayer black
-            ch_x ". . . fine."
-
-    elif Girl.Shame >= 20:
-        ch_x "[Girl.name], my dear, that attire is positively scandalous."
-
-    if Girl.event_counter["caught"]:
-
-        "And this isn't even the first time this has happened!"
-
-    if Partner:
-        $ Partner.change_face("_surprised",2)
-        if Partner in Rules:
-            if Partner == KittyX:
-                "Xavier glances over at [KittyX.name], who just waggles her phone. . ."
-            elif Partner == LauraX:
-                $ Laura_Arms = 2
-                "Xavier glances over at [LauraX.name], who raises her fist and shakes it. . ."
-                $ Laura_Arms = 1
-            ch_x "And. . .hm, I could have sworn there was someone else. . ."
-        else:
-            ch_x "And [Partner.name], you were just watching this occur!"
-        $ Partner.change_face("_bemused",1, Eyes="_side")
-
-    if EmmaX.location == bg_current and EmmaX not in Rules:
-        if not EmmaX.event_counter["caught"]:
-            ch_x "Emma, you are entrusted as a teacher here, I can't have you fraternizing with the students."
-            ch_x "This is especially true in the school's public spaces!"
-            ch_x "What sort of message does that send?"
-            ch_x "How appropriate would it be if I were to just wander the halls with Miss Grey on my lap?"
-            call change_Xavier_face ("hypno")
-            ch_x "Just. . . running my hands along her firm little body without a care in the world. . ."
-            call change_Xavier_face ("_happy")
-            if JeanX.location == bg_current:
-                "You glance over at [JeanX.name], she shrugs."
-            ch_x ". . ."
-            call change_Xavier_face ("shocked")
-            ch_x "Yes, well, as I was saying! . ."
-        else:
-            ch_x "Emma, I don't believe this is the first time we've had this talk."
-            ch_x "I should hope it will be the last."
-    if StormX.location == bg_current and StormX not in Rules:
-        if not StormX.event_counter["caught"]:
-            if EmmaX.location == bg_current and EmmaX not in Rules:
-                ch_x "And Ororo! You also know better than to be fraternizing with the students!"
-            else:
-                ch_x "Ororo, you are entrusted as a teacher here, I can't have you fraternizing with the students."
-            ch_x "I'm well aware of your Bohemian tendencies in private, but you must comport yourself while in public."
-            ch_x "What sort of message does that send?"
-            ch_x "Do you think it would be appropriate for me to engage in such escapades?"
-            call change_Xavier_face ("hypno")
-            ch_x "Just. . . rolling down the halls with my balls flowing freely in the wind. . ."
-            call change_Xavier_face ("_happy")
-            ch_x ". . ."
-            call change_Xavier_face ("shocked")
-            ch_x "Do not distract me! . ."
-        else:
-            if EmmaX.location == bg_current and EmmaX not in Rules:
-                ch_x "And Ororo! We've also been over this before."
-            else:
-                ch_x "Ororo, I don't believe this is the first time we've had this talk."
-            ch_x "I should hope it will be the last."
-
-    $ Line = 0
-    menu:
-        ch_x "Well what have you to say for yourselves?"
-        "Sorry sir, won't do it again.":
-            if RogueX.location == bg_current and RogueX.event_counter["caught"] < 3:
-                $ RogueX.change_stat("love", 70, 20)
-                $ RogueX.change_stat("inhibition", 50, -15)
-                $ RogueX.change_stat("love", 90, 5)
-            if KittyX.location == bg_current and KittyX.event_counter["caught"] < 3:
-                $ KittyX.change_stat("love", 70, 10)
-                $ KittyX.change_stat("inhibition", 30, -25)
-                $ KittyX.change_stat("inhibition", 50, -10)
-            if EmmaX.location == bg_current and EmmaX.event_counter["caught"] < 3:
-                $ EmmaX.change_stat("love", 70, 5)
-                $ EmmaX.change_stat("inhibition", 30, -15)
-            if LauraX.location == bg_current and LauraX.event_counter["caught"] < 3:
-                $ LauraX.change_stat("inhibition", 30, -20)
-                $ LauraX.change_stat("inhibition", 50, -10)
-            if JeanX.location == bg_current and JeanX.event_counter["caught"] < 3:
-                $ JeanX.change_stat("obedience", 30, -20)
-                $ JeanX.change_stat("obedience", 50, -10)
-            if StormX.location == bg_current and StormX.event_counter["caught"] < 3:
-                $ StormX.change_stat("love", 70, 5)
-                $ StormX.change_stat("inhibition", 30, -5)
-            if JubesX.location == bg_current and JubesX.event_counter["caught"] < 3:
-                $ JubesX.change_stat("love", 70, 10)
-                $ JubesX.change_stat("obedience", 70, 5)
-                $ JubesX.change_stat("inhibition", 30, -10)
-                $ JubesX.change_stat("inhibition", 50, -5)
-            $ Girl.change_stat("obedience", 50, -5)
-
-            call change_Xavier_face ("_happy")
-            if Girl.event_counter["caught"]:
-                ch_x "But you know you've done this before. . . at least [Girl.event_counter['caught']] times. . ."
-            elif Girl == EmmaX and TotalCaught:
-                ch_x "Not with Ms. Frost, perhaps, but you know you've done this before. . ."
-                ch_x "at least [TotalCaught] times. . ."
-                $ Girl.change_face("_sexy",Brows="_confused")
-            elif Girl == StormX and TotalCaught:
-                ch_x "Not with Ms. Munroe, perhaps, but you know you've done this before. . ."
-                ch_x "at least [TotalCaught] times. . ."
-                $ Girl.change_face("_sexy",Brows="_confused")
-            elif TotalCaught:
-                ch_x "Not with this young lady, perhaps, but you know you've done this before. . ."
-                ch_x "at least [TotalCaught] times. . ."
-            else:
-                ch_x "Very well, just don't let it happen again. "
-            $ Count += 5
-            if PunishmentX:
-                ch_x "I'm extending your punishment by [Count] days."
-            else:
-                ch_x "I'm halving your daily stipend for [Count] days."
-            ch_x "Now return to your rooms and reflect on what you've done."
-        "Just having a little fun, right [Girl.petname]?":
-
-
-            $ Girl.nameCheck()
-            $ Girl.change_face("_bemused")
-            $ Girl.change_stat("lust", 90, 5)
-            if RogueX.location == bg_current and RogueX.event_counter["caught"] < 5:
-                $ RogueX.change_stat("love", 70, 20)
-                $ RogueX.change_stat("love", 90, 10)
-            if KittyX.location == bg_current and KittyX.event_counter["caught"] < 5:
-                $ KittyX.change_stat("inhibition", 90, 10)
-                $ KittyX.change_stat("love", 90, 10)
-            if EmmaX.location == bg_current and EmmaX.event_counter["caught"] < 5:
-                $ EmmaX.change_stat("inhibition", 90, 10)
-                $ EmmaX.change_stat("love", 90, 10)
-            if LauraX.location == bg_current and LauraX.event_counter["caught"] < 5:
-                $ LauraX.change_stat("inhibition", 90, 10)
-                $ LauraX.change_stat("obedience", 90, 5)
-                $ LauraX.change_stat("love", 90, 5)
-            if JeanX.location == bg_current and JeanX.event_counter["caught"] < 5:
-                $ JeanX.change_stat("inhibition", 200, 10)
-                $ JeanX.change_stat("obedience", 50, 5)
-                $ JeanX.change_stat("obedience", 90, 5)
-                $ JeanX.change_stat("love", 90, 5)
-            if StormX.location == bg_current and StormX.event_counter["caught"] < 5:
-                $ StormX.change_stat("inhibition", 90, 15)
-                $ StormX.change_stat("obedience", 50, 5)
-                $ StormX.change_stat("love", 90, 5)
-            if JubesX.location == bg_current and JubesX.event_counter["caught"] < 5:
-                $ JubesX.change_stat("inhibition", 90, 5)
-                $ JubesX.change_stat("obedience", 80, 5)
-                $ JubesX.change_stat("love", 90, 10)
-
-            call change_Xavier_face ("_angry")
-            $ Count += 10
-            ch_x "If that's your attitude, harsher methods might be necessary."
-            if PunishmentX:
-                ch_x "I'm extending your punishment by [Count] days."
-            else:
-                ch_x "I'm halving your daily stipend for [Count] days."
-
-            if RogueX.location == bg_current and RogueX.event_counter["caught"] < 3:
-                $ RogueX.change_stat("obedience", 50, 20)
-                $ RogueX.change_stat("obedience", 90, 20)
-                $ RogueX.change_stat("inhibition", 30, -20)
-                $ RogueX.change_stat("inhibition", 50, -10)
-            if KittyX.location == bg_current and KittyX.event_counter["caught"] < 3:
-                $ KittyX.change_stat("obedience", 50, 20)
-                $ KittyX.change_stat("obedience", 90, 20)
-                $ KittyX.change_stat("inhibition", 30, -20)
-            if EmmaX.location == bg_current and EmmaX.event_counter["caught"] < 3:
-                $ EmmaX.change_stat("obedience", 50, 20)
-                $ EmmaX.change_stat("obedience", 90, 20)
-                $ EmmaX.change_stat("inhibition", 30, -20)
-            if LauraX.location == bg_current and LauraX.event_counter["caught"] < 3:
-                $ LauraX.change_stat("obedience", 50, 20)
-                $ LauraX.change_stat("obedience", 90, 20)
-                $ LauraX.change_stat("inhibition", 30, -20)
-            if JeanX.location == bg_current and JeanX.event_counter["caught"] < 3:
-                $ JeanX.change_stat("obedience", 50, 20)
-                $ JeanX.change_stat("obedience", 90, 20)
-            if StormX.location == bg_current and StormX.event_counter["caught"] < 3:
-                $ StormX.change_stat("obedience", 50, 20)
-                $ StormX.change_stat("inhibition", 30, -10)
-            if JubesX.location == bg_current and JubesX.event_counter["caught"] < 3:
-                $ JubesX.change_stat("obedience", 70, 10)
-                $ JubesX.change_stat("inhibition", 30, -10)
-
-            ch_x "I've had enough of you, begone."
-
-
-        "Just this. . . Plan Omega, [RogueX.name]." if Girl == RogueX and Player.level >= 5:
-            $ Line = "Omega"
-        "Just this. . . Plan Kappa, [KittyX.name]!" if Girl == KittyX and Player.level >= 5:
-            $ Line = "Kappa"
-        "Just this. . . Plan Psi, [EmmaX.name]!" if Girl == EmmaX and Player.level >= 5:
-            $ Line = "Psi"
-        "Just this. . . Plan Chi, [LauraX.name]!" if Girl == LauraX and Player.level >= 5:
-            $ Line = "Chi"
-        "Just this. . . Plan Alpha, [JeanX.name]!" if Girl == JeanX and Player.level >= 5:
-            $ Line = "Alpha"
-        "Just this. . . Plan Rho, [StormX.name]!" if Girl == StormX and Player.level >= 5:
-            $ Line = "Rho"
-        "Just this. . . Plan Zeta, [JubesX.name]!" if Girl == JubesX and Player.level >= 5:
-            $ Line = "Zeta"
-        "You can suck it, old man.":
-
-
-
-            $ Girl.change_face("_surprised")
-            $ Girl.change_stat("lust", 90, 10)
-            if RogueX.location == bg_current and RogueX.event_counter["caught"] < 3:
-                $ RogueX.change_stat("obedience", 50, 20)
-                $ RogueX.change_stat("obedience", 90, 40)
-            if KittyX.location == bg_current and KittyX.event_counter["caught"] < 3:
-                $ KittyX.change_stat("obedience", 50, 25)
-                $ KittyX.change_stat("obedience", 90, 40)
-            if EmmaX.location == bg_current and EmmaX.event_counter["caught"] < 3:
-                $ EmmaX.change_stat("love", 90, 5)
-                $ EmmaX.change_stat("obedience", 50, 20)
-                $ EmmaX.change_stat("obedience", 90, 30)
-            if LauraX.location == bg_current and LauraX.event_counter["caught"] < 3:
-                $ LauraX.change_stat("love", 90, 5)
-                $ LauraX.change_stat("obedience", 50, 25)
-                $ LauraX.change_stat("obedience", 90, 30)
-            if JeanX.location == bg_current and JeanX.event_counter["caught"] < 3:
-                $ JeanX.change_stat("love", 50, 5)
-                $ JeanX.change_stat("love", 90, 10)
-                $ JeanX.change_stat("obedience", 50, 25)
-                $ JeanX.change_stat("obedience", 90, 30)
-            if StormX.location == bg_current and StormX.event_counter["caught"] < 3:
-                $ StormX.change_stat("love", 90, -5)
-                $ StormX.change_stat("obedience", 50, 20)
-                $ StormX.change_stat("obedience", 90, 30)
-            if JubesX.location == bg_current and JubesX.event_counter["caught"] < 3:
-                $ JubesX.change_stat("love", 80, 10)
-                $ JubesX.change_stat("obedience", 50, 25)
-                $ JubesX.change_stat("obedience", 90, 30)
-
-            call change_Xavier_face ("_angry")
-            $ Count += 20
-            ch_x "If that's your attitude, harsher methods might be necessary."
-            if PunishmentX:
-                ch_x "I'm extending your punishment by [Count] days!"
-            else:
-                ch_x "I'm halving your daily stipend for [Count] days!"
-
-            if RogueX.location == bg_current and RogueX.event_counter["caught"] < 3:
-                if RogueX.inhibition > 500:
-                    $ RogueX.change_stat("inhibition", 90, 15)
-                $ RogueX.change_stat("inhibition", 30, -20)
-                $ RogueX.change_stat("inhibition", 50, -10)
-            if KittyX.location == bg_current and KittyX.event_counter["caught"] < 3:
-                if KittyX.inhibition > 500:
-                    $ KittyX.change_stat("inhibition", 90, 15)
-                $ KittyX.change_stat("inhibition", 30, -20)
-                $ KittyX.change_stat("inhibition", 50, -10)
-            if EmmaX.location == bg_current and EmmaX.event_counter["caught"] < 3:
-                if EmmaX.inhibition > 500:
-                    $ EmmaX.change_stat("inhibition", 90, 15)
-                $ EmmaX.change_stat("inhibition", 30, -20)
-                $ EmmaX.change_stat("inhibition", 50, -10)
-            if LauraX.location == bg_current and LauraX.event_counter["caught"] < 3:
-                if LauraX.inhibition > 500:
-                    $ LauraX.change_stat("inhibition", 90, 15)
-                $ LauraX.change_stat("inhibition", 30, -15)
-                $ LauraX.change_stat("inhibition", 50, -10)
-            if JeanX.location == bg_current and JeanX.event_counter["caught"] < 3:
-                $ JeanX.change_stat("inhibition", 90, 15)
-            if StormX.location == bg_current and StormX.event_counter["caught"] < 3:
-                if StormX.inhibition > 500:
-                    $ StormX.change_stat("inhibition", 90, 5)
-                $ StormX.change_stat("inhibition", 30, -10)
-                $ StormX.change_stat("inhibition", 50, -5)
-            if JubesX.location == bg_current and JubesX.event_counter["caught"] < 3:
-                if JubesX.inhibition > 500:
-                    $ JubesX.change_stat("inhibition", 90, 15)
-                $ JubesX.change_stat("inhibition", 30, -15)
-                $ JubesX.change_stat("inhibition", 50, -10)
-
-            ch_x "Now get out of my sight."
-
-
-    if Line:
-        if Line == "Omega":
-            if approval_check(RogueX, 1500, TabM=1, Loc="No"):
-                call Xavier_Plan (RogueX)
-                return
-            elif approval_check(RogueX, 1000, TabM=1, Loc="No"):
-                $ Girl.change_face("_perplexed",Brows = "_sad")
-                ch_r "I'm not comfortable with something that extreme, [RogueX.player_petname]. . ."
-                menu:
-                    "Dammit [RogueX.name]. . .":
-                        $ Girl.change_face("_angry")
-                        $ RogueX.change_stat("obedience", 50, 5)
-                        $ RogueX.change_stat("love", 90, -5)
-                    "Yeah, I guess you're right. . .":
-                        $ Girl.change_face("_bemused")
-            else:
-                $ Girl.change_face("_confused")
-                ch_r "What nonsense are you talking now?"
-                ch_p "Plan {i}Omega!{/i} . . you know. . ."
-                ch_r "Sounds like gibberish."
-                ch_p "Oh, yeah, I guess I haven't mentioned that. . ."
-                $ Girl.change_face("_bemused")
-
-        elif Line == "Kappa":
-            if "Xavier's photo" in Player.inventory and approval_check(KittyX, 1500, TabM=1, Loc="No"):
-                call Xavier_Plan (KittyX)
-                return
-            elif approval_check(KittyX, 1000, TabM=1, Loc="No"):
-                $ Girl.change_face("_perplexed",Brows = "_sad")
-                if "Xavier's photo" in Player.inventory:
-                    ch_k "You know. . . I really don't think that's a good idea. . ."
-                elif "kappa" in Player.history:
-                    ch_k "Maybe if we came back later we could find something. . ."
-                else:
-                    ch_k "We don't really have any way to pull that off atm. . ."
-                    $ Player.history.append("kappa")
-                menu:
-                    "Dammit [KittyX.name]. . .":
-                        $ Girl.change_face("_angry")
-                        $ KittyX.change_stat("obedience", 50, 5)
-                        $ KittyX.change_stat("love", 90, -5)
-                    "Yeah, I guess you're right. . .":
-                        $ Girl.change_face("_bemused")
-                        $ KittyX.change_stat("love", 90, 5)
-            else:
-                $ Girl.change_face("_confused")
-                ch_k "Wait, Plan what??"
-                ch_p "Plan {i}Kappa!{/i} . . you know. . ."
-                ch_k "I have no {i}idea{/i} what you're talking about."
-                ch_p "oh, yeah, I guess I haven't mentioned that. . ."
-                $ Girl.change_face("_bemused")
-
-        elif Line == "Psi":
-            if approval_check(EmmaX, 1500, TabM=1, Loc="No"):
-                call Xavier_Plan (EmmaX)
-                return
-            elif approval_check(EmmaX, 1000, TabM=1, Loc="No"):
-                $ Girl.change_face("_perplexed",Brows = "_sad")
-                ch_e "Um, I don't believe we're quite at that point yet, [EmmaX.player_petname]. . ."
-                menu:
-                    "Dammit [EmmaX.name]. . .":
-                        $ Girl.change_face("_angry")
-                        $ EmmaX.change_stat("obedience", 50, 5)
-                        $ EmmaX.change_stat("love", 90, -5)
-                    "Yeah, I guess you're right. . .":
-                        $ Girl.change_face("_bemused")
-            else:
-                $ Girl.change_face("_confused")
-                ch_e "Lord child, what are you talking about now?"
-                ch_p "Plan {i}Psi!{/i} . . you know. . ."
-                ch_e "I wish that I did."
-                ch_p "Oh, yeah, I guess I haven't mentioned that. . ."
-                $ Girl.change_face("_bemused")
-
-        elif Line == "Chi":
-            if LauraX.level >= 2 and approval_check(LauraX, 1500, TabM=1, Loc="No") and approval_check(LauraX, 750, "I"):
-                call Xavier_Plan (LauraX)
-                return
-            elif approval_check(LauraX, 1000, TabM=1, Loc="No"):
-                $ Girl.change_face("_angry",Eyes="_side",Brows = "_angry")
-                ch_l "I told you that was a stupid idea. . ."
-                menu:
-                    "Dammit [LauraX.name]. . .":
-                        $ Girl.change_face("_angry")
-                        $ LauraX.change_stat("obedience", 50, 5)
-                        $ LauraX.change_stat("love", 90, -5)
-                    "Yeah, I guess you're right. . .":
-                        $ Girl.change_face("_bemused")
-                        $ LauraX.change_stat("love", 90, 5)
-            else:
-                $ Girl.change_face("_confused")
-                ch_l "Yeah!"
-                ch_l ". . ."
-                ch_l "Wait, plan \"key,\" what??"
-                ch_p "Plan {i}Chi!{/i} . . you know. . ."
-                ch_l "Um. No?"
-                ch_p "oh, yeah, I guess I haven't mentioned that. . ."
-                $ Girl.change_face("_bemused")
-
-        elif Line == "Alpha":
-            if approval_check(JeanX, 1500, TabM=1, Loc="No"):
-                call Xavier_Plan (JeanX)
-                return
-            elif approval_check(JeanX, 1000, TabM=1, Loc="No"):
-                $ Girl.change_face("_perplexed",Brows = "_sad")
-                ch_j "Look, this is your mess, I'm not going to clean it up, [JeanX.player_petname]. . ."
-                menu:
-                    "Dammit [JeanX.name]. . .":
-                        $ Girl.change_face("_angry")
-                        $ JeanX.change_stat("obedience", 50, 5)
-                        $ JeanX.change_stat("love", 90, -5)
-                    "Yeah, I guess you're right. . .":
-                        $ Girl.change_face("_bemused")
-            else:
-                $ Girl.change_face("_confused")
-                ch_j "Huh? What are you talking about?"
-                ch_p "Plan {i}Alpha!{/i} . . you know. . ."
-                ch_j "Drawing a blank here. . ."
-                ch_p "Oh, yeah, I guess I haven't mentioned that. . ."
-                $ Girl.change_face("_bemused")
-
-        elif Line == "Rho":
-            if "Xavier's files" in Player.inventory and approval_check(StormX, 1500, TabM=1, Loc="No"):
-                call Xavier_Plan (StormX)
-                return
-            elif approval_check(StormX, 1000, TabM=1, Loc="No"):
-                $ Girl.change_face("_perplexed",Brows = "_sad")
-                if "Xavier's files" in Player.inventory:
-                    ch_s "I really doubt that we should attempt that. . ."
-                elif "rho" in Player.history:
-                    ch_s "Perhaps if we had some leverage on the situation. . ."
-                else:
-                    ch_s "I'm not sure what you think we could do here. . ."
-                    $ Player.history.append("rho")
-                menu:
-                    "Dammit [StormX.name]. . .":
-                        $ Girl.change_face("_angry")
-                        $ StormX.change_stat("obedience", 50, 5)
-                        $ StormX.change_stat("love", 90, -5)
-                    "Yeah, I guess you're right. . .":
-                        $ Girl.change_face("_bemused")
-            else:
-                $ Girl.change_face("_confused")
-                ch_s "'Ro? You were speaking to me?"
-                ch_p "Yes! Plan {i}Rho!{/i} . . you know. . ."
-                ch_s "Yes, this is 'Ro. What plan?"
-                ch_p "What's on second! I don't know!"
-                $ Girl.change_face("_smile")
-                ch_s "Ah! \"Third base!\""
-                $ Girl.change_face("_bemused")
-
-        elif Line == "Zeta":
-            if approval_check(JubesX, 1500, TabM=1, Loc="No"):
-                call Xavier_Plan (JubesX)
-                return
-            elif approval_check(JubesX, 1000, TabM=1, Loc="No"):
-                $ Girl.change_face("_perplexed",Brows = "_sad")
-                ch_v "What?! Um, no, let's not."
-                menu:
-                    "Dammit [JubesX.name]. . .":
-                        $ Girl.change_face("_angry")
-                        $ JubesX.change_stat("obedience", 50, 5)
-                        $ JubesX.change_stat("love", 90, -5)
-                    "Yeah, I guess you're right. . .":
-                        $ Girl.change_face("_bemused")
-            else:
-                $ Girl.change_face("_confused")
-                ch_v "Huh?"
-                ch_p "Plan {i}Zeta!{/i} . . you know. . ."
-                ch_v "Is this a \"Gundam\" thing?"
-                ch_p "Oh, yeah, I guess I haven't mentioned that. . ."
-                $ Girl.change_face("_bemused")
-
-
-
-        call change_Xavier_face ("_angry")
-        $ Count += 10
-        ch_x "I have no idea what that was about, but it sounds like you haven't learned."
-        if PunishmentX:
-            ch_x "I'm extending your punishment by [Count] days."
-        else:
-            ch_x "I'm halving your daily stipend for [Count] days."
-
-            if RogueX.location == bg_current and RogueX.event_counter["caught"] < 3:
-                $ RogueX.change_stat("obedience", 50, 10)
-                $ RogueX.change_stat("obedience", 90, 10)
-                $ RogueX.change_stat("inhibition", 30, -10)
-                $ RogueX.change_stat("inhibition", 50, -5)
-            if KittyX.location == bg_current and KittyX.event_counter["caught"] < 3:
-                $ KittyX.change_stat("obedience", 50, 10)
-                $ KittyX.change_stat("obedience", 90, 10)
-                $ KittyX.change_stat("inhibition", 30, -10)
-                $ KittyX.change_stat("inhibition", 50, -5)
-            if EmmaX.location == bg_current and EmmaX.event_counter["caught"] < 3:
-                $ EmmaX.change_stat("obedience", 50, 10)
-                $ EmmaX.change_stat("inhibition", 50, -5)
-            if LauraX.location == bg_current and LauraX.event_counter["caught"] < 3:
-                $ LauraX.change_stat("obedience", 50, 10)
-                $ LauraX.change_stat("obedience", 90, 10)
-                $ LauraX.change_stat("inhibition", 30, -10)
-                $ LauraX.change_stat("inhibition", 50, -5)
-            if JeanX.location == bg_current and JeanX.event_counter["caught"] < 3:
-                $ JeanX.change_stat("obedience", 50, -10)
-            if StormX.location == bg_current and StormX.event_counter["caught"] < 3:
-                $ StormX.change_stat("obedience", 50, 10)
-                $ StormX.change_stat("inhibition", 50, -5)
-            if JubesX.location == bg_current and JubesX.event_counter["caught"] < 3:
-                $ JubesX.change_stat("obedience", 50, 5)
-                $ JubesX.change_stat("obedience", 90, 5)
-                $ JubesX.change_stat("inhibition", 30, -8)
-                $ JubesX.change_stat("inhibition", 50, -2)
-        ch_x "I've had enough of you, begone."
-
-
-    $ PunishmentX += Count
-
-    $ Girl.event_counter["caught"] += 1
-    if Partner in all_Girls:
-        $ Partner.event_counter["caught"] += 1
-    $ Girl.add_word(0,"caught","caught")
-
-    if Girl == KittyX and KittyX not in Rules and "Xavier's photo" not in Player.inventory:
-        "It would probably be a good idea to find some way to get Xavier to leave you alone."
-        if KittyX.event_counter["caught"] > 1:
-            "Maybe I should try searching the office when he's not around."
-        if KittyX.event_counter["caught"] > 2:
-            "I bet [KittyX.name] could help me get in."
-        if KittyX.event_counter["caught"] > 3:
-            "I bet there's something in that lefthand drawer. . ."
-    elif Girl == JeanX and "nowhammy" not in JeanX.traits and JeanX.event_counter["caught"] > 1:
-        ch_x "Oh, and Jean, dear, I'd like a word?"
-        $ Girl.change_face("_bemused")
-        ch_j "What is it?"
-        ch_x "I understand that you've been using your abilities to. . ."
-        ch_x "cover up for some of your. . . transgressions."
-        $ Girl.change_face("_bemused",Eyes="up")
-        ch_j "Oh, you mean how I mindwipe the \"NPCs\" that get too nosy?"
-        call change_Xavier_face ("_angry")
-        ch_x "If by \"NPCs\" you mean your fellow students. . ."
-        ch_x ". . . and by \"get too nosy,\" you mean \"notice you having sex in public\". . ."
-        ch_x ". . . then yes, that is exactly what I mean."
-        $ Girl.change_face("_bemused",Eyes="_side")
-        ch_j "Ok, yeah."
-        ch_x "I would like you to cease this activity at once!"
-        ch_x "It is a total abuse of your abilities and of those students' autonomy!"
-        $ Girl.change_face("_angry",1)
-        ch_j "Who cares."
-        call change_Xavier_face ("shocked")
-        ch_x "!!!"
-        ch_x "I do!"
-        call change_Xavier_face ("_angry")
-        ch_x "That is it, young lady. Until further notice, you're forbidden from. . . whammying your fellow students!"
-        $ Girl.change_face("_angry",1,Mouth="_surprised")
-        ch_j "Bullshit!"
-        $ Girl.change_face("_angry",0,Eyes="psychic")
-        ch_x "Ugh. . ."
-        call change_Xavier_face ("psychic")
-        ch_x "[Player.name]. . . this may take a while. . ."
-        ch_x "You may as well leave. . ."
-        $ JeanX.traits.append("nowhammy")
-        $ Girl.change_face("_normal")
-
-    if EmmaX.location == bg_current and EmmaX not in Rules:
-        ch_x "Emma, I'd like you to stay after for a brief discussion about \"boundaries\". . ."
-        if EmmaX.event_counter["caught"]:
-            $ EmmaX.change_stat("love", 90, -5)
-            $ Girl.change_face("_angry",Eyes="_closed")
-            ch_e "Not again. . ."
-    if StormX.location == bg_current and StormX not in Rules:
-        if EmmaX.location == bg_current and EmmaX not in Rules:
-            ch_x "And Ororo, I'm afraid we will have to have words as well. . ."
-        else:
-            ch_x "Ororo, I'd like you to stay after for a brief discussion about \"boundaries\". . ."
-        if StormX.event_counter["caught"]:
-            $ StormX.change_stat("love", 90, -5)
-            $ Girl.change_face("_angry",Eyes="_closed")
-            ch_s "Again? . ."
-        if StormX not in Rules and "Xavier's files" not in Player.inventory:
-            "It would probably be a good idea to find some way to get Xavier to leave you alone."
-            if StormX.event_counter["caught"] > 1:
-                "Maybe I should try searching the office when he's not around."
-            if StormX.event_counter["caught"] > 2:
-                "I bet [StormX.name] could help me get in."
-            if StormX.event_counter["caught"] > 3:
-                "I bet there's something in that righthand drawer. . ."
-
-    call Remove_Girl ("All")
-    "You return to your room"
-    hide Xavier_sprite
-    $ bg_current = "bg_player"
-    jump Misplaced
-
-
-
-label Xavier_Plan(GirlX=0):
-    if "Xavier" in Player.daily_history:
-        "The Professor seems pretty out of it."
-        "You don't think you'll be able to get anything more out of him today."
-        "You leave him to it."
-        $ bg_current = "bg_player"
-        jump Misplaced
-
-
-    call shift_focus (GirlX)
-    $ GirlX.change_face("_sly")
-    "As you say this, a sly grin crosses [GirlX.name]'s face."
-    "You quickly approach Xavier and place your hands on his head."
-    call change_Xavier_face ("psychic")
-    ch_x ". . ."
-    call change_Xavier_face ("shocked")
-    "Xavier realizes with a shock that with your powers, his telepathy is useless."
-
-    if Partner:
-        if Partner == RogueX and "Omega" not in Player.traits:
-            $ Line = "first"
-        elif Partner == KittyX and "Kappa" not in Player.traits:
-            $ Line = "first"
-        elif Partner == EmmaX and "Psi" not in Player.traits:
-            $ Line = "first"
-        elif Partner == LauraX and "Chi" not in Player.traits:
-            $ Line = "first"
-        elif Partner == JeanX and "Alpha" not in Player.traits:
-            $ Line = "first"
-        elif Partner == StormX and "Rho" not in Player.traits:
-            $ Line = "first"
-        elif Partner == JubesX and "Zeta" not in Player.traits:
-            $ Line = "first"
-
-        if Line == "first":
-
-            if approval_check(Partner, 1000) or Partner == JeanX:
-
-                $ Partner.change_face("_surprised")
-                "[Partner.name] looks a bit caught off guard, but goes along with the idea."
-                $ Partner.change_face("_sly")
-            else:
-                $ Partner.change_face("_surprised")
-                "[Partner.name] looks a bit uncomfortable with what's happening and takes off."
-                call Remove_Girl (Partner)
-        else:
-
-            $ Partner.change_face("_sly")
-            "[Partner.name] understands what's going on here."
-
-
-    call change_Xavier_face ("_angry")
-    if GirlX == RogueX:
-        $ RogueX.arms = ""
-        $ RogueX.ArmPose = 2
-        show Rogue_sprite zorder 24 at sprite_location(stage_left+100,85) with ease
-        "[RogueX.name] moves in and also grabs his head, duplicating his powers as he watches helplessly."
-        "Now that she posesses his full power, while his are negated, he has no defenses."
-        call change_Xavier_face ("hypno")
-        if "Omega" in Player.traits:
-            ch_x "Oh, not again."
-            ch_x "What is it you want this time?"
-            $ RogueX.change_stat("obedience", 80, 3)
-            $ RogueX.change_stat("inhibition", 70, 1)
-        else:
-            $ RogueX.change_stat("obedience", 50, 40)
-            $ RogueX.change_stat("inhibition", 70, 20)
-        ch_r "Well, [RogueX.player_petname], what would you like to do with this opportunity?"
-        ch_r "I think we'll only get three tries at this. . ."
-    elif GirlX == KittyX:
-        $ KittyX.ArmPose = 2
-        show Kitty_sprite at sprite_location(stage_left+100,150) with ease
-        $ KittyX.sprite_location = stage_center
-        "[KittyX.name] moves in sits on his lap, pinning his arms to the chair."
-        if "Kappa" in Player.traits:
-            ch_x "Oh, not again."
-            ch_x "What is it you want this time?"
-            $ KittyX.change_stat("obedience", 80, 3)
-            $ KittyX.change_stat("inhibition", 70, 1)
-        else:
-            ch_x "What is the meaning of this? Unhand me!"
-            "You pull out the photo you found earlier in his study."
-            $ KittyX.change_stat("obedience", 50, 40)
-            $ KittyX.change_stat("inhibition", 70, 30)
-            ch_p "I have here a rather. . . compromising photo of you and Mystique."
-            ch_p "I was thinking maybe you could cut me a little slack around here."
-            ch_x "And if I do not?"
-            ch_p "[KittyX.name] here's set it to distribute to every computer in school, every day."
-            ch_p "And only I know the password."
-            ch_x "Very well. . . I'll forget about your punishment."
-            ch_p "Oh, I think we can do a bit better than that. . ."
-            $ KittyX.change_stat("obedience", 200, 30)
-            $ KittyX.change_stat("inhibition", 200, 10)
-        ch_k "Well, [KittyX.player_petname], what should we ask for?"
-    elif GirlX == EmmaX or GirlX == JeanX:
-        if GirlX == EmmaX:
-            show Emma_Sprite zorder 24 at sprite_location(stage_left+100,85) with ease
-        elif GirlX == JeanX:
-            show Jean_Sprite zorder 24 at sprite_location(stage_left+100,85) with ease
-        "[GirlX.name] moves behind Xavier and activates her own telepathy."
-        call change_Xavier_face ("_angry")
-        if (GirlX == EmmaX and "Psi" in Player.traits) or (GirlX == JeanX and "Alpha" in Player.traits):
-            ch_x "Oh, not again. . ."
-            $ GirlX.change_stat("obedience", 80, 3)
-            $ GirlX.change_stat("inhibition", 80, 1)
-        else:
-            $ GirlX.change_stat("obedience", 50, 40)
-            $ GirlX.change_stat("inhibition", 70, 30)
-            $ GirlX.change_stat("obedience", 200, 30)
-            $ GirlX.change_stat("inhibition", 200, 10)
-        GirlX.voice "Well, [GirlX.player_petname], what should we ask for?"
-    elif GirlX == LauraX:
-        $ LauraX.ArmPose = 2
-        if "Chi" in Player.traits:
-            ch_x "Oh, not again."
-            $ LauraX.Claws = 1
-            ch_x "What is it you want this time?"
-            $ LauraX.change_stat("obedience", 80, 3)
-            $ LauraX.change_stat("inhibition", 80, 1)
-        else:
-            ch_x "What is the meaning of this? Unhand me!"
-            ch_p "[LauraX.name] and I were talking, and it seems like neither of us appreciates you bothering us."
-            ch_x "And if I continue?"
-            ch_p "My little [LauraX.petname] here has a very particular set of skills, you know. . ."
-            $ GirlX.nameCheck()
-            $ LauraX.Claws = 1
-            $ GirlX.change_face("_sly")
-            ch_p "She could cause a lot of trouble if she keeps getting called down here. . ."
-            "[LauraX.name] draws her claws along the arm of the Professor's chair, tracing fine lines into the metal."
-            ch_x "Very well. . . I'll forget about your punishment."
-            ch_p "Oh, I think we can do a bit better than that. . ."
-            $ LauraX.change_stat("obedience", 50, 40)
-            $ LauraX.change_stat("inhibition", 80, 30)
-            $ LauraX.change_stat("obedience", 200, 30)
-            $ LauraX.change_stat("inhibition", 200, 10)
-        ch_l "Well, [LauraX.player_petname], what should we ask for?"
-    elif GirlX == StormX:
-        $ StormX.ArmPose = 1
-        show Storm_Sprite at sprite_location(stage_left+100,150) with ease
-        $ StormX.sprite_location = stage_center
-        "[StormX.name] moves in sits on his lap, pinning his arms to the chair."
-        if "Rho" in Player.traits:
-            ch_x "Oh, not this again."
-            ch_x "What is it you want this time?"
-            $ StormX.change_stat("obedience", 80, 3)
-            $ StormX.change_stat("inhibition", 70, 1)
-        else:
-            ch_x "What is the meaning of this? Unhand me!"
-            "You pull out the files you found earlier in his study."
-            $ StormX.change_stat("obedience", 50, 40)
-            $ StormX.change_stat("inhibition", 70, 30)
-            ch_p "I have here some rather. . . questionable \"medical\" files."
-            ch_p "I was thinking maybe you could cut me a little slack around here."
-            ch_x "And if I do not?"
-            ch_p "We've made sure that -all- the girls in these files will find out."
-            ch_x "Very well. . . I'll forget about your punishment."
-            ch_p "Oh, I think we can do a bit better than that. . ."
-            $ StormX.change_stat("obedience", 200, 30)
-            $ StormX.change_stat("inhibition", 200, 10)
-        ch_s "Well, [StormX.player_petname], what should we ask for?"
-    elif GirlX == JubesX:
-        $ JubesX.ArmPose = 2
-        show Jubes_Sprite at sprite_location(stage_left+100,150) with ease
-        $ JubesX.sprite_location = stage_center
-        "[JubesX.name] moves in and sits on his lap, pinning his arms to the chair."
-        "She turns to look at him."
-        if "Zeta" in Player.traits:
-            ch_x "Oh, not again."
-            ch_x "What is it you want this time?"
-            $ JubesX.change_stat("obedience", 80, 3)
-            $ JubesX.change_stat("inhibition", 70, 1)
-        else:
-            ch_x "What is the meaning of this? Unhand me!"
-            $ JubesX.change_stat("inhibition", 70, 30)
-            ch_v "Look into my eyes. . ."
-            $ JubesX.change_stat("obedience", 50, 40)
-            $ JubesX.change_stat("inhibition", 200, 10)
-            ch_v "see the sparks dancing around them? . . ."
-            $ JubesX.change_stat("obedience", 200, 30)
-            "She slowly mesmerizes him into a trance, using a combination of her vampiric abilties and fireworks. . ."
-        ch_v "Well, [JubesX.player_petname], what should we ask for?"
-
-    $ Count = 3
-    $ PunishmentX = 0
-    while Count > 0:
-        $ Count -= 1
-        menu:
-            ch_x "What do you want?"
-            "Don't bother us anymore when we're having fun." if GirlX not in Rules:
-                ch_x "Very well. . . I could offer you some. . . discretion. . ."
-                $ Rules.append(GirlX)
-            "You know, it's kinda fun dodging you, catch us if you can." if GirlX in Rules:
-                ch_x "If you. . . want me to, I suppose. . ."
-                $ Rules.remove(GirlX)
-
-            "You know, [JeanX.name] should be able to \"whammy\" people again." if JeanX in all_Girls and "nowhammy" in JeanX.traits:
-                ch_x "I could remove her mind-wiping ban. . ."
-                $ JeanX.traits.remove("nowhammy")
-                $ JeanX.traits.append("whammy")
-                if JeanX.location == bg_current:
-                    $ JeanX.change_stat("obedience", 50, 5)
-                    $ JeanX.change_stat("love", 50, 5)
-                    $ JeanX.change_stat("love", 70, 5)
-                    $ JeanX.change_stat("love", 90, 5)
-                    $ GirlX.change_face("_sly",1)
-                    ch_j "Nice. . ."
-            "You know, I did like it when [JeanX.name] couldn't use her \"whammy.\"" if JeanX in all_Girls and "whammy" in JeanX.traits:
-                ch_x "I could reinstate her mind-wiping ban. . ."
-                $ JeanX.traits.append("nowhammy")
-                $ JeanX.traits.remove("whammy")
-                if JeanX.location == bg_current:
-                    $ JeanX.change_stat("obedience", 50, 5)
-                    $ JeanX.change_stat("obedience", 80, 5)
-                    $ JeanX.change_stat("love", 70, -5)
-                    $ JeanX.change_stat("love", 90, -5)
-                    $ GirlX.change_face("_angry",1,Mouth="_surprised")
-                    ch_j "Hey!"
-                    $ GirlX.change_face("_angry",1)
-
-            "Raise my stipend." if Player.income < 30:
-                if GirlX == RogueX and "Omega" not in Player.traits:
-                    ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.income += 2
-                elif GirlX == KittyX and "Kappa" not in Player.traits:
-                    ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.income += 2
-                elif GirlX == EmmaX and "Psi" not in Player.traits:
-                    ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.income += 2
-                elif GirlX == LauraX and "Chi" not in Player.traits:
-                    ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.income += 2
-                elif GirlX == JeanX and "Alpha" not in Player.traits:
-                    ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.income += 2
-                elif GirlX == StormX and "Rho" not in Player.traits:
-                    ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.income += 2
-                elif GirlX == JubesX and "Zeta" not in Player.traits:
-                    ch_x "Very well. . . but I can only raise it by so much. . ."
-                    $ Player.income += 2
-                else:
-                    ch_x "I'm afraid I can't manage any more than I have. . ."
-                    $ Count += 1
-            "Raise my stipend. [[Used](locked)" if Player.income >= 30:
-                pass
-            "There's this girl that's been bothering me. . .":
-
-                "This will send a girl away, temporarily removing her from the game."
-                "You can always ask to bring her back later."
-                $ Line = 0
-                menu:
-                    ch_p "Could you get rid of. . ."
-                    "[RogueX.name]" if RogueX in active_Girls:
-                        $ Line = RogueX
-                    "[KittyX.name]" if KittyX in active_Girls and "met" in KittyX.history:
-                        $ Line = KittyX
-                    "[EmmaX.name]" if EmmaX in active_Girls and "met" in EmmaX.history:
-                        $ Line = EmmaX
-                    "[LauraX.name]" if LauraX in active_Girls and "met" in LauraX.history and "dress0" not in LauraX.history:
-                        $ Line = LauraX
-                    "[JeanX.name]" if JeanX in active_Girls and "met" in JeanX.history:
-                        $ Line = JeanX
-                    "[StormX.name]" if StormX in active_Girls and "met" in StormX.history:
-                        $ Line = StormX
-                    "[JubesX.name]" if JubesX in active_Girls and "met" in JubesX.history:
-                        $ Line = JubesX
-                    "Never mind. . .":
-                        $ Count += 1
-                if Line:
-
-                    ch_x "Very well, I suppose I can keep her occupied with various tasks around the campus. . ."
-                    ch_x "She should be out of your hair for the time being."
-                    if Line.location == bg_current:
-
-                        $ Line.change_stat("love", 90, -10)
-                        $ Line.change_stat("obedience", 50, 3)
-                        if Line == RogueX:
-                            ch_r "What do you mean, I'm \"bothering\" you?"
-                        elif Line == KittyX:
-                            ch_k "Hey, what gives?!"
-                        elif Line == EmmaX:
-                            ch_e "Excuse me? I must not have heard that right."
-                        elif Line == LauraX:
-                            ch_l "Explain."
-                        elif Line == JeanX:
-                            ch_j "Are you kidding me?!"
-                        elif Line == StormX:
-                            ch_s "I do not understand this."
-                        elif Line == JubesX:
-                            ch_v "Seriously?!"
-                        menu:
-                            extend ""
-                            "Oh, sorry, never mind.":
-                                $ Line = 0
-                                if approval_check(Line, 2000):
-
-                                    $ Line.change_face("_confused")
-                                    $ Line.change_stat("love", 90, 3)
-                                    $ Line.change_stat("obedience", 50, 2)
-                                    if Line == RogueX:
-                                        ch_r "Right. . ."
-                                    elif Line == KittyX:
-                                        ch_k "Uh-huh?"
-                                    elif Line == EmmaX:
-                                        ch_e ". . . right. . ."
-                                    elif Line == LauraX:
-                                        ch_l "If you say so."
-                                    elif Line == JeanX:
-                                        ch_j "We will have words. . ."
-                                    elif Line == StormX:
-                                        ch_s "I will remember this. . ."
-                                    elif Line == JubesX:
-                                        ch_v "Riiight."
-                                else:
-
-                                    $ Line.change_face("_angry")
-                                    $ Line.change_stat("obedience", 50, -2)
-                                    $ Line.change_stat("inhibition", 60, 3)
-                                    if Line == RogueX:
-                                        ch_r "Damned right you are."
-                                    elif Line == KittyX:
-                                        ch_k "Yeah, right."
-                                    elif Line == EmmaX:
-                                        ch_e "I don't know what you were thinking."
-                                    elif Line == LauraX:
-                                        ch_l "Uh. . . huh."
-                                    elif Line == JeanX:
-                                        ch_j "We will have words. . ."
-                                    elif Line == StormX:
-                                        ch_s "I will remember this. . ."
-                                    elif Line == JubesX:
-                                        ch_v "We will have words."
-                            "Sorry, but I just need some \"me\" time.":
-                                $ active_Girls.remove(Line)
-                                $ Line.change_stat("obedience", 50, 5)
-                                $ Line.change_stat("obedience", 90, 2)
-                                $ Line.change_stat("inhibition", 60, 2)
-                                if approval_check(Line, 900, "L") or approval_check(Line, 2000):
-
-                                    $ Line.change_face("_sadside")
-                                    if Line == RogueX:
-                                        ch_r "I suppose if you do, I can give you some space."
-                                    elif Line == KittyX:
-                                        ch_k "I guess we both could. . ."
-                                    elif Line == EmmaX:
-                                        ch_e "I wouldn't want to be a bother. . ."
-                                    elif Line == LauraX:
-                                        ch_l "I can make myself scarce. . ."
-                                    elif Line == JeanX:
-                                        ch_j "Well, I guess I could find someone else to occupy my time with. . ."
-                                    elif Line == StormX:
-                                        ch_s ". . . fine, I can understand that. . ."
-                                    elif Line == JubesX:
-                                        ch_v "Ok, whatever, I have things to do."
-                                else:
-
-                                    $ Line.change_stat("love", 90, -5)
-                                    $ Line.change_face("_angry")
-                                    $ Line.add_word(1,"_angry","_angry")
-                                    if Line == RogueX:
-                                        ch_r "Oh, I think you'll be getting it."
-                                    elif Line == KittyX:
-                                        ch_k "Yeah, \"me\" too, I guess!"
-                                    elif Line == EmmaX:
-                                        ch_e "I do have other things with which to occupy myself."
-                                    elif Line == LauraX:
-                                        ch_l "I'm busy too."
-                                    elif Line == StormX:
-                                        ch_s "Oh, you shall get it. . ."
-                                    elif Line == JubesX:
-                                        ch_v "We will have words."
-                            "You heard me.":
-                                $ active_Girls.remove(Line)
-                                $ Line.change_stat("love", 80, -5)
-                                $ Line.change_stat("love", 90, -5)
-                                $ Line.change_stat("obedience", 80, 5)
-                                if approval_check(Line, 850, "O") or approval_check(Line, 1500, "LO"):
-
-                                    $ Line.change_face("_sadside")
-                                    $ Line.change_stat("obedience", 200, 10)
-                                else:
-
-                                    $ Line.change_face("_angry")
-                                    $ Line.change_stat("love", 90, -5)
-                                    $ Line.change_stat("inhibition", 60, 5)
-                                    $ Line.add_word(1,"_angry","_angry")
-                                if Line == RogueX:
-                                    ch_r "Loud and clear."
-                                elif Line == KittyX:
-                                    ch_k ". . ."
-                                elif Line == EmmaX:
-                                    ch_e "I suppose I did."
-                                elif Line == LauraX:
-                                    ch_l "If you say so."
-                                elif Line == JeanX:
-                                    ch_j "Noted. . ."
-                                elif Line == StormX:
-                                    ch_s "Like thunder. . ."
-                                elif Line == JubesX:
-                                    ch_v "We will have words."
-                    else:
-
-
-                        $ active_Girls.remove(Line)
-                if Line == GirlX:
-                    GirlX.voice "Did you forget that I'm your escape plan?"
-                    menu:
-                        "Oh. . .":
-                            ch_x "I'll forget you asked."
-                            $ Count = 0
-                $ Line = 0
-
-
-            "I wanted to bring a girl back in. . ." if len(all_Girls) > len (active_Girls):
-                "This will bring the girl back into active play."
-                "You can always ask to send her away again later."
-                $ Line = 0
-                menu:
-                    ch_p "Could you bring back. . ."
-                    "[RogueX.name]" if RogueX not in active_Girls and RogueX in TotalGirl:
-                        $ Line = RogueX
-                    "[KittyX.name]" if KittyX not in active_Girls and KittyX in all_Girls and "met" in KittyX.history:
-                        $ Line = KittyX
-                    "[EmmaX.name]" if EmmaX not in active_Girls and EmmaX in all_Girls and "met" in EmmaX.history:
-                        $ Line = EmmaX
-                    "[LauraX.name]" if LauraX not in active_Girls and LauraX in all_Girls and "met" in LauraX.history and "dress0" not in LauraX.history:
-
-                        $ Line = LauraX
-                    "[JeanX.name]" if JeanX not in active_Girls and JeanX in all_Girls and "met" in JeanX.history:
-                        $ Line = JeanX
-                    "[StormX.name]" if StormX not in active_Girls and StormX in all_Girls and "met" in StormX.history:
-                        $ Line = StormX
-                    "[JubesX.name]" if JubesX not in active_Girls and JubesX in all_Girls and "met" in JubesX.history:
-                        $ Line = JubesX
-                    "Never mind. . .":
-                        $ Count += 1
-                if Line:
-
-                    ch_x "Certainly. I've kept her busy, but I can let her off the hook. . ."
-                    ch_x "She should have more free time now. . ."
-                    $ active_Girls.append(Line)
-                $ Line = 0
-            "In was interested in a key. . . ":
-                menu:
-                    "Give me the key to your study." if "Xavier" not in Keys:
-                        ch_x "Fine, take it. . ."
-                        $ Keys.append("Xavier")
-                    "Give me the key to your study.[[Owned] (locked)" if "Xavier" in Keys:
-                        pass
-
-                    "Give me the key to [GirlX.name]'s room." if GirlX not in Keys:
-                        ch_x "I. . . suppose I could do that. . ."
-                        $ Keys.append(GirlX)
-                    "Give me the key to [GirlX.name]'s room.[[Owned] (locked)" if GirlX in Keys:
-                        pass
-                    "Never mind the keys.":
-
-                        $ Count += 1
-            "That should do it.":
-                $ Count = 0
-
-    ch_x "Very well, that should conclude our business. Please leave."
-    if GirlX == RogueX:
-        if "Omega" not in Player.traits:
-            $ GirlX.change_stat("lust", 90, 10)
-            $ GirlX.change_stat("love", 70, 30)
-            $ GirlX.change_stat("love", 200, 20)
-            $ Player.traits.append("Omega")
-        ch_p "Ok, that's enough. Make Xavier forget that any of this happened, and then let's get out of here."
-        $ GirlX.arms = "_gloves"
-        $ GirlX.ArmPose = 1
-    elif GirlX == KittyX:
-        if "Kappa" not in Player.traits:
-            $ GirlX.change_stat("lust", 90, 10)
-            $ GirlX.change_stat("inhibition", 80, 10)
-            $ GirlX.change_stat("love", 70, 10)
-            $ GirlX.change_stat("love", 200, 20)
-            $ Player.traits.append("Kappa")
-        $ GirlX.ArmPose = 0
-    elif GirlX == EmmaX:
-        ch_p "Ok, that's enough. Make Xavier forget that any of this happened, and then let's get out of here."
-        if "Psi" not in Player.traits:
-            $ GirlX.change_stat("lust", 90, 10)
-            $ GirlX.change_stat("inhibition", 80, 10)
-            $ GirlX.change_stat("love", 70, 10)
-            $ GirlX.change_stat("love", 200, 20)
-            $ Player.traits.append("Psi")
-    elif GirlX == LauraX:
-        if "Chi" not in Player.traits:
-            $ GirlX.change_stat("lust", 90, 10)
-            $ GirlX.change_stat("inhibition", 80, 10)
-            $ GirlX.change_stat("love", 70, 10)
-            $ GirlX.change_stat("love", 200, 20)
-            $ Player.traits.append("Chi")
-        $ GirlX.ArmPose = 1
-        $ GirlX.Claws = 0
-    elif GirlX == JeanX:
-        ch_p "Ok, that's enough. Make Xavier forget that any of this happened, and then let's get out of here."
-        if "Alpha" not in Player.traits:
-            $ GirlX.change_stat("lust", 70, 20)
-            $ GirlX.change_stat("lust", 90, 10)
-            $ GirlX.change_stat("inhibition", 80, 10)
-            $ GirlX.change_stat("obedience", 70, 10)
-            $ GirlX.change_stat("obedience", 200, 20)
-            $ GirlX.change_stat("love", 70, 10)
-            $ GirlX.change_stat("love", 200, 20)
-            $ Player.traits.append("Alpha")
-    elif GirlX == StormX:
-        if "Rho" not in Player.traits:
-            $ GirlX.change_stat("lust", 90, 10)
-            $ GirlX.change_stat("inhibition", 80, 10)
-            $ GirlX.change_stat("love", 70, 10)
-            $ GirlX.change_stat("love", 200, 20)
-            $ Player.traits.append("Rho")
-    elif GirlX == JubesX:
-        if "Zeta" not in Player.traits:
-            $ GirlX.change_stat("lust", 90, 10)
-            $ GirlX.change_stat("inhibition", 80, 10)
-            $ GirlX.change_stat("love", 70, 10)
-            $ GirlX.change_stat("love", 200, 20)
-            $ Player.traits.append("Zeta")
-        $ GirlX.ArmPose = 0
-
-    $ Player.daily_history.append("Xavier")
-    call Remove_Girl ("All")
-    hide Xavier_sprite
-    $ bg_current = "bg_player"
-    call set_the_scene
-    "You return to your room"
-    jump Misplaced
-
-
-
-
-
-
-
-label Girl_Caught_Changing(Girl=0):
-    if Girl not in all_Girls:
-        return
-    call shift_focus (Girl)
-    $ D20 = renpy.random.randint(1, 20)
-
-    $ Girl.change_face("_surprised", 1,Mouth = "_kiss")
-    call Remove_Girl ("All")
-
-    if D20 > 17:
-
-        $ Girl.change_outfit("nude")
-    else:
-
-        $ Girl.change_outfit(6)
-        if D20 >15:
-
-            $ Girl.legs = ""
-            $ Girl.hose = ""
-            $ Girl.underwear = ""
-        elif D20 >14:
-
-            $ Girl.bra = ""
-            $ Girl.top = ""
-        elif D20 >10:
-
-            $ Girl.top = ""
-            $ Girl.legs = ""
-        elif D20 >5:
-
-            $ Girl.top = ""
-
-    $ Girl.location = bg_current
-    call set_the_scene (Dress=0)
-    if D20 > 17:
-
-        "As you enter the room, you see [Girl.name] is naked, and seems to be getting dressed."
-    elif D20 >14:
-
-        "As you enter the room, you see [Girl.name] is practically naked, and seems to be getting dressed."
-    elif D20 >10:
-
-        "As you enter the room, you see [Girl.name] is in her underwear, and seems to be getting dressed."
-    elif D20 >5:
-
-        "As you enter the room, you see [Girl.name] has her top off, and seems to be getting dressed."
-    else:
-
-        "As you enter the room, you see [Girl.name] has just pulled her top on, and seems to have been getting dressed."
-
-    if Girl == StormX:
-        ch_s "Oh, hello, [Girl.player_petname]."
-    elif approval_check(Girl, 1400):
-        if Girl == RogueX:
-            ch_r "Oh, hey."
-        elif Girl == KittyX:
-            ch_k "Hey, [Girl.player_petname]."
-        elif Girl == EmmaX:
-            ch_e "Oh, here for the view?"
-        elif Girl == LauraX:
-            ch_l "Hey."
-        elif Girl == JeanX:
-            ch_j "Oh, [Girl.player_petname]?"
-        elif Girl == JubesX:
-            ch_v "Yo."
-    else:
-        if D20 > 5:
-            if not approval_check(Girl, (D20 *70)) and (not Girl.SeenPussy or not Girl.SeenChest):
-
-                $ Girl.change_face("_surprised",Brows="_angry")
-                $ Girl.change_stat("love", 80, -50)
-
-                if not Girl.OverNum() or (Girl.OverNum()+Girl.ChestNum() <5) or (Girl.PantsNum() < 5 and Girl.HoseNum() < 10):
-
-
-                    call expression Girl.tag + "_First_Bottomless" pass (1)
-                    call expression Girl.tag + "_First_Topless" pass (1)
-                    $ Girl.top = "_towel"
-                    "She grabs a towel and covers up."
-            else:
-
-                $ Girl.change_face("_surprised", 1,Brows = "_confused")
-                if "exhibitionist" in Girl.traits:
-                    $ Girl.change_stat("lust", 200, (2*D20))
-                else:
-                    $ Girl.change_stat("lust", 200, D20)
-                if D20 > 17:
-                    call expression Girl.tag + "_First_Bottomless"
-                    call expression Girl.tag + "_First_Topless" pass (1)
-                elif D20 > 15:
-                    call expression Girl.tag + "_First_Bottomless"
-                elif D20 > 14:
-                    call expression Girl.tag + "_First_Topless"
-            $ Girl.change_stat("inhibition", 70, 20)
-
-
-            if Girl == RogueX:
-                ch_r "Hey! Learn to knock maybe?!"
-            elif Girl == KittyX:
-                ch_k "Why didn't you knock?!"
-            elif Girl == EmmaX:
-                ch_e "Did you consider knocking?"
-            elif Girl == LauraX:
-                ch_l "Didn't think about knocking?"
-            elif Girl == JeanX:
-                ch_j "Forget to knock, [JeanX.player_petname]?"
-            elif Girl == JubesX:
-                ch_v "Hey, knock maybe?"
-            menu:
-                extend ""
-                "Sorry, I should have knocked.":
-                    $ Girl.change_stat("love", 50, 2)
-                    $ Girl.change_stat("love", 80, 4)
-                "And miss the view?":
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("obedience", 80, 2)
-                    $ Girl.change_stat("inhibition", 60, 1)
-        else:
-
-
-            if not approval_check(Girl, 800) and (not Girl.SeenPussy or not Girl.SeenChest):
-                $ Girl.change_face("_angry",Brows="_confused")
-                $ Girl.change_stat("love", 80, -5)
-            else:
-                $ Girl.change_face("_sexy",Brows="_confused")
-            $ Girl.change_stat("inhibition", 50, 3)
-
-            if Girl == RogueX:
-                ch_r "Well hello there, [Girl.player_petname]. Hoping to see something more?"
-            elif Girl == KittyX:
-                ch_k "Hey, [Girl.player_petname]. . . {i}you{/i} were hoping I'd be naaaked."
-            elif Girl == EmmaX:
-                ch_e "Were you hoping to catch me in a compromising position?."
-            elif Girl == LauraX:
-                ch_l "Hey, [Girl.player_petname]. Trying to catch a peek?"
-            elif Girl == JeanX:
-                ch_j "Oh, [Girl.player_petname]. Hoping to catch me dressing again?"
-            elif Girl == JubesX:
-                ch_v "Hey, [Girl.player_petname]. Hoping to catch me naked again?"
-
-            menu:
-                extend ""
-                "Sorry, I should have knocked.":
-                    $ Girl.change_stat("love", 50, 2)
-                    $ Girl.change_stat("love", 80, 2)
-                "Well, to be honest. . .":
-                    $ Girl.change_stat("love", 50, -2)
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("obedience", 80, 2)
-                    $ Girl.change_stat("inhibition", 60, 1)
-        $ Girl.change_face("_sexy")
-        if approval_check(Girl, 1000):
-
-            if Girl == RogueX:
-                ch_r "You could have just asked, [RogueX.player_petname]."
-            elif Girl == KittyX:
-                ch_k "I didn't say that I {i}minded{/i}. . ."
-            elif Girl == EmmaX:
-                ch_e "That does show initiative. . ."
-            elif Girl == LauraX:
-                ch_l "I don't mind."
-            elif Girl == JeanX:
-                ch_j "Well, give the audience what it wants. . ."
-            elif Girl == JubesX:
-                ch_v "You just have to ask. . ."
-
-            $ Girl.top_pulled_up = 1
-            $ Girl.upskirt = 1
-            pause 1
-            call expression Girl.tag + "_First_Topless" pass (1)
-            call expression Girl.tag + "_First_Bottomless" pass (1)
-            $ Girl.top_pulled_up = 0
-            $ Girl.upskirt = 0
-            "She flashes you real quick."
-        else:
-
-            if Girl == RogueX:
-                ch_r "Well, it happens, just be careful next time."
-            elif Girl == KittyX:
-                ch_k "Yeah. . . we wouldn't want any accidents. . ."
-            elif Girl == EmmaX:
-                ch_e "Hmm, show a bit more care next time. . ."
-            elif Girl == LauraX:
-                ch_l "Uh-huh . . ."
-            elif Girl == JeanX:
-                ch_j "Sure, perv."
-            elif Girl == JubesX:
-                ch_v "Don't be sneaking around."
-
-    if Girl == RogueX:
-        ch_r "Well, are you planning to stick around?"
-    elif Girl == KittyX:
-        ch_k "So were you planning on staying?"
-    elif Girl == EmmaX:
-        ch_e "Did you have business with me?"
-    elif Girl == LauraX:
-        ch_l "So did you plan to stay?"
-    elif Girl == JeanX:
-        ch_j "So, what did you want?"
-    elif Girl == StormX:
-        ch_s "Was there something I could help you with?"
-    elif Girl == JubesX:
-        ch_v "Did you want something?"
-    menu:
-        extend ""
-        "Sure, for a bit.":
-            pass
-        "Actually, I should get going. . .":
-
-            $ Girl.change_outfit(6,Changed=0)
-            $ renpy.pop_call()
-            call Worldmap
-
-    if Girl == StormX and D20 >5:
-
-        ch_s "Ok, then let me finish getting dressed. . ."
-        menu:
-            "Ok.":
-                "She finishes getting changed."
-                $ Girl.change_outfit(6,Changed=0)
-            "Actually, you could leave them off.":
-                if approval_check(Girl, 350+(10*D20)):
-                    $ Girl.change_stat("love", 70, 3)
-                    $ Girl.change_stat("obedience", 50, 1)
-                    $ Girl.change_stat("obedience", 80, 2)
-                    $ Girl.change_stat("inhibition", 60, 2)
-                    $ Girl.change_face("_sexy")
-                    ch_s "I suppose that could not hurt. . ."
-                    $ Girl.Set_Temp_Outfit()
-                else:
-                    $ Girl.change_stat("inhibition", 60, 2)
-                    $ Girl.change_face("_smile")
-                    ch_s "Ha! I would not want to be too much of a distraction."
-                    $ Girl.change_outfit(6,Changed=0)
-            "Why not lose the rest too?":
-                $ Girl.change_face("_sexy")
-                if approval_check(Girl, 700):
-                    $ Girl.change_stat("love", 50, 1)
-                    $ Girl.change_stat("love", 70, 1)
-                    $ Girl.change_stat("obedience", 50, 1)
-                    $ Girl.change_stat("obedience", 80, 1)
-                    $ Girl.change_stat("inhibition", 70, 1)
-                    ch_s "Oh, you are a naughty one. . ."
-                    $ Girl.change_outfit("nude")
-                    $ Girl.Set_Temp_Outfit()
-                elif approval_check(Girl, 350+(10*D20)):
-                    $ Girl.change_stat("love", 80, 1)
-                    $ Girl.change_stat("obedience", 50, 1)
-                    $ Girl.change_stat("obedience", 80, 1)
-                    $ Girl.change_stat("inhibition", 70, 2)
-                    ch_s "I could at least. . . pause for a moment?"
-                    $ Girl.Set_Temp_Outfit()
-                else:
-                    $ Girl.change_stat("love", 60, 1)
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("inhibition", 70, 1)
-                    ch_s "You are joking, [Girl.player_petname]."
-                    $ Girl.change_outfit(6,Changed=0)
-            "Don't, stay like that.":
-                $ Girl.change_stat("obedience", 80, 2)
-                if approval_check(Girl,1100):
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("inhibition", 60, 1)
-                    $ Girl.change_face("_sexy")
-                    ch_s "If you want. . ."
-                    $ Girl.Set_Temp_Outfit()
-                elif approval_check(Girl, 350+(10*D20)) and approval_check(Girl, 400, "O"):
-                    $ Girl.change_stat("love", 50, -2)
-                    $ Girl.change_stat("love", 80, -1)
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_face("_sexy",Eyes="_side")
-                    ch_s ". . . Very well."
-                    $ Girl.Set_Temp_Outfit()
-                else:
-                    $ Girl.change_stat("love", 80, -2)
-                    $ Girl.change_stat("obedience", 50, -1)
-                    $ Girl.change_face("_angry")
-                    ch_s "You do not decide that, [Girl.player_petname]."
-                    $ Girl.change_outfit(6,Changed=0)
-            "Lose the rest of it.":
-                $ Girl.change_stat("obedience", 80, 2)
-                if approval_check(Girl,1300):
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("inhibition", 60, 1)
-                    $ Girl.change_face("_sexy")
-                    ch_s "Fine. . ."
-                    $ Girl.change_outfit("nude")
-                    $ Girl.Set_Temp_Outfit()
-                elif approval_check(Girl,800) and approval_check(Girl, 500, "O"):
-                    $ Girl.change_stat("love", 50, -2)
-                    $ Girl.change_stat("love", 80, -2)
-                    $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("obedience", 80, 1)
-                    $ Girl.change_face("_sexy",Eyes="_side")
-                    ch_s ". . . Fine."
-                    $ Girl.change_outfit("nude")
-                    $ Girl.Set_Temp_Outfit()
-                else:
-                    $ Girl.change_stat("love", 50, -2)
-                    $ Girl.change_stat("love", 80, -2)
-                    $ Girl.change_stat("obedience", 50, -2)
-                    $ Girl.change_stat("obedience", 80, 2)
-                    $ Girl.change_face("_angry")
-                    ch_s "I do not think that I will, [Girl.player_petname]."
-                    $ Girl.change_outfit(6,Changed=0)
-    return
-
-
-
-label Girl_Caught_Mastubating(Girl=0):
-
-    if Girl not in all_Girls:
-        return
-    $ Girl.drain_word("gonnafap")
-    call Remove_Girl ("All")
-    $ Girl.location = bg_current
-    "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
-    menu:
-        extend ""
-        "Knock politely":
-            $ Line = "knock"
-        "Peek inside":
-            call set_the_scene
-            $ Girl.change_face("_kiss",1,Eyes = "_closed")
-            $ primary_action = "masturbation"
-            $ girl_offhand_action = "fondle_pussy"
-            "You see [Girl.name], eyes closed and stroking herself vigorously."
-            menu:
-                extend ""
-                "Enter Quietly":
-                    $ Line = "enter"
-                "Pull back and knock":
-                    $ Line = "knock"
-                "Leave quietly":
-                    $ Line = "leave"
-        "Enter quietly":
-            $ Line = "enter"
-            "You hear some odd noises coming from [Girl.name]'s room as you enter."
-        "Leave quietly":
-            $ Line = "leave"
-
-    if Line == "leave":
-        $ Girl.change_stat("lust", 80, 20)
-        "You leave [Girl.name] to her business and slip out."
-        $ renpy.pop_call()
-        jump Campus_Map
-    elif Line == "knock":
-        "You hear some soft moans, followed by some shuffling around as items tumble to the ground."
-        "After several seconds and some more shuffling of clothing, [Girl.name] comes to the door."
-        $ Girl.change_face("_confused",1,Eyes = "_surprised",Mouth = "_smile")
-        $ primary_action = 0
-        $ girl_offhand_action = 0
-        call set_the_scene
-        if Girl == RogueX:
-            ch_r "Sorry about that [RogueX.player_petname], I was. . . working out."
-        elif Girl == KittyX:
-            ch_k "Oh, hey, [KittyX.player_petname], I was. . . never mind."
-        elif Girl == EmmaX:
-            ch_e "Well, I suppose you could tell I was a bit. . . occupied."
-        elif Girl == LauraX:
-            ch_l "Um, hey [LauraX.player_petname], just working off some stress."
-        elif Girl == JeanX:
-            ch_j "Oh, [JeanX.player_petname]. I was. . . never mind."
-        elif Girl == StormX:
-            ch_s "Oh, um, [StormX.player_petname]. I was just. . . stretching."
-        elif Girl == JubesX:
-            ch_v "Oh, hey, [Girl.player_petname]. . . I was. . ."
-        $ approval_bonus += 10
-    elif Line == "enter":
-        call shift_focus (Girl)
-        show blackscreen onlayer black
-        $ Girl.upskirt = 1
-        $ Girl.underwear_pulled_down = 1
-        $ Girl.location = bg_current
-
-        call set_the_scene
-        $ Girl.change_face("_sexy")
-        $ Girl.eyes = "_closed"
-        $ Girl.ArmPose = 2
-        $ Count = 0
-        $ primary_action = "masturbation"
-        hide blackscreen onlayer black
-        $ Girl.daily_history.append("unseen")
-        $ Girl.recent_history.append("unseen")
-        call expression Girl.tag + "_SexAct" pass ("masturbate")
-        if "_angry" in Girl.recent_history:
-            return
-
-
-        $ Girl.change_face("_sexy",Brows="_confused")
-        if Girl.action_counter["masturbation"] == 1:
-            if Girl == RogueX:
-                ch_r "Well that was a bit unexpected. . ."
-                $ Girl.change_face("_bemused",Eyes="_side")
-                ch_r "but not exactly unpleasant. . ."
-                $ Girl.change_face("_sexy")
-                ch_r "Maybe next time I'll give you a heads up first."
-            elif Girl == KittyX:
-                ch_k "So[KittyX.like]I wasn't expecting company. . ."
-                $ Girl.change_face("_bemused",Eyes="_side")
-                ch_k "but I didn't exactly mind it either. . ."
-                $ Girl.change_face("_sexy")
-                ch_k "Maybe knock next time?"
-            elif Girl == EmmaX:
-                ch_e "I wasn't expecting visitors. . ."
-                $ Girl.change_face("_bemused",Eyes="_side")
-                ch_e "although for you I could make an exception. . ."
-                $ Girl.change_face("_sexy")
-                ch_e "Perhaps next time you could knock?"
-            elif Girl == LauraX:
-                ch_l "So what are you doing here? . ."
-                $ Girl.change_face("_bemused",Eyes="_side")
-                ch_l "not that I mind the company. . ."
-                $ Girl.change_face("_sexy")
-                ch_l "But you know, give me a heads up first."
-            elif Girl == JeanX:
-                $ Girl.change_face("_bemused",Eyes="_side")
-                ch_j "Well that was fun. . ."
-                $ Girl.change_face("_sexy")
-                ch_j "So what brings you here? . ."
-            elif Girl == StormX:
-                ch_s "That was an interesting experience. . ."
-                $ Girl.change_face("_bemused",Eyes="_side")
-                ch_s "I certainly didn't mnd the attention. . ."
-                $ Girl.change_face("_sexy")
-                ch_s "You might want to knock in future though."
-            elif Girl == JubesX:
-                ch_v "I don't usually get unexpected visitors . ."
-                $ Girl.change_face("_bemused",Eyes="_side")
-                ch_v "but I didn't mind the company. . ."
-                $ Girl.change_face("_sexy")
-                ch_v "Maybe knock next time?"
-        else:
-            if Girl == RogueX:
-                ch_r "Fancy seeing you here again, [Girl.player_petname]. Almost like it was intentional. . ."
-            elif Girl == KittyX:
-                ch_k "You seem to be making a habit of dropping in."
-            elif Girl == EmmaX:
-                ch_e "I notice you make a habit of dropping in."
-            elif Girl == LauraX:
-                ch_l "You're around a lot. . ."
-            elif Girl == JeanX:
-                ch_j "You have a habit of dropping by. . ."
-            elif Girl == StormX:
-                ch_s "You come up here fairly often. . ."
-            elif Girl == JubesX:
-                ch_v "You stop by alot. . ."
-
-        $ Girl.ArmPose = 1
-        $ Girl.change_outfit(Changed=0)
-
-    return
-
-
-
-
-
-label Call_For_Les(Girl=0, Girl2=0, BO=[]):
-
-
-    if Girl not in active_Girls:
-        $ BO = active_Girls[:]
-        while BO and Girl not in active_Girls:
-            if BO[0] not in Party and BO[0].location != bg_current and "les" in BO[0].recent_history:
-
-
-                $ Girl = BO[0]
-                $ BO = [1]
-            $ BO.remove(BO[0])
-    if Girl in active_Girls and not Girl2:
-
-        $ BO = active_Girls[:]
-        $ BO.remove(Girl)
-        while BO:
-            if BO[0] not in Party and BO[0].location != bg_current and "les" in BO[0].recent_history:
-
-
-                if approval_check(BO[0], 1600 - BO[0].SEXP, TabM=0):
-                    $ Girl2 = BO[0]
-                    $ BO = [1]
-                else:
-                    return 0
-            $ BO.remove(BO[0])
-    if Girl not in active_Girls or Girl2 not in active_Girls:
-
-        return 0
-
-    show Cellphone at sprite_location(stage_left)
-
-    $ Line = 0
-    "You get a call from [Girl.name]."
-    if Girl == RogueX:
-        ch_r "Hey, [Player.name]. . . I was just over here with [Girl2.name] and. . ."
-        ch_r "One thing lead to another, you know how that goes. . . and we were just wondering,"
-        ch_r "Would you like to come over and join us?"
-    elif Girl == KittyX:
-        ch_k "Oh, hi, [Girl.player_petname]. . . I was just hanging out with [Girl2.name] and. . ."
-        ch_k "we got to thinking[Girl.like]"
-        ch_k "Did you wanna come over and join us?"
-    elif Girl == EmmaX:
-        ch_e "[Girl.player_petname]. . . I was just here entertaining [Girl2.name]. . ."
-        ch_e "One thing lead to another, I'm sure you get the picture. . . and we were just wondering,"
-        ch_e "Would you like to come lend us a hand?"
-        ch_e "Or other bits. . ."
-    elif Girl == LauraX:
-        ch_l "Hey, [Player.name]. . . I was with [Girl2.name] here, and. . ."
-        ch_l "You know, feeling each other up-"
-        Girl2.voice "Hey!{w=0.3}{nw}"
-        ch_l ". . . so . . ."
-        ch_l "Want in on this action?"
-    elif Girl == JeanX:
-        ch_j "Oh, [Girl.player_petname]. . . I was hanging out with [Girl2.name]. . ."
-        ch_j "Did you want to swing by and pound some sense into her?"
-        Girl2.voice "Hey!{w=0.3}{nw}"
-        ch_j ". . ."
-    elif Girl == StormX:
-        ch_s "Hello, [Girl.player_petname]? . . I was having a. . . chat with [Girl2.name]. . ."
-        ch_s "We were having a good time, and were wondering if perhaps you wanted to join us?"
-    elif Girl == JubesX:
-        ch_v "Oh, hey, [Girl.player_petname]. . . [Girl2.name]'s over here and. . ."
-        ch_v "we were having some fun, and. . ."
-        ch_v "Did you want to join us?"
-    while not Line and Line != "what":
-        menu:
-            extend ""
-            "Sure, I'll be right there!":
-                $ Girl.change_stat("love", 95, 5)
-                $ Girl.change_stat("obedience", 95, 3)
-                $ Girl.change_stat("inhibition", 95, 2)
-                if Girl in (EmmaX,StormX):
-                    ch_e "Lovely, see you in a bit."
-                else:
-                    Girl.voice "Cool. See you here."
-                $ Girl2.change_stat("love", 95, 5)
-                $ Girl2.change_stat("obedience", 95, 3)
-                $ Girl2.change_stat("inhibition", 95, 2)
-                $ Line = "yes"
-            "Nah, have fun though.":
-                $ Girl.change_stat("love", 90, -4)
-                $ Girl.change_stat("obedience", 95, 2)
-                $ Girl.change_stat("inhibition", 90, -2)
-                if Girl == RogueX:
-                    ch_r "Oh. Ok then. . ."
-                elif Girl == KittyX:
-                    ch_k "Wow, ok, I guess."
-                elif Girl == EmmaX:
-                    ch_e "I admire your restraint. . ."
-                    $ Girl.change_stat("obedience", 95, 2)
-                    ch_e "If not your wisdom. . ."
-                elif Girl == LauraX:
-                    ch_l "Huh. Ok."
-                elif Girl == JeanX:
-                    ch_j "Ok, just thought I'd ask."
-                    ch_j "Later then."
-                elif Girl == StormX:
-                    ch_s "That is unfortunate. . ."
-                elif Girl == JubesX:
-                    ch_v "Ok, but you're missing out!"
-                $ Girl2.change_stat("love", 90, -4)
-                $ Girl2.change_stat("obedience", 95, 2)
-                $ Girl2.change_stat("inhibition", 90, -2)
-                $ Player.recent_history.append("no_les")
-                "She hangs up."
-                hide Cellphone
-                jump Misplaced
-            "What, are you watching a movie?" if Line != "what" and Girl != JeanX:
-                $ Girl.change_stat("love", 80, 2)
-                $ Girl.change_stat("inhibition", 80, 2)
-                if Girl == RogueX:
-                    ch_r "Oh, we're putting on quite the show, but no."
-                elif Girl == KittyX:
-                    $ Girl.change_stat("inhibition", 80, 2)
-                    ch_k "Um. . . no. . .we're, um. . ."
-                elif Girl == EmmaX:
-                    $ Girl.change_stat("love", 80, 1)
-                    ch_e "Oh, that's adorable. No, of course not."
-                elif Girl == LauraX:
-                    ch_l "You hit your head or something?"
-                elif Girl == StormX:
-                    ch_s "A movie? . . no. Not a movie."
-                elif Girl == JubesX:
-                    ch_v "Heh, no! We aren't. . . it's more fun than that. . ."
-
-                $ Girl2.change_stat("love", 80, 2)
-                $ Girl2.change_stat("inhibition", 80, 2)
-                if Girl2 == RogueX:
-                    ch_r "We're bumpin uglies, [Girl2.player_petname]."
-                    ch_r "Thought you might want in."
-                elif Girl2 == KittyX:
-                    $ Girl2.change_stat("inhibition", 80, 2)
-                    ch_k "It's, um. . . sex."
-                    ch_k "We're having sex."
-                    ch_k "-thought you might wanna join us?"
-                elif Girl2 == EmmaX:
-                    ch_e "We're having -intercourse-, [Girl2.player_petname]."
-                    ch_e "Did - you - want - to - join - us?"
-                elif Girl2 == LauraX:
-                    ch_l "Sex, dumbass."
-                    ch_l "We're shucking clams over here and wanted someone to bring the meat."
-                    ch_l "You packing, or what?"
-                elif Girl2 == StormX:
-                    ch_s "What she is trying to say is that we were enjoying each other's bodies."
-                    ch_s "Sex, [Girl2.player_petname]. We wanted you to join us for sex."
-                elif Girl2 == JubesX:
-                    ch_v "I was eating her out, basically."
-                    ch_v "Did you want in on this?"
-                $ Line = "what"
-
-
-    hide Cellphone
-
-    if bg_current == Girl.home:
-
-        $ Line = Girl
-        $ Girl = Girl2
-        $ Girl2 = Line
-    $ Girl.location = Girl.home
-    $ Girl2.location = Girl.home
-    $ bg_current = Girl.home
-    $ Taboo= 0
-    $ Girl.Taboo = 0
-    $ Girl2.Taboo = 0
-    $ Line = 0
-
-    $ Girl.drain_word("les",1,0)
-    $ Girl2.drain_word("les",1,0)
-
-    $ Girl.add_word(0,"lesbian","lesbian")
-    $ Girl2.add_word(0,"lesbian","lesbian")
-    $ Girl.add_word(1,0,0,0,"les "+Girl2.tag)
-    $ Girl2.add_word(1,0,0,0,"les "+Girl.tag)
-
-    call set_the_scene (0, 1, 0, 0)
-    "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
-    while Line < 2:
-        menu:
-            extend ""
-            "Knock politely":
-                if Girl == RogueX:
-                    ch_r "Come on in, [RogueX.player_petname]!"
-                elif Girl == KittyX:
-                    ch_k "Oh! Come in!"
-                elif Girl == EmmaX:
-                    ch_e "No need to wait on our account. . ."
-                elif Girl == LauraX:
-                    ch_l "Come in!"
-                elif Girl == JeanX:
-                    ch_j "Enter!"
-                elif Girl == StormX:
-                    ch_s "Come in!"
-                elif Girl == JubesX:
-                    ch_v "You may enter!"
-                $ Line = 2
-            "Peek inside" if Line != 1:
-                call set_the_scene
-                $ Girl.change_face("_kiss",1,Eyes = "_closed")
-                $ Girl2.change_face("_kiss",1,Eyes = "_closed")
-                $ primary_action = "lesbian"
-                $ girl_offhand_action = "fondle_pussy"
-                $ second_girl_primary_action = "fondle_pussy"
-                "You see [Girl.name] and [Girl2.name], eyes closed and stroking each other vigorously."
-                $ Line = 1
-            "Enter quietly":
-                $ Line = 2
-            "Leave quietly":
-                "You leave the girls to their business and slip out."
-                $ Girl.Thirst -= 30
-                $ Girl.lust = 20
-                $ Girl2.Thirst -= 30
-                $ Girl2lust = 20
-                $ Girl.change_stat("love", 90, -3)
-                $ Girl2.change_stat("love", 90, -3)
-                $ renpy.pop_call()
-                $ bg_current = "bg_campus"
-                $ Line = 0
-                jump Misplaced
-
-    $ Line = 0
-    $ Girl.change_face("_sly",1)
-    $ Girl2.change_face("_sly",1)
-    call set_the_scene (1, 0, 0, 0)
-    if Girl == RogueX:
-        ch_r "Sorry we got started without you."
-    elif Girl == KittyX:
-        ch_k "Oh, hey, [KittyX.player_petname], we. . . got a little bored."
-    elif Girl == EmmaX:
-        ch_e "We certainly didn't."
-    elif Girl == LauraX:
-        ch_l "So you waiting for another invitation?"
-    elif Girl == JeanX:
-        ch_j "So you getting in here?"
-    elif Girl == StormX:
-        ch_s "Well? Are you joining us?"
-    elif Girl == JubesX:
-        ch_v "Get over here."
-
-    $ primary_action = "lesbian"
-    $ girl_offhand_action = "fondle_pussy"
-    $ second_girl_primary_action = "fondle_pussy"
-    $ Partner = Girl2
-    call expression Girl.tag + "_SexAct" pass ("lesbian")
-    jump Misplaced
-    return
-
-
-
-
-
-
-label Girls_Caught_Lesing(Girl=0, Girl2=0, BO=[]):
-
-
-    $ BO = active_Girls[:]
-    if Girl in all_Girls:
-        $ BO.remove(Girl)
-    while BO and not Girl:
-        if BO[0] not in Party and BO[0].location == bg_current and "les" in BO[0].recent_history:
-
-
-            $ Girl = BO[0]
-            $ BO = [1]
-        $ BO.remove(BO[0])
-    if Girl and not Girl2:
-
-        $ BO = active_Girls[:]
-        $ BO.remove(Girl)
-        while BO:
-            if BO[0] not in Party and BO[0].location == bg_current and "les" in BO[0].recent_history:
-
-
-                $ Girl2 = BO[0]
-                $ BO = [1]
-            $ BO.remove(BO[0])
-
-    if not Girl or not Girl2:
-        return 1
-
-    $ Girl.drain_word("les",1,0)
-    $ Girl2.drain_word("les",1,0)
-
-    $ Girl.add_word(0,"lesbian","lesbian")
-    $ Girl2.add_word(0,"lesbian","lesbian")
-    $ Girl.add_word(1,0,0,0,"les "+Girl2.tag)
-    $ Girl2.add_word(1,0,0,0,"les "+Girl.tag)
-
-    "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
-    $ Line = 0
-    while not Line:
-        menu:
-            extend ""
-            "Knock politely":
-                "You hear some soft moans, followed by some shuffling around as items tumble to the ground."
-                "After several seconds and some more shuffling of clothing, [Girl.name] comes to the door."
-                $ Girl.change_face("_confused",2,Eyes = "_surprised",Mouth = "_smile")
-                $ Girl2.change_face("_confused",2,Eyes = "_surprised",Mouth = "_smile")
-                $ primary_action = 0
-                $ girl_offhand_action = 0
-                $ second_girl_primary_action = 0
-                $ second_girl_offhand_action = 0
-                call set_the_scene
-                if Girl == RogueX:
-                    ch_r "Sorry about that [Girl.player_petname], we were, um. . . working out."
-                elif Girl == KittyX:
-                    ch_k "Oh, hey, [Girl.player_petname], hi, we were. . . never mind."
-                elif Girl == EmmaX:
-                    ch_e "Well, I hope you have a good reason for interrupting us."
-                    ch_e "I was. . . teaching her a few things. . ."
-                elif Girl == LauraX:
-                    ch_l "Um, hey [Girl.player_petname], we were a bit busy."
-                elif Girl == JeanX:
-                    ch_j "Hey [Girl.player_petname], we were just giving [Girl2.name]'s tongue a workout."
-                elif Girl == StormX:
-                    ch_s "Ah, hello, [Girl.player_petname] . . I was having a. . . chat with [Girl2.name]. . ."
-                elif Girl == JubesX:
-                    ch_v "Oh, hey. . . me and [Girl2.name] were just. . . having some fun."
-                $ Girl.change_face("_smile",1)
-                $ Girl2.change_face("_smile",1)
-                $ approval_bonus += 10
-                $ Line = 1
-            "Peek inside":
-                call set_the_scene
-                $ Girl.change_face("_kiss",1,Eyes = "_closed")
-                $ Girl2.change_face("_kiss",1,Eyes = "_closed")
-                $ primary_action = "lesbian"
-                $ girl_offhand_action = "fondle_pussy"
-                $ second_girl_primary_action = "fondle_pussy"
-                "You see [Girl.name] and [Girl2.name], eyes closed and stroking each other vigorously."
-            "Enter quietly":
-                call set_the_scene (Quiet=1)
-                $ Girl.change_face("_kiss",1,Eyes = "_closed")
-                $ Girl2.change_face("_kiss",1,Eyes = "_closed")
-                $ primary_action = "lesbian"
-                $ girl_offhand_action = "fondle_pussy"
-                $ second_girl_primary_action = "fondle_pussy"
-                $ Girl.add_word(1,"unseen","unseen")
-                $ Girl2.add_word(1,"unseen","unseen")
-                $ Partner = Girl2
-                $ Line = 0
-                call expression Girl.tag + "_SexAct" pass ("lesbian")
-            "Leave quietly":
-                "You leave the girls to their business and slip out."
-                $ Girl.Thirst -= 30
-                $ Girl.lust = 20
-                $ Girl2.Thirst -= 30
-                $ Girl2lust = 20
-                $ renpy.pop_call()
-                jump Campus_Map
-    $ Line = 0
-    return
-
-
-
-
-
-label Girl_Caught_Shower(Girl=0):
-    if Girl not in all_Girls:
-        return
-    call shift_focus (Girl)
-
-    $ Options = []
-    $ Girl.add_word(1,"showered","showered",0,0)
-    call Remove_Girl ("All")
-
-    $ Girl.change_outfit("nude")
-    $ Girl.change_face("_smile",1)
-
-    $ Girl.location = "bg_showerroom"
-    $ Girl.Water = 1
-    $ Girl.grool = 2
-
-    if "gonnafap" in Girl.daily_history:
-        "As you approach the showers, you hear some shallow moans from inside."
-    else:
-        "As you approach the showers, you hear some humming noises from inside."
-    menu:
-        "What do you do?"
-        "Enter":
-            pass
-        "Knock":
-            $ Line = "knock"
-        "Come back later":
-            call Remove_Girl (Girl)
-            $ Girl.change_outfit(6)
-            $ Girl.drain_word("gonnafap",0,1)
-            $ Girl.lust = 25
-            $ Girl.Thirst -= int(Girl.Thirst/2) if Girl.Thirst >= 50 else int(Girl.Thirst/4)
-            $ bg_current = "bg_campus"
-            jump Misplaced
-
-    if Line == "knock":
-
-        "You knock on the door. You hear some shuffling inside"
-        $ Girl.top = "_towel"
-        if "gonnafap" in Girl.daily_history:
-
-            "You hear a sharp shuffling sound and the water gets cut off."
-            "After several seconds and some more shuffling, [Girl.name] comes to the door."
-            $ Girl.change_face("_perplexed",2,Mouth="_normal")
-            call set_the_scene (Dress=0)
-            if Girl == RogueX:
-                ch_r "Sorry about that [Girl.player_petname], I was. . . just wrapping up my shower."
-            elif Girl == KittyX:
-                ch_k "Oh, hey, [Girl.player_petname]. I was just. . . showering. Yeah."
-            elif Girl == EmmaX:
-                ch_e "Oh, hello [Girl.player_petname]. I was. . . taking care of some personal business."
-            elif Girl == LauraX:
-                ch_l "Oh, hey [Girl.player_petname]. I was just. . . working off some stress."
-            elif Girl == JeanX:
-                ch_j "Oh, [Girl.player_petname]. I was. . . never mind."
-            elif Girl == StormX:
-                ch_s "Ah, hello, [Girl.player_petname]. . . I was. . . cleaning myself."
-            elif Girl == JubesX:
-                ch_v "Oh, hey, [Girl.player_petname]. . . I was. . . what did you hear?"
-            $ Girl.change_stat("lust", 90, 5)
-            $ approval_bonus += 10
-        else:
-
-            "You hear the rustling of a towel and some knocking around, but after a few seconds [Girl.name] comes to the door."
-            call set_the_scene (Dress=0)
-            if Girl == RogueX:
-                ch_r "Sorry about that [Girl.player_petname], I was just wrapping up my shower."
-            elif Girl == KittyX:
-                ch_k "Oh, hey, [Girl.player_petname]. I was just[KittyX.like]showering."
-            elif Girl == EmmaX:
-                ch_e "Oh, hello [Girl.player_petname]. I was just finishing my shower."
-            elif Girl == LauraX:
-                ch_l "Oh, hey [Girl.player_petname]. I was just finishing up."
-            elif Girl == JeanX:
-                ch_j "Oh, [Girl.player_petname]. I'm about done here."
-            elif Girl == StormX:
-                ch_s "Ah, hello, [Girl.player_petname] . . I am about finished here if you want some water. . ."
-            elif Girl == JubesX:
-                ch_v "Oh, hey, [Girl.player_petname]. I was wrapping up here. . ."
-    else:
-
-
-        if "gonnafap" in Girl.daily_history:
-
-            $ Girl.drain_word("gonnafap",0,1)
-            $ Girl.change_face("_sexy",Eyes="_closed")
-            $ Girl.add_word(1,"unseen","unseen",0,0)
-            call set_the_scene (Dress=0)
-            $ Count = 0
-            $ primary_action = "masturbation"
-            $ girl_offhand_action = "fondle_pussy"
-            "You see [Girl.name] under the shower, feeling herself up."
-            call expression Girl.tag + "_SexAct" pass ("masturbate")
-            $ bg_current = "bg_showerroom"
-            jump Misplaced
-
-        elif D20 >= 15:
-
-            call set_the_scene (Dress=0)
-            $ Girl.change_face("_surprised", 1)
-            "As you enter the showers, you see [Girl.name] washing up."
-            call expression Girl.tag + "_First_Bottomless" pass (1)
-            call expression Girl.tag + "_First_Topless" pass (1)
-            if not approval_check(Girl, 1200) or not Girl.SeenPussy or not Girl.SeenChest:
-                $ Girl.brows="_angry"
-                $ Girl.top = "_towel"
-                "She grabs a towel and covers up."
-                $ Girl.change_face("_angry", 1)
-                $ Girl.change_stat("love", 80, -5)
-            else:
-                if "exhibitionist" in Girl.traits:
-                    $ Girl.change_stat("lust", 90, (2*D20))
-                else:
-                    $ Girl.change_stat("lust", 80, D20)
-                $ Girl.brows="_confused"
-
-
-
-
-
-
-            $ Girl.change_stat("inhibition", 70, 3)
-            if Girl == RogueX:
-                ch_r "Hey! Learn to knock maybe?!"
-            elif Girl == KittyX:
-                ch_k "Did you[KittyX.like]get a good look?"
-            elif Girl == EmmaX:
-                ch_e "Hello. Haven't you learned to knock before entering?"
-            elif Girl == LauraX:
-                ch_l "Um, hey? Don't knock much?"
-            elif Girl == JeanX:
-                ch_j "Forget to knock, [JeanX.player_petname]?"
-            elif Girl == StormX:
-                ch_s "Oh, hello, [Girl.player_petname]."
-            elif Girl == JubesX:
-                ch_v "Hey, knock maybe?"
-            menu:
-                extend ""
-                "Sorry, I should have knocked.":
-                    $ Girl.change_stat("love", 50, 2)
-                    if Girl != StormX:
-                        $ Girl.change_stat("love", 80, 4)
-                "And miss the view?":
-                    $ Girl.change_stat("obedience", 50, 2)
-                    if Girl != StormX:
-                        $ Girl.change_stat("obedience", 80, 2)
-                        $ Girl.change_stat("inhibition", 60, 1)
-                "Why, would it have made a difference?":
-                    if not approval_check(Girl, 500,"I"):
-                        $ Girl.change_stat("love", 50, -3)
-                        $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("obedience", 80, 2)
-                    $ Girl.change_stat("inhibition", 60, 2)
-                "It's not as if you're leaving that much to the imagination. . ." if Girl == EmmaX:
-                    $ EmmaX.change_stat("obedience", 50, 2)
-                    $ EmmaX.change_stat("obedience", 80, 2)
-                    $ EmmaX.change_stat("inhibition", 60, 2)
-        else:
-
-
-
-            $ Girl.top = "_towel"
-            call set_the_scene (Dress=0)
-            "As you enter the showers, you see [Girl.name] putting on a towel."
-            if not approval_check(Girl, 1100) and (not Girl.SeenPussy or not Girl.SeenChest):
-                $ Girl.change_face("_angry",Brows="_confused")
-                $ Girl.change_stat("love", 80, -5)
-            else:
-                $ Girl.change_face("_sexy",Brows="_confused")
-            $ Girl.change_stat("inhibition", 50, 3)
-            if Girl == RogueX:
-                ch_r "Well hello there, [RogueX.player_petname]. Hoping to see something more?"
-            elif Girl == KittyX:
-                ch_k "Oh, hey. Were you hoping I'd be naaaaaked?"
-            elif Girl == EmmaX:
-                ch_e "Oh, hello, [EmmaX.player_petname]. Sorry you didn't get here sooner?"
-            elif Girl == LauraX:
-                ch_l "Oh, hey [LauraX.player_petname]. Trying to slip in unnoticed?"
-            elif Girl == JeanX:
-                ch_j "Oh, [JeanX.player_petname], just sneaking in?"
-            elif Girl == StormX:
-                ch_s "Oh, hello, [Girl.player_petname]."
-            elif Girl == JubesX:
-                ch_v "Well you're being sneaky. . ."
-            menu:
-                extend ""
-                "Sorry, I should have knocked.":
-                    $ Girl.change_stat("love", 50, 2)
-                    if Girl != StormX:
-                        $ Girl.change_stat("love", 80, 2)
-                "Well, to be honest. . .":
-                    $ Girl.change_stat("love", 50, -2)
-                    $ Girl.change_stat("obedience", 50, 2)
-                    if Girl != StormX:
-                        $ Girl.change_stat("obedience", 80, 2)
-                        $ Girl.change_stat("inhibition", 60, 1)
-                "I still like the view. . ." if Girl != EmmaX:
-                    if approval_check(Girl, 500,"I"):
-                        $ Girl.change_stat("love", 80, 1)
-                    else:
-                        $ Girl.change_stat("love", 50, -1)
-                        $ Girl.change_stat("obedience", 50, 2)
-                    $ Girl.change_stat("obedience", 80, 2)
-                    $ Girl.change_stat("inhibition", 60, 3)
-                "It's not as if you're leaving that much to the imagination. . ." if Girl == EmmaX:
-                    $ EmmaX.change_stat("obedience", 50, 2)
-                    $ EmmaX.change_stat("obedience", 80, 2)
-                    $ EmmaX.change_stat("inhibition", 60, 2)
-
-
-        $ Girl.change_face("_sexy")
-        if Girl == StormX:
-            ch_s "Oh, that's fine, [Girl.player_petname]."
-            ch_s "You might want to be careful with the other girls though."
-        elif not approval_check(Girl, 1000) or not Girl.SeenPussy or not Girl.SeenChest:
-            if Girl == RogueX:
-                ch_r "Well, it happens, just be careful next time."
-            elif Girl == KittyX:
-                ch_k "Well, it's not like I totally mind. . ."
-            elif Girl == EmmaX:
-                ch_e "Hmm. Yes, a likely excuse."
-            elif Girl == LauraX:
-                ch_l "Well, just keep an eye on your own bits."
-                ch_l "Wouldn't want them going missing."
-            elif Girl == JeanX:
-                ch_j "Well, just. . . be more careful."
-            elif Girl == JubesX:
-                ch_v "Gimme some warning next time."
-        elif not approval_check(Girl, 1300):
-            if Girl == RogueX:
-                ch_r "Well, it happens, just be careful next time."
-            elif Girl == KittyX:
-                ch_k "Well too bad."
-            elif Girl == EmmaX:
-                ch_e "Hmm. Yes, a likely excuse."
-            elif Girl == LauraX:
-                ch_l "Uh-huh."
-            elif Girl == JeanX:
-                ch_j "Sure. . ."
-            elif Girl == JubesX:
-                ch_v "Uh-huh. . ."
-        else:
-            if Girl == RogueX:
-                ch_r "You could have just asked, [Girl.player_petname]."
-            elif Girl == KittyX:
-                ch_k "Well, it's not like it's totally off the table. . ."
-            elif Girl == EmmaX:
-                ch_e "Well, it's not that I mind. . ."
-            elif Girl == LauraX:
-                ch_l "Nah, I don't mind much. . ."
-            elif Girl == JeanX:
-                ch_j "How could I resist an audience?"
-            elif Girl == JubesX:
-                ch_v "Gimme some warning next time."
-            elif Girl == JubesX:
-                ch_v "You just have to ask. . ."
-
-            if Girl.top == "_towel":
-
-                $ Girl.top = ""
-                pause 0.5
-                $ Girl.top = "_towel"
-                "She flashes you real quick."
-                $ Girl.top = "_towel"
-                call expression Girl.tag + "_First_Bottomless" pass (1)
-                call expression Girl.tag + "_First_Topless" pass (1)
-
-                if Girl == LauraX:
-                    ch_l "Heh!"
-
-
-
-    if Girl == RogueX:
-        ch_r "Well, I should probably get going. . ."
-    elif Girl == KittyX:
-        ch_k "I'm done here, see you later?"
-    elif Girl == EmmaX:
-        ch_e "I should probably be leaving. . ."
-    elif Girl == LauraX:
-        ch_l "I should get going. . ."
-    elif Girl == JeanX:
-        ch_j "Ok, I'm headed out."
-    elif Girl == StormX:
-        ch_s "Ok, I am finished here, [Girl.player_petname]."
-    elif Girl == JubesX:
-        ch_v "Well, I'm done here. . ."
-    menu:
-        extend ""
-        "Sure, see you later then.":
-            call Remove_Girl (Girl)
-        "Actually, could you stick around a minute?":
-            if approval_check(Girl, 900) or Girl == StormX:
-                if Girl == RogueX:
-                    ch_r "Sure, what's up?"
-                elif Girl == KittyX:
-                    ch_k "Yeah?"
-                elif Girl == EmmaX:
-                    ch_e "Very well, what did you need?"
-                elif Girl == LauraX:
-                    $ LauraX.location = "bg_showerroom"
-                    ch_l "Huh? Ok, what's up?"
-                elif Girl == JeanX:
-                    ch_j "What? Why?"
-                elif Girl == StormX:
-                    ch_s "I suppose so, what did you need?"
-                elif Girl == JubesX:
-                    ch_v "Oh? Why?"
-            else:
-
-                if Girl == RogueX:
-                    ch_r "Um, actually, I'm not really comfortable being so. . . exposed?"
-                    ch_r "I'll just see you around later."
-                elif Girl == KittyX:
-                    ch_k "I'm[KittyX.like]totally exposed here?"
-                    ch_k "I'm just going to head out."
-                elif Girl == EmmaX:
-                    ch_e "I really shouldn't be \"hanging out\" in such a state."
-                    ch_e "We can talk later."
-                elif Girl == LauraX:
-                    ch_l "I probably shouldn't hang out like this."
-                    ch_l "We'll talk later."
-                elif Girl == JeanX:
-                    ch_j "I'd rather not."
-                elif Girl == JubesX:
-                    ch_v "Um. . . nah. . ."
-                call Remove_Girl (Girl)
-
-    if Line == "leaving":
-        $ Girl.change_outfit(6)
-    $ Line = 0
-    return 0
 
 
 
@@ -7745,227 +1936,6 @@ label Breakup(Girl=0, Other=0, Anger=0, BO=[]):
 
 
 
-
-
-
-label CheatCheck(BO=[], BO2=[]):
-
-
-
-
-
-
-
-    $ BO = all_Girls[:]
-    $ renpy.random.shuffle(BO)
-    while BO:
-        if "locked" in Player.traits and BO[0].location != bg_current:
-
-            pass
-        else:
-            $ BO2 = all_Girls[:]
-            while BO2:
-                if "meet girl" in Player.daily_history:
-
-                    return
-                elif BO[0] in Player.Harem:
-
-                    if "saw with " + BO2[0].tag in BO[0].traits:
-
-                        if BO[0] in Player.Harem and BO2[0] in Player.Harem:
-
-                            $ BO[0].drain_word("saw with "+BO2[0].tag,0,0,1)
-                        elif BO[0] in Player.Harem and BO2[0].tag + "Yes" in Player.traits:
-                            $ BO[0].drain_word("saw with "+BO2[0].tag,0,0,1)
-                        elif bg_current == "bg_player" or bg_current == BO[0].home:
-                            call Cheated (BO[0], BO2[0])
-                            $ renpy.pop_call()
-                            return
-                $ BO2.remove(BO2[0])
-        $ BO.remove(BO[0])
-    return
-
-label ShareCheck(BO=[], BO2=[]):
-
-
-
-
-
-    $ BO = all_Girls[:]
-    $ BO.remove(StormX)
-    while BO:
-        if BO[0] in Player.Harem:
-
-            $ BO2 = all_Girls[:]
-            $ BO2.remove(StormX)
-            while BO2:
-                if "ask " + BO2[0].tag in BO[0].traits:
-
-                    if BO[0] in Player.Harem and BO2[0] in Player.Harem:
-
-                        $ BO[0].drain_word("ask "+BO2[0].tag,0,0,1)
-                    else:
-                        call Share (BO[0], BO2[0])
-                        $ renpy.pop_call()
-                        return
-                $ BO2.remove(BO2[0])
-        $ BO.remove(BO[0])
-    return
-
-label AddictCheck(BO=[]):
-
-
-    $ BO = active_Girls[:]
-    $ renpy.random.shuffle(BO)
-    if JubesX in BO and JubesX.addiction >= 40 and BO[0].resistance:
-        $ BO.remove(JubesX)
-        if "sunshine" not in JubesX.history or "addiction" in JubesX.daily_history:
-            pass
-        elif bg_current == JubesX.home or bg_current == "bg_player":
-            if not JubesX.resistance:
-
-                call addiction_event (JubesX)
-            else:
-                call addiction_fix (JubesX)
-        else:
-            if "asked meet" in JubesX.daily_history:
-                pass
-            elif "asked meet" in JubesX.daily_history and JubesX.addiction >= 60:
-                "[JubesX.name] texts you. . ."
-                JubesX.voice "I know I asked to meet you in your room earlier, but I really need a fix."
-                $ Player.add_word(1,"asked fix",0,0,0)
-                $ JubesX.add_word(1,"asked meet","asked meet",0,0)
-                call ReturnToRoom
-                return
-            else:
-                "[JubesX.name] texts and asks if you could get her a fix later."
-                $ JubesX.add_word(1,"asked meet","asked meet",0,0)
-                call ReturnToRoom
-                return
-    while BO:
-        if "locked" in Player.traits and BO[0].location != bg_current:
-
-            pass
-        elif "asked fix" in Player.daily_history and "asked meet" not in BO[0].daily_history:
-
-            pass
-        elif BO[0].Event[3]:
-
-            pass
-        elif "_angry" not in BO[0].recent_history and "addiction" not in BO[0].daily_history and BO[0].remaining_actions >= 1:
-
-            if (BO[0].addiction >= 60 or (BO[0].addiction >= 40 and BO[0] == JubesX)) and BO[0].resistance:
-
-                if bg_current == BO[0].home or bg_current == "bg_player":
-                    call addiction_fix (BO[0])
-                else:
-                    if "asked meet" in BO[0].recent_history:
-                        pass
-                    elif "asked meet" in BO[0].daily_history and BO[0].addiction >= 80:
-                        "[BO[0].name] texts you. . ."
-                        BO[0].voice "I know I asked to meet you in your room earlier, but I'm serious, this is important."
-                        $ Player.add_word(1,"asked fix",0,0,0)
-                        $ BO[0].add_word(1,"asked meet","asked meet",0,0)
-                        call ReturnToRoom
-                        return
-                    else:
-                        "[BO[0].name] texts and asks if you could meet her in your room later."
-                        $ BO[0].add_word(1,"asked meet","asked meet",0,0)
-                        call ReturnToRoom
-                        return
-
-            elif BO[0].resistance:
-                pass
-
-            elif BO[0] == JubesX and BO[0].addiction < 50:
-                pass
-            elif BO[0].addiction >= 35 and not BO[0].Event[1]:
-
-                call addiction_event (BO[0])
-            elif BO[0].addiction >= 60 and BO[0].Event[1] <= 2:
-
-                call addiction_event (BO[0])
-            elif BO[0].addiction >= 90:
-
-                call addiction_event (BO[0])
-        $ BO.remove(BO[0])
-    return
-
-
-label Share(Girl=0, Other=0):
-
-
-
-    $ Girl.drain_word("ask "+Other.tag,0,0,1)
-
-    if Girl.Break[0]:
-
-        "[Girl.name] sends you a text."
-        $ Other.change_stat("love", 90, -10)
-        $ Other.change_stat("obedience", 80, 10)
-        $ Other.change_stat("inhibition", 80, 5)
-
-        if Other == RogueX:
-            Girl.voice "She said to \"stop bother'in her?\""
-        elif Other == KittyX:
-            Girl.voice "She said to \"give it a rest?\""
-        elif Other == EmmaX:
-            Girl.voice "She said \"when hell freezes over?\""
-        elif Other == LauraX:
-            Girl.voice "She said to \"fuck off?\""
-        elif Other == JeanX:
-            Girl.voice "She didn't seem to know who I was talking about."
-        elif Other == StormX:
-            Girl.voice "She said \"I would rather not?\""
-        elif Other == JubesX:
-            Girl.voice "She said to \"give it a rest?\""
-        Girl.voice "I guess we can see if she comes around on the idea."
-    else:
-
-        if Other == JeanX or Other.GirlLikeCheck(Girl) >= 800 or approval_check(Other, 1800) or (approval_check(Other, 1500) and Other.GirlLikeCheck(Girl) >= 500):
-
-            $ Other.add_word(1,0,0,"poly "+Girl.tag,0)
-
-
-            $ Other.change_stat("obedience", 80, 10)
-            $ Other.change_stat("inhibition", 80, 15)
-
-            $ BO = Player.Harem[:]
-            while BO:
-                $ BO[0].drain_word("saw with "+Other.tag,0,0,1)
-                $ BO.remove(BO[0])
-            if Girl.Event[5]:
-
-                $ Player.Harem.append(Other)
-
-            elif bg_current in PersonalRooms:
-
-                if Other.tag+"Yes" not in Player.traits:
-                    $ Player.traits.append(Other.tag+"Yes")
-                call expression Other.tag + "_BF"
-                $ renpy.pop_call()
-                $ renpy.pop_call()
-            else:
-
-                if Other.tag+"Yes" not in Player.traits:
-                    $ Player.traits.append(Other.tag+"Yes")
-                call AskedMeet (Other, "_bemused")
-        else:
-
-            "[Girl.name] sends you a text."
-            Girl.voice "I talked to [Other.name] about sharing you, and she said she wasn't into that sort of thing,"
-            if not approval_check(Other, 2000):
-                $ Other.change_stat("love", 200, -15)
-                $ Other.change_stat("obedience", 50, -5)
-                $ Other.change_stat("inhibition", 50, 5)
-                Girl.voice "She's just not into you like that."
-            else:
-                $ Other.change_stat("love", 200, -5)
-                Girl.voice "She doesn't really like me that much. . ."
-
-
-            $ Other.Break[0] = 7
-    return
 
 
 
@@ -10405,7 +4375,7 @@ label Frisky_Class(Girl=0, Teacher=0, LineB=0, BO=[]):
                 "Since Xavier isn't concerned with your activities, you both head back to your room instead."
                 $ Girl.location = "bg_player"
                 call clear_the_room (Girl, 0, 1)
-                jump Player_Room
+                jump player_room
 
 
 
@@ -10457,4 +4427,2467 @@ label Frisky_Class_End:
     "Eventually, [Girl.name] seems to settle down and pay attention to the course material. You manage to do the same without falling asleep."
     $ Line = 0
     return
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc
+
+
+
+
+label Rogue_First_Topless(Silent=0, TempLine=0):
+    if RogueX.ChestNum() > 1 or RogueX.OverNum() > 2:
+
+        return
+    if RogueX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ RogueX.recent_history.append("topless")
+    $ RogueX.daily_history.append("topless")
+    $ RogueX.drain_word("no_topless")
+    $ RogueX.SeenChest += 1
+    if RogueX.SeenChest > 1:
+        return
+
+    $ RogueX.change_stat("inhibition", 70, 20)
+    if not Silent:
+        $ RogueX.change_face("_bemused", 1)
+        "[RogueX.name] looks a bit shy, and slowly lowers her hands from her chest."
+        ch_r "Well, [RogueX.player_petname]? Like what you see?"
+        menu Rogue_First_TMenu:
+            extend ""
+            "Nod":
+                $ RogueX.change_stat("love", 90, 20)
+                $ RogueX.change_stat("inhibition", 70, 20)
+                $ RogueX.change_face("_smile")
+                ch_r ". . ."
+                $ RogueX.change_stat("love", 40, 20)
+            "Whatever.":
+                $ RogueX.change_stat("love", 90, -30)
+                $ RogueX.change_stat("obedience", 50, 20)
+                $ RogueX.change_stat("inhibition", 70, -10)
+                $ RogueX.change_face("_angry")
+                ch_r "Hmph!"
+                $ RogueX.change_stat("obedience", 70, 20)
+            "Well, they aren't that bad. . .":
+                $ RogueX.change_stat("love", 90, -30)
+                $ RogueX.change_stat("obedience", 60, 25)
+                $ RogueX.change_stat("inhibition", 70, -15)
+                $ RogueX.change_face("_confused",2)
+                ch_r "Say what now?"
+                menu:
+                    "I, um, no, they're great!":
+                        $ RogueX.change_face("_angry",2, Mouth="_smile")
+                        $ RogueX.change_stat("inhibition", 70, 10)
+                        ch_r "Of couse they are!"
+                    "[EmmaX.name]'s were bigger, that's all." if EmmaX.SeenChest:
+                        $ TempLine = EmmaX
+                    "[StormX.name]'s were bigger, that's all." if StormX.SeenChest:
+                        $ TempLine = StormX
+                    "[KittyX.name]'s were tighter, that's all." if KittyX.SeenChest:
+                        $ TempLine = KittyX
+
+                if TempLine:
+                    $ RogueX.change_face("_angry")
+                    $ RogueX.mouth = "_surprised"
+                    $ RogueX.change_stat("love", 90, -10)
+                    $ RogueX.change_stat("obedience", 80, 30)
+                    $ RogueX.change_stat("inhibition", 70, -25)
+                    ch_r ". . ."
+                    $ RogueX.mouth = "_sad"
+                    if TempLine in (EmmaX,StormX):
+                        if RogueX.GirlLikeCheck(TempLine) >= 800:
+                            $ RogueX.change_face("_sly",2,Eyes="_side")
+                            $ RogueX.change_stat("obedience", 80, 5)
+                            ch_r "Well, I mean they would be quite the handful. . ."
+                            $ RogueX.GirlLikeUp(TempLine,20)
+                        elif RogueX.GirlLikeCheck(TempLine) >= 700:
+                            $ RogueX.eyes = "_side"
+                            $ RogueX.change_stat("obedience", 80, 5)
+                            ch_r "I mean, I guess, if you like that kind of thing. . ."
+                        else:
+                            $ RogueX.GirlLikeUp(TempLine,-50)
+                            $ TempLine = "bad"
+                    elif TempLine == KittyX:
+                        if RogueX.LikeKitty >= 800:
+                            $ RogueX.change_face("_sly",2,Eyes="_side")
+                            $ RogueX.change_stat("obedience", 80, 5)
+                            ch_r "They are kind of adorable. . ."
+                            $ RogueX.LikeKitty += 20
+                        elif RogueX.LikeKitty >= 700:
+                            $ RogueX.eyes = "_side"
+                            $ RogueX.change_stat("obedience", 80, 5)
+                            ch_r "I mean, yeah, I guess. . ."
+                        else:
+                            $ RogueX.LikeKitty -= 50
+                            $ TempLine = "bad"
+
+                    if TempLine == "bad":
+                        $ RogueX.change_stat("love", 90, -20)
+                        ch_r "Yeah, that's enough outta you, [RogueX.player_petname]."
+                        $ RogueX.change_outfit()
+                        $ RogueX.recent_history.append("no_topless")
+                        $ RogueX.daily_history.append("no_topless")
+                        $ RogueX.recent_history.append("_angry")
+                        $ RogueX.daily_history.append("_angry")
+    else:
+        $ RogueX.add_word(1,0, "", "", "topless")
+        if approval_check(RogueX, 800) and not RogueX.Forced:
+            $ RogueX.change_stat("inhibition", 70, 5)
+            $ RogueX.change_stat("obedience", 70, 5)
+        else:
+            $ RogueX.change_stat("love", 90, -5)
+            $ RogueX.change_stat("inhibition", 70, -5)
+            $ RogueX.change_face("_angry")
+            $ RogueX.change_stat("obedience", 70, 15)
+    return
+
+
+label Rogue_First_Bottomless(Silent=0):
+    if RogueX.PantiesNum() > 1 or RogueX.PantsNum() > 2 or RogueX.HoseNum() > 9:
+
+        return
+    if RogueX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ RogueX.recent_history.append("bottomless")
+    $ RogueX.daily_history.append("bottomless")
+    $ RogueX.drain_word("no_bottomless")
+    $ RogueX.SeenPussy += 1
+    if RogueX.SeenPussy > 1:
+
+        return
+
+    $ RogueX.change_stat("inhibition", 80, 40)
+    if not Silent:
+        $ RogueX.change_face("_bemused", 1)
+        "[RogueX.name] shyly moves her hands aside, revealing her pussy."
+        menu Rogue_First_BMenu:
+            ch_r "Well, [RogueX.player_petname]? Was it worth the wait?"
+            "Lovely. . .":
+                $ RogueX.change_stat("love", 90, 20)
+                $ RogueX.change_stat("inhibition", 60, 30)
+                $ RogueX.change_face("_smile")
+                ch_r ". . ."
+                $ RogueX.change_stat("love", 40, 20)
+            "I suppose.":
+                $ RogueX.change_stat("love", 90, -30)
+                $ RogueX.change_stat("obedience", 50, 20)
+                $ RogueX.change_stat("inhibition", 70, -20)
+                $ RogueX.change_face("_angry")
+                ch_r ". . ."
+                $ RogueX.change_stat("obedience", 70, 30)
+    else:
+        $ RogueX.add_word(1,0, "", "", "bottomless")
+        if approval_check(RogueX, 500):
+            $ RogueX.change_stat("inhibition", 60, 30)
+        else:
+            $ RogueX.change_stat("love", 90, -5)
+            $ RogueX.change_stat("inhibition", 70, -5)
+            $ RogueX.change_face("_angry")
+            $ RogueX.change_stat("obedience", 70, 15)
+    return
+
+
+label Kitty_First_Topless(Silent=0, TempLine=0):
+    if KittyX.ChestNum() > 1 or KittyX.OverNum() > 2:
+
+        return
+    if KittyX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ KittyX.recent_history.append("topless")
+    $ KittyX.daily_history.append("topless")
+    $ KittyX.drain_word("no_topless")
+    $ KittyX.SeenChest += 1
+    if KittyX.SeenChest > 1:
+        return
+
+
+    $ KittyX.change_stat("inhibition", 70, 15)
+    if not Silent:
+        $ KittyX.change_face("_bemused", 2)
+        "Kitty looks a bit shy, and slowly lowers her hands from her chest."
+        ch_k "[KittyX.Like]what do you think?"
+        $ KittyX.blushing = "_blush1"
+        menu Kitty_First_TMenu:
+            extend ""
+            "Lovely.":
+                $ KittyX.change_stat("love", 90, 20)
+                $ KittyX.change_stat("inhibition", 70, 20)
+                $ KittyX.change_face("_smile",2)
+                ch_k ". . ."
+                $ KittyX.change_stat("love", 40, 20)
+                $ KittyX.blushing = "_blush1"
+            "That's it?":
+
+                $ KittyX.change_stat("love", 90, -30)
+                $ KittyX.change_stat("obedience", 60, 25)
+                $ KittyX.change_stat("inhibition", 70, -15)
+                $ KittyX.change_face("_confused",2)
+                ch_k "What?"
+                menu:
+                    "I, um, no, they're great!":
+                        $ KittyX.change_face("_angry",2, Mouth="_smile")
+                        $ KittyX.change_stat("inhibition", 70, 10)
+                        ch_k "Obviously!"
+                    "[EmmaX.name]'s were bigger, that's all." if EmmaX.SeenChest:
+                        $ TempLine = EmmaX
+                    "[RogueX.name]'s were bigger, that's all." if RogueX.SeenChest:
+                        $ TempLine = RogueX
+                    "[LauraX.name]'s were bigger, that's all." if LauraX.SeenChest:
+                        $ TempLine = LauraX
+                    "[JeanX.name]'s were bigger, that's all." if JeanX.SeenChest:
+                        $ TempLine = JeanX
+                    "[StormX.name]'s were bigger, that's all." if StormX.SeenChest:
+                        $ TempLine = StormX
+
+                if TempLine:
+                    $ KittyX.change_face("_angry")
+                    $ KittyX.mouth = "_surprised"
+                    $ KittyX.change_stat("love", 90, -10)
+                    $ KittyX.change_stat("obedience", 80, 30)
+                    $ KittyX.change_stat("inhibition", 70, -25)
+                    ch_k ". . ."
+                    $ KittyX.mouth = "_sad"
+                    if TempLine in (EmmaX,StormX):
+                        if KittyX.GirlLikeCheck(TempLine) >= 800:
+                            $ KittyX.change_face("_sly",2,Eyes="_side")
+                            $ KittyX.change_stat("obedience", 80, 5)
+                            ch_k "Yeah, like you just wanna shove your head into there. . ."
+                            $ KittyX.GirlLikeUp(TempLine,20)
+                        elif KittyX.GirlLikeCheck(TempLine) >= 700:
+                            $ KittyX.eyes = "_side"
+                            $ KittyX.change_stat("obedience", 80, 5)
+                            ch_k "I mean, I guess, if you like that kind of thing. . ."
+                        else:
+                            $ KittyX.GirlLikeUp(TempLine,-50)
+                            $ TempLine = "bad"
+                    elif TempLine:
+                        if KittyX.GirlLikeCheck(TempLine) >= 800:
+                            $ KittyX.change_face("_sly",2,Eyes="_side")
+                            $ KittyX.change_stat("obedience", 80, 5)
+                            ch_k "Yeah, like two ripe apples. . . I mean-"
+                            $ KittyX.GirlLikeUp(TempLine,20)
+                        elif KittyX.GirlLikeCheck(TempLine) >= 700:
+                            $ KittyX.eyes = "_side"
+                            $ KittyX.change_stat("obedience", 80, 5)
+                            ch_k "[KittyX.Like]I guess. . ."
+                        else:
+                            $ KittyX.GirlLikeUp(TempLine,-50)
+                            $ TempLine = "bad"
+
+                    if TempLine == "bad":
+                        $ KittyX.change_stat("love", 90, -20)
+                        ch_k "Well you sure know how to ruin a mood."
+                        $ KittyX.change_outfit()
+                        $ KittyX.recent_history.append("no_topless")
+                        $ KittyX.daily_history.append("no_topless")
+                        $ KittyX.recent_history.append("_angry")
+                        $ KittyX.daily_history.append("_angry")
+    else:
+
+
+        $ KittyX.add_word(1,0, "", "", "topless")
+        if approval_check(KittyX, 800) and not KittyX.Forced:
+            $ KittyX.change_stat("inhibition", 70, 5)
+            $ KittyX.change_stat("obedience", 70, 10)
+        else:
+            $ KittyX.change_stat("love", 90, -5)
+            $ KittyX.change_stat("inhibition", 70, -5)
+            $ KittyX.change_face("_angry")
+            $ KittyX.change_stat("obedience", 70, 20)
+    return
+
+label Kitty_First_Bottomless(Silent=0):
+    if KittyX.PantiesNum() > 1 or KittyX.PantsNum() > 2 or KittyX.HoseNum() > 9:
+
+        return
+    if KittyX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ KittyX.recent_history.append("bottomless")
+    $ KittyX.daily_history.append("bottomless")
+    $ KittyX.drain_word("no_bottomless")
+    $ KittyX.SeenPussy += 1
+    if KittyX.SeenPussy > 1:
+        return
+
+    $ KittyX.change_stat("inhibition", 80, 30)
+    $ KittyX.change_stat("obedience", 70, 10)
+    if not Silent:
+        $ KittyX.change_face("_bemused", 1)
+        "[KittyX.name] shyly moves her hands aside, revealing her pussy."
+        menu Kitty_First_BMenu:
+            extend ""
+            "Lovely. . .":
+                $ KittyX.change_stat("love", 90, 20)
+                $ KittyX.change_stat("inhibition", 60, 25)
+                $ KittyX.change_face("_smile")
+                ch_k ". . ."
+                $ KittyX.change_stat("love", 40, 20)
+            "Now {i}that's{/i} the \"Kitty\" I wanted to see.":
+                $ KittyX.change_stat("love", 40, 25)
+                $ KittyX.change_stat("inhibition", 60, 30)
+                $ KittyX.change_face("_perplexed", 2)
+                ch_k "[[snort]"
+                $ KittyX.change_stat("love", 90, 25)
+                $ KittyX.blushing = "_blush1"
+            "Pretty messy down there." if KittyX.pubes:
+                $ KittyX.change_face("_surprised",2)
+                ch_k "!"
+                if approval_check(KittyX, 800, "LO"):
+                    $ KittyX.change_face("_bemused",1)
+                    $ KittyX.change_stat("obedience", 50, 30)
+                    $ KittyX.change_stat("inhibition", 60, 25)
+                    ch_k "I guess I could trim it up a bit. . ."
+                    $ KittyX.Todo.append("shave")
+                else:
+                    $ KittyX.change_face("_angry",1)
+                    $ KittyX.change_stat("love", 40, -20)
+                    $ KittyX.change_stat("obedience", 50, 25)
+                    $ KittyX.change_stat("inhibition", 60, -5)
+                    ch_k "Well[KittyX.like]sorry I don't keep it baby soft!"
+            "I've seen better.":
+                $ KittyX.change_stat("love", 90, -30)
+                $ KittyX.change_stat("obedience", 50, 25)
+                $ KittyX.change_stat("inhibition", 70, -30)
+                $ KittyX.change_face("_angry")
+                ch_k ". . ."
+                $ KittyX.change_stat("obedience", 70, 35)
+    else:
+        $ KittyX.add_word(1,0, "", "", "bottomless")
+        if approval_check(KittyX, 800) and not KittyX.Forced:
+            $ KittyX.change_stat("inhibition", 60, 15)
+            $ KittyX.change_stat("obedience", 70, 10)
+        else:
+            $ KittyX.change_stat("love", 90, -10)
+            $ KittyX.change_stat("inhibition", 70, -5)
+            $ KittyX.change_face("_angry")
+            $ KittyX.change_stat("obedience", 70, 20)
+    return
+
+
+
+label Emma_First_Topless(Silent=0, TempLine=0):
+    if EmmaX.ChestNum() > 1 or EmmaX.OverNum() > 2:
+
+        return
+    if EmmaX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ EmmaX.recent_history.append("topless")
+    $ EmmaX.daily_history.append("topless")
+    $ EmmaX.drain_word("no_topless")
+    $ EmmaX.SeenChest += 1
+    if EmmaX.SeenChest > 1:
+        return
+
+
+    $ EmmaX.change_stat("inhibition", 70, 15)
+    if not Silent:
+        $ EmmaX.change_face("_sly")
+        "You get your first look at [EmmaX.name]'s bare chest."
+        ch_e "Well, [EmmaX.player_petname]? Is it everything you dreamed?"
+        $ EmmaX.blushing = "_blush1"
+        menu Emma_First_TMenu:
+            extend ""
+            "Definitely, and more.":
+                $ EmmaX.change_stat("love", 90, 20)
+                $ EmmaX.change_stat("inhibition", 70, 20)
+                $ EmmaX.change_face("_smile",1)
+                ch_e "I do aim to impress."
+                $ EmmaX.change_stat("love", 40, 20)
+                $ EmmaX.blushing = ""
+            ". . . [[stunned]":
+                $ EmmaX.change_stat("love", 90, 20)
+                $ EmmaX.change_stat("inhibition", 70, 30)
+                ch_e "Yes, that would be the usual reaction."
+                $ EmmaX.change_stat("love", 40, 10)
+            "Huh, not what I was expecting. . .":
+                $ EmmaX.change_stat("love", 90, -30)
+                $ EmmaX.change_stat("obedience", 60, 25)
+                $ EmmaX.change_stat("inhibition", 70, -15)
+                $ EmmaX.change_face("_confused",2)
+                ch_e "What?"
+                menu:
+                    "They're even better than I imagined!":
+                        $ EmmaX.change_stat("love", 90, 20)
+                        $ EmmaX.change_stat("obedience", 60, -20)
+                        $ EmmaX.change_stat("inhibition", 70, 20)
+                        $ EmmaX.change_face("_perplexed",1)
+                        ch_e "Well, I suppose you managed to salvage that one. . ."
+                    "I, um, no, they're great!":
+                        $ EmmaX.change_face("_angry",2, Mouth="_smile")
+                        $ EmmaX.change_stat("inhibition", 70, 10)
+                        ch_e "Of couse they are!"
+                    "[RogueX.name]'s were tighter, that's all." if RogueX.SeenChest:
+                        $ TempLine = RogueX
+                    "[KittyX.name]'s were tighter, that's all." if KittyX.SeenChest:
+                        $ TempLine = KittyX
+                    "[LauraX.name]'s were tighter, that's all." if LauraX.SeenChest:
+                        $ TempLine = LauraX
+                    "[JeanX.name]'s were tighter, that's all." if JeanX.SeenChest:
+                        $ TempLine = JeanX
+                    "[StormX.name]'s were larger, that's all." if StormX.SeenChest:
+                        $ TempLine = StormX
+
+                if TempLine:
+                    $ EmmaX.change_face("_angry")
+                    $ EmmaX.mouth = "_surprised"
+                    $ EmmaX.change_stat("love", 90, -10)
+                    $ EmmaX.change_stat("obedience", 80, 30)
+                    $ EmmaX.change_stat("inhibition", 70, -25)
+                    ch_e ". . ."
+                    $ EmmaX.mouth = "_sad"
+                    if TempLine == KittyX:
+                        if EmmaX.LikeKitty >= 800:
+                            $ EmmaX.change_face("_sly",2,Eyes="_side")
+                            $ EmmaX.change_stat("obedience", 80, 5)
+                            ch_e "They are rather . . . pert. . ."
+                            $ EmmaX.LikeKitty += 20
+                        elif EmmaX.LikeKitty >= 700:
+                            $ EmmaX.eyes = "_side"
+                            $ EmmaX.change_stat("obedience", 80, 5)
+                            ch_e "Well, for a child. . ."
+                        else:
+                            $ EmmaX.LikeKitty -= 50
+                            $ TempLine = "bad"
+
+                    elif TempLine == StormX:
+                        if EmmaX.GirlLikeCheck(TempLine) >= 800:
+                            $ EmmaX.change_face("_sly",2,Eyes="_side")
+                            $ EmmaX.change_stat("obedience", 80, 5)
+                            ch_e "They are lovely, but. . ."
+                            $ EmmaX.GirlLikeUp(TempLine,20)
+                        elif EmmaX.GirlLikeCheck(TempLine) >= 700:
+                            $ EmmaX.eyes = "_side"
+                            $ EmmaX.change_stat("obedience", 80, 5)
+                            ch_e "I don't know about that. . ."
+                        else:
+                            $ EmmaX.GirlLikeUp(TempLine,-50)
+                            $ TempLine = "bad"
+                    elif TempLine:
+                        if EmmaX.GirlLikeCheck(TempLine) >= 800:
+                            $ EmmaX.change_face("_sly",2,Eyes="_side")
+                            $ EmmaX.change_stat("obedience", 80, 5)
+                            ch_e "They are rather . . . ripe. . ."
+                            $ EmmaX.GirlLikeUp(TempLine,20)
+                        elif EmmaX.GirlLikeCheck(TempLine) >= 700:
+                            $ EmmaX.eyes = "_side"
+                            $ EmmaX.change_stat("obedience", 80, 5)
+                            ch_e "I suppose if you prefer that. . ."
+                        else:
+                            $ EmmaX.GirlLikeUp(TempLine,-50)
+                            $ TempLine = "bad"
+
+
+                    if TempLine == "bad":
+                        $ EmmaX.change_stat("love", 90, -20)
+                        ch_e "I think you've seen enough for now, [EmmaX.player_petname]."
+                        $ EmmaX.change_outfit()
+                        $ EmmaX.recent_history.append("no_topless")
+                        $ EmmaX.daily_history.append("no_topless")
+                        $ EmmaX.recent_history.append("_angry")
+                        $ EmmaX.daily_history.append("_angry")
+    else:
+
+
+        $ EmmaX.add_word(1,0, "", "", "topless")
+        if approval_check(EmmaX, 800) and not EmmaX.Forced:
+            $ EmmaX.change_stat("inhibition", 70, 5)
+            $ EmmaX.change_stat("obedience", 70, 5)
+        else:
+            $ EmmaX.change_stat("love", 90, -10)
+            $ EmmaX.change_stat("inhibition", 70, -5)
+            $ EmmaX.change_face("_angry")
+            $ EmmaX.change_stat("obedience", 70, 15)
+    return
+
+
+label Emma_First_Bottomless(Silent=0):
+    if EmmaX.PantiesNum() > 1 or EmmaX.PantsNum() > 2 or EmmaX.HoseNum() > 9:
+
+        return
+    if EmmaX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ EmmaX.recent_history.append("bottomless")
+    $ EmmaX.daily_history.append("bottomless")
+    $ EmmaX.drain_word("no_bottomless")
+    $ EmmaX.SeenPussy += 1
+    if EmmaX.SeenPussy > 1:
+        return
+
+
+    $ EmmaX.change_stat("inhibition", 80, 30)
+    $ EmmaX.change_stat("obedience", 70, 10)
+    if not Silent:
+        $ EmmaX.change_face("_sly")
+        "You find yourself staring at [EmmaX.name]'s bare pussy."
+        menu Emma_First_BMenu:
+            extend ""
+            "Niiice. . .":
+                $ EmmaX.change_stat("love", 90, 20)
+                $ EmmaX.change_stat("inhibition", 60, 25)
+                $ EmmaX.change_face("_smile")
+                ch_e "I'm aware. . . "
+                $ EmmaX.change_stat("love", 40, 20)
+            "I see you keep it smooth down there." if not EmmaX.pubes:
+                $ EmmaX.change_face("_confused",1)
+                ch_e "Yes?"
+                if approval_check(EmmaX, 700, "LO"):
+                    $ EmmaX.change_face("_bemused")
+                    menu:
+                        ch_e "Do you prefer more fuzz?"
+                        "Yes":
+                            if approval_check(EmmaX, 900, "LO"):
+                                $ EmmaX.change_stat("obedience", 50, 30)
+                                $ EmmaX.change_stat("inhibition", 60, 25)
+                                ch_e "I suppose I could let it go. . ."
+                                $ EmmaX.Todo.append("pubes")
+                            else:
+                                $ EmmaX.change_face("_normal")
+                                ch_e "Well that's a pity."
+                        "Up to you, I guess.":
+                            $ EmmaX.change_stat("love", 80, 10)
+                            ch_e "I'm glad you agree."
+                        "No, leave it that way.":
+                            if approval_check(EmmaX, 900, "LO"):
+                                $ EmmaX.change_face("_sly")
+                                $ EmmaX.change_stat("love", 80, 10)
+                            else:
+                                $ EmmaX.change_face("_angry",Mouth="_normal")
+                            $ EmmaX.change_stat("inhibition", 60, 25)
+                            ch_e "I'm glad I have your. . . permission."
+                            $ EmmaX.brows = "_normal"
+                else:
+                    $ EmmaX.change_face("_angry",1)
+                    $ EmmaX.change_stat("love", 40, -20)
+                    $ EmmaX.change_stat("obedience", 50, 25)
+                    $ EmmaX.change_stat("inhibition", 60, -5)
+                    ch_e "Yes, I'm afraid I don't like an unkept garden."
+            "Not bad for someone your age.":
+                $ EmmaX.change_stat("love", 90, -30)
+                $ EmmaX.change_stat("obedience", 50, 25)
+                $ EmmaX.change_stat("inhibition", 70, -30)
+                $ EmmaX.change_face("_angry",2)
+                if not EmmaX.Forced and not approval_check(EmmaX, 900, "LO"):
+                    $ EmmaX.recent_history.append("_angry")
+                    $ EmmaX.daily_history.append("_angry")
+                    $ EmmaX.change_stat("obedience", 70, 25)
+                ch_e "You will regret that remark. . ."
+    else:
+
+        $ EmmaX.add_word(1,0, "", "", "bottomless")
+        if approval_check(EmmaX, 800) and not EmmaX.Forced:
+            $ EmmaX.change_stat("inhibition", 60, 5)
+            $ EmmaX.change_stat("obedience", 70, 10)
+        else:
+            $ EmmaX.change_stat("love", 90, -10)
+            $ EmmaX.change_stat("inhibition", 70, -5)
+            $ EmmaX.change_face("_angry")
+            $ EmmaX.change_stat("obedience", 70, 15)
+    return
+
+
+label Laura_First_Topless(Silent=0, TempLine=0):
+    if LauraX.ChestNum() > 1 or LauraX.OverNum() > 2:
+
+        return
+    if LauraX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ LauraX.recent_history.append("topless")
+    $ LauraX.daily_history.append("topless")
+    $ LauraX.drain_word("no_topless")
+    $ LauraX.SeenChest += 1
+    if LauraX.SeenChest > 1:
+        return
+
+    $ LauraX.change_stat("inhibition", 70, 15)
+    if not Silent:
+        $ LauraX.change_face("_sly")
+        "You get your first look at Laura's bare chest."
+        ch_l "So? What are you looking at?"
+        $ LauraX.blushing = "_blush1"
+        menu Laura_First_TMenu:
+            extend ""
+            "Your tits? They look great.":
+                $ LauraX.change_stat("love", 90, 20)
+                $ LauraX.change_stat("inhibition", 70, 20)
+                $ LauraX.change_face("_sexy",1,Eyes="_down")
+                ch_l "Huh. I mean I guess so. . ."
+                $ LauraX.change_face("_smile", 0)
+                $ LauraX.change_stat("love", 40, 20)
+            ". . . [[stunned]":
+                $ LauraX.change_stat("love", 90, 10)
+                $ LauraX.change_stat("inhibition", 70, 10)
+                ch_l "Cat got your tongue?"
+                $ LauraX.change_stat("love", 40, 10)
+            "Huh, not what I was expecting. . .":
+                $ LauraX.change_stat("love", 90, -30)
+                $ LauraX.change_stat("obedience", 60, 25)
+                $ LauraX.change_stat("inhibition", 70, -15)
+                $ LauraX.change_face("_confused",2)
+                ch_l "Huh?"
+                menu:
+                    "They're really perky!":
+                        $ LauraX.change_stat("love", 90, 20)
+                        $ LauraX.change_stat("obedience", 60, -20)
+                        $ LauraX.change_stat("inhibition", 70, 20)
+                        $ LauraX.change_face("_perplexed",1)
+                        ch_l "Oh. Right. . ."
+                    "I, um, no, they're great!":
+                        $ LauraX.change_face("_angry",2, Mouth="_smile")
+                        $ LauraX.change_stat("inhibition", 70, 10)
+                        ch_l "Why wouldn't they be?"
+                    "[KittyX.name]'s were tighter, that's all." if KittyX.SeenChest:
+                        $ TempLine = KittyX
+                    "[EmmaX.name]'s were a lot bigger, that's all." if EmmaX.SeenChest:
+                        $ TempLine = EmmaX
+                    "[StormX.name]'s were a lot bigger, that's all." if StormX.SeenChest:
+                        $ TempLine = StormX
+
+                if TempLine:
+                    $ LauraX.change_face("_angry")
+                    $ LauraX.mouth = "_surprised"
+                    $ LauraX.change_stat("love", 90, -10)
+                    $ LauraX.change_stat("obedience", 80, 30)
+                    $ LauraX.change_stat("inhibition", 70, -25)
+                    ch_l ". . ."
+                    $ LauraX.mouth = "_sad"
+                    if TempLine in (EmmaX,StormX):
+                        if LauraX.GirlLikeCheck(TempLine) >= 800:
+                            $ LauraX.change_face("_sly",2,Eyes="_side")
+                            $ LauraX.change_stat("obedience", 80, 5)
+                            ch_l "They are kinda huge. . ."
+                            $ LauraX.GirlLikeUp(TempLine,20)
+                        elif LauraX.GirlLikeCheck(TempLine) >= 700:
+                            $ LauraX.eyes = "_side"
+                            $ LauraX.change_stat("obedience", 80, 5)
+                            ch_l "I guess that's true. . ."
+                        else:
+                            $ LauraX.GirlLikeUp(TempLine,-50)
+                            $ TempLine = "bad"
+
+                    elif TempLine == KittyX:
+                        if LauraX.LikeKitty >= 800:
+                            $ LauraX.change_face("_sly",2,Eyes="_side")
+                            $ LauraX.change_stat("obedience", 80, 5)
+                            ch_l "She is very. . . streamlined. . ."
+                            $ LauraX.LikeKitty += 20
+                        elif LauraX.LikeKitty >= 700:
+                            $ LauraX.eyes = "_side"
+                            $ LauraX.change_stat("obedience", 80, 5)
+                            ch_l "they are kinda. . . pointy. . ."
+                        else:
+                            $ LauraX.LikeKitty -= 50
+                            $ TempLine = "bad"
+
+
+                    if TempLine == "bad":
+                        $ LauraX.change_stat("love", 90, -20)
+                        ch_l "Still kinda rude though."
+                        $ LauraX.change_outfit()
+                        $ LauraX.recent_history.append("no_topless")
+                        $ LauraX.daily_history.append("no_topless")
+                        $ LauraX.recent_history.append("_angry")
+                        $ LauraX.daily_history.append("_angry")
+    else:
+
+
+        $ LauraX.add_word(1,0, "", "", "topless")
+        if approval_check(LauraX, 800) and not LauraX.Forced:
+            $ LauraX.change_stat("inhibition", 70, 5)
+            $ LauraX.change_stat("obedience", 70, 10)
+        else:
+            $ LauraX.change_stat("love", 90, -5)
+            $ LauraX.change_stat("inhibition", 70, -5)
+            $ LauraX.change_face("_angry")
+            $ LauraX.change_stat("obedience", 70, 10)
+    return
+
+
+label Laura_First_Bottomless(Silent=0):
+    if LauraX.PantiesNum() > 1 or LauraX.PantsNum() > 2 or LauraX.HoseNum() > 9:
+
+        return
+    if LauraX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ LauraX.recent_history.append("bottomless")
+    $ LauraX.daily_history.append("bottomless")
+    $ LauraX.drain_word("no_bottomless")
+    $ LauraX.SeenPussy += 1
+    if LauraX.SeenPussy > 1:
+        return
+
+
+    $ LauraX.change_stat("inhibition", 80, 30)
+    $ LauraX.change_stat("obedience", 70, 10)
+    if not Silent:
+        $ LauraX.change_face("_sly")
+        if LauraX.pubes:
+            "You find yourself staring at [LauraX.name]'s furry pussy."
+        else:
+            "You find yourself staring at [LauraX.name]'s bare pussy."
+        menu Laura_First_BMenu:
+            extend ""
+            "Niiice. . .":
+                $ LauraX.change_stat("love", 90, 20)
+                $ LauraX.change_stat("inhibition", 60, 25)
+                $ LauraX.change_face("_smile")
+                ch_l "You think?"
+                ch_l "Yeah, I like it too. . . "
+                $ LauraX.change_stat("love", 40, 20)
+            "I see you keep it natural down there." if LauraX.pubes:
+                $ LauraX.change_face("_confused",1)
+                ch_l "Well. . . yeah."
+                if approval_check(LauraX, 700, "LO"):
+                    $ LauraX.change_face("_bemused")
+                    menu:
+                        ch_l "What, am I supposed to shave it?"
+                        "Yes":
+                            if approval_check(LauraX, 900, "LO"):
+                                $ LauraX.change_stat("obedience", 50, 30)
+                                $ LauraX.change_stat("inhibition", 60, 25)
+                                ch_l "I guess I could. . ."
+                                $ LauraX.Todo.append("pubes")
+                            else:
+                                $ LauraX.change_face("_normal")
+                                ch_l "Seems like a waste of time."
+                                ch_l "Do you know how fast my hair grows?"
+                        "Up to you, I guess.":
+                            $ LauraX.change_stat("love", 80, 10)
+                            ch_l "Yeah, I mean, shaving would be a lot of work."
+                        "No, leave it that way.":
+                            if approval_check(LauraX, 900, "LO"):
+                                $ LauraX.change_face("_sly")
+                                $ LauraX.change_stat("love", 80, 10)
+                            else:
+                                $ LauraX.change_face("_angry",Mouth="_normal")
+                            $ LauraX.change_stat("inhibition", 60, 25)
+                            ch_l "Right."
+                            $ LauraX.brows = "_normal"
+                else:
+                    $ LauraX.change_face("_angry",1)
+                    $ LauraX.change_stat("love", 40, -20)
+                    $ LauraX.change_stat("obedience", 50, 25)
+                    $ LauraX.change_stat("inhibition", 60, -5)
+                    ch_l "I mean, what else would I do?"
+            "What a mess.":
+                $ LauraX.change_stat("love", 90, -30)
+                $ LauraX.change_stat("obedience", 50, 25)
+                $ LauraX.change_stat("inhibition", 70, -30)
+                $ LauraX.change_face("_angry",2)
+                if not LauraX.Forced and not approval_check(LauraX, 900, "LO"):
+                    $ LauraX.recent_history.append("_angry")
+                    $ LauraX.daily_history.append("_angry")
+                    $ LauraX.change_stat("obedience", 70, 25)
+                ch_l "I'll make you a mess. . ."
+    else:
+        $ LauraX.add_word(1,0, "", "", "bottomless")
+        if approval_check(LauraX, 800) and not LauraX.Forced:
+            $ LauraX.change_stat("inhibition", 60, 5)
+            $ LauraX.change_stat("obedience", 70, 10)
+        else:
+            $ LauraX.change_stat("love", 90, -5)
+            $ LauraX.change_stat("inhibition", 70, -5)
+            $ LauraX.change_face("_angry")
+            $ LauraX.change_stat("obedience", 70, 15)
+    return
+
+
+
+label Jean_First_Topless(Silent=0, TempLine=0):
+    if (JeanX.ChestNum() > 1 or JeanX.OverNum() > 2) and not TempLine:
+
+
+        return
+    if JeanX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ JeanX.recent_history.append("topless")
+    $ JeanX.daily_history.append("topless")
+    $ JeanX.drain_word("no_topless")
+    $ JeanX.SeenChest += 1
+    if JeanX.SeenChest > 1:
+        return
+
+    $ JeanX.change_stat("inhibition", 70, 15)
+    if not Silent:
+        $ JeanX.change_face("_sly")
+        "You get your first look at Jean's bare chest."
+        ch_j "So, pretty spectacular, right?"
+        $ JeanX.blushing = "_blush1"
+        menu Jean_First_TMenu:
+            extend ""
+            "Yeah, they look amazing.":
+                $ JeanX.change_stat("love", 90, 10)
+                $ JeanX.change_stat("inhibition", 200, 20)
+                $ JeanX.change_face("_sexy",1,Eyes="_down")
+                ch_j "Yeah, they are pretty tight. . ."
+                $ JeanX.change_face("_smile", 0)
+                $ JeanX.change_stat("obedience", 40, 20)
+            ". . . [[stunned]":
+                $ JeanX.change_stat("love", 90, 20)
+                $ JeanX.change_stat("inhibition", 200, 10)
+                ch_j "Stunning, I know."
+                $ JeanX.change_stat("obedience", 40, 10)
+            "Huh, not what I was expecting. . .":
+                $ JeanX.change_stat("love", 90, 10)
+                $ JeanX.change_stat("obedience", 40, 20)
+                $ JeanX.change_stat("inhibition", 200, 20)
+                $ JeanX.change_face("_smile", 0)
+                ch_j "Exactl-{w=0.3}{nw}"
+                $ JeanX.change_stat("love", 90, -40)
+                $ JeanX.change_stat("obedience", 60, 10)
+                $ JeanX.change_stat("inhibition", 200, -15)
+                $ JeanX.change_face("_confused",2)
+                ch_j "Exactl- wait, what?"
+                $ TempLine = 0
+                menu:
+                    "They're really perky!":
+                        $ JeanX.change_stat("love", 90, 10)
+                        $ JeanX.change_stat("obedience", 60, 10)
+                        $ JeanX.change_stat("inhibition", 200, 20)
+                        $ JeanX.change_face("_perplexed",1)
+                        ch_j "Oh. Of course. . ."
+                    "I, um, no, they're great!":
+                        $ JeanX.change_face("_angry",2, Mouth="_smile")
+                        $ JeanX.change_stat("obedience", 80, 20)
+                        ch_j "Of course they are!"
+                    "[RogueX.name]'s were nicer, that's all." if RogueX.SeenChest:
+                        $ TempLine = RogueX
+                    "[KittyX.name]'s were tighter, that's all." if KittyX.SeenChest:
+                        $ TempLine = KittyX
+                    "[EmmaX.name]'s were a lot bigger, that's all." if EmmaX.SeenChest:
+                        $ TempLine = EmmaX
+                    "[LauraX.name]'s were nicer, that's all." if LauraX.SeenChest:
+                        $ TempLine = LauraX
+                    "[StormX.name]'s were a lot bigger, that's all." if StormX.SeenChest:
+                        $ TempLine = StormX
+
+                if TempLine:
+                    $ JeanX.change_face("_angry")
+                    $ JeanX.mouth = "_surprised"
+                    $ JeanX.change_stat("love", 50, -10)
+                    $ JeanX.change_stat("love", 90, -10)
+                    $ JeanX.change_stat("obedience", 50, 10)
+                    $ JeanX.change_stat("obedience", 80, 30)
+                    $ JeanX.change_stat("inhibition", 200, -15)
+                    ch_j ". . ."
+                    $ JeanX.mouth = "_sad"
+                    if TempLine in (EmmaX,StormX):
+                        if JeanX.GirlLikeCheck(TempLine) >= 700:
+                            $ JeanX.change_face("_sly",2,Eyes="_side")
+                            ch_j "Well, they are. . . heavy. . ."
+                            $ JeanX.GirlLikeUp(TempLine,20)
+                        else:
+                            $ JeanX.eyes = "_side"
+                            ch_j "If you have a thing for udders. . ."
+                            $ JeanX.LikeEmma -= 50
+                            $ JeanX.GirlLikeUp(TempLine,-50)
+                            $ TempLine = "bad"
+
+                    elif TempLine == KittyX:
+                        if JeanX.LikeKitty >= 700:
+                            $ JeanX.change_face("_sly",2,Eyes="_side")
+                            ch_j "She is very. . . cute. . ."
+                            $ JeanX.LikeKitty += 20
+                        else:
+                            $ JeanX.eyes = "_side"
+                            ch_j "If you have a thing for surf boards. . ."
+                            $ JeanX.LikeKitty -= 50
+                            $ TempLine = "bad"
+                    else:
+                        if JeanX.GirlLikeCheck(TempLine) >= 700:
+                            $ JeanX.change_face("_sly",2,Eyes="_side")
+                            ch_j "She is very. . . petite. . ."
+                            $ JeanX.GirlLikeUp(TempLine,20)
+                        else:
+                            $ JeanX.eyes = "_side"
+                            ch_j "they are kinda. . . pointy. . ."
+                            $ JeanX.GirlLikeUp(TempLine,-50)
+                            $ TempLine = "bad"
+
+
+                    if TempLine == "bad":
+                        $ JeanX.change_stat("love", 90, -20)
+                        ch_j "Still, inappropriate on your part!"
+                        $ JeanX.change_outfit()
+                        $ JeanX.recent_history.append("no_topless")
+                        $ JeanX.daily_history.append("no_topless")
+                        $ JeanX.recent_history.append("_angry")
+                        $ JeanX.daily_history.append("_angry")
+    else:
+
+
+        if approval_check(JeanX, 800) and not JeanX.Forced:
+            $ JeanX.change_stat("love", 70, 10)
+            $ JeanX.change_stat("obedience", 70, 25)
+            $ JeanX.change_stat("inhibition", 70, 15)
+        else:
+            $ JeanX.change_stat("love", 90, -40)
+            $ JeanX.change_stat("inhibition", 200, -20)
+            $ JeanX.change_face("_angry")
+            $ JeanX.change_stat("obedience", 70, 40)
+    return
+
+
+label Jean_First_Bottomless(Silent=0):
+    if JeanX.PantiesNum() > 1 or JeanX.PantsNum() > 2 or JeanX.HoseNum() > 9:
+
+        return
+    if JeanX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ JeanX.recent_history.append("bottomless")
+    $ JeanX.daily_history.append("bottomless")
+    $ JeanX.drain_word("no_bottomless")
+    $ JeanX.SeenPussy += 1
+    if JeanX.SeenPussy > 1:
+        return
+
+    $ JeanX.change_stat("inhibition", 200, 30)
+    $ JeanX.change_stat("obedience", 90, 10)
+    if not Silent:
+        $ JeanX.change_face("_sly")
+        if JeanX.pubes:
+            "You find yourself staring at [JeanX.name]'s fuzzy pussy."
+        else:
+            "You find yourself staring at [JeanX.name]'s bare pussy."
+        menu Jean_First_BMenu:
+            extend ""
+            "Niiice. . .":
+                $ JeanX.change_stat("love", 90, 20)
+                $ JeanX.change_stat("inhibition", 200, 25)
+                $ JeanX.change_face("_smile")
+                ch_j "Right?"
+                $ JeanX.change_stat("love", 40, 20)
+            "I see you got a fire crotch down there." if JeanX.pubes:
+                $ JeanX.change_face("_confused",1)
+                ch_j "Well. . . yeah."
+                if approval_check(JeanX, 700, "LO"):
+                    $ JeanX.change_face("_bemused")
+                    menu:
+                        ch_j "Do you prefer it smooth?"
+                        "Yes":
+                            if approval_check(JeanX, 900, "LO"):
+                                $ JeanX.change_stat("obedience", 90, 30)
+                                $ JeanX.change_stat("inhibition", 200, 25)
+                                ch_j "Hmm, I guess. . ."
+                                $ JeanX.Todo.append("pubes")
+                            else:
+                                $ JeanX.change_face("_normal")
+                                ch_j "Not worth the hassle."
+                        "Up to you, I guess.":
+                            $ JeanX.change_stat("love", 80, 10)
+                            ch_j "Of course it is."
+                        "No, leave it that way.":
+                            if approval_check(JeanX, 900, "LO"):
+                                $ JeanX.change_face("_sly")
+                                $ JeanX.change_stat("love", 80, 10)
+                            else:
+                                $ JeanX.change_face("_angry",Mouth="_normal")
+                            $ JeanX.change_stat("inhibition", 200, 25)
+                            ch_j "Of course."
+                            $ JeanX.brows = "_normal"
+                else:
+                    $ JeanX.change_face("_angry",1)
+                    $ JeanX.change_stat("love", 40, -20)
+                    $ JeanX.change_stat("obedience", 90, 25)
+                    $ JeanX.change_stat("inhibition", 200, -5)
+                    ch_j "I didn't really feel like waxing it."
+            "What a mess." if JeanX.pubes:
+                $ JeanX.change_stat("love", 90, -30)
+                $ JeanX.change_stat("obedience", 90, 25)
+                $ JeanX.change_stat("inhibition", 200, -30)
+                $ JeanX.change_face("_angry",2)
+                if not JeanX.Forced and not approval_check(JeanX, 900, "LO"):
+                    $ JeanX.recent_history.append("_angry")
+                    $ JeanX.daily_history.append("_angry")
+                    $ JeanX.change_stat("obedience", 90, 25)
+                ch_j "Oh, so it's not baby-smooth like [EmmaX.name]'s?"
+            "Eh, I've seen better" if not JeanX.pubes:
+                $ JeanX.change_stat("love", 90, -30)
+                $ JeanX.change_stat("obedience", 90, 25)
+                $ JeanX.change_stat("inhibition", 200, -30)
+                $ JeanX.change_face("_angry",2)
+                if not JeanX.Forced and not approval_check(JeanX, 900, "LO"):
+                    $ JeanX.recent_history.append("_angry")
+                    $ JeanX.daily_history.append("_angry")
+                    $ JeanX.change_stat("obedience", 90, 25)
+                ch_j "Oh, so it's not saggy like [EmmaX.name]'s?"
+    else:
+        $ JeanX.add_word(1,0, "", "", "bottomless")
+        if approval_check(JeanX, 800) and not JeanX.Forced:
+            $ JeanX.change_stat("inhibition", 60, 5)
+            $ JeanX.change_stat("obedience", 90, 10)
+        else:
+            $ JeanX.change_stat("love", 90, -5)
+            $ JeanX.change_stat("inhibition", 200, -5)
+            $ JeanX.change_face("_angry")
+            $ JeanX.change_stat("obedience", 90, 15)
+    return
+
+
+
+label Storm_First_Topless(Silent=0, TempLine=0):
+
+    if StormX.ChestNum() > 1 or StormX.OverNum() > 2:
+
+        return
+    if StormX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ StormX.recent_history.append("topless")
+    $ StormX.daily_history.append("topless")
+    $ StormX.drain_word("no_topless")
+    $ StormX.SeenChest += 1
+    return
+
+
+label Storm_First_Bottomless(Silent=0):
+    if StormX.PantiesNum() > 1 or StormX.PantsNum() > 2 or StormX.HoseNum() > 9:
+
+        return
+    if StormX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ StormX.recent_history.append("bottomless")
+    $ StormX.daily_history.append("bottomless")
+    $ StormX.drain_word("no_bottomless")
+    $ StormX.SeenPussy += 1
+    return
+
+
+
+label Jubes_First_Topless(Silent=0, TempLine=0):
+    if JubesX.ChestNum() > 1 or JubesX.OverNum() > 2:
+
+        return
+    if JubesX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ JubesX.recent_history.append("topless")
+    $ JubesX.daily_history.append("topless")
+    $ JubesX.drain_word("no_topless")
+    $ JubesX.SeenChest += 1
+    if JubesX.SeenChest > 1:
+        return
+
+    $ JubesX.change_stat("inhibition", 70, 15)
+    if not Silent:
+        $ JubesX.change_face("_sly")
+        "You get your first look at Jubes's bare chest."
+        ch_v "So. . . um. . . like what you see?"
+        $ JubesX.blushing = "_blush1"
+        menu Jubes_First_TMenu:
+            extend ""
+            "Your tits? They look great.":
+                $ JubesX.change_stat("love", 90, 20)
+                $ JubesX.change_stat("inhibition", 70, 20)
+                $ JubesX.change_face("_smile",2)
+                pause 0.5
+                $ JubesX.change_face("_sexy",1,Eyes="_down")
+                ch_v "Ah! Um. . . yeah, I guess. . ."
+                $ JubesX.change_face("_smile")
+                $ JubesX.change_stat("love", 40, 20)
+            ". . . [[stunned]":
+                $ JubesX.change_stat("love", 90, 10)
+                $ JubesX.change_stat("inhibition", 70, 10)
+                ch_v "Oh, that's a \"hit.\""
+                $ JubesX.change_stat("love", 40, 10)
+            "Huh, not what I was expecting. . .":
+                $ JubesX.change_stat("love", 90, -30)
+                $ JubesX.change_stat("obedience", 60, 25)
+                $ JubesX.change_stat("inhibition", 70, -15)
+                $ JubesX.change_face("_confused",2)
+                ch_v "Wha?"
+                menu:
+                    "They're really perky!":
+                        $ JubesX.change_stat("love", 90, 20)
+                        $ JubesX.change_stat("obedience", 60, -20)
+                        $ JubesX.change_stat("inhibition", 70, 20)
+                        $ JubesX.change_face("_perplexed",1)
+                        ch_v "Oh. Right. . ."
+                    "I, um, no, they're great!":
+                        $ JubesX.change_face("_angry",2, Mouth="_smile")
+                        $ JubesX.change_stat("inhibition", 70, 10)
+                        ch_v ". . ."
+                        ch_v "I -know- that, that's why I was confused?"
+                    "[KittyX.name]'s were tighter, that's all." if KittyX.SeenChest:
+                        $ TempLine = KittyX
+                    "[EmmaX.name]'s were a lot bigger, that's all." if EmmaX.SeenChest:
+                        $ TempLine = EmmaX
+                    "[StormX.name]'s were a lot bigger, that's all." if StormX.SeenChest:
+                        $ TempLine = StormX
+
+                if TempLine:
+                    $ JubesX.change_face("_angry")
+                    $ JubesX.mouth = "_surprised"
+                    $ JubesX.change_stat("love", 90, -10)
+                    $ JubesX.change_stat("obedience", 80, 30)
+                    $ JubesX.change_stat("inhibition", 70, -25)
+                    ch_v ". . ."
+                    $ JubesX.mouth = "_sad"
+                    if TempLine in (EmmaX,StormX):
+                        if JubesX.GirlLikeCheck(TempLine) >= 800:
+                            $ JubesX.change_face("_sly",2,Eyes="_side")
+                            $ JubesX.change_stat("obedience", 80, 5)
+                            ch_v "Well they are really ginormous. . ."
+                            $ JubesX.GirlLikeUp(TempLine,20)
+                        elif JubesX.GirlLikeCheck(TempLine) >= 700:
+                            $ JubesX.eyes = "_side"
+                            $ JubesX.change_stat("obedience", 80, 5)
+                            ch_v "Oh. Well I can't compete there. . ."
+                        else:
+                            $ JubesX.GirlLikeUp(TempLine,-50)
+                            $ TempLine = "bad"
+
+                    elif TempLine == KittyX:
+                        if JubesX.LikeKitty >= 800:
+                            $ JubesX.change_face("_sly",2,Eyes="_side")
+                            $ JubesX.change_stat("obedience", 80, 5)
+                            ch_v ". . . I guess they are really cute. . ."
+                            $ JubesX.LikeKitty += 20
+                        elif JubesX.LikeKitty >= 700:
+                            $ JubesX.eyes = "_side"
+                            $ JubesX.change_stat("obedience", 80, 5)
+                            ch_v "Ok, into that, uh? . ."
+                        else:
+                            $ JubesX.LikeKitty -= 50
+                            $ TempLine = "bad"
+
+
+                    if TempLine == "bad":
+                        $ JubesX.change_stat("love", 90, -20)
+                        ch_v "Still, you don't just -say- something like that!"
+                        $ JubesX.change_outfit()
+                        $ JubesX.recent_history.append("no_topless")
+                        $ JubesX.daily_history.append("no_topless")
+                        $ JubesX.recent_history.append("_angry")
+                        $ JubesX.daily_history.append("_angry")
+    else:
+
+
+        $ JubesX.add_word(1,0, "", "", "topless")
+        if approval_check(JubesX, 800) and not JubesX.Forced:
+            $ JubesX.change_stat("inhibition", 70, 5)
+            $ JubesX.change_stat("obedience", 70, 10)
+        else:
+            $ JubesX.change_stat("love", 90, -5)
+            $ JubesX.change_stat("inhibition", 70, -5)
+            $ JubesX.change_face("_angry")
+            $ JubesX.change_stat("obedience", 70, 10)
+    return
+
+
+label Jubes_First_Bottomless(Silent=0):
+    if JubesX.PantiesNum() > 1 or JubesX.PantsNum() > 2 or JubesX.HoseNum() > 9:
+
+        return
+    if JubesX.location != bg_current and "phonesex" not in Player.recent_history:
+        return
+    $ JubesX.recent_history.append("bottomless")
+    $ JubesX.daily_history.append("bottomless")
+    $ JubesX.drain_word("no_bottomless")
+    $ JubesX.SeenPussy += 1
+    if JubesX.SeenPussy > 1:
+        return
+
+
+    $ JubesX.change_stat("inhibition", 80, 30)
+    $ JubesX.change_stat("obedience", 70, 10)
+    if not Silent:
+        $ JubesX.change_face("_sly")
+        if JubesX.pubes:
+            "You find yourself staring at [JubesX.name]'s furry pussy."
+        else:
+            "You find yourself staring at [JubesX.name]'s bare pussy."
+        menu Jubes_First_BMenu:
+            extend ""
+            "Niiice. . .":
+                $ JubesX.change_stat("love", 90, 20)
+                $ JubesX.change_stat("inhibition", 60, 25)
+                $ JubesX.change_face("_surprised",2)
+                ch_v "!!"
+                $ JubesX.change_face("_smile",1)
+                ch_v "Oh, um, yeah, I. . . also. . . "
+                $ JubesX.change_stat("love", 40, 20)
+            "I see you keep it natural down there." if JubesX.pubes:
+                $ JubesX.change_face("_confused",2)
+                ch_v "Well. . . yeah."
+                if approval_check(JubesX, 700, "LO"):
+                    $ JubesX.change_face("_bemused",1)
+                    menu:
+                        ch_v "Did you. . . prefer it shaved?"
+                        "Yes":
+                            if approval_check(JubesX, 900, "LO"):
+                                $ JubesX.change_stat("obedience", 50, 30)
+                                $ JubesX.change_stat("inhibition", 60, 25)
+                                ch_v "I guess I could. . ."
+                                $ JubesX.Todo.append("pubes")
+                            else:
+                                $ JubesX.change_face("_normal")
+                                ch_v "I dunno, seems like a lot of hassle."
+                        "Up to you, I guess.":
+                            $ JubesX.change_stat("love", 80, 10)
+                            ch_v "Well, yeah, right? Of course."
+                            if approval_check(JubesX, 900, "LO"):
+                                $ JubesX.change_stat("inhibition", 60, 10)
+                                $ JubesX.Todo.append("pubes")
+                        "No, leave it that way.":
+                            if approval_check(JubesX, 900, "LO"):
+                                $ JubesX.change_face("_sly")
+                                $ JubesX.change_stat("love", 80, 10)
+                            else:
+                                $ JubesX.change_face("_angry",Mouth="_normal")
+                            $ JubesX.change_stat("inhibition", 60, 25)
+                            ch_v "Oh, I guess that's your call?"
+                            $ JubesX.brows = "_normal"
+                else:
+                    $ JubesX.change_face("_angry",1)
+                    $ JubesX.change_stat("love", 40, -20)
+                    $ JubesX.change_stat("obedience", 50, 25)
+                    $ JubesX.change_stat("inhibition", 60, -5)
+                    ch_v "Well, of course!"
+            "What a mess.":
+                $ JubesX.change_stat("love", 90, -30)
+                $ JubesX.change_stat("obedience", 50, 25)
+                $ JubesX.change_stat("inhibition", 70, -30)
+                $ JubesX.change_face("_angry",2)
+                if not JubesX.Forced and not approval_check(JubesX, 900, "LO"):
+                    $ JubesX.recent_history.append("_angry")
+                    $ JubesX.daily_history.append("_angry")
+                    $ JubesX.change_stat("obedience", 70, 25)
+                ch_v "Oh, them's fighting words. . ."
+    else:
+        $ JubesX.add_word(1,0, "", "", "bottomless")
+        if approval_check(JubesX, 800) and not JubesX.Forced:
+            $ JubesX.change_stat("inhibition", 60, 5)
+            $ JubesX.change_stat("obedience", 70, 10)
+        else:
+            $ JubesX.change_stat("love", 90, -5)
+            $ JubesX.change_stat("inhibition", 70, -5)
+            $ JubesX.change_face("_angry")
+            $ JubesX.change_stat("obedience", 70, 15)
+    return
+
+
+label Showering(Occupants=[], StayCount=[] , Showered=0, Line=0, BO=[]):
+
+
+    $ BO = all_Girls[:]
+    while BO:
+
+        if BO[0] not in active_Girls:
+            $ BO[0].location = "hold"
+        if BO[0].location == "bg_showerroom" and BO[0] not in Occupants:
+            $ Occupants.append(BO[0])
+        $ BO.remove(BO[0])
+    if Occupants:
+        ch_p "I'm taking a shower, care to join me?"
+        if Occupants[0] == RogueX and "showered" in RogueX.recent_history:
+            if len(Occupants) > 1:
+
+                ch_r "We actually just finished up, so we'll head out."
+            else:
+                ch_r "I actually just finished up, so I'll head out."
+            $ Showered = 1
+        elif Occupants[0] == KittyX and "showered" in KittyX.recent_history:
+            if len(Occupants) > 1:
+
+                ch_k "We actually just showered, so we're heading out."
+            else:
+                ch_k "I actually just showered, so I'm heading out."
+            $ Showered = 1
+        elif Occupants[0] == EmmaX and "showered" in EmmaX.recent_history:
+            if len(Occupants) > 1:
+
+                ch_e "We were actually finishing up, so we're heading out."
+            else:
+                ch_e "I was actually finishing up, so I'm heading out."
+            $ Showered = 1
+        elif Occupants[0] == LauraX and "showered" in LauraX.recent_history:
+            if len(Occupants) > 1:
+
+                ch_l "We were done, actually."
+            else:
+                ch_l "I'm heading out now."
+            $ Showered = 1
+        elif Occupants[0] == JeanX and "showered" in JeanX.recent_history:
+            if len(Occupants) > 1:
+
+                ch_j "We were done."
+            else:
+                ch_j "I'm heading out."
+            $ Showered = 1
+        elif Occupants[0] == StormX and "showered" in StormX.recent_history:
+            if len(Occupants) > 1:
+
+                ch_s "I think we're about finished and heading out now."
+            else:
+                ch_s "I was about finished and heading out now."
+            $ Showered = 1
+        elif Occupants[0] == JubesX and "showered" in JubesX.recent_history:
+            if len(Occupants) > 1:
+
+                ch_v "We finished getting showered, so we're taking off."
+            else:
+                ch_v "I finished getting showered, so I'm taking off."
+            $ Showered = 1
+        else:
+
+            if Occupants[0] == RogueX:
+                if approval_check(RogueX, 1200) or (approval_check(RogueX, 600) and RogueX.SeenChest and RogueX.SeenPussy):
+
+                    ch_r "I suppose I could stick around. . ."
+                    $ StayCount.append(RogueX)
+                else:
+
+                    ch_r "Nah, I should probably get going."
+            elif Occupants[0] == KittyX:
+                if approval_check(KittyX, 1400) or (approval_check(KittyX, 700) and KittyX.SeenChest and KittyX.SeenPussy):
+                    ch_k "Yeah, I could stick around."
+                    $ StayCount.append(KittyX)
+                else:
+                    ch_k "I've got to get going."
+            elif Occupants[0] == EmmaX:
+                if not "classcaught" in EmmaX.history or "three" not in EmmaX.history:
+                    ch_e "I really should be going. . ."
+                elif approval_check(EmmaX, 1400) or (approval_check(EmmaX, 700) and EmmaX.SeenChest and EmmaX.SeenPussy):
+                    ch_e "I suppose I could stay, for a bit."
+                    $ StayCount.append(EmmaX)
+                else:
+                    ch_e "I'm afraid I really must be going."
+            elif Occupants[0] == LauraX:
+                if approval_check(LauraX, 1400) or (approval_check(LauraX, 700) and LauraX.SeenChest and LauraX.SeenPussy):
+                    ch_l "I got nothing better to do."
+                    $ StayCount.append(LauraX)
+                else:
+                    ch_l "I gotta get going."
+            elif Occupants[0] == JeanX:
+                if approval_check(JeanX, 1400) or (approval_check(JeanX, 700) and JeanX.SeenChest and JeanX.SeenPussy):
+                    ch_j "Sure, why not."
+                    $ StayCount.append(JeanX)
+                else:
+                    ch_j "Nah, lol."
+            elif Occupants[0] == StormX:
+                if approval_check(StormX, 700):
+                    ch_s "I could stay, I suppose."
+                    $ StayCount.append(StormX)
+                else:
+                    ch_s "I really do have things to do, [StormX.player_petname]."
+            elif Occupants[0] == JubesX:
+                if approval_check(JubesX, 1400) or (approval_check(JubesX, 700) and JubesX.SeenChest and JubesX.SeenPussy):
+                    ch_v "I guess I could stay a minute. . ."
+                    $ StayCount.append(JubesX)
+                else:
+                    ch_v "I'm kinda busy, [JubesX.player_petname]."
+
+
+            if len(Occupants) >= 2:
+
+                if Occupants[1] == RogueX:
+                    if approval_check(RogueX, 1200) or (approval_check(RogueX, 600) and RogueX.SeenChest and RogueX.SeenPussy):
+                        if StayCount:
+
+                            ch_r "I could stick around too. . ."
+                        else:
+
+                            ch_r "Well, I could probably stay."
+                        $ StayCount.append(RogueX)
+                    else:
+                        if StayCount:
+
+                            ch_r "I can't though . ."
+                        else:
+
+                            ch_r "I should get going too."
+
+                elif Occupants[1] == KittyX:
+                    if approval_check(KittyX, 1400) or (approval_check(KittyX, 700) and KittyX.SeenChest and KittyX.SeenPussy):
+                        if StayCount:
+
+                            ch_k "I guess I could stay too. . ."
+                        else:
+
+                            ch_k "Well, I could stay though."
+                        $ StayCount.append(KittyX)
+                    else:
+                        if StayCount:
+
+                            ch_k "I've really got to go though. . ."
+                        else:
+
+                            ch_k "Yeah, I should head out too."
+
+                elif Occupants[1] == EmmaX:
+                    if not "classcaught" in EmmaX.history or "three" not in EmmaX.history:
+                        ch_e "I really should be going. . ."
+                    elif approval_check(EmmaX, 1400) or (approval_check(EmmaX, 700) and EmmaX.SeenChest and EmmaX.SeenPussy):
+                        if StayCount:
+
+                            ch_e "I suppose I could also stay. . ."
+                        else:
+
+                            ch_e "But {i}I{/i} could stick around. . ."
+                        $ StayCount.append(EmmaX)
+                    else:
+                        if StayCount:
+
+                            ch_e "But I really must be going. . ."
+                        else:
+
+                            ch_e "Yes, let's go."
+
+                elif Occupants[1] == LauraX:
+                    if approval_check(LauraX, 1400) or (approval_check(LauraX, 700) and LauraX.SeenChest and LauraX.SeenPussy):
+                        if StayCount:
+
+                            ch_l "I could stay too. . ."
+                        else:
+
+                            ch_l "I could stick around."
+                        $ StayCount.append(LauraX)
+                    else:
+                        if StayCount:
+
+                            ch_l "I gotta get going though. . ."
+                        else:
+
+                            ch_l "Yeah, me too."
+
+                elif Occupants[1] == JeanX:
+                    if approval_check(JeanX, 1000) or (approval_check(JeanX, 600) and JeanX.SeenChest and JeanX.SeenPussy):
+                        if StayCount:
+
+                            ch_j "I guess I could stay too. . ."
+                        else:
+
+                            ch_j "I could stick around."
+                        $ StayCount.append(JeanX)
+                    else:
+                        if StayCount:
+
+                            ch_j "I'm heading out though. . ."
+                        else:
+
+                            ch_j "Yeah."
+
+                elif Occupants[1] == StormX:
+                    if approval_check(StormX, 700):
+                        if StayCount:
+
+                            ch_s "I could also stay. . ."
+                        else:
+
+                            ch_s "I could stay for a moment though. . ."
+                        $ StayCount.append(StormX)
+                    else:
+                        if StayCount:
+
+                            ch_s "Well I'm afraid I must be going. . ."
+                        else:
+
+                            ch_s "Yes, let's."
+
+                elif Occupants[1] == JubesX:
+                    if approval_check(JubesX, 1400) or (approval_check(JubesX, 700) and JubesX.SeenChest and JubesX.SeenPussy):
+                        if StayCount:
+
+                            ch_k "I could kinda stay too. . ."
+                        else:
+
+                            ch_k "Well, -I'm- not that busy. . ."
+                        $ StayCount.append(JubesX)
+                    else:
+                        if StayCount:
+
+                            ch_k "I'm really busy right now though. . ."
+                        else:
+
+                            ch_k "Oh, yeah, I gotta go too. . ."
+
+
+        if len(Occupants) > len(StayCount):
+
+            menu:
+                extend ""
+                "Ok, see you later then.":
+                    if RogueX.location == bg_current and RogueX not in StayCount:
+                        ch_r "Yeah, later."
+                    if KittyX.location == bg_current and KittyX not in StayCount:
+                        ch_k "Bye!"
+                    if EmmaX.location == bg_current and EmmaX not in StayCount:
+                        ch_e "Yes, later."
+                    if LauraX.location == bg_current and LauraX not in StayCount:
+                        ch_l "Yup."
+                    if JeanX.location == bg_current and JeanX not in StayCount:
+                        ch_j "Ok."
+                    if StormX.location == bg_current and StormX not in StayCount:
+                        ch_s "Yes, I'll see you."
+                    if JubesX.location == bg_current and JubesX not in StayCount:
+                        ch_v "Laters!"
+
+                "Sure you got every spot?" if Showered:
+                    $ Line = "spot"
+                "Maybe you could stay and watch?":
+
+
+
+                    $ Line = "watch me"
+
+                "But I didn't get to watch." if Showered:
+                    $ Line = "watch you"
+            if Line:
+                $ BO = Occupants[:]
+                while BO:
+
+                    if BO[0].location == bg_current and BO[0] not in StayCount:
+                        if BO[0] == EmmaX and (not "classcaught" in EmmaX.history or (StayCount and "three" not in EmmaX.history)):
+
+                            pass
+                        elif BO[0] == JeanX and approval_check(BO[0], 600):
+                            $ StayCount.append(BO[0])
+                        elif BO[0] == StormX:
+                            if approval_check(BO[0], 700, "LO"):
+                                $ StayCount.append(BO[0])
+                        elif approval_check(BO[0], 1200,Alt=[[KittyX],1400]) or (approval_check(BO[0], 600,Alt=[[KittyX],700]) and BO[0].SeenChest and BO[0].SeenPussy):
+                            $ StayCount.append(BO[0])
+                        elif Line == "spot" and approval_check(BO[0], 1000, "LI",Alt=[[KittyX],1200]):
+                            $ StayCount.append(BO[0])
+                        elif Line == "watch you" and approval_check(BO[0], 600, "O",Alt=[[EmmaX],500]):
+                            $ StayCount.append(BO[0])
+
+                    $ BO.remove(BO[0])
+
+                if Line == "spot":
+
+                    if StayCount:
+
+                        if StayCount[0] == RogueX:
+
+                            ch_r "Fine, I could use another scrub."
+                        elif StayCount[0] == KittyX:
+
+                            ch_k "Oh, I guess I could take another pass at it."
+                        elif StayCount[0] == EmmaX:
+
+                            ch_e "I suppose we could take a look. . ."
+                        elif StayCount[0] == LauraX:
+
+                            ch_l "Well, maybe. . ."
+                        elif StayCount[0] == JeanX:
+
+                            ch_j "Well. . ."
+                        elif StayCount[0] == StormX:
+
+                            ch_s "Well, another pass couldn't hurt. . ."
+                        elif StayCount[0] == JubesX:
+
+                            ch_v "I mean, you can never be -too- clean. . ."
+                    if RogueX.location == bg_current and RogueX not in StayCount:
+
+                        if StayCount:
+                            ch_r "Well, [RogueX.player_petname], I think I'm fine."
+                        else:
+                            ch_r "No, [RogueX.player_petname], I think I'm covered."
+                    if KittyX.location == bg_current and KittyX not in StayCount:
+
+                        if StayCount:
+                            ch_k "Oh, well I think I[KittyX.like]got it?"
+                            ch_k "See you later, [KittyX.player_petname]."
+                        else:
+                            ch_k "Ha, I'm squeaky clean, [KittyX.player_petname], see you later."
+                    if EmmaX.location == bg_current and EmmaX not in StayCount:
+
+                        if StayCount:
+                            ch_e "Well it appears you'll be taken care of."
+                            ch_e "I'll be going, [EmmaX.player_petname]."
+                        else:
+                            ch_e "I'm afraid not, [EmmaX.player_petname], I'll be going."
+                    if LauraX.location == bg_current and LauraX not in StayCount:
+
+                        if StayCount:
+                            ch_l "Looks like you got this handled."
+                            ch_l "I'm out, [LauraX.player_petname]."
+                        else:
+                            ch_l "I'm out."
+                    if JeanX.location == bg_current and JeanX not in StayCount:
+
+                        if StayCount:
+                            ch_j "Well, looks like you guys are going to have fun."
+                            ch_j "I'll head out, [JeanX.player_petname]."
+                        else:
+                            ch_j "I'll head out."
+                    if StormX.location == bg_current and StormX not in StayCount:
+
+                        if StayCount:
+                            ch_s "It looks like you'll be occupied."
+                            ch_s "I'll be going, [StormX.player_petname]."
+                        else:
+                            ch_s "I really doubt that I could have, [StormX.player_petname], I'll be going."
+                    if JubesX.location == bg_current and JubesX not in StayCount:
+
+                        if StayCount:
+                            ch_v "Nah, I think you'll be fine."
+                            ch_v "Later, guys."
+                        else:
+                            ch_v "Nah, I'm good. Later, [JubesX.player_petname]."
+
+
+                elif Line == "watch me":
+
+                    if StayCount:
+                        if StayCount[0] == RogueX:
+
+                            ch_r "Yeah, I guess I do enjoy the view."
+                        elif StayCount[0] == KittyX:
+
+                            ch_k "I. . . guess I wouldn't mind that. . ."
+                        elif StayCount[0] == LauraX:
+
+                            ch_l "Ok, let's see what you got."
+                        elif StayCount[0] == JeanX:
+
+                            ch_j "Ohh, this should be good. . ."
+                        elif StayCount[0] == StormX:
+
+                            ch_s "I suppose that I could. . ."
+                        elif StayCount[0] == JubesX:
+
+                            ch_v ". . . Yeah, ok."
+
+                    if RogueX.location == bg_current and RogueX not in StayCount:
+
+                        if StayCount:
+                            ch_r "Oh, well, I'm gonna pass on that, [RogueX.player_petname]."
+                        else:
+                            ch_r "Yeah, I'm gonna pass on that, [RogueX.player_petname]."
+                    if KittyX.location == bg_current and KittyX not in StayCount:
+
+                        if StayCount:
+                            ch_k "Well, [KittyX.like]I don't need to see that."
+                            ch_k "See you later, [KittyX.player_petname]."
+                        else:
+                            ch_k "[KittyX.Like]I don't need to see that."
+                    if EmmaX.location == bg_current and EmmaX not in StayCount:
+
+                        if StayCount:
+                            ch_e "You appear to have enough of an audience."
+                            ch_e "I'll be going, [EmmaX.player_petname]."
+                        else:
+                            ch_e "I think I'll be fine, [EmmaX.player_petname], I'll be going."
+                    if LauraX.location == bg_current and LauraX not in StayCount:
+
+                        if StayCount:
+                            ch_l "She's got you covered."
+                            ch_l "I'm out, [LauraX.player_petname]."
+                        else:
+                            ch_l "I'm out."
+                    if JeanX.location == bg_current and JeanX not in StayCount:
+
+                        if StayCount:
+                            ch_j "Well, looks like you guys are going to have fun."
+                            ch_j "I'll head out, [JeanX.player_petname]."
+                        else:
+                            ch_j "I'll head out."
+                    if StormX.location == bg_current and StormX not in StayCount:
+
+                        if StayCount:
+                            ch_s "Oh, I think someone else wants the show."
+                            ch_s "I'll be going, [StormX.player_petname]."
+                        else:
+                            ch_s "I don't see why I would, [StormX.player_petname]. I'll be going."
+                    if JubesX.location == bg_current and JubesX not in StayCount:
+
+                        if StayCount:
+                            ch_v "Um, no thanks. . ."
+                            ch_v "See you later, [JubesX.player_petname]."
+                        else:
+                            ch_v "Um, no thanks."
+
+
+                elif Line == "watch you":
+
+                    if StayCount:
+                        if StayCount[0] == RogueX:
+
+                            ch_r "Well, I don't mind putting on a show."
+                        elif StayCount[0] == KittyX:
+
+                            ch_k "You want to watch me. . ."
+                            ch_k "Ok."
+                        elif StayCount[0] == EmmaX:
+
+                            ch_e "I suppose I can't blame you for that. . ."
+                        elif StayCount[0] == LauraX:
+
+                            ch_l "Huh. Suit yourself."
+                        elif StayCount[0] == JeanX:
+
+                            ch_j "Well, we can't have that. . ."
+                        elif StayCount[0] == StormX:
+
+                            ch_s ". . ."
+                        elif StayCount[0] == JubesX:
+
+                            ch_v "Well. . . I guess we should make up for that. . ."
+
+                    if RogueX.location == bg_current and RogueX not in StayCount:
+
+                        if StayCount:
+                            ch_r "Really? Well not me."
+                            ch_r "Have fun, [RogueX.player_petname]."
+                        else:
+                            ch_r "Keep dreaming, [RogueX.player_petname]."
+                    if KittyX.location == bg_current and KittyX not in StayCount:
+
+                        if StayCount:
+                            ch_k "Seriously?! Well I'm not into that."
+                            ch_k "Later, [KittyX.player_petname]."
+                        else:
+                            ch_k "[KittyX.Like]no way!"
+                    if EmmaX.location == bg_current and EmmaX not in StayCount:
+
+                        if StayCount:
+                            ch_e "I wouldn't want to intrude."
+                            ch_e "I'll be going."
+                        else:
+                            ch_e "Hmm, I doubt you could handle it."
+                            ch_e "I'll be going."
+                    if LauraX.location == bg_current and LauraX not in StayCount:
+
+                        if StayCount:
+                            ch_l "She's got you covered."
+                            ch_l "I'm out, [LauraX.player_petname]."
+                        else:
+                            ch_l "I'm out."
+                    if JeanX.location == bg_current and JeanX not in StayCount:
+
+                        if StayCount:
+                            ch_j "Well, looks like you guys are going to have fun."
+                            ch_j "I'll head out, [JeanX.player_petname]."
+                        else:
+                            ch_j "I'll head out."
+                    if StormX.location == bg_current and StormX not in StayCount:
+
+                        if StayCount:
+                            ch_s "Well, you two enjoy yourselves."
+                            ch_s "I'll be going."
+                        else:
+                            ch_s "I'm flattered, but no."
+                            ch_s "I'll be going."
+                    if JubesX.location == bg_current and JubesX not in StayCount:
+
+                        if StayCount:
+                            ch_v "Ok, looks like you two can have fun with that."
+                            ch_v "Later, [JubesX.player_petname]."
+                        else:
+                            ch_v "Yeah, no way."
+
+
+            if len(StayCount) > 1:
+
+                if StayCount[1].GirlLikeCheck(StayCount[0]) > 500:
+
+                    if StayCount[1] == RogueX:
+                        ch_r "I guess I could too."
+                    elif StayCount[1] == EmmaX:
+                        ch_e "I suppose I don't want to be left out of this. . ."
+                    elif StayCount[1] == JeanX:
+                        ch_j "Well, it does look like fun. . ."
+                else:
+                    if StayCount[1] == RogueX:
+                        ch_r "Well I guess if she's in, I am too!"
+                    elif StayCount[1] == EmmaX:
+                        ch_e "I wouldn't want to leave you alone with. . . this."
+                    elif StayCount[1] == JeanX:
+                        ch_j "Hmm, maybe I should stick around. . ."
+                if StayCount[1] == KittyX:
+                    ch_k "I- yeah, me neither!"
+                elif StayCount[1] == LauraX:
+                    ch_l "Fine."
+                elif StayCount[1] == StormX:
+                    ch_s "Well I suppose I should join you. . ."
+                elif StayCount[1] == JubesX:
+                    ch_v "Um, yeah, let's do this."
+
+        $ BO = Occupants[:]
+        while BO:
+
+            if BO[0].location == bg_current:
+                if BO[0] in StayCount:
+
+                    $ BO[0].change_outfit("nude")
+                    $ BO[0].Water = 1
+                    $ BO[0].spunk = []
+                    $ BO[0].recent_history.append("showered")
+                    $ BO[0].daily_history.append("showered")
+                    call expression BO[0].tag + "_First_Bottomless" pass (1)
+                    call expression BO[0].tag + "_First_Topless" pass (1)
+                else:
+
+                    call Remove_Girl (BO[0])
+                while BO[0] in Nearby:
+                    $ Nearby.remove(BO[0])
+            $ BO.remove(BO[0])
+
+
+
+
+
+    call Seen_First_Peen (0, 0, 0, 1)
+
+    while len(StayCount) >= 2 and StayCount[1] in Nearby:
+
+        $ Nearby.remove(StayCount[1])
+    while StayCount and StayCount[0] in Nearby:
+
+        $ Nearby.remove(StayCount[0])
+
+    if Nearby and len(StayCount) < 2:
+
+        $ renpy.random.shuffle(Nearby)
+
+        while Nearby and (len(Nearby) + len(StayCount)) > 2:
+
+            $ Nearby.remove(Nearby[0])
+
+        if len(Nearby) >= 2:
+            "As you finish getting undressed, [Nearby[0].name] and [Nearby[1].name] enter the room."
+            $ Nearby[1].location = bg_current
+        else:
+            "As you finish getting undressed, [Nearby[0].name] enters the room."
+        $ Nearby[0].location = bg_current
+
+        $ BO = Nearby[:]
+
+
+        call set_the_scene (Dress=0)
+
+        call Seen_First_Peen (0, 0, 1, 1)
+
+        if RogueX in BO:
+            if RogueX.SeenPeen == 1:
+                $ RogueX.change_face("_surprised",2,Eyes="_down")
+                ch_r "Oh!"
+                $ RogueX.change_face("_bemused",1,Eyes="_side")
+                ch_r "I am so sorry, I should {i}not{/i} have just barged in like that."
+            else:
+                $ RogueX.change_face("_bemused",1,Eyes="_side")
+                ch_r "I simply {i}must{/i} be more careful. . ."
+        if KittyX in BO:
+            $ KittyX.change_face("_bemused",2,Eyes="_side")
+            if KittyX.SeenPeen == 1:
+                ch_k "Sorry! Sorry! I need to stop just casually phasing into places!"
+            else:
+                ch_k "I have {i}got{/i} to knock more. . ."
+        if EmmaX in BO:
+            if EmmaX.SeenPeen == 1:
+                $ EmmaX.change_face("_surprised")
+                ch_e "Oh! Dreadfully sorry."
+                $ EmmaX.change_face("_sexy",Eyes="_down")
+                ch_e "I hope we can meet again under. . . different circumstances."
+            else:
+                $ EmmaX.change_face("_sexy",Eyes="_down")
+                ch_e "I really should pay closer attention. . ."
+            if "classcaught" not in EmmaX.history or ((StayCount or len(Nearby) >= 2) and "three" not in EmmaX.history):
+
+                "[EmmaX.name] decides to leave immediately."
+                call Remove_Girl (EmmaX)
+                $ BO.remove(EmmaX)
+                $ EmmaX.change_outfit()
+        if LauraX in BO:
+            if LauraX.SeenPeen == 1:
+                $ LauraX.change_face("_surprised",Eyes="_down")
+                ch_l "Hey. That's interesting. . ."
+            else:
+                $ LauraX.change_face("_normal",Eyes="_down")
+                ch_l ". . ."
+                $ LauraX.change_face("_normal")
+                ch_l "I'm supposed to knock, aren't I."
+        if JeanX in BO:
+            if JeanX.SeenPeen == 1:
+                $ JeanX.change_face("_surprised",Eyes="_down")
+                ch_j "Well what do we have here? . ."
+            else:
+                $ JeanX.change_face("_normal",Eyes="_down")
+                ch_j ". . ."
+                $ JeanX.change_face("_normal")
+                ch_j "Oh, nice to catch you. . . like this. . ."
+        if StormX in BO:
+            if StormX.SeenPeen == 1:
+                $ StormX.change_face("_surprised")
+                ch_s "Oh! Hello there."
+                $ StormX.change_face("_sexy",Eyes="_down")
+                ch_s "And hello to you as well. . ."
+            else:
+                $ StormX.change_face("_sexy",Eyes="_down")
+                ch_s "I'm sorry to intrude. . ."
+            $ StormX.change_face("_sexy")
+        if JubesX in BO:
+            $ JubesX.change_face("_bemused",2,Eyes="_side")
+            if JubesX.SeenPeen == 1:
+                ch_v "Oh, sorry! I wasn't paying attention."
+                $ JubesX.eyes = "_down"
+                pause 1
+                $ JubesX.eyes = "_side"
+                ch_v "um. . . hey. . ."
+            else:
+                ch_v "Oh, sorry! I wasn't paying attention."
+
+        if EmmaX in StayCount and "three" not in EmmaX.history:
+
+            if len(BO) >= 2:
+                "Seeing the other girls arrive, [EmmaX.name] quickly excuses herself."
+            else:
+                "Seeing [BO[0].name] arrive, [EmmaX.name] quickly excuses herself."
+            $ StayCount.remove(EmmaX)
+            call Remove_Girl (EmmaX)
+            $ EmmaX.change_outfit()
+
+        if BO:
+
+            if approval_check(BO[0], 1200):
+                $ StayCount.append(BO[0])
+            if len(BO) >=2 and approval_check(BO[1], 1200) and len(StayCount) < 2:
+                $ StayCount.append(BO[1])
+
+            if len(BO) >=2:
+                if BO[0] not in StayCount and BO[1] not in StayCount:
+                    "They both turn right back around."
+                    call Remove_Girl (BO[0])
+                    call Remove_Girl (BO[1])
+                    $ BO = []
+                elif BO[0] not in StayCount:
+                    "[BO[0].name] turns right back around, but [BO[1].name] stays."
+                    call Remove_Girl (BO[0])
+                    $ BO.remove(BO[0])
+                elif BO[1] not in StayCount:
+                    "[BO[1].name] turns right back around, but [BO[0].name] stays."
+                    call Remove_Girl (BO[1])
+                    $ BO.remove(BO[1])
+            elif BO[0] not in StayCount:
+                "She turns right back around."
+                call Remove_Girl (BO[0])
+                $ BO.remove(BO[0])
+
+            while BO:
+
+
+                $ BO[0].change_outfit("nude")
+                $ BO[0].Water = 1
+                $ BO[0].spunk = []
+                $ BO[0].recent_history.append("showered")
+                $ BO[0].daily_history.append("showered")
+                call expression BO[0].tag + "_First_Bottomless" pass (1)
+                call expression BO[0].tag + "_First_Topless" pass (1)
+                if BO[0] == RogueX:
+                    ch_r "I wouldn't mind stick'in around though."
+                elif BO[0] == KittyX:
+                    ch_k "I {i}could{/i} get in on this."
+                elif BO[0] == EmmaX:
+                    ch_e "But, I could use some face time."
+                elif BO[0] == LauraX:
+                    ch_l "Scoot over."
+                elif BO[0] == JeanX:
+                    ch_j "You're hogging the water."
+                elif BO[0] == StormX:
+                    ch_s "Oh, goodbye then. . ."
+                elif BO[0] == JubesX:
+                    ch_v "Well, I could always join ya."
+                $ BO.remove(BO[0])
+
+
+
+    $ Round -= 30 if Round >= 30 else Round
+    $ primary_action = 0
+
+    if StayCount:
+
+        if len(StayCount) > 1 and StayCount[0] == StayCount[1]:
+            $ StayCount.remove(StayCount[0])
+        if len(StayCount) > 1:
+
+            call shift_focus (StayCount[0], StayCount[1])
+            "You take a quick shower with [StayCount[0].name] and [StayCount[1].name]."
+        else:
+            call shift_focus (StayCount[0])
+            "You take a quick shower with [StayCount[0].name]."
+
+        call Shower_Sex
+
+        if StayCount[0] == RogueX:
+
+            ch_r "That was real nice, [RogueX.player_petname]."
+        elif StayCount[0] == KittyX:
+
+            ch_k "That was. . . nice."
+        elif StayCount[0] == EmmaX:
+
+            ch_e "That was. . . distracting."
+        elif StayCount[0] == LauraX:
+
+            ch_l "Well that was fun."
+        elif StayCount[0] == JeanX:
+
+            ch_j "That was fun."
+        elif StayCount[0] == StormX:
+
+            ch_s "Ah, that was relaxing."
+        elif StayCount[0] == JubesX:
+
+            ch_v "That was fun, [JubesX.player_petname]."
+
+        if len(StayCount) > 1:
+
+            if StayCount[1] == RogueX:
+
+                ch_r "Yeah."
+            elif StayCount[1] == KittyX:
+
+                ch_k "Yeah, I had fun."
+            elif StayCount[1] == EmmaX:
+
+                ch_e "Indeed."
+            elif StayCount[1] == LauraX:
+
+                ch_l "Yup."
+            elif StayCount[1] == JeanX:
+
+                ch_j "Yeah, it was."
+            elif StayCount[1] == StormX:
+
+                ch_s "Certainly."
+            elif StayCount[1] == JubesX:
+
+                ch_v "Yeah, totally."
+    else:
+
+
+        $ Line = "You take a quick shower" + renpy.random.choice([". It was fairly uneventful.",
+                        ". A few people came and went as you did so.",
+                        ". That was refreshing."])
+        "[Line]"
+
+    $ Player.recent_history.append("showered")
+    $ Player.daily_history.append("showered")
+    if "scent" in Player.daily_history:
+        $ Player.daily_history.remove("scent")
+
+    call Get_Dressed
+    if RogueX.location == bg_current:
+        $ RogueX.change_outfit("_towel")
+    if KittyX.location == bg_current:
+        $ KittyX.change_outfit("_towel")
+    if EmmaX.location == bg_current:
+        $ EmmaX.change_outfit("_towel")
+    if LauraX.location == bg_current:
+        $ LauraX.change_outfit("_towel")
+    if JeanX.location == bg_current:
+        $ JeanX.change_outfit("_towel")
+
+
+    if JubesX.location == bg_current:
+        $ JubesX.change_outfit("_towel")
+
+    $ Options = []
+
+
+
+
+
+
+
+
+
+    return
+
+
+
+
+label Shower_Sex(Options=0, Line=0):
+
+    if len(StayCount) > 1 and (approval_check(StayCount[1], 1800,Check=1) > approval_check(StayCount[0], 1800,Check=1)):
+        $ renpy.random.shuffle(StayCount)
+    call shift_focus (StayCount[0])
+
+    $ D20 = renpy.random.randint(1,20)
+    $ D20 += 5 if approval_check(StayCount[0], 1800) else 0
+
+    if "showered" in Player.recent_history:
+        $ D20 = 0
+
+    $ StayCount[0].change_face("_sly")
+
+    if len(StayCount) > 1 and D20 >= 10:
+        "As you do so, both girls press their bodies body up against yours."
+        $ Line = StayCount[0].name
+        call Close_Launch (StayCount[0], StayCount[1])
+    elif D20 >= 5:
+        "As you do so, [StayCount[0].name] presses her body up against you."
+        $ Line = "She"
+        call Close_Launch (StayCount[0])
+    else:
+        $ Line = renpy.random.choice(["It was fairly uneventful.",
+                    "A few people came and went as you did so.",
+                    "That was refreshing."])
+        "[Line]"
+        if len(StayCount) > 1:
+            $ StayCount[0].change_stat("lust", 50, 15)
+            $ StayCount[1].change_stat("lust", 50, 15)
+            $ StayCount[0].change_stat("lust", 90, 10)
+            $ StayCount[1].change_stat("lust", 90, 10)
+            "You got a good look at them washing off, and they didn't seem to mind the view either."
+            $ StayCount[0].GLG(StayCount[1],600,4,1)
+            $ StayCount[1].GLG(StayCount[0],600,4,1)
+            $ StayCount[0].GLG(StayCount[1],800,2,1)
+            $ StayCount[1].GLG(StayCount[0],800,2,1)
+        else:
+            $ StayCount[0].change_stat("lust", 50, 15)
+            $ StayCount[0].change_stat("lust", 90, 10)
+            "You got a good look at her washing off, and she didn't seem to mind the view either."
+        return
+
+    if Line:
+        if len(StayCount) > 1:
+            $ StayCount[0].change_stat("lust", 50, 5)
+            $ StayCount[0].change_stat("lust", 70, 3)
+            $ StayCount[1].change_stat("lust", 50, 5)
+            $ StayCount[1].change_stat("lust", 70, 3)
+        else:
+            $ StayCount[0].change_stat("lust", 50, 6)
+            $ StayCount[0].change_stat("lust", 70, 3)
+        $ Player.change_stat("focus", 50, 5)
+        $ Player.change_stat("focus", 80, 2)
+        menu:
+            extend ""
+            "Continue?":
+                pass
+            "Stop her." if len(StayCount) < 2:
+                $ Line = 0
+                call expression StayCount[0].tag + "_Pos_Reset"
+                "You take a step back, pulling away from her."
+                $ StayCount[0].change_stat("love", 80, -1)
+                $ StayCount[0].change_stat("obedience", 80, 5)
+                $ StayCount[0].change_stat("inhibition", 80, -1)
+                $ StayCount[0].change_face("_sad")
+                "She seems a bit disappointed."
+            "Stop them." if len(StayCount) > 1:
+                $ Line = 0
+                call expression StayCount[1].tag + "_Pos_Reset"
+                call expression StayCount[0].tag + "_Pos_Reset"
+                "You take a step back, pulling away from them."
+                $ StayCount[0].change_stat("love", 80, -1)
+                $ StayCount[0].change_stat("obedience", 80, 5)
+                $ StayCount[0].change_stat("inhibition", 80, -1)
+                $ StayCount[1].change_stat("obedience", 80, 5)
+                $ StayCount[1].change_stat("inhibition", 80, -1)
+                $ StayCount[0].change_face("_sad")
+                $ StayCount[1].change_face("_sad")
+                "They seem a bit disappointed."
+    if Line:
+
+        $ Options = [1]
+        if len(StayCount) > 1:
+            if approval_check(StayCount[0], 1300) and StayCount[0].GirlLikeCheck(StayCount[1]) >= 800:
+                $ Options.append(2)
+            if approval_check(StayCount[0], 1200) and StayCount[0].GirlLikeCheck(StayCount[1]) >= 700:
+                $ Options.append(3)
+
+        if approval_check(StayCount[0], 1300):
+            $ Options.append(4)
+        if approval_check(StayCount[0], 1400):
+            $ Options.append(5)
+
+        if approval_check(StayCount[0], 1300):
+            $ Options.append(6)
+        if approval_check(StayCount[0], 1200):
+            $ Options.append(7)
+
+        if not approval_check(StayCount[0], 1400):
+
+            if approval_check(StayCount[0], 1000):
+                $ Options.append(8)
+            if approval_check(StayCount[0], 1100):
+                $ Options.append(9)
+            if approval_check(StayCount[0], 1000):
+                $ Options.append(10)
+            if approval_check(StayCount[0], 1100):
+                $ Options.append(11)
+
+        $ renpy.random.shuffle(Options)
+
+
+
+        if Options[0] == 2:
+            $ StayCount[0].change_stat("lust", 50, 5)
+            $ StayCount[0].change_stat("lust", 70, 2)
+            $ StayCount[1].change_stat("lust", 50, 7)
+            $ StayCount[1].change_stat("lust", 70, 3)
+            $ Player.change_stat("focus", 50, 8)
+            $ Player.change_stat("focus", 80, 4)
+            "[Line] reaches over to [StayCount[1].name] and begins soaping up her chest."
+        elif Options[0] == 3:
+            $ StayCount[0].change_stat("lust", 50, 7)
+            $ StayCount[0].change_stat("lust", 70, 3)
+            $ StayCount[1].change_stat("lust", 50, 8)
+            $ StayCount[1].change_stat("lust", 70, 4)
+            $ Player.change_stat("focus", 50, 8)
+            $ Player.change_stat("focus", 80, 5)
+            "[Line] reaches over to [StayCount[1].name] and begins soaping up her pussy."
+
+
+        elif Options[0] == 4:
+            if len(StayCount) > 1:
+                $ StayCount[0].change_stat("lust", 50, 10)
+                $ StayCount[0].change_stat("lust", 70, 7)
+            else:
+                $ StayCount[0].change_stat("lust", 50, 8)
+                $ StayCount[0].change_stat("lust", 70, 5)
+            $ Player.change_stat("focus", 50, 10)
+            $ Player.change_stat("focus", 80, 6)
+            "[Line] reaches down and takes your cock in her hand, soaping it up."
+        elif Options[0] == 5:
+            if len(StayCount) > 1:
+                $ StayCount[0].change_stat("lust", 50, 12)
+                $ StayCount[0].change_stat("lust", 70, 8)
+            else:
+                $ StayCount[0].change_stat("lust", 50, 9)
+                $ StayCount[0].change_stat("lust", 70, 6)
+            $ Player.change_stat("focus", 50, 10)
+            $ Player.change_stat("focus", 80, 4)
+            "[Line] kneels down and wraps her breasts around your cock, soaping it up."
+
+
+        elif Options[0] == 6:
+            if len(StayCount) > 1:
+                $ StayCount[0].change_stat("lust", 50, 11)
+                $ StayCount[0].change_stat("lust", 70, 6)
+            else:
+                $ StayCount[0].change_stat("lust", 50, 9)
+                $ StayCount[0].change_stat("lust", 70, 5)
+            $ Player.change_stat("focus", 50, 9)
+            $ Player.change_stat("focus", 80, 4)
+            "[Line] reaches down and begins fondling her own pussy, building a nice lather."
+        elif Options[0] == 7:
+            if len(StayCount) > 1:
+                $ StayCount[0].change_stat("lust", 50, 10)
+                $ StayCount[0].change_stat("lust", 70, 5)
+            else:
+                $ StayCount[0].change_stat("lust", 50, 9)
+                $ StayCount[0].change_stat("lust", 70, 4)
+            $ Player.change_stat("focus", 50, 8)
+            $ Player.change_stat("focus", 80, 3)
+            "[Line] begins rubbing her own breasts in circles, building a nice lather."
+
+
+        elif Options[0] == 8:
+            $ StayCount[0].change_stat("lust", 50, 6)
+            $ StayCount[0].change_stat("lust", 70, 3)
+            $ Player.change_stat("focus", 50, 7)
+            $ Player.change_stat("focus", 80, 3)
+            "[Line] draws her breasts up and down your arm, the soap bubbles squirting out."
+        elif Options[0] == 9:
+            $ StayCount[0].change_stat("lust", 50, 8)
+            $ StayCount[0].change_stat("lust", 70, 3)
+            $ Player.change_stat("focus", 50, 8)
+            $ Player.change_stat("focus", 80, 3)
+            "[Line] kneels down and rubs her breasts against your leg, soaping it up."
+        elif Options[0] == 10:
+            $ StayCount[0].change_stat("lust", 50, 7)
+            $ StayCount[0].change_stat("lust", 70, 3)
+            $ Player.change_stat("focus", 50, 6)
+            $ Player.change_stat("focus", 80, 3)
+            "[Line] presses against your back, her soapy breasts rubbing back and forth against it."
+        elif Options[0] == 11:
+            $ StayCount[0].change_stat("lust", 50, 7)
+            $ StayCount[0].change_stat("lust", 70, 3)
+            $ Player.change_stat("focus", 50, 8)
+            $ Player.change_stat("focus", 80, 4)
+            "[Line] presses against your chest, her soapy breasts rubbing back and forth against it."
+        elif Options[0] == 1:
+            $ StayCount[0].change_stat("lust", 50, 5)
+            $ StayCount[0].change_stat("lust", 70, 2)
+            $ Player.change_stat("focus", 50, 6)
+            $ Player.change_stat("focus", 80, 3)
+            "[Line] stares silently at you as she moves her hands along her soapy body. . ."
+            $ Line = 0
+
+    if Line and len(StayCount) > 1:
+
+        $ D20 += 5 if approval_check(StayCount[1], 1800) else 0
+        if StayCount[1].GirlLikeCheck(StayCount[0]) <= 800 and 2 <= Options[0] <=3:
+            $ D20 -= 5
+        if StayCount[1].GirlLikeCheck(StayCount[0]) <= 600:
+            $ D20 -= 5
+
+        if 2 <= Options[0] <= 3:
+
+            if approval_check(StayCount[1], 1300) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 800:
+                $ StayCount[1].change_face("_sexy",1)
+                $ StayCount[0].change_stat("lust", 50, 5)
+                $ StayCount[0].change_stat("lust", 70, 5)
+                $ StayCount[1].change_stat("lust", 50, 12)
+                $ StayCount[1].change_stat("lust", 70, 12)
+                call Close_Launch (StayCount[0], StayCount[1])
+                "[StayCount[1].name] seems really into this, and returns the favor."
+                $ Player.change_stat("focus", 50, 7)
+                $ Player.change_stat("focus", 80, 3)
+                $ Line = 4
+            elif approval_check(StayCount[1], 1200) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 700:
+                $ StayCount[1].change_face("_sexy",2,Eyes="_closed")
+                $ StayCount[1].change_stat("lust", 50, 10)
+                $ StayCount[1].change_stat("lust", 70, 10)
+                $ Player.change_stat("focus", 50, 5)
+                $ Player.change_stat("focus", 80, 3)
+                call Close_Launch (StayCount[0], StayCount[1])
+                "[StayCount[1].name] seems really into this, and leans into it."
+            else:
+                $ StayCount[1].change_stat("lust", 50, 10)
+                $ StayCount[1].change_face("_sadside",Brows="_confused")
+                "[StayCount[1].name] doesn't really seem to appreciate this."
+                "She pulls away."
+                $ Line = 3
+        else:
+
+            if (approval_check(StayCount[1], 1300) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 700) or approval_check(StayCount[1], 2000):
+                if Options[0] == 5:
+                    $ StayCount[1].change_stat("lust", 50, 10)
+                    $ StayCount[1].change_stat("lust", 70, 5)
+                    $ Player.change_stat("focus", 50, 6)
+                    $ Player.change_stat("focus", 80, 3)
+                    call Close_Launch (StayCount[0], StayCount[1])
+                    "[StayCount[1].name] seems really into this, slowly rubbing against you as she watches."
+                else:
+                    $ StayCount[1].change_stat("lust", 50, 10)
+                    $ StayCount[1].change_stat("lust", 70, 5)
+                    $ Player.change_stat("focus", 50, 5)
+                    $ Player.change_stat("focus", 80, 3)
+                    call Close_Launch (StayCount[0], StayCount[1])
+                    "[StayCount[1].name] seems really into this, and joins her on the other side."
+                $ Line = 4
+            elif ((approval_check(StayCount[1], 1200) and StayCount[1].GirlLikeCheck(StayCount[0]) >= 600)) or approval_check(StayCount[1], 1600):
+                $ StayCount[1].change_face("_sexy",2,Eyes="_down")
+                $ StayCount[1].change_stat("lust", 50, 10)
+                $ StayCount[1].change_stat("lust", 70, 5)
+                "[StayCount[1].name] seems really into this, and watches her do it."
+            else:
+                $ StayCount[1].change_face("_sadside",Brows="_confused")
+                $ StayCount[1].change_stat("lust", 50, 5)
+                "[StayCount[1].name] doesn't really seem to appreciate this."
+                $ Line = 3
+    if Line:
+        menu:
+            extend ""
+            "Continue?":
+                pass
+            "Stop her." if len(StayCount) < 2:
+                $ Line = 0
+                call expression StayCount[0].tag + "_Pos_Reset"
+                "You take a step back, pulling away from her."
+                $ StayCount[0].change_stat("love", 80, -2)
+                $ StayCount[0].change_stat("obedience", 80, 5)
+                $ StayCount[0].change_stat("inhibition", 80, -2)
+                $ StayCount[0].change_face("_sad")
+                "She seems a bit disappointed."
+            "Stop them." if len(StayCount) > 1:
+                $ Line = 0
+                call expression StayCount[1].tag + "_Pos_Reset"
+                call expression StayCount[0].tag + "_Pos_Reset"
+                "You take a step back, pulling away from them."
+                $ StayCount[0].change_face("_sad")
+                $ StayCount[0].change_stat("love", 80, -2)
+                $ StayCount[0].change_stat("obedience", 80, 5)
+                $ StayCount[0].change_stat("inhibition", 80, -2)
+                if Line == 3:
+                    $ StayCount[1].change_stat("love", 80, 4)
+                    $ StayCount[1].change_stat("obedience", 80, 5)
+                    $ StayCount[1].change_face("_bemused")
+                    "[StayCount[0].name] seems a bit disappointed, but [StayCount[1].name] seems pleased."
+                else:
+                    $ StayCount[1].change_stat("love", 80, -1)
+                    $ StayCount[1].change_stat("obedience", 80, 5)
+                    $ StayCount[1].change_stat("inhibition", 80, -1)
+                    $ StayCount[1].change_face("_sad")
+                    "They seem a bit disappointed."
+
+    if Line:
+
+        if len(StayCount) > 1 and Line != 3:
+            $ StayCount[0].GLG(StayCount[1],600,4,1)
+            $ StayCount[1].GLG(StayCount[0],600,4,1)
+            $ StayCount[0].GLG(StayCount[1],800,3,1)
+            $ StayCount[1].GLG(StayCount[0],800,3,1)
+            $ StayCount[0].GLG(StayCount[1],900,1,1)
+            $ StayCount[1].GLG(StayCount[0],900,1,1)
+        if 2 <= Options[0] <= 3 and D20 >= 15:
+
+            $ StayCount[1].GLG(StayCount[0],900,4,1)
+            $ Player.change_stat("focus", 50, 10)
+            $ Player.change_stat("focus", 80, 5)
+            "After a few minutes of this, it looks like [StayCount[1].name] gets off."
+            call Girl_Cumming (StayCount[1], 1)
+            if Line == 4:
+                $ StayCount[0].GLG(StayCount[1],900,3,1)
+                "It looks like [StayCount[0].name] is reacting positively to it as well. . ."
+                call Girl_Cumming (StayCount[0], 1)
+            if len(StayCount) > 1:
+                "The girls take a step back."
+                call expression StayCount[1].tag + "_Pos_Reset"
+            else:
+                "[StayCount[0].name] takes a step back."
+            call expression StayCount[0].tag + "_Pos_Reset"
+
+        elif 4 <= Options[0] <= 5 and D20 >= 10:
+
+            $ Player.focus = 15
+            if Options[0] == 5:
+                $ StayCount[0].spunk.append("tits")
+
+            if Line == 4:
+                $ StayCount[0].change_stat("inhibition", 90, 7)
+                $ StayCount[1].change_stat("inhibition", 90, 4)
+                $ StayCount[0].GLG(StayCount[1],900,3,1)
+                $ StayCount[1].GLG(StayCount[0],900,3,1)
+                "After a few minutes of this, the two of them manage to get you off."
+            else:
+                $ StayCount[0].change_stat("inhibition", 90, 5)
+                "After a few minutes of this, she manages to get you off."
+            "A little more work is needed to clean up the mess."
+            if Options[0] == 5:
+                $ StayCount[0].spunk = []
+            if len(StayCount) > 1:
+                "The girls take a step back."
+                call expression StayCount[1].tag + "_Pos_Reset"
+            else:
+                "[StayCount[0].name] takes a step back."
+            call expression StayCount[0].tag + "_Pos_Reset"
+
+        elif 6 <= Options[0] <= 7 and D20 >= 15:
+
+            $ StayCount[0].change_stat("inhibition", 90, 7)
+            $ Player.change_stat("focus", 50, 15)
+            $ Player.change_stat("focus", 80, 5)
+            "After a few minutes of this, it looks like [StayCount[0].name] gets off."
+            call Girl_Cumming (StayCount[0], 1)
+            if Line == 4:
+                $ StayCount[1].change_stat("inhibition", 90, 6)
+                $ StayCount[0].GLG(StayCount[1],900,3,1)
+                "It looks like [StayCount[1].name] is enjoying herself as well. . ."
+                call Girl_Cumming (StayCount[1], 1)
+            if len(StayCount) > 1:
+                $ StayCount[1].GLG(StayCount[0],900,3,1)
+                "The girls take a step back."
+                call expression StayCount[1].tag + "_Pos_Reset"
+            else:
+                "[StayCount[0].name] takes a step back."
+            call expression StayCount[0].tag + "_Pos_Reset"
+        else:
+
+            if len(StayCount) > 1:
+                call expression StayCount[1].tag + "_Pos_Reset"
+            call expression StayCount[0].tag + "_Pos_Reset"
+            $ Player.change_stat("focus", 50, 15)
+            $ Player.change_stat("focus", 80, 5)
+            if D20 >= 15:
+                "After a minute or two, it sounds like someone is coming, so you scramble apart."
+                "Disappointing. . ."
+            elif D20 >= 10:
+                "After a minute or two, she seems satisfied with her efforts, and pulls back."
+                if 4 <= Options[0] <= 5:
+                    "You're left pretty hard."
+            else:
+                "After a minute or so of this, she draws back and finshes washing herself off."
+                if 4 <= Options[0] <= 5:
+                    "You're left pretty hard."
+    call shift_focus (StayCount[0])
+    return

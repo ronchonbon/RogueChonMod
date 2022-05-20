@@ -304,7 +304,7 @@ label Girl_Warn_Her:
     if primary_action == "sex" and Girl.event_counter["creampied"] >= 5:
 
         $ Girl.change_face("_sexy")
-        $ Player.cock_position = "in"
+        $ Player.cock_position = "sex"
         $ Girl.spunk.append("in")
         $ Player.spunk = "in"
         $ action_speed = 0
@@ -316,7 +316,7 @@ label Girl_Warn_Her:
     elif primary_action == "sex" and Girl.event_counter["creampied"] and D20 >= 10:
 
         $ Girl.change_face("_sexy")
-        $ Player.cock_position = "in"
+        $ Player.cock_position = "sex"
         $ Girl.spunk.append("in")
         $ Player.spunk = "in"
         $ action_speed = 0
@@ -996,7 +996,7 @@ label Girl_In_Mouth:
 
 label Girl_Creampie_P:
     if primary_action == "sex" and action_context == "auto":
-        $ Player.cock_position = "in"
+        $ Player.cock_position = "sex"
         $ Girl.spunk.append("in")
         $ Player.spunk = "in"
         $ action_speed = 0
@@ -1054,7 +1054,7 @@ label Girl_Creampie_P:
             "She gets a michevious look and speeds up, you burst inside her."
         else:
             "As you continue to pound her, she nods her head."
-        $ Player.cock_position = "in"
+        $ Player.cock_position = "sex"
         $ Girl.spunk.append("in")
         $ Player.spunk = "in"
         $ action_speed = 0

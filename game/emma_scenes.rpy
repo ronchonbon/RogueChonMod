@@ -1223,7 +1223,7 @@ label Emma_BF_Jerk:
         call Remove_Girl (EmmaX)
         call set_the_scene
         $ renpy.pop_call()
-        jump Player_Room
+        jump player_room
     if EmmaX.Event[5] > 1:
         ch_e "It was such a mistake asking you again. You still need to mature."
     if EmmaX.Event[5] != 20:
@@ -1236,7 +1236,7 @@ label Emma_BF_Jerk:
     $ bg_current = "bg_player"
     call Remove_Girl (EmmaX)
     $ renpy.pop_call()
-    jump Player_Room
+    jump player_room
 
 
 label Emma_Love(Shipping=[], Shipshape=0, BO=[]):

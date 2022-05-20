@@ -43,12 +43,12 @@ label action(Girl):
         call pullback_reactions(Girl, primary_action)
         jump before_action
     elif primary_action in anal_insertion_actions and not Girl.used_to_anal and ("finger_ass" in Girl.daily_history or "dildo_anal" in Girl.daily_history or "anal" in Girl.daily_history):
-        call ass_sore_reactions(Girl)
+        call anal_insertion_reactions(Girl)
     elif primary_action in Girl.recent_history:
         call recent_action_reactions(Girl)
         jump before_action
     elif primary_action in Girl.daily_history:
-        call done_action_today_reactions(Girl)
+        call daily_action_reactions(Girl)
         jump before_action
 
     if primary_action != "kiss":
@@ -448,7 +448,7 @@ label before_action:
     elif primary_action == "finger_pussy":
         $ action_speed = 2
     elif primary_action == "sex":
-        $ Player.cock_position = "in"
+        $ Player.cock_position = "sex"
 
         $ action_speed = 1
     elif primary_action == "anal":
@@ -459,7 +459,7 @@ label before_action:
         $ action_speed = 1
 
     if Taboo:
-        $ focused_Girl.drain_word("tabno")
+        $ focused_Girl.drain_word("no_taboo")
 
     $ focused_Girl.drain_word("no_" + primary_action)
     $ focused_Girl.add_word(0, primary_action, primary_action)
@@ -493,7 +493,7 @@ label action_cycle:
             call expression focused_Girl.tag + "_Sex_Launch" pass(primary_action)
 
             if primary_action == "sex":
-                $ Player.cock_position = "in"
+                $ Player.cock_position = "sex"
             elif primary_action == "anal":
                 $ Player.cock_position = "anal"
             elif primary_action == "hotdog":
@@ -608,7 +608,7 @@ label after_action:
     elif Girl.action_counter[primary_action] == 1:
         call first_action_response(focused_Girl, primary_action)
     elif (primary_action in cock_actions or primary_action == "kiss") and Girl.action_counter[primary_action] == 5:
-        call after_action_five_times_lines(focused_Girl)
+        call action_done_five_times_lines(focused_Girl)
     elif primary_action in sex_actions and not action_context:
         if "unsatisfied" in focused_Girl.recent_history:
             call unsatisfied_reactions(Girl, action)
@@ -1029,7 +1029,7 @@ label set_approval_bonus(Girl, action):
     if Girl.event_counter["forced"] and not Girl.Forced:
         $ approval_bonus -= 5*Girl.event_counter["forced"]
 
-    if Taboo and "tabno" in Girl.daily_history:
+    if Taboo and "no_taboo" in Girl.daily_history:
         $ approval_bonus -= 10
 
     if "no_" + primary_action in Girl.daily_history:

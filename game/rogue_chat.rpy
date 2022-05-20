@@ -1754,7 +1754,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
             jump Rogue_Room
         elif RogueX.location == "bg_player":
             ch_r "I'll be waiting."
-            jump Player_Room
+            jump player_room
         elif RogueX.location == "bg_showerroom":
             ch_r "I guess I'll be here."
             jump Shower_Room
@@ -1982,7 +1982,7 @@ label Rogue_Leave(approval_bonus=approval_bonus):
             jump Rogue_Room
         elif RogueX.location == "bg_player":
             ch_r "I'll be waiting."
-            jump Player_Room
+            jump player_room
         elif RogueX.location == "bg_showerroom":
             ch_r "I guess I'll see you there."
             jump Shower_Room_Entry

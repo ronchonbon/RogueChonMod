@@ -46,7 +46,7 @@ label Shopping_Mall(First=0, Second=0, Girl=0, Cart=[]):
             "You wait around a bit."
             call Wait
             call EventCalls
-            call Girls_Location
+            call girls_location
             if time_index >= 3:
                 ch_u "The mall is now closing, please head to the nearest exit. . ."
                 "You head back to campus."

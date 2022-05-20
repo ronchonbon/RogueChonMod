@@ -213,20 +213,18 @@ image Rogue_sex_animation:
         (1120,840),
         (0,0), ConditionSwitch(
             "not Player.sprite", "Rogue_sex_body_Anim0",
-            "Player.cock in ['sex', 'anal']", "Rogue_sex_body_Anim[action_speed]",
-            "Player.cock == 'footjob'", "Rogue_sex_body_FootAnim[action_speed]",
-            "Player.cock == 'out' and action_speed >= 2","Rogue_Hotdog_Body_Anim[action_speed]",
+            "Player.cock_position in ['sex', 'anal']", "Rogue_sex_body_Anim[action_speed]",
+            "Player.cock_position == 'footjob'", "Rogue_sex_body_FootAnim[action_speed]",
+            "Player.cock_position == 'out' and action_speed >= 2","Rogue_Hotdog_Body_Anim[action_speed]",
             "True", "Rogue_sex_body_Anim0"),
         (0,0), ConditionSwitch(
             "not Player.sprite", "Rogue_sex_legs_Anim0",
-            "Player.cock in ['sex', 'anal']", "Rogue_sex_legs_Anim[action_speed]",
-            "Player.cock == 'footjob'", "Rogue_sex_legs_FootAnim[action_speed]",
-            "Player.cock == 'out' and action_speed >= 2","Rogue_Hotdog_Legs_Anim[action_speed]",
+            "Player.cock_position in ['sex', 'anal']", "Rogue_sex_legs_Anim[action_speed]",
+            "Player.cock_position == 'footjob'", "Rogue_sex_legs_FootAnim[action_speed]",
+            "Player.cock_position == 'out' and action_speed >= 2","Rogue_Hotdog_Legs_Anim[action_speed]",
             "True", "Rogue_sex_legs_Anim0"))
 
-    align (0.6, 0.0)
-    pos (650, 200)
-    zoom 0.85
+    align (0.6, 0.0) zoom 0.85
 
 image Rogue_doggy_blinking:
     "Rogue_doggy_eyes"
@@ -249,30 +247,30 @@ image Rogue_doggy_animation:
         (420,750),
         (0,0), ConditionSwitch(
             "not Player.sprite", "Rogue_doggy_body",
-            "Player.cock == 'anal'", ConditionSwitch(
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Rogue_Doggy_Fuck2_Top",
                     "action_speed > 1", "Rogue_Doggy_Fuck_Top",
                     "action_speed ", "Rogue_Doggy_Anal_Head_Top",
                     "True", "Rogue_doggy_body"),
-            "Player.cock == 'sex'", ConditionSwitch(
+            "Player.cock_position == 'sex'", ConditionSwitch(
                     "action_speed > 2", "Rogue_Doggy_Fuck2_Top",
                     "action_speed > 1", "Rogue_Doggy_Fuck_Top",
                     "True", "Rogue_doggy_body"),
             "True", "Rogue_doggy_body"),
         (0,0), ConditionSwitch(
             "not Player.sprite", "Rogue_doggy_ass",
-            "Player.cock == 'anal'", ConditionSwitch(
+            "Player.cock_position == 'anal'", ConditionSwitch(
                     "action_speed > 2", "Rogue_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Rogue_Doggy_Fuck_Ass",
                     "action_speed ", "Rogue_Doggy_Anal_Head_Ass",
                     "True", "Rogue_doggy_ass"),
-            "Player.cock == 'sex'", ConditionSwitch(
+            "Player.cock_position == 'sex'", ConditionSwitch(
                     "action_speed > 2", "Rogue_Doggy_Fuck2_Ass",
                     "action_speed > 1", "Rogue_Doggy_Fuck_Ass",
                     "True", "Rogue_doggy_ass"),
             "True", "Rogue_doggy_ass"),
         (0,0), ConditionSwitch(
-            "Player.cock == 'footjob'", ConditionSwitch(
+            "Player.cock_position == 'footjob'", ConditionSwitch(
                     "action_speed > 1", "Rogue_doggy_feet2",
                     "action_speed ", "Rogue_doggy_feet1",
                     "True", "Rogue_doggy_feet0"),

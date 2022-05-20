@@ -350,7 +350,7 @@ label begging_menu(Girl, action):
         "Sorry, never mind." if "no_" + action in Girl.daily_history:
             $ Girl.change_face("_bemused")
 
-            call no_problem_lines(Girl)
+            call sorry_never_mind_lines(Girl)
 
             return
         "Maybe later?" if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "fondle_ass", "handjob", "footjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"] and "no_" + action not in Girl.daily_history:
@@ -381,7 +381,7 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("inhibition", 50, 1)
 
             if Taboo:
-                $ Girl.add_word(1, "tabno", "tabno")
+                $ Girl.add_word(1, "no_taboo", "no_taboo")
 
             $ Girl.recent_history.append("no_" + action)
             $ Girl.daily_history.append("no_" + action)
@@ -409,7 +409,7 @@ label begging_menu(Girl, action):
                     $ Girl.change_stat("inhibition", 70, 3)
                     $ Girl.change_stat("inhibition", 40, 2)
 
-                call reward_politeness_lines(Girl)
+                call begging_lines(Girl)
 
                 if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy"]:
                     jump before_fondle
@@ -468,7 +468,7 @@ label begging_menu(Girl, action):
             $ Girl.change_stat("inhibition", 70, 2)
 
             if Taboo:
-                $ Girl.add_word(1, "tabno", "tabno")
+                $ Girl.add_word(1, "no_taboo", "no_taboo")
 
             $ Girl.recent_history.append("no_" + action)
             $ Girl.daily_history.append("no_" + action)
@@ -480,7 +480,7 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("obedience", 90, 2)
                 $ Girl.change_stat("obedience", 50, 2)
 
-                call think_would_enjoy_lines(Girl)
+                call trying_to_convince_lines(Girl)
 
                 $ Girl.change_stat("inhibition", 70, 3)
                 $ Girl.change_stat("inhibition", 40, 2)
@@ -496,7 +496,7 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("obedience", 90, 1)
                 $ Girl.change_stat("obedience", 50, 2)
 
-                call reward_politeness_lines(Girl)
+                call begging_lines(Girl)
 
                 $ Girl.change_stat("inhibition", 70, 1)
                 $ Girl.change_stat("inhibition", 40, 2)
@@ -514,17 +514,7 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("inhibition", 70, 3)
                 $ Girl.change_stat("inhibition", 40, 2)
 
-                $ line = renpy.random.choice(["Sure, put'im here.",
-                    "No Problem.",
-                    "Sure. Drop trou.",
-                    "Sure, I guess.",
-                    "Okay.",
-                    "Ok, lemme see it.",
-                    "I guess. . .",
-                    "I suppose, whip it out.",
-                    "Ok, [She gestures for you to come over].",
-                    "Heh, ok."])
-                ch_r "[line]"
+                call begging_lines(Girl)
 
                 $ line = 0
 

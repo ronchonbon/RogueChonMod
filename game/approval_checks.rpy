@@ -38,7 +38,7 @@ label action_approval_checks(Girl, action):
     elif action == "suck_breasts":
         $ approval = approval_check(Girl, 1050, TabM = 4)
     elif action == "fondle_pussy":
-        if Girl in [EmmaX, LauraX, JeanX, StormX, JubesX] and Taboo and "public" not in Girl.History:
+        if Girl in [EmmaX, LauraX, JeanX, StormX, JubesX] and Taboo and "public" not in Girl.history:
             $ approval_bonus -= 20
 
         if "no_fondle_pussy" in Girl.daily_history:

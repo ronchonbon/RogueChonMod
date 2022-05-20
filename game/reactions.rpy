@@ -43,8 +43,8 @@ label forced_but_not_unwelcome_reactions(Girl, action):
 
     return
 
-label went_too_far_reactions(Girl, action):
-    call went_too_far_lines(Girl)
+label forced_action_rejected_reactions(Girl, action):
+    call forced_action_rejected_lines(Girl)
 
     if action in ["fondle_thighs"]:
         $ Girl.change_stat("lust", 50, 2)
@@ -85,23 +85,23 @@ label anal_insertion_not_loose_done_today_reactions(Girl, action):
 
     return
 
-label not_happening_reactions(Girl, action):
+label otherwise_rejected_reactions(Girl, action):
     if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "fondle_ass", "handjob", "blowjob", "sex"]:
         $ Girl.change_face("_sexy")
         $ Girl.Mouth = "_sad"
     elif action in ["eat_pussy", "finger_ass", "eat_ass", "footjob", "titjob", "dildo_pussy", "dildo_ass", "anal", "hotdog"]:
         $ Girl.change_face("_surprised")
 
-    call not_happening_lines(Girl)
+    call otherwise_not_interested_lines(Girl)
 
     $ Girl.change_face()
 
     return
 
-label action_rejected_taboo_reactions(Girl, action):
+label taboo_action_rejected_reactions(Girl, action):
     $ Girl.change_face("_angry", 1)
 
-    call not_in_public_lines(Girl)
+    call taboo_action_rejected_lines(Girl)
 
     if action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
         $ Girl.change_stat("lust", 200, 5)
@@ -445,7 +445,7 @@ label auto_approved_reactions(Girl, action):
         $ Girl.change_stat("inhibition", 50, 3)
         $ Girl.change_stat("inhibition", 70, 1)
 
-        call lets_do_this_lines(Girl)
+        call auto_accepted_lines(Girl)
 
     return
 
@@ -454,13 +454,13 @@ label auto_rejected_reactions(Girl, action):
         $ Girl.change_face("_surprised")
         $ Girl.change_stat("obedience", 50, -2)
 
-        call go_back_lines(Girl)
+        call auto_rejected_lines(Girl)
     elif action == "fondle_breasts":
         $ Girl.change_face("_surprised")
         $ Girl.Brows = "_confused"
         $ Girl.change_stat("obedience", 50, -2)
 
-        call go_back_lines(Girl)
+        call auto_rejected_lines(Girl)
     elif action == "finger_pussy":
         $ Girl.change_face("_surprised", 2)
         $ Girl.change_stat("love", 80, -2)
@@ -471,13 +471,13 @@ label auto_rejected_reactions(Girl, action):
 
         $ Girl.change_face("_perplexed", 1)
 
-        call go_back_lines(Girl)
+        call auto_rejected_lines(Girl)
     elif action == "eat_pussy":
         $ Girl.change_face("_surprised")
         $ Girl.change_stat("love", 80, -2)
         $ Girl.change_stat("obedience", 50, -3)
 
-        call go_back_lines(Girl)
+        call auto_rejected_lines(Girl)
 
         $ Girl.change_face("_perplexed",1)
 
@@ -486,7 +486,7 @@ label auto_rejected_reactions(Girl, action):
         $ Girl.change_face("_surprised")
         $ Girl.change_stat("obedience", 50, -3)
 
-        call go_back_lines(Girl)
+        call auto_rejected_lines(Girl)
 
         $ Girl.change_face("_bemused")
     elif action in ["finger_ass", "eat_ass"]:
@@ -494,7 +494,7 @@ label auto_rejected_reactions(Girl, action):
         $ Girl.change_stat("love", 80, -2)
         $ Girl.change_stat("obedience", 50, -3)
 
-        call go_back_lines(Girl)
+        call auto_rejected_lines(Girl)
     elif action in dildo_actions or action in sex_actions:
         $ Girl.Brows = "_angry"
 
@@ -530,10 +530,10 @@ label recent_action_reactions(Girl):
 
     return
 
-label done_action_today_reactions(Girl):
+label daily_action_reactions(Girl):
     $ Girl.change_face("_sexy", 1)
 
-    call gently_lines(Girl)
+    call daily_action_lines(Girl)
 
     return
 
@@ -572,18 +572,17 @@ label first_time_asking_reactions(Girl, action):
 
     return
 
-label ass_sore_reactions(Girl):
+label anal_insertion_reactions(Girl):
     $ Girl.change_face("_bemused", 1)
 
-    call ass_sore_lines(Girl)
+    call anal_insertion_not_loose_done_today_lines(Girl)
 
     return
 
 label starting_to_get_bored_reactions(Girl, action):
     $ Girl.Brows = "_confused"
 
-    call warm_hands_lines(Girl)
-    call getting_close_lines(Girl)
+    call starting_to_get_bored_lines(Girl)
 
     return
 
@@ -595,9 +594,7 @@ label definitely_bored_now_reactions(Girl, action):
     else:
         $ Girl.Brows = "_angry"
 
-        call getting_rugburn_lines(Girl)
-        call done_with_this_lines(Girl)
-        call can_we_do_something_else_lines(Girl)
+        call definitely_bored_now_lines(Girl)
 
     call try_something_else_menu(Girl, action)
 
@@ -609,7 +606,7 @@ label unsatisfied_reactions(Girl, action):
     if Girl != JeanX:
         $ Girl.Eyes = "_side"
 
-    call didnt_get_off_lines(Girl)
+    call unsatisfied_lines(Girl)
 
     return
 
@@ -621,10 +618,10 @@ label would_you_like_more_reactions(Girl, action):
 
     return
 
-label done_with_action_reactions(Girl, action):
+label end_of_action_reactions(Girl, action):
     $ Girl.change_face("_bemused", 0)
 
-    call im_done_lines(Girl)
+    call end_of_action_lines(Girl)
 
 label sex_acts(action = 0):
     if Alonecheck(focused_Girl) and focused_Girl.Taboo == 20:
@@ -1043,12 +1040,12 @@ label first_action_response(Girl, action):
     if not action_context:
         if Girl.love >= 500 and "unsatisfied" not in Girl.recent_history:
             $ Girl.Mouth = "_smile"
-            call that_was_nice_lines(Girl)
+            call satisfied_lines(Girl)
         elif action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass", "dildo_pussy", "dildo_ass"] and Girl.obedience <= 500 and Player.focus <= 20:
             $ Girl.change_face("_perplexed", 1)
 
             call was_that_enough_lines(Girl)
-        elif action in cock_actions and  Player.focus <= 20:
+        elif action in cock_actions and Player.focus <= 20:
             $ Girl.Mouth = "_sad"
 
             call was_that_enough_lines(Girl)
@@ -1140,7 +1137,7 @@ label action_approved(Girl, action):
         $ Girl.change_stat("love", 20, -2, 1)
 
         call action_forcefully_approved_lines(Girl)
-    elif not Taboo and "tabno" in Girl.daily_history:
+    elif not Taboo and "no_taboo" in Girl.daily_history:
         call private_enough_lines(Girl)
     elif action == "anal" and "anal" in Girl.daily_history and not Girl.Loose:
         pass
@@ -1180,20 +1177,17 @@ label action_disapproved(Girl, action):
         $ Girl.change_face("_bemused", 2)
 
     if "no_" + action in Girl.recent_history:
-        call just_told_you_no_lines(Girl)
-    elif Taboo and "tabno" in Girl.daily_history and "no_" + action in Girl.daily_history:
-        call had_enough_of_this_lines(Girl)
+        call said_no_recently_lines(Girl)
+    elif Taboo and "no_taboo" in Girl.daily_history and "no_" + action in Girl.daily_history:
+        call taboo_and_said_no_today_lines(Girl)
     elif "no_" + action in Girl.daily_history:
-        call already_said_no_lines(Girl)
-    elif Taboo and "tabno" in Girl.daily_history:
-        call already_said_not_here_lines(Girl)
+        call said_no_today_lines(Girl)
+    elif Taboo and "no_taboo" in Girl.daily_history:
+        call taboo_lines(Girl)
     elif not Girl.action_counter[action]:
         $ Girl.change_face("_bemused")
 
-        if action not in ["finger_ass", "eat_ass"]:
-            call not_ready_yet_lines(Girl)
-        else:
-            call not_into_ass_play(Girl)
+        call action_not_done_yet_lines(Girl)
     elif action in anal_insertion_actions and not Girl.Loose and action not in Girl.daily_history:
         $ Girl.change_face("_perplexed")
 
@@ -1201,8 +1195,7 @@ label action_disapproved(Girl, action):
     else:
         $ Girl.change_face("_bemused")
 
-        call rather_not_lines(Girl)
-        call not_happening_lines(Girl)
+        call otherwise_not_interested_lines(Girl)
 
         if Girl in [RogueX, KittyX, EmmaX, StormX]:
             $ Girl.Blush = 1
@@ -1230,7 +1223,7 @@ label action_accepted(Girl, action):
                 $ Girl.change_stat("obedience", 90, 1)
                 $ Girl.change_stat("inhibition", 60, 1)
 
-        call come_and_get_em_lines(Girl)
+        call action_accepted_enthusiastically_lines(Girl)
 
         $ Girl.change_stat("love", 90, 1)
         $ Girl.change_stat("inhibition", 50, 3)
@@ -1276,7 +1269,7 @@ label action_accepted(Girl, action):
             elif action in ["fondle_ass"]:
                 $ Girl.change_face("bemused, 1")
 
-            call come_and_get_em_lines(Girl)
+            call action_accepted_enthusiastically_lines(Girl)
 
         if action in ["finger_pussy", "eat_pussy", "finger_ass"]:
             $ Girl.change_stat("obedience", 20, 1)
@@ -1338,25 +1331,25 @@ label action_rejected(Girl, action):
     if "no_" + action in Girl.daily_history:
         $ Girl.change_face("_angry", 1)
 
-        call learn_to_take_no_lines(Girl)
+        call action_already_rejected_lines(Girl)
 
         $ Girl.add_word(1,"_angry","_angry")
     elif Girl.Forced:
-        call went_too_far_reactions(Girl, action)
+        call forced_action_rejected_reactions(Girl, action)
 
         $ Girl.add_word(1, "_angry", "_angry")
     elif Taboo:
-        call action_rejected_taboo_reactions(Girl, action)
+        call taboo_action_rejected_reactions(Girl, action)
 
-        $ Girl.add_word(1, "tabno", "tabno")
+        $ Girl.add_word(1, "no_taboo", "no_taboo")
     elif action in anal_insertion_actions and not Girl.Loose and action in Girl.daily_history:
         call anal_insertion_not_loose_done_today_reactions(Girl)
     elif Girl.action_counter[action]:
         $ Girl.change_face("_sad")
 
-        call you_had_your_shot_lines(Girl)
+        call previous_action_rejected_lines(Girl)
     else:
-        call not_happening_reactions(Girl, action)
+        call otherwise_rejected_reactions(Girl, action)
 
     $ Girl.recent_history.append("no_" + action)
     $ Girl.daily_history.append("no_" + action)

@@ -335,7 +335,7 @@ label tour_parting:
     call set_the_scene
     "This is a short tutorial on the game's features. Feel free to skip it, you can always view it later in this room."
     call Tutorial
-    jump Player_Room
+    jump player_room
 return
 
 
@@ -666,7 +666,7 @@ label Rogue_Love_Jerk:
         $ RogueX.location = "bg_rogue"
         $ bg_current = "bg_player"
         call Remove_Girl (RogueX)
-        jump Player_Room
+        jump player_room
     if RogueX.Event[6] > 1:
         ch_r "Fool me once, shame on you. . . I thought you'd grown."
     ch_r "If that's how you want to be, you can get the hell out of here!"
@@ -677,7 +677,7 @@ label Rogue_Love_Jerk:
     $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
     call Remove_Girl (RogueX)
-    jump Player_Room
+    jump player_room
 
 label Rogue_AnnaMarie:
     ch_r "I should probably tell you, I wasn't exactly born with the name \"Rogue.\""
@@ -830,7 +830,7 @@ label Rogue_Sub_Jerk:
         $ bg_current = "bg_player"
         $ RogueX.location = "bg_rogue"
         call Remove_Girl (RogueX)
-        jump Player_Room
+        jump player_room
     if RogueX.Event[7] > 1:
         ch_r "I thought you may have learned to respect my needs by now."
     ch_r "If that's how it is, I would appreciate some time alone."
@@ -841,7 +841,7 @@ label Rogue_Sub_Jerk:
     $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
     call Remove_Girl (RogueX)
-    jump Player_Room
+    jump player_room
 
 
 
@@ -954,7 +954,7 @@ label Rogue_Obed_Jerk:
         $ bg_current = "bg_player"
         $ RogueX.location = "bg_rogue"
         call Remove_Girl (RogueX)
-        jump Player_Room
+        jump player_room
     if RogueX.Event[8] > 1:
         ch_r "I thought you may have learned to respect my needs by now."
     ch_r "If that's how it is, I would appreciate some time alone."
@@ -965,7 +965,7 @@ label Rogue_Obed_Jerk:
     $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
     call Remove_Girl (RogueX)
-    jump Player_Room
+    jump player_room
 
 
 
@@ -1075,7 +1075,7 @@ label Rogue_Sexfriend_Jerk:
         $ bg_current = "bg_player"
         $ RogueX.location = "bg_rogue"
         call Remove_Girl (RogueX)
-        jump Player_Room
+        jump player_room
     $ Count = (10*RogueX.Event[9])
     $ RogueX.change_stat("inhibition", 200, -Count)
     if bg_current == "bg_rogue":
@@ -1087,7 +1087,7 @@ label Rogue_Sexfriend_Jerk:
     if "Historia" in Player.traits:
         return
     call Remove_Girl (RogueX)
-    jump Player_Room
+    jump player_room
 
 
 
@@ -1202,7 +1202,7 @@ label Rogue_Fuckbuddy_Jerk:
         ch_r "Ok, I'm out."
         $ RogueX.location = "bg_rogue"
     call Remove_Girl (RogueX)
-    jump Player_Room
+    jump player_room
 
 
 
@@ -1519,7 +1519,7 @@ label Rogue_Frisky_Class:
                 "Since Xavier isn't concerned with your activities, you both head back to your room instead."
                 $ RogueX.location = "bg_player"
                 call clear_the_room (RogueX, 0, 1)
-                jump Player_Room
+                jump player_room
 
 
 

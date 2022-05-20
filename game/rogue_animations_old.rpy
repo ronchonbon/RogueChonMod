@@ -1678,24 +1678,24 @@ label Rogue_Sex_Launch(Line=primary_action):
     $ Line = "solo" if not Line else Line
     $ Player.sprite = 1
     if Line == "sex":
-        $ Player.cock = "sex"
+        $ Player.cock_position = "sex"
         if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
             $ offhand_action = 0
     elif Line == "anal":
-        $ Player.cock = "anal"
+        $ Player.cock_position = "anal"
         if offhand_action in ("finger_ass","dildo_anal","eat_ass"):
             $ offhand_action = 0
     elif Line == "hotdog":
-        $ Player.cock = "out"
+        $ Player.cock_position = "out"
     elif Line == "footjob":
         $ ShowFeet = 1
-        $ Player.cock = "footjob"
+        $ Player.cock_position = "footjob"
     elif Line == "massage":
         $ Player.sprite = 0
-        $ Player.cock = 0
+        $ Player.cock_position = 0
     else:
         $ Player.sprite = 0
-        $ Player.cock = "out"
+        $ Player.cock_position = "out"
         $ action_speed = 0
 
     if RogueX.pose == "doggy":

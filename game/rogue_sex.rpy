@@ -1,4 +1,3 @@
-
 label Rogue_SexAct(Act=0):
     if AloneCheck(RogueX) and RogueX.Taboo == 20:
         $ RogueX.Taboo = 0
@@ -41,7 +40,6 @@ label Rogue_SexAct(Act=0):
         call Rogue_SexPrep
         if not action_context:
             return
-
 
 label Rogue_Masturbate:
     $ Round -= 5 if Round > 5 else (Round-1)
@@ -730,22 +728,25 @@ label Rogue_M_Interupted:
             ch_r "Well if you say so."
     return
 
-
-
-
-
-image AssBase:
-    "images/RogueDoggy/Rogue_Doggy_Ass.png"
-
-image Dildo_Animation:
-    contains:
-        "UI_Dildo"
-        block:
-            ease 1 pos (100,300)
-            ease 1 pos (100,400)
-            repeat
-
-image AssTest:
-
-    AlphaMask("Dildo_Animation", "AssBase")
-# Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc
+label Rogue_Fondle:
+    $ RogueX.mouth = "_smile"
+    if not RogueX.remaining_actions:
+        ch_r "I'm a bit worn out right now, [RogueX.player_petname], maybe later."
+        return
+    menu:
+        ch_r "Well where exactly were you interested in touching, [RogueX.player_petname]?"
+        "Your breasts?" if RogueX.remaining_actions:
+            jump Rogue_Fondle_Breasts
+        "Suck your breasts?" if RogueX.remaining_actions and RogueX.action_counter["suck_breasts"]:
+            jump Rogue_Suck_Breasts
+        "Your thighs?" if RogueX.remaining_actions:
+            jump Rogue_Fondle_Thighs
+        "Your pussy?" if RogueX.remaining_actions:
+            jump Rogue_Fondle_Pussy
+        "Lick your pussy?" if RogueX.remaining_actions and RogueX.action_counter["eat_pussy"]:
+            jump Rogue_Lick_Pussy
+        "Your Ass?" if RogueX.remaining_actions:
+            jump Rogue_Fondle_Ass
+        "Never mind.":
+            return
+    return

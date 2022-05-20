@@ -1935,7 +1935,7 @@ label Laura_Summon(approval_bonus=approval_bonus):
             jump Laura_Room
         elif LauraX.location == "bg_player":
             ch_l "I'll be waiting."
-            jump Player_Room
+            jump player_room
         elif LauraX.location == "bg_showerroom":
             ch_l "I'll leave you some hot water."
             jump Shower_Room
@@ -2179,7 +2179,7 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump Laura_Room
         elif LauraX.location == "bg_player":
             ch_l "Good."
-            jump Player_Room
+            jump player_room
         elif LauraX.location == "bg_showerroom":
             ch_l "Ok, nice."
             jump Shower_Room_Entry
@@ -2192,7 +2192,7 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         else:
             ch_l "I'll just meet you in your room."
             $ LauraX.location = "bg_player"
-            jump Player_Room
+            jump player_room
 
 
 

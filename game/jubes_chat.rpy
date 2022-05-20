@@ -1932,7 +1932,7 @@ label Jubes_Summon(approval_bonus=approval_bonus):
             jump Jubes_Room
         elif JubesX.location == "bg_player":
             ch_v "I'll be waiting."
-            jump Player_Room
+            jump player_room
         elif JubesX.location == "bg_showerroom":
             ch_v "I'll leave you some hot water."
             jump Shower_Room
@@ -2183,7 +2183,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump Jubes_Room
         elif JubesX.location == "bg_player":
             ch_v "Good."
-            jump Player_Room
+            jump player_room
         elif JubesX.location == "bg_showerroom":
             ch_v "Ok, nice."
             jump Shower_Room_Entry
@@ -2196,7 +2196,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         else:
             ch_v "I'll just meet you in your room."
             $ JubesX.location = "bg_player"
-            jump Player_Room
+            jump player_room
 
 
 
