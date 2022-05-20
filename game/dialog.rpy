@@ -115,19 +115,19 @@ label generic_exit_sex_menu_lines(Girl):
 
 label exit_sex_menu_experienced_first_round_lines(Girl):
     if Girl == RogueX:
-        $ lines = ["Are you sure, [Girl.player_petname]? I could really use some company."
+        $ lines = ["Are you sure, " + Girl.player_petname + "? I could really use some company."
     elif Girl == KittyX:
-        $ lines = ["Are you sure, [Girl.player_petname]? I wasn't exactly. . . finished."
+        $ lines = ["Are you sure, " + Girl.player_petname + "? I wasn't exactly. . . finished."
     elif Girl == EmmaX:
-        $ lines = ["Are you certain, [Girl.player_petname]? Are you perhaps forgetting something?"
+        $ lines = ["Are you certain, " + Girl.player_petname + "? Are you perhaps forgetting something?"
     elif Girl == LauraX:
-        $ lines = ["Are you sure, [Girl.player_petname]?{p}I could go another round. . . or two. . ."]
+        $ lines = ["Are you sure, " + Girl.player_petname + "?{p}I could go another round. . . or two. . ."]
     elif Girl == JeanX:
-        $ lines = ["Are you sure, [Girl.player_petname]?{p}I could go another round. . . or two. . ."]
+        $ lines = ["Are you sure, " + Girl.player_petname + "?{p}I could go another round. . . or two. . ."]
     elif Girl == StormX:
-        $ lines = ["Are you certain, [Girl.player_petname]? Are you perhaps forgetting something?"]
+        $ lines = ["Are you certain, " + Girl.player_petname + "? Are you perhaps forgetting something?"]
     elif Girl == JubesX:
-        $ lines = ["Are you sure, [Girl.player_petname]?{p}I could keep going. . ."]
+        $ lines = ["Are you sure, " + Girl.player_petname + "?{p}I could keep going. . ."]
 
     $ line = renpy.random.choice(lines)
 
@@ -159,7 +159,7 @@ label exit_sex_menu_experienced_addicted_lines(Girl):
 
 label exit_sex_menu_experienced_lines(Girl):
     if Girl == RogueX:
-        $ lines = ["Don't leave me hang'in, [Girl.player_petname]."]
+        $ lines = ["Don't leave me hang'in, " + Girl.player_petname + "."]
     elif Girl == KittyX:
         $ lines = ["I still need some more attention."]
     elif Girl == EmmaX:
@@ -357,17 +357,17 @@ label exit_sex_menu_more_than_two_rounds_lines(Girl):
 
 label exit_sex_menu_girl_also_tired_lines(Girl):
     if Girl == RogueX:
-        $ lines = ["I guess I'm a bit tuckered out too, [Girl.player_petname]. I guess we can take a breather."]
+        $ lines = ["I guess I'm a bit tuckered out too, " + Girl.player_petname + ". I guess we can take a breather."]
     elif Girl == KittyX:
-        $ lines = ["I guess I'm kinda tired too, [Girl.player_petname]. We can take a break. . .{p}. . .for now."]
+        $ lines = ["I guess I'm kinda tired too, " + Girl.player_petname + ". We can take a break. . .{p}. . .for now."]
     elif Girl == EmmaX:
-        $ lines = ["I suppose I'm tired as well, [Girl.player_petname]. We can take a breather. . ."]
+        $ lines = ["I suppose I'm tired as well, " + Girl.player_petname + ". We can take a breather. . ."]
     elif Girl == LauraX:
         $ lines = ["Yeah, you look like you've had enough. We can take a break. . .{p}}. . .for now."]
     elif Girl == JeanX:
         $ lines = ["Ok, sounds good. . ."]
     elif Girl == StormX:
-        $ lines = ["I could use some rest as well, [Girl.player_petname]."]
+        $ lines = ["I could use some rest as well, " + Girl.player_petname + "."]
     elif Girl == JubesX:
         $ lines = ["Sure, I guess we can take a little break. . ."]
 
@@ -411,8 +411,8 @@ label end_of_action_lines(Girl, action):
             $ lines.append("Ok, I gotta rest my jaw for a minute. . .")
     elif Girl == EmmaX:
         $ lines = ["We need to stop for a moment, let me catch my breath.",
-            ch_e "All right, [EmmaX.player_petname], that's plenty for now.",
-            ch_e "Ok, [EmmaX.player_petname], that's enough of that for now.",
+            ch_e "All right, " + Girl.player_petname + ", that's plenty for now.",
+            ch_e "Ok, " + Girl.player_petname + ", that's enough of that for now.",
             ch_e "That's probably enough of that.",
             "Ok, that's enough, for now. . ."]
 
@@ -435,7 +435,7 @@ label end_of_action_lines(Girl, action):
             ch_s "That is enough of that."]
     elif Girl == JubesX:
         $ lines = ["Ok, that's it, I need a break.",
-            ch_s "[StormX.player_petname], that will be enough for now."]
+            ch_s "" + Girl.player_petname + ", that will be enough for now."]
 
         if action in
 
@@ -485,7 +485,7 @@ label ten_rounds_left_lines(Girl, action):
 
     return
 
-label five_rounds_left_lines(Girl):
+label five_rounds_left_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["Seriously, it'll be time to stop soon."]
     elif Girl == KittyX:
@@ -572,7 +572,7 @@ label tired_lines(Girl):
 
     return
 
-label auto_rejected_lines(Girl):
+label auto_rejected_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["Ah, ah, Just keep doing what you were doing, " + Girl.player_petname + ".",
             "Hey, just keep doing what you were doing, " + Girl.player_petname + ".",
@@ -587,34 +587,34 @@ label auto_rejected_lines(Girl):
             $ lines.append("Keep it out of there, " + Girl.player_petname + ".",
                 "Keep it outside, " + Girl.player_petname + ".")
     elif Girl == KittyX:
-        $ lines = ["Nuh-uh, [KittyX.player_petname], get back to what you were doing.",
+        $ lines = ["Nuh-uh, " + Girl.player_petname + ", get back to what you were doing.",
             "Oooo! Um, no, no thanks. No. . .",
-            "Whoa, back off, [KittyX.player_petname].",
+            "Whoa, back off, " + Girl.player_petname + ".",
             "Um, don't do that. . .",
             "Um, what do you think you're doing?",
-            "Hmm, kinda rude, [KittyX.player_petname]."]
+            "Hmm, kinda rude, " + Girl.player_petname + "."]
 
         if action in hand_actions:
-            $ lines.append("Hands off, [KittyX.player_petname].")
+            $ lines.append("Hands off, " + Girl.player_petname + ".")
 
         if action in ass_actions:
-            $ lines.append("Um[KittyX.like]what are you doing back there?!")
+            $ lines.append("Um[Girl.like]what are you doing back there?!")
 
         if action in dildo_actions:
             $ lines.append("Hey, what are you planning to do with that?!")
 
         if action in ["fondle_thighs", pussy_actions, ass_actions]:
-            $ lines.append("Heh, keep it above the belt, [KittyX.player_petname].")
+            $ lines.append("Heh, keep it above the belt, " + Girl.player_petname + ".")
 
         if action in [finger_actions, dildo_actions]:
             $ lines.append("Um, no take that out.")
     elif Girl == EmmaX:
-        $ lines = ["Whoa, back off, [EmmaX.player_petname].",
-            "[EmmaX.player_petname]! Not now. . .",
+        $ lines = ["Whoa, back off, " + Girl.player_petname + ".",
+            "" + Girl.player_petname + "! Not now. . .",
             "Do you really think you can handle that?"]
 
         if action in hand_actions:
-            $ lines.append("Hands off, [EmmaX.player_petname].")
+            $ lines.append("Hands off, " + Girl.player_petname + ".")
 
         if action in finger_actions:
             $ lines.append("Careful what you put in there, you may not get it back.")
@@ -632,24 +632,24 @@ label auto_rejected_lines(Girl):
             $ lines.append("Excuse yourself, what are you planning to do with that?!")
 
         if action in ["fondle_thighs", pussy_actions, ass_actions]:
-            $ lines.append("Perhaps we keep it above the waist, [EmmaX.player_petname].")
+            $ lines.append("Perhaps we keep it above the waist, " + Girl.player_petname + ".")
 
         if action == "hotdog":
-            $ lines.append("You might want to take a step back, [EmmaX.player_petname]?")
+            $ lines.append("You might want to take a step back, " + Girl.player_petname + "?")
     elif Girl == LauraX:
-        $ lines = ["Roll it back, [LauraX.player_petname]. . .",
-            "Whoa, back off, [LauraX.player_petname].",
-            "[LauraX.player_petname]! No. . ."]
+        $ lines = ["Roll it back, " + Girl.player_petname + ". . .",
+            "Whoa, back off, " + Girl.player_petname + ".",
+            "" + Girl.player_petname + "! No. . ."]
 
         if action in hand_actions:
             $ lines.append("Watch your hands, or lose them.",
-                "Hands off, [LauraX.player_petname].")
+                "Hands off, " + Girl.player_petname + ".")
 
         if action in dildo_actions:
             $ lines.append("Hey, what are you planning to do with that?!")
 
         if action in ["fondle_thighs", pussy_actions, ass_actions]:
-            $ lines.append("Maybe we keep it above the waist, [LauraX.player_petname].")
+            $ lines.append("Maybe we keep it above the waist, " + Girl.player_petname + ".")
 
         if action in anal_insertion_actions:
             $ lines.append("Oh? A backdoor intruder?")
@@ -661,18 +661,18 @@ label auto_rejected_lines(Girl):
             $ lines.append("Oh, taking it all the way, are we?")
 
         if action == "hotdog":
-            $ lines.append("You might want to take a step back, [LauraX.player_petname]?")
+            $ lines.append("You might want to take a step back, " + Girl.player_petname + "?")
     elif Girl == JeanX:
-        $ lines = ["Not so fast, [JeanX.player_petname]. . .",
-            "Hmmm, not yet, [JeanX.player_petname].",
-            "Ooo! Not right now, [JeanX.player_petname].",
-            "Whoa there, [JeanX.player_petname]!"]
+        $ lines = ["Not so fast, " + Girl.player_petname + ". . .",
+            "Hmmm, not yet, " + Girl.player_petname + ".",
+            "Ooo! Not right now, " + Girl.player_petname + ".",
+            "Whoa there, " + Girl.player_petname + "!"]
 
         if action in dildo_actions:
             $ lines.append("Hey, what are you planning to do with that?!")
 
         if action in ["fondle_thighs", pussy_actions, ass_actions]]:
-            $ lines.append("Keep it above the waist, [JeanX.player_petname].")
+            $ lines.append("Keep it above the waist, " + Girl.player_petname + ".")
 
         if action in insertion_actions:
             $ lines.append("Just sticking it in?")
@@ -681,20 +681,20 @@ label auto_rejected_lines(Girl):
             $ lines.append("Sticking in the back?")
 
         if action == "hotdog":
-            $ lines.append("Little close there, [JeanX.player_petname]?")
+            $ lines.append("Little close there, " + Girl.player_petname + "?")
     elif Girl == StormX:
         $ lines = ["Probably not, right now. . .",
             "Show some self control. . .",
             "Perhaps show some control. . .",
-            "You go too far, [StormX.player_petname].",
-            "[StormX.player_petname]! Not now. . .",
+            "You go too far, " + Girl.player_petname + ".",
+            "" + Girl.player_petname + "! Not now. . .",
             "Are you certain that is what you want?"]
 
         if action in finger_actions:
             $ lines.append("Careful what you put in there, you may not get it back.")
 
         if action in hand_actions:
-            $ lines.append("Release me, [StormX.player_petname].")
+            $ lines.append("Release me, " + Girl.player_petname + ".")
 
         if action in dildo_actions:
             $ lines.append("Excuse yourself, what are you planning to do with that?!")
@@ -703,24 +703,24 @@ label auto_rejected_lines(Girl):
             $ lines.append("Excuse me, what are you aiming at?")
 
         if action in ["fondle_thighs", pussy_actions, ass_actions]:
-            $ lines.append("Perhaps we keep it above the waist, [StormX.player_petname].")
+            $ lines.append("Perhaps we keep it above the waist, " + Girl.player_petname + ".")
 
         if action == "eat_pussy":
             $ lines.append("I appreciate the intent, but this is not the time for it.")
 
         if action == "hotdog":
-            $ lines.append("You are rather close, [StormX.player_petname]. . .")
+            $ lines.append("You are rather close, " + Girl.player_petname + ". . .")
     elif Girl == JubesX:
-        $ lines = ["Cool your jets, [JubesX.player_petname]. . .",
-            "Whoa, back off, [JubesX.player_petname].",
-            "[JubesX.player_petname]! No. . ."]
+        $ lines = ["Cool your jets, " + Girl.player_petname + ". . .",
+            "Whoa, back off, " + Girl.player_petname + ".",
+            "" + Girl.player_petname + "! No. . ."]
 
         if action in hand_actions:
             $ lines.append("Watch your hands, or lose them.",
-                "Hands off, [JubesX.player_petname].")
+                "Hands off, " + Girl.player_petname + ".")
 
         if action in ["fondle_thighs", pussy_actions, ass_actions]:
-            $ lines.append("Maybe we keep it above the waist, [JubesX.player_petname].")
+            $ lines.append("Maybe we keep it above the waist, " + Girl.player_petname + ".")
 
         if action == "eat_pussy":
             $ lines.append("Hey, good instincts, but maybe hold off?")
@@ -734,7 +734,7 @@ label auto_rejected_lines(Girl):
 
     return
 
-label private_enough_lines(Girl):
+label private_enough_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["I guess this is private enough. . .",
             "Ok, I guess this is private enough. . .",
@@ -798,181 +798,228 @@ label private_enough_lines(Girl):
 
     return
 
-label recent_action_lines(Girl):
+label recent_action_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["Mmm, again? Ok.",
-            "Mmm, again? Let me flex my hand a bit. . .",
-            "I don't want to wear them out. . .",
-            "Mmm, again? Ok, let me get the girls ready.",
-            "Mmm, again? [[stretches her jaw]"
             "Mmm, again? Ok, let's get to it.",
-            "You want to go again? Ok.",
-            "I think I'm warmed up. . ."]
+            "Again? Ok.",
+            "Again? K."]
+
+        if action == "handjob":
+            $ lines.append("Mmm, again? Let me flex my hand a bit. . .")
+
+        if action == "footjob":
+            $ lines.append("I don't want to wear them out. . .")
+
+        if action == "titjob":
+            $ lines.append("Mmm, again? Ok, let me get the girls ready.")
+
+        if action == "blowjob":
+            $ lines.append("Mmm, again? [[stretches her jaw]")
+
+        if action in sex_actions:
+            $ lines.append("You want to go again? Ok.")
+
+        if action in anal_insertion_actions:
+            $ lines.append("I think I'm warmed up. . .")
+    if Girl == KittyX:
+        $ lines = ["Mmm, again? Ok.",
+            "Mmm, again?",
+            "Mmm, again? Ok, let's get to it."]
+
+        if action == "handjob":
+            $ lines.append("You're giving me carpal tunnel. . .")
+
+        if action == "footjob":
+            $ lines.append("I'm getting foot cramps. . .")
 
 
-        ch_k "Mmm, again? Ok."
-        ch_e "Mmmm, again? I suppose. . ."
-        ch_l "Mmmm, again? I guess. . ."
-        ch_j "Mmmm, again? I guess. . ."
-        ch_s "Mmmm, again? I suppose. . ."
-        ch_v "Mmmm, again? I guess. . ."
+        if action == "blowjob":
+            $ lines.append("Mmm, again? [[stretches her jaw]")
 
+        if action in sex_actions:
+            $ lines.append("Another round? {i}Fine.{/i}")
 
-        ch_k "You're giving me carpal tunnel. . ."
-        ch_e "I will need to grade papers later, you know. . ."
-        ch_l "Hmm, another handy then. . ."
-        ch_j "Well, I guess another wouldn't hurt. . ."
-        ch_s "I do not know if I have it in me. . ."
-        ch_v "Hmm, another handy then. . ."
+        if action in anal_insertion_actions:
+            $ lines.append("I guess I'm warmed up. . .")
+    if Girl == EmmaX:
+        $ lines = ["Mmmm, again? I suppose. . .",
+            "Oh! Back for more?",
+            "Mmm, again? Ok, let's get to it.",
+            "Again? Oh, very well.",
+            "Alright."]
 
-        ch_k "Mmm, again?"
-        ch_e "Oh! Back for more?"
-        ch_l "Huh, again?"
-        ch_j "Huh, again?"
-        ch_s "You cannot get enough?"
+        if action == "handjob":
+            $ lines.append("I will need to grade papers later, you know. . .")
 
+        if action == "footjob":
+            $ lines.append("You know, heels are nightmare on the arches. . .")
 
-        ch_k "Mmm, again? [[stretches her jaw]"
-        ch_e "Mmm, again? [[yawns]"
-        ch_l "Mmm, again? [[yawns]"
-        ch_j "Mmm, again?"
-        ch_s "Mmm, again?"
+        if action == "blowjob":
+            $ lines.append("Mmm, again? [[yawns]")
 
-        ch_k "Mmm, again? Ok, let's get to it."
-        ch_e "Mmm, again? Ok, let's get to it."
-        ch_l "Mmm, again? Ok, let's get to it."
-        ch_j "Mmm, again? Ok, let's get to it."
-        ch_s "Mmm, again? Ok, let's get to it."
+        if action in sex_actions:
+            $ lines.append("Again? " + Girl.player_petname + ", you're insatiable!")
 
-        ch_k "I'm getting foot cramps. . ."
-        ch_e "You know, heels are nightmare on the arches. . ."
-        ch_l "More of that, huh. . ."
-        ch_j "More of that, huh. . ."
-        ch_s "I suppose so. . ."
+        if action in anal_insertion_actions:
+            $ lines.append("I am warmed up. . .")
+    if Girl == LauraX:
+        $ lines = ["Mmmm, again? I guess. . .",
+            "Huh, again?",
+            "Mmm, again? Ok, let's get to it.",
+            "More of that, huh. . .",
+            "Again? Fine, whatever."]
 
+        if action == "handjob":
+            $ lines.append("Hmm, another handy then. . .")
 
-        ch_k "Another round? {i}Fine.{/i}"
-        ch_e "Again? [EmmaX.player_petname], you're insatiable!"
-        ch_l "Again? Your funeral."
-        ch_j "Again? Your funeral."
-        ch_s "Again? [StormX.player_petname], you are a lion!"
+        if action == "blowjob":
+            $ lines.append("Mmm, again? [[yawns]")
 
-        ch_k "I guess I'm warmed up. . ."
-        ch_e "I am warmed up. . ."
-        ch_l "I am warmed up. . ."
-        ch_j "I am warmed up. . ."
-        ch_s "I am properly stretched out. . ."
+        if action in sex_actions:
+            $ lines.append("Again? Your funeral.")
 
-        ch_k "Again? Ok."
-        ch_e "Again? Oh, very well."
-        ch_l "Again? Fine, whatever."
-        ch_j "Again? Fine, whatever."
-        ch_s "Again? Oh, very well."
+        if action in anal_insertion_actions:
+            $ lines.append("I am warmed up. . .")
 
+        if action in active_actions:
+            $ lines.append("Sure, get in there.")
+    if Girl == JeanX:
+        $ lines = ["Mmmm, again? I guess. . .",
+            "Huh, again?",
+            "Mmm, again?",
+            "Mmm, again? Ok, let's get to it.",
+            "More of that, huh. . .",
+            "Ok, sure.",
+            "Again? Fine, whatever."]
 
-        ch_k "Again? K."
-        ch_e "Alright."
-        ch_l "Sure, get in there."
-        ch_j "Ok, sure."
-        ch_s "Of course."
+        if action in job_actions:
+            $ lines.append("Well, I guess another wouldn't hurt. . .")
+
+        if action in sex_actions:
+            $ lines.append("Again? Your funeral.")
+
+        if action in anal_insertion_actions:
+            $ lines.append("I am warmed up. . .")
+    if Girl == StormX:
+        $ lines = ["Mmmm, again? I suppose. . .",
+            "You cannot get enough?",
+            "Mmm, again?",
+            "Mmm, again? Ok, let's get to it.",
+            "I suppose so. . .",
+            "Again? Oh, very well.",
+            "Of course."]
+
+        if action in job_actions:
+            $ lines.append("I do not know if I have it in me. . .")
+
+        if action in sex_actions:
+            $ lines.append("Again? " + Girl.player_petname + ", you are a lion!")
+
+        if action in anal_insertion_actions:
+            $ lines.append("I am properly stretched out. . .")
+    if Girl == JubesX:
+        $ lines = ["Mmmm, again? I guess. . ."]
+
+        if action == "handjob":
+            $ lines.append("Hmm, another handy then. . .")
+
+    $ line = renpy.random.choice(lines)
 
     Girl.voice "[line]"
 
     return
 
-label taboo_action_rejected_lines(Girl):
+label taboo_action_rejected_lines(Girl, action):
     if Girl == RogueX:
         $ lines = ["I really don't think this is the right place for that!",
             "" + Girl.player_petname + "! Not in public!",
             "This just really isn't the time or place, " + Girl.player_petname + "!",
             "Not in such an exposed place, " + Girl.player_petname + ".",
-            "You really expect me to do that here? You realize how. . . exposed that would be?",
-            "You really expect me to do that here?",
             "Not here!",
-            "Even if I wanted to, it certainly wouldn't be here!",
-            "That you would even suggest such a thing in a place like this. . .",
             "I'd be a bit embarassed doing that here."]
 
+        if action in [dildo_actions, cock_actions]:
+            $ lines.append("You really expect me to do that here? You realize how. . . exposed that would be?",
+                "You really expect me to do that here?",
+                "Even if I wanted to, it certainly wouldn't be here!")
 
-    ch_k "I don't like being so. . . exposed."
-    ch_e "I can't been seen doing that with you."
-    ch_l "I try to stay off the radar."
-    ch_j "I'm. . . not comfortable. . . in public. . ."
-    ch_s "I should not be seen doing that."
-    ch_v "I don't wanna make a scene."
+        if action in sex_actions:
+            $ lines.append("That you would even suggest such a thing in a place like this. . .")
+    elif Girl == KittyX:
+        $ lines = ["I don't like being so. . . exposed.",
+            "Time and place, " + Girl.player_petname + "!",
+            "This just really isn't the time or place, " + Girl.player_petname + "!",
+            "" + Girl.player_petname + "! Not here!",
+            "" + Girl.player_petname + "! Time and place!",
+            "This is way too exposed!",
+            "Not here!",
+            "Not here, not anywhere near here.",
+            "[Girl.Like]not here though?"]
 
-    ch_k "Time and place, [Girl.player_petname]!"
-    ch_e "I have a reputation to maintain."
+        if action in [dildo_actions, cock_actions]:
+            $ lines.append("You're being ridiculous. That? Here?!")
 
-    ch_k "This just really isn't the time or place, [Girl.player_petname]!"
+        if action in passive_actions:
+            $ lines.append("You really expect me to do that here? You realize how. . . exposed that would be?")
 
-    ch_k "[Girl.player_petname]! Not here!"
+        if action in sex_actions:
+            $ lines.append("I can't believe you'd even consider it around here!")
+    elif Girl == EmmaX:
+        $ lines = ["I can't be seen doing that with you.",
+            "I have a reputation to maintain.",
+            "I couldn't possibly do that. . . here!",
+            "This is way too exposed!",
+            "Not here!",
+            "This truly isn't an appropriate place for that.",
+            "How can you imagine this would be an appropriate location?",
+            "This area is a bit too exposed for that sort of thing. . ."]
 
+        if action in [dildo_actions, cock_actions]:
+            $ lines.append("Can you imagine the scandal? Here?")
 
-    ch_k "[Girl.player_petname]! Time and place!"
+        if action == "anal":
+            if approval_check(EmmaX, 500, "I"):
+                $ lines.append("How can you imagine this would be an appropriate location?.{p}This place, I mean, not anal.{p}Anal can be nice, sometimes.")
+            else:
+                $ lines.append("How can you imagine this would be an appropriate location?.{p}This place, I mean, not anal.{p}Anal can be nice, sometimes.{p}Maybe not with you.")
+    elif Girl == LauraX:
+        $ lines = ["I try to stay off the radar.",
+            "This area's too exposed.",
+            "Not here!",
+            "This is too exposed.",
+            "This place is way too exposed."]
 
+        if action in [dildo_actions, cock_actions]:
+            $ lines.append("You really expect me to do that here? This isn't exactly \"covert.\"",
+                "This area is a bit too exposed for that sort of thing. . .")
+    elif Girl == JeanX:
+        $ lines = ["I'm. . . not comfortable. . . in public. . .",
+            "I'm not comfortable in public right now. . .",
+            "Not here!",
+            "This is too public.",
+            "I'm just not comfortable with that right now. . .",
+            "This area is a bit too exposed for that sort of thing. . ."]
 
-    ch_e "I couldn't possibly do that. . . here!"
-    ch_l "This area's too exposed."
-    ch_j "I'm not comfortable in public right now. . ."
-    ch_s "I could not possibly do that here."
+        if action in [dildo_actions, cock_actions]:
+            $ lines.append("You really expect me to do that here?{p}You know I can't \"take care of that\" anymore. . .")
+    elif Girl == StormX:
+        $ lines = ["I should not be seen doing that.",
+            "I do not wish to make a spectacle.",
+            "This is much too exposed.",
+            "Not here!",
+            "This truly is not an appropriate place for that.",
+            "This area is a bit too exposed for that sort of thing. . ."]
 
+        if action in [dildo_actions, cock_actions]:
+            $ lines.append("I could not possibly do that here.")
 
-    ch_k "You really expect me to do that here? You realize how. . . exposed that would be?"
-    ch_e "Can you imagine the scandal? Here?"
-    ch_l "You really expect me to do that here? This isn't exactly \"covert.\""
-    ch_j "You really expect me to do that here?"
-    ch_j "You know I can't \"take care of that\" anymore. . ."
-    ch_s "I do not wish to make a spectacle."
+        if action in sex_actions:
+            $ lines.append("How could you imagine that this would be an appropriate location?")
+    elif Girl == JubesX:
+        $ lines = ["I don't wanna make a scene."]
 
-
-    ch_k "This is way too exposed!"
-    ch_e "This is way too exposed!"
-    ch_l "This area's too exposed."
-    ch_j "I'm not comfortable in public right now. . ."
-    ch_s "This is much too exposed."
-
-
-    ch_e "Not here!"
-
-    ch_j "Not here!"
-    ch_s "Not here!"
-
-    ch_k "Not here!"
-
-    ch_l "Not here!"
-    ch_s "Not here!"
-
-    ch_k "Not here, not anywhere near here."
-    ch_e "This truly isn't an appropriate place for that."
-    ch_l "This is too exposed."
-    ch_j "This is too public."
-    ch_s "This truly is not an appropriate place for that."
-
-
-    ch_k "I can't believe you'd even consider it around here!"
-    ch_e "How can you imagine this would be an appropriate location?"
-    ch_l "This place is way too exposed."
-    ch_j "I'm just not comfortable with that right now. . ."
-    ch_s "How could you imagine that this would be an appropriate location?"
-
-    ch_k "You're being ridiculous. That? Here?!"
-    ch_e "How can you imagine this would be an appropriate location?"
-    ch_e "This place, I mean, not anal."
-    ch_j "I'm just not comfortable with that right now. . ."
-
-    if approval_check(EmmaX, 500, "I"):
-        ch_e "Anal can be nice, sometimes."
-    if not approval:
-        ch_e "Maybe not with you."
-
-
-    ch_k "[Girl.Like]not here though?"
-    ch_e "This area is a bit too exposed for that sort of thing. . ."
-    ch_l "This area is a bit too exposed for that sort of thing. . ."
-    ch_j "This area is a bit too exposed for that sort of thing. . ."
-    ch_s "This area is a bit too exposed for that sort of thing. . ."
-
+    $ line = renpy.random.choice(lines)
 
     Girl.voice "[line]"
 
@@ -983,24 +1030,67 @@ label taboo_lines(Girl):
         $ lines = ["I told you not in public!",
             "I already told you this is too public!",
             "This is just way too exposed!",
+            "I said not in public!"]
+
+        if action in passive_actions:
+            $ lines.append("I already told you that I wouldn't do that out here!")
+
+        if action in dildo_actions:
+            $ lines.append("Stop swinging that thing around in public!")
+
+        if action == "hotdog":
+            $ lines.append("I told you that I didn't want you rubb'in up on me in public!")
+    elif Girl == KittyX:
+        $ lines = ["Not here!",
+            "This is just way too exposed!",
+            "I told you this is too public!",
             "I said not in public!",
-            "Stop swinging that thing around in public!",
-            "I already told you that I wouldn't do that out here!",
-            "I told you that I didn't want you rubb'in up on me in public!"]
+            "I already told you this is too public!",
+            "I{i}just{/i}[Girl.like]told you, not in public!"]
 
-    ch_j "I told you. . . not here, [JeanX.player_petname]."
-    ch_s "This area is too public, [StormX.player_petname]."
-    ch_v "I told you, not here, [JubesX.player_petname]."
+        if action in passive_actions:
+            $ lines.append("I already told you that I wouldn't do that out here!")
+
+        if action in dildo_actions:
+            $ lines.append("Stop swinging that thing around in public!")
+    elif Girl == EmmaX:
+        $ lines = []
+
+        if action in passive_actions:
+            $ lines.append()
+
+        if action in dildo_actions:
+            $ lines.append()
+    elif Girl == LauraX:
+        $ lines = []
+
+        if action in passive_actions:
+            $ lines.append()
+
+        if action in dildo_actions:
+            $ lines.append()
+    elif Girl == JeanX:
+        $ lines = []
+
+        if action in passive_actions:
+            $ lines.append()
+
+        if action in dildo_actions:
+            $ lines.append()
+
+    ch_j "I told you. . . not here, " + Girl.player_petname + "."
+    ch_s "This area is too public, " + Girl.player_petname + "."
+    ch_v "I told you, not here, " + Girl.player_petname + "."
 
 
 
 
-    ch_s "As I said, not here, [StormX.player_petname]."
+    ch_s "As I said, not here, " + Girl.player_petname + "."
 
-    ch_e "As I said, not here, [EmmaX.player_petname]."
-    ch_l "I told you, not here, [LauraX.player_petname]."
+    ch_e "As I said, not here, " + Girl.player_petname + "."
+    ch_l "I told you, not here, " + Girl.player_petname + "."
 
-    ch_k "Not here!"
+
 
 
         ch_l "I said not in public."
@@ -1008,37 +1098,37 @@ label taboo_lines(Girl):
         ch_s "I was very clear, this is too public."
         ch_v "I said not in public."
 
-        ch_k "This is just way too exposed!"
+
         ch_e "This is not an appropriate place for that."
         ch_l "This is just way too exposed!"
         ch_j "I don't want to show off the goods like that!"
         ch_s "This is not an appropriate place for that."
 
-        ch_k "I told you this is too public!"
+
         ch_e "I told you this is too public!"
         ch_l "Like I told you, too public!"
         ch_j "Like I said, too public!"
         ch_s "I told you this is too public!"
 
-        ch_k "Stop swinging that thing around in public!"
+
         ch_e "Stop showing that thing around in public!"
         ch_l "Stop swinging that thing around in public!"
         ch_j "Stop swinging that thing around in public!"
         ch_s "Stop showing that thing around in public!"
 
-            ch_k "I already told you that I wouldn't do that out here!"
+
             ch_e "I already told you that I wouldn't do that out here!"
             ch_l "I already told you that I wouldn't do that out here!"
             ch_s "I already told you that I wouldn't do that out here!"
 
-                ch_k "I said not in public!"
+
                 ch_e "I told you, not in public!"
                 ch_l "I said not in public!"
                 ch_j "I said not in public!"
                 ch_s "I informed you, not in public!"
 
 
-                    ch_k "I already told you this is too public!"
+
                     ch_l "I already told you this is too public!"
                     ch_j "I told you, I'm not comfortable with that. . ."
 
@@ -1047,7 +1137,7 @@ label taboo_lines(Girl):
                     ch_j "I told you, I'm not comfortable with that. . ."
                     ch_s "I have already informed you, this is too public!"
 
-                    ch_k "I{i}just{/i}[KittyX.like]told you, not in public!"
+
                     ch_e "I already told you. . .not in such an exposed location."
                     ch_l "I told you. . . this place is too exposed."
                     ch_j "I'm not comfortable with that. . ."
@@ -1079,12 +1169,12 @@ label action_not_done_yet_lines(Girl):
         $ lines = ["I. . . don't think that's. . ."]
 
 
-    ch_k "I'm[Girl.like]not ready for that, [Girl.player_petname]. . ."
-    ch_e "I highly doubt you could handle them, [EmmaX.player_petname]. . ."
-    ch_l "Look, I don't know if we're ready for that, [LauraX.player_petname]. . ."
-    ch_j "Look, don't touch, [JeanX.player_petname]. . ."
-    ch_s "Perhaps some other time, [StormX.player_petname]. . ."
-    ch_v "Look, I don't know if we're ready for that, [JubesX.player_petname]. . ."
+    ch_k "I'm[Girl.like]not ready for that, " + Girl.player_petname + ". . ."
+    ch_e "I highly doubt you could handle them, " + Girl.player_petname + ". . ."
+    ch_l "Look, I don't know if we're ready for that, " + Girl.player_petname + ". . ."
+    ch_j "Look, don't touch, " + Girl.player_petname + ". . ."
+    ch_s "Perhaps some other time, " + Girl.player_petname + ". . ."
+    ch_v "Look, I don't know if we're ready for that, " + Girl.player_petname + ". . ."
 
     ch_k "Not. . . yet. . . maybe later."
     ch_e "Let's work up to that, perhaps. . ."
@@ -1094,31 +1184,31 @@ label action_not_done_yet_lines(Girl):
     ch_v "Let's work up to that maybe. ."
 
     ch_k "Not. . . yet. . . maybe later."
-    ch_e "Seems a bit forward, [EmmaX.player_petname]."
-    ch_l "Seems a bit aggressive, [LauraX.player_petname]."
-    ch_j "Look, don't touch, [JeanX.player_petname]."
-    ch_s "I would rather you did not, [StormX.player_petname]."
-    ch_v "Kinda forward, [JubesX.player_petname]."
+    ch_e "Seems a bit forward, " + Girl.player_petname + "."
+    ch_l "Seems a bit aggressive, " + Girl.player_petname + "."
+    ch_j "Look, don't touch, " + Girl.player_petname + "."
+    ch_s "I would rather you did not, " + Girl.player_petname + "."
+    ch_v "Kinda forward, " + Girl.player_petname + "."
 
-    ch_k "Um, not down there, [Girl.player_petname]. . ."
-    ch_e "I don't think we're there yet, [EmmaX.player_petname]. . ."
-    ch_l "I don't think we're there yet, [LauraX.player_petname]. . ."
-    ch_j "I don't think we're there yet, [JeanX.player_petname]. . ."
-    ch_s "Perhaps go slower, [StormX.player_petname]. . ."
-    ch_v "I don't think we're there yet, [JubesX.player_petname]. . ."
+    ch_k "Um, not down there, " + Girl.player_petname + ". . ."
+    ch_e "I don't think we're there yet, " + Girl.player_petname + ". . ."
+    ch_l "I don't think we're there yet, " + Girl.player_petname + ". . ."
+    ch_j "I don't think we're there yet, " + Girl.player_petname + ". . ."
+    ch_s "Perhaps go slower, " + Girl.player_petname + ". . ."
+    ch_v "I don't think we're there yet, " + Girl.player_petname + ". . ."
 
-    ch_k "That's pretty intimate, [Girl.player_petname]. . ."
-    ch_e "I'm not sure we're at that stage, [EmmaX.player_petname]. . ."
-    ch_j "Mmmm, not right now, [JeanX.player_petname]. . ."
-    ch_s "Oh, that would. . .perhaps not, [StormX.player_petname]. . ."
-    ch_v "I'm not sure we're there yet, [JubesX.player_petname]. . ."
+    ch_k "That's pretty intimate, " + Girl.player_petname + ". . ."
+    ch_e "I'm not sure we're at that stage, " + Girl.player_petname + ". . ."
+    ch_j "Mmmm, not right now, " + Girl.player_petname + ". . ."
+    ch_s "Oh, that would. . .perhaps not, " + Girl.player_petname + ". . ."
+    ch_v "I'm not sure we're there yet, " + Girl.player_petname + ". . ."
 
-    ch_k "Not yet, [Girl.player_petname]. . ."
-    ch_e "Not yet, [EmmaX.player_petname]. . ."
-    ch_l "Not yet, [LauraX.player_petname]. . ."
-    ch_j "Not yet, [JeanX.player_petname]. . ."
-    ch_s "I would rather not, [StormX.player_petname]. . ."
-    ch_v "Not yet, [JubesX.player_petname]. . ."
+    ch_k "Not yet, " + Girl.player_petname + ". . ."
+    ch_e "Not yet, " + Girl.player_petname + ". . ."
+    ch_l "Not yet, " + Girl.player_petname + ". . ."
+    ch_j "Not yet, " + Girl.player_petname + ". . ."
+    ch_s "I would rather not, " + Girl.player_petname + ". . ."
+    ch_v "Not yet, " + Girl.player_petname + ". . ."
 
     ch_k "I. . . don't think that's. . ."
     ch_e "That's really not my usual style. . ."
@@ -1127,38 +1217,38 @@ label action_not_done_yet_lines(Girl):
     ch_s "I am unsure about that. . ."
     ch_v "That's really not my style. . ."
 
-    ch_e "Are you sure though, [EmmaX.player_petname]?. . ."
-    ch_l "Seriously, [LauraX.player_petname]. . ."
-    ch_j "Seriously, [JeanX.player_petname]. . ."
-    ch_s "Are you certain, [StormX.player_petname]? . ."
-    ch_v "Seriously, [JubesX.player_petname]. . ."
+    ch_e "Are you sure though, " + Girl.player_petname + "?. . ."
+    ch_l "Seriously, " + Girl.player_petname + ". . ."
+    ch_j "Seriously, " + Girl.player_petname + ". . ."
+    ch_s "Are you certain, " + Girl.player_petname + "? . ."
+    ch_v "Seriously, " + Girl.player_petname + ". . ."
 
-    ch_k "I'm not really up for that, [Girl.player_petname]. . ."
-    ch_e "Perhaps later, [EmmaX.player_petname]. . ."
-    ch_l "I'm not really into that, [LauraX.player_petname]. . ."
-    ch_j "Not really my thing, [JeanX.player_petname]. . ."
+    ch_k "I'm not really up for that, " + Girl.player_petname + ". . ."
+    ch_e "Perhaps later, " + Girl.player_petname + ". . ."
+    ch_l "I'm not really into that, " + Girl.player_petname + ". . ."
+    ch_j "Not really my thing, " + Girl.player_petname + ". . ."
 
-    ch_k "I don't know about the taste, [Girl.player_petname]. . ."
-    ch_e "I'm not sure you're up to my usual tastes, [EmmaX.player_petname]. . ."
-    ch_l "I don't know if your taste will match your scent, [LauraX.player_petname]. . ."
-    ch_j "I have been wondering what you taste like, [JeanX.player_petname]. . ."
-    ch_s "I am not sure I would enjoy this, [StormX.player_petname]. . ."
+    ch_k "I don't know about the taste, " + Girl.player_petname + ". . ."
+    ch_e "I'm not sure you're up to my usual tastes, " + Girl.player_petname + ". . ."
+    ch_l "I don't know if your taste will match your scent, " + Girl.player_petname + ". . ."
+    ch_j "I have been wondering what you taste like, " + Girl.player_petname + ". . ."
+    ch_s "I am not sure I would enjoy this, " + Girl.player_petname + ". . ."
 
-    ch_e "I'm a bit past toys, [EmmaX.player_petname]. . ."
-    ch_l "I'm just not into toys, [LauraX.player_petname]. . ."
-    ch_j "I'm just not into toys, [LauraX.player_petname]. . ."
-    ch_s "I'm a bit past toys, [StormX.player_petname]. . ."
+    ch_e "I'm a bit past toys, " + Girl.player_petname + ". . ."
+    ch_l "I'm just not into toys, " + Girl.player_petname + ". . ."
+    ch_j "I'm just not into toys, " + Girl.player_petname + ". . ."
+    ch_s "I'm a bit past toys, " + Girl.player_petname + ". . ."
 
-    ch_k "I'm just not into toys, [Girl.player_petname]. . ."
-    ch_e "I'm just not into toys, [EmmaX.player_petname]. . ."
-    ch_l "I'm just not into toys, [LauraX.player_petname]. . ."
-    ch_s "I'm just not into toys, [StormX.player_petname]. . ."
+    ch_k "I'm just not into toys, " + Girl.player_petname + ". . ."
+    ch_e "I'm just not into toys, " + Girl.player_petname + ". . ."
+    ch_l "I'm just not into toys, " + Girl.player_petname + ". . ."
+    ch_s "I'm just not into toys, " + Girl.player_petname + ". . ."
 
-    ch_k "I don't know, [Girl.player_petname]. . ."
-    ch_e "I'm unsure, [EmmaX.player_petname]. . ."
-    ch_l "Eh, [LauraX.player_petname]. . ."
+    ch_k "I don't know, " + Girl.player_petname + ". . ."
+    ch_e "I'm unsure, " + Girl.player_petname + ". . ."
+    ch_l "Eh, " + Girl.player_petname + ". . ."
     ch_j "Well. . ."
-    ch_s "I am unsure, [StormX.player_petname]. . ."
+    ch_s "I am unsure, " + Girl.player_petname + ". . ."
 
     ch_k "I don't know that I'm. . .[Girl.like]ready? . ."
     ch_e "I really doubt you understand what you're in for. . ."
@@ -1172,11 +1262,11 @@ label action_not_done_yet_lines(Girl):
     ch_j "I don't know that you're ready for that yet."
     ch_s "I do not know that you are yet prepared for that."
 
-    ch_k "That's kinda hot, [Girl.player_petname]. . ."
-    ch_e "Hmm, that could be amusing, [EmmaX.player_petname]. . ."
-    ch_l "Hmm, that could be amusing, [LauraX.player_petname]. . ."
-    ch_j "Hmm, that could be amusing, [JeanX.player_petname]. . ."
-    ch_s "Hmm, that could be entertaining, [StormX.player_petname]. . ."
+    ch_k "That's kinda hot, " + Girl.player_petname + ". . ."
+    ch_e "Hmm, that could be amusing, " + Girl.player_petname + ". . ."
+    ch_l "Hmm, that could be amusing, " + Girl.player_petname + ". . ."
+    ch_j "Hmm, that could be amusing, " + Girl.player_petname + ". . ."
+    ch_s "Hmm, that could be entertaining, " + Girl.player_petname + ". . ."
 
     Girl.voice "[line]"
 
@@ -1190,11 +1280,11 @@ label sorry_never_mind_lines(Girl):
             "Fine.",
             "No problem."]
 
-    ch_k "It's cool, [Girl.player_petname]."
-    ch_e "Don't concern yourself, [EmmaX.player_petname]."
+    ch_k "It's cool, " + Girl.player_petname + "."
+    ch_e "Don't concern yourself, " + Girl.player_petname + "."
     ch_l "No worries."
     ch_j "It's fine, I get it."
-    ch_s "Don't concern yourself, [StormX.player_petname]."
+    ch_s "Don't concern yourself, " + Girl.player_petname + "."
     ch_v "Yeah, whatever."
 
     ch_k "No problem."
@@ -1202,15 +1292,15 @@ label sorry_never_mind_lines(Girl):
     ch_l "It's cool."
     ch_s "No offense taken. I get it."
 
-    ch_k "Yeah, ok, [Girl.player_petname]."
+    ch_k "Yeah, ok, " + Girl.player_petname + "."
     ch_e "I appreciate your restraint."
     ch_l "It's cool."
     ch_s "I appreciate your restraint."
 
-    ch_e "I appreciate your restraint, [EmmaX.player_petname]."
-    ch_l "It's cool, [LauraX.player_petname]."
+    ch_e "I appreciate your restraint, " + Girl.player_petname + "."
+    ch_l "It's cool, " + Girl.player_petname + "."
 
-    ch_s "I appreciate your restraint, [StormX.player_petname]."
+    ch_s "I appreciate your restraint, " + Girl.player_petname + "."
 
     ch_e "Quite alright."
     ch_l "It's fine."
@@ -1218,26 +1308,26 @@ label sorry_never_mind_lines(Girl):
     ch_s "I understand."
     ch_v "It's fine."
 
-    ch_e "That's all right, [EmmaX.player_petname]."
-    ch_l "Yeah, ok, [LauraX.player_petname]."
-    ch_j "Ok, fine, [JeanX.player_petname]."
-    ch_s "That is fine, [StormX.player_petname]."
+    ch_e "That's all right, " + Girl.player_petname + "."
+    ch_l "Yeah, ok, " + Girl.player_petname + "."
+    ch_j "Ok, fine, " + Girl.player_petname + "."
+    ch_s "That is fine, " + Girl.player_petname + "."
 
-    ch_k "Aw, it's ok, [Girl.player_petname]."
-    ch_e "No harm done, [EmmaX.player_petname]."
+    ch_k "Aw, it's ok, " + Girl.player_petname + "."
+    ch_e "No harm done, " + Girl.player_petname + "."
     ch_l "Cool."
     ch_j "Ok then."
-    ch_s "It is fine, [StormX.player_petname]."
+    ch_s "It is fine, " + Girl.player_petname + "."
 
-    ch_k "Yeah, ok, [Girl.player_petname]."
-    ch_e "I thought as much, [EmmaX.player_petname]."
-    ch_l "Yeah, ok, [LauraX.player_petname]."
-    ch_j "Yeah, ok, [JeanX.player_petname]."
-    ch_s "I thought as much, [StormX.player_petname]."
+    ch_k "Yeah, ok, " + Girl.player_petname + "."
+    ch_e "I thought as much, " + Girl.player_petname + "."
+    ch_l "Yeah, ok, " + Girl.player_petname + "."
+    ch_j "Yeah, ok, " + Girl.player_petname + "."
+    ch_s "I thought as much, " + Girl.player_petname + "."
 
-    ch_e "I'm sure, [EmmaX.player_petname]."
-    ch_l "Yeah, ok, [LauraX.player_petname]."
-    ch_s "I'm sure, [StormX.player_petname]."
+    ch_e "I'm sure, " + Girl.player_petname + "."
+    ch_l "Yeah, ok, " + Girl.player_petname + "."
+    ch_s "I'm sure, " + Girl.player_petname + "."
 
     ch_k "Yeah."
     ch_e "Thank you."
@@ -1315,25 +1405,25 @@ label maybe_later_lines(Girl):
     ch_e "Well, I can't rule it out. . ."
     ch_l "Eh. Maybe."
     ch_j ". . . I guess? Maybe."
-    ch_s "I will give it some thought, [StormX.player_petname]."
+    ch_s "I will give it some thought, " + Girl.player_petname + "."
     ch_v "Eh. Maybe."
 
-    ch_k "I'll give it some thought, [KittyX.player_petname]."
-    ch_v "Maybe, [JubesX.player_petname]."
+    ch_k "I'll give it some thought, " + Girl.player_petname + "."
+    ch_v "Maybe, " + Girl.player_petname + "."
 
-    ch_k "Heh, maybe, [KittyX.player_petname]."
+    ch_k "Heh, maybe, " + Girl.player_petname + "."
     ch_e "Perhaps."
     ch_l "Maybe?"
     ch_v "Maybe?"
 
-    ch_k "I'll give it some thought, [KittyX.player_petname]."
-    ch_e "I'll give it some thought, [EmmaX.player_petname]."
-    ch_l "Maybe, [LauraX.player_petname]."
+    ch_k "I'll give it some thought, " + Girl.player_petname + "."
+    ch_e "I'll give it some thought, " + Girl.player_petname + "."
+    ch_l "Maybe, " + Girl.player_petname + "."
 
-    ch_k "It's. . . possible, [KittyX.player_petname]."
-    ch_e "It's. . . possible, [EmmaX.player_petname]."
-    ch_l "It's. . . possible, [LauraX.player_petname]."
-    ch_v "It's. . . possible, [JubesX.player_petname]."
+    ch_k "It's. . . possible, " + Girl.player_petname + "."
+    ch_e "It's. . . possible, " + Girl.player_petname + "."
+    ch_l "It's. . . possible, " + Girl.player_petname + "."
+    ch_v "It's. . . possible, " + Girl.player_petname + "."
 
     ch_k ". . ."
     ch_k "Maybe."
@@ -1351,20 +1441,20 @@ label maybe_later_lines(Girl):
     ch_j ". . . maybe."
     ch_s "Perhaps."
 
-    ch_k "You[Girl.like]never know, [Girl.player_petname]."
-    ch_e "I wouldn't rule it out, [EmmaX.player_petname]."
-    ch_l "Yeah, maybe, [LauraX.player_petname]."
-    ch_j "Sure, whatever, [JeanX.player_petname]."
-    ch_s "I would not rule it out, [StormX.player_petname]."
+    ch_k "You[Girl.like]never know, " + Girl.player_petname + "."
+    ch_e "I wouldn't rule it out, " + Girl.player_petname + "."
+    ch_l "Yeah, maybe, " + Girl.player_petname + "."
+    ch_j "Sure, whatever, " + Girl.player_petname + "."
+    ch_s "I would not rule it out, " + Girl.player_petname + "."
 
-    ch_e "Maybe I'll practice on my own time, [EmmaX.player_petname]."
-    ch_l "Maybe I'll practice on my own time, [LauraX.player_petname]."
-    ch_s "Maybe I'll practice on my own time, [StormX.player_petname]."
+    ch_e "Maybe I'll practice on my own time, " + Girl.player_petname + "."
+    ch_l "Maybe I'll practice on my own time, " + Girl.player_petname + "."
+    ch_s "Maybe I'll practice on my own time, " + Girl.player_petname + "."
 
-    ch_k "Maybe I'll practice on my own time, [Girl.player_petname]."
-    ch_e "Perhaps I'll practice on my own time, [EmmaX.player_petname]."
+    ch_k "Maybe I'll practice on my own time, " + Girl.player_petname + "."
+    ch_e "Perhaps I'll practice on my own time, " + Girl.player_petname + "."
 
-    ch_s "Perhaps I'll practice on my own time, [StormX.player_petname]."
+    ch_s "Perhaps I'll practice on my own time, " + Girl.player_petname + "."
 
 
     ch_e ". . ."
@@ -1391,25 +1481,25 @@ label maybe_later_lines(Girl):
     ch_s "I imagine at some point we shall. . ."
     ch_s ". . . frequently."
 
-    ch_k "Yeah, maybe, [Girl.player_petname]."
-    ch_e "I imagine it will happen at some point, [EmmaX.player_petname]."
+    ch_k "Yeah, maybe, " + Girl.player_petname + "."
+    ch_e "I imagine it will happen at some point, " + Girl.player_petname + "."
     ch_l "I gues eventually. . ."
     ch_j "I guess eventually. . ."
-    ch_s "I expect it will happen at some point, [StormX.player_petname]."
+    ch_s "I expect it will happen at some point, " + Girl.player_petname + "."
 
 
-    ch_k "I'll be thinking about it, [Girl.player_petname]."
-    ch_e "I'll be thinking about it, [EmmaX.player_petname]."
-    ch_l "I'll be thinking about it, [LauraX.player_petname]."
-    ch_j "Well, I'll give it some thought, [JeanX.player_petname]."
-    ch_v "I'll be thinking about it, [JubesX.player_petname]."
+    ch_k "I'll be thinking about it, " + Girl.player_petname + "."
+    ch_e "I'll be thinking about it, " + Girl.player_petname + "."
+    ch_l "I'll be thinking about it, " + Girl.player_petname + "."
+    ch_j "Well, I'll give it some thought, " + Girl.player_petname + "."
+    ch_v "I'll be thinking about it, " + Girl.player_petname + "."
 
-    ch_k "Anything's possible, [Girl.player_petname]."
-    ch_e "Anything's possible, [EmmaX.player_petname]."
-    ch_l "Anything's possible, [LauraX.player_petname]."
+    ch_k "Anything's possible, " + Girl.player_petname + "."
+    ch_e "Anything's possible, " + Girl.player_petname + "."
+    ch_l "Anything's possible, " + Girl.player_petname + "."
     ch_j ". . . I guess? Maybe."
-    ch_s "I will give it some thought, [StormX.player_petname]."
-    ch_v "Anything's possible, [JubesX.player_petname]."
+    ch_s "I will give it some thought, " + Girl.player_petname + "."
+    ch_v "Anything's possible, " + Girl.player_petname + "."
 
     Girl.voice "[line]"
 
@@ -1422,7 +1512,7 @@ label begging_lines(Girl):
             "Well, if you're gonna beg. . ."]
 
 
-    ch_k "Well[KittyX.like]if you ask nicely. . ."
+    ch_k "Well[Girl.like]if you ask nicely. . ."
     ch_e "Politeness can be rewarded. . ."
     ch_l "Well if you're going to be a little bitch about it. . ."
     ch_j "Oh, fine, just don't start crying."
@@ -1626,7 +1716,7 @@ label action_already_rejected_lines(Girl):
             ch_j "Don't ask again."
             ch_s "Do not make me repeat myself."
 
-            ch_k "Look, I already told you no thanks, [Girl.player_petname]."
+            ch_k "Look, I already told you no thanks, " + Girl.player_petname + "."
             ch_e "I've refused, end of story."
             ch_l "Look, I already told you no."
             ch_j "I already told you no."
@@ -1643,29 +1733,29 @@ label action_already_rejected_lines(Girl):
             ch_j "I'm not telling you again."
             ch_s "I shall not repeat myself."
 
-            $ LauraX.ArmPose = 2
-            $ LauraX.ArmPose = 1
-            $ LauraX.Claws = 1
+            $ Girl.ArmPose = 2
+            $ Girl.ArmPose = 1
+            $ Girl.Claws = 1
             ch_l "Suck this then."
-            $ LauraX.Claws = 0
+            $ Girl.Claws = 0
 
 
-            $ JeanX.ArmPose = 2
+            $ Girl.ArmPose = 2
             ch_j "You want me to make you suck yourself?"
-            $ JeanX.ArmPose = 1
-            $ JeanX.change_face("_angry",1,Eyes="_side")
+            $ Girl.ArmPose = 1
+            $ Girl.change_face("_angry",1,Eyes="_side")
             ch_j "Damn. . . forgot I can't do that. . ."
             ch_s "You go too far!"
 
 
-            ch_e "Learn to take \"no\" for an answer, [EmmaX.player_petname]."
+            ch_e "Learn to take \"no\" for an answer, " + Girl.player_petname + "."
 
-            ch_j "Learn to take \"no\" for an answer, [JeanX.player_petname]."
-            ch_s "Learn to take \"no\" for an answer, [StormX.player_petname]."
+            ch_j "Learn to take \"no\" for an answer, " + Girl.player_petname + "."
+            ch_s "Learn to take \"no\" for an answer, " + Girl.player_petname + "."
 
-            ch_k "Learn to take \"no\" for an answer, [Girl.player_petname]."
+            ch_k "Learn to take \"no\" for an answer, " + Girl.player_petname + "."
 
-            ch_l "Learn to take \"no\" for an answer, [LauraX.player_petname]."
+            ch_l "Learn to take \"no\" for an answer, " + Girl.player_petname + "."
 
 
 
@@ -1677,18 +1767,18 @@ label action_already_rejected_lines(Girl):
             ch_v "I'm pretty clear on this, NO."
 
             ch_k "How many times do I have to say \"no?\""
-            ch_e "I don't appreciate having to repeat myself, [EmmaX.player_petname]."
-            ch_l "I don't like to repeat myself, [LauraX.player_petname]."
+            ch_e "I don't appreciate having to repeat myself, " + Girl.player_petname + "."
+            ch_l "I don't like to repeat myself, " + Girl.player_petname + "."
 
-            ch_k "Not even, [Girl.player_petname]."
-            ch_e "I really can't, [EmmaX.player_petname]."
-            ch_l "I really can't, [LauraX.player_petname]."
-            ch_j "I really can't, [JeanX.player_petname]."
-            ch_v "I really can't, [JubesX.player_petname]."
+            ch_k "Not even, " + Girl.player_petname + "."
+            ch_e "I really can't, " + Girl.player_petname + "."
+            ch_l "I really can't, " + Girl.player_petname + "."
+            ch_j "I really can't, " + Girl.player_petname + "."
+            ch_v "I really can't, " + Girl.player_petname + "."
 
         ch_e "Don't question me again."
         ch_l "Don't push me."
-        ch_j "Don't push your luck, [JeanX.player_petname]."
+        ch_j "Don't push your luck, " + Girl.player_petname + "."
         ch_s "Do not question me again."
 
         ch_k "Maybe[Girl.like]take \"no\" for an answer?"
@@ -1748,7 +1838,7 @@ label otherwise_not_interested_lines(Girl):
     ch_s "Hmm, no."
     ch_v "You wish."
 
-    ch_k "Um, no thanks, [Girl.player_petname]."
+    ch_k "Um, no thanks, " + Girl.player_petname + "."
     ch_e "No. Thank you."
     ch_l "Nope."
     ch_j "Nope."
@@ -1762,11 +1852,11 @@ label otherwise_not_interested_lines(Girl):
     ch_s "I would be uncomfortable with that. . ."
     ch_v "I'm really not cool with that. . ."
 
-    ch_k "Let's not, ok [Girl.player_petname]?"
-    ch_e "Let's not, ok [EmmaX.player_petname]?"
-    ch_l "Let's not, ok [LauraX.player_petname]?"
-    ch_j "Let's not, ok [JeanX.player_petname]?"
-    ch_v "Let's not, ok [JubesX.player_petname]?"
+    ch_k "Let's not, ok " + Girl.player_petname + "?"
+    ch_e "Let's not, ok " + Girl.player_petname + "?"
+    ch_l "Let's not, ok " + Girl.player_petname + "?"
+    ch_j "Let's not, ok " + Girl.player_petname + "?"
+    ch_v "Let's not, ok " + Girl.player_petname + "?"
 
 
     ch_e "I'd rather not today. . ."
@@ -1775,12 +1865,12 @@ label otherwise_not_interested_lines(Girl):
     ch_s "I would rather not. . ."
     ch_v "I'd rather not today. . ."
 
-    ch_k "Not now, [Girl.player_petname]."
-    ch_e "Not now, [EmmaX.player_petname]."
-    ch_l "Not now, [LauraX.player_petname]."
-    ch_j "Not now, [JeanX.player_petname]."
-    ch_s "Not now, [StormX.player_petname]."
-    ch_v "Not now, [JubesX.player_petname]."
+    ch_k "Not now, " + Girl.player_petname + "."
+    ch_e "Not now, " + Girl.player_petname + "."
+    ch_l "Not now, " + Girl.player_petname + "."
+    ch_j "Not now, " + Girl.player_petname + "."
+    ch_s "Not now, " + Girl.player_petname + "."
+    ch_v "Not now, " + Girl.player_petname + "."
 
     ch_e "I'd rather not right now though."
     ch_l "Nah."
@@ -1788,33 +1878,33 @@ label otherwise_not_interested_lines(Girl):
     ch_s "I would rather not right now though."
     ch_v "Nah."
 
-    ch_k "Not, right now [Girl.player_petname]. . ."
-    ch_l "Not right now [LauraX.player_petname]. . ."
-    ch_j "Not right now [JeanX.player_petname]. . ."
-    ch_s "Perhaps later, [StormX.player_petname]. . ."
+    ch_k "Not, right now " + Girl.player_petname + ". . ."
+    ch_l "Not right now " + Girl.player_petname + ". . ."
+    ch_j "Not right now " + Girl.player_petname + ". . ."
+    ch_s "Perhaps later, " + Girl.player_petname + ". . ."
 
-    ch_k "Later, [Girl.player_petname]!"
-    ch_e "Perhaps later, [EmmaX.player_petname]."
-    ch_l "I don't know, [LauraX.player_petname]!"
-    ch_j "I don't know, [JeanX.player_petname]. . ."
-    ch_s "Perhaps later, [StormX.player_petname]."
+    ch_k "Later, " + Girl.player_petname + "!"
+    ch_e "Perhaps later, " + Girl.player_petname + "."
+    ch_l "I don't know, " + Girl.player_petname + "!"
+    ch_j "I don't know, " + Girl.player_petname + ". . ."
+    ch_s "Perhaps later, " + Girl.player_petname + "."
 
-    ch_e "We don't need any toys, do we, [EmmaX.player_petname]?"
-    ch_l "I don't think we need any toys, [LauraX.player_petname]."
-    ch_j "I don't think we need any toys, [LauraX.player_petname]."
-    ch_s "We don't need any toys, do we, [StormX.player_petname]?"
+    ch_e "We don't need any toys, do we, " + Girl.player_petname + "?"
+    ch_l "I don't think we need any toys, " + Girl.player_petname + "."
+    ch_j "I don't think we need any toys, " + Girl.player_petname + "."
+    ch_s "We don't need any toys, do we, " + Girl.player_petname + "?"
 
 
-    ch_k "I don't think we need any toys, [Girl.player_petname]."
-    ch_e "I don't think we need any toys, [EmmaX.player_petname]."
-    ch_l "I don't think we need any toys, [LauraX.player_petname]."
-    ch_s "I don't think we need any toys, [StormX.player_petname]."
+    ch_k "I don't think we need any toys, " + Girl.player_petname + "."
+    ch_e "I don't think we need any toys, " + Girl.player_petname + "."
+    ch_l "I don't think we need any toys, " + Girl.player_petname + "."
+    ch_s "I don't think we need any toys, " + Girl.player_petname + "."
 
     ch_k "Not now, ok?"
-    ch_e "Not now, [EmmaX.player_petname]. . ."
+    ch_e "Not now, " + Girl.player_petname + ". . ."
     ch_l "Not now, ok?"
     ch_j "Not now, ok?"
-    ch_s "Not now, [StormX.player_petname]. . ."
+    ch_s "Not now, " + Girl.player_petname + ". . ."
 
     ch_k "Maybe[Girl.like]not right now? . ."
     ch_e "Perhaps another time would be better? . ."
@@ -1841,11 +1931,11 @@ label otherwise_not_interested_lines(Girl):
 
     ch_j "I'm sorry, not now."
 
-    ch_k "No luck [Girl.player_petname]."
-    ch_e "No thank you, [EmmaX.player_petname]."
-    ch_l "No thank you, [LauraX.player_petname]."
-    ch_j "No thanks, [JeanX.player_petname]."
-    ch_v "No thank you, [JubesX.player_petname]."
+    ch_k "No luck " + Girl.player_petname + "."
+    ch_e "No thank you, " + Girl.player_petname + "."
+    ch_l "No thank you, " + Girl.player_petname + "."
+    ch_j "No thanks, " + Girl.player_petname + "."
+    ch_v "No thank you, " + Girl.player_petname + "."
 
     ch_k "Ugh!"
     ch_e "I know, I'm as disappointed as you are."
@@ -1853,13 +1943,13 @@ label otherwise_not_interested_lines(Girl):
     ch_j "Yeah, sorry."
     ch_v "Yeah, sorry."
 
-    ch_k "Scram, [Girl.player_petname]."
+    ch_k "Scram, " + Girl.player_petname + "."
 
     ch_k "That's. . . not cool."
-    ch_e "Not today, [EmmaX.player_petname]."
-    ch_l "Not today, [LauraX.player_petname]."
-    ch_j "Not today, [JeanX.player_petname]."
-    ch_v "Not today, [JubesX.player_petname]."
+    ch_e "Not today, " + Girl.player_petname + "."
+    ch_l "Not today, " + Girl.player_petname + "."
+    ch_j "Not today, " + Girl.player_petname + "."
+    ch_v "Not today, " + Girl.player_petname + "."
 
     ch_k "Ew."
     ch_e "I'm sorry, not now."
@@ -1867,22 +1957,22 @@ label otherwise_not_interested_lines(Girl):
     ch_v "I'm sorry, not now."
 
     ch_k "I don't wanna touch that."
-    ch_e "No, I don't think so, [EmmaX.player_petname]."
+    ch_e "No, I don't think so, " + Girl.player_petname + "."
     ch_l "I don't know where that's been lately."
     ch_j "I'd really prefer not touching that."
-    ch_s "No, I do not think so, [StormX.player_petname]."
+    ch_s "No, I do not think so, " + Girl.player_petname + "."
 
-    ch_k "How about let's not, [Girl.player_petname]."
-    ch_e "How about let's not, [EmmaX.player_petname]."
+    ch_k "How about let's not, " + Girl.player_petname + "."
+    ch_e "How about let's not, " + Girl.player_petname + "."
     ch_l "Nah."
     ch_j "Nah."
-    ch_s "I would rather not, [StormX.player_petname]."
+    ch_s "I would rather not, " + Girl.player_petname + "."
 
     ch_k "Nope."
     ch_e "I don't think I will."
     ch_l "Nope."
 
-    $ JeanX.change_face("_smile", 1)
+    $ Girl.change_face("_smile", 1)
     ch_j "Ha! Good one."
     ch_s "I do not think that I will."
 
@@ -1950,7 +2040,7 @@ label previous_action_rejected_lines(Girl):
     ch_s "No, I do not think so."
     ch_v "You'll have to earn that."
 
-    ch_k "Sorry, [KittyX.player_petname], maybe later?"
+    ch_k "Sorry, " + Girl.player_petname + ", maybe later?"
     ch_e "I am sorry about that, but perhaps later?"
     ch_l "You'll have to earn that back."
     ch_j "We've had enough of that."
@@ -2004,10 +2094,10 @@ label previous_action_rejected_lines(Girl):
     ch_s "Our time together was a memory."
 
     ch_k "No, not this time."
-    ch_e "I'm just not in the mood, [EmmaX.player_petname]."
+    ch_e "I'm just not in the mood, " + Girl.player_petname + "."
     ch_l "Nah, not this time."
     ch_j "Nah, not this time."
-    ch_s "I am just not in the mood, [StormX.player_petname]."
+    ch_s "I am just not in the mood, " + Girl.player_petname + "."
 
     ch_k "Sorry, you can keep your toys to yourself."
     ch_e "Sorry, you can keep your toys to yourself."
@@ -2021,10 +2111,10 @@ label previous_action_rejected_lines(Girl):
     ch_s "Sorry, you can keep your toys out of there."
 
     ch_k "I'm not feeling it today. . ."
-    ch_e "I'm not in the mood, [EmmaX.player_petname]. . ."
+    ch_e "I'm not in the mood, " + Girl.player_petname + ". . ."
     ch_l "Not right now."
     ch_j "Not right now."
-    ch_s "I am in no mood, [StormX.player_petname]. . ."
+    ch_s "I am in no mood, " + Girl.player_petname + ". . ."
 
 
     ch_k "Maybe just[Girl.like]fuck yourself, huh?"
@@ -2122,7 +2212,7 @@ label forced_but_not_unwelcome_lines(Girl):
     ch_v "Suit yourself."
 
 
-    ch_e "Hm. Alright, but don't push your luck, [EmmaX.player_petname]."
+    ch_e "Hm. Alright, but don't push your luck, " + Girl.player_petname + "."
     ch_l "Ok, fine."
     ch_j ". . . Ok, whatever."
     ch_s ". . . fine."
@@ -2133,7 +2223,7 @@ label forced_but_not_unwelcome_lines(Girl):
     ch_l "Whatever. . ."
     ch_j ". . ."
     ch_s ". . . fine. . ."
-    $ JeanX.change_face("_angry",1,Eyes="_side")
+    $ Girl.change_face("_angry",1,Eyes="_side")
     ch_j "Whatever. . ."
 
 
@@ -2189,60 +2279,60 @@ label said_no_recently_lines(Girl):
         "I {i}just{/i} told you \"no,\" " + Girl.player_petname + ".",
         "What part of \"no,\" did you not get, " + Girl.player_petname + "?"]
 
-    ch_k "[KittyX.Like]no way, [KittyX.player_petname]."
-    ch_e "Your persistance is doing you no favors, [EmmaX.player_petname]."
+    ch_k "[Girl.Like]no way, " + Girl.player_petname + "."
+    ch_e "Your persistance is doing you no favors, " + Girl.player_petname + "."
     ch_l "Take a breath here, before you regret it."
     ch_j "I'm not used to repeating myself."
-    ch_s "Do not persist in this, [StormX.player_petname]."
+    ch_s "Do not persist in this, " + Girl.player_petname + "."
     ch_v "I already told you, \"no\"."
 
-    ch_k "I[KittyX.like]{i}just{/i} told you \"no!\""
+    ch_k "I[Girl.like]{i}just{/i} told you \"no!\""
 
 
-    ch_s "Your persistance is doing you no favors, [StormX.player_petname]."
+    ch_s "Your persistance is doing you no favors, " + Girl.player_petname + "."
 
-    ch_k "You don't[KittyX.like]listen do you, [KittyX.player_petname]."
-    ch_e "You need to learn to take\"no\" for an answer, [EmmaX.player_petname]."
-    ch_l "I just told you no, [LauraX.player_petname]."
-    ch_j "I just told you no, [JeanX.player_petname]."
-    ch_v "I just told you no, [JubesX.player_petname]."
+    ch_k "You don't[Girl.like]listen do you, " + Girl.player_petname + "."
+    ch_e "You need to learn to take\"no\" for an answer, " + Girl.player_petname + "."
+    ch_l "I just told you no, " + Girl.player_petname + "."
+    ch_j "I just told you no, " + Girl.player_petname + "."
+    ch_v "I just told you no, " + Girl.player_petname + "."
 
-    ch_k "I {i}just{/i} told you \"no,\" [KittyX.player_petname]."
-    ch_e "I {i}just{/i} refused, [EmmaX.player_petname]."
-    ch_l "I {i}just{/i} told you \"no,\" [LauraX.player_petname]."
-    ch_j "I {i}just{/i} told you \"no,\" [JeanX.player_petname]."
+    ch_k "I {i}just{/i} told you \"no,\" " + Girl.player_petname + "."
+    ch_e "I {i}just{/i} refused, " + Girl.player_petname + "."
+    ch_l "I {i}just{/i} told you \"no,\" " + Girl.player_petname + "."
+    ch_j "I {i}just{/i} told you \"no,\" " + Girl.player_petname + "."
 
-    ch_k "What did I[KittyX.like]{i}just{/i} tell you [KittyX.player_petname]."
+    ch_k "What did I[Girl.like]{i}just{/i} tell you " + Girl.player_petname + "."
     ch_e "I believe I just told you, \"no.\""
-    ch_l "Just told you I wouldn't, [LauraX.player_petname]."
-    ch_j "Just told you I wouldn't, [JeanX.player_petname]."
-    ch_s "You will need to accept a \"no\", [StormX.player_petname]."
+    ch_l "Just told you I wouldn't, " + Girl.player_petname + "."
+    ch_j "Just told you I wouldn't, " + Girl.player_petname + "."
+    ch_s "You will need to accept a \"no\", " + Girl.player_petname + "."
 
-    ch_e "What part of \"no,\" did you not get, [EmmaX.player_petname]?"
-    ch_l "What part of \"no,\" did you not get, [LauraX.player_petname]?"
-    ch_j "What part of \"no,\" did you not get, [LauraX.player_petname]?"
-    ch_s "What part of \"no,\" did you not get, [StormX.player_petname]?"
+    ch_e "What part of \"no,\" did you not get, " + Girl.player_petname + "?"
+    ch_l "What part of \"no,\" did you not get, " + Girl.player_petname + "?"
+    ch_j "What part of \"no,\" did you not get, " + Girl.player_petname + "?"
+    ch_s "What part of \"no,\" did you not get, " + Girl.player_petname + "?"
 
-    ch_k "You don't[KittyX.like]listen do you, [KittyX.player_petname]."
-    ch_e "Pay attention, [EmmaX.player_petname]."
-    ch_l "You should listen better, [LauraX.player_petname]."
-    ch_j "Don't make me repeat myself again, [JeanX.player_petname]."
-    ch_s "I have made myself clear, [StormX.player_petname]."
+    ch_k "You don't[Girl.like]listen do you, " + Girl.player_petname + "."
+    ch_e "Pay attention, " + Girl.player_petname + "."
+    ch_l "You should listen better, " + Girl.player_petname + "."
+    ch_j "Don't make me repeat myself again, " + Girl.player_petname + "."
+    ch_s "I have made myself clear, " + Girl.player_petname + "."
 
-    ch_k "I{i}just{/i}[KittyX.like]told you \"no!\""
-    ch_e "I'm afraid that \"no\" is my final answer, [EmmaX.player_petname]."
-    ch_l "Sorry, [LauraX.player_petname] \"no.\""
+    ch_k "I{i}just{/i}[Girl.like]told you \"no!\""
+    ch_e "I'm afraid that \"no\" is my final answer, " + Girl.player_petname + "."
+    ch_l "Sorry, " + Girl.player_petname + " \"no.\""
     ch_j "I don't repeat myself."
-    ch_s "I am afraid that \"no\" is my final answer, [StormX.player_petname]."
+    ch_s "I am afraid that \"no\" is my final answer, " + Girl.player_petname + "."
 
 
     ch_j "I don't repeat myself."
-    ch_s "I am afraid that \"no\" is my final answer, [StormX.player_petname]."
+    ch_s "I am afraid that \"no\" is my final answer, " + Girl.player_petname + "."
 
 
-        ch_l "Sorry, [LauraX.player_petname] \"no.\""
+        ch_l "Sorry, " + Girl.player_petname + " \"no.\""
         ch_j "I don't repeat myself."
-        ch_s "I am afraid that \"no\" is my final answer, [StormX.player_petname]."
+        ch_s "I am afraid that \"no\" is my final answer, " + Girl.player_petname + "."
 
     Girl.voice "[line]"
 
@@ -2258,7 +2348,7 @@ label action_accepted_enthusiastically_lines(Girl):
             "Sure, get in there."]
 
 
-        ch_k "Ok [Girl.player_petname], come and get'em."
+        ch_k "Ok " + Girl.player_petname + ", come and get'em."
         ch_e "That sounds lovely, ravish me."
         ch_l "Sure, sounds fun."
         ch_j "Sure, sounds fun."
@@ -2272,12 +2362,12 @@ label action_accepted_enthusiastically_lines(Girl):
         ch_s "Oh very well. . ."
         ch_v "Sure."
 
-        ch_k "Ok [Girl.player_petname], go ahead."
-        ch_e "Ok [EmmaX.player_petname], go ahead."
-        ch_l "Ok [LauraX.player_petname], go ahead."
-        ch_j "Ok [JeanX.player_petname], go ahead."
-        ch_s "Ok [StormX.player_petname], go ahead."
-        ch_v "Ok [JubesX.player_petname], go ahead."
+        ch_k "Ok " + Girl.player_petname + ", go ahead."
+        ch_e "Ok " + Girl.player_petname + ", go ahead."
+        ch_l "Ok " + Girl.player_petname + ", go ahead."
+        ch_j "Ok " + Girl.player_petname + ", go ahead."
+        ch_s "Ok " + Girl.player_petname + ", go ahead."
+        ch_v "Ok " + Girl.player_petname + ", go ahead."
 
         ch_k "Ok, whatever."
         ch_e "Mmmm, I couldn't refuse. . ."
@@ -2543,25 +2633,25 @@ label daily_action_lines(Girl):
                 "You'd like another round?",
                 "I suppose I am irresistible. . .",
                 "Didn't get enough earlier?",
-                "You're wearing me out, " + EmmaX.player_petname + "."]
+                "You're wearing me out, " + Girl.player_petname + "."]
         ch_e "[Line]"
         $ Line = renpy.random.choice(["Back again?",
                 "You'd like another round?",
                 "I must be better than I thought.",
                 "Didn't get enough earlier?",
-                "Your funeral, " + LauraX.player_petname + "."]
+                "Your funeral, " + Girl.player_petname + "."]
         ch_l "[Line]"
         $ Line = renpy.random.choice(["Back again?",
                 "You'd like another round?",
                 "I must be better than I thought.",
                 "Didn't get enough earlier?",
-                "Your funeral, " + JeanX.player_petname + "."]
+                "Your funeral, " + Girl.player_petname + "."]
         ch_j "[Line]"
         $ Line = renpy.random.choice(["Back again?",
                 "You would like another round?",
                 "I suppose that I can be irresistible. . .",
                 "Did you not get enough earlier?",
-                "You are wearing me out, " + StormX.player_petname + "."]
+                "You are wearing me out, " + Girl.player_petname + "."]
         ch_s "[Line]"
 
         $ Line = renpy.random.choice(["Back again so soon?",
@@ -2574,25 +2664,25 @@ label daily_action_lines(Girl):
                 "So you'd like another round?",
                 "I'm still a little sore from earlier.",
                 "Didn't get enough earlier?",
-                "You're wearing me out, " + EmmaX.player_petname + "."]
+                "You're wearing me out, " + Girl.player_petname + "."]
         ch_e "[Line]"
         $ Line = renpy.random.choice(["Back again so soon?",
                 "So you'd like another round?",
                 "Again? Sure.",
                 "Didn't get enough earlier?",
-                "Your funeral, " + LauraX.player_petname + "."]
+                "Your funeral, " + Girl.player_petname + "."]
         ch_l "[Line]"
         $ Line = renpy.random.choice(["Back again so soon?",
                 "So you'd like another round?",
                 "Again? Sure.",
                 "Didn't get enough earlier?",
-                "Your funeral, " + JeanX.player_petname + "."]
+                "Your funeral, " + Girl.player_petname + "."]
         ch_j "[Line]"
         $ Line = renpy.random.choice(["Back again so soon?",
                 "So you would like another round?",
                 "I am still rather sore from earlier.",
                 "You did not get enough earlier?",
-                "You are tiring me, " + StormX.player_petname + "."]
+                "You are tiring me, " + Girl.player_petname + "."]
         ch_s "[Line]"
 
 
@@ -2645,10 +2735,10 @@ label taboo_and_said_no_today_lines(Girl):
     ch_e "You've been warned."
     ch_l "I've had enough of this today."
     ch_j "I've had enough of this today."
-    ch_s "This area is too public, [StormX.player_petname]."
+    ch_s "This area is too public, " + Girl.player_petname + "."
     ch_v "I've had enough of this today."
 
-    ch_k "I told you this was[KittyX.like]too public!"
+    ch_k "I told you this was[Girl.like]too public!"
     ch_e "I told you I couldn't be seen like that."
     ch_l "I told you, I couldn't be caught like that."
     ch_j "I told you, I'm not comfortable in public."
@@ -2714,7 +2804,7 @@ label taboo_and_said_no_today_lines(Girl):
     ch_j "I'm not comfortable with that. . ."
     ch_s "I have already informed you. . . not in such an exposed location."
 
-    ch_k "I{i}just{/i}[KittyX.like]told, not in public!"
+    ch_k "I{i}just{/i}[Girl.like]told, not in public!"
     ch_e "I just told you. . .not in such an exposed location."
     ch_l "I just told you. . .not in such an exposed location."
     ch_j "I just told you. . .not in such an exposed location."
@@ -2732,63 +2822,63 @@ label said_no_today_lines(Girl):
             "I already told you \"no,\" " + Girl.player_petname + ".",
             "I told you \"no\" earlier " + Girl.player_petname + "."]
 
-    ch_k "I[KittyX.like]already told you \"no.\""
+    ch_k "I[Girl.like]already told you \"no.\""
     ch_e "I believe you know my answer on this matter."
     ch_l "Don't make me tell you again today."
     ch_j "Don't ask me again today."
     ch_s "I have already told you my answer."
     ch_v "Don't make me tell you again today."
 
-    ch_k "[KittyX.Like]take a lesson, [KittyX.player_petname]."
+    ch_k "[Girl.Like]take a lesson, " + Girl.player_petname + "."
     ch_e "I believe you know my answer on this matter."
 
     ch_s "I believe you know my answer on this matter."
 
-    ch_e "I told you \"no,\" [EmmaX.player_petname]."
-    ch_l "I told you \"no,\" [LauraX.player_petname]."
-    ch_j "I told you \"no,\" [JeanX.player_petname]."
-    ch_s "You will need to accept a \"no\", [StormX.player_petname]."
-    ch_v "I told you \"no,\" [JubesX.player_petname]."
+    ch_e "I told you \"no,\" " + Girl.player_petname + "."
+    ch_l "I told you \"no,\" " + Girl.player_petname + "."
+    ch_j "I told you \"no,\" " + Girl.player_petname + "."
+    ch_s "You will need to accept a \"no\", " + Girl.player_petname + "."
+    ch_v "I told you \"no,\" " + Girl.player_petname + "."
 
-    ch_e "I already refused, [EmmaX.player_petname]."
-    ch_l "I already told you \"no,\" [LauraX.player_petname]."
-    ch_j "I already told you \"no,\" [JeanX.player_petname]."
-    ch_s "I already refused, [StormX.player_petname]."
+    ch_e "I already refused, " + Girl.player_petname + "."
+    ch_l "I already told you \"no,\" " + Girl.player_petname + "."
+    ch_j "I already told you \"no,\" " + Girl.player_petname + "."
+    ch_s "I already refused, " + Girl.player_petname + "."
 
 
-    ch_k "I told you \"no,\" [KittyX.player_petname]."
-    ch_e "I told you \"no,\" [EmmaX.player_petname]."
-    ch_l "Told you \"no,\" [LauraX.player_petname]."
-    ch_j "Told you \"no,\" [JeanX.player_petname]."
-    ch_s "I told you \"no,\" [StormX.player_petname]."
+    ch_k "I told you \"no,\" " + Girl.player_petname + "."
+    ch_e "I told you \"no,\" " + Girl.player_petname + "."
+    ch_l "Told you \"no,\" " + Girl.player_petname + "."
+    ch_j "Told you \"no,\" " + Girl.player_petname + "."
+    ch_s "I told you \"no,\" " + Girl.player_petname + "."
 
-    ch_k "I already told you \"no,\" [KittyX.player_petname]."
-    ch_e "I already told you \"no,\" [EmmaX.player_petname]."
-    ch_l "I already told you \"no,\" [LauraX.player_petname]."
-    ch_j "I already told you \"no,\" [LauraX.player_petname]."
-    ch_s "I already told you \"no,\" [StormX.player_petname]."
+    ch_k "I already told you \"no,\" " + Girl.player_petname + "."
+    ch_e "I already told you \"no,\" " + Girl.player_petname + "."
+    ch_l "I already told you \"no,\" " + Girl.player_petname + "."
+    ch_j "I already told you \"no,\" " + Girl.player_petname + "."
+    ch_s "I already told you \"no,\" " + Girl.player_petname + "."
 
-    ch_e "I said \"no,\" [EmmaX.player_petname]."
-    ch_l "I told you \"no,\" [LauraX.player_petname]."
-    ch_j "I told you \"no,\" [JeanX.player_petname]."
-    ch_s "I said \"no,\" [StormX.player_petname]."
+    ch_e "I said \"no,\" " + Girl.player_petname + "."
+    ch_l "I told you \"no,\" " + Girl.player_petname + "."
+    ch_j "I told you \"no,\" " + Girl.player_petname + "."
+    ch_s "I said \"no,\" " + Girl.player_petname + "."
 
-    ch_k "I already[KittyX.like]told you \"no.\""
-    ch_e "I believe I just told you \"no,\" [EmmaX.player_petname]."
+    ch_k "I already[Girl.like]told you \"no.\""
+    ch_e "I believe I just told you \"no,\" " + Girl.player_petname + "."
     ch_l "I just told you \"no.\""
     ch_j "Not today."
-    ch_s "I believe that I just told you \"no,\" [StormX.player_petname]."
+    ch_s "I believe that I just told you \"no,\" " + Girl.player_petname + "."
 
 
     ch_l "I just told you \"no.\""
     ch_j "Not today."
-    ch_s "I believe that I just told you \"no,\" [StormX.player_petname]."
+    ch_s "I believe that I just told you \"no,\" " + Girl.player_petname + "."
 
 
-    ch_k "I{i}just{/i}[KittyX.like]told you \"no\" earlier!"
-    ch_l "I'm believe I just told you \"no,\" [LauraX.player_petname]."
-    ch_j "I'm believe I just told you \"no,\" [JeanX.player_petname]."
-    ch_s "I believe that I just told you \"no,\" [StormX.player_petname]."
+    ch_k "I{i}just{/i}[Girl.like]told you \"no\" earlier!"
+    ch_l "I'm believe I just told you \"no,\" " + Girl.player_petname + "."
+    ch_j "I'm believe I just told you \"no,\" " + Girl.player_petname + "."
+    ch_s "I believe that I just told you \"no,\" " + Girl.player_petname + "."
 
     Girl.voice "[line]"
 
@@ -2826,12 +2916,12 @@ label forced_action_rejected_lines(Girl):
     ch_j ". . . no, not worth it."
     ch_v "Suck yourself."
 
-    ch_k "Keep away from my kitty, [Girl.player_petname]."
-    ch_e "I don't think so, [EmmaX.player_petname]."
-    ch_l "I don't think so, [LauraX.player_petname]."
-    ch_j "I don't think so, [JeanX.player_petname]."
+    ch_k "Keep away from my kitty, " + Girl.player_petname + "."
+    ch_e "I don't think so, " + Girl.player_petname + "."
+    ch_l "I don't think so, " + Girl.player_petname + "."
+    ch_j "I don't think so, " + Girl.player_petname + "."
 
-    ch_v "I don't think so, [JubesX.player_petname]."
+    ch_v "I don't think so, " + Girl.player_petname + "."
 
     ch_k "Back off!"
     ch_e "Do you want to keep those fingers?"
@@ -2952,7 +3042,7 @@ label this_is_boring_lines(Girl):
     ch_s "No, I think not."
 
 
-    ch_k "Hey, I've got better things to do if you're[KittyX.like]going to be a dick about it."
+    ch_k "Hey, I've got better things to do if you're[Girl.like]going to be a dick about it."
     ch_e "You know, I do have better things to do with my time than this."
     ch_l "I have better things to do with my time."
     ch_j "I have better things to do with my time."
@@ -3003,7 +3093,7 @@ label satisfied_lines(Girl):
             "That was pretty hot, " + Girl.player_petname + ", we'll have to do that again sometime.",
             "That was really great, " + Girl.player_petname + ", we'll have to do that again sometime."]
 
-    ch_k "I hope there was[KittyX.like]enough to work with."
+    ch_k "I hope there was[Girl.like]enough to work with."
     ch_e "I'm sure it exceeded your expectations. . ."
     ch_l "Did you enjoy that?"
     ch_j "I bet you enjoyed that."
@@ -3090,7 +3180,7 @@ label satisfied_lines(Girl):
     ch_s "That certainly was an interesting experience. . ."
 
 
-    ch_k "I feel like I've been waiting[KittyX.like]a million years for that."
+    ch_k "I feel like I've been waiting[Girl.like]a million years for that."
     ch_e "I assume I rocked your entire world."
     ch_l "I can tell, I was the best you've had."
     ch_j "Blew your mind, uh?"
@@ -3109,7 +3199,7 @@ label satisfied_lines(Girl):
     ch_s "Was that satisfactory?"
 
 
-    if KittyX.used_to_anal:
+    if Girl.used_to_anal:
         ch_k "That was. . . interesting. . ."
         ch_l "That was. . . interesting. . ."
         ch_j "That was. . . interesting. . ."
@@ -3478,12 +3568,12 @@ label unconvinced_lines(Girl):
             "I really don't think that I would."]
 
 
-    ch_k "Um, not this time, [Girl.player_petname], that's too. . ."
-    ch_e "I would, but still no, [EmmaX.player_petname]."
-    ch_l "I would, but still no, [LauraX.player_petname]."
-    ch_j "I would, but still no, [JeanX.player_petname]."
-    ch_s "I would, but still no, [StormX.player_petname]."
-    ch_v "I would, but still no, [JubesX.player_petname]."
+    ch_k "Um, not this time, " + Girl.player_petname + ", that's too. . ."
+    ch_e "I would, but still no, " + Girl.player_petname + "."
+    ch_l "I would, but still no, " + Girl.player_petname + "."
+    ch_j "I would, but still no, " + Girl.player_petname + "."
+    ch_s "I would, but still no, " + Girl.player_petname + "."
+    ch_v "I would, but still no, " + Girl.player_petname + "."
 
     ch_k "I really don't think so."
     ch_e "I really don't think so."
@@ -3659,35 +3749,35 @@ label definitely_bored_now_lines(Girl):
             $ lines = ["Can we. . . do something. . . else?"]
 
 
-        ch_k "Maybe we could try something else here [KittyX.player_petname]?"
-        ch_e "Perhaps we could try something else, [EmmaX.player_petname]?"
-        ch_l "Maybe it's time for something else, [LauraX.player_petname]?"
-        ch_j "Maybe it's time for something else, [JeanX.player_petname]?"
+        ch_k "Maybe we could try something else here " + Girl.player_petname + "?"
+        ch_e "Perhaps we could try something else, " + Girl.player_petname + "?"
+        ch_l "Maybe it's time for something else, " + Girl.player_petname + "?"
+        ch_j "Maybe it's time for something else, " + Girl.player_petname + "?"
         ch_s "I am sure that is fun, but could we try something different?"
         ch_v "Could we maybe try. . . something else?"
 
 
-        ch_k "You look like you're having fun there, but maybe we could[KittyX.like]try something else?"
+        ch_k "You look like you're having fun there, but maybe we could[Girl.like]try something else?"
         ch_e "You certainly seem to be enjoying yourself, but perhaps we could add some variety?"
         ch_l "Maybe change things up a little?"
 
         ch_j "Maybe try something else?"
 
-        ch_k "[KittyX.player_petname], I know you're having fun down there, but maybe we could try something else."
-        ch_e "[EmmaX.player_petname], I know you're having fun down there, but maybe we could try something else."
+        ch_k "" + Girl.player_petname + ", I know you're having fun down there, but maybe we could try something else."
+        ch_e "" + Girl.player_petname + ", I know you're having fun down there, but maybe we could try something else."
 
-        ch_k "[KittyX.player_petname], this is nice, but could we do something else?"
-        ch_e "[EmmaX.player_petname], this is nice, but could we do something else?"
-
-
-        ch_k "[KittyX.player_petname], this is getting kind sore, maybe we could try something else."
-        ch_e "[EmmaX.player_petname], this is getting kind sore, maybe we could try something else."
+        ch_k "" + Girl.player_petname + ", this is nice, but could we do something else?"
+        ch_e "" + Girl.player_petname + ", this is nice, but could we do something else?"
 
 
-        ch_k "[KittyX.player_petname], this is getting weird, maybe we could try something else."
-        ch_e "[EmmaX.player_petname], this is getting weird, maybe we could try something else."
-        ch_l "[LauraX.player_petname], could we try something different?"
-        ch_j "[JeanX.player_petname], could we try something different?"
+        ch_k "" + Girl.player_petname + ", this is getting kind sore, maybe we could try something else."
+        ch_e "" + Girl.player_petname + ", this is getting kind sore, maybe we could try something else."
+
+
+        ch_k "" + Girl.player_petname + ", this is getting weird, maybe we could try something else."
+        ch_e "" + Girl.player_petname + ", this is getting weird, maybe we could try something else."
+        ch_l "" + Girl.player_petname + ", could we try something different?"
+        ch_j "" + Girl.player_petname + ", could we try something different?"
 
         ch_k "Can we[Girl.Like]be done with this now? I'm getting sore."
         ch_e "Are you certain you didn't have anything else in mind?"
@@ -3715,7 +3805,7 @@ label definitely_bored_now_lines(Girl):
         ch_s "Hmm, I am developing a hand cramp here."
         ch_s "Mind if we take a break?"
 
-        ch_k "I'm getting rug-burn here [Girl.player_petname]. Can we do something else?"
+        ch_k "I'm getting rug-burn here " + Girl.player_petname + ". Can we do something else?"
         ch_e "I'm getting a bit worn out, could we settle this some other way?"
         ch_l "Seriously, can we do something else?"
         ch_j "Ok, seriously, can't we do something else?"
@@ -3727,11 +3817,11 @@ label definitely_bored_now_lines(Girl):
         ch_j "Ok, that's enough of that. Can we do something else?"
         ch_s "My jaw is becoming uncomfortable, could we do something else?"
 
-            ch_k "[Girl.player_petname], this is getting uncomfortable, maybe we could try something else."
-        ch_e "[EmmaX.player_petname], this is getting uncomfortable, maybe we could try something else."
-        ch_l "[LauraX.player_petname], this is getting uncomfortable, maybe we could try something else."
-        ch_j "[JeanX.player_petname], this is getting uncomfortable, maybe we could try something else."
-        ch_s "[StormX.player_petname], this is getting uncomfortable, maybe we could try something else."
+            ch_k "" + Girl.player_petname + ", this is getting uncomfortable, maybe we could try something else."
+        ch_e "" + Girl.player_petname + ", this is getting uncomfortable, maybe we could try something else."
+        ch_l "" + Girl.player_petname + ", this is getting uncomfortable, maybe we could try something else."
+        ch_j "" + Girl.player_petname + ", this is getting uncomfortable, maybe we could try something else."
+        ch_s "" + Girl.player_petname + ", this is getting uncomfortable, maybe we could try something else."
 
             ch_k "Ouch, foot cramp, can we[Girl.like]take a break?"
             ch_e "Hmm, foot cramp, could we take a short break?"
@@ -4108,26 +4198,26 @@ label used_to_action_lines(Girl):
 
 label auto_accepted_lines(Girl):
     if Girl == RogueX:
-        $ lines = ["Ok, [Girl.player_petname], let's do this.",
+        $ lines = ["Ok, " + Girl.player_petname + ", let's do this.",
             "Hmm, stick it in. . .",
             "Hmm, I've apparently got someone's attention. . ."]
 
 
-    ch_k "Oh. . . game on, [Girl.player_petname]."
-    ch_e "Mmm, if you insist, [EmmaX.player_petname]."
-    ch_l "Fine by me, [LauraX.player_petname]."
-    ch_j "Oh, if you must, [JeanX.player_petname]."
-    ch_s "Mmm, if you insist, [StormX.player_petname]."
-    ch_v "Fine by me, [JubesX.player_petname]."
+    ch_k "Oh. . . game on, " + Girl.player_petname + "."
+    ch_e "Mmm, if you insist, " + Girl.player_petname + "."
+    ch_l "Fine by me, " + Girl.player_petname + "."
+    ch_j "Oh, if you must, " + Girl.player_petname + "."
+    ch_s "Mmm, if you insist, " + Girl.player_petname + "."
+    ch_v "Fine by me, " + Girl.player_petname + "."
 
-    ch_k "Ooo, [Girl.player_petname], toys!"
-    ch_e "Hmm, [EmmaX.player_petname], toys!"
-    ch_l "Ooo, [LauraX.player_petname], toys!"
-    ch_j "Ooo, [JeanX.player_petname], toys!"
-    ch_s "Hmm, [StormX.player_petname], toys!"
+    ch_k "Ooo, " + Girl.player_petname + ", toys!"
+    ch_e "Hmm, " + Girl.player_petname + ", toys!"
+    ch_l "Ooo, " + Girl.player_petname + ", toys!"
+    ch_j "Ooo, " + Girl.player_petname + ", toys!"
+    ch_s "Hmm, " + Girl.player_petname + ", toys!"
 
-    ch_e "Mmmm, [EmmaX.player_petname], toys. . ."
-    ch_s "Mmmm, [StormX.player_petname], toys. . ."
+    ch_e "Mmmm, " + Girl.player_petname + ", toys. . ."
+    ch_s "Mmmm, " + Girl.player_petname + ", toys. . ."
 
 
     if Girl.used_to_anal:
@@ -4136,7 +4226,7 @@ label auto_accepted_lines(Girl):
         ch_e "Oooh, naughty boy. . ."
         ch_l "Yeah, ok. . ."
         ch_j "Oh! Sure. . ."
-        ch_s "[StormX.player_petname], I am surprised at you. . ."
+        ch_s "" + Girl.player_petname + ", I am surprised at you. . ."
     else:
         "[Girl.name] is briefly startled, but shrugs."
         ch_k "Oookay. . ."
@@ -4171,7 +4261,7 @@ label were_done_here_lines(Girl):
     ch_l "Dick."
     ch_l "Don't push me."
     ch_j "Hey, I don't need my powers to hurt you."
-    "[StormX.name] shoves you away and backhands you in the face."
+    "[Girl.name] shoves you away and backhands you in the face."
     ch_s "That is unfortunate."
     ch_s "I am afraid that is -not- what will happen here."
     ch_v "Dick."
@@ -4181,7 +4271,7 @@ label were_done_here_lines(Girl):
     "[Girl.name] shoves you away and slaps you in the face."
     ch_k "Asshole!"
     ch_k "You need to ask nicer than that!"
-    "[EmmaX.name] shoves you away and backhands you in the face."
+    "[Girl.name] shoves you away and backhands you in the face."
     ch_e "Impertinent!"
     ch_e "You need to ask a lady first."
 
@@ -4195,10 +4285,10 @@ label were_done_here_lines(Girl):
     "[Girl.name] shoves you away."
     ch_k "Jerk!"
     ch_k "I'm not into that!"
-    ch_e "Don't push your luck, [EmmaX.player_petname]."
-    ch_l "Don't push it, [LauraX.player_petname]."
-    ch_j "Don't push it, [JeanX.player_petname]."
-    ch_s "Do not go beyond yourself, [StormX.player_petname]."
+    ch_e "Don't push your luck, " + Girl.player_petname + "."
+    ch_l "Don't push it, " + Girl.player_petname + "."
+    ch_j "Don't push it, " + Girl.player_petname + "."
+    ch_s "Do not go beyond yourself, " + Girl.player_petname + "."
 
     "[Girl.name] shoves you away and slaps you in the face."
     ch_k "Jerk!"
@@ -4403,10 +4493,10 @@ label first_action_approval_mostly_love_lines(Girl):
     return
 
 label first_action_approval_mostly_obedience_lines(Girl):
-    $ lines = ["If that's what you want, [Girl.player_petname]. . .",
+    $ lines = ["If that's what you want, " + Girl.player_petname + ". . .",
         "If that's what you want. . .",
         "I suppose, if that's what you want. . .",
-        "Ok, [Girl.player_petname], I'm ready."]
+        "Ok, " + Girl.player_petname + ", I'm ready."]
 
 
 
@@ -4417,11 +4507,11 @@ label first_action_approval_mostly_obedience_lines(Girl):
         ch_s "That is what you want?"
         ch_v "Is that what gets you off?"
 
-        ch_k "If you want, [Girl.player_petname]. . ."
-        ch_e "If that's what you'd like, [EmmaX.player_petname]. . ."
-        ch_l "If you want, [LauraX.player_petname]. . ."
+        ch_k "If you want, " + Girl.player_petname + ". . ."
+        ch_e "If that's what you'd like, " + Girl.player_petname + ". . ."
+        ch_l "If you want, " + Girl.player_petname + ". . ."
 
-        ch_s "If that is what you want, [StormX.player_petname]. . ."
+        ch_s "If that is what you want, " + Girl.player_petname + ". . ."
 
 
         ch_k "I mean. . ."
@@ -4437,23 +4527,23 @@ label first_action_approval_mostly_obedience_lines(Girl):
         ch_j "I could do that, I guess. . ."
         ch_s "If that is what you want. . ."
 
-        ch_k "If that's what you want, [Girl.player_petname]. . ."
-        ch_e "If that's what you want, [EmmaX.player_petname]. . ."
-        ch_l "If that's what you want, [LauraX.player_petname]. . ."
-        ch_j "If that's what you want, [JeanX.player_petname]. . ."
-        ch_s "If that is what you want, [StormX.player_petname]. . ."
+        ch_k "If that's what you want, " + Girl.player_petname + ". . ."
+        ch_e "If that's what you want, " + Girl.player_petname + ". . ."
+        ch_l "If that's what you want, " + Girl.player_petname + ". . ."
+        ch_j "If that's what you want, " + Girl.player_petname + ". . ."
+        ch_s "If that is what you want, " + Girl.player_petname + ". . ."
 
-        ch_e "If you enjoy that, [EmmaX.player_petname]. . ."
+        ch_e "If you enjoy that, " + Girl.player_petname + ". . ."
 
-        ch_j "If you want, [JeanX.player_petname]. . ."
-        ch_s "If you enjoy that, [StormX.player_petname]. . ."
+        ch_j "If you want, " + Girl.player_petname + ". . ."
+        ch_s "If you enjoy that, " + Girl.player_petname + ". . ."
 
 
-        ch_k "I suppose if it's you, [Girl.player_petname]. . ."
-        ch_e "If you insist, [EmmaX.player_petname]. . ."
-        ch_l "Yes, [LauraX.player_petname]. . ."
-        ch_j "Ok, [JeanX.player_petname]. . ."
-        ch_s "If that is what you wish, [StormX.player_petname]. . ."
+        ch_k "I suppose if it's you, " + Girl.player_petname + ". . ."
+        ch_e "If you insist, " + Girl.player_petname + ". . ."
+        ch_l "Yes, " + Girl.player_petname + ". . ."
+        ch_j "Ok, " + Girl.player_petname + ". . ."
+        ch_s "If that is what you wish, " + Girl.player_petname + ". . ."
 
         ch_k "Well. . ."
         ch_e "I expected we'd get here at some point. . ."
@@ -4482,7 +4572,7 @@ label first_action_approval_addicted_lines(Girl):
     ch_k "I kind of {i}need{/i} to. . ."
     ch_e "Mmmmmmmm. . ."
     ch_s "Mmmmmmmm. . ."
-    ch_v "If you want, [JubesX.player_petname]. . ."
+    ch_v "If you want, " + Girl.player_petname + ". . ."
 
     ch_k "Hmmmm. . . ."
     ch_e "Hmmmm. . . ."
@@ -4790,10 +4880,10 @@ label before_action_less_than_three_times_lines(Girl):
 
 label anal_insertion_not_loose_not_done_today_lines(Girl):
     if Girl == RogueX:
-        $ lines = ["You could have been a bit more gentle last time, [Girl.player_petname]. . ."]
+        $ lines = ["You could have been a bit more gentle last time, " + Girl.player_petname + ". . ."]
 
-    ch_k "You could have been a bit more gentle last time, [Girl.player_petname]. . ."
-    ch_l "You could have been a bit more gentle last time, [LauraX.player_petname]. . ."
+    ch_k "You could have been a bit more gentle last time, " + Girl.player_petname + ". . ."
+    ch_l "You could have been a bit more gentle last time, " + Girl.player_petname + ". . ."
 
 
     ch_k "That was kind of. . . rough last time?"
@@ -4808,20 +4898,20 @@ label anal_insertion_not_loose_not_done_today_lines(Girl):
 
 label anal_insertion_not_loose_done_today_lines(Girl):
     if Girl == RogueX:
-        $ lines = ["Sorry, I just need a little break back there, [Girl.player_petname]."]
+        $ lines = ["Sorry, I just need a little break back there, " + Girl.player_petname + "."]
 
         $ lines = ["I'm still a little sore from earlier, " + Girl.player_petname + "."]
 
 
 ch_k "I'm not really over the last time, but. . ."
 
-    ch_k "I'm still a little sore from earlier, [Girl.player_petname]."
-    ch_v "I'm still a little sore from earlier, [JubesX.player_petname]."
+    ch_k "I'm still a little sore from earlier, " + Girl.player_petname + "."
+    ch_v "I'm still a little sore from earlier, " + Girl.player_petname + "."
     ch_k "I'm still[Girl.like]sore from earlier. . ."
     ch_l "I'm still sore from earlier. . ."
 
-    ch_k "Sorry, I just need a little break back there, [Girl.player_petname]."
-    ch_l "Sorry, I just need a little break back there, [LauraX.player_petname]."
+    ch_k "Sorry, I just need a little break back there, " + Girl.player_petname + "."
+    ch_l "Sorry, I just need a little break back there, " + Girl.player_petname + "."
 
 
     ch_k "I'm[Girl.like]a little sore here?"
@@ -4836,13 +4926,13 @@ ch_k "I'm not really over the last time, but. . ."
 
 label hard_cock_lines(Girl):
     if Girl == EmmaX:
-        ch_e "My word [Girl.player_petname], your member is hard enough to crack diamond. . . and I should know."
+        ch_e "My word " + Girl.player_petname + ", your member is hard enough to crack diamond. . . and I should know."
     elif Girl == LauraX:
         ch_l "Nice to see you're ready for business. . ."
     elif Girl == JeanX:
         ch_j "I see you won't need any encouragement. . ."
     elif Girl == StormX:
-        ch_s "I must say [Girl.player_petname], you certainly do seem to be. . . excited."
+        ch_s "I must say " + Girl.player_petname + ", you certainly do seem to be. . . excited."
 
     Girl.voice "[line]"
 
@@ -4867,12 +4957,12 @@ label first_time_asking_lines(Girl):
     $ Girl.blushing = "_blush1"
 
     ch_k "You want to rub your cock against my. . . breasts?"
-    ch_e "Hmm, are you sure you can handle that, [EmmaX.player_petname]?"
+    ch_e "Hmm, are you sure you can handle that, " + Girl.player_petname + "?"
     ch_l "You want a titjob, huh?"
     ch_j "Oh, you want me to put these to work. . ."
-    $ JeanX.change_face("_sly", 1)
+    $ Girl.change_face("_sly", 1)
     ch_j "I can't blame you. . ."
-    ch_s "My breasts are really appealing to you, [StormX.player_petname]?"
+    ch_s "My breasts are really appealing to you, " + Girl.player_petname + "?"
 
 
 
@@ -4884,10 +4974,10 @@ label first_time_asking_lines(Girl):
 
 
     ch_k "Huh, so you'd like me to touch your cock with my feet?"
-    ch_e "Mmm, so you're into feet then, [EmmaX.player_petname]?"
+    ch_e "Mmm, so you're into feet then, " + Girl.player_petname + "?"
     ch_l "Standard footjob?"
     ch_j "Oh, a foot person, eh?"
-    ch_s "Oh, you would like me to use my feet, [StormX.player_petname]?"
+    ch_s "Oh, you would like me to use my feet, " + Girl.player_petname + "?"
 
 
     ch_k "I haven't really had much experience with this. . . "
@@ -4981,7 +5071,7 @@ label mouth_not_enough(Girl):
 
 label what_do_you_think_youre_doing_lines(Girl):
     $ lines = ["Hey, what do you think you're doing back there?!",
-        "Hmm, kinda rude, [Girl.player_petname]."]
+        "Hmm, kinda rude, " + Girl.player_petname + "."]
 
     Girl.voice "[line]"
 
@@ -5005,18 +5095,18 @@ label achievement_lines(Girl):
 
     ch_k "I've kinda become[Girl.like]a \"Handi-Queen\" or something."
     ch_e "I've apparently become the \"queen\" of handjobs as well."
-    ch_l "Looks like you filled out the punch card, [LauraX.player_petname]."
+    ch_l "Looks like you filled out the punch card, " + Girl.player_petname + "."
     ch_j "This seems to be all we do lately. . ."
     ch_s "I seem to have become the \"queen\" of good handjobs."
 
     ch_k "I can't[Girl.like]get your taste out of my mind."
-    ch_e "You taste positively intoxicating, [EmmaX.player_petname]."
+    ch_e "You taste positively intoxicating, " + Girl.player_petname + "."
     ch_l "Your flavor is intoxicating."
     ch_j "Wow, you know. . . I don't always love this. . ."
-    $ JeanX.change_face("_smile", 2)
+    $ Girl.change_face("_smile", 2)
     ch_j "but I guess with you it's different somehow. . ."
-    $ JeanX.blushing = "_blush1"
-    ch_s "I cannot imagine how I went this long without such a delicacy, [StormX.player_petname]."
+    $ Girl.blushing = "_blush1"
+    ch_s "I cannot imagine how I went this long without such a delicacy, " + Girl.player_petname + "."
 
 
     ch_k "I guess I've gotten pretty smooth at the \"Kittypedi.\""
@@ -5477,11 +5567,13 @@ label accepted_without_question_lines(Girl, action):
 label pull_back_before_get_in_lines(Girl, action):
     if Girl == RogueX:
         if Girl.action_counter[action]:
-            $ lines = ["Well ok, [Girl.player_petname], no harm done. Just give me a little warning next time.",
-                "Well ok, [Girl.player_petname], it has been kinda fun."]
+            $ lines = ["Well ok, " + Girl.player_petname + ", no harm done. Just give me a little warning next time.",
+                "Well ok, " + Girl.player_petname + ", it has been kinda fun."]
         else:
-            $ lines = ["Well ok, [Girl.player_petname], I'm not really ready for that, but maybe if you ask nicely next time . . .",
-            "Well ok, [Girl.player_petname], that's a bit dirty, maybe ask a girl?"]
+            $ lines = ["Well ok, " + Girl.player_petname + ", I'm not really ready for that, but maybe if you ask nicely next time . . ."]
+
+            if action in anal_insertion_actions:
+                $ lines.append("Well ok, " + Girl.player_petname + ", that's a bit dirty, maybe ask a girl?")
 
     $ line = renpy.random.choice(lines)
 
@@ -5509,7 +5601,7 @@ label caught_masturbating_lines(Girl):
     elif Girl == LauraX:
         $ lines = ["Huh.{p}}When did you get here?"]
     elif Girl == JeanX:
-        $ lines = ["Oh, hey. . .[JeanX.player_petname].{p}}When did you get here?"]
+        $ lines = ["Oh, hey. . ." + Girl.player_petname + ".{p}}When did you get here?"]
     elif Girl == StormX:
         $ lines = ["!{p}}How long have you been there?!"]
     elif Girl == JubesX:
