@@ -28,7 +28,7 @@ image Rogue_Pussy_Mask:
 
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_SexMask.png"
+        "images/Rogue_doggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
         xzoom 0.6
@@ -43,7 +43,7 @@ image Rogue_Pussy_Mask_Static:
 
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_SexMask.png"
+        "images/Rogue_doggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
         xzoom 0.6
@@ -91,13 +91,13 @@ image Rogue_Pussy_Static:
     subpixel True
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Pussy_FBase.png"
+        "images/Rogue_doggy/Rogue_Doggy_Pussy_FBase.png"
         anchor (0.52,0.69)
         pos (220,518)
         xzoom 1
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Pussy_FHole.png"
+        "images/Rogue_doggy/Rogue_Doggy_Pussy_FHole.png"
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
@@ -110,11 +110,11 @@ image Rogue_Pussy_Static:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == 'garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
-            "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings.png",
+            "RogueX.hose == 'garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings_Loose.png",
+            "RogueX.hose == 'stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings.png",
             "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == 'ripped_pantyhose'", "images/RogueDoggy/Rogue_Doggy_FullHose_Holed.png",
-            "RogueX.hose == 'ripped_tights'", "images/RogueDoggy/Rogue_Doggy_Tights_Holed.png",
+            "RogueX.hose == 'ripped_pantyhose'", "images/Rogue_doggy/Rogue_Doggy_FullHose_Holed.png",
+            "RogueX.hose == 'ripped_tights'", "images/Rogue_doggy/Rogue_Doggy_Tights_Holed.png",
             "True", Null(),
             ),
     contains:
@@ -129,7 +129,7 @@ image Rogue_Pussy_Hole_Mask_Static:
 
     contains:
 
-        AlphaMask("images/RogueDoggy/Rogue_Doggy_Pussy_FHole.png", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("images/Rogue_doggy/Rogue_Doggy_Pussy_FHole.png", "images/Rogue_doggy/Rogue_Doggy_SexMask.png")
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
@@ -144,7 +144,7 @@ image Rogue_PussyHole_Static:
 
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Pussy_FHeading.png"
+        "images/Rogue_doggy/Rogue_Doggy_Pussy_FHeading.png"
         anchor (0.52,0.69)
         pos (217,515)
         zoom 1
@@ -161,13 +161,13 @@ image Rogue_Pussy_Heading:
     subpixel True
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Pussy_FBase.png"
+        "images/Rogue_doggy/Rogue_Doggy_Pussy_FBase.png"
         anchor (0.52,0.69)
         pos (220,518)
         xzoom 1
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Pussy_FHole.png"
+        "images/Rogue_doggy/Rogue_Doggy_Pussy_FHole.png"
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
@@ -180,11 +180,11 @@ image Rogue_Pussy_Heading:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == 'garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
-            "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings.png",
+            "RogueX.hose == 'garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings_Loose.png",
+            "RogueX.hose == 'stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings.png",
             "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == 'ripped_pantyhose'", "images/RogueDoggy/Rogue_Doggy_FullHose_Holed.png",
-            "RogueX.hose == 'ripped_tights'", "images/RogueDoggy/Rogue_Doggy_Tights_Holed.png",
+            "RogueX.hose == 'ripped_pantyhose'", "images/Rogue_doggy/Rogue_Doggy_FullHose_Holed.png",
+            "RogueX.hose == 'ripped_tights'", "images/Rogue_doggy/Rogue_Doggy_Tights_Holed.png",
             "True", Null(),
             ),
     contains:
@@ -200,7 +200,7 @@ image Rogue_Pussy_Hole_Mask:
 
     contains:
 
-        AlphaMask("images/RogueDoggy/Rogue_Doggy_Pussy_FHole.png", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("images/Rogue_doggy/Rogue_Doggy_Pussy_FHole.png", "images/Rogue_doggy/Rogue_Doggy_SexMask.png")
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
@@ -215,7 +215,7 @@ image Rogue_Pussy_Heading_Flap:
 
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Pussy_FHeading.png"
+        "images/Rogue_doggy/Rogue_Doggy_Pussy_FHeading.png"
         anchor (0.52,0.69)
         pos (217,515)
         zoom 1
@@ -232,13 +232,13 @@ image Rogue_Pussy_Fingering:
     subpixel True
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Pussy_FBase.png"
+        "images/Rogue_doggy/Rogue_Doggy_Pussy_FBase.png"
         anchor (0.52,0.69)
         pos (220,518)
         xzoom 1
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Pussy_FHole.png"
+        "images/Rogue_doggy/Rogue_Doggy_Pussy_FHole.png"
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
@@ -251,11 +251,11 @@ image Rogue_Pussy_Fingering:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == 'garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
-            "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings.png",
+            "RogueX.hose == 'garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings_Loose.png",
+            "RogueX.hose == 'stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings.png",
             "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == 'ripped_pantyhose'", "images/RogueDoggy/Rogue_Doggy_FullHose_Holed.png",
-            "RogueX.hose == 'ripped_tights'", "images/RogueDoggy/Rogue_Doggy_Tights_Holed.png",
+            "RogueX.hose == 'ripped_pantyhose'", "images/Rogue_doggy/Rogue_Doggy_FullHose_Holed.png",
+            "RogueX.hose == 'ripped_tights'", "images/Rogue_doggy/Rogue_Doggy_Tights_Holed.png",
             "True", Null(),
             ),
     contains:
@@ -284,18 +284,18 @@ image Rogue_Pussy_Fucking2:
 
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Pussy_FBase.png"
+        "images/Rogue_doggy/Rogue_Doggy_Pussy_FBase.png"
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Pussy_FHole.png"
+        "images/Rogue_doggy/Rogue_Doggy_Pussy_FHole.png"
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == 'garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
-            "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings.png",
+            "RogueX.hose == 'garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings_Loose.png",
+            "RogueX.hose == 'stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings.png",
             "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == 'ripped_pantyhose'", "images/RogueDoggy/Rogue_Doggy_FullHose_Holed.png",
-            "RogueX.hose == 'ripped_tights'", "images/RogueDoggy/Rogue_Doggy_Tights_Holed.png",
+            "RogueX.hose == 'ripped_pantyhose'", "images/Rogue_doggy/Rogue_Doggy_FullHose_Holed.png",
+            "RogueX.hose == 'ripped_tights'", "images/Rogue_doggy/Rogue_Doggy_Tights_Holed.png",
             "True", Null(),
             ),
     contains:
@@ -304,8 +304,8 @@ image Rogue_Pussy_Fucking2:
 
 
         ConditionSwitch(
-            "primary_action == 'dildo_pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
-            "True",AlphaMask("Zero_doggy_fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
+            "primary_action == 'dildo_pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/Rogue_doggy/Rogue_Doggy_SexMask.png"),
+            "True",AlphaMask("Zero_doggy_fucking2", "images/Rogue_doggy/Rogue_Doggy_SexMask.png"),
             ),
 
 
@@ -313,23 +313,23 @@ image Rogue_Pussy_Fucking3:
 
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Pussy_FBase.png"
+        "images/Rogue_doggy/Rogue_Doggy_Pussy_FBase.png"
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Pussy_FHole.png"
+        "images/Rogue_doggy/Rogue_Doggy_Pussy_FHole.png"
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == 'garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
-            "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings.png",
+            "RogueX.hose == 'garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings_Loose.png",
+            "RogueX.hose == 'stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings.png",
             "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == 'ripped_pantyhose'", "images/RogueDoggy/Rogue_Doggy_FullHose_Holed.png",
-            "RogueX.hose == 'ripped_tights'", "images/RogueDoggy/Rogue_Doggy_Tights_Holed.png",
+            "RogueX.hose == 'ripped_pantyhose'", "images/Rogue_doggy/Rogue_Doggy_FullHose_Holed.png",
+            "RogueX.hose == 'ripped_tights'", "images/Rogue_doggy/Rogue_Doggy_Tights_Holed.png",
             "True", Null(),
             ),
     contains:
 
-        AlphaMask("Zero_doggy_fucking3", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("Zero_doggy_fucking3", "images/Rogue_doggy/Rogue_Doggy_SexMask.png")
 
 image Rogue_Doggy_Fucking_Dildo:
 
@@ -350,18 +350,18 @@ image Rogue_Anal:
 
     contains:
 
-        "images/RogueDoggy/Rogue_doggy_asshole_Loose.png"
+        "images/Rogue_doggy/Rogue_doggy_anus_loose.png"
         anchor (0.50,0.69)
         pos (208,500)
         zoom 1.25
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == 'garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
-            "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings.png",
+            "RogueX.hose == 'garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings_Loose.png",
+            "RogueX.hose == 'stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings.png",
             "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == 'ripped_pantyhose'", "images/RogueDoggy/Rogue_Doggy_FullHose_Holed.png",
-            "RogueX.hose == 'ripped_tights'", "images/RogueDoggy/Rogue_Doggy_Tights_Holed.png",
+            "RogueX.hose == 'ripped_pantyhose'", "images/Rogue_doggy/Rogue_Doggy_FullHose_Holed.png",
+            "RogueX.hose == 'ripped_tights'", "images/Rogue_doggy/Rogue_Doggy_Tights_Holed.png",
             "True", Null(),
             )
     contains:
@@ -375,10 +375,10 @@ image Rogue_Anal_Fingering:
 
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Anal_FullBase.png"
+        "images/Rogue_doggy/Rogue_doggy_anal_full_base.png"
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Anal_FullHole.png"
+        "images/Rogue_doggy/Rogue_doggy_anal_full_hole.png"
         anchor (0.52,0.69)
         pos (218,518)
         zoom 0.6
@@ -390,11 +390,11 @@ image Rogue_Anal_Fingering:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == 'garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
-            "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings.png",
+            "RogueX.hose == 'garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings_Loose.png",
+            "RogueX.hose == 'stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings.png",
             "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == 'ripped_pantyhose'", "images/RogueDoggy/Rogue_Doggy_FullHose_Holed.png",
-            "RogueX.hose == 'ripped_tights'", "images/RogueDoggy/Rogue_Doggy_Tights_Holed.png",
+            "RogueX.hose == 'ripped_pantyhose'", "images/Rogue_doggy/Rogue_Doggy_FullHose_Holed.png",
+            "RogueX.hose == 'ripped_tights'", "images/Rogue_doggy/Rogue_Doggy_Tights_Holed.png",
             "True", Null(),
             )
     contains:
@@ -418,7 +418,7 @@ image Zero_Doggy_Anal_Finger:
 image Rogue_Doggy_Anal_Fingering_Mask:
 
     contains:
-        "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"
+        "images/Rogue_doggy/Rogue_doggy_anal_mask.png"
 
         anchor (0.52,0.69)
         pos (218,518)
@@ -434,10 +434,10 @@ image Rogue_Anal_Heading:
 
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Anal_FullBase.png"
+        "images/Rogue_doggy/Rogue_doggy_anal_full_base.png"
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Anal_FullHole.png"
+        "images/Rogue_doggy/Rogue_doggy_anal_full_hole.png"
         anchor (0.52,0.69)
         pos (218,518)
         zoom 0.5
@@ -449,11 +449,11 @@ image Rogue_Anal_Heading:
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == 'garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
-            "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings.png",
+            "RogueX.hose == 'garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings_Loose.png",
+            "RogueX.hose == 'stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings.png",
             "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == 'ripped_pantyhose'", "images/RogueDoggy/Rogue_Doggy_FullHose_Holed.png",
-            "RogueX.hose == 'ripped_tights'", "images/RogueDoggy/Rogue_Doggy_Tights_Holed.png",
+            "RogueX.hose == 'ripped_pantyhose'", "images/Rogue_doggy/Rogue_Doggy_FullHose_Holed.png",
+            "RogueX.hose == 'ripped_tights'", "images/Rogue_doggy/Rogue_Doggy_Tights_Holed.png",
             "True", Null(),
             )
     contains:
@@ -468,7 +468,7 @@ image Rogue_Anal_Heading:
 image Rogue_Doggy_Anal_Heading_Mask:
 
     contains:
-        "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"
+        "images/Rogue_doggy/Rogue_doggy_anal_mask.png"
         anchor (0.52,0.69)
         pos (218,518)
         zoom 0.5
@@ -540,29 +540,29 @@ image Rogue_Anal_Fucking:
 
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Anal_FullBase.png"
+        "images/Rogue_doggy/Rogue_doggy_anal_full_base.png"
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Anal_FullHole.png"
+        "images/Rogue_doggy/Rogue_doggy_anal_full_hole.png"
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Anal_FullCheeks.png"
+        "images/Rogue_doggy/Rogue_doggy_anal_full_cheeks.png"
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == 'garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
-            "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings.png",
+            "RogueX.hose == 'garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings_Loose.png",
+            "RogueX.hose == 'stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings.png",
             "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == 'ripped_pantyhose'", "images/RogueDoggy/Rogue_Doggy_FullHose_Holed.png",
-            "RogueX.hose == 'ripped_tights'", "images/RogueDoggy/Rogue_Doggy_Tights_Holed.png",
+            "RogueX.hose == 'ripped_pantyhose'", "images/Rogue_doggy/Rogue_Doggy_FullHose_Holed.png",
+            "RogueX.hose == 'ripped_tights'", "images/Rogue_doggy/Rogue_Doggy_Tights_Holed.png",
             "True", Null(),
             ),
     contains:
 
         ConditionSwitch(
 
-            "primary_action == 'dildo_anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
-            "True", AlphaMask("Zero_doggy_anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
+            "primary_action == 'dildo_anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/Rogue_doggy/Rogue_doggy_anal_mask.png"),
+            "True", AlphaMask("Zero_doggy_anal1", "images/Rogue_doggy/Rogue_doggy_anal_mask.png"),
             ),
 
 image Rogue_Doggy_Anal_Dildo:
@@ -580,18 +580,18 @@ image Rogue_Doggy_Anal_Dildo:
 image Rogue_Doggy_Anal_FullMask:
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Anal_FullMask.png"
+        "images/Rogue_doggy/Rogue_Doggy_Anal_FullMask.png"
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Anal_FullCheeks.png"
+        "images/Rogue_doggy/Rogue_doggy_anal_full_cheeks.png"
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == 'garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
-            "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings.png",
+            "RogueX.hose == 'garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings_Loose.png",
+            "RogueX.hose == 'stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings.png",
             "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == 'ripped_pantyhose'", "images/RogueDoggy/Rogue_Doggy_FullHose_Holed.png",
-            "RogueX.hose == 'ripped_tights'", "images/RogueDoggy/Rogue_Doggy_Tights_Holed.png",
+            "RogueX.hose == 'ripped_pantyhose'", "images/Rogue_doggy/Rogue_Doggy_FullHose_Holed.png",
+            "RogueX.hose == 'ripped_tights'", "images/Rogue_doggy/Rogue_Doggy_Tights_Holed.png",
             "True", Null(),
             )
 
@@ -630,29 +630,29 @@ image Rogue_Anal_Fucking2:
 
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Anal_FullBase.png"
+        "images/Rogue_doggy/Rogue_doggy_anal_full_base.png"
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_Anal_FullHole.png"
+        "images/Rogue_doggy/Rogue_doggy_anal_full_hole.png"
     contains:
 
 
 
 
-        "images/RogueDoggy/Rogue_Doggy_Anal_FullCheeks.png"
+        "images/Rogue_doggy/Rogue_doggy_anal_full_cheeks.png"
     contains:
         ConditionSwitch(
 
-            "RogueX.hose == 'garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings_Loose.png",
-            "RogueX.hose == 'stockings_and_garterbelt'", "images/RogueDoggy/Rogue_Doggy_Stockings.png",
+            "RogueX.hose == 'garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings_Loose.png",
+            "RogueX.hose == 'stockings_and_garterbelt'", "images/Rogue_doggy/Rogue_Doggy_Stockings.png",
             "RogueX.underwear and RogueX.underwear_pulled_down", Null(),
-            "RogueX.hose == 'ripped_pantyhose'", "images/RogueDoggy/Rogue_Doggy_FullHose_Holed.png",
-            "RogueX.hose == 'ripped_tights'", "images/RogueDoggy/Rogue_Doggy_Tights_Holed.png",
+            "RogueX.hose == 'ripped_pantyhose'", "images/Rogue_doggy/Rogue_Doggy_FullHose_Holed.png",
+            "RogueX.hose == 'ripped_tights'", "images/Rogue_doggy/Rogue_Doggy_Tights_Holed.png",
             "True", Null(),
             )
     contains:
 
-        AlphaMask("Zero_doggy_anal2", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png")
+        AlphaMask("Zero_doggy_anal2", "images/Rogue_doggy/Rogue_doggy_anal_mask.png")
 
 image Rogue_Doggy_Fuck2_Top:
 
@@ -991,7 +991,7 @@ image Rogue_Pussy_Open_Mask:
         yoffset 3
 
 image Rogue_sex_pussy_Spunk_Heading:
-    "images/KittySex/Kitty_Sex_Spunk_Puss_Over.png"
+    "images/Kitty_sex/Kitty_Sex_Spunk_Puss_Over.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
     xzoom 0.8
@@ -1217,7 +1217,7 @@ image Rogue_Sex_Anal_Fucking2:
 
     contains:
 
-        "images/KittySex/Kitty_Sex_Hole_Open.png"
+        "images/Kitty_sex/Kitty_sex_anus_open.png"
     contains:
 
         AlphaMask("Rogue_Anal_Zero_Anim2", "Rogue_Anal_Fucking_Mask")
@@ -1226,7 +1226,7 @@ image Rogue_Sex_Anal_Fucking3:
 
     contains:
 
-        "images/KittySex/Kitty_Sex_Hole_Open.png"
+        "images/Kitty_sex/Kitty_sex_anus_open.png"
     contains:
 
         AlphaMask("Kitty_Anal_Zero_Anim3", "Kitty_Anal_Fucking_Mask")
@@ -1234,17 +1234,17 @@ image Rogue_Sex_Anal_Fucking3:
 image Rogue_Anal_Fucking_Mask:
 
     contains:
-        "images/KittySex/Kitty_Sex_Hole_Mask.png"
+        "images/Kitty_sex/Kitty_sex_anus_mask.png"
         yoffset 1
 
 image Rogue_Anal_Open_Mask:
 
     contains:
-        "images/KittySex/Kitty_Sex_Hole_Mask.png"
+        "images/Kitty_sex/Kitty_sex_anus_mask.png"
         yoffset 3
 
 image Rogue_Sex_Anal_Heading:
-    "images/KittySex/Kitty_Sex_Hole_Open.png"
+    "images/Kitty_sex/Kitty_sex_anus_open.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
     xzoom 0.6
@@ -1258,7 +1258,7 @@ image Rogue_Sex_Anal_Heading:
         repeat
 
 image Rogue_Anal_Spunk_Heading_Over:
-    "images/KittySex/Kitty_Sex_Spunk_Anal_Over.png"
+    "images/Kitty_sex/Kitty_Sex_Spunk_Anal_Over.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
     xzoom 0.8
@@ -1270,7 +1270,7 @@ image Rogue_Anal_Spunk_Heading_Over:
         ease 2.25 xzoom 0.8
         repeat
 image Rogue_Anal_Spunk_Heading_Under:
-    "images/KittySex/Kitty_Sex_Spunk_Anal_Under.png"
+    "images/Kitty_sex/Kitty_Sex_Spunk_Anal_Under.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
     xzoom 0.6
@@ -1284,7 +1284,7 @@ image Rogue_Anal_Spunk_Heading_Under:
         repeat
 
 image Rogue_Sex_Anal_Tip:
-    "images/KittySex/Kitty_Sex_Hole_Open.png"
+    "images/Kitty_sex/Kitty_sex_anus_open.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
     xzoom 0.6

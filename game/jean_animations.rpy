@@ -975,7 +975,7 @@ image Jean_Doggy_Ass:
         (0,0), "images/JeanDoggy/Jean_Doggy_Ass.png",
         (0,0), ConditionSwitch(
 
-            "JeanX.Water", "images/RogueDoggy/Rogue_Doggy_WetAss.png",
+            "JeanX.Water", "images/Rogue_doggy/Rogue_Doggy_WetAss.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -1014,8 +1014,8 @@ image Jean_Doggy_Ass:
 
             "'in' in JeanX.spunk and Player.cock_position == 'in'",Null(),
             "'in' in JeanX.spunk ", "images/JeanDoggy/Jean_Doggy_SpunkPussyClosed.png",
-            "JeanX.grool and Player.cock_position == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
-            "JeanX.grool", "images/RogueDoggy/Rogue_Doggy_WetPussyClosed.png",
+            "JeanX.grool and Player.cock_position == 'in'", "images/Rogue_doggy/Rogue_Doggy_WetPussyOpen.png",
+            "JeanX.grool", "images/Rogue_doggy/Rogue_Doggy_WetPussyClosed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -1024,11 +1024,11 @@ image Jean_Doggy_Ass:
             "Player.sprite and Player.cock_position == 'in'", Null(),
             "primary_action == 'fondle_pussy' or offhand_action == 'fondle_pussy'",Null(),
             "primary_action == 'dildo_pussy'", Null(),
-            "JeanX.legs == 'pants' and not JeanX.upskirt", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
+            "JeanX.legs == 'pants' and not JeanX.upskirt", "images/Rogue_doggy/Rogue_Doggy_Pubes_Panties.png",
             "JeanX.underwear_pulled_down and primary_action == 'eat_pussy'", "images/JeanDoggy/Jean_Doggy_Pubes_Open.png",
             "JeanX.underwear_pulled_down", "images/JeanDoggy/Jean_Doggy_Pubes.png",
-            "JeanX.underwear", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
-            "JeanX.hose and JeanX.hose != 'stockings'", "images/RogueDoggy/Rogue_Doggy_Pubes_Panties.png",
+            "JeanX.underwear", "images/Rogue_doggy/Rogue_Doggy_Pubes_Panties.png",
+            "JeanX.hose and JeanX.hose != 'stockings'", "images/Rogue_doggy/Rogue_Doggy_Pubes_Panties.png",
             "primary_action == 'eat_pussy'", "images/JeanDoggy/Jean_Doggy_Pubes_Open.png",
             "True", "images/JeanDoggy/Jean_Doggy_Pubes.png",
             ),
@@ -1149,8 +1149,8 @@ image Jean_Doggy_Ass:
             "not Player.sprite or Player.cock_position != 'out'", Null(),
 
 
-            "action_speed ", AlphaMask("Zero_hotdog_moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
-            "True", AlphaMask("Zero_hotdog_static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "action_speed ", AlphaMask("Zero_hotdog_moving", "images/Rogue_doggy/Rogue_Doggy_HotdogMask.png"),
+            "True", AlphaMask("Zero_hotdog_static", "images/Rogue_doggy/Rogue_Doggy_HotdogMask.png"),
             ),
 
 
@@ -1331,7 +1331,7 @@ image Jean_Pussy_Mask:
 
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_SexMask.png"
+        "images/Rogue_doggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
         xzoom 0.6
@@ -1346,7 +1346,7 @@ image Jean_Pussy_Mask_Static:
 
     contains:
 
-        "images/RogueDoggy/Rogue_Doggy_SexMask.png"
+        "images/Rogue_doggy/Rogue_Doggy_SexMask.png"
         anchor (0.52,0.69)
         pos (217,518)
         xzoom 0.6
@@ -1432,7 +1432,7 @@ image Jean_Pussy_Hole_Mask_Static:
 
     contains:
 
-        AlphaMask("images/JeanDoggy/Jean_Doggy_Pussy_FHole.png", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("images/JeanDoggy/Jean_Doggy_Pussy_FHole.png", "images/Rogue_doggy/Rogue_Doggy_SexMask.png")
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
@@ -1503,7 +1503,7 @@ image Jean_Pussy_Hole_Mask:
 
     contains:
 
-        AlphaMask("images/JeanDoggy/Jean_Doggy_Pussy_FHole.png", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("images/JeanDoggy/Jean_Doggy_Pussy_FHole.png", "images/Rogue_doggy/Rogue_Doggy_SexMask.png")
         subpixel True
         anchor (0.52,0.69)
         pos (217,518)
@@ -1592,8 +1592,8 @@ image Jean_Pussy_Fucking2:
 
 
         ConditionSwitch(
-            "primary_action == 'dildo_pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
-            "True",AlphaMask("Zero_Jean_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
+            "primary_action == 'dildo_pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/Rogue_doggy/Rogue_Doggy_SexMask.png"),
+            "True",AlphaMask("Zero_Jean_Doggy_Fucking2", "images/Rogue_doggy/Rogue_Doggy_SexMask.png"),
             ),
 
 
@@ -1617,7 +1617,7 @@ image Jean_Pussy_Fucking3:
             )
     contains:
 
-        AlphaMask("Zero_Jean_Doggy_Fucking3", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("Zero_Jean_Doggy_Fucking3", "images/Rogue_doggy/Rogue_Doggy_SexMask.png")
 
 
 
@@ -1738,7 +1738,7 @@ image Zero_Jean_Doggy_Anal_HeadingJunk:
 image Jean_Doggy_Anal_Heading_Mask:
 
     contains:
-        "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"
+        "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png"
         anchor (0.52,0.69)
         pos (218,518)
         zoom 0.5
@@ -1813,8 +1813,8 @@ image Jean_Anal_Fucking:
 
         ConditionSwitch(
 
-            "primary_action == 'dildo_anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
-            "True", AlphaMask("Zero_Jean_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
+            "primary_action == 'dildo_anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png"),
+            "True", AlphaMask("Zero_Jean_Doggy_Anal1", "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png"),
             ),
 
 image Jean_Doggy_Anal_FullMask:
@@ -1901,7 +1901,7 @@ image Jean_Anal_Fucking2:
             )
     contains:
 
-        AlphaMask("Zero_Jean_Doggy_Anal2", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png")
+        AlphaMask("Zero_Jean_Doggy_Anal2", "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png")
 
 image Jean_Doggy_Fuck2_Top:
 

@@ -104,7 +104,7 @@ image Rogue_blowjob_body:
     offset (-615, -125)
 
 image Rogue_blowjob_mask:
-    "images/Rogue_blowjob/Rogue_facemask_blowjob.png"
+    "images/Rogue_blowjob/Rogue_blowjob_face_mask.png"
     anchor (0.4,0.65)
 
 image Rogue_blowjob_mask_heading:
@@ -167,7 +167,7 @@ image Rogue_blowjob_hairback_animation3:
     blowjob_sucking
 
 image Rogue_blowjob_facemask_animation3:
-    AlphaMask("Rogue_blowjob_head", "images/Rogue_blowjob/Rogue_facemask_blowjob.png")
+    AlphaMask("Rogue_blowjob_head", "images/Rogue_blowjob/Rogue_blowjob_face_mask.png")
     blowjob_sucking
 
 image Rogue_blowjob_body_animation4:
@@ -183,7 +183,7 @@ image Rogue_blowjob_hairback_animation4:
     blowjob_deepthroat
 
 image Rogue_blowjob_facemask_animation4:
-    AlphaMask("Rogue_blowjob_head", "images/Rogue_blowjob/Rogue_facemask_blowjob.png")
+    AlphaMask("Rogue_blowjob_head", "images/Rogue_blowjob/Rogue_blowjob_face_mask.png")
     blowjob_deepthroat
 
 image Rogue_mouth_blowjob_sucking:
@@ -234,11 +234,11 @@ image Rogue_doggy_blinking:
         3.25
     choice:
         3
-    "images/Rogue_doggy/Rogue_eyes_doggy_squint.png"
+    "images/Rogue_doggy/Rogue_doggy_eyes_sexy.png"
     0.05
-    "images/Rogue_doggy/Rogue_eyes_doggy_closed.png"
+    "images/Rogue_doggy/Rogue_doggy_eyes_closed.png"
     0.15
-    "images/Rogue_doggy/Rogue_eyes_doggy_squint.png"
+    "images/Rogue_doggy/Rogue_doggy_eyes_sexy.png"
     0.05
     repeat
 

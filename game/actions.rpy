@@ -409,7 +409,7 @@ label before_action:
                 "[line]"
 
         if Player.focus >= 50:
-            call hard_cock_lines(focused_Girl)
+            call hard_cock_lines(focused_Girl, primary_action)
 
     call first_action_reactions(focused_Girl, primary_action)
 
@@ -602,7 +602,7 @@ label after_action:
         elif primary_action in ["anal"] and not action_context:
             $ focused_Girl.change_face("_bemused", 1)
 
-        call achievement_lines(focused_Girl)
+        call achievement_lines(focused_Girl, primary_action)
     elif primary_action == "blowjob" and action_context == "shift":
         pass
     elif Girl.action_counter[primary_action] == 1:
@@ -611,15 +611,15 @@ label after_action:
         call action_done_five_times_lines(focused_Girl)
     elif primary_action in sex_actions and not action_context:
         if "unsatisfied" in focused_Girl.recent_history:
-            call unsatisfied_reactions(Girl, action)
+            call unsatisfied_reactions(Girl, primary_action)
 
     if primary_action == "kiss" and not action_context and focused_Girl.action_counter["kiss"] > 5 and focused_Girl.lust > 50 and approvalcheck(focused_Girl, 950):
-        call would_you_like_more_lines(Girl, action)
+        call would_you_like_more_lines(Girl, primary_action)
 
     $ approval_bonus = 0
 
     if action_context == "shift":
-        call switching_action_lines(focused_Girl)
+        call switching_action_lines(focused_Girl, primary_action)
     elif primary_action == "kiss":
         call expression focused_Girl.Tah + "_Pos_Reset"
     elif primary_action == "handjob":
@@ -1112,8 +1112,8 @@ label end_of_action_round(Girl, action):
     call Escalation(Girl)
 
     if Round == 10:
-        call ten_rounds_left_lines(Girl)
+        call ten_rounds_left_lines(Girl, primary_action)
     elif Round == 5:
-        call five_rounds_left_lines(Girl)
+        call five_rounds_left_lines(Girl, primary_action)
 
     return False

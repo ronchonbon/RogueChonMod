@@ -2681,8 +2681,8 @@ image Emma_Doggy_Ass:
 
             "'in' in EmmaX.spunk and Player.cock_position == 'in'",Null(),
             "'in' in EmmaX.spunk ", "images/JeanDoggy/Jean_Doggy_SpunkPussyClosed.png",
-            "EmmaX.grool and Player.cock_position == 'in'", "images/RogueDoggy/Rogue_Doggy_WetPussyOpen.png",
-            "EmmaX.grool", "images/RogueDoggy/Rogue_Doggy_WetPussyClosed.png",
+            "EmmaX.grool and Player.cock_position == 'in'", "images/Rogue_doggy/Rogue_Doggy_WetPussyOpen.png",
+            "EmmaX.grool", "images/Rogue_doggy/Rogue_Doggy_WetPussyClosed.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -2858,8 +2858,8 @@ image Emma_Doggy_Ass:
             "not Player.sprite or Player.cock_position != 'out'", Null(),
 
 
-            "action_speed ", AlphaMask("Zero_hotdog_moving", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
-            "True", AlphaMask("Zero_hotdog_static", "images/RogueDoggy/Rogue_Doggy_HotdogMask.png"),
+            "action_speed ", AlphaMask("Zero_hotdog_moving", "images/Rogue_doggy/Rogue_Doggy_HotdogMask.png"),
+            "True", AlphaMask("Zero_hotdog_static", "images/Rogue_doggy/Rogue_Doggy_HotdogMask.png"),
             ),
 
 
@@ -3247,8 +3247,8 @@ image Emma_Pussy_Fucking2:
     contains:
 
         ConditionSwitch(
-            "primary_action == 'dildo_pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
-            "True",AlphaMask("Zero_Emma_Doggy_Fucking2", "images/RogueDoggy/Rogue_Doggy_SexMask.png"),
+            "primary_action == 'dildo_pussy'", AlphaMask("Rogue_Doggy_Fucking_Dildo", "images/Rogue_doggy/Rogue_Doggy_SexMask.png"),
+            "True",AlphaMask("Zero_Emma_Doggy_Fucking2", "images/Rogue_doggy/Rogue_Doggy_SexMask.png"),
             ),
 
 
@@ -3283,7 +3283,7 @@ image Emma_Pussy_Fucking3:
             )
     contains:
 
-        AlphaMask("Zero_Emma_Doggy_Fucking3", "images/RogueDoggy/Rogue_Doggy_SexMask.png")
+        AlphaMask("Zero_Emma_Doggy_Fucking3", "images/Rogue_doggy/Rogue_Doggy_SexMask.png")
 
 image Zero_Emma_Doggy_Fucking3:
 
@@ -3409,7 +3409,7 @@ image Zero_Emma_Doggy_Anal_HeadingJunk:
 image Emma_Doggy_Anal_Heading_Mask:
 
     contains:
-        "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"
+        "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png"
         anchor (0.52,0.69)
         pos (218,518)
         zoom 0.5
@@ -3489,8 +3489,8 @@ image Emma_Anal_Fucking:
 
         ConditionSwitch(
 
-            "primary_action == 'dildo_anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
-            "True", AlphaMask("Zero_Emma_Doggy_Anal1", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png"),
+            "primary_action == 'dildo_anal'", AlphaMask("Rogue_Doggy_Anal_Dildo", "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png"),
+            "True", AlphaMask("Zero_Emma_Doggy_Anal1", "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png"),
             ),
 
 
@@ -3586,7 +3586,7 @@ image Emma_Anal_Fucking2:
             )
     contains:
 
-        AlphaMask("Zero_Emma_Doggy_Anal2", "images/RogueDoggy/Rogue_Doggy_Anal_CockMask.png")
+        AlphaMask("Zero_Emma_Doggy_Anal2", "images/Rogue_doggy/Rogue_Doggy_Anal_CockMask.png")
 
 image Emma_Doggy_Fuck2_Top:
 

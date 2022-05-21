@@ -142,6 +142,7 @@ init python:
             self.SeenPussy = 0
             self.SeenPanties = 0
 
+            self.wearing_skirt = False
             self.upskirt = 0
             self.top_pulled_up = 0
             self.underwear_pulled_down = 0

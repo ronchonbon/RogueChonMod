@@ -2,8 +2,11 @@
 errors listed below, and try again.
 
 
-File "game/dialog.rpy", line 118: is not terminated with a newline. (Check strings and parenthesis.)
-            $ lines = ["Are you sure, " + Girl.player_petname + "? I could really use some company."
+The label starting_to_get_bored_lines is defined twice, at File "game/dialog.rpy", line 1451:
+label starting_to_get_bored_lines(Girl, action):
+and File "game/dialog.rpy", line 3396:
+label starting_to_get_bored_lines(Girl, action):
+
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Fri May 20 17:24:22 2022
+Sat May 21 03:16:15 2022
