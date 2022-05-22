@@ -957,7 +957,7 @@ image Kitty_Doggy_Body:
             ),
         (0,0), ConditionSwitch(
 
-            "KittyX.Water", "images/KittyDoggy/Kitty_Doggy_Body_Wet.png",
+            "KittyX.wet", "images/KittyDoggy/Kitty_Doggy_Body_Wet.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -1054,13 +1054,13 @@ image Kitty_Doggy_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "KittyX.Water or KittyX.hair == 'wet'", "images/KittyDoggy/Kitty_Doggy_Hair_Wet.png",
+            "KittyX.wet or KittyX.hair == 'wet'", "images/KittyDoggy/Kitty_Doggy_Hair_Wet.png",
             "KittyX.hair == 'long'", "images/KittyDoggy/Kitty_Doggy_Hair_Long.png",
             "True", "images/KittyDoggy/Kitty_Doggy_Hair_Evo.png",
             ),
         (0,0), ConditionSwitch(
 
-            "KittyX.Water", "images/KittyDoggy/Kitty_Doggy_Head_Wet.png",
+            "KittyX.wet", "images/KittyDoggy/Kitty_Doggy_Head_Wet.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -1154,7 +1154,7 @@ image Kitty_Doggy_Ass:
         (0,0), "images/KittyDoggy/Kitty_Doggy_Ass.png",
         (0,0), ConditionSwitch(
 
-            "KittyX.Water", "images/KittyDoggy/Kitty_Doggy_Ass_Wet.png",
+            "KittyX.wet", "images/KittyDoggy/Kitty_Doggy_Ass_Wet.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -2363,7 +2363,7 @@ image Kitty_blowjob_animation:
 image Kitty_BJ_hairback:
 
     ConditionSwitch(
-            "KittyX.Water and KittyX.hair == 'evo'", "images/KittyBJFace/Kitty_BJ_hairbackWet.png",
+            "KittyX.wet and KittyX.hair == 'evo'", "images/KittyBJFace/Kitty_BJ_hairbackWet.png",
             "KittyX.hair == 'long'", "images/KittyBJFace/Kitty_BJ_hairbackWet.png",
             "True", Null(),
             ),
@@ -2407,7 +2407,7 @@ image Kitty_BJ_Backdrop:
             ),
         (0,0), ConditionSwitch(
 
-            "not KittyX.Water", Null(),
+            "not KittyX.wet", Null(),
             "True", "images/KittyBJFace/Kitty_BJ_Wet_Body.png",
             ),
 
@@ -2443,7 +2443,7 @@ image Kitty_BJ_Head:
         (858,928),
         (0,0), ConditionSwitch(
 
-            "KittyX.Water or KittyX.hair == 'wet'", "images/KittyBJFace/Kitty_BJ_hairbackWet.png",
+            "KittyX.wet or KittyX.hair == 'wet'", "images/KittyBJFace/Kitty_BJ_hairbackWet.png",
             "True", Null(),
             ),
 
@@ -2466,7 +2466,7 @@ image Kitty_BJ_Head:
 
             "action_speed <= 2 or action_speed == 5 or not renpy.showing('Kitty_blowjob_animation')", ConditionSwitch(
 
-                    "KittyX.Water", ConditionSwitch(
+                    "KittyX.wet", ConditionSwitch(
 
                             "KittyX.blushing", "images/KittyBJFace/Kitty_BJ_FaceClosed_Wet_Blush.png",
                             "True", "images/KittyBJFace/Kitty_BJ_FaceClosed_Wet.png",
@@ -2475,7 +2475,7 @@ image Kitty_BJ_Head:
                     "True", "images/KittyBJFace/Kitty_BJ_FaceClosed.png"
                     ),
 
-            "KittyX.Water", ConditionSwitch(
+            "KittyX.wet", ConditionSwitch(
 
                     "KittyX.blushing", "images/KittyBJFace/Kitty_BJ_FaceOpen_Wet_Blush.png",
                     "True", "images/KittyBJFace/Kitty_BJ_FaceOpen_Wet.png",
@@ -2555,14 +2555,14 @@ image Kitty_BJ_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "KittyX.Water or KittyX.hair == 'wet'", "images/KittyBJFace/Kitty_BJ_Hair_Wet.png",
+            "KittyX.wet or KittyX.hair == 'wet'", "images/KittyBJFace/Kitty_BJ_Hair_Wet.png",
             "KittyX.hair == 'long'", "images/KittyBJFace/Kitty_BJ_Hair_Long.png",
             "KittyX.hair == 'evo'", "images/KittyBJFace/Kitty_BJ_Hair_Evo.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not KittyX.Water", Null(),
+            "not KittyX.wet", Null(),
             "action_speed > 2", "images/KittyBJFace/Kitty_BJ_Wet_HeadOpen.png",
             "True", "images/KittyBJFace/Kitty_BJ_Wet_HeadClosed.png",
             ),

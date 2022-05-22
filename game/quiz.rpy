@@ -1,6 +1,6 @@
 
 
-label Group_Strip_Study(BO=[], QuizOrder=[]):
+label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
     $ Count = 0
     $ between_event_count = 1
     $ counter = 0
@@ -164,10 +164,10 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
         $ JubesX.change_face("_sly", 1)
 
 
-    $ BO = Party[:]
-    while BO:
-        $ BO[0].add_word(1,0,"stripstudy",0,"stripstudy")
-        $ BO.remove(BO[0])
+    $ temp_Girls = Party[:]
+    while temp_Girls:
+        $ temp_Girls[0].add_word(1,0,"stripstudy",0,"stripstudy")
+        $ temp_Girls.remove(temp_Girls[0])
 
     if len(Party) >= 2:
         if counter == 3:
@@ -208,7 +208,7 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
                 elif Party[1] == JubesX:
                     ch_v "Sorry, guys, this is -your- party. . ."
                 "[Party[1].name] leaves the room"
-                call Remove_Girl (Party[1])
+                call remove_girl (Party[1])
 
 
     while between_event_count:
@@ -222,7 +222,7 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
         else:
             $ Count += 1
             call Strip_Study_Wrong
-            if between_event_count == 0 and len(Party) >= 2 and not Party[1].ClothingCheck:
+            if between_event_count == 0 and len(Party) >= 2 and not Party[1].clothingCheck:
 
                 menu:
                     "Well, [Party[1].name], you and I could still have some fun. . .":
@@ -231,7 +231,7 @@ label Group_Strip_Study(BO=[], QuizOrder=[]):
                     "Bummer":
                         pass
 
-        if len(Party) >= 2 and counter != 3 and Party[1].ClothingCheck:
+        if len(Party) >= 2 and counter != 3 and Party[1].clothingCheck:
 
             $ Party.reverse()
             call shift_focus (Party[0])
@@ -427,7 +427,7 @@ label Strip_Study_Right:
         menu:
             "Well I could think of something else you could do. . .":
                 pass
-            "It looks like [Party[1].name] has some questions for me. . ." if Party[1].ClothingCheck:
+            "It looks like [Party[1].name] has some questions for me. . ." if Party[1].clothingCheck:
 
                 return
     $ between_event_count = 0

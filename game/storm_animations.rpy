@@ -275,7 +275,7 @@ image Storm_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "not StormX.Water", Null(),
+            "not StormX.wet", Null(),
             "(StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra') and StormX.ArmPose == 1", "images/StormSprite/Storm_Sprite_Water_Tight1.png",
             "StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra'", "images/StormSprite/Storm_Sprite_Water_Tight2.png",
             "StormX.ArmPose == 1", "images/StormSprite/Storm_Sprite_Water_Loose1.png",
@@ -368,7 +368,7 @@ image Storm_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.Water and StormX.ArmPose != 1", "images/StormSprite/Storm_Sprite_Water_Arm2.png",
+            "StormX.wet and StormX.ArmPose != 1", "images/StormSprite/Storm_Sprite_Water_Arm2.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -542,10 +542,10 @@ image Storm_Sprite_hairback:
 
                 "StormX.top == 'towel'", Null(),
                 "StormX.hair == 'wethawk'", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Back_Wet.png",
-                "StormX.hair == 'mohawk' and StormX.Water", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Back_Wet.png",
+                "StormX.hair == 'mohawk' and StormX.wet", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Back_Wet.png",
                 "StormX.hair == 'mohawk'", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Back.png",
                 "StormX.hair == 'wet'", "images/StormSprite/Storm_Sprite_Hair_Long_Back_Wet.png",
-                "StormX.hair and StormX.Water", "images/StormSprite/Storm_Sprite_Hair_Long_Back_Wet.png",
+                "StormX.hair and StormX.wet", "images/StormSprite/Storm_Sprite_Hair_Long_Back_Wet.png",
                 "StormX.hair == 'short'", Null(),
                 "StormX.hair", "images/StormSprite/Storm_Sprite_Hair_Long_Back.png",
                 "True", Null(),
@@ -669,7 +669,7 @@ image Storm_Sprite_Head:
         (0,0), "Storm Blink",
         (0,0), ConditionSwitch(
 
-            "not StormX.Water", Null(),
+            "not StormX.wet", Null(),
             "True", "images/StormSprite/Storm_Sprite_Head_Water.png",
             ),
         (0,0), "images/StormSprite/Storm_Sprite_Earrings.png",
@@ -678,10 +678,10 @@ image Storm_Sprite_Head:
 
             "StormX.top == 'towel'", Null(),
             "StormX.hair == 'wethawk'", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Wet.png",
-            "StormX.hair == 'mohawk' and StormX.Water", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Wet.png",
+            "StormX.hair == 'mohawk' and StormX.wet", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Wet.png",
             "StormX.hair == 'mohawk'", "images/StormSprite/Storm_Sprite_Hair_Mohawk.png",
             "StormX.hair == 'wet'", "images/StormSprite/Storm_Sprite_Hair_Long_Wet.png",
-            "StormX.hair and StormX.Water", "images/StormSprite/Storm_Sprite_Hair_Long_Wet.png",
+            "StormX.hair and StormX.wet", "images/StormSprite/Storm_Sprite_Hair_Long_Wet.png",
             "StormX.hair == 'short'", "images/StormSprite/Storm_Sprite_Hair_Short.png",
             "renpy.showing('Storm_SexSprite')", "images/StormSprite/Storm_Sprite_Hair_Long_Sex.png",
             "StormX.hair", "images/StormSprite/Storm_Sprite_Hair_Long.png",
@@ -942,7 +942,7 @@ image Storm_Sex_Body:
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.Water", "images/StormSex/Storm_Sex_Wet_Body.png",
+            "StormX.wet", "images/StormSex/Storm_Sex_Wet_Body.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -1062,7 +1062,7 @@ image Storm_Sex_Tits:
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.Water", "images/StormSex/Storm_Sex_Wet_Tits.png",
+            "StormX.wet", "images/StormSex/Storm_Sex_Wet_Tits.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -1169,7 +1169,7 @@ image Storm_Sex_Legs:
             ),
         (0,0), ConditionSwitch(
 
-            "not StormX.Water", Null(),
+            "not StormX.wet", Null(),
             "ShowFeet", "images/StormSex/Storm_Sex_Wet_Legs_FJ.png",
             "True", "images/StormSex/Storm_Sex_Wet_Legs.png",
             ),
@@ -2875,7 +2875,7 @@ image Storm_BJ_Animation:
 image Storm_BJ_hairback:
 
     ConditionSwitch(
-            "(StormX.hair == 'long' and StormX.Water) or StormX.hair == 'wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Under.png",
+            "(StormX.hair == 'long' and StormX.wet) or StormX.hair == 'wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Under.png",
             "StormX.hair == 'mohawk' or StormX.hair == 'wethawk' or StormX.hair == 'short'", Null(),
             "True", "images/StormBJFace/Storm_BJ_Hair_Long_Under.png",
             ),
@@ -2885,8 +2885,8 @@ image Storm_BJ_hairback:
 image Storm_BJ_HairTop:
     contains:
         ConditionSwitch(
-                "(StormX.hair == 'mohawk' and StormX.Water) or StormX.hair == 'wethawk'", "images/StormBJFace/Storm_BJ_Hair_WetM_Over.png",
-                "StormX.Water or StormX.hair == 'wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Over.png",
+                "(StormX.hair == 'mohawk' and StormX.wet) or StormX.hair == 'wethawk'", "images/StormBJFace/Storm_BJ_Hair_WetM_Over.png",
+                "StormX.wet or StormX.hair == 'wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Over.png",
                 "StormX.hair == 'mohawk'", "images/StormBJFace/Storm_BJ_Hair_Mohawk_Over.png",
                 "StormX.hair == 'short'", "images/StormBJFace/Storm_BJ_Hair_Short.png",
                 "True", "images/StormBJFace/Storm_BJ_Hair_Long_Over.png",
@@ -2894,7 +2894,7 @@ image Storm_BJ_HairTop:
     contains:
         ConditionSwitch(
 
-                "'hair' in StormX.spunk and (StormX.Water or StormX.hair == 'wethawk' or StormX.hair == 'wet')", "images/StormBJFace/Storm_BJ_Spunk_HairW.png",
+                "'hair' in StormX.spunk and (StormX.wet or StormX.hair == 'wethawk' or StormX.hair == 'wet')", "images/StormBJFace/Storm_BJ_Spunk_HairW.png",
                 "'hair' in StormX.spunk and StormX.hair == 'mohawk'", "images/StormBJFace/Storm_BJ_Spunk_HairM.png",
                 "'hair' in StormX.spunk", "images/StormBJFace/Storm_BJ_Spunk_HairL.png",
                 "True", Null(),
@@ -3017,13 +3017,13 @@ image Storm_BJ_Head:
         (0,0), "images/StormBJFace/Storm_BJ_Earring.png",
         (0,0), ConditionSwitch(
 
-            "not StormX.Water", Null(),
+            "not StormX.wet", Null(),
             "True", "images/StormBJFace/Storm_BJ_Wet.png",
             ),
         (0,0), ConditionSwitch(
 
-            "(StormX.hair == 'mohawk' and StormX.Water) or StormX.hair == 'wethawk'", "images/StormBJFace/Storm_BJ_Hair_WetM_Over.png",
-            "StormX.Water or StormX.hair == 'wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Over.png",
+            "(StormX.hair == 'mohawk' and StormX.wet) or StormX.hair == 'wethawk'", "images/StormBJFace/Storm_BJ_Hair_WetM_Over.png",
+            "StormX.wet or StormX.hair == 'wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Over.png",
             "StormX.hair == 'mohawk'", "images/StormBJFace/Storm_BJ_Hair_Mohawk_Over.png",
             "StormX.hair == 'short'", "images/StormBJFace/Storm_BJ_Hair_Short_Over.png",
             "True", "images/StormBJFace/Storm_BJ_Hair_Long_Over.png",
@@ -3037,7 +3037,7 @@ image Storm_BJ_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "'hair' in StormX.spunk and (StormX.Water or StormX.hair == 'wethawk' or StormX.hair == 'wet')", "images/StormBJFace/Storm_BJ_Spunk_HairW.png",
+            "'hair' in StormX.spunk and (StormX.wet or StormX.hair == 'wethawk' or StormX.hair == 'wet')", "images/StormBJFace/Storm_BJ_Spunk_HairW.png",
             "'hair' in StormX.spunk and StormX.hair == 'short'", "images/StormBJFace/Storm_BJ_Spunk_HairS.png",
             "'hair' in StormX.spunk and StormX.hair == 'mohawk'", "images/StormBJFace/Storm_BJ_Spunk_HairM.png",
             "'hair' in StormX.spunk", "images/StormBJFace/Storm_BJ_Spunk_HairL.png",
@@ -3866,8 +3866,8 @@ image Storm_TJ_HairTop:
 
     contains:
         ConditionSwitch(
-                        "(StormX.hair == 'mohawk' and StormX.Water) or StormX.hair == 'wethawk'", "images/StormBJFace/Storm_BJ_Hair_WetM_Over.png",
-                        "StormX.Water or StormX.hair == 'wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Over.png",
+                        "(StormX.hair == 'mohawk' and StormX.wet) or StormX.hair == 'wethawk'", "images/StormBJFace/Storm_BJ_Hair_WetM_Over.png",
+                        "StormX.wet or StormX.hair == 'wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Over.png",
                         "StormX.hair == 'mohawk'", "images/StormBJFace/Storm_BJ_Hair_Mohawk_Over.png",
                         "StormX.hair == 'short'", "images/StormBJFace/Storm_BJ_Hair_Short_Over.png",
                         "True", "images/StormBJFace/Storm_BJ_Hair_Long_Over.png",
@@ -3876,7 +3876,7 @@ image Storm_TJ_HairTop:
     contains:
         ConditionSwitch(
 
-                        "'hair' in StormX.spunk and (StormX.Water or StormX.hair == 'wethawk' or StormX.hair == 'wet')", "images/StormBJFace/Storm_BJ_Spunk_HairW.png",
+                        "'hair' in StormX.spunk and (StormX.wet or StormX.hair == 'wethawk' or StormX.hair == 'wet')", "images/StormBJFace/Storm_BJ_Spunk_HairW.png",
                         "'hair' in StormX.spunk and StormX.hair == 'mohawk'", "images/StormBJFace/Storm_BJ_Spunk_HairM.png",
                         "'hair' in StormX.spunk", "images/StormBJFace/Storm_BJ_Spunk_HairL.png",
                         "True", Null(),
@@ -3913,7 +3913,7 @@ image Storm_TJ_Body:
         "images/StormBJFace/Storm_TJ_Body.png"
     contains:
         ConditionSwitch(
-                        "not StormX.Water",Null(),
+                        "not StormX.wet",Null(),
                         "True",       "images/StormBJFace/Storm_TJ_Body_Wet.png",
                         )
     contains:
@@ -3954,7 +3954,7 @@ image Storm_TJ_Body:
 
         ConditionSwitch(
                         "StormX.top", Null(),
-                        "StormX.hair == 'long' and not StormX.Water", "images/StormBJFace/Storm_TJ_Hair_Long_Mid.png",
+                        "StormX.hair == 'long' and not StormX.wet", "images/StormBJFace/Storm_TJ_Hair_Long_Mid.png",
                         "True",   Null(),
                         )
     transform_anchor True
@@ -4031,7 +4031,7 @@ image Storm_TJ_Tits:
                         )
     contains:
         ConditionSwitch(
-                        "not StormX.Water",Null(),
+                        "not StormX.wet",Null(),
                         "True",       "images/StormBJFace/Storm_TJ_Tits_Wet.png",
                         )
     contains:

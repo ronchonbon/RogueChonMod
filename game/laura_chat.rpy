@@ -15,7 +15,7 @@ label Laura_Relationship:
                     $ LauraX.change_face("_angry", 1)
                     ch_l "Still a no."
                     return
-                elif LauraX.Break[0]:
+                elif LauraX.broken_up[0]:
                     $ LauraX.change_face("_angry", 1)
                     ch_l "I'm not looking for a pack."
                     if Player.Harem:
@@ -374,7 +374,7 @@ label Laura_Monogamy:
 
     menu:
         "Could you not hook up with other girls?" if "mono" not in LauraX.traits:
-            if LauraX.Thirst >= 60 and not approval_check(LauraX, 1700, "LO", TabM=0):
+            if LauraX.thirst >= 60 and not approval_check(LauraX, 1700, "LO", TabM=0):
 
                 $ LauraX.change_face("_sly",1)
                 if "mono" not in LauraX.daily_history:
@@ -406,7 +406,7 @@ label Laura_Monogamy:
 
                 $ LauraX.change_face("_sly",1,Eyes="_side")
                 ch_l "Ok."
-            elif LauraX.Thirst >= 60 and not approval_check(LauraX, 1700, "LO", TabM=0):
+            elif LauraX.thirst >= 60 and not approval_check(LauraX, 1700, "LO", TabM=0):
 
                 $ LauraX.change_face("_sly",1)
                 if "mono" not in LauraX.daily_history:
@@ -460,7 +460,7 @@ label Laura_Jumped:
     menu:
         ch_l "Yeah?"
         "Could you maybe just ask instead?" if "chill" not in LauraX.traits:
-            if LauraX.Thirst >= 60 and not approval_check(LauraX, 1500, "LO", TabM=0):
+            if LauraX.thirst >= 60 and not approval_check(LauraX, 1500, "LO", TabM=0):
 
                 $ LauraX.change_face("_sly",1)
                 if "chill" not in LauraX.daily_history:
@@ -493,7 +493,7 @@ label Laura_Jumped:
 
                 $ LauraX.change_face("_sly",1,Eyes="_side")
                 ch_l "Ok."
-            elif LauraX.Thirst >= 60 and not approval_check(LauraX, 500, "O", TabM=0):
+            elif LauraX.thirst >= 60 and not approval_check(LauraX, 500, "O", TabM=0):
 
                 $ LauraX.change_face("_sly",1)
                 if "chill" not in LauraX.daily_history:
@@ -903,7 +903,7 @@ label Laura_SexChat:
 
 
 label Laura_Chitchat(O=0, Options=["default","default","default"]):
-    $ Round -= 3 if Round > 3 else (Round-1)
+    $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]
     else:
@@ -927,7 +927,7 @@ label Laura_Chitchat(O=0, Options=["default","default","default"]):
             return
 
         if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or approval_check(LauraX, 800, "I")):
-            if LauraX.location == bg_current and LauraX.Thirst >= 30 and "refused" not in LauraX.daily_history and "quicksex" not in LauraX.daily_history:
+            if LauraX.location == bg_current and LauraX.thirst >= 30 and "refused" not in LauraX.daily_history and "quicksex" not in LauraX.daily_history:
                 $ LauraX.change_face("_sly",1)
                 ch_l "Hey, wanna bone?"
                 call Quick_Sex (LauraX)
@@ -1741,7 +1741,7 @@ label Laura_Summon(approval_bonus=approval_bonus):
             ch_l "Nah."
             $ LauraX.recent_history.append("no_summon")
         return
-    elif "les" in LauraX.recent_history:
+    elif "lesbian" in LauraX.recent_history:
 
         if approval_check(LauraX, 2000):
             ch_l "I'm kinda with a girl right now? Wanna come over?"
@@ -1942,7 +1942,7 @@ label Laura_Summon(approval_bonus=approval_bonus):
         elif LauraX.location == "bg_campus":
             ch_l "Look for the biggest tree."
             jump Campus
-        elif LauraX.location in PersonalRooms:
+        elif LauraX.location in personal_rooms:
             ch_l "Yeah, see you."
             $ bg_current = LauraX.location
             jump Misplaced
@@ -2170,10 +2170,10 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         call Gym_Clothes_Off ([LauraX])
         if LauraX.location == "bg_classroom":
             ch_l "Ok, get a move on then."
-            jump Class_Room_Entry
+            jump Class_Room_entry
         elif LauraX.location == "bg_dangerroom":
             ch_l "I'll get warmed up."
-            jump Danger_Room_Entry
+            jump Danger_Room_entry
         elif LauraX.location == "bg_laura":
             ch_l "Ok."
             jump Laura_Room
@@ -2182,13 +2182,13 @@ label Laura_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump player_room
         elif LauraX.location == "bg_showerroom":
             ch_l "Ok, nice."
-            jump Shower_Room_Entry
+            jump Shower_Room_entry
         elif LauraX.location == "bg_campus":
             ch_l "Ok, nice."
-            jump Campus_Entry
+            jump Campus_entry
         elif LauraX.location == "bg_pool":
             ch_l "Cool."
-            jump Pool_Entry
+            jump Pool_entry
         else:
             ch_l "I'll just meet you in your room."
             $ LauraX.location = "bg_player"
@@ -2248,21 +2248,21 @@ label Laura_Wardrobe_Menu:
                 call Laura_Clothes_Under
             "Accessories":
                 call Laura_Clothes_Misc
-            "Outfit Management":
-                call Laura_Clothes_Outfits
+            "outfit Management":
+                call Laura_Clothes_outfits
             "Let's talk about what you wear around.":
                 call Clothes_Schedule (LauraX)
 
             "Could I get a look at it?" if LauraX.location != bg_current:
 
-                call OutfitShame (LauraX, 0, 2)
+                call outfitShame (LauraX, 0, 2)
                 if _return:
                     show PhoneSex zorder 150
                     ch_l "Ok, that good?"
                 hide PhoneSex
             "Could I get a look at it?" if renpy.showing('DressScreen'):
 
-                call OutfitShame (LauraX, 0, 2)
+                call outfitShame (LauraX, 0, 2)
                 if _return:
                     hide DressScreen
             "Would you be more comfortable behind a screen? (locked)" if LauraX.Taboo:
@@ -2283,12 +2283,12 @@ label Laura_Wardrobe_Menu:
             "Switch to. . .":
 
                 if renpy.showing('DressScreen'):
-                    call OutfitShame (LauraX, 0, 2)
+                    call outfitShame (LauraX, 0, 2)
                     if _return:
                         hide DressScreen
                     else:
                         $ LauraX.change_outfit()
-                $ LauraX.Set_Temp_Outfit()
+                $ LauraX.Set_Temp_outfit()
                 $ primary_action = 0
                 call Switch_Chat
                 if Girl != LauraX:
@@ -2316,12 +2316,12 @@ label Laura_Wardrobe_Menu:
                         ch_l "Sure."
                     $ LauraX.recent_history.append("wardrobe")
                 if renpy.showing('DressScreen'):
-                    call OutfitShame (LauraX, 0, 2)
+                    call outfitShame (LauraX, 0, 2)
                     if _return:
                         hide DressScreen
                     else:
                         $ LauraX.change_outfit()
-                $ LauraX.Set_Temp_Outfit()
+                $ LauraX.Set_Temp_outfit()
                 $ LauraX.Chat[1] += 1
                 $ primary_action = 0
                 return
@@ -2332,23 +2332,23 @@ label Laura_Wardrobe_Menu:
 
 
 
-    menu Laura_Clothes_Outfits:
+    menu Laura_Clothes_outfits:
         "You should remember that one. [[Set Custom]":
 
             menu:
                 "Which slot would you like this saved in?"
                 "Custom 1":
-                    call OutfitShame (LauraX, 3, 1)
+                    call outfitShame (LauraX, 3, 1)
                 "Custom 2":
-                    call OutfitShame (LauraX, 5, 1)
+                    call outfitShame (LauraX, 5, 1)
                 "Custom 3":
-                    call OutfitShame (LauraX, 6, 1)
+                    call outfitShame (LauraX, 6, 1)
                 "Gym Clothes":
-                    call OutfitShame (LauraX, 4, 1)
+                    call outfitShame (LauraX, 4, 1)
                 "Sleepwear":
-                    call OutfitShame (LauraX, 7, 1)
+                    call outfitShame (LauraX, 7, 1)
                 "Swimwear":
-                    call OutfitShame (LauraX, 10, 1)
+                    call outfitShame (LauraX, 10, 1)
                 "Never mind":
 
                     pass
@@ -2357,8 +2357,8 @@ label Laura_Wardrobe_Menu:
             $ LauraX.change_outfit("casual1")
             menu:
                 "You should wear this one out. [[set current outfit]":
-                    $ LauraX.Outfit = "casual1"
-                    $ LauraX.Shame = 0
+                    $ LauraX.outfit = "casual1"
+                    $ LauraX.shame = 0
                     ch_l "Yeah, I love wearing this one in the field."
                 "Let's try something else though.":
                     ch_l "Ok."
@@ -2367,8 +2367,8 @@ label Laura_Wardrobe_Menu:
             $ LauraX.change_outfit("casual2")
             menu:
                 "You should wear this one out. [[set current outfit]":
-                    $ LauraX.Outfit = "casual2"
-                    $ LauraX.Shame = 0
+                    $ LauraX.outfit = "casual2"
+                    $ LauraX.shame = 0
                     ch_l "Yeah, I mean, my cousin got it for me."
                 "Let's try something else though.":
                     ch_l "Ok."
@@ -2400,11 +2400,11 @@ label Laura_Wardrobe_Menu:
                         pass
                     "You should wear this one in private." if counter:
                         if counter == 5:
-                            $ LauraX.Clothing[9] = "custom2"
+                            $ LauraX.clothing[9] = "custom2"
                         elif counter == 6:
-                            $ LauraX.Clothing[9] = "custom3"
+                            $ LauraX.clothing[9] = "custom3"
                         else:
-                            $ LauraX.Clothing[9] = "custom1"
+                            $ LauraX.clothing[9] = "custom1"
                         ch_l "Ok, sure."
                     "On second thought, forget about that one outfit. . .":
 
@@ -2490,14 +2490,14 @@ label Laura_Wardrobe_Menu:
                     "You know, you should wear this one out. [[set current outfit]":
                         if "exhibitionist" in LauraX.traits:
                             ch_l "mmmm. . ."
-                            $ LauraX.Outfit = "nude"
+                            $ LauraX.outfit = "nude"
                             $ LauraX.change_stat("lust", 50, 10)
                             $ LauraX.change_stat("lust", 70, 5)
-                            $ LauraX.Shame = 50
+                            $ LauraX.shame = 50
                         elif approval_check(LauraX, 800, "I") or approval_check(LauraX, 2800, TabM=0):
                             ch_l "Exciting. . ."
-                            $ LauraX.Outfit = "nude"
-                            $ LauraX.Shame = 50
+                            $ LauraX.outfit = "nude"
+                            $ LauraX.shame = 50
                         else:
                             $ LauraX.change_face("_sexy", 1)
                             $ LauraX.eyes = "_surprised"
@@ -3038,19 +3038,19 @@ label Laura_Wardrobe_Menu:
 
     menu Laura_Clothes_Misc:
 
-        "Dry Hair" if LauraX.hair == "wet":
+        "Dry Hair" if LauraX.hair == "_wet":
             ch_p "Maybe dry out your hair."
             if approval_check(LauraX, 600):
                 ch_l "Ok."
-                $ LauraX.hair = "long"
+                $ LauraX.hair = "_long"
             else:
                 ch_l "I don't know, it's fine like this."
 
-        "Wet Hair style" if LauraX.hair != "wet":
+        "Wet Hair style" if LauraX.hair != "_wet":
             ch_p "You should go for that wet look with your hair."
             if approval_check(LauraX, 800):
                 ch_l "Hmm?"
-                $ LauraX.hair = "wet"
+                $ LauraX.hair = "_wet"
                 "She wanders off for a minute and comes back."
                 ch_l "Like this?"
             else:
@@ -3058,7 +3058,7 @@ label Laura_Wardrobe_Menu:
 
         "Grow pubes" if not LauraX.pubes:
             ch_p "You know, I like some nice hair down there. Maybe grow it out."
-            if "pubes" in LauraX.Todo:
+            if "pubes" in LauraX.to_do:
                 $ LauraX.change_face("_bemused", 1)
                 ch_l "Even I can't grow it out instantly."
             else:
@@ -3070,12 +3070,12 @@ label Laura_Wardrobe_Menu:
                     $ LauraX.brows = "_angry"
                     ch_l "I think I'll do what I want down there."
                     return
-                $ LauraX.Todo.append("pubes")
-                $ LauraX.PubeC = 6
+                $ LauraX.to_do.append("pubes")
+                $ LauraX.pubes_counter = 6
         "Shave pubes" if LauraX.pubes == "_hairy":
             ch_p "I like it waxed clean down there."
             $ LauraX.change_face("_bemused", 1)
-            if "shave" in LauraX.Todo:
+            if "shave" in LauraX.to_do:
                 ch_l "Yeah, I know, I'll get to it."
             else:
                 if approval_check(LauraX, 1100, TabM=0):
@@ -3085,14 +3085,14 @@ label Laura_Wardrobe_Menu:
                     $ LauraX.brows = "_angry"
                     ch_l "I think I'll do what I want down there."
                     return
-                $ LauraX.Todo.append("shave")
+                $ LauraX.to_do.append("shave")
 
         "Piercings. [[See what she looks like without them first] (locked)" if not LauraX.SeenPussy and not LauraX.SeenChest:
             pass
 
         "Add ring piercings" if LauraX.piercings != "_ring" and (LauraX.SeenPussy or LauraX.SeenChest):
             ch_p "You know, you'd look really nice with some ring body piercings."
-            if "_ring" in LauraX.Todo:
+            if "_ring" in LauraX.to_do:
                 ch_l "Yeah, I know, I'll get to it."
             else:
                 $ LauraX.change_face("_bemused", 1)
@@ -3108,11 +3108,11 @@ label Laura_Wardrobe_Menu:
                     $ LauraX.brows = "_angry"
                     ch_l "Not interested, [LauraX.player_petname]."
                     return
-                $ LauraX.Todo.append("_ring")
+                $ LauraX.to_do.append("_ring")
 
         "Add barbell piercings" if LauraX.piercings != "_barbell" and (LauraX.SeenPussy or LauraX.SeenChest):
             ch_p "You know, you'd look really nice with some barbell body piercings."
-            if "_barbell" in LauraX.Todo:
+            if "_barbell" in LauraX.to_do:
                 ch_l "Yeah, I know, I'll get to it."
             else:
                 $ LauraX.change_face("_bemused", 1)
@@ -3128,7 +3128,7 @@ label Laura_Wardrobe_Menu:
                     $ LauraX.brows = "_angry"
                     ch_l "Not interested, [LauraX.player_petname]."
                     return
-                $ LauraX.Todo.append("_barbell")
+                $ LauraX.to_do.append("_barbell")
 
         "Remove piercings" if LauraX.piercings:
             ch_p "You know, you'd look better without those piercings."

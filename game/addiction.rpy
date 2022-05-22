@@ -1,5 +1,5 @@
 label addiction_event(Girl):
-    $ Girl.drain_word("asked meet")
+    $ Girl.drain_word("asked_to_meet")
 
     call set_the_scene
     call shift_focus (Girl)
@@ -809,7 +809,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
         $ stored_count = approval_bonus
 
         if not approval_check(Girl, 1200, "LO"):
-            $ Girl.Forced = 1
+            $ Girl.forced = 1
 
             $ multi_action = 0
 
@@ -817,7 +817,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
             extend ""
 
             "Nothing, just touch whatever you like.":
-                $ Girl.Forced = 0
+                $ Girl.forced = 0
 
                 if Girl.player_petname in ["master", "sir"]:
                     $ Girl.change_stat("lust", 80, 3)
@@ -883,15 +883,15 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                     call Girl_Tag (Girl)
 
-                while Girl.addiction > 20 and Round > 10:
+                while Girl.addiction > 20 and round > 10:
                     $ Girl.addiction -= 1
 
-                    $ Round -= 1
-                    if Round == 10:
+                    $ round -= 1
+                    if round == 10:
                         Girl.voice "I suppose we don't have time for any more than that."
             "How about a kiss?":
                 if Girl.action_counter["kiss"] or approval_check(Girl, 600, "LI",Alt=[[RogueX,JeanX],560]) or Girl.player_petname in ("master", "sir"):
-                    $ Girl.Forced = 0
+                    $ Girl.forced = 0
                     $ Girl.change_stat("lust", 80, 3)
                     $ Girl.change_stat("love", 80, 6)
                     $ Girl.change_face("_sexy")
@@ -1102,7 +1102,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                         elif Girl == JubesX:
                             ch_v "That had to be plenty."
             "How about you strip for me, and then I let you touch me?":
-                $ stored_count = Girl.ClothingCheck()
+                $ stored_count = Girl.clothingCheck()
 
                 call Group_Strip(Girl)
 
@@ -1118,7 +1118,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                     "That was pretty weak, I'll need a bit more.":
                         $ Girl.change_face("_angry")
 
-                        if stored_count > Girl.ClothingCheck() and Girl.ClothingCheck() < 3:
+                        if stored_count > Girl.clothingCheck() and Girl.clothingCheck() < 3:
                             $ Girl.change_stat("love", 200, -40)
                             $ Girl.change_stat("inhibition", 50, 5)
                             $ Girl.change_stat("obedience", 50, 20)
@@ -1220,7 +1220,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                     "[Girl.name] gives one last look over her shoulder before slamming the door and storming out."
 
-                    call Remove_Girl (Girl)
+                    call remove_girl (Girl)
 
                     jump addiction_bad_end
 
@@ -1413,7 +1413,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                 $ approval_bonus += 10
 
         $ between_event_count -= 1 if between_event_count > 0 else 0
-        $ Round -= 10 if Round >= 21 else Round - 10
+        $ round -= 10 if round >= 21 else round - 10
 
     if Girl.addiction >= 80:
         $ Girl.change_face("_angry")
@@ -1589,11 +1589,11 @@ label addiction_bad_end:
 
     $ approval_bonus = 0
     $ Line = 0
-    $ action_context = 0
+    $ action_context = None
 
-    $ Girl.Forced = 0
+    $ Girl.forced = 0
 
-    $ multi_action = 1
+    $ multi_action = True
 
     $ Girl.addiction_rate += 2
 
@@ -1610,7 +1610,7 @@ label addiction_bad_end:
         elif bg_current == "bg_player" and Girl.location == bg_current:
             "[Girl.name] heads out."
 
-        call Remove_Girl (Girl)
+        call remove_girl (Girl)
 
     $ renpy.pop_call()
 
@@ -1618,7 +1618,7 @@ label addiction_bad_end:
 
 label addiction_fix_beg:
     $ Girl.change_face("_angry")
-    $ Girl.Forced = 0
+    $ Girl.forced = 0
 
     if "beg" in Girl.recent_history:
         $ Girl.change_stat("love", 200, -10)
@@ -1755,7 +1755,7 @@ label addiction_fix_beg:
     return
 
 label addiction_fix(Girl):
-    $ Girl.drain_word("asked meet")
+    $ Girl.drain_word("asked_to_meet")
     $ Girl = GirlCheck(Girl)
 
     call set_the_scene
@@ -1954,7 +1954,7 @@ label addiction_fix_end:
             if "forced tag" in Girl.recent_history:
                 ch_r "I got what I needed. I really wish that I could avoid it, but it looks like I'm stuck with you."
                 ch_r "Just. . . in future maybe try to be less of a dick about it?"
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 ch_r "Thanks. I really appreciate this. I can't really explain it, but if I don't get. . . "
                 ch_r "access every now and then, I just feel awful, crawling out of my skin. Being with you, helps calm me down."
 
@@ -1968,7 +1968,7 @@ label addiction_fix_end:
         else:
             if "forced tag" in Girl.recent_history:
                 ch_r "Well, I got what I needed. I guess I'll see you around."
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 ch_r "Hmmmm, that was real nice, [Girl.player_petname]."
                 ch_r "I'm looking forward more and more to these . . . \"sessions\" of ours."
             else:
@@ -1978,7 +1978,7 @@ label addiction_fix_end:
             if "forced tag" in Girl.recent_history:
                 ch_k "Ok, that should do it. . ."
                 ch_k "Could you maybe not force me into that though?"
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 ch_k "Thanks for helping me out. It really feels awful when I let it go too long."
 
                 if approval_check(Girl, 850):
@@ -1992,7 +1992,7 @@ label addiction_fix_end:
         else:
             if "forced tag" in Girl.recent_history:
                 ch_k "Ok, that should do it. . . guess I'll see you around."
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 ch_k "Mmmmm, that was greeeeat, [Girl.player_petname]."
                 ch_k "I hope to see you again real soon. . ."
             else:
@@ -2002,7 +2002,7 @@ label addiction_fix_end:
             if "forced tag" in Girl.recent_history:
                 ch_e "Well. . . I suppose that will satisfy me."
                 ch_e "You could perhaps catch more flies with honey, you know. . ."
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 ch_e "I appreciate your. . . assistance."
                 ch_e "This really is quite inconvenient, but I suppose it could be worse."
 
@@ -2016,7 +2016,7 @@ label addiction_fix_end:
         else:
             if "forced tag" in Girl.recent_history:
                 ch_e "Well. . . I suppose that will satisfy me. . . at least for the time being."
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 ch_e "Hmmmm, that was quite pleasant, [Girl.player_petname]."
                 ch_e "I suppose I am quite anticipating our next rendezvous."
             else:
@@ -2027,7 +2027,7 @@ label addiction_fix_end:
             if "forced tag" in Girl.recent_history:
                 ch_l "Ok, that should do it."
                 ch_l "Maybe don't be such an asshole though."
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 ch_l "Mmmm, that's a weight off. . ."
                 ch_l "Thanks for helping to sort me out there, [Girl.player_petname]."
 
@@ -2043,7 +2043,7 @@ label addiction_fix_end:
         else:
             if "forced tag" in Girl.recent_history:
                 ch_l "Ok, that should do it. See you later."
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 ch_l "Good times, [Girl.player_petname]."
                 ch_l "See ya later."
             else:
@@ -2054,7 +2054,7 @@ label addiction_fix_end:
         if Girl.Event[1] < 11:
             if "forced tag" in Girl.recent_history:
                 ch_j "Ok, that's the stuff. . ."
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 $ Girl.change_stat("love", 80, 3)
                 $ Girl.change_stat("obedience", 50, 2)
                 $ Girl.change_stat("obedience", 80, 2)
@@ -2075,7 +2075,7 @@ label addiction_fix_end:
         else:
             if "forced tag" in Girl.recent_history:
                 ch_j "Ok, that should do it. See you later."
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 ch_j "Ok, thanks, [Girl.player_petname]."
                 ch_j "Later."
             else:
@@ -2091,7 +2091,7 @@ label addiction_fix_end:
 
                 ch_s ". . . I'm sorry."
                 ch_s "You left me no option. . ."
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 ch_s "Thank you for. . . indulging me."
                 ch_s "I find these urges. . . inconvenient. . ."
 
@@ -2108,7 +2108,7 @@ label addiction_fix_end:
                 $ Girl.change_stat("obedience", 50, 1)
 
                 ch_s ". . . I am sorry. . ."
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 ch_s ". . . I did enjoy that, [Girl.player_petname]."
                 ch_s "I shall see you later. . ."
             else:
@@ -2119,7 +2119,7 @@ label addiction_fix_end:
             if "forced tag" in Girl.recent_history:
                 ch_v "Well. . . I'm sorry it came to that. . ."
                 ch_v "I hope we can work together better than this. . ."
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 ch_v "Thanks. . . "
                 ch_v "You really don't miss the sunlight until it's gone, uh?"
 
@@ -2133,7 +2133,7 @@ label addiction_fix_end:
         else:
             if "forced tag" in Girl.recent_history:
                 ch_v "Don't push me to the \"red line\" again. . ."
-            elif not Girl.Forced:
+            elif not Girl.forced:
                 ch_v "Hmmmm, that was nice, [Girl.player_petname]."
                 ch_v "I'll see you next time I get a tan. . ."
             else:
@@ -2151,7 +2151,7 @@ label addiction_fix_end:
             "Bye":
                 pass
             "See you next time. . .":
-                if not Girl.Forced and approval_check(Girl, 800):
+                if not Girl.forced and approval_check(Girl, 800):
                     $ Girl.change_face("_bemused",1,Eyes="_side")
 
                     if Girl == RogueX:
@@ -2177,7 +2177,7 @@ label addiction_fix_end:
 
                     "She scowls"
             "Did you want to stick around?":
-                if not Girl.Forced and approval_check(Girl, 800, "LI"):
+                if not Girl.forced and approval_check(Girl, 800, "LI"):
                     $ Girl.change_face("_smile",1)
                     $ Party.append(Girl)
 
@@ -2297,7 +2297,7 @@ label addiction_serum:
                         $ Girl.change_face("_surprised")
 
                         ch_r "Your what? . . . You want me to drink your jiz?"
-                    if approval_check(Girl, 750) and not Girl.Forced:
+                    if approval_check(Girl, 750) and not Girl.forced:
                         $ Girl.change_face("_sexy")
 
                         ch_r "Well if that's the plan, couldn't I just get some from the source?"
@@ -2313,7 +2313,7 @@ label addiction_serum:
 
                         ch_k "Your what? . . . You want me to. . ."
                         ch_k ". . . drink your jiz?"
-                    if approval_check(Girl, 850) and not Girl.Forced:
+                    if approval_check(Girl, 850) and not Girl.forced:
                         $ Girl.change_face("_sexy")
 
                         ch_k "I mean, I don't -could- drink it from the bottle. . ."
@@ -2328,7 +2328,7 @@ label addiction_serum:
                         $ Girl.change_face("_surprised")
 
                         ch_e "Well. . . I suppose it does make a certain amount of sense. . ."
-                    if approval_check(Girl, 950) and not Girl.Forced:
+                    if approval_check(Girl, 950) and not Girl.forced:
                         $ Girl.change_face("_sexy")
 
                         ch_e "I might be convinced to drink it from the source, you know. . ."
@@ -2395,7 +2395,7 @@ label addiction_serum:
                         $ Girl.change_face("_surprised")
 
                         ch_v "Your what? . . . Jiz, uh?"
-                    if approval_check(Girl, 750) and not Girl.Forced:
+                    if approval_check(Girl, 750) and not Girl.forced:
                         $ Girl.change_face("_sexy")
 
                         ch_v "I could always just suck you dry myself. . ."
@@ -2418,7 +2418,7 @@ label addiction_serum:
         if Girl == RogueX:
             ch_r "Hmm, it was good last time. . ."
 
-            if approval_check(Girl, 750) and not Girl.Forced:
+            if approval_check(Girl, 750) and not Girl.forced:
                 $ Girl.change_face("_sexy")
 
                 ch_r "I'd really rather get it straight off the tap. . ."
@@ -2430,7 +2430,7 @@ label addiction_serum:
         elif Girl == KittyX:
             ch_k "Well, it was tasty. . ."
 
-            if approval_check(Girl, 850) and not Girl.Forced:
+            if approval_check(Girl, 850) and not Girl.forced:
                 $ Girl.change_face("_sexy")
 
                 ch_k "I take my milk from the bottle. . ."
@@ -2442,7 +2442,7 @@ label addiction_serum:
         elif Girl == EmmaX:
             ch_e "You do possess a unique bouquet. . ."
 
-            if approval_check(Girl, 950) and not Girl.Forced:
+            if approval_check(Girl, 950) and not Girl.forced:
                 $ Girl.change_face("_sexy")
 
                 ch_e "I'd rather take my medicine. . . directly."
@@ -2454,7 +2454,7 @@ label addiction_serum:
         elif Girl == LauraX:
             ch_l "Yeah, I mean it was pretty good. . ."
 
-            if approval_check(Girl, 850) and not Girl.Forced:
+            if approval_check(Girl, 850) and not Girl.forced:
                 $ Girl.change_face("_sexy")
 
                 ch_l "I'd really rather get it straight off the tap. . ."
@@ -2466,7 +2466,7 @@ label addiction_serum:
         elif Girl == JeanX:
             ch_j "Well, it is tasty. . ."
 
-            if approval_check(Girl, 850) and not Girl.Forced:
+            if approval_check(Girl, 850) and not Girl.forced:
                 $ Girl.change_face("_sexy")
 
                 ch_j "I could just suck you off or something. . ."
@@ -2478,7 +2478,7 @@ label addiction_serum:
         elif Girl == StormX:
             ch_s "I did enjoy it last time. . ."
 
-            if approval_check(Girl, 950) and not Girl.Forced:
+            if approval_check(Girl, 950) and not Girl.forced:
                 $ Girl.change_face("_sexy")
 
                 ch_s "We could be more direct about it. . ."
@@ -2490,7 +2490,7 @@ label addiction_serum:
         elif Girl == JubesX:
             ch_v "I guess one smoothie is as good as another. . ."
 
-            if approval_check(Girl, 750) and not Girl.Forced:
+            if approval_check(Girl, 750) and not Girl.forced:
                 $ Girl.change_face("_sexy")
 
                 ch_v "I could always just suck you dry myself. . ."
@@ -2530,7 +2530,7 @@ label addiction_serum:
         menu:
             "What do you ask for in exchange?"
             "Give it to her":
-                $ Girl.Forced = 0
+                $ Girl.forced = 0
                 $ Girl.mouth = "_smile"
                 $ Girl.change_stat("love", 50, 1,Alt=[[JeanX],500,3])
 
@@ -2836,7 +2836,7 @@ label addiction_serum:
                 $ Girl.change_stat("inhibition", 70, 2)
 
                 if not approval_check(Girl, 1200, "LI"):
-                    $ Girl.Forced = 1
+                    $ Girl.forced = 1
 
                     $ multi_action = 0
 
@@ -2865,7 +2865,7 @@ label addiction_serum:
                 $ Girl.change_stat("inhibition", 70, 4)
 
                 if not approval_check(Girl, 1200, "LI"):
-                    $ Girl.Forced = 1
+                    $ Girl.forced = 1
 
                     $ multi_action = 0
 

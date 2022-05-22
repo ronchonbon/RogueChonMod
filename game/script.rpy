@@ -80,22 +80,22 @@ label splashscreen:
 init -1:
 
     default SaveVersion = 997
-    default Day = 1
+    default day = 1
     default Cheat = 0
-    default Round = 100
+    default round = 100
     default time_options = ["morning", "midday", "evening", "night"]
     default time_index = 2
     default current_time = time_options[(time_index)]
-    default Week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    default Weekday = 6
-    default DayofWeek = Week[Weekday]
+    default week = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    default weekday = 6
+    default day_of_week = week[weekday]
     default bg_current = "bg_study"
     default focused_Girl = 0
     default Party = []
     default all_Girls = []
     default active_Girls = []
-    default TotalSEXP = 0
-    default PersonalRooms = ["bg_player"]
+    default total_SEXP = 0
+    default personal_rooms = ["bg_player"]
     default Taboo = 0
     default Rules = []
     default Digits = []
@@ -103,8 +103,8 @@ init -1:
     default Line = 0
     default TempLine = 0
     default PassLine = 0
-    default action_context = 0
-    default multi_action = 1
+    default action_context = None
+    default multi_action = True
     default primary_action = 0
     default offhand_action = 0
     default girl_offhand_action = 0
@@ -120,7 +120,7 @@ init -1:
 
     default Partner = 0
     default Events = []
-    default PunishmentX = 0
+    default being_punished = 0
     default approval_bonus = 0
     default approval = 0
     default Count = 0

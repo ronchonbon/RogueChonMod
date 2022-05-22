@@ -101,10 +101,10 @@ layeredimage Rogue_sprite:
     elif RogueX.bra:
         "images/Rogue_sprite/Rogue_standing_bra[RogueX.bra].png"
 
-    if RogueX.Water and RogueX.Water < 3:
+    if RogueX.wet and RogueX.wet < 3:
         "images/Rogue_sprite/Rogue_standing_body[RogueX.ArmPose]_wet.png"
 
-    if RogueX.Water == 3:
+    if RogueX.wet == 3:
         "images/Rogue_sprite/Rogue_standing_body_wet3.png"
 
     if not RogueX.top:
@@ -290,7 +290,7 @@ layeredimage Rogue_head:
     always:
         "images/Rogue_blowjob/Rogue_blowjob_hair[RogueX.hair].png"
 
-    if RogueX.Water:
+    if RogueX.wet:
         "images/Rogue_blowjob/Rogue_blowjob_face_wet.png"
 
     if "hair" in RogueX.spunk:
@@ -318,7 +318,7 @@ layeredimage Rogue_sex_body:
     else:
         "images/Rogue_sex/Rogue_sex_bra[RogueX.bra].png"
 
-    if RogueX.Water:
+    if RogueX.wet:
         "images/Rogue_sex/Rogue_Sex_Wet_Body.png"
 
     if not RogueX.top:
@@ -357,7 +357,7 @@ layeredimage Rogue_sex_legs:
     always:
         "images/Rogue_sex/Rogue_sex_legs.png"
 
-    if RogueX.Water:
+    if RogueX.wet:
         "images/Rogue_sex/Rogue_sex_legs_wet.png"
 
     always:
@@ -423,7 +423,7 @@ layeredimage Rogue_sex_feet:
     always:
         "images/Rogue_sex/Rogue_sex_feet.png"
 
-    if RogueX.Water:
+    if RogueX.wet:
         "images/Rogue_sex/Rogue_sex_feet_wet.png"
 
     if not RogueX.hose or RogueX.underwear_pulled_down or RogueX.hose == "_garterbelt":
@@ -544,7 +544,7 @@ layeredimage Rogue_sex_anus:
         AlphaMask("Rogue_Anal_Zero_Anim[action_speed]", "Rogue_Anal_Fucking_Mask")
 
 layeredimage Rogue_doggy_body:
-    if not RogueX.Water and RogueX.hair == "_evo":
+    if not RogueX.wet and RogueX.hair == "_evo":
         "images/Rogue_doggy/Rogue_doggy_hair_evo_back.png"
 
     always:
@@ -574,13 +574,13 @@ layeredimage Rogue_doggy_body:
     if RogueX.bra:
         "images/Rogue_doggy/Rogue_doggy_bra[RogueX.bra].png"
 
-    if RogueX.Water:
+    if RogueX.wet:
         "images/Rogue_doggy/Rogue_doggy_top_wet.png"
 
     if RogueX.top:
         "images/Rogue_doggy/Rogue_doggy_top[RogueX.top].png"
 
-    if RogueX.Water:
+    if RogueX.wet:
         "images/Rogue_doggy/Rogue_doggy_hair_wet.png"
     else:
         "images/Rogue_doggy/Rogue_doggy_hair[RogueX.hair].png"
@@ -614,7 +614,7 @@ layeredimage Rogue_doggy_ass:
     always:
         "images/Rogue_doggy/Rogue_doggy_ass.png"
 
-    if RogueX.Water:
+    if RogueX.wet:
         "images/Rogue_doggy/Rogue_doggy_ass_wet.png"
 
     if RogueX.hose == "_stockings":

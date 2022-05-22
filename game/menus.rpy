@@ -11,7 +11,7 @@ label enter_main_sex_menu:
         if Taboo > 20 and "taboo" not in focused_Girl.history:
             call expression focused_Girl.tag + "_Taboo_Talk"
 
-            if bg_current == "bg_classroom" or bg_current in PersonalRooms and AloneCheck(focused_Girl):
+            if bg_current == "bg_classroom" or bg_current in personal_rooms and AloneCheck(focused_Girl):
                 ch_p "We could just lock the door, right?"
                 ch_e "We certainly could. . ."
                 "[focused_Girl.name] walks to the door and locks it behind her."
@@ -22,7 +22,7 @@ label enter_main_sex_menu:
             else:
                 return
 
-    $ action_context = 0
+    $ action_context = None
     $ primary_action = 0
     $ offhand_action = 0
     $ girl_offhand_action = 0
@@ -48,12 +48,12 @@ label enter_main_sex_menu:
         if focused_Girl.location == bg_current:
             call sex_menu_caught_or_angry_lines(focused_Girl)
 
-        $ focused_Girl.OutfitChange()
+        $ focused_Girl.outfitChange()
         $ focused_Girl.drain_word("caught",1,0)
 
         return
 
-    if Round < 5:
+    if round < 5:
         call sex_menu_less_than_five_rounds(focused_Girl)
 
         return
@@ -264,7 +264,7 @@ label girl_sex_menu(Girl):
             if Girl.lust >= 50 or Girl.addiction >= 50:
                 $ Girl.change_face("_sad")
 
-                if Girl.remaining_actions and Girl.SEXP >= 15 and Round > 20:
+                if Girl.remaining_actions and Girl.SEXP >= 15 and round > 20:
                     if "round2" not in Girl.recent_history:
                         call exit_sex_menu_experienced_first_round_lines(Girl)
 
@@ -353,7 +353,7 @@ label begging_menu(Girl, action):
             call sorry_never_mind_lines(Girl)
 
             return
-        "Maybe later?" if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "fondle_ass", "handjob", "footjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"] and "no_" + action not in Girl.daily_history:
+        "Maybe later?" if action in ["masturbation", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "fondle_ass", "handjob", "footjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"] and "no_" + action not in Girl.daily_history:
             $ Girl.change_face("_sexy")
 
             if action == "fondle_breasts" and Girl not in [LauraX, JubesX]:
@@ -845,7 +845,7 @@ label kiss_menu:
             call Slap_Ass(focused_Girl)
 
             $ counter += 1
-            $ Round -= 1
+            $ round -= 1
 
             jump action_cycle
         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
@@ -969,7 +969,7 @@ label fondle_menu:
             call Slap_Ass(focused_Girl)
 
             $ counter += 1
-            $ Round -= 1
+            $ round -= 1
 
             jump action_cycle
         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
@@ -1246,7 +1246,7 @@ label handjob_menu:
             call Slap_Ass(focused_Girl)
 
             $ counter += 1
-            $ Round -= 1
+            $ round -= 1
 
             jump action_cycle
         "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
@@ -1471,7 +1471,7 @@ label sex_menu:
             call Slap_Ass(focused_Girl)
 
             $ counter += 1
-            $ Round -= 1
+            $ round -= 1
 
             jump action_cycle
         "Turn her around":

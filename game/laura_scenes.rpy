@@ -1,7 +1,7 @@
 
 
 
-label LauraMeet(Topics=[], Loop=1):
+label meet_Laura(Topics=[], Loop=1):
     $ active_Girls.append(LauraX) if LauraX not in active_Girls else active_Girls
     $ LauraX.name = "???"
     $ LauraX.names.remove("Laura")
@@ -17,8 +17,8 @@ label LauraMeet(Topics=[], Loop=1):
     $ LauraX.sprite_location = stage_center
     call set_the_scene (0)
     $ LauraX.player_petname = Player.name
-    $ LauraX.OutfitDay = "casual1"
-    $ LauraX.Outfit = "casual1"
+    $ LauraX.today_outfit = "casual1"
+    $ LauraX.outfit = "casual1"
     $ LauraX.change_outfit("casual1")
 
     "As you approach the Danger Room, you hear a ferocious clanging of metal."
@@ -240,11 +240,11 @@ label LauraMeet(Topics=[], Loop=1):
 
     "She dashes out of the room, headed for the hangar."
 
-    $ LauraX.PubeC = 3
-    $ LauraX.Todo.append("mission")
+    $ LauraX.pubes_counter = 3
+    $ LauraX.to_do.append("mission")
 
     $ bg_current = "bg_dangerroom"
-    $ Round -= 10
+    $ round -= 10
     call shift_focus (RogueX)
     $ active_Girls.remove(LauraX) if LauraX in active_Girls else active_Girls
 
@@ -270,7 +270,7 @@ label Laura_Key:
 
 
 
-label Laura_BF(BO=[]):
+label Laura_BF(temp_Girls=[]):
     call shift_focus (LauraX)
     if LauraX.location != bg_current:
         $ LauraX.location = bg_current
@@ -278,7 +278,7 @@ label Laura_BF(BO=[]):
             "[LauraX.name] approaches you and motions that she wants to speak to you alone."
         else:
             "[LauraX.name] turns towards you and motions that she wants to speak to you alone."
-    $ LauraX.drain_word("asked meet")
+    $ LauraX.drain_word("asked_to_meet")
     call set_the_scene (0)
     call Display_Girl (LauraX)
     "She looks a bit concerned and you can tell she's a bit anxious about whatever she has to say."
@@ -484,7 +484,7 @@ label Laura_BF(BO=[]):
             ch_l "I should. . . leave."
             "[LauraX.name] wanders off in a bit of a daze."
             $ LauraX.Event[5] = 20
-            call Remove_Girl (LauraX)
+            call remove_girl (LauraX)
             $ Line = 0
             return
 
@@ -509,12 +509,12 @@ label Laura_BF(BO=[]):
                     $ Line = 0
                     if approval_check(LauraX, 1200):
 
-                        $ BO = Player.Harem[:]
-                        while BO and Line != "no":
+                        $ temp_Girls = Player.Harem[:]
+                        while temp_Girls and Line != "no":
 
-                            if LauraX.GirlLikeCheck(BO[0]) <= 500:
+                            if LauraX.GirlLikeCheck(temp_Girls[0]) <= 500:
                                 $ Line = "no"
-                            $ BO.remove(BO[0])
+                            $ temp_Girls.remove(temp_Girls[0])
                     else:
                         $ Line = "no"
                     if Line == "no":
@@ -538,7 +538,7 @@ label Laura_BF(BO=[]):
                     $ Line = "no"
             if Line == "no":
                 $ LauraX.Event[5] = 20
-                call Remove_Girl (LauraX)
+                call remove_girl (LauraX)
                 $ Line = 0
                 return
 
@@ -564,7 +564,7 @@ label Laura_BF(BO=[]):
                 $ LauraX.change_face("_confused",1)
                 ch_l "Hmm, get back to me, I guess?"
                 $ LauraX.Event[5] = 20
-                call Remove_Girl (LauraX)
+                call remove_girl (LauraX)
                 $ Line = 0
                 return
         call Haremchange_stat (LauraX, 900, 20)
@@ -593,9 +593,9 @@ label Laura_BF(BO=[]):
 
 label Laura_Cleanhouse:
 
-    $ LauraX.drain_word("asked meet")
-    if "cleanhouse" in LauraX.Todo:
-        $ LauraX.Todo.remove("cleanhouse")
+    $ LauraX.drain_word("asked_to_meet")
+    if "cleanhouse" in LauraX.to_do:
+        $ LauraX.to_do.remove("cleanhouse")
     if not Player.Harem or LauraX in Player.Harem:
         $ LauraX.Event[5] = 2
         return
@@ -652,12 +652,12 @@ label Laura_Cleanhouse:
         pass
     elif approval_check(LauraX, 1200) and approval_check(LauraX, 500,"O"):
 
-        $ BO = Player.Harem[:]
-        while BO and Line != "no":
+        $ temp_Girls = Player.Harem[:]
+        while temp_Girls and Line != "no":
 
-            if LauraX.GirlLikeCheck(BO[0]) <= 400:
+            if LauraX.GirlLikeCheck(temp_Girls[0]) <= 400:
                 $ Line = "no"
-            $ BO.remove(BO[0])
+            $ temp_Girls.remove(temp_Girls[0])
     else:
         $ Line = "no"
     if Line == "no":
@@ -683,20 +683,20 @@ label Laura_Cleanhouse:
     return
 
 
-label Laura_Love(Shipping=[], Shipshape=0, Topics=[], BO=[]):
+label Laura_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
 
 
 
 
 
 
-    $ LauraX.drain_word("asked meet")
-    $ BO = all_Girls[:]
-    $ BO.remove(LauraX)
-    while BO:
-        if approval_check(BO[0], 1200, "LO"):
-            $ Shipping.append(BO[0])
-        $ BO.remove(BO[0])
+    $ LauraX.drain_word("asked_to_meet")
+    $ temp_Girls = all_Girls[:]
+    $ temp_Girls.remove(LauraX)
+    while temp_Girls:
+        if approval_check(temp_Girls[0], 1200, "LO"):
+            $ Shipping.append(temp_Girls[0])
+        $ temp_Girls.remove(temp_Girls[0])
     $ Shipshape = len(Shipping)
 
     if LauraX.location == bg_current or LauraX in Party:
@@ -978,7 +978,7 @@ label Laura_Love(Shipping=[], Shipshape=0, Topics=[], BO=[]):
         $ LauraX.recent_history.append("_angry")
         $ LauraX.daily_history.append("_angry")
         hide Laura_Sprite with easeoutright
-        call Remove_Girl (LauraX)
+        call remove_girl (LauraX)
         $ LauraX.location = "hold"
         return
 
@@ -1104,7 +1104,7 @@ label Laura_Love_End:
     if "lover" not in LauraX.player_petnames:
         $ LauraX.Event[6] = 20
         hide Laura_Sprite with easeoutright
-        call Remove_Girl (LauraX)
+        call remove_girl (LauraX)
         $ LauraX.location = "hold"
         return
 
@@ -1227,7 +1227,7 @@ label Laura_Love_Redux:
 
 
 label Laura_Sub:
-    $ LauraX.drain_word("asked meet")
+    $ LauraX.drain_word("asked_to_meet")
     call shift_focus (LauraX)
     if LauraX.location != bg_current and LauraX not in Party:
         "Suddenly, [LauraX.name] shows up and says she needs to talk to you."
@@ -1480,7 +1480,7 @@ label Laura_Sub:
         $ LauraX.player_petnames.append("sir")
 
     elif Line == "rude":
-        call Remove_Girl (LauraX)
+        call remove_girl (LauraX)
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
         "[LauraX.name] knocks her way past you and storms off."
@@ -1488,7 +1488,7 @@ label Laura_Sub:
         $ LauraX.change_face("_sadside", 2)
         ch_l "Huh, ok, if you're not interested. . ."
         hide Laura_Sprite with easeoutright
-        call Remove_Girl (LauraX)
+        call remove_girl (LauraX)
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
         "[LauraX.name] heads out of the room."
@@ -1573,7 +1573,7 @@ label Laura_Sub_Asked:
     if Line == "rude":
 
         hide Laura_Sprite with easeoutright
-        call Remove_Girl (LauraX)
+        call remove_girl (LauraX)
         $ LauraX.recent_history.append("_angry")
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
@@ -1600,7 +1600,7 @@ label Laura_Sub_Asked:
 
 
 label Laura_Master:
-    $ LauraX.drain_word("asked meet")
+    $ LauraX.drain_word("asked_to_meet")
     call shift_focus (LauraX)
     if LauraX.location != bg_current and LauraX not in Party:
         "Suddenly, [LauraX.name] shows up and says she needs to talk to you."
@@ -1758,7 +1758,7 @@ label Laura_Master:
     if Line == "rude":
         $ LauraX.recent_history.append("_angry")
         hide Laura_Sprite with easeoutright
-        call Remove_Girl (LauraX)
+        call remove_girl (LauraX)
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
         "[LauraX.name] stomps out of the room."
@@ -1766,7 +1766,7 @@ label Laura_Master:
         ch_l "Ok, fine then."
         ch_l "And here I was, about to \"elevate your clearance.\""
         hide Laura_Sprite with easeoutright
-        call Remove_Girl (LauraX)
+        call remove_girl (LauraX)
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
         "[LauraX.name] brushes past you on her way out."
@@ -1790,7 +1790,7 @@ label Laura_Sexfriend:
 
     $ LauraX.lust = 70
     $ LauraX.location = bg_current
-    $ LauraX.drain_word("asked meet")
+    $ LauraX.drain_word("asked_to_meet")
     call set_the_scene
     $ LauraX.daily_history.append("relationship")
     call Taboo_Level
@@ -1927,15 +1927,15 @@ label Laura_Sexfriend:
 label Laura_Fuckbuddy:
     $ LauraX.daily_history.append("relationship")
     $ LauraX.lust = 80
-    $ LauraX.drain_word("asked meet")
+    $ LauraX.drain_word("asked_to_meet")
 
     "You hear a knock on the door, and go to answer it."
 
     $ LauraX.location = bg_current
     call shift_focus (LauraX)
     call set_the_scene (0)
-    $ LauraX.Outfit = "casual1"
-    $ LauraX.OutfitDay = "casual1"
+    $ LauraX.outfit = "casual1"
+    $ LauraX.today_outfit = "casual1"
     $ LauraX.change_outfit("casual1")
     call Display_Girl (LauraX)
     call Taboo_Level
@@ -1966,7 +1966,7 @@ label Laura_Fuckbuddy:
 
 label Laura_Daddy:
     $ LauraX.daily_history.append("relationship")
-    $ LauraX.drain_word("asked meet")
+    $ LauraX.drain_word("asked_to_meet")
     call shift_focus (LauraX)
     call set_the_scene
     ch_l ". . ."
@@ -2228,14 +2228,14 @@ label Laura_Dressup:
     $ active_Girls.append(LauraX) if LauraX not in active_Girls else active_Girls
     call shift_focus (LauraX)
     $ bg_current = "bg_campus"
-    call Remove_Girl ("All")
+    call remove_girl ("All")
     $ LauraX.location = bg_current
     call set_the_scene (0)
 
-    $ LauraX.Outfit = "casual1"
+    $ LauraX.outfit = "casual1"
     $ LauraX.change_outfit("casual1")
     show Laura_Sprite at sprite_location(LauraX.sprite_location) with vpunch
-    $ Round -= 10 if Round >= 11 else Round
+    $ round -= 10 if round >= 11 else round
     $ LauraX.history.remove("dress0")
     $ LauraX.history.append("dress1")
     $ LauraX.history.append("met")
@@ -2275,13 +2275,13 @@ label Laura_Dressup:
             ch_l "Not really."
 
     hide Laura_Sprite with easeoutright
-    call Remove_Girl (LauraX)
+    call remove_girl (LauraX)
     "[LauraX.name] walks away, and as you watch her go you feel a tap on your shoulder."
 
     call shift_focus (KittyX)
     $ KittyX.location = bg_current
     call set_the_scene (0)
-    $ KittyX.Outfit = KittyX.OutfitDay
+    $ KittyX.outfit = KittyX.today_outfit
     $ KittyX.change_outfit()
     call Display_Girl (KittyX)
 
@@ -2415,7 +2415,7 @@ label Laura_Dressup3:
     "You remember [KittyX.name] talking about getting [LauraX.name] some new clothes. She must've gotten [LauraX.name] to try them on."
     "You can't help but feel curious. . ."
 
-    $ KittyX.Outfit = KittyX.OutfitDay
+    $ KittyX.outfit = KittyX.today_outfit
     $ KittyX.change_outfit()
     $ LauraX.change_outfit("nude")
     $ LauraX.bra = "wolvie_top"
@@ -2597,7 +2597,7 @@ label Laura_Dressup3:
                 call Laura_First_Topless
                 call Laura_First_Bottomless (1)
                 pause 1
-                $ LauraX.change_outfit(LauraX.OutfitDay,Changed=1)
+                $ LauraX.change_outfit(LauraX.today_outfit,Changed=1)
                 "And then puts on her usual outfit."
 
                 if approval_check(KittyX,1200):
@@ -2612,7 +2612,7 @@ label Laura_Dressup3:
             ch_k "Later, [KittyX.player_petname]!"
             ch_l "See ya."
 
-    $ Round -= 20 if Round >= 21 else Round
+    $ round -= 20 if round >= 21 else round
     return
 
 

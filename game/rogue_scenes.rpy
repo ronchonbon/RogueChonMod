@@ -330,7 +330,7 @@ label tour_parting:
     if "Historia" in Player.traits:
         return 0
     $ bg_current = "bg_player"
-    call Wait
+    call wait
     $ bg_current = "bg_player"
     call set_the_scene
     "This is a short tutorial on the game's features. Feel free to skip it, you can always view it later in this room."
@@ -393,7 +393,7 @@ label Rogue_BF:
     call shift_focus (RogueX)
 
     $ Player.add_word(1,"interruption")
-    $ RogueX.drain_word("asked meet")
+    $ RogueX.drain_word("asked_to_meet")
     if RogueX.location != bg_current and RogueX not in Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
@@ -470,7 +470,7 @@ label Rogue_BF:
                 $ RogueX.change_stat("love", 200, -10)
                 ch_r "I get it. That's fine."
                 $ RogueX.Event[5] = 20
-                call Remove_Girl (RogueX)
+                call remove_girl (RogueX)
                 $ Line = 0
                 return
         "Not really.":
@@ -506,7 +506,7 @@ label Rogue_BF_Jerk:
         $ RogueX.player_petnames.append("boyfriend")
         $ Achievements.append("I am not your Boyfriend!")
         $ bg_current = "bg_player"
-        call Remove_Girl (RogueX)
+        call remove_girl (RogueX)
         call set_the_scene
         return
     if 1 <  RogueX.Event[5] < 20:
@@ -523,7 +523,7 @@ label Rogue_BF_Jerk:
         return 1
     $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
-    call Remove_Girl (RogueX)
+    call remove_girl (RogueX)
     call set_the_scene
     jump Misplaced
 
@@ -532,7 +532,7 @@ label Rogue_BF_Jerk:
 
 label Rogue_Love:
     call shift_focus (RogueX)
-    $ RogueX.drain_word("asked meet")
+    $ RogueX.drain_word("asked_to_meet")
 
     if bg_current != "bg_rogue":
         if RogueX.location == bg_current or RogueX in Party:
@@ -665,7 +665,7 @@ label Rogue_Love_Jerk:
         $ Achievements.append("One Sided Love")
         $ RogueX.location = "bg_rogue"
         $ bg_current = "bg_player"
-        call Remove_Girl (RogueX)
+        call remove_girl (RogueX)
         jump player_room
     if RogueX.Event[6] > 1:
         ch_r "Fool me once, shame on you. . . I thought you'd grown."
@@ -676,7 +676,7 @@ label Rogue_Love_Jerk:
         return 0
     $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
-    call Remove_Girl (RogueX)
+    call remove_girl (RogueX)
     jump player_room
 
 label Rogue_AnnaMarie:
@@ -730,7 +730,7 @@ label Rogue_AnnaMarie:
 
 label Rogue_Sub:
     call shift_focus (RogueX)
-    $ RogueX.drain_word("asked meet")
+    $ RogueX.drain_word("asked_to_meet")
     if RogueX.location != bg_current and RogueX not in Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
@@ -829,7 +829,7 @@ label Rogue_Sub_Jerk:
         $ Achievements.append("Nosiree")
         $ bg_current = "bg_player"
         $ RogueX.location = "bg_rogue"
-        call Remove_Girl (RogueX)
+        call remove_girl (RogueX)
         jump player_room
     if RogueX.Event[7] > 1:
         ch_r "I thought you may have learned to respect my needs by now."
@@ -840,7 +840,7 @@ label Rogue_Sub_Jerk:
         return
     $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
-    call Remove_Girl (RogueX)
+    call remove_girl (RogueX)
     jump player_room
 
 
@@ -849,7 +849,7 @@ label Rogue_Sub_Jerk:
 
 label Rogue_Master:
     call shift_focus (RogueX)
-    $ RogueX.drain_word("asked meet")
+    $ RogueX.drain_word("asked_to_meet")
     if RogueX.location != bg_current and RogueX not in Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
@@ -953,7 +953,7 @@ label Rogue_Obed_Jerk:
         $ Achievements.append("Heavy is the Head")
         $ bg_current = "bg_player"
         $ RogueX.location = "bg_rogue"
-        call Remove_Girl (RogueX)
+        call remove_girl (RogueX)
         jump player_room
     if RogueX.Event[8] > 1:
         ch_r "I thought you may have learned to respect my needs by now."
@@ -964,7 +964,7 @@ label Rogue_Obed_Jerk:
         return
     $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
-    call Remove_Girl (RogueX)
+    call remove_girl (RogueX)
     jump player_room
 
 
@@ -977,7 +977,7 @@ label Rogue_Sexfriend:
     if RogueX in Player.Harem:
         if RogueX.location != bg_current and RogueX not in Party:
             return
-        $ RogueX.drain_word("asked meet")
+        $ RogueX.drain_word("asked_to_meet")
         if "_stockings_and_garterbelt" not in RogueX.inventory:
             $ RogueX.inventory.append("_stockings_and_garterbelt")
         $ RogueX.player_petnames.append("sex friend")
@@ -985,7 +985,7 @@ label Rogue_Sexfriend:
         "[RogueX.name] suddenly gives your butt a little squeeze."
         return
 
-    $ RogueX.drain_word("asked meet")
+    $ RogueX.drain_word("asked_to_meet")
     if RogueX.location != bg_current and RogueX not in Party:
         "Suddenly, [RogueX.name] shows up and says she needs to talk to you."
 
@@ -1074,7 +1074,7 @@ label Rogue_Sexfriend_Jerk:
         $ Achievements.append("Man of Virtue")
         $ bg_current = "bg_player"
         $ RogueX.location = "bg_rogue"
-        call Remove_Girl (RogueX)
+        call remove_girl (RogueX)
         jump player_room
     $ Count = (10*RogueX.Event[9])
     $ RogueX.change_stat("inhibition", 200, -Count)
@@ -1086,7 +1086,7 @@ label Rogue_Sexfriend_Jerk:
         $ RogueX.location = "bg_rogue"
     if "Historia" in Player.traits:
         return
-    call Remove_Girl (RogueX)
+    call remove_girl (RogueX)
     jump player_room
 
 
@@ -1095,7 +1095,7 @@ label Rogue_Sexfriend_Jerk:
 
 label Rogue_Fuckbuddy:
     call shift_focus (RogueX)
-    $ RogueX.drain_word("asked meet")
+    $ RogueX.drain_word("asked_to_meet")
     if RogueX in Player.Harem:
         if RogueX.location != bg_current and RogueX not in Party:
             return
@@ -1201,14 +1201,14 @@ label Rogue_Fuckbuddy_Jerk:
     else:
         ch_r "Ok, I'm out."
         $ RogueX.location = "bg_rogue"
-    call Remove_Girl (RogueX)
+    call remove_girl (RogueX)
     jump player_room
 
 
 
 label Rogue_Daddy:
     $ RogueX.daily_history.append("relationship")
-    $ RogueX.drain_word("asked meet")
+    $ RogueX.drain_word("asked_to_meet")
     call shift_focus (RogueX)
     call set_the_scene
     ch_r ". . ."
@@ -1512,7 +1512,7 @@ label Rogue_Frisky_Class:
             else:
                 "Dr. McCoy stops his lecture in mid-sentence when he notices that the whole class is looking at you and [RogueX.name]."
                 ch_b "Oh, my stars and garters!"
-                ch_b "[Player.name]!?! {b}WHAT ARE YOU DOING? BOTH OF YOU, TO THE PROFESSOR'S OFFICE, IMMEDIATELY!{/b}"
+                ch_b "[Player.name]!?! {b}WHAT ARE YOU DOING? temp_GirlsTH OF YOU, TO THE PROFESSOR'S OFFICE, IMMEDIATELY!{/b}"
             if RogueX not in Rules:
                 call Girls_Caught (RogueX)
             else:

@@ -27,7 +27,7 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.Water", "images/EmmaSprite/EmmaSprite_HairbackWet.png",
+            "EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.wet", "images/EmmaSprite/EmmaSprite_HairbackWet.png",
             "EmmaX.hair", "images/EmmaSprite/EmmaSprite_Hairback.png",
             "True", Null(),
             ),
@@ -101,7 +101,7 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.Water", "images/EmmaSprite/EmmaSprite_Water_Legs.png",
+            "EmmaX.wet", "images/EmmaSprite/EmmaSprite_Water_Legs.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -233,7 +233,7 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "not EmmaX.Water", Null(),
+            "not EmmaX.wet", Null(),
             "EmmaX.ArmPose == 1", "images/EmmaSprite/EmmaSprite_Water_Arms1.png",
             "True", "images/EmmaSprite/EmmaSprite_Water_Arms2.png",
             ),
@@ -285,7 +285,7 @@ image Emma_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "not EmmaX.Water", Null(),
+            "not EmmaX.wet", Null(),
             "EmmaX.ArmPose == 1 or EmmaX.bra == 'corset'", "images/EmmaSprite/EmmaSprite_Water_TitsUp.png",
             "True", "images/EmmaSprite/EmmaSprite_Water_TitsDown.png",
             ),
@@ -629,7 +629,7 @@ image EmmaSprite_Head:
 
                 "not EmmaX.blushing", ConditionSwitch(
 
-                    "EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.Water", ConditionSwitch(
+                    "EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.wet", ConditionSwitch(
 
                             "EmmaX.brows == 'angry'", "images/EmmaSprite/EmmaSprite_Head_Wet_Angry.png",
                             "EmmaX.brows == 'sad'", "images/EmmaSprite/EmmaSprite_Head_Wet_Sad.png",
@@ -648,7 +648,7 @@ image EmmaSprite_Head:
                     ),
                 "EmmaX.blushing == '_blush1'", ConditionSwitch(
 
-                    "EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.Water", ConditionSwitch(
+                    "EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.wet", ConditionSwitch(
 
                             "EmmaX.brows == 'angry'", "images/EmmaSprite/EmmaSprite_Head_Wet_AngryB1.png",
                             "EmmaX.brows == 'sad'", "images/EmmaSprite/EmmaSprite_Head_Wet_SadB1.png",
@@ -667,7 +667,7 @@ image EmmaSprite_Head:
                     ),
                 "True", ConditionSwitch(
 
-                    "EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.Water", ConditionSwitch(
+                    "EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.wet", ConditionSwitch(
 
                             "EmmaX.brows == 'angry'", "images/EmmaSprite/EmmaSprite_Head_Wet_AngryB2.png",
                             "EmmaX.brows == 'sad'", "images/EmmaSprite/EmmaSprite_Head_Wet_SadB2.png",
@@ -726,23 +726,23 @@ image EmmaSprite_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.Water", "images/EmmaSprite/EmmaSprite_Head_HairWet.png",
+            "EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.wet", "images/EmmaSprite/EmmaSprite_Head_HairWet.png",
             "True", "images/EmmaSprite/EmmaSprite_Head_Hair.png",
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.Water", "images/EmmaSprite/EmmaSprite_Head_Water.png",
+            "EmmaX.wet", "images/EmmaSprite/EmmaSprite_Head_Water.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "'hair' in EmmaX.spunk and (EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.Water)", "images/EmmaSprite/EmmaSprite_Head_Spunk_HairWet.png",
+            "'hair' in EmmaX.spunk and (EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet' or EmmaX.wet)", "images/EmmaSprite/EmmaSprite_Head_Spunk_HairWet.png",
             "'hair' in EmmaX.spunk", "images/EmmaSprite/EmmaSprite_Head_Spunk_HairWave.png",
             "True", Null(),
             ),
         (-1,0), ConditionSwitch(
 
-            "EmmaX.hair == 'hat wet' or (EmmaX.hair == 'hat' and EmmaX.Water)", "images/EmmaSprite/EmmaSprite_Shadow_Wet.png",
+            "EmmaX.hair == 'hat wet' or (EmmaX.hair == 'hat' and EmmaX.wet)", "images/EmmaSprite/EmmaSprite_Shadow_Wet.png",
             "EmmaX.hair == 'hat'", "images/EmmaSprite/EmmaSprite_Shadow_Long.png",
             "True", Null(),
             ),
@@ -2401,7 +2401,7 @@ image Emma_Doggy_Body:
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.Water", "images/EmmaDoggy/Emma_Doggy_Wet_Body.png",
+            "EmmaX.wet", "images/EmmaDoggy/Emma_Doggy_Wet_Body.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -2444,7 +2444,7 @@ image Emma_Doggy_Head:
 
         (0,0), ConditionSwitch(
 
-                "EmmaX.Water or EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet'", "images/EmmaDoggy/Emma_Doggy_Hair_Wet_Back.png",
+                "EmmaX.wet or EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet'", "images/EmmaDoggy/Emma_Doggy_Hair_Wet_Back.png",
                 "True", "images/EmmaDoggy/Emma_Doggy_Hair_Long_Back.png",
             ),
         (0,0), ConditionSwitch(
@@ -2503,7 +2503,7 @@ image Emma_Doggy_Head:
 
         (0,0), ConditionSwitch(
 
-            "EmmaX.Water or EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet'", "images/EmmaDoggy/Emma_Doggy_Hair_Wet.png",
+            "EmmaX.wet or EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet'", "images/EmmaDoggy/Emma_Doggy_Hair_Wet.png",
             "True", "images/EmmaDoggy/Emma_Doggy_Hair_Long.png",
             ),
 
@@ -2534,13 +2534,13 @@ image Emma_Doggy_Hair_Over:
 
     contains:
         ConditionSwitch(
-                    "EmmaX.Water or EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet'", "images/EmmaDoggy/Emma_Doggy_Hair_Wet.png",
+                    "EmmaX.wet or EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet'", "images/EmmaDoggy/Emma_Doggy_Hair_Wet.png",
                     "True", "images/EmmaDoggy/Emma_Doggy_Hair_Long.png",
                     )
     contains:
         ConditionSwitch(
 
-                "EmmaX.Water", "images/EmmaDoggy/Emma_Doggy_Head_Wet.png",
+                "EmmaX.wet", "images/EmmaDoggy/Emma_Doggy_Head_Wet.png",
                 "True", Null(),
                 ),
     contains:
@@ -2553,7 +2553,7 @@ image Emma_Doggy_Hair_Over:
     contains:
         ConditionSwitch(
 
-                "EmmaX.hair == 'hat wet' or (EmmaX.hair == 'hat' and EmmaX.Water)", "images/EmmaDoggy/Emma_Doggy_Hair_Wet_Shadow.png",
+                "EmmaX.hair == 'hat wet' or (EmmaX.hair == 'hat' and EmmaX.wet)", "images/EmmaDoggy/Emma_Doggy_Hair_Wet_Shadow.png",
                 "EmmaX.hair == 'hat'", "images/EmmaDoggy/Emma_Doggy_Hair_Long_Shadow.png",
                 "True", Null(),
                 )
@@ -2629,7 +2629,7 @@ image Emma_Doggy_Ass:
 
         (0,0), ConditionSwitch(
 
-            "EmmaX.Water", "images/EmmaDoggy/Emma_Doggy_Wet_Ass.png",
+            "EmmaX.wet", "images/EmmaDoggy/Emma_Doggy_Wet_Ass.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -2931,7 +2931,7 @@ image Emma_Doggy_Boob:
     contains:
 
         ConditionSwitch(
-            "EmmaX.Water", "images/EmmaDoggy/Emma_Doggy_Wet_Boob.png",
+            "EmmaX.wet", "images/EmmaDoggy/Emma_Doggy_Wet_Boob.png",
             "True", Null(),
             )
     contains:
@@ -4382,7 +4382,7 @@ image Emma_BJ_Animation:
 image Emma_BJ_hairback:
 
     ConditionSwitch(
-            "EmmaX.Water or EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet'", Null(),
+            "EmmaX.wet or EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet'", Null(),
             "True", "images/EmmaBJFace/Emma_BJ_Hair_Wave_Back.png",
             ),
     zoom 1.4
@@ -4412,7 +4412,7 @@ image Emma_BJ_Head:
         (858,928),
          (0,0), ConditionSwitch(
 
-            "EmmaX.Water or EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet'", "images/EmmaBJFace/Emma_BJ_Hair_Wet_Mid.png",
+            "EmmaX.wet or EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet'", "images/EmmaBJFace/Emma_BJ_Hair_Wet_Mid.png",
             "True", "images/EmmaBJFace/Emma_BJ_Hair_Wave_Mid.png",
             ),
         (0,0), ConditionSwitch(
@@ -4502,7 +4502,7 @@ image Emma_BJ_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "EmmaX.Water or EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet'", "images/EmmaBJFace/Emma_BJ_Hair_Wet_Top.png",
+            "EmmaX.wet or EmmaX.hair == 'wet' or EmmaX.hair == 'hat wet'", "images/EmmaBJFace/Emma_BJ_Hair_Wet_Top.png",
             "True", "images/EmmaBJFace/Emma_BJ_Hair_Wave_Top.png",
             ),
 

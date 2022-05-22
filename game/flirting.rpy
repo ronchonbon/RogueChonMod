@@ -2012,7 +2012,7 @@ label Compliment(Girl=0, Line0=0, Line1=0, Line2=0, Options=[], CountList=[], Li
                 $ Girl.change_stat("love", 80, -1)
                 $ Girl.change_stat("obedience", 60, 2)
                 $ Girl.change_face("_confused",1)
-                ch_j "Wait. . ."
+                ch_j "wait. . ."
             elif Girl == StormX:
                 ch_s "So you -were- awake. I owe Emma a drink."
             else:
@@ -2694,7 +2694,7 @@ label Love_You(Girl=0):
                 ch_v "I. . . not now. . ."
 
             "[Girl.name] leaves the room."
-            call Remove_Girl (Girl)
+            call remove_girl (Girl)
             jump Misplaced
         return
 
@@ -3147,7 +3147,7 @@ label Hold_Hands(Girl=0, Gloves=0):
         $ Girl.addiction_rate += 1 if Girl.addiction_rate < 5 else 0
 
     while Count:
-        $ Round -= 5
+        $ round -= 5
         if approval_check(Girl, 800,"L"):
             if Count >= 8:
                 $ Girl.change_stat("love", 90, 2)
@@ -3176,7 +3176,7 @@ label Hold_Hands(Girl=0, Gloves=0):
                 $ Girl.change_face("_bemused",1)
                 return
         $ Count -= 1
-        $ Count = 0 if Round <= 10 else Count
+        $ Count = 0 if round <= 10 else Count
 
 
 
@@ -3570,9 +3570,9 @@ label Girl_Headpat(Girl=0):
                     $ Girl.change_stat("obedience", 30, 3)
                     $ Girl.change_stat("inhibition", 40, 2)
                     $ Count = 1
-        while Count > 0 and Round >= 10:
+        while Count > 0 and round >= 10:
             $ Count -= 1 if Count != 4 else 0
-            $ Round -= 1
+            $ round -= 1
             menu:
                 "Continue?"
                 "Yes":
@@ -3889,7 +3889,7 @@ label AskPanties(Girl=0, Store=0):
                         hide blackscreen onlayer black
                         $ Girl.daily_history.append("pantyless")
                         $ Girl.change_outfit()
-                        call OutfitShame (Girl, 20)
+                        call outfitShame (Girl, 20)
                         "When you return, she quietly hands you her balled up panties."
                         $ Line = 0
                     "And miss the show?":
@@ -3991,7 +3991,7 @@ label AskPanties(Girl=0, Store=0):
                 "[Girl.name] nods and leaves for a minute."
                 $ Girl.daily_history.append("pantyless")
                 $ Girl.change_outfit()
-                call OutfitShame (Girl, 20)
+                call outfitShame (Girl, 20)
                 $ Girl.location = bg_current
                 call set_the_scene
                 "She returns and quietly hands you her balled up panties."
@@ -4105,7 +4105,7 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
 
         $ Girl.daily_history.append("pantyless")
         $ Girl.change_outfit()
-        call OutfitShame (Girl, 20)
+        call outfitShame (Girl, 20)
         return
     elif Girl == JeanX and Girl.PantsNum() == 5 and not approval_check(Girl, 400, "L"):
         $ Girl.underwear = ""
@@ -4119,7 +4119,7 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
 
         $ Girl.daily_history.append("pantyless")
         $ Girl.change_outfit()
-        call OutfitShame (Girl, 20)
+        call outfitShame (Girl, 20)
         return
 
     $ Store = Girl.legs
@@ -4187,5 +4187,5 @@ label Remove_Panties(Girl=0, Type=0, Store=0, Store2=0):
 
     $ Girl.daily_history.append("pantyless")
     $ Girl.change_outfit()
-    call OutfitShame (Girl, 20)
+    call outfitShame (Girl, 20)
     return

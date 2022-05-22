@@ -5,7 +5,7 @@ label JeanMeet:
 
     $ JeanX.name = "???"
     $ JeanX.add_word(1,"showered","showered",0,0)
-    call Remove_Girl ("All")
+    call remove_girl ("All")
     call Jeanname (1)
 
 
@@ -15,7 +15,7 @@ label JeanMeet:
     $ Line = 0
 
     $ JeanX.change_outfit("casual1")
-    $ JeanX.Outfit = "casual1"
+    $ JeanX.outfit = "casual1"
     $ JeanX.change_face("_sly",0)
     call set_the_scene (0, 1, 0)
     "As you approach the showers, you notice someone getting dressed."
@@ -246,7 +246,7 @@ label JeanMeet:
             $ JeanX.change_stat("obedience", 200, 30)
             ch_j "What?!"
             $ JeanX.change_face("_confused",1)
-            ch_j "Wait. . ."
+            ch_j "wait. . ."
             $ JeanX.change_face("_angry",1)
             $ JeanX.change_stat("love", 90, -15)
             $ JeanX.change_stat("obedience", 200, -10)
@@ -327,12 +327,12 @@ label JeanMeet:
 
     $ JeanX.history.append("met")
     $ bg_current = "bg_showerroom"
-    $ Round -= 10
+    $ round -= 10
     call shift_focus (RogueX)
     $ JeanX.location = "hold"
     call set_the_scene
-    $ JeanX.Outfit = "casual1"
-    $ JeanX.OutfitDay = "casual1"
+    $ JeanX.outfit = "casual1"
+    $ JeanX.today_outfit = "casual1"
     $ JeanX.change_outfit("casual1")
 
     "She collects her things and leaves the room."
@@ -381,7 +381,7 @@ label JeanMeet:
     ch_e "Do try to avoid that relentless black hole of drama. . ."
     show Emma_Sprite at sprite_location(-100) with easeinleft
     pause 0.2
-    call Remove_Girl (EmmaX)
+    call remove_girl (EmmaX)
     call shift_focus (RogueX)
     call set_the_scene
     return

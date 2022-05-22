@@ -24,7 +24,7 @@ label AskDateOther:
     return
 
 
-label Les_Interupted(Girl=0, BO=[]):
+label Les_Interupted(Girl=0, temp_Girls=[]):
     $ Girl = GirlCheck(Girl)
 
     if "unseen" not in Girl.recent_history:
@@ -242,7 +242,7 @@ label Les_Interupted(Girl=0, BO=[]):
         else:
             jump player_room
 
-    if Round <= 10:
+    if round <= 10:
 
         if Girl == RogueX:
             ch_r "It's getting too late to do much about it right now though."
@@ -261,7 +261,7 @@ label Les_Interupted(Girl=0, BO=[]):
         return
     $ action_context = "interrupted"
 
-label LesScene(Girl=0, Bonus=0, BO=[]):
+label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
     $ Girl = GirlCheck(Girl)
     call shift_focus (Girl)
 
@@ -299,13 +299,13 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
 
     if Partner not in all_Girls:
         $ Partner = 0
-        $ BO = all_Girls[:]
-        $ BO.remove(Girl)
-        while BO:
-            if BO[0].location == bg_current:
-                $ Partner = BO[0]
-                $ BO = [1]
-            $ BO.remove(BO[0])
+        $ temp_Girls = all_Girls[:]
+        $ temp_Girls.remove(Girl)
+        while temp_Girls:
+            if temp_Girls[0].location == bg_current:
+                $ Partner = temp_Girls[0]
+                $ temp_Girls = [1]
+            $ temp_Girls.remove(temp_Girls[0])
 
     if Girl == JeanX:
 
@@ -331,11 +331,11 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
     $ Girl.add_word(1,"noticed "+Partner.tag,"noticed "+Partner.tag)
     $ Partner.add_word(1,"noticed "+Girl.tag,"noticed "+Girl.tag)
 
-    if bg_current in PersonalRooms:
+    if bg_current in personal_rooms:
         $ Taboo = 0
         $ Girl.Taboo = 0
         $ Partner.Taboo = 0
-    if Girl.event_counter["forced"] and not Girl.Forced:
+    if Girl.event_counter["forced"] and not Girl.forced:
         $ approval_bonus -= 5*Girl.event_counter["forced"]
 
     $ approval = approval_check(Girl, 1350, TabM = 2, Bonus = Bonus)
@@ -501,7 +501,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
             ch_s "Oh, so you would like to see the two of us together?"
         elif Girl == JubesX:
             ch_v "Oh, me and her? Together?"
-        if Girl.Forced:
+        if Girl.forced:
             $ Girl.change_face("_sad")
             if Girl == RogueX:
                 ch_r "And {i}just{/i} watch?"
@@ -550,7 +550,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
 
     if not Girl.event_counter["seen_with_girl"] and approval:
 
-        if Girl.Forced:
+        if Girl.forced:
             $ Girl.change_face("_sad")
             $ Girl.change_stat("love", 70, -3, 1)
             $ Girl.change_stat("love", 20, -2, 1)
@@ -625,7 +625,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
 
     elif approval:
 
-        if Girl.Forced:
+        if Girl.forced:
             $ Girl.change_face("_sad")
             $ Girl.change_stat("love", 70, -3, 1)
             $ Girl.change_stat("love", 20, -2, 1)
@@ -697,7 +697,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
 
     if approval >= 2:
 
-        if Girl.Forced:
+        if Girl.forced:
             $ Girl.change_face("_sad")
             $ Girl.change_stat("obedience", 90, 1)
             $ Girl.change_stat("inhibition", 60, 1)
@@ -885,7 +885,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
 
 
                 $ approval = approval_check(Girl, 550, "OI", TabM = 2)
-                if approval > 1 or (approval and Girl.Forced):
+                if approval > 1 or (approval and Girl.forced):
                     $ Girl.change_face("_sad")
                     $ Girl.change_stat("love", 70, -5, 1)
                     $ Girl.change_stat("love", 200, -5)
@@ -906,7 +906,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
                     $ Girl.change_stat("obedience", 80, 4)
                     $ Girl.change_stat("inhibition", 80, 1)
                     $ Girl.change_stat("inhibition", 60, 3)
-                    $ Girl.Forced = 1
+                    $ Girl.forced = 1
                     jump Les_Partner
                 else:
                     $ Girl.change_stat("love", 200, -20)
@@ -961,7 +961,7 @@ label LesScene(Girl=0, Bonus=0, BO=[]):
             ch_s "I'm afraid that settles that."
         elif Girl == JubesX:
             ch_v "Well, doesn't look like it's happening. . ."
-    elif Girl.Forced:
+    elif Girl.forced:
         $ Girl.change_face("_angry", 1)
         if Girl == RogueX:
             ch_r "Look, that's just not on the table."
@@ -1066,18 +1066,18 @@ label Les_Partner:
 
 
 
-    $ BO = all_Girls[:]
-    $ BO.remove(Girl)
-    while BO:
-        if BO[0].location == bg_current:
-            call Les_Response (BO[0], Girl, 2)
+    $ temp_Girls = all_Girls[:]
+    $ temp_Girls.remove(Girl)
+    while temp_Girls:
+        if temp_Girls[0].location == bg_current:
+            call Les_Response (temp_Girls[0], Girl, 2)
             if not _return:
 
                 return
-        $ BO.remove(BO[0])
+        $ temp_Girls.remove(temp_Girls[0])
 
 
-label Les_Prep(Girl=focused_Girl, BO=[]):
+label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
 
     $ Line = 0
     if Girl not in all_Girls or Girl == Partner:
@@ -1088,13 +1088,13 @@ label Les_Prep(Girl=focused_Girl, BO=[]):
 
     if Partner not in all_Girls:
         $ Partner = 0
-        $ BO = all_Girls[:]
-        $ BO.remove(Girl)
-        while BO:
-            if BO[0].location == bg_current:
-                $ Partner = BO[0]
-                $ BO = [1]
-            $ BO.remove(BO[0])
+        $ temp_Girls = all_Girls[:]
+        $ temp_Girls.remove(Girl)
+        while temp_Girls:
+            if temp_Girls[0].location == bg_current:
+                $ Partner = temp_Girls[0]
+                $ temp_Girls = [1]
+            $ temp_Girls.remove(temp_Girls[0])
 
     if Line:
 
@@ -1112,7 +1112,7 @@ label Les_Prep(Girl=focused_Girl, BO=[]):
         "[Girl.name] move's closer to [Partner.name] and wraps her arms around her neck."
         if not Girl.event_counter["seen_with_girl"]:
 
-            if Girl.Forced:
+            if Girl.forced:
                 $ Girl.change_stat("love", 90, -20)
                 $ Girl.change_stat("obedience", 70, 55)
                 $ Girl.change_stat("inhibition", 80, 55)
@@ -1127,7 +1127,7 @@ label Les_Prep(Girl=focused_Girl, BO=[]):
     $ primary_action = "lesbian"
     if action_context:
         $ renpy.pop_call()
-        $ action_context = 0
+        $ action_context = None
     $ Line = 0
     if Girl.Taboo:
         $ Girl.drain_word("no_taboo")
@@ -1137,7 +1137,7 @@ label Les_Prep(Girl=focused_Girl, BO=[]):
 
 label Les_Cycle(Girl=focused_Girl):
     $ Girl = GirlCheck(Girl)
-    while Round > 0:
+    while round > 0:
         call shift_focus (Girl)
         call Les_Launch (Girl)
         $ Girl.lust_face()
@@ -1251,7 +1251,7 @@ label Les_Cycle(Girl=focused_Girl):
         call Sex_Dialog (Girl, Partner)
 
         $ counter += 1
-        $ Round -= 1
+        $ round -= 1
 
         $ Player.focus = 50 if not Player.semen and Player.focus >= 50 else Player.focus
 
@@ -1293,14 +1293,14 @@ label Les_Cycle(Girl=focused_Girl):
         $ Player.focus -= 12 if Player.focusing and Player.focus > 50 else 0
 
         if "unseen" in Girl.recent_history:
-            if Round == 10:
+            if round == 10:
                 "It's getting a bit late, [Girl.name] and [Partner.name] will probably be wrapping up soon."
-            elif Round == 5:
+            elif round == 5:
                 "They're definitely going to stop soon."
         else:
-            if Round == 10:
+            if round == 10:
                 call Sex_Basic_Dialog (Girl, 10)
-            elif Round == 5:
+            elif round == 5:
                 call Sex_Basic_Dialog (Girl, 5)
 
     $ Girl.change_face("_bemused", 0)
@@ -1504,7 +1504,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
                 ch_s "Oh, yes, Ms. Frost. We would not wish to give the wrong impression."
             else:
                 ch_e "I can't imagine why you would think I would engage in such behavior with a student!"
-            call Remove_Girl (EmmaX)
+            call remove_girl (EmmaX)
             "She quickly leaves the room."
             return 0
 
@@ -2080,7 +2080,7 @@ label Les_Change(Primary=0, Secondary=Partner, D20S=0, PrimaryLust=0, SecondaryL
 
 
 
-label Poly_Start(Newbie=0, Round2=0, Asked=0):
+label Poly_Start(Newbie=0, round2=0, Asked=0):
 
 
 
@@ -2103,7 +2103,7 @@ label Poly_Start(Newbie=0, Round2=0, Asked=0):
                 $ Player.Harem.append(Asked)
 
     if "polystart" in Player.daily_history:
-        if Round2 and Asked:
+        if round2 and Asked:
             "You pull [Player.Harem[0].name] aside for a moment."
             ch_p "Hey, have you changed your mind about [Newbie.name] lately?"
             if Player.Harem[0] == RogueX:
@@ -2126,7 +2126,7 @@ label Poly_Start(Newbie=0, Round2=0, Asked=0):
     $ Player.daily_history.append("polystart")
 
     if len(Player.Harem) >= 2:
-        call Harem_Start (Newbie, Round2)
+        call Harem_Start (Newbie, round2)
         return
 
 
@@ -2136,7 +2136,7 @@ label Poly_Start(Newbie=0, Round2=0, Asked=0):
     call clear_the_room (Player.Harem[0])
 
 
-    if Round2:
+    if round2:
         "You pull [Party[0].name] aside for a moment."
         ch_p "Hey, have you changed your mind about [Newbie.name] lately?"
     else:
@@ -2637,9 +2637,9 @@ label Poly_Start(Newbie=0, Round2=0, Asked=0):
             elif Party[0] == JubesX:
                 ch_v "Well, I'm out then."
             $ Party[0].traits.append("ex")
-            $ Party[0].Break[0] = 5 + Party[0].Break[1] + Party[0].Cheated
+            $ Party[0].broken_up[0] = 5 + Party[0].broken_up[1] + Party[0].Cheated
             $ Player.Harem.remove(Party[0])
-            call Remove_Girl (Party[0])
+            call remove_girl (Party[0])
 
 
     $ Party = []
@@ -2658,7 +2658,7 @@ label Poly_Start(Newbie=0, Round2=0, Asked=0):
 
 
 
-label Harem_Start(Newbie=0, Round2=0):
+label Harem_Start(Newbie=0, round2=0):
 
 
 
@@ -2678,7 +2678,7 @@ label Harem_Start(Newbie=0, Round2=0):
 
     $ Party[0].change_face("_bemused")
     $ Party[1].change_face("_bemused")
-    if Round2:
+    if round2:
         "You call [Party[0].name] and [Party[1].name] over."
         ch_p "I was wondering if you'd changed your mind about [Newbie.name]."
     else:
@@ -3305,10 +3305,10 @@ label Harem_Start(Newbie=0, Round2=0):
                     elif Party[0] == JubesX:
                         ch_v "Well, I'm out then."
                     $ Party[Count].traits.append("ex")
-                    $ Party[Count].Break[0] = 5 + Party[Count].Break[1] + Party[Count].Cheated
+                    $ Party[Count].broken_up[0] = 5 + Party[Count].broken_up[1] + Party[Count].Cheated
 
                     $ Player.Harem.remove(Party[Count])
-                    call Remove_Girl (Party[Count])
+                    call remove_girl (Party[Count])
                 $ Count += 1
 
 
@@ -3330,50 +3330,50 @@ label Harem_Start(Newbie=0, Round2=0):
     $ Count = 0
     return
 
-label Harem_Initiation(BO=[], BO2=[]):
+label Harem_Initiation(temp_Girls=[], temp_Girls2=[]):
 
 
-    $ BO = Player.Harem[:]
-    while BO:
-        $ BO2 = Player.Harem[:]
-        while BO2:
-            if BO[0] != BO2[0] and "poly " + BO2[0].tag not in BO[0].traits:
-                $ BO[0].traits.append("poly " + BO2[0].tag)
-            if BO[0] != BO2[0] and "saw with " + BO2[0].tag in BO[0].traits:
-                $ BO[0].drain_word("saw with " + BO2[0].tag,0,0,1)
-            $ BO2.remove(BO2[0])
-        $ BO.remove(BO[0])
+    $ temp_Girls = Player.Harem[:]
+    while temp_Girls:
+        $ temp_Girls2 = Player.Harem[:]
+        while temp_Girls2:
+            if temp_Girls[0] != temp_Girls2[0] and "poly " + temp_Girls2[0].tag not in temp_Girls[0].traits:
+                $ temp_Girls[0].traits.append("poly " + temp_Girls2[0].tag)
+            if temp_Girls[0] != temp_Girls2[0] and "saw with " + temp_Girls2[0].tag in temp_Girls[0].traits:
+                $ temp_Girls[0].drain_word("saw with " + temp_Girls2[0].tag,0,0,1)
+            $ temp_Girls2.remove(temp_Girls2[0])
+        $ temp_Girls.remove(temp_Girls[0])
     return
 
 
 
 
-label Call_For_Les(Girl=0, Girl2=0, BO=[]):
+label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
 
 
     if Girl not in active_Girls:
-        $ BO = active_Girls[:]
-        while BO and Girl not in active_Girls:
-            if BO[0] not in Party and BO[0].location != bg_current and "les" in BO[0].recent_history:
+        $ temp_Girls = active_Girls[:]
+        while temp_Girls and Girl not in active_Girls:
+            if temp_Girls[0] not in Party and temp_Girls[0].location != bg_current and "lesbian" in temp_Girls[0].recent_history:
 
 
-                $ Girl = BO[0]
-                $ BO = [1]
-            $ BO.remove(BO[0])
+                $ Girl = temp_Girls[0]
+                $ temp_Girls = [1]
+            $ temp_Girls.remove(temp_Girls[0])
     if Girl in active_Girls and not Girl2:
 
-        $ BO = active_Girls[:]
-        $ BO.remove(Girl)
-        while BO:
-            if BO[0] not in Party and BO[0].location != bg_current and "les" in BO[0].recent_history:
+        $ temp_Girls = active_Girls[:]
+        $ temp_Girls.remove(Girl)
+        while temp_Girls:
+            if temp_Girls[0] not in Party and temp_Girls[0].location != bg_current and "lesbian" in temp_Girls[0].recent_history:
 
 
-                if approval_check(BO[0], 1600 - BO[0].SEXP, TabM=0):
-                    $ Girl2 = BO[0]
-                    $ BO = [1]
+                if approval_check(temp_Girls[0], 1600 - temp_Girls[0].SEXP, TabM=0):
+                    $ Girl2 = temp_Girls[0]
+                    $ temp_Girls = [1]
                 else:
                     return 0
-            $ BO.remove(BO[0])
+            $ temp_Girls.remove(temp_Girls[0])
     if Girl not in active_Girls or Girl2 not in active_Girls:
 
         return 0
@@ -3515,8 +3515,8 @@ label Call_For_Les(Girl=0, Girl2=0, BO=[]):
     $ Girl2.Taboo = 0
     $ Line = 0
 
-    $ Girl.drain_word("les",1,0)
-    $ Girl2.drain_word("les",1,0)
+    $ Girl.drain_word("lesbian",1,0)
+    $ Girl2.drain_word("lesbian",1,0)
 
     $ Girl.add_word(0,"lesbian","lesbian")
     $ Girl2.add_word(0,"lesbian","lesbian")
@@ -3557,9 +3557,9 @@ label Call_For_Les(Girl=0, Girl2=0, BO=[]):
                 $ Line = 2
             "Leave quietly":
                 "You leave the girls to their business and slip out."
-                $ Girl.Thirst -= 30
+                $ Girl.thirst -= 30
                 $ Girl.lust = 20
-                $ Girl2.Thirst -= 30
+                $ Girl2.thirst -= 30
                 $ Girl2lust = 20
                 $ Girl.change_stat("love", 90, -3)
                 $ Girl2.change_stat("love", 90, -3)

@@ -256,14 +256,14 @@ label HWchange_stat(Girl=0, HWType=0, HWCheck=0, HWValue=0, HWStore=0):
     return
 
 
-label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
+label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
 
 
 
 
 
     $ bg_current = "HW Party"
-    call Remove_Girl ("All")
+    call remove_girl ("All")
     
     $ Party = []
     $ Present = []
@@ -279,8 +279,8 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
     $ Present.append(RogueX)
     $ RogueX.location = "HW Party"
     $ RogueX.add_word(1,0,RogueX.hair,0,"halloween")
-    $ RogueX.OutfitDay = "costume"
-    $ RogueX.Outfit = RogueX.OutfitDay
+    $ RogueX.outfitDay = "costume"
+    $ RogueX.outfit = RogueX.outfitDay
     $ RogueX.change_outfit(Changed=1)
 
     call shift_focus (RogueX)
@@ -440,8 +440,8 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
     $ Present.append(KittyX)
     $ KittyX.location = "HW Party"
     $ KittyX.add_word(1,0,KittyX.hair,0,"halloween")
-    $ KittyX.OutfitDay = "costume"
-    $ KittyX.Outfit = KittyX.OutfitDay
+    $ KittyX.outfitDay = "costume"
+    $ KittyX.outfit = KittyX.outfitDay
     $ KittyX.change_outfit(Changed=1)
 
     call shift_focus (KittyX)
@@ -609,8 +609,8 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
     $ Present.append(LauraX)
     $ LauraX.location = "HW Party"
     $ LauraX.add_word(1,0,LauraX.hair,0,"halloween")
-    $ LauraX.OutfitDay = "costume"
-    $ LauraX.Outfit = LauraX.OutfitDay
+    $ LauraX.outfitDay = "costume"
+    $ LauraX.outfit = LauraX.outfitDay
     $ LauraX.change_outfit(Changed=1)
 
     call shift_focus (LauraX)
@@ -715,7 +715,7 @@ label Halloween_Party_Entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
                     ease 0.8 pos (1200,50)
                 pause 0.8
                 "[LauraX.name] stalks out of the party for the night."
-                call Remove_Girl (LauraX)
+                call remove_girl (LauraX)
 
                 $ KittyX.change_face("_angry")
                 call HWchange_stat (KittyX, "love", 70, 2)
@@ -831,8 +831,8 @@ label Halloween_Jean:
     $ Present.append(JeanX)
     $ JeanX.location = "HW Party"
     $ JeanX.add_word(1,0,JeanX.hair,0,"halloween")
-    $ JeanX.OutfitDay = "costume"
-    $ JeanX.Outfit = JeanX.OutfitDay
+    $ JeanX.outfitDay = "costume"
+    $ JeanX.outfit = JeanX.outfitDay
     $ JeanX.change_outfit(Changed=1)
 
     call shift_focus (JeanX)
@@ -981,7 +981,7 @@ label Halloween_Jean:
             $ JeanX.change_face("_angry",Eyes="_side")
             ch_j "Is that the girl with the water powers?"
             $ JeanX.change_face("_angry",Mouth="_surprised")
-            ch_j "Wait, -do- we have a girl with water powers?"
+            ch_j "wait, -do- we have a girl with water powers?"
             $ JeanX.change_face("_normal")
             ch_j "Anyway. . . I whammied some nerd to make me a costume with red hair."
             ch_j "Is this her?"
@@ -1085,8 +1085,8 @@ label Halloween_Jean:
     $ StormX.change_face("_smile")
     $ StormX.location = "HW Party"
     $ StormX.add_word(1,0,StormX.hair,0,"halloween")
-    $ StormX.OutfitDay = "costume"
-    $ StormX.Outfit = StormX.OutfitDay
+    $ StormX.outfitDay = "costume"
+    $ StormX.outfit = StormX.outfitDay
     $ StormX.change_outfit(Changed=1)
 
     call shift_focus (StormX)
@@ -1252,8 +1252,8 @@ label Halloween_Emma:
     $ EmmaX.location = "HW Party"
     $ EmmaX.change_face("_smile")
     $ EmmaX.add_word(1,0,EmmaX.hair,0,"halloween")
-    $ EmmaX.OutfitDay = "costume"
-    $ EmmaX.Outfit = EmmaX.OutfitDay
+    $ EmmaX.outfitDay = "costume"
+    $ EmmaX.outfit = EmmaX.outfitDay
     $ EmmaX.change_outfit(Changed=1)
 
     call shift_focus (EmmaX)
@@ -1539,8 +1539,8 @@ label Halloween_Skip:
         if Options[0] not in Nearby:
             $ Nearby.append(Options[0])
         $ Options[0].location = "HW Party"
-        $ Options[0].OutfitDay = "costume"
-        $ Options[0].Outfit = EmmaX.OutfitDay
+        $ Options[0].outfitDay = "costume"
+        $ Options[0].outfit = EmmaX.outfitDay
         $ Options[0].change_outfit(Changed=1)
         $ Options[0].add_word(1,0,0,0,"halloween")
 
@@ -1550,7 +1550,7 @@ label Halloween_Skip:
 label Halloween_Party:
 
     call Halloween_Events
-    if Round <= 10:
+    if round <= 10:
         call Halloween_Ending
     menu:
         "You are at the Halloween Party. What would you like to do?"
@@ -1574,7 +1574,7 @@ label Halloween_Party:
 label Halloween_Events:
     if not HWEvents:
 
-        $ Round -= 15
+        $ round -= 15
         $ HWEvents = ["Scott is dressed like Ryu. He tries to do a Hadouken, but with his eyes.",
                             "Kurt is dressed like Sasuke. He keeps teleporting around and dropping logs everywhere.",
                             "Bobby is dressed like Sub Zero. He keeps yelling \"get over here!\", but everyone looks confused.",
@@ -1598,7 +1598,7 @@ label Halloween_Events:
         $ Player.add_word(1,"halloween","halloween",0,"halloween")
         "Introductions out of the way, you take a look around the party in progress."
     "[HWEvents[0]]"
-    $ Round -= 5
+    $ round -= 5
     $ HWEvents.remove(HWEvents[0])
     return
 
@@ -1627,7 +1627,7 @@ label Halloween_Ending(Girl=0):
             $ Girl = 0
 
     $ bg_current = "bg_player"
-    call Wait
+    call wait
     call girls_location
     if Girl:
         $ Girl.location = "bg_player"

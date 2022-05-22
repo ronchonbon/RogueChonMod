@@ -1,15 +1,11 @@
-label Sleepover(Line=0, BO=[]):
-
-
-
-
+label sleepover(Line=0):
     $ Party = []
 
-    $ BO = all_Girls[:]
-    while BO:
-        if BO[0].location == bg_current:
-            $ Party.append(BO[0])
-        $ BO.remove(BO[0])
+    $ temp_Girls = all_Girls[:]
+    while temp_Girls:
+        if temp_Girls[0].location == bg_current:
+            $ Party.append(temp_Girls[0])
+        $ temp_Girls.remove(temp_Girls[0])
 
 
     if bg_current == "bg_player" and "met" in StormX.history and "met" not in JubesX.history:
@@ -17,7 +13,7 @@ label Sleepover(Line=0, BO=[]):
         call clear_the_room ("All", 1, 0)
         "It's getting late, so you go to sleep."
         call Jubes_Meet
-        call Wait
+        call wait
         return
 
     if not Party and bg_current == "bg_player":
@@ -27,14 +23,14 @@ label Sleepover(Line=0, BO=[]):
         "It's getting late, so you go to sleep."
         if "met" in StormX.history and "met" not in JubesX.history:
             call Jubes_Meet
-        call Wait
+        call wait
         return
 
     while len(Party) > 2:
 
         $ Party.remove(Party[2])
 
-    if Day <= 4:
+    if day <= 4:
 
         $ Party = []
     elif Party and Party[0]:
@@ -42,18 +38,18 @@ label Sleepover(Line=0, BO=[]):
 
     if bg_current != "bg_player":
 
-        $ BO = all_Girls[:]
-        while BO:
-            if BO[0].home == bg_current:
-                if BO[0] not in Party:
+        $ temp_Girls = all_Girls[:]
+        while temp_Girls:
+            if temp_Girls[0].home == bg_current:
+                if temp_Girls[0] not in Party:
 
-                    "[BO[0].name] probably wouldn't appreciate you staying over, you head back to your own room."
-                    call Remove_Girl ("All")
+                    "[temp_Girls[0].name] probably wouldn't appreciate you staying over, you head back to your own room."
+                    call remove_girl ("All")
                     jump Return_Player
-                if BO[0] != Party[0]:
+                if temp_Girls[0] != Party[0]:
                     $ Party.reverse()
-                $ BO = [1]
-            $ BO.remove(BO[0])
+                $ temp_Girls = [1]
+            $ temp_Girls.remove(temp_Girls[0])
 
 
     if bg_current == "bg_player":
@@ -100,7 +96,7 @@ label Sleepover(Line=0, BO=[]):
         "Tell Oni \"[Party] - [bg_current]\""
 
 
-    if Day <= 4:
+    if day <= 4:
 
         jump Return_Player
 
@@ -111,7 +107,7 @@ label Sleepover(Line=0, BO=[]):
                 jump Return_Player
             else:
                 ch_e "I should probably get going, we wouldn't want any rumors to spread."
-                call Remove_Girl (EmmaX)
+                call remove_girl (EmmaX)
         elif len(Party) >= 2 and "three" not in EmmaX.history:
 
             if (bg_current == EmmaX.home or bg_current == "bg_player") and approval_check(EmmaX, 1100, "LI"):
@@ -120,12 +116,12 @@ label Sleepover(Line=0, BO=[]):
                 ch_e "[Party[1].name] dear, I need a moment with [Player.name], but you can leave."
                 $ Party[1].change_face("_confused",1)
                 Party[1].voice "Oh, ok. . ."
-                call Remove_Girl (Party[1])
+                call remove_girl (Party[1])
                 ch_e "Sorry about that, but I had to discuss something with you in private."
             else:
 
                 ch_e "Yes, I really should be leaving, don't let me bother you two."
-                call Remove_Girl (EmmaX)
+                call remove_girl (EmmaX)
             if "sleeptime" not in EmmaX.history:
                 $ EmmaX.history.append("sleeptime")
         if not Party or (EmmaX not in Party and bg_current == EmmaX.home):
@@ -377,8 +373,8 @@ label Sleepover(Line=0, BO=[]):
             jump Return_Player
         else:
 
-            call Remove_Girl (Party[0])
-            call Sleepover
+            call remove_girl (Party[0])
+            call sleepover
             return
 
 
@@ -614,29 +610,29 @@ label Sleepover(Line=0, BO=[]):
         call clear_the_room ("All", 1)
 
         "It's getting late, so you go to sleep."
-        call Wait
+        call wait
         return
 
     if bg_current != "bg_player" and bg_current != Party[0].home:
 
         "You probably shouldn't sleep here, you head back to your own room."
-        call Remove_Girl ("All")
+        call remove_girl ("All")
         $ renpy.pop_call()
         jump player_room
 
-    jump Sleepover_Morning
+    jump sleepover_Morning
 
 
 label Return_Player:
 
     $ del Party[:]
-    $ BO = all_Girls[:]
-    $ renpy.random.shuffle(BO)
-    while BO:
-        if bg_current != BO[0].home and BO[0].location == bg_current:
-            "[BO[0].name] heads out."
-            $ BO[0].location = BO[0].home
-        $ BO.remove(BO[0])
+    $ temp_Girls = all_Girls[:]
+    $ renpy.random.shuffle(temp_Girls)
+    while temp_Girls:
+        if bg_current != temp_Girls[0].home and temp_Girls[0].location == bg_current:
+            "[temp_Girls[0].name] heads out."
+            $ temp_Girls[0].location = temp_Girls[0].home
+        $ temp_Girls.remove(temp_Girls[0])
     if bg_current != "bg_player":
         "You head back to your room."
     $ bg_current = "bg_player"
@@ -645,13 +641,13 @@ label Return_Player:
 
 
 
-label Sleepover_Morning:
+label sleepover_Morning:
 
-    $ BO = all_Girls[:]
-    while BO:
-        if BO[0].location == bg_current and BO[0] not in Party:
-            call Remove_Girl (BO[0])
-        $ BO.remove(BO[0])
+    $ temp_Girls = all_Girls[:]
+    while temp_Girls:
+        if temp_Girls[0].location == bg_current and temp_Girls[0] not in Party:
+            call remove_girl (temp_Girls[0])
+        $ temp_Girls.remove(temp_Girls[0])
 
     call shift_focus (Party[0])
 
@@ -660,7 +656,7 @@ label Sleepover_Morning:
         $ Party[0].change_outfit("nude")
     else:
         $ Party[0].change_outfit("sleep")
-    $ Party[0].OutfitDay == Party[0].Outfit
+    $ Party[0].today_outfit == Party[0].outfit
     if len(Party) >= 2:
 
         if Party[1] == StormX and not StormX.sleepwear[0] and StormX.Taboo < 20:
@@ -668,7 +664,7 @@ label Sleepover_Morning:
             $ Party[1].change_outfit("nude")
         else:
             $ Party[1].change_outfit("sleep")
-        $ Party[1].OutfitDay == Party[1].Outfit
+        $ Party[1].today_outfit == Party[1].outfit
         "The girls change into their sleepwear."
     else:
         "[Party[0].name] changes into her sleepwear."
@@ -697,7 +693,7 @@ label Sleepover_Morning:
         elif Party[1] == KittyX:
             ch_k "Night, [KittyX.player_petname]"
         elif Party[1] == EmmaX:
-            ch_e "Lights out."
+            ch_e "lights out."
         elif Party[1] == LauraX:
             ch_l "Night."
         elif Party[1] == JeanX:
@@ -734,25 +730,25 @@ label Sleepover_Morning:
 
     $ time_index = 0
     $ current_time = time_options[(time_index)]
-    $ Day += 1
+    $ day += 1
 
-    if Weekday < 6:
-        $ Weekday += 1
+    if weekday < 6:
+        $ weekday += 1
     else:
-        $ Weekday = 0
+        $ weekday = 0
 
 
 
-    $ DayofWeek = Week[Weekday]
+    $ day_of_week = week[weekday]
     hide NightMask onlayer nightmask
     $ Player.semen = Player.max_semen
     $ Player.spunk = 0
-    $ Round = 50
+    $ round = 50
 
-    $ BO = Party[:]
-    while BO:
-        $ BO[0].remaining_actions = BO[0].max_actions
-        $ BO.remove(BO[0])
+    $ temp_Girls = Party[:]
+    while temp_Girls:
+        $ temp_Girls[0].remaining_actions = temp_Girls[0].max_actions
+        $ temp_Girls.remove(temp_Girls[0])
 
 
 
@@ -1278,33 +1274,33 @@ label Sleepover_Morning:
 
     $ time_index = 3
     $ current_time = time_options[(time_index)]
-    $ Day -= 1
+    $ day -= 1
 
-    if Weekday == 0:
-        $ Weekday = 6
+    if weekday == 0:
+        $ weekday = 6
     else:
-        $ Weekday -= 1
+        $ weekday -= 1
 
-    $ DayofWeek = Week[Weekday]
+    $ day_of_week = week[weekday]
 
-    call Wait
+    call wait
 
-    $ BO = all_Girls[:]
-    while BO:
-        if "leaving" in BO[0].recent_history or BO[0].location == bg_current:
+    $ temp_Girls = all_Girls[:]
+    while temp_Girls:
+        if "leaving" in temp_Girls[0].recent_history or temp_Girls[0].location == bg_current:
 
 
-            $ Party.append(BO[0])
-            $ BO[0].location = bg_current
-            if "leaving" in BO[0].recent_history:
-                $ BO[0].recent_history.remove("leaving")
-        if "morningwood" in BO[0].traits:
+            $ Party.append(temp_Girls[0])
+            $ temp_Girls[0].location = bg_current
+            if "leaving" in temp_Girls[0].recent_history:
+                $ temp_Girls[0].recent_history.remove("leaving")
+        if "morningwood" in temp_Girls[0].traits:
 
-            $ BO[0].recent_history.append("blowjob")
-            $ BO[0].daily_history.append("blowjob")
-            $ BO[0].daily_history.append("morningwood")
-            $ BO[0].traits.remove("morningwood")
-        $ BO.remove(BO[0])
+            $ temp_Girls[0].recent_history.append("blowjob")
+            $ temp_Girls[0].daily_history.append("blowjob")
+            $ temp_Girls[0].daily_history.append("morningwood")
+            $ temp_Girls[0].traits.remove("morningwood")
+        $ temp_Girls.remove(temp_Girls[0])
 
 
 
@@ -1389,10 +1385,10 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
         if "hungry" in Party[0].traits and D20 >= 2:
 
             $ Girls[0] += 2
-        if Party[0].Thirst >= 60:
+        if Party[0].thirst >= 60:
 
             $ Girls[0] += 2
-        elif Party[0].Thirst >= 30:
+        elif Party[0].thirst >= 30:
 
             $ Girls[0] += 1
         if Party[0].lust >= 50:
@@ -1433,10 +1429,10 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
         if "hungry" in Party[1].traits and D20 >= 2:
 
             $ Girls[1] += 2
-        if Party[1].Thirst >= 60:
+        if Party[1].thirst >= 60:
 
             $ Girls[1] += 2
-        elif Party[1].Thirst >= 30:
+        elif Party[1].thirst >= 30:
 
             $ Girls[1] += 1
         if Party[1].lust >= 50:
@@ -1529,7 +1525,7 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
         $ Party[0].daily_history.append("blowjob")
         $ Party[0].daily_history.append("morningwood")
         $ Party[0].traits.append("morningwood")
-        call Sleepover_MorningWood
+        call sleepover_MorningWood
 
         call Sex_Over (0)
     else:
@@ -1545,7 +1541,7 @@ label Morningwood_Check(Girls=[0,-3], D20=0):
 
 
 
-label Sleepover_MorningWood:
+label sleepover_MorningWood:
 
     $ Player.add_word(1,"interruption")
     call shift_focus (Party[0])
@@ -2120,15 +2116,15 @@ label Sleepover_MorningWood:
 
             $ time_index = 3
             $ current_time = time_options[(time_index)]
-            $ Day -= 1
+            $ day -= 1
 
-            if Weekday == 0:
-                $ Weekday = 6
+            if weekday == 0:
+                $ weekday = 6
             else:
-                $ Weekday -= 1
+                $ weekday -= 1
 
-            $ DayofWeek = Week[Weekday]
-            call Wait
+            $ day_of_week = week[weekday]
+            call wait
 
             jump Return_Player
 
@@ -2139,7 +2135,7 @@ label Sleepover_MorningWood:
 
         $ Line = 0
         $ action_speed = 1
-        $ action_context = 0
+        $ action_context = None
         if Partner:
             $ second_girl_primary_action = "blowjob"
         call Morning_Partner

@@ -4,7 +4,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
 
     if action_context == "skip" and Line:
 
-        $ action_context = 0
+        $ action_context = None
         return
 
     if primary_action == "handjob":
@@ -1938,7 +1938,7 @@ label Offhand_Set(action_context=action_context, Tempprimary_action=offhand_acti
     else:
         "There's some kind of bug here, let Oni know."
 
-    $ action_context = 0
+    $ action_context = None
     return
 
 
@@ -2838,13 +2838,13 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
             if girl_offhand_action == "kiss girl" and GirlA.lust <= 20 and GirlA.event_counter["orgasmed"]< 1:
 
                 return
-            elif girl_offhand_action and position_timer <= Round:
+            elif girl_offhand_action and position_timer <= round:
 
                 return
         elif second_girl_primary_action and D20 < 15 and second_girl_primary_action != "watch":
 
             return
-        elif second_girl_primary_action and position_timer <= Round:
+        elif second_girl_primary_action and position_timer <= round:
 
             return
     $ Options = ["watch", "masturbation", "masturbation", "masturbation"]
@@ -3177,10 +3177,10 @@ label Threeway_Set(GirlA=Secondary, Preset=0, Mode=0, Action=second_girl_primary
 
 
     if Preset:
-        $ position_timer = Round - 2
+        $ position_timer = round - 2
     else:
 
-        $ position_timer = Round - 1
+        $ position_timer = round - 1
     $ TempLust2 += 2
     if Mode == "lesbian":
 
@@ -4561,7 +4561,6 @@ label start_of_sex_narration(Girl, action):
         "glances around to see if anyone notices what she's doing"])
 
     $ first_undressing_line = renpy.random.choice(["hesitantly pulls down your pants"])
-
     $ undressing_line = renpy.random.choice(["pulls down your pants"])
 
     if action == "sex":
@@ -4615,9 +4614,7 @@ label start_of_sex_narration(Girl, action):
             "backs her ass up against your cock"])
 
         $ player_first_action_line = None
-
         $ player_action_line = None
-
         $ final_line = None
 
     if Taboo:
@@ -4683,5 +4680,53 @@ label start_of_sex_narration(Girl, action):
 
             if final_line:
                 "She [final_line]."
+
+    return
+
+label knows_her_place_narrations(Girl, action):
+    $ lines = ["[Girl.name] doesn't seem to be into this, but she knows her place.",
+        "[Girl.name] doesn't seem to be into this, you're lucky she's so obedient."]
+
+    "[line]"
+
+    return
+
+label not_ready_to_stop_narrations(Girl, action):
+    $ lines = ["She continues to shake a little with pleasure.",
+        "She is breathing heavily as your cock rubs inside her.",
+        "She slowly turns back towards you and smiles.",
+        "She doesn't seem ready to stop."]
+
+    "[line]"
+
+    return
+
+label auto_accepted_narrations(Girl, action)
+    if action == "fondle_thighs":
+        "As you caress her thigh, [Girl.name] glances at you, and smiles."
+    elif action == "fondle_breasts":
+        "As you cup her breast, [Girl.name] gently nods."
+    elif action == "suck_breasts":
+        "As you dive in, [Girl.name] seems a bit surprised, but just makes a little \"coo.\""
+    elif action == "fondle_pussy":
+        "As your hand creeps up her thigh, [Girl.name] seems a bit surprised, but then nods."
+    elif action == "finger_pussy":
+        "As you slide a finger in, [Girl.name] seems a bit surprised, but seems into it."
+    elif action == "eat_pussy":
+        $ line = renpy.random.choice(["As you crouch down and start to lick her pussy, [Girl.name] startles, but then sinks into the sensation.",
+            "As you crouch down and start to lick her pussy, [Girl.name] jumps, but then softens.",
+            "As you crouch down and start to lick her pussy, [Girl.name] starts, but then softens."])
+        "[line]"
+    elif action == "fondle_ass":
+        $ line = renpy.random.choice(["As your hand creeps down her backside, [Girl.name] seems a bit surprised, but then nods.",
+            "As your hand creeps down her backside, [Girl.name] jumps a bit, and then relaxes.",
+            "As your hand creeps down her backside, [Girl.name] shivers a bit, and then relaxes."])
+        "[line]"
+    elif action == "finger_ass":
+        "As you slide a finger in, [Girl.name] tightens around it in surprise, but seems into it."
+    elif action == "eat_ass":
+        "As you crouch down and start to lick her asshole, [Girl.name] startles briefly, but then begins to melt."
+    elif action in dildo_actions or action in sex_actions:
+        "[Girl.name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
 
     return

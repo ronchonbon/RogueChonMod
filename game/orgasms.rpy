@@ -98,7 +98,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
             call shift_focus (Partner)
             call AllReset (Partner)
 
-            $ action_context = 0
+            $ action_context = None
             "[Girl.name] Steps back in."
 
             call AllReset (Girl)
@@ -138,9 +138,9 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                 elif Girl == JeanX:
                     ch_j "Where do you think you're going?"
                 elif Girl == StormX:
-                    ch_s "Wait. . ."
+                    ch_s "wait. . ."
                 elif Girl == JubesX:
-                    ch_v "Wait, you're letting it go to waste?"
+                    ch_v "wait, you're letting it go to waste?"
                 $ Girl.blushing = "_blush2"
                 menu:
                     extend ""
@@ -449,7 +449,7 @@ label Girl_In_Mouth:
 
     $ Player.cock_position = "out"
     if action_context == "auto" or action_context == "warn":
-        $ action_context = 0
+        $ action_context = None
         if not renpy.showing(Girl.tag+"_BJ_Animation"):
             call expression Girl.tag+"_BJ_Launch" pass ("cum")
         $ action_speed = 2
@@ -706,7 +706,7 @@ label Girl_In_Mouth:
         jump Girl_Swallowed
 
 
-    $ action_context = 0
+    $ action_context = None
     "You ask if you can cum in her mouth."
     if renpy.showing(Girl.tag+"_PJ_Animation"):
         call expression Girl.tag + "_Kissing_Launch" pass (primary_action, 0)
@@ -1669,7 +1669,7 @@ label Girl_Orgasm_After:
     $ Player.semen -= 1
     $ Player.focus = 0
     $ action_speed = 0
-    $ Girl.Thirst -= 10 if Girl.Thirst > 50 else 5
+    $ Girl.thirst -= 10 if Girl.thirst > 50 else 5
     menu:
         "Want [Girl.name] to clean you off?"
         "Yes":
@@ -1689,7 +1689,7 @@ label Girl_Orgasm_After:
             pass
     if Girl.spunk:
         call Girl_Cleanup (Girl)
-    $ action_context = 0
+    $ action_context = None
     return
 
 label Girl_CleanCock(Girl=0):
@@ -1756,13 +1756,13 @@ label Girl_CleanCock(Girl=0):
 
 
 
-label Girl_Cumming(Girl=0, Quick=0, BO=[]):
+label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
 
     if Girl not in all_Girls:
         return
 
-    $ Girl.drain_word("gonnafap",1,1,0)
-    $ Girl.drain_word("wannafap",1,1,0)
+    $ Girl.drain_word("will_masturbate",1,1,0)
+    $ Girl.drain_word("wants_to_masturbate",1,1,0)
 
     if Girl.location == "bg_teacher" and bg_current == "bg_classroom":
         pass
@@ -1789,8 +1789,8 @@ label Girl_Cumming(Girl=0, Quick=0, BO=[]):
                 Girl.name + " stiffens and lets out a low moan.",
                 Girl.name + "'s body quivers and suddenly goes still."])
     "[Line]"
-    $ Girl.Thirst = int(Girl.Thirst/2)
-    $ Girl.Thirst -= 5
+    $ Girl.thirst = int(Girl.thirst/2)
+    $ Girl.thirst -= 5
 
     $ Girl.session_orgasms += 1
     $ Girl.event_counter["orgasmed"]+= 1
@@ -1879,15 +1879,15 @@ label Girl_Cumming(Girl=0, Quick=0, BO=[]):
         $ Girl.change_stat("obedience", 70, 2)
 
 
-        $ BO = all_Girls[:]
-        $ BO.remove(Girl)
-        while BO:
-            if BO[0].location == bg_current and "noticed "+Girl.tag in BO[0].recent_history:
-                $ BO[0].lust += 15 if BO[0].GirlLikeCheck(Girl) >= 500 else 10
-                $ BO[0].lust += 5 if BO[0].event_counter["been_with_girl"] >= 5 else 0
-            if BO[0].lust >= 100:
-                call Girl_Cumming (BO[0], 1)
-            $ BO.remove(BO[0])
+        $ temp_Girls = all_Girls[:]
+        $ temp_Girls.remove(Girl)
+        while temp_Girls:
+            if temp_Girls[0].location == bg_current and "noticed "+Girl.tag in temp_Girls[0].recent_history:
+                $ temp_Girls[0].lust += 15 if temp_Girls[0].GirlLikeCheck(Girl) >= 500 else 10
+                $ temp_Girls[0].lust += 5 if temp_Girls[0].event_counter["been_with_girl"] >= 5 else 0
+            if temp_Girls[0].lust >= 100:
+                call Girl_Cumming (temp_Girls[0], 1)
+            $ temp_Girls.remove(temp_Girls[0])
 
 
         if (primary_action == "blowjob" or primary_action == "handjob") and not offhand_action:

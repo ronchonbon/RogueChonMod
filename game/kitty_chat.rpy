@@ -16,7 +16,7 @@ label Kitty_Relationship:
                     $ KittyX.change_face("_angry", 1)
                     ch_k "Still \"nope.\""
                     return
-                elif KittyX.Break[0]:
+                elif KittyX.broken_up[0]:
                     $ KittyX.change_face("_angry", 1)
                     ch_k "Not while you're dating her. . ."
                     if Player.Harem:
@@ -423,7 +423,7 @@ label Kitty_Monogamy:
 
     menu:
         "Could you not hook up with other girls?" if "mono" not in KittyX.traits:
-            if KittyX.Thirst >= 60 and not approval_check(KittyX, 1700, "LO", TabM=0):
+            if KittyX.thirst >= 60 and not approval_check(KittyX, 1700, "LO", TabM=0):
 
                 $ KittyX.change_face("_sly",1)
                 if "mono" not in KittyX.daily_history:
@@ -455,7 +455,7 @@ label Kitty_Monogamy:
 
                 $ KittyX.change_face("_sly",1,Eyes="_side")
                 ch_k "Ok."
-            elif KittyX.Thirst >= 60 and not approval_check(KittyX, 1700, "LO", TabM=0):
+            elif KittyX.thirst >= 60 and not approval_check(KittyX, 1700, "LO", TabM=0):
 
                 $ KittyX.change_face("_sly",1)
                 if "mono" not in KittyX.daily_history:
@@ -511,7 +511,7 @@ label Kitty_Jumped:
     menu:
         ch_k "Um. . . I guess?"
         "Could you maybe just ask instead?" if "chill" not in KittyX.traits:
-            if KittyX.Thirst >= 60 and not approval_check(KittyX, 1500, "LO", TabM=0):
+            if KittyX.thirst >= 60 and not approval_check(KittyX, 1500, "LO", TabM=0):
 
                 $ KittyX.change_face("_surprised",2)
                 if "chill" not in KittyX.daily_history:
@@ -545,7 +545,7 @@ label Kitty_Jumped:
 
                 $ KittyX.change_face("_sly",1,Eyes="_side")
                 ch_k "Ok."
-            elif KittyX.Thirst >= 60 and not approval_check(KittyX, 600, "O", TabM=0):
+            elif KittyX.thirst >= 60 and not approval_check(KittyX, 600, "O", TabM=0):
 
                 $ KittyX.change_face("_angry",1)
                 if "chill" not in KittyX.daily_history:
@@ -960,7 +960,7 @@ label Kitty_SexChat:
 
 
 label Kitty_Chitchat(O=0, Options=["default","default","default"]):
-    $ Round -= 3 if Round > 3 else (Round-1)
+    $ round -= 3 if round > 3 else (round-1)
     if O:
         $ Options = [O]
     else:
@@ -979,7 +979,7 @@ label Kitty_Chitchat(O=0, Options=["default","default","default"]):
             call Kitty_Hungry
             return
         if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or approval_check(KittyX, 800, "I")):
-            if KittyX.location == bg_current and KittyX.Thirst >= 30 and "refused" not in KittyX.daily_history and "quicksex" not in KittyX.daily_history:
+            if KittyX.location == bg_current and KittyX.thirst >= 30 and "refused" not in KittyX.daily_history and "quicksex" not in KittyX.daily_history:
                 $ Girl.change_face("_smile",2,Brows="_sad")
                 ch_k "Hey, um . . . did you want to. . ."
                 ch_k ". . . sex?"
@@ -1828,7 +1828,7 @@ label Kitty_Summon(approval_bonus=approval_bonus):
             ch_k "It's kinda late? Maybe tomorrow."
             $ KittyX.recent_history.append("no_summon")
         return
-    elif "les" in KittyX.recent_history:
+    elif "lesbian" in KittyX.recent_history:
 
         if approval_check(KittyX, 2000):
             ch_k "I'm sorta with someone right now, [KittyX.player_petname], wanna join us?"
@@ -2019,7 +2019,7 @@ label Kitty_Summon(approval_bonus=approval_bonus):
         elif KittyX.location == "bg_campus":
             ch_k "I've got a nice spot in the shade."
             jump Campus
-        elif KittyX.location in PersonalRooms:
+        elif KittyX.location in personal_rooms:
             ch_k "See ya' in a bit. . ."
             $ bg_current = KittyX.location
             jump Misplaced
@@ -2237,10 +2237,10 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         call Gym_Clothes_Off ([KittyX])
         if KittyX.location == "bg_classroom":
             ch_k "Cool, study buddy!"
-            jump Class_Room_Entry
+            jump Class_Room_entry
         elif KittyX.location == "bg_dangerroom":
             ch_k "I'll be ready and waiting!"
-            jump Danger_Room_Entry
+            jump Danger_Room_entry
         elif KittyX.location == "bg_kitty":
             ch_k "I'll meet you there."
             jump Kitty_Room
@@ -2249,13 +2249,13 @@ label Kitty_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump player_room
         elif KittyX.location == "bg_showerroom":
             ch_k "I guess I'll see you there."
-            jump Shower_Room_Entry
+            jump Shower_Room_entry
         elif KittyX.location == "bg_campus":
             ch_k "Let's head over there."
-            jump Campus_Entry
+            jump Campus_entry
         elif KittyX.location == "bg_pool":
             ch_k "Ok, let's go."
-            jump Pool_Entry
+            jump Pool_entry
         else:
             ch_k "You know, I'll just meet you in my room."
             $ KittyX.location = "bg_kitty"
@@ -2315,21 +2315,21 @@ label Kitty_Wardrobe_Menu:
                 call Kitty_Clothes_Under
             "Accessories":
                 call Kitty_Clothes_Misc
-            "Outfits":
-                call Kitty_Clothes_Outfits
+            "outfits":
+                call Kitty_Clothes_outfits
             "Let's talk about what you wear around.":
                 call Clothes_Schedule (KittyX)
 
             "Could I get a look at it?" if KittyX.location != bg_current:
 
-                call OutfitShame (KittyX, 0, 2)
+                call outfitShame (KittyX, 0, 2)
                 if _return:
                     show PhoneSex zorder 150
                     ch_k "Cute? . ."
                 hide PhoneSex
             "Could I get a look at it?" if renpy.showing('DressScreen'):
 
-                call OutfitShame (KittyX, 0, 2)
+                call outfitShame (KittyX, 0, 2)
                 if _return:
                     hide DressScreen
             "Would you be more comfortable behind a screen? (locked)" if KittyX.Taboo:
@@ -2350,12 +2350,12 @@ label Kitty_Wardrobe_Menu:
             "Switch to. . .":
 
                 if renpy.showing('DressScreen'):
-                    call OutfitShame (KittyX, 0, 2)
+                    call outfitShame (KittyX, 0, 2)
                     if _return:
                         hide DressScreen
                     else:
                         $ KittyX.change_outfit()
-                $ KittyX.Set_Temp_Outfit()
+                $ KittyX.Set_Temp_outfit()
                 $ primary_action = 0
                 call Switch_Chat
                 if Girl != KittyX:
@@ -2383,13 +2383,13 @@ label Kitty_Wardrobe_Menu:
                         ch_k "Sure."
                     $ KittyX.recent_history.append("wardrobe")
                 if renpy.showing('DressScreen'):
-                    call OutfitShame (KittyX, 0, 2)
+                    call outfitShame (KittyX, 0, 2)
                     if _return:
                         hide DressScreen
                     else:
                         $ KittyX.change_outfit()
 
-                $ KittyX.Set_Temp_Outfit()
+                $ KittyX.Set_Temp_outfit()
                 $ KittyX.Chat[1] += 1
                 $ primary_action = 0
                 return
@@ -2400,23 +2400,23 @@ label Kitty_Wardrobe_Menu:
 
 
 
-    menu Kitty_Clothes_Outfits:
+    menu Kitty_Clothes_outfits:
         "You should remember that one. [[Set Custom]":
 
             menu:
                 "Which slot would you like this saved in?"
                 "Custom 1":
-                    call OutfitShame (KittyX, 3, 1)
+                    call outfitShame (KittyX, 3, 1)
                 "Custom 2":
-                    call OutfitShame (KittyX, 5, 1)
+                    call outfitShame (KittyX, 5, 1)
                 "Custom 3":
-                    call OutfitShame (KittyX, 6, 1)
+                    call outfitShame (KittyX, 6, 1)
                 "Gym Clothes":
-                    call OutfitShame (KittyX, 4, 1)
+                    call outfitShame (KittyX, 4, 1)
                 "Sleepwear":
-                    call OutfitShame (KittyX, 7, 1)
+                    call outfitShame (KittyX, 7, 1)
                 "Swimwear":
-                    call OutfitShame (KittyX, 10, 1)
+                    call outfitShame (KittyX, 10, 1)
                 "Never mind":
                     pass
         "I really like that pink shirt and capris outfit you wear.":
@@ -2425,8 +2425,8 @@ label Kitty_Wardrobe_Menu:
             $ KittyX.change_outfit("casual1")
             menu:
                 "You should wear this one out. [[set current outfit]":
-                    $ KittyX.Outfit = "casual1"
-                    $ KittyX.Shame = 0
+                    $ KittyX.outfit = "casual1"
+                    $ KittyX.shame = 0
                     ch_k "I used to wear that one[KittyX.like]every day!"
                 "Let's try something else though.":
                     ch_k "K."
@@ -2436,8 +2436,8 @@ label Kitty_Wardrobe_Menu:
             $ KittyX.change_outfit("casual2")
             menu:
                 "You should wear this one out. [[set current outfit]":
-                    $ KittyX.Outfit = "casual2"
-                    $ KittyX.Shame = 0
+                    $ KittyX.outfit = "casual2"
+                    $ KittyX.shame = 0
                     ch_k "That one[KittyX.like]used to be my favorite too!"
                 "Let's try something else though.":
                     ch_k "K."
@@ -2469,11 +2469,11 @@ label Kitty_Wardrobe_Menu:
                         pass
                     "You should wear this one in private." if counter:
                         if counter == 5:
-                            $ KittyX.Clothing[9] = "custom2"
+                            $ KittyX.clothing[9] = "custom2"
                         elif counter == 6:
-                            $ KittyX.Clothing[9] = "custom3"
+                            $ KittyX.clothing[9] = "custom3"
                         else:
-                            $ KittyX.Clothing[9] = "custom1"
+                            $ KittyX.clothing[9] = "custom1"
                         ch_k "Ok, sure."
                     "On second thought, forget about that one outfit. . .":
 
@@ -2558,14 +2558,14 @@ label Kitty_Wardrobe_Menu:
                     "You know, you should wear this one out. [[set current outfit]":
                         if "exhibitionist" in KittyX.traits:
                             ch_k "I'm[KittyX.like]getting a little wet just thinking about it."
-                            $ KittyX.Outfit = "nude"
+                            $ KittyX.outfit = "nude"
                             $ KittyX.change_stat("lust", 50, 10)
                             $ KittyX.change_stat("lust", 70, 5)
-                            $ KittyX.Shame = 50
+                            $ KittyX.shame = 50
                         elif approval_check(KittyX, 800, "I") or approval_check(KittyX, 2800, TabM=0):
                             ch_k "I guess we could. . ."
-                            $ KittyX.Outfit = "nude"
-                            $ KittyX.Shame = 50
+                            $ KittyX.outfit = "nude"
+                            $ KittyX.shame = 50
                         else:
                             $ KittyX.change_face("_sexy", 1)
                             $ KittyX.eyes = "_surprised"
@@ -3110,27 +3110,27 @@ label Kitty_Wardrobe_Menu:
             else:
                 ch_k "Yeah, I know that."
 
-        "Loose Hair Style" if KittyX.hair != "long":
+        "Loose Hair Style" if KittyX.hair != "_long":
             ch_p "Maybe let your hair down."
             if approval_check(KittyX, 600):
                 ch_k "You think?"
-                $ KittyX.hair = "long"
+                $ KittyX.hair = "_long"
             else:
                 ch_k "I[KittyX.like]kinda prefer to keep it up."
 
-        "Wet hair style." if KittyX.hair != "wet":
+        "Wet hair style." if KittyX.hair != "_wet":
             ch_p "You should go for that wet look with your hair."
             if approval_check(KittyX, 800):
                 ch_k "You think so?"
                 "She rummages in her bag and grabs some gel, running it through her hair."
                 ch_k "Like this?"
-                $ KittyX.hair = "wet"
+                $ KittyX.hair = "_wet"
             else:
                 ch_k "It's too high maintenance."
 
         "Grow pubes" if not KittyX.pubes:
             ch_p "You know, I like some nice hair down there. Maybe grow it out."
-            if "pubes" in KittyX.Todo:
+            if "pubes" in KittyX.to_do:
                 ch_k "[[snort] You've got to give it some time!"
             else:
                 $ KittyX.change_face("_bemused", 1)
@@ -3146,13 +3146,13 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.brows = "_angry"
                     ch_k "Not that it's any of your business, [KittyX.player_petname]."
                     return
-                $ KittyX.Todo.append("pubes")
-                $ KittyX.PubeC = 6
+                $ KittyX.to_do.append("pubes")
+                $ KittyX.pubes_counter = 6
 
         "Shave pubes" if KittyX.pubes:
             ch_p "I like it waxed clean down there."
             $ KittyX.change_face("_bemused", 1)
-            if "shave" in KittyX.Todo:
+            if "shave" in KittyX.to_do:
                 ch_k "I know, I know. I'll take care of it later."
             else:
                 $ approval = approval_check(KittyX, 1150, TabM=0)
@@ -3168,14 +3168,14 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.brows = "_angry"
                     ch_k "Not that it's any of your business, [KittyX.player_petname]."
                     return
-                $ KittyX.Todo.append("shave")
+                $ KittyX.to_do.append("shave")
 
         "Piercings. [[See what she looks like without them first] (locked)" if not KittyX.SeenPussy and not KittyX.SeenChest:
             pass
 
         "Add ring piercings" if KittyX.piercings != "_ring" and (KittyX.SeenPussy or KittyX.SeenChest):
             ch_p "You know, you'd look really nice with some ring body piercings."
-            if "_ring" in KittyX.Todo:
+            if "_ring" in KittyX.to_do:
                 ch_k "I know, I know. I'll take care of it later."
             else:
                 $ KittyX.change_face("_bemused", 1)
@@ -3191,11 +3191,11 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.brows = "_angry"
                     ch_k "Not that it's any of your business, [KittyX.player_petname]."
                     return
-                $ KittyX.Todo.append("_ring")
+                $ KittyX.to_do.append("_ring")
 
         "Add barbell piercings" if KittyX.piercings != "_barbell" and (KittyX.SeenPussy or KittyX.SeenChest):
             ch_p "You know, you'd look really nice with some barbell body piercings."
-            if "_barbell" in KittyX.Todo:
+            if "_barbell" in KittyX.to_do:
                 ch_k "I know, I know. I'll take care of it later."
             else:
                 $ KittyX.change_face("_bemused", 1)
@@ -3211,7 +3211,7 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.brows = "_angry"
                     ch_k "Not that it's any of your business, [KittyX.player_petname]."
                     return
-                $ KittyX.Todo.append("_barbell")
+                $ KittyX.to_do.append("_barbell")
                 $ KittyX.piercings = "_barbell"
 
         "Remove Piercings" if KittyX.piercings:

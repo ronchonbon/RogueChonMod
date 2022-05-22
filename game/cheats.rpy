@@ -417,44 +417,44 @@ label WardrobeEditor(Chr=0):
                             else:
                                 $ Chr.grool  = 0
                         "Toggle wet look":
-                            if not Chr.Water:
-                                $ Chr.Water = 1
-                            elif Chr.Water == 1:
-                                $ Chr.Water = 3
+                            if not Chr.wet:
+                                $ Chr.wet = 1
+                            elif Chr.wet == 1:
+                                $ Chr.wet = 3
                             else:
-                                $ Chr.Water  = 0
+                                $ Chr.wet  = 0
                         "Toggle pubes":
                             if not Chr.pubes:
                                 $ Chr.pubes = "_hairy"
                             else:
                                 $ Chr.pubes = "_bare"
                         "Toggle Short Hair" if Chr == KittyX:
-                            if Chr.hair == "long":
+                            if Chr.hair == "_long":
                                 $ Chr.hair = "_evo"
                             else:
-                                $ Chr.hair = "long"
+                                $ Chr.hair = "_long"
                         "Toggle Mohawk" if Chr == StormX:
-                            if Chr.hair == "long":
-                                $ Chr.hair = "mohawk"
+                            if Chr.hair == "_long":
+                                $ Chr.hair = "_mohawk"
                             else:
-                                $ Chr.hair = "long"
+                                $ Chr.hair = "_long"
                         "Toggle Short Hair" if Chr == StormX:
-                            if Chr.hair == "long":
-                                $ Chr.hair = "short"
+                            if Chr.hair == "_long":
+                                $ Chr.hair = "_short"
                             else:
-                                $ Chr.hair = "long"
+                                $ Chr.hair = "_long"
                         "Toggle Ponytailr" if Chr == JeanX:
                             if Chr.hair == "pont":
-                                $ Chr.hair = "short"
+                                $ Chr.hair = "_short"
                             else:
                                 $ Chr.hair = "pony"
                         "Toggle Hat" if Chr == EmmaX:
                             if Chr.hair == "_wavy":
                                 $ Chr.hair = "_hat"
-                            elif Chr.hair == "wet":
-                                $ Chr.hair = "hat wet"
-                            elif Chr.hair == "hat wet":
-                                $ Chr.hair = "wet"
+                            elif Chr.hair == "_wet":
+                                $ Chr.hair = "_wet_hat"
+                            elif Chr.hair == "_wet_hat":
+                                $ Chr.hair = "_wet"
                             else:
                                 $ Chr.hair = "_wavy"
                         "Cosplay Hair" if Chr == RogueX:
@@ -464,7 +464,7 @@ label WardrobeEditor(Chr=0):
                                 $ Chr.hair = "_cosplay"
                         "Ponytail Hair" if Chr == JeanX:
                             if Chr.hair == "pony":
-                                $ Chr.hair = "short"
+                                $ Chr.hair = "_short"
                             else:
                                 $ Chr.hair = "pony"
                         "Toggle held":

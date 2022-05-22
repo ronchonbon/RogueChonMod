@@ -2,7 +2,7 @@ label Date_Ask(Girl=0):
 
     $ Girl = GirlCheck(Girl)
     call shift_focus (Girl)
-    if "yesdate" in Girl.daily_history:
+    if "going_on_date" in Girl.daily_history:
         $ Girl.change_face("_bemused")
         if Girl == RogueX:
             ch_r "Come on, I already said \"yes.\""
@@ -52,7 +52,7 @@ label Date_Ask(Girl=0):
             call Emma_Taboo_Talk
             if "taboo" not in EmmaX.history:
                 return
-    if Girl.Break[0] and "ex" in Girl.traits:
+    if Girl.broken_up[0] and "ex" in Girl.traits:
         $ Girl.change_face("_angry")
         if Girl == RogueX:
             ch_r "Seriously? You're asking me that after what you just did?"
@@ -435,7 +435,7 @@ label Date_Ask(Girl=0):
                 ch_l "I'm out."
             elif Girl == JeanX:
                 ch_j "You don't want that."
-                $ Girl.daily_history.append("yesdate")
+                $ Girl.daily_history.append("going_on_date")
             elif Girl == StormX:
                 ch_s "I am not fine with that."
             elif Girl == JubesX:
@@ -462,8 +462,8 @@ label Date_Ask(Girl=0):
             ch_s "Later."
         elif Girl == JubesX:
             ch_v "See you then!"
-    $ Girl.daily_history.append("yesdate")
-    $ Player.daily_history.append("yesdate")
+    $ Girl.daily_history.append("going_on_date")
+    $ Player.daily_history.append("going_on_date")
     return
 
 label Date_Stood_Up(Girl=0):
@@ -792,18 +792,18 @@ label Date_Stood_Up(Girl=0):
 
     return
 
-label Readytogo(Girl=0, R=0, BO=[]):
+label Readytogo(Girl=0, R=0, temp_Girls=[]):
 
-    if Girl in all_Girls and "yesdate" in Girl.daily_history:
+    if Girl in all_Girls and "going_on_date" in Girl.daily_history:
 
         $ R = Girl
     else:
-        $ BO = all_Girls[:]
-        while BO:
-            if BO[0].location == bg_current and "yesdate" in BO[0].daily_history:
-                $ R = BO[0]
-                $ BO = [1]
-            $ BO.remove(BO[0])
+        $ temp_Girls = all_Girls[:]
+        while temp_Girls:
+            if temp_Girls[0].location == bg_current and "going_on_date" in temp_Girls[0].daily_history:
+                $ R = temp_Girls[0]
+                $ temp_Girls = [1]
+            $ temp_Girls.remove(temp_Girls[0])
     if R not in all_Girls:
 
         return
@@ -832,7 +832,7 @@ label Readytogo(Girl=0, R=0, BO=[]):
         "Yes":
             $ renpy.pop_call()
             $ renpy.pop_call()
-            jump Campus_Entry
+            jump Campus_entry
         "Not yet":
             if R == RogueX:
                 ch_r "Ok, it's getting late though."
@@ -869,7 +869,7 @@ label Readytogo(Girl=0, R=0, BO=[]):
                 ch_s ". . . Fine."
             elif R == JubesX:
                 ch_v "Well. . . ok?"
-            $ R.daily_history.remove("yesdate")
+            $ R.daily_history.remove("going_on_date")
 
             if R.location != bg_current:
 
@@ -884,7 +884,7 @@ label Readytogo(Girl=0, R=0, BO=[]):
                 call set_the_scene
     return
 
-label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], BO=[]):
+label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], temp_Girls=[]):
 
 
 
@@ -892,12 +892,12 @@ label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], BO=[]):
 
     $ Party = []
 
-    $ BO = active_Girls[:]
-    while BO:
-        if "yesdate" in BO[0].daily_history:
-            $ Party.append(BO[0])
-            $ BO[0].daily_history.remove("yesdate")
-        $ BO.remove(BO[0])
+    $ temp_Girls = active_Girls[:]
+    while temp_Girls:
+        if "going_on_date" in temp_Girls[0].daily_history:
+            $ Party.append(temp_Girls[0])
+            $ temp_Girls[0].daily_history.remove("going_on_date")
+        $ temp_Girls.remove(temp_Girls[0])
 
     if not Party:
         "Nobody showed up, weird."
@@ -913,12 +913,12 @@ label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], BO=[]):
 
 
 
-    $ BO = Party[:]
-    while BO:
-        if "stoodup" in BO[0].history:
-            $ BO[0].history.remove("stoodup")
-        call Date_Prep (BO[0])
-        $ BO.remove(BO[0])
+    $ temp_Girls = Party[:]
+    while temp_Girls:
+        if "stoodup" in temp_Girls[0].history:
+            $ temp_Girls[0].history.remove("stoodup")
+        call Date_Prep (temp_Girls[0])
+        $ temp_Girls.remove(temp_Girls[0])
 
     $ bg_current = "date"
     $ Player.add_word(1,"date")
@@ -936,7 +936,7 @@ label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], BO=[]):
             ch_p "Ok then, I guess we're ready to get going. . ."
     else:
         "As you arrive, you see [Party[0].name] waiting for you."
-    if Round <= 60:
+    if round <= 60:
 
         $ Party[0].change_stat("love", 90, -3)
         $ Party[0].change_stat("obedience", 50, 2)
@@ -994,7 +994,7 @@ label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], BO=[]):
                 Party[0].voice "That's not an excuse!"
 
 
-    if Round <= 25:
+    if round <= 25:
 
         $ Party[0].change_stat("love", 90, -3)
         $ Party[0].change_stat("obedience", 50, 1)
@@ -1023,10 +1023,10 @@ label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], BO=[]):
             "The girls storm off."
         else:
             "[Party[0].tag] storms off."
-        call Remove_Girl ("All")
+        call remove_girl ("All")
         $ bg_current = "bg_campus"
         $ Player.Drainword("date")
-        $ Player.Drainword("yesdate")
+        $ Player.Drainword("going_on_date")
         return
 
 
@@ -1084,19 +1084,19 @@ label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], BO=[]):
 
         menu Date_Location:
             extend ""
-            "To a restaurant." if "dinner" not in Player.recent_history and Round >= 20:
+            "To a restaurant." if "dinner" not in Player.recent_history and round >= 20:
                 $ Line = "dinner"
-            "To a restaurant. (locked)" if "dinner" in Player.recent_history or Round <=20:
+            "To a restaurant. (locked)" if "dinner" in Player.recent_history or round <=20:
                 $ Line = "dinner"
 
-            "Let's shop." if "shopping" not in Player.recent_history and Round >= 20 and "mall" in Player.history:
+            "Let's shop." if "shopping" not in Player.recent_history and round >= 20 and "mall" in Player.history:
                 $ Line = "shopping"
-            "Let's shop. (locked)" if ("shopping" in Player.recent_history or Round < 20) and "mall" in Player.history:
+            "Let's shop. (locked)" if ("shopping" in Player.recent_history or round < 20) and "mall" in Player.history:
                 $ Line = "shopping"
 
-            "To the movies." if "movie" not in Player.recent_history and Round >= 60:
+            "To the movies." if "movie" not in Player.recent_history and round >= 60:
                 $ Line = "movie"
-            "To the movies [[No time]. (locked)" if "movie" in Player.recent_history or Round < 60:
+            "To the movies [[No time]. (locked)" if "movie" in Player.recent_history or round < 60:
                 $ Line = "movie"
             "Let's head back.":
 
@@ -1375,8 +1375,8 @@ label Date_Crossed(Girls=[], Check=0, Count=0, counter=0):
                             call Girl_Date_Over (JubesX)
 
                     "You head back to your room."
-                    if "yesdate" in Player.daily_history:
-                        $ Player.daily_history.remove("yesdate")
+                    if "going_on_date" in Player.daily_history:
+                        $ Player.daily_history.remove("going_on_date")
                     $ bg_current = "bg_player"
                     jump Misplaced
             return
@@ -1507,27 +1507,27 @@ label Date_Prep(Girl=0):
         return
     $ Taboo = 40
     $ Girl.Taboo = 40
-    if Girl.Clothing[7]:
+    if Girl.clothing[7]:
 
-        if Girl.Clothing[7] == 2:
-            $ Girl.Outfit = "casual2"
-        elif Girl.Clothing[7] == 3:
-            $ Girl.Outfit = "custom1"
-        elif Girl.Clothing[7] == 4:
-            $ Girl.Outfit = "gym"
-        elif Girl.Clothing[7] == 5:
-            $ Girl.Outfit = "custom2"
-        elif Girl.Clothing[7] == 6:
-            $ Girl.Outfit = "custom3"
+        if Girl.clothing[7] == 2:
+            $ Girl.outfit = "casual2"
+        elif Girl.clothing[7] == 3:
+            $ Girl.outfit = "custom1"
+        elif Girl.clothing[7] == 4:
+            $ Girl.outfit = "gym"
+        elif Girl.clothing[7] == 5:
+            $ Girl.outfit = "custom2"
+        elif Girl.clothing[7] == 6:
+            $ Girl.outfit = "custom3"
         else:
-            $ Girl.Outfit = "casual1"
+            $ Girl.outfit = "casual1"
     else:
         $ Options = ["casual2", "casual1"]
         $ Options.append("custom1") if Girl.Custom1[0] == 2 else Options
         $ Options.append("custom2") if Girl.Custom2[0] == 2 else Options
         $ Options.append("custom3") if Girl.Custom3[0] == 2 else Options
         $ renpy.random.shuffle(Options)
-        $ Girl.Outfit = Options[0]
+        $ Girl.outfit = Options[0]
         $ del Options[:]
     $ Girl.location = "date"
     $ Girl.change_outfit(Changed=1)
@@ -1538,19 +1538,19 @@ label Date_Dinner:
     $ bg_current = "bg_restaurant"
     $ Player.recent_history.append("dinner")
     $ Player.daily_history.append("dinner")
-    $ BO = Party[:]
-    while BO:
-        $ BO[0].location = "bg_restaurant"
-        $ BO.remove(BO[0])
+    $ temp_Girls = Party[:]
+    while temp_Girls:
+        $ temp_Girls[0].location = "bg_restaurant"
+        $ temp_Girls.remove(temp_Girls[0])
 
     call set_the_scene
 
     "The waitress comes to the table."
 
-    $ BO = Party[:]
-    while BO:
-        call expression BO[0].tag + "_Dinner"
-        $ BO.remove(BO[0])
+    $ temp_Girls = Party[:]
+    while temp_Girls:
+        call expression temp_Girls[0].tag + "_Dinner"
+        $ temp_Girls.remove(temp_Girls[0])
     call Player_Dinner
 
     "After a bit, the waitress brings you your meals."
@@ -1588,9 +1588,9 @@ label Date_Dinner:
 
     call Date_Paying ("dinner")
 
-    $ Round -= 30 if Round > 40 else (Round-10)
+    $ round -= 30 if round > 40 else (round-10)
 
-    if Round < 20:
+    if round < 20:
         "It's getting late, you head back to the dorms. . ."
         jump Date_End
 
@@ -2020,20 +2020,20 @@ label Jubes_Dinner(GirlCost=0):
     call Date_Bonus (JubesX, (int(GirlCost/2)))
     return
 
-label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
+label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
 
 
-    $ BO = Party[:]
-    if 0 in BO:
-        $ BO.remove(0)
-    while BO:
-        if approval_check(BO[0], 1000):
-            $ OptionsDS.append(BO[0])
-            if Party[0] == BO[0] and Date_Bonus[0] > 10:
-                $ OptionsDS.append(BO[0])
-            elif BO[0] in Party and Date_Bonus[1] > 10:
-                $ OptionsDS.append(BO[0])
-        $ BO.remove(BO[0])
+    $ temp_Girls = Party[:]
+    if 0 in temp_Girls:
+        $ temp_Girls.remove(0)
+    while temp_Girls:
+        if approval_check(temp_Girls[0], 1000):
+            $ OptionsDS.append(temp_Girls[0])
+            if Party[0] == temp_Girls[0] and Date_Bonus[0] > 10:
+                $ OptionsDS.append(temp_Girls[0])
+            elif temp_Girls[0] in Party and Date_Bonus[1] > 10:
+                $ OptionsDS.append(temp_Girls[0])
+        $ temp_Girls.remove(temp_Girls[0])
 
     if len(OptionsDS) == 0:
 
@@ -2432,10 +2432,10 @@ label Date_Movies:
     $ bg_current = "bg_movies"
     $ Player.recent_history.append("movie")
     $ Player.daily_history.append("movie")
-    $ BO = Party[:]
-    while BO:
-        $ BO[0].location = "bg_movies"
-        $ BO.remove(BO[0])
+    $ temp_Girls = Party[:]
+    while temp_Girls:
+        $ temp_Girls[0].location = "bg_movies"
+        $ temp_Girls.remove(temp_Girls[0])
 
     call set_the_scene
 
@@ -2761,9 +2761,9 @@ label Date_Movies:
 
     call Movie_Sex
 
-    $ Round -= 60 if Round > 70 else (Round-10)
+    $ round -= 60 if round > 70 else (round-10)
 
-    if Round < 20:
+    if round < 20:
         "After you leave the theater, you notice it's getting dark, and head back to the dorms. . ."
         jump Date_End
 
@@ -2774,25 +2774,25 @@ label Date_Movies:
     "You seem to have some time left, where would you like to go next?"
     jump Date_Location
 
-label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], BO=[]):
+label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
 
-    $ BO = Party[:]
-    if 0 in BO:
-        $ BO.remove(0)
-    while BO:
-        if approval_check(BO[0], 1000):
-            $ OptionsDS.append(BO[0])
-            if Party[0] == BO[0] and Date_Bonus[0] > 10:
-                $ OptionsDS.append(BO[0])
-            elif BO[0] in Party and Date_Bonus[1] > 10:
-                $ OptionsDS.append(BO[0])
+    $ temp_Girls = Party[:]
+    if 0 in temp_Girls:
+        $ temp_Girls.remove(0)
+    while temp_Girls:
+        if approval_check(temp_Girls[0], 1000):
+            $ OptionsDS.append(temp_Girls[0])
+            if Party[0] == temp_Girls[0] and Date_Bonus[0] > 10:
+                $ OptionsDS.append(temp_Girls[0])
+            elif temp_Girls[0] in Party and Date_Bonus[1] > 10:
+                $ OptionsDS.append(temp_Girls[0])
             if "horror" in Player.recent_history:
-                $ OptionsDS.append(BO[0])
+                $ OptionsDS.append(temp_Girls[0])
             elif "drama" in Player.recent_history:
-                $ OptionsDS.append(BO[0])
-            elif BO[0] == LauraX and "action" in Player.recent_history:
-                $ OptionsDS.append(BO[0])
-        $ BO.remove(BO[0])
+                $ OptionsDS.append(temp_Girls[0])
+            elif temp_Girls[0] == LauraX and "action" in Player.recent_history:
+                $ OptionsDS.append(temp_Girls[0])
+        $ temp_Girls.remove(temp_Girls[0])
 
     if len(OptionsDS) == 0:
 
@@ -3384,7 +3384,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
 
     if Activity == "dinner":
         $ Total_Cost = Play_Cost + Date_Cost[0] + Date_Cost[1]
-        "The Waitress brings you the check, it comes to $[Total_Cost]."
+        "The waitress brings you the check, it comes to $[Total_Cost]."
     else:
         if len(Party) >= 2:
             $ Total_Cost = 30
@@ -3892,7 +3892,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
 
     if JeanX in Party and Line in (JeanX,"split","deadbeat"):
 
-        ch_j "Waiter?"
+        ch_j "waiter?"
         $ JeanX.change_face("_confused",Eyes="psychic")
         ch_j ". . ."
         $ JeanX.change_face("_sly")
@@ -3928,12 +3928,12 @@ label Date_End:
 
     if time_index == 2:
 
-        if Round > 20:
+        if round > 20:
             $ bg_current = "bg_date"
             call set_the_scene (Dress=0)
             "You decide to walk back slowly, as the night falls around you. . ."
 
-        call Wait (Outfit=0)
+        call wait (outfit=0)
 
         $ bg_current = "bg_date"
         call set_the_scene (Dress=0)
@@ -3973,7 +3973,7 @@ label Date_End:
 label Date_Over:
     if time_index == 2:
 
-        call Wait (Outfit=0)
+        call wait (outfit=0)
     $ Player.daily_history.append("post date")
     $ bg_current = "bg_player"
     call clear_the_room ("All", 0, 1)
@@ -3982,10 +3982,10 @@ label Date_Over:
 label Player_Date_End:
 
     $ bg_current = "bg_player"
-    $ BO = Party[:]
-    while BO:
-        $ BO[0].location = "bg_player"
-        $ BO.remove(BO[0])
+    $ temp_Girls = Party[:]
+    while temp_Girls:
+        $ temp_Girls[0].location = "bg_player"
+        $ temp_Girls.remove(temp_Girls[0])
     call set_the_scene (Dress=0)
     call Taboo_Level
     if len(Party) >= 2:
@@ -4161,7 +4161,7 @@ label Girl_Date_End(Girl=0):
                     call Date_Sex_Break (Girl, 0, 2)
                     $ multi_action = 0
                     call KissPrep (Girl)
-                    $ multi_action = 1
+                    $ multi_action = True
                 if approval_check(Girl, 900, Bonus=(10*Date_Bonus[0])):
                     $ Girl.change_face("_sexy", 1)
                     if Girl == RogueX:
@@ -4337,11 +4337,11 @@ label Girl_Date_End(Girl=0):
         else:
             "[Girl.name] shoves you out into the hall. You head back to your room."
             $ bg_current = "bg_player"
-        call Remove_Girl ("All")
+        call remove_girl ("All")
         $ Player.daily_history.append("post date")
         jump player_room
 
-    call Sleepover (Girl)
+    call sleepover (Girl)
     jump Misplaced
 
 label Date_Ditched(Girls=0):
@@ -4481,7 +4481,7 @@ label Girl_Date_Over(Girl=0, Angry=1):
             ch_v "Well, I'm out. . ."
         "[Girl.name] storms out."
     if "study" in Player.recent_history:
-        call Remove_Girl (Girl)
+        call remove_girl (Girl)
         return
     if Party[0] == Girl:
         $ Date_Bonus[0] = Date_Bonus[1]
@@ -4494,7 +4494,7 @@ label Girl_Date_Over(Girl=0, Angry=1):
 
     $ Date_Bonus[1] = 0
     $ Date_Cost[1] = 0
-    call Remove_Girl (Girl)
+    call remove_girl (Girl)
     if not Party:
 
         jump Date_End

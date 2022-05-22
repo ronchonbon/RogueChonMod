@@ -1,80 +1,18 @@
 label forced_but_not_unwelcome_reactions(Girl, action):
     $ Girl.change_face("_sad")
 
-    if action in ["fondle_thighs", "fondle_breasts", "fondle_ass"]:
-        $ Girl.change_stat("love", 70, -3, 1)
-        $ Girl.change_stat("love", 20, -1, 1)
-    elif action in ["suck_breasts", "fondle_pussy", "eat_pussy", "finger_ass", "eat_ass"]:
-        $ Girl.change_stat("love", 70, -5, 1)
-        $ Girl.change_stat("love", 20, -2, 1)
-    elif action in job_actions:
-        $ Girl.change_stat("love", 70, -5, 1)
-        $ Girl.change_stat("love", 200, -2)
-    elif action in ["dildo_pussy", "dildo_ass", "sex", "anal"]:
-        $ Girl.change_stat("love", 70, -5, 1)
-        $ Girl.change_stat("love", 200, -5)
-    elif action in ["hotdog"]:
-        $ Girl.change_stat("love", 70, -2, 1)
-        $ Girl.change_stat("love", 200, -5)
-
+    call forced_but_not_unwelcome_changes_A(Girl, action)
     call forced_but_not_unwelcome_lines(Girl, action)
-
-    if action == "fondle_thighs":
-        $ Girl.change_stat("obedience", 50, 3)
-        $ Girl.change_stat("inhibition", 60, 2)
-    elif action in breast_actions:
-        $ Girl.change_stat("obedience", 90, 2)
-        $ Girl.change_stat("obedience", 50, 4)
-        $ Girl.change_stat("inhibition", 60, 3)
-    elif action in ["fondle_pussy", "eat_pussy", "finger_ass", "eat_ass", "handjob", "footjob", "titjob", "blowjob"]:
-        $ Girl.change_stat("obedience", 50, 4)
-        $ Girl.change_stat("inhibition", 80, 1)
-        $ Girl.change_stat("inhibition", 60, 3)
-    elif action in ["fondle_ass"]:
-        $ Girl.change_stat("obedience", 50, 3)
-        $ Girl.change_stat("inhibition", 60, 3)
-    elif action in ["dildo_pussy", "dildo_ass", "sex", "anal"]:
-        $ Girl.change_stat("obedience", 80, 4)
-        $ Girl.change_stat("inhibition", 80, 1)
-        $ Girl.change_stat("inhibition", 60, 3)
-    elif action in ["hotdog"]:
-        $ Girl.change_stat("obedience", 80, 4)
-        $ Girl.change_stat("inhibition", 60, 2)
+    call forced_but_not_unwelcome_changes_B(Girl, action)
 
     return
 
 label forced_action_rejected_reactions(Girl, action):
+    if action == "masturbation":
+        $ Girl.change_face("_angry", 1)
+
     call forced_action_rejected_lines(Girl, action)
-
-    if action in ["fondle_thighs"]:
-        $ Girl.change_stat("lust", 50, 2)
-        $ Girl.change_stat("obedience", 50, -1)
-    elif action in ["hotdog"]:
-        $ Girl.change_stat("lust", 200, 5)
-
-        if Girl.love > 300:
-            $ Girl.change_stat("love", 70, -1)
-
-        $ Girl.change_stat("obedience", 50, -1)
-    else:
-        if action in ["fondle_pussy"]:
-            $ Girl.change_stat("lust", 70, 5)
-        elif action in ["eat_pussy"]:
-            $ Girl.change_stat("lust", 80, 5)
-        elif action in ["fondle_breasts", "suck_breasts", "fondle_ass"]:
-            $ Girl.change_stat("lust", 60, 5)
-        elif action in ["finger_ass", "eat_ass"]:
-            if approvalcheck(Girl, 500, "I"):
-                $ Girl.change_stat("lust", 80, 10)
-            else:
-                $ Girl.change_stat("lust", 50, 3)
-        elif action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal"]:
-            $ Girl.change_stat("lust", 200, 5)
-
-            if Girl.love > 300:
-                $ Girl.change_stat("love", 70, -2)
-
-        $ Girl.change_stat("obedience", 50, -2)
+    call forced_action_rejected_changes(Girl, action)
 
     return
 
@@ -91,6 +29,8 @@ label otherwise_rejected_reactions(Girl, action):
         $ Girl.Mouth = "_sad"
     elif action in ["eat_pussy", "finger_ass", "eat_ass", "footjob", "titjob", "dildo_pussy", "dildo_ass", "anal", "hotdog"]:
         $ Girl.change_face("_surprised")
+    elif action in ["masturbation"]:
+        $ Girl.change_face("_normal", 1)
 
     call otherwise_not_interested_lines(Girl, action)
 
@@ -102,22 +42,12 @@ label taboo_action_rejected_reactions(Girl, action):
     $ Girl.change_face("_angry", 1)
 
     call taboo_action_rejected_lines(Girl, action)
-
-    if action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
-        $ Girl.change_stat("lust", 200, 5)
-        $ Girl.change_stat("obedience", 50, -3)
+    call taboo_action_rejected_changes(Girl, action)
 
     return
 
 label forced_rejected_reactions(Girl, action):
-    if action in ["fondle_thighs"]:
-        $ Girl.change_stat("love", 200, -8)
-    elif action in ["fondle_breasts", "suck_breasts", "fondle_ass", "hotdog"]:
-        $ Girl.change_stat("love", 200, -10)
-    elif action in ["fondle_pussy", "eat_pussy", "finger_ass", "eat_ass", "handjob", "footjob", "titjob", "blowjob"]:
-        $ Girl.change_stat("love", 200, -15)
-    elif action in ["dildo_pussy", "dildo_ass", "sex", "anal"]:
-        $ Girl.change_stat("love", 200, -20)
+    call forced_rejected_changes(Girl, action)
 
     $ Girl.change_face("_angry", 1)
 
@@ -130,191 +60,10 @@ label forced_rejected_reactions(Girl, action):
 
     return
 
-label first_action_reactions(Girl, action):
-    if not Girl.action_counter[action]:
-        if action == "fondle_thighs":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -10)
-                $ Girl.change_stat("obedience", 70, 15)
-                $ Girl.change_stat("inhibition", 80, 10)
-            else:
-                $ Girl.change_stat("love", 90, 5)
-                $ Girl.change_stat("obedience", 70, 10)
-                $ Girl.change_stat("inhibition", 80, 15)
-        elif action == "fondle_breasts":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -20)
-                $ Girl.change_stat("obedience", 70, 25)
-                $ Girl.change_stat("inhibition", 80, 15)
-            else:
-                $ Girl.change_stat("love", 90, 10)
-                $ Girl.change_stat("obedience", 70, 5)
-                $ Girl.change_stat("inhibition", 80, 15)
-        elif action == "suck_breasts":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -25)
-                $ Girl.change_stat("obedience", 70, 25)
-                $ Girl.change_stat("inhibition", 80, 17)
-            else:
-                $ Girl.change_stat("love", 90, 10)
-                $ Girl.change_stat("obedience", 70, 10)
-                $ Girl.change_stat("inhibition", 80, 15)
-        elif action == "fondle_pussy":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -50)
-                $ Girl.change_stat("obedience", 70, 35)
-                $ Girl.change_stat("inhibition", 80, 25)
-            else:
-                $ Girl.change_stat("love", 90, 10)
-                $ Girl.change_stat("obedience", 70, 10)
-                $ Girl.change_stat("inhibition", 80, 15)
-        elif action == "finger_pussy":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -60)
-                $ Girl.change_stat("obedience", 70, 55)
-                $ Girl.change_stat("inhibition", 80, 35)
-            else:
-                $ Girl.change_stat("love", 90, 10)
-                $ Girl.change_stat("obedience", 70, 20)
-                $ Girl.change_stat("inhibition", 80, 25)
-        if action == "eat_pussy":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -30)
-                $ Girl.change_stat("obedience", 70, 35)
-                $ Girl.change_stat("inhibition", 80, 75)
-            else:
-                $ Girl.change_stat("love", 90, 35)
-                $ Girl.change_stat("obedience", 70, 15)
-                $ Girl.change_stat("inhibition", 80, 35)
-        elif action == "fondle_ass":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -20)
-                $ Girl.change_stat("obedience", 70, 20)
-                $ Girl.change_stat("inhibition", 80, 15)
-            else:
-                $ Girl.change_stat("love", 90, 10)
-                $ Girl.change_stat("obedience", 70, 12)
-                $ Girl.change_stat("inhibition", 80, 20)
-        elif action == "finger_ass":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -50)
-                $ Girl.change_stat("obedience", 70, 60)
-                $ Girl.change_stat("inhibition", 80, 35)
-            else:
-                $ Girl.change_stat("love", 90, 10)
-                $ Girl.change_stat("obedience", 70, 20)
-                $ Girl.change_stat("inhibition", 80, 25)
-        elif action == "eat_ass":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -30)
-                $ Girl.change_stat("obedience", 70, 40)
-                $ Girl.change_stat("inhibition", 80, 80)
-            else:
-                $ Girl.change_stat("love", 90, 35)
-                $ Girl.change_stat("obedience", 70, 25)
-                $ Girl.change_stat("inhibition", 80, 55)
-        elif action == "handjob":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -20)
-                $ Girl.change_stat("obedience", 70, 25)
-                $ Girl.change_stat("inhibition", 80, 30)
-            else:
-                $ Girl.change_stat("love", 90, 5)
-                $ Girl.change_stat("obedience", 70, 20)
-                $ Girl.change_stat("inhibition", 80, 20)
-        elif action == "footjob":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -20)
-                $ Girl.change_stat("obedience", 70, 25)
-                $ Girl.change_stat("inhibition", 80, 30)
-            else:
-                $ Girl.change_stat("love", 90, 5)
-                $ Girl.change_stat("obedience", 70, 20)
-                $ Girl.change_stat("inhibition", 80, 20)
-        elif action == "titjob":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -25)
-                $ Girl.change_stat("obedience", 70, 30)
-                $ Girl.change_stat("inhibition", 80, 35)
-            else:
-                $ Girl.change_stat("love", 90, 5)
-                $ Girl.change_stat("obedience", 70, 25)
-                $ Girl.change_stat("inhibition", 80, 30)
-        elif action == "blowjob":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -70)
-                $ Girl.change_stat("obedience", 70, 45)
-                $ Girl.change_stat("inhibition", 80, 60)
-            else:
-                $ Girl.change_stat("love", 90, 5)
-                $ Girl.change_stat("obedience", 70, 35)
-                $ Girl.change_stat("inhibition", 80, 40)
-        elif action == "dildo_pussy":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -75)
-                $ Girl.change_stat("obedience", 70, 60)
-                $ Girl.change_stat("inhibition", 80, 35)
-            else:
-                $ Girl.change_stat("love", 90, 10)
-                $ Girl.change_stat("obedience", 70, 20)
-                $ Girl.change_stat("inhibition", 80, 45)
-        elif action == "dildo_ass":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -75)
-                $ Girl.change_stat("obedience", 70, 60)
-                $ Girl.change_stat("inhibition", 80, 35)
-            else:
-                $ Girl.change_stat("love", 90, 10)
-                $ Girl.change_stat("obedience", 70, 20)
-                $ Girl.change_stat("inhibition", 80, 45)
-        elif action == "sex":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -150)
-                $ Girl.change_stat("obedience", 70, 60)
-                $ Girl.change_stat("inhibition", 80, 50)
-            else:
-                $ Girl.change_stat("love", 90, 30)
-                $ Girl.change_stat("obedience", 70, 30)
-                $ Girl.change_stat("inhibition", 80, 60)
-        elif action == "anal":
-            if not Girl.action_counter["anal"]:
-                if Girl.Forced:
-                    $ Girl.change_stat("love", 90, -150)
-                    $ Girl.change_stat("obedience", 70, 70)
-                    $ Girl.change_stat("inhibition", 80, 40)
-                else:
-                    $ Girl.change_stat("love", 90, 10)
-                    $ Girl.change_stat("obedience", 70, 30)
-                    $ Girl.change_stat("inhibition", 80, 70)
-            elif not Girl.Loose:
-                if Girl.Forced:
-                    $ Girl.change_stat("love", 90, -20)
-                    $ Girl.change_stat("obedience", 70, 10)
-                    $ Girl.change_stat("inhibition", 80, 5)
-                else:
-                    $ Girl.change_stat("obedience", 70, 7)
-                    $ Girl.change_stat("inhibition", 80, 5)
-        elif action == "hotdog":
-            if Girl.Forced:
-                $ Girl.change_stat("love", 90, -5)
-                $ Girl.change_stat("obedience", 70, 20)
-                $ Girl.change_stat("inhibition", 80, 10)
-            else:
-                $ Girl.change_stat("love", 90, 20)
-                $ Girl.change_stat("obedience", 70, 20)
-                $ Girl.change_stat("inhibition", 80, 20)
-
-    return
-
 label first_action_approval_forced_reactions(Girl, action):
     $ Girl.change_face("_sad")
 
-    if action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "anal", "hotdog"]:
-        $ Girl.change_stat("love", 70, -3, 1)
-        $ Girl.change_stat("love", 20, -2, 1)
-    elif action in ["sex"]:
-        $ Girl.change_stat("love", 70, -30, 1)
-        $ Girl.change_stat("love", 20, -20, 1)
+    call first_action_approval_forced_reactions(Girl, action)
 
     return
 
@@ -356,115 +105,35 @@ label first_action_approval_reactions(Girl, action):
     return
 
 label auto_approved_reactions(Girl, action):
-    if action == "fondle_thighs":
-        $ Girl.change_face("_sexy")
-        $ Girl.change_stat("obedience", 50, 1)
-        $ Girl.change_stat("inhibition", 30, 2)
+    if action in ["fondle_thighs", "fondle_breasts"]:
+        $ Girl.change_face("sexy")
 
-        "As you caress her thigh, [Girl.name] glances at you, and smiles."
-    elif action == "fondle_breasts":
-        $ Girl.change_face("_sexy")
-        $ Girl.change_stat("obedience", 90, 1)
-        $ Girl.change_stat("obedience", 70, 2)
-        $ Girl.change_stat("inhibition", 70, 3)
-        $ Girl.change_stat("inhibition", 30, 2)
-
-        "As you cup her breast, [Girl.name] gently nods."
-    elif action == "suck_breasts":
-        $ Girl.change_face("_sexy")
-        $ Girl.change_stat("obedience", 90, 1)
-        $ Girl.change_stat("obedience", 70, 2)
-        $ Girl.change_stat("inhibition", 70, 3)
-        $ Girl.change_stat("inhibition", 30, 2)
-
-        "As you dive in, [Girl.name] seems a bit surprised, but just makes a little \"coo.\""
-    elif action == "fondle_pussy":
-        $ Girl.change_face("_sexy")
-        $ Girl.change_stat("obedience", 90, 1)
-        $ Girl.change_stat("obedience", 70, 2)
-        $ Girl.change_stat("inhibition", 70, 3)
-        $ Girl.change_stat("inhibition", 30, 2)
-
-        "As your hand creeps up her thigh, [Girl.name] seems a bit surprised, but then nods."
-    elif action == "finger_pussy":
-        $ Girl.change_face("_surprised")
-        $ Girl.change_stat("obedience", 90, 1)
-        $ Girl.change_stat("obedience", 70, 2)
-        $ Girl.change_stat("inhibition", 70, 3)
-        $ Girl.change_stat("inhibition", 30, 2)
-
-        "As you slide a finger in, [Girl.name] seems a bit surprised, but seems into it."
-    elif action == "eat_pussy":
-        $ Girl.change_face("_surprised")
-        $ Girl.change_stat("obedience", 90, 1)
-        $ Girl.change_stat("obedience", 70, 2)
-        $ Girl.change_stat("inhibition", 70, 3)
-        $ Girl.change_stat("inhibition", 30, 2)
-
-        $ line = renpy.random.choice(["As you crouch down and start to lick her pussy, [Girl.name] startles, but then sinks into the sensation.",
-            "As you crouch down and start to lick her pussy, [Girl.name] jumps, but then softens.",
-            "As you crouch down and start to lick her pussy, [Girl.name] starts, but then softens."])
-        "[line]"
-
-        $ Girl.change_face("_sexy")
-    elif action == "fondle_ass":
+        call auto_accepted_narrations(Girl, action)
+    else:
         $ Girl.change_face("_surprised", 1)
-        $ Girl.change_stat("obedience", 70, 2)
-        $ Girl.change_stat("inhibition", 40, 2)
 
-        $ line = renpy.random.choice(["As your hand creeps down her backside, [Girl.name] seems a bit surprised, but then nods.",
-            "As your hand creeps down her backside, [Girl.name] jumps a bit, and then relaxes.",
-            "As your hand creeps down her backside, [Girl.name] shivers a bit, and then relaxes."])
-        "[line]"
+        call auto_accepted_narrations(Girl, action)
 
         $ Girl.change_face("_sexy")
-    elif action == "finger_ass":
-        $ Girl.change_face("_surprised")
-        $ Girl.change_stat("obedience", 90, 2)
-        $ Girl.change_stat("obedience", 70, 2)
-        $ Girl.change_stat("inhibition", 80, 2)
-        $ Girl.change_stat("inhibition", 30, 2)
 
-        "As you slide a finger in, [Girl.name] tightens around it in surprise, but seems into it."
-
-        $ Girl.change_face("_sexy")
-    elif action == "eat_ass":
-        $ Girl.change_face("_surprised")
-        $ Girl.change_stat("obedience", 90, 1)
-        $ Girl.change_stat("inhibition", 80, 3)
-        $ Girl.change_stat("inhibition", 40, 2)
-
-        "As you crouch down and start to lick her asshole, [Girl.name] startles briefly, but then begins to melt."
-
-        $ Girl.change_face("_sexy")
-    elif action in dildo_actions or action in sex_actions:
-        "[Girl.name] is briefly startled and turns towards you, but then smiles and makes a little humming noise."
-
-        $ Girl.change_face("_sexy")
-        $ Girl.change_stat("obedience", 70, 3)
-        $ Girl.change_stat("inhibition", 50, 3)
-        $ Girl.change_stat("inhibition", 70, 1)
-
-        call auto_accepted_lines(Girl, action)
+    call auto_accepted_lines(Girl, action)
 
     return
 
 label auto_rejected_reactions(Girl, action):
-    if action in ["fondle_thighs", "suck_breasts", "fondle_pussy"]:
+    call auto_rejected_changes(Girl action)
+
+    if action in ["fondle_thighs", "suck_breasts", "fondle_pussy", "finger_ass", "eat_ass"]:
         $ Girl.change_face("_surprised")
-        $ Girl.change_stat("obedience", 50, -2)
 
         call auto_rejected_lines(Girl, action)
     elif action == "fondle_breasts":
         $ Girl.change_face("_surprised")
         $ Girl.Brows = "_confused"
-        $ Girl.change_stat("obedience", 50, -2)
 
         call auto_rejected_lines(Girl, action)
     elif action == "finger_pussy":
         $ Girl.change_face("_surprised", 2)
-        $ Girl.change_stat("love", 80, -2)
-        $ Girl.change_stat("obedience", 50, -3)
 
         Girl.voice "Oooh!"
         "She slaps your hand back."
@@ -474,8 +143,6 @@ label auto_rejected_reactions(Girl, action):
         call auto_rejected_lines(Girl, action)
     elif action == "eat_pussy":
         $ Girl.change_face("_surprised")
-        $ Girl.change_stat("love", 80, -2)
-        $ Girl.change_stat("obedience", 50, -3)
 
         call auto_rejected_lines(Girl, action)
 
@@ -484,17 +151,10 @@ label auto_rejected_reactions(Girl, action):
         "She pushes your head back away from her."
     elif action == "fondle_ass":
         $ Girl.change_face("_surprised")
-        $ Girl.change_stat("obedience", 50, -3)
 
         call auto_rejected_lines(Girl, action)
 
         $ Girl.change_face("_bemused")
-    elif action in ["finger_ass", "eat_ass"]:
-        $ Girl.change_face("_surprised")
-        $ Girl.change_stat("love", 80, -2)
-        $ Girl.change_stat("obedience", 50, -3)
-
-        call auto_rejected_lines(Girl, action)
     elif action in dildo_actions or action in sex_actions:
         $ Girl.Brows = "_angry"
 
@@ -507,19 +167,17 @@ label pullback_reactions(Girl, action):
     $ Girl.change_face("_surprised")
     $ Girl.Brows = "_sad"
 
-    if action in ["fondle_pussy", "fondle_ass"]:
-        if Girl.lust > 80:
-            $ Girl.change_stat("love", 70, -4)
-    elif action in ["fondle_thighs", "finger_ass", "eat_ass"]:
-        if Girl.lust > 60:
-            $ Girl.change_stat("love", 70, -3)
+    call pullback_changes(Girl, action)
 
-    $ Girl.change_stat("obedience", 90, 1)
-    $ Girl.change_stat("obedience", 70, 2)
+    $ lines = ["As you pull back, [Girl.name] looks a little sad."]
 
-    "As you pull back, [Girl.name] looks a little sad."
-    "As your finger slides out, [Girl.name] gasps and looks upset."
-    "As your hand pulls out, [Girl.name] gasps and looks upset."
+    if action in finger_actions:
+        $ lines.append("As your finger slides out, [Girl.name] gasps and looks upset.")
+        $ lines.append("As your hand pulls out, [Girl.name] gasps and looks upset.")
+
+    $ line = renpy.random.choice(lines)
+
+    "[line]"
 
     return
 
@@ -565,7 +223,7 @@ label first_time_asking_reactions(Girl, action):
 
             call hand_not_enough(Girl)
 
-    if Girl.Forced:
+    if Girl.forced:
         $ Girl.change_face("_sad")
 
         call first_time_forcing_lines(Girl, action)
@@ -998,7 +656,7 @@ label girl_initiated_action(Girl, action):
     return False
 
 label first_action_approval(Girl, action):
-    if Girl.Forced:
+    if Girl.forced:
         call first_action_approval_forced_reactions(Girl, action)
     elif Girl.love >= (Girl.obedience + Girl.inhibition):
         call first_action_approval_mostly_love_reactions(Girl, action)
@@ -1096,9 +754,6 @@ label action_specific_consequences(Girl, action):
         $ achievement = Girl.tag + " Sex Addict"
 
         call Partner_Like(Girl, 3, 2)
-
-        $ Girl.change_stat("inhibition", 30, 2)
-        $ Girl.change_stat("inhibition", 70, 1)
     elif action == "anal":
         $ achievement = Girl.tag + " Anal Addict"
 
@@ -1112,9 +767,6 @@ label action_specific_consequences(Girl, action):
                 call Partner_Like(Girl, 4, 2)
             elif Girl in [EmmaX, LauraX, JeanX, StormX, JubesX]:
                 call Partner_Like(Girl, 3, 2)
-
-        $ Girl.change_stat("inhibition", 30, 3)
-        $ Girl.change_stat("inhibition", 70, 1)
     elif action == "hotdog":
         $ achievement = Girl.tag + " Full Buns"
 
@@ -1123,15 +775,14 @@ label action_specific_consequences(Girl, action):
         elif Girl in [KittyX, EmmaX, LauraX]:
             call Partner_Like(Girl, 2)
 
-        $ Girl.change_stat("inhibition", 30, 1)
-        $ Girl.change_stat("inhibition", 70, 1)
+    call action_specific_changes(Girl, action)
 
     return
 
 label action_approved(Girl, action):
     $ Girl.change_face("_sexy", 1)
 
-    if Girl.Forced:
+    if Girl.forced:
         $ Girl.change_face("_sad")
         $ Girl.change_stat("love", 70, -3, 1)
         $ Girl.change_stat("love", 20, -2, 1)
@@ -1192,7 +843,7 @@ label action_disapproved(Girl, action):
         $ Girl.change_face("_perplexed")
 
         call anal_insertion_not_loose_lines(Girl, action)
-    else:
+    elif action != "masturbation":
         $ Girl.change_face("_bemused")
 
         call otherwise_not_interested_lines(Girl, action)
@@ -1210,117 +861,32 @@ label action_accepted(Girl, action):
     $ Girl.change_face("_bemused", 1)
 
     if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy"]:
-        if Girl.Forced:
+        if Girl.forced:
             $ Girl.change_face("_sad")
 
-            if action in ["fondle_thighs"]:
-                $ Girl.change_stat("love", 70, -3, 1)
-                $ Girl.change_stat("obedience", 90, 1)
-                $ Girl.change_stat("inhibition", 60, 1)
-            elif action in ["fondle_breasts", "suck_breasts", "fondle_pussy"]:
-                $ Girl.change_stat("love", 70, -3, 1)
-                $ Girl.change_stat("love", 20, -2, 1)
-                $ Girl.change_stat("obedience", 90, 1)
-                $ Girl.change_stat("inhibition", 60, 1)
+            call forced_action_accepted_changes(Girl, action)
 
         call action_accepted_enthusiastically_lines(Girl, action)
-
-        $ Girl.change_stat("love", 90, 1)
-        $ Girl.change_stat("inhibition", 50, 3)
-
+        call action_accepted_changes(Girl, action)
         call before_action
-    elif action in ["finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "eat_ass"]:
-        if Girl.Forced:
+    else:
+        if Girl.forced:
             $ Girl.change_face("_sad")
 
-            if action in ["finger_pussy", "eat_pussy", "finger_ass"]:
-                $ Girl.change_stat("love", 70, -3, 1)
-                $ Girl.change_stat("love", 20, -2, 1)
-                $ Girl.change_stat("obedience", 90, 1)
-                $ Girl.change_stat("inhibition", 60, 1)
-            elif action in ["fondle_ass"]:
-                $ Girl.change_stat("love", 70, -2, 1)
-                $ Girl.change_stat("obedience", 90, 2)
-                $ Girl.change_stat("inhibition", 60, 2)
-            elif action in ["eat_ass"]:
-                $ Girl.change_stat("love", 70, -3, 1)
-                $ Girl.change_stat("love", 20, -2, 1)
-                $ Girl.change_stat("obedience", 90, 2)
-                $ Girl.change_stat("inhibition", 60, 2)
-
-            call forced_but_welcome_lines(Girl, action)
-        else:
-            if action in ["finger_pussy", "eat_pussy", "finger_ass", "eat_ass"]:
-                $ Girl.change_face("_sexy", 1)
-
-                if action in ["finger_pussy"]:
-                    $ Girl.change_stat("love", 90, 1)
-                    $ Girl.change_stat("inhibition", 50, 3)
-                elif action in ["eat_pussy", "finger_ass"]:
-                    $ Girl.Eyes = "_closed"
-                    $ Girl.change_stat("love", 90, 1)
-                    $ Girl.change_stat("inhibition", 50, 3)
-                    $ Girl.change_stat("lust", 200, 3)
-                elif action in ["eat_ass"]:
-                    $ Girl.Eyes = "_closed"
-                    $ Girl.change_stat("love", 90, 1)
-                    $ Girl.change_stat("inhibition", 60, 2)
-                    $ Girl.change_stat("lust", 200, 3)
-            elif action in ["fondle_ass"]:
-                $ Girl.change_face("bemused, 1")
-
-            call action_accepted_enthusiastically_lines(Girl, action)
-
-        if action in ["finger_pussy", "eat_pussy", "finger_ass"]:
-            $ Girl.change_stat("obedience", 20, 1)
-            $ Girl.change_stat("obedience", 60, 1)
-            $ Girl.change_stat("inhibition", 70, 2)
-        elif action in ["fondle_ass"]:
-            $ Girl.change_stat("lust", 200, 3)
-            $ Girl.change_stat("obedience", 60, 1)
-            $ Girl.change_stat("inhibition", 70, 1)
-        elif action in ["eat_ass"]:
-            $ Girl.change_stat("obedience", 20, 1)
-            $ Girl.change_stat("obedience", 60, 1)
-            $ Girl.change_stat("inhibition", 80, 2)
-
-        call before_action
-    elif action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:                                                                   #She's into it. . .
-        if Girl.Forced:
-            $ Girl.change_face("_sad")
-            $ Girl.change_stat("inhibition", 60, 1)
-
-            if action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal"]:
-                $ Girl.change_stat("obedience", 90, 1)
-            elif action in ["hotdog"]:
-                $ Girl.change_stat("obedience", 80, 1)
-
+            call forced_action_accepted_changes(Girl, action)
             call action_forcefully_accepted_lines(Girl, action)
         elif "no_" + action in Girl.daily_history:
             call convinced_after_saying_no_lines(Girl, action)
         else:
-            $ Girl.change_face("_sexy", 1)
+            if action in ["fondle_ass"]:
+                $ Girl.change_face("bemused", 1)
+            else:
+                $ Girl.change_face("_sexy", 1)
 
-            if action in ["handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal"]:
-                $ Girl.change_stat("love", 90, 1)
-                $ Girl.change_stat("inhibition", 50, 3)
-            elif action in ["hotdog"]:
-                $ Girl.change_stat("love", 80, 1)
-                $ Girl.change_stat("inhibition", 50, 2)
-
+            call not_forced_action_accepted_changes(Girl, action)
             call accepted_without_question_lines(Girl, action)
 
-            $ line = 0
-
-        $ Girl.change_stat("obedience", 20, 1)
-
-        if action in ["handjob", "footjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
-            $ Girl.change_stat("obedience", 60, 1)
-            $ Girl.change_stat("inhibition", 70, 2)
-        elif action in ["titjob", "blowjob"]:
-            $ Girl.change_stat("obedience", 70, 1)
-            $ Girl.change_stat("inhibition", 80, 2)
-
+        call action_accepted_changes(Girl, action)
         jump before_action
 
     return
@@ -1334,7 +900,7 @@ label action_rejected(Girl, action):
         call action_already_rejected_lines(Girl, action)
 
         $ Girl.add_word(1,"_angry","_angry")
-    elif Girl.Forced:
+    elif Girl.forced:
         call forced_action_rejected_reactions(Girl, action)
 
         $ Girl.add_word(1, "_angry", "_angry")
@@ -1354,18 +920,18 @@ label action_rejected(Girl, action):
     $ Girl.recent_history.append("no_" + action)
     $ Girl.daily_history.append("no_" + action)
 
-    $ temp_modifier = 0
+    $ approval_bonus = 0
 
     return
 
 label forced_action(Girl, action):
     call forced_approval_checks(Girl, action)
 
-    if approval > 1 or (approval and Girl.Forced):
+    if approval > 1 or (approval and Girl.forced):
         call forced_but_not_unwelcome_reactions(Girl, action)
 
         if approval < 2:
-            $ Girl.Forced = 1
+            $ Girl.forced = 1
 
         jump before_action
     else:

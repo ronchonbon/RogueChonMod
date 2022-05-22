@@ -80,7 +80,7 @@ label StormMeetAsk:
             ch_e "Right. . ."
     ch_e "Ok, now sit down, the lesson is about to begin."
     $ Player.add_word(1,0,0,0,"attic")
-    $ StormX.Break[0] = 104
+    $ StormX.broken_up[0] = 104
     $ Player.history.remove("noise")
     $ EmmaX.location = "bg_teacher"
     return
@@ -97,13 +97,13 @@ label StormMeetWater:
             "Stop being a pussy."
     if len(Party) > 1:
         Party[0].voice "I think we'll sit this one out."
-        call Remove_Girl (Party[0])
+        call remove_girl (Party[0])
         Party[0].voice "Have fun though."
-        call Remove_Girl (Party[0])
+        call remove_girl (Party[0])
     elif Party:
         Party[0].voice "I think I'll sit this one out."
         Party[0].voice "Have fun though."
-        call Remove_Girl (Party[0])
+        call remove_girl (Party[0])
     "You head for the door marked \"Attic. . .\""
     $ Player.add_word(1,"water",0,0,0)
     jump StormMeet
@@ -123,11 +123,11 @@ label StormMeet:
 
     $ Player.history.remove("attic")
     $ bg_current = "bg_storm"
-    $ StormX.OutfitDay = "casual1"
-    $ StormX.Outfit = "casual1"
+    $ StormX.today_outfit = "casual1"
+    $ StormX.outfit = "casual1"
     $ StormX.change_outfit("casual1")
     call clear_the_room ("All", 0, 1)
-    $ StormX.Break[0] = 0
+    $ StormX.broken_up[0] = 0
     $ StormX.location = 0
     $ StormX.love = 500
     $ StormX.obedience = 0
@@ -444,7 +444,7 @@ label StormMeet:
     $ EmmaX.Schedule[3][0] = "bg_emma"
     $ EmmaX.Schedule[3][1] = "bg_dangerroom"
 
-    $ Round -= 20
+    $ round -= 20
     $ bg_current = "bg_player"
     jump Misplaced
 
@@ -577,8 +577,8 @@ label Storm_Nudity:
                 $ StormX.change_stat("obedience", 80, 5)
                 $ StormX.change_stat("inhibition", 200, -3)
                 ch_s "If it would make you more comforable, then I would not mind it."
-                $ StormX.OutfitDay = "casual1"
-                $ StormX.Outfit = "casual1"
+                $ StormX.today_outfit = "casual1"
+                $ StormX.outfit = "casual1"
                 $ StormX.change_outfit("casual1")
 
             "Should I get naked too?" if "naked" not in Player.recent_history:
@@ -701,7 +701,7 @@ label Storm_Teacher_Caught(Girl=0):
     else:
         "[Girl.name] jumps and dashes out of the room."
         call Partner_Like (StormX, -2, -3, 500, Girl)
-        call Remove_Girl (Girl)
+        call remove_girl (Girl)
 
     $ Girl.reputation -= 1
     call Partner_Like (Girl, 3, 2, 800, StormX)
@@ -862,7 +862,7 @@ label Storm_Hairtalk:
     $ StormX.change_face("_bemused")
     ch_s "Oh, that was me during an earlier, more rebellious phase."
     hide Storm_Photo with easeoutbottom
-    $ StormX.history.append("mohawk")
+    $ StormX.history.append("_mohawk")
     menu:
         extend ""
         "You look great like that.":
@@ -877,7 +877,7 @@ label Storm_Hairtalk:
                     $ StormX.change_stat("obedience", 80, 2)
                     if approval_check(StormX, 700):
                         ch_s "I think that I shall."
-                        $ StormX.Todo.append("hair")
+                        $ StormX.to_do.append("hair")
                     else:
                         ch_s "I may consider it in future. . ."
                 "Not really, you look great this way too.":
@@ -1024,7 +1024,7 @@ label Storm_Detention:
                 $ StormX.change_stat("inhibition", 50, 5)
                 $ StormX.change_stat("lust", 80, 5)
                 $ Player.XP += 10
-    $ Round = 20 if Round > 20 else Round
+    $ round = 20 if round > 20 else round
     ch_s "Ok, I think that's plenty for now. . ."
     ch_s "You wouldn't want to make this a habit. . ."
     $ approval_bonus = 0
@@ -1065,7 +1065,7 @@ label Storm_BF:
             "[StormX.name] approaches you and asks if the two of you can talk."
         else:
             "[StormX.name] turns towards you and asks if the two of you can talk."
-    $ StormX.drain_word("asked meet")
+    $ StormX.drain_word("asked_to_meet")
 
     call set_the_scene (0)
     call Display_Girl (StormX)
@@ -1111,7 +1111,7 @@ label Storm_BF:
             $ StormX.change_stat("inhibition", 70, -2)
             ch_s "Then I won't take more of your time."
             ch_s "Let me know when your. . . schedule clears up."
-            call Remove_Girl (StormX)
+            call remove_girl (StormX)
             $ Player.history.append("story")
             return
 
@@ -1201,7 +1201,7 @@ label Storm_BF_Story:
                     ch_s "Well that is a disappointment."
                     if not approval_check(StormX, 1000):
                         ch_s "I suppose that will be all then."
-                        call Remove_Girl (StormX)
+                        call remove_girl (StormX)
                         return
                     else:
                         $ StormX.change_stat("obedience", 80, 5)
@@ -1285,7 +1285,7 @@ label Storm_BF_End:
 
 label Storm_Love:
 
-    $ StormX.drain_word("asked meet")
+    $ StormX.drain_word("asked_to_meet")
     if StormX.location == bg_current or StormX in Party:
         "[StormX.name] glances over at you with an apprising look on her face."
     else:
@@ -1682,7 +1682,7 @@ label Storm_Love_Badend:
     ch_s "You know, I do not think you're ready to have this conversation."
     $ StormX.recent_history.append("_angry")
     $ StormX.daily_history.append("_angry")
-    call Remove_Girl (StormX)
+    call remove_girl (StormX)
     return
 
 
@@ -1690,7 +1690,7 @@ label Storm_Love_Badend:
 
 label Storm_Sub:
     call shift_focus (StormX)
-    $ StormX.drain_word("asked meet")
+    $ StormX.drain_word("asked_to_meet")
 
     $ StormX.location = bg_current
     call set_the_scene
@@ -1823,7 +1823,7 @@ label Storm_Sub:
             ch_s ". . .fine."
             $ StormX.change_stat("obedience", 90, -10)
             ch_s "Perhaps some other time. . ."
-            call Remove_Girl (StormX)
+            call remove_girl (StormX)
             $ StormX.change_face("_normal",1)
             $ StormX.history.append("sir")
             return
@@ -1951,7 +1951,7 @@ label Storm_Sub_Asked:
     if Line == "rude":
 
         hide Storm_Sprite with easeoutright
-        call Remove_Girl (StormX)
+        call remove_girl (StormX)
         $ StormX.recent_history.append("_angry")
         $ renpy.pop_call()
         "[StormX.name] marches out the door, leaving you alone. She looked pretty upset."
@@ -1977,7 +1977,7 @@ label Storm_Sub_Asked:
 
 
 label Storm_Master:
-    $ StormX.drain_word("asked meet")
+    $ StormX.drain_word("asked_to_meet")
     call shift_focus (StormX)
     $ StormX.location = bg_current
     call set_the_scene
@@ -2270,7 +2270,7 @@ label Storm_Poolnight:
             "You join her in the pool and swim about for a bit."
             $ StormX.change_stat("lust", 90, 3)
             "You weave closer and closer to each other. . ."
-            $ Round -= 10 if Round >= 10 else Round
+            $ round -= 10 if round >= 10 else round
             "Finally, she pulls you close and whispers in your ear. . ."
             $ StormX.change_stat("lust", 90, 5)
             ch_s "Would you like to get out of the water, and get me soaking wet?"
@@ -2412,7 +2412,7 @@ label Storm_Daddy:
                 ch_s "Oh. . . "
                 ch_s ". . . I suppose that it is."
                 ch_s "Never mind. . ."
-                call Remove_Girl (StormX)
+                call remove_girl (StormX)
                 $ Line = 0
             "I'd rather not." if "callyouthat" in StormX.recent_history or "whycare" in StormX.recent_history:
                 $ StormX.change_stat("love", 90, -2)
@@ -2421,7 +2421,7 @@ label Storm_Daddy:
                 ch_s "Oh. . . "
                 ch_s ". . . I suppose that it fine."
                 ch_s "Never mind. . ."
-                call Remove_Girl (StormX)
+                call remove_girl (StormX)
                 $ Line = 0
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

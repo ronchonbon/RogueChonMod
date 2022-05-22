@@ -43,8 +43,8 @@ image Jubes_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.Water and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Water1.png",
-            "JubesX.Water", "images/JubesSprite/Jubes_Sprite_Water2.png",
+            "JubesX.wet and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Water1.png",
+            "JubesX.wet", "images/JubesSprite/Jubes_Sprite_Water2.png",
             "True", Null(),
             ),
 
@@ -328,7 +328,7 @@ image Jubes_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.Water and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Water1_Arm.png",
+            "JubesX.wet and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Water1_Arm.png",
             "True", Null(),
             ),
 
@@ -496,7 +496,7 @@ image Jubes_Sprite_hairback:
 
 
                 "JubesX.hair == 'wet'", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Back.png",
-                "JubesX.Water", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Back.png",
+                "JubesX.wet", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Back.png",
                 "True", "images/JubesSprite/Jubes_Sprite_Hair_Short_Back.png",
                 ),
 
@@ -569,13 +569,13 @@ image Jubes_Sprite_Head:
         (0,0), ConditionSwitch(
 
 
-            "JubesX.hair == 'wet' or JubesX.Water", "images/JubesSprite/Jubes_Sprite_Hair_Wet.png",
+            "JubesX.hair == 'wet' or JubesX.wet", "images/JubesSprite/Jubes_Sprite_Hair_Wet.png",
             "JubesX.hair == 'shades'", "images/JubesSprite/Jubes_Sprite_Hair_Shades.png",
             "True", "images/JubesSprite/Jubes_Sprite_Hair_Short.png",
             ),
         (0,0), ConditionSwitch(
 
-            "not JubesX.Water", Null(),
+            "not JubesX.wet", Null(),
             "True", "images/JubesSprite/Jubes_Sprite_Wet_Head.png",
             ),
         (0,0), ConditionSwitch(
@@ -795,7 +795,7 @@ image Jubes_Doggy_Head:
 
         (0,0), ConditionSwitch(
 
-            "JubesX.Water or JubesX.hair == 'wet'", "images/JubesDoggy/Jubes_Doggy_Hair_Wet_Back.png",
+            "JubesX.wet or JubesX.hair == 'wet'", "images/JubesDoggy/Jubes_Doggy_Hair_Wet_Back.png",
             "True", "images/JubesDoggy/Jubes_Doggy_Hair_Long_Back.png",
             ),
         (0,0), ConditionSwitch(
@@ -858,7 +858,7 @@ image Jubes_Doggy_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.Water or JubesX.hair == 'wet'", "images/JubesDoggy/Jubes_Doggy_Hair_Wet.png",
+            "JubesX.wet or JubesX.hair == 'wet'", "images/JubesDoggy/Jubes_Doggy_Hair_Wet.png",
             "True", "images/JubesDoggy/Jubes_Doggy_Hair_Long.png",
             ),
         (0,0), ConditionSwitch(
@@ -3934,7 +3934,7 @@ image Jubes_Sprite_BJ_hairback:
     ConditionSwitch(
 
             "not JubesX.hair", Null(),
-            "JubesX.hair == 'wet' or JubesX.Water", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Under.png",
+            "JubesX.hair == 'wet' or JubesX.wet", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Under.png",
             "JubesX.hair", "images/JubesSprite/Jubes_Sprite_Hair_Long_Under.png",
             "True", Null(),
             )
@@ -4017,7 +4017,7 @@ image Jubes_Sprite_BJ_Head:
         (0,0), ConditionSwitch(
 
             "JubesX.top == 'jacket'", Null(),
-            "JubesX.hair == 'wet' or JubesX.Water", Null(),
+            "JubesX.hair == 'wet' or JubesX.wet", Null(),
             "JubesX.hair", "images/JubesSprite/Jubes_Sprite_Hair_Long_Mid.png",
             "True", Null(),
             ),
@@ -4029,13 +4029,13 @@ image Jubes_Sprite_BJ_Head:
         (0,0), ConditionSwitch(
 
             "not JubesX.hair", Null(),
-            "JubesX.hair == 'wet' or JubesX.Water", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Over.png",
+            "JubesX.hair == 'wet' or JubesX.wet", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Over.png",
             "JubesX.hair", "images/JubesSprite/Jubes_Sprite_Hair_Long_Over.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not JubesX.Water", Null(),
+            "not JubesX.wet", Null(),
             "True", "images/JubesSprite/Jubes_Sprite_Head_Wet.png",
 
             ),

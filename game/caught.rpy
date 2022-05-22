@@ -1,17 +1,17 @@
 
-label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
+label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=[]):
     call shift_focus (Girl)
     call checkout
     Girl.voice "!!!"
     $ Line = primary_action
     call Trig_Reset
     $ Girl.change_outfit()
-    $ BO = all_Girls[:]
-    while BO:
-        if BO[0].location == bg_current:
-            $ BO[0].location = "bg_study"
-        $ TotalCaught += BO[0].event_counter["caught"]
-        $ BO.remove(BO[0])
+    $ temp_Girls = all_Girls[:]
+    while temp_Girls:
+        if temp_Girls[0].location == bg_current:
+            $ temp_Girls[0].location = "bg_study"
+        $ TotalCaught += temp_Girls[0].event_counter["caught"]
+        $ temp_Girls.remove(temp_Girls[0])
     $ bg_current = "bg_study"
     call set_the_scene (0)
     show Xavier_sprite at sprite_location(stage_left)
@@ -30,7 +30,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
         show Storm_Sprite at sprite_location(stage_right) with ease
     elif Girl == JubesX:
         show Jubes_Sprite at sprite_location(stage_right) with ease
-    call OutfitShame (Girl, 20)
+    call outfitShame (Girl, 20)
 
     $ Count = Girl.event_counter["caught"]
 
@@ -53,7 +53,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
     $ Girl.change_face("_sad")
     if (Girl == EmmaX or Partner == EmmaX) and (Girl == StormX or Partner == StormX):
         ch_x "I'm very disappointed in the both of you!."
-        ch_x "You should BOTH know better than this!"
+        ch_x "You should temp_GirlsTH know better than this!"
     elif Girl == StormX or Partner == StormX:
         ch_x "I'm very disappointed in your behavior, particularly yours, Ororo."
     elif Girl == EmmaX or Partner == EmmaX:
@@ -72,15 +72,15 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
     else:
         ch_x "Having sexual relations in such a public location, it shows very poor character of you!"
 
-    if Girl.Shame >= 40:
+    if Girl.shame >= 40:
         ch_x "[Girl.name], my dear, you're practically naked! At least throw a towel on!"
         "He throws [Girl.name] the towel."
         show blackscreen onlayer black
-        $ BO = all_Girls[:]
-        while BO:
-            if BO[0].location == bg_current and (not BO[0].top and not BO[0].bra):
-                $ BO[0].top = "_towel"
-            $ BO.remove(BO[0])
+        $ temp_Girls = all_Girls[:]
+        while temp_Girls:
+            if temp_Girls[0].location == bg_current and (not temp_Girls[0].top and not temp_Girls[0].bra):
+                $ temp_Girls[0].top = "_towel"
+            $ temp_Girls.remove(temp_Girls[0])
         hide blackscreen onlayer black
         if (Girl == StormX or Partner == StormX) and StormX.top == "_towel":
             ch_x ". . ."
@@ -92,7 +92,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
             hide blackscreen onlayer black
             ch_x ". . . fine."
 
-    elif Girl.Shame >= 20:
+    elif Girl.shame >= 20:
         ch_x "[Girl.name], my dear, that attire is positively scandalous."
 
     if Girl.event_counter["caught"]:
@@ -200,7 +200,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
             else:
                 ch_x "Very well, just don't let it happen again. "
             $ Count += 5
-            if PunishmentX:
+            if being_punished:
                 ch_x "I'm extending your punishment by [Count] days."
             else:
                 ch_x "I'm halving your daily stipend for [Count] days."
@@ -241,7 +241,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
             call change_Xavier_face ("_angry")
             $ Count += 10
             ch_x "If that's your attitude, harsher methods might be necessary."
-            if PunishmentX:
+            if being_punished:
                 ch_x "I'm extending your punishment by [Count] days."
             else:
                 ch_x "I'm halving your daily stipend for [Count] days."
@@ -327,7 +327,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
             call change_Xavier_face ("_angry")
             $ Count += 20
             ch_x "If that's your attitude, harsher methods might be necessary."
-            if PunishmentX:
+            if being_punished:
                 ch_x "I'm extending your punishment by [Count] days!"
             else:
                 ch_x "I'm halving your daily stipend for [Count] days!"
@@ -414,7 +414,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
                         $ KittyX.change_stat("love", 90, 5)
             else:
                 $ Girl.change_face("_confused")
-                ch_k "Wait, Plan what??"
+                ch_k "wait, Plan what??"
                 ch_p "Plan {i}Kappa!{/i} . . you know. . ."
                 ch_k "I have no {i}idea{/i} what you're talking about."
                 ch_p "oh, yeah, I guess I haven't mentioned that. . ."
@@ -461,7 +461,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
                 $ Girl.change_face("_confused")
                 ch_l "Yeah!"
                 ch_l ". . ."
-                ch_l "Wait, plan \"key,\" what??"
+                ch_l "wait, plan \"key,\" what??"
                 ch_p "Plan {i}Chi!{/i} . . you know. . ."
                 ch_l "Um. No?"
                 ch_p "oh, yeah, I guess I haven't mentioned that. . ."
@@ -546,7 +546,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
         call change_Xavier_face ("_angry")
         $ Count += 10
         ch_x "I have no idea what that was about, but it sounds like you haven't learned."
-        if PunishmentX:
+        if being_punished:
             ch_x "I'm extending your punishment by [Count] days."
         else:
             ch_x "I'm halving your daily stipend for [Count] days."
@@ -582,7 +582,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
         ch_x "I've had enough of you, begone."
 
 
-    $ PunishmentX += Count
+    $ being_punished += Count
 
     $ Girl.event_counter["caught"] += 1
     if Partner in all_Girls:
@@ -654,7 +654,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, BO=[]):
             if StormX.event_counter["caught"] > 3:
                 "I bet there's something in that righthand drawer. . ."
 
-    call Remove_Girl ("All")
+    call remove_girl ("All")
     "You return to your room"
     hide Xavier_sprite
     $ bg_current = "bg_player"
@@ -706,7 +706,7 @@ label Xavier_Plan(GirlX=0):
             else:
                 $ Partner.change_face("_surprised")
                 "[Partner.name] looks a bit uncomfortable with what's happening and takes off."
-                call Remove_Girl (Partner)
+                call remove_girl (Partner)
         else:
 
             $ Partner.change_face("_sly")
@@ -845,7 +845,7 @@ label Xavier_Plan(GirlX=0):
         ch_v "Well, [JubesX.player_petname], what should we ask for?"
 
     $ Count = 3
-    $ PunishmentX = 0
+    $ being_punished = 0
     while Count > 0:
         $ Count -= 1
         menu:
@@ -1187,7 +1187,7 @@ label Xavier_Plan(GirlX=0):
         $ GirlX.ArmPose = 0
 
     $ Player.daily_history.append("Xavier")
-    call Remove_Girl ("All")
+    call remove_girl ("All")
     hide Xavier_sprite
     $ bg_current = "bg_player"
     call set_the_scene
@@ -1207,7 +1207,7 @@ label Girl_Caught_Changing(Girl=0):
     $ D20 = renpy.random.randint(1, 20)
 
     $ Girl.change_face("_surprised", 1,Mouth = "_kiss")
-    call Remove_Girl ("All")
+    call remove_girl ("All")
 
     if D20 > 17:
 
@@ -1428,7 +1428,7 @@ label Girl_Caught_Changing(Girl=0):
                     $ Girl.change_stat("inhibition", 60, 2)
                     $ Girl.change_face("_sexy")
                     ch_s "I suppose that could not hurt. . ."
-                    $ Girl.Set_Temp_Outfit()
+                    $ Girl.Set_Temp_outfit()
                 else:
                     $ Girl.change_stat("inhibition", 60, 2)
                     $ Girl.change_face("_smile")
@@ -1444,14 +1444,14 @@ label Girl_Caught_Changing(Girl=0):
                     $ Girl.change_stat("inhibition", 70, 1)
                     ch_s "Oh, you are a naughty one. . ."
                     $ Girl.change_outfit("nude")
-                    $ Girl.Set_Temp_Outfit()
+                    $ Girl.Set_Temp_outfit()
                 elif approval_check(Girl, 350+(10*D20)):
                     $ Girl.change_stat("love", 80, 1)
                     $ Girl.change_stat("obedience", 50, 1)
                     $ Girl.change_stat("obedience", 80, 1)
                     $ Girl.change_stat("inhibition", 70, 2)
                     ch_s "I could at least. . . pause for a moment?"
-                    $ Girl.Set_Temp_Outfit()
+                    $ Girl.Set_Temp_outfit()
                 else:
                     $ Girl.change_stat("love", 60, 1)
                     $ Girl.change_stat("obedience", 50, 2)
@@ -1465,14 +1465,14 @@ label Girl_Caught_Changing(Girl=0):
                     $ Girl.change_stat("inhibition", 60, 1)
                     $ Girl.change_face("_sexy")
                     ch_s "If you want. . ."
-                    $ Girl.Set_Temp_Outfit()
+                    $ Girl.Set_Temp_outfit()
                 elif approval_check(Girl, 350+(10*D20)) and approval_check(Girl, 400, "O"):
                     $ Girl.change_stat("love", 50, -2)
                     $ Girl.change_stat("love", 80, -1)
                     $ Girl.change_stat("obedience", 50, 2)
                     $ Girl.change_face("_sexy",Eyes="_side")
                     ch_s ". . . Very well."
-                    $ Girl.Set_Temp_Outfit()
+                    $ Girl.Set_Temp_outfit()
                 else:
                     $ Girl.change_stat("love", 80, -2)
                     $ Girl.change_stat("obedience", 50, -1)
@@ -1487,7 +1487,7 @@ label Girl_Caught_Changing(Girl=0):
                     $ Girl.change_face("_sexy")
                     ch_s "Fine. . ."
                     $ Girl.change_outfit("nude")
-                    $ Girl.Set_Temp_Outfit()
+                    $ Girl.Set_Temp_outfit()
                 elif approval_check(Girl,800) and approval_check(Girl, 500, "O"):
                     $ Girl.change_stat("love", 50, -2)
                     $ Girl.change_stat("love", 80, -2)
@@ -1496,7 +1496,7 @@ label Girl_Caught_Changing(Girl=0):
                     $ Girl.change_face("_sexy",Eyes="_side")
                     ch_s ". . . Fine."
                     $ Girl.change_outfit("nude")
-                    $ Girl.Set_Temp_Outfit()
+                    $ Girl.Set_Temp_outfit()
                 else:
                     $ Girl.change_stat("love", 50, -2)
                     $ Girl.change_stat("love", 80, -2)
@@ -1513,8 +1513,8 @@ label Girl_Caught_Mastubating(Girl=0):
 
     if Girl not in all_Girls:
         return
-    $ Girl.drain_word("gonnafap")
-    call Remove_Girl ("All")
+    $ Girl.drain_word("will_masturbate")
+    call remove_girl ("All")
     $ Girl.location = bg_current
     "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
     menu:
@@ -1655,36 +1655,36 @@ label Girl_Caught_Mastubating(Girl=0):
 
 
 
-label Girls_Caught_Lesing(Girl=0, Girl2=0, BO=[]):
+label Girls_Caught_Lesing(Girl=0, Girl2=0, temp_Girls=[]):
 
 
-    $ BO = active_Girls[:]
+    $ temp_Girls = active_Girls[:]
     if Girl in all_Girls:
-        $ BO.remove(Girl)
-    while BO and not Girl:
-        if BO[0] not in Party and BO[0].location == bg_current and "les" in BO[0].recent_history:
+        $ temp_Girls.remove(Girl)
+    while temp_Girls and not Girl:
+        if temp_Girls[0] not in Party and temp_Girls[0].location == bg_current and "lesbian" in temp_Girls[0].recent_history:
 
 
-            $ Girl = BO[0]
-            $ BO = [1]
-        $ BO.remove(BO[0])
+            $ Girl = temp_Girls[0]
+            $ temp_Girls = [1]
+        $ temp_Girls.remove(temp_Girls[0])
     if Girl and not Girl2:
 
-        $ BO = active_Girls[:]
-        $ BO.remove(Girl)
-        while BO:
-            if BO[0] not in Party and BO[0].location == bg_current and "les" in BO[0].recent_history:
+        $ temp_Girls = active_Girls[:]
+        $ temp_Girls.remove(Girl)
+        while temp_Girls:
+            if temp_Girls[0] not in Party and temp_Girls[0].location == bg_current and "lesbian" in temp_Girls[0].recent_history:
 
 
-                $ Girl2 = BO[0]
-                $ BO = [1]
-            $ BO.remove(BO[0])
+                $ Girl2 = temp_Girls[0]
+                $ temp_Girls = [1]
+            $ temp_Girls.remove(temp_Girls[0])
 
     if not Girl or not Girl2:
         return 1
 
-    $ Girl.drain_word("les",1,0)
-    $ Girl2.drain_word("les",1,0)
+    $ Girl.drain_word("lesbian",1,0)
+    $ Girl2.drain_word("lesbian",1,0)
 
     $ Girl.add_word(0,"lesbian","lesbian")
     $ Girl2.add_word(0,"lesbian","lesbian")
@@ -1747,9 +1747,9 @@ label Girls_Caught_Lesing(Girl=0, Girl2=0, BO=[]):
                 call expression Girl.tag + "_SexAct" pass ("lesbian")
             "Leave quietly":
                 "You leave the girls to their business and slip out."
-                $ Girl.Thirst -= 30
+                $ Girl.thirst -= 30
                 $ Girl.lust = 20
-                $ Girl2.Thirst -= 30
+                $ Girl2.thirst -= 30
                 $ Girl2lust = 20
                 $ renpy.pop_call()
                 jump Campus_Map
@@ -1767,16 +1767,16 @@ label Girl_Caught_Shower(Girl=0):
 
     $ Options = []
     $ Girl.add_word(1,"showered","showered",0,0)
-    call Remove_Girl ("All")
+    call remove_girl ("All")
 
     $ Girl.change_outfit("nude")
     $ Girl.change_face("_smile",1)
 
     $ Girl.location = "bg_showerroom"
-    $ Girl.Water = 1
+    $ Girl.wet = 1
     $ Girl.grool = 2
 
-    if "gonnafap" in Girl.daily_history:
+    if "will_masturbate" in Girl.daily_history:
         "As you approach the showers, you hear some shallow moans from inside."
     else:
         "As you approach the showers, you hear some humming noises from inside."
@@ -1787,11 +1787,11 @@ label Girl_Caught_Shower(Girl=0):
         "Knock":
             $ Line = "knock"
         "Come back later":
-            call Remove_Girl (Girl)
+            call remove_girl (Girl)
             $ Girl.change_outfit(6)
-            $ Girl.drain_word("gonnafap",0,1)
+            $ Girl.drain_word("will_masturbate",0,1)
             $ Girl.lust = 25
-            $ Girl.Thirst -= int(Girl.Thirst/2) if Girl.Thirst >= 50 else int(Girl.Thirst/4)
+            $ Girl.thirst -= int(Girl.thirst/2) if Girl.thirst >= 50 else int(Girl.thirst/4)
             $ bg_current = "bg_campus"
             jump Misplaced
 
@@ -1799,7 +1799,7 @@ label Girl_Caught_Shower(Girl=0):
 
         "You knock on the door. You hear some shuffling inside"
         $ Girl.top = "_towel"
-        if "gonnafap" in Girl.daily_history:
+        if "will_masturbate" in Girl.daily_history:
 
             "You hear a sharp shuffling sound and the water gets cut off."
             "After several seconds and some more shuffling, [Girl.name] comes to the door."
@@ -1842,9 +1842,9 @@ label Girl_Caught_Shower(Girl=0):
     else:
 
 
-        if "gonnafap" in Girl.daily_history:
+        if "will_masturbate" in Girl.daily_history:
 
-            $ Girl.drain_word("gonnafap",0,1)
+            $ Girl.drain_word("will_masturbate",0,1)
             $ Girl.change_face("_sexy",Eyes="_closed")
             $ Girl.add_word(1,"unseen","unseen",0,0)
             call set_the_scene (Dress=0)
@@ -2049,7 +2049,7 @@ label Girl_Caught_Shower(Girl=0):
     menu:
         extend ""
         "Sure, see you later then.":
-            call Remove_Girl (Girl)
+            call remove_girl (Girl)
         "Actually, could you stick around a minute?":
             if approval_check(Girl, 900) or Girl == StormX:
                 if Girl == RogueX:
@@ -2085,7 +2085,7 @@ label Girl_Caught_Shower(Girl=0):
                     ch_j "I'd rather not."
                 elif Girl == JubesX:
                     ch_v "Um. . . nah. . ."
-                call Remove_Girl (Girl)
+                call remove_girl (Girl)
 
     if Line == "leaving":
         $ Girl.change_outfit(6)
@@ -2102,7 +2102,7 @@ label Share(Girl=0, Other=0):
 
     $ Girl.drain_word("ask "+Other.tag,0,0,1)
 
-    if Girl.Break[0]:
+    if Girl.broken_up[0]:
 
         "[Girl.name] sends you a text."
         $ Other.change_stat("love", 90, -10)
@@ -2134,15 +2134,15 @@ label Share(Girl=0, Other=0):
             $ Other.change_stat("obedience", 80, 10)
             $ Other.change_stat("inhibition", 80, 15)
 
-            $ BO = Player.Harem[:]
-            while BO:
-                $ BO[0].drain_word("saw with "+Other.tag,0,0,1)
-                $ BO.remove(BO[0])
+            $ temp_Girls = Player.Harem[:]
+            while temp_Girls:
+                $ temp_Girls[0].drain_word("saw with "+Other.tag,0,0,1)
+                $ temp_Girls.remove(temp_Girls[0])
             if Girl.Event[5]:
 
                 $ Player.Harem.append(Other)
 
-            elif bg_current in PersonalRooms:
+            elif bg_current in personal_rooms:
 
                 if Other.tag+"Yes" not in Player.traits:
                     $ Player.traits.append(Other.tag+"Yes")
@@ -2168,5 +2168,5 @@ label Share(Girl=0, Other=0):
                 Girl.voice "She doesn't really like me that much. . ."
 
 
-            $ Other.Break[0] = 7
+            $ Other.broken_up[0] = 7
     return

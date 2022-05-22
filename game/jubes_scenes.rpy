@@ -6,8 +6,8 @@ label Jubes_Meet:
 
 
     show blackscreen onlayer black
-    $ JubesX.OutfitDay = "casual2"
-    $ JubesX.Outfit = "casual2"
+    $ JubesX.today_outfit = "casual2"
+    $ JubesX.outfit = "casual2"
     $ JubesX.change_outfit("casual2")
     call clear_the_room ("All", 0, 1)
     $ JubesX.location = bg_current
@@ -42,7 +42,7 @@ label Jubes_Meet:
     $ Player.change_stat("focus", 80, 10)
     $ JubesX.change_stat("lust", 80, 5)
 
-    "Wait. . . no it's not. . ."
+    "wait. . . no it's not. . ."
     call shift_focus (JubesX)
 
     $ JubesX.ArmPose = 2
@@ -535,7 +535,7 @@ label Jubes_Meet:
     $ JubesX.add_word(1,0,0,0,"met")
     $ active_Girls.append(JubesX) if JubesX not in active_Girls else active_Girls
     hide Jubes_Sprite with easeoutright
-    call Remove_Girl (JubesX)
+    call remove_girl (JubesX)
     "[JubesX.name] leaves the room, you might as well get some sleep. . ."
     return
 
@@ -640,7 +640,7 @@ label Jubes_Sunshine:
     ch_v "Anyway, I just wanted to say \"thank you,\" this is great!"
     $ JubesX.add_word(1,0,0,0,"sunshine")
     hide Jubes_Sprite with easeoutright
-    call Remove_Girl (JubesX)
+    call remove_girl (JubesX)
     "[JubesX.name] dashes off, and you continue on your way. . ."
     return
 
@@ -648,7 +648,7 @@ label Jubes_Sunshine:
 
 
 
-label Jubes_Entry_Check:
+label Jubes_entry_Check:
 
     if JubesX not in Party:
         return
@@ -764,17 +764,17 @@ label Jubes_Sunshock:
                         $ Girl.change_stat("love", 80, 6)
                         $ Girl.change_face("_smile")
                         call Girl_Tag (Girl)
-                    while Girl.addiction > 20 and Round > 10:
+                    while Girl.addiction > 20 and round > 10:
 
                         $ Girl.addiction -= 1
-                        $ Round -= 1
-                        if Round == 10:
+                        $ round -= 1
+                        if round == 10:
                             Girl.voice "I suppose we don't have time for any more than that."
                 "How about a kiss?":
 
 
                     if Girl.action_counter["kiss"] or approval_check(Girl, 600, "LI") or Girl.player_petname in ("master", "sir"):
-                        $ Girl.Forced = 0
+                        $ Girl.forced = 0
                         $ Girl.change_stat("lust", 80, 3)
                         $ Girl.change_stat("love", 80, 6)
                         $ Girl.change_face("_sexy")
@@ -908,7 +908,7 @@ label Jubes_Sunshock:
 
 
 
-label Jubes_Mall(BO=[]):
+label Jubes_Mall(temp_Girls=[]):
 
 
     call shift_focus (JubesX)
@@ -969,7 +969,7 @@ label Jubes_Mall(BO=[]):
             ch_v "I know, right?"
             menu:
                 extend ""
-                "Wait, there's a mall?":
+                "wait, there's a mall?":
                     $ JubesX.change_stat("love", 80, 1)
                     $ JubesX.change_stat("inhibition", 70, 1)
                     $ JubesX.change_face("_confused")
@@ -982,7 +982,7 @@ label Jubes_Mall(BO=[]):
             $ JubesX.change_stat("love", 90, -1)
             $ JubesX.change_stat("obedience", 90, 1)
             $ JubesX.change_face("_sad")
-        "Wait, there's a mall?":
+        "wait, there's a mall?":
             $ JubesX.change_stat("love", 80, 1)
             $ JubesX.change_stat("inhibition", 70, 1)
             $ JubesX.change_face("_confused")
@@ -1043,11 +1043,11 @@ label Jubes_Mall(BO=[]):
     ch_v "It's open dawn to dusk, which is why I wasn't able to get here for a while. . ."
     ch_v "It's got a -ton- of different shops, although I guess not all of them would be very interesting to you."
     $ Line = 0
-    $ BO = all_Girls[:]
-    while BO and not Line:
-        if BO[0].Date:
+    $ temp_Girls = all_Girls[:]
+    while temp_Girls and not Line:
+        if temp_Girls[0].Date:
             $ Line = 1
-        $ BO.remove(BO[0])
+        $ temp_Girls.remove(temp_Girls[0])
     if Line:
 
         "You realize that the local movie theater is actually at one end of the mall."
@@ -1174,7 +1174,7 @@ label Jubes_Key:
 
 
 
-label Jubes_BF(BO=[]):
+label Jubes_BF(temp_Girls=[]):
     call shift_focus (JubesX)
     if JubesX.location != bg_current:
         $ JubesX.location = bg_current
@@ -1182,7 +1182,7 @@ label Jubes_BF(BO=[]):
             "[JubesX.name] approaches you and motions that she wants to speak to you alone."
         else:
             "[JubesX.name] turns towards you and motions that she wants to speak to you alone."
-    $ JubesX.drain_word("asked meet")
+    $ JubesX.drain_word("asked_to_meet")
     call set_the_scene (0)
     call Display_Girl (JubesX)
     "She looks a bit concerned and you can tell she's a bit anxious about whatever she has to say."
@@ -1388,7 +1388,7 @@ label Jubes_BF(BO=[]):
             ch_v "I should. . . leave."
             "[JubesX.name] wanders off in a bit of a daze."
             $ JubesX.Event[5] = 20
-            call Remove_Girl (JubesX)
+            call remove_girl (JubesX)
             $ Line = 0
             return
 
@@ -1413,12 +1413,12 @@ label Jubes_BF(BO=[]):
                     $ Line = 0
                     if approval_check(JubesX, 1200):
 
-                        $ BO = Player.Harem[:]
-                        while BO and Line != "no":
+                        $ temp_Girls = Player.Harem[:]
+                        while temp_Girls and Line != "no":
 
-                            if JubesX.GirlLikeCheck(BO[0]) <= 500:
+                            if JubesX.GirlLikeCheck(temp_Girls[0]) <= 500:
                                 $ Line = "no"
-                            $ BO.remove(BO[0])
+                            $ temp_Girls.remove(temp_Girls[0])
                     else:
                         $ Line = "no"
                     if Line == "no":
@@ -1442,7 +1442,7 @@ label Jubes_BF(BO=[]):
                     $ Line = "no"
             if Line == "no":
                 $ JubesX.Event[5] = 20
-                call Remove_Girl (JubesX)
+                call remove_girl (JubesX)
                 $ Line = 0
                 return
 
@@ -1468,7 +1468,7 @@ label Jubes_BF(BO=[]):
                 $ JubesX.change_face("_confused",1)
                 ch_v "Hmm, get back to me, I guess?"
                 $ JubesX.Event[5] = 20
-                call Remove_Girl (JubesX)
+                call remove_girl (JubesX)
                 $ Line = 0
                 return
         call Haremchange_stat (JubesX, 900, 20)
@@ -1497,9 +1497,9 @@ label Jubes_BF(BO=[]):
 
 label Jubes_Cleanhouse:
 
-    $ JubesX.drain_word("asked meet")
-    if "cleanhouse" in JubesX.Todo:
-        $ JubesX.Todo.remove("cleanhouse")
+    $ JubesX.drain_word("asked_to_meet")
+    if "cleanhouse" in JubesX.to_do:
+        $ JubesX.to_do.remove("cleanhouse")
     if not Player.Harem or JubesX in Player.Harem:
         $ JubesX.Event[5] = 2
         return
@@ -1556,12 +1556,12 @@ label Jubes_Cleanhouse:
         pass
     elif approval_check(JubesX, 1200) and approval_check(JubesX, 500,"O"):
 
-        $ BO = Player.Harem[:]
-        while BO and Line != "no":
+        $ temp_Girls = Player.Harem[:]
+        while temp_Girls and Line != "no":
 
-            if JubesX.GirlLikeCheck(BO[0]) <= 400:
+            if JubesX.GirlLikeCheck(temp_Girls[0]) <= 400:
                 $ Line = "no"
-            $ BO.remove(BO[0])
+            $ temp_Girls.remove(temp_Girls[0])
     else:
         $ Line = "no"
     if Line == "no":
@@ -1587,20 +1587,20 @@ label Jubes_Cleanhouse:
     return
 
 
-label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], BO=[]):
+label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], temp_Girls=[]):
 
 
 
 
 
 
-    $ JubesX.drain_word("asked meet")
-    $ BO = all_Girls[:]
-    $ BO.remove(JubesX)
-    while BO:
-        if approval_check(BO[0], 1200, "LO"):
-            $ Shipping.append(BO[0])
-        $ BO.remove(BO[0])
+    $ JubesX.drain_word("asked_to_meet")
+    $ temp_Girls = all_Girls[:]
+    $ temp_Girls.remove(JubesX)
+    while temp_Girls:
+        if approval_check(temp_Girls[0], 1200, "LO"):
+            $ Shipping.append(temp_Girls[0])
+        $ temp_Girls.remove(temp_Girls[0])
     $ Shipshape = len(Shipping)
 
     if JubesX.location == bg_current or JubesX in Party:
@@ -1882,7 +1882,7 @@ label Jubes_Love(Shipping=[], Shipshape=0, Topics=[], BO=[]):
         $ JubesX.recent_history.append("_angry")
         $ JubesX.daily_history.append("_angry")
         hide Jubes_Sprite with easeoutright
-        call Remove_Girl (JubesX)
+        call remove_girl (JubesX)
         $ JubesX.location = "hold"
         return
 
@@ -2008,7 +2008,7 @@ label Jubes_Love_End:
     if "lover" not in JubesX.player_petnames:
         $ JubesX.Event[6] = 20
         hide Jubes_Sprite with easeoutright
-        call Remove_Girl (JubesX)
+        call remove_girl (JubesX)
         $ JubesX.location = "hold"
         return
 
@@ -2131,7 +2131,7 @@ label Jubes_Love_Redux:
 
 
 label Jubes_Sub:
-    $ JubesX.drain_word("asked meet")
+    $ JubesX.drain_word("asked_to_meet")
     call shift_focus (JubesX)
     if JubesX.location != bg_current and JubesX not in Party:
         "Suddenly, [JubesX.name] shows up and says she needs to talk to you."
@@ -2384,7 +2384,7 @@ label Jubes_Sub:
         $ JubesX.player_petnames.append("sir")
 
     elif Line == "rude":
-        call Remove_Girl (JubesX)
+        call remove_girl (JubesX)
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
         "[JubesX.name] knocks her way past you and storms off."
@@ -2392,7 +2392,7 @@ label Jubes_Sub:
         $ JubesX.change_face("_sadside", 2)
         ch_v "Huh, ok, if you're not interested. . ."
         hide Jubes_Sprite with easeoutright
-        call Remove_Girl (JubesX)
+        call remove_girl (JubesX)
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
         "[JubesX.name] heads out of the room."
@@ -2477,7 +2477,7 @@ label Jubes_Sub_Asked:
     if Line == "rude":
 
         hide Jubes_Sprite with easeoutright
-        call Remove_Girl (JubesX)
+        call remove_girl (JubesX)
         $ JubesX.recent_history.append("_angry")
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
@@ -2504,7 +2504,7 @@ label Jubes_Sub_Asked:
 
 
 label Jubes_Master:
-    $ JubesX.drain_word("asked meet")
+    $ JubesX.drain_word("asked_to_meet")
     call shift_focus (JubesX)
     if JubesX.location != bg_current and JubesX not in Party:
         "Suddenly, [JubesX.name] shows up and says she needs to talk to you."
@@ -2662,7 +2662,7 @@ label Jubes_Master:
     if Line == "rude":
         $ JubesX.recent_history.append("_angry")
         hide Jubes_Sprite with easeoutright
-        call Remove_Girl (JubesX)
+        call remove_girl (JubesX)
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
         "[JubesX.name] stomps out of the room."
@@ -2670,7 +2670,7 @@ label Jubes_Master:
         ch_v "Ok, fine then."
         ch_v "And here I was, about to \"elevate your clearance.\""
         hide Jubes_Sprite with easeoutright
-        call Remove_Girl (JubesX)
+        call remove_girl (JubesX)
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
         "[JubesX.name] brushes past you on her way out."
@@ -2694,7 +2694,7 @@ label Jubes_Sexfriend:
 
     $ JubesX.lust = 70
     $ JubesX.location = bg_current
-    $ JubesX.drain_word("asked meet")
+    $ JubesX.drain_word("asked_to_meet")
     call set_the_scene
     $ JubesX.daily_history.append("relationship")
     call Taboo_Level
@@ -2831,15 +2831,15 @@ label Jubes_Sexfriend:
 label Jubes_Fuckbuddy:
     $ JubesX.daily_history.append("relationship")
     $ JubesX.lust = 80
-    $ JubesX.drain_word("asked meet")
+    $ JubesX.drain_word("asked_to_meet")
 
     "You hear a knock on the door, and go to answer it."
 
     $ JubesX.location = bg_current
     call shift_focus (JubesX)
     call set_the_scene (0)
-    $ JubesX.Outfit = "casual1"
-    $ JubesX.OutfitDay = "casual1"
+    $ JubesX.outfit = "casual1"
+    $ JubesX.today_outfit = "casual1"
     $ JubesX.change_outfit("casual1")
     call Display_Girl (JubesX)
     call Taboo_Level
@@ -2870,7 +2870,7 @@ label Jubes_Fuckbuddy:
 
 label Jubes_Daddy:
     $ JubesX.daily_history.append("relationship")
-    $ JubesX.drain_word("asked meet")
+    $ JubesX.drain_word("asked_to_meet")
     call shift_focus (JubesX)
     call set_the_scene
     ch_v ". . ."

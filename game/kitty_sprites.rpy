@@ -114,7 +114,7 @@ layeredimage Kitty_sprite:
     else:
         "images/Kitty_sprite/Kitty_standing_piercings[KittyX.piercings].png"
 
-    if KittyX.Water:
+    if KittyX.wet:
         "images/Kitty_sprite/Kitty_standing_wet[KittyX.ArmPose].png"
 
     if not KittyX.top:
@@ -257,11 +257,11 @@ layeredimage Kitty_hairback:
     size (416, 610) zoom 0.5
 
 layeredimage Kitty_head:
-    if (not action_speed or not renpy.showing("Kitty_blowjob_animation")) and RogueX.Water:
+    if (not action_speed or not renpy.showing("Kitty_blowjob_animation")) and RogueX.wet:
         "images/Kitty_sprite/Kitty_standing_face[KittyX.hair][KittyX.blushing]_wet.png"
     elif not action_speed or not renpy.showing("Kitty_blowjob_animation"):
         "images/Kitty_sprite/Kitty_standing_face[KittyX.hair][KittyX.blushing].png"
-    elif RogueX.Water:
+    elif RogueX.wet:
         "images/Kitty_sprite/Kitty_face_blowjob[KittyX.blushing]_wet.png"
     else:
         "images/Kitty_sprite/Kitty_face_blowjob[KittyX.blushing].png"
@@ -283,12 +283,12 @@ layeredimage Kitty_head:
     always:
         "Kitty_blinking"
 
-    if KittyX.Water:
+    if KittyX.wet:
         "images/Kitty_sprite/Kitty_standing_hair_wet.png"
     else:
         "images/Kitty_sprite/Kitty_standing_hair[KittyX.hair].png"
 
-    if KittyX.Water:
+    if KittyX.wet:
         "images/Kitty_sprite/Kitty_standing_head_wet.png"
 
     if KittyX.hair in ["_evo", "_long"] and "hair" in KittyX.spunk:
@@ -327,7 +327,7 @@ layeredimage Kitty_sex_body:
     else:
         "images/Kitty_sex/Kitty_sex_bra[KittyX.bra].png"
 
-    if KittyX.Water:
+    if KittyX.wet:
         "images/Kitty_sex/Kitty_sex_body_wet.png"
 
     if not KittyX.top:
@@ -365,7 +365,7 @@ layeredimage Kitty_sex_legs:
     always:
         "images/Kitty_sex/Kitty_sex_legs.png"
 
-    if KittyX.Water:
+    if KittyX.wet:
         "images/Kitty_sex/Kitty_sex_legs_wet.png"
 
     always:
@@ -433,7 +433,7 @@ layeredimage Kitty_sex_feet:
     always:
         "images/Kitty_sex/Kitty_sex_feet.png"
 
-    if KittyX.Water:
+    if KittyX.wet:
         "images/Kitty_sex/Kitty_sex_feet_wet.png"
 
     if KittyX.legs and not KittyX.upskirt and KittyX.legs not in ["_blue_skirt", "_shorts"] and KittyX.hose:

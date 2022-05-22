@@ -44,8 +44,8 @@ image Laura_Sprite:
         (0,0), "images/LauraSprite/Laura_Sprite_Tits.png",
         (0,0), ConditionSwitch(
 
-            "LauraX.Water and LauraX.ArmPose == 1", "images/LauraSprite/Laura_Sprite_Water1.png",
-            "LauraX.Water", "images/LauraSprite/Laura_Sprite_Water2.png",
+            "LauraX.wet and LauraX.ArmPose == 1", "images/LauraSprite/Laura_Sprite_Water1.png",
+            "LauraX.wet", "images/LauraSprite/Laura_Sprite_Water2.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -296,7 +296,7 @@ image Laura_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.Water and LauraX.ArmPose == 2", "images/LauraSprite/Laura_Sprite_Water2top.png",
+            "LauraX.wet and LauraX.ArmPose == 2", "images/LauraSprite/Laura_Sprite_Water2top.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -467,7 +467,7 @@ image Laura_Sprite_hairback:
             "not LauraX.hair", Null(),
             "renpy.showing('Laura_BJ_Animation')", Null(),
 
-            "LauraX.hair == 'wet' or LauraX.Water", "images/LauraSprite/Laura_Sprite_Hair_Wet_Under.png",
+            "LauraX.hair == 'wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Under.png",
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Under.png",
             "True", Null(),
             ),
@@ -481,7 +481,7 @@ image Laura_Sprite_HairMid:
             "not LauraX.hair", Null(),
             "renpy.showing('Laura_BJ_Animation')", Null(),
 
-            "LauraX.hair == 'wet' or LauraX.Water", Null(),
+            "LauraX.hair == 'wet' or LauraX.wet", Null(),
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Mid.png",
             "True", Null(),
             ),
@@ -493,7 +493,7 @@ image Laura_Sprite_HairTop:
 
             "not LauraX.hair", Null(),
             "renpy.showing('Laura_SexSprite')", "images/LauraSex/Laura_Sprite_Hair_Long_OverSex.png",
-            "LauraX.hair == 'wet' or LauraX.Water", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
+            "LauraX.hair == 'wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Over.png",
             "True", Null(),
             ),
@@ -575,7 +575,7 @@ image Laura_Sprite_Head:
             "LauraX.top == 'jacket'", Null(),
             "renpy.showing('Laura_TJ_Animation')", Null(),
             "renpy.showing('Laura_Sex_Animation')", Null(),
-            "LauraX.hair == 'wet' or LauraX.Water", Null(),
+            "LauraX.hair == 'wet' or LauraX.wet", Null(),
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Mid.png",
             "True", Null(),
             ),
@@ -589,13 +589,13 @@ image Laura_Sprite_Head:
             "not LauraX.hair", Null(),
             "renpy.showing('Laura_TJ_Animation')", Null(),
             "renpy.showing('Laura_SexSprite')", "images/LauraSex/Laura_Sprite_Hair_Long_OverSex.png",
-            "LauraX.hair == 'wet' or LauraX.Water", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
+            "LauraX.hair == 'wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Over.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not LauraX.Water", Null(),
+            "not LauraX.wet", Null(),
             "True", "images/LauraSprite/Laura_Sprite_Head_Wet.png",
 
             ),
@@ -810,7 +810,7 @@ image Laura_Doggy_Head:
 
         (0,0), ConditionSwitch(
 
-            "LauraX.Water or LauraX.hair == 'wet'", "images/LauraDoggy/Laura_Doggy_Hair_Wet_Back.png",
+            "LauraX.wet or LauraX.hair == 'wet'", "images/LauraDoggy/Laura_Doggy_Hair_Wet_Back.png",
             "True", "images/LauraDoggy/Laura_Doggy_Hair_Long_Back.png",
             ),
         (0,0), ConditionSwitch(
@@ -873,7 +873,7 @@ image Laura_Doggy_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.Water or LauraX.hair == 'wet'", "images/LauraDoggy/Laura_Doggy_Hair_Wet.png",
+            "LauraX.wet or LauraX.hair == 'wet'", "images/LauraDoggy/Laura_Doggy_Hair_Wet.png",
             "True", "images/LauraDoggy/Laura_Doggy_Hair_Long.png",
             ),
         (0,0), ConditionSwitch(
@@ -3947,7 +3947,7 @@ image Laura_Sprite_BJ_hairback:
     ConditionSwitch(
 
             "not LauraX.hair", Null(),
-            "LauraX.hair == 'wet' or LauraX.Water", "images/LauraSprite/Laura_Sprite_Hair_Wet_Under.png",
+            "LauraX.hair == 'wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Under.png",
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Under.png",
             "True", Null(),
             )
@@ -4030,7 +4030,7 @@ image Laura_Sprite_BJ_Head:
         (0,0), ConditionSwitch(
 
             "LauraX.top == 'jacket'", Null(),
-            "LauraX.hair == 'wet' or LauraX.Water", Null(),
+            "LauraX.hair == 'wet' or LauraX.wet", Null(),
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Mid.png",
             "True", Null(),
             ),
@@ -4042,13 +4042,13 @@ image Laura_Sprite_BJ_Head:
         (0,0), ConditionSwitch(
 
             "not LauraX.hair", Null(),
-            "LauraX.hair == 'wet' or LauraX.Water", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
+            "LauraX.hair == 'wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Over.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not LauraX.Water", Null(),
+            "not LauraX.wet", Null(),
             "True", "images/LauraSprite/Laura_Sprite_Head_Wet.png",
 
             ),

@@ -1,4 +1,6 @@
 label forced_approval_checks(Girl, action):
+    if action in ["masturbation"]:
+        $ approval = approval_check(Girl, 450, "OI", TabM = 2)
     if action in ["fondle_thighs", "fondle_breasts"]:
         $ approval = approval_check(Girl, 350, "OI", TabM = 2)
     elif action in ["suck_breasts", "fondle_pussy"]:
@@ -31,6 +33,8 @@ label forced_approval_checks(Girl, action):
 label action_approval_checks(Girl, action):
     if action == "kiss":
         $ approval = approval_check(Girl, 700, TabM=1,Alt=[[RogueX,JeanX],500])
+    elif action == "masturbation":
+        $ approval = approval_check(Girl, 1200, TabM = 2)
     elif action == "fondle_thighs":
         $ approval = approval_check(Girl, 750, TabM=1)
     elif action == "fondle_breasts":

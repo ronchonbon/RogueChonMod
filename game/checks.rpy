@@ -152,7 +152,7 @@ init python:
 
 
 
-    def Room_Full(Here = [],BO=[]):
+    def Room_Full(Here = [],temp_Girls=[]):
 
 
         global Party
@@ -165,11 +165,11 @@ init python:
 
 
 
-        BO = all_Girls[:]
-        while BO:
-            if BO[0].location == bg_current and BO[0] not in Party:
-                Here.append(BO[0])
-            BO.remove(BO[0])
+        temp_Girls = all_Girls[:]
+        while temp_Girls:
+            if temp_Girls[0].location == bg_current and temp_Girls[0] not in Party:
+                Here.append(temp_Girls[0])
+            temp_Girls.remove(temp_Girls[0])
         if len(Party) + len(Here) >= 2:
             return 1
         else:
@@ -177,21 +177,21 @@ init python:
 
 
 
-    def AloneCheck(Girl=0,BO=[]):
+    def AloneCheck(Girl=0,temp_Girls=[]):
 
 
-        BO = all_Girls[:]
+        temp_Girls = all_Girls[:]
         if Girl and Girl in all_Girls:
-            BO.remove(Girl)
-        while BO:
-            if BO[0].location == bg_current:
+            temp_Girls.remove(Girl)
+        while temp_Girls:
+            if temp_Girls[0].location == bg_current:
                 return 0
-            BO.remove(BO[0])
+            temp_Girls.remove(temp_Girls[0])
         return 1
 
 
 
-    def GirlCheck(Check=0,Local=0,BO=[]):
+    def GirlCheck(Check=0,Local=0,temp_Girls=[]):
 
 
         global focused_Girl
@@ -205,19 +205,19 @@ init python:
         else:
 
 
-            BO = all_Girls[:]
-            while BO:
-                if bg_current == BO[0].location:
+            temp_Girls = all_Girls[:]
+            while temp_Girls:
+                if bg_current == temp_Girls[0].location:
 
 
-                    focused_Girl = BO[0]
-                    return BO[0]
-                BO.remove(BO[0])
+                    focused_Girl = temp_Girls[0]
+                    return temp_Girls[0]
+                temp_Girls.remove(temp_Girls[0])
         ch_u("Tell Oni, no appropriate character was found.", interact=True)
         return focused_Girl
 
 
-label CheatCheck(BO=[], BO2=[]):
+label CheatCheck(temp_Girls=[], temp_Girls2=[]):
 
 
 
@@ -225,69 +225,69 @@ label CheatCheck(BO=[], BO2=[]):
 
 
 
-    $ BO = all_Girls[:]
-    $ renpy.random.shuffle(BO)
-    while BO:
-        if "locked" in Player.traits and BO[0].location != bg_current:
+    $ temp_Girls = all_Girls[:]
+    $ renpy.random.shuffle(temp_Girls)
+    while temp_Girls:
+        if "locked" in Player.traits and temp_Girls[0].location != bg_current:
 
             pass
         else:
-            $ BO2 = all_Girls[:]
-            while BO2:
+            $ temp_Girls2 = all_Girls[:]
+            while temp_Girls2:
                 if "meet girl" in Player.daily_history:
 
                     return
-                elif BO[0] in Player.Harem:
+                elif temp_Girls[0] in Player.Harem:
 
-                    if "saw with " + BO2[0].tag in BO[0].traits:
+                    if "saw with " + temp_Girls2[0].tag in temp_Girls[0].traits:
 
-                        if BO[0] in Player.Harem and BO2[0] in Player.Harem:
+                        if temp_Girls[0] in Player.Harem and temp_Girls2[0] in Player.Harem:
 
-                            $ BO[0].drain_word("saw with "+BO2[0].tag,0,0,1)
-                        elif BO[0] in Player.Harem and BO2[0].tag + "Yes" in Player.traits:
-                            $ BO[0].drain_word("saw with "+BO2[0].tag,0,0,1)
-                        elif bg_current == "bg_player" or bg_current == BO[0].home:
-                            call Cheated (BO[0], BO2[0])
+                            $ temp_Girls[0].drain_word("saw with "+temp_Girls2[0].tag,0,0,1)
+                        elif temp_Girls[0] in Player.Harem and temp_Girls2[0].tag + "Yes" in Player.traits:
+                            $ temp_Girls[0].drain_word("saw with "+temp_Girls2[0].tag,0,0,1)
+                        elif bg_current == "bg_player" or bg_current == temp_Girls[0].home:
+                            call Cheated (temp_Girls[0], temp_Girls2[0])
                             $ renpy.pop_call()
                             return
-                $ BO2.remove(BO2[0])
-        $ BO.remove(BO[0])
+                $ temp_Girls2.remove(temp_Girls2[0])
+        $ temp_Girls.remove(temp_Girls[0])
     return
 
-label ShareCheck(BO=[], BO2=[]):
+label ShareCheck(temp_Girls=[], temp_Girls2=[]):
 
 
 
 
 
-    $ BO = all_Girls[:]
-    $ BO.remove(StormX)
-    while BO:
-        if BO[0] in Player.Harem:
+    $ temp_Girls = all_Girls[:]
+    $ temp_Girls.remove(StormX)
+    while temp_Girls:
+        if temp_Girls[0] in Player.Harem:
 
-            $ BO2 = all_Girls[:]
-            $ BO2.remove(StormX)
-            while BO2:
-                if "ask " + BO2[0].tag in BO[0].traits:
+            $ temp_Girls2 = all_Girls[:]
+            $ temp_Girls2.remove(StormX)
+            while temp_Girls2:
+                if "ask " + temp_Girls2[0].tag in temp_Girls[0].traits:
 
-                    if BO[0] in Player.Harem and BO2[0] in Player.Harem:
+                    if temp_Girls[0] in Player.Harem and temp_Girls2[0] in Player.Harem:
 
-                        $ BO[0].drain_word("ask "+BO2[0].tag,0,0,1)
+                        $ temp_Girls[0].drain_word("ask "+temp_Girls2[0].tag,0,0,1)
                     else:
-                        call Share (BO[0], BO2[0])
+                        call Share (temp_Girls[0], temp_Girls2[0])
                         $ renpy.pop_call()
                         return
-                $ BO2.remove(BO2[0])
-        $ BO.remove(BO[0])
+                $ temp_Girls2.remove(temp_Girls2[0])
+        $ temp_Girls.remove(temp_Girls[0])
     return
 
-label AddictCheck(BO=[]):
+label AddictCheck(temp_Girls=[]):
 
 
-    $ BO = active_Girls[:]
-    $ renpy.random.shuffle(BO)
-    if JubesX in BO and JubesX.addiction >= 40 and BO[0].resistance:
-        $ BO.remove(JubesX)
+    $ temp_Girls = active_Girls[:]
+    $ renpy.random.shuffle(temp_Girls)
+    if JubesX in temp_Girls and JubesX.addiction >= 40 and temp_Girls[0].resistance:
+        $ temp_Girls.remove(JubesX)
         if "sunshine" not in JubesX.history or "addiction" in JubesX.daily_history:
             pass
         elif bg_current == JubesX.home or bg_current == "bg_player":
@@ -297,65 +297,65 @@ label AddictCheck(BO=[]):
             else:
                 call addiction_fix (JubesX)
         else:
-            if "asked meet" in JubesX.daily_history:
+            if "asked_to_meet" in JubesX.daily_history:
                 pass
-            elif "asked meet" in JubesX.daily_history and JubesX.addiction >= 60:
+            elif "asked_to_meet" in JubesX.daily_history and JubesX.addiction >= 60:
                 "[JubesX.name] texts you. . ."
                 JubesX.voice "I know I asked to meet you in your room earlier, but I really need a fix."
                 $ Player.add_word(1,"asked fix",0,0,0)
-                $ JubesX.add_word(1,"asked meet","asked meet",0,0)
-                call ReturnToRoom
+                $ JubesX.add_word(1,"asked_to_meet","asked_to_meet",0,0)
+                call return_to_room
                 return
             else:
                 "[JubesX.name] texts and asks if you could get her a fix later."
-                $ JubesX.add_word(1,"asked meet","asked meet",0,0)
-                call ReturnToRoom
+                $ JubesX.add_word(1,"asked_to_meet","asked_to_meet",0,0)
+                call return_to_room
                 return
-    while BO:
-        if "locked" in Player.traits and BO[0].location != bg_current:
+    while temp_Girls:
+        if "locked" in Player.traits and temp_Girls[0].location != bg_current:
 
             pass
-        elif "asked fix" in Player.daily_history and "asked meet" not in BO[0].daily_history:
+        elif "asked fix" in Player.daily_history and "asked_to_meet" not in temp_Girls[0].daily_history:
 
             pass
-        elif BO[0].Event[3]:
+        elif temp_Girls[0].Event[3]:
 
             pass
-        elif "_angry" not in BO[0].recent_history and "addiction" not in BO[0].daily_history and BO[0].remaining_actions >= 1:
+        elif "_angry" not in temp_Girls[0].recent_history and "addiction" not in temp_Girls[0].daily_history and temp_Girls[0].remaining_actions >= 1:
 
-            if (BO[0].addiction >= 60 or (BO[0].addiction >= 40 and BO[0] == JubesX)) and BO[0].resistance:
+            if (temp_Girls[0].addiction >= 60 or (temp_Girls[0].addiction >= 40 and temp_Girls[0] == JubesX)) and temp_Girls[0].resistance:
 
-                if bg_current == BO[0].home or bg_current == "bg_player":
-                    call addiction_fix (BO[0])
+                if bg_current == temp_Girls[0].home or bg_current == "bg_player":
+                    call addiction_fix (temp_Girls[0])
                 else:
-                    if "asked meet" in BO[0].recent_history:
+                    if "asked_to_meet" in temp_Girls[0].recent_history:
                         pass
-                    elif "asked meet" in BO[0].daily_history and BO[0].addiction >= 80:
-                        "[BO[0].name] texts you. . ."
-                        BO[0].voice "I know I asked to meet you in your room earlier, but I'm serious, this is important."
+                    elif "asked_to_meet" in temp_Girls[0].daily_history and temp_Girls[0].addiction >= 80:
+                        "[temp_Girls[0].name] texts you. . ."
+                        temp_Girls[0].voice "I know I asked to meet you in your room earlier, but I'm serious, this is important."
                         $ Player.add_word(1,"asked fix",0,0,0)
-                        $ BO[0].add_word(1,"asked meet","asked meet",0,0)
-                        call ReturnToRoom
+                        $ temp_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
+                        call return_to_room
                         return
                     else:
-                        "[BO[0].name] texts and asks if you could meet her in your room later."
-                        $ BO[0].add_word(1,"asked meet","asked meet",0,0)
-                        call ReturnToRoom
+                        "[temp_Girls[0].name] texts and asks if you could meet her in your room later."
+                        $ temp_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
+                        call return_to_room
                         return
 
-            elif BO[0].resistance:
+            elif temp_Girls[0].resistance:
                 pass
 
-            elif BO[0] == JubesX and BO[0].addiction < 50:
+            elif temp_Girls[0] == JubesX and temp_Girls[0].addiction < 50:
                 pass
-            elif BO[0].addiction >= 35 and not BO[0].Event[1]:
+            elif temp_Girls[0].addiction >= 35 and not temp_Girls[0].Event[1]:
 
-                call addiction_event (BO[0])
-            elif BO[0].addiction >= 60 and BO[0].Event[1] <= 2:
+                call addiction_event (temp_Girls[0])
+            elif temp_Girls[0].addiction >= 60 and temp_Girls[0].Event[1] <= 2:
 
-                call addiction_event (BO[0])
-            elif BO[0].addiction >= 90:
+                call addiction_event (temp_Girls[0])
+            elif temp_Girls[0].addiction >= 90:
 
-                call addiction_event (BO[0])
-        $ BO.remove(BO[0])
+                call addiction_event (temp_Girls[0])
+        $ temp_Girls.remove(temp_Girls[0])
     return

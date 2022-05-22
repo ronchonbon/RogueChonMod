@@ -95,7 +95,7 @@ layeredimage background:
     if not entering and bg_current == "bg_classroom":
         "images/background/bg_classroom_front.png"
 
-    if not entering and bg_current == "bg_classroom" and time_index < 2 and Weekday < 5:
+    if not entering and bg_current == "bg_classroom" and time_index < 2 and weekday < 5:
         "images/background/bg_classroom_pupils.png"
 
     size (1024, 768)

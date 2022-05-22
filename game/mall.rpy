@@ -1,23 +1,23 @@
 
-label Mall_Entry(First=0, Second=0, Girl=0, Cart=[]):
-    call Jubes_Entry_Check
+label Mall_entry(First=0, Second=0, Girl=0, Cart=[]):
+    call Jubes_entry_Check
     $ Player.drain_word("locked",0,0,1)
     $ bg_current = "bg_mall"
     $ Nearby = []
     call Gym_Clothes_Off
     call Taboo_Level
     $ Player.recent_history.append("traveling")
-    call EventCalls
+    call event_calls
 
 label Shopping_Mall(First=0, Second=0, Girl=0, Cart=[]):
 
     $ bg_current = "bg_mall"
     $ Player.recent_history.append("shopping")
     $ Player.daily_history.append("shopping")
-    $ BO = Party[:]
-    while BO:
-        $ BO[0].location = "bg_mall"
-        $ BO.remove(BO[0])
+    $ temp_Girls = Party[:]
+    while temp_Girls:
+        $ temp_Girls[0].location = "bg_mall"
+        $ temp_Girls.remove(temp_Girls[0])
 
     call set_the_scene
     "You're at the Salem Centre Mall."
@@ -32,32 +32,32 @@ label Shopping_Mall(First=0, Second=0, Girl=0, Cart=[]):
         "You wander the various stores, seeing what they have to offer. . ."
     menu Mall_Menu:
         "Where would you like to go?"
-        "Enter the Sex Shop" if Round > 20:
+        "Enter the Sex Shop" if round > 20:
             call Sex_Shop
 
-        "Enter Lingerie Shop" if Round > 20:
+        "Enter Lingerie Shop" if round > 20:
             call Lingerie_Shop
 
-        "Enter Swimwear Shop" if Round > 20:
+        "Enter Swimwear Shop" if round > 20:
             call Swim_Shop
 
-        "Wait around a bit" if "date" not in Player.recent_history:
+        "wait around a bit" if "date" not in Player.recent_history:
 
             "You wait around a bit."
-            call Wait
-            call EventCalls
+            call wait
+            call event_calls
             call girls_location
             if time_index >= 3:
                 ch_u "The mall is now closing, please head to the nearest exit. . ."
                 "You head back to campus."
-                jump Campus_Entry
+                jump Campus_entry
 
         "Head back to school" if "date" not in Player.recent_history:
 
-            jump Campus_Entry
+            jump Campus_entry
 
 
-        "Just wander and window shop" if Party and Round > 20:
+        "Just wander and window shop" if Party and round > 20:
 
             if len(Party) >= 2:
                 if renpy.random.randint(1, 20) > 10:
@@ -74,15 +74,15 @@ label Shopping_Mall(First=0, Second=0, Girl=0, Cart=[]):
                     $ Party[0].change_stat("obedience", 50, 1)
                     $ Party[0].change_stat("inhibition", 50, 1)
                 "You wander around with [Party[0].name]and see what they have available."
-            $ Round -= 10
+            $ round -= 10
 
-        "Do something else" if "date" in Player.recent_history and Round > 20:
+        "Do something else" if "date" in Player.recent_history and round > 20:
 
             jump Date_Location
 
         "Head back to school" if "date" in Player.recent_history:
 
-            if "movie" in Player.recent_history or "dinner" in Player.recent_history or Round < 30 or not Party:
+            if "movie" in Player.recent_history or "dinner" in Player.recent_history or round < 30 or not Party:
                 show blackscreen onlayer black with dissolve
                 "It's getting late, you head back to the dorms. . ."
                 jump Date_End
@@ -107,7 +107,7 @@ label Shopping_Mall(First=0, Second=0, Girl=0, Cart=[]):
                         jump Date_End
 
 
-    if time_index >= 3 or Round < 20:
+    if time_index >= 3 or round < 20:
         if "date" in Player.recent_history:
 
             show blackscreen onlayer black with dissolve
@@ -115,23 +115,23 @@ label Shopping_Mall(First=0, Second=0, Girl=0, Cart=[]):
             jump Date_End
         ch_u "The mall is now closing, please head to the nearest exit. . ."
         "You head back to campus."
-        jump Campus_Entry
+        jump Campus_entry
     jump Mall_Menu
 
 
 label Sex_Shop:
 
     $ bg_current = "bg_shop"
-    $ BO = Party[:]
-    while BO:
-        $ BO[0].location = "bg_shop"
-        $ BO.remove(BO[0])
+    $ temp_Girls = Party[:]
+    while temp_Girls:
+        $ temp_Girls[0].location = "bg_shop"
+        $ temp_Girls.remove(temp_Girls[0])
 
     call set_the_scene
     $ Girl = 0
     "You head into Spiral's Body Shoppe. . ."
     while True:
-        if Round <= 20:
+        if round <= 20:
             "It's getting late, you head back into the mall. . ."
             $ Girl = 0
             return
@@ -243,13 +243,13 @@ label Sex_Shop:
                 $ Girl = Second
             "Exit.":
                 "You head back into the mall. . ."
-                $ Round -= 10 if Round > 20 else (Round-10)
+                $ round -= 10 if round > 20 else (round-10)
                 $ Girl = 0
                 $ bg_current = "bg_mall"
-                $ BO = Party[:]
-                while BO:
-                    $ BO[0].location = "bg_mall"
-                    $ BO.remove(BO[0])
+                $ temp_Girls = Party[:]
+                while temp_Girls:
+                    $ temp_Girls[0].location = "bg_mall"
+                    $ temp_Girls.remove(temp_Girls[0])
 
                 call set_the_scene
                 return
@@ -407,7 +407,7 @@ label Sex_Shop:
                             ch_s "I doubt I can find a place for this one."
                         elif Girl == JubesX:
                             ch_v "This is way too many. . ."
-                    $ Girl.held_item = 0
+                    $ Girl.held_item = None
                     $ Girl.ArmPose = 2
                     $ Girl = 0
 
@@ -530,7 +530,7 @@ label Sex_Shop:
                             ch_e "I already have plenty."
                         else:
                             Girl.voice "I already have one of these."
-                    $ Girl.held_item = 0
+                    $ Girl.held_item = None
                     $ Girl.ArmPose = 2
                     $ Girl = 0
 
@@ -551,16 +551,16 @@ label Swim_Shop:
 
 
     $ bg_current = "bg_shop"
-    $ BO = Party[:]
-    while BO:
-        $ BO[0].location = "bg_shop"
-        $ BO.remove(BO[0])
+    $ temp_Girls = Party[:]
+    while temp_Girls:
+        $ temp_Girls[0].location = "bg_shop"
+        $ temp_Girls.remove(temp_Girls[0])
 
     call set_the_scene
     $ Girl = 0
     "You head into \"The Swimsuit Issue\". . ."
     while True:
-        if Round <= 20:
+        if round <= 20:
             "It's getting late, you head back into the mall. . ."
             $ Girl = 0
             return
@@ -577,10 +577,10 @@ label Swim_Shop:
                 "You head back into the mall. . ."
                 $ Girl = 0
                 $ bg_current = "bg_mall"
-                $ BO = Party[:]
-                while BO:
-                    $ BO[0].location = "bg_mall"
-                    $ BO.remove(BO[0])
+                $ temp_Girls = Party[:]
+                while temp_Girls:
+                    $ temp_Girls[0].location = "bg_mall"
+                    $ temp_Girls.remove(temp_Girls[0])
 
                 call set_the_scene
                 return
@@ -783,13 +783,13 @@ label Swim_Shop:
 
 
                         $ Girl.change_outfit(Changed=0)
-                        $ Round -= 20 if Round > 30 else (Round-10)
+                        $ round -= 20 if round > 30 else (round-10)
                         $ Player.drain_word("locked",0,0,1)
                         $ bg_current = "bg_shop"
-                        $ BO = Party[:]
-                        while BO:
-                            $ BO[0].location = "bg_shop"
-                            $ BO.remove(BO[0])
+                        $ temp_Girls = Party[:]
+                        while temp_Girls:
+                            $ temp_Girls[0].location = "bg_shop"
+                            $ temp_Girls.remove(temp_Girls[0])
 
                         call Taboo_Level
                         call set_the_scene
@@ -818,7 +818,7 @@ label Swim_Shop:
                                 "The_top" if "_bikini_top" in Cart:
                                     "You agree to buy [Girl.name] the bikini top."
                                     if Girl.tag + " bikini_top" in Player.inventory:
-                                        "Wait, you already have one of those."
+                                        "wait, you already have one of those."
                                         "You pull out the one in your bag."
                                         $ Player.inventory.remove(Girl.tag + " bikini_top")
                                     elif Girl in (KittyX,EmmaX,StormX):
@@ -860,7 +860,7 @@ label Swim_Shop:
                                 "The_bottoms" if "_bikini_bottoms" in Cart:
                                     "You agree to buy [Girl.name] the bikini bottoms."
                                     if Girl.tag + " bikini_bottoms" in Player.inventory:
-                                        "Wait, you already have those."
+                                        "wait, you already have those."
                                         "You pull out the pair in your bag."
                                         $ Player.inventory.remove(Girl.tag + " bikini_bottoms")
                                     elif Girl in (KittyX,EmmaX,StormX):
@@ -902,7 +902,7 @@ label Swim_Shop:
                                 "The_skirt" if "_blue_skirt" in Cart:
                                     "You agree to buy [Girl.name] the blue skirt."
                                     if Girl.tag + " blue_skirt" in Player.inventory:
-                                        "Wait, you already have one of those."
+                                        "wait, you already have one of those."
                                         "You pull out the one in your bag."
                                         $ Player.inventory.remove(Girl.tag + " blue_skirt")
                                     if Player.cash < 50:
@@ -969,16 +969,16 @@ label Lingerie_Shop:
 
 
     $ bg_current = "bg_shop"
-    $ BO = Party[:]
-    while BO:
-        $ BO[0].location = "bg_shop"
-        $ BO.remove(BO[0])
+    $ temp_Girls = Party[:]
+    while temp_Girls:
+        $ temp_Girls[0].location = "bg_shop"
+        $ temp_Girls.remove(temp_Girls[0])
 
     call set_the_scene
     $ Girl = 0
     "You head into \"Stacy's\". . ."
     while True:
-        if Round <= 20:
+        if round <= 20:
             "It's getting late, you head back into the mall. . ."
             $ Girl = 0
             return
@@ -995,10 +995,10 @@ label Lingerie_Shop:
                 "You head back into the mall. . ."
                 $ Girl = 0
                 $ bg_current = "bg_mall"
-                $ BO = Party[:]
-                while BO:
-                    $ BO[0].location = "bg_mall"
-                    $ BO.remove(BO[0])
+                $ temp_Girls = Party[:]
+                while temp_Girls:
+                    $ temp_Girls[0].location = "bg_mall"
+                    $ temp_Girls.remove(temp_Girls[0])
                 call set_the_scene
                 return
 
@@ -1434,13 +1434,13 @@ label Lingerie_Shop:
                                 $ Girl.GirlLikeUp(Second,5)
                                 $ Second.GirlLikeUp(Girl,3)
 
-                        $ Round -= 20 if Round > 30 else (Round-10)
+                        $ round -= 20 if round > 30 else (round-10)
                         $ Player.drain_word("locked",0,0,1)
                         $ bg_current = "bg_shop"
-                        $ BO = Party[:]
-                        while BO:
-                            $ BO[0].location = "bg_shop"
-                            $ BO.remove(BO[0])
+                        $ temp_Girls = Party[:]
+                        while temp_Girls:
+                            $ temp_Girls[0].location = "bg_shop"
+                            $ temp_Girls.remove(temp_Girls[0])
 
                         call Taboo_Level
                         call set_the_scene
@@ -1471,7 +1471,7 @@ label Lingerie_Shop:
                                 "The lace_bra" if "lace_bra" in Cart:
                                     "You agree to buy [Girl.name] the lace bra."
                                     if Girl.tag + " lace_bra" in Player.inventory:
-                                        "Wait, you already have one of those."
+                                        "wait, you already have one of those."
                                         "You pull out the one in your bag."
                                         $ Player.inventory.remove(Girl.tag + " lace_bra")
                                     elif Player.cash < 90:
@@ -1505,7 +1505,7 @@ label Lingerie_Shop:
                                 "The corset" if "_corset" in Cart:
                                     "You agree to buy [Girl.name] the corset."
                                     if Girl.tag + " corset" in Player.inventory:
-                                        "Wait, you already have one of those."
+                                        "wait, you already have one of those."
                                         "You pull out the one in your bag."
                                         $ Player.inventory.remove(Girl.tag + " corset")
                                     elif Player.cash < 70:
@@ -1531,7 +1531,7 @@ label Lingerie_Shop:
                                 "The lace corset" if "lace corset" in Cart:
                                     "You agree to buy [Girl.name] the lace corset."
                                     if Girl.tag + " lace corset" in Player.inventory:
-                                        "Wait, you already have one of those."
+                                        "wait, you already have one of those."
                                         "You pull out the one in your bag."
                                         $ Player.inventory.remove(Girl.tag + " lace corset")
                                     elif Player.cash < 90:
@@ -1554,7 +1554,7 @@ label Lingerie_Shop:
                                 "The lace_panties" if "_lace_panties" in Cart:
                                     "You agree to buy [Girl.name] the lace panties."
                                     if Girl.tag + " lace_panties" in Player.inventory:
-                                        "Wait, you already have one of those."
+                                        "wait, you already have one of those."
                                         "You pull out the ones in your bag."
                                         $ Player.inventory.remove(Girl.tag + " lace_panties")
                                     elif Player.cash < 110:
@@ -1592,7 +1592,7 @@ label Lingerie_Shop:
                                 "The tiger-striped_panties" if "tiger_panties" in Cart:
                                     "You agree to buy [Girl.name] the tiger panties."
                                     if Girl.tag + " tiger_panties" in Player.inventory:
-                                        "Wait, you already have one of those."
+                                        "wait, you already have one of those."
                                         "You pull out the ones in your bag."
                                         $ Player.inventory.remove(Girl.tag + " tiger_panties")
                                     elif Player.cash < 100:
@@ -1616,7 +1616,7 @@ label Lingerie_Shop:
                                 "The stockings and garterbelt" if "_stockings_and_garterbelt" in Cart:
                                     "You agree to buy [Girl.name] the stockings and garterbelt."
                                     if Girl.tag + " stockings and garterbelt" in Player.inventory:
-                                        "Wait, you already have those."
+                                        "wait, you already have those."
                                         "You pull out the ones in your bag."
                                         $ Player.inventory.remove(Girl.tag + " stockings and garterbelt")
                                     elif Player.cash < 100:
@@ -1644,7 +1644,7 @@ label Lingerie_Shop:
                                 "The knee stockings" if "knee stockings" in Cart:
                                     "You agree to buy [Girl.name] the knee stockings."
                                     if Girl.tag + " knee stockings" in Player.inventory:
-                                        "Wait, you already have some of those."
+                                        "wait, you already have some of those."
                                         "You pull out the ones in your bag."
                                         $ Player.inventory.remove(Girl.tag + " knee stockings")
                                     elif Player.cash < 50:
@@ -1667,7 +1667,7 @@ label Lingerie_Shop:
                                 "The high socks" if "socks" in Cart:
                                     "You agree to buy [Girl.name] the socks."
                                     if Girl.tag + " socks" in Player.inventory:
-                                        "Wait, you already have one of those."
+                                        "wait, you already have one of those."
                                         "You pull out the ones in your bag."
                                         $ Player.inventory.remove(Girl.tag + " socks")
                                     elif Player.cash < 50:
@@ -1690,7 +1690,7 @@ label Lingerie_Shop:
                                 "The_pantyhose" if "pantyhose" in Cart:
                                     "You agree to buy [Girl.name] the pantyhose."
                                     if Girl.tag + "_pantyhose" in Player.inventory:
-                                        "Wait, you already have one of those."
+                                        "wait, you already have one of those."
                                         "You pull out the ones in your bag."
                                         $ Player.inventory.remove(Girl.tag + "_pantyhose")
                                     elif Player.cash < 50:
@@ -1713,7 +1713,7 @@ label Lingerie_Shop:
                                 "The nighty" if "nighty" in Cart:
                                     "You agree to buy [Girl.name] the nighty."
                                     if Girl.tag + " nighty" in Player.inventory:
-                                        "Wait, you already have one of those."
+                                        "wait, you already have one of those."
                                         "You pull out the one in your bag."
                                         $ Player.inventory.remove(Girl.tag + " nighty")
                                     elif Player.cash < 75:

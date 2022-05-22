@@ -187,8 +187,8 @@ image Jean_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "JeanX.Water and JeanX.ArmPose == 1", "images/JeanSprite/Jean_Sprite_Water1.png",
-            "JeanX.Water", "images/JeanSprite/Jean_Sprite_Water2.png",
+            "JeanX.wet and JeanX.ArmPose == 1", "images/JeanSprite/Jean_Sprite_Water1.png",
+            "JeanX.wet", "images/JeanSprite/Jean_Sprite_Water2.png",
             "True", Null(),
             ),
 
@@ -283,7 +283,7 @@ image Jean_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "JeanX.Water and JeanX.ArmPose == 1", "images/JeanSprite/Jean_Sprite_Water1Arm.png",
+            "JeanX.wet and JeanX.ArmPose == 1", "images/JeanSprite/Jean_Sprite_Water1Arm.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -469,7 +469,7 @@ image Jean_Sprite_hairback:
             "not JeanX.hair", Null(),
             "renpy.showing('Jean_BJ_Animation')", Null(),
 
-            "JeanX.hair == 'wet' or JeanX.Water", "images/JeanSprite/Jean_Sprite_Hair_Wet_Under.png",
+            "JeanX.hair == 'wet' or JeanX.wet", "images/JeanSprite/Jean_Sprite_Hair_Wet_Under.png",
             "JeanX.hair == 'pony'", Null(),
             "True", "images/JeanSprite/Jean_Sprite_Hair_Short_Under.png",
             ),
@@ -483,7 +483,7 @@ image Jean_Sprite_HairMid:
             "not JeanX.hair", Null(),
             "renpy.showing('Jean_BJ_Animation')", Null(),
 
-            "JeanX.hair == 'wet' JeanX.hair == 'pony' or JeanX.Water", Null(),
+            "JeanX.hair == 'wet' JeanX.hair == 'pony' or JeanX.wet", Null(),
             "True","images/JeanSprite/Jean_Sprite_Hair_Short_Mid.png",
             ),
     anchor (0.6, 0.0)
@@ -494,7 +494,7 @@ image Jean_Sprite_HairTop:
 
             "not JeanX.hair", Null(),
 
-            "JeanX.hair == 'wet' or JeanX.Water", "images/JeanSprite/Jean_Sprite_Hair_Wet_Over.png",
+            "JeanX.hair == 'wet' or JeanX.wet", "images/JeanSprite/Jean_Sprite_Hair_Wet_Over.png",
             "JeanX.hair == 'pony'", "images/JeanSprite/Jean_Sprite_Hair_Pony_Over.png",
             "True", "images/JeanSprite/Jean_Sprite_Hair_Short_Over.png",
             ),
@@ -601,14 +601,14 @@ image Jean_Sprite_Head:
             "not JeanX.hair", Null(),
             "renpy.showing('Jean_TJ_Animation')", Null(),
 
-            "JeanX.hair == 'wet' or JeanX.Water", "images/JeanSprite/Jean_Sprite_Hair_Wet_Over.png",
+            "JeanX.hair == 'wet' or JeanX.wet", "images/JeanSprite/Jean_Sprite_Hair_Wet_Over.png",
             "JeanX.hair == 'pony'", "images/JeanSprite/Jean_Sprite_Hair_Pony_Over.png",
             "JeanX.hair", "images/JeanSprite/Jean_Sprite_Hair_Short_Over.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not JeanX.Water", Null(),
+            "not JeanX.wet", Null(),
             "True", "images/JeanSprite/Jean_Sprite_Head_Wet.png",
 
             ),
@@ -866,7 +866,7 @@ image Jean_Doggy_Head:
         (0,0), "Jean Doggy Blink",
         (0,0), ConditionSwitch(
 
-            "JeanX.Water or JeanX.hair == 'wet'", "images/JeanDoggy/Jean_Doggy_Hair_Wet_Under.png",
+            "JeanX.wet or JeanX.hair == 'wet'", "images/JeanDoggy/Jean_Doggy_Hair_Wet_Under.png",
             "True", Null(),
             ),
 
@@ -896,7 +896,7 @@ image Jean_Doggy_Head:
 image Jean_Doggy_Hair_Under:
 
     ConditionSwitch(
-                "JeanX.Water or JeanX.hair == 'wet'", "images/JeanDoggy/Jean_Doggy_Hair_Wet_Under.png",
+                "JeanX.wet or JeanX.hair == 'wet'", "images/JeanDoggy/Jean_Doggy_Hair_Wet_Under.png",
                 "JeanX.hair == 'pony'", Null(),
                 "True", "images/JeanDoggy/Jean_Doggy_Hair_Short_Under.png",
                 )
@@ -906,7 +906,7 @@ image Jean_Doggy_Hair_Over:
 
     contains:
         ConditionSwitch(
-                    "JeanX.Water or JeanX.hair == 'wet'", "images/JeanDoggy/Jean_Doggy_Hair_Wet_Over.png",
+                    "JeanX.wet or JeanX.hair == 'wet'", "images/JeanDoggy/Jean_Doggy_Hair_Wet_Over.png",
                     "JeanX.hair == 'pony'", "images/JeanDoggy/Jean_Doggy_Hair_Pony_Over.png",
                     "True", "images/JeanDoggy/Jean_Doggy_Hair_Short_Over.png",
                     )
@@ -975,7 +975,7 @@ image Jean_Doggy_Ass:
         (0,0), "images/JeanDoggy/Jean_Doggy_Ass.png",
         (0,0), ConditionSwitch(
 
-            "JeanX.Water", "images/Rogue_doggy/Rogue_Doggy_WetAss.png",
+            "JeanX.wet", "images/Rogue_doggy/Rogue_Doggy_WetAss.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
@@ -3355,7 +3355,7 @@ image Jean_BJ_Animation:
 image Jean_BJ_hairback:
 
     ConditionSwitch(
-            "JeanX.Water or JeanX.hair == 'wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Under.png",
+            "JeanX.wet or JeanX.hair == 'wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Under.png",
             "JeanX.hair == 'pony'", Null(),
             "True", "images/JeanBJFace/Jean_BJ_Hair_Short_Under.png",
             ),
@@ -3365,7 +3365,7 @@ image Jean_BJ_hairback:
 image Jean_BJ_HairTop:
 
     ConditionSwitch(
-            "JeanX.Water or JeanX.hair == 'wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Over.png",
+            "JeanX.wet or JeanX.hair == 'wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Over.png",
             "True", Null(),
             ),
     zoom 1.4
@@ -3395,8 +3395,8 @@ image Jean_BJ_Head:
         (858,928),
         (0,0), ConditionSwitch(
 
-            "(JeanX.Water or JeanX.hair == 'wet') and renpy.showing('Jean_SexSprite')", "images/JeanBJFace/Jean_BJ_Hair_Wet_Mid.png",
-            "JeanX.Water or JeanX.hair == 'wet'", Null(),
+            "(JeanX.wet or JeanX.hair == 'wet') and renpy.showing('Jean_SexSprite')", "images/JeanBJFace/Jean_BJ_Hair_Wet_Mid.png",
+            "JeanX.wet or JeanX.hair == 'wet'", Null(),
             "JeanX.hair == 'pony'", Null(),
             "True", "images/JeanBJFace/Jean_BJ_Hair_Short_Under.png",
             ),
@@ -3487,7 +3487,7 @@ image Jean_BJ_Head:
 
         (0,0), ConditionSwitch(
 
-            "JeanX.Water or JeanX.hair == 'wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Over.png",
+            "JeanX.wet or JeanX.hair == 'wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Over.png",
             "JeanX.hair == 'pony'", "images/JeanBJFace/Jean_BJ_Hair_Pony_Over.png",
             "True", "images/JeanBJFace/Jean_BJ_Hair_Short_Over.png",
             ),
@@ -4175,7 +4175,7 @@ image Jean_TJ_Head:
 image Jean_TJ_HairTop:
 
     ConditionSwitch(
-                    "JeanX.Water or JeanX.hair == 'wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Over.png",
+                    "JeanX.wet or JeanX.hair == 'wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Over.png",
                     "JeanX.hair == 'pony'", "images/JeanBJFace/Jean_BJ_Hair_Pony_Over.png",
                     "True", "images/JeanBJFace/Jean_BJ_Hair_Short_Over.png",
                     )

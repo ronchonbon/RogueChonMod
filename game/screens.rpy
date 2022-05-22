@@ -858,18 +858,18 @@ screen Status_Screen:
             yzoom -1
             subpixel True
 
-        if Round < 50:
-            add "images/Clockred.png" at rotate_red(Round):
+        if round < 50:
+            add "images/Clockred.png" at rotate_red(round):
                 anchor (0.5,0.5)
                 subpixel True
         else:
-            add "images/Clockwhite.png" at rotate_white(Round):
+            add "images/Clockwhite.png" at rotate_white(round):
                 anchor (0.5,0.5)
                 subpixel True
 
 
 
-        imagebutton idle "images/Clockface.png" hover "images/Clockface.png" action NullAction() hovered tt.Action("Time Left: [Round]%") anchor (0.5,0.5)
+        imagebutton idle "images/Clockface.png" hover "images/Clockface.png" action NullAction() hovered tt.Action("Time Left: [round]%") anchor (0.5,0.5)
 
     frame:
 
@@ -878,7 +878,7 @@ screen Status_Screen:
         background None
         has vbox
         hbox:
-            text "Day: [Day] [DayofWeek]" size 12
+            text "Day: [Day] [Dayofweek]" size 12
         hbox:
             text "Time: [current_time]" size 12
     frame:

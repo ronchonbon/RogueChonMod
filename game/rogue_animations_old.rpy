@@ -3273,35 +3273,35 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
 
 
     if GirlB:
-        $ BO = [GirlA,GirlB]
+        $ temp_Girls = [GirlA,GirlB]
     elif GirlA:
-        $ BO = [GirlA]
-    while BO:
-        if BO[0] == KittyX or BO[0] == LauraX:
-            $ BO[0].ArmPose = 1
+        $ temp_Girls = [GirlA]
+    while temp_Girls:
+        if temp_Girls[0] == KittyX or temp_Girls[0] == LauraX:
+            $ temp_Girls[0].ArmPose = 1
         else:
-            $ BO[0].ArmPose = 2
+            $ temp_Girls[0].ArmPose = 2
         $ YLoc = 100
-        if GirlA == BO[0]:
+        if GirlA == temp_Girls[0]:
 
-            if BO[0] == KittyX:
+            if temp_Girls[0] == KittyX:
                 $ XLoc = 450
-            elif BO[0] == RogueX:
+            elif temp_Girls[0] == RogueX:
                 $ XLoc = 550
             else:
                 $ XLoc = 500
-            $ BO[0].sprite_layer = 100
+            $ temp_Girls[0].sprite_layer = 100
             $ XZoom = -1.3
-        elif GirlB == BO[0]:
+        elif GirlB == temp_Girls[0]:
 
-            if BO[0] == EmmaX or LauraX:
+            if temp_Girls[0] == EmmaX or LauraX:
                 $ XLoc = 700
             else:
                 $ XLoc = 715
-            $ BO[0].sprite_layer = 75
+            $ temp_Girls[0].sprite_layer = 75
             $ XZoom = 1.3
 
-        if BO[0] == RogueX:
+        if temp_Girls[0] == RogueX:
             call Rogue_Hide
             show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3310,7 +3310,7 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.6, 0.0)
-        elif BO[0] == KittyX:
+        elif temp_Girls[0] == KittyX:
             call Kitty_Hide
             show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3319,7 +3319,7 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.5, 0.0)
-        elif BO[0] == EmmaX:
+        elif temp_Girls[0] == EmmaX:
             call Emma_Hide
             show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3328,7 +3328,7 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.5, 0.0)
-        elif BO[0] == LauraX:
+        elif temp_Girls[0] == LauraX:
             call Laura_Hide
             show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3337,7 +3337,7 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.5, 0.0)
-        elif BO[0] == JeanX:
+        elif temp_Girls[0] == JeanX:
             call Jean_Hide
             show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3346,7 +3346,7 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.5, 0.0)
-        elif BO[0] == StormX:
+        elif temp_Girls[0] == StormX:
             call Storm_Hide
             show Storm_Sprite zorder StormX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3355,7 +3355,7 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.6, 0.0)
-        elif BO[0] == JubesX:
+        elif temp_Girls[0] == JubesX:
             call Jubes_Hide
             show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3364,7 +3364,7 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.6, 0.0)
-        $ BO.remove(BO[0])
+        $ temp_Girls.remove(temp_Girls[0])
     return
 
 
@@ -3382,57 +3382,57 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
 
 
 
-label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, BO=[]):
+label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, temp_Girls=[]):
 
 
 
     if Partner not in all_Girls:
         return
-    $ BO = [Girl,Partner]
-    while BO:
-        if "unseen" in BO[0].recent_history:
-            $ BO[0].eyes = "closed"
-        elif Girl == BO[0]:
+    $ temp_Girls = [Girl,Partner]
+    while temp_Girls:
+        if "unseen" in temp_Girls[0].recent_history:
+            $ temp_Girls[0].eyes = "closed"
+        elif Girl == temp_Girls[0]:
             if Girl == RogueX:
-                $ BO[0].eyes = "side"
+                $ temp_Girls[0].eyes = "side"
             elif Girl == EmmaX:
-                $ BO[0].eyes = "_sly"
+                $ temp_Girls[0].eyes = "_sly"
             else:
-                $ BO[0].eyes = "leftside"
+                $ temp_Girls[0].eyes = "leftside"
         else:
-            $ BO[0].eyes = "side"
+            $ temp_Girls[0].eyes = "side"
 
-        if BO[0] == KittyX or BO[0] == LauraX:
-            $ BO[0].ArmPose = 1
+        if temp_Girls[0] == KittyX or temp_Girls[0] == LauraX:
+            $ temp_Girls[0].ArmPose = 1
         else:
-            $ BO[0].ArmPose = 2
+            $ temp_Girls[0].ArmPose = 2
         $ YLoc = 100
-        if Girl == BO[0]:
+        if Girl == temp_Girls[0]:
 
-            if BO[0] == KittyX:
+            if temp_Girls[0] == KittyX:
                 $ XLoc = 450
-            elif BO[0] == RogueX:
+            elif temp_Girls[0] == RogueX:
                 $ XLoc = 550
             else:
                 $ XLoc = 500
-            $ BO[0].sprite_layer = 100
+            $ temp_Girls[0].sprite_layer = 100
             $ XZoom = -1.3
         else:
 
-            if BO[0] == EmmaX or LauraX:
+            if temp_Girls[0] == EmmaX or LauraX:
                 $ XLoc = 700
             else:
                 $ XLoc = 715
-            if BO[0] == KittyX:
+            if temp_Girls[0] == KittyX:
                 if RogueX in (Partner,Girl):
                     $ KittyX.sprite_layer = 100
                 else:
                     $ KittyX.sprite_layer = 25
             else:
-                $ BO[0].sprite_layer = 75
+                $ temp_Girls[0].sprite_layer = 75
             $ XZoom = 1.3
 
-        if BO[0] == RogueX:
+        if temp_Girls[0] == RogueX:
             call Rogue_Hide
             show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3441,7 +3441,7 @@ label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, BO=[]):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.6, 0.0)
-        elif BO[0] == KittyX:
+        elif temp_Girls[0] == KittyX:
             call Kitty_Hide
             show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3450,7 +3450,7 @@ label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, BO=[]):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.5, 0.0)
-        elif BO[0] == EmmaX:
+        elif temp_Girls[0] == EmmaX:
             call Emma_Hide
             show Emma_Sprite zorder EmmaX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3459,7 +3459,7 @@ label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, BO=[]):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.5, 0.0)
-        elif BO[0] == LauraX:
+        elif temp_Girls[0] == LauraX:
             call Laura_Hide
             show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3468,7 +3468,7 @@ label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, BO=[]):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.5, 0.0)
-        elif BO[0] == JeanX:
+        elif temp_Girls[0] == JeanX:
             call Jean_Hide
             show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3477,7 +3477,7 @@ label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, BO=[]):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.5, 0.0)
-        elif BO[0] == StormX:
+        elif temp_Girls[0] == StormX:
             call Storm_Hide
             show Storm_Sprite zorder StormX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3486,7 +3486,7 @@ label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, BO=[]):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.6, 0.0)
-        elif BO[0] == JubesX:
+        elif temp_Girls[0] == JubesX:
             call Jubes_Hide
             show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
@@ -3495,7 +3495,7 @@ label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, BO=[]):
                 yzoom 1.3
                 offset (0,0)
                 anchor (0.6, 0.0)
-        $ BO.remove(BO[0])
+        $ temp_Girls.remove(temp_Girls[0])
     return
 
 image CircleTest:
@@ -3508,12 +3508,12 @@ image CircleTest:
     contains:
 
         ConditionSwitch(
-            "Round>= 50", "ClockWhite",
+            "round>= 50", "ClockWhite",
             "True",Null(),
             ),
     contains:
         ConditionSwitch(
-            "Round<= 50", "ClockRed",
+            "round<= 50", "ClockRed",
             "True",Null(),
             ),
     contains:
@@ -3526,14 +3526,14 @@ image ClockWhite:
         subpixel True
         "images/Clockwhite.png"
         anchor (0.5,0.5)
-        rotate -(int(Round *3.6))
+        rotate -(int(round *3.6))
 
 image ClockRed:
     contains:
         subpixel True
         "images/Clockred.png"
         anchor (0.5,0.5)
-        rotate -(int(Round *3.6-180))
+        rotate -(int(round *3.6-180))
 
 image BlueScreen:
 

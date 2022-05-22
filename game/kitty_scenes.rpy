@@ -1,10 +1,10 @@
 
 
 
-label KittyMeet:
+label meet_Kitty:
     $ bg_current = "bg_campus"
-    $ KittyX.OutfitDay = "casual1"
-    $ KittyX.Outfit = "casual1"
+    $ KittyX.today_outfit = "casual1"
+    $ KittyX.outfit = "casual1"
     $ KittyX.change_outfit("casual1")
     call clear_the_room ("All", 0, 1)
     $ KittyX.location = "bg_kitty"
@@ -188,7 +188,7 @@ label KittyMeet:
     $ KittyX.history.append("met")
     $ active_Girls.append(KittyX) if KittyX not in active_Girls else active_Girls
     $ bg_current = "bg_classroom"
-    $ Round -= 10
+    $ round -= 10
     call shift_focus (RogueX)
     return
 
@@ -216,7 +216,7 @@ label Kitty_Key:
 
 label Kitty_BF:
     call shift_focus (KittyX)
-    $ KittyX.drain_word("asked meet")
+    $ KittyX.drain_word("asked_to_meet")
     if KittyX.location != bg_current:
         $ KittyX.location = bg_current
         if KittyX not in Party:
@@ -307,7 +307,7 @@ label Kitty_BF:
                 $ KittyX.change_stat("love", 200, -10)
                 ch_k "Well. . . okay. I get it."
                 $ KittyX.Event[5] = 20
-                call Remove_Girl (KittyX)
+                call remove_girl (KittyX)
                 $ Line = 0
                 return
         "Not really.":
@@ -343,7 +343,7 @@ label Kitty_BF_Jerk:
         $ KittyX.player_petnames.append("boyfriend")
         $ Achievements.append("I am not your Boyfriend!")
         $ bg_current = "bg_player"
-        call Remove_Girl (KittyX)
+        call remove_girl (KittyX)
         call set_the_scene
         $ renpy.pop_call()
         jump player_room
@@ -357,7 +357,7 @@ label Kitty_BF_Jerk:
     if "Historia" in Player.traits:
         return
     $ bg_current = "bg_player"
-    call Remove_Girl (KittyX)
+    call remove_girl (KittyX)
     $ renpy.pop_call()
     jump player_room
 
@@ -368,7 +368,7 @@ label Kitty_Love:
 
 
     call shift_focus (KittyX)
-    $ KittyX.drain_word("asked meet")
+    $ KittyX.drain_word("asked_to_meet")
     if KittyX.Event[6]:
 
         "[KittyX.name] seems kind of shy and shuffles up to you, as if working up her nerve."
@@ -408,7 +408,7 @@ label Kitty_Love:
         ch_k "Never mind!"
         "Kitty dashes off and phases through the nearest wall."
         hide Kitty_sprite with easeoutright
-        call Remove_Girl (KittyX)
+        call remove_girl (KittyX)
         return
     if KittyX.Event[6] == 2:
         ch_k "Sorry about before, I don't think I was ready maybe. . ."
@@ -621,11 +621,11 @@ label Kitty_Love:
 label Kitty_Love_End:
     if Line == "awkward" or "lover" not in KittyX.player_petnames:
         hide Kitty_sprite with easeoutright
-        call Remove_Girl (KittyX)
+        call remove_girl (KittyX)
         return
     ch_k "So I was thinking. . . did you want to . . ."
     if bg_current != "bg_player" and bg_current != "bg_kitty":
-        ch_k "Wait, let's take this someplace more private. . ."
+        ch_k "wait, let's take this someplace more private. . ."
         $ bg_current = "bg_kitty"
         $ KittyX.location = bg_current
         call set_the_scene
@@ -718,7 +718,7 @@ label Kitty_Love_Redux:
 
 label Kitty_Sub:
     call shift_focus (KittyX)
-    $ KittyX.drain_word("asked meet")
+    $ KittyX.drain_word("asked_to_meet")
     if KittyX.location != bg_current and KittyX not in Party:
         "Suddenly, [KittyX.name] shows up and says she needs to talk to you."
 
@@ -898,7 +898,7 @@ label Kitty_Sub:
 
     elif Line == "rude":
         hide Kitty_sprite with easeoutbottom
-        call Remove_Girl (KittyX)
+        call remove_girl (KittyX)
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
         "[KittyX.name] phases through the floor in a huff, leaving you alone."
@@ -910,7 +910,7 @@ label Kitty_Sub:
         ch_k "I should go. I think I hear Professor Xavier calling me."
         $ KittyX.blushing = "_blush1"
         hide Kitty_sprite with easeoutbottom
-        call Remove_Girl (KittyX)
+        call remove_girl (KittyX)
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
         "[KittyX.name] phases through the floor, leaving you alone. It didn't look like she could get away fast enough."
@@ -997,7 +997,7 @@ label Kitty_Sub_Asked:
     if Line == "rude":
 
         hide Kitty_sprite with easeoutbottom
-        call Remove_Girl (KittyX)
+        call remove_girl (KittyX)
         $ KittyX.recent_history.append("_angry")
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
@@ -1025,7 +1025,7 @@ label Kitty_Sub_Asked:
 
 label Kitty_Master:
     call shift_focus (KittyX)
-    $ KittyX.drain_word("asked meet")
+    $ KittyX.drain_word("asked_to_meet")
     if KittyX.location != bg_current and KittyX not in Party:
         "Suddenly, [KittyX.name] shows up and says she needs to talk to you."
 
@@ -1126,13 +1126,13 @@ label Kitty_Master:
     if Line == "rude":
         $ KittyX.recent_history.append("_angry")
         hide Kitty_sprite with easeoutbottom
-        call Remove_Girl (KittyX)
+        call remove_girl (KittyX)
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
         "[KittyX.name] phases through the floor in a huff. She might have been crying."
     elif Line == "embarrassed":
         hide Kitty_sprite with easeoutbottom
-        call Remove_Girl (KittyX)
+        call remove_girl (KittyX)
         if "Historia" not in Player.traits:
             $ renpy.pop_call()
         "[KittyX.name] phases through the floor, leaving you alone. She looked really embarrassed."
@@ -1338,7 +1338,7 @@ label Kitty_Sexfriend:
         ch_k "I'll definitely be seeing {i}you{/i} later, [KittyX.player_petname]."
         hide Kitty_sprite with easeoutright
         "She passes through a nearby wall. "
-    call Remove_Girl (KittyX)
+    call remove_girl (KittyX)
     return
 
 
@@ -1350,7 +1350,7 @@ label Kitty_Sexfriend:
 
 label Kitty_Fuckbuddy:
     $ KittyX.daily_history.append("relationship")
-    $ KittyX.drain_word("asked meet")
+    $ KittyX.drain_word("asked_to_meet")
     "Out of nowhere, you feel a hand stroking across your cock."
     "Even though you're fully dressed, it definitely feels like soft skin touching your own."
     "You glance down and see a slender arm snaked around your waist, before vanishing into your pants."
@@ -1370,7 +1370,7 @@ label Kitty_Fuckbuddy:
 
 label Kitty_Daddy:
     $ KittyX.daily_history.append("relationship")
-    $ KittyX.drain_word("asked meet")
+    $ KittyX.drain_word("asked_to_meet")
     call shift_focus (KittyX)
     call set_the_scene
     ch_k ". . ."
@@ -2110,7 +2110,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
         $ KittyX.GLG(Girl,900,(2*Shy),1)
         $ Girl.add_word(1,"yoinked")
     else:
-        call Remove_Girl (Girl)
+        call remove_girl (Girl)
         $ Girl.GLG(KittyX,900,-(2*Shy),1)
 
     if Girl == JeanX and approval < 2:

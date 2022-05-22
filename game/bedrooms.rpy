@@ -22,10 +22,10 @@ label girls_room_entry(Girl):
     $ Player.recent_history.append("traveling")
 
     $ D20 = renpy.random.randint(1, 20)
-    $ Round -= 5 if Round >= 5 else Round
+    $ round -= 5 if round >= 5 else round
 
     if Girl in Party:
-        if time_index >= 3 or (time_index == 2 and Round <= 10):
+        if time_index >= 3 or (time_index == 2 and round <= 10):
             if approval_check(Girl, 1000, "LI", Alt = [[JubesX], 500]) or approval_check(Girl, 600, "OI",Alt = [[JubesX], 300]):
                 if Girl == RogueX:
                     ch_r "It's pretty late, [Girl.player_petname], but you can come in for a little bit."
@@ -97,11 +97,11 @@ label girls_room_entry(Girl):
             elif Girl == JubesX:
                 ch_v "Have a seat or whatever. . ."
 
-        call EventCalls
+        call event_calls
 
         call girls_room(Girl)
 
-    if Round >= 10 and Girl.location == bg_current and "les" in Girl.recent_history:
+    if round >= 10 and Girl.location == bg_current and "lesbian" in Girl.recent_history:
         call Girls_Caught_Lesing(Girl)
 
         if not _return:
@@ -114,7 +114,7 @@ label girls_room_entry(Girl):
 
         jump Misplaced
 
-    if Round >= 10 and Girl.location == bg_current and "gonnafap" in Girl.daily_history and D20 >= 5:
+    if round >= 10 and Girl.location == bg_current and "will_masturbate" in Girl.daily_history and D20 >= 5:
         call Girl_Caught_Mastubating(Girl)
     else:
         if Girl in Keys:
@@ -130,12 +130,12 @@ label girls_room_entry(Girl):
 
         if line != "knock" and Girl in Keys:
             if Girl.location == bg_current:
-                if Round <= 10:        #add "no" condtion here
+                if round <= 10:        #add "no" condtion here
                     if time_index >= 3: #night time
                         "She's asleep in bed. You slip out quietly." #fix add options here.
 
                         return
-                elif "gonnafap" in Girl.daily_history and D20 >= 5:
+                elif "will_masturbate" in Girl.daily_history and D20 >= 5:
                     call Girl_Caught_Mastubating(Girl)
                 elif D20 >=15 and (time_index >= 3 or time_index == 0):
                     call Girl_Caught_Changing(Girl)
@@ -143,7 +143,7 @@ label girls_room_entry(Girl):
         else:
             "You knock on [Girl.name]'s door."
             if Girl.location == bg_current:
-                if Round <= 10:
+                if round <= 10:
                     if time_index >= 3: #night time
                         "There's no answer, she's probably asleep."
 
@@ -363,7 +363,7 @@ label girls_room_entry(Girl):
 
             jump Misplaced
 
-    call EventCalls
+    call event_calls
     jump Misplaced
 
 label girls_room(Girl):
@@ -375,10 +375,10 @@ label girls_room(Girl):
     call QuickEvents
     call checkout(1)
 
-    if Round <= 10:
-        call Round10
+    if round <= 10:
+        call round_10
         call girls_location
-        call EventCalls
+        call event_calls
 
     call GirlsAngry
 
@@ -422,13 +422,13 @@ label girls_room(Girl):
 
             call Taboo_Level
         "Sleep" if time_index >= 3: #night time
-            call Round10
+            call round_10
             call girls_location
-            call EventCalls
-        "Wait" if time_index < 3: #not night time
-            call Round10
+            call event_calls
+        "wait" if time_index < 3: #not night time
+            call round_10
             call girls_location
-            call EventCalls
+            call event_calls
         "Return to Your Room" if TravelMode:
             jump player_room_entry
         "Other Girl's Rooms" if TravelMode:
@@ -452,11 +452,11 @@ label girls_room(Girl):
 
             return
         "Go to the Showers" if TravelMode:
-            jump Shower_Room_Entry
+            jump Shower_Room_entry
         "Leave" if not TravelMode:
             call Worldmap
         "Leave [[Go to Campus Square]" if TravelMode:
-            jump Campus_Entry
+            jump Campus_entry
 
     if "angry" in Girl.recent_history:
         $ Girl.change_face("angry")
@@ -478,9 +478,9 @@ label player_room_entry:
     $ Player.recent_history.append("traveling")
 
     $ Nearby = []
-    $ Round -= 5 if Round >= 5 else Round
+    $ round -= 5 if round >= 5 else round
 
-    call EventCalls
+    call event_calls
     call set_the_scene
     jump Clear_Stack
 
@@ -493,10 +493,10 @@ label player_room:
     call QuickEvents
     call checkout(1)
 
-    if Round <= 10:
-        call Round10
+    if round <= 10:
+        call round_10
         call girls_location
-        call EventCalls
+        call event_calls
 
     call GirlsAngry
 
@@ -519,15 +519,15 @@ label player_room:
 
             call Taboo_Level
         "Sleep" if time_index >= 3: #night time
-            call Round10
+            call round_10
             call girls_location
-            call EventCalls
-        "Wait" if time_index < 3: #not night time
+            call event_calls
+        "wait" if time_index < 3: #not night time
             "You wait around a bit."
 
-            call Round10
+            call round_10
             call girls_location
-            call EventCalls
+            call event_calls
         "Shop":
             call Shop
         "Special Options":
@@ -551,12 +551,12 @@ label player_room:
                 "Back":
                     pass
         "Go to the Showers" if TravelMode:
-            jump Shower_Room_Entry
+            jump Shower_Room_entry
         "Attic" if TravelMode and "attic" in Player.history:
             jump StormMeet
         "Leave" if not TravelMode:
             call Worldmap
         "Leave [Go to Campus Square]" if TravelMode:
-            jump Campus_Entry
+            jump Campus_entry
 
     jump player_room
