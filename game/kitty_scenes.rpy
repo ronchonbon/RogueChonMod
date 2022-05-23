@@ -24,7 +24,7 @@ label meet_Kitty:
     $ KittyX.location = "bg_campus"
     $ KittyX.change_stat("love", 90, -25)
     $ KittyX.change_face("_surprised")
-    $ KittyX.ArmPose = 1
+    $ KittyX.arm_pose = 1
     ch_u "Hey!"
     $ KittyX.brows = "_angry"
     ch_u "What the hell was that?"
@@ -202,12 +202,12 @@ label Kitty_Key:
     call shift_focus (KittyX)
     call set_the_scene
     $ KittyX.change_face("_bemused")
-    $ KittyX.ArmPose = 2
+    $ KittyX.arm_pose = 2
     ch_k "So you've[KittyX.like]been dropping by a lot lately, I figured you might want a key. . ."
     ch_p "Thanks."
-    $ KittyX.ArmPose = 1
-    $ Keys.append(KittyX)
-    $ KittyX.Event[0] = 1
+    $ KittyX.arm_pose = 1
+    $ keys.append(KittyX)
+    $ KittyX.event_happened[0] = 1
     return
 
 
@@ -227,7 +227,7 @@ label Kitty_BF:
     call set_the_scene (0)
     call show_girl (KittyX)
     "A little blush on her cheeks, you can tell she's a bit anxious about whatever she has to say."
-    call Taboo_Level
+    call taboo_Level
     call clear_the_room (KittyX)
     $ KittyX.daily_history.append("relationship")
     $ KittyX.change_face("_bemused", 1)
@@ -258,7 +258,7 @@ label Kitty_BF:
     elif Player.Harem:
         ch_k "I know you're kinda[KittyX.like]dating [Player.Harem[0].name] and all. . ."
 
-    if not KittyX.Event[5]:
+    if not KittyX.event_happened[5]:
         ch_k "So, uhm. . ."
         ch_k "It’s not like I[KittyX.like]haven’t gone out with guys before."
         ch_k "I just[KittyX.like].wow, this is so awkward. I really like you a lot and. . ."
@@ -271,7 +271,7 @@ label Kitty_BF:
     else:
         ch_k "I wish you weren’t[KittyX.like]such a jerk sometimes, but still. . . I’m totally serious about this."
         ch_k "I wanna be your girlfriend[KittyX.like]officially."
-    $ KittyX.Event[5] += 1
+    $ KittyX.event_happened[5] += 1
     menu:
         extend ""
         "Are you kidding? I'd love to!":
@@ -299,28 +299,28 @@ label Kitty_BF:
                     $ Line = "no"
                 "They wouldn't be cool with that." if len(Player.Harem) > 1:
                     $ Line = "no"
-                "I'm sorry, but. . . no." if KittyX.Event[5] != 20:
+                "I'm sorry, but. . . no." if KittyX.event_happened[5] != 20:
                     $ Line = "no"
                 "No way.":
                     jump Kitty_BF_Jerk
             if Line == "no":
                 $ KittyX.change_stat("love", 200, -10)
                 ch_k "Well. . . okay. I get it."
-                $ KittyX.Event[5] = 20
+                $ KittyX.event_happened[5] = 20
                 call remove_girl (KittyX)
                 $ Line = 0
                 return
         "Not really.":
             jump Kitty_BF_Jerk
 
-    if "Historia" not in Player.traits:
+    if not simulation:
         $ Player.Harem.append(KittyX)
         if "KittyYes" in Player.traits:
             $ Player.traits.remove("KittyYes")
     $ KittyX.player_petnames.append("boyfriend")
     $ KittyX.change_face("_sexy")
     ch_k "Now. . . boyfriend. . . how about you and I[KittyX.like]celebrate, huh?"
-    if "Historia" in Player.traits:
+    if simulation:
         return True
     $ approval_bonus = 10
     $ Player.add_word(1,"interruption")
@@ -332,29 +332,29 @@ label Kitty_BF_Jerk:
     $ KittyX.change_face("_angry", 1)
     ch_k "Fine![KittyX.Like]. . .be that way!"
     $ KittyX.change_stat("obedience", 50, 40)
-    if KittyX.Event[5] != 20:
-        $ KittyX.change_stat("obedience", 200, (20* KittyX.Event[5]))
-    if 20 > KittyX.Event[5] >= 3:
+    if KittyX.event_happened[5] != 20:
+        $ KittyX.change_stat("obedience", 200, (20* KittyX.event_happened[5]))
+    if 20 > KittyX.event_happened[5] >= 3:
         $ KittyX.change_face("_sad")
         ch_k "Yeah? Well. . .[KittyX.like]I don’t care what you want! We’re dating! Deal."
         ch_k "I. . .uhm. . .think I need to[KittyX.like]be alone for a little while."
-        if "Historia" in Player.traits:
+        if simulation:
             return True
         $ KittyX.player_petnames.append("boyfriend")
-        $ Achievements.append("I am not your Boyfriend!")
+        $ achievements.append("I am not your Boyfriend!")
         $ bg_current = "bg_player"
         call remove_girl (KittyX)
         call set_the_scene
         $ renpy.pop_call()
         jump player_room
-    if KittyX.Event[5] > 1:
+    if KittyX.event_happened[5] > 1:
         ch_k "It was such a mistake asking you again. You’re[KittyX.like]still such a jerk!"
-    if KittyX.Event[5] != 20:
-        $ KittyX.change_stat("love", 200, -(50* KittyX.Event[5]))
+    if KittyX.event_happened[5] != 20:
+        $ KittyX.change_stat("love", 200, -(50* KittyX.event_happened[5]))
     else:
         $ KittyX.change_stat("love", 200, -50)
     ch_k "Get out, you big jerk!"
-    if "Historia" in Player.traits:
+    if simulation:
         return
     $ bg_current = "bg_player"
     call remove_girl (KittyX)
@@ -369,7 +369,7 @@ label Kitty_Love:
 
     call shift_focus (KittyX)
     $ KittyX.drain_word("asked_to_meet")
-    if KittyX.Event[6]:
+    if KittyX.event_happened[6]:
 
         "[KittyX.name] seems kind of shy and shuffles up to you, as if working up her nerve."
     elif bg_current != "bg_kitty":
@@ -385,13 +385,13 @@ label Kitty_Love:
     call set_the_scene (0)
     call show_girl (KittyX)
     call clear_the_room (KittyX)
-    call Taboo_Level
+    call taboo_Level
     $ KittyX.daily_history.append("relationship")
     $ KittyX.change_face("_bemused", 1)
     $ KittyX.eyes = "_side"
     $ Line = 0
-    $ KittyX.Event[6] += 1
-    if KittyX.Event[6] == 1:
+    $ KittyX.event_happened[6] += 1
+    if KittyX.event_happened[6] == 1:
         if KittyX in Player.Harem:
             ch_k "We've[KittyX.like]been together for a while now, and I've been thinking. . ."
         else:
@@ -410,10 +410,10 @@ label Kitty_Love:
         hide Kitty_sprite with easeoutright
         call remove_girl (KittyX)
         return
-    if KittyX.Event[6] == 2:
+    if KittyX.event_happened[6] == 2:
         ch_k "Sorry about before, I don't think I was ready maybe. . ."
         ch_k ". . . but I was kind of thinking-"
-    elif KittyX.Event[6] >= 5:
+    elif KittyX.event_happened[6] >= 5:
         ch_k "Um. . ."
         $ KittyX.eyes = "_sly"
         ch_k "You know, it's time to stop running. I think I love you."
@@ -449,7 +449,7 @@ label Kitty_Love:
                 "You keep hold of her wrist."
                 $ Line = "wrist"
             "Let her go":
-                if 1 < KittyX.Event[6] < 4:
+                if 1 < KittyX.event_happened[6] < 4:
                     "You immediately release her wrist."
                     $ KittyX.eyes = "_down"
                     "She dashes through the nearest wall and vanishes from view."
@@ -604,9 +604,9 @@ label Kitty_Love:
             ch_k "Oh, well I mean if you don't love me-"
             ch_k "You don't have to love me, that's ok."
             ch_k "I'll, um. . . never mind."
-            if "Historia" not in Player.traits:
+            if not simulation:
                 $ KittyX.recent_history.append("_angry")
-        $ KittyX.Event[6] = 20
+        $ KittyX.event_happened[6] = 20
     else:
         if Line:
 
@@ -625,12 +625,12 @@ label Kitty_Love_End:
         return
     ch_k "So I was thinking. . . did you want to . . ."
     if bg_current != "bg_player" and bg_current != "bg_kitty":
-        ch_k "wait, let's take this someplace more private. . ."
+        ch_k "Wait, let's take this someplace more private. . ."
         $ bg_current = "bg_kitty"
         $ KittyX.location = bg_current
         call set_the_scene
         call clear_the_room (KittyX)
-        call Taboo_Level
+        call taboo_Level
         ch_k "Ok, so like I was saying. . ."
     $ KittyX.change_stat("obedience", 70, 10)
     $ Player.add_word(1,"interruption")
@@ -639,14 +639,14 @@ label Kitty_Love_End:
         "Yeah, let's do this. . . [[have sex]":
             $ KittyX.change_stat("inhibition", 30, 30)
             ch_k "Hmm. . ."
-            if "Historia" in Player.traits:
+            if simulation:
                 return True
             call Kitty_SexAct ("sex")
         "I have something else in mind. . .[[choose another activity]":
             $ KittyX.brows = "_confused"
             $ KittyX.change_stat("obedience", 70, 20)
             ch_k "Something like. . ."
-            if "Historia" in Player.traits:
+            if simulation:
                 return True
             $ approval_bonus = 20
             call Kitty_SexMenu
@@ -656,7 +656,7 @@ label Kitty_Love_Redux:
 
     $ Line = 0
     $ KittyX.daily_history.append("relationship")
-    if KittyX.Event[6] >= 25:
+    if KittyX.event_happened[6] >= 25:
 
         ch_p "I hope you've forgiven me, I still love you."
         $ KittyX.change_stat("love", 95, 10)
@@ -704,12 +704,12 @@ label Kitty_Love_Redux:
         $ KittyX.change_stat("inhibition", 90, 10)
         $ KittyX.change_face("_smile")
         ch_k "I[KittyX.like]love you too!"
-        if KittyX.Event[6] < 25:
+        if KittyX.event_happened[6] < 25:
             $ KittyX.change_face("_sly")
             "She slugs you in the arm"
             ch_k "Took you long enough."
         $ KittyX.player_petnames.append("lover")
-    $ KittyX.Event[6] = 25
+    $ KittyX.event_happened[6] = 25
     return
 
 
@@ -726,7 +726,7 @@ label Kitty_Sub:
     call set_the_scene (0)
     call show_girl (KittyX)
     call clear_the_room (KittyX)
-    call Taboo_Level
+    call taboo_Level
     $ KittyX.daily_history.append("relationship")
     $ KittyX.change_face("_bemused", 1)
 
@@ -899,7 +899,7 @@ label Kitty_Sub:
     elif Line == "rude":
         hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
-        if "Historia" not in Player.traits:
+        if not simulation:
             $ renpy.pop_call()
         "[KittyX.name] phases through the floor in a huff, leaving you alone."
     elif Line == "embarrassed":
@@ -911,7 +911,7 @@ label Kitty_Sub:
         $ KittyX.blushing = "_blush1"
         hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
-        if "Historia" not in Player.traits:
+        if not simulation:
             $ renpy.pop_call()
         "[KittyX.name] phases through the floor, leaving you alone. It didn't look like she could get away fast enough."
     return
@@ -999,7 +999,7 @@ label Kitty_Sub_Asked:
         hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
         $ KittyX.recent_history.append("_angry")
-        if "Historia" not in Player.traits:
+        if not simulation:
             $ renpy.pop_call()
         "[KittyX.name] phases through the floor, leaving you alone. She looked pretty upset."
     elif "sir" in KittyX.player_petnames:
@@ -1034,7 +1034,7 @@ label Kitty_Master:
     call show_girl (KittyX)
     call clear_the_room (KittyX)
     $ KittyX.daily_history.append("relationship")
-    call Taboo_Level
+    call taboo_Level
     $ Line = 0
     $ KittyX.change_face("_bemused", 1)
     ch_k "[KittyX.player_petname], if you don't mind me saying so. . ."
@@ -1127,13 +1127,13 @@ label Kitty_Master:
         $ KittyX.recent_history.append("_angry")
         hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
-        if "Historia" not in Player.traits:
+        if not simulation:
             $ renpy.pop_call()
         "[KittyX.name] phases through the floor in a huff. She might have been crying."
     elif Line == "embarrassed":
         hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
-        if "Historia" not in Player.traits:
+        if not simulation:
             $ renpy.pop_call()
         "[KittyX.name] phases through the floor, leaving you alone. She looked really embarrassed."
     elif Line != "fail":
@@ -1154,7 +1154,7 @@ label Kitty_Sexfriend:
     call show_girl (KittyX)
     call clear_the_room (KittyX)
     $ KittyX.daily_history.append("relationship")
-    call Taboo_Level
+    call taboo_Level
     $ Line = 0
     $ KittyX.change_face("_bemused", 1)
     ch_k "So, [KittyX.player_petname]. . .you[KittyX.like]got a second?"
@@ -1360,7 +1360,7 @@ label Kitty_Fuckbuddy:
     "Looking around, you don't see anyone nearby, and it doesn't look like anyone else noticed what happened."
     "Maybe you'll check up on [KittyX.name] later. . ."
     $ KittyX.player_petnames.append("fuck buddy")
-    $ KittyX.Event[10] += 1
+    $ KittyX.event_happened[10] += 1
     return
 
 
@@ -2149,7 +2149,7 @@ label Kitty_Kate:
     $ KittyX.location = bg_current
     call set_the_scene (0)
     call show_girl (KittyX)
-    call Taboo_Level
+    call taboo_Level
     $ Line = 0
     $ KittyX.change_face("_bemused", 1)
     ch_k "Hey, [KittyX.player_petname]. . .you[KittyX.like]got a second?"

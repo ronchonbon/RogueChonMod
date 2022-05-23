@@ -8,9 +8,9 @@ layeredimage Rogue_sprite:
     if not RogueX.top:
         Null()
     elif RogueX.top_pulled_up:
-        "images/Rogue_sprite/Rogue_standing_top[RogueX.top][RogueX.ArmPose]_up.png"
+        "images/Rogue_sprite/Rogue_standing_top[RogueX.top][RogueX.arm_pose]_up.png"
     else:
-        "images/Rogue_sprite/Rogue_standing_top[RogueX.top][RogueX.ArmPose].png"
+        "images/Rogue_sprite/Rogue_standing_top[RogueX.top][RogueX.arm_pose].png"
 
     always:
         "images/Rogue_sprite/Rogue_standing_body[RogueX.pubes][RogueX.piercings].png"
@@ -91,7 +91,7 @@ layeredimage Rogue_sprite:
         "images/Rogue_sprite/Rogue_standing_legs[RogueX.legs].png"
 
     always:
-        "images/Rogue_sprite/Rogue_standing_arms[RogueX.ArmPose][RogueX.neck][RogueX.arms].png"
+        "images/Rogue_sprite/Rogue_standing_arms[RogueX.arm_pose][RogueX.neck][RogueX.arms].png"
 
     always:
         "images/Rogue_sprite/Rogue_standing_chest[RogueX.piercings].png"
@@ -102,7 +102,7 @@ layeredimage Rogue_sprite:
         "images/Rogue_sprite/Rogue_standing_bra[RogueX.bra].png"
 
     if RogueX.wet and RogueX.wet < 3:
-        "images/Rogue_sprite/Rogue_standing_body[RogueX.ArmPose]_wet.png"
+        "images/Rogue_sprite/Rogue_standing_body[RogueX.arm_pose]_wet.png"
 
     if RogueX.wet == 3:
         "images/Rogue_sprite/Rogue_standing_body_wet3.png"
@@ -110,17 +110,17 @@ layeredimage Rogue_sprite:
     if not RogueX.top:
         Null()
     elif RogueX.top_pulled_up:
-        "images/Rogue_sprite/Rogue_standing_top[RogueX.top][RogueX.ArmPose]_up.png"
+        "images/Rogue_sprite/Rogue_standing_top[RogueX.top][RogueX.arm_pose]_up.png"
     else:
-        "images/Rogue_sprite/Rogue_standing_top[RogueX.top][RogueX.ArmPose].png"
+        "images/Rogue_sprite/Rogue_standing_top[RogueX.top][RogueX.arm_pose].png"
 
     if RogueX.accessory:
-        "images/Rogue_sprite/Rogue_standing_accessory[RogueX.accessory][RogueX.ArmPose].png"
+        "images/Rogue_sprite/Rogue_standing_accessory[RogueX.accessory][RogueX.arm_pose].png"
 
     if not renpy.showing("Rogue_blowjob_animation") and not renpy.showing("Rogue_TJ_Animation"):
         "Rogue_head" pos (185, 38)
 
-    if "hand" in RogueX.spunk and RogueX.ArmPose == 2:
+    if "hand" in RogueX.spunk and RogueX.arm_pose == 2:
         "images/Rogue_sprite/Rogue_standing_spunk_hand.png"
 
     if "belly" in RogueX.spunk:
@@ -129,7 +129,7 @@ layeredimage Rogue_sprite:
     if "tits" in RogueX.spunk:
         "images/Rogue_sprite/Rogue_standing_spunk_breasts.png"
 
-    if RogueX.held_item and RogueX.ArmPose == 2:
+    if RogueX.held_item and RogueX.arm_pose == 2:
         "images/Rogue_sprite/Rogue_standing_held[RogueX.held_item].png"
 
     if primary_action == "lesbian" or not girl_offhand_action or focused_Girl != RogueX:
@@ -412,7 +412,7 @@ layeredimage Rogue_sex_legs:
     else:
         "Rogue_Footcock_Zero_Anim[animation_speed]"
 
-    if not action_speed or Player.cock_position == "footjob" or ShowFeet:
+    if not action_speed or Player.cock_position == "footjob" or show_feet:
         "Rogue_sex_feet"
     else:
         AlphaMask("Rogue_sex_feet","images/Rogue_sex/Rogue_sex_feet_mask.png")

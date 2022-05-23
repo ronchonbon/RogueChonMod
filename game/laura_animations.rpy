@@ -13,9 +13,9 @@ image Laura_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.arms == 'gloves' and LauraX.ArmPose == 2", "images/LauraSprite/Laura_Sprite_Glove_Back2.png",
+            "LauraX.arms == 'gloves' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Glove_Back2.png",
             "LauraX.arms == 'gloves'", "images/LauraSprite/Laura_Sprite_Glove_Back1.png",
-            "LauraX.ArmPose == 2", "images/LauraSprite/Laura_Sprite_Arm_Back2.png",
+            "LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Arm_Back2.png",
             "True", "images/LauraSprite/Laura_Sprite_Arm_Back1.png",
             ),
 
@@ -25,8 +25,8 @@ image Laura_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "LauraX.top_pulled_up and LauraX.top == 'jacket'", "images/LauraSprite/Laura_Sprite_Jacket_Back_Up.png",
-            "LauraX.top == 'jacket'", "images/LauraSprite/Laura_Sprite_Jacket_Back.png",
+            "LauraX.top_pulled_up and LauraX.top == '_jacket'", "images/LauraSprite/Laura_Sprite_Jacket_Back_Up.png",
+            "LauraX.top == '_jacket'", "images/LauraSprite/Laura_Sprite_Jacket_Back.png",
             "True", Null(),
             ),
 
@@ -35,22 +35,22 @@ image Laura_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "LauraX.arms == 'gloves' and LauraX.ArmPose == 2", "images/LauraSprite/Laura_Sprite_Glove_Mid2.png",
+            "LauraX.arms == 'gloves' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Glove_Mid2.png",
             "LauraX.arms == 'gloves'", "images/LauraSprite/Laura_Sprite_Glove_Mid1.png",
-            "LauraX.ArmPose == 2", "images/LauraSprite/Laura_Sprite_Arm_Mid2.png",
+            "LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Arm_Mid2.png",
             "True", "images/LauraSprite/Laura_Sprite_Arm_Mid1.png",
             ),
 
         (0,0), "images/LauraSprite/Laura_Sprite_Tits.png",
         (0,0), ConditionSwitch(
 
-            "LauraX.wet and LauraX.ArmPose == 1", "images/LauraSprite/Laura_Sprite_Water1.png",
+            "LauraX.wet and LauraX.arm_pose == 1", "images/LauraSprite/Laura_Sprite_Water1.png",
             "LauraX.wet", "images/LauraSprite/Laura_Sprite_Water2.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.arms == 'wrists' and LauraX.ArmPose == 2", "images/LauraSprite/Laura_Sprite_Wrist2.png",
+            "LauraX.arms == 'wrists' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Wrist2.png",
             "LauraX.arms == 'wrists'", "images/LauraSprite/Laura_Sprite_Wrist1.png",
             "True", Null(),
             ),
@@ -252,20 +252,20 @@ image Laura_Sprite:
 
             "LauraX.top_pulled_up", ConditionSwitch(
 
-                    "LauraX.top == 'jacket' and LauraX.ArmPose == 2", "images/LauraSprite/Laura_Sprite_Jacket_A2_Up.png",
-                    "LauraX.top == 'jacket'", "images/LauraSprite/Laura_Sprite_Jacket_A1_Up.png",
+                    "LauraX.top == '_jacket' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Jacket_A2_Up.png",
+                    "LauraX.top == '_jacket'", "images/LauraSprite/Laura_Sprite_Jacket_A1_Up.png",
 
                     "True", Null(),
                     ),
-            "LauraX.top == 'jacket' and LauraX.ArmPose == 2", "images/LauraSprite/Laura_Sprite_Jacket_A2.png",
-            "LauraX.top == 'jacket'", "images/LauraSprite/Laura_Sprite_Jacket_A1.png",
+            "LauraX.top == '_jacket' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Jacket_A2.png",
+            "LauraX.top == '_jacket'", "images/LauraSprite/Laura_Sprite_Jacket_A1.png",
             "LauraX.top == 'towel'", "images/LauraSprite/Laura_Sprite_Towel.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not LauraX.piercings or (not LauraX.top and not LauraX.bra)", Null(),
-            "LauraX.top == 'jacket'", Null(),
+            "LauraX.top == '_jacket'", Null(),
             "LauraX.piercings == 'barbell'",  "images/LauraSprite/Laura_Sprite_Barbell_TitsC.png",
             "LauraX.piercings == 'ring'", "images/LauraSprite/Laura_Sprite_Ring_TitsC.png",
             "True", Null(),
@@ -290,34 +290,34 @@ image Laura_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.arms == 'gloves' and LauraX.ArmPose == 2", "images/LauraSprite/Laura_Sprite_Glove_Top2.png",
-            "LauraX.ArmPose == 2", "images/LauraSprite/Laura_Sprite_Arm_Left2.png",
+            "LauraX.arms == 'gloves' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Glove_Top2.png",
+            "LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Arm_Left2.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.wet and LauraX.ArmPose == 2", "images/LauraSprite/Laura_Sprite_Water2top.png",
+            "LauraX.wet and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Water2top.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.ArmPose == 2 and LauraX.arms == 'wrists'", "images/LauraSprite/Laura_Sprite_Wrist_Left2.png",
+            "LauraX.arm_pose == 2 and LauraX.arms == 'wrists'", "images/LauraSprite/Laura_Sprite_Wrist_Left2.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.top == 'jacket' and LauraX.ArmPose == 2", "images/LauraSprite/Laura_Sprite_Jacket_A2Top.png",
+            "LauraX.top == '_jacket' and LauraX.arm_pose == 2", "images/LauraSprite/Laura_Sprite_Jacket_A2Top.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.ArmPose == 2 and LauraX.Claws", "images/LauraSprite/Laura_Sprite_Claws2.png",
+            "LauraX.arm_pose == 2 and LauraX.claws", "images/LauraSprite/Laura_Sprite_Claws2.png",
             "True", Null(),
             ),
 
         (0,0), ConditionSwitch(
 
-            "LauraX.ArmPose == 2 or 'hand' not in LauraX.spunk", Null(),
+            "LauraX.arm_pose == 2 or 'hand' not in LauraX.spunk", Null(),
             "True", "images/LauraSprite/Laura_Sprite_Spunk_Hand.png",
             ),
 
@@ -467,7 +467,7 @@ image Laura_Sprite_hairback:
             "not LauraX.hair", Null(),
             "renpy.showing('Laura_BJ_Animation')", Null(),
 
-            "LauraX.hair == 'wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Under.png",
+            "LauraX.hair == '_wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Under.png",
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Under.png",
             "True", Null(),
             ),
@@ -481,7 +481,7 @@ image Laura_Sprite_HairMid:
             "not LauraX.hair", Null(),
             "renpy.showing('Laura_BJ_Animation')", Null(),
 
-            "LauraX.hair == 'wet' or LauraX.wet", Null(),
+            "LauraX.hair == '_wet' or LauraX.wet", Null(),
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Mid.png",
             "True", Null(),
             ),
@@ -493,7 +493,7 @@ image Laura_Sprite_HairTop:
 
             "not LauraX.hair", Null(),
             "renpy.showing('Laura_SexSprite')", "images/LauraSex/Laura_Sprite_Hair_Long_OverSex.png",
-            "LauraX.hair == 'wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
+            "LauraX.hair == '_wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Over.png",
             "True", Null(),
             ),
@@ -572,10 +572,10 @@ image Laura_Sprite_Head:
         (0,0), "Laura Blink",
         (0,0), ConditionSwitch(
 
-            "LauraX.top == 'jacket'", Null(),
+            "LauraX.top == '_jacket'", Null(),
             "renpy.showing('Laura_TJ_Animation')", Null(),
             "renpy.showing('Laura_Sex_Animation')", Null(),
-            "LauraX.hair == 'wet' or LauraX.wet", Null(),
+            "LauraX.hair == '_wet' or LauraX.wet", Null(),
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Mid.png",
             "True", Null(),
             ),
@@ -589,7 +589,7 @@ image Laura_Sprite_Head:
             "not LauraX.hair", Null(),
             "renpy.showing('Laura_TJ_Animation')", Null(),
             "renpy.showing('Laura_SexSprite')", "images/LauraSex/Laura_Sprite_Hair_Long_OverSex.png",
-            "LauraX.hair == 'wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
+            "LauraX.hair == '_wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Over.png",
             "True", Null(),
             ),
@@ -722,7 +722,7 @@ image Laura_Doggy_Animation:
                     "action_speed ", "Laura_Doggy_Feet1",
                     "True", "Laura_Doggy_Feet0",
                     ),
-            "not Player.sprite and ShowFeet", "Laura_Doggy_Shins",
+            "not Player.sprite and show_feet", "Laura_Doggy_Shins",
             "True", Null(),
             ),
         )
@@ -778,7 +778,7 @@ image Laura_Doggy_Body:
         (0,0), ConditionSwitch(
 
             "not LauraX.top", Null(),
-            "LauraX.top == 'jacket'", "images/LauraDoggy/Laura_Doggy_Over_Jacket.png",
+            "LauraX.top == '_jacket'", "images/LauraDoggy/Laura_Doggy_Over_Jacket.png",
             "LauraX.top == 'towel' and not LauraX.top_pulled_up", "images/LauraDoggy/Laura_Doggy_Over_TowelTop.png",
             "True", Null(),
             ),
@@ -810,7 +810,7 @@ image Laura_Doggy_Head:
 
         (0,0), ConditionSwitch(
 
-            "LauraX.wet or LauraX.hair == 'wet'", "images/LauraDoggy/Laura_Doggy_Hair_Wet_Back.png",
+            "LauraX.wet or LauraX.hair == '_wet'", "images/LauraDoggy/Laura_Doggy_Hair_Wet_Back.png",
             "True", "images/LauraDoggy/Laura_Doggy_Hair_Long_Back.png",
             ),
         (0,0), ConditionSwitch(
@@ -873,7 +873,7 @@ image Laura_Doggy_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "LauraX.wet or LauraX.hair == 'wet'", "images/LauraDoggy/Laura_Doggy_Hair_Wet.png",
+            "LauraX.wet or LauraX.hair == '_wet'", "images/LauraDoggy/Laura_Doggy_Hair_Wet.png",
             "True", "images/LauraDoggy/Laura_Doggy_Hair_Long.png",
             ),
         (0,0), ConditionSwitch(
@@ -2106,7 +2106,7 @@ label Laura_Doggy_Reset:
     if not renpy.showing("Laura_Doggy_Animation"):
         return
 
-    $ LauraX.ArmPose = 2
+    $ LauraX.arm_pose = 2
     $ LauraX.spriteVer = 0
     hide Laura_Doggy_Animation
     call Laura_Hide
@@ -2246,12 +2246,12 @@ image Laura_Sex_Body:
             "not LauraX.top", Null(),
             "LauraX.top_pulled_up", ConditionSwitch(
 
-                    "LauraX.top == 'jacket'", "images/LauraSex/Laura_Sex_Jacket_Back_Up.png",
+                    "LauraX.top == '_jacket'", "images/LauraSex/Laura_Sex_Jacket_Back_Up.png",
                     "True", Null(),
                     ),
             "True", ConditionSwitch(
 
-                    "LauraX.top == 'jacket'", "images/LauraSex/Laura_Sex_Jacket_Back.png",
+                    "LauraX.top == '_jacket'", "images/LauraSex/Laura_Sex_Jacket_Back.png",
                     "True", Null(),
                     ),
             )
@@ -2329,13 +2329,13 @@ image Laura_Sex_Body:
             "not LauraX.top", Null(),
             "LauraX.top_pulled_up", ConditionSwitch(
 
-                    "LauraX.top == 'jacket'", "images/LauraSex/Laura_Sex_Jacket_Up.png",
+                    "LauraX.top == '_jacket'", "images/LauraSex/Laura_Sex_Jacket_Up.png",
 
                     "True", Null(),
                     ),
             "True", ConditionSwitch(
 
-                    "LauraX.top == 'jacket'", "images/LauraSex/Laura_Sex_Jacket.png",
+                    "LauraX.top == '_jacket'", "images/LauraSex/Laura_Sex_Jacket.png",
 
                     "True", Null(),
                     ),
@@ -3849,7 +3849,7 @@ label Laura_Sex_Launch(Line=primary_action):
     elif Line == "hotdog":
         $ Player.cock_position = "out"
     elif Line == "footjob":
-        $ ShowFeet = 1
+        $ show_feet = 1
         $ Player.cock_position = "footjob"
     elif Line == "massage":
         $ Player.sprite = 0
@@ -3885,7 +3885,7 @@ label Laura_Sex_Reset:
         return
     if not renpy.showing("Laura_SexSprite"):
         return
-    $ LauraX.ArmPose = 2
+    $ LauraX.arm_pose = 2
     hide Laura_SexSprite
     call Laura_Hide
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
@@ -3947,7 +3947,7 @@ image Laura_Sprite_BJ_hairback:
     ConditionSwitch(
 
             "not LauraX.hair", Null(),
-            "LauraX.hair == 'wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Under.png",
+            "LauraX.hair == '_wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Under.png",
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Under.png",
             "True", Null(),
             )
@@ -4029,8 +4029,8 @@ image Laura_Sprite_BJ_Head:
         (0,0), "Laura Blink",
         (0,0), ConditionSwitch(
 
-            "LauraX.top == 'jacket'", Null(),
-            "LauraX.hair == 'wet' or LauraX.wet", Null(),
+            "LauraX.top == '_jacket'", Null(),
+            "LauraX.hair == '_wet' or LauraX.wet", Null(),
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Mid.png",
             "True", Null(),
             ),
@@ -4042,7 +4042,7 @@ image Laura_Sprite_BJ_Head:
         (0,0), ConditionSwitch(
 
             "not LauraX.hair", Null(),
-            "LauraX.hair == 'wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
+            "LauraX.hair == '_wet' or LauraX.wet", "images/LauraSprite/Laura_Sprite_Hair_Wet_Over.png",
             "LauraX.hair", "images/LauraSprite/Laura_Sprite_Hair_Long_Over.png",
             "True", Null(),
             ),
@@ -5028,7 +5028,7 @@ image Laura_BJ_Body_6:
 
 label Laura_BJ_Launch(Line=primary_action):
 
-    $ LauraX.ArmPose = 1
+    $ LauraX.arm_pose = 1
     if renpy.showing("Laura_BJ_Animation"):
         return
 
@@ -5046,7 +5046,7 @@ label Laura_BJ_Launch(Line=primary_action):
 
     $ action_speed = 0
     if Line == "L":
-        if Taboo:
+        if taboo:
             if len(Present) >= 2:
                 if Present[0] != LauraX:
                     "[LauraX.name] looks back at [Present[0].name] to see if she's watching."
@@ -5224,7 +5224,7 @@ label Laura_HJ_Launch(Line=primary_action):
     else:
         $ action_speed = 1
     pause .5
-    $ LauraX.ArmPose = 1
+    $ LauraX.arm_pose = 1
     # show Laura_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
     #
     #     offset (250,250)
@@ -5234,7 +5234,7 @@ label Laura_HJ_Reset:
     if not renpy.showing("Laura_HJ_Animation"):
         return
     $ action_speed = 0
-    $ LauraX.ArmPose = 1
+    $ LauraX.arm_pose = 1
     hide Laura_HJ_Animation with easeoutbottom
     call Laura_Hide
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
@@ -6333,7 +6333,7 @@ label Laura_TJ_Launch(Line=primary_action):
         alpha 1
         ease 1 zoom 2.3 xpos 750 yoffset -100
     if Line == "L":
-        if Taboo:
+        if taboo:
             if len(Present) >= 2:
                 if Present[0] != LauraX:
                     "[LauraX.name] looks back at [Present[0].name] to see if she's watching."
@@ -6351,7 +6351,7 @@ label Laura_TJ_Launch(Line=primary_action):
         "She tugs off her [LauraX.bra] and throws it aside."
     $ LauraX.top = ""
     $ LauraX.bra = ""
-    $ LauraX.ArmPose = 0
+    $ LauraX.arm_pose = 0
 
     call Laura_First_Topless
 

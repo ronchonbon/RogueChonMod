@@ -133,9 +133,9 @@ label action(Girl):
     return
 
 label before_action:
-    if Taboo:
-        $ focused_Girl.inhibition += int(Taboo/10)
-        $ focused_Girl.lust += int(Taboo/5)
+    if taboo:
+        $ focused_Girl.inhibition += int(taboo/10)
+        $ focused_Girl.lust += int(taboo/5)
 
     $ focused_Girl.change_face("_sexy")
 
@@ -252,7 +252,7 @@ label before_action:
 
                 $ focused_Girl.upskirt = 1
                 $ focused_Girl.underwear_pulled_down = 1
-                $ focused_Girl.SeenPanties = 1
+                $ focused_Girl.seen_underwear = 1
 
                 call expression focused_Girl.tag + "_First_Bottomless" pass(1)
             elif primary_action == "hotdog":
@@ -268,20 +268,20 @@ label before_action:
 
     call first_action_changes(focused_Girl, primary_action)
 
-    if Taboo:
+    if taboo:
         if primary_action == "fondle_thighs":
-            $ focused_Girl.change_stat("lust", 200, (int(Taboo/5)))
-            $ focused_Girl.change_stat("inhibition", 200, (2*(int(Taboo/5))))
+            $ focused_Girl.change_stat("lust", 200, (int(taboo/5)))
+            $ focused_Girl.change_stat("inhibition", 200, (2*(int(taboo/5))))
         elif primary_action in ["fondle_breasts", "suck_breasts", "finger_pussy", "eat_pussy", "fondle_ass", "finger_ass", "dildo_pussy", "dildo_ass"]:
-            $ focused_Girl.inhibition += int(Taboo/10)
-            $ focused_Girl.lust += int(Taboo/5)
+            $ focused_Girl.inhibition += int(taboo/10)
+            $ focused_Girl.lust += int(taboo/5)
         elif primary_action in ["fondle_pussy", "eat_pussy", "finger_ass", "eat_ass"]:
-            if focused_Girl == JeanX and focused_Girl.Taboo:
-                $ focused_Girl.change_stat("inhibition", 200, (int(Taboo/10)))
-            elif Taboo:
-                $ focused_Girl.inhibition += int(Taboo/10)
+            if focused_Girl == JeanX and focused_Girl.taboo:
+                $ focused_Girl.change_stat("inhibition", 200, (int(taboo/10)))
+            elif taboo:
+                $ focused_Girl.inhibition += int(taboo/10)
 
-            $ focused_Girl.lust += int(Taboo/5)
+            $ focused_Girl.lust += int(taboo/5)
 
     if action_context:
         $ renpy.pop_call()
@@ -291,7 +291,7 @@ label before_action:
     if primary_action in inside_panties_actions:
         if focused_Girl.wearing_skirt:
             $ focused_Girl.upskirt = 1
-            $ focused_Girl.SeenPanties = 1
+            $ focused_Girl.seen_underwear = 1
 
         call expression focused_Girl.tag + "_First_Bottomless" pass(1)
 
@@ -313,7 +313,7 @@ label before_action:
     elif primary_action == "hotdog":
         $ action_speed = 1
 
-    if Taboo:
+    if taboo:
         $ focused_Girl.drain_word("no_taboo")
 
     $ focused_Girl.drain_word("no_" + primary_action)
@@ -435,7 +435,7 @@ label after_action:
     if primary_action in ["handjob", "footjob"]:
         $ focused_Girl.change_stat("lust", 90, 5)
 
-    if achievement is not None and achievement in Achievements:
+    if achievement is not None and achievement in achievements:
         pass
     elif primary_action == "titjob" and Girl.action_counter[primary_action] > 5:
         pass
@@ -448,7 +448,7 @@ label after_action:
             $ focused_Girl.SEXP += 7
 
         if achievement is not None:
-            $ Achievements.append(achievement)
+            $ achievements.append(achievement)
 
         if primary_action not in ["anal"] and not action_context:
             $ focused_Girl.change_face("_smile", 1)
@@ -500,7 +500,7 @@ label set_approval_bonus(Girl, action):
             $ approval_bonus += 10
 
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += Taboo
+            $ approval_bonus += taboo
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -514,7 +514,7 @@ label set_approval_bonus(Girl, action):
             $ approval_bonus += 20
 
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (3*Taboo)
+            $ approval_bonus += (3*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -534,7 +534,7 @@ label set_approval_bonus(Girl, action):
             $ approval_bonus += 10
 
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (4*Taboo)
+            $ approval_bonus += (4*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -554,7 +554,7 @@ label set_approval_bonus(Girl, action):
             $ approval_bonus += 10
 
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (2*Taboo)
+            $ approval_bonus += (2*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -579,7 +579,7 @@ label set_approval_bonus(Girl, action):
             $ approval_bonus += 10
 
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (4*Taboo)
+            $ approval_bonus += (4*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -596,7 +596,7 @@ label set_approval_bonus(Girl, action):
             $ approval_bonus += 15
 
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += Taboo
+            $ approval_bonus += taboo
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -622,7 +622,7 @@ label set_approval_bonus(Girl, action):
             $ approval_bonus += 10
 
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (4*Taboo)
+            $ approval_bonus += (4*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -647,7 +647,7 @@ label set_approval_bonus(Girl, action):
             $ approval_bonus += 10
 
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (4*Taboo)
+            $ approval_bonus += (4*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -662,7 +662,7 @@ label set_approval_bonus(Girl, action):
             $ approval_bonus += 3
 
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (3*Taboo)
+            $ approval_bonus += (3*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -692,7 +692,7 @@ label set_approval_bonus(Girl, action):
         if action_context == "shift":
             $ approval_bonus += 15
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (3*Taboo)
+            $ approval_bonus += (3*taboo)
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
         elif "ex" in Girl.traits:
@@ -705,13 +705,13 @@ label set_approval_bonus(Girl, action):
         elif Girl.action_counter[primary_action]: #You've done it before
             $ approval_bonus += 5
 
-        if Girl.SeenChest and approval_check(Girl, 500): # You've seen her tits.
+        if Girl.seen_breasts and approval_check(Girl, 500): # You've seen her tits.
             $ approval_bonus += 10
         if not Girl.Chest and not Girl.Over: #She's already topless
             $ approval_bonus += 10
 
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (5*Taboo)
+            $ approval_bonus += (5*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -742,7 +742,7 @@ label set_approval_bonus(Girl, action):
             $ approval_bonus += 15
 
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (4*Taboo)
+            $ approval_bonus += (4*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -765,7 +765,7 @@ label set_approval_bonus(Girl, action):
         if action_context == "shift":
             $ approval_bonus += 10
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (5*Taboo)
+            $ approval_bonus += (5*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -778,7 +778,7 @@ label set_approval_bonus(Girl, action):
             $ approval_bonus -= 20
         elif "anal" in Girl.daily_history or "dildo_anal" in Girl.daily_history:
             $ approval_bonus -= 10
-        elif (Girl.action_counter["anal"] + Girl.action_counter["dildo_ass"] + Girl.Plug) > 0: #You've done it before
+        elif (Girl.action_counter["anal"] + Girl.action_counter["dildo_ass"] + Girl.buttplug) > 0: #You've done it before
             $ approval_bonus += 20
 
         if Girl.PantsNum() > 6: # she's got pants on.
@@ -792,7 +792,7 @@ label set_approval_bonus(Girl, action):
         if action_context == "shift":
             $ approval_bonus += 10
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (5*Taboo)
+            $ approval_bonus += (5*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -819,7 +819,7 @@ label set_approval_bonus(Girl, action):
         if action_context == "shift":
             $ approval_bonus += 10
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (4*Taboo)
+            $ approval_bonus += (4*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -853,7 +853,7 @@ label set_approval_bonus(Girl, action):
         if action_context == "shift":
             $ approval_bonus += 10
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (5*Taboo)
+            $ approval_bonus += (5*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -872,7 +872,7 @@ label set_approval_bonus(Girl, action):
         if action_context == "shift":
             $ approval_bonus += 10
         if "exhibitionist" in Girl.traits:
-            $ approval_bonus += (3*Taboo)
+            $ approval_bonus += (3*taboo)
 
         if Girl in Player.Harem or "sex friend" in Girl.player_petnames:
             $ approval_bonus += 10
@@ -882,7 +882,7 @@ label set_approval_bonus(Girl, action):
     if Girl.event_counter["forced"] and not Girl.forced:
         $ approval_bonus -= 5*Girl.event_counter["forced"]
 
-    if Taboo and "no_taboo" in Girl.daily_history:
+    if taboo and "no_taboo" in Girl.daily_history:
         $ approval_bonus -= 10
 
     if "no_" + primary_action in Girl.daily_history:

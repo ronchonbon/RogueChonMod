@@ -1623,7 +1623,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
                 $ TempFocus += -3 if Player.focus > 50 else 2
             return
 
-        if Psychic == "handjob" or not Psychic:
+        if psychic == "handjob" or not psychic:
 
             $ Line = Line + renpy.random.choice(["Her movements are masterful, her slightest touch starts you twitching",
                                     "She's something of an expert, you feel a light tingle in your shaft",
@@ -1637,7 +1637,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
             else:
                 $ TempFocus += 15 if Player.focus < 60 else 7
             $ TempLust += 2 if GirlA.lust < 60 else 0
-        elif Psychic == "mouth":
+        elif psychic == "mouth":
             $ Line = Line + renpy.random.choice(["She masterfully bobs on your cock, and it twitches with each stroke",
                                 "She smoothly bobs up and down on your cock, a frenzy of motion",
                                 "She gobbles you up all the way to the base, then quickly draws out and plunges back in",
@@ -1646,7 +1646,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
                                 "She puts the shaft into her mouth and her tounge swirls rapidly around it"])
             $ TempFocus += 22 if Player.focus > 40 else 10
             $ TempLust += 3 if GirlA.lust > 60 else 1
-        elif Psychic == "tits":
+        elif psychic == "tits":
             $ Line = renpy.random.choice([GirlA.name + " juggles her breast projections up and down around your cock",
                                 GirlA.name + " lightly strokes the head as it pops up between her tits",
                                 GirlA.name + " has a smooth motion going now, gentle and precise",
@@ -1654,7 +1654,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
                                 GirlA.name + " gently caresses the shaft between her tits"])
             $ TempFocus += 15 if Player.focus < 60 else 5
             $ TempLust += 6 if GirlA.lust > 60 else 3
-        elif Psychic == "sex" or Psychic == "anal":
+        elif psychic == "sex" or psychic == "anal":
 
             $ Line = Line + renpy.random.choice(["It bounces rapidly against your cock",
                             "You thrust into it and she squeaks a bit",
@@ -2796,7 +2796,7 @@ label Three_Change(LeadGirl=Primary, SecondGirl=Partner, D20S=0, PrimaryLust=0, 
                     call Threeway_Set (SecondGirl, "fondle_ass", 0, second_girl_primary_action, LeadGirl)
                 "why don't you lick her ass?" if second_girl_primary_action != "eat_ass":
                     call Threeway_Set (SecondGirl, "eat_ass", 0, second_girl_primary_action, LeadGirl)
-                "wait, I meant. . .":
+                "Wait, I meant. . .":
                     jump Three_Change_Menu
         "about me. . .":
 
@@ -2810,7 +2810,7 @@ label Three_Change(LeadGirl=Primary, SecondGirl=Partner, D20S=0, PrimaryLust=0, 
                     call Threeway_Set (SecondGirl, "blowjob", 0, second_girl_primary_action, LeadGirl)
                 "why don't you give me a show?" if second_girl_primary_action != "masturbation":
                     call Threeway_Set (SecondGirl, "masturbation", 0, second_girl_primary_action, LeadGirl)
-                "wait, I meant. . .":
+                "Wait, I meant. . .":
                     jump Three_Change_Menu
         "never mind.":
             pass
@@ -3214,7 +3214,7 @@ label Dirty_Talk(Girl=Primary, D20=0, TempCheck=0, TempLine=0, Tempprimary_actio
 
 
 
-    if primary_action == "strip" or not primary_action:
+    if primary_action == "striptease" or not primary_action:
 
         return
 
@@ -4497,7 +4497,7 @@ label auto_action_narrations(Girl, action):
         else:
             "You press up against [Girl.name]'s backside."
 
-        $ Girl.SeenPanties = 1
+        $ Girl.seen_underwear = 1
 
         "You rub the tip of your cock against her moist slit."
 
@@ -4518,7 +4518,7 @@ label auto_action_narrations(Girl, action):
         else:
             "You press up against [Girl.name]'s backside."
 
-        $ Girl.SeenPanties = 1
+        $ Girl.seen_underwear = 1
 
         "You press the tip of your cock against her tight rim."
 
@@ -4617,7 +4617,7 @@ label start_of_sex_narration(Girl, action):
         $ player_action_line = None
         $ final_line = None
 
-    if Taboo:
+    if taboo:
         if Girl in [RogueX, KittyX]:
             if (action == "sex" and not Girl.action_counter["sex"]) or (action == "anal" and not Girl.action_counter["anal"]):
                 "[Girl.name] [check_line]. . ."
@@ -4649,11 +4649,11 @@ label start_of_sex_narration(Girl, action):
                 "She [final_line]."
 
         if Girl != JeanX:
-            $ Girl.inhibition += int(Taboo/10)
-            $ Girl.lust += int(Taboo/5)
+            $ Girl.inhibition += int(taboo/10)
+            $ Girl.lust += int(taboo/5)
         else:
-            $ JeanX.change_stat("inhibition", 90, int(Taboo/10))
-            $ JeanX.change_stat("lust", 50, int(Taboo/5))
+            $ JeanX.change_stat("inhibition", 90, int(taboo/10))
+            $ JeanX.change_stat("lust", 50, int(taboo/5))
     else:
         if Girl in [RogueX, KittyX]:
             if (action == "sex" and not Girl.action_counter["sex"]) or (action == "anal" and not Girl.action_counter["anal"]):

@@ -17,7 +17,7 @@ image Storm_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.top == 'jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket_Under.png",
+            "StormX.top == '_jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket_Under.png",
             "True", Null(),
             ),
 
@@ -42,7 +42,7 @@ image Storm_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "StormX.ArmPose != 1", "images/StormSprite/Storm_Sprite_Body2.png",
+            "StormX.arm_pose != 1", "images/StormSprite/Storm_Sprite_Body2.png",
             "True", "images/StormSprite/Storm_Sprite_Body1.png",
             ),
 
@@ -98,8 +98,8 @@ image Storm_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "not StormX.accessory == 'rings' or StormX.top == 'jacket'", Null(),
-            "StormX.ArmPose == 1", "images/StormSprite/Storm_Sprite_ArmRings1.png",
+            "not StormX.accessory == 'rings' or StormX.top == '_jacket'", Null(),
+            "StormX.arm_pose == 1", "images/StormSprite/Storm_Sprite_ArmRings1.png",
             "True", "images/StormSprite/Storm_Sprite_ArmRings2.png",
             ),
         (0,0), ConditionSwitch(
@@ -276,9 +276,9 @@ image Storm_Sprite:
         (0,0), ConditionSwitch(
 
             "not StormX.wet", Null(),
-            "(StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra') and StormX.ArmPose == 1", "images/StormSprite/Storm_Sprite_Water_Tight1.png",
+            "(StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra') and StormX.arm_pose == 1", "images/StormSprite/Storm_Sprite_Water_Tight1.png",
             "StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra'", "images/StormSprite/Storm_Sprite_Water_Tight2.png",
-            "StormX.ArmPose == 1", "images/StormSprite/Storm_Sprite_Water_Loose1.png",
+            "StormX.arm_pose == 1", "images/StormSprite/Storm_Sprite_Water_Loose1.png",
             "True", "images/StormSprite/Storm_Sprite_Water_Loose2.png",
             ),
 
@@ -293,8 +293,8 @@ image Storm_Sprite:
             "StormX.top_pulled_up", ConditionSwitch(
 
                     "StormX.top == 'white_shirt'", "images/StormSprite/Storm_Sprite_Over_WhiteShirt_Up.png",
-                    "StormX.top == 'jacket' and StormX.ArmPose != 1", "images/StormSprite/Storm_Sprite_Over_Jacket2_Up.png",
-                    "StormX.top == 'jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket1_Up.png",
+                    "StormX.top == '_jacket' and StormX.arm_pose != 1", "images/StormSprite/Storm_Sprite_Over_Jacket2_Up.png",
+                    "StormX.top == '_jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket1_Up.png",
 
                     "True", Null(),
                     ),
@@ -303,18 +303,18 @@ image Storm_Sprite:
             "StormX.bra == 'black_bra' or StormX.bra == 'lace_bra' or StormX.bra == 'sports_bra'", ConditionSwitch(
 
                     "StormX.top == 'white_shirt'", "images/StormSprite/Storm_Sprite_Over_WhiteShirtU.png",
-                    "StormX.top == 'jacket' and StormX.ArmPose != 1", "images/StormSprite/Storm_Sprite_Over_Jacket2U.png",
-                    "StormX.top == 'jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket1U.png",
+                    "StormX.top == '_jacket' and StormX.arm_pose != 1", "images/StormSprite/Storm_Sprite_Over_Jacket2U.png",
+                    "StormX.top == '_jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket1U.png",
                     "True", Null(),
                     ),
             "StormX.top == 'white_shirt'", "images/StormSprite/Storm_Sprite_Over_WhiteShirtL.png",
-            "StormX.top == 'jacket' and StormX.ArmPose != 1", "images/StormSprite/Storm_Sprite_Over_Jacket2L.png",
-            "StormX.top == 'jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket1L.png",
+            "StormX.top == '_jacket' and StormX.arm_pose != 1", "images/StormSprite/Storm_Sprite_Over_Jacket2L.png",
+            "StormX.top == '_jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket1L.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "not StormX.top_pulled_up or StormX.top != 'jacket'", Null(),
+            "not StormX.top_pulled_up or StormX.top != '_jacket'", Null(),
 
             "StormX.bra == 'black_bra'", "images/StormSprite/Storm_Sprite_Chest_Bra_UpJ.png",
             "StormX.bra == 'lace_bra'", "images/StormSprite/Storm_Sprite_Chest_Bra_UpJ.png",
@@ -326,7 +326,7 @@ image Storm_Sprite:
         (0,0), ConditionSwitch(
 
             "not StormX.piercings or (not StormX.top and not StormX.bra and not StormX.top_pulled_up)", Null(),
-            "StormX.top == 'jacket' and not StormX.top_pulled_up", Null(),
+            "StormX.top == '_jacket' and not StormX.top_pulled_up", Null(),
             "StormX.piercings == 'barbell'", ConditionSwitch(
 
                     "StormX.top_pulled_up", "images/StormSprite/Storm_Sprite_Barbell_TitsL.png",
@@ -351,31 +351,31 @@ image Storm_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.ArmPose == 1", "images/StormSprite/Storm_Sprite_Arms1a.png",
+            "StormX.arm_pose == 1", "images/StormSprite/Storm_Sprite_Arms1a.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.top == 'jacket'", "images/StormSprite/Storm_Sprite_Over_JacketC.png",
+            "StormX.top == '_jacket'", "images/StormSprite/Storm_Sprite_Over_JacketC.png",
             "True", Null(),
             ),
         (53,-45), "Storm_Sprite_Head",
         (0,0), ConditionSwitch(
 
-            "StormX.ArmPose != 1 and renpy.showing('Storm_HJ_Animation')", Null(),
-            "StormX.ArmPose != 1", "images/StormSprite/Storm_Sprite_Arms2a.png",
+            "StormX.arm_pose != 1 and renpy.showing('Storm_HJ_Animation')", Null(),
+            "StormX.arm_pose != 1", "images/StormSprite/Storm_Sprite_Arms2a.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.wet and StormX.ArmPose != 1", "images/StormSprite/Storm_Sprite_Water_Arm2.png",
+            "StormX.wet and StormX.arm_pose != 1", "images/StormSprite/Storm_Sprite_Water_Arm2.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "StormX.ArmPose != 1 and StormX.top == 'jacket' and renpy.showing('Storm_HJ_Animation')", "images/StormSprite/Storm_Sprite_Over_Jacket2H.png",
-            "StormX.ArmPose != 1 and StormX.top == 'jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket2A.png",
-            "StormX.ArmPose != 1 and StormX.accessory == 'rings'", "images/StormSprite/Storm_Sprite_ArmRings2Top.png",
+            "StormX.arm_pose != 1 and StormX.top == '_jacket' and renpy.showing('Storm_HJ_Animation')", "images/StormSprite/Storm_Sprite_Over_Jacket2H.png",
+            "StormX.arm_pose != 1 and StormX.top == '_jacket'", "images/StormSprite/Storm_Sprite_Over_Jacket2A.png",
+            "StormX.arm_pose != 1 and StormX.accessory == 'rings'", "images/StormSprite/Storm_Sprite_ArmRings2Top.png",
             "True", Null(),
             ),
 
@@ -544,7 +544,7 @@ image Storm_Sprite_hairback:
                 "StormX.hair == 'wethawk'", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Back_Wet.png",
                 "StormX.hair == 'mohawk' and StormX.wet", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Back_Wet.png",
                 "StormX.hair == 'mohawk'", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Back.png",
-                "StormX.hair == 'wet'", "images/StormSprite/Storm_Sprite_Hair_Long_Back_Wet.png",
+                "StormX.hair == '_wet'", "images/StormSprite/Storm_Sprite_Hair_Long_Back_Wet.png",
                 "StormX.hair and StormX.wet", "images/StormSprite/Storm_Sprite_Hair_Long_Back_Wet.png",
                 "StormX.hair == 'short'", Null(),
                 "StormX.hair", "images/StormSprite/Storm_Sprite_Hair_Long_Back.png",
@@ -680,7 +680,7 @@ image Storm_Sprite_Head:
             "StormX.hair == 'wethawk'", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Wet.png",
             "StormX.hair == 'mohawk' and StormX.wet", "images/StormSprite/Storm_Sprite_Hair_Mohawk_Wet.png",
             "StormX.hair == 'mohawk'", "images/StormSprite/Storm_Sprite_Hair_Mohawk.png",
-            "StormX.hair == 'wet'", "images/StormSprite/Storm_Sprite_Hair_Long_Wet.png",
+            "StormX.hair == '_wet'", "images/StormSprite/Storm_Sprite_Hair_Long_Wet.png",
             "StormX.hair and StormX.wet", "images/StormSprite/Storm_Sprite_Hair_Long_Wet.png",
             "StormX.hair == 'short'", "images/StormSprite/Storm_Sprite_Hair_Short.png",
             "renpy.showing('Storm_SexSprite')", "images/StormSprite/Storm_Sprite_Hair_Long_Sex.png",
@@ -905,7 +905,7 @@ image Storm_Sex_Body:
 
         (0,0), ConditionSwitch(
 
-            "not StormX.accessory == 'rings' or StormX.top == 'jacket'", Null(),
+            "not StormX.accessory == 'rings' or StormX.top == '_jacket'", Null(),
             "True", "images/StormSex/Storm_Sex_Arms_Ring.png",
             ),
         (0,0), ConditionSwitch(
@@ -949,7 +949,7 @@ image Storm_Sex_Body:
 
             "StormX.top == 'white_shirt' and StormX.top_pulled_up", "images/StormSex/Storm_Sex_Chest_Shirt_Up.png",
             "StormX.top == 'white_shirt'", "images/StormSex/Storm_Sex_Chest_Shirt.png",
-            "StormX.top == 'jacket'", "images/StormSex/Storm_Sex_Chest_Jacket.png",
+            "StormX.top == '_jacket'", "images/StormSex/Storm_Sex_Chest_Jacket.png",
             "True", Null(),
 
 
@@ -1162,15 +1162,15 @@ image Storm_Sex_Legs:
             ),
         (0,0), ConditionSwitch(
 
-            "Player.sprite and Player.cock_position == 'anal' and ShowFeet", "images/StormSex/Storm_Sex_Legs_FJ_Anal.png",
-            "ShowFeet", "images/StormSex/Storm_Sex_Legs_FJ.png",
+            "Player.sprite and Player.cock_position == 'anal' and show_feet", "images/StormSex/Storm_Sex_Legs_FJ_Anal.png",
+            "show_feet", "images/StormSex/Storm_Sex_Legs_FJ.png",
             "Player.sprite and Player.cock_position == 'anal'", "images/StormSex/Storm_Sex_Legs_Anal.png",
             "True", "images/StormSex/Storm_Sex_Legs.png",
             ),
         (0,0), ConditionSwitch(
 
             "not StormX.wet", Null(),
-            "ShowFeet", "images/StormSex/Storm_Sex_Wet_Legs_FJ.png",
+            "show_feet", "images/StormSex/Storm_Sex_Wet_Legs_FJ.png",
             "True", "images/StormSex/Storm_Sex_Wet_Legs.png",
             ),
 
@@ -1183,7 +1183,7 @@ image Storm_Sex_Legs:
 
         (0,0), ConditionSwitch(
 
-            "ShowFeet",ConditionSwitch(
+            "show_feet",ConditionSwitch(
 
                     "StormX.hose == 'stockings_and_garterbelt'", "images/StormSex/Storm_Sex_Hose_StockingsGarter_FJ.png",
                     "StormX.hose == 'garterbelt'", "images/StormSex/Storm_Sex_Hose_Garter_FJ.png",
@@ -1198,7 +1198,7 @@ image Storm_Sex_Legs:
         (0,0), ConditionSwitch(
 
             "not StormX.accessory == 'rings' or StormX.legs == 'pants' or StormX.legs == 'yoga_pants'", Null(),
-            "ShowFeet", "images/StormSex/Storm_Sex_LegRings_FJ.png",
+            "show_feet", "images/StormSex/Storm_Sex_LegRings_FJ.png",
             "True", "images/StormSex/Storm_Sex_LegRings.png",
             ),
         (0,0), ConditionSwitch(
@@ -1206,15 +1206,15 @@ image Storm_Sex_Legs:
             "StormX.legs and StormX.legs != 'skirt' and not StormX.upskirt", Null(),
             "StormX.underwear_pulled_down",ConditionSwitch(
 
-                    "StormX.underwear == 'cos_panties' and ShowFeet", "images/StormSex/Storm_Sex_Panties_Cos_FJ_Down.png",
+                    "StormX.underwear == 'cos_panties' and show_feet", "images/StormSex/Storm_Sex_Panties_Cos_FJ_Down.png",
                     "StormX.underwear == 'cos_panties'", "images/StormSex/Storm_Sex_Panties_Cos_Down.png",
-                    "StormX.underwear == 'white_panties' and ShowFeet", "images/StormSex/Storm_Sex_Panties_White_FJ_Down.png",
+                    "StormX.underwear == 'white_panties' and show_feet", "images/StormSex/Storm_Sex_Panties_White_FJ_Down.png",
                     "StormX.underwear == 'white_panties'", "images/StormSex/Storm_Sex_Panties_White_Down.png",
-                    "StormX.underwear and ShowFeet", "images/StormSex/Storm_Sex_Panties_Black_FJ_Down.png",
+                    "StormX.underwear and show_feet", "images/StormSex/Storm_Sex_Panties_Black_FJ_Down.png",
                     "StormX.underwear", "images/StormSex/Storm_Sex_Panties_Black_Down.png",
                     "True", Null(),
                     ),
-            "ShowFeet",ConditionSwitch(
+            "show_feet",ConditionSwitch(
 
                     "StormX.underwear == 'cos_panties' and StormX.grool", "images/StormSex/Storm_Sex_Panties_Cos_FJ_Wet.png",
                     "StormX.underwear == 'cos_panties'", "images/StormSex/Storm_Sex_Panties_Cos_FJ.png",
@@ -1254,7 +1254,7 @@ image Storm_Sex_Legs:
         (0,0), ConditionSwitch(
 
             "StormX.underwear and StormX.underwear_pulled_down", Null(),
-            "ShowFeet",ConditionSwitch(
+            "show_feet",ConditionSwitch(
 
                     "StormX.hose == 'pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJ.png",
                     "StormX.hose == 'ripped_pantyhose'", "images/StormSex/Storm_Sex_Hose_Pantyhose_FJHoled.png",
@@ -1267,17 +1267,17 @@ image Storm_Sex_Legs:
 
         (0,0), ConditionSwitch(
 
-            "StormX.legs == 'skirt' and ShowFeet", "images/StormSex/Storm_Sex_Legs_Skirt_FJ.png",
+            "StormX.legs == 'skirt' and show_feet", "images/StormSex/Storm_Sex_Legs_Skirt_FJ.png",
             "StormX.upskirt",ConditionSwitch(
 
                     "StormX.legs == 'skirt'", "images/StormSex/Storm_Sex_Legs_Skirt_Up.png",
-                    "StormX.legs == 'pants' and ShowFeet", "images/StormSex/Storm_Sex_Legs_Pants_FJ_Down.png",
+                    "StormX.legs == 'pants' and show_feet", "images/StormSex/Storm_Sex_Legs_Pants_FJ_Down.png",
                     "StormX.legs == 'pants'", "images/StormSex/Storm_Sex_Legs_Pants_Down.png",
-                    "StormX.legs == 'yoga_pants' and ShowFeet", "images/StormSex/Storm_Sex_Legs_YogaPants_FJ_Down.png",
+                    "StormX.legs == 'yoga_pants' and show_feet", "images/StormSex/Storm_Sex_Legs_YogaPants_FJ_Down.png",
                     "StormX.legs == 'yoga_pants'", "images/StormSex/Storm_Sex_Legs_YogaPants_Down.png",
                     "True", Null(),
                     ),
-            "ShowFeet",ConditionSwitch(
+            "show_feet",ConditionSwitch(
 
                     "StormX.legs == 'pants' and StormX.grool > 1", "images/StormSex/Storm_Sex_Legs_Pants_FJ_Wet.png",
                     "StormX.legs == 'pants'", "images/StormSex/Storm_Sex_Legs_Pants_FJ.png",
@@ -1325,7 +1325,7 @@ image Storm_Sex_Legs:
             ),
         (0,0), ConditionSwitch(
 
-            "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
+            "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
 
             "True", Null(),
             ),
@@ -1407,13 +1407,13 @@ image Storm_Sex_Pussy:
         ConditionSwitch(
                 "not StormX.pubes", Null(),
 
-                "Player.sprite and Player.cock_position == 'in' and action_speed and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Fucking_FJ.png",
+                "Player.sprite and Player.cock_position == 'in' and action_speed and show_feet", "images/StormSex/Storm_Sex_Pubes_Fucking_FJ.png",
                 "Player.sprite and Player.cock_position == 'in' and action_speed", "images/StormSex/Storm_Sex_Pubes_Fucking.png",
-                "Player.sprite and Player.cock_position == 'in' and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
+                "Player.sprite and Player.cock_position == 'in' and show_feet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
                 "Player.sprite and Player.cock_position == 'in'", "images/StormSex/Storm_Sex_Pubes_Open.png",
-                "primary_action == 'eat_pussy' and ShowFeet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
+                "primary_action == 'eat_pussy' and show_feet", "images/StormSex/Storm_Sex_Pubes_Open_FJ.png",
                 "primary_action == 'eat_pussy'", "images/StormSex/Storm_Sex_Pubes_Open.png",
-                "ShowFeet", "images/StormSex/Storm_Sex_Pubes_Closed_FJ.png",
+                "show_feet", "images/StormSex/Storm_Sex_Pubes_Closed_FJ.png",
                 "True", "images/StormSex/Storm_Sex_Pubes_Closed.png",
                 )
     contains:
@@ -1578,7 +1578,7 @@ image Storm_Sex_Static:
         subpixel True
         ConditionSwitch(
 
-                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
+                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
                 "True", Null(),
                 )
         pos (0,-140)
@@ -2319,7 +2319,7 @@ image Storm_Sex_Hotdog_Speed1:
         subpixel True
         ConditionSwitch(
 
-                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
+                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
                 "True", Null(),
                 )
         pos (0,-160)
@@ -2390,7 +2390,7 @@ image Storm_Sex_Hotdog_Speed2:
         subpixel True
         ConditionSwitch(
 
-                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
+                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot2.png"),
                 "True", Null(),
                 )
         pos (0,-160)
@@ -2458,7 +2458,7 @@ image Storm_Sex_FJ_Speed0:
         subpixel True
         ConditionSwitch(
 
-                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
+                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
                 "True", Null(),
                 )
         pos (0,-200)
@@ -2529,7 +2529,7 @@ image Storm_Sex_FJ_Speed1:
         subpixel True
         ConditionSwitch(
 
-                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
+                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
                 "True", Null(),
                 )
         pos (0,-200)
@@ -2600,7 +2600,7 @@ image Storm_Sex_FJ_Speed2:
         subpixel True
         ConditionSwitch(
 
-                "ShowFeet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
+                "show_feet", AlphaMask("Storm_Sex_Feet", "images/StormSex/Storm_Sex_Mask_Foot.png"),
                 "True", Null(),
                 )
         pos (0,-200)
@@ -2638,7 +2638,7 @@ label Storm_Sex_Launch(Line=primary_action):
             $ StormX.upskirt = 1
         $ Player.cock_position = "out"
     elif Line == "footjob":
-        $ ShowFeet = 1
+        $ show_feet = 1
         $ Player.cock_position = "footjob"
     elif Line == "massage":
         $ Player.sprite = 0
@@ -2666,7 +2666,7 @@ label Storm_Sex_Reset:
         return
     if not renpy.showing("Storm_SexSprite"):
         return
-    $ StormX.ArmPose = 2
+    $ StormX.arm_pose = 2
     hide Storm_SexSprite
     call Storm_Hide
 
@@ -2796,7 +2796,7 @@ image Storm_HJ_Animation:
 
 
 label Storm_HJ_Launch(Line=primary_action):
-    $ StormX.ArmPose = 2
+    $ StormX.arm_pose = 2
     if renpy.showing("Storm_HJ_Animation"):
         $ primary_action = "handjob"
         return
@@ -2829,7 +2829,7 @@ label Storm_HJ_Reset:
     if not renpy.showing("Storm_HJ_Animation"):
         return
     $ action_speed = 0
-    $ StormX.ArmPose = 1
+    $ StormX.arm_pose = 1
     hide Storm_HJ_Animation with easeoutbottom
     call Storm_Hide
     show Storm_Sprite zorder StormX.sprite_layer at sprite_location(StormX.sprite_location):
@@ -2875,7 +2875,7 @@ image Storm_BJ_Animation:
 image Storm_BJ_hairback:
 
     ConditionSwitch(
-            "(StormX.hair == 'long' and StormX.wet) or StormX.hair == 'wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Under.png",
+            "(StormX.hair == 'long' and StormX.wet) or StormX.hair == '_wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Under.png",
             "StormX.hair == 'mohawk' or StormX.hair == 'wethawk' or StormX.hair == 'short'", Null(),
             "True", "images/StormBJFace/Storm_BJ_Hair_Long_Under.png",
             ),
@@ -2886,7 +2886,7 @@ image Storm_BJ_HairTop:
     contains:
         ConditionSwitch(
                 "(StormX.hair == 'mohawk' and StormX.wet) or StormX.hair == 'wethawk'", "images/StormBJFace/Storm_BJ_Hair_WetM_Over.png",
-                "StormX.wet or StormX.hair == 'wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Over.png",
+                "StormX.wet or StormX.hair == '_wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Over.png",
                 "StormX.hair == 'mohawk'", "images/StormBJFace/Storm_BJ_Hair_Mohawk_Over.png",
                 "StormX.hair == 'short'", "images/StormBJFace/Storm_BJ_Hair_Short.png",
                 "True", "images/StormBJFace/Storm_BJ_Hair_Long_Over.png",
@@ -2894,7 +2894,7 @@ image Storm_BJ_HairTop:
     contains:
         ConditionSwitch(
 
-                "'hair' in StormX.spunk and (StormX.wet or StormX.hair == 'wethawk' or StormX.hair == 'wet')", "images/StormBJFace/Storm_BJ_Spunk_HairW.png",
+                "'hair' in StormX.spunk and (StormX.wet or StormX.hair == 'wethawk' or StormX.hair == '_wet')", "images/StormBJFace/Storm_BJ_Spunk_HairW.png",
                 "'hair' in StormX.spunk and StormX.hair == 'mohawk'", "images/StormBJFace/Storm_BJ_Spunk_HairM.png",
                 "'hair' in StormX.spunk", "images/StormBJFace/Storm_BJ_Spunk_HairL.png",
                 "True", Null(),
@@ -3023,7 +3023,7 @@ image Storm_BJ_Head:
         (0,0), ConditionSwitch(
 
             "(StormX.hair == 'mohawk' and StormX.wet) or StormX.hair == 'wethawk'", "images/StormBJFace/Storm_BJ_Hair_WetM_Over.png",
-            "StormX.wet or StormX.hair == 'wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Over.png",
+            "StormX.wet or StormX.hair == '_wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Over.png",
             "StormX.hair == 'mohawk'", "images/StormBJFace/Storm_BJ_Hair_Mohawk_Over.png",
             "StormX.hair == 'short'", "images/StormBJFace/Storm_BJ_Hair_Short_Over.png",
             "True", "images/StormBJFace/Storm_BJ_Hair_Long_Over.png",
@@ -3037,7 +3037,7 @@ image Storm_BJ_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "'hair' in StormX.spunk and (StormX.wet or StormX.hair == 'wethawk' or StormX.hair == 'wet')", "images/StormBJFace/Storm_BJ_Spunk_HairW.png",
+            "'hair' in StormX.spunk and (StormX.wet or StormX.hair == 'wethawk' or StormX.hair == '_wet')", "images/StormBJFace/Storm_BJ_Spunk_HairW.png",
             "'hair' in StormX.spunk and StormX.hair == 'short'", "images/StormBJFace/Storm_BJ_Spunk_HairS.png",
             "'hair' in StormX.spunk and StormX.hair == 'mohawk'", "images/StormBJFace/Storm_BJ_Spunk_HairM.png",
             "'hair' in StormX.spunk", "images/StormBJFace/Storm_BJ_Spunk_HairL.png",
@@ -3780,7 +3780,7 @@ label Storm_BJ_Launch(Line=primary_action):
 
     # show Storm_BJ_Animation zorder 150:
     #     pos (630,650)
-    if Taboo and Line == "L":
+    if taboo and Line == "L":
         if len(Present) >= 2:
             if Present[0] != StormX:
                 "[StormX.name] looks back at [Present[0].name] to see if she's watching."
@@ -3867,7 +3867,7 @@ image Storm_TJ_HairTop:
     contains:
         ConditionSwitch(
                         "(StormX.hair == 'mohawk' and StormX.wet) or StormX.hair == 'wethawk'", "images/StormBJFace/Storm_BJ_Hair_WetM_Over.png",
-                        "StormX.wet or StormX.hair == 'wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Over.png",
+                        "StormX.wet or StormX.hair == '_wet'", "images/StormBJFace/Storm_BJ_Hair_WetL_Over.png",
                         "StormX.hair == 'mohawk'", "images/StormBJFace/Storm_BJ_Hair_Mohawk_Over.png",
                         "StormX.hair == 'short'", "images/StormBJFace/Storm_BJ_Hair_Short_Over.png",
                         "True", "images/StormBJFace/Storm_BJ_Hair_Long_Over.png",
@@ -3876,7 +3876,7 @@ image Storm_TJ_HairTop:
     contains:
         ConditionSwitch(
 
-                        "'hair' in StormX.spunk and (StormX.wet or StormX.hair == 'wethawk' or StormX.hair == 'wet')", "images/StormBJFace/Storm_BJ_Spunk_HairW.png",
+                        "'hair' in StormX.spunk and (StormX.wet or StormX.hair == 'wethawk' or StormX.hair == '_wet')", "images/StormBJFace/Storm_BJ_Spunk_HairW.png",
                         "'hair' in StormX.spunk and StormX.hair == 'mohawk'", "images/StormBJFace/Storm_BJ_Spunk_HairM.png",
                         "'hair' in StormX.spunk", "images/StormBJFace/Storm_BJ_Spunk_HairL.png",
                         "True", Null(),
@@ -3919,7 +3919,7 @@ image Storm_TJ_Body:
     contains:
 
         ConditionSwitch(
-                        "not StormX.accessory == 'rings' or StormX.top == 'jacket'", Null(),
+                        "not StormX.accessory == 'rings' or StormX.top == '_jacket'", Null(),
                         "True", "images/StormBJFace/Storm_TJ_Arms_Ring.png",
                         )
     contains:
@@ -3935,7 +3935,7 @@ image Storm_TJ_Body:
 
         ConditionSwitch(
                         "StormX.top == 'white_shirt'","images/StormBJFace/Storm_titjob_over_WhiteShirt_Body.png",
-                        "StormX.top == 'jacket'","images/StormBJFace/Storm_titjob_over_Jacket_Body.png",
+                        "StormX.top == '_jacket'","images/StormBJFace/Storm_titjob_over_Jacket_Body.png",
                         "True", Null(),
                         )
     contains:
@@ -4042,7 +4042,7 @@ image Storm_TJ_Tits:
     contains:
 
         ConditionSwitch(
-                        "StormX.top == 'jacket'","images/StormBJFace/Storm_titjob_over_Jacket_Top.png",
+                        "StormX.top == '_jacket'","images/StormBJFace/Storm_titjob_over_Jacket_Top.png",
 
                         "True", Null(),
                         )
@@ -4076,7 +4076,7 @@ image Storm_TJ_Tits:
     contains:
 
         ConditionSwitch(
-                        "not StormX.accessory == 'rings' or StormX.top == 'jacket'", Null(),
+                        "not StormX.accessory == 'rings' or StormX.top == '_jacket'", Null(),
                         "True", "images/StormBJFace/Storm_TJ_Wrists_Ring.png",
                         )
     contains:

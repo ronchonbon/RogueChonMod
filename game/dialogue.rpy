@@ -4742,9 +4742,9 @@ label first_time_asking_lines(Girl, action):
         elif action == "sex":
             $ lines.append("So, you'd like to take this to the next level? Actual sex? . . .")
         elif action == "anal":
-            $ lines.append("wait, so you want to stick it in my butt?!")
+            $ lines.append("Wait, so you want to stick it in my butt?!")
         elif action == "hotdog":
-            $ lines.append("wait, so you want to grind against my butt?!")
+            $ lines.append("Wait, so you want to grind against my butt?!")
     elif Girl == KittyX:
         $ lines = ["I haven't really had much experience with this. . . "]
 

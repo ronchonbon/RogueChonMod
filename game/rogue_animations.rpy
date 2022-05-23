@@ -274,7 +274,7 @@ image Rogue_doggy_animation:
                     "action_speed > 1", "Rogue_doggy_feet2",
                     "action_speed ", "Rogue_doggy_feet1",
                     "True", "Rogue_doggy_feet0"),
-            "not Player.sprite and ShowFeet", "Rogue_doggy_feet0",
+            "not Player.sprite and show_feet", "Rogue_doggy_feet0",
             "True", Null()))
 
     align (0.6,0.0)

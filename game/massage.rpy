@@ -7,7 +7,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
 
     $ approval = approval_check(Girl, 500, TabM = 1)
 
-    if Girl == JeanX and not JeanX.Taboo:
+    if Girl == JeanX and not JeanX.taboo:
         $ approval = 2
     if approval >= 2:
         $ Girl.change_face("_bemused", 1)
@@ -191,7 +191,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
             ch_v "Definitely not."
         $ Girl.recent_history.append("_angry")
         $ Girl.daily_history.append("_angry")
-    elif Girl.Taboo:
+    elif Girl.taboo:
         $ Girl.change_face("_angry", 1)
         if Girl == RogueX:
             ch_r "I don't want you touching me in public."
@@ -435,9 +435,9 @@ label Massage_Cycle:
 
         if Girl.pose == "doggy" or Girl.pose == "sex":
             if Current in ("calves","feet"):
-                $ ShowFeet = 1
+                $ show_feet = 1
             else:
-                $ ShowFeet = 0
+                $ show_feet = 0
 
         elif Current in ("neck","shoulders","back","breasts","arms","hands"):
             $ Girl.pose = "breasts"
@@ -810,7 +810,7 @@ label Massage_Cycle:
 
 
 
-        if not Girl.Taboo:
+        if not Girl.taboo:
 
             $ primary_action = "massage"
             $ Line = 0

@@ -1,103 +1,4 @@
-label Class_Room_entering:
-    call Jubes_entry_Check
-    $ Player.drain_word("locked",0,0,1)
-    $ Present = []
-    $ bg_current = "bg_classroom"
-    $ Nearby = []
-    call Gym_Clothes_Off
-    call Taboo_Level
-    $ Player.recent_history.append("traveling")
-    $ round -= 5 if round >= 5 else round
-    call event_calls
-    call set_the_scene (0)
-    $ Line = "entry"
 
-label Class_Room:
-    $ bg_current = "bg_classroom"
-    if "goto" in Player.recent_history or "traveling" in Player.recent_history:
-        $ Present = []
-        if time_index < 2 and weekday < 5:
-            call Class_Room_Seating
-        $ Player.drain_word("goto",1,0)
-        $ Player.drain_word("traveling",1,0)
-    call Taboo_Level
-    call set_the_scene (silent=1)
-    call QuickEvents
-    call checkout (1)
-    if round <= 10:
-        if time_index >= 3:
-            "You're getting tired, you head back to your room."
-            jump player_room
-        call wait
-        call event_calls
-        call girls_location
-    call GirlsAngry
-
-    if Line == "entry":
-        if EmmaX.location == "bg_teacher":
-            $ Line = "As you sit down, you see "+ EmmaX.name +" at the podium. What would you like to do?"
-        elif StormX.location == "bg_teacher":
-            $ Line = "As you sit down, you see "+ StormX.name +" at the podium. What would you like to do?"
-        elif time_index == 2 or weekday > 5:
-            $ Line = "You enter the classroom. What would you like to do?"
-        else:
-            $ Line = "You sit down at a desk. What would you like to do?"
-    else:
-        if Line != "What would you like to do next?":
-            $ Line = "You are in class right now. What would you like to do?"
-
-
-
-    menu:
-        "[Line]"
-        "Take the morning class" if weekday < 5 and time_index == 0:
-            if round >= 30:
-                jump Take_Class
-            else:
-                "Class is already letting out. You can hang out until the next one."
-        "Take the afternoon class" if weekday < 5 and time_index == 1:
-            if round >= 30:
-                jump Take_Class
-            else:
-                "Class is already letting out. You can hang out until they lock up for the night."
-        "There are no classes right now (locked)" if weekday >= 5 or time_index >= 2:
-            pass
-        "Chat":
-
-            call Chat
-            $ Line = "You are in class right now. What would you like to do?"
-
-        "Lock the door" if "locked" not in Player.traits:
-            if weekday >=5 or time_index >= 2:
-                "You lock the door"
-                $ Player.traits.append("locked")
-                call Taboo_Level
-            else:
-                "You can't really do that during class."
-
-        "Unlock the door" if "locked" in Player.traits:
-            "You unlock the door"
-            $ Player.traits.remove("locked")
-            call Taboo_Level
-
-        "wait" if time_index < 3:
-            "You hang out for a bit."
-            call wait
-            call event_calls
-            call girls_location
-
-            if time_index < 2:
-                $ Line = "A new class is in session. What would you like to do?"
-            else:
-                $ Line = "Classes have let out for the day. What would you like to do?"
-
-        "Leave" if not TravelMode:
-            call Worldmap
-        "Leave [[Go to Campus Square]" if TravelMode:
-            jump Campus_entry
-
-    $ Line = 0
-    jump Class_Room
 
 
 
@@ -154,12 +55,12 @@ label Take_Class:
     call set_the_scene
     call event_calls
     $ Line = "What would you like to do next?"
-    jump Class_Room
+    jump classroom
 
 
 
 
-label Class_Room_Seating(Girls=[], GirlB=0, GirlLike=0, Line=0, D20=0, temp_Girls=[]):
+label classroom_Seating(Girls=[], GirlB=0, GirlLike=0, Line=0, D20=0, temp_Girls=[]):
 
 
     $ Present = []
@@ -187,7 +88,7 @@ label Class_Room_Seating(Girls=[], GirlB=0, GirlLike=0, Line=0, D20=0, temp_Girl
     if len(Girls) == 2:
 
         $ D20 = renpy.random.randint(500, 1500)
-        if (Girls[0].GirlLikeCheck(Girls[1]) + Girls[1].GirlLikeCheck(Girls[0])) >= D20:
+        if (Girls[0].likes.[Girls[1].tag] + Girls[1].likes.[Girls[0].tag]) >= D20:
             "You see that [Girls[0].name] and [Girls[1].name] are sitting next to each other, which do you sit next to?"
         else:
             "You see that [Girls[0].name] and [Girls[1].name] are in the room, but on opposite sides."
@@ -280,7 +181,7 @@ label Class_Room_Seating(Girls=[], GirlB=0, GirlLike=0, Line=0, D20=0, temp_Girl
 
     if Present:
         call shift_focus (Present[0])
-    call set_the_scene (silent=1)
+    call set_the_scene (silent = True)
 
     return
 
@@ -830,7 +731,7 @@ label Frisky_Class(Girl=0, Teacher=0, LineB=0, temp_Girls=[]):
                         $ Present[1].GirlLikeUp(Girl,-4)
                         $ Girl.GirlLikeUp(Present[1],-2)
                         call remove_girl (Present[1])
-                    elif approval_check(Present[1], 1500) and Present[1].GirlLikeCheck(Girl) >= 600:
+                    elif approval_check(Present[1], 1500) and Present[1].likes.[Girl.tag] >= 600:
 
                         $ Present[1].eyes = "leftside"
                         "[Present[1].name] seems to notice what you and [Girl.name] are doing."
@@ -924,7 +825,7 @@ label Frisky_Class(Girl=0, Teacher=0, LineB=0, temp_Girls=[]):
             if Teacher:
                 $ Teacher.change_face("_surprised",1)
                 "[Teacher.name] stops her lecture in mid-sentence when she notices what you and [Girl.name] are up to."
-                if approval_check(Teacher, 1500) and Teacher.GirlLikeCheck(Girl) >= 600:
+                if approval_check(Teacher, 1500) and Teacher.likes.[Girl.tag] >= 600:
 
                     $ Teacher.change_face("_sly",1)
                     if Line == "too far":

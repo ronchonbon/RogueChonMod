@@ -38,12 +38,12 @@ image Jubes_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "JubesX.ArmPose != 1", "images/JubesSprite/Jubes_Sprite_Body2.png",
+            "JubesX.arm_pose != 1", "images/JubesSprite/Jubes_Sprite_Body2.png",
             "True", "images/JubesSprite/Jubes_Sprite_Body1.png",
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.wet and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Water1.png",
+            "JubesX.wet and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Water1.png",
             "JubesX.wet", "images/JubesSprite/Jubes_Sprite_Water2.png",
             "True", Null(),
             ),
@@ -57,7 +57,7 @@ image Jubes_Sprite:
 
 
             "not JubesX.accessory", Null(),
-            "(JubesX.top_pulled_up or JubesX.accessory == 'open jacket') and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1_Back.png",
+            "(JubesX.top_pulled_up or JubesX.accessory == 'open jacket') and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1_Back.png",
             "(JubesX.top_pulled_up or JubesX.accessory == 'open jacket')", "images/JubesSprite/Jubes_Sprite_Jacket_Open2_Back.png",
 
 
@@ -270,29 +270,29 @@ image Jubes_Sprite:
             "JubesX.top == 'tube_top'", "images/JubesSprite/Jubes_Sprite_Over_Tube.png",
             "JubesX.top == 'red_shirt'", "images/JubesSprite/Jubes_Sprite_Over_Red.png",
             "JubesX.top == 'black_shirt'", "images/JubesSprite/Jubes_Sprite_Over_Black.png",
-            "JubesX.top == 'towel' and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Over_Towel1.png",
+            "JubesX.top == 'towel' and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Over_Towel1.png",
             "JubesX.top == 'towel'", "images/JubesSprite/Jubes_Sprite_Over_Towel2.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "not JubesX.accessory", Null(),
-            "JubesX.accessory == 'open jacket' and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1.png",
+            "JubesX.accessory == 'open jacket' and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1.png",
             "JubesX.accessory == 'open jacket'", "images/JubesSprite/Jubes_Sprite_Jacket_Open2.png",
             "JubesX.top_pulled_up", ConditionSwitch(
 
-                    "(JubesX.accessory == 'jacket' or JubesX.accessory == 'shut jacket') and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1.png",
-                    "JubesX.accessory == 'jacket' or JubesX.accessory == 'shut jacket'", "images/JubesSprite/Jubes_Sprite_Jacket_Open2.png",
+                    "(JubesX.accessory == '_jacket' or JubesX.accessory == 'shut jacket') and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Open1.png",
+                    "JubesX.accessory == '_jacket' or JubesX.accessory == 'shut jacket'", "images/JubesSprite/Jubes_Sprite_Jacket_Open2.png",
                     "True", Null(),
                     ),
 
 
-            "JubesX.accessory == 'jacket' and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Closed1.png",
-            "JubesX.accessory == 'jacket'", "images/JubesSprite/Jubes_Sprite_Jacket_Closed2.png",
+            "JubesX.accessory == '_jacket' and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Closed1.png",
+            "JubesX.accessory == '_jacket'", "images/JubesSprite/Jubes_Sprite_Jacket_Closed2.png",
 
-            "JubesX.upskirt and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Shut1_Up.png",
+            "JubesX.upskirt and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Shut1_Up.png",
             "JubesX.upskirt", "images/JubesSprite/Jubes_Sprite_Jacket_Shut2_Up.png",
-            "JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Shut1.png",
+            "JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Jacket_Shut1.png",
             "True", "images/JubesSprite/Jubes_Sprite_Jacket_Shut2.png",
             ),
 
@@ -323,12 +323,12 @@ image Jubes_Sprite:
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_ArmOver1.png",
+            "JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_ArmOver1.png",
             "True", "images/JubesSprite/Jubes_Sprite_ArmOver2.png",
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.wet and JubesX.ArmPose == 1", "images/JubesSprite/Jubes_Sprite_Water1_Arm.png",
+            "JubesX.wet and JubesX.arm_pose == 1", "images/JubesSprite/Jubes_Sprite_Water1_Arm.png",
             "True", Null(),
             ),
 
@@ -495,7 +495,7 @@ image Jubes_Sprite_hairback:
 
 
 
-                "JubesX.hair == 'wet'", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Back.png",
+                "JubesX.hair == '_wet'", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Back.png",
                 "JubesX.wet", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Back.png",
                 "True", "images/JubesSprite/Jubes_Sprite_Hair_Short_Back.png",
                 ),
@@ -569,7 +569,7 @@ image Jubes_Sprite_Head:
         (0,0), ConditionSwitch(
 
 
-            "JubesX.hair == 'wet' or JubesX.wet", "images/JubesSprite/Jubes_Sprite_Hair_Wet.png",
+            "JubesX.hair == '_wet' or JubesX.wet", "images/JubesSprite/Jubes_Sprite_Hair_Wet.png",
             "JubesX.hair == 'shades'", "images/JubesSprite/Jubes_Sprite_Hair_Shades.png",
             "True", "images/JubesSprite/Jubes_Sprite_Hair_Short.png",
             ),
@@ -707,7 +707,7 @@ image Jubes_Doggy_Animation:
                     "action_speed ", "Jubes_Doggy_Feet1",
                     "True", "Jubes_Doggy_Feet0",
                     ),
-            "not Player.sprite and ShowFeet", "Jubes_Doggy_Shins",
+            "not Player.sprite and show_feet", "Jubes_Doggy_Shins",
             "True", Null(),
             ),
         )
@@ -763,7 +763,7 @@ image Jubes_Doggy_Body:
         (0,0), ConditionSwitch(
 
             "not JubesX.top", Null(),
-            "JubesX.top == 'jacket'", "images/JubesDoggy/Jubes_Doggy_Over_Jacket.png",
+            "JubesX.top == '_jacket'", "images/JubesDoggy/Jubes_Doggy_Over_Jacket.png",
             "JubesX.top == 'towel' and not JubesX.top_pulled_up", "images/JubesDoggy/Jubes_Doggy_Over_TowelTop.png",
             "True", Null(),
             ),
@@ -795,7 +795,7 @@ image Jubes_Doggy_Head:
 
         (0,0), ConditionSwitch(
 
-            "JubesX.wet or JubesX.hair == 'wet'", "images/JubesDoggy/Jubes_Doggy_Hair_Wet_Back.png",
+            "JubesX.wet or JubesX.hair == '_wet'", "images/JubesDoggy/Jubes_Doggy_Hair_Wet_Back.png",
             "True", "images/JubesDoggy/Jubes_Doggy_Hair_Long_Back.png",
             ),
         (0,0), ConditionSwitch(
@@ -858,7 +858,7 @@ image Jubes_Doggy_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "JubesX.wet or JubesX.hair == 'wet'", "images/JubesDoggy/Jubes_Doggy_Hair_Wet.png",
+            "JubesX.wet or JubesX.hair == '_wet'", "images/JubesDoggy/Jubes_Doggy_Hair_Wet.png",
             "True", "images/JubesDoggy/Jubes_Doggy_Hair_Long.png",
             ),
         (0,0), ConditionSwitch(
@@ -2092,7 +2092,7 @@ label Jubes_Doggy_Reset:
     if not renpy.showing("Jubes_Doggy_Animation"):
         return
 
-    $ JubesX.ArmPose = 2
+    $ JubesX.arm_pose = 2
     $ JubesX.spriteVer = 0
     hide Jubes_Doggy_Animation
     call Jubes_Hide
@@ -2232,12 +2232,12 @@ image Jubes_Sex_Body:
             "not JubesX.top", Null(),
             "JubesX.top_pulled_up", ConditionSwitch(
 
-                    "JubesX.top == 'jacket'", "images/JubesSex/Jubes_Sex_Jacket_Back_Up.png",
+                    "JubesX.top == '_jacket'", "images/JubesSex/Jubes_Sex_Jacket_Back_Up.png",
                     "True", Null(),
                     ),
             "True", ConditionSwitch(
 
-                    "JubesX.top == 'jacket'", "images/JubesSex/Jubes_Sex_Jacket_Back.png",
+                    "JubesX.top == '_jacket'", "images/JubesSex/Jubes_Sex_Jacket_Back.png",
                     "True", Null(),
                     ),
             )
@@ -2315,13 +2315,13 @@ image Jubes_Sex_Body:
             "not JubesX.top", Null(),
             "JubesX.top_pulled_up", ConditionSwitch(
 
-                    "JubesX.top == 'jacket'", "images/JubesSex/Jubes_Sex_Jacket_Up.png",
+                    "JubesX.top == '_jacket'", "images/JubesSex/Jubes_Sex_Jacket_Up.png",
 
                     "True", Null(),
                     ),
             "True", ConditionSwitch(
 
-                    "JubesX.top == 'jacket'", "images/JubesSex/Jubes_Sex_Jacket.png",
+                    "JubesX.top == '_jacket'", "images/JubesSex/Jubes_Sex_Jacket.png",
 
                     "True", Null(),
                     ),
@@ -3836,7 +3836,7 @@ label Jubes_Sex_Launch(Line=primary_action):
     elif Line == "hotdog":
         $ Player.cock_position = "out"
     elif Line == "footjob":
-        $ ShowFeet = 1
+        $ show_feet = 1
         $ Player.cock_position = "footjob"
     elif Line == "massage":
         $ Player.sprite = 0
@@ -3872,7 +3872,7 @@ label Jubes_Sex_Reset:
         return
     if not renpy.showing("Jubes_SexSprite"):
         return
-    $ JubesX.ArmPose = 2
+    $ JubesX.arm_pose = 2
     hide Jubes_SexSprite
     call Jubes_Hide
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
@@ -3934,7 +3934,7 @@ image Jubes_Sprite_BJ_hairback:
     ConditionSwitch(
 
             "not JubesX.hair", Null(),
-            "JubesX.hair == 'wet' or JubesX.wet", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Under.png",
+            "JubesX.hair == '_wet' or JubesX.wet", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Under.png",
             "JubesX.hair", "images/JubesSprite/Jubes_Sprite_Hair_Long_Under.png",
             "True", Null(),
             )
@@ -4016,8 +4016,8 @@ image Jubes_Sprite_BJ_Head:
         (0,0), "Jubes Blink",
         (0,0), ConditionSwitch(
 
-            "JubesX.top == 'jacket'", Null(),
-            "JubesX.hair == 'wet' or JubesX.wet", Null(),
+            "JubesX.top == '_jacket'", Null(),
+            "JubesX.hair == '_wet' or JubesX.wet", Null(),
             "JubesX.hair", "images/JubesSprite/Jubes_Sprite_Hair_Long_Mid.png",
             "True", Null(),
             ),
@@ -4029,7 +4029,7 @@ image Jubes_Sprite_BJ_Head:
         (0,0), ConditionSwitch(
 
             "not JubesX.hair", Null(),
-            "JubesX.hair == 'wet' or JubesX.wet", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Over.png",
+            "JubesX.hair == '_wet' or JubesX.wet", "images/JubesSprite/Jubes_Sprite_Hair_Wet_Over.png",
             "JubesX.hair", "images/JubesSprite/Jubes_Sprite_Hair_Long_Over.png",
             "True", Null(),
             ),
@@ -5016,7 +5016,7 @@ image Jubes_BJ_Body_6:
 label Jubes_BJ_Launch(Line=primary_action):
     return
 
-    $ JubesX.ArmPose = 1
+    $ JubesX.arm_pose = 1
     if renpy.showing("Jubes_BJ_Animation"):
         return
 
@@ -5034,7 +5034,7 @@ label Jubes_BJ_Launch(Line=primary_action):
 
     $ action_speed = 0
     if Line == "L":
-        if Taboo:
+        if taboo:
             if len(Present) >= 2:
                 if Present[0] != JubesX:
                     "[JubesX.name] looks back at [Present[0].name] to see if she's watching."
@@ -5213,7 +5213,7 @@ label Jubes_HJ_Launch(Line=primary_action):
     else:
         $ action_speed = 1
     pause 0.5
-    $ JubesX.ArmPose = 1
+    $ JubesX.arm_pose = 1
     # show Jubes_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
     #
     #     offset (250,250)
@@ -5223,7 +5223,7 @@ label Jubes_HJ_Reset:
     if not renpy.showing("Jubes_HJ_Animation"):
         return
     $ action_speed = 0
-    $ JubesX.ArmPose = 1
+    $ JubesX.arm_pose = 1
     hide Jubes_HJ_Animation with easeoutbottom
     call Jubes_Hide
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
@@ -6323,7 +6323,7 @@ label Jubes_TJ_Launch(Line=primary_action):
         alpha 1
         ease 1 zoom 2.3 xpos 750 yoffset -100
     if Line == "L":
-        if Taboo:
+        if taboo:
             if len(Present) >= 2:
                 if Present[0] != JubesX:
                     "[JubesX.name] looks back at [Present[0].name] to see if she's watching."
@@ -6341,7 +6341,7 @@ label Jubes_TJ_Launch(Line=primary_action):
         "She tugs off her [JubesX.bra] and throws it aside."
     $ JubesX.top = ""
     $ JubesX.bra = ""
-    $ JubesX.ArmPose = 0
+    $ JubesX.arm_pose = 0
 
     call Jubes_First_Topless
 

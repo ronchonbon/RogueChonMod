@@ -286,9 +286,9 @@ label end_of_action_reactions(Girl, action):
     call end_of_action_lines(Girl, action)
 
 label sex_acts(action = 0):
-    if Alonecheck(focused_Girl) and focused_Girl.Taboo == 20:
-        $ focused_Girl.Taboo = 0
-        $ Taboo = 0
+    if Alonecheck(focused_Girl) and focused_Girl.taboo == 20:
+        $ focused_Girl.taboo = 0
+        $ taboo = 0
 
     call shift_focus(focused_Girl)
 
@@ -331,7 +331,7 @@ label girl_initiated_action(Girl, action):
             $ topless_phrase = covered_phrase
 
         if (Girl.Over or Girl.Chest) and not Girl.top_pulled_up:
-            if approval_check(Girl, 1250, TabM = 1) or (Girl.SeenChest and approval_check(Girl, 500) and not Taboo):
+            if approval_check(Girl, 1250, TabM = 1) or (Girl.seen_breasts and approval_check(Girl, 500) and not taboo):
                 $ Girl.top_pulled_up = 1
 
                 $ line = Girl.Over if Girl.Over else Girl.Chest
@@ -365,7 +365,7 @@ label girl_initiated_action(Girl, action):
 
 
         if (Girl.Legs and not Girl.upskirt) or (Girl.Panties and not Girl.underwear_pulled_down):
-            if approval_check(Girl, 1250, TabM = 1) or (Girl.SeenPussy and approval_check(Girl, 500) and not Taboo):
+            if approval_check(Girl, 1250, TabM = 1) or (Girl.seen_pussy and approval_check(Girl, 500) and not taboo):
                 $ Girl.upskirt = 1
                 $ Girl.underwear_pulled_down = 1
 
@@ -421,7 +421,7 @@ label girl_initiated_action(Girl, action):
             elif action == "dildo_ass":
                 "[Girl.name] grabs her dildo, rubbing is suggestively against her ass."
 
-        $ Girl.SeenPanties = 1
+        $ Girl.seen_underwear = 1
 
         if action == "dildo_pussy":
             "She slides the tip along her pussy and seems to want you to insert it."
@@ -459,7 +459,7 @@ label girl_initiated_action(Girl, action):
                     "[Girl.name] turns around and pulls you toward her."])
                 "[line]"
 
-            $ Girl.SeenPanties = 1
+            $ Girl.seen_underwear = 1
 
             if action == "sex":
                 $ line = renpy.random.choice(["She slides the tip along her pussy and seems to want you to insert it."])
@@ -718,7 +718,7 @@ label action_specific_consequences(Girl, action):
     $ achievement = None
 
     $ Girl.action_counter[action] += 1
-    $ setattr(Girl, action, Girl.action_counter[action])
+    $ setattr(Girl, action_counter[action], Girl.action_counter[action])
 
     if action == "kiss":
         call Partner_Like(Girl, 1)
@@ -792,7 +792,7 @@ label action_approved(Girl, action):
         $ Girl.change_stat("love", 20, -2, 1)
 
         call action_forcefully_approved_lines(Girl, action)
-    elif not Taboo and "no_taboo" in Girl.daily_history:
+    elif not taboo and "no_taboo" in Girl.daily_history:
         call private_enough_lines(Girl, action)
     elif action == "anal" and "anal" in Girl.daily_history and not Girl.Loose:
         pass
@@ -813,7 +813,7 @@ label action_approved(Girl, action):
         call before_action_less_than_three_times_lines(Girl, action)
     else:
         $ Girl.change_face("_sexy", 1)
-        $ Girl.ArmPose = 2
+        $ Girl.arm_pose = 2
 
         call used_to_action_lines(Girl, action)
 
@@ -829,11 +829,11 @@ label action_disapproved(Girl, action):
 
     if "no_" + action in Girl.recent_history:
         call said_no_recently_lines(Girl, action)
-    elif Taboo and "no_taboo" in Girl.daily_history and "no_" + action in Girl.daily_history:
+    elif taboo and "no_taboo" in Girl.daily_history and "no_" + action in Girl.daily_history:
         call taboo_and_said_no_today_lines(Girl, action)
     elif "no_" + action in Girl.daily_history:
         call said_no_today_lines(Girl, action)
-    elif Taboo and "no_taboo" in Girl.daily_history:
+    elif taboo and "no_taboo" in Girl.daily_history:
         call taboo_lines(Girl, action)
     elif not Girl.action_counter[action]:
         $ Girl.change_face("_bemused")
@@ -901,7 +901,7 @@ label action_accepted(Girl, action):
     return
 
 label action_rejected(Girl, action):
-    $ Girl.ArmPose = 1
+    $ Girl.arm_pose = 1
 
     if "no_" + action in Girl.daily_history:
         $ Girl.change_face("_angry", 1)
@@ -913,7 +913,7 @@ label action_rejected(Girl, action):
         call forced_action_rejected_reactions(Girl, action)
 
         $ Girl.add_word(1, "_angry", "_angry")
-    elif Taboo:
+    elif taboo:
         call taboo_action_rejected_reactions(Girl, action)
 
         $ Girl.add_word(1, "no_taboo", "no_taboo")

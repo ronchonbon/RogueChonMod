@@ -214,9 +214,9 @@ label Emma_HWChat_Minimal:
         ch_e "What was it you wished to discuss, [EmmaX.player_petname]?"
         "Romance her":
             menu:
-                "Flirt with her (locked)" if EmmaX.Chat[5]:
+                "Flirt with her (locked)" if EmmaX.had_chat[5]:
                     pass
-                "Flirt with her" if not EmmaX.Chat[5]:
+                "Flirt with her" if not EmmaX.had_chat[5]:
                     call Emma_Flirt_Minimal
                 "Sex Menu":
                     ch_p "Did you want to fool around?"
@@ -281,7 +281,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
     $ RogueX.add_word(1,0,RogueX.hair,0,"halloween")
     $ RogueX.outfitday = "costume"
     $ RogueX.outfit = RogueX.outfitday
-    $ RogueX.change_outfit(Changed=1)
+    $ RogueX.change_outfit(outfit_changed=1)
 
     call shift_focus (RogueX)
     show Rogue_sprite at sprite_location(1200,50):
@@ -442,7 +442,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
     $ KittyX.add_word(1,0,KittyX.hair,0,"halloween")
     $ KittyX.outfitday = "costume"
     $ KittyX.outfit = KittyX.outfitday
-    $ KittyX.change_outfit(Changed=1)
+    $ KittyX.change_outfit(outfit_changed=1)
 
     call shift_focus (KittyX)
     show Kitty_sprite at sprite_location(1200,50):
@@ -611,7 +611,7 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
     $ LauraX.add_word(1,0,LauraX.hair,0,"halloween")
     $ LauraX.outfitday = "costume"
     $ LauraX.outfit = LauraX.outfitday
-    $ LauraX.change_outfit(Changed=1)
+    $ LauraX.change_outfit(outfit_changed=1)
 
     call shift_focus (LauraX)
     show Laura_Sprite at sprite_location(1200,50):
@@ -833,7 +833,7 @@ label Halloween_Jean:
     $ JeanX.add_word(1,0,JeanX.hair,0,"halloween")
     $ JeanX.outfitday = "costume"
     $ JeanX.outfit = JeanX.outfitday
-    $ JeanX.change_outfit(Changed=1)
+    $ JeanX.change_outfit(outfit_changed=1)
 
     call shift_focus (JeanX)
     show Jean_Sprite at sprite_location(1200,50):
@@ -981,7 +981,7 @@ label Halloween_Jean:
             $ JeanX.change_face("_angry",Eyes="_side")
             ch_j "Is that the girl with the water powers?"
             $ JeanX.change_face("_angry",Mouth="_surprised")
-            ch_j "wait, -do- we have a girl with water powers?"
+            ch_j "Wait, -do- we have a girl with water powers?"
             $ JeanX.change_face("_normal")
             ch_j "Anyway. . . I whammied some nerd to make me a costume with red hair."
             ch_j "Is this her?"
@@ -1087,7 +1087,7 @@ label Halloween_Jean:
     $ StormX.add_word(1,0,StormX.hair,0,"halloween")
     $ StormX.outfitday = "costume"
     $ StormX.outfit = StormX.outfitday
-    $ StormX.change_outfit(Changed=1)
+    $ StormX.change_outfit(outfit_changed=1)
 
     call shift_focus (StormX)
     show Storm_Sprite at sprite_location(1200,50):
@@ -1254,7 +1254,7 @@ label Halloween_Emma:
     $ EmmaX.add_word(1,0,EmmaX.hair,0,"halloween")
     $ EmmaX.outfitday = "costume"
     $ EmmaX.outfit = EmmaX.outfitday
-    $ EmmaX.change_outfit(Changed=1)
+    $ EmmaX.change_outfit(outfit_changed=1)
 
     call shift_focus (EmmaX)
     show Emma_Sprite at sprite_location(-200,50):
@@ -1541,7 +1541,7 @@ label Halloween_Skip:
         $ Options[0].location = "HW Party"
         $ Options[0].outfitday = "costume"
         $ Options[0].outfit = EmmaX.outfitday
-        $ Options[0].change_outfit(Changed=1)
+        $ Options[0].change_outfit(outfit_changed=1)
         $ Options[0].add_word(1,0,0,0,"halloween")
 
         $ Options.remove(Options[0])
@@ -1632,7 +1632,7 @@ label Halloween_Ending(Girl=0):
     if Girl:
         $ Girl.location = "bg_player"
 
-        call set_the_scene (silent=1)
+        call set_the_scene (silent = True)
         $ Girl.change_face("_smile",1)
         if Girl == RogueX:
             ch_r "Well that was an awful fun shindig."

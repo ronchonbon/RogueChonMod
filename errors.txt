@@ -2,9 +2,7 @@
 errors listed below, and try again.
 
 
-File "game/rogue_animations_old.rpy", line 2063: if statement expects a non-empty block.
-    if not renpy.showing("Rogue_sprite"):
-                                         ^
+File "game/shower.rpy", line 440: indentation mismatch.
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sun May 22 22:32:30 2022
+Mon May 23 06:32:47 2022

@@ -33,7 +33,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
 
     if action_context == "swap":
 
-        $ Line = "So what would you like "+Girl.name+" to do?"
+        $ Line = "So what would you like " + Girl.name + " to do?"
     elif primary_action == "handjob":
         $ Line = "As she strokes, you're about ready to come. . ."
     elif primary_action == "blowjob":
@@ -138,9 +138,9 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                 elif Girl == JeanX:
                     ch_j "Where do you think you're going?"
                 elif Girl == StormX:
-                    ch_s "wait. . ."
+                    ch_s "Wait . ."
                 elif Girl == JubesX:
-                    ch_v "wait, you're letting it go to waste?"
+                    ch_v "Wait, you're letting it go to waste?"
                 $ Girl.blushing = "_blush2"
                 menu:
                     extend ""
@@ -1665,7 +1665,7 @@ label Girl_Creampied:
 label Girl_Orgasm_After:
     $ Line = "What next?"
     if not renpy.showing(Girl.tag+"_HJ_Animation"):
-        $ Girl.ArmPose = 1
+        $ Girl.arm_pose = 1
     $ Player.semen -= 1
     $ Player.focus = 0
     $ action_speed = 0
@@ -1696,7 +1696,7 @@ label Girl_CleanCock(Girl=0):
     $ Girl = GirlCheck(Girl)
     $ Line = "What next?"
     if not renpy.showing(Girl.tag+"_HJ_Animation"):
-        $ Girl.ArmPose = 1
+        $ Girl.arm_pose = 1
     $ Player.cock_position = "out"
     $ action_speed = 0
     if primary_action == "anal" and not approval_check(Girl, 1600, TabM=1) and not Girl.addiction >= 80:
@@ -2004,7 +2004,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
                             $ Girl.eyes = "_stunned"
                             "She drifts off into incoherent moans."
 
-    if primary_action == "strip":
+    if primary_action == "striptease":
         call AllReset (Girl)
         if Girl == RogueX:
             show Rogue_sprite at Girl_Dance1(RogueX)

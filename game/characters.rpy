@@ -45,10 +45,13 @@ init python:
         def add_word(self, only = False, recent = None, daily = None, trait = None, history = None):
             if (recent and not only) or (recent and recent not in self.recent_history):
                 self.recent_history.append(recent)
+
             if (daily and not only) or (daily and daily not in self.daily_history):
                 self.daily_history.append(daily)
+
             if (trait and not only) or (trait and trait not in self.traits):
                 self.traits.append(trait)
+
             if (history and not only) or (history and history not in self.history):
                 self.history.append(history)
             return
@@ -57,12 +60,15 @@ init python:
             if recent:
                 while word in self.recent_history:
                     self.recent_history.remove(word)
+
             if daily:
                 while word in self.daily_history:
                     self.daily_history.remove(word)
+
             if traits:
                 while word in self.traits:
                     self.traits.remove(word)
+
             return
 
         def change_stat(self, flavor, check, update, greater_than = False, x_position = 0.75):
@@ -103,7 +109,7 @@ init python:
             self.addiction = 0
             self.addiction_rate = 0
             self.resistance = 0
-            self.Taboo = 0
+            self.taboo = 0
             self.XP = 0
             self.stat_points = 0
             self.XP_goal = 100
@@ -114,81 +120,76 @@ init python:
 
             self.remaining_actions = 3
             self.max_actions = 3
+
             self.pose = 0
+
             self.reputation = 600
+
             self.recent_history = []
             self.daily_history = []
             self.traits = []
             self.history = []
-            self.Date = 0
-            self.Chat = [0, 0, 0, 0, 0, 0]
-            self.Event = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-            self.player_petname = "Zero"
-            self.player_petnames = ["Zero"]
-            self.petname = "Girl"
-            self.petnames = ["Girl"]
+            self.went_on_date = 0
+            self.had_chat = [0, 0, 0, 0, 0, 0]
+            self.event_happened = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
-            self.Cheated = 0
+            self.cheated_on = 0
             self.broken_up = [0, 0]
             self.forced = 0
+
             self.location = "hold"
-            self.home = 0
 
             self.outfit = "casual1"
             self.today_outfit = "casual1"
-            self.SeenPeen = 0
-            self.SeenChest = 0
-            self.SeenPussy = 0
-            self.SeenPanties = 0
+
+            self.seen_peen = False
+            self.seen_breasts = False
+            self.seen_pussy = False
+            self.seen_underwear = False
 
             self.wearing_skirt = False
-            self.upskirt = 0
-            self.top_pulled_up = 0
-            self.underwear_pulled_down = 0
+            self.upskirt = False
+            self.top_pulled_up = False
+            self.underwear_pulled_down = False
             self.grool = 0
             self.wet = False
             self.spunk = []
             self.piercings = ""
-            self.pubes = "_hairy"
-            self.ArmPose = 1
+            self.arm_pose = 1
 
             self.blushing = ""
             self.eyes = "_normal"
             self.mouth = "_normal"
             self.brows = "_normal"
             self.emotion = "_normal"
-
-            self.held_item = None
             self.arms = ""
+
             self.legs = ""
             self.top = ""
             self.neck = ""
             self.bra = ""
             self.underwear = ""
             self.accessory = ""
-            self.hair = 1
             self.hose = ""
+
             self.shame = 0
+
+            self.held_item = None
             self.inventory = []
 
+            self.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            self.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            self.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            self.temp_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
 
-            self.Custom1 = [0, "", "", "", "", "", "", "", "", "", 0]
-            self.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
-            self.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
-            self.TempClothes = [0, "", "", "", "", "", "", "", "", "", 0]
-            self.Gag = 0
+            self.gag = False
+            self.buttplug = False
+
             self.to_do = []
             self.pubes_counter = 0
-            self.Schedule = [["MM", "MA", "ME", "MN"],
-                                ["TM", "TA", "TE", "TN"],
-                                ["WM", "WA", "WE", "WN"],
-                                ["ThM", "ThA", "ThE", "ThN"],
-                                ["FM", "FA", "FE", "FN"],
-                                ["SaM", "SaA", "SaE", "SaN"],
-                                ["SuM", "SuA", "SuE", "SuN"],
-                                ]
-            self.clothing = [0, "", "", "", "", "", "", "", "", 0]                    #schedules when she wears what: (0-6) = Mon-Sun, (7) Datewear, (8) Teachingwear, (9) Private
+
+            self.clothing = [0, "", "", "", "", "", "", "", "", 0]
 
             self.action_counter = {}
 
@@ -201,513 +202,412 @@ init python:
                 "forced": 0}
 
             self.session_orgasms = 0
-            self.Strip = 0
-            self.used_to_anal = 0
-            self.Vib = 0
-            self.Plug = 0
             self.SEXP = 0
-            self.massage_chart = [0, "", "", "", "", "", "", "", "", 0]
+
             self.player_favorite_action = 0
             self.favorite_action = 0
 
+            self.stored_stats = 0
 
             if self.tag == "Rogue":
                 self.voice = ch_r
 
-                self.Casual1 = [2,"_gloves", "_skirt", "_mesh_top", "_spiked_collar", "_tank", "_black_panties", "", "", "_tights", 0]
-                self.Casual2 = [2,"_gloves", "_pants", "_pink_top", "", "_buttoned_tank", "_black_panties", "", "", "", 0]
-                self.Gym = [0, "_gloves", "", "_hoodie", "", "_sports_bra", "_shorts", "", "", "",10]
+                self.first_casual_outfit = [2,"_gloves", "_skirt", "_mesh_top", "_spiked_collar", "_tank", "_black_panties", "", "", "_tights", 0]
+                self.second_casual_outfit = [2,"_gloves", "_pants", "_pink_top", "", "_buttoned_tank", "_black_panties", "", "", "", 0]
+                self.gym_clothes = [0, "_gloves", "", "_hoodie", "", "_sports_bra", "_shorts", "", "", "",10]
                 self.sleepwear = [0, "", "", "", "", "_tank", "_green_panties", "", "", "",20]
-                self.Swim = [0, "", "", "_hoodie", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.Costume = [2,"_gloves", "_skirt", "", "", "_tube_top", "_black_panties", "_sweater", "_cosplay", "", 0]
-
-
-
+                self.swimwear = [0, "", "", "_hoodie", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+                self.halloween_costume = [2,"_gloves", "_skirt", "", "", "_tube_top", "_black_panties", "_sweater", "_cosplay", "", 0]
 
                 self.home = "bg_rogue"
                 self.hair = "_evo"
-                self.LikeKitty = 600
-                self.LikeEmma = 500
-                self.LikeLaura = 500
-                self.Schedule = [["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
-                                        ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
-                                        ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
-                                        ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
-                                        ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
-                                        ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"],
-                                        ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"],
-                                        ]
-                self.SexKitty = 0
-                self.SexEmma = 0
-                self.SexLaura = 0
+                self.pubes = "_hairy"
+
+                self.weekly_schedule = [["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
+                                 ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
+                                 ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
+                                 ["bg_classroom", "bg_dangerroom", "bg_rogue", "bg_rogue"],
+                                 ["bg_rogue", "bg_classroom", "bg_dangerroom", "bg_rogue"],
+                                 ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"],
+                                 ["bg_dangerroom", "bg_pool", "bg_rogue", "bg_rogue"]]
+
+                self.likes = {"Rogue": None, "Kitty": 600, "Emma": 500, "Laura": 500, "Jean": 200, "Storm": 600, "Jubes": 500}
+
                 self.history = ["met"]
+
+                self.used_to_anal = 0
+
                 self.massage_chart = ["shoulders", "arms", "arms", "hands", "hands", "back", "hips", "back", "breasts", "breasts"]
+
+                self.player_petname = "Sugar"
+                self.player_petnames = ["Sugar", Player.name]
+                self.petname = "Rogue"
+                self.petnames = ["Rogue"]
             elif self.tag == "Kitty":
                 self.voice = ch_k
 
-                self.Casual1 = [2,0, "_capris", "_pink_top", "_gold_necklace", "_cami", "_green_panties", "", "", "", 0]
-                self.Casual2 = [2,0, "_black_jeans", "_red_shirt", "star_necklace", "_bra", "_green_panties", "", "", "", 0]
-                self.Gym = [0, "", "_shorts", "", "", "_sports_bra", "_green_panties", "", "", "",10]
+                self.first_casual_outfit = [2,0, "_capris", "_pink_top", "_gold_necklace", "_cami", "_green_panties", "", "", "", 0]
+                self.second_casual_outfit = [2,0, "_black_jeans", "_red_shirt", "_star_necklace", "_bra", "_green_panties", "", "", "", 0]
+                self.gym_clothes = [0, "", "_shorts", "", "", "_sports_bra", "_green_panties", "", "", "",10]
                 self.sleepwear = [0, "", "_shorts", "", "", "_cami", "_green_panties", "", "", "",20]
-                self.Swim = [0, "", "_blue_skirt", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.Costume = [2,0, "_dress", "_jacket", "_flower_necklace", "_dress", "_lace_panties", "", "", "", 0]
+                self.swimwear = [0, "", "_blue_skirt", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+                self.halloween_costume = [2,0, "_dress", "_jacket", "_flower_necklace", "_dress", "_lace_panties", "", "", "", 0]
+
                 self.home = "bg_kitty"
                 self.hair = "_evo"
-                self.LikeRogue = 600
-                self.LikeEmma = 500
-                self.LikeLaura = 500
+                self.pubes = "_hairy"
+
                 self.like = ", like, "
                 self.Like = "Like, "
-                self.Schedule = [["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
-                                        ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
-                                        ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
-                                        ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
-                                        ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
-                                        ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"],
-                                        ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"],
-                                        ]
-                self.SexRogue = 0
-                self.SexEmma = 0
-                self.SexLaura = 0
+
+                self.weekly_schedule = [["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                                 ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
+                                 ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                                 ["bg_classroom", "bg_pool", "bg_kitty", "bg_kitty"],
+                                 ["bg_classroom", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                                 ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"],
+                                 ["bg_campus", "bg_dangerroom", "bg_kitty", "bg_kitty"]]
+
+                self.likes = {"Rogue": 600, "Kitty": None, "Emma": 500, "Laura": 500, "Jean": 300, "Storm": 600, "Jubes": 600}
+
+                self.used_to_anal = 0
+
                 self.massage_chart = ["shoulders", "back", "hips", "thighs", "calves", "feet", "feet", "hips", "ass", "pussy"]
+
+                self.player_petname = Player.name[:1]
+                self.player_petnames = ["sweetie", Player.name[:1], Player.name]
+                self.petname = "Kitty"
+                self.petnames = ["Kitty"]
             elif self.tag == "Emma":
                 self.voice = ch_e
 
-                self.Casual1 = [2,0, "_pants", "_jacket", "_choker", "_corset", "_white_panties", "", "", "", 0]
-                self.Casual2 = [2,"_gloves", "_pants", "", "_choker", "_corset", "_white_panties", "", "", "",5]
-                self.Gym = [0, "", "", "", "", "_sports_bra", "sports_panties", "", "", "",10]
+                self.first_casual_outfit = [2,0, "_pants", "_jacket", "_choker", "_corset", "_white_panties", "", "", "", 0]
+                self.second_casual_outfit = [2,"_gloves", "_pants", "", "_choker", "_corset", "_white_panties", "", "", "",5]
+                self.gym_clothes = [0, "", "", "", "", "_sports_bra", "sports_panties", "", "", "",10]
                 self.sleepwear = [0, "", "", "", "", "_corset", "_white_panties", "", "", "",25]
-                self.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.Costume =  [2,"_gloves", "_dress", "_dress", "_choker", "", "_lace_panties", "", "_hat", "_stockings_and_garterbelt", 0]
+                self.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+                self.halloween_costume =  [2,"_gloves", "_dress", "_dress", "_choker", "", "_lace_panties", "", "_hat", "_stockings_and_garterbelt", 0]
+
                 self.home = "bg_emma"
                 self.hair = "_wavy"
                 self.pubes = "_bare"
-                self.LikeRogue = 500
-                self.LikeKitty = 500
-                self.LikeLaura = 500
-                self.Schedule = [["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
-                                        ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
-                                        ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
-                                        ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
-                                        ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
-                                        ["bg_pool", "bg_pool", "bg_emma", "bg_emma"],
-                                        ["bg_pool", "bg_pool", "bg_emma", "bg_emma"],
-                                        ]
-                self.SexRogue = 0
-                self.SexKitty = 0
-                self.SexLaura = 0
+
+                self.weekly_schedule = [["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
+                                 ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
+                                 ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
+                                 ["bg_teacher", "bg_teacher", "bg_dangerroom", "bg_emma"],
+                                 ["bg_teacher", "bg_teacher", "bg_classroom", "bg_emma"],
+                                 ["bg_pool", "bg_pool", "bg_emma", "bg_emma"],
+                                 ["bg_pool", "bg_pool", "bg_emma", "bg_emma"]]
+
+                self.likes = {"Rogue": 500, "Kitty": 500, "Emma": None, "Laura": 500, "Jean": 100, "Storm": 500, "Jubes": 500}
+
                 self.used_to_anal = 2
+
                 self.massage_chart = ["shoulders", "neck", "neck", "back", "hips", "ass", "ass", "back", "breasts", "breasts"]
 
+                self.names = ["Ms. Frost"]
+                self.name = "Ms. Frost"
+                self.player_petname = "young man"
+                self.player_petnames = ["young man", Player.name]
+                self.petname = self.name
+                self.petnames = ["Emma", "Ms. Frost"]
             elif self.tag == "Laura":
                 self.voice = ch_l
 
-                self.Casual1 = [2,"wrists", "leather_pants", "", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
-                self.Casual2 = [2,0, "_skirt", "_jacket", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
-                self.Gym = [2,"wrists", "leather_pants", "", "", "leather_bra", "_black_panties", "", "", "", 0]
+                self.first_casual_outfit = [2,"wrists", "leather_pants", "", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
+                self.second_casual_outfit = [2,0, "_skirt", "_jacket", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
+                self.gym_clothes = [2,"wrists", "leather_pants", "", "", "leather_bra", "_black_panties", "", "", "", 0]
                 self.sleepwear = [0, "", "", "", "", "leather_bra", "leather_panties", "", "", "",20]
-                self.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.Costume = [2,"_gloves", "other_skirt", "", "", "white_tank", "_black_panties", "suspenders", "", "black stockings", 0]
+                self.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+                self.halloween_costume = [2,"_gloves", "other_skirt", "", "", "white_tank", "_black_panties", "suspenders", "", "black stockings", 0]
+
                 self.home = "bg_laura"
                 self.hair = "_long"
-                self.LikeRogue = 500
-                self.LikeKitty = 500
-                self.LikeEmma = 500
-                self.ScentTimer = 0
-                self.Claws = 0
-                self.Schedule = [["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
+                self.pubes = "_hairy"
+
+                self.scent_timer = 0
+                self.claws = 0
+                self.weekly_schedule = [["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
                                         ["bg_dangerroom", "bg_classroom", "bg_campus", "bg_laura"],
                                         ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
                                         ["bg_dangerroom", "bg_classroom", "bg_campus", "bg_laura"],
                                         ["bg_pool", "bg_classroom", "bg_dangerroom", "bg_laura"],
                                         ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"],
-                                        ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"],
-                                        ]
-                self.SexRogue = 0
-                self.SexKitty = 0
-                self.SexEmma = 0
+                                        ["bg_pool", "bg_laura", "bg_dangerroom", "bg_laura"]]
+
+                self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 500, "Laura": None, "Jean": 300, "Storm": 500, "Jubes": 600}
+
                 self.used_to_anal = 2
+
                 self.massage_chart = ["shoulders", "back", "arms", "hips", "thighs", "calves", "ass", "ass", "pussy", "pussy"]
 
+                self.player_petname = "guy"
+                self.player_petnames = ["guy", Player.name]
+                self.petname = "Laura"
+                self.petnames = ["Laura", "X-23"]
             elif self.tag == "Jean":
                 self.voice = ch_j
 
-                self.StatStore = 0
                 self.IX = 500
 
-                self.Casual1 = [2,0, "_pants", "pink_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
-                self.Casual2 = [2,0, "_skirt", "green_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
-                self.Gym = [0, "", "yoga_pants", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
+                self.first_casual_outfit = [2,0, "_pants", "pink_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
+                self.second_casual_outfit = [2,0, "_skirt", "green_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
+                self.gym_clothes = [0, "", "yoga_pants", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
                 self.sleepwear = [0, "", "", "pink_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
-                self.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.Costume =  [2,0, "_shorts", "yellow_shirt", "", "green_bra", "_green_panties", "suspenders", "pony", "", 0]
+                self.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+                self.halloween_costume =  [2,0, "_shorts", "yellow_shirt", "", "green_bra", "_green_panties", "suspenders", "pony", "", 0]
+
                 self.home = "bg_jean"
                 self.hair = "_short"
+                self.pubes = "_hairy"
 
-                RogueX.LikeJean = 200
-                KittyX.LikeJean = 300
-                EmmaX.LikeJean = 100
-                LauraX.LikeJean = 300
-
-                RogueX.SexJean = 0
-                KittyX.SexJean = 0
-                EmmaX.SexJean = 0
-                LauraX.SexJean = 0
-
-                self.LikeRogue = 500
-                self.LikeKitty = 500
-                self.LikeEmma = 300
-                self.LikeLaura = 500
-                self.SexRogue = 0
-                self.SexKitty = 0
-                self.SexEmma = 0
-                self.SexLaura = 0
-
-
-                self.LikeSRogue = 0
-                self.LikeSKitty = 0
-                self.LikeSEmma = 0
-                self.LikeSLaura = 0
-
-                self.Schedule = [["bg_classroom", "bg_classroom", "bg_dangerroom", "bg_jean"],
+                self.weekly_schedule = [["bg_classroom", "bg_classroom", "bg_dangerroom", "bg_jean"],
                                         ["bg_jean", "bg_classroom", "bg_jean", "bg_jean"],
                                         ["bg_jean", "bg_classroom", "bg_dangerroom", "bg_jean"],
                                         ["bg_classroom", "bg_classroom", "bg_jean", "bg_jean"],
                                         ["bg_jean", "bg_classroom", "bg_dangerroom", "bg_jean"],
                                         ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"],
-                                        ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"],
-                                        ]
+                                        ["bg_dangerroom", "bg_campus", "bg_pool", "bg_jean"]]
+
+                self.likes = {"Rogue": 500, "Kitty": 500, "Emma": 300, "Laura": 500, "Jean": None, "Storm": 300, "Jubes": 300}
+
+                self.used_to_anal = 0
 
                 self.massage_chart = ["back", "shoulders", "neck", "neck", "back", "hips", "ass", "ass", "pussy", "pussy"]
 
+                self.player_petname = "um. . ."
+                self.player_petnames = ["um. . ."]
+                self.petname = self.name
+                self.petnames = ["Jean"]
             elif self.tag == "Storm":
                 self.voice = ch_s
 
-                self.Casual1 = [2,0, "_skirt", "white_shirt", "", "black_bra", "_white_panties", "", "", "", 0]
-                self.Casual2 = [2,0, "_pants", "_jacket", "", "_sports_bra", "_white_panties", "", "", "", 0]
-                self.Gym = [0, "", "yoga_pants", "", "", "_sports_bra", "_white_panties", "", "", "",10]
+                self.first_casual_outfit = [2,0, "_skirt", "white_shirt", "", "black_bra", "_white_panties", "", "", "", 0]
+                self.second_casual_outfit = [2,0, "_pants", "_jacket", "", "_sports_bra", "_white_panties", "", "", "", 0]
+                self.gym_clothes = [0, "", "yoga_pants", "", "", "_sports_bra", "_white_panties", "", "", "",10]
                 self.sleepwear = [0, "", "", "white_shirt", "", "", "_white_panties", "", "", "",25]
-                self.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.Costume = [2,0, "", "", "ring_necklace", "cos_bra", "cos_panties", "rings", "_short", "", 0]
+                self.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+                self.halloween_costume = [2,0, "", "", "ring_necklace", "cos_bra", "cos_panties", "rings", "_short", "", 0]
+
                 self.home = "bg_storm"
                 self.hair = "_long"
+                self.pubes = "_hairy"
 
-                self.LikeRogue = 500
-                self.LikeKitty = 600
-                self.LikeLaura = 500
-                self.LikeEmma = 400
-                self.LikeJean = 300
-                self.SexRogue = 0
-                self.SexKitty = 0
-                self.SexLaura = 0
-                self.SexEmma = 0
-                self.SexJean = 0
-
-
-                RogueX.LikeStorm = 600
-                KittyX.LikeStorm = 600
-                EmmaX.LikeStorm = 500
-                LauraX.LikeStorm = 500
-                JeanX.LikeStorm = 300
-
-                RogueX.SexStorm = 0
-                KittyX.SexStorm = 0
-                EmmaX.SexStorm = 0
-                LauraX.SexStorm = 0
-                JeanX.SexStorm = 0
-
-                self.Schedule = [["bg_storm", "bg_dangerroom", "bg_dangerroom", "bg_storm"],
+                self.weekly_schedule = [["bg_storm", "bg_dangerroom", "bg_dangerroom", "bg_storm"],
                                         ["bg_teacher", "bg_teacher", "bg_classroom", "bg_storm"],
                                         ["bg_storm", "bg_dangerroom", "bg_dangerroom", "bg_storm"],
                                         ["bg_teacher", "bg_teacher", "bg_classroom", "bg_storm"],
                                         ["bg_pool", "bg_campus", "bg_classroom", "bg_storm"],
                                         ["bg_storm", "bg_campus", "bg_storm", "bg_pool"],
-                                        ["bg_storm", "bg_campus", "bg_storm", "bg_pool"],
-                                        ]
+                                        ["bg_storm", "bg_campus", "bg_storm", "bg_pool"]]
+
+                self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 400, "Laura": 500, "Jean": 300, "Storm": None, "Jubes": 500}
+
+                self.used_to_anal = 0
 
                 self.massage_chart = ["feet", "calves", "thighs", "hips", "ass", "ass", "pussy", "ass", "pussy", "pussy"]
 
+                self.player_petname = Player.name
+                self.player_petnames = [Player.name]
+                self.petname = self.name
+                self.petnames = ["Storm", "Ororo", "Ms. Munroe"]
             elif self.tag == "Jubes":
                 self.voice = ch_v
 
-                self.Casual1 = [2,0, "_shorts", "_red_shirt", "", "_sports_bra", "blue_panties", "_jacket", "", "", 0]
-                self.Casual2 = [2,0, "_pants", "black_shirt", "", "_sports_bra", "blue_panties", "_jacket", "", "", 0]
-                self.Gym = [0, "", "_pants", "", "", "_sports_bra", "blue_panties", "", "", "",10]
-                self.sleepwear = [0, "", "", "", "", "_sports_bra", "blue_panties", "", "", "",25]
-                self.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-                self.Costume = [0, "", "_pants", "black_shirt", "", "_sports_bra", "blue_panties", "_jacket", "", "", 0]
+                self.first_casual_outfit = [2,0, "_shorts", "_red_shirt", "", "_sports_bra", "_blue_panties", "_jacket", "", "", 0]
+                self.second_casual_outfit = [2,0, "_pants", "_black_shirt", "", "_sports_bra", "_blue_panties", "_jacket", "", "", 0]
+                self.gym_clothes = [0, "", "_pants", "", "", "_sports_bra", "_blue_panties", "", "", "",10]
+                self.sleepwear = [0, "", "", "", "", "_sports_bra", "_blue_panties", "", "", "",25]
+                self.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+                self.halloween_costume = [0, "", "_pants", "_black_shirt", "", "_sports_bra", "_blue_panties", "_jacket", "", "", 0]
+
                 self.home = "bg_jubes"
-                self.hair = "shades"
+                self.hair = "_shades"
+                self.pubes = "_hairy"
 
-                self.LikeRogue = 500
-                self.LikeKitty = 600
-                self.LikeLaura = 600
-                self.LikeEmma = 500
-                self.LikeJean = 300
-                self.LikeStorm = 500
-                self.SexRogue = 0
-                self.SexKitty = 0
-                self.SexLaura = 0
-                self.SexEmma = 0
-                self.SexJean = 0
-                self.SexStorm = 0
-
-
-                RogueX.LikeJubes = 500
-                KittyX.LikeJubes = 600
-                EmmaX.LikeJubes = 500
-                LauraX.LikeJubes = 600
-                JeanX.LikeJubes = 300
-                StormX.LikeJubes = 500
-
-                RogueX.SexJubes = 0
-                KittyX.SexJubes = 0
-                EmmaX.SexJubes = 0
-                LauraX.SexJubes = 0
-                JeanX.SexJubes = 0
-                StormX.SexJubes = 0
-
-                self.Schedule = [["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
+                self.weekly_schedule = [["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
                                         ["bg_classroom", "bg_classroom", "bg_jubes", "bg_jubes"],
                                         ["bg_jubes", "bg_dangerroom", "bg_dangerroom", "bg_jubes"],
                                         ["bg_dangerroom", "bg_dangerroom", "bg_jubes", "bg_jubes"],
                                         ["bg_pool", "bg_campus", "bg_campus", "bg_jubes"],
                                         ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"],
-                                        ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"],
-                                        ]
+                                        ["bg_jubes", "bg_campus", "bg_jubes", "bg_pool"]]
+
+                self.likes = {"Rogue": 500, "Kitty": 600, "Emma": 500, "Laura": 600, "Jean": 300, "Storm": 500, "Jubes": None}
+
+                self.used_to_anal = 0
 
                 self.massage_chart = ["neck", "shoulders", "calves", "feet", "neck", "shoulders", "calves", "feet", "pussy", "pussy"]
 
-            self.change_outfit(Changed=1)
-
-        def Introduction(self):
-
-            if self == RogueX:
-                self.player_petname = "Sugar"
-                self.player_petnames = ["Sugar",Player.name]
-                self.petname = "Rogue"
-                self.petnames = ["Rogue"]
-            elif self == KittyX:
-                self.player_petname = Player.name[:1]
-                self.player_petnames = ["sweetie",Player.name[:1],Player.name]
-                self.petname = "Kitty"
-                self.petnames = ["Kitty"]
-            elif self == EmmaX:
-                self.names = ["Ms. Frost"]
-                self.name = "Ms. Frost"
-                self.player_petname = "young man"
-                self.player_petnames = ["young man",Player.name]
-                self.petname = EmmaX.name
-                self.petnames = ["Emma", "Ms. Frost"]
-            elif self == LauraX:
-                self.player_petname = "guy"
-                self.player_petnames = ["guy",Player.name]
-                self.petname = "Laura"
-                self.petnames = ["Laura", "X-23"]
-            elif self.tag == "Jean":
-                self.player_petname = "um. . ."
-                self.player_petnames = ["um. . ."]
-                self.petname = JeanX.name
-                self.petnames = ["Jean"]
-            elif self.tag == "Storm":
-                self.player_petname = "Player.name"
-                self.player_petnames = ["Player.name"]
-                self.petname = StormX.name
-                self.petnames = ["Storm", "Ororo", "Ms. Munroe"]
-            elif self.tag == "Jubes":
                 self.player_petname = "Bro"
-                self.player_petnames = ["Bro", "Player.name"]
-                self.petname = JubesX.name
+                self.player_petnames = ["Bro", Player.name]
+                self.petname = self.name
                 self.petnames = ["Jubes", "Jubilee"]
 
-            self.change_outfit(6,Changed=1)
-            global all_Girls
-            if self not in all_Girls:
-                all_Girls.append(self)
-            Shop_Inventory.extend(["DL", "G", "A"])
+            self.change_outfit(6)
+
+            shop_inventory.extend(["DL", "G", "A"])
             personal_rooms.append(self.home)
 
-        def SluttyClothes(self):
+            global all_Girls
 
+            all_Girls.append(self)
 
-            if self == RogueX:
+        def slutty_clothes(self):
+            if self.tag == "Rogue":
                 if "_stockings_and_garterbelt" in self.inventory:
-                    self.Casual1[9] = "_stockings_and_garterbelt"
+                    self.first_casual_outfit[9] = "_stockings_and_garterbelt"
                 elif self.inhibition >= 300:
-                    self.Casual1[9] = "_stockings"
+                    self.first_casual_outfit[9] = "_stockings"
                 else:
-                    self.Casual1[9] = "_tights"
+                    self.first_casual_outfit[9] = "_tights"
 
-                if self.Gym[0] == 0 and self.Gym[5] and self.inhibition >= 300:
+                if self.gym_clothes[0] == 0 and self.gym_clothes[5] and self.inhibition >= 300:
+                    self.gym_clothes[3] == 0
 
-                    self.Gym[3] == 0
-
-                if self.Swim[0] == 0 and self.Swim[5] and self.inhibition >= 300:
-
-                    self.Swim[3] == 0
-            elif self == KittyX:
-                if self.Swim[2] == "_blue_skirt" and self.Swim[6] and self.inhibition > 500:
-
-                    self.Swim[2] = 0
-            elif self == LauraX:
-                if self.inhibition >= 400 and self.Casual2[5] == "leather_bra" and "_corset" in self.inventory:
-                    self.Casual2[5] = "_corset"
+                if self.swimwear[0] == 0 and self.swimwear[5] and self.inhibition >= 300:
+                    self.swimwear[3] == 0
+            elif self.tag == "Kitty":
+                if self.swimwear[2] == "_blue_skirt" and self.swimwear[6] and self.inhibition > 500:
+                    self.swimwear[2] = 0
+            elif self.tag == "Laura":
+                if self.inhibition >= 400 and self.second_casual_outfit[5] == "leather_bra" and "_corset" in self.inventory:
+                    self.second_casual_outfit[5] = "_corset"
                 if self.inhibition >= 600 and "_lace_panties" in self.inventory:
-                    self.Casual2[6] = "_lace_panties"
+                    self.second_casual_outfit[6] = "_lace_panties"
                 if self.inhibition >= 600 and "_stockings_and_garterbelt" in self.inventory:
-                    self.Casual2[9] = "_stockings_and_garterbelt"
-
-            elif self == JeanX:
+                    self.second_casual_outfit[9] = "_stockings_and_garterbelt"
+            elif self.tag == "Jean":
                 if "_stockings_and_garterbelt" in self.inventory:
-                    self.Casual1[9] = "_stockings_and_garterbelt"
+                    self.first_casual_outfit[9] = "_stockings_and_garterbelt"
                 elif self.love >= 300:
-                    self.Casual1[9] = "_stockings"
+                    self.first_casual_outfit[9] = "_stockings"
+
                 if self.inhibition >= 600 and "_bikini_top" in self.inventory:
-                    self.Gym[5] = "_bikini_top" if self.Gym[0] == 1 else self.Gym[5]
+                    self.gym_clothes[5] = "_bikini_top" if self.gym_clothes[0] == 1 else self.gym_clothes[5]
+
                 if self.inhibition >= 600 and "lace_bra" in self.inventory:
-                    self.Casual1[5] = "lace_bra"
-                    self.Casual2[5] = "lace_bra"
+                    self.first_casual_outfit[5] = "lace_bra"
+                    self.second_casual_outfit[5] = "lace_bra"
+
                 if self.inhibition >= 600 and "_lace_panties" in self.inventory:
-                    self.Casual1[6] = "_lace_panties"
-                    self.Casual2[6] = "_lace_panties"
-            elif self == StormX:
-                if self.inhibition >= 400 and self.Casual2[5] == "_sports_bra":
-                    self.Casual2[5] = "_tube_top"
-                if self.inhibition >= 400 and self.Casual2[5] == "_white_panties":
-                    self.Casual2[5] = "_black_panties"
+                    self.first_casual_outfit[6] = "_lace_panties"
+                    self.second_casual_outfit[6] = "_lace_panties"
+            elif self.tag == "Storm":
+                if self.inhibition >= 400 and self.second_casual_outfit[5] == "_sports_bra":
+                    self.second_casual_outfit[5] = "_tube_top"
+
+                if self.inhibition >= 400 and self.second_casual_outfit[5] == "_white_panties":
+                    self.second_casual_outfit[5] = "_black_panties"
+
                 if self.inhibition >= 600 and "_lace_panties" in self.inventory:
-                    self.Casual2[6] = "_lace_panties"
-            elif self == JubesX:
-                if self.inhibition >= 500 and self.Casual1[3] == "_red_shirt":
-                    self.Casual1[3] = "_tube_top"
-                    self.Casual1[5] = 0
+                    self.second_casual_outfit[6] = "_lace_panties"
+            elif self.tag == "Jubes":
+                if self.inhibition >= 500 and self.first_casual_outfit[3] == "_red_shirt":
+                    self.first_casual_outfit[3] = "_tube_top"
+                    self.first_casual_outfit[5] = 0
+
                 if self.inhibition >= 600 and "_lace_panties" in self.inventory:
-                    self.Casual2[6] = "_lace_panties"
+                    self.second_casual_outfit[6] = "_lace_panties"
+
                 if self.inhibition >= 600 and "_stockings_and_garterbelt" in self.inventory:
-                    self.Casual2[9] = "_stockings_and_garterbelt"
+                    self.second_casual_outfit[9] = "_stockings_and_garterbelt"
+
             return
 
-        def add_word(self,Only=0,Recent=0,Daily=0,Trait=0,History=0):
+        def add_word(self, only = False, recent = False, daily = False, trait = False, history = False):
+            if (recent and not only) or (recent and recent not in self.recent_history):
+                self.recent_history.append(recent)
 
+            if (daily and not only) or (daily and daily not in self.daily_history):
+                self.daily_history.append(daily)
 
+            if (trait and not only) or (trait and trait not in self.traits):
+                self.traits.append(trait)
 
-            if (Recent and not Only) or (Recent and Recent not in self.recent_history):
-                self.recent_history.append(Recent)
-            if (Daily and not Only) or (Daily and Daily not in self.daily_history):
-                self.daily_history.append(Daily)
-            if (Trait and not Only) or (Trait and Trait not in self.traits):
-                self.traits.append(Trait)
-            if (History and not Only) or (History and History not in self.history):
-                self.history.append(History)
+            if (history and not only) or (history and history not in self.history):
+                self.history.append(history)
+
             return
 
-        def drain_word(self, word, Recent = 1, Daily = 1, Traits=0):
-
-
-            if Recent and word in self.recent_history:
+        def drain_word(self, word, recent = True, daily = True, traits = False):
+            if recent and word in self.recent_history:
                 while word in self.recent_history:
                     self.recent_history.remove(word)
-            if Daily and word in self.daily_history:
+
+            if daily and word in self.daily_history:
                 while word in self.daily_history:
                     self.daily_history.remove(word)
-            if Traits and word in self.traits:
+
+            if traits and word in self.traits:
                 while word in self.traits:
                     self.traits.remove(word)
+
             return
 
-        def change_stat(self, flavor=0, Check=100, value=1, Greater=0, Type=0, Alt=[[],0, 0], Overflow=0, BStat=0, x_position = 0.75):
-
-
-
-
-
-            if self not in all_Girls:
-                return
-
+        def change_stat(self, flavor, check, value, greater_than = False, Alt = [[], 0, 0], x_position = 0.75):
             if self in Alt[0]:
-
-                Check = Alt[1] if Alt[1] else Check
+                check = Alt[1] if Alt[1] else check
                 value = Alt[2] if Alt[2] else value
 
             if flavor == "love" or flavor == "obedience" or flavor == "inhibition":
+                check = check*10
 
-                Check = Check*10
+            stat = getattr(self,flavor)
 
-            Type = getattr(self,flavor)
-
-            Overflow = self.Chat[4]
+            Overflow = self.had_chat[4]
             x_position = self.sprite_location
 
             if self.tag == "Jean" and flavor == "inhibition" and self.IX > 0:
+                stat -= self.IX
 
-                Type -= self.IX
-
-            if Greater:
-
-
-                if Type >= Check:
-
-                    Type += value
+            if greater_than:
+                if stat >= check:
+                    stat += value
                 else:
-
                     value = 0
             else:
-                if Type <= Check:
-                    Type += value
+                if stat <= check:
+                    stat += value
                 else:
                     value = 0
 
             if self.tag == "Jean" and flavor == "inhibition" and self.IX > 0:
-
-                Type += self.IX
+                stat += self.IX
 
             if value:
-
-
                 if self.tag == "Jean" and value > 0:
-                    if flavor == "obedience" and self.obedience <= 800 and Check < 800:
-
-
+                    if flavor == "obedience" and self.obedience <= 800 and check < 800:
                         value = int(value/2)
-                        Type -= value
+                        stat -= value
                     elif flavor == "inhibition" and self.IX > 0:
-                        if self.Taboo >= 40:
-
+                        if self.taboo >= 40:
                             value += value
-                            Type += value
-                        if Type > 1000:
+                            stat += value
+                        if stat > 1000:
+                            self.IX -= (stat - 1000)
 
-                            self.IX -= (Type - 1000)
-                            Type = 1000
+                            stat = 1000
                             value = 0
-                        elif Type > 700:
-
+                        elif stat > 700:
                             self.IX -= int(value/2)
+
                         self.IX = 0 if self.IX < 0 else self.IX
-                    elif flavor == "love" and Type >= 500 and self.obedience < 700:
-
-
-
+                    elif flavor == "love" and stat >= 500 and self.obedience < 700:
                         if self.love < 500:
-
                             self.love = 500
-                            value = Type - 500
 
+                            value = stat - 500
 
+                        self.stored_stats += value
 
-
-                        self.StatStore += value
-
-                        if Check > self.obedience:
-
+                        if check > self.obedience:
                             flavor = "obedience"
                             value = int(value/5)
-                            Type = self.obedience + value
+                            stat = self.obedience + value
                         else:
                             value = 0
-
-
-
 
                 if flavor == "love":
                     Color = "#c11b17"
@@ -717,52 +617,56 @@ init python:
                     Color = "#FFF380"
                 elif flavor == "lust":
                     Color = "#FAAFBE"
-                    call_holder(value, Color, x_position)
-                    if flavor == "lust" and Type >= 100 and not primary_action:
 
+                    call_holder(value, Color, x_position)
+
+                    if flavor == "lust" and stat >= 100 and not primary_action:
                         renpy.call("Girl_Cumming",self,1)
+
                         return
-                    Type = 100 if Type > 100 else Type
-                    setattr(self,flavor,Type)
+
+                    stat = 100 if stat > 100 else stat
+
+                    setattr(self, flavor, stat)
+
                     return
 
-                if Type > 1000:
-                    call_holder((-(Type-1000-value)), Color, x_position)
-                    if not self.Chat[4]:
+                if stat > 1000:
+                    call_holder((-(stat-1000-value)), Color, x_position)
 
+                    if not self.had_chat[4]:
                         value = 0
                     else:
+                        value = stat - 1000
 
-                        value = Type - 1000
+                        setattr(self, flavor, 1000)
 
-                        setattr(self,flavor,1000)
                         if flavor == "love":
-                            if self.Chat[4] == 1:
+                            if self.had_chat[4] == 1:
                                 flavor = "obedience"
-                            elif self.Chat[4] == 2:
+                            elif self.had_chat[4] == 2:
                                 flavor = "inhibition"
                             else:
                                 value = 0
                         elif flavor == "obedience":
-                            if self.Chat[4] == 3:
+                            if self.had_chat[4] == 3:
                                 flavor = "inhibition"
-                            elif self.Chat[4] == 4:
+                            elif self.had_chat[4] == 4:
                                 flavor = "love"
                             else:
                                 value = 0
                         elif flavor == "inhibition":
-                            if self.Chat[4] == 5:
+                            if self.had_chat[4] == 5:
                                 flavor = "obedience"
-                            elif self.Chat[4] == 6:
+                            elif self.had_chat[4] == 6:
                                 flavor = "love"
                             else:
                                 value = 0
 
-                        Type = getattr(self,flavor)
-                        Type += value
+                        stat = getattr(self,flavor)
+                        stat += value
 
                         if flavor == "love":
-
                             Color = "#c11b17"
                         elif flavor == "obedience":
                             Color = "#2554c7"
@@ -771,18 +675,14 @@ init python:
                         else:
                             Color = "#FFFFFF"
 
-
                 if value:
-
                     call_holder(value, Color, x_position)
 
+            stat = 1000 if stat > 1000 else stat
 
+            setattr(self, flavor, stat)
 
-            Type = 1000 if Type > 1000 else Type
-
-            setattr(self,flavor,Type)
             return
-
 
         def change_face(self, emotion = 5, B = 5, M = 0, Mouth = 0, Eyes = 0, Brows = 0):
 
@@ -801,21 +701,21 @@ init python:
                 self.brows = "_normal"
                 self.eyes = "_normal"
             elif emotion == "_angry":
-                if self == LauraX:
+                if self.tag == "Laura":
                     self.mouth = "_kiss"
                 else:
                     self.mouth = "_sad"
                 self.brows = "_angry"
                 self.eyes = "_sexy"
             elif emotion == "_bemused":
-                if self == EmmaX:
+                if self.tag == "Emma":
                     self.mouth = "_normal"
                 else:
                     self.mouth = "_lipbite"
                 self.brows = "_sad"
                 self.eyes = "_squint"
             elif emotion == "_closed":
-                if self == RogueX:
+                if self.tag == "Rogue":
                     self.mouth = "_lipbite"
                 else:
                     self.mouth = "_normal"
@@ -824,13 +724,13 @@ init python:
             elif emotion == "_confused":
                 self.mouth = "_kiss"
                 self.brows = "_confused"
-                if self == LauraX or self == EmmaX:
+                if self.tag == "Laura" or self.tag == "Emma":
                     self.eyes = "_squint"
                 else:
                     self.eyes = "_surprised"
             elif emotion == "_kiss":
                 self.mouth = "_kiss"
-                if self == LauraX or self == EmmaX:
+                if self.tag == "Laura" or self.tag == "Emma":
                     self.brows = "_sad"
                 else:
                     self.brows = "_normal"
@@ -838,7 +738,7 @@ init python:
             elif emotion == "_sad":
                 self.mouth = "_sad"
                 self.brows = "_sad"
-                if self == JeanX or self == JubesX:
+                if self.tag == "Jean" or self.tag == "Jubes":
                     self.eyes = "_normal"
                 else:
                     self.eyes = "_sexy"
@@ -848,10 +748,10 @@ init python:
                 self.eyes = "_side"
             elif emotion == "_sexy":
                 self.mouth = "_lipbite"
-                if self == EmmaX:
+                if self.tag == "Emma":
                     self.brows = "_normal"
                     self.eyes = "_squint"
-                elif self == LauraX:
+                elif self.tag == "Laura":
                     self.brows = "_sad"
                     self.eyes = "_squint"
                 else:
@@ -860,27 +760,27 @@ init python:
             elif emotion == "_sly":
                 self.brows = "_normal"
                 self.eyes = "_squint"
-                if self == RogueX:
+                if self.tag == "Rogue":
                     self.mouth = "_grimace"
-                if self == LauraX:
-                    if LauraX.love >= 700:
+                if self.tag == "Laura":
+                    if self.love >= 700:
                         self.mouth = "_smile"
                     else:
                         self.mouth = "_smirk"
                     self.brows = "_confused"
-                elif self == KittyX:
+                elif self.tag == "Kitty":
                     self.mouth = "_smile"
                 else:
                     self.mouth = "_smirk"
             elif emotion == "_smile":
-                if self == LauraX and LauraX.love < 700:
+                if self.tag == "Laura" and self.love < 700:
                     self.mouth = "_smirk"
                 else:
                     self.mouth = "_smile"
                 self.brows = "_normal"
                 self.eyes = "_normal"
             elif emotion == "_surprised":
-                if self == RogueX or self == KittyX:
+                if self.tag == "Rogue" or self.tag == "Kitty":
                     self.mouth = "_surprised"
                 else:
                     self.mouth = "_kiss"
@@ -891,35 +791,35 @@ init python:
                 self.brows = "_surprised"
                 self.eyes = "_surprised"
             elif emotion == "startled":
-                if self == RogueX or self == KittyX:
+                if self.tag == "Rogue" or self.tag == "Kitty":
                     self.mouth = "_grimace"
                 else:
                     self.mouth = "_smile"
                 self.brows = "_surprised"
                 self.eyes = "_surprised"
             elif emotion == "_down":
-                if self == RogueX or self == KittyX:
+                if self.tag == "Rogue" or self.tag == "Kitty":
                     self.mouth = "_surprised"
                 else:
                     self.mouth = "_sad"
                 self.brows = "_sad"
                 self.eyes = "_down"
             elif emotion == "_perplexed":
-                if self == RogueX:
+                if self.tag == "Rogue":
                     self.mouth = "_sad"
                     self.brows = "_confused"
                 else:
                     self.mouth = "_smile"
                     self.brows = "_sad"
-                if self == LauraX:
+                if self.tag == "Laura":
                     self.eyes = "_surprised"
                 else:
                     self.eyes = "_normal"
             elif emotion == "_sucking":
                 self.mouth = "_sucking"
-                if self == EmmaX:
+                if self.tag == "Emma":
                     self.brows = "_surprised"
-                elif self == LauraX:
+                elif self.tag == "Laura":
                     self.brows = "_sad"
                 else:
                     self.brows = "_normal"
@@ -927,14 +827,14 @@ init python:
             elif emotion == "_tongue":
                 self.mouth = "_tongue"
                 self.brows = "_sad"
-                if self == LauraX:
+                if self.tag == "Laura":
                     self.eyes = "_stunned"
                 else:
                     self.eyes = "_sexy"
             elif emotion == "_manic":
-                if self == RogueX:
+                if self.tag == "Rogue":
                     self.mouth = "_grimace"
-                elif self == LauraX:
+                elif self.tag == "Laura":
                     self.mouth = "_lipbite"
                 else:
                     self.mouth = "_smile"
@@ -1078,175 +978,160 @@ init python:
 
 
 
-        def change_outfit(self, outfitTemp = 5, Spunk = 0, Undressed = 0, Changed = 1,Holderoutfit=[]):
+        def change_outfit(self, temp_outfit = 5, undressed = 0, outfit_changed = 1):
+            temp_outfit = temp_outfit if temp_outfit else self.outfit
 
-
-
-            if self not in all_Girls:
+            if self.location == bg_current and renpy.showing("NightMask", layer = 'nightmask') and time_index == 0:
                 return
 
-            outfitTemp = outfitTemp if outfitTemp else self.outfit
-
-            if self.location == bg_current and renpy.showing("NightMask", layer='nightmask') and time_index == 0:
-
-                return
-
-            if self.location not in ("bg_showerroom", "bg_pool") or (outfitTemp not in ("nude", "swimwear", "_towel")):
-
+            if self.location not in ["bg_showerroom", "bg_pool"] or (temp_outfit not in ["nude", "swimwear", "_towel"]):
                 self.wet = False
-            if self.spunk:
 
+            if self.spunk:
                 if "painted" not in self.daily_history or "cleaned" not in self.daily_history:
                     del self.spunk[:]
 
-
             if self.upskirt or self.top_pulled_up or self.underwear_pulled_down:
-                Undressed = 1
+                undressed = 1
 
             self.upskirt = 0
             self.top_pulled_up = 0
             self.underwear_pulled_down = 0
 
-            if outfitTemp == 5:
-
+            if temp_outfit == 5:
                 if "yoinked" in self.recent_history:
-
                     return
-                outfitTemp = self.outfit
-            elif outfitTemp == 6:
 
-                outfitTemp = self.today_outfit
+                temp_outfit = self.outfit
+            elif temp_outfit == 6:
+                temp_outfit = self.today_outfit
+
                 self.outfit = self.today_outfit
-            if outfitTemp != self.outfit:
 
+            if temp_outfit != self.outfit:
+                outfit_changed = 1
 
-                Changed = 1
-                self.outfit = outfitTemp
-            if self in Party and outfitTemp == self.today_outfit:
+                self.outfit = temp_outfit
+            if self in Party and temp_outfit == self.today_outfit:
+                temp_outfit = self.outfit
 
-                outfitTemp = self.outfit
-
-            if outfitTemp == "casual1":
-                Holderoutfit = self.Casual1[:]
-            elif outfitTemp == "casual2":
-                Holderoutfit = self.Casual2[:]
-            elif outfitTemp == "nude":
-                Holderoutfit = [0, "", "", "", "", "", "", "", "", "",50]
-            elif outfitTemp == "_towel":
-                Holderoutfit = [0, "", "", "_towel", "", "", "", "", "", "",35]
-            elif outfitTemp == "custom1":
-                Holderoutfit = self.Custom1[:]
-            elif outfitTemp == "custom2":
-                Holderoutfit = self.Custom2[:]
-            elif outfitTemp == "custom3":
-                Holderoutfit = self.Custom3[:]
-            elif outfitTemp == "temporary":
-                Holderoutfit = self.TempClothes[:]
-            elif outfitTemp == "sleep":
-                Holderoutfit = self.sleepwear[:]
-            elif outfitTemp == "gym":
-                Holderoutfit = self.Gym[:]
-            elif outfitTemp == "costume":
-                Holderoutfit = self.Costume[:]
-            elif outfitTemp == "swimwear":
-                if not self.Swim[0]:
+            if temp_outfit == "casual1":
+                outfit_holder = self.first_casual_outfit[:]
+            elif temp_outfit == "casual2":
+                outfit_holder = self.second_casual_outfit[:]
+            elif temp_outfit == "nude":
+                outfit_holder = [0, "", "", "", "", "", "", "", "", "", 50]
+            elif temp_outfit == "_towel":
+                outfit_holder = [0, "", "", "_towel", "", "", "", "", "", "", 35]
+            elif temp_outfit == "custom1":
+                outfit_holder = self.first_custom_outfit[:]
+            elif temp_outfit == "custom2":
+                outfit_holder = self.second_custom_outfit[:]
+            elif temp_outfit == "custom3":
+                outfit_holder = self.third_custom_outfit[:]
+            elif temp_outfit == "temporary":
+                outfit_holder = self.temp_outfit[:]
+            elif temp_outfit == "sleep":
+                outfit_holder = self.sleepwear[:]
+            elif temp_outfit == "gym":
+                outfit_holder = self.gym_clothes[:]
+            elif temp_outfit == "costume":
+                outfit_holder = self.Costume[:]
+            elif temp_outfit == "swimwear":
+                if not self.swimwear[0]:
                     if "_bikini_top" not in self.inventory or "_bikini_bottoms" not in self.inventory:
                         self.outfit = self.today_outfit
 
                         if "swim" not in self.daily_history:
-                            if self == RogueX:
+                            if self.tag == "Rogue":
                                 ch_r("I don't really have any swimsuit I could wear. . .", interact=True)
-                            elif self == KittyX:
+                            elif self.tag == "Kitty":
                                 ch_k("I wish I had something cute to wear, but I don't. . .", interact=True)
-                            elif self == EmmaX:
+                            elif self.tag == "Emma":
                                 ch_e("I really don't own the proper attire. . .", interact=True)
-                            elif self == LauraX:
+                            elif self.tag == "Laura":
                                 ch_l("Don't have a suit. . .", interact=True)
-                            elif self == JeanX:
+                            elif self.tag == "Jean":
                                 ch_j("I might, if you buy me a suit. . .", interact=True)
-                            elif self == StormX:
+                            elif self.tag == "Storm":
                                 ch_s("I -am- afraid Charles would want me to wear a suit. . .", interact=True)
-                            elif self == JubesX:
+                            elif self.tag == "Jubes":
                                 ch_v("I haven't picked out a suit yet. . .", interact=True)
+
                         return False
-                    elif self == KittyX and "_blue_skirt" not in self.inventory and self.inhibition <= 400:
+                    elif self.tag == "Kitty" and "_blue_skirt" not in self.inventory and self.inhibition <= 400:
                         self.outfit = self.today_outfit
+
                         if "swim" not in self.daily_history:
                             ch_k("I don't know, I do have a suit, but it's a little daring. . .", interact=True)
                             ch_k("If only I had a little skirt or something. . .", interact=True)
+
                         return False
                     else:
-                        self.Swim[0] = 1
-                Holderoutfit = self.Swim[:]
+                        self.swimwear[0] = 1
 
-            while len(Holderoutfit) < 11:
-                Holderoutfit.append(0)
+                outfit_holder = self.swimwear[:]
 
-            if not self.legs and Holderoutfit[2]:
-                Undressed = 1
-            elif not self.top and Holderoutfit[3]:
-                Undressed = 1
-            elif not self.bra and Holderoutfit[5]:
-                Undressed = 1
-            elif not self.underwear and Holderoutfit[6] and "pantyless" not in self.daily_history:
-                Undressed = 1
-            elif not self.hose and Holderoutfit[9]:
-                Undressed = 1
+            while len(outfit_holder) < 11:
+                outfit_holder.append(0)
 
+            if not self.legs and outfit_holder[2]:
+                undressed = 1
+            elif not self.top and outfit_holder[3]:
+                undressed = 1
+            elif not self.bra and outfit_holder[5]:
+                undressed = 1
+            elif not self.underwear and outfit_holder[6] and "commando" not in self.daily_history:
+                undressed = 1
+            elif not self.hose and outfit_holder[9]:
+                undressed = 1
 
+            if self.tag == "Emma" and (outfit_holder[8] != "_hat" and outfit_holder[8] != "_wet_hat"):
+                self.hair = "_wet" if outfit_holder[8] == "_wet_hat" else "_wave"
 
-            if self == EmmaX and (Holderoutfit[8] != "_hat" and Holderoutfit[8] != "_wet_hat"):
-
-                self.hair = "_wet" if Holderoutfit[8] == "_wet_hat" else "_wave"
-
-            self.arms = Holderoutfit[1]
-            self.legs = Holderoutfit[2]
-            self.top = Holderoutfit[3]
-            self.neck = Holderoutfit[4]
-            self.bra = Holderoutfit[5]
-            self.underwear = Holderoutfit[6]
-            self.accessory = Holderoutfit[7]
-            self.hair = Holderoutfit[8] if Holderoutfit[8] else self.hair
-            self.hose = Holderoutfit[9]
-            self.shame = Holderoutfit[10]
+            self.arms = outfit_holder[1]
+            self.legs = outfit_holder[2]
+            self.top = outfit_holder[3]
+            self.neck = outfit_holder[4]
+            self.bra = outfit_holder[5]
+            self.underwear = outfit_holder[6]
+            self.accessory = outfit_holder[7]
+            self.hair = outfit_holder[8] if outfit_holder[8] else self.hair
+            self.hose = outfit_holder[9]
+            self.shame = outfit_holder[10]
 
             if "ripped" in self.daily_history and "modesty" not in self.recent_history:
-
                 self.hose = "_ripped_pantyhose" if self.hose == "_pantyhose" else self.hose
                 self.hose = "_ripped_tights" if self.hose == "_tights" else self.hose
-            if self.underwear and self.underwear != "_shorts" and "pantyless" in self.daily_history and "modesty" not in self.daily_history:
 
-                if outfitTemp != "sleep" and outfitTemp != "gym":
+            if self.underwear and self.underwear != "_shorts" and "commando" in self.daily_history and "modesty" not in self.daily_history:
+                if temp_outfit != "sleep" and temp_outfit != "gym":
                     self.underwear = ""
 
+            if not outfit_changed and temp_outfit == self.outfit and self.location == bg_current:
+                if undressed == 2:
+                    renpy.say(None, self.name + " throws on a towel.", interact = True)
+                elif undressed:
+                    renpy.say(None, self.name + " throws her clothes back on.", interact = True)
 
-
-            if not Changed and outfitTemp == self.outfit and self.location == bg_current:
-
-                if Undressed == 2:
-                    renpy.say(None,self.name+" throws on a towel.", interact=True)
-                elif Undressed:
-                    renpy.say(None,self.name+" throws her clothes back on.", interact=True)
-            if Undressed:
+            if undressed:
                 return 2
-            return True
 
-
-
+            return 1
 
         def Set_Temp_outfit(self):
 
 
-            self.TempClothes[1] = self.arms
-            self.TempClothes[2] = self.legs
-            self.TempClothes[3] = self.top
-            self.TempClothes[4] = self.neck
-            self.TempClothes[5] = self.bra
-            self.TempClothes[6] = self.underwear
-            self.TempClothes[7] = self.accessory
-            self.TempClothes[8] = self.hair
-            self.TempClothes[9] = self.hose
-            self.TempClothes[0] = 1
+            self.temp_outfit[1] = self.arms
+            self.temp_outfit[2] = self.legs
+            self.temp_outfit[3] = self.top
+            self.temp_outfit[4] = self.neck
+            self.temp_outfit[5] = self.bra
+            self.temp_outfit[6] = self.underwear
+            self.temp_outfit[7] = self.accessory
+            self.temp_outfit[8] = self.hair
+            self.temp_outfit[9] = self.hose
+            self.temp_outfit[0] = 1
 
 
 
@@ -1258,18 +1143,18 @@ init python:
 
             if Up and self.top_pulled_up and self.bra:
                 return True
-            if self == RogueX:
+            if self.tag == "Rogue":
                 if self.bra in ("_tank", "_buttoned_tank"):
                     return 5
-            if self == LauraX:
+            if self.tag == "Laura":
                 if self.bra in ("leather_bra", "white_tank"):
                     return 5
                 elif self.bra == "wolvie_top":
                     return 3
-            if self == JeanX:
+            if self.tag == "Jean":
                 if self.bra == "_sports_bra":
                     return 5
-            if self == StormX:
+            if self.tag == "Storm":
                 if self.bra == "_sports_bra":
                     return 5
             if self.bra == "_tube_top":
@@ -1291,16 +1176,16 @@ init python:
 
             if Up and self.top_pulled_up and self.top:
                 return True
-            if self == RogueX:
+            if self.tag == "Rogue":
                 if self.top == "_mesh_top":
                     return 2
-            if self == EmmaX:
+            if self.tag == "Emma":
                 if self.top == "_towel":
                     return 2
-            if self == StormX:
+            if self.tag == "Storm":
                 if self.top == "_towel":
                     return False
-            if self == JubesX:
+            if self.tag == "Jubes":
                 if Up and self.top_pulled_up and self.accessory:
                     return True
                 if self.accessory == "_jacket":
@@ -1328,14 +1213,14 @@ init python:
 
 
 
-            if self == JubesX:
+            if self.tag == "Jubes":
                 if self.accessory == "shut_jacket":
                     return 5
 
             if Up and self.upskirt and self.legs:
                 return True
 
-            if self == RogueX and self.underwear == "_shorts":
+            if self.tag == "Rogue" and self.underwear == "_shorts":
                 return 6
             if self.legs == "_shorts":
                 return 6
@@ -1345,7 +1230,7 @@ init python:
                 return 8
             if self.top == "_towel" and self not in (EmmaX,StormX):
                 return 5
-            if self == EmmaX and self.top == "_dress":
+            if self.tag == "Emma" and self.top == "_dress":
                 return 4
             if self.legs == "mesh_pants":
                 return 2
@@ -1431,13 +1316,10 @@ init python:
         def SeenCheck(self, Check=0, C = 0):
             C = 0
 
-
-
-
-            if not self.SeenChest:
+            if not self.seen_breasts:
                 if (not self.top and not self.bra) or self.top_pulled_up or Check == 1 or Check == 2:
                     C += 1
-            if not self.SeenPussy:
+            if not self.seen_pussy:
                 if Check == 1 or Check == 3:
                     C += 1
                 elif not self.legs or self.upskirt:
@@ -1447,139 +1329,94 @@ init python:
                         C += 1
             return C
 
-
-
-
-        def GirlLikeCheck(self,Chr=0):
-
-            return getattr(self,"Like"+Chr.tag)
-
-        def GirlLikeUp(self,Chr=0,value=0,Like=0):
-
-            if "Jeaned" in self.traits:
-
-                Like = getattr(JeanX,"LikeS"+self.tag)
-                if Like + value > 1000:
-                    setattr(JeanX,"LikeS"+self.tag, 1000)
-                elif Like + value < 0:
-                    setattr(JeanX,"LikeS"+self.tag, 0)
-                else:
-                    setattr(JeanX,"LikeS"+self.tag, value + Like)
-                return
-
-            Like = getattr(self,"Like"+Chr.tag)
-            if Like + value > 1000:
-                setattr(self,"Like"+Chr.tag, 1000)
-            elif Like + value < 0:
-                setattr(self,"Like"+Chr.tag, 0)
-            else:
-                setattr(self,"Like"+Chr.tag, value + Like)
-            return
-
         def GLG(self, ChrB = 0, Check=200, Modifier = 1, Auto = 0, Jealousy = 0, Ok = 0, Likes=0):
-
-
-
-
-
-
-
-
-
-            if self not in all_Girls or ChrB not in all_Girls:
-                return
             Jealousy = 0
-            Likes = self.GirlLikeCheck(ChrB)
-
+            Likes = self.likes[ChrB.tag]
 
             if Likes <= Check:
-
                 if Auto:
+                    self.likes[ChrB.tag] += Modifier
 
-                    setattr(self,"Like"+ChrB.tag,Likes+Modifier)
                     self.change_stat("lust", 200, (int(Modifier/5)))
+
                     return
 
-
                 if self in Player.Harem:
-
                     if ChrB not in Player.Harem and "poly " + ChrB.tag not in self.traits:
-
                         Jealousy = 100
             elif Auto:
                 self.change_stat("lust", 200, (int(Modifier/5)))
+
                 return
 
-
             Jealousy += (self.love - 600) if self.love > 600 else 0
-
             Jealousy += self.SEXP if self.inhibition <= 500 else 0
-
             Jealousy -= (self.obedience - 250) if self.obedience > 250 else 0
-
-
-
             Jealousy = 0 if Jealousy < 1 else Jealousy
 
             Modifier += 1 if not Jealousy and Likes >= 500 else 0
 
-
-
             if Likes >= 900:
-
                 Likes += Modifier
+
                 self.change_stat("love", 80, (int(Modifier/2)))
                 self.change_stat("lust", 200, (int(Modifier/5)))
-                Ok = 2
-            elif Likes >= 800:
 
+                return_value = 2
+            elif Likes >= 800:
                 if Jealousy <= 300:
                     Likes += Modifier
+
                     self.change_stat("love", 80, (int(Modifier/2)))
                     self.change_stat("lust", 200, (int(Modifier/2)))
-                    Ok = 2
+
+                    return_value = 2
                 else:
                     Likes -= Modifier
-                    self.change_stat("lust", 200, (int(Modifier/5)))
-                    Ok = 1
-            elif Likes >= 600:
 
+                    self.change_stat("lust", 200, (int(Modifier/5)))
+
+                    return_value = 1
+            elif Likes >= 600:
                 if Jealousy <= 100:
                     Likes += Modifier
+
                     self.change_stat("love", 80, (int(Modifier/4)))
                     self.change_stat("lust", 200, (int(Modifier/2)))
-                    Ok = 2
+
+                    return_value = 2
                 elif Jealousy <= 300:
                     Likes -= Modifier
+
                     self.change_stat("lust", 200, (int(Modifier/2)))
-                    Ok = 1
+
+                    return_value = 1
                 else:
                     Likes -= (Modifier + (int(Jealousy/50)))
+
                     self.change_stat("love", 90, (-(int(Modifier))))
                     self.change_stat("lust", 200, (int(Modifier/5)))
-                    Ok = 2
-            elif Likes >= 400:
 
+                    return_value = 2
+            elif Likes >= 400:
                 if Jealousy <= 100:
                     Likes -= Modifier
-                    Ok = 1
+
+                    return_value = 1
                 else:
                     Likes -= (Modifier + (int(Jealousy/100)))
+
                 self.change_stat("lust", 200, (int(Modifier/10)))
             else:
-
                 Likes -= (Modifier + (int(Jealousy/50)))
+
                 self.change_stat("lust", 200, (int(Modifier/10)))
+
             self.change_stat("inhibition", 60, (int(Modifier/10)))
 
+            self.likes[ChrB.tag] = Likes + Modifier
 
-
-            setattr(self,"Like"+ChrB.tag,Likes+Modifier)
-
-            return Ok
-
-
-
+            return return_value
 
         def nameCheck(self, counter = 0):
 
@@ -1587,9 +1424,9 @@ init python:
 
             if self.petname == self.name:
                 return False
-            if self.Taboo:
+            if self.taboo:
 
-                counter = int(self.Taboo/10)
+                counter = int(self.taboo/10)
 
 
             if self.petname in ("girl", "boo", "bae", "baby", "sweetie"):
@@ -1787,7 +1624,7 @@ init python:
 
 
 
-label Clothing_Schedule_Check(Girl=0, Changed=0, value=0, Count=0):
+label Clothing_Schedule_Check(Girl=0, outfit_changed=0, value=0, Count=0):
 
 
 
@@ -1797,16 +1634,16 @@ label Clothing_Schedule_Check(Girl=0, Changed=0, value=0, Count=0):
 
 
     while Count < 9:
-        if Girl.clothing[Count] == Changed:
+        if Girl.clothing[Count] == outfit_changed:
             if value:
 
-                if Girl.clothing[Count] == 3 and Girl.Custom1[0] == 2:
+                if Girl.clothing[Count] == 3 and Girl.first_custom_outfit[0] == 2:
                     pass
-                elif Girl.clothing[Count] == 5 and Girl.Custom2[0] == 2:
+                elif Girl.clothing[Count] == 5 and Girl.second_custom_outfit[0] == 2:
                     pass
-                elif Girl.clothing[Count] == 6 and Girl.Custom3[0] == 2:
+                elif Girl.clothing[Count] == 6 and Girl.third_custom_outfit[0] == 2:
                     pass
-                elif Girl.clothing[Count] == 4 and Girl.Gym[0] != 1:
+                elif Girl.clothing[Count] == 4 and Girl.gym_clothes[0] != 1:
                     pass
                 else:
                     $ Girl.clothing[Count] = 0
@@ -1821,93 +1658,93 @@ label Emergency_Clothing_Reset:
     menu:
         "Do you want to continue?"
         "Yes":
-            $ RogueX.Custom1 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ RogueX.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ RogueX.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ RogueX.Casual1 = [2,"_gloves", "_skirt", "_mesh_top", "_spiked_collar", "_tank", "_black_panties", "", "", "_tights", 0]
-            $ RogueX.Casual2 = [2,"_gloves", "_pants", "_pink_top", "_spiked_collar", "_buttoned_tank", "_black_panties", "", "", "", 0]
-            $ RogueX.Gym = [0, "_gloves", "", "_hoodie", "", "_sports_bra", "_shorts", "", "", "", 0]
+            $ RogueX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ RogueX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ RogueX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ RogueX.first_casual_outfit = [2,"_gloves", "_skirt", "_mesh_top", "_spiked_collar", "_tank", "_black_panties", "", "", "_tights", 0]
+            $ RogueX.second_casual_outfit = [2,"_gloves", "_pants", "_pink_top", "_spiked_collar", "_buttoned_tank", "_black_panties", "", "", "", 0]
+            $ RogueX.gym_clothes = [0, "_gloves", "", "_hoodie", "", "_sports_bra", "_shorts", "", "", "", 0]
             $ RogueX.sleepwear = [0, "", "", "", "", "_tank", "_green_panties", "", "", "", 0]
-            $ RogueX.Swim = [0, "", "", "_hoodie", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ RogueX.Costume = [2,"_gloves", "_skirt", "", "", "_tube_top", "_black_panties", "_sweater", "_cosplay", "", 0]
+            $ RogueX.swimwear = [0, "", "", "_hoodie", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+            $ RogueX.halloween_costume = [2,"_gloves", "_skirt", "", "", "_tube_top", "_black_panties", "_sweater", "_cosplay", "", 0]
             $ RogueX.clothing = [0, "", "", "", "", "", "", "", "", 0]
             $ RogueX.outfit = "casual1"
             $ RogueX.today_outfit = "casual1"
 
-            $ KittyX.Custom1 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ KittyX.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ KittyX.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ KittyX.Casual1 = [2,0, "_capris", "_pink_top", "_gold_necklace", "_cami", "_green_panties", "", "", "", 0]
-            $ KittyX.Casual2 = [2,0, "_black_jeans", "_red_shirt", "", "_bra", "_green_panties", "", "", "", 0]
-            $ KittyX.Gym = [0, "", "_shorts", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
+            $ KittyX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ KittyX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ KittyX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ KittyX.first_casual_outfit = [2,0, "_capris", "_pink_top", "_gold_necklace", "_cami", "_green_panties", "", "", "", 0]
+            $ KittyX.second_casual_outfit = [2,0, "_black_jeans", "_red_shirt", "", "_bra", "_green_panties", "", "", "", 0]
+            $ KittyX.gym_clothes = [0, "", "_shorts", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
             $ KittyX.sleepwear = [0, "", "_shorts", "", "", "_cami", "_green_panties", "", "", "", 0]
-            $ KittyX.Swim = [0, "", "_blue_skirt", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ KittyX.Costume = [2,0, "_dress", "_jacket", "_flower_necklace", "_dress", "_lace_panties", "", "", "", 0]
+            $ KittyX.swimwear = [0, "", "_blue_skirt", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+            $ KittyX.halloween_costume = [2,0, "_dress", "_jacket", "_flower_necklace", "_dress", "_lace_panties", "", "", "", 0]
             $ KittyX.clothing = [0, "", "", "", "", "", "", "", "", 0]
             $ KittyX.outfit = "casual1"
             $ KittyX.today_outfit = "casual1"
 
-            $ EmmaX.Custom1 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ EmmaX.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ EmmaX.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ EmmaX.Casual1 = [2,0, "_pants", "_jacket", "_choker", "_corset", "_white_panties", "", "", "", 0]
-            $ EmmaX.Casual2 = [2,"_gloves", "_pants", "", "_choker", "_corset", "_white_panties", "", "", "", 0]
-            $ EmmaX.Gym = [0, "", "", "", "", "_sports_bra", "sports_panties", "", "", "", 0]
+            $ EmmaX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ EmmaX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ EmmaX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ EmmaX.first_casual_outfit = [2,0, "_pants", "_jacket", "_choker", "_corset", "_white_panties", "", "", "", 0]
+            $ EmmaX.second_casual_outfit = [2,"_gloves", "_pants", "", "_choker", "_corset", "_white_panties", "", "", "", 0]
+            $ EmmaX.gym_clothes = [0, "", "", "", "", "_sports_bra", "sports_panties", "", "", "", 0]
             $ EmmaX.sleepwear = [0, "", "", "", "", "_corset", "_white_panties", "", "", "", 0]
-            $ EmmaX.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ EmmaX.Costume =  [2,"_gloves", "_dress", "_dress", "_choker", "", "_lace_panties", "", "_hat", "_stockings_and_garterbelt", 0]
+            $ EmmaX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+            $ EmmaX.halloween_costume =  [2,"_gloves", "_dress", "_dress", "_choker", "", "_lace_panties", "", "_hat", "_stockings_and_garterbelt", 0]
             $ EmmaX.clothing = [0, "", "", "", "", "", "", "", "", 0]
             $ EmmaX.outfit = "casual1"
             $ EmmaX.today_outfit = "casual1"
 
-            $ LauraX.Custom1 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ LauraX.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ LauraX.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ LauraX.Casual1 = [2,"wrists", "leather_pants", "", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
-            $ LauraX.Casual2 = [2,0, "_skirt", "_jacket", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
-            $ LauraX.Gym = [0, "wrists", "leather_pants", "", "", "leather_bra", "_black_panties", "", "", "", 0]
+            $ LauraX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ LauraX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ LauraX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ LauraX.first_casual_outfit = [2,"wrists", "leather_pants", "", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
+            $ LauraX.second_casual_outfit = [2,0, "_skirt", "_jacket", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
+            $ LauraX.gym_clothes = [0, "wrists", "leather_pants", "", "", "leather_bra", "_black_panties", "", "", "", 0]
             $ LauraX.sleepwear = [0, "", "", "", "", "leather_bra", "leather_panties", "", "", "", 0]
-            $ LauraX.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ LauraX.Costume = [2,"_gloves", "other_skirt", "", "", "white_tank", "_black_panties", "suspenders", "", "black stockings", 0]
+            $ LauraX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+            $ LauraX.halloween_costume = [2,"_gloves", "other_skirt", "", "", "white_tank", "_black_panties", "suspenders", "", "black stockings", 0]
             $ LauraX.clothing = [0, "", "", "", "", "", "", "", "", 0]
             $ LauraX.outfit = "casual1"
             $ LauraX.today_outfit = "casual1"
 
-            $ JeanX.Custom1 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JeanX.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JeanX.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JeanX.Casual1 = [2,0, "_pants", "pink_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.Casual2 = [2,0, "_skirt", "green_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.Gym = [0, "", "yoga_pants", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
+            $ JeanX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ JeanX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ JeanX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ JeanX.first_casual_outfit = [2,0, "_pants", "pink_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
+            $ JeanX.second_casual_outfit = [2,0, "_skirt", "green_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
+            $ JeanX.gym_clothes = [0, "", "yoga_pants", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
             $ JeanX.sleepwear = [0, "", "", "pink_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ JeanX.Costume =  [2,0, "_shorts", "yellow_shirt", "", "green_bra", "_green_panties", "suspenders", "pony", "", 0]
+            $ JeanX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+            $ JeanX.halloween_costume =  [2,0, "_shorts", "yellow_shirt", "", "green_bra", "_green_panties", "suspenders", "pony", "", 0]
             $ JeanX.clothing = [0, "", "", "", "", "", "", "", "", 0]
             $ JeanX.outfit = "casual1"
             $ JeanX.today_outfit = "casual1"
 
-            $ StormX.Custom1 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ StormX.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ StormX.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ StormX.Casual1 = [2,0, "_skirt", "white_shirt", "", "black_bra", "_white_panties", "", "", "", 0]
-            $ StormX.Casual2 = [2,0, "_pants", "_jacket", "", "_tube_top", "_white_panties", "", "", "", 0]
-            $ StormX.Gym = [0, "", "yoga_pants", "", "", "_sports_bra", "_white_panties", "", "", "",10]
+            $ StormX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ StormX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ StormX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ StormX.first_casual_outfit = [2,0, "_skirt", "white_shirt", "", "black_bra", "_white_panties", "", "", "", 0]
+            $ StormX.second_casual_outfit = [2,0, "_pants", "_jacket", "", "_tube_top", "_white_panties", "", "", "", 0]
+            $ StormX.gym_clothes = [0, "", "yoga_pants", "", "", "_sports_bra", "_white_panties", "", "", "",10]
             $ StormX.sleepwear = [0, "", "", "white_shirt", "", "", "_white_panties", "", "", "",25]
-            $ StormX.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ StormX.Costume = [2,0, "", "", "ring_necklace", "cos_bra", "cos_panties", "rings", "_short", "", 0]
+            $ StormX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+            $ StormX.halloween_costume = [2,0, "", "", "ring_necklace", "cos_bra", "cos_panties", "rings", "_short", "", 0]
             $ StormX.clothing = [0, "", "", "", "", "", "", "", "", 0]
             $ StormX.outfit = "casual1"
             $ StormX.today_outfit = "casual1"
 
-            $ JubesX.Custom1 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JubesX.Custom2 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JubesX.Custom3 = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JubesX.Casual1 = [2,0, "_shorts", "_red_shirt", "", "_sports_bra", "blue_panties", "_jacket", "", "", 0]
-            $ JubesX.Casual2 = [2,0, "_pants", "black_shirt", "", "_sports_bra", "blue_panties", "_jacket", "", "", 0]
-            $ JubesX.Gym = [0, "", "_pants", "", "", "_sports_bra", "blue_panties", "", "", "",10]
-            $ JubesX.sleepwear = [0, "", "", "", "", "_sports_bra", "blue_panties", "", "", "",25]
-            $ JubesX.Swim = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ JubesX.Costume = [0, "", "_pants", "black_shirt", "", "_sports_bra", "blue_panties", "_jacket", "", "", 0]
+            $ JubesX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ JubesX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ JubesX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
+            $ JubesX.first_casual_outfit = [2,0, "_shorts", "_red_shirt", "", "_sports_bra", "_blue_panties", "_jacket", "", "", 0]
+            $ JubesX.second_casual_outfit = [2,0, "_pants", "_black_shirt", "", "_sports_bra", "_blue_panties", "_jacket", "", "", 0]
+            $ JubesX.gym_clothes = [0, "", "_pants", "", "", "_sports_bra", "_blue_panties", "", "", "",10]
+            $ JubesX.sleepwear = [0, "", "", "", "", "_sports_bra", "_blue_panties", "", "", "",25]
+            $ JubesX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
+            $ JubesX.halloween_costume = [0, "", "_pants", "_black_shirt", "", "_sports_bra", "_blue_panties", "_jacket", "", "", 0]
             $ JubesX.clothing = [0, "", "", "", "", "", "", "", "", 0]
             $ JubesX.outfit = "casual1"
             $ JubesX.today_outfit = "casual1"

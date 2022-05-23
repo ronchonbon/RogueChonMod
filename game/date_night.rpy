@@ -49,7 +49,7 @@ label Date_Ask(Girl=0):
             return
         if "taboo" not in EmmaX.history:
 
-            call Emma_Taboo_Talk
+            call Emma_taboo_Talk
             if "taboo" not in EmmaX.history:
                 return
     if Girl.broken_up[0] and "ex" in Girl.traits:
@@ -832,7 +832,7 @@ label Readytogo(Girl=0, R=0, temp_Girls=[]):
         "Yes":
             $ renpy.pop_call()
             $ renpy.pop_call()
-            jump Campus_entry
+            jump campus_entry
         "Not yet":
             if R == RogueX:
                 ch_r "Ok, it's getting late though."
@@ -879,7 +879,7 @@ label Readytogo(Girl=0, R=0, temp_Girls=[]):
                     call locked_door (R)
                     return
                 $ R.location = bg_current
-                call Taboo_Level (0)
+                call taboo_Level (0)
                 $ R.change_outfit()
                 call set_the_scene
     return
@@ -1505,8 +1505,8 @@ label Date_Prep(Girl=0):
     if Girl not in all_Girls:
         "Tell Oni this girl called without a target girl."
         return
-    $ Taboo = 40
-    $ Girl.Taboo = 40
+    $ taboo = 40
+    $ Girl.taboo = 40
     if Girl.clothing[7]:
 
         if Girl.clothing[7] == 2:
@@ -1523,14 +1523,14 @@ label Date_Prep(Girl=0):
             $ Girl.outfit = "casual1"
     else:
         $ Options = ["casual2", "casual1"]
-        $ Options.append("custom1") if Girl.Custom1[0] == 2 else Options
-        $ Options.append("custom2") if Girl.Custom2[0] == 2 else Options
-        $ Options.append("custom3") if Girl.Custom3[0] == 2 else Options
+        $ Options.append("custom1") if Girl.first_custom_outfit[0] == 2 else Options
+        $ Options.append("custom2") if Girl.second_custom_outfit[0] == 2 else Options
+        $ Options.append("custom3") if Girl.third_custom_outfit[0] == 2 else Options
         $ renpy.random.shuffle(Options)
         $ Girl.outfit = Options[0]
         $ del Options[:]
     $ Girl.location = "date"
-    $ Girl.change_outfit(Changed=1)
+    $ Girl.change_outfit(outfit_changed=1)
     $ Girl.change_face("_smile")
     return
 
@@ -2079,7 +2079,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
     elif OptionsDS[0] == "anal":
         "Halfway through the meal, [Girl.name] gets a sly look on her face."
         "She nods her head suggestively towards the restrooms, and then excuses herself."
-        call Date_Sex_Break (Girl, Previous)
+        call check_if_second_minds (Girl, Previous)
         if _return == 4:
             $ Girl.change_face("_sadside", 2)
             "You wait a few minutes until she returns, seemingly a bit annoyed at you."
@@ -2115,7 +2115,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             $ Girl.change_stat("inhibition", 50, 9)
             $ Girl.change_stat("inhibition", 80, 3)
             $ Girl.addiction -= 20
-            $ Girl.SeenPeen += 1
+            $ Girl.seen_peen += 1
             $ Girl.action_counter["anal"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("anal")
@@ -2124,7 +2124,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
     elif OptionsDS[0] == "sex":
         "Halfway through the meal, [Girl.name] gets a sly look on her face."
         "She nods her head suggestively towards the restrooms, and then excuses herself."
-        call Date_Sex_Break (Girl, Previous)
+        call check_if_second_minds (Girl, Previous)
         if _return == 4:
             $ Girl.change_face("_sadside", 2)
             "You wait a few minutes until she returns, seemingly a bit annoyed at you."
@@ -2160,7 +2160,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             $ Girl.change_stat("inhibition", 50, 8)
             $ Girl.change_stat("inhibition", 80, 2)
             $ Girl.addiction -= 20
-            $ Girl.SeenPeen += 1
+            $ Girl.seen_peen += 1
             $ Girl.action_counter["sex"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("sex")
@@ -2169,7 +2169,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
     elif OptionsDS[0] == "blowjob":
         "Halfway through the meal, [Girl.name] gets a sly look on her face, then knocks her fork off the table."
         "She ducks under the table after it, and unzips your pants."
-        call Date_Sex_Break (Girl, Previous)
+        call check_if_second_minds (Girl, Previous)
         if _return == 4:
             $ Girl.change_face("_sadside", 2)
             "You zip them back up and shoo her away. She gets back up from under the table."
@@ -2238,7 +2238,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                     $ Girl.daily_history.append("swallow")
             $ Girl.change_stat("inhibition", 30, 4)
             $ Girl.change_stat("inhibition", 80, 2)
-            $ Girl.SeenPeen += 1
+            $ Girl.seen_peen += 1
             $ Girl.addiction -= 10
             $ Girl.action_counter["blowjob"] += 1
             $ Player.semen -= 1
@@ -2247,7 +2247,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 call Date_Bonus (Previous, -10)
     elif OptionsDS[0] == "handjob":
         "Halfway through the meal, [Girl.name] gets a sly look on her face, then shifts her chair around next to yours."
-        call Date_Sex_Break (Girl, Previous)
+        call check_if_second_minds (Girl, Previous)
         if _return == 4:
 
             $ Girl.change_face("_sadside", 2)
@@ -2275,7 +2275,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 $ Line = "She"
             if Girl.action_counter["blowjob"] and (approval_check(Girl, 1200) or Girl == JubesX):
                 "Just as you're about to cum, [Girl.name] ducks her head under the table and comes up with a mouth full."
-                $ Girl.SeenPeen += 1
+                $ Girl.seen_peen += 1
                 $ Girl.action_counter["blowjob"] += 1
                 $ Girl.addiction -= 20
                 $ Girl.event_counter["swallowed"] += 1
@@ -2315,7 +2315,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 call Date_Bonus (Previous, -5)
     elif OptionsDS[0] == "pussy":
         "Halfway through the meal, [Girl.name] gets a sly look on her face, then shifts her chair around next to yours."
-        call Date_Sex_Break (Girl, Previous)
+        call check_if_second_minds (Girl, Previous)
         if _return == 4:
 
             if Girl.legs:
@@ -2390,7 +2390,7 @@ label Dinner_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
     elif OptionsDS[0] == "footjob":
         "Halfway through the meal, [Girl.name] gets a sly look on her face, then shifts a bit lower in her seat."
         "You suddenly feel her foot in your lap, gently caressing your cock."
-        call Date_Sex_Break (Girl, Previous)
+        call check_if_second_minds (Girl, Previous)
         if _return == 4:
             $ Girl.change_face("_sadside", 2)
             "You shift uncomfortably and push her foot away."
@@ -2838,7 +2838,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
         $ Girl.recent_history.append("kiss")
         $ Girl.recent_history.append("moviesex")
         $ Girl.daily_history.append("kiss")
-        call Date_Sex_Break (Girl, Previous)
+        call check_if_second_minds (Girl, Previous)
         if _return == 4:
 
             "You settle back into your seats and watch the rest of the film."
@@ -2877,7 +2877,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 "As you make out, [Girl.name] reaches down and undoes your fly. She pulls her panties aside and shifts into your lap."
             else:
                 "As you make out, [Girl.name] reaches down and undoes your fly. She hikes her skirt up a bit and shifts into your lap."
-            call Date_Sex_Break (Girl, Previous)
+            call check_if_second_minds (Girl, Previous)
             if _return == 3:
 
                 call Sex_Basic_Dialog (Girl, "partner")
@@ -2931,7 +2931,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 ch_v "A movie and a free fill-up. . ."
             $ Girl.change_stat("inhibition", 50, 4)
             $ Girl.change_stat("inhibition", 90, 3)
-            $ Girl.SeenPeen += 1
+            $ Girl.seen_peen += 1
             $ Girl.action_counter["anal"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("anal")
@@ -2942,7 +2942,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 "As you make out, [Girl.name] reaches down and undoes your fly. She pulls her panties aside and shifts into your lap."
             else:
                 "As you make out, [Girl.name] reaches down and undoes your fly. She hikes her skirt up a bit and shifts into your lap."
-            call Date_Sex_Break (Girl, Previous)
+            call check_if_second_minds (Girl, Previous)
             if _return == 3:
 
                 call Sex_Basic_Dialog (Girl, "partner")
@@ -2996,7 +2996,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 ch_v "A movie and a free fill-up. . ."
             $ Girl.change_stat("inhibition", 50, 4)
             $ Girl.change_stat("inhibition", 90, 3)
-            $ Girl.SeenPeen += 1
+            $ Girl.seen_peen += 1
             $ Girl.action_counter["sex"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("sex")
@@ -3004,7 +3004,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
         elif OptionsDS[0] == "blowjob":
             $ Girl.change_face("_sucking", 1)
             "As you make out, [Girl.name] reaches down and undoes your fly. She then bends down and wraps her lips around it."
-            call Date_Sex_Break (Girl, Previous)
+            call check_if_second_minds (Girl, Previous)
             if _return == 3:
 
                 call Sex_Basic_Dialog (Girl, "partner")
@@ -3059,7 +3059,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                     ch_v "Ugh, what a mess. . ."
             $ Girl.change_stat("inhibition", 40, 3)
             $ Girl.change_stat("inhibition", 80, 2)
-            $ Girl.SeenPeen += 1
+            $ Girl.seen_peen += 1
             $ Girl.action_counter["blowjob"] += 1
             $ Player.semen -= 1
             $ Girl.recent_history.append("blowjob")
@@ -3067,7 +3067,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
         elif OptionsDS[0] == "handjob":
             $ Girl.change_face("_sexy")
             "As you make out, [Girl.name] reaches down and pulls out your cock."
-            call Date_Sex_Break (Girl, Previous)
+            call check_if_second_minds (Girl, Previous)
             if _return == 3:
 
                 call Sex_Basic_Dialog (Girl, "partner")
@@ -3164,7 +3164,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
                 "As you make out, [Girl.name] grabs your hand and shoves it down her panties."
             else:
                 "As you make out, [Girl.name] grabs your hand and shoves it between her legs."
-            call Date_Sex_Break (Girl, Previous)
+            call check_if_second_minds (Girl, Previous)
             $ Girl.eyes = "_closed"
             if _return == 3:
 
@@ -3203,7 +3203,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
             $ Girl.change_face("_sexy")
             "After making out for a few minutes, [Girl.name] gets a sly look on her face and reaches into her pocket."
             "After a second, she hands you a cloth lump, apparently her panties."
-            $ Girl.daily_history.append("pantyless")
+            $ Girl.daily_history.append("commando")
             $ Girl.change_stat("inhibition", 60, 2)
             $ Girl.underwear = ""
             if Girl == RogueX:
@@ -3892,7 +3892,7 @@ label Date_Paying(Activity="dinner", Total_Cost=0):
 
     if JeanX in Party and Line in (JeanX,"split","deadbeat"):
 
-        ch_j "waiter?"
+        ch_j "Waiter?"
         $ JeanX.change_face("_confused",Eyes="psychic")
         ch_j ". . ."
         $ JeanX.change_face("_sly")
@@ -3987,7 +3987,7 @@ label Player_Date_End:
         $ temp_Girls[0].location = "bg_player"
         $ temp_Girls.remove(temp_Girls[0])
     call set_the_scene (Dress=0)
-    call Taboo_Level
+    call taboo_Level
     if len(Party) >= 2:
         "You bring the girls to your own door."
         menu:
@@ -4032,7 +4032,7 @@ label Girl_Date_End(Girl=0):
         if len(Party) >= 2 and Party[1] != Girl:
             $ Party[1].location = Girl.home
         call set_the_scene (Dress=0)
-        call Taboo_Level
+        call taboo_Level
 
     if len(Party) >= 2 and Party[0] != Girl:
 
@@ -4138,7 +4138,7 @@ label Girl_Date_End(Girl=0):
                 ch_s "I enjoyed the evening, [Girl.player_petname]. We should do this again."
             elif Girl == JubesX:
                 ch_v "Well, that was fun, [Girl.player_petname]. Maybe we could do this again."
-        $ Girl.Date += 1
+        $ Girl.went_on_date += 1
         menu:
             extend ""
             "Could I get a good night kiss?":
@@ -4158,7 +4158,7 @@ label Girl_Date_End(Girl=0):
                         ch_s "I suppose that it would not hurt. . ."
                     elif Girl == JubesX:
                         ch_v "Sure, why not. . ."
-                    call Date_Sex_Break (Girl, 0, 2)
+                    call check_if_second_minds (Girl, 0, 2)
                     $ multi_action = 0
                     call KissPrep (Girl)
                     $ multi_action = True
@@ -4197,7 +4197,7 @@ label Girl_Date_End(Girl=0):
                             ch_v "Did you wanna. . . invite me in?"
                         else:
                             ch_v "Did you wanna. . . come inside?"
-                    call Date_Sex_Break (Girl)
+                    call check_if_second_minds (Girl)
                     if _return == 4:
                         if bg_current == "bg_player":
                             ch_p "You should probably get going, sorry."
@@ -4242,7 +4242,7 @@ label Girl_Date_End(Girl=0):
                         ch_s "Yes, I think that I might, [Girl.player_petname]."
                     elif Girl == JubesX:
                         ch_v "Oh, sure! The night's young."
-                    call Date_Sex_Break (Girl)
+                    call check_if_second_minds (Girl)
                     if _return == 4:
                         ch_p "I should probably get going, sorry."
                         call Girl_Date_Over (Girl, 0)
@@ -4264,7 +4264,7 @@ label Girl_Date_End(Girl=0):
                         ch_s "I was hoping that you would ask. . ."
                     elif Girl == JubesX:
                         ch_v "Oh, sure! The night's young."
-                    call Date_Sex_Break (Girl)
+                    call check_if_second_minds (Girl)
                     if _return == 4:
                         ch_p "You should probably get going, sorry."
                         call Girl_Date_Over (Girl, 0)
@@ -4290,7 +4290,7 @@ label Girl_Date_End(Girl=0):
     if bg_current != "bg_player":
         $ bg_current = Girl.home
     call set_the_scene (Dress=0)
-    call Taboo_Level
+    call taboo_Level
     $ Girl.change_face("_sexy", 1)
     if Girl == RogueX:
         if len(Party) < 2:

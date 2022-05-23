@@ -821,7 +821,7 @@ label Kitty_Sex_Launch(Line=primary_action):
     elif Line == "hotdog":
         $ Player.cock_position = "out"
     elif Line == "footjob":
-        $ ShowFeet = 1
+        $ show_feet = 1
         $ Player.cock_position = "footjob"
     elif Line == "massage":
         $ Player.sprite = 0
@@ -849,7 +849,7 @@ label Kitty_Sex_Reset:
         return
     if not renpy.showing("Kitty_sex_animation"):
         return
-    $ KittyX.ArmPose = 2
+    $ KittyX.arm_pose = 2
     hide Kitty_sex_animation
     call Kitty_Hide
 
@@ -915,7 +915,7 @@ image Kitty_Doggy_Animation:
                     "action_speed ", "Kitty_Doggy_Feet1",
                     "True", "Kitty_Doggy_Feet0",
                     ),
-            "not Player.sprite and ShowFeet", "Kitty_Doggy_Feet0",
+            "not Player.sprite and show_feet", "Kitty_Doggy_Feet0",
             "True", Null(),
             ),
         )
@@ -936,16 +936,16 @@ image Kitty_Doggy_Body:
 
             "not KittyX.bra", Null(),
             "KittyX.top_pulled_up", ConditionSwitch(
-                    "KittyX.top and KittyX.top != 'towel' and KittyX.top != 'jacket'", Null(),
-                    "KittyX.bra == 'dress' and KittyX.top and KittyX.top != 'towel'", "images/KittyDoggy/Kitty_Doggy_Bra_Dress_UpC.png",
-                    "KittyX.bra == 'dress'", "images/KittyDoggy/Kitty_Doggy_Bra_Dress_Up.png",
+                    "KittyX.top and KittyX.top != 'towel' and KittyX.top != '_jacket'", Null(),
+                    "KittyX.bra == '_dress' and KittyX.top and KittyX.top != 'towel'", "images/KittyDoggy/Kitty_Doggy_Bra_Dress_UpC.png",
+                    "KittyX.bra == '_dress'", "images/KittyDoggy/Kitty_Doggy_Bra_Dress_Up.png",
                     "KittyX.bra == 'cami'", "images/KittyDoggy/Kitty_Doggy_Bra_Cami_Up.png",
                     "KittyX.bra == 'lace_bra'", "images/KittyDoggy/Kitty_Doggy_Bra_Lace.png",
                     "KittyX.bra == 'sports_bra'", "images/KittyDoggy/Kitty_Doggy_Bra_Sports_Up.png",
                     "KittyX.bra == 'bikini_top'", "images/KittyDoggy/Kitty_Doggy_Bra_Bikini_Up.png",
                     "True", "images/KittyDoggy/Kitty_Doggy_Bra.png",
                     ),
-            "KittyX.bra == 'dress'", "images/KittyDoggy/Kitty_Doggy_Bra_Dress.png",
+            "KittyX.bra == '_dress'", "images/KittyDoggy/Kitty_Doggy_Bra_Dress.png",
             "KittyX.bra == 'cami'", "images/KittyDoggy/Kitty_Doggy_Bra_Cami.png",
             "KittyX.bra == 'lace_bra'", "images/KittyDoggy/Kitty_Doggy_Bra_Lace.png",
             "KittyX.bra == 'sports_bra'", "images/KittyDoggy/Kitty_Doggy_Bra_Sports.png",
@@ -960,7 +960,7 @@ image Kitty_Doggy_Body:
         (0,0), ConditionSwitch(
 
             "not KittyX.top", Null(),
-            "KittyX.top == 'jacket'", "images/KittyDoggy/Kitty_Doggy_Over_Jacket.png",
+            "KittyX.top == '_jacket'", "images/KittyDoggy/Kitty_Doggy_Over_Jacket.png",
             "KittyX.top == 'red_shirt'", "images/KittyDoggy/Kitty_Doggy_Over_Red.png",
             "KittyX.top == 'pink_top'", "images/KittyDoggy/Kitty_Doggy_Over_Pink.png",
             "KittyX.top == 'towel' and not KittyX.top_pulled_up", "images/KittyDoggy/Kitty_Doggy_Over_Towel.png",
@@ -1051,7 +1051,7 @@ image Kitty_Doggy_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "KittyX.wet or KittyX.hair == 'wet'", "images/KittyDoggy/Kitty_Doggy_Hair_Wet.png",
+            "KittyX.wet or KittyX.hair == '_wet'", "images/KittyDoggy/Kitty_Doggy_Hair_Wet.png",
             "KittyX.hair == 'long'", "images/KittyDoggy/Kitty_Doggy_Hair_Long.png",
             "True", "images/KittyDoggy/Kitty_Doggy_Hair_Evo.png",
             ),
@@ -1132,7 +1132,7 @@ image Kitty_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "not KittyX.upskirt", Null(),
-            "KittyX.legs == 'dress'", "images/KittyDoggy/Kitty_Doggy_Legs_Dress_Back.png",
+            "KittyX.legs == '_dress'", "images/KittyDoggy/Kitty_Doggy_Legs_Dress_Back.png",
             "KittyX.legs == 'shorts' and KittyX.grool", "images/KittyDoggy/Kitty_Doggy_Legs_Shorts_BackW.png",
             "KittyX.legs == 'shorts'", "images/KittyDoggy/Kitty_Doggy_Legs_Shorts_Back.png",
             "KittyX.legs == 'yoga_pants'", "images/KittyDoggy/Kitty_Doggy_Legs_Yoga_Back.png",
@@ -1293,7 +1293,7 @@ image Kitty_Doggy_Ass:
             ),
         (0,0), ConditionSwitch(
 
-            "KittyX.legs == 'dress'", ConditionSwitch(
+            "KittyX.legs == '_dress'", ConditionSwitch(
                     "KittyX.upskirt and Player.sprite and Player.cock_position == 'anal' and action_speed" , "images/KittyDoggy/Kitty_Doggy_Legs_Dress_Up.png",
                     "KittyX.upskirt", "images/KittyDoggy/Kitty_Doggy_Legs_Dress_Up.png",
                     "True", "images/KittyDoggy/Kitty_Doggy_Legs_Dress.png",
@@ -1335,13 +1335,13 @@ image Kitty_Doggy_Ass:
         (0,0), ConditionSwitch(
 
             "KittyX.legs == 'blue_skirt' and KittyX.upskirt", Null(),
-            "KittyX.legs == 'dress' and KittyX.upskirt", Null(),
+            "KittyX.legs == '_dress' and KittyX.upskirt", Null(),
             "KittyX.top == 'pink_top'", "images/KittyDoggy/Kitty_Doggy_Over_Pink_Tail.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "KittyX.legs == 'dress' and KittyX.upskirt", Null(),
+            "KittyX.legs == '_dress' and KittyX.upskirt", Null(),
             "KittyX.top == 'towel' and KittyX.top_pulled_up", Null(),
             "KittyX.top == 'towel' and KittyX.upskirt", "images/KittyDoggy/Kitty_Doggy_Legs_Towel_Up.png",
             "KittyX.top == 'towel'", "images/KittyDoggy/Kitty_Doggy_Legs_Towel.png",
@@ -2265,7 +2265,7 @@ label Kitty_Doggy_Reset:
     if not renpy.showing("Kitty_Doggy_Animation"):
         return
 
-    $ KittyX.ArmPose = 2
+    $ KittyX.arm_pose = 2
     $ KittyX.spriteVer = 0
     hide Kitty_Doggy_Animation
     call Kitty_Hide
@@ -2440,7 +2440,7 @@ image Kitty_BJ_Head:
         (858,928),
         (0,0), ConditionSwitch(
 
-            "KittyX.wet or KittyX.hair == 'wet'", "images/KittyBJFace/Kitty_BJ_hairbackWet.png",
+            "KittyX.wet or KittyX.hair == '_wet'", "images/KittyBJFace/Kitty_BJ_hairbackWet.png",
             "True", Null(),
             ),
 
@@ -2552,7 +2552,7 @@ image Kitty_BJ_Head:
             ),
         (0,0), ConditionSwitch(
 
-            "KittyX.wet or KittyX.hair == 'wet'", "images/KittyBJFace/Kitty_BJ_Hair_Wet.png",
+            "KittyX.wet or KittyX.hair == '_wet'", "images/KittyBJFace/Kitty_BJ_Hair_Wet.png",
             "KittyX.hair == 'long'", "images/KittyBJFace/Kitty_BJ_Hair_Long.png",
             "KittyX.hair == 'evo'", "images/KittyBJFace/Kitty_BJ_Hair_Evo.png",
             "True", Null(),
@@ -2764,7 +2764,7 @@ label Kitty_BJ_Launch(Line=primary_action):
         with dissolve
 
     if Line == "L":
-        if Taboo:
+        if taboo:
             if len(Present) >= 2:
                 if Present[0] != KittyX:
                     "[KittyX.name] looks back at [Present[0].name] to see if she's watching."
@@ -3514,7 +3514,7 @@ label Kitty_TJ_Launch(Line=primary_action):
     show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
         alpha 1
         ease 1 zoom 2 xpos 700 yoffset 50
-    if Line == "L" and Taboo:
+    if Line == "L" and taboo:
         if len(Present) >= 2:
             if Present[0] != KittyX:
                 "[KittyX.name] looks back at [Present[0].name] to see if she's watching."
@@ -3530,7 +3530,7 @@ label Kitty_TJ_Launch(Line=primary_action):
         "She tugs off her [KittyX.bra] and throws it aside."
     $ KittyX.top = ""
     $ KittyX.bra = ""
-    $ KittyX.ArmPose = 0
+    $ KittyX.arm_pose = 0
     call Kitty_First_Topless
     if Line == "L":
         if not KittyX.action_counter["titjob"]:
@@ -3677,7 +3677,7 @@ label Kitty_HJ_Launch(Line=primary_action):
         with dissolve
 
     if Line == "L":
-        if Taboo:
+        if taboo:
             if len(Present) >= 2:
                 if Present[0] != KittyX:
                     "[KittyX.name] looks back at [Present[0].name] to see if she's watching."
@@ -3793,7 +3793,7 @@ label Kitty_ThreewayBreasts_Launch:
     show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
 
         ease 0.5 pos (700,200) xzoom -1.5 yzoom 1.5
-    $ KittyX.ArmPose = 1
+    $ KittyX.arm_pose = 1
     return
 
 

@@ -1,43 +1,50 @@
-label Rogue_SexAct(Act=0):
-    if AloneCheck(Girl) and Girl.Taboo == 20:
-        $ Girl.Taboo = 0
-        $ Taboo = 0
+label SexAct(Girl, action = 0):
+    if AloneCheck(Girl) and Girl.taboo == 20:
+        $ Girl.taboo = 0
+        $ taboo = 0
+
     call shift_focus (Girl)
-    if Act == "SkipTo":
+
+    if action == "SkipTo":
         $ renpy.pop_call()
         $ renpy.pop_call()
 
         call SkipTo (Girl)
-    elif Act == "switch":
+    elif action == "switch":
         $ renpy.pop_call()
-
-
-    elif Act == "masturbate":
+    elif action == "masturbation":
         call before_masturbation
+
         if not action_context:
             return
-    elif Act == "lesbian":
+    elif action == "lesbian":
         call Les_Prep (Girl)
+
         if not action_context:
             return
-    elif Act == "kiss":
+    elif action == "kiss":
         call KissPrep (Girl)
+
         if not action_context:
             return
-    elif Act == "breasts":
+    elif action == "breasts":
         call Rogue_Fondle_Breasts
+
         if not action_context:
             return
-    elif Act == "blowjob":
+    elif action == "blowjob":
         call Rogue_BJ_Prep
+
         if not action_context:
             return
-    elif Act == "handjob":
+    elif action == "handjob":
         call Rogue_HJ_Prep
+
         if not action_context:
             return
-    elif Act == "sex":
+    elif action == "sex":
         call Rogue_SexPrep
+
         if not action_context:
             return
 
@@ -118,8 +125,8 @@ label masturbate(Girl):
 
                         call well_in_hand_disapproved_lines(Girl, primary_action)
 
-        $ Girl.ArmPose = 1
-        $ Girl.change_outfit(Changed=0)
+        $ Girl.arm_pose = 1
+        $ Girl.change_outfit(outfit_changed=0)
         $ Girl.remaining_actions -= 1
 
         $ Player.change_stat("focus", 50, 30)
@@ -149,7 +156,7 @@ label masturbate(Girl):
 
                 $ renpy.pop_call()
 
-                jump Campus_Map
+                jump campus_Map
             else:
                 call fancy_bumping_into_you_disapproval_lines(Girl, primary_action)
                 call remove_girl (Girl)
@@ -170,7 +177,7 @@ label masturbate(Girl):
             else:
                 "[Girl.name]'s hand slides down her body and begins to caress her pussy."
 
-            $ Girl.SeenPanties = 1
+            $ Girl.seen_underwear = 1
 
             "She starts to slowly rub herself."
 
@@ -206,7 +213,7 @@ label masturbate(Girl):
 
                     "[Girl.name] pulls her hands away from herself."
 
-                    $ Girl.change_outfit(Changed=0)
+                    $ Girl.change_outfit(outfit_changed=0)
                     $ Girl.change_stat("obedience", 90, 1)
                     $ Girl.change_stat("obedience", 50, 1)
                     $ Girl.change_stat("obedience", 30, 2)
@@ -268,11 +275,11 @@ label before_masturbation:
     if "unseen" in Girl.recent_history:
         $ Girl.change_face("_sexy")
         $ Girl.eyes = "_closed"
-        $ Girl.ArmPose = 2
+        $ Girl.arm_pose = 2
         "You see [Girl.name] leaning back, masturbating. You don't think she's noticed you yet."
     else:
         $ Girl.change_face("_sexy")
-        $ Girl.ArmPose = 2
+        $ Girl.arm_pose = 2
         "[Girl.name] lays back and starts to toy with herself."
         if not Girl.action_counter["masturbation"]:
             if Girl.forced:
@@ -293,7 +300,7 @@ label before_masturbation:
         $ renpy.pop_call()
         $ action_context = None
     $ Line = 0
-    if Taboo:
+    if taboo:
         $ Girl.drain_word("no_taboo")
     $ Girl.drain_word("no_masturbation")
     $ Girl.recent_history.append("masturbation")
@@ -383,10 +390,10 @@ label masturbation_cycle:
                                 "Never mind":
                                     jump masturbation_cycle
 
-                        "Show her feet" if not ShowFeet and (Girl.pose == "doggy" or Girl.pose == "sex"):
-                            $ ShowFeet = 1
-                        "Hide her feet" if ShowFeet and (Girl.pose == "doggy" or Girl.pose == "sex"):
-                            $ ShowFeet = 0
+                        "Show her feet" if not show_feet and (Girl.pose == "doggy" or Girl.pose == "sex"):
+                            $ show_feet = 1
+                        "Hide her feet" if show_feet and (Girl.pose == "doggy" or Girl.pose == "sex"):
+                            $ show_feet = 0
                         "Undress [Girl.name]":
 
                             if "unseen" in Girl.recent_history:
@@ -621,7 +628,7 @@ label Rogue_M_Interupted:
                 call masturbation_worn_out_lines(Girl, primary_action)
         "I'm good here. [[Stop]":
             if Girl.love < 800 and Girl.inhibition < 500 and Girl.obedience < 500:
-                $ Girl.change_outfit(Changed=0)
+                $ Girl.change_outfit(outfit_changed=0)
             $ Girl.change_face("_normal")
             $ Girl.brows = "_confused"
 

@@ -16,7 +16,7 @@ label Gifts:
                         if "_dildo" not in Girl.inventory:
                             "You give [Girl.name] the dildo."
                             $ Girl.blushing = "_blush1"
-                            $ Girl.ArmPose = 2
+                            $ Girl.arm_pose = 2
                             $ Girl.held_item = "_dildo"
                             if approval_check(Girl, 800):
                                 $ Girl.change_face("_bemused")
@@ -162,14 +162,14 @@ label Gifts:
                             elif Girl == JubesX:
                                 ch_v "This is way too many. . ."
                         $ Girl.held_item = None
-                        $ Girl.ArmPose = 2
+                        $ Girl.arm_pose = 2
 
                     "Give her the vibrator." if "_vibrator" in Player.inventory:
 
                         if "_vibrator" not in Girl.inventory:
                             "You give [Girl.name] the Shocker Vibrator."
                             $ Girl.blushing = "_blush1"
-                            $ Girl.ArmPose = 2
+                            $ Girl.arm_pose = 2
                             $ Girl.held_item = "_vibrator"
                             if approval_check(Girl, 700):
                                 $ Girl.change_face("_bemused")
@@ -281,7 +281,7 @@ label Gifts:
                             else:
                                 Girl.voice "I already have one of these."
                         $ Girl.held_item = None
-                        $ Girl.ArmPose = 2
+                        $ Girl.arm_pose = 2
 
                     "Give her a butt plug." if "buttplug" in Player.inventory:
                         if "buttplug" not in Girl.inventory:
@@ -388,7 +388,7 @@ label Gifts:
                                     $ Girl.change_stat("love", 50, -5)
                                     $ Girl.change_stat("obedience", 200, 5)
                                     $ Girl.change_stat("inhibition", 200, -5)
-                                    ch_j "wait, did -you- read this?"
+                                    ch_j "Wait, did -you- read this?"
                                 elif Girl == StormX:
                                     ch_s "I do think I need to speak to that girl. . ."
                                 elif Girl == JubesX:
@@ -767,21 +767,21 @@ label Gifts:
                                 elif Girl == KittyX:
                                     if "no_gift_bra" in Girl.daily_history:
                                         ch_k "I don't want these either!"
-                                    elif Girl.SeenPanties:
+                                    elif Girl.seen_underwear:
                                         ch_k "Just because you've seen my panties doesn't mean you get to pick them out."
                                     else:
                                         ch_k "Oh, don't you worry what I've got on down there."
                                 elif Girl == EmmaX:
                                     if "no_gift_bra" in Girl.daily_history:
                                         ch_e "These aren't appropriate either."
-                                    elif Girl.SeenPanties:
+                                    elif Girl.seen_underwear:
                                         ch_e "Just because you've seen my panties doesn't mean you get to pick them out."
                                     else:
                                         ch_e "I don't believe these are appropriate thoughts for you to be having."
                                 elif Girl == LauraX:
                                     if "no_gift_bra" in Girl.daily_history:
                                         ch_l "I don't want these either!"
-                                    elif Girl.SeenPanties:
+                                    elif Girl.seen_underwear:
                                         ch_l "Did you not like the ones I had?"
                                     else:
                                         ch_l "You don't need to worry about my underwear."
@@ -974,9 +974,9 @@ label Gifts:
                                     ch_s "Oh! I understand the purpose of the flap now!"
                                 if Girl == KittyX:
                                     if Girl.inhibition >= 400 or "_blue_skirt" in Girl.inventory:
-                                        $ Girl.Swim[0] = 1
+                                        $ Girl.swimwear[0] = 1
                                 else:
-                                    $ Girl.Swim[0] = 1
+                                    $ Girl.swimwear[0] = 1
                         else:
                             Girl.voice "I already have one of those."
 
@@ -1093,9 +1093,9 @@ label Gifts:
                                     ch_s "Oh! I understand the purpose of the flap now!"
                                 if Girl == KittyX:
                                     if Girl.inhibition >= 400 or "_blue_skirt" in Girl.inventory:
-                                        $ Girl.Swim[0] = 1
+                                        $ Girl.swimwear[0] = 1
                                 else:
-                                    $ Girl.Swim[0] = 1
+                                    $ Girl.swimwear[0] = 1
                         else:
                             Girl.voice "I already have one of those."
 
@@ -1148,7 +1148,7 @@ label Gifts:
                                 $ Girl.recent_history.append("no_gift_skirt")
                                 $ Girl.daily_history.append("no_gift_skirt")
                             if Girl == KittyX and "_bikini_top" in Girl.inventory and "_bikini_bottoms" in Girl.inventory:
-                                $ Girl.Swim[0] = 1
+                                $ Girl.swimwear[0] = 1
                         else:
                             Girl.voice "I already have one of those."
                     "Never mind":
@@ -1159,7 +1159,7 @@ label Gifts:
 
 
                 ch_p "I wanted to talk about your style."
-                call Taboo_Level
+                call taboo_Level
                 $ Line = "Giftstore"
                 call expression Girl.tag + "_Clothes"
             "Switch to. . .":

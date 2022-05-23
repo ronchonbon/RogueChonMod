@@ -4,11 +4,11 @@ label addiction_event(Girl):
     call set_the_scene
     call shift_focus(Girl)
 
-    $ Girl.Event[1] += 1
+    $ Girl.event_happened[1] += 1
 
     $ Player.add_word(1,0,"fix")
 
-    call locked_door(Girl)
+    call locked_door(Girl, entering = True)
 
     if not _return:
         return
@@ -24,23 +24,23 @@ label addiction_event(Girl):
         else:
             "[Girl.name] barges into your room in a tizzy."
 
-    $ Taboo = 0
+    $ taboo = 0
 
-    $ Girl.Taboo = 0
+    $ Girl.taboo = 0
 
     $ bg_current = "bg_player"
 
     $ Girl.location = bg_current
-    $ Girl.change_outfit(Changed=1)
+    $ Girl.change_outfit(outfit_changed=1)
 
     call set_the_scene
     call clear_the_room (Girl)
 
-    if Girl.Event[1] == 1:
+    if Girl.event_happened[1] == 1:
         if Girl == RogueX:
             $ Girl.change_face("_bemused")
 
-            ch_r "Oh, hey there [Girl.player_petname]. You seem to be fitting in well. . ."
+            ch_r "Hey there [Girl.player_petname]. You seem to be fitting in well. . ."
 
             if not Girl.action_counter["kiss"]:
                 ch_r "Look, since the other day when I first. . . touched you,"
@@ -160,6 +160,7 @@ label addiction_event(Girl):
                     pass
                 "Ok.":
                     pass
+
             ch_v "I was able to go out in the sun earlier, but it wore off."
             ch_v "It started to itch, then to burn. . ."
             ch_v "I guess it's only temporary. . ."
@@ -176,7 +177,7 @@ label addiction_event(Girl):
                 "No.":
                     ch_v ". . ."
             ch_v "I guess that is a bit much. . ."
-    elif Girl.Event[1] == 2:
+    elif Girl.event_happened[1] == 2:
         jump second_addiction_event
     else:
         jump third_addiction_event
@@ -206,7 +207,9 @@ label addiction_event(Girl):
                 "She leans in for another kiss."
 
                 $ primary_action = "kiss"
-                call action(Girl)
+
+                call shift_focus(Girl)
+                call before_action
             else:
                 $ Girl.change_face("_sad",2)
 
@@ -249,7 +252,9 @@ label addiction_event(Girl):
                 "She leans in for a kiss."
 
                 $ primary_action = "kiss"
-                call action(Girl)
+
+                call shift_focus(Girl)
+                call before_action
             else:
                 $ Girl.change_face("_sad",2)
 
@@ -292,7 +297,9 @@ label addiction_event(Girl):
                 "She leans in for a kiss."
 
                 $ primary_action = "kiss"
-                call action(Girl)
+
+                call shift_focus(Girl)
+                call before_action
             else:
                 $ Girl.change_stat("lust", 80, 3)
                 $ Girl.change_stat("love", 90, 1)
@@ -332,7 +339,9 @@ label addiction_event(Girl):
                         "She leans in for a kiss."
 
                         $ primary_action = "kiss"
-                        call action(Girl)
+
+                        call shift_focus(Girl)
+                        call before_action
                     "Only if we can make out a bit." if Girl not in (LauraX,JeanX):
                         $ Girl.change_stat("love", 80, 3)
                         $ Girl.change_stat("obedience", 40, 5)
@@ -348,7 +357,9 @@ label addiction_event(Girl):
                             ch_s "Oh. I suppose we could. . ."
 
                         $ primary_action = "kiss"
-                        call action(Girl)
+
+                        call shift_focus(Girl)
+                        call before_action
                     "Not good enough.":
                         $ Girl.change_stat("love", 200, -5)
                         $ Girl.brows = "_angry"
@@ -373,7 +384,8 @@ label addiction_event(Girl):
 
                 $ primary_action = "kiss"
 
-                call action(Girl)
+                call shift_focus(Girl)
+                call before_action
             else:
                 $ Girl.change_stat("lust", 80, 3)
                 $ Girl.change_stat("love", 90, 1)
@@ -405,7 +417,8 @@ label addiction_event(Girl):
 
                         $ primary_action = "kiss"
 
-                        call action(Girl)
+                        call shift_focus(Girl)
+                        call before_action
                     "Only if we can make out a bit.":
                         $ Girl.change_stat("love", 80, 3)
                         $ Girl.change_stat("obedience", 40, 5)
@@ -415,7 +428,8 @@ label addiction_event(Girl):
 
                         $ primary_action = "kiss"
 
-                        call action(Girl)
+                        call shift_focus(Girl)
+                        call before_action
                     "Not good enough.":
                         $ Girl.change_stat("love", 200, -5)
                         $ Girl.brows = "_angry"
@@ -611,7 +625,7 @@ label second_addiction_event:
     jump addiction_good_end
 
 label third_addiction_event:
-    $ Girl.Event[1] += 1
+    $ Girl.event_happened[1] += 1
     $ Girl.change_face("_manic",2)
 
     if Girl == RogueX:
@@ -747,24 +761,24 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
         $ between_event_count += 1
 
     if Girl == RogueX:
-        if Girl.Event[1] == 1:
+        if Girl.event_happened[1] == 1:
             ch_r "Fine then, what would work for you?"
         else:
             ch_r "What do I need to do for another touch?"
     elif Girl == KittyX:
-        if Girl.Event[1] == 1:
+        if Girl.event_happened[1] == 1:
             ch_k "So[Girl.Like]what do you want?"
         else:
             ch_k "Ok, so what'll it take to get another hit?"
     elif Girl == EmmaX:
-        if Girl.Event[1] == 1:
+        if Girl.event_happened[1] == 1:
             ch_e "Very well, what is it that you want?"
         else:
             ch_e "What would it take then?"
     elif Girl == LauraX:
         ch_l "Ok, fine, what do you want?"
     elif Girl == JeanX:
-        if Girl.Event[1] == 1:
+        if Girl.event_happened[1] == 1:
             ch_j "What is it that you want?"
         else:
             ch_j "What'll it take?"
@@ -777,7 +791,8 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
         menu:
             "Do you want to lock the door first?"
             "Yes":
-                "You go to lock the door"
+                "You go to lock the door."
+
                 if not approval_check(Girl, 1000):
                     $ Girl.change_face("_perplexed")
                     $ Girl.change_stat("obedience", 60, 2)
@@ -802,7 +817,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                 $ Player.traits.append("locked")
 
-                call Taboo_Level
+                call taboo_Level
             "No":
                 pass
     while between_event_count:
@@ -842,11 +857,13 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                         ch_s "Well then. . ."
                     elif Girl == JubesX:
                         ch_v "Then I suppose I choose. . ."
+
                     "She leans in for a kiss."
 
                     $ primary_action = "kiss"
 
-                    call action(Girl)
+                    call shift_focus(Girl)
+                    call before_action
                 elif approval_check(Girl, 650, "LI",Alt=[[RogueX],600]):
                     $ Girl.change_stat("lust", 80, 3)
                     $ Girl.change_stat("love", 80, 5)
@@ -875,7 +892,8 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                     $ primary_action = "kiss"
 
-                    call action(Girl)
+                    call shift_focus(Girl)
+                    call before_action
                 else:
                     $ Girl.change_stat("lust", 80, 3)
                     $ Girl.change_stat("love", 80, 6)
@@ -910,11 +928,13 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                         ch_s "A kiss? I suppose it could work."
                     elif Girl == JubesX:
                         ch_v "You've convinced me. . ."
+
                     "She leans in for a kiss."
 
                     $ primary_action = "kiss"
 
-                    call action(Girl)
+                    call shift_focus(Girl)
+                    call before_action
 
                     $ Girl.addiction = 20 if Girl.addiction > 20 else Girl.addiction
                     $ Girl.addiction = 5 if Girl == JubesX else Girl.addiction
@@ -1106,9 +1126,6 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                 call Group_Strip(Girl)
 
-                if Girl.location != bg_current:
-                    jump Misplaced
-
                 menu:
                     "Ok, that was enough, you can touch me now.":
                         call Girl_Tag (Girl)
@@ -1154,16 +1171,16 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                                 ch_s "Well. . . that's unfortunate."
                             elif Girl == JubesX:
                                 ch_v "Cheh."
-            "I have some ideas. . ." if Girl.Event[1] >= 10:
+            "I have some ideas. . ." if Girl.event_happened[1] >= 10:
                 $ focused_Girl = Girl
 
                 call enter_main_sex_menu
-            "Have you considered a . . . chemical solution?" if Girl.Event[1] >= 10 and Player.semen and not Girl.Chat[2]:
+            "Have you considered a . . . chemical solution?" if Girl.event_happened[1] >= 10 and Player.semen and not Girl.had_chat[2]:
                 call addiction_serum
-            "Would you like some \"serum?\"" if Girl.Event[1] >= 10 and Player.semen and Girl.Chat[2]:
+            "Would you like some \"serum?\"" if Girl.event_happened[1] >= 10 and Player.semen and Girl.had_chat[2]:
                 call addiction_serum
-            "Nope, you're on your own":
-                if Girl.Event[1] >= 10:
+            "Nope, you're on your own." if menu_context != "sunshock":
+                if Girl.event_happened[1] >= 10:
                     call addiction_fix_beg
                 elif Girl.addiction >= 70:
                     $ Girl.change_face("_angry",2)
@@ -1223,6 +1240,12 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
                     call remove_girl (Girl)
 
                     jump addiction_bad_end
+            "Oh, never mind." if menu_context == "sunshock":
+                $ JubesX.change_stat("love", 70, -2)
+                $ JubesX.change_stat("love", 90, -2)
+                $ JubesX.change_stat("obedience", 70, 1)
+                $ JubesX.change_stat("obedience", 90, 2)
+                $ JubesX.change_face("_angry",1)
 
         if "_angry" in Girl.recent_history:
             if Girl.addiction >= 80:
@@ -1463,7 +1486,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
         $ Girl.addiction_rate += 2
         $ Girl.resistance = 1 if Girl.resistance < 1 else Girl.resistance
-        $ Girl.Event[1] = 10
+        $ Girl.event_happened[1] = 10
 
         jump addiction_bad_end
 
@@ -1488,7 +1511,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
 label addiction_good_end:
     $ Girl.daily_history.append("fixed")
-    $ Girl.Event[1] = 10
+    $ Girl.event_happened[1] = 10
     $ Girl.change_face("_surprised")
 
     if Girl == RogueX:
@@ -1546,7 +1569,7 @@ label addiction_good_end:
 
     call Sex_Over
 
-    if Girl not in Digits:
+    if Girl not in phonebook:
         if Girl == RogueX:
             ch_r "I'm going to need to get in touch, you should probably have my number, here you go."
         elif Girl == KittyX:
@@ -1563,7 +1586,7 @@ label addiction_good_end:
         elif Girl == JubesX:
             ch_v "I guess I should give you my number. . ."
 
-        $ Digits.append(Girl)
+        $ phonebook.append(Girl)
     if Girl == RogueX:
         ch_r "I may need to do this again sometime. . . I'll see ya later."
     elif Girl == KittyX:
@@ -1582,7 +1605,7 @@ label addiction_good_end:
     $ Girl.resistance = 1
 
 label addiction_bad_end:
-    $ Girl.Event[3] = 5
+    $ Girl.event_happened[3] = 5
     $ Girl.recent_history.append("addiction")
     $ Girl.daily_history.append("addiction")
     $ Girl.drain_word("ultimatum",0)
@@ -1600,21 +1623,17 @@ label addiction_bad_end:
     call Sex_Over
     call checkout
 
-    $ Girl.ArmPose = 1
+    $ Girl.arm_pose = 1
 
     if Girl not in Party:
         if bg_current == Girl.home:
             "You head back to your room."
-
-            $ bg_current = "bg_player"
         elif bg_current == "bg_player" and Girl.location == bg_current:
             "[Girl.name] heads out."
 
         call remove_girl (Girl)
 
-    $ renpy.pop_call()
-
-    jump Misplaced
+    return
 
 label addiction_fix_beg:
     $ Girl.change_face("_angry")
@@ -1762,7 +1781,7 @@ label addiction_fix(Girl):
     call shift_focus(Girl)
 
     $ Girl.location = bg_current
-    $ Girl.change_outfit(Changed=1)
+    $ Girl.change_outfit(outfit_changed=1)
 
     call locked_door(Girl)
 
@@ -1774,9 +1793,9 @@ label addiction_fix(Girl):
 
     $ Girl.change_face("_manic")
 
-    $ Taboo = 0
+    $ taboo = 0
 
-    $ Girl.Taboo = 0
+    $ Girl.taboo = 0
 
     if bg_current != "bg_player" and bg_current != Girl.home:
         if Girl.location == bg_current or Girl in Party:
@@ -1788,7 +1807,7 @@ label addiction_fix(Girl):
             "[Girl.name] turns to you with a hungry look."
         else:
             "[Girl.name] pops into your room in a bit of a tizzy."
-    if Girl.Event[1] < 11:
+    if Girl.event_happened[1] < 11:
         if Girl == RogueX:
             ch_r "Hey, so we figured out what's causing this buzz."
             ch_r "Since I saw you last, it's been easier to deal with, it builds slower, goes away faster."
@@ -1950,7 +1969,7 @@ label addiction_fix_end:
     $ Girl.mouth = "_sad"
 
     if Girl == RogueX:
-        if Girl.Event[1] < 11:
+        if Girl.event_happened[1] < 11:
             if "forced tag" in Girl.recent_history:
                 ch_r "I got what I needed. I really wish that I could avoid it, but it looks like I'm stuck with you."
                 ch_r "Just. . . in future maybe try to be less of a dick about it?"
@@ -1974,7 +1993,7 @@ label addiction_fix_end:
             else:
                 ch_r "Well, looks like we both got what we wanted. I guess I'll see you around."
     elif Girl == KittyX:
-        if Girl.Event[1] < 11:
+        if Girl.event_happened[1] < 11:
             if "forced tag" in Girl.recent_history:
                 ch_k "Ok, that should do it. . ."
                 ch_k "Could you maybe not force me into that though?"
@@ -1998,7 +2017,7 @@ label addiction_fix_end:
             else:
                 ch_k "Well, you seemed to have fun. . . I'll see you around."
     elif Girl == EmmaX:
-        if Girl.Event[1] < 11:
+        if Girl.event_happened[1] < 11:
             if "forced tag" in Girl.recent_history:
                 ch_e "Well. . . I suppose that will satisfy me."
                 ch_e "You could perhaps catch more flies with honey, you know. . ."
@@ -2023,7 +2042,7 @@ label addiction_fix_end:
                 ch_e "Well. . . you seem to have gotten the best of this arrangement. . ."
                 ch_e "For now, at least. . ."
     elif Girl == LauraX:
-        if Girl.Event[1] < 11:
+        if Girl.event_happened[1] < 11:
             if "forced tag" in Girl.recent_history:
                 ch_l "Ok, that should do it."
                 ch_l "Maybe don't be such an asshole though."
@@ -2051,7 +2070,7 @@ label addiction_fix_end:
 
                 ch_l "Ok, looks like you got what you wanted. Guess I'll see you around."
     elif Girl == JeanX:
-        if Girl.Event[1] < 11:
+        if Girl.event_happened[1] < 11:
             if "forced tag" in Girl.recent_history:
                 ch_j "Ok, that's the stuff. . ."
             elif not Girl.forced:
@@ -2084,7 +2103,7 @@ label addiction_fix_end:
 
                 ch_j "Ok, I guess that'll be all. . ."
     elif Girl == StormX:
-        if Girl.Event[1] < 11:
+        if Girl.event_happened[1] < 11:
             if "forced tag" in Girl.recent_history:
                 $ Girl.change_stat("love", 80, 5)
                 $ Girl.change_stat("obedience", 50, 5)
@@ -2115,7 +2134,7 @@ label addiction_fix_end:
                 ch_s "Well. . . I hope you are also satisfied. . ."
                 ch_s "For now, I am as well. . ."
     elif Girl == JubesX:
-        if Girl.Event[1] < 11:
+        if Girl.event_happened[1] < 11:
             if "forced tag" in Girl.recent_history:
                 ch_v "Well. . . I'm sorry it came to that. . ."
                 ch_v "I hope we can work together better than this. . ."
@@ -2139,10 +2158,10 @@ label addiction_fix_end:
             else:
                 ch_v "Ok, I guess we got what we wanted from this. . ."
 
-    if Girl.Event[1] < 11:
-        $ Girl.Event[1] = 11
+    if Girl.event_happened[1] < 11:
+        $ Girl.event_happened[1] = 11
 
-    $ Girl.Event[1] += 1
+    $ Girl.event_happened[1] += 1
     $ Girl.daily_history.append("fixed")
 
     if "forced tag" not in Girl.recent_history:
@@ -2239,7 +2258,7 @@ label addiction_serum:
     $ stored_count = Girl.remaining_actions
     $ Girl.remaining_actions = 0
 
-    if not Girl.Chat[2]:
+    if not Girl.had_chat[2]:
         $ Girl.change_face("_confused")
 
         if Girl == RogueX:
@@ -2404,13 +2423,13 @@ label addiction_serum:
 
                 $ approval_bonus += 20
 
-                $ Girl.Chat[3] = 1
+                $ Girl.had_chat[3] = 1
             "Never mind.":
                 $ Girl.remaining_actions = stored_count
 
                 return
 
-    elif Girl.Chat[3]:
+    elif Girl.had_chat[3]:
         $ Girl.change_face("_bemused", 1)
 
         $ approval_bonus += 20
@@ -2499,7 +2518,7 @@ label addiction_serum:
                 $ Girl.brows = "_normal"
 
                 ch_v "Sure, why not."
-    elif Girl.Chat[2]:
+    elif Girl.had_chat[2]:
         ch_p "I was just thinking, I could whip up more of that serum. . ."
 
         $ Girl.change_face("_bemused")
@@ -2540,21 +2559,21 @@ label addiction_serum:
             "Well, a handy might do the trick. . .":
                 $ Girl.change_face("_sexy")
 
-                if approval_check(Girl, 1100) or (approval_check(Girl, 800) and Girl.Chat[2]):
-                    $ Girl.ArmPose = 2
+                if approval_check(Girl, 1100) or (approval_check(Girl, 800) and Girl.had_chat[2]):
+                    $ Girl.arm_pose = 2
 
                     if Girl == RogueX:
-                        if Girl.Chat[3]:
+                        if Girl.had_chat[3]:
                             ch_r "Heh, I guess I could work the pump for a bit."
                         else:
                             ch_r "I guess if that's what you want. . ."
                     elif Girl == KittyX:
-                        if Girl.Chat[3]:
+                        if Girl.had_chat[3]:
                             ch_k "Oh, we're going \"manual\" then. . ."
                         else:
                             ch_k "Hmm, yeah, cost of doing business. . ."
                     elif Girl == EmmaX:
-                        if Girl.Chat[3]:
+                        if Girl.had_chat[3]:
                             ch_e "Well, I suppose if you want something done right. . ."
                         else:
                             ch_e "I suppose one good turn deserves another. . ."
@@ -2596,19 +2615,19 @@ label addiction_serum:
             "How about a blowjob?":
                 $ Girl.change_face("_sexy")
 
-                if approval_check(Girl, 1300) or (approval_check(Girl, 800) and Girl.Chat[3]):
+                if approval_check(Girl, 1300) or (approval_check(Girl, 800) and Girl.had_chat[3]):
                     if Girl == RogueX:
-                        if Girl.Chat[3]:
+                        if Girl.had_chat[3]:
                             ch_r "Heh, I guess I could get it straight from the source."
                         else:
                             ch_r "I. . . suppose I could. . ."
                     elif Girl == KittyX:
-                        if Girl.Chat[3]:
+                        if Girl.had_chat[3]:
                             ch_k "Oh, I guess straight off the tap. . ."
                         else:
                             ch_k "Hmm, yeah, cost of doing business. . ."
                     elif Girl == EmmaX:
-                        if Girl.Chat[3]:
+                        if Girl.had_chat[3]:
                             ch_e "Doesn't hurt to get it from the source. . ."
                         else:
                             ch_e "I suppose one good turn deserves another. . ."
@@ -2745,30 +2764,30 @@ label addiction_serum:
             $ Girl.mouth = "_surprised"
 
             if Girl == RogueX:
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_r "[Line] bucks, just to drink your cum?"
-                elif Girl.Chat[2]:
+                elif Girl.had_chat[2]:
                     ch_r "[Line] bucks, just for this supposed \"serum\"?"
                 else:
                     ch_r "[Line] bucks, just for that serum?"
             elif Girl == KittyX:
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_k "[Line] bucks for a mouthfull of jiz?"
-                elif Girl.Chat[2]:
+                elif Girl.had_chat[2]:
                     ch_k "[Line] bucks, just for this supposed \"serum\"?"
                 else:
                     ch_k "[Line] bucks, just for that serum?"
             elif Girl == EmmaX:
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_e "[Line] dollars? You're charging for warm semen?"
-                elif Girl.Chat[2]:
+                elif Girl.had_chat[2]:
                     ch_e "[Line] bucks, just for this supposed \"serum\"?"
                 else:
                     ch_e "[Line] bucks, just for that suspect liquid?"
             elif Girl == LauraX:
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_l "[Line] bucks for fresh cum?"
-                elif Girl.Chat[2]:
+                elif Girl.had_chat[2]:
                     ch_l "[Line] bucks, just for some \"serum\"?"
                 else:
                     ch_l "[Line] bucks, just for that stuff?"
@@ -2777,23 +2796,23 @@ label addiction_serum:
 
                 $ Girl.change_stat("obedience", 80, 1)
 
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_j "[Line] bucks for some jiz?"
-                elif Girl.Chat[2]:
+                elif Girl.had_chat[2]:
                     ch_j "[Line] bucks, just for some shady \"serum\"?"
                 else:
                     ch_j "[Line] bucks, just for that junk?"
             elif Girl == StormX:
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_s "[Line] dollars? You're charging for fresh semen?"
-                elif Girl.Chat[2]:
+                elif Girl.had_chat[2]:
                     ch_s "[Line] dollars, for this supposed \"serum\"?"
                 else:
                     ch_s "[Line] dollars, for that concoction?"
             elif Girl == JubesX:
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_v "[Line] bucks? cash for spunk?"
-                elif Girl.Chat[2]:
+                elif Girl.had_chat[2]:
                     ch_v "[Line] bucks, for this \"serum\"?"
                 else:
                     ch_v "[Line] bucks, for. . . whatever that is?"
@@ -2812,7 +2831,7 @@ label addiction_serum:
                 $ Girl.change_stat("love", 70, -2, 1)
                 $ Girl.change_stat("love", 90, -10)
 
-            if Girl.Chat[2] and Line == "Ten" and Girl.addiction >= 75:
+            if Girl.had_chat[2] and Line == "Ten" and Girl.addiction >= 75:
                 if Girl == RogueX:
                     ch_r "Five was bad enough! Fine, here you go, but not a penny more."
                 elif Girl == KittyX:
@@ -2842,7 +2861,7 @@ label addiction_serum:
 
                 $ Player.cash += 10
                 $ Girl.recent_history.append("has serum")
-            elif Girl.Chat[2] and Line == "Five":
+            elif Girl.had_chat[2] and Line == "Five":
                 if Girl == RogueX:
                     ch_r "Ok, here you go."
                 elif Girl == KittyX:
@@ -2891,7 +2910,7 @@ label addiction_serum:
             $ Girl.addiction = 20 if Girl.addiction >= 20 else 0
 
             if Girl == RogueX:
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_r "Well, I think that hit the spot. . ."
 
                     $ Girl.remaining_actions = stored_count
@@ -2900,7 +2919,7 @@ label addiction_serum:
                 else:
                     ch_r "That was. . . good actually, now what about this serum?"
             elif Girl == KittyX:
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_k "Hmm, delicious. . ."
 
                     $ Girl.remaining_actions = stored_count
@@ -2909,7 +2928,7 @@ label addiction_serum:
                 else:
                     ch_k "That was. . . fine, but what about this serum?"
             elif Girl == EmmaX:
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_e "Quite satisfying. . ."
 
                     $ Girl.remaining_actions = stored_count
@@ -2918,7 +2937,7 @@ label addiction_serum:
                 else:
                     ch_e "Now that we've dealt with the payment, what about this \"serum?\""
             elif Girl == LauraX:
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_l "That was good. . ."
 
                     $ Girl.remaining_actions = stored_count
@@ -2927,7 +2946,7 @@ label addiction_serum:
                 else:
                     ch_l "Ok, so you mentioned a \"serum?\""
             elif Girl == JeanX:
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_j "That was actually real tasty. . ."
 
                     $ Girl.remaining_actions = stored_count
@@ -2936,7 +2955,7 @@ label addiction_serum:
                 else:
                     ch_j "Ok, so about that \"serum?\""
             elif Girl == StormX:
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_s "That should take care of it. . ."
 
                     $ Girl.remaining_actions = stored_count
@@ -2945,7 +2964,7 @@ label addiction_serum:
                 else:
                     ch_s "Ok, now about that \"serum?\""
             elif Girl == JubesX:
-                if Girl.Chat[3]:
+                if Girl.had_chat[3]:
                     ch_v "Mmmmm. . ."
                     ch_v "Mmmmm!!"
 
@@ -3034,7 +3053,7 @@ label addiction_serum:
         "You hand her a small bottle filled with \"serum.\""
         "She opens the bottle and gives it a little sniff."
 
-        if Girl.Chat[3]:
+        if Girl.had_chat[3]:
             "She glances hesitantly at you, but gulps it down, and wipes her lips."
 
             $ Girl.change_stat("inhibition", 70, 2)
@@ -3073,7 +3092,7 @@ label addiction_serum:
                 ch_v "Oh, you just bottled your jiz."
                 ch_v "That makes sense."
 
-            $ Girl.Chat[3] = 1
+            $ Girl.had_chat[3] = 1
         elif Girl.event_counter["swallowed"] or Girl not in (RogueX,KittyX):
             $ Girl.change_face("_surprised")
 
@@ -3128,7 +3147,7 @@ label addiction_serum:
             elif Girl == JubesX:
                 ch_v "Oh, it's fine, tastes great, actually."
 
-            $ Girl.Chat[3] = 1
+            $ Girl.had_chat[3] = 1
         else:
             "She then gulps it down and wipes her lips."
             if Girl == RogueX:
@@ -3146,7 +3165,7 @@ label addiction_serum:
 
         $ Girl.change_face()
 
-        if Girl.Chat[3]:
+        if Girl.had_chat[3]:
             if Girl == RogueX:
                 ch_r "Hmm, even knowing what that stuff is, it does seem to work."
             elif Girl == KittyX:
@@ -3181,7 +3200,7 @@ label addiction_serum:
         if "addictive" in Player.traits:
             $ Girl.addiction_rate += 2
 
-        $ Girl.Chat[2] += 1
+        $ Girl.had_chat[2] += 1
     else:
         if Girl == RogueX:
             ch_r "Too bad we couldn't come to an arrangement here. . ."

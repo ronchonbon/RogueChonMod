@@ -150,7 +150,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             $ Girl.change_face("_bemused",1)
             Girl.voice "I don't have a top on under this. . ."
 
-        if (Girl.SeenPussy and Girl.SeenChest) and AloneCheck():
+        if (Girl.seen_pussy and Girl.seen_breasts) and AloneCheck():
             $ Mod -= 100
 
 
@@ -566,7 +566,7 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
         $ Girl.add_word(1,"dip","dip")
     else:
 
-        if Girl.SeenPussy and Girl.SeenChest:
+        if Girl.seen_pussy and Girl.seen_breasts:
             $ Mod += 100
 
         if "exhibitionist" in Girl.traits:
@@ -645,7 +645,7 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
             menu:
                 extend ""
                 "Ok, we can just use swimsuits.":
-                    if Girl.Swim[0]:
+                    if Girl.swimwear[0]:
 
                         if "dip" not in Girl.recent_history and "no_dip" not in Girl.recent_history:
                             $ Girl.change_stat("love", 80, 2)
@@ -716,7 +716,7 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
                         $ Girl.legs = ""
                         $ Girl.hose = ""
                         "And ends up in her underwear."
-                        $ Girl.SeenPanties = 1
+                        $ Girl.seen_underwear = 1
                 "Never mind then.":
 
 
@@ -861,71 +861,7 @@ label Pool_Topless(Girl=focused_Girl, temp_Girls=[]):
     $ Count = 0
     return
 
-label Pool_entering:
-    call Jubes_entry_Check
-    $ Player.drain_word("locked",0,0,1)
-    $ bg_current = "bg_pool"
-    $ Nearby = []
-    call Taboo_Level
-    $ Player.recent_history.append("traveling")
-    $ round -= 5 if round >= 5 else round
-    call event_calls
-    call Gym_Clothes_Off
-    call SwimSuit
-    call set_the_scene
 
-label Pool_Room:
-    $ bg_current = "bg_pool"
-    $ Player.drain_word("traveling",1,0)
-    call Taboo_Level
-    call set_the_scene (silent=1, Dress=0)
-    call QuickEvents
-    call checkout (1)
-    if round <= 10:
-        if time_index >= 3:
-            "You're getting tired, you head back to your room."
-            jump player_room
-        call wait
-        call event_calls
-        call girls_location
-    call GirlsAngry
-
-
-
-    menu:
-        "You're at the pool. What would you like to do?"
-        "Chat":
-
-            call Chat
-
-        "Want to sunbathe?" if time_index < 2:
-            call Pool_Sunbathe
-            $ round -= 20 if round >= 20 else round
-            "You just hang out for a little while."
-        "Want to swim?":
-            if time_index >= 3 and AloneCheck():
-                "It's a bit late for a swim."
-            else:
-                call Pool_Swim
-        "Want to skinnydip?":
-            call Pool_Skinnydip
-
-        "wait. (locked)" if time_index >= 3:
-            pass
-        "wait." if time_index < 3:
-            "You hang out for a bit."
-            call wait
-            call event_calls
-            call girls_location
-
-        "Leave" if not TravelMode:
-            call Worldmap
-        "Leave [[Go to Campus Square]" if TravelMode:
-            jump Campus_entry
-
-        "Go to the showers" if TravelMode:
-            jump Shower_Room_entry
-    jump Pool_Room
 
 label Pool_Swim(Swimmers=[], temp_Girls=[]):
     $ D20 = renpy.random.randint(1, 20)
@@ -938,7 +874,7 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     $ temp_Girls = all_Girls[:]
     while temp_Girls:
         if bg_current == temp_Girls[0].location and approval_check(temp_Girls[0], 700):
-            if temp_Girls[0].bra == temp_Girls[0].Swim[5] and temp_Girls[0].underwear == temp_Girls[0].Swim[6]:
+            if temp_Girls[0].bra == temp_Girls[0].swimwear[5] and temp_Girls[0].underwear == temp_Girls[0].swimwear[6]:
 
                 $ Swimmers.append(temp_Girls[0])
             elif not temp_Girls[0].ChestNum() and not temp_Girls[0].OverNum() and not temp_Girls[0].PantiesNum() and not temp_Girls[0].PantsNum() and not temp_Girls[0].HoseNum():
@@ -1016,7 +952,7 @@ label SwimSuit(temp_Girls=[]):
 
     $ temp_Girls = all_Girls[:]
     while temp_Girls:
-        if temp_Girls[0].location == bg_current and temp_Girls[0].Swim[0] and temp_Girls[0] not in Party and temp_Girls[0].Schedule[weekday][time_index] == "bg_pool":
+        if temp_Girls[0].location == bg_current and temp_Girls[0].swimwear[0] and temp_Girls[0] not in Party and temp_Girls[0].weekly_schedule[weekday][time_index] == "bg_pool":
 
 
             $ temp_Girls[0].change_outfit("swimwear")
@@ -1025,7 +961,7 @@ label SwimSuit(temp_Girls=[]):
 
 image FullPool:
 
-    AlphaMask("bg_pool", "images/PoolMask.png")
+    AlphaMask("bg_pool", "images/background/bg_pool_mask.png")
 
 label ShowPool(temp_Girls=[], PoolLoc=0):
 

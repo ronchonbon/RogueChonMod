@@ -8,8 +8,8 @@ label enter_main_sex_menu:
         if "three" not in focused_Girl.history and not AloneCheck(focused_Girl):
             call expression focused_Girl.tag + "_ThreeCheck"
 
-        if Taboo > 20 and "taboo" not in focused_Girl.history:
-            call expression focused_Girl.tag + "_Taboo_Talk"
+        if taboo > 20 and "taboo" not in focused_Girl.history:
+            call expression focused_Girl.tag + "_taboo_Talk"
 
             if bg_current == "bg_classroom" or bg_current in personal_rooms and AloneCheck(focused_Girl):
                 ch_p "We could just lock the door, right?"
@@ -18,7 +18,7 @@ label enter_main_sex_menu:
 
                 $ Player.traits.append("locked")
 
-                call Taboo_Level
+                call taboo_Level
             else:
                 return
 
@@ -29,7 +29,7 @@ label enter_main_sex_menu:
 
     call expression focused_Girl.tag + "_Hide" pass(1)
 
-    $ focused_Girl.ArmPose = 1
+    $ focused_Girl.arm_pose = 1
 
     call set_the_scene(1,0,0,0,1)
 
@@ -383,7 +383,7 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("love", 80, 1)
                 $ Girl.change_stat("inhibition", 50, 1)
 
-            if Taboo:
+            if taboo:
                 $ Girl.add_word(1, "no_taboo", "no_taboo")
 
             $ Girl.recent_history.append("no_" + action)
@@ -430,7 +430,7 @@ label begging_menu(Girl, action):
 
                     call please_not_good_enough_lines(Girl)
                 elif action in ["blowjob"]:
-                    if approval_check(Girl, 1100, TabM = 3): # 110, 125, 140, Taboo -120(230)             Handy instead?
+                    if approval_check(Girl, 1100, TabM = 3): # 110, 125, 140, taboo -120(230)             Handy instead?
                         $ Girl.change_stat("inhibition", 80, 1)
                         $ Girl.change_stat("inhibition", 60, 3)
                         $ Girl.change_face("_confused", 1)
@@ -478,7 +478,7 @@ label begging_menu(Girl, action):
             $ Girl.change_stat("love", 80, 2)
             $ Girl.change_stat("inhibition", 70, 2)
 
-            if Taboo:
+            if taboo:
                 $ Girl.add_word(1, "no_taboo", "no_taboo")
 
             $ Girl.recent_history.append("no_" + action)
@@ -538,7 +538,7 @@ label begging_menu(Girl, action):
                 call trying_to_convince_lines(Girl, action)
                 jump before_action
             else:
-                $ approval = approval_check(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)             Handy instead?
+                $ approval = approval_check(Girl, 1100, TabM = 3) # 110, 125, 140, taboo -120(230)             Handy instead?
 
                 if approval >= 2:
                     $ Girl.change_stat("inhibition", 80, 1)
@@ -1136,10 +1136,10 @@ label fondle_menu:
                             jump action_cycle
                         "Never mind":
                             jump action_cycle
-                "Show her feet" if not ShowFeet and focused_Girl.pose in ["doggy", "sex"]:
-                    $ ShowFeet = 1
-                "Hide her feet" if ShowFeet and focused_Girl.pose in ["doggy", "sex"]:
-                    $ ShowFeet = 0
+                "Show her feet" if not show_feet and focused_Girl.pose in ["doggy", "sex"]:
+                    $ show_feet = 1
+                "Hide her feet" if show_feet and focused_Girl.pose in ["doggy", "sex"]:
+                    $ show_feet = 0
                 "Undress [focused_Girl.name]":
                     call Girl_Undress
                 "Clean up [focused_Girl.name] (locked)" if not focused_Girl.spunk:
@@ -1566,10 +1566,10 @@ label sex_menu:
                     $ Player.cock_position = 0
 
                     $ action_speed = 0
-                "Show her feet" if not ShowFeet and focused_Girl.pose in ["doggy", "sex"]:
-                    $ ShowFeet = 1
-                "Hide her feet" if ShowFeet and focused_Girl.pose in ["doggy", "sex"]:
-                    $ ShowFeet = 0
+                "Show her feet" if not show_feet and focused_Girl.pose in ["doggy", "sex"]:
+                    $ show_feet = 1
+                "Hide her feet" if show_feet and focused_Girl.pose in ["doggy", "sex"]:
+                    $ show_feet = 0
                 "Undress [focused_Girl.name]":
                     call Girl_Undress(focused_Girl)
                 "Clean up [focused_Girl.name] (locked)" if not focused_Girl.spunk:

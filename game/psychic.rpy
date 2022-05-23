@@ -48,14 +48,14 @@ label MindFuck_Screen:
             alpha .2
     return
 
-label PsychicFlash(Face="_sly", TempLoc=0):
+label psychicFlash(Face="_sly", TempLoc=0):
     call MindFuck_Screen
     $ Line = Girl.location
     $ Girl.location = bg_current
     call set_the_scene (1, 0, 0, 0, 1)
     if Face:
         $ Girl.change_face(Face)
-    $ Girl.ArmPose = 2
+    $ Girl.arm_pose = 2
     $ Girl.top_pulled_up = 1
     $ Girl.upskirt = 1
     $ Girl.underwear_pulled_down = 1
@@ -64,9 +64,9 @@ label PsychicFlash(Face="_sly", TempLoc=0):
         hide Emma_Sprite with fade
     elif Girl == JeanX:
         hide Jean_Sprite with fade
-    $ Girl.change_outfit(6,Changed=1)
+    $ Girl.change_outfit(6,outfit_changed=1)
     scene onlayer black
-    $ Girl.ArmPose = 1
+    $ Girl.arm_pose = 1
     $ Line = 0
     Girl.voice ". . ."
 
@@ -106,7 +106,7 @@ label MindFuck(TempLoc=0):
                 ch_j "Ok, that'll do it. . ."
                 ch_j "Be thinking about me. . ."
 
-            $ Girl.change_outfit(6,Changed=1)
+            $ Girl.change_outfit(6,outfit_changed=1)
             $ Girl.spunk = []
             if Girl == EmmaX:
                 hide Emma_Sprite with fade

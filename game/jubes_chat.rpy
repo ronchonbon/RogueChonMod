@@ -33,7 +33,7 @@ label Jubes_Relationship:
                         ch_v "Well, you need to check in with [Player.Harem[0].name] first, [JubesX.player_petname]."
                     return
 
-                if JubesX.Event[5]:
+                if JubesX.event_happened[5]:
                     $ JubesX.change_face("_bemused", 1)
                     ch_v "You were the one that turned me down. . ."
                 else:
@@ -143,10 +143,10 @@ label Jubes_Relationship:
             "About that talk we had before. . .":
 
                 menu:
-                    "When you said you loved me. . ." if "lover" not in JubesX.traits and JubesX.Event[6] >= 20 and JubesX.Event[6] != 23:
+                    "When you said you loved me. . ." if "lover" not in JubesX.traits and JubesX.event_happened[6] >= 20 and JubesX.event_happened[6] != 23:
                         call Jubes_Love_Redux
 
-                    "When you were telling me all that stuff about yourself. . ." if "lover" not in JubesX.traits and JubesX.Event[6] == 23:
+                    "When you were telling me all that stuff about yourself. . ." if "lover" not in JubesX.traits and JubesX.event_happened[6] == 23:
                         call Jubes_Love_Redux
 
                     "You said you wanted me to be more in control?" if "sir" not in JubesX.player_petnames and "sir" in JubesX.history:
@@ -536,9 +536,9 @@ label Jubes_Jumped:
 
 
 label Jubes_Hungry:
-    if JubesX.Chat[3]:
+    if JubesX.had_chat[3]:
         ch_v "[[licks her lips] I'm a little thirsty. . ."
-    elif JubesX.Chat[2]:
+    elif JubesX.had_chat[2]:
         ch_v "I really love that serum you whipped up."
     else:
         ch_v "[[licks her lips] I'm a little thirsty. . ."
@@ -901,21 +901,21 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
         $ Options = [O]
     else:
 
-        if JubesX not in Digits:
+        if JubesX not in phonebook:
             if approval_check(JubesX, 500, "L") or approval_check(JubesX, 250, "I"):
                 ch_v "Oh, here's my number, call me maybe."
-                $ Digits.append(JubesX)
+                $ phonebook.append(JubesX)
                 return
             elif approval_check(JubesX, 250, "O"):
                 ch_v "If you need to call me, here's my number."
-                $ Digits.append(JubesX)
+                $ phonebook.append(JubesX)
                 return
 
         if "hungry" not in JubesX.traits and JubesX.event_counter["swallowed"] >= 3 and JubesX.location == bg_current:
             call Jubes_Hungry
             return
 
-        if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not Taboo or approval_check(JubesX, 800, "I")):
+        if bg_current != "bg_restaurant" and bg_current != "HW Party" and (not taboo or approval_check(JubesX, 800, "I")):
             if JubesX.location == bg_current and JubesX.thirst >= 30 and "refused" not in JubesX.daily_history and "quicksex" not in JubesX.daily_history:
                 $ JubesX.change_face("_sly",1)
                 ch_v "Hey, did you. . . wanna do something?"
@@ -925,7 +925,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
 
 
 
-        if JubesX.Event[0] and "key" not in JubesX.Chat:
+        if JubesX.event_happened[0] and "key" not in JubesX.had_chat:
             $ Options.append("key")
 
         if "mandrill" in Player.traits and "cologne chat" not in JubesX.daily_history:
@@ -938,7 +938,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
         if "Jubes" not in JubesX.names:
             $ Options.append("jubes")
 
-        if JubesX.Date >= 1 and bg_current != "bg_restaurant":
+        if JubesX.went_on_date >= 1 and bg_current != "bg_restaurant":
 
             $ Options.append("dated")
 
@@ -961,11 +961,11 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
             $ Options.append("fondled")
         if "Dazzler and Longshot" in JubesX.inventory and "256 Shades of Grey" in JubesX.inventory and "Avengers Tower Penthouse" in JubesX.inventory:
 
-            if "book" not in JubesX.Chat:
+            if "book" not in JubesX.had_chat:
                 $ Options.append("booked")
         if "lace_bra" in JubesX.inventory or "_lace_panties" in JubesX.inventory:
 
-            if "lingerie" not in JubesX.Chat:
+            if "lingerie" not in JubesX.had_chat:
                 $ Options.append("lingerie")
         if JubesX.action_counter["handjob"]:
 
@@ -1040,7 +1040,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
         $ JubesX.change_face("_sly")
 
     elif Options[0] == "caught":
-        if "caught chat" in JubesX.Chat:
+        if "caught chat" in JubesX.had_chat:
             ch_v "We should try not to get caught like that."
             if not approval_check(JubesX, 500, "I"):
                 ch_v "Unless. . ."
@@ -1050,13 +1050,13 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
                 ch_v "I guess you wouldn't want to be so public anymore."
             else:
                 ch_v "I kinda had fun though. . ."
-            $ JubesX.Chat.append("caught chat")
+            $ JubesX.had_chat.append("caught chat")
     elif Options[0] == "key":
         if JubesX.SEXP <= 15:
             ch_v "Be careful when you use that key . ."
         else:
             ch_v "I gave you a key, but you don't visit. . ."
-        $ JubesX.Chat.append("key")
+        $ JubesX.had_chat.append("key")
 
 
 
@@ -1118,11 +1118,11 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
 
     elif Options[0] == "showercaught":
 
-        if "shower" in JubesX.Chat:
+        if "shower" in JubesX.had_chat:
             ch_v "You saw me showering again. . ."
         else:
             ch_v "hey. don't you check before entering the showers?"
-            $ JubesX.Chat.append("shower")
+            $ JubesX.had_chat.append("shower")
             menu:
                 extend ""
                 "It was a total accident! I promise!":
@@ -1182,14 +1182,14 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
                 $ JubesX.change_face("_sad")
                 ch_v "Well. . . I guess I could."
         $ JubesX.blushing = "_blush1"
-        $ JubesX.Chat.append("book")
+        $ JubesX.had_chat.append("book")
 
     elif Options[0] == "lingerie":
 
         $ JubesX.change_face("_sly",2)
         ch_v "That underwear you got me was pretty nice. . . thanks."
         $ JubesX.blushing = "_blush1"
-        $ JubesX.Chat.append("lingerie")
+        $ JubesX.had_chat.append("lingerie")
 
     elif Options[0] == "handy":
 
@@ -1199,7 +1199,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
         $ JubesX.blushing = ""
 
     elif Options[0] == "blowjob":
-        if "blowjob" not in JubesX.Chat:
+        if "blowjob" not in JubesX.had_chat:
 
             $ JubesX.change_face("_sly",2)
             ch_v "Hey, I didn't bite or anything, did I?"
@@ -1230,7 +1230,7 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
                     $ JubesX.change_face("_sad",2)
                     ch_v "Well. . . sorry about that. . ."
             $ JubesX.blushing = "_blush1"
-            $ JubesX.Chat.append("blowjob")
+            $ JubesX.had_chat.append("blowjob")
         else:
             $ Line = renpy.random.choice(["You know, your dick tastes great.", 
                             "I think I nearly dislocated my jaw last time.", 
@@ -1240,14 +1240,14 @@ label Jubes_Chitchat(O=0, Options=["default","default","default"]):
 
     elif Options[0] == "swallowed":
 
-        if "swallow" in JubesX.Chat:
+        if "swallow" in JubesX.had_chat:
             ch_v "I wouldn't mind another taste of your. . ."
         else:
             ch_v "So. . . the other day. . ."
             ch_v "I really got a charge out of drinking your. . ."
             $ JubesX.change_face("_sly",1)
             ch_v "I wouldn't mind that again some time."
-            $ JubesX.Chat.append("swallow")
+            $ JubesX.had_chat.append("swallow")
 
     elif Options[0] == "facial":
 
@@ -1650,7 +1650,7 @@ label Jubes_Rename:
 
 
 label Jubes_Personality(counter=0):
-    if not JubesX.Chat[4] or counter:
+    if not JubesX.had_chat[4] or counter:
         "Since you're doing well in one area, you can convince Jubes to focus on one of the others."
         "Any time you go over the limit in a given stat, the excess will spill over into the chosen stat instead."
         "This will also impact which personality trait takes priority in dialog."
@@ -1659,35 +1659,35 @@ label Jubes_Personality(counter=0):
         "More Obedient. [[Love to Obedience]" if JubesX.love > 900:
             ch_p "If you really love me, could you please just do what I say?"
             ch_v "If you really care about that, sure."
-            $ JubesX.Chat[4] = 1
+            $ JubesX.had_chat[4] = 1
         "Less Inhibited. [[Love to Inhibition]" if JubesX.love > 900:
             ch_p "If you really love me, could lighten up a bit, just have some fun?"
             ch_v "I could always be a bit more wild if that's what you want."
-            $ JubesX.Chat[4] = 2
+            $ JubesX.had_chat[4] = 2
 
         "Less Inhibited. [[Obedience to Inhibition]" if JubesX.obedience > 900:
             ch_p "I want you to be less inhibited."
             ch_v "I guess I could go all-out."
-            $ JubesX.Chat[4] = 3
+            $ JubesX.had_chat[4] = 3
         "More Loving. [[Obedience to Love]" if JubesX.obedience > 900:
             ch_p "I'd like you to learn to love me."
             ch_v "I can try."
-            $ JubesX.Chat[4] = 4
+            $ JubesX.had_chat[4] = 4
 
         "More Obedient. [[Inhibition to Obedience]" if JubesX.inhibition > 900:
             ch_p "I know we're having fun, but couldn't you listen to me sometimes?"
             ch_v "I can give it a shot. . ."
-            $ JubesX.Chat[4] = 5
+            $ JubesX.had_chat[4] = 5
 
         "More Loving. [[Inhibition to Love]" if JubesX.inhibition > 900:
             ch_p "I know we're having fun, but do you even care about me?"
             ch_v "If that's something you need out of this. . ."
-            $ JubesX.Chat[4] = 6
+            $ JubesX.had_chat[4] = 6
 
-        "I guess just do what you like. . .[[reset]" if JubesX.Chat[4]:
+        "I guess just do what you like. . .[[reset]" if JubesX.had_chat[4]:
             ch_p "You know what we talked about before? Nevermind that stuff."
             ch_v "Um, ok."
-            $ JubesX.Chat[4] = 0
+            $ JubesX.had_chat[4] = 0
         "Repeat the rules":
             call Jubes_Personality (1)
             return
@@ -1923,10 +1923,10 @@ label Jubes_Summon(approval_bonus=approval_bonus):
         $ Line = 0
         if JubesX.location == "bg_classroom":
             ch_v "K, there's room next to me."
-            jump Class_Room
+            jump classroom
         elif JubesX.location == "bg_dangerroom":
             ch_v "Don't be long. . ."
-            jump Danger_Room
+            jump danger_room
         elif JubesX.location == "bg_jubes":
             ch_v "I'll. . . get ready."
             jump Jubes_Room
@@ -1935,10 +1935,10 @@ label Jubes_Summon(approval_bonus=approval_bonus):
             jump player_room
         elif JubesX.location == "bg_showerroom":
             ch_v "I'll leave you some hot water."
-            jump Shower_Room
+            jump shower_room
         elif JubesX.location == "bg_campus":
             ch_v "I'm still in the shade a bit. . ."
-            jump Campus
+            jump campus
         elif JubesX.location in personal_rooms:
             ch_v "Yeah, see you."
             $ bg_current = JubesX.location
@@ -1955,7 +1955,7 @@ label Jubes_Summon(approval_bonus=approval_bonus):
         ch_v "Ok, [JubesX.player_petname]."
 
     if bg_current not in personal_rooms:
-        call Jubes_Sunshock
+        call is_Jubes_sunshocked
         if _return:
 
             $ JubesX.recent_history.append("no_summon")
@@ -1967,7 +1967,7 @@ label Jubes_Summon(approval_bonus=approval_bonus):
         call locked_door (JubesX)
         return
     $ JubesX.location = bg_current
-    call Taboo_Level (0)
+    call taboo_Level (0)
     $ JubesX.change_outfit()
     call set_the_scene
     return
@@ -2022,7 +2022,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
 
 
     if bg_current == "bg_dangerroom":
-        call Gym_Exit ([JubesX])
+        call exit_gym ([JubesX])
 
     $ JubesX.change_outfit()
 
@@ -2141,7 +2141,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 $ Line = "no"
 
 
-    call Taboo_Level (0)
+    call taboo_Level (0)
     $ JubesX.recent_history.append("followed")
     if not Line:
 
@@ -2174,10 +2174,10 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         call Gym_Clothes_Off ([JubesX])
         if JubesX.location == "bg_classroom":
             ch_v "Ok, get a move on then."
-            jump Class_Room_entry
+            jump classroom_entry
         elif JubesX.location == "bg_dangerroom":
             ch_v "I'll get warmed up."
-            jump Danger_Room_entry
+            jump danger_room_entry
         elif JubesX.location == "bg_jubes":
             ch_v "Ok."
             jump Jubes_Room
@@ -2186,13 +2186,13 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             jump player_room
         elif JubesX.location == "bg_showerroom":
             ch_v "Ok, nice."
-            jump Shower_Room_entry
+            jump shower_entry
         elif JubesX.location == "bg_campus":
             ch_v "Ok, nice."
-            jump Campus_entry
+            jump campus_entry
         elif JubesX.location == "bg_pool":
             ch_v "Cool."
-            jump Pool_entry
+            jump pool_entry
         else:
             ch_v "I'll just meet you in your room."
             $ JubesX.location = "bg_player"
@@ -2215,7 +2215,7 @@ label Jubes_Leave(approval_bonus=approval_bonus, GirlsNum=0):
 
 
 label Jubes_Clothes:
-    if JubesX.Taboo:
+    if JubesX.taboo:
         if "exhibitionist" in JubesX.traits:
             ch_v "Yes? . ."
         elif approval_check(JubesX, 900, TabM=4) or approval_check(JubesX, 400, "I", TabM=3):
@@ -2268,11 +2268,11 @@ label Jubes_Wardrobe_Menu:
                 call outfitShame (JubesX, 0, 2)
                 if _return:
                     hide DressScreen
-            "Would you be more comfortable behind a screen? (locked)" if JubesX.Taboo:
+            "Would you be more comfortable behind a screen? (locked)" if JubesX.taboo:
                 pass
-            "Would you be more comfortable behind a screen?" if JubesX.location == bg_current and not JubesX.Taboo and not renpy.showing('DressScreen'):
+            "Would you be more comfortable behind a screen?" if JubesX.location == bg_current and not JubesX.taboo and not renpy.showing('DressScreen'):
 
-                if approval_check(JubesX, 1500) or (JubesX.SeenChest and JubesX.SeenPussy):
+                if approval_check(JubesX, 1500) or (JubesX.seen_breasts and JubesX.seen_pussy):
                     ch_v "I think I'm fine. . ."
                 else:
                     show DressScreen zorder 150
@@ -2303,15 +2303,15 @@ label Jubes_Wardrobe_Menu:
 
                 if "wardrobe" not in JubesX.recent_history:
 
-                    if JubesX.Chat[1] <= 1:
+                    if JubesX.had_chat[1] <= 1:
                         $ JubesX.change_stat("love", 70, 15)
                         $ JubesX.change_stat("obedience", 40, 20)
                         ch_v "Oh! Thank you."
-                    elif JubesX.Chat[1] <= 10:
+                    elif JubesX.had_chat[1] <= 10:
                         $ JubesX.change_stat("love", 70, 5)
                         $ JubesX.change_stat("obedience", 40, 7)
                         ch_v "Right?"
-                    elif JubesX.Chat[1] <= 50:
+                    elif JubesX.had_chat[1] <= 50:
                         $ JubesX.change_stat("love", 70, 1)
                         $ JubesX.change_stat("obedience", 40, 1)
                         ch_v "Uh-huh."
@@ -2325,7 +2325,7 @@ label Jubes_Wardrobe_Menu:
                     else:
                         $ JubesX.change_outfit()
                 $ JubesX.Set_Temp_outfit()
-                $ JubesX.Chat[1] += 1
+                $ JubesX.had_chat[1] += 1
                 $ primary_action = 0
                 return
 
@@ -2376,26 +2376,26 @@ label Jubes_Wardrobe_Menu:
                 "Let's try something else though.":
                     ch_v "Ok."
 
-        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not JubesX.Custom1[0] and not JubesX.Custom2[0] and not JubesX.Custom3[0]:
+        "Remember that outfit we put together? [[Set a custom outfit] (locked)" if not JubesX.first_custom_outfit[0] and not JubesX.second_custom_outfit[0] and not JubesX.third_custom_outfit[0]:
             pass
 
-        "Remember that outfit we put together?" if JubesX.Custom1[0] or JubesX.Custom2[0] or JubesX.Custom3[0]:
+        "Remember that outfit we put together?" if JubesX.first_custom_outfit[0] or JubesX.second_custom_outfit[0] or JubesX.third_custom_outfit[0]:
             $ counter = 0
             while 1:
                 menu:
-                    "Throw on Custom 1 (locked)" if not JubesX.Custom1[0]:
+                    "Throw on Custom 1 (locked)" if not JubesX.first_custom_outfit[0]:
                         pass
-                    "Throw on Custom 1" if JubesX.Custom1[0]:
+                    "Throw on Custom 1" if JubesX.first_custom_outfit[0]:
                         $ JubesX.change_outfit("custom1")
                         $ counter = 3
-                    "Throw on Custom 2 (locked)" if not JubesX.Custom2[0]:
+                    "Throw on Custom 2 (locked)" if not JubesX.second_custom_outfit[0]:
                         pass
-                    "Throw on Custom 2" if JubesX.Custom2[0]:
+                    "Throw on Custom 2" if JubesX.second_custom_outfit[0]:
                         $ JubesX.change_outfit("custom2")
                         $ counter = 5
-                    "Throw on Custom 3 (locked)" if not JubesX.Custom3[0]:
+                    "Throw on Custom 3 (locked)" if not JubesX.third_custom_outfit[0]:
                         pass
-                    "Throw on Custom 3" if JubesX.Custom3[0]:
+                    "Throw on Custom 3" if JubesX.third_custom_outfit[0]:
                         $ JubesX.change_outfit("custom3")
                         $ counter = 6
 
@@ -2412,20 +2412,20 @@ label Jubes_Wardrobe_Menu:
                     "On second thought, forget about that one outfit. . .":
 
                         menu:
-                            "Custom 1 [[clear custom 1]" if JubesX.Custom1[0]:
+                            "Custom 1 [[clear custom 1]" if JubesX.first_custom_outfit[0]:
                                 ch_v "Ok."
-                                $ JubesX.Custom1[0] = 0
-                            "Custom 1 [[clear custom 1] (locked)" if not JubesX.Custom1[0]:
+                                $ JubesX.first_custom_outfit[0] = 0
+                            "Custom 1 [[clear custom 1] (locked)" if not JubesX.first_custom_outfit[0]:
                                 pass
-                            "Custom 2 [[clear custom 2]" if JubesX.Custom2[0]:
+                            "Custom 2 [[clear custom 2]" if JubesX.second_custom_outfit[0]:
                                 ch_v "Ok."
-                                $ JubesX.Custom2[0] = 0
-                            "Custom 2 [[clear custom 2] (locked)" if not JubesX.Custom2[0]:
+                                $ JubesX.second_custom_outfit[0] = 0
+                            "Custom 2 [[clear custom 2] (locked)" if not JubesX.second_custom_outfit[0]:
                                 pass
-                            "Custom 3 [[clear custom 3]" if JubesX.Custom3[0]:
+                            "Custom 3 [[clear custom 3]" if JubesX.third_custom_outfit[0]:
                                 ch_v "Ok."
-                                $ JubesX.Custom3[0] = 0
-                            "Custom 3 [[clear custom 3] (locked)" if not JubesX.Custom3[0]:
+                                $ JubesX.third_custom_outfit[0] = 0
+                            "Custom 3 [[clear custom 3] (locked)" if not JubesX.third_custom_outfit[0]:
                                 pass
                             "Never mind, [[back].":
                                 pass
@@ -2438,10 +2438,10 @@ label Jubes_Wardrobe_Menu:
                         $ counter = 0
                         return
 
-        "Gym Clothes?" if not JubesX.Taboo or bg_current == "bg_dangerroom":
+        "Gym Clothes?" if not JubesX.taboo or bg_current == "bg_dangerroom":
             $ JubesX.change_outfit("gym")
 
-        "Sleepwear?" if not JubesX.Taboo:
+        "Sleepwear?" if not JubesX.taboo:
             if approval_check(JubesX, 1200):
                 $ JubesX.change_outfit("sleep")
             else:
@@ -2449,9 +2449,9 @@ label Jubes_Wardrobe_Menu:
                 if _return:
                     $ JubesX.change_outfit("sleep")
 
-        "Swimwear? (locked)" if (JubesX.Taboo and bg_current != "bg_pool") or not JubesX.Swim[0]:
+        "Swimwear? (locked)" if (JubesX.taboo and bg_current != "bg_pool") or not JubesX.swimwear[0]:
             $ JubesX.change_outfit("swimwear")
-        "Swimwear?" if (not JubesX.Taboo or bg_current == "bg_pool") and JubesX.Swim[0]:
+        "Swimwear?" if (not JubesX.taboo or bg_current == "bg_pool") and JubesX.swimwear[0]:
             $ JubesX.change_outfit("swimwear")
 
         "Halloween Costume?" if "halloween" in JubesX.history:
@@ -2464,13 +2464,13 @@ label Jubes_Wardrobe_Menu:
             $ Line = 0
             if not JubesX.bra and not JubesX.underwear and not JubesX.top and not JubesX.legs and not JubesX.hose:
                 ch_v "Uh-huh. . . wait, how would you know?!"
-            elif JubesX.SeenChest and JubesX.SeenPussy and approval_check(JubesX, 1200, TabM=4):
+            elif JubesX.seen_breasts and JubesX.seen_pussy and approval_check(JubesX, 1200, TabM=4):
                 ch_v ". . . yeah?"
                 $ Line = 1
             elif approval_check(JubesX, 2000, TabM=4):
                 ch_v "Well you get to the point!"
                 $ Line = 1
-            elif JubesX.SeenChest and JubesX.SeenPussy and approval_check(JubesX, 1200, TabM=0):
+            elif JubesX.seen_breasts and JubesX.seen_pussy and approval_check(JubesX, 1200, TabM=0):
                 ch_v "Maaaybe, but not here. . ."
             elif approval_check(JubesX, 2000, TabM=0):
                 ch_v "Maaaybe, but not here. . ."
@@ -2530,7 +2530,7 @@ label Jubes_Wardrobe_Menu:
 
         "Why don't you go with no jacket?" if JubesX.accessory:
             $ JubesX.change_face("_bemused", 1)
-            if JubesX.top or (approval_check(JubesX, 800, TabM=3) and (JubesX.bra or JubesX.SeenChest)):
+            if JubesX.top or (approval_check(JubesX, 800, TabM=3) and (JubesX.bra or JubesX.seen_breasts)):
 
                 ch_v "Sure."
             elif approval_check(JubesX, 600, TabM=0):
@@ -2556,7 +2556,7 @@ label Jubes_Wardrobe_Menu:
 
         "Why don't you go with no [JubesX.top]?" if JubesX.top:
             $ JubesX.change_face("_bemused", 1)
-            if approval_check(JubesX, 800, TabM=3) and (JubesX.bra or JubesX.SeenChest):
+            if approval_check(JubesX, 800, TabM=3) and (JubesX.bra or JubesX.seen_breasts):
                 ch_v "Sure."
             elif approval_check(JubesX, 600, TabM=0):
                 call Jubes_NoBra
@@ -2587,7 +2587,7 @@ label Jubes_Wardrobe_Menu:
 
         "Maybe open the jacket more?" if JubesX.accessory and JubesX.accessory != "open_jacket":
             $ JubesX.change_face("_bemused")
-            if JubesX.top or (approval_check(JubesX, 800, TabM=3) and (JubesX.bra or JubesX.SeenChest)):
+            if JubesX.top or (approval_check(JubesX, 800, TabM=3) and (JubesX.bra or JubesX.seen_breasts)):
 
                 ch_v "Sure."
             elif approval_check(JubesX, 600, TabM=0):
@@ -2612,7 +2612,7 @@ label Jubes_Wardrobe_Menu:
 
         "Maybe just leave the jacket loose?" if JubesX.accessory and JubesX.accessory != "_jacket":
             $ JubesX.change_face("_bemused")
-            if JubesX.top or (approval_check(JubesX, 800, TabM=3) and (JubesX.bra or JubesX.SeenChest)):
+            if JubesX.top or (approval_check(JubesX, 800, TabM=3) and (JubesX.bra or JubesX.seen_breasts)):
 
                 ch_v "Sure."
             elif approval_check(JubesX, 600, TabM=0):
@@ -2655,7 +2655,7 @@ label Jubes_Wardrobe_Menu:
                     return
             $ JubesX.top = "_red_shirt"
 
-        "Try on that leather shirt." if JubesX.top != "black_shirt":
+        "Try on that leather shirt." if JubesX.top != "_black_shirt":
             $ JubesX.change_face("_bemused")
             if not JubesX.top:
 
@@ -2668,7 +2668,7 @@ label Jubes_Wardrobe_Menu:
                     $ JubesX.change_face("_bemused", 1)
                     ch_v "I don't really want to take this [JubesX.top] off at the moment."
                     return
-            $ JubesX.top = "black_shirt"
+            $ JubesX.top = "_black_shirt"
 
         "Try on that pink tubetop." if JubesX.top != "_tube_top":
             $ JubesX.change_face("_bemused")
@@ -2687,7 +2687,7 @@ label Jubes_Wardrobe_Menu:
 
         "Maybe just throw on a towel?" if JubesX.top != "_towel":
             $ JubesX.change_face("_bemused", 1)
-            if JubesX.bra or JubesX.SeenChest:
+            if JubesX.bra or JubesX.seen_breasts:
                 ch_v "Odd."
             elif approval_check(JubesX, 1000, TabM=0):
                 $ JubesX.change_face("_perplexed", 1)
@@ -2710,7 +2710,7 @@ label Jubes_Wardrobe_Menu:
         menu:
             ch_v "I don't exactly have anything on under this. . ."
             "Then you could slip something on under it. . .":
-                if JubesX.SeenChest and approval_check(JubesX, 1000, TabM=3):
+                if JubesX.seen_breasts and approval_check(JubesX, 1000, TabM=3):
                     $ JubesX.blushing = "_blush1"
                     ch_v "Oh, I was just warning -you-. . ."
                     $ JubesX.blushing = ""
@@ -2742,7 +2742,7 @@ label Jubes_Wardrobe_Menu:
                 else:
                     $ JubesX.change_face("_surprised")
                     $ JubesX.brows = "_angry"
-                    if JubesX.Taboo > 20:
+                    if JubesX.taboo > 20:
                         ch_v "Not in public, I won't!"
                     else:
                         ch_v "Nah."
@@ -2759,9 +2759,9 @@ label Jubes_Wardrobe_Menu:
 
         "Maybe go without the [JubesX.legs]." if JubesX.legs:
             $ JubesX.change_face("_sexy", 1)
-            if JubesX.SeenPanties and JubesX.underwear and approval_check(JubesX, 500, TabM=5):
+            if JubesX.seen_underwear and JubesX.underwear and approval_check(JubesX, 500, TabM=5):
                 ch_v "Ok, sure."
-            elif JubesX.SeenPussy and approval_check(JubesX, 900, TabM=4):
+            elif JubesX.seen_pussy and approval_check(JubesX, 900, TabM=4):
                 ch_v "Yeah, ok."
             elif approval_check(JubesX, 1300, TabM=2) and JubesX.underwear:
                 ch_v "For you, fine. . ."
@@ -2790,7 +2790,7 @@ label Jubes_Wardrobe_Menu:
             if renpy.showing('DressScreen'):
                 pass
             elif JubesX.underwear:
-                $ JubesX.SeenPanties = 1
+                $ JubesX.seen_underwear = 1
             else:
                 call Jubes_First_Bottomless
 
@@ -2820,7 +2820,7 @@ label Jubes_Wardrobe_Menu:
         menu:
             ch_v "I'm actually not wearing any?"
             "Then you could slip on a pair of panties. . .":
-                if JubesX.SeenPussy and approval_check(JubesX, 1100, TabM=4):
+                if JubesX.seen_pussy and approval_check(JubesX, 1100, TabM=4):
                     $ JubesX.blushing = "_blush1"
                     ch_v "No, no, it's fine like this. . ."
                     $ JubesX.blushing = ""
@@ -2833,7 +2833,7 @@ label Jubes_Wardrobe_Menu:
                     if "_lace_panties" in JubesX.inventory:
                         $ JubesX.underwear  = "_lace_panties"
                     else:
-                        $ JubesX.underwear = "blue_panties"
+                        $ JubesX.underwear = "_blue_panties"
                     if approval_check(JubesX, 1200, TabM=4):
                         $ Line = JubesX.legs
                         $ JubesX.legs = ""
@@ -2863,7 +2863,7 @@ label Jubes_Wardrobe_Menu:
                 else:
                     $ JubesX.change_face("_surprised")
                     $ JubesX.brows = "_angry"
-                    if JubesX.Taboo > 20:
+                    if JubesX.taboo > 20:
                         ch_v "Yeah, but not in public, [JubesX.player_petname]!"
                     else:
                         ch_v "Nah."
@@ -2882,10 +2882,10 @@ label Jubes_Wardrobe_Menu:
             menu:
                 "How about you lose the [JubesX.bra]?" if JubesX.bra:
                     $ JubesX.change_face("_bemused", 1)
-                    if JubesX.SeenChest and approval_check(JubesX, 900, TabM=2.7):
+                    if JubesX.seen_breasts and approval_check(JubesX, 900, TabM=2.7):
                         ch_v "Sure."
                     elif approval_check(JubesX, 1100, TabM=2):
-                        if JubesX.Taboo:
+                        if JubesX.taboo:
                             ch_v "I don't know, here. . ."
                         else:
                             ch_v "Maaaybe. . ."
@@ -2921,7 +2921,7 @@ label Jubes_Wardrobe_Menu:
 
                 "Add lace_bra" if JubesX.bra != "lace_bra" and "lace_bra" in JubesX.inventory:
                     ch_p "I like that bra corset."
-                    if JubesX.SeenChest or approval_check(JubesX, 1300, TabM=2):
+                    if JubesX.seen_breasts or approval_check(JubesX, 1300, TabM=2):
                         ch_v "K."
                         $ JubesX.bra = "lace_bra"
                     else:
@@ -2937,7 +2937,7 @@ label Jubes_Wardrobe_Menu:
                         ch_v "K."
                         $ JubesX.bra = "_bikini_top"
                     else:
-                        if JubesX.SeenChest or approval_check(JubesX, 1000, TabM=2):
+                        if JubesX.seen_breasts or approval_check(JubesX, 1000, TabM=2):
                             ch_v "K."
                             $ JubesX.bra = "_bikini_top"
                         else:
@@ -2975,7 +2975,7 @@ label Jubes_Wardrobe_Menu:
             menu:
                 "You could lose those panties. . ." if JubesX.underwear:
                     $ JubesX.change_face("_bemused", 1)
-                    if approval_check(JubesX, 900) and (JubesX.legs or (JubesX.SeenPussy and not JubesX.Taboo)):
+                    if approval_check(JubesX, 900) and (JubesX.legs or (JubesX.seen_pussy and not JubesX.taboo)):
 
                         if approval_check(JubesX, 850, "L"):
                             ch_v "True. . ."
@@ -2999,7 +2999,7 @@ label Jubes_Wardrobe_Menu:
                             if not _return:
                                 $ JubesX.change_face("_surprised")
                                 $ JubesX.brows = "_angry"
-                                if JubesX.Taboo > 20:
+                                if JubesX.taboo > 20:
                                     ch_v "This is just too public."
                                 else:
                                     ch_v "Nah."
@@ -3026,16 +3026,16 @@ label Jubes_Wardrobe_Menu:
                         $ JubesX.blushing = ""
                     $ Line = 0
 
-                "Why don't you wear the blue panties instead?" if JubesX.underwear and JubesX.underwear != "blue_panties":
+                "Why don't you wear the blue panties instead?" if JubesX.underwear and JubesX.underwear != "_blue_panties":
                     if approval_check(JubesX, 1100, TabM=3):
                         ch_v "Ok."
-                        $ JubesX.underwear = "blue_panties"
+                        $ JubesX.underwear = "_blue_panties"
                     else:
                         call Display_DressScreen (JubesX)
                         if not _return:
                             ch_v "That's none of your busines."
                         else:
-                            $ JubesX.underwear = "blue_panties"
+                            $ JubesX.underwear = "_blue_panties"
 
                 "Why don't you wear the lace panties instead?" if "_lace_panties" in JubesX.inventory and JubesX.underwear and JubesX.underwear != "_lace_panties":
                     if approval_check(JubesX, 1300, TabM=3):
@@ -3096,7 +3096,7 @@ label Jubes_Wardrobe_Menu:
                         extend ""
                         "How about the blue ones?":
                             ch_v "Sure, ok."
-                            $ JubesX.underwear = "blue_panties"
+                            $ JubesX.underwear = "_blue_panties"
                         "How about the lace ones?" if "_lace_panties" in JubesX.inventory:
                             ch_v "Alright."
                             $ JubesX.underwear  = "_lace_panties"
@@ -3118,15 +3118,15 @@ label Jubes_Wardrobe_Menu:
 
     menu Jubes_Clothes_Misc:
 
-        "Shades in her hair" if JubesX.hair != "shades":
+        "Shades in her hair" if JubesX.hair != "_shades":
             ch_p "You're missing those signature shades!"
             if approval_check(JubesX, 600):
                 ch_v "Oh yeah!"
-                $ JubesX.hair = "shades"
+                $ JubesX.hair = "_shades"
             else:
                 ch_v "I don't know, it's fine like this."
 
-        "Shades out of her hair" if JubesX.hair == "shades":
+        "Shades out of her hair" if JubesX.hair == "_shades":
             ch_p "You should try without the shades."
             if approval_check(JubesX, 600):
                 ch_v "Ok. . "
@@ -3184,10 +3184,10 @@ label Jubes_Wardrobe_Menu:
                     return
                 $ JubesX.to_do.append("shave")
 
-        "Piercings. [[See what she looks like without them first] (locked)" if not JubesX.SeenPussy and not JubesX.SeenChest:
+        "Piercings. [[See what she looks like without them first] (locked)" if not JubesX.seen_pussy and not JubesX.seen_breasts:
             pass
 
-        "Add ring piercings" if JubesX.piercings != "_ring" and (JubesX.SeenPussy or JubesX.SeenChest):
+        "Add ring piercings" if JubesX.piercings != "_ring" and (JubesX.seen_pussy or JubesX.seen_breasts):
             ch_p "You know, you'd look really nice with some ring body piercings."
             if "_ring" in JubesX.to_do:
                 ch_v "I heard you, I'll get around to it."
@@ -3207,7 +3207,7 @@ label Jubes_Wardrobe_Menu:
                     return
                 $ JubesX.to_do.append("_ring")
 
-        "Add barbell piercings" if JubesX.piercings != "_barbell" and (JubesX.SeenPussy or JubesX.SeenChest):
+        "Add barbell piercings" if JubesX.piercings != "_barbell" and (JubesX.seen_pussy or JubesX.seen_breasts):
             ch_p "You know, you'd look really nice with some barbell body piercings."
             if "_barbell" in JubesX.to_do:
                 ch_v "I heard you, I'll get around to it."

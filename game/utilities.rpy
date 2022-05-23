@@ -156,9 +156,7 @@ label round_10(occupant = None):
         elif occupant == StormX:
             ch_s "I am going to bed soon. You should go."
 
-        $ bg_current == "bg_campus"
-
-        jump Misplaced
+        jump campus
     return
 
 label checkout(total = False):
@@ -189,7 +187,7 @@ label checkout(total = False):
             $ temp_Girls[0].event_counter["forced"] += 1
 
         if temp_Girls[0] == LauraX:
-            $ LauraX.ScentTimer = 0
+            $ LauraX.scent_timer = 0
 
         $ temp_Girls.remove(temp_Girls[0])
 
@@ -216,7 +214,7 @@ label checkout(total = False):
         $ Player.focusing = False
     return
 
-label wait(outfit=1, lights=1):
+label wait(outfit = True, lights = True):
     show blackscreen onlayer black
 
     call checkout (1)
@@ -357,25 +355,25 @@ label wait(outfit=1, lights=1):
             if "fuck buddy" in temp_Girls[0].player_petnames:
                 $ temp_Girls[0].inhibition += 10
 
-            $ temp_Girls[0].SluttyClothes()
+            $ temp_Girls[0].slutty_clothes()
 
-            if temp_Girls[0] == JeanX:
-                if temp_Girls[0].love < 1000 and temp_Girls[0].StatStore > 0:
-                    if temp_Girls[0].obedience >= 900:
-                        $ temp_Girls[0].love += 10
-                        $ temp_Girls[0].StatStore -= 10
-                    elif temp_Girls[0].obedience >= 700:
-                        $ temp_Girls[0].love += 5
-                        $ temp_Girls[0].StatStore -= 5
-                    elif temp_Girls[0].obedience >= 500:
-                        $ temp_Girls[0].love += 1
-                        $ temp_Girls[0].StatStore -= 1
-                if temp_Girls[0].reputation <= 800 and "nowhammy" not in JeanX.traits:
-                    $ temp_Girls[0].reputation = 800
+            # if temp_Girls[0] == JeanX:
+            #     if temp_Girls[0].love < 1000 and temp_Girls[0].stored_stats > 0:
+            #         if temp_Girls[0].obedience >= 900:
+            #             $ temp_Girls[0].love += 10
+            #             $ temp_Girls[0].stored_stats -= 10
+            #         elif temp_Girls[0].obedience >= 700:
+            #             $ temp_Girls[0].love += 5
+            #             $ temp_Girls[0].stored_stats -= 5
+            #         elif temp_Girls[0].obedience >= 500:
+            #             $ temp_Girls[0].love += 1
+            #             $ temp_Girls[0].stored_stats -= 1
+            #     if temp_Girls[0].reputation <= 800 and "nowhammy" not in JeanX.traits:
+            #         $ temp_Girls[0].reputation = 800
 
-            if "Jeaned" in temp_Girls[0].traits:
-                $ temp_Girls[0].traits.remove("Jeaned")
-                $ temp_Girls[0].LikeJean = getattr(JeanX,"LikeS"+temp_Girls[0].tag)
+            # if "Jeaned" in temp_Girls[0].traits:
+            #     $ temp_Girls[0].traits.remove("Jeaned")
+            #     $ temp_Girls[0].LikeJean = getattr(JeanX,"LikeS"+temp_Girls[0].tag)
 
             $ temp_Girls.remove(temp_Girls[0])
 
@@ -393,11 +391,11 @@ label wait(outfit=1, lights=1):
     if time_index == 0:
         $ del Player.daily_history[:]
 
-    call Taboo_Level (0)
+    call taboo_Level (0)
     call GirlwaitUp
 
     if time_index == 3:
-        call Study_Time
+        call offscreen_studying
 
     $ temp_Girls = all_Girls[:]
 
@@ -415,8 +413,8 @@ label wait(outfit=1, lights=1):
             $ temp_Girls[0].thirst -= int(temp_Girls[0].thirst/2)
             $ temp_Girls[0].lust = 20
 
-        $ temp_Girls[0].Chat[5] = 0
-        $ temp_Girls[0].Event[3] -= 1 if temp_Girls[0].Event[3] else 0
+        $ temp_Girls[0].had_chat[5] = 0
+        $ temp_Girls[0].event_happened[3] -= 1 if temp_Girls[0].event_happened[3] else 0
         $ temp_Girls[0].forced = False
 
         if temp_Girls[0].location == "bg_classroom" or temp_Girls[0].location == "bg_dangerroom" or temp_Girls[0].location == "bg_teacher":
@@ -436,11 +434,11 @@ label wait(outfit=1, lights=1):
         $ temp_Girls[0].addiction += temp_Girls[0].addiction_rate
         $ temp_Girls[0].addiction_rate -= temp_Girls[0].resistance if temp_Girls[0].addiction_rate > 3 else 0
 
-        if temp_Girls[0].Taboo and temp_Girls[0].shame and temp_Girls[0] in active_Girls:
+        if temp_Girls[0].taboo and temp_Girls[0].shame and temp_Girls[0] in active_Girls:
             if temp_Girls[0].location == "bg_dangerroom":
                 $ temp_Girls[0].shame -= 10 if temp_Girls[0].shame >= 10 else temp_Girls[0].shame
 
-            $ Count = int((temp_Girls[0].Taboo*temp_Girls[0].shame)/200)
+            $ Count = int((temp_Girls[0].taboo*temp_Girls[0].shame)/200)
 
             $ temp_Girls[0].change_stat("obedience", 90, Count)
             $ temp_Girls[0].change_stat("inhibition", 90, Count)
@@ -461,9 +459,9 @@ label wait(outfit=1, lights=1):
             $ temp_Girls[0].traits.append("stoodup")
 
         if temp_Girls[0].used_to_anal < 2:
-            if (temp_Girls[0].action_counter["anal"] + temp_Girls[0].action_counter["dildo_ass"] + temp_Girls[0].Plug) >= 15:
+            if (temp_Girls[0].action_counter["anal"] + temp_Girls[0].action_counter["dildo_ass"] + temp_Girls[0].buttplug) >= 15:
                 $ temp_Girls[0].used_to_anal = 2
-            elif (temp_Girls[0].action_counter["anal"] + temp_Girls[0].action_counter["dildo_ass"] + temp_Girls[0].Plug) >= 3:
+            elif (temp_Girls[0].action_counter["anal"] + temp_Girls[0].action_counter["dildo_ass"] + temp_Girls[0].buttplug) >= 3:
                 $ temp_Girls[0].used_to_anal = 1
 
         $ temp_Girls[0].XP = 3330 if temp_Girls[0].XP > 3330 else temp_Girls[0].XP
@@ -528,6 +526,7 @@ label wait(outfit=1, lights=1):
 
     if lights:
         hide blackscreen onlayer black
+
     return
 
 label Girls_Schedule(Girls=[], Clothes=1, Location=1, temp_location=0):
@@ -549,22 +548,22 @@ label Girls_Schedule(Girls=[], Clothes=1, Location=1, temp_location=0):
                     $ Girls[0].today_outfit = "casual1"
                 elif Girls[0].clothing[weekday] == 2:
                     $ Girls[0].today_outfit = "casual2"
-                elif Girls[0].clothing[weekday] == 3 and Girls[0].Custom1[0]:
+                elif Girls[0].clothing[weekday] == 3 and Girls[0].first_custom_outfit[0]:
                     $ Girls[0].today_outfit = "custom1"
                 elif Girls[0].clothing[weekday] == 4:
                     $ Girls[0].today_outfit = "gym"
-                elif Girls[0].clothing[weekday] == 5 and Girls[0].Custom2[0]:
+                elif Girls[0].clothing[weekday] == 5 and Girls[0].second_custom_outfit[0]:
                     $ Girls[0].today_outfit = "custom2"
-                elif Girls[0].clothing[weekday] == 6 and Girls[0].Custom3[0]:
+                elif Girls[0].clothing[weekday] == 6 and Girls[0].third_custom_outfit[0]:
                     $ Girls[0].today_outfit = "custom3"
 
                 if not Girls[0].today_outfit:
                     $ Options = ["casual1", "casual2"]
 
                     if not Girls[0].broken_up[0]:
-                        $ Options.append("custom1") if Girls[0].Custom1[0] == 2 else Options
-                        $ Options.append("custom2") if Girls[0].Custom2[0] == 2 else Options
-                        $ Options.append("custom3") if Girls[0].Custom3[0] == 2 else Options
+                        $ Options.append("custom1") if Girls[0].first_custom_outfit[0] == 2 else Options
+                        $ Options.append("custom2") if Girls[0].second_custom_outfit[0] == 2 else Options
+                        $ Options.append("custom3") if Girls[0].third_custom_outfit[0] == 2 else Options
 
                     $ renpy.random.shuffle(Options)
 
@@ -582,7 +581,7 @@ label Girls_Schedule(Girls=[], Clothes=1, Location=1, temp_location=0):
             elif Girls[0] in Party or Girls[0].location == "hold":
                 pass
             else:
-                $ Girls[0].location = Girls[0].Schedule[weekday][time_index]
+                $ Girls[0].location = Girls[0].weekly_schedule[weekday][time_index]
 
                 if Girls[0] == JubesX and JubesX.addiction > 60:
                     $ JubesX.location = JubesX.home
@@ -606,25 +605,25 @@ label Girls_Schedule(Girls=[], Clothes=1, Location=1, temp_location=0):
 
     return
 
-label Study_Time(Studiers=[]):
+label offscreen_studying(studiers = []):
     $ temp_Girls = all_Girls[:]
 
     while temp_Girls:
         if temp_Girls[0].location != bg_current and temp_Girls[0].location in personal_rooms:
-            $ Studiers.append(temp_Girls[0])
+            $ studiers.append(temp_Girls[0])
 
         $ temp_Girls.remove(temp_Girls[0])
 
-    if len(Studiers) < 2:
+    if len(studiers) < 2:
         return
 
-    $ renpy.random.shuffle(Studiers)
+    $ renpy.random.shuffle(studiers)
 
-    $ Studiers[0].GLG(Studiers[1],800,5,1)
-    $ Studiers[1].GLG(Studiers[0],800,5,1)
+    $ studiers[0].GLG(studiers[1],800,5,1)
+    $ studiers[1].GLG(studiers[0],800,5,1)
 
-    $ Studiers[0].XP += 5
-    $ Studiers[1].XP += 5
+    $ studiers[0].XP += 5
+    $ studiers[1].XP += 5
 
     return
 
@@ -645,10 +644,10 @@ label to_do(Girl=0):
 
         if "cleanhouse" in Girl.to_do:
             if LauraX in Player.Harem or not Player.Harem:
-                $ LauraX.Event[5] = 2
+                $ LauraX.event_happened[5] = 2
                 $ Girl.to_do.remove("cleanhouse")
 
-            $ LauraX.Event[5] -= 1 if LauraX.Event[5] > 1 else 0
+            $ LauraX.event_happened[5] -= 1 if LauraX.event_happened[5] > 1 else 0
     else:
         if "pubes" in Girl.to_do:
             $ Girl.pubes_counter -= 1
@@ -687,286 +686,286 @@ label to_do(Girl=0):
 
 label event_calls(event_Girls=[]):
     call Present_Check
-    $ D20 = renpy.random.randint(1, 20)
-    call Get_Dressed
-
-    if time_index == 2 and "going_on_date" in Player.daily_history:
-        if bg_current == "bg_campus":
-            call DateNight
-
-            $ Player.drain_word("going_on_date",0,1)
-
-            return
-        else:
-            menu:
-                "You have a date to get to, head for the square?"
-                "Yes":
-                    $ renpy.pop_call()
-
-                    jump Campus_entry
-                "No":
-                    "Suit yourself. . ."
-
-    if day < 3 or round <= 10:
-        return
-
-    if KittyX in active_Girls:
-        if "Kate" not in KittyX.names and KittyX.inhibition >= 500 and KittyX.location == bg_current:
-            call Kitty_Kate
-
-            return
-    else:
-        if "traveling" in Player.recent_history and "met" not in KittyX.history and bg_current == "bg_classroom":
-            jump meet_Kitty
-
-            return
-
-    if LauraX in active_Girls:
-        pass
-    elif "met" not in LauraX.history and "traveling" in Player.recent_history:
-        if bg_current == "bg_dangerroom":
-            if day >= 7 and "dress0" not in LauraX.history and "mission" not in LauraX.to_do:
-                call meet_Laura
-
-                return
-
-        if time_index < 3 and "met" in KittyX.history:
-            if "dress0" in LauraX.history:
-                call Laura_Dressup
-
-                return
-
-    if EmmaX in active_Girls:
-        if bg_current == "bg_classroom" and time_index == 2 and weekday in (0,2,4):
-            if "traveling" in Player.recent_history and not Party:
-                if "classcaught" not in EmmaX.history:
-                    jump Emma_Caught_Classroom
-
-                    return
-                elif D20 <= 10 and "will_masturbate" in EmmaX.daily_history:
-                    jump Emma_Caught_Classroom
-
-                    return
-
-            if "detention" in Player.traits and not Party:
-                jump Emma_Detention
-
-            if round >= 70:
-                $ EmmaX.location = "bg_classroom"
-    else:
-        if day >= 4 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
-            jump meet_Emma
-
-            return
-
-    if StormX in active_Girls:
-        if bg_current == "bg_classroom" and StormX.location == "bg_teacher" and "Peter" in StormX.history and "traveling" in Player.recent_history:
-            call Storm_Peter
-
-            return
-
-        if bg_current == "bg_classroom" and time_index == 2 and weekday in (1,3):
-            if "_mohawk" not in StormX.history and "traveling" not in Player.recent_history and approval_check(StormX, 200, "I"):
-                jump Storm_Hairtalk
-
-                return
-            if round >= 70:
-                $ StormX.location = "bg_classroom"
-
-        if time_index == 3 and bg_current == "bg_pool" and "poolnight" in Player.history:
-            if "sex friend" not in StormX.player_petnames or (D20 < 5 and "poolnight" not in Player.recent_history):
-                call Storm_Poolnight
-
-                return
-    elif "met" not in StormX.history and "met" in JeanX.history:
-        if bg_current == "bg_player" and "attic" not in Player.history and "noise" not in Player.history:
-            call StormMeetPrelude
-
-            return
-        elif bg_current == "bg_classroom" and "noise" in Player.history and "traveling" in Player.recent_history:
-            call StormMeetAsk
-
-            return
-        elif bg_current == "bg_player" and time_index < 2 and 0 < StormX.broken_up[0] <= 101 and "traveling" in Player.recent_history:
-            call StormMeetWater
-            jump Misplaced
-
-    if JubesX in active_Girls:
-        if time_index < 3 and "sunshine" not in JubesX.history and "traveling" in Player.recent_history and bg_current in ("bg_classroom","bg_dangerroom","bg_campus","bg_pool"):
-            jump Jubes_Sunshine
-
-            return
-        elif "mall" not in Player.history and "sunshine" in JubesX.history and time_index < 3 and JubesX.addiction < 50:
-            call Jubes_Mall
-            jump Misplaced
-        elif not JubesX.Event[1] and JubesX.addiction < 50:
-            $ JubesX.addiction += 5
-
-    if "goto" in Player.recent_history:
-        $ Player.recent_history.remove("goto")
-
-        return
-
-    if "locked" in Player.traits:
-        return
-
-    if "micro" not in Player.history and day > 13:
-        call Microtransactions_Intro
-
-    if "fix" not in Player.daily_history:
-        call AddictCheck
-
-    if bg_current == "bg_player":
-        $ event_Girls = active_Girls[:]
-
-        while event_Girls and "asked_to_meet" not in event_Girls[0].daily_history:
-            if "asked_to_meet" in event_Girls[0].daily_history:
-                $ event_Girls = ["x", event_Girls[0]]
-
-            $ event_Girls.remove(event_Girls[0])
-
-    if not event_Girls:
-        call ShareCheck
-        call CheatCheck
-        call JumperCheck
-
-        if time_index >= 2 and "fapcall" not in Player.daily_history:
-            $ event_Girls = active_Girls[:]
-
-            $ renpy.random.shuffle(event_Girls)
-
-            while event_Girls:
-                if "wants_to_masturbate" in event_Girls[0].daily_history:
-                    call CalltoFap (event_Girls[0])
-
-                    if not event_Girls:
-                        return
-
-                $ event_Girls.remove(event_Girls[0])
-
-    $ event_Girls = active_Girls[:] if not event_Girls else event_Girls
-    $ renpy.random.shuffle(event_Girls)
-
-
-    while event_Girls:
-        if "relationship" not in event_Girls[0].daily_history:
-            if "stoodup" in event_Girls[0].traits:
-                call Date_Stood_Up (event_Girls[0])
-                return
-
-            if event_Girls[0].broken_up[0] or "_angry" in event_Girls[0].daily_history:
-                pass
-            elif not event_Girls[0].Event[0] and event_Girls[0].event_counter["sleepover"] >= 5:
-                if event_Girls[0].location == bg_current or event_Girls[0] in Party:
-                    call expression event_Girls[0].tag + "_Key"
-
-                    return
-            elif event_Girls[0] == JubesX:
-                pass
-            elif event_Girls[0] == JeanX:
-                if bg_current != "bg_classroom":
-                    if JeanX.obedience >= 500 and "sir" not in JeanX.history:
-                        call Jean_Sub
-                    elif JeanX.obedience >= 800 and "master" not in JeanX.history:
-                        call Jean_Master
-                    elif JeanX.love >= 500 and "sexfriend" not in JeanX.history:
-                        call Jean_Like
-                    elif JeanX.love >= 800 and JeanX.obedience >= 600 and not JeanX.Event[5]:
-                        call Jean_Love
-                    elif "daddy" not in JeanX.player_petnames and approval_check(JeanX, 750, "L"):
-                        if (bg_current == event_Girls[0].home or bg_current == "bg_player") and event_Girls[0].location == bg_current:
-                            call Jean_Daddy
-
-                    return
-            elif "boyfriend" not in event_Girls[0].player_petnames and event_Girls[0].love >= 800 and event_Girls[0].Event[5] != 20 and event_Girls[0].tag + "No" not in Player.traits:
-                if event_Girls[0] == LauraX and LauraX.Event[5] == 3:
-                    call Laura_Cleanhouse
-                elif Player.Harem and event_Girls[0].tag + "Yes" not in Player.traits:
-                    call Poly_Start (event_Girls[0])
-                elif bg_current == event_Girls[0].home or bg_current == "bg_player":
-                    call expression event_Girls[0].tag + "_BF"
-                else:
-                    call AskedMeet (event_Girls[0], "_bemused")
-
-                return
-            elif "lover" not in event_Girls[0].player_petnames and event_Girls[0].love >= 950 and event_Girls[0].Event[6] < 15:
-                if bg_current == event_Girls[0].home or bg_current == "bg_player":
-                    call expression event_Girls[0].tag + "_Love"
-                else:
-                    call AskedMeet (event_Girls[0], "_bemused")
-
-                return
-            elif "sir" not in event_Girls[0].history and "sir" not in event_Girls[0].player_petnames and event_Girls[0].obedience >= 500:
-                if bg_current == event_Girls[0].home or bg_current == "bg_player":
-                    call expression event_Girls[0].tag + "_Sub"
-                else:
-                    call AskedMeet (event_Girls[0], "_bemused")
-                return
-            elif "master" not in event_Girls[0].history and "master" not in event_Girls[0].player_petnames and event_Girls[0].obedience >= 850 and event_Girls[0].Event[8] < 2:
-                if bg_current == event_Girls[0].home or bg_current == "bg_player":
-                    call expression event_Girls[0].tag + "_Master"
-                else:
-                    call AskedMeet (event_Girls[0], "_bemused")
-
-                return
-            elif "daddy" not in event_Girls[0].player_petnames and approval_check(event_Girls[0], 750, "L") and approval_check(event_Girls[0], 500, "O") and approval_check(event_Girls[0], 500, "I"):
-                if (bg_current == event_Girls[0].home or bg_current == "bg_player") and event_Girls[0].location == bg_current:
-                    call expression event_Girls[0].tag + "_Daddy"
-
-                return
-            elif "sex friend" not in event_Girls[0].player_petnames and event_Girls[0].inhibition >= 500:
-                if event_Girls[0] == EmmaX:
-                    if bg_current == "bg_classroom" and (EmmaX.location == "bg_teacher" or EmmaX.location == "bg_classroom") and time_index == 2:
-                        call Emma_Sexfriend
-                        return
-                elif event_Girls[0] == StormX:
-                    if StormX.Event[9]:
-                        pass
-                    elif "traveling" in Player.recent_history and time_index < 2:
-                        call Storm_Sexfriend
-
-                        return
-                elif bg_current == event_Girls[0].home or bg_current == "bg_player":
-                    call expression event_Girls[0].tag + "_Sexfriend"
-
-                    return
-                elif event_Girls[0] in Player.Harem and event_Girls[0].location == bg_current:
-                    call expression event_Girls[0].tag + "_Sexfriend"
-
-                    return
-                elif event_Girls[0] == LauraX:
-                    call expression event_Girls[0].tag + "_Sexfriend"
-
-                    return
-            elif "fuck buddy" not in event_Girls[0].player_petnames and event_Girls[0].inhibition >= 800:
-                if event_Girls[0] == RogueX:
-                    if bg_current != event_Girls[0].location:
-                        call expression event_Girls[0].tag + "_Fuckbuddy"
-
-                        return
-                elif event_Girls[0] == LauraX:
-                    if bg_current == "bg_player" and event_Girls[0].location != bg_current:
-                        call expression event_Girls[0].tag + "_Fuckbuddy"
-
-                        return
-                elif event_Girls[0] == StormX:
-                    if bg_current == "bg_classroom" and time_index == 2 and weekday in (1,3):
-                        call Storm_Fuckbuddy
-
-                        return
-                elif bg_current == event_Girls[0].home or bg_current == "bg_player":
-                    call expression event_Girls[0].tag + "_Fuckbuddy"
-
-                    return
-                elif event_Girls[0] in Player.Harem and event_Girls[0].location == bg_current:
-                    call expression event_Girls[0].tag + "_Fuckbuddy"
-
-                    return
-
-        $ event_Girls.remove(event_Girls[0])
-
-    if "fix" in Player.daily_history:
-        call AddictCheck
+    # $ D20 = renpy.random.randint(1, 20)
+    # call Get_Dressed
+    #
+    # if time_index == 2 and "going_on_date" in Player.daily_history:
+    #     if bg_current == "bg_campus":
+    #         call DateNight
+    #
+    #         $ Player.drain_word("going_on_date",0,1)
+    #
+    #         return
+    #     else:
+    #         menu:
+    #             "You have a date to get to, head for the square?"
+    #             "Yes":
+    #                 $ renpy.pop_call()
+    #
+    #                 jump campus_entry
+    #             "No":
+    #                 "Suit yourself. . ."
+    #
+    # if day < 3 or round <= 10:
+    #     return
+    #
+    # if KittyX in active_Girls:
+    #     if "Kate" not in KittyX.names and KittyX.inhibition >= 500 and KittyX.location == bg_current:
+    #         call Kitty_Kate
+    #
+    #         return
+    # else:
+    #     if "traveling" in Player.recent_history and "met" not in KittyX.history and bg_current == "bg_classroom":
+    #         jump meet_Kitty
+    #
+    #         return
+    #
+    # if LauraX in active_Girls:
+    #     pass
+    # elif "met" not in LauraX.history and "traveling" in Player.recent_history:
+    #     if bg_current == "bg_dangerroom":
+    #         if day >= 7 and "dress0" not in LauraX.history and "mission" not in LauraX.to_do:
+    #             call meet_Laura
+    #
+    #             return
+    #
+    #     if time_index < 3 and "met" in KittyX.history:
+    #         if "dress0" in LauraX.history:
+    #             call Laura_Dressup
+    #
+    #             return
+    #
+    # if EmmaX in active_Girls:
+    #     if bg_current == "bg_classroom" and time_index == 2 and weekday in (0,2,4):
+    #         if "traveling" in Player.recent_history and not Party:
+    #             if "classcaught" not in EmmaX.history:
+    #                 jump Emma_Caught_Classroom
+    #
+    #                 return
+    #             elif D20 <= 10 and "will_masturbate" in EmmaX.daily_history:
+    #                 jump Emma_Caught_Classroom
+    #
+    #                 return
+    #
+    #         if "detention" in Player.traits and not Party:
+    #             jump Emma_Detention
+    #
+    #         if round >= 70:
+    #             $ EmmaX.location = "bg_classroom"
+    # else:
+    #     if day >= 4 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
+    #         jump meet_Emma
+    #
+    #         return
+    #
+    # if StormX in active_Girls:
+    #     if bg_current == "bg_classroom" and StormX.location == "bg_teacher" and "Peter" in StormX.history and "traveling" in Player.recent_history:
+    #         call Storm_Peter
+    #
+    #         return
+    #
+    #     if bg_current == "bg_classroom" and time_index == 2 and weekday in (1,3):
+    #         if "_mohawk" not in StormX.history and "traveling" not in Player.recent_history and approval_check(StormX, 200, "I"):
+    #             jump Storm_Hairtalk
+    #
+    #             return
+    #         if round >= 70:
+    #             $ StormX.location = "bg_classroom"
+    #
+    #     if time_index == 3 and bg_current == "bg_pool" and "poolnight" in Player.history:
+    #         if "sex friend" not in StormX.player_petnames or (D20 < 5 and "poolnight" not in Player.recent_history):
+    #             call Storm_Poolnight
+    #
+    #             return
+    # elif "met" not in StormX.history and "met" in JeanX.history:
+    #     if bg_current == "bg_player" and "attic" not in Player.history and "noise" not in Player.history:
+    #         call StormMeetPrelude
+    #
+    #         return
+    #     elif bg_current == "bg_classroom" and "noise" in Player.history and "traveling" in Player.recent_history:
+    #         call StormMeetAsk
+    #
+    #         return
+    #     elif bg_current == "bg_player" and time_index < 2 and 0 < StormX.broken_up[0] <= 101 and "traveling" in Player.recent_history:
+    #         call StormMeetWater
+    #         jump Misplaced
+    #
+    # if JubesX in active_Girls:
+    #     if time_index < 3 and "sunshine" not in JubesX.history and "traveling" in Player.recent_history and bg_current in ("bg_classroom","bg_dangerroom","bg_campus","bg_pool"):
+    #         jump Jubes_Sunshine
+    #
+    #         return
+    #     elif "mall" not in Player.history and "sunshine" in JubesX.history and time_index < 3 and JubesX.addiction < 50:
+    #         call Jubes_Mall
+    #         jump Misplaced
+    #     elif not JubesX.event_happened[1] and JubesX.addiction < 50:
+    #         $ JubesX.addiction += 5
+    #
+    # if "goto" in Player.recent_history:
+    #     $ Player.recent_history.remove("goto")
+    #
+    #     return
+    #
+    # if "locked" in Player.traits:
+    #     return
+    #
+    # if "micro" not in Player.history and day > 13:
+    #     call Microtransactions_Intro
+    #
+    # if "fix" not in Player.daily_history:
+    #     call check_addiction
+    #
+    # if bg_current == "bg_player":
+    #     $ event_Girls = active_Girls[:]
+    #
+    #     while event_Girls and "asked_to_meet" not in event_Girls[0].daily_history:
+    #         if "asked_to_meet" in event_Girls[0].daily_history:
+    #             $ event_Girls = ["x", event_Girls[0]]
+    #
+    #         $ event_Girls.remove(event_Girls[0])
+    #
+    # if not event_Girls:
+    #     call ShareCheck
+    #     call CheatCheck
+    #     call JumperCheck
+    #
+    #     if time_index >= 2 and "fapcall" not in Player.daily_history:
+    #         $ event_Girls = active_Girls[:]
+    #
+    #         $ renpy.random.shuffle(event_Girls)
+    #
+    #         while event_Girls:
+    #             if "wants_to_masturbate" in event_Girls[0].daily_history:
+    #                 call CalltoFap (event_Girls[0])
+    #
+    #                 if not event_Girls:
+    #                     return
+    #
+    #             $ event_Girls.remove(event_Girls[0])
+    #
+    # $ event_Girls = active_Girls[:] if not event_Girls else event_Girls
+    # $ renpy.random.shuffle(event_Girls)
+    #
+    #
+    # while event_Girls:
+    #     if "relationship" not in event_Girls[0].daily_history:
+    #         if "stoodup" in event_Girls[0].traits:
+    #             call Date_Stood_Up (event_Girls[0])
+    #             return
+    #
+    #         if event_Girls[0].broken_up[0] or "_angry" in event_Girls[0].daily_history:
+    #             pass
+    #         elif not event_Girls[0].event_happened[0] and event_Girls[0].event_counter["sleepover"] >= 5:
+    #             if event_Girls[0].location == bg_current or event_Girls[0] in Party:
+    #                 call expression event_Girls[0].tag + "_Key"
+    #
+    #                 return
+    #         elif event_Girls[0] == JubesX:
+    #             pass
+    #         elif event_Girls[0] == JeanX:
+    #             if bg_current != "bg_classroom":
+    #                 if JeanX.obedience >= 500 and "sir" not in JeanX.history:
+    #                     call Jean_Sub
+    #                 elif JeanX.obedience >= 800 and "master" not in JeanX.history:
+    #                     call Jean_Master
+    #                 elif JeanX.love >= 500 and "sexfriend" not in JeanX.history:
+    #                     call Jean_Like
+    #                 elif JeanX.love >= 800 and JeanX.obedience >= 600 and not JeanX.event_happened[5]:
+    #                     call Jean_Love
+    #                 elif "daddy" not in JeanX.player_petnames and approval_check(JeanX, 750, "L"):
+    #                     if (bg_current == event_Girls[0].home or bg_current == "bg_player") and event_Girls[0].location == bg_current:
+    #                         call Jean_Daddy
+    #
+    #                 return
+    #         elif "boyfriend" not in event_Girls[0].player_petnames and event_Girls[0].love >= 800 and event_Girls[0].event_happened[5] != 20 and event_Girls[0].tag + "No" not in Player.traits:
+    #             if event_Girls[0] == LauraX and LauraX.event_happened[5] == 3:
+    #                 call Laura_Cleanhouse
+    #             elif Player.Harem and event_Girls[0].tag + "Yes" not in Player.traits:
+    #                 call Poly_Start (event_Girls[0])
+    #             elif bg_current == event_Girls[0].home or bg_current == "bg_player":
+    #                 call expression event_Girls[0].tag + "_BF"
+    #             else:
+    #                 call AskedMeet (event_Girls[0], "_bemused")
+    #
+    #             return
+    #         elif "lover" not in event_Girls[0].player_petnames and event_Girls[0].love >= 950 and event_Girls[0].event_happened[6] < 15:
+    #             if bg_current == event_Girls[0].home or bg_current == "bg_player":
+    #                 call expression event_Girls[0].tag + "_Love"
+    #             else:
+    #                 call AskedMeet (event_Girls[0], "_bemused")
+    #
+    #             return
+    #         elif "sir" not in event_Girls[0].history and "sir" not in event_Girls[0].player_petnames and event_Girls[0].obedience >= 500:
+    #             if bg_current == event_Girls[0].home or bg_current == "bg_player":
+    #                 call expression event_Girls[0].tag + "_Sub"
+    #             else:
+    #                 call AskedMeet (event_Girls[0], "_bemused")
+    #             return
+    #         elif "master" not in event_Girls[0].history and "master" not in event_Girls[0].player_petnames and event_Girls[0].obedience >= 850 and event_Girls[0].event_happened[8] < 2:
+    #             if bg_current == event_Girls[0].home or bg_current == "bg_player":
+    #                 call expression event_Girls[0].tag + "_Master"
+    #             else:
+    #                 call AskedMeet (event_Girls[0], "_bemused")
+    #
+    #             return
+    #         elif "daddy" not in event_Girls[0].player_petnames and approval_check(event_Girls[0], 750, "L") and approval_check(event_Girls[0], 500, "O") and approval_check(event_Girls[0], 500, "I"):
+    #             if (bg_current == event_Girls[0].home or bg_current == "bg_player") and event_Girls[0].location == bg_current:
+    #                 call expression event_Girls[0].tag + "_Daddy"
+    #
+    #             return
+    #         elif "sex friend" not in event_Girls[0].player_petnames and event_Girls[0].inhibition >= 500:
+    #             if event_Girls[0] == EmmaX:
+    #                 if bg_current == "bg_classroom" and (EmmaX.location == "bg_teacher" or EmmaX.location == "bg_classroom") and time_index == 2:
+    #                     call Emma_Sexfriend
+    #                     return
+    #             elif event_Girls[0] == StormX:
+    #                 if StormX.event_happened[9]:
+    #                     pass
+    #                 elif "traveling" in Player.recent_history and time_index < 2:
+    #                     call Storm_Sexfriend
+    #
+    #                     return
+    #             elif bg_current == event_Girls[0].home or bg_current == "bg_player":
+    #                 call expression event_Girls[0].tag + "_Sexfriend"
+    #
+    #                 return
+    #             elif event_Girls[0] in Player.Harem and event_Girls[0].location == bg_current:
+    #                 call expression event_Girls[0].tag + "_Sexfriend"
+    #
+    #                 return
+    #             elif event_Girls[0] == LauraX:
+    #                 call expression event_Girls[0].tag + "_Sexfriend"
+    #
+    #                 return
+    #         elif "fuck buddy" not in event_Girls[0].player_petnames and event_Girls[0].inhibition >= 800:
+    #             if event_Girls[0] == RogueX:
+    #                 if bg_current != event_Girls[0].location:
+    #                     call expression event_Girls[0].tag + "_Fuckbuddy"
+    #
+    #                     return
+    #             elif event_Girls[0] == LauraX:
+    #                 if bg_current == "bg_player" and event_Girls[0].location != bg_current:
+    #                     call expression event_Girls[0].tag + "_Fuckbuddy"
+    #
+    #                     return
+    #             elif event_Girls[0] == StormX:
+    #                 if bg_current == "bg_classroom" and time_index == 2 and weekday in (1,3):
+    #                     call Storm_Fuckbuddy
+    #
+    #                     return
+    #             elif bg_current == event_Girls[0].home or bg_current == "bg_player":
+    #                 call expression event_Girls[0].tag + "_Fuckbuddy"
+    #
+    #                 return
+    #             elif event_Girls[0] in Player.Harem and event_Girls[0].location == bg_current:
+    #                 call expression event_Girls[0].tag + "_Fuckbuddy"
+    #
+    #                 return
+    #
+    #     $ event_Girls.remove(event_Girls[0])
+    #
+    # if "fix" in Player.daily_history:
+    #     call check_addiction
 
 label QuickEvents(event_Girls=[]):
 
@@ -987,7 +986,7 @@ label QuickEvents(event_Girls=[]):
                 $ event_Girls[0].grool = 0
 
 
-            if Taboo and event_Girls[0].lust >= 75:
+            if taboo and event_Girls[0].lust >= 75:
                 if event_Girls[0].inhibition > 800 or "exhibitionist" in event_Girls[0].traits:
                     "[event_Girls[0].name] gets a sly smile on her face and squirms a bit."
                 elif event_Girls[0].inhibition > 500 and event_Girls[0].lust < 90:
@@ -1007,7 +1006,7 @@ label QuickEvents(event_Girls=[]):
 
             if event_Girls[0].location == "bg_showerroom" and "showered" in event_Girls[0].daily_history:
 
-                $ event_Girls[0].location = event_Girls[0].Schedule[weekday][time_index]
+                $ event_Girls[0].location = event_Girls[0].weekly_schedule[weekday][time_index]
                 if event_Girls[0] == JubesX and JubesX.addiction > 60:
 
                     $ JubesX.location = JubesX.home
@@ -1025,7 +1024,7 @@ label AskedMeet(Girl=0, Emotion="_bemused", Why=0):
         "[Girl.name] asks if you could meet her in your room later."
         $ Girl.add_word(1,"asked_to_meet","asked_to_meet",0,0)
         $ Player.add_word(1,0,"meet girl",0,0)
-        if RTR_Toggle:
+        if always_return_to_room:
             call return_to_room
     return
 
@@ -1141,22 +1140,22 @@ menu Tutorial:
         while True:
             menu:
                 "So what can you do with your time?"
-                "wait/Sleep":
-                    "You can always just \"wait.\" This causes you to waste time, but who knows, maybe something interesting will happen."
+                "Wait/Sleep":
+                    "You can always just \"Wait\" This causes you to waste time, but who knows, maybe something interesting will happen."
                     "Of course when it's night time, this becomes \"Sleep.\" You can only sleep in your own room at first, but maybe someone else would let you sleep in her room."
                 "Shop":
                     "You can also access the school's fabricator store, where you can order various items to be delivered to your room."
                 "Class":
                     "You can always attend classes. These are typically not that interesting, but will raise your XP, and various events might occur in class."
                     "Classes are open during weekday morning and midday periods. You might bump into Rogue there."
-                    "You can access the classroom by using \"Leave [[Go to Campus Square].\""
+                    "You can access the classroom by using \"Leave [[Go to campus Square].\""
                 "Danger Room":
                     "You can also attend a Danger Room training session. These also raise your XP."
                     "The Danger Room is open any time except late at night (students need their sleep)."
-                    "You can access the Danger Room by using \"Leave [[Go to Campus Square].\""
+                    "You can access the Danger Room by using \"Leave [[Go to campus Square].\""
                 "Shower":
                     "You can also take a shower, but don't worry, you'll do that off camera automatically if you don't get around to it."
-                    "You can access the showers by using \"Leave [[Go to Campus Square].\""
+                    "You can access the showers by using \"Leave [[Go to campus Square].\""
                 "Study":
                     "You can also choose to study with one of the other students. This will gain you XP, and who knows what else might happen?"
                 "Dating":
@@ -1242,22 +1241,14 @@ label SpecialMenu:
                 "If a girl says she needs to see you, by default you are asked if you'd like to return."
                 menu:
                     "Would you like the game to ask you this?"
-                    "Yes [[current]" if RTR_Toggle:
+                    "Yes [[current]" if always_return_to_room:
                         pass
-                    "Yes" if not RTR_Toggle:
-                        $ RTR_Toggle = 1
-                    "No [[current]" if not RTR_Toggle:
+                    "Yes" if not always_return_to_room:
+                        $ always_return_to_room = 1
+                    "No [[current]" if not always_return_to_room:
                         pass
-                    "No" if RTR_Toggle:
-                        $ RTR_Toggle = 0
-            "Activate Travel Mode" if not TravelMode:
-                "This mode causes you to travel directly to adjacent areas, but not directly to more distant ones."
-                "If you would prefer to use the default, more \"world map\" style of travel, you can toggle this back off."
-                "You can use \"Leave\" to open the location directory."
-                $ TravelMode = 1
-            "Deactivate Travel Mode" if TravelMode:
-                $ TravelMode = 0
-
+                    "No" if always_return_to_room:
+                        $ always_return_to_room = 0
             "Press the red button" if False:
                 "Huh, wonder what that was about. . ."
             "Never mind.":
@@ -1739,7 +1730,7 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[], temp_Girls=[]):
                 $ Character.location = Character.home
                 call set_the_scene
                 call clear_the_room (Character)
-                call Taboo_Level
+                call taboo_Level
                 if not Silent:
                     "[Character.name] brings you back to her room. . ."
                 jump Misplaced
@@ -1766,38 +1757,45 @@ label clear_the_room(Character=0, Passive=0, Silent=0, Girls=[], temp_Girls=[]):
         $ Girls.remove(Girls[0])
     if Character in all_Girls:
         call show_girl (Character)
-    call Taboo_Level
+    call taboo_Level
     return
 
-label girls_location(GirlsNum=0, Change=0, temp_Girlsptions=[]):
-    $ temp_Girlsptions = all_Girls[:]
-    $ renpy.random.shuffle(temp_Girlsptions)
-    while temp_Girlsptions:
+label girls_location(GirlsNum=0, Change=0):
+    $ temp_Girls = renpy.random.shuffle(all_Girls[:])
 
-        if "leaving" in temp_Girlsptions[0].recent_history:
-            if "sleepover" in temp_Girlsptions[0].traits:
-                $ temp_Girlsptions[0].drain_word("sleepover",0,0,1)
-            call expression temp_Girlsptions[0].tag + "_Leave"
-            if temp_Girlsptions[0].location != bg_current:
-                if temp_Girlsptions[0] in Present:
-                    $ Present.remove(temp_Girlsptions[0])
+    while temp_Girls:
+        if "leaving" in temp_Girls[0].recent_history:
+            if "sleepover" in temp_Girls[0].traits:
+                $ temp_Girls[0].drain_word("sleepover",0,0,1)
+
+            call expression temp_Girls[0].tag + "_Leave"
+
+            if temp_Girls[0].location != bg_current:
+                if temp_Girls[0] in Present:
+                    $ Present.remove(temp_Girls[0])
+
                 $ Change = 1
+
             $ GirlsNum += 1
 
-        if temp_Girlsptions[0] in Nearby and temp_Girlsptions[0].location != "nearby":
-            $ Nearby.remove(temp_Girlsptions[0])
-        $ temp_Girlsptions.remove(temp_Girlsptions[0])
+        if temp_Girls[0] in Nearby and temp_Girls[0].location != "nearby":
+            $ Nearby.remove(temp_Girls[0])
+
+        $ temp_Girls.remove(temp_Girls[0])
 
     if Change:
+        call set_the_scene(Dress=0)
 
-        call set_the_scene (Dress=0)
+    $ temp_Girls = all_Girls[:]
 
-    $ temp_Girlsptions = all_Girls[:]
-    while temp_Girlsptions:
-        if "arriving" in temp_Girlsptions[0].recent_history:
+    while temp_Girls:
+        if "arriving" in temp_Girls[0].recent_history:
             call Girls_Arrive
+
             return
-        $ temp_Girlsptions.remove(temp_Girlsptions[0])
+
+        $ temp_Girls.remove(temp_Girls[0])
+
     return
 
 label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, temp_Girls=[]):
@@ -2514,44 +2512,45 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0, temp_Girls=[]):
         "There were some others as well, but they kept their distance."
     return
 
-label Gym_entry(temp_Girls=[], GirlsNum=0):
-    if Taboo == 0 and bg_current == "bg_dangerroom":
+label gym_entry(number_of_girls = 0):
+    if taboo == 0:
         menu:
             "Is this visit for work or for play?"
             "Work [[get geared up]":
                 pass
             "Play [[keep on this outfit]":
                 return
+
     $ temp_Girls = all_Girls[:]
+
     while temp_Girls:
-
         if temp_Girls[0].location != "bg_dangerroom" and temp_Girls[0].outfit == "gym":
-
             $ temp_Girls[0].outfit = temp_Girls[0].today_outfit
         elif temp_Girls[0].outfit == "gym":
-
             pass
         elif temp_Girls[0].location == "bg_dangerroom" and temp_Girls[0] not in Party:
-
             $ temp_Girls[0].outfit = "gym"
+
         $ temp_Girls.remove(temp_Girls[0])
+
     call set_the_scene
+
     $ temp_Girls = Present[:]
+
     while temp_Girls:
         if temp_Girls[0].outfit != "gym":
-
             if approval_check(temp_Girls[0], 1300, "LO") or "passive" in temp_Girls[0].traits:
                 pass
-            elif approval_check(temp_Girls[0], 800, "LO") and temp_Girls[0].Custom1[0]:
+            elif approval_check(temp_Girls[0], 800, "LO") and temp_Girls[0].first_custom_outfit[0]:
                 pass
-            elif approval_check(temp_Girls[0], 600, "LO") and temp_Girls[0].Gym[0] != 1:
+            elif approval_check(temp_Girls[0], 600, "LO") and temp_Girls[0].gym_clothes[0] != 1:
                 pass
             else:
                 $ Line = "no"
 
             if Line == "no" or "asked gym" in temp_Girls[0].daily_history or "no_ask gym" in temp_Girls[0].traits:
-
                 show blackscreen onlayer black
+
                 if temp_Girls[0] == EmmaX:
                     ch_e "I should change too."
                 elif temp_Girls[0] == LauraX:
@@ -2559,16 +2558,16 @@ label Gym_entry(temp_Girls=[], GirlsNum=0):
                 elif temp_Girls[0] == StormX:
                     ch_s "I should change as well. . ."
                 else:
-                    if GirlsNum:
+                    if number_of_girls:
                         temp_Girls[0].voice "I'll be right back too."
                     else:
                         temp_Girls[0].voice "I'll be back soon, gotta change."
+
                 $ temp_Girls[0].outfit = "gym"
             else:
-
                 $ temp_Girls[0].daily_history.append("asked gym")
-                if GirlsNum:
 
+                if number_of_girls:
                     if temp_Girls[0] == EmmaX:
                         $ Line = "Do you think I should change as well?"
                     elif temp_Girls[0] == LauraX:
@@ -2586,7 +2585,9 @@ label Gym_entry(temp_Girls=[], GirlsNum=0):
                         $ Line = "Do you think I should change into my gym clothes?"
                     else:
                         $ Line = "Would you like me to change into my gym clothes?"
+
                 temp_Girls[0].voice "[Line]"
+
                 menu:
                     extend ""
                     "Yeah, they look great.":
@@ -2594,23 +2595,27 @@ label Gym_entry(temp_Girls=[], GirlsNum=0):
                         $ temp_Girls[0].change_stat("love", 80, 2)
                         $ temp_Girls[0].change_stat("obedience", 40, 1)
                         $ temp_Girls[0].change_stat("inhibition", 30, 1)
+
                         $ Line = 1
                     "No, stay in that.":
                         $ temp_Girls[0].change_face("_confused")
                         $ temp_Girls[0].change_stat("obedience", 50, 5)
+
                         $ Line = 0
                     "Whichever you like.":
                         $ temp_Girls[0].change_face("_confused")
                         $ temp_Girls[0].change_stat("inhibition", 50, 1)
+
                         $ Line = renpy.random.randint(0, 3)
                     "I don't care.":
                         $ temp_Girls[0].change_face("_angry")
                         $ temp_Girls[0].change_stat("love", 50, -3, 1)
                         $ temp_Girls[0].change_stat("obedience", 50, 4)
                         $ temp_Girls[0].change_stat("inhibition", 50, 2)
-                        $ Line = renpy.random.randint(0, 1)
-                if Line:
 
+                        $ Line = renpy.random.randint(0, 1)
+
+                if Line:
                     if temp_Girls[0] == RogueX:
                         ch_r "Ok, be right back."
                     elif temp_Girls[0] == KittyX:
@@ -2623,48 +2628,59 @@ label Gym_entry(temp_Girls=[], GirlsNum=0):
                         ch_s "Then I will return shortly."
                     elif temp_Girls[0] == JubesX:
                         ch_v "K, be right back."
+
                     $ temp_Girls[0].outfit = "gym"
 
             if temp_Girls[0].outfit == "gym":
-                $ GirlsNum += 1
+                $ number_of_girls += 1
+
             $ Line = 0
 
         $ temp_Girls.remove(temp_Girls[0])
 
-
     $ temp_Girls = all_Girls[:]
-    while temp_Girls:
 
+    while temp_Girls:
         $ temp_Girls[0].change_outfit()
         $ temp_Girls.remove(temp_Girls[0])
+
     hide blackscreen onlayer black
+
     return
 
-label Gym_Exit(temp_Girls=[]):
+label exit_gym(temp_Girls = []):
     if temp_Girls and temp_Girls[0] in all_Girls:
         pass
     else:
         $ temp_Girls = Party[:]
+
+    $ line = None
+
     while temp_Girls:
         if temp_Girls[0].outfit == "gym":
 
             if len(Party) > 1:
-                $ Line = "We should change out of these if we're leaving. . ."
+                $ line = "We should change out of these if we're leaving. . ."
             else:
-                $ Line = "I should change out of these if we're leaving. . ."
+                $ line = "I should change out of these if we're leaving. . ."
             $ temp_Girls[0].outfit = temp_Girls[0].today_outfit
-        $ temp_Girls.remove(temp_Girls[0])
-    if Party:
-        Party[0].voice "[Line]"
-    if Line:
-        show blackscreen onlayer black with dissolve
-        $ temp_Girls = Party[:]
-        while temp_Girls:
 
+        $ temp_Girls.remove(temp_Girls[0])
+
+    if Party:
+        Party[0].voice "[line]"
+
+    if line:
+        show blackscreen onlayer black with dissolve
+
+        $ temp_Girls = Party[:]
+
+        while temp_Girls:
             $ temp_Girls[0].change_outfit()
             $ temp_Girls.remove(temp_Girls[0])
-        $ Line = 0
+
         hide blackscreen onlayer black
+
     return
 
 label Gym_Clothes_Off(temp_Girls=[]):
@@ -2734,9 +2750,9 @@ label ReturnToSender:
 
 
 
-        if temp_Girls[0] not in Party and temp_Girls[0].Schedule[weekday][time_index] != bg_current:
+        if temp_Girls[0] not in Party and temp_Girls[0].weekly_schedule[weekday][time_index] != bg_current:
 
-            $ temp_Girls[0].location = temp_Girls[0].Schedule[weekday][time_index]
+            $ temp_Girls[0].location = temp_Girls[0].weekly_schedule[weekday][time_index]
             if temp_Girls[0] == JubesX and JubesX.addiction > 60:
 
                 $ JubesX.location = JubesX.home
@@ -2825,13 +2841,13 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
 
     if Girl == KittyX:
         if bg_current == "bg_campus" or bg_current == "bg_pool":
-            "Suddently, [Girl.name] rounds a corner."
+            "Suddenly, [Girl.name] rounds a corner."
         else:
             "You look to the door just as [KittyX.name] phases into the room."
 
         $ KittyX.location = bg_current
 
-        call Taboo_Level
+        call taboo_Level
 
         $ KittyX.change_outfit()
 
@@ -2848,9 +2864,9 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
             call show_girl (Girl, trigger_reset=0)
 
             if bg_current == "bg_campus" or bg_current == "bg_pool":
-                "Suddently, [Girl.name] rounds a corner."
+                "Suddenly, [Girl.name] rounds a corner."
             else:
-                "Suddently, [Girl.name] enters the room, apparently without knocking."
+                "Suddenly, [Girl.name] enters the room, apparently without knocking."
 
             if Girl == RogueX:
                 ch_r "Hey, got a minute, [Girl.player_petname]?"
@@ -2876,7 +2892,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
 
         $ JeanX.location = bg_current
 
-        call Taboo_Level
+        call taboo_Level
 
         $ JeanX.change_outfit()
 
@@ -2960,8 +2976,8 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
                         $ Girl.change_outfit()
 
                         if Girl == LauraX:
-                            $ LauraX.ArmPose = 2
-                            $ LauraX.Claws = 1
+                            $ LauraX.arm_pose = 2
+                            $ LauraX.claws = 1
 
                             "snickt"
 
@@ -2969,7 +2985,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
 
                             "The door swings open."
 
-                            $ LauraX.Claws = 0
+                            $ LauraX.claws = 0
 
                             ch_l "Hey, so I don't like being jerked around, so don't do that, okay?"
                         else:
@@ -3042,7 +3058,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
         if "poly " + current_Girl.tag in Girl.traits or (current_Girl in Player.Harem and Girl in Player.Harem):
             pass
         else:
-            if approval_check(current_Girl, 1500, TabM=2, Bonus = (Girl.GirlLikeCheck(current_Girl) - 500)):
+            if approval_check(current_Girl, 1500, TabM=2, Bonus = (Girl.likes[current_Girl.tag] - 500)):
                 $ current_Girl.change_face("_sexy", 1)
                 $ current_Girl.change_stat("obedience", 90, 5)
                 $ current_Girl.change_stat("inhibition", 90, 5)
@@ -3120,7 +3136,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
 
     $ Girl.location = bg_current
 
-    call Taboo_Level
+    call taboo_Level
 
     $ Girl.change_outfit(5)
     $ Player.drain_word("locked",0,0,1)
@@ -3134,7 +3150,7 @@ label locked_door(Girl=0, entering=0, current_Girl=0):
 
     return True
 
-label Taboo_Level(Taboo_Loc=1, Teach=0, temp_Girls=[]):
+label taboo_Level(taboo_Loc=1, Teach=0, temp_Girls=[]):
 
 
 
@@ -3146,12 +3162,12 @@ label Taboo_Level(Taboo_Loc=1, Teach=0, temp_Girls=[]):
         $ StormX.location = "bg_classroom"
         $ Teach = 2
 
-    call CheckTaboo (Player, bg_current)
+    call Checktaboo (Player, bg_current)
 
     $ temp_Girls = all_Girls[:]
     if JeanX in temp_Girls and "nowhammy" not in JeanX.traits:
 
-        $ JeanX.Taboo = 0
+        $ JeanX.taboo = 0
         $ temp_Girls.remove(JeanX)
     while temp_Girls:
 
@@ -3159,12 +3175,12 @@ label Taboo_Level(Taboo_Loc=1, Teach=0, temp_Girls=[]):
         if temp_Girls[0] in Party:
             $ temp_Girls[0].location = bg_current
         if temp_Girls[0].location == "nearby":
-            $ Taboo_Check = bg_current
+            $ taboo_Check = bg_current
         else:
-            $ Taboo_Check = temp_Girls[0].location
-        if not Taboo_Loc or Taboo_Check == bg_current:
+            $ taboo_Check = temp_Girls[0].location
+        if not taboo_Loc or taboo_Check == bg_current:
 
-            call CheckTaboo (temp_Girls[0], Taboo_Check)
+            call Checktaboo (temp_Girls[0], taboo_Check)
         $ temp_Girls.remove(temp_Girls[0])
 
     if Teach == 2:
@@ -3173,40 +3189,40 @@ label Taboo_Level(Taboo_Loc=1, Teach=0, temp_Girls=[]):
         $ EmmaX.location = "bg_teacher"
     return
 
-label CheckTaboo(character=0, Taboo_Check=0):
+label Checktaboo(character=0, taboo_Check=0):
 
 
 
-    if Taboo_Check in personal_rooms or Taboo_Check == "hold":
-        $ character.Taboo = 0
-    elif "locked" in Player.traits and Taboo_Check == bg_current:
-        $ character.Taboo = 0
-    elif Taboo_Check in ("bg_classroom", "bg_study"):
+    if taboo_Check in personal_rooms or taboo_Check == "hold":
+        $ character.taboo = 0
+    elif "locked" in Player.traits and taboo_Check == bg_current:
+        $ character.taboo = 0
+    elif taboo_Check in ("bg_classroom", "bg_study"):
         if time_index >= 3:
-            $ character.Taboo = 10
+            $ character.taboo = 10
         elif time_index == 2 or weekday >= 5:
-            $ character.Taboo = 30
+            $ character.taboo = 30
         else:
-            $ character.Taboo = 40
-    elif Taboo_Check == "bg_dangerroom":
+            $ character.taboo = 40
+    elif taboo_Check == "bg_dangerroom":
         if time_index >= 3:
-            $ character.Taboo = 20
+            $ character.taboo = 20
         else:
-            $ character.Taboo = 40
-    elif Taboo_Check == "bg_campus" or Taboo_Check == "bg_pool":
+            $ character.taboo = 40
+    elif taboo_Check == "bg_campus" or taboo_Check == "bg_pool":
         if time_index >= 3:
-            $ character.Taboo = 20
+            $ character.taboo = 20
         else:
-            $ character.Taboo = 40
-    elif Taboo_Check == "bg_showerroom":
-        $ character.Taboo = 20
+            $ character.taboo = 40
+    elif taboo_Check == "bg_showerroom":
+        $ character.taboo = 20
     else:
-        $ character.Taboo = 40
+        $ character.taboo = 40
     if character == Player:
 
-        $ Taboo = character.Taboo
+        $ taboo = character.taboo
         return
-    if character.Taboo >= 20:
+    if character.taboo >= 20:
 
         return
 
@@ -3215,12 +3231,12 @@ label CheckTaboo(character=0, Taboo_Check=0):
 
         if Girl2[0] != character:
 
-            if character.location == Girl2[0].location and character.GirlLikeCheck(Girl2[0]) <= 700 and not (character in Player.Harem and Girl2[0] in Player.Harem):
+            if character.location == Girl2[0].location and character.likes[Girl2[0].tag] <= 700 and not (character in Player.Harem and Girl2[0] in Player.Harem):
 
-                $ character.Taboo = 20
+                $ character.taboo = 20
         $ Girl2.remove(Girl2[0])
 
-    $ Taboo = character.Taboo if (character.Taboo > Taboo and bg_current == character.location) else Taboo
+    $ taboo = character.taboo if (character.taboo > taboo and bg_current == character.location) else taboo
 
     return
 
@@ -3558,33 +3574,33 @@ label Shop:
             menu Shop_Books:
                 "Buy \"Dazzler and Longshot\" for $20.":
                     "A sappy romantic novel about two starcrossed lovers."
-                    if "DL" not in Shop_Inventory:
+                    if "DL" not in shop_inventory:
                         "They seem to be out of stock at the moment."
                     elif Player.cash >= 20:
                         "You purchase the book."
-                        $ Shop_Inventory.remove("DL")
+                        $ shop_inventory.remove("DL")
                         $ Player.inventory.append("Dazzler and Longshot")
                         $ Player.cash -= 20
                     else:
                         "You don't have enough for that."
                 "Buy \"256 Shades of Grey\" for $20.":
                     "A gripping sexual thriller about a stern red-headed \"goblin queen\" and her subject."
-                    if "G" not in Shop_Inventory:
+                    if "G" not in shop_inventory:
                         "They seem to be out of stock at the moment."
                     elif Player.cash >= 20:
                         "You purchase the book."
-                        $ Shop_Inventory.remove("G")
+                        $ shop_inventory.remove("G")
                         $ Player.inventory.append("256 Shades of Grey")
                         $ Player.cash -= 20
                     else:
                         "You don't have enough for that."
                 "Buy \"Avengers Tower Penthouse\" for $20.":
                     "A book filled with nude pictures of various Avengers, sexy."
-                    if "A" not in Shop_Inventory:
+                    if "A" not in shop_inventory:
                         "They seem to be out of stock at the moment."
                     elif Player.cash >= 20:
                         "You purchase the book."
-                        $ Shop_Inventory.remove("A")
+                        $ shop_inventory.remove("A")
                         $ Player.inventory.append("Avengers Tower Penthouse")
                         $ Player.cash -= 20
                     else:
@@ -3662,19 +3678,15 @@ label Shop:
     jump Shop
     return
 
-label set_the_scene(Chr=1, entering=0, Dress=1, trigger_reset=1, silent=0, temp_Girls=[]):
-
-
-
-
-
-
+label set_the_scene(Chr=1, entering=0, Dress=1, trigger_reset=1, silent=0):
     if not silent:
         show blackscreen onlayer black
 
     if entering:
         $ Chr = 0
+
         call AllHide
+
         $ entering = True
     else:
         $ entering = False
@@ -3685,36 +3697,32 @@ label set_the_scene(Chr=1, entering=0, Dress=1, trigger_reset=1, silent=0, temp_
         hide NightMask onlayer nightmask
 
     if trigger_reset:
-
         $ primary_action = 0
         $ offhand_action = 0 if offhand_action != "jerking_off" else "jerking_off"
         $ girl_offhand_action = 0
         $ second_girl_primary_action = 0
         $ second_girl_offhand_action = 0
+
         $ trigger_reset = 0
 
     if Chr:
         call Present_Check
 
-
         $ temp_Girls = all_Girls[:]
 
         while temp_Girls:
-
-
-
-
-
             if focused_Girl != temp_Girls[0]:
-
                 $ temp_Girls[0].sprite_location = stage_right
                 $ temp_Girls[0].sprite_layer = 75
+
             call show_girl (temp_Girls[0], Dress, trigger_reset)
+
             $ temp_Girls.remove(temp_Girls[0])
 
         if focused_Girl.location == bg_current:
             $ focused_Girl.sprite_location = stage_center
             $ focused_Girl.sprite_layer = 100
+
             call show_girl (focused_Girl, Dress, trigger_reset)
 
         if bg_current == "bg_study" and time_index < 3:
@@ -3722,89 +3730,72 @@ label set_the_scene(Chr=1, entering=0, Dress=1, trigger_reset=1, silent=0, temp_
         else:
             hide Xavier_sprite
     else:
-
         call AllHide (1)
+
     show Chibi_UI
     hide Cellphone
 
     if bg_current == "bg_classroom":
         if EmmaX.location == "bg_teacher":
-
-
             $ EmmaX.change_outfit()
         if StormX.location == "bg_teacher":
-
-
             $ StormX.change_outfit()
 
     if bg_current != "bg_pool":
-
         hide FullPool
     if trigger_reset and Dress:
-
         call Get_Dressed
 
     hide DressScreen
-    if "Historia" in Player.traits:
+
+    if simulation:
         show BlueScreen onlayer black
     else:
         hide BlueScreen onlayer black
+
     hide blackscreen onlayer black
 
     return
 
-label shift_focus(Chr=RogueX, Second=0, temp_Girls=[], Return=0):
-
-    if Chr not in all_Girls:
-        "Tell Oni [Chr]"
-        "Then Tell Oni [Chr.tag]"
-    if Chr == focused_Girl == Partner:
-
+label shift_focus(Girl, Second=0, Return=0):
+    if Girl == focused_Girl == Partner:
         $ temp_Girls = all_Girls[:]
-        if Partner in all_Girls:
-            $ temp_Girls.remove(Partner)
-        else:
-            "Tell Oni, in Shift Focus, P:[Partner]"
-        while temp_Girls:
+        $ temp_Girls.remove(Partner)
 
+        while temp_Girls:
             if temp_Girls[0].location == bg_current:
                 $ Partner = temp_Girls[0]
+
             $ temp_Girls.remove(temp_Girls[0])
 
-    if Chr.location == bg_current:
-
+    if Girl.location == bg_current:
         $ temp_Girls = all_Girls[:]
-        if Chr in all_Girls:
-            $ temp_Girls.remove(Chr)
-        else:
-            "Tell Oni, in Shift Focus, C:[Chr]"
+        $ temp_Girls.remove(Girl)
+
         while temp_Girls:
-
             if temp_Girls[0].location == bg_current:
-
                 $ temp_Girls[0].sprite_location = stage_right
                 $ temp_Girls[0].sprite_layer = 75
                 $ temp_Girls = [1]
+
             $ temp_Girls.remove(temp_Girls[0])
 
-        $ Chr.sprite_location = stage_center
-        $ Chr.sprite_layer = 100
-    if focused_Girl == Chr:
+        $ Girl.sprite_location = stage_center
+        $ Girl.sprite_layer = 100
 
+    if focused_Girl == Girl:
         pass
-    elif Second and Second != Chr:
-
+    elif Second and Second != Girl:
         $ Partner = Second
-    elif Partner == Chr:
-
+    elif Partner == Girl:
         $ Partner = focused_Girl
-    $ focused_Girl = Chr
-    if Partner == Chr:
+
+    $ focused_Girl = Girl
+
+    if Partner == Girl:
         $ Partner = 0
 
     $ renpy.restart_interaction()
-
-
 
     return
 
@@ -3815,22 +3806,22 @@ label show_girl(Girl=0, Dress=1, trigger_reset=1, DLoc=0, YLoc=50):
     if Girl not in Party and Girl.location != bg_current:
         call expression Girl.tag + "_Hide" pass (1)
 
-        $ Girl.change_outfit(Changed=1)
+        $ Girl.change_outfit(outfit_changed=1)
 
         return
 
     if Dress:
         if Girl.outfit == "swimwear":
             if Girl.location == "bg_pool":
-                $ Girl.change_outfit(Changed=1)
+                $ Girl.change_outfit(outfit_changed=1)
             elif Girl.today_outfit != "swimwear":
                 $ Girl.outfit = Girl.today_outfit
-                $ Girl.change_outfit(Changed=1)
-        elif Taboo:
-            $ Girl.change_outfit(Changed=1)
+                $ Girl.change_outfit(outfit_changed=1)
+        elif taboo:
+            $ Girl.change_outfit(outfit_changed=1)
         elif Girl.location != "bg_dangerroom" and Girl.today_outfit != "gym":
             $ Girl.outfit = Girl.today_outfit
-            $ Girl.change_outfit(Changed=1)
+            $ Girl.change_outfit(outfit_changed=1)
     elif Girl.location != "bg_showerroom" and Girl.location != "bg_pool":
         $ Girl.wet = False
 
@@ -3878,7 +3869,7 @@ label show_girl(Girl=0, Dress=1, trigger_reset=1, DLoc=0, YLoc=50):
             offset (0,0)
             anchor (0.5, 0.0)
     elif Girl == LauraX:
-        $ Girl.Claws = 0
+        $ Girl.claws = 0
         show Laura_Sprite zorder Girl.sprite_layer at sprite_location(DLoc,YLoc):
             alpha 1
             zoom 1
@@ -4188,9 +4179,9 @@ label Sex_Menu_Threesome(Girl=0):
         "Never mind [[something else]":
 
             pass
-    if AloneCheck(Girl) and Girl.Taboo == 20:
-        $ Girl.Taboo = 0
-        $ Taboo = 0
+    if AloneCheck(Girl) and Girl.taboo == 20:
+        $ Girl.taboo = 0
+        $ taboo = 0
     return
 
 label Partner_Like(Girl=0, value=1, Altvalue=1, Measure=800, Partner=Partner):
@@ -4228,12 +4219,6 @@ label RoomStatboost(Type=0, Check=0, Amount=0, temp_Girls=[]):
     return
 
 label GirlwaitUp(Local=0, Check=70, D20=0, Teach=0, temp_GirlsA=[], temp_GirlsB=[]):
-
-
-
-
-
-
     $ D20 = renpy.random.randint(0,1) if not D20 else D20
 
     if EmmaX.location == "bg_teacher":
@@ -4242,57 +4227,44 @@ label GirlwaitUp(Local=0, Check=70, D20=0, Teach=0, temp_GirlsA=[], temp_GirlsB=
     elif StormX.location == "bg_teacher":
         $ StormX.location = "bg_classroom"
         $ Teach = 2
+
     $ temp_GirlsA = all_Girls[:]
 
     while temp_GirlsA:
-
         $ temp_GirlsB = all_Girls[:]
+
         while temp_GirlsB:
-
             if temp_GirlsA[0] != temp_GirlsB[0] and temp_GirlsA[0].location == temp_GirlsB[0].location:
-
                 if temp_GirlsA[0].location == "bg_classroom":
                     $ temp_GirlsA[0].GLG(temp_GirlsB[0],700,1,1)
-
                 elif temp_GirlsA[0].location == "bg_dangerroom":
                     $ temp_GirlsA[0].GLG(temp_GirlsB[0],700,(1+D20),1)
-
                 elif temp_GirlsA[0].location == "bg_showerroom":
                     if temp_GirlsA[0] == EmmaX:
-
                         $ temp_GirlsA[0].GLG(temp_GirlsB[0],900,3,1)
-
                     elif temp_GirlsB[0] in (EmmaX,StormX) and temp_GirlsA[0] != LauraX:
-
                         $ temp_GirlsA[0].GLG(temp_GirlsB[0],900,3,1)
                     else:
-
                         $ temp_GirlsA[0].GLG(temp_GirlsB[0],900,2,1)
                 else:
-
                     $ temp_GirlsA[0].GLG(temp_GirlsB[0],Check, D20,1)
 
-
-
                 if temp_GirlsA[0] == EmmaX:
-
-
                     $ temp_GirlsA[0].GLG(temp_GirlsB[0],1000,(int(temp_GirlsB[0].shame/4)),1)
                 elif temp_GirlsB[0] in (EmmaX,StormX) and temp_GirlsA[0] != LauraX:
-
-
                     $ temp_GirlsA[0].GLG(temp_GirlsB[0],1000, (int(temp_GirlsB[0].shame/4)),1)
                 else:
-
                     $ temp_GirlsA[0].GLG(temp_GirlsB[0],1000, (int(temp_GirlsB[0].shame/5)),1)
 
             $ temp_GirlsB.remove(temp_GirlsB[0])
+
         $ temp_GirlsA.remove(temp_GirlsA[0])
 
     if Teach == 2:
         $ StormX.location = "bg_teacher"
     elif Teach:
         $ EmmaX.location = "bg_teacher"
+
     return
 
 label lesbian_check(Girls=[], temp_Girls=[]):
@@ -4338,14 +4310,14 @@ label lesbian_check(Girls=[], temp_Girls=[]):
 
 
             $ Girls.remove(Girls[1])
-        elif Girls[0] == JeanX and Girls[1].GirlLikeCheck(Girls[0]) >= 500:
+        elif Girls[0] == JeanX and Girls[1].likes[Girls[0].tag] >= 500:
 
             $ Partner = Girls[1]
-        elif (Girls[1] in Player.Harem and Girls[0] in Player.Harem) and Girls[0].GirlLikeCheck(Girls[1]) >= 600:
+        elif (Girls[1] in Player.Harem and Girls[0] in Player.Harem) and Girls[0].likes[Girls[1].tag] >= 600:
             $ Partner = Girls[1]
-        elif Girls[1].GirlLikeCheck(Girls[0]) >= 800 and Girls[0].GirlLikeCheck(Girls[1]) >= 800:
+        elif Girls[1].likes[Girls[0].tag] >= 800 and Girls[0].likes[Girls[1].tag] >= 800:
             $ Partner = Girls[1]
-        elif Girls[1].thirst >= 90 and Girls[0].GirlLikeCheck(Girls[1]) >= 600:
+        elif Girls[1].thirst >= 90 and Girls[0]..likes[Girls[1].tag] >= 600:
             $ Partner = Girls[1]
         else:
 
@@ -4394,7 +4366,7 @@ label Haremchange_stat(Girl=0, Check=1000, value=0, Greater=0, temp_GirlsA=[], t
 
 
 
-    if "Historia" in Player.traits:
+    if simulation:
         return
     if Girl == "All" or Girl == 0:
         $ temp_GirlsA = Player.Harem[:]
@@ -4456,7 +4428,7 @@ label JumperCheck(Girls=[], temp_Girls=[]):
 
         if Girls[0] in Player.Harem and Girls[1] in Player.Harem:
             $ Partner = Girls[1]
-        elif Girls[0].GirlLikeCheck(Girls[1]) >= 800 and Girls[1].GirlLikeCheck(Girls[0]) >= 800:
+        elif Girls[0].likes[Girls[1].tag] >= 800 and Girls[1].likes[Girls[0].tag] >= 800:
             $ Partner = Girls[1]
 
     call Jumped
@@ -4486,7 +4458,7 @@ label Jumped(Act=0):
 
         $ Girls.remove(Partner)
         $ Partner = 0
-    elif EmmaX in Girls and ((Taboo and "taboo" not in EmmaX.history) or "three" not in EmmaX.history):
+    elif EmmaX in Girls and ((taboo and "taboo" not in EmmaX.history) or "three" not in EmmaX.history):
 
         $ Girls.remove(EmmaX)
         $ Partner = 0
@@ -4509,9 +4481,9 @@ label Jumped(Act=0):
         $ temp_Girls.remove(temp_Girls[0])
     $ Girls[0].add_word(1,"jumped","jumped")
 
-    call Taboo_Level
+    call taboo_Level
 
-    if Taboo and (not approval_check(Girls[0], 1500, TabM=3) or (Girls[0] == EmmaX and Taboo and "taboo" not in EmmaX.history)):
+    if taboo and (not approval_check(Girls[0], 1500, TabM=3) or (Girls[0] == EmmaX and taboo and "taboo" not in EmmaX.history)):
 
         $ Act = "leave"
 
@@ -4590,7 +4562,7 @@ label Jumped(Act=0):
         $ temp_Girls[0].location = bg_current
         $ temp_Girls.remove(temp_Girls[0])
 
-    call Taboo_Level
+    call taboo_Level
     call set_the_scene (Dress=0)
 
     $ Girls[0].add_word(1,"jumped","jumped",0,"jumped")
@@ -4695,7 +4667,7 @@ label Quick_Sex(Girl=focused_Girl, Act=0):
                 elif Girl == JubesX:
                     ch_v "What-ever. . ."
                 menu:
-                    "wait, on second thought. . .":
+                    "Wait, on second thought. . .":
                         $ Girl.change_stat("love", 80, -2)
                         $ Girl.change_stat("obedience", 80, -8)
                         $ Line = "ask"
@@ -5045,7 +5017,7 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
 
 
 
-    call Girls_Taboo (Primary)
+    call Girls_taboo (Primary)
     if not primary_action:
         return
 
@@ -5090,7 +5062,7 @@ label Sex_Dialog(Primary=focused_Girl, Secondary=0, TempFocus=0, PrimaryLust=0, 
 
 
     if Secondary:
-        $ SecondaryLust += (int(PrimaryLust/10)) if Secondary.GirlLikeCheck(Primary) >= 700 else 0
+        $ SecondaryLust += (int(PrimaryLust/10)) if Secondary.likes[Primary.tag] >= 700 else 0
         $ Secondary.change_stat("lust", 200, SecondaryLust)
         $ Secondary.lust_face()
 
@@ -5266,11 +5238,11 @@ label primary_action_Swap(Active=0, primary_actionX1=primary_action, primary_act
             $ renpy.pop_call()
             jump Jubes_SMenu
     else:
-        call set_the_scene (Dress=0, trigger_reset=0, silent=1)
+        call set_the_scene (Dress=0, trigger_reset=0, silent = True)
         call expression Primary.tag + "_SexAct" pass ("SkipTo")
     return
 
-label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0, approval=1, Tempshame=0, TabooM=1):
+label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0, approval=1, Tempshame=0, tabooM=1):
 
 
 
@@ -5292,7 +5264,7 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
 
         $ Mod = int(Mod/2) if Mod > 0 else Mod
 
-        $ Mod = (Girl.GirlLikeCheck(Girl2)-600)
+        $ Mod = (Girl.likes[Girl2.tag]-600)
 
         if Girl in Player.Harem and Girl2 in Player.Harem:
             $ Mod += 500
@@ -5327,54 +5299,54 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
 
     if "exhibitionist" in Girl.traits or approval_check(Girl,900,"I"):
 
-        $ TabooM = 0
+        $ tabooM = 0
     elif approval_check(Girl,50,"X") or approval_check(Girl,800,"I"):
-        $ TabooM = 0.5
+        $ tabooM = 0.5
 
     if not approval:
 
         pass
-    elif primary_action == "strip" and offhand_action != "jerking_off":
+    elif primary_action == "striptease" and offhand_action != "jerking_off":
         pass
     elif not primary_action:
         pass
     elif primary_action == "eat_ass":
-        $ approval = approval_check(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1550,Bonus=Mod, TabM = (tabooM* 3 ))
     elif primary_action == "anal":
-        $ approval = approval_check(Girl,1550,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1550,Bonus=Mod, TabM = (tabooM* 3 ))
     elif primary_action == "sex":
-        $ approval = approval_check(Girl,1400,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1400,Bonus=Mod, TabM = (tabooM* 3 ))
     elif primary_action == "eat_pussy":
-        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (tabooM* 2 ))
     elif offhand_action == "jerking_off":
-        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (tabooM* 2 ))
     elif primary_action == "blowjob":
-        $ approval = approval_check(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1300,Bonus=Mod, TabM = (tabooM* 2 ))
     elif primary_action == "titjob":
-        $ approval = approval_check(Girl,1200,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1200,Bonus=Mod, TabM = (tabooM* 3 ))
     elif primary_action == "hotdog":
-        $ approval = approval_check(Girl,1000,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1000,Bonus=Mod, TabM = (tabooM* 3 ))
     elif primary_action == "handjob" or girl_offhand_action == "handjob":
-        $ approval = approval_check(Girl,1100,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1100,Bonus=Mod, TabM = (tabooM* 2 ))
     elif primary_action == "footjob":
-        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (tabooM* 2 ))
     elif primary_action == "dildo_anal":
-        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (tabooM* 2 ))
     elif primary_action == "dildo_pussy":
-        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1250,Bonus=Mod, TabM = (tabooM* 2 ))
     elif primary_action == "finger_ass":
-        $ approval = approval_check(Girl,1300,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1300,Bonus=Mod, TabM = (tabooM* 2 ))
     elif primary_action == "fondle_pussy" or primary_action == "finger_pussy":
-        $ approval = approval_check(Girl,1050,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1050,Bonus=Mod, TabM = (tabooM* 2 ))
     elif primary_action == "suck_breasts":
-        $ approval = approval_check(Girl,1050,Bonus=Mod, TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1050,Bonus=Mod, TabM = (tabooM* 3 ))
     elif primary_action == "fondle_breasts":
-        $ approval = approval_check(Girl,950,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,950,Bonus=Mod, TabM = (tabooM* 2 ))
     elif primary_action == "fondle_ass":
-        $ approval = approval_check(Girl,850,Bonus=Mod, TabM = (TabooM* 1 ))
+        $ approval = approval_check(Girl,850,Bonus=Mod, TabM = (tabooM* 1 ))
 
     elif primary_action == "masturbation":
-        $ approval = approval_check(Girl,1200,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1200,Bonus=Mod, TabM = (tabooM* 2 ))
 
     elif primary_action == "kiss":
         $ approval = approval_check(Girl,500,Bonus=Mod, TabM = 0)
@@ -5382,7 +5354,7 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
         $ approval = approval_check(Girl,750,Bonus=Mod, TabM = 0)
 
     elif primary_action == "lesbian":
-        $ approval = approval_check(Girl,1350,Bonus=Mod, TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1350,Bonus=Mod, TabM = (tabooM* 2 ))
 
 
     if not approval:
@@ -5391,29 +5363,29 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
     elif not second_girl_primary_action:
         pass
     elif second_girl_primary_action == "eat_ass":
-        $ approval = approval_check(Girl,1750,Bonus=(Mod+200), TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1750,Bonus=(Mod+200), TabM = (tabooM* 3 ))
     elif second_girl_primary_action == "eat_pussy":
-        $ approval = approval_check(Girl,1450,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1450,Bonus=(Mod+200), TabM = (tabooM* 2 ))
     elif second_girl_primary_action == "blowjob":
-        $ approval = approval_check(Girl,1300,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1300,Bonus=(Mod+200), TabM = (tabooM* 2 ))
     elif second_girl_primary_action == "handjob":
-        $ approval = approval_check(Girl,1200,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1200,Bonus=(Mod+200), TabM = (tabooM* 2 ))
     elif second_girl_primary_action == "finger_ass":
-        $ approval = approval_check(Girl,1500,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1500,Bonus=(Mod+200), TabM = (tabooM* 2 ))
     elif second_girl_primary_action == "fondle_pussy":
-        $ approval = approval_check(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1250,Bonus=(Mod+200), TabM = (tabooM* 2 ))
     elif second_girl_primary_action == "suck_breasts":
-        $ approval = approval_check(Girl,1250,Bonus=(Mod+200), TabM = (TabooM* 3 ))
+        $ approval = approval_check(Girl,1250,Bonus=(Mod+200), TabM = (tabooM* 3 ))
     elif second_girl_primary_action == "fondle_breasts":
-        $ approval = approval_check(Girl,1150,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1150,Bonus=(Mod+200), TabM = (tabooM* 2 ))
     elif second_girl_primary_action == "kiss girl":
         $ approval = approval_check(Girl,1050,Bonus=(Mod+200), TabM = 0)
     elif second_girl_primary_action == "kiss both":
         $ approval = approval_check(Girl,1050,Bonus=(Mod+200), TabM = 0)
     elif second_girl_primary_action == "fondle_ass":
-        $ approval = approval_check(Girl,1050,Bonus=(Mod+200), TabM = (TabooM* 1 ))
+        $ approval = approval_check(Girl,1050,Bonus=(Mod+200), TabM = (tabooM* 1 ))
     elif second_girl_primary_action == "masturbation":
-        $ approval = approval_check(Girl,1400,Bonus=(Mod+200), TabM = (TabooM* 2 ))
+        $ approval = approval_check(Girl,1400,Bonus=(Mod+200), TabM = (tabooM* 2 ))
     elif second_girl_primary_action == "watch":
         $ approval = approval_check(Girl,1000,Bonus=(Mod+200), TabM = 0)
     elif second_girl_primary_action == "kiss":
@@ -5458,7 +5430,7 @@ label Activity_Check(Girl=0, Girl2=0, Silent=0, Removal=1, ClothesCheck=1, Mod=0
 
     return approval
 
-label Seen_First_Peen(Primary=0, Secondary=0, Silent=0, Undress=0, Passive=0, GirlsNum=0, React=0, temp_Girlsptions=[]):
+label Seen_First_Peen(Primary=0, Secondary=0, Silent=0, Undress=0, Passive=0, GirlsNum=0, React=0, temp_Girls=[]):
 
 
 
@@ -5467,17 +5439,17 @@ label Seen_First_Peen(Primary=0, Secondary=0, Silent=0, Undress=0, Passive=0, Gi
 
     if not Primary:
 
-        $ temp_Girlsptions = Present[:]
-        $ renpy.random.shuffle(temp_Girlsptions)
-        while temp_Girlsptions:
+        $ temp_Girls = Present[:]
+        $ renpy.random.shuffle(temp_Girls)
+        while temp_Girls:
 
 
-            if (focused_Girl == temp_Girlsptions[0] or D20 >= 10) and "peen" not in temp_Girlsptions[0].recent_history:
+            if (focused_Girl == temp_Girls[0] or D20 >= 10) and "peen" not in temp_Girls[0].recent_history:
 
 
-                call Girl_First_Peen (temp_Girlsptions[0], Silent, Undress)
+                call Girl_First_Peen (temp_Girls[0], Silent, Undress)
                 $ GirlsNum = _return
-            $ temp_Girlsptions.remove(temp_Girlsptions[0])
+            $ temp_Girls.remove(temp_Girls[0])
 
         if not GirlsNum:
 
@@ -5554,13 +5526,13 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
 
     $ Girl.recent_history.append("peen")
     $ Girl.daily_history.append("peen")
-    $ Girl.SeenPeen += 1
+    $ Girl.seen_peen += 1
     $ Girl.change_stat("inhibition", 30, 2)
     $ Girl.change_stat("inhibition", 80, 1)
 
     if Second:
 
-        if Girl.SeenPeen == 1:
+        if Girl.seen_peen == 1:
             $ Girl.change_face("_surprised", 2)
             if Girl == RogueX:
                 ch_r "Wow, yeah, that's pretty nice. . ."
@@ -5673,7 +5645,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
         else:
             "You whip your cock out."
         $ Player.add_word(1,"cockout")
-        if not Girl.forced and not React and Taboo > 20 and (not approval_check(Girl, 1500) or Girl.SEXP < 10) and bg_current != "bg_showerroom" and Girl not in (JeanX,StormX):
+        if not Girl.forced and not React and taboo > 20 and (not approval_check(Girl, 1500) or Girl.SEXP < 10) and bg_current != "bg_showerroom" and Girl not in (JeanX,StormX):
 
             if not approval_check(Girl, 800) and not approval_check(Girl, 500, "I"):
 
@@ -5682,7 +5654,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     $ Girl.change_face("_confused", Eyes="_down")
                     ch_e "Mmm?"
                     $ Girl.change_face("_surprised", Eyes="_squint")
-                    if Girl.SeenPeen == 1:
+                    if Girl.seen_peen == 1:
                         $ Girl.change_stat("love", 30, 10)
                         $ Girl.change_stat("love", 90, 5)
                         $ Girl.change_stat("obedience", 50, 20)
@@ -5715,7 +5687,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     $ Girl.recent_history.append("_angry")
                     $ Girl.daily_history.append("_angry")
                     $ React = 2
-                    if Girl.SeenPeen == 1:
+                    if Girl.seen_peen == 1:
                         $ Girl.change_stat("love", 90, -20)
                         $ Girl.change_stat("obedience", 50, 30)
                         $ Girl.change_stat("inhibition", 60, 20)
@@ -5755,7 +5727,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                 elif Girl == JubesX:
                     ch_v "Um, maybe you should put that away?"
                 $ Girl.change_face("_bemused", 1)
-                if Girl.SeenPeen == 1:
+                if Girl.seen_peen == 1:
                     if Girl == RogueX:
                         ch_r "I mean. . . no, definitely put that away!"
                     elif Girl == KittyX:
@@ -5773,13 +5745,13 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                 $ React = 2
 
 
-        elif Girl.SeenPeen > 10:
+        elif Girl.seen_peen > 10:
 
             return False
         elif approval_check(Girl, 1200) or approval_check(Girl, 500, "L"):
 
             $ Girl.change_face("_sly",1)
-            if Girl.SeenPeen == 1:
+            if Girl.seen_peen == 1:
                 $ Girl.change_face("_surprised",2)
                 if Girl == RogueX:
                     ch_r "Whoa, I didn't know they looked so big up close."
@@ -5824,7 +5796,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     $ Girl.change_stat("love", 80, 3)
                     $ Girl.change_stat("obedience", 80, 1)
                     $ Girl.change_stat("inhibition", 60, 4)
-            elif Girl.SeenPeen == 2:
+            elif Girl.seen_peen == 2:
                 if Girl == RogueX:
                     ch_r "That thing sure is impressive."
                     $ Girl.change_stat("obedience", 50, 5)
@@ -5855,7 +5827,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     $ Girl.change_face("_sly",1)
                     $ Girl.change_stat("obedience", 80, 1)
                     $ Girl.change_stat("inhibition", 60, 1)
-            elif Girl.SeenPeen == 5:
+            elif Girl.seen_peen == 5:
                 if Girl == RogueX:
                     ch_r "I certainly appreciate that guy."
                     $ Girl.change_stat("inhibition", 60, 5)
@@ -5884,7 +5856,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     $ Girl.change_stat("love", 80, 1)
                     $ Girl.change_stat("obedience", 80, 2)
                     $ Girl.change_stat("inhibition", 60, 2)
-            elif Girl.SeenPeen == 10:
+            elif Girl.seen_peen == 10:
                 if Girl == RogueX:
                     ch_r "I never get tired of seeing that."
                     $ Girl.change_stat("love", 90, 10)
@@ -5924,7 +5896,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
         else:
 
             $ Girl.change_face("_sad",1)
-            if Girl.SeenPeen == 1:
+            if Girl.seen_peen == 1:
                 $ Girl.change_face("_perplexed",1 )
                 $ Girl.eyes = "_down"
                 if Girl == RogueX:
@@ -5953,7 +5925,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     $ Girl.change_stat("inhibition", 60, 2)
                 $ Girl.change_stat("obedience", 50, 5)
                 $ Girl.change_stat("inhibition", 60, 5)
-            elif Girl.SeenPeen < 5:
+            elif Girl.seen_peen < 5:
                 $ Girl.change_face("_sad",0)
                 if Girl == RogueX:
                     ch_r "Yeah, I've seen it."
@@ -5972,7 +5944,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
                     ch_v "That's. . . inappropriate. . ."
                     $ Girl.change_stat("obedience", 80, 2)
                 $ Girl.change_stat("inhibition", 60, 2)
-            elif Girl.SeenPeen == 10:
+            elif Girl.seen_peen == 10:
                 if Girl == RogueX:
                     ch_r "I'm getting tired of seeing that."
                     $ Girl.change_stat("obedience", 50, 5)
@@ -6006,30 +5978,30 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
     else:
 
         $ Player.recent_history.append("cockout")
-        if Girl.SeenPeen > 10:
+        if Girl.seen_peen > 10:
             return
         elif approval_check(Girl, 1200) or approval_check(Girl, 500, "L"):
-            if Girl.SeenPeen == 1:
+            if Girl.seen_peen == 1:
                 $ Girl.change_stat("love", 90, 5)
-            elif Girl.SeenPeen == 2:
+            elif Girl.seen_peen == 2:
                 $ Girl.change_stat("obedience", 50, 5)
-            elif Girl.SeenPeen == 5:
+            elif Girl.seen_peen == 5:
                 $ Girl.change_stat("inhibition", 60, 5)
-            elif Girl.SeenPeen == 10:
+            elif Girl.seen_peen == 10:
                 $ Girl.change_stat("love", 90, 10)
         else:
-            if Girl.SeenPeen == 1:
+            if Girl.seen_peen == 1:
                 $ Girl.change_stat("obedience", 50, 5)
                 $ Girl.change_stat("inhibition", 60, 5)
                 $ Girl.add_word(1,0,0,0,"seenpeen")
-            elif Girl.SeenPeen < 5:
+            elif Girl.seen_peen < 5:
                 $ Girl.change_stat("inhibition", 60, 2)
-            elif Girl.SeenPeen == 10:
+            elif Girl.seen_peen == 10:
                 $ Girl.change_stat("obedience", 50, 5)
                 $ Girl.change_stat("inhibition", 60, 5)
         if Girl == JubesX:
             $ Girl.change_stat("obedience", 80, 1)
-    if Girl.SeenPeen == 1:
+    if Girl.seen_peen == 1:
         if Girl == JeanX:
             $ Girl.change_stat("love", 90, 10)
             $ Girl.change_stat("obedience", 30, 20)
@@ -6044,7 +6016,7 @@ label Girl_First_Peen(Girl=0, Silent=0, Undress=0, Second=0, React=0):
     $ Girl.change_face("_sly",1)
     return React
 
-label Girls_Taboo(Girl=0, counter=1, Choice=0, D20=0):
+label Girls_taboo(Girl=0, counter=1, Choice=0, D20=0):
 
 
 
@@ -6068,7 +6040,7 @@ label Girls_Taboo(Girl=0, counter=1, Choice=0, D20=0):
         $ D20 += 8
     if D20 < 10:
 
-        if Taboo > 20:
+        if taboo > 20:
             if (primary_action == "kiss" and not offhand_action and not girl_offhand_action):
 
                 pass
@@ -6117,7 +6089,7 @@ label Girls_Taboo(Girl=0, counter=1, Choice=0, D20=0):
 
         call Girls_Noticed (Girl)
 
-    if Taboo <= 20:
+    if taboo <= 20:
 
         call Girls_Noticed (Girl)
         return
@@ -6363,7 +6335,7 @@ label Girls_Taboo(Girl=0, counter=1, Choice=0, D20=0):
             show blackscreen onlayer black
             call AllReset (Girl)
             call remove_girl (Girl)
-            $ Girl.change_outfit(Changed=0)
+            $ Girl.change_outfit(outfit_changed=0)
             hide blackscreen onlayer black
             $ bg_current = "bg_player"
             jump Misplaced
@@ -6444,10 +6416,10 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, temp_Girls=[]):
 
     if "poly " + Girl.tag in Other.traits or (Girl in Player.Harem and Other in Player.Harem):
 
-        $ B = (1000-(20*Taboo))
+        $ B = (1000-(20*taboo))
     else:
 
-        $ B = (Other.GirlLikeCheck(Girl) - 500)
+        $ B = (Other.likes[Girl.tag] - 500)
         if Other in Player.Harem:
 
             $ B -= 200
@@ -6558,10 +6530,10 @@ label Girls_Noticed(Girl=Primary, Other=0, Silent=0, B=0, temp_Girls=[]):
             $ Other.recent_history.append("_angry")
             call GirlsAngry
         call remove_girl (Other)
-    if AloneCheck(Girl) and Girl.Taboo == 20:
+    if AloneCheck(Girl) and Girl.taboo == 20:
 
-        $ Girl.Taboo = 0
-        $ Taboo = 0
+        $ Girl.taboo = 0
+        $ taboo = 0
     if Line:
 
         "[Line]."
@@ -6605,7 +6577,7 @@ label CloseOut(Girl=focused_Girl):
         call expression Girl.tag + "_DP_After"
     elif primary_action == "dildo_anal":
         call expression Girl.tag + "_DA_After"
-    elif primary_action == "strip":
+    elif primary_action == "striptease":
         call Group_Strip_End
     elif primary_action == "masturbation":
         $ Girl.remaining_actions -= 1
@@ -6668,7 +6640,7 @@ label Sex_Over(Clothes=1, Girls=0, temp_Girls=[]):
         $ temp_Girls = all_Girls[:]
         while temp_Girls:
             if temp_Girls[0].location == bg_current:
-                if temp_Girls[0].change_outfit(Changed=1) == 2:
+                if temp_Girls[0].change_outfit(outfit_changed=1) == 2:
                     if Line:
                         $ Line = Line + " and " + temp_Girls[0].name
                     else:
@@ -6720,7 +6692,7 @@ label SkipTo(Girl=focused_Girl):
         call expression Girl.tag + "_DP_Cycle"
     elif primary_action == "dildo_anal":
         call expression Girl.tag + "_DA_Cycle"
-    elif primary_action == "strip":
+    elif primary_action == "striptease":
         call Group_Strip_End
     elif primary_action == "masturbation":
         $ Girl.remaining_actions -= 1
@@ -6742,9 +6714,9 @@ label clear_stack:
     jump player_room
 
 label Girl_TightsRipped(Girl=0, Count=0):
-
     if Girl not in all_Girls:
         return
+
     if Girl.hose == "_tights":
         $ Count = 1
         $ Girl.hose = "_ripped_tights"
@@ -6761,6 +6733,7 @@ label Girl_TightsRipped(Girl=0, Count=0):
 
         if Girl == RogueX:
             ch_r "Damnation, that's another pair ruined!"
+            ch_r "Tsk, another pair ruined!"
         elif Girl == KittyX:
             ch_k "Dammit! Not again!"
         elif Girl == EmmaX:
@@ -6776,6 +6749,7 @@ label Girl_TightsRipped(Girl=0, Count=0):
         $ Count = 2
         if Girl == RogueX:
             ch_r "I hate getting a run in these things."
+            ch_r "Well that's a good pair of tights down the chute."
         elif Girl == KittyX:
             ch_k "Ouch, I guess I missed a dodge. . ."
         elif Girl == EmmaX:
@@ -6798,14 +6772,14 @@ label Girl_TightsRipped(Girl=0, Count=0):
 
                 pass
             elif Girl.underwear:
-                if Girl.SeenPanties:
+                if Girl.seen_underwear:
                     $ Count = 3 if not approval_check(Girl, 600) else Count
                 else:
-                    $ Girl.SeenPanties = 1
+                    $ Girl.seen_underwear = 1
                     $ Count = 3 if not approval_check(Girl, 900) else Count
                 $ Girl.change_stat("lust", 60, 2)
             else:
-                if Girl.SeenPussy:
+                if Girl.seen_pussy:
                     $ Count = 3 if not approval_check(Girl, 900) else Count
                 else:
                     call Rogue_First_Bottomless

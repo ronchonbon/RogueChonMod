@@ -126,7 +126,7 @@ label Chat(Girl=0):
                     ch_v "Hey, what can I do for ya, [Girl.player_petname]?"
             call Chat_Menu
 
-        elif Girl in Digits:
+        elif Girl in phonebook:
             if Girl.location == "hold":
                 "She doesn't seem to be picking up."
             else:
@@ -222,9 +222,9 @@ label Chat_Menu:
         "Romance her":
 
             menu:
-                "Flirt with her (locked)" if Girl.Chat[5]:
+                "Flirt with her (locked)" if Girl.had_chat[5]:
                     pass
-                "Flirt with her" if not Girl.Chat[5]:
+                "Flirt with her" if not Girl.had_chat[5]:
                     call Flirt (Girl)
 
                 "Sex Menu (locked)" if Girl.location != bg_current:
@@ -374,10 +374,10 @@ label Chat_Menu:
                         "Never mind.":
                             pass
 
-                "Could I get your number?" if Girl not in Digits:
+                "Could I get your number?" if Girl not in phonebook:
                     if Girl == EmmaX and approval_check(Girl, 800, "LI"):
                         ch_e "I don't see why not."
-                        $ Digits.append(Girl)
+                        $ phonebook.append(Girl)
                     elif Girl != EmmaX and (approval_check(Girl, 400, "L") or approval_check(Girl, 200, "I")):
                         if Girl == RogueX:
                             ch_r "Sure, I suppose."
@@ -391,7 +391,7 @@ label Chat_Menu:
                             ch_s "Oh? Certainly."
                         elif Girl == JubesX:
                             ch_v "Sure, yeah."
-                        $ Digits.append(Girl)
+                        $ phonebook.append(Girl)
                     elif approval_check(Girl, 200, "O",Alt=[[EmmaX],500-EmmaX.inhibition]):
                         if Girl == RogueX:
                             ch_r "If you want it, I guess."
@@ -407,7 +407,7 @@ label Chat_Menu:
                             ch_s "I don't see why not."
                         elif Girl == JubesX:
                             ch_v "I guess?"
-                        $ Digits.append(Girl)
+                        $ phonebook.append(Girl)
                     else:
                         if Girl == RogueX:
                             ch_r "I don't really want you calling me."
@@ -582,7 +582,7 @@ label Switch_Chat:
             return
 
     if Girl.location != bg_current:
-        if Girl in Digits:
+        if Girl in phonebook:
             "You give [Girl.name] a call."
             if Girl == EmmaX and "classcaught" not in EmmaX.history:
                 ch_e "I don't have time to talk to students right now."
@@ -1026,7 +1026,7 @@ label Girl_Settings:
                 if bg_current == "HW Party":
                     Girl.voice "Not at the party. . ."
                 else:
-                    call Taboo_Level
+                    call taboo_Level
                     call expression Girl.tag + "_Clothes"
 
             "Shift her Personality" if approval_check(Girl, 900, "L", TabM=0) or approval_check(Girl, 900, "O", TabM=0)or approval_check(Girl, 900, "I", TabM=0):

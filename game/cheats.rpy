@@ -156,7 +156,7 @@ label WardrobeEditor(Chr=0):
                         "Add red_top" if Chr == KittyX or Chr == JubesX:
                             $ Chr.top = "_red_shirt"
                         "Add black_top" if Chr == JubesX:
-                            $ Chr.top = "black_shirt"
+                            $ Chr.top = "_black_shirt"
                         "Add tube_top" if Chr == JubesX:
                             $ Chr.top = "_tube_top"
                         "Add pink_shirt" if Chr == JeanX:
@@ -206,10 +206,10 @@ label WardrobeEditor(Chr=0):
                             else:
                                 $ Chr.top_pulled_up = 1
                         "Toggle Arms":
-                            if Chr.ArmPose == 1:
-                                $ Chr.ArmPose = 2
+                            if Chr.arm_pose == 1:
+                                $ Chr.arm_pose = 2
                             else:
-                                $ Chr.ArmPose = 1
+                                $ Chr.arm_pose = 1
                         "Back":
                             jump Wardrobe_Menu
             "Bra":
@@ -266,10 +266,10 @@ label WardrobeEditor(Chr=0):
                             else:
                                 $ Chr.piercings = "_ring"
                         "Toggle Arms":
-                            if Chr.ArmPose == 1:
-                                $ Chr.ArmPose = 2
+                            if Chr.arm_pose == 1:
+                                $ Chr.arm_pose = 2
                             else:
-                                $ Chr.ArmPose = 1
+                                $ Chr.arm_pose = 1
                         "Back":
                             jump Wardrobe_Menu
             "Pants":
@@ -405,10 +405,10 @@ label WardrobeEditor(Chr=0):
                         "Emotions":
                             call EmotionEditor (Chr)
                         "Toggle Arms":
-                            if Chr.ArmPose == 1:
-                                $ Chr.ArmPose = 2
+                            if Chr.arm_pose == 1:
+                                $ Chr.arm_pose = 2
                             else:
-                                $ Chr.ArmPose = 1
+                                $ Chr.arm_pose = 1
                         "Toggle Wetness":
                             if not Chr.grool:
                                 $ Chr.grool = 1
@@ -590,7 +590,7 @@ return
 label StatHacks(Chr=0, counter=0):
     while True:
         menu:
-            "[Chr.name]: Love: [Chr.love], Obedience: [Chr.obedience], Inhibition:[Chr.inhibition], Lust: [Chr.lust] Taboo: [Taboo], Location: [Chr.location]"
+            "[Chr.name]: Love: [Chr.love], Obedience: [Chr.obedience], Inhibition:[Chr.inhibition], Lust: [Chr.lust] taboo: [taboo], Location: [Chr.location]"
             "Activities":
                 menu:
                     "Recent Actions":
@@ -615,9 +615,9 @@ label StatHacks(Chr=0, counter=0):
                 $ Chr.inhibition += 100
             "Lower Inhibitions":
                 $ Chr.inhibition -= 100
-            "Taboo toggle":
-                $ Taboo = 40 if Taboo != 40 else 0
-                "[Taboo]"
+            "taboo toggle":
+                $ taboo = 40 if taboo != 40 else 0
+                "[taboo]"
             "Small":
                 $ counter = 1
                 while counter:
@@ -678,7 +678,7 @@ label Cheat_Menu(Girl=0):
             $ Girl.action_counter["fondle_ass"] += 5
             $ Girl.action_counter["dildo_pussy"] += 5
             $ Girl.action_counter["dildo_ass"] += 5
-            $ Girl.Plug += 5
+            $ Girl.buttplug += 5
             $ Girl.action_counter["suck_breasts"] += 5
             $ Girl.action_counter["finger_pussy"] += 5
             $ Girl.action_counter["finger_ass"] += 5
@@ -688,18 +688,18 @@ label Cheat_Menu(Girl=0):
             $ Girl.event_counter["swallowed"] += 5
             $ Girl.event_counter["creampied"] += 5
             $ Girl.event_counter["anal_creampied"] += 5
-            $ Girl.SeenChest = 1
-            $ Girl.SeenPanties = 1
-            $ Girl.SeenPussy = 1
+            $ Girl.seen_breasts = 1
+            $ Girl.seen_underwear = 1
+            $ Girl.seen_pussy = 1
         "Level Reset":
             $ Girl.action_counter["handjob"] = 0
             $ Girl.action_counter["blowjob"] = 0
             $ Girl.event_counter["swallowed"] = 0
-        "Toggle Taboo":
-            if not Taboo:
-                $ Taboo = 40
+        "Toggle taboo":
+            if not taboo:
+                $ taboo = 40
             else:
-                $ Taboo = 0
+                $ taboo = 0
         "Maxed":
             $ Girl.love = 1000
             $ Girl.inhibition = 1000

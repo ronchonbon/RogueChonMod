@@ -158,8 +158,8 @@ label StormMeet:
 
 
     "And she's naked."
-    $ StormX.SeenChest += 1
-    $ StormX.SeenPussy += 1
+    $ StormX.seen_breasts += 1
+    $ StormX.seen_pussy += 1
     $ StormX.change_face("_normal")
     ch_u "Oh, hello there."
     menu:
@@ -439,10 +439,10 @@ label StormMeet:
     $ StormX.history.append("met")
     $ StormX.petname = StormX.name
     $ active_Girls.append(StormX) if StormX not in active_Girls else active_Girls
-    $ EmmaX.Schedule[1][0] = "bg_emma"
-    $ EmmaX.Schedule[1][1] = "bg_dangerroom"
-    $ EmmaX.Schedule[3][0] = "bg_emma"
-    $ EmmaX.Schedule[3][1] = "bg_dangerroom"
+    $ EmmaX.weekly_schedule[1][0] = "bg_emma"
+    $ EmmaX.weekly_schedule[1][1] = "bg_dangerroom"
+    $ EmmaX.weekly_schedule[3][0] = "bg_emma"
+    $ EmmaX.weekly_schedule[3][1] = "bg_dangerroom"
 
     $ round -= 20
     $ bg_current = "bg_player"
@@ -812,12 +812,12 @@ label Storm_Hairtalk:
             if approval_check(StormX, 800):
                 $ StormX.change_stat("inhibition", 50, 1)
                 $ StormX.change_stat("inhibition", 80, 2)
-                $ Taboo = 0
-                $ StormX.Taboo = 0
+                $ taboo = 0
+                $ StormX.taboo = 0
                 ch_s "I. . . suppose that I might accomodate that. . ."
                 call Girl_Undress (StormX)
-                $ Taboo = 40
-                $ StormX.Taboo = 40
+                $ taboo = 40
+                $ StormX.taboo = 40
             else:
                 $ StormX.change_stat("love", 70, -2)
                 $ StormX.change_stat("inhibition", 200, 5)
@@ -925,7 +925,7 @@ label Storm_Detention:
     $ StormX.change_outfit()
     call set_the_scene
     $ StormX.change_face("_sly")
-    $ StormX.ArmPose = 2
+    $ StormX.arm_pose = 2
     $ Count = 0
     call clear_the_room (StormX, 0, 1)
     hide blackscreen onlayer black
@@ -942,7 +942,7 @@ label Storm_Detention:
     $ StormX.change_face("_sly")
     $ StormX.change_stat("lust", 80, 3)
     ch_s "You've been such a naughty pupil. . ."
-    $ StormX.ArmPose = 1
+    $ StormX.arm_pose = 1
     $ StormX.change_face("_sadside", Brows="_normal")
     $ StormX.change_stat("lust", 80, 5)
     ch_s "Chasing after those young girls. . ."
@@ -956,8 +956,8 @@ label Storm_Detention:
         $ StormX.history.append("detention")
 
     "[StormX.name] walks to the door and locks it behind her."
-    $ Taboo = 0
-    $ StormX.Taboo = 0
+    $ taboo = 0
+    $ StormX.taboo = 0
     $ Player.traits.append("locked")
     menu:
         extend ""
@@ -1043,13 +1043,13 @@ label Storm_Key:
     call shift_focus (StormX)
     call set_the_scene
     $ StormX.change_face("_bemused")
-    $ StormX.ArmPose = 2
+    $ StormX.arm_pose = 2
     ch_s "You have been coming up more often. . ."
     ch_s ". . . you might want a key. . ."
     ch_p "Thanks."
-    $ StormX.ArmPose = 1
-    $ Keys.append(StormX)
-    $ StormX.Event[0] = 1
+    $ StormX.arm_pose = 1
+    $ keys.append(StormX)
+    $ StormX.event_happened[0] = 1
     return
 
 
@@ -1069,7 +1069,7 @@ label Storm_BF:
 
     call set_the_scene (0)
     call show_girl (StormX)
-    call Taboo_Level
+    call taboo_Level
     call clear_the_room (StormX)
     $ StormX.daily_history.append("relationship")
 
@@ -1086,7 +1086,7 @@ label Storm_BF:
             ch_s "Then I won't take more of your time than is necessary."
             $ StormX.change_face("_grimace")
 
-    $ StormX.Event[5] = 20
+    $ StormX.event_happened[5] = 20
 
     ch_s "I have been enjoying the time we've spent together."
     ch_s "I mean to say, I have been enjoying you."
@@ -1272,7 +1272,7 @@ label Storm_BF_Story:
 label Storm_BF_End:
     $ StormX.player_petnames.append("boyfriend")
 
-    if "Historia" not in Player.traits:
+    if not simulation:
         $ Player.Harem.append(StormX)
         if "StormYes" in Player.traits:
             $ Player.traits.remove("StormYes")
@@ -1296,7 +1296,7 @@ label Storm_Love:
     $ StormX.location = bg_current
     call set_the_scene
     call clear_the_room (StormX)
-    call Taboo_Level
+    call taboo_Level
     $ StormX.daily_history.append("relationship")
 
     $ StormX.change_face("_sadside",1)
@@ -1315,7 +1315,7 @@ label Storm_Love:
         "That sucks.":
             $ StormX.change_stat("love", 200, -5)
             $ StormX.change_stat("inhibition", 90, 2)
-            $ StormX.Event[6] += 1
+            $ StormX.event_happened[6] += 1
             $ StormX.change_face("_angry",2)
             ch_s ". . ."
             $ StormX.change_face("_normal",1)
@@ -1323,7 +1323,7 @@ label Storm_Love:
             $ StormX.change_stat("love", 200, -3)
             $ StormX.change_face("_confused",1)
             if not approval_check(StormX, 800, "OI"):
-                $ StormX.Event[6] += 1
+                $ StormX.event_happened[6] += 1
                 $ StormX.change_stat("love", 200, -2)
             ch_s ". . ."
     if len(Player.Harem) >= 2:
@@ -1354,7 +1354,7 @@ label Storm_Love:
             $ StormX.change_face("_confused",1)
             if not approval_check(StormX, 600, "OI"):
                 $ StormX.change_stat("love", 200, -3)
-                $ StormX.Event[6] += 1
+                $ StormX.event_happened[6] += 1
                 $ StormX.change_face("_sly",1)
             ch_s ". . . that is. . . not the reaction I intended. . ."
             $ StormX.change_face("_normal",1)
@@ -1363,7 +1363,7 @@ label Storm_Love:
             $ StormX.change_face("_confused",1)
             if not approval_check(StormX, 800, "OI"):
                 $ StormX.change_stat("love", 200, -2)
-                $ StormX.Event[6] += 1
+                $ StormX.event_happened[6] += 1
                 $ StormX.change_face("_angry",1)
             ch_s ". . ."
     ch_s "My concern leads back to my childhood."
@@ -1391,13 +1391,13 @@ label Storm_Love:
             if not approval_check(StormX, 600, "OI"):
                 $ StormX.change_stat("love", 200, -3)
                 $ StormX.change_stat("inhibition", 80, -2)
-                $ StormX.Event[6] += 1
+                $ StormX.event_happened[6] += 1
                 $ StormX.change_face("_angry",1)
             ch_s ". . ."
             ch_s "Yes. \"Wow.\""
         "Cool!":
             $ StormX.change_stat("love", 200, -5)
-            $ StormX.Event[6] += 1
+            $ StormX.event_happened[6] += 1
             $ StormX.change_face("_surprised",2)
             ch_s ". . ."
             $ StormX.change_face("_angry",1)
@@ -1409,7 +1409,7 @@ label Storm_Love:
             $ StormX.change_face("_sadside",1)
             if not approval_check(StormX, 800, "OI"):
                 $ StormX.change_stat("love", 200, -3)
-                $ StormX.Event[6] += 1
+                $ StormX.event_happened[6] += 1
                 $ StormX.change_face("_angry",1)
             ch_s ". . ."
             ch_s "I did expect a bit more \"engagement\" here. . ."
@@ -1440,14 +1440,14 @@ label Storm_Love:
             $ StormX.change_stat("love", 200, -5)
             $ StormX.change_stat("obedience", 80, 5)
             $ StormX.change_stat("inhibition", 80, -5)
-            $ StormX.Event[6] += 2
+            $ StormX.event_happened[6] += 2
             $ StormX.change_face("_angry",2)
             ch_s "Of course not!"
             ch_s "That is an inapporpriate way to discuss such things."
             $ StormX.blushing = "_blush1"
         "Ok.":
             $ StormX.change_stat("love", 200, -5)
-            $ StormX.Event[6] += 1
+            $ StormX.event_happened[6] += 1
             $ StormX.change_face("_angry",1,Eyes="_side")
             ch_s "Why do I feel like you are not engaged in this conversation?"
 
@@ -1510,14 +1510,14 @@ label Storm_Love:
             "Nope.":
                 $ StormX.change_stat("love", 200, -5)
                 $ StormX.change_stat("obedience", 80, -2)
-                $ StormX.Event[6] += 1
+                $ StormX.event_happened[6] += 1
                 $ StormX.change_face("_angry",1)
                 ch_s ". . ."
                 $ StormX.eyes = "_side"
                 ch_s "I suppose that should not surprise me. . ."
             "Lady problems,\" right?":
                 $ StormX.change_stat("love", 200, -10)
-                $ StormX.Event[6] += 2
+                $ StormX.event_happened[6] += 2
                 $ StormX.change_face("_surprised",2)
                 ch_s ". . ."
                 $ StormX.change_stat("obedience", 80, -2)
@@ -1530,10 +1530,10 @@ label Storm_Love:
                 $ StormX.change_stat("love", 200, -3)
                 if not approval_check(StormX, 800, "OI"):
                     $ StormX.change_stat("love", 200, -2)
-                    $ StormX.Event[6] += 2
+                    $ StormX.event_happened[6] += 2
                 $ StormX.change_face("_angry",1)
                 ch_s ". . ."
-    if StormX.Event[6] >= 5:
+    if StormX.event_happened[6] >= 5:
 
         jump Storm_Love_Badend
 
@@ -1568,12 +1568,12 @@ label Storm_Love_Redux:
             $ StormX.change_face("_sly",1)
             if not approval_check(StormX, 600, "OI"):
                 $ StormX.change_stat("love", 200, -3)
-                $ StormX.Event[6] += 1
+                $ StormX.event_happened[6] += 1
                 $ StormX.change_face("_angry",1,Mouth="_smile")
             ch_s "Try to avoid a swelled head, [StormX.player_petname]"
         "Cool!":
             $ StormX.change_stat("love", 200, -5)
-            $ StormX.Event[6] += 2
+            $ StormX.event_happened[6] += 2
             $ StormX.change_face("_angry",1)
             ch_s "I am glad you are enjoying my struggles."
         "Ok.":
@@ -1581,13 +1581,13 @@ label Storm_Love_Redux:
             $ StormX.change_face("_bemused",1)
             if not approval_check(StormX, 800, "OI"):
                 $ StormX.change_stat("love", 200, -3)
-                $ StormX.Event[6] += 1
+                $ StormX.event_happened[6] += 1
                 $ StormX.change_face("_angry",2)
                 ch_s "Is that really the best you can offer here?"
                 $ StormX.blushing = ""
             ch_s "Why do I put up with you?"
 
-    if StormX.Event[6] >= 5:
+    if StormX.event_happened[6] >= 5:
 
         jump Storm_Love_Badend
 
@@ -1609,13 +1609,13 @@ label Storm_Love_Redux:
             $ StormX.change_face("_confused",1)
             if not approval_check(StormX, 1200):
                 $ StormX.change_stat("love", 200, -5)
-                $ StormX.Event[6] += 1
+                $ StormX.event_happened[6] += 1
             ch_s "You have nothing more to add than that?"
         "I wouldn't go that far.":
             $ StormX.change_stat("love", 200, -10)
             $ StormX.change_stat("obedience", 90, 5)
             $ StormX.change_stat("inhibition", 90, -5)
-            $ StormX.Event[6] += 2
+            $ StormX.event_happened[6] += 2
             $ StormX.change_face("_angry",1,Eyes="_side")
             ch_s "No, I suppose you would not."
         "I guess I do too. . .":
@@ -1624,16 +1624,16 @@ label Storm_Love_Redux:
             $ StormX.change_face("_bemused",1)
             if not approval_check(StormX, 1200):
                 $ StormX.change_face("_angry",1)
-                $ StormX.Event[6] += 1
+                $ StormX.event_happened[6] += 1
             ch_s "Please, do not overwhelm me with your affections. . ."
         "Ok.":
             if not approval_check(StormX, 800, "OI"):
                 $ StormX.change_face("_angry",1)
                 $ StormX.change_stat("love", 200, -2)
-                $ StormX.Event[6] += 1
+                $ StormX.event_happened[6] += 1
             ch_s ". . ."
 
-    if StormX.Event[6] >= 6:
+    if StormX.event_happened[6] >= 6:
 
         jump Storm_Love_Badend
 
@@ -1699,7 +1699,7 @@ label Storm_Sub:
     else:
         "[StormX.name] approaches you, looking to talk."
     call clear_the_room (StormX)
-    call Taboo_Level
+    call taboo_Level
     $ StormX.daily_history.append("relationship")
 
     $ StormX.change_face("_sly")
@@ -1987,7 +1987,7 @@ label Storm_Master:
         "[StormX.name] approaches you, looking to talk."
     call clear_the_room (StormX)
     $ StormX.daily_history.append("relationship")
-    call Taboo_Level
+    call taboo_Level
     $ Line = 0
     $ Options = all_Girls[:]
     while Options:
@@ -2227,7 +2227,7 @@ label Storm_Sexfriend:
     "Drop by the pool tonight. . ."
     $ Player.add_word(1,0,0,0,"poolnight")
     $ StormX.daily_history.append("relationship")
-    $ StormX.Event[9] = 1
+    $ StormX.event_happened[9] = 1
     return
 
 
@@ -2237,8 +2237,8 @@ label Storm_Poolnight:
     call clear_the_room (StormX, 1, 1)
     $ StormX.location = "bg_pool"
     call ShowPool ([StormX])
-    $ Taboo = 0
-    $ StormX.Taboo = 0
+    $ taboo = 0
+    $ StormX.taboo = 0
     $ StormX.change_face("_sly", 1)
     $ StormX.change_outfit("nude")
     $ StormX.recent_history.append("poolnight")
@@ -2314,7 +2314,7 @@ label Storm_Fuckbuddy:
     call set_the_scene (Dress=0)
     $ Player.traits.append("locked")
     $ Nearby = []
-    call Taboo_Level
+    call taboo_Level
     $ StormX.change_face("_sly", 1,Eyes="_side")
     $ StormX.change_stat("inhibition", 200, 5)
     "After class, [StormX.name] walks past you, and places a hand on your chest as you head out."
@@ -2324,7 +2324,7 @@ label Storm_Fuckbuddy:
     $ StormX.change_stat("inhibition", 200, 10)
     ch_s "I do have needs, you know."
     $ StormX.player_petnames.append("fuck buddy")
-    $ StormX.Event[10] += 1
+    $ StormX.event_happened[10] += 1
     $ StormX.change_face("_sly", 1)
     $ StormX.change_stat("inhibition", 200, 10)
     ch_s "Couldn't you help me with that? . . "

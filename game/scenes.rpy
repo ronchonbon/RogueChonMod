@@ -632,7 +632,7 @@ label Breakup(Girl=0, Other=0, Anger=0, temp_Girls=[]):
         if Girl in Player.Harem:
             $ Player.Harem.remove(Girl)
 
-        $ Girl.broken_up[0] = 5 + Girl.broken_up[1] + Girl.Cheated
+        $ Girl.broken_up[0] = 5 + Girl.broken_up[1] + Girl.cheated_on
         $ Girl.broken_up[1] += 1
     else:
 
@@ -808,7 +808,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
             elif Girl == JubesX:
                 ch_v "I have a sensitive nose. . ."
 
-            if Girl.Cheated:
+            if Girl.cheated_on:
                 $ Line = Line+" Again!"
             Girl.voice "[Line]"
             menu:
@@ -986,7 +986,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
 
     menu:
         "I won't do it again.":
-            if Girl.Cheated:
+            if Girl.cheated_on:
                 $ Girl.change_stat("love", 90, 5)
                 Girl.voice "Like the last time you told me that, you mean?"
                 $ Resolution -= 1
@@ -1040,7 +1040,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
             $ Line = "threeway"
 
     if Resolution >= 5 and Line == "threeway":
-        if Girl.Cheated:
+        if Girl.cheated_on:
             $ Girl.change_stat("love", 90, 25)
             $ Girl.change_stat("obedience", 90, 30)
             $ Girl.change_stat("inhibition", 90, 60)
@@ -1068,7 +1068,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
         $ Line = "poly"
 
     elif Resolution >= 5:
-        if Girl.Cheated:
+        if Girl.cheated_on:
             $ Girl.change_stat("love", 90, 20)
             $ Girl.change_stat("obedience", 90, 10)
             $ Girl.change_stat("inhibition", 90, 100)
@@ -1117,7 +1117,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
             elif Girl == JubesX:
                 ch_v "I'm not interested in that right now!"
         $ Girl.change_face("_sadside")
-        if Girl.Cheated:
+        if Girl.cheated_on:
             $ Girl.change_stat("obedience", 80, 15)
             if Girl == RogueX:
                 ch_r "I've given you a chance to do right by me, and you keep screwing it up."
@@ -1172,7 +1172,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
                 ch_s "I do not think you're prepared for such a relationship."
             elif Girl == JubesX:
                 ch_v "You're pushing it."
-        if Girl.Cheated:
+        if Girl.cheated_on:
             $ Girl.change_stat("obedience", 90, -50)
             $ Girl.change_stat("inhibition", 90, 20)
             if Girl == RogueX:
@@ -1231,8 +1231,8 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
         $ Girl.GLG(Other,1000,-50,1)
 
     if "ex" in Girl.traits:
-        $ Girl.broken_up[0] = 5 + Girl.broken_up[1] + Girl.Cheated
-    $ Girl.Cheated += 1
+        $ Girl.broken_up[0] = 5 + Girl.broken_up[1] + Girl.cheated_on
+    $ Girl.cheated_on += 1
 
 
     menu:
@@ -1262,7 +1262,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
             elif Girl == JubesX:
                 ch_v "Yeah, maybe. . ."
 
-        "Want to fool around a bit?" if Girl in Player.Harem and not Taboo:
+        "Want to fool around a bit?" if Girl in Player.Harem and not taboo:
             if Girl.obedience + Girl.inhibition >= (1.5*Girl.love) or Girl.lust >= 70:
 
                 $ Girl.change_face("_sly",Eyes="_side")
@@ -1311,7 +1311,7 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
             elif Girl == JubesX:
                 ch_v "Yeah, maybe. . ."
 
-        "Want to have some break-up sex?" if Girl not in Player.Harem and not Taboo:
+        "Want to have some break-up sex?" if Girl not in Player.Harem and not taboo:
             if Girl.obedience + Girl.inhibition >= (1.5*Girl.love) or Girl.lust >= 70:
 
                 $ Girl.change_face("_angry",Eyes="_side")
@@ -1388,11 +1388,11 @@ label Cheated(Girl=0, Other=0, Resolution=0, B=0):
         call remove_girl (Girl)
     return
 
-label NoFap(Girl=0, TabStore=Taboo, counter=0):
+label NoFap(Girl=0, TabStore=taboo, counter=0):
 
 
 
-    $ Taboo = 0
+    $ taboo = 0
     ch_p "About when you masturbate on your own time. . ."
 
     if "askedfap" in Girl.daily_history:
@@ -1896,7 +1896,7 @@ label NoFap(Girl=0, TabStore=Taboo, counter=0):
 
 
     $ Girl.add_word(1,0,"askedfap",0,"askedfap")
-    $ Taboo = TabStore
+    $ taboo = TabStore
     return
 
 label CalltoFap(Girl=0, Fap=0):
@@ -2118,7 +2118,7 @@ label CalltoFap(Girl=0, Fap=0):
                     ch_j "Fine!"
                     ch_j "You can just imagine what I'm *not* doing right now."
                     $ Girl.change_face("_angry",Mouth="_smirk")
-                    call PsychicFlash (0)
+                    call psychicFlash (0)
                 elif Girl == StormX:
                     ch_s ". . ."
                     ch_s "Well, that is unfortunate, [StormX.player_petname]."
@@ -2200,7 +2200,7 @@ label CalltoFap(Girl=0, Fap=0):
 
         $ Girl.location = Girl.home
         $ bg_current = Girl.home
-        call Taboo_Level (1)
+        call taboo_Level (1)
 
         jump Misplaced
 
@@ -2211,7 +2211,7 @@ label CalltoFap(Girl=0, Fap=0):
             pass
         else:
             $ Girl.location = Girl.home
-        call Taboo_Level (0)
+        call taboo_Level (0)
         call PhoneSex (Girl)
         $ renpy.pop_call()
     elif Fap:
@@ -2227,7 +2227,7 @@ label PhoneSex(Girl=0):
     if bg_current != "bg_player":
         "You rush back to your room."
         $ bg_current = "bg_player"
-        call Taboo_Level
+        call taboo_Level
         call set_the_scene
     if Girl in (EmmaX,JeanX):
 
@@ -2296,8 +2296,8 @@ label Rogue_First_Topless(Silent=0, TempLine=0):
     $ RogueX.recent_history.append("topless")
     $ RogueX.daily_history.append("topless")
     $ RogueX.drain_word("no_topless")
-    $ RogueX.SeenChest += 1
-    if RogueX.SeenChest > 1:
+    $ RogueX.seen_breasts += 1
+    if RogueX.seen_breasts > 1:
         return
 
     $ RogueX.change_stat("inhibition", 70, 20)
@@ -2331,11 +2331,11 @@ label Rogue_First_Topless(Silent=0, TempLine=0):
                         $ RogueX.change_face("_angry",2, Mouth="_smile")
                         $ RogueX.change_stat("inhibition", 70, 10)
                         ch_r "Of couse they are!"
-                    "[EmmaX.name]'s were bigger, that's all." if EmmaX.SeenChest:
+                    "[EmmaX.name]'s were bigger, that's all." if EmmaX.seen_breasts:
                         $ TempLine = EmmaX
-                    "[StormX.name]'s were bigger, that's all." if StormX.SeenChest:
+                    "[StormX.name]'s were bigger, that's all." if StormX.seen_breasts:
                         $ TempLine = StormX
-                    "[KittyX.name]'s were tighter, that's all." if KittyX.SeenChest:
+                    "[KittyX.name]'s were tighter, that's all." if KittyX.seen_breasts:
                         $ TempLine = KittyX
 
                 if TempLine:
@@ -2402,8 +2402,8 @@ label Rogue_First_Bottomless(Silent=0):
     $ RogueX.recent_history.append("bottomless")
     $ RogueX.daily_history.append("bottomless")
     $ RogueX.drain_word("no_bottomless")
-    $ RogueX.SeenPussy += 1
-    if RogueX.SeenPussy > 1:
+    $ RogueX.seen_pussy += 1
+    if RogueX.seen_pussy > 1:
 
         return
 
@@ -2446,8 +2446,8 @@ label Kitty_First_Topless(Silent=0, TempLine=0):
     $ KittyX.recent_history.append("topless")
     $ KittyX.daily_history.append("topless")
     $ KittyX.drain_word("no_topless")
-    $ KittyX.SeenChest += 1
-    if KittyX.SeenChest > 1:
+    $ KittyX.seen_breasts += 1
+    if KittyX.seen_breasts > 1:
         return
 
 
@@ -2478,15 +2478,15 @@ label Kitty_First_Topless(Silent=0, TempLine=0):
                         $ KittyX.change_face("_angry",2, Mouth="_smile")
                         $ KittyX.change_stat("inhibition", 70, 10)
                         ch_k "Obviously!"
-                    "[EmmaX.name]'s were bigger, that's all." if EmmaX.SeenChest:
+                    "[EmmaX.name]'s were bigger, that's all." if EmmaX.seen_breasts:
                         $ TempLine = EmmaX
-                    "[RogueX.name]'s were bigger, that's all." if RogueX.SeenChest:
+                    "[RogueX.name]'s were bigger, that's all." if RogueX.seen_breasts:
                         $ TempLine = RogueX
-                    "[LauraX.name]'s were bigger, that's all." if LauraX.SeenChest:
+                    "[LauraX.name]'s were bigger, that's all." if LauraX.seen_breasts:
                         $ TempLine = LauraX
-                    "[JeanX.name]'s were bigger, that's all." if JeanX.SeenChest:
+                    "[JeanX.name]'s were bigger, that's all." if JeanX.seen_breasts:
                         $ TempLine = JeanX
-                    "[StormX.name]'s were bigger, that's all." if StormX.SeenChest:
+                    "[StormX.name]'s were bigger, that's all." if StormX.seen_breasts:
                         $ TempLine = StormX
 
                 if TempLine:
@@ -2555,8 +2555,8 @@ label Kitty_First_Bottomless(Silent=0):
     $ KittyX.recent_history.append("bottomless")
     $ KittyX.daily_history.append("bottomless")
     $ KittyX.drain_word("no_bottomless")
-    $ KittyX.SeenPussy += 1
-    if KittyX.SeenPussy > 1:
+    $ KittyX.seen_pussy += 1
+    if KittyX.seen_pussy > 1:
         return
 
     $ KittyX.change_stat("inhibition", 80, 30)
@@ -2622,8 +2622,8 @@ label Emma_First_Topless(Silent=0, TempLine=0):
     $ EmmaX.recent_history.append("topless")
     $ EmmaX.daily_history.append("topless")
     $ EmmaX.drain_word("no_topless")
-    $ EmmaX.SeenChest += 1
-    if EmmaX.SeenChest > 1:
+    $ EmmaX.seen_breasts += 1
+    if EmmaX.seen_breasts > 1:
         return
 
 
@@ -2664,15 +2664,15 @@ label Emma_First_Topless(Silent=0, TempLine=0):
                         $ EmmaX.change_face("_angry",2, Mouth="_smile")
                         $ EmmaX.change_stat("inhibition", 70, 10)
                         ch_e "Of couse they are!"
-                    "[RogueX.name]'s were tighter, that's all." if RogueX.SeenChest:
+                    "[RogueX.name]'s were tighter, that's all." if RogueX.seen_breasts:
                         $ TempLine = RogueX
-                    "[KittyX.name]'s were tighter, that's all." if KittyX.SeenChest:
+                    "[KittyX.name]'s were tighter, that's all." if KittyX.seen_breasts:
                         $ TempLine = KittyX
-                    "[LauraX.name]'s were tighter, that's all." if LauraX.SeenChest:
+                    "[LauraX.name]'s were tighter, that's all." if LauraX.seen_breasts:
                         $ TempLine = LauraX
-                    "[JeanX.name]'s were tighter, that's all." if JeanX.SeenChest:
+                    "[JeanX.name]'s were tighter, that's all." if JeanX.seen_breasts:
                         $ TempLine = JeanX
-                    "[StormX.name]'s were larger, that's all." if StormX.SeenChest:
+                    "[StormX.name]'s were larger, that's all." if StormX.seen_breasts:
                         $ TempLine = StormX
 
                 if TempLine:
@@ -2756,8 +2756,8 @@ label Emma_First_Bottomless(Silent=0):
     $ EmmaX.recent_history.append("bottomless")
     $ EmmaX.daily_history.append("bottomless")
     $ EmmaX.drain_word("no_bottomless")
-    $ EmmaX.SeenPussy += 1
-    if EmmaX.SeenPussy > 1:
+    $ EmmaX.seen_pussy += 1
+    if EmmaX.seen_pussy > 1:
         return
 
 
@@ -2840,8 +2840,8 @@ label Laura_First_Topless(Silent=0, TempLine=0):
     $ LauraX.recent_history.append("topless")
     $ LauraX.daily_history.append("topless")
     $ LauraX.drain_word("no_topless")
-    $ LauraX.SeenChest += 1
-    if LauraX.SeenChest > 1:
+    $ LauraX.seen_breasts += 1
+    if LauraX.seen_breasts > 1:
         return
 
     $ LauraX.change_stat("inhibition", 70, 15)
@@ -2881,11 +2881,11 @@ label Laura_First_Topless(Silent=0, TempLine=0):
                         $ LauraX.change_face("_angry",2, Mouth="_smile")
                         $ LauraX.change_stat("inhibition", 70, 10)
                         ch_l "Why wouldn't they be?"
-                    "[KittyX.name]'s were tighter, that's all." if KittyX.SeenChest:
+                    "[KittyX.name]'s were tighter, that's all." if KittyX.seen_breasts:
                         $ TempLine = KittyX
-                    "[EmmaX.name]'s were a lot bigger, that's all." if EmmaX.SeenChest:
+                    "[EmmaX.name]'s were a lot bigger, that's all." if EmmaX.seen_breasts:
                         $ TempLine = EmmaX
-                    "[StormX.name]'s were a lot bigger, that's all." if StormX.SeenChest:
+                    "[StormX.name]'s were a lot bigger, that's all." if StormX.seen_breasts:
                         $ TempLine = StormX
 
                 if TempLine:
@@ -2956,8 +2956,8 @@ label Laura_First_Bottomless(Silent=0):
     $ LauraX.recent_history.append("bottomless")
     $ LauraX.daily_history.append("bottomless")
     $ LauraX.drain_word("no_bottomless")
-    $ LauraX.SeenPussy += 1
-    if LauraX.SeenPussy > 1:
+    $ LauraX.seen_pussy += 1
+    if LauraX.seen_pussy > 1:
         return
 
 
@@ -3045,8 +3045,8 @@ label Jean_First_Topless(Silent=0, TempLine=0):
     $ JeanX.recent_history.append("topless")
     $ JeanX.daily_history.append("topless")
     $ JeanX.drain_word("no_topless")
-    $ JeanX.SeenChest += 1
-    if JeanX.SeenChest > 1:
+    $ JeanX.seen_breasts += 1
+    if JeanX.seen_breasts > 1:
         return
 
     $ JeanX.change_stat("inhibition", 70, 15)
@@ -3092,15 +3092,15 @@ label Jean_First_Topless(Silent=0, TempLine=0):
                         $ JeanX.change_face("_angry",2, Mouth="_smile")
                         $ JeanX.change_stat("obedience", 80, 20)
                         ch_j "Of course they are!"
-                    "[RogueX.name]'s were nicer, that's all." if RogueX.SeenChest:
+                    "[RogueX.name]'s were nicer, that's all." if RogueX.seen_breasts:
                         $ TempLine = RogueX
-                    "[KittyX.name]'s were tighter, that's all." if KittyX.SeenChest:
+                    "[KittyX.name]'s were tighter, that's all." if KittyX.seen_breasts:
                         $ TempLine = KittyX
-                    "[EmmaX.name]'s were a lot bigger, that's all." if EmmaX.SeenChest:
+                    "[EmmaX.name]'s were a lot bigger, that's all." if EmmaX.seen_breasts:
                         $ TempLine = EmmaX
-                    "[LauraX.name]'s were nicer, that's all." if LauraX.SeenChest:
+                    "[LauraX.name]'s were nicer, that's all." if LauraX.seen_breasts:
                         $ TempLine = LauraX
-                    "[StormX.name]'s were a lot bigger, that's all." if StormX.SeenChest:
+                    "[StormX.name]'s were a lot bigger, that's all." if StormX.seen_breasts:
                         $ TempLine = StormX
 
                 if TempLine:
@@ -3178,8 +3178,8 @@ label Jean_First_Bottomless(Silent=0):
     $ JeanX.recent_history.append("bottomless")
     $ JeanX.daily_history.append("bottomless")
     $ JeanX.drain_word("no_bottomless")
-    $ JeanX.SeenPussy += 1
-    if JeanX.SeenPussy > 1:
+    $ JeanX.seen_pussy += 1
+    if JeanX.seen_pussy > 1:
         return
 
     $ JeanX.change_stat("inhibition", 200, 30)
@@ -3274,7 +3274,7 @@ label Storm_First_Topless(Silent=0, TempLine=0):
     $ StormX.recent_history.append("topless")
     $ StormX.daily_history.append("topless")
     $ StormX.drain_word("no_topless")
-    $ StormX.SeenChest += 1
+    $ StormX.seen_breasts += 1
     return
 
 label Storm_First_Bottomless(Silent=0):
@@ -3286,7 +3286,7 @@ label Storm_First_Bottomless(Silent=0):
     $ StormX.recent_history.append("bottomless")
     $ StormX.daily_history.append("bottomless")
     $ StormX.drain_word("no_bottomless")
-    $ StormX.SeenPussy += 1
+    $ StormX.seen_pussy += 1
     return
 
 label Jubes_First_Topless(Silent=0, TempLine=0):
@@ -3298,8 +3298,8 @@ label Jubes_First_Topless(Silent=0, TempLine=0):
     $ JubesX.recent_history.append("topless")
     $ JubesX.daily_history.append("topless")
     $ JubesX.drain_word("no_topless")
-    $ JubesX.SeenChest += 1
-    if JubesX.SeenChest > 1:
+    $ JubesX.seen_breasts += 1
+    if JubesX.seen_breasts > 1:
         return
 
     $ JubesX.change_stat("inhibition", 70, 15)
@@ -3342,11 +3342,11 @@ label Jubes_First_Topless(Silent=0, TempLine=0):
                         $ JubesX.change_stat("inhibition", 70, 10)
                         ch_v ". . ."
                         ch_v "I -know- that, that's why I was confused?"
-                    "[KittyX.name]'s were tighter, that's all." if KittyX.SeenChest:
+                    "[KittyX.name]'s were tighter, that's all." if KittyX.seen_breasts:
                         $ TempLine = KittyX
-                    "[EmmaX.name]'s were a lot bigger, that's all." if EmmaX.SeenChest:
+                    "[EmmaX.name]'s were a lot bigger, that's all." if EmmaX.seen_breasts:
                         $ TempLine = EmmaX
-                    "[StormX.name]'s were a lot bigger, that's all." if StormX.SeenChest:
+                    "[StormX.name]'s were a lot bigger, that's all." if StormX.seen_breasts:
                         $ TempLine = StormX
 
                 if TempLine:
@@ -3417,8 +3417,8 @@ label Jubes_First_Bottomless(Silent=0):
     $ JubesX.recent_history.append("bottomless")
     $ JubesX.daily_history.append("bottomless")
     $ JubesX.drain_word("no_bottomless")
-    $ JubesX.SeenPussy += 1
-    if JubesX.SeenPussy > 1:
+    $ JubesX.seen_pussy += 1
+    if JubesX.seen_pussy > 1:
         return
 
 
@@ -3498,3 +3498,246 @@ label Jubes_First_Bottomless(Silent=0):
             $ JubesX.change_face("_angry")
             $ JubesX.change_stat("obedience", 70, 15)
     return
+
+label Training:
+    $ D20 = renpy.random.randint(1, 20)
+
+
+
+    $ Player.XP += (5 + (int(round / 10)))
+    $ Player.daily_history.append("dangerroom")
+    call set_the_scene
+
+    if round >= 80:
+        $ Line = "You have a long session in the Danger Room."
+    elif round >= 50:
+        $ Line = "You have a short workout in the Danger Room."
+    else:
+        $ Line = "You squeeze in a quick session in the Danger Room."
+
+    $ primary_action = 0
+    if D20 >= 18:
+
+        "[Line] During the exercise, Cyclops accidentally shoots you."
+        "Luckily you're immune to the beams, but your clothes weren't so lucky."
+        call RoomStatboost ("love", 80, 2)
+        call RoomStatboost ("lust", 80, 5)
+    elif D20 >= 17:
+        "[Line] You participate in a hand-to-hand combat class."
+        "Before you begin, Cyclops explains that it’s always good to know how to defend yourself when you can’t rely on your powers."
+        "It sounds like there’s a story there."
+    elif D20 >= 16:
+        "Some of the senior students walk over to talk about your powers."
+        "Nightcrawler wonders aloud what would happen if he grabbed you and tried to teleport while you tried to disable his powers."
+        "You succeed in freaking each other out."
+    else:
+        $ Line = Line + renpy.random.choice([" It was fairly boring.",
+                    " You do some training with basic firearms.",
+                    " You run the obstacle course.",
+                    " You fight in a simulated battle against the Brotherhood.",
+                    " You help take down a holographic Sentinel.",
+                    " You take part in a training exercise against the Avengers. As if the X-Men and Avengers would ever fight.",
+                    " You and some of the others take part in a survival exercise. . . also known as \"try to last as long as you can while Wolverine hunts you down one by one.\"",
+                    " You decide to test yourself by facing off against Magneto solo. It goes about as well as you’d expect.",
+                    " You use the Danger Room’s holograms to relive some of the original X-Men’s biggest battles. You learn quite a bit about teamwork.",
+                    " Beast is teaching a class on parkour. You take part and pick up a few pointers. You’re no Spider-Man, but at least you pick up a few things.",
+                    " You participate in an emergency drill. You pick up quite a few tips about first aid, triage and the proper way to move injured people.",
+                    " You take part in an urban emergency situation exercise. Cyclops takes the time to explain to you how to use cover to get close enough to use your powers.",
+                    " You take part in a jungle simulation exercise under Wolverine. You learn some basic survival techniques, but you privately hope you never need them.",
+                    " Your team fight a simulation of Magneto."])
+        "[Line]"
+
+    $ Options = active_Girls[:]
+    while Options:
+
+        if Options[0].location == bg_current:
+            call Girl_TightsRipped (Options[0])
+        $ Options.remove(Options[0])
+    call wait
+    call girls_location
+    call set_the_scene
+    $ Line = "The training session has ended, what would you like to do next?"
+
+    jump danger_room
+
+
+
+
+
+
+
+
+
+
+
+label study_Explore:
+    $ Line = 0
+    $ D20 = renpy.random.randint(1, 20)
+    menu:
+        "Where would you like to look?"
+        "Bookshelf":
+            if D20 >= 5 + counter:
+                $ Line = "book"
+            else:
+                "As you search the bookshelf, you accidentally knock one of the books off."
+                "It hammers against the floor, and a little light blinks on the desk."
+        "Left Desk Drawer":
+            if KittyX.location != bg_current and StormX.location != bg_current:
+                "You can't seem to get it open, it would be nice to have someone open the catch from the inside."
+            elif D20 >= 10 + counter:
+                $ Line = "left"
+            else:
+                "As you open the drawer, it makes a loud a squeak."
+                "As you look around, you notice a little light starts blinking on the desk."
+        "Middle Desk Drawer":
+            if KittyX.location != bg_current and StormX.location != bg_current:
+                "You can't seem to get it open, it would be nice to have someone open the catch from the inside."
+            elif D20 >= 15 + counter:
+                $ Line = "mid"
+            else:
+                "As you open the drawer, it makes a loud a squeak."
+                "As you look around, you notice a little light starts blinking on the desk."
+        "Right Desk Drawer":
+            if KittyX.location != bg_current and StormX.location != bg_current:
+                "You can't seem to get it open, it would be nice to have someone open the catch from the inside."
+            elif D20 >= 5 + counter:
+                $ Line = "right"
+            else:
+                "As you open the drawer, it makes a loud a squeak."
+                "As you look around, you notice a little light starts blinking on the desk."
+        "Never mind [[back]":
+            jump study_room
+
+    $ D20 = renpy.random.randint(1, 20)
+    if not Line:
+        "Probably best to get out of here."
+        "You slip out and head back to your room."
+        jump player_room_entry
+    elif Line == "book":
+        if D20 >= 15 and "Well Studied" not in achievements:
+            "As you check the books on the shelf, you notice that one of them is actually a disguised lockbox."
+            if KittyX.location == bg_current:
+                menu:
+                    "Since [KittyX.name] is around, have her check inside?"
+                    "Check in the box":
+                        if approval_check(KittyX, 700, "I") or approval_check(KittyX, 1800):
+                            if "Well Studied" not in achievements:
+                                $ KittyX.change_stat("obedience", 50, 10)
+                                $ KittyX.change_stat("inhibition", 60, 15)
+                                ch_k "Sounds like a plan."
+                                "[KittyX.name] swipes her hand through the box, and pulls out a stack of bills."
+                                "Looks like Xavier was hiding a rainy day fund in here."
+                                $ Player.cash += 500
+                                "[[$500 acquired.]"
+                                $ achievements.append("Well Studied")
+                            else:
+                                "Looks like this has been thoroughly looted."
+                        else:
+                            $ KittyX.change_stat("love", 90, -3)
+                            $ KittyX.change_stat("obedience", 50, 1)
+                            $ KittyX.change_stat("inhibition", 60, 2)
+                            ch_k "I really don't think we should do that."
+                    "Put it back.":
+                        "You place the box back on the shelf."
+            elif StormX.location == bg_current:
+                menu:
+                    "Since [StormX.name] is around, have her check inside?"
+                    "Check in the box":
+                        if approval_check(StormX, 700, "I") or approval_check(StormX, 1800):
+                            if "Well Studied" not in achievements:
+                                $ StormX.change_stat("obedience", 50, 10)
+                                $ StormX.change_stat("inhibition", 60, 15)
+                                ch_s "I suppose I could. . ."
+                                "[StormX.name] picks the lock on the box, and pulls out a stack of bills."
+                                "Looks like Charles had some money set aside. . ."
+                                $ Player.cash += 500
+                                "[[$500 acquired.]"
+                                $ achievements.append("Well Studied")
+                            else:
+                                "Looks like this has been thoroughly looted."
+                        else:
+                            $ StormX.change_stat("love", 90, -3)
+                            $ StormX.change_stat("obedience", 50, 1)
+                            $ StormX.change_stat("inhibition", 60, 2)
+                            ch_s "I really don't think we should do that."
+                    "Put it back.":
+                        "You place the box back on the shelf."
+            else:
+                "You can't think of any way to get it open, too bad you aren't a ghost or something."
+                "You place the box back on the shelf."
+        elif D20 >= 15:
+            "There doesn't seem to be anything more of interest in here."
+        else:
+            "You search through the books for a few minutes, but don't find anything."
+            "It would probably take a more thorough search."
+    elif Line == "left":
+        if "Xavier's photo" not in Player.inventory:
+            if D20 >= 10:
+                "Buried under a pile of documents, you find a printed out photo."
+                "It appears to be a selfie of Mystique making out with Xavier."
+                "She's reaching down to adjust his . . . oh, {i}that's{/i} interesting."
+                if StormX.location == bg_current:
+                    ch_s "You should probably put that back, it looks personal."
+                else:
+                    "[[Xavier's photo acquired.]"
+                    $ Player.inventory.append("Xavier's photo")
+                    if "kappa" in Player.history:
+                        $ Player.history.remove("kappa")
+            else:
+                "You search through some documents, but don't find anything."
+                "It would probably take a more thorough search."
+        else:
+            "There doesn't seem to be anything more of interest in here."
+    elif Line == "mid":
+        if "All" not in keys:
+            "Under a few trinkets, you find a small keyring."
+            "[[Keyring acquired.]"
+            if "Xavier" not in keys:
+                $ keys.append("Xavier")
+            if RogueX not in keys:
+                $ keys.append(RogueX)
+            if KittyX not in keys:
+                $ keys.append(KittyX)
+            if EmmaX not in keys:
+                $ keys.append(EmmaX)
+            if LauraX not in keys:
+                $ keys.append(LauraX)
+            if JeanX not in keys:
+                $ keys.append(JeanX)
+            if StormX not in keys:
+                $ keys.append(StormX)
+            if JubesX not in keys:
+                $ keys.append(JubesX)
+            if "All" not in keys:
+                $ keys.append("All")
+        else:
+            "There doesn't seem to be anything interesting in here."
+    elif Line == "right":
+        "There doesn't seem to be anything more of interest in here, maybe later?"
+        if "Xavier's files" not in Player.inventory:
+            if D20 >= 10:
+                "You search through some documents, but don't find anything."
+                if StormX.location == bg_current:
+                    ch_s "Hmm. . ."
+                    "She reaches under some of the documents and finds a small notch."
+                    "With a soft \"click\"a panel flips open in the drawer, revealing some file folders."
+                    "Inside are some fairly. . . detailed reports on the girls at the school."
+                    $ StormX.change_face("_surprised",2)
+                    "These include body measurements, sexual histories. . . masturbation habits?"
+                    $ StormX.change_stat("obedience", 70, 5)
+                    $ StormX.change_stat("inhibition", 70, 5)
+                    $ StormX.change_face("_angry")
+                    ch_s "Well, I don't think Charles should be holding information like this. . ."
+                    $ StormX.change_face("_normal",1)
+                    "[[Xavier's files acquired.]"
+                    $ Player.inventory.append("Xavier's files")
+                    if "rho" in Player.history:
+                        $ Player.history.remove("rho")
+            else:
+                "You search through some documents, but don't find anything."
+                "It would probably take a more thorough search."
+        else:
+            "There doesn't seem to be anything more of interest in here."
+
+    $ counter += 3
+    jump study_Explore

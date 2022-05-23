@@ -129,12 +129,12 @@ label JeanMeet:
         ch_j "Anyway, I know what you were doing here. . ."
         ch_j "I bet you were hoping that you'd catch me naked or something, uh?"
         ch_j "Wanted to see these titties?"
-        $ JeanX.ArmPose = 2
+        $ JeanX.arm_pose = 2
         $ JeanX.top_pulled_up = 1
         pause 1      
         $ JeanX.top_pulled_up = 0
         $ JeanX.change_face("_sly",0,Eyes="_side")
-        $ JeanX.ArmPose = 1
+        $ JeanX.arm_pose = 1
         ch_j "Can't blame you, everyone does, the pervs."
         menu:
             extend ""
@@ -181,7 +181,7 @@ label JeanMeet:
                 $ JeanX.change_stat("love", 90, -10)
                 $ JeanX.change_stat("obedience", 200, 10)
                 $ JeanX.change_stat("inhibition", 200, -5)
-                $ JeanX.ArmPose = 2
+                $ JeanX.arm_pose = 2
                 ch_j "Exactl- wait, what?"
                 $ JeanX.change_face("_surprised",1)
                 menu:
@@ -213,7 +213,7 @@ label JeanMeet:
                         ch_j "You should have forgotten that!"
                         ch_j "I mind took you!"
                         $ Line = "power"
-                $ JeanX.ArmPose = 1
+                $ JeanX.arm_pose = 1
 
 
     if not Line:
@@ -246,7 +246,7 @@ label JeanMeet:
             $ JeanX.change_stat("obedience", 200, 30)
             ch_j "What?!"
             $ JeanX.change_face("_confused",1)
-            ch_j "wait. . ."
+            ch_j "Wait . ."
             $ JeanX.change_face("_angry",1)
             $ JeanX.change_stat("love", 90, -15)
             $ JeanX.change_stat("obedience", 200, -10)
@@ -263,7 +263,7 @@ label JeanMeet:
             $ JeanX.change_face("_angry",1)
             ch_j "You're just, like. . . immune to mind-taking or something!"
     $ JeanX.change_stat("inhibition", 200, -200)
-    if JeanX.SeenChest:
+    if JeanX.seen_breasts:
         $ JeanX.change_face("_angry",1)
         ch_j "So you saw my. . ."
         menu:
@@ -397,8 +397,8 @@ label Jean_Key:
     $ JeanX.change_face("_bemused")
     ch_j "Oh, here, just in case you wanted to drop by."
     "She tossed a key at you, which you manage to catch."
-    $ Keys.append(JeanX)
-    $ JeanX.Event[0] = 1
+    $ keys.append(JeanX)
+    $ JeanX.event_happened[0] = 1
     ch_p "Thanks."
     return
 
@@ -415,7 +415,7 @@ label Jean_Like:
     call clear_the_room (JeanX)
     call set_the_scene
     $ JeanX.daily_history.append("relationship")
-    call Taboo_Level
+    call taboo_Level
     $ Line = 0
     $ JeanX.change_face("_sly",1,Eyes="_down")
     ". . .{w=0.5}{nw}"
@@ -436,7 +436,7 @@ label Jean_Like:
         if JeanX.event_counter["orgasmed"]>= 30:
             $ JeanX.change_stat("lust", 80, 10)
             ch_j ". . . seriously. . ."
-    if JeanX.SeenPeen:
+    if JeanX.seen_peen:
         $ JeanX.change_face("_sly",1)
         $ JeanX.change_stat("love", 200, 5)
         $ JeanX.change_stat("obedience", 90, 10)
@@ -540,7 +540,7 @@ label Jean_Love:
     call clear_the_room (JeanX)
     call set_the_scene
     $ JeanX.daily_history.append("relationship")
-    call Taboo_Level
+    call taboo_Level
     $ Line = 0
     $ JeanX.change_face("_sly",1)
     ch_j "So. . . [JeanX.player_petname]."
@@ -627,7 +627,7 @@ label Jean_Love:
                 ch_j "I guess that's fine."
                 ch_j "Whatever."
     ch_j "Anyway, I just wanted to put that out there."
-    $ JeanX.Event[5] = 1
+    $ JeanX.event_happened[5] = 1
     $ JeanX.player_petname = "lover"
     $ JeanX.player_petnames.append("lover")
     if Player.Harem:
@@ -732,7 +732,7 @@ label Jean_Love:
                                     ch_j "You sort things out on your end and get back to me."
                                     ch_j ". . . just don't take -too- long."
                                     $ Player.Harem.remove(JeanX)
-                                    $ JeanX.Event[5] = 20
+                                    $ JeanX.event_happened[5] = 20
                                     return
                                 "[[Might as well roll with it. . .]":
                                     ch_j "Heh."
@@ -759,7 +759,7 @@ label Jean_Sub:
     call clear_the_room (JeanX)
     call set_the_scene
     $ JeanX.daily_history.append("relationship")
-    call Taboo_Level
+    call taboo_Level
     $ Line = 0
     $ JeanX.change_face("_sly",1,Eyes="_side")
     ch_j "Hey. . . [JeanX.player_petname]."
@@ -900,7 +900,7 @@ label Jean_Master:
     call clear_the_room (JeanX)
     call set_the_scene
     $ JeanX.daily_history.append("relationship")
-    call Taboo_Level
+    call taboo_Level
     $ Line = 0
     $ JeanX.change_face("_sly",1,Eyes="_side")
     ch_j "Hey. . . [JeanX.player_petname]."

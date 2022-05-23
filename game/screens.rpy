@@ -42,9 +42,9 @@ screen say(who, what, side_image=None, two_window=False, CountWords=0):
     else:
 
 
-        if who == "Rogue" and RogueX.Gag:
+        if who == "Rogue" and RogueX.gag:
             $ CountWords = 1
-        elif who == "Kitty" and KittyX.Gag:
+        elif who == "Kitty" and KittyX.gag:
             $ CountWords = 1
         if CountWords == 1:
             $ CountWords = what.count(" ") if what.count(" ") <= 10 else 10
@@ -545,7 +545,7 @@ screen preferences():
                 bar value Preference("auto-forward time")
 
                 if config.has_voice:
-                    textbutton _("Wait for Voice") action Preference("wait for voice", "toggle")
+                    textbutton _("Wait for Voice") action Preference("Wait for voice", "toggle")
 
         vbox:
             frame:
@@ -720,7 +720,7 @@ screen statbutton:
 
 
 
-screen Inventorybutton:
+screen inventory_button:
     imagebutton:
         auto "images/UI_Backpack_%s.png"
         action Show("Inventory_screen")
@@ -739,7 +739,7 @@ image Alt_Screen_Mask:
         alpha .5
         pos (0,-20)
 
-screen Status_Screen:
+screen status_screen:
 
     default tt = Tooltip(" ")
 
@@ -878,7 +878,7 @@ screen Status_Screen:
         background None
         has vbox
         hbox:
-            text "day: [day] [day_of_week]" size 12
+            text "Day: [day] [day_of_week]" size 12
         hbox:
             text "Time: [current_time]" size 12
     frame:
@@ -960,20 +960,20 @@ screen Inventory_screen:
 
         text "Inventory:" size 20
         showif "_dildo" in Player.inventory:
-            $ Inventory_Count = Player.inventory.count("_dildo")
-            text "Dildos: [Inventory_Count]" size 15
+            $ inventory_count = Player.inventory.count("_dildo")
+            text "Dildos: [inventory_count]" size 15
         showif "_vibrator" in Player.inventory:
-            $ Inventory_Count = Player.inventory.count("_vibrator")
-            text "Vibrators: [Inventory_Count]" size 15
+            $ inventory_count = Player.inventory.count("_vibrator")
+            text "Vibrators: [inventory_count]" size 15
         showif "Dazzler and Longshot" in Player.inventory:
-            $ Inventory_Count = Player.inventory.count("Dazzler and Longshot")
-            text "Dazzler and Longshot: [Inventory_Count]" size 15
+            $ inventory_count = Player.inventory.count("Dazzler and Longshot")
+            text "Dazzler and Longshot: [inventory_count]" size 15
         showif "256 Shades of Grey" in Player.inventory:
-            $ Inventory_Count = Player.inventory.count("256 Shades of Grey")
-            text "256 Shades of Grey: [Inventory_Count]" size 15
+            $ inventory_count = Player.inventory.count("256 Shades of Grey")
+            text "256 Shades of Grey: [inventory_count]" size 15
         showif "Avengers Tower Penthouse" in Player.inventory:
-            $ Inventory_Count = Player.inventory.count("Avengers Tower Penthouse")
-            text "Avengers Tower Penthouse: [Inventory_Count]" size 15
+            $ inventory_count = Player.inventory.count("Avengers Tower Penthouse")
+            text "Avengers Tower Penthouse: [inventory_count]" size 15
         showif "Xavier's photo" in Player.inventory:
             text "Xavier's Photo" size 15
         showif "Xavier's files" in Player.inventory:
@@ -1067,29 +1067,29 @@ screen Inventory_screen:
 
 
         showif "Mandrill Cologne" in Player.inventory:
-            $ Inventory_Count = Player.inventory.count("Mandrill Cologne")
-            textbutton "Mandrill Cologne: [Inventory_Count] doses" action ui.callsinnewcontext("MandrillScreen") text_size 15
+            $ inventory_count = Player.inventory.count("Mandrill Cologne")
+            textbutton "Mandrill Cologne: [inventory_count] doses" action ui.callsinnewcontext("MandrillScreen") text_size 15
         showif "Purple Rain Cologne" in Player.inventory:
-            $ Inventory_Count = Player.inventory.count("Purple Rain Cologne")
-            textbutton "Purple Rain Cologne: [Inventory_Count] doses" action ui.callsinnewcontext("PurpleRainScreen") text_size 15
+            $ inventory_count = Player.inventory.count("Purple Rain Cologne")
+            textbutton "Purple Rain Cologne: [inventory_count] doses" action ui.callsinnewcontext("PurpleRainScreen") text_size 15
         showif "Corruption Cologne" in Player.inventory:
-            $ Inventory_Count = Player.inventory.count("Corruption Cologne")
-            textbutton "Corruption Cologne: [Inventory_Count] doses" action ui.callsinnewcontext("CorruptionScreen") text_size 15
-        showif "Xavier" in Keys:
+            $ inventory_count = Player.inventory.count("Corruption Cologne")
+            textbutton "Corruption Cologne: [inventory_count] doses" action ui.callsinnewcontext("CorruptionScreen") text_size 15
+        showif "Xavier" in keys:
             text "Xavier's Key" size 15
-        showif RogueX in Keys:
+        showif RogueX in keys:
             text "Rogue's Key" size 15
-        showif KittyX in Keys:
+        showif KittyX in keys:
             text "Kitty's Key" size 15
-        showif EmmaX in Keys:
+        showif EmmaX in keys:
             text "Emma's Key" size 15
-        showif LauraX in Keys:
+        showif LauraX in keys:
             text "Laura's Key" size 15
-        showif JeanX in Keys:
+        showif JeanX in keys:
             text "Jean's Key" size 15
-        showif StormX in Keys:
+        showif StormX in keys:
             text "Storm's Key" size 15
-        showif JubesX in Keys:
+        showif JubesX in keys:
             text "Jubes's Key" size 15
 
 
@@ -1110,8 +1110,8 @@ label MandrillScreen:
         "You'll confuse the scent you already have on."
         return
 
-    $ Inventory_Count = Player.inventory.count("Mandrill Cologne")
-    "This cologne is guaranteed to make women love you more [[+Love]. You have [Inventory_Count] doses left."
+    $ inventory_count = Player.inventory.count("Mandrill Cologne")
+    "This cologne is guaranteed to make women love you more [[+Love]. You have [inventory_count] doses left."
     "Product warning, any love gained while under the effects may be lost when this wears off, if the limits are reached."
     menu:
         "Use it now?"
@@ -1131,8 +1131,8 @@ label PurpleRainScreen:
         "You'll confuse the scent you already have on."
         return
 
-    $ Inventory_Count = Player.inventory.count("Purple Rain Cologne")
-    "This cologne is guaranteed to make women more suggestible to your orders until tomorrow [[+Obedience]. You have [Inventory_Count] doses left."
+    $ inventory_count = Player.inventory.count("Purple Rain Cologne")
+    "This cologne is guaranteed to make women more suggestible to your orders until tomorrow [[+Obedience]. You have [inventory_count] doses left."
     "Product warning, any obedience gained whie under the effects may be lost when this wears off, if the limits are reached."
     menu:
         "Use it now?"
@@ -1151,8 +1151,8 @@ label CorruptionScreen:
         "You'll confuse the scent you already have on."
         return
 
-    $ Inventory_Count = Player.inventory.count("Corruption Cologne")
-    "This cologne is guaranteed to make women let loose their wild side [[-Inhibition]. You have [Inventory_Count] doses left."
+    $ inventory_count = Player.inventory.count("Corruption Cologne")
+    "This cologne is guaranteed to make women let loose their wild side [[-Inhibition]. You have [inventory_count] doses left."
     "Product warning, any Inhibition lost whie under the effects may be regained when this wears off, if the limits are reached."
     menu:
         "Use it now?"

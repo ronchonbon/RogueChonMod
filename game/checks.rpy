@@ -43,10 +43,10 @@ init python:
         L = Chr.love
         O = Chr.obedience
         I = Chr.inhibition
-        LocalTaboo = Chr.Taboo
+        Localtaboo = Chr.taboo
         Loc = Chr.location if not Loc else Loc
 
-        if Chr == JeanX and (O <= 800 or JeanX.Taboo):
+        if Chr == JeanX and (O <= 800 or JeanX.taboo):
 
             I = (I - JeanX.IX)
 
@@ -92,58 +92,58 @@ init python:
                         I = 1000
 
         if Type == "LOI":
-            LocalTaboo = LocalTaboo*10
+            Localtaboo = Localtaboo*10
             Localapproval_bonus = approval_bonus*10
 
         elif Type == "LO":
 
 
             I = 0
-            LocalTaboo = LocalTaboo*6
+            Localtaboo = Localtaboo*6
             Localapproval_bonus = approval_bonus*6
         elif Type == "OI":
             L = 0
-            LocalTaboo = LocalTaboo*6
+            Localtaboo = Localtaboo*6
             Localapproval_bonus = approval_bonus*6
         elif Type == "LI":
             O = 0
-            LocalTaboo = LocalTaboo*6
+            Localtaboo = Localtaboo*6
             Localapproval_bonus = approval_bonus*6
 
         elif Type == "L":
             O = 0
             I = 0
-            LocalTaboo = LocalTaboo*3
+            Localtaboo = Localtaboo*3
             Localapproval_bonus = approval_bonus*3
         elif Type == "O":
             L = 0
             I = 0
-            LocalTaboo = LocalTaboo*3
+            Localtaboo = Localtaboo*3
             Localapproval_bonus = approval_bonus*3
         elif Type == "I":
             O = 0
             L = 0
-            LocalTaboo = LocalTaboo*3
+            Localtaboo = Localtaboo*3
             Localapproval_bonus = approval_bonus*3
 
         else:
-            LocalTaboo = LocalTaboo*10
+            Localtaboo = Localtaboo*10
             Localapproval_bonus = approval_bonus*10
 
         TabM = 0 if TabM <= 0 else TabM
 
         if Check:
 
-            Check = (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*LocalTaboo))
+            Check = (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*Localtaboo))
             return Check
 
-        if (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*LocalTaboo)) >= (T + (2*Spread)):
+        if (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*Localtaboo)) >= (T + (2*Spread)):
 
             return 3
-        elif (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*LocalTaboo)) >= (T + Spread):
+        elif (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*Localtaboo)) >= (T + Spread):
 
             return 2
-        elif (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*LocalTaboo)) >= T:
+        elif (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*Localtaboo)) >= T:
 
             return True
         else:
@@ -281,81 +281,89 @@ label ShareCheck(temp_Girls=[], temp_Girls2=[]):
         $ temp_Girls.remove(temp_Girls[0])
     return
 
-label AddictCheck(temp_Girls=[]):
-
-
+label check_addiction:
     $ temp_Girls = active_Girls[:]
+
     $ renpy.random.shuffle(temp_Girls)
+
     if JubesX in temp_Girls and JubesX.addiction >= 40 and temp_Girls[0].resistance:
         $ temp_Girls.remove(JubesX)
+
         if "sunshine" not in JubesX.history or "addiction" in JubesX.daily_history:
             pass
         elif bg_current == JubesX.home or bg_current == "bg_player":
             if not JubesX.resistance:
-
-                call addiction_event (JubesX)
+                call addiction_event(JubesX)
             else:
-                call addiction_fix (JubesX)
+                call addiction_fix(JubesX)
         else:
             if "asked_to_meet" in JubesX.daily_history:
                 pass
             elif "asked_to_meet" in JubesX.daily_history and JubesX.addiction >= 60:
                 "[JubesX.name] texts you. . ."
+
                 JubesX.voice "I know I asked to meet you in your room earlier, but I really need a fix."
-                $ Player.add_word(1,"asked fix",0,0,0)
+
+                $ Player.add_word(1,"asked_for_fix",0,0,0)
                 $ JubesX.add_word(1,"asked_to_meet","asked_to_meet",0,0)
+
                 call return_to_room
+
                 return
             else:
                 "[JubesX.name] texts and asks if you could get her a fix later."
+
                 $ JubesX.add_word(1,"asked_to_meet","asked_to_meet",0,0)
+
                 call return_to_room
+
                 return
     while temp_Girls:
         if "locked" in Player.traits and temp_Girls[0].location != bg_current:
-
             pass
-        elif "asked fix" in Player.daily_history and "asked_to_meet" not in temp_Girls[0].daily_history:
-
+        elif "asked_for_fix" in Player.daily_history and "asked_to_meet" not in temp_Girls[0].daily_history:
             pass
-        elif temp_Girls[0].Event[3]:
-
+        elif temp_Girls[0].event_happened[3]:
             pass
         elif "_angry" not in temp_Girls[0].recent_history and "addiction" not in temp_Girls[0].daily_history and temp_Girls[0].remaining_actions >= 1:
-
             if (temp_Girls[0].addiction >= 60 or (temp_Girls[0].addiction >= 40 and temp_Girls[0] == JubesX)) and temp_Girls[0].resistance:
-
                 if bg_current == temp_Girls[0].home or bg_current == "bg_player":
-                    call addiction_fix (temp_Girls[0])
+                    call addiction_fix(temp_Girls[0])
                 else:
                     if "asked_to_meet" in temp_Girls[0].recent_history:
                         pass
                     elif "asked_to_meet" in temp_Girls[0].daily_history and temp_Girls[0].addiction >= 80:
                         "[temp_Girls[0].name] texts you. . ."
+
                         temp_Girls[0].voice "I know I asked to meet you in your room earlier, but I'm serious, this is important."
-                        $ Player.add_word(1,"asked fix",0,0,0)
+
+                        $ Player.add_word(1,"asked_for_fix",0,0,0)
+
                         $ temp_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
+
                         call return_to_room
+
                         return
                     else:
                         "[temp_Girls[0].name] texts and asks if you could meet her in your room later."
-                        $ temp_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
-                        call return_to_room
-                        return
 
+                        $ temp_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
+
+                        call return_to_room
+
+                        return
             elif temp_Girls[0].resistance:
                 pass
-
             elif temp_Girls[0] == JubesX and temp_Girls[0].addiction < 50:
                 pass
-            elif temp_Girls[0].addiction >= 35 and not temp_Girls[0].Event[1]:
-
-                call addiction_event (temp_Girls[0])
-            elif temp_Girls[0].addiction >= 60 and temp_Girls[0].Event[1] <= 2:
-
-                call addiction_event (temp_Girls[0])
+            elif temp_Girls[0].addiction >= 35 and not temp_Girls[0].event_happened[1]:
+                call addiction_event(temp_Girls[0])
+            elif temp_Girls[0].addiction >= 60 and temp_Girls[0].event_happened[1] <= 2:
+                call addiction_event(temp_Girls[0])
             elif temp_Girls[0].addiction >= 90:
+                call addiction_event(temp_Girls[0])
 
-                call addiction_event (temp_Girls[0])
-        $ temp_Girls.remove(temp_Girls[0])
+        if len(temp_Girls) > 0:
+            $ temp_Girls.remove(temp_Girls[0])
+
     return

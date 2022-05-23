@@ -5,14 +5,14 @@ layeredimage Kitty_sprite:
     if KittyX.legs == "_dress" and KittyX.upskirt:
         "images/Kitty_sprite/Kitty_standing_legs[KittyX.legs]_back.png"
 
-    if KittyX.ArmPose == 1:
-        "images/Kitty_sprite/Kitty_standing_arms[KittyX.ArmPose].png"
+    if KittyX.arm_pose == 1:
+        "images/Kitty_sprite/Kitty_standing_arms[KittyX.arm_pose].png"
 
     if KittyX.top == "_pink_top":
-        "images/Kitty_sprite/Kitty_standing_top[KittyX.top][KittyX.ArmPose]_under.png"
+        "images/Kitty_sprite/Kitty_standing_top[KittyX.top][KittyX.arm_pose]_under.png"
 
     always:
-        "images/Kitty_sprite/Kitty_standing_body[KittyX.pubes][KittyX.ArmPose].png"
+        "images/Kitty_sprite/Kitty_standing_body[KittyX.pubes][KittyX.arm_pose].png"
 
     if not KittyX.piercings or (KittyX.underwear and not KittyX.underwear_pulled_down):
         Null()
@@ -84,8 +84,8 @@ layeredimage Kitty_sprite:
     elif KittyX.legs:
         "images/Kitty_sprite/Kitty_standing_legs[KittyX.legs].png"
 
-    if KittyX.ArmPose == 2:
-        "images/Kitty_sprite/Kitty_standing_arms[KittyX.ArmPose].png"
+    if KittyX.arm_pose == 2:
+        "images/Kitty_sprite/Kitty_standing_arms[KittyX.arm_pose].png"
 
     always:
         "images/Kitty_sprite/Kitty_standing_chest.png"
@@ -98,14 +98,14 @@ layeredimage Kitty_sprite:
 
     if not KittyX.bra:
         Null()
-    elif not KittyX.top_pulled_up and KittyX.ArmPose != 1 and KittyX.bra in ["_cami", "_bikini_top", "_dress"]:
-        "images/Kitty_sprite/Kitty_standing_bra[KittyX.bra][KittyX.ArmPose].png"
+    elif not KittyX.top_pulled_up and KittyX.arm_pose != 1 and KittyX.bra in ["_cami", "_bikini_top", "_dress"]:
+        "images/Kitty_sprite/Kitty_standing_bra[KittyX.bra][KittyX.arm_pose].png"
     elif not KittyX.top_pulled_up:
-        "images/Kitty_sprite/Kitty_standing_bra[KittyX.bra][KittyX.ArmPose].png"
+        "images/Kitty_sprite/Kitty_standing_bra[KittyX.bra][KittyX.arm_pose].png"
     elif KittyX.top and KittyX.top != "_towel":
-        "images/Kitty_sprite/Kitty_standing_bra[KittyX.bra][KittyX.ArmPose].png"
+        "images/Kitty_sprite/Kitty_standing_bra[KittyX.bra][KittyX.arm_pose].png"
     elif KittyX.bra:
-        "images/Kitty_sprite/Kitty_standing_bra[KittyX.bra][KittyX.ArmPose]_up.png"
+        "images/Kitty_sprite/Kitty_standing_bra[KittyX.bra][KittyX.arm_pose]_up.png"
 
     if not KittyX.piercings or not KittyX.bra or KittyX.top_pulled_up:
         Null()
@@ -115,14 +115,14 @@ layeredimage Kitty_sprite:
         "images/Kitty_sprite/Kitty_standing_piercings[KittyX.piercings].png"
 
     if KittyX.wet:
-        "images/Kitty_sprite/Kitty_standing_wet[KittyX.ArmPose].png"
+        "images/Kitty_sprite/Kitty_standing_body_wet[KittyX.arm_pose].png"
 
     if not KittyX.top:
         Null()
     elif KittyX.top_pulled_up:
-        "images/Kitty_sprite/Kitty_standing_top[KittyX.top][KittyX.ArmPose]_up.png"
+        "images/Kitty_sprite/Kitty_standing_top[KittyX.top][KittyX.arm_pose]_up.png"
     else:
-        "images/Kitty_sprite/Kitty_standing_top[KittyX.top][KittyX.ArmPose].png"
+        "images/Kitty_sprite/Kitty_standing_top[KittyX.top][KittyX.arm_pose].png"
 
     if not KittyX.top or not KittyX.bra or not KittyX.top_pulled_up:
         Null()
@@ -257,11 +257,9 @@ layeredimage Kitty_hairback:
     size (416, 610) zoom 0.5
 
 layeredimage Kitty_head:
-    if (not action_speed or not renpy.showing("Kitty_blowjob_animation")) and RogueX.wet:
-        "images/Kitty_sprite/Kitty_standing_face[KittyX.hair][KittyX.blushing]_wet.png"
-    elif not action_speed or not renpy.showing("Kitty_blowjob_animation"):
+    if not action_speed or not renpy.showing("Kitty_blowjob_animation"):
         "images/Kitty_sprite/Kitty_standing_face[KittyX.hair][KittyX.blushing].png"
-    elif RogueX.wet:
+    elif KittyX.wet:
         "images/Kitty_sprite/Kitty_face_blowjob[KittyX.blushing]_wet.png"
     else:
         "images/Kitty_sprite/Kitty_face_blowjob[KittyX.blushing].png"
@@ -283,9 +281,7 @@ layeredimage Kitty_head:
     always:
         "Kitty_blinking"
 
-    if KittyX.wet:
-        "images/Kitty_sprite/Kitty_standing_hair_wet.png"
-    else:
+    always:
         "images/Kitty_sprite/Kitty_standing_hair[KittyX.hair].png"
 
     if KittyX.wet:

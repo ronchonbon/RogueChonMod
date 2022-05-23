@@ -64,7 +64,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
             "Sure?":
                 ch_l "Good."
                 "[LauraX.name] grabs your hand and presses it against her breast."
-                call Date_Sex_Break (LauraX, Second)
+                call check_if_second_minds (LauraX, Second)
                 if _return == 4:
                     "[LauraX.name] stops what she's doing."
                     ch_l "Be that way."
@@ -104,7 +104,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
             "Sure?":
                 ch_j "Good."
                 "[JeanX.name] grabs your hand and presses it against her breast."
-                call Date_Sex_Break (JeanX, Second)
+                call check_if_second_minds (JeanX, Second)
                 if _return == 4:
                     "[JeanX.name] stops what she's doing."
                     ch_j "Ok, ok, hands off. . ."
@@ -255,7 +255,7 @@ label Strip_Study_Right:
 
     if Party[0].top:
 
-        if Party[0] == StormX or Party[0].SeenChest or (Party[0].bra and approval_check(Party[0], 300)) or approval_check(Party[0], 850):
+        if Party[0] == StormX or Party[0].seen_breasts or (Party[0].bra and approval_check(Party[0], 300)) or approval_check(Party[0], 850):
             $ Party[0].change_stat("inhibition", 25, 1)
             $ Party[0].change_stat("inhibition", 50, 1)
             $ Line = Party[0].top
@@ -285,7 +285,7 @@ label Strip_Study_Right:
 
     if Party[0].legs:
 
-        if Party[0] == StormX or (Party[0].SeenPanties and Party[0].SeenPussy) or (Party[0].underwear and (approval_check(Party[0], 700) or Party[0].SeenPanties)) or approval_check(Party[0], 950):
+        if Party[0] == StormX or (Party[0].seen_underwear and Party[0].seen_pussy) or (Party[0].underwear and (approval_check(Party[0], 700) or Party[0].seen_underwear)) or approval_check(Party[0], 950):
             $ Party[0].change_stat("lust", 50, 5)
             $ Party[0].change_stat("inhibition", 30, 1)
             $ Party[0].change_stat("inhibition", 50, 1)
@@ -293,10 +293,10 @@ label Strip_Study_Right:
             $ Party[0].legs = ""
             "She unfastens her [Line] and slides them down her legs."
             if Party[0].underwear:
-                if not Party[0].SeenPanties:
+                if not Party[0].seen_underwear:
                     $ Party[0].change_stat("inhibition", 200, 2)
                     $ Party[0].change_stat("inhibition", 50, 3)
-                    $ Party[0].SeenPanties = 1
+                    $ Party[0].seen_underwear = 1
             else:
 
                 $ Party[0].blushing = "_blush1"
@@ -319,14 +319,14 @@ label Strip_Study_Right:
         return
 
     if Party[0].bra:
-        if Party[0] == StormX or approval_check(Party[0], 900) or (Party[0].SeenChest and approval_check(Party[0], 600)):
+        if Party[0] == StormX or approval_check(Party[0], 900) or (Party[0].seen_breasts and approval_check(Party[0], 600)):
             $ Party[0].change_stat("lust", 60, 5)
             $ Party[0].change_stat("inhibition", 50, 2)
             $ Party[0].change_stat("inhibition", 200, 1)
             $ Line = Party[0].bra
             $ Party[0].bra = ""
             "She pulls her [Line] over her head and tosses it aside."
-            if not Party[0].SeenChest:
+            if not Party[0].seen_breasts:
                 $ Party[0].change_stat("inhibition", 200, 3)
                 $ Party[0].change_stat("inhibition", 50, 1)
                 call expression Party[0].tag + "_First_Topless"
@@ -351,14 +351,14 @@ label Strip_Study_Right:
         return
 
     if Party[0].underwear:
-        if Party[0] == StormX or approval_check(Party[0], 950) or (Party[0].SeenPussy and approval_check(Party[0], 600)):
+        if Party[0] == StormX or approval_check(Party[0], 950) or (Party[0].seen_pussy and approval_check(Party[0], 600)):
             $ Party[0].change_stat("lust", 70, 10)
             $ Party[0].change_stat("inhibition", 70, 2)
             $ Party[0].change_stat("inhibition", 200, 2)
             $ Line = Party[0].underwear
             $ Party[0].underwear = ""
             "She slides her [Line] off, leaving her pussy bare."
-            if not Party[0].SeenPussy:
+            if not Party[0].seen_pussy:
                 $ Party[0].change_stat("inhibition", 50, 4)
                 $ Party[0].change_stat("inhibition", 200, 4)
                 call expression Party[0].tag + "_First_Bottomless"
@@ -804,7 +804,7 @@ label Emma_Quiz_Question:
                 return False
             "C. I don't know":
                 $ EmmaX.change_face("_sadside", 1)
-                if not EmmaX.SeenPussy:
+                if not EmmaX.seen_pussy:
                     ch_e "Boo, I thought you might at least take a guess. . ."
                 else:
                     ch_e "Clearly you weren't paying enough attention."
@@ -1348,7 +1348,7 @@ label Emma_StripStudy_Intro:
                         menu:
                             extend ""
                             "Um. . . oh, OH! Yeah, sounds good. [[Strip tutoring]":
-                                $ Line = "strip"
+                                $ Line = "striptease"
                             "Looks like I am. . .":
                                 if approval_check(EmmaX, 500, "O"):
                                     $ EmmaX.change_stat("obedience", 80, 5)
@@ -1388,7 +1388,7 @@ label Emma_StripStudy_Intro:
                     $ EmmaX.change_stat("obedience", 80, 3)
                     $ EmmaX.change_stat("inhibition", 50, 5)
                     ch_e "I was hoping you would. . ."
-                    $ Line = "strip"
+                    $ Line = "striptease"
                 "No, I've got this.":
                     $ EmmaX.change_face("_confused", Eyes="_side")
                     if "frisky" in EmmaX.history:
@@ -1411,7 +1411,7 @@ label Emma_StripStudy_Intro:
                     "Take off some clothes?":
                         $ EmmaX.change_stat("inhibition", 50, 5)
                         ch_e "Yes."
-                        $ Line = "strip"
+                        $ Line = "striptease"
                     "Yes? . .":
                         if approval_check(EmmaX, 500, "O"):
                             $ EmmaX.change_face("_confused", 2)
@@ -1454,7 +1454,7 @@ label Emma_StripStudy_Intro:
                 if Line == "ask":
                     $ EmmaX.change_face("_bemused", Eyes="_side")
                     ch_e "Take off some clothes. . ."
-                    $ Line = "strip"
+                    $ Line = "striptease"
                 $ EmmaX.change_face("_sly", Brows="_confused")
                 menu:
                     ch_e "Would that interest you?"
@@ -1481,11 +1481,11 @@ label Emma_StripStudy_Intro:
                         ch_e "Hrm."
                         $ Line = "no"
 
-        if Line == "strip":
+        if Line == "striptease":
             $ EmmaX.change_face("_sly", 0)
             if len(Party) >= 2:
                 ch_e "And you, [Party[1].name]? Care to participate?"
-                call Date_Sex_Break (EmmaX, Party[1])
+                call check_if_second_minds (EmmaX, Party[1])
                 if _return == 4:
 
                     ch_e "Well I suppose we can. . . postone that."

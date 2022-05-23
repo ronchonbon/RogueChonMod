@@ -836,7 +836,7 @@ label Rogue_Doggy_Reset:
     if not renpy.showing("Rogue_doggy_animation"):
         return
 
-    $ RogueX.ArmPose = 2
+    $ RogueX.arm_pose = 2
     $ RogueX.spriteVer = 0
     hide Rogue_doggy_animation
     call Rogue_Hide
@@ -1688,7 +1688,7 @@ label Rogue_Sex_Launch(Line=primary_action):
     elif Line == "hotdog":
         $ Player.cock_position = "out"
     elif Line == "footjob":
-        $ ShowFeet = 1
+        $ show_feet = 1
         $ Player.cock_position = "footjob"
     elif Line == "massage":
         $ Player.sprite = 0
@@ -1718,7 +1718,7 @@ label Rogue_Sex_Reset:
         return
     if not renpy.showing("Rogue_sex_animation"):
         return
-    $ RogueX.ArmPose = 2
+    $ RogueX.arm_pose = 2
     hide Rogue_sex_animation
     call Rogue_Hide
 
@@ -1762,7 +1762,7 @@ label Rogue_BJ_Launch(Line=primary_action):
             zoom 2.5 offset (70,140)
         with dissolve
 
-    if Taboo and Line == "L":
+    if taboo and Line == "L":
 
         if len(Present) >= 2:
             if Present[0] != RogueX:
@@ -1922,7 +1922,7 @@ label Rogue_TJ_Launch(Line=primary_action):
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         alpha 1
         ease 1 zoom 2 xpos 550 offset (0,50)
-    if Taboo:
+    if taboo:
         if len(Present) >= 2:
             if Present[0] != RogueX:
                 "[RogueX.name] looks back at [Present[0].name] to see if she's watching."
@@ -2059,7 +2059,7 @@ label Rogue_HJ_Launch(Line=primary_action):
         return
     call Rogue_Hide
     $ RogueX.arms = ""
-    $ RogueX.ArmPose = 1
+    $ RogueX.arm_pose = 1
     if not renpy.showing("Rogue_sprite"):
         show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
             alpha 1
@@ -2069,7 +2069,7 @@ label Rogue_HJ_Launch(Line=primary_action):
         alpha 1
         ease 1 zoom 1.7 xpos 700 offset (0,200)
 
-    if Taboo and Line == "L":
+    if taboo and Line == "L":
 
         if len(Present) >= 2:
             if Present[0] != RogueX:
@@ -3278,9 +3278,9 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
         $ temp_Girls = [GirlA]
     while temp_Girls:
         if temp_Girls[0] == KittyX or temp_Girls[0] == LauraX:
-            $ temp_Girls[0].ArmPose = 1
+            $ temp_Girls[0].arm_pose = 1
         else:
-            $ temp_Girls[0].ArmPose = 2
+            $ temp_Girls[0].arm_pose = 2
         $ YLoc = 100
         if GirlA == temp_Girls[0]:
 
@@ -3403,9 +3403,9 @@ label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, temp_Girls=[]):
             $ temp_Girls[0].eyes = "side"
 
         if temp_Girls[0] == KittyX or temp_Girls[0] == LauraX:
-            $ temp_Girls[0].ArmPose = 1
+            $ temp_Girls[0].arm_pose = 1
         else:
-            $ temp_Girls[0].ArmPose = 2
+            $ temp_Girls[0].arm_pose = 2
         $ YLoc = 100
         if Girl == temp_Girls[0]:
 

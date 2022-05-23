@@ -34,7 +34,7 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
         if Girl == EmmaX and "classcaught" not in Girl.history:
             $ Girl.change_face("_surprised", 1)
             $ Girl.eyes = "_down"
-            ch_e "wait. . ."
+            ch_e "Wait . ."
             $ Girl.change_face("_angry", 1)
             ch_e "That really isn't appropriate."
             $ Girl.change_stat("lust", 50, 7)
@@ -249,7 +249,7 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
 
             $ offhand_action = 0
 
-            if primary_action == "strip":
+            if primary_action == "striptease":
                 call Group_Strip_End
             elif primary_action == "masturbation":
                 $ Girl.remaining_actions -= 1
@@ -279,7 +279,7 @@ label Girl_Tag(Girl=0, Forced=0, Gloves=0):
     $ Girl = GirlCheck(Girl)
     call shift_focus (Girl)
     $ Gloves = Girl.arms
-    $ Girl.ArmPose = 2
+    $ Girl.arm_pose = 2
     if not Forced:
         $ Girl.eyes = "_closed"
         $ Girl.brows = "_sad"
@@ -328,7 +328,7 @@ label Girl_Tag(Girl=0, Forced=0, Gloves=0):
                     $ Girl.recent_history.append("no_tag")
                     $ Girl.daily_history.append("no_tag")
                     $ Girl.arms = Gloves
-                    $ Girl.ArmPose = 1
+                    $ Girl.arm_pose = 1
                     return
             "Let her.":
                 "She touches your face."
@@ -375,7 +375,7 @@ label Girl_Tag(Girl=0, Forced=0, Gloves=0):
         "Appearing sated, she puts her gloves back on."
     $ Girl.blushing = "_blush1"
     $ Girl.arms = Gloves
-    $ Girl.ArmPose = 1
+    $ Girl.arm_pose = 1
     $ Girl.change_face()
     if Forced:
         $ Girl.recent_history.append("forced tag")
@@ -395,7 +395,7 @@ label Slap_Ass(Girl=0):
 
     $ Girl.event_counter["ass_slapped"] += 1
 
-    $ Girl.blushing = "_blush2" if Taboo else 1
+    $ Girl.blushing = "_blush2" if taboo else 1
     if approval_check(Girl, 200, "O", TabM=1):
         $ Girl.change_face("_sexy", 1)
         $ Girl.mouth = "_surprised"
@@ -419,7 +419,7 @@ label Slap_Ass(Girl=0):
 
         call Girl_Cumming (Girl)
 
-    if Taboo:
+    if taboo:
         if not approval_check(Girl, 800, TabM=2):
             if Girl.event_counter["ass_slapped"] <= 5:
                 $ Girl.change_stat("obedience", 80, 2)

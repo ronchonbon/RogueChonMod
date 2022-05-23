@@ -278,39 +278,39 @@ label Clothes_ScheduleB(Girl=0, Count=0):
                 ch_v "Which one?"
             menu:
                 extend ""
-                "The first one. (locked)" if not Girl.Custom1[0]:
+                "The first one. (locked)" if not Girl.first_custom_outfit[0]:
                     pass
-                "The first one." if Girl.Custom1[0]:
-                    if Girl.Custom1[0] == 2 or Count == 99:
+                "The first one." if Girl.first_custom_outfit[0]:
+                    if Girl.first_custom_outfit[0] == 2 or Count == 99:
                         $ Count = 3
                     else:
                         Girl.voice "Well. . ."
                         call QuickoutfitCheck (Girl, 3)
-                        if Girl.Custom1[0] == 2:
+                        if Girl.first_custom_outfit[0] == 2:
                             $ Count = 3
                         else:
                             $ Line = "no"
-                "The second one. (locked)" if not Girl.Custom2[0]:
+                "The second one. (locked)" if not Girl.second_custom_outfit[0]:
                     pass
-                "The second one." if Girl.Custom2[0]:
-                    if Girl.Custom2[0] == 2 or Count == 99:
+                "The second one." if Girl.second_custom_outfit[0]:
+                    if Girl.second_custom_outfit[0] == 2 or Count == 99:
                         $ Count = 5
                     else:
                         Girl.voice "Well. . ."
                         call QuickoutfitCheck (Girl, 5)
-                        if Girl.Custom2[0] == 2:
+                        if Girl.second_custom_outfit[0] == 2:
                             $ Count = 5
                         else:
                             $ Line = "no"
-                "The third one. (locked)" if not Girl.Custom3[0]:
+                "The third one. (locked)" if not Girl.third_custom_outfit[0]:
                     pass
-                "The third one." if Girl.Custom3[0]:
-                    if Girl.Custom3[0] == 2 or Count == 99:
+                "The third one." if Girl.third_custom_outfit[0]:
+                    if Girl.third_custom_outfit[0] == 2 or Count == 99:
                         $ Count = 6
                     else:
                         Girl.voice "Well. . ."
                         call QuickoutfitCheck (Girl, 6)
-                        if Girl.Custom3[0] == 2:
+                        if Girl.third_custom_outfit[0] == 2:
                             $ Count = 6
                         else:
                             $ Line = "no"
@@ -347,7 +347,7 @@ label Clothes_ScheduleB(Girl=0, Count=0):
             else:
                 Girl.voice "Well. . ."
                 call QuickoutfitCheck (Girl, 7)
-                if Girl.Custom1[0] == 2:
+                if Girl.first_custom_outfit[0] == 2:
                     $ Count = 7
                     Girl.voice "Fine. . ."
                 else:
@@ -445,7 +445,7 @@ label Private_outfit(Girl=0):
         return
     if "comfy" in Girl.recent_history or "comfy" in Girl.traits or Girl.outfit == Girl.clothing[9]:
         call AltClothes (Girl, 9)
-        $ Girl.change_outfit(Changed=1)
+        $ Girl.change_outfit(outfit_changed=1)
     elif "no_comfy" in Girl.recent_history:
         pass
     elif approval_check(Girl, 1200, "LI") and (2*Girl.inhibition) >= (Girl.love + Girl.obedience +100):
@@ -472,7 +472,7 @@ label Private_outfit(Girl=0):
             ch_v "Gimme a minute. . ."
             ch_v "I wanna slip something else on. . ."
         call AltClothes (Girl, 9)
-        $ Girl.change_outfit(Changed=1)
+        $ Girl.change_outfit(outfit_changed=1)
         $ Girl.recent_history.append("comfy")
     else:
         call shift_focus (Girl)
@@ -483,7 +483,7 @@ label Private_outfit(Girl=0):
                 "Sure.":
                     ch_r "Love to. . ."
                     call AltClothes (Girl, 9)
-                    $ Girl.change_outfit(Changed=1)
+                    $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
                     ch_r "Suit yourself."
@@ -495,7 +495,7 @@ label Private_outfit(Girl=0):
                 "Sure.":
                     ch_k "Hehe. . ."
                     call AltClothes (Girl, 9)
-                    $ Girl.change_outfit(Changed=1)
+                    $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
                     ch_k "Oh, ok."
@@ -507,7 +507,7 @@ label Private_outfit(Girl=0):
                 "Sure.":
                     ch_e "Lovely. . ."
                     call AltClothes (Girl, 9)
-                    $ Girl.change_outfit(Changed=1)
+                    $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
                     ch_e "Very well."
@@ -519,7 +519,7 @@ label Private_outfit(Girl=0):
                 "Sure.":
                     ch_l "Cool. . ."
                     call AltClothes (Girl, 9)
-                    $ Girl.change_outfit(Changed=1)
+                    $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
                     ch_l "Oh, ok."
@@ -529,7 +529,7 @@ label Private_outfit(Girl=0):
                 ch_j "I do have a more fun look. . ."
                 "Sure.":
                     call AltClothes (Girl, 9)
-                    $ Girl.change_outfit(Changed=1)
+                    $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
                     ch_j "Huh. Ok. . ."
@@ -541,7 +541,7 @@ label Private_outfit(Girl=0):
                 "Sure.":
                     ch_s "Excellent. . ."
                     call AltClothes (Girl, 9)
-                    $ Girl.change_outfit(Changed=1)
+                    $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
                     ch_s "Very well."
@@ -553,7 +553,7 @@ label Private_outfit(Girl=0):
                 "Sure.":
                     ch_v "Cool. . ."
                     call AltClothes (Girl, 9)
-                    $ Girl.change_outfit(Changed=1)
+                    $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
                     ch_v "Ok, fine."
@@ -567,33 +567,33 @@ label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
     $ Girl.change_face("_sexy", 1)
 
     if Custom == 3:
-        $ Shame = Girl.Custom1[10]
-        if Girl.Custom1[0] == 2 or "exhibitionist" in Girl.traits:
+        $ Shame = Girl.first_custom_outfit[10]
+        if Girl.first_custom_outfit[0] == 2 or "exhibitionist" in Girl.traits:
             $ Girl.outfit = "custom1"
             $ Agree = 1
         else:
             call QuickoutfitCheck (Girl, 3)
-            if Girl.Custom1[0] == 2:
+            if Girl.first_custom_outfit[0] == 2:
                 $ Girl.outfit = "custom1"
                 $ Agree = 1
     elif Custom == 5:
-        $ Shame = Girl.Custom2[10]
-        if Girl.Custom2[0] == 2 or "exhibitionist" in Girl.traits:
+        $ Shame = Girl.second_custom_outfit[10]
+        if Girl.second_custom_outfit[0] == 2 or "exhibitionist" in Girl.traits:
             $ Girl.outfit = "custom2"
             $ Agree = 1
         else:
             call QuickoutfitCheck (Girl, 5)
-            if Girl.Custom2[0] == 2:
+            if Girl.second_custom_outfit[0] == 2:
                 $ Girl.outfit = "custom2"
                 $ Agree = 1
     else:
-        $ Shame = Girl.Custom3[10]
-        if Girl.Custom3[0] == 2 or "exhibitionist" in Girl.traits:
+        $ Shame = Girl.third_custom_outfit[10]
+        if Girl.third_custom_outfit[0] == 2 or "exhibitionist" in Girl.traits:
             $ Girl.outfit = "custom3"
             $ Agree = 1
         else:
             call QuickoutfitCheck (Girl, 6)
-            if Girl.Custom3[0] == 2:
+            if Girl.third_custom_outfit[0] == 2:
                 $ Girl.outfit = "custom3"
                 $ Agree = 1
 
@@ -770,7 +770,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
     $ Girl = GirlCheck(Girl)
 
-    if not Check and not Taboo and not Girl.Taboo and Custom != 20:
+    if not Check and not taboo and not Girl.taboo and Custom != 20:
 
         if Girl.clothing[9] and bg_current in personal_rooms:
 
@@ -1180,9 +1180,9 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             pass
         elif Girl == StormX and StormX in Rules:
             pass
-        elif Girl.PantiesNum() > 2 and (Girl.SeenPanties or approval_check(Girl, 900, TabM=0)):
+        elif Girl.PantiesNum() > 2 and (Girl.seen_underwear or approval_check(Girl, 900, TabM=0)):
             pass
-        elif Girl.SeenPussy or approval_check(Girl, 1200, TabM=0):
+        elif Girl.seen_pussy or approval_check(Girl, 1200, TabM=0):
             pass
         else:
             $ Agree = 0
@@ -1193,9 +1193,9 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             pass
         elif Girl.OverNum() > 2:
             pass
-        elif Girl.ChestNum() > 2 and (Girl.SeenChest or approval_check(Girl, 900, TabM=0)):
+        elif Girl.ChestNum() > 2 and (Girl.seen_breasts or approval_check(Girl, 900, TabM=0)):
             pass
-        elif Girl.SeenChest or approval_check(Girl, 1200, TabM=0):
+        elif Girl.seen_breasts or approval_check(Girl, 1200, TabM=0):
             pass
         else:
             $ Agree = 0
@@ -1240,7 +1240,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             menu:
                 extend ""
                 "Ok then, you can put your normal clothes back on.":
-                    $ Girl.change_outfit(Changed=1)
+                    $ Girl.change_outfit(outfit_changed=1)
                     hide DressScreen
                 "Ok, we can keep tweaking it.":
                     pass
@@ -1261,7 +1261,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_v "Cool, cool. . ."
             return
         if Girl == RogueX:
-            if Girl.Taboo >= 40:
+            if Girl.taboo >= 40:
                 $ Girl.change_face("_confused",1)
                 $ Girl.mouth = "_smile"
                 ch_r "It's a little late to worry about that, right?"
@@ -1306,7 +1306,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_r "You have got to be kidding."
                 $ Agree = 0
         elif Girl == KittyX:
-            if Girl.Taboo >= 40:
+            if Girl.taboo >= 40:
                 $ Girl.change_face("_confused",1)
                 $ Girl.mouth = "_smile"
                 ch_k "Kinda late to ask, right?"
@@ -1349,7 +1349,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_k "I - can't - even."
                 $ Agree = 0
         elif Girl == EmmaX:
-            if Girl.Taboo >= 40:
+            if Girl.taboo >= 40:
                 $ Girl.change_face("_confused",1)
                 $ Girl.mouth = "_smile"
                 "She glances around."
@@ -1394,7 +1394,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_e "Even I can't pull this off."
                 $ Agree = 0
         elif Girl == LauraX:
-            if Girl.Taboo >= 40:
+            if Girl.taboo >= 40:
                 $ Girl.change_face("_confused",1)
                 $ Girl.mouth = "_smile"
                 ch_l "Well a bit late for that, I guess."
@@ -1439,7 +1439,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_l "As if."
                 $ Agree = 0
         elif Girl == JeanX:
-            if Girl.Taboo >= 40:
+            if Girl.taboo >= 40:
                 $ Girl.change_face("_confused",1)
                 $ Girl.mouth = "_smile"
                 ch_j "Well, I guess so, right?"
@@ -1485,7 +1485,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 $ Agree = 0
         elif Girl == StormX:
 
-            if Girl.Taboo >= 40:
+            if Girl.taboo >= 40:
                 $ Girl.change_face("_confused",1)
                 $ Girl.mouth = "_smile"
                 "She glances around."
@@ -1526,7 +1526,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_s "I'm afraid that Charles would never approve."
                 $ Agree = 0
         elif Girl == JubesX:
-            if Girl.Taboo >= 40:
+            if Girl.taboo >= 40:
                 $ Girl.change_face("_confused",1)
                 $ Girl.mouth = "_smile"
                 ch_v "I guess that ship has sailed. . ."
@@ -1574,31 +1574,31 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
 
         if Custom == 5:
-            $ Girl.Custom2 = [2,Girl.arms,Girl.legs,Girl.top,Girl.neck,Girl.bra,Girl.underwear,Girl.accessory,Girl.hair,Girl.hose,Tempshame]
-            $ Girl.Custom2[0] = 2 if Agree else 1
+            $ Girl.second_custom_outfit = [2,Girl.arms,Girl.legs,Girl.top,Girl.neck,Girl.bra,Girl.underwear,Girl.accessory,Girl.hair,Girl.hose,Tempshame]
+            $ Girl.second_custom_outfit[0] = 2 if Agree else 1
             call Clothing_Schedule_Check (Girl, 5, 1)
         elif Custom == 6:
-            $ Girl.Custom3 = [2,Girl.arms,Girl.legs,Girl.top,Girl.neck,Girl.bra,Girl.underwear,Girl.accessory,Girl.hair,Girl.hose,Tempshame]
-            $ Girl.Custom3[0] = 2 if Agree else 1
+            $ Girl.third_custom_outfit = [2,Girl.arms,Girl.legs,Girl.top,Girl.neck,Girl.bra,Girl.underwear,Girl.accessory,Girl.hair,Girl.hose,Tempshame]
+            $ Girl.third_custom_outfit[0] = 2 if Agree else 1
             call Clothing_Schedule_Check (Girl, 6, 1)
         elif Custom == 4:
             if Agree:
-                $ Girl.Gym = [2,Girl.arms,Girl.legs,Girl.top,Girl.neck,Girl.bra,Girl.underwear,Girl.accessory,Girl.hair,Girl.hose,Tempshame]
+                $ Girl.gym_clothes = [2,Girl.arms,Girl.legs,Girl.top,Girl.neck,Girl.bra,Girl.underwear,Girl.accessory,Girl.hair,Girl.hose,Tempshame]
                 call Clothing_Schedule_Check (Girl, 4, 1)
         elif Custom == 7:
             $ Girl.sleepwear = [2,Girl.arms,Girl.legs,Girl.top,Girl.neck,Girl.bra,Girl.underwear,Girl.accessory,Girl.hair,Girl.hose,Tempshame]
             $ Girl.sleepwear[0] = 2 if Agree else 1
         elif Custom == 10:
             if Agree:
-                $ Girl.Swim = [2,Girl.arms,Girl.legs,Girl.top,Girl.neck,Girl.bra,Girl.underwear,Girl.accessory,Girl.hair,Girl.hose,Tempshame]
+                $ Girl.swimwear = [2,Girl.arms,Girl.legs,Girl.top,Girl.neck,Girl.bra,Girl.underwear,Girl.accessory,Girl.hair,Girl.hose,Tempshame]
         elif Custom == 3:
-            $ Girl.Custom1 = [2,Girl.arms,Girl.legs,Girl.top,Girl.neck,Girl.bra,Girl.underwear,Girl.accessory,Girl.hair,Girl.hose,Tempshame]
-            $ Girl.Custom1[0] = 2 if Agree else 1
+            $ Girl.first_custom_outfit = [2,Girl.arms,Girl.legs,Girl.top,Girl.neck,Girl.bra,Girl.underwear,Girl.accessory,Girl.hair,Girl.hose,Tempshame]
+            $ Girl.first_custom_outfit[0] = 2 if Agree else 1
             call Clothing_Schedule_Check (Girl, 3, 1)
         else:
             "Tell Oni Custom outfit was [Custom]"
             $ RogueX.gibberish = 5
-    elif Girl.Taboo <= 20:
+    elif Girl.taboo <= 20:
 
         $ Tempshame /= 2
 
@@ -1640,8 +1640,8 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
         pass
     elif Girl.location == "bg_dangerroom" and Girl.outfit == "gym":
-        $ Girl.change_outfit("gym",Changed = 1)
-    elif not Girl.Taboo:
+        $ Girl.change_outfit("gym",outfit_changed = 1)
+    elif not Girl.taboo:
         pass
     elif Girl.outfit == "swimwear" and bg_current == "bg_pool":
         pass
@@ -1661,21 +1661,21 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Girl == LauraX:
                 ch_l "One sec, I gotta change real quick."
             elif Girl == JeanX:
-                ch_j "wait while I get changed."
+                ch_j "Wait while I get changed."
             elif Girl == StormX:
                 ch_s "I'll need to change into something more substantial."
             elif Girl == JubesX:
                 ch_v "I need to throw something on real quick. . ."
         if Girl.location == "bg_dangerroom":
             $ Girl.outfit =  "gym"
-        elif Girl.location == "bg_pool" and Girl.Swim[0]:
+        elif Girl.location == "bg_pool" and Girl.swimwear[0]:
             $ Girl.outfit =  "swimwear"
         else:
             $ Girl.outfit = renpy.random.choice(["casual1", "casual2"])
 
         $ Girl.add_word(1,"modesty", "modesty")
         $ Girl.wet = False
-        $ Girl.change_outfit(Changed=1)
+        $ Girl.change_outfit(outfit_changed=1)
         if Girl == RogueX:
             ch_r "That wasn't really \"outdoor ready\"."
         elif Girl == KittyX:
@@ -1696,7 +1696,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
 
 
-label QuickoutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, Holderoutfit=[]):
+label QuickoutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, outfit_holder=[]):
 
 
 
@@ -1705,19 +1705,19 @@ label QuickoutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, Holdero
     $ Girl = GirlCheck(Girl)
 
     if Custom == 3:
-        $ Holderoutfit = Girl.Custom1[:]
+        $ outfit_holder = Girl.first_custom_outfit[:]
     elif Custom == 5:
-        $ Holderoutfit = Girl.Custom2[:]
+        $ outfit_holder = Girl.second_custom_outfit[:]
     elif Custom == 6:
-        $ Holderoutfit = Girl.Custom3[:]
+        $ outfit_holder = Girl.third_custom_outfit[:]
 
 
     elif Custom == 7:
-        $ Holderoutfit = Girl.sleepwear[:]
+        $ outfit_holder = Girl.sleepwear[:]
     elif Custom == 4:
-        $ Holderoutfit = Girl.Gym[:]
+        $ outfit_holder = Girl.gym_clothes[:]
     elif Custom == 10:
-        $ Holderoutfit = Girl.Swim[:]
+        $ outfit_holder = Girl.swimwear[:]
     else:
         "Tell Oni, outfit check, [Custom]."
         return
@@ -1725,36 +1725,36 @@ label QuickoutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, Holdero
 
 
 
-    while len(Holderoutfit) < 11:
-        $ Holderoutfit.append(0)
+    while len(outfit_holder) < 11:
+        $ outfit_holder.append(0)
 
-    if Holderoutfit[5] in ("_tank", "white_tank", "button_tank", "_sports_bra", "_tube_top", "_corset"):
+    if outfit_holder[5] in ("_tank", "white_tank", "button_tank", "_sports_bra", "_tube_top", "_corset"):
         $ Count = 20
-    elif Holderoutfit[5] == "wolvie_top":
+    elif outfit_holder[5] == "wolvie_top":
         $ Count = 10
-    elif Holderoutfit[5] in ("lace_bra", "lace corset"):
+    elif outfit_holder[5] in ("lace_bra", "lace corset"):
         $ Count = 5
-    elif Holderoutfit[5]:
+    elif outfit_holder[5]:
 
         $ Count = 10
-    elif Holderoutfit[7] == "suspenders" or Holderoutfit[7] == "suspenders2":
+    elif outfit_holder[7] == "suspenders" or outfit_holder[7] == "suspenders2":
         $ Count = 5
     else:
         $ Count = 0
 
 
-    if Holderoutfit[3] in ("nighty", "_mesh_top"):
+    if outfit_holder[3] in ("nighty", "_mesh_top"):
         $ Count += 5
-    elif Holderoutfit[3] == "_towel":
+    elif outfit_holder[3] == "_towel":
         if Girl == EmmaX:
             $ Count += 5
         elif Girl == StormX:
             pass
         else:
             $ Count += 10
-    elif Holderoutfit[3] in ("_jacket", "_dress", "_pink_top") or Holderoutfit[7] == "_jacket":
+    elif outfit_holder[3] in ("_jacket", "_dress", "_pink_top") or outfit_holder[7] == "_jacket":
         $ Count += 15
-    elif Holderoutfit[3] or Holderoutfit[7] == "shut_jacket":
+    elif outfit_holder[3] or outfit_holder[7] == "shut_jacket":
         $ Count += 20
 
     if Girl.piercings and Count <= 10:
@@ -1765,26 +1765,26 @@ label QuickoutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, Holdero
     $ Tempshame -= Count
     $ Count = 0
 
-    if Holderoutfit[2] and Holderoutfit[6]:
+    if outfit_holder[2] and outfit_holder[6]:
         $ Count = 30
-    elif Holderoutfit[2] in ("_blue_skirt", "_skirt", "other_skirt"):
+    elif outfit_holder[2] in ("_blue_skirt", "_skirt", "other_skirt"):
         $ Count = 20
-    elif Holderoutfit[2] or Holderoutfit[7] == "shut_jacket":
+    elif outfit_holder[2] or outfit_holder[7] == "shut_jacket":
         $ Count = 25
-    elif Holderoutfit[6] == "_shorts":
+    elif outfit_holder[6] == "_shorts":
         $ Count = 25
-    elif Holderoutfit[6] in ("_bikini_bottoms", "sports_panties", "_shorts"):
+    elif outfit_holder[6] in ("_bikini_bottoms", "sports_panties", "_shorts"):
         $ Count = 15
-    elif Holderoutfit[6] == "_lace_panties":
+    elif outfit_holder[6] == "_lace_panties":
         $ Count = 5
-    elif Holderoutfit[6]:
+    elif outfit_holder[6]:
         $ Count = 10
 
-    if Holderoutfit[9] == "_tights":
+    if outfit_holder[9] == "_tights":
 
         $ Count = 25 if Count < 25 else Count
 
-    if Holderoutfit[3] == "_towel" and Girl not in (EmmaX,StormX):
+    if outfit_holder[3] == "_towel" and Girl not in (EmmaX,StormX):
 
         $ Count = 25 if Count else 15
 
@@ -1818,20 +1818,20 @@ label QuickoutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, Holdero
 
     if Custom == 3:
 
-        $ Girl.Custom1[0] = 2 if Agree else 1
+        $ Girl.first_custom_outfit[0] = 2 if Agree else 1
         call Clothing_Schedule_Check (Girl, 3, 1)
     elif Custom == 5:
 
-        $ Girl.Custom2[0] = 2 if Agree else 1
+        $ Girl.second_custom_outfit[0] = 2 if Agree else 1
         call Clothing_Schedule_Check (Girl, 5, 1)
     elif Custom == 6:
 
-        $ Girl.Custom3[0] = 2 if Agree else 1
+        $ Girl.third_custom_outfit[0] = 2 if Agree else 1
         call Clothing_Schedule_Check (Girl, 6, 1)
     elif Custom == 4:
 
 
-        $ Girl.Gym[0] = 2 if Agree else 1
+        $ Girl.gym_clothes[0] = 2 if Agree else 1
         call Clothing_Schedule_Check (Girl, 4, 1)
     elif Custom == 7:
 
@@ -1839,7 +1839,7 @@ label QuickoutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, Holdero
     elif Custom == 10:
 
 
-        $ Girl.Swim[0] = 2 if Agree else 1
+        $ Girl.swimwear[0] = 2 if Agree else 1
     else:
         "Tell Oni Custom outfit was [Custom]"
         $ RogueX.gibberish = 5
@@ -1856,12 +1856,12 @@ label Display_DressScreen(Girl=focused_Girl):
         return True
 
     if Girl == StormX:
-        if not Girl.Taboo or StormX in Rules:
+        if not Girl.taboo or StormX in Rules:
             return True
         else:
             ch_s "I'm afraid rules are rules."
 
-    if Girl.Taboo:
+    if Girl.taboo:
         return False
 
     $ Girl.change_face("_bemused",1,Eyes="_side")

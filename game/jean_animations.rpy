@@ -6,7 +6,7 @@ image Jean_Sprite:
         (160,0), "Jean_Sprite_hairback",
         (0,0), ConditionSwitch(
 
-            "JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Body2.png",
+            "JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Body2.png",
             "True", "images/JeanSprite/Jean_Sprite_Body1.png",
             ),
 
@@ -180,14 +180,14 @@ image Jean_Sprite:
 
         (0,0), ConditionSwitch(
 
-            "JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_2LeftArm.png",
+            "JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_2LeftArm.png",
             "True", "images/JeanSprite/Jean_Sprite_1LeftArm.png",
             "True", Null(),
             ),
 
         (0,0), ConditionSwitch(
 
-            "JeanX.wet and JeanX.ArmPose == 1", "images/JeanSprite/Jean_Sprite_Water1.png",
+            "JeanX.wet and JeanX.arm_pose == 1", "images/JeanSprite/Jean_Sprite_Water1.png",
             "JeanX.wet", "images/JeanSprite/Jean_Sprite_Water2.png",
             "True", Null(),
             ),
@@ -196,27 +196,27 @@ image Jean_Sprite:
 
             "JeanX.top_pulled_up", ConditionSwitch(
 
-                    "JeanX.bra == 'green_bra' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Chest_GreenBra2_Up.png",
+                    "JeanX.bra == 'green_bra' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Chest_GreenBra2_Up.png",
                     "JeanX.bra == 'green_bra'", "images/JeanSprite/Jean_Sprite_Chest_GreenBra1_Up.png",
-                    "JeanX.bra == 'lace_bra' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Chest_GreenBra2_Up.png",
+                    "JeanX.bra == 'lace_bra' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Chest_GreenBra2_Up.png",
                     "JeanX.bra == 'lace_bra'", "images/JeanSprite/Jean_Sprite_Chest_GreenBra1_Up.png",
                     "JeanX.bra == 'corset'", "images/JeanSprite/Jean_Sprite_Chest_Corset_Up.png",
-                    "JeanX.bra == 'sports_bra' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Chest_Sportsbra2_Up.png",
+                    "JeanX.bra == 'sports_bra' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Chest_Sportsbra2_Up.png",
                     "JeanX.bra == 'sports_bra'", "images/JeanSprite/Jean_Sprite_Chest_Sportsbra1_Up.png",
-                    "JeanX.bra == 'bikini_top' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Chest_Bikini2_Up.png",
+                    "JeanX.bra == 'bikini_top' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Chest_Bikini2_Up.png",
                     "JeanX.bra == 'bikini_top'", "images/JeanSprite/Jean_Sprite_Chest_Bikini1_Up.png",
 
                     "True", Null(),
                     ),
-            "JeanX.bra == 'green_bra' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Chest_GreenBra2.png",
+            "JeanX.bra == 'green_bra' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Chest_GreenBra2.png",
             "JeanX.bra == 'green_bra'", "images/JeanSprite/Jean_Sprite_Chest_GreenBra1.png",
-            "JeanX.bra == 'lace_bra' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Chest_LaceBra2.png",
+            "JeanX.bra == 'lace_bra' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Chest_LaceBra2.png",
             "JeanX.bra == 'lace_bra'", "images/JeanSprite/Jean_Sprite_Chest_LaceBra1.png",
-            "JeanX.bra == 'sports_bra' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Chest_Sportsbra2.png",
+            "JeanX.bra == 'sports_bra' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Chest_Sportsbra2.png",
             "JeanX.bra == 'sports_bra'", "images/JeanSprite/Jean_Sprite_Chest_Sportsbra1.png",
-            "JeanX.bra == 'bikini_top' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Chest_Bikini2.png",
+            "JeanX.bra == 'bikini_top' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Chest_Bikini2.png",
             "JeanX.bra == 'bikini_top'", "images/JeanSprite/Jean_Sprite_Chest_Bikini1.png",
-            "JeanX.bra == 'corset' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Chest_Corset2.png",
+            "JeanX.bra == 'corset' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Chest_Corset2.png",
             "JeanX.bra == 'corset'", "images/JeanSprite/Jean_Sprite_Chest_Corset1.png",
 
             "True", Null(),
@@ -226,22 +226,22 @@ image Jean_Sprite:
 
             "JeanX.top_pulled_up", ConditionSwitch(
 
-                    "JeanX.top == 'yellow_shirt' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Over_Tank2_Up.png",
+                    "JeanX.top == 'yellow_shirt' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Over_Tank2_Up.png",
                     "JeanX.top == 'yellow_shirt'", "images/JeanSprite/Jean_Sprite_Over_Tank1_Up.png",
-                    "JeanX.top == 'pink_shirt' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Over_PinkShirt2_Up.png",
+                    "JeanX.top == 'pink_shirt' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Over_PinkShirt2_Up.png",
                     "JeanX.top == 'pink_shirt'", "images/JeanSprite/Jean_Sprite_Over_PinkShirt1_Up.png",
-                    "JeanX.top == 'green_shirt' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Over_GreenShirt2_Up.png",
+                    "JeanX.top == 'green_shirt' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Over_GreenShirt2_Up.png",
                     "JeanX.top == 'green_shirt'", "images/JeanSprite/Jean_Sprite_Over_GreenShirt1_Up.png",
 
                     "True", Null(),
                     ),
-            "JeanX.top == 'yellow_shirt' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Over_Tank2.png",
+            "JeanX.top == 'yellow_shirt' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Over_Tank2.png",
             "JeanX.top == 'yellow_shirt'", "images/JeanSprite/Jean_Sprite_Over_Tank1.png",
-            "JeanX.top == 'pink_shirt' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Over_PinkShirt2.png",
+            "JeanX.top == 'pink_shirt' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Over_PinkShirt2.png",
             "JeanX.top == 'pink_shirt'", "images/JeanSprite/Jean_Sprite_Over_PinkShirt1.png",
-            "JeanX.top == 'green_shirt' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Over_GreenShirt2.png",
+            "JeanX.top == 'green_shirt' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Over_GreenShirt2.png",
             "JeanX.top == 'green_shirt'", "images/JeanSprite/Jean_Sprite_Over_GreenShirt1.png",
-            "JeanX.top == 'towel' and JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_Over_Towel2.png",
+            "JeanX.top == 'towel' and JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_Over_Towel2.png",
             "JeanX.top == 'towel'", "images/JeanSprite/Jean_Sprite_Over_Towel1.png",
             "True", Null(),
             ),
@@ -278,39 +278,39 @@ image Jean_Sprite:
         (0,0), ConditionSwitch(
 
             "renpy.showing('Jean_HJ_Animation')", Null(),
-            "JeanX.ArmPose == 1", "images/JeanSprite/Jean_Sprite_1LeftHand.png",
+            "JeanX.arm_pose == 1", "images/JeanSprite/Jean_Sprite_1LeftHand.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
-            "JeanX.wet and JeanX.ArmPose == 1", "images/JeanSprite/Jean_Sprite_Water1Arm.png",
-            "True", Null(),
-            ),
-        (0,0), ConditionSwitch(
-
-            "renpy.showing('Jean_HJ_Animation')", Null(),
-            "JeanX.bra == 'sports_bra' and JeanX.ArmPose == 1", "images/JeanSprite/Jean_Sprite_Chest_Sportsbra1_Arm.png",
+            "JeanX.wet and JeanX.arm_pose == 1", "images/JeanSprite/Jean_Sprite_Water1Arm.png",
             "True", Null(),
             ),
         (0,0), ConditionSwitch(
 
             "renpy.showing('Jean_HJ_Animation')", Null(),
-            "JeanX.top == 'pink_shirt' and JeanX.ArmPose == 1", "images/JeanSprite/Jean_Sprite_Over_PinkShirt1_Arm.png",
+            "JeanX.bra == 'sports_bra' and JeanX.arm_pose == 1", "images/JeanSprite/Jean_Sprite_Chest_Sportsbra1_Arm.png",
+            "True", Null(),
+            ),
+        (0,0), ConditionSwitch(
+
+            "renpy.showing('Jean_HJ_Animation')", Null(),
+            "JeanX.top == 'pink_shirt' and JeanX.arm_pose == 1", "images/JeanSprite/Jean_Sprite_Over_PinkShirt1_Arm.png",
             "True", Null(),
             ),
 
         (0,0), ConditionSwitch(
 
-            "JeanX.ArmPose != 1", "images/JeanSprite/Jean_Sprite_2RightHand.png",
+            "JeanX.arm_pose != 1", "images/JeanSprite/Jean_Sprite_2RightHand.png",
             "True", "images/JeanSprite/Jean_Sprite_1RightHand.png",
 
             ),
         (0,0), ConditionSwitch(
 
             "not JeanX.legs or JeanX.upskirt", Null(),
-            "JeanX.ArmPose != 1 and JeanX.accessory == 'suspenders' and JeanX.top_pulled_up", "images/JeanSprite/Jean_Sprite_Acc_Suspenders2_Up.png",
-            "JeanX.ArmPose != 1 and JeanX.accessory == 'suspenders'", "images/JeanSprite/Jean_Sprite_Acc_Suspenders2.png",
-            "JeanX.ArmPose != 1 and JeanX.accessory == 'suspenders2'", "images/JeanSprite/Jean_Sprite_Acc_Suspenders2_Up.png",
+            "JeanX.arm_pose != 1 and JeanX.accessory == 'suspenders' and JeanX.top_pulled_up", "images/JeanSprite/Jean_Sprite_Acc_Suspenders2_Up.png",
+            "JeanX.arm_pose != 1 and JeanX.accessory == 'suspenders'", "images/JeanSprite/Jean_Sprite_Acc_Suspenders2.png",
+            "JeanX.arm_pose != 1 and JeanX.accessory == 'suspenders2'", "images/JeanSprite/Jean_Sprite_Acc_Suspenders2_Up.png",
 
             "JeanX.accessory == 'suspenders' and JeanX.top_pulled_up", "images/JeanSprite/Jean_Sprite_Acc_Suspenders1_Up.png",
             "JeanX.accessory == 'suspenders'", "images/JeanSprite/Jean_Sprite_Acc_Suspenders1.png",
@@ -469,7 +469,7 @@ image Jean_Sprite_hairback:
             "not JeanX.hair", Null(),
             "renpy.showing('Jean_BJ_Animation')", Null(),
 
-            "JeanX.hair == 'wet' or JeanX.wet", "images/JeanSprite/Jean_Sprite_Hair_Wet_Under.png",
+            "JeanX.hair == '_wet' or JeanX.wet", "images/JeanSprite/Jean_Sprite_Hair_Wet_Under.png",
             "JeanX.hair == 'pony'", Null(),
             "True", "images/JeanSprite/Jean_Sprite_Hair_Short_Under.png",
             ),
@@ -483,7 +483,7 @@ image Jean_Sprite_HairMid:
             "not JeanX.hair", Null(),
             "renpy.showing('Jean_BJ_Animation')", Null(),
 
-            "JeanX.hair == 'wet' JeanX.hair == 'pony' or JeanX.wet", Null(),
+            "JeanX.hair == '_wet' JeanX.hair == 'pony' or JeanX.wet", Null(),
             "True","images/JeanSprite/Jean_Sprite_Hair_Short_Mid.png",
             ),
     anchor (0.6, 0.0)
@@ -494,7 +494,7 @@ image Jean_Sprite_HairTop:
 
             "not JeanX.hair", Null(),
 
-            "JeanX.hair == 'wet' or JeanX.wet", "images/JeanSprite/Jean_Sprite_Hair_Wet_Over.png",
+            "JeanX.hair == '_wet' or JeanX.wet", "images/JeanSprite/Jean_Sprite_Hair_Wet_Over.png",
             "JeanX.hair == 'pony'", "images/JeanSprite/Jean_Sprite_Hair_Pony_Over.png",
             "True", "images/JeanSprite/Jean_Sprite_Hair_Short_Over.png",
             ),
@@ -601,7 +601,7 @@ image Jean_Sprite_Head:
             "not JeanX.hair", Null(),
             "renpy.showing('Jean_TJ_Animation')", Null(),
 
-            "JeanX.hair == 'wet' or JeanX.wet", "images/JeanSprite/Jean_Sprite_Hair_Wet_Over.png",
+            "JeanX.hair == '_wet' or JeanX.wet", "images/JeanSprite/Jean_Sprite_Hair_Wet_Over.png",
             "JeanX.hair == 'pony'", "images/JeanSprite/Jean_Sprite_Hair_Pony_Over.png",
             "JeanX.hair", "images/JeanSprite/Jean_Sprite_Hair_Short_Over.png",
             "True", Null(),
@@ -634,7 +634,7 @@ image Jean Blink:
     "JeanX.eyes == 'closed'", "images/JeanSprite/Jean_Sprite_Eyes_Closed.png",
     "JeanX.eyes == 'leftside'", "images/JeanSprite/Jean_Sprite_Eyes_Leftside.png",
     "JeanX.eyes == 'manic'", "images/JeanSprite/Jean_Sprite_Eyes_Normal.png",
-    "JeanX.eyes == 'psychic'", "images/JeanSprite/Jean_Sprite_Eyes_Psychic.png",
+    "JeanX.eyes == 'psychic'", "images/JeanSprite/Jean_Sprite_Eyes_psychic.png",
     "JeanX.eyes == 'squint'", "Jean_Squint",
     "True", "images/JeanSprite/Jean_Sprite_Eyes_Normal.png",
     ),
@@ -727,7 +727,7 @@ image Jean_Doggy_Animation:
                     "action_speed ", "Jean_Doggy_Feet1",
                     "True", "Jean_Doggy_Feet0",
                     ),
-            "not Player.sprite and ShowFeet", "Jean_Doggy_Feet0",
+            "not Player.sprite and show_feet", "Jean_Doggy_Feet0",
             "True", Null(),
             ),
         )
@@ -866,7 +866,7 @@ image Jean_Doggy_Head:
         (0,0), "Jean Doggy Blink",
         (0,0), ConditionSwitch(
 
-            "JeanX.wet or JeanX.hair == 'wet'", "images/JeanDoggy/Jean_Doggy_Hair_Wet_Under.png",
+            "JeanX.wet or JeanX.hair == '_wet'", "images/JeanDoggy/Jean_Doggy_Hair_Wet_Under.png",
             "True", Null(),
             ),
 
@@ -896,7 +896,7 @@ image Jean_Doggy_Head:
 image Jean_Doggy_Hair_Under:
 
     ConditionSwitch(
-                "JeanX.wet or JeanX.hair == 'wet'", "images/JeanDoggy/Jean_Doggy_Hair_Wet_Under.png",
+                "JeanX.wet or JeanX.hair == '_wet'", "images/JeanDoggy/Jean_Doggy_Hair_Wet_Under.png",
                 "JeanX.hair == 'pony'", Null(),
                 "True", "images/JeanDoggy/Jean_Doggy_Hair_Short_Under.png",
                 )
@@ -906,7 +906,7 @@ image Jean_Doggy_Hair_Over:
 
     contains:
         ConditionSwitch(
-                    "JeanX.wet or JeanX.hair == 'wet'", "images/JeanDoggy/Jean_Doggy_Hair_Wet_Over.png",
+                    "JeanX.wet or JeanX.hair == '_wet'", "images/JeanDoggy/Jean_Doggy_Hair_Wet_Over.png",
                     "JeanX.hair == 'pony'", "images/JeanDoggy/Jean_Doggy_Hair_Pony_Over.png",
                     "True", "images/JeanDoggy/Jean_Doggy_Hair_Short_Over.png",
                     )
@@ -2037,7 +2037,7 @@ label Jean_Doggy_Reset:
     if not renpy.showing("Jean_Doggy_Animation"):
         return
 
-    $ JeanX.ArmPose = 2
+    $ JeanX.arm_pose = 2
     $ JeanX.spriteVer = 0
     hide Jean_Doggy_Animation
     call Jean_Hide
@@ -3223,7 +3223,7 @@ label Jean_Sex_Launch(Line=primary_action):
             $ JeanX.upskirt = 1
         $ Player.cock_position = "out"
     elif Line == "footjob":
-        $ ShowFeet = 1
+        $ show_feet = 1
         $ Player.cock_position = "footjob"
         $ JeanX.pose = "doggy"
     elif Line == "massage":
@@ -3252,7 +3252,7 @@ label Jean_Sex_Reset:
         return
     if not renpy.showing("Jean_SexSprite"):
         return
-    $ JeanX.ArmPose = 2
+    $ JeanX.arm_pose = 2
     hide Jean_SexSprite
     call Jean_Hide
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
@@ -3355,7 +3355,7 @@ image Jean_BJ_Animation:
 image Jean_BJ_hairback:
 
     ConditionSwitch(
-            "JeanX.wet or JeanX.hair == 'wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Under.png",
+            "JeanX.wet or JeanX.hair == '_wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Under.png",
             "JeanX.hair == 'pony'", Null(),
             "True", "images/JeanBJFace/Jean_BJ_Hair_Short_Under.png",
             ),
@@ -3365,7 +3365,7 @@ image Jean_BJ_hairback:
 image Jean_BJ_HairTop:
 
     ConditionSwitch(
-            "JeanX.wet or JeanX.hair == 'wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Over.png",
+            "JeanX.wet or JeanX.hair == '_wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Over.png",
             "True", Null(),
             ),
     zoom 1.4
@@ -3395,8 +3395,8 @@ image Jean_BJ_Head:
         (858,928),
         (0,0), ConditionSwitch(
 
-            "(JeanX.wet or JeanX.hair == 'wet') and renpy.showing('Jean_SexSprite')", "images/JeanBJFace/Jean_BJ_Hair_Wet_Mid.png",
-            "JeanX.wet or JeanX.hair == 'wet'", Null(),
+            "(JeanX.wet or JeanX.hair == '_wet') and renpy.showing('Jean_SexSprite')", "images/JeanBJFace/Jean_BJ_Hair_Wet_Mid.png",
+            "JeanX.wet or JeanX.hair == '_wet'", Null(),
             "JeanX.hair == 'pony'", Null(),
             "True", "images/JeanBJFace/Jean_BJ_Hair_Short_Under.png",
             ),
@@ -3487,7 +3487,7 @@ image Jean_BJ_Head:
 
         (0,0), ConditionSwitch(
 
-            "JeanX.wet or JeanX.hair == 'wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Over.png",
+            "JeanX.wet or JeanX.hair == '_wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Over.png",
             "JeanX.hair == 'pony'", "images/JeanBJFace/Jean_BJ_Hair_Pony_Over.png",
             "True", "images/JeanBJFace/Jean_BJ_Hair_Short_Over.png",
             ),
@@ -3837,7 +3837,7 @@ label Jean_BJ_Launch(Line=primary_action):
 
     # show Jean_BJ_Animation zorder 150:
     #     pos (645,510)
-    if Taboo and Line == "L":
+    if taboo and Line == "L":
         if len(Present) >= 2:
             if Present[0] != JeanX:
                 "[JeanX.name] looks back at [Present[0].name] to see if she's watching."
@@ -4001,7 +4001,7 @@ label Jean_HJ_Launch(Line=primary_action):
         $ primary_action = "handjob"
         return
     call Jean_Hide
-    $ JeanX.ArmPose = 1
+    $ JeanX.arm_pose = 1
     if Line == "L":
         show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(stage_right):
             alpha 1
@@ -4030,7 +4030,7 @@ label Jean_HJ_Reset:
     if not renpy.showing("Jean_HJ_Animation"):
         return
     $ action_speed = 0
-    $ JeanX.ArmPose = 1
+    $ JeanX.arm_pose = 1
     hide Jean_HJ_Animation with easeoutbottom
     call Jean_Hide
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(JeanX.sprite_location):
@@ -4054,12 +4054,12 @@ label Jean_HJ_Reset:
 
 
 
-image Jean_Hand_Psychic:
+image Jean_Hand_psychic:
     ConditionSwitch(
-        "Psychic == 'mouth'", "images/JeanSprite/PsyMouth.png",
-        "Psychic == 'pussy'", "images/JeanSprite/PsyPussy.png",
-        "Psychic == 'anal'", "images/JeanSprite/PsyAss.png",
-        "Psychic == 'tits'", "images/JeanSprite/PsyTits.png",
+        "psychic == 'mouth'", "images/JeanSprite/PsyMouth.png",
+        "psychic == 'pussy'", "images/JeanSprite/PsyPussy.png",
+        "psychic == 'anal'", "images/JeanSprite/PsyAss.png",
+        "psychic == 'tits'", "images/JeanSprite/PsyTits.png",
         "True", "images/JeanSprite/handjeanP.png",
         )
 
@@ -4094,9 +4094,9 @@ image Jean_PJ_Animation:
     contains:
         ConditionSwitch(
 
-            "not action_speed", Transform("Jean_Hand_Psychic"),
-            "action_speed == 1", At("Jean_Hand_Psychic", Jean_Hand_1()),
-            "action_speed >= 2", At("Jean_Hand_Psychic", Jean_Hand_2()),
+            "not action_speed", Transform("Jean_Hand_psychic"),
+            "action_speed == 1", At("Jean_Hand_psychic", Jean_Hand_1()),
+            "action_speed >= 2", At("Jean_Hand_psychic", Jean_Hand_2()),
             "action_speed ", Null(),
             ),
     anchor (0.51, -1.3)
@@ -4124,7 +4124,7 @@ label Jean_PJ_Reset:
     if not renpy.showing("Jean_PJ_Animation"):
         return
     $ action_speed = 0
-    $ JeanX.ArmPose = 1
+    $ JeanX.arm_pose = 1
     hide Jean_PJ_Animation with easeoutbottom
     return
 
@@ -4175,7 +4175,7 @@ image Jean_TJ_Head:
 image Jean_TJ_HairTop:
 
     ConditionSwitch(
-                    "JeanX.wet or JeanX.hair == 'wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Over.png",
+                    "JeanX.wet or JeanX.hair == '_wet'", "images/JeanBJFace/Jean_BJ_Hair_Wet_Over.png",
                     "JeanX.hair == 'pony'", "images/JeanBJFace/Jean_BJ_Hair_Pony_Over.png",
                     "True", "images/JeanBJFace/Jean_BJ_Hair_Short_Over.png",
                     )
