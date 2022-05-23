@@ -2,11 +2,9 @@
 errors listed below, and try again.
 
 
-The label starting_to_get_bored_lines is defined twice, at File "game/dialog.rpy", line 1451:
-label starting_to_get_bored_lines(Girl, action):
-and File "game/dialog.rpy", line 3396:
-label starting_to_get_bored_lines(Girl, action):
-
+File "game/rogue_animations_old.rpy", line 2063: if statement expects a non-empty block.
+    if not renpy.showing("Rogue_sprite"):
+                                         ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Sat May 21 03:16:15 2022
+Sun May 22 22:32:30 2022

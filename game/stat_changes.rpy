@@ -8,7 +8,7 @@ label forced_but_not_unwelcome_changes_A(Girl, action):
     elif action in job_actions:
         $ Girl.change_stat("love", 70, -5, 1)
         $ Girl.change_stat("love", 200, -2)
-    elif action in ["dildo_pussy", "dildo_ass", "sex", "anal"]:
+    elif action in ["masturbation", "dildo_pussy", "dildo_ass", "sex", "anal"]:
         $ Girl.change_stat("love", 70, -5, 1)
         $ Girl.change_stat("love", 200, -5)
     elif action in ["hotdog"]:
@@ -32,7 +32,7 @@ label forced_but_not_unwelcome_changes_B(Girl, action):
     elif action in ["fondle_ass"]:
         $ Girl.change_stat("obedience", 50, 3)
         $ Girl.change_stat("inhibition", 60, 3)
-    elif action in ["dildo_pussy", "dildo_ass", "sex", "anal"]:
+    elif action in ["masturbation", "dildo_pussy", "dildo_ass", "sex", "anal"]:
         $ Girl.change_stat("obedience", 80, 4)
         $ Girl.change_stat("inhibition", 80, 1)
         $ Girl.change_stat("inhibition", 60, 3)
@@ -42,7 +42,7 @@ label forced_but_not_unwelcome_changes_B(Girl, action):
 
     return
 
-label forced_action_rejected_reactions(Girl, action)
+label forced_action_rejected_changes(Girl, action):
     if action == "masturbation":
         $ Girl.change_stat("lust", 90, 5)
 
@@ -66,7 +66,7 @@ label forced_action_rejected_reactions(Girl, action)
         elif action in ["fondle_breasts", "suck_breasts", "fondle_ass"]:
             $ Girl.change_stat("lust", 60, 5)
         elif action in ["finger_ass", "eat_ass"]:
-            if approvalcheck(Girl, 500, "I"):
+            if approval_check(Girl, 500, "I"):
                 $ Girl.change_stat("lust", 80, 10)
             else:
                 $ Girl.change_stat("lust", 50, 3)
@@ -97,7 +97,7 @@ label forced_rejected_changes(Girl, action):
         $ Girl.change_stat("love", 200, -10)
     elif action in ["fondle_pussy", "eat_pussy", "finger_ass", "eat_ass", "handjob", "footjob", "titjob", "blowjob"]:
         $ Girl.change_stat("love", 200, -15)
-    elif action in ["dildo_pussy", "dildo_ass", "sex", "anal"]:
+    elif action in ["masturbation". "dildo_pussy", "dildo_ass", "sex", "anal"]:
         $ Girl.change_stat("love", 200, -20)
 
     return

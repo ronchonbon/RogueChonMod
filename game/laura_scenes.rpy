@@ -280,7 +280,7 @@ label Laura_BF(temp_Girls=[]):
             "[LauraX.name] turns towards you and motions that she wants to speak to you alone."
     $ LauraX.drain_word("asked_to_meet")
     call set_the_scene (0)
-    call Display_Girl (LauraX)
+    call show_girl (LauraX)
     "She looks a bit concerned and you can tell she's a bit anxious about whatever she has to say."
     call Taboo_Level
     call clear_the_room (LauraX)
@@ -583,7 +583,7 @@ label Laura_BF(temp_Girls=[]):
     $ LauraX.change_face("_sly",1)
     ch_l "So, did you have any plans for the next few minutes? . ."
     if "Historia" in Player.traits:
-        return 1
+        return True
     $ approval_bonus = 10
     $ Player.add_word(1,"interruption")
     call Laura_SexMenu
@@ -1234,7 +1234,7 @@ label Laura_Sub:
 
     $ LauraX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (LauraX)
+    call show_girl (LauraX)
     call clear_the_room (LauraX)
     call set_the_scene
     call Taboo_Level
@@ -1607,7 +1607,7 @@ label Laura_Master:
 
     $ LauraX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (LauraX)
+    call show_girl (LauraX)
     call clear_the_room (LauraX)
     call set_the_scene
     $ LauraX.daily_history.append("relationship")
@@ -1937,7 +1937,7 @@ label Laura_Fuckbuddy:
     $ LauraX.outfit = "casual1"
     $ LauraX.today_outfit = "casual1"
     $ LauraX.change_outfit("casual1")
-    call Display_Girl (LauraX)
+    call show_girl (LauraX)
     call Taboo_Level
     $ primary_action = "masturbation"
     $ girl_offhand_action = "fondle_pussy"
@@ -2283,7 +2283,7 @@ label Laura_Dressup:
     call set_the_scene (0)
     $ KittyX.outfit = KittyX.today_outfit
     $ KittyX.change_outfit()
-    call Display_Girl (KittyX)
+    call show_girl (KittyX)
 
     $ KittyX.change_face("_smile")
     ch_k "Hey, [KittyX.player_petname], what're you staring at?"

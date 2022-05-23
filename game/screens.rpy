@@ -878,7 +878,7 @@ screen Status_Screen:
         background None
         has vbox
         hbox:
-            text "Day: [Day] [Dayofweek]" size 12
+            text "day: [day] [day_of_week]" size 12
         hbox:
             text "Time: [current_time]" size 12
     frame:

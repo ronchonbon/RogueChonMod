@@ -1219,7 +1219,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
             elif Girl == JubesX:
                 ch_v "Sure, take a look. . ."
             hide DressScreen
-            return 1
+            return True
         if not Agree:
 
             $ Girl.change_face("_bemused", 2,Eyes="_side")
@@ -1853,16 +1853,16 @@ label Display_DressScreen(Girl=focused_Girl):
 
 
     if renpy.showing('DressScreen'):
-        return 1
+        return True
 
     if Girl == StormX:
         if not Girl.Taboo or StormX in Rules:
-            return 1
+            return True
         else:
             ch_s "I'm afraid rules are rules."
 
     if Girl.Taboo:
-        return 0
+        return False
 
     $ Girl.change_face("_bemused",1,Eyes="_side")
     if "screen" in Girl.daily_history:
@@ -1900,7 +1900,7 @@ label Display_DressScreen(Girl=focused_Girl):
                 ch_j "Good."
             elif Girl == JubesX:
                 ch_v "Oh, thanks. . ."
-            return 1
+            return True
         "No, don't":
             if Girl == RogueX:
                 ch_r "Fine then. . ."
@@ -1915,4 +1915,4 @@ label Display_DressScreen(Girl=focused_Girl):
             elif Girl == JubesX:
                 ch_v "Well, fine. . ."
 
-    return 0
+    return False

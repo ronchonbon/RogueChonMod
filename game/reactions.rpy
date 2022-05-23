@@ -63,6 +63,10 @@ label forced_rejected_reactions(Girl, action):
 label first_action_approval_forced_reactions(Girl, action):
     $ Girl.change_face("_sad")
 
+    if action == "masturbation":
+        $ Girl.change_stat("love", 70, -3, 1)
+        $ Girl.change_stat("love", 20, -2, 1)
+
     call first_action_approval_forced_reactions(Girl, action)
 
     return
@@ -77,7 +81,7 @@ label first_action_approval_mostly_love_reactions(Girl, action):
     return
 
 label first_action_approval_mostly_obedience_reactions(Girl, action):
-    if action in ["handjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
+    if action in ["masturbation", "handjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
         $ Girl.change_face("_normal")
     elif action in ["footjob"]:
         $ Girl.change_face("_normal",1)
@@ -94,7 +98,7 @@ label first_action_approval_addicted_reactions(Girl, action):
     return
 
 label first_action_approval_reactions(Girl, action):
-    if action in ["handjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
+    if action in ["masturbation", "handjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
         $ Girl.change_face("_sad")
         $ Girl.Mouth = "_smile"
     elif action in ["footjob"]:
@@ -327,7 +331,7 @@ label girl_initiated_action(Girl, action):
             $ topless_phrase = covered_phrase
 
         if (Girl.Over or Girl.Chest) and not Girl.top_pulled_up:
-            if approvalcheck(Girl, 1250, TabM = 1) or (Girl.SeenChest and approvalcheck(Girl, 500) and not Taboo):
+            if approval_check(Girl, 1250, TabM = 1) or (Girl.SeenChest and approval_check(Girl, 500) and not Taboo):
                 $ Girl.top_pulled_up = 1
 
                 $ line = Girl.Over if Girl.Over else Girl.Chest
@@ -361,7 +365,7 @@ label girl_initiated_action(Girl, action):
 
 
         if (Girl.Legs and not Girl.upskirt) or (Girl.Panties and not Girl.underwear_pulled_down):
-            if approvalcheck(Girl, 1250, TabM = 1) or (Girl.SeenPussy and approvalcheck(Girl, 500) and not Taboo):
+            if approval_check(Girl, 1250, TabM = 1) or (Girl.SeenPussy and approval_check(Girl, 500) and not Taboo):
                 $ Girl.upskirt = 1
                 $ Girl.underwear_pulled_down = 1
 
@@ -392,7 +396,7 @@ label girl_initiated_action(Girl, action):
             "[Girl.name] [phrase], clearly intending you to get to work."
     elif action in job_actions:
         if action == "handjob":
-            if offhand_action == "jackin":
+            if offhand_action == "jerking_off":
                 "[Girl.name] brushes your hand aside and starts stroking your cock."
             else:
                 "[Girl.name] gives you a mischevious smile, and starts to fondle your cock."
@@ -476,95 +480,95 @@ label girl_initiated_action(Girl, action):
 
     if action in == "kiss":
         $ action_line = "You lean in to the kiss"
-        $ praise_line = "Mmm, this is a nice surprise, " + Girl.Pet
+        $ praise_line = "Mmm, this is a nice surprise, " + Girl.player_petname
         $ no_action_line = "You pull back."
-        $ reject_line = "Let's not do that right now, " + Girl.Pet
+        $ reject_line = "Let's not do that right now, " + Girl.player_petname
     elif action in ["fondle_breasts", "suck_breasts", "fondle_pussy", "eat_pussy", "finger_ass", "handjob", "footjob", "titjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"]:
         if action == "fondle_breasts":
             $ action_line = "You start to fondle them."
-            $ praise_line = "I like the initiative, " + Girl.Pet
+            $ praise_line = "I like the initiative, " + Girl.player_petname
             $ no_action_line = "You pull your hand back."
-            $ reject_line = "Let's not do that right now, " + Girl.Pet
+            $ reject_line = "Let's not do that right now, " + Girl.player_petname
             $ rejection_response_line = Girl.name + " pulls back."
         elif action == "suck_breasts":
             $ action_line = "You start to run your tongue along her nipple."
-            $ praise_line = "Mmm, I like this, " + Girl.Pet
+            $ praise_line = "Mmm, I like this, " + Girl.player_petname
             $ no_action_line = "You pull your head back."
-            $ reject_line = "Let's not do that right now, " + Girl.Pet
+            $ reject_line = "Let's not do that right now, " + Girl.player_petname
             $ rejection_response_line = Girl.name + " pulls away."
         elif action == "fondle_pussy":
             $ action_line = "You start to run your fingers along her pussy."
-            $ praise_line = "I like the initiative, " + Girl.Pet
+            $ praise_line = "I like the initiative, " + Girl.player_petname
             $ no_action_line = "You pull your hand back."
-            $ reject_line = "Let's not do that right now, " + Girl.Pet
+            $ reject_line = "Let's not do that right now, " + Girl.player_petname
             $ rejection_response_line = Girl.name + " pulls back."
         elif action == "eat_pussy":
             $ action_line = "You start licking her slit."
-            $ praise_line = "Mmm, I like this idea, " + Girl.Pet
+            $ praise_line = "Mmm, I like this idea, " + Girl.player_petname
             $ no_action_line = "You pull your head away."
-            $ reject_line = "Let's not do that right now, " + Girl.Pet
+            $ reject_line = "Let's not do that right now, " + Girl.player_petname
             $ rejection_response_line = Girl.name + " pulls back."
         elif action == "finger_ass":
             $ action_line = "You press your finger into her tight ass."
-            $ praise_line = "Dirty girl, " + Girl.Pet
+            $ praise_line = "Dirty girl, " + Girl.player_petname
             $ no_action_line = "You pull your hand back."
-            $ reject_line = "Let's not do that right now, " + Girl.Pet
+            $ reject_line = "Let's not do that right now, " + Girl.player_petname
             $ rejection_response_line = Girl.name + " pulls back."
         elif action == "handjob":
             $ action_line = "[Girl.name] continues her actions."
-            $ praise_line = "Oooh, that's good, [Girl.Pet]."
+            $ praise_line = "Oooh, that's good, [Girl.player_petname]."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
             $ rejection_response_line = "[Girl.name] puts it down."
         elif action == "footjob":
             $ action_line = "[Girl.name] continues her actions."
-            $ praise_line = "Oooh, that's good, [Girl.Pet]."
+            $ praise_line = "Oooh, that's good, [Girl.player_petname]."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
             $ rejection_response_line = "[Girl.name] puts it down."
         elif action == "titjob":
             $ action_line = "[Girl.name] starts to slide them up and down."
-            $ praise_line = "Oh, that sounds like a good idea, [Girl.Pet]."
+            $ praise_line = "Oh, that sounds like a good idea, [Girl.player_petname]."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
             $ rejection_response_line = "[Girl.name] lets it drop out from between her breasts."
         elif action == "blowjob":
             $ action_line = "[Girl.name] continues licking at it."
-            $ praise_line = "Hmmm, keep doing that, [Girl.Pet]."
+            $ praise_line = "Hmmm, keep doing that, [Girl.player_petname]."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
             $ rejection_response_line = "[Girl.name] puts it down."
         elif action == "dildo_pussy":
             $ action_line = "[Girl.name] slides it in."
-            $ praise_line = "Oh yeah, [Girl.Pet], let's do this."
+            $ praise_line = "Oh yeah, [Girl.player_petname], let's do this."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
             $ rejection_response_line = "[Girl.name] sets the dildo down."
         elif action == "dildo_ass":
             $ action_line = "[Girl.name] slides it in."
-            $ praise_line = "Hmmm, keep doing that, [Girl.Pet]."
+            $ praise_line = "Hmmm, keep doing that, [Girl.player_petname]."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
             $ rejection_response_line = "[Girl.name] sets the dildo down."
         elif action == "sex":
             $ action_line = "[Girl.name] slides it in."
-            $ praise_line = "Oh yeah, [Girl.Pet], let's do this."
+            $ praise_line = "Oh yeah, [Girl.player_petname], let's do this."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
             $ rejection_response_line = "[Girl.name] pulls back."
         elif action == "anal":
             $ action_line = "[Girl.name] slides it in."
-            $ praise_line = "Ooo, dirty girl, [Girl.Pet], let's do this."
+            $ praise_line = "Ooo, dirty girl, [Girl.player_petname], let's do this."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
             $ rejection_response_line = "[Girl.name] pulls back."
         elif action == "hotdog":
             $ action_line = renpy.random.choice([Girl.name + " starts to grind against you",
                 Girl.name + " keeps grinding",
                 Girl.name + " continues to grind"])
-            $ praise_line = "Hmmm, that's good, [Girl.Pet]."
+            $ praise_line = "Hmmm, that's good, [Girl.player_petname]."
             $ no_action_line = None
-            $ reject_line = "Let's not do that for now, [Girl.Pet]."
+            $ reject_line = "Let's not do that for now, [Girl.player_petname]."
             $ rejection_response_line = "[Girl.name] pulls back."
 
         menu:
@@ -796,13 +800,11 @@ label action_approved(Girl, action):
         $ Girl.change_face("_sexy", 1)
 
         call recent_action_lines(Girl, action)
-
         jump before_action
     elif action in Girl.daily_history:
         $ Girl.change_face("_sexy", 1)
 
         call daily_action_lines(Girl, action)
-
     elif Girl.action_counter[action] < 3:
         $ Girl.change_face("_sexy", 1)
         $ Girl.Brows = "_confused"
@@ -814,8 +816,6 @@ label action_approved(Girl, action):
         $ Girl.ArmPose = 2
 
         call used_to_action_lines(Girl, action)
-
-    $ line = 0
 
     return
 
@@ -852,6 +852,15 @@ label action_disapproved(Girl, action):
             $ Girl.Blush = 1
         else:
             $ Girl.Blush = 0
+
+    if action == "masturbation":
+        ch_r "That's. . . a little intimate, [RogueX.player_petname]."
+        ch_k "That's. . . private? You know?"
+        ch_e "I don't know that I want to perform."
+        ch_l "I don't know that I want to do that right now."
+        ch_j "I don't know, it's kind of a bad time. . ."
+        ch_s "I am unsure about this."
+        ch_v "I don't know, I'm not really into it right now."
 
     call begging_menu(Girl, action)
 
@@ -933,7 +942,10 @@ label forced_action(Girl, action):
         if approval < 2:
             $ Girl.forced = 1
 
-        jump before_action
+        if action == "masturbation":
+            jump before_masturbation
+        else:
+            jump before_action
     else:
         call forced_rejected_reactions(Girl, action)
 

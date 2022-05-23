@@ -828,8 +828,8 @@ label Rogue_Doggy_Launch(Line=primary_action):
         return
     $ action_speed = 0
     call Rogue_Hide (1)
-    show Rogue_doggy_animation zorder 150 at sprite_location(stage_center+50)
-    with dissolve
+    # show Rogue_doggy_animation zorder 150 at sprite_location(stage_center+50)
+    # with dissolve
     return
 
 label Rogue_Doggy_Reset:
@@ -1705,11 +1705,11 @@ label Rogue_Sex_Launch(Line=primary_action):
         return
     $ action_speed = 0
     call Rogue_Hide (1)
-    show Rogue_sex_animation zorder 150
-
-
-
-    with dissolve
+    # show Rogue_sex_animation zorder 150
+    #
+    #
+    #
+    # with dissolve
     return
 
 label Rogue_Sex_Reset:
@@ -1784,8 +1784,8 @@ label Rogue_BJ_Launch(Line=primary_action):
 
     show Rogue_sprite zorder RogueX.sprite_layer:
         alpha 0
-    show Rogue_blowjob_animation zorder 150:
-        pos (645,510)
+    # show Rogue_blowjob_animation zorder 150:
+    #     pos (645,510)
     return
 
 label Rogue_BJ_Reset:
@@ -1969,7 +1969,7 @@ label Rogue_TJ_Launch(Line=primary_action):
     $ action_speed = 0
     if Line != "cum":
         $ primary_action = "titjob"
-    show Rogue_TJ_Animation zorder 150 at sprite_location(stage_right)
+    # show Rogue_TJ_Animation zorder 150 at sprite_location(stage_right)
     hide blackscreen onlayer black with dissolve
     return
 
@@ -2008,13 +2008,13 @@ image Zero_cock_handjob:
     pos (200,400)
 
 image Rogue_handjob_under:
-    "images/RogueBJFace/hand2.png"
+    "images/Rogue_sprite/Rogue_handjob_hand2.png"
     anchor (0.5,0.5)
     pos (0,0)
 
 
 image Rogue_handjob_over:
-    "images/RogueBJFace/hand1.png"
+    "images/Rogue_sprite/Rogue_handjob_hand1.png"
     anchor (0.5,0.5)
     pos (0,0)
 
@@ -2093,7 +2093,7 @@ label Rogue_HJ_Launch(Line=primary_action):
     $ action_speed = 0
     if Line != "cum":
         $ primary_action = "handjob"
-    show Rogue_HJ_Animation zorder 150 at sprite_location(RogueX.sprite_location) with easeinbottom
+    # show Rogue_HJ_Animation zorder 150 at sprite_location(RogueX.sprite_location) with easeinbottom
     return
 
 label Rogue_HJ_Reset:
@@ -2773,7 +2773,7 @@ image Chibi_Null:
     pos (75,675)
     zoom 0.5
 
-image Chibi_Jackin:
+image Chibi_jerking_off:
 
     contains:
         "Zero_Chibicock"
@@ -2891,7 +2891,7 @@ image Chibi_UI:
     contains:
         ConditionSwitch(
             "'cockout' not in Player.recent_history", Null(),
-            "offhand_action == 'jackin'", "Chibi_Jackin",
+            "offhand_action == 'jerking_off'", "Chibi_jerking_off",
             "girl_offhand_action == 'hand' or second_girl_primary_action == 'hand'", "Chibi_Handy",
             "second_girl_primary_action == 'blow'", "Chibi_Sucking",
             "True", "Chibi_Null",

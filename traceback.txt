@@ -1,56 +1,140 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
-While running game code:
-  File "game/locations.rpy", line 83, in script call
-    call girls_room(RogueX)
-  File "game/bedrooms.rpy", line 393, in script call
-    call Chat
-  File "game/chat.rpy", line 127, in script call
-    call Chat_Menu
-  File "game/menus.rpy", line 66, in script call
-    call girl_sex_menu(focused_Girl)
-  File "game/menus.rpy", line 157, in script call
+While loading <'Image' u'images/RogueBJFace/handcock_G.png'>:
+  File "game/bedrooms.rpy", line 530, in script call
+    call event_calls
+  File "game/utilities.rpy", line 817, in script call
+    call AddictCheck
+  File "game/checks.rpy", line 329, in script call
+    call addiction_fix (temp_Girls[0])
+  File "game/addiction.rpy", line 1945, in script call
+    call addiction_ultimatum
+  File "game/addiction.rpy", line 1162, in script call
+    call addiction_serum
+  File "game/addiction.rpy", line 2627, in script call
     call action(Girl)
-  File "game/actions.rpy", line 64, in script call
-    call action_accepted(Girl, primary_action)
-  File "game/reactions.rpy", line 1231, in script call
-    call before_action
-  File "game/actions.rpy", line 437, in script
-    if focused_Girl.wearing_skirt:
-  File "game/actions.rpy", line 437, in <module>
-    if focused_Girl.wearing_skirt:
-AttributeError: 'GirlClass' object has no attribute 'wearing_skirt'
+  File "game/actions.rpy", line 128, in script call
+    call action_disapproved(Girl, primary_action)
+  File "game/reactions.rpy", line 865, in script call
+    call begging_menu(Girl, action)
+  File "game/menus.rpy", line 1172, in script
+    menu:
+IOError: Couldn't find file 'images/RogueBJFace/handcock_G.png'.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/locations.rpy", line 83, in script call
-    call girls_room(RogueX)
-  File "game/bedrooms.rpy", line 393, in script call
-    call Chat
-  File "game/chat.rpy", line 127, in script call
-    call Chat_Menu
-  File "game/menus.rpy", line 66, in script call
-    call girl_sex_menu(focused_Girl)
-  File "game/menus.rpy", line 157, in script call
+  File "game/bedrooms.rpy", line 530, in script call
+    call event_calls
+  File "game/utilities.rpy", line 817, in script call
+    call AddictCheck
+  File "game/checks.rpy", line 329, in script call
+    call addiction_fix (temp_Girls[0])
+  File "game/addiction.rpy", line 1945, in script call
+    call addiction_ultimatum
+  File "game/addiction.rpy", line 1162, in script call
+    call addiction_serum
+  File "game/addiction.rpy", line 2627, in script call
     call action(Girl)
-  File "game/actions.rpy", line 64, in script call
-    call action_accepted(Girl, primary_action)
-  File "game/reactions.rpy", line 1231, in script call
-    call before_action
-  File "game/actions.rpy", line 437, in script
-    if focused_Girl.wearing_skirt:
-  File "renpy/ast.py", line 1898, in execute
-    if renpy.python.py_eval(condition):
-  File "renpy/python.py", line 2276, in py_eval
-    return py_eval_bytecode(code, globals, locals)
-  File "renpy/python.py", line 2269, in py_eval_bytecode
-    return eval(bytecode, globals, locals)
-  File "game/actions.rpy", line 437, in <module>
-    if focused_Girl.wearing_skirt:
-AttributeError: 'GirlClass' object has no attribute 'wearing_skirt'
+  File "game/actions.rpy", line 128, in script call
+    call action_disapproved(Girl, primary_action)
+  File "game/reactions.rpy", line 865, in script call
+    call begging_menu(Girl, action)
+  File "game/menus.rpy", line 1172, in script
+    menu:
+  File "renpy/ast.py", line 1688, in execute
+    choice = renpy.exports.menu(choices, self.set, args, kwargs, item_arguments)
+  File "renpy/exports.py", line 1060, in menu
+    rv = renpy.store.menu(new_items)
+  File "renpy/exports.py", line 1296, in display_menu
+    rv = renpy.ui.interact(mouse='menu', type=type, roll_forward=roll_forward)
+  File "renpy/ui.py", line 298, in interact
+    rv = renpy.game.interface.interact(roll_forward=roll_forward, **kwargs)
+  File "renpy/display/core.py", line 3325, in interact
+    repeat, rv = self.interact_core(preloads=preloads, trans_pause=trans_pause, pause=pause, pause_start=pause_start, **kwargs)
+  File "renpy/display/core.py", line 3839, in interact_core
+    self.draw_screen(root_widget, fullscreen_video, (not fullscreen_video) or video_frame_drawn)
+  File "renpy/display/core.py", line 2565, in draw_screen
+    renpy.config.screen_height,
+  File "render.pyx", line 492, in renpy.display.render.render_screen
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/image.py", line 501, in render
+    return wrap_render(self.target, width, height, st, at)
+  File "renpy/display/image.py", line 307, in wrap_render
+    rend = render(child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 826, in render
+    surf = render(child, width, height, cst, cat)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/transform.py", line 733, in render
+    return transform_render(self, width, height, st, at)
+  File "accelerator.pyx", line 187, in renpy.display.accelerator.transform_render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 367, in render
+    surf = render(self.child, width, height, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/layout.py", line 1456, in render
+    cr = renpy.display.render.render(self.child, w, h, st, at)
+  File "render.pyx", line 170, in renpy.display.render.render
+  File "render.pyx", line 263, in renpy.display.render.render
+  File "renpy/display/im.py", line 625, in render
+    return cache.get(self, render=True)
+  File "renpy/display/im.py", line 287, in get
+    surf = image.load()
+  File "renpy/display/im.py", line 706, in load
+    raise e
+IOError: Couldn't find file 'images/RogueBJFace/handcock_G.png'.
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like 0.997f2
-Sat May 21 03:54:31 2022
+Sun May 22 22:35:09 2022

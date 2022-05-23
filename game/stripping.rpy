@@ -672,7 +672,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
     if "exhibitionist" in Girl.traits:
         $ Girl.change_stat("lust", 200, 2)
     $ Player.change_stat("focus", 60, 3)
-    if offhand_action == "jackin":
+    if offhand_action == "jerking_off":
         $ Girl.change_stat("lust", 200, 2)
         $ Player.change_stat("focus", 200, 5)
 
@@ -688,7 +688,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
             if "_angry" in Girl.recent_history:
                 return
             $ Girl.change_stat("lust", 200, 5)
-            if not Player.semen and offhand_action == "jackin":
+            if not Player.semen and offhand_action == "jerking_off":
                 "You're spitting dust here, maybe just watch quietly for a while."
                 $ offhand_action = 0
             if Player.focus > 80:
@@ -783,9 +783,9 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     $ Girl.change_stat("lust", 70, 2)
                 $ Girl.recent_history.append("watching")
 
-        "Start jack'in it." if offhand_action != "jackin":
-            call Jackin (Girl)
-        "Stop jack'in it." if offhand_action == "jackin":
+        "Start jack'in it." if offhand_action != "jerking_off":
+            call jerking_off (Girl)
+        "Stop jack'in it." if offhand_action == "jerking_off":
             $ offhand_action = 0
 
         "Lose the [Girl.arms]. . ." if Girl.arms:
@@ -2869,7 +2869,7 @@ label Bottoms_Off_Legs(Girl=0):
                 else:
                     "[Girl.name] pulls her [Line] off."
 
-            "Rip the [Girl.hose]." if Girl.hose == "pantyhose" or Girl.hose == "_tights":
+            "Rip the [Girl.hose]." if Girl.hose == "_pantyhose" or Girl.hose == "_tights":
                 $ Girl.change_face("_bemused", 1)
                 if Girl.legs:
                     Girl.voice "All right, fine."
@@ -2884,9 +2884,9 @@ label Bottoms_Off_Legs(Girl=0):
 
                 $ Line = Girl.hose
                 if Girl.hose == "_tights":
-                    $ Girl.hose = "ripped_tights"
-                elif Girl.hose == "pantyhose":
-                    $ Girl.hose = "ripped_pantyhose"
+                    $ Girl.hose = "_ripped_tights"
+                elif Girl.hose == "_pantyhose":
+                    $ Girl.hose = "_ripped_pantyhose"
                 if Girl.hose not in Girl.inventory:
                     $ Girl.inventory.append(Girl.hose)
                 $ Girl.add_word(1,"ripped", "ripped")

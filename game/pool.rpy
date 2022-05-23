@@ -947,9 +947,9 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
             else:
                 if Line or PassLine:
 
-                    call Display_Girl (temp_Girls[0], 0, 0, 950, 150)
+                    call show_girl (temp_Girls[0], 0, 0, 950, 150)
                 else:
-                    call Display_Girl (temp_Girls[0], 0, 0, 800, 150)
+                    call show_girl (temp_Girls[0], 0, 0, 800, 150)
                 if temp_Girls[0].change_outfit("swimwear"):
 
                     $ Line = "" if Swimmers and not PassLine else "s"

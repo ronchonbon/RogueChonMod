@@ -2010,7 +2010,7 @@ label Jean_Summon(approval_bonus=approval_bonus):
     $ JeanX.recent_history.append("summoned")
     $ Line = 0
     if "locked" in Player.traits:
-        call Locked_Door (JeanX)
+        call locked_door (JeanX)
         return
     $ JeanX.location = bg_current
     call Taboo_Level (0)
@@ -2648,7 +2648,7 @@ label Jean_Wardrobe_Menu:
                     "She pulls out her green bra and slips it under her [JeanX.top]."
                 else:
                     ch_j "Yeah, I don't think so."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if approval_check(JeanX, 1100, "LI", TabM=2) and JeanX.love > JeanX.inhibition:
@@ -2666,11 +2666,11 @@ label Jean_Wardrobe_Menu:
                         ch_j ". . . not right now. . ."
                     else:
                         ch_j "Ha! Not for you, [JeanX.player_petname]."
-                    return 0
+                    return False
             "Never mind.":
                 ch_j "Ok. . ."
-                return 0
-        return 1
+                return False
+        return True
 
 
 
@@ -2772,7 +2772,7 @@ label Jean_Wardrobe_Menu:
                     return
                 else:
                     ch_j "Nope."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if approval_check(JeanX, 1100, "LI", TabM=3) and JeanX.love > JeanX.inhibition:
@@ -2790,12 +2790,12 @@ label Jean_Wardrobe_Menu:
                         ch_j ". . . not right now. . ."
                     else:
                         ch_j "Ha! Not for you, [JeanX.player_petname]."
-                    return 0
+                    return False
             "Never mind.":
 
                 ch_j "Ok. . ."
-                return 0
-        return 1
+                return False
+        return True
 
 
 
@@ -2899,10 +2899,10 @@ label Jean_Wardrobe_Menu:
                     $ JeanX.hose = ""
                 "The thigh-high hose would look good with that." if JeanX.hose != "_stockings":
                     $ JeanX.hose = "_stockings"
-                "The full length hose would look good with that." if JeanX.hose != "pantyhose" and "pantyhose" in JeanX.inventory:
-                    $ JeanX.hose = "pantyhose"
-                "The ripped pantyhose would look good with that." if JeanX.hose != "ripped_pantyhose" and "ripped_pantyhose" in JeanX.inventory:
-                    $ JeanX.hose = "ripped_pantyhose"
+                "The full length hose would look good with that." if JeanX.hose != "_pantyhose" and "_pantyhose" in JeanX.inventory:
+                    $ JeanX.hose = "_pantyhose"
+                "The ripped pantyhose would look good with that." if JeanX.hose != "_ripped_pantyhose" and "_ripped_pantyhose" in JeanX.inventory:
+                    $ JeanX.hose = "_ripped_pantyhose"
                 "The stockings and garterbelt would look good with that." if JeanX.hose != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:
                     $ JeanX.hose = "_stockings_and_garterbelt"
                 "Just the garterbelt would look good with that." if JeanX.hose != "garterbelt" and "_stockings_and_garterbelt" in JeanX.inventory:

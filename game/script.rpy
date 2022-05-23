@@ -6,7 +6,7 @@ image NightMask = "images/nightmask.png"
 
 image Crossroads_E = "images/Crossroads_Evening.jpg"
 image Crossroads_N = "images/Crossroads_Night.jpg"
-image Crossroads_D = "images/Crossroads_Day.jpg"
+image Crossroads_D = "images/Crossroads_day.jpg"
 
 image UI_Backpack = "images/UI_Backpack_idle.png"
 image UI_Dildo = "images/UI_Dildo.png"
@@ -116,7 +116,7 @@ init -1:
     default Present = []
     default Shop_Inventory = []
     default Inventory_Count = 0
-    default StackDepth = 0
+    default stack_depth = 0
 
     default Partner = 0
     default Events = []

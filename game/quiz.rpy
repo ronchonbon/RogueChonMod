@@ -513,74 +513,74 @@ label Rogue_Quiz_Question:
         menu:
             ch_r "Who was the first person who I used my powers on?"
             "A. Colby":
-                return 0
+                return False
             "B. Renly":
-                return 0
+                return False
             "C. Remy":
-                return 0
+                return False
             "D. Cody":
-                return 1
+                return True
     if QuizOrder[between_event_count] == 2:
         menu:
             ch_r "Where did I live before moving to Xaviers?"
             "A. Lousiana":
-                return 0
+                return False
             "B. Mississippi":
-                return 1
+                return True
             "C. Connecticut":
-                return 0
+                return False
             "D. Tennessee":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 3:
         menu:
             ch_r "What was the first power I. . . borrowed?"
             "A. Mystique's shape shifting":
-                return 0
+                return False
             "B. Shadowcat's phasing":
-                return 0
+                return False
             "C. Nightcrawler's teleport":
-                return 1
+                return True
             "D. Cyclops's eyebeams":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 4:
         menu:
             ch_r "What mutant raised me as my parent before my powers manifested."
             "A. Magneto":
-                return 0
+                return False
             "B. Mystique":
-                return 1
+                return True
             "C. Xavier":
-                return 0
+                return False
             "D. Belasco":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 5:
         menu:
             ch_r "I eventually joined the X-Men after Mystique attacked me, where?"
             "A. At school":
-                return 0
+                return False
             "B. At the beach":
-                return 0
+                return False
             "C. In the mountains":
-                return 1
+                return True
             "D. In the bayou":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 6:
         menu:
             ch_r "When Magneto was selecting the fittest mutants for Asteroid M, I was captured after beating which member of the Brotherhood?"
             "A. Blob":
-                return 0
+                return False
             "B. Avalanche":
-                return 0
+                return False
             "C. Toad":
                 "That's right, [RogueX.player_petname], I slammed that frog tongue in a car door"
                 "Better not make me angry."
-                return 1
+                return True
             "D. Quicksilver":
-                return 0
+                return False
 
 
     "She asked an obscure question but you answer the question correctly."
-    return 1
+    return True
 
 
 
@@ -590,125 +590,125 @@ label Kitty_Quiz_Question:
         menu:
             ch_k "Ok, do you[KittyX.like]know where I come from? What's my home town?"
             "A. Chicago, Illinois":
-                return 0
+                return False
             "B. Deerfield, Illinois":
-                return 1
+                return True
             "C. New York City, New York":
-                return 0
+                return False
             "D. St. Louis, Missouri":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 2:
         menu:
             ch_k "What's my mutant power called?"
             "A. Disappearing":
-                return 0
+                return False
             "B. Ghosting":
-                return 0
+                return False
             "C. Phasing":
-                return 1
+                return True
             "D. Shifting":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 3:
         ch_k "So. . . don't laugh, but I have this stuffed animal I sleep with[KittyX.like]every night."
         menu:
             ch_k "Know his name?"
             "A. Draco":
-                return 0
+                return False
             "B. Flipper":
-                return 0
+                return False
             "C. Lockheed":
-                return 1
+                return True
             "D. N'gari":
-                return 0
+                return False
 
     if QuizOrder[between_event_count] == 4:
         ch_k "Okay. Did you know that Dr. McCoy takes a handful of students on a private tutoring retreat?"
         menu:
             ch_k "Know where he takes them?"
             "A. The Great Redwood Forest, California":
-                return 1
+                return True
             "B. Mount McKinley, Alaska":
-                return 0
+                return False
             "C. Mount Rushmore, South Dakota":
-                return 0
+                return False
             "D. Yellowstone National Park, Wyoming":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 5:
         ch_k "One of the worst threats we have to worry about as mutants are the giant robots called Sentinels."
         menu:
             ch_k "Do you know who built them?"
             "A. Arcade":
-                return 0
+                return False
             "B. Bolivar Trask":
-                return 1
+                return True
             "C. Magneto":
-                return 0
+                return False
             "D. Unus the Untouchable":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 6:
         ch_k "Y'know, we didn't always have classes here at the Institute."
         ch_k "For a while, all the students here went to a local public school."
         menu:
             ch_k "Know which one?"
             "A. Bayville High School":
-                return 1
+                return True
             "B. King Memorial High School":
-                return 0
+                return False
             "C. Riverside High School":
-                return 0
+                return False
             "D. Seth Paine High School":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 7:
         menu:
             ch_k "It seems like it happened so long ago, but do you know who the first mutant I ever met was?"
             "A. Jean Grey":
-                return 0
+                return False
             "B. Lance Alvers":
-                return 1
+                return True
             "C. Mystique":
-                return 0
+                return False
             "D. Professor Xavier":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 8:
         ch_k "Rogue, Boom-Boom, Magma, Jean, and I once put together a crime-fighting team and took down a local chop shop operation."
         ch_k "Even though it was a lot of fun, we ended up disbanding after that."
         menu:
             ch_k "Anyway, know what the name we chose for the group was?"
             "A. The Bayville Avengers":
-                return 0
+                return False
             "B. The Bayville Brawlers":
-                return 0
+                return False
             "C. The Bayville Harpies":
-                return 0
+                return False
             "D. The Bayville Sirens":
-                return 1
+                return True
     if QuizOrder[between_event_count] == 9:
         menu:
             ch_k "Okay[KittyX.like].not that I'd know, but do you know the remedy for stink bomb aroma?"
             "A. A hot shower":
-                return 0
+                return False
             "B. Methyl Ethyl Ketone":
-                return 0
+                return False
             "C. Isolation":
-                return 1
+                return True
             "D. Tomato Juice":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 10:
         ch_k "When I'm using my powers, I'm not[KittyX.like]{i}totally{/i} invulnerable."
         menu:
             ch_k "Who has powers that can still affect me?"
             "A. Blob":
-                return 0
+                return False
             "B. Magneto":
-                return 0
+                return False
             "C. Quicksilver":
-                return 0
+                return False
             "D. Scarlet Witch":
-                return 1
+                return True
 
 
     "She asked an obscure question but you answer the question correctly."
-    return 1
+    return True
 
 
 label Emma_Quiz_Question:
@@ -717,91 +717,91 @@ label Emma_Quiz_Question:
         menu:
             ch_e "So, do you know where I lived as a child?"
             "A. Manchester, England":
-                return 0
+                return False
             "B. New York City, New York":
-                return 0
+                return False
             "C. Boston, Massachusetts":
-                return 1
+                return True
             "D. London, England":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 2:
         menu:
             ch_e "What's my mutant power?"
             "A. Telekinesis":
-                return 0
+                return False
             "B. Ice Powers":
-                return 0
+                return False
             "C. Telepathy":
-                return 1
+                return True
             "D. Baking":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 3:
         ch_e "I was once a leader in a. . . social club."
         menu:
             ch_e "What was the name of that club?"
             "A. Akatsuki":
-                return 0
+                return False
             "B. The Pride":
-                return 0
+                return False
             "C. The Hellfire Club":
-                return 1
+                return True
             "D. The Sinister Six":
-                return 0
+                return False
 
     if QuizOrder[between_event_count] == 4:
         ch_e "I was once a leader in a. . . social club."
         menu:
             ch_e "What was my title in that organization?"
             "A. The Black Queen":
-                return 0
+                return False
             "B. The White Queen":
-                return 1
+                return True
             "C. The Red Queen":
-                return 0
+                return False
             "D. Princess Powerful":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 5:
         ch_e "I have some clones wandering around. . . somewhere."
         menu:
             ch_e "What are they called?"
             "A. Kagebunshin":
-                return 0
+                return False
             "B. The Stepford Cuckoos":
-                return 1
+                return True
             "C. Jamie Maddrox":
-                return 0
+                return False
             "D. The Spice Girls":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 6:
         menu:
             ch_e "What is it called when a mutant develops a new ability, unrelated to their original one?"
             "A. Secondary Mutation":
-                return 1
+                return True
             "B. Level-Up":
-                return 0
+                return False
             "C. Digivolution":
-                return 0
+                return False
             "D. Super-Mutant":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 7:
         ch_e "I used to teach on an island nation of all mutants."
         menu:
             ch_e "What was it called?"
             "A. Australia":
-                return 0
+                return False
             "B. Genosha":
-                return 1
+                return True
             "C. Martinique":
-                return 0
+                return False
             "D. Whole Cake Island":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 8:
         menu:
             ch_e "When we first met, how did I trim my pubic hair?"
             "A. Left natural":
-                return 0
+                return False
             "B. Shaved into an \"X\"":
-                return 0
+                return False
             "C. I don't know":
                 $ EmmaX.change_face("_sadside", 1)
                 if not EmmaX.SeenPussy:
@@ -809,37 +809,37 @@ label Emma_Quiz_Question:
                 else:
                     ch_e "Clearly you weren't paying enough attention."
                 $ EmmaX.change_face("_normal")
-                return 0
+                return False
             "D. Waxed clean":
                 $ EmmaX.change_face("_sly", 1)
                 ch_e "Someone was paying attention. . ."
-                return 1
+                return True
     if QuizOrder[between_event_count] == 9:
         menu:
             ch_e "name one of my horrible sisters."
             "A. Drucilla":
-                return 0
+                return False
             "B. Elsa":
-                return 0
+                return False
             "C. Adrienne":
-                return 1
+                return True
             "D. Cordelia":
-                return 1
+                return True
     if QuizOrder[between_event_count] == 10:
         menu:
             ch_e "My previous teaching experience was at which Ivy League school?"
             "A. Deerfield Community College":
-                return 0
+                return False
             "B. Princeton":
-                return 0
+                return False
             "C. Empire State University":
-                return 0
+                return False
             "D. The Massachusetts Academy":
-                return 1
+                return True
 
 
     "She asked an obscure question but you answer the question correctly."
-    return 1
+    return True
 
 
 
@@ -848,13 +848,13 @@ label Laura_Quiz_Question:
         menu:
             ch_l "I don't know. . . what color are my eyes?"
             "A. Blue":
-                return 0
+                return False
             "B. Green":
-                return 1
+                return True
             "C. Brown":
-                return 0
+                return False
             "D. Red":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 2:
         $ LauraX.change_face("_perplexed",1,Eyes="_side")
         ch_l "Um. . ."
@@ -863,24 +863,24 @@ label Laura_Quiz_Question:
             ch_l "Say my name."
             "A. [LauraX.petname]":
                 ch_l "Close enough."
-                return 1
+                return True
             "B. Esme":
-                return 0
+                return False
             "C. Laura":
-                return 1
+                return True
             "D. . . .":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 3:
         menu:
             ch_l "What do you think about my ass?"
             "A. Kind of flat?":
-                return 0
+                return False
             "B. Tight?":
-                return 1
+                return True
             "C. Hot?":
-                return 1
+                return True
             "D. I don't know?":
-                return 0
+                return False
 
     if QuizOrder[between_event_count] == 4:
         menu:
@@ -889,19 +889,19 @@ label Laura_Quiz_Question:
                 $ LauraX.change_face("_surprised")
                 ch_l "How did you guess?"
                 $ LauraX.change_face("_sly")
-                return 1
+                return True
             "B. 2?":
                 $ LauraX.change_face("_sly")
                 ch_l "Mmmm, you and me?"
-                return 1
+                return True
             "C. 8?":
                 $ LauraX.change_face("_perplexed")
                 ch_l ". . . What? Why?"
                 $ LauraX.change_face("_bemused")
-                return 0
+                return False
             "D. Green?":
                 ch_l ". . ."
-                return 0
+                return False
 
 
 
@@ -976,7 +976,7 @@ label Laura_Quiz_Question:
 
 
     ch_l ". . . I can't think of anything, skip my turn."
-    return 1
+    return True
 
 
 
@@ -987,13 +987,13 @@ label Jean_Quiz_Question:
         menu:
             ch_j "I don't know. . . what color are my eyes?"
             "A. Blue":
-                return 0
+                return False
             "B. Green":
-                return 1
+                return True
             "C. Brown":
-                return 0
+                return False
             "D. Red":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 2:
         $ JeanX.change_face("_perplexed",1,Eyes="_side")
         ch_j "Um. . ."
@@ -1002,24 +1002,24 @@ label Jean_Quiz_Question:
             ch_j "Say my name."
             "A. [JeanX.petname]":
                 ch_j "Close enough."
-                return 1
+                return True
             "B. Esme":
-                return 0
+                return False
             "C. Jean":
-                return 1
+                return True
             "D. . . .":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 3:
         menu:
             ch_j "What do you think about my ass?"
             "A. Kind of flat?":
-                return 0
+                return False
             "B. Tight?":
-                return 1
+                return True
             "C. Hot?":
-                return 1
+                return True
             "D. I don't know?":
-                return 0
+                return False
 
     if QuizOrder[between_event_count] == 4:
         menu:
@@ -1028,19 +1028,19 @@ label Jean_Quiz_Question:
                 $ JeanX.change_face("_surprised")
                 ch_j "No?"
                 $ JeanX.change_face("_sly")
-                return 0
+                return False
             "B. 2?":
                 $ JeanX.change_face("_sly")
                 ch_j "Mmmm, you and me?"
-                return 1
+                return True
             "C. 8?":
                 $ JeanX.change_face("_perplexed")
                 ch_j ". . . What? Why?"
                 $ JeanX.change_face("_bemused")
-                return 0
+                return False
             "D. Green?":
                 ch_j ". . ."
-                return 0
+                return False
 
 
 
@@ -1115,59 +1115,59 @@ label Jean_Quiz_Question:
 
 
     ch_j ". . . I can't think of anything, skip my turn."
-    return 1
+    return True
 
 label Storm_Quiz_Question:
     if QuizOrder[between_event_count] == 1:
         menu:
             ch_s "So what color are my eyes?"
             "A. Blue":
-                return 1
+                return True
             "B. Green":
-                return 0
+                return False
             "C. Brown":
-                return 0
+                return False
             "D. White?":
                 ch_s ". . . sometimes."
-                return 1
+                return True
     if QuizOrder[between_event_count] == 2:
         menu:
             ch_s "Where was I born?"
             "A. Kenya":
-                return 0
+                return False
             "B. New York":
-                return 1
+                return True
             "C. Egypt":
-                return 0
+                return False
             "D. Honolulu":
-                return 0
+                return False
     if QuizOrder[between_event_count] == 3:
         menu:
             ch_s "What do you think about my body?"
             "A. Kind of flat?":
                 $ StormX.change_face("_confused")
-                return 0
+                return False
             "B. Thicc?":
                 $ Party[0].change_stat("love", 80, 2)
                 $ Party[0].change_stat("inhibition", 80, 2)
-                return 1
+                return True
             "C. Hot?":
-                return 1
+                return True
             "D. I don't know?":
                 ch_s "A fair response."
-                return 1
+                return True
 
     if QuizOrder[between_event_count] == 4:
         menu:
             ch_j "In what city was I a thief?"
             "A. Detroit?":
-                return 0
+                return False
             "B. Rome?":
-                return 0
+                return False
             "C. New York?":
-                return 0
+                return False
             "D. Cairo?":
-                return 1
+                return True
 
 
 
@@ -1242,7 +1242,7 @@ label Storm_Quiz_Question:
 
 
     "She asked an obscure question but you answer the question correctly."
-    return 1
+    return True
 
 
 
@@ -1253,40 +1253,40 @@ label Jubes_Quiz_Question:
             ch_v "Where did I grow up?"
             "A. Hong Kong":
                 ch_v "My -parents,- maybe. . ."
-                return 0
+                return False
             "B. Beverly Hills":
-                return 1
+                return True
             "C. Shenzhen":
-                return 0
+                return False
             "D. Bel Air":
                 ch_v "So close. . ."
-                return 0
+                return False
     if QuizOrder[between_event_count] == 2:
         menu:
             ch_v "What is my full first name?"
             "A. Jubilation":
                 if JubesX.name == "Jubilation":
                     ch_v "Ok, that one was too easy."
-                return 1
+                return True
             "B. Jubal":
-                return 0
+                return False
             "C. Jubilant":
-                return 0
+                return False
             "D. Jabroni":
                 ch_v ". . . no."
-                return 0
+                return False
     if QuizOrder[between_event_count] == 3:
         menu:
             ch_v "Where did I live after losing my parents?"
             "A. With your uncle Bruce":
-                return 0
+                return False
             "B. In an abandoned building":
-                return 0
+                return False
             "C. In a cave lair":
                 ch_v "No, the vampire thing came later."
-                return 0
+                return False
             "D. In a mall":
-                return 1
+                return True
 
     if QuizOrder[between_event_count] == 4:
         menu:
@@ -1295,20 +1295,20 @@ label Jubes_Quiz_Question:
                 $ JubesX.change_face("_surprised")
                 ch_v "Ok, maybe I sent some bad cues on this one?"
                 $ JubesX.change_face("_sly")
-                return 0
+                return False
             "B. Figure Skating":
-                return 0
+                return False
             "C. Gymnastics":
                 ch_v "Why yes it was. . ."
                 ch_v "I'm still quite flexible. . ."
-                return 1
+                return True
             "D. Shotput":
                 ch_v ". . ."
-                return 0
+                return False
 
 
     "She asks you some other tricky questions, but you manage to get them right."
-    return 1
+    return True
 
 
 
@@ -1505,8 +1505,8 @@ label Emma_StripStudy_Intro:
                         ch_k "It could be fun. . ."
                     elif Party[1] == LauraX:
                         ch_l "Yeah, ok. . ."
-            return 1
+            return True
         else:
-            return 0
-    return 0
+            return False
+    return False
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

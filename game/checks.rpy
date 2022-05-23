@@ -32,7 +32,7 @@ init python:
 
     def approval_check(Chr = 0, T = 1000, Type = "LOI", Spread = 150, TmpM = 1, TabM = 0, C = 1, Bonus = 0, Loc = 0, Check=0, Alt=[[],0]):
         if Chr not in all_Girls:
-            return 0
+            return False
 
         while Alt[0]:
 
@@ -145,9 +145,9 @@ init python:
             return 2
         elif (L + O + I + Bonus + (TmpM*Localapproval_bonus) - (TabM*LocalTaboo)) >= T:
 
-            return 1
+            return True
         else:
-            return 0
+            return False
 
 
 
@@ -171,9 +171,9 @@ init python:
                 Here.append(temp_Girls[0])
             temp_Girls.remove(temp_Girls[0])
         if len(Party) + len(Here) >= 2:
-            return 1
+            return True
         else:
-            return 0
+            return False
 
 
 
@@ -185,9 +185,9 @@ init python:
             temp_Girls.remove(Girl)
         while temp_Girls:
             if temp_Girls[0].location == bg_current:
-                return 0
+                return False
             temp_Girls.remove(temp_Girls[0])
-        return 1
+        return True
 
 
 

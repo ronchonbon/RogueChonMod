@@ -225,7 +225,7 @@ label Kitty_BF:
             "[KittyX.name] turns towards you and asks if the two of you can talk."
 
     call set_the_scene (0)
-    call Display_Girl (KittyX)
+    call show_girl (KittyX)
     "A little blush on her cheeks, you can tell she's a bit anxious about whatever she has to say."
     call Taboo_Level
     call clear_the_room (KittyX)
@@ -321,7 +321,7 @@ label Kitty_BF:
     $ KittyX.change_face("_sexy")
     ch_k "Now. . . boyfriend. . . how about you and I[KittyX.like]celebrate, huh?"
     if "Historia" in Player.traits:
-        return 1
+        return True
     $ approval_bonus = 10
     $ Player.add_word(1,"interruption")
     call Kitty_SexMenu
@@ -339,7 +339,7 @@ label Kitty_BF_Jerk:
         ch_k "Yeah? Well. . .[KittyX.like]I don’t care what you want! We’re dating! Deal."
         ch_k "I. . .uhm. . .think I need to[KittyX.like]be alone for a little while."
         if "Historia" in Player.traits:
-            return 1
+            return True
         $ KittyX.player_petnames.append("boyfriend")
         $ Achievements.append("I am not your Boyfriend!")
         $ bg_current = "bg_player"
@@ -383,7 +383,7 @@ label Kitty_Love:
 
     $ KittyX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (KittyX)
+    call show_girl (KittyX)
     call clear_the_room (KittyX)
     call Taboo_Level
     $ KittyX.daily_history.append("relationship")
@@ -640,14 +640,14 @@ label Kitty_Love_End:
             $ KittyX.change_stat("inhibition", 30, 30)
             ch_k "Hmm. . ."
             if "Historia" in Player.traits:
-                return 1
+                return True
             call Kitty_SexAct ("sex")
         "I have something else in mind. . .[[choose another activity]":
             $ KittyX.brows = "_confused"
             $ KittyX.change_stat("obedience", 70, 20)
             ch_k "Something like. . ."
             if "Historia" in Player.traits:
-                return 1
+                return True
             $ approval_bonus = 20
             call Kitty_SexMenu
     return
@@ -724,7 +724,7 @@ label Kitty_Sub:
 
     $ KittyX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (KittyX)
+    call show_girl (KittyX)
     call clear_the_room (KittyX)
     call Taboo_Level
     $ KittyX.daily_history.append("relationship")
@@ -1031,7 +1031,7 @@ label Kitty_Master:
 
     $ KittyX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (KittyX)
+    call show_girl (KittyX)
     call clear_the_room (KittyX)
     $ KittyX.daily_history.append("relationship")
     call Taboo_Level
@@ -1151,7 +1151,7 @@ label Kitty_Master:
 label Kitty_Sexfriend:
     $ KittyX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (KittyX)
+    call show_girl (KittyX)
     call clear_the_room (KittyX)
     $ KittyX.daily_history.append("relationship")
     call Taboo_Level
@@ -2148,7 +2148,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
 label Kitty_Kate:
     $ KittyX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (KittyX)
+    call show_girl (KittyX)
     call Taboo_Level
     $ Line = 0
     $ KittyX.change_face("_bemused", 1)

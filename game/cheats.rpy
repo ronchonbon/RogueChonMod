@@ -341,13 +341,13 @@ label WardrobeEditor(Chr=0):
                                 "Add stockings and garter":
                                     $ Chr.hose = "_stockings_and_garterbelt"
                                 "Add_pantyhose":
-                                    $ Chr.hose = "pantyhose"
+                                    $ Chr.hose = "_pantyhose"
                                 "Add_tights":
                                     $ Chr.hose = "_tights"
                                 "Add ripped hose":
-                                    $ Chr.hose = "ripped_pantyhose"
+                                    $ Chr.hose = "_ripped_pantyhose"
                                 "Add ripped_tights":
-                                    $ Chr.hose = "ripped_tights"
+                                    $ Chr.hose = "_ripped_tights"
                                 "Add_tights":
                                     $ Chr.hose = "_tights"
                                 "Add knee stockings" if Chr == KittyX:

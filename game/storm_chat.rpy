@@ -1956,7 +1956,7 @@ label Storm_Summon(approval_bonus=approval_bonus):
     $ StormX.recent_history.append("summoned")
     $ Line = 0
     if "locked" in Player.traits:
-        call Locked_Door (StormX)
+        call locked_door (StormX)
         return
     $ StormX.location = bg_current
     call Taboo_Level (0)
@@ -2647,7 +2647,7 @@ label Storm_Wardrobe_Menu:
                     "She pulls out her tube top and slips it on under her [StormX.top]."
                 else:
                     ch_s "I don't think it would be appropriate."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if StormX in Rules or not StormX.Taboo:
@@ -2666,11 +2666,11 @@ label Storm_Wardrobe_Menu:
                         ch_s "Not in public, I'm afraid"
                     else:
                         ch_s "I'm afraid not, [StormX.player_petname]!"
-                    return 0
+                    return False
             "Never mind.":
                 ch_s "Ok. . ."
-                return 0
-        return 1
+                return False
+        return True
 
 
 
@@ -2771,7 +2771,7 @@ label Storm_Wardrobe_Menu:
                     return
                 else:
                     ch_s "No, thank you."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if StormX.Taboo <= 20 or StormX.HoseNum() >= 5 or StormX in Rules:
@@ -2790,12 +2790,12 @@ label Storm_Wardrobe_Menu:
                         ch_s "Obviously, but not in public, [StormX.player_petname]."
                     else:
                         ch_s "I'm afraid not, [StormX.player_petname]!"
-                    return 0
+                    return False
             "Never mind.":
 
                 ch_s "Ok. . ."
-                return 0
-        return 1
+                return False
+        return True
 
 
 
@@ -2917,10 +2917,10 @@ label Storm_Wardrobe_Menu:
                     $ StormX.hose = ""
                 "The thigh-high hose would look good with that." if StormX.hose != "_stockings":
                     $ StormX.hose = "_stockings"
-                "The pantyhose would look good with that." if StormX.hose != "pantyhose":
-                    $ StormX.hose = "pantyhose"
-                "The ripped pantyhose would look good with that." if StormX.hose != "ripped_pantyhose" and "ripped_pantyhose" in StormX.inventory:
-                    $ StormX.hose = "ripped_pantyhose"
+                "The pantyhose would look good with that." if StormX.hose != "_pantyhose":
+                    $ StormX.hose = "_pantyhose"
+                "The ripped pantyhose would look good with that." if StormX.hose != "_ripped_pantyhose" and "_ripped_pantyhose" in StormX.inventory:
+                    $ StormX.hose = "_ripped_pantyhose"
                 "The stockings and garterbelt would look good with that." if StormX.hose != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in StormX.inventory:
                     $ StormX.hose = "_stockings_and_garterbelt"
                 "Just the garterbelt would look good with that." if StormX.hose != "garterbelt" and "_stockings_and_garterbelt" in StormX.inventory:

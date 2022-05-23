@@ -1960,7 +1960,7 @@ label Laura_Summon(approval_bonus=approval_bonus):
     $ LauraX.recent_history.append("summoned")
     $ Line = 0
     if "locked" in Player.traits:
-        call Locked_Door (LauraX)
+        call locked_door (LauraX)
         return
     $ LauraX.location = bg_current
     call Taboo_Level (0)
@@ -2613,7 +2613,7 @@ label Laura_Wardrobe_Menu:
                     "She pulls out her leather bra and slips it on under her [LauraX.top]."
                 else:
                     ch_l "Yeah, I don't think so."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if approval_check(LauraX, 1100, "LI", TabM=2) and LauraX.love > LauraX.inhibition:
@@ -2631,11 +2631,11 @@ label Laura_Wardrobe_Menu:
                         ch_l "Not in public, I won't!"
                     else:
                         ch_l "You're not that cute, [LauraX.player_petname]!"
-                    return 0
+                    return False
             "Never mind.":
                 ch_l "Ok. . ."
-                return 0
-        return 1
+                return False
+        return True
 
 
 
@@ -2748,7 +2748,7 @@ label Laura_Wardrobe_Menu:
                     return
                 else:
                     ch_l "Nope."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if approval_check(LauraX, 1100, "LI", TabM=3) and LauraX.love > LauraX.inhibition:
@@ -2766,12 +2766,12 @@ label Laura_Wardrobe_Menu:
                         ch_l "Yeah, but not in public, [LauraX.player_petname]!"
                     else:
                         ch_l "You aren't that cute, [LauraX.player_petname]!"
-                    return 0
+                    return False
             "Never mind.":
 
                 ch_l "Ok. . ."
-                return 0
-        return 1
+                return False
+        return True
 
 
 

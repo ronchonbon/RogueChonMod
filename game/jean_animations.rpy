@@ -2029,8 +2029,8 @@ label Jean_Doggy_Launch(Line=primary_action):
         return
     $ action_speed = 0
     call Jean_Hide (1)
-    show Jean_Doggy_Animation zorder 150 at sprite_location(stage_center+50)
-    with dissolve
+    # show Jean_Doggy_Animation zorder 150 at sprite_location(stage_center+50)
+    # with dissolve
     return
 
 label Jean_Doggy_Reset:
@@ -3835,8 +3835,8 @@ label Jean_BJ_Launch(Line=primary_action):
     if Line != "cum":
         $ primary_action = "blowjob"
 
-    show Jean_BJ_Animation zorder 150:
-        pos (645,510)
+    # show Jean_BJ_Animation zorder 150:
+    #     pos (645,510)
     if Taboo and Line == "L":
         if len(Present) >= 2:
             if Present[0] != JeanX:
@@ -4018,9 +4018,9 @@ label Jean_HJ_Launch(Line=primary_action):
     else:
         $ action_speed = 1
     pause 0.5
-    show Jean_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
-
-        offset (250,250)
+    # show Jean_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
+    #
+    #     offset (250,250)
     show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(stage_right):
         alpha 1
         ease 0.5 zoom 1.7 offset (-150,200)
@@ -4115,9 +4115,9 @@ label Jean_PJ_Launch(Line=primary_action):
             alpha 1
             zoom 1 offset (0,0) xpos JeanX.sprite_location
 
-    show Jean_PJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
-
-        offset (250,250)
+    # show Jean_PJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
+    #
+    #     offset (250,250)
     return
 
 label Jean_PJ_Reset:
@@ -5078,8 +5078,8 @@ label Jean_TJ_Launch(Line=primary_action):
     $ action_speed = 0
     if Line != "cum":
         $ primary_action = "titjob"
-    show Jean_TJ_Animation zorder 150:
-        pos (1000,1050)
+    # show Jean_TJ_Animation zorder 150:
+    #     pos (1000,1050)
     $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
     return

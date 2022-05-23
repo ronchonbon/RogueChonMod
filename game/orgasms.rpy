@@ -104,7 +104,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
             call AllReset (Girl)
             return
 
-        "Just fire away" if offhand_action == "jackin":
+        "Just fire away" if offhand_action == "jerking_off":
             if "cockout" not in Player.recent_history:
                 $ Player.spunk = "in"
                 "You cum in your pants."

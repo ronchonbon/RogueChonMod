@@ -1779,7 +1779,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
     $ RogueX.recent_history.append("summoned")
     $ Line = 0
     if "locked" in Player.traits:
-        call Locked_Door (RogueX)
+        call locked_door (RogueX)
         return
     call Taboo_Level (0)
     $ RogueX.change_outfit()
@@ -2589,7 +2589,7 @@ label Rogue_Wardrobe_Menu:
                     "She pulls out her tanktop and slips it on under her [RogueX.top]."
                 else:
                     ch_r "Yeah, I don't think so."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if approval_check(RogueX, 1100, "LI", TabM=2) and RogueX.love > RogueX.inhibition:
@@ -2607,12 +2607,12 @@ label Rogue_Wardrobe_Menu:
                         ch_r "Not in public, [RogueX.player_petname]!"
                     else:
                         ch_r "Don't push it, [RogueX.player_petname]."
-                    return 0
+                    return False
             "Never mind.":
 
                 ch_r "Ok. . ."
-                return 0
-        return 1
+                return False
+        return True
 
 
 
@@ -2666,8 +2666,8 @@ label Rogue_Wardrobe_Menu:
 
         "The tights would look good with that." if RogueX.hose != 'tights' and RogueX.legs != "_pants":
             $ RogueX.hose = "_tights"
-        "Your ripped tights would look good with that." if RogueX.hose != 'ripped_tights' and "ripped_tights" in RogueX.inventory and RogueX.legs != "_pants":
-            $ RogueX.hose = "ripped_tights"
+        "Your ripped tights would look good with that." if RogueX.hose != 'ripped_tights' and "_ripped_tights" in RogueX.inventory and RogueX.legs != "_pants":
+            $ RogueX.hose = "_ripped_tights"
         "You could lose the tights." if RogueX.hose == 'ripped_tights' or RogueX.hose == 'tights':
             $ RogueX.hose = ""
 
@@ -2755,7 +2755,7 @@ label Rogue_Wardrobe_Menu:
                     return
                 else:
                     ch_r "Nope."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if approval_check(RogueX, 1100, "LI", TabM=3) and RogueX.love > RogueX.inhibition:
@@ -2773,12 +2773,12 @@ label Rogue_Wardrobe_Menu:
                         ch_r "Not here,[RogueX.player_petname]!"
                     else:
                         ch_r "Not with you around,[RogueX.player_petname]!"
-                    return 0
+                    return False
             "Never mind.":
 
                 ch_r "Ok. . ."
-                return 0
-        return 1
+                return False
+        return True
 
 
 
@@ -2883,14 +2883,14 @@ label Rogue_Wardrobe_Menu:
                     $ RogueX.hose = ""
                 "The thigh-high hose would look good with that." if RogueX.hose != "_stockings" and RogueX.legs != "_pants":
                     $ RogueX.hose = "_stockings"
-                "The pantyhose would look good with that." if RogueX.hose != "pantyhose" and RogueX.legs != "_pants":
-                    $ RogueX.hose = "pantyhose"
+                "The pantyhose would look good with that." if RogueX.hose != "_pantyhose" and RogueX.legs != "_pants":
+                    $ RogueX.hose = "_pantyhose"
                 "The stockings would look good with that." if RogueX.hose != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in RogueX.inventory and RogueX.legs != "_pants":
                     $ RogueX.hose = "_stockings_and_garterbelt"
                 "Maybe just the garterbelt?" if RogueX.hose != "garterbelt" and "_stockings_and_garterbelt" in RogueX.inventory and RogueX.legs != "_pants":
                     $ RogueX.hose = "garterbelt"
-                "Your ripped pantyhose would look good with that." if RogueX.hose != "ripped_pantyhose" and "ripped_pantyhose" in RogueX.inventory and RogueX.legs != "_pants":
-                    $ RogueX.hose = "ripped_pantyhose"
+                "Your ripped pantyhose would look good with that." if RogueX.hose != "_ripped_pantyhose" and "_ripped_pantyhose" in RogueX.inventory and RogueX.legs != "_pants":
+                    $ RogueX.hose = "_ripped_pantyhose"
                 "Never mind":
                     pass
             jump Rogue_Clothes_Under

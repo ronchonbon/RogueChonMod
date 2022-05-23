@@ -839,11 +839,8 @@ label Kitty_Sex_Launch(Line=primary_action):
         return
     $ action_speed = 0
     call Kitty_Hide (1)
-    show Kitty_sex_animation zorder 150
-
-
-
-    with dissolve
+    # show Kitty_sex_animation zorder 150
+    # with dissolve
     return
 
 label Kitty_Sex_Reset:
@@ -2260,8 +2257,8 @@ label Kitty_Doggy_Launch(Line=primary_action):
         return
     $ action_speed = 0
     call Kitty_Hide (1)
-    show Kitty_Doggy_Animation zorder 150 at sprite_location(stage_center+50)
-    with dissolve
+    # show Kitty_Doggy_Animation zorder 150 at sprite_location(stage_center+50)
+    # with dissolve
     return
 
 label Kitty_Doggy_Reset:
@@ -2787,8 +2784,8 @@ label Kitty_BJ_Launch(Line=primary_action):
 
     show Kitty_sprite zorder KittyX.sprite_layer:
         alpha 0
-    show Kitty_blowjob_animation zorder 150:
-        pos (645,510)
+    # show Kitty_blowjob_animation zorder 150:
+    #     pos (645,510)
     return
 
 label Kitty_BJ_Reset:
@@ -3548,7 +3545,7 @@ label Kitty_TJ_Launch(Line=primary_action):
     $ action_speed = 0
     if Line != "cum":
         $ primary_action = "titjob"
-    show Kitty_TJ_Animation zorder 150
+    # show Kitty_TJ_Animation zorder 150
     $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
     return
@@ -3695,9 +3692,9 @@ label Kitty_HJ_Launch(Line=primary_action):
     else:
         $ action_speed = 1
     pause 0.5
-    show Kitty_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
-
-        offset (100,250)
+    # show Kitty_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
+    #
+    #     offset (100,250)
     return
 
 label Kitty_HJ_Reset:

@@ -1,5 +1,5 @@
 
-label Jackin(Girl=0, counter=0, temp_Girls=[]):
+label jerking_off(Girl=0, counter=0, temp_Girls=[]):
 
 
     if not Girl or Girl not in all_Girls:
@@ -12,7 +12,7 @@ label Jackin(Girl=0, counter=0, temp_Girls=[]):
 
     if "unseen" in Girl.recent_history:
         $ Player.recent_history.append("cockout")
-        $ offhand_action = "jackin"
+        $ offhand_action = "jerking_off"
         "You whip out your cock and start working it."
     else:
         if not Player.semen:
@@ -26,10 +26,10 @@ label Jackin(Girl=0, counter=0, temp_Girls=[]):
             $ Player.recent_history.append("cockout")
             call Seen_First_Peen (Girl, Partner)
 
-        $ offhand_action = "jackin"
-        if "jackin" in Girl.recent_history:
+        $ offhand_action = "jerking_off"
+        if "jerking_off" in Girl.recent_history:
             return
-        $ Girl.add_word(0,"jackin","jackin",0,0)
+        $ Girl.add_word(0,"jerking_off","jerking_off",0,0)
 
         if Girl == EmmaX and "classcaught" not in Girl.history:
             $ Girl.change_face("_surprised", 1)

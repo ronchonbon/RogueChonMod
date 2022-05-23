@@ -2037,7 +2037,7 @@ label Kitty_Summon(approval_bonus=approval_bonus):
     $ KittyX.recent_history.append("summoned")
     $ Line = 0
     if "locked" in Player.traits:
-        call Locked_Door (KittyX)
+        call locked_door (KittyX)
         return
     call Taboo_Level (0)
     $ KittyX.location = bg_current
@@ -2702,7 +2702,7 @@ label Kitty_Wardrobe_Menu:
                     "She pulls out her sports bra and passes it through her [KittyX.top]."
                 else:
                     ch_k "Yeah, I don't think so."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if approval_check(KittyX, 1100, "LI", TabM=2) and KittyX.love > KittyX.inhibition:
@@ -2720,13 +2720,13 @@ label Kitty_Wardrobe_Menu:
                         ch_k "Not in public, [KittyX.player_petname]!"
                     else:
                         ch_k "I don't like you {i}that{/i} much, [KittyX.player_petname]!"
-                    return 0
+                    return False
             "Never mind.":
 
 
                 ch_k "Ok. . ."
-                return 0
-        return 1
+                return False
+        return True
 
 
 
@@ -2829,7 +2829,7 @@ label Kitty_Wardrobe_Menu:
                     "She pulls out her green panties and pulls them up through her [KittyX.legs]."
                 else:
                     ch_k "Yeah, I don't think so."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if approval_check(KittyX, 1100, "LI", TabM=3) and KittyX.love > KittyX.inhibition:
@@ -2847,12 +2847,12 @@ label Kitty_Wardrobe_Menu:
                         ch_k "Not in public, [KittyX.player_petname]!"
                     else:
                         ch_k "I don't like you {i}that{/i} much, [KittyX.player_petname]!"
-                    return 0
+                    return False
             "Never mind.":
 
                 ch_k "Ok. . ."
-                return 0
-        return 1
+                return False
+        return True
 
 
 
@@ -2972,14 +2972,14 @@ label Kitty_Wardrobe_Menu:
                     $ KittyX.hose = "_stockings"
                 "The knee-high hose would look good with that." if KittyX.hose != "knee stockings" and "knee" in KittyX.inventory:
                     $ KittyX.hose = "knee stockings"
-                "The pantyhose would look good with that." if KittyX.hose != "pantyhose" and "pantyhose" in KittyX.inventory:
-                    $ KittyX.hose = "pantyhose"
+                "The pantyhose would look good with that." if KittyX.hose != "_pantyhose" and "_pantyhose" in KittyX.inventory:
+                    $ KittyX.hose = "_pantyhose"
                 "The stockings would look good with that." if KittyX.hose != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in KittyX.inventory:
                     $ KittyX.hose = "_stockings_and_garterbelt"
                 "Maybe just the garterbelt?" if KittyX.hose != "garterbelt" and "_stockings_and_garterbelt" in KittyX.inventory:
                     $ KittyX.hose = "garterbelt"
-                "Your ripped pantyhose would look good with that." if KittyX.hose != "ripped_pantyhose" and "ripped_pantyhose" in KittyX.inventory:
-                    $ KittyX.hose = "ripped_pantyhose"
+                "Your ripped pantyhose would look good with that." if KittyX.hose != "_ripped_pantyhose" and "_ripped_pantyhose" in KittyX.inventory:
+                    $ KittyX.hose = "_ripped_pantyhose"
                 "Never mind":
                     pass
             jump Kitty_Clothes_Under

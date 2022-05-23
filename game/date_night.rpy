@@ -471,7 +471,7 @@ label Date_Stood_Up(Girl=0):
     if Girl.location != bg_current:
         "[Girl.name] storms into the room."
         $ Girl.location = bg_current
-        call Display_Girl (Girl)
+        call show_girl (Girl)
     else:
         "[Girl.name] turns to you."
     $ Girl.change_face("_confused")
@@ -876,7 +876,7 @@ label Readytogo(Girl=0, R=0, temp_Girls=[]):
                 $ R.recent_history.append("summoned")
                 $ Line = 0
                 if "locked" in Player.traits:
-                    call Locked_Door (R)
+                    call locked_door (R)
                     return
                 $ R.location = bg_current
                 call Taboo_Level (0)
@@ -3266,7 +3266,7 @@ label Date_Sex_Break(Girl=0, Previous=0, Repeat=0):
             $ Previous = Party[0]
 
     if Previous not in all_Girls:
-        return 0
+        return False
 
     if Girl == Previous:
         "Tell Oni that on a date, a girl and previous were the same, [Girl.tag], DSB"
@@ -3274,7 +3274,7 @@ label Date_Sex_Break(Girl=0, Previous=0, Repeat=0):
     if Girl.GirlLikeCheck(Previous) >= 700 and Previous.GirlLikeCheck(Girl) >= 700:
 
         $ Previous.recent_history.append("noticed " + Girl.tag)
-        return 1
+        return True
     elif Previous == JeanX and not approval_check(Previous, 500, "L"):
 
         $ Previous.change_face("_sly",1,Eyes="_side")
@@ -3378,7 +3378,7 @@ label Date_Sex_Break(Girl=0, Previous=0, Repeat=0):
                 call Date_Bonus (Previous, -5)
 
             return 3
-    return 0
+    return False
 
 label Date_Paying(Activity="dinner", Total_Cost=0):
 

@@ -482,7 +482,7 @@ label player_room_entry:
 
     call event_calls
     call set_the_scene
-    jump Clear_Stack
+    jump clear_stack
 
 label player_room:
     $ bg_current = "bg_player"

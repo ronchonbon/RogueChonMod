@@ -2125,7 +2125,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
     $ EmmaX.recent_history.append("summoned")
     $ Line = 0
     if "locked" in Player.traits:
-        call Locked_Door (EmmaX)
+        call locked_door (EmmaX)
         return
     $ EmmaX.location = bg_current
     call Taboo_Level (0)
@@ -2822,7 +2822,7 @@ label Emma_Wardrobe_Menu:
                     "She pulls out her sports bra and slips it on under her [EmmaX.top]."
                 else:
                     ch_e "Yes, but I'd rather not."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if approval_check(EmmaX, 1100, "LI", TabM=(3-Public)) and EmmaX.love > EmmaX.inhibition:
@@ -2840,12 +2840,12 @@ label Emma_Wardrobe_Menu:
                         ch_e "I'm afraid I couldn't do that in public."
                     else:
                         ch_e "I could, but I wouldn't."
-                    return 0
+                    return False
             "Never mind.":
 
 
-                return 0
-        return 1
+                return False
+        return True
 
 
 
@@ -2955,10 +2955,10 @@ label Emma_Wardrobe_Menu:
                     return
                 elif EmmaX.Taboo and approval_check(EmmaX, 800, TabM=0):
                     ch_e "I like how you think, but not in public like this."
-                    return 0
+                    return False
                 else:
                     ch_e "I could, but I'd rather not."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if approval_check(EmmaX, 1100, "LI", TabM=(5-Public)) and EmmaX.love > EmmaX.inhibition:
@@ -2976,12 +2976,12 @@ label Emma_Wardrobe_Menu:
                         ch_e "I'm afraid not out here, [EmmaX.player_petname]!"
                     else:
                         ch_e "You wish, [EmmaX.player_petname]!"
-                    return 0
+                    return False
             "Never mind.":
 
                 ch_e "Ok. . ."
-                return 0
-        return 1
+                return False
+        return True
 
 
 
@@ -3078,10 +3078,10 @@ label Emma_Wardrobe_Menu:
                     $ EmmaX.hose = ""
                 "The thigh-high hose would look good with that." if EmmaX.hose != "_stockings" and "_stockings_and_garterbelt" in EmmaX.inventory:
                     $ EmmaX.hose = "_stockings"
-                "The pantyhose would look good with that." if EmmaX.hose != "pantyhose" and "pantyhose" in EmmaX.inventory:
-                    $ EmmaX.hose = "pantyhose"
-                "The ripped pantyhose would look good with that." if EmmaX.hose != "ripped_pantyhose" and "ripped_pantyhose" in EmmaX.inventory:
-                    $ EmmaX.hose = "ripped_pantyhose"
+                "The pantyhose would look good with that." if EmmaX.hose != "_pantyhose" and "_pantyhose" in EmmaX.inventory:
+                    $ EmmaX.hose = "_pantyhose"
+                "The ripped pantyhose would look good with that." if EmmaX.hose != "_ripped_pantyhose" and "_ripped_pantyhose" in EmmaX.inventory:
+                    $ EmmaX.hose = "_ripped_pantyhose"
                 "The stockings and garterbelt would look good with that." if EmmaX.hose != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in EmmaX.inventory:
                     $ EmmaX.hose = "_stockings_and_garterbelt"
                 "Maybe just the garterbelt?" if EmmaX.hose != "garterbelt" and "_stockings_and_garterbelt" in EmmaX.inventory:

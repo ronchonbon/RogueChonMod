@@ -348,7 +348,7 @@ label Emma_Caught_Classroom:
     $ EmmaX.ArmPose = 1
     $ EmmaX.change_outfit()
     $ bg_current = "bg_classroom"
-    call Display_Girl (EmmaX)
+    call show_girl (EmmaX)
     if "classcaught" in EmmaX.history:
         ch_e "I notice you make a habit of dropping in."
         $ EmmaX.change_outfit()
@@ -464,7 +464,7 @@ label Emma_Caught_Classroom:
                 $ Taboo = 0
                 $ EmmaX.Taboo = 0
                 if "Historia" in Player.traits:
-                    return 1
+                    return True
                 call Group_Strip (EmmaX)
             "Could you just keep going?":
                 $ EmmaX.change_stat("love", 70, 10)
@@ -484,7 +484,7 @@ label Emma_Caught_Classroom:
                         if "Historia" not in Player.traits:
                             call Seen_First_Peen (EmmaX)
                         "You begin to stroke your cock."
-                        $ offhand_action = "jackin"
+                        $ offhand_action = "jerking_off"
                     "No, you go ahead.":
                         $ EmmaX.change_face("_sad")
                         $ EmmaX.change_stat("love", 70, -10)
@@ -499,7 +499,7 @@ label Emma_Caught_Classroom:
                 $ girl_offhand_action = "fondle_breasts"
                 "She leans back and runs her fingertips along her breasts."
                 if "Historia" in Player.traits:
-                    return 1
+                    return True
                 call Emma_M_Cycle
             "Could I feel you up?":
                 $ EmmaX.change_stat("love", 70, 5)
@@ -512,7 +512,7 @@ label Emma_Caught_Classroom:
                 $ Taboo = 0
                 $ EmmaX.Taboo = 0
                 if "Historia" in Player.traits:
-                    return 1
+                    return True
                 call Emma_FB_Prep
             "Could you give me a hand? [[point to your cock]":
                 $ EmmaX.change_stat("love", 70, -5)
@@ -528,7 +528,7 @@ label Emma_Caught_Classroom:
                 $ Taboo = 0
                 $ EmmaX.Taboo = 0
                 if "Historia" in Player.traits:
-                    return 1
+                    return True
                 call Group_Strip (EmmaX)
             "I should just get going then.":
                 $ EmmaX.change_face("_surprised")
@@ -1109,7 +1109,7 @@ label Emma_BF:
             "[EmmaX.name] turns towards you and asks if the two of you can talk."
 
     call set_the_scene (0)
-    call Display_Girl (EmmaX)
+    call show_girl (EmmaX)
     "You can tell she's a bit uncomfortable about whatever she has to say."
     call Taboo_Level
     call clear_the_room (EmmaX)
@@ -1197,7 +1197,7 @@ label Emma_BF:
     $ EmmaX.change_face("_sexy")
     ch_e "So then. . . how would you like to celebrate?"
     if "Historia" in Player.traits:
-        return 1
+        return True
     $ approval_bonus = 10
     $ Player.add_word(1,"interruption")
     call enter_main_sex_menu(EmmaX)
@@ -1216,7 +1216,7 @@ label Emma_BF_Jerk:
         ch_e "I'm doing to consider us a couple whether you approve or not."
         ch_e "And with that, adieu."
         if "Historia" in Player.traits:
-            return 1
+            return True
         $ EmmaX.player_petnames.append("boyfriend")
         $ Achievements.append("I am not your Boyfriend!")
         $ bg_current = "bg_player"

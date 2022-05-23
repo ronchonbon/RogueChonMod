@@ -213,11 +213,11 @@ label Chat_Menu:
                 call Swap_Nearby (Girl)
             elif Room_Full():
                 "It's already pretty crowded here."
-                call Dismissed
+                call dismiss_menu
             else:
                 call expression Girl.tag + "_Summon"
         "Ask [Girl.name] to leave" if Girl.location == bg_current:
-            call Girl_Dismissed (Girl)
+            call dismiss_girl (Girl)
             return
         "Romance her":
 
@@ -614,7 +614,7 @@ label Switch_Chat:
     $ Line = 0
     return
 
-label Girl_Dismissed(Girl=0, Leaving=0):
+label dismiss_girl(Girl=0, Leaving=0):
     $ Girl = GirlCheck(Girl)
     if Girl in Party:
         $ Party.remove(Girl)

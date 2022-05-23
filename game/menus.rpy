@@ -354,7 +354,10 @@ label begging_menu(Girl, action):
 
             return
         "Maybe later?" if action in ["masturbation", "fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "fondle_ass", "handjob", "footjob", "blowjob", "dildo_pussy", "dildo_ass", "sex", "anal", "hotdog"] and "no_" + action not in Girl.daily_history:
-            $ Girl.change_face("_sexy")
+            if action == "masturbation":
+                $ Girl.change_face("_sexy", 1)
+            else:
+                $ Girl.change_face("_sexy")
 
             if action == "fondle_breasts" and Girl not in [LauraX, JubesX]:
                 "She re-adjusts her cleavage."
@@ -367,7 +370,7 @@ label begging_menu(Girl, action):
 
                 if action in ["fondle_breasts", "suck_breasts"]:
                     $ Girl.change_stat("love", 50, 1)
-            elif action in ["fondle_pussy"]:
+            elif action in ["masturbation", "fondle_pussy"]:
                 $ Girl.change_stat("love", 80, 2)
                 $ Girl.change_stat("inhibition", 70, 2)
             elif action in ["fondle_ass"]:
@@ -387,6 +390,16 @@ label begging_menu(Girl, action):
             $ Girl.daily_history.append("no_" + action)
 
             jump begging_rejected
+        "You look like you could use it. . ." if action == "masturbation":
+            if approval:
+                $ Girl.change_face("_sexy")
+                $ Girl.change_stat("obedience", 90, 2)
+                $ Girl.change_stat("obedience", 50, 2)
+                $ Girl.change_stat("inhibition", 70, 3)
+                $ Girl.change_stat("inhibition", 40, 2)
+
+                call begging_lines(Girl, action)
+                jump before_masturbation
         "Come on, please?" if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy", "blowjob"]:
             if approval:
                 $ Girl.change_face("_sexy")
@@ -410,41 +423,33 @@ label begging_menu(Girl, action):
                     $ Girl.change_stat("inhibition", 40, 2)
 
                 call begging_lines(Girl)
-
-                if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy"]:
-                    jump before_fondle
-                elif action in ["blowjob"]:
-                    $ line = renpy.random.choice(["Well, sure, ahhhhhh.",
-                        "Well. . . ok.",
-                        "I guess a taste couldn't hurt.",
-                        "I guess I could. . . whip it out.",
-                        "Fine. . . [She licks her lips].",
-                        "Heh, ok, alright."])
-                    ch_r "[line]"
-
-                    $ line = 0
-
-                    jump before_handjob
-
-                jump begging_approved
+                jump before_action
             else:
                 if action in ["fondle_thighs", "fondle_breasts", "suck_breasts", "fondle_pussy"]:
                     $ Girl.change_face("_sexy")
 
                     call please_not_good_enough_lines(Girl)
                 elif action in ["blowjob"]:
-                    if approvalcheck(Girl, 1100, TabM = 3): # 110, 125, 140, Taboo -120(230)             Handy instead?
+                    if approval_check(Girl, 1100, TabM = 3): # 110, 125, 140, Taboo -120(230)             Handy instead?
                         $ Girl.change_stat("inhibition", 80, 1)
                         $ Girl.change_stat("inhibition", 60, 3)
                         $ Girl.change_face("_confused", 1)
 
                         if Girl.action_counter["handjob"]:
                             ch_r "Maybe you'd settle for a handy?"
+                            ch_k "Maybe I could just use my hand?"
+                            ch_e "I could just stroke you off, perhaps?"
+                            ch_l "Couldn't I just use my hand again?{p}You seemed to like that."
+                            ch_s "I could just stroke you off, perhaps?"
                         else:
                             ch_r "I could maybe. . . [[she makes a jerking motion with her hand]?"
+                            ch_k "I could maybe. . . [[she makes a jerking motion with her hand]?"
+                            ch_e "Would my hand be an adequate substitute?"
+                            ch_l "I could maybe use my hand instead, how's that sound?"
+                            ch_s "Would my hand be an adequate substitute?"
 
                         menu:
-                            ch_r "What do you say?"
+                            ch_r ""
                             "Sure, that's fine.":
                                 $ Girl.change_stat("love", 80, 2)
                                 $ Girl.change_stat("inhibition", 60, 1)
@@ -452,11 +457,17 @@ label begging_menu(Girl, action):
 
                                 $ primary_action = "handjob"
 
-                                jump before_handjob
+                                jump before_action
                             "Nah, if it's not a BJ, forget it.":
                                 $ Girl.change_stat("love", 200, -2)
 
                                 ch_r "Ok, whatever."
+                                ch_k "Ok, your loss."
+                                ch_e "Pity."
+                                ch_l "Fine, be that way."
+                                $ JeanX.arms = ""
+                                ch_j "Too bad then."
+                                ch_s "That is unfortunate."
 
                                 $ Girl.change_stat("obedience", 70, 2)
         "I'm sure I can convince you later. . ." if action in ["eat_pussy", "eat_ass"] and "no_" + action not in Girl.daily_history:
@@ -485,7 +496,7 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("inhibition", 70, 3)
                 $ Girl.change_stat("inhibition", 40, 2)
 
-                jump before_fondle
+                jump before_action
             else:
                 $ Girl.change_face("_sexy")
 
@@ -501,7 +512,7 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("inhibition", 70, 1)
                 $ Girl.change_stat("inhibition", 40, 2)
 
-                jump before_fondle
+                jump before_action
             else:
                 $ Girl.change_face("_sexy")
 
@@ -515,10 +526,7 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("inhibition", 40, 2)
 
                 call begging_lines(Girl)
-
-                $ line = 0
-
-                jump before_handjob
+                jump before_action
         "I think this could be fun for both of us. . ." if action in ["titjob"]:
             if approval:
                 $ Girl.change_face("_sexy")
@@ -527,29 +535,29 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("inhibition", 70, 3)
                 $ Girl.change_stat("inhibition", 40, 2)
 
-                $ line = renpy.random.choice(["Well, ok, put it here.",
-                    "Well. . . ok.",
-                    "I guess.",
-                    "I guess, whip it out.",
-                    "Fine. . . [She drools a bit into her cleavage].",
-                    "Heh, ok, alright."])
-                ch_r "[line]"
-
-                $ line = 0
-
-                jump before_handjob
+                call trying_to_convince_lines(Girl, action)
+                jump before_action
             else:
-                $ approval = approvalcheck(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)             Handy instead?
+                $ approval = approval_check(Girl, 1100, TabM = 3) # 110, 125, 140, Taboo -120(230)             Handy instead?
 
                 if approval >= 2:
                     $ Girl.change_stat("inhibition", 80, 1)
                     $ Girl.change_stat("inhibition", 60, 3)
                     $ Girl.change_face("_confused", 1)
 
+                    call maybe_blowjob_instead_lines(Girl, action)
+
                     if Girl.action_counter["blowjob"]:
                         ch_r "I could just. . . blow you instead?"
+                        ch_e "You seemed to enjoy blowjobs, would that work instead?"
+                        ch_s "You seemed to enjoy blowjobs, would that work instead?"
                     else:
                         ch_r "I could maybe. . . you know, [[she pushes her tongue against the side of her cheek]?"
+                        ch_k "Could I[Girl.like]. . . blow you instead?"
+                        ch_e "Would you perhaps prefer a blowjob?"
+                        ch_l "I could maybe blow you?"
+                        ch_j "What about a blowjob then?"
+                        ch_s "Would you perhaps prefer a blowjob?"
 
                     menu:
                         extend ""
@@ -560,7 +568,7 @@ label begging_menu(Girl, action):
 
                             $ primary_action = "blowjob"
 
-                            jump before_handjob
+                            jump before_action
                         "Nah, it's all about dem titties.":
                             $ line = "no_BJ"
                 if approval:
@@ -568,10 +576,15 @@ label begging_menu(Girl, action):
                     $ Girl.change_stat("inhibition", 60, 3)
                     $ Girl.change_face("_confused", 1)
 
-                    if Girl.action_counter["handjob"]:
-                        ch_r "Maybe you'd settle for a handy?"
-                    else:
-                        ch_r "I could maybe. . . [[she makes a jerking motion with her hand]?"
+                    call maybe_handjob_instead_lines(Girl, action)
+
+                    ch_r "Maybe you'd settle for a handy?"
+                    ch_r "I could maybe. . . [[she makes a jerking motion with her hand]?"
+                    ch_k "Maybe you'd[Girl.like]settle for a handy?"
+                    ch_e "Perhaps a handjob?"
+                    ch_l "I could give you a handy?"
+                    ch_j "I could give you a hand job?"
+                    ch_s "Perhaps a handjob?"
 
                     menu:
                         extend ""
@@ -582,7 +595,7 @@ label begging_menu(Girl, action):
 
                             $ primary_action = "handjob"
 
-                            jump before_handjob
+                            jump before_action
                         "Seriously, titties." if line == "no_BJ":
                             $ line = 0
                         "Nah, it's all about dem titties." if line != "no_BJ":
@@ -590,7 +603,13 @@ label begging_menu(Girl, action):
 
                 $ Girl.change_stat("love", 200, -2)
 
+                call alternative_rejected_lines(Girl, action)
                 ch_r "Ok, whatever."
+                ch_k "Nah."
+                ch_e "Well, that's too bad."
+                ch_l "Nah."
+                ch_j "Well then too bad, I guess."
+                ch_s "Well. That is unfortunate. . ."
 
                 $ Girl.change_stat("obedience", 70, 2)
         "I think you'd like it. . ." if action in ["dildo_pussy", "dildo_ass"]:
@@ -601,13 +620,7 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("inhibition", 70, 3)
                 $ Girl.change_stat("inhibition", 40, 2)
 
-                $ line = renpy.random.choice(["Well, sure, stick it in.",
-                    "I suppose. . .",
-                    "You've got me there."])
-                ch_r "[line]"
-
-                $ line = 0
-
+                call trying_to_convince_lines(Girl, action)
                 jump before_action
         "I think you'd enjoy it as much as I would. . ." if action in ["sex"]:
             if approval:
@@ -617,13 +630,7 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("inhibition", 70, 3)
                 $ Girl.change_stat("inhibition", 40, 2)
 
-                $ line = renpy.random.choice(["Well, sure, stick it in.",
-                    "I suppose. . .",
-                    "You've got me there."])
-                ch_r "[line]"
-
-                $ line = 0
-
+                call trying_to_convince_lines(Girl, action)
                 jump before_action
         "I bet it would feel really good. . ." if action in ["anal"]:
             if approval:
@@ -633,13 +640,7 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("inhibition", 70, 3)
                 $ Girl.change_stat("inhibition", 40, 2)
 
-                $ line = renpy.random.choice(["Well, sure, stick it in.",
-                    "I suppose. . .",
-                    "You've got me there."])
-                ch_r "[line]"
-
-                $ line = 0
-
+                call trying_to_convince_lines(Girl, action)
                 jump before_action
         "You might like it. . ." if action in ["hotdog"]:
             if approval:
@@ -647,14 +648,10 @@ label begging_menu(Girl, action):
                 $ Girl.change_stat("obedience", 60, 2)
                 $ Girl.change_stat("inhibition", 50, 2)
 
-                $ line = renpy.random.choice(["Well, sure, give it a rub.",
-                    "I suppose. . .",
-                    "You've got me there."])
-                ch_r "[line]"
-
-                $ line = 0
-
+                call trying_to_convince_lines(Girl, action)
                 jump before_action
+        "Just get at it already." if action == "masturbation":
+            call forced_action(Girl, action)
         "[[Start caressing her thigh anyway]" if action == "fondle_thighs":
             call forced_action(Girl, action)
         "[[Grab her chest anyway]" if action == "fondle_breasts":
@@ -671,11 +668,11 @@ label begging_menu(Girl, action):
             call forced_action(Girl, action)
         "Come on, get to work." if action in ["handjob", "footjob"]:                                               # Pressured into it
             call forced_action(Girl, action)
-        "Come on, let me fuck those titties, [Girl.Pet]" if action in ["titjob"]:
+        "Come on, let me fuck those titties, [Girl.player_petname]" if action in ["titjob"]:
             $ Girl.namecheck() #checks reaction to petname
 
             call forced_action(Girl, action)
-        "Suck it, [Girl.Pet]" if action in ["blowjob"]:                                               # Pressured into it
+        "Suck it, [Girl.player_petname]" if action in ["blowjob"]:                                               # Pressured into it
             $ Girl.namecheck() #checks reaction to petname
 
             call forced_action(Girl, action)
@@ -749,7 +746,7 @@ label try_something_else_menu(Girl, action):
 
             jump action_cycle
         "No, get back down there." if action in ["handjob", "footjob", "titjob", "blowjob"]:
-            if approvalcheck(Girl, 1200) or approvalcheck(Girl, 500, "O"):
+            if approval_check(Girl, 1200) or approval_check(Girl, 500, "O"):
                 $ Girl.change_stat("love", 200, -5)
                 $ Girl.change_stat("obedience", 50, 3)
                 $ Girl.change_stat("obedience", 80, 2)
@@ -781,7 +778,7 @@ label try_something_else_menu(Girl, action):
 
             jump after_action
         "No, this is fun.":
-            if approvalcheck(Girl, 1200) or approvalcheck(Girl, 500, "O"):
+            if approval_check(Girl, 1200) or approval_check(Girl, 500, "O"):
                 $ Girl.change_stat("love", 200, -5)
                 $ Girl.change_stat("obedience", 50, 3)
                 $ Girl.change_stat("obedience", 80, 2)
@@ -858,9 +855,9 @@ label kiss_menu:
             "You release your concentration. . ."
 
             $ Player.focusing = 0
-        "Start jack'in it." if multi_action and offhand_action != "jackin":
-            call Jackin(focused_Girl)
-        "Stop jack'in it." if multi_action and offhand_action == "jackin":
+        "Start jack'in it." if multi_action and offhand_action != "jerking_off":
+            call jerking_off(focused_Girl)
+        "Stop jack'in it." if multi_action and offhand_action == "jerking_off":
             "You stop jack'in it."
 
             $ offhand_action = 0
@@ -1200,7 +1197,7 @@ label handjob_menu:
         "Suck on it." if primary_action == "blowjob" and action_speed != 3:
             $ action_speed = 3
 
-            if offhand_action == "jackin":
+            if offhand_action == "jerking_off":
                 "She dips her head a bit lower, and you move your hand out of the way."
         "Suck on it. (locked)" if primary_action == "blowjob" and action_speed == 3:
             pass
@@ -1210,7 +1207,7 @@ label handjob_menu:
                 $ focused_Girl.change_stat("obedience", 80, 30 - 3*focused_Girl.action_counter["blowjob"])
                 $ focused_Girl.recent_history.append("pushed")
 
-            if offhand_action == "jackin" and action_speed != 3:
+            if offhand_action == "jerking_off" and action_speed != 3:
                 "She takes it to the root, and you move your hand out of the way."
 
             $ action_speed = 4
@@ -1629,7 +1626,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
             $ Girl.change_stat("obedience", 70, 3)
             $ Girl.change_stat("inhibition", 50, 3)
 
-            if not approvalcheck(Girl, 700, "O", TabM=1): #checks if obedience is 700+
+            if not approval_check(Girl, 700, "O", TabM=1): #checks if obedience is 700+
                 $ Girl.change_face("_angry")
 
                 call were_done_here_lines(Girl)
@@ -1664,7 +1661,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
             $ Girl.change_stat("obedience", 70, 3)
             $ Girl.change_stat("inhibition", 50, 3)
 
-            if not approvalcheck(Girl, 700, "O", TabM=1):   #checks if obedience is 700+
+            if not approval_check(Girl, 700, "O", TabM=1):   #checks if obedience is 700+
                 $ Girl.change_face("_angry")
 
                 call were_done_here_lines(Girl)
@@ -1695,7 +1692,7 @@ label what_do_you_think_youre_doing_menu(Girl, action):
             $ Girl.change_stat("obedience", 70, 3)
             $ Girl.change_stat("inhibition", 50, 3)
 
-            if not approvalcheck(Girl, 500, "O", TabM=1): #checks if obedience is 700+
+            if not approval_check(Girl, 500, "O", TabM=1): #checks if obedience is 700+
                 $ Girl.change_face("_angry")
 
                 call were_done_here_lines(Girl)

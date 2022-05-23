@@ -80,7 +80,7 @@ init python:
                     update = 0
 
             if update:
-                CallHolder(update, "#FFFFFF", x_position)
+                call_holder(update, "#FFFFFF", x_position)
 
             stat = 100 if stat > 100 else stat
 
@@ -615,7 +615,7 @@ init python:
                     self.traits.remove(word)
             return
 
-        def change_stat(self, flavor=0, Check=100, Value=1, Greater=0, Type=0, Alt=[[],0, 0], Overflow=0, BStat=0, x_position = 0.75):
+        def change_stat(self, flavor=0, Check=100, value=1, Greater=0, Type=0, Alt=[[],0, 0], Overflow=0, BStat=0, x_position = 0.75):
 
 
 
@@ -627,7 +627,7 @@ init python:
             if self in Alt[0]:
 
                 Check = Alt[1] if Alt[1] else Check
-                Value = Alt[2] if Alt[2] else Value
+                value = Alt[2] if Alt[2] else value
 
             if flavor == "love" or flavor == "obedience" or flavor == "inhibition":
 
@@ -647,42 +647,42 @@ init python:
 
                 if Type >= Check:
 
-                    Type += Value
+                    Type += value
                 else:
 
-                    Value = 0
+                    value = 0
             else:
                 if Type <= Check:
-                    Type += Value
+                    Type += value
                 else:
-                    Value = 0
+                    value = 0
 
             if self.tag == "Jean" and flavor == "inhibition" and self.IX > 0:
 
                 Type += self.IX
 
-            if Value:
+            if value:
 
 
-                if self.tag == "Jean" and Value > 0:
+                if self.tag == "Jean" and value > 0:
                     if flavor == "obedience" and self.obedience <= 800 and Check < 800:
 
 
-                        Value = int(Value/2)
-                        Type -= Value
+                        value = int(value/2)
+                        Type -= value
                     elif flavor == "inhibition" and self.IX > 0:
                         if self.Taboo >= 40:
 
-                            Value += Value
-                            Type += Value
+                            value += value
+                            Type += value
                         if Type > 1000:
 
                             self.IX -= (Type - 1000)
                             Type = 1000
-                            Value = 0
+                            value = 0
                         elif Type > 700:
 
-                            self.IX -= int(Value/2)
+                            self.IX -= int(value/2)
                         self.IX = 0 if self.IX < 0 else self.IX
                     elif flavor == "love" and Type >= 500 and self.obedience < 700:
 
@@ -691,20 +691,20 @@ init python:
                         if self.love < 500:
 
                             self.love = 500
-                            Value = Type - 500
+                            value = Type - 500
 
 
 
 
-                        self.StatStore += Value
+                        self.StatStore += value
 
                         if Check > self.obedience:
 
                             flavor = "obedience"
-                            Value = int(Value/5)
-                            Type = self.obedience + Value
+                            value = int(value/5)
+                            Type = self.obedience + value
                         else:
-                            Value = 0
+                            value = 0
 
 
 
@@ -717,7 +717,7 @@ init python:
                     Color = "#FFF380"
                 elif flavor == "lust":
                     Color = "#FAAFBE"
-                    CallHolder(Value, Color, x_position)
+                    call_holder(value, Color, x_position)
                     if flavor == "lust" and Type >= 100 and not primary_action:
 
                         renpy.call("Girl_Cumming",self,1)
@@ -727,13 +727,13 @@ init python:
                     return
 
                 if Type > 1000:
-                    CallHolder((-(Type-1000-Value)), Color, x_position)
+                    call_holder((-(Type-1000-value)), Color, x_position)
                     if not self.Chat[4]:
 
-                        Value = 0
+                        value = 0
                     else:
 
-                        Value = Type - 1000
+                        value = Type - 1000
 
                         setattr(self,flavor,1000)
                         if flavor == "love":
@@ -742,24 +742,24 @@ init python:
                             elif self.Chat[4] == 2:
                                 flavor = "inhibition"
                             else:
-                                Value = 0
+                                value = 0
                         elif flavor == "obedience":
                             if self.Chat[4] == 3:
                                 flavor = "inhibition"
                             elif self.Chat[4] == 4:
                                 flavor = "love"
                             else:
-                                Value = 0
+                                value = 0
                         elif flavor == "inhibition":
                             if self.Chat[4] == 5:
                                 flavor = "obedience"
                             elif self.Chat[4] == 6:
                                 flavor = "love"
                             else:
-                                Value = 0
+                                value = 0
 
                         Type = getattr(self,flavor)
-                        Type += Value
+                        Type += value
 
                         if flavor == "love":
 
@@ -772,9 +772,9 @@ init python:
                             Color = "#FFFFFF"
 
 
-                if Value:
+                if value:
 
-                    CallHolder(Value, Color, x_position)
+                    call_holder(value, Color, x_position)
 
 
 
@@ -1168,13 +1168,13 @@ init python:
                                 ch_s("I -am- afraid Charles would want me to wear a suit. . .", interact=True)
                             elif self == JubesX:
                                 ch_v("I haven't picked out a suit yet. . .", interact=True)
-                        return 0
+                        return False
                     elif self == KittyX and "_blue_skirt" not in self.inventory and self.inhibition <= 400:
                         self.outfit = self.today_outfit
                         if "swim" not in self.daily_history:
                             ch_k("I don't know, I do have a suit, but it's a little daring. . .", interact=True)
                             ch_k("If only I had a little skirt or something. . .", interact=True)
-                        return 0
+                        return False
                     else:
                         self.Swim[0] = 1
                 Holderoutfit = self.Swim[:]
@@ -1212,8 +1212,8 @@ init python:
 
             if "ripped" in self.daily_history and "modesty" not in self.recent_history:
 
-                self.hose = "ripped_pantyhose" if self.hose == "pantyhose" else self.hose
-                self.hose = "ripped_tights" if self.hose == "_tights" else self.hose
+                self.hose = "_ripped_pantyhose" if self.hose == "_pantyhose" else self.hose
+                self.hose = "_ripped_tights" if self.hose == "_tights" else self.hose
             if self.underwear and self.underwear != "_shorts" and "pantyless" in self.daily_history and "modesty" not in self.daily_history:
 
                 if outfitTemp != "sleep" and outfitTemp != "gym":
@@ -1229,7 +1229,7 @@ init python:
                     renpy.say(None,self.name+" throws her clothes back on.", interact=True)
             if Undressed:
                 return 2
-            return 1
+            return True
 
 
 
@@ -1257,7 +1257,7 @@ init python:
         def ChestNum(self,Up=1):
 
             if Up and self.top_pulled_up and self.bra:
-                return 1
+                return True
             if self == RogueX:
                 if self.bra in ("_tank", "_buttoned_tank"):
                     return 5
@@ -1285,12 +1285,12 @@ init python:
             if self.accessory == "suspenders" or self.accessory == "suspenders2":
                 return 2
 
-            return 0
+            return False
 
         def OverNum(self,Up=1):
 
             if Up and self.top_pulled_up and self.top:
-                return 1
+                return True
             if self == RogueX:
                 if self.top == "_mesh_top":
                     return 2
@@ -1299,14 +1299,14 @@ init python:
                     return 2
             if self == StormX:
                 if self.top == "_towel":
-                    return 0
+                    return False
             if self == JubesX:
                 if Up and self.top_pulled_up and self.accessory:
-                    return 1
+                    return True
                 if self.accessory == "_jacket":
                     return 3
                 if self.accessory == "open_jacket":
-                    return 1
+                    return True
                 if self.accessory == "shut_jacket":
                     return 5
             if self.top == "_towel":
@@ -1322,7 +1322,7 @@ init python:
             if self.top:
                 return 5
 
-            return 0
+            return False
 
         def PantsNum(self,Up=1):
 
@@ -1333,7 +1333,7 @@ init python:
                     return 5
 
             if Up and self.upskirt and self.legs:
-                return 1
+                return True
 
             if self == RogueX and self.underwear == "_shorts":
                 return 6
@@ -1350,15 +1350,15 @@ init python:
             if self.legs == "mesh_pants":
                 return 2
             if self.legs:
-                return 10
+                return True0
 
 
-            return 0
+            return False
 
         def PantiesNum(self,Up=1):
 
             if Up and self.underwear_pulled_down and self.underwear:
-                return 1
+                return True
             if self.underwear == "_lace_panties":
                 return 2
             if self.underwear == "sports_panties" or self.underwear == "_shorts":
@@ -1367,26 +1367,26 @@ init python:
                 return 7
             if self.underwear:
                 return 4
-            return 0
+            return False
 
         def HoseNum(self,Up=1):
 
             if Up and self.hose and (self.underwear_pulled_down or self.upskirt):
-                return 1
+                return True
             if self.hose == "_stockings":
-                return 1
-            if self.hose == "pantyhose":
+                return True
+            if self.hose == "_pantyhose":
                 return 6
             if self.hose == "_tights":
-                return 10
+                return True0
             if self.hose == "stockings and gaterbelt":
                 return 4
-            if self.hose == "ripped_pantyhose":
+            if self.hose == "_ripped_pantyhose":
                 return 4
-            if self.hose == "ripped_tights":
+            if self.hose == "_ripped_tights":
                 return 4
 
-            return 0
+            return False
 
         def ClothingCheck(self,C = 0):
             C = 0
@@ -1454,26 +1454,26 @@ init python:
 
             return getattr(self,"Like"+Chr.tag)
 
-        def GirlLikeUp(self,Chr=0,Value=0,Like=0):
+        def GirlLikeUp(self,Chr=0,value=0,Like=0):
 
             if "Jeaned" in self.traits:
 
                 Like = getattr(JeanX,"LikeS"+self.tag)
-                if Like + Value > 1000:
+                if Like + value > 1000:
                     setattr(JeanX,"LikeS"+self.tag, 1000)
-                elif Like + Value < 0:
+                elif Like + value < 0:
                     setattr(JeanX,"LikeS"+self.tag, 0)
                 else:
-                    setattr(JeanX,"LikeS"+self.tag, Value + Like)
+                    setattr(JeanX,"LikeS"+self.tag, value + Like)
                 return
 
             Like = getattr(self,"Like"+Chr.tag)
-            if Like + Value > 1000:
+            if Like + value > 1000:
                 setattr(self,"Like"+Chr.tag, 1000)
-            elif Like + Value < 0:
+            elif Like + value < 0:
                 setattr(self,"Like"+Chr.tag, 0)
             else:
-                setattr(self,"Like"+Chr.tag, Value + Like)
+                setattr(self,"Like"+Chr.tag, value + Like)
             return
 
         def GLG(self, ChrB = 0, Check=200, Modifier = 1, Auto = 0, Jealousy = 0, Ok = 0, Likes=0):
@@ -1586,7 +1586,7 @@ init python:
 
 
             if self.petname == self.name:
-                return 0
+                return False
             if self.Taboo:
 
                 counter = int(self.Taboo/10)
@@ -1597,7 +1597,7 @@ init python:
                     self.change_stat("love", 80, 1)
                 else:
                     self.change_stat("love", 50, -1)
-                    return 1
+                    return True
             elif self.petname in ("_sexy", "lover", "beloved"):
                 if approval_check(self, 900, TabM=1,Alt=[[LauraX],1100]):
                     self.change_stat("love", 80, 2)
@@ -1607,7 +1607,7 @@ init python:
                     self.change_stat("love", 50, (-1-counter))
                     self.change_stat("obedience", 50, 1)
                     self.change_stat("inhibition", 20, -1)
-                    return 1
+                    return True
 
             elif self.petname == "slave":
                 if approval_check(self, 800, "O", TabM=3,Alt=[[EmmaX,StormX],900]):
@@ -1625,7 +1625,7 @@ init python:
                     self.change_stat("love", 50, -1, 1)
                     self.change_stat("obedience", 50, 1)
                     self.change_stat("inhibition", 50, -1)
-                    return 1
+                    return True
             elif self.petname == "pet":
                 if approval_check(self, 1500, TabM=2,Alt=[[LauraX],800]):
                     self.change_stat("lust", 90, (3+counter))
@@ -1641,7 +1641,7 @@ init python:
                     self.change_stat("love", 50, -1, 1)
                     self.change_stat("obedience", 50, 1)
                     self.change_stat("inhibition", 50, -1)
-                    return 1
+                    return True
             elif self.petname == "slut":
                 if approval_check(self, 500, "O", TabM=2) or approval_check(self, 500, "I", TabM=2,Alt=[[LauraX],400]):
                     self.change_stat("lust", 90, (4+counter))
@@ -1658,7 +1658,7 @@ init python:
                     self.change_stat("love", 50, (-1-counter), 1)
                     self.change_stat("obedience", 50, 1)
                     self.change_stat("inhibition", 20, -1)
-                    return 1
+                    return True
             elif self.petname == "whore":
                 if approval_check(self, 600, "O", TabM=2,Alt=[[EmmaX],700]) or approval_check(self, 600, "I", TabM=2,Alt=[[LauraX],400]):
                     self.change_stat("lust", 90, 4)
@@ -1676,7 +1676,7 @@ init python:
                     self.change_stat("obedience", 50, 1)
                     self.change_stat("inhibition", 21, 1, 1)
                     self.change_stat("inhibition", 20, -1)
-                    return 1
+                    return True
             elif self.petname == "sugartits":
                 if approval_check(self, 1500, TabM=1,Alt=[[EmmaX],1300]):
                     self.change_stat("obedience", 80, 1)
@@ -1688,7 +1688,7 @@ init python:
                     self.change_stat("love", 50, (-1-counter))
                     self.change_stat("obedience", 50, 1)
                     self.change_stat("inhibition", 20, -1)
-                    return 1
+                    return True
             elif self.petname == "sex friend":
                 if approval_check(self, 750, "O", TabM=1) or approval_check(self, 600, "I", TabM=1):
                     self.change_stat("lust", 90, 3)
@@ -1706,7 +1706,7 @@ init python:
                     self.change_stat("love", 50, (-1-counter), 1)
                     self.change_stat("obedience", 50, 1)
                     self.change_stat("inhibition", 20, -1)
-                    return 1
+                    return True
             elif self.petname == "fuckbuddy":
                 if approval_check(self, 700, "O", TabM=2) or approval_check(self, 700, "I", TabM=1):
                     self.change_stat("lust", 90, 3)
@@ -1724,7 +1724,7 @@ init python:
                     self.change_stat("love", 60, (-2-counter), 1)
                     self.change_stat("obedience", 60, 1)
                     self.change_stat("inhibition", 20, -1)
-                    return 1
+                    return True
             elif self.petname in ("baby girl", "mommy"):
                 if approval_check(self, 1200, TabM=1):
                     self.change_stat("obedience", 80, 1)
@@ -1736,35 +1736,35 @@ init python:
                     self.change_stat("love", 50, (-1-counter))
                     self.change_stat("obedience", 50, 1)
                     self.change_stat("inhibition", 20, -1)
-                    return 1
+                    return True
 
             elif self.petname == "chere":
                 if approval_check(self, 600, "L", TabM=1):
                     self.change_stat("love", 80, 2)
                 else:
                     self.change_stat("love", 50, -1)
-                    return 1
+                    return True
 
             elif self.petname == "kitten":
                 if approval_check(self, 600, "L", TabM=1):
                     self.change_stat("love", 80, 2)
                 else:
                     self.change_stat("love", 50, -1)
-                    return 1
+                    return True
 
             elif self.petname == "darling":
                 if approval_check(self, 600, "L", TabM=1):
                     self.change_stat("love", 80, 2)
                 else:
                     self.change_stat("love", 50, -1)
-                    return 1
+                    return True
 
             elif self.petname == "Wolvie":
                 if approval_check(self, 500, "I", TabM=1):
                     self.change_stat("love", 80, 1)
                 else:
                     self.change_stat("love", 50, -1)
-                    return 1
+                    return True
             elif self.petname == "X-23":
                 if approval_check(self, 800, "O"):
                     self.change_stat("lust", 90, 3)
@@ -1776,8 +1776,8 @@ init python:
                     self.change_stat("obedience", 30, 2)
                     self.change_stat("obedience", 50, 2)
                     self.change_stat("inhibition", 50, -1)
-                    return 1
-            return 0
+                    return True
+            return False
 
 
 
@@ -1787,7 +1787,7 @@ init python:
 
 
 
-label Clothing_Schedule_Check(Girl=0, Changed=0, Value=0, Count=0):
+label Clothing_Schedule_Check(Girl=0, Changed=0, value=0, Count=0):
 
 
 
@@ -1798,7 +1798,7 @@ label Clothing_Schedule_Check(Girl=0, Changed=0, Value=0, Count=0):
 
     while Count < 9:
         if Girl.clothing[Count] == Changed:
-            if Value:
+            if value:
 
                 if Girl.clothing[Count] == 3 and Girl.Custom1[0] == 2:
                     pass

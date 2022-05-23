@@ -1068,7 +1068,7 @@ label Storm_BF:
     $ StormX.drain_word("asked_to_meet")
 
     call set_the_scene (0)
-    call Display_Girl (StormX)
+    call show_girl (StormX)
     call Taboo_Level
     call clear_the_room (StormX)
     $ StormX.daily_history.append("relationship")

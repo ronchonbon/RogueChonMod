@@ -664,7 +664,7 @@ label Swim_Shop:
 
                 $ Girl.sprite_location = stage_center
                 $ Girl.sprite_layer = 100
-                call Display_Girl (Girl, 0, 0)
+                call show_girl (Girl, 0, 0)
 
                 hide blackscreen onlayer black
             $ Player.traits.append("locked")
@@ -1065,7 +1065,7 @@ label Lingerie_Shop:
                 
                 $ Girl.sprite_location = stage_center
                 $ Girl.sprite_layer = 100
-                call Display_Girl (Girl, 0, 0)
+                call show_girl (Girl, 0, 0)
 
                 hide blackscreen onlayer black
             $ Player.traits.append("locked")
@@ -1306,9 +1306,9 @@ label Lingerie_Shop:
                             $ Cart.append("socks")
 
 
-                    "Pantyhose (locked)" if Girl.hose == "pantyhose":
+                    "Pantyhose (locked)" if Girl.hose == "_pantyhose":
                         pass
-                    "Pantyhose" if Girl.hose != "pantyhose" and Girl != LauraX:
+                    "Pantyhose" if Girl.hose != "_pantyhose" and Girl != LauraX:
                         if Girl.SeenPussy or approval_check(Girl, 900, TabM=2):
                             $ Girl.change_face("_sexy")
                             Girl.voice "Sure. . ."
@@ -1319,24 +1319,24 @@ label Lingerie_Shop:
                             $ Girl.hose = ""
                             call expression Girl.tag + "_First_Bottomless"
                             pause 0.3
-                            $ Girl.hose = "pantyhose"
+                            $ Girl.hose = "_pantyhose"
                             $ Girl.underwear_pulled_down = 0
                             $ Girl.upskirt = 0
-                            if Second and "pantyhose" not in Cart:
+                            if Second and "_pantyhose" not in Cart:
                                 $ Girl.GirlLikeUp(Second,1)
                                 $ Second.GirlLikeUp(Girl,2)
                         else:
                             Girl.voice "I'll need some privacy here. . ."
                             show blackscreen onlayer black
-                            $ Girl.hose = "pantyhose"
+                            $ Girl.hose = "_pantyhose"
                             "You back out of the room for a moment. . ."
                             hide blackscreen onlayer black
-                        if "pantyhose" in Cart:
+                        if "_pantyhose" in Cart:
                             pass
-                        elif "pantyhose" in Girl.inventory:
+                        elif "_pantyhose" in Girl.inventory:
                             Girl.voice "I do already have these though."
                         else:
-                            $ Cart.append("pantyhose")
+                            $ Cart.append("_pantyhose")
 
 
                     "Lose the [Girl.hose]" if Girl.hose:
@@ -1687,7 +1687,7 @@ label Lingerie_Shop:
                                         Girl.voice "These are pretty nice. . ."
 
 
-                                "The_pantyhose" if "pantyhose" in Cart:
+                                "The_pantyhose" if "_pantyhose" in Cart:
                                     "You agree to buy [Girl.name] the pantyhose."
                                     if Girl.tag + "_pantyhose" in Player.inventory:
                                         "wait, you already have one of those."
@@ -1695,14 +1695,14 @@ label Lingerie_Shop:
                                         $ Player.inventory.remove(Girl.tag + "_pantyhose")
                                     elif Player.cash < 50:
                                         "You look at the tag, and actually, they're $50, you can't afford them."
-                                        $ Cart.remove("pantyhose")
+                                        $ Cart.remove("_pantyhose")
                                     else:
                                         $ Player.cash -= 50
-                                    if "pantyhose" in Cart:
+                                    if "_pantyhose" in Cart:
 
-                                        $ Cart.remove("pantyhose")
+                                        $ Cart.remove("_pantyhose")
                                         $ Girl.change_face("_bemused",1)
-                                        $ Girl.inventory.append("pantyhose")
+                                        $ Girl.inventory.append("_pantyhose")
                                         $ Player.add_word(1,"purchased")
                                         $ Girl.change_stat("love", 200, 5)
                                         $ Girl.change_stat("obedience", 200, 5)

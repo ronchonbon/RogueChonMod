@@ -1521,7 +1521,7 @@ label Primary_SexDialog(GirlA=Primary, TempLine=0, TempLust=0, TempLust2=0):
     elif primary_action == "masturbation":
         call Girl_Self_Lines (GirlA)
         if "unseen" not in GirlA.recent_history:
-            if offhand_action == "jackin" or "cockout" in Player.recent_history:
+            if offhand_action == "jerking_off" or "cockout" in Player.recent_history:
                 $ TempLust += 2
 
 
@@ -1842,7 +1842,7 @@ label Offhand_Dialog(Girl=Primary, TempLine=0):
         $ PrimaryLust += 3 if Girl.lust > 70 and Girl.used_to_anal else 1
         $ TempFocus += 2 if Player.focus < 90 else 0
 
-    elif offhand_action == "jackin":
+    elif offhand_action == "jerking_off":
         if primary_action == "masturbation":
             $ Line = " You stroke your cock as you watch her go."
         elif primary_action == "lesbian":
@@ -1932,7 +1932,7 @@ label Offhand_Set(action_context=action_context, Tempprimary_action=offhand_acti
                 $ action_context = "offhand"
                 call action(Chr)
             "Also jack it." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "dildo_pussy", "dildo_anal"):
-                call Jackin (Chr)
+                call jerking_off (Chr)
             "Nevermind":
                 pass
     else:
@@ -4701,7 +4701,7 @@ label not_ready_to_stop_narrations(Girl, action):
 
     return
 
-label auto_accepted_narrations(Girl, action)
+label auto_accepted_narrations(Girl, action):
     if action == "fondle_thighs":
         "As you caress her thigh, [Girl.name] glances at you, and smiles."
     elif action == "fondle_breasts":

@@ -71,7 +71,7 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
     $ Line = 0
 
 
-    if offhand_action == "jackin":
+    if offhand_action == "jerking_off":
         $ Girl.eyes = "_down"
         if Girl == RogueX:
             ch_r "And why is your cock out like that?!"
@@ -1151,9 +1151,9 @@ label Les_Cycle(Girl=focused_Girl):
                 "\"Ahem. . .\"" if "unseen" in Girl.recent_history:
                     jump Les_Interupted
 
-                "Start jack'in it." if offhand_action != "jackin":
-                    call Jackin (Girl)
-                "Stop jack'in it." if offhand_action == "jackin":
+                "Start jack'in it." if offhand_action != "jerking_off":
+                    call jerking_off (Girl)
+                "Stop jack'in it." if offhand_action == "jerking_off":
                     $ offhand_action = 0
 
                 "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
@@ -1506,7 +1506,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
                 ch_e "I can't imagine why you would think I would engage in such behavior with a student!"
             call remove_girl (EmmaX)
             "She quickly leaves the room."
-            return 0
+            return False
 
     if not Speaker.remaining_actions:
 
@@ -1524,7 +1524,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
             ch_s "I cannot right now, I am sorry."
         elif Speaker == JubesX:
             ch_v "Sorry, I'm just worn out. . ."
-        return 0
+        return False
 
     if Speaker.event_counter["been_with_girl"]:
         $ approval_bonus += 10
@@ -3372,11 +3372,11 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                     $ Girl2 = temp_Girls[0]
                     $ temp_Girls = [1]
                 else:
-                    return 0
+                    return False
             $ temp_Girls.remove(temp_Girls[0])
     if Girl not in active_Girls or Girl2 not in active_Girls:
 
-        return 0
+        return False
 
     show Cellphone at sprite_location(stage_left)
 

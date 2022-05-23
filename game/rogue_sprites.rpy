@@ -248,7 +248,7 @@ layeredimage Rogue_head:
         "images/Rogue_blowjob/Rogue_blowjob_mouth_sucking.png"
     elif renpy.showing("Rogue_blowjob_animation") and action_speed:
         Null()
-    elif RogueX.mouth != "_smirk":
+    elif RogueX.mouth not in ["_smirk", "_grimace"]:
         "images/Rogue_blowjob/Rogue_blowjob_mouth[RogueX.mouth].png"
     else:
         "images/Rogue_blowjob/Rogue_blowjob_mouth_smile.png"

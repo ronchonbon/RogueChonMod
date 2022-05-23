@@ -1964,7 +1964,7 @@ label Jubes_Summon(approval_bonus=approval_bonus):
     $ JubesX.recent_history.append("summoned")
     $ Line = 0
     if "locked" in Player.traits:
-        call Locked_Door (JubesX)
+        call locked_door (JubesX)
         return
     $ JubesX.location = bg_current
     call Taboo_Level (0)
@@ -2728,7 +2728,7 @@ label Jubes_Wardrobe_Menu:
                     "She pulls out her sports bra and slips it on under her [JubesX.top]."
                 else:
                     ch_v "Yeah, that wouldn't help."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if approval_check(JubesX, 1100, "LI", TabM=2) and JubesX.love > JubesX.inhibition:
@@ -2746,11 +2746,11 @@ label Jubes_Wardrobe_Menu:
                         ch_v "Not in public, I won't!"
                     else:
                         ch_v "Nah."
-                    return 0
+                    return False
             "Never mind.":
                 ch_v "Ok. . ."
-                return 0
-        return 1
+                return False
+        return True
 
 
 
@@ -2849,7 +2849,7 @@ label Jubes_Wardrobe_Menu:
                     return
                 else:
                     ch_v "Nope."
-                    return 0
+                    return False
             "You could always just wear nothing at all. . .":
 
                 if approval_check(JubesX, 1100, "LI", TabM=3) and JubesX.love > JubesX.inhibition:
@@ -2867,12 +2867,12 @@ label Jubes_Wardrobe_Menu:
                         ch_v "Yeah, but not in public, [JubesX.player_petname]!"
                     else:
                         ch_v "Nah."
-                    return 0
+                    return False
             "Never mind.":
 
                 ch_v "Ok. . ."
-                return 0
-        return 1
+                return False
+        return True
 
 
 
@@ -2956,10 +2956,10 @@ label Jubes_Wardrobe_Menu:
                     $ JubesX.hose = ""
                 "The thigh-high hose would look good with that." if JubesX.hose != "_stockings":
                     $ JubesX.hose = "_stockings"
-                "The pantyhose would look good with that." if JubesX.hose != "pantyhose" and "pantyhose" in JubesX.inventory:
-                    $ JubesX.hose = "pantyhose"
-                "The ripped pantyhose would look good with that." if JubesX.hose != "ripped_pantyhose" and "ripped_pantyhose" in JubesX.inventory:
-                    $ JubesX.hose = "ripped_pantyhose"
+                "The pantyhose would look good with that." if JubesX.hose != "_pantyhose" and "_pantyhose" in JubesX.inventory:
+                    $ JubesX.hose = "_pantyhose"
+                "The ripped pantyhose would look good with that." if JubesX.hose != "_ripped_pantyhose" and "_ripped_pantyhose" in JubesX.inventory:
+                    $ JubesX.hose = "_ripped_pantyhose"
                 "The tall socks would look good with that." if JubesX.hose != "socks" and "socks" in JubesX.inventory:
                     $ JubesX.hose = "socks"
                 "The stockings and garterbelt would look good with that." if JubesX.hose != "_stockings_and_garterbelt" and "_stockings_and_garterbelt" in JubesX.inventory:

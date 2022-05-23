@@ -124,8 +124,6 @@ label action(Girl):
 
         if approval >= 2:
             call action_accepted(Girl, primary_action)
-            label begging_approved:
-            jump before_action
         else:
             call action_disapproved(Girl, primary_action)
 
@@ -468,7 +466,7 @@ label after_action:
         if "unsatisfied" in focused_Girl.recent_history:
             call unsatisfied_reactions(Girl, primary_action)
 
-    if primary_action == "kiss" and not action_context and focused_Girl.action_counter["kiss"] > 5 and focused_Girl.lust > 50 and approvalcheck(focused_Girl, 950):
+    if primary_action == "kiss" and not action_context and focused_Girl.action_counter["kiss"] > 5 and focused_Girl.lust > 50 and approval_check(focused_Girl, 950):
         call would_you_like_more_lines(Girl, primary_action)
 
     $ approval_bonus = 0

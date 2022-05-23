@@ -821,11 +821,11 @@ label Gifts:
 
                     "Give her the pantyhose." if Girl.tag + "_pantyhose" in Player.inventory:
 
-                        if "pantyhose" not in Girl.inventory:
+                        if "_pantyhose" not in Girl.inventory:
                             "You give [Girl.name] the pantyhose."
                             $ Girl.change_face("_bemused")
                             $ Player.inventory.remove(Girl.tag + "_pantyhose")
-                            $ Girl.inventory.append("pantyhose")
+                            $ Girl.inventory.append("_pantyhose")
                             $ Girl.change_stat("love", 200, 5)
                             $ Girl.change_stat("obedience", 200, 5)
                             $ Girl.change_stat("inhibition", 200, 5)

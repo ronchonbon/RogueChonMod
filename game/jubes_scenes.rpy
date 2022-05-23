@@ -714,11 +714,11 @@ label Jubes_Sunshock:
 
     if JubesX.addiction <= 50 or time_index > 2:
 
-        return 0
+        return False
     $ JubesX.change_face("_sad",1)
     if "sunshock" in JubesX.recent_history:
         ch_v "Like I said, I'm not up for the sunshine."
-        return 1
+        return True
     $ JubesX.add_word(1,"sunshock",0,0,0)
     ch_v "Oh, wait, I'm kinda on a \"low charge\" at the moment, so I don't really want to go out in the sunlight?"
     menu:
@@ -729,12 +729,12 @@ label Jubes_Sunshock:
             $ JubesX.change_stat("inhibition", 90, 1)
             $ JubesX.change_face("_smile",1)
             ch_v "Thanks for understanding. . ."
-            return 1
+            return True
 
         "I could always. . . come get you?" if bg_current != JubesX.location and JubesX not in Party:
 
             ch_v "Oh, that could be nice. I'll see you then."
-            return 1
+            return True
 
         "I could always. . . top you off?" if bg_current == JubesX.location or JubesX in Party:
 
@@ -870,14 +870,14 @@ label Jubes_Sunshock:
                 else:
                     $ JubesX.change_face("_angry",1)
                     ch_v "You have to be kidding! I'd catch fire!"
-                return 1
+                return True
             elif approval_check(JubesX, 1600) or approval_check(JubesX, 500, "O"):
                 $ JubesX.change_stat("obedience", 90, 2)
                 $ JubesX.change_stat("inhibition", 80, 2)
                 ch_v "I guess I could manage it for a little bit. . ."
             else:
                 ch_v "Grow up. . ."
-                return 1
+                return True
         "Come on, don't be like that.":
 
 
@@ -893,15 +893,15 @@ label Jubes_Sunshock:
                 else:
                     $ JubesX.change_face("_angry",1)
                     ch_v "You have to be kidding! I'd catch fire!"
-                return 1
+                return True
             elif approval_check(JubesX, 1600) or approval_check(JubesX, 500, "O"):
                 $ JubesX.change_stat("obedience", 90, 2)
                 $ JubesX.change_stat("inhibition", 80, 2)
                 ch_v "I guess I could manage it for a little bit. . ."
             else:
                 ch_v "Grow up. . ."
-                return 1
-    return 0
+                return True
+    return False
 
 
 
@@ -1184,7 +1184,7 @@ label Jubes_BF(temp_Girls=[]):
             "[JubesX.name] turns towards you and motions that she wants to speak to you alone."
     $ JubesX.drain_word("asked_to_meet")
     call set_the_scene (0)
-    call Display_Girl (JubesX)
+    call show_girl (JubesX)
     "She looks a bit concerned and you can tell she's a bit anxious about whatever she has to say."
     call Taboo_Level
     call clear_the_room (JubesX)
@@ -1487,7 +1487,7 @@ label Jubes_BF(temp_Girls=[]):
     $ JubesX.change_face("_sly",1)
     ch_v "So, did you have any plans for the next few minutes? . ."
     if "Historia" in Player.traits:
-        return 1
+        return True
     $ approval_bonus = 10
     $ Player.add_word(1,"interruption")
     call Jubes_SexMenu
@@ -2138,7 +2138,7 @@ label Jubes_Sub:
 
     $ JubesX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (JubesX)
+    call show_girl (JubesX)
     call clear_the_room (JubesX)
     call set_the_scene
     call Taboo_Level
@@ -2511,7 +2511,7 @@ label Jubes_Master:
 
     $ JubesX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (JubesX)
+    call show_girl (JubesX)
     call clear_the_room (JubesX)
     call set_the_scene
     $ JubesX.daily_history.append("relationship")
@@ -2841,7 +2841,7 @@ label Jubes_Fuckbuddy:
     $ JubesX.outfit = "casual1"
     $ JubesX.today_outfit = "casual1"
     $ JubesX.change_outfit("casual1")
-    call Display_Girl (JubesX)
+    call show_girl (JubesX)
     call Taboo_Level
     $ primary_action = "masturbation"
     $ girl_offhand_action = "fondle_pussy"

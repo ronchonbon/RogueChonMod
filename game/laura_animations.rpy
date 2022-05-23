@@ -2098,8 +2098,8 @@ label Laura_Doggy_Launch(Line=primary_action):
         return
     $ action_speed = 0
     call Laura_Hide (1)
-    show Laura_Doggy_Animation zorder 150 at sprite_location(stage_center+150)
-    with dissolve
+    # show Laura_Doggy_Animation zorder 150 at sprite_location(stage_center+150)
+    # with dissolve
     return
 
 label Laura_Doggy_Reset:
@@ -5061,8 +5061,8 @@ label Laura_BJ_Launch(Line=primary_action):
 
     show Laura_Sprite zorder LauraX.sprite_layer:
         alpha 0
-    show Laura_BJ_Animation zorder 150:
-        pos (645,510)
+    # show Laura_BJ_Animation zorder 150:
+    #     pos (645,510)
     return
 
 label Laura_BJ_Reset:
@@ -5225,9 +5225,9 @@ label Laura_HJ_Launch(Line=primary_action):
         $ action_speed = 1
     pause .5
     $ LauraX.ArmPose = 1
-    show Laura_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
-
-        offset (250,250)
+    # show Laura_HJ_Animation zorder 150 at sprite_location(stage_center) with easeinbottom:
+    #
+    #     offset (250,250)
     return
 
 label Laura_HJ_Reset:
@@ -6361,8 +6361,8 @@ label Laura_TJ_Launch(Line=primary_action):
     $ action_speed = 0
     if Line != "cum":
         $ primary_action = "titjob"
-    show Laura_TJ_Animation zorder 150:
-        pos (700,520)
+    # show Laura_TJ_Animation zorder 150:
+    #     pos (700,520)
     $ Player.sprite = 1
     hide blackscreen onlayer black with dissolve
     return

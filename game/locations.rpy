@@ -73,9 +73,9 @@ label Misplaced:
 
     scene onlayer black
     $ Player.drain_word("locked",0,0,1)
-    $ StackDepth = renpy.call_stack_depth()
-    while StackDepth > 0:
-        $ StackDepth -= 1
+    $ stack_depth = renpy.call_stack_depth()
+    while stack_depth > 0:
+        $ stack_depth -= 1
         $ renpy.pop_call()
     if bg_current == "bg_player":
         jump player_room
@@ -387,18 +387,18 @@ label Training:
 label Rogue_TightsRipped(Count=0):
     if RogueX.hose == "_tights":
         $ Count = 1
-        $ RogueX.hose = "ripped_tights"
+        $ RogueX.hose = "_ripped_tights"
         $ RogueX.change_face("_angry")
-        if "ripped_tights" in RogueX.inventory:
+        if "_ripped_tights" in RogueX.inventory:
             ch_r "Damnation, that's another pair ruined!"
         else:
             $ Count = 2
             ch_r "Well that's a good pair of tights down the chute."
-    elif RogueX.hose == "pantyhose":
+    elif RogueX.hose == "_pantyhose":
         $ Count = 1
-        $ RogueX.hose = "ripped_pantyhose"
+        $ RogueX.hose = "_ripped_pantyhose"
         $ RogueX.change_face("_angry")
-        if "ripped_pantyhose" in RogueX.inventory:
+        if "_ripped_pantyhose" in RogueX.inventory:
             ch_r "Tsk, another pair ruined!"
         else:
             $ Count = 2

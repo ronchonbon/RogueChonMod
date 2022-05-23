@@ -411,7 +411,7 @@ label Jean_Like:
         $ JeanX.location = bg_current
         "[JeanX.name] walks up to you."
     call set_the_scene (0)
-    call Display_Girl (JeanX)
+    call show_girl (JeanX)
     call clear_the_room (JeanX)
     call set_the_scene
     $ JeanX.daily_history.append("relationship")
@@ -536,7 +536,7 @@ label Jean_Love:
         $ JeanX.location = bg_current
         "[JeanX.name] walks up to you."
     call set_the_scene (0)
-    call Display_Girl (JeanX)
+    call show_girl (JeanX)
     call clear_the_room (JeanX)
     call set_the_scene
     $ JeanX.daily_history.append("relationship")
@@ -755,7 +755,7 @@ label Jean_Sub:
         $ JeanX.location = bg_current
         "[JeanX.name] walks up to you."
     call set_the_scene (0)
-    call Display_Girl (JeanX)
+    call show_girl (JeanX)
     call clear_the_room (JeanX)
     call set_the_scene
     $ JeanX.daily_history.append("relationship")
@@ -896,7 +896,7 @@ label Jean_Master:
         $ JeanX.location = bg_current
         "[JeanX.name] walks up to you."
     call set_the_scene (0)
-    call Display_Girl (JeanX)
+    call show_girl (JeanX)
     call clear_the_room (JeanX)
     call set_the_scene
     $ JeanX.daily_history.append("relationship")

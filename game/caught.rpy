@@ -1681,7 +1681,7 @@ label Girls_Caught_Lesing(Girl=0, Girl2=0, temp_Girls=[]):
             $ temp_Girls.remove(temp_Girls[0])
 
     if not Girl or not Girl2:
-        return 1
+        return True
 
     $ Girl.drain_word("lesbian",1,0)
     $ Girl2.drain_word("lesbian",1,0)
@@ -2090,7 +2090,7 @@ label Girl_Caught_Shower(Girl=0):
     if Line == "leaving":
         $ Girl.change_outfit(6)
     $ Line = 0
-    return 0
+    return False
 
 
 

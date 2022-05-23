@@ -2,13 +2,13 @@ label addiction_event(Girl):
     $ Girl.drain_word("asked_to_meet")
 
     call set_the_scene
-    call shift_focus (Girl)
+    call shift_focus(Girl)
 
     $ Girl.Event[1] += 1
 
     $ Player.add_word(1,0,"fix")
 
-    call Locked_Door (Girl)
+    call locked_door(Girl)
 
     if not _return:
         return
@@ -1764,7 +1764,7 @@ label addiction_fix(Girl):
     $ Girl.location = bg_current
     $ Girl.change_outfit(Changed=1)
 
-    call Locked_Door(Girl)
+    call locked_door(Girl)
 
     if not _return:
         return

@@ -292,7 +292,7 @@ label tour_parting:
                 $ RogueX.change_stat("inhibition", 10, 20)
                 $ RogueX.change_stat("inhibition", 50, 10)
                 if "Historia" in Player.traits:
-                    return 1
+                    return True
                 $ primary_action = "kiss"
                 call action(RogueX)
                 if "_angry" in RogueX.recent_history:
@@ -328,7 +328,7 @@ label tour_parting:
 
     $ RogueX.location = "bg_rogue"
     if "Historia" in Player.traits:
-        return 0
+        return False
     $ bg_current = "bg_player"
     call wait
     $ bg_current = "bg_player"
@@ -399,7 +399,7 @@ label Rogue_BF:
 
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (RogueX)
+    call show_girl (RogueX)
     call clear_the_room (RogueX)
     call Taboo_Level
     $ RogueX.daily_history.append("relationship")
@@ -483,7 +483,7 @@ label Rogue_BF:
     $ RogueX.change_face("_sexy")
     ch_r "Now, . . . boyfriend. . . how would you like to celebrate?"
     if "Historia" in Player.traits:
-        return 1
+        return True
     $ approval_bonus = 10
     call shift_focus(RogueX)
     call enter_main_sex_menu
@@ -502,7 +502,7 @@ label Rogue_BF_Jerk:
         ch_r "Hrmph. I don't care what you want, we're dating. Deal with it."
         ch_r "Now I need some alone time though."
         if "Historia" in Player.traits:
-            return 1
+            return True
         $ RogueX.player_petnames.append("boyfriend")
         $ Achievements.append("I am not your Boyfriend!")
         $ bg_current = "bg_player"
@@ -520,7 +520,7 @@ label Rogue_BF_Jerk:
     else:
         "[RogueX.name] storms off."
     if "Historia" in Player.traits:
-        return 1
+        return True
     $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
     call remove_girl (RogueX)
@@ -546,7 +546,7 @@ label Rogue_Love:
     $ bg_current = "bg_rogue"
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (RogueX)
+    call show_girl (RogueX)
     call clear_the_room (RogueX)
     call Taboo_Level
     $ RogueX.daily_history.append("relationship")
@@ -620,7 +620,7 @@ label Rogue_Love:
                 $ RogueX.change_stat("inhibition", 30, 30)
                 ch_r "Hmm. . ."
                 if "Historia" in Player.traits:
-                    return 1
+                    return True
                 call Rogue_SexAct ("sex")
                 return
             "I have something else in mind. . .[[choose another activity]":
@@ -638,7 +638,7 @@ label Rogue_Love:
     else:
         ch_r "Now, lover. . . was there anything else you felt like doing to celebrate?"
     if "Historia" in Player.traits:
-        return 1
+        return True
     if "_stockings_and_garterbelt" not in RogueX.inventory:
         $ RogueX.inventory.append("_stockings_and_garterbelt")
     $ approval_bonus = 20
@@ -660,7 +660,7 @@ label Rogue_Love_Jerk:
         ch_r "I. . . I don't care, I love you too much anyways."
         ch_r "I need some time to myself though."
         if "Historia" in Player.traits:
-            return 1
+            return True
         $ RogueX.player_petnames.append("lover")
         $ Achievements.append("One Sided Love")
         $ RogueX.location = "bg_rogue"
@@ -673,7 +673,7 @@ label Rogue_Love_Jerk:
     $ Count = (100* RogueX.Event[6])
     $ RogueX.change_stat("love", 200, -Count)
     if "Historia" in Player.traits:
-        return 0
+        return False
     $ RogueX.location = "bg_rogue"
     $ bg_current = "bg_player"
     call remove_girl (RogueX)
@@ -737,7 +737,7 @@ label Rogue_Sub:
     $ Player.add_word(1,"interruption")
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (RogueX)
+    call show_girl (RogueX)
     call clear_the_room (RogueX)
     call Taboo_Level
     $ RogueX.daily_history.append("relationship")
@@ -803,7 +803,7 @@ label Rogue_Sub:
     $ RogueX.change_face("_sexy")
     ch_r "Now, sir. . . was there anything else you wished me to do to celebrate?"
     if "Historia" in Player.traits:
-        return 1
+        return True
     if "_stockings_and_garterbelt" not in RogueX.inventory:
         $ RogueX.inventory.append("_stockings_and_garterbelt")
     $ approval_bonus = 10
@@ -856,7 +856,7 @@ label Rogue_Master:
     $ Player.add_word(1,"interruption")
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (RogueX)
+    call show_girl (RogueX)
     call clear_the_room (RogueX)
     call Taboo_Level
     $ RogueX.daily_history.append("relationship")
@@ -928,7 +928,7 @@ label Rogue_Master:
     $ RogueX.change_face("_sexy")
     ch_r "Now, master. . . was there anything else you wished me to do to celebrate?"
     if "Historia" in Player.traits:
-        return 1
+        return True
     $ approval_bonus = 20
     call shift_focus(RogueX)
     call enter_main_sex_menu
@@ -994,7 +994,7 @@ label Rogue_Sexfriend:
     $ RogueX.player_petnames.append("sex friend")
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (RogueX)
+    call show_girl (RogueX)
     call clear_the_room (RogueX)
     call Taboo_Level
     $ RogueX.change_face("_smile", 1)
@@ -1049,7 +1049,7 @@ label Rogue_Sexfriend:
         $ RogueX.change_face("_sexy")
         ch_r "Now, sex friend. . . how would you like to celebrate?"
         if "Historia" in Player.traits:
-            return 1
+            return True
     $ Player.add_word(1,"interruption")
     $ approval_bonus = 25
     call shift_focus(RogueX)
@@ -1109,7 +1109,7 @@ label Rogue_Fuckbuddy:
 
     $ RogueX.location = bg_current
     call set_the_scene (0)
-    call Display_Girl (RogueX)
+    call show_girl (RogueX)
     call clear_the_room (RogueX)
     call Taboo_Level
     $ RogueX.change_face("_bemused", 1)
@@ -1144,7 +1144,7 @@ label Rogue_Fuckbuddy:
                 $ RogueX.top = 0
                 $ RogueX.bra = 0
                 if "Historia" in Player.traits:
-                    return 1
+                    return True
                 call Rogue_First_Topless (1)
                 call Rogue_Breasts_Launch
                 "Rogue, throws her top off, grabs you and shoves your head into her cleavage."
@@ -1164,7 +1164,7 @@ label Rogue_Fuckbuddy:
         $ RogueX.change_face("_sexy")
         ch_r "Now, -heh-, fuck buddy. . . let's make this official!"
     if "Historia" in Player.traits:
-        return 1
+        return True
     $ approval_bonus = 30
     $ Player.add_word(1,"interruption")
     call shift_focus(RogueX)
@@ -1183,7 +1183,7 @@ label Rogue_Fuckbuddy_Jerk:
         $ RogueX.change_outfit()
         ch_r "Look, I don't care what you call it. Just let me know if you want a tumble."
         if "Historia" in Player.traits:
-            return 1
+            return True
         call Rogue_First_Topless (1)
         $ RogueX.player_petnames.append("fuck buddy")
         $ Achievements.append("Stalwart as the mount")
