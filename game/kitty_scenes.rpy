@@ -240,7 +240,7 @@ label meet_Kitty:
 
     $ KittyX.location = "bg_kitty"
 
-    hide Kitty_sprite
+    hide Kitty_sprite with easeoutleft
 
     "She jogs off down the path, and you continue on to class."
 
@@ -251,8 +251,6 @@ label meet_Kitty:
     $ bg_current = "bg_classroom"
 
     $ round -= 10
-
-    call shift_focus(RogueX)
 
     return
 

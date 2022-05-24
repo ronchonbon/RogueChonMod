@@ -657,8 +657,7 @@ label Girls_Caught(Girl=0, TotalCaught=0, Shame=0, Count=0, T_Pet=0, temp_Girls=
     call remove_girl ("all")
     "You return to your room"
     hide Xavier_sprite
-    $ bg_current = "bg_player"
-    jump Misplaced
+    jump player_room
 
 
 
@@ -667,8 +666,7 @@ label Xavier_Plan(GirlX=0):
         "The Professor seems pretty out of it."
         "You don't think you'll be able to get anything more out of him today."
         "You leave him to it."
-        $ bg_current = "bg_player"
-        jump Misplaced
+        jump player_room
 
 
     call shift_focus (GirlX)
@@ -1189,10 +1187,9 @@ label Xavier_Plan(GirlX=0):
     $ Player.daily_history.append("Xavier")
     call remove_girl ("all")
     hide Xavier_sprite
-    $ bg_current = "bg_player"
     call set_the_scene
     "You return to your room"
-    jump Misplaced
+    jump player_room
 
 
 
@@ -1795,9 +1792,7 @@ label girl_caught_showering(Girl):
             $ Girl.lust = 25
             $ Girl.thirst -= int(Girl.thirst/2) if Girl.thirst >= 50 else int(Girl.thirst/4)
 
-            $ bg_current = "bg_campus"
-
-            jump Misplaced
+            jump campus
 
     if knock:
         "You knock on the door. You hear some shuffling inside"
@@ -1865,9 +1860,7 @@ label girl_caught_showering(Girl):
 
             call expression Girl.tag + "_SexAct" pass ("masturbation")
 
-            $ bg_current = "bg_showerroom"
-
-            jump Misplaced
+            jump shower_room
         elif D20 >= 15:
             call set_the_scene(check_if_dressed = False)
 

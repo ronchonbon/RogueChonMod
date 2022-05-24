@@ -121,7 +121,7 @@ label auto_approved_reactions(Girl, action):
     return
 
 label auto_rejected_reactions(Girl, action):
-    call auto_rejected_changes(Girl action)
+    call auto_rejected_changes(Girl, action)
 
     if action in ["fondle_thighs", "suck_breasts", "fondle_pussy", "finger_ass", "eat_ass"]:
         $ Girl.change_face("_surprised")
@@ -667,8 +667,6 @@ label first_action_approval(Girl, action):
     else:
         call first_action_approval_reactions(Girl, action)
 
-    jump before_action
-
     return
 
 label first_action_response(Girl, action):
@@ -797,12 +795,14 @@ label action_approved(Girl, action):
         $ Girl.change_face("_sexy", 1)
 
         call recent_action_lines(Girl, action)
-        jump before_action
+
+        return True
     elif action in Girl.daily_history:
         $ Girl.change_face("_sexy", 1)
 
         call daily_action_lines(Girl, action)
-        jump before_action
+
+        return True
     elif Girl.action_counter[action] < 3:
         $ Girl.change_face("_sexy", 1)
         $ Girl.Brows = "_confused"
@@ -815,7 +815,7 @@ label action_approved(Girl, action):
 
         call used_to_action_lines(Girl, action)
 
-    return
+    return False
 
 label action_disapproved(Girl, action):
     if action in fondle_actions:
@@ -892,7 +892,8 @@ label action_accepted(Girl, action):
             call accepted_without_question_lines(Girl, action)
 
     call action_accepted_changes(Girl, action)
-    jump before_action
+
+    return
 
 label action_rejected(Girl, action):
     $ Girl.arm_pose = 1

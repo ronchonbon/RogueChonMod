@@ -2,55 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/utilities.rpy", line 1185: invalid syntax
-    event_Girls[0]blushing = "_blush1"
-                          ^
-    
-
-File "game/utilities.rpy", line 1186: invalid syntax
-    event_Girls[0]grool = 2
-                       ^
-    
-
-File "game/utilities.rpy", line 1188: invalid syntax
-    event_Girls[0]blushing = "_blush1"
-                          ^
-    
-
-File "game/utilities.rpy", line 1189: invalid syntax
-    event_Girls[0]grool = 1
-                       ^
-    
-
-File "game/utilities.rpy", line 1191: invalid syntax
-    event_Girls[0]grool = 0
-                       ^
-    
-
-File "game/utilities.rpy", line 1204: invalid syntax
-    event_Girls[0]location = event_Girls[0]home if bg_current != event_Girls[0]home else "bg_campus"
-                          ^
-    
-
-File "game/utilities.rpy", line 1207: invalid syntax
-    event_Girls[0]add_word(1,0,"wants_to_masturbate",0,0)
-                          ^
-    
-
-File "game/utilities.rpy", line 1211: invalid syntax
-    event_Girls[0]add_word(1,0,"will_masturbate",0,0)
-                          ^
-    
-
-File "game/utilities.rpy", line 1214: invalid syntax
-    event_Girls[0]location = event_Girls[0]weekly_schedule[weekday][time_index]
-                          ^
-    
-
-File "game/utilities.rpy", line 1219: invalid syntax
-    event_Girls[0]spunk = []
-                       ^
-    
+File "game/locations.rpy", line 496: expected 'label_name_declare' not found.
+    label:
+         ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Tue May 24 01:39:44 2022
+Tue May 24 03:18:22 2022

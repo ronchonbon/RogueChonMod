@@ -306,12 +306,12 @@ label check_who_is_present(hold = True):
     return
 
 label check_addiction:
-    $ temp_Girls = active_Girls[:]
+    $ addicted_Girls = active_Girls[:]
 
-    $ renpy.random.shuffle(temp_Girls)
+    $ renpy.random.shuffle(addicted_Girls)
 
-    if JubesX in temp_Girls and JubesX.addiction >= 40 and JubesX.resistance:
-        $ temp_Girls.remove(JubesX)
+    if JubesX in addicted_Girls and JubesX.addiction >= 40 and JubesX.resistance:
+        $ addicted_Girls.remove(JubesX)
 
         if "sunshine" not in JubesX.history or "addiction" in JubesX.daily_history:
             pass
@@ -343,70 +343,70 @@ label check_addiction:
 
                 return
 
-    while temp_Girls:
-        if "locked" in Player.traits and temp_Girls[0].location != bg_current:
+    while addicted_Girls:
+        if "locked" in Player.traits and addicted_Girls[0].location != bg_current:
             pass
-        elif "asked_for_fix" in Player.daily_history and "asked_to_meet" not in temp_Girls[0].daily_history:
+        elif "asked_for_fix" in Player.daily_history and "asked_to_meet" not in addicted_Girls[0].daily_history:
             pass
-        elif temp_Girls[0].event_happened[3]:
+        elif addicted_Girls[0].event_happened[3]:
             pass
-        elif "_angry" not in temp_Girls[0].recent_history and "addiction" not in temp_Girls[0].daily_history and temp_Girls[0].remaining_actions >= 1:
-            if (temp_Girls[0].addiction >= 60 or (temp_Girls[0].addiction >= 40 and temp_Girls[0] == JubesX)) and temp_Girls[0].resistance:
-                if bg_current == temp_Girls[0].home or bg_current == "bg_player":
-                    call addiction_fix(temp_Girls[0])
+        elif "_angry" not in addicted_Girls[0].recent_history and "addiction" not in addicted_Girls[0].daily_history and addicted_Girls[0].remaining_actions >= 1:
+            if (addicted_Girls[0].addiction >= 60 or (addicted_Girls[0].addiction >= 40 and addicted_Girls[0] == JubesX)) and addicted_Girls[0].resistance:
+                if bg_current == addicted_Girls[0].home or bg_current == "bg_player":
+                    call addiction_fix(addicted_Girls[0])
                 else:
-                    if "asked_to_meet" in temp_Girls[0].recent_history:
+                    if "asked_to_meet" in addicted_Girls[0].recent_history:
                         pass
-                    elif "asked_to_meet" in temp_Girls[0].daily_history and temp_Girls[0].addiction >= 80:
-                        "[temp_Girls[0].name] texts you. . ."
-                        temp_Girls[0].voice "I know I asked to meet you in your room earlier, but I'm serious, this is important."
+                    elif "asked_to_meet" in addicted_Girls[0].daily_history and addicted_Girls[0].addiction >= 80:
+                        "[addicted_Girls[0].name] texts you. . ."
+                        addicted_Girls[0].voice "I know I asked to meet you in your room earlier, but I'm serious, this is important."
 
                         $ Player.add_word(1,"asked_for_fix",0,0,0)
 
-                        $ temp_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
+                        $ addicted_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
 
                         call return_to_room
 
                         return
                     else:
-                        "[temp_Girls[0].name] texts and asks if you could meet her in your room later."
+                        "[addicted_Girls[0].name] texts and asks if you could meet her in your room later."
 
-                        $ temp_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
+                        $ addicted_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
 
                         call return_to_room
 
                         return
-            elif temp_Girls[0].resistance:
+            elif addicted_Girls[0].resistance:
                 pass
-            elif temp_Girls[0] == JubesX and temp_Girls[0].addiction < 50:
+            elif addicted_Girls[0] == JubesX and addicted_Girls[0].addiction < 50:
                 pass
-            elif (temp_Girls[0].addiction >= 35 and not temp_Girls[0].event_happened[1]) or (temp_Girls[0].addiction >= 60 and temp_Girls[0].event_happened[1] <= 2) or temp_Girls[0].addiction >= 90:
-                if bg_current == temp_Girls[0].home or bg_current == "bg_player":
-                    call addiction_event(temp_Girls[0])
+            elif (addicted_Girls[0].addiction >= 35 and not addicted_Girls[0].event_happened[1]) or (addicted_Girls[0].addiction >= 60 and addicted_Girls[0].event_happened[1] <= 2) or addicted_Girls[0].addiction >= 90:
+                if bg_current == addicted_Girls[0].home or bg_current == "bg_player":
+                    call addiction_event(addicted_Girls[0])
                 else:
-                    if "asked_to_meet" in temp_Girls[0].recent_history:
+                    if "asked_to_meet" in addicted_Girls[0].recent_history:
                         pass
-                    elif "asked_to_meet" in temp_Girls[0].daily_history and temp_Girls[0].addiction >= 80:
-                        "[temp_Girls[0].name] texts you. . ."
-                        temp_Girls[0].voice "I know I asked to meet you in your room earlier, but I'm serious, this is important."
+                    elif "asked_to_meet" in addicted_Girls[0].daily_history and addicted_Girls[0].addiction >= 80:
+                        "[addicted_Girls[0].name] texts you. . ."
+                        addicted_Girls[0].voice "I know I asked to meet you in your room earlier, but I'm serious, this is important."
 
                         $ Player.add_word(1,"asked_for_fix",0,0,0)
 
-                        $ temp_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
+                        $ addicted_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
 
                         call return_to_room
 
                         return
                     else:
-                        "[temp_Girls[0].name] texts and asks if you could meet her in your room later."
+                        "[addicted_Girls[0].name] texts and asks if you could meet her in your room later."
 
-                        $ temp_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
+                        $ addicted_Girls[0].add_word(1,"asked_to_meet","asked_to_meet",0,0)
 
                         call return_to_room
 
                         return
 
-        $ temp_Girls.remove(temp_Girl[0])
+        $ addicted_Girls.remove(addicted_Girls[0])
 
     return
 

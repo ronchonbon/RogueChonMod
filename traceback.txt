@@ -1,50 +1,260 @@
 ﻿I'm sorry, but an uncaught exception occurred.
 
 While running game code:
-  File "game/locations.rpy", line 132, in script call
+  File "game/locations.rpy", line 135, in script call
     call world_map
-  File "game/locations.rpy", line 610, in script call
+  File "game/locations.rpy", line 719, in script call
     call world_map
-  File "game/locations.rpy", line 610, in script call
+  File "game/locations.rpy", line 798, in script call
     call world_map
-  File "game/locations.rpy", line 132, in script call
+  File "game/locations.rpy", line 949, in script call
+    call shower_room
+  File "game/locations.rpy", line 1170, in script call
     call world_map
-  File "game/locations.rpy", line 709, in script call
+  File "game/locations.rpy", line 135, in script call
     call world_map
-  File "game/locations.rpy", line 132, in script call
+  File "game/locations.rpy", line 682, in script call
+    call take_class
+  File "game/classroom.rpy", line 52, in script call
+    call event_calls
+  File "game/locations.rpy", line 135, in script call
     call world_map
-  File "game/locations.rpy", line 325, in script call
-    call set_the_scene
-  File "game/utilities.rpy", line 730, in script
-    return
-Exception: Could not find return label (u'game/utilities.rpy', 1653339557, 3).
+  File "game/locations.rpy", line 719, in script call
+    call world_map
+  File "game/locations.rpy", line 798, in script call
+    call world_map
+  File "game/locations.rpy", line 1170, in script call
+    call world_map
+  File "game/locations.rpy", line 135, in script call
+    call world_map
+  File "game/locations.rpy", line 687, in script call
+    call take_class
+  File "game/classroom.rpy", line 52, in script call
+    call event_calls
+  File "game/locations.rpy", line 135, in script call
+    call world_map
+  File "game/locations.rpy", line 798, in script call
+    call world_map
+  File "game/locations.rpy", line 1170, in script call
+    call world_map
+  File "game/locations.rpy", line 135, in script call
+    call world_map
+  File "game/locations.rpy", line 682, in script call
+    call take_class
+  File "game/classroom.rpy", line 50, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 769, in script call
+    call training
+  File "game/scenes.rpy", line 58, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 546, in script call
+    call world_map
+  File "game/locations.rpy", line 568, in script call
+    call event_calls
+  File "game/utilities.rpy", line 751, in script call
+    call DateNight
+  File "game/date_night.rpy", line 3973, in script call
+    call Girl_Date_End (Party[0])
+  File "game/date_night.rpy", line 4349, in script call
+    call sleepover (Girl)
+  File "game/locations.rpy", line 135, in script call
+    call world_map
+  File "game/locations.rpy", line 719, in script call
+    call world_map
+  File "game/locations.rpy", line 769, in script call
+    call training
+  File "game/scenes.rpy", line 58, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 536, in script call
+    call tenth_round
+  File "game/utilities.rpy", line 1228, in script call
+    call sleepover
+  File "game/locations.rpy", line 135, in script call
+    call world_map
+  File "game/locations.rpy", line 1189, in script call
+    call event_calls
+  File "game/locations.rpy", line 135, in script call
+    call world_map
+  File "game/locations.rpy", line 1221, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/locations.rpy", line 769, in script call
+    call training
+  File "game/scenes.rpy", line 58, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 1214, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 506, in script call
+    call study
+  File "game/studying.rpy", line 156, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 1214, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 504, in script call
+    call chat
+  File "game/chat.rpy", line 122, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu
+  File "game/menus.rpy", line 61, in script call
+    call girl_sex_menu(focused_Girl)
+  File "game/actions.rpy", line 130, in script call
+    call action_disapproved(Girl, primary_action)
+  File "game/reactions.rpy", line 863, in script call
+    call begging_menu(Girl, action)
+  File "game/menus.rpy", line 360, in script call
+    call maybe_later_lines(Girl, action)
+  File "game/dialogue.rpy", line 1390, in script
+    label maybe_later_lines(Girl, action):
+Exception: Required parameter action has no value.
 
 -- Full Traceback ------------------------------------------------------------
 
 Full traceback:
-  File "game/locations.rpy", line 132, in script call
+  File "game/locations.rpy", line 135, in script call
     call world_map
-  File "game/locations.rpy", line 610, in script call
+  File "game/locations.rpy", line 719, in script call
     call world_map
-  File "game/locations.rpy", line 610, in script call
+  File "game/locations.rpy", line 798, in script call
     call world_map
-  File "game/locations.rpy", line 132, in script call
+  File "game/locations.rpy", line 949, in script call
+    call shower_room
+  File "game/locations.rpy", line 1170, in script call
     call world_map
-  File "game/locations.rpy", line 709, in script call
+  File "game/locations.rpy", line 135, in script call
     call world_map
-  File "game/locations.rpy", line 132, in script call
+  File "game/locations.rpy", line 682, in script call
+    call take_class
+  File "game/classroom.rpy", line 52, in script call
+    call event_calls
+  File "game/locations.rpy", line 135, in script call
     call world_map
-  File "game/locations.rpy", line 325, in script call
-    call set_the_scene
-  File "game/utilities.rpy", line 730, in script
-    return
-  File "renpy/ast.py", line 1567, in execute
-    next_node(renpy.game.context().lookup_return(pop=True))
-  File "renpy/execution.py", line 710, in lookup_return
-    raise Exception("Could not find return label {!r}.".format(self.return_stack[-1]))
-Exception: Could not find return label (u'game/utilities.rpy', 1653339557, 3).
+  File "game/locations.rpy", line 719, in script call
+    call world_map
+  File "game/locations.rpy", line 798, in script call
+    call world_map
+  File "game/locations.rpy", line 1170, in script call
+    call world_map
+  File "game/locations.rpy", line 135, in script call
+    call world_map
+  File "game/locations.rpy", line 687, in script call
+    call take_class
+  File "game/classroom.rpy", line 52, in script call
+    call event_calls
+  File "game/locations.rpy", line 135, in script call
+    call world_map
+  File "game/locations.rpy", line 798, in script call
+    call world_map
+  File "game/locations.rpy", line 1170, in script call
+    call world_map
+  File "game/locations.rpy", line 135, in script call
+    call world_map
+  File "game/locations.rpy", line 682, in script call
+    call take_class
+  File "game/classroom.rpy", line 50, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 769, in script call
+    call training
+  File "game/scenes.rpy", line 58, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 546, in script call
+    call world_map
+  File "game/locations.rpy", line 568, in script call
+    call event_calls
+  File "game/utilities.rpy", line 751, in script call
+    call DateNight
+  File "game/date_night.rpy", line 3973, in script call
+    call Girl_Date_End (Party[0])
+  File "game/date_night.rpy", line 4349, in script call
+    call sleepover (Girl)
+  File "game/locations.rpy", line 135, in script call
+    call world_map
+  File "game/locations.rpy", line 719, in script call
+    call world_map
+  File "game/locations.rpy", line 769, in script call
+    call training
+  File "game/scenes.rpy", line 58, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 536, in script call
+    call tenth_round
+  File "game/utilities.rpy", line 1228, in script call
+    call sleepover
+  File "game/locations.rpy", line 135, in script call
+    call world_map
+  File "game/locations.rpy", line 1189, in script call
+    call event_calls
+  File "game/locations.rpy", line 135, in script call
+    call world_map
+  File "game/locations.rpy", line 1221, in script call
+    call chat
+  File "game/chat.rpy", line 164, in script call
+    call chat_menu
+  File "game/locations.rpy", line 769, in script call
+    call training
+  File "game/scenes.rpy", line 58, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 1214, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 506, in script call
+    call study
+  File "game/studying.rpy", line 156, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 1214, in script call
+    call girls_location
+  File "game/utilities.rpy", line 1356, in script call
+    call expression temp_Girls[0].tag + "_Leave"
+  File "game/locations.rpy", line 504, in script call
+    call chat
+  File "game/chat.rpy", line 122, in script call
+    call chat_menu
+  File "game/chat.rpy", line 263, in script call
+    call enter_main_sex_menu
+  File "game/menus.rpy", line 61, in script call
+    call girl_sex_menu(focused_Girl)
+  File "game/actions.rpy", line 130, in script call
+    call action_disapproved(Girl, primary_action)
+  File "game/reactions.rpy", line 863, in script call
+    call begging_menu(Girl, action)
+  File "game/menus.rpy", line 360, in script call
+    call maybe_later_lines(Girl, action)
+  File "game/dialogue.rpy", line 1390, in script
+    label maybe_later_lines(Girl, action):
+  File "renpy/ast.py", line 869, in execute
+    values = apply_arguments(self.parameters, renpy.store._args, renpy.store._kwargs)
+  File "renpy/ast.py", line 159, in apply_arguments
+    return parameters.apply(args, kwargs, ignore_errors)
+  File "renpy/ast.py", line 123, in apply
+    raise Exception("Required parameter %s has no value." % name)
+Exception: Required parameter action has no value.
 
 Windows-10-10.0.19041
 Ren'Py 7.4.11.2266
 Rogue-Like 0.997f2
-Tue May 24 00:59:57 2022
+Tue May 24 03:43:15 2022

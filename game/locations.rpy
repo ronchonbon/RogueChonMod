@@ -86,6 +86,9 @@ label player_room:
 
     call taboo_level
     call set_the_scene(silent = True)
+
+    label player_room_menu:
+
     call quick_event
     call checkout(total = True)
 
@@ -96,7 +99,7 @@ label player_room:
 
     call are_girls_angry
 
-    menu player_room_menu:
+    menu:
         "You are in your room. What would you like to do?"
         "Chat":
             call chat
@@ -477,6 +480,9 @@ label girls_room:
 
     call taboo_level
     call set_the_scene(silent = True)
+
+    label girls_room_menu:
+
     call quick_event
     call checkout(total = True)
 
@@ -486,8 +492,6 @@ label girls_room:
         call event_calls
 
     call are_girls_angry
-
-    label girls_room_menu:
 
     if Girl.location == bg_current:
         "You are in [Girl.name]'s room. What would you like to do?"
@@ -571,6 +575,9 @@ label campus:
 
     call taboo_level
     call set_the_scene(silent = True)
+
+    label campus_menu:
+
     call quick_event
     call checkout(total = True)
     call are_girls_angry
@@ -596,7 +603,7 @@ label campus:
         call event_calls
         call girls_location
 
-    menu campus_menu:
+    menu:
         "You are in the university square. What would you like to do?"
         "Chat":
             call chat
@@ -639,8 +646,20 @@ label classroom:
         $ Player.drain_word("goto",1,0)
         $ Player.drain_word("traveling",1,0)
 
+    if EmmaX.location == "bg_teacher":
+        "As you sit down, you see [EmmaX.name] at the podium."
+    elif StormX.location == "bg_teacher":
+        "As you sit down, you see [StormX.name] at the podium."
+    elif time_index == 2 or weekday > 5:
+        "You enter the classroom."
+    else:
+        "You sit down at a desk"
+
     call taboo_level
     call set_the_scene(silent = True)
+
+    label classroom_menu:
+
     call quick_event
     call checkout(total = True)
 
@@ -656,17 +675,8 @@ label classroom:
 
     call are_girls_angry
 
-    if EmmaX.location == "bg_teacher":
-        "As you sit down, you see [EmmaX.name] at the podium. What would you like to do?"
-    elif StormX.location == "bg_teacher":
-        "As you sit down, you see [StormX.name] at the podium. What would you like to do?"
-    elif time_index == 2 or weekday > 5:
-        "You enter the classroom. What would you like to do?"
-    else:
-        "You sit down at a desk. What would you like to do?"
-
-    menu classroom_menu:
-        extend ""
+    menu:
+        "What would you like to do?"
         "Take the morning class" if weekday < 5 and time_index == 0:
             if round >= 30:
                 call take_class
@@ -789,6 +799,110 @@ label danger_room:
 
     jump danger_room_menu
 
+label gym_entry(number_of_girls = 0):
+    # if taboo == 0:
+    #     menu:
+    #         "Is this visit for work or for play?"
+    #         "Work [[get geared up]":
+    #             pass
+    #         "Play [[keep on this outfit]":
+    #             return
+
+    python:
+        for G in all_Girls:
+            if G.location != "bg_dangerroom" and G.outfit == "gym":
+                G.outfit = G.today_outfit
+            elif G.outfit == "gym":
+                continue
+            elif G.location == "bg_dangerroom" and G not in Party:
+                G.outfit = "gym"
+
+    call set_the_scene
+
+    $ temp_Girls = Present[:]
+
+    while temp_Girls:
+        if temp_Girls[0].outfit != "gym":
+            if approval_check(temp_Girls[0], 1300, "LO") or "passive" in temp_Girls[0].traits:
+                $ approval_passed = True
+            elif approval_check(temp_Girls[0], 800, "LO") and temp_Girls[0].first_custom_outfit[0]:
+                $ approval_passed = True
+            elif approval_check(temp_Girls[0], 600, "LO") and temp_Girls[0].gym_clothes[0] != 1:
+                $ approval_passed = True
+            else:
+                $ approval_passed = False
+
+            if not approval_passed or "asked gym" in temp_Girls[0].daily_history or "no_ask gym" in temp_Girls[0].traits:
+                show black_screen onlayer black
+
+                if temp_Girls[0] == EmmaX:
+                    ch_e "I should change too."
+                elif temp_Girls[0] == LauraX:
+                    ch_l "I'll be right back. . ."
+                elif temp_Girls[0] == StormX:
+                    ch_s "I should change as well. . ."
+                else:
+                    if number_of_girls:
+                        temp_Girls[0].voice "I'll be right back too."
+                    else:
+                        temp_Girls[0].voice "I'll be back soon, gotta change."
+
+                $ temp_Girls[0].outfit = "gym"
+            else:
+                $ temp_Girls[0].daily_history.append("asked gym")
+
+                if number_of_girls:
+                    if temp_Girls[0] == EmmaX:
+                        $ line = "Do you think I should change as well?"
+                    elif temp_Girls[0] == LauraX:
+                        $ line = "Did you want me to change into my gym clothes?"
+                    elif temp_Girls[0] == StormX:
+                        $ line = "Do you think I should change as well?"
+                    else:
+                        $ line = "Should I change too?"
+                else:
+                    if temp_Girls[0] == EmmaX:
+                        $ line = "Did you want me to change into my gear?"
+                    elif temp_Girls[0] == LauraX:
+                        $ line = "Did you want me to change into my gym clothes?"
+                    elif temp_Girls[0] == StormX:
+                        $ line = "Do you think I should change into my gym clothes?"
+                    else:
+                        $ line = "Would you like me to change into my gym clothes?"
+
+                temp_Girls[0].voice "[line]"
+
+                call gym_clothes_menu
+
+                if _return:
+                    if temp_Girls[0] == RogueX:
+                        ch_r "Ok, be right back."
+                    elif temp_Girls[0] == KittyX:
+                        ch_k "Ok, back in a bit."
+                    elif temp_Girls[0] == EmmaX:
+                        ch_e "Fine, I'll be right back."
+                    elif temp_Girls[0] == LauraX:
+                        ch_l "I'll be right back then."
+                    elif temp_Girls[0] == StormX:
+                        ch_s "Then I will return shortly."
+                    elif temp_Girls[0] == JubesX:
+                        ch_v "K, be right back."
+
+                    $ temp_Girls[0].outfit = "gym"
+
+            if temp_Girls[0].outfit == "gym":
+                $ number_of_girls += 1
+
+        $ temp_Girls.remove(temp_Girls[0])
+
+    python:
+        for G in all_Girls:
+            G.change_outfit()
+
+    hide black_screen onlayer black
+
+    return
+
 label shower_entry:
     call check_on_Jubes_sunshock
 
@@ -805,7 +919,7 @@ label shower_entry:
     if round <= 10 or len(Party) >= 2:
         call shower_room
 
-    if day >= 9 and "met" not in JeanX.history and "met" in EmmaX.history:
+    if day >= 15 and "met" not in JeanX.history and "met" in EmmaX.history:
         call JeanMeet
         call shower_room
 
@@ -996,6 +1110,9 @@ label shower_room:
 
     call taboo_level
     call set_the_scene(check_if_dressed = False)
+
+    label shower_menu:
+
     call quick_event
     call checkout(total = True)
 
@@ -1011,7 +1128,7 @@ label shower_room:
 
     call are_girls_angry
 
-    menu shower_menu:
+    menu:
         "You're in the showers. What would you like to do?"
         "Chat":
             call chat
@@ -1080,6 +1197,9 @@ label pool:
 
     call taboo_level
     call set_the_scene(silent = True, check_if_dressed = False)
+
+    label pool_menu:
+
     call quick_event
     call checkout(total = True)
 
@@ -1095,7 +1215,7 @@ label pool:
 
     call are_girls_angry
 
-    menu pool_menu:
+    menu:
         "You're at the pool. What would you like to do?"
         "Chat":
             call chat
@@ -1276,6 +1396,9 @@ label study_room:
 
     call taboo_level
     call set_the_scene(silent = True)
+
+    label study_menu:
+
     call quick_event
     call checkout(total = True)
 
@@ -1296,7 +1419,7 @@ label study_room:
     else:
         "You are in Xavier's study. What would you like to do?"
 
-    menu study_menu:
+    menu:
         extend ""
         "Chat" if time_index >= 3:
             call chat

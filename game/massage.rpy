@@ -123,7 +123,7 @@ label Massage(Girl=0, Current=0, Past=0, MCount=0):
                 $ Girl.recent_history.append("no_massage")
                 $ Girl.daily_history.append("no_massage")
                 return
-            "Come on, Please?":
+            "Come on, please?":
                 if approval:
                     $ Girl.change_face("_sexy")
                     $ Girl.change_stat("obedience", 90, 1)

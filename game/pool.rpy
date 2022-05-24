@@ -936,13 +936,14 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     elif D20 == 10:
         "You decide to make use of the diving board. You do a couple of dives before taking it easy and just swimming around."
 
-    call who_likes_who (1, 80, 3)
+    call who_likes_who (80, 3)
     call RoomStatboost ("love", 80, 3)
     call RoomStatboost ("lust", 30, 5)
     $ round -= 20 if round >= 20 else round
     hide FullPool
     call set_the_scene (1, 0, 0)
     "You all get out of the pool and rest for a bit."
+
     return
 
 

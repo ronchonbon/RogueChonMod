@@ -775,21 +775,6 @@ label event_calls(event_Girls=[]):
 
             return
 
-    if LauraX in active_Girls:
-        pass
-    elif "met" not in LauraX.history and "traveling" in Player.recent_history:
-        if bg_current == "bg_dangerroom":
-            if day >= 7 and "dress0" not in LauraX.history and "mission" not in LauraX.to_do:
-                call meet_Laura
-
-                return
-
-        if time_index < 3 and "met" in KittyX.history:
-            if "dress0" in LauraX.history:
-                call Laura_Dressup
-
-                return
-
     if EmmaX in active_Girls:
         if bg_current == "bg_classroom" and time_index == 2 and weekday in (0,2,4):
             if "traveling" in Player.recent_history and not Party:
@@ -808,10 +793,25 @@ label event_calls(event_Girls=[]):
             if round >= 70:
                 $ EmmaX.location = "bg_classroom"
     else:
-        if day >= 4 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
+        if day >= 9 and "met" not in EmmaX.history and "traveling" in Player.recent_history and bg_current == "bg_classroom" and weekday < 5:
             jump meet_Emma
 
             return
+
+    if LauraX in active_Girls:
+        pass
+    elif "met" not in LauraX.history and "traveling" in Player.recent_history:
+        if bg_current == "bg_dangerroom":
+            if day >= 12 and "dress0" not in LauraX.history and "mission" not in LauraX.to_do:
+                call meet_Laura
+
+                return
+
+        if time_index < 3 and "met" in KittyX.history:
+            if "dress0" in LauraX.history:
+                call Laura_Dressup
+
+                return
 
     if StormX in active_Girls:
         if bg_current == "bg_classroom" and StormX.location == "bg_teacher" and "Peter" in StormX.history and "traveling" in Player.recent_history:
@@ -1131,7 +1131,7 @@ label set_the_scene(character = True, entering = False, check_if_dressed = True,
                 $ temp_Girls[0].sprite_location = stage_right
                 $ temp_Girls[0].sprite_layer = 75
 
-            call display_girl(G, check_if_dressed, trigger_reset)
+            call display_girl(temp_Girls[0], check_if_dressed, trigger_reset)
 
             $ temp_Girls.remove(temp_Girls[0])
 
@@ -2705,12 +2705,15 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
             if approval_check(Primary, 1000):
                 if len(Present) < 2 and D20 >= 10:
                     $ line = Primary.name + " takes the seat next to you"
+
                     $ Present.append(Primary)
                 else:
                     $ line = Primary.name + " sits across the room from you"
+
                     $ Nearby.append(Primary)
             else:
                 $ line = Primary.name + " sits across the room from you"
+
                 $ Nearby.append(Primary)
 
         if Secondary:
@@ -2721,18 +2724,21 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
                         $ line = Primary.name + " and " + Secondary.name + " sit down next to you"
                     else:
                         $ line = line + ", while " + Secondary.name + " takes the seat next to you"
+
                     $ Present.append(Secondary)
                 else:
                     if Primary in Nearby:
                         $ line = Primary.name + " and " + Secondary.name + " sit across the room from you"
                     else:
                         $ line = line + ", while " + Secondary.name + " sits across the room from you"
+
                     $ Nearby.append(Secondary)
             else:
                 if Primary in Nearby:
                     $ line = Primary.name + " and " + Secondary.name + " sit across the room from you"
                 else:
                     $ line = line + ", while " + Secondary.name + " sits across the room from you"
+
                 $ Nearby.append(Secondary)
         if line:
             "[line]."
@@ -2801,109 +2807,7 @@ label Girls_Arrive(Primary=0, Secondary=0, GirlsNum=0):
         "There were some others as well, but they kept their distance."
     return
 
-label gym_entry(number_of_girls = 0):
-    if taboo == 0:
-        menu:
-            "Is this visit for work or for play?"
-            "Work [[get geared up]":
-                pass
-            "Play [[keep on this outfit]":
-                return
 
-    python:
-        for G in all_Girls:
-            if G.location != "bg_dangerroom" and G.outfit == "gym":
-                G.outfit = G.today_outfit
-            elif G.outfit == "gym":
-                continue
-            elif G.location == "bg_dangerroom" and G not in Party:
-                G.outfit = "gym"
-
-    call set_the_scene
-
-    $ temp_Girls = Present[:]
-
-    while temp_Girls:
-        if temp_Girls[0].outfit != "gym":
-            if approval_check(temp_Girls[0], 1300, "LO") or "passive" in temp_Girls[0].traits:
-                $ approval_passed = True
-            elif approval_check(temp_Girls[0], 800, "LO") and temp_Girls[0].first_custom_outfit[0]:
-                $ approval_passed = True
-            elif approval_check(temp_Girls[0], 600, "LO") and temp_Girls[0].gym_clothes[0] != 1:
-                $ approval_passed = True
-            else:
-                $ approval_passed = False
-
-            if not approval_passed or "asked gym" in temp_Girls[0].daily_history or "no_ask gym" in temp_Girls[0].traits:
-                show black_screen onlayer black
-
-                if temp_Girls[0] == EmmaX:
-                    ch_e "I should change too."
-                elif temp_Girls[0] == LauraX:
-                    ch_l "I'll be right back. . ."
-                elif temp_Girls[0] == StormX:
-                    ch_s "I should change as well. . ."
-                else:
-                    if number_of_girls:
-                        temp_Girls[0].voice "I'll be right back too."
-                    else:
-                        temp_Girls[0].voice "I'll be back soon, gotta change."
-
-                $ temp_Girls[0].outfit = "gym"
-            else:
-                $ temp_Girls[0].daily_history.append("asked gym")
-
-                if number_of_girls:
-                    if temp_Girls[0] == EmmaX:
-                        $ line = "Do you think I should change as well?"
-                    elif temp_Girls[0] == LauraX:
-                        $ line = "Did you want me to change into my gym clothes?"
-                    elif temp_Girls[0] == StormX:
-                        $ line = "Do you think I should change as well?"
-                    else:
-                        $ line = "Should I change too?"
-                else:
-                    if temp_Girls[0] == EmmaX:
-                        $ line = "Did you want me to change into my gear?"
-                    elif temp_Girls[0] == LauraX:
-                        $ line = "Did you want me to change into my gym clothes?"
-                    elif temp_Girls[0] == StormX:
-                        $ line = "Do you think I should change into my gym clothes?"
-                    else:
-                        $ line = "Would you like me to change into my gym clothes?"
-
-                temp_Girls[0].voice "[line]"
-
-                call gym_clothes_menu
-
-                if _return:
-                    if temp_Girls[0] == RogueX:
-                        ch_r "Ok, be right back."
-                    elif temp_Girls[0] == KittyX:
-                        ch_k "Ok, back in a bit."
-                    elif temp_Girls[0] == EmmaX:
-                        ch_e "Fine, I'll be right back."
-                    elif temp_Girls[0] == LauraX:
-                        ch_l "I'll be right back then."
-                    elif temp_Girls[0] == StormX:
-                        ch_s "Then I will return shortly."
-                    elif temp_Girls[0] == JubesX:
-                        ch_v "K, be right back."
-
-                    $ temp_Girls[0].outfit = "gym"
-
-            if temp_Girls[0].outfit == "gym":
-                $ number_of_girls += 1
-
-        $ temp_Girls.remove(temp_Girls[0])
-
-    python:
-        for G in all_Girls:
-            G.change_outfit()
-
-    hide black_screen onlayer black
-
-    return
 
 label gym_clothes_menu:
     menu:

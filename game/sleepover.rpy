@@ -1311,14 +1311,16 @@ label sleepover_Morning:
 
     if Party:
         $ Party[0].change_face("_normal")
-        $ Party[0].change_outfit(6,Changed = 1)
+        $ Party[0].change_outfit(6, outfit_changed = True)
 
         if len(Party) >= 2:
             $ Party[1].change_face("_normal")
-            $ Party[1].change_outfit(6,Changed = 1)
+            $ Party[1].change_outfit(6, outfit_changed = True)
+
             "The girls get changed for the day."
         else:
             "[Party[0].name] gets changed for the day."
+            
     $ Party = []
 
 

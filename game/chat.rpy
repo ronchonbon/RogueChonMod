@@ -645,7 +645,7 @@ label dismiss_girl(Girl=0, Leaving=0):
     $ Girl = check_girl(Girl)
     if Girl in Party:
         $ Party.remove(Girl)
-    call Girls_Schedule ([Girl], 0)
+    call change_into_scheduled_outfit ([Girl], 0)
 
     if "leaving" in Girl.recent_history:
         $ Girl.drain_word("leaving")

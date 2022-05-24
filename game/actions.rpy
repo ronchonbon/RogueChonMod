@@ -1,4 +1,4 @@
-label action(Girl):
+label action:
     $ stack_depth = renpy.call_stack_depth()
 
     if primary_action in dildo_actions:
@@ -9,7 +9,7 @@ label action(Girl):
 
     $ round -= 5 if round > 5 else (round-1)
 
-    call shift_focus(Girl)
+    # call shift_focus(Girl)
     call set_approval_bonus(Girl, primary_action)
     call action_approval_checks(Girl, primary_action)
 
@@ -121,15 +121,21 @@ label action(Girl):
 
         if not Girl.action_counter[primary_action] and approval:
             call first_action_approval(Girl, primary_action)
+            jump before_action
         elif approval:
             call action_approved(Girl, primary_action)
 
+            if _return:
+                jump before_action
+
         if approval >= 2:
             call action_accepted(Girl, primary_action)
+            jump before_action
         else:
             call action_disapproved(Girl, primary_action)
 
         call action_rejected(Girl, primary_action)
+        
         label begging_rejected:
 
     return
@@ -467,7 +473,7 @@ label after_action:
     elif Girl.action_counter[primary_action] == 1:
         call first_action_response(focused_Girl, primary_action)
     elif (primary_action in cock_actions or primary_action == "kiss") and Girl.action_counter[primary_action] == 5:
-        call action_done_five_times_lines(focused_Girl)
+        call action_done_five_times_lines(focused_Girl, primary_action)
     elif primary_action in sex_actions and not action_context:
         if "unsatisfied" in focused_Girl.recent_history:
             call unsatisfied_reactions(Girl, primary_action)
@@ -491,8 +497,7 @@ label after_action:
     #     call expression focused_Girl.tag + "_BJ_Reset"
 
     call checkout
-
-    return
+    jump main_sex_menu
 
 label set_approval_bonus(Girl, action):
     if primary_action == "fondle_thighs":

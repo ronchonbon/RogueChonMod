@@ -1774,7 +1774,7 @@ label Top_Off(Girl=0, Intro=1, line=0, counter=0):
             else:
                 $ Girl.change_face("_sexy")
                 call Top_Off_Refused (Girl)
-        "Come on, Please? [[take it all off]":
+        "Come on, please? [[take it all off]":
 
 
 
@@ -2481,7 +2481,7 @@ label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
                     ch_k "[Girl.Like], fine, whatever."
                 else:
                     Girl.voice "Good."
-            "Come on, Please?":
+            "Come on, please?":
 
                 if "no_bottomless" in Girl.daily_history:
                     $ Girl.change_face("_angry", 1)

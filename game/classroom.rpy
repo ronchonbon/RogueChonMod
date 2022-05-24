@@ -83,7 +83,7 @@ label classroom_Seating(Girls=[], GirlB=0, GirlLike=0, line=0, D20=0, temp_Girls
     if len(Girls) == 2:
 
         $ D20 = renpy.random.randint(500, 1500)
-        if (Girls[0].likes.[Girls[1].tag] + Girls[1].likes.[Girls[0].tag]) >= D20:
+        if (Girls[0].likes[Girls[1].tag] + Girls[1].likes[Girls[0].tag]) >= D20:
             "You see that [Girls[0].name] and [Girls[1].name] are sitting next to each other, which do you sit next to?"
         else:
             "You see that [Girls[0].name] and [Girls[1].name] are in the room, but on opposite sides."
@@ -726,7 +726,7 @@ label Frisky_Class(Girl=0, Teacher=0, lineB=0, temp_Girls=[]):
                         $ Present[1].GirlLikeUp(Girl,-4)
                         $ Girl.GirlLikeUp(Present[1],-2)
                         call remove_girl (Present[1])
-                    elif approval_check(Present[1], 1500) and Present[1].likes.[Girl.tag] >= 600:
+                    elif approval_check(Present[1], 1500) and Present[1].likes[Girl.tag] >= 600:
 
                         $ Present[1].eyes = "leftside"
                         "[Present[1].name] seems to notice what you and [Girl.name] are doing."

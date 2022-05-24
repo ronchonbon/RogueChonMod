@@ -1752,8 +1752,8 @@ label Rogue_Summon(approval_bonus=approval_bonus):
         elif RogueX.location == "bg_rogue":
             ch_r "I'll get tidied up."
 
-            call girls_room(RogueX)
-            return
+            $ Girl = RogueX
+            jump girls_room
         elif RogueX.location == "bg_player":
             ch_r "I'll be waiting."
             jump player_room
@@ -1771,8 +1771,8 @@ label Rogue_Summon(approval_bonus=approval_bonus):
             ch_r "You know, I'll just meet you in my room."
             $ RogueX.location = "bg_rogue"
 
-            call girls_room(RogueX)
-            return
+            $ Girl = RogueX
+            jump girls_room
 
 
     elif line == "lonely":
@@ -1984,8 +1984,9 @@ label Rogue_Leave(approval_bonus=approval_bonus):
         elif RogueX.location == "bg_rogue":
             ch_r "I'll meet you there."
 
-            call girls_room(RogueX)
-            return
+            $ Girl = RogueX
+
+            jump girls_room
         elif RogueX.location == "bg_player":
             ch_r "I'll be waiting."
             jump player_room
@@ -2002,8 +2003,8 @@ label Rogue_Leave(approval_bonus=approval_bonus):
             ch_r "You know, I'll just meet you in my room."
             $ RogueX.location = "bg_rogue"
 
-            call girls_room(RogueX)
-            return
+            $ Girl = RogueX
+            jump girls_room
 
 
 

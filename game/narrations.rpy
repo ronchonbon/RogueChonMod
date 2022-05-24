@@ -1875,30 +1875,27 @@ label Offhand_Set(action_context=action_context, Tempprimary_action=offhand_acti
 
 
     $ Chr = check_girl(Chr)
-    if action_context == "shift focus":
+    if action_context == "shift_focus":
         if Tempprimary_action:
-            $ offhand_action = None
+            $ offhand_action = primary_action
+            $ primary_action = Tempprimary_action
+
             if Tempprimary_action == "fondle_breasts":
                 "You shift your attention to her breasts."
-                jump expression Chr.tag + "_FB_Prep"
             elif Tempprimary_action == "suck_breasts":
                 "You shift your attention to her breasts."
-                jump expression Chr.tag + "_SB_Prep"
             elif Tempprimary_action == "fondle_pussy":
                 "You shift your attention to her pussy."
-                jump expression Chr.tag + "_FP_Prep"
             elif Tempprimary_action == "eat_pussy":
                 "You shift your attention to her pussy."
-                jump expression Chr.tag + "_LP_Prep"
             elif Tempprimary_action == "fondle_ass":
                 "You shift your attention to her ass."
-                jump expression Chr.tag + "_FA_Prep"
             elif Tempprimary_action == "finger_ass":
                 "You shift your attention to her ass."
-                jump expression Chr.tag + "_IA_Prep"
             else:
                 "You go back to kissing her deeply."
-                jump KissPrep
+
+            jump before_action
         else:
             "You aren't doing anything else to shift to."
         return
@@ -1910,27 +1907,27 @@ label Offhand_Set(action_context=action_context, Tempprimary_action=offhand_acti
                 "You lean in and start kissing her."
                 $ offhand_action = "kiss"
                 $ action_context = "offhand"
-                call action(Chr)
+                call action
             "Also fondle her breasts." if primary_action in ("kiss","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
                 $ offhand_action = "fondle_breasts"
                 $ action_context = "offhand"
-                call action(Chr)
+                call action
             "Also suck her breasts." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "sex", "anal", "hotdog", "dildo_pussy", "dildo_anal"):
                 $ offhand_action = "suck_breasts"
                 $ action_context = "offhand"
-                call action(Chr)
+                call action
             "Also fondle her pussy." if primary_action in ("kiss","fondle_breasts","fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
                 $ offhand_action = "fondle_pussy"
                 $ action_context = "offhand"
-                call action(Chr)
+                call action
             "Also fondle her ass." if primary_action in ("kiss","fondle_breasts","fondle_pussy", "fondle_thighs", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "anal", "hotdog", "footjob", "dildo_pussy", "dildo_anal"):
                 $ offhand_action = "fondle_ass"
                 $ action_context = "offhand"
-                call action(Chr)
+                call action
             "Also finger her ass." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "suck_breasts", "eat_pussy", "eat_ass", "sex", "hotdog", "footjob", "dildo_pussy"):
                 $ offhand_action = "finger_ass"
                 $ action_context = "offhand"
-                call action(Chr)
+                call action
             "Also jack it." if primary_action in ("fondle_breasts","fondle_pussy", "fondle_thighs", "fondle_ass", "finger_ass", "suck_breasts", "eat_pussy", "eat_ass", "dildo_pussy", "dildo_anal"):
                 call jerking_off (Chr)
             "Nevermind":

@@ -1,3 +1,141 @@
+label check_if_second_minds(Girl = None, Previous = None, repeat = 0):
+    if Previous not in all_Girls and len(Party) >= 2:
+        if Girl == Party[0]:
+            $ Previous = Party[1]
+        else:
+            $ Previous = Party[0]
+
+    if Previous not in all_Girls:
+        return False
+
+    if Girl.likes[Previous.tag] >= 700 and Previous.likes[Girl.tag] >= 700:
+        $ Previous.recent_history.append("noticed " + Girl.tag)
+
+        return True
+    elif Previous == JeanX and not approval_check(Previous, 500, "L"):
+        $ Previous.change_face("_sly",1,Eyes="_side")
+
+        if bg_current == "bg_restaurant":
+            "[Previous.name] rolls her eyes, but goes back to her meal."
+        elif bg_current == "bg_movie":
+            "[Previous.name] rolls her eyes, but continues to watch the movie."
+        else:
+            "[Previous.name] rolls her eyes, but doesn't get involved."
+
+        $ Previous.recent_history.append("noticed " + Girl.tag)
+
+        $ Girl.check_if_likes(Previous, 600, 5, 2)
+
+        $ Previous.check_if_likes(Girl, 500, 3)
+        $ Previous.check_if_likes(Girl, 900, 3)
+
+        return 2
+    elif approval_check(Previous, 1400) and Previous.likes[Girl.tag] >= 500:
+        $ Previous.change_face("_sly")
+
+        "[Previous.name] winks at you, but doesn't move to get involved."
+
+        $ Previous.recent_history.append("noticed " + Girl.tag)
+
+        $ Girl.check_if_likes(Previous, 600, 5, 1)
+        $ Girl.check_if_likes(Previous, 900, 3, 1)
+
+        $ Previous.check_if_likes(Girl, 900, 2, 1)
+
+        return 2
+    elif approval_check(Previous, 1400) and Previous.likes[Girl.tag] < 500:
+        pass
+
+    if repeat == 2:
+        $ Previous.change_face("_angry",Eyes="_side")
+        $ Previous.change_stat("love", 80, -5)
+        $ Previous.change_stat("obedience", 80, 5)
+        $ Previous.check_if_likes(Girl, 800, -3, 1)
+        $ Previous.add_word(1,"annoyed")
+
+        return 3
+    elif "annoyed" in Previous.recent_history:
+        $ Previous.change_face("_angry")
+        $ Previous.change_stat("love", 80, -15)
+        $ Previous.change_stat("obedience", 80, 15)
+
+        if Previous == RogueX:
+            ch_r "Get a room you two!"
+        elif Previous == KittyX:
+            ch_k "Geeze, right in front of me?!"
+        elif Previous == EmmaX:
+            ch_e "Oh do grow up, you two!"
+        elif Previous == LauraX:
+            ch_l "Seriously, get a room!"
+        elif Previous == JeanX:
+            ch_j "Ok, keep the hormones to a dull roar."
+        elif Previous == StormX:
+            ch_s "That is enough, break it up."
+        elif Previous == JubesX:
+            ch_v "Cut it out!"
+
+        $ Previous.check_if_likes(Girl, 800, -3, 1)
+
+        call Girl_Date_Over (Previous)
+
+        return 3
+
+    $ Previous.add_word(1,"annoyed")
+
+    if Previous == RogueX:
+        ch_r "I know what she's up to, cut it out."
+    elif Previous == KittyX:
+        ch_k "I see you there, cut it out."
+    elif Previous == EmmaX:
+        ch_e "Oh, I see what's going on, stop it."
+    elif Previous == LauraX:
+        ch_l "You think I wouldn't notice? Cut it out."
+    elif Previous == JeanX:
+        ch_j "I don't have to be a psychic to know what's going on there."
+        ch_j "and I -am- one."
+        ch_j "Cut it out."
+    elif Previous == StormX:
+        ch_s "I would hope that we could make it through the meal."
+    elif Previous == JubesX:
+        ch_v "I can -see- you, you know."
+
+    $ Previous.check_if_likes(Girl, 800, -1, 1)
+
+    $ Girl.check_if_likes(Previous, 800, -3, 1)
+
+    menu:
+        extend ""
+        "Ok, I'll stop.":
+            $ Previous.change_stat("love", 80, 10)
+            $ Previous.change_stat("obedience", 80, -5)
+            $ Previous.change_stat("inhibition", 60, 5)
+
+            $ Girl.check_if_likes(Previous, 800, -3, 1)
+
+            if "study" not in Player.recent_history:
+                call Date_Bonus(Previous, 5)
+
+            return 4
+        "I don't think so.":
+            $ Previous.change_face("_angry")
+            $ Previous.change_stat("love", 80, -10)
+            $ Previous.change_stat("obedience", 80, 10)
+            $ Previous.change_stat("inhibition", 60, -5)
+            $ Previous.check_if_likes(Girl,800,-3,1)
+
+            if "study" in Player.recent_history:
+                call Girl_Date_Over(Previous)
+            else:
+                call Date_Bonus(Previous, -5)
+
+            return 3
+
+    return False
+
+
+
+
+
 label Date_Ask(Girl=0):
 
     $ Girl = check_girl(Girl)
@@ -920,7 +1058,7 @@ label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], temp_Girls=[]):
         call Date_Prep (temp_Girls[0])
         $ temp_Girls.remove(temp_Girls[0])
 
-    $ bg_current = "date"
+    $ bg_current = "bg_campus"
     $ Player.add_word(1,"date")
     call shift_focus (Party[0])
     call set_the_scene
@@ -1167,12 +1305,9 @@ label DateNight(Date_Bonus=[0,0], Play_Cost=0, Date_Cost=[0,0], temp_Girls=[]):
         jump Date_Movies
     elif line == "shopping":
         "You wander the mall, checking out some of the nicer boutiques."
-        call Shopping_Mall
-        jump Misplaced
+        jump Shopping_Mall
     else:
-
-        $ bg_current = "bg_campus"
-        jump Misplaced
+        jump campus
 
 label Date_Crossed(Girls=[], Check=0, Count=0, counter=0):
 
@@ -1377,8 +1512,7 @@ label Date_Crossed(Girls=[], Check=0, Count=0, counter=0):
                     "You head back to your room."
                     if "going_on_date" in Player.daily_history:
                         $ Player.daily_history.remove("going_on_date")
-                    $ bg_current = "bg_player"
-                    jump Misplaced
+                    jump player_room
             return
 
 
@@ -3249,136 +3383,7 @@ label Movie_Sex(Girl=0, Previous=0, GirlBonus=0, OptionsDS=[], temp_Girls=[]):
     $ Girl.change_outfit(Changed=0)
     return
 
-label Date_Sex_Break(Girl=0, Previous=0, Repeat=0):
 
-
-
-
-
-
-
-
-
-    if Previous not in all_Girls and len(Party) >= 2:
-        if Girl == Party[0]:
-            $ Previous = Party[1]
-        else:
-            $ Previous = Party[0]
-
-    if Previous not in all_Girls:
-        return False
-
-    if Girl == Previous:
-        "Tell Oni that on a date, a girl and previous were the same, [Girl.tag], DSB"
-
-    if Girl.likes[Previous.tag] >= 700 and Previous.likes[Girl.tag] >= 700:
-
-        $ Previous.recent_history.append("noticed " + Girl.tag)
-        return True
-    elif Previous == JeanX and not approval_check(Previous, 500, "L"):
-
-        $ Previous.change_face("_sly",1,Eyes="_side")
-        if bg_current == "bg_restaurant":
-            "[Previous.name] rolls her eyes, but goes back to her meal."
-        elif bg_current == "bg_movie":
-            "[Previous.name] rolls her eyes, but continues to watch the movie."
-        else:
-            "[Previous.name] rolls her eyes, but doesn't get involved."
-        $ Previous.recent_history.append("noticed " + Girl.tag)
-        $ Girl.check_if_likes(Previous,600,5,2)
-        $ Previous.check_if_likes(Girl,500,3)
-        $ Previous.check_if_likes(Girl,900,3)
-        return 2
-    elif approval_check(Previous, 1400) and Previous.likes[Girl.tag] >= 500:
-
-        $ Previous.change_face("_sly")
-        "[Previous.name] winks at you, but doesn't move to get involved."
-        $ Previous.recent_history.append("noticed " + Girl.tag)
-        $ Girl.check_if_likes(Previous,600,5,1)
-        $ Girl.check_if_likes(Previous,900,3,1)
-        $ Previous.check_if_likes(Girl,900,2,1)
-        return 2
-    elif approval_check(Previous, 1400) and Previous.likes[Girl.tag] < 500:
-        pass
-
-
-
-
-
-    if Repeat == 2:
-
-        $ Previous.change_face("_angry",Eyes="_side")
-        $ Previous.change_stat("love", 80, -5)
-        $ Previous.change_stat("obedience", 80, 5)
-        $ Previous.check_if_likes(Girl,800,-3,1)
-        $ Previous.add_word(1,"annoyed")
-        return 3
-    elif "annoyed" in Previous.recent_history:
-
-        $ Previous.change_face("_angry")
-        $ Previous.change_stat("love", 80, -15)
-        $ Previous.change_stat("obedience", 80, 15)
-        if Previous == RogueX:
-            ch_r "Get a room you two!"
-        elif Previous == KittyX:
-            ch_k "Geeze, right in front of me?!"
-        elif Previous == EmmaX:
-            ch_e "Oh do grow up, you two!"
-        elif Previous == LauraX:
-            ch_l "Seriously, get a room!"
-        elif Previous == JeanX:
-            ch_j "Ok, keep the hormones to a dull roar."
-        elif Previous == StormX:
-            ch_s "That is enough, break it up."
-        elif Previous == JubesX:
-            ch_v "Cut it out!"
-        $ Previous.check_if_likes(Girl,800,-3,1)
-        call Girl_Date_Over (Previous)
-
-        return 3
-    $ Previous.add_word(1,"annoyed")
-    if Previous == RogueX:
-        ch_r "I know what she's up to, cut it out."
-    elif Previous == KittyX:
-        ch_k "I see you there, cut it out."
-    elif Previous == EmmaX:
-        ch_e "Oh, I see what's going on, stop it."
-    elif Previous == LauraX:
-        ch_l "You think I wouldn't notice? Cut it out."
-    elif Previous == JeanX:
-        ch_j "I don't have to be a psychic to know what's going on there."
-        ch_j "and I -am- one."
-        ch_j "Cut it out."
-    elif Previous == StormX:
-        ch_s "I would hope that we could make it through the meal."
-    elif Previous == JubesX:
-        ch_v "I can -see- you, you know."
-    $ Previous.check_if_likes(Girl,800,-1,1)
-    $ Girl.check_if_likes(Previous,800,-3,1)
-    menu:
-        extend ""
-        "Ok, I'll stop.":
-            $ Previous.change_stat("love", 80, 10)
-            $ Previous.change_stat("obedience", 80, -5)
-            $ Previous.change_stat("inhibition", 60, 5)
-            $ Girl.check_if_likes(Previous,800,-3,1)
-            if "study" not in Player.recent_history:
-                call Date_Bonus (Previous, 5)
-
-            return 4
-        "I don't think so.":
-            $ Previous.change_face("_angry")
-            $ Previous.change_stat("love", 80, -10)
-            $ Previous.change_stat("obedience", 80, 10)
-            $ Previous.change_stat("inhibition", 60, -5)
-            $ Previous.check_if_likes(Girl,800,-3,1)
-            if "study" in Player.recent_history:
-                call Girl_Date_Over (Previous)
-            else:
-                call Date_Bonus (Previous, -5)
-
-            return 3
-    return False
 
 label Date_Paying(Activity="dinner", Total_Cost=0):
 
@@ -3929,13 +3934,13 @@ label Date_End:
     if time_index == 2:
 
         if round > 20:
-            $ bg_current = "bg_date"
+            $ bg_current = "bg_campus"
             call set_the_scene(check_if_dressed = False)
             "You decide to walk back slowly, as the night falls around you. . ."
 
         call wait (outfit=0)
 
-        $ bg_current = "bg_date"
+        $ bg_current = "bg_campus"
         call set_the_scene(check_if_dressed = False)
     else:
         $ bg_current = "bg_player"
@@ -3975,9 +3980,8 @@ label Date_Over:
 
         call wait (outfit=0)
     $ Player.daily_history.append("post date")
-    $ bg_current = "bg_player"
     call clear_the_room ("all", 0, 1)
-    jump Misplaced
+    jump player_room
 
 label Player_Date_End:
 
@@ -4160,7 +4164,8 @@ label Girl_Date_End(Girl=0):
                         ch_v "Sure, why not. . ."
                     call check_if_second_minds (Girl, 0, 2)
                     $ multi_action = 0
-                    call KissPrep (Girl)
+                    $ primary_action = "kiss"
+                    call before_action
                     $ multi_action = True
                 if approval_check(Girl, 900, Bonus=(10*Date_Bonus[0])):
                     $ Girl.change_face("_sexy", 1)
@@ -4324,7 +4329,7 @@ label Girl_Date_End(Girl=0):
     $ Player.daily_history.append("post date")
 
 
-    call expression Girl.tag + "_SexMenu"
+    call enter_main_sex_menu
 
     if "_angry" in Girl.recent_history:
         if bg_current == "bg_player":
@@ -4342,7 +4347,7 @@ label Girl_Date_End(Girl=0):
         jump player_room
 
     call sleepover (Girl)
-    jump Misplaced
+    return
 
 label Date_Ditched(Girls=0):
 

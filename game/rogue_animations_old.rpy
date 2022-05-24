@@ -827,7 +827,7 @@ label Rogue_Doggy_Launch(line=primary_action):
     if renpy.showing("Rogue_doggy_animation"):
         return
     $ action_speed = 0
-    call Rogue_Hide (1)
+    call hide_girl(RogueX, hide_sprite = True)
     show Rogue_doggy_animation zorder 150 at sprite_location(stage_center+50)
     with dissolve
     return
@@ -839,7 +839,7 @@ label Rogue_Doggy_Reset:
     $ RogueX.arm_pose = 2
     $ RogueX.spriteVer = 0
     hide Rogue_doggy_animation
-    call Rogue_Hide
+    call hide_girl(RogueX)
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         alpha 1
         zoom 1
@@ -1702,7 +1702,7 @@ label Rogue_sex_Launch(line=primary_action):
     if renpy.showing("Rogue_sex_animation"):
         return
     $ action_speed = 0
-    call Rogue_Hide (1)
+    call hide_girl(RogueX, hide_sprite = True)
     show Rogue_sex_animation zorder 150
 
 
@@ -1718,7 +1718,7 @@ label Rogue_sex_Reset:
         return
     $ RogueX.arm_pose = 2
     hide Rogue_sex_animation
-    call Rogue_Hide
+    call hide_girl(RogueX)
 
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         alpha 1
@@ -1747,7 +1747,7 @@ label Rogue_BJ_Launch(line=primary_action):
     if renpy.showing("Rogue_blowjob_animation"):
         return
 
-    call Rogue_Hide
+    call hide_girl(RogueX)
     if line == "L" or line == "cum":
         show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(stage_center):
             alpha 1
@@ -1790,7 +1790,7 @@ label Rogue_BJ_Reset:
     if not renpy.showing("Rogue_blowjob_animation"):
         return
 
-    call Rogue_Hide
+    call hide_girl(RogueX)
     $ action_speed = 0
 
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
@@ -1916,7 +1916,7 @@ label Rogue_TJ_Launch(line=primary_action):
 
     if renpy.showing("Rogue_TJ_Animation"):
         return
-    call Rogue_Hide
+    call hide_girl(RogueX)
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         alpha 1
         ease 1 zoom 2 xpos 550 offset (0,50)
@@ -1976,7 +1976,7 @@ label Rogue_TJ_Reset:
     if not renpy.showing("Rogue_TJ_Animation"):
         return
     hide Rogue_TJ_Animation
-    call Rogue_Hide
+    call hide_girl(RogueX)
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         zoom 2 xpos 550 offset (0,50)
     show Rogue_sprite zorder RogueX.sprite_layer:
@@ -2055,7 +2055,7 @@ label Rogue_HJ_Launch(line=primary_action):
     if renpy.showing("Rogue_HJ_Animation"):
         $ primary_action = "handjob"
         return
-    call Rogue_Hide
+    call hide_girl(RogueX)
     $ RogueX.arms = ""
     $ RogueX.arm_pose = 1
     if not renpy.showing("Rogue_sprite"):
@@ -2100,7 +2100,7 @@ label Rogue_HJ_Reset:
     $ action_speed = 0
     hide Rogue_HJ_Animation
     with dissolve
-    call Rogue_Hide
+    call hide_girl(RogueX)
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         alpha 1
         zoom 1.7 xpos 700 offset (0,200)
@@ -2898,7 +2898,7 @@ image Chibi_UI:
 
 
 label Rogue_Kissing_Launch(T=primary_action, Set=1):
-    call Rogue_Hide
+    call hide_girl(RogueX)
     $ primary_action = T
     $ RogueX.pose = "kiss" if Set else RogueX.pose
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location)
@@ -2919,7 +2919,7 @@ label Rogue_Kissing_Smooch:
     return
 
 label Rogue_Breasts_Launch(T=primary_action, Set=1):
-    call Rogue_Hide
+    call hide_girl(RogueX)
     $ primary_action = T
     $ RogueX.pose = "breasts" if Set else RogueX.pose
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
@@ -2927,7 +2927,7 @@ label Rogue_Breasts_Launch(T=primary_action, Set=1):
     return
 
 label Rogue_Middle_Launch(T=primary_action, Set=1):
-    call Rogue_Hide
+    call hide_girl(RogueX)
     $ primary_action = T
     $ RogueX.pose = "mid" if Set else RogueX.pose
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
@@ -2936,7 +2936,7 @@ label Rogue_Middle_Launch(T=primary_action, Set=1):
     return
 
 label Rogue_Pussy_Launch(T=primary_action, Set=1):
-    call Rogue_Hide
+    call hide_girl(RogueX)
     $ primary_action = T
     $ RogueX.pose = "pussy" if Set else RogueX.pose
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
@@ -2946,7 +2946,7 @@ label Rogue_Pussy_Launch(T=primary_action, Set=1):
 label Rogue_Pos_Reset(T=0, Set=0):
     if RogueX.location != bg_current:
         return
-    call Rogue_Hide
+    call hide_girl(RogueX)
     show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(RogueX.sprite_location):
         ease 0.5 offset (0,0) anchor (0.6, 0.0) zoom 1 alpha 1 xzoom 1 yzoom 1
     show Rogue_sprite zorder RogueX.sprite_layer:
@@ -3289,7 +3289,7 @@ label Close_Launch(GirlA=0, GirlB=0, XLoc=0, YLoc=0, XZoom=0):
             $ XZoom = 1.3
 
         if temp_Girls[0] == RogueX:
-            call Rogue_Hide
+            call hide_girl(RogueX)
             show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
                 zoom 1
@@ -3420,7 +3420,7 @@ label Les_Launch(Girl=0, XLoc=0, YLoc=0, XZoom=0, temp_Girls=[]):
             $ XZoom = 1.3
 
         if temp_Girls[0] == RogueX:
-            call Rogue_Hide
+            call hide_girl(RogueX)
             show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(XLoc,YLoc):
                 alpha 1
                 zoom 1
