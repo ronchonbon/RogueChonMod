@@ -177,7 +177,7 @@ label Rogue_OtherWoman(counter=0):
 
     if not Player.Harem:
         return
-    $ counter = int((RogueX.GirlLikeCheck(Player.Harem[0]) - 500)/2)
+    $ counter = int((RogueX.likes[Player.Harem[0].tag] - 500)/2)
 
     $ RogueX.change_face("_perplexed")
     if len(Player.Harem) >= 2:
@@ -255,114 +255,114 @@ label Rogue_About(Check=0):
     if Check == KittyX:
         if "poly Kitty" in RogueX.traits:
             ch_r "I think you know the answer to that one. . ."
-        elif RogueX.LikeKitty >= 900:
+        elif RogueX.likes[KittyX.tag] >= 900:
             ch_r "I think she's really . . . hot?"
-        elif RogueX.LikeKitty >= 800:
+        elif RogueX.likes[KittyX.tag] >= 800:
             ch_r "I feel really close to her, best friends, maybe more."
-        elif RogueX.LikeKitty >= 700:
+        elif RogueX.likes[KittyX.tag] >= 700:
             ch_r "She's one of my best friends."
-        elif RogueX.LikeKitty >= 600:
+        elif RogueX.likes[KittyX.tag] >= 600:
             ch_r "We're good friends."
-        elif RogueX.LikeKitty >= 500:
+        elif RogueX.likes[KittyX.tag] >= 500:
             ch_r "I don't know, she's ok."
-        elif RogueX.LikeKitty >= 400:
+        elif RogueX.likes[KittyX.tag] >= 400:
             ch_r "We're. . . kind of off right now."
-        elif RogueX.LikeKitty >= 300:
+        elif RogueX.likes[KittyX.tag] >= 300:
             ch_r "I don't want to talk about it."
         else:
             ch_r "That ho-bag skank?"
     elif Check == EmmaX:
         if "poly Emma" in RogueX.traits:
             ch_r "Well, I sure don't kick her out of bed. . ."
-        elif RogueX.LikeEmma >= 900:
+        elif RogueX.likes[EmmaX.tag] >= 900:
             ch_r "I'm kinda hot for teacher."
-        elif RogueX.LikeEmma >= 800:
+        elif RogueX.likes[EmmaX.tag] >= 800:
             ch_r "She's pretty amaz'in, right? Sometimes I wonder. . ."
-        elif RogueX.LikeEmma >= 700:
+        elif RogueX.likes[EmmaX.tag] >= 700:
             ch_r "We hang out sometimes after class, she's fun to talk to."
-        elif RogueX.LikeEmma >= 600:
+        elif RogueX.likes[EmmaX.tag] >= 600:
             ch_r "She's a really great teach, I love her lectures."
-        elif RogueX.LikeEmma >= 500:
+        elif RogueX.likes[EmmaX.tag] >= 500:
             ch_r "I don't know, she's ok."
-        elif RogueX.LikeEmma >= 400:
+        elif RogueX.likes[EmmaX.tag] >= 400:
             ch_r "I don't really like the way she looks at you in class."
-        elif RogueX.LikeEmma >= 300:
+        elif RogueX.likes[EmmaX.tag] >= 300:
             ch_r "I hate her class."
         else:
             ch_r "Ugh, that WITCH!"
     elif Check == LauraX:
         if "poly Laura" in RogueX.traits:
             ch_r "We hook up from time to time. . ."
-        elif RogueX.LikeLaura >= 900:
+        elif RogueX.likes[LauraX.tag] >= 900:
             ch_r "She's got an animal magnetism to her. . ."
-        elif RogueX.LikeLaura >= 800:
+        elif RogueX.likes[LauraX.tag] >= 800:
             ch_r "We really seem to get along. . ."
-        elif RogueX.LikeLaura >= 700:
+        elif RogueX.likes[LauraX.tag] >= 700:
             ch_r "She's a good friend."
-        elif RogueX.LikeLaura >= 600:
+        elif RogueX.likes[LauraX.tag] >= 600:
             ch_r "She's a good teammate."
-        elif RogueX.LikeLaura >= 500:
+        elif RogueX.likes[LauraX.tag] >= 500:
             ch_r "I don't know, she's ok in a fight."
-        elif RogueX.LikeLaura >= 400:
+        elif RogueX.likes[LauraX.tag] >= 400:
             ch_r "We're. . . not in a good place."
-        elif RogueX.LikeLaura >= 300:
+        elif RogueX.likes[LauraX.tag] >= 300:
             ch_r "I don't want to talk about it."
         else:
             ch_r "That ho-bag skank?"
     elif Check == JeanX:
         if "poly Jean" in RogueX.traits:
             ch_r "We hook up from time to time. . ."
-        elif RogueX.LikeJean >= 900:
+        elif RogueX.likes[JeanX.tag] >= 900:
             ch_r "She's got a real charm to her. . ."
-        elif RogueX.LikeJean >= 800:
+        elif RogueX.likes[JeanX.tag] >= 800:
             ch_r "We really seem to get along. . ."
-        elif RogueX.LikeJean >= 700:
+        elif RogueX.likes[JeanX.tag] >= 700:
             ch_r "She's a. . . friend."
-        elif RogueX.LikeJean >= 600:
+        elif RogueX.likes[JeanX.tag] >= 600:
             ch_r "She's a good teammate."
-        elif RogueX.LikeJean >= 500:
+        elif RogueX.likes[JeanX.tag] >= 500:
             ch_r "I don't know, she's ok."
-        elif RogueX.LikeJean >= 400:
+        elif RogueX.likes[JeanX.tag] >= 400:
             ch_r "We're. . . not in a good place."
-        elif RogueX.LikeJean >= 300:
+        elif RogueX.likes[JeanX.tag] >= 300:
             ch_r "I'm tired a' her nonsense."
         else:
             ch_r "That ho-bag witch?!"
     elif Check == StormX:
         if "poly Storm" in RogueX.traits:
             ch_r "Well, she's sure nice to cuddle up to. . ."
-        elif RogueX.LikeStorm >= 900:
+        elif RogueX.likes[StormX.tag] >= 900:
             ch_r "I'm kinda into her."
-        elif RogueX.LikeStorm >= 800:
+        elif RogueX.likes[StormX.tag] >= 800:
             ch_r "She's pretty great, right? I kinda wonder. . ."
-        elif RogueX.LikeStorm >= 700:
+        elif RogueX.likes[StormX.tag] >= 700:
             ch_r "We talk sometimes after class, she's a good listener."
-        elif RogueX.LikeStorm >= 600:
+        elif RogueX.likes[StormX.tag] >= 600:
             ch_r "She's a really great teach, I love her lectures."
-        elif RogueX.LikeStorm >= 500:
+        elif RogueX.likes[StormX.tag] >= 500:
             ch_r "I don't know, she's ok."
-        elif RogueX.LikeStorm >= 400:
+        elif RogueX.likes[StormX.tag] >= 400:
             ch_r "I don't really like the way she looks at you in class."
-        elif RogueX.LikeStorm >= 300:
+        elif RogueX.likes[StormX.tag] >= 300:
             ch_r "I hate her class."
         else:
             ch_r "Ugh, that WITCH!"
     elif Check == JubesX:
         if "poly Jubes" in RogueX.traits:
             ch_r "I think you know the answer to that one. . ."
-        elif RogueX.LikeJubes >= 900:
+        elif RogueX.likes[JubesX.tag] >= 900:
             ch_r "I think she's really . . . hot?"
-        elif RogueX.LikeJubes >= 800:
+        elif RogueX.likes[JubesX.tag] >= 800:
             ch_r "I think we work really great together. . ."
-        elif RogueX.LikeJubes >= 700:
+        elif RogueX.likes[JubesX.tag] >= 700:
             ch_r "She's a really good friend."
-        elif RogueX.LikeJubes >= 600:
+        elif RogueX.likes[JubesX.tag] >= 600:
             ch_r "We're friends."
-        elif RogueX.LikeJubes >= 500:
+        elif RogueX.likes[JubesX.tag] >= 500:
             ch_r "I don't know, she's ok."
-        elif RogueX.LikeJubes >= 400:
+        elif RogueX.likes[JubesX.tag] >= 400:
             ch_r "We're. . . kind of off right now."
-        elif RogueX.LikeJubes >= 300:
+        elif RogueX.likes[JubesX.tag] >= 300:
             ch_r "I don't want to talk about it."
         else:
             ch_r "That ho-bag skank?"
@@ -372,18 +372,18 @@ label Rogue_About(Check=0):
 label Rogue_Monogamy:
 
     menu:
-        "Could you not hook up with other girls?" if "mono" not in RogueX.traits:
+        "Could you not hook up with other girls?" if "monogamous" not in RogueX.traits:
             if RogueX.thirst >= 60 and not approval_check(RogueX, 1700, "LO", TabM=0):
 
                 $ RogueX.change_face("_sly",1)
-                if "mono" not in RogueX.daily_history:
+                if "monogamous" not in RogueX.daily_history:
                     $ RogueX.change_stat("obedience", 90, -2)
                 ch_r "I might consider that, but you don't exactly make yourself available. . ."
                 return
             elif approval_check(RogueX, 1200, "LO", TabM=0) and RogueX.love >= RogueX.obedience:
 
                 $ RogueX.change_face("_sly",1)
-                if "mono" not in RogueX.daily_history:
+                if "monogamous" not in RogueX.daily_history:
                     $ RogueX.change_stat("love", 90, 1)
                 ch_r "Aw, would that make you jealous?"
                 ch_r "I suppose I could restain myself. . ."
@@ -396,10 +396,10 @@ label Rogue_Monogamy:
                 $ RogueX.change_face("_sly",1,Brows="_confused")
                 ch_r "Who I \"hook up\" with is my own damned business."
                 return
-            if "mono" not in RogueX.daily_history:
+            if "monogamous" not in RogueX.daily_history:
                 $ RogueX.change_stat("obedience", 90, 3)
-            $ RogueX.add_word(1,0,"mono","mono")
-        "Don't hook up with other girls." if "mono" not in RogueX.traits:
+            $ RogueX.add_word(1,0,"monogamous","monogamous")
+        "Don't hook up with other girls." if "monogamous" not in RogueX.traits:
             if approval_check(RogueX, 900, "O", TabM=0):
 
                 $ RogueX.change_face("_sly",1,Eyes="_side")
@@ -407,7 +407,7 @@ label Rogue_Monogamy:
             elif RogueX.thirst >= 60 and not approval_check(RogueX, 1700, "LO", TabM=0):
 
                 $ RogueX.change_face("_sly",1)
-                if "mono" not in RogueX.daily_history:
+                if "monogamous" not in RogueX.daily_history:
                     $ RogueX.change_stat("obedience", 90, -2)
                 ch_r "I might consider that, but you don't exactly make yourself available. . ."
                 return
@@ -425,10 +425,10 @@ label Rogue_Monogamy:
                 $ RogueX.change_face("_sly",1,Brows="_confused")
                 ch_r "Who I \"hook up\" with is my own damned business."
                 return
-            if "mono" not in RogueX.daily_history:
+            if "monogamous" not in RogueX.daily_history:
                 $ RogueX.change_stat("obedience", 90, 3)
-            $ RogueX.add_word(1,0,"mono","mono")
-        "It's ok if you hook up with other girls." if "mono" in RogueX.traits:
+            $ RogueX.add_word(1,0,"monogamous","monogamous")
+        "It's ok if you hook up with other girls." if "monogamous" in RogueX.traits:
             if approval_check(RogueX, 700, "O", TabM=0):
                 $ RogueX.change_face("_sly",1,Eyes="_side")
                 ch_r "As you wish."
@@ -437,14 +437,14 @@ label Rogue_Monogamy:
                 ch_r "I hope you don't give me any reasons to want to. . ."
             else:
                 $ RogueX.change_face("_sly",1,Brows="_confused")
-                if "mono" not in RogueX.daily_history:
+                if "monogamous" not in RogueX.daily_history:
                     $ RogueX.change_stat("love", 90, -2)
                 ch_r "Oh? Well, glad I got your permission there."
-            if "mono" not in RogueX.daily_history:
+            if "monogamous" not in RogueX.daily_history:
                 $ RogueX.change_stat("obedience", 90, 3)
-            if "mono" in RogueX.traits:
-                $ RogueX.traits.remove("mono")
-            $ RogueX.add_word(1,0,"mono")
+            if "monogamous" in RogueX.traits:
+                $ RogueX.traits.remove("monogamous")
+            $ RogueX.add_word(1,0,"monogamous")
         "Never mind.":
             pass
     return
@@ -583,11 +583,11 @@ return
 
 
 
-label Rogue_SexChat:
-    $ Line = "Yeah, what did you want to talk about?" if not Line else Line
+label Rogue_sexchat:
+    $ line = "Yeah, what did you want to talk about?" if not line else line
     while True:
         menu:
-            ch_r "[Line]"
+            ch_r "[line]"
             "My favorite thing to do is. . .":
                 if "setfav" in RogueX.daily_history:
                     ch_r "Yeah, I know. You just told me earlier."
@@ -919,12 +919,12 @@ label Rogue_SexChat:
             "About when you masturbate":
                 call NoFap (RogueX)
 
-            "Never Mind" if Line == "Yeah, what did you want to talk about?":
+            "Never Mind" if line == "Yeah, what did you want to talk about?":
                 return
-            "That's all." if Line != "Yeah, what did you want to talk about?":
+            "That's all." if line != "Yeah, what did you want to talk about?":
                 return
-        if Line == "Yeah, what did you want to talk about?":
-            $ Line = "Anything else?"
+        if line == "Yeah, what did you want to talk about?":
+            $ line = "Anything else?"
     return
 
 
@@ -1033,11 +1033,11 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         ch_r ". . . I'm gettin some pretty naughty thoughts over here, [RogueX.player_petname]. . ."
 
     elif Options[0] == "blowjob":
-        $ Line = renpy.random.choice(["You know, you taste better than I thought.",
+        $ line = renpy.random.choice(["You know, you taste better than I thought.",
                 "You're making my jaw a bit sore there.",
                 "Let me know if you want a little mouth attention.",
                 "Hmmm. . . [she mimes her tongue knocking against her cheek.]"])
-        ch_r "[Line]"
+        ch_r "[line]"
 
     elif Options[0] == "close":
         ch_r "It's always been hard for me to get close to people, since I could never. . ."
@@ -1066,7 +1066,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         ch_r "Can't wait for the next big party."
         ch_r "I love to dance, and I've got the best partner to grind with-"
         $ RogueX.pose = "doggy"
-        call Rogue_Sex_Launch ("massage")
+        call Rogue_sex_Launch ("massage")
         if RogueX.legs == "_skirt":
             $ RogueX.upskirt = 1
             if RogueX.underwear and RogueX.seen_underwear and approval_check(RogueX, 800, TabM = 3):
@@ -1118,7 +1118,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
                 $ RogueX.change_stat("obedience", 80, 4)
                 $ RogueX.change_stat("inhibition", 80, 4)
             "I love you too, [RogueX.petname].":
-                $ RogueX.nameCheck()
+                $ RogueX.name_check()
                 if _return:
                     $ RogueX.change_face("_angry")
                     $ RogueX.change_stat("love", 90, -1)
@@ -1152,7 +1152,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         call Rogue_Master
         $ RogueX.daily_history.append("nametag chat")
     elif Options[0] == "sexfriend?":
-        call Rogue_Sexfriend
+        call Rogue_sexfriend
         $ RogueX.daily_history.append("nametag chat")
     elif Options[0] == "fuckbuddy?":
         call Rogue_Fuckbuddy
@@ -1163,11 +1163,11 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
     elif Options[0] == "annamarie":
         call Rogue_AnnaMarie
     elif Options[0] == "hate":
-        $ Line = renpy.random.choice(["Get away from me.",
+        $ line = renpy.random.choice(["Get away from me.",
                 "I don't want to see your face.",
                 "Stop bothering me.",
                 "Leave me alone."])
-        ch_r "[Line]"
+        ch_r "[line]"
     else:
 
         $ D20 = renpy.random.randint(1, 16)
@@ -1230,7 +1230,7 @@ label Rogue_Chitchat(O=0, Options=["default","default","default"]):
         else:
             $ RogueX.change_face("_smile")
             ch_r "I like hanging out with you like this!"
-    $ Line = 0
+    $ line = 0
     return
 
 
@@ -1546,7 +1546,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
         return
 
     $ D20 = renpy.random.randint(1, 20)
-    $ Line = 0
+    $ line = 0
     if RogueX.location == "bg_classroom":
         $ approval_bonus = -10
     elif RogueX.location == "bg_dangerroom":
@@ -1556,7 +1556,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
 
     if D20 <= 3:
 
-        $ Line = "no"
+        $ line = "no"
     elif "lesbian" in RogueX.recent_history:
 
         if approval_check(RogueX, 2000):
@@ -1564,7 +1564,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
             menu:
                 extend ""
                 "Sure":
-                    $ Line = "go to"
+                    $ line = "go to"
                 "No thanks.":
                     ch_r "Suit yourself."
                     return
@@ -1623,36 +1623,36 @@ label Rogue_Summon(approval_bonus=approval_bonus):
 
         if "summoned" in RogueX.recent_history:
             ch_r "Ok, fine, but why are you leading me on a merry chase?"
-            $ Line = "yes"
+            $ line = "yes"
 
         elif "goto" in RogueX.recent_history:
             menu:
                 extend ""
                 "You're right, be right back.":
                     ch_r "See you then!"
-                    $ Line = "go to"
+                    $ line = "go to"
                 "Nah, it's better here.":
                     ch_r "Fine by me."
                 "But I'd {i}really{/i} like to see you over here.":
                     if approval_check(RogueX, 600, "L") or approval_check(RogueX, 1400):
-                        $ Line = "lonely"
+                        $ line = "lonely"
                     else:
-                        $ Line = "no"
+                        $ line = "no"
                 "I said come over here.":
                     if approval_check(RogueX, 600, "O"):
 
-                        $ Line = "command"
+                        $ line = "command"
                     elif D20 >= 7 and approval_check(RogueX, 1400):
 
                         ch_r "I suppose I can, [RogueX.player_petname]."
-                        $ Line = "yes"
+                        $ line = "yes"
                     elif approval_check(RogueX, 200, "O"):
 
                         ch_r "I don't think so."
                         ch_r "If you want to see me, you know where to find me."
                     else:
 
-                        $ Line = "no"
+                        $ line = "no"
         else:
             menu:
                 extend ""
@@ -1660,7 +1660,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
                     $ RogueX.change_stat("love", 55, 1)
                     $ RogueX.change_stat("inhibition", 30, 1)
                     ch_r "See you then!"
-                    $ Line = "go to"
+                    $ line = "go to"
                 "Nah, we can talk later.":
 
                     $ RogueX.change_stat("obedience", 50, 1)
@@ -1671,10 +1671,10 @@ label Rogue_Summon(approval_bonus=approval_bonus):
                     if approval_check(RogueX, 600, "L") or approval_check(RogueX, 1400):
                         $ RogueX.change_stat("love", 70, 1)
                         $ RogueX.change_stat("obedience", 50, 1)
-                        $ Line = "lonely"
+                        $ line = "lonely"
                     else:
                         $ RogueX.change_stat("inhibition", 30, 1)
-                        $ Line = "no"
+                        $ line = "no"
                 "I said come over here.":
 
                     if approval_check(RogueX, 600, "O"):
@@ -1682,7 +1682,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
                         $ RogueX.change_stat("love", 50, 1, 1)
                         $ RogueX.change_stat("love", 40, -1)
                         $ RogueX.change_stat("obedience", 90, 1)
-                        $ Line = "command"
+                        $ line = "command"
 
                     elif D20 >= 7 and approval_check(RogueX, 1400):
 
@@ -1691,7 +1691,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
                         $ RogueX.change_stat("obedience", 50, 2)
                         $ RogueX.change_stat("obedience", 90, 1)
                         ch_r "I suppose I can, [RogueX.player_petname]."
-                        $ Line = "yes"
+                        $ line = "yes"
 
                     elif approval_check(RogueX, 200, "O"):
 
@@ -1708,7 +1708,7 @@ label Rogue_Summon(approval_bonus=approval_bonus):
                         $ RogueX.change_stat("inhibition", 50, 1)
                         $ RogueX.change_stat("love", 50, -1, 1)
                         $ RogueX.change_stat("obedience", 70, -1)
-                        $ Line = "no"
+                        $ line = "no"
     else:
 
 
@@ -1716,16 +1716,16 @@ label Rogue_Summon(approval_bonus=approval_bonus):
             ch_r "I'd love to, [RogueX.player_petname]."
         else:
             ch_r "Ok, I'll be right over, [RogueX.player_petname]."
-        $ Line = "yes"
+        $ line = "yes"
 
     $ approval_bonus = 0
 
-    if not Line:
+    if not line:
 
         $ RogueX.recent_history.append("no_summon")
         return
 
-    if Line == "no":
+    if line == "no":
 
         if RogueX.location == "bg_classroom":
             ch_r "I seriously can't, [RogueX.player_petname], big test coming up."
@@ -1736,11 +1736,11 @@ label Rogue_Summon(approval_bonus=approval_bonus):
         $ RogueX.recent_history.append("no_summon")
         return
 
-    elif Line == "go to":
+    elif line == "go to":
 
         $ renpy.pop_call()
         $ approval_bonus = 0
-        $ Line = 0
+        $ line = 0
         $ RogueX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
         if RogueX.location == "bg_classroom":
@@ -1775,17 +1775,17 @@ label Rogue_Summon(approval_bonus=approval_bonus):
             return
 
 
-    elif Line == "lonely":
+    elif line == "lonely":
         ch_r "Oh, how could I say \"no\" to you, [RogueX.player_petname]?"
-    elif Line == "command":
+    elif line == "command":
         ch_r "Fine, if you insist, [RogueX.player_petname]."
 
     $ RogueX.recent_history.append("summoned")
-    $ Line = 0
+    $ line = 0
     if "locked" in Player.traits:
         call locked_door (RogueX)
         return
-    call taboo_Level (0)
+    call taboo_level(taboo_location = False)
     $ RogueX.change_outfit()
     $ RogueX.location = bg_current
     call set_the_scene
@@ -1849,7 +1849,7 @@ label Rogue_Leave(approval_bonus=approval_bonus):
         $ RogueX.traits.append("follow")
 
     $ D20 = renpy.random.randint(1, 20)
-    $ Line = 0
+    $ line = 0
 
     if RogueX.location == "bg_classroom":
         $ approval_bonus = 10
@@ -1886,7 +1886,7 @@ label Rogue_Leave(approval_bonus=approval_bonus):
             if "followed" not in RogueX.recent_history:
                 $ RogueX.change_stat("love", 55, 1)
                 $ RogueX.change_stat("inhibition", 30, 1)
-            $ Line = "go to"
+            $ line = "go to"
         "Nah, we can talk later.":
 
             if "followed" not in RogueX.recent_history:
@@ -1899,11 +1899,11 @@ label Rogue_Leave(approval_bonus=approval_bonus):
                 if "followed" not in RogueX.recent_history:
                     $ RogueX.change_stat("love", 70, 1)
                     $ RogueX.change_stat("obedience", 50, 1)
-                $ Line = "lonely"
+                $ line = "lonely"
             else:
                 if "followed" not in RogueX.recent_history:
                     $ RogueX.change_stat("inhibition", 30, 1)
-                $ Line = "no"
+                $ line = "no"
         "No, stay here.":
 
             if approval_check(RogueX, 600, "O"):
@@ -1912,7 +1912,7 @@ label Rogue_Leave(approval_bonus=approval_bonus):
                     $ RogueX.change_stat("love", 50, 1, 1)
                     $ RogueX.change_stat("love", 40, -1)
                     $ RogueX.change_stat("obedience", 90, 1)
-                $ Line = "command"
+                $ line = "command"
 
             elif D20 >= 7 and approval_check(RogueX, 1400):
 
@@ -1922,7 +1922,7 @@ label Rogue_Leave(approval_bonus=approval_bonus):
                     $ RogueX.change_stat("obedience", 50, 2)
                     $ RogueX.change_stat("obedience", 90, 1)
                 ch_r "I suppose I can, [RogueX.player_petname]."
-                $ Line = "yes"
+                $ line = "yes"
 
             elif approval_check(RogueX, 200, "O"):
 
@@ -1942,17 +1942,17 @@ label Rogue_Leave(approval_bonus=approval_bonus):
                     $ RogueX.change_stat("inhibition", 50, 1)
                     $ RogueX.change_stat("love", 50, -1, 1)
                     $ RogueX.change_stat("obedience", 70, -1)
-                $ Line = "no"
+                $ line = "no"
 
 
     $ RogueX.recent_history.append("followed")
-    if not Line:
+    if not line:
 
         hide Rogue_sprite
-        call Gym_Clothes_Off ([RogueX])
+        call change_out_of_gym_clothes ([RogueX])
         return
 
-    if Line == "no":
+    if line == "no":
 
         if RogueX.location == "bg_classroom":
             ch_r "I seriously can't, [RogueX.player_petname], big test coming up."
@@ -1961,20 +1961,20 @@ label Rogue_Leave(approval_bonus=approval_bonus):
         else:
             ch_r "I'm sorry, [RogueX.player_petname], but I'm kinda busy right now."
         hide Rogue_sprite
-        call Gym_Clothes_Off ([RogueX])
+        call change_out_of_gym_clothes ([RogueX])
         return
 
-    elif Line == "go to":
+    elif line == "go to":
 
 
         $ approval_bonus = 0
-        $ Line = 0
-        call DrainAll ("leaving")
-        call DrainAll ("arriving")
+        $ line = 0
+        call drain_all_words ("leaving")
+        call drain_all_words ("arriving")
         $ RogueX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
         hide Rogue_sprite
-        call Gym_Clothes_Off ([RogueX])
+        call change_out_of_gym_clothes ([RogueX])
         if RogueX.location == "bg_classroom":
             ch_r "See you then!"
             jump classroom_entry
@@ -2007,15 +2007,15 @@ label Rogue_Leave(approval_bonus=approval_bonus):
 
 
 
-    elif Line == "lonely":
+    elif line == "lonely":
         ch_r "Oh, how could I say \"no\" to you, [RogueX.player_petname]?"
-    elif Line == "command":
+    elif line == "command":
         ch_r "Fine, if you insist, [RogueX.player_petname]."
 
-    $ Line = 0
+    $ line = 0
     ch_r "I can stay for a bit."
     $ RogueX.location = bg_current
-    call taboo_Level (0)
+    call taboo_level(taboo_location = False)
     return
 
 
@@ -2152,10 +2152,10 @@ label Rogue_Clothes:
     else:
         ch_r "I'm not really interested in your fashion opinions."
         return
-    if Girl != RogueX or Line == "Giftstore":
+    if Girl != RogueX or line == "Giftstore":
 
         $ renpy.pop_call()
-    $ Line = 0
+    $ line = 0
     $ Girl = RogueX
     call shift_focus (Girl)
 
@@ -2185,20 +2185,20 @@ label Rogue_Wardrobe_Menu:
                     show PhoneSex zorder 150
                     ch_r "How's that? . ."
                 hide PhoneSex
-            "Could I get a look at it?" if renpy.showing('DressScreen'):
+            "Could I get a look at it?" if renpy.showing('dress_screen'):
 
                 call outfitShame (RogueX, 0, 2)
                 if _return:
-                    hide DressScreen
+                    hide dress_screen
 
             "Would you be more comfortable behind a screen? (locked)" if RogueX.taboo:
                 pass
-            "Would you be more comfortable behind a screen?" if RogueX.location == bg_current and not RogueX.taboo and not renpy.showing('DressScreen'):
+            "Would you be more comfortable behind a screen?" if RogueX.location == bg_current and not RogueX.taboo and not renpy.showing('dress_screen'):
 
                 if approval_check(RogueX, 1500) or (RogueX.seen_breasts and RogueX.seen_pussy):
                     ch_r "Don't really need that, thanks."
                 else:
-                    show DressScreen zorder 150
+                    show dress_screen zorder 150
                     ch_r "This is more comfortable, thanks."
 
             "Gift for you (locked)" if Girl.location != bg_current:
@@ -2208,15 +2208,15 @@ label Rogue_Wardrobe_Menu:
                 call Gifts
             "Switch to. . .":
 
-                if renpy.showing('DressScreen'):
+                if renpy.showing('dress_screen'):
                     call outfitShame (RogueX, 0, 2)
                     if _return:
-                        hide DressScreen
+                        hide dress_screen
                     else:
                         $ RogueX.change_outfit()
                 $ RogueX.Set_Temp_outfit()
-                $ primary_action = 0
-                call Switch_Chat
+                $ primary_action = None
+                call Switch_chat
                 if Girl != RogueX:
                     ch_p "I wanted to talk about your clothes."
                     call expression Girl.tag +"_Clothes"
@@ -2241,16 +2241,16 @@ label Rogue_Wardrobe_Menu:
                     else:
                         ch_r "Ok."
                     $ RogueX.recent_history.append("wardrobe")
-                if renpy.showing('DressScreen'):
+                if renpy.showing('dress_screen'):
                     call outfitShame (RogueX, 0, 2)
                     if _return:
-                        hide DressScreen
+                        hide dress_screen
                     else:
                         $ RogueX.change_outfit()
 
                 $ RogueX.Set_Temp_outfit()
                 $ RogueX.had_chat[1] += 1
-                $ primary_action = 0
+                $ primary_action = None
                 return
 
 
@@ -2371,7 +2371,7 @@ label Rogue_Wardrobe_Menu:
             if approval_check(RogueX, 1200):
                 $ RogueX.change_outfit("sleep")
             else:
-                call Display_DressScreen (RogueX)
+                call Display_dress_screen (RogueX)
                 if _return:
                     $ RogueX.change_outfit("sleep")
 
@@ -2387,15 +2387,15 @@ label Rogue_Wardrobe_Menu:
 
 
             $ RogueX.change_face("_sexy", 1)
-            $ Line = 0
+            $ line = 0
             if not RogueX.bra and not RogueX.underwear and not RogueX.top and not RogueX.legs and not RogueX.hose:
                 ch_r "Can't get much more naked than this."
             elif RogueX.seen_breasts and RogueX.seen_pussy and approval_check(RogueX, 1000, TabM=5):
                 ch_r "Naughty boy. . ."
-                $ Line = 1
+                $ line = 1
             elif approval_check(RogueX, 2000, TabM=5):
                 ch_r "Hmm. . . you move fast, but I suppose for you. . ."
-                $ Line = 1
+                $ line = 1
             elif RogueX.seen_breasts and RogueX.seen_pussy and approval_check(RogueX, 1000, TabM=0):
                 ch_r "Well, maybe if it weren't quite so. . . public here."
             elif approval_check(RogueX, 2000, TabM=0):
@@ -2407,7 +2407,7 @@ label Rogue_Wardrobe_Menu:
                 $ RogueX.change_face("_angry", 1)
                 ch_r "What sort of common strumpet do you take me for?"
 
-            if Line:
+            if line:
                 $ RogueX.change_outfit("nude")
                 "She pulls all her clothes off and throws them in a heap on the floor."
                 call Rogue_First_Topless
@@ -2437,7 +2437,7 @@ label Rogue_Wardrobe_Menu:
                         else:
                             $ RogueX.change_face("_confused", 1)
                             ch_r "Well obviously. It's not like I'd ever go out like this."
-            $ Line = 0
+            $ line = 0
         "Never mind":
 
             return
@@ -2458,7 +2458,7 @@ label Rogue_Wardrobe_Menu:
                 call Rogue_NoBra
                 if not _return:
                     if not approval_check(RogueX, 1200):
-                        call Display_DressScreen (RogueX)
+                        call Display_dress_screen (RogueX)
                         if not _return:
                             return
                     else:
@@ -2466,7 +2466,7 @@ label Rogue_Wardrobe_Menu:
                         return
             else:
 
-                call Display_DressScreen (RogueX)
+                call Display_dress_screen (RogueX)
                 if not _return:
                     ch_r "I'd rather not. . ."
                     if not RogueX.bra:
@@ -2474,7 +2474,7 @@ label Rogue_Wardrobe_Menu:
                     return
 
             $ RogueX.top = ""
-            if not RogueX.bra and not renpy.showing('DressScreen'):
+            if not RogueX.bra and not renpy.showing('dress_screen'):
                 call Rogue_First_Topless
 
         "Try on the green mesh top." if RogueX.top != "_mesh_top":
@@ -2485,13 +2485,13 @@ label Rogue_Wardrobe_Menu:
                 call Rogue_NoBra
                 if not _return:
                     if not approval_check(RogueX, 1200):
-                        call Display_DressScreen (RogueX)
+                        call Display_dress_screen (RogueX)
                         if not _return:
                             return
                     else:
                         return
             else:
-                call Display_DressScreen (RogueX)
+                call Display_dress_screen (RogueX)
                 if not _return:
                     ch_r "I'm afraid that top is a bit sheer to have nothing under it."
                     if not RogueX.bra:
@@ -2507,7 +2507,7 @@ label Rogue_Wardrobe_Menu:
                     $ RogueX.neck = ""
 
 
-            if not RogueX.bra and not renpy.showing('DressScreen'):
+            if not RogueX.bra and not renpy.showing('dress_screen'):
                 call Rogue_First_Topless
 
         "How about that pink top?" if RogueX.top != "_pink_top":
@@ -2525,7 +2525,7 @@ label Rogue_Wardrobe_Menu:
                 $ RogueX.change_face("_perplexed", 1)
                 ch_r "I suppose? . ."
             else:
-                call Display_DressScreen (RogueX)
+                call Display_dress_screen (RogueX)
                 if not _return:
                     ch_r "That don't leave much to the imagination. . ."
                     return
@@ -2535,7 +2535,7 @@ label Rogue_Wardrobe_Menu:
             if RogueX.legs:
                 ch_r "I can't really wear that with my [RogueX.legs] on."
             elif not approval_check(RogueX, 1100, TabM=3):
-                call Display_DressScreen (RogueX)
+                call Display_dress_screen (RogueX)
                 if not _return:
                     ch_r "That's a bit . . . revealing."
                     return
@@ -2565,7 +2565,7 @@ label Rogue_Wardrobe_Menu:
                         ch_r "I'll keep my panties on, thanks."
                     else:
                         ch_r "Be happy with what you get."
-            if not RogueX.bra and not renpy.showing('DressScreen'):
+            if not RogueX.bra and not renpy.showing('dress_screen'):
                 call Rogue_First_Topless
         "Never mind":
 
@@ -2639,13 +2639,13 @@ label Rogue_Wardrobe_Menu:
                 call Rogue_NoPantiesOn
                 if not _return and not RogueX.underwear:
                     if not approval_check(RogueX, 1500):
-                        call Display_DressScreen (RogueX)
+                        call Display_dress_screen (RogueX)
                         if not _return:
                             return
                     else:
                         return
             else:
-                call Display_DressScreen (RogueX)
+                call Display_dress_screen (RogueX)
                 if not _return:
                     ch_r "Not in front of you, [RogueX.player_petname]."
                     if not RogueX.underwear:
@@ -2657,7 +2657,7 @@ label Rogue_Wardrobe_Menu:
             else:
                 $ RogueX.legs = ""
                 "She tugs her skirt off and drops it to the ground."
-            if renpy.showing('DressScreen'):
+            if renpy.showing('dress_screen'):
                 pass
             elif RogueX.underwear:
                 $ RogueX.seen_underwear = 1
@@ -2694,13 +2694,13 @@ label Rogue_Wardrobe_Menu:
                 call Rogue_NoPantiesOn
                 if not _return and not RogueX.underwear:
                     if not approval_check(RogueX, 1500):
-                        call Display_DressScreen (RogueX)
+                        call Display_dress_screen (RogueX)
                         if not _return:
                             return
                     else:
                         return
             else:
-                call Display_DressScreen (RogueX)
+                call Display_dress_screen (RogueX)
                 if not _return:
                     ch_r "Not in front of you, [RogueX.player_petname]."
                     if not RogueX.underwear:
@@ -2709,7 +2709,7 @@ label Rogue_Wardrobe_Menu:
             if RogueX.underwear == "_shorts":
                 $ RogueX.underwear = ""
             "She tugs her shorts off and drops them to the ground."
-            if renpy.showing('DressScreen'):
+            if renpy.showing('dress_screen'):
                 pass
             elif RogueX.underwear:
                 $ RogueX.seen_underwear = 1
@@ -2749,15 +2749,15 @@ label Rogue_Wardrobe_Menu:
                     else:
                         $ RogueX.underwear = "_black_panties"
                     if approval_check(RogueX, 1200, TabM=4) and RogueX.legs:
-                        $ Line = RogueX.legs
+                        $ line = RogueX.legs
                         $ RogueX.legs = ""
-                        "She pulls off her [Line] and slips on the [RogueX.underwear]."
+                        "She pulls off her [line] and slips on the [RogueX.underwear]."
                     elif RogueX.legs == "_skirt":
                         "She pulls out her [RogueX.underwear] and pulls them up under her skirt."
                         $ RogueX.legs = ""
                         "Then she drops the skirt to the floor."
                     else:
-                        $ Line = RogueX.legs
+                        $ line = RogueX.legs
                         $ RogueX.legs = ""
                         "She steps away a moment and then comes back wearing only the [RogueX.underwear]."
                     return
@@ -2802,7 +2802,7 @@ label Rogue_Wardrobe_Menu:
                     elif RogueX.top == "_hoodie" and approval_check(RogueX, 500, TabM=2):
                         ch_r "I guess this covers enough. . ."
                     elif not RogueX.seen_breasts and not approval_check(RogueX, 1100):
-                        call Display_DressScreen (RogueX)
+                        call Display_dress_screen (RogueX)
                         if not _return:
                             if RogueX.top == "_pink_top" and approval_check(RogueX, 950, TabM=2):
                                 ch_r "This look is a bit revealing. . ."
@@ -2813,13 +2813,13 @@ label Rogue_Wardrobe_Menu:
                             else:
                                 ch_r "I don't think so, [RogueX.player_petname]."
                             return
-                    $ Line = RogueX.bra
+                    $ line = RogueX.bra
                     $ RogueX.bra = ""
                     if RogueX.top:
-                        "She reaches into her [RogueX.top] grabs her [Line], and pulls it out, dropping it to the ground."
+                        "She reaches into her [RogueX.top] grabs her [line], and pulls it out, dropping it to the ground."
                     else:
-                        "She lets her [Line] fall to the ground."
-                    if (not RogueX.top or RogueX.top == "_mesh_top") and not renpy.showing('DressScreen'):
+                        "She lets her [line] fall to the ground."
+                    if (not RogueX.top or RogueX.top == "_mesh_top") and not renpy.showing('dress_screen'):
                         call Rogue_First_Topless
 
                 "Try on that black tank top." if RogueX.bra != "_tank":
@@ -2831,7 +2831,7 @@ label Rogue_Wardrobe_Menu:
                     if (RogueX.seen_breasts and approval_check(RogueX, 600)) or approval_check(RogueX, 900, TabM=2):
                         ch_r "Sure."
                     else:
-                        call Display_DressScreen (RogueX)
+                        call Display_dress_screen (RogueX)
                         if not _return:
                             ch_r "I don't know about wearing it with this. . ."
                             return
@@ -2841,7 +2841,7 @@ label Rogue_Wardrobe_Menu:
                     if (RogueX.seen_breasts and approval_check(RogueX, 600)) or approval_check(RogueX, 1100, TabM=2):
                         ch_r "Sure."
                     else:
-                        call Display_DressScreen (RogueX)
+                        call Display_dress_screen (RogueX)
                         if not _return:
                             ch_r "That's a bit too revealing. . ."
                             return
@@ -2851,7 +2851,7 @@ label Rogue_Wardrobe_Menu:
                     if (RogueX.seen_breasts and approval_check(RogueX, 600)) or approval_check(RogueX, 900, TabM=2):
                         ch_r "Sure."
                     else:
-                        call Display_DressScreen (RogueX)
+                        call Display_dress_screen (RogueX)
                         if not _return:
                             ch_r "I don't know about wearing it with this. . ."
                             return
@@ -2861,7 +2861,7 @@ label Rogue_Wardrobe_Menu:
                     if (RogueX.seen_breasts and approval_check(RogueX, 800)) or approval_check(RogueX, 1100, TabM=2):
                         ch_r "Sure."
                     else:
-                        call Display_DressScreen (RogueX)
+                        call Display_dress_screen (RogueX)
                         if not _return:
                             ch_r "That's a bit too revealing. . ."
                             return
@@ -2874,7 +2874,7 @@ label Rogue_Wardrobe_Menu:
                         if RogueX.seen_breasts or approval_check(RogueX, 1000, TabM=2):
                             ch_r "Sure."
                         else:
-                            call Display_DressScreen (RogueX)
+                            call Display_dress_screen (RogueX)
                             if not _return:
                                 ch_r "I kinda don't feel right about that. . ."
                                 return
@@ -2927,7 +2927,7 @@ label Rogue_Wardrobe_Menu:
                         elif approval_check(RogueX, 1400, TabM=3):
                             ch_r "Oh, fine. You've been a good boy."
                         else:
-                            call Display_DressScreen (RogueX)
+                            call Display_dress_screen (RogueX)
                             if not _return:
                                 $ RogueX.change_face("_surprised")
                                 $ RogueX.brows = "_angry"
@@ -2936,27 +2936,27 @@ label Rogue_Wardrobe_Menu:
                                 else:
                                     ch_r "Not with you around,[RogueX.player_petname]!"
                                 jump Rogue_Clothes
-                    $ Line = RogueX.underwear
+                    $ line = RogueX.underwear
                     $ RogueX.underwear = ""
                     if not RogueX.legs:
-                        "She pulls off her [Line], then drops them to the ground."
-                        if not renpy.showing('DressScreen'):
+                        "She pulls off her [line], then drops them to the ground."
+                        if not renpy.showing('dress_screen'):
                             call Rogue_First_Bottomless
                     elif approval_check(RogueX, 1200, TabM=4):
                         $ primary_action = RogueX.legs
                         $ RogueX.legs = ""
                         pause 0.5
                         $ RogueX.legs = primary_action
-                        "She pulls off her [RogueX.legs] and [Line], then pulls the [RogueX.legs] back on."
+                        "She pulls off her [RogueX.legs] and [line], then pulls the [RogueX.legs] back on."
                         $ primary_action = 1
                         call Rogue_First_Bottomless (1)
                     elif RogueX.legs == "_skirt":
-                        "She reaches under her skirt and pulls her [Line] off."
+                        "She reaches under her skirt and pulls her [line] off."
                     else:
                         $ RogueX.blushing = "_blush1"
                         "She steps away a moment and then comes back."
                         $ RogueX.blushing = ""
-                    $ Line = 0
+                    $ line = 0
 
                 "Why don't you wear the green panties instead?" if RogueX.underwear and RogueX.underwear != "_green_panties":
                     if approval_check(RogueX, 1000, TabM=3):
@@ -2965,7 +2965,7 @@ label Rogue_Wardrobe_Menu:
                     elif RogueX.underwear == "_shorts":
                         ch_r "Heh, no, I think I'll stick with these, thanks."
                     else:
-                        call Display_DressScreen (RogueX)
+                        call Display_dress_screen (RogueX)
                         if not _return:
                             ch_r "I think I'll choose my own underwear, thank you."
                         else:
@@ -2978,7 +2978,7 @@ label Rogue_Wardrobe_Menu:
                     elif RogueX.underwear == "_shorts":
                         ch_r "Heh, no, I think I'll stick with these, thanks."
                     else:
-                        call Display_DressScreen (RogueX)
+                        call Display_dress_screen (RogueX)
                         if not _return:
                             ch_r "I don't see how that's any business of yours, [RogueX.player_petname]."
                         else:
@@ -2991,7 +2991,7 @@ label Rogue_Wardrobe_Menu:
                     elif RogueX.underwear == "_shorts":
                         ch_r "Heh, no, I think I'll stick with these, thanks."
                     else:
-                        call Display_DressScreen (RogueX)
+                        call Display_dress_screen (RogueX)
                         if not _return:
                             ch_r "I don't see how that's any business of yours, [RogueX.player_petname]."
                         else:
@@ -3006,7 +3006,7 @@ label Rogue_Wardrobe_Menu:
                             ch_r "Sure."
                             $ RogueX.underwear = "_bikini_bottoms"
                         else:
-                            call Display_DressScreen (RogueX)
+                            call Display_dress_screen (RogueX)
                             if not _return:
                                 ch_r "I kinda don't feel right about that. . ."
                             else:

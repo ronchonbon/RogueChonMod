@@ -1,5 +1,5 @@
 image title card = "images/titleimage.jpg"
-image NightMask = "images/nightmask.png"
+image night_mask = "images/nightmask.png"
 
 image UI_Backpack = "images/UI_Backpack_idle.png"
 image UI_Dildo = "images/UI_Dildo.png"
@@ -15,7 +15,7 @@ image UI_PartnerHand:
     ConditionSwitch("Partner == StormX", "images/UI_GirlHandS.png",
             "True", "images/UI_GirlHand.png")
 
-image blackscreen:
+image black_screen:
     Solid("#000000")
     on show:
         alpha 1.0
@@ -89,11 +89,11 @@ init -1:
     default multi_action = True
     default action_speed = 0
 
-    default primary_action = 0
-    default offhand_action = 0
-    default girl_offhand_action = 0
-    default second_girl_primary_action = 0
-    default second_girl_offhand_action = 0
+    default primary_action = None
+    default offhand_action = None
+    default girl_offhand_action = None
+    default second_girl_primary_action = None
+    default second_girl_offhand_action = None
 
     default position_timer = 100
 
@@ -134,7 +134,7 @@ init -1:
     default Xavier_emotion = "_happy"
     default Xavier_sprite_location = stage_center
 
-    default Gwenname = "????"
+    default Gwen_name = "????"
 
     default door_locked = False
     default entering = False

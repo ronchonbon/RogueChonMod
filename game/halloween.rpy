@@ -1,7 +1,7 @@
 
-label Halloween_Chat(Girl=0):
+label Halloween_chat(Girl=0):
 
-    show blackscreen onlayer black
+    show black_screen onlayer black
     if Girl == RogueX and renpy.showing("Rogue_sprite"):
         pass
     elif Girl == KittyX and renpy.showing("Kitty_sprite"):
@@ -27,11 +27,11 @@ label Halloween_Chat(Girl=0):
         $ Present.append(Girl)
         $ Girl.location = "HW Party"
 
-        call show_girl (Girl)
-    hide blackscreen onlayer black
+        call display_girl (Girl)
+    hide black_screen onlayer black
 
     if Girl == EmmaX and "classcaught" not in EmmaX.history:
-        jump Emma_HWChat_Minimal
+        jump Emma_HWchat_Minimal
 
     if Girl == RogueX:
         ch_r "So what did you want to talk about, [Girl.player_petname]?"
@@ -46,13 +46,13 @@ label Halloween_Chat(Girl=0):
     elif Girl == StormX:
         ch_s "What can I do for you, [Girl.player_petname]?"
 
-    call Halloween_Chat_Menu
+    call Halloween_chat_Menu
     return
 
 
 
-label Halloween_Chat_Menu:
-    $ Girl = GirlCheck(Girl)
+label Halloween_chat_Menu:
+    $ Girl = check_girl(Girl)
     $ Girl.change_face()
     call shift_focus (Girl)
 
@@ -204,10 +204,10 @@ label Halloween_Chat_Menu:
             elif Girl == StormX:
                 ch_s "Very well then."
             return
-    jump Halloween_Chat_Menu
+    jump Halloween_chat_Menu
 
 
-label Emma_HWChat_Minimal:
+label Emma_HWchat_Minimal:
     $ EmmaX.change_face()
     call shift_focus (EmmaX)
     menu:
@@ -240,7 +240,7 @@ label Emma_HWChat_Minimal:
             ch_e "Very well. . ."
             ch_e "I have some. . . business to attend to."
             return
-    jump Emma_HWChat_Minimal
+    jump Emma_HWchat_Minimal
 
 
 label HWchange_stat(Girl=0, HWType=0, HWCheck=0, HWvalue=0, HWStore=0):
@@ -256,14 +256,14 @@ label HWchange_stat(Girl=0, HWType=0, HWCheck=0, HWvalue=0, HWStore=0):
     return
 
 
-label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
+label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWline=[]):
 
 
 
 
 
     $ bg_current = "HW Party"
-    call remove_girl ("All")
+    call remove_girl ("all")
     
     $ Party = []
     $ Present = []
@@ -319,9 +319,9 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
             call HWchange_stat (RogueX, "inhibition", 50, 1)
             $ RogueX.change_face("_confused")
 
-    $ HWLine = ["Oh. . . that's sorta what I figured. . .","Well \"Ahoy\" to you then.","Oooh, dangerous. . .","Well I've certainly got a fire for you to put out. . ."]
-    $ HWLine = HWLine[Costume]
-    ch_r "[HWLine]"
+    $ HWline = ["Oh. . . that's sorta what I figured. . .","Well \"Ahoy\" to you then.","Oooh, dangerous. . .","Well I've certainly got a fire for you to put out. . ."]
+    $ HWline = HWline[Costume]
+    ch_r "[HWline]"
     if not Costume:
         $ RogueX.change_face("_smile")
         ch_r "Still, welcome to the party, I suppose. . ."
@@ -459,9 +459,9 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
     $ KittyX.change_face("_smile",Eyes="_down")
     ch_k "Lemme guess who you are. . ."
     $ KittyX.change_face("_smile")
-    $ HWLine = [Player.name+" Right?","A mysterious sailor. . .","Oooh, dangerous assassin. . .","A noble hero."]
-    $ HWLine = HWLine[Costume]
-    ch_k "[HWLine]"
+    $ HWline = [Player.name+" Right?","A mysterious sailor. . .","Oooh, dangerous assassin. . .","A noble hero."]
+    $ HWline = HWline[Costume]
+    ch_k "[HWline]"
     menu:
         extend ""
         "Yup.":
@@ -626,9 +626,9 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
 
     $ LauraX.change_face("_normal")
     ch_l "Oh, hey, [KittyX.name], [Player.name]."
-    $ HWLine = ["Like the look.","Homeless person?","Hand ninja?","Lumberjack?"]
-    $ HWLine = HWLine[Costume]
-    ch_l "[HWLine]"
+    $ HWline = ["Like the look.","Homeless person?","Hand ninja?","Lumberjack?"]
+    $ HWline = HWline[Costume]
+    ch_l "[HWline]"
     if Costume:
         menu:
             extend ""
@@ -654,9 +654,9 @@ label Halloween_Party_entry(HWEvents=[], HWParty=[], Costume=0, HWLine=[]):
                     call HWchange_stat (LauraX, "inhibition", 60, 2)
                     ch_l "It -definitely- looks like a Hand ninja though."
     $ KittyX.change_face("_smile",Eyes="_side")
-    $ HWLine = ["Right?","He's a pirate, silly!","Yeah, I guess he could be. . .","It's a fireman, silly!"]
-    $ HWLine = HWLine[Costume]
-    ch_k "[HWLine]"
+    $ HWline = ["Right?","He's a pirate, silly!","Yeah, I guess he could be. . .","It's a fireman, silly!"]
+    $ HWline = HWline[Costume]
+    ch_k "[HWline]"
     $ KittyX.change_face("_smile")
     ch_k "Now guess what [LauraX.name]'s going as!"
     menu:
@@ -847,7 +847,7 @@ label Halloween_Jean:
     ch_j ". . ."
     $ JeanX.change_face("_normal",Brows="_angry")
     ch_j "Oh, hey. . . you look familiar."
-    $ Line = JeanX.player_petname
+    $ line = JeanX.player_petname
     menu:
         extend ""
         "It's me, [Player.name].":
@@ -938,17 +938,17 @@ label Halloween_Jean:
                 call HWchange_stat (JeanX, "love", 90, 1)
                 call HWchange_stat (JeanX, "obedience", 50, 1)
                 call HWchange_stat (JeanX, "obedience", 70, 1)
-                ch_j "Oh. Right. [Line]."
-                $ JeanX.player_petname = Line
-                $ Line = 0
-            "And you call me [Line], remember?" if Line != Player.name:
+                ch_j "Oh. Right. [line]."
+                $ JeanX.player_petname = line
+                $ line = 0
+            "And you call me [line], remember?" if line != Player.name:
                 $ JeanX.change_face("_normal")
                 call HWchange_stat (JeanX, "love", 70, 1)
                 call HWchange_stat (JeanX, "love", 90, 1)
                 call HWchange_stat (JeanX, "obedience", 70, 1)
-                ch_j "Oh. Right. [Line]."
-                $ JeanX.player_petname = Line
-                $ Line = 0
+                ch_j "Oh. Right. [line]."
+                $ JeanX.player_petname = line
+                $ line = 0
             "Leave it":
                 $ JeanX.change_face("_normal")
                 call HWchange_stat (JeanX, "inhibition", 50, 1)
@@ -1102,9 +1102,9 @@ label Halloween_Jean:
     $ StormX.change_face("_smile",Eyes="_down")
     "She looks you up and down."
     $ StormX.change_face("_smile")
-    $ HWLine = ["Some form of vagabond? Yes?","You are a dashing swashbuckler!","You are a deadly Hand ninja.",". . . Ah! You are a valiant fire fighter!"]
-    $ HWLine = HWLine[Costume]
-    ch_s "[HWLine]"
+    $ HWline = ["Some form of vagabond? Yes?","You are a dashing swashbuckler!","You are a deadly Hand ninja.",". . . Ah! You are a valiant fire fighter!"]
+    $ HWline = HWline[Costume]
+    ch_s "[HWline]"
     menu:
         extend ""
         "Yeah, you got it.":
@@ -1391,10 +1391,10 @@ label Halloween_Emma:
     ch_e "Now that you mention it, the other students are a bit. . . flamboyantly attired."
     $ EmmaX.change_face("_angry",Eyes="_down")
     ch_e "Does that explain why you're dressed as some sort of. . ."
-    $ HWLine = ["Well, I suppose that's how you always look.","Rogue seaman?","Sneakthief?","Fireman?"]
+    $ HWline = ["Well, I suppose that's how you always look.","Rogue seaman?","Sneakthief?","Fireman?"]
     $ EmmaX.change_face("_normal",Brows="_confused")
-    $ HWLine = HWLine[Costume]
-    ch_e "[HWLine]"
+    $ HWline = HWline[Costume]
+    ch_e "[HWline]"
     if Costume == 1:
         menu:
             extend ""
@@ -1555,17 +1555,17 @@ label Halloween_Party:
     menu:
         "You are at the Halloween Party. What would you like to do?"
         "Talk to [RogueX.name]." if RogueX.location == "HW Party" or RogueX.location == "nearby":
-            call Halloween_Chat (RogueX)
+            call Halloween_chat (RogueX)
         "Talk to [KittyX.name]." if KittyX.location == "HW Party" or KittyX.location == "nearby":
-            call Halloween_Chat (KittyX)
+            call Halloween_chat (KittyX)
         "Talk to [EmmaX.name]." if EmmaX.location == "HW Party" or EmmaX.location == "nearby":
-            call Halloween_Chat (EmmaX)
+            call Halloween_chat (EmmaX)
         "Talk to [LauraX.name]." if LauraX.location == "HW Party" or LauraX.location == "nearby":
-            call Halloween_Chat (LauraX)
+            call Halloween_chat (LauraX)
         "Talk to [JeanX.name]." if JeanX.location == "HW Party" or JeanX.location == "nearby":
-            call Halloween_Chat (JeanX)
+            call Halloween_chat (JeanX)
         "Talk to [StormX.name]." if StormX.location == "HW Party" or StormX.location == "nearby":
-            call Halloween_Chat (StormX)
+            call Halloween_chat (StormX)
         "Leave the party":
             call Halloween_Ending
     jump Halloween_Party

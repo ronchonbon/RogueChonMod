@@ -25,7 +25,7 @@ label AskDateOther:
 
 
 label Les_Interupted(Girl=0, temp_Girls=[]):
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
 
     if "unseen" not in Girl.recent_history:
         if Girl.event_counter["orgasmed"]< 3 and Girl.remaining_actions:
@@ -67,8 +67,8 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
     elif Girl == JubesX:
         ch_v "Oh? hey [Girl.player_petname]. What'd you see?"
     $ Girl.remaining_actions -= 1 if Girl.remaining_actions > 0 else 0
-    call checkout (1)
-    $ Line = 0
+    call checkout(total = True)
+    $ line = 0
 
 
     if offhand_action == "jerking_off":
@@ -262,7 +262,7 @@ label Les_Interupted(Girl=0, temp_Girls=[]):
     $ action_context = "interrupted"
 
 label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
 
     if not Girl.remaining_actions:
@@ -314,19 +314,19 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
 
         call Girl_Whammy (Girl)
 
-    $ Line = Girl.GirlLikeCheck(Partner)
-    if Line >= 900:
+    $ line = Girl.likes[Partner.tag]
+    if line >= 900:
         $ Bonus += 150
-    elif Line >= 800 or "poly "+Partner.tag in Girl.traits:
+    elif line >= 800 or "poly "+Partner.tag in Girl.traits:
         $ Bonus += 100
-    elif Line >= 700:
+    elif line >= 700:
         $ Bonus += 50
-    elif Line <= 200:
+    elif line <= 200:
         $ Bonus -= 200
-    elif Line <= 500:
+    elif line <= 500:
         $ Bonus -= 100
     $ Partner.drain_word("unseen",1,0)
-    $ Line = 0
+    $ line = 0
 
     $ Girl.add_word(1,"noticed "+Partner.tag,"noticed "+Partner.tag)
     $ Partner.add_word(1,"noticed "+Girl.tag,"noticed "+Girl.tag)
@@ -663,10 +663,10 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
             jump Les_Prep
         elif approval and "lesbian" in Girl.daily_history:
             $ Girl.change_face("_sexy", 1)
-            $ Line = renpy.random.choice(["Enjoyed the show?",
+            $ line = renpy.random.choice(["Enjoyed the show?",
                                     "Didn't get enough earlier?",
                                     "I don't mind having an audience. . ."])
-            Girl.voice "[Line]"
+            Girl.voice "[line]"
         elif Girl.event_counter["been_with_girl"] < 3:
             $ Girl.change_face("_sexy", 1)
             $ Girl.brows = "_confused"
@@ -687,12 +687,12 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
         else:
             $ Girl.change_face("_sexy", 1)
             $ Girl.ArmPose = 2
-            $ Line = renpy.random.choice(["You do like to watch.",
+            $ line = renpy.random.choice(["You do like to watch.",
                                     "So you'd like us to go again?",
                                     "You want to watch some more?",
                                     "You want me to get it on with "+Partner.tag+"?"])
-            Girl.voice "[Line]"
-        $ Line = 0
+            Girl.voice "[line]"
+        $ line = 0
 
 
     if approval >= 2:
@@ -735,13 +735,13 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                 elif Girl == JubesX:
                     ch_v "Back to it then?"
             else:
-                $ Line = renpy.random.choice(["Well. . . ok.",
+                $ line = renpy.random.choice(["Well. . . ok.",
                                         "I don't mind getting with her. . .",
                                         "A",
                                         "Sure.",
                                         "I guess. . .",
                                         "Heh, ok, fine."])
-                if Line == "A":
+                if line == "A":
                     if Girl == RogueX:
                         ch_r "I may have needed this anyway. . ."
                     elif Girl == KittyX:
@@ -757,8 +757,8 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                     elif Girl == JubesX:
                         ch_v "I still needed some attention anyway."
                 else:
-                    Girl.voice "[Line]"
-                $ Line = 0
+                    Girl.voice "[line]"
+                $ line = 0
         $ Girl.change_stat("obedience", 20, 1)
         $ Girl.change_stat("obedience", 60, 1)
         $ Girl.change_stat("inhibition", 70, 2)
@@ -800,7 +800,7 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                     elif Girl == JubesX:
                         ch_v "Sure, maybe."
                 elif Bonus >= 0:
-                    $ Girl.GLG(Partner,800,3,1)
+                    $ Girl.check_if_likes(Partner,800,3,1)
                     if Girl == RogueX:
                         ch_r "Um, I don't know. . . maybe?"
                     elif Girl == KittyX:
@@ -855,13 +855,13 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                     $ Girl.change_stat("obedience", 50, 5)
                     $ Girl.change_stat("inhibition", 70, 4)
                     $ Girl.change_stat("inhibition", 40, 4)
-                    $ Line = renpy.random.choice(["Well. . . ok.",
+                    $ line = renpy.random.choice(["Well. . . ok.",
                                         "I don't mind getting with her. . .",
                                         "A",
                                         "Sure.",
                                         "I guess. . .",
                                         "Heh, ok, fine."])
-                    if Line == "A":
+                    if line == "A":
                         if Girl == RogueX:
                             ch_r "I may have needed this anyway. . ."
                         elif Girl == KittyX:
@@ -877,9 +877,9 @@ label LesScene(Girl=0, Bonus=0, temp_Girls=[]):
                         elif Girl == JubesX:
                             ch_v "I mean, maybe."
                     else:
-                        Girl.voice "[Line]"
-                    Girl.voice "[Line]"
-                    $ Line = 0
+                        Girl.voice "[line]"
+                    Girl.voice "[line]"
+                    $ line = 0
                     jump Les_Partner
             "Just get at it already.":
 
@@ -1079,12 +1079,12 @@ label Les_Partner:
 
 label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
 
-    $ Line = 0
+    $ line = 0
     if Girl not in all_Girls or Girl == Partner:
         $ Girl = focused_Girl
         if Girl == Partner:
             $ Partner = 0
-            $ Line = 1
+            $ line = 1
 
     if Partner not in all_Girls:
         $ Partner = 0
@@ -1096,11 +1096,11 @@ label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
                 $ temp_Girls = [1]
             $ temp_Girls.remove(temp_Girls[0])
 
-    if Line:
+    if line:
 
         call shift_focus (Partner)
 
-    $ Line = 0
+    $ line = 0
 
     $ Girl.add_word(1,"noticed "+Partner.tag,"noticed "+Partner.tag)
     $ Partner.add_word(1,"noticed "+Girl.tag,"noticed "+Girl.tag)
@@ -1128,7 +1128,7 @@ label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
     if action_context:
         $ renpy.pop_call()
         $ action_context = None
-    $ Line = 0
+    $ line = 0
     if Girl.Taboo:
         $ Girl.drain_word("no_taboo")
     $ Girl.drain_word("no_lesbian")
@@ -1136,7 +1136,7 @@ label Les_Prep(Girl=focused_Girl, temp_Girls=[]):
     $ Partner.add_word(0,"lesbian","lesbian")
 
 label Les_Cycle(Girl=focused_Girl):
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     while round > 0:
         call shift_focus (Girl)
         call Les_Launch (Girl)
@@ -1154,7 +1154,7 @@ label Les_Cycle(Girl=focused_Girl):
                 "Start jack'in it." if offhand_action != "jerking_off":
                     call jerking_off (Girl)
                 "Stop jack'in it." if offhand_action == "jerking_off":
-                    $ offhand_action = 0
+                    $ offhand_action = None
 
                 "Focus to last longer [[not unlocked]. (locked)" if "focus" not in Player.traits:
                     pass
@@ -1239,11 +1239,11 @@ label Les_Cycle(Girl=focused_Girl):
                 "Back to Sex Menu" if multi_action:
                     ch_p "Let's try something else."
                     $ action_context = "shift"
-                    $ Line = 0
+                    $ line = 0
                     jump Les_After
                 "End Scene" if not multi_action:
                     ch_p "Let's stop for now."
-                    $ Line = 0
+                    $ line = 0
                     jump Les_After
 
 
@@ -1269,7 +1269,7 @@ label Les_Cycle(Girl=focused_Girl):
                     if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
                         $ Girl.recent_history.append("unsatisfied")
                         $ Girl.daily_history.append("unsatisfied")
-                    $ Line = "came"
+                    $ line = "came"
                 else:
                     "You grunt and try to hold it in."
                     $ Player.focus = 95
@@ -1280,8 +1280,8 @@ label Les_Cycle(Girl=focused_Girl):
                 call Girl_Cumming (Girl)
                 jump Les_Interupted
 
-            if Line == "came":
-                $ Line = 0
+            if line == "came":
+                $ line = 0
                 if not Player.semen:
                     "You're emptied out, you should probably take a break."
         if Partner and Partner.lust >= 100:
@@ -1304,7 +1304,7 @@ label Les_Cycle(Girl=focused_Girl):
                 call Sex_Basic_Dialog (Girl, 5)
 
     $ Girl.change_face("_bemused", 0)
-    $ Line = 0
+    $ line = 0
     if "unseen" not in Girl.recent_history:
         call Sex_Basic_Dialog (Girl, "done")
 
@@ -1408,7 +1408,7 @@ label Post_Les_Dialog:
     else:
 
 
-        if Girl.GirlLikeCheck(Partner) >= 600:
+        if Girl.likes[Partner.tag] >= 600:
 
             if Girl == RogueX:
                 ch_r "You. . . really know what you're doing down there. . ."
@@ -1442,7 +1442,7 @@ label Post_Les_Dialog:
                 ch_v "You. . . tried. . ."
 
 
-        if Partner.GirlLikeCheck(Girl) >= 600:
+        if Partner.likes[Girl.tag] >= 600:
 
             if Partner == RogueX:
                 ch_r "Um, yeah, you too. . ."
@@ -1489,7 +1489,7 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
         $ Subject = focused_Girl
     if Speaker == EmmaX:
 
-        if "three" not in EmmaX.history or "classcaught" not in EmmaX.history or (Taboo > 20 and "taboo" not in EmmaX.history):
+        if "threesome" not in EmmaX.history or "classcaught" not in EmmaX.history or (Taboo > 20 and "taboo" not in EmmaX.history):
             $ EmmaX.recent_history.append("no_lesbian")
             $ EmmaX.daily_history.append("no_lesbian")
             $ EmmaX.change_stat("obedience", 70, 5)
@@ -1547,15 +1547,15 @@ label Les_Response(Speaker=0, Subject=0, Step=1, B=0, B2=0, approval_bonus=0, Re
         $ approval_bonus -= 40
 
 
-    if Speaker.GirlLikeCheck(Subject) >= 900:
+    if Speaker.likes[Subject.tag] >= 900:
         $ B += 150
-    elif Speaker.GirlLikeCheck(Subject) >= 800 or "poly " + Subject.tag in Speaker.traits:
+    elif Speaker.likes[Subject.tag] >= 800 or "poly " + Subject.tag in Speaker.traits:
         $ B += 100
-    elif Speaker.GirlLikeCheck(Subject) >= 700:
+    elif Speaker.likes[Subject.tag] >= 700:
         $ B += 50
-    elif Speaker.GirlLikeCheck(Subject) <= 200:
+    elif Speaker.likes[Subject.tag] <= 200:
         $ B -= 200
-    elif Speaker.GirlLikeCheck(Subject) <= 500:
+    elif Speaker.likes[Subject.tag] <= 500:
         $ B -= 100
 
     if Speaker == JeanX:
@@ -1989,28 +1989,28 @@ label Les_FirstKiss:
 
     if "les " + Partner.tag in Girl.history:
 
-        $ Line = "experienced"
+        $ line = "experienced"
     elif Girl.event_counter["been_with_girl"] and Partner.event_counter["been_with_girl"]:
 
-        $ Line = "first both"
+        $ line = "first both"
     elif Girl.event_counter["been_with_girl"]:
 
-        $ Line = "first girl"
+        $ line = "first girl"
     elif Partner.event_counter["been_with_girl"]:
 
-        $ Line = "first partner"
+        $ line = "first partner"
 
-    if Line == "experienced":
+    if line == "experienced":
         "[Girl.name] and [Partner.name] move together in a passionate kiss."
         "[Girl.name]'s arms firmly grasp [Partner.name]'s neck and pull her close."
     else:
-        if Line in ("first both", "first girl"):
+        if line in ("first both", "first girl"):
 
             "[Girl.name] slowly moves in and gives [Partner.name] a soft kiss."
         else:
 
             "[Girl.name] casually places a hand on the back of [Partner.name]'s head and draws their lips together."
-        if Line == "first partner":
+        if line == "first partner":
 
             "[Partner.name] pulls back a bit, but slowly leans into the enbrace."
         else:
@@ -2025,7 +2025,7 @@ label Les_FirstKiss:
 
 label Girl_Whammy(Other):
 
-    if "nowhammy" not in JeanX.traits and Other.LikeJean < 800:
+    if "nowhammy" not in JeanX.traits and Other.likes[JeanX.tag] < 800:
 
         $ Player.add_word(1,0,0,0,"whammied")
         if Other == EmmaX and EmmaX.level >= JeanX.level:
@@ -2034,11 +2034,9 @@ label Girl_Whammy(Other):
         if Other == JubesX and JubesX.level >= JeanX.level:
             ch_v "Vampire whammy beats mutant whammy!"
             return
-        if "Jeaned" not in Other.traits:
-            $ Other.traits.append("Jeaned")
-            $ setattr(JeanX,"LikeS"+Other.tag,Other.LikeJean)
-        $ Other.LikeJean += 500 if Other.LikeJean <= 900 else Other.LikeJean
-        $ Other.LikeJean = 900 if Other.LikeJean >= 900 else Other.LikeJean
+            
+        $ Other.likes[JeanX.tag] += 500 if Other.likes[JeanX.tag] <= 900 else Other.likes[JeanX.tag]
+        $ Other.likes[JeanX.tag] = 900 if Other.likes[JeanX.tag] >= 900 else Other.likes[JeanX.tag]
     return
 
 
@@ -2050,7 +2048,7 @@ label Les_Change(Primary=0, Secondary=Partner, D20S=0, PrimaryLust=0, SecondaryL
 
     if Primary not in all_Girls:
         return
-    $ Line = 0
+    $ line = 0
     menu:
         "Hey [Primary.name]. . ."
         "why don't you kiss her?" if second_girl_offhand_action != "kiss girl" and second_girl_offhand_action != "kiss both":
@@ -2069,11 +2067,11 @@ label Les_Change(Primary=0, Secondary=Partner, D20S=0, PrimaryLust=0, SecondaryL
             call Threeway_Set (Primary, "eat_ass", "lesbian", girl_offhand_action, Secondary)
         "never mind.":
             pass
-    if not Line:
-        $ Line = "You return to what you were doing."
+    if not line:
+        $ line = "You return to what you were doing."
     else:
         $ action_context = "skip"
-    "[Line]"
+    "[line]"
     return
 
 
@@ -2085,7 +2083,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
 
 
 
-    $ Line = 0
+    $ line = 0
 
     if Newbie in Player.Harem:
         return
@@ -2161,9 +2159,9 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
 
 
 
-    if Party[0].GirlLikeCheck(Newbie) >= 800:
+    if Party[0].likes[Newbie.tag] >= 800:
         $ Party[0].change_face("_sly")
-    elif Party[0].GirlLikeCheck(Newbie) >= 600:
+    elif Party[0].likes[Newbie.tag] >= 600:
         pass
     else:
 
@@ -2171,70 +2169,70 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
 
 
     if Party[0] == RogueX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800:
 
             ch_r "She is pretty sexy, I guess."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600:
 
             ch_r "I like her just fine, I was just wondering where it was headed."
         else:
 
             ch_r "I'm not really a fan'a hers."
     elif Party[0] == KittyX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800:
 
             ch_k "She's kinda hot, I get that. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600:
 
             ch_k "She's ok, sure, but I'm not sure. . ."
         else:
 
             ch_k "I don't really like her much."
     elif Party[0] == EmmaX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800:
 
             ch_e "I think she's quite the catch."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600:
 
             ch_e "I do like her, but have some concerns."
         else:
 
             ch_e "I don't really approve."
     elif Party[0] == LauraX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800:
 
             ch_l "She's pretty hot, I get it."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600:
 
             ch_l "She's ok, I guess."
         else:
 
             ch_l "I don't like her."
     elif Party[0] == JeanX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800:
 
             ch_j "I get it, she's hot enough."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600:
 
             ch_j "She's. . . fine."
         else:
 
             ch_j "You probably shouldn't be seen around her."
     elif Party[0] == StormX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800:
 
             ch_s "She is very beautiful, certainly."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600:
 
             ch_s "She is a good girl, certainly. . ."
         else:
 
             ch_s "I do not think I like her much."
     elif Party[0] == JubesX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800:
 
             ch_v "Ok, she's totally hot, but. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600:
 
             ch_v "She's. . . fine, but. . ."
         else:
@@ -2270,260 +2268,260 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
     menu:
         extend ""
         "Yeah, I'd like to date her too.":
-            $ Line = "y"
+            $ line = "y"
         "Maybe, what do you think?":
-            $ Line = "m"
+            $ line = "m"
         "No, not really.":
-            $ Line = "n"
+            $ line = "n"
 
-    if Line == "y":
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
+    if line == "y":
+        if Party[0].likes[Newbie.tag] >= 800:
 
-            $ Line = "yy"
+            $ line = "yy"
             $ Party[0].change_stat("love", 90, 5)
             $ Party[0].change_stat("obedience", 50, 5)
             $ Party[0].change_stat("inhibition", 90, 10)
         elif approval_check(Party[0], 1800):
 
-            $ Line = "ym"
+            $ line = "ym"
             $ Party[0].change_stat("obedience", 50, 5)
-        elif approval_check(Party[0], 1500) and Party[0].GirlLikeCheck(Newbie) >= 500:
+        elif approval_check(Party[0], 1500) and Party[0].likes[Newbie.tag] >= 500:
 
-            $ Line = "ym"
+            $ line = "ym"
         else:
 
-            $ Line = "yn"
+            $ line = "yn"
             $ Party[0].change_stat("love", 90, -10)
 
-    if Line == "m":
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
+    if line == "m":
+        if Party[0].likes[Newbie.tag] >= 800:
 
-            $ Line = "my"
+            $ line = "my"
             $ Party[0].change_stat("inhibition", 90, 5)
         elif approval_check(Party[0], 1800):
 
-            $ Line = "mm"
-        elif approval_check(Party[0], 1500) and Party[0].GirlLikeCheck(Newbie) >= 600:
+            $ line = "mm"
+        elif approval_check(Party[0], 1500) and Party[0].likes[Newbie.tag] >= 600:
 
-            $ Line = "mm"
+            $ line = "mm"
         else:
 
-            $ Line = "mn"
+            $ line = "mn"
 
-    if Line == "n":
-        if Party[0].GirlLikeCheck(Newbie) >= 800:
+    if line == "n":
+        if Party[0].likes[Newbie.tag] >= 800:
 
-            $ Line = "ny"
+            $ line = "ny"
             $ Party[0].change_stat("inhibition", 90, 10)
         elif approval_check(Party[0], 1700):
 
-            $ Line = "nm"
+            $ line = "nm"
             $ Party[0].change_stat("inhibition", 90, 5)
-        elif approval_check(Party[0], 1300) and Party[0].GirlLikeCheck(Newbie) >= 500:
+        elif approval_check(Party[0], 1300) and Party[0].likes[Newbie.tag] >= 500:
 
-            $ Line = "nm"
+            $ line = "nm"
             $ Party[0].change_stat("love", 90, 5)
         else:
 
-            $ Line = "nn"
+            $ line = "nn"
             $ Party[0].change_stat("love", 90, 10)
 
 
 
 
 
-    if Line == "yn" or Line == "mn" or Line == "nn":
+    if line == "yn" or line == "mn" or line == "nn":
         $ Party[0].change_face("_angry")
-    elif Line == "yy" or Line == "ny" or Line == "my":
+    elif line == "yy" or line == "ny" or line == "my":
         $ Party[0].change_face("_sexy")
     else:
         $ Party[0].change_face("_bemused")
 
 
     if Party[0] == RogueX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_r "Great, sounds fun."
-        elif Line == "my":
+        elif line == "my":
 
             ch_r "Oh, don't let me stop you."
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_r "Oh. Well maybe you should!"
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_r "Yeah, I guess I can live with that."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_r "Hmm, not that I would have minded."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_r "I don't think I'm really cool with that."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_r "Good to hear."
 
     elif Party[0] == KittyX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_k "Cool, sounds fun."
-        elif Line == "my":
+        elif line == "my":
 
             ch_k "Oh, seriously, it's fine with me!"
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_k "You might want to, she's hot!"
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_k "Yeah, I can[KittyX.like]live with that."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_k "Ok, I would have been ok with it though."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_k "That's not really cool with me."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_k "Good, that wouldn't have been cool."
 
     elif Party[0] == EmmaX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_e "Lovely. . ."
-        elif Line == "my":
+        elif line == "my":
 
             ch_e "Oh, please do, she's lovely."
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_e "Pity, I rather like her."
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_e "I suppose I can make do then."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_e "You could do a lot worse."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_e "I don't think that will be acceptable."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_e "Probably for the best."
 
     elif Party[0] == LauraX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_l "Nice."
-        elif Line == "my":
+        elif line == "my":
 
             ch_l "Come on, she's pretty great."
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_l "You sure? She's hot."
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_l "Fine, I can work with that."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_l "Ok. I'm cool with it if you do though."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_l "Nope."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_l "Good."
 
     elif Party[0] == JeanX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_j "Well, ok, sure."
-        elif Line == "my":
+        elif line == "my":
 
             ch_j "Well. . . she could be fun. . ."
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_j "Really? I mean, she could be fun."
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_j "Well, ok, fine. . ."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_j "Ok. I could think about it though."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_j "Well, cut it out."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_j "Yeah."
 
     elif Party[0] == StormX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_s "Oh, that will be nice. . ."
-        elif Line == "my":
+        elif line == "my":
 
             ch_s "Oh, you definitely should!"
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_s "That is too bad. You would go well together."
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_s "Well, that should be fine."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_s "You might want to reconsider. . ."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_s "I do not think I could deal with her."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_s "Yes, I would agree with that."
 
     elif Party[0] == JubesX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_v "Ok, cool."
-        elif Line == "my":
+        elif line == "my":
 
             ch_v "Yeah, sure, I'm down with it."
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_v "Ok, but you might be missing out!"
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_v "Ok, yeah, I can deal."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_v "Ok, your call, I guess."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_v "Well. . . I might have some feelings."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_v "Glad we're on the same page here."
 
 
 
-    if Line != "yy" and Line != "nn":
+    if line != "yy" and line != "nn":
 
         menu:
             extend ""
-            "Ok, then I guess I will ask her to join us." if Line in ("my","ny","ym","mm","nm"):
+            "Ok, then I guess I will ask her to join us." if line in ("my","ny","ym","mm","nm"):
 
-                $ Line = "yy"
+                $ line = "yy"
                 $ Party[0].change_face("_smile")
                 $ Party[0].change_stat("love", 90, 10)
                 $ Party[0].change_stat("obedience", 50, 10)
@@ -2542,9 +2540,9 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
                 elif Party[0] == JubesX:
                     ch_v "Sweet!"
 
-            "Well then, I guess I'll stop." if Line in ("mn","yn","ym","mm","nm"):
+            "Well then, I guess I'll stop." if line in ("mn","yn","ym","mm","nm"):
 
-                $ Line = "nn"
+                $ line = "nn"
                 $ Party[0].change_face("_smile")
                 $ Party[0].change_stat("love", 90, 10)
                 if Party[0] == RogueX:
@@ -2562,13 +2560,13 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
                 elif Party[0] == JubesX:
                     ch_v "Ok, good."
 
-            "I'm asking her in anyway." if Line in ("mn","yn"):
+            "I'm asking her in anyway." if line in ("mn","yn"):
 
                 pass
 
-            "Well, I'm going to pass anyway." if Line in ("nm","ny","mm"):
+            "Well, I'm going to pass anyway." if line in ("nm","ny","mm"):
 
-                $ Line = "nn"
+                $ line = "nn"
                 $ Party[0].change_face("_sad")
                 $ Party[0].change_stat("obedience", 70, 5)
                 if Party[0] == RogueX:
@@ -2588,10 +2586,10 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
 
 
 
-    if Line == "mn" or Line == "yn":
+    if line == "mn" or line == "yn":
 
 
-        if approval_check(Party[0], 1600) and Party[0].GirlLikeCheck(Newbie) >= 500:
+        if approval_check(Party[0], 1600) and Party[0].likes[Newbie.tag] >= 500:
             $ Party[0].change_face("_sadside")
             $ Party[0].change_stat("love", 90, -5)
             $ Party[0].change_stat("obedience", 50, 15)
@@ -2611,7 +2609,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
                 ch_s "I can accept that."
             elif Party[0] == JubesX:
                 ch_v "Whatever. Fine."
-            $ Line = "yy"
+            $ line = "yy"
         else:
             $ Party[0].change_face("_angry",Eyes="_side")
             $ Party[0].change_stat("love", 90, -25)
@@ -2643,7 +2641,7 @@ label Poly_Start(Newbie=0, round2=0, Asked=0):
 
 
     $ Party = []
-    if Line == "yy":
+    if line == "yy":
         if Newbie.tag + "No" in Player.traits:
             $ Player.traits.remove(Newbie.tag + "No")
         $ Player.drain_word(Newbie.tag + "No",0,0,1)
@@ -2663,7 +2661,7 @@ label Harem_Start(Newbie=0, round2=0):
 
 
 
-    $ Line = 0
+    $ line = 0
 
     if len(Player.Harem) < 2:
 
@@ -2720,12 +2718,12 @@ label Harem_Start(Newbie=0, round2=0):
 
 
 
-    if Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+    if Party[0].likes[Newbie.tag] >= 600 and Party[1].likes[Newbie.tag] >= 600:
         pass
-    elif Party[0].GirlLikeCheck(Newbie) >= 700:
+    elif Party[0].likes[Newbie.tag] >= 700:
 
         $ Party[1].change_face("_angry",Mouth="_normal")
-    elif Party[1].GirlLikeCheck(Newbie) >= 700:
+    elif Party[1].likes[Newbie.tag] >= 700:
 
         $ Party[0].change_face("_angry",Mouth="_normal")
     else:
@@ -2734,81 +2732,81 @@ label Harem_Start(Newbie=0, round2=0):
         $ Party[1].change_face("_angry",Mouth="_normal")
 
     if Party[0] == RogueX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800 and Party[1].likes[Newbie.tag] >= 800:
 
             ch_r "Now we like her just fine, and we can't say we don't like the idea much."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600 and Party[1].likes[Newbie.tag] >= 600:
 
             ch_r "Now we like her just fine, but we don't know about share'in."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
+        elif Party[0].likes[Newbie.tag] >= 700:
 
             ch_r "Now I like her just fine, but [Party[1].name] ain't so sure."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
+        elif Party[1].likes[Newbie.tag] >= 700:
 
             ch_r "Now [Party[1].name] seems to like her, but I'm not so sure."
         else:
 
             ch_r "Neither'a us is really cool with that."
     elif Party[0] == KittyX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800 and Party[1].likes[Newbie.tag] >= 800:
 
             ch_k "She's kinda hot, we get that. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600 and Party[1].likes[Newbie.tag] >= 600:
 
             ch_k "She's ok, sure, but we're not sure. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
+        elif Party[0].likes[Newbie.tag] >= 700:
 
             ch_k "I like her, but I don't know about [Party[1].name]."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
+        elif Party[1].likes[Newbie.tag] >= 700:
 
             ch_k "[Party[1].name] likes her, but I don't know."
         else:
 
             ch_k "We don't really like her much."
     elif Party[0] == EmmaX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800 and Party[1].likes[Newbie.tag] >= 800:
 
             ch_e "I think we agree that she's a nice catch."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600 and Party[1].likes[Newbie.tag] >= 600:
 
             ch_e "We do like her, but we have some concerns."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
+        elif Party[0].likes[Newbie.tag] >= 700:
 
             ch_e "[Party[1].name] doesn't really approve."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
+        elif Party[1].likes[Newbie.tag] >= 700:
 
             ch_e "[Party[1].name] seems to think she's acceptable."
         else:
 
             ch_e "We don't really approve."
     elif Party[0] == LauraX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800 and Party[1].likes[Newbie.tag] >= 800:
 
             ch_l "She's pretty hot, we get it."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600 and Party[1].likes[Newbie.tag] >= 600:
 
             ch_l "She's ok, I guess."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
+        elif Party[0].likes[Newbie.tag] >= 700:
 
             ch_l "She's fine, but [Party[1].name] doesn't like her."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
+        elif Party[1].likes[Newbie.tag] >= 700:
 
             ch_l "[Party[1].name] likes her. I don't."
         else:
 
             ch_l "We don't like her."
     elif Party[0] == JeanX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800 and Party[1].likes[Newbie.tag] >= 800:
 
             ch_j "I get it, she's hot enough."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600 and Party[1].likes[Newbie.tag] >= 600:
 
             ch_j "She's. . . fine."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
+        elif Party[0].likes[Newbie.tag] >= 700:
 
             ch_j "I think she's fine, but [Party[1].name] doesn't like her."
             ch_j "For whatever that's worth. . ."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
+        elif Party[1].likes[Newbie.tag] >= 700:
 
             ch_j "[Party[1].name] likes her. I don't."
             ch_j "So I think you know the right answer to this one. . ."
@@ -2816,16 +2814,16 @@ label Harem_Start(Newbie=0, round2=0):
 
             ch_j "You probably shouldn't be seen around her."
     elif Party[0] == StormX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800 and Party[1].likes[Newbie.tag] >= 800:
 
             ch_s "We agree that she is very beautiful. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600 and Party[1].likes[Newbie.tag] >= 600:
 
             ch_s "She is a good girl, but we do have some concerns. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
+        elif Party[0].likes[Newbie.tag] >= 700:
 
             ch_s "I like her, but [Party[1].name] does not approve."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
+        elif Party[1].likes[Newbie.tag] >= 700:
 
             ch_s "[Party[1].name] appears to like her, I am unsure."
         else:
@@ -2833,16 +2831,16 @@ label Harem_Start(Newbie=0, round2=0):
             ch_s "We do not like her very much."
 
     elif Party[0] == JubesX:
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+        if Party[0].likes[Newbie.tag] >= 800 and Party[1].likes[Newbie.tag] >= 800:
 
             ch_v "Ok, she's totally hot, but. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 600 and Party[1].GirlLikeCheck(Newbie) >= 600:
+        elif Party[0].likes[Newbie.tag] >= 600 and Party[1].likes[Newbie.tag] >= 600:
 
             ch_v "She's. . . fine, but. . ."
-        elif Party[0].GirlLikeCheck(Newbie) >= 700:
+        elif Party[0].likes[Newbie.tag] >= 700:
 
             ch_v "She's. . . fine, but, [Party[1].name]. . ."
-        elif Party[1].GirlLikeCheck(Newbie) >= 700:
+        elif Party[1].likes[Newbie.tag] >= 700:
 
             ch_v "[Party[1].name] likes her, but I don't know."
         else:
@@ -2872,16 +2870,16 @@ label Harem_Start(Newbie=0, round2=0):
     menu:
         extend ""
         "Yeah, I'd like to date her too.":
-            $ Line = "y"
+            $ line = "y"
         "Maybe, what do you think?":
-            $ Line = "m"
+            $ line = "m"
         "No, not really.":
-            $ Line = "n"
+            $ line = "n"
 
-    if Line == "y":
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+    if line == "y":
+        if Party[0].likes[Newbie.tag] >= 800 and Party[1].likes[Newbie.tag] >= 800:
 
-            $ Line = "yy"
+            $ line = "yy"
             $ Party[0].change_stat("love", 90, 5)
             $ Party[0].change_stat("obedience", 50, 5)
             $ Party[0].change_stat("inhibition", 90, 10)
@@ -2890,74 +2888,74 @@ label Harem_Start(Newbie=0, round2=0):
             $ Party[1].change_stat("inhibition", 90, 10)
         elif approval_check(Party[0], 1800) and approval_check(Party[1], 1800):
 
-            $ Line = "ym"
+            $ line = "ym"
             $ Party[0].change_stat("obedience", 50, 10)
             $ Party[1].change_stat("obedience", 50, 10)
         elif approval_check(Party[0], 1500) and approval_check(Party[1], 1500):
-            if Party[0].GirlLikeCheck(Newbie) >= 500 and Party[1].GirlLikeCheck(Newbie) >= 500:
+            if Party[0].likes[Newbie.tag] >= 500 and Party[1].likes[Newbie.tag] >= 500:
 
-                $ Line = "ym"
+                $ line = "ym"
                 $ Party[0].change_stat("obedience", 80, 15)
                 $ Party[1].change_stat("obedience", 80, 15)
             else:
 
-                $ Line = "yn"
+                $ line = "yn"
                 $ Party[0].change_stat("love", 90, -5)
                 $ Party[0].change_stat("obedience", 50, -5)
                 $ Party[1].change_stat("love", 90, -5)
                 $ Party[1].change_stat("obedience", 50, -5)
         else:
 
-            $ Line = "yn"
+            $ line = "yn"
             $ Party[0].change_stat("love", 90, -10)
             $ Party[0].change_stat("obedience", 50, -5)
             $ Party[1].change_stat("love", 90, -10)
             $ Party[1].change_stat("obedience", 50, -5)
 
-    if Line == "m":
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+    if line == "m":
+        if Party[0].likes[Newbie.tag] >= 800 and Party[1].likes[Newbie.tag] >= 800:
 
-            $ Line = "my"
+            $ line = "my"
             $ Party[0].change_stat("inhibition", 90, 5)
             $ Party[1].change_stat("inhibition", 90, 5)
         elif approval_check(Party[0], 1800) and approval_check(Party[1], 1800):
 
-            $ Line = "mm"
+            $ line = "mm"
         elif approval_check(Party[0], 1500) and approval_check(Party[1], 1500):
-            if Party[0].GirlLikeCheck(Newbie) >= 600 or Party[1].GirlLikeCheck(Newbie) >= 600:
+            if Party[0].likes[Newbie.tag] >= 600 or Party[1].likes[Newbie.tag] >= 600:
 
-                $ Line = "mm"
+                $ line = "mm"
             else:
 
-                $ Line = "mn"
+                $ line = "mn"
         else:
 
-            $ Line = "mn"
+            $ line = "mn"
 
-    if Line == "n":
-        if Party[0].GirlLikeCheck(Newbie) >= 800 and Party[1].GirlLikeCheck(Newbie) >= 800:
+    if line == "n":
+        if Party[0].likes[Newbie.tag] >= 800 and Party[1].likes[Newbie.tag] >= 800:
 
-            $ Line = "ny"
+            $ line = "ny"
             $ Party[0].change_stat("inhibition", 90, 10)
             $ Party[1].change_stat("inhibition", 90, 10)
         elif approval_check(Party[0], 1700) and approval_check(Party[1], 1700):
 
-            $ Line = "nm"
+            $ line = "nm"
             $ Party[0].change_stat("inhibition", 90, 5)
         elif approval_check(Party[0], 1300) and approval_check(Party[1], 1300):
-            if Party[0].GirlLikeCheck(Newbie) >= 500 and Party[1].GirlLikeCheck(Newbie) >= 500:
+            if Party[0].likes[Newbie.tag] >= 500 and Party[1].likes[Newbie.tag] >= 500:
 
-                $ Line = "nm"
+                $ line = "nm"
             else:
 
-                $ Line = "nn"
+                $ line = "nn"
                 $ Party[0].change_stat("love", 90, 5)
                 $ Party[0].change_stat("inhibition", 90, 5)
                 $ Party[1].change_stat("love", 90, 5)
                 $ Party[1].change_stat("inhibition", 90, 5)
         else:
 
-            $ Line = "nn"
+            $ line = "nn"
             $ Party[0].change_stat("love", 90, 5)
             $ Party[0].change_stat("inhibition", 90, 5)
             $ Party[1].change_stat("love", 90, 5)
@@ -2967,10 +2965,10 @@ label Harem_Start(Newbie=0, round2=0):
 
 
 
-    if Line == "yn" or Line == "mn" or Line == "nn":
+    if line == "yn" or line == "mn" or line == "nn":
         $ Party[0].change_face("_angry")
         $ Party[1].change_face("_angry")
-    elif Line == "yy" or Line == "ny" or Line == "my":
+    elif line == "yy" or line == "ny" or line == "my":
         $ Party[0].change_face("_sexy")
         $ Party[1].change_face("_sexy")
     else:
@@ -2979,189 +2977,189 @@ label Harem_Start(Newbie=0, round2=0):
 
 
     if Party[0] == RogueX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_r "Great, sounds fun."
-        elif Line == "my":
+        elif line == "my":
 
             ch_r "Oh, don't let me stop you."
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_r "Oh. Well maybe you should!"
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_r "Yeah, I guess we can live with that."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_r "Hmm, not that we would have minded."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_r "I don't think we're really cool with that."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_r "Good to hear."
 
     elif Party[0] == KittyX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_k "Cool, sounds fun."
-        elif Line == "my":
+        elif line == "my":
 
             ch_k "Oh, seriously, it's fine with us!"
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_k "You might want to, she's hot!"
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_k "Yeah, we can[KittyX.like]live with that."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_k "Ok, we would have been ok with it though."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_k "That's not really cool with us."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_k "Good, that wouldn't have been cool."
 
     elif Party[0] == EmmaX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_e "Lovely. . ."
-        elif Line == "my":
+        elif line == "my":
 
             ch_e "Oh, please do, she's lovely."
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_e "Pity, I rather like her."
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_e "I suppose we can make do then."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_e "You could do a lot worse."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_e "I don't think that will be acceptable."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_e "Probably for the best."
 
     elif Party[0] == LauraX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_l "Nice."
-        elif Line == "my":
+        elif line == "my":
 
             ch_l "Come on, she's pretty great."
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_l "You sure? She's hot."
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_l "Fine, we can work with that."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_l "Ok. We're cool with it if you do though."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_l "Nope."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_l "Good."
 
     elif Party[0] == JeanX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_j "Well, ok, sure."
-        elif Line == "my":
+        elif line == "my":
 
             ch_j "Well. . . she could be fun. . ."
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_j "Really? I mean, she could be fun."
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_j "Well, ok, fine. . ."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_j "Ok. I could think about it though."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_j "Well, cut it out."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_j "Yeah."
 
     elif Party[0] == StormX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_s "Oh, that will be nice. . ."
-        elif Line == "my":
+        elif line == "my":
 
             ch_s "Oh, you definitely should!"
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_s "That is too bad. You would go well together."
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_s "Well, that should be fine."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_s "You might want to reconsider. . ."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_s "I do not think we could deal with her."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_s "Yes, we could agree with that."
 
     elif Party[0] == JubesX:
-        if Line == "yy":
+        if line == "yy":
 
             ch_v "Ok, cool."
-        elif Line == "my":
+        elif line == "my":
 
             ch_v "Yeah, sure, I guess we're down with that down with it."
-        elif Line == "ny":
+        elif line == "ny":
 
             ch_v "Ok, but you might be missing out!"
 
-        elif Line == "ym" or Line == "mm":
+        elif line == "ym" or line == "mm":
 
             ch_v "Ok, yeah, we can deal."
-        elif Line == "nm":
+        elif line == "nm":
 
             ch_v "Ok, your call, I guess."
 
-        elif Line == "yn" or Line == "mn":
+        elif line == "yn" or line == "mn":
 
             ch_v "Well. . . we might have some feelings."
-        elif Line == "nn":
+        elif line == "nn":
 
             ch_v "Glad we're on the same page here."
 
 
 
-    if Line != "yy" and Line != "nn":
+    if line != "yy" and line != "nn":
 
         menu:
             extend ""
-            "Ok, then I guess I will ask her to join us." if Line in ("my","ny","ym","mm","nm"):
+            "Ok, then I guess I will ask her to join us." if line in ("my","ny","ym","mm","nm"):
 
-                $ Line = "yy"
+                $ line = "yy"
                 $ Party[0].change_face("_smile")
                 $ Party[1].change_face("_smile")
                 $ Party[0].change_stat("obedience", 80, 5)
@@ -3182,9 +3180,9 @@ label Harem_Start(Newbie=0, round2=0):
                     ch_s "Good."
                 elif Party[0] == JubesX:
                     ch_v "Sweet!"
-            "Well then, I guess I'll stop." if Line in ("mn","yn"):
+            "Well then, I guess I'll stop." if line in ("mn","yn"):
 
-                $ Line = "nn"
+                $ line = "nn"
                 $ Party[0].change_face("_normal")
                 $ Party[1].change_face("_normal")
                 $ Party[0].change_stat("love", 90, 5)
@@ -3205,13 +3203,13 @@ label Harem_Start(Newbie=0, round2=0):
                     ch_s "Good."
                 elif Party[0] == JubesX:
                     ch_v "Ok, good."
-            "I'm asking her in anyway." if Line in ("mn","yn"):
+            "I'm asking her in anyway." if line in ("mn","yn"):
 
                 pass
 
-            "Well, I'm going to pass anyway." if Line in ("ym","my","nm","ny","mm"):
+            "Well, I'm going to pass anyway." if line in ("ym","my","nm","ny","mm"):
 
-                $ Line = "nn"
+                $ line = "nn"
                 $ Party[0].change_face("_sad")
                 $ Party[1].change_face("_sad")
                 $ Party[0].change_stat("obedience", 50, 5)
@@ -3232,7 +3230,7 @@ label Harem_Start(Newbie=0, round2=0):
                     ch_v "Yeah, that's fine."
 
 
-        if Line == "yy" or Line == "nn":
+        if line == "yy" or line == "nn":
             pass
         elif len(Player.Harem) >= 3:
             $ Party[0].change_face("_smile",Eyes="_side")
@@ -3254,12 +3252,12 @@ label Harem_Start(Newbie=0, round2=0):
                 ch_s "What harm would one more bring?"
             elif Party[0] == JubesX:
                 ch_v "Ok, I'll make some room."
-            $ Line = "yy"
-        elif Line == "mn" or Line == "yn":
+            $ line = "yy"
+        elif line == "mn" or line == "yn":
 
             $ Count = 0
             while Count < 2:
-                if approval_check(Party[Count], 1600) and Party[Count].GirlLikeCheck(Newbie) >= 500:
+                if approval_check(Party[Count], 1600) and Party[Count].likes[Newbie.tag] >= 500:
 
                     $ Party[Count].change_face("_sadside")
                     $ Party[Count].change_stat("love", 90, -5)
@@ -3279,7 +3277,7 @@ label Harem_Start(Newbie=0, round2=0):
                         ch_s "If you insist, I will find room for her. . ."
                     elif Party[0] == JubesX:
                         ch_v "I guess we can share."
-                    $ Line = "yy"
+                    $ line = "yy"
                 else:
 
                     $ Party[Count].change_face("_angry",Eyes="_side")
@@ -3313,7 +3311,7 @@ label Harem_Start(Newbie=0, round2=0):
 
 
 
-    if Line == "yy":
+    if line == "yy":
         if Newbie.tag + "No" in Player.traits:
             $ Player.traits.remove(Newbie.tag + "No")
         $ Player.drain_word(Newbie.tag + "No",0,0,1)
@@ -3378,9 +3376,9 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
 
         return False
 
-    show Cellphone at sprite_location(stage_left)
+    show cellphone at sprite_location(stage_left)
 
-    $ Line = 0
+    $ line = 0
     "You get a call from [Girl.name]."
     if Girl == RogueX:
         ch_r "Hey, [Player.name]. . . I was just over here with [Girl2.name] and. . ."
@@ -3413,7 +3411,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
         ch_v "Oh, hey, [Girl.player_petname]. . . [Girl2.name]'s over here and. . ."
         ch_v "we were having some fun, and. . ."
         ch_v "Did you want to join us?"
-    while not Line and Line != "what":
+    while not line and line != "what":
         menu:
             extend ""
             "Sure, I'll be right there!":
@@ -3427,7 +3425,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 $ Girl2.change_stat("love", 95, 5)
                 $ Girl2.change_stat("obedience", 95, 3)
                 $ Girl2.change_stat("inhibition", 95, 2)
-                $ Line = "yes"
+                $ line = "yes"
             "Nah, have fun though.":
                 $ Girl.change_stat("love", 90, -4)
                 $ Girl.change_stat("obedience", 95, 2)
@@ -3454,9 +3452,9 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 $ Girl2.change_stat("inhibition", 90, -2)
                 $ Player.recent_history.append("no_les")
                 "She hangs up."
-                hide Cellphone
+                hide cellphone
                 jump Misplaced
-            "What, are you watching a movie?" if Line != "what" and Girl != JeanX:
+            "What, are you watching a movie?" if line != "what" and Girl != JeanX:
                 $ Girl.change_stat("love", 80, 2)
                 $ Girl.change_stat("inhibition", 80, 2)
                 if Girl == RogueX:
@@ -3497,23 +3495,23 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 elif Girl2 == JubesX:
                     ch_v "I was eating her out, basically."
                     ch_v "Did you want in on this?"
-                $ Line = "what"
+                $ line = "what"
 
 
-    hide Cellphone
+    hide cellphone
 
     if bg_current == Girl.home:
 
-        $ Line = Girl
+        $ line = Girl
         $ Girl = Girl2
-        $ Girl2 = Line
+        $ Girl2 = line
     $ Girl.location = Girl.home
     $ Girl2.location = Girl.home
     $ bg_current = Girl.home
     $ Taboo= 0
     $ Girl.Taboo = 0
     $ Girl2.Taboo = 0
-    $ Line = 0
+    $ line = 0
 
     $ Girl.drain_word("lesbian",1,0)
     $ Girl2.drain_word("lesbian",1,0)
@@ -3525,7 +3523,7 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
 
     call set_the_scene (0, 1, 0, 0)
     "As you approach her room, you hear soft moans from inside, and notice that the door is slightly ajar."
-    while Line < 2:
+    while line < 2:
         menu:
             extend ""
             "Knock politely":
@@ -3543,8 +3541,8 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                     ch_s "Come in!"
                 elif Girl == JubesX:
                     ch_v "You may enter!"
-                $ Line = 2
-            "Peek inside" if Line != 1:
+                $ line = 2
+            "Peek inside" if line != 1:
                 call set_the_scene
                 $ Girl.change_face("_kiss",1,Eyes = "_closed")
                 $ Girl2.change_face("_kiss",1,Eyes = "_closed")
@@ -3552,9 +3550,9 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 $ girl_offhand_action = "fondle_pussy"
                 $ second_girl_primary_action = "fondle_pussy"
                 "You see [Girl.name] and [Girl2.name], eyes closed and stroking each other vigorously."
-                $ Line = 1
+                $ line = 1
             "Enter quietly":
-                $ Line = 2
+                $ line = 2
             "Leave quietly":
                 "You leave the girls to their business and slip out."
                 $ Girl.thirst -= 30
@@ -3565,10 +3563,10 @@ label Call_For_Les(Girl=0, Girl2=0, temp_Girls=[]):
                 $ Girl2.change_stat("love", 90, -3)
                 $ renpy.pop_call()
                 $ bg_current = "bg_campus"
-                $ Line = 0
+                $ line = 0
                 jump Misplaced
 
-    $ Line = 0
+    $ line = 0
     $ Girl.change_face("_sly",1)
     $ Girl2.change_face("_sly",1)
     call set_the_scene (1, 0, 0, 0)

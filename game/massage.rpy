@@ -1,5 +1,5 @@
 label Massage(Girl=0, Current=0, Past=0, MCount=0):
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
     $ approval_bonus = 0
     if "_angry" in Girl.recent_history:
@@ -299,7 +299,7 @@ label Massage_Cycle:
     $ Girl.add_word(1,"massage","massage",0,0)
 
     if Girl.pose == "doggy" or Girl.pose == "sex":
-        call expression Girl.tag + "_Sex_Launch" pass ("massage")
+        call expression Girl.tag + "_sex_launch" pass ("massage")
 
     $ primary_action = "massage"
 
@@ -448,10 +448,10 @@ label Massage_Cycle:
 
         if Current == "neck":
             if Past in ("shoulders","back"):
-                $ Line = "You slide your hands toward " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands toward " +Girl.name+ "'s " +Current
                 $ Check = 400
             else:
-                $ Line = "You begin to massage " +Girl.name+ "'s " +Current
+                $ line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 500
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
@@ -462,15 +462,15 @@ label Massage_Cycle:
                     $ Girl.change_stat("lust", 90, 2)
                     "You really dig into her neck muscles, and she lets out a long groan of pleasure."
                 else:
-                    "[Line]. She stretches out in obvious pleasure as the knots release."
+                    "[line]. She stretches out in obvious pleasure as the knots release."
 
             $ Girl.addiction -= 2
         elif Current == "shoulders":
             if Past in ("back","neck","arms"):
-                $ Line = "You slide your hands toward " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands toward " +Girl.name+ "'s " +Current
                 $ Check = 400
             else:
-                $ Line = "You begin to massage " +Girl.name+ "'s " +Current
+                $ line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 500
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
@@ -481,19 +481,19 @@ label Massage_Cycle:
                     $ Girl.change_stat("lust", 90, 2)
                     "You really dig into her shoulders, and she wriggles them and moans."
                 else:
-                    "[Line]. She stretches out in obvious pleasure as the knots release."
+                    "[line]. She stretches out in obvious pleasure as the knots release."
             elif Past == Current:
                 $ Check = 600
-                $ Line = "You continue to massage " +Girl.name+ "'s " +Current
+                $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
             if not Girl.top:
                 $ Girl.addiction -= 3
         elif Current == "back":
             if Past in ("neck","shoulders","breasts","hips"):
-                $ Line = "You slide your hands toward " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands toward " +Girl.name+ "'s " +Current
                 $ Check = 400
             else:
-                $ Line = "You begin to massage " +Girl.name+ "'s " +Current
+                $ line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 500
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
@@ -504,10 +504,10 @@ label Massage_Cycle:
                     $ Girl.change_stat("lust", 90, 2)
                     "You really put the pressure into her spine, and she lets out a long groan of pleasure."
                 else:
-                    "[Line]. She moans as you hear her vertebrae stretch."
+                    "[line]. She moans as you hear her vertebrae stretch."
             elif Past == Current:
                 $ Check = 600
-                $ Line = "You continue to massage " +Girl.name+ "'s " +Current
+                $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
             if not Girl.top:
                 $ Girl.addiction -= 2
@@ -515,10 +515,10 @@ label Massage_Cycle:
                 $ Girl.addiction -= 2
         elif Current == "breasts":
             if Past == "back":
-                $ Line = "You slide your hands around and grasp " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands around and grasp " +Girl.name+ "'s " +Current
                 $ Check = 1000
             else:
-                $ Line = "You move your hands to grab " +Girl.name+ "'s " +Current
+                $ line = "You move your hands to grab " +Girl.name+ "'s " +Current
                 $ Check = 1050
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
@@ -530,23 +530,23 @@ label Massage_Cycle:
                     $ Girl.change_stat("lust", 200, 2)
                     "You knead her breasts firmly and she lets out a low moan."
                 else:
-                    "[Line]. Her nipples grow sharp in your palms."
+                    "[line]. Her nipples grow sharp in your palms."
             elif Past == Current:
                 $ Check = 1050
                 $ Girl.change_stat("lust", 200, 2)
-                $ Line = "You continue to rub " +Girl.name+ "'s " +Current
+                $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
             if not Girl.top and not Girl.bra:
                 $ Girl.addiction -= 5
         elif Current == "arms":
             if Past == "shoulders":
-                $ Line = "You slide your hands down " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands down " +Girl.name+ "'s " +Current
                 $ Check = 400
             elif Past == "hands":
-                $ Line = "You slide your hands up " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands up " +Girl.name+ "'s " +Current
                 $ Check = 400
             else:
-                $ Line = "You begin to massage " +Girl.name+ "'s " +Current
+                $ line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 500
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
@@ -557,19 +557,19 @@ label Massage_Cycle:
                     $ Girl.change_stat("lust", 90, 2)
                     "You really dig into her triceps, and she seemed really knotted up."
                 else:
-                    "[Line]. Her hands flex involuntarily and she coos in pleasure."
+                    "[line]. Her hands flex involuntarily and she coos in pleasure."
             elif Past == Current:
                 $ Check = 600
-                $ Line = "You continue to massage " +Girl.name+ "'s " +Current
+                $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
             if Girl.top not in ("_mesh_top","_pink_top","_jacket"):
                 $ Girl.addiction -= 3
         elif Current == "hands":
             if Past == "arms":
-                $ Line = "You slide your hands down and grasp " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands down and grasp " +Girl.name+ "'s " +Current
                 $ Check = 400
             else:
-                $ Line = "You pick up " +Girl.name+ "'s " +Current+ " and begin to massage them"
+                $ line = "You pick up " +Girl.name+ "'s " +Current+ " and begin to massage them"
                 $ Check = 500
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
@@ -579,21 +579,21 @@ label Massage_Cycle:
                     $ Girl.change_stat("lust", 70, 2)
                     "You stretch each finger and rub along the joints. She lets out a small gasp."
                 else:
-                    "[Line]. Her fingers flex with pleasure."
+                    "[line]. Her fingers flex with pleasure."
             elif Past == Current:
                 $ Check = 600
-                $ Line = "You continue to massage " +Girl.name+ "'s " +Current
+                $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
             $ Girl.addiction -= 3
         elif Current == "hips":
             if Past == "back":
-                $ Line = "You slide your hands down toward " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands down toward " +Girl.name+ "'s " +Current
                 $ Check = 400
             elif Past in ("ass","pussy","thighs"):
-                $ Line = "You slide your hands up toward " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands up toward " +Girl.name+ "'s " +Current
                 $ Check = 400
             else:
-                $ Line = "You begin to massage " +Girl.name+ "'s " +Current
+                $ line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 500
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
@@ -603,22 +603,22 @@ label Massage_Cycle:
                 if Past == Current:
                     "You really dig into her hips, and she lets out a long groan of pleasure."
                 else:
-                    "[Line]. Her back arches out in obvious pleasure as the knots release."
+                    "[line]. Her back arches out in obvious pleasure as the knots release."
             elif Past == Current:
                 $ Check = 600
-                $ Line = "You continue to massage " +Girl.name+ "'s " +Current
+                $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
             if not Girl.legs and Girl.HoseNum() < 10:
                 $ Girl.addiction -= 1
         elif Current == "ass":
             if Past in ("back","hips"):
-                $ Line = "You slide your hands down toward " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands down toward " +Girl.name+ "'s " +Current
                 $ Check = 900
             elif Past in ("pussy","thighs"):
-                $ Line = "You slide your hands up to " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands up to " +Girl.name+ "'s " +Current
                 $ Check = 900
             else:
-                $ Line = "You begin to massage " +Girl.name+ "'s " +Current
+                $ line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 950
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
@@ -630,23 +630,23 @@ label Massage_Cycle:
                     $ Girl.change_stat("lust", 200, 2)
                     "You move across her ass in a wavelike pattern as her back wriggles in pleasure."
                 else:
-                    "[Line]. Her muscles tighten and release as you squeeze them."
+                    "[line]. Her muscles tighten and release as you squeeze them."
             elif Past == Current:
                 $ Check = 950
                 $ Girl.change_stat("lust", 90, 2)
-                $ Line = "You continue to massage " +Girl.name+ "'s " +Current
+                $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
             if not Girl.legs and not Girl.underwear and Girl.HoseNum() < 10:
                 $ Girl.addiction -= 3
         elif Current == "pussy":
             if Past in ("hips","ass"):
-                $ Line = "You slide your hands around toward " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands around toward " +Girl.name+ "'s " +Current
                 $ Check = 1200
             elif Past == "thighs":
-                $ Line = "You slide your hands up and into " +Girl.name+ "'s groin"
+                $ line = "You slide your hands up and into " +Girl.name+ "'s groin"
                 $ Check = 1100
             else:
-                $ Line = "You begin to massage " +Girl.name+ "'s " +Current
+                $ line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 1200
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
@@ -658,23 +658,23 @@ label Massage_Cycle:
                     $ Girl.change_stat("lust", 200, 5)
                     "You draw your thumbs across her clit and she shudders with pleasure."
                 else:
-                    "[Line]. Her back arches with pleasure and she releases a soft moan."
+                    "[line]. Her back arches with pleasure and she releases a soft moan."
             elif Past == Current:
                 $ Check = 1200
                 $ Girl.change_stat("lust", 200, 3)
-                $ Line = "You continue to rub " +Girl.name+ "'s " +Current
+                $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
             if not Girl.legs and not Girl.underwear and Girl.HoseNum() < 10:
                 $ Girl.addiction -= 5
         elif Current == "thighs":
             if Past == "calves":
-                $ Line = "You slide your hands up toward " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands up toward " +Girl.name+ "'s " +Current
                 $ Check = 500
             elif Past in ("hips","ass","pussy"):
-                $ Line = "You slide your hands down toward " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands down toward " +Girl.name+ "'s " +Current
                 $ Check = 400
             else:
-                $ Line = "You begin to massage " +Girl.name+ "'s " +Current
+                $ line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 600
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
@@ -685,22 +685,22 @@ label Massage_Cycle:
                     $ Girl.change_stat("lust", 60, 1)
                     "You really put some pressure into stretching out her quads, and she groans in pleasure."
                 else:
-                    "[Line]. Her legs stretch out with clear satisfaction."
+                    "[line]. Her legs stretch out with clear satisfaction."
             elif Past == Current:
                 $ Check = 600
-                $ Line = "You continue to massage " +Girl.name+ "'s " +Current
+                $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
             if Girl.PantsNum() <= 6 and Girl.HoseNum() < 10:
                 $ Girl.addiction -= 3
         elif Current == "calves":
             if Past == "feet":
-                $ Line = "You slide your hands up and stroke " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands up and stroke " +Girl.name+ "'s " +Current
                 $ Check = 400
             elif Past == "thighs":
-                $ Line = "You slide your hands up to grab " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands up to grab " +Girl.name+ "'s " +Current
                 $ Check = 400
             else:
-                $ Line = "You begin to massage " +Girl.name+ "'s " +Current
+                $ line = "You begin to massage " +Girl.name+ "'s " +Current
                 $ Check = 500
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
@@ -711,19 +711,19 @@ label Massage_Cycle:
                     $ Girl.change_stat("lust", 60, 1)
                     "You stretch her ankles back and forth, as you work out her tensed calves."
                 else:
-                    "[Line]. She flexes her toes in satisfaction as her muscles stretch out."
+                    "[line]. She flexes her toes in satisfaction as her muscles stretch out."
             elif Past == Current:
                 $ Check = 600
-                $ Line = "You continue to massage " +Girl.name+ "'s " +Current
+                $ line = "You continue to massage " +Girl.name+ "'s " +Current
 
             if Girl.PantsNum() <= 6 and Girl.HoseNum() < 10:
                 $ Girl.addiction -= 2
         elif Current == "feet":
             if Past == "calves":
-                $ Line = "You slide your hands down and grasp " +Girl.name+ "'s " +Current
+                $ line = "You slide your hands down and grasp " +Girl.name+ "'s " +Current
                 $ Check = 400
             else:
-                $ Line = "You begin to rub " +Girl.name+ "'s " +Current
+                $ line = "You begin to rub " +Girl.name+ "'s " +Current
                 $ Check = 600
 
             if Girl.massage_chart[MCount] == Current and approval_check(Girl, Check):
@@ -734,10 +734,10 @@ label Massage_Cycle:
                     $ Girl.change_stat("lust", 90, 2)
                     "You press your thumbs deeply into her arches, and her toes curl around them."
                 else:
-                    "[Line]. She stretches her toes and lets out a soft moan."
+                    "[line]. She stretches her toes and lets out a soft moan."
             elif Past == Current:
                 $ Check = 600
-                $ Line = "You continue to rub " +Girl.name+ "'s " +Current
+                $ line = "You continue to rub " +Girl.name+ "'s " +Current
 
             if Girl.accessory != "boots" and Girl.HoseNum() < 10:
                 $ Girl.addiction -= 3
@@ -751,14 +751,14 @@ label Massage_Cycle:
                 $ Girl.change_stat("obedience", 30, 1)
         elif approval_check(Girl, Check):
 
-            $ Line = Line + renpy.random.choice([". She wriggles a little in contentment.",
+            $ line = line + renpy.random.choice([". She wriggles a little in contentment.",
                                 ". She lets out a little hum.",
                                 ". She really seems to enjoy it.",
                                 ". She seems comfortable with this.",
                                 ". She lets out a small purr of pleasure."])
             $ Girl.change_stat("lust", 60, 2)
             $ Girl.change_stat("lust", 90, 1)
-            "[Line]"
+            "[line]"
             if Current == Past and Current in ("breasts","ass","pussy"):
 
 
@@ -773,13 +773,13 @@ label Massage_Cycle:
                 return
         elif approval_check(Girl, Check-200) or "massagefail" in Girl.recent_history:
 
-            $ Line = Line + renpy.random.choice([". She stiffens a bit, but settles back into it.",
+            $ line = line + renpy.random.choice([". She stiffens a bit, but settles back into it.",
                                 ". She doesn't seem to enjoy it.",
                                 ". She doesn't seem comfortable with this.",
                                 ". She lets out a small tsk of irritation."])
             $ Girl.change_stat("lust", 60, -1)
             $ Girl.change_stat("lust", 90, -2)
-            "[Line]"
+            "[line]"
             if Current == Past and Current in ("breasts","ass","pussy"):
 
                 call Massage_BadEnd
@@ -795,7 +795,7 @@ label Massage_Cycle:
             $ Girl.add_word(1,"massagefail")
         else:
 
-            "[Line]. She stiffens and sits up."
+            "[line]. She stiffens and sits up."
             $ Girl.add_word(1,"massagefail")
             jump Massage_BadEnd
 
@@ -813,10 +813,10 @@ label Massage_Cycle:
         if not Girl.taboo:
 
             $ primary_action = "massage"
-            $ Line = 0
-            call Girl_Self_Lines (Girl, "T3", girl_offhand_action)
-            if Line:
-                $ Line3 = Line + "."
+            $ line = 0
+            call Girl_Self_lines (Girl, "T3", girl_offhand_action)
+            if line:
+                $ line3 = line + "."
 
         $ Player.focus = 50 if not Player.semen and Player.focus >= 50 else Player.focus
         $ Player.focus = 80 if Player.focus >= 80 and girl_offhand_action != "handjob" else Player.focus
@@ -834,7 +834,7 @@ label Massage_Cycle:
                 if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
                     $ Girl.recent_history.append("unsatisfied")
                     $ Girl.daily_history.append("unsatisfied")
-                $ Line = "came"
+                $ line = "came"
 
             if Girl.lust >= 100:
 
@@ -874,8 +874,8 @@ label Massage_Cycle:
 
                 jump Massage_After
 
-            if Line == "came":
-                $ Line = 0
+            if line == "came":
+                $ line = 0
                 if not Player.semen:
                     "You're emptied out, you should probably take a break."
         if Partner and Partner.lust >= 100:

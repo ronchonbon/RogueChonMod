@@ -18,13 +18,13 @@ label Microtransactions_Intro:
                 "You excuse yourself and head out."
             else:
                 "You head over."
-    show blackscreen onlayer black
+    show black_screen onlayer black
     pause 0.1
     $ round -= 5
     $ bg_current = "bg_study"
     call change_Xavier_face ("_happy")
     call set_the_scene
-    hide blackscreen onlayer black
+    hide black_screen onlayer black
     ch_x "[Player.name], I'm glad you came to see me."
     ch_x "I have a problem that I believe you could take off my plate."
     ch_x " I've heard that you have been having. . . financial problems of late."
@@ -76,20 +76,20 @@ label Microtransactions_Intro:
             ch_x "If this isn't something you want to do, I understand."
             ch_x "But this is actually a rather urgent delivery, so I'm afraid that just this once. . ."
             ch_x "I must insist."
-    show blackscreen onlayer black
+    show black_screen onlayer black
     scene
     pause 0.1
     scene empty_class onlayer backdrop
-    hide blackscreen onlayer black
+    hide black_screen onlayer black
     $ round -= 5
     "You take a small metal box from the Professor, and head to Professor McCoy's lab."
     "You drop it off in the corner, and it rapidly expands into a large device labeled \"Pym\""
     ch_b "Oh, my shirnk ray!"
     $ bg_current = "bg_study"
-    show blackscreen onlayer black
+    show black_screen onlayer black
     pause 0.1
     call set_the_scene
-    hide blackscreen onlayer black
+    hide black_screen onlayer black
     $ round -= 5
     "You return to Xavier's office."
     $ Player.cash += 5
@@ -99,10 +99,10 @@ label Microtransactions_Intro:
     ch_x "I'm sure there will be plenty of business."
     "You return to your room."
     $ bg_current = "bg_player"
-    show blackscreen onlayer black
+    show black_screen onlayer black
     pause 0.1
     call set_the_scene
-    hide blackscreen onlayer black
+    hide black_screen onlayer black
     return
 
 label Microtransactions:
@@ -118,7 +118,7 @@ label Microtransactions:
     menu:
         "What do you want to do?"
         "Deliver a nearby MT":
-            $ Line = renpy.random.choice(["the danger room",
+            $ line = renpy.random.choice(["the danger room",
                         "the classroom",
                         "the pool",
                         "Scott's room",
@@ -131,11 +131,11 @@ label Microtransactions:
                         "Xavier's study",
                         "the caffeteria"])
             $ round -= 10
-            show blackscreen onlayer black
+            show black_screen onlayer black
             pause 0.1
-            hide blackscreen onlayer black
-            "You grab a package from McCoy and deliver it to [Line]."
-            $ Line = renpy.random.choice(["a refridgerator",
+            hide black_screen onlayer black
+            "You grab a package from McCoy and deliver it to [line]."
+            $ line = renpy.random.choice(["a refridgerator",
                         "a microwave",
                         "a sex doll. That's awkward",
                         "a sex doll. That makes sense",
@@ -145,17 +145,17 @@ label Microtransactions:
                         "a crate full of wrapped white powder. Flour, probably",
                         "a giant pile of wrapped clothing",
                         "a giant crate of booze"])
-            "It quickly grows into [Line]."
+            "It quickly grows into [line]."
             $ round -= 5
             $ Player.cash += 1
-            show blackscreen onlayer black
+            show black_screen onlayer black
             pause 0.1
-            hide blackscreen onlayer black
+            hide black_screen onlayer black
             "You head back home."
         "Deliver a distant MT [[locked] (locked)" if round < 50:
             pass
         "Deliver a distant MT" if round >= 50:
-            $ Line = renpy.random.choice(["the restaurant",
+            $ line = renpy.random.choice(["the restaurant",
                         "the theater",
                         "a local boutique",
                         "mayor's house",
@@ -166,11 +166,11 @@ label Microtransactions:
                         "a broken down shack",
                         "the local highschool"])
             $ round -= 20
-            show blackscreen onlayer black
+            show black_screen onlayer black
             pause 0.1
-            hide blackscreen onlayer black
-            "You grab a package from McCoy and deliver it to [Line]."
-            $ Line = renpy.random.choice(["a refridgerator",
+            hide black_screen onlayer black
+            "You grab a package from McCoy and deliver it to [line]."
+            $ line = renpy.random.choice(["a refridgerator",
                         "a microwave",
                         "a sex doll. That's awkward",
                         "a sex doll. That makes sense",
@@ -180,12 +180,12 @@ label Microtransactions:
                         "a crate full of wrapped white powder. Flour, probably",
                         "a giant pile of wrapped clothing",
                         "a giant crate of popcorn"])
-            "It quickly grows into [Line]."
+            "It quickly grows into [line]."
             $ round -= 10
             $ Player.cash += 3
-            show blackscreen onlayer black
+            show black_screen onlayer black
             pause 0.1
-            hide blackscreen onlayer black
+            hide black_screen onlayer black
             "You head back home."
         "Exit":
             return

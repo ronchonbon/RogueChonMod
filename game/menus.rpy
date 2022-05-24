@@ -5,7 +5,7 @@ label enter_main_sex_menu:
 
             return
 
-        if "three" not in focused_Girl.history and not AloneCheck(focused_Girl):
+        if "threesome" not in focused_Girl.history and not AloneCheck(focused_Girl):
             call expression focused_Girl.tag + "_ThreeCheck"
 
         if taboo > 20 and "taboo" not in focused_Girl.history:
@@ -18,14 +18,14 @@ label enter_main_sex_menu:
 
                 $ Player.traits.append("locked")
 
-                call taboo_Level
+                call taboo_level
             else:
                 return
 
     $ action_context = None
-    $ primary_action = 0
-    $ offhand_action = 0
-    $ girl_offhand_action = 0
+    $ primary_action = None
+    $ offhand_action = None
+    $ girl_offhand_action = None
 
     call expression focused_Girl.tag + "_Hide" pass(1)
 
@@ -48,20 +48,15 @@ label enter_main_sex_menu:
         if focused_Girl.location == bg_current:
             call sex_menu_caught_or_angry_lines(focused_Girl)
 
-        $ focused_Girl.outfitChange()
+        $ focused_Girl.change_outfit()
         $ focused_Girl.drain_word("caught",1,0)
 
         return
 
     if round < 5:
-        call sex_menu_less_than_five_rounds(focused_Girl)
+        call sex_menu_less_than_five_rounds_lines(focused_Girl)
 
         return
-
-    $ main_line = None
-    $ fondle_line = None
-    $ handjob_line = None
-    $ show_line = None
 
     call girl_sex_menu(focused_Girl)
 
@@ -83,7 +78,7 @@ label enter_main_sex_menu:
 
         return
 
-    call GirlsAngry
+    call are_girls_angry
     jump enter_main_sex_menu
 
 label girl_sex_menu(Girl):
@@ -669,11 +664,11 @@ label begging_menu(Girl, action):
         "Come on, get to work." if action in ["handjob", "footjob"]:                                               # Pressured into it
             call forced_action(Girl, action)
         "Come on, let me fuck those titties, [Girl.player_petname]" if action in ["titjob"]:
-            $ Girl.namecheck() #checks reaction to petname
+            $ Girl.name_check() #checks reaction to petname
 
             call forced_action(Girl, action)
         "Suck it, [Girl.player_petname]" if action in ["blowjob"]:                                               # Pressured into it
-            $ Girl.namecheck() #checks reaction to petname
+            $ Girl.name_check() #checks reaction to petname
 
             call forced_action(Girl, action)
         "[[Press it against her.]]" if action in ["dildo_pussy", "dildo_ass"]:
@@ -860,7 +855,7 @@ label kiss_menu:
         "Stop jack'in it." if multi_action and offhand_action == "jerking_off":
             "You stop jack'in it."
 
-            $ offhand_action = 0
+            $ offhand_action = None
         "Other options":
             menu:
                 "Offhand action":
@@ -1151,7 +1146,7 @@ label fondle_menu:
         "Back to Sex Menu" if multi_action:
             ch_p "Let's try something else."
 
-            call reset_position(focused_Girl)
+            call expression focused_Girl.tag + "_Pos_Reset"
 
             $ action_context = "shift"
             $ line = 0
@@ -1160,7 +1155,7 @@ label fondle_menu:
         "End Scene" if not multi_action:
             ch_p "Let's stop for now."
 
-            call reset_position(focused_Girl)
+            call expression focused_Girl.tag + "_Pos_Reset"
 
             $ line = 0
 

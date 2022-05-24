@@ -185,14 +185,14 @@ label pullback_reactions(Girl, action):
 
     return
 
-label recent_action_reactions(Girl):
+label recent_action_reactions(Girl, action):
     $ Girl.change_face("_sexy", 1)
 
     call recent_action_lines(Girl, action)
 
     return
 
-label daily_action_reactions(Girl):
+label daily_action_reactions(Girl, action):
     $ Girl.change_face("_sexy", 1)
 
     call daily_action_lines(Girl, action)
@@ -234,7 +234,7 @@ label first_time_asking_reactions(Girl, action):
 
     return
 
-label anal_insertion_reactions(Girl):
+label anal_insertion_reactions(Girl, action):
     $ Girl.change_face("_bemused", 1)
 
     call anal_insertion_not_loose_done_today_lines(Girl, action)
@@ -597,7 +597,7 @@ label girl_initiated_action(Girl, action):
 
                 ch_p "[praise_line]"
 
-                $ Girl.namecheck() #checks reaction to petname
+                $ Girl.name_check() #checks reaction to petname
 
                 "You grab the dildo and slide it in."
 
@@ -616,7 +616,7 @@ label girl_initiated_action(Girl, action):
 
                 ch_p "[praise_line]"
 
-                $ Girl.namecheck() #checks reaction to petname
+                $ Girl.name_check() #checks reaction to petname
 
                 "[action_line]"
 
@@ -636,7 +636,7 @@ label girl_initiated_action(Girl, action):
 
                 ch_p "[reject_line]"
 
-                $ Girl.namecheck() #checks reaction to petname
+                $ Girl.name_check() #checks reaction to petname
 
                 if Girl == JeanX:
                     $ Girl.change_stat("love", 70, -4)
@@ -718,7 +718,6 @@ label action_specific_consequences(Girl, action):
     $ achievement = None
 
     $ Girl.action_counter[action] += 1
-    $ setattr(Girl, action_counter[action], Girl.action_counter[action])
 
     if action == "kiss":
         call Partner_Like(Girl, 1)
@@ -794,7 +793,7 @@ label action_approved(Girl, action):
         call action_forcefully_approved_lines(Girl, action)
     elif not taboo and "no_taboo" in Girl.daily_history:
         call private_enough_lines(Girl, action)
-    elif action == "anal" and "anal" in Girl.daily_history and not Girl.Loose:
+    elif action == "anal" and "anal" in Girl.daily_history and not Girl.used_to_anal:
         pass
     elif action in Girl.recent_history:
         $ Girl.change_face("_sexy", 1)
@@ -839,7 +838,7 @@ label action_disapproved(Girl, action):
         $ Girl.change_face("_bemused")
 
         call action_not_done_yet_lines(Girl, action)
-    elif action in anal_insertion_actions and not Girl.Loose and action not in Girl.daily_history:
+    elif action in anal_insertion_actions and not Girl.used_to_anal and action not in Girl.daily_history:
         $ Girl.change_face("_perplexed")
 
         call anal_insertion_not_loose_lines(Girl, action)
@@ -877,7 +876,7 @@ label action_accepted(Girl, action):
 
         call action_accepted_enthusiastically_lines(Girl, action)
         call action_accepted_changes(Girl, action)
-        call before_action
+        jump before_action
     else:
         if Girl.forced:
             $ Girl.change_face("_sad")
@@ -917,8 +916,8 @@ label action_rejected(Girl, action):
         call taboo_action_rejected_reactions(Girl, action)
 
         $ Girl.add_word(1, "no_taboo", "no_taboo")
-    elif action in anal_insertion_actions and not Girl.Loose and action in Girl.daily_history:
-        call anal_insertion_not_loose_done_today_reactions(Girl)
+    elif action in anal_insertion_actions and not Girl.used_to_anal and action in Girl.daily_history:
+        call anal_insertion_not_loose_done_today_reactions(Girl, action)
     elif Girl.action_counter[action]:
         $ Girl.change_face("_sad")
 

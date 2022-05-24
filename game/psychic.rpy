@@ -50,7 +50,7 @@ label MindFuck_Screen:
 
 label psychicFlash(Face="_sly", TempLoc=0):
     call MindFuck_Screen
-    $ Line = Girl.location
+    $ line = Girl.location
     $ Girl.location = bg_current
     call set_the_scene (1, 0, 0, 0, 1)
     if Face:
@@ -67,7 +67,7 @@ label psychicFlash(Face="_sly", TempLoc=0):
     $ Girl.change_outfit(6,outfit_changed=1)
     scene onlayer black
     $ Girl.arm_pose = 1
-    $ Line = 0
+    $ line = 0
     Girl.voice ". . ."
 
 

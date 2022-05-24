@@ -1,3 +1,70 @@
+init python:
+
+    def call_holder(value, Color, XPOS):
+        global number_of_holders
+
+        number_of_holders += 1 if number_of_holders < 10 else -9
+
+        renpy.show_screen("stat_holder_" + str(number_of_holders), value, Color, XPOS)
+
+        return
+
+transform stat_animation(Timer, XPOS):
+    alpha 0
+    pause Timer
+    xpos XPOS ypos 0.15 alpha 1
+    parallel:
+        linear 1 ypos 0.0
+    parallel:
+        pause 0.3
+        linear 0.3 alpha 0
+
+screen stat_graphic(value, Color, Timer, XPOS):
+    showif value > 0:
+        text "+[value]" size 30 color Color at stat_animation(Timer, XPOS)
+    else:
+        text "[value]" size 30 color Color at stat_animation(Timer, XPOS)
+
+screen stat_holder_1(value, Color, XPOS):
+    use stat_graphic(value, Color, 0.0, XPOS-30)
+    timer 0.6 action Hide("stat_holder_1")
+
+screen stat_holder_2(value, Color, XPOS):
+    use stat_graphic(value, Color, 0.1, XPOS)
+    timer 0.7 action Hide("stat_holder_2")
+
+screen stat_holder_3(value, Color, XPOS):
+    use stat_graphic(value, Color, 0.2, XPOS+30)
+    timer 0.8 action Hide("stat_holder_3")
+
+screen stat_holder_4(value, Color, XPOS):
+    use stat_graphic(value, Color, 0.3, XPOS-30)
+    timer 0.9 action Hide("stat_holder_4")
+
+screen stat_holder_5(value, Color, XPOS):
+    use stat_graphic(value, Color, 0.4, XPOS)
+    timer 1.0 action Hide("stat_holder_5")
+
+screen stat_holder_6(value, Color, XPOS):
+    use stat_graphic(value, Color, 0.5, XPOS+30)
+    timer 1.1 action Hide("stat_holder_6")
+
+screen stat_holder_7(value, Color, XPOS):
+    use stat_graphic(value, Color, 0.6, XPOS-30)
+    timer 1.2 action Hide("stat_holder_7")
+
+screen stat_holder_8(value, Color, XPOS):
+    use stat_graphic(value, Color, 0.7, XPOS)
+    timer 1.3 action Hide("stat_holder_8")
+
+screen stat_holder_9(value, Color, XPOS):
+    use stat_graphic(value, Color, 0.8, XPOS+30)
+    timer 1.4 action Hide("stat_holder_9")
+
+screen stat_holder_10(value, Color, XPOS):
+    use stat_graphic(value, Color, 0.9, XPOS-30)
+    timer 1.5 action Hide("stat_holder_10")
+
 layeredimage Xavier_sprite:
     always:
         "images/NPC/Xavier_body.png"
@@ -57,7 +124,7 @@ label change_Xavier_face(face = Xavier_emotion):
         $ Xavier_brows = "concentrate"
         $ Xavier_eyes = "_happy"
         $ Xavier_psychic = 0
-        
+
     return
 
 layeredimage background:

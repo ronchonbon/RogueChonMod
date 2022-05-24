@@ -1,7 +1,7 @@
 
 label Gifts:
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
     while True:
         if not Player.inventory:
@@ -1159,12 +1159,12 @@ label Gifts:
 
 
                 ch_p "I wanted to talk about your style."
-                call taboo_Level
-                $ Line = "Giftstore"
+                call taboo_level
+                $ line = "Giftstore"
                 call expression Girl.tag + "_Clothes"
             "Switch to. . .":
 
-                call Switch_Chat
+                call Switch_chat
                 ch_p "I'd like to give you something."
                 if Girl.location != bg_current:
                     Girl.voice "I don't see how, if I'm not there."

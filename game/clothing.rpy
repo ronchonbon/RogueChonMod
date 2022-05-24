@@ -1,9 +1,36 @@
+label alternate_clothes(Girl, outfit = 1):
+    $ Girl = check_girl(Girl)
 
+    if Girl.clothing[outfit] == 1 or not Girl.clothing[outfit]:
+        $ Girl.outfit = "casual1"
+    elif Girl.clothing[outfit] == 2:
+        $ Girl.outfit = "casual2"
+    elif Girl.clothing[outfit] == 3:
+        $ Girl.outfit = "custom1"
+    elif Girl.clothing[outfit] == 5:
+        $ Girl.outfit = "custom2"
+    elif Girl.clothing[outfit] == 6:
+        $ Girl.outfit = "custom3"
+    elif Girl.clothing[outfit] == 7:
+        $ Girl.outfit = "sleep"
+    elif Girl.clothing[outfit] == 4:
+        $ Girl.outfit = "gym"
+    elif Girl.clothing[outfit] == 10:
+        $ Girl.outfit = "swimwear"
+    else:
+        $ Girl.outfit = "casual1"
+
+    return
+
+
+
+
+    
 
 label Clothes_Schedule(Girl=0, counter=0):
 
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
 
     if Girl == RogueX:
@@ -223,7 +250,7 @@ label Clothes_Schedule(Girl=0, counter=0):
 label Clothes_ScheduleB(Girl=0, Count=0):
 
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
     menu:
         "Your green outfit." if Girl == RogueX:
@@ -289,7 +316,7 @@ label Clothes_ScheduleB(Girl=0, Count=0):
                         if Girl.first_custom_outfit[0] == 2:
                             $ Count = 3
                         else:
-                            $ Line = "no"
+                            $ line = "no"
                 "The second one. (locked)" if not Girl.second_custom_outfit[0]:
                     pass
                 "The second one." if Girl.second_custom_outfit[0]:
@@ -301,7 +328,7 @@ label Clothes_ScheduleB(Girl=0, Count=0):
                         if Girl.second_custom_outfit[0] == 2:
                             $ Count = 5
                         else:
-                            $ Line = "no"
+                            $ line = "no"
                 "The third one. (locked)" if not Girl.third_custom_outfit[0]:
                     pass
                 "The third one." if Girl.third_custom_outfit[0]:
@@ -313,10 +340,10 @@ label Clothes_ScheduleB(Girl=0, Count=0):
                         if Girl.third_custom_outfit[0] == 2:
                             $ Count = 6
                         else:
-                            $ Line = "no"
+                            $ line = "no"
                 "Never mind":
                     pass
-            if Line == "no":
+            if line == "no":
                 if Girl == RogueX:
                     ch_r "No, I'm not wearing that outside, [Girl.player_petname]."
                 elif Girl == KittyX:
@@ -331,7 +358,7 @@ label Clothes_ScheduleB(Girl=0, Count=0):
                     ch_s "I cannot wear that one in public."
                 elif Girl == JubesX:
                     ch_v "That one's private. . ."
-                $ Line = 0
+                $ line = 0
             else:
                 Girl.voice "Fine. . ."
         "Your gym clothes.":
@@ -407,36 +434,11 @@ label Clothes_ScheduleB(Girl=0, Count=0):
     return Count
 
 
-label AltClothes(Girl=0, outfit=1):
 
-
-
-
-    $ Girl = GirlCheck(Girl)
-
-    if Girl.clothing[outfit] == 1 or not Girl.clothing[outfit]:
-        $ Girl.outfit = "casual1"
-    elif Girl.clothing[outfit] == 2:
-        $ Girl.outfit = "casual2"
-    elif Girl.clothing[outfit] == 3:
-        $ Girl.outfit = "custom1"
-    elif Girl.clothing[outfit] == 5:
-        $ Girl.outfit = "custom2"
-    elif Girl.clothing[outfit] == 6:
-        $ Girl.outfit = "custom3"
-    elif Girl.clothing[outfit] == 7:
-        $ Girl.outfit = "sleep"
-    elif Girl.clothing[outfit] == 4:
-        $ Girl.outfit = "gym"
-    elif Girl.clothing[outfit] == 10:
-        $ Girl.outfit = "swimwear"
-    else:
-        $ Girl.outfit = "casual1"
-    return
 
 label Private_outfit(Girl=0):
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     if Girl.broken_up[0] or "_angry" in Girl.daily_history:
         return
     if Girl.outfit == "temporary" or not Girl.clothing[9]:
@@ -444,7 +446,7 @@ label Private_outfit(Girl=0):
 
         return
     if "comfy" in Girl.recent_history or "comfy" in Girl.traits or Girl.outfit == Girl.clothing[9]:
-        call AltClothes (Girl, 9)
+        call alternate_clothes (Girl, 9)
         $ Girl.change_outfit(outfit_changed=1)
     elif "no_comfy" in Girl.recent_history:
         pass
@@ -471,7 +473,7 @@ label Private_outfit(Girl=0):
         elif Girl == JubesX:
             ch_v "Gimme a minute. . ."
             ch_v "I wanna slip something else on. . ."
-        call AltClothes (Girl, 9)
+        call alternate_clothes (Girl, 9)
         $ Girl.change_outfit(outfit_changed=1)
         $ Girl.recent_history.append("comfy")
     else:
@@ -482,7 +484,7 @@ label Private_outfit(Girl=0):
                 ch_r "Should I throw on somethin' more comfortable?"
                 "Sure.":
                     ch_r "Love to. . ."
-                    call AltClothes (Girl, 9)
+                    call alternate_clothes (Girl, 9)
                     $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
@@ -494,7 +496,7 @@ label Private_outfit(Girl=0):
                 ch_k "Want me to wear something more fun?"
                 "Sure.":
                     ch_k "Hehe. . ."
-                    call AltClothes (Girl, 9)
+                    call alternate_clothes (Girl, 9)
                     $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
@@ -506,7 +508,7 @@ label Private_outfit(Girl=0):
                 ch_e "Would you like me to change into something more comfortable?"
                 "Sure.":
                     ch_e "Lovely. . ."
-                    call AltClothes (Girl, 9)
+                    call alternate_clothes (Girl, 9)
                     $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
@@ -518,7 +520,7 @@ label Private_outfit(Girl=0):
                 ch_l "I could throw on something a bit more fun. . ."
                 "Sure.":
                     ch_l "Cool. . ."
-                    call AltClothes (Girl, 9)
+                    call alternate_clothes (Girl, 9)
                     $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
@@ -528,7 +530,7 @@ label Private_outfit(Girl=0):
             menu:
                 ch_j "I do have a more fun look. . ."
                 "Sure.":
-                    call AltClothes (Girl, 9)
+                    call alternate_clothes (Girl, 9)
                     $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
@@ -540,7 +542,7 @@ label Private_outfit(Girl=0):
                 ch_s "Would you like me to change into something more comfortable?"
                 "Sure.":
                     ch_s "Excellent. . ."
-                    call AltClothes (Girl, 9)
+                    call alternate_clothes (Girl, 9)
                     $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
@@ -552,7 +554,7 @@ label Private_outfit(Girl=0):
                 ch_v "Hey, how'bout I throw something. . . nice on?"
                 "Sure.":
                     ch_v "Cool. . ."
-                    call AltClothes (Girl, 9)
+                    call alternate_clothes (Girl, 9)
                     $ Girl.change_outfit(outfit_changed=1)
                     $ Girl.recent_history.append("comfy")
                 "No thanks.":
@@ -562,7 +564,7 @@ label Private_outfit(Girl=0):
 
 label Custom_Out(Girl=0, Custom=3, Shame=0, Agree=0):
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
     $ Girl.change_face("_sexy", 1)
 
@@ -768,7 +770,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
 
 
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
 
     if not Check and not taboo and not Girl.taboo and Custom != 20:
 
@@ -1218,7 +1220,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 ch_s "I don't see why not. . ."
             elif Girl == JubesX:
                 ch_v "Sure, take a look. . ."
-            hide DressScreen
+            hide dress_screen
             return True
         if not Agree:
 
@@ -1241,7 +1243,7 @@ label outfitShame(Girl=0, Custom=3, Check=0, Count=0, Tempshame=50, Agree=1):
                 extend ""
                 "Ok then, you can put your normal clothes back on.":
                     $ Girl.change_outfit(outfit_changed=1)
-                    hide DressScreen
+                    hide dress_screen
                 "Ok, we can keep tweaking it.":
                     pass
             $ Girl.change_face("_smile", 1)
@@ -1702,7 +1704,7 @@ label QuickoutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, outfit_
 
 
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
 
     if Custom == 3:
         $ outfit_holder = Girl.first_custom_outfit[:]
@@ -1849,10 +1851,10 @@ label QuickoutfitCheck(Girl=0, Custom=3, Count=0, Tempshame=50, Agree=1, outfit_
 
 
 
-label Display_DressScreen(Girl=focused_Girl):
+label Display_dress_screen(Girl=focused_Girl):
 
 
-    if renpy.showing('DressScreen'):
+    if renpy.showing('dress_screen'):
         return True
 
     if Girl == StormX:
@@ -1887,7 +1889,7 @@ label Display_DressScreen(Girl=focused_Girl):
     menu:
         extend ""
         "Go ahead":
-            show DressScreen zorder 150
+            show dress_screen zorder 150
             if Girl == RogueX:
                 ch_r "Thanks."
             elif Girl == KittyX:

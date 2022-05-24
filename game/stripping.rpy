@@ -110,18 +110,18 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
                 call remove_girl (EmmaX)
 
     if "stripping" in Present[0].daily_history and approval_check(Present[0], 500, TabM = 3):
-        $ Line = renpy.random.choice(["You liked the show earlier?",
+        $ line = renpy.random.choice(["You liked the show earlier?",
                     "Didn't get enough earlier?",
                     "You're going to wear me out."])
     else:
-        $ Line = renpy.random.choice(["Ok, that sounds fun.",
+        $ line = renpy.random.choice(["Ok, that sounds fun.",
                     "I could get into that.",
                     "Yeah, ok."])
 
-    Present[0].voice "[Line]"
-    $ Line = 0
+    Present[0].voice "[line]"
+    $ line = 0
 
-    call AllReset ("All")
+    call AllReset ("all")
 
 
     $ counter = len(Present)
@@ -193,8 +193,8 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
 
         $ round -= 2 if round > 2 else round
         if len(Present) >= 2:
-            $ Present[0].GLG(Present[1],600,1,1)
-            $ Present[1].GLG(Present[0],600,1,1)
+            $ Present[0].check_if_likes(Present[1],600,1,1)
+            $ Present[1].check_if_likes(Present[0],600,1,1)
         menu:
             "Continue":
                 pass
@@ -208,7 +208,7 @@ label Group_Strip(Girl=0, approval_bonus=approval_bonus, approval_bonusP=[0,0], 
 
     if EmmaX.location == bg_current and len(Present) >= 2:
 
-        if "classcaught" not in EmmaX.history or "three" not in EmmaX.history or (taboo and "taboo" not in EmmaX.history):
+        if "classcaught" not in EmmaX.history or "threesome" not in EmmaX.history or (taboo and "taboo" not in EmmaX.history):
             if EmmaX.location == "bg_emma":
 
                 ch_e "If the two of you would like to get indecent, please do it elsewhere."
@@ -243,8 +243,8 @@ label Group_Stripping:
             jump Group_Strip_End
 
         if len(Present) >= 2 and Count != between_event_count:
-            $ Present[Count].GLG(Present[between_event_count],800,2,1)
-            $ Present[between_event_count].GLG(Present[Count],800,2,1)
+            $ Present[Count].check_if_likes(Present[between_event_count],800,2,1)
+            $ Present[between_event_count].check_if_likes(Present[Count],800,2,1)
 
         if len(Present) >= 2:
 
@@ -320,9 +320,9 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 25, 1)
                 $ Player.change_stat("focus", 60, 3)
-                $ Line = Girl.accessory
+                $ line = Girl.accessory
                 $ Girl.accessory = ""
-                "She shrugs off her [Line] and throws it behind her."
+                "She shrugs off her [line] and throws it behind her."
             else:
                 jump Strip_Ultimatum
         elif Girl == JubesX and Girl.accessory and Girl.top and (Girl.underwear or Girl.legs or Girl.HoseNum() >= 10):
@@ -331,9 +331,9 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 25, 1)
                 $ Player.change_stat("focus", 60, 3)
-                $ Line = Girl.accessory
+                $ line = Girl.accessory
                 $ Girl.accessory = ""
-                "She shrugs off her [Line] and throws it behind her."
+                "She shrugs off her [line] and throws it behind her."
             else:
                 jump Strip_Ultimatum
         elif Girl.top and Girl.bra and (Girl.underwear or Girl.legs or Girl.HoseNum() >= 10):
@@ -342,12 +342,12 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 25, 1)
                 $ Player.change_stat("focus", 60, 3)
-                $ Line = Girl.top
+                $ line = Girl.top
                 $ Girl.top = ""
                 if Girl == KittyX:
-                    "She drops her shoulders and her [Line] falls to the floor."
+                    "She drops her shoulders and her [line] falls to the floor."
                 else:
-                    "She pulls her [Line] over her head and throws it behind her."
+                    "She pulls her [line] over her head and throws it behind her."
             else:
                 jump Strip_Ultimatum
 
@@ -358,12 +358,12 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 30, 1)
                 $ Player.change_stat("focus", 60, 5)
-                $ Line = Girl.legs
+                $ line = Girl.legs
                 $ Girl.legs = ""
                 if Girl == KittyX:
-                    "Her [Line] slide through her legs until they're only on her toes, before she kicks them to the floor."
+                    "Her [line] slide through her legs until they're only on her toes, before she kicks them to the floor."
                 else:
-                    "She unzips and pulls down her [Line], dropping them to the floor."
+                    "She unzips and pulls down her [line], dropping them to the floor."
                 if not Girl.seen_underwear:
                     $ Girl.change_stat("obedience", 50, 2)
                     $ Girl.change_stat("obedience", 200, 3)
@@ -390,12 +390,12 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     jump Strip_Ultimatum
             else:
                 $ Player.change_stat("focus", 60, 3)
-            $ Line = Girl.hose
+            $ line = Girl.hose
             $ Girl.hose = ""
             if Girl == KittyX:
-                "Her [Line] slide down off her legs, leaving them in a small pile."
+                "Her [line] slide down off her legs, leaving them in a small pile."
             else:
-                "She rolls the [Line] down off her legs, leaving them in a small pile."
+                "She rolls the [line] down off her legs, leaving them in a small pile."
             call expression Girl.tag + "_First_Bottomless" pass (1)
 
         elif Girl == JubesX and Girl.accessory and (Girl.underwear or Girl.legs or Girl.HoseNum() >= 10):
@@ -405,16 +405,16 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ Girl.change_stat("obedience", 50, 2)
                 $ Girl.change_stat("inhibition", 50, 10)
                 $ Player.change_stat("focus", 80, 15)
-                $ Line = Girl.accessory
+                $ line = Girl.accessory
                 $ Girl.accessory = ""
-                "She shrugs off her [Line] and throws it behind her."
+                "She shrugs off her [line] and throws it behind her."
                 if not Girl.seen_breasts:
                     $ Girl.change_face("_bemused", 1)
                     $ Girl.change_stat("obedience", 50, 3)
                     $ Girl.change_stat("obedience", 200, 4)
                     $ Girl.change_stat("inhibition", 50, 3)
                     $ Girl.change_stat("inhibition", 200, 3)
-                    "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                    "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     call expression Girl.tag + "_First_Topless" pass (1)
             else:
                 jump Strip_Ultimatum
@@ -425,7 +425,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ Girl.change_stat("obedience", 50, 2)
                 $ Girl.change_stat("inhibition", 50, 10)
                 $ Player.change_stat("focus", 80, 15)
-                $ Line = Girl.top
+                $ line = Girl.top
                 $ Girl.top = ""
                 if not Girl.seen_breasts:
                     $ Girl.change_face("_bemused", 1)
@@ -434,17 +434,17 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     $ Girl.change_stat("inhibition", 50, 3)
                     $ Girl.change_stat("inhibition", 200, 3)
                     if Girl == KittyX:
-                        "She hesitantly glances your way, and then with tug her [Line] passes through her, tossing it to the ground."
+                        "She hesitantly glances your way, and then with tug her [line] passes through her, tossing it to the ground."
                     elif Girl in (EmmaX,LauraX,StormX):
-                        "She glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                        "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     else:
-                        "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                        "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     call expression Girl.tag + "_First_Topless" pass (1)
                 else:
                     if Girl == KittyX:
-                        "She drops her shoulders and her [Line] falls to the floor."
+                        "She drops her shoulders and her [line] falls to the floor."
                     else:
-                        "She pulls her [Line] over her head, tossing it to the ground."
+                        "She pulls her [line] over her head, tossing it to the ground."
             else:
                 jump Strip_Ultimatum
 
@@ -455,16 +455,16 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 $ Girl.change_stat("obedience", 50, 2)
                 $ Girl.change_stat("inhibition", 50, 1)
                 $ Player.change_stat("focus", 80, 15)
-                $ Line = Girl.bra
+                $ line = Girl.bra
                 $ Girl.bra = ""
                 if not Girl.seen_breasts:
                     $ Girl.change_face("_bemused", 1)
                     if Girl == KittyX:
-                        "She hesitantly glances your way, and then with a shrug pulls her [Line] through herself, tossing it to the ground."
+                        "She hesitantly glances your way, and then with a shrug pulls her [line] through herself, tossing it to the ground."
                     elif Girl in (EmmaX,LauraX,StormX):
-                        "She glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                        "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     else:
-                        "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                        "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     $ Girl.change_stat("obedience", 50, 3)
                     $ Girl.change_stat("obedience", 200, 4)
                     $ Girl.change_stat("inhibition", 50, 3)
@@ -473,9 +473,9 @@ label Girl_Stripping(Girl=0, Nudist=0):
                 else:
                     $ Girl.change_face("_sexy")
                     if Girl == KittyX:
-                        "She pulls her [Line] through herself, tossing it to the ground."
+                        "She pulls her [line] through herself, tossing it to the ground."
                     else:
-                        "She pulls her [Line] over her head, tossing it to the ground."
+                        "She pulls her [line] over her head, tossing it to the ground."
             else:
                 jump Strip_Ultimatum
 
@@ -483,7 +483,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
             if approval_check(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.seen_pussy and approval_check(Girl, 1100, TabM = 3) and not Girl.taboo):
                 $ Girl.change_stat("lust", 75, 10)
-                $ Line = Girl.legs
+                $ line = Girl.legs
                 $ Girl.legs = ""
                 if not Girl.seen_pussy:
                     $ Girl.change_stat("obedience", 60, 3)
@@ -491,19 +491,19 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     $ Girl.change_stat("inhibition", 50, 4)
                     $ Girl.change_stat("inhibition", 200, 4)
                     if Girl == KittyX:
-                        "She shyly looks up at you, and then slowly lets her [Line] slide to the floor."
+                        "She shyly looks up at you, and then slowly lets her [line] slide to the floor."
                     elif Girl in (EmmaX,LauraX,JeanX):
-                        "She hesitantly looks up at you, and then slowly unzips and pulls down her [Line], dropping them to the floor."
+                        "She hesitantly looks up at you, and then slowly unzips and pulls down her [line], dropping them to the floor."
                     else:
-                        "She shyly looks up at you, and then slowly unzips and pulls down her [Line], dropping them to the floor."
+                        "She shyly looks up at you, and then slowly unzips and pulls down her [line], dropping them to the floor."
                     call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
                     $ Girl.change_stat("obedience", 50, 1)
                     $ Girl.change_stat("obedience", 75, 1)
                     if Girl == KittyX:
-                        "She lets her [Line] pass through her legs, dropping them to the floor."
+                        "She lets her [line] pass through her legs, dropping them to the floor."
                     else:
-                        "She unzips and pulls down her [Line], dropping them to the floor."
+                        "She unzips and pulls down her [line], dropping them to the floor."
                     $ Girl.change_stat("inhibition", 70, 2)
                 $ Player.change_stat("focus", 85, 15)
             else:
@@ -512,17 +512,17 @@ label Girl_Stripping(Girl=0, Nudist=0):
         elif Girl == JubesX and Girl.accessory:
 
             if approval_check(Girl, 1350, TabM = 3) or (Girl.seen_pussy and approval_check(Girl, 1100, TabM = 3) and not Girl.taboo):
-                $ Line = Girl.accessory
+                $ line = Girl.accessory
                 $ Girl.accessory = ""
                 if not Girl.seen_pussy:
                     $ Girl.change_stat("obedience", 60, 3)
                     $ Girl.change_stat("obedience", 200, 5)
                     $ Girl.change_stat("inhibition", 50, 4)
                     $ Girl.change_stat("inhibition", 200, 4)
-                    "She hesitantly glances your way, and then with a shrug pulls her [Line] off, tossing it to the ground."
+                    "She hesitantly glances your way, and then with a shrug pulls her [line] off, tossing it to the ground."
                     call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
-                    "She shrugs her [Line] off, tossing it to the ground."
+                    "She shrugs her [line] off, tossing it to the ground."
 
                 if not Girl.bra or Girl.top_pulled_up:
                     if not Girl.seen_breasts:
@@ -545,7 +545,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
         elif Girl.top and not Girl.underwear:
 
             if approval_check(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.seen_pussy and approval_check(Girl, 1100, TabM = 3) and not Girl.taboo):
-                $ Line = Girl.top
+                $ line = Girl.top
                 $ Girl.top = ""
                 if not Girl.seen_pussy:
                     $ Girl.change_stat("obedience", 60, 3)
@@ -553,17 +553,17 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     $ Girl.change_stat("inhibition", 50, 4)
                     $ Girl.change_stat("inhibition", 200, 4)
                     if Girl == KittyX:
-                        "She hesitantly glances your way, and then with a tug pulls her [Line] through herself, tossing it to the ground."
+                        "She hesitantly glances your way, and then with a tug pulls her [line] through herself, tossing it to the ground."
                     elif Girl in (EmmaX,LauraX,StormX):
-                        "She glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                        "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     else:
-                        "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                        "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
                     if Girl == KittyX:
-                        "She drops her shoulders and her [Line] falls to the floor."
+                        "She drops her shoulders and her [line] falls to the floor."
                     else:
-                        "She pulls her [Line] over her head, tossing it to the ground."
+                        "She pulls her [line] over her head, tossing it to the ground."
 
                 if not Girl.bra or Girl.top_pulled_up:
                     if not Girl.seen_breasts:
@@ -588,7 +588,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
             if approval_check(Girl, 1250, TabM = 3,Alt=[[StormX],(750-Nudist*3)]) or (Girl.seen_breasts and approval_check(Girl, 1100, TabM = 3) and not Girl.taboo):
                 $ Girl.change_stat("lust", 60, 5)
-                $ Line = Girl.bra
+                $ line = Girl.bra
                 $ Girl.bra = ""
                 if not Girl.seen_breasts:
                     $ Girl.change_stat("obedience", 50, 3)
@@ -596,18 +596,18 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     $ Girl.change_stat("inhibition", 50, 3)
                     $ Girl.change_stat("inhibition", 200, 3)
                     if Girl == KittyX:
-                        "She hesitantly glances your way, and then with a tug pulls her [Line] through herself, tossing it to the ground."
+                        "She hesitantly glances your way, and then with a tug pulls her [line] through herself, tossing it to the ground."
                     elif Girl in (EmmaX,LauraX,StormX):
-                        "She glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                        "She glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     else:
-                        "She hesitantly glances your way, and then with a shrug pulls her [Line] over her head, tossing it to the ground."
+                        "She hesitantly glances your way, and then with a shrug pulls her [line] over her head, tossing it to the ground."
                     call expression Girl.tag + "_First_Topless" pass (1)
                 else:
                     $ Girl.change_stat("obedience", 50, 2)
                     if Girl == KittyX:
-                        "She drops her shoulders and her [Line] falls to the floor."
+                        "She drops her shoulders and her [line] falls to the floor."
                     else:
-                        "She pulls her [Line] over her head, tossing it to the ground."
+                        "She pulls her [line] over her head, tossing it to the ground."
                     $ Girl.change_stat("inhibition", 50, 1)
                 $ Player.change_stat("focus", 80, 15)
             else:
@@ -617,7 +617,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
 
             if approval_check(Girl, 1350, TabM = 3,Alt=[[StormX],(800-Nudist*3)]) or (Girl.seen_pussy and approval_check(Girl, 1100, TabM = 3) and not Girl.taboo):
                 $ Girl.change_stat("lust", 75, 10)
-                $ Line = Girl.underwear
+                $ line = Girl.underwear
                 $ Girl.underwear = ""
                 if not Girl.seen_pussy:
                     $ Girl.change_stat("obedience", 60, 3)
@@ -625,19 +625,19 @@ label Girl_Stripping(Girl=0, Nudist=0):
                     $ Girl.change_stat("inhibition", 50, 4)
                     $ Girl.change_stat("inhibition", 200, 4)
                     if Girl == KittyX:
-                        "She shyly looks up at you, and then slowly tugs her [Line] off, flinging them to the side."
+                        "She shyly looks up at you, and then slowly tugs her [line] off, flinging them to the side."
                     elif Girl in (EmmaX,LauraX):
-                        "She looks up at you, and then slowly pulls her [Line] down, kicking them off to the side."
+                        "She looks up at you, and then slowly pulls her [line] down, kicking them off to the side."
                     else:
-                        "She shyly looks up at you, and then slowly pulls her [Line] down, kicking them off to the side."
+                        "She shyly looks up at you, and then slowly pulls her [line] down, kicking them off to the side."
                     call expression Girl.tag + "_First_Bottomless" pass (1)
                 else:
                     $ Girl.change_stat("obedience", 50, 1)
                     $ Girl.change_stat("obedience", 75, 1)
                     if Girl == KittyX:
-                        "She looks up at you, and then gently pulls her [Line] off, flicking them to the side."
+                        "She looks up at you, and then gently pulls her [line] off, flicking them to the side."
                     else:
-                        "She looks up at you, and then gently pulls her [Line] down, kicking them off to the side."
+                        "She looks up at you, and then gently pulls her [line] down, kicking them off to the side."
                     $ Girl.change_stat("inhibition", 70, 2)
                 $ Player.change_stat("focus", 85, 15)
             else:
@@ -690,7 +690,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
             $ Girl.change_stat("lust", 200, 5)
             if not Player.semen and offhand_action == "jerking_off":
                 "You're spitting dust here, maybe just watch quietly for a while."
-                $ offhand_action = 0
+                $ offhand_action = None
             if Player.focus > 80:
                 jump Group_Strip_End
 
@@ -786,7 +786,7 @@ label Girl_Stripping(Girl=0, Nudist=0):
         "Start jack'in it." if offhand_action != "jerking_off":
             call jerking_off (Girl)
         "Stop jack'in it." if offhand_action == "jerking_off":
-            $ offhand_action = 0
+            $ offhand_action = None
 
         "Lose the [Girl.arms]. . ." if Girl.arms:
             $ Girl.change_face("_surprised")
@@ -1029,7 +1029,7 @@ transform Girl_Dance1(Chr=focused_Girl):
 
 label AutoStrip(Girl=0):
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     if (Girl.underwear and not Girl.underwear_pulled_down) or Girl.PantsNum() >= 6 or Girl.HoseNum() >= 6:
         if Girl == RogueX:
             ch_r "Well, I guess some things are necessary, [RogueX.player_petname]."
@@ -1073,7 +1073,7 @@ label AutoStrip(Girl=0):
 
 label Girl_Undress(Girl=0, Region="ask", stored_count=0):
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
 
     $ stored_count = approval_bonus
@@ -1154,9 +1154,9 @@ label Girl_Undress(Girl=0, Region="ask", stored_count=0):
 
 
 
-label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
+label Top_Off(Girl=0, Intro=1, line=0, counter=0):
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
 
     if not Girl.top and not Girl.bra:
@@ -1224,13 +1224,13 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
     $ approval = approval_check(Girl, 1100, TabM = 4)
 
     if action_context == "auto" and  (Girl.top or Girl.bra or (Girl == JubesX and Girl.accessory)) and not Girl.top_pulled_up:
-        $ Line = 0
+        $ line = 0
         if approval_check(Girl, 1250, TabM = 1) or (Girl.seen_breasts and approval_check(Girl, 500) and not taboo):
 
             $ Girl.change_stat("inhibition", 70, 1)
             $ Girl.top_pulled_up = 1
-            $ Line = Girl.top if Girl.top else Girl.bra
-            "[Girl.name] sighs in frustration, and pulls her [Line] up over her breasts."
+            $ line = Girl.top if Girl.top else Girl.bra
+            "[Girl.name] sighs in frustration, and pulls her [line] up over her breasts."
             if Girl == RogueX:
                 ch_r "I just wasn't getting much out of it that way."
             elif Girl == KittyX:
@@ -1251,18 +1251,18 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
         elif Girl.top and Girl.bra and approval_check(Girl, 800, TabM = 1):
 
             $ Girl.change_stat("inhibition", 40, 1)
-            $ Line = Girl.top
+            $ line = Girl.top
             $ Girl.top = ""
             if Girl == KittyX:
-                "[Girl.name] sighs in frustration, and her [Line] drops to the ground."
+                "[Girl.name] sighs in frustration, and her [line] drops to the ground."
             elif Girl == JubesX:
                 if Girl.accessory:
                     $ Girl.accessory = ""
-                    "[Girl.name] sighs in frustration, and shrugs off her Jacket, before pulling her [Line] over her head."
+                    "[Girl.name] sighs in frustration, and shrugs off her Jacket, before pulling her [line] over her head."
                 else:
-                    "[Girl.name] sighs in frustration, and pulls her [Line] over her head, throwing it aside."
+                    "[Girl.name] sighs in frustration, and pulls her [line] over her head, throwing it aside."
             else:
-                "[Girl.name] sighs in frustration, and pulls her [Line] over her head, throwing it aside."
+                "[Girl.name] sighs in frustration, and pulls her [line] over her head, throwing it aside."
             if Girl == RogueX:
                 ch_r "I just wasn't getting much out of it that way."
             elif Girl == KittyX:
@@ -1279,7 +1279,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                 ch_v "Ok, that's a bit better. . ."
 
 
-        $ Line = 0
+        $ line = 0
         return
 
     if approval >= 2:
@@ -1333,34 +1333,34 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
 
                 "Lose the [Girl.top]." if Girl.top:
                     $ Girl.change_face("_bemused", 1)
-                    $ Line = Girl.top
+                    $ line = Girl.top
                     $ Girl.top = ""
                     if Girl == KittyX:
-                        "[Girl.name] shrugs and her [Line] falls through to the ground."
+                        "[Girl.name] shrugs and her [line] falls through to the ground."
                     else:
-                        "[Girl.name] pulls her [Line] off and tosses it aside."
+                        "[Girl.name] pulls her [line] off and tosses it aside."
 
                 "Why don't you lose the [Girl.neck]?" if Girl.neck:
-                    $ Line = Girl.neck
+                    $ line = Girl.neck
                     $ Girl.neck = ""
-                    "[Girl.name] pulls her [Line] off."
+                    "[Girl.name] pulls her [line] off."
 
                 "Just lose the [Girl.bra]." if Girl.top and Girl.bra:
                     $ Girl.change_face("_bemused", 1)
-                    $ Line = Girl.bra
+                    $ line = Girl.bra
                     $ Girl.bra = ""
                     if Girl == KittyX:
-                        "[Girl.name] reaches through her top and pulls her [Line] free, dropping it to the ground."
+                        "[Girl.name] reaches through her top and pulls her [line] free, dropping it to the ground."
                     else:
-                        "[Girl.name] slowly removes her [Line] from under the [Girl.top]."
+                        "[Girl.name] slowly removes her [line] from under the [Girl.top]."
                 "Lose the [Girl.bra]." if not Girl.top and Girl.bra:
                     $ Girl.change_face("_bemused", 1)
-                    $ Line = Girl.bra
+                    $ line = Girl.bra
                     $ Girl.bra = ""
                     if Girl == KittyX:
-                        "[Girl.name] shrugs and her [Line] falls through to the ground."
+                        "[Girl.name] shrugs and her [line] falls through to the ground."
                     else:
-                        "[Girl.name] throws off her [Line]."
+                        "[Girl.name] throws off her [line]."
                 "Just pull it up." if (Girl.top or Girl.bra) and not Girl.top_pulled_up:
                     $ Girl.change_face("_bemused", 1)
                     $ Girl.top_pulled_up = 1
@@ -1380,17 +1380,17 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                         if Girl == JubesX and Girl.accessory:
                             $ Girl.accessory = ""
                             "[Girl.name] pulls off her jacket. . ."
-                        $ Line = Girl.top
+                        $ line = Girl.top
                         $ Girl.top = ""
-                        "[Girl.name] tosses the [Line] over her head. . ."
-                        $ Line = Girl.bra
+                        "[Girl.name] tosses the [line] over her head. . ."
+                        $ line = Girl.bra
                         $ Girl.bra = ""
-                        ". . .and then the [Line] as well."
+                        ". . .and then the [line] as well."
                 "Lose the [Girl.arms]. . ." if Girl.arms:
                     $ Girl.change_face("_sexy")
-                    $ Line = Girl.arms
+                    $ line = Girl.arms
                     $ Girl.arms = ""
-                    "She pulls off her [Line]."
+                    "She pulls off her [line]."
 
                 "Why don't you lose the suspenders?" if Girl.accessory == "suspenders" or Girl.accessory == "suspenders2":
                     $ Girl.accessory = ""
@@ -1676,18 +1676,18 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                 elif Girl == JubesX:
                     ch_v "Well, I guess. . ."
                 $ Girl.change_face("_bemused", 1)
-                $ Line = Girl.top
+                $ line = Girl.top
                 $ Girl.top = ""
                 if Girl == KittyX:
-                    "[Girl.name] shrugs and her [Line] falls through to the ground."
+                    "[Girl.name] shrugs and her [line] falls through to the ground."
                 elif Girl == JubesX:
                     if Girl.accessory:
                         $ Girl.accessory = ""
-                        "[Girl.name] shrugs off her Jacket, before pulling her [Line] over her head."
+                        "[Girl.name] shrugs off her Jacket, before pulling her [line] over her head."
                     else:
-                        "[Girl.name] pulls her [Line] over her head, throwing it aside."
+                        "[Girl.name] pulls her [line] over her head, throwing it aside."
                 else:
-                    "[Girl.name] tosses the [Line] over her head."
+                    "[Girl.name] tosses the [line] over her head."
                 $ Girl.change_stat("obedience", 50, 1)
                 $ Girl.change_stat("inhibition", 30, 2)
             elif not Girl.bra:
@@ -1748,18 +1748,18 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
                             $ Girl.change_stat("obedience", 20, 2)
                             $ Girl.change_stat("obedience", 60, 1)
                             $ Girl.change_face("_sexy")
-                            $ Line = Girl.top
+                            $ line = Girl.top
                             $ Girl.top = ""
                             if Girl == KittyX:
-                                "[Girl.name] shrugs and her [Line] falls through to the ground."
+                                "[Girl.name] shrugs and her [line] falls through to the ground."
                             elif Girl == JubesX:
                                 if Girl.accessory:
                                     $ Girl.accessory = ""
-                                    "[Girl.name] shrugs off her Jacket, before pulling her [Line] over her head."
+                                    "[Girl.name] shrugs off her Jacket, before pulling her [line] over her head."
                                 else:
-                                    "[Girl.name] and pulls her [Line] over her head, throwing it aside."
+                                    "[Girl.name] and pulls her [line] over her head, throwing it aside."
                             else:
-                                "[Girl.name] tosses the [Line] over her head."
+                                "[Girl.name] tosses the [line] over her head."
                             $ Girl.top = ""
                             $ Girl.change_stat("inhibition", 30, 2)
                             $ Girl.change_stat("inhibition", 60, 1)
@@ -1840,9 +1840,9 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
         "Lose the [Girl.arms], at least. . ." if Girl.arms:
             $ Girl.change_face("_sexy")
             Girl.voice "Oh, all right."
-            $ Line = Girl.arms
+            $ line = Girl.arms
             $ Girl.arms = ""
-            "She pulls off her [Line]."
+            "She pulls off her [line]."
         "No, topless or nothing.":
 
             call ToplessorNothing (Girl)
@@ -1858,7 +1858,7 @@ label Top_Off(Girl=0, Intro=1, Line=0, counter=0):
 
 label Top_Off_Refused(Girl=0):
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
 
     $ Girl.change_face("_angry")
@@ -1960,7 +1960,7 @@ label Top_Off_Refused(Girl=0):
 
 label ToplessorNothing(Girl=0):
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
 
     $ Girl.change_face("_angry")
@@ -2066,8 +2066,8 @@ label ToplessorNothing(Girl=0):
     return
 
 
-label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
-    $ Girl = GirlCheck(Girl)
+label Bottoms_Off(Girl=0, Intro=1, line=0, counter=0):
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
 
     if not Girl.legs and not Girl.underwear and not Girl.hose:
@@ -2164,7 +2164,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                     return
                 $ Girl.change_stat("inhibition", 60, 1)
                 if Girl.HoseNum() >= 6:
-                    $ Line = Girl.hose
+                    $ line = Girl.hose
                     $ Girl.hose = ""
                 $ Girl.upskirt = 1
 
@@ -2172,20 +2172,20 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                     if Girl.PantsNum(0) >= 6:
                         "[Girl.name] grumbles to herself, and then allows her [Girl.legs] to drop down her legs."
                     else:
-                        "[Girl.name] grumbles to herself, and then allows her [Line] to drop down her legs."
+                        "[Girl.name] grumbles to herself, and then allows her [line] to drop down her legs."
                     if Girl.underwear:
                         $ Girl.seen_underwear = 1
                 elif Girl.underwear:
                     if Girl.PantsNum(0) >= 6:
                         "[Girl.name] grumbles to herself, and then unzips her [Girl.legs], sliding them down her legs."
                     else:
-                        "[Girl.name] grumbles to herself, and then pulls her [Line] down her legs."
+                        "[Girl.name] grumbles to herself, and then pulls her [line] down her legs."
                     $ Girl.seen_underwear = 1
                 else:
                     if Girl.PantsNum(0) >= 6:
                         "[Girl.name] grumbles to herself, and then unzips her [Girl.legs], sliding them off her bare ass."
                     else:
-                        "[Girl.name] grumbles to herself, and then pulls her [Line] down her bare ass."
+                        "[Girl.name] grumbles to herself, and then pulls her [line] down her bare ass."
                 call expression Girl.tag + "_First_Bottomless" pass (1)
                 if taboo:
                     $ Girl.change_stat("inhibition", 90, (int(taboo/10)))
@@ -2239,33 +2239,33 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
             $ Girl.change_stat("inhibition", 60, 1)
         if Girl == RogueX:
             if approval >= 3:
-                $ Line = "Hmmm, what do you want to see? . ."
+                $ line = "Hmmm, what do you want to see? . ."
             else:
-                $ Line = "Well, ok. I'd kinda like to keep {i}some{/i} modesty though. . ."
+                $ line = "Well, ok. I'd kinda like to keep {i}some{/i} modesty though. . ."
         elif Girl == KittyX:
             if approval >= 3:
-                $ Line = "Heh, what would you like to see? . ."
+                $ line = "Heh, what would you like to see? . ."
             else:
-                $ Line = "Ok, maybe, but don't push it. . ."
+                $ line = "Ok, maybe, but don't push it. . ."
         elif Girl == EmmaX:
             if approval >= 3:
-                $ Line = "Mmmm, what would you like?"
+                $ line = "Mmmm, what would you like?"
             else:
-                $ Line = "What would you have me take off?"
+                $ line = "What would you have me take off?"
         elif Girl == LauraX:
             if approval >= 3:
-                $ Line = "What did you want off?"
+                $ line = "What did you want off?"
             else:
-                $ Line = "Hm, what did you want me to lose?"
+                $ line = "Hm, what did you want me to lose?"
         elif Girl == JeanX:
             if approval >= 3:
-                $ Line = "What did you want off?"
+                $ line = "What did you want off?"
             else:
-                $ Line = "Like. . . what? . ."
+                $ line = "Like. . . what? . ."
         elif Girl == StormX:
-            $ Line = "What would you have me remove?"
+            $ line = "What would you have me remove?"
         elif Girl == JubesX:
-            $ Line =  "Well like what did you have in mind here?"
+            $ line =  "Well like what did you have in mind here?"
         call Bottoms_Off_Legs (Girl)
 
         if not Girl.underwear and Girl.recent_history.count("bottomless") < 2:
@@ -2505,20 +2505,20 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                         $ D20 = renpy.random.randint(1, 3)
                         $ approval += 1 if D20 == 3 else 0
                         if Girl == RogueX:
-                            $ Line = "Well, what were you thinking then. . ."
+                            $ line = "Well, what were you thinking then. . ."
                         elif Girl == KittyX:
-                            $ Line = "I guess. . ."
+                            $ line = "I guess. . ."
                         elif Girl == EmmaX:
-                            $ Line = "Perhaps. . ."
+                            $ line = "Perhaps. . ."
                         elif Girl == LauraX:
-                            $ Line = "Maybe. . ."
+                            $ line = "Maybe. . ."
                         elif Girl == JeanX:
-                            $ Line = "-sigh-. . . like what?"
+                            $ line = "-sigh-. . . like what?"
                         elif Girl == StormX:
                             ch_s ". . ."
-                            $ Line = "What did you want? . ."
+                            $ line = "What did you want? . ."
                         elif Girl == JubesX:
-                            $ Line =  "I mean, maaaybe. . ."
+                            $ line =  "I mean, maaaybe. . ."
                         call Bottoms_Off_Legs (Girl)
                     else:
                         $ Girl.change_face("_sexy")
@@ -2527,7 +2527,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
             "It doesn't have to be everything. . ." if Girl.legs or Girl.HoseNum() >= 10 or Girl.underwear == "_shorts":
                 if approval and "no_bottomless" not in Girl.daily_history:
                     $ Girl.change_face("_bemused", 1)
-                    $ Line = "Well what did you have in mind then?"
+                    $ line = "Well what did you have in mind then?"
                     call Bottoms_Off_Legs (Girl)
                 else:
 
@@ -2543,20 +2543,20 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
                     $ Girl.change_stat("obedience", 50, 4)
                     $ Girl.change_stat("inhibition", 60, 3)
                     if Girl == RogueX:
-                        $ Line =  "Fine, if that's what you want. What do you want to see?"
+                        $ line =  "Fine, if that's what you want. What do you want to see?"
                     elif Girl == KittyX:
-                        $ Line =  "Like geez, you're serious. . ."
+                        $ line =  "Like geez, you're serious. . ."
                     elif Girl == EmmaX:
-                        $ Line =  "Don't test me. . ."
+                        $ line =  "Don't test me. . ."
                     elif Girl == LauraX:
-                        $ Line =  "Don't push me. . ."
+                        $ line =  "Don't push me. . ."
                     elif Girl == JeanX:
-                        $ Line = "Think very carefully. . ."
+                        $ line = "Think very carefully. . ."
                     elif Girl == StormX:
                         ch_s ". . ."
-                        $ Line = "What did you want? . ."
+                        $ line = "What did you want? . ."
                     elif Girl == JubesX:
-                        $ Line =  "Tone. . ."
+                        $ line =  "Tone. . ."
                     $ approval = 1 if approval < 1 else approval
                     $ Girl.forced = 1
                     call Bottoms_Off_Legs (Girl)
@@ -2604,7 +2604,7 @@ label Bottoms_Off(Girl=0, Intro=1, Line=0, counter=0):
     return
 
 label Bottoms_Off_Legs(Girl=0):
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
 
     if Girl.forced:
@@ -2616,31 +2616,31 @@ label Bottoms_Off_Legs(Girl=0):
     else:
         $ Girl.change_face("_bemused", 1)
 
-    $ Line = "Well what did you want off?" if not Line else Line
+    $ line = "Well what did you want off?" if not line else line
     $ counter = 1
     while counter and (Girl.legs or Girl.underwear or Girl.hose):
-        Girl.voice "[Line]"
+        Girl.voice "[line]"
         menu:
             extend ""
 
-            "Take it all off" if Line != "Well what did you have in mind then?":
+            "Take it all off" if line != "Well what did you have in mind then?":
 
                 if not Girl.underwear and Girl.HoseNum() < 10:
                     call NoPantiesOn (Girl)
 
                 if Girl.legs:
-                    $ Line = Girl.legs
+                    $ line = Girl.legs
                     $ Girl.legs = ""
                     if not Girl.seen_underwear:
                         if Girl == RogueX:
-                            "[Girl.name] shyly removes her [Line]."
+                            "[Girl.name] shyly removes her [line]."
                         elif Girl == KittyX:
-                            "[Girl.name] shyly tugs her [Line] off of her legs."
+                            "[Girl.name] shyly tugs her [line] off of her legs."
                         else:
-                            "[Girl.name] pulls off her [Line]."
+                            "[Girl.name] pulls off her [line]."
                         $ Girl.seen_underwear = 1
                     else:
-                        "[Girl.name] pulls her [Line] off."
+                        "[Girl.name] pulls her [line] off."
 
                 if approval < 2 and not Girl.underwear and Girl.HoseNum() >= 10:
                     call NoPantiesOn (Girl)
@@ -2657,23 +2657,23 @@ label Bottoms_Off_Legs(Girl=0):
                     "She pulls her [Girl.accessory] off."
 
                 if Girl.hose:
-                    $ Line = Girl.hose
+                    $ line = Girl.hose
                     $ Girl.hose = ""
                     if Girl == KittyX:
-                        "Her [Line] drop to the ground in a heap."
+                        "Her [line] drop to the ground in a heap."
                     else:
-                        "She pulls her [Line] down."
+                        "She pulls her [line] down."
 
                 if approval < 2:
                     call NoPantiesOn (Girl)
 
                 if Girl.underwear:
-                    $ Line = Girl.underwear
+                    $ line = Girl.underwear
                     $ Girl.underwear = ""
                     if Girl == KittyX:
-                        "She glances up at you as her [Line] fall clear of her."
+                        "She glances up at you as her [line] fall clear of her."
                     else:
-                        "She glances up at you as she removes her [Line]."
+                        "She glances up at you as she removes her [line]."
                 call expression Girl.tag + "_First_Bottomless"
 
 
@@ -2703,27 +2703,27 @@ label Bottoms_Off_Legs(Girl=0):
                     call Bottoms_Off_Refused (Girl)
                     return
 
-                $ Line = Girl.legs
+                $ line = Girl.legs
                 $ Girl.legs = ""
                 if not Girl.underwear and Girl.HoseNum() < 10:
                     $ Girl.change_face("_sly", 2)
                     if Girl == KittyX:
-                        "She blushes and looks at you as her [Line] drops at her feet."
+                        "She blushes and looks at you as her [line] drops at her feet."
                     elif Girl == RogueX:
-                        "She blushes and looks at you slyly before removing her [Line]."
+                        "She blushes and looks at you slyly before removing her [line]."
                     else:
-                        "She glaces at you slyly before removing her [Line]."
+                        "She glaces at you slyly before removing her [line]."
                     call expression Girl.tag + "_First_Bottomless"
                 elif not Girl.seen_underwear:
                     if Girl == KittyX:
-                        "She blushes and looks at you as her [Line] drops at her feet."
+                        "She blushes and looks at you as her [line] drops at her feet."
                     elif Girl == RogueX:
-                        "She blushes and looks at you slyly before removing her [Line]."
+                        "She blushes and looks at you slyly before removing her [line]."
                     else:
-                        "She glaces at you slyly before removing her [Line]."
+                        "She glaces at you slyly before removing her [line]."
                     $ Girl.seen_underwear = 1
                 else:
-                    "[Girl.name] pulls her [Line] off."
+                    "[Girl.name] pulls her [line] off."
                 $ Girl.change_face("_bemused", 1)
 
             "Lose the [Girl.underwear]." if Girl.underwear:
@@ -2769,27 +2769,27 @@ label Bottoms_Off_Legs(Girl=0):
                         ch_s "Fine."
                     else:
                         Girl.voice "Ok, sure, [Girl.player_petname]."
-                $ Line = Girl.underwear
+                $ line = Girl.underwear
                 $ Girl.underwear = ""
                 if Girl == KittyX:
                     if Girl.PantsNum() >= 5:
-                        "She reaches a hand into her [Girl.legs] and pulls her [Line] out through the pocket."
+                        "She reaches a hand into her [Girl.legs] and pulls her [line] out through the pocket."
                         "She gives a little wink as she drops them to the ground."
                     elif Girl.HoseNum() >= 5:
-                        "She reaches a hand into her [Girl.hose] and pulls her [Line] out through the pocket."
+                        "She reaches a hand into her [Girl.hose] and pulls her [line] out through the pocket."
                         "She gives a little wink as she drops them to the ground."
                     else:
-                        "With a little shimmy, her [Line] drop to the ground."
+                        "With a little shimmy, her [line] drop to the ground."
                 elif Girl.PantsNum() >= 6:
-                    "She pulls her [Girl.legs] off, then removes her [Line], before putting them back on."
+                    "She pulls her [Girl.legs] off, then removes her [line], before putting them back on."
                 elif Girl.HoseNum() >= 6:
-                    "She pulls her [Girl.hose] off, then removes her [Line], before putting them back on."
+                    "She pulls her [Girl.hose] off, then removes her [line], before putting them back on."
                 elif Girl == JubesX and JubesX.accessory == "shut_jacket":
-                    "She reaches under her jacket and pulls her [Line] down."
+                    "She reaches under her jacket and pulls her [line] down."
                 elif Girl.legs:
-                    "She reaches under her [Girl.legs] and pulls her [Line] down."
+                    "She reaches under her [Girl.legs] and pulls her [line] down."
                 else:
-                    "She glances up at you as she removes her [Line]."
+                    "She glances up at you as she removes her [line]."
                 call expression Girl.tag + "_First_Bottomless"
 
             "Just give me a clear view. . ." if (Girl.underwear and not Girl.underwear_pulled_down) or (Girl.legs and not Girl.upskirt):
@@ -2844,30 +2844,30 @@ label Bottoms_Off_Legs(Girl=0):
                         ch_r "Ok, sure, [Girl.player_petname]."
                     else:
                         Girl.voice "Fine, [Girl.player_petname]."
-                $ Line = Girl.hose
+                $ line = Girl.hose
                 $ Girl.hose = ""
                 if Girl == KittyX:
                     if Girl.PantsNum() >= 5:
-                        "She reaches a hand into her [Girl.legs] and pulls her [Line] right through her legs."
+                        "She reaches a hand into her [Girl.legs] and pulls her [line] right through her legs."
                         "She makes a little flourish and drops them to the ground."
                     else:
-                        "She gives a little shake and her [Line] drop to the ground."
+                        "She gives a little shake and her [line] drop to the ground."
                 elif Girl.PantsNum() >= 6:
-                    "She pulls off her [Girl.legs] and pulls her [Line] off, then puts them back on."
+                    "She pulls off her [Girl.legs] and pulls her [line] off, then puts them back on."
                 elif Girl.legs:
-                    "She reaches under her [Girl.legs] and pulls her [Line] down."
+                    "She reaches under her [Girl.legs] and pulls her [line] down."
                 elif Girl.HoseNum() < 10:
-                    "[Girl.name] pulls her [Line] off."
+                    "[Girl.name] pulls her [line] off."
                 elif not Girl.underwear:
                     $ Girl.change_face("_sly", 2)
-                    "She blushes and looks at you slyly before removing her [Line]."
+                    "She blushes and looks at you slyly before removing her [line]."
                     $ Girl.blushing = "_blush1"
                     call expression Girl.tag + "_First_Bottomless"
                 elif not Girl.seen_underwear:
-                    "[Girl.name] shyly removes her [Line]."
+                    "[Girl.name] shyly removes her [line]."
                     $ Girl.seen_underwear = 1
                 else:
-                    "[Girl.name] pulls her [Line] off."
+                    "[Girl.name] pulls her [line] off."
 
             "Rip the [Girl.hose]." if Girl.hose == "_pantyhose" or Girl.hose == "_tights":
                 $ Girl.change_face("_bemused", 1)
@@ -2882,7 +2882,7 @@ label Bottoms_Off_Legs(Girl=0):
                         Girl.voice "Sorry, no, [Girl.player_petname]."
                     return
 
-                $ Line = Girl.hose
+                $ line = Girl.hose
                 if Girl.hose == "_tights":
                     $ Girl.hose = "_ripped_tights"
                 elif Girl.hose == "_pantyhose":
@@ -2890,7 +2890,7 @@ label Bottoms_Off_Legs(Girl=0):
                 if Girl.hose not in Girl.inventory:
                     $ Girl.inventory.append(Girl.hose)
                 $ Girl.add_word(1,"ripped", "ripped")
-                "You tear holes in her [Line]."
+                "You tear holes in her [line]."
                 if not approval_check(Girl, 1200, TabM=0):
                     $ Girl.change_face("_angry", 1,Eyes="_down")
                     if Girl == RogueX:
@@ -2920,13 +2920,13 @@ label Bottoms_Off_Legs(Girl=0):
                 $ counter = 0
 
         $ counter = 2 if counter else counter
-        $ Line = "Anything else?"
+        $ line = "Anything else?"
     return
 
 
 label NoPantiesOn(Girl=0):
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
 
     if not Girl.underwear:
@@ -3027,7 +3027,7 @@ label NoPantiesOn(Girl=0):
     return
 
 label Bottoms_Off_Refused(Girl=0):
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
 
     if Girl == RogueX:

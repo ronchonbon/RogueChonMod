@@ -4,8 +4,8 @@ label Mall_entry(First=0, Second=0, Girl=0, Cart=[]):
     $ Player.drain_word("locked",0,0,1)
     $ bg_current = "bg_mall"
     $ Nearby = []
-    call Gym_Clothes_Off
-    call taboo_Level
+    call change_out_of_gym_clothes
+    call taboo_level
     $ Player.recent_history.append("traveling")
     call event_calls
 
@@ -83,7 +83,7 @@ label Shopping_Mall(First=0, Second=0, Girl=0, Cart=[]):
         "Head back to school" if "date" in Player.recent_history:
 
             if "movie" in Player.recent_history or "dinner" in Player.recent_history or round < 30 or not Party:
-                show blackscreen onlayer black with dissolve
+                show black_screen onlayer black with dissolve
                 "It's getting late, you head back to the dorms. . ."
                 jump Date_End
             else:
@@ -102,7 +102,7 @@ label Shopping_Mall(First=0, Second=0, Girl=0, Cart=[]):
                     "Head back to school [[seriously this time]":
                         ch_p "Yeah, let's head back."
                         Party[0].voice "Fine. . ."
-                        show blackscreen onlayer black with dissolve
+                        show black_screen onlayer black with dissolve
                         "It's getting late, you head back to the dorms. . ."
                         jump Date_End
 
@@ -110,7 +110,7 @@ label Shopping_Mall(First=0, Second=0, Girl=0, Cart=[]):
     if time_index >= 3 or round < 20:
         if "date" in Player.recent_history:
 
-            show blackscreen onlayer black with dissolve
+            show black_screen onlayer black with dissolve
             "It's getting late, you head back to the dorms. . ."
             jump Date_End
         ch_u "The mall is now closing, please head to the nearest exit. . ."
@@ -659,16 +659,16 @@ label Swim_Shop:
                 call set_the_scene
             else:
 
-                show blackscreen onlayer black
+                show black_screen onlayer black
                 call AllHide
 
                 $ Girl.sprite_location = stage_center
                 $ Girl.sprite_layer = 100
-                call show_girl (Girl, 0, 0)
+                call display_girl (Girl, 0, 0)
 
-                hide blackscreen onlayer black
+                hide black_screen onlayer black
             $ Player.traits.append("locked")
-            call taboo_Level
+            call taboo_level
 
             while Girl:
                 menu:
@@ -680,13 +680,13 @@ label Swim_Shop:
                             call Dressing_Strip_Bra ("_bikini_top")
                         else:
                             Girl.voice "I'll need some privacy here. . ."
-                            show blackscreen onlayer black
+                            show black_screen onlayer black
                             if Girl == JubesX:
                                 $ Girl.accessory = ""
                             $ Girl.top = ""
                             $ Girl.bra = "_bikini_top"
                             "You back out of the room for a moment. . ."
-                            hide blackscreen onlayer black
+                            hide black_screen onlayer black
                         if "_bikini_top" in Cart:
                             pass
                         elif "_bikini_top" in Girl.inventory:
@@ -705,12 +705,12 @@ label Swim_Shop:
                             call Dressing_Strip_Panties ("_bikini_bottoms")
                         else:
                             Girl.voice "I'll need some privacy here. . ."
-                            show blackscreen onlayer black
+                            show black_screen onlayer black
                             $ Girl.legs = ""
                             $ Girl.hose = ""
                             $ Girl.underwear = "_bikini_bottoms"
                             "You back out of the room for a moment. . ."
-                            hide blackscreen onlayer black
+                            hide black_screen onlayer black
                         if "_bikini_bottoms" in Cart:
                             pass
                         elif "_bikini_bottoms" in Girl.inventory:
@@ -737,10 +737,10 @@ label Swim_Shop:
                             $ Girl.upskirt = 0
                         else:
                             Girl.voice "I'll need some privacy here. . ."
-                            show blackscreen onlayer black
+                            show black_screen onlayer black
                             $ Girl.legs = "_blue_skirt"
                             "You back out of the room for a moment. . ."
-                            hide blackscreen onlayer black
+                            hide black_screen onlayer black
                         if "_blue_skirt" in Cart:
                             pass
                         elif "_blue_skirt" in Girl.inventory:
@@ -750,7 +750,7 @@ label Swim_Shop:
                     "Leave Dressing Area.":
 
                         if Cart and Second:
-                            if Second.location == bg_current and Second not in (LauraX,JeanX) and Second.GirlLikeCheck(Girl) >= 500:
+                            if Second.location == bg_current and Second not in (LauraX,JeanX) and Second.likes[Girl.tag] >= 500:
                                 $ Second.change_face("_smile")
                                 if Second == RogueX:
                                     ch_r "Look'in good there. . ."
@@ -791,7 +791,7 @@ label Swim_Shop:
                             $ temp_Girls[0].location = "bg_shop"
                             $ temp_Girls.remove(temp_Girls[0])
 
-                        call taboo_Level
+                        call taboo_level
                         call set_the_scene
                         if not Cart:
                             "That was fun, but since there wasn't anything she was interested in, she put it all back."
@@ -1060,16 +1060,16 @@ label Lingerie_Shop:
                 call set_the_scene
             else:
 
-                show blackscreen onlayer black
+                show black_screen onlayer black
                 call AllHide
                 
                 $ Girl.sprite_location = stage_center
                 $ Girl.sprite_layer = 100
-                call show_girl (Girl, 0, 0)
+                call display_girl (Girl, 0, 0)
 
-                hide blackscreen onlayer black
+                hide black_screen onlayer black
             $ Player.traits.append("locked")
-            call taboo_Level
+            call taboo_level
 
             while Girl:
                 menu:
@@ -1094,13 +1094,13 @@ label Lingerie_Shop:
                                 call Dressing_Strip_Bra ("lace_bra")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
-                                show blackscreen onlayer black
+                                show black_screen onlayer black
                                 if Girl == JubesX:
                                     $ Girl.accessory = ""
                                 $ Girl.top = ""
                                 $ Girl.bra = "lace_bra"
                                 "You back out of the room for a moment. . ."
-                                hide blackscreen onlayer black
+                                hide black_screen onlayer black
                             if "lace_bra" in Cart:
                                 pass
                             elif "lace_bra" in Girl.inventory:
@@ -1129,13 +1129,13 @@ label Lingerie_Shop:
                                 call Dressing_Strip_Bra ("_corset")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
-                                show blackscreen onlayer black
+                                show black_screen onlayer black
                                 if Girl == JubesX:
                                     $ Girl.accessory = ""
                                 $ Girl.top = ""
                                 $ Girl.bra = "_corset"
                                 "You back out of the room for a moment. . ."
-                                hide blackscreen onlayer black
+                                hide black_screen onlayer black
                             if "_corset" in Cart:
                                 pass
                             elif "_corset" in Girl.inventory:
@@ -1164,13 +1164,13 @@ label Lingerie_Shop:
                                 call Dressing_Strip_Bra ("lace corset")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
-                                show blackscreen onlayer black
+                                show black_screen onlayer black
                                 if Girl == JubesX:
                                     $ Girl.accessory = ""
                                 $ Girl.top = ""
                                 $ Girl.bra = "lace corset"
                                 "You back out of the room for a moment. . ."
-                                hide blackscreen onlayer black
+                                hide black_screen onlayer black
                             if "lace corset" in Cart:
                                 pass
                             elif "lace corset" in Girl.inventory:
@@ -1198,12 +1198,12 @@ label Lingerie_Shop:
                                 call Dressing_Strip_Panties ("_lace_panties")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
-                                show blackscreen onlayer black
+                                show black_screen onlayer black
                                 $ Girl.legs = ""
                                 $ Girl.hose = ""
                                 $ Girl.underwear = "_lace_panties"
                                 "You back out of the room for a moment. . ."
-                                hide blackscreen onlayer black
+                                hide black_screen onlayer black
                             if "_lace_panties" in Cart:
                                 pass
                             elif "_lace_panties" in Girl.inventory:
@@ -1227,12 +1227,12 @@ label Lingerie_Shop:
                                 call Dressing_Strip_Panties ("tiger_panties")
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
-                                show blackscreen onlayer black
+                                show black_screen onlayer black
                                 $ Girl.legs = ""
                                 $ Girl.hose = ""
                                 $ Girl.underwear = "tiger_panties"
                                 "You back out of the room for a moment. . ."
-                                hide blackscreen onlayer black
+                                hide black_screen onlayer black
                             if "tiger_panties" in Cart:
                                 pass
                             elif "tiger_panties" in Girl.inventory:
@@ -1262,10 +1262,10 @@ label Lingerie_Shop:
                                 $ Second.GirlLikeUp(Girl,2)
                         else:
                             Girl.voice "I'll need some privacy here. . ."
-                            show blackscreen onlayer black
+                            show black_screen onlayer black
                             $ Girl.hose = "_stockings_and_garterbelt"
                             "You back out of the room for a moment. . ."
-                            hide blackscreen onlayer black
+                            hide black_screen onlayer black
                         if "_stockings_and_garterbelt" in Cart:
                             pass
                         elif "_stockings_and_garterbelt" in Girl.inventory:
@@ -1327,10 +1327,10 @@ label Lingerie_Shop:
                                 $ Second.GirlLikeUp(Girl,2)
                         else:
                             Girl.voice "I'll need some privacy here. . ."
-                            show blackscreen onlayer black
+                            show black_screen onlayer black
                             $ Girl.hose = "_pantyhose"
                             "You back out of the room for a moment. . ."
-                            hide blackscreen onlayer black
+                            hide black_screen onlayer black
                         if "_pantyhose" in Cart:
                             pass
                         elif "_pantyhose" in Girl.inventory:
@@ -1387,12 +1387,12 @@ label Lingerie_Shop:
                                     $ Second.GirlLikeUp(Girl,3)
                             else:
                                 Girl.voice "I'll need some privacy here. . ."
-                                show blackscreen onlayer black
+                                show black_screen onlayer black
                                 if Girl == JubesX:
                                     $ Girl.accessory = ""
                                 $ Girl.top = "nighty"
                                 "You back out of the room for a moment. . ."
-                                hide blackscreen onlayer black
+                                hide black_screen onlayer black
                             if "nighty" in Cart:
                                 pass
                             elif "nighty" in Girl.inventory:
@@ -1403,7 +1403,7 @@ label Lingerie_Shop:
 
 
                         if Cart and Second:
-                            if Second.location == bg_current and Second not in (LauraX,JeanX) and Second.GirlLikeCheck(Girl) >= 500:
+                            if Second.location == bg_current and Second not in (LauraX,JeanX) and Second.likes[Girl.tag] >= 500:
                                 $ Second.change_face("_sexy")
                                 if Second == RogueX:
                                     ch_r "Look'in good there. . ."
@@ -1442,7 +1442,7 @@ label Lingerie_Shop:
                             $ temp_Girls[0].location = "bg_shop"
                             $ temp_Girls.remove(temp_Girls[0])
 
-                        call taboo_Level
+                        call taboo_level
                         call set_the_scene
 
                         $ Girl.change_outfit(outfit_changed=0)

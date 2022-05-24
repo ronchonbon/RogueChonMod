@@ -1,3 +1,25 @@
+init python:
+
+    def check_girl(Girl, local = False):
+        global focused_Girl
+
+        if Girl in all_Girls and (not local or bg_current == Check.location):
+            return Girl
+        elif bg_current == focused_Girl.location:
+            return focused_Girl
+        else:
+            for Girl in all_Girls:
+                if bg_current == Girl.location:
+                    focused_Girl = Girl
+
+                    return Girl
+
+
+
+
+
+                    
+
 label dildo_check(Girl):
     if "_dildo" in Player.inventory:
         "You pull out a large rubber dildo. Lucky you remembered to keep it handy."
@@ -21,6 +43,11 @@ label vibrator_check(Girl):
         return False
 
     return True
+
+
+
+
+
 
 
 
@@ -191,30 +218,6 @@ init python:
 
 
 
-    def GirlCheck(Check=0,Local=0,temp_Girls=[]):
-
-
-        global focused_Girl
-        if Check in all_Girls and (not Local or bg_current == Check.location):
-
-
-            return Check
-        elif bg_current == focused_Girl.location:
-
-            return focused_Girl
-        else:
-
-
-            temp_Girls = all_Girls[:]
-            while temp_Girls:
-                if bg_current == temp_Girls[0].location:
-
-
-                    focused_Girl = temp_Girls[0]
-                    return temp_Girls[0]
-                temp_Girls.remove(temp_Girls[0])
-        ch_u("Tell Oni, no appropriate character was found.", interact=True)
-        return focused_Girl
 
 
 label CheatCheck(temp_Girls=[], temp_Girls2=[]):

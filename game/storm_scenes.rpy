@@ -126,7 +126,7 @@ label StormMeet:
     $ StormX.today_outfit = "casual1"
     $ StormX.outfit = "casual1"
     $ StormX.change_outfit("casual1")
-    call clear_the_room ("All", 0, 1)
+    call clear_the_room ("all", 0, 1)
     $ StormX.broken_up[0] = 0
     $ StormX.location = 0
     $ StormX.love = 500
@@ -682,15 +682,15 @@ label Storm_Teacher_Caught(Girl=0):
 
     if "noticed " + Girl.tag in StormX.recent_history:
         return
-    if approval_check(StormX, 500, "I") and approval_check(StormX, 1500) and StormX.GirlLikeCheck(Girl) >= 500:
+    if approval_check(StormX, 500, "I") and approval_check(StormX, 1500) and StormX.likes[Girl.tag] >= 500:
         "[StormX.name] notices the two of you, but just nods in approval and continues on."
-        $ StormX.GLG(Girl,800,3,1)
-        $ Girl.GLG(StormX,800,3,1)
+        $ StormX.check_if_likes(Girl,800,3,1)
+        $ Girl.check_if_likes(StormX,800,3,1)
         $ StormX.recent_history.append("noticed " + Girl.tag)
         return
 
     ch_s "[Player.name]? [Girl.name]? Could you please stop what you are doing there?"
-    call checkout (1)
+    call checkout(total = True)
 
     $ Girl.change_face("_bemused", 2, Eyes="_side")
     call AllReset (Girl)
@@ -705,7 +705,7 @@ label Storm_Teacher_Caught(Girl=0):
 
     $ Girl.reputation -= 1
     call Partner_Like (Girl, 3, 2, 800, StormX)
-    $ StormX.GLG(Girl,800,3,1)
+    $ StormX.check_if_likes(Girl,800,3,1)
 
     $ Player.reputation -= 1
     ch_s "Thank you."
@@ -721,7 +721,7 @@ label Storm_Hairtalk:
     $ StormX.location = "bg_classroom"
     call clear_the_room (StormX, 0, 1)
     call set_the_scene
-    call AltClothes (StormX, 8)
+    call alternate_clothes (StormX, 8)
     $ StormX.change_face("_normal")
     "When class ends, [StormX.name] calls you to her desk."
     ch_s "[StormX.player_petname], I was noticing that you seemed. . . distracted in class lately."
@@ -919,7 +919,7 @@ label Storm_Detention:
     else:
         "After class, the students file out, and you wait a few minutes until they're all gone."
         "Once the last student leaves, [StormX.name] approaches you."
-    show blackscreen onlayer black
+    show black_screen onlayer black
     $ bg_current = "bg_classroom"
     $ StormX.location = "bg_classroom"
     $ StormX.change_outfit()
@@ -928,8 +928,8 @@ label Storm_Detention:
     $ StormX.arm_pose = 2
     $ Count = 0
     call clear_the_room (StormX, 0, 1)
-    hide blackscreen onlayer black
-    $ Line = 0
+    hide black_screen onlayer black
+    $ line = 0
     if "detention" in Player.daily_history:
         ch_s "I'm glad you take your. . . education seriously."
     else:
@@ -1068,8 +1068,8 @@ label Storm_BF:
     $ StormX.drain_word("asked_to_meet")
 
     call set_the_scene (0)
-    call show_girl (StormX)
-    call taboo_Level
+    call display_girl (StormX)
+    call taboo_level
     call clear_the_room (StormX)
     $ StormX.daily_history.append("relationship")
 
@@ -1296,7 +1296,7 @@ label Storm_Love:
     $ StormX.location = bg_current
     call set_the_scene
     call clear_the_room (StormX)
-    call taboo_Level
+    call taboo_level
     $ StormX.daily_history.append("relationship")
 
     $ StormX.change_face("_sadside",1)
@@ -1455,9 +1455,9 @@ label Storm_Love:
     ch_s "It made me seek out open spaces, places from which I always felt like I could flee."
     $ StormX.change_face("_bemused",1)
     ch_s "So I expect that you understand what a difficulty you've caused me. . ."
-    $ Line = 1
-    while Line > 0:
-        $ Line -= 1
+    $ line = 1
+    while line > 0:
+        $ line -= 1
         menu:
             extend ""
             "Yeah, I understand." if "iknow" not in StormX.recent_history:
@@ -1465,7 +1465,7 @@ label Storm_Love:
                 $ StormX.change_stat("obedience", 80, 2)
                 $ StormX.add_word(1,"iknow",0,0,0)
                 $ StormX.change_face("_smile",1,Brows = "_confused")
-                $ Line += 1
+                $ line += 1
                 ch_s "Oh?"
             "I'm afraid I don't. . .":
                 if "iknow" in StormX.recent_history and "strong" not in StormX.recent_history:
@@ -1506,7 +1506,7 @@ label Storm_Love:
                         ch_s ". . ."
                         ch_s "No."
                 $ StormX.add_word(1,"strong",0,0,0)
-                $ Line +=1
+                $ line +=1
             "Nope.":
                 $ StormX.change_stat("love", 200, -5)
                 $ StormX.change_stat("obedience", 80, -2)
@@ -1699,11 +1699,11 @@ label Storm_Sub:
     else:
         "[StormX.name] approaches you, looking to talk."
     call clear_the_room (StormX)
-    call taboo_Level
+    call taboo_level
     $ StormX.daily_history.append("relationship")
 
     $ StormX.change_face("_sly")
-    $ Line = 0
+    $ line = 0
     ch_s "[StormX.player_petname]. . . I have noticed that when we are together. . ."
     ch_s ". . . you tend to. . . assert yourself. . ."
     menu:
@@ -1729,7 +1729,7 @@ label Storm_Sub:
         extend ""
         "You. . . enjoy it?":
             $ StormX.change_stat("obedience", 90, 3)
-            $ Line = ". . . yes, I suppose that I do."
+            $ line = ". . . yes, I suppose that I do."
         "Does it turn you on?":
             $ StormX.change_face("_bemused",Eyes="_side")
             $ StormX.change_stat("obedience", 90, 2)
@@ -1737,7 +1737,7 @@ label Storm_Sub:
             $ StormX.change_stat("obedience", 90, 3)
             $ StormX.change_stat("inhibition", 90, 5)
             $ StormX.change_stat("lust", 90, 5)
-            $ Line = ". . . yes."
+            $ line = ". . . yes."
         "Sorry?":
             $ StormX.change_face("_perplexed",2)
             $ StormX.change_stat("obedience", 90, -5)
@@ -1753,13 +1753,13 @@ label Storm_Sub:
             $ StormX.change_stat("inhibition", 90, 7)
             $ StormX.change_stat("lust", 70, 5)
             $ StormX.change_face("_bemused",2,Eyes="_side")
-            $ Line = ". . .sometimes. . ."
-    while Line:
+            $ line = ". . .sometimes. . ."
+    while line:
         menu:
-            ch_s "[Line]"
+            ch_s "[line]"
             "Cool.":
                 $ StormX.change_face("_perplexed",1)
-                $ Line = 0
+                $ line = 0
             "Say it again.":
                 $ StormX.change_face("_perplexed",Eyes="_side")
                 ch_s ". . ."
@@ -1787,15 +1787,15 @@ label Storm_Sub:
                             $ StormX.change_stat("obedience", 90, 3)
                             $ StormX.change_stat("inhibition", 90, 2)
                             ch_s "Thank you."
-                    $ Line = 0
+                    $ line = 0
                     $ StormX.change_face("_sly",1)
             "I'm glad.":
-                $ Line = 0
+                $ line = 0
                 $ StormX.change_face("_bemused",1)
                 $ StormX.change_stat("love", 90, 3)
                 $ StormX.change_stat("inhibition", 90, 2)
             "It turns me on too.":
-                $ Line = 0
+                $ line = 0
                 $ StormX.change_face("_sly",1,Mouth="_smile")
                 $ StormX.change_stat("love", 90, 2)
                 $ StormX.change_stat("obedience", 90, 5)
@@ -1879,7 +1879,7 @@ label Storm_Sub:
 
 
 label Storm_Sub_Asked:
-    $ Line = 0
+    $ line = 0
     $ StormX.change_face("_sadside", 1)
     ch_s "I do recall something like that. . ."
     ch_s "You indicated that you were uninterested. . ."
@@ -1894,9 +1894,9 @@ label Storm_Sub_Asked:
                 pass
             else:
                 ch_s "I have changed my mind. . . at least for the time being. . ."
-                $ Line = "rude"
+                $ line = "rude"
 
-            if Line != "rude":
+            if line != "rude":
                 $ StormX.change_stat("love", 90, 10)
                 $ StormX.change_face("_sly", 1)
                 ch_s "I appreciate that. . ."
@@ -1911,9 +1911,9 @@ label Storm_Sub_Asked:
             else:
                 ch_s "Well. . ."
                 ch_s "I have changed my mind. . . at least for the time being. . ."
-                $ Line = "rude"
+                $ line = "rude"
 
-            if Line != "rude":
+            if line != "rude":
                 $ StormX.change_stat("obedience", 200, 10)
                 ch_s ". . ."
                 $ StormX.change_face("_sly",1)
@@ -1935,9 +1935,9 @@ label Storm_Sub_Asked:
                 $ StormX.change_stat("inhibition", 90, 5)
                 ch_s "-no. . ."
                 ch_s "I have changed my mind. . . at least for the time being. . ."
-                $ Line = "rude"
+                $ line = "rude"
 
-            if Line != "rude":
+            if line != "rude":
                 $ StormX.change_stat("love", 200, 5)
                 $ StormX.change_stat("obedience", 200, 10)
                 $ StormX.change_stat("inhibition", 90, 5)
@@ -1948,7 +1948,7 @@ label Storm_Sub_Asked:
 
     $ StormX.recent_history.append("asked sub")
     $ StormX.daily_history.append("asked sub")
-    if Line == "rude":
+    if line == "rude":
 
         hide Storm_Sprite with easeoutright
         call remove_girl (StormX)
@@ -1987,21 +1987,21 @@ label Storm_Master:
         "[StormX.name] approaches you, looking to talk."
     call clear_the_room (StormX)
     $ StormX.daily_history.append("relationship")
-    call taboo_Level
-    $ Line = 0
+    call taboo_level
+    $ line = 0
     $ Options = all_Girls[:]
     while Options:
 
         if "master" == Options[0].player_petname:
-            $ Line = 2
+            $ line = 2
         elif "master" in Options[0].player_petnames:
-            $ Line = 1 if not Line else Line
+            $ line = 1 if not line else line
         $ Options.remove(Options[0])
     $ StormX.change_face("_bemused", 1)
-    if Line:
+    if line:
 
         ch_s "I have heard some talk among the other girls. . ."
-        if Line == 2:
+        if line == 2:
 
             ch_s "Apparently you have been having some of them calling you. . . "
             $ StormX.change_face("_sly", 1)
@@ -2030,7 +2030,7 @@ label Storm_Master:
             $ StormX.change_face("_confused", 1)
             $ StormX.change_stat("obedience", 200, -2)
             $ StormX.change_stat("inhibition", 90, -2)
-            if Line == 2:
+            if line == 2:
                 ch_s "Really? . ."
                 $ StormX.change_face("_sly", 1)
                 $ StormX.change_stat("love", 90, -5)
@@ -2056,7 +2056,7 @@ label Storm_Master:
             $ StormX.change_face("_confused", 1)
             $ StormX.change_stat("obedience", 200, -5)
             $ StormX.change_stat("inhibition", 90, -2)
-            if Line:
+            if line:
                 $ StormX.change_stat("love", 90, -5)
                 ch_s "You don't need to hide such things from me. . ."
             else:
@@ -2099,8 +2099,8 @@ label Storm_Master:
             ch_s "Perhaps you should ask me. . ."
     $ StormX.change_face("_sly", 1)
     ch_s "I might. . ."
-    $ Line = 1
-    while Line:
+    $ line = 1
+    while line:
         menu:
             extend ""
             "Call me \"Master.\"" if "master" not in StormX.player_petnames:
@@ -2144,8 +2144,8 @@ label Storm_Master:
                 $ StormX.change_stat("lust", 200, 5)
                 ch_s "Master."
                 $ StormX.player_petnames.append("master")
-            "Say it again." if "master" in StormX.player_petnames and Line < 3:
-                if Line < 2:
+            "Say it again." if "master" in StormX.player_petnames and line < 3:
+                if line < 2:
                     $ StormX.change_stat("obedience", 200, 2)
                     $ StormX.change_stat("inhibition", 80, 2)
                     $ StormX.change_face("_sly", 2,Eyes="_side")
@@ -2158,29 +2158,29 @@ label Storm_Master:
                     ch_s "Alright, that is perhaps a bit much. . ."
                 $ StormX.change_face("_sly", 2,Eyes="_side")
                 ch_s "Master."
-                $ Line += 1
+                $ line += 1
             "Yes, call me that from now on." if "master" in StormX.player_petnames:
                 $ StormX.change_face("_sly", 1)
                 $ StormX.change_stat("obedience", 200, 5)
                 $ StormX.change_stat("inhibition", 90, 2)
                 ch_s "Of course. . . Master"
                 $ StormX.player_petname = "master"
-                $ Line = 0
+                $ line = 0
             "But I'd prefer you stick to [StormX.player_petname]." if "master" in StormX.player_petnames:
                 $ StormX.change_face("_sad", 1)
                 $ StormX.change_stat("love", 90, 3)
                 $ StormX.change_stat("obedience", 200, 3)
                 ch_s "I suppose that I can. . . [StormX.player_petname]"
-                $ Line = 0
+                $ line = 0
             "I don't know if I would be comfortable with that. . ." if "context" not in StormX.recent_history and "master" not in StormX.player_petnames:
                 $ StormX.change_stat("love", 90, 2)
                 $ StormX.change_stat("obedience", 200, -3)
                 $ StormX.change_stat("inhibition", 90, -2)
-                $ Line = "context"
+                $ line = "context"
             "I can't ask you to call me that." if "context" not in StormX.recent_history and "master" not in StormX.player_petnames:
                 $ StormX.change_stat("obedience", 200, -5)
                 $ StormX.change_stat("inhibition", 90, -3)
-                $ Line = "context"
+                $ line = "context"
             "I still would rather not have you call me that." if "context" in StormX.recent_history and "master" not in StormX.player_petnames:
                 $ StormX.change_face("_sad", 1,Mouth="_smile")
                 $ StormX.change_stat("love", 90, 5)
@@ -2191,10 +2191,10 @@ label Storm_Master:
                 ch_s ". . ."
                 $ StormX.change_face("_sly", 1)
                 ch_s "Though if you change your mind. . ."
-                $ Line = 0
+                $ line = 0
 
 
-        if Line == "context":
+        if line == "context":
 
             $ StormX.change_face("_surprised", 2)
             ch_s "Oh."
@@ -2210,11 +2210,11 @@ label Storm_Master:
             ch_s ". . . if it were you. . ."
             $ StormX.change_face("_sly", 1)
             $ StormX.add_word(1,"context",0,0,0)
-            $ Line = 1
+            $ line = 1
 
     $ StormX.change_face("_sly", 1)
     $ StormX.history.append("master")
-    $ Line = 0
+    $ line = 0
     return
 
 
@@ -2292,7 +2292,7 @@ label Storm_Poolnight:
             jump Misplaced
     hide Storm_Sprite
     hide FullPool
-    call set_the_scene (Dress=0)
+    call set_the_scene(check_if_dressed = False)
     $ StormX.change_face("_sly", 1,Eyes="leftside")
     ch_s "Now that you have me, [StormX.player_petname]. . ."
     $ StormX.change_face("_sly", 1)
@@ -2311,10 +2311,10 @@ label Storm_Fuckbuddy:
     $ StormX.location = "bg_classroom"
     $ bg_current = "bg_classroom"
     call clear_the_room (StormX, 1, 1)
-    call set_the_scene (Dress=0)
+    call set_the_scene(check_if_dressed = False)
     $ Player.traits.append("locked")
     $ Nearby = []
-    call taboo_Level
+    call taboo_level
     $ StormX.change_face("_sly", 1,Eyes="_side")
     $ StormX.change_stat("inhibition", 200, 5)
     "After class, [StormX.name] walks past you, and places a hand on your chest as you head out."
@@ -2339,14 +2339,14 @@ label Storm_Daddy:
     call shift_focus (StormX)
     call set_the_scene
     ch_s ". . ."
-    $ Line = 0
+    $ line = 0
     $ Options = all_Girls[:]
     while Options:
 
         if "daddy" == Options[0].player_petname:
-            $ Line = 2
+            $ line = 2
         elif "daddy" in Options[0].player_petnames:
-            $ Line = 1 if not Line else Line
+            $ line = 1 if not line else line
         $ Options.remove(Options[0])
 
 
@@ -2354,7 +2354,7 @@ label Storm_Daddy:
         ch_s "I have been talking with the other girls. . ."
     else:
         ch_s "I have heard something among the students. . ."
-    if Line:
+    if line:
         ch_s "Apparently you have some of them call you. . . \"daddy?\""
     else:
         ch_s "Apparently sometimes the woman in a relationship. . ."
@@ -2368,9 +2368,9 @@ label Storm_Daddy:
             ch_s "Affectionate, but. . . submissive?"
         "Not really.":
             ch_s "Oh. Perhaps I misunderstood."
-    $ Line = 1
+    $ line = 1
     $ StormX.player_petnames.append("daddy")
-    while Line:
+    while line:
         menu:
             extend ""
             "Did you want me to call you that?" if "callyouthat" not in StormX.recent_history:
@@ -2389,7 +2389,7 @@ label Storm_Daddy:
                 $ StormX.change_stat("love", 200, 5)
                 $ StormX.change_stat("inhibition", 90, 3)
                 ch_s "Certainly. . . Daddy."
-                $ Line = 0
+                $ line = 0
             "Call me \"Daddy.\"":
                 $ StormX.change_stat("love", 90, 2)
                 $ StormX.change_stat("obedience", 80, 3)
@@ -2398,7 +2398,7 @@ label Storm_Daddy:
                 $ StormX.change_stat("inhibition", 90, 2)
                 $ StormX.change_stat("lust", 90, 3)
                 ch_s "Certainly. . . Daddy."
-                $ Line = 0
+                $ line = 0
             "Why do you care?" if "whycare" not in StormX.recent_history:
                 $ StormX.change_stat("love", 90, 2)
                 $ StormX.change_stat("obedience", 80, -1)
@@ -2413,7 +2413,7 @@ label Storm_Daddy:
                 ch_s ". . . I suppose that it is."
                 ch_s "Never mind. . ."
                 call remove_girl (StormX)
-                $ Line = 0
+                $ line = 0
             "I'd rather not." if "callyouthat" in StormX.recent_history or "whycare" in StormX.recent_history:
                 $ StormX.change_stat("love", 90, -2)
                 $ StormX.change_stat("obedience", 90, 3)
@@ -2422,6 +2422,6 @@ label Storm_Daddy:
                 ch_s ". . . I suppose that it fine."
                 ch_s "Never mind. . ."
                 call remove_girl (StormX)
-                $ Line = 0
+                $ line = 0
     return
 # Decompiled by unrpyc: https://github.com/CensoredUsername/unrpyc

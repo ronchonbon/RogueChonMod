@@ -6,7 +6,7 @@ label meet_Kitty:
     $ KittyX.today_outfit = "casual1"
     $ KittyX.outfit = "casual1"
     $ KittyX.change_outfit("casual1")
-    call clear_the_room ("All", 0, 1)
+    call clear_the_room ("all", 0, 1)
     $ KittyX.location = "bg_kitty"
     $ KittyX.love = 400
     $ KittyX.obedience = 100
@@ -225,9 +225,9 @@ label Kitty_BF:
             "[KittyX.name] turns towards you and asks if the two of you can talk."
 
     call set_the_scene (0)
-    call show_girl (KittyX)
+    call display_girl (KittyX)
     "A little blush on her cheeks, you can tell she's a bit anxious about whatever she has to say."
-    call taboo_Level
+    call taboo_level
     call clear_the_room (KittyX)
     $ KittyX.daily_history.append("relationship")
     $ KittyX.change_face("_bemused", 1)
@@ -296,19 +296,19 @@ label Kitty_BF:
                     call Kitty_Kissing_Launch ("kiss")
                     $ KittyX.action_counter["kiss"] += 1
                 "She wouldn't understand." if len(Player.Harem) == 1:
-                    $ Line = "no"
+                    $ line = "no"
                 "They wouldn't be cool with that." if len(Player.Harem) > 1:
-                    $ Line = "no"
+                    $ line = "no"
                 "I'm sorry, but. . . no." if KittyX.event_happened[5] != 20:
-                    $ Line = "no"
+                    $ line = "no"
                 "No way.":
                     jump Kitty_BF_Jerk
-            if Line == "no":
+            if line == "no":
                 $ KittyX.change_stat("love", 200, -10)
                 ch_k "Well. . . okay. I get it."
                 $ KittyX.event_happened[5] = 20
                 call remove_girl (KittyX)
-                $ Line = 0
+                $ line = 0
                 return
         "Not really.":
             jump Kitty_BF_Jerk
@@ -324,7 +324,7 @@ label Kitty_BF:
         return True
     $ approval_bonus = 10
     $ Player.add_word(1,"interruption")
-    call Kitty_SexMenu
+    call Kitty_sexMenu
     $ approval_bonus = 0
     return
 
@@ -383,13 +383,13 @@ label Kitty_Love:
 
     $ KittyX.location = bg_current
     call set_the_scene (0)
-    call show_girl (KittyX)
+    call display_girl (KittyX)
     call clear_the_room (KittyX)
-    call taboo_Level
+    call taboo_level
     $ KittyX.daily_history.append("relationship")
     $ KittyX.change_face("_bemused", 1)
     $ KittyX.eyes = "_side"
-    $ Line = 0
+    $ line = 0
     $ KittyX.event_happened[6] += 1
     if KittyX.event_happened[6] == 1:
         if KittyX in Player.Harem:
@@ -442,12 +442,12 @@ label Kitty_Love:
                 $ KittyX.change_face("_smile", 1)
                 $ KittyX.change_stat("love", 95, 20)
                 "You draw her into an embrace, arms wrapped tightly around her waist."
-                $ Line = "hug"
+                $ line = "hug"
             "Stay like this":
                 $ KittyX.eyes = "_down"
                 $ KittyX.change_stat("obedience", 95, 10)
                 "You keep hold of her wrist."
-                $ Line = "wrist"
+                $ line = "wrist"
             "Let her go":
                 if 1 < KittyX.event_happened[6] < 4:
                     "You immediately release her wrist."
@@ -467,7 +467,7 @@ label Kitty_Love:
         ch_k "I'd fall. . ."
         menu:
             extend ""
-            "I'll never let go." if Line:
+            "I'll never let go." if line:
                 $ KittyX.change_stat("love", 95, 20)
                 $ KittyX.change_stat("inhibition", 80, 10)
                 "She melts into your arms."
@@ -515,14 +515,14 @@ label Kitty_Love:
                         $ KittyX.change_stat("obedience", 80, 20)
                         $ KittyX.change_stat("inhibition", 80, -10)
                         ch_k "That's not a \"yes.\" . ."
-                        $ Line = "awkward"
+                        $ line = "awkward"
                     "Not really.":
                         $ KittyX.change_stat("love", 200, -30)
                         $ KittyX.change_stat("obedience", 80, 30)
                         $ KittyX.change_stat("inhibition", 80, -30)
                         $ KittyX.change_face("_angry", 2)
                         ch_k "Huh?!"
-                        $ Line = "awkward"
+                        $ line = "awkward"
             "Huh.":
                 $ KittyX.change_stat("love", 200, -10)
                 $ KittyX.change_stat("obedience", 80, 10)
@@ -539,13 +539,13 @@ label Kitty_Love:
                         $ KittyX.change_stat("obedience", 80, 30)
                         $ KittyX.change_stat("inhibition", 80, -20)
                         $ KittyX.change_face("_angry", 2)
-                        $ Line = "awkward"
+                        $ line = "awkward"
             "Well that's awkward.":
                 $ KittyX.change_stat("love", 200, -30)
                 $ KittyX.change_stat("obedience", 80, 40)
                 $ KittyX.change_stat("inhibition", 80, -20)
                 $ KittyX.change_face("_perplexed", 2)
-                $ Line = "awkward"
+                $ line = "awkward"
     else:
         menu:
             extend ""
@@ -553,7 +553,7 @@ label Kitty_Love:
                 $ KittyX.change_stat("love", 200, 50)
                 $ KittyX.change_stat("inhibition", 80, 30)
                 $ KittyX.change_face("_smile")
-                $ Line = "love"
+                $ line = "love"
             "I think you're pretty great.":
                 $ KittyX.change_face("_confused")
                 menu:
@@ -571,7 +571,7 @@ label Kitty_Love:
                             $ KittyX.change_stat("inhibition", 80, 10)
                             ch_k "But[KittyX.like]not \"nothing\". . ."
                         else:
-                            $ Line = "awkward"
+                            $ line = "awkward"
                     "Not really.":
                         $ KittyX.change_face("_sad")
                         if approval_check(KittyX, 1500, "OI"):
@@ -579,7 +579,7 @@ label Kitty_Love:
                             $ KittyX.change_stat("obedience", 50, 30)
                             ch_k "Ouch. . ."
                         else:
-                            $ Line = "awkward"
+                            $ line = "awkward"
             "I was thinking something more casual. . .":
                 $ KittyX.change_face("_sad")
                 if approval_check(KittyX, 1200, "OI") or approval_check(KittyX, 700, "I"):
@@ -588,9 +588,9 @@ label Kitty_Love:
                     $ KittyX.change_stat("inhibition", 90, 30)
                     ch_k "Close enough."
                 else:
-                    $ Line = "awkward"
+                    $ line = "awkward"
 
-    if Line == "awkward":
+    if line == "awkward":
         if approval_check(KittyX, 700, "O"):
             ch_k "Fine, this doesn't have to be love."
         elif approval_check(KittyX, 700, "I"):
@@ -608,7 +608,7 @@ label Kitty_Love:
                 $ KittyX.recent_history.append("_angry")
         $ KittyX.event_happened[6] = 20
     else:
-        if Line:
+        if line:
 
             "She squeezes you even tighter and makes a little whimper."
         else:
@@ -619,7 +619,7 @@ label Kitty_Love:
             $ KittyX.player_petnames.append("lover")
 
 label Kitty_Love_End:
-    if Line == "awkward" or "lover" not in KittyX.player_petnames:
+    if line == "awkward" or "lover" not in KittyX.player_petnames:
         hide Kitty_sprite with easeoutright
         call remove_girl (KittyX)
         return
@@ -630,7 +630,7 @@ label Kitty_Love_End:
         $ KittyX.location = bg_current
         call set_the_scene
         call clear_the_room (KittyX)
-        call taboo_Level
+        call taboo_level
         ch_k "Ok, so like I was saying. . ."
     $ KittyX.change_stat("obedience", 70, 10)
     $ Player.add_word(1,"interruption")
@@ -641,7 +641,7 @@ label Kitty_Love_End:
             ch_k "Hmm. . ."
             if simulation:
                 return True
-            call Kitty_SexAct ("sex")
+            call Kitty_sexAct ("sex")
         "I have something else in mind. . .[[choose another activity]":
             $ KittyX.brows = "_confused"
             $ KittyX.change_stat("obedience", 70, 20)
@@ -649,19 +649,19 @@ label Kitty_Love_End:
             if simulation:
                 return True
             $ approval_bonus = 20
-            call Kitty_SexMenu
+            call Kitty_sexMenu
     return
 
 label Kitty_Love_Redux:
 
-    $ Line = 0
+    $ line = 0
     $ KittyX.daily_history.append("relationship")
     if KittyX.event_happened[6] >= 25:
 
         ch_p "I hope you've forgiven me, I still love you."
         $ KittyX.change_stat("love", 95, 10)
         if approval_check(KittyX, 950, "L"):
-            $ Line = "love"
+            $ line = "love"
         else:
             $ KittyX.change_face("_sad")
             ch_k "You've dug too deep a hole, [KittyX.player_petname]."
@@ -677,13 +677,13 @@ label Kitty_Love_Redux:
                 ch_p "Yeah. I mean, yes, I love you, Kitty."
                 $ KittyX.change_stat("love", 200, 10)
                 if approval_check(KittyX, 950, "L"):
-                    $ Line = "love"
+                    $ line = "love"
                 else:
                     $ KittyX.change_face("_sadside")
                     ch_k "Well, I don't know how I feel at this point. . ."
             "I've changed my mind, so. . .":
                 if approval_check(KittyX, 950, "L"):
-                    $ Line = "love"
+                    $ line = "love"
                     $ KittyX.eyes = "_surprised"
                     ch_k "Really?!"
                 else:
@@ -698,7 +698,7 @@ label Kitty_Love_Redux:
                 $ KittyX.change_face("_angry")
                 ch_k "Seriously?"
                 $ KittyX.recent_history.append("_angry")
-    if Line == "love":
+    if line == "love":
         $ KittyX.change_stat("love", 200, 40)
         $ KittyX.change_stat("obedience", 90, 10)
         $ KittyX.change_stat("inhibition", 90, 10)
@@ -724,13 +724,13 @@ label Kitty_Sub:
 
     $ KittyX.location = bg_current
     call set_the_scene (0)
-    call show_girl (KittyX)
+    call display_girl (KittyX)
     call clear_the_room (KittyX)
-    call taboo_Level
+    call taboo_level
     $ KittyX.daily_history.append("relationship")
     $ KittyX.change_face("_bemused", 1)
 
-    $ Line = 0
+    $ line = 0
     ch_k "So, uhm. . .you've really kinda[KittyX.like]taken control in our relationship lately."
     menu:
         extend ""
@@ -758,7 +758,7 @@ label Kitty_Sub:
                     extend ""
                     "Guess you don't know me so well, huh?":
                         ch_k "I guess not."
-                        $ Line = "rude"
+                        $ line = "rude"
                     "Sorry. I kind of thought you were getting into me being like that.":
                         $ KittyX.change_face("_sexy", 2)
                         $ KittyX.eyes = "_side"
@@ -768,7 +768,7 @@ label Kitty_Sub:
                         ch_k ". . ."
 
     $ KittyX.blushing = "_blush1"
-    if not Line:
+    if not line:
 
         ch_k "Well, I've, uhm. . . never had a guy be like that with me before. . ."
         $ KittyX.change_face("_sly", 2)
@@ -793,7 +793,7 @@ label Kitty_Sub:
                             $ KittyX.change_stat("love", 200, -10)
                             $ KittyX.change_stat("obedience", 200, 5)
                             ch_k "Y'know, you're such a jerk, [Player.name]!"
-                            $ Line = "rude"
+                            $ line = "rude"
                         "I think I could maybe do that.":
                             $ KittyX.change_face("_bemused", 2)
                             $ KittyX.eyes = "_side"
@@ -818,21 +818,21 @@ label Kitty_Sub:
                         $ KittyX.change_face("_bemused", 2)
                         $ KittyX.change_stat("love", 95, 10)
                         $ KittyX.change_stat("inhibition", 50, 10)
-                        $ Line = 0
+                        $ line = 0
                     "Uhm. . .yeah. I {i}do{/i} think it's weird. Sorry.":
                         $ KittyX.change_stat("love", 200, -15)
                         $ KittyX.change_stat("obedience", 200, -5)
                         $ KittyX.change_stat("inhibition", 50, -10)
-                        $ Line = "embarrassed"
+                        $ line = "embarrassed"
             "I don't really care what you like. I do what I want.":
 
                 $ KittyX.change_stat("love", 200, -10)
                 $ KittyX.change_stat("obedience", 200, 15)
                 $ KittyX.change_face("_angry")
                 ch_k "Y'know, you're such a jerk, [Player.name]!"
-                $ Line = "rude"
+                $ line = "rude"
 
-    if not Line:
+    if not line:
         $ KittyX.change_face("_bemused", 1)
         $ KittyX.eyes = "_down"
         ch_k "Cool. So. . .just so you know. . .I don't mind[KittyX.like]you being in control."
@@ -843,23 +843,23 @@ label Kitty_Sub:
             "Don't you think that relationship's kinda. . .weird?":
                 $ KittyX.change_stat("love", 200, -5)
                 $ KittyX.change_stat("inhibition", 50, -15)
-                $ Line = "embarrassed"
+                $ line = "embarrassed"
             "I think I could get used to that kinda thing.":
                 $ KittyX.change_stat("obedience", 200, 5)
                 $ KittyX.change_stat("inhibition", 50, 5)
                 $ KittyX.change_face("_smile", 1)
-                $ Line = 0
-            "You actually {i}read{/i} that?" if "256 Shades of Grey" in KittyX.inventory and Line != "grey":
+                $ line = 0
+            "You actually {i}read{/i} that?" if "256 Shades of Grey" in KittyX.inventory and line != "grey":
                 $ KittyX.change_stat("love", 95, 5)
                 $ KittyX.change_face("_sly", 1)
                 ch_k "You think I wouldn't read something you bought me? I think you {i}maybe{/i} don't realize how much I like you."
                 $ KittyX.change_stat("inhibition", 50, 5)
                 ch_k "Well, I {i}did{/i} read it. And. . .it turns out it kinda[KittyX.like]. . {i}really{/i} turned me on."
                 ch_k "So. . .what d'you think? Think[KittyX.like]maybe you'd like that?"
-                $ Line = "grey"
+                $ line = "grey"
                 jump Kitty_Sub_Choice
 
-    if not Line:
+    if not line:
         $ KittyX.change_face("_smile", 1)
         ch_k "Awesome. So. . .if you wanted me to, I could[KittyX.like]call you {i}sir{/i} or something."
         $ KittyX.change_face("_sly", 2)
@@ -888,21 +888,21 @@ label Kitty_Sub:
                         $ KittyX.change_stat("love", 200, -10)
                         $ KittyX.change_stat("obedience", 200, -50)
                         $ KittyX.change_stat("inhibition", 50, -15)
-                        $ Line = "embarrassed"
+                        $ line = "embarrassed"
 
 
     $ KittyX.history.append("sir")
-    if not Line:
+    if not line:
         $ KittyX.blushing = "_blush1"
         $ KittyX.player_petnames.append("sir")
 
-    elif Line == "rude":
+    elif line == "rude":
         hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
         if not simulation:
             $ renpy.pop_call()
         "[KittyX.name] phases through the floor in a huff, leaving you alone."
-    elif Line == "embarrassed":
+    elif line == "embarrassed":
         $ KittyX.change_face("_sadside", 2)
         ch_k "Oh! Uhm, yeah! [KittyX.Like]I mean. . ."
         $ KittyX.mouth = "_smile"
@@ -917,7 +917,7 @@ label Kitty_Sub:
     return
 
 label Kitty_Sub_Asked:
-    $ Line = 0
+    $ line = 0
     $ KittyX.change_face("_sadside", 1)
     ch_k "Yeah. And I also[KittyX.like]remember what a {i}jerk{/i} you were to me about it."
     menu:
@@ -931,9 +931,9 @@ label Kitty_Sub_Asked:
                 pass
             else:
                 ch_k "Well maybe {i}I'm{/i}[KittyX.like]over that. . ."
-                $ Line = "rude"
+                $ line = "rude"
 
-            if Line != "rude":
+            if line != "rude":
                 $ KittyX.change_stat("love", 90, 10)
                 $ KittyX.change_face("_sly", 1)
                 ch_k "Well. . .okay. I {i}did{/i} think that was pretty hot. Also, you're super-cute when you apologize."
@@ -947,7 +947,7 @@ label Kitty_Sub_Asked:
                     ch_k "Ok, fine."
                 else:
                     ch_k "Um, not really."
-                    $ Line = "rude"
+                    $ line = "rude"
             elif approval_check(KittyX, 600, "O"):
 
                 $ KittyX.change_face("_sadside", 1)
@@ -981,7 +981,7 @@ label Kitty_Sub_Asked:
                             $ KittyX.change_face("_angry", 1)
                             $ KittyX.eyes = "_side"
                             ch_k "You really don't learn, do you?"
-                            $ Line = "rude"
+                            $ line = "rude"
                     "Ok, never mind then.":
                         $ KittyX.change_face("_angry", 1)
                         $ KittyX.change_stat("love", 200, -10)
@@ -990,11 +990,11 @@ label Kitty_Sub_Asked:
                         $ KittyX.change_stat("inhibition", 50, -15)
                         ch_k "Y'know, if you're gonna throw that in my face, forget it."
                         ch_k "I should've[KittyX.like]expected you'd be like that."
-                        $ Line = "rude"
+                        $ line = "rude"
 
     $ KittyX.recent_history.append("asked sub")
     $ KittyX.daily_history.append("asked sub")
-    if Line == "rude":
+    if line == "rude":
 
         hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
@@ -1031,11 +1031,11 @@ label Kitty_Master:
 
     $ KittyX.location = bg_current
     call set_the_scene (0)
-    call show_girl (KittyX)
+    call display_girl (KittyX)
     call clear_the_room (KittyX)
     $ KittyX.daily_history.append("relationship")
-    call taboo_Level
-    $ Line = 0
+    call taboo_level
+    $ line = 0
     $ KittyX.change_face("_bemused", 1)
     ch_k "[KittyX.player_petname], if you don't mind me saying so. . ."
     ch_k "I think having you be[KittyX.like]in control of our relationship is working out pretty awesome."
@@ -1051,7 +1051,7 @@ label Kitty_Master:
                     $ KittyX.change_stat("obedience", 200, -15)
                     $ KittyX.change_stat("inhibition", 50, 10)
                     ch_k "Oh. Well, okay, I guess."
-                    $ Line = "fail"
+                    $ line = "fail"
                 "What'd you have in mind?":
                     $ KittyX.eyes = "_side"
                     ch_k "I dunno. I was thinking[KittyX.like]maybe I could start calling you. . . {i}master{/i}?"
@@ -1066,7 +1066,7 @@ label Kitty_Master:
                             $ KittyX.change_stat("obedience", 200, -15)
                             $ KittyX.change_stat("inhibition", 50, 5)
                             ch_k "Oh. Well, okay, I guess."
-                            $ Line = "fail"
+                            $ line = "fail"
                 "Actually, I'd prefer we stopped doing it. I don't want to be too controlling.":
 
                     $ KittyX.change_face("_sly", 1)
@@ -1074,7 +1074,7 @@ label Kitty_Master:
                     $ KittyX.change_stat("obedience", 200, -10)
                     $ KittyX.change_stat("inhibition", 50, 10)
                     ch_k "Aw, I guess I can't get mad about that. . ."
-                    $ Line = "fail"
+                    $ line = "fail"
                 "Actually, let's stop that. It's creeping me out.":
 
                     $ KittyX.change_face("_perplexed", 2)
@@ -1083,7 +1083,7 @@ label Kitty_Master:
                     $ KittyX.change_stat("inhibition", 50, -15)
                     ch_k "Oh. Sorry. I guess I got[KittyX.like]carried away with it."
                     $ KittyX.blushing = "_blush1"
-                    $ Line = "embarrassed"
+                    $ line = "embarrassed"
         "As if I care what you think, slut.":
 
             $ KittyX.change_face("_sad", 1)
@@ -1106,7 +1106,7 @@ label Kitty_Master:
                         $ KittyX.change_stat("inhibition", 50, 5)
                         $ KittyX.change_face("_angry", 1)
                         ch_k "!!!"
-                        $ Line = "rude"
+                        $ line = "rude"
                 "Sorry. I'm just trying to do the \"control\" thing. I thought you'd like it. Too much?":
 
                     $ KittyX.change_stat("love", 200, 10)
@@ -1120,23 +1120,23 @@ label Kitty_Master:
             $ KittyX.change_stat("obedience", 200, -20)
             $ KittyX.change_stat("inhibition", 50, -25)
             ch_k "Oh. Uhm. . .never mind, then."
-            $ Line = "embarrassed"
+            $ line = "embarrassed"
 
     $ KittyX.history.append("master")
-    if Line == "rude":
+    if line == "rude":
         $ KittyX.recent_history.append("_angry")
         hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
         if not simulation:
             $ renpy.pop_call()
         "[KittyX.name] phases through the floor in a huff. She might have been crying."
-    elif Line == "embarrassed":
+    elif line == "embarrassed":
         hide Kitty_sprite with easeoutbottom
         call remove_girl (KittyX)
         if not simulation:
             $ renpy.pop_call()
         "[KittyX.name] phases through the floor, leaving you alone. She looked really embarrassed."
-    elif Line != "fail":
+    elif line != "fail":
         $ KittyX.change_stat("obedience", 200, 50)
         $ KittyX.player_petnames.append("master")
         $ KittyX.player_petname = "master"
@@ -1148,14 +1148,14 @@ label Kitty_Master:
 
 
 
-label Kitty_Sexfriend:
+label Kitty_sexfriend:
     $ KittyX.location = bg_current
     call set_the_scene (0)
-    call show_girl (KittyX)
+    call display_girl (KittyX)
     call clear_the_room (KittyX)
     $ KittyX.daily_history.append("relationship")
-    call taboo_Level
-    $ Line = 0
+    call taboo_level
+    $ line = 0
     $ KittyX.change_face("_bemused", 1)
     ch_k "So, [KittyX.player_petname]. . .you[KittyX.like]got a second?"
     menu:
@@ -1165,7 +1165,7 @@ label Kitty_Sexfriend:
             ch_k "You're such a jerk, [Player.name]!"
             $ KittyX.change_stat("love", 200, -20)
             $ KittyX.change_stat("obedience", 50, 3)
-            $ Line = "rude"
+            $ line = "rude"
         "This doesn't sound good.":
 
             $ KittyX.change_face("_perplexed", 1)
@@ -1174,7 +1174,7 @@ label Kitty_Sexfriend:
 
             pass
 
-    if not Line:
+    if not line:
         if approval_check(KittyX, 850, "L"):
             $ KittyX.change_face("_bemused", 1)
             ch_k "Well. . . I really like you. You know that, right?"
@@ -1195,7 +1195,7 @@ label Kitty_Sexfriend:
                     $ KittyX.change_stat("obedience", 50, 5)
                     $ KittyX.change_stat("inhibition", 80, -5)
                     ch_k "Y'know, you're such an ass, [Player.name]!"
-                    $ Line = "rude"
+                    $ line = "rude"
 
         elif approval_check(KittyX, 1000, "LI"):
             $ KittyX.change_face("_sexy", 1)
@@ -1213,7 +1213,7 @@ label Kitty_Sexfriend:
 
                     $ KittyX.change_face("_angry")
                     ch_k "Well not anymore, I'm not!"
-                    $ Line = "rude"
+                    $ line = "rude"
         else:
 
             $ KittyX.mouth = "_smile"
@@ -1239,15 +1239,15 @@ label Kitty_Sexfriend:
                             $ KittyX.change_face("_perplexed",2)
                             $ KittyX.change_stat("inhibition", 80, -5)
                             ch_k "Uhm. . . never mind, then."
-                            $ Line = "embarrassed"
+                            $ line = "embarrassed"
                 "Uhm, I think I've had my fill of {i}weird{/i}, thanks":
 
                     $ KittyX.change_face("_angry",1)
                     ch_k "Fine. [KittyX.like]whatever."
-                    $ Line = "rude"
+                    $ line = "rude"
     if KittyX in Player.Harem:
-        $ Line = "harem"
-    if not Line:
+        $ line = "harem"
+    if not line:
         ch_k "Anyway. . . I was[KittyX.like]kinda thinking. . . we get along pretty well, right?"
         menu:
             extend ""
@@ -1258,9 +1258,9 @@ label Kitty_Sexfriend:
                 $ KittyX.change_stat("love", 200, -10)
                 $ KittyX.change_stat("inhibition", 80, -10)
                 ch_k "Sorry. I knew this was a mistake."
-                $ Line = "embarrassed"
+                $ line = "embarrassed"
 
-    if not Line:
+    if not line:
         ch_k "And we've[KittyX.like]known each other for a little while, right?"
         menu:
             extend ""
@@ -1271,8 +1271,8 @@ label Kitty_Sexfriend:
                 $ KittyX.change_stat("love", 200, -10)
                 $ KittyX.change_stat("inhibition", 80, -10)
                 ch_k "Sorry. I knew this was a mistake."
-                $ Line = "embarrassed"
-    if not Line:
+                $ line = "embarrassed"
+    if not line:
         ch_k "Well. . . I was just kinda thinking. . . "
         ch_k "[KittyX.like]we could take our relationship a little further, if you wanted to."
         menu:
@@ -1296,7 +1296,7 @@ label Kitty_Sexfriend:
                         $ KittyX.change_stat("obedience", 50, 10)
                         $ KittyX.change_stat("inhibition", 80, -40)
                         ch_k "You're the biggest asshole[KittyX.like]ever, [KittyX.player_petname]!"
-                        $ Line = "rude"
+                        $ line = "rude"
             "Uhm, to be honest, I'd rather not.":
 
                 $ KittyX.change_face("_sadside",2)
@@ -1304,11 +1304,11 @@ label Kitty_Sexfriend:
                 $ KittyX.change_stat("inhibition", 80, -15)
                 ch_k "Oh. Okay."
                 ch_k "I[KittyX.like]think I should go now. I've got[KittyX.like]stuff to do."
-                $ Line = "_sad"
-    if Line == "harem":
+                $ line = "_sad"
+    if line == "harem":
         ch_k "I am -totally- addicted to this dick. . ."
-        $ Line = 0
-    if Line == "rude":
+        $ line = 0
+    if line == "rude":
         $ KittyX.change_face("_angry",1)
         $ KittyX.recent_history.append("_angry")
         $ KittyX.change_stat("love", 200, -20)
@@ -1317,14 +1317,14 @@ label Kitty_Sexfriend:
         hide Kitty_sprite with easeoutleft
         $ KittyX.recent_history.append("_angry")
         "[KittyX.name] storms off in a huff. She seemed pretty mad at you."
-    elif Line == "embarrassed":
+    elif line == "embarrassed":
         $ KittyX.change_face("_perplexed",1)
         $ KittyX.change_stat("love", 200, -10)
         $ KittyX.change_stat("obedience", 50, 5)
         $ KittyX.change_stat("inhibition", 80, -20)
         hide Kitty_sprite with easeoutbottom
         "[KittyX.name] phases through the floor leaving you alone. That was very strange."
-    elif Line == "_sad":
+    elif line == "_sad":
         hide Kitty_sprite with easeoutbottom
         "[KittyX.name] phases through the floor leaving you alone. You think you may have hurt her feelings."
     else:
@@ -1814,11 +1814,11 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
         return
 
 
-    if KittyX.GirlLikeCheck(Girl) <= 200:
+    if KittyX.likes[Girl.tag] <= 200:
         $ TempBonus = 400
-    elif KittyX.GirlLikeCheck(Girl) <= 400:
+    elif KittyX.likes[Girl.tag] <= 400:
         $ TempBonus = 200
-    elif KittyX.GirlLikeCheck(Girl) >= 800 or approval_check(Girl, 500, "I", TabM=3):
+    elif KittyX.likes[Girl.tag] >= 800 or approval_check(Girl, 500, "I", TabM=3):
 
         $ TempBonus = 0
     else:
@@ -1834,22 +1834,22 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 if approval_check(KittyX, 800, TabM=2, Bonus=TempBonus):
 
 
-                    $ Line = "over"
+                    $ line = "over"
                 elif approval_check(KittyX, 600, TabM=2, Bonus=TempBonus):
 
-                    $ Line = "no"
+                    $ line = "no"
                 else:
 
-                    $ Line = "noway"
+                    $ line = "noway"
             else:
 
                 $ Shy = 3
                 if approval_check(KittyX, 800, TabM=2.5, Bonus=(TempBonus*1.5)):
-                    $ Line = "over"
+                    $ line = "over"
                 elif approval_check(KittyX, 600, TabM=1.5, Bonus=TempBonus):
-                    $ Line = "no"
+                    $ line = "no"
                 else:
-                    $ Line = "noway"
+                    $ line = "noway"
 
         ". . . [Girl.bra]?" if Girl.bra:
             if Girl.top:
@@ -1858,22 +1858,22 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 if approval_check(KittyX, 1200, TabM=1, Bonus=TempBonus):
 
 
-                    $ Line = "chest"
+                    $ line = "chest"
                 elif approval_check(KittyX, 600, TabM=0.5, Bonus=TempBonus):
 
-                    $ Line = "no"
+                    $ line = "no"
                 else:
 
-                    $ Line = "noway"
+                    $ line = "noway"
             else:
 
                 $ Shy = 3
                 if approval_check(KittyX, 800, TabM=2.5, Bonus=(TempBonus*1.5)):
-                    $ Line = "chest"
+                    $ line = "chest"
                 elif approval_check(KittyX, 600, TabM=1.5, Bonus=TempBonus):
-                    $ Line = "no"
+                    $ line = "no"
                 else:
-                    $ Line = "noway"
+                    $ line = "noway"
 
         ". . . [Girl.legs]?" if Girl.legs:
             if Girl.underwear or Girl.HoseNum() >= 10:
@@ -1882,22 +1882,22 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 if approval_check(KittyX, 1000, TabM=2, Bonus=TempBonus):
 
 
-                    $ Line = "legs"
+                    $ line = "legs"
                 elif approval_check(KittyX, 800, TabM=2, Bonus=TempBonus):
 
-                    $ Line = "no"
+                    $ line = "no"
                 else:
 
-                    $ Line = "noway"
+                    $ line = "noway"
             else:
 
                 $ Shy = 3
                 if approval_check(KittyX, 1000, TabM=2.5, Bonus=(TempBonus*1.5)):
-                    $ Line = "legs"
+                    $ line = "legs"
                 elif approval_check(KittyX, 800, TabM=1.5, Bonus=TempBonus):
-                    $ Line = "no"
+                    $ line = "no"
                 else:
-                    $ Line = "noway"
+                    $ line = "noway"
 
         ". . . [Girl.underwear]?" if Girl.underwear:
             if Girl.legs or Girl.HoseNum() >= 10:
@@ -1906,22 +1906,22 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 if approval_check(KittyX, 1000, TabM=1, Bonus=TempBonus):
 
 
-                    $ Line = "_panties"
+                    $ line = "_panties"
                 elif approval_check(KittyX, 800, TabM=0.5, Bonus=TempBonus):
 
-                    $ Line = "no"
+                    $ line = "no"
                 else:
 
-                    $ Line = "noway"
+                    $ line = "noway"
             else:
 
                 $ Shy = 3
                 if approval_check(KittyX, 1000, TabM=2.5, Bonus=(TempBonus*1.5)):
-                    $ Line = "_panties"
+                    $ line = "_panties"
                 elif approval_check(KittyX, 800, TabM=1.5, Bonus=TempBonus):
-                    $ Line = "no"
+                    $ line = "no"
                 else:
-                    $ Line = "noway"
+                    $ line = "noway"
 
         ". . . [Girl.hose]?" if Girl.hose:
             if Girl.legs:
@@ -1930,45 +1930,45 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
                 if approval_check(KittyX, 800, TabM=1, Bonus=TempBonus):
 
 
-                    $ Line = "hose"
+                    $ line = "hose"
                 elif approval_check(KittyX, 800, TabM=0.5, Bonus=TempBonus):
 
-                    $ Line = "no"
+                    $ line = "no"
                 else:
 
-                    $ Line = "noway"
+                    $ line = "noway"
             elif Girl.underwear or Girl.HoseNum() < 10:
 
                 $ Shy = 2
                 if approval_check(KittyX, 1000, TabM=2, Bonus=TempBonus):
 
 
-                    $ Line = "hose"
+                    $ line = "hose"
                 elif approval_check(KittyX, 800, TabM=2, Bonus=TempBonus):
 
-                    $ Line = "no"
+                    $ line = "no"
                 else:
 
-                    $ Line = "noway"
+                    $ line = "noway"
             else:
 
                 $ Shy = 3
                 if approval_check(KittyX, 1000, TabM=2.5, Bonus=(TempBonus*1.5)):
-                    $ Line = "hose"
+                    $ line = "hose"
                 elif approval_check(KittyX, 800, TabM=1.5, Bonus=TempBonus):
-                    $ Line = "no"
+                    $ line = "no"
                 else:
-                    $ Line = "noway"
+                    $ line = "noway"
         "Never mind.":
 
             return
 
-    if Line == "no":
+    if line == "no":
         $ KittyX.change_face("_sadside",1)
         $ KittyX.change_stat("love", 90, -(Shy))
         ch_k "I really couldn't do that to her."
         return
-    if Line == "noway":
+    if line == "noway":
         $ KittyX.change_face("_angry",1)
         $ KittyX.change_stat("love", 90, -(2*Shy))
         $ KittyX.change_stat("obedience", 60, -(Shy))
@@ -1981,47 +1981,47 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
     "[KittyX.name] sneaks up behind [Girl.name]. . ."
 
     $ Girl.change_face("_surprised",2)
-    if Line == "over":
-        $ Line = Girl.top
+    if line == "over":
+        $ line = Girl.top
         $ Girl.top = ""
         call expression Girl.tag + "_First_Topless" pass (1)
-        "She reaches out and snags [Girl.name]'s [Line], tugging it through her body."
+        "She reaches out and snags [Girl.name]'s [line], tugging it through her body."
 
-    elif Line == "chest":
-        $ Line = Girl.bra
+    elif line == "chest":
+        $ line = Girl.bra
         $ Girl.bra = ""
         call expression Girl.tag + "_First_Topless" pass (1)
         if Girl.top:
-            "She reaches through [Girl.name]'s [Girl.top] and snags her [Line]."
+            "She reaches through [Girl.name]'s [Girl.top] and snags her [line]."
         else:
-            "She reaches out and snags [Girl.name]'s [Line], tugging it free."
+            "She reaches out and snags [Girl.name]'s [line], tugging it free."
 
-    elif Line == "legs":
-        $ Line = Girl.legs
+    elif line == "legs":
+        $ line = Girl.legs
         $ Girl.legs = ""
         call expression Girl.tag + "_First_Bottomless" pass (1)
-        "She reaches down and snags [Girl.name]'s [Line], tugging them through her body."
+        "She reaches down and snags [Girl.name]'s [line], tugging them through her body."
 
-    elif Line == "_panties":
-        $ Line = Girl.underwear
+    elif line == "_panties":
+        $ line = Girl.underwear
         $ Girl.underwear = ""
         call expression Girl.tag + "_First_Bottomless" pass (1)
         if Girl.legs:
-            "She reaches down through [Girl.name]'s [Girl.legs] and snags her [Line]."
+            "She reaches down through [Girl.name]'s [Girl.legs] and snags her [line]."
         elif Girl.hose:
-            "She reaches down through [Girl.name]'s [Girl.hose] and snags her [Line]."
+            "She reaches down through [Girl.name]'s [Girl.hose] and snags her [line]."
         else:
-            "She reaches out and snags [Girl.name]'s [Line], tugging them free."
-    elif Line == "hose":
-        $ Line = Girl.hose
+            "She reaches out and snags [Girl.name]'s [line], tugging them free."
+    elif line == "hose":
+        $ line = Girl.hose
         $ Girl.hose = ""
         call expression Girl.tag + "_First_Bottomless" pass (1)
         if Girl.legs:
-            "She reaches down through [Girl.name]'s [Girl.legs] and snags her [Line]."
+            "She reaches down through [Girl.name]'s [Girl.legs] and snags her [line]."
         else:
-            "She reaches out and snags [Girl.name]'s [Line], tugging them free."
+            "She reaches out and snags [Girl.name]'s [line], tugging them free."
 
-    "She then dashes back a few steps, slipping the [Line] behind her back."
+    "She then dashes back a few steps, slipping the [line] behind her back."
 
     call Activity_Check (Girl, KittyX, 1, 0, 2)
     $ approval = _return
@@ -2106,12 +2106,12 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
 
 
     if approval:
-        $ Girl.GLG(KittyX,900,(2*Shy),1)
-        $ KittyX.GLG(Girl,900,(2*Shy),1)
+        $ Girl.check_if_likes(KittyX,900,(2*Shy),1)
+        $ KittyX.check_if_likes(Girl,900,(2*Shy),1)
         $ Girl.add_word(1,"yoinked")
     else:
         call remove_girl (Girl)
-        $ Girl.GLG(KittyX,900,-(2*Shy),1)
+        $ Girl.check_if_likes(KittyX,900,-(2*Shy),1)
 
     if Girl == JeanX and approval < 2:
         "With a quick nod, her clothes come flying back to her."
@@ -2139,7 +2139,7 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
         $ KittyX.change_face("_sly")
         $ KittyX.change_stat("love", 80, 1)
         $ KittyX.change_stat("lust", 80, Shy)
-        "[KittyX.name] laughs under her breath and waggles the [Line] at you."
+        "[KittyX.name] laughs under her breath and waggles the [line] at you."
     return
 
 
@@ -2148,9 +2148,9 @@ label Kitty_Yoink(Girl=0, TempBonus=0, Shy=0):
 label Kitty_Kate:
     $ KittyX.location = bg_current
     call set_the_scene (0)
-    call show_girl (KittyX)
-    call taboo_Level
-    $ Line = 0
+    call display_girl (KittyX)
+    call taboo_level
+    $ line = 0
     $ KittyX.change_face("_bemused", 1)
     ch_k "Hey, [KittyX.player_petname]. . .you[KittyX.like]got a second?"
     menu:

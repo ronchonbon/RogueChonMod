@@ -2078,7 +2078,7 @@ image Jubes_Doggy_Foot2_Ass:
 
 
 
-label Jubes_Doggy_Launch(Line=primary_action):
+label Jubes_Doggy_Launch(line=primary_action):
     return
     if renpy.showing("Jubes_Doggy_Animation"):
         return
@@ -3817,38 +3817,38 @@ image Jubes_Mega_Mask:
 
 
 
-label Jubes_Sex_Launch(Line=primary_action):
+label Jubes_sex_launch(line=primary_action):
     return
-    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
+    $ girl_offhand_action = None if girl_offhand_action == "handjob" else girl_offhand_action
     $ Player.sprite = 1
-    $ Line = "solo" if not Line else Line
-    if Line == "sex":
+    $ line = "solo" if not line else line
+    if line == "sex":
         $ Player.cock_position = "sex"
         if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
-            $ offhand_action = 0
-    elif Line == "anal":
+            $ offhand_action = None
+    elif line == "anal":
         $ Player.cock_position = "anal"
         if offhand_action in ("finger_ass","dildo_anal","eat_ass"):
-            $ offhand_action = 0
-    elif Line == "solo":
+            $ offhand_action = None
+    elif line == "solo":
         $ Player.sprite = 0
         $ Player.cock_position = "out"
-    elif Line == "hotdog":
+    elif line == "hotdog":
         $ Player.cock_position = "out"
-    elif Line == "footjob":
+    elif line == "footjob":
         $ show_feet = 1
         $ Player.cock_position = "footjob"
-    elif Line == "massage":
+    elif line == "massage":
         $ Player.sprite = 0
         $ Player.cock_position = 0
     else:
         $ Player.sprite = 0
         $ Player.cock_position = "out"
         $ action_speed = 0
-    $ primary_action = Line
+    $ primary_action = line
 
     if JubesX.pose == "doggy":
-        call Jubes_Doggy_Launch (Line)
+        call Jubes_Doggy_Launch (line)
         return
     if renpy.showing("Jubes_SexSprite"):
         return
@@ -5013,7 +5013,7 @@ image Jubes_BJ_Body_6:
 
 
 
-label Jubes_BJ_Launch(Line=primary_action):
+label Jubes_BJ_Launch(line=primary_action):
     return
 
     $ JubesX.arm_pose = 1
@@ -5021,7 +5021,7 @@ label Jubes_BJ_Launch(Line=primary_action):
         return
 
     call Jubes_Hide
-    if Line == "L" or Line == "cum":
+    if line == "L" or line == "cum":
         show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_center):
             alpha 1
             ease 1 zoom 2.5 offset (150,80)
@@ -5033,7 +5033,7 @@ label Jubes_BJ_Launch(Line=primary_action):
         with dissolve
 
     $ action_speed = 0
-    if Line == "L":
+    if line == "L":
         if taboo:
             if len(Present) >= 2:
                 if Present[0] != JubesX:
@@ -5044,7 +5044,7 @@ label Jubes_BJ_Launch(Line=primary_action):
                 "[JubesX.name] casually glances around to see if anyone can see her."
         "[JubesX.name] smoothly bends down and places your cock against her cheek."
 
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "blowjob"
 
     show Jubes_Sprite zorder JubesX.sprite_layer:
@@ -5191,13 +5191,13 @@ image Jubes_HJ_Animation:
     zoom 0.4
 
 
-label Jubes_HJ_Launch(Line=primary_action):
+label Jubes_HJ_Launch(line=primary_action):
     return
     if renpy.showing("Jubes_HJ_Animation"):
         $ primary_action = "handjob"
         return
     call Jubes_Hide
-    if Line == "L":
+    if line == "L":
         show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,200)
@@ -5208,7 +5208,7 @@ label Jubes_HJ_Launch(Line=primary_action):
         with dissolve
 
     $ action_speed = 0
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "handjob"
     else:
         $ action_speed = 1
@@ -6314,7 +6314,7 @@ image Jubes_TJ_5:
 
 
 
-label Jubes_TJ_Launch(Line=primary_action):
+label Jubes_TJ_Launch(line=primary_action):
     return
     if renpy.showing("Jubes_TJ_Animation"):
         return
@@ -6322,7 +6322,7 @@ label Jubes_TJ_Launch(Line=primary_action):
     show Jubes_Sprite zorder JubesX.sprite_layer at sprite_location(JubesX.sprite_location):
         alpha 1
         ease 1 zoom 2.3 xpos 750 yoffset -100
-    if Line == "L":
+    if line == "L":
         if taboo:
             if len(Present) >= 2:
                 if Present[0] != JubesX:
@@ -6345,16 +6345,16 @@ label Jubes_TJ_Launch(Line=primary_action):
 
     call Jubes_First_Topless
 
-    show blackscreen onlayer black with dissolve
+    show black_screen onlayer black with dissolve
     show Jubes_Sprite zorder JubesX.sprite_layer:
         alpha 0
     $ action_speed = 0
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "titjob"
     # show Jubes_TJ_Animation zorder 150:
     #     pos (700,520)
     $ Player.sprite = 1
-    hide blackscreen onlayer black with dissolve
+    hide black_screen onlayer black with dissolve
     return
 
 label Jubes_TJ_Reset:

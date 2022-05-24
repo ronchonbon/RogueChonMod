@@ -247,7 +247,7 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
                 "Hmm, sounds like a plan.":
                     $ action_context = "shift"
 
-            $ offhand_action = 0
+            $ offhand_action = None
 
             if primary_action == "striptease":
                 call Group_Strip_End
@@ -258,8 +258,8 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
             elif primary_action:
                 call CloseOut (Girl)
 
-            show blackscreen onlayer black
-            hide blackscreen onlayer black
+            show black_screen onlayer black
+            hide black_screen onlayer black
             if temp_Girls[0] == "handjob":
                 jump expression Girl.tag + "_HJ_Prep"
             elif temp_Girls[0] == "blowjob":
@@ -276,7 +276,7 @@ label jerking_off(Girl=0, counter=0, temp_Girls=[]):
 
 label Girl_Tag(Girl=0, Forced=0, Gloves=0):
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     call shift_focus (Girl)
     $ Gloves = Girl.arms
     $ Girl.arm_pose = 2
@@ -338,23 +338,23 @@ label Girl_Tag(Girl=0, Forced=0, Gloves=0):
         $ Girl.change_stat("lust", 90, 5)
         if Gloves == "_gloves":
             $ Girl.arms = ""
-            $ Line = "She pulls off her gloves and"
+            $ line = "She pulls off her gloves and"
         else:
-            $ Line = "She reaches out and"
+            $ line = "She reaches out and"
         if Girl == RogueX:
-            "[Line] touches your face for a moment."
+            "[line] touches your face for a moment."
         elif Girl == KittyX:
-            "[Line] grabs both sides of your face, looking intently into your eyes."
+            "[line] grabs both sides of your face, looking intently into your eyes."
         elif Girl == EmmaX:
-            "[Line] rubs the back of her hand against your cheek."
+            "[line] rubs the back of her hand against your cheek."
         elif Girl == LauraX:
-            "[Line] grabs your face in one hand, firmly smooshing your cheeks together."
+            "[line] grabs your face in one hand, firmly smooshing your cheeks together."
         elif Girl == JeanX:
-            "[Line] wraps her hand around the back of your neck."
+            "[line] wraps her hand around the back of your neck."
         elif Girl == StormX:
-            "[Line] strokes her hand across your cheek."
+            "[line] strokes her hand across your cheek."
         elif Girl == JubesX:
-            "[Line] strokes your neck and cups her hand under your jaw."
+            "[line] strokes your neck and cups her hand under your jaw."
     $ Girl.blushing = "_blush2"
 
     if round <= 15:

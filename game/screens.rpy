@@ -76,7 +76,7 @@ screen say(who, what, side_image=None, two_window=False, CountWords=0):
             style "say_two_window_vbox"
 
             window:
-                if who == Gwenname:
+                if who == Gwen_name:
                     style "say_balloon" background Frame("images/WordballoonG.png", 50, 50)
                 else:
                     style "say_balloon"
@@ -135,7 +135,7 @@ screen say(who, what, side_image=None, two_window=False, CountWords=0):
                     add "arrow" rotate -90 xzoom -1 xpos 1.03 ypos -0.85
                 else:
                     add "arrow" xalign 0.8
-            elif who == Gwenname:
+            elif who == Gwen_name:
                 add "arrowG" xalign 0.15
             elif who == Player.name or who == "Danger Room":
                 pass
@@ -497,7 +497,7 @@ screen preferences():
                 has vbox
 
                 label _("Transitions")
-                textbutton _("All") action Preference("transitions", "all")
+                textbutton _("all") action Preference("transitions", "all")
                 textbutton _("None") action Preference("transitions", "none")
 
             frame:
@@ -881,6 +881,8 @@ screen status_screen:
             text "Day: [day] [day_of_week]" size 12
         hbox:
             text "Time: [current_time]" size 12
+        hbox:
+            text "Stack depth: [stack_depth]" size 8
     frame:
 
         xpos 920

@@ -69,7 +69,7 @@ label sex_menu_caught_or_angry_lines(Girl):
 
     return
 
-label sex_menu_less_than_five_rounds(Girl):
+label sex_menu_less_than_five_rounds_lines(Girl):
     if Girl == RogueX:
         $ lines = ["We've been at it for a while now, let's take a breather."]
     elif Girl == KittyX:
@@ -1769,9 +1769,9 @@ label begging_lines(Girl, action):
             "I suppose it does not hurt. . .",
             "I suppose it could not hurt. . .",
             "Well, one could not hurt. . .",
-            "[Line]"
-            "[Line]"
-            "[Line]"
+            "[line]"
+            "[line]"
+            "[line]"
             "Well, I suppose.",
             "Well. . . ok.",
             "I could perhaps give it a try.",
@@ -4861,9 +4861,10 @@ label first_time_asking_lines(Girl, action):
         elif action == "handjob":
             $ lines.append("Handjob, huh. . .")
 
-    $ line = renpy.random.choice(lines)
+    if len(lines) > 0:
+        $ line = renpy.random.choice(lines)
 
-    Girl.voice "[line]"
+        Girl.voice "[line]"
 
     return
 

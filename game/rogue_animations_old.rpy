@@ -823,13 +823,13 @@ image NotSlap_Ass:
 
 
 
-label Rogue_Doggy_Launch(Line=primary_action):
+label Rogue_Doggy_Launch(line=primary_action):
     if renpy.showing("Rogue_doggy_animation"):
         return
     $ action_speed = 0
     call Rogue_Hide (1)
-    # show Rogue_doggy_animation zorder 150 at sprite_location(stage_center+50)
-    # with dissolve
+    show Rogue_doggy_animation zorder 150 at sprite_location(stage_center+50)
+    with dissolve
     return
 
 label Rogue_Doggy_Reset:
@@ -871,12 +871,12 @@ image Rogue_sex_legs_Anim0:
     pos (650,230)
 
 
-image Rogue_Sex_Lick_Breasts:
+image Rogue_sex_Lick_Breasts:
     "licking"
     zoom 0.6
     offset (450,270)
 
-image Rogue_Sex_Fondle_Breasts:
+image Rogue_sex_Fondle_Breasts:
     "GropeLeftBreast"
     zoom 1.1
     offset (320,-130)
@@ -895,12 +895,12 @@ image Rogue_hairback_Sex:
     anchor (0.5,0.5)
     rotate -10
 
-image Rogue_Sex_Lick_Pussy:
+image Rogue_sex_Lick_Pussy:
     "licking"
     zoom 0.7
     offset (530,510)
 
-image Rogue_Sex_Lick_Ass:
+image Rogue_sex_Lick_Ass:
     "licking"
     zoom 0.7
     offset (535,590)
@@ -923,82 +923,80 @@ image Rogue_sex_pussy_Fucking0:
 
     contains:
 
-        "images/RogueSex/Rogue_sex_pussy_Open.png"
+        "images/Rogue_sex/Rogue_sex_pussy_Open.png"
     contains:
 
         ConditionSwitch(
                 "not RogueX.pubes", Null(),
-                "True", "images/RogueSex/Rogue_Sex_Pubes_Open.png",
+                "True", "images/Rogue_sex/Rogue_sex_Pubes_Open.png",
                 ),
     contains:
 
-        AlphaMask("Rogue_Sex_Zero_Anim0", "Rogue_Pussy_Open_Mask")
+        AlphaMask("Rogue_sex_Zero_Anim0", "Rogue_Pussy_Open_Mask")
 
 image Rogue_sex_pussy_Fucking1:
 
     contains:
 
-        "images/RogueSex/Rogue_sex_pussy_Open.png"
+        "images/Rogue_sex/Rogue_sex_pussy_Open.png"
     contains:
 
         ConditionSwitch(
                 "not RogueX.pubes", Null(),
-                "True", "images/RogueSex/Rogue_Sex_Pubes_Open.png",
+                "True", "images/Rogue_sex/Rogue_sex_Pubes_Open.png",
                 ),
     contains:
 
-        AlphaMask("Rogue_Sex_Zero_Anim1", "Rogue_Pussy_Open_Mask")
+        AlphaMask("Rogue_sex_Zero_Anim1", "Rogue_Pussy_Open_Mask")
 
 image Rogue_sex_pussy_Fucking2:
 
     contains:
 
-        "images/RogueSex/Rogue_sex_pussy_Fucking.png"
+        "images/Rogue_sex/Rogue_sex_pussy_Fucking.png"
     contains:
 
         ConditionSwitch(
                 "not RogueX.pubes", Null(),
-                "True", "images/RogueSex/Rogue_Sex_Pubes_Fucking.png",
+                "True", "images/Rogue_sex/Rogue_sex_Pubes_Fucking.png",
                 ),
     contains:
 
-        AlphaMask("Rogue_Sex_Zero_Anim2", "Rogue_Pussy_Fucking_Mask")
+        AlphaMask("Rogue_sex_Zero_Anim2", "Rogue_Pussy_Fucking_Mask")
 
 image Rogue_sex_pussy_Fucking3:
 
     contains:
 
-        "images/RogueSex/Rogue_sex_pussy_Fucking.png"
+        "images/Rogue_sex/Rogue_sex_pussy_Fucking.png"
     contains:
 
         ConditionSwitch(
                 "not RogueX.pubes", Null(),
-                "True", "images/RogueSex/Rogue_Sex_Pubes_Fucking.png",
+                "True", "images/Rogue_sex/Rogue_sex_Pubes_Fucking.png",
                 ),
     contains:
 
-        AlphaMask("Rogue_Sex_Zero_Anim3", "Rogue_Pussy_Fucking_Mask")
+        AlphaMask("Rogue_sex_Zero_Anim3", "Rogue_Pussy_Fucking_Mask")
 
 image Rogue_Pussy_Fucking_Mask:
-
     contains:
-        "images/RogueSex/Rogue_sex_pussy_Mask.png"
+        "images/Rogue_sex/Rogue_sex_pussy_mask.png"
 
 image Rogue_Pussy_Open_Mask:
-
     contains:
-        "images/RogueSex/Rogue_sex_pussy_Mask.png"
+        "images/Rogue_sex/Rogue_sex_pussy_mask.png"
         yoffset 3
 
 image Rogue_sex_pussy_Spunk_Heading:
-    "images/Kitty_sex/Kitty_Sex_Spunk_Puss_Over.png"
+    "images/Kitty_sex/Kitty_sex_spunk_pussy_over.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
     xzoom 0.8
 
 
 
-image Rogue_Sex_FingerP_Anim1:
+image Rogue_sex_FingerP_Anim1:
 
     contains:
         subpixel True
@@ -1011,7 +1009,7 @@ image Rogue_Sex_FingerP_Anim1:
             ease 0.6 ypos 520
             repeat
 
-image Rogue_Sex_Dildo_Anim2:
+image Rogue_sex_Dildo_Anim2:
 
     contains:
         subpixel True
@@ -1025,7 +1023,7 @@ image Rogue_Sex_Dildo_Anim2:
             repeat
 
 
-image Rogue_Sex_Zero_Anim0:
+image Rogue_sex_Zero_Anim0:
 
     contains:
         subpixel True
@@ -1033,7 +1031,7 @@ image Rogue_Sex_Zero_Anim0:
         pos (503,530)
         zoom 1.3
 
-image Rogue_Sex_Zero_Anim1:
+image Rogue_sex_Zero_Anim1:
 
     contains:
         subpixel True
@@ -1046,7 +1044,7 @@ image Rogue_Sex_Zero_Anim1:
             ease 3 ypos 525
             repeat
 
-image Rogue_Sex_Zero_Anim2:
+image Rogue_sex_Zero_Anim2:
 
     contains:
         subpixel True
@@ -1059,7 +1057,7 @@ image Rogue_Sex_Zero_Anim2:
             ease 3 ypos 490
             repeat
 
-image Rogue_Sex_Zero_Anim3:
+image Rogue_sex_Zero_Anim3:
 
     contains:
         subpixel True
@@ -1169,7 +1167,7 @@ image Rogue_sex_body_Anim3:
 
 
 
-image Rogue_Sex_FingerA_Anim1:
+image Rogue_sex_FingerA_Anim1:
 
     contains:
         subpixel True
@@ -1195,7 +1193,7 @@ image Rogue_Anal_Dildo_Anim2:
             ease 3 ypos 570
             repeat
 
-image Rogue_Sex_Anal_Fucking0:
+image Rogue_sex_Anal_Fucking0:
 
     contains:
 
@@ -1204,7 +1202,7 @@ image Rogue_Sex_Anal_Fucking0:
 
         AlphaMask("Rogue_Anal_Zero_Anim0", "Rogue_Anal_Fucking_Mask")
 
-image Rogue_Sex_Anal_Fucking1:
+image Rogue_sex_Anal_Fucking1:
 
     contains:
 
@@ -1213,7 +1211,7 @@ image Rogue_Sex_Anal_Fucking1:
 
         AlphaMask("Rogue_Anal_Zero_Anim1", "Rogue_Anal_Fucking_Mask")
 
-image Rogue_Sex_Anal_Fucking2:
+image Rogue_sex_Anal_Fucking2:
 
     contains:
 
@@ -1222,7 +1220,7 @@ image Rogue_Sex_Anal_Fucking2:
 
         AlphaMask("Rogue_Anal_Zero_Anim2", "Rogue_Anal_Fucking_Mask")
 
-image Rogue_Sex_Anal_Fucking3:
+image Rogue_sex_Anal_Fucking3:
 
     contains:
 
@@ -1243,7 +1241,7 @@ image Rogue_Anal_Open_Mask:
         "images/Kitty_sex/Kitty_sex_anus_mask.png"
         yoffset 3
 
-image Rogue_Sex_Anal_Heading:
+image Rogue_sex_Anal_Heading:
     "images/Kitty_sex/Kitty_sex_anus_open.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
@@ -1258,7 +1256,7 @@ image Rogue_Sex_Anal_Heading:
         repeat
 
 image Rogue_Anal_Spunk_Heading_Over:
-    "images/Kitty_sex/Kitty_Sex_Spunk_Anal_Over.png"
+    "images/Kitty_sex/Kitty_sex_Spunk_Anal_Over.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
     xzoom 0.8
@@ -1270,7 +1268,7 @@ image Rogue_Anal_Spunk_Heading_Over:
         ease 2.25 xzoom 0.8
         repeat
 image Rogue_Anal_Spunk_Heading_Under:
-    "images/Kitty_sex/Kitty_Sex_Spunk_Anal_Under.png"
+    "images/Kitty_sex/Kitty_sex_Spunk_Anal_Under.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
     xzoom 0.6
@@ -1283,7 +1281,7 @@ image Rogue_Anal_Spunk_Heading_Under:
         ease 2.25 xzoom 0.6
         repeat
 
-image Rogue_Sex_Anal_Tip:
+image Rogue_sex_Anal_Tip:
     "images/Kitty_sex/Kitty_sex_anus_open.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
@@ -1672,25 +1670,25 @@ transform Rogue_sex_body_FootAnim0A():
 
 
 
-label Rogue_Sex_Launch(Line=primary_action):
-    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
+label Rogue_sex_Launch(line=primary_action):
+    $ girl_offhand_action = None if girl_offhand_action == "handjob" else girl_offhand_action
 
-    $ Line = "solo" if not Line else Line
+    $ line = "solo" if not line else line
     $ Player.sprite = 1
-    if Line == "sex":
+    if line == "sex":
         $ Player.cock_position = "sex"
         if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
-            $ offhand_action = 0
-    elif Line == "anal":
+            $ offhand_action = None
+    elif line == "anal":
         $ Player.cock_position = "anal"
         if offhand_action in ("finger_ass","dildo_anal","eat_ass"):
-            $ offhand_action = 0
-    elif Line == "hotdog":
+            $ offhand_action = None
+    elif line == "hotdog":
         $ Player.cock_position = "out"
-    elif Line == "footjob":
+    elif line == "footjob":
         $ show_feet = 1
         $ Player.cock_position = "footjob"
-    elif Line == "massage":
+    elif line == "massage":
         $ Player.sprite = 0
         $ Player.cock_position = 0
     else:
@@ -1699,20 +1697,20 @@ label Rogue_Sex_Launch(Line=primary_action):
         $ action_speed = 0
 
     if RogueX.pose == "doggy":
-        call Rogue_Doggy_Launch (Line)
+        call Rogue_Doggy_Launch (line)
         return
     if renpy.showing("Rogue_sex_animation"):
         return
     $ action_speed = 0
     call Rogue_Hide (1)
-    # show Rogue_sex_animation zorder 150
-    #
-    #
-    #
-    # with dissolve
+    show Rogue_sex_animation zorder 150
+
+
+
+    with dissolve
     return
 
-label Rogue_Sex_Reset:
+label Rogue_sex_Reset:
     if renpy.showing("Rogue_doggy_animation"):
         call Rogue_Doggy_Reset
         return
@@ -1744,13 +1742,13 @@ label Rogue_Sex_Reset:
 
 
 
-label Rogue_BJ_Launch(Line=primary_action):
+label Rogue_BJ_Launch(line=primary_action):
 
     if renpy.showing("Rogue_blowjob_animation"):
         return
 
     call Rogue_Hide
-    if Line == "L" or Line == "cum":
+    if line == "L" or line == "cum":
         show Rogue_sprite zorder RogueX.sprite_layer at sprite_location(stage_center):
             alpha 1
 
@@ -1762,7 +1760,7 @@ label Rogue_BJ_Launch(Line=primary_action):
             zoom 2.5 offset (70,140)
         with dissolve
 
-    if taboo and Line == "L":
+    if taboo and line == "L":
 
         if len(Present) >= 2:
             if Present[0] != RogueX:
@@ -1771,7 +1769,7 @@ label Rogue_BJ_Launch(Line=primary_action):
                 "[RogueX.name] looks back at [Present[1].name] to see if she's watching."
         else:
             "[RogueX.name] looks around to see if anyone can see her."
-    if Line == "L":
+    if line == "L":
         if not RogueX.action_counter["blowjob"]:
             "[RogueX.name] hesitantly pulls down your pants and touches her mouth to your cock."
         else:
@@ -1779,13 +1777,13 @@ label Rogue_BJ_Launch(Line=primary_action):
 
     $ action_speed = 0
 
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "blowjob"
 
     show Rogue_sprite zorder RogueX.sprite_layer:
         alpha 0
-    # show Rogue_blowjob_animation zorder 150:
-    #     pos (645,510)
+    show Rogue_blowjob_animation zorder 150:
+        pos (645,510)
     return
 
 label Rogue_BJ_Reset:
@@ -1914,7 +1912,7 @@ transform Zero_TJ_Cock_2():
 
 
 
-label Rogue_TJ_Launch(Line=primary_action):
+label Rogue_TJ_Launch(line=primary_action):
 
     if renpy.showing("Rogue_TJ_Animation"):
         return
@@ -1943,7 +1941,7 @@ label Rogue_TJ_Launch(Line=primary_action):
 
     call Rogue_First_Topless
 
-    if not RogueX.action_counter["titjob"] and Line == "L":
+    if not RogueX.action_counter["titjob"] and line == "L":
         if not RogueX.bra and not RogueX.top:
             "As you pull out your cock, [RogueX.name] hesitantly places it between her breasts and starts to rub them up and down the shaft."
         elif RogueX.bra and not RogueX.top:
@@ -1952,7 +1950,7 @@ label Rogue_TJ_Launch(Line=primary_action):
             "As you pull out your cock, [RogueX.name] hesitantly places it under her [RogueX.top], between her breasts and starts to rub them up and down the shaft."
         else:
             "As you pull out your cock, [RogueX.name] hesitantly places it under her clothes, between her breasts and starts to rub them up and down the shaft."
-    elif Line == "L":
+    elif line == "L":
         if not RogueX.bra and not RogueX.top:
             "As you pull out your cock, [RogueX.name] places it between her breasts and starts to rub them up and down the shaft."
         elif RogueX.bra and not RogueX.top:
@@ -1963,14 +1961,14 @@ label Rogue_TJ_Launch(Line=primary_action):
             "As you pull out your cock, [RogueX.name] places it under her clothes, between her breasts and starts to rub them up and down the shaft."
     else:
         "[RogueX.name] wraps her tits around your cock."
-    show blackscreen onlayer black with dissolve
+    show black_screen onlayer black with dissolve
     show Rogue_sprite zorder RogueX.sprite_layer:
         alpha 0
     $ action_speed = 0
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "titjob"
-    # show Rogue_TJ_Animation zorder 150 at sprite_location(stage_right)
-    hide blackscreen onlayer black with dissolve
+    show Rogue_TJ_Animation zorder 150 at sprite_location(stage_right)
+    hide black_screen onlayer black with dissolve
     return
 
 label Rogue_TJ_Reset:
@@ -2053,7 +2051,7 @@ transform Rogue_Hand_2():
 
 
 
-label Rogue_HJ_Launch(Line=primary_action):
+label Rogue_HJ_Launch(line=primary_action):
     if renpy.showing("Rogue_HJ_Animation"):
         $ primary_action = "handjob"
         return
@@ -2069,7 +2067,7 @@ label Rogue_HJ_Launch(Line=primary_action):
         alpha 1
         ease 1 zoom 1.7 xpos 700 offset (0,200)
 
-    if taboo and Line == "L":
+    if taboo and line == "L":
 
         if len(Present) >= 2:
             if Present[0] != RogueX:
@@ -2082,7 +2080,7 @@ label Rogue_HJ_Launch(Line=primary_action):
             "As you pull out your cock, [RogueX.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
         else:
             "She then leans over and grabs your cock."
-    elif Line == "L":
+    elif line == "L":
         if not RogueX.action_counter["handjob"] and RogueX.arms:
             "As you pull out your cock, [RogueX.name] pulls off her gloves, and hesitantly reaches for it. She starts to roughly stroke on it."
         else:
@@ -2091,9 +2089,9 @@ label Rogue_HJ_Launch(Line=primary_action):
         "[RogueX.name] bends down and grabs your cock."
 
     $ action_speed = 0
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "handjob"
-    # show Rogue_HJ_Animation zorder 150 at sprite_location(RogueX.sprite_location) with easeinbottom
+    show Rogue_HJ_Animation zorder 150 at sprite_location(RogueX.sprite_location) with easeinbottom
     return
 
 label Rogue_HJ_Reset:
@@ -2964,7 +2962,7 @@ label Rogue_Pos_Reset(T=0, Set=0):
     return
 
 label Rogue_Hide(Sprite=0):
-    call Rogue_Sex_Reset
+    call Rogue_sex_Reset
     hide Rogue_sex_animation
     hide Rogue_doggy_animation
     hide Rogue_HJ_Animation
@@ -2974,8 +2972,8 @@ label Rogue_Hide(Sprite=0):
         hide Rogue_sprite
     return
 
-image Cellphone:
-    "images/Cellphone.png"
+image cellphone:
+    "images/cellphone.png"
     xoffset 0
     yoffset 100
 
@@ -3012,14 +3010,14 @@ image PhoneScreen:
         zoom 1.1
 
 
-image DressScreen:
+image dress_screen:
 
     contains:
 
-        "images/DressScreen.png"
+        "images/dress_screen.png"
     contains:
 
-        AlphaMask("images/DressScreenShadow.png","DressShadow")
+        AlphaMask("images/dress_screenShadow.png","DressShadow")
     zoom 1
     offset (375,225)
 
@@ -3535,7 +3533,7 @@ image ClockRed:
         anchor (0.5,0.5)
         rotate -(int(round *3.6-180))
 
-image BlueScreen:
+image blue_screen:
 
     alpha 0.1
     contains:

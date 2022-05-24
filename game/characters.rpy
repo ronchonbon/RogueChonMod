@@ -981,7 +981,7 @@ init python:
         def change_outfit(self, temp_outfit = 5, undressed = 0, outfit_changed = 1):
             temp_outfit = temp_outfit if temp_outfit else self.outfit
 
-            if self.location == bg_current and renpy.showing("NightMask", layer = 'nightmask') and time_index == 0:
+            if self.location == bg_current and renpy.showing("night_mask", layer = 'nightmask') and time_index == 0:
                 return
 
             if self.location not in ["bg_showerroom", "bg_pool"] or (temp_outfit not in ["nude", "swimwear", "_towel"]):
@@ -1235,7 +1235,7 @@ init python:
             if self.legs == "mesh_pants":
                 return 2
             if self.legs:
-                return True0
+                return 10
 
 
             return False
@@ -1263,7 +1263,7 @@ init python:
             if self.hose == "_pantyhose":
                 return 6
             if self.hose == "_tights":
-                return True0
+                return 10
             if self.hose == "stockings and gaterbelt":
                 return 4
             if self.hose == "_ripped_pantyhose":
@@ -1329,7 +1329,7 @@ init python:
                         C += 1
             return C
 
-        def GLG(self, ChrB = 0, Check=200, Modifier = 1, Auto = 0, Jealousy = 0, Ok = 0, Likes=0):
+        def check_if_likes(self, ChrB = 0, Check=200, Modifier = 1, Auto = 0, Jealousy = 0, Ok = 0, Likes=0):
             Jealousy = 0
             Likes = self.likes[ChrB.tag]
 
@@ -1418,7 +1418,7 @@ init python:
 
             return return_value
 
-        def nameCheck(self, counter = 0):
+        def name_check(self, counter = 0):
 
 
 
@@ -1615,223 +1615,3 @@ init python:
                     self.change_stat("inhibition", 50, -1)
                     return True
             return False
-
-
-
-
-
-
-
-
-
-label Clothing_Schedule_Check(Girl=0, outfit_changed=0, value=0, Count=0):
-
-
-
-
-
-
-
-
-    while Count < 9:
-        if Girl.clothing[Count] == outfit_changed:
-            if value:
-
-                if Girl.clothing[Count] == 3 and Girl.first_custom_outfit[0] == 2:
-                    pass
-                elif Girl.clothing[Count] == 5 and Girl.second_custom_outfit[0] == 2:
-                    pass
-                elif Girl.clothing[Count] == 6 and Girl.third_custom_outfit[0] == 2:
-                    pass
-                elif Girl.clothing[Count] == 4 and Girl.gym_clothes[0] != 1:
-                    pass
-                else:
-                    $ Girl.clothing[Count] = 0
-            else:
-                $ Girl.clothing[Count] = 0
-        $ Count += 1
-    return
-
-
-label Emergency_Clothing_Reset:
-    "This resets all customized clothing to their defaults."
-    menu:
-        "Do you want to continue?"
-        "Yes":
-            $ RogueX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ RogueX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ RogueX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ RogueX.first_casual_outfit = [2,"_gloves", "_skirt", "_mesh_top", "_spiked_collar", "_tank", "_black_panties", "", "", "_tights", 0]
-            $ RogueX.second_casual_outfit = [2,"_gloves", "_pants", "_pink_top", "_spiked_collar", "_buttoned_tank", "_black_panties", "", "", "", 0]
-            $ RogueX.gym_clothes = [0, "_gloves", "", "_hoodie", "", "_sports_bra", "_shorts", "", "", "", 0]
-            $ RogueX.sleepwear = [0, "", "", "", "", "_tank", "_green_panties", "", "", "", 0]
-            $ RogueX.swimwear = [0, "", "", "_hoodie", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ RogueX.halloween_costume = [2,"_gloves", "_skirt", "", "", "_tube_top", "_black_panties", "_sweater", "_cosplay", "", 0]
-            $ RogueX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ RogueX.outfit = "casual1"
-            $ RogueX.today_outfit = "casual1"
-
-            $ KittyX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ KittyX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ KittyX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ KittyX.first_casual_outfit = [2,0, "_capris", "_pink_top", "_gold_necklace", "_cami", "_green_panties", "", "", "", 0]
-            $ KittyX.second_casual_outfit = [2,0, "_black_jeans", "_red_shirt", "", "_bra", "_green_panties", "", "", "", 0]
-            $ KittyX.gym_clothes = [0, "", "_shorts", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
-            $ KittyX.sleepwear = [0, "", "_shorts", "", "", "_cami", "_green_panties", "", "", "", 0]
-            $ KittyX.swimwear = [0, "", "_blue_skirt", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ KittyX.halloween_costume = [2,0, "_dress", "_jacket", "_flower_necklace", "_dress", "_lace_panties", "", "", "", 0]
-            $ KittyX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ KittyX.outfit = "casual1"
-            $ KittyX.today_outfit = "casual1"
-
-            $ EmmaX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ EmmaX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ EmmaX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ EmmaX.first_casual_outfit = [2,0, "_pants", "_jacket", "_choker", "_corset", "_white_panties", "", "", "", 0]
-            $ EmmaX.second_casual_outfit = [2,"_gloves", "_pants", "", "_choker", "_corset", "_white_panties", "", "", "", 0]
-            $ EmmaX.gym_clothes = [0, "", "", "", "", "_sports_bra", "sports_panties", "", "", "", 0]
-            $ EmmaX.sleepwear = [0, "", "", "", "", "_corset", "_white_panties", "", "", "", 0]
-            $ EmmaX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ EmmaX.halloween_costume =  [2,"_gloves", "_dress", "_dress", "_choker", "", "_lace_panties", "", "_hat", "_stockings_and_garterbelt", 0]
-            $ EmmaX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ EmmaX.outfit = "casual1"
-            $ EmmaX.today_outfit = "casual1"
-
-            $ LauraX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ LauraX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ LauraX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ LauraX.first_casual_outfit = [2,"wrists", "leather_pants", "", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
-            $ LauraX.second_casual_outfit = [2,0, "_skirt", "_jacket", "leash_choker", "leather_bra", "_black_panties", "", "", "", 0]
-            $ LauraX.gym_clothes = [0, "wrists", "leather_pants", "", "", "leather_bra", "_black_panties", "", "", "", 0]
-            $ LauraX.sleepwear = [0, "", "", "", "", "leather_bra", "leather_panties", "", "", "", 0]
-            $ LauraX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ LauraX.halloween_costume = [2,"_gloves", "other_skirt", "", "", "white_tank", "_black_panties", "suspenders", "", "black stockings", 0]
-            $ LauraX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ LauraX.outfit = "casual1"
-            $ LauraX.today_outfit = "casual1"
-
-            $ JeanX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JeanX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JeanX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JeanX.first_casual_outfit = [2,0, "_pants", "pink_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.second_casual_outfit = [2,0, "_skirt", "green_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.gym_clothes = [0, "", "yoga_pants", "", "", "_sports_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.sleepwear = [0, "", "", "pink_shirt", "", "green_bra", "_green_panties", "", "", "", 0]
-            $ JeanX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ JeanX.halloween_costume =  [2,0, "_shorts", "yellow_shirt", "", "green_bra", "_green_panties", "suspenders", "pony", "", 0]
-            $ JeanX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ JeanX.outfit = "casual1"
-            $ JeanX.today_outfit = "casual1"
-
-            $ StormX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ StormX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ StormX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ StormX.first_casual_outfit = [2,0, "_skirt", "white_shirt", "", "black_bra", "_white_panties", "", "", "", 0]
-            $ StormX.second_casual_outfit = [2,0, "_pants", "_jacket", "", "_tube_top", "_white_panties", "", "", "", 0]
-            $ StormX.gym_clothes = [0, "", "yoga_pants", "", "", "_sports_bra", "_white_panties", "", "", "",10]
-            $ StormX.sleepwear = [0, "", "", "white_shirt", "", "", "_white_panties", "", "", "",25]
-            $ StormX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ StormX.halloween_costume = [2,0, "", "", "ring_necklace", "cos_bra", "cos_panties", "rings", "_short", "", 0]
-            $ StormX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ StormX.outfit = "casual1"
-            $ StormX.today_outfit = "casual1"
-
-            $ JubesX.first_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JubesX.second_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JubesX.third_custom_outfit = [0, "", "", "", "", "", "", "", "", "", 0]
-            $ JubesX.first_casual_outfit = [2,0, "_shorts", "_red_shirt", "", "_sports_bra", "_blue_panties", "_jacket", "", "", 0]
-            $ JubesX.second_casual_outfit = [2,0, "_pants", "_black_shirt", "", "_sports_bra", "_blue_panties", "_jacket", "", "", 0]
-            $ JubesX.gym_clothes = [0, "", "_pants", "", "", "_sports_bra", "_blue_panties", "", "", "",10]
-            $ JubesX.sleepwear = [0, "", "", "", "", "_sports_bra", "_blue_panties", "", "", "",25]
-            $ JubesX.swimwear = [0, "", "", "", "", "_bikini_top", "_bikini_bottoms", "", "", "", 0]
-            $ JubesX.halloween_costume = [0, "", "_pants", "_black_shirt", "", "_sports_bra", "_blue_panties", "_jacket", "", "", 0]
-            $ JubesX.clothing = [0, "", "", "", "", "", "", "", "", 0]
-            $ JubesX.outfit = "casual1"
-            $ JubesX.today_outfit = "casual1"
-
-            "Done."
-            "You will now need to set their custom outfits again."
-        "No":
-            pass
-    return
-
-
-
-
-label GirlsAngry(Girls=0, temp_Girls=[]):
-
-    $ approval_bonus = 0
-    $ temp_Girls = all_Girls[:]
-    while temp_Girls:
-        if temp_Girls[0].location == bg_current and "_angry" in temp_Girls[0].recent_history:
-            if bg_current == temp_Girls[0].home:
-                if temp_Girls[0] == RogueX:
-                    ch_r "You should get out, I'm fix'in ta throw down."
-                elif temp_Girls[0] == KittyX:
-                    ch_k "You should get out of here, I can't even look at you right now."
-                elif temp_Girls[0] == EmmaX:
-                    ch_e "You should leave, or do you want to test me?"
-                elif temp_Girls[0] == LauraX:
-                    ch_l "You should leave."
-                elif temp_Girls[0] == JeanX:
-                    ch_j "Out, NOW!"
-                elif temp_Girls[0] == StormX:
-                    ch_s "Out!"
-                elif temp_Girls[0] == JubesX:
-                    ch_v "Get out!"
-                "You head back to your room."
-                $ Party = []
-                $ renpy.pop_call()
-                jump player_room_entry
-            else:
-                $ temp_Girls[0].location = temp_Girls[0].home
-            if temp_Girls[0] in Party:
-                $ Party.remove(temp_Girls[0])
-            if Girls:
-                ". . . and so does [temp_Girls[0].name]."
-            else:
-                "[temp_Girls[0].name] storms off."
-                if temp_Girls[0] == StormX:
-                    ". . . so to speak."
-            $ Girls += 1
-            if temp_Girls[0] == RogueX:
-                hide Rogue_sprite with easeoutleft
-            elif temp_Girls[0] == KittyX:
-                hide Kitty_sprite with easeoutleft
-            elif temp_Girls[0] == EmmaX:
-                hide Emma_Sprite with easeoutleft
-            elif temp_Girls[0] == LauraX:
-                hide Laura_Sprite with easeoutleft
-            elif temp_Girls[0] == JeanX:
-                hide Jean_Sprite with easeoutleft
-            elif temp_Girls[0] == StormX:
-                hide Storm_Sprite with easeoutleft
-            elif temp_Girls[0] == JubesX:
-                hide Jubes_Sprite with easeoutleft
-        $ temp_Girls.remove(temp_Girls[0])
-    return
-
-
-
-label Lastnamer(wordcount=0, Splitname=0, Lastname=0):
-
-    $ wordcount = Player.name.count(" ")
-
-
-    $ Splitname = Player.name.split()
-
-
-    $ Lastname = "Mr. " + Splitname[wordcount]
-    return Lastname
-
-
-
-
-label DrainAll(word=0, Recent=1, Daily=1, Traits=0):
-
-
-    $ temp_Girls = all_Girls[:]
-    while temp_Girls:
-        $ temp_Girls[0].drain_word(word,Recent,Daily,Traits)
-        $ temp_Girls.remove(temp_Girls[0])
-    return

@@ -116,12 +116,12 @@ label WardrobeEditor(Chr=0):
                         "Doggy" if Chr == RogueX:
                             $ Chr.pose = "doggy"
                             if not renpy.showing(Chr.tag+"_Doggy"):
-                                call expression Chr.tag + "_Sex_Launch"
+                                call expression Chr.tag + "_sex_launch"
                             else:
                                 call expression Chr.tag + "_Sex_Reset"
                         "Sexpose" if Chr != RogueX:
                             if not renpy.showing(Chr.tag+"_SexSprite"):
-                                call expression Chr.tag + "_Sex_Launch"
+                                call expression Chr.tag + "_sex_launch"
                             else:
                                 call expression Chr.tag + "_Sex_Reset"
                         "Back":

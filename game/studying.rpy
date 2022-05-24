@@ -10,7 +10,6 @@ label study:
 
     if not Party:
         "There's nobody here to study with."
-
         menu:
             "Study anyway?"
             "Yes":
@@ -104,13 +103,13 @@ label study:
 
     if len(Party) >= 2:
         $ Party[1].change_stat("love", 80, 2)
-        $ Party[0].GLG(Party[1], 700, 5, 1)
-        $ Party[1].GLG(Party[0], 700, 5, 1)
+        $ Party[0].check_if_likes(Party[1], 700, 5, 1)
+        $ Party[1].check_if_likes(Party[0], 700, 5, 1)
         $ Party[1].XP += 5
 
     $ D20 = renpy.random.randint(1, 20)
 
-    if len(Party) >= 2 and EmmaX in Party and "three" not in EmmaX.history:
+    if len(Party) >= 2 and EmmaX in Party and "threesome" not in EmmaX.history:
         $ frisky_possible = False
     else:
         $ frisky_possible = True
@@ -155,7 +154,7 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
 
     if Party[0] == EmmaX and "classcaught" not in EmmaX.history:
         "[EmmaX.name] leans close to you for a moment, but then catches herself and pulls back."
-    elif Party[0] == EmmaX and Second and ("three" not in EmmaX.history or "taboo" not in EmmaX.history):
+    elif Party[0] == EmmaX and Second and ("threesome" not in EmmaX.history or "taboo" not in EmmaX.history):
         "[EmmaX.name] starts to lean close to you, but then notices [Second.name]."
 
         $ Party[0].change_face("_sly",1,Eyes="_side")
@@ -270,9 +269,9 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
 
                 "[Party[1].name] glowers at you a bit."
 
-                $ Party[0].GLG(Second,700,5,1)
+                $ Party[0].check_if_likes(Second,700,5,1)
 
-                $ Party[1].GLG(Party[0],700,5,1)
+                $ Party[1].check_if_likes(Party[0],700,5,1)
         elif len(Party) == 2:
             call check_if_second_minds(Party[0], Party[1])
 
@@ -370,8 +369,8 @@ label frisky_study(Prime_Bonus=0, Second_Bonus=0):
 
             call before_action
         if len(Party) >= 2:
-            $ Party[0].GLG(Party[1], 900, 10, 1)
-            $ Party[1].GLG(Party[0], 900, 10, 1)
+            $ Party[0].check_if_likes(Party[1], 900, 10, 1)
+            $ Party[1].check_if_likes(Party[0], 900, 10, 1)
     else:
         return
 

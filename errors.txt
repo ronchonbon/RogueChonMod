@@ -2,7 +2,9 @@
 errors listed below, and try again.
 
 
-File "game/shower.rpy", line 440: indentation mismatch.
+File "game/actions.rpy", line 158: expected statement.
+    focused_Girl.action_counter["kiss"] += 1
+                                        ^
 
 Ren'Py Version: Ren'Py 7.4.11.2266
-Mon May 23 06:32:47 2022
+Mon May 23 21:16:15 2022

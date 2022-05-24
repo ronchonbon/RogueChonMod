@@ -63,7 +63,7 @@ label player_room_entry:
 
     $ Nearby = []
 
-    call Gym_Clothes_Off
+    call change_out_of_gym_clothes
     call event_calls
     call set_the_scene
 
@@ -72,22 +72,22 @@ label player_room:
 
     $ Player.drain_word("traveling", 1, 0)
 
-    call taboo_Level
+    call taboo_level
     call set_the_scene(silent = True)
-    call QuickEvents
-    call checkout(1)
+    call quick_event
+    call checkout(total = True)
 
     if round <= 10:
-        call round_10
+        call tenth_round
         call girls_location
         call event_calls
 
-    call GirlsAngry
+    call are_girls_angry
 
     menu:
         "You are in your room. What would you like to do?"
         "Chat":
-            call Chat
+            call chat
         "Study":
             call study
         "Lock the door" if not door_locked:
@@ -95,21 +95,21 @@ label player_room:
 
             $ door_locked = True
 
-            call taboo_Level
+            call taboo_level
         "Unlock the door" if door_locked:
             "You unlock the door."
 
             $ door_locked = False
 
-            call taboo_Level
+            call taboo_level
         "Sleep" if time_index >= 3: #night time
-            call round_10
+            call tenth_round
             call girls_location
             call event_calls
         "Wait" if time_index < 3: #not night time
             "You wait around a bit."
 
-            call round_10
+            call tenth_round
             call girls_location
             call event_calls
         "Shop":
@@ -129,9 +129,9 @@ label girls_room_entry(Girl):
 
     $ Nearby = []
 
-    call Gym_Clothes_Off #call Gym_Clothes
+    call change_out_of_gym_clothes #call Gym_Clothes
     call set_the_scene(entering = 1)
-    call taboo_Level
+    call taboo_level
 
     $ Player.recent_history.append("traveling")
 
@@ -465,17 +465,17 @@ label girls_room(Girl):
 
     $ Player.drain_word("traveling", 1, 0)
 
-    call taboo_Level
+    call taboo_level
     call set_the_scene(silent = True)
-    call QuickEvents
-    call checkout(1)
+    call quick_event
+    call checkout(total = True)
 
     if round <= 10:
-        call round_10
+        call tenth_round
         call girls_location
         call event_calls
 
-    call GirlsAngry
+    call are_girls_angry
 
     label girls_room_menu:
 
@@ -485,9 +485,9 @@ label girls_room(Girl):
         "You are in [Girl.name]'s room, but she isn't here. What would you like to do?"
 
     menu:
-        "[line]"
+        extend ""
         "Chat":
-            call Chat
+            call chat
         "Would you like to study?":
             call study
         "Lock the door" if not door_locked:
@@ -511,21 +511,21 @@ label girls_room(Girl):
 
                 $ door_locked = True
 
-                call taboo_Level
+                call taboo_level
         "Unlock the door" if door_locked:
             "You unlock the door."
 
             $ door_locked = False
 
-            call taboo_Level
+            call taboo_level
         "Sleep" if time_index >= 3: #night time
-            call round_10
+            call tenth_round
             call girls_location
             call event_calls
         "Wait" if time_index < 3: #not night time
             "You wait around a bit."
 
-            call round_10
+            call tenth_round
             call girls_location
             call event_calls
         "Leave":
@@ -549,8 +549,8 @@ label campus_entry:
 
     $ Nearby = []
 
-    call Gym_Clothes_Off
-    call taboo_Level
+    call change_out_of_gym_clothes
+    call taboo_level
     call event_calls
     call set_the_scene
 
@@ -559,12 +559,12 @@ label campus:
 
     $ Player.drain_word("traveling",1,0)
 
-    call taboo_Level
+    call taboo_level
     call set_the_scene(silent = True)
-    call QuickEvents
-    call checkout (1)
+    call quick_event
+    call checkout(total = True)
 
-    call GirlsAngry
+    call are_girls_angry
 
     if time_index == 2 and "going_on_date" in Player.daily_history:
         menu:
@@ -590,7 +590,7 @@ label campus:
     menu:
         "You are in the university square. What would you like to do?"
         "Chat":
-            call Chat
+            call chat
         "Wait" if time_index < 3:
             "You wait around a bit."
 
@@ -603,11 +603,11 @@ label campus:
     jump campus
 
 label campus_map:
-    $ primary_action = 0
-    $ offhand_action = 0
-    $ girl_offhand_action = 0
-    $ second_girl_primary_action = 0
-    $ second_girl_offhand_action = 0
+    $ primary_action = None
+    $ offhand_action = None
+    $ girl_offhand_action = None
+    $ second_girl_primary_action = None
+    $ second_girl_offhand_action = None
 
     $ bg_current = "bg_campus"
 
@@ -629,8 +629,8 @@ label classroom_entry:
     $ Present = []
     $ Nearby = []
 
-    call Gym_Clothes_Off
-    call taboo_Level
+    call change_out_of_gym_clothes
+    call taboo_level
     call event_calls
     call set_the_scene(0)
 
@@ -646,10 +646,10 @@ label classroom:
         $ Player.drain_word("goto",1,0)
         $ Player.drain_word("traveling",1,0)
 
-    call taboo_Level
+    call taboo_level
     call set_the_scene(silent = True)
-    call QuickEvents
-    call checkout (1)
+    call quick_event
+    call checkout(total = True)
 
     if round <= 10:
         if time_index >= 3:
@@ -661,7 +661,7 @@ label classroom:
         call event_calls
         call girls_location
 
-    call GirlsAngry
+    call are_girls_angry
 
     if EmmaX.location == "bg_teacher":
         "As you sit down, you see [EmmaX.name] at the podium. What would you like to do?"
@@ -676,23 +676,23 @@ label classroom:
         extend ""
         "Take the morning class" if weekday < 5 and time_index == 0:
             if round >= 30:
-                jump Take_Class
+                jump take_class
             else:
                 "Class is already letting out. You can hang out until the next one."
         "Take the afternoon class" if weekday < 5 and time_index == 1:
             if round >= 30:
-                jump Take_Class
+                jump take_class
             else:
                 "Class is already letting out. You can hang out until they lock up for the night."
         "Chat":
-            call Chat
+            call chat
         "Lock the door" if "locked" not in Player.traits:
             if weekday >=5 or time_index >= 2:
                 "You lock the door."
 
                 $ Player.traits.append("locked")
 
-                call taboo_Level
+                call taboo_level
             else:
                 "You can't really do that during class."
         "Unlock the door" if "locked" in Player.traits:
@@ -700,7 +700,7 @@ label classroom:
 
             $ Player.traits.remove("locked")
 
-            call taboo_Level
+            call taboo_level
         "Wait" if time_index < 3:
             "You hang out for a bit."
 
@@ -709,9 +709,9 @@ label classroom:
             call event_calls
 
             if time_index < 2:
-                $ Line = "A new class is in session. What would you like to do?"
+                $ line = "A new class is in session. What would you like to do?"
             else:
-                $ Line = "Classes have let out for the day. What would you like to do?"
+                $ line = "Classes have let out for the day. What would you like to do?"
         "Leave":
             call world_map
 
@@ -728,7 +728,7 @@ label danger_room_entry:
     $ Nearby = []
 
     call gym_entry
-    call taboo_Level
+    call taboo_level
     call event_calls
     call set_the_scene
 
@@ -737,10 +737,10 @@ label danger_room:
 
     $ Player.drain_word("traveling",1,0)
 
-    call taboo_Level
+    call taboo_level
     call set_the_scene(silent = True)
-    call QuickEvents
-    call checkout (1)
+    call quick_event
+    call checkout(total = True)
 
     if round <= 10:
         "Looks like shifts are changing. . ."
@@ -753,9 +753,9 @@ label danger_room:
         call wait
         call girls_location
         call event_calls
-        call Gym_Clothes_Off
+        call change_out_of_gym_clothes
 
-    call GirlsAngry
+    call are_girls_angry
 
     menu:
         "This is the Danger Room. What would you like to do?"
@@ -763,18 +763,18 @@ label danger_room:
             if time_index >= 3:
                 "The Danger Room has been powered off for the night, maybe take a break."
             elif round >= 30:
-                jump Training
+                jump training
             else:
                 "There really isn't time to do much before the next rotation, maybe wait a bit."
         "Chat":
-            call Chat
+            call chat
         "Lock the door" if "locked" not in Player.traits:
             if time_index >= 3:
                 "You lock the door."
 
                 $ Player.traits.append("locked")
 
-                call taboo_Level
+                call taboo_level
             else:
                 "You can't really do that during free hours."
         "Unlock the door" if "locked" in Player.traits:
@@ -782,14 +782,14 @@ label danger_room:
 
             $ Player.traits.remove("locked")
 
-            call taboo_Level
+            call taboo_level
         "Wait" if time_index < 3:
             "You hang out for a bit."
 
             call wait
             call girls_location
             call event_calls
-            call Gym_Clothes_Off
+            call change_out_of_gym_clothes
         "Leave":
             call exit_gym
             jump campus_map
@@ -806,7 +806,7 @@ label shower_entry:
     $ Nearby = []
     $ Present = []
 
-    call taboo_Level
+    call taboo_level
     call set_the_scene (0, 1, 0)
 
     if round <= 10 or len(Party) >= 2:
@@ -866,7 +866,7 @@ label shower_entry:
 
         $ temp_Girls.remove(temp_Girls[0])
 
-    call set_the_scene (Dress=0)
+    call set_the_scene(check_if_dressed = False)
 
     if Party:
         $ line = " and " + Party[0].name
@@ -1007,10 +1007,10 @@ label shower_room:
 
     $ Player.drain_word("traveling",1,0)
 
-    call taboo_Level
-    call set_the_scene(Dress=0)
-    call QuickEvents
-    call checkout (1)
+    call taboo_level
+    call set_the_scene(check_if_dressed = False)
+    call quick_event
+    call checkout(total = True)
 
     if round <= 10:
         if time_index == 3:
@@ -1021,12 +1021,12 @@ label shower_room:
         call event_calls
         call girls_location
 
-    call GirlsAngry
+    call are_girls_angry
 
     menu:
         "You're in the showers. What would you like to do?"
         "Chat":
-            call Chat
+            call chat
         "Shower" if round > 30:
             call showering
         "Wait" if time_index < 3:
@@ -1046,9 +1046,9 @@ label shower_room:
 
                 while temp_Girls:
                     if temp_Girls[0].location != bg_current and "showered" not in temp_Girls[0].daily_history and (temp_Girls[0].location == temp_Girls[0].home or temp_Girls[0].location == "bg_dangerroom"):
-                        $ Nearby.append(Line[0])
+                        $ Nearby.append(line[0])
 
-                    $ temp_Girls.remove(Line[0])
+                    $ temp_Girls.remove(line[0])
 
                 if Nearby:
                     $ renpy.random.shuffle(Nearby)
@@ -1061,7 +1061,7 @@ label shower_room:
 
                     $ Nearby[0].location = "nearby"
         "Leave":
-            call QuickEvents
+            call quick_event
             call world_map
             call change_out_of_towels
 
@@ -1077,8 +1077,8 @@ label pool_entry:
 
     $ Nearby = []
 
-    call Gym_Clothes_Off
-    call taboo_Level
+    call change_out_of_gym_clothes
+    call taboo_level
     call event_calls
     call SwimSuit
     call set_the_scene
@@ -1088,10 +1088,10 @@ label pool:
 
     $ Player.drain_word("traveling",1,0)
 
-    call taboo_Level
+    call taboo_level
     call set_the_scene(silent = True, Dress=0)
-    call QuickEvents
-    call checkout (1)
+    call quick_event
+    call checkout(total = True)
 
     if round <= 10:
         if time_index >= 3:
@@ -1103,12 +1103,12 @@ label pool:
         call event_calls
         call girls_location
 
-    call GirlsAngry
+    call are_girls_angry
 
     menu:
         "You're at the pool. What would you like to do?"
         "Chat":
-            call Chat
+            call chat
         "Want to sunbathe?" if time_index < 2:
             call Pool_Sunbathe
 
@@ -1143,8 +1143,8 @@ label study_entry:
 
     $ Nearby = []
 
-    call Gym_Clothes_Off
-    call taboo_Level
+    call change_out_of_gym_clothes
+    call taboo_level
     call set_the_scene(entering = True)
 
     menu:
@@ -1290,10 +1290,10 @@ label study_room:
 
     $ Player.drain_word("traveling",1,0)
 
-    call taboo_Level
+    call taboo_level
     call set_the_scene(silent = True)
-    call QuickEvents
-    call checkout (1)
+    call quick_event
+    call checkout(total = True)
 
     if round <= 10:
         if time_index >= 3:
@@ -1304,7 +1304,7 @@ label study_room:
             call wait
             call girls_location
 
-    call GirlsAngry
+    call are_girls_angry
     call change_Xavier_face ("_happy")
 
     if time_index >= 3:
@@ -1315,7 +1315,7 @@ label study_room:
     menu:
         extend ""
         "Chat" if time_index >= 3:
-            call Chat
+            call chat
         "Plan Omega!" if time_index < 3 and RogueX.location == bg_current and Player.level >= 5:
             if approval_check(RogueX, 1500, TabM=1, Loc="No"):
                 call Xavier_Plan(RogueX)

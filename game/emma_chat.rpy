@@ -1,12 +1,12 @@
 
 
-label Emma_Chat_Minimal:
+label Emma_chat_Minimal:
     $ EmmaX.change_face()
     call shift_focus (EmmaX)
     if EmmaX.location != bg_current:
-        show Cellphone at sprite_location(EmmaX.sprite_location)
+        show cellphone at sprite_location(EmmaX.sprite_location)
     else:
-        hide Cellphone
+        hide cellphone
     if "caught" in EmmaX.recent_history:
         ch_e "I don't think we should be seen together, if you don't mind."
         return
@@ -73,7 +73,7 @@ label Emma_Chat_Minimal:
                 "She seems a bit reserved. Maybe you need something to break the ice."
                 "Maybe you should check in on her after classes are over and the students leave."
             return
-    jump Emma_Chat_Minimal
+    jump Emma_chat_Minimal
 
 label Emma_Flirt_Minimal:
     menu:
@@ -281,7 +281,7 @@ label Emma_OtherWoman(counter=0):
 
     if not Player.Harem:
         return
-    $ counter = int((EmmaX.GirlLikeCheck(Player.Harem[0]) - 500)/2)
+    $ counter = int((EmmaX.likes[Player.Harem[0].tag] - 500)/2)
 
     $ EmmaX.change_face("_perplexed")
     if len(Player.Harem) >= 2:
@@ -358,114 +358,114 @@ label Emma_About(Check=0):
     if Check == RogueX:
         if "poly Rogue" in EmmaX.traits:
             ch_e "As you're aware, we've shared a great deal. . ."
-        elif EmmaX.LikeRogue >= 900:
+        elif EmmaX.likes[RogueX.tag] >= 900:
             ch_e "I do find her rather mesmerizing. . ."
-        elif EmmaX.LikeRogue >= 800:
+        elif EmmaX.likes[RogueX.tag] >= 800:
             ch_e "That accent certainly did grow on me. . ."
-        elif EmmaX.LikeRogue >= 700:
+        elif EmmaX.likes[RogueX.tag] >= 700:
             ch_e "We've become quite close."
-        elif EmmaX.LikeRogue >= 600:
+        elif EmmaX.likes[RogueX.tag] >= 600:
             ch_e "I'm rather fond of her."
-        elif EmmaX.LikeRogue >= 500:
+        elif EmmaX.likes[RogueX.tag] >= 500:
             ch_e "She's an adequate student."
-        elif EmmaX.LikeRogue >= 400:
+        elif EmmaX.likes[RogueX.tag] >= 400:
             ch_e "She can be a bit of a handful."
-        elif EmmaX.LikeRogue >= 300:
+        elif EmmaX.likes[RogueX.tag] >= 300:
             ch_e "I can barely tollerate her disrespectful nature."
         else:
             ch_e "That swamp rat? What about her?"
     elif Check == KittyX:
         if "poly Kitty" in EmmaX.traits:
             ch_e "As you're aware, we do get along quite well. . ."
-        elif EmmaX.LikeKitty >= 900:
+        elif EmmaX.likes[KittyX.tag] >= 900:
             ch_e "She is rather. . . flexible. . ."
-        elif EmmaX.LikeKitty >= 800:
+        elif EmmaX.likes[KittyX.tag] >= 800:
             ch_e "She is rather adorable. . ."
-        elif EmmaX.LikeKitty >= 700:
+        elif EmmaX.likes[KittyX.tag] >= 700:
             ch_e "She's something of a friend at this point."
-        elif EmmaX.LikeKitty >= 600:
+        elif EmmaX.likes[KittyX.tag] >= 600:
             ch_e "Once you get to know her, she's not bad."
-        elif EmmaX.LikeKitty >= 500:
+        elif EmmaX.likes[KittyX.tag] >= 500:
             ch_e "She's an adequate student."
-        elif EmmaX.LikeKitty >= 400:
+        elif EmmaX.likes[KittyX.tag] >= 400:
             ch_e "She can be a bit of a know it all."
-        elif EmmaX.LikeKitty >= 300:
+        elif EmmaX.likes[KittyX.tag] >= 300:
             ch_e "I can't stand her constant questions."
         else:
             ch_e "That little bitch?"
     elif Check == LauraX:
         if "poly Laura" in EmmaX.traits:
             ch_e "She is quite. . . energetic. . ."
-        elif EmmaX.LikeLaura >= 900:
+        elif EmmaX.likes[LauraX.tag] >= 900:
             ch_e "She's very durable. . ."
-        elif EmmaX.LikeLaura >= 800:
+        elif EmmaX.likes[LauraX.tag] >= 800:
             ch_e "She has a rough quality that is quite exciting. . ."
-        elif EmmaX.LikeLaura >= 700:
+        elif EmmaX.likes[LauraX.tag] >= 700:
             ch_e "She's something of a friend at this point."
-        elif EmmaX.LikeLaura >= 600:
+        elif EmmaX.likes[LauraX.tag] >= 600:
             ch_e "Once you get to know her, she's not bad."
-        elif EmmaX.LikeLaura >= 500:
+        elif EmmaX.likes[LauraX.tag] >= 500:
             ch_e "She's an adequate student."
-        elif EmmaX.LikeLaura >= 400:
+        elif EmmaX.likes[LauraX.tag] >= 400:
             ch_e "She is a bit rough around the edges."
-        elif EmmaX.LikeLaura >= 300:
+        elif EmmaX.likes[LauraX.tag] >= 300:
             ch_e "Yes, a bit feral, that one."
         else:
             ch_e "I'd put her down myself if I didn't have responsibilites."
     elif Check == JeanX:
         if "poly Jean" in EmmaX.traits:
             ch_e "As you're aware, we've shared a great deal. . ."
-        elif EmmaX.LikeJean >= 900:
+        elif EmmaX.likes[JeanX.tag] >= 900:
             ch_e "I do find her rather mesmerizing. . ."
-        elif EmmaX.LikeJean >= 800:
+        elif EmmaX.likes[JeanX.tag] >= 800:
             ch_e "She really is lovely, when you give her a chance. . ."
-        elif EmmaX.LikeJean >= 700:
+        elif EmmaX.likes[JeanX.tag] >= 700:
             ch_e "I have grown to like her. . ."
-        elif EmmaX.LikeJean >= 600:
+        elif EmmaX.likes[JeanX.tag] >= 600:
             ch_e "I'm rather fond of her."
-        elif EmmaX.LikeJean >= 500:
+        elif EmmaX.likes[JeanX.tag] >= 500:
             ch_e "She's an adequate student."
-        elif EmmaX.LikeJean >= 400:
+        elif EmmaX.likes[JeanX.tag] >= 400:
             ch_e "She can be a bit of a pill."
-        elif EmmaX.LikeJean >= 300:
+        elif EmmaX.likes[JeanX.tag] >= 300:
             ch_e "I can barely tollerate her arrogance."
         else:
             ch_e "That bitch? What about her?"
     elif Check == StormX:
         if "poly Storm" in EmmaX.traits:
             ch_e "She is marvelously experienced. . ."
-        elif EmmaX.LikeStorm >= 900:
+        elif EmmaX.likes[StormX.tag] >= 900:
             ch_e "She complements me well. . ."
-        elif EmmaX.LikeStorm >= 800:
+        elif EmmaX.likes[StormX.tag] >= 800:
             ch_e "She has a lovely figure. . ."
-        elif EmmaX.LikeStorm >= 700:
+        elif EmmaX.likes[StormX.tag] >= 700:
             ch_e "She's something of a friend."
-        elif EmmaX.LikeStorm >= 600:
+        elif EmmaX.likes[StormX.tag] >= 600:
             ch_e "She's an excellent colleague."
-        elif EmmaX.LikeStorm >= 500:
+        elif EmmaX.likes[StormX.tag] >= 500:
             ch_e "She's an adequate colleague."
-        elif EmmaX.LikeStorm >= 400:
+        elif EmmaX.likes[StormX.tag] >= 400:
             ch_e "She is a bit rough around the edges"
-        elif EmmaX.LikeStorm >= 300:
+        elif EmmaX.likes[StormX.tag] >= 300:
             ch_e "The carpet matches the drapes, you know. Of course you would."
         else:
             ch_e "I wish I could convince Charles to fire her."
     elif Check == JubesX:
         if "poly Jubes" in EmmaX.traits:
             ch_e "As you're aware, we do get along quite well. . ."
-        elif EmmaX.LikeJubes >= 900:
+        elif EmmaX.likes[JubesX.tag] >= 900:
             ch_e "She is rather. . . flexible. . ."
-        elif EmmaX.LikeJubes >= 800:
+        elif EmmaX.likes[JubesX.tag] >= 800:
             ch_e "She is rather lovely. . ."
-        elif EmmaX.LikeJubes >= 700:
+        elif EmmaX.likes[JubesX.tag] >= 700:
             ch_e "She's something of a friend at this point."
-        elif EmmaX.LikeJubes >= 600:
+        elif EmmaX.likes[JubesX.tag] >= 600:
             ch_e "Once you get to know her, she's not bad."
-        elif EmmaX.LikeJubes >= 500:
+        elif EmmaX.likes[JubesX.tag] >= 500:
             ch_e "She's an adequate student."
-        elif EmmaX.LikeJubes >= 400:
+        elif EmmaX.likes[JubesX.tag] >= 400:
             ch_e "She can be a bit of a biter"
-        elif EmmaX.LikeJubes >= 300:
+        elif EmmaX.likes[JubesX.tag] >= 300:
             ch_e "She is very disruptive."
         else:
             ch_e "That little bitch?"
@@ -475,18 +475,18 @@ label Emma_About(Check=0):
 label Emma_Monogamy:
 
     menu:
-        "Could you not hook up with other girls?" if "mono" not in EmmaX.traits:
+        "Could you not hook up with other girls?" if "monogamous" not in EmmaX.traits:
             if EmmaX.thirst >= 50 and not approval_check(EmmaX, 1800, "LO", TabM=0):
 
                 $ EmmaX.change_face("_sly",1)
-                if "mono" not in EmmaX.daily_history:
+                if "monogamous" not in EmmaX.daily_history:
                     $ EmmaX.change_stat("obedience", 90, -2)
                 ch_e "You know, it's not like you leave me any alternatives. . ."
                 return
             elif approval_check(EmmaX, 1300, "LO", TabM=0) and EmmaX.love >= EmmaX.obedience:
 
                 $ EmmaX.change_face("_sly",1)
-                if "mono" not in EmmaX.daily_history:
+                if "monogamous" not in EmmaX.daily_history:
                     $ EmmaX.change_stat("love", 90, 1)
                 ch_e "Jealousy is an adorable look on you. . ."
                 ch_e "I suppose I could restain myself. . ."
@@ -500,11 +500,11 @@ label Emma_Monogamy:
                 ch_e "I'm afraid my affairs are my own business."
                 ch_e "Don't leave me wanting. . ."
                 return
-            if "mono" not in EmmaX.daily_history:
+            if "monogamous" not in EmmaX.daily_history:
                 $ EmmaX.change_stat("obedience", 90, 3)
-            $ EmmaX.add_word(1,0,"mono")
-            $ EmmaX.traits.append("mono")
-        "Don't hook up with other girls." if "mono" not in EmmaX.traits:
+            $ EmmaX.add_word(1,0,"monogamous")
+            $ EmmaX.traits.append("monogamous")
+        "Don't hook up with other girls." if "monogamous" not in EmmaX.traits:
             if approval_check(EmmaX, 900, "O", TabM=0):
 
                 $ EmmaX.change_face("_sly",1,Eyes="_side")
@@ -512,7 +512,7 @@ label Emma_Monogamy:
             elif EmmaX.thirst >= 60 and not approval_check(EmmaX, 1700, "LO", TabM=0):
 
                 $ EmmaX.change_face("_sly",1)
-                if "mono" not in EmmaX.daily_history:
+                if "monogamous" not in EmmaX.daily_history:
                     $ EmmaX.change_stat("obedience", 90, -2)
                 ch_e "You know, it's not like you leave me any alternatives. . ."
                 return
@@ -530,11 +530,11 @@ label Emma_Monogamy:
                 $ EmmaX.change_face("_sly",1,Brows="_confused")
                 ch_e "My affairs are my own business."
                 return
-            if "mono" not in EmmaX.daily_history:
+            if "monogamous" not in EmmaX.daily_history:
                 $ EmmaX.change_stat("obedience", 90, 3)
-            $ EmmaX.add_word(1,0,"mono")
-            $ EmmaX.traits.append("mono")
-        "It's ok if you hook up with other girls." if "mono" in EmmaX.traits:
+            $ EmmaX.add_word(1,0,"monogamous")
+            $ EmmaX.traits.append("monogamous")
+        "It's ok if you hook up with other girls." if "monogamous" in EmmaX.traits:
             if approval_check(EmmaX, 700, "O", TabM=0):
                 $ EmmaX.change_face("_sly",1,Eyes="_side")
                 ch_e "Of course."
@@ -543,14 +543,14 @@ label Emma_Monogamy:
                 ch_e "Only if I find myself. . . available. . ."
             else:
                 $ EmmaX.change_face("_sly",1,Brows="_confused")
-                if "mono" not in EmmaX.daily_history:
+                if "monogamous" not in EmmaX.daily_history:
                     $ EmmaX.change_stat("love", 90, -2)
                 ch_e "I wasn't aware that I needed your permission."
-            if "mono" not in EmmaX.daily_history:
+            if "monogamous" not in EmmaX.daily_history:
                 $ EmmaX.change_stat("obedience", 90, 3)
-            if "mono" in EmmaX.traits:
-                $ EmmaX.traits.remove("mono")
-            $ EmmaX.add_word(1,0,"mono")
+            if "monogamous" in EmmaX.traits:
+                $ EmmaX.traits.remove("monogamous")
+            $ EmmaX.add_word(1,0,"monogamous")
         "Never mind.":
             pass
     return
@@ -664,11 +664,11 @@ return
 
 
 
-label Emma_SexChat:
-    $ Line = "Hmm? What did you want to talk about?" if not Line else Line
+label Emma_Sexchat:
+    $ line = "Hmm? What did you want to talk about?" if not line else line
     while True:
         menu:
-            ch_e "[Line]"
+            ch_e "[line]"
             "My favorite thing to do is. . .":
                 if "setfav" in EmmaX.daily_history:
                     ch_e "I'm aware. You just told me earlier."
@@ -1019,17 +1019,17 @@ label Emma_SexChat:
             "We talked about maybe having some fun in public?" if "taboocheck" in EmmaX.history and "taboo" not in EmmaX.history:
                 call Emma_taboo_Talk
 
-            "Have you considered maybe having a threesome?" if "threecheck" not in EmmaX.history and "three" not in EmmaX.history:
+            "Have you considered maybe having a threesome?" if "threecheck" not in EmmaX.history and "threesome" not in EmmaX.history:
                 call Emma_ThreeCheck
-            "We talked about maybe having a threesome?" if "threecheck" in EmmaX.history and "three" not in EmmaX.history:
+            "We talked about maybe having a threesome?" if "threecheck" in EmmaX.history and "threesome" not in EmmaX.history:
                 call Emma_ThreeCheck
 
-            "Never Mind" if Line == "Hmm? What did you want to talk about?":
+            "Never Mind" if line == "Hmm? What did you want to talk about?":
                 return
-            "That's all." if Line != "Hmm? What did you want to talk about?":
+            "That's all." if line != "Hmm? What did you want to talk about?":
                 return
-        if Line == "Yeah, what did you want to talk about?":
-            $ Line = "Anything else?"
+        if line == "Yeah, what did you want to talk about?":
+            $ line = "Anything else?"
     return
 
 
@@ -1388,11 +1388,11 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
             $ EmmaX.blushing = "_blush1"
             $ EmmaX.had_chat.append("blowjob")
         else:
-            $ Line = renpy.random.choice(["You've a taste that's easy to acquire.", 
+            $ line = renpy.random.choice(["You've a taste that's easy to acquire.", 
                             "My jaw is a bit sore lately.", 
                             "If you need some. . . attention, let me know.",
                             "Mmmm. . . [she mimes her tongue knocking against her cheek.]"])
-            ch_e "[Line]"
+            ch_e "[line]"
 
     elif Options[0] == "swallowed":
 
@@ -1484,11 +1484,11 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
         $ EmmaX.had_chat.append("public")
 
     elif Options[0] == "hate":
-        $ Line = renpy.random.choice(["I'd rather keep this professional.", 
+        $ line = renpy.random.choice(["I'd rather keep this professional.", 
                 "If you have something to say, put it in writing.", 
                 "Back off.",
                 "Leave me alone."])
-        ch_e "[Line]"
+        ch_e "[line]"
     else:
 
         $ D20 = renpy.random.randint(1, 15)
@@ -1545,12 +1545,12 @@ label Emma_Chitchat(O=0, Options=["default","default","default"]):
             $ EmmaX.change_face("startled")
             ch_e "As students go, you're not intollerable."
 
-    $ Line = 0
+    $ line = 0
     return
 
 
 label Emma_names(Tempname=0):
-    call Lastnamer
+    call get_last_name
     $ Tempname = _return
     menu:
         ch_e "Oh? What would you like me to call you?"
@@ -1889,7 +1889,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
         return
 
     $ D20 = renpy.random.randint(1, 20)
-    $ Line = 0
+    $ line = 0
     if EmmaX.location == "bg_teacher":
         $ approval_bonus = -30
     elif EmmaX.location == "bg_classroom":
@@ -1901,7 +1901,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
 
     if D20 <= 3:
 
-        $ Line = "no"
+        $ line = "no"
     if time_index >= 3:
         if approval_check(EmmaX, 700, "L") or approval_check(EmmaX, 300, "O"):
 
@@ -1920,7 +1920,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
             menu:
                 extend ""
                 "Sure":
-                    $ Line = "go to"
+                    $ line = "go to"
                 "No thanks.":
                     ch_e "Your loss."
                     return
@@ -1969,34 +1969,34 @@ label Emma_Summon(approval_bonus=approval_bonus):
 
         if "summoned" in EmmaX.recent_history:
             ch_e "Again? Very well."
-            $ Line = "yes"
+            $ line = "yes"
         elif "goto" in EmmaX.recent_history:
             menu:
                 extend ""
                 "You're right, be right back.":
                     ch_e "I'll be waiting."
-                    $ Line = "go to"
+                    $ line = "go to"
                 "Nah, it's better here.":
                     ch_e "Very well."
                 "But I'd {i}really{/i} like to see you over here.":
                     if approval_check(EmmaX, 600, "L") or approval_check(EmmaX, 1400):
-                        $ Line = "lonely"
+                        $ line = "lonely"
                     else:
-                        $ Line = "no"
+                        $ line = "no"
                 "I said come over here.":
                     if approval_check(EmmaX, 600, "O"):
 
-                        $ Line = "command"
+                        $ line = "command"
                     elif D20 >= 7 and approval_check(EmmaX, 1400):
 
                         ch_e "Hmm, very well."
-                        $ Line = "yes"
+                        $ line = "yes"
                     elif approval_check(EmmaX, 200, "O"):
 
                         ch_e "If you're lucky, I'll still be here when you arrive."
                     else:
 
-                        $ Line = "no"
+                        $ line = "no"
         else:
             menu:
                 extend ""
@@ -2004,7 +2004,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
                     $ EmmaX.change_stat("love", 55, 1)
                     $ EmmaX.change_stat("inhibition", 30, 1)
                     ch_e "I'll be waiting."
-                    $ Line = "go to"
+                    $ line = "go to"
                 "Nah, we can talk later.":
 
                     $ EmmaX.change_stat("obedience", 50, 1)
@@ -2015,10 +2015,10 @@ label Emma_Summon(approval_bonus=approval_bonus):
                     if approval_check(EmmaX, 600, "L") or approval_check(EmmaX, 1400):
                         $ EmmaX.change_stat("love", 70, 1)
                         $ EmmaX.change_stat("obedience", 50, 1)
-                        $ Line = "lonely"
+                        $ line = "lonely"
                     else:
                         $ EmmaX.change_stat("inhibition", 30, 1)
-                        $ Line = "no"
+                        $ line = "no"
                 "I said come over here.":
 
                     if approval_check(EmmaX, 600, "O"):
@@ -2026,7 +2026,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
                         $ EmmaX.change_stat("love", 50, 1, 1)
                         $ EmmaX.change_stat("love", 40, -1)
                         $ EmmaX.change_stat("obedience", 90, 1)
-                        $ Line = "command"
+                        $ line = "command"
 
                     elif D20 >= 7 and approval_check(EmmaX, 1400):
 
@@ -2035,7 +2035,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
                         $ EmmaX.change_stat("obedience", 50, 2)
                         $ EmmaX.change_stat("obedience", 90, 1)
                         ch_e "Ok, fine, [EmmaX.player_petname]."
-                        $ Line = "yes"
+                        $ line = "yes"
 
                     elif approval_check(EmmaX, 200, "O"):
 
@@ -2052,7 +2052,7 @@ label Emma_Summon(approval_bonus=approval_bonus):
                         $ EmmaX.change_stat("inhibition", 50, 1)
                         $ EmmaX.change_stat("love", 50, -1, 1)
                         $ EmmaX.change_stat("obedience", 70, -1)
-                        $ Line = "no"
+                        $ line = "no"
     else:
 
 
@@ -2060,16 +2060,16 @@ label Emma_Summon(approval_bonus=approval_bonus):
             ch_e "I'd love to."
         else:
             ch_e "I'll be right there, [EmmaX.player_petname]."
-        $ Line = "yes"
+        $ line = "yes"
 
     $ approval_bonus = 0
 
-    if not Line:
+    if not line:
 
         $ EmmaX.recent_history.append("no_summon")
         return
 
-    if Line == "no":
+    if line == "no":
 
         if EmmaX.location == "bg_teacher":
             ch_e "I can't exactly leave class, [EmmaX.player_petname]."
@@ -2082,11 +2082,11 @@ label Emma_Summon(approval_bonus=approval_bonus):
         $ EmmaX.recent_history.append("no_summon")
         return
 
-    elif Line == "go to":
+    elif line == "go to":
 
         $ renpy.pop_call()
         $ approval_bonus = 0
-        $ Line = 0
+        $ line = 0
         $ EmmaX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
         if EmmaX.location == "bg_classroom" or EmmaX.location == "bg_teacher":
@@ -2117,18 +2117,18 @@ label Emma_Summon(approval_bonus=approval_bonus):
             jump Emma_Room
 
 
-    elif Line == "lonely":
+    elif line == "lonely":
         ch_e "Well, we can't have that now."
-    elif Line == "command":
+    elif line == "command":
         ch_e "If I must. . ."
 
     $ EmmaX.recent_history.append("summoned")
-    $ Line = 0
+    $ line = 0
     if "locked" in Player.traits:
         call locked_door (EmmaX)
         return
     $ EmmaX.location = bg_current
-    call taboo_Level (0)
+    call taboo_level(taboo_location = False)
     $ EmmaX.change_outfit()
     call set_the_scene
     return
@@ -2191,7 +2191,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         $ EmmaX.traits.append("follow")
 
     $ D20 = renpy.random.randint(1, 20)
-    $ Line = 0
+    $ line = 0
 
     if EmmaX.location == "bg_teacher":
         $ approval_bonus = -40
@@ -2236,7 +2236,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
             if "followed" not in EmmaX.recent_history:
                 $ EmmaX.change_stat("love", 55, 1)
                 $ EmmaX.change_stat("inhibition", 30, 1)
-            $ Line = "go to"
+            $ line = "go to"
         "Nah, we can talk later.":
 
             if "followed" not in EmmaX.recent_history:
@@ -2249,11 +2249,11 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                 if "followed" not in EmmaX.recent_history:
                     $ EmmaX.change_stat("love", 70, 1)
                     $ EmmaX.change_stat("obedience", 50, 1)
-                $ Line = "lonely"
+                $ line = "lonely"
             else:
                 if "followed" not in EmmaX.recent_history:
                     $ EmmaX.change_stat("inhibition", 30, 1)
-                $ Line = "no"
+                $ line = "no"
         "No, stay here.":
 
             if approval_check(EmmaX, 600, "O"):
@@ -2263,7 +2263,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                         $ EmmaX.change_stat("love", 90, 1)
                     $ EmmaX.change_stat("love", 40, -1)
                     $ EmmaX.change_stat("obedience", 90, 1)
-                $ Line = "command"
+                $ line = "command"
 
             elif D20 >= 7 and approval_check(EmmaX, 1400):
 
@@ -2273,7 +2273,7 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                     $ EmmaX.change_stat("obedience", 50, 2)
                     $ EmmaX.change_stat("obedience", 90, 1)
                 ch_e "I guess it wasn't that important. . ."
-                $ Line = "yes"
+                $ line = "yes"
 
             elif approval_check(EmmaX, 200, "O"):
 
@@ -2292,18 +2292,18 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
                     $ EmmaX.change_stat("inhibition", 50, 1)
                     $ EmmaX.change_stat("love", 50, -1, 1)
                     $ EmmaX.change_stat("obedience", 70, -1)
-                $ Line = "no"
+                $ line = "no"
 
 
-    call taboo_Level (0)
+    call taboo_level(taboo_location = False)
     $ EmmaX.recent_history.append("followed")
-    if not Line:
+    if not line:
 
         hide Emma_Sprite
-        call Gym_Clothes_Off ([EmmaX])
+        call change_out_of_gym_clothes ([EmmaX])
         return
 
-    if Line == "no":
+    if line == "no":
 
         if EmmaX.location == "bg_teacher":
             ch_e "I'm not \"cutting class,\" [EmmaX.player_petname]."
@@ -2314,20 +2314,20 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
         else:
             ch_e "I'm sorry, I'm just much too busy at the moment."
         hide Emma_Sprite
-        call Gym_Clothes_Off ([EmmaX])
+        call change_out_of_gym_clothes ([EmmaX])
         return
 
-    elif Line == "go to":
+    elif line == "go to":
 
 
         $ approval_bonus = 0
-        $ Line = 0
-        call DrainAll ("leaving")
-        call DrainAll ("arriving")
+        $ line = 0
+        call drain_all_words ("leaving")
+        call drain_all_words ("arriving")
         $ EmmaX.recent_history.append("goto")
         $ Player.recent_history.append("goto")
         hide Emma_Sprite
-        call Gym_Clothes_Off ([EmmaX])
+        call change_out_of_gym_clothes ([EmmaX])
         if EmmaX.location == "bg_teacher":
             ch_e "I'll see you there."
             jump classroom_entry
@@ -2359,12 +2359,12 @@ label Emma_Leave(approval_bonus=approval_bonus, GirlsNum=0):
 
 
 
-    elif Line == "lonely":
+    elif line == "lonely":
         ch_e "Well we wouldn't want that. . ."
-    elif Line == "command":
+    elif line == "command":
         ch_e "If you insist."
 
-    $ Line = 0
+    $ line = 0
     ch_e "I suppose I can stay for a while."
     $ EmmaX.location = bg_current
     return
@@ -2389,10 +2389,10 @@ label Emma_Clothes(Public=0, Bonus=0):
         ch_e "I'll let you know when I care what you think."
         return
 
-    if Girl != EmmaX or Line == "Giftstore":
+    if Girl != EmmaX or line == "Giftstore":
 
         $ renpy.pop_call()
-    $ Line = 0
+    $ line = 0
     $ Girl = EmmaX
     call shift_focus (Girl)
 
@@ -2434,19 +2434,19 @@ label Emma_Wardrobe_Menu:
                     ch_e "Ok, a quick shot for you. . ."
                 hide PhoneSex
 
-            "Could I get a look at it?" if renpy.showing('DressScreen'):
+            "Could I get a look at it?" if renpy.showing('dress_screen'):
 
                 call outfitShame (EmmaX, 0, 2)
                 if _return:
-                    hide DressScreen
+                    hide dress_screen
             "Would you be more comfortable behind a screen? (locked)" if EmmaX.taboo:
                 pass
-            "Would you be more comfortable behind a screen?" if EmmaX.location == bg_current and not EmmaX.taboo and not renpy.showing('DressScreen'):
+            "Would you be more comfortable behind a screen?" if EmmaX.location == bg_current and not EmmaX.taboo and not renpy.showing('dress_screen'):
 
                 if approval_check(EmmaX, 1500) or (EmmaX.seen_breasts and EmmaX.seen_pussy):
                     ch_e "Oh, I think we can handle this."
                 else:
-                    show DressScreen zorder 150
+                    show dress_screen zorder 150
                     ch_e "Yes, this will be more comfortable."
 
             "Gift for you (locked)" if Girl.location != bg_current:
@@ -2456,15 +2456,15 @@ label Emma_Wardrobe_Menu:
                 call Gifts
             "Switch to. . .":
 
-                if renpy.showing('DressScreen'):
+                if renpy.showing('dress_screen'):
                     call outfitShame (EmmaX, 0, 2)
                     if _return:
-                        hide DressScreen
+                        hide dress_screen
                     else:
                         $ EmmaX.change_outfit()
                 $ EmmaX.Set_Temp_outfit()
-                $ primary_action = 0
-                call Switch_Chat
+                $ primary_action = None
+                call Switch_chat
                 if Girl != EmmaX:
                     ch_p "I wanted to talk about your clothes."
                     call expression Girl.tag +"_Clothes"
@@ -2485,15 +2485,15 @@ label Emma_Wardrobe_Menu:
                         $ EmmaX.change_stat("love", 70, 1)
                         $ EmmaX.change_stat("obedience", 40, 1)
                     $ EmmaX.recent_history.append("wardrobe")
-                if renpy.showing('DressScreen'):
+                if renpy.showing('dress_screen'):
                     call outfitShame (EmmaX, 0, 2)
                     if _return:
-                        hide DressScreen
+                        hide dress_screen
                     else:
                         $ EmmaX.change_outfit()
                 $ EmmaX.Set_Temp_outfit()
                 $ EmmaX.had_chat[1] += 1
-                $ primary_action = 0
+                $ primary_action = None
                 return
 
 
@@ -2611,7 +2611,7 @@ label Emma_Wardrobe_Menu:
             if approval_check(EmmaX, 1200):
                 $ EmmaX.change_outfit("sleep")
             else:
-                call Display_DressScreen (EmmaX)
+                call Display_dress_screen (EmmaX)
                 if _return:
                     $ EmmaX.change_outfit("sleep")
 
@@ -2627,18 +2627,18 @@ label Emma_Wardrobe_Menu:
 
 
             $ EmmaX.change_face("_sly", 1)
-            $ Line = 0
+            $ line = 0
             if not EmmaX.bra and not EmmaX.underwear and not EmmaX.top and not EmmaX.legs and not EmmaX.hose:
 
                 ch_e "Apparently so. . ."
             elif EmmaX.seen_breasts and EmmaX.seen_pussy and approval_check(EmmaX, 1200, TabM=(5-Public)):
 
                 ch_e "I'll take that as an invitation. . ."
-                $ Line = 1
+                $ line = 1
             elif approval_check(EmmaX, 2000, TabM=(5-Public)):
 
                 ch_e "I suppose you've earned it. . ."
-                $ Line = 1
+                $ line = 1
             elif EmmaX.seen_breasts and EmmaX.seen_pussy and approval_check(EmmaX, 1200, TabM=0):
 
                 ch_e "As you're well aware, but this isn't the appropriate venue. . ."
@@ -2656,7 +2656,7 @@ label Emma_Wardrobe_Menu:
                 ch_e "Not the worst line I've heard."
                 ch_e ". . . but close."
 
-            if Line:
+            if line:
                 $ EmmaX.change_outfit("nude")
                 "She strips down."
                 call Emma_First_Topless
@@ -2692,7 +2692,7 @@ label Emma_Wardrobe_Menu:
                         else:
                             $ EmmaX.change_face("_confused", 1)
                             ch_e "So long as it's just the two of us, I don't mind this."
-            $ Line = 0
+            $ line = 0
         "Never mind":
 
             return
@@ -2712,22 +2712,22 @@ label Emma_Wardrobe_Menu:
                 call Emma_NoBra
                 if not _return:
                     if not approval_check(EmmaX, 1200):
-                        call Display_DressScreen (EmmaX)
+                        call Display_dress_screen (EmmaX)
                         if not _return:
                             return
                     else:
                         return
             else:
-                call Display_DressScreen (EmmaX)
+                call Display_dress_screen (EmmaX)
                 if not _return:
                     ch_e "I'm afraid not."
                     if not EmmaX.bra:
                         ch_e "I'm indecent under this. . ."
                     return
-            $ Line = EmmaX.top
+            $ line = EmmaX.top
             $ EmmaX.top = ""
-            "She shrugs off her [Line]."
-            if not EmmaX.bra and not renpy.showing('DressScreen'):
+            "She shrugs off her [line]."
+            if not EmmaX.bra and not renpy.showing('dress_screen'):
                 call Emma_First_Topless
 
         "Try on that white jacket you have." if EmmaX.top != "_jacket":
@@ -2735,7 +2735,7 @@ label Emma_Wardrobe_Menu:
             if EmmaX.bra or EmmaX.seen_breasts or approval_check(EmmaX, 500, TabM=(3-Public)):
                 ch_e "Yeah, ok."
             else:
-                call Display_DressScreen (EmmaX)
+                call Display_dress_screen (EmmaX)
                 if not _return:
                     $ EmmaX.change_face("_bemused", 1)
                     ch_e "I'm not sure this is appropriate without something more substantial underneath."
@@ -2747,7 +2747,7 @@ label Emma_Wardrobe_Menu:
             if EmmaX.bra or EmmaX.seen_breasts or approval_check(EmmaX, 500, TabM=(3-Public)):
                 ch_e "Yeah, ok."
             else:
-                call Display_DressScreen (EmmaX)
+                call Display_dress_screen (EmmaX)
                 if not _return:
                     $ EmmaX.change_face("_bemused", 1)
                     ch_e "I'm not sure this is appropriate without something more substantial underneath."
@@ -2765,7 +2765,7 @@ label Emma_Wardrobe_Menu:
             if EmmaX.bra or EmmaX.seen_breasts or approval_check(EmmaX, 500, TabM=(3-Public)):
                 ch_e "Yeah, ok."
             else:
-                call Display_DressScreen (EmmaX)
+                call Display_dress_screen (EmmaX)
                 if not _return:
                     $ EmmaX.change_face("_bemused", 1)
                     ch_e "This is a bit shear for this top."
@@ -2781,7 +2781,7 @@ label Emma_Wardrobe_Menu:
                 $ EmmaX.change_face("_perplexed", 1)
                 ch_e "Fine."
             else:
-                call Display_DressScreen (EmmaX)
+                call Display_dress_screen (EmmaX)
                 if not _return:
                     $ EmmaX.change_face("_bemused", 1)
                     ch_e "This wouldn't leave much to the imagination."
@@ -2864,23 +2864,23 @@ label Emma_Wardrobe_Menu:
                 call Emma_NoPantiesOn
                 if not _return and not EmmaX.underwear:
                     if not approval_check(EmmaX, 1500):
-                        call Display_DressScreen (EmmaX)
+                        call Display_dress_screen (EmmaX)
                         if not _return:
                             return
                     else:
                         return
             else:
-                call Display_DressScreen (EmmaX)
+                call Display_dress_screen (EmmaX)
                 if not _return:
                     ch_e "I'm afraid not."
                     if not EmmaX.underwear:
                         ch_e "You understand, it could get. . . drafty. . ."
                     return
-            $ Line = EmmaX.legs
+            $ line = EmmaX.legs
             $ EmmaX.legs = ""
-            "She peels her [Line] off."
-            $ Line = 0
-            if renpy.showing('DressScreen'):
+            "She peels her [line] off."
+            $ line = 0
+            if renpy.showing('dress_screen'):
                 pass
             elif EmmaX.underwear:
                 $ EmmaX.seen_underwear = 1
@@ -2941,15 +2941,15 @@ label Emma_Wardrobe_Menu:
                     else:
                         $ EmmaX.underwear = "_green_panties"
                     if approval_check(EmmaX, 1200, TabM=4):
-                        $ Line = EmmaX.legs
+                        $ line = EmmaX.legs
                         $ EmmaX.legs = ""
-                        "She pulls off her [Line] and slips on the [EmmaX.underwear]."
+                        "She pulls off her [line] and slips on the [EmmaX.underwear]."
                     elif EmmaX.legs == "_skirt":
                         "She pulls out her [EmmaX.underwear] and pulls them up under her skirt."
                         $ EmmaX.legs = ""
                         "Then she drops the skirt to the floor."
                     else:
-                        $ Line = EmmaX.legs
+                        $ line = EmmaX.legs
                         $ EmmaX.legs = ""
                         "She steps away a moment and then comes back wearing only the [EmmaX.underwear]."
                     return
@@ -3001,22 +3001,22 @@ label Emma_Wardrobe_Menu:
                     elif EmmaX.top == "_jacket" and approval_check(EmmaX, 700, TabM=(3-Public)):
                         ch_e "This is a bit daring without anything under it. . ."
                     elif not EmmaX.top:
-                        call Display_DressScreen (EmmaX)
+                        call Display_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I don't think that would be appropriate."
                             return
                     else:
-                        call Display_DressScreen (EmmaX)
+                        call Display_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I'm afraid not, [EmmaX.player_petname]."
                             return
-                    $ Line = EmmaX.bra
+                    $ line = EmmaX.bra
                     $ EmmaX.bra = ""
                     if EmmaX.top:
-                        "She reaches under her [EmmaX.top] grabs her [Line], and pulls it out, dropping it to the ground."
+                        "She reaches under her [EmmaX.top] grabs her [line], and pulls it out, dropping it to the ground."
                     else:
-                        "She lets her [Line] fall to the ground."
-                        if not renpy.showing('DressScreen'):
+                        "She lets her [line] fall to the ground."
+                        if not renpy.showing('dress_screen'):
                             call Emma_First_Topless
 
                 "I like that corset you have." if EmmaX.bra != "_corset":
@@ -3025,7 +3025,7 @@ label Emma_Wardrobe_Menu:
                         $ EmmaX.bra = "_corset"
                         $ EmmaX.TitsUp = 1
                     else:
-                        call Display_DressScreen (EmmaX)
+                        call Display_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I don't think that would be appropriate. . ."
                         else:
@@ -3036,7 +3036,7 @@ label Emma_Wardrobe_Menu:
                         ch_e "Fine."
                         $ EmmaX.bra = "lace_bra"
                     else:
-                        call Display_DressScreen (EmmaX)
+                        call Display_dress_screen (EmmaX)
                         if not _return:
                             ch_e "It's a bit revealing. . ."
                         else:
@@ -3047,7 +3047,7 @@ label Emma_Wardrobe_Menu:
                         ch_e "Fine."
                         $ EmmaX.bra = "_sports_bra"
                     else:
-                        call Display_DressScreen (EmmaX)
+                        call Display_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I'm not sure about that. . ."
                         else:
@@ -3062,7 +3062,7 @@ label Emma_Wardrobe_Menu:
                             ch_e "Fine."
                             $ EmmaX.bra = "_bikini_top"
                         else:
-                            call Display_DressScreen (EmmaX)
+                            call Display_dress_screen (EmmaX)
                             if not _return:
                                 ch_e "I don't know about wearing that here. . ."
                             else:
@@ -3117,7 +3117,7 @@ label Emma_Wardrobe_Menu:
                         elif approval_check(EmmaX, 1300, TabM=(4-Public)):
                             ch_e "Fine."
                         else:
-                            call Display_DressScreen (EmmaX)
+                            call Display_dress_screen (EmmaX)
                             if not _return:
                                 $ EmmaX.change_face("_surprised")
                                 $ EmmaX.brows = "_angry"
@@ -3126,34 +3126,34 @@ label Emma_Wardrobe_Menu:
                                 else:
                                     ch_e "I could, but I won't, [EmmaX.player_petname]!"
                                 return
-                    $ Line = EmmaX.underwear
+                    $ line = EmmaX.underwear
                     $ EmmaX.underwear = ""
                     if not EmmaX.legs:
-                        "She pulls off her [Line], then drops them to the ground."
-                        if not renpy.showing('DressScreen'):
+                        "She pulls off her [line], then drops them to the ground."
+                        if not renpy.showing('dress_screen'):
                             call Emma_First_Bottomless
                     elif approval_check(EmmaX, 1200, TabM=4):
                         $ primary_action = EmmaX.legs
                         $ EmmaX.legs = ""
                         pause 0.5
                         $ EmmaX.legs = primary_action
-                        "She pulls off her [EmmaX.legs] and [Line], then pulls the [EmmaX.legs] back on."
+                        "She pulls off her [EmmaX.legs] and [line], then pulls the [EmmaX.legs] back on."
                         $ primary_action = 1
                         call Emma_First_Bottomless (1)
                     elif EmmaX.legs == "_skirt":
-                        "She reaches under her skirt and pulls her [Line] off."
+                        "She reaches under her skirt and pulls her [line] off."
                     else:
                         $ EmmaX.blushing = "_blush1"
                         "She steps away a moment and then comes back."
                         $ EmmaX.blushing = ""
-                    $ Line = 0
+                    $ line = 0
 
                 "Why don't you wear the white panties instead?" if EmmaX.underwear and EmmaX.underwear != "_white_panties":
                     if approval_check(EmmaX, 1100, TabM=(4-Public)):
                         ch_e "Ok."
                         $ EmmaX.underwear = "_white_panties"
                     else:
-                        call Display_DressScreen (EmmaX)
+                        call Display_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I really don't see how that's any of your concern."
                         else:
@@ -3164,7 +3164,7 @@ label Emma_Wardrobe_Menu:
                         ch_e "Fine."
                         $ EmmaX.underwear = "sports_panties"
                     else:
-                        call Display_DressScreen (EmmaX)
+                        call Display_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I really don't see how that's any of your concern."
                         else:
@@ -3175,7 +3175,7 @@ label Emma_Wardrobe_Menu:
                         ch_e "Fine."
                         $ EmmaX.underwear = "_lace_panties"
                     else:
-                        call Display_DressScreen (EmmaX)
+                        call Display_dress_screen (EmmaX)
                         if not _return:
                             ch_e "I really don't see how that's any of your concern."
                         else:
@@ -3190,7 +3190,7 @@ label Emma_Wardrobe_Menu:
                             ch_e "Fine."
                             $ EmmaX.underwear = "_bikini_bottoms"
                         else:
-                            call Display_DressScreen (EmmaX)
+                            call Display_dress_screen (EmmaX)
                             if not _return:
                                 ch_e "I don't know about wearing those here. . ."
                             else:

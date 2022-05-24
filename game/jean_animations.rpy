@@ -2024,7 +2024,7 @@ image Jean_Doggy_Feet2:
 
 
 
-label Jean_Doggy_Launch(Line=primary_action):
+label Jean_Doggy_Launch(line=primary_action):
     if renpy.showing("Jean_Doggy_Animation"):
         return
     $ action_speed = 0
@@ -3202,41 +3202,41 @@ image Jean_Sex_Hotdog_Speed2:
 
 
 
-label Jean_Sex_Launch(Line=primary_action):
-    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
+label Jean_sex_launch(line=primary_action):
+    $ girl_offhand_action = None if girl_offhand_action == "handjob" else girl_offhand_action
 
 
 
 
     $ Player.sprite = 1
-    $ Line = "solo" if not Line else Line
-    if Line == "sex":
+    $ line = "solo" if not line else line
+    if line == "sex":
         $ Player.cock_position = "sex"
         if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
-            $ offhand_action = 0
-    elif Line == "anal":
+            $ offhand_action = None
+    elif line == "anal":
         $ Player.cock_position = "anal"
         if offhand_action in ("finger_ass","dildo_anal","eat_ass"):
-            $ offhand_action = 0
-    elif Line == "hotdog":
+            $ offhand_action = None
+    elif line == "hotdog":
         if JeanX.PantsNum() == 5:
             $ JeanX.upskirt = 1
         $ Player.cock_position = "out"
-    elif Line == "footjob":
+    elif line == "footjob":
         $ show_feet = 1
         $ Player.cock_position = "footjob"
         $ JeanX.pose = "doggy"
-    elif Line == "massage":
+    elif line == "massage":
         $ Player.sprite = 0
         $ Player.cock_position = 0
     else:
         $ Player.sprite = 0
         $ Player.cock_position = "out"
         $ action_speed = 0
-    $ primary_action = Line
+    $ primary_action = line
 
     if JeanX.pose == "doggy":
-        call Jean_Doggy_Launch (Line)
+        call Jean_Doggy_Launch (line)
         return
     if renpy.showing("Jean_SexSprite"):
         return
@@ -3809,7 +3809,7 @@ transform Jean_BJ_Body_6():
 
 
 
-label Jean_BJ_Launch(Line=primary_action):
+label Jean_BJ_Launch(line=primary_action):
     if renpy.showing("Jean_BJ_Animation"):
         return
 
@@ -3818,7 +3818,7 @@ label Jean_BJ_Launch(Line=primary_action):
         hide Jean_TJ_Animation
     else:
         call Jean_Hide
-        if Line == "L" or Line == "cum":
+        if line == "L" or line == "cum":
             show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(stage_center):
                 alpha 1
                 ease 1 zoom 2.5 offset (150,80)
@@ -3832,12 +3832,12 @@ label Jean_BJ_Launch(Line=primary_action):
 
     $ action_speed = 0
 
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "blowjob"
 
     # show Jean_BJ_Animation zorder 150:
     #     pos (645,510)
-    if taboo and Line == "L":
+    if taboo and line == "L":
         if len(Present) >= 2:
             if Present[0] != JeanX:
                 "[JeanX.name] looks back at [Present[0].name] to see if she's watching."
@@ -3846,7 +3846,7 @@ label Jean_BJ_Launch(Line=primary_action):
         else:
             "[JeanX.name] looks around to see if anyone can see her."
         "She then bends down and puts your cock to her mouth."
-    elif Line == "L":
+    elif line == "L":
         "[JeanX.name] smoothly bends down and places your cock against her cheek."
 
     return
@@ -3996,13 +3996,13 @@ image Jean_HJ_Animation:
     zoom 0.4
 
 
-label Jean_HJ_Launch(Line=primary_action):
+label Jean_HJ_Launch(line=primary_action):
     if renpy.showing("Jean_HJ_Animation"):
         $ primary_action = "handjob"
         return
     call Jean_Hide
     $ JeanX.arm_pose = 1
-    if Line == "L":
+    if line == "L":
         show Jean_Sprite zorder JeanX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,350)
@@ -4013,7 +4013,7 @@ label Jean_HJ_Launch(Line=primary_action):
         with dissolve
 
     $ action_speed = 0
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "handjob"
     else:
         $ action_speed = 1
@@ -4103,7 +4103,7 @@ image Jean_PJ_Animation:
     zoom 0.4
 
 
-label Jean_PJ_Launch(Line=primary_action):
+label Jean_PJ_Launch(line=primary_action):
     if renpy.showing("Jean_PJ_Animation"):
         $ primary_action = "psy"
         return
@@ -5033,7 +5033,7 @@ image Jean_TJ_5:
 
 
 
-label Jean_TJ_Launch(Line=primary_action):
+label Jean_TJ_Launch(line=primary_action):
     if renpy.showing("Jean_TJ_Animation"):
         return
 
@@ -5060,7 +5060,7 @@ label Jean_TJ_Launch(Line=primary_action):
 
 
 
-    show blackscreen onlayer black with dissolve
+    show black_screen onlayer black with dissolve
 
     if renpy.showing("Jean_BJ_Animation"):
         hide Jean_BJ_Animation
@@ -5076,12 +5076,12 @@ label Jean_TJ_Launch(Line=primary_action):
         $ JeanX.top_pulled_up = 1
 
     $ action_speed = 0
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "titjob"
     # show Jean_TJ_Animation zorder 150:
     #     pos (1000,1050)
     $ Player.sprite = 1
-    hide blackscreen onlayer black with dissolve
+    hide black_screen onlayer black with dissolve
     return
 
 label Jean_TJ_Reset:

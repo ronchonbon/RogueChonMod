@@ -2093,7 +2093,7 @@ image Laura_Doggy_Foot2_Ass:
 
 
 
-label Laura_Doggy_Launch(Line=primary_action):
+label Laura_Doggy_Launch(line=primary_action):
     if renpy.showing("Laura_Doggy_Animation"):
         return
     $ action_speed = 0
@@ -3831,37 +3831,37 @@ image Laura_Mega_Mask:
 
 
 
-label Laura_Sex_Launch(Line=primary_action):
-    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
+label Laura_sex_launch(line=primary_action):
+    $ girl_offhand_action = None if girl_offhand_action == "handjob" else girl_offhand_action
     $ Player.sprite = 1
-    $ Line = "solo" if not Line else Line
-    if Line == "sex":
+    $ line = "solo" if not line else line
+    if line == "sex":
         $ Player.cock_position = "sex"
         if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
-            $ offhand_action = 0
-    elif Line == "anal":
+            $ offhand_action = None
+    elif line == "anal":
         $ Player.cock_position = "anal"
         if offhand_action in ("finger_ass","dildo_anal","eat_ass"):
-            $ offhand_action = 0
-    elif Line == "solo":
+            $ offhand_action = None
+    elif line == "solo":
         $ Player.sprite = 0
         $ Player.cock_position = "out"
-    elif Line == "hotdog":
+    elif line == "hotdog":
         $ Player.cock_position = "out"
-    elif Line == "footjob":
+    elif line == "footjob":
         $ show_feet = 1
         $ Player.cock_position = "footjob"
-    elif Line == "massage":
+    elif line == "massage":
         $ Player.sprite = 0
         $ Player.cock_position = 0
     else:
         $ Player.sprite = 0
         $ Player.cock_position = "out"
         $ action_speed = 0
-    $ primary_action = Line
+    $ primary_action = line
 
     if LauraX.pose == "doggy":
-        call Laura_Doggy_Launch (Line)
+        call Laura_Doggy_Launch (line)
         return
     if renpy.showing("Laura_SexSprite"):
         return
@@ -5026,14 +5026,14 @@ image Laura_BJ_Body_6:
 
 
 
-label Laura_BJ_Launch(Line=primary_action):
+label Laura_BJ_Launch(line=primary_action):
 
     $ LauraX.arm_pose = 1
     if renpy.showing("Laura_BJ_Animation"):
         return
 
     call Laura_Hide
-    if Line == "L" or Line == "cum":
+    if line == "L" or line == "cum":
         show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_center):
             alpha 1
             ease 1 zoom 2.5 offset (150,80)
@@ -5045,7 +5045,7 @@ label Laura_BJ_Launch(Line=primary_action):
         with dissolve
 
     $ action_speed = 0
-    if Line == "L":
+    if line == "L":
         if taboo:
             if len(Present) >= 2:
                 if Present[0] != LauraX:
@@ -5056,7 +5056,7 @@ label Laura_BJ_Launch(Line=primary_action):
                 "[LauraX.name] casually glances around to see if anyone can see her."
         "[LauraX.name] smoothly bends down and places your cock against her cheek."
 
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "blowjob"
 
     show Laura_Sprite zorder LauraX.sprite_layer:
@@ -5203,12 +5203,12 @@ image Laura_HJ_Animation:
     zoom 0.4
 
 
-label Laura_HJ_Launch(Line=primary_action):
+label Laura_HJ_Launch(line=primary_action):
     if renpy.showing("Laura_HJ_Animation"):
         $ primary_action = "handjob"
         return
     call Laura_Hide
-    if Line == "L":
+    if line == "L":
         show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-150,200)
@@ -5219,7 +5219,7 @@ label Laura_HJ_Launch(Line=primary_action):
         with dissolve
 
     $ action_speed = 0
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "handjob"
     else:
         $ action_speed = 1
@@ -6325,14 +6325,14 @@ image Laura_TJ_5:
 
 
 
-label Laura_TJ_Launch(Line=primary_action):
+label Laura_TJ_Launch(line=primary_action):
     if renpy.showing("Laura_TJ_Animation"):
         return
     call Laura_Hide
     show Laura_Sprite zorder LauraX.sprite_layer at sprite_location(LauraX.sprite_location):
         alpha 1
         ease 1 zoom 2.3 xpos 750 yoffset -100
-    if Line == "L":
+    if line == "L":
         if taboo:
             if len(Present) >= 2:
                 if Present[0] != LauraX:
@@ -6355,16 +6355,16 @@ label Laura_TJ_Launch(Line=primary_action):
 
     call Laura_First_Topless
 
-    show blackscreen onlayer black with dissolve
+    show black_screen onlayer black with dissolve
     show Laura_Sprite zorder LauraX.sprite_layer:
         alpha 0
     $ action_speed = 0
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "titjob"
     # show Laura_TJ_Animation zorder 150:
     #     pos (700,520)
     $ Player.sprite = 1
-    hide blackscreen onlayer black with dissolve
+    hide black_screen onlayer black with dissolve
     return
 
 label Laura_TJ_Reset:

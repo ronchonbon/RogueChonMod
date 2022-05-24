@@ -817,7 +817,7 @@ label addiction_ultimatum(stored_addiction = Girl.addiction):
 
                 $ Player.traits.append("locked")
 
-                call taboo_Level
+                call taboo_level
             "No":
                 pass
     while between_event_count:
@@ -1611,7 +1611,7 @@ label addiction_bad_end:
     $ Girl.drain_word("ultimatum",0)
 
     $ approval_bonus = 0
-    $ Line = 0
+    $ line = 0
     $ action_context = None
 
     $ Girl.forced = 0
@@ -1775,7 +1775,7 @@ label addiction_fix_beg:
 
 label addiction_fix(Girl):
     $ Girl.drain_word("asked_to_meet")
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
 
     call set_the_scene
     call shift_focus(Girl)
@@ -2543,7 +2543,7 @@ label addiction_serum:
     $ Count = 3
 
     while Count and "has serum" not in Girl.recent_history:
-        $ Line = 0
+        $ line = 0
         $ Count -= 1
 
         menu:
@@ -2736,9 +2736,9 @@ label addiction_serum:
 
                     $ Count = 0
             "I'm charging for a sip, $5.":
-                $ Line = "Five"
+                $ line = "Five"
             "I'm afraid I'll have to charge, $10.":
-                $ Line = "Ten"
+                $ line = "Ten"
             "Never mind.":
                 if Girl == RogueX:
                     ch_r "Oh, ok. . ."
@@ -2759,63 +2759,63 @@ label addiction_serum:
 
                 return
 
-        if Line == "Five" or Line == "Ten":
+        if line == "Five" or line == "Ten":
             $ Girl.change_face("_angry")
             $ Girl.mouth = "_surprised"
 
             if Girl == RogueX:
                 if Girl.had_chat[3]:
-                    ch_r "[Line] bucks, just to drink your cum?"
+                    ch_r "[line] bucks, just to drink your cum?"
                 elif Girl.had_chat[2]:
-                    ch_r "[Line] bucks, just for this supposed \"serum\"?"
+                    ch_r "[line] bucks, just for this supposed \"serum\"?"
                 else:
-                    ch_r "[Line] bucks, just for that serum?"
+                    ch_r "[line] bucks, just for that serum?"
             elif Girl == KittyX:
                 if Girl.had_chat[3]:
-                    ch_k "[Line] bucks for a mouthfull of jiz?"
+                    ch_k "[line] bucks for a mouthfull of jiz?"
                 elif Girl.had_chat[2]:
-                    ch_k "[Line] bucks, just for this supposed \"serum\"?"
+                    ch_k "[line] bucks, just for this supposed \"serum\"?"
                 else:
-                    ch_k "[Line] bucks, just for that serum?"
+                    ch_k "[line] bucks, just for that serum?"
             elif Girl == EmmaX:
                 if Girl.had_chat[3]:
-                    ch_e "[Line] dollars? You're charging for warm semen?"
+                    ch_e "[line] dollars? You're charging for warm semen?"
                 elif Girl.had_chat[2]:
-                    ch_e "[Line] bucks, just for this supposed \"serum\"?"
+                    ch_e "[line] bucks, just for this supposed \"serum\"?"
                 else:
-                    ch_e "[Line] bucks, just for that suspect liquid?"
+                    ch_e "[line] bucks, just for that suspect liquid?"
             elif Girl == LauraX:
                 if Girl.had_chat[3]:
-                    ch_l "[Line] bucks for fresh cum?"
+                    ch_l "[line] bucks for fresh cum?"
                 elif Girl.had_chat[2]:
-                    ch_l "[Line] bucks, just for some \"serum\"?"
+                    ch_l "[line] bucks, just for some \"serum\"?"
                 else:
-                    ch_l "[Line] bucks, just for that stuff?"
+                    ch_l "[line] bucks, just for that stuff?"
             elif Girl == JeanX:
                 ch_j "So lemme get this straight."
 
                 $ Girl.change_stat("obedience", 80, 1)
 
                 if Girl.had_chat[3]:
-                    ch_j "[Line] bucks for some jiz?"
+                    ch_j "[line] bucks for some jiz?"
                 elif Girl.had_chat[2]:
-                    ch_j "[Line] bucks, just for some shady \"serum\"?"
+                    ch_j "[line] bucks, just for some shady \"serum\"?"
                 else:
-                    ch_j "[Line] bucks, just for that junk?"
+                    ch_j "[line] bucks, just for that junk?"
             elif Girl == StormX:
                 if Girl.had_chat[3]:
-                    ch_s "[Line] dollars? You're charging for fresh semen?"
+                    ch_s "[line] dollars? You're charging for fresh semen?"
                 elif Girl.had_chat[2]:
-                    ch_s "[Line] dollars, for this supposed \"serum\"?"
+                    ch_s "[line] dollars, for this supposed \"serum\"?"
                 else:
-                    ch_s "[Line] dollars, for that concoction?"
+                    ch_s "[line] dollars, for that concoction?"
             elif Girl == JubesX:
                 if Girl.had_chat[3]:
-                    ch_v "[Line] bucks? cash for spunk?"
+                    ch_v "[line] bucks? cash for spunk?"
                 elif Girl.had_chat[2]:
-                    ch_v "[Line] bucks, for this \"serum\"?"
+                    ch_v "[line] bucks, for this \"serum\"?"
                 else:
-                    ch_v "[Line] bucks, for. . . whatever that is?"
+                    ch_v "[line] bucks, for. . . whatever that is?"
 
             $ Girl.change_face()
             $ Girl.eyes = "_side"
@@ -2827,11 +2827,11 @@ label addiction_serum:
             $ Girl.change_face()
             $ Girl.brows = "_sad"
 
-            if Line == "Ten":
+            if line == "Ten":
                 $ Girl.change_stat("love", 70, -2, 1)
                 $ Girl.change_stat("love", 90, -10)
 
-            if Girl.had_chat[2] and Line == "Ten" and Girl.addiction >= 75:
+            if Girl.had_chat[2] and line == "Ten" and Girl.addiction >= 75:
                 if Girl == RogueX:
                     ch_r "Five was bad enough! Fine, here you go, but not a penny more."
                 elif Girl == KittyX:
@@ -2861,7 +2861,7 @@ label addiction_serum:
 
                 $ Player.cash += 10
                 $ Girl.recent_history.append("has serum")
-            elif Girl.had_chat[2] and Line == "Five":
+            elif Girl.had_chat[2] and line == "Five":
                 if Girl == RogueX:
                     ch_r "Ok, here you go."
                 elif Girl == KittyX:
@@ -3033,14 +3033,14 @@ label addiction_serum:
             $ Girl.change_stat("obedience", 80, 2)
             $ Girl.change_stat("inhibition", 80, -2)
 
-            if Line == "Ten":
+            if line == "Ten":
                 $ Player.cash -= 10
-            elif Line == "Five":
+            elif line == "Five":
                 $ Player.cash -= 5
 
             Girl.voice "Grrr. . ."
 
-            $ Line = 0
+            $ line = 0
 
             $ Girl.remaining_actions = stored_count
 

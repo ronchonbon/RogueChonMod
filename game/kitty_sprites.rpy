@@ -345,10 +345,10 @@ layeredimage Kitty_sex_body:
         "images/Kitty_sex/Kitty_sex_spunk_tits.png"
 
     if "suck_breasts" in [primary_action, offhand_action]:
-        "Kitty_Sex_Lick_Breasts"
+        "Kitty_sex_Lick_Breasts"
 
     if "fondle_breasts" in [primary_action, offhand_action]:
-        "Kitty_Sex_Fondle_Breasts"
+        "Kitty_sex_Fondle_Breasts"
 
     size (1120, 840)
 
@@ -407,9 +407,9 @@ layeredimage Kitty_sex_legs:
     if Player.sprite and Player.cock_position:
         Null()
     elif primary_action == "eat_pussy":
-        "Kitty_Sex_Lick_Pussy"
+        "Kitty_sex_Lick_Pussy"
     elif primary_action == "eat_ass":
-        "Kitty_Sex_Lick_Ass"
+        "Kitty_sex_Lick_Ass"
 
     if not Player.sprite or Player.cock_position != "footjob":
         Null()
@@ -492,7 +492,7 @@ layeredimage Kitty_sex_pussy:
     if not Player.sprite or Player.cock_position != "sex":
         Null()
     else:
-        AlphaMask("Kitty_Sex_Zero_Anim[action_speed]", "Kitty_Pussy_Fucking_Mask")
+        AlphaMask("Kitty_sex_Zero_Anim[action_speed]", "Kitty_Pussy_Fucking_Mask")
 
     if "in" not in KittyX.spunk or not Player.sprite or Player.cock_position != "sex" or not action_speed:
         Null()
@@ -503,7 +503,7 @@ layeredimage Kitty_sex_pussy:
 
 layeredimage Kitty_sex_anus:
     if Player.sprite and Player.cock_position == "anal" and action_speed < 2:
-        "Kitty_Sex_Anal[action_speed]"
+        "Kitty_sex_Anal[action_speed]"
     elif Player.sprite and Player.cock_position == "anal":
         "images/Kitty_sex/Kitty_sex_anus_open.png"
     elif KittyX.used_to_anal:
@@ -516,18 +516,18 @@ layeredimage Kitty_sex_anus:
     elif Player.sprite and Player.cock_position != "anal" and action_speed >= 1:
         "images/Kitty_sex/Kitty_sex_spunk_anal_under.png"
     elif Player.sprite and Player.cock_position != "anal" and action_speed:
-        "Kitty_Sex_Anal_Spunk_Heading_Under"
+        "Kitty_sex_Anal_Spunk_Heading_Under"
     else:
         "images/Kitty_sex/Kitty_sex_spunk_anal_closed.png"
 
     if not Player.sprite or Player.cock_position != "anal":
         Null()
     else:
-        AlphaMask("Kitty_Anal_Zero_Anim[action_speed]", "Kitty_Sex_Anal_Fucking_Mask")
+        AlphaMask("Kitty_Anal_Zero_Anim[action_speed]", "Kitty_sex_Anal_Fucking_Mask")
 
     if "anal" not in KittyX.spunk or not Player.sprite or Player.cock_position != "anal" or not action_speed:
         Null()
     elif action_speed == 1:
-        "Kitty_Sex_Anal_Spunk_Heading_Over"
+        "Kitty_sex_Anal_Spunk_Heading_Over"
     else:
         "images/Kitty_sex/Kitty_sex_spunk_anal_over.png"

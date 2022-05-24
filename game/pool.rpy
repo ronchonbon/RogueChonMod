@@ -59,7 +59,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             $ Girl.change_face("_bemused",2)
             ch_e "[EmmaX.player_petname], we can't be seen like that in public. . ."
             return
-        if "three" not in EmmaX.history:
+        if "threesome" not in EmmaX.history:
             if not AloneCheck(EmmaX):
                 $ Girl.change_face("_bemused",2)
                 ch_e "Not with this sort of company. . ."
@@ -85,10 +85,10 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
         $ Girl.add_word(1,"tan","tan")
         return
 
-    $ Line = 0
+    $ line = 0
     while True:
 
-        if not Line:
+        if not line:
 
             menu:
                 extend ""
@@ -156,26 +156,26 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
         if "exhibitionist" in Girl.traits:
 
-            $ Line = "sure"
+            $ line = "sure"
         elif approval_check(Girl, 700+Mod, "I"):
 
-            $ Line = "sure"
+            $ line = "sure"
         elif approval_check(Girl, 1400+Mod) or (Girl == StormX and StormX in Rules):
 
-            $ Line = "sure"
+            $ line = "sure"
         elif approval_check(Girl, 900):
 
-            $ Line = "sorry"
+            $ line = "sorry"
         else:
 
-            $ Line = "no"
+            $ line = "no"
 
         if Type == "no_bra" or Type == "no_panties":
 
             menu:
                 extend ""
                 "And?":
-                    if Line == "sure":
+                    if line == "sure":
                         if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
                             $ Girl.change_stat("inhibition", 70, 1)
 
@@ -216,11 +216,11 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         elif Girl == JubesX:
                             ch_v "Well, I'm keeping it on."
                 "Take it off anyway.":
-                    if Line == "sure" or (Line == "sorry" and Girl != StormX and approval_check(Girl, 600+Mod, "O")):
+                    if line == "sure" or (line == "sorry" and Girl != StormX and approval_check(Girl, 600+Mod, "O")):
                         if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
                             $ Girl.change_stat("obedience", 50, 1)
                             $ Girl.change_stat("obedience", 80, 2)
-                        if Line != "sure":
+                        if line != "sure":
                             $ Girl.change_face("_sad",2)
                         else:
                             $ Girl.change_face("_normal",1)
@@ -240,7 +240,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         elif Girl == JubesX:
                             ch_v "Whatever. . ."
 
-                        $ Line = "sure"
+                        $ line = "sure"
                     else:
                         if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
                             $ Girl.change_stat("love", 80, -2)
@@ -291,7 +291,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         ch_v "Hehe. . ."
                 "Ok, that's fine.":
 
-                    if Line == "sure":
+                    if line == "sure":
                         if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
                             $ Girl.change_stat("love", 80, 2)
                             $ Girl.change_stat("obedience", 80, 1)
@@ -335,7 +335,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                         elif Girl == JubesX:
                             ch_v "Thanks. . ."
 
-            if Line == "sure":
+            if line == "sure":
 
                 $ Girl.top = ""
                 call expression Girl.tag + "_First_Topless"
@@ -347,10 +347,10 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
             else:
                 $ Girl.add_word(1,"no_tan","no_tan")
 
-            $ Line = 0
+            $ line = 0
 
 
-        if Line == "sure":
+        if line == "sure":
 
             if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
                 $ Girl.change_stat("obedience", 70, 2)
@@ -391,7 +391,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
             $ Girl.add_word(1,"tan","tan")
 
-        elif Line == "sorry" and (Type == "over" or Type == "legs" or Type == "_jacket"):
+        elif line == "sorry" and (Type == "over" or Type == "legs" or Type == "_jacket"):
 
             if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
                 $ Girl.change_stat("obedience", 50, 1)
@@ -423,7 +423,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 $ Girl.hose = ""
             $ Girl.add_word(1,"tan","tan")
 
-        elif Line == "sorry":
+        elif line == "sorry":
 
             if "tan" not in Girl.recent_history and "no_tan" not in Girl.recent_history:
                 $ Girl.change_stat("obedience", 50, 2)
@@ -447,7 +447,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
                 ch_v "Sorry. . ."
             $ Girl.add_word(1,"no_tan","no_tan")
 
-        elif Line == "no":
+        elif line == "no":
 
             $ Girl.change_stat("love", 50, -5)
             $ Girl.change_stat("obedience", 50, 2)
@@ -473,7 +473,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
         if not Girl.bra and not Girl.top and not Girl.underwear and not Girl.legs and Girl.HoseNum() < 10:
             $ Girl.change_outfit("nude")
         $ Mod = 0
-        $ Line = 0
+        $ line = 0
         if Girl.clothingCheck():
             "Anything else?"
         else:
@@ -485,7 +485,7 @@ label Pool_Sunbathe(Girl=0, Type=0, Mod=0):
 
 
 
-label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
+label Pool_Skinnydip(Girl=0, line=0, Type=0, Mod=0):
 
 
 
@@ -539,7 +539,7 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
             $ Girl.change_face("_bemused",2)
             ch_e "[EmmaX.player_petname], I couldn't risk us getting caught. . ."
             return
-        if "three" not in EmmaX.history:
+        if "threesome" not in EmmaX.history:
             if not AloneCheck(EmmaX):
                 $ Girl.change_face("_bemused",2)
                 ch_e "Not with this sort of company. . ."
@@ -571,21 +571,21 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
 
         if "exhibitionist" in Girl.traits:
 
-            $ Line = "sure"
+            $ line = "sure"
         elif approval_check(Girl, 700-Mod, "I"):
 
-            $ Line = "sure"
+            $ line = "sure"
         elif approval_check(Girl, 1200-Mod) or (Girl == StormX and StormX in Rules):
 
-            $ Line = "sure"
+            $ line = "sure"
         elif approval_check(Girl, 800):
 
-            $ Line = "sorry"
+            $ line = "sorry"
         else:
 
-            $ Line = "no"
+            $ line = "no"
 
-        if Line == "sure":
+        if line == "sure":
 
             if "dip" not in Girl.recent_history and "no_dip" not in Girl.recent_history:
                 $ Girl.change_stat("obedience", 70, 2)
@@ -620,7 +620,7 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
             $ Girl.change_outfit("nude")
             $ Girl.add_word(1,"dip","dip")
 
-        elif Line == "sorry":
+        elif line == "sorry":
 
             if "dip" not in Girl.recent_history and "no_dip" not in Girl.recent_history:
                 $ Girl.change_stat("obedience", 50, 2)
@@ -667,10 +667,10 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
                         elif Girl == JubesX:
                             ch_v "Sure!"
 
-                        show blackscreen onlayer black
+                        show black_screen onlayer black
                         "She goes and changes into her suit. . ."
                         $ Girl.change_outfit("swimwear")
-                        hide blackscreen onlayer black
+                        hide black_screen onlayer black
                         $ Girl.add_word(1,"no_dip","no_dip")
                         $ Count = 1
                     else:
@@ -739,7 +739,7 @@ label Pool_Skinnydip(Girl=0, Line=0, Type=0, Mod=0):
                     $ Girl.add_word(1,"no_dip","no_dip")
                     return
 
-        elif Line == "no":
+        elif line == "no":
 
             $ Girl.change_stat("love", 50, -5)
             if "dip" not in Girl.recent_history and "no_dip" not in Girl.recent_history:
@@ -869,8 +869,8 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     $ Player.daily_history.append("swim")
     call set_the_scene
 
-    $ Line = ""
-    $ PassLine = 0
+    $ line = ""
+    $ Passline = 0
     $ temp_Girls = all_Girls[:]
     while temp_Girls:
         if bg_current == temp_Girls[0].location and approval_check(temp_Girls[0], 700):
@@ -881,29 +881,29 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
 
                 $ Swimmers.append(temp_Girls[0])
             else:
-                if Line or PassLine:
+                if line or Passline:
 
-                    call show_girl (temp_Girls[0], 0, 0, 950, 150)
+                    call display_girl (temp_Girls[0], 0, 0, 950, 150)
                 else:
-                    call show_girl (temp_Girls[0], 0, 0, 800, 150)
+                    call display_girl (temp_Girls[0], 0, 0, 800, 150)
                 if temp_Girls[0].change_outfit("swimwear"):
 
-                    $ Line = "" if Swimmers and not PassLine else "s"
+                    $ line = "" if Swimmers and not Passline else "s"
                     $ Swimmers.append(temp_Girls[0])
                 else:
 
-                    $ Line = "" if PassLine and not Swimmers else "s"
-                    $ PassLine = PassLine + " and " + temp_Girls[0].name if PassLine else temp_Girls[0].name
+                    $ line = "" if Passline and not Swimmers else "s"
+                    $ Passline = Passline + " and " + temp_Girls[0].name if Passline else temp_Girls[0].name
         $ temp_Girls.remove(temp_Girls[0])
 
     if len(Swimmers) >= 2:
-        "The girls get[Line] changed and join you."
+        "The girls get[line] changed and join you."
     elif Swimmers:
-        "[Swimmers[0].name] get[Line] changed and joins you."
-    if PassLine:
-        "[PassLine] chill[Line] out poolside."
-    $ PassLine = 0
-    $ Line = 0
+        "[Swimmers[0].name] get[line] changed and joins you."
+    if Passline:
+        "[Passline] chill[line] out poolside."
+    $ Passline = 0
+    $ line = 0
 
     call ShowPool (Swimmers[:])
 
@@ -936,7 +936,7 @@ label Pool_Swim(Swimmers=[], temp_Girls=[]):
     elif D20 == 10:
         "You decide to make use of the diving board. You do a couple of dives before taking it easy and just swimming around."
 
-    call GirlwaitUp (1, 80, 3)
+    call who_likes_who (1, 80, 3)
     call RoomStatboost ("love", 80, 3)
     call RoomStatboost ("lust", 30, 5)
     $ round -= 20 if round >= 20 else round

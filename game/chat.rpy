@@ -1,47 +1,42 @@
-label Chat(Girl=0):
+label chat(Girl = None):
     if not Girl:
         menu:
             "Chat with [RogueX.name]" if RogueX.location == bg_current:
                 $ Girl = RogueX
             "Text [RogueX.name]" if RogueX.location != bg_current:
                 $ Girl = RogueX
-
             "Chat with [KittyX.name]" if KittyX.location == bg_current:
                 $ Girl = KittyX
             "Text [KittyX.name]" if KittyX.location != bg_current and "met" in KittyX.history:
                 $ Girl = KittyX
-
             "Chat with [EmmaX.name]" if EmmaX.location == bg_current:
                 $ Girl = EmmaX
             "Text [EmmaX.name]" if EmmaX.location != bg_current and "met" in EmmaX.history:
                 $ Girl = EmmaX
-
             "Chat with [LauraX.name]" if LauraX.location == bg_current:
                 $ Girl = LauraX
             "Text [LauraX.name]" if LauraX.location != bg_current and "met" in LauraX.history:
                 $ Girl = LauraX
-
             "Chat with [JeanX.name]" if JeanX.location == bg_current:
                 $ Girl = JeanX
             "Text [JeanX.name]" if JeanX.location != bg_current and "met" in JeanX.history:
                 $ Girl = JeanX
-
             "Chat with [StormX.name]" if StormX.location == bg_current:
                 $ Girl = StormX
             "Text [StormX.name]" if StormX.location != bg_current and "met" in StormX.history:
                 $ Girl = StormX
-
             "Chat with [JubesX.name]" if JubesX.location == bg_current:
                 $ Girl = JubesX
             "Text [JubesX.name]" if JubesX.location != bg_current and "met" in JubesX.history:
                 $ Girl = JubesX
             "Never Mind":
-
                 pass
+
     if Girl:
         if Girl.location == bg_current:
             if Girl == EmmaX and "classcaught" not in EmmaX.history:
-                jump Emma_Chat_Minimal
+                jump Emma_chat_Minimal
+
             if "caught" in Girl.daily_history:
                 if Girl == RogueX:
                     ch_r "We should probably keep our distance for now."
@@ -57,13 +52,14 @@ label Chat(Girl=0):
                     ch_s "We should probably keep our distance. . ."
                 elif Girl == JubesX:
                     ch_v "I want to keep my distance for now. . ."
-                return
-            if Girl == LauraX and Girl.location == bg_current and "scent" in Player.daily_history:
 
+                return
+
+            if Girl == LauraX and Girl.location == bg_current and "scent" in Player.daily_history:
                 if not approval_check(Girl, 1700) and not approval_check(Girl, 600,"O"):
                     $ Options = all_Girls[:]
                     while Options:
-                        if Options[0] in Player.daily_history and "saw with " + Options[0].tag not in Girl.traits and Girl.GirlLikeCheck(Options[0]) <= 700:
+                        if Options[0] in Player.daily_history and "saw with " + Options[0].tag not in Girl.traits and Girl.likes[Options[0].tag] <= 700:
                             $ Girl.traits.append("saw with " + Options[0].tag)
                         $ Options.remove(Options[0])
                 $ Player.daily_history.remove("scent")
@@ -124,7 +120,7 @@ label Chat(Girl=0):
                     ch_s "What can I do for you, [Girl.player_petname]?"
                 elif Girl == JubesX:
                     ch_v "Hey, what can I do for ya, [Girl.player_petname]?"
-            call Chat_Menu
+            call chat_Menu
 
         elif Girl in phonebook:
             if Girl.location == "hold":
@@ -135,16 +131,16 @@ label Chat(Girl=0):
                         "She texts back, \"We can speak after class, [EmmaX.player_petname].\""
                         return
                     elif "classcaught" not in EmmaX.history:
-                        call Emma_Chat_Minimal
+                        call Emma_chat_Minimal
                         return
                 if Girl == StormX:
                     if StormX.location == "bg_teacher" and bg_current == "bg_classroom":
                         "She texts back, \"This can wait until after class, [StormX.player_petname].\""
                         return
                 if Girl.location != bg_current:
-                    show Cellphone at sprite_location(stage_left)
+                    show cellphone at sprite_location(stage_left)
                 else:
-                    hide Cellphone
+                    hide cellphone
                 "You send [Girl.name] a text."
 
                 if "_angry" not in Girl.recent_history:
@@ -162,20 +158,20 @@ label Chat(Girl=0):
                         ch_s "What can I do for you, [Girl.player_petname]?"
                     elif Girl == JubesX:
                         ch_v "Hey, what can I do for ya, [Girl.player_petname]?"
-                call Chat_Menu
+                call chat_Menu
         else:
             "You don't know her number, you'll have to go to her."
     return
 
-label Chat_Menu:
+label chat_Menu:
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     $ Girl.change_face()
     call shift_focus (Girl)
     if Girl.location != bg_current:
-        show Cellphone at sprite_location(stage_left)
+        show cellphone at sprite_location(stage_left)
     else:
-        hide Cellphone
+        hide cellphone
 
     if "_angry" in Girl.recent_history:
         if Girl == RogueX:
@@ -266,7 +262,7 @@ label Chat_Menu:
                         elif Girl == JubesX:
                             ch_v "Yeah?"
                         call shift_focus(Girl)
-                        jump enter_main_sex_menu
+                        call enter_main_sex_menu
                         return
                     elif approval_check(Girl, 400, "OI"):
                         if Girl == RogueX:
@@ -284,7 +280,7 @@ label Chat_Menu:
                         elif Girl == JubesX:
                             ch_v "What would you like, [Girl.player_petname]?"
                         call shift_focus(Girl)
-                        jump enter_main_sex_menu
+                        call enter_main_sex_menu
                         return
                     else:
                         if Girl == RogueX:
@@ -306,8 +302,8 @@ label Chat_Menu:
                     pass
                 "Dirty Talk" if Girl.SEXP >= 10:
                     ch_p "About when we get together. . ."
-                    $ Line = 0
-                    call expression Girl.tag + "_SexChat"
+                    $ line = 0
+                    call expression Girl.tag + "_Sexchat"
 
                 "Date (locked)" if time_index > 2:
                     pass
@@ -536,7 +532,7 @@ label Chat_Menu:
             return
         "Switch to. . .":
 
-            call Switch_Chat
+            call Switch_chat
         "Never mind.":
 
             if Girl == RogueX:
@@ -554,14 +550,14 @@ label Chat_Menu:
             elif Girl == JubesX:
                 ch_v "K. . ."
             return
-    jump Chat_Menu
+    jump chat_Menu
 
-label Switch_Chat:
+label Switch_chat:
 
     if bg_current == "HW Party":
         "You'll have to go to the other girls if you want to talk to them."
         return
-    $ Line = Girl
+    $ line = Girl
     menu:
         "[RogueX.name]" if Girl != RogueX:
             $ Girl = RogueX
@@ -578,7 +574,7 @@ label Switch_Chat:
         "[JubesX.name]" if Girl != JubesX and "met" in JubesX.history:
             $ Girl = JubesX
         "Never mind":
-            $ Line = 0
+            $ line = 0
             return
 
     if Girl.location != bg_current:
@@ -586,17 +582,17 @@ label Switch_Chat:
             "You give [Girl.name] a call."
             if Girl == EmmaX and "classcaught" not in EmmaX.history:
                 ch_e "I don't have time to talk to students right now."
-                $ Girl = Line
+                $ Girl = line
         else:
             "You don't have her number."
-            $ Girl = Line
+            $ Girl = line
     if Girl == EmmaX and "classcaught" not in EmmaX.history:
         ch_e "Surely we can discuss this later. . . alone perhaps."
-        $ Girl = Line
-        $ Line = 0
+        $ Girl = line
+        $ line = 0
         return
     call shift_focus (Girl)
-    if "_angry" not in Girl.recent_history and Girl != Line:
+    if "_angry" not in Girl.recent_history and Girl != line:
         if Girl == RogueX:
             ch_r "So what did you want to talk about, [Girl.player_petname]?"
         elif Girl == KittyX:
@@ -611,11 +607,11 @@ label Switch_Chat:
             ch_s "What can I do for you, [Girl.player_petname]?"
         elif Girl == JubesX:
             ch_v "Hey, what can I do for ya, [Girl.player_petname]?"
-    $ Line = 0
+    $ line = 0
     return
 
 label dismiss_girl(Girl=0, Leaving=0):
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
     if Girl in Party:
         $ Party.remove(Girl)
     call Girls_Schedule ([Girl], 0)
@@ -907,112 +903,7 @@ label dismiss_girl(Girl=0, Leaving=0):
         "[Girl.name] heads out."
     return
 
-label Favorite_Actions(Chr=0, Quick=0, Temp=0, ATemp=0, PTemp=0, BTemp=0, TTemp=0, HTemp=0, FTemp=0, D20F=0, temp_Girlsptions=0):
 
-
-
-
-    if Chr:
-        $ temp_Girlsptions = [Chr]
-    else:
-        $ temp_Girlsptions = active_Girls[:]
-
-
-    while temp_Girlsptions:
-        $ Chr = temp_Girlsptions[0]
-
-        $ ATemp = Chr.action_counter["anal"] + Chr.action_counter["dildo_ass"] + Chr.action_counter["fondle_ass"] + Chr.action_counter["finger_ass"] + Chr.action_counter["eat_ass"]
-        $ PTemp = Chr.action_counter["sex"] + Chr.action_counter["dildo_pussy"] + Chr.action_counter["fondle_pussy"] + Chr.action_counter["finger_pussy"] + Chr.action_counter["eat_pussy"]
-        $ BTemp = Chr.action_counter["blowjob"]
-        $ TTemp = Chr.action_counter["titjob"]
-        $ XTemp = Chr.action_counter["footjob"]
-        $ HTemp = Chr.action_counter["handjob"]
-        $ FTemp = Chr.action_counter["fondle_breasts"]+ Chr.action_counter["fondle_thighs"]+ Chr.action_counter["suck_breasts"] + Chr.action_counter["hotdog"]
-
-
-        if Chr.player_favorite_action and approval_check(Chr, 1500):
-            if Chr.player_favorite_action == "anal":
-                $ ATemp += 20
-            elif Chr.player_favorite_action == "sex":
-                $ PTemp += 20
-            elif Chr.player_favorite_action == "blowjob":
-                $ BTemp += 20
-            elif Chr.player_favorite_action == "titjob":
-                $ TTemp += 20
-            elif Chr.player_favorite_action == "footjob":
-                $ XTemp += 20
-            elif Chr.player_favorite_action == "handjob":
-                $ HTemp += 20
-            else:
-                $ FTemp += 20
-        elif Chr.player_favorite_action and approval_check(Chr, 800):
-            if Chr.player_favorite_action == "anal":
-                $ ATemp += 5
-            elif Chr.player_favorite_action == "sex":
-                $ PTemp += 5
-            elif Chr.player_favorite_action == "blowjob":
-                $ BTemp += 5
-            elif Chr.player_favorite_action == "titjob":
-                $ TTemp += 5
-            elif Chr.player_favorite_action == "footjob":
-                $ XTemp += 5
-            elif Chr.player_favorite_action == "handjob":
-                $ HTemp += 5
-            else:
-                $ FTemp += 5
-
-
-        $ Total = ATemp + PTemp + BTemp + TTemp + HTemp + XTemp + FTemp + Chr.action_counter["kiss"]
-        if Total <= 0:
-            $ D20F = 999
-        else:
-            $ D20F = renpy.random.randint(1, Total)
-
-
-        if D20F <= ATemp:
-
-            if Chr.action_counter["anal"] >= 5:
-                $ Temp = "anal"
-            elif Chr.action_counter["eat_ass"] >= 5:
-                $ Temp = "eat_ass"
-            else:
-                $ Temp = "finger_ass"
-        elif D20F <= ATemp + PTemp:
-
-            if Chr.action_counter["sex"] >= 5:
-                $ Temp = "sex"
-            elif Chr.action_counter["eat_pussy"] >= 5:
-                $ Temp = "eat_pussy"
-            else:
-                $ Temp = "fondle_pussy"
-        elif D20F <= ATemp + PTemp + BTemp:
-            $ Temp = "blowjob"
-        elif D20F <= ATemp + PTemp + BTemp + TTemp:
-            $ Temp = "titjob"
-        elif D20F <= ATemp + PTemp + BTemp + TTemp + XTemp + HTemp:
-            $ Temp = "footjob"
-        elif D20F <= ATemp + PTemp + BTemp + TTemp + XTemp + HTemp:
-            $ Temp = "handjob"
-        elif D20F <= ATemp + PTemp + BTemp + TTemp + XTemp + HTemp + FTemp:
-
-            $ D20F = renpy.random.randint(1, 20)
-            if D20F >= 15 and Chr.action_counter["hotdog"]:
-                $ Temp = "hotdog"
-            elif D20F >= 10 and Chr.action_counter["suck_breasts"]:
-                $ Temp = "suck_breasts"
-            elif D20F >= 5 and Chr.action_counter["fondle_breasts"]:
-                $ Temp = "fondle_breasts"
-            else:
-                $ Temp = "fondle_thighs"
-        else:
-            $ Temp = "kiss"
-
-        if not Quick:
-            $ Chr.favorite_action = Temp
-        else:
-            return Temp
-        $ temp_Girlsptions.remove(temp_Girlsptions[0])
-    return
 
 label Girl_Settings:
     if Girl not in all_Girls:
@@ -1026,7 +917,7 @@ label Girl_Settings:
                 if bg_current == "HW Party":
                     Girl.voice "Not at the party. . ."
                 else:
-                    call taboo_Level
+                    call taboo_level
                     call expression Girl.tag + "_Clothes"
 
             "Shift her Personality" if approval_check(Girl, 900, "L", TabM=0) or approval_check(Girl, 900, "O", TabM=0)or approval_check(Girl, 900, "I", TabM=0):
@@ -1047,7 +938,7 @@ label Girl_Settings:
 
             "Follow options" if "follow" in Girl.traits:
                 ch_p "You know how you ask if I want to follow you sometimes?"
-                $ Line = 0
+                $ line = 0
                 if Girl == RogueX:
                     ch_r "Yes?"
                 elif Girl == EmmaX:
@@ -1079,7 +970,7 @@ label Girl_Settings:
                         if "follow" not in Girl.daily_history:
                             $ Girl.change_stat("love", 90, -2)
                             $ Girl.change_stat("obedience", 30, 5)
-                        $ Line = "free"
+                        $ line = "free"
 
                     "You can ask if I want to follow you." if "asktravels" not in Girl.traits or "freetravels" in Girl.traits:
                         $ Girl.change_face("_perplexed")
@@ -1100,7 +991,7 @@ label Girl_Settings:
                         if "follow" not in Girl.daily_history:
                             $ Girl.change_stat("love", 70, 2)
                             $ Girl.change_stat("inhibition", 60, 2)
-                        $ Line = "ask"
+                        $ line = "ask"
 
                     "Don't ever leave when I'm around." if "lockedtravels" not in Girl.traits or "freetravels" in Girl.traits:
                         if approval_check(Girl, 500, "O",Alt=[[EmmaX,JeanX],600]) or approval_check(Girl, 900, "L"):
@@ -1128,7 +1019,7 @@ label Girl_Settings:
                                     $ Girl.change_stat("love", 99, 2)
                                 $ Girl.change_stat("obedience", 60, 5)
                             $ Girl.change_stat("inhibition", 50, -5, 1)
-                            $ Line = "lock"
+                            $ line = "lock"
                         else:
                             $ Girl.change_face("_angry")
                             if Girl == RogueX:
@@ -1162,7 +1053,7 @@ label Girl_Settings:
                         elif Girl == JubesX:
                             ch_v "Right. . ."
 
-                if Line:
+                if line:
                     $ Girl.daily_history.append("follow")
                     if "freetravels" in Girl.traits:
                         $ Girl.traits.remove("freetravels")
@@ -1171,13 +1062,13 @@ label Girl_Settings:
                     if "lockedtravels" in Girl.traits:
                         $ Girl.traits.remove("lockedtravels")
 
-                    if Line == "free":
+                    if line == "free":
                         $ Girl.traits.append("freetravels")
-                    elif Line == "ask":
+                    elif line == "ask":
                         $ Girl.traits.append("asktravels")
-                    elif Line == "lock":
+                    elif line == "lock":
                         $ Girl.traits.append("lockedtravels")
-                    $ Line = 0
+                    $ line = 0
 
             "\"Like\" options" if Girl == KittyX:
                 ch_p "So you[Girl.like]say \"[Girl.like]\" a lot. . ."
@@ -1227,7 +1118,7 @@ label Girl_Settings:
                         $ Girl.change_face("_smile")
                         $ Girl.add_word(1,0,0,"lockedout")
             "Switch to. . .":
-                call Switch_Chat
+                call Switch_chat
             "Never mind.":
 
                 return

@@ -21,7 +21,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
             ch_r "but it looks like I got ahead of myself. . ."
             $ RogueX.eyes = "_squint"
             ch_r "Did you have anything else in mind?"
-            call Rogue_SexMenu
+            call Rogue_sexMenu
             return
         "[RogueX.name] moves a bit closer to you, and then suggests \"strip studying.\""
         ch_r "Alright, [RogueX.player_petname], I'll make this simple. I'll ask you a quiz question, get it right, I take something off. . ."
@@ -36,7 +36,7 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
             ch_k "but it would be a pretty short game. . ."
             $ KittyX.eyes = "_squint"
             ch_k "Was there something you'd rather do?"
-            call Kitty_SexMenu
+            call Kitty_sexMenu
             return
         "She then asks if maybe you want to do some \"strip studying?\""
         $ KittyX.change_face("_perplexed", 2)
@@ -247,9 +247,9 @@ label Group_Strip_Study(temp_Girls=[], QuizOrder=[]):
 label Strip_Study_Right:
     if Party[0].hose:
 
-        $ Line = Party[0].hose
+        $ line = Party[0].hose
         $ Party[0].hose = ""
-        "She slowly removes her [Line]. . ."
+        "She slowly removes her [line]. . ."
         $ Party[0].change_stat("lust", 50, 3)
         return
 
@@ -258,9 +258,9 @@ label Strip_Study_Right:
         if Party[0] == StormX or Party[0].seen_breasts or (Party[0].bra and approval_check(Party[0], 300)) or approval_check(Party[0], 850):
             $ Party[0].change_stat("inhibition", 25, 1)
             $ Party[0].change_stat("inhibition", 50, 1)
-            $ Line = Party[0].top
+            $ line = Party[0].top
             $ Party[0].top = ""
-            "She pulls her [Line] off and throws it aside."
+            "She pulls her [line] off and throws it aside."
             if not Party[0].bra:
                 call expression Party[0].tag + "_First_Topless"
         else:
@@ -289,9 +289,9 @@ label Strip_Study_Right:
             $ Party[0].change_stat("lust", 50, 5)
             $ Party[0].change_stat("inhibition", 30, 1)
             $ Party[0].change_stat("inhibition", 50, 1)
-            $ Line = Party[0].legs
+            $ line = Party[0].legs
             $ Party[0].legs = ""
-            "She unfastens her [Line] and slides them down her legs."
+            "She unfastens her [line] and slides them down her legs."
             if Party[0].underwear:
                 if not Party[0].seen_underwear:
                     $ Party[0].change_stat("inhibition", 200, 2)
@@ -323,9 +323,9 @@ label Strip_Study_Right:
             $ Party[0].change_stat("lust", 60, 5)
             $ Party[0].change_stat("inhibition", 50, 2)
             $ Party[0].change_stat("inhibition", 200, 1)
-            $ Line = Party[0].bra
+            $ line = Party[0].bra
             $ Party[0].bra = ""
-            "She pulls her [Line] over her head and tosses it aside."
+            "She pulls her [line] over her head and tosses it aside."
             if not Party[0].seen_breasts:
                 $ Party[0].change_stat("inhibition", 200, 3)
                 $ Party[0].change_stat("inhibition", 50, 1)
@@ -355,9 +355,9 @@ label Strip_Study_Right:
             $ Party[0].change_stat("lust", 70, 10)
             $ Party[0].change_stat("inhibition", 70, 2)
             $ Party[0].change_stat("inhibition", 200, 2)
-            $ Line = Party[0].underwear
+            $ line = Party[0].underwear
             $ Party[0].underwear = ""
-            "She slides her [Line] off, leaving her pussy bare."
+            "She slides her [line] off, leaving her pussy bare."
             if not Party[0].seen_pussy:
                 $ Party[0].change_stat("inhibition", 50, 4)
                 $ Party[0].change_stat("inhibition", 200, 4)
@@ -1339,7 +1339,7 @@ label Emma_StripStudy_Intro:
                 "What sort of motivation?":
                     if "frisky" not in EmmaX.history:
                         $ EmmaX.change_face("_sly")
-                        $ Line = "ask"
+                        $ line = "ask"
                     else:
                         $ EmmaX.change_stat("obedience", 80, 3)
                         $ EmmaX.change_face("_confused",1)
@@ -1348,19 +1348,19 @@ label Emma_StripStudy_Intro:
                         menu:
                             extend ""
                             "Um. . . oh, OH! Yeah, sounds good. [[Strip tutoring]":
-                                $ Line = "striptease"
+                                $ line = "striptease"
                             "Looks like I am. . .":
                                 if approval_check(EmmaX, 500, "O"):
                                     $ EmmaX.change_stat("obedience", 80, 5)
                                     $ EmmaX.change_stat("inhibition", 50, 5)
                                     $ EmmaX.change_face("_sly", 2)
-                                    $ Line = "ask"
+                                    $ line = "ask"
                                 elif approval_check(EmmaX, 500, "LO"):
                                     $ EmmaX.change_face("_confused", 2)
                                     $ EmmaX.change_stat("love", 70, -5)
                                     $ EmmaX.change_stat("obedience", 80, 5)
                                     ch_e "Very well. . ."
-                                    $ Line = "ask"
+                                    $ line = "ask"
                                 else:
                                     $ EmmaX.change_stat("love", 200, -5)
                                     $ EmmaX.change_stat("inhibition", 50, -5)
@@ -1370,12 +1370,12 @@ label Emma_StripStudy_Intro:
                                 if approval_check(EmmaX, 400, "O"):
                                     $ EmmaX.change_face("_confused", 2)
                                     $ EmmaX.change_stat("inhibition", 50, 5)
-                                    $ Line = "ask"
+                                    $ line = "ask"
                                 elif approval_check(EmmaX, 500, "LO"):
                                     $ EmmaX.change_face("_confused", 1, Brows="_angry")
                                     $ EmmaX.change_stat("obedience", 50, 5)
                                     $ EmmaX.change_stat("inhibition", 50, 5)
-                                    $ Line = "ask"
+                                    $ line = "ask"
                                 else:
                                     $ EmmaX.change_stat("love", 200, -5)
                                     $ EmmaX.change_stat("inhibition", 50, -5)
@@ -1388,7 +1388,7 @@ label Emma_StripStudy_Intro:
                     $ EmmaX.change_stat("obedience", 80, 3)
                     $ EmmaX.change_stat("inhibition", 50, 5)
                     ch_e "I was hoping you would. . ."
-                    $ Line = "striptease"
+                    $ line = "striptease"
                 "No, I've got this.":
                     $ EmmaX.change_face("_confused", Eyes="_side")
                     if "frisky" in EmmaX.history:
@@ -1400,7 +1400,7 @@ label Emma_StripStudy_Intro:
                         $ EmmaX.change_stat("inhibition", 50, -5)
                     ch_e "Oh. . . Very well then."
                     $ EmmaX.change_face("_confused")
-            if Line == "ask":
+            if line == "ask":
                 ch_e "Well, perhaps I could quiz you about mutant psychology. . ."
                 $ EmmaX.eyes = "_side"
                 ch_e "and, perhaps, if you were to get a question right. . ."
@@ -1411,7 +1411,7 @@ label Emma_StripStudy_Intro:
                     "Take off some clothes?":
                         $ EmmaX.change_stat("inhibition", 50, 5)
                         ch_e "Yes."
-                        $ Line = "striptease"
+                        $ line = "striptease"
                     "Yes? . .":
                         if approval_check(EmmaX, 500, "O"):
                             $ EmmaX.change_face("_confused", 2)
@@ -1421,7 +1421,7 @@ label Emma_StripStudy_Intro:
                             else:
                                 $ EmmaX.change_stat("obedience", 80, 5)
                                 $ EmmaX.change_stat("inhibition", 50, -5)
-                            $ Line = "ask"
+                            $ line = "ask"
                         elif approval_check(EmmaX, 500, "LO"):
                             $ EmmaX.change_face("_confused", 1, Brows="_angry")
                             if "frisky" in EmmaX.history:
@@ -1430,7 +1430,7 @@ label Emma_StripStudy_Intro:
                             else:
                                 $ EmmaX.change_stat("obedience", 80, 5)
                                 $ EmmaX.change_stat("inhibition", 50, -5)
-                            $ Line = "ask"
+                            $ line = "ask"
                     ". . .":
                         if approval_check(EmmaX, 500, "O"):
                             $ EmmaX.change_face("_confused", 2)
@@ -1440,7 +1440,7 @@ label Emma_StripStudy_Intro:
                             else:
                                 $ EmmaX.change_stat("obedience", 50, 5)
                                 $ EmmaX.change_stat("inhibition", 50, -5)
-                            $ Line = "ask"
+                            $ line = "ask"
                         elif approval_check(EmmaX, 500, "LO"):
                             $ EmmaX.change_face("_confused", 1, Brows="_angry")
                             if "frisky" in EmmaX.history:
@@ -1450,11 +1450,11 @@ label Emma_StripStudy_Intro:
                             else:
                                 $ EmmaX.change_stat("obedience", 50, 5)
                                 $ EmmaX.change_stat("inhibition", 50, -5)
-                            $ Line = "ask"
-                if Line == "ask":
+                            $ line = "ask"
+                if line == "ask":
                     $ EmmaX.change_face("_bemused", Eyes="_side")
                     ch_e "Take off some clothes. . ."
-                    $ Line = "striptease"
+                    $ line = "striptease"
                 $ EmmaX.change_face("_sly", Brows="_confused")
                 menu:
                     ch_e "Would that interest you?"
@@ -1479,9 +1479,9 @@ label Emma_StripStudy_Intro:
                             $ EmmaX.change_stat("inhibition", 50, -5)
                         $ EmmaX.change_face("_angry")
                         ch_e "Hrm."
-                        $ Line = "no"
+                        $ line = "no"
 
-        if Line == "striptease":
+        if line == "striptease":
             $ EmmaX.change_face("_sly", 0)
             if len(Party) >= 2:
                 ch_e "And you, [Party[1].name]? Care to participate?"

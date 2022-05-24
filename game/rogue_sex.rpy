@@ -43,7 +43,7 @@ label SexAct(Girl, action = 0):
         if not action_context:
             return
     elif action == "sex":
-        call Rogue_SexPrep
+        call Rogue_sexPrep
 
         if not action_context:
             return
@@ -130,7 +130,7 @@ label masturbate(Girl):
         $ Girl.remaining_actions -= 1
 
         $ Player.change_stat("focus", 50, 30)
-        call checkout (1)
+        call checkout(total = True)
 
         $ action_context = None
 
@@ -196,7 +196,7 @@ label masturbate(Girl):
 
                     ch_p "That is so sexy, [Girl.petname]."
 
-                    $ Girl.nameCheck()
+                    $ Girl.name_check()
 
                     "You lean back and enjoy the show."
 
@@ -209,7 +209,7 @@ label masturbate(Girl):
 
                     ch_p "Let's not do that right now, [Girl.petname]."
 
-                    $ Girl.nameCheck()
+                    $ Girl.name_check()
 
                     "[Girl.name] pulls her hands away from herself."
 
@@ -221,7 +221,7 @@ label masturbate(Girl):
             jump before_masturbation
         else:
             $ approval_bonus = 0
-            $ offhand_action = 0
+            $ offhand_action = None
         return
 
     if not Girl.action_counter["masturbation"]:
@@ -269,7 +269,7 @@ label before_masturbation:
     $ Girl.upskirt = 1
     $ Girl.underwear_pulled_down = 1
     call Rogue_First_Bottomless (1)
-    call set_the_scene (Dress=0)
+    call set_the_scene(check_if_dressed = False)
 
 
     if "unseen" in Girl.recent_history:
@@ -299,7 +299,7 @@ label before_masturbation:
     if action_context:
         $ renpy.pop_call()
         $ action_context = None
-    $ Line = 0
+    $ line = 0
     if taboo:
         $ Girl.drain_word("no_taboo")
     $ Girl.drain_word("no_masturbation")
@@ -340,7 +340,7 @@ label masturbation_cycle:
                 "Start jack'in it." if offhand_action != "jerking_off":
                     call jerking_off (Girl)
                 "Stop jack'in it." if offhand_action == "jerking_off":
-                    $ offhand_action = 0
+                    $ offhand_action = None
 
                 "Slap her ass" if Girl.location == bg_current:
                     if "unseen" in Girl.recent_history:
@@ -416,12 +416,12 @@ label masturbation_cycle:
                     ch_p "Let's try something else."
                     call Rogue_Pos_Reset
                     $ action_context = "shift"
-                    $ Line = 0
+                    $ line = 0
                     jump Rogue_M_Interupted
                 "End Scene" if not multi_action or Girl.location != bg_current:
                     ch_p "Let's stop for now."
                     call Rogue_Pos_Reset
-                    $ Line = 0
+                    $ line = 0
                     jump Rogue_M_Interupted
 
 
@@ -448,7 +448,7 @@ label masturbation_cycle:
                     if 100 > Girl.lust >= 70 and Girl.session_orgasms < 2:
                         $ Girl.recent_history.append("unsatisfied")
                         $ Girl.daily_history.append("unsatisfied")
-                    $ Line = "came"
+                    $ line = "came"
                 else:
                     "You grunt and try to hold it in."
                     $ Player.focus = 95
@@ -461,11 +461,11 @@ label masturbation_cycle:
                 if Girl.location == bg_current:
                     jump Rogue_M_Interupted
 
-            if Line == "came":
-                $ Line = 0
+            if line == "came":
+                $ line = 0
                 if not Player.semen:
                     "You're emptied out, you should probably take a break."
-                    $ offhand_action = 0 if offhand_action == "jerking_off" else offhand_action
+                    $ offhand_action = None if offhand_action == "jerking_off" else offhand_action
 
 
                 if "unsatisfied" in Girl.recent_history:
@@ -473,7 +473,7 @@ label masturbation_cycle:
                     menu:
                         "Let her keep going?"
                         "Yes, keep going for a bit.":
-                            $ Line = "You let her get back into it"
+                            $ line = "You let her get back into it"
                             jump masturbation_cycle
                         "No, I'm done.":
                             "You ask her to stop."
@@ -501,7 +501,7 @@ label masturbation_cycle:
 
 
     $ Girl.change_face("_bemused", 0)
-    $ Line = 0
+    $ line = 0
     if "unseen" not in Girl.recent_history:
         ch_r "Ok, [Girl.player_petname], that's enough of that for now."
 

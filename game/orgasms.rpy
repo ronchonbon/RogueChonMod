@@ -7,7 +7,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
         "You spray jizz across the room."
         return
 
-    $ Girl = GirlCheck(Girl)
+    $ Girl = check_girl(Girl)
 
     call shift_focus (Girl)
     if primary_action == "blowjob":
@@ -33,24 +33,24 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
 
     if action_context == "swap":
 
-        $ Line = "So what would you like " + Girl.name + " to do?"
+        $ line = "So what would you like " + Girl.name + " to do?"
     elif primary_action == "handjob":
-        $ Line = "As she strokes, you're about ready to come. . ."
+        $ line = "As she strokes, you're about ready to come. . ."
     elif primary_action == "blowjob":
-        $ Line = "As she sucks at you, you start to feel about to come. . ."
+        $ line = "As she sucks at you, you start to feel about to come. . ."
     elif primary_action == "titjob":
-        $ Line = "As you rub into her cleavage, you start to feel about to come. . ."
+        $ line = "As you rub into her cleavage, you start to feel about to come. . ."
     elif primary_action == "sex" or primary_action == "anal":
-        $ Line = "As you thrust into her, you feel about to blow. . ."
+        $ line = "As you thrust into her, you feel about to blow. . ."
     elif primary_action == "hotdog":
-        $ Line = "As you grind into her, you feel about to blow. . ."
+        $ line = "As you grind into her, you feel about to blow. . ."
     else:
-        $ Line = "You start to feel about to come. . ."
+        $ line = "You start to feel about to come. . ."
 
     $ Girl.change_face("_sexy")
 
     menu:
-        "[Line]"
+        "[line]"
         "Warn her":
             $ action_context = "warn"
             jump Girl_Warn_Her
@@ -221,7 +221,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                                 ch_s ". . ."
                             elif Girl == JubesX:
                                 ch_v "Well. . . I still think that was a waste."
-                            $ Line = 0
+                            $ line = 0
                             $ Player.focus -= 5
                             return
 
@@ -243,7 +243,7 @@ label Player_Cumming(Girl=0, approval_bonus=approval_bonus):
                 ch_s "So what did you have in mind then?"
             elif Girl == JubesX:
                 ch_v "Ok, so what'd you want?"
-            $ Line = 0
+            $ line = 0
             $ Player.focus = 95
             return
 
@@ -954,7 +954,7 @@ label Girl_In_Mouth:
                 $ Girl.change_stat("obedience", 50, -1, 1)
                 $ Girl.recent_history.append("_angry")
                 $ Girl.daily_history.append("_angry")
-                $ Line = 0
+                $ line = 0
                 return
             $ Girl.change_stat("obedience", 50, 10,Alt=[[JeanX],900,10])
             $ Girl.change_stat("obedience", 70, 5)
@@ -1362,7 +1362,7 @@ label Girl_Cum_Outside:
 
 
 
-            call expression Girl.tag+"_Sex_Launch" pass ("hotdog")
+            call expression Girl.tag+"_sex_launch" pass ("hotdog")
     $ action_speed = 0
     if Girl.addiction >= 60 and approval_check(Girl, 1000, "I", Bonus = ((Girl.addiction*10)- Girl.obedience))  and Girl.event_counter["swallowed"]:
         $ Girl.eyes = "_manic"
@@ -1663,7 +1663,7 @@ label Girl_Creampied:
 
 
 label Girl_Orgasm_After:
-    $ Line = "What next?"
+    $ line = "What next?"
     if not renpy.showing(Girl.tag+"_HJ_Animation"):
         $ Girl.arm_pose = 1
     $ Player.semen -= 1
@@ -1693,8 +1693,8 @@ label Girl_Orgasm_After:
     return
 
 label Girl_CleanCock(Girl=0):
-    $ Girl = GirlCheck(Girl)
-    $ Line = "What next?"
+    $ Girl = check_girl(Girl)
+    $ line = "What next?"
     if not renpy.showing(Girl.tag+"_HJ_Animation"):
         $ Girl.arm_pose = 1
     $ Player.cock_position = "out"
@@ -1784,11 +1784,11 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
     call Punch
 
     $ action_speed = 1
-    $ Line = renpy.random.choice([Girl.name + " is suddenly rocked with spasms, holding back a muffled scream.", 
+    $ line = renpy.random.choice([Girl.name + " is suddenly rocked with spasms, holding back a muffled scream.", 
                 Girl.name + " grabs on tightly as her body shakes with pleasure.", 
                 Girl.name + " stiffens and lets out a low moan.",
                 Girl.name + "'s body quivers and suddenly goes still."])
-    "[Line]"
+    "[line]"
     $ Girl.thirst = int(Girl.thirst/2)
     $ Girl.thirst -= 5
 
@@ -1808,41 +1808,41 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
     $ Girl.brows = "_sad"
     $ Girl.mouth = "_tongue"
     if Girl == RogueX:
-        $ Line = renpy.random.choice(["Wow. . .  just, wow.", 
+        $ line = renpy.random.choice(["Wow. . .  just, wow.", 
                 "I don't know what came over me. . .", 
                 "Hmmmm. . . .",
                 "That, felt good. Thatfeltrealgood."])
     elif Girl == KittyX:
-        $ Line = renpy.random.choice(["Wow. . .  just, wow.", 
+        $ line = renpy.random.choice(["Wow. . .  just, wow.", 
                 "That was amazing!", 
                 "Hmmmm. . . .",
                 "I loved that!"])
     elif Girl == EmmaX:
-        $ Line = renpy.random.choice(["Oooooh. . . lovely.", 
+        $ line = renpy.random.choice(["Oooooh. . . lovely.", 
                 "I really enjoyed that one. . .", 
                 "Hmmmm. . . .",
                 "That was. . . greaaaaat. . ."])
     elif Girl == LauraX:
-        $ Line = renpy.random.choice(["Oooooh. . .", 
+        $ line = renpy.random.choice(["Oooooh. . .", 
                 "That was a good one. . .", 
                 "Hmmmm. . . .",
                 "That was. . ."])
     elif Girl == JeanX:
-        $ Line = renpy.random.choice(["Oooooh. . .", 
+        $ line = renpy.random.choice(["Oooooh. . .", 
                 "Ah, I needed that. . .", 
                 "Hmmmm. . . .",
                 "Woo, nice. . ."])
     elif Girl == StormX:
-        $ Line = renpy.random.choice(["Oooooh. . .", 
+        $ line = renpy.random.choice(["Oooooh. . .", 
                 "Nnnnmmmmaaaaahhh. . .", 
                 "Hmmmm. . . .",
                 "That was. . . amaaazing. . ."])
     elif Girl == JubesX:
-        $ Line = renpy.random.choice(["Oooooh. . .", 
+        $ line = renpy.random.choice(["Oooooh. . .", 
                 "Wooooww. . .", 
                 "Hmmmm. . . .",
                 "Wonderful. . ."])
-    Girl.voice "[Line]"
+    Girl.voice "[line]"
 
     if "unsatisfied" in Girl.recent_history:
         $ Girl.change_stat("love", 70, 2)
@@ -1866,7 +1866,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
             elif Girl == JubesX:
                 ch_v "So you -do- know how to make a girl feel good."
         $ Girl.drain_word("unsatisfied")
-    $ Line = 0
+    $ line = 0
 
     if primary_action != "masturbation":
         if Girl.session_orgasms == 1:
@@ -1883,7 +1883,7 @@ label Girl_Cumming(Girl=0, Quick=0, temp_Girls=[]):
         $ temp_Girls.remove(Girl)
         while temp_Girls:
             if temp_Girls[0].location == bg_current and "noticed "+Girl.tag in temp_Girls[0].recent_history:
-                $ temp_Girls[0].lust += 15 if temp_Girls[0].GirlLikeCheck(Girl) >= 500 else 10
+                $ temp_Girls[0].lust += 15 if temp_Girls[0].likes[Girl.tag] >= 500 else 10
                 $ temp_Girls[0].lust += 5 if temp_Girls[0].event_counter["been_with_girl"] >= 5 else 0
             if temp_Girls[0].lust >= 100:
                 call Girl_Cumming (temp_Girls[0], 1)
@@ -2828,7 +2828,7 @@ label Partner_Cleanup_Check(Girl=0, B=0):
         $ B = 0
 
 
-    if Partner == JeanX and not approval_check(Partner, 600, "LO") and Partner.GirlLikeCheck(Girl) < (500-2*B):
+    if Partner == JeanX and not approval_check(Partner, 600, "LO") and Partner.likes[Girl.tag] < (500-2*B):
 
         ch_j "Hm? Clean [Girl.name] off?"
         ch_j "I guess she is a mess. . ."
@@ -2843,14 +2843,14 @@ label Partner_Cleanup_Check(Girl=0, B=0):
         ch_j "There."
         return
 
-    if not approval_check(Partner, 1400, Bonus=3*B) or Partner.GirlLikeCheck(Girl) < (500-2*B):
+    if not approval_check(Partner, 1400, Bonus=3*B) or Partner.likes[Girl.tag] < (500-2*B):
 
         $ Partner.change_face("_sly")
         $ Partner.change_stat("obedience", 50, -3)
         $ Partner.change_stat("inhibition", 70, 10)
         $ Partner.change_stat("inhibition", 200, 5)
         $ Partner.change_stat("lust", 60, 5)
-        call Partner_CGLine (2)
+        call Partner_CGline (2)
         menu:
             extend ""
             "Fine, never mind.":
@@ -2863,71 +2863,71 @@ label Partner_Cleanup_Check(Girl=0, B=0):
 
                     $ Partner.change_face("_sad")
                     $ Partner.change_stat("obedience", 50, 10)
-                    call Partner_CGLine (3)
-                elif Partner.GirlLikeCheck(Girl) >= 800:
+                    call Partner_CGline (3)
+                elif Partner.likes[Girl.tag] >= 800:
 
                     $ Partner.change_face("_sly")
                     $ Partner.change_stat("love", 70, -3)
                     $ Partner.change_stat("obedience", 50, 3)
-                    call Partner_CGLine (4)
+                    call Partner_CGline (4)
                 elif approval_check(Partner, 1200, Bonus=3*B):
 
                     $ Partner.change_face("_normal")
                     $ Partner.change_stat("love", 70, -3)
                     $ Partner.change_stat("obedience", 50, 3)
-                    call Partner_CGLine (5)
-                elif Choice == "partner lick" and approval_check(Partner, 1200) and Partner.GirlLikeCheck(Girl) >= 600:
+                    call Partner_CGline (5)
+                elif Choice == "partner lick" and approval_check(Partner, 1200) and Partner.likes[Girl.tag] >= 600:
 
                     $ Partner.change_face("_normal")
                     $ Partner.change_stat("love", 70, -3)
                     $ Partner.change_stat("obedience", 50, 3)
-                    call Partner_CGLine (6)
+                    call Partner_CGline (6)
                     $ Choice = "partner wipe"
                 else:
 
                     $ Partner.change_stat("love", 70, -5)
                     $ Partner.change_stat("obedience", 50, -5)
-                    $ Girl.GLG(Partner,900,-2,1)
-                    call Partner_CGLine (7)
+                    $ Girl.check_if_likes(Partner,900,-2,1)
+                    call Partner_CGline (7)
                     $ Choice = "random"
     else:
         $ Girl.change_face("_bemused")
         if not Choice:
             $ Choice = "partner wipe"
-        $ Girl.GLG(Partner,900,3,1)
-        call Partner_CGLine (1)
+        $ Girl.check_if_likes(Partner,900,3,1)
+        call Partner_CGline (1)
 
 
 
     if Choice != "random":
         $ Girl.change_stat("lust", 60, 5)
-        if not approval_check(Girl, 1400, Bonus=3*B) or Girl.GirlLikeCheck(Partner) < (500-2*B):
+        if not approval_check(Girl, 1400, Bonus=3*B) or Girl.likes[Partner.tag] < (500-2*B):
 
-            if Girl.GirlLikeCheck(Partner) >= 800:
+            if Girl.likes[Partner.tag] >= 800:
                 $ Girl.change_stat("inhibition", 90, 5)
-                $ Partner.GLG(Girl,900,5,1)
-                call Partner_CGLine (8, Girl)
+                $ Partner.check_if_likes(Girl,900,5,1)
+                call Partner_CGline (8, Girl)
             elif approval_check(Girl, 1200, Bonus=3*B):
                 $ Girl.change_stat("obedience", 50, 3)
                 $ Girl.change_stat("obedience", 80, 2)
                 $ Girl.change_stat("inhibition", 70, 3)
-                call Partner_CGLine (9, Girl)
-            elif approval_check(Girl, 1000, Bonus=3*B) and Girl.GirlLikeCheck(Partner) >= (600-B):
+                call Partner_CGline (9, Girl)
+            elif approval_check(Girl, 1000, Bonus=3*B) and Girl.likes[Partner.tag] >= (600-B):
                 $ Girl.change_stat("love", 70, 1)
                 $ Girl.change_stat("obedience", 50, 3)
                 $ Girl.change_stat("obedience", 80, 3)
                 $ Girl.change_stat("inhibition", 70, 5)
-                $ Partner.GLG(Girl,900,3,1)
-                call Partner_CGLine (10, Girl)
+                $ Partner.check_if_likes(Girl,900,3,1)
+                call Partner_CGline (10, Girl)
             else:
                 $ Girl.change_stat("obedience", 70, -3)
                 $ Girl.change_stat("inhibition", 70, 2)
-                call Partner_CGLine (11, Girl)
+                call Partner_CGline (11, Girl)
                 $ Choice = "random"
         else:
             $ Girl.change_stat("obedience", 50, 3)
             $ Girl.change_stat("inhibition", 70, 3)
-            call Partner_CGLine (12, Girl)
+            call Partner_CGline (12, Girl)
 
     if Choice != "random":
 
@@ -2940,19 +2940,19 @@ label Partner_Cleanup_Check(Girl=0, B=0):
         call AllReset (Partner)
         call AllReset (focused_Girl)
         if Choice == "partner lick":
-            $ Girl.GLG(Partner,900,10,1)
-            call Partner_CGLine (13, Girl)
+            $ Girl.check_if_likes(Partner,900,10,1)
+            call Partner_CGline (13, Girl)
         else:
-            $ Girl.GLG(Partner,900,3,1)
-            call Partner_CGLine (14, Girl)
+            $ Girl.check_if_likes(Partner,900,3,1)
+            call Partner_CGline (14, Girl)
 
     return
 
-label Partner_CGLine(LineNum=1, Girl=0):
+label Partner_CGline(lineNum=1, Girl=0):
 
-    if not Partner or not LineNum:
+    if not Partner or not lineNum:
         return
-    if LineNum == 1:
+    if lineNum == 1:
 
         if Partner == RogueX:
             ch_r "Sure, why not?"
@@ -2969,7 +2969,7 @@ label Partner_CGLine(LineNum=1, Girl=0):
             ch_s "I suppose I would not mind. . ."
         elif Partner == JubesX:
             ch_v "Cool. . ."
-    elif LineNum == 2:
+    elif lineNum == 2:
 
         if Partner == RogueX:
             ch_r "You want me ta clean up your mess?"
@@ -2986,7 +2986,7 @@ label Partner_CGLine(LineNum=1, Girl=0):
             ch_s "You would like me to clean her off?"
         elif Partner == JubesX:
             ch_v "Could I? . ."
-    elif LineNum == 3:
+    elif lineNum == 3:
 
         if Partner == RogueX:
             ch_r "If you say so."
@@ -3002,7 +3002,7 @@ label Partner_CGLine(LineNum=1, Girl=0):
             ch_s ". . . Fine."
         elif Partner == JubesX:
             ch_v "Sure. . ."
-    elif LineNum == 4:
+    elif lineNum == 4:
 
         if Partner == RogueX:
             ch_r "Well, if she doesn't mind. . ."
@@ -3018,7 +3018,7 @@ label Partner_CGLine(LineNum=1, Girl=0):
             ch_s "Very well, come here."
         elif Partner == JubesX:
             ch_v "Cool. . ."
-    elif LineNum == 5:
+    elif lineNum == 5:
 
         if Partner == RogueX:
             ch_r "I s'pose so. . ."
@@ -3034,7 +3034,7 @@ label Partner_CGLine(LineNum=1, Girl=0):
             ch_s "I suppose that I could. . ."
         elif Partner == JubesX:
             ch_v "Sure. . ."
-    elif LineNum == 6:
+    elif lineNum == 6:
 
         if Partner == RogueX:
             ch_r "I can wipe her off, I guess, but that's it. . ."
@@ -3050,7 +3050,7 @@ label Partner_CGLine(LineNum=1, Girl=0):
             ch_s "I will wipe her clean, but not. . . with my tongue."
         elif Partner == JubesX:
             ch_v "I guess I could just wipe her off. . ."
-    elif LineNum == 7:
+    elif lineNum == 7:
 
         if Partner == RogueX:
             ch_r "Well, that's y'all's business. . ."
@@ -3069,7 +3069,7 @@ label Partner_CGLine(LineNum=1, Girl=0):
     if not Girl:
         return
 
-    elif LineNum == 8:
+    elif lineNum == 8:
 
         if Girl == RogueX:
             ch_r "Well, how could I turn down such an attractive offer. . ."
@@ -3085,7 +3085,7 @@ label Partner_CGLine(LineNum=1, Girl=0):
             ch_s "That would be lovely, [Partner.name]."
         elif Partner == JubesX:
             ch_v "Cool. . ."
-    elif LineNum == 9:
+    elif lineNum == 9:
 
         if Girl == RogueX:
             ch_r "If that's what turns you on. . ."
@@ -3101,7 +3101,7 @@ label Partner_CGLine(LineNum=1, Girl=0):
             ch_s "I could do that."
         elif Partner == JubesX:
             ch_v "Sure. . ."
-    elif LineNum == 10:
+    elif lineNum == 10:
 
         if Girl == RogueX:
             ch_r "Kinda ganging up on me here. . ."
@@ -3117,7 +3117,7 @@ label Partner_CGLine(LineNum=1, Girl=0):
             ch_s "That might be. . . nice."
         elif Partner == JubesX:
             ch_v "Cool. . ."
-    elif LineNum == 11:
+    elif lineNum == 11:
 
         if Girl == RogueX:
             ch_r "I'm just not that kinda girl. . ."
@@ -3133,7 +3133,7 @@ label Partner_CGLine(LineNum=1, Girl=0):
             ch_s ". . . I would rather not."
         elif Partner == JubesX:
             ch_v "Um. . ."
-    elif LineNum == 12:
+    elif lineNum == 12:
 
         if Girl == RogueX:
             ch_r "I wouldn't mind some help. . ."
@@ -3149,7 +3149,7 @@ label Partner_CGLine(LineNum=1, Girl=0):
             ch_s ". . . Fine."
         elif Partner == JubesX:
             ch_v "Cool. . ."
-    elif LineNum == 13:
+    elif lineNum == 13:
 
         if Girl == RogueX:
             ch_r "Well that was a treat. . ."
@@ -3165,7 +3165,7 @@ label Partner_CGLine(LineNum=1, Girl=0):
             ch_s "Well. . . thank you. . . [Partner.name]."
         elif Partner == JubesX:
             ch_v "Oh, um, thanks, I guess. . ."
-    elif LineNum == 14:
+    elif lineNum == 14:
 
         if Girl == RogueX:
             ch_r "Piece of cake, heh. . ."
@@ -3197,8 +3197,8 @@ label Partner_Clean_Girl(Girl=0):
     if "chin" in Girl.spunk or "mouth" in Girl.spunk:
         while "chin" in Girl.spunk:
             $ Girl.spunk.remove("chin")
-        $ Girl.GLG(Partner,900,2,1)
-        $ Partner.GLG(Girl,900,2,1)
+        $ Girl.check_if_likes(Partner,900,2,1)
+        $ Partner.check_if_likes(Girl,900,2,1)
         if Choice == "partner lick":
             if "mouth" not in Partner.spunk:
                 $ Partner.spunk.append("mouth")
@@ -3246,7 +3246,7 @@ label Partner_Clean_Girl(Girl=0):
         $ counter += 1
     if "tits" in Girl.spunk:
         $ Girl.spunk.remove("tits")
-        $ Girl.GLG(Partner,900,2,1)
+        $ Girl.check_if_likes(Partner,900,2,1)
         if Choice == "partner lick":
             if "mouth" not in Partner.spunk:
                 $ Partner.spunk.append("mouth")
@@ -3311,7 +3311,7 @@ label Partner_Clean_Girl(Girl=0):
         $ counter += 1
     if "in" in Girl.spunk:
         $ Girl.spunk.remove("in")
-        $ Girl.GLG(Partner,900,5,1)
+        $ Girl.check_if_likes(Partner,900,5,1)
         if Choice == "partner lick":
             if "mouth" not in Partner.spunk:
                 $ Partner.spunk.append("mouth")
@@ -3335,7 +3335,7 @@ label Partner_Clean_Girl(Girl=0):
         $ counter += 1
     if "anal" in Girl.spunk:
         $ Girl.spunk.remove("anal")
-        $ Girl.GLG(Partner,900,5,1)
+        $ Girl.check_if_likes(Partner,900,5,1)
         if Choice == "partner lick" and approval_check(Partner, 800, "I"):
             if "mouth" not in Partner.spunk:
                 $ Partner.spunk.append("mouth")

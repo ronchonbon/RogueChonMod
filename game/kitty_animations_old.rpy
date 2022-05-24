@@ -43,23 +43,23 @@ image Kitty_sex_legs_Anim0:
 
 
 
-image Kitty_Sex_Lick_Breasts:
+image Kitty_sex_Lick_Breasts:
     "licking"
     zoom 0.6
     offset (450,210)
 
-image Kitty_Sex_Fondle_Breasts:
+image Kitty_sex_Fondle_Breasts:
     "GropeLeftBreast"
     zoom 1.1
     offset (320,-180)
 
 
-image Kitty_Sex_Lick_Pussy:
+image Kitty_sex_Lick_Pussy:
     "licking"
     zoom 0.7
     offset (530,510)
 
-image Kitty_Sex_Lick_Ass:
+image Kitty_sex_Lick_Ass:
     "licking"
     zoom 0.7
     offset (535,590)
@@ -98,7 +98,7 @@ image Kitty_Pussy_Fucking0:
                 ),
     contains:
 
-        AlphaMask("Kitty_Sex_Zero_Anim0", "Kitty_Pussy_Open_Mask")
+        AlphaMask("Kitty_sex_Zero_Anim0", "Kitty_Pussy_Open_Mask")
 
 image Kitty_Pussy_Fucking1:
 
@@ -113,7 +113,7 @@ image Kitty_Pussy_Fucking1:
                 ),
     contains:
 
-        AlphaMask("Kitty_Sex_Zero_Anim1", "Kitty_Pussy_Open_Mask")
+        AlphaMask("Kitty_sex_Zero_Anim1", "Kitty_Pussy_Open_Mask")
 
 image Kitty_Pussy_Fucking2:
 
@@ -128,7 +128,7 @@ image Kitty_Pussy_Fucking2:
                 ),
     contains:
 
-        AlphaMask("Kitty_Sex_Zero_Anim2", "Kitty_Pussy_Fucking_Mask")
+        AlphaMask("Kitty_sex_Zero_Anim2", "Kitty_Pussy_Fucking_Mask")
 image Kitty_Pussy_Fucking3:
 
     contains:
@@ -142,7 +142,7 @@ image Kitty_Pussy_Fucking3:
                 ),
     contains:
 
-        AlphaMask("Kitty_Sex_Zero_Anim3", "Kitty_Pussy_Fucking_Mask")
+        AlphaMask("Kitty_sex_Zero_Anim3", "Kitty_Pussy_Fucking_Mask")
 
 image Kitty_Pussy_Fucking_Mask:
 
@@ -180,7 +180,7 @@ image Kitty_Pussy_Spunk_Heading:
 
 
 
-image Kitty_Sex_Zero_Anim0:
+image Kitty_sex_Zero_Anim0:
 
     contains:
         subpixel True
@@ -188,7 +188,7 @@ image Kitty_Sex_Zero_Anim0:
         pos (498,530)
         zoom 1.4
 
-image Kitty_Sex_Zero_Anim1:
+image Kitty_sex_Zero_Anim1:
 
     contains:
         subpixel True
@@ -201,7 +201,7 @@ image Kitty_Sex_Zero_Anim1:
             ease 3 pos (498,525)
             repeat
 
-image Kitty_Sex_Zero_Anim2:
+image Kitty_sex_Zero_Anim2:
 
     contains:
         subpixel True
@@ -214,7 +214,7 @@ image Kitty_Sex_Zero_Anim2:
             ease 3 pos (500,490)
             repeat
 
-image Kitty_Sex_Zero_Anim3:
+image Kitty_sex_Zero_Anim3:
 
     contains:
         subpixel True
@@ -327,16 +327,16 @@ image Kitty_sex_body_Anim3:
 
 
 
-image Kitty_Sex_Anal_Fucking0:
+image Kitty_sex_Anal_Fucking0:
 
     contains:
 
-        "Kitty_Sex_Anal0"
+        "Kitty_sex_Anal0"
     contains:
 
-        AlphaMask("Kitty_Anal_Zero_Anim0", "Kitty_Sex_Anal_Fucking_Mask")
+        AlphaMask("Kitty_Anal_Zero_Anim0", "Kitty_sex_Anal_Fucking_Mask")
 
-image Kitty_Sex_Anal_Fucking1:
+image Kitty_sex_Anal_Fucking1:
 
     contains:
 
@@ -344,38 +344,38 @@ image Kitty_Sex_Anal_Fucking1:
     contains:
 
 
-        AlphaMask("Kitty_Anal_Zero_Anim1", "Kitty_Sex_Anal_Fucking_Mask")
+        AlphaMask("Kitty_Anal_Zero_Anim1", "Kitty_sex_Anal_Fucking_Mask")
 
-image Kitty_Sex_Anal_Fucking2:
-
-    contains:
-
-        "images/Kitty_sex/Kitty_sex_anus_open.png"
-    contains:
-
-        AlphaMask("Kitty_Anal_Zero_Anim2", "Kitty_Sex_Anal_Fucking_Mask")
-
-image Kitty_Sex_Anal_Fucking3:
+image Kitty_sex_Anal_Fucking2:
 
     contains:
 
         "images/Kitty_sex/Kitty_sex_anus_open.png"
     contains:
 
-        AlphaMask("Kitty_Anal_Zero_Anim3", "Kitty_Sex_Anal_Fucking_Mask")
+        AlphaMask("Kitty_Anal_Zero_Anim2", "Kitty_sex_Anal_Fucking_Mask")
 
-image Kitty_Sex_Anal_Fucking_Mask:
+image Kitty_sex_Anal_Fucking3:
+
+    contains:
+
+        "images/Kitty_sex/Kitty_sex_anus_open.png"
+    contains:
+
+        AlphaMask("Kitty_Anal_Zero_Anim3", "Kitty_sex_Anal_Fucking_Mask")
+
+image Kitty_sex_Anal_Fucking_Mask:
 
     contains:
         "images/Kitty_sex/Kitty_sex_anus_mask.png"
 
-image Kitty_Sex_Anal_Open_Mask:
+image Kitty_sex_Anal_Open_Mask:
 
     contains:
         "images/Kitty_sex/Kitty_sex_anus_mask.png"
         yoffset 3
 
-image Kitty_Sex_Anal1:
+image Kitty_sex_Anal1:
     "images/Kitty_sex/Kitty_sex_anus_open.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
@@ -389,7 +389,7 @@ image Kitty_Sex_Anal1:
         ease 2.25 xzoom 0.6
         repeat
 
-image Kitty_Sex_Anal_Spunk_Heading_Over:
+image Kitty_sex_Anal_Spunk_Heading_Over:
     "images/Kitty_sex/Kitty_sex_spunk_anal_over.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
@@ -401,7 +401,7 @@ image Kitty_Sex_Anal_Spunk_Heading_Over:
         ease 0.25 xzoom 1.0
         ease 2.25 xzoom 0.8
         repeat
-image Kitty_Sex_Anal_Spunk_Heading_Under:
+image Kitty_sex_Anal_Spunk_Heading_Under:
     "images/Kitty_sex/Kitty_sex_spunk_anal_under.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
@@ -415,7 +415,7 @@ image Kitty_Sex_Anal_Spunk_Heading_Under:
         ease 2.25 xzoom 0.6
         repeat
 
-image Kitty_Sex_Anal0:
+image Kitty_sex_Anal0:
     "images/Kitty_sex/Kitty_sex_anus_open.png"
     anchor (0.5,0.5)
     pos (0.5,0.5)
@@ -801,39 +801,39 @@ transform Kitty_sex_body_FootAnim0A():
 
 
 
-label Kitty_Sex_Launch(Line=primary_action):
-    $ girl_offhand_action = 0 if girl_offhand_action == "handjob" else girl_offhand_action
+label Kitty_sex_Launch(line=primary_action):
+    $ girl_offhand_action = None if girl_offhand_action == "handjob" else girl_offhand_action
 
 
 
 
 
     $ Player.sprite = 1
-    $ Line = "solo" if not Line else Line
-    if Line == "sex":
+    $ line = "solo" if not line else line
+    if line == "sex":
         $ Player.cock_position = "sex"
         if offhand_action in ("fondle_pussy","dildo_pussy","eat_pussy"):
-            $ offhand_action = 0
-    elif Line == "anal":
+            $ offhand_action = None
+    elif line == "anal":
         $ Player.cock_position = "anal"
         if offhand_action in ("finger_ass","dildo_anal","eat_ass"):
-            $ offhand_action = 0
-    elif Line == "hotdog":
+            $ offhand_action = None
+    elif line == "hotdog":
         $ Player.cock_position = "out"
-    elif Line == "footjob":
+    elif line == "footjob":
         $ show_feet = 1
         $ Player.cock_position = "footjob"
-    elif Line == "massage":
+    elif line == "massage":
         $ Player.sprite = 0
         $ Player.cock_position = 0
     else:
         $ Player.sprite = 0
         $ Player.cock_position = "out"
         $ action_speed = 0
-    $ primary_action = Line
+    $ primary_action = line
 
     if KittyX.pose == "doggy":
-        call Kitty_Doggy_Launch (Line)
+        call Kitty_Doggy_Launch (line)
         return
     if renpy.showing("Kitty_sex_animation"):
         return
@@ -843,7 +843,7 @@ label Kitty_Sex_Launch(Line=primary_action):
     # with dissolve
     return
 
-label Kitty_Sex_Reset:
+label Kitty_sex_Reset:
     if renpy.showing("Kitty_Doggy_Animation"):
         call Kitty_Doggy_Reset
         return
@@ -2252,7 +2252,7 @@ image Kitty_Doggy_Feet2:
 
 
 
-label Kitty_Doggy_Launch(Line=primary_action):
+label Kitty_Doggy_Launch(line=primary_action):
     if renpy.showing("Kitty_Doggy_Animation"):
         return
     $ action_speed = 0
@@ -2747,12 +2747,12 @@ transform Kitty_BJ_Body_6():
 
 
 
-label Kitty_BJ_Launch(Line=primary_action):
+label Kitty_BJ_Launch(line=primary_action):
     if renpy.showing("Kitty_blowjob_animation"):
         return
 
     call Kitty_Hide
-    if Line == "L" or Line == "cum":
+    if line == "L" or line == "cum":
         show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(stage_center):
             alpha 1
             ease 1 zoom 2.5 offset (150,80)
@@ -2763,7 +2763,7 @@ label Kitty_BJ_Launch(Line=primary_action):
             zoom 2.5 offset (150,80)
         with dissolve
 
-    if Line == "L":
+    if line == "L":
         if taboo:
             if len(Present) >= 2:
                 if Present[0] != KittyX:
@@ -2779,7 +2779,7 @@ label Kitty_BJ_Launch(Line=primary_action):
 
     $ action_speed = 0
 
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "blowjob"
 
     show Kitty_sprite zorder KittyX.sprite_layer:
@@ -3507,14 +3507,14 @@ image Kitty_TJ_Body_5:
 
 
 
-label Kitty_TJ_Launch(Line=primary_action):
+label Kitty_TJ_Launch(line=primary_action):
     if renpy.showing("Kitty_TJ_Animation"):
         return
     call Kitty_Hide
     show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(KittyX.sprite_location):
         alpha 1
         ease 1 zoom 2 xpos 700 yoffset 50
-    if Line == "L" and taboo:
+    if line == "L" and taboo:
         if len(Present) >= 2:
             if Present[0] != KittyX:
                 "[KittyX.name] looks back at [Present[0].name] to see if she's watching."
@@ -3532,22 +3532,22 @@ label Kitty_TJ_Launch(Line=primary_action):
     $ KittyX.bra = ""
     $ KittyX.arm_pose = 0
     call Kitty_First_Topless
-    if Line == "L":
+    if line == "L":
         if not KittyX.action_counter["titjob"]:
             "She hesitantly presses your cock against her chest."
         else:
             "She squeezes her breasts around your cock."
 
 
-    show blackscreen onlayer black with dissolve
+    show black_screen onlayer black with dissolve
     show Kitty_sprite zorder KittyX.sprite_layer:
         alpha 0
     $ action_speed = 0
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "titjob"
     # show Kitty_TJ_Animation zorder 150
     $ Player.sprite = 1
-    hide blackscreen onlayer black with dissolve
+    hide black_screen onlayer black with dissolve
     return
 
 label Kitty_TJ_Reset:
@@ -3661,12 +3661,12 @@ image Kitty_HJ_Animation:
     zoom 0.4
 
 
-label Kitty_HJ_Launch(Line=primary_action):
+label Kitty_HJ_Launch(line=primary_action):
     if renpy.showing("Kitty_HJ_Animation"):
         $ primary_action = "handjob"
         return
     call Kitty_Hide
-    if Line == "L":
+    if line == "L":
         show Kitty_sprite zorder KittyX.sprite_layer at sprite_location(stage_right):
             alpha 1
             ease 1 zoom 1.7 offset (-50,200)
@@ -3676,7 +3676,7 @@ label Kitty_HJ_Launch(Line=primary_action):
             ease 1 zoom 1.7 offset (-50,200)
         with dissolve
 
-    if Line == "L":
+    if line == "L":
         if taboo:
             if len(Present) >= 2:
                 if Present[0] != KittyX:
@@ -3687,7 +3687,7 @@ label Kitty_HJ_Launch(Line=primary_action):
                 "[KittyX.name] casually glances around to see if anyone can see her."
 
     $ action_speed = 0
-    if Line != "cum":
+    if line != "cum":
         $ primary_action = "handjob"
     else:
         $ action_speed = 1
@@ -3779,7 +3779,7 @@ label Kitty_Pos_Reset(T=0, Set=0):
     return
 
 label Kitty_Hide(Sprite=0):
-    call Kitty_Sex_Reset
+    call Kitty_sex_Reset
     hide Kitty_sex_animation
     hide Kitty_Doggy_Animation
     hide Kitty_HJ_Animation

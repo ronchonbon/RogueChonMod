@@ -1,4 +1,6 @@
 label action(Girl):
+    $ stack_depth = renpy.call_stack_depth()
+
     if primary_action in dildo_actions:
         call dildo_check(Girl)
 
@@ -35,19 +37,19 @@ label action(Girl):
             call auto_rejected_reactions(Girl, primary_action)
 
             $ approval_bonus = 0
-            $ offhand_action = 0
+            $ offhand_action = None
 
             return
     elif action_context == "pullback":
         call pullback_reactions(Girl, primary_action)
         jump before_action
     elif primary_action in anal_insertion_actions and not Girl.used_to_anal and ("finger_ass" in Girl.daily_history or "dildo_anal" in Girl.daily_history or "anal" in Girl.daily_history):
-        call anal_insertion_reactions(Girl)
+        call anal_insertion_reactions(Girl, primary_action)
     elif primary_action in Girl.recent_history:
-        call recent_action_reactions(Girl)
+        call recent_action_reactions(Girl, primary_action)
         jump before_action
     elif primary_action in Girl.daily_history:
-        call daily_action_reactions(Girl)
+        call daily_action_reactions(Girl, primary_action)
         jump before_action
 
     if primary_action == "kiss":
@@ -143,7 +145,7 @@ label before_action:
         $ focused_Girl.change_stat("inhibition", 10, 1)
         $ focused_Girl.change_stat("inhibition", 20, 1)
 
-        call expression focused_Girl.tag + "_Kissing_Launch" pass("kiss")
+        # call expression focused_Girl.tag + "_Kissing_Launch" pass("kiss")
 
         if focused_Girl.action_counter["kiss"] >= 10 and focused_Girl.inhibition >= 300:
             $ focused_Girl.change_face("_sucking")
@@ -152,8 +154,12 @@ label before_action:
         else:
             $ focused_Girl.change_face("_kiss",2)
 
-        if focused_Girl == RogueX and not Girl.action_counter["kiss"]:
-            jump Rogue_first_kiss
+        if focused_Girl == RogueX and not focused_Girl.action_counter["kiss"]:
+            $ focused_Girl.action_counter["kiss"] += 1
+
+            call Rogue_first_kiss
+
+            return
         else:
             call kissing_narrations(focused_Girl)
     elif primary_action in fondle_actions:
@@ -196,20 +202,20 @@ label before_action:
 
         call Seen_First_Peen(focused_Girl, Partner, React = action_context)
 
-        if primary_action == "handjob":
-            call expression focused_Girl.tag + "_HJ_Launch" pass("L")
-        elif primary_action == "titjob":
-            call expression focused_Girl.tag + "_TJ_Launch" pass("L")
-        elif primary_action == "blowjob":
-            call expression focused_Girl.tag + "_BJ_Launch" pass("L")
-        elif primary_action in dildo_actions:
-            call expression focused_Girl.tag + "_Pussy_Launch" pass(primary_action)
+        # if primary_action == "handjob":
+        #     call expression focused_Girl.tag + "_HJ_Launch" pass("L")
+        # elif primary_action == "titjob":
+        #     call expression focused_Girl.tag + "_TJ_Launch" pass("L")
+        # elif primary_action == "blowjob":
+        #     call expression focused_Girl.tag + "_BJ_Launch" pass("L")
+        # elif primary_action in dildo_actions:
+        #     call expression focused_Girl.tag + "_Pussy_Launch" pass(primary_action)
     elif primary_action in sex_actions:
         call Seen_First_Peen(focused_Girl, Partner, React = action_context)
 
         $ focused_Girl.pose = "doggy"
 
-        call expression focused_Girl.tag + "_Sex_Launch" pass(primary_action)
+        # call expression focused_Girl.tag + "_sex_launch" pass(primary_action)
 
     if primary_action not in sex_actions:
         if action_context == focused_Girl:
@@ -319,42 +325,42 @@ label before_action:
     $ focused_Girl.drain_word("no_" + primary_action)
     $ focused_Girl.add_word(0, primary_action, primary_action)
 
-    if primary_action in fondle_actions:
-        if focused_Girl != EmmaX:
-            call expression focused_Girl.tag + "_Pussy_Launch" pass(primary_action)
-        else:
-            if focused_Girl.pose in ["doggy", "sex"]:
-                call ViewShift(focused_Girl, focused_Girl.pose, 0, primary_action)
-            else:
-                call ViewShift(focused_Girl, "pussy", 0, primary_action)
-    elif primary_action in breast_actions:
-        call expression focused_Girl.tag + "_Breasts_Launch" pass(primary_action)
-    elif primary_action == "footjob":
-        call expression focused_Girl.tag + "_Sex_Launch" pass(primary_action)
+    # if primary_action in fondle_actions:
+    #     if focused_Girl != EmmaX:
+    #         call expression focused_Girl.tag + "_Pussy_Launch" pass(primary_action)
+    #     else:
+    #         if focused_Girl.pose in ["doggy", "sex"]:
+    #             call ViewShift(focused_Girl, focused_Girl.pose, 0, primary_action)
+    #         else:
+    #             call ViewShift(focused_Girl, "pussy", 0, primary_action)
+    # elif primary_action in breast_actions:
+    #     call expression focused_Girl.tag + "_Breasts_Launch" pass(primary_action)
+    # elif primary_action == "footjob":
+    #     call expression focused_Girl.tag + "_sex_launch" pass(primary_action)
 
 label action_cycle:
     if primary_action in mouth_actions:
         if primary_action != "kiss" and offhand_action == "kiss":
-            $ offhand_action = 0
+            $ offhand_action = None
 
     while round > 0:
-        if primary_action == "kiss":
-            call expression focused_Girl.tag + "_Kissing_Launch" pass("kiss")
-
-            $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
-        if primary_action in fondle_actions:
-            call ViewShift(focused_Girl, Girl.pose, 0, primary_actions)
-        elif primary_action in ["footjob", "sex", "anal", "hotdog"]:
-            call expression focused_Girl.tag + "_Sex_Launch" pass(primary_action)
-
-            if primary_action == "sex":
-                $ Player.cock_position = "sex"
-            elif primary_action == "anal":
-                $ Player.cock_position = "anal"
-            elif primary_action == "hotdog":
-                $ Player.cock_position = "out"
-        elif primary_action in dildo_actions:
-            call ViewShift(focused_Girl, Girl.pose, 0)
+        # if primary_action == "kiss":
+        #     call expression focused_Girl.tag + "_Kissing_Launch" pass("kiss")
+        #
+        #     $ Player.focus -= 10 if Player.focusing and Player.focus > 50 else 0
+        # if primary_action in fondle_actions:
+        #     call ViewShift(focused_Girl, Girl.pose, 0, primary_actions)
+        # elif primary_action in ["footjob", "sex", "anal", "hotdog"]:
+        #     call expression focused_Girl.tag + "_sex_launch" pass(primary_action)
+        #
+        #     if primary_action == "sex":
+        #         $ Player.cock_position = "sex"
+        #     elif primary_action == "anal":
+        #         $ Player.cock_position = "anal"
+        #     elif primary_action == "hotdog":
+        #         $ Player.cock_position = "out"
+        # elif primary_action in dildo_actions:
+        #     call ViewShift(focused_Girl, Girl.pose, 0)
 
         $ focused_Girl.lust_face()
 
@@ -474,7 +480,7 @@ label after_action:
     if action_context == "shift":
         call switching_action_lines(focused_Girl, primary_action)
     elif primary_action == "kiss":
-        call expression focused_Girl.Tah + "_Pos_Reset"
+        call expression focused_Girl.tag + "_Pos_Reset"
     elif primary_action == "handjob":
         call expression focused_Girl.tag + "_HJ_Reset"
     elif primary_action == "footjob":
